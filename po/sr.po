@@ -1,0 +1,4518 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: mc 4.6.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-11 17:05-0400\n"
+"PO-Revision-Date: 2003-09-11 20:41+0200\n"
+"Last-Translator: Страхиња Радић <mr99164@alas.matf.bg.ac.yu>\n"
+"Language-Team: српски <sr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-5\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
+#: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2705
+#: edit/editcmd.c:273 edit/editcmd.c:281 edit/editcmd.c:1709 src/wtools.c:133
+#: vfs/vfs.c:1840
+msgid "Error"
+msgstr "Грешка"
+
+#: edit/edit.c:153 edit/edit.c:340
+msgid " Cannot open file for reading: "
+msgstr " Не могу да отворим датотеку за читање: "
+
+#: edit/edit.c:283
+msgid " Error reading from pipe: "
+msgstr " Грешка при читању са цеви: "
+
+#: edit/edit.c:292
+msgid " Cannot open pipe for reading: "
+msgstr " Не могу да отворим цев за читање: "
+
+#: edit/edit.c:355
+msgid " Cannot get size/permissions info for file: "
+msgstr " Не могу да сазнам величину и дозволе за датотеку: "
+
+#: edit/edit.c:364
+msgid " Not an ordinary file: "
+msgstr " Датотека није обична: "
+
+#: edit/edit.c:380
+msgid " File is too large: "
+msgstr " Датотека је превелика: "
+
+#: edit/edit.c:2705
+msgid "Macro recursion is too deep"
+msgstr "Ниво рекурзије макроа је превисок"
+
+#: edit/edit.h:279
+msgid "&Dismiss"
+msgstr "&Отпусти"
+
+#: edit/edit.h:281 edit/editcmd.c:373 edit/editcmd.c:1218 edit/editcmd.c:1300
+#: edit/editcmd.c:2572 edit/editmenu.c:37 edit/editoptions.c:71
+#: src/boxes.c:138 src/boxes.c:275 src/boxes.c:371 src/boxes.c:463
+#: src/boxes.c:589 src/boxes.c:712 src/boxes.c:938 src/boxes.c:1006
+#: src/filegui.c:780 src/find.c:179 src/layout.c:349 src/option.c:114
+#: src/subshell.c:323 src/view.c:2134 src/wtools.c:381
+msgid "&OK"
+msgstr "&У реду"
+
+#: edit/editcmd.c:45 edit/editcmd.c:46
+msgid " Enter file name: "
+msgstr " Унесите назив датотеке: "
+
+#: edit/editcmd.c:274
+msgid " Error writing to pipe: "
+msgstr " Грешка при упису у цев: "
+
+#: edit/editcmd.c:284
+msgid " Cannot open pipe for writing: "
+msgstr " Не могу да отворим цев за упис: "
+
+#: edit/editcmd.c:366
+msgid "Quick save "
+msgstr "Брзо чување "
+
+#: edit/editcmd.c:367
+msgid "Safe save "
+msgstr "Безбедно чување "
+
+#: edit/editcmd.c:368
+msgid "Do backups -->"
+msgstr "Прави резерву -->"
+
+#: edit/editcmd.c:371 edit/editcmd.c:1159 edit/editcmd.c:1216
+#: edit/editcmd.c:1298 edit/editcmd.c:2570 edit/editoptions.c:68
+#: src/achown.c:69 src/boxes.c:139 src/boxes.c:276 src/boxes.c:369
+#: src/boxes.c:461 src/boxes.c:587 src/boxes.c:710 src/boxes.c:1006
+#: src/chmod.c:97 src/chown.c:74 src/cmd.c:865 src/filegui.c:762
+#: src/find.c:179 src/hotlist.c:121 src/hotlist.c:522 src/hotlist.c:829
+#: src/hotlist.c:925 src/layout.c:350 src/learn.c:59 src/option.c:115
+#: src/panelize.c:69 src/view.c:464 src/view.c:2131 src/wtools.c:58
+#: src/wtools.c:379
+msgid "&Cancel"
+msgstr "&Поништи"
+
+#: edit/editcmd.c:377
+msgid "Extension:"
+msgstr "Врста:"
+
+#: edit/editcmd.c:383
+msgid " Edit Save Mode "
+msgstr " Режим чувања "
+
+#: edit/editcmd.c:456 edit/editcmd.c:515
+msgid " Save As "
+msgstr " Сачувај као "
+
+#: edit/editcmd.c:473 edit/editcmd.c:794 edit/editcmd.c:831 edit/editcmd.c:990
+#: edit/editcmd.c:1103 src/file.c:612 src/help.c:319 src/main.c:434
+#: src/screen.c:1413 src/screen.c:1970 src/selcodepage.c:106
+#: src/subshell.c:319 src/subshell.c:653 src/utilunix.c:398 src/utilunix.c:402
+#: src/utilunix.c:424 src/utilunix.c:476 vfs/mcfs.c:139
+msgid "Warning"
+msgstr "Упозорење"
+
+#: edit/editcmd.c:474
+msgid " A file already exists with this name. "
+msgstr " Датотека под тим називом већ постоји. "
+
+#: edit/editcmd.c:475
+msgid "Overwrite"
+msgstr "Препиши"
+
+#: edit/editcmd.c:475 edit/editcmd.c:557 edit/editcmd.c:759 edit/editcmd.c:794
+#: edit/editcmd.c:834 edit/editcmd.c:993 edit/editcmd.c:1106
+msgid "Cancel"
+msgstr "Поништи"
+
+#: edit/editcmd.c:517 edit/editcmd.c:2283 src/view.c:463
+msgid " Cannot save file. "
+msgstr " Не могу да сачувам датотеку. "
+
+#: edit/editcmd.c:617 edit/editcmd.c:625 edit/editcmd.c:650 edit/editcmd.c:697
+msgid " Delete macro "
+msgstr " Брисање макроа "
+
+#: edit/editcmd.c:619
+msgid " Cannot open temp file "
+msgstr " Не могу да отворим привремену датотеку "
+
+#: edit/editcmd.c:627 edit/editcmd.c:688 edit/editcmd.c:745
+msgid " Cannot open macro file "
+msgstr " Не могу да отворим датотеку макроа "
+
+#: edit/editcmd.c:651
+msgid " Cannot overwrite macro file "
+msgstr " Не могу да препишем датотеку макроа "
+
+#: edit/editcmd.c:667 edit/editcmd.c:688
+msgid " Save macro "
+msgstr " Чување макроа "
+
+#: edit/editcmd.c:669
+msgid " Press the macro's new hotkey: "
+msgstr " Притисните нову пречицу макроа: "
+
+#: edit/editcmd.c:698 edit/editkeys.c:195 edit/editkeys.c:225
+msgid " Press macro hotkey: "
+msgstr " Притисните пречицу макроа: "
+
+#: edit/editcmd.c:744
+msgid " Load macro "
+msgstr " Учитавање макроа "
+
+#: edit/editcmd.c:757
+msgid " Confirm save file? : "
+msgstr " Потврда чувања датотека? : "
+
+#: edit/editcmd.c:759 src/view.c:462
+msgid " Save file "
+msgstr " Чување датотеке "
+
+#: edit/editcmd.c:759 edit/editwidget.c:289 src/view.c:2247
+msgid "Save"
+msgstr "Сачувај"
+
+#: edit/editcmd.c:794 edit/editcmd.c:832
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Постојећи текст је измењен а није сачуван.\n"
+" Дугме `настави' одбацује ове измене. "
+
+#: edit/editcmd.c:794 edit/editcmd.c:833 edit/editcmd.c:993
+#: edit/editcmd.c:1106
+msgid "Continue"
+msgstr "Настави"
+
+#: edit/editcmd.c:840
+msgid " Load "
+msgstr " Учитај "
+
+#: edit/editcmd.c:992 edit/editcmd.c:1105
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Блок је велики, можда нећете моћи да опозовете ову радњу. "
+
+#: edit/editcmd.c:1161
+msgid "O&ne"
+msgstr "Једа&н"
+
+#: edit/editcmd.c:1163 src/file.c:2224 src/filegui.c:538
+msgid "A&ll"
+msgstr "С&ве"
+
+#: edit/editcmd.c:1165 src/file.c:2161 src/filegui.c:227
+msgid "&Skip"
+msgstr "Пре&скочи"
+
+#: edit/editcmd.c:1167
+msgid "&Replace"
+msgstr "За&мени"
+
+#: edit/editcmd.c:1174 edit/editcmd.c:1181
+msgid " Replace with: "
+msgstr " Замени са: "
+
+#: edit/editcmd.c:1186
+msgid " Confirm replace "
+msgstr " Потврда замене "
+
+#: edit/editcmd.c:1220 edit/editcmd.c:1302
+msgid "scanf &Expression"
+msgstr "Изр&аз за scanf"
+
+#: edit/editcmd.c:1222
+msgid "replace &All"
+msgstr "замени &Све"
+
+#: edit/editcmd.c:1224
+msgid "pr&Ompt on replace"
+msgstr "п&Отврда замене"
+
+#: edit/editcmd.c:1226 edit/editcmd.c:1304 src/view.c:2137
+msgid "&Backwards"
+msgstr "Уна&зад"
+
+#: edit/editcmd.c:1228 edit/editcmd.c:1306
+msgid "&Regular expression"
+msgstr "&Регуларни израз"
+
+#: edit/editcmd.c:1230 edit/editcmd.c:1308
+msgid "&Whole words only"
+msgstr "Само &целе речи"
+
+#: edit/editcmd.c:1232 edit/editcmd.c:1310 src/find.c:171
+msgid "case &Sensitive"
+msgstr "разл. &Вел./мала слова"
+
+#: edit/editcmd.c:1236
+msgid " Enter replacement argument order eg. 3,2,1,4 "
+msgstr " Унесите редослед замене аргумената, нпр. 3,2,1,4 "
+
+#: edit/editcmd.c:1240
+msgid " Enter replacement string:"
+msgstr " Унесите ниску замене:"
+
+#: edit/editcmd.c:1244 edit/editcmd.c:1314 src/view.c:2142
+msgid " Enter search string:"
+msgstr " Унесите ниску претраге:"
+
+#: edit/editcmd.c:1263 edit/editcmd.c:1915 edit/editcmd.c:1939
+msgid " Replace "
+msgstr " Замена "
+
+#: edit/editcmd.c:1328 edit/editcmd.c:2026 edit/editcmd.c:2028
+#: edit/editcmd.c:2056 edit/editwidget.c:294 src/view.c:1619 src/view.c:1698
+#: src/view.c:1851 src/view.c:1863 src/view.c:2087 src/view.c:2140
+#: src/view.c:2147 src/view.c:2257
+msgid "Search"
+msgstr "Тражи"
+
+#: edit/editcmd.c:1709
+msgid ""
+" Invalid regular expression, or scanf expression with to many conversions "
+msgstr ""
+" Регуларни израз је неисправан или је израз за `scanf' са превише претварања "
+
+#: edit/editcmd.c:1917
+msgid " Error in replacement format string. "
+msgstr " Грешка у форматирајућој нисци замене. "
+
+#: edit/editcmd.c:1947
+#, c-format
+msgid " %ld replacements made. "
+msgstr " Извршено %ld замена. "
+
+#: edit/editcmd.c:1950 edit/editcmd.c:2028 edit/editcmd.c:2056 src/view.c:1698
+#: src/view.c:1863
+msgid " Search string not found "
+msgstr " Тражена ниска није нађена "
+
+#: edit/editcmd.c:2026
+#, c-format
+msgid " %d finds made, %d bookmarks added "
+msgstr " Нађено %d, додано %d обележивача "
+
+#: edit/editcmd.c:2078 edit/editwidget.c:297 src/help.c:827 src/main.c:1233
+#: src/view.c:479 src/view.c:2242 src/view.c:2267
+msgid "Quit"
+msgstr "Заврши"
+
+#: edit/editcmd.c:2078 src/view.c:480
+msgid " File was modified, Save with exit? "
+msgstr " Датотека је измењена, да сачувам при излазу? "
+
+#: edit/editcmd.c:2079 src/view.c:481
+msgid "Cancel quit"
+msgstr "Поништи завршетак"
+
+#: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
+#: src/filegui.c:543 src/hotlist.c:1048 src/main.c:481 src/screen.c:1958
+#: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
+msgid "&Yes"
+msgstr "&Да"
+
+#: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
+#: src/filegui.c:542 src/hotlist.c:1048 src/main.c:481 src/screen.c:1959
+#: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
+msgid "&No"
+msgstr "&Не"
+
+#: edit/editcmd.c:2192
+msgid " Copy to clipboard "
+msgstr " Копирај у прихватник "
+
+#: edit/editcmd.c:2192 edit/editcmd.c:2205
+msgid " Unable to save to file. "
+msgstr " Не могу да сачувам датотеку. "
+
+#: edit/editcmd.c:2205
+msgid " Cut to clipboard "
+msgstr " Исеци у прихватник "
+
+#: edit/editcmd.c:2233 src/view.c:2032
+msgid " Goto line "
+msgstr " Иди на ред "
+
+#: edit/editcmd.c:2233
+msgid " Enter line: "
+msgstr " Унесите број реда: "
+
+#: edit/editcmd.c:2268 edit/editcmd.c:2281
+msgid " Save Block "
+msgstr " Сачувај блок "
+
+#: edit/editcmd.c:2297 edit/editcmd.c:2310
+msgid " Insert File "
+msgstr " Уметни датотеку "
+
+#: edit/editcmd.c:2312
+msgid " Cannot insert file. "
+msgstr " Не могу да уметнем датотеку. "
+
+#: edit/editcmd.c:2329
+msgid " Sort block "
+msgstr " Поређај блок "
+
+#: edit/editcmd.c:2329 edit/editcmd.c:2455
+msgid " You must first highlight a block of text. "
+msgstr " Прво морате да означите блок текста. "
+
+#: edit/editcmd.c:2336
+msgid " Run Sort "
+msgstr " Ређај "
+
+#: edit/editcmd.c:2337
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Унесите изборе ређања (види упутство) раздвојене белинама: "
+
+#: edit/editcmd.c:2348 edit/editcmd.c:2353
+msgid " Sort "
+msgstr " Ређај "
+
+#: edit/editcmd.c:2349
+msgid " Cannot execute sort command "
+msgstr " Не могу да извршим наредбу ређања "
+
+#: edit/editcmd.c:2354
+msgid " Sort returned non-zero: "
+msgstr " Ређање није успешно завршено: "
+
+#: edit/editcmd.c:2378
+msgid "Paste output of external command"
+msgstr "Залепи излаз спољашње наредбе"
+
+#: edit/editcmd.c:2379
+msgid "Enter shell command(s):"
+msgstr "Унесите наредбе љуске:"
+
+#: edit/editcmd.c:2388
+msgid "External command"
+msgstr "Спољашња наредба"
+
+#: edit/editcmd.c:2389
+msgid "Cannot execute command"
+msgstr "Не могу да извршим наредбу"
+
+#: edit/editcmd.c:2423
+msgid "Error creating script:"
+msgstr "Грешка при стварању списа:"
+
+#: edit/editcmd.c:2431
+msgid "Error reading script:"
+msgstr "Грешка при читању списа:"
+
+#: edit/editcmd.c:2440
+msgid "Error closing script:"
+msgstr "Грешка при затварању списа:"
+
+#: edit/editcmd.c:2446
+msgid "Script created:"
+msgstr "Спис је створен:"
+
+#: edit/editcmd.c:2453
+msgid "Process block"
+msgstr "Обради блок"
+
+#: edit/editcmd.c:2565
+msgid " Mail "
+msgstr " Пошта "
+
+#: edit/editcmd.c:2576
+msgid " Copies to"
+msgstr " Копије "
+
+#: edit/editcmd.c:2580
+msgid " Subject"
+msgstr " Тема "
+
+#: edit/editcmd.c:2584
+msgid " To"
+msgstr " Коме"
+
+#: edit/editcmd.c:2586
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <тема> -c <копије> <коме>"
+
+#: edit/editkeys.c:180
+msgid " Emacs key: "
+msgstr " Тастер Емакса: "
+
+#: edit/editkeys.c:194 edit/editkeys.c:225
+msgid " Execute Macro "
+msgstr " Изврши макро "
+
+#: edit/editkeys.c:217
+msgid " Insert Literal "
+msgstr " Убаци литерал "
+
+#: edit/editkeys.c:218
+msgid " Press any key: "
+msgstr " Притисните било који тастер: "
+
+#: edit/editlock.c:147
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Датотеку `%s' већ уређује\n"
+"корисник: %s\n"
+"ИБ процеса: %d"
+
+#: edit/editlock.c:152
+msgid "File locked"
+msgstr "Датотека је закључана"
+
+#: edit/editlock.c:152
+msgid "&Grab lock"
+msgstr "&Заузми катанац"
+
+#: edit/editlock.c:153
+msgid "&Ignore lock"
+msgstr "З&анемари катанац"
+
+#: edit/editmenu.c:55
+msgid " About "
+msgstr " О програму"
+
+#: edit/editmenu.c:56
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                    Cooledit  v3.11.5\n"
+"\n"
+" Ауторска права (C) 1996 Задужбина за слободни софтвер\n"
+"\n"
+"     Пријатељски према кориснику уређивач текста написан\n"
+"                  за Поноћног Командира.\n"
+
+#: edit/editmenu.c:283 edit/editmenu.c:301
+msgid "&Open file..."
+msgstr "&Отвори датотеку..."
+
+#: edit/editmenu.c:284
+msgid "&New              C-n"
+msgstr "&Ново                   C-n"
+
+#: edit/editmenu.c:286 edit/editmenu.c:304
+msgid "&Save              F2"
+msgstr "&Сачувај                 F2"
+
+#: edit/editmenu.c:287 edit/editmenu.c:305
+msgid "Save &as...       F12"
+msgstr "Сачувај &као...         F12"
+
+#: edit/editmenu.c:289 edit/editmenu.c:307
+msgid "&Insert file...   F15"
+msgstr "&Убаци датотеку...      F15"
+
+#: edit/editmenu.c:290
+msgid "Copy to &file...  C-f"
+msgstr "Копирај у &датотеку...  C-f"
+
+#: edit/editmenu.c:292 edit/editmenu.c:310
+msgid "&User menu...     F11"
+msgstr "Кориснички &мени...     F11"
+
+#: edit/editmenu.c:294 edit/editmenu.c:312
+msgid "A&bout...            "
+msgstr "&О програму...             "
+
+#: edit/editmenu.c:296 edit/editmenu.c:314
+msgid "&Quit             F10"
+msgstr "&Заврши                 F10"
+
+#: edit/editmenu.c:302
+msgid "&New            C-x k"
+msgstr "&Ново                   C-x k"
+
+#: edit/editmenu.c:308
+msgid "Copy to &file...     "
+msgstr "Копирај у &датотеку...       "
+
+#: edit/editmenu.c:319
+msgid "&Toggle Mark       F3"
+msgstr "&Смени ознаку            F3"
+
+#: edit/editmenu.c:320
+msgid "&Mark Columns    S-F3"
+msgstr "&Означи колоне           S-F3"
+
+#: edit/editmenu.c:322
+msgid "Toggle &ins/overw Ins"
+msgstr "Смени &убац./препис.    Ins"
+
+#: edit/editmenu.c:324
+msgid "&Copy              F5"
+msgstr "&Копирај                   F5"
+
+#: edit/editmenu.c:325
+msgid "&Move              F6"
+msgstr "&Премести                  F6"
+
+#: edit/editmenu.c:326
+msgid "&Delete            F8"
+msgstr "&Обриши                    F8"
+
+#: edit/editmenu.c:328
+msgid "&Undo             C-u"
+msgstr "&Опозови                  C-u"
+
+#: edit/editmenu.c:330
+msgid "&Beginning     C-PgUp"
+msgstr "&Почетак               C-PgUp"
+
+#: edit/editmenu.c:331
+msgid "&End           C-PgDn"
+msgstr "&Крај                  C-PgDn"
+
+#: edit/editmenu.c:338
+msgid "&Search...         F7"
+msgstr "&Тражи                     F7"
+
+#: edit/editmenu.c:339
+msgid "Search &again     F17"
+msgstr "Тра&жи поново             F17"
+
+#: edit/editmenu.c:340
+msgid "&Replace...        F4"
+msgstr "&Замени...                 F4"
+
+#: edit/editmenu.c:347 edit/editmenu.c:371
+msgid "&Go to line...            M-l"
+msgstr "&Иди на линију...               M-l"
+
+#: edit/editmenu.c:348 edit/editmenu.c:372
+msgid "Go to matching &bracket   M-b"
+msgstr "Иди на одговарајућу &заграду    M-b"
+
+#: edit/editmenu.c:350 edit/editmenu.c:374
+msgid "Insert &literal...       C-q"
+msgstr "Убаци &литерал...               C-q"
+
+#: edit/editmenu.c:352 edit/editmenu.c:376
+msgid "&Refresh screen          C-l"
+msgstr "&Освежи екран                   C-l"
+
+#: edit/editmenu.c:354 edit/editmenu.c:378
+msgid "&Start record macro      C-r"
+msgstr "&Почни снимање макроа           C-r"
+
+#: edit/editmenu.c:355 edit/editmenu.c:379
+msgid "&Finish record macro...  C-r"
+msgstr "&Заврши снимање макроа...       C-r"
+
+#: edit/editmenu.c:356
+msgid "&Execute macro...   C-a, KEY"
+msgstr "&Изврши макро...           C-a, KEY"
+
+#: edit/editmenu.c:357 edit/editmenu.c:381
+msgid "Delete macr&o...            "
+msgstr "Обриши макр&о...                   "
+
+#: edit/editmenu.c:359 edit/editmenu.c:383
+msgid "Insert &date/time           "
+msgstr "Убаци &датум и време               "
+
+#: edit/editmenu.c:361 edit/editmenu.c:385
+msgid "Format p&aragraph        M-p"
+msgstr "Форматирај п&асус               M-p"
+
+#: edit/editmenu.c:362
+msgid "'ispell' s&pell check    C-p"
+msgstr "Провери &правопис `ispell'-ом C-p"
+
+#: edit/editmenu.c:363 edit/editmenu.c:387
+msgid "Sor&t...                 M-t"
+msgstr "Поре&ђај...                     M-t"
+
+#: edit/editmenu.c:364 edit/editmenu.c:388
+msgid "Paste o&utput of...      M-u"
+msgstr "Залепи &излаз наредбе...        M-u"
+
+#: edit/editmenu.c:365 edit/editmenu.c:389
+msgid "E&xternal Formatter      F19"
+msgstr "Спо&љашњи форматер              F19"
+
+#: edit/editmenu.c:366 edit/editmenu.c:390
+msgid "&Mail...                    "
+msgstr "По&шта...                          "
+
+#: edit/editmenu.c:380
+msgid "&Execute macro... C-x e, KEY"
+msgstr "&Изврши макро...         C-x e, KEY"
+
+#: edit/editmenu.c:386
+msgid "'ispell' s&pell check    M-$"
+msgstr "Провери &правопис `ispell'-ом M-$"
+
+#: edit/editmenu.c:395
+msgid "&General...  "
+msgstr "&Опште...  "
+
+#: edit/editmenu.c:396
+msgid "&Save mode..."
+msgstr "&Режим чувања..."
+
+#: edit/editmenu.c:397 src/main.c:934
+msgid "learn &Keys..."
+msgstr "Научи &тастере..."
+
+#: edit/editmenu.c:408 edit/editmenu.c:422 src/chmod.c:147 src/chown.c:121
+msgid " File "
+msgstr " Датотека "
+
+#: edit/editmenu.c:410 edit/editmenu.c:424
+msgid " Edit "
+msgstr " Уређивање "
+
+#: edit/editmenu.c:412 edit/editmenu.c:426
+msgid " Sear/Repl "
+msgstr " Претражи/замени "
+
+#: edit/editmenu.c:414 edit/editmenu.c:428
+msgid " Command "
+msgstr " Наредба "
+
+#: edit/editmenu.c:416 edit/editmenu.c:430
+msgid " Options "
+msgstr " Избори "
+
+#: edit/editoptions.c:36
+msgid "Intuitive"
+msgstr "Интуитивно"
+
+#: edit/editoptions.c:36
+msgid "Emacs"
+msgstr "Емакс"
+
+#: edit/editoptions.c:39
+msgid "None"
+msgstr "Ништа"
+
+#: edit/editoptions.c:39
+msgid "Dynamic paragraphing"
+msgstr "Динамични пасуси"
+
+#: edit/editoptions.c:39
+msgid "Type writer wrap"
+msgstr "Аутоматски прелом"
+
+#: edit/editoptions.c:75
+msgid "Word wrap line length: "
+msgstr "Прелом на дужини: "
+
+#: edit/editoptions.c:81
+msgid "Tab spacing: "
+msgstr "Размак табулатора: "
+
+#: edit/editoptions.c:88
+msgid "Synta&x highlighting"
+msgstr "Исти&цање синтаксе"
+
+#: edit/editoptions.c:91
+msgid "Save file &position"
+msgstr "Чување текуће &позиције"
+
+#: edit/editoptions.c:94
+msgid "Confir&m before saving"
+msgstr "Потврда &чувања"
+
+#: edit/editoptions.c:97
+msgid "Fill tabs with &spaces"
+msgstr "Попуни табулато&ре размацима"
+
+#: edit/editoptions.c:100
+msgid "&Return does autoindent"
+msgstr "Тастер `&Return' не увлачи"
+
+#: edit/editoptions.c:103
+msgid "&Backspace through tabs"
+msgstr "Тастером `&Backsp' кроз табул."
+
+#: edit/editoptions.c:106
+msgid "&Fake half tabs"
+msgstr "&Лажна полутабулација"
+
+#: edit/editoptions.c:112
+msgid "Wrap mode"
+msgstr "Прелом линија"
+
+#: edit/editoptions.c:119
+msgid "Key emulation"
+msgstr "Имитација тастера"
+
+#: edit/editoptions.c:124
+msgid " Editor options "
+msgstr " Избори уређивача "
+
+#: edit/editwidget.c:288 src/help.c:794 src/help.c:815 src/main.c:1230
+#: src/screen.c:2185 src/tree.c:1030 src/view.c:2240
+msgid "Help"
+msgstr "Помоћ"
+
+#: edit/editwidget.c:290
+msgid "Mark"
+msgstr "Означи"
+
+#: edit/editwidget.c:291
+msgid "Replac"
+msgstr "Замени"
+
+#: edit/editwidget.c:292 src/file.c:816 src/screen.c:2189 src/tree.c:1035
+msgid "Copy"
+msgstr "Копир."
+
+#: edit/editwidget.c:293
+msgid "Move"
+msgstr "Прем."
+
+#: edit/editwidget.c:295 src/screen.c:2192
+msgid "Delete"
+msgstr "Обриши"
+
+#: edit/editwidget.c:296 src/main.c:1232
+msgid "PullDn"
+msgstr "Мени"
+
+#: edit/syntax.c:1089 edit/syntax.c:1096
+msgid " Load syntax file "
+msgstr " Учитај датотеку синтаксе "
+
+#: edit/syntax.c:1090 src/help.c:765 src/user.c:713
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Не могу да отворим датотеку `%s' \n"
+" %s "
+
+#: edit/syntax.c:1097
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Грешка у датотеци `%s' на реду %d "
+
+#: src/achown.c:70 src/chmod.c:98 src/chown.c:75
+msgid "&Set"
+msgstr "&Постави"
+
+#: src/achown.c:71
+msgid "S&kip"
+msgstr "Прес&кочи"
+
+#: src/achown.c:72 src/chmod.c:102 src/chown.c:78
+msgid "Set &all"
+msgstr "Постави &све"
+
+#: src/achown.c:251 src/achown.c:339 src/achown.c:346
+msgid "owner"
+msgstr "власник"
+
+#: src/achown.c:251 src/achown.c:341 src/achown.c:348
+msgid "group"
+msgstr "група"
+
+#: src/achown.c:343
+msgid "other"
+msgstr "други"
+
+#: src/achown.c:351
+msgid "On"
+msgstr "На"
+
+#: src/achown.c:353
+msgid "Flag"
+msgstr "Ознака"
+
+#: src/achown.c:355
+msgid "Mode"
+msgstr "Режим"
+
+#: src/achown.c:359
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d од %d"
+
+#: src/achown.c:550
+msgid " Chown advanced command "
+msgstr " Напредна промена власника "
+
+#: src/achown.c:608 src/achown.c:624 src/achown.c:670 src/chmod.c:253
+#: src/chmod.c:323
+#, c-format
+msgid ""
+" Cannot chmod \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да променим дозволе `%s'\n"
+" %s "
+
+#: src/achown.c:613 src/achown.c:628 src/achown.c:674 src/chown.c:216
+#: src/chown.c:324
+#, c-format
+msgid ""
+" Cannot chown \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да променим власника `%s' \n"
+" %s "
+
+#: src/background.c:177
+msgid "Background process:"
+msgstr "Позадински процес:"
+
+#: src/background.c:275 src/file.c:2159
+msgid " Background process error "
+msgstr " Грешка позадинског процеса "
+
+#: src/background.c:278
+msgid " Child died unexpectedly "
+msgstr " Дете је изненадно завршило рад "
+
+#: src/background.c:280
+msgid " Unknown error in child "
+msgstr " Непозната грешка у детету "
+
+#: src/background.c:295
+msgid " Background protocol error "
+msgstr " Грешка позадинског протокола "
+
+#: src/background.c:296
+msgid ""
+" Background process sent us a request for more arguments \n"
+" than we can handle. \n"
+msgstr ""
+" Позадински процес нам је послао захтев за више аргумената\n"
+" него што можемо да обрадимо. \n"
+
+#: src/boxes.c:73
+msgid "&Full file list"
+msgstr "&Пун списак датотека"
+
+#: src/boxes.c:74
+msgid "&Brief file list"
+msgstr "&Кратак списак датотека"
+
+#: src/boxes.c:75
+msgid "&Long file list"
+msgstr "&Дугачак списак датотека"
+
+#: src/boxes.c:76
+msgid "&User defined:"
+msgstr "&Кориснички задано:"
+
+#: src/boxes.c:135
+msgid "Listing mode"
+msgstr "Режим списка"
+
+#: src/boxes.c:137
+msgid "user &Mini status"
+msgstr "корисничко &Мини стање"
+
+#: src/boxes.c:277
+msgid "&Reverse"
+msgstr "&Изврни"
+
+#: src/boxes.c:278
+msgid "case sensi&tive"
+msgstr "разлику&ј велика и мала слова"
+
+#: src/boxes.c:279
+msgid "Sort order"
+msgstr "Поредак ређања"
+
+#: src/boxes.c:374
+msgid " confirm &Exit "
+msgstr " потврда &Излаза "
+
+#: src/boxes.c:376
+msgid " confirm e&Xecute "
+msgstr " потврда и&Звршавања "
+
+#: src/boxes.c:378
+msgid " confirm o&Verwrite "
+msgstr " потврда &Преписивања "
+
+#: src/boxes.c:380
+msgid " confirm &Delete "
+msgstr " потврда &Брисања "
+
+#: src/boxes.c:386 src/cmd.c:198
+msgid " Confirmation "
+msgstr " Потврде "
+
+#: src/boxes.c:458
+msgid "Full 8 bits output"
+msgstr "Пун осмобитни излаз"
+
+#: src/boxes.c:458
+msgid "ISO 8859-1"
+msgstr "изо 8859-1"
+
+#: src/boxes.c:458
+msgid "7 bits"
+msgstr "7 бита"
+
+#: src/boxes.c:465 src/boxes.c:593
+msgid "F&ull 8 bits input"
+msgstr "П&ун осмобитни улаз"
+
+#: src/boxes.c:473 src/boxes.c:574
+msgid " Display bits "
+msgstr " Битова у приказу "
+
+#: src/boxes.c:555 src/boxes.c:580 src/selcodepage.c:71
+msgid "Other 8 bit"
+msgstr "Друго осмобитно"
+
+#: src/boxes.c:577
+msgid "Input / display codepage:"
+msgstr "Кодна страна улаза и приказа:"
+
+#: src/boxes.c:596
+msgid "&Select"
+msgstr "&Изабери"
+
+#: src/boxes.c:715
+msgid "Use &passive mode"
+msgstr "Користи &пасивни режим"
+
+#: src/boxes.c:717
+msgid "&Use ~/.netrc"
+msgstr "&Користи ~/.netrc"
+
+#: src/boxes.c:721
+msgid "&Always use ftp proxy"
+msgstr "&Увек користи посредника за ftp"
+
+#: src/boxes.c:723
+msgid "sec"
+msgstr "сек"
+
+#: src/boxes.c:727
+msgid "ftpfs directory cache timeout:"
+msgstr "истекло време за оставу дир. ftpfs-а:"
+
+#: src/boxes.c:731
+msgid "ftp anonymous password:"
+msgstr "анонимна лозинка за ftp:"
+
+#: src/boxes.c:738
+msgid "Timeout for freeing VFSs:"
+msgstr "Чекање ослобађања ВСД-ова:"
+
+#: src/boxes.c:744
+msgid " Virtual File System Setting "
+msgstr " Подешавање виртуалног система датотека "
+
+#: src/boxes.c:798
+msgid "Quick cd"
+msgstr "Брза пром.дир."
+
+#: src/boxes.c:801
+msgid "cd"
+msgstr "пром.дир."
+
+#: src/boxes.c:839
+msgid "Symbolic link"
+msgstr "Симболичка веза"
+
+#: src/boxes.c:843
+msgid "Symbolic link filename:"
+msgstr "Датотека симболичке везе:"
+
+#: src/boxes.c:845
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Постојећа датотека (на коју ће упућивати веза):"
+
+#: src/boxes.c:874
+msgid "Running "
+msgstr "Покренуто "
+
+#: src/boxes.c:875 src/find.c:734
+msgid "Stopped"
+msgstr "Заустављено "
+
+#: src/boxes.c:935
+msgid "&Stop"
+msgstr "&Заустави"
+
+#: src/boxes.c:936
+msgid "&Resume"
+msgstr "&Настави"
+
+#: src/boxes.c:937
+msgid "&Kill"
+msgstr "&Убиј"
+
+#: src/boxes.c:974
+msgid "Background Jobs"
+msgstr "Позадински послови"
+
+#: src/boxes.c:1005
+msgid "Domain:"
+msgstr "Домен:"
+
+#: src/boxes.c:1005
+msgid "Username:"
+msgstr "Корисн. име:"
+
+#: src/boxes.c:1005 vfs/vfs.c:1875
+msgid "Password:"
+msgstr "Лозинка:"
+
+#: src/boxes.c:1056
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Лозинка за \\\\%s\\%s"
+
+#: src/charsets.c:51 vfs/extfs.c:1301 vfs/sfs.c:308
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Упозорење: датотека %s није нађена\n"
+
+#: src/charsets.c:198 src/charsets.c:212
+#, c-format
+msgid "Cannot translate from %s to %s"
+msgstr "Не могу да преведем из %s у %s"
+
+#: src/chmod.c:78
+msgid "execute/search by others"
+msgstr "извр./претр. за остале"
+
+#: src/chmod.c:79
+msgid "write by others"
+msgstr "упис за остале"
+
+#: src/chmod.c:80
+msgid "read by others"
+msgstr "читање за остале"
+
+#: src/chmod.c:81
+msgid "execute/search by group"
+msgstr "извр./претр. за групу"
+
+#: src/chmod.c:82
+msgid "write by group"
+msgstr "упис за групу"
+
+#: src/chmod.c:83
+msgid "read by group"
+msgstr "читање за групу"
+
+#: src/chmod.c:84
+msgid "execute/search by owner"
+msgstr "извр./претр. за власника"
+
+#: src/chmod.c:85
+msgid "write by owner"
+msgstr "упис за власника"
+
+#: src/chmod.c:86
+msgid "read by owner"
+msgstr "читање за власника"
+
+#: src/chmod.c:87
+msgid "sticky bit"
+msgstr "лепљиви бит"
+
+#: src/chmod.c:88
+msgid "set group ID on execution"
+msgstr "постави ИБ групе при изв."
+
+#: src/chmod.c:89
+msgid "set user ID on execution"
+msgstr "постави ИБ корис. при изв."
+
+#: src/chmod.c:99
+msgid "C&lear marked"
+msgstr "О&чисти означене"
+
+#: src/chmod.c:100
+msgid "S&et marked"
+msgstr "П&остави означене"
+
+#: src/chmod.c:101
+msgid "&Marked all"
+msgstr "&Све означене"
+
+#: src/chmod.c:125 src/screen.c:403
+msgid "Name"
+msgstr "Назив"
+
+#: src/chmod.c:127
+msgid "Permissions (Octal)"
+msgstr "Дозволе (октално)"
+
+#: src/chmod.c:129
+msgid "Owner name"
+msgstr "Име власника"
+
+#: src/chmod.c:131
+msgid "Group name"
+msgstr "Назив групе"
+
+#: src/chmod.c:134
+msgid "Use SPACE to change"
+msgstr "Размакница за измену"
+
+#: src/chmod.c:136
+msgid "an option, ARROW KEYS"
+msgstr "избора, стрелице за"
+
+#: src/chmod.c:138
+msgid "to move between options"
+msgstr "кретање по изборима"
+
+#: src/chmod.c:140
+msgid "and T or INS to mark"
+msgstr "а T или INS за означавање"
+
+#: src/chmod.c:145 src/chown.c:113
+msgid " Permission "
+msgstr " Дозвола "
+
+#: src/chmod.c:200
+msgid "Chmod command"
+msgstr "Промена дозвола"
+
+#: src/chown.c:76
+msgid "Set &users"
+msgstr "Постави &кориснике"
+
+#: src/chown.c:77
+msgid "Set &groups"
+msgstr "Постави &групе"
+
+#: src/chown.c:105
+msgid " Name "
+msgstr " Назив "
+
+#: src/chown.c:107
+msgid " Owner name "
+msgstr " Име власника "
+
+#: src/chown.c:109 src/chown.c:119
+msgid " Group name "
+msgstr " Назив групе "
+
+#: src/chown.c:111
+msgid " Size "
+msgstr " Величина "
+
+#: src/chown.c:117
+msgid " User name "
+msgstr " Име корисника "
+
+#: src/chown.c:160
+msgid " Chown command "
+msgstr " Промена власника "
+
+#: src/chown.c:180
+msgid "<Unknown user>"
+msgstr "<Непознат корисник>"
+
+#: src/chown.c:181
+msgid "<Unknown group>"
+msgstr "<Непозната група>"
+
+#: src/cmd.c:198
+msgid "Files tagged, want to cd?"
+msgstr "Датотеке означене, да пром.дир.?"
+
+#: src/cmd.c:204 src/cmd.c:674 src/cmd.c:736 src/main.c:706 src/screen.c:1931
+msgid "Cannot change directory"
+msgstr "Не могу да променим директоријум"
+
+#: src/cmd.c:237
+msgid " View file "
+msgstr " Прегледај датотеку "
+
+#: src/cmd.c:237
+msgid " Filename:"
+msgstr " Датотека: "
+
+#: src/cmd.c:259
+msgid " Filtered view "
+msgstr " Филтрирани приказ "
+
+#: src/cmd.c:260
+msgid " Filter command and arguments:"
+msgstr " Наредба и аргументи филтера: "
+
+#: src/cmd.c:359
+msgid "Create a new Directory"
+msgstr "Створи нови директоријум"
+
+#: src/cmd.c:360
+msgid " Enter directory name:"
+msgstr " Унесите назив директоријума:"
+
+#: src/cmd.c:432
+msgid " Filter "
+msgstr " Филтар "
+
+#: src/cmd.c:433
+msgid " Set expression for filtering filenames"
+msgstr " Постави израз за филтрирање датотека"
+
+#: src/cmd.c:486
+msgid " Select "
+msgstr " Изабери "
+
+#: src/cmd.c:514 src/cmd.c:559 src/find.c:142
+msgid "  Malformed regular expression  "
+msgstr " Неисправни регуларни израз "
+
+#: src/cmd.c:532
+msgid " Unselect "
+msgstr " Одизабери "
+
+#: src/cmd.c:600
+msgid "Extension file edit"
+msgstr "Уређивање датотеке са врстама"
+
+#: src/cmd.c:601
+msgid " Which extension file you want to edit? "
+msgstr " Коју датотеку са врстама желите да уредите? "
+
+#: src/cmd.c:602 src/cmd.c:705
+msgid "&User"
+msgstr "&Корисничку"
+
+#: src/cmd.c:602 src/cmd.c:631 src/cmd.c:705
+msgid "&System Wide"
+msgstr "&Системску"
+
+#: src/cmd.c:628
+msgid " Menu edit "
+msgstr " Уређивање менија "
+
+#: src/cmd.c:629
+msgid " Which menu file do you want to edit? "
+msgstr " Коју датотеку менија желите да уредите? "
+
+#: src/cmd.c:631
+msgid "&Local"
+msgstr "&Локалну"
+
+#: src/cmd.c:631
+msgid "&Home"
+msgstr "&Домаћу"
+
+#: src/cmd.c:703
+msgid "Syntax file edit"
+msgstr "Уређивање синтаксне датотеке"
+
+#: src/cmd.c:704
+msgid " Which syntax file you want to edit? "
+msgstr " Коју синтаксну датотеку желите да уредите?"
+
+#: src/cmd.c:863
+msgid " Compare directories "
+msgstr " Пореди директоријуме "
+
+#: src/cmd.c:864
+msgid " Select compare method: "
+msgstr " Изаберите начин поређења: "
+
+#: src/cmd.c:864
+msgid "&Quick"
+msgstr "&Брз"
+
+#: src/cmd.c:865
+msgid "&Size only"
+msgstr "&Само величина"
+
+#: src/cmd.c:865
+msgid "&Thorough"
+msgstr "&Темељан"
+
+#: src/cmd.c:878
+msgid " Both panels should be in the listing mode to use this command "
+msgstr " Оба окна би требало да су у режиму списка за употребу ове наредбе "
+
+#: src/cmd.c:894
+msgid " The command history is empty "
+msgstr " Историја наредби је празна "
+
+#: src/cmd.c:898
+msgid " Command history "
+msgstr " Историја наредби "
+
+#: src/cmd.c:934
+msgid ""
+" Not an xterm or Linux console; \n"
+" the panels cannot be toggled. "
+msgstr ""
+" Ово није Икс терминал или конзола; \n"
+" окна се не могу смењивати. "
+
+#: src/cmd.c:948
+#, c-format
+msgid "Link %s to:"
+msgstr "Повежи %s са:"
+
+#: src/cmd.c:949
+msgid " Link "
+msgstr " Повежи "
+
+#: src/cmd.c:959
+#, c-format
+msgid " link: %s "
+msgstr " веза: %s "
+
+#: src/cmd.c:987
+#, c-format
+msgid " symlink: %s "
+msgstr " симвеза: %s "
+
+#: src/cmd.c:1021
+#, c-format
+msgid " Symlink `%s' points to: "
+msgstr " Симвеза `%s' упућује на: "
+
+#: src/cmd.c:1026
+msgid " Edit symlink "
+msgstr " Уреди симвезу "
+
+#: src/cmd.c:1031
+#, c-format
+msgid " edit symlink, unable to remove %s: %s "
+msgstr " уређивање симвезе; не могу да уклоним %s: %s "
+
+#: src/cmd.c:1035
+#, c-format
+msgid " edit symlink: %s "
+msgstr " уређивање симвезе: %s "
+
+#: src/cmd.c:1046
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "`%s' није симболичка веза"
+
+#: src/cmd.c:1158
+#, c-format
+msgid " Cannot chdir to %s "
+msgstr " Не могу да поставим дир. на %s "
+
+#: src/cmd.c:1167
+msgid " Enter machine name (F1 for details): "
+msgstr " Унесите назив машине (F1 за детаље): "
+
+#: src/cmd.c:1172 src/widget.c:1051
+msgid " Link to a remote machine "
+msgstr " Повезивање са удаљеном машином "
+
+#: src/cmd.c:1179 src/widget.c:1052
+msgid " FTP to machine "
+msgstr " FTP на машину "
+
+#: src/cmd.c:1185
+msgid " Shell link to machine "
+msgstr " Повезивање љуске са машином "
+
+#: src/cmd.c:1192 src/widget.c:1053
+msgid " SMB link to machine "
+msgstr " Веза SMB са машином "
+
+#: src/cmd.c:1203
+msgid " Socket source routing setup "
+msgstr " Подешавање усмеравања извора утичнице "
+
+#: src/cmd.c:1204
+msgid " Enter host name to use as a source routing hop: "
+msgstr " Унесите назив домаћина за скок усмеравања извора: "
+
+#: src/cmd.c:1212
+msgid " Host name "
+msgstr " Назив домаћина "
+
+#: src/cmd.c:1212
+msgid " Error while looking up IP address "
+msgstr " Грешка при тражењу адресе ИП "
+
+#: src/cmd.c:1223
+msgid " Undelete files on an ext2 file system "
+msgstr " Одобриши датотеке на систему датотека ext2 "
+
+#: src/cmd.c:1224
+msgid ""
+" Enter device (without /dev/) to undelete\n"
+"   files on: (F1 for details)"
+msgstr ""
+" Унесите уређај (без /dev/) за одобрисање\n"
+"   датотека на: (F1 за детаље)"
+
+#: src/cmd.c:1274
+msgid " Setup saved to ~/"
+msgstr " Подешавања сачувана у ~/"
+
+#: src/cmd.c:1276
+msgid " Setup "
+msgstr " Подешавања "
+
+#: src/command.c:168 src/screen.c:2175 src/tree.c:883
+#, c-format
+msgid ""
+" Cannot chdir to \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да поставим дир. на `%s' \n"
+" %s "
+
+#: src/command.c:199 src/user.c:696
+msgid " Cannot execute commands on non-local filesystems"
+msgstr " Не могу да извршавам наредбе на не-лок. системима датoтека"
+
+#: src/command.c:208 src/execute.c:182
+msgid " The shell is already running a command "
+msgstr " Љуска већ извршава наредбу "
+
+#: src/dialog.c:58
+msgid ""
+"\n"
+"\n"
+"\n"
+"refresh stack underflow!\n"
+"\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"стог освежавања је испражњен!\n"
+"\n"
+"\n"
+
+#: src/dir.c:50
+msgid "&Unsorted"
+msgstr "Н&есређено"
+
+#: src/dir.c:51
+msgid "&Name"
+msgstr "&Назив"
+
+#: src/dir.c:52
+msgid "&Extension"
+msgstr "&Врста"
+
+#: src/dir.c:53
+msgid "&Modify time"
+msgstr "Датум &измене"
+
+#: src/dir.c:54
+msgid "&Access time"
+msgstr "Датум &приступа"
+
+#: src/dir.c:55
+msgid "&Change time"
+msgstr "Датум &промене"
+
+#: src/dir.c:56
+msgid "&Size"
+msgstr "&Величина"
+
+#: src/dir.c:57
+msgid "&Inode"
+msgstr "&Инод"
+
+#: src/dir.c:60
+msgid "&Type"
+msgstr "В&рста"
+
+#: src/dir.c:61
+msgid "&Links"
+msgstr "Ве&зе"
+
+#: src/dir.c:62
+msgid "N&GID"
+msgstr "N&GID"
+
+#: src/dir.c:63
+msgid "N&UID"
+msgstr "N&UID"
+
+#: src/dir.c:64
+msgid "&Owner"
+msgstr "В&ласник"
+
+#: src/dir.c:65
+msgid "&Group"
+msgstr "&Група"
+
+#: src/dir.c:478 src/dir.c:584
+msgid "Cannot read directory contents"
+msgstr "Не могу да учитам садржај директоријума"
+
+#: src/execute.c:132 src/utilunix.c:377
+msgid "Press any key to continue..."
+msgstr "Притисните било који тастер за наставак..."
+
+#: src/execute.c:234
+msgid "Type `exit' to return to the Midnight Commander"
+msgstr "Унесите `exit' да бисте се вратили у Поноћног Командира"
+
+#: src/execute.c:342
+#, c-format
+msgid " Cannot fetch a local copy of %s "
+msgstr " Не могу да добавим локални примерак %s "
+
+#: src/ext.c:106 src/user.c:568
+#, c-format
+msgid ""
+" Cannot create temporary command file \n"
+" %s "
+msgstr ""
+" Не могу да створим привремену датотеку наредби \n"
+" %s "
+
+#: src/ext.c:119 src/user.c:591
+msgid " Parameter "
+msgstr " Параметар "
+
+#: src/ext.c:523 src/ext.c:542
+msgid " file error "
+msgstr " грешка датотеке "
+
+#: src/ext.c:525 src/ext.c:544
+msgid "Format of the "
+msgstr "Формат "
+
+#: src/ext.c:526
+msgid ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package."
+msgstr ""
+"Датотека mc.ext је измењена у верзији 3.0.\n"
+"Изгледа да инсталација није успела.\n"
+"Молим да преузмете свеж примерак из\n"
+"пакета Поноћног Командира."
+
+#: src/ext.c:545
+msgid ""
+" file has changed\n"
+"with version 3.0. You may want either to\n"
+"copy it from "
+msgstr ""
+" датотека је измењена\n"
+"у верзији 3.0. Вероватно ћете пожелети\n"
+"да је копирате из "
+
+#: src/ext.c:548
+msgid ""
+"mc.ext or use that\n"
+"file as an example of how to write it.\n"
+msgstr ""
+"mc.ext или да користите\n"
+"ту датотеку као узор.\n"
+
+#: src/ext.c:551
+msgid "mc.ext will be used for this moment."
+msgstr "mc.ext ће се за сада користити."
+
+#: src/file.c:140 src/tree.c:649
+msgid " Copy "
+msgstr " Копирај "
+
+#: src/file.c:141 src/tree.c:690
+msgid " Move "
+msgstr " Премести "
+
+#: src/file.c:142 src/tree.c:764
+msgid " Delete "
+msgstr " Обриши "
+
+#: src/file.c:229
+msgid " Invalid target mask "
+msgstr " Неисправна одредишна маска "
+
+#: src/file.c:329
+msgid " Cannot make the hardlink "
+msgstr " Не могу да направим тврду везу "
+
+#: src/file.c:372
+#, c-format
+msgid ""
+" Cannot read source link \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да читам изворну везу `%s' \n"
+" %s "
+
+#: src/file.c:383
+msgid ""
+" Cannot make stable symlinks across non-local filesystems: \n"
+"\n"
+" Option Stable Symlinks will be disabled "
+msgstr ""
+" Не могу да правим стабилне симвезе преко не-лок. система датотека: \n"
+"\n"
+" Избор `Стабилне симвезе' ће бити искључен "
+
+#: src/file.c:432
+#, c-format
+msgid ""
+" Cannot create target symlink \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да створим одредишну симвезу `%s' \n"
+" %s "
+
+#: src/file.c:506
+#, c-format
+msgid ""
+" Cannot overwrite directory \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да препишем директоријум `%s' \n"
+" %s "
+
+#: src/file.c:517
+#, c-format
+msgid ""
+" Cannot stat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да извршим `stat' на изворној датотеци `%s' \n"
+" %s "
+
+#: src/file.c:527 src/file.c:1128
+#, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' и `%s' су истоветни "
+
+#: src/file.c:565
+#, c-format
+msgid ""
+" Cannot create special file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да створим посебну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:577 src/file.c:826
+#, c-format
+msgid ""
+" Cannot chown target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да променим власника одредишној датотеци `%s' \n"
+" %s "
+
+#: src/file.c:588 src/file.c:843
+#, c-format
+msgid ""
+" Cannot chmod target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да променим дозволе одредишној датотеци `%s' \n"
+" %s "
+
+#: src/file.c:602
+#, c-format
+msgid ""
+" Cannot open source file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да отворим датотеку `%s' \n"
+" %s "
+
+#: src/file.c:613
+msgid " Reget failed, about to overwrite file "
+msgstr " Поновно преузимање није успело, преписаћу датотеку "
+
+#: src/file.c:620
+#, c-format
+msgid ""
+" Cannot fstat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да извршим `fstat' на изворној датотеци `%s' \n"
+" %s "
+
+#: src/file.c:644
+#, c-format
+msgid ""
+" Cannot create target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да створим одредишну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:659
+#, c-format
+msgid ""
+" Cannot fstat target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да извршим fstat на одредишној датотеци `%s' \n"
+" %s "
+
+#: src/file.c:693
+#, c-format
+msgid ""
+" Cannot read source file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да читам одредишну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:728
+#, c-format
+msgid ""
+" Cannot write target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да пишем у одредишну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:746
+msgid "(stalled)"
+msgstr "(застој)"
+
+#: src/file.c:793
+#, c-format
+msgid ""
+" Cannot close source file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да затворим изворну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:804
+#, c-format
+msgid ""
+" Cannot close target file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да затворим одредишну датотеку `%s' \n"
+" %s "
+
+#: src/file.c:817
+msgid "Incomplete file was retrieved. Keep it?"
+msgstr "Датотека није у потпуности преузета. Да је задржим?"
+
+#: src/file.c:818
+msgid "&Delete"
+msgstr "&Обриши"
+
+#: src/file.c:818
+msgid "&Keep"
+msgstr "&Задржи"
+
+#: src/file.c:886
+#, c-format
+msgid ""
+" Cannot stat source directory \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да извршим stat на изворном директоријуму `%s' \n"
+" %s "
+
+#: src/file.c:913
+#, c-format
+msgid ""
+" Source directory \"%s\" is not a directory \n"
+" %s "
+msgstr ""
+" Изворни директоријум `%s' није директоријум \n"
+" %s "
+
+#: src/file.c:923
+#, c-format
+msgid ""
+" Cannot copy cyclic symbolic link \n"
+" `%s' "
+msgstr ""
+" Не могу да копирам цикличну симболичку везу \n"
+" `%s' "
+
+#: src/file.c:958 src/file.c:1998 src/tree.c:704
+#, c-format
+msgid ""
+" Destination \"%s\" must be a directory \n"
+" %s "
+msgstr ""
+" Одредиште `%s' мора да буде директоријум \n"
+" %s "
+
+#: src/file.c:988
+#, c-format
+msgid ""
+" Cannot create target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да створим одредишни директоријум `%s' \n"
+" %s "
+
+#: src/file.c:1007
+#, c-format
+msgid ""
+" Cannot chown target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да променим власника одредишном директоријуму `%s' \n"
+" %s "
+
+#: src/file.c:1109
+#, c-format
+msgid ""
+" Cannot stat file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да извршим stat на датотеци `%s' \n"
+" %s "
+
+#: src/file.c:1135
+#, c-format
+msgid " Cannot overwrite directory `%s' "
+msgstr " Не могу да препишем директоријум `%s' "
+
+#: src/file.c:1170
+#, c-format
+msgid ""
+" Cannot move file \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да преместим датотеку `%s' у `%s' \n"
+" %s "
+
+#: src/file.c:1194
+#, c-format
+msgid ""
+" Cannot remove file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да уклоним датотеку `%s' \n"
+" %s "
+
+#: src/file.c:1246
+#, c-format
+msgid " `%s' and `%s' are the same directory "
+msgstr " `%s' и `%s' су истоветни директоријуми "
+
+#: src/file.c:1265
+#, c-format
+msgid " Cannot overwrite directory \"%s\" %s "
+msgstr " Не могу да препишем директоријум `%s' %s "
+
+#: src/file.c:1269
+#, c-format
+msgid " Cannot overwrite file \"%s\" %s "
+msgstr " Не могу да препишем датотеку `%s' %s "
+
+#: src/file.c:1295
+#, c-format
+msgid ""
+" Cannot move directory \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да преместим директоријум `%s' у `%s' \n"
+" %s "
+
+#: src/file.c:1365
+#, c-format
+msgid ""
+" Cannot delete file \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да обришем датотеку `%s' \n"
+" %s "
+
+#: src/file.c:1425 src/file.c:1494 src/file.c:1522
+#, c-format
+msgid ""
+" Cannot remove directory \"%s\" \n"
+" %s "
+msgstr ""
+" Не могу да уклоним директоријум `%s' \n"
+" %s "
+
+#: src/file.c:1670
+msgid "1Copy"
+msgstr "1Копирај"
+
+#: src/file.c:1670
+msgid "1Move"
+msgstr "1Премести"
+
+#: src/file.c:1670
+msgid "1Delete"
+msgstr "1Обриши"
+
+#: src/file.c:1685
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+#: src/file.c:1687
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o %d %f%m"
+
+#: src/file.c:1689 vfs/fish.c:539
+msgid "file"
+msgstr "датотеку"
+
+#: src/file.c:1689
+msgid "files"
+msgstr "датотека"
+
+#: src/file.c:1689
+msgid "directory"
+msgstr "директоријум"
+
+#: src/file.c:1689
+msgid "directories"
+msgstr "директоријума"
+
+#: src/file.c:1690
+msgid "files/directories"
+msgstr "датотека/директоријума"
+
+#: src/file.c:1690
+msgid " with source mask:"
+msgstr " уз изворну маску:"
+
+#: src/file.c:1690
+msgid " to:"
+msgstr " у:"
+
+#: src/file.c:1834
+msgid " Cannot operate on \"..\"! "
+msgstr " Не могу да радим са `..'! "
+
+#: src/file.c:1890
+msgid " Sorry, I could not put the job in background "
+msgstr " Извините, али нисам могао да пошаљем посао у позадину "
+
+#: src/file.c:2161 src/view.c:464
+msgid "&Retry"
+msgstr "П&робај поново"
+
+#: src/file.c:2162 src/file.c:2225 src/filegui.c:224 src/filegui.c:534
+msgid "&Abort"
+msgstr "&Прекини"
+
+#: src/file.c:2214
+msgid ""
+"\n"
+"   Directory not empty.   \n"
+"   Delete it recursively? "
+msgstr ""
+"\n"
+"   Директоријум није празан.   \n"
+"   Желите ли да га рекурзивно обришем? "
+
+#: src/file.c:2216
+msgid ""
+"\n"
+"   Background process: Directory not empty \n"
+"   Delete it recursively? "
+msgstr ""
+"\n"
+"   Позадински процес: Директоријум није празан \n"
+"   Желите ли да га рекурзивно обришем? "
+
+#: src/file.c:2218
+msgid " Delete: "
+msgstr " Обриши: "
+
+#: src/file.c:2224 src/filegui.c:536
+msgid "Non&e"
+msgstr "&Ништа"
+
+# Estimated time of arrival
+# Процењено време доласка
+#: src/filegui.c:341
+#, c-format
+msgid "ETA %d:%02d.%02d"
+msgstr "ПВД %d:%02d.%02d"
+
+#: src/filegui.c:364
+#, c-format
+msgid "%.2f MB/s"
+msgstr "%.2f МБ/с"
+
+#: src/filegui.c:367
+#, c-format
+msgid "%.2f KB/s"
+msgstr "%.2f КБ/с"
+
+#: src/filegui.c:370
+#, c-format
+msgid "%ld B/s"
+msgstr "%ld Б/с"
+
+#: src/filegui.c:393
+msgid "File"
+msgstr "Датотека"
+
+#: src/filegui.c:416
+msgid "Count"
+msgstr "Број"
+
+#: src/filegui.c:437
+msgid "Bytes"
+msgstr "Бајтова"
+
+#: src/filegui.c:470
+msgid "Source"
+msgstr "Извор"
+
+#: src/filegui.c:493
+msgid "Target"
+msgstr "Одредиште"
+
+#: src/filegui.c:515
+msgid "Deleting"
+msgstr "Бришем"
+
+#: src/filegui.c:533
+#, c-format
+msgid "Target file \"%s\" already exists!"
+msgstr "Одредишна датотека `%s' већ постоји!"
+
+#: src/filegui.c:535
+msgid "If &size differs"
+msgstr "Ако је &величина различита"
+
+#: src/filegui.c:537
+msgid "&Update"
+msgstr "&Ажурирај"
+
+#: src/filegui.c:539
+msgid "Overwrite all targets?"
+msgstr "Желите ли да препишем сва одредишта?"
+
+#: src/filegui.c:540
+msgid "&Reget"
+msgstr "&Поново преузми"
+
+#: src/filegui.c:541
+msgid "A&ppend"
+msgstr "&Надовежи"
+
+#: src/filegui.c:544
+msgid "Overwrite this target?"
+msgstr "Желите ли да препишем ово одредиште?"
+
+#: src/filegui.c:545
+#, c-format
+msgid "Target date: %s, size %d"
+msgstr "Датум одредишта: %s, величина %d"
+
+#: src/filegui.c:546
+#, c-format
+msgid "Source date: %s, size %d"
+msgstr "Датум извора: %s, величина %d"
+
+#: src/filegui.c:621
+msgid " File exists "
+msgstr " Датотека постоји "
+
+#: src/filegui.c:623
+msgid " Background process: File exists "
+msgstr " Позадински процес: датотека постоји "
+
+#: src/filegui.c:745
+msgid "preserve &Attributes"
+msgstr "очувај &Атрибуте"
+
+#: src/filegui.c:747
+msgid "follow &Links"
+msgstr "прати &Везе"
+
+#: src/filegui.c:749
+msgid "to:"
+msgstr "у:"
+
+#: src/filegui.c:750
+msgid "&Using shell patterns"
+msgstr "&Користи обрасце љуске"
+
+#: src/filegui.c:771
+msgid "&Background"
+msgstr "&Позадина"
+
+#: src/filegui.c:781
+msgid "&Stable Symlinks"
+msgstr "&Стабилне симвезе"
+
+#: src/filegui.c:783
+msgid "&Dive into subdir if exists"
+msgstr "&Зарони у поддиректоријуме"
+
+#: src/filegui.c:955
+#, c-format
+msgid ""
+"Invalid source pattern `%s' \n"
+" %s "
+msgstr ""
+"Неисправан изворни образац `%s' \n"
+" %s "
+
+#: src/find.c:102
+msgid "&Suspend"
+msgstr "&Обустави"
+
+#: src/find.c:103
+msgid "Con&tinue"
+msgstr "&Настави"
+
+#: src/find.c:104
+msgid "&Chdir"
+msgstr "&Chdir"
+
+#: src/find.c:105
+msgid "&Again"
+msgstr "&Поново"
+
+#: src/find.c:106 src/subshell.c:323
+msgid "&Quit"
+msgstr "&Заврши"
+
+#: src/find.c:107 src/panelize.c:72
+msgid "Pane&lize"
+msgstr "Претвори &у окно"
+
+#: src/find.c:108
+msgid "&View - F3"
+msgstr "&Прегледај - F3"
+
+#: src/find.c:109
+msgid "&Edit - F4"
+msgstr "&Уреди - F4"
+
+#: src/find.c:178
+msgid "Start at:"
+msgstr "Почни од:"
+
+#: src/find.c:178
+msgid "Filename:"
+msgstr "Датотека:"
+
+#: src/find.c:178
+msgid "Content: "
+msgstr "Саджај: "
+
+#: src/find.c:179 src/main.c:820 src/main.c:844
+msgid "&Tree"
+msgstr "&Стабло"
+
+#: src/find.c:227 src/find.c:805
+msgid "Find File"
+msgstr "Нађи датотеку"
+
+#: src/find.c:467
+#, c-format
+msgid "Grepping in %s"
+msgstr "Тражим текст у %s"
+
+#: src/find.c:538
+msgid "Finished"
+msgstr "Готово"
+
+#: src/find.c:562 src/view.c:1619
+#, c-format
+msgid "Searching %s"
+msgstr "Тражим %s"
+
+#: src/find.c:734 src/find.c:831
+msgid "Searching"
+msgstr "Тражим"
+
+#: src/help.c:280
+msgid " Help file format error\n"
+msgstr " Грешка у формату датотеке помоћи\n"
+
+#: src/help.c:319
+msgid " Internal bug: Double start of link area "
+msgstr " Унутрашња грешка: Двоструки почетак области везе "
+
+#: src/help.c:555 src/help.c:779
+#, c-format
+msgid " Cannot find node %s in help file "
+msgstr " Не могу да нађем чвор %s у датотеци помоћи "
+
+#: src/help.c:817
+msgid "Index"
+msgstr "Индекс"
+
+#: src/help.c:819
+msgid "Prev"
+msgstr "Претх"
+
+#: src/hotlist.c:115
+msgid "&Move"
+msgstr "&Премести"
+
+#: src/hotlist.c:116 src/panelize.c:71
+msgid "&Remove"
+msgstr "&Уклони"
+
+#: src/hotlist.c:117 src/hotlist.c:833 src/hotlist.c:929
+msgid "&Append"
+msgstr "&Надовежи"
+
+#: src/hotlist.c:118 src/hotlist.c:831 src/hotlist.c:927
+msgid "&Insert"
+msgstr "У&метни"
+
+#: src/hotlist.c:119
+msgid "New &Entry"
+msgstr "Нова &ставка"
+
+#: src/hotlist.c:120
+msgid "New &Group"
+msgstr "Нова &група"
+
+#: src/hotlist.c:122
+msgid "&Up"
+msgstr "&Горе"
+
+#: src/hotlist.c:123
+msgid "&Add current"
+msgstr "&Додај текуће"
+
+#: src/hotlist.c:125
+msgid "&Refresh"
+msgstr "&Освежи"
+
+# Virtual file system
+# Виртуални систем датотека
+#: src/hotlist.c:126
+msgid "Fr&ee VFSs now"
+msgstr "&Ослободи ВСД сада"
+
+#: src/hotlist.c:128
+msgid "Change &To"
+msgstr "П&ромени у"
+
+#: src/hotlist.c:176
+msgid "Subgroup - press ENTER to see list"
+msgstr "Подгрупа - притисните `ENTER' за списак"
+
+#: src/hotlist.c:608
+msgid "Active VFS directories"
+msgstr "Активни директоријуми ВСД"
+
+#: src/hotlist.c:611
+msgid "Directory hotlist"
+msgstr "Брзи списак директоријума"
+
+#: src/hotlist.c:639
+msgid " Directory path "
+msgstr " Путања директоријума "
+
+#: src/hotlist.c:642 src/hotlist.c:691
+msgid " Directory label "
+msgstr " Натпис директоријума "
+
+#: src/hotlist.c:667
+#, c-format
+msgid "Moving %s"
+msgstr "Премештам %s"
+
+#: src/hotlist.c:906
+msgid "New hotlist entry"
+msgstr "Нова ставка брзог списка"
+
+#: src/hotlist.c:906
+msgid "Directory label"
+msgstr "Натпис директоријума"
+
+#: src/hotlist.c:906
+msgid "Directory path"
+msgstr "Путања директоријума"
+
+#: src/hotlist.c:986
+msgid " New hotlist group "
+msgstr " Нова група брзог списка "
+
+#: src/hotlist.c:986
+msgid "Name of new group"
+msgstr "Назив нове групе"
+
+#: src/hotlist.c:1001
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Натпис за `%s':"
+
+#: src/hotlist.c:1005
+msgid " Add to hotlist "
+msgstr " Додај у брзи списак "
+
+#: src/hotlist.c:1042
+msgid " Remove: "
+msgstr "Уклони: "
+
+#: src/hotlist.c:1046
+msgid ""
+"\n"
+" Group not empty.\n"
+" Remove it?"
+msgstr ""
+"\n"
+" Група није празна.\n"
+" Желите ли да је уклоним?"
+
+#: src/hotlist.c:1389
+msgid " Top level group "
+msgstr " Врховна група "
+
+#: src/hotlist.c:1412
+msgid "MC was unable to write ~/"
+msgstr "ПК не може да пише у датотеку ~/"
+
+#: src/hotlist.c:1413
+msgid " file, your old hotlist entries were not deleted"
+msgstr ", ваше старе ставке брзог списка нису обрисане"
+
+#: src/hotlist.c:1415
+msgid " Hotlist Load "
+msgstr " Учитај брзи списак "
+
+#: src/info.c:74
+#, c-format
+msgid "Midnight Commander %s"
+msgstr "Поноћни командир %s"
+
+#: src/info.c:91
+#, c-format
+msgid "File:       %s"
+msgstr "Датотека:        %s"
+
+#: src/info.c:103
+#, c-format
+msgid "Free nodes: %d (%d%%) of %d"
+msgstr "Слободно чворова: %d (%d%%) од %d"
+
+#: src/info.c:109
+msgid "No node information"
+msgstr "Нема података о чворовима"
+
+#: src/info.c:117
+#, c-format
+msgid "Free space: %s (%d%%) of %s"
+msgstr "Слободно простора: %s (%d%%) од %s"
+
+#: src/info.c:121
+msgid "No space information"
+msgstr "Нема података о простору"
+
+#: src/info.c:125
+#, c-format
+msgid "Type:      %s "
+msgstr "Врста:           %s "
+
+#: src/info.c:125
+msgid "non-local vfs"
+msgstr "не-локални всд"
+
+#: src/info.c:131
+#, c-format
+msgid "Device:    %s"
+msgstr "Уређај:          %s"
+
+#: src/info.c:135
+#, c-format
+msgid "Filesystem: %s"
+msgstr "Систем датотека: %s"
+
+#: src/info.c:140
+#, c-format
+msgid "Accessed:  %s"
+msgstr "Посл. приступ:   %s"
+
+#: src/info.c:144
+#, c-format
+msgid "Modified:  %s"
+msgstr "Датум измене:    %s"
+
+#: src/info.c:148
+#, c-format
+msgid "Created:   %s"
+msgstr "Створено:        %s"
+
+#: src/info.c:163
+#, c-format
+msgid "Size:      %s"
+msgstr "Величина:        %s"
+
+#: src/info.c:166
+#, c-format
+msgid " (%d block)"
+msgstr " (%d блок)"
+
+#: src/info.c:166
+#, c-format
+msgid " (%d blocks)"
+msgstr " (%d блокова)"
+
+#: src/info.c:172
+#, c-format
+msgid "Owner:     %s/%s"
+msgstr "Власник:      %s/%s"
+
+#: src/info.c:177
+#, c-format
+msgid "Links:     %d"
+msgstr "Веза:            %d"
+
+#: src/info.c:181
+#, c-format
+msgid "Mode:      %s (%04o)"
+msgstr "Дозволе:   %s (%04o)"
+
+#: src/info.c:186
+#, c-format
+msgid "Location:  %Xh:%Xh"
+msgstr "Место:       %Xh:%Xh"
+
+#: src/info.c:196
+msgid "File:       None"
+msgstr "Датотека:    Ниједна"
+
+#: src/layout.c:152
+msgid "&Vertical"
+msgstr "&Усправно"
+
+#: src/layout.c:153
+msgid "&Horizontal"
+msgstr "&Положено"
+
+#: src/layout.c:163
+msgid "&Xterm window title"
+msgstr "наслов прозора и&Кс терминала"
+
+#: src/layout.c:164
+msgid "h&Intbar visible"
+msgstr "&Линија са саветима је видљива"
+
+#: src/layout.c:165
+msgid "&Keybar visible"
+msgstr "линија са &Тастерима је видљива"
+
+#: src/layout.c:166
+msgid "command &Prompt"
+msgstr "наредбени о&Дзивник"
+
+#: src/layout.c:167
+msgid "show &Mini status"
+msgstr "прикажи &Мини стање"
+
+#: src/layout.c:168
+msgid "menu&Bar visible"
+msgstr "линија мени&Ја је видљива"
+
+#: src/layout.c:169
+msgid "&Equal split"
+msgstr "подједнака по&Дела"
+
+#: src/layout.c:170
+msgid "pe&Rmissions"
+msgstr "до&Зволе"
+
+#: src/layout.c:171
+msgid "&File types"
+msgstr "&Врсте датотека"
+
+#: src/layout.c:351 src/learn.c:60 src/learn.c:175 src/option.c:116
+msgid "&Save"
+msgstr "са&Чувај"
+
+#: src/layout.c:359
+msgid " Panel split "
+msgstr " Подела окна "
+
+#: src/layout.c:360
+msgid " Highlight... "
+msgstr " Истицање... "
+
+#: src/layout.c:361 src/option.c:126
+msgid " Other options "
+msgstr " Други избори "
+
+#: src/layout.c:362
+msgid "output lines"
+msgstr "редови излаза"
+
+#: src/layout.c:424
+msgid "Layout"
+msgstr "Распоред"
+
+#: src/learn.c:74
+msgid "Learn keys"
+msgstr "Научи тастере"
+
+#: src/learn.c:80
+msgid " Teach me a key "
+msgstr " Научите ме вашим тастерима "
+
+#: src/learn.c:81
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Молим да притиснете тастер %s\n"
+"и да сачекате да ова порука нестане.\n"
+"\n"
+"Онда га поново притисните и видите да ли се појављује\n"
+"`Да' поред његовог дугмета.\n"
+"\n"
+"Ако желите да одустанете, притисните једном тастер\n"
+"`Escape' и сачекајте."
+
+#: src/learn.c:115
+msgid " Cannot accept this key "
+msgstr " Не могу да прихватим овај тастер "
+
+#: src/learn.c:116
+#, c-format
+msgid " You have entered \"%s\""
+msgstr " Притисли сте `%s'"
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+#: src/learn.c:165
+msgid "OK"
+msgstr "Да"
+
+#: src/learn.c:173
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Изгледа да сви ваши тастери већ сада\n"
+"лепо раде. То је одлично."
+
+#: src/learn.c:175
+msgid "&Discard"
+msgstr "&Одбаци"
+
+#: src/learn.c:180
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Одлично! Имате потпуну терминалску базу!\n"
+"Сви ваши тастери добро раде."
+
+#: src/learn.c:288
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Притисните сваки од ових тастера. Пошто сте то урадили, проверите"
+
+#: src/learn.c:292
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "поред којих не стоји ознака `Да'. Притисните размакницу на"
+
+#: src/learn.c:296
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "недостајућима или прит. мишем за задавање. Креће се преко `Tab'-а."
+
+#: src/main.c:435
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Командир не може да уђе у директоријум за који\n"
+" подљуска тврди да се у њему налазите. Можда сте\n"
+" обрисали ваш текући директоријум, или сте дали\n"
+" себи прешироке дозволе преко наредбе `su'? "
+
+#: src/main.c:479 src/screen.c:1957
+msgid " The Midnight Commander "
+msgstr " Поноћни командир "
+
+#: src/main.c:480
+msgid " Do you really want to quit the Midnight Commander? "
+msgstr " Да ли заисте желите да завршите рад у Поноћном Командиру? "
+
+#: src/main.c:817 src/main.c:841
+msgid "&Listing mode..."
+msgstr "&Режим списка..."
+
+#: src/main.c:818 src/main.c:842
+msgid "&Quick view     C-x q"
+msgstr "&Брзи преглед     C-x q"
+
+#: src/main.c:819 src/main.c:843
+msgid "&Info           C-x i"
+msgstr "&Подаци           C-x i"
+
+#: src/main.c:822 src/main.c:846
+msgid "&Sort order..."
+msgstr "&Поредак ређања..."
+
+#: src/main.c:824 src/main.c:848
+msgid "&Filter..."
+msgstr "&Филтар..."
+
+#: src/main.c:828 src/main.c:852
+msgid "&Network link..."
+msgstr "&Мрежно повезивање..."
+
+#: src/main.c:830 src/main.c:854
+msgid "FT&P link..."
+msgstr "Повезивање FT&P-а..."
+
+#: src/main.c:831 src/main.c:855
+msgid "S&hell link..."
+msgstr "Повезивање &љуске..."
+
+#: src/main.c:833 src/main.c:857
+msgid "SM&B link..."
+msgstr "Повезивање SM&B-а..."
+
+#: src/main.c:837 src/main.c:861
+msgid "&Rescan         C-r"
+msgstr "Осве&жи             C-r"
+
+#: src/main.c:865
+msgid "&User menu          F2"
+msgstr "&Кориснички мени        F2"
+
+#: src/main.c:866
+msgid "&View               F3"
+msgstr "&Прегледај              F3"
+
+#: src/main.c:867
+msgid "Vie&w file...         "
+msgstr "Прегледај да&тотеку...    "
+
+#: src/main.c:868
+msgid "&Filtered view     M-!"
+msgstr "&Филтрирано прегледање M-!"
+
+#: src/main.c:869
+msgid "&Edit               F4"
+msgstr "&Уреди                  F4"
+
+#: src/main.c:870
+msgid "&Copy               F5"
+msgstr "&Копирај                F5"
+
+#: src/main.c:871
+msgid "c&Hmod           C-x c"
+msgstr "промени до&Зволе     C-x c"
+
+#: src/main.c:872
+msgid "&Link            C-x l"
+msgstr "направи &Везу        C-x l"
+
+#: src/main.c:873
+msgid "&SymLink         C-x s"
+msgstr "направи &СимВезу     C-x s"
+
+#: src/main.c:874
+msgid "edit s&Ymlink  C-x C-s"
+msgstr "уреди си&Мвезу     C-x C-s"
+
+#: src/main.c:875
+msgid "ch&Own           C-x o"
+msgstr "промени в&Ласника    C-x o"
+
+#: src/main.c:876
+msgid "&Advanced chown       "
+msgstr "&Напр. промена власника   "
+
+#: src/main.c:877
+msgid "&Rename/Move        F6"
+msgstr "пр&Еименуј/премести     F6"
+
+#: src/main.c:878
+msgid "&Mkdir              F7"
+msgstr "н&Аправи директоријум   F7"
+
+#: src/main.c:879
+msgid "&Delete             F8"
+msgstr "&Обриши                 F8"
+
+#: src/main.c:880
+msgid "&Quick cd          M-c"
+msgstr "&Брза пром.дир.        M-c"
+
+#: src/main.c:882
+msgid "select &Group      M-+"
+msgstr "изабери &Групу         M-+"
+
+#: src/main.c:883
+msgid "u&Nselect group    M-\\"
+msgstr "о&Дизабери групу       M-\\"
+
+#: src/main.c:884
+msgid "reverse selec&Tion M-*"
+msgstr "обрни из&Бор           M-*"
+
+#: src/main.c:886
+msgid "e&Xit              F10"
+msgstr "и&Злаз                 F10"
+
+#: src/main.c:894
+msgid "&Directory tree"
+msgstr "&Стабло директоријума"
+
+#: src/main.c:895
+msgid "&Find file            M-?"
+msgstr "&Нађи датотеку              M-?"
+
+#: src/main.c:896
+msgid "s&Wap panels          C-u"
+msgstr "разм&Ени окна               C-u"
+
+#: src/main.c:897
+msgid "switch &Panels on/off C-o"
+msgstr "искључи/укључи &Окна        C-o"
+
+#: src/main.c:898
+msgid "&Compare directories  C-x d"
+msgstr "&Пореди директоријуме     C-x d"
+
+#: src/main.c:899
+msgid "e&Xternal panelize    C-x !"
+msgstr "критери&Јум попуне окна   C-x !"
+
+#: src/main.c:900
+msgid "show directory s&Izes"
+msgstr "прикажи вели&Чине директоријума"
+
+#: src/main.c:902
+msgid "command &History"
+msgstr "&Историја наредби"
+
+#: src/main.c:903
+msgid "di&Rectory hotlist    C-\\"
+msgstr "брзи с&Писак директоријума  C-\\"
+
+#: src/main.c:905
+msgid "&Active VFS list      C-x a"
+msgstr "списак &Активних ВСД      C-x a"
+
+#: src/main.c:908
+msgid "&Background jobs      C-x j"
+msgstr "&Позадински послови       C-x j"
+
+#: src/main.c:912
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Одобриши датотеке (само на ext2fs)"
+
+#: src/main.c:915
+msgid "&Listing format edit"
+msgstr "&Уреди формат списка"
+
+#: src/main.c:920
+msgid "Edit &extension file"
+msgstr "Уреди датотеку &врста"
+
+#: src/main.c:921
+msgid "Edit &menu file"
+msgstr "Уреди датотеку &менија"
+
+#: src/main.c:923
+msgid "Edit edi&tor menu file"
+msgstr "Уреди датотеку менија &уређивача"
+
+#: src/main.c:924
+msgid "Edit &syntax file"
+msgstr "Уреди датотеку &синтаксе"
+
+#: src/main.c:930
+msgid "&Configuration..."
+msgstr "&Подешавања..."
+
+#: src/main.c:931
+msgid "&Layout..."
+msgstr "&Изглед..."
+
+#: src/main.c:932
+msgid "c&Onfirmation..."
+msgstr "п&Отврде..."
+
+#: src/main.c:933
+msgid "&Display bits..."
+msgstr "&Битова у приказу..."
+
+#: src/main.c:936
+msgid "&Virtual FS..."
+msgstr "&Виртуални СД..."
+
+#: src/main.c:939
+msgid "&Save setup"
+msgstr "&Сачувај подешавања"
+
+#: src/main.c:950
+msgid " &Above "
+msgstr " &Изнад "
+
+#: src/main.c:950
+msgid " &Left "
+msgstr " &Лево "
+
+#: src/main.c:954
+msgid " &File "
+msgstr " &Датотека "
+
+#: src/main.c:957
+msgid " &Command "
+msgstr " &Наредба "
+
+#: src/main.c:960
+msgid " &Options "
+msgstr " &Избори "
+
+#: src/main.c:963
+msgid " &Below "
+msgstr " и&Спод "
+
+#: src/main.c:963
+msgid " &Right "
+msgstr " &Десно "
+
+#: src/main.c:1006
+msgid " Information "
+msgstr " Информације "
+
+#: src/main.c:1008
+msgid ""
+" Using the fast reload option may not reflect the exact \n"
+" directory contents. In this cases you'll need to do a  \n"
+" manual reload of the directory. See the man page for   \n"
+" the details.                                           "
+msgstr ""
+" Са укљученим избором за брзо учитавање можда се неће    \n"
+" приказивати тачан садржај директоријума. Онда ћете можда\n"
+" морати да ручно освежавате приказ. Погледајте упутство  \n"
+" за детаље.                                              "
+
+#: src/main.c:1231 src/screen.c:2186
+msgid "Menu"
+msgstr "Мени"
+
+#: src/main.c:1368
+msgid "The TERM environment variable is unset!\n"
+msgstr "Променљива љуске `TERM' није постављена!\n"
+
+#: src/main.c:1662 src/textconf.c:116
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "ГНУ-ов Поноћни командир %s\n"
+
+#: src/main.c:1873
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
+
+#: src/main.c:1877
+msgid "+number"
+msgstr "+број"
+
+#: src/main.c:1878
+msgid "Set initial line number for the internal editor"
+msgstr "Поставите број почетног реда за уграђени уређивач"
+
+#: src/main.c:1880
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
+"на адресу mc-devel@gnome.org\n"
+
+#: src/main.c:1895
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Help:         helpnormal, helpitalic, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+"--colors КЉУЧНА РЕЧ={ИСПИС},{ПОЗАД}\n"
+"\n"
+"{ИСПИС} и {ПОЗАД} се могу изоставити и користиће се подраз. вредности\n"
+"\n"
+"Кључне речи:\n"
+"   Опште:       errors, reverse, gauge, input\n"
+"   Приказ дат.: normal, selected, marked, markselect\n"
+"   Дијалози:    dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Менији:      menu, menuhot, menusel, menuhotsel\n"
+"   Помоћ:       helpnormal, helpitalic, helplink, helpslink\n"
+"   Врсте дат.:  directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Боје:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray и white\n"
+"\n"
+
+#: src/main.c:1970
+msgid "Use to debug the background code"
+msgstr "Користите да бисте поправљали позадински код"
+
+#: src/main.c:1973
+msgid "Request to run in color mode"
+msgstr "Захтевање обојеног режима"
+
+#: src/main.c:1975
+msgid "Specifies a color configuration"
+msgstr "Поставља подешавања боја"
+
+#: src/main.c:1979
+msgid "Edits one file"
+msgstr "Уређује једну датотеку"
+
+#: src/main.c:1983
+msgid "Displays this help message"
+msgstr "Приказује ову поруку помоћи"
+
+#: src/main.c:1985
+msgid "Displays a help screen on how to change the color scheme"
+msgstr "Приказује екран помоћи око промене шеме боја"
+
+#: src/main.c:1988
+msgid "Log ftp dialog to specified file"
+msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
+
+#: src/main.c:1991
+msgid "Set debug level"
+msgstr "Постављање нивоа поправљања"
+
+#: src/main.c:1995
+msgid "Print data directory"
+msgstr "Штампај директоријум са подацима"
+
+#: src/main.c:1997
+msgid "Requests to run in black and white"
+msgstr "Захтева покретање у режиму без боја"
+
+#: src/main.c:1999
+msgid "Disable mouse support in text version"
+msgstr "Искључи подршку за миша у текстуалној верзији"
+
+#: src/main.c:2002
+msgid "Disables subshell support"
+msgstr "Искључује подршку за подљуске"
+
+#: src/main.c:2005
+msgid "Print last working directory to specified file"
+msgstr "Штампај последњи радни директоријум у задану датотеку"
+
+#: src/main.c:2007
+msgid "Resets soft keys on HP terminals"
+msgstr "Поставља меке тастере на ХП-овим терминалима"
+
+#: src/main.c:2009
+msgid "To run on slow terminals"
+msgstr "Покретање на спором терминалу"
+
+#: src/main.c:2011
+msgid "Use stickchars to draw"
+msgstr "Користи квазиграфичке симболе за цртање"
+
+#: src/main.c:2014
+msgid "Enables subshell support (default)"
+msgstr "Укључује подршку за подљуске (подраз.)"
+
+#: src/main.c:2018
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Покушава да користи termcap уместо terminfo-а"
+
+#: src/main.c:2021
+msgid "Displays the current version"
+msgstr "Приказује текућу верзију"
+
+#: src/main.c:2023
+msgid "Launches the file viewer on a file"
+msgstr "Покреће прегледач датотека над датотеком"
+
+#: src/main.c:2025
+msgid "Forces xterm features"
+msgstr "Захтева одлике Икс терминала"
+
+#: src/main.c:2238
+msgid " Notice "
+msgstr " Објава "
+
+#: src/main.c:2239
+msgid ""
+" The Midnight Commander configuration files \n"
+" are now stored in the ~/.mc directory, the \n"
+" files have been moved now\n"
+msgstr ""
+" Датотеке са подешавањима Поноћног командира \n"
+" се сада смештају у директоријум `~/.mc';\n"
+" датотеке су сада премештене\n"
+
+#: src/option.c:57
+msgid "safe de&Lete"
+msgstr "безбедно б&Рисање"
+
+#: src/option.c:58
+msgid "cd follows lin&Ks"
+msgstr "пром.дир. прати &Везе"
+
+#: src/option.c:59
+msgid "L&ynx-like motion"
+msgstr "L&ynx-олико кретање"
+
+#: src/option.c:60
+msgid "rotatin&G dash"
+msgstr "ротирајућа &Црта"
+
+#: src/option.c:61
+msgid "co&Mplete: show all"
+msgstr "до&Пуна: прикажи све"
+
+#: src/option.c:62
+msgid "&Use internal view"
+msgstr "&Користи уграђени преглед"
+
+#: src/option.c:63
+msgid "use internal ed&It"
+msgstr "користи уграђено уређ&Ивање"
+
+#: src/option.c:64
+msgid "auto m&Enus"
+msgstr "аутоматски &Менији"
+
+#: src/option.c:65
+msgid "&Auto save setup"
+msgstr "&Аутоматско чување подешавања"
+
+#: src/option.c:66
+msgid "shell &Patterns"
+msgstr "&Обрасци љуске"
+
+#: src/option.c:67
+msgid "Compute &Totals"
+msgstr "Рачунај &Укупне збирове"
+
+#: src/option.c:68
+msgid "&Verbose operation"
+msgstr "&Брбљиви рад"
+
+#: src/option.c:70
+msgid "&Fast dir reload"
+msgstr "&Брзо учитавање директоријума"
+
+#: src/option.c:71
+msgid "mi&X all files"
+msgstr "&Мешани приказ"
+
+#: src/option.c:72
+msgid "&Drop down menus"
+msgstr "&Падајући менији"
+
+#: src/option.c:73
+msgid "ma&Rk moves down"
+msgstr "после о&Знаке иди доле"
+
+#: src/option.c:74
+msgid "show &Hidden files"
+msgstr "прикажи &Сакривене датотеке"
+
+#: src/option.c:75
+msgid "show &Backup files"
+msgstr "прикажи &Резервне датотеке"
+
+#: src/option.c:86
+msgid "&Never"
+msgstr "&Никад"
+
+#: src/option.c:87
+msgid "on dumb &Terminals"
+msgstr "на глупим &Терминалима"
+
+#: src/option.c:88
+msgid "Alwa&ys"
+msgstr "&Увек"
+
+#: src/option.c:124
+msgid " Panel options "
+msgstr " Избори окна "
+
+#: src/option.c:125
+msgid " Pause after run... "
+msgstr " Пауза после покретања... "
+
+#: src/option.c:171
+msgid "Configure options"
+msgstr "Подеси изборе"
+
+#: src/panelize.c:70
+msgid "&Add new"
+msgstr "&Додај ново"
+
+#: src/panelize.c:156 src/panelize.c:422
+msgid "External panelize"
+msgstr "Критеријум попуне окна"
+
+#: src/panelize.c:171
+msgid "Command"
+msgstr "Наредба"
+
+#: src/panelize.c:187 src/panelize.c:244 src/panelize.c:315 src/panelize.c:336
+msgid "Other command"
+msgstr "Друга наредба"
+
+#: src/panelize.c:228
+msgid " Add to external panelize "
+msgstr " Додај у критеријуме попуне "
+
+#: src/panelize.c:229
+msgid " Enter command label: "
+msgstr " Унесите натпис наредбе: "
+
+#: src/panelize.c:269
+msgid " Cannot run external panelize in a non-local directory "
+msgstr " Не могу да извршим критеријуме попуне у не-локалним дир. "
+
+#: src/panelize.c:318
+msgid "Find rejects after patching"
+msgstr "Нађи одбијене исправке после крпљења"
+
+#: src/panelize.c:319
+msgid "Find *.orig after patching"
+msgstr "Нађи *.orig после крпљења"
+
+#: src/panelize.c:320
+msgid "Find SUID and SGID programs"
+msgstr "Нађи програме са постављеним ПКИБ (SUID) и ПГИБ (SGID)"
+
+#: src/panelize.c:371
+msgid "Cannot invoke command."
+msgstr "Не могу да покренем наредбу."
+
+#: src/panelize.c:422
+msgid "Pipe close failed"
+msgstr "Затварање цеви није успело"
+
+#: src/popt.c:547
+msgid "missing argument"
+msgstr "недостаје аргумент"
+
+#: src/popt.c:549
+msgid "unknown option"
+msgstr "непознат избор"
+
+#: src/popt.c:555
+msgid "invalid numeric value"
+msgstr "неисправна бројевна вредност"
+
+#: src/popthelp.c:31
+msgid "Show this help message"
+msgstr "Прикажи ову поруку помоћи"
+
+#: src/popthelp.c:32
+msgid "Display brief usage message"
+msgstr "Прикажи кратку поруку о употреби"
+
+#: src/popthelp.c:60
+msgid "ARG"
+msgstr "АРГ"
+
+#: src/popthelp.c:179
+msgid "Usage:"
+msgstr "Употреба:"
+
+#: src/screen.c:199
+msgid "UP--DIR"
+msgstr "НАД-ДИР"
+
+#: src/screen.c:220
+msgid "SYMLINK"
+msgstr "СИМВЕЗА"
+
+#: src/screen.c:224
+msgid "SUB-DIR"
+msgstr "ПОД-ДИР"
+
+#: src/screen.c:404 src/screen.c:405
+msgid "Size"
+msgstr "Величина"
+
+#: src/screen.c:407
+msgid "MTime"
+msgstr "ДатИзм"
+
+#: src/screen.c:408
+msgid "ATime"
+msgstr "ДатПрс"
+
+#: src/screen.c:409
+msgid "CTime"
+msgstr "ДатПрм"
+
+#: src/screen.c:410
+msgid "Permission"
+msgstr "Дозволе"
+
+#: src/screen.c:411
+msgid "Perm"
+msgstr "Дозв"
+
+# Број веза
+#: src/screen.c:412
+msgid "Nl"
+msgstr "Бв"
+
+#: src/screen.c:413
+msgid "Inode"
+msgstr "Инод"
+
+#: src/screen.c:414
+msgid "UID"
+msgstr "КИБ"
+
+#: src/screen.c:415
+msgid "GID"
+msgstr "ИБГ"
+
+#: src/screen.c:416
+msgid "Owner"
+msgstr "Власник"
+
+#: src/screen.c:417
+msgid "Group"
+msgstr "Група"
+
+#: src/screen.c:653
+#, c-format
+msgid "%s bytes in %d file"
+msgstr "%s бајтова у %d датотеци"
+
+#: src/screen.c:653
+#, c-format
+msgid "%s bytes in %d files"
+msgstr "%s бајтова у %d датотека"
+
+#: src/screen.c:679
+msgid "<readlink failed>"
+msgstr "<неуспешно читање везе>"
+
+#: src/screen.c:1287
+msgid "Unknown tag on display format: "
+msgstr "Непозната ознака у формату приказа: "
+
+#: src/screen.c:1413
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Кориснички формат не изгледа исправно, враћам на подраз."
+
+#: src/screen.c:1958
+msgid " Do you really want to execute? "
+msgstr " Да ли заиста желите да извршим? "
+
+#: src/screen.c:1970
+msgid " No action taken "
+msgstr " Ништа није урађено "
+
+#: src/screen.c:2187
+msgid "View"
+msgstr "Преглд"
+
+#: src/screen.c:2188 src/view.c:2253
+msgid "Edit"
+msgstr "Уреди"
+
+#: src/screen.c:2190 src/tree.c:1037
+msgid "RenMov"
+msgstr "ПимПрм"
+
+#: src/screen.c:2191 src/tree.c:1041
+msgid "Mkdir"
+msgstr "НапДир"
+
+#: src/selcodepage.c:55
+msgid " Choose input codepage "
+msgstr " Изаберите кодну страну улаза "
+
+#: src/selcodepage.c:59
+msgid "-  < No translation >"
+msgstr "-  < Без претварања >"
+
+#: src/selcodepage.c:107
+msgid ""
+"To use this feature select your codepage in\n"
+"Setup / Display Bits dialog!\n"
+"Do not forget to save options."
+msgstr ""
+"Да бисте користили ову одлику изаберите\n"
+"кодну страну у дијалогу Подешавања / Бита у\n"
+"приказу! Не заборавите да сачувате изборе."
+
+#: src/slint.c:187
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Величина екрана %dx%d није подржана.\n"
+"Проверите променљиву љуске `TERM'.\n"
+
+#: src/subshell.c:320
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"ГНУ-ов Поноћни командир је већ\n"
+"покренут на овом терминалу.\n"
+"Подршка за подљуске ће бити искључена."
+
+#: src/subshell.c:425
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Не могу да отворим именовану цев %s\n"
+
+#: src/subshell.c:653
+msgid " The shell is still active. Quit anyway? "
+msgstr " Љуска је још активна. Желите ли да ипак завршим рад? "
+
+#: src/subshell.c:790
+#, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr "Упозорење: Не могу да идем на %s.\n"
+
+#: src/textconf.c:50
+msgid "With builtin Editor\n"
+msgstr "Са уграђеним уређивачем\n"
+
+#: src/textconf.c:56
+msgid "Using system-installed S-Lang library"
+msgstr "Користим системску библиотеку S-Lang"
+
+#: src/textconf.c:58
+msgid "Using included S-Lang library"
+msgstr "Користим укључену библиотеку S-Lang"
+
+#: src/textconf.c:64
+msgid "with termcap database"
+msgstr "са базом termcap"
+
+#: src/textconf.c:66
+msgid "with terminfo database"
+msgstr "са базом terminfo"
+
+#: src/textconf.c:70
+msgid "Using the ncurses library"
+msgstr "Користим библиотеку ncurses"
+
+#: src/textconf.c:79
+msgid "With optional subshell support"
+msgstr "Са необавезном подршком за подљуске"
+
+#: src/textconf.c:81
+msgid "With subshell support as default"
+msgstr "Са подразумеваном подршком за подљуске"
+
+#: src/textconf.c:87
+msgid "With support for background operations\n"
+msgstr "Са подршком за позадинске радње\n"
+
+#: src/textconf.c:91
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "Са подршком за миша у Икс терминалу и конзоли\n"
+
+#: src/textconf.c:93
+msgid "With mouse support on xterm\n"
+msgstr "Са подршком за миша у Икс терминалу\n"
+
+#: src/textconf.c:97
+msgid "With support for X11 events\n"
+msgstr "Са подршком за догађаје Икса 11\n"
+
+#: src/textconf.c:101
+msgid "With internationalization support\n"
+msgstr "Са подршком за интернационализацију\n"
+
+#: src/textconf.c:105
+msgid "With multiple codepages support\n"
+msgstr "Са подршком за више кодних страна\n"
+
+#: src/textconf.c:121
+msgid "Virtual File System:"
+msgstr "Виртуални систем датотека:"
+
+#: src/tree.c:203
+#, c-format
+msgid ""
+"Cannot open the %s file for writing:\n"
+"%s\n"
+msgstr ""
+"Не могу да отворим датотеку %s за упис:\n"
+"%s\n"
+
+#: src/tree.c:647
+#, c-format
+msgid "Copy \"%s\" directory to:"
+msgstr "Копирај директоријум `%s' у:"
+
+#: src/tree.c:688
+#, c-format
+msgid "Move \"%s\" directory to:"
+msgstr "Премести директоријум `%s' у:"
+
+#: src/tree.c:698
+#, c-format
+msgid ""
+" Cannot stat the destination \n"
+" %s "
+msgstr ""
+" Не могу да извршим `stat' над одредиштем \n"
+" %s "
+
+#: src/tree.c:763
+#, c-format
+msgid "  Delete %s?  "
+msgstr "  Желите ли да обришем `%s'?  "
+
+#: src/tree.c:795
+msgid "Static"
+msgstr "Статч."
+
+#: src/tree.c:795
+msgid "Dynamc"
+msgstr "Динмч."
+
+#: src/tree.c:1031
+msgid "Rescan"
+msgstr "Освежи"
+
+#: src/tree.c:1033
+msgid "Forget"
+msgstr "Забор."
+
+#: src/tree.c:1046
+msgid "Rmdir"
+msgstr "БрДир"
+
+#: src/treestore.c:342
+#, c-format
+msgid ""
+"Cannot write to the %s file:\n"
+"%s\n"
+msgstr ""
+"Не могу да пишем у датотеку %s:\n"
+"%s\n"
+
+#: src/user.c:135
+msgid " Format error on file Extensions File "
+msgstr " Грешка у формату датотеке Датотека врста "
+
+#: src/user.c:136
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макро %%var нема подразумевану вредност "
+
+#: src/user.c:137
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макро %%var нема променљиву "
+
+#: src/user.c:449
+msgid " Debug "
+msgstr " Поправљање "
+
+#: src/user.c:458
+msgid " ERROR: "
+msgstr " ГРЕШКА: "
+
+#: src/user.c:462
+msgid " True:  "
+msgstr " Тачно:    "
+
+#: src/user.c:464
+msgid " False: "
+msgstr " Погрешно: "
+
+#: src/user.c:671
+msgid " Warning -- ignoring file "
+msgstr " Упозорење - заобилазим датотеку "
+
+#: src/user.c:672
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Датотеку %s не поседује ни администратор ни ви, а није ни\n"
+"читљива за свет. Њена употреба може да угрози вашу безбедност"
+
+#: src/user.c:794
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Прикладне ставке нису нађене у %s "
+
+#: src/user.c:800
+msgid " User menu "
+msgstr " Кориснички мени "
+
+#: src/util.c:668 src/util.c:694
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
+#: src/util.c:669 src/util.c:692
+msgid "%b %e  %Y"
+msgstr "%b %e  %Y"
+
+#: src/utilunix.c:330
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s није директоријум\n"
+
+#: src/utilunix.c:332
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Не поседујете директоријум %s\n"
+
+#: src/utilunix.c:335
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Не могу да поставим исправне дозволе за директоријум %s\n"
+
+#: src/utilunix.c:340
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Не могу да створим привремени директоријум %s: %s\n"
+
+#: src/utilunix.c:370
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Привремене датотеке ће бити стваране у %s\n"
+
+#: src/utilunix.c:373
+msgid "Temporary files will not be created\n"
+msgstr "Привремене датотеке неће бити стваране\n"
+
+#: src/utilunix.c:398
+msgid " Pipe failed "
+msgstr " Цев није успела "
+
+#: src/utilunix.c:402
+msgid " Dup failed "
+msgstr " Позив `dup' није успео "
+
+#: src/view.c:525
+msgid " Cannot spawn child program "
+msgstr " Не могу да створим дете-програм "
+
+#: src/view.c:536
+msgid "Empty output from child filter"
+msgstr "Дете-филтар није исписало ништа"
+
+#: src/view.c:542
+msgid " Cannot open file "
+msgstr " Не могу да отворим датотеку "
+
+#: src/view.c:642
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Не могу да отворим `%s'\n"
+" %s "
+
+#: src/view.c:651
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Не могу да извршим `stat' над \"%s\"\n"
+" %s "
+
+#: src/view.c:660
+msgid " Cannot view: not a regular file "
+msgstr " Не могу да прегледам: датотека није обична "
+
+#: src/view.c:800
+#, c-format
+msgid "File: %s"
+msgstr "Датотека: %s"
+
+#: src/view.c:815
+#, c-format
+msgid "Offset 0x%08x"
+msgstr "Померај 0x%08x"
+
+#: src/view.c:817
+#, c-format
+msgid "Col %d"
+msgstr "Кол %d"
+
+#: src/view.c:821
+#, c-format
+msgid "%s bytes"
+msgstr "%s бајтова"
+
+#: src/view.c:826
+msgid "  [grow]"
+msgstr "  [расте]"
+
+#: src/view.c:1851
+msgid "Invalid hex search expression"
+msgstr "Неисправан израз хекс претраге"
+
+#: src/view.c:1905
+msgid " Invalid regular expression "
+msgstr " Неисправан регуларни израз "
+
+#: src/view.c:2030
+#, c-format
+msgid ""
+" The current line number is %d.\n"
+" Enter the new line number:"
+msgstr ""
+" Број текућег реда је %d.\n"
+" Унесите нови број реда:"
+
+#: src/view.c:2053
+#, c-format
+msgid ""
+" The current address is 0x%lx.\n"
+" Enter the new address:"
+msgstr ""
+" Текућа адреса је 0x%lx.\n"
+" Унесите нову адресу:"
+
+#: src/view.c:2055
+msgid " Goto Address "
+msgstr " Иди на адресу "
+
+#: src/view.c:2087
+msgid " Enter regexp:"
+msgstr " Унесите регизраз:"
+
+#: src/view.c:2243
+msgid "Ascii"
+msgstr "Аски"
+
+#: src/view.c:2243
+msgid "Hex"
+msgstr "Хекс"
+
+#: src/view.c:2245
+msgid "Goto"
+msgstr "ИдиНа"
+
+#: src/view.c:2245
+msgid "Line"
+msgstr "Ред"
+
+#: src/view.c:2247
+msgid "RxSrch"
+msgstr "РгПртр"
+
+#: src/view.c:2252
+msgid "EdText"
+msgstr "УрТкст"
+
+#: src/view.c:2252
+msgid "EdHex"
+msgstr "УрХекс"
+
+#: src/view.c:2254
+msgid "UnWrap"
+msgstr "ОдПрлм"
+
+#: src/view.c:2254
+msgid "Wrap"
+msgstr "Прелом"
+
+#: src/view.c:2257
+msgid "HxSrch"
+msgstr "ХкПртр"
+
+#: src/view.c:2260
+msgid "Raw"
+msgstr "Сирово"
+
+#: src/view.c:2260
+msgid "Parse"
+msgstr "Рашчл"
+
+#: src/view.c:2265
+msgid "Unform"
+msgstr "Неформ"
+
+#: src/view.c:2265
+msgid "Format"
+msgstr "Формат"
+
+#: src/widget.c:911
+msgid " History "
+msgstr " Историја "
+
+#: src/win.c:121
+msgid "Function key 1"
+msgstr "Функц. тастер 1"
+
+#: src/win.c:122
+msgid "Function key 2"
+msgstr "Функц. тастер 2"
+
+#: src/win.c:123
+msgid "Function key 3"
+msgstr "Функц. тастер 3"
+
+#: src/win.c:124
+msgid "Function key 4"
+msgstr "Функц. тастер 4"
+
+#: src/win.c:125
+msgid "Function key 5"
+msgstr "Функц. тастер 5"
+
+#: src/win.c:126
+msgid "Function key 6"
+msgstr "Функц. тастер 6"
+
+#: src/win.c:127
+msgid "Function key 7"
+msgstr "Функц. тастер 7"
+
+#: src/win.c:128
+msgid "Function key 8"
+msgstr "Функц. тастер 8"
+
+#: src/win.c:129
+msgid "Function key 9"
+msgstr "Функц. тастер 9"
+
+#: src/win.c:130
+msgid "Function key 10"
+msgstr "Функц. тастер 10"
+
+#: src/win.c:131
+msgid "Function key 11"
+msgstr "Функц. тастер 11"
+
+#: src/win.c:132
+msgid "Function key 12"
+msgstr "Функц. тастер 12"
+
+#: src/win.c:133
+msgid "Function key 13"
+msgstr "Функц. тастер 13"
+
+#: src/win.c:134
+msgid "Function key 14"
+msgstr "Функц. тастер 14"
+
+#: src/win.c:135
+msgid "Function key 15"
+msgstr "Функц. тастер 15"
+
+#: src/win.c:136
+msgid "Function key 16"
+msgstr "Функц. тастер 16"
+
+#: src/win.c:137
+msgid "Function key 17"
+msgstr "Функц. тастер 17"
+
+#: src/win.c:138
+msgid "Function key 18"
+msgstr "Функц. тастер 18"
+
+#: src/win.c:139
+msgid "Function key 19"
+msgstr "Функц. тастер 19"
+
+#: src/win.c:140
+msgid "Function key 20"
+msgstr "Функц. тастер 20"
+
+#: src/win.c:141
+msgid "Backspace key"
+msgstr "Таст. `Backspace'"
+
+#: src/win.c:142
+msgid "End key"
+msgstr "Таст. `End'"
+
+#: src/win.c:143
+msgid "Up arrow key"
+msgstr "Стрелица нагоре"
+
+#: src/win.c:144
+msgid "Down arrow key"
+msgstr "Стрелица надоле"
+
+#: src/win.c:145
+msgid "Left arrow key"
+msgstr "Стралица налево"
+
+#: src/win.c:146
+msgid "Right arrow key"
+msgstr "Стрелица надесно"
+
+#: src/win.c:147
+msgid "Home key"
+msgstr "Таст. `Home'"
+
+#: src/win.c:148
+msgid "Page Down key"
+msgstr "Таст. `Page Up'"
+
+#: src/win.c:149
+msgid "Page Up key"
+msgstr "Таст. `Page Down'"
+
+#: src/win.c:150
+msgid "Insert key"
+msgstr "Таст. `Insert'"
+
+#: src/win.c:151
+msgid "Delete key"
+msgstr "Таст. `Delete'"
+
+#: src/win.c:152
+msgid "Completion/M-tab"
+msgstr "Допуна/M-tab"
+
+#: src/win.c:153
+msgid "+ on keypad"
+msgstr "Сиви +"
+
+#: src/win.c:154
+msgid "- on keypad"
+msgstr "Сиви -"
+
+#: src/win.c:155
+msgid "* on keypad"
+msgstr "Сиви *"
+
+#: src/win.c:157
+msgid "Left arrow keypad"
+msgstr "Сива стрел. налево"
+
+#: src/win.c:158
+msgid "Right arrow keypad"
+msgstr "Сива стрел. надесно"
+
+#: src/win.c:159
+msgid "Up arrow keypad"
+msgstr "Сива стрел. нагоре"
+
+#: src/win.c:160
+msgid "Down arrow keypad"
+msgstr "Сива стрел. надоле"
+
+#: src/win.c:161
+msgid "Home on keypad"
+msgstr "Сиви `Home'"
+
+#: src/win.c:162
+msgid "End on keypad"
+msgstr "Сиви `End'"
+
+#: src/win.c:163
+msgid "Page Down keypad"
+msgstr "Сиви `Page Down'"
+
+#: src/win.c:164
+msgid "Page Up keypad"
+msgstr "Сиви `Page Up'"
+
+#: src/win.c:165
+msgid "Insert on keypad"
+msgstr "Сиви `Insert'"
+
+#: src/win.c:166
+msgid "Delete on keypad"
+msgstr "Сиви `Delete'"
+
+#: src/win.c:167
+msgid "Enter on keypad"
+msgstr "Сиви `Enter'"
+
+#: src/win.c:168
+msgid "Slash on keypad"
+msgstr "Сиви /"
+
+#: src/win.c:169
+msgid "NumLock on keypad"
+msgstr "Сиви `NumLock'"
+
+#: vfs/cpio.c:141 vfs/cpio.c:157
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Не могу да отворим архиву врсте `cpio'\n"
+"%s"
+
+#: vfs/cpio.c:223
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Прерани завршетак архиве врсте `cpio'\n"
+"%s"
+
+#: vfs/cpio.c:309 vfs/cpio.c:359
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Покварено заглавље архиве врсте `cpio' у\n"
+"%s"
+
+#: vfs/cpio.c:430
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Недоследне тврде везе\n"
+"%s\n"
+"у архиви врсте `cpio'\n"
+"%s"
+
+#: vfs/cpio.c:453
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s садржи двоструке ставке! Заобилазим!"
+
+#: vfs/cpio.c:522
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Неочекивани завршетак датотеке\n"
+"%s"
+
+#: vfs/direntry.c:301
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Остава директоријума је истекла за %s"
+
+#: vfs/direntry.c:789
+msgid "Starting linear transfer..."
+msgstr "Покрећем линеарни пренос..."
+
+#: vfs/direntry.c:963
+msgid "Getting file"
+msgstr "Добављам датотеку"
+
+#: vfs/extfs.c:291
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Не могу да отворим архиву врсте `%s'\n"
+"%s"
+
+#: vfs/extfs.c:329 vfs/extfs.c:351 vfs/extfs.c:401
+msgid "Inconsistent extfs archive"
+msgstr "Недоследна архива extfs"
+
+#: vfs/fish.c:144
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Прекидам повезивање са %s"
+
+#: vfs/fish.c:222
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Чекам почетни ред..."
+
+#: vfs/fish.c:232
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Извините, али за сад не можемо да се повезујемо уз потврду лозинке."
+
+#: vfs/fish.c:237
+msgid " fish: Password required for "
+msgstr " fish: Неопходна је лозинка за "
+
+#: vfs/fish.c:246
+msgid "fish: Sending password..."
+msgstr "fish: Шаљем лозинку..."
+
+#: vfs/fish.c:252
+msgid "fish: Sending initial line..."
+msgstr "fish: Шаљем почетни ред..."
+
+#: vfs/fish.c:262
+msgid "fish: Handshaking version..."
+msgstr "fish: Преговарам о верзији..."
+
+#: vfs/fish.c:272
+msgid "fish: Setting up current directory..."
+msgstr "fish: Постављам текући директоријум..."
+
+#: vfs/fish.c:274
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Повезан, дом %s."
+
+#: vfs/fish.c:352
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Учитавам директоријум %s..."
+
+#: vfs/fish.c:455 vfs/ftpfs.c:1356 vfs/undelfs.c:310
+#, c-format
+msgid "%s: done."
+msgstr "%s: готово."
+
+#: vfs/fish.c:460 vfs/ftpfs.c:1308 vfs/undelfs.c:313
+#, c-format
+msgid "%s: failure"
+msgstr "%s: неуспех"
+
+#: vfs/fish.c:485
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: складиштење %s: шаљем наредбу..."
+
+#: vfs/fish.c:526
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Локално читање није успело, шаљем нуле"
+
+#: vfs/fish.c:538
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: складиштим %s %d (%lu)"
+
+#: vfs/fish.c:539
+msgid "zeros"
+msgstr "нуле"
+
+#: vfs/fish.c:592
+msgid "Aborting transfer..."
+msgstr "Прекидам пренос..."
+
+#: vfs/fish.c:601
+msgid "Error reported after abort."
+msgstr "Пријављена је грешка после прекида."
+
+#: vfs/fish.c:603
+msgid "Aborted transfer would be successful."
+msgstr "Прекинути пренос би био успешан."
+
+#: vfs/ftpfs.c:382
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Прекидам повезивање са %s"
+
+#: vfs/ftpfs.c:435
+msgid " FTP: Password required for "
+msgstr " FTP: Неопходна је лозинка за "
+
+#: vfs/ftpfs.c:473
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: шаљем корисничко име"
+
+#: vfs/ftpfs.c:477
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: шаљем лозинку"
+
+#: vfs/ftpfs.c:483
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: Неопходан је налог за корисника %s"
+
+#: vfs/ftpfs.c:485
+msgid "Account:"
+msgstr "Налог:"
+
+#: vfs/ftpfs.c:489
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: шаљем кориснички налог"
+
+#: vfs/ftpfs.c:498
+msgid "ftpfs: logged in"
+msgstr "ftpfs: пријавио сам се"
+
+#: vfs/ftpfs.c:512
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Неуспешна пријава корисника %s "
+
+#: vfs/ftpfs.c:545
+#, c-format
+msgid " Cannot set source routing (%s)"
+msgstr " Не могу да поставим изворно усмеравање (%s)"
+
+#: vfs/ftpfs.c:667
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Неисправни назив домаћина."
+
+#: vfs/ftpfs.c:685
+msgid "ftpfs: Invalid host address."
+msgstr "ftpfs: Неисправна адреса домаћина."
+
+#: vfs/ftpfs.c:708
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: повезујем се са %s"
+
+#: vfs/ftpfs.c:718
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: повезивање је прекинуо корисник"
+
+#: vfs/ftpfs.c:720
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: повезивање са сервером није успело: %s"
+
+#: vfs/ftpfs.c:761
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Чекам на поновно повезивање... %d (Control-C поништава)"
+
+#: vfs/ftpfs.c:947
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: нисам могао да подесим пасивни режим"
+
+#: vfs/ftpfs.c:1026
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: прекидам пренос."
+
+#: vfs/ftpfs.c:1028
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: грешка при прекидању: %s"
+
+#: vfs/ftpfs.c:1036
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: прекидање није успело"
+
+#: vfs/ftpfs.c:1140 vfs/ftpfs.c:1245
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: наредба `CWD' није успела."
+
+#: vfs/ftpfs.c:1150 vfs/ftpfs.c:1157
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: нисам могао да разрешим симвезу"
+
+#: vfs/ftpfs.c:1208
+msgid "Resolving symlink..."
+msgstr "Разрешавам симвезе..."
+
+#: vfs/ftpfs.c:1233
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Учитавам директоријум FTP-а %s... %s%s"
+
+#: vfs/ftpfs.c:1234
+msgid "(strict rfc959)"
+msgstr "(строго према rfc959)"
+
+#: vfs/ftpfs.c:1235
+msgid "(chdir first)"
+msgstr "(прво постави дир.)"
+
+#: vfs/ftpfs.c:1369
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: нисам успео; немам решења"
+
+#: vfs/ftpfs.c:1434
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: складиштим датотеку %lu (%lu)"
+
+#: vfs/ftpfs.c:1906
+msgid ""
+"~/.netrc file has not correct mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"Датотека ~/.netrc нема исправне дозволе.\n"
+"Уклоните лозинку или исправите дозволе."
+
+# Систем датотека Поноћног командира
+#: vfs/mcfs.c:123 vfs/mcfs.c:168
+msgid " MCFS "
+msgstr " СДПК "
+
+#: vfs/mcfs.c:124
+msgid " The server does not support this version "
+msgstr " Сервер не подржава ову верзију "
+
+#: vfs/mcfs.c:141
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Удаљени сервер није покренут на системском порту. \n"
+" Неопходна вам је лозинка за пријаву, али подаци можда неће\n"
+" бити безбедни на удаљеној страни. Желите ли да наставим? \n"
+
+#: vfs/mcfs.c:154
+msgid " MCFS Password required "
+msgstr " Неопходна је лозинка за СДПК "
+
+#: vfs/mcfs.c:168
+msgid " Invalid password "
+msgstr " Неисправна лозинка "
+
+#: vfs/mcfs.c:228
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Не могу да пронађем домаћина: %s "
+
+#: vfs/mcfs.c:247
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Не могу да створим утичницу: %s "
+
+#: vfs/mcfs.c:253
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Не могу да се повежем са сервером: %s "
+
+#: vfs/mcfs.c:323
+msgid " Too many open connections "
+msgstr " Превише отворених повезивања "
+
+#: vfs/sfs.c:336
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Упозорење: Неисправан ред у %s:\n"
+"%s\n"
+
+#: vfs/sfs.c:348
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Упозорење: Неисправан прекидач %c у %s:\n"
+"%s\n"
+
+#: vfs/smbfs.c:575
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" поновно повезивање са %s није успело\n"
+" "
+
+#: vfs/smbfs.c:1111
+msgid " Authentication failed "
+msgstr " Потврда исправности није успела "
+
+#: vfs/smbfs.c:1623
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " Грешка %s приликом стварања директоријума %s "
+
+#: vfs/smbfs.c:1646
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " Грешка %s приликом уклањања директоријума %s "
+
+#: vfs/smbfs.c:1755
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s при отварању удаљене датотеке %s "
+
+#: vfs/smbfs.c:1828
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s при уклањању удаљене датотеке %s "
+
+#: vfs/smbfs.c:1866
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s при преименовању датотека\n"
+
+#: vfs/tar.c:80 vfs/tar.c:97
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Не могу да отворим архиву врсте `tar'\n"
+"%s"
+
+#: vfs/tar.c:280
+msgid "Unexpected EOF on archive file"
+msgstr "Неочекивани завршетак датотеке у архиви"
+
+#: vfs/tar.c:332 vfs/tar.c:339
+msgid "Inconsistent tar archive"
+msgstr "Недоследна архива врсте `tar'"
+
+#: vfs/tar.c:409
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Хмм,...\n"
+"%s\n"
+"не личи на архиву врсте `tar'."
+
+#: vfs/undelfs.c:76
+msgid " undelfs: error "
+msgstr " undelfs: грешка "
+
+#: vfs/undelfs.c:179
+msgid " not enough memory "
+msgstr " недовољно меморије "
+
+#: vfs/undelfs.c:184
+msgid " while allocating block buffer "
+msgstr " при алоцирању блока прихватника "
+
+#: vfs/undelfs.c:188
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#: vfs/undelfs.c:192
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " при почетку скенирања инодова %d "
+
+#: vfs/undelfs.c:199
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: учитавам податке о обрисаним инодовима: %d инодова"
+
+#: vfs/undelfs.c:214
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " при позиву ext2_block_iterate %d "
+
+#: vfs/undelfs.c:222
+msgid " no more memory while reallocating array "
+msgstr " нема више меморије при поновној алок. низа "
+
+#: vfs/undelfs.c:241
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " при скенирању инодова %d "
+
+#: vfs/undelfs.c:265
+msgid " Ext2lib error "
+msgstr " Грешка библиотеке ext2lib "
+
+#: vfs/undelfs.c:292 vfs/undelfs.c:611
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Не могу да отворим датотеку %s "
+
+#: vfs/undelfs.c:295
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: читам мапу битова за инодове..."
+
+#: vfs/undelfs.c:298
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Не могу да учитам мапу битова за инодове из: \n"
+" %s \n"
+
+#: vfs/undelfs.c:301
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: учитавам мапу битова за инодове..."
+
+#: vfs/undelfs.c:304
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+" Не могу да учитам мапу битова за блокове из: \n"
+" %s \n"
+
+#: vfs/undelfs.c:327
+msgid " vfs_info is not fs! "
+msgstr " vfs_info - није систем датотека! "
+
+#: vfs/undelfs.c:383 vfs/undelfs.c:567
+msgid " You have to chdir to extract files first "
+msgstr " Морате да поставите дир. у који желите да издвајате "
+
+#: vfs/undelfs.c:506
+msgid " while iterating over blocks "
+msgstr " при итерацији блокова "
+
+#: vfs/vfs.c:1166
+msgid "Changes to file lost"
+msgstr "Измене у датотеци су изгубљене"
+
+#: vfs/vfs.c:1838
+msgid "Cannot parse:"
+msgstr "Не могу да рашчланим:"
+
+#: vfs/vfs.c:1840
+msgid "More parsing errors will be ignored."
+msgstr "Даље грешке ће бити занемарене."
+
+#: vfs/vfs.c:1850
+msgid "Internal error:"
+msgstr "Унутрашња грешка:"
+
+#: vfs/vfs.c:1860
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (пренесено %lu бајтова)"
+
+#: vfs/vfs.c:1861
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s пренесено %lu бајтова"
