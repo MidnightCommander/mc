@@ -6912,7 +6912,7 @@ msgid "Warning: file %s not found\n"
 msgstr "Attenzione: file %s non trovato\n"
 
 #: vfs/sfs.c:329
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
 "%s\n"
