@@ -161,8 +161,12 @@ Makefile: $(srcdir)/Make-mc.in $(top_builddir)/config.status
 DISTVFS = Make-mc.in ChangeLog callback.h README README.fish \
 	$(VFSSRCS) $(VFSHDRS)
 
-all: @LIBVFS@ @mcserv@
+all: all-recursive all-local
+
+all-recursive:
 	cd extfs && $(MAKE) all
+
+all-local: @LIBVFS@ @mcserv@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -193,7 +197,9 @@ mcserv: mcserv.o tcputil.o mad.o
 # Commands to build standalone version (.so)
 #
 
-VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so fish.so direntry.so cpio.so
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
+	tar.so names.so container.so extfs.so util-alone.so util.sor \
+	utilunix.sor sfs.so fish.so direntry.so cpio.so
 
 %.sor:	../src/%.c
 	$(CC) -c -fpic $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
@@ -234,13 +240,14 @@ distclean: clean
 	rm -f *~
 	rm -f Makefile
 
-install: install.extfs @MCSERV_INSTALL_TRUE@ install_mcserv
+install: all-local install-local install-recursive
 
-install_mcserv:
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	$(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv
+install-local:
+@MCSERV_INSTALL_TRUE@	$(mkinstalldirs) $(DESTDIR)$(bindir)
+@MCSERV_INSTALL_TRUE@	$(INSTALL_PROGRAM) mcserv \
+@MCSERV_INSTALL_TRUE@	  $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
-install.extfs:
+install-recursive:
 	cd extfs && $(MAKE) install
 
 uninstall:

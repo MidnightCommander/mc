@@ -1,3 +1,8 @@
+2001-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: Make it possible to run "make install" before
+	"make all".  Use more Automake-compatible target names.
+
 2001-08-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* smbfs.c: Undefine VERSION to prevent warning. Comments fixes.
