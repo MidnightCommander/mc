@@ -1,3 +1,10 @@
+2001-02-23  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uzip.in (mczipfs_list): Don't check zipinfo support on
+	the real file - check usage info instead. Use more robust checks
+	for valid lines. Suppress stderr from unzip. Workaround for jar
+	files - fix mode for files ending with slash.
+
 2001-02-20  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Include sys/timeb.h if it's present. Include time.h and

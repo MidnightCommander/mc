@@ -12,19 +12,16 @@ XZIP="$DZIP/zip -g"
 XDZIP="$DZIP/zip -d"
 XUNZIP="$DZIP/unzip"
 XZIPINFO="$DZIP/unzip -Z"
-#
-#If you don't have zipinfo, set ZIPINFO=
-#
 
 mczipfs_list ()
 {
-DOZIPINFO=no
-if test -n "$XZIPINFO"; then
-    DOZIPINFO=
-    $XZIPINFO -l "$1" | @AWK@ -v uid=${UID-0} -v zipfile="$1" -v xunzip=${XUNZIP-unzip} '
-/^Archive/ { next }
-/^[0-9]*\ file/ { next }
-/(unx|fat|ntf)/ { 
+# Try zipinfo if available, fallback to unzip.
+if $XZIPINFO 2>&1 | grep ZipInfo >/dev/null; then
+    $XZIPINFO -l "$1" 2>/dev/null | \
+       @AWK@ -v uid=${UID-0} -v zipfile="$1" -v xunzip=$XUNZIP '
+# Zipinfo prints errors on stdout. Check mode and time to skip them.
+/^[^a-z\-]/ { next }
+($9 ~ /:/) {
 split($0,a,":")
 nam = substr(a[2],4)
 if ($1 ~ /^l/ ) {
@@ -37,10 +34,15 @@ if ($1 ~ /^l/ ) {
     linkname=""
 }
 
+# If mode is not UNIX-compatible, take first 4 characters.
 if (length($1) != 10)
     mode=substr($1, 1, 4) "------"
 else
     mode=$1
+
+# Workaround for jar files - files ending with / are directories.
+if ($0 ~ /\/$/)
+    sub(/^./, "d", mode)
 
 if (nam ~ /^\^/)
     nam=substr(nam, 2)
@@ -51,22 +53,12 @@ else
     a[3] = 1900 + a[3]
 printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", mode, uid, 0, $4, a[2], a[1], a[3], $9, nam, arrow, linkname
 next
-}
-{
-exit 214
 }' 2>/dev/null
-    if test $? = 214; then
-        DOZIPINFO=no
-    fi
-fi
-if test -n "$DOZIPINFO"; then
-    $XUNZIP -v "$1" | @AWK@ -v uid=${UID-0} '
-BEGIN { hyphens=0 }
-/^Archive/ { next }
-/^\ Length/ { next }
-/^\ ?------/ { if (hyphens > 0) exit 0; hyphens=1; next }
-{ 
-if (hyphens < 1) next;
+else
+    $XUNZIP -v "$1" 2>/dev/null | @AWK@ -v uid=${UID-0} '
+# Not sure about portability of unzip -qq.
+# Check ratio to eliminate all but valid entries.
+($4 ~ /%$/) {
 if ($8 ~ /^\^/)
     $8=substr($8, 2)
 ## Y2K patch. if Year>=2000, unzip returns Year>=100  
