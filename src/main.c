@@ -2222,9 +2222,9 @@ print_mc_usage (FILE *stream)
 	    
     N_("Usage is:\n\n"
        "mc [flags] [this_dir] [other_panel_dir]\n\n"),
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
+#ifndef OS2_NT
     N_("-a, --stickchars   Force use of +, -, | for line drawing.\n"),
-#endif
+#endif /* !OS2_NT */
     N_("-b, --nocolor      Force black and white display.\n"),
 #ifdef WITH_BACKGROUND
     N_("-B, --background   [DEVEL-ONLY: Debug the background code]\n"),
@@ -2413,10 +2413,10 @@ static const struct poptOption argument_table [] = {
       N_("Resets soft keys on HP terminals") },
     { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0,
       N_("To run on slow terminals") },
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
+#ifndef OS2_NT
     { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0,
       N_("Use stickchars to draw") },
-#endif
+#endif /* !OS2_NT */
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "subshell", 	'U', POPT_ARG_NONE, 	&use_subshell,		  0,
       N_("Enables subshell support (default)")},

@@ -1,3 +1,9 @@
+2002-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c (init_curses) [!HAVE_SLANG]: Add support for
+	stickchars - fill acs_map[] with ASCII approximations.
+	* main.c [!HAVE_SLANG]: Enable --stickchars (-a) for ncurses.
+
 2002-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* setup.c: New variable global_profile_name to hold full name of

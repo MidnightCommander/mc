@@ -570,8 +570,27 @@ void init_curses ()
     nodelay (stdscr, FALSE);
 }
 #else
+static const struct {
+    int acscode;
+    int character;
+} acs_approx [] = {
+    { 'q',  '-' }, /* ACS_HLINE */
+    { 'x',  '|' }, /* ACS_VLINE */
+    { 'l',  '+' }, /* ACS_ULCORNER */
+    { 'k',  '+' }, /* ACS_URCORNER */
+    { 'm',  '+' }, /* ACS_LLCORNER */
+    { 'j',  '+' }, /* ACS_LRCORNER */
+    { 'a',  '#' }, /* ACS_CKBOARD */
+    { 'u',  '+' }, /* ACS_RTEE */
+    { 't',  '+' }, /* ACS_LTEE */
+    { 'w',  '+' }, /* ACS_TTEE */
+    { 'v',  '+' }, /* ACS_BTEE */
+    { 'n',  '+' }, /* ACS_PLUS */
+    { 0, 0 } };
+
 void init_curses (void)
 {
+    int i;
     initscr();
 #ifdef HAVE_ESCDELAY
     /*
@@ -586,6 +605,11 @@ void init_curses (void)
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
     init_colors ();
+    if (force_ugly_line_drawing) {
+	for (i = 0; acs_approx[i].acscode != 0; i++) {
+	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
+	}
+    }
 }
 #endif /* ! HAVE_SLANG */
 
