@@ -174,6 +174,37 @@ vfs_ncs_getid (struct vfs_class *nvfs, const char *dir,
 }
 
 
+/*
+ * Create a new timestamp item by VFS class and VFS id.
+ * If parent_name is provided, get ID for it and make it our parent.
+ * This should be an archive name, so that the parent archive could be
+ * freed in the same time as the VFS object for the given VFS id.
+ */
+void
+vfs_stamp_create (struct vfs_class *vclass, vfsid id,
+		  const char *parent_name)
+{
+    struct vfs_stamping *parent, *pparent;
+    struct vfs_class *pclass;
+    vfsid par_id;
+
+    parent = NULL;
+    if (parent_name) {
+	pclass = vfs_get_class (parent_name);
+	par_id = vfs_getid (pclass, parent_name, &pparent);
+	if (par_id) {
+	    parent = g_new (struct vfs_stamping, 1);
+	    parent->v = pclass;
+	    parent->next = 0;
+	    parent->id = par_id;
+	    parent->parent = pparent;
+	}
+    }
+
+    vfs_add_noncurrent_stamps (vclass, id, parent);
+}
+
+
 static int
 is_parent (struct vfs_class *nvfs, vfsid nvfsid,
 	   struct vfs_stamping *parent)

@@ -43,7 +43,7 @@
 
 #include "xdirentry.h"
 #include "vfs.h"
-#include "gc.h"		/* vfs_add_noncurrent_stamps */
+#include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
 
 #define FISH_DIRECTORY_TIMEOUT 30 * 60
@@ -687,7 +687,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, in
     int r;
 
     r = fish_command (me, super, WAIT_REPLY, cmd);
-    vfs_add_noncurrent_stamps (&vfs_fish_ops, (vfsid) super, NULL);
+    vfs_stamp_create (&vfs_fish_ops, super, NULL);
     if (r != COMPLETE) ERRNOR (E_REMOTE, -1);
     if (flags & OPT_FLUSH)
 	vfs_s_invalidate(me, super);

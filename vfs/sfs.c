@@ -22,7 +22,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
-#include "gc.h"		/* vfs_add_noncurrent_stamps */
+#include "gc.h"		/* vfs_stamp_create */
 #include "local.h"
 #include "../src/execute.h"	/* EXECUTE_AS_SHELL */
 
@@ -147,7 +147,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
 	cur->next = head;
 	head = cur;
 
-	vfs_add_noncurrent_stamps (&vfs_sfs_ops, (vfsid) head, NULL);
+	vfs_stamp_create (&vfs_sfs_ops, head, NULL);
 
 	return cache;
     }

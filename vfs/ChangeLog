@@ -1,3 +1,8 @@
+2003-11-13  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_stamp_me): Generalize and move ...
+	* gc.c (vfs_stamp_create): ... here.  Use whenever possible.
+
 2003-11-12  Pavel Roskin  <proski@gnu.org>
 
 	* gc.c: Use NULL instead of -1 for empty vfsid.  Adjust all

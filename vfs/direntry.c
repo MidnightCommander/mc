@@ -426,25 +426,6 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 
 /* ------------------------------------------------------------------------= */
 
-static void
-vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup,
-		const char *fs_name)
-{
-    struct vfs_stamping *parent;
-    struct vfs_class *v;
-
-    v = vfs_get_class (fs_name);
-    if (v->flags & VFSF_LOCAL) {
-	parent = NULL;
-    } else {
-	parent = g_new (struct vfs_stamping, 1);
-	parent->v = v;
-	parent->next = 0;
-	parent->id = vfs_getid (v, fs_name, &(parent->parent));
-    }
-    vfs_add_noncurrent_stamps (me, (vfsid) psup, parent);
-}
-
 char *
 vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
 		       struct vfs_s_super **archive, int flags)
@@ -491,7 +472,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
 	vfs_die ("You have to fill root inode\n");
 
     vfs_s_insert_super (me, super);
-    vfs_s_stamp_me (me, super, archive_name);
+    vfs_stamp_create (me, super, archive_name);
 
   return_success:
     *archive = super;
@@ -852,21 +833,9 @@ vfs_s_close (void *fh)
     struct vfs_class *me = FH_SUPER->me;
 
     FH_SUPER->fd_usage--;
-    if (!FH_SUPER->fd_usage){
-        struct vfs_stamping *parent;
-        struct vfs_class *v;
-        
-	v = vfs_get_class (FH_SUPER->name);
-	if (v->flags & VFSF_LOCAL) {
-	    parent = NULL;
-	} else {
-	    parent = g_new (struct vfs_stamping, 1);
-	    parent->v = v;
-	    parent->next = 0;
-	    parent->id = vfs_getid (v, FH_SUPER->name, &(parent->parent));
-	}
-        vfs_add_noncurrent_stamps (me, (vfsid) (FH_SUPER), parent);
-    }
+    if (!FH_SUPER->fd_usage)
+	vfs_stamp_create (me, FH_SUPER, FH_SUPER->name);
+
     if (FH->linear == LS_LINEAR_OPEN)
 	MEDATA->linear_close (me, fh);
     if (MEDATA->fh_close)

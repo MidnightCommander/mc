@@ -434,8 +434,6 @@ extfs_get_path_mangle (const char *inname, struct archive **archive,
     const char *archive_name;
     int result = -1;
     struct archive *parc;
-    struct vfs_stamping *parent;
-    struct vfs_class *v;
     int fstype;
 
     archive_name = inname;
@@ -470,18 +468,9 @@ extfs_get_path_mangle (const char *inname, struct archive **archive,
     if (result == -1)
 	ERRNOR (EIO, NULL);
 
-    if (archive_name) {
-	v = vfs_get_class (archive_name);
-	if (v->flags & VFSF_LOCAL) {
-	    parent = NULL;
-	} else {
-	    parent = g_new (struct vfs_stamping, 1);
-	    parent->v = v;
-	    parent->next = 0;
-	    parent->id = vfs_getid (v, archive_name, &(parent->parent));
-	}
-	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) parc, parent);
-    }
+    if (archive_name)
+	vfs_stamp_create (&vfs_extfs_ops, parc, archive_name);
+
   return_success:
     *archive = parc;
     return local;
@@ -757,22 +746,8 @@ extfs_close (void *data)
 
     file->archive->fd_usage--;
     if (!file->archive->fd_usage) {
-	struct vfs_stamping *parent;
-	struct vfs_class *v;
-
-	if (!file->archive->name || !*file->archive->name
-	    || (v =
-		vfs_get_class (file->archive->name))->flags & VFSF_LOCAL) {
-	    parent = NULL;
-	} else {
-	    parent = g_new (struct vfs_stamping, 1);
-	    parent->v = v;
-	    parent->next = 0;
-	    parent->id =
-		vfs_getid (v, file->archive->name, &(parent->parent));
-	}
-	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive),
-				   parent);
+	vfs_stamp_create (&vfs_extfs_ops, file->archive,
+			  file->archive->name);
     }
 
     g_free (data);

@@ -72,7 +72,7 @@ What to do with this?
 
 #include "xdirentry.h"
 #include "vfs.h"
-#include "gc.h"		/* vfs_add_noncurrent_stamps */
+#include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
 #include "ftpfs.h"
@@ -1454,7 +1454,7 @@ ftpfs_send_command(struct vfs_class *me, char *filename, char *cmd, int flags)
     p = ftpfs_translate_path (me, super, rpath);
     r = ftpfs_command (me, super, WAIT_REPLY, cmd, p);
     g_free (p);
-    vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) super, NULL);
+    vfs_stamp_create (&vfs_ftpfs_ops, super, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
     if (r != COMPLETE)

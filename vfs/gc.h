@@ -15,6 +15,8 @@ void vfs_stamp (struct vfs_class *, vfsid);
 void vfs_rmstamp (struct vfs_class *, vfsid, int);
 void vfs_add_noncurrent_stamps (struct vfs_class *, vfsid,
 				struct vfs_stamping *);
+void vfs_stamp_create (struct vfs_class *vclass, vfsid id,
+		       const char *parent_name);
 void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
 void vfs_expire (int);
