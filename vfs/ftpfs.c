@@ -1125,9 +1125,9 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 
     has_symlinks = 0;
     if (bucket->strict_rfc959_list_cmd)
-        print_vfs_message("ftpfs: Reading FTP directory... (don't use UNIX ls options)");
+        print_vfs_message("ftpfs: Reading FTP directory %s... (don't use UNIX ls options)", remote_path);
     else
-        print_vfs_message("ftpfs: Reading FTP directory...");
+        print_vfs_message("ftpfs: Reading FTP directory %s...", remote_path);
     if (has_spaces || bucket->strict_rfc959_list_cmd) 
         if (ftpfs_chdir_internal (bucket, remote_path) != COMPLETE) {
             my_errno = ENOENT;
@@ -1238,11 +1238,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     }
     close_this_sock(fp, sock);
     disable_interrupt_key();
-    if (get_reply (qsock (bucket), NULL, 0) != COMPLETE) {
-	my_errno = EIO;
-        goto error_3;
-    }
-    if (file_list->next == file_list) {
+    if ( (get_reply (qsock (bucket), NULL, 0) != COMPLETE) || (file_list->next == file_list)) {
         if (bucket->__inode_counter == 0 && !bucket->strict_rfc959_list_cmd) {
             /* It's our first attempt to get a directory listing from this
                server (UNIX style LIST command) */

@@ -1,5 +1,8 @@
 Wed Oct 28 17:06:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
+	* ftpfs.c: report which directory you are listing, fix behaviour
+ 	with servers that don't like LIST //. (Nowell)
+
 	* direntry.c (vfs_s_automake): insert newly generated entry
 
 	* direntry.c (vfs_s_free_entry): Debugging printf() killed.
