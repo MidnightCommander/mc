@@ -38,6 +38,7 @@
 #include "dlg.h"
 #include "widget.h"
 #include "dialog.h"		/* For do_refresh() */
+#include "wtools.h"		/* For common_dialog_repaint() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */
 #include "dir.h"
@@ -88,20 +89,6 @@ static struct panelize {
 static char* panelize_title = N_(" External panelize ");
 
 static void
-panelize_refresh (void)
-{
-    attrset (COLOR_NORMAL);
-    dlg_erase (panelize_dlg);
-    
-    draw_box (panelize_dlg, 1, 2, panelize_dlg->lines-2, panelize_dlg->cols-4);
-    draw_box (panelize_dlg, UY, UX, panelize_dlg->lines-10, panelize_dlg->cols-10);
-    
-    attrset (COLOR_HOT_NORMAL);
-    dlg_move (panelize_dlg, 1, (panelize_dlg->cols - strlen(panelize_title)) / 2);
-    addstr (panelize_title);
-}
-
-static void
 update_command (void)
 {
     if (l_panelize->pos != last_listitem) {
@@ -118,7 +105,9 @@ panelize_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-	panelize_refresh ();
+	common_dialog_repaint (h);
+	attrset (COLOR_NORMAL);
+	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
 	break;
 
     case DLG_POST_KEY:
