@@ -105,6 +105,7 @@ context exclusive // \n brown
 context linestart # \n brightred
     keyword \\\n yellow
     keyword /\**\*/ brown
+    keyword //*\n brown
     keyword "+" red
     keyword <+> red
 
