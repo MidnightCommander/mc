@@ -116,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %config /etc/pam.d/mcserv
 %config /etc/rc.d/init.d/mcserv
-%attr(-, -, man)  /usr/man/man8/mcserv.8
+%attr(-, root, man)  /usr/man/man8/mcserv.8
 /usr/bin/mcserv
 
 %files -n tkmc
