@@ -113,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/pixmaps/mc/*
 %{prefix}/share/mime-info/mc.keys
+%dir %{prefix}/etc
+%dir %{prefix}/etc/CORBA
+%dir %{prefix}/etc/CORBA/servers
 %config %{prefix}/etc/CORBA/servers/*
 
 %changelog
