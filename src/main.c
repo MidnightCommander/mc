@@ -2084,8 +2084,8 @@ print_mc_usage (poptContext ctx, FILE * stream)
     /* print help for options */
     poptPrintHelp (ctx, stream, 0);
 
-    fprintf (stream, "  %s             %s", _("+number"),
-	     _("number is the start line number of file for `mcedit'.\n"));
+    fprintf (stream, "  %s             %s\n", _("+number"),
+	     _("Set initial line number for the internal editor"));
     fprintf (stream,
 	     _("\n"
 	       "Please send any bug reports (including the output of `mc -V')\n"
