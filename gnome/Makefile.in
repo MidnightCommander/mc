@@ -127,13 +127,13 @@ LOBJS = mad.o
 #
 # These objects from ../src do depend on HAVE_GNOME
 #
-OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o		\
-	file.o find.o dialog.o key.o chmod.o chown.o view.o	\
+OOBJS = dlg.o screen.o widget.o wtools.o boxes.o		\
+	file.o find.o dialog.o key.o view.o			\
 	panelize.o hotlist.o background.o dir.o util.o		\
 	win.o color.o profile.o user.o ext.o setup.o		\
-	subshell.o terms.o achown.o fsusage.o mountlist.o	\
-	@XCURSES@ @REGEX_O@ complete.o command.o		\
-	option.o cmd.o utilunix.o xslint.o gdialogs.o filenot.o	\
+	subshell.o terms.o fsusage.o mountlist.o		\
+	@REGEX_O@ complete.o command.o				\
+	cmd.o utilunix.o xslint.o gdialogs.o filenot.o		\
 	fileopctx.o treestore.o
 
 CORBAOBJS = 			\

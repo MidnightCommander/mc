@@ -1,3 +1,8 @@
+2000-08-22  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: don't use info.o, chmod.o, chown.o, achown.o,
+	@XCURSES@ and option.o
+
 2000-08-21  Jonathan Blandford  <jrb@redhat.com>
 
 	* gmount.c (create_device_link): Fix memory leak.  Also, make sure
