@@ -1408,7 +1408,7 @@ msgstr "FTP-katalog cache timeout :"
 
 #: gnome/gprefs.c:163
 msgid "Allow customization of icons in icon view"
-msgstr "Tillåt ändring av ikoner i ikonvyn"
+msgstr "Tillåt anpassning av ikoner i ikonvyn"
 
 #: gnome/gprefs.c:172
 msgid "File display"
@@ -1428,7 +1428,7 @@ msgstr "Cachning"
 
 #: gnome/gprefs.c:474
 msgid "Preferences"
-msgstr "Inställningar"
+msgstr "Alternativ"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
@@ -1460,7 +1460,7 @@ msgstr "<Okänd>"
 
 #: gnome/gprop.c:494
 msgid "General"
-msgstr "Allämnt"
+msgstr "Allmänt"
 
 #: gnome/gprop.c:505
 msgid "Title"
@@ -1472,23 +1472,23 @@ msgstr "Välj ikon"
 
 #: gnome/gscreen.c:1415
 msgid "Reloads the current directory"
-msgstr "Ladda om den aktuella katalogen"
+msgstr "Laddar om den aktuella katalogen"
 
 #: gnome/gscreen.c:1417
 msgid "New _Directory..."
-msgstr "Ny _Katalog..."
+msgstr "Ny _katalog..."
 
 #: gnome/gscreen.c:1417
 msgid "Creates a new directory here"
-msgstr "Skapa en ny katalog här"
+msgstr "Skapar en ny katalog här"
 
 #: gnome/gscreen.c:1419
 msgid "New _File..."
-msgstr "Ny _Fil..."
+msgstr "Ny _fil..."
 
 #: gnome/gscreen.c:1419
 msgid "Creates a new file here"
-msgstr "Skapa en ny fil här"
+msgstr "Skapar en ny fil här"
 
 #: gnome/gscreen.c:1620
 #, c-format
@@ -1523,7 +1523,7 @@ msgstr "Byt namn eller flytta katalog"
 
 #: gnome/gscreen.c:2245
 msgid "Back"
-msgstr "Bak"
+msgstr "Bakåt"
 
 #: gnome/gscreen.c:2245
 msgid "Go to the previously visited directory"
