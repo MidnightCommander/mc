@@ -1,7 +1,7 @@
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.99a\n"
+"Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2002-08-21 03:42-0400\n"
 "PO-Revision-Date: 2002-04-11 16:36+0300\n"
 "Last-Translator: Volodymyr M. Lisivka <lvm@mystery.lviv.net>\n"
@@ -847,36 +847,36 @@ msgstr "Вст. &yс╕"
 msgid "owner"
 msgstr "власник"
 
-#: src/achown.c:345 src/achown.c:352
+#: src/achown.c:342 src/achown.c:349
 msgid "group"
 msgstr "група"
 
-#: src/achown.c:347
+#: src/achown.c:344
 msgid "other"
 msgstr "╕нш╕"
 
-#: src/achown.c:355
+#: src/achown.c:352
 msgid "On"
 msgstr "На"
 
-#: src/achown.c:357
+#: src/achown.c:354
 msgid "Flag"
 msgstr "М╕тка"
 
-#: src/achown.c:359
+#: src/achown.c:356
 msgid "Mode"
 msgstr "Режим"
 
-#: src/achown.c:364
+#: src/achown.c:360
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d з %d"
 
-#: src/achown.c:372
+#: src/achown.c:543
 msgid " Chown advanced command "
 msgstr " Розширена зм╕на власника "
 
-#: src/achown.c:607 src/achown.c:623 src/achown.c:669 src/chmod.c:267
+#: src/achown.c:600 src/achown.c:616 src/achown.c:662 src/chmod.c:267
 #: src/chmod.c:336
 #, c-format
 msgid ""
@@ -886,7 +886,7 @@ msgstr ""
 " Не вдалося зм╕нити права для \"%s\" \n"
 " %s "
 
-#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:216
+#: src/achown.c:605 src/achown.c:620 src/achown.c:666 src/chown.c:216
 #: src/chown.c:323
 #, c-format
 msgid ""
@@ -1539,7 +1539,7 @@ msgstr ""
 msgid " You can not execute commands on non-local filesystems"
 msgstr " Ви не можете виконувати команди на нелокальних файлових системах"
 
-#: src/dialog.c:55
+#: src/dialog.c:48
 msgid ""
 "\n"
 "\n"
@@ -2356,7 +2356,7 @@ msgstr "Шукаю"
 msgid "Find file"
 msgstr "Знайти файл"
 
-#: src/help.c:275
+#: src/help.c:274
 msgid ""
 " Help file format error\n"
 ""
@@ -2364,15 +2364,15 @@ msgstr ""
 "Помилка формату файла дов╕дки\n"
 ""
 
-#: src/help.c:314
+#: src/help.c:313
 msgid " Internal bug: Double start of link area "
 msgstr " Внутр╕шня помилка: Подв╕йний початок област╕ посилання "
 
-#: src/help.c:568
+#: src/help.c:567
 msgid " Cannot find node [Contents] in help file "
 msgstr " Не вда╓ться знайти вузол [Contents] у файл╕ дов╕дки "
 
-#: src/help.c:737
+#: src/help.c:736
 msgid " Help "
 msgstr " Дов╕дка "
 
@@ -2390,11 +2390,11 @@ msgstr ""
 msgid " Cannot find node %s in help file "
 msgstr " Не вда╓ться знайти вузол %s у файл╕ дов╕дки "
 
-#: src/help.c:813
+#: src/help.c:810
 msgid "Index"
 msgstr "Вм╕ст"
 
-#: src/help.c:815
+#: src/help.c:812
 msgid "Prev"
 msgstr "Назад"
 
@@ -2402,7 +2402,7 @@ msgstr "Назад"
 msgid "&Move"
 msgstr "Пере&нести"
 
-#: src/hotlist.c:118 src/hotlist.c:1410 src/panelize.c:75 src/wtools.c:349
+#: src/hotlist.c:118 src/hotlist.c:1410 src/panelize.c:75 src/wtools.c:328
 msgid "&Remove"
 msgstr "Ви&далити"
 
@@ -2729,7 +2729,7 @@ msgstr "Права д&оступу"
 msgid "&File types"
 msgstr "Типи &файл╕в"
 
-#: src/layout.c:368 src/learn.c:60 src/learn.c:183 src/option.c:137
+#: src/layout.c:368 src/learn.c:61 src/learn.c:173 src/option.c:137
 msgid "&Save"
 msgstr "&Зберегти"
 
@@ -2758,15 +2758,15 @@ msgstr "рядк╕в виводу"
 msgid "Layout"
 msgstr "Макет"
 
-#: src/learn.c:74
+#: src/learn.c:75
 msgid " Learn keys "
 msgstr " Вивчення клав╕ш "
 
-#: src/learn.c:91
+#: src/learn.c:81
 msgid " Teach me a key "
 msgstr " Навч╕ть мене клав╕ш╕ "
 
-#: src/learn.c:92
+#: src/learn.c:82
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -2787,20 +2787,20 @@ msgstr ""
 "Якщо ви хочете в╕дм╕нити навчання, натисн╕ть\n"
 "клав╕шу Esc ╕ також тр╕шки зачекайте."
 
-#: src/learn.c:126
+#: src/learn.c:116
 msgid " Cannot accept this key "
 msgstr " Не можу прийняти цю клав╕шу "
 
-#: src/learn.c:127
+#: src/learn.c:117
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " Ви ввели \"%s\""
 
-#: src/learn.c:174
+#: src/learn.c:164
 msgid "OK"
 msgstr " √"
 
-#: src/learn.c:181
+#: src/learn.c:171
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2808,11 +2808,11 @@ msgstr ""
 "Схоже, що вс╕ ваш╕ клав╕ш╕ вже\n"
 "нормально працюють. Це просто чудово."
 
-#: src/learn.c:183
+#: src/learn.c:173
 msgid "&Discard"
 msgstr "В&╕дкинути"
 
-#: src/learn.c:187
+#: src/learn.c:177
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2820,19 +2820,19 @@ msgstr ""
 "Чудово! Ви ма╓те повний опис терм╕налу!\n"
 "Вс╕ ваш╕ клав╕ш╕ працюють."
 
-#: src/learn.c:271
+#: src/learn.c:261
 msgid "Learn keys"
 msgstr "Вивчення клав╕ш"
 
-#: src/learn.c:304
+#: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. П╕сля цього знайд╕ть,"
 
-#: src/learn.c:306
+#: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "клав╕ш╕, як╕ не мають пом╕тки √. Для навчання клав╕ш╕ вибер╕ть"
 
-#: src/learn.c:308
+#: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "╖╖ при допомоз╕ Tab або мишкою ╕ натисн╕ть проб╕л."
 
@@ -3707,14 +3707,6 @@ msgstr " Вибер╕ть кодування тексту "
 msgid "-  < No translation >"
 msgstr "-  < Без перекодування >"
 
-#: src/selcodepage.c:76
-msgid ""
-"Midnight Commander was compiled without iconv support,\n"
-"so charsets recoding feature is not available!"
-msgstr ""
-"Midnight Commander було скомп╕льовано без п╕дтримки iconv,\n"
-"так що перекодування недоступне!"
-
 #: src/selcodepage.c:93
 msgid ""
 "To use this feature select your codepage in\n"
@@ -3752,11 +3744,15 @@ msgstr "Увага: Не вдалося зм╕нити на %s.\n"
 msgid "Virtual File System: tarfs, extfs"
 msgstr "В╕ртуальна Файлова Система: tarfs, extfs"
 
-#: src/textconf.c:12
+#: src/textconf.c:11
+msgid ", cpiofs"
+msgstr ", cpiofs"
+
+#: src/textconf.c:13
 msgid ", ftpfs"
 msgstr ", ftpfs"
 
-#: src/textconf.c:14
+#: src/textconf.c:15
 msgid " (proxies: hsc proxy)"
 msgstr " (прокс╕: hsc прокс╕)"
 
