@@ -1,5 +1,10 @@
 2005-02-06  Roland Illig  <roland.illig@gmx.de>
 
+	* widget.h: Added a new function button_get_text.
+	* widget.c: Likewise.
+
+2005-02-06  Roland Illig  <roland.illig@gmx.de>
+
 	* achown.c (get_ownership): Simplified the code. Now it is
 	more independent of the WButton internals.
 	* achown.c (get_ownership): Renamed to update_ownership.

@@ -171,6 +171,7 @@ void gauge_set_value (WGauge *g, int max, int current);
 void gauge_show (WGauge *g, int shown);
 
 /* Buttons */
+const char *button_get_text (WButton *b);
 void button_set_text (WButton *b, const char *text);
 
 /* Listbox manager */

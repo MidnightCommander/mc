@@ -236,6 +236,12 @@ button_new (int y, int x, int action, int flags, const char *text,
     return b;
 }
 
+const char *
+button_get_text (WButton *b)
+{
+    return b->text;
+}
+
 void
 button_set_text (WButton *b, const char *text)
 {
