@@ -1,5 +1,8 @@
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
+	* learn.c (learn_check_key): Simplify logic.  Add a comment for
+	translators.
+
 	* file.h: Rename know_not_what_am_i_doing to safe_delete.
 	* file.c (real_query_recursive): Don't ask to enter "yes" - it's
 	ugly and requires changing input method in some locales.

@@ -152,61 +152,62 @@ static int learn_move (int right)
     return 0;
 }
 
-static int learn_check_key (int c)
+static int
+learn_check_key (int c)
 {
     int i;
 
     for (i = 0; i < learn_total; i++) {
-        if (key_name_conv_tab [i].code == c) {
-	    if (!learnkeys [i].ok) {
-	    	dlg_select_widget (learn_dlg, learnkeys [i].button);
-	        label_set_text ((WLabel *) learnkeys [i].label,
-	            _("OK"));
-	        learnkeys [i].ok = 1;
-	        learnok++;
-	        if (learnok >= learn_total) {
-	            learn_dlg->ret_value = B_CANCEL;
-	            if (learnchanged) {
-	                if (query_dialog (learn_title, 
-			    _("It seems that all your keys already\n"
-			      "work fine. That's great."),
-	                    1, 2, _("&Save"), _("&Discard")) == 0)
-	                    learn_dlg->ret_value = B_ENTER;
-	            } else {
-	            	message (1, learn_title,
-			_("Great! You have a complete terminal database!\n"
+	if (key_name_conv_tab[i].code != c || learnkeys[i].ok)
+	    continue;
+
+	dlg_select_widget (learn_dlg, learnkeys[i].button);
+	/* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
+	label_set_text ((WLabel *) learnkeys[i].label, _("OK"));
+	learnkeys[i].ok = 1;
+	learnok++;
+	if (learnok >= learn_total) {
+	    learn_dlg->ret_value = B_CANCEL;
+	    if (learnchanged) {
+		if (query_dialog (learn_title,
+				  _
+				  ("It seems that all your keys already\n"
+				   "work fine. That's great."), 1, 2,
+				  _("&Save"), _("&Discard")) == 0)
+		    learn_dlg->ret_value = B_ENTER;
+	    } else {
+		message (1, learn_title,
+			 _
+			 ("Great! You have a complete terminal database!\n"
 			  "All your keys work well."));
-	            }
-		    dlg_stop (learn_dlg);
-	        }
-	        return 1;
 	    }
-        }
+	    dlg_stop (learn_dlg);
+	}
+	return 1;
     }
     switch (c) {
-        case KEY_LEFT:
-        case 'h':
-            return learn_move (0);
-        case KEY_RIGHT:
-        case 'l':
-            return learn_move (1);
-        case 'j':
-            dlg_one_down (learn_dlg);
-            return 1;
-        case 'k':
-            dlg_one_up (learn_dlg);
-            return 1;
-    }    
+    case KEY_LEFT:
+    case 'h':
+	return learn_move (0);
+    case KEY_RIGHT:
+    case 'l':
+	return learn_move (1);
+    case 'j':
+	dlg_one_down (learn_dlg);
+	return 1;
+    case 'k':
+	dlg_one_up (learn_dlg);
+	return 1;
+    }
 
     /* Prevent from disappearing if a non-defined sequence is pressed
        and contains s or c. Use ALT('s') or ALT('c'). */
-	if (c < 255 && isalpha(c))
-	{
-		c = toupper(c);
-		for (i = 0; i < BUTTONS; i++)
-			if (c == learn_but [i].hotkey)
-				return 1;
-	}
+    if (c < 255 && isalpha (c)) {
+	c = toupper (c);
+	for (i = 0; i < BUTTONS; i++)
+	    if (c == learn_but[i].hotkey)
+		return 1;
+    }
 
     return 0;
 }
