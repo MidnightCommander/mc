@@ -220,17 +220,11 @@ get_byte (WView *view, unsigned int byte_index)
     int page   = byte_index / VIEW_PAGE_SIZE + 1;
     int offset = byte_index % VIEW_PAGE_SIZE;
     int i, n;
-    block_ptr_t *tmp;
-    
+
     if (view->growing_buffer){
 	if (page > view->blocks){
-	    tmp = g_new (block_ptr_t, page);
-	    if (view->block_ptr){
-		bcopy (view->block_ptr, tmp, sizeof (block_ptr_t) *
-		       view->blocks);
-		g_free (view->block_ptr);
-	    } 
-	    view->block_ptr = tmp;
+	    view->block_ptr = g_realloc (view->block_ptr,
+					 sizeof (block_ptr_t) * page);
 	    for (i = view->blocks; i < page; i++){
 		char *p = g_malloc (VIEW_PAGE_SIZE);
 		view->block_ptr [i].data = p;
@@ -240,12 +234,10 @@ get_byte (WView *view, unsigned int byte_index)
 		    n = fread (p, 1, VIEW_PAGE_SIZE, view->stdfile);
 		else
 		    n = mc_read (view->file, p, VIEW_PAGE_SIZE);
-
 /*
  * FIXME: Errors are ignored at this point
  * Also should report preliminary EOF
  */
-
 		if (n != -1)
 		    view->bytes_read += n;
 		if (view->s.st_size < view->bytes_read){
@@ -1423,7 +1415,7 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 	    prev = 0;
     }
 
-    for (i = 0; ch > 0; ch = get_byte (view, pos)){
+    for (i = 0; ch != -1; ch = get_byte (view, pos)){
 
 	if (i == usable_size){
 	    buffer = grow_string_buffer (buffer, &buffer_size);
@@ -1432,7 +1424,7 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 
 	pos += direction; i++;
 
-	if (ch == '\n'){
+	if (ch == '\n' || !ch){
 	    break;
 	}
 	buffer [i] = ch;
