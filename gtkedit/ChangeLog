@@ -1,4 +1,8 @@
-2000-09-30  Pavel Roskin  <proski@gnu.org>
+2000-11-01  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* editcmd.c (canonicalize_pathname) [GTK]: memory leaking fixed
+
+2000-10-30  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (canonicalize_pathname) [GTK]: Make the argument
 	constant.
