@@ -269,7 +269,7 @@ void set_idle_proc (Dlg_head *d, int state)
 }
 
 /* add component to dialog buffer */
-int add_widgetl (Dlg_head *where, void *what, WLay layout)
+int add_widget (Dlg_head *where, void *what)
 {
     Widget_Item *back;
     Widget      *widget = (Widget *) what;
@@ -277,7 +277,6 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
     /* Only used by Tk */
     widget->frame = the_frame;
 
-    widget->layout = layout;
     /* Don't accept 0 widgets, this could be from widgets that could not */
     /* initialize properly */
     if (!what)
@@ -373,11 +372,6 @@ int destroy_widget (Widget *w)
 	w->destroy (w);
     g_free (w);
     return 1;
-}
-
-int add_widget (Dlg_head *where, void *what)
-{
-    return add_widgetl (where, what, XV_WLAY_DONTCARE);
 }
 
 int send_message (Dlg_head *h, Widget *w, int msg, int par)

@@ -170,8 +170,7 @@ static void init_listmode (char *oldlistformat)
 #define XTRACT(i) BY+listmode_but[i].y, BX+listmode_but[i].x, listmode_but[i].ret_cmd, listmode_but[i].flags, listmode_but[i].text, 0, 0, NULL
 
     for (i = 0; i < BUTTONS; i++)
-	add_widgetl (listmode_dlg, button_new (XTRACT (i)), (i == BUTTONS - 1) ?
-	    XV_WLAY_CENTERROW : XV_WLAY_RIGHTOF);
+	add_widget (listmode_dlg, button_new (XTRACT (i)));
 
     /* We add the labels. */
     for (i = 0; i < LABELS; i++){
@@ -216,7 +215,7 @@ static void init_listmode (char *oldlistformat)
     }
 
     /* add listbox to the dialogs */
-    add_widgetl (listmode_dlg, l_listmode, XV_WLAY_EXTENDWIDTH);
+    add_widget (listmode_dlg, l_listmode);
 
     radio_columns = radio_new (UY+1, UX+32, 2, s_columns, 1, NULL);
     add_widget (listmode_dlg, radio_columns);

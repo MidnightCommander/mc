@@ -173,23 +173,23 @@ authinfo_get_authinfo_from_user (const char *host,
     g_free (title);
 
     in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name");
-    add_widgetl (auth_dlg, in_user, XV_WLAY_BELOWOF);
+    add_widget (auth_dlg, in_user);
 
     in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain");
-    add_widgetl (auth_dlg, in_domain, XV_WLAY_NEXTCOLUMN);
-    add_widgetl (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
-                 buts[1], 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
-    add_widgetl (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
-                 buts[0], 0, 0, "ok"), XV_WLAY_CENTERROW);
+    add_widget (auth_dlg, in_domain);
+    add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
+                 buts[1], 0 ,0, "cancel"));
+    add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
+                 buts[0], 0, 0, "ok"));
 
     in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password");
     in_password->completion_flags = 0;
     in_password->is_password = 1;
-    add_widgetl (auth_dlg, in_password, XV_WLAY_BELOWOF);
+    add_widget (auth_dlg, in_password);
 
-    add_widgetl (auth_dlg, label_new (7, 3, labs[2], "label-passwd"), XV_WLAY_BELOWOF);
-    add_widgetl (auth_dlg, label_new (5, 3, labs[1], "label-user"), XV_WLAY_BELOWOF);
-    add_widgetl (auth_dlg, label_new (3, 3, labs[0], "label-domain"), XV_WLAY_NEXTCOLUMN);
+    add_widget (auth_dlg, label_new (7, 3, labs[2], "label-passwd"));
+    add_widget (auth_dlg, label_new (5, 3, labs[1], "label-user"));
+    add_widget (auth_dlg, label_new (3, 3, labs[0], "label-domain"));
 
     run_dlg (auth_dlg);
 

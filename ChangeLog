@@ -1,5 +1,25 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* gtkedit/editcmd.c: Remove support for XView layout attributes.
+	* gtkedit/editoptions.c: Likewise.
+	* pc/chmod.c: Likewise.
+	* pc/drive.c: Likewise.
+	* src/boxes.c: Likewise.
+	* src/chmod.c: Likewise.
+	* src/dlg.c: Likewise.
+	* src/dlg.h: Likewise.
+	* src/filegui.c: Likewise.
+	* src/find.c: Likewise.
+	* src/hotlist.c: Likewise.
+	* src/layout.c: Likewise.
+	* src/listmode.c: Likewise.
+	* src/main.c: Likewise.
+	* src/option.c: Likewise.
+	* src/panelize.c: Likewise.
+	* src/wtools.c: Likewise.
+	* src/wtools.h: Likewise.
+	* vfs/smbfs.c: Likewise.
+
 	* autogen.sh: Check out "intl" and "macros" directories if they
 	are missing. Simply "cvs up -d" won't restore them.
 

@@ -184,25 +184,23 @@ display_init (int radio_sel, char *init_text,
 		     DLG_CENTER | DLG_GRID);
 
     x_set_dialog_title (dd, _("Listing mode"));
-    add_widgetl (dd,
+    add_widget (dd,
         button_new (4, button_start, B_CANCEL, 
-			NORMAL_BUTTON, cancel_button, 0, 0, "cancel-button"),
-	XV_WLAY_RIGHTOF);
+			NORMAL_BUTTON, cancel_button, 0, 0, "cancel-button"));
 
-    add_widgetl (dd,
+    add_widget (dd,
 		button_new (3, button_start, B_ENTER, 
-			DEFPUSH_BUTTON, ok_button, 0, 0, "ok-button"),
-	 XV_WLAY_CENTERROW);
+			DEFPUSH_BUTTON, ok_button, 0, 0, "ok-button"));
 
     status = input_new (10, 9, INPUT_COLOR, DISPLAY_X-14, _status [radio_sel], "mini-input");
-    add_widgetl (dd, status, XV_WLAY_RIGHTDOWN);
+    add_widget (dd, status);
     input_set_point (status, 0);
 
     check_status = check_new (9, 5, _check_status, user_mini_status, "mini-status");
-    add_widgetl (dd, check_status, XV_WLAY_NEXTROW);
+    add_widget (dd, check_status);
     
     user = input_new  (7, 9, INPUT_COLOR, DISPLAY_X-14, init_text, "user-fmt-input");
-    add_widgetl (dd, user, XV_WLAY_RIGHTDOWN);
+    add_widget (dd, user);
     input_set_point (user, 0);
 
 #ifdef PORT_HAS_ICON_VIEW
@@ -211,7 +209,7 @@ display_init (int radio_sel, char *init_text,
     my_radio = radio_new (3, 5, LIST_TYPES-1, displays, 1, "radio");
 #endif
     my_radio->sel = my_radio->pos = current_mode;
-    add_widgetl (dd, my_radio, XV_WLAY_BELOWCLOSE);
+    add_widget (dd, my_radio);
 }
 
 int
@@ -333,18 +331,18 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 		     
     x_set_dialog_title (dd, sort_title);
 
-    add_widgetl (dd, 
+    add_widget (dd, 
 		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON, cancel_button, 
-		0, 0, "cancel-button"), XV_WLAY_CENTERROW);
+		0, 0, "cancel-button"));
 
-    add_widgetl (dd, 
+    add_widget (dd, 
 		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON, ok_button,
-		0, 0, "ok-button"),	XV_WLAY_RIGHTDOWN);
+		0, 0, "ok-button"));
 
     case_sense = check_new (4, check_pos, *case_sensitive, case_label, "case-check");
-    add_widgetl (dd, case_sense, XV_WLAY_RIGHTDOWN);
+    add_widget (dd, case_sense);
     c = check_new (3, check_pos, *reverse, reverse_label, "reverse-check");
-    add_widgetl (dd, c, XV_WLAY_RIGHTDOWN);
+    add_widget (dd, c);
 
     my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1, "radio-1");
     my_radio->sel = my_radio->pos = current_mode;
@@ -374,19 +372,19 @@ static int my_exit;
 
 static QuickWidget conf_widgets [] = {
 { quick_button,   4, 6, 4, CONFY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, XV_WLAY_RIGHTOF, "c" },
+      0, B_CANCEL, 0, 0, "c" },
 { quick_button,   4, 6, 3, CONFY, N_("&Ok"),
-      0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "o" },
+      0, B_ENTER, 0, 0, "o" },
 
 { quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
-      9, 0, &my_exit, 0, XV_WLAY_BELOWCLOSE, "e" },
+      9, 0, &my_exit, 0, "e" },
 { quick_checkbox, 1, 13, 5, CONFY, N_(" confirm e&Xecute "),
-      10, 0, &my_execute, 0, XV_WLAY_BELOWCLOSE, "x" },
+      10, 0, &my_execute, 0, "x" },
 { quick_checkbox, 1, 13, 4, CONFY, N_(" confirm o&Verwrite "),
-      10, 0, &my_overwrite, 0, XV_WLAY_BELOWCLOSE, "ov" },
+      10, 0, &my_overwrite, 0, "ov" },
 { quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
-      9, 0, &my_delete, 0, XV_WLAY_BELOWCLOSE, "de" },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
+      9, 0, &my_delete, 0, "de" },
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
 
 static QuickDialog confirmation =
@@ -462,14 +460,14 @@ char *display_bits_str [] =
 
 static QuickWidget display_widgets [] = {
 { quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, XV_WLAY_CENTERROW, "c" },
+      0, B_CANCEL, 0, 0, "c" },
 { quick_button,   4,  6,    3, DISPY, N_("&Ok"),
-      0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "o" },
+      0, B_ENTER, 0, 0, "o" },
 { quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
-      0, 0, &new_meta, 0, XV_WLAY_BELOWCLOSE, "u" },
+      0, 0, &new_meta, 0, "u" },
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
-      &new_mode, display_bits_str, XV_WLAY_BELOWCLOSE, "r" },
-{ 0,              0, 0, 0, 0, 0,  0, 0, 0, 0, XV_WLAY_DONTCARE }
+      &new_mode, display_bits_str, "r" },
+{ 0,              0, 0, 0, 0, 0,  0, 0, 0, 0, 0 }
 };
 
 static QuickDialog display_bits =
@@ -637,37 +635,37 @@ static int ret_use_netrc;
 #if 0
 /* Not used currently */
 { quick_checkbox,  4, VFSX, 10, VFSY, "Use ~/.netrc",
-      'U', 0, 0, &ret_use_netrc, 0, XV_WLAY_BELOWCLOSE, "" },
+      'U', 0, 0, &ret_use_netrc, 0, "" },
 #endif
 
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, XV_WLAY_RIGHTOF, "button-cancel" },
+      0, B_CANCEL, 0, 0, "button-cancel" },
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
-      0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "button-ok" },
+      0, B_ENTER, 0, 0, "button-ok" },
 #if defined(USE_NETCODE)
 { quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
-      XV_WLAY_RIGHTDOWN, "input-ftp-proxy" },
+      "input-ftp-proxy" },
 { quick_checkbox,  4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), 0, 0,
-      &ftpfs_always_use_proxy, 0, XV_WLAY_RIGHTDOWN, "check-ftp-proxy" },
+      &ftpfs_always_use_proxy, 0, "check-ftp-proxy" },
 { quick_label,    49, VFSX, 7, VFSY, N_("sec"),
-      0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec" },
+      0, 0, 0, 0, "label-sec" },
 { quick_input,    38, VFSX, 7, VFSY, "", 10, 0, 0, &ret_directory_timeout,
-      XV_WLAY_RIGHTDOWN, "input-timeout" },
+      "input-timeout" },
 { quick_label,     4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:"),
-      0, 0, 0, 0, XV_WLAY_NEXTROW, "label-cache"},
+      0, 0, 0, 0, "label-cache"},
 { quick_input,     4, VFSX, 6, VFSY, "", 48, 0, 0, &ret_passwd,
-      XV_WLAY_RIGHTDOWN, "input-passwd" },
+      "input-passwd" },
 { quick_label,     4, VFSX, 5, VFSY, N_("ftp anonymous password:"),
-      0, 0, 0, 0, XV_WLAY_NEXTROW, "label-pass"},
+      0, 0, 0, 0, "label-pass"},
 #endif
 { quick_label,    49, VFSX, 3, VFSY, "sec",
-      0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec2" },
+      0, 0, 0, 0, "label-sec2" },
 { quick_input,    38, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
-      XV_WLAY_RIGHTOF, "input-timo-vfs" },
+      "input-timo-vfs" },
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
-      0, 0, 0, 0, XV_WLAY_BELOWCLOSE, "label-vfs" },
-{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
+      0, 0, 0, 0, "label-vfs" },
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
 };
 
 static QuickDialog confvfs_dlg =
@@ -724,13 +722,13 @@ cd_dialog (void)
     QuickWidget quick_widgets [] = {
 #ifdef HAVE_TK
 #define INPUT_INDEX 2
-    { quick_button, 0, 1, 0, 1, N_("&Cancel"), 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "cancel" },
-    { quick_button, 0, 1, 0, 1, N_("&Ok"),     0, B_ENTER,  0, 0, XV_WLAY_DONTCARE, "ok" },
+    { quick_button, 0, 1, 0, 1, N_("&Cancel"), 0, B_CANCEL, 0, 0, "cancel" },
+    { quick_button, 0, 1, 0, 1, N_("&Ok"),     0, B_ENTER,  0, 0, "ok" },
 #else
 #define INPUT_INDEX 0
 #endif
-    { quick_input,  6, 57, 5, 0, "", 50, 0, 0, 0, XV_WLAY_RIGHTOF, "input" },
-    { quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
+    { quick_input,  6, 57, 5, 0, "", 50, 0, 0, 0, "input" },
+    { quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
     { 0 } };
     
     char *my_str;
@@ -779,16 +777,16 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 #if defined(HAVE_TK)
 #define INPUT_INDEX 2
     { quick_button, 0, 1, 0, 1, _("&Cancel"), 0, B_CANCEL, 0, 0,
-	  XV_WLAY_DONTCARE, "cancel" },
+	  "cancel" },
     { quick_button, 0, 1, 0, 1, _("&Ok"), 0, B_ENTER, 0, 0,
-	  XV_WLAY_DONTCARE, "ok" },
+	  "ok" },
 #else
 #define INPUT_INDEX 0
 #endif
-    { quick_input,  4, 80, 5, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-1" },
-    { quick_label,  4, 80, 4, 8, "", 0, 0, 0, 0, XV_WLAY_BELOWOF, "label-1" },
-    { quick_input,  4, 80, 3, 8, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-2" },
-    { quick_label,  4, 80, 2, 8, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-2" },
+    { quick_input,  4, 80, 5, 8, "", 58, 0, 0, 0, "input-1" },
+    { quick_label,  4, 80, 4, 8, "", 0, 0, 0, 0, "label-1" },
+    { quick_input,  4, 80, 3, 8, "", 58, 0, 0, 0, "input-2" },
+    { quick_label,  4, 80, 2, 8, "", 0, 0, 0, 0, "label-2" },
     { 0 } };
     
     Quick_input.xlen  = 64;

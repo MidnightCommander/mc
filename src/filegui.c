@@ -260,39 +260,27 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
 
     x_set_dialog_title (ui->op_dlg, "");
 
-    add_widgetl (ui->op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
-					 NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"),
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP,
-					 NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"),
-		 XV_WLAY_CENTERROW);
+    add_widget (ui->op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
+					 NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"));
+    add_widget (ui->op_dlg, button_new (BY-minus, 14 + eta_offset, FILE_SKIP,
+					 NORMAL_BUTTON, _("&Skip"), 0, 0, "skip"));
 
-    add_widgetl (ui->op_dlg, ui->progress_gauge[2] = gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"), 
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->progress_label[2] = label_new (7, FCOPY_LABEL_X, fifteen, "l-1"), 
-		 XV_WLAY_NEXTROW);
-    add_widgetl (ui->op_dlg, ui->bps_label = label_new (7, WX, "", "bps-label"), XV_WLAY_NEXTROW);
+    add_widget (ui->op_dlg, ui->progress_gauge[2] = gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0, "g-1"));
+    add_widget (ui->op_dlg, ui->progress_label[2] = label_new (7, FCOPY_LABEL_X, fifteen, "l-1"));
+    add_widget (ui->op_dlg, ui->bps_label = label_new (7, WX, "", "bps-label"));
 
-    add_widgetl (ui->op_dlg, ui->progress_gauge[1] = gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"), 
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->progress_label[1] = label_new (8, FCOPY_LABEL_X, fifteen, "l-2"), 
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->stalled_label = label_new (8, WX, "", "stalled"), XV_WLAY_NEXTROW);
+    add_widget (ui->op_dlg, ui->progress_gauge[1] = gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0, "g-2"));
+    add_widget (ui->op_dlg, ui->progress_label[1] = label_new (8, FCOPY_LABEL_X, fifteen, "l-2"));
+    add_widget (ui->op_dlg, ui->stalled_label = label_new (8, WX, "", "stalled"));
 
-    add_widgetl (ui->op_dlg, ui->progress_gauge[0] = gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"), 
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->progress_label[0] = label_new (6, FCOPY_LABEL_X, fifteen, "l-3"), 
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->eta_label = label_new (6, WX, "", "eta_label"), XV_WLAY_NEXTROW);
+    add_widget (ui->op_dlg, ui->progress_gauge[0] = gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0, "g-3"));
+    add_widget (ui->op_dlg, ui->progress_label[0] = label_new (6, FCOPY_LABEL_X, fifteen, "l-3"));
+    add_widget (ui->op_dlg, ui->eta_label = label_new (6, WX, "", "eta_label"));
 
-    add_widgetl (ui->op_dlg, ui->file_string[1] = label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"),
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->file_label[1] = label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"), 
-		 XV_WLAY_NEXTROW);
-    add_widgetl (ui->op_dlg, ui->file_string[0] = label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"),
-		 XV_WLAY_RIGHTOF);
-    add_widgetl (ui->op_dlg, ui->file_label[0] = label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"), 
-		 XV_WLAY_NEXTROW);
+    add_widget (ui->op_dlg, ui->file_string[1] = label_new (4, FCOPY_GAUGE_X, sixty, "fs-l-1"));
+    add_widget (ui->op_dlg, ui->file_label[1] = label_new (4, FCOPY_LABEL_X, fifteen, "fs-l-2"));
+    add_widget (ui->op_dlg, ui->file_string[0] = label_new (3, FCOPY_GAUGE_X, sixty, "fs-x-1"));
+    add_widget (ui->op_dlg, ui->file_label[0] = label_new (3, FCOPY_LABEL_X, fifteen, "fs-x-2"));
 
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */
@@ -583,43 +571,40 @@ static struct
 	int   ypos, xpos;	
 	int   value;		/* 0 for labels */
 	char* tkname;
-	WLay  layout;
 }
 rd_widgets [] =
 {
 	{N_("Target file \"%s\" already exists!"),
-	                 3,      4,  0,              "target-e",   XV_WLAY_CENTERROW},
-	{N_("&Abort"),   BY + 3, 25, REPLACE_ABORT,  "abort",      XV_WLAY_CENTERROW},
+	                 3,      4,  0,              "target-e"    },
+	{N_("&Abort"),   BY + 3, 25, REPLACE_ABORT,  "abort"       },
 	{N_("if &Size differs"),
-	                 BY + 1, 28, REPLACE_SIZE,   "if-size",    XV_WLAY_RIGHTOF},
-	{N_("non&E"),    BY,     47, REPLACE_NEVER,  "none",       XV_WLAY_RIGHTOF},
-	{N_("&Update"),  BY,     36, REPLACE_UPDATE, "update",     XV_WLAY_RIGHTOF},
-	{N_("al&L"),     BY,     28, REPLACE_ALWAYS, "all",        XV_WLAY_RIGHTOF},
+	                 BY + 1, 28, REPLACE_SIZE,   "if-size"     },
+	{N_("non&E"),    BY,     47, REPLACE_NEVER,  "none"        },
+	{N_("&Update"),  BY,     36, REPLACE_UPDATE, "update"      },
+	{N_("al&L"),     BY,     28, REPLACE_ALWAYS, "all"         },
 	{N_("Overwrite all targets?"),
-	                 BY,     4,  0,              "over-label", XV_WLAY_CENTERROW},
-	{N_("&Reget"),   BY - 1, 28, REPLACE_REGET,  "reget",      XV_WLAY_RIGHTOF},
-	{N_("ap&Pend"),  BY - 2, 45, REPLACE_APPEND, "append",     XV_WLAY_RIGHTOF},
-	{N_("&No"),      BY - 2, 37, REPLACE_NO,     "no",         XV_WLAY_RIGHTOF},
-	{N_("&Yes"),     BY - 2, 28, REPLACE_YES,    "yes",        XV_WLAY_RIGHTOF},
+	                 BY,     4,  0,              "over-label"  },
+	{N_("&Reget"),   BY - 1, 28, REPLACE_REGET,  "reget"       },
+	{N_("ap&Pend"),  BY - 2, 45, REPLACE_APPEND, "append"      },
+	{N_("&No"),      BY - 2, 37, REPLACE_NO,     "no"          },
+	{N_("&Yes"),     BY - 2, 28, REPLACE_YES,    "yes"         },
 	{N_("Overwrite this target?"),
-	                 BY - 2, 4,  0,              "overlab",    XV_WLAY_CENTERROW},
+	                 BY - 2, 4,  0,              "overlab"     },
 	{N_("Target date: %s, size %d"),
-	                 6,      4,  0,              "target-date",XV_WLAY_CENTERROW},
+	                 6,      4,  0,              "target-date" },
 	{N_("Source date: %s, size %d"),
-	                 5,      4,  0,              "source-date",XV_WLAY_CENTERROW}
+	                 5,      4,  0,              "source-date" }
 }; 
 
 #define ADD_RD_BUTTON(i)\
-	add_widgetl (ui->replace_dlg,\
+	add_widget (ui->replace_dlg,\
 		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
-		NORMAL_BUTTON, rd_widgets [i].text, 0, 0, rd_widgets [i].tkname), \
-		rd_widgets [i].layout)
+		NORMAL_BUTTON, rd_widgets [i].text, 0, 0, rd_widgets [i].tkname))
 
 #define ADD_RD_LABEL(ui,i,p1,p2)\
 	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
-	add_widgetl (ui->replace_dlg,\
-		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname),\
-		rd_widgets [i].layout)
+	add_widget (ui->replace_dlg,\
+		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer, rd_widgets [i].tkname))
 
 static void
 init_replace (FileOpContext *ctx, enum OperationMode mode)
@@ -803,23 +788,23 @@ static QuickWidget fmd_widgets [] = {
 #define	FMCB11 1
 	/* follow symlinks and preserve Attributes must be the first */
     { quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-      0 /* &op_preserve */, 0, XV_WLAY_BELOWCLOSE, "preserve" },
+      0 /* &op_preserve */, 0, "preserve" },
     { quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0, 
-      0 /* &file_mask_op_follow_links */, 0, XV_WLAY_BELOWCLOSE, "follow" },
-    { quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, XV_WLAY_BELOWOF,"to"},
+      0 /* &file_mask_op_follow_links */, 0, "follow" },
+    { quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0,"to"},
     { quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0, 
-      0 /* &source_easy_patterns */, 0, XV_WLAY_BELOWCLOSE, "using-shell" },
+      0 /* &source_easy_patterns */, 0, "using-shell" },
     { quick_input, 3, 64, 3, FMDY, "", 58, 
-      0, 0, 0, XV_WLAY_BELOWCLOSE, "input-def" },
+      0, 0, 0, "input-def" },
 #define FMDI1 4
 #define FMDI2 5
 #define FMDC 3
     { quick_input, 3, 64, 6, FMDY, "", 58, 0, 
-      0, 0, XV_WLAY_BELOWCLOSE, "input2" },
+      0, 0, "input2" },
 #define FMDI0 6	  
-    { quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, XV_WLAY_DONTCARE, "ql" },
+    { quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, "ql" },
 #define	FMBRGT 7
-    { quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE,
+    { quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	  "cancel" },
 #undef SKIP
 #ifdef WITH_BACKGROUND
@@ -828,7 +813,7 @@ static QuickWidget fmd_widgets [] = {
 # define FMCB22 10
 # define FMBLFT 9
 # define FMBMID 8
-    { quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0, XV_WLAY_DONTCARE, "back" },
+    { quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0, "back" },
 #else /* WITH_BACKGROUND */
 # define SKIP 4
 # define FMCB21 10
@@ -836,11 +821,11 @@ static QuickWidget fmd_widgets [] = {
 # define FMBLFT 8
 # undef  FMBMID
 #endif
-    { quick_button, 14, 64, 9, FMDY, N_("&Ok"), 0, B_ENTER, 0, 0, XV_WLAY_NEXTROW, "ok" },
+    { quick_button, 14, 64, 9, FMDY, N_("&Ok"), 0, B_ENTER, 0, 0, "ok" },
     { quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-      0 /* &file_mask_stable_symlinks */, 0, XV_WLAY_BELOWCLOSE, "stab-sym" },
+      0 /* &file_mask_stable_symlinks */, 0, "stab-sym" },
     { quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0, 0, 
-      0 /* &dive_into_subdirs */, 0, XV_WLAY_BELOWOF, "dive" },
+      0 /* &dive_into_subdirs */, 0, "dive" },
     { 0 } };
 
 void

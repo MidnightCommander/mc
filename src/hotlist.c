@@ -610,8 +610,7 @@ static void init_hotlist (int list_type)
 
     for (i = 0; i < BUTTONS; i++){
 	if (hotlist_but[i].type & list_type)
-	    add_widgetl (hotlist_dlg, button_new (XTRACT (i)), (i == BUTTONS - 1) ?
-		XV_WLAY_CENTERROW : XV_WLAY_RIGHTOF);
+	    add_widget (hotlist_dlg, button_new (XTRACT (i)));
     }
 #undef XTRACT
 
@@ -640,7 +639,7 @@ static void init_hotlist (int list_type)
     } else
 	fill_listbox ();
 
-    add_widgetl (hotlist_dlg, l_hotlist, XV_WLAY_EXTENDWIDTH); 
+    add_widget (hotlist_dlg, l_hotlist); 
     /* add listbox to the dialogs */
 }
 
@@ -663,8 +662,7 @@ static void init_movelist (int list_type, struct hotlist *item)
 
     for (i = 0; i < BUTTONS; i++){
 	if (hotlist_but[i].type & list_type)
-	    add_widgetl (movelist_dlg, button_new (XTRACT (i)), (i == BUTTONS - 1) ?
-		XV_WLAY_CENTERROW : XV_WLAY_RIGHTOF);
+	    add_widget (movelist_dlg, button_new (XTRACT (i)));
     }
 
 #undef	XTRACT
@@ -683,7 +681,7 @@ static void init_movelist (int list_type, struct hotlist *item)
 
     fill_listbox ();
 
-    add_widgetl (movelist_dlg, l_movelist, XV_WLAY_EXTENDWIDTH); 
+    add_widget (movelist_dlg, l_movelist); 
     /* add listbox to the dialogs */
 }
 
@@ -799,19 +797,19 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), 0, B_CANCEL, 
-	  0, 0, XV_WLAY_DONTCARE, "button-cancel" },
+	  0, 0, "button-cancel" },
     { quick_button, 30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), 0, B_INSERT, 
-	  0, 0, XV_WLAY_DONTCARE, "button-insert" },
+	  0, 0, "button-insert" },
     { quick_button, 10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), 0, B_APPEND, 
-	  0, 0, XV_WLAY_DONTCARE, "button-append" },
+	  0, 0, "button-append" },
     { quick_input,  4, 80, RELATIVE_Y_INPUT_PTH, 0, "",58, 0, 
-	  0, 0, XV_WLAY_BELOWCLOSE, "input-pth" },
+	  0, 0, "input-pth" },
     { quick_label, RELATIVE_Y_LABEL_PTH, 80, 3, 0, 0, 0, 0, 
-	  0, 0, XV_WLAY_DONTCARE, "label-pth" },
+	  0, 0, "label-pth" },
     { quick_input,  4, 80, 3, 0, "", 58, 0, 
-	  0, 0, XV_WLAY_BELOWCLOSE, "input-lbl" },
+	  0, 0, "input-lbl" },
     { quick_label,  3, 80, 2, 0, 0, 0, 0, 
-	  0, 0, XV_WLAY_DONTCARE, "label-lbl" },
+	  0, 0, "label-lbl" },
     { 0 } };
     
     int len;
@@ -896,13 +894,13 @@ static int add_new_group_input (char *header, char *label, char **result)
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  XV_WLAY_DONTCARE, "button-cancel" },
+	  "button-cancel" },
     { quick_button, 30, 80, 1, 0, N_("&Insert"), 0, B_INSERT, 0, 0,
-	  XV_WLAY_DONTCARE, "button-insert" },
+	  "button-insert" },
     { quick_button, 10, 80, 1, 0, N_("&Append"), 0, B_APPEND, 0, 0,
-	  XV_WLAY_DONTCARE, "button-append" },
-    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input" },
-    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
+	  "button-append" },
+    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" },
+    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, "label" },
     { 0 } };
     int relative_y[] = {1, 1, 1, 0, 2}; /* the relative_x component from the
                                            quick_widgets variable above */

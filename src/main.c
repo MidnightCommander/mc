@@ -2169,8 +2169,8 @@ setup_panels_and_run_mc ()
     add_widget (midnight_dlg, the_hint);
 #endif /* HAVE_X */
     load_hint ();
-    add_widgetl (midnight_dlg, cmdline, XV_WLAY_RIGHTOF);
-    add_widgetl (midnight_dlg, the_prompt, XV_WLAY_DONTCARE);
+    add_widget (midnight_dlg, cmdline);
+    add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);
 
     if (boot_current_is_left){

@@ -196,13 +196,12 @@ static void init_panelize (void)
 #define XTRACT(i) BY+panelize_but[i].y, BX+panelize_but[i].x, panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, 0, 0, panelize_but[i].tkname
 
     for (i = 0; i < BUTTONS; i++)
-	add_widgetl (panelize_dlg, button_new (XTRACT (i)), (i == BUTTONS - 1) ?
-	    XV_WLAY_CENTERROW : XV_WLAY_RIGHTOF);
+	add_widget(panelize_dlg, button_new (XTRACT (i)));
 
     pname = input_new (UY+14, UX, INPUT_COLOR, panelize_dlg->cols-10, "", "in");
-    add_widgetl (panelize_dlg, pname, XV_WLAY_RIGHTOF);
+    add_widget (panelize_dlg, pname);
 
-    add_widgetl (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"), XV_WLAY_NEXTROW);
+    add_widget (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"));
 
     /* get new listbox */
     l_panelize = listbox_new (UY + 1, UX + 1, panelize_dlg->cols-12, 10, 0, l_call, "li");
@@ -213,7 +212,7 @@ static void init_panelize (void)
     }
 
     /* add listbox to the dialogs */
-    add_widgetl (panelize_dlg, l_panelize, XV_WLAY_EXTENDWIDTH); 
+    add_widget (panelize_dlg, l_panelize); 
 
     listbox_select_entry (l_panelize, 
         listbox_search_text (l_panelize, _("Other command")));

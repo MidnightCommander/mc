@@ -108,13 +108,12 @@ static void drive_cmd()
 	    for (i = 0; i < nDrivesAvail - MAX_LGH; i++) {
 		p -= 4;
 		sprintf(szTempBuf, "&%c", *p);
-		add_widgetl(drive_dlg,
+		add_widget (drive_dlg,
 		    button_new (5,
 			(m_drv-i-1)*2+4 - (MAX_LGH*2 - nDrivesAvail) * 2,
 			B_DRIVE_BASE + nDrivesAvail - i - 1,
 			HIDDEN_BUTTON,
-			szTempBuf, 0, NULL, NULL),
-		    XV_WLAY_RIGHTOF);
+			szTempBuf, 0, NULL, NULL));
 		}
 	}
 
@@ -122,10 +121,9 @@ static void drive_cmd()
     for (i = 0; i < m_drv; i++) {
     	p -= 4;
     	sprintf (szTempBuf, "&%c", *p);
-	    add_widgetl(drive_dlg,
+	    add_widget (drive_dlg,
 		button_new (3, (m_drv-i-1)*2+4, B_DRIVE_BASE+m_drv-i-1,
-		HIDDEN_BUTTON, szTempBuf, 0, NULL, NULL),
-		XV_WLAY_RIGHTOF);
+		HIDDEN_BUTTON, szTempBuf, 0, NULL, NULL));
     }
 
     run_dlg(drive_dlg);   

@@ -44,7 +44,6 @@ typedef struct {
     int  value;			/* Buttons only: value of button */
     int  *result;		/* Checkbutton: where to store result */
     char **str_result;		/* Input lines: destination  */
-    WLay layout;		/* XView Layouting stuff */
     char *tkname;		/* Name of the widget used for Tk only */
     void *the_widget;		/* For the quick quick dialog manager */
 } QuickWidget;

@@ -64,57 +64,57 @@ void edit_options_dialog (void)
     {
 /*0 */
 	{quick_button, 6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), 0, B_CANCEL, 0,
-	 0, XV_WLAY_DONTCARE, NULL},
+	 0, NULL},
 /*1 */
 	{quick_button, 2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Ok"), 0, B_ENTER, 0,
-	 0, XV_WLAY_DONTCARE, NULL},
+	 0, NULL},
 /*2 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 4, OPT_DLG_H, N_("Word wrap line length : "), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*3 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 4, OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0,
-	 0, 0, XV_WLAY_DONTCARE, "i"},
+	 0, 0, "i"},
 /*4 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H, N_("Tab spacing : "), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*5 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0,
-	 0, 0, XV_WLAY_DONTCARE, "i"},
+	 0, 0, "i"},
 /*6 */
 #if !defined(MIDNIGHT) || defined(HAVE_SYNTAXH)
 #define OA 1
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, N_("synta&X highlighting"), 8, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 #else
 #define OA 0
 #endif
 /*7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 8, OPT_DLG_H, N_("confir&M before saving"), 6, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*8 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9, OPT_DLG_H, N_("fill tabs with &Spaces"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*9 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10, OPT_DLG_H, N_("&Return does autoindent"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*10 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 11, OPT_DLG_H, N_("&Backspace through tabs"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*11 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 12, OPT_DLG_H, N_("&Fake half tabs"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*12 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 6, OPT_DLG_H, "", 3, 0,
-	 0, wrap_str, XV_WLAY_DONTCARE, "wrapm"},
+	 0, wrap_str, "wrapm"},
 /*13 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, N_("Wrap mode"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 /*14 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 11, OPT_DLG_H, "", 2, 0,
-       0, key_emu_str, XV_WLAY_DONTCARE, "keyemu"},
+       0, key_emu_str, "keyemu"},
 /*15 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 12, OPT_DLG_H, N_("Key emulation"), 0, 0,
-	 0, 0, XV_WLAY_DONTCARE, NULL},
+	 0, 0, NULL},
 	{0}};
 
     static int i18n_flag = 0;

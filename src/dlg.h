@@ -111,40 +111,6 @@ typedef struct Dlg_head {
 #endif
 } Dlg_head;
 
-/* XView widget layout */
-
-typedef enum { 
-    XV_WLAY_DONTCARE, /* Place the widget wherever it is reasonable */
-    
-    XV_WLAY_RIGHTOF,  /* Place the widget to the right of the last widget
-		       * created - note: add_widget creates widgets from
-		       *  the last to the first one.
-		       */
-    
-    XV_WLAY_BELOWOF,  /* Place it in a column like style */
-    
-    XV_WLAY_BELOWCLOSE,/* The same, but without any gap between them */
-    
-    XV_WLAY_NEXTROW,  /* Place it on the left margin with Y bellow all the
-		       * previous widgets
-		       */
-    
-    XV_WLAY_CENTERROW,/* The same as previous, but when the dialog is
-		       * ready to show, tries to center that row of widgets
-		       */
-    
-    XV_WLAY_NEXTCOLUMN, /* Place it on the top margin with X behind all the
-		       * previous widgets
-		       */
-		       
-    XV_WLAY_RIGHTDOWN, /* Place the widget to the right of the last one with
-    		        * y set so that both y + h and yold + hold are equal.
-    		          This is usefull if the previous widget was a radio,
-    		          which has multiple lines */
-    XV_WLAY_EXTENDWIDTH  /* Like nextrow, but later on tries to extend the widget
-                          * to fit in the frame (only for PANEL_LIST) */
-} WLay;
-
 /* Every Widget must have this as it's first element */
 typedef struct Widget {
     int x, y;
@@ -169,7 +135,6 @@ typedef struct Widget {
         AREA_BOTTOM
     } area; /* Used by X platforms, should stay here always because the size
                of this structure has to be same everywhere :) */
-    WLay  layout;
 } Widget;
 
 /* The options for the widgets */
@@ -208,7 +173,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 #define DLG_CENTER       1	/* Center the dialog */
 #define DLG_NONE         0	/* No options */
 int  add_widget           (Dlg_head *dest, void *Widget);
-int  add_widgetl          (Dlg_head *dest, void *Widget, WLay layout);
 int  remove_widget        (Dlg_head *dest, void *Widget);
 int  destroy_widget       (Widget *w);
 

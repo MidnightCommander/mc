@@ -206,37 +206,35 @@ static void init_configure (void)
 
     x_set_dialog_title (conf_dlg, _("Configure options"));
 
-    add_widgetl (conf_dlg,
-	button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "button-cancel"),
-	XV_WLAY_RIGHTOF);
+    add_widget (conf_dlg,
+	button_new (BY, b3, B_CANCEL, NORMAL_BUTTON,
+		    cancel_button, 0, 0, "button-cancel"));
 
-    add_widgetl (conf_dlg,
-	button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "button-save"),
-	XV_WLAY_RIGHTOF);
+    add_widget (conf_dlg,
+	button_new (BY, b2, B_EXIT, NORMAL_BUTTON,
+		    save_button, 0, 0, "button-save"));
     
-    add_widgetl (conf_dlg,
-        button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "button-ok"),
-        XV_WLAY_CENTERROW);
+    add_widget (conf_dlg,
+        button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON,
+		    ok_button, 0, 0, "button-ok"));
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options [i].tk
 
     /* Add all the checkboxes */
     for (i = 0; i < 13; i++){
 	check_options [i].widget = check_new (OY + (13-i), OX+2, XTRACT(i));
-	add_widgetl (conf_dlg, check_options [i].widget,
-	    XV_WLAY_BELOWCLOSE);
+	add_widget (conf_dlg, check_options [i].widget);
     }
 
     pause_radio = radio_new (RY+1, RX+2, 3, pause_options, 1, "pause-radio");
     pause_radio->sel = pause_after_run;
 #ifndef HAVE_GNOME
-    add_widgetl (conf_dlg, pause_radio, XV_WLAY_BELOWCLOSE);
+    add_widget (conf_dlg, pause_radio);
 #endif
     for (i = 0; i < 6; i++){
 	check_options [i+13].widget = check_new (PY + (6-i), PX+2,
 						  XTRACT(i+13));
-	add_widgetl (conf_dlg, check_options [i+13].widget,
-	    XV_WLAY_BELOWCLOSE);
+	add_widget (conf_dlg, check_options [i+13].widget);
     }
 }
 

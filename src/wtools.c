@@ -286,8 +286,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	destroy_dlg (query_dlg);
     } else {
 #ifdef HAVE_X
-	add_widgetl (query_dlg, button_new(0, 0, B_EXIT, NORMAL_BUTTON, _("&Ok"), 0, 0, NULL),
-	    XV_WLAY_CENTERROW);
+	add_widget (query_dlg, button_new(0, 0, B_EXIT, NORMAL_BUTTON,
+					  _("&Ok"), 0, 0, NULL));
 
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
 #ifdef HAVE_TK
@@ -511,7 +511,7 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 	}
 	qw->the_widget = widget;
-	add_widgetl (dd, widget, qw->layout);
+	add_widget (dd, widget);
     }
 
     while (nskip--)
@@ -559,11 +559,11 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
     { quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  XV_WLAY_RIGHTOF, "button-cancel" },
+	  "button-cancel" },
     { quick_button, 3, 10, 1, 0, N_("&Ok"), 0, B_ENTER, 0, 0,
-	  XV_WLAY_CENTERROW, "button-ok" },
-    { quick_input,  4, 80, 0, 0, "", 58, 0, 0, 0, XV_WLAY_NEXTROW, 0 },
-    { quick_label,  3, 80, 2, 0, "", 0, 0, 0, 0, XV_WLAY_NEXTROW, "label" },
+	  "button-ok" },
+    { quick_input,  4, 80, 0, 0, "", 58, 0, 0, 0, 0 },
+    { quick_label,  3, 80, 2, 0, "", 0, 0, 0, 0, "label" },
     { 0 } };
     
     int len;

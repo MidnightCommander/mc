@@ -455,15 +455,12 @@ static void init_layout (void)
 			     
     x_set_dialog_title (layout_dlg, _("Layout"));
 
-    add_widgetl (layout_dlg,
-		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "c"), 
-		XV_WLAY_RIGHTOF);
-    add_widgetl (layout_dlg,
-		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "s"),
-		XV_WLAY_RIGHTOF);
-    add_widgetl (layout_dlg,
-		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "o"),
-		XV_WLAY_CENTERROW);
+    add_widget (layout_dlg,
+		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "c"));
+    add_widget (layout_dlg,
+		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "s"));
+    add_widget (layout_dlg,
+		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "o"));
 #ifndef HAVE_X
     if (console_flag){
 	add_widget (layout_dlg,
@@ -479,12 +476,12 @@ static void init_layout (void)
 
     for (i = 0; i < 6; i++){
 	check_options [i].widget = check_new (8 - i, 7 + first_width, XTRACT(i));
-	add_widgetl (layout_dlg, check_options [i].widget, XV_WLAY_BELOWCLOSE);
+	add_widget (layout_dlg, check_options [i].widget);
     }
     check_options [8].widget = check_new (10, 6, XTRACT(8));
-    add_widgetl (layout_dlg, check_options [8].widget, XV_WLAY_BELOWCLOSE);
+    add_widget (layout_dlg, check_options [8].widget);
     check_options [7].widget = check_new (9, 6, XTRACT(7));
-    add_widgetl (layout_dlg, check_options [7].widget, XV_WLAY_BELOWCLOSE);
+    add_widget (layout_dlg, check_options [7].widget);
 
     _filetype_mode = filetype_mode;
     _permission_mode = permission_mode;
@@ -496,9 +493,9 @@ static void init_layout (void)
     _xterm_hintbar = xterm_hintbar;
 #ifndef HAVE_X
     bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0, ">");
-    add_widgetl (layout_dlg, bright_widget, XV_WLAY_RIGHTOF);
+    add_widget (layout_dlg, bright_widget);
     bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0, "<");
-    add_widgetl (layout_dlg, bleft_widget, XV_WLAY_RIGHTOF);
+    add_widget (layout_dlg, bleft_widget);
     check_options [6].widget = check_new (5, 6, XTRACT(6));
 #endif
     old_first_panel_size = -1;

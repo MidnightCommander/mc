@@ -239,7 +239,7 @@ static void init_chmod (void)
 	if (i == 2 && single_set)
 	    break;
 	else
-	    add_widgetl (ch_dlg, button_new (XTRACT (i)), XV_WLAY_RIGHTOF);
+	    add_widget (ch_dlg, button_new (XTRACT (i)));
     }
 
 
