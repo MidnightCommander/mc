@@ -1,5 +1,8 @@
 2000-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* main.c [HAVE_GNOME]: disable chmod and chown - they were
+	broken and obsoleted by the "Properties" dialog
+
 	* cmd.c [HAVE_X]: Removed dependency on status_using_ncurses
 
 	* man2hlp.c: Removed undocumented feature - when converting

@@ -1289,6 +1289,7 @@ static menu_entry RightMenu [] = {
     { ' ', N_("&Rescan         C-r"),    'R', reread_cmd }
 };
 
+#ifndef HAVE_GNOME
 static menu_entry FileMenu [] = {
     { ' ', N_("&User menu          F2"), 'U', user_file_menu_cmd },
     { ' ', N_("&View               F3"), 'V', view_cmd },
@@ -1315,6 +1316,7 @@ static menu_entry FileMenu [] = {
     { ' ', "", ' ', 0 },
     { ' ', N_("e&Xit              F10"), 'X', (callfn) quit_cmd }
 };
+#endif
 
 void external_panelize (void);
 static menu_entry CmdMenu [] = {
@@ -1740,10 +1742,12 @@ static const key_map ctl_x_map [] = {
     { XCTRL('p'),   copy_other_pathname },
     { 't',          copy_current_tagged },
     { XCTRL('t'),   copy_other_tagged },
-#endif
     { 'c',          chmod_cmd },
+#endif
 #ifndef OS2_NT
+#ifndef HAVE_GNOME
     { 'o',          chown_cmd },
+#endif
     { 'l',          link_cmd },
     { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
