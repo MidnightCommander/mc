@@ -259,6 +259,10 @@ static void sfs_free (vfsid id)
 	prev->next = cur->next;
     else
 	head = cur->next;
+
+    g_free (cur->cache);
+    g_free (cur->name);
+    g_free (cur);
 }
 
 static void sfs_fill_names (vfs *me, void (*func)(char *))
@@ -295,7 +299,7 @@ static int sfs_init (vfs *me)
     char *mc_sfsini;
     FILE *cfg;
 
-    mc_sfsini = concat_dir_and_file (mc_home, "extfs/sfs.ini");
+    mc_sfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
     cfg = fopen (mc_sfsini, "r");
 
     if (!cfg){

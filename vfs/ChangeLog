@@ -1,3 +1,8 @@
+2002-07-03  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* sfs.c (sfs_free): Fix memory leak.
+	(sfs_init): Use PATH_SEP_STR.
+
 2002-07-03  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (cpio_open_cpio_file): Fix type initialization.
