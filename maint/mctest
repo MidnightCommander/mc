@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# This is a testsuite for GNU Midnight Commander.
+# Maintainer doing the release must ensure that this testsuite passes.
+
+set -e
+
+# Default configuration
+make distcheck
+
+# Maximal code coverage
+make distcheck with_screen=mcslang enable_charset=yes with_samba=yes \
+     with_tm_x_support=yes with_mcfs=yes with_included_gettext=yes
+
+# Minimal code coverage
+make distcheck enable_largefile=no enable_nls=no with_vfs=no \
+     with_gpm_mouse=no with_subshell=no with_edit=no with_ext2undel=no \
+     with_screen=ncurses
+
+# Experimental and rarely used options
+make distcheck with_glib2=yes with_screen=mcslang with_termcap=yes \
+     with_mmap=no with_subshell=optional
