@@ -1,3 +1,8 @@
+2001-11-27  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Support "Home" and "End" sequences in xterm from
+	XFree86 4.1.0.
+
 2001-11-16  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* doc/mcedit.1.in: Fix help file location.

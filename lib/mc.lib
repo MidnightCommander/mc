@@ -83,8 +83,10 @@ delete=\e[3~
 bs=
 home=\e[1~
 home=\e[7~
+end=\eOF
 end=\e[4~
 end=\e[8~
+home=\eOH
 pgdn=\e[6~
 pgup=\e[5~
 
@@ -115,8 +117,10 @@ delete=\e[3~
 bs=
 home=\e[1~
 home=\e[7~
+home=\eOH
 end=\e[4~
 end=\e[8~
+end=\eOF
 pgdn=\e[6~
 pgup=\e[5~
 
