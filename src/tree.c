@@ -752,11 +752,12 @@ void show_tree (WTree *tree)
 	if (current->sublevel == topsublevel){
 
 	    /* Top level directory */
-	    if (tree->active && current == tree->selected_ptr)
+	    if (tree->active && current == tree->selected_ptr) {
 		if (!use_colors && !tree->is_panel)
 			attrset (MARKED_COLOR);
 		else
 			attrset (SELECTED_COLOR);
+	    }
 
 	    /* Show full name */
 	    addstr (name_trunc (current->name, tree_cols - 6));
@@ -783,12 +784,13 @@ void show_tree (WTree *tree)
 	    addch (ACS_HLINE);
 	    noacs ();
 	    
-	    if (tree->active && current == tree->selected_ptr)
+	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */
 		if (!use_colors && !tree->is_panel)
 		    attrset (MARKED_COLOR);
 		else
 		    attrset (SELECTED_COLOR);
+	    }
 
 	    /* Show sub-name */
 	    addch (' ');
