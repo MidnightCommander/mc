@@ -1,3 +1,14 @@
+1998-12-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gcmd.c: #include "../vfs/vfs.h"
+
+	* gdesktop.c (setup_icon_dnd_actions): Moved the code that calls
+	gtk_drag_source_set() for an icon here.
+	(editing_started): Temporarily disable drags while the icon's text
+	is being edited.
+	(editing_stopped): Re-enable DnD from the icon once editing has
+	stopped.
+
 1998-12-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcmd.c (gnome_close_panel): When a panel is destroyed, chdir to
