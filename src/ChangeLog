@@ -1,5 +1,8 @@
 2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* Makefile.am (mc.hlp.ru): Use mc.1 instead of mc.1.in.
+	(mc.hlp): Likewise.
+
 	* file.c (copy_file_file): Chmod destination only if
 	ctx->preserve is on.  Eliminate gotos.
 
@@ -8,6 +11,7 @@
 	* Makefile.am (mc.hlp.ru): New rule to compile translated
 	help file.
 	(mclib_DATA): Add mc.hlp.ru.
+	(EXTRA_DIST): Likewise.
 
 	* gindex.pl: Add optional 4th argument for translated
 	Content section name.
