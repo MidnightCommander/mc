@@ -1,3 +1,8 @@
+Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+
+	* edit.h: added "../" before some includes to avoid unnecessary
+	"-I" options for the PC port makefiles.
+
 Sun Aug  9 22:39:12 1998  Janne Kukonlehto  <jtklehto@paju.oulu.fi>
 
 	* mad.h (calloc): Added parentheses around the arguments as
