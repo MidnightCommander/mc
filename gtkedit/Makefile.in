@@ -36,7 +36,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	cd $(top_builddir) && CONFIG_FILES=gtkedit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 .c.o:
-	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DGTK $<
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DHAVE_X -DHAVE_GNOME -DGTK $<
 
 check:
 	@echo no tests are supplied.

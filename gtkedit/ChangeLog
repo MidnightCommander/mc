@@ -1,5 +1,8 @@
 2001-05-31  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Define HAVE_X and HAVE_GNOME, not just GTK -
+	header files are using them.
+
 	* editdraw.c (edit_render) [GTK]: Revert previous patch, it
 	broke compilation.
 
