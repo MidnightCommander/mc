@@ -1,3 +1,8 @@
+1999-01-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* option.c (init_configure): One line patch from Alexander
+	Savelyev to transalate all strings.
+
 1999-01-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* file.c: Killed operation_names: they seemed same to op_names to

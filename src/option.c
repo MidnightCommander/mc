@@ -157,7 +157,7 @@ static void init_configure (void)
 		title3 = _(" Other options ");
 
 		first_width = strlen (title1) + 1;
-		for (i = 13; i < 18; i++)
+		for (i = 13; i < 19; i++)
 		{
 			check_options[i].text = _(check_options[i].text);
 			l1 = strlen (check_options[i].text) + 7;
