@@ -593,12 +593,13 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 		mc_stat (fp_dlg->file_name, &linkstat);
 
 	finish = 0;
-	if (!S_ISREG (fp_dlg->st.st_mode))
-		finish = 1;
-
-	if (S_ISLNK (fp_dlg->st.st_mode))
-		if (!S_ISREG (linkstat.st_mode))
+	if (!S_ISREG (fp_dlg->st.st_mode)){
+		if (S_ISLNK (fp_dlg->st.st_mode)){
+			if (!S_ISREG (linkstat.st_mode))
+				finish = 1;
+		} else
 			finish = 1;
+	}
 
 	if (finish){
 		if (!fp_dlg->can_set_icon) {
