@@ -379,8 +379,8 @@ void check_error_pipe (void)
             FD_SET (error_pipe[0], &select_set);
             timeout.tv_sec = 0;
             timeout.tv_usec = 0;
-            select (FD_SETSIZE, &select_set, 0, 0, &timeout);
-            if (!FD_ISSET (0, &select_set))
+            select (error_pipe[0] + 1, &select_set, 0, 0, &timeout);
+            if (!FD_ISSET (error_pipe[0], &select_set))
 		break;
 	    read (error_pipe[0], error + len, 1);
 	    len ++;
