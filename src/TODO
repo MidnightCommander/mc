@@ -204,7 +204,7 @@
 
   - Add an overlap when going up or down in the file list.
 
-  - In the user menu, don't use the entries array, we can now grow
+ ++ In the user menu, don't use the entries array, we can now grow
     dynamically.  I should take a look at this one day, it's easy to
     fix.
 

@@ -45,16 +45,11 @@
 
 /* "$Id$" */
 
-#define MAX_ENTRIES 40
+#define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
 
-static char *data;
-static char *entries [MAX_ENTRIES];
-static int max_cols;
-static int menu_lines;
 static int debug_flag = 0;
 static int debug_error = 0;
-extern char *search_string (char *, char *);
 
 /* Formats defined:
    %%  The % character
@@ -148,11 +143,11 @@ int check_format_var (const char *p, char **v)
 	var_name [dots-2 - (p+3)] = 0;
 
 	value = getenv (var_name);
+	g_free (var_name);
 	if (value){
 	    *v = g_strdup (value);
 	    return q-p;
 	}
-	g_free (var_name);
 	var_name = g_malloc (q - dots + 1);
 	strncpy (var_name, dots, q - dots + 1);
 	var_name [q-dots] = 0;
@@ -181,11 +176,7 @@ char *expand_format (char c, int quote)
 {
     WPanel *panel;
     char *(*quote_func)(const char *, int);
-    
-    if (quote)
-	quote_func = name_quote;
-    else
-	quote_func = fake_name_quote;
+    char *fname;
 
     if (c == '%')
 	return g_strdup ("%");
@@ -193,25 +184,28 @@ char *expand_format (char c, int quote)
     if (islower (c))
 	panel = cpanel;
     else {
-	if (get_other_type () == view_listing){
-	    panel = other_panel;
-	} else
+	if (get_other_type () != view_listing)
 	    return g_strdup ("");
+	panel = other_panel;
     }
     if (!panel)
 	panel = cpanel;
 
+    if (quote)
+	quote_func = name_quote;
+    else
+	quote_func = fake_name_quote;
+
     c = tolower (c);
+    fname = panel->dir.list [panel->selected].fname;
     
     switch (c){
     case 'f': 
-    case 'p': return (*quote_func) (panel->dir.list [panel->selected].fname, 0);
-    case 'b':
-	return strip_ext((*quote_func) (panel->dir.list [panel->selected].fname, 0));
+    case 'p': return (*quote_func) (fname, 0);
+    case 'b': return strip_ext((*quote_func) (fname, 0));
     case 'd': return (*quote_func) (panel->cwd, 0);
-    case 's':
-	if (!panel->marked)
-	    return (*quote_func) (panel->dir.list [panel->selected].fname, 0);
+    case 's': if (!panel->marked)
+		return (*quote_func) (fname, 0);
 
 	/* Fall through */
 
@@ -482,20 +476,24 @@ static char *test_line (char *p, int *result)
 
 /* FIXME: recode this routine on version 3.0, it could be cleaner */
 static void
-execute_menu_command (char *s)
+execute_menu_command (char *commands)
 {
-    char *commands;
     FILE *cmd_file;
     int  cmd_file_fd;
     int  expand_prefix_found = 0;
-    int parameter_found = 0;
-    int do_quote;
-    char prompt [80] = "";
+    char *parameter = 0;
+    int  do_quote;
+    char prompt [80];
     int  col;
     char *file_name;
 #ifdef OS2_NT
     char *p;
 #endif
+    /* Skip menu entry title line */
+    commands = strchr (commands, '\n');
+    if (!commands){
+	return;
+    }
 
     if ((file_name = tempnam (NULL, "mcusr")) == 0) {
 	message (1, MSG_ERROR, _(" Can't generate unique filename \n %s "),
@@ -516,29 +514,22 @@ execute_menu_command (char *s)
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
-    commands = strchr (s, '\n');
-    if (!commands){
-	fclose (cmd_file);
-	unlink (file_name);
-        free (file_name);
-	return;
-    }
     commands++;
     
     for (col = 0; *commands; commands++){
-	if (col == 0 && (*commands != ' ' && *commands != '\t'))
-	    break;
-        else if (col == 0)
+	if (col == 0) {
+	    if (*commands != ' ' && *commands != '\t')
+		break;
 	    while (*commands == ' ' || *commands == '\t')
 	        commands++;
+	}
 	col++;
 	if (*commands == '\n')
 	    col = 0;
-	if (parameter_found){
+	if (parameter){
 	    if (*commands == '}'){
-		char *parameter;
 		char *tmp;
-		parameter_found = 0;
+		*parameter = 0;
 		parameter = input_dialog (_(" Parameter "), prompt, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
@@ -553,24 +544,21 @@ execute_menu_command (char *s)
 		} else
 		    fputs (parameter, cmd_file);
 		g_free (parameter);
+		parameter = 0;
 	    } else {
-		int len = strlen (prompt);
-
-		if (len+1 < sizeof (prompt)){
-		    prompt [len] = *commands;
-		    prompt [len+1] = 0;
-		} else
-		    prompt [sizeof (prompt)-1] = 0;
+		if (parameter < &prompt [sizeof (prompt) - 1]) {
+		    *parameter++ = *commands;
+		} 
 	    }
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
 	    if (isdigit (*commands)) {
 		do_quote = atoi (commands);
-		for ( ; isdigit (*commands); commands++)
-		    ;	    
+		while (isdigit (*commands))
+		    commands++;
 	    }
 	    if (*commands == '{')
-		parameter_found = 1;
+		parameter = prompt;
 	    else{
 		char *text = expand_format (*commands, do_quote);
 		fputs (text, cmd_file);
@@ -601,31 +589,30 @@ execute_menu_command (char *s)
 static int
 menu_file_own(char* path)
 {
-	struct stat st;
+    struct stat st;
 
-	if (stat (path, &st) == 0
-		&& (!st.st_uid || (st.st_uid == geteuid ()))
-		&& ((st.st_mode & (S_IWGRP | S_IWOTH)) == 0)
-	) {
-		return 1;
-	}
-	else
-	{
-		if (verbose)
-		{
-			message (0, _(" Warning -- ignoring file "),
-				 _("File %s is not owned by root or you or is world writable.\n"
-				   "Using it may compromise your security"),
-				path
-			);
-		}
-		return 0;
-	}
+    if (stat (path, &st) == 0
+	&& (!st.st_uid || (st.st_uid == geteuid ()))
+	&& ((st.st_mode & (S_IWGRP | S_IWOTH)) == 0)
+    ) {
+	return 1;
+    }
+    if (verbose)
+    {
+	message (0, _(" Warning -- ignoring file "),
+		    _("File %s is not owned by root or you or is world writable.\n"
+		    "Using it may compromise your security"),
+		path
+	);
+    }
+    return 0;
 }
 
 void user_menu_cmd (void)
 {
     char *menu, *p;
+    char *data, **entries;
+    int  max_cols, menu_lines, menu_limit;
     int  col, i, accept_entry = 1;
     int  selected, old_patterns;
     Listbox *listbox;
@@ -654,14 +641,28 @@ void user_menu_cmd (void)
     }
     
     max_cols = 0;
-    for (i = 0; i < MAX_ENTRIES; i++)
-	entries [i] = 0;
     selected = 0;
+    menu_limit = 0;
+    entries = 0;
 
     /* Parse the menu file */
     old_patterns = easy_patterns;
     p = check_patterns (data);
     for (menu_lines = col = 0; *p; p++){
+	if (menu_lines >= menu_limit){
+	    char ** new_entries;
+	    
+	    menu_limit += MAX_ENTRIES;
+	    new_entries = g_realloc (entries, sizeof (new_entries[0]) * menu_limit);
+
+	    if (new_entries == 0)
+		break;
+
+	    entries = new_entries;
+	    new_entries += menu_limit;
+	    while (--new_entries >= &entries[menu_lines])
+		*new_entries = 0;
+	}
 	if (col == 0 && !entries [menu_lines]){
 	    if (*p == '#'){
 		/* A commented menu entry */
@@ -669,9 +670,7 @@ void user_menu_cmd (void)
 	    } else if (*p == '+'){
 		if (*(p+1) == '='){
 		    /* Combined adding and default */
-		    char *q = p++;
-		    
-		    p = test_line (q, &accept_entry);
+		    p = test_line (p, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
@@ -680,9 +679,8 @@ void user_menu_cmd (void)
 		}
 	    } else if (*p == '='){
 		if (*(p+1) == '+'){
-		    char *q = p++;
 		    /* Combined adding and default */
-		    p = test_line (q, &accept_entry);
+		    p = test_line (p, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
@@ -701,11 +699,6 @@ void user_menu_cmd (void)
 		    accept_entry = 1;
 	    }
 	}
-	if (menu_lines == MAX_ENTRIES)
-	    break;
-	if (*p == '\t')
-	    *p = ' ';
-	col++;
 	if (*p == '\n'){
 	    if (entries [menu_lines]){
 		menu_lines++;
@@ -713,11 +706,20 @@ void user_menu_cmd (void)
 	    }
 	    max_cols = max (max_cols, col);
 	    col = 0;
+	} else {
+	    if (*p == '\t')
+		*p = ' ';
+	    col++;
 	}
     }
     if (menu_lines == 0) {
+	g_free (data);
+	if (entries)
+	    g_free (entries);
+	/* FIXME: this message is not quite right */
 	message (1, MSG_ERROR, _(" Empty file %s "), menu);
-        g_free (menu);
+	g_free (menu);
+	easy_patterns = old_patterns;
 	return;
     }
     g_free (menu);
@@ -727,14 +729,13 @@ void user_menu_cmd (void)
     /* Create listbox */
     listbox = create_listbox_window (max_cols+2, menu_lines, _(" User menu "),
 				     "[Menu File Edit]");
-    
     /* insert all the items found */
-    for (i = 0; i < menu_lines; i++)
-	LISTBOX_APPEND_TEXT (listbox, (unsigned char)entries [i][0],
-			     extract_line (entries [i],
-					   entries [i]+MAX_ENTRY_LEN),
-			     entries [i]);
-
+    for (i = 0; i < menu_lines; i++) {
+	p = entries [i];
+	LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
+			     extract_line (p, p + MAX_ENTRY_LEN), p
+			    );
+    }
     /* Select the default entry */
     listbox_select_by_number (listbox->list, selected);
     
@@ -744,5 +745,6 @@ void user_menu_cmd (void)
 
     easy_patterns = old_patterns;
     do_refresh ();
+    g_free (entries);
     g_free (data);
 }
