@@ -2214,10 +2214,8 @@ msgstr "Cercant"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " El format del fitxer d'ajuda és erroni\n"
-""
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "

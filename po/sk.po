@@ -2207,10 +2207,8 @@ msgstr "Hľadanie"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " Chyba vo formáte súboru pomocníka\n"
-" "
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "

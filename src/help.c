@@ -275,7 +275,9 @@ static char *help_follow_link (char *start, char *selected_item)
 	if (p)
 	    return p;
     }
-    return _(" Help file format error\n\x4");	/*  */
+
+    /* Create a replacement page with the error message */
+    return _(" Help file format error\n");
 }
 
 static char *select_next_link (char *start, char *current_link)

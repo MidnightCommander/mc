@@ -2195,10 +2195,8 @@ msgstr "正在搜索"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " 帮助文件格式错误\n"
-""
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "

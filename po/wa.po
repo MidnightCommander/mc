@@ -2223,10 +2223,8 @@ msgstr "Dji cwîr"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " Ene sacwè ni va nén el cogne do fitchî d' aidance\n"
-""
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "

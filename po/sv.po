@@ -2238,10 +2238,8 @@ msgstr "Söker"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " Fel i hjälpfilens format\n"
-""
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "

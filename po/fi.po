@@ -2168,7 +2168,6 @@ msgstr ""
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 
 #: src/help.c:317

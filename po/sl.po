@@ -2209,10 +2209,8 @@ msgstr "Iščem"
 #: src/help.c:278
 msgid ""
 " Help file format error\n"
-""
 msgstr ""
 " Napaka v načinu zapisa datoteke s pomočjo\n"
-""
 
 #: src/help.c:317
 msgid " Internal bug: Double start of link area "
