@@ -45,6 +45,7 @@
 #include "view.h"
 #include "main.h"
 #include "../vfs/vfs.h"
+#include "x.h"
 
 #include "cons.saver.h"
 #include "layout.h"
@@ -105,21 +106,22 @@ static void
 exec_extension (char *filename, char *data, char **drops, int *move_dir, int start_line)
 {
     char *file_name;
+    int  cmd_file_fd;
     FILE *cmd_file;
     int  expand_prefix_found = 0;
-    int parameter_found = 0;
+    int  parameter_found = 0;
     char prompt [80];
-    int run_view = 0;
-    int def_hex_mode = default_hex_mode, changed_hex_mode = 0;
-    int def_nroff_flag = default_nroff_flag, changed_nroff_flag = 0;
-    int written_nonspace = 0;
-    int is_cd = 0;
+    int  run_view = 0;
+    int  def_hex_mode = default_hex_mode, changed_hex_mode = 0;
+    int  def_nroff_flag = default_nroff_flag, changed_nroff_flag = 0;
+    int  written_nonspace = 0;
+    int  is_cd = 0;
     char buffer [1024];
     char *p = 0;
     char *localcopy = NULL;
+    int  do_local_copy;
     time_t localmtime = 0;
     struct stat mystat;
-    int    do_local_copy;
     quote_func_t quote_func = name_quote;
 
     /* Avoid making a local copy if we are doing a cd */
@@ -133,11 +135,14 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
      */
     file_name = strdup (tmpnam (NULL));
 
-    if ((cmd_file = fopen (file_name, "w+")) == NULL){
+    if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
+    cmd_file = fdopen (cmd_file_fd, "w");
+    fprintf (cmd_file, "#!%s\n", shell);
+	     
     prompt [0] = 0;
     for (;*data && *data != '\n'; data++){
 	if (parameter_found){
@@ -270,28 +275,29 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
     	q[1] = 0;
     	do_cd (p, cd_parse_command);
     } else {
-	shell_execute (file_name, 1);
-
-    if (console_flag)
+	shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
+	if (console_flag)
 	{
-		handle_console (CONSOLE_SAVE);
+	    handle_console (CONSOLE_SAVE);
 	    if (output_lines && keybar_visible)
-		{
-			show_console_contents (output_start_y,
+	    {
+		show_console_contents (output_start_y,
 				       LINES-keybar_visible-output_lines-1,
 				       LINES-keybar_visible-1);
-			
-		}
+		
+	    }
 	}
-
+	
 #ifdef OLD_CODE
 	if (vfs_current_is_local ())
-	    shell_execute (file_name, 1);
+	    shell_execute (file_name, EXECUTE_INTERNAL);
 	else
 	    message (1, _(" Warning "), _(" Can't execute commands on a Virtual File System directory "));
 #endif
     }
+#ifndef PORT_DOES_BACKGROUND_EXEC
     unlink (file_name);
+#endif
     if (localcopy) {
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);

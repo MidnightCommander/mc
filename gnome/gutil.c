@@ -49,7 +49,7 @@
 #include <gdk/gdkprivate.h>
 #include "util.h"
 
-int my_system_get_child_pid (int as_shell_command, const char *shell, const char *command, pid_t *pid)
+int my_system_get_child_pid (int flags, const char *shell, const char *command, pid_t *pid)
 {
 	struct sigaction ignore, save_intr, save_quit, save_stop;
 	int status = 0, i;
@@ -72,13 +72,27 @@ int my_system_get_child_pid (int as_shell_command, const char *shell, const char
 
 		for (i = 3; i < top; i++)
 			close (i);
-	
-		if (as_shell_command)
-			execl (shell, shell, "-c", command, (char *) 0);
-		else
-			execlp (shell, shell, command, (char *) 0);
 
-		_exit (127);		/* Exec error */
+		*pid = fork ();
+		if (*pid == 0){
+			if (flags & EXECUTE_AS_SHELL)
+				execl (shell, shell, "-c", command, (char *) 0);
+			else
+				execlp (shell, shell, command, (char *) 0);
+			/* See note below for why we use _exit () */
+			_exit (127);		/* Exec error */
+		} else {
+			int status;
+			
+			waitpid (*pid, &status, 0);
+			if (flags & EXECUTE_TEMPFILE)
+				unlink (command);
+		}
+		/* We need to use _exit instead of exit to avoid
+		 * calling the atexit handlers (specifically the gdk atexit
+		 * handler
+		 */
+		_exit (0);
 	}
 	sigaction (SIGINT,  &save_intr, NULL);
 	sigaction (SIGQUIT, &save_quit, NULL);
@@ -91,11 +105,11 @@ int my_system_get_child_pid (int as_shell_command, const char *shell, const char
 	return WEXITSTATUS(status);
 }
 
-int my_system (int as_shell_command, const char *shell, const char *command)
+int my_system (int flags, const char *shell, const char *command)
 {
 	pid_t pid;
 	
-	return my_system_get_child_pid (as_shell_command, shell, command, &pid);
+	return my_system_get_child_pid (flags, shell, command, &pid);
 }
 
 int

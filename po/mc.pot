@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-22 01:04:36-0500\n"
+"Date: 1998-04-23 14:33:00-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -63,7 +63,7 @@ msgid " Save As "
 msgstr ""
 
 #. Warning message with a query to continue or cancel the operation
-#: edit/editcmd.c:407 edit/editcmd.c:714 edit/editcmd.c:726 edit/editcmd.c:827 edit/editcmd.c:910 gnome/gdesktop.c:1256 src/ext.c:291 src/help.c:320 src/main.c:683 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:373 src/utilunix.c:377 src/utilunix.c:443
+#: edit/editcmd.c:407 edit/editcmd.c:714 edit/editcmd.c:726 edit/editcmd.c:827 edit/editcmd.c:910 gnome/gdesktop.c:1258 src/ext.c:295 src/help.c:320 src/main.c:683 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
 msgid " Warning "
 msgstr ""
 
@@ -141,7 +141,7 @@ msgstr ""
 msgid " Save file "
 msgstr ""
 
-#: edit/editcmd.c:687 edit/editwidget.c:911 src/view.c:1983
+#: edit/editcmd.c:687 edit/editwidget.c:911 src/view.c:1982
 msgid "Save"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid " Replace "
 msgstr ""
 
 #. Heads the 'Search' dialog box
-#: edit/editcmd.c:1111 edit/editcmd.c:1287 edit/editcmd.c:1943 src/view.c:1470 src/view.c:1560 src/view.c:1682 src/view.c:1878 src/view.c:1910
+#: edit/editcmd.c:1111 edit/editcmd.c:1287 edit/editcmd.c:1943 src/view.c:1469 src/view.c:1559 src/view.c:1681 src/view.c:1877 src/view.c:1909
 msgid " Search "
 msgstr ""
 
@@ -304,11 +304,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1961 gnome/gcmd.c:94 gnome/gdesktop.c:1071 src/cmd.c:241 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
+#: edit/editcmd.c:1961 gnome/gcmd.c:94 gnome/gdesktop.c:1073 src/cmd.c:241 src/file.c:2116 src/file.c:2469 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1961 gnome/gcmd.c:94 gnome/gdesktop.c:1071 src/cmd.c:241 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:411
+#: edit/editcmd.c:1961 gnome/gcmd.c:94 gnome/gdesktop.c:1073 src/cmd.c:241 src/file.c:2116 src/file.c:2466 src/file.c:2549 src/hotlist.c:1027 src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&No"
 msgstr ""
 
@@ -342,7 +342,7 @@ msgstr ""
 msgid " Cut to clipboard "
 msgstr ""
 
-#: edit/editcmd.c:2220 edit/editcmd.c:2222 src/view.c:1851
+#: edit/editcmd.c:2220 edit/editcmd.c:2222 src/view.c:1850
 msgid " Goto line "
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:910 gnome/glayout.c:358 src/help.c:812 src/main.c:1670 src/screen.c:2194 src/screen.c:2228 src/tree.c:1451 src/view.c:1978
+#: edit/editwidget.c:910 gnome/glayout.c:358 src/help.c:812 src/main.c:1670 src/screen.c:2194 src/screen.c:2228 src/tree.c:1451 src/view.c:1977
 msgid "Help"
 msgstr ""
 
@@ -773,11 +773,11 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: edit/editwidget.c:916 gnome/gview.c:291 gnome/gview.c:315 src/view.c:1991
+#: edit/editwidget.c:916 gnome/gview.c:291 gnome/gview.c:315 src/view.c:1990
 msgid "Search"
 msgstr ""
 
-#: edit/editwidget.c:917 gnome/gdesktop.c:968 gnome/glayout.c:282 src/screen.c:2201 src/screen.c:2235
+#: edit/editwidget.c:917 gnome/gdesktop.c:970 gnome/glayout.c:282 src/screen.c:2201 src/screen.c:2235
 msgid "Delete"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "PullDn"
 msgstr ""
 
-#: edit/editwidget.c:920 gnome/gview.c:286 src/help.c:824 src/main.c:1673 src/view.c:1980 src/view.c:2000
+#: edit/editwidget.c:920 gnome/gview.c:286 src/help.c:824 src/main.c:1673 src/view.c:1979 src/view.c:1999
 msgid "Quit"
 msgstr ""
 
@@ -805,7 +805,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/achown.c:72 src/boxes.c:139 src/boxes.c:274 src/boxes.c:371 src/boxes.c:458 src/boxes.c:637 src/boxes.c:758 src/boxes.c:800 src/chmod.c:115 src/chown.c:81 src/cmd.c:833 src/file.c:1953 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: src/achown.c:72 src/boxes.c:139 src/boxes.c:274 src/boxes.c:371 src/boxes.c:458 src/boxes.c:637 src/boxes.c:758 src/boxes.c:800 src/chmod.c:115 src/chown.c:81 src/cmd.c:833 src/file.c:1953 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr ""
 
@@ -1525,50 +1525,50 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: src/ext.c:137 src/user.c:506
+#: src/ext.c:139 src/user.c:506
 msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:147 src/user.c:532
+#: src/ext.c:152 src/user.c:532
 msgid " Parameter "
 msgstr ""
 
-#: src/ext.c:291
+#: src/ext.c:295
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr ""
 
-#: src/ext.c:386
+#: src/ext.c:392
 msgid " file error"
 msgstr ""
 
-#: src/ext.c:387
+#: src/ext.c:393
 msgid "Format of the "
 msgstr ""
 
-#: src/ext.c:405
+#: src/ext.c:411
 msgid " file error "
 msgstr ""
 
-#: src/ext.c:406
+#: src/ext.c:412
 msgid "Format of the ~/"
 msgstr ""
 
-#: src/ext.c:406
+#: src/ext.c:412
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
 
-#: src/ext.c:408
+#: src/ext.c:414
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
 
-#: src/ext.c:410
+#: src/ext.c:416
 msgid "mc.ext will be used for this moment."
 msgstr ""
 
@@ -2056,7 +2056,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: src/find.c:526 src/view.c:1470
+#: src/find.c:526 src/view.c:1469
 msgid "Searching %s"
 msgstr ""
 
@@ -2539,7 +2539,7 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1069 src/main.c:836 src/screen.c:1981
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1071 src/main.c:836 src/screen.c:1981
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -3142,7 +3142,7 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1070 src/screen.c:1982
+#: gnome/gdesktop.c:1072 src/screen.c:1982
 msgid " Do you really want to execute? "
 msgstr ""
 
@@ -3150,7 +3150,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: src/screen.c:2197 src/screen.c:2231 src/view.c:1987
+#: src/screen.c:2197 src/screen.c:2231 src/view.c:1986
 msgid "Edit"
 msgstr ""
 
@@ -3292,153 +3292,153 @@ msgstr ""
 msgid "name_trunc: too big"
 msgstr ""
 
-#: src/utilunix.c:373
+#: src/utilunix.c:374
 msgid " Pipe failed "
 msgstr ""
 
-#: src/utilunix.c:377
+#: src/utilunix.c:378
 msgid " Dup failed "
 msgstr ""
 
-#: src/view.c:408
+#: src/view.c:407
 msgid ""
 "File: \n"
 "\n"
 "    "
 msgstr ""
 
-#: src/view.c:409
+#: src/view.c:408
 msgid ""
 "\n"
 "\n"
 "has been modified, do you want to save the changes?\n"
 msgstr ""
 
-#: src/view.c:411
+#: src/view.c:410
 msgid " Save changes "
 msgstr ""
 
-#: src/view.c:453
+#: src/view.c:452
 msgid " Can't spawn child program "
 msgstr ""
 
-#: src/view.c:463
+#: src/view.c:462
 msgid " Empty output from child filter "
 msgstr ""
 
-#: src/view.c:469
+#: src/view.c:468
 msgid " Could not open file "
 msgstr ""
 
-#: src/view.c:487
+#: src/view.c:486
 msgid " Can't open file \""
 msgstr ""
 
-#: src/view.c:495
+#: src/view.c:494
 msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
 
-#: src/view.c:501
+#: src/view.c:500
 msgid " Can't view: not a regular file "
 msgstr ""
 
-#: src/view.c:521
+#: src/view.c:520
 msgid " Can not fetch local copy "
 msgstr ""
 
-#: src/view.c:704
+#: src/view.c:703
 msgid "File: %s"
 msgstr ""
 
-#: gnome/gview.c:119 src/view.c:709
+#: gnome/gview.c:119 src/view.c:708
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: gnome/gview.c:121 src/view.c:711
+#: gnome/gview.c:121 src/view.c:710
 msgid "Col %d"
 msgstr ""
 
-#: gnome/gview.c:125 src/view.c:715
+#: gnome/gview.c:125 src/view.c:714
 msgid "%s bytes"
 msgstr ""
 
-#: src/view.c:720
+#: src/view.c:719
 msgid "  [grow]"
 msgstr ""
 
-#: src/view.c:1560 src/view.c:1682
+#: src/view.c:1559 src/view.c:1681
 msgid " Search string not found "
 msgstr ""
 
-#: src/view.c:1721
+#: src/view.c:1720
 msgid " Invalid regular expression "
 msgstr ""
 
-#: src/view.c:1849
+#: src/view.c:1848
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
 
-#: src/view.c:1878
+#: src/view.c:1877
 msgid " Enter regexp:"
 msgstr ""
 
-#: src/view.c:1910
+#: src/view.c:1909
 msgid " Enter search string:"
 msgstr ""
 
-#: src/view.c:1981
+#: src/view.c:1980
 msgid "Ascii"
 msgstr ""
 
-#: gnome/gview.c:308 src/view.c:1981
+#: gnome/gview.c:308 src/view.c:1980
 msgid "Hex"
 msgstr ""
 
-#: src/view.c:1982
+#: src/view.c:1981
 msgid "Line"
 msgstr ""
 
-#: src/view.c:1983
+#: src/view.c:1982
 msgid "RxSrch"
 msgstr ""
 
-#: src/view.c:1986
+#: src/view.c:1985
 msgid "EdText"
 msgstr ""
 
-#: src/view.c:1986
+#: src/view.c:1985
 msgid "EdHex"
 msgstr ""
 
-#: src/view.c:1988
+#: src/view.c:1987
 msgid "UnWrap"
 msgstr ""
 
-#: gnome/gview.c:300 src/view.c:1988
+#: gnome/gview.c:300 src/view.c:1987
 msgid "Wrap"
 msgstr ""
 
-#: src/view.c:1991
+#: src/view.c:1990
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:1994
+#: src/view.c:1993
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:1994
+#: src/view.c:1993
 msgid "Parse"
 msgstr ""
 
-#: src/view.c:1998
+#: src/view.c:1997
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:1998
+#: src/view.c:1997
 msgid "Format"
 msgstr ""
 
@@ -3661,19 +3661,19 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: gnome/gdesktop.c:961 gnome/gscreen.c:365
+#: gnome/gdesktop.c:963 gnome/gscreen.c:365
 msgid "Properties"
 msgstr ""
 
-#: gnome/gdesktop.c:1080
+#: gnome/gdesktop.c:1082
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1081 gnome/gscreen.c:321
+#: gnome/gdesktop.c:1083 gnome/gscreen.c:321
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1256
+#: gnome/gdesktop.c:1258
 msgid " Could not open %s directory"
 msgstr ""
 

@@ -1,3 +1,14 @@
+1998-04-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (do_execute), utilunix.c (my_system), gutil.c, ext.c:
+	Changed the way we execute programs.  Now a new set of flags exist
+	that indicates how the execution is done.  In ports that execute
+	by sending the process to background, when executing temporary
+	files, we have to remove the files after the child process has
+	finished executing the code not after the calling do_execute.
+
+	* ext.c (exec_extension): Create temporary file exclusively.
+
 Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* configure.in: Don't try to link MC against SLang >= 1.0. I will 
