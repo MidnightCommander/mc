@@ -133,25 +133,7 @@ void menu_save_mode_cmd (void);
 int edit_raw_key_query (const char *heading, const char *query, int cancel);
 int edit_file (const char *_file, int line);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
-
-#ifndef NO_INLINE_GETBYTE
 int edit_get_byte (WEdit * edit, long byte_index);
-#else
-static inline int edit_get_byte (WEdit * edit, long byte_index)
-{
-    unsigned long p;
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-	return '\n';
-
-    if (byte_index >= edit->curs1) {
-	p = edit->curs1 + edit->curs2 - byte_index - 1;
-	return edit->buffers2[p >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1];
-    } else {
-	return edit->buffers1[byte_index >> S_EDIT_BUF_SIZE][byte_index & M_EDIT_BUF_SIZE];
-    }
-}
-#endif
-
 int edit_count_lines (WEdit * edit, long current, int upto);
 long edit_move_forward (WEdit * edit, long current, int lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);

@@ -91,8 +91,6 @@ char *option_backup_ext = "~";
 static void edit_move_to_prev_col (WEdit *edit, long p);
 static void user_menu (WEdit *edit);
 
-#ifndef NO_INLINE_GETBYTE
-
 int edit_get_byte (WEdit * edit, long byte_index)
 {
     unsigned long p;
@@ -106,9 +104,6 @@ int edit_get_byte (WEdit * edit, long byte_index)
 	return edit->buffers1[byte_index >> S_EDIT_BUF_SIZE][byte_index & M_EDIT_BUF_SIZE];
     }
 }
-
-#endif
-
 
 /*
  * Initialize the buffers for an empty files.

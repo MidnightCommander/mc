@@ -1,3 +1,10 @@
+2005-01-30  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Removed NO_INLINE_GETBYTE conditional. The name was
+	misleading, as it really meant INLINE_GETBYTE. Furthermore,
+	it has not been working since the split of edit.h into edit-widget.h.
+	* edit.c: Likewise.
+
 2005-01-26  Roland Illig  <roland.illig@gmx.de>
 
 	* editdraw.c (edit_status): Fixed drawing bug with ncurses.
