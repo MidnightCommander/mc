@@ -563,10 +563,9 @@ void
 tree_store_remove_entry(char *name)
 {
     tree_entry *current, *base, *old;
-    int len, base_sublevel;
+    int len;
 
     g_return_if_fail(name != NULL);
-    g_return_if_fail(ts.check_name != NULL);
 
     /* Miguel Ugly hack */
     if (name[0] == PATH_SEP && name[1] == 0)
@@ -576,11 +575,6 @@ tree_store_remove_entry(char *name)
     base = tree_store_whereis(name);
     if (!base)
 	return;			/* Doesn't exist */
-
-    if (ts.check_name[0] == PATH_SEP && ts.check_name[1] == 0)
-	base_sublevel = base->sublevel;
-    else
-	base_sublevel = base->sublevel + 1;
 
     len = strlen(base->name);
     current = base->next;

@@ -1,5 +1,8 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* treestore.c (tree_store_remove_entry): Don't use ts.check_name
+	and don't check it.
+
 	* treestore.c: Remove unused code, reformat.
 	* treestore.h: Remove unused declarations.
 
