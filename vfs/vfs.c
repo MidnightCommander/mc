@@ -897,6 +897,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
             mc_def_ungetlocalcopy (vfs, path, local, has_changed);
     g_free (path);
+    g_free (local);
     return return_value;
 }
 
