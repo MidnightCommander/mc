@@ -148,7 +148,7 @@ typedef struct {
     int timer_id;
     int drag_motion_x;
     int drag_motion_y;
-    
+    void *panel_listbox;	/* container for the list */
 #endif
     void *corbadat;
 } WPanel;

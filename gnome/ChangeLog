@@ -1,5 +1,16 @@
 1999-01-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (x_reset_sort_labels): Various fixes to fix some of my
+	recent changes.  I bet Jonathan found that things were not quite
+	working.  Sorry for the previous untested changes.
+
+	This also fixes the bugs reported on gnome-list regarding the
+	CList problems.  This is the correct fix (basically, we were using
+	a CList that was configured in one way, even if the display format
+	had changed.  Now, the CList is kept in sync with the format by
+	calling a routine that somehow got dropped during some recent
+	changes).
+
 	* gtools.c (query_dialog): Simplified.  
 
 1999-01-02  Jonathan Blandford  <jrb@redhat.com>

@@ -1396,12 +1396,8 @@ panel_switch_new_display_mode (WPanel *panel)
 
 	panel->list = panel_create_file_list (panel);
 	gtk_widget_destroy (old_list);
-	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
-			  0, 0);
-	gtk_widget_show (panel->list);
-	panel_update_contents (panel);
+	gtk_container_add (GTK_CONTAINER (panel->panel_listbox), panel->list);
+	gtk_widget_show_all (panel->list);
 }
 
 static GtkWidget *
@@ -2070,8 +2066,7 @@ do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
 		return;
 	panel->list_type = list_icons;
 	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	panel_update_contents (panel);
 }
 
 static void
@@ -2081,9 +2076,9 @@ do_switch_to_brief_listing (GtkWidget *widget, WPanel *panel)
 		return;
 	panel->list_type = list_brief;
 	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	panel_update_contents (panel);
 }
+
 static void
 do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
 {
@@ -2091,9 +2086,9 @@ do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
 		return;
 	panel->list_type = list_full;
 	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	panel_update_contents (panel);
 }
+
 static void
 do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
 {
@@ -2101,8 +2096,7 @@ do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
 		return;
 	panel->list_type = list_user;
 	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	panel_update_contents (panel);
 }
 
 static GtkWidget *
@@ -2159,6 +2153,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_widget_show (panel->notebook);
 	
 	panel->icons = panel_create_icon_display (panel);
+	gtk_widget_show (panel->icons);
 	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
 	gtk_widget_show (panel->scrollbar);
 
@@ -2169,9 +2164,15 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	box = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (box), panel->icons, TRUE, TRUE, 0);
 	gtk_box_pack_end (GTK_BOX (box), panel->scrollbar, FALSE, TRUE, 0);
+	gtk_widget_show (box);
+	
+	panel->panel_listbox = gtk_event_box_new ();
+	gtk_widget_show (panel->panel_listbox);
+	gtk_container_add (GTK_CONTAINER (panel->panel_listbox), panel->list);
 
+	
 	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), box, NULL);
-	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), panel->list, NULL);
+	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), panel->panel_listbox, NULL);
 	gtk_notebook_set_page (GTK_NOTEBOOK (panel->notebook), panel->list_type == list_icons ? 0 : 1);
 	gtk_widget_show_all (box);
 	gtk_widget_show (panel->list);
@@ -2409,12 +2410,18 @@ paint_frame (WPanel *panel)
 void
 x_reset_sort_labels (WPanel *panel)
 {
+	int page;
+		
 	if (!panel->notebook)
 		return;
 
-	gtk_notebook_set_page (
-		GTK_NOTEBOOK (panel->notebook),
-		panel->list_type == list_icons ? 0 : 1);
+	if (panel->list_type == list_icons){
+		page = 0;
+	} else {
+		page = 1;
+		panel_switch_new_display_mode (panel);
+	}
+	gtk_notebook_set_page (GTK_NOTEBOOK (panel->notebook), page);
 }
 
 /* Releases all of the X resources allocated */
