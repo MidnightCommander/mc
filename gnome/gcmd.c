@@ -89,7 +89,7 @@ gnome_about_cmd (void)
 	};
 
         about = gnome_about_new (_("GNU Midnight Commander"), VERSION,
-				 "(C) 1994-1998 the Free Software Fundation",
+				 "Copyright 1994-1999 the Free Software Foundation",
 				 authors,
 				 _("The GNOME edition of the Midnight Commander file manager."),
 				 NULL);
