@@ -3647,7 +3647,7 @@ msgstr " Uzstâdîðana "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 
@@ -3734,14 +3734,14 @@ msgstr ""
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 
@@ -3750,7 +3750,7 @@ msgid " Parameter "
 msgstr ""
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 
 #: src/ext.c:415
@@ -4239,7 +4239,7 @@ msgid " with source mask:"
 msgstr ""
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr ""
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4553,7 +4553,7 @@ msgid " Internal bug: Double start of link area "
 msgstr ""
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr ""
 
 #: src/help.c:741
@@ -4563,7 +4563,7 @@ msgstr ""
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Nevar atvçrt datni %s \n"
@@ -4571,7 +4571,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr ""
 
 #: src/help.c:808
@@ -5763,7 +5763,7 @@ msgstr ""
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 
@@ -5792,7 +5792,7 @@ msgstr ""
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 
@@ -5809,7 +5809,7 @@ msgstr ""
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 
@@ -5841,7 +5841,7 @@ msgstr ""
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 
@@ -5944,7 +5944,7 @@ msgid " Save changes "
 msgstr " Glabât izmaiòas "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr ""
 
 #: src/view.c:458
@@ -5956,30 +5956,30 @@ msgid " Could not open file "
 msgstr ""
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr ""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr ""
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 
@@ -6639,17 +6639,17 @@ msgstr " Nepareiza parole "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nevar atrast hostdatoru: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nevar izveidot kontaktu: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nevar savienoties ar serveri: %s "
 
 #: vfs/mcfs.c:320

@@ -368,7 +368,7 @@ static void array_promote(char *array,int elsize,int element)
 
   if (!p)
     {
-      DEBUG(5,("Ahh! Can't malloc\n"));
+      DEBUG(5,("Ahh! Cannot malloc\n"));
       return;
     }
   memcpy(p,array + element * elsize, elsize);

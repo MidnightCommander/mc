@@ -3277,7 +3277,7 @@ msgstr " Фоновые задания "
 
 #: src/charsets.c:173 src/charsets.c:186
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Невозможно перекодировать из %s в %s"
 
 #: src/chmod.c:90
@@ -3678,7 +3678,7 @@ msgstr " Настройка "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Невозможно перейти в '%s' \n"
@@ -3773,7 +3773,7 @@ msgstr "Неизвестный"
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Невозможно создать временный командный файл \n"
@@ -4226,7 +4226,7 @@ msgid " with source mask:"
 msgstr " с исходным шаблоном:"
 
 #: src/file.c:1859
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Невозможно выполнить указанную операцию на \"..\"! "
 
 #: src/file.c:1878 src/screen.c:2103
@@ -4471,7 +4471,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Внутренняя ошибка: Двойное начало области ссылки "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Невозможно найти узел [Contents] в файле помощи "
 
 #: src/help.c:737
@@ -4481,7 +4481,7 @@ msgstr " Помощь "
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Невозможно открыть файл %s \n"
@@ -4489,7 +4489,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Невозможно найти узел %s в файле помощи "
 
 #: src/help.c:813
@@ -5753,7 +5753,7 @@ msgstr " Действие не выполнено "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Невозможно перейти в \"%s\" \n"
@@ -5790,7 +5790,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "Невозможно загрузить %s/%s"
 
 #: src/slint.c:199
@@ -5926,7 +5926,7 @@ msgstr ""
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Невозможно открыть файл %s на запись:\n"
@@ -5945,7 +5945,7 @@ msgstr " Переместить каталог \"%s\" в:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Невозможно получить свойства места назначения \n"
@@ -5979,7 +5979,7 @@ msgstr "УдКтлог"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Невозможно писать в файл %s:\n"
@@ -6095,7 +6095,7 @@ msgid " Save changes "
 msgstr " Сохранить изменения "
 
 #: src/view.c:452
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Невозможно породить дочерний процесс "
 
 #: src/view.c:461
@@ -6107,25 +6107,25 @@ msgid " Could not open file "
 msgstr " Невозможно открыть файл "
 
 #: src/view.c:481
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Невозможно открыть файл \""
 
 #: src/view.c:488
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Невозможно получить свойства файла \n"
 " "
 
 #: src/view.c:494
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Просмотр невозможен: не обычный файл "
 
 #: src/view.c:575
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Невозможно открыть \"%s\"\n"
@@ -6134,7 +6134,7 @@ msgstr ""
 #: src/view.c:584
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Невозможно получить свойства \"%s\"\n"
@@ -6810,17 +6810,17 @@ msgstr " Неверный пароль "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Невозможно определить имя машины: %s"
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Невозможно создать сокет: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "Невозможно соединиться с сервером: %s "
 
 #: vfs/mcfs.c:320

@@ -3331,7 +3331,7 @@ msgstr "Processi in background"
 
 #: src/charsets.c:169 src/charsets.c:182
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Impossibile tradurre da %s a %s"
 
 #: src/chmod.c:90
@@ -3750,7 +3750,7 @@ msgstr " Configurazione "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Non posso entrare in '%s' \n"
@@ -3845,7 +3845,7 @@ msgstr "Sconosciuto"
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 "Non posso creare file comandi temporaneo \n"
@@ -4298,7 +4298,7 @@ msgid " with source mask:"
 msgstr " con maschera sorgente:"
 
 #: src/file.c:1859
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Non posso operare su \"..\"! "
 
 #: src/file.c:1878 src/screen.c:2103
@@ -4543,7 +4543,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Errore interno: Doppio inizio di area di link"
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Non trovo il nodo [Contents] nel file d'aiuto"
 
 #: src/help.c:737
@@ -4553,7 +4553,7 @@ msgstr " Aiuto "
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Non posso aprire il file %s \n"
@@ -4561,7 +4561,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Non trovo il nodo %s nel file d'aiuto "
 
 #: src/help.c:813
@@ -5833,7 +5833,7 @@ msgstr " Nessuna azione intrapresa "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Non posso entrare in `%s' \n"
@@ -5875,7 +5875,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "Non posso caricare %s/%s"
 
 #: src/slint.c:199
@@ -6013,7 +6013,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Non posso aprire il file `%s' in scrittura:\n"
@@ -6032,7 +6032,7 @@ msgstr "Muovi la directory `%s' a:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 "Non posso ottenere informazioni sulla destinazione \n"
@@ -6066,7 +6066,7 @@ msgstr "Elimina"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Non posso scrivere sul file `%s':\n"
@@ -6181,7 +6181,7 @@ msgid " Save changes "
 msgstr " Salva modifiche "
 
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Non posso eseguire il processo figlio "
 
 #: src/view.c:459
@@ -6193,23 +6193,23 @@ msgid " Could not open file "
 msgstr " Non posso aprire il file "
 
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Non posso aprire il file \""
 
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr "Non posso avere informazioni sul file "
 
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Non posso vederlo: non è un file regolare "
 
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Non posso aprire il file %s \n"
@@ -6218,7 +6218,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Non riesco a verificare il file %s \n"
@@ -6894,17 +6894,17 @@ msgstr " Password errata"
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr "Nome host irraggiungibile: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Non riesco a creare il socket: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Non riesco a connettermi al server: %s "
 
 #: vfs/mcfs.c:320

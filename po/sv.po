@@ -3389,7 +3389,7 @@ msgstr "Bakgrundsjobb"
 
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Kan inte översätta från %s till %s"
 
 #: src/chmod.c:91
@@ -3818,7 +3818,7 @@ msgstr " Inställningar "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Kan inte byta katalog till \"%s\" \n"
@@ -3914,7 +3914,7 @@ msgstr "Okänd"
 #: src/ext.c:146 src/user.c:550
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Kan inte skapa temporär kommandofil \n"
@@ -4371,7 +4371,7 @@ msgid " with source mask:"
 msgstr " med källmask:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Kan inte operera på \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2103
@@ -4622,7 +4622,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Intern bugg: Dubbel start av länkarean "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Kan inte hitta nod [Innehåll] i hjälpfilen "
 
 # kontrollera att den finns
@@ -4633,7 +4633,7 @@ msgstr " Hjälp "
 #: src/help.c:768 src/user.c:682
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Kan inte öppna fil %s \n"
@@ -4641,7 +4641,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Kan inte hitta nod %s i hjälpfilen "
 
 #: src/help.c:813
@@ -5926,7 +5926,7 @@ msgstr " Ingen aktion utförd "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Kan inte byta katalog till \"%s\" \n"
@@ -5968,7 +5968,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "Kan inte läsa in %s/%s"
 
 #: src/slint.c:199
@@ -6106,7 +6106,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Kan inte öppna filen %s för skrivning:\n"
@@ -6125,7 +6125,7 @@ msgstr "Flytta \"%s\" katalogen till:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Kan inte inhämta status om destinationen \n"
@@ -6159,7 +6159,7 @@ msgstr "Rmdir"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Kan inte skriva till filen %s:\n"
@@ -6273,7 +6273,7 @@ msgid " Save changes "
 msgstr " Spara ändringar "
 
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Kan inte skapa barnprogram "
 
 #: src/view.c:459
@@ -6285,25 +6285,25 @@ msgid " Could not open file "
 msgstr " Kan inte öppna fil "
 
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Kan inte öppna fil \""
 
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Kan inte inhämta status om fil \n"
 " "
 
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Kan inte visa: inte en vanlig fil "
 
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Kan inte öppna \"%s\"\n"
@@ -6312,7 +6312,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Kan inte inhämta status om \"%s\"\n"
@@ -7001,17 +7001,17 @@ msgstr " Ogiltigt lösenord "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Kan inte hitta värden: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Kan inte skapa uttag: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "Kan inte ansluta till värd: %s"
 
 #: vfs/mcfs.c:320
@@ -7273,13 +7273,13 @@ msgstr "%s: %s: %s %ld bytes överförda"
 #~ msgstr "Radera"
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Kan inte generera unika filnamn \n"
 #~ " %s "
 
-#~ msgid " Can't execute commands on a Virtual File System directory "
+#~ msgid " Cannot execute commands on a Virtual File System directory "
 #~ msgstr " Kan inte exekvera kommandon i en VFS-katalog "
 
 #~ msgid "Using "

@@ -565,7 +565,7 @@ help_index_cmd (Dlg_head *h)
     currentpoint = startpoint = search_string (data, "[Help]") + 1;
 
     if (!(new_item = search_string (data, "[Contents]")))
-	message (1, MSG_ERROR, _(" Can't find node [Contents] in help file "));
+	message (1, MSG_ERROR, _(" Cannot find node [Contents] in help file "));
     else
 	currentpoint = startpoint = new_item + 1;
     selected_item = NULL;
@@ -765,7 +765,7 @@ interactive_display (char *filename, char *node)
 	data = load_mc_home_file ("mc.hlp", &hlpfile);
 
     if (data == NULL){
-	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
+	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "),
 		 hlpfile, unix_error_string (errno));
     }
 
@@ -776,7 +776,7 @@ interactive_display (char *filename, char *node)
 	return;
 
     if (!(main_node = search_string (data, node))){
-	message (1, MSG_ERROR, _(" Can't find node %s in help file "), node);
+	message (1, MSG_ERROR, _(" Cannot find node %s in help file "), node);
 	interactive_display_finish ();
 	return;
     }

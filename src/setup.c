@@ -651,7 +651,7 @@ load_setup (void)
 
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() <= 0 ) {
-	message( 1, MSG_ERROR, _("Can't load %s/%s"), mc_home, CHARSETS_INDEX );
+	message( 1, MSG_ERROR, _("Cannot load %s/%s"), mc_home, CHARSETS_INDEX );
     } else {
 	char cpname[128];
 	load_string( "Misc", "display_codepage", "",

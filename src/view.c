@@ -449,7 +449,7 @@ init_growing_view (WView *view, char *name, char *filename)
 	open_error_pipe ();
 	if ((view->stdfile = popen (name, "r")) == NULL){
 	    close_error_pipe (view->have_frame?-1:1, view->data);
-	    return set_view_init_error (view, _(" Can't spawn child program "));
+	    return set_view_init_error (view, _(" Cannot spawn child program "));
 	}
 
 	/* First, check if filter produced any output */
@@ -478,20 +478,20 @@ static char *load_view_file (WView *view, char *filename)
 {
     if ((view->file = mc_open (filename, O_RDONLY)) < 0){
 	set_view_init_error (view, 0);
-	return ( g_strconcat (_(" Can't open file \""),
+	return ( g_strconcat (_(" Cannot open file \""),
 			      filename, "\"\n ",
 			      unix_error_string (errno), " ", NULL));
     }
     if (mc_fstat (view->file, &view->s) < 0){
 	set_view_init_error (view, 0);
 	close_view_file (view);
-	return  g_strconcat (_(" Can't stat file \n "),
+	return  g_strconcat (_(" Cannot stat file \n "),
 			     unix_error_string (errno), " ", NULL);
     }
     if (S_ISDIR (view->s.st_mode) || S_ISSOCK (view->s.st_mode)
 	|| S_ISFIFO (view->s.st_mode)){
 	close_view_file (view);
-	return set_view_init_error (view, _(" Can't view: not a regular file "));
+	return set_view_init_error (view, _(" Cannot view: not a regular file "));
     }
 
     if (view->s.st_size == 0){
@@ -572,7 +572,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	if ((fd = mc_open(_file, O_RDONLY)) == -1) {
             char tmp[BUF_MEDIUM];
 	    g_snprintf (tmp, sizeof (tmp), 
-                        _(" Can't open \"%s\"\n %s "),
+                        _(" Cannot open \"%s\"\n %s "),
 			_file, unix_error_string (errno));
 	    view->filename = g_strdup (_file);
             error = set_view_init_error (view, tmp);
@@ -581,7 +581,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	if (mc_fstat (fd, &view->s) == -1) {
             char tmp[BUF_MEDIUM];
 	    g_snprintf (tmp, sizeof (tmp), 
-                        _(" Can't stat \"%s\"\n %s "),
+                        _(" Cannot stat \"%s\"\n %s "),
 			_file, unix_error_string (errno));
 	    mc_close(fd);
 	    view->filename = g_strdup (_file);

@@ -3237,7 +3237,7 @@ msgstr "Arxaplan vəzifələri"
 
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "%s %s olaraq çevrilə bilmir"
 
 #: src/chmod.c:91
@@ -3664,7 +3664,7 @@ msgstr " Quruluş "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " '%s' a(ə) keçə bilmirəm \n"
@@ -3759,7 +3759,7 @@ msgstr "Namə'lum"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Müvəqqəti əmr faylı yaradıla bilmir \n"
@@ -3770,7 +3770,7 @@ msgid " Parameter "
 msgstr " Parametr "
 
 #: src/ext.c:310
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " Virtual Fayl Sistemi Qovluğunda əmrlər işə salına bilməz "
 
 #: src/ext.c:410
@@ -4218,7 +4218,7 @@ msgid " with source mask:"
 msgstr " qaynaq maskalı: "
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " \"..\" üstündə əməliyyat aparıla bilmir! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4538,7 +4538,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Daxili bug:  Double start of link area "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " [İçindəkilər] düyümü kömək faylında tapıla bilmədi "
 
 #: src/help.c:737
@@ -4548,7 +4548,7 @@ msgstr " Kömək "
 #: src/help.c:768 src/user.c:678
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " %s faylı açıla bilmadi \n"
@@ -4556,7 +4556,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " %s düyümü kömək faylında tapıla bilmədi"
 
 #: src/help.c:813
@@ -5838,7 +5838,7 @@ msgstr "Mkdir"
 #: src/screen.c:2404 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " \"%s\" qovluğuna keçə bilmirəm \n"
@@ -5876,7 +5876,7 @@ msgstr ""
 
 #: src/setup.c:642
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "%s/%s yüklənə bilmir"
 
 #: src/subshell.c:451
@@ -6005,7 +6005,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "%s faylını yazmaq üçün aça bilmədim :\n"
@@ -6024,7 +6024,7 @@ msgstr "\"%s\"'yi buraya daşı :"
 #: src/tree.c:680
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Buranı stat edə bilmədim \n"
@@ -6058,7 +6058,7 @@ msgstr "Qovluğu sil"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "%s faylına yaza bilmirəm:\n"
@@ -6173,7 +6173,7 @@ msgid " Save changes "
 msgstr " Dəyişiklikləri qeyd et "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Törəmə proqramı başlada bilmədim "
 
 #: src/view.c:458
@@ -6185,25 +6185,25 @@ msgid " Could not open file "
 msgstr " Faylı aça bilmədim "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Faylı aça bilmədim \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Faylı stat edə bilmədim \n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " \"%s\"'yi aça bilmirəm\n"
@@ -6212,7 +6212,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " \"%s\"'yi stat edə bilmədim\n"
@@ -6888,17 +6888,17 @@ msgstr " Səhv verilmiş parol "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Verici adını tapa bilmədim : %s"
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Soketi yarada bilmədim : %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Vericiyə bağlana bilmədim : %s "
 
 #: vfs/mcfs.c:320

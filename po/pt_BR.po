@@ -4493,7 +4493,7 @@ msgstr " Configuração "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Não é possível mudar para '%s' \n"
@@ -4607,7 +4607,7 @@ msgstr "Desconhecido"
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 "Não é possível gerar nome de arquivo\n"
@@ -4617,7 +4617,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 "Impossível criar arquivo de comando temporário \n"
@@ -4630,7 +4630,7 @@ msgstr " Parâmetro "
 
 # src/ext.c:301
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Não é possível  executar comandos em um diretório  de um Sistema de "
 "Arquivos virtual"
@@ -5273,7 +5273,7 @@ msgstr " com máscara de origem:"
 
 # src/file.c:1838
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr "Impossível operar em \"..\"! "
 
 # src/file.c:1857
@@ -5664,7 +5664,7 @@ msgstr " Problema interno: início duplo de área de ligação"
 
 # src/help.c:572
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Impossível achar nó [Conteúdo] no arquivo de ajuda"
 
 # src/help.c:741
@@ -5676,7 +5676,7 @@ msgstr " Ajuda "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Impossível abrir arquivo %s \n"
@@ -5685,7 +5685,7 @@ msgstr ""
 # src/help.c:771
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Impossível achar nó %s no arquivo de ajuda"
 
 # src/help.c:808
@@ -7223,7 +7223,7 @@ msgstr "Mkdir"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Impossível mudar diretório para \"%s\" \n"
@@ -7260,7 +7260,7 @@ msgstr "Alerta: Impossível mudar para %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Impossivel abrir arquivo %s para escrita:\n"
@@ -7282,7 +7282,7 @@ msgstr "Mover diretório \"%s\" para:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Não foi possível testar o destino \n"
@@ -7323,7 +7323,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Impossível escrever para o arquivo %s :\n"
@@ -7455,7 +7455,7 @@ msgstr " Gravar mudanças"
 
 # src/view.c:446
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Impossível trocar programa filho "
 
 # src/view.c:455
@@ -7470,13 +7470,13 @@ msgstr " Impossível abrir arquivo"
 
 # src/view.c:475
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Impossível abrir arquivo \""
 
 # src/view.c:482
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Não foi possível testar o arquivo \n"
@@ -7484,14 +7484,14 @@ msgstr ""
 
 # src/view.c:488
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Impossível visualizar: não é arquivo regular "
 
 # src/help.c:766 src/user.c:640
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Não é possível abrir \"%s\"\n"
@@ -7501,7 +7501,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Não foi possível verificar status de \"%s\"\n"
@@ -8286,18 +8286,18 @@ msgstr " Senha inválida "
 # src/tree.c:692
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Impossível localizar máquina: %s "
 
 # src/screen.c:2312
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Impossível criar soquete: %s"
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Impossível conectar ao servidor: %s"
 
 # vfs/mcfs.c:322

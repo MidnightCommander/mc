@@ -3663,7 +3663,7 @@ msgstr " Configurare "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Nu pot schimba directorul la '%s' \n"
@@ -3758,7 +3758,7 @@ msgstr "Necunoscut"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Nu pot crea un fiºier temporar de comenzi \n"
@@ -3769,7 +3769,7 @@ msgid " Parameter "
 msgstr " Parametru "
 
 #: src/ext.c:310
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Nu se pot executa comenzi pe un director dintr-un Sistem Virtual de Fiºiere "
 
@@ -4319,7 +4319,7 @@ msgid " with source mask:"
 msgstr " cu mascã sursã:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Nu pot opera pe  \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4639,7 +4639,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Eroare internã: Start dublu al zonei de legãturã "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Nu gãsesc nodul [Contents] în fiºierul de ajutor "
 
 #: src/help.c:737
@@ -4649,7 +4649,7 @@ msgstr " Ajutor "
 #: src/help.c:762 src/user.c:678
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Nu pot deschide fiºierul %s \n"
@@ -4657,7 +4657,7 @@ msgstr ""
 
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Nu gãsesc nodul %s în fiºierul de ajutor "
 
 #: src/help.c:804
@@ -5951,7 +5951,7 @@ msgstr "DirNou"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Nu pot schimba dir. în \"%s\" \n"
@@ -5982,7 +5982,7 @@ msgstr " Atenþie: Nu pot schimba în %s \n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 " Nu pot deschide fiºierul %s pentru scriere:\n"
@@ -6001,7 +6001,7 @@ msgstr "Mutã directorul \"%s\" în:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Nu pot executa stat pe destinaþia \n"
@@ -6035,7 +6035,7 @@ msgstr "ªtgdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Nu pot scrie în fiºierul %s:\n"
@@ -6148,7 +6148,7 @@ msgid " Save changes "
 msgstr " Salvez schimbãrile "
 
 #: src/view.c:445
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nu pot face clonare pe programul copil "
 
 #: src/view.c:454
@@ -6160,25 +6160,25 @@ msgid " Could not open file "
 msgstr " Nu pot deschide fiºierul "
 
 #: src/view.c:474
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Nu pot deschide fiºierul \""
 
 #: src/view.c:481
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Nu pot executa stat pe fiºierul \n"
 " "
 
 #: src/view.c:487
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Nu poati vizualizat: nu este un fiºier obiºnuit "
 
 #: src/view.c:568
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Nu pot deschide fiºierul \"%s\"\n"
@@ -6187,7 +6187,7 @@ msgstr ""
 #: src/view.c:577
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Nu pot executa stat pe \"%s\"\n"
@@ -6863,17 +6863,17 @@ msgstr " Parolã invalidã "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nu pot localiza gazda: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nu pot crea socket-ul: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nu mã pot conecta la server-ul: %s"
 
 #: vfs/mcfs.c:320
@@ -7164,7 +7164,7 @@ msgstr "rec&Uperez fiºiere (doar ext2fs)"
 #~ msgstr "tasta '%d 0': "
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Nu pot genera un nume de fiºier unic \n"

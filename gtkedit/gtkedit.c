@@ -244,7 +244,7 @@ static void gtk_edit_realize (GtkWidget * widget)
 
     gtk_edit_alloc_colors (edit, colormap);
 
-    /* Can't call gtk_style_set_background here because it's handled specially */
+    /* Cannot call gtk_style_set_background here because it's handled specially */
     gdk_window_set_background (widget->window, &edit->color[1]);
     gdk_window_set_background (edit->text_area, &edit->color[1]);
 

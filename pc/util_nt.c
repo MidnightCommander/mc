@@ -194,7 +194,7 @@ char *tilde_expand (char *directory)
 }
 
 /* sleep: Call Windows API.
-	  Can't do simple define. That would need <windows.h> in every source
+	  Cannot do simple define. That would need <windows.h> in every source
 */
 #ifndef __EMX__
 void sleep(unsigned long dwMiliSecs)

@@ -108,7 +108,7 @@ void handle_console (unsigned char action)
 	/* Get the console saver running */
 	cons_saver_pid = fork ();
 	if (cons_saver_pid < 0){
-	    /* Can't fork */
+	    /* Cannot fork */
 	    /* Delete pipes */
 	    close (pipefd1[1]);
 	    close (pipefd1[0]);

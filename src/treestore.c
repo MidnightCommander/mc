@@ -358,7 +358,7 @@ tree_store_save_to (char *name)
 			}
 			
 			if (i == EOF){
-				fprintf (stderr, _("Can't write to the %s file:\n%s\n"), name,
+				fprintf (stderr, _("Cannot write to the %s file:\n%s\n"), name,
 					 unix_error_string (errno));
 				break;
 			}

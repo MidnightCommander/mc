@@ -3820,7 +3820,7 @@ msgstr " 配置 "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 "无法改变目录到`%s'\n"
@@ -3909,7 +3909,7 @@ msgstr "未知"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 "无法创键临时命令文件\n"
@@ -3920,7 +3920,7 @@ msgid " Parameter "
 msgstr " 参数 "
 
 #: src/ext.c:311
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " 无法在虚拟文件系统上执行文件"
 
 #: src/ext.c:411
@@ -4479,7 +4479,7 @@ msgid " with source mask:"
 msgstr " 使用掩码:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " 无法在\"..\"上操作!"
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4797,7 +4797,7 @@ msgstr ""
 
 #: src/help.c:568
 #, fuzzy
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " 不是普通文件 "
 
 #: src/help.c:737
@@ -4807,7 +4807,7 @@ msgstr " 帮助 "
 #: src/help.c:762 src/user.c:679
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " 无法打开文件 %s\n"
@@ -4815,7 +4815,7 @@ msgstr ""
 
 #: src/help.c:767
 #, fuzzy, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " 不是普通文件 "
 
 #: src/help.c:804
@@ -6038,7 +6038,7 @@ msgstr "建目录"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " 无法改变目录到\"%s\"\n"
@@ -6069,7 +6069,7 @@ msgstr "警告: 无法改变到 %s.\n"
 #: src/tree.c:192
 #, fuzzy, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "无法以写方式打开文件:\n"
@@ -6088,7 +6088,7 @@ msgstr "移动\"%s\"目录到:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 "无法取得目标的信息\n"
@@ -6122,7 +6122,7 @@ msgstr "删除子目录"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "无法写文件%s:\n"
@@ -6237,7 +6237,7 @@ msgid " Save changes "
 msgstr " 保存所作的修改"
 
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " 无法创建子进程"
 
 #: src/view.c:450
@@ -6249,25 +6249,25 @@ msgid " Could not open file "
 msgstr " 无法打开文件"
 
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " 无法打开文件\""
 
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 "无法取得文件信息\n"
 " "
 
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " 不是普通文件 "
 
 #: src/view.c:564
 #, fuzzy, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " 无法打开文件 %s\n"
@@ -6276,7 +6276,7 @@ msgstr ""
 #: src/view.c:573
 #, fuzzy, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 "无法取得%s的信息\n"
@@ -6952,21 +6952,21 @@ msgstr " 非法口令 "
 
 #: vfs/mcfs.c:230
 #, fuzzy, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr ""
 "无法取得目标的信息\n"
 " %s "
 
 #: vfs/mcfs.c:248
 #, fuzzy, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr ""
 " 无法改变当前目录到%s\n"
 " %s "
 
 #: vfs/mcfs.c:254
 #, fuzzy, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "ftpfs: 连接服务器失败: %s"
 
 #: vfs/mcfs.c:320
@@ -7230,7 +7230,7 @@ msgstr "恢复文件(&U)(只对ext2fs)"
 
 #, fuzzy
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " 无法打开文件 %s\n"

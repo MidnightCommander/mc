@@ -277,7 +277,7 @@ int my_system (int flags, const char *shell, const char *command)
 #    elif defined (HAVE_SETREUID)
 	    setreuid (vfs_uid, vfs_uid);
 #    else
-	    ; /* Can't drop privileges */
+	    ; /* Cannot drop privileges */
 #    endif
 #endif
 	

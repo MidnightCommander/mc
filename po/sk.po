@@ -3320,7 +3320,7 @@ msgstr "Úlohy v pozadí"
 
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Nemô¾em prelo¾i» z %s do %s"
 
 #: src/chmod.c:90
@@ -3746,7 +3746,7 @@ msgstr " Nastavenie "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Nemô¾em chdir na '%s' \n"
@@ -3841,7 +3841,7 @@ msgstr "Neznámy"
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Nemô¾em vytvori» doèasný príkazový súbor \n"
@@ -4292,7 +4292,7 @@ msgid " with source mask:"
 msgstr " so zdrojovou maskou:"
 
 #: src/file.c:1859
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Nemô¾em pracova» na \"..\"! "
 
 #: src/file.c:1878 src/screen.c:2103
@@ -4537,7 +4537,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Vnútorná chyba: Dvojité spustenie pripojenej oblasti "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Nemô¾em nájs» uzol [obsah] v súbore nápovedy "
 
 #: src/help.c:737
@@ -4547,7 +4547,7 @@ msgstr " Pomoc "
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Nemô¾em otvori» súbor %s \n"
@@ -4555,7 +4555,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Nemô¾em nájs» uzol %s v súbore nápovedy "
 
 #: src/help.c:813
@@ -5829,7 +5829,7 @@ msgstr " Nie je zadaná èinnos» "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 "Nemô¾em zmeni» adresár na \"%s\" \n"
@@ -5871,7 +5871,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "Nemô¾em naèíta» %s/%s"
 
 #: src/slint.c:199
@@ -6009,7 +6009,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Nemô¾em otvori» %s súbor pre zapisovanie:\n"
@@ -6028,7 +6028,7 @@ msgstr "Presúvam \"%s\" adresár do:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Nemô¾em urèi» cieµ \n"
@@ -6062,7 +6062,7 @@ msgstr "Zmaza» adr."
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Nemô¾em zapísa» do %s súboru:\n"
@@ -6177,7 +6177,7 @@ msgid " Save changes "
 msgstr " Ulo¾i» zmeny "
 
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nemo¾no strati» program potomka procesu "
 
 #: src/view.c:459
@@ -6189,25 +6189,25 @@ msgid " Could not open file "
 msgstr " Nemohol som otvori» súbor "
 
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Nemô¾em otvori» súbor \""
 
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Nemô¾em urèi» parametre súbor \n"
 " "
 
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Nemô¾em nahliadnu»: toto nie je normálny súbor "
 
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Nemô¾em otvori» \"%s\"\n"
@@ -6216,7 +6216,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Nemô¾em urèi» \"%s\"\n"
@@ -6891,17 +6891,17 @@ msgstr " Neplatné heslo "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nemô¾em urèi» hostiteµa: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nemô¾em vytvori» soket: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nemô¾em sa pripoji» k serveru: %s"
 
 #: vfs/mcfs.c:320

@@ -3327,7 +3327,7 @@ msgstr "Úlohy na pozadí"
 
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Nelze pøevést z %s na %s"
 
 #: src/chmod.c:91
@@ -3754,7 +3754,7 @@ msgstr " Nastavení "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Nelze zmìnit adresáø na '%s' \n"
@@ -3849,7 +3849,7 @@ msgstr "Neznámý"
 #: src/ext.c:146 src/user.c:550
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Nelze vytvoøit doèasný soubor \n"
@@ -4304,7 +4304,7 @@ msgid " with source mask:"
 msgstr " vyhovujících masce: (F1=nápovìda)"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Nelze pracovat s \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2103
@@ -4549,7 +4549,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Vnitøní závada: Dvojité spu¹tìní pole odkazù "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " V souboru s nápovìdou nelze najít sekci [Contents] "
 
 #: src/help.c:737
@@ -4559,7 +4559,7 @@ msgstr " Nápovìda "
 #: src/help.c:768 src/user.c:682
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Nelze otevøít soubor %s \n"
@@ -4567,7 +4567,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " V souboru s nápovìdou nelze najít sekci %s "
 
 #: src/help.c:813
@@ -5840,7 +5840,7 @@ msgstr " ®ádná akce nebyla provedena "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 "Adresáø nelze zmìnit na \"%s\" \n"
@@ -5882,7 +5882,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "Nelze naèíst %s/%s"
 
 #: src/slint.c:199
@@ -6020,7 +6020,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Do souboru %s nelze zapisovat:\n"
@@ -6039,7 +6039,7 @@ msgstr "Pøesunout adresáø \"%s\" do:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Nad cílem nelze zavolat stat() \n"
@@ -6073,7 +6073,7 @@ msgstr "Ma¾Adr"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Nelze zapisovat do souboru %s:\n"
@@ -6189,7 +6189,7 @@ msgid " Save changes "
 msgstr " Ulo¾it zmìny "
 
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nelze odstartovat podproces "
 
 #: src/view.c:459
@@ -6201,25 +6201,25 @@ msgid " Could not open file "
 msgstr " Nelze otevøít soubor "
 
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Nelze otevøít soubor \""
 
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Nelze zjistit parametry souboru \n"
 " "
 
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Nelze prohlí¾et: není to normální soubor "
 
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Nelze otevøít \"%s\"\n"
@@ -6228,7 +6228,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Nelze zjistit informace o \"%s\" \n"
@@ -6904,17 +6904,17 @@ msgstr " Chybné heslo "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nelze lokalizovat server: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nelze vytvoøit soket: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "Nelze se pøipojit k serveru: %s "
 
 #: vfs/mcfs.c:320

@@ -227,7 +227,7 @@ open_tcp_link  (char *host, int *port, int *version, char *caller)
 	       sizeof (inaddr));
     else {
 	if ((hp = gethostbyname (host)) == NULL){
-	    message_2s (1, caller, _(" Can't locate hostname: %s "), host);
+	    message_2s (1, caller, _(" Cannot locate hostname: %s "), host);
 	    return 0;
 	}
 	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr,
@@ -245,13 +245,13 @@ open_tcp_link  (char *host, int *port, int *version, char *caller)
     server_address.sin_port = htons (*port);
     
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0){
-	message_2s (1, caller, _(" Can't create socket: %s "),
+	message_2s (1, caller, _(" Cannot create socket: %s "),
 		 unix_error_string(errno));
 	return 0;
     }
     if (connect (my_socket, (struct sockaddr *) &server_address,
 	     sizeof (server_address)) < 0){
-	message_2s (1, caller, _(" Can't connect to server: %s "),
+	message_2s (1, caller, _(" Cannot connect to server: %s "),
 		 unix_error_string (errno));
 	close (my_socket);
 	return 0;

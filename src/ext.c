@@ -148,7 +148,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     cmd_file_fd = mc_mkstemps(&file_name, "mcext", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1){
-	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
+	message (1, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }

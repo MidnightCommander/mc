@@ -55,7 +55,7 @@ static void _win32InitTrace()
 
 	   	__win32_trace_f = fopen(TRACE_FILE, "wt");
 		if (__win32_trace_f == NULL) {
-			printf("Midnight Commander[DEBUG]: Can't open trace file '" TRACE_FILE "': %s \n", strerror(errno));
+			printf("Midnight Commander[DEBUG]: Cannot open trace file '" TRACE_FILE "': %s \n", strerror(errno));
 	   	}
 		atexit (&_win32EndTrace);
 	}

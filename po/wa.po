@@ -3645,7 +3645,7 @@ msgstr " Apontiaedje "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Dji n' sai fé on chdir viè '%s' \n"
@@ -3736,7 +3736,7 @@ msgstr "Nén cnoxhu"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Dji n' sai fé on passant fitchî di cmande \n"
@@ -3747,7 +3747,7 @@ msgid " Parameter "
 msgstr " Pondant "
 
 #: src/ext.c:311
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Dji n' sai enonder des cmandes dins on ridant k' est so on forveyu sistinme "
 "di fitchîs "
@@ -4302,7 +4302,7 @@ msgid " with source mask:"
 msgstr " avou li masse soûrdant:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Dji n' sai ovrer so \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4622,7 +4622,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Divintrin bug: dobe enondeye del coine loyén "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Dji n' trove nou nuk [Ådvins] è fitchî d' aidance "
 
 #: src/help.c:737
@@ -4632,7 +4632,7 @@ msgstr " Aide "
 #: src/help.c:762 src/user.c:679
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Dji n' sai drovi li fitchî %s \n"
@@ -4640,7 +4640,7 @@ msgstr ""
 
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Dji n' trove nén li nuk %s è fitchî d' aidance "
 
 #: src/help.c:804
@@ -5882,7 +5882,7 @@ msgstr "Mkdir"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Dji n' sai fé on chdir dins \"%s\" \n"
@@ -5913,7 +5913,7 @@ msgstr "Advertixhmint: dji n' sai candjî dins %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Dji n' sai drovi li fitchî %s po scrire divins:\n"
@@ -5932,7 +5932,7 @@ msgstr "Bodjî li ridant \"%s\" dins:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 
@@ -5964,7 +5964,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Dji n' sai scrire è fitchî %s :\n"
@@ -6080,7 +6080,7 @@ msgid " Save changes "
 msgstr " Schaper les candjmints "
 
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr ""
 
 #: src/view.c:450
@@ -6092,25 +6092,25 @@ msgid " Could not open file "
 msgstr " Dji n' sai drovi li fitchî "
 
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Dji n' sai drovi li fitchî \""
 
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Dji n' sai fé on stat sol fitchî \n"
 " "
 
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 
 #: src/view.c:564
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Dji n' sai drovi \"%s\"\n"
@@ -6119,7 +6119,7 @@ msgstr ""
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Dji n' sai fé on stat so \"%s\"\n"
@@ -6779,17 +6779,17 @@ msgstr ""
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Dji n' sai trovrer li lodjeu: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Dji n' sai fé on soket: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "Dji n' pout m' raloyi å sierveu: %s"
 
 #: vfs/mcfs.c:320
@@ -7040,7 +7040,7 @@ msgstr "Sistinme di fitchîs disrafaçabe po ext2fs"
 #~ msgstr "Tchwezi ene imådjete"
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Dji n' sai produre on no di fitchî unike \n"
@@ -7092,7 +7092,7 @@ msgstr "Sistinme di fitchîs disrafaçabe po ext2fs"
 #~ msgstr " eyèt li conzole Linux"
 
 #~ msgid ""
-#~ " Can't chdir to %s \n"
+#~ " Cannot chdir to %s \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Dji n' sai chdir dins %s \n"

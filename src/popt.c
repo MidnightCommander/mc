@@ -236,7 +236,7 @@ static void execCommand(poptContext con) {
 #elif defined (HAVE_SETREUID)
     setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
 #else
-    ; /* Can't drop privileges */
+    ; /* Cannot drop privileges */
 #endif
 #endif
 

@@ -904,7 +904,7 @@ void close_low_fds(void)
     fd = sys_open("/dev/null",O_RDWR,0);
     if (fd < 0) fd = sys_open("/dev/null",O_WRONLY,0);
     if (fd < 0) {
-      DEBUG(0,("Can't open /dev/null\n"));
+      DEBUG(0,("Cannot open /dev/null\n"));
       return;
     }
     if (fd != i) {
@@ -979,7 +979,7 @@ SMB_OFF_T transfer_file(int infd,int outfd,SMB_OFF_T n,char *header,int headlen,
   }
 
   if (!buf) {
-    DEBUG(0,("Can't allocate transfer buffer!\n"));
+    DEBUG(0,("Cannot allocate transfer buffer!\n"));
     exit(1);
   }
 

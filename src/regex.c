@@ -2542,7 +2542,7 @@ regex_compile (pattern, size, syntax, bufp)
               if (c1 > regnum)
                 FREE_STACK_RETURN (REG_ESUBREG);
 
-              /* Can't back reference to a subexpression if inside of it.  */
+              /* Cannot back reference to a subexpression if inside of it.  */
               if (group_in_compile_stack (compile_stack, c1))
                 goto normal_char;
 
@@ -4190,7 +4190,7 @@ re_match_2_internal (bufp, string1, size1, string2, size2, pos, regs, stop)
 	    int regno = *p++;   /* Get which register to match against.  */
 	    DEBUG_PRINT2 ("EXECUTING duplicate %d.\n", regno);
 
-	    /* Can't back reference a group which we've never matched.  */
+	    /* Cannot back reference a group which we've never matched.  */
             if (REG_UNSET (regstart[regno]) || REG_UNSET (regend[regno]))
               goto fail;
               
@@ -4706,7 +4706,7 @@ re_match_2_internal (bufp, string1, size1, string2, size2, pos, regs, stop)
 	  mcnt = (int) Sword;
         matchsyntax:
 	  PREFETCH ();
-	  /* Can't use *d++ here; SYNTAX may be an unsafe macro.  */
+	  /* Cannot use *d++ here; SYNTAX may be an unsafe macro.  */
 	  d++;
 	  if (SYNTAX (d[-1]) != (enum syntaxcode) mcnt)
 	    goto fail;
@@ -4723,7 +4723,7 @@ re_match_2_internal (bufp, string1, size1, string2, size2, pos, regs, stop)
 	  mcnt = (int) Sword;
         matchnotsyntax:
 	  PREFETCH ();
-	  /* Can't use *d++ here; SYNTAX may be an unsafe macro.  */
+	  /* Cannot use *d++ here; SYNTAX may be an unsafe macro.  */
 	  d++;
 	  if (SYNTAX (d[-1]) == (enum syntaxcode) mcnt)
 	    goto fail;

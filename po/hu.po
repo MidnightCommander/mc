@@ -4525,7 +4525,7 @@ msgstr " Beállítások "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Nem sikerült belépni a '%s' könyvtárba \n"
@@ -4639,7 +4639,7 @@ msgstr "Ismeretlen"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Nem sikerült ideiglenes parancsfájlt létrehozni \n"
@@ -4652,7 +4652,7 @@ msgstr " Paraméter "
 
 # !! tenyleg a konyvtar a fontos itt?
 #: src/ext.c:311
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " Nem lehet parancsokat futtatni VFS könyvtárakon. "
 
 # src/ext.c:414
@@ -5302,7 +5302,7 @@ msgstr " az alábbi a maszkkal:"
 
 # src/file.c:1856
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " A \"..\" könyvtárat nem lehet erre haszálni... "
 
 # Copy, Move, Delete...
@@ -5693,7 +5693,7 @@ msgstr " Belsõ programhiba: linkterület duplán kezdve "
 
 # src/help.c:572
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Nem található [Contents] bejegyzés a súgófájlban. "
 
 # src/help.c:741
@@ -5705,7 +5705,7 @@ msgstr " Súgó"
 #: src/help.c:762 src/user.c:679
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " \"%s\" megnyitása nem sikerült. \n"
@@ -5714,7 +5714,7 @@ msgstr ""
 # src/help.c:771
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Nem található a \"%s\" bejegyzés a súgófájlban "
 
 # src/help.c:808
@@ -7276,7 +7276,7 @@ msgstr "ÚjKvtr"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Nem sikerült belépni a \"%s\" könyvtárba. \n"
@@ -7313,7 +7313,7 @@ msgstr "Figyelem: nem sikerült belépni a \"%s\" könyvtárba.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Nem sikerült a \"%s\" fájlt íráshoz megnyitni:\n"
@@ -7335,7 +7335,7 @@ msgstr "A(z) \"%s\" könyvtár áthelyezése ide:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Nem sikerükt lekérdezni a célfájl/-könyvtár adatait. \n"
@@ -7376,7 +7376,7 @@ msgstr "KvTörl"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Nem siekrült írni a \"%s\" fájlba:\n"
@@ -7513,7 +7513,7 @@ msgstr " Változások mentése "
 
 # src/view.c:448
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nem sikerült programot indítani "
 
 # src/view.c:457
@@ -7528,13 +7528,13 @@ msgstr " Nem sikerült megnyitni a fájlt "
 
 # src/view.c:477
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Nem sikerült megnyitni a fájlt: \""
 
 # src/view.c:484
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Nem sikerült lekérdezni a fájl adatait: \n"
@@ -7542,14 +7542,14 @@ msgstr ""
 
 # src/view.c:490
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Nem lehet megjeleníteni, nem közönséges fájl. "
 
 # src/view.c:571
 #: src/view.c:564
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Nem sikerült a fájlt megynitni: \"%s\"\n"
@@ -7559,7 +7559,7 @@ msgstr ""
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Nem sikerült a fájl adatait lekérdezni: \"%s\"\n"
@@ -8384,19 +8384,19 @@ msgstr " Hibás jelszó "
 # vfs/mcfs.c:235
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nem található gép ezen a néven: %s "
 
 # vfs/mcfs.c:253
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nem sikerült a 'socket' létrehozása: %s "
 
 # vfs/mcfs.c:259
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nem sikerült kapcsolódni a kiszolgálóhoz: %s "
 
 # vfs/mcfs.c:324
@@ -8710,7 +8710,7 @@ msgstr "Fájlhelyreállító fájlrendszer 'ext2fs'-hez"
 
 # src/ext.c:143 src/user.c:544
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Nem sikeült egyedi fájlnevet generálni \n"

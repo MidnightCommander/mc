@@ -3323,7 +3323,7 @@ msgstr "Posli v ozadju"
 
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "Nisem mogel prevesti iz %s v %s"
 
 #: src/chmod.c:90
@@ -3751,7 +3751,7 @@ msgstr " Nastavi "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Ne morem iti v imenik '%s' \n"
@@ -3846,7 +3846,7 @@ msgstr "Neznan"
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Ne morem ustvariti zaèasne ukazne datoteke \n"
@@ -4298,7 +4298,7 @@ msgid " with source mask:"
 msgstr " z masko izvira:"
 
 #: src/file.c:1859
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Ne morem operirati nad \"..\"! "
 
 #: src/file.c:1878 src/screen.c:2103
@@ -4543,7 +4543,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Notranja napaka: Dvojni zaèetek povezav"
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Ne najdem listov [Vsebine] v datoteki s pomoèjo"
 
 #: src/help.c:737
@@ -4553,7 +4553,7 @@ msgstr " Pomoè "
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Ne morem odpreti datoteke %s \n"
@@ -4561,7 +4561,7 @@ msgstr ""
 
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Ne najdem noda %s v datoteki s pomoèjo"
 
 #: src/help.c:813
@@ -5843,7 +5843,7 @@ msgstr " Izr¹eno ni bilo nobeno dejanje"
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Ne morem iti v imenik \"%s\" \n"
@@ -5885,7 +5885,7 @@ msgstr ""
 
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr " Ne morem nalo¾iti %s/%s"
 
 #: src/slint.c:199
@@ -6023,7 +6023,7 @@ msgstr "Polnoèni poveljnik GNU %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Ne morem odpreti %s za pisanje:\n"
@@ -6042,7 +6042,7 @@ msgstr "Prestavi imenik \"%s\" v:"
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Ne morem poizvedeti po cilju \n"
@@ -6076,7 +6076,7 @@ msgstr "Rmdir"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Ne morem pisati v datoteko %s:\n"
@@ -6191,7 +6191,7 @@ msgid " Save changes "
 msgstr " Shrani spremembe "
 
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nisem mogel pognati podrejenega programa"
 
 #: src/view.c:459
@@ -6203,25 +6203,25 @@ msgid " Could not open file "
 msgstr " Ne morem odpreti datoteke "
 
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Ne morem odpreti datoteke \""
 
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Ne morem poizvedeti stanja datoteke \n"
 " "
 
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Ne morem pogledati: ni obièajna datoteka "
 
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Ne morem odpreti \"%s\"\n"
@@ -6230,7 +6230,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Ne morem poizvedeti stanja \"%s\"\n"
@@ -6907,17 +6907,17 @@ msgstr " Neveljavno geslo"
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nisem mogel poizvedeti za imenom gostitelja: %s"
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nisem mogel ustvariti vtièa: %s"
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nisem se uspel povezati s stre¾nikom: %s"
 
 #: vfs/mcfs.c:320
@@ -7142,7 +7142,7 @@ msgstr "%s: %s: %s %ld prene¹enih bajtov"
 #~ msgid "File/New/Directory..."
 #~ msgstr "Datoteka/Nov/Imenik..."
 
-#~ msgid " Can't execute commands on a Virtual File System directory "
+#~ msgid " Cannot execute commands on a Virtual File System directory "
 #~ msgstr ""
 #~ " Ne morem poganjati ukazov na imenuku Navideznega Datoteènega Sistema "
 #~ "(VFS)"
@@ -7172,7 +7172,7 @@ msgstr "%s: %s: %s %ld prene¹enih bajtov"
 #~ msgstr "Bri¹i"
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Ne morem generirati unikatnega imena datoteke \n"

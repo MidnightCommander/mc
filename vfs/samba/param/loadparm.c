@@ -1883,7 +1883,7 @@ static BOOL handle_include(char *pszParmValue,char **ptr)
   if (file_exist(fname,NULL))
     return(pm_process(fname, do_section, do_parameter));      
 
-  DEBUG(2,("Can't find include file %s\n",fname));
+  DEBUG(2,("Cannot find include file %s\n",fname));
 
   return(False);
 }
@@ -1910,7 +1910,7 @@ static BOOL handle_copy(char *pszParmValue,char **ptr)
      {
        if (iTemp == iServiceIndex)
 	 {
-	   DEBUG(0,("Can't copy service %s - unable to copy self!\n",
+	   DEBUG(0,("Cannot copy service %s - unable to copy self!\n",
 		    pszParmValue));
 	 }
        else

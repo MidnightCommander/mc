@@ -191,7 +191,7 @@ static void save_tree (WTree *tree)
     error = tree_store_save ();
 
     if (error){
-	fprintf (stderr, _("Can't open the %s file for writing:\n%s\n"), MC_TREE,
+	fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), MC_TREE,
 		 unix_error_string (error));
 	return;
     }
@@ -686,7 +686,7 @@ static void tree_move (WTree *tree, char *default_dest)
 	return;
     }
     if (stat (dest, &buf)){
-	message (1, MSG_ERROR, _(" Can't stat the destination \n %s "),
+	message (1, MSG_ERROR, _(" Cannot stat the destination \n %s "),
 		 unix_error_string (errno));
 	g_free (dest);
 	return;
@@ -872,7 +872,7 @@ chdir_sel (WTree *tree)
 	paint_panel (cpanel);
 	select_item (cpanel);
     } else {
-	message (1, MSG_ERROR, _(" Can't chdir to \"%s\" \n %s "),
+	message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		 tree->selected_ptr->name, unix_error_string (errno));
     }
     change_panel ();

@@ -3666,7 +3666,7 @@ msgstr " Configuració "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " No puc canviar a \"%s\" \n"
@@ -3761,7 +3761,7 @@ msgstr "Desconegut"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " No puc crear fitxer temporal d'ordres \n"
@@ -3772,7 +3772,7 @@ msgid " Parameter "
 msgstr " Paràmetre "
 
 #: src/ext.c:311
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " No puc executar ordres en  d'un Sistema de Fitxers Virtual "
 
 #: src/ext.c:411
@@ -4325,7 +4325,7 @@ msgid " with source mask:"
 msgstr " amb màscara font:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " No puc treballar sobre \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4647,7 +4647,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " S'ha produït un error intern: Començament doble de l'àrea d'enllaços "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " No es troba el node [Contents] al fitxer d'ajuda "
 
 #: src/help.c:737
@@ -4657,7 +4657,7 @@ msgstr " Ajuda "
 #: src/help.c:762 src/user.c:679
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " No puc obrir el fitxer %s \n"
@@ -4665,7 +4665,7 @@ msgstr ""
 
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " No es troba el node %s al fitxer d'ajuda"
 
 #: src/help.c:804
@@ -5965,7 +5965,7 @@ msgstr "FerDir"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " No puc canviar a \"%s\" \n"
@@ -5996,7 +5996,7 @@ msgstr "Avís: No s'ha pogut canviar a %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "No puc obrir el fitxer %s per escriure:\n"
@@ -6015,7 +6015,7 @@ msgstr "Mou el directori \"%s\" a:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " No puc estudiar el destí \n"
@@ -6049,7 +6049,7 @@ msgstr "SupDir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "No puc escriure al fitxer %s:\n"
@@ -6164,7 +6164,7 @@ msgid " Save changes "
 msgstr " Desa els canvis "
 
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " No puc llançar el procés fill "
 
 #: src/view.c:450
@@ -6177,25 +6177,25 @@ msgstr " No puc obrir el fitxer "
 
 # Apa, trenquem la tipografia!  iv
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " No puc obrir el fitxer \""
 
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " No puc estudiar el fitxer \n"
 " "
 
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
 
 #: src/view.c:564
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " No es pot obrir \"%s\"\n"
@@ -6204,7 +6204,7 @@ msgstr ""
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " No es pot fer un stat a \"%s\" \n"
@@ -6882,17 +6882,17 @@ msgstr " La contrasenya no és vàlida "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " No es pot trobar el nom de l'ordinador central: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " No es pot crear el sòcol: %s"
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " No es pot connectar amb el servidor: %s"
 
 #: vfs/mcfs.c:320
@@ -7153,7 +7153,7 @@ msgstr "Recupera el sistema de fitxers per a ext2 que s'havia suprimit"
 #~ msgstr "Selecciona una icona"
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " No es pot generar un nom de fitxer únic \n"
@@ -7202,7 +7202,7 @@ msgstr "Recupera el sistema de fitxers per a ext2 que s'havia suprimit"
 #~ msgstr " i a la consola Linux"
 
 #~ msgid ""
-#~ " Can't chdir to %s \n"
+#~ " Cannot chdir to %s \n"
 #~ " %s "
 #~ msgstr ""
 #~ " No puc canviar a %s \n"

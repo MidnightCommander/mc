@@ -3651,7 +3651,7 @@ msgstr " Opsætning "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Kan ikke skifte mappe til '%s' \n"
@@ -3746,7 +3746,7 @@ msgstr "Ukendt"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Kan ikke oprette midlertidig kommandofil \n"
@@ -3757,7 +3757,7 @@ msgid " Parameter "
 msgstr " Parameter "
 
 #: src/ext.c:311
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " Kan ikke køre kommandoer i en mappe på et virtuelt filsystem "
 
 #: src/ext.c:411
@@ -4311,7 +4311,7 @@ msgid " with source mask:"
 msgstr " med kildemaske:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Kan ikke arbejde på \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4631,7 +4631,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Intern fejl: Dobbelt start på link område "
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Kan ikke finde noden [Indhold] i hjælpefilen "
 
 #: src/help.c:737
@@ -4641,7 +4641,7 @@ msgstr " Hjælp "
 #: src/help.c:762 src/user.c:679
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Kan ikke åbne filen %s \n"
@@ -4649,7 +4649,7 @@ msgstr ""
 
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Kan ikke finde noden %s i hjælpefilen "
 
 #: src/help.c:804
@@ -5935,7 +5935,7 @@ msgstr "Mkdir"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 "Kan ikke skifte mappe til \"%s\" \n"
@@ -5966,7 +5966,7 @@ msgstr "Advarsel: Kunne ikke skifte til %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Kan ikke åbne filen %s for skriving:\n"
@@ -5985,7 +5985,7 @@ msgstr "Flyt \"%s\" mappen til:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Kan ikke køre stat på målet \n"
@@ -6019,7 +6019,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Kan ikke skrive til %s filen::\n"
@@ -6135,7 +6135,7 @@ msgid " Save changes "
 msgstr " Gem ændringer "
 
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Kan ikke starte barneprogram "
 
 #: src/view.c:450
@@ -6147,25 +6147,25 @@ msgid " Could not open file "
 msgstr " Kunne ikke åbne filen "
 
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Kan ikke åbne filen \""
 
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Kan ikke lave stat på filen \n"
 " "
 
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Kan ikke vise: ikke en normal fil "
 
 #: src/view.c:564
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Kan ikke åbne \"%s\" \n"
@@ -6174,7 +6174,7 @@ msgstr ""
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Kunne ikke køre stat på %s \n"
@@ -6850,17 +6850,17 @@ msgstr " Ugyldig adgangskode "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Kan ikke finde værtsnavn: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Kan ikke oprette sokkel %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr "Kan ikke forbinde til server %s"
 
 #: vfs/mcfs.c:320
@@ -7119,7 +7119,7 @@ msgstr "'Undelete'-filsystem til ext2"
 #~ msgstr "Vælg ikon"
 
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Kan ikke oprette unikt filnavn  \n"

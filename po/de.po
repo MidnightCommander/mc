@@ -3661,7 +3661,7 @@ msgstr " Einstellungen "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Kann nicht in Verzeichni '%s' wechseln \n"
@@ -3756,7 +3756,7 @@ msgstr "Unbekannt"
 #: src/ext.c:146 src/user.c:546
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Kann temporäre Befehlsdaei nicht anlegen \n"
@@ -3767,7 +3767,7 @@ msgid " Parameter "
 msgstr " Parameter "
 
 #: src/ext.c:310
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Kann Befehle nicht auf einem Virtual File System Verzeichnis ausführen "
 
@@ -4320,7 +4320,7 @@ msgid " with source mask:"
 msgstr " mit Quellmaske:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Kann nicht auf \"..\" agieren! "
 
 #: src/file.c:1879 src/screen.c:2104
@@ -4640,7 +4640,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Interner Fehler: Doppelter Start des Link-Bereiches"
 
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Kann Knoten [Contents] nicht in Hilfedatei finden "
 
 #: src/help.c:737
@@ -4650,7 +4650,7 @@ msgstr " Hilfe "
 #: src/help.c:762 src/user.c:678
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Kann Datei %s nicht öffnen \n"
@@ -4658,7 +4658,7 @@ msgstr ""
 
 #: src/help.c:767
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Kann Knoten %s nicht in der Hilfedatei finden "
 
 #: src/help.c:804
@@ -5945,7 +5945,7 @@ msgstr "Mkdir"
 #: src/screen.c:2404 src/tree.c:868
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Kann nicht in Verzeichnis \"%s\" wechseln \n"
@@ -5976,7 +5976,7 @@ msgstr "Warnung: Kann nicht in %s wechseln.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Kann die Datei %s nicht zum Schreiben öffnen:\n"
@@ -5995,7 +5995,7 @@ msgstr "Verschiebe Verzeichnis \"%s\" zu:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Kann das Ziel nicht untersuchen \n"
@@ -6029,7 +6029,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Kann nicht in Datei %s schreiben:\n"
@@ -6145,7 +6145,7 @@ msgid " Save changes "
 msgstr " Änderungen speichern "
 
 #: src/view.c:441
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Kann Tochterprozeß nicht erzeugen "
 
 #: src/view.c:450
@@ -6157,25 +6157,25 @@ msgid " Could not open file "
 msgstr " Kann Datei nicht öffnen "
 
 #: src/view.c:470
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Kann Datei nicht öffnen \""
 
 #: src/view.c:477
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Kann Datei nicht untersuchen \n"
 " "
 
 #: src/view.c:483
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Kann es nicht anzeigen: Keine normale Datei "
 
 #: src/view.c:564
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Kann \"%s\" nicht öffnen\n"
@@ -6184,7 +6184,7 @@ msgstr ""
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Kann \"%s\" nicht untersuchen \n"
@@ -6864,17 +6864,17 @@ msgstr " Ungültiges Paßwort "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Kann Maschinenname %s nicht orten "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Kann Socket %s nicht anlegen "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Kann nicht mit Server %s verbinden "
 
 #: vfs/mcfs.c:320

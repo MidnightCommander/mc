@@ -3694,7 +3694,7 @@ msgstr " Instellingen "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " 'chdir' naar directory '%s' mislukt \n"
@@ -3789,7 +3789,7 @@ msgstr "Onbekend"
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 " Genereren van een unieke bestandsnaam mislukt \n"
@@ -3798,7 +3798,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Kan geen tijdelijk opdrachtenbestand maken \n"
@@ -3809,7 +3809,7 @@ msgid " Parameter "
 msgstr " Parameter "
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Opdrachten kunnen niet op een Virtueel Bestandssysteem (VFS) directory "
 "worden uitgevoerd "
@@ -4365,7 +4365,7 @@ msgid " with source mask:"
 msgstr " met bronmasker:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Opereren op \"..\" is niet mogelijk! "
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4685,7 +4685,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Interne fout: dubbele start van linkgebied"
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " De [Contents]-node is niet gevonden in het helpbestand "
 
 #: src/help.c:741
@@ -4695,7 +4695,7 @@ msgstr " Help "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Openen van bestand %s mislukt \n"
@@ -4703,7 +4703,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Node %s is niet gevonden het helpbestand "
 
 #: src/help.c:808
@@ -5972,7 +5972,7 @@ msgstr "Mkdir"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Schakelen naar directory \"%s\" mislukt \n"
@@ -6003,7 +6003,7 @@ msgstr "Waarschuwing: Schakelen naar %s mislukt.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Openen van bestand %s voor schrijven mislukt:\n"
@@ -6022,7 +6022,7 @@ msgstr "Verplaats  de \"%s\" directory naar:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Inspecteren van het doel mislukt \n"
@@ -6056,7 +6056,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Schrijven naar bestand %s mislukt:\n"
@@ -6171,7 +6171,7 @@ msgid " Save changes "
 msgstr " Sla de veranderingen op "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Starten kindproces mislukt "
 
 #: src/view.c:458
@@ -6183,25 +6183,25 @@ msgid " Could not open file "
 msgstr " Openen mislukt van bestand "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Openen niet mogelijk van bestand \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Inspecteren mislukt van bestand \n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Bekijken niet mogelijk: geen normaal bestand "
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Openen van \"%s\" is niet mogelijk\n"
@@ -6210,7 +6210,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Inspectie van \"%s\" mislukt \n"
@@ -6887,17 +6887,17 @@ msgstr " Ongeldig wachtwoord "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Kan machinenaam niet vinden: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Kan socket niet creëren: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Kan niet verbinden met server: %s "
 
 #: vfs/mcfs.c:320

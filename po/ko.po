@@ -3680,7 +3680,7 @@ msgstr " 환경설정 "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " '%s'로 디렉토리 바꿀 수 없음 \n"
@@ -3775,7 +3775,7 @@ msgstr "모름"
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 " 유일한 파일이름을 만들 수 없습니다 \n"
@@ -3784,7 +3784,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " 임시 명령 파일을 생성할 수 없습니다 \n"
@@ -3795,7 +3795,7 @@ msgid " Parameter "
 msgstr " Parameter "
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " 가상 파일 체계 디렉토리에서는 명령을 실행할 수 없어요 "
 
 #: src/ext.c:415
@@ -4349,7 +4349,7 @@ msgid " with source mask:"
 msgstr " with source mask:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " \"..\"에 대해서는 작업할 수 없습니다! "
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4669,7 +4669,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " 내부 버그: Double start of link area "
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " 도움말 파일에서 [Contents]를 찾을 수 없어요 "
 
 #: src/help.c:741
@@ -4679,7 +4679,7 @@ msgstr " 도움말 "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " %s 파일을 열 수 없어요 \n"
@@ -4687,7 +4687,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " 도움말 파일에서 %s를 찾을 수 없어요 "
 
 #: src/help.c:808
@@ -5961,7 +5961,7 @@ msgstr "Mkdir"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " \"%s\"로 디렉토리을 바꿀 수 없어요 \n"
@@ -5992,7 +5992,7 @@ msgstr "경고: %s로 바꿀 수 없습니다.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "쓰기 위한 파일 %s를 열수 없어요:\n"
@@ -6011,7 +6011,7 @@ msgstr "디렉토리 \"%s\"를 이동할 곳:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " 대상 정보(stat)를 알아낼 수 없습니다 \n"
@@ -6045,7 +6045,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "%s 파일에 쓸 수 없습니다:\n"
@@ -6158,7 +6158,7 @@ msgid " Save changes "
 msgstr " 바뀐 내용 저장 "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
 
 #: src/view.c:458
@@ -6170,25 +6170,25 @@ msgid " Could not open file "
 msgstr " 파일 열기 실패 "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " 열 수 없는 파일: \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " 파일 정보를 얻을 수 없습니다 \n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " 일반파일이 아니라 볼 수 없습니다 "
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " \"%s\"를 열 수 없습니다 \n"
@@ -6197,7 +6197,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " \"%s\" 파일정보를 얻을 수 없어요\n"
@@ -6870,17 +6870,17 @@ msgstr " 틀린 비밀번호 "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " 호스트 위치를 알 수 없음: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " 소켓을 생성할 수 없음: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " 서버로 연결할 수 없음: %s "
 
 #: vfs/mcfs.c:320

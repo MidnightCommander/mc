@@ -1856,7 +1856,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     free_linklist (&dest_dirs);
     if (get_current_type () == view_listing)
 	if (!panel->marked && !strcmp (selection (panel)->fname, "..")){
-	    message (1, MSG_ERROR, _(" Can't operate on \"..\"! "));
+	    message (1, MSG_ERROR, _(" Cannot operate on \"..\"! "));
 	    file_op_context_destroy (ctx);
 	    return 0;
 	}

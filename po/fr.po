@@ -3712,7 +3712,7 @@ msgstr " Configuration "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Ne peut changer de répertoire vers « %s » \n"
@@ -3807,7 +3807,7 @@ msgstr "Inconnu"
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 " Ne peut générer un nom de fichier unique \n"
@@ -3816,7 +3816,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Ne peut créer un fichier de commandes temporaire \n"
@@ -3827,7 +3827,7 @@ msgid " Parameter "
 msgstr " Paramètre "
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 " Ne peut exécuter une commande sur un répertoire du Système de Fichiers "
 "Virtuel (VFS)"
@@ -4379,7 +4379,7 @@ msgid " with source mask:"
 msgstr " avec masque source :"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Ne peut opérer sur « .. » ! "
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4699,7 +4699,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " Bug interne : Double start of link area "
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Ne peut trouver le noeud [Sommaire] dans le fichier d'aide "
 
 #: src/help.c:741
@@ -4709,7 +4709,7 @@ msgstr " Aide "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Ne peut ouvrir le fichier %s \n"
@@ -4717,7 +4717,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Ne peut trouver le noeud %s dans le fichier d'aide "
 
 #: src/help.c:808
@@ -6008,7 +6008,7 @@ msgstr "Mkdir"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Ne peut aller dans le répertoire « %s »\n"
@@ -6039,7 +6039,7 @@ msgstr "Attention : ne peut aller à %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Ne peut ouvrir le fichier %s en écriture :\n"
@@ -6058,7 +6058,7 @@ msgstr "Déplacer le répertoire « %s » dans :"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 "Ne peut accéder à la destination \n"
@@ -6092,7 +6092,7 @@ msgstr "Rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Ne peut écrire dans le fichier %s :\n"
@@ -6208,7 +6208,7 @@ msgid " Save changes "
 msgstr " Enregistrer les changements "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Ne peut lancer un processus fils "
 
 #: src/view.c:458
@@ -6220,25 +6220,25 @@ msgid " Could not open file "
 msgstr " Ne peut ouvrir le fichier "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Ne peut ouvrir le fichier \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Ne peut analyser le fichier\n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Visualisation impossible : ce n'est pas un fichier régulier "
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Ne peut ouvrir « %s »\n"
@@ -6247,7 +6247,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Ne peut analyser « %s »\n"
@@ -6926,17 +6926,17 @@ msgstr " Mot de passe incorrect "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Ne peut localiser la machine : %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Ne peut créer une socket : %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Ne peut se connecter au serveur : %s "
 
 #: vfs/mcfs.c:320
@@ -7205,7 +7205,7 @@ msgstr "Réc&upération du système de fichiers pour ext2fs"
 #~ msgstr "  %s octets dans %d fichier%s"
 
 #~ msgid ""
-#~ " Can't chdir to %s \n"
+#~ " Cannot chdir to %s \n"
 #~ " %s "
 #~ msgstr ""
 #~ " Ne peut aller dans le répertoire %s \n"

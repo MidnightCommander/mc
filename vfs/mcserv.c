@@ -1110,7 +1110,7 @@ static char *get_client (int portnum)
 #endif
     
     if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
-	return "Can't create socket";
+	return "Cannot create socket";
 
     /* Use this to debug: */
     if (setsockopt (sock, SOL_SOCKET, SO_REUSEADDR, (char *) &yes, sizeof (yes)) < 0)
@@ -1133,7 +1133,7 @@ static char *get_client (int portnum)
 
     if (bind (sock, (struct sockaddr *) &server_address,
 	      sizeof (server_address)) < 0)
-	return "Can't bind";
+	return "Cannot bind";
 
     listen (sock, 5);
 

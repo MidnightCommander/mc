@@ -2403,7 +2403,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 #endif
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0){
-	    message (1, MSG_ERROR, _(" Can't chdir to \"%s\" \n %s "),
+	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     panel->cwd, unix_error_string (errno));
 	} else
 	    subshell_chdir (panel->cwd);

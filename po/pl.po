@@ -3688,7 +3688,7 @@ msgstr " Ustawienia "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Nie mo¿na zmieniæ katalogu na '%s' \n"
@@ -3783,7 +3783,7 @@ msgstr "Nieznany"
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 " Nie mo¿na utworzyæ unikalnej nazwy pliku \n"
@@ -3792,7 +3792,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Nie mo¿na utworzyæ tymczasowego pliku polecenia \n"
@@ -3803,7 +3803,7 @@ msgid " Parameter "
 msgstr " Parametr "
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr " Nie mo¿na wykonywaæ poleceñ na Wirtualnym Systemie Plików "
 
 #: src/ext.c:415
@@ -4357,7 +4357,7 @@ msgid " with source mask:"
 msgstr " z mask± ¼ród³ow±:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " Nie mo¿na operowaæ na \"..\"! "
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4677,7 +4677,7 @@ msgid " Internal bug: Double start of link area "
 msgstr " B³±d wewnêtrzny: Zagnie¿d¿ony pocz±tek obszaru odsy³acza "
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " Nie mo¿na odnale¼æ wêz³a [Zawarto¶æ] ([Contents]) w pliku pomocy "
 
 #: src/help.c:741
@@ -4687,7 +4687,7 @@ msgstr " Pomoc "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Nie mo¿na otworzyæ pliku %s \n"
@@ -4695,7 +4695,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " Nie mo¿na odnale¼æ wêz³a %s w pliku pomocy "
 
 #: src/help.c:808
@@ -5973,7 +5973,7 @@ msgstr "Utwórz"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Nie mo¿na zmieniæ katalogu na \"%s\" \n"
@@ -6004,7 +6004,7 @@ msgstr "Ostrze¿enie: Nie mo¿na zmieniæ katalogu na %s.\n"
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Nie mo¿na otworzyæ pliku %s do zapisu:\n"
@@ -6023,7 +6023,7 @@ msgstr "Przenie¶ katalog \"%s\" do:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Nie mo¿na wykonaæ operacji stat na pliku docelowym \n"
@@ -6057,7 +6057,7 @@ msgstr "Usuñ"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Nie mo¿na zapisaæ do pliku %s:\n"
@@ -6170,7 +6170,7 @@ msgid " Save changes "
 msgstr " Zapisz zmiany "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Nie mo¿na uruchomiæ programu potomnego "
 
 #: src/view.c:458
@@ -6182,25 +6182,25 @@ msgid " Could not open file "
 msgstr " Nie mo¿na otworzyæ pliku "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Nie mo¿na otworzyæ pliku \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Nie mo¿na wykonaæ operacji stat na pliku \n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Nie mo¿na wy¶wietliæ: to nie zwyk³y plik "
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Nie mo¿na otworzyæ \"%s\"\n"
@@ -6209,7 +6209,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Nie mo¿na wykonaæ operacji stat na \"%s\"\n"
@@ -6888,17 +6888,17 @@ msgstr " Niew³a¶ciwe has³o "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Nie mo¿na odnale¼æ nazwy komputera: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Nie mo¿na utworzyæ gniazdka: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Nie mo¿na po³±czyæ siê z serwerem: %s "
 
 #: vfs/mcfs.c:320

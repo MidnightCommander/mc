@@ -555,7 +555,7 @@ execute_menu_command (WEdit *edit_widget, char *commands)
     cmd_file_fd = mc_mkstemps(&file_name, "mcusr", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1){
-	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
+	message (1, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
@@ -686,7 +686,7 @@ void user_menu_cmd (WEdit *edit_widget)
     }
 
     if ((data = load_file (menu)) == NULL){
-	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
+	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "),
 		 menu, unix_error_string (errno));
 	g_free (menu);
 	menu = NULL;

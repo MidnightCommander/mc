@@ -411,7 +411,7 @@ int main (int argc, char **argv)
     filename = argv[2];
     file = fopen (filename, "r");
     if (file == NULL){
-	sprintf (buffer, "man2hlp: Can't open file \"%s\"", filename);
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
 	perror (buffer);
 	return 3;
     }

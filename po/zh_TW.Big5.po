@@ -4445,7 +4445,7 @@ msgstr "背景工作"
 # vfs/mcfs.c:235
 #: src/charsets.c:171 src/charsets.c:184
 #, c-format
-msgid "Can't translate from %s to %s"
+msgid "Cannot translate from %s to %s"
 msgstr "無法由 %s 轉換到 %s"
 
 # src/chmod.c:95
@@ -4971,7 +4971,7 @@ msgstr " 設定 "
 #: src/command.c:171
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " 無法改變目錄到 '%s' \n"
@@ -5086,7 +5086,7 @@ msgstr "不明的"
 #: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " 無法建立指令暫存檔 \n"
@@ -5613,7 +5613,7 @@ msgstr " 以來源遮罩："
 
 # src/file.c:1856
 #: src/file.c:1859
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr " 無法操作 \"..\"! "
 
 # src/file.c:1875
@@ -5922,7 +5922,7 @@ msgstr " 內部臭蟲： 重覆的連結區域開頭 "
 
 # src/help.c:572
 #: src/help.c:568
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr " 無法在說明檔裡找到 [內容] 節點 "
 
 # src/help.c:741
@@ -5935,7 +5935,7 @@ msgstr " 說明 "
 #: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " 無法開啟檔案 %s \n"
@@ -5944,7 +5944,7 @@ msgstr ""
 # src/help.c:771
 #: src/help.c:779
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr " 無法在說明檔裡找到節點 %s "
 
 # src/help.c:808
@@ -7511,7 +7511,7 @@ msgstr " 不作任何動作 "
 #: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " 無法改變目錄至 \"%s\" \n"
@@ -7560,7 +7560,7 @@ msgstr ""
 # src/view.c:571
 #: src/setup.c:654
 #, c-format
-msgid "Can't load %s/%s"
+msgid "Cannot load %s/%s"
 msgstr "無法載入 %s/%s"
 
 #: src/slint.c:199
@@ -7727,7 +7727,7 @@ msgstr "GNU Midnight Commander %s\n"
 #: src/tree.c:194
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "無法開啟檔案 %s 來寫入資料：\n"
@@ -7749,7 +7749,7 @@ msgstr "搬移目錄 \"%s\" 至："
 #: src/tree.c:689
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " 無法 stat 目的地 \n"
@@ -7790,7 +7790,7 @@ msgstr "刪目錄"
 #: src/treestore.c:361
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "無法寫入到檔案 %s :\n"
@@ -7929,7 +7929,7 @@ msgstr " 存檔 "
 
 # src/view.c:448
 #: src/view.c:450
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " 無法產生子程式 "
 
 # src/view.c:457
@@ -7944,13 +7944,13 @@ msgstr " 無法開啟檔案 "
 
 # src/view.c:477
 #: src/view.c:479
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " 無法開啟檔案 \""
 
 # src/view.c:484
 #: src/view.c:486
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " 無法 stat 檔案 \n"
@@ -7958,14 +7958,14 @@ msgstr ""
 
 # src/view.c:490
 #: src/view.c:492
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " 無法檢視：並非一常規檔案 "
 
 # src/view.c:571
 #: src/view.c:573
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " 無法開啟檔案 \"%s\" \n"
@@ -7975,7 +7975,7 @@ msgstr ""
 #: src/view.c:582
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " 無法 stat %s \n"
@@ -8807,19 +8807,19 @@ msgstr " 密碼無效 "
 # vfs/mcfs.c:235
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " 找不到主機: %s"
 
 # vfs/mcfs.c:253
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " 無法建立插座: %s"
 
 # vfs/mcfs.c:259
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " 無法連結到伺服器: %s"
 
 # vfs/mcfs.c:324
@@ -9118,7 +9118,7 @@ msgstr "%s: %s: %s 已傳送 %ld 位元組"
 #~ " %s "
 
 # src/ext.c:315
-#~ msgid " Can't execute commands on a Virtual File System directory "
+#~ msgid " Cannot execute commands on a Virtual File System directory "
 #~ msgstr " 無法在虛擬檔案系統的目錄上執行指令  "
 
 # src/textconf.c:44
@@ -9202,7 +9202,7 @@ msgstr "%s: %s: %s 已傳送 %ld 位元組"
 # src/ext.c:143
 # src/user.c:544
 #~ msgid ""
-#~ " Can't generate unique filename \n"
+#~ " Cannot generate unique filename \n"
 #~ " %s "
 #~ msgstr ""
 #~ " 無法產生唯一的檔名\n"

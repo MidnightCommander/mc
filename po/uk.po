@@ -3641,7 +3641,7 @@ msgstr " Установки "
 #: src/command.c:170
 #, c-format
 msgid ""
-" Can't chdir to '%s' \n"
+" Cannot chdir to '%s' \n"
 " %s "
 msgstr ""
 " Неможливо перейти в каталог \"%s\" \n"
@@ -3730,7 +3730,7 @@ msgstr ""
 #: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
-" Can't generate unique filename \n"
+" Cannot generate unique filename \n"
 " %s "
 msgstr ""
 " Неможливо створити ун╕кальну назву файлу \n"
@@ -3739,7 +3739,7 @@ msgstr ""
 #: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
-" Can't create temporary command file \n"
+" Cannot create temporary command file \n"
 " %s "
 msgstr ""
 " Неможливо створити тимчасовий командний файл \n"
@@ -3750,7 +3750,7 @@ msgid " Parameter "
 msgstr " Параметр "
 
 #: src/ext.c:315
-msgid " Can't execute commands on a Virtual File System directory "
+msgid " Cannot execute commands on a Virtual File System directory "
 msgstr ""
 
 #: src/ext.c:415
@@ -4267,7 +4267,7 @@ msgid " with source mask:"
 msgstr " з вих╕дною маскою:"
 
 #: src/file.c:1860
-msgid " Can't operate on \"..\"! "
+msgid " Cannot operate on \"..\"! "
 msgstr ""
 
 #: src/file.c:1879 src/screen.c:2115
@@ -4585,7 +4585,7 @@ msgid " Internal bug: Double start of link area "
 msgstr ""
 
 #: src/help.c:572
-msgid " Can't find node [Contents] in help file "
+msgid " Cannot find node [Contents] in help file "
 msgstr ""
 
 #: src/help.c:741
@@ -4595,7 +4595,7 @@ msgstr " Дов╕дка "
 #: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
-" Can't open file %s \n"
+" Cannot open file %s \n"
 " %s "
 msgstr ""
 " Неможливо в╕дкрити файл %s \n"
@@ -4603,7 +4603,7 @@ msgstr ""
 
 #: src/help.c:771
 #, c-format
-msgid " Can't find node %s in help file "
+msgid " Cannot find node %s in help file "
 msgstr ""
 
 #: src/help.c:808
@@ -5816,7 +5816,7 @@ msgstr "СтвКат"
 #: src/screen.c:2415 src/tree.c:866
 #, c-format
 msgid ""
-" Can't chdir to \"%s\" \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
 " Неможливо зм╕нити каталог на \"%s\" \n"
@@ -5847,7 +5847,7 @@ msgstr ""
 #: src/tree.c:192
 #, c-format
 msgid ""
-"Can't open the %s file for writing:\n"
+"Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 "Неможливо в╕дкрити файл %s для записування:\n"
@@ -5866,7 +5866,7 @@ msgstr "Перенести каталог \"%s\" у:"
 #: src/tree.c:682
 #, c-format
 msgid ""
-" Can't stat the destination \n"
+" Cannot stat the destination \n"
 " %s "
 msgstr ""
 " Неможливо отримати властивост╕ призначення \n"
@@ -5900,7 +5900,7 @@ msgstr "rmdir"
 #: src/treestore.c:360
 #, c-format
 msgid ""
-"Can't write to the %s file:\n"
+"Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 "Неможливо записати у файл %s:\n"
@@ -6013,7 +6013,7 @@ msgid " Save changes "
 msgstr " Зберегти зм╕ни "
 
 #: src/view.c:449
-msgid " Can't spawn child program "
+msgid " Cannot spawn child program "
 msgstr " Неможливо породити процес-нащадок "
 
 #: src/view.c:458
@@ -6025,25 +6025,25 @@ msgid " Could not open file "
 msgstr " Неможливо в╕дкрити файл "
 
 #: src/view.c:478
-msgid " Can't open file \""
+msgid " Cannot open file \""
 msgstr " Неможливо в╕дкрити файл \""
 
 #: src/view.c:485
 msgid ""
-" Can't stat file \n"
+" Cannot stat file \n"
 " "
 msgstr ""
 " Неможливо отримати властивост╕ файлу \n"
 " "
 
 #: src/view.c:491
-msgid " Can't view: not a regular file "
+msgid " Cannot view: not a regular file "
 msgstr " Неможливо показати: не звичайний файл "
 
 #: src/view.c:572
 #, c-format
 msgid ""
-" Can't open \"%s\"\n"
+" Cannot open \"%s\"\n"
 " %s "
 msgstr ""
 " Неможливо в╕дкрити \"%s\"\n"
@@ -6052,7 +6052,7 @@ msgstr ""
 #: src/view.c:581
 #, c-format
 msgid ""
-" Can't stat \"%s\"\n"
+" Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
 " Неможливо отримати властивост╕ \"%s\"\n"
@@ -6718,17 +6718,17 @@ msgstr " Нев╕рний пароль "
 
 #: vfs/mcfs.c:230
 #, c-format
-msgid " Can't locate hostname: %s "
+msgid " Cannot locate hostname: %s "
 msgstr " Неможливо знайти назву машини: %s "
 
 #: vfs/mcfs.c:248
 #, c-format
-msgid " Can't create socket: %s "
+msgid " Cannot create socket: %s "
 msgstr " Неможливо створити сокет: %s "
 
 #: vfs/mcfs.c:254
 #, c-format
-msgid " Can't connect to server: %s "
+msgid " Cannot connect to server: %s "
 msgstr " Неможливо з'╓днатися з сервером: %s"
 
 #: vfs/mcfs.c:320
