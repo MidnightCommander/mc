@@ -145,9 +145,6 @@
 /* Defined if your CPP understands ## macro token pasting method */
 #undef HAVE_PORTABLE_TOKEN_PASTING
 
-/* Define if you want to turn on SCO-specific code */
-#undef SCO_FLAVOR
-
 /* Define if your system has struct linger */
 #undef HAVE_STRUCT_LINGER
 

@@ -66,14 +66,20 @@ AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
 LIBS="$LIBS $GLIB_LIBS"
 
 dnl
-dnl For A/UX.  Do not move
+dnl OS specific flags.
 dnl
 
 posix_libs=""
 case $host_os in
 aux*)
+    # A/UX
     posix_libs="-lposix"
     AC_DEFINE(_POSIX_SOURCE)
+    ;;
+sco*)
+    AC_DEFINE(SCO_FLAVOR, 1, [Define if you want to turn on SCO-specific code])
+    AC_DEFINE(_SVID3, 1, [Needs to be defined on SCO])
+    ;;
 esac
 
 AC_PROG_INSTALL
@@ -339,14 +345,6 @@ dnl	AC_MSG_WARN([Use of the bsdcurses extension has some])
 dnl	AC_MSG_WARN([display/input problems.])
 dnl	AC_MSG_WARN([Reconsider using xcurses])
 dnl])
-
-AC_ARG_WITH(sco,
-	[--with-sco                 Use this to turn on SCO-specific code],[
-	if test x$withval = xyes; then
-		AC_DEFINE(SCO_FLAVOR)
-		CFLAGS="$CFLAGS -D_SVID3"
-	fi
-])
 
 AC_ARG_WITH(sunos-curses,
 	[--with-sunos-curses        Used to force SunOS 4.x curses],[

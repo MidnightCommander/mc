@@ -1,3 +1,11 @@
+2001-05-26  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Define SCO_FLAVOR based on $host_os, not on the
+	user choice.
+	* acconfig.h: Changes for the above.
+	* INSTALL: Don't document --with-sco - it's now defunct.
+	* INSTALL.FAST: Likewise.
+
 2001-05-25  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Match both "mail" and "Mail", but only if they

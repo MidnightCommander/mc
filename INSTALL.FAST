@@ -46,9 +46,6 @@ replacement for SysV curses).
 	The configure will append `lib' and `include' to find the libgpm.a
 	and gpm.h files respectively.
 
-`--with-sco'
-	If you are compiling on a SCO machine.
-
    You may also want to specify CFLAGS for the compiler, even if it finds
    itself some defaults by typing e.g.
 

@@ -118,12 +118,6 @@ installed the gpm package.
 `--with-mmap'
      Needed when compiling under AIX if you want the fast viewer.
 
-`--with-sco'
-     This option is used to compile on SCO: it turns on SCO-specific
-     code, i.e. disables the terminal resizing mechanism, uses the
-     BSD-like pseudoterminal handling, adds screen-saving capabilities
-     on console, etc.
-
 `--with-subshell[=optional]', `--without-subshell' 
      The subshell support is by default turned on, you can disable
      this by using the --without-subshell option.  If you pass the
