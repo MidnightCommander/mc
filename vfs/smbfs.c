@@ -450,6 +450,7 @@ browsing_helper (const char *name, uint32 type, const char *comment)
     }
     DEBUG (3, ("\t%-15.15s%-10.10s%s\n", name, typestr, comment));
 }
+
 static void
 loaddir_helper (file_info * finfo, const char *mask)
 {
@@ -1261,47 +1262,47 @@ fake_share_stat(const char *server_url, const char *path, struct stat *buf)
 
 /* stat a single file, get_remote_stat callback  */
 static dir_entry *single_entry;
+
 static void
-statfile_helper(file_info *finfo, const char *mask)
+statfile_helper (file_info * finfo, const char *mask)
 {
-	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
+    time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
 
-#if 0 /* single_entry is never freed now. And only my_stat is used */
-	single_entry = g_new (dir_entry, 1);
+#if 0				/* single_entry is never free()d now.  And only my_stat is used */
+    single_entry = g_new (dir_entry, 1);
 
-	single_entry->text = dos_to_unix (g_strdup (finfo->name), 1);
+    single_entry->text = dos_to_unix (g_strdup (finfo->name), 1);
 
-	single_entry->next = 0;
+    single_entry->next = 0;
 #endif
-	if (!single_entry)
-		single_entry = g_new0 (dir_entry, 1);
+    if (!single_entry)
+	single_entry = g_new0 (dir_entry, 1);
 
-	single_entry->my_stat.st_size = finfo->size;
-	single_entry->my_stat.st_mtime = finfo->mtime;
-	single_entry->my_stat.st_atime = finfo->atime;
-	single_entry->my_stat.st_ctime = finfo->ctime;
-	single_entry->my_stat.st_uid = finfo->uid;
-	single_entry->my_stat.st_gid = finfo->gid;
+    single_entry->my_stat.st_size = finfo->size;
+    single_entry->my_stat.st_mtime = finfo->mtime;
+    single_entry->my_stat.st_atime = finfo->atime;
+    single_entry->my_stat.st_ctime = finfo->ctime;
+    single_entry->my_stat.st_uid = finfo->uid;
+    single_entry->my_stat.st_gid = finfo->gid;
 
-	single_entry->my_stat.st_mode =
-	    S_IRUSR|S_IRGRP|S_IROTH|S_IWUSR|S_IWGRP|S_IWOTH;
+    single_entry->my_stat.st_mode =	/*  rw-rw-rw */
+	S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP | S_IWOTH;
 
 /*  if (finfo->mode & aVOLID);	 nothing similar in real world */
-	if (finfo->mode & aDIR)
-		single_entry->my_stat.st_mode |= S_IFDIR;
-	else
-		single_entry->my_stat.st_mode |= S_IFREG;/* if not dir, regular file? */
+    if (finfo->mode & aDIR)		/* drwxrwxrwx */
+	single_entry->my_stat.st_mode |= S_IFDIR | S_IXUSR | S_IXGRP | S_IXOTH;
+    else			/* if not dir, regular file? */
+	single_entry->my_stat.st_mode |= S_IFREG;
 /*  if (finfo->mode & aARCH);	DOS archive	*/
 /*  if (finfo->mode & aHIDDEN);	like a dot file? */
 /*  if (finfo->mode & aSYSTEM); like a kernel? */
-  if (finfo->mode & aRONLY)
-		single_entry->my_stat.st_mode &= ~(S_IRUSR|S_IRGRP|S_IROTH);
- 
-	DEBUG(6, ("  %-30s%7.7s%8.0f  %s",
-		CNV_LANG(finfo->name),
-		attrib_string(finfo->mode),
-		(double)finfo->size,
-		asctime(LocalTime(&t)))); 
+    if (finfo->mode & aRONLY)
+	single_entry->my_stat.st_mode &= ~(S_IWUSR | S_IWGRP | S_IWOTH);
+
+    DEBUG (6, ("  %-30s%7.7s%8.0f  %s",
+	       CNV_LANG (finfo->name),
+	       attrib_string (finfo->mode),
+	       (double) finfo->size, asctime (LocalTime (&t))));
 }
 
 /* stat a single file */
@@ -1323,7 +1324,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 
 	memcpy(buf, &single_entry->my_stat, sizeof(struct stat));
 
-/* dont free here, use for smbfs_fstat() */
+/* don't free here, use for smbfs_fstat() */
 /*	g_free(single_entry->text);
 	g_free(single_entry);	*/
 	g_free (mypath);

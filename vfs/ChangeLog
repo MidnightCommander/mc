@@ -3,6 +3,7 @@
 	* smbfs.c (loaddir_helper): Remove write permissions if file
 	has readonly attribute.  Add execute permissions for directory.
 	Reformat whole function.
+	(statfile_helper): Likewise.
 	(server_browsing_helper): Add execute permissions.  Reformat.
 	(browsing_helper): Likewise.
 
