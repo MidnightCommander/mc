@@ -697,7 +697,9 @@ void setup_panels (void)
 
 void flag_winch (int dummy)
 {
+#ifndef USE_NCURSES	/* don't do malloc in a signal handler */
     low_level_change_screen_size ();
+#endif
     winch_flag = 1;
 }
 
@@ -716,7 +718,7 @@ low_level_change_screen_size (void)
     if (winsz.ws_col && winsz.ws_row){
 #if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
 	resizeterm(winsz.ws_row, winsz.ws_col);
-	clearok(stdscr,TRUE);	/* FIXME: sigwinch's should use a semaphore! */
+	clearok(stdscr,TRUE);	/* sigwinch's should use a semaphore! */
 #else
 	COLS = winsz.ws_col;
 	LINES = winsz.ws_row;

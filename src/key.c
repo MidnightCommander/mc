@@ -479,6 +479,10 @@ int get_key_code (int no_delay)
         nodelay (stdscr, TRUE);
     }
     c = xgetch ();
+#if defined(USE_NCURSES) && defined(KEY_RESIZE)
+    if (c == KEY_RESIZE)
+        goto nodelay_try_again;
+#endif
     if (no_delay) {
         nodelay (stdscr, FALSE);
         if (c == ERR) {

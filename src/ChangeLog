@@ -1,5 +1,10 @@
 2002-02-05  Pavel Roskin  <proski@gnu.org>
 
+	* key.c [USE_NCURSES] (get_key_code): Ignore KEY_RESIZE.
+	* layout.c [USE_NCURSES] (flag_winch): Don't call
+	low_level_change_screen_size() from signal handler.
+	From Thomas Dickey <dickey@herndon4.his.com>
+
 	* screen.c (format_file): Add a new parameter (size of the
 	output buffer) to prevent buffer overflow on very wide
 	terminals.
