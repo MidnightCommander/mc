@@ -1,3 +1,11 @@
+2001-06-13  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_SHORT_D_NAME_LEN): Fix compiler warnings in
+	the test code.
+	* configure.in: Fix compiler warnings in the arguments to
+	AC_TRY_WARNINGS. Fix value of NEED_CRYPT_PROTOTYPE - add spaces
+	around `=' in the `test' command.
+
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
 	* doc-gnome/C/gmc.sgml: Remove index - it's not used in the

@@ -9,14 +9,14 @@ CFLAGS="$CFLAGS -I$srcdir"
 AC_TRY_RUN([
 #include <src/fs.h>
 
-main ()
+int main ()
 {
    struct dirent ddd;
 
    if (sizeof (ddd.d_name) < 12)
-	exit (0);
+	return 0;
    else
-   	exit (1); 
+   	return 1; 
 }
 
 ],[

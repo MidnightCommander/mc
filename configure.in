@@ -113,15 +113,19 @@ AC_SUBST(SHADOWLIB)
 
 NEED_CRYPT_PROTOTYPE=yes
 if test x$ac_cv_header_crypt_h = xyes; then
-AC_TRY_WARNINGS([#include <crypt.h>], [char *p = crypt("xxx", "yyy");],[
+AC_TRY_WARNINGS([#include <crypt.h>], [char *p = crypt("xxx", "yyy");
+if (p)
+return 0;],[
 NEED_CRYPT_PROTOTYPE=no])
 else 
     if test x$ac_cv_header_unistd_h = xyes; then
-AC_TRY_WARNINGS([#include <unistd.h>], [char *p = crypt("xxx", "yyy");],[
+AC_TRY_WARNINGS([#include <unistd.h>], [char *p = crypt("xxx", "yyy");
+if (p)
+return 0;],[
 NEED_CRYPT_PROTOTYPE=no])
     fi
 fi
-if test x$NEED_CRYPT_PROTOTYPE=xyes; then
+if test x$NEED_CRYPT_PROTOTYPE = xyes; then
 AC_DEFINE(NEED_CRYPT_PROTOTYPE)
 fi
 
