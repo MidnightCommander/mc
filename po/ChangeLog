@@ -1,3 +1,8 @@
+1999-08-30  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+
+	* wa.po: updated walloon language file from
+	Lorint Hendschel <LorintHendschel@skynet.be>
+
 1999-08-29  Federico Mena Quintero  <federico@redhat.com>
 
 	* POTFILES.in: Added gnome/gdesktop-prefs.c to the list of files.
