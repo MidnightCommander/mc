@@ -78,13 +78,7 @@ static WRadio *radio_itemwidth;
 struct listmode_button {
     int ret_cmd, flags, y, x;
     char *text;
-};
-
-static struct listmode_button listmode_but[BUTTONS] = {
-    {B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel"},
-    {B_ADD, NORMAL_BUTTON, 0, 22, "&Add item"},
-    {B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove"},
-    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&OK"},
+    bcback callback;
 };
 
 #define B_PLUS B_USER
@@ -102,8 +96,37 @@ static struct listmode_label listmode_labels[LABELS] = {
     {UY + 13, UX + 22, "Item width:"}
 };
 
+static char *
+select_new_item (void)
+{
+    /* NOTE: The following array of possible items must match the
+       formats array in screen.c. Better approach might be to make the
+       formats array global */
+    char *possible_items[] =
+	{ "name", "size", "type", "mtime", "perm", "mode", "|", "nlink",
+	"owner", "group", "atime", "ctime", "space", "mark",
+	"inode", NULL
+    };
+
+    int i;
+    Listbox *mylistbox;
+
+    mylistbox =
+	create_listbox_window (12, 20, " Add listing format item ",
+			       listmode_section);
+    for (i = 0; possible_items[i]; i++) {
+	listbox_add_item (mylistbox->list, 0, 0, possible_items[i], NULL);
+    }
+
+    i = run_listbox (mylistbox);
+    if (i >= 0)
+	return possible_items[i];
+    else
+	return NULL;
+}
+
 static void
-listmode_refresh (Dlg_head * h)
+listmode_refresh (Dlg_head *h)
 {
     common_dialog_repaint (h);
 
@@ -126,7 +149,31 @@ bminus_cback (int action)
 }
 
 static int
-listmode_callback (Dlg_head * h, int Par, int Msg)
+badd_cback (int action)
+{
+    char *s = select_new_item ();
+    if (s) {
+	listbox_add_item (l_listmode, 0, 0, s, NULL);
+    }
+    return 0;
+}
+
+static int
+bremove_cback (int action)
+{
+    listbox_remove_current (l_listmode, 0);
+    return 0;
+}
+
+static struct listmode_button listmode_but[BUTTONS] = {
+    {B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel", NULL},
+    {B_ADD, NORMAL_BUTTON, 0, 22, "&Add item", badd_cback},
+    {B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove", bremove_cback},
+    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&OK", NULL},
+};
+
+static int
+listmode_callback (Dlg_head *h, int Par, int Msg)
 {
     switch (Msg) {
 
@@ -168,7 +215,8 @@ init_listmode (char *oldlistformat)
 				BX + listmode_but[i].x,
 				listmode_but[i].ret_cmd,
 				listmode_but[i].flags,
-				listmode_but[i].text, 0));
+				listmode_but[i].text,
+				listmode_but[i].callback));
 
     /* We add the labels. */
     for (i = 0; i < LABELS; i++) {
@@ -229,41 +277,12 @@ init_listmode (char *oldlistformat)
 }
 
 static void
-listmode_done (Dlg_head * h)
+listmode_done (Dlg_head *h)
 {
     destroy_dlg (h);
     if (0)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
-}
-
-static char *
-select_new_item (void)
-{
-    /* NOTE: The following array of possible items must match the
-       formats array in screen.c. Better approach might be to make the
-       formats array global */
-    char *possible_items[] =
-	{ "name", "size", "type", "mtime", "perm", "mode", "|", "nlink",
-	"owner", "group", "atime", "ctime", "space", "mark",
-	"inode", NULL
-    };
-
-    int i;
-    Listbox *mylistbox;
-
-    mylistbox =
-	create_listbox_window (12, 20, " Add listing format item ",
-			       listmode_section);
-    for (i = 0; possible_items[i]; i++) {
-	listbox_add_item (mylistbox->list, 0, 0, possible_items[i], NULL);
-    }
-
-    i = run_listbox (mylistbox);
-    if (i >= 0)
-	return possible_items[i];
-    else
-	return NULL;
 }
 
 static char *
@@ -306,35 +325,18 @@ listmode_edit (char *oldlistformat)
     listmode_dlg = init_listmode (s);
     g_free (s);
 
-    while (newformat == NULL) {
-	/* display file info */
-	attrset (SELECTED_COLOR);
+    attrset (SELECTED_COLOR);
 
-	/*
-	 * FIXME: Calling run_dlg() more than once doesn't work.
-	 * This code is broken.
-	 */
-	run_dlg (listmode_dlg);
+    run_dlg (listmode_dlg);
 
-	switch (listmode_dlg->ret_value) {
-	case B_CANCEL:
-	    newformat = g_strdup (oldlistformat);
-	    break;
+    switch (listmode_dlg->ret_value) {
+    case B_CANCEL:
+	newformat = g_strdup (oldlistformat);
+	break;
 
-	case B_ADD:
-	    s = select_new_item ();
-	    if (s)
-		listbox_add_item (l_listmode, 0, 0, s, NULL);
-	    break;
-
-	case B_REMOVE:
-	    listbox_remove_current (l_listmode, 0);
-	    break;
-
-	case B_ENTER:
-	    newformat = collect_new_format ();
-	    break;
-	}
+    case B_ENTER:
+	newformat = collect_new_format ();
+	break;
     }
 
     listmode_done (listmode_dlg);
