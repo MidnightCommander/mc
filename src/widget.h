@@ -14,6 +14,9 @@
 #define NORMAL_BUTTON		2
 #define DEFPUSH_BUTTON		3
 
+/* button callback */
+typedef int (*bcback) (int);
+
 typedef struct WButton {
     Widget widget;
     int action;			/* what to do when pressed */
@@ -22,7 +25,7 @@ typedef struct WButton {
     char *text;			/* text of button */
     int hotkey;			/* hot KEY */
     int hotpos;			/* offset hot KEY char in text */
-    int (*callback) (int);	/* Callback function */
+    bcback callback;		/* Callback function */
 } WButton;
 
 typedef struct WRadio {
@@ -129,8 +132,8 @@ typedef struct {
 } WButtonBar;
 
 /* Constructors */
-WButton *button_new   (int y, int x, int action, int flags, char *text, 
-			int (*callback)(int));
+WButton *button_new   (int y, int x, int action, int flags, char *text,
+		      bcback callback);
 WRadio  *radio_new    (int y, int x, int count, char **text, int use_hotkey);
 WCheck  *check_new    (int y, int x, int state,  char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, char *histname);

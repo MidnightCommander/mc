@@ -1,5 +1,7 @@
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* widget.h: Define type bcback for button callbacks.
+
 	* widget.c (listbox_new): Remove "action" argument.  Listboxes
 	without callbacks default to closing the dialog.  Adjust all
 	users.  This fixes double click on completion listbox.

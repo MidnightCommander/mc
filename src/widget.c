@@ -203,8 +203,8 @@ button_scan_hotkey(WButton* b)
 }
 
 WButton *
-button_new (int y, int x, int action, int flags, char *text, 
-	    int (*callback)(int))
+button_new (int y, int x, int action, int flags, char *text,
+	    bcback callback)
 {
     WButton *b = g_new (WButton, 1);
 
