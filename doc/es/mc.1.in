@@ -2775,7 +2775,7 @@ archivo existente. Representan algún tipo de información relacionada con
 el sistema en forma de árbol de directorios. Se accede a ellos ejecutando
 .RI ' "cd #nombrefs" '
 donde nombrefs es el nombre corto que identifica el extfs (ver más
-adelante).  Ejemplos de estos son audio (lista de pistas de sonido en
+adelante).  Ejemplos de éstos son audio (lista de pistas de sonido en
 el CD) o apt (lista de paquetes de tipo Debian en el sistema).
 .PP
 Por ejemplo, para listar las pistas de música del CD, escribir
@@ -2791,11 +2791,11 @@ Puede tratarse de archivos reales empaquetados o comprimidos en un archivo
 en un archivo de correo electrónico (mailfs) o partes de un archivo de
 modificaciones o parches (patchfs). Para acceder a ellos se añade
 .RI ' #nombrefs '
-al nombre del archivo a abrir. Éste archivo podría él mismo estar en
+al nombre del archivo a abrir. Este archivo podría él mismo estar en
 otro sistema de archivos virtual.
 .PP
-Por ejemplo, para listar los contenidos un archivo documentos.zip comprimido
-hay que escribir
+Por ejemplo, para listar los contenidos de un archivo documentos.zip
+comprimido hay que escribir
 .PP
 .nf
   cd documentos.zip#uzip
