@@ -1,5 +1,8 @@
 2001-02-09  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Don't check for any 64-bit functions and
+	syscall() - they are not needed.
+
 	* samba/configure.in: Remove the test for
 	HAVE_EXPLICIT_LARGEFILE_SUPPORT, since it's incompatible with
 	the rest of the source that doesn't use explicit 64-bit calls.
