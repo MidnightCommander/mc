@@ -85,12 +85,13 @@ static void status_string (WEdit * edit, char *s, int w, int fill)
 }
 
 /* how to get as much onto the status line as is numerically possible :) */
-void edit_status (WEdit * edit)
+void
+edit_status (WEdit *edit)
 {
     int w, i, t;
     char *s;
     w = edit->widget.cols - (edit->have_frame * 2);
-    s = malloc (w + 16);
+    s = g_malloc (w + 16);
     if (w < 4)
 	w = 4;
     memset (s, ' ', w);
@@ -105,14 +106,14 @@ void edit_status (WEdit * edit)
 	    s[i] = ' ';
 	}
 	t = w - 20;
-	if (t > 1)	/* g_snprintf() must write at least '\000' */
+	if (t > 1)		/* g_snprintf() must write at least '\000' */
 	    status_string (edit, s + 20, t + 1 /* for '\000' */ , ' ');
     }
     s[w] = 0;
 
     printw ("%-*s", w, s);
     attrset (EDITOR_NORMAL_COLOR);
-    free (s);
+    g_free (s);
 }
 
 /* this scrolls the text so that cursor is on the screen */

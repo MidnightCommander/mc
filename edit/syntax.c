@@ -81,16 +81,7 @@ struct _syntax_marker {
 
 int option_syntax_highlighting = 1;
 
-static inline void *syntax_malloc (size_t x)
-{
-    void *p;
-    p = malloc (x);
-    memset (p, 0, x);
-    return p;
-}
-
-#define syntax_free(x) {if(x){free(x);(x)=0;}}
-#define syntax_g_free(x) {if(x){g_free(x);(x)=0;}}
+#define syntax_g_free(x) do {if(x) {g_free(x); (x)=0;}} while (0)
 
 static long compare_word_to_right (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
 {
@@ -355,7 +346,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 	    if (i > (edit->syntax_marker ? edit->syntax_marker->offset + SYNTAX_MARKER_DENSITY : SYNTAX_MARKER_DENSITY)) {
 		struct _syntax_marker *s;
 		s = edit->syntax_marker;
-		edit->syntax_marker = syntax_malloc (sizeof (struct _syntax_marker));
+		edit->syntax_marker = g_malloc0 (sizeof (struct _syntax_marker));
 		edit->syntax_marker->next = s;
 		edit->syntax_marker->offset = i;
 		edit->syntax_marker->rule = edit->rule;
@@ -377,7 +368,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 		break;
 	    }
 	    s = edit->syntax_marker->next;
-	    syntax_free (edit->syntax_marker);
+	    syntax_g_free (edit->syntax_marker);
 	    edit->syntax_marker = s;
 	}
     }
@@ -411,7 +402,7 @@ static int read_one_line (char **line, FILE * f)
 {
     char *p;
     int len = 256, c, r = 0, i = 0;
-    p = syntax_malloc (len);
+    p = g_malloc0 (len);
 
     for (;;) {
 	c = fgetc (f);
@@ -428,9 +419,9 @@ static int read_one_line (char **line, FILE * f)
 	} else {
 	    if (i >= len - 1) {
 		char *q;
-		q = syntax_malloc (len * 2);
+		q = g_malloc0 (len * 2);
 		memcpy (q, p, len);
-		syntax_free (p);
+		syntax_g_free (p);
 		p = q;
 		len *= 2;
 	    }
@@ -603,7 +594,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
     strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
-    r = edit->rules = syntax_malloc (MAX_CONTEXTS * sizeof (struct context_rule *));
+    r = edit->rules = g_malloc0 (MAX_CONTEXTS * sizeof (struct context_rule *));
 
     for (;;) {
 	char **a;
@@ -617,7 +608,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		line = save_line + 1;
 		syntax_g_free (error_file_name);
 		if (l)
-		    syntax_free (l);
+		    syntax_g_free (l);
 		if (!read_one_line (&l, f))
 		    break;
 	    } else {
@@ -663,12 +654,12 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		    break_a;
 		}
 		a++;
-		c = r[0] = syntax_malloc (sizeof (struct context_rule));
-		c->left = (char *) strdup (" ");
-		c->right = (char *) strdup (" ");
+		c = r[0] = g_malloc0 (sizeof (struct context_rule));
+		c->left = g_strdup (" ");
+		c->right = g_strdup (" ");
 		num_contexts = 0;
 	    } else {
-		c = r[num_contexts] = syntax_malloc (sizeof (struct context_rule));
+		c = r[num_contexts] = g_malloc0 (sizeof (struct context_rule));
 		if (!strcmp (*a, "exclusive")) {
 		    a++;
 		    c->between_delimiters = 1;
@@ -676,14 +667,14 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		check_a;
 		if (!strcmp (*a, "whole")) {
 		    a++;
-		    c->whole_word_chars_left = (char *) strdup (whole_left);
-		    c->whole_word_chars_right = (char *) strdup (whole_right);
+		    c->whole_word_chars_left = g_strdup (whole_left);
+		    c->whole_word_chars_right = g_strdup (whole_right);
 		} else if (!strcmp (*a, "wholeleft")) {
 		    a++;
-		    c->whole_word_chars_left = (char *) strdup (whole_left);
+		    c->whole_word_chars_left = g_strdup (whole_left);
 		} else if (!strcmp (*a, "wholeright")) {
 		    a++;
-		    c->whole_word_chars_right = (char *) strdup (whole_right);
+		    c->whole_word_chars_right = g_strdup (whole_right);
 		}
 		check_a;
 		if (!strcmp (*a, "linestart")) {
@@ -691,23 +682,23 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		    c->line_start_left = 1;
 		}
 		check_a;
-		c->left = (char *) strdup (*a++);
+		c->left = g_strdup (*a++);
 		check_a;
 		if (!strcmp (*a, "linestart")) {
 		    a++;
 		    c->line_start_right = 1;
 		}
 		check_a;
-		c->right = (char *) strdup (*a++);
+		c->right = g_strdup (*a++);
 		c->first_left = *c->left;
 		c->first_right = *c->right;
 	    }
-	    c->keyword = syntax_malloc (MAX_WORDS_PER_CONTEXT * sizeof (struct key_word *));
+	    c->keyword = g_malloc0 (MAX_WORDS_PER_CONTEXT * sizeof (struct key_word *));
 #if 0
 	    c->max_words = MAX_WORDS_PER_CONTEXT;
 #endif
 	    num_words = 1;
-	    c->keyword[0] = syntax_malloc (sizeof (struct key_word));
+	    c->keyword[0] = g_malloc0 (sizeof (struct key_word));
 	    fg = *a;
 	    if (*a)
 		a++;
@@ -717,7 +708,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    strcpy (last_fg, fg ? fg : "");
 	    strcpy (last_bg, bg ? bg : "");
 	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
-	    c->keyword[0]->keyword = (char *) strdup (" ");
+	    c->keyword[0]->keyword = g_strdup (" ");
 	    check_not_a;
 	    num_contexts++;
 	} else if (!strcmp (args[0], "spellcheck")) {
@@ -731,17 +722,17 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    if (num_words == -1)
 		break_a;
 	    check_a;
-	    k = r[num_contexts - 1]->keyword[num_words] = syntax_malloc (sizeof (struct key_word));
+	    k = r[num_contexts - 1]->keyword[num_words] = g_malloc0 (sizeof (struct key_word));
 	    if (!strcmp (*a, "whole")) {
 		a++;
-		k->whole_word_chars_left = (char *) strdup (whole_left);
-		k->whole_word_chars_right = (char *) strdup (whole_right);
+		k->whole_word_chars_left = g_strdup (whole_left);
+		k->whole_word_chars_right = g_strdup (whole_right);
 	    } else if (!strcmp (*a, "wholeleft")) {
 		a++;
-		k->whole_word_chars_left = (char *) strdup (whole_left);
+		k->whole_word_chars_left = g_strdup (whole_left);
 	    } else if (!strcmp (*a, "wholeright")) {
 		a++;
-		k->whole_word_chars_right = (char *) strdup (whole_right);
+		k->whole_word_chars_right = g_strdup (whole_right);
 	    }
 	    check_a;
 	    if (!strcmp (*a, "linestart")) {
@@ -752,7 +743,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    if (!strcmp (*a, "whole")) {
 		break_a;
 	    }
-	    k->keyword = (char *) strdup (*a++);
+	    k->keyword = g_strdup (*a++);
 	    k->first = *k->keyword;
 	    fg = *a;
 	    if (*a)
@@ -775,13 +766,13 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    break_a;
 	}
 	free_args (args);
-	syntax_free (l);
+	syntax_g_free (l);
     }
     free_args (args);
-    syntax_free (l);
+    syntax_g_free (l);
 
     if (!edit->rules[0])
-	syntax_free (edit->rules);
+	syntax_g_free (edit->rules);
 
     if (result)
 	return result;
@@ -800,7 +791,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    for (j = 1; c->keyword[j]; j++)
 		*p++ = c->keyword[j]->first;
 	    *p = '\0';
-	    c->keyword_first_chars = syntax_malloc (strlen (first_chars) + 2);
+	    c->keyword_first_chars = g_malloc0 (strlen (first_chars) + 2);
 	    strcpy (c->keyword_first_chars, first_chars);
 	}
     }
@@ -816,31 +807,31 @@ void edit_free_syntax_rules (WEdit * edit)
     if (!edit->rules)
 	return;
     edit_get_rule (edit, -1);
-    syntax_free (edit->syntax_type);
+    syntax_g_free (edit->syntax_type);
     edit->syntax_type = 0;
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
-		syntax_free (edit->rules[i]->keyword[j]->keyword);
-		syntax_free (edit->rules[i]->keyword[j]->whole_word_chars_left);
-		syntax_free (edit->rules[i]->keyword[j]->whole_word_chars_right);
-		syntax_free (edit->rules[i]->keyword[j]);
+		syntax_g_free (edit->rules[i]->keyword[j]->keyword);
+		syntax_g_free (edit->rules[i]->keyword[j]->whole_word_chars_left);
+		syntax_g_free (edit->rules[i]->keyword[j]->whole_word_chars_right);
+		syntax_g_free (edit->rules[i]->keyword[j]);
 	    }
 	}
-	syntax_free (edit->rules[i]->left);
-	syntax_free (edit->rules[i]->right);
-	syntax_free (edit->rules[i]->whole_word_chars_left);
-	syntax_free (edit->rules[i]->whole_word_chars_right);
-	syntax_free (edit->rules[i]->keyword);
-	syntax_free (edit->rules[i]->keyword_first_chars);
-	syntax_free (edit->rules[i]);
+	syntax_g_free (edit->rules[i]->left);
+	syntax_g_free (edit->rules[i]->right);
+	syntax_g_free (edit->rules[i]->whole_word_chars_left);
+	syntax_g_free (edit->rules[i]->whole_word_chars_right);
+	syntax_g_free (edit->rules[i]->keyword);
+	syntax_g_free (edit->rules[i]->keyword_first_chars);
+	syntax_g_free (edit->rules[i]);
     }
     while (edit->syntax_marker) {
 	struct _syntax_marker *s = edit->syntax_marker->next;
-	syntax_free (edit->syntax_marker);
+	syntax_g_free (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
-    syntax_free (edit->rules);
+    syntax_g_free (edit->rules);
 }
 
 /* returns -1 on file error, line number on error in file syntax */
@@ -867,7 +858,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
     args[0] = 0;
     for (;;) {
 	line++;
-	syntax_free (l);
+	syntax_g_free (l);
 	if (!read_one_line (&l, f))
 	    break;
 	get_args (l, args, &argc);
@@ -885,7 +876,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 	}
 	if (names) {
 /* 1: just collecting a list of names of rule sets */
-	    names[count++] = (char *) strdup (args[2]);
+	    names[count++] = g_strdup (args[2]);
 	    names[count] = 0;
 	} else if (type) {
 /* 2: rule set was explicitly specified by the caller */
@@ -920,8 +911,8 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 		    else
 			result = line_error;
 		} else {
-		    syntax_free (edit->syntax_type);
-		    edit->syntax_type = (char *) strdup (args[2]);
+		    syntax_g_free (edit->syntax_type);
+		    edit->syntax_type = g_strdup (args[2]);
 /* if there are no rules then turn off syntax highlighting for speed */
 		    if (!edit->rules[1])
 			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
@@ -935,7 +926,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 	free_args (args);
     }
     free_args (args);
-    syntax_free (l);
+    syntax_g_free (l);
     fclose (f);
     return result;
 }

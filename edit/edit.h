@@ -36,9 +36,6 @@
 #include <errno.h>
 
 #include <stdlib.h>
-#if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
-#    include <malloc.h>
-#endif
 
 #include "src/global.h"
 

@@ -115,13 +115,15 @@ end_paragraph (WEdit *edit, int force)
 					i - edit->curs_line, 0));
 }
 
-static unsigned char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
+static unsigned char *
+get_paragraph (WEdit *edit, long p, long q, int indent, int *size)
 {
     unsigned char *s, *t;
 #if 0
-    t = malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
+    t = g_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length +
+		  10);
 #else
-    t = malloc (2 * (q - p) + 100);
+    t = g_malloc (2 * (q - p) + 100);
 #endif
     if (!t)
 	return 0;
@@ -307,7 +309,8 @@ static int test_indent (WEdit * edit, long p, long q)
     return indent;
 }
 
-void format_paragraph (WEdit * edit, int force)
+void
+format_paragraph (WEdit *edit, int force)
 {
     long p, q;
     int size;
@@ -326,13 +329,13 @@ void format_paragraph (WEdit * edit, int force)
     if (!force) {
 	int i;
 	if (strchr (NO_FORMAT_CHARS_START, *t)) {
-	    free (t);
+	    g_free (t);
 	    return;
 	}
 	for (i = 0; i < size - 1; i++) {
 	    if (t[i] == '\n') {
 		if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1])) {
-		    free (t);
+		    g_free (t);
 		    return;
 		}
 	    }
@@ -340,8 +343,8 @@ void format_paragraph (WEdit * edit, int force)
     }
     format_this (t, q - p, indent);
     put_paragraph (edit, t, p, q, indent, size);
-    free (t);
+    g_free (t);
 
     /* Scroll left as much as possible to show the formatted paragraph */
-    edit_scroll_left(edit, - edit->start_col);
+    edit_scroll_left (edit, -edit->start_col);
 }

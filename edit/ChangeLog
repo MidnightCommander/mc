@@ -1,5 +1,8 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h: Don't inclide malloc.h.  Use g_malloc() and g_free()
+	instead.  Adjust all dependencies.
+
 	* edit.c (edit_load_file): Merge edit_open_file().  Disable fast
 	loading on non-local VFS because the file size can be wrong.
 	(init_dynamic_edit_buffers): Split into edit_init_buffers() and

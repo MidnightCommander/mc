@@ -44,8 +44,7 @@ struct _book_mark *book_mark_find (WEdit * edit, int line)
     struct _book_mark *p;
     if (!edit->book_mark) {
 /* must have an imaginary top bookmark at line -1 to make things less complicated  */
-	edit->book_mark = malloc (sizeof (struct _book_mark));
-	memset (edit->book_mark, 0, sizeof (struct _book_mark));
+	edit->book_mark = g_malloc0 (sizeof (struct _book_mark));
 	edit->book_mark->line = -1;
 	return edit->book_mark;
     }
@@ -115,12 +114,14 @@ int book_mark_query_all (WEdit * edit, int line, int *c)
 }
 
 /* insert a bookmark at this line */
-void book_mark_insert (WEdit * edit, int line, int c)
+void
+book_mark_insert (WEdit *edit, int line, int c)
 {
     struct _book_mark *p, *q;
     p = book_mark_find (edit, line);
 #if 0
-    if (p->line == line) {	/* already exists, so just change the colour */
+    if (p->line == line) {
+	/* already exists, so just change the colour */
 	if (p->c != c) {
 	    edit->force |= REDRAW_LINE;
 	    p->c = c;
@@ -129,13 +130,12 @@ void book_mark_insert (WEdit * edit, int line, int c)
     }
 #endif
     edit->force |= REDRAW_LINE;
-/* create list entry */
-    q = malloc (sizeof (struct _book_mark));
-    memset (q, 0, sizeof (struct _book_mark));
+    /* create list entry */
+    q = g_malloc0 (sizeof (struct _book_mark));
     q->line = line;
     q->c = c;
     q->next = p->next;
-/* insert into list */
+    /* insert into list */
     q->prev = p;
     if (p->next)
 	p->next->prev = q;
@@ -159,13 +159,13 @@ int book_mark_clear (WEdit * edit, int line, int c)
 	    p->prev->next = p->next;
 	    if (p->next)
 		p->next->prev = p->prev;
-	    free (p);
+	    g_free (p);
 	    break;
 	}
     }
 /* if there is only our dummy book mark left, clear it for speed */
     if (edit->book_mark->line == -1 && !edit->book_mark->next) {
-	free (edit->book_mark);
+	g_free (edit->book_mark);
 	edit->book_mark = 0;
     }
     return r;
@@ -186,11 +186,11 @@ void book_mark_flush (WEdit * edit, int c)
 	    q->prev->next = q->next;
 	    if (p)
 		p->prev = q->prev;
-	    free (q);
+	    g_free (q);
 	}
     }
     if (!edit->book_mark->next) {
-	free (edit->book_mark);
+	g_free (edit->book_mark);
 	edit->book_mark = 0;
     }
 }

@@ -232,7 +232,7 @@ edit_get_filter (const char *filename)
     if (i < 0)
 	return 0;
     l = strlen (filename);
-    p = malloc (strlen (all_filters[i].read) + l + 2);
+    p = g_malloc (strlen (all_filters[i].read) + l + 2);
     sprintf (p, all_filters[i].read, filename);
     return p;
 }
@@ -245,7 +245,7 @@ char *edit_get_write_filter (char *writename, const char *filename)
     if (i < 0)
 	return 0;
     l = strlen (writename);
-    p = malloc (strlen (all_filters[i].write) + l + 2);
+    p = g_malloc (strlen (all_filters[i].write) + l + 2);
     sprintf (p, all_filters[i].write, writename);
     return p;
 }
@@ -284,7 +284,8 @@ long edit_write_stream (WEdit * edit, FILE * f)
  */
 
 /* inserts a file at the cursor, returns 1 on success */
-int edit_insert_file (WEdit * edit, const char *filename)
+int
+edit_insert_file (WEdit *edit, const char *filename)
 {
     char *p;
     if ((p = edit_get_filter (filename))) {
@@ -295,21 +296,28 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	    edit_insert_stream (edit, f);
 	    edit_cursor_move (edit, current - edit->curs1);
 	    if (pclose (f) > 0) {
-		edit_error_dialog (_ ("Error"), catstrs (_ (" Error reading from pipe: "), p, " ", 0));
-		free (p);
+		edit_error_dialog (_("Error"),
+				   catstrs (_
+					    (" Error reading from pipe: "),
+					    p, " ", 0));
+		g_free (p);
 		return 0;
 	    }
 	} else {
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open pipe for reading: "), p, " ", 0)));
-	    free (p);
+	    edit_error_dialog (_("Error"),
+			       get_sys_error (catstrs
+					      (_
+					       (" Cannot open pipe for reading: "),
+					       p, " ", 0)));
+	    g_free (p);
 	    return 0;
 	}
-	free (p);
+	g_free (p);
     } else {
 	int i, file, blocklen;
 	long current = edit->curs1;
 	unsigned char *buf;
-	if ((file = mc_open (filename, O_RDONLY | O_BINARY )) == -1)
+	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1)
 	    return 0;
 	buf = g_malloc (TEMP_BUF_LEN);
 	while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
@@ -535,8 +543,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	    option_whole_chars_search = option_whole_chars_search_buf;
 	}
 #endif				/* ENABLE_NLS */
-	edit = g_malloc (sizeof (WEdit));
-	memset (edit, 0, sizeof (WEdit));
+	edit = g_malloc0 (sizeof (WEdit));
 	to_free = 1;
     }
     edit_purge_widget (edit);
@@ -550,7 +557,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit_set_filename (edit, filename);
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
-    edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
+    edit->undo_stack = g_malloc ((edit->stack_size + 10) * sizeof (long));
     if (edit_load_file (edit)) {
 	/* edit_load_file already gives an error message */
 	if (to_free)
@@ -599,8 +606,7 @@ edit_clean (WEdit *edit)
 	    g_free (edit->buffers2[j]);
     }
 
-    if (edit->undo_stack)
-	free (edit->undo_stack);
+    g_free (edit->undo_stack);
     g_free (edit->filename);
 
     edit_purge_widget (edit);
@@ -632,8 +638,7 @@ edit_reload (WEdit *edit, const char *filename)
     WEdit *e;
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
-    e = g_malloc (sizeof (WEdit));
-    memset (e, 0, sizeof (WEdit));
+    e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
     e->macro_i = -1;
     if (!edit_init (e, lines, columns, filename, 0)) {
@@ -697,10 +702,10 @@ void edit_push_action (WEdit * edit, long c,...)
 	if (option_max_undo < 256)
 	    option_max_undo = 256;
 	if (edit->stack_size < option_max_undo) {
-	    t = malloc ((edit->stack_size * 2 + 10) * sizeof (long));
+	    t = g_malloc ((edit->stack_size * 2 + 10) * sizeof (long));
 	    if (t) {
 		memcpy (t, edit->undo_stack, sizeof (long) * edit->stack_size);
-		free (edit->undo_stack);
+		g_free (edit->undo_stack);
 		edit->undo_stack = t;
 		edit->stack_size <<= 1;
 		edit->stack_size_mask = edit->stack_size - 1;
@@ -823,19 +828,20 @@ static inline void edit_modification (WEdit * edit)
    Returns char passed over, inserted or removed.
  */
 
-void edit_insert (WEdit * edit, int c)
+void
+edit_insert (WEdit *edit, int c)
 {
-/* check if file has grown to large */
+    /* check if file has grown to large */
     if (edit->last_byte >= SIZE_LIMIT)
 	return;
 
-/* first we must update the position of the display window */
+    /* first we must update the position of the display window */
     if (edit->curs1 < edit->start_display) {
 	edit->start_display++;
 	if (c == '\n')
 	    edit->start_line++;
     }
-/* now we must update some info on the file and check if a redraw is required */
+    /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n') {
 	if (edit->book_mark)
 	    book_mark_inc (edit, edit->curs_line);
@@ -843,28 +849,31 @@ void edit_insert (WEdit * edit, int c)
 	edit->total_lines++;
 	edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
     }
-/* tell that we've modified the file */
+    /* tell that we've modified the file */
     edit_modification (edit);
 
-/* save the reverse command onto the undo stack */
+    /* save the reverse command onto the undo stack */
     edit_push_action (edit, BACKSPACE);
 
-/* update markers */
+    /* update markers */
     edit->mark1 += (edit->mark1 > edit->curs1);
     edit->mark2 += (edit->mark2 > edit->curs1);
     edit->last_get_rule += (edit->last_get_rule > edit->curs1);
 
-/* add a new buffer if we've reached the end of the last one */
+    /* add a new buffer if we've reached the end of the last one */
     if (!(edit->curs1 & M_EDIT_BUF_SIZE))
-	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] =
+	    g_malloc (EDIT_BUF_SIZE);
 
-/* perfprm the insertion */
-    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->curs1 & M_EDIT_BUF_SIZE] = (unsigned char) c;
+    /* perform the insertion */
+    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->
+						   curs1 & M_EDIT_BUF_SIZE]
+	= (unsigned char) c;
 
-/* update file length */
+    /* update file length */
     edit->last_byte++;
 
-/* update cursor position */
+    /* update cursor position */
     edit->curs1++;
 }
 
@@ -990,7 +999,8 @@ static void memqcpy (WEdit * edit, unsigned char *dest, unsigned char *src, int 
     }
 }
 
-int edit_move_backward_lots (WEdit * edit, long increment)
+int
+edit_move_backward_lots (WEdit *edit, long increment)
 {
     int r, s, t;
     unsigned char *p;
@@ -1008,17 +1018,22 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 
     p = 0;
     if (s > r) {
-	memqcpy (edit, edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - r,
-	      edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] + s - r, r);
+	memqcpy (edit,
+		 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - r,
+		 edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] + s - r,
+		 r);
     } else {
 	if (s) {
-	    memqcpy (edit, edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - s,
-		     edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE], s);
+	    memqcpy (edit,
+		     edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t -
+		     s, edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE], s);
 	    p = edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE];
 	    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = 0;
 	}
-	memqcpy (edit, edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - r,
-		 edit->buffers1[(edit->curs1 >> S_EDIT_BUF_SIZE) - 1] + EDIT_BUF_SIZE - (r - s), r - s);
+	memqcpy (edit,
+		 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + t - r,
+		 edit->buffers1[(edit->curs1 >> S_EDIT_BUF_SIZE) - 1] +
+		 EDIT_BUF_SIZE - (r - s), r - s);
     }
     increment -= r;
     edit->curs1 -= r;
@@ -1027,10 +1042,11 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 	if (p)
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = p;
 	else
-	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
+		g_malloc (EDIT_BUF_SIZE);
     } else {
 	if (p)
-	    free (p);
+	    g_free (p);
     }
 
     s = edit->curs1 & M_EDIT_BUF_SIZE;
@@ -1043,7 +1059,8 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 	if (r < t)
 	    t = r;
 	memqcpy (edit,
-		 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + EDIT_BUF_SIZE - t,
+		 edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] +
+		 EDIT_BUF_SIZE - t,
 		 edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] + s - t,
 		 t);
 	if (r >= s) {
@@ -1052,9 +1069,10 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = 0;
 	    }
 	    memqcpy (edit,
-		     edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] + EDIT_BUF_SIZE - r,
-		     edit->buffers1[(edit->curs1 >> S_EDIT_BUF_SIZE) - 1] + EDIT_BUF_SIZE - (r - s),
-		     r - s);
+		     edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] +
+		     EDIT_BUF_SIZE - r,
+		     edit->buffers1[(edit->curs1 >> S_EDIT_BUF_SIZE) - 1] +
+		     EDIT_BUF_SIZE - (r - s), r - s);
 	}
 	increment -= r;
 	edit->curs1 -= r;
@@ -1063,10 +1081,10 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 	    if (p)
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = p;
 	    else
-		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
+		    g_malloc (EDIT_BUF_SIZE);
 	} else {
-	    if (p)
-		free (p);
+	    g_free (p);
 	}
     }
     return edit_get_byte (edit, edit->curs1);
@@ -1096,7 +1114,7 @@ int edit_cursor_move (WEdit * edit, long increment)
 
 	    c = edit_get_byte (edit, edit->curs1 - 1);
 	    if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
-		edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+		edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
 	    edit->curs2++;
 	    c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
@@ -1121,7 +1139,7 @@ int edit_cursor_move (WEdit * edit, long increment)
 
 	    c = edit_get_byte (edit, edit->curs1);
 	    if (!(edit->curs1 & M_EDIT_BUF_SIZE))
-		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = malloc (EDIT_BUF_SIZE);
+		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
 	    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->curs1 & M_EDIT_BUF_SIZE] = c;
 	    edit->curs1++;
 	    c = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
@@ -1600,19 +1618,21 @@ void edit_push_markers (WEdit * edit)
 }
 
 /* return -1 on nothing to store or error, zero otherwise */
-void edit_get_selection (WEdit * edit)
+void
+edit_get_selection (WEdit *edit)
 {
     long start_mark, end_mark;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return;
     if (selection_history[current_selection].len < 4096)	/* large selections should not be held -- to save memory */
-	current_selection = (current_selection + 1) % NUM_SELECTION_HISTORY;
+	current_selection =
+	    (current_selection + 1) % NUM_SELECTION_HISTORY;
     selection_history[current_selection].len = end_mark - start_mark;
-    if (selection_history[current_selection].text)
-	free (selection_history[current_selection].text);
-    selection_history[current_selection].text = malloc (selection_history[current_selection].len + 1);
+    g_free (selection_history[current_selection].text);
+    selection_history[current_selection].text =
+	g_malloc (selection_history[current_selection].len + 1);
     if (!selection_history[current_selection].text) {
-	selection_history[current_selection].text = malloc (1);
+	selection_history[current_selection].text = g_malloc (1);
 	*selection_history[current_selection].text = 0;
 	selection_history[current_selection].len = 0;
     } else {

@@ -160,7 +160,7 @@ edit (const char *_file, int line)
     WButtonBar *edit_bar;
 
     if (option_backup_ext_int != -1) {
-	option_backup_ext = malloc (sizeof (int) + 1);
+	option_backup_ext = g_malloc (sizeof (int) + 1);
 	option_backup_ext[sizeof (int)] = '\0';
 	memcpy (option_backup_ext, (char *) &option_backup_ext_int,
 		sizeof (int));

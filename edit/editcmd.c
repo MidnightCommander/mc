@@ -196,7 +196,8 @@ void edit_refresh_cmd (WEdit * edit)
 			    c) rename <tempnam> to <filename>. */
 
 /* returns 0 on error */
-int edit_save_file (WEdit * edit, const char *filename)
+int
+edit_save_file (WEdit *edit, const char *filename)
 {
     char *p;
     long filelen = 0;
@@ -223,13 +224,13 @@ int edit_save_file (WEdit * edit, const char *filename)
 	char *savedir, *slashpos, *saveprefix;
 	slashpos = strrchr (filename, PATH_SEP);
 	if (slashpos) {
-	    savedir = (char *) strdup (filename);
+	    savedir = g_strdup (filename);
 	    savedir[slashpos - filename + 1] = '\0';
 	} else
-	    savedir = (char *) strdup (".");
+	    savedir = g_strdup (".");
 	saveprefix = concat_dir_and_file (savedir, "cooledit");
-	free (savedir);
-	fd = mc_mkstemps(&savename, saveprefix, NULL);
+	g_free (savedir);
+	fd = mc_mkstemps (&savename, saveprefix, NULL);
 	g_free (saveprefix);
 	if (!savename)
 	    return 0;
@@ -245,8 +246,9 @@ int edit_save_file (WEdit * edit, const char *filename)
     mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
     mc_chmod (savename, edit->stat1.st_mode);
 
-    if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY ,
-		    edit->stat1.st_mode)) == -1)
+    if ((fd =
+	 mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY,
+		  edit->stat1.st_mode)) == -1)
 	goto error_save;
 
 /* pipe save */
@@ -254,7 +256,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	FILE *file;
 
 	mc_close (fd);
-	file  = (FILE *) popen (p, "w");
+	file = (FILE *) popen (p, "w");
 
 	if (file) {
 	    filelen = edit_write_stream (edit, file);
@@ -262,38 +264,55 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    pclose (file);
 #else
 	    if (pclose (file) != 0) {
-		edit_error_dialog (_ ("Error"), catstrs (_ (" Error writing to pipe: "), p, " ", 0));
-		free (p);
+		edit_error_dialog (_("Error"),
+				   catstrs (_(" Error writing to pipe: "),
+					    p, " ", 0));
+		g_free (p);
 		goto error_save;
 	    }
 #endif
 	} else {
-	    edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open pipe for writing: "), p, " ", 0)));
-	    free (p);
+	    edit_error_dialog (_("Error"),
+			       get_sys_error (catstrs
+					      (_
+					       (" Cannot open pipe for writing: "),
+					       p, " ", 0)));
+	    g_free (p);
 	    goto error_save;
 	}
-	free (p);
+	g_free (p);
     } else {
 	long buf;
 	buf = 0;
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
-	    if (mc_write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
+	    if (mc_write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE)
+		!= EDIT_BUF_SIZE) {
 		mc_close (fd);
 		goto error_save;
 	    }
 	    buf++;
 	}
-	if (mc_write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) != (edit->curs1 & M_EDIT_BUF_SIZE)) {
+	if (mc_write
+	    (fd, (char *) edit->buffers1[buf],
+	     edit->curs1 & M_EDIT_BUF_SIZE) !=
+	    (edit->curs1 & M_EDIT_BUF_SIZE)) {
 	    filelen = -1;
 	} else if (edit->curs2) {
 	    edit->curs2--;
 	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	    if (mc_write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=  1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
+	    if (mc_write
+		(fd,
+		 (char *) edit->buffers2[buf] + EDIT_BUF_SIZE -
+		 (edit->curs2 & M_EDIT_BUF_SIZE) - 1,
+		 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=
+		1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
 		filelen = -1;
 	    } else {
 		while (--buf >= 0) {
-		    if (mc_write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
+		    if (mc_write
+			(fd, (char *) edit->buffers2[buf],
+			 EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
 			filelen = -1;
 			break;
 		    }
@@ -308,7 +327,8 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (filelen != edit->last_byte)
 	goto error_save;
     if (this_save_mode == 2)
-	if (mc_rename (filename, catstrs (filename, option_backup_ext, 0)) == -1)
+	if (mc_rename (filename, catstrs (filename, option_backup_ext, 0))
+	    == -1)
 	    goto error_save;
     if (this_save_mode > 0)
 	if (mc_rename (savename, filename) == -1)
@@ -405,7 +425,7 @@ edit_set_filename (WEdit *edit, const char *f)
 	g_free (edit->filename);
     if (!f)
 	f = "";
-    edit->filename = (char *) g_strdup (f);
+    edit->filename = g_strdup (f);
 }
 
 /* Here we want to warn the users of overwriting an existing file,
@@ -840,7 +860,8 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
 }
 
 
-void edit_block_copy_cmd (WEdit * edit)
+void
+edit_block_copy_cmd (WEdit *edit)
 {
     long start_mark, end_mark, current = edit->curs1;
     int size, x;
@@ -851,23 +872,25 @@ void edit_block_copy_cmd (WEdit * edit)
     if (eval_marks (edit, &start_mark, &end_mark))
 	return;
     if (column_highlighting)
-	if ((x >= edit->column1 && x < edit->column2) || (x > edit->column2 && x <= edit->column1))
+	if ((x >= edit->column1 && x < edit->column2)
+	    || (x > edit->column2 && x <= edit->column1))
 	    return;
 
     copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
 
-/* all that gets pushed are deletes hence little space is used on the stack */
+    /* all that gets pushed are deletes hence little space is used on the stack */
 
     edit_push_markers (edit);
 
     if (column_highlighting) {
-	edit_insert_column_of_text (edit, copy_buf, size, abs (edit->column2 - edit->column1));
+	edit_insert_column_of_text (edit, copy_buf, size,
+				    abs (edit->column2 - edit->column1));
     } else {
 	while (size--)
 	    edit_insert_ahead (edit, copy_buf[size]);
     }
 
-    free (copy_buf);
+    g_free (copy_buf);
     edit_scroll_screen_over_cursor (edit);
 
     if (column_highlighting) {
@@ -875,13 +898,15 @@ void edit_block_copy_cmd (WEdit * edit)
 	edit_push_action (edit, COLUMN_ON);
 	column_highlighting = 0;
     } else if (start_mark < current && end_mark > current)
-	edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
+	edit_set_markers (edit, start_mark,
+			  end_mark + end_mark - start_mark, 0, 0);
 
     edit->force |= REDRAW_PAGE;
 }
 
 
-void edit_block_move_cmd (WEdit * edit)
+void
+edit_block_move_cmd (WEdit *edit)
 {
     long count;
     long current;
@@ -896,13 +921,18 @@ void edit_block_move_cmd (WEdit * edit)
 	edit_update_curs_col (edit);
 	x = edit->curs_col;
 	if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
-	    if ((x > edit->column1 && x < edit->column2) || (x > edit->column2 && x < edit->column1))
+	    if ((x > edit->column1 && x < edit->column2)
+		|| (x > edit->column2 && x < edit->column1))
 		return;
     } else if (start_mark <= edit->curs1 && end_mark >= edit->curs1)
 	return;
 
     if ((end_mark - start_mark) > option_max_undo / 2)
-	if (edit_query_dialog2 (_ ("Warning"), _ (" Block is large, you may not be able to undo this action. "), _ ("Continue"), _ ("Cancel")))
+	if (edit_query_dialog2
+	    (_("Warning"),
+	     _
+	     (" Block is large, you may not be able to undo this action. "),
+	     _("Continue"), _("Cancel")))
 	    return;
 
     edit_push_markers (edit);
@@ -920,7 +950,10 @@ void edit_block_move_cmd (WEdit * edit)
 	    deleted = 1;
 	}
 	edit_move_to_line (edit, line);
-	edit_cursor_move (edit, edit_move_forward3 (edit, edit_bol (edit, edit->curs1), x, 0) - edit->curs1);
+	edit_cursor_move (edit,
+			  edit_move_forward3 (edit,
+					      edit_bol (edit, edit->curs1),
+					      x, 0) - edit->curs1);
 	edit_insert_column_of_text (edit, copy_buf, size, c2 - c1);
 	if (!deleted) {
 	    line = edit->curs_line;
@@ -928,13 +961,17 @@ void edit_block_move_cmd (WEdit * edit)
 	    x = edit->curs_col;
 	    edit_block_delete_cmd (edit);
 	    edit_move_to_line (edit, line);
-	    edit_cursor_move (edit, edit_move_forward3 (edit, edit_bol (edit, edit->curs1), x, 0) - edit->curs1);
+	    edit_cursor_move (edit,
+			      edit_move_forward3 (edit,
+						  edit_bol (edit,
+							    edit->curs1),
+						  x, 0) - edit->curs1);
 	}
 	edit_set_markers (edit, 0, 0, 0, 0);
 	edit_push_action (edit, COLUMN_ON);
 	column_highlighting = 0;
     } else {
-	copy_buf = malloc (end_mark - start_mark);
+	copy_buf = g_malloc (end_mark - start_mark);
 	edit_cursor_move (edit, start_mark - edit->curs1);
 	edit_scroll_screen_over_cursor (edit);
 	count = start_mark;
@@ -943,14 +980,18 @@ void edit_block_move_cmd (WEdit * edit)
 	    count++;
 	}
 	edit_scroll_screen_over_cursor (edit);
-	edit_cursor_move (edit, current - edit->curs1 - (((current - edit->curs1) > 0) ? end_mark - start_mark : 0));
+	edit_cursor_move (edit,
+			  current - edit->curs1 -
+			  (((current - edit->curs1) >
+			    0) ? end_mark - start_mark : 0));
 	edit_scroll_screen_over_cursor (edit);
 	while (count-- > start_mark)
 	    edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
-	edit_set_markers (edit, edit->curs1, edit->curs1 + end_mark - start_mark, 0, 0);
+	edit_set_markers (edit, edit->curs1,
+			  edit->curs1 + end_mark - start_mark, 0, 0);
     }
     edit_scroll_screen_over_cursor (edit);
-    free (copy_buf);
+    g_free (copy_buf);
     edit->force |= REDRAW_PAGE;
 }
 
@@ -1260,7 +1301,8 @@ static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
 static int
-string_regexp_search (char *pattern, char *string, int len, int match_type, int match_bol, int icase, int *found_len, void *d)
+string_regexp_search (char *pattern, char *string, int len, int match_type,
+		      int match_bol, int icase, int *found_len, void *d)
 {
     static regex_t r;
     static char *old_pattern = NULL;
@@ -1272,21 +1314,25 @@ string_regexp_search (char *pattern, char *string, int len, int match_type, int 
     if (!pmatch)
 	pmatch = s;
 
-    if (!old_pattern || strcmp (old_pattern, pattern) || old_type != match_type || old_icase != icase) {
+    if (!old_pattern || strcmp (old_pattern, pattern)
+	|| old_type != match_type || old_icase != icase) {
 	if (old_pattern) {
 	    regfree (&r);
-	    free (old_pattern);
+	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
 	if (regcomp (&r, pattern, REG_EXTENDED | (icase ? REG_ICASE : 0))) {
 	    *found_len = 0;
 	    return -3;
 	}
-	old_pattern = (char *) strdup (pattern);
+	old_pattern = g_strdup (pattern);
 	old_type = match_type;
 	old_icase = icase;
     }
-    if (regexec (&r, string, d ? NUM_REPL_ARGS : 1, pmatch, ((match_bol || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
+    if (regexec
+	(&r, string, d ? NUM_REPL_ARGS : 1, pmatch,
+	 ((match_bol
+	   || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
 	*found_len = 0;
 	return -1;
     }
@@ -1990,19 +2036,22 @@ void edit_quit_cmd (WEdit * edit)
 
 #define TEMP_BUF_LEN 1024
 
-/* returns a null terminated length of text. Result must be free'd */
-unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l)
+/* Return a null terminated length of text. Result must be g_free'd */
+unsigned char *
+edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
-    r = s = malloc (finish - start + 1);
+    r = s = g_malloc (finish - start + 1);
     if (column_highlighting) {
 	*l = 0;
-	while (start < finish) {	/* copy from buffer, excluding chars that are out of the column 'margins' */
+	/* copy from buffer, excluding chars that are out of the column 'margins' */
+	while (start < finish) {
 	    int c, x;
-	    x = edit_move_forward3 (edit, edit_bol (edit, start), 0, start);
+	    x = edit_move_forward3 (edit, edit_bol (edit, start), 0,
+				    start);
 	    c = edit_get_byte (edit, start);
 	    if ((x >= edit->column1 && x < edit->column2)
-	     || (x >= edit->column2 && x < edit->column1) || c == '\n') {
+		|| (x >= edit->column2 && x < edit->column1) || c == '\n') {
 		*s++ = c;
 		(*l)++;
 	    }
@@ -2040,12 +2089,12 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	    p += r;
 	    len -= r;
 	}
-	free (block);
+	g_free (block);
     } else {
 	unsigned char *buf;
 	int i = start, end;
 	len = finish - start;
-	buf = malloc (TEMP_BUF_LEN);
+	buf = g_malloc (TEMP_BUF_LEN);
 	while (start != finish) {
 	    end = min (finish, start + TEMP_BUF_LEN);
 	    for (; i < end; i++)
@@ -2053,7 +2102,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	    len -= mc_write (file, (char *) buf, end - start);
 	    start = end;
 	}
-	free (buf);
+	g_free (buf);
     }
     mc_close (file);
     if (len)
