@@ -542,7 +542,7 @@ msgstr "Стар╕ файли."
 
 #: gnome/gdialogs.c:435
 msgid "Files only if size differs."
-msgstr "Фали, що в╕др╕зняють довжиною."
+msgstr "Файли, що в╕др╕зняються за розм╕ром."
 
 #: gnome/gdialogs.c:441
 msgid "All files."
@@ -705,6 +705,8 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
+"Неможливо отримати властивост╕ %s\n"
+"%s"
 
 #: gnome/gicon.c:282
 msgid "Default set of icons not found, check your installation"
@@ -3730,7 +3732,7 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
-" Неможливо створити тимчасовий командкий файл \n"
+" Неможливо створити тимчасовий командний файл \n"
 " %s "
 
 #: src/ext.c:165 src/user.c:578
@@ -4046,7 +4048,7 @@ msgstr ""
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Отримано неповний файл. Залашата його?"
+msgstr "Отримано неповний файл. Залишити його?"
 
 #: src/file.c:803
 msgid "&Delete"
@@ -5848,10 +5850,12 @@ msgid ""
 " Can't stat the destination \n"
 " %s "
 msgstr ""
+" Неможливо отримати властивост╕ призначення \n"
+" %s "
 
 #: src/tree.c:688
 msgid " The destination isn't a directory "
-msgstr ""
+msgstr " М╕сцем призначення не ╓ каталог "
 
 #: src/tree.c:744
 #, c-format
@@ -5860,19 +5864,19 @@ msgstr "  Стерти %s?  "
 
 #: src/tree.c:776
 msgid "Static"
-msgstr ""
+msgstr "Статичне"
 
 #: src/tree.c:776
 msgid "Dynamc"
-msgstr ""
+msgstr "Динам╕чне"
 
 #: src/tree.c:1012
 msgid "Forget"
-msgstr ""
+msgstr "Забути"
 
 #: src/tree.c:1025
 msgid "Rmdir"
-msgstr "Rmdir"
+msgstr "rmdir"
 
 #: src/treestore.c:360
 #, c-format
@@ -5926,6 +5930,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
+"Файл %s не належить root'у чи Вам або доступний на запис усiм.\n"
+"Використання цього файлу неприйнятно з мiркувань безпеки"
 
 #: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
@@ -6008,6 +6014,8 @@ msgid ""
 " Can't stat file \n"
 " "
 msgstr ""
+" Неможливо отримати властивост╕ файлу \n"
+" "
 
 #: src/view.c:491
 msgid " Can't view: not a regular file "
@@ -6028,6 +6036,8 @@ msgid ""
 " Can't stat \"%s\"\n"
 " %s "
 msgstr ""
+" Неможливо отримати властивост╕ \"%s\"\n"
+" %s "
 
 #: src/view.c:716
 #, c-format
