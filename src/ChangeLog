@@ -1,3 +1,10 @@
+2004-09-19  Roland Illig  <roland.illig@gmx.de>
+
+	* find.c: Applied patch to make the find dialog more responsive
+	while scanning through large files.
+
+	From Jindrich Makovicka <makovick kmlinux.fjfi.cvut.cz>
+
 2004-09-18  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_handle_key): Fixed invalid-offset-bug when handling

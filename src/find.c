@@ -41,6 +41,7 @@
 #include "wtools.h"
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
+#include "key.h"
 
 /* Size of the find parameters window */
 #define FIND_Y 14
@@ -61,6 +62,12 @@ enum {
     B_VIEW
 };
 
+typedef enum {
+    FIND_CONT,
+    FIND_SUSPEND,
+    FIND_ABORT
+} FindProgressStatus;
+
 /* List of directories to be ignored, separated by ':' */
 char *find_ignore_dirs = 0;
 
@@ -76,6 +83,11 @@ static int count;		/* Number of files displayed */
 static int matches;		/* Number of matches */
 static int is_start;		/* Status of the start/stop toggle button */
 static char *old_dir;
+
+/* Where did we stop */
+static int resuming;
+static int last_line;
+static int last_pos;
 
 static Dlg_head *find_dlg;	/* The dialog */
 
@@ -434,32 +446,61 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
     return buffer;
 }
 
+static FindProgressStatus
+check_find_events(Dlg_head *h)
+{
+    Gpm_Event event;
+    int c;
+     
+    c = get_event (&event, h->mouse_status == MOU_REPEAT, 0);
+    if (c != EV_NONE) {
+ 	dlg_process_event (h, c, &event);
+ 	if (h->ret_value == B_ENTER
+ 	    || h->ret_value == B_CANCEL
+ 	    || h->ret_value == B_AGAIN
+ 	    || h->ret_value == B_PANELIZE) {
+ 	    /* dialog terminated */
+ 	    return FIND_ABORT;
+ 	}
+ 	if (!(h->flags & DLG_WANT_IDLE)) {
+ 	    /* searching suspended */
+ 	    return FIND_SUSPEND;
+ 	}
+    }
+ 
+    return FIND_CONT;
+}
+ 
 /* 
  * search_content:
  *
  * Search the global (FIXME) regexp compiled content_pattern string in the
  * DIRECTORY/FILE.  It will add the found entries to the find listbox.
+ * 
+ * returns 0 if do_search should look for another file
+ *         1 if do_search should exit and proceed to the event handler
  */
-static void
+static int
 search_content (Dlg_head *h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer [BUF_SMALL];
     char *fname;
     int file_fd;
+    int ret_val = 0;
 
     fname = concat_dir_and_file (directory, filename);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode)){
 	g_free (fname);
-	return;
+	return 0;
     }
 
     file_fd = mc_open (fname, O_RDONLY);
     g_free (fname);
 
     if (file_fd == -1)
-	return;
+	return 0;
 
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
 
@@ -477,7 +518,14 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	char *p;
 	int found = 0;
 
-	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline))){
+	if (resuming) {
+	    /* We've been previously suspended, start from the previous position */
+	    resuming = 0;
+	    line = last_line;
+	    pos = last_pos;
+	}
+
+	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
 	    if (found == 0){	/* Search in binary line once */
 		if (regexec (r, p, 1, 0, 0) == 0){
 		    g_free (p);
@@ -491,10 +539,31 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 		found = 0;
 	    }
 	    g_free (p);
+ 
+ 	    if ((line & 0xff) == 0) {
+		FindProgressStatus res;
+		res = check_find_events(h);
+		switch (res) {
+		case FIND_ABORT:
+		    stop_idle (h);
+		    ret_val = 1;
+		    break;
+		case FIND_SUSPEND:
+		    resuming = 1;
+		    last_line = line;
+		    last_pos = pos;
+		    ret_val = 1;
+		    break;
+		default:
+		    break;
+		}
+	    }
+ 
 	}
     }
     disable_interrupt_key ();
     mc_close (file_fd);
+    return ret_val;
 }
 
 static int
@@ -594,9 +663,11 @@ do_search (struct Dlg_head *h)
     }
 
     if (regexp_match (find_pattern, dp->d_name, match_file)){
-	if (content_pattern)
-	    search_content (h, directory, dp->d_name);
-	else 
+	if (content_pattern) {
+	    if (search_content (h, directory, dp->d_name)) {
+		return 1;
+	    }
+	} else 
 	    find_add_match (h, directory, dp->d_name);
     }
     
@@ -819,6 +890,7 @@ setup_gui (void)
 static int
 run_process (void)
 {
+    resuming = 0;
     set_idle_proc (find_dlg, 1);
     run_dlg (find_dlg);
     return find_dlg->ret_value;
