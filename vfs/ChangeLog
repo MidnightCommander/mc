@@ -1,5 +1,7 @@
 2000-04-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
+	* extfs/audio: Added a way to browse audio CDs conviently
+
 	* undelfs.c: use NULLs instead of 0s when you assign to pointers!
 
 2000-04-05  Andrew V. Samoilov <sav@bcs.zp.ua>
