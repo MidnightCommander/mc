@@ -2282,6 +2282,11 @@ view_handle_key (WView *view, int c)
         view_move_forward (view, vheight - 1);
         return 1;
 
+    case XCTRL('o'):
+	view_other_cmd ();
+	return 1;
+
+    /* Unlike Ctrl-O, run a new shell if the subshell is not running.  */
     case '!':
 	exec_shell ();
 	return 1;

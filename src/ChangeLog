@@ -1,3 +1,10 @@
+2001-08-07  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (do_execute): Don't show prompt if the command is empty
+	and the subshell is not running.
+	* view.c (view_handle_key): Add support for Ctrl-O in the viewer.
+	Suggested by Walery Studennikov <despair@sama.ru>
+
 2001-08-06  Pavel Roskin  <proski@gnu.org>
 
 	* boxes.c (display_init): Associate correct help topic.

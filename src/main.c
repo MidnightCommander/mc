@@ -767,7 +767,7 @@ do_execute (const char *shell, const char *command, int flags)
 #ifndef __os2__
     unlink (control_file);
 #endif
-    if (!use_subshell && !(flags & EXECUTE_INTERNAL)){
+    if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
 	printf ("%s%s%s\n", last_paused ? "\r\n":"", prompt, command);
 	last_paused = 0;
     }
