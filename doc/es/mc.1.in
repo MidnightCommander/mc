@@ -2123,14 +2123,14 @@ un directorio no vacío. Pulsaremos Sí para borrar el directorio recursivamente,
 No para saltar el directorio, Todo para borrar recursivamente todos los directorios
 marcados no vacíos y Ninguno para saltarlos todos. Podemos abortar toda la
 operación pulsando el botón Abortar. Si seleccionamos el botón Sí o Todo
-se nos pedirá confirmación. Diremos "sí" sólo si estamos realmente
+se nos pedirá confirmación. Diremos "sí" sólo si estamos realmente seguros
 de que queremos una eliminación recursiva.
 .PP
 Si hemos marcado archivos y realizamos una operación sobre ellos, sólo
 los archivos sobre los que la operación fue exitosa son desmarcados. Los archivos
 saltados y aquellos en los que la operación falló permanecen marcados.
 .\"NODE "Mask Copy/Rename"
-.SH "Mascara de Copiar/Renombrar"
+.SH "Copiar/Renombrar con Máscara"
 Las operaciones de copiar/mover permiten transformar los nombres de los archivos
 de manera sencilla. Para ello, hay que procurar una máscara correcta para el
 origen y normalmente en la terminación del destino algunos caracteres comodín.
