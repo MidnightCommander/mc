@@ -412,7 +412,7 @@ regex/\.(zoo|ZOO)$
 # lha
 type/^LHa\ .*archive
 	Open=%cd %p#ulha
-	View=%view{ascii} lharc l %f
+	View=%view{ascii} lha l %f
 
 # arj
 regex/\.a(rj|[0-9][0-9])$
