@@ -1,5 +1,9 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (update_one_panel_widget): Use VFS_SETCTL_FLUSH for the
+	current directory.  This fixes Ctrl-R on fish.
+	* vfsdummy.h: Remove unused functions.
+
 	* main.c (process_args): Use VFS_SETCTL_LOGFILE for ftpfs.
 
 2003-10-15  Pavel Roskin  <proski@gnu.org>

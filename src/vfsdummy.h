@@ -18,8 +18,6 @@
 #define mc_opendir opendir
 #define mc_readdir readdir
 #define mc_closedir closedir
-#define mc_telldir telldir
-#define mc_seekdir seekdir
 
 #define mc_stat stat
 #define mc_mknod mknod
@@ -72,7 +70,5 @@ return_zero (void)
 #define vfs_add_current_stamps() do { } while (0)
 #define vfs_timeout_handler() do { } while (0)
 #define vfs_timeouts() 0
-
-#define ftpfs_flushdir() do { } while (0)
 
 #endif				/* !__VFSDUMMY_H */

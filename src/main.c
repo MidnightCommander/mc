@@ -332,11 +332,7 @@ update_one_panel_widget (WPanel *panel, int force_update,
 
     if (force_update & UP_RELOAD) {
 	panel->is_panelized = 0;
-
-#if 1
-	ftpfs_flushdir ();
-#endif
-/* FIXME: Should supply flushdir method */
+	mc_setctl (panel->cwd, VFS_SETCTL_FLUSH, 0);
 	memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
 
