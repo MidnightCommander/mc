@@ -1,5 +1,13 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c: DLG_BACKWARD now affects how the dialog is populated by
+	widgets, not the runtime behavior.
+	(init_dlg): Don't change current widget.  This allows using
+	dlg_select_widget() before the dialog is run.
+	* dlg.h: Remove initfocus field.
+	* wtools.c (query_dialog): Use dlg_select_widget(), not
+	initfocus to set the initial widget.
+
 	* widget.c (input_callback): Don't handle Enter.
 	Requested by Ali Akcaagac <aliakc@web.de>
 

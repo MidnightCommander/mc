@@ -115,6 +115,8 @@ query_dialog (char *header, char *text, int flags, int count, ...)
 {
     va_list ap;
     Dlg_head *query_dlg;
+    WButton *button;
+    WButton *defbutton = NULL;
     int win_len = 0;
     int i;
     int result = -1;
@@ -155,7 +157,6 @@ query_dialog (char *header, char *text, int flags, int count, ...)
 		    "[QueryBox]", header, DLG_BACKWARD);
 
     if (count > 0) {
-
 	cols = (cols - win_len - 2) / 2 + 2;
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
@@ -163,16 +164,21 @@ query_dialog (char *header, char *text, int flags, int count, ...)
 	    xpos = strlen (cur_name) + 6;
 	    if (strchr (cur_name, '&') != NULL)
 		xpos--;
-	    add_widget (query_dlg,
-			button_new (lines - 3, cols, B_USER + i,
-				    NORMAL_BUTTON, cur_name, 0));
+
+	    button =
+		button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON,
+			    cur_name, 0);
+	    add_widget (query_dlg, button);
 	    cols += xpos;
 	    if (i == sel_pos)
-		query_dlg->initfocus = query_dlg->current;
+		defbutton = button;
 	}
 	va_end (ap);
 
 	add_widget (query_dlg, label_new (2, 3, text));
+
+	if (defbutton)
+	    dlg_select_widget (query_dlg, defbutton);
 
 	/* run dialog and make result */
 	run_dlg (query_dlg);

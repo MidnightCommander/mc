@@ -230,8 +230,8 @@ set_idle_proc (Dlg_head *d, int enable)
 }
 
 /*
- * Insert widget to dialog before current widget and make the new widget
- * current.  Return widget number.
+ * Insert widget to dialog before current widget.  For dialogs populated
+ * from the bottom, make the widget current.  Return widget number.
  */
 int
 add_widget (Dlg_head *h, void *w)
@@ -262,7 +262,9 @@ add_widget (Dlg_head *h, void *w)
 	h->first = new_item;
     }
 
-    h->current = new_item;
+    if (!(h->flags & DLG_BACKWARD) || !h->current)
+	h->current = new_item;
+
     return new_item->dlg_id;
 }
 
@@ -323,18 +325,14 @@ dlg_unfocus (Dlg_head *h)
     return 0;
 }
 
-static void select_a_widget (Dlg_head *h, int down)
+static void
+select_a_widget (Dlg_head *h, int down)
 {
-    int dir_forward = !(h->flags & DLG_BACKWARD);
-
     if (!h->current)
-       return;
-
-    if (!down)
-	dir_forward = !dir_forward;
+	return;
 
     do {
-	if (dir_forward)
+	if (down)
 	    h->current = h->current->next;
 	else
 	    h->current = h->current->prev;
@@ -682,13 +680,6 @@ void init_dlg (Dlg_head *h)
 
     push_refresh (dlg_refresh, h, refresh_mode);
     h->refresh_pushed = 1;
-
-    /* Initialize direction */
-    if (h->flags & DLG_BACKWARD)
-	h->current =  h->first;
-
-    if (h->initfocus != NULL)
-        h->current = h->initfocus;
 
     h->previous_dialog = current_dlg;
     current_dlg = h;
