@@ -1,3 +1,21 @@
+2000-10-30  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_save_file): better error handling on writting
+
+	(edit_sort_cmd): saved sort options proposed in dialog
+
+	edit.h, editcmd.c: declaration for edit_save_block () added
+
+	(edit_split_filename): f constified
+
+	* edit.c (edit_init) [ENABLE_NLS]: option_whole_chars_search 
+	expanded by national letters using current locale on first call
+
+	(edit_file_is_open) [MIDNIGHT]: all occurences and related code
+	are commented
+
+	(edit_execute_cmd): typo in error message fixed
+
 2000-09-30  Pavel Roskin  <proski@gnu.org>
 
 	* libgettext.h: Removed, shouldn't be here.
