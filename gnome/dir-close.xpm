@@ -5,7 +5,7 @@ static char *DIRECTORY_CLOSE_XPM[] = {
 "  c Gray0",
 ". c #635d4f",
 "X c #88806c",
-"o c #99907b",
+"o c #a9907b",
 "O c Gray100",
 "+ c None",
 /* pixels */

@@ -6,7 +6,7 @@ static char *DIRECTORY_OPEN_XPM[] = {
 ". c #88806c",
 "X c #8d8571",
 "o c #938a75",
-"O c #99907b",
+"O c #a9907b",
 "+ c #99907c",
 "@ c #9a917d",
 "# c #9c937f",
