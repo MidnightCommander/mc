@@ -3114,6 +3114,9 @@ int main (int argc, char *argv [])
 
     /* Program main loop */
     do_nc ();
+
+    /* Save the tree store */
+    mc_tree_store_save ();
     
     /* Virtual File System shutdown */
     vfs_shut ();

@@ -1762,10 +1762,10 @@ setup_icon_dnd_source (DesktopIconInfo *dii)
 			    (GtkSignalFunc) drag_begin,
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get),
+			    (GtkSignalFunc) drag_data_get,
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_end",
-			    GTK_SIGNAL_FUNC (drag_end),
+			    (GtkSignalFunc) drag_end,
 			    dii);
 }
 

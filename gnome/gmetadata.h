@@ -9,13 +9,9 @@
 #define GMETADATA_H
 
 
-/* Returns the coordinates of the icon corresponding to the specified file.  If no position
- * has been set, returns FALSE.  Else it returns TRUE and sets the *x and *y values.
- */
 int gmeta_get_icon_pos (char *filename, int *x, int *y);
-
-/* Saves the icon position for the specified file */
 void gmeta_set_icon_pos (char *filename, int x, int y);
+void gmeta_del_icon_pos (char *filename);
 
 
 #endif

@@ -128,22 +128,6 @@ gnome_about_cmd (void)
 }
 
 void
-gnome_quit_cmd (void)
-{
-	int q = 0;
-
-	if (!confirm_exit)
-		q = 1;
-	else if (query_dialog (_(" The Midnight Commander "),
-			       _(" Do you really want to quit the Midnight Commander? "),
-			       0, 2, _("&Yes"), _("&No")) == 0)
-		q = 1;
-	
-	if (q == 1)
-		gtk_main_quit ();
-}
-
-void
 gnome_open_panel (GtkWidget *widget, WPanel *panel)
 {
 	new_panel_at (panel->cwd);
