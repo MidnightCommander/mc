@@ -1,5 +1,10 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: removed commands to build standalone libvfs -
+	they are now in Makefile.am. Create links in the build
+	directory - source directory may be read-only. Removed hack
+	with mcservx - it's no longer needed.
+
 	* ftpfs.h: include "xdirentry.h" instead of "vfs/xdirentry.h"
 
 2000-09-05  Pavel Roskin  <proski@gnu.org>

@@ -210,28 +210,6 @@ VFSHDRS = 			\
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-#
-# Commands to build standalone version (.so)
-#
-
-VFSSOOBJS = tcputil.so fish.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
-	tar.so cpio.so sfs.so names.so container.so extfs.so util-alone.so \
-	util.sor utilunix.sor direntry.so
-
-%.sor:	../src/%.c
-	$(CC) -fpic -Wall -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
-
-%.so:	%.c
-	$(CC) -fpic -Wall -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
-
-libvfs.so: $(VFSSOOBJS)
-	gcc $(VFSSOOBJS) -shared -o libvfs.so
-
-libvfs.a: $(VFSSOOBJS)
-	$(RMF) $@
-	$(AR) cr $@ $(VFSSOOBJS)
-	-$(RANLIB) $@
-
 Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
 	cd $(builddir) && CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in CONFIG_HEADERS= $(SHELL) ./config.status
 
@@ -250,19 +228,15 @@ all: @LIBVFS@ @mcserv@
 check:
 	@echo no tests are supplied.
 
-checklinks:
-	@if test -f $(vfsdir)/mad.c; then echo ok; \
-	else $(MAKE) sourcelinks; fi
+SRC_LINKS = mad.c mad.h
 
-sourcelinks:
-	-cd $(vfsdir); $(LN_S) ../src/mad.c ../src/mad.h . >/dev/null 2>&1; true
+$(SRC_LINKS):
+	for i in $(SRC_LINKS); do \
+		$(LN_S) $(mcsrcdir)/$$i . || exit 1; \
+	done
 
-mcserv: checklinks
-	$(MAKE) mcservx
-
-mcservx: mcserv.o tcputil.o mad.o
+mcserv: mcserv.o tcputil.o mad.o
 	$(CC) $(LDFLAGS) -o mcserv mcserv.o tcputil.o mad.o $(LIBS)
-	touch mcservx
 
 $(SAMBAFILES):
 	cd samba && $(MAKE)
@@ -283,7 +257,7 @@ TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
 clean:
-	$(RMF) mcserv *.o core a.out *.a mcservx *.so *.sor
+	$(RMF) mcserv *.o core a.out *.a $(SRC_LINKS)
 
 realclean: clean
 	$(RMF) .depend
@@ -292,8 +266,7 @@ realclean: clean
 
 distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
-	$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a $(srcdir)/libvfs.so
-	$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
+	$(RMF) $(srcdir)/core $(srcdir)/libvfs-mc.a
 	(cd extfs; $(MAKE) distclean)
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	$(RMF) $(srcdir)/Makefile
