@@ -1,6 +1,13 @@
+2002-01-11  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/xml.syntax: New file - hightlighting for XML.
+	From Petr Kozelka <pkozelka@centrum.cz>
+	* syntax/Syntax: Add xml.syntax.
+	* syntax/Makefile.am: Likewise.
+
 2002-01-04  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
-        * configure.in: Added "eu" to ALL_LINGUAS
+	* configure.in: Added "eu" to ALL_LINGUAS.
 
 2002-01-03  Pavel Roskin  <proski@gnu.org>
 

@@ -1,0 +1,48 @@
+# XML syntax highlighting
+#
+# Author: Petr Kozelka <pkozelka@email.cz>
+# http://kozelka.hyperlink.cz
+
+context default
+	keyword &*; white/16 cyan/12
+	spellcheck
+
+context <!-- --> brightgreen/22
+	spellcheck
+
+context <! > yellow/20
+	keyword '+' brightcyan/23
+	keyword "+" brightcyan/23
+	keyword whole DOCTYPE white/13 red/0
+	keyword whole PUBLIC brightred/13
+	keyword whole SYSTEM brightred/13
+	keyword whole NDATA brightred/13
+	keyword whole CDATA white/13
+	keyword whole #PCDATA white/13
+	keyword whole EMPTY white/13
+	keyword whole #REQUIRED white/13
+	keyword whole #IMPLIED white/13
+	keyword whole ELEMENT white/13
+	keyword whole ENTITY brightred/13
+	keyword whole ATTLIST white/13
+	keyword whole %*; white/16 cyan/12
+	keyword \( lightgray/23
+	keyword \) lightgray/23
+	keyword \* lightgray/23
+	keyword \? lightgray/23
+	keyword \+ lightgray/23
+	keyword \| lightgray/23
+	keyword \, lightgray/23
+	spellcheck
+
+context <\?xml \?> white/15 red/0
+context <\? \?> lightgray/15 black/0
+context < > white/15
+	keyword \sxmlns\:*\="+" brightred/24
+	keyword \sxmlns\="+" brightred/24
+	keyword \s+\= yellow/24
+	keyword '*' brightcyan/23
+	keyword "*" brightcyan/23
+	spellcheck
+
+

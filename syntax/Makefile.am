@@ -27,6 +27,7 @@ syntax_DATA =			\
 	slang.syntax		\
 	swig.syntax		\
 	texinfo.syntax		\
-	unknown.syntax
+	unknown.syntax		\
+	xml.syntax
 
 EXTRA_DIST = $(syntax_DATA)
