@@ -1470,6 +1470,7 @@ linear_read (vfs *me, vfs_s_fh *fh, void *buf, int len)
 	linear_abort(me, fh);
 
     if (!n) {
+	SUP.control_connection_buzy = 0;
 	close (FH_SOCK);
 	FH_SOCK = -1;
         if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE))
@@ -1744,6 +1745,7 @@ static int ftpfs_fh_close (vfs *me, vfs_s_fh *fh)
 	fh->changed = 0;
 	if (get_reply (me, fh->ino->SUP.sock, NULL, 0) != COMPLETE)
 	    ERRNOR (EIO, -1);
+	vfs_s_invalidate (me, FH_SUPER);
     }
     return 0;
 }

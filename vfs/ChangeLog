@@ -1,5 +1,9 @@
 2002-05-21  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* ftpfs.c (linear_read): Unset control_connection_buzy
+	on EOF.
+	(ftpfs_fh_close): Call vfs_s_invalidate ().
+
 	* fish.c (fish_fh_open): Don't retrieve file if it is
 	opened for writting only.
 
