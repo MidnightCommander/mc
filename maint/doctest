@@ -21,7 +21,6 @@ test -r doc/mc.1.in || { echo "ERROR: cannot read doc/mc.1.in" 2>&1; exit 1; }
 
 # Test the documentation for possible errors.
 one_test find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tps {} \;
-one_test find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tdvi {} \;
 one_test find doc -name '*.[1-9].in' -exec nroff -mandoc -Tlatin1 {} \;
 
 # Check the English manuals to be in ASCII.
