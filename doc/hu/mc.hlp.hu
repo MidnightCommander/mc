@@ -111,9 +111,9 @@ funkcióért és a funkcióhoz szükséges kódért Torben
 Fjerdingstad-nek és  Sergey-nek közremûködésükért). Kérlek,
 ne csinálj szó szerinti másolatot a funkció beállításairól.
 A fájlok forrása a
-/var/tmp/mc-4.5.46-buildroot/usr/lib/mc/bin/mc.sh (bash és
+/usr/lib/mc/bin/mc.sh (bash és
 zsh felhasználóknak), illetõleg a
-/var/tmp/mc-4.5.46-buildroot/usr/lib/mc/bin/mc.csh (tcsh
+/usr/lib/mc/bin/mc.csh (tcsh
 felhasználóknak) fájl. Ilyenkor, amikor a funkció
 beállításokat változtatod, a profil értékeket nem
 szükséges megváltoztatnod, csak arról gondoskodj, hogy az
@@ -126,14 +126,14 @@ mc ()
     mkdir -p ~/.mc/tmp 2> /dev/null
     chmod 700 ~/.mc/tmp
     MC=~/.mc/tmp/mc-$$
-    /var/tmp/mc-4.5.46-buildroot/usr/bin/mc -P "$@" > "$MC"
+    /usr/bin/mc -P "$@" > "$MC"
     cd "`cat $MC`"
     rm "$MC"
     unset MC;
 }
 
 tcsh felhasználóknak: alias mc 'setenv MC
-`/var/tmp/mc-4.5.46-buildroot/usr/bin/mc -P \!*`; cd $MC;
+`/usr/bin/mc -P \!*`; cd $MC;
 unsetenv MC'
 
 Tudom, a bash funkciók rövidebbek lehetnek a bash-nál és a
@@ -1259,7 +1259,7 @@ tulajdonosa, és nem leget bárki számára írható. Ha
 nem talál ilyen fájlt, az ~/.mc/menu keresése a következõ 
 lépés, egyébként pedig az mc az alapértelmezett 
 rendszerszintû menüt használja, pl.:
-/var/tmp/mc-4.5.46-buildroot/usr/lib/mc/mc.menu.
+/usr/lib/mc/mc.menu.
 
 A menü fájl formátuma nagyon egyszerû. A sorok, amelyek
 bármivel kezdõdhetnek, de a space, vagy a tab
@@ -1724,7 +1724,7 @@ A Midnight Commander indításkor megpróbálja az indítási
 információkat beolvasni az ~/.mc/ini fájlból. Ha ez
 a fájl nem létezik, ezeket az információkat a rendszerszintû
 konfigurációs fájlból fogja beolvasni, amelyek a
-/var/tmp/mc-4.5.46-buildroot/usr/lib/mc/mc.ini fájlban
+/usr/lib/mc/mc.ini fájlban
 találhatóak meg. Ha ez a rendszerszintû konfigurációs fájl
 sem létezik, a MC az alapértelmezett beállításokat
 használja.
@@ -2322,9 +2322,6 @@ A szerkesztõ megjeleníti még a nem-amerikai karaktereket is
 Beállításoknál beállíthatod a Képernyõbiteket 7 bitre a
 térközök tisztasága miatt.
 
-Lásd még README.edit fájlt a forrás könyvtárban a további
-információkért.
-
 [Completion]
 Kiegészítés
 
@@ -2418,7 +2415,7 @@ Példák:
     /#ftp:guest@remote-host.com:40/pub
     /#ftp:miguel:xxx@server/pub
 
-Tûzfalon keresztüli kapcsolat létrehozásához, az ftp://!
+Tûzfalon keresztüli kapcsolat létrehozásához, az /#ftp:!
 kiegészítés használatára van szükséged (pl., felkiáltójel a
 dupla perjel után) ahhoz, hogy a Midnight Commander
 használni tudja a proxy host-ot az ftp átvitelhez. A

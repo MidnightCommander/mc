@@ -2565,10 +2565,6 @@ binary files, you should set
 .B display bits
 to 7 bits in the options menu to keep the spacing clean.
 .PP
-See also the file 
-.B README.edit
-in the source tree for some more info.
-.PP
 .SH "Completion"
 Let the Midnight Commander type for you.
 .PP

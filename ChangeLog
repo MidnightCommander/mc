@@ -1,3 +1,10 @@
+2002-08-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* doc/ru/mc.1.in: Remove reference to README.edit.
+	* doc/mc.1.in: Likewise.
+	* doc/hu/mc.hlp.hu: Likewise. Remove /var/tmp/mc-4.5.46-buildroot
+	everywhere.
+
 2002-08-14  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in: Consistently use "native" ftp syntax.
