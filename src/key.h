@@ -1,6 +1,8 @@
 #ifndef __KEY_H
 #define __KEY_H
 
+#include "mouse.h" /* Gpm_Event */
+
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);

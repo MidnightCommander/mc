@@ -32,66 +32,6 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
 
-typedef void (*fnptr)(void);
-
-typedef struct Fkey_Table_List {
-    fnptr  actions[11];
-    struct Fkey_Table_List *next;
-    int    has_labels;
-} Fkey_Table_List;
-
-static Fkey_Table_List *fkey_table_list = NULL;
-
-/* Return values: 0 = not a fkey, other = was a fkey */
-int check_fkeys (int c)
-{
-    int fkey;
-
-    if (!fkey_table_list)
-	return 0;
-    
-    switch (c){
-    case KEY_F(1):
-	fkey = 1;
-	break;
-    case KEY_F(2):
-	fkey = 2;
-	break;
-    case KEY_F(3):
-	fkey = 3;
-	break;
-    case KEY_F(4):
-	fkey = 4;
-	break;
-    case KEY_F(5):
-	fkey = 5;
-	break;
-    case KEY_F(6):
-	fkey = 6;
-	break;
-    case KEY_F(7):
-	fkey = 7;
-	break;
-    case KEY_F(8):
-	fkey = 8;
-	break;
-    case KEY_F(9):
-	fkey = 9;
-	break;
-    case KEY_F(10):
-	fkey = 10;
-	break;
-    default:
-	return 0;
-    }
-    if (fkey_table_list->actions [fkey]){
-	fkey_table_list->actions [fkey] ();
-	return fkey;
-    }
-    else
-	return 0;
-}
-
 /* Return values: 0 = not a movement key, 1 = was a movement key */
 int check_movement_keys (int c, int additional, int page_size, void *data,
 			 movefn backfn, movefn forfn, movefn topfn,
@@ -169,11 +109,6 @@ void mc_raw_mode (void)
 void mc_noraw_mode (void)
 {
     noraw ();
-}
-
-int is_quit_char (int c)
-{
-    return (c == XCTRL('g') || (c == ESC_CHAR) || (c == KEY_F(10)));
 }
 
 /* This table is a mapping between names and the constants we use

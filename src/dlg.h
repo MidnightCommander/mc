@@ -212,8 +212,6 @@ Widget *find_widget_type   (Dlg_head *h, callback_fn signature);
 #define widget_want_hotkey(w,i) widget_option(w, W_WANT_HOTKEY, i)
 #define widget_want_postkey(w,i) widget_option(w, W_WANT_POSTKEY, i)
 
-typedef void (*movefn)(void *, int);
-
 /* Used in load_prompt() */
 void update_cursor (Dlg_head *h);
 

@@ -1,6 +1,8 @@
 #ifndef __WIDGET_H
 #define __WIDGET_H
 
+#include "dlg.h"		/* Widget */
+
 #define C_BOOL		1
 #define C_CHANGE	2
 
@@ -47,12 +49,6 @@ typedef struct WGauge {
     int shown;
     int max;
     int current;
-    int pixels;			/* Only used for Tk:
-				 * We keep the pixel size in the C code
-				 * so that we can compute quickly compute
-				 * the size of the rectangle in the Tk
-				 * canvas.  Using Tcl would be too slow.
-				 */
 } WGauge;
 
 typedef struct hist_entry {
@@ -81,7 +77,6 @@ typedef struct {
     int  need_push;		/* need to push the current Input on hist? */
     char **completions;		/* Possible completions array */
     int  completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */
-    int  inserted_one;		/* TK: just one char inserted, nothing fancy */
     char *history_name;		/* name of history for loading and saving */
 } WInput;
 

@@ -669,7 +669,6 @@ gauge_new (int y, int x, int shown, int max, int current, char *tkname)
         max = 1; /* I do not like division by zero :) */
     g->max = max;
     g->current = current;
-    g->pixels = 0;
     widget_want_cursor (g->widget, 0);
     return g;
 }
@@ -1486,7 +1485,6 @@ handle_char (WInput *in, int c_code)
 	}
     	free_completions (in);
 	v = insert_char (in, c_code);
-	in->inserted_one = c_code;
     }
     if (!disable_update)
 	update_input (in, 1);
