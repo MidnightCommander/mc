@@ -1,3 +1,8 @@
+2000-06-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* screen.c (display_mini_info): two different patterns are
+	used now: for one file and for other cases
+
 2000-06-16  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cons_saver: support linux with devfs, patch by pavenis@lanet.lv

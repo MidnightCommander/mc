@@ -658,9 +658,9 @@ display_mini_info (WPanel *panel)
 	attrset (MARKED_COLOR);
 	printw  ("%*s", panel->widget.cols-2, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
-	g_snprintf (buffer, sizeof (buffer), _("  %s bytes in %d file%s"),
-		 size_trunc_sep (panel->total), panel->marked,
-		 panel->marked == 1 ? "" : "s");
+	g_snprintf (buffer, sizeof (buffer), _((panel->marked == 1) ?
+		 N_("  %s bytes in %d file") : N_("  %s bytes in %d files")),
+		 size_trunc_sep (panel->total), panel->marked);
 	p = buffer;
 	if (strlen (buffer) > panel->widget.cols-4){
 	    buffer [panel->widget.cols-4] = 0;
@@ -807,8 +807,6 @@ adjust_top_file (WPanel *panel)
 #else
 #define adjust_top_file(p)
 #endif
-
-extern void paint_info_panel (WPanel *panel);
 
 /* Repaints the information that changes after a command */
 void
@@ -965,8 +963,6 @@ is_a_panel (Widget *w)
 {
 	return (w->callback == (void *) panel_callback);
 }
-
-void directory_history_add (WPanel * panel, char *s);
 
 /* Panel creation */
 /* The parameter specifies the name of the panel for setup retieving */
@@ -2528,7 +2524,6 @@ panel_event (Gpm_Event *event, WPanel *panel)
     const int lines = panel->count;
 
     int my_index;
-    extern void change_panel (void);
 
     event->y -= 2;
     if ((event->type & (GPM_DOWN|GPM_DRAG))){
@@ -2579,7 +2574,6 @@ panel_event (Gpm_Event *event, WPanel *panel)
     const int lines = llines (panel);
 
     int my_index;
-    extern void change_panel (void);
 
     if (event->type & GPM_DOWN && event->x == 1 + 1 && event->y == 0 + 1) {
 	directory_history_prev (panel);
