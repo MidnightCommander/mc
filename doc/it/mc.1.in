@@ -3161,8 +3161,7 @@ per i dettagli sulla licenza e sulla mancanza di garanzie.
 .\"NODE "AVAILABILITY"
 .SH "REPERIBILITA'"
 L'ultima versione di questo programma si trova su
-ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ e sui
-mirror elencati sul sito GNOME http://www.gnome.org/.
+ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
 .\"NODE "SEE ALSO"
 .SH "VEDERE ANCHE"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),

@@ -3089,8 +3089,7 @@ carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa puede encontrarse en
-ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ y en los
-servidores espejo de GNOME que se relacionan en http://www.gnome.org/.
+ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
 mcedit(1), mcserv(8), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),

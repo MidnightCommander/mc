@@ -87,8 +87,7 @@ help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
-mirrors listed on the GNOME site http://www.gnome.org/.
+ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
 .SH SEE ALSO
 mc(1), mcedit(1)
 .PP
