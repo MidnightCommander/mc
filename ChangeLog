@@ -1,5 +1,11 @@
 2002-10-17  Pavel Roskin  <proski@gnu.org>
 
+	* doc/hu/Makefile.am: Generate Hungarian help file from the
+	manual, just like other languages.
+	* doc/hu/mc.1.in: New file, converted from the help file.
+	* doc/hu/xnc.hlp: Likewise.
+	* configure.in: Adjust for the above.
+
 	* doc/mc.1.in: Add node names.  Remove redundant paragraph
 	breaks at the start and the end of the sections.  Mention
 	"stalelink" as color keyword.

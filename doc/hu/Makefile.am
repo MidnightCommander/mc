@@ -1,1 +1,10 @@
+mandir = @mandir@/hu
+man_MANS = mc.1
+
 pkgdata_DATA = mc.hlp.hu
+
+EXTRA_DIST = xnc.hlp
+CLEANFILES = $(pkgdata_DATA)
+
+mc.hlp.hu: mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp
+	- $(top_builddir)/src/man2hlp mc.1 $(srcdir)/xnc.hlp mc.hlp.hu

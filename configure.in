@@ -588,7 +588,7 @@ vfs/extfs/uzoo
 
 doc/mc.1 doc/mcedit.1 doc/mcserv.8
 doc/es/mc.1 doc/es/Makefile
-doc/hu/Makefile doc/hu/mc.hlp.hu
+doc/hu/mc.1 doc/hu/Makefile
 doc/it/mc.1 doc/it/Makefile
 doc/pl/mc.1 doc/pl/Makefile
 doc/ru/mc.1 doc/ru/Makefile
