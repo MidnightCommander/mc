@@ -73,8 +73,8 @@ msgstr "&Dispensar"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
-msgstr "&Ok"
+msgid "&OK"
+msgstr "&OK"
 
 #: edit/edit_key_translator.c:135
 msgid " Emacs key: "
@@ -245,11 +245,11 @@ msgid " Cancel "
 msgstr " Cancelar "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "U&M"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr " Tod&os "
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
@@ -2064,7 +2064,7 @@ msgid "a&ll"
 msgstr "&Tudo"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "&Nenhum"
 
 #: src/file.c:2198
@@ -2141,7 +2141,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Arquivo de destino \"%s\" já existe"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "se &Tamanho for diferente"
 
 #: src/filegui.c:526
@@ -2157,7 +2157,7 @@ msgid "&Reget"
 msgstr "&Obter novamente"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "A&dicionar"
 
 #: src/filegui.c:534
@@ -3203,8 +3203,8 @@ msgid "cd follows lin&Ks"
 msgstr "cd segue ligação"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
-msgstr "Movimentação similar ao l&Ynx"
+msgid "L&ynx-like motion"
+msgstr "Movimentação similar ao L&ynx"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
@@ -3275,7 +3275,7 @@ msgid "on dumb &Terminals"
 msgstr "em &Terminais burros"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "Sem&pre"
 
 #: src/option.c:157

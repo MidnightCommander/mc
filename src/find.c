@@ -145,7 +145,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     static char *labs[] =
 	{ N_("Start at:"), N_("Filename:"), N_("Content: ") };
-    static char *buts[] = { N_("&Ok"), N_("&Tree"), N_("&Cancel") };
+    static char *buts[] = { N_("&OK"), N_("&Tree"), N_("&Cancel") };
     static int ilen = 30, istart = 14;
     static int b0 = 3, b1 = 16, b2 = 36;
 

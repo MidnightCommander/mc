@@ -84,7 +84,7 @@ static struct listmode_button listmode_but[BUTTONS] = {
     {B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel"},
     {B_ADD, NORMAL_BUTTON, 0, 22, "&Add item"},
     {B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove"},
-    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&Ok"},
+    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&OK"},
 };
 
 #define B_PLUS B_USER

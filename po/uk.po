@@ -66,7 +66,7 @@ msgstr "&Закрити"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
+msgid "&OK"
 msgstr "Г&aразд"
 
 #: edit/edit_key_translator.c:135
@@ -236,11 +236,11 @@ msgid " Cancel "
 msgstr " &Cкасувати "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "&Oдин"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Ус╕"
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
@@ -2036,7 +2036,7 @@ msgid "a&ll"
 msgstr "&Ус╕"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "Ж&oдного"
 
 #: src/file.c:2198
@@ -2113,7 +2113,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Ц╕льовий файл \"%s\" вже ╕сну╓!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "З р╕зним &розм╕ром"
 
 #: src/filegui.c:526
@@ -2129,7 +2129,7 @@ msgid "&Reget"
 msgstr "Пере&читати"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "Дописати у &к╕нець"
 
 #: src/filegui.c:534
@@ -3167,7 +3167,7 @@ msgid "cd follows lin&Ks"
 msgstr "Зм╕на &каталогу за посиланнями"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
+msgid "L&ynx-like motion"
 msgstr "Нав╕гац╕я у стил╕ l&ynx"
 
 #: src/option.c:67
@@ -3239,7 +3239,7 @@ msgid "on dumb &Terminals"
 msgstr "На простих &терм╕налах"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "&Завжди"
 
 #: src/option.c:157

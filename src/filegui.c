@@ -520,15 +520,15 @@ rd_widgets [] =
 	{N_("Target file \"%s\" already exists!"),
 	                 3,      4,  0,              "target-e"    },
 	{N_("&Abort"),   BY + 3, 25, REPLACE_ABORT,  "abort"       },
-	{N_("if &Size differs"),
+	{N_("If &size differs"),
 	                 BY + 1, 28, REPLACE_SIZE,   "if-size"     },
-	{N_("non&E"),    BY,     47, REPLACE_NEVER,  "none"        },
+	{N_("Non&e"),    BY,     47, REPLACE_NEVER,  "none"        },
 	{N_("&Update"),  BY,     36, REPLACE_UPDATE, "update"      },
-	{N_("al&L"),     BY,     28, REPLACE_ALWAYS, "all"         },
+	{N_("A&ll"),     BY,     28, REPLACE_ALWAYS, "all"         },
 	{N_("Overwrite all targets?"),
 	                 BY,     4,  0,              "over-label"  },
 	{N_("&Reget"),   BY - 1, 28, REPLACE_REGET,  "reget"       },
-	{N_("ap&Pend"),  BY - 2, 45, REPLACE_APPEND, "append"      },
+	{N_("A&ppend"),  BY - 2, 45, REPLACE_APPEND, "append"      },
 	{N_("&No"),      BY - 2, 37, REPLACE_NO,     "no"          },
 	{N_("&Yes"),     BY - 2, 28, REPLACE_YES,    "yes"         },
 	{N_("Overwrite this target?"),
@@ -768,7 +768,7 @@ static QuickWidget fmd_widgets [] = {
 # define FMBLFT 8
 # undef  FMBMID
 #endif
-    { quick_button, 14, 64, 9, FMDY, N_("&Ok"), 0, B_ENTER, 0, 0, "ok" },
+    { quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, "ok" },
     { quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
       0 /* &file_mask_stable_symlinks */, 0, "stab-sym" },
     { quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0, 0, 

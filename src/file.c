@@ -2220,7 +2220,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	    query_set_sel (1);
 	ctx->recursive_result = query_dialog (text, msg, D_ERROR, 5,
 					      _("&Yes"), _("&No"),
-					      _("a&ll"), _("non&E"),
+					      _("A&ll"), _("Non&e"),
 					      _("&Abort"));
 
 	if (ctx->recursive_result != RECURSIVE_ABORT)

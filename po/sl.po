@@ -69,7 +69,7 @@ msgstr "&Opusti"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
+msgid "&OK"
 msgstr "&V redu"
 
 #: edit/edit_key_translator.c:135
@@ -239,11 +239,11 @@ msgid " Cancel "
 msgstr " Prekliči "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "e&Na"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Vse"
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
@@ -2045,7 +2045,7 @@ msgid "a&ll"
 msgstr "&vse"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "br&Ez"
 
 #: src/file.c:2198
@@ -2122,7 +2122,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Ciljna datoteka \"%s\" že obstaja!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "če se &Velikost razlikuje"
 
 #: src/filegui.c:526
@@ -2138,7 +2138,7 @@ msgid "&Reget"
 msgstr "&Znova dobi"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "&Dodaj"
 
 #: src/filegui.c:534
@@ -3183,7 +3183,7 @@ msgid "cd follows lin&Ks"
 msgstr "cd sledi po&vezavam"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
+msgid "L&ynx-like motion"
 msgstr "premikanje kot v l&Znx-u"
 
 #: src/option.c:67
@@ -3255,7 +3255,7 @@ msgid "on dumb &Terminals"
 msgstr "na neumnih &Terminalih"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "&vedno"
 
 #: src/option.c:157

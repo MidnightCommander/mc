@@ -68,8 +68,8 @@ msgstr "Forkast"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
-msgstr "&Ok"
+msgid "&OK"
+msgstr "&OK"
 
 #: edit/edit_key_translator.c:135
 msgid " Emacs key: "
@@ -238,12 +238,12 @@ msgid " Cancel "
 msgstr " Avbryt "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "e&N"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
-msgstr "al&Le"
+msgid "A&ll"
+msgstr "A&lle"
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
 msgid "&Skip"
@@ -2040,7 +2040,7 @@ msgid "a&ll"
 msgstr "a&lle"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "ing&En"
 
 #: src/file.c:2198
@@ -2117,7 +2117,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Målfilen \"%s\" eksisterer allerede!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "hvis størrelsen er forskjellig"
 
 #: src/filegui.c:526
@@ -2133,7 +2133,7 @@ msgid "&Reget"
 msgstr "Hent igjen"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "legg til"
 
 #: src/filegui.c:534
@@ -3174,7 +3174,7 @@ msgid "cd follows lin&Ks"
 msgstr "cd følger lenker"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
+msgid "L&ynx-like motion"
 msgstr "lynx-lignende bevegelse"
 
 #: src/option.c:67
@@ -3246,7 +3246,7 @@ msgid "on dumb &Terminals"
 msgstr "på stumme &Terminaler"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "alltid"
 
 #: src/option.c:157

@@ -70,7 +70,7 @@ msgstr "&Ignorar"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
+msgid "&OK"
 msgstr "&Aceptar"
 
 #: edit/edit_key_translator.c:135
@@ -240,11 +240,11 @@ msgid " Cancel "
 msgstr " Cancelar "
 
 #: edit/editcmd.c:1028
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "sólo u&No"
 
 #: edit/editcmd.c:1030 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Todos"
 
 #: edit/editcmd.c:1032 src/file.c:2161 src/filegui.c:229
@@ -2034,7 +2034,7 @@ msgid "a&ll"
 msgstr "&Todo"
 
 #: src/file.c:2220 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "nin&Guno"
 
 #: src/file.c:2230
@@ -2111,7 +2111,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "¡El archivo destino \"%s\" ya existe!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "si el ta&Maño difiere"
 
 #: src/filegui.c:526
@@ -2127,7 +2127,7 @@ msgid "&Reget"
 msgstr "&Reintentar"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "aña&Dir"
 
 #: src/filegui.c:534
@@ -3169,8 +3169,8 @@ msgid "cd follows lin&Ks"
 msgstr "cd sigue en&Laces"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
-msgstr "navegación al estilo l&Ynx"
+msgid "L&ynx-like motion"
+msgstr "navegación al estilo L&ynx"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
@@ -3241,7 +3241,7 @@ msgid "on dumb &Terminals"
 msgstr "sólo en terminales &Tontas"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "&Siempre"
 
 #: src/option.c:157

@@ -75,8 +75,8 @@ msgstr "&Schließen"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
-msgstr "&Ok"
+msgid "&OK"
+msgstr "&OK"
 
 #: edit/edit_key_translator.c:135
 msgid " Emacs key: "
@@ -246,12 +246,12 @@ msgid " Cancel "
 msgstr " Abbrechen "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "ei&Ne"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
-msgstr "al&Le"
+msgid "A&ll"
+msgstr "A&lle"
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
 msgid "&Skip"
@@ -2050,7 +2050,7 @@ msgid "a&ll"
 msgstr "a&lle"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "kein&e"
 
 #: src/file.c:2198
@@ -2127,7 +2127,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Zieldatei \"%s\" existiert bereits!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "bei unter&Schiedlicher größe"
 
 #: src/filegui.c:526
@@ -2143,7 +2143,7 @@ msgid "&Reget"
 msgstr "e&Rneut holen"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "Anhängen"
 
 #: src/filegui.c:534
@@ -3186,8 +3186,8 @@ msgid "cd follows lin&Ks"
 msgstr "cd folgt lin&Ks"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
-msgstr "l&Ynx-Artige Bewegungen"
+msgid "L&ynx-like motion"
+msgstr "L&ynx-Artige Bewegungen"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
@@ -3258,7 +3258,7 @@ msgid "on dumb &Terminals"
 msgstr "auf dummen &Terminals"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "Immer"
 
 #: src/option.c:157

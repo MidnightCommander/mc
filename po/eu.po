@@ -71,7 +71,7 @@ msgstr "&Itxi"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
+msgid "&OK"
 msgstr "&Ados"
 
 #: edit/edit_key_translator.c:135
@@ -241,11 +241,11 @@ msgid " Cancel "
 msgstr " Utzi "
 
 #: edit/editcmd.c:1027
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "Ba&t"
 
 #: edit/editcmd.c:1029 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Guztia"
 
 #: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
@@ -2050,7 +2050,7 @@ msgid "a&ll"
 msgstr "&dena"
 
 #: src/file.c:2188 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "&Bat ere ez"
 
 #: src/file.c:2198
@@ -2127,7 +2127,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "\"%s\" helburu-fitxategia badago lehendik ere!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "&Tamaina desberdina bada"
 
 #: src/filegui.c:526
@@ -2143,7 +2143,7 @@ msgid "&Reget"
 msgstr "&Beste saiakera bat"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "era&nskina"
 
 #: src/filegui.c:534
@@ -3189,8 +3189,8 @@ msgid "cd follows lin&Ks"
 msgstr "cd-k &estekei jarraitzen die "
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
-msgstr "l&Ynx-en moduko mugimendua"
+msgid "L&ynx-like motion"
+msgstr "L&ynx-en moduko mugimendua"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
@@ -3261,7 +3261,7 @@ msgid "on dumb &Terminals"
 msgstr "&Terminal inozoetan"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "&beti"
 
 #: src/option.c:157

@@ -136,7 +136,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     static char *display_title = N_("Listing mode");
     static int i18n_displays_flag;
     char *user_mini_status = _("user &Mini status");
-    char *ok_button = _("&Ok");
+    char *ok_button = _("&OK");
     char *cancel_button = _("&Cancel");
 
     static int button_start = 30;
@@ -273,7 +273,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     sortfn *result;
     WCheck *c, *case_sense;
 
-	char* ok_button = _("&Ok");
+	char* ok_button = _("&OK");
 	char* cancel_button = _("&Cancel");
 	char* reverse_label = _("&Reverse");
 	char* case_label = _("case sensi&tive");
@@ -371,7 +371,7 @@ static int my_exit;
 static QuickWidget conf_widgets [] = {
 { quick_button,   4, 6, 4, CONFY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, "c" },
-{ quick_button,   4, 6, 3, CONFY, N_("&Ok"),
+{ quick_button,   4, 6, 3, CONFY, N_("&OK"),
       0, B_ENTER, 0, 0, "o" },
 
 { quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
@@ -463,7 +463,7 @@ static char *display_bits_str [] =
 static QuickWidget display_widgets [] = {
 { quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, "c" },
-{ quick_button,   4,  6,    3, DISPY, N_("&Ok"),
+{ quick_button,   4,  6,    3, DISPY, N_("&OK"),
       0, B_ENTER, 0, 0, "o" },
 { quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
       0, 0, &new_meta, 0, "u" },
@@ -586,7 +586,7 @@ init_disp_bits_box (void)
 			    NORMAL_BUTTON, _("&Cancel"), 0, 0, NULL ) );
     add_widget( dbits_dlg,
 		button_new( DISPY - 3, 7, B_ENTER,
-			    NORMAL_BUTTON, _("&Ok"), 0, 0, NULL ) );
+			    NORMAL_BUTTON, _("&OK"), 0, 0, NULL ) );
 
     inpcheck = check_new( 6, 4, !use_8th_bit_as_meta,
 			  _("F&ull 8 bits input"), NULL );
@@ -709,7 +709,7 @@ static int ret_use_netrc;
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, "button-cancel" },
-{ quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
+{ quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&OK"),
       0, B_ENTER, 0, 0, "button-ok" },
 #if defined(USE_NETCODE)
 { quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
@@ -937,7 +937,7 @@ job_buttons [] =
 	{N_("&Stop"),   3,  B_STOP,   task_cb, "button-stop"},
 	{N_("&Resume"), 12, B_RESUME, task_cb, "button-cont"},
 	{N_("&Kill"),   23, B_KILL,   task_cb, "button-kill"},
-	{N_("&Ok"),     35, B_CANCEL, NULL,    "button-ok"},
+	{N_("&OK"),     35, B_CANCEL, NULL,    "button-ok"},
 };
 
 void
@@ -1006,7 +1006,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     int dialog_y = 12;
     struct smb_authinfo *return_value;
     static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
-    static char* buts[] = {N_("&Ok"), N_("&Cancel")};
+    static char* buts[] = {N_("&OK"), N_("&Cancel")};
     static int ilen = 30, istart = 14;
     static int b0 = 3, b2 = 30;
     char *title;

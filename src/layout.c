@@ -360,7 +360,7 @@ static void init_layout (void)
     static int i18n_layt_flag = 0;
 	static int b1, b2, b3;
     int i = sizeof (s_split_direction) / sizeof(char*) ;
-	char* ok_button = _("&Ok");
+	char* ok_button = _("&OK");
 	char* cancel_button = _("&Cancel");
 	char* save_button = _("&Save");
     

@@ -82,7 +82,7 @@ msgstr "Закрыть"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
+msgid "&OK"
 msgstr "&Дальше"
 
 #: edit/edit_key_translator.c:135
@@ -247,11 +247,11 @@ msgid " Cancel "
 msgstr " Прервать "
 
 #: edit/editcmd.c:1028
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "&Один"
 
 #: edit/editcmd.c:1030 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Все"
 
 #: edit/editcmd.c:1032 src/file.c:2161 src/filegui.c:229
@@ -2033,7 +2033,7 @@ msgid "a&ll"
 msgstr "&Все"
 
 #: src/file.c:2220 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "ни &Одного"
 
 #: src/file.c:2230
@@ -2110,7 +2110,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Целевой файл \"%s\" уже существует!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "&Различающиеся по длине"
 
 #: src/filegui.c:526
@@ -2126,7 +2126,7 @@ msgid "&Reget"
 msgstr "пере&Читать"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "дописать в &Конец"
 
 #: src/filegui.c:534
@@ -3167,7 +3167,7 @@ msgid "cd follows lin&Ks"
 msgstr "Смена &каталога по ссылкам"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
+msgid "L&ynx-like motion"
 msgstr "Навигация в стиле l&ynx"
 
 #: src/option.c:67
@@ -3239,7 +3239,7 @@ msgid "on dumb &Terminals"
 msgstr "На &тупых терминалах"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "&Всегда"
 
 #: src/option.c:157

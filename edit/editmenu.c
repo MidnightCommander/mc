@@ -27,7 +27,7 @@
 #include "editcmddef.h"
 
 #undef edit_message_dialog
-#define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&Ok"))
+#define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&OK"))
 #define CFocus(x) 
 
 static void menu_cmd (int i)

@@ -373,7 +373,7 @@ real_input_dialog_help (char *header, char *text, char *help,
     QuickWidget quick_widgets[] = {
 	{quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	 "button-cancel"},
-	{quick_button, 3, 10, 1, 0, N_("&Ok"), 0, B_ENTER, 0, 0,
+	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0,
 	 "button-ok"},
 	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, 0},
 	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, "label"},

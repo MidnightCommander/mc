@@ -63,7 +63,7 @@ static struct {
    /* other options */
    {N_("safe de&Lete"),       &safe_delete,       TOGGLE_VARIABLE,       0, "safe-del" },
    {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
-   {N_("l&Ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
+   {N_("L&ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
    {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
    {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
    {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
@@ -92,7 +92,7 @@ static WRadio *pause_radio;
 static char *pause_options [3] = {
     N_("&Never"),
     N_("on dumb &Terminals"),
-    N_("alwa&Ys") };
+    N_("Alwa&ys") };
 
 #define PAUSE_OPTIONS (sizeof(pause_options) / sizeof(char *))
 
@@ -145,7 +145,7 @@ init_configure (void)
     int i;
     static int i18n_config_flag = 0;
     static int b1, b2, b3;
-    char *ok_button = _("&Ok");
+    char *ok_button = _("&OK");
     char *cancel_button = _("&Cancel");
     char *save_button = _("&Save");
 

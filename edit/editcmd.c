@@ -331,7 +331,7 @@ void menu_save_mode_cmd (void)
     {
 	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, "c"},
-	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
+	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&OK"), 0,
 	 B_ENTER, 0, 0, "o"},
 	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
 	 0, 0, &str_result, "edit-backup-ext"},
@@ -1032,9 +1032,9 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     {
 	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
 	 0, B_CANCEL, 0, 0, NULL},
-	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("o&Ne"),
+	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("O&ne"),
 	 0, B_REPLACE_ONE, 0, 0, NULL},
-	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("al&L"),
+	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("A&ll"),
 	 0, B_REPLACE_ALL, 0, 0, NULL},
 	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
 	 0, B_SKIP_REPLACE, 0, 0, NULL},
@@ -1088,7 +1088,7 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     {
 	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, NULL},
-	{quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
+	{quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
 	 0, NULL},
 	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
 	 0, 0, NULL},
@@ -1169,7 +1169,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     {
 	{quick_button, 6, 10, 7, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, NULL},
-	{quick_button, 2, 10, 7, SEARCH_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
+	{quick_button, 2, 10, 7, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
 	 0, NULL},
 	{quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
 	 0, 0, NULL },
@@ -2352,7 +2352,7 @@ void edit_mail_dialog (WEdit * edit)
     {
 	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, NULL},
-	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
+	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
 	 0, NULL},
 	{quick_input, 3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, 0,
 	 0, "mail-dlg-input"},

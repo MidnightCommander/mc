@@ -77,8 +77,8 @@ msgstr "&Chiudi"
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
 #: src/wtools.c:376
-msgid "&Ok"
-msgstr "&Ok"
+msgid "&OK"
+msgstr "&OK"
 
 #: edit/edit_key_translator.c:135
 msgid " Emacs key: "
@@ -230,11 +230,11 @@ msgid " Block is large, you may not be able to undo this action. "
 msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 
 #: edit/editcmd.c:1035
-msgid "o&Ne"
+msgid "O&ne"
 msgstr "&Nome"
 
 #: edit/editcmd.c:1037 src/filegui.c:527
-msgid "al&L"
+msgid "A&ll"
 msgstr "&Tutti"
 
 #: edit/editcmd.c:1039 src/file.c:2161 src/filegui.c:229
@@ -2011,7 +2011,7 @@ msgid "a&ll"
 msgstr "&Tutto"
 
 #: src/file.c:2220 src/filegui.c:525
-msgid "non&E"
+msgid "Non&e"
 msgstr "nessun&O"
 
 #: src/file.c:2230
@@ -2085,7 +2085,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr " Il file \"%s\" esiste già!"
 
 #: src/filegui.c:523
-msgid "if &Size differs"
+msgid "If &size differs"
 msgstr "solo se la dimensione è &Diversa"
 
 #: src/filegui.c:526
@@ -2101,7 +2101,7 @@ msgid "&Reget"
 msgstr "&Reget"
 
 #: src/filegui.c:531
-msgid "ap&Pend"
+msgid "A&ppend"
 msgstr "atta&Cca"
 
 #: src/filegui.c:534
@@ -3140,7 +3140,7 @@ msgid "cd follows lin&Ks"
 msgstr "cd segue i collegamenti (&K)"
 
 #: src/option.c:66
-msgid "l&Ynx-like motion"
+msgid "L&ynx-like motion"
 msgstr "navigazione stile L&Ynx"
 
 #: src/option.c:67
@@ -3212,7 +3212,7 @@ msgid "on dumb &Terminals"
 msgstr "su terminali stupidi (&Q)"
 
 #: src/option.c:95
-msgid "alwa&Ys"
+msgid "Alwa&ys"
 msgstr "sempre (&X)"
 
 #: src/option.c:157

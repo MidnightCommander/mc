@@ -62,7 +62,7 @@ void edit_options_dialog (void)
 	{quick_button, 6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, NULL},
 /*1 */
-	{quick_button, 2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Ok"), 0, B_ENTER, 0,
+	{quick_button, 2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"), 0, B_ENTER, 0,
 	 0, NULL},
 /*2 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 4, OPT_DLG_H, N_("Word wrap line length : "), 0, 0,
