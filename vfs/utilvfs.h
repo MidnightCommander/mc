@@ -2,4 +2,5 @@
 #include "../src/global.h"
 
 #include "../src/tty.h"		/* enable/disable interrupt key */
+#include "../src/background.h"
 #include "../src/main.h"

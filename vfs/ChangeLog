@@ -1,3 +1,8 @@
+2001-05-14  Pavel Roskin  <proski@gnu.org>
+
+	* utilvfs.h: Include background.h.
+	* cpio.c: Include utilvfs.h.
+
 2001-05-14  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* Make-mc.in: add possibility to build libvfs.so
