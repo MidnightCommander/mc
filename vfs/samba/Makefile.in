@@ -92,7 +92,6 @@ SAMBAFILES=			\
 	lib/charset.o 	\
 	lib/username.o 	\
 	lib/util_file.o 	\
-	lib/signal.o 	\
 	lib/util_sock.o 	\
 	lib/genrand.o 	\
 	lib/md4.o 	\

@@ -115,7 +115,7 @@ static size_t     format_pos     = 0;
 /* -------------------------------------------------------------------------- **
  * Functions...
  */
-
+#if 0
 #if defined(SIGUSR2)
 /* ************************************************************************** **
  * catch a sigusr2 - decrease the debug log level.
@@ -157,7 +157,7 @@ void sig_usr1( int sig )
 
   } /* sig_usr1 */
 #endif /* SIGUSR1 */
-
+#endif
 
 /* ************************************************************************** **
  * get ready for syslog stuff

@@ -21,6 +21,7 @@
 
 extern int DEBUGLEVEL;
 
+#if 0
 static int gotalarm;
 
 /***************************************************************
@@ -64,7 +65,6 @@ BOOL do_file_lock(int fd, int waitsecs, int type)
 
   return (ret == 0);
 }
-
 
 /***************************************************************
  Lock an fd. Abandon after waitsecs seconds.
@@ -160,6 +160,7 @@ void endfilepwent(void *vp, int *file_lock_depth)
   fclose(fp);
   DEBUG(7, ("endfilepwent: closed file.\n"));
 }
+#endif
 
 /*************************************************************************
  Return the current position in the file list as an SMB_BIG_UINT.

@@ -1,3 +1,20 @@
+2002-04-24  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/lib/signal.c: Remove.
+
+	* samba/lib/debug.c (sig_usr2): Commented out.
+	(sig_usr1): Likewise.
+	* samba/lib/util_file.c (gotalarm): Commented out.
+	(gotalarm_sig): Likewise.
+	(do_file_lock): Likewise.
+	(file_lock): Likewise.
+	(file_unlock): Likewise.
+	(startfilepwent): Likewise.
+	(endfilepwent): Likewise.
+
+	* samba/Makefile.in (SAMBAFILES): Remove lib/signal.o.
+	* Makefile.am (SAMBA_DIST): Remove lib/signal.c.
+
 2002-04-19  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* vfs.c (vfs_init) [!WITH_MCFS]: Don't register mcfs.

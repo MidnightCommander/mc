@@ -154,7 +154,6 @@ SAMBA_DIST =			\
 	lib/kanji.c		\
 	lib/md4.c		\
 	lib/netmask.c		\
-	lib/signal.c		\
 	lib/slprintf.c		\
 	lib/system.c		\
 	lib/time.c		\
