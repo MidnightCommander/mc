@@ -1,3 +1,10 @@
+2001-07-12  Andrew V. Samoilov <kai@cmail.ru>
+
+	* glayout.c (create_new_menu): Don't release file2 if it is NULL.
+	* gnome-file-property-dialog.c: Use MSG_ERROR instead of "Error" as
+	message()'s second parameter.
+	(apply_name_change): Release base_name after use.
+
 2001-07-11  Pavel Roskin  <proski@gnu.org>
 
 	* gdialogs.c: Use g_snprintf() instead of snprintf().
