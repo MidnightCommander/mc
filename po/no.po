@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-09-26 21:39+0200\n"
+"POT-Creation-Date: 1999-10-06 10:06+0200\n"
 "PO-Revision-Date: 1999-09-26 21:40+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -484,6 +484,11 @@ msgstr "Bruk formet tekst"
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
 msgstr "Skrivebord"
+
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:141
+msgid "Home directory"
+msgstr "Hjemmekatalog"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -5283,7 +5288,7 @@ msgstr "Ingen vinduer åpnet ved oppstart"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Viser katalogen som inneholder .links oppstartsfilene og avslutt"
 
-#: src/main.c:3039
+#: src/main.c:3045
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5291,11 +5296,11 @@ msgstr ""
 "Kunne ikke åpne tty linjen. Du må kjøre mc uten -P flagget.\n"
 "På noen systemer vil du kanskje bruke # `which mc`\n"
 
-#: src/main.c:3117
+#: src/main.c:3123
 msgid " Notice "
 msgstr " Notis "
 
-#: src/main.c:3118
+#: src/main.c:3124
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
