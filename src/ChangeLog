@@ -8,7 +8,7 @@
 
 	* main.c: Option -P takes an argument (output filename) now.
 	(main): Output the last directory to the specified file.  Don't
-	output "." is this information is unavailable.
+	output "." if this information is unavailable.
 
 	* subshell.c (subshell_name_quote): Don't quote numbers and
 	letters if possible and safe.
@@ -43,6 +43,12 @@
 	readable and easier to document.
 	* screen.c (panel_format): Likewise.
 	(mini_status_format): Likewise.
+
+2002-10-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (init_growing_view): Mark message for translation.
+	(normal_search) [HAVE_CHARSET]: Convert saved search string to
+	original codeset if input_dialog() returns empty string.
 
 2002-10-24  Pavel Roskin  <proski@gnu.org>
 
