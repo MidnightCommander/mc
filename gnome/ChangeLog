@@ -1,3 +1,8 @@
+1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcorba.c (impl_GNOME_FileManagerFactory_create_window): Fix bug
+	spooted by federico.  I was connecting to the wrong signal.
+
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_class_init): Added two new signals,

@@ -152,7 +152,7 @@ impl_GNOME_FileManagerFactory_create_window (impl_POA_GNOME_FileManagerFactory *
 	newservant->mywin = new_panel_at ((dir && *dir) ? dir : home_dir);
 	
 	gtk_signal_connect(GTK_OBJECT(newservant->mywin->xwindow),
-			   "destroy", impl_GNOME_FileManagerWindow_close,
+			   "destroy", do_window_close,
 			   newservant);
 	
 	POA_GNOME_FileManagerWindow__init((PortableServer_Servant) newservant, ev);
