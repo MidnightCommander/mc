@@ -120,14 +120,10 @@
 # C
 shell/.c
 	Open=%var{EDITOR:vi} %f
-	Compile=%var{CC:cc} -O -c %f
-	Link=%var{CC:cc} -O -o %d/`basename %f .c` %f
 
 # Fortran
 shell/.f
 	Open=%var{EDITOR:vi} %f
-	Compile=f77 -O -c %f
-	Compile and Link=f77 -O %f
 	
 # Header
 shell/.h
@@ -137,20 +133,14 @@ shell/.h
 shell/.o
 	#Open=%var{PAGER:more} %f
 	View=%view{ascii} file %f && nm %f
-	Link=%var{CC:cc} -O %f
-	Disassemble=%view{ascii} objdump -d -r %f
 
 # Asm
 shell/.s
 	Open=%var{EDITOR:vi} %f
-	Assemble=%var{CC:cc} -O -c %f
-	Link=%var{CC:cc} -O -o %d/`basename %f .s` %f
 
 # C++
 regex/\.(C|cc)$
 	Open=%var{EDITOR:vi} %f
-	Compile=c++ -O -c %f
-	Link=c++ -O -o %d/`basename %f .c` %f
 
 ### Documentation ###
 
@@ -245,8 +235,6 @@ include/image-options
 	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (ee %f &); fi
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
-	Set root window to this image=background-properties --setwallpaper %f &
-	Display this file=ee %f &
 
 
 ### Sound files ###
@@ -307,7 +295,7 @@ type/^PDF
 regex/\.([Hh]tml?|HTML?)$
 	#Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
 	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then echo @X11_WWW@ %f; (@X11_WWW@ %f &) >/dev/null 2>&1; else lynx -force_html %f; fi
-	View=%view{ascii} lynx -dump -force_html %f; 
+	View=%view{ascii} lynx -dump -force_html %f
 
 # StarOffice and OpenOffice
 shell/.sdw
@@ -349,27 +337,13 @@ type/^FrameMaker
 regex/\.([Dd]vi|DVI)$
 	Open=if [ x$DISPLAY = x ]; then dvisvga %f; else (xdvi %f &); fi
 	View=%view{ascii} dvi2tty %f
-	Convert file to Postscript=dvips %f
 
 # TeX
 regex/\.([Tt]ex|TEX|TeX)$
 	Open=%var{EDITOR:vi} %f
-	TeX this file=tex %f
-	LaTeX this file=latex %f
 
 
 ### Miscellaneous ###
-
-shell/^RMAIL$
-	Start Emacs on this RMAIL file=emacs %f
-	Open=emacs %f
-
-type/^(M|m)ail
-	Open=elm -f %f
-	View=%view{ascii} mcmfmt < %f
-
-# core
-shell/core
 
 # Makefile
 regex/[Mm]akefile$
@@ -399,83 +373,67 @@ regex/\.(rexx|rex|cmd)$
 regex/\.t([gp]?z|ar\.g?[zZ])$
 	Open=%cd %p#utar
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
-	Extract=gzip -dc %f 2>/dev/null | tar xf -
+
 regex/\.tar\.bz$
 	# Open=%cd %p#utar
 	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
-	Extract=bzip -dc %f 2>/dev/null | tar xf -
+
 regex/\.tar\.bz2$
 	Open=%cd %p#utar
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
-	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
 
 # .tar.F - used in QNX
 regex/\.tar\.F$
 	# Open=%cd %p#utar
 	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
-	Extract=freeze -dc %f 2>/dev/null | tar xf -
 
 # tar
 regex/\.(tar|TAR)$
 	Open=%cd %p#utar
 	View=%view{ascii} tar tvvf %f
-	Extract=tar xf %f
 
 # zip
 type/^Zip\ archive
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
-	Extract=unzip %f
-	Extract (with flags)=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
-	Unzip=unzip %f '*'
 
 # zoo
 regex/\.(zoo|ZOO)$
 	Open=%cd %p#uzoo
 	View=%view{ascii} zoo l %f
-	Extract=zoo x %f '*'
 	
 # lha
 type/^LHa\ .*archive
 	Open=%cd %p#ulha
 	View=%view{ascii} lharc l %f
-	Extract=lharc x %f '*'
-	Extract (with flags)=I=%{Enter any LHarc flags:}; if test -n "$I"; then lharc x $I %f; fi
 
 # arj
 regex/\.a(rj|[0-9][0-9])$
 	Open=%cd %p#uarj
 	View=%view{ascii} unarj l %f
-	Extract=unarj x %f '*'
-	Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
 
 # ha
 regex/\.(ha|HA|Ha)$
 	Open=%cd %p#uha
 	View=%view{ascii} ha lf %f
-	Extract=ha xy %f '*'
-	Extract (with flags)=I=%{Enter any HA flags:}; if test -n "$I"; then ha xy $I %f; fi
 
 # rar
 regex/\.[rR]([aA][rR]|[0-9][0-9])$
 	Open=%cd %p#urar
 	View=%view{ascii} rar v -c- %f
-	Extract=rar x -c- %f '*'
-	Extract (with flags)=I=%{Enter any RAR flags:}; if test -n "$I";then rar x $I %f; fi
 
 # cpio
 shell/.cpio.Z
 	Open=%cd %p#ucpio
 	View=%view{ascii} compress -dc '%f' | cpio -ictv
-	Extract=compress -dc '%f' | cpio -ic
+
 shell/.cpio.gz
 	Open=%cd %p#ucpio
 	View=%view{ascii} gzip -dc '%f' | cpio -ictv
-	Extract=gzip -dc '%f' | cpio -ic
+
 shell/.cpio
 	Open=%cd %p#ucpio
 	View=%view{ascii} cat '%f' | cpio -ictv
-	Extract=cat '%f' | cpio -ic
 
 # ls-lR
 regex/(^|\.)ls-?lR$
@@ -493,21 +451,18 @@ type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Uncompress=gunzip %f
 
 # bzip2
 type/^bzip2
 	Open=bzip2 -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip2 %f
 
 # bzip
 type/^bzip
 	Open=bzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} bzip -dc %f 2>/dev/null
 	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip %f
 
 # compress
 type/^compress
@@ -530,33 +485,16 @@ regex/\.trpm$
 regex/\.(spm|src\.rpm)$
 	Open=%cd %p#rpm
 	View=%view{ascii} rpm -qivlp --scripts %f
-	Install this RPM=rpm -i %f
-	Rebuild this RPM=rpm --rebuild %f
-	Check signature=rpm --checksig %f
 
 # Compiled RPMs
 regex/\.rpm$
 	Open=%cd %p#rpm
 	View=%view{ascii} rpm -qivlp --scripts %f
-	Install this RPM=rpm -i %f
-	Upgrade this RPM=rpm -U %f
-	Check signature=rpm --checksig %f
 
 # deb
 regex/\.deb$
 	Open=%cd %p#deb
 	View=%view{ascii} dpkg-deb -c %f
-
-
-### Directories ###
-
-directory/^\.\.$
-directory/^News$
-directory/^Mail$
-directory/^\..*$
-directory/^.*$
-	Start XTerm here=cd %p; exec xterm &
-	Make tar.gz=I=%{Enter destination file name:}; if test -n "$I"; then tar cvf - %p | gzip > $I; fi
 
 
 ### Default ###
@@ -565,8 +503,6 @@ directory/^.*$
 default/*
 	Open=
 	View=
-	Drop=
-	Title=%p
 
 
 ### EOF ###
