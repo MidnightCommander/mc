@@ -1,5 +1,8 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* gscreen.c (tree_size_allocate): Don't call save_setup() if
+	auto_save_setup is 0.
+
 	* Makefile.in: Add dependencies between gmc and static libraries
 	in the source tree.
 

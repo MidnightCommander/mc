@@ -2310,7 +2310,10 @@ tree_size_allocate (GtkWidget *widget, GtkAllocation *allocation, WPanel *panel)
 	} else {
 		tree_panel_visible = allocation->width;
 	}
-	save_setup ();
+
+	if (auto_save_setup) {
+		save_setup ();
+	}
 }
 
 void
