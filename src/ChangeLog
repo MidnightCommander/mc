@@ -64,12 +64,12 @@
 
 2003-09-29  Koblinger Egmont  <egmont@uhulinux.hu>
 
-	* main.c (copy_other_pathname): Trailing slash in not always
+	* main.c (copy_other_pathname): Trailing slash was not always
 	inserted when it should be.
 
 2003-09-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* find.c (do_search): Use strncpy() instead if unsafe strcpy().
+	* find.c (do_search): Use strncpy() instead of unsafe strcpy().
 	Check mc_(l)stat() return values.
 
 2003-09-24  Pavel Roskin  <proski@gnu.org>
