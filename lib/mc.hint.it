@@ -30,7 +30,7 @@ Dritta: Vuoi fare ricerche complesse? Usa il comando Pannellizza.
 Dritta: Per cambiare directory mentre batti un comando, usa M-c (cd rapido).
 Nota: I comandi di shell non funzionano se non sei in un file system locale.
 Dritta: Riesuma il testo nell'editor integrato con C-u.
-Dritta: Non ti funzionano alcuni tasti? Guarda in Opzioni/Memorizza tasti.
+Dritta: Non ti funzionano alcuni tasti? Guarda in Opzioni/Impara tasti.
 Dritta: Per vedere il risultato di un comando nel visualizzatore, usa M-!
 Dritta: F13 (o Shift-F3) invoca il visualizzatore in modo 'raw'.
 Dritta: Tasti non funzionanti in xterms? Usa i file xterm.ad, .ti e .tcap di mc.
