@@ -20,10 +20,6 @@ void setup_logging( char *pname, BOOL interactive );
 void dbgflush( void );
 BOOL dbghdr( int level, char *file, char *func, int line );
 
-/* The following definitions come from lib/genrand.c  */
-
-void generate_random_buffer( unsigned char *out, int len, BOOL re_seed);
-
 /* The following definitions come from lib/interface.c  */
 
 void load_interfaces(void);
@@ -172,8 +168,6 @@ char *tab_depth(int depth);
 int str_checksum(const char *s);
 void zero_free(void *p, size_t size);
 int set_maxfiles(int requested_max);
-void reg_get_subkey(char *full_keyname, char *key_name, char *subkey_name);
-BOOL reg_split_key(char *full_keyname, uint32 *reg_type, char *key_name);
 
 /* The following definitions come from lib/util_file.c  */
 
@@ -207,7 +201,6 @@ BOOL send_smb(int fd,char *buffer);
 BOOL send_one_packet(char *buf,int len,struct in_addr ip,int port,int type);
 int open_socket_in(int type, int port, int dlevel,uint32 socket_addr, BOOL rebind);
 int open_socket_out(int type, struct in_addr *addr, int port ,int timeout);
-void reset_globals_after_fork(void);
 char *client_name(int fd);
 char *client_addr(int fd);
 
@@ -245,10 +238,6 @@ BOOL string_set(char **dest,const char *src);
 void string_sub(char *s,const char *pattern,const char *insert);
 void all_string_sub(char *s,const char *pattern,const char *insert);
 void split_at_last_component(char *path, char *front, char sep, char *back);
-
-/* The following definitions come from lib/util_unistr.c  */
-
-int struni2(char *dst, const char *src);
 
 /* The following definitions come from libsmb/clientgen.c  */
 
@@ -312,8 +301,6 @@ BOOL cli_qfileinfo(struct cli_state *cli, int fnum,
 		   time_t *w_time, SMB_INO_T *ino);
 int cli_list(struct cli_state *cli,const char *Mask,uint16 attribute, 
 	     void (*fn)(file_info *, const char *, void *), void *state);
-BOOL cli_oem_change_password(struct cli_state *cli, const char *user, const char *new_password,
-                             const char *old_password);
 BOOL cli_negprot(struct cli_state *cli);
 BOOL cli_session_request(struct cli_state *cli,
 			 struct nmb_name *calling, struct nmb_name *called);
@@ -329,9 +316,6 @@ BOOL cli_establish_connection(struct cli_state *cli,
 				struct nmb_name *calling, struct nmb_name *called,
 				char *service, char *service_type,
 				BOOL do_shutdown, BOOL do_tcon);
-int cli_printjob_del(struct cli_state *cli, int job);
-int cli_print_queue(struct cli_state *cli, 
-		    void (*fn)(struct print_job_info *));
 BOOL cli_chkpath(struct cli_state *cli, char *path);
 BOOL cli_message_start(struct cli_state *cli, char *host, char *username, 
 			      int *grp);
@@ -399,7 +383,6 @@ void nt_lm_owf_gen(char *pwd, uchar nt_p16[16], uchar p16[16]);
 void SMBOWFencrypt(uchar passwd[16], uchar *c8, uchar p24[24]);
 void NTLMSSPOWFencrypt(uchar passwd[8], uchar *ntlmchalresp, uchar p24[24]);
 void SMBNTencrypt(uchar *passwd, uchar *c8, uchar *p24);
-BOOL make_oem_passwd_hash(char data[516], const char *passwd, uchar old_pw_hash[16], BOOL unicode);
 
 /* The following definitions come from libsmb/smberr.c  */
 
@@ -620,12 +603,8 @@ void lp_killunused(BOOL (*snumused)(int ));
 BOOL lp_load(char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc);
 void lp_resetnumservices(void);
 int lp_numservices(void);
-void lp_dump(FILE *f, BOOL show_defaults, int maxtoprint);
-void lp_dump_one(FILE *f, BOOL show_defaults, int snum);
 int lp_servicenumber(char *pszServiceName);
 char *volume_label(int snum);
-void lp_remove_service(int snum);
-void lp_copy_service(int snum, char *new_name);
 int lp_default_server_announce(void);
 int lp_major_announce_version(void);
 int lp_minor_announce_version(void);

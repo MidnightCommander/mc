@@ -1,3 +1,29 @@
+2005-02-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/include/proto.h: Adjust for the last changes.
+
+	* samba/lib/util.c: Comment out unused ra_type, in_group(),
+	get_numlist(), Atoic(), dns_to_netbios_name(), name_interpret(),
+	directory_exist(), file_size(), unix_format(), dos_format(),
+	close_low_fds(), name_ptr(), name_extract(), unix_do_match(),
+	unix_mask_match(), do_match(), mask_match(),
+	interpret_protocol(), readdirname(), is_in_path(),
+	set_namearray(), free_namearray(), fcntl_lock(), is_myname(),
+	set_remote_arch(), get_remote_arch(). align2(), out_ascii() and
+	out_data().
+	(reg_get_subkey): Remove.
+	(reg_split_key): Remove.
+
+	* samba/lib/system.c: Comment out sys_lstat(), sys_fseek(),
+	sys_ftell(), sys_readdir(), sys_getwd(), sys_chown(), sys_random()
+	and sys_srandom().
+
+	* samba/libsmb/clientgen.c (cli_qpathinfo): Comment out.
+	(cli_qpathinfo2): Comment out.
+	(cli_printjob_del): Remove.
+	(cli_print_queue): Remove.
+	(cli_dskattr): Comment out.
+
 2005-02-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/lib/username.c (map_username): Comment out.

@@ -1670,6 +1670,7 @@ BOOL cli_setatr(struct cli_state *cli, char *fname, uint16 attr, time_t t)
 	return True;
 }
 
+#if 0
 /****************************************************************************
 send a qpathinfo call
 ****************************************************************************/
@@ -1811,7 +1812,7 @@ BOOL cli_qpathinfo2(struct cli_state *cli, const char *fname,
 	if (rparam) free(rparam);
 	return True;
 }
-
+#endif	/* 0 */
 
 /****************************************************************************
 send a qfileinfo call
@@ -2692,115 +2693,6 @@ BOOL cli_establish_connection(struct cli_state *cli,
 	return True;
 }
 
-#if 0
-/****************************************************************************
-  cancel a print job
-  ****************************************************************************/
-int cli_printjob_del(struct cli_state *cli, int job)
-{
-	char *rparam = NULL;
-	char *rdata = NULL;
-	char *p;
-	int rdrcnt,rprcnt, ret = -1;
-	pstring param;
-
-	memset(param,'\0',sizeof(param));
-
-	p = param;
-	SSVAL(p,0,81);		/* DosPrintJobDel() */
-	p += 2;
-	pstrcpy(p,"W");
-	p = skip_string(p,1);
-	pstrcpy(p,"");
-	p = skip_string(p,1);
-	SSVAL(p,0,job);     
-	p += 2;
-	
-	if (cli_api(cli, 
-		    param, PTR_DIFF(p,param), 1024,  /* Param, length, maxlen */
-		    NULL, 0, CLI_BUFFER_SIZE,            /* data, length, maxlen */
-		    &rparam, &rprcnt,                /* return params, length */
-		    &rdata, &rdrcnt)) {               /* return data, length */
-		ret = SVAL(rparam,0);
-	}
-
-	if (rparam) free(rparam);
-	if (rdata) free(rdata);
-
-	return ret;
-}
-
-/****************************************************************************
-call fn() on each entry in a print queue
-****************************************************************************/
-int cli_print_queue(struct cli_state *cli, 
-		    void (*fn)(struct print_job_info *))
-{
-	char *rparam = NULL;
-	char *rdata = NULL;
-	char *p;
-	int rdrcnt, rprcnt;
-	pstring param;
-	int result_code=0;
-	int i = -1;
-	
-	memset(param,'\0',sizeof(param));
-
-	p = param;
-	SSVAL(p,0,76);         /* API function number 76 (DosPrintJobEnum) */
-	p += 2;
-	pstrcpy(p,"zWrLeh");   /* parameter description? */
-	p = skip_string(p,1);
-	pstrcpy(p,"WWzWWDDzz");  /* returned data format */
-	p = skip_string(p,1);
-	pstrcpy(p,cli->share);    /* name of queue */
-	p = skip_string(p,1);
-	SSVAL(p,0,2);   /* API function level 2, PRJINFO_2 data structure */
-	SSVAL(p,2,1000); /* size of bytes of returned data buffer */
-	p += 4;
-	pstrcpy(p,"");   /* subformat */
-	p = skip_string(p,1);
-
-	DEBUG(4,("doing cli_print_queue for %s\n", cli->share));
-
-	if (cli_api(cli, 
-		    param, PTR_DIFF(p,param), 1024,  /* Param, length, maxlen */
-		    NULL, 0, CLI_BUFFER_SIZE,            /* data, length, maxlen */
-		    &rparam, &rprcnt,                /* return params, length */
-		    &rdata, &rdrcnt)) {               /* return data, length */
-		int converter;
-		result_code = SVAL(rparam,0);
-		converter = SVAL(rparam,2);       /* conversion factor */
-
-		if (result_code == 0) {
-			struct print_job_info job;
-			
-			p = rdata; 
-
-			for (i = 0; i < SVAL(rparam,4); ++i) {
-				job.id = SVAL(p,0);
-				job.priority = SVAL(p,2);
-				fstrcpy(job.user,
-					fix_char_ptr(SVAL(p,4), converter, 
-						     rdata, rdrcnt));
-				job.t = make_unix_date3(p + 12);
-				job.size = IVAL(p,16);
-				fstrcpy(job.name,fix_char_ptr(SVAL(p,24), 
-							      converter, 
-							      rdata, rdrcnt));
-				fn(&job);				
-				p += 28;
-			}
-		}
-	}
-
-	/* If any parameters or data were returned, free the storage. */
-	if(rparam) free(rparam);
-	if(rdata) free(rdata);
-
-	return i;
-}
-#endif
 
 /****************************************************************************
 check for existance of a dir
@@ -2928,7 +2820,7 @@ BOOL cli_message_end(struct cli_state *cli, int grp)
 	return True;
 }      
 
-
+#if 0	/* May be useful one day */
 /****************************************************************************
 query disk space
 ****************************************************************************/
@@ -2951,3 +2843,4 @@ BOOL cli_dskattr(struct cli_state *cli, int *bsize, int *total, int *avail)
 	
 	return True;
 }
+#endif	/* 0 */

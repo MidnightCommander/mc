@@ -89,7 +89,9 @@ BOOL case_mangle;
 static const char *remote_machine = "";
 static const char *local_machine = "";
 static const char *remote_arch = "UNKNOWN";
+#if 0
 static enum remote_arch_types ra_type = RA_UNKNOWN;
+#endif
 static const char *remote_proto = "UNKNOWN";
 pstring myhostname="";
 pstring user_socket_options="";   
@@ -120,7 +122,7 @@ char *tmpdir(void)
 /****************************************************************************
 determine whether we are in the specified group
 ****************************************************************************/
-
+#if 0
 BOOL in_group(gid_t group, gid_t current_gid, int ngroups, gid_t *groups)
 {
 	int i;
@@ -191,7 +193,7 @@ char *get_numlist(char *p, uint32 **num, int *count)
 
 	return p;
 }
-
+#endif /* 0 */
 /*******************************************************************
 copy an IP address from one buffer to another
 ********************************************************************/
@@ -202,7 +204,7 @@ void putip(void *dest,void *src)
 
 
 #define TRUNCATE_NETBIOS_NAME 1
-
+#if 0
 /*******************************************************************
  convert, possibly using a stupid microsoft-ism which has destroyed
  the transport independence of netbios (for CIFS vendors that usually
@@ -280,6 +282,7 @@ static int name_interpret(char *in,char *out)
 #endif
   return(ret);
 }
+#endif /* 0 */
 
 /****************************************************************************
 mangle a name into netbios format
@@ -366,7 +369,7 @@ time_t file_modtime(char *fname)
 
   return(st.st_mtime);
 }
-
+#if 0
 /*******************************************************************
   check if a directory exists
 ********************************************************************/
@@ -397,6 +400,7 @@ SMB_OFF_T file_size(char *file_name)
     return (SMB_OFF_T)-1;
   return(buf.st_size);
 }
+#endif	/* 0 */
 
 /*******************************************************************
 return a string representing an attribute for a file
@@ -417,8 +421,7 @@ char *attrib_string(uint16 mode)
   return(attrstr);
 }
 
-
-
+#if 0
 /****************************************************************************
   make a file into unix format
 ****************************************************************************/
@@ -434,7 +437,7 @@ void dos_format(char *fname)
 {
   string_replace(fname,'/','\\');
 }
-
+#endif	/* 0 */
 /*******************************************************************
   show a smb message structure
 ********************************************************************/
@@ -789,6 +792,9 @@ static void dirname_dos(char *path,char *buf)
 }
 
 
+/****************************************************************************
+parse out a filename from a path name. Assumes dos style filenames.
+****************************************************************************/
 static char *filename_dos(char *path,char *buf)
 {
   char *p = strrchr(path,'\\');
@@ -896,7 +902,6 @@ void make_dir_struct(char *buf,char *mask,char *fname,SMB_OFF_T size,int mode,ti
     strupper(buf+30);
   DEBUG(8,("put name [%s] into dir struct\n",buf+30));
 }
-#endif /* 0 */
 
 
 /*******************************************************************
@@ -922,6 +927,7 @@ void close_low_fds(void)
     }
   }
 }
+#endif	/* 0 */
 
 /****************************************************************************
 Set a fd into blocking/nonblocking mode. Uses POSIX O_NONBLOCK if available,
@@ -1040,7 +1046,6 @@ SMB_OFF_T transfer_file(int infd,int outfd,SMB_OFF_T n,char *header,int headlen,
   }
   return(total);
 }
-#endif /* 0 */
 
 
 /****************************************************************************
@@ -1075,6 +1080,7 @@ int name_extract(char *buf,int ofs,char *name)
   if (d < -50 || d > 50) return(0);
   return(name_interpret(p,name));
 }
+#endif	/* 0 */
   
 /****************************************************************************
 return the total storage length of a mangled name
@@ -1124,7 +1130,7 @@ void msleep(int t)
   }
 }
 
-
+#if 0
 /*********************************************************
 * Recursive routine that is called by unix_mask_match.
 * Does the actual matching. This is the 'original code' 
@@ -1558,7 +1564,7 @@ BOOL mask_match(char *str, char *regexp, int case_sig,BOOL trans2)
 
   return matched;
 }
-
+#endif /* 0 */
 
 #if 0
 /****************************************************************************
@@ -1619,10 +1625,6 @@ this is a version of setbuffer() for those machines that only have setvbuf
   setvbuf(f,buf,_IOFBF,bufsize);
 }
 #endif
-
-/****************************************************************************
-parse out a filename from a path name. Assumes dos style filenames.
-****************************************************************************/
 #endif /* 0 */
 
 
@@ -1713,7 +1715,7 @@ BOOL ip_equal(struct in_addr ip1,struct in_addr ip2)
   return(a1 == a2);
 }
 
-
+#if 0	/* May be useful one day */
 /****************************************************************************
 interpret a protocol description string, with a default
 ****************************************************************************/
@@ -1736,7 +1738,7 @@ int interpret_protocol(char *str,int def)
   
   return(def);
 }
-
+#endif	/* 0 */
 
 /****************************************************************************
 interpret an internet address or name into an IP address in 4 byte form
@@ -2328,7 +2330,7 @@ void smb_panic(char *why)
 	abort();
 }
 
-
+#if 0
 /*******************************************************************
 a readdir wrapper which just returns the file name
 ********************************************************************/
@@ -2657,7 +2659,8 @@ BOOL is_myname(char *s)
   DEBUG(8, ("is_myname(\"%s\") returns %d\n", s, ret));
   return(ret);
 }
-
+#endif	/* 0 */
+#if 0	/* Can be useful one day */
 /*******************************************************************
 set the horrid remote_arch string based on an enum.
 ********************************************************************/
@@ -2695,8 +2698,8 @@ enum remote_arch_types get_remote_arch(void)
 {
   return ra_type;
 }
-
-
+#endif /* 0 */
+#if 0
 /*******************************************************************
 align a pointer to a multiple of 2 bytes
 ********************************************************************/
@@ -2758,6 +2761,7 @@ void out_data(FILE *f,char *buf1,int len, int per_line)
 		fprintf(f, "\n");    
 	}
 }
+#endif /* 0 */
 
 void print_asc(int level, unsigned char *buf,int len)
 {
@@ -2902,57 +2906,4 @@ int set_maxfiles(int requested_max)
 	return requested_max;
 #endif
 }
-
-
-/*****************************************************************
- splits out the last subkey of a key
- *****************************************************************/  
-void reg_get_subkey(char *full_keyname, char *key_name, char *subkey_name)
-{
-	split_at_last_component(full_keyname, key_name, '\\', subkey_name);
-}
-
-/*****************************************************************
- splits out the start of the key (HKLM or HKU) and the rest of the key
- *****************************************************************/  
-BOOL reg_split_key(char *full_keyname, uint32 *reg_type, char *key_name)
-{
-	pstring tmp;
-
-	if (!next_token(&full_keyname, tmp, "\\", sizeof(tmp)))
-	{
-		return False;
-	}
-
-	(*reg_type) = 0;
-
-	DEBUG(10, ("reg_split_key: hive %s\n", tmp));
-
-	if (strequal(tmp, "HKLM") || strequal(tmp, "HKEY_LOCAL_MACHINE"))
-	{
-		(*reg_type) = HKEY_LOCAL_MACHINE;
-	}
-	else if (strequal(tmp, "HKU") || strequal(tmp, "HKEY_USERS"))
-	{
-		(*reg_type) = HKEY_USERS;
-	}
-	else
-	{
-		DEBUG(10,("reg_split_key: unrecognised hive key %s\n", tmp));
-		return False;
-	}
-	
-	if (next_token(NULL, tmp, "\n\r", sizeof(tmp)))
-	{
-		fstrcpy(key_name, tmp);
-	}
-	else
-	{
-		key_name[0] = 0;
-	}
-
-	DEBUG(10, ("reg_split_key: name %s\n", key_name));
-
-	return True;
-}
-#endif
+#endif	/* 0 */
