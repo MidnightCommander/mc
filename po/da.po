@@ -12,11 +12,12 @@
 #. Not essential to translate
 #: gtkedit/edit.c:2768 gtkedit/editcmd.c:2880 gtkedit/editcmd.c:2886
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
+
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "POT-Creation-Date: 2000-05-15 21:07+0200\n"
-"PO-Revision-Date: 2000-05-07 17:37+01:00\n"
+"PO-Revision-Date: 2000-05-27 23:37+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -480,11 +481,6 @@ msgstr "Genskab standard_ikoner"
 msgid "Configure _Background Image"
 msgstr "Indstil _baggrundsbillede"
 
-#. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:141
-msgid "Home directory"
-msgstr "Hjemmemappe"
-
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
@@ -510,6 +506,11 @@ msgstr "Brug gennemsigtig tekst"
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
 msgstr "Skrivebord"
+
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:146
+msgid "Home directory"
+msgstr "Hjemmemappe"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -674,7 +675,7 @@ msgstr "færdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 msgid "Password:"
 msgstr "Adgangskode:"
 
@@ -994,51 +995,6 @@ msgstr ""
 "\n"
 "Som root kan du gøre skade på dit system, hvis ud ikke passer på.\n"
 "Gnome filhåndteringen vil ikke forhindre dig i det."
-
-#: gnome/gmc-client.c:26
-msgid "Could not contact the file manager\n"
-msgstr "Kunne ikke kontakte filhåndteringen\n"
-
-#: gnome/gmc-client.c:45
-msgid "Could not get the desktop\n"
-msgstr "Kunne ikke få skrivebordet\n"
-
-#: gnome/gmc-client.c:142
-#, c-format
-msgid "Unknown arrange type `%s'\n"
-msgstr "Ukendt sorteringstype `%s'\n"
-
-#: gnome/gmc-client.c:206
-msgid "Create window showing the specified directory"
-msgstr "Opret vindue som viser den angivede mappe"
-
-#: gnome/gmc-client.c:206 gnome/gmc-client.c:208
-msgid "DIRECTORY"
-msgstr "DIRECTORY"
-
-#: gnome/gmc-client.c:208
-msgid "Rescan the specified directory"
-msgstr "Genindlæs den aktuelle mappe"
-
-#: gnome/gmc-client.c:210
-msgid "Rescan the desktop icons"
-msgstr "Genindlæs skrivebordsikonerne"
-
-#: gnome/gmc-client.c:212
-msgid "Rescan the desktop device icons"
-msgstr "Genindlæs skrivebordsenhedsikonerne"
-
-#: gnome/gmc-client.c:214
-msgid "Arrange the desktop icons"
-msgstr "Ord skrivebordsikonerne"
-
-#: gnome/gmc-client.c:215
-msgid "name | type | size | atime | mtime | ctime"
-msgstr "navn | type | størrelse | atid | mtid | etid"
-
-#: gnome/gmc-client.c:217
-msgid "Close windows whose directories cannot be reached"
-msgstr "Luk de vinduer hvis mapper ikke kan nåes"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1721,6 +1677,51 @@ msgstr "afslut"
 #: gnome/gwidget.c:107
 msgid "abort"
 msgstr "afbryd"
+
+#: gnome/gmc-client.c:26
+msgid "Could not contact the file manager\n"
+msgstr "Kunne ikke kontakte filhåndteringen\n"
+
+#: gnome/gmc-client.c:45
+msgid "Could not get the desktop\n"
+msgstr "Kunne ikke få skrivebordet\n"
+
+#: gnome/gmc-client.c:142
+#, c-format
+msgid "Unknown arrange type `%s'\n"
+msgstr "Ukendt sorteringstype `%s'\n"
+
+#: gnome/gmc-client.c:206
+msgid "Create window showing the specified directory"
+msgstr "Opret vindue som viser den angivede mappe"
+
+#: gnome/gmc-client.c:206 gnome/gmc-client.c:208
+msgid "DIRECTORY"
+msgstr "DIRECTORY"
+
+#: gnome/gmc-client.c:208
+msgid "Rescan the specified directory"
+msgstr "Genindlæs den aktuelle mappe"
+
+#: gnome/gmc-client.c:210
+msgid "Rescan the desktop icons"
+msgstr "Genindlæs skrivebordsikonerne"
+
+#: gnome/gmc-client.c:212
+msgid "Rescan the desktop device icons"
+msgstr "Genindlæs skrivebordsenhedsikonerne"
+
+#: gnome/gmc-client.c:214
+msgid "Arrange the desktop icons"
+msgstr "Ord skrivebordsikonerne"
+
+#: gnome/gmc-client.c:215
+msgid "name | type | size | atime | mtime | ctime"
+msgstr "navn | type | størrelse | atid | mtid | etid"
+
+#: gnome/gmc-client.c:217
+msgid "Close windows whose directories cannot be reached"
+msgstr "Luk de vinduer hvis mapper ikke kan nåes"
 
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
@@ -3045,7 +3046,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:669
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
 msgid " Oops... "
 msgstr " Ups... "
 
@@ -3598,15 +3599,15 @@ msgstr " Indtast maskinenavn (F1 for detaljer): "
 msgid " Could not chdir to %s "
 msgstr " Kunne ikke skifte mappe til %s "
 
-#: src/cmd.c:1382 src/widget.c:1163
+#: src/cmd.c:1382 src/widget.c:1162
 msgid " Link to a remote machine "
 msgstr " Lænke til en fremmed maskine "
 
-#: src/cmd.c:1388 src/widget.c:1164
+#: src/cmd.c:1388 src/widget.c:1163
 msgid " FTP to machine "
 msgstr " FTP til maskine "
 
-#: src/cmd.c:1394 src/widget.c:1165
+#: src/cmd.c:1394 src/widget.c:1164
 msgid " SMB link to machine "
 msgstr " SMB-lænke til maskine "
 
@@ -3741,7 +3742,7 @@ msgstr "Filen '%s' findes men kan ikke stat'es: %s"
 msgid "Unknown"
 msgstr "Ukendt"
 
-#: src/ext.c:143 src/user.c:542
+#: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3750,7 +3751,7 @@ msgstr ""
 " Kan ikke oprette unikt filnavn  \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:554
+#: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3759,7 +3760,7 @@ msgstr ""
 " Kan ikke oprette midlertidig kommandofil \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:576
+#: src/ext.c:165 src/user.c:578
 msgid " Parameter "
 msgstr " Parameter "
 
@@ -3767,23 +3768,37 @@ msgstr " Parameter "
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " Kan ikke køre kommandoer i en mappe på et virtuelt filsystem "
 
-#: src/ext.c:412
+#: src/ext.c:414
 msgid " file error"
 msgstr " filfejl"
 
-#: src/ext.c:413
+#: src/ext.c:415
 msgid "Format of the "
 msgstr "Format af "
 
-#: src/ext.c:431
+#: src/ext.c:417
+msgid ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package or in case you don't\n"
+"have any, get it from ftp://ftp.nuclecu.unam.mx."
+msgstr ""
+"mc.ext filen var ændret\n"
+"med version 3.0. Det ser ud til at installationen\n"
+"fejlede. Venligst få fat på en frisk kopi fra\n"
+"Midnight Commander pakken, eller ifald du ikke har nogen,\n"
+"tag den fra ftp://ftp.nuclecu.unam.mx."
+
+#: src/ext.c:432
 msgid " file error "
 msgstr " filfejl "
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid "Format of the ~/"
 msgstr "Format af ~/"
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3793,7 +3808,7 @@ msgstr ""
 "siden version 3.0. Du kan enten \n"
 "kopiére den fra "
 
-#: src/ext.c:434
+#: src/ext.c:435
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3801,7 +3816,7 @@ msgstr ""
 "mc.ext eller bruge denne\n"
 "fil som et eksempel på hvordan den skal laves.\n"
 
-#: src/ext.c:436
+#: src/ext.c:437
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext vil blive brugt indtil videre."
 
@@ -4640,7 +4655,7 @@ msgstr " Kan ikke finde noden [Indhold] i hjælpefilen "
 msgid " Help "
 msgstr " Hjælp "
 
-#: src/help.c:766 src/user.c:687
+#: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -5388,7 +5403,7 @@ msgid ""
 msgstr ""
 " Hvis du bruger hurtig genopfriskningsmetoden er det \n"
 " ikke sikkert at du får korrekt besked om mappens    \n"
-" indhold. Isåfald må du bruge manuel genopfriskning. \n"
+" indhold. I så fald må du bruge manuel genopfriskning. \n"
 " Tjek mansiden for detaljer. "
 
 #: src/main.c:1929
@@ -6021,32 +6036,44 @@ msgstr ""
 "Kan ikke skrive til %s filen::\n"
 "%s\n"
 
-#: src/user.c:271
+#: src/user.c:137
+msgid " Format error on file Extensions File "
+msgstr " Formatfejl på fil-udvidelses fil "
+
+#: src/user.c:138
+msgid " The %%var macro does not have a default "
+msgstr "%%var makroen har ikke en standardværdi "
+
+#: src/user.c:139
+msgid " The %%var macros does not have a variable "
+msgstr "%%var makroen har ikke en variabel "
+
+#: src/user.c:273
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Ugyldig mønsterdefinition for skal \"%c\". "
 
-#: src/user.c:424
+#: src/user.c:426
 msgid " Debug "
 msgstr " Aflus "
 
-#: src/user.c:433
+#: src/user.c:435
 msgid " ERROR: "
 msgstr " FEJL: "
 
-#: src/user.c:437
+#: src/user.c:439
 msgid " True:  "
 msgstr " Sand:  "
 
-#: src/user.c:439
+#: src/user.c:441
 msgid " False: "
 msgstr " Falsk: "
 
-#: src/user.c:645
+#: src/user.c:647
 msgid " Warning -- ignoring file "
 msgstr " Advarsel -- ignorerer filen "
 
-#: src/user.c:646
+#: src/user.c:648
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6055,19 +6082,18 @@ msgstr ""
 "Filen %s er hverken ejet af root, dig eller globalt skrivbar.\n"
 "At bruge den kan muligvis kompromittere din sikkerhed"
 
-#: src/user.c:670
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
-" Jeg kan ikke køre programmer når jeg er logget på en ikke-lokal mappe "
+" Jeg kan ikke køre programmer når jeg er logget på et ikke-lokalt katalog "
 
-#. FIXME: this message is not quite right
 #: src/user.c:770
 #, c-format
-msgid " Empty file %s "
-msgstr "Tøm fil %s"
+msgid " No appropriative entries found in %s "
+msgstr " Ingen passende indgange fundet i %s "
 
 #. Create listbox
-#: src/user.c:779
+#: src/user.c:776
 msgid " User menu "
 msgstr " Brugermenu "
 
@@ -6272,7 +6298,7 @@ msgstr "U-form"
 msgid "Format"
 msgstr "Format"
 
-#: src/widget.c:995
+#: src/widget.c:994
 msgid " History "
 msgstr " Historie "
 
@@ -6646,141 +6672,141 @@ msgstr "Fejl meldt tilbage efter afbrydelse."
 msgid "Aborted transfer would be successful."
 msgstr "Afbrudt overførsel ville være lykkedes."
 
-#: vfs/ftpfs.c:318
+#: vfs/ftpfs.c:315
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Afkobler fra %s"
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:373
 msgid " FTP: Password required for "
 msgstr " FTP: Behøver adgangskode til"
 
-#: vfs/ftpfs.c:409
+#: vfs/ftpfs.c:402
 msgid " Proxy: Password required for "
 msgstr " Proxy: Behøver adgangskode til "
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:428
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: sender proxy loginnavn"
 
-#: vfs/ftpfs.c:439
+#: vfs/ftpfs.c:432
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: sender proxy brugeradgangskode"
 
-#: vfs/ftpfs.c:443
+#: vfs/ftpfs.c:436
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: proxy bekræftelse lykkedes"
 
-#: vfs/ftpfs.c:447
+#: vfs/ftpfs.c:440
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: forbundet til %s"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:457
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sender loginnavn"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:462
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sender brugeradgangskode"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:467
 msgid "ftpfs: logged in"
 msgstr "ftpfs: logget ind"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:482
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Forkert login for bruger %s "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:514
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Kunne ikke sætte kilderuting op (%s)"
 
-#: vfs/ftpfs.c:647
+#: vfs/ftpfs.c:640
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ugyldig værtsnavn."
 
-#: vfs/ftpfs.c:667
+#: vfs/ftpfs.c:660
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ugyldig værtsadresse."
 
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:683
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: laver forbindelse til %s"
 
-#: vfs/ftpfs.c:700
+#: vfs/ftpfs.c:693
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: forbindelse afbrudt af bruger"
 
-#: vfs/ftpfs.c:702
+#: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: forbindelse til server mislykkedes: %s"
 
-#: vfs/ftpfs.c:744
+#: vfs/ftpfs.c:736
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Venter på at forsøge igen... %d (Ctrl-C annullerer)"
 
-#: vfs/ftpfs.c:930
+#: vfs/ftpfs.c:922
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kunne ikke indstille passiv måde"
 
-#: vfs/ftpfs.c:1005
+#: vfs/ftpfs.c:997
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: afbryder overførsel."
 
-#: vfs/ftpfs.c:1007
+#: vfs/ftpfs.c:999
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: afbrydelsesfejl: %s"
 
-#: vfs/ftpfs.c:1012
+#: vfs/ftpfs.c:1004
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: afbryd mislykkedes"
 
-#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1200
+#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD mislykkedes"
 
-#: vfs/ftpfs.c:1111 vfs/ftpfs.c:1118
+#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: kunne ikke læse symlænke"
 
-#: vfs/ftpfs.c:1169
+#: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
 msgstr "Læser symlænke..."
 
-#: vfs/ftpfs.c:1188
+#: vfs/ftpfs.c:1180
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Læser FTP-mappe %s... %s%s"
 
-#: vfs/ftpfs.c:1189
+#: vfs/ftpfs.c:1181
 msgid "(strict rfc959)"
 msgstr "(følg rfc959)"
 
-#: vfs/ftpfs.c:1190
+#: vfs/ftpfs.c:1182
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1287
+#: vfs/ftpfs.c:1279
 msgid "ftpfs: failed"
 msgstr "ftpfs: fejlede"
 
-#: vfs/ftpfs.c:1297
+#: vfs/ftpfs.c:1289
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
-#: vfs/ftpfs.c:1360
+#: vfs/ftpfs.c:1352
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: gemmer fil %d (%d)"
 
-#: vfs/ftpfs.c:1775
+#: vfs/ftpfs.c:1767
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6913,11 +6939,11 @@ msgstr ""
 msgid "Unexpected EOF on archive file"
 msgstr "Uventet EOF i arkivfilen"
 
-#: vfs/tar.c:339 vfs/tar.c:346
+#: vfs/tar.c:336 vfs/tar.c:343
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistent tar-arkiv"
 
-#: vfs/tar.c:411
+#: vfs/tar.c:413
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6927,6 +6953,35 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "ser ikke ud til at være et tar-arkiv."
+
+#: vfs/vfs.c:1139
+msgid "Changes to file lost"
+msgstr "Ændringer til fil tabt"
+
+#: vfs/vfs.c:1781
+msgid "Could not parse:"
+msgstr "Kunne ikke fortolke:"
+
+#: vfs/vfs.c:1783
+msgid "More parsing errors will be ignored."
+msgstr "Flere fortolkningsfejl vil blive ignoreret."
+
+#: vfs/vfs.c:1783
+msgid "(sorry)"
+msgstr "(beklager)"
+
+#: vfs/vfs.c:1794
+msgid "Internal error:"
+msgstr " Intern fejl:"
+
+#: vfs/vfs.c:1804
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%ld byte overført)"
+
+#: vfs/vfs.c:1805
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr "%s: %s: %s %ld byte overført"
 
 #: vfs/undelfs.c:81
 msgid " undelfs: error "
@@ -7033,32 +7088,3 @@ msgstr " Kunne ikke åbne filen %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Undelete filsystem for ext2"
-
-#: vfs/vfs.c:1151
-msgid "Changes to file lost"
-msgstr "Ændringer til fil tabt"
-
-#: vfs/vfs.c:1794
-msgid "Could not parse:"
-msgstr "Kunne ikke fortolke:"
-
-#: vfs/vfs.c:1796
-msgid "More parsing errors will be ignored."
-msgstr "Flere fortolkningsfejl vil blive ignoreret."
-
-#: vfs/vfs.c:1796
-msgid "(sorry)"
-msgstr "(beklager)"
-
-#: vfs/vfs.c:1807
-msgid "Internal error:"
-msgstr " Intern fejl:"
-
-#: vfs/vfs.c:1817
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld byte overført)"
-
-#: vfs/vfs.c:1818
-#, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld byte overført"
