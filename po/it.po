@@ -7,11 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-<<<<<<< it.po
-"POT-Creation-Date: 2002-08-21 11:51+0200\n"
-=======
 "POT-Creation-Date: 2002-08-21 03:42-0400\n"
->>>>>>> 1.96
 "PO-Revision-Date: 2001-09-30 20:25GMT+1\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italiano (use this)<tp@lists.linux.it> <it@li.org>\n"
@@ -67,38 +63,20 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Menu utente disponibile solo in mcedit se chiamato da mc"
 
-<<<<<<< it.po
-#: edit/edit.h:347 edit/edit.h:348
-=======
 #: edit/edit.h:341 edit/edit.h:342
->>>>>>> 1.96
 msgid " Enter file name: "
 msgstr " Inserire nome file: "
 
-<<<<<<< it.po
-#: edit/edit.h:351
-=======
 #: edit/edit.h:345
->>>>>>> 1.96
 msgid "&Dismiss"
 msgstr "&Chiudi"
 
 #. 1
-<<<<<<< it.po
-#: edit/edit.h:353 edit/editcmd.c:344 edit/editcmd.c:1097 edit/editcmd.c:1178
-#: edit/editcmd.c:2367 edit/editmenu.c:32 edit/editoptions.c:65
-=======
 #: edit/edit.h:347 edit/editcmd.c:344 edit/editcmd.c:1097 edit/editcmd.c:1178
 #: edit/editcmd.c:2367 edit/editmenu.c:32 edit/editoptions.c:65
->>>>>>> 1.96
 #: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
-<<<<<<< it.po
-#: src/boxes.c:616 src/boxes.c:740 src/boxes.c:969 src/boxes.c:1039
-#: src/filegui.c:797 src/find.c:154 src/layout.c:366 src/option.c:135
-=======
 #: src/boxes.c:616 src/boxes.c:740 src/boxes.c:969 src/boxes.c:1039
 #: src/filegui.c:797 src/find.c:148 src/layout.c:366 src/option.c:135
->>>>>>> 1.96
 #: src/wtools.c:522
 msgid "&Ok"
 msgstr "&Ok"
@@ -196,11 +174,7 @@ msgstr "Annulla"
 msgid " Save as "
 msgstr " Salva come..."
 
-<<<<<<< it.po
-#: edit/editcmd.c:454 edit/editcmd.c:2103 src/view.c:389
-=======
 #: edit/editcmd.c:454 edit/editcmd.c:2103 src/view.c:384
->>>>>>> 1.96
 msgid " Error trying to save file. "
 msgstr " Errore nel salvataggio del file. "
 
@@ -252,19 +226,11 @@ msgid " Confirm save file? : "
 msgstr " Conferma:  salvo il file?: "
 
 #. Buttons to 'Confirm save file' query
-<<<<<<< it.po
-#: edit/editcmd.c:698 src/view.c:388
-=======
 #: edit/editcmd.c:698 src/view.c:383
->>>>>>> 1.96
 msgid " Save file "
 msgstr " Salva il file "
 
-<<<<<<< it.po
-#: edit/editcmd.c:698 edit/editwidget.c:234 src/view.c:2042
-=======
 #: edit/editcmd.c:698 edit/editwidget.c:234 src/view.c:2037
->>>>>>> 1.96
 msgid "Save"
 msgstr "Salva"
 
@@ -344,11 +310,7 @@ msgstr "espressione &Regolare"
 msgid "&Whole words only"
 msgstr "solo &Parole intere"
 
-<<<<<<< it.po
-#: edit/editcmd.c:1111 edit/editcmd.c:1188 src/find.c:147
-=======
 #: edit/editcmd.c:1111 edit/editcmd.c:1188 src/find.c:141
->>>>>>> 1.96
 msgid "case &Sensitive"
 msgstr "controllare &Maiuscole/minuscole"
 
@@ -360,11 +322,7 @@ msgstr " Ordine dell'argomento di sostituzione es. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Inserire stringa di sostituzione:"
 
-<<<<<<< it.po
-#: edit/editcmd.c:1123 edit/editcmd.c:1192 src/view.c:1957
-=======
 #: edit/editcmd.c:1123 edit/editcmd.c:1192 src/view.c:1952
->>>>>>> 1.96
 msgid " Enter search string:"
 msgstr " Inserire stringa di ricerca"
 
@@ -374,15 +332,9 @@ msgid " Replace "
 msgstr " Sostituisci "
 
 #. in response to number of bookmarks added because of string being found %d times
-<<<<<<< it.po
-#: edit/editcmd.c:1206 edit/editcmd.c:1883 edit/editcmd.c:1885
-#: edit/editcmd.c:1913 src/view.c:1487 src/view.c:1566 src/view.c:1686
-#: src/view.c:1698 src/view.c:1915 src/view.c:1957
-=======
 #: edit/editcmd.c:1206 edit/editcmd.c:1883 edit/editcmd.c:1885
 #: edit/editcmd.c:1913 src/view.c:1482 src/view.c:1561 src/view.c:1681
 #: src/view.c:1693 src/view.c:1910 src/view.c:1952
->>>>>>> 1.96
 msgid " Search "
 msgstr " Cerca "
 
@@ -424,27 +376,15 @@ msgstr " Il file è stato modificato. Lo salvo uscendo? "
 msgid "Cancel quit"
 msgstr "Annulla uscita"
 
-<<<<<<< it.po
-#: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
-#: src/subshell.c:703 src/tree.c:755 src/view.c:412
-=======
 #: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:563 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
 #: src/subshell.c:703 src/tree.c:755 src/view.c:407
->>>>>>> 1.96
 msgid "&Yes"
 msgstr " &Sì"
 
-<<<<<<< it.po
-#: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
-#: src/subshell.c:703 src/tree.c:755 src/view.c:412
-=======
 #: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:562 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
 #: src/subshell.c:703 src/tree.c:755 src/view.c:407
->>>>>>> 1.96
 msgid "&No"
 msgstr "&No"
 
@@ -460,11 +400,7 @@ msgstr " impossibile salvare il file. "
 msgid " Cut to clipboard "
 msgstr " Taglia nella clipboard "
 
-<<<<<<< it.po
-#: edit/editcmd.c:2071 src/view.c:1861
-=======
 #: edit/editcmd.c:2071 src/view.c:1856
->>>>>>> 1.96
 msgid " Goto line "
 msgstr " Vai alla linea "
 
@@ -851,13 +787,8 @@ msgstr "Emulazione tasti"
 msgid " Editor options "
 msgstr " Opzioni editor"
 
-<<<<<<< it.po
-#: edit/editwidget.c:233 src/help.c:811 src/main.c:1404 src/screen.c:2213
-#: src/tree.c:1018 src/view.c:2035
-=======
 #: edit/editwidget.c:233 src/help.c:811 src/main.c:1404 src/screen.c:2213
 #: src/tree.c:1018 src/view.c:2030
->>>>>>> 1.96
 msgid "Help"
 msgstr "Aiuto"
 
@@ -877,11 +808,7 @@ msgstr "Copia"
 msgid "Move"
 msgstr "Sposta"
 
-<<<<<<< it.po
-#: edit/editwidget.c:239 src/view.c:2050
-=======
 #: edit/editwidget.c:239 src/view.c:2045
->>>>>>> 1.96
 msgid "Search"
 msgstr "Cerca"
 
@@ -893,13 +820,8 @@ msgstr "Elimina"
 msgid "PullDn"
 msgstr "Menu"
 
-<<<<<<< it.po
-#: edit/editwidget.c:243 src/help.c:823 src/main.c:1407 src/view.c:2037
-#: src/view.c:2059
-=======
 #: edit/editwidget.c:243 src/help.c:823 src/main.c:1407 src/view.c:2032
 #: src/view.c:2054
->>>>>>> 1.96
 msgid "Quit"
 msgstr "Esci"
 
@@ -1158,11 +1080,7 @@ msgstr "Nome file esistente (sul quale punta il coll. simbolico):"
 msgid "Running "
 msgstr "Attivo "
 
-<<<<<<< it.po
-#: src/boxes.c:905 src/find.c:720
-=======
 #: src/boxes.c:905 src/find.c:714
->>>>>>> 1.96
 msgid "Stopped"
 msgstr "Sospeso "
 
@@ -1573,19 +1491,11 @@ msgstr " Connessione remota "
 msgid " FTP to machine "
 msgstr " Connessione FTP "
 
-<<<<<<< it.po
-#: src/cmd.c:1323
-msgid " Shell link to machine "
-msgstr " Connessione shell alla macchina "
-
-#: src/cmd.c:1329 src/widget.c:1062
-=======
 #: src/cmd.c:1323
 msgid " Shell link to machine "
 msgstr " Collegamento Shell alla macchina "
 
 #: src/cmd.c:1329 src/widget.c:1062
->>>>>>> 1.96
 msgid " SMB link to machine "
 msgstr " Connessione SMB alla macchina "
 
@@ -2426,11 +2336,7 @@ msgstr "Nome file:"
 msgid "Content: "
 msgstr "Contenuto: "
 
-<<<<<<< it.po
-#: src/find.c:154 src/main.c:957 src/main.c:984
-=======
 #: src/find.c:148 src/main.c:957 src/main.c:984
->>>>>>> 1.96
 msgid "&Tree"
 msgstr "&Albero"
 
@@ -3004,19 +2910,11 @@ msgstr "&Connessione rete..."
 msgid "FT&P link..."
 msgstr "Connessione FT&P..."
 
-<<<<<<< it.po
 #: src/main.c:968 src/main.c:995
 msgid "S&hell link..."
 msgstr "Collegamento S&hell..."
 
 #: src/main.c:970 src/main.c:997
-=======
-#: src/main.c:968 src/main.c:995
-msgid "S&hell link..."
-msgstr "Collegamento S&hell..."
-
-#: src/main.c:970 src/main.c:997
->>>>>>> 1.96
 msgid "SM&B link..."
 msgstr "Connessione FT&P..."
 
@@ -3794,11 +3692,7 @@ msgstr ""
 msgid "View"
 msgstr "Vista"
 
-<<<<<<< it.po
-#: src/screen.c:2216 src/view.c:2046
-=======
 #: src/screen.c:2216 src/view.c:2041
->>>>>>> 1.96
 msgid "Edit"
 msgstr "Cambia"
 
