@@ -181,7 +181,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	if (netrcpass != NULL)
 	    pass = strdup (netrcpass);
 	else
-	    pass = input_dialog (" MCFS Password required ", "Password:", "");
+	    pass = input_dialog (" MCFS Password required ", _("Password:"), "");
 	if (!pass){
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);

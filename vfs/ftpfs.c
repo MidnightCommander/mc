@@ -441,7 +441,7 @@ login_server (struct ftpfs_connection *bucket, char *netrcpass)
 	    if (!bucket->password){
 		p = copy_strings (" FTP: Password required for ", quser(bucket), 
 				  " ", NULL);
-		op = input_dialog (p, "Password:", "");
+		op = input_dialog (p, _("Password:"), "");
 		free (p);
 		if (op == NULL) {
 		    ftpfserrno = EPERM;
@@ -475,7 +475,7 @@ login_server (struct ftpfs_connection *bucket, char *netrcpass)
 	    wipe_password (proxypass);
 	p = copy_strings(" Proxy: Password required for ", proxyname, " ",
 			 NULL);
-	proxypass = input_dialog (p, "Password:", "");
+	proxypass = input_dialog (p, _("Password:"), "");
 	free(p);
 	if (proxypass == NULL) {
 	    ftpfserrno = EPERM;

@@ -1,5 +1,8 @@
 # List of files which containing translatable strings.
 
+vfs/ftpfs.c
+vfs/mcfs.c
+
 edit/edit.c
 edit/edit_key_translator.c
 edit/editcmd.c
