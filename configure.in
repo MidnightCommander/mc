@@ -48,7 +48,7 @@ if test x"$X11_WWW" = x; then
     X11_WWW=lynx
 fi
 
-ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sl sv sk uk ta tr wa zh_TW.Big5 zh_CN.GB2312"
+ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko lv nl no pl pt_BR ro ru sl sv sk uk ta tr wa zh_TW.Big5 zh_CN.GB2312"
 
 AM_GNOME_GETTEXT
 
