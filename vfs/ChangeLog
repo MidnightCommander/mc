@@ -1,5 +1,8 @@
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/uzoo.in: Always use "q" option to avoid processing junk.
+	Always create symlink, do it in a safer directory.
+
 	* extfs/uarj.in: New script working with open-source ARJ.
 	Contributed by Viatcheslav Odintsov.
 	* extfs/uarj: Remove.

@@ -2,20 +2,29 @@
 #
 # Zoo file system
 #
-# Copyright ? U. N. Known
-#
-# This filesystem is _dangerous_. It used to create symlinks in filesystem
-# with zoo file, it used to happily delete file from your filesystem.
-# Now it is 'only' very ugly (it creates temporary files in ~/.mc/
-#
+# Source of zoo can be found at
+# ftp://ftp.ibiblio.org/pub/Linux/utils/compress/
 
 ZOO=zoo
 
+# Stupid zoo won't work if the archive name has no .zoo extension, so we
+# have to make a symlink with a "better" name.  Also, zoo can create
+# directories even if printing files to stdout, so it's safer to confine
+# it to a temporary directory.
+mklink ()
+{
+    TMPDIR="/tmp/mctmpdir-uzoo.$$"
+    mkdir $TMPDIR || exit 1
+    trap 'cd /; rm -rf $TMPDIR' 0 1 2 3 5 13 15
+    ARCHIVE=$TMPDIR/tmp.zoo
+    ln -sf "$1" "$ARCHIVE"
+    cd $TMPDIR || exit 1
+}
+
 mczoofs_list ()
 {
-    $ZOO l $1 | @AWK@ -v uid=${UID-0} '
-BEGIN { hyphens=0 }
-/^---/ { if (hyphens > 0) exit 0; hyphens=1; next }
+    mklink "$1"
+    $ZOO lq "$ARCHIVE" | @AWK@ -v uid=${UID-0} '
 /^[^\ ]/ { next }
 {
 if (NF < 8)
@@ -37,33 +46,21 @@ else
 
 mczoofs_copyout ()
 {
-    $ZOO xp $1 $2 | tail +6l > $3 2>/dev/null
+    mklink "$1"
+    # zoo only accepts name without directory as file to extract
+    base=`echo "$2" | sed 's,.*/,,'`
+    $ZOO xpq: "$ARCHIVE" "$base" > "$3"
+    cd /
     exit 0
 }
 
-# zoo is stupid and won't be happy when the name has no extension.
-# We have to do a small trick :) [pretty dirty, broken hack -- pavel]
-if echo $2 | grep '\.zoo$' >/dev/null; then
-  :
-else
-  SYMLINK=$HOME/.mc/temporary.$2.zoo
-  if test -f $SYMLINK; then
-    SYMLINK=$HOME/.mc/temporary.$2.
-  fi
-  if test -f $SYMLINK; then
-    echo "Ugh. I did not expect this to happen. Cleanup your ~/.mc."
-    sleep 5
-    exit 1
-  fi
-  ln -s $2 $SYMLINK
-  trap 'rm -f $SYMLINK' 0 1 2 3 5 13 15
-  $2=$SYMLINK
-fi
-
 umask 077
 
-case "$1" in
-  list) mczoofs_list $2; exit $?;;
-  copyout) mczoofs_copyout $2 $3 $4; exit $?;;
+cmd="$1"
+shift
+case "$cmd" in
+  list) mczoofs_list "$@" ;;
+  copyout) mczoofs_copyout "$@" ;;
+  *) exit 1 ;;
 esac
-exit 1
+exit 0
