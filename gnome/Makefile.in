@@ -51,14 +51,14 @@ GNOMEHDRS = 		\
 	gblist.h
 
 ICONS = 				\
-	$(srcdir)/directory.xpm		\
-	$(srcdir)/i-directory.png	\
-	$(srcdir)/i-executable.png	\
-	$(srcdir)/i-symlink.png		\
-	$(srcdir)/i-device.png		\
-	$(srcdir)/i-regular.png		\
-	$(srcdir)/i-core.png		\
-	$(srcdir)/i-sock.png
+	directory.xpm		\
+	i-directory.png	\
+	i-executable.png	\
+	i-symlink.png		\
+	i-device.png		\
+	i-regular.png		\
+	i-core.png		\
+	i-sock.png
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
@@ -194,11 +194,14 @@ install_gmc: all
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
-	$(INSTALL_DATA) $(ICONS) $(DESTDIR)$(icondir)
+	for I in $(ICONS); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	-$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
+	-cd $(DESTDIR)$(icondir); $(RMF) $(ICONS)
+	-rmdir $(DESTDIR)$(icondir)
 
 depend dep: @gmcdep@
 
