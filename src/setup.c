@@ -64,6 +64,10 @@ extern int ftpfs_use_unix_list_options;
 extern int ftpfs_first_cd_then_ls;
 #endif
 
+#ifdef HAVE_GNOME
+extern int we_can_afford_the_speed;
+#endif
+
 /* "$Id$" */
 
 #ifdef USE_VFS
@@ -245,6 +249,7 @@ static struct {
 
 #ifdef HAVE_GNOME
     { "tree_panel_visible", &tree_panel_visible },
+    { "we_can_afford_the_speed", &we_can_afford_the_speed },
 #else
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split",   &horizontal_split },

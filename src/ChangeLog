@@ -1,3 +1,7 @@
+1999-02-01  Jonathan Blandford  <jrb@redhat.com>
+
+	* setup.c: save we_can_afford_the_speed
+
 Wed Feb  3 22:27:04 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* util.c (strip_password): Extented to find the url in the first 
