@@ -1,3 +1,8 @@
+2001-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (mc_bindings) [linux]: Remove old hack - recognizing
+	"\e[2~" on all terminals.
+
 2001-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c (load_codepages_list): Print a warning if

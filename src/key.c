@@ -180,11 +180,6 @@ typedef struct {
 static key_define_t mc_bindings [] = {
     { KEY_END,    ESC_STR ">", MCKEY_NOACTION },
     { KEY_HOME,   ESC_STR "<", MCKEY_NOACTION },
-
-#ifdef linux
-    /* Incredible, but many Linuxes still have old databases */
-    { KEY_IC,     ESC_STR "[2~", MCKEY_NOACTION },
-#endif
     { 0, 0, MCKEY_NOACTION },
 };
 
