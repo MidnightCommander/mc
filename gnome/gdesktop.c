@@ -2707,6 +2707,9 @@ desktop_popup (GdkEventButton *event)
 
 	/* Create the menu and then strip the tearoff menu items, sigh... */
 
+	if (nodesktop)
+		return;
+
 	popup = gnome_popup_menu_new (desktop_popup_items);
 
 	strip_tearoff_menu_item (desktop_arrange_icons_items);

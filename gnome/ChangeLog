@@ -3,6 +3,7 @@
 	* gicon.c (gicon_init): make missing icons non-fatal error
 
 	* gmain.c, gdesktop.c: added option not to display desktop icons
+	(desktop_popup): don't handle clicks when --nodesktop
 
 2000-01-26  Federico Mena Quintero  <federico@helixcode.com>
 
