@@ -11,6 +11,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include <signal.h>
 #define WANT_WIDGETS		/* bleah */
 #include "tty.h"		/* for KEY_BACKSPACE */
 #include "x.h"
