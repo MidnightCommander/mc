@@ -51,8 +51,6 @@ ALL_LINGUAS="ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sl s
 
 AM_GNOME_GETTEXT
 
-AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
-
 dnl
 dnl Enforce coding standards
 dnl

@@ -23,6 +23,9 @@
 
 @TOP@
 
+#undef PACKAGE
+#undef VERSION
+
 /* Always defined */
 #undef D_INO_IN_DIRENT
 #undef IS_AIX
