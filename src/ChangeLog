@@ -1,3 +1,7 @@
+2003-03-03  Pavel Roskin  <proski@gnu.org>
+
+	* profile.c (load): Fix reading keys immediately after comments.
+
 2003-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* cons.handler.c: Put checks for rxvt extensions in one place.
