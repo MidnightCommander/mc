@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 1999-09-17 04:26+0200\n"
+"POT-Creation-Date: 1999-09-22 18:47+0200\n"
 "PO-Revision-Date: 1999-09-18 00:37+0200\n"
 "Last-Translator: GNOME PL Team\n"
 "Language-Team: Polish <gnomepl@pandora.info.bielsko.pl>\n"
@@ -341,7 +341,7 @@ msgstr "Wy¶wietlane kolumny"
 msgid "Custom View"
 msgstr "Widok u¿ytkownika"
 
-#: gnome/gdesktop.c:1 gnome/gdesktop.c:1 gnome/gmount.c:1
+#: gnome/gdesktop.c:1 gnome/gmount.c:1
 msgid "Warning"
 msgstr "Ostrze¿enie"
 
@@ -361,18 +361,6 @@ msgstr "Podczas wykonywania polecenia eject (wysuñ)"
 #: gnome/gdesktop.c:1 gnome/gicon.c:1 gnome/gtools.c:1
 msgid "Error"
 msgstr "B³±d"
-
-#. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1
-msgid "Home directory"
-msgstr "Katalog domowy"
-
-#: gnome/gdesktop.c:1
-#, c-format
-msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-msgstr ""
-"Nie mo¿na utworzyæ dowi±zania symbolicznego od %s do %s; ikona "
-"reprezentuj±ca katalog domowy nie zostanie utworzona."
 
 #: gnome/gdesktop.c:1
 msgid ""
@@ -454,12 +442,16 @@ msgid "Create _New Window"
 msgstr "Nowe okno"
 
 #: gnome/gdesktop.c:1 gnome/glayout.c:1
-msgid "Recreate Desktop _Shortcuts"
-msgstr "Odtwórz ³±cza na biurku"
+msgid "Rescan _Desktop Directory"
+msgstr "Od¶wie¿ katalog _biurka"
 
 #: gnome/gdesktop.c:1 gnome/glayout.c:1
-msgid "Rescan _Desktop"
-msgstr "Od¶wie¿ biurko"
+msgid "Rescan De_vices"
+msgstr "Od¶wie¿ _urz±dzenia"
+
+#: gnome/gdesktop.c:1 gnome/glayout.c:1
+msgid "Recreate Default _Icons"
+msgstr "Odtwórz domy¶lne _ikony"
 
 #: gnome/gdesktop.c:1
 msgid "Configure _Background Image"
@@ -481,11 +473,11 @@ msgstr "Przyci±ganie ikon do siatki"
 
 #: gnome/gdesktop-prefs.c:1
 msgid "Use shaped icons"
-msgstr "Nieregularne kszta³ty ikon"
+msgstr "Ikony bez t³a"
 
 #: gnome/gdesktop-prefs.c:1
 msgid "Use shaped text"
-msgstr "Nieregularne napisy"
+msgstr "Napisy bez t³a"
 
 #: gnome/gdesktop-prefs.c:1
 msgid "Desktop"
@@ -830,11 +822,11 @@ msgstr "Wy¶wietla rozmiar przestrzeni dyskowej zajmowanej przez ka¿dy katalog"
 
 #: gnome/glayout.c:1
 msgid "Close window"
-msgstr ""
+msgstr "Zamknij okno"
 
 #: gnome/glayout.c:1
 msgid "Closes this window"
-msgstr ""
+msgstr "Zamyka bie¿±ce okno"
 
 #: gnome/glayout.c:1
 msgid "Select _All"
@@ -1986,6 +1978,8 @@ msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
+"Wprowad¼ kolejno¶æ zast±pieñ wystêpuj±cych w formacie\n"
+"scanf lub w wyra¿eniu regularnym, np. 2,1,2"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1
@@ -2618,7 +2612,7 @@ msgstr "Brak"
 
 #: gtkedit/editoptions.c:1
 msgid "Dynamic paragraphing"
-msgstr ""
+msgstr "Dynamiczne akapity"
 
 #: gtkedit/editoptions.c:1
 msgid "Type writer wrap"
@@ -2973,6 +2967,8 @@ msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
+" Proces w tle próbuje przes³aæ wiêcej argumentów, ni¿\n"
+" mo¿na obs³u¿yæ. \n"
 
 #: src/boxes.c:1
 msgid " Listing mode "
@@ -3283,7 +3279,7 @@ msgstr " Nie mo¿na pobraæ lokalnej kopii %s "
 
 #: src/cmd.c:1
 msgid " CD "
-msgstr ""
+msgstr " Zmiana katalogu "
 
 #: src/cmd.c:1
 msgid "Files tagged, want to cd?"
@@ -3448,12 +3444,12 @@ msgstr " Modyfikuj dowi±zanie symboliczne "
 #: src/cmd.c:1
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr ""
+msgstr " modyfikacja dowi±zania symbolicznego, nie mo¿na usun±æ %s: %s "
 
 #: src/cmd.c:1
 #, c-format
 msgid " edit symlink: %s "
-msgstr ""
+msgstr " modyfikacja dowi±zania symbolicznego: %s"
 
 #: src/cmd.c:1
 msgid " Link symbolically "
@@ -3466,7 +3462,7 @@ msgstr " Wzglêdne dowi±zanie symboliczne "
 #: src/cmd.c:1
 #, c-format
 msgid " relative symlink: %s "
-msgstr ""
+msgstr " wzglêdne dowi±zanie symboliczne: %s"
 
 #: src/cmd.c:1
 msgid " Enter machine name (F1 for details): "
@@ -3479,7 +3475,7 @@ msgstr " Nie mo¿na zmieniæ katalogu na %s "
 
 #: src/cmd.c:1
 msgid " Link to a remote machine "
-msgstr " £±cze na zdaln± maszynê "
+msgstr " Po³±czenie ze zdaln± maszyn± "
 
 #: src/cmd.c:1
 msgid " FTP to machine "
@@ -3614,7 +3610,7 @@ msgstr "Grupa"
 #: src/dir.c:1
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr ""
+msgstr "Plik istnieje, lecz nie mo¿na wykonaæ operacji stat(): %s %s"
 
 #: src/dir.c:1
 msgid "Unknown"
@@ -3682,7 +3678,7 @@ msgstr ""
 
 #: src/ext.c:1
 msgid "mc.ext will be used for this moment."
-msgstr ""
+msgstr "zostanie wykorzystany mc.ext."
 
 #: src/file.c:1 src/tree.c:1
 msgid " Copy "
@@ -4015,55 +4011,55 @@ msgstr " B³±d wewnêtrzny: get_file \n"
 #.
 #: src/file.c:1
 msgid "1Copy"
-msgstr "1Kopiuj"
+msgstr "1Kopiowanie"
 
 #: src/file.c:1
 msgid "1Move"
-msgstr "1Przenie¶"
+msgstr "1Przeniesienie"
 
 #: src/file.c:1
 msgid "1Delete"
-msgstr "1Usuñ"
+msgstr "1Usuniêcie"
 
 #: src/file.c:1
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr ""
+msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1
 #, c-format
 msgid "%o %d %f%m"
-msgstr ""
+msgstr "%o %d %f%m"
 
 #: src/file.c:1
 #, c-format
 msgid "%o %f \"%s\"%e"
-msgstr ""
+msgstr "%o %f \"%s\"%e"
 
 #: src/file.c:1
 #, c-format
 msgid "%o %d %f%e"
-msgstr ""
+msgstr "%o %d %f%e"
 
 #: src/file.c:1
 msgid "file"
-msgstr "plik"
+msgstr "pliku"
 
 #: src/file.c:1
 msgid "files"
-msgstr "pliki"
+msgstr "plików"
 
 #: src/file.c:1
 msgid "directory"
-msgstr "katalog"
+msgstr "katalogu"
 
 #: src/file.c:1
 msgid "directories"
-msgstr "katalogi"
+msgstr "katalogów"
 
 #: src/file.c:1
 msgid "files/directories"
-msgstr "pliki/katalogi"
+msgstr "plików/katalogów"
 
 #: src/file.c:1
 msgid " with source mask:"
@@ -4160,7 +4156,7 @@ msgstr "Plik"
 
 #: src/filegui.c:1
 msgid "Count"
-msgstr ""
+msgstr "Liczba"
 
 #: src/filegui.c:1
 msgid "Bytes"
@@ -4367,11 +4363,11 @@ msgstr "Szukaj ponownie"
 
 #: src/find.c:1
 msgid "View this file"
-msgstr ""
+msgstr "Podgl±d pliku"
 
 #: src/find.c:1
 msgid "Edit this file"
-msgstr ""
+msgstr "Edycja pliku"
 
 #: src/find.c:1
 msgid "Send the results to a Panel"
@@ -4547,15 +4543,15 @@ msgstr " Grupa  g³ówna"
 
 #: src/hotlist.c:1
 msgid "Hotlist is now kept in file ~/"
-msgstr ""
+msgstr "Lista podrêcznych katalogów bêdzie przechowywana w pliku ~/"
 
 #: src/hotlist.c:1
 msgid "MC will load hotlist from ~/"
-msgstr ""
+msgstr "Lista podrêcznych katalogów zostanie wczytana z pliku ~/"
 
 #: src/hotlist.c:1
 msgid "and then delete [Hotlist] section there"
-msgstr ""
+msgstr "a nastêpnie zostanie usuniêta sekcja [Hotlist]"
 
 #: src/hotlist.c:1 src/hotlist.c:1 src/hotlist.c:1 src/hotlist.c:1
 msgid " Hotlist Load "
@@ -4563,11 +4559,11 @@ msgstr ""
 
 #: src/hotlist.c:1 src/hotlist.c:1
 msgid "MC was unable to write ~/"
-msgstr ""
+msgstr "Nie mo¿na zapisaæ pliku ~/"
 
 #: src/hotlist.c:1
 msgid " file, your old hotlist entries were not deleted"
-msgstr ""
+msgstr ". Poprzednia lista podrêcznych katalogów nie zosta³a usuniêta"
 
 #: src/hotlist.c:1
 msgid "You have ~/"
@@ -4579,23 +4575,27 @@ msgstr " oraz sekcjê [Hotlist] w ~/"
 
 #: src/hotlist.c:1
 msgid "Your ~/"
-msgstr ""
+msgstr "Plik ~/"
 
 #: src/hotlist.c:1
 msgid " most probably was created\n"
-msgstr ""
+msgstr " prawdopodobnie zosta³ utworzony\n"
 
 #: src/hotlist.c:1
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
 msgstr ""
+"przez poprzedni± wersjê MC\n"
+"i jest bardziej aktualny, ni¿ elementy z ~/"
 
 #: src/hotlist.c:1
 msgid ""
 " entries\n"
 "\n"
 msgstr ""
+" \n"
+"\n"
 
 #: src/hotlist.c:1
 msgid ""
@@ -4603,6 +4603,9 @@ msgid ""
 "\n"
 "  Remove - remove old hotlist entries from ~/"
 msgstr ""
+"Mo¿esz wybraæ pomiêdzy\n"
+"\n"
+"  Usuñ     - usunie poprzedni± listê podrêcznych katalogów z ~/"
 
 #: src/hotlist.c:1
 msgid ""
@@ -4610,6 +4613,10 @@ msgid ""
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
+"  Zachowaj - zachowa poprzednie elementy, nastêpnym razem pytanie\n"
+"             zostanie zadane ponownie\n"
+"  Po³±cz   - doda poprzednie elementy do listy, jako grupê\n"
+"             \"Elementy z pliku ~/"
 
 #: src/hotlist.c:1
 msgid "&Merge"
@@ -4617,11 +4624,11 @@ msgstr "Po³±cz"
 
 #: src/hotlist.c:1
 msgid " Entries from ~/"
-msgstr ""
+msgstr " Elementy z pliku ~/"
 
 #: src/hotlist.c:1
 msgid " file your old hotlist entries were not deleted"
-msgstr ""
+msgstr " poprzednie elementy listy podrêcznych katalogów nie zosta³y usuniête"
 
 #: src/info.c:1
 #, c-format
@@ -4787,7 +4794,7 @@ msgstr " Inne opcje "
 
 #: src/layout.c:1
 msgid "output lines"
-msgstr ""
+msgstr "liczba wierszy wyj¶ciowych"
 
 #: src/layout.c:1
 msgid "Layout"
@@ -5186,7 +5193,7 @@ msgstr ""
 
 #: src/main.c:1
 msgid "Obsolete"
-msgstr ""
+msgstr "Przestarza³a"
 
 #: src/main.c:1
 msgid "Requests to run in black and white"
@@ -5194,7 +5201,7 @@ msgstr "Powoduje uruchomienie w trybie czarno-bia³ym"
 
 #: src/main.c:1
 msgid "Disable mouse support in text version"
-msgstr ""
+msgstr "Deaktywuje obs³ugê myszy w trybie tekstowym"
 
 #: src/main.c:1
 msgid "Disables subshell support"
@@ -5379,7 +5386,7 @@ msgstr " Oczekiwanie po uruchomieniu... "
 
 #: src/option.c:1
 msgid "Configure options"
-msgstr ""
+msgstr "Opcje konfiguracji"
 
 #: src/panelize.c:1
 msgid "&Add new"
@@ -5465,18 +5472,19 @@ msgstr "UID"
 msgid "GID"
 msgstr "GID"
 
+# Co za kretyn pisa³ ten fragment?!!
 #: src/screen.c:1
 #, c-format
 msgid "  %s bytes in %d file%s"
-msgstr "  %s bajtów w %d plikach"
+msgstr "  %s bajtów w %d plikach%s"
 
 #: src/screen.c:1
 msgid "Unknow tag on display format: "
-msgstr ""
+msgstr "Nieznany znacznik w formacie wy¶wietlania: "
 
 #: src/screen.c:1
 msgid "User suplied format looks invalid, reverting to default."
-msgstr ""
+msgstr "Format u¿ytkownika jest niepoprawny, przywrócono domy¶lny."
 
 #: src/screen.c:1 src/screen.c:1
 msgid " Do you really want to execute? "
@@ -5599,11 +5607,11 @@ msgstr ""
 #: src/user.c:1
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
-msgstr ""
+msgstr " Niepoprawny wzorzec dopasowania \"%c\". "
 
 #: src/user.c:1
 msgid " Debug "
-msgstr ""
+msgstr " ¦ledzenie "
 
 #: src/user.c:1
 msgid " ERROR: "
@@ -5630,7 +5638,7 @@ msgstr ""
 
 #: src/user.c:1
 msgid " I can't run programs while logged on a non local directory "
-msgstr ""
+msgstr " Wykonywanie poleceñ jest mo¿liwe tylko w lokalnym katalogu "
 
 #: src/user.c:1
 #, c-format
@@ -6325,20 +6333,20 @@ msgstr " Zbyt wiele otwartych po³±czeñ "
 
 #: vfs/smbfs.c:1
 msgid "Domain:"
-msgstr ""
+msgstr "Domena:"
 
 #: vfs/smbfs.c:1
 msgid "Username:"
-msgstr ""
+msgstr "U¿ytkownik:"
 
 #: vfs/smbfs.c:1
 msgid "Password: "
-msgstr ""
+msgstr "Hsa³o:"
 
 #: vfs/smbfs.c:1
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr ""
+msgstr "Has³o dla \\\\%s\\%s"
 
 #: vfs/smbfs.c:1
 #, c-format
@@ -6346,6 +6354,8 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
+" ponowne po³±czenie z %s nie powiod³o siê\n"
+" "
 
 #: vfs/smbfs.c:1
 #, c-format
