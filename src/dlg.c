@@ -233,13 +233,13 @@ int add_widget (Dlg_head *where, void *what)
     Widget_Item *back;
     Widget      *widget = (Widget *) what;
 
-    /* Only used by Tk */
-    widget->frame = the_frame;
-
     /* Don't accept 0 widgets, this could be from widgets that could not */
     /* initialize properly */
     if (!what)
 	return 0;
+
+    /* Only used by Tk */
+    widget->frame = the_frame;
 
     widget->x += where->x;
     widget->y += where->y;

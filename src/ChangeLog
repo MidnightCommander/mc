@@ -1,3 +1,8 @@
+2001-11-07  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* dlg.c (add_widget): Check for what is not NULL
+	before everything else.
+
 2001-10-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* charsets.c (load_codepages_list): Use glib memory allocation
