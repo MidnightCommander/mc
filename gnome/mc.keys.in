@@ -22,9 +22,6 @@ application/x-tex:
 application/postscript:
 	icon-filename=@icondir@/postscript.xpm
 
-application/x-object-file:
-	icon-filename=@icondir@/o.xpm
-
 audio/*:
 	icon-filename=@icondir@/sound.xpm
 
