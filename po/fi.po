@@ -1,18 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# GNU Midnight Commander Finnish translation file
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Mikko Rauhala <mjr@iki.fi>, 1999.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gmc finnish 0.01\n"
 "POT-Creation-Date: 1999-04-19 00:37-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 1999-08-23 17:30+0200\n"
+"Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: ENCODING\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
@@ -30,7 +29,7 @@ msgstr " Paina makron pikavalintaa: "
 
 #: edit/edit_key_translator.c:144
 msgid " Insert Literal "
-msgstr " Lisää kirjaimellisesti "
+msgstr " Lisää merkki "
 
 #: edit/edit_key_translator.c:144
 msgid " Press any key: "
@@ -42,19 +41,19 @@ msgstr " Ei ole toista paneelia jonka sisältöön verrata "
 
 #: gnome/gcmd.c:109
 msgid "The Midnight Commander Team"
-msgstr ""
+msgstr "Midnight Commander -tiimi"
 
 #: gnome/gcmd.c:111
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr "Bugiraportit: http://bugs.gnome.org, tai käytä gnome-bug -skriptiä"
+msgstr "Bugiraportit: http://bugs.gnome.org, tai käytä gnome-bug -komentoa"
 
 #: gnome/gcmd.c:123
 msgid "GNU Midnight Commander"
-msgstr ""
+msgstr "GNU Midnight Commander"
 
 #: gnome/gcmd.c:126
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "GNOME-version Midnight Commander -tiedostomanagerista."
+msgstr "GNOME-versio Midnight Commander -tiedostonhallintaohjelmasta."
 
 #: gnome/gcmd.c:263
 msgid "Sort By"
@@ -67,7 +66,7 @@ msgstr "Älä erottele isoja ja pieniä kirjaimia."
 
 #: gnome/gcmd.c:271
 msgid "Sort files by "
-msgstr "Lajittele tiedostot kentällä"
+msgstr "Lajittele tiedostot kentällä "
 
 #: gnome/gcmd.c:276 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
 msgid "Name"
@@ -112,11 +111,11 @@ msgstr "Etsi kaikki core-tiedostot"
 
 #: gnome/gcmd.c:492 src/panelize.c:350
 msgid "Find rejects after patching"
-msgstr "Etsi rejectit patchayksen jäljiltä"
+msgstr "Etsi hylätyt paikkauksen jäljiltä"
 
 #: gnome/gcmd.c:536
 msgid "Run Command"
-msgstr "Aja komento"
+msgstr "Suorita komento"
 
 #. Frame 1
 #: gnome/gcmd.c:541
@@ -135,7 +134,7 @@ msgstr "Poista"
 #. Frame 2
 #: gnome/gcmd.c:570
 msgid "Run this Command"
-msgstr "Aja tämä komento"
+msgstr "Suorita tämä komento"
 
 #: gnome/gcmd.c:577
 msgid "Command: "
@@ -152,7 +151,7 @@ msgstr "Näytä kaikki tietostot"
 
 #: gnome/gcmd.c:658
 msgid "."
-msgstr ""
+msgstr "."
 
 #: gnome/gcmd.c:674
 msgid ""
@@ -167,7 +166,7 @@ msgstr ""
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr "Anna regex jolla näytettävät tiedostot valitaan."
+msgstr "Anna säännöllinen lauseke, jolla näytettävät tiedostot valitaan."
 
 #: gnome/gcmd.c:733
 msgid " Open with..."
@@ -179,7 +178,7 @@ msgstr "Anna lisäparametrit:"
 
 #: gnome/gcmd.c:796
 msgid "Desktop entry properties"
-msgstr "Työpöytätiedot"
+msgstr "Työpöytäkuvakkeen ominaisuudet"
 
 #: gnome/gcmd.c:821
 msgid "Select File"
@@ -198,11 +197,11 @@ msgstr ""
 
 #: gnome/gcmd.c:831
 msgid "Enter a regular expression here to select files in the panel view with."
-msgstr "Anna regex jolla näytettävät tiedostot valitaan."
+msgstr "Anna säännöllinen lauseke, jolla näytettävät tiedostot valitaan."
 
 #: gnome/gcmd.c:874 src/cmd.c:545 src/cmd.c:596
 msgid "  Malformed regular expression  "
-msgstr " Huonosti muodostettu regex "
+msgstr "  Virheellinen säännöllinen lauseke  "
 
 #: gnome/gcustom-layout.c:36
 msgid "Access Time"
@@ -221,7 +220,7 @@ msgstr "Ryhmä"
 
 #: gnome/gcustom-layout.c:39
 msgid "Group ID"
-msgstr "Ryhmäntunniste"
+msgstr "Ryhmänumero"
 
 #: gnome/gcustom-layout.c:40
 msgid "Inode Number"
@@ -247,7 +246,7 @@ msgstr "Omistaja"
 
 #: gnome/gcustom-layout.c:46 src/screen.c:402
 msgid "Permission"
-msgstr "Luvat"
+msgstr "Oikeudet"
 
 #: gnome/gcustom-layout.c:48
 msgid "Size (short)"
@@ -259,11 +258,11 @@ msgstr "Tyyppi"
 
 #: gnome/gcustom-layout.c:50
 msgid "User ID"
-msgstr "Käyttäjännumero"
+msgstr "Käyttäjänumero"
 
 #: gnome/gcustom-layout.c:144
 msgid "Possible Columns"
-msgstr "Mahdollisia sarakkeita"
+msgstr "Mahdolliset sarakkeet"
 
 #: gnome/gcustom-layout.c:164
 msgid "Displayed Columns"
@@ -271,7 +270,7 @@ msgstr "Näytetyt sarakkeet"
 
 #: gnome/gcustom-layout.c:306
 msgid "Custom View"
-msgstr "Itsetehty näkymä"
+msgstr "Oma näkymä"
 
 #: gnome/gdesktop.c:425 gnome/gdesktop.c:2052 gnome/gmount.c:321
 msgid "Warning"
@@ -280,7 +279,7 @@ msgstr "Varoitus"
 #: gnome/gdesktop.c:426
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
-msgstr "Tiedostoa %s ei voitu avata; ikoneita ei siis tipu"
+msgstr "Tiedostoa %s ei voitu avata; työpöytäkuvakkeita ei näy"
 
 #: gnome/gdesktop.c:1019
 msgid "While running the mount/umount command"
@@ -302,7 +301,8 @@ msgstr "Kotihakemisto"
 #: gnome/gdesktop.c:2053
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-msgstr "Ei voitu symlinkata tiedostoa %s tiedostoon %s; kotityöpöydän ikonia ei siis tipu."
+msgstr "Ei voitu luoda symbolista linkkiä tiedostosta %s nimelle %s; "
+"kotityöpöytäikonia ei siis näy."
 
 #: gnome/gdesktop.c:2397
 msgid ""
@@ -315,7 +315,7 @@ msgstr ""
 "Tiedostoa background-properties-capplet\n"
 "ei löytynyt polultasi.\n"
 "\n"
-"Taustaa ei voitu asettaa"
+"Taustaa ei voitu asettaa."
 
 #: gnome/gdesktop.c:2406 gnome/glayout.c:361
 msgid "_Terminal"
@@ -323,7 +323,7 @@ msgstr "_Pääte"
 
 #: gnome/gdesktop.c:2406 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
-msgstr "Avaa uusi pääte tässä hakemistossa"
+msgstr "Avaa uusi pääte tämänhetkisessä hakemistossa"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/gdesktop.c:2408 gnome/glayout.c:363
@@ -332,15 +332,15 @@ msgstr "_Hakemisto..."
 
 #: gnome/gdesktop.c:2408 gnome/glayout.c:363
 msgid "Creates a new directory"
-msgstr "Luo uuden hakemiston"
+msgstr "Luo uusi hakemisto"
 
 #: gnome/gdesktop.c:2409
 msgid "_Launcher..."
-msgstr "_Laukaisin..."
+msgstr "_Käynnistin..."
 
 #: gnome/gdesktop.c:2409
 msgid "Creates a new launcher"
-msgstr "Luo uuden laukaisimen"
+msgstr "Luo uuden käynnistimen"
 
 #: gnome/gdesktop.c:2417 gnome/glayout.c:451
 msgid "Arrange Icons"
@@ -360,7 +360,7 @@ msgstr "Lue työpöytä uudestaan"
 
 #: gnome/gdesktop.c:2422
 msgid "Configure Background Image"
-msgstr "Säädä taustakuva"
+msgstr "Aseta taustakuva"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -368,7 +368,7 @@ msgstr "Hakemistoon: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
-msgstr "Kopiodaan mistä: "
+msgstr "Kopiointikohde: "
 
 #: gnome/gdialogs.c:62
 msgid "Deleting file: "
@@ -384,11 +384,11 @@ msgid ""
 "folder.  Please select the action to be performed."
 msgstr ""
 "Joitakin tiedostoja, joita yrität kopioida, on jo olemassa kohdehakemistossa. "
-"Valitse toiminto"
+"Ole hyvä ja valitse toimintatapa."
 
 #: gnome/gdialogs.c:398
 msgid "Prompt me before overwriting any file."
-msgstr "Kysy ennen korvaamista"
+msgstr "Kysy ennen korvaamista."
 
 #: gnome/gdialogs.c:405
 msgid "Don't overwrite any files."
@@ -461,16 +461,16 @@ msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
-"Tämän valitseminen kopioi tiedostot, joihin symlinkit osoittavat pelkkien "
+"Tämän valitseminen kopioi tiedostot, joihin symlinkit osoittavat, pelkkien "
 "linkkien kopioimisen sijaan."
 
 #: gnome/gdialogs.c:641
 msgid "Preserve file attributes."
-msgstr "Säilytä attribuutit"
+msgstr "Säilytä tiedostoattribuutit."
 
 #: gnome/gdialogs.c:646
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr "Säilytä luvat ja UID/GID jos mahdollista"
+msgstr "Säilytä oikeudet ja UID/GID jos mahdollista"
 
 #: gnome/gdialogs.c:652
 msgid "Recursively copy subdirectories."
@@ -527,11 +527,11 @@ msgstr "valmis."
 #. are used to identify password boxes and hide characters with "*"
 #: gnome/gdialogs.c:961 src/wtools.c:587 vfs/vfs.c:1768
 msgid "Password:"
-msgstr "Tunnussana:"
+msgstr "Salasana:"
 
 #: gnome/gdialogs.c:961
 msgid "Password"
-msgstr "Tunnussana:"
+msgstr "Salasana"
 
 #. Create the dialog
 #: gnome/gdialogs.c:993
@@ -540,11 +540,11 @@ msgstr "Symbolinen linkki"
 
 #: gnome/gdialogs.c:1009 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Olemassaoleva tiedostonnimi (johon symlink osoittaa):"
+msgstr "Olemassaoleva tiedostonimi (johon linkki tulee osoittamaan):"
 
 #: gnome/gdialogs.c:1023 src/boxes.c:801
 msgid "Symbolic link filename:"
-msgstr "Symbolisen linkin tiedostonnimi:"
+msgstr "Symbolisen linkin tiedostonimi:"
 
 #: gnome/gdnd.c:52
 msgid "_Move here"
@@ -556,7 +556,7 @@ msgstr "_Kopioi tänne"
 
 #: gnome/gdnd.c:54
 msgid "_Link here"
-msgstr "_Linkkaa tänne"
+msgstr "_Linkitä tänne"
 
 #: gnome/gdnd.c:56
 msgid "Cancel drag"
@@ -569,12 +569,12 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
-"Tiedostoa %s ei voitu stat:ata\n"
+"Tiedoston %s tietoja ei voitu lukea\n"
 "%s"
 
 #: gnome/gicon.c:154
 msgid "Default set of icons not found, please check your installation"
-msgstr "Oletusikoneita ei löytynyt, tarkista installaatiosi"
+msgstr "Oletuskuvakkeita ei löytynyt, tarkista asennuksesi"
 
 #: gnome/glayout.c:41
 msgid "_Icon View"
@@ -590,7 +590,7 @@ msgstr "_Lyhyt näkymä"
 
 #: gnome/glayout.c:45 gnome/glayout.c:61
 msgid "Switch view to show just file name and type"
-msgstr "Vaihda näkymään jossa on vain tiedostojen nimet ja tyypit"
+msgstr "Vaihda näkymään, jossa on vain tiedostojen nimet ja tyypit"
 
 #: gnome/glayout.c:47
 msgid "_Detailed View"
@@ -598,11 +598,11 @@ msgstr "_Yksityiskohtainen näkymä"
 
 #: gnome/glayout.c:48 gnome/glayout.c:64
 msgid "Switch view to show detailed file statistics"
-msgstr "Vaihda näkymään jossa on yksityiskohtaiset tiedot tiedostoista"
+msgstr "Vaihda näkymään, jossa on yksityiskohtaiset tiedot tiedostoista"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr "_Käyttäjän näkymä"
+msgstr "_Oma näkymä"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
@@ -618,11 +618,11 @@ msgstr "Lyhyt"
 
 #: gnome/glayout.c:63
 msgid "Detailed"
-msgstr "Yksityiskohtainen"
+msgstr "Yks.koht."
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Käyttäjän"
+msgstr "Oma"
 
 #: gnome/glayout.c:302
 msgid "Enter command to run"
@@ -635,7 +635,7 @@ msgid ""
 "\n"
 "Are you sure you want to exit?"
 msgstr ""
-"Jos lopetat file managerin, GNOMEn työpöydänhallinta loppuu myös.\n"
+"Jos lopetat tiedostonhallinnan, GNOMEn työpöydänhallinta loppuu myös.\n"
 "\n"
 "Oletko varma, että haluat poistua?"
 
@@ -648,168 +648,174 @@ msgid ""
 "\n"
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
+"Tiedostonhallinta ja työpöydänhallinta lopetetaan\n"
+"\n"
+"Jos haluat käynnistää jomman kumman uudelleen, voit käynnistää sen\n"
+"paneelista tai antaa UNIX-komento 'gmc'\n"
+"\n"
+"Paina OK lopetttaaksesi sovellus, tai peruuta, jos haluat jatkaa sen käyttöä."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:384
 msgid "_Copy..."
-msgstr ""
+msgstr "_Kopioi..."
 
 #: gnome/glayout.c:384
 msgid "Copy files"
-msgstr ""
+msgstr "Kopioi tiedostoja"
 
 #: gnome/glayout.c:385
 msgid "_Delete..."
-msgstr ""
+msgstr "_Tuhoa..."
 
 #: gnome/glayout.c:385
 msgid "Delete files"
-msgstr ""
+msgstr "Tuhoa tiedostoja"
 
 #: gnome/glayout.c:386
 msgid "_Move..."
-msgstr ""
+msgstr "_Siirrä..."
 
 #: gnome/glayout.c:386
 msgid "Rename or move files"
-msgstr ""
+msgstr "Siirrä tai uudelleennimeä tiedostoja"
 
 #: gnome/glayout.c:388
 msgid "Show directory sizes"
-msgstr ""
+msgstr "Näytä hakemistojen koot"
 
 #: gnome/glayout.c:388
 msgid "Shows the disk space used by each directory"
-msgstr ""
+msgstr "Näytä jokaisen hakemiston viemä levytila"
 
 #: gnome/glayout.c:395
 msgid "Select _All"
-msgstr ""
+msgstr "Valitse _kaikki"
 
 #: gnome/glayout.c:395
 msgid "Select all files in the current Panel"
-msgstr ""
+msgstr "Valitse kaikki tiedostot tässä paneelissa"
 
 #: gnome/glayout.c:397
 msgid "_Select Files..."
-msgstr ""
+msgstr "_Valitse tiedostot..."
 
 #: gnome/glayout.c:397
 msgid "Select a group of files"
-msgstr ""
+msgstr "Valitse ryhmä tiedostoja"
 
 #: gnome/glayout.c:398
 msgid "_Invert Selection"
-msgstr ""
+msgstr "_Käännä valinta"
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
-msgstr ""
+msgstr "Kääntää valinnan päinvastaiseksi"
 
 #: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2031
 msgid "Search"
-msgstr ""
+msgstr "Etsi"
 
 #: gnome/glayout.c:400
 msgid "Search for a file in the current Panel"
-msgstr ""
+msgstr "Etsi tiedostoa tästä paneelista"
 
 #: gnome/glayout.c:403 gnome/gscreen.c:1437
 msgid "_Rescan Directory"
-msgstr ""
+msgstr "_Lue hakemisto uudelleen"
 
 #: gnome/glayout.c:403
 msgid "Rescan the directory contents"
-msgstr ""
+msgstr "Lue hakemiston sisältö uudelleen"
 
 #: gnome/glayout.c:410
 msgid "_Sort By..."
-msgstr ""
+msgstr "_Lajittelukenttä..."
 
 #: gnome/glayout.c:410
 msgid "Confirmation settings"
-msgstr ""
+msgstr "Varmistusasetukset"
 
 #: gnome/glayout.c:411
 msgid "_Filter View..."
-msgstr ""
+msgstr "_Suodata näkymä..."
 
 #: gnome/glayout.c:411
 msgid "Global option settings"
-msgstr ""
+msgstr "Yleiset asetukset"
 
 #: gnome/glayout.c:418
 msgid "_Find File..."
-msgstr ""
+msgstr "_Etsi tiedosto..."
 
 #: gnome/glayout.c:418
 msgid "Locate files on disk"
-msgstr ""
+msgstr "Etsi tiedostoja levyltä"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:421
 msgid "_Edit mime types..."
-msgstr ""
+msgstr "_Muokkaa MIME-tyyppejä..."
 
 #: gnome/glayout.c:421
 msgid "Edits the MIME type bindings"
-msgstr ""
+msgstr "Muokkaa MIME-tyyppiasetuksia"
 
 #: gnome/glayout.c:423
 msgid "_Run Command..."
-msgstr ""
+msgstr "_Suorita komento..."
 
 #: gnome/glayout.c:423
 msgid "Runs a command"
-msgstr ""
+msgstr "Suorita annettu komento"
 
 #: gnome/glayout.c:425
 msgid "_Run Command in panel..."
-msgstr ""
+msgstr "Suorita komento _paneelissa..."
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
-msgstr ""
+msgstr "Suorita komento ja näytä tulokset paneelissa"
 
 #: gnome/glayout.c:435
 msgid "_Background jobs..."
-msgstr ""
+msgstr "_Taustatyöt..."
 
 #: gnome/glayout.c:435
 msgid "List of background operations"
-msgstr ""
+msgstr "Lista taustatöistä"
 
 #: gnome/glayout.c:438
 msgid "Exit"
-msgstr ""
+msgstr "Lopeta"
 
 #: gnome/glayout.c:438
 msgid "Terminates the file manager and the desktop"
-msgstr ""
+msgstr "Lopettaa tiedoston- ja työpöydänhallinnan"
 
 #: gnome/glayout.c:453
 msgid "Rescan System Devices"
-msgstr ""
+msgstr "Hae järjestelmän laitteet"
 
 #: gnome/glayout.c:461 gnome/glayout.c:471
 msgid "_Layout"
-msgstr ""
+msgstr "_Asettelu"
 
 #: gnome/glayout.c:462 gnome/glayout.c:472
 msgid "_Commands"
-msgstr ""
+msgstr "_Komennot"
 
 #: gnome/glayout.c:463
 msgid "_Desktop"
-msgstr ""
+msgstr "_Työpöytä"
 
 #: gnome/glayout.c:464 gnome/glayout.c:473
 msgid "_Help"
-msgstr ""
+msgstr "_Ohje"
 
 #: gnome/glayout.c:613
 msgid "File/New/Directory..."
-msgstr ""
+msgstr "Tiedosto/Uusi/Hakemisto..."
 
 #: gnome/gmain.c:561
 msgid ""
@@ -818,596 +824,600 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
+"Ajat GNOME-tiedostonhallintaa pääkäyttäjänä.\n"
+"\n"
+"Pääkäyttäjänä voit vahingoittaa järjestelmääsi ellet ole varovainen, eikä "
+"GNOME-tiedostonhallinta estä sinua tekemästä tätä."
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
 msgid "Full Name: "
-msgstr ""
+msgstr "Koko nimi: "
 
 #: gnome/gnome-file-property-dialog.c:178
 msgid "File Name"
-msgstr ""
+msgstr "Tiedostonimi"
 
 #: gnome/gnome-file-property-dialog.c:201
 msgid "File Type: "
-msgstr ""
+msgstr "Tyyppi: "
 
 #: gnome/gnome-file-property-dialog.c:207
 msgid "File Type: Symbolic Link"
-msgstr ""
+msgstr "Tyyppi: Symbolinen linkki"
 
 #: gnome/gnome-file-property-dialog.c:212
 msgid "Target Name: INVALID LINK"
-msgstr ""
+msgstr "Kohteen nimi: TOIMIMATON LINKKI"
 
 #: gnome/gnome-file-property-dialog.c:215
 msgid "Target Name: "
-msgstr ""
+msgstr "Kohteen nimi: "
 
 #: gnome/gnome-file-property-dialog.c:220
 msgid "File Type: Directory"
-msgstr ""
+msgstr "Tyyppi: Hakemisto"
 
 #: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Character Device"
-msgstr ""
+msgstr "Tyyppi: Merkkilaite"
 
 #: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Block Device"
-msgstr ""
+msgstr "Tyyppi: Lohkolaite"
 
 #: gnome/gnome-file-property-dialog.c:226
 msgid "File Type: Socket"
-msgstr ""
+msgstr "Tyyppi: Pistoke"
 
 #: gnome/gnome-file-property-dialog.c:228
 msgid "File Type: FIFO"
-msgstr ""
+msgstr "Tyyppi: FIFO"
 
 #: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
 msgid "File Size: "
-msgstr ""
+msgstr "Koko: "
 
 #: gnome/gnome-file-property-dialog.c:238
 msgid " bytes"
-msgstr ""
+msgstr " tavua"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
-msgstr ""
+msgstr " kilotavua ("
 
 #: gnome/gnome-file-property-dialog.c:243
 #: gnome/gnome-file-property-dialog.c:249
 msgid " bytes)"
-msgstr ""
+msgstr " tavua)"
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " MBytes  ("
-msgstr ""
+msgstr " megatavua ("
 
 #: gnome/gnome-file-property-dialog.c:256
 msgid "File Size: N/A"
-msgstr ""
+msgstr "Koko: -"
 
 #: gnome/gnome-file-property-dialog.c:267
 msgid "File Created on: "
-msgstr ""
+msgstr "Tiedosto luotu: "
 
 #: gnome/gnome-file-property-dialog.c:276
 msgid "Last Modified on: "
-msgstr ""
+msgstr "Viimeksi muutettu: "
 
 #: gnome/gnome-file-property-dialog.c:285
 msgid "Last Accessed on: "
-msgstr ""
+msgstr "Viimeksi luettu: "
 
 #: gnome/gnome-file-property-dialog.c:303
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: gnome/gnome-file-property-dialog.c:310
 msgid "Caption:"
-msgstr ""
+msgstr "Otsake:"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
 #: src/screen.c:2353 src/screen.c:2383
 msgid "View"
-msgstr ""
+msgstr "Näyttö"
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
-msgstr ""
+msgstr "Käytä oletusarvoisia näyttövalintoja"
 
 #: gnome/gnome-file-property-dialog.c:439
 msgid "Select an Icon"
-msgstr ""
+msgstr "Valitse kuvake"
 
 #. we do open first
 #: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
 msgid "Open"
-msgstr ""
+msgstr "Avaa"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr ""
+msgstr "Käytä oletusarvoista avaustoimintoa"
 
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Drop Action"
-msgstr ""
+msgstr "Pudotustoiminto"
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
-msgstr ""
+msgstr "Käytä oletusarvoista pudotustoimintoa"
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr ""
+msgstr "Käytä oletusarvoista näyttötoimintoa"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
 #: src/screen.c:2354 src/screen.c:2384 src/view.c:2027
 msgid "Edit"
-msgstr ""
+msgstr "Muokkaa"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
-msgstr ""
+msgstr "Käytä oletusarvoista muokkaustoimintoa"
 
 #: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
 msgid "Icon"
-msgstr ""
+msgstr "Kuvake"
 
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
 msgid "File Actions"
-msgstr ""
+msgstr "Tiedostotoiminnot"
 
 #: gnome/gnome-file-property-dialog.c:616
 msgid "Open action"
-msgstr ""
+msgstr "Avaustoiminto"
 
 #: gnome/gnome-file-property-dialog.c:617
 msgid "Needs terminal to run"
-msgstr ""
+msgstr "Tarvitsee pääteikkunan suoritusta varten"
 
 #: gnome/gnome-file-property-dialog.c:742
 msgid "File Permissions"
-msgstr ""
+msgstr "Tiedosto-oikeudet"
 
 #: gnome/gnome-file-property-dialog.c:753 gnome/gprop.c:259
 msgid "Current mode: "
-msgstr ""
+msgstr "Tämänhetkinen moodi: "
 
 #. Headings
 #: gnome/gnome-file-property-dialog.c:768 gnome/gprop.c:272
 msgid "Read"
-msgstr ""
+msgstr "Luku"
 
 #: gnome/gnome-file-property-dialog.c:769 gnome/gprop.c:273
 msgid "Write"
-msgstr ""
+msgstr "Kirjoitus"
 
 #: gnome/gnome-file-property-dialog.c:770 gnome/gprop.c:274
 msgid "Exec"
-msgstr ""
+msgstr "Suoritus"
 
 #: gnome/gnome-file-property-dialog.c:771 gnome/gprop.c:275
 msgid "Special"
-msgstr ""
+msgstr "Erikois"
 
 #. Permissions
 #: gnome/gnome-file-property-dialog.c:775 gnome/gprop.c:279
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
 #: gnome/gnome-file-property-dialog.c:777 gnome/gprop.c:281
 msgid "Other"
-msgstr ""
+msgstr "Muut"
 
 #. Special
 #: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:285
 msgid "Set UID"
-msgstr ""
+msgstr "Aseta käyttäjätunnus"
 
 #: gnome/gnome-file-property-dialog.c:782 gnome/gprop.c:286
 msgid "Set GID"
-msgstr ""
+msgstr "Aseta ryhmätunnus"
 
 #: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:287
 msgid "Sticky"
-msgstr ""
+msgstr "Tahma"
 
 #: gnome/gnome-file-property-dialog.c:914
 msgid "File ownership"
-msgstr ""
+msgstr "Tiedoston omistajuus"
 
 #: gnome/gnome-file-property-dialog.c:1074
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: gnome/gnome-file-property-dialog.c:1077
 msgid "Statistics"
-msgstr ""
+msgstr "Tilastot"
 
 #: gnome/gnome-file-property-dialog.c:1083
 msgid "Options"
-msgstr ""
+msgstr "Valinnat"
 
 #: gnome/gnome-file-property-dialog.c:1086
 msgid "Permissions"
-msgstr ""
+msgstr "Oikeudet"
 
 #: gnome/gnome-file-property-dialog.c:1089
 msgid " Properties"
-msgstr ""
+msgstr ":n ominaisuudet"
 
 #: gnome/gnome-file-property-dialog.c:1140
 msgid "You entered an invalid username"
-msgstr ""
+msgstr "Annoit epäkelvon käyttäjätunnuksen"
 
 #: gnome/gnome-file-property-dialog.c:1185
 msgid "You must rename your file to something"
-msgstr ""
+msgstr "Sinun täytyy uudelleennimetä tiedosto joksikin"
 
 #: gnome/gnome-file-property-dialog.c:1191
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr ""
+msgstr "Tiedostolle ei voi antaa '/'-merkin sisältävää nimeä"
 
 #. the first label
 #: gnome/gnome-open-dialog.c:382
 msgid "Select an application to open \""
-msgstr ""
+msgstr "Valitse sovellus avaamaan \""
 
 #: gnome/gnome-open-dialog.c:393
 msgid "Select a file to run with"
-msgstr ""
+msgstr "Valitse tiedosto ajettavaksi"
 
 #. the file tree
 #: gnome/gnome-open-dialog.c:404
 msgid "Applications"
-msgstr ""
+msgstr "Sovellukset"
 
 #: gnome/gnome-open-dialog.c:420
 msgid "Program to run"
-msgstr ""
+msgstr "Ajettava ohjelma"
 
 #: gnome/gpopup2.c:188
 msgid "Mount device"
-msgstr ""
+msgstr "Liitä laite"
 
 #: gnome/gpopup2.c:189
 msgid "Unmount device"
-msgstr ""
+msgstr "Irrota laite"
 
 #: gnome/gpopup2.c:190
 msgid "Eject device"
-msgstr ""
+msgstr "Syötä levy ulos"
 
 #: gnome/gpopup2.c:193
 msgid "Open with..."
-msgstr ""
+msgstr "Avaa ohjelmalla..."
 
 #: gnome/gpopup2.c:195
 msgid "View Unfiltered"
-msgstr ""
+msgstr "Näytä suodattamattomana"
 
 #: gnome/gpopup2.c:198
 msgid "Copy..."
-msgstr ""
+msgstr "Kopioi..."
 
 #: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2358
 #: src/screen.c:2388
 msgid "Delete"
-msgstr ""
+msgstr "Tuhoa"
 
 #: gnome/gpopup2.c:200
 msgid "Move..."
-msgstr ""
+msgstr "Siirrä..."
 
 #: gnome/gpopup2.c:201
 msgid "Hard Link..."
-msgstr ""
+msgstr "Luo kova linkki..."
 
 #: gnome/gpopup2.c:202
 msgid "Symlink..."
-msgstr ""
+msgstr "Luo pehmeä linkki..."
 
 #: gnome/gpopup2.c:203
 msgid "Edit Symlink..."
-msgstr ""
+msgstr "Muokkaa pehmeää linkkiä..."
 
 #: gnome/gpopup2.c:205
 msgid "Properties..."
-msgstr ""
+msgstr "Ominaisuudet..."
 
 #: gnome/gprefs.c:88
 msgid "Show backup files"
-msgstr ""
+msgstr "Näytä varmuuskopiot"
 
 #: gnome/gprefs.c:92
 msgid "Show hidden files"
-msgstr ""
+msgstr "Näytä piilotiedostot"
 
 #: gnome/gprefs.c:96
 msgid "Mix files and directories"
-msgstr ""
+msgstr "Näytä hakemistot ja tiedostot sekaisin"
 
 #: gnome/gprefs.c:100
 msgid "Use shell patterns instead of regular expressions"
-msgstr ""
+msgstr "Käytä komentotulkin lausekkeita säännöllisten lausekkeiden sijaan"
 
 #: gnome/gprefs.c:109
 msgid "Confirm when deleting file"
-msgstr ""
+msgstr "Varmista tuhottaessa tiedostoa"
 
 #: gnome/gprefs.c:113
 msgid "Confirm when overwriting files"
-msgstr ""
+msgstr "Varmista ylikirjoitettaessa tiedostoja"
 
 #: gnome/gprefs.c:117
 msgid "Confirm when executing files"
-msgstr ""
+msgstr "Varmista suoritettaessa tiedostoja"
 
 #: gnome/gprefs.c:121
 msgid "Show progress while operations are being performed"
-msgstr ""
+msgstr "Näytä edistys operaatioita suoritettaessa"
 
 #: gnome/gprefs.c:130
 msgid "VFS Timeout:"
-msgstr ""
+msgstr "VFS-aikaraja:"
 
 #: gnome/gprefs.c:131 gnome/gprefs.c:156
 msgid "Seconds"
-msgstr ""
+msgstr "sekuntia"
 
 #: gnome/gprefs.c:134
 msgid "Anonymous FTP password:"
-msgstr ""
+msgstr "Anonyymi-FTP-salasana:"
 
 #: gnome/gprefs.c:138
 msgid "Always use FTP proxy"
-msgstr ""
+msgstr "Käytä aina FTP-proxyä"
 
 #: gnome/gprefs.c:147
 msgid "Fast directory reload"
-msgstr ""
+msgstr "Nopea hakemiston uudelleenlataus"
 
 #: gnome/gprefs.c:151
 msgid "Compute totals before copying files"
-msgstr ""
+msgstr "Laske lopulliset koot ennen tiedostojen kopiointia"
 
 #: gnome/gprefs.c:155
 msgid "FTP directory cache timeout :"
-msgstr ""
+msgstr "FTP-hakemistovälimuistin aikaraja :"
 
 #: gnome/gprefs.c:159
 msgid "Allow customization of icons in icon view"
-msgstr ""
+msgstr "Salli omien kuvakkeiden käyttö kuvakenäytössä"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Käytä muotoiltuja kuvakkeita"
 
 #: gnome/gprefs.c:171
 msgid "Auto place icons"
-msgstr ""
+msgstr "Asettele kuvakkeet automaattisesti"
 
 #: gnome/gprefs.c:175
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "Asettele kuvakkeet ruudukkoon"
 
 #: gnome/gprefs.c:184
 msgid "File display"
-msgstr ""
+msgstr "Tiedostojen näyttö"
 
 #: gnome/gprefs.c:188
 msgid "Confirmation"
-msgstr ""
+msgstr "Varmistukset"
 
 #: gnome/gprefs.c:192
 msgid "VFS"
-msgstr ""
+msgstr "VFS-virtuaalitiedostojärjestelmä"
 
 #: gnome/gprefs.c:196
 msgid "Caching"
-msgstr ""
+msgstr "Välimuisti"
 
 #: gnome/gprefs.c:200
 msgid "Desktop"
-msgstr ""
+msgstr "Työpöytä"
 
 #: gnome/gprefs.c:479
 msgid "Preferences"
-msgstr ""
+msgstr "Asetukset"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
-msgstr ""
+msgstr "Tiedostonimi"
 
 #: gnome/gprop.c:67
 msgid "Full name: "
-msgstr ""
+msgstr "Koko nimi: "
 
 #: gnome/gprop.c:109 src/panelize.c:205
 msgid "Command"
-msgstr ""
+msgstr "Komento"
 
 #: gnome/gprop.c:119
 msgid "Command:"
-msgstr ""
+msgstr "Komento:"
 
 #: gnome/gprop.c:129
 msgid "Use terminal"
-msgstr ""
+msgstr "Käytä pääteikkunaa"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
-msgstr ""
+msgstr "Tiedoston moodi (oikeudet)"
 
 #: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
-msgstr ""
+msgstr "<tuntematon>"
 
 #: gnome/gprop.c:494
 msgid "General"
-msgstr ""
+msgstr "Yleinen"
 
 #: gnome/gprop.c:505
 msgid "Title"
-msgstr ""
+msgstr "Otsake"
 
 #: gnome/gprop.c:535
 msgid "Select icon"
-msgstr ""
+msgstr "Valitse kuvake"
 
 #: gnome/gscreen.c:1437
 msgid "Reloads the current directory"
-msgstr ""
+msgstr "Lataa nykyhakemiston uudelleen"
 
 #: gnome/gscreen.c:1439
 msgid "New _Directory..."
-msgstr ""
+msgstr "Uusi _hakemisto..."
 
 #: gnome/gscreen.c:1439
 msgid "Creates a new directory here"
-msgstr ""
+msgstr "Luo uuden hakemiston tähän"
 
 #: gnome/gscreen.c:1620
 msgid "All files"
-msgstr ""
+msgstr "Kaikki tiedostot"
 
 #: gnome/gscreen.c:1622
 msgid "Archives and compressed files"
-msgstr ""
+msgstr "Arkistot ja pakatut tiedostot"
 
 #: gnome/gscreen.c:1624
 msgid "RPM/DEB files"
-msgstr ""
+msgstr "RPM- ja DEB-tiedostot"
 
 #: gnome/gscreen.c:1626
 msgid "Text/Document files"
-msgstr ""
+msgstr "Teksti- ja dokumenttitiedostot"
 
 #: gnome/gscreen.c:1628
 msgid "HTML and SGML files"
-msgstr ""
+msgstr "HTML- ja SGML-tiedostot"
 
 #: gnome/gscreen.c:1630
 msgid "Postscript and PDF files"
-msgstr ""
+msgstr "Postscript- ja PDF-tiedostot"
 
 #: gnome/gscreen.c:1632
 msgid "Spreadsheet files"
-msgstr ""
+msgstr "Taulukkolaskentatiedostot"
 
 #: gnome/gscreen.c:1634
 msgid "Image files"
-msgstr ""
+msgstr "Kuvatiedostot"
 
 #: gnome/gscreen.c:1637
 msgid "Video/animation files"
-msgstr ""
+msgstr "Video- ja animaatiotiedostot"
 
 #: gnome/gscreen.c:1639
 msgid "Audio files"
-msgstr ""
+msgstr "Äänitiedostot"
 
 #: gnome/gscreen.c:1641
 msgid "C program files"
-msgstr ""
+msgstr "C-ohjelmatiedostot"
 
 #: gnome/gscreen.c:1643
 msgid "C++ program files"
-msgstr ""
+msgstr "C++-ohjelmatiedostot"
 
 #: gnome/gscreen.c:1645
 msgid "Objective-C program files"
-msgstr ""
+msgstr "Objective-C-ohjelmatiedostot"
 
 #: gnome/gscreen.c:1647
 msgid "Scheme program files"
-msgstr ""
+msgstr "Scheme-ohjelmatiedostot"
 
 #: gnome/gscreen.c:1649
 msgid "Assembler program files"
-msgstr ""
+msgstr "Assembler-ohjelmatiedostot"
 
 #: gnome/gscreen.c:1651
 msgid "Misc. program files"
-msgstr ""
+msgstr "Sekalaiset ohjelmatiedostot"
 
 #: gnome/gscreen.c:1653
 msgid "Font files"
-msgstr ""
+msgstr "Kirjasintiedostot"
 
 #: gnome/gscreen.c:1780
 #, c-format
 msgid "Search: %s"
-msgstr ""
+msgstr "Etsi: %s"
 
 #: gnome/gscreen.c:1790
 #, c-format
 msgid "%s bytes in %d file"
-msgstr ""
+msgstr "%s tavua %d tiedostossa"
 
 #: gnome/gscreen.c:1790
 #, c-format
 msgid "%s bytes in %d files"
-msgstr ""
+msgstr "%s tavua %d tiedostossa"
 
 #: gnome/gscreen.c:1816 src/screen.c:670
 msgid "<readlink failed>"
-msgstr ""
+msgstr "<linkin luku epäonnistui>"
 
 #: gnome/gscreen.c:1870
 msgid "Filter"
-msgstr ""
+msgstr "Suodin"
 
 #: gnome/gscreen.c:2373
 msgid "Back"
-msgstr ""
+msgstr "Edellinen"
 
 #: gnome/gscreen.c:2373
 msgid "Go to the previously visited directory"
-msgstr ""
+msgstr "Palaa edelliseen vierailtuun hakemistoon"
 
 #: gnome/gscreen.c:2375
 msgid "Up"
-msgstr ""
+msgstr "Ylös"
 
 #: gnome/gscreen.c:2375
 msgid "Go up a level in the directory heirarchy"
-msgstr ""
+msgstr "Palaa hakemistohierarkiassa ylöspäin"
 
 #: gnome/gscreen.c:2377
 msgid "Forward"
-msgstr ""
+msgstr "Seuraava"
 
 #: gnome/gscreen.c:2377
 msgid "Go to the next directory"
-msgstr ""
+msgstr "Mene seuraavaan hakemistoon"
 
 #: gnome/gscreen.c:2380 src/tree.c:1011
 msgid "Rescan"
-msgstr ""
+msgstr "Virkistä"
 
 #: gnome/gscreen.c:2380
 msgid "Rescan the current directory"
-msgstr ""
+msgstr "Virkistä hakemistonäkymä"
 
 #: gnome/gscreen.c:2383
 msgid "Home"
-msgstr ""
+msgstr "Koti"
 
 #: gnome/gscreen.c:2383
 msgid "Go to your home directory"
-msgstr ""
+msgstr "Siirry kotihakemistoon"
 
 #: gnome/gscreen.c:2529
 msgid "Location:"
-msgstr ""
+msgstr "Sijainti:"
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/editcmd.c:344 gtkedit/editcmd.c:1187
@@ -1417,133 +1427,134 @@ msgstr ""
 #: src/filegui.c:838 src/find.c:171 src/layout.c:370 src/option.c:144
 #: src/wtools.c:289 src/wtools.c:563
 msgid "&Ok"
-msgstr ""
+msgstr "&Ok"
 
 #: gnome/gview.c:135 src/view.c:718
 #, c-format
 msgid "Offset 0x%08x"
-msgstr ""
+msgstr "Siirros 0x%08x"
 
 #: gnome/gview.c:137 src/view.c:720
 #, c-format
 msgid "Col %d"
-msgstr ""
+msgstr "Sarake %d"
 
 #: gnome/gview.c:141 src/view.c:724
 #, c-format
 msgid "%s bytes"
-msgstr ""
+msgstr "%s tavua"
 
 #: gnome/gview.c:305
 msgid "_Goto line"
-msgstr ""
+msgstr "Siirry _riville"
 
 #: gnome/gview.c:306
 msgid "Jump to a specified line number"
-msgstr ""
+msgstr "Siirry määritellylle riville"
 
 #: gnome/gview.c:308
 msgid "_Monitor file"
-msgstr ""
+msgstr "_Seuraa tiedostoa"
 
 #: gnome/gview.c:308
 msgid "Monitor file growing"
-msgstr ""
+msgstr "Seuraa tiedoston kasvua"
 
 #: gnome/gview.c:315
 msgid "Regexp search"
-msgstr ""
+msgstr "Haku säännöllisellä lausekkeella"
 
 #: gnome/gview.c:316
 msgid "Regular expression search"
-msgstr ""
+msgstr "Haku säännöllisellä lausekkeella"
 
 #: gnome/gview.c:325
 msgid "_Wrap"
-msgstr ""
+msgstr "_Kierto"
 
 #: gnome/gview.c:326
 msgid "Wrap the text"
-msgstr ""
+msgstr "Kierrä teksti oikeasta reunasta"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:329
 msgid "_Parsed view"
-msgstr ""
+msgstr "_Parsittu näkymä"
 
 #: gnome/gview.c:332
 msgid "_Formatted"
-msgstr ""
+msgstr "_Muotoiltu"
 
 #: gnome/gview.c:334
 msgid "_Hex"
-msgstr ""
+msgstr "_Heksa"
 
 #: gnome/gview.c:340
 msgid "_Search"
-msgstr ""
+msgstr "_Haku"
 
 #: gnome/gwidget.c:90
 msgid "ok"
-msgstr ""
+msgstr "ok"
 
 #: gnome/gwidget.c:92
 msgid "cancel"
-msgstr ""
+msgstr "peruuta"
 
 #: gnome/gwidget.c:94
 msgid "help"
-msgstr ""
+msgstr "ohje"
 
 #: gnome/gwidget.c:96 src/file.c:2252
 msgid "yes"
-msgstr ""
+msgstr "kyllä"
 
 #: gnome/gwidget.c:98 src/file.c:2250
 msgid "no"
-msgstr ""
+msgstr "ei"
 
 #: gnome/gwidget.c:100
 msgid "exit"
-msgstr ""
+msgstr "lopeta"
 
 #: gnome/gwidget.c:102
 msgid "abort"
-msgstr ""
+msgstr "peru"
 
 #: gnome/gmount.c:195
 msgid "Could not open the /etc/fstab file"
-msgstr ""
+msgstr "Tiedostoa /etc/fstab ei voitu avata"
 
 #: gnome/gmount.c:322
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
+msgstr "Ei voitu luoda symbolista linkkiä %s:a nimelle %s; työpöytäikonia "
+"laitteelle ei näytetä."
 
 #: gnome/gmount.c:374 gnome/gmount.c:389
 #, c-format
 msgid "CD-ROM %d"
-msgstr ""
+msgstr "CD-ROM %d"
 
 #: gnome/gmount.c:379
 #, c-format
 msgid "Floppy %d"
-msgstr ""
+msgstr "Levyke %d"
 
 #: gnome/gmount.c:385
 #, c-format
 msgid "Disk %d"
-msgstr ""
+msgstr "Levy %d"
 
 #: gnome/gmount.c:395
 #, c-format
 msgid "NFS dir %s"
-msgstr ""
+msgstr "NFS-hakemisto %s"
 
 #: gnome/gmount.c:399
 #, c-format
 msgid "Device %d"
-msgstr ""
+msgstr "Laite %d"
 
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
@@ -1552,45 +1563,47 @@ msgstr ""
 #: src/screen.c:2373 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
-msgstr ""
+msgstr " Virhe "
 
 #: gtkedit/edit.c:131 gtkedit/edit.c:233
 msgid " Failed trying to open file for reading: "
-msgstr ""
+msgstr " Tiedoston avaaminen lukua varten epäonnistui: "
 
 #: gtkedit/edit.c:240
 msgid " Cannot get size/permissions info on file: "
-msgstr ""
+msgstr " Koko- ja oikeustietoja tiedostosta ei saatu: "
 
 #: gtkedit/edit.c:247
 msgid " Not an ordinary file: "
-msgstr ""
+msgstr " Ei tavallinen tiedosto: "
 
 #: gtkedit/edit.c:253
 msgid " File is too large: "
-msgstr ""
+msgstr " Tiedosto on liian suuri: "
 
 #: gtkedit/edit.c:254
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
+" \n"
+" Lisää edit.h:MAXBUF ja käännä muokkain uudelleen. "
 
 #: gtkedit/edit.c:310 gtkedit/edit.c:346
 msgid " Error allocating memory "
-msgstr ""
+msgstr " Virhe varattessa muistia "
 
 #: gtkedit/editcmd.c:337
 msgid "Quick save "
-msgstr ""
+msgstr "Nopea tallennus "
 
 #: gtkedit/editcmd.c:338
 msgid "Safe save "
-msgstr ""
+msgstr "Turvallinen tallennus"
 
 #: gtkedit/editcmd.c:339
 msgid "Do backups -->"
-msgstr ""
+msgstr "Tee varmuuskopioita -->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:342 gtkedit/editcmd.c:1139 gtkedit/editcmd.c:1185
@@ -1602,20 +1615,20 @@ msgstr ""
 #: src/layout.c:371 src/learn.c:59 src/option.c:145 src/panelize.c:86
 #: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 msgid "&Cancel"
-msgstr ""
+msgstr "&Peruuta"
 
 #: gtkedit/editcmd.c:348
 msgid "Extension:"
-msgstr ""
+msgstr "Pääte:"
 
 #. NLS ?
 #: gtkedit/editcmd.c:355
 msgid " Edit Save Mode "
-msgstr ""
+msgstr " Muokkaa tallennusmoodia "
 
 #: gtkedit/editcmd.c:479
 msgid " Save As "
-msgstr ""
+msgstr " Tallenna nimellä "
 
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:493 gtkedit/editcmd.c:812 gtkedit/editcmd.c:842
@@ -1624,206 +1637,208 @@ msgstr ""
 #: src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390 src/utilunix.c:394
 #: src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
-msgstr ""
+msgstr " Varoitus "
 
 #: gtkedit/editcmd.c:494
 msgid " A file already exists with this name. "
-msgstr ""
+msgstr " Tämänniminen tiedosto on jo olemassa. "
 
 #. Push buttons to over-write the current file, or cancel the operation
 #: gtkedit/editcmd.c:496
 msgid "Overwrite"
-msgstr ""
+msgstr "Ylikirjoita"
 
 #: gtkedit/editcmd.c:496 gtkedit/editcmd.c:558 gtkedit/editcmd.c:785
 #: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842 gtkedit/editcmd.c:989
 #: gtkedit/editcmd.c:1581
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #: gtkedit/editcmd.c:512
 msgid " Save as "
-msgstr ""
+msgstr " Tallenna nimellä "
 
 #: gtkedit/editcmd.c:512 gtkedit/editcmd.c:2636
 msgid " Error trying to save file. "
-msgstr ""
+msgstr " Virhe tallennettaessa tiedostoa. "
 
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:628 gtkedit/editcmd.c:636 gtkedit/editcmd.c:661
 msgid " Delete macro "
-msgstr ""
+msgstr " Poista makro "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:630
 msgid " Error trying to open temp file "
-msgstr ""
+msgstr " Virhe avattaessa väliaikaistiedostoa "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:638 gtkedit/editcmd.c:699 gtkedit/editcmd.c:767
 msgid " Error trying to open macro file "
-msgstr ""
+msgstr " Virhe avattaessa makrotiedostoa "
 
 #: gtkedit/editcmd.c:643 gtkedit/editcmd.c:651 gtkedit/editcmd.c:687
 #: gtkedit/editcmd.c:742
 #, c-format
 msgid "key '%d 0': "
-msgstr ""
+msgstr "avain '%d 0': "
 
 #: gtkedit/editcmd.c:662
 msgid " Error trying to overwrite macro file "
-msgstr ""
+msgstr " Virhe kirjoitettaessa makrotiedostoa "
 
 #. This heads the 'Macro' dialog box
 #: gtkedit/editcmd.c:679
 msgid " Macro "
-msgstr ""
+msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
 #: gtkedit/editcmd.c:681
 msgid " Press the macro's new hotkey: "
-msgstr ""
+msgstr " Paina makron uutta pikanäppäintä: "
 
 #. This heads the 'Save Macro' dialog box
 #: gtkedit/editcmd.c:699
 msgid " Save macro "
-msgstr ""
+msgstr " Tallenna makro "
 
 #: gtkedit/editcmd.c:709 gtkedit/editcmd.c:716
 msgid " Delete Macro "
-msgstr ""
+msgstr " Poista makro"
 
 #. This heads the 'Load Macro' dialog box
 #: gtkedit/editcmd.c:766
 msgid " Load macro "
-msgstr ""
+msgstr " Lataa makro "
 
 #: gtkedit/editcmd.c:780 gtkedit/editcmd.c:782
 msgid " Confirm save file? : "
-msgstr ""
+msgstr " Varmista tallennus? : "
 
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:785
 msgid " Save file "
-msgstr ""
+msgstr " Tallenna tiedosto "
 
 #: gtkedit/editcmd.c:785 gtkedit/editwidget.c:1066 src/view.c:2023
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 #: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
+" Tekstiä on muokattu ilman tallennusta.\n"
+" Jos valitset jatka, muutokset häviävät."
 
 #: gtkedit/editcmd.c:812 gtkedit/editcmd.c:842 gtkedit/editcmd.c:989
 msgid "Continue"
-msgstr ""
+msgstr "Jatka"
 
 #. Heads the 'Load' file dialog box
 #: gtkedit/editcmd.c:831 gtkedit/editcmd.c:845
 msgid " Load "
-msgstr ""
+msgstr " Lataa "
 
 #: gtkedit/editcmd.c:831
 msgid " Error trying to open file for reading "
-msgstr ""
+msgstr " Virhe avattaessa tiedostoa lukemista varten "
 
 #: gtkedit/editcmd.c:989 gtkedit/editcmd.c:1086
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
+msgstr " Valinta on suuri; et ehkä kykene peruuttamaan tätä toimintoa. "
 
 #: gtkedit/editcmd.c:1086
 msgid " Continue "
-msgstr ""
+msgstr " Jatka "
 
 #: gtkedit/editcmd.c:1086
 msgid " Cancel "
-msgstr ""
+msgstr " Peruuta "
 
 #: gtkedit/editcmd.c:1141 src/filegui.c:596
 msgid "al&L"
-msgstr ""
+msgstr "K&aikki"
 
 #: gtkedit/editcmd.c:1143 src/file.c:2174 src/filegui.c:266
 msgid "&Skip"
-msgstr ""
+msgstr "&Ohita"
 
 #: gtkedit/editcmd.c:1145
 msgid "&Replace"
-msgstr ""
+msgstr "&Korvaa"
 
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
 #: gtkedit/editcmd.c:1151 gtkedit/editcmd.c:1579
 msgid " Replace with: "
-msgstr ""
+msgstr " Korvaus: "
 
 #: gtkedit/editcmd.c:1155
 msgid " Confirm replace "
-msgstr ""
+msgstr " Varmista korvaus "
 
 #: gtkedit/editcmd.c:1189 gtkedit/editcmd.c:1274
 msgid "scanf &Expression"
-msgstr ""
+msgstr "scanf &Lauseke"
 
 #: gtkedit/editcmd.c:1191
 msgid "replace &All"
-msgstr ""
+msgstr "korvaa &Kaikki"
 
 #: gtkedit/editcmd.c:1193
 msgid "pr&Ompt on replace"
-msgstr ""
+msgstr "kysy korvatess&a"
 
 #: gtkedit/editcmd.c:1195 gtkedit/editcmd.c:1276
 msgid "&Backwards"
-msgstr ""
+msgstr "&Takaperin"
 
 #: gtkedit/editcmd.c:1197 gtkedit/editcmd.c:1278
 msgid "&Regular expression"
-msgstr ""
+msgstr "&Säännöllinen lauseke"
 
 #: gtkedit/editcmd.c:1199 gtkedit/editcmd.c:1280
 msgid "&Whole words only"
-msgstr ""
+msgstr "&Vain koko sanat"
 
 #: gtkedit/editcmd.c:1201 gtkedit/editcmd.c:1282
 msgid "case &Sensitive"
-msgstr ""
+msgstr "isot/pienet kirjaimet &erilaisia"
 
 #: gtkedit/editcmd.c:1205
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr ""
+msgstr " Anna korvausparametrien järjestys, esim. 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1209
 msgid " Enter replacement string:"
-msgstr ""
+msgstr " Anna korvaava merkkijono:"
 
 #: gtkedit/editcmd.c:1213 gtkedit/editcmd.c:1286 src/view.c:1948
 msgid " Enter search string:"
-msgstr ""
+msgstr " Anna haettava merkkijono:"
 
 #. Heads the 'Replace' dialog box
 #: gtkedit/editcmd.c:1232 gtkedit/editcmd.c:1483 gtkedit/editcmd.c:1577
 #: gtkedit/editcmd.c:2128 gtkedit/editcmd.c:2159 gtkedit/editcmd.c:2161
 msgid " Replace "
-msgstr ""
+msgstr " Korvaa "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1477 gtkedit/editcmd.c:2230
 #: src/view.c:1502 src/view.c:1601 src/view.c:1723 src/view.c:1916
 #: src/view.c:1948
 msgid " Search "
-msgstr ""
+msgstr " Hae "
 
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1349
 msgid " Enter search text : "
-msgstr ""
+msgstr " Anna haettava teksti :"
 
 #: gtkedit/editcmd.c:1356
 msgid " Enter replace text : "
-msgstr ""
+msgstr " Anna korvaava teksti : "
 
 #: gtkedit/editcmd.c:1359 gtkedit/editcmd.c:1360
 #, c-format
@@ -1831,10 +1846,12 @@ msgid ""
 "You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
 "\"Enter...order\""
 msgstr ""
+"Voit antaa säännöllisten lausekkeiden alimerkkijonot %s:llä (ei \\1, \\2, "
+"kuten sed:issä), ja käytä sitten \"Anna...järjestys\":tä"
 
 #: gtkedit/editcmd.c:1362
 msgid " Enter argument (or substring) order : "
-msgstr ""
+msgstr " Anna parametrien (tai alimerkkijonojen) järjestys : "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1366 gtkedit/editcmd.c:1367
@@ -1842,354 +1859,358 @@ msgid ""
 "Enter the order of replacement of your scanf format specifiers or regexp "
 "substrings"
 msgstr ""
+"Anna alimerkkijonojesi korvausjärjestys"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1372
 msgid " Whole words only "
-msgstr ""
+msgstr " Vain koko sanat "
 
 #: gtkedit/editcmd.c:1374
 msgid " Case sensitive "
-msgstr ""
+msgstr " Isot/pienet erikseen "
 
 #: gtkedit/editcmd.c:1377
 msgid " Regular expression "
-msgstr ""
+msgstr " Säännöllinen lauseke "
 
 #: gtkedit/editcmd.c:1378 gtkedit/editcmd.c:1379
 msgid "See the regex man page for how to compose a regular expression"
-msgstr ""
+msgstr "Katso regex-manuaalisivulta säännöllisten lausekkeiden muodostusohjeet"
 
 #: gtkedit/editcmd.c:1385
 msgid " Backwards "
-msgstr ""
+msgstr " Takaperin "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1387 gtkedit/editcmd.c:1388
 msgid "Warning: Searching backward can be slow"
-msgstr ""
+msgstr "Varoitus: Takaperin etsintä voi olla hidasta"
 
 #: gtkedit/editcmd.c:1401
 msgid " Prompt on replace "
-msgstr ""
+msgstr " Kysy korvattaessa "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1403
 msgid "Ask before making each replacement"
-msgstr ""
+msgstr "Kysy ennen korvauksen suorittamista"
 
 #: gtkedit/editcmd.c:1405
 msgid " Replace all "
-msgstr ""
+msgstr " Korvaa kaikki "
 
 #: gtkedit/editcmd.c:1408
 msgid " Scanf expression "
-msgstr ""
+msgstr " Scanf-lauseke "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1410
 msgid "Allows entering of a C format string, see the scanf man page"
-msgstr ""
+msgstr "Sallii C-muotoisen merkkijonon antamisen, katso scanf-manuaalisivu"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1415
 msgid "Begin search, Enter"
-msgstr ""
+msgstr "Aloita etsintä, Enter"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1418
 msgid "Abort this dialog, Esc"
-msgstr ""
+msgstr "Poistu dialogista, Esc"
 
 #. Buttons for the confirm replace dialog box.
 #: gtkedit/editcmd.c:1581
 msgid "Replace"
-msgstr ""
+msgstr "Korvaa"
 
 #: gtkedit/editcmd.c:1581
 msgid "Skip"
-msgstr ""
+msgstr "Ohita"
 
 #: gtkedit/editcmd.c:1581
 msgid "Replace all"
-msgstr ""
+msgstr "Korvaa kaikki"
 
 #: gtkedit/editcmd.c:1954
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
+" Virheellinen säännöllinen lauseke, tai liian monimutkainen scanf-lauseke "
 
 #. "Invalid regexp string or scanf string"
 #: gtkedit/editcmd.c:2130
 msgid " Error in replacement format string. "
-msgstr ""
+msgstr " Virhe korvaavassa merkkijonossa. "
 
 #: gtkedit/editcmd.c:2158
 #, c-format
 msgid " %ld replacements made. "
-msgstr ""
+msgstr " %ld korvausta tehty. "
 
 #: gtkedit/editcmd.c:2161 gtkedit/editcmd.c:2230
 msgid " Search string not found. "
-msgstr ""
+msgstr " Hakumerkkijonoa ei löytynyt. "
 
 #. Confirm 'Quit' dialog box
 #: gtkedit/editcmd.c:2254 gtkedit/editcmd.c:2269 gtkedit/editcmd.c:2272
 msgid " Quit "
-msgstr ""
+msgstr " Poistu "
 
 #: gtkedit/editcmd.c:2255 gtkedit/editcmd.c:2273
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
+" Tekstiä on muokattu ilman tallentamista.\n"
+" Tallennetaanko lopetettaessa? "
 
 #: gtkedit/editcmd.c:2269
 msgid " File was modified, Save with exit? "
-msgstr ""
+msgstr " Tiedostoa on muutettu, tallennetaanko lopetettaessa? "
 
 #: gtkedit/editcmd.c:2269
 msgid "Cancel quit"
-msgstr ""
+msgstr "Peruuta lopetus"
 
 #: gtkedit/editcmd.c:2269 src/cmd.c:251 src/file.c:1859 src/file.c:2233
 #: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
-msgstr ""
+msgstr "&Kyllä"
 
 #: gtkedit/editcmd.c:2269 src/cmd.c:251 src/file.c:1859 src/file.c:2233
 #: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
-msgstr ""
+msgstr "&Ei"
 
 #: gtkedit/editcmd.c:2273
 msgid " &Cancel quit "
-msgstr ""
+msgstr " &Peruuta lopetus "
 
 #: gtkedit/editcmd.c:2273
 msgid " &Yes "
-msgstr ""
+msgstr " &Kyllä "
 
 #: gtkedit/editcmd.c:2273
 msgid " &No "
-msgstr ""
+msgstr " &Ei "
 
 #: gtkedit/editcmd.c:2476 gtkedit/editcmd.c:2551
 msgid " Copy to clipboard "
-msgstr ""
+msgstr " Kopioi leikepöydälle"
 
 #: gtkedit/editcmd.c:2476 gtkedit/editcmd.c:2498 gtkedit/editcmd.c:2551
 #: gtkedit/editcmd.c:2564
 msgid " Unable to save to file. "
-msgstr ""
+msgstr " Ei voitu tallentaa tiedostoon. "
 
 #: gtkedit/editcmd.c:2498 gtkedit/editcmd.c:2564
 msgid " Cut to clipboard "
-msgstr ""
+msgstr " Leikkaa leikepöydälle "
 
 #: gtkedit/editcmd.c:2586 gtkedit/editcmd.c:2590 gtkedit/editcmd.c:2595
 #: gtkedit/editcmd.c:2598 src/view.c:1888
 msgid " Goto line "
-msgstr ""
+msgstr " Siirry riville "
 
 #: gtkedit/editcmd.c:2586 gtkedit/editcmd.c:2590 gtkedit/editcmd.c:2595
 #: gtkedit/editcmd.c:2598
 msgid " Enter line: "
-msgstr ""
+msgstr " Anna rivi: "
 
 #: gtkedit/editcmd.c:2619 gtkedit/editcmd.c:2636
 msgid " Save Block "
-msgstr ""
+msgstr " Tallenna valinta "
 
 #: gtkedit/editcmd.c:2670
 msgid " Insert File "
-msgstr ""
+msgstr " Liitä tiedosto "
 
 #: gtkedit/editcmd.c:2685
 msgid " Insert file "
-msgstr ""
+msgstr " Liitä tiedosto "
 
 #: gtkedit/editcmd.c:2685
 msgid " Error trying to insert file. "
-msgstr ""
+msgstr " Virhe liitettäessä tiedostoa. "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2705
 msgid " Sort block "
-msgstr ""
+msgstr " Järjestä valinta "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2705 gtkedit/editcmd.c:2759
 msgid " You must first highlight a block of text. "
-msgstr ""
+msgstr " Sinun täytyy ensin valita lohko tekstiä. "
 
 #: gtkedit/editcmd.c:2712
 msgid " Run Sort "
-msgstr ""
+msgstr " Aja sort-järjestäjä "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2714
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
+msgstr " Anna sortin valitsimet (ks. manuaalisivu) välein erotettuna: "
 
 #: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2731
 msgid " Sort "
-msgstr ""
+msgstr " Järjestä "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2727
 msgid " Error trying to execute sort command "
-msgstr ""
+msgstr " Virhe suoritettaessa sort-komentoa "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2733
 msgid " Sort returned non-zero: "
-msgstr ""
+msgstr " Sort palautti virhearvon: "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2757 gtkedit/editcmd.c:2787
 msgid " Process block "
-msgstr ""
+msgstr " Käsittele valinta "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2789
 msgid " Error trying to stat file "
-msgstr ""
+msgstr " Virhe hakiessa tietoja tiedostosta "
 
 #: gtkedit/editcmd.c:2859
 msgid " Mail "
-msgstr ""
+msgstr " Posti "
 
 #: gtkedit/editcmd.c:2872
 msgid " Copies to"
-msgstr ""
+msgstr " Kopiot"
 
 #: gtkedit/editcmd.c:2876
 msgid " Subject"
-msgstr ""
+msgstr " Aihe"
 
 #: gtkedit/editcmd.c:2880
 msgid " To"
-msgstr ""
+msgstr " Vastaanottaja"
 
 #: gtkedit/editcmd.c:2882
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr " mail -s <subject> -c <cc> <to>"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
-msgstr ""
+msgstr "Intuitiivinen"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
-msgstr ""
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:39
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
-msgstr ""
+msgstr "Dynaaminen kappalejako"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
-msgstr ""
+msgstr "Kirjoituskonekierto"
 
 #. 2
 #: gtkedit/editoptions.c:74
 msgid "Word wrap line length : "
-msgstr ""
+msgstr "Sanakierron rivipituus : "
 
 #. 4
 #: gtkedit/editoptions.c:80
 msgid "Tab spacing : "
-msgstr ""
+msgstr "Tabulaattoriväli : "
 
 #: gtkedit/editoptions.c:88
 msgid "synta&X highlighting"
-msgstr ""
+msgstr "syntaks&Ikorostus"
 
 #. 7
 #: gtkedit/editoptions.c:94
 msgid "confir&M before saving"
-msgstr ""
+msgstr "&Varmista ennen tallennusta"
 
 #. 8
 #: gtkedit/editoptions.c:97
 msgid "fill tabs with &Spaces"
-msgstr ""
+msgstr "täytä tabit &Välilyönnein"
 
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr ""
+msgstr "&Rivinvaihto sisentää"
 
 #. 10
 #: gtkedit/editoptions.c:103
 msgid "&Backspace through tabs"
-msgstr ""
+msgstr "&Poisto tuhoaa tabit"
 
 #. 11
 #: gtkedit/editoptions.c:106
 msgid "&Fake half tabs"
-msgstr ""
+msgstr "valepuolikas&Tabit"
 
 #. 13
 #: gtkedit/editoptions.c:112
 msgid "Wrap mode"
-msgstr ""
+msgstr "Kieromoodi"
 
 #. 15
 #: gtkedit/editoptions.c:118
 msgid "Key emulation"
-msgstr ""
+msgstr "Näppäimistöemulaatio"
 
 #: gtkedit/editoptions.c:159
 msgid " Editor options "
-msgstr ""
+msgstr " Muokkaimen valinnat "
 
 #. Not essential to translate
 #: gtkedit/editwidget.c:312
 msgid "Error initialising editor.\n"
-msgstr ""
+msgstr "Virhe alustaessa muokkainta.\n"
 
 #: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2351
 #: src/screen.c:2381 src/tree.c:1009 src/view.c:2018
 msgid "Help"
-msgstr ""
+msgstr "Ohje"
 
 #: gtkedit/editwidget.c:1067
 msgid "Mark"
-msgstr ""
+msgstr "Merkki"
 
 #: gtkedit/editwidget.c:1068
 msgid "Replac"
-msgstr ""
+msgstr "Korvaa"
 
 #: gtkedit/editwidget.c:1074 src/main.c:1707
 msgid "PullDn"
-msgstr ""
+msgstr "Vedä alas"
 
 #: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1708 src/view.c:2020
 #: src/view.c:2040
 msgid "Quit"
-msgstr ""
+msgstr "Lopeta"
 
 #: gtkedit/editmenu.c:57
 msgid " Word wrap "
-msgstr ""
+msgstr " Sanakierto "
 
 #. Not essential to translate
 #: gtkedit/editmenu.c:59
 msgid " Enter line length, 0 for off: "
-msgstr ""
+msgstr " Anna rivinpituus, 0 kytkee pois: "
 
 #: gtkedit/editmenu.c:70
 msgid " About "
-msgstr ""
+msgstr " Tietoja "
 
 #: gtkedit/editmenu.c:71
 msgid ""
@@ -2201,439 +2222,448 @@ msgid ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+"   Copyright (C) 1996 Free Software Foundation\n"
+"\n"
+"       Käyttäjäystävällinen tekstinmuokkain\n"
+"           Midnight Commanderia varten.\n"
 
 #: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
 msgid "&Open/load...     C-o"
-msgstr ""
+msgstr "&Avaa/lataa...    C-o"
 
 #: gtkedit/editmenu.c:120
 msgid "&New              C-n"
-msgstr ""
+msgstr "&Uusi             C-n"
 
 #: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
 msgid "&Save              F2"
-msgstr ""
+msgstr "&Tallenna          F2"
 
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
 msgid "save &As...       F12"
-msgstr ""
+msgstr "tallenna &Nimellä... F12"
 
 #: gtkedit/editmenu.c:125 gtkedit/editmenu.c:141
 msgid "&Insert file...   F15"
-msgstr ""
+msgstr "&Liitä tiedosto... F15"
 
 #: gtkedit/editmenu.c:126
 msgid "copy to &File...  C-f"
-msgstr ""
+msgstr "&Kopioi tiedostoon... C-f"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
 msgid "a&Bout...            "
-msgstr ""
+msgstr "t&Ietoja...          "
 
 #: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
 msgid "&Quit             F10"
-msgstr ""
+msgstr "&Lopeta           F10"
 
 #: gtkedit/editmenu.c:136
 msgid "&New            C-x k"
-msgstr ""
+msgstr "&Uusi           C-x k"
 
 #: gtkedit/editmenu.c:142
 msgid "copy to &File...     "
-msgstr ""
+msgstr "&kopioi tiedostoon... "
 
 #: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
 msgid "&Toggle Mark       F3"
-msgstr ""
+msgstr "&Aseta merkki      F3"
 
 #: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "&Merkitse sarakkeet S-F3"
 
 #: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
 msgid "toggle &Ins/overw Ins"
-msgstr ""
+msgstr "aseta &Ylikirjoitus"
 
 #: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Copy              F5"
-msgstr ""
+msgstr "&Kopioi            F5"
 
 #: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Move              F6"
-msgstr ""
+msgstr "&Siirrä            F6"
 
 #: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
 msgid "&Delete            F8"
-msgstr ""
+msgstr "&Tuhoa             F8"
 
 #: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
 msgid "&Undo             C-u"
-msgstr ""
+msgstr "&Peruuta          C-u"
 
 #: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Beginning     C-PgUp"
-msgstr ""
+msgstr "&Alku          C-PgUp"
 
 #: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
 msgid "&End           C-PgDn"
-msgstr ""
+msgstr "&Loppu         C-PgDn"
 
 #: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
 msgid "&Search...         F7"
-msgstr ""
+msgstr "&Etsi...           F7"
 
 #: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
 msgid "search &Again     F17"
-msgstr ""
+msgstr "etsi &Uudestaan   F17"
 
 #: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
 msgid "&Replace...        F4"
-msgstr ""
+msgstr "&Korvaa...         F4"
 
 #: gtkedit/editmenu.c:199 gtkedit/editmenu.c:221
 msgid "&Goto line...            M-l"
-msgstr ""
+msgstr "&Siirry riville...       M-l"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
 msgid "insert &Literal...       C-q"
-msgstr ""
+msgstr "lisää &merkki...         C-q"
 
 #: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
 msgid "&Refresh screen          C-l"
-msgstr ""
+msgstr "&Virkistä näyttö         C-l"
 
 #: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
 msgid "&Start record macro      C-r"
-msgstr ""
+msgstr "&Aloita makron nauhoitus C-r"
 
 #: gtkedit/editmenu.c:206 gtkedit/editmenu.c:228
 msgid "&Finish record macro...  C-r"
-msgstr ""
+msgstr "&Lopeta makron nauhoitus... C-r"
 
 #: gtkedit/editmenu.c:207
 msgid "&Execute macro...   C-a, KEY"
-msgstr ""
+msgstr "&Suorita makro...   C-a, KEY"
 
 #: gtkedit/editmenu.c:208 gtkedit/editmenu.c:230
 msgid "delete macr&O...            "
-msgstr ""
+msgstr "poista makr&O...            "
 
 #: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
 msgid "insert &Date/time           "
-msgstr ""
+msgstr "lisää &Päiväys              "
 
 #: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
 msgid "format p&Aragraph        M-p"
-msgstr ""
+msgstr "muotoile &Kappale        M-p"
 
 #: gtkedit/editmenu.c:213
 msgid "'ispell' s&Pell check    C-p"
-msgstr ""
+msgstr "'is&Pell' tarkistus       C-p"
 
 #: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
 msgid "sor&T...                 M-t"
-msgstr ""
+msgstr "&Järjestä...             M-t"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:237
 msgid "'indent' &C Formatter    F19"
-msgstr ""
+msgstr "'indent' &C-muotoilija   F19"
 
 #: gtkedit/editmenu.c:216
 msgid "&Mail...                    "
-msgstr ""
+msgstr "&Postit...                  "
 
 #: gtkedit/editmenu.c:229
 msgid "&Execute macro... C-x e, KEY"
-msgstr ""
+msgstr "&Suorita makro... C-x e, KEY"
 
 #: gtkedit/editmenu.c:235
 msgid "'ispell' s&Pell check    M-$"
-msgstr ""
+msgstr "'is&Pell' tarkistus      M-$"
 
 #: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
 msgid "&General...  "
-msgstr ""
+msgstr "&Yleistä...  "
 
 #: gtkedit/editmenu.c:245 gtkedit/editmenu.c:254
 msgid "&Save mode..."
-msgstr ""
+msgstr "&Tallennusmoodi..."
 
 #: gtkedit/editmenu.c:247 gtkedit/editmenu.c:256 src/main.c:1339
 msgid "&Layout..."
-msgstr ""
+msgstr "&Muotoilu..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:392
 #: src/chmod.c:164 src/chown.c:130
 msgid " File "
-msgstr ""
+msgstr " Tiedosto "
 
 #: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276 gtkedit/editmenu.c:408
 msgid " Edit "
-msgstr ""
+msgstr " Muokkaa "
 
 #: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277
 msgid " Sear/Repl "
-msgstr ""
+msgstr " Etsi/Korvaa "
 
 #: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278 gtkedit/editmenu.c:448
 msgid " Command "
-msgstr ""
+msgstr " Komento "
 
 #: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279
 msgid " Options "
-msgstr ""
+msgstr " Valinnat "
 
 #: gtkedit/editmenu.c:393
 msgid "Open...\tC-o"
-msgstr ""
+msgstr "Avaa...\tC-o"
 
 #: gtkedit/editmenu.c:394
 msgid "New\tC-n"
-msgstr ""
+msgstr "Uusi\tC-n"
 
 #: gtkedit/editmenu.c:396
 msgid "Save\tF2"
-msgstr ""
+msgstr "Tallenna\tF2"
 
 #: gtkedit/editmenu.c:397
 msgid "Save as...\tF12"
-msgstr ""
+msgstr "Tallenna nimellä...\tF12"
 
 #: gtkedit/editmenu.c:399
 msgid "Insert file...\tF15"
-msgstr ""
+msgstr "Liitä tiedosto...\tF15"
 
 #: gtkedit/editmenu.c:400
 msgid "Copy to file...\tC-f"
-msgstr ""
+msgstr "Kopioi tiedostoon...\tC-f"
 
 #. Tool hint
 #: gtkedit/editmenu.c:403
 msgid "Disk operations"
-msgstr ""
+msgstr "Levytoiminnot"
 
 #: gtkedit/editmenu.c:409
 msgid "Toggle mark\tF3"
-msgstr ""
+msgstr "Aseta merkki\tF3"
 
 #: gtkedit/editmenu.c:410
 msgid "Toggle mark columns\tC-b"
-msgstr ""
+msgstr "Aseta merkkisarakkeet\tC-b"
 
 #: gtkedit/editmenu.c:412
 msgid "Toggle book mark\tC-M-Ins"
-msgstr ""
+msgstr "Aseta kirjanmerkki\tC-M-Ins"
 
 #: gtkedit/editmenu.c:413
 msgid "Previous book mark\tC-M-Up"
-msgstr ""
+msgstr "Edellinen kirjanmerkki\tC-M-Up"
 
 #: gtkedit/editmenu.c:414
 msgid "Next book mark\tC-M-Down"
-msgstr ""
+msgstr "Seuraava kirjanmerkki\tC-M-Down"
 
 #: gtkedit/editmenu.c:415
 msgid "Flush book marks"
-msgstr ""
+msgstr "Poista kirjanmerkit"
 
 #: gtkedit/editmenu.c:417
 msgid "Toggle insert/overwrite\tIns"
-msgstr ""
+msgstr "Aseta ylikirjoitus\tIns"
 
 #: gtkedit/editmenu.c:419
 msgid "Copy block to cursor\tF5"
-msgstr ""
+msgstr "Kopioi valinta kursoriin\tF5"
 
 #: gtkedit/editmenu.c:420
 msgid "Move block to cursor\tF6"
-msgstr ""
+msgstr "Siirrä valinta kursoriin\tF6"
 
 #: gtkedit/editmenu.c:421
 msgid "Delete block\tF8/C-Del"
-msgstr ""
+msgstr "Tuhoa valinta\tF8/C-Del"
 
 #: gtkedit/editmenu.c:423
 msgid "Copy block to clipbrd\tC-Ins"
-msgstr ""
+msgstr "Kopioi valinta leikepöydälle\tC-Ins"
 
 #: gtkedit/editmenu.c:424
 msgid "Cut block to clipbrd\tS-Del"
-msgstr ""
+msgstr "Leikkaa valinta leikepöydälle\tS-Del"
 
 #: gtkedit/editmenu.c:425
 msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
+msgstr "Liimaa valinta leikepöydältä\tS-Ins"
 
 #: gtkedit/editmenu.c:426
 msgid "Selection history\tM-Ins"
-msgstr ""
+msgstr "Valintahistoria\tM-Ins"
 
 #: gtkedit/editmenu.c:428
 msgid "Undo\tC-BackSpace"
-msgstr ""
+msgstr "Peruuta\tC-BackSpace"
 
 #. Tool hint
 #: gtkedit/editmenu.c:431
 msgid "Manipulating blocks of text"
-msgstr ""
+msgstr "Tekstivalintojen muokkaus"
 
 #: gtkedit/editmenu.c:436
 msgid " Srch/Replce "
-msgstr ""
+msgstr " Etsi/Korvaa "
 
 #: gtkedit/editmenu.c:437
 msgid "Search...\tF7"
-msgstr ""
+msgstr "Etsi...\tF7"
 
 #: gtkedit/editmenu.c:438
 msgid "Search again\tF17"
-msgstr ""
+msgstr "Etsi uudestaan\tF17"
 
 #: gtkedit/editmenu.c:439
 msgid "Replace...\tF4"
-msgstr ""
+msgstr "Korvaa...\tF4"
 
 #: gtkedit/editmenu.c:440
 msgid "Replace again\tF14"
-msgstr ""
+msgstr "Korvaa uudestaan\tF14"
 
 #. Tool hint
 #: gtkedit/editmenu.c:443
 msgid "Search for and replace text"
-msgstr ""
+msgstr "Etsi ja korvaa tekstiä"
 
 #: gtkedit/editmenu.c:449
 msgid "Goto line...\tM-l"
-msgstr ""
+msgstr "Siirry riville...\tM-l"
 
 #: gtkedit/editmenu.c:451
 msgid "Start record macro\tC-r"
-msgstr ""
+msgstr "Aloita makron tallennus\tC-r"
 
 #: gtkedit/editmenu.c:452
 msgid "Finish record macro...\tC-r"
-msgstr ""
+msgstr "Lopeta makron tallennus...\tC-r"
 
 #: gtkedit/editmenu.c:453
 msgid "Execute macro...\tC-a, KEY"
-msgstr ""
+msgstr "Suorita makro...\tC-a, KEY"
 
 #: gtkedit/editmenu.c:454
 msgid "Delete macro...\t"
-msgstr ""
+msgstr "Poista makro...\t"
 
 #: gtkedit/editmenu.c:456
 msgid "Insert date/time\tC-d"
-msgstr ""
+msgstr "Lisää päiväys\tC-d"
 
 #: gtkedit/editmenu.c:457
 msgid "Format paragraph\tM-p"
-msgstr ""
+msgstr "Muotoile kappale\tM-p"
 
 #: gtkedit/editmenu.c:459
 msgid "Refresh display\tC-l"
-msgstr ""
+msgstr "Virkistä näyttö\tC-l"
 
 #. Tool hint
 #: gtkedit/editmenu.c:462
 msgid "Macros and internal commands"
-msgstr ""
+msgstr "Makrot ja sisäiset komennot"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
-msgstr ""
+msgstr "&Kuittaa"
 
 #: gtkedit/gtkedit.c:66
 msgid " Enter file name: "
-msgstr ""
+msgstr " Anna tiedostonimi: "
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-msgstr ""
+msgstr "The Quick Brown Fox Jumps Over The Lazy Dog"
 
 #: gtkedit/gtkedit.c:802
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
+"gtkedit.c: HOME-ympäristömuuttujaa ei ole määritelty eikä passwd:sta löydy "
+"tietoja - keskeytetään.\n"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
-msgstr ""
+msgstr "Tyhjennä muokkauspuskuri"
 
 #: gtkedit/gtkedit.c:1295
 msgid "Insert File"
-msgstr ""
+msgstr "Liitä tiedosto"
 
 #: gtkedit/gtkedit.c:1295
 msgid "Insert text from a file"
-msgstr ""
+msgstr "Liitä tekstiä tiedostosta"
 
 #: gtkedit/gtkedit.c:1297
 msgid "Copy to file"
-msgstr ""
+msgstr "Kopioi tiedostoon"
 
 #: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
-msgstr ""
+msgstr "Kopioi lohko tiedostoon"
 
 #: gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
-msgstr ""
+msgstr "Etsi/Korvaa"
 
 #: gtkedit/syntax.c:1339 gtkedit/syntax.c:1346
 msgid " Load syntax file "
-msgstr ""
+msgstr " Lataa syntaksitiedosto "
 
 #: gtkedit/syntax.c:1339
 msgid " File access error "
-msgstr ""
+msgstr " Tiedosto-oikeusvirhe "
 
 #: gtkedit/syntax.c:1345
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr ""
+msgstr " Virhe tiedostossa %s rivillä %d "
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
-msgstr ""
+msgstr "&Aseta"
 
 #: src/achown.c:73
 msgid "S&kip"
-msgstr ""
+msgstr "&Ohita"
 
 #: src/achown.c:74 src/chmod.c:119 src/chown.c:83
 msgid "Set &all"
-msgstr ""
+msgstr "Aseta &kaikki"
 
 #: src/achown.c:362 src/achown.c:369
 msgid "owner"
-msgstr ""
+msgstr "omistaja"
 
 #: src/achown.c:364 src/achown.c:371
 msgid "group"
-msgstr ""
+msgstr "ryhmä"
 
 #: src/achown.c:366
 msgid "other"
-msgstr ""
+msgstr "muut"
 
 #: src/achown.c:374
 msgid "On"
-msgstr ""
+msgstr "Päällä"
 
 #: src/achown.c:376
 msgid "Flag"
-msgstr ""
+msgstr "Lippo"
 
 #: src/achown.c:383
 #, c-format
 msgid "%6d of %d"
-msgstr ""
+msgstr "%6d %d:sta"
 
 #: src/achown.c:391
 msgid " Chown advanced command "
-msgstr ""
+msgstr " Chown - edistynyt komento "
 
 #: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:285
 #: src/chmod.c:370
@@ -2642,6 +2672,8 @@ msgid ""
 " Couldn't chmod \"%s\" \n"
 " %s "
 msgstr ""
+" chmod \"%s\" epäonnistui\n"
+" %s "
 
 #: src/achown.c:634 src/achown.c:649 src/achown.c:712 src/chown.c:223
 #: src/chown.c:345
@@ -2650,474 +2682,480 @@ msgid ""
 " Couldn't chown \"%s\" \n"
 " %s "
 msgstr ""
+" chown \"%s\" epäonnistui\n"
+" %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
 #: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:624
 msgid " Oops... "
-msgstr ""
+msgstr " Hups... "
 
 #: src/achown.c:667
 msgid " I can't run the Advanced Chown command on an extfs "
-msgstr ""
+msgstr " Edistynyttä chown:ia ei voida suorittaa extfs:lle "
 
 #: src/achown.c:671
 msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr ""
+msgstr " Edistynyttä chown:ia ei voida suorittaa tarfs:lle "
 
 #: src/background.c:181
 msgid "Background process:"
-msgstr ""
+msgstr "Taustaprosessi:"
 
 #: src/background.c:287 src/file.c:2173
 msgid " Background process error "
-msgstr ""
+msgstr " Taustaprosessivirhe "
 
 #: src/background.c:294
 msgid " Child died unexpectedly "
-msgstr ""
+msgstr " Lapsiprosessi kuoli odottamattomasti "
 
 #: src/background.c:296
 msgid " Unknown error in child "
-msgstr ""
+msgstr " Tuntematon virhe lapsiprosessissa "
 
 #: src/background.c:311
 msgid " Background protocol error "
-msgstr ""
+msgstr " Taustaprotokollavirhe "
 
 #: src/background.c:312
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
+" Taustaprosessi lähetti pyynnön koskien liian montaa parametria.\n"
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr ""
+msgstr " Listausmoodi "
 
 #: src/boxes.c:68
 msgid "&Full file list"
-msgstr ""
+msgstr "&Täysi tiedostolista"
 
 #: src/boxes.c:69
 msgid "&Brief file list"
-msgstr ""
+msgstr "&Lyhyt tiedostolista"
 
 #: src/boxes.c:70
 msgid "&Long file list"
-msgstr ""
+msgstr "&Pitkä tiedostolista"
 
 #: src/boxes.c:71
 msgid "&User defined:"
-msgstr ""
+msgstr "&Oma tiedostolista:"
 
 #: src/boxes.c:72
 msgid "&Icon view"
-msgstr ""
+msgstr "&Ikoninäyttö"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
-msgstr ""
+msgstr "&Minitila"
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr ""
+msgstr "Listausmoodi"
 
 #: src/boxes.c:280
 msgid "&Reverse"
-msgstr ""
+msgstr "&Käänteinen"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
-msgstr ""
+msgstr "&Isot/pienet eroavat"
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr ""
+msgstr "Järjestys"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
-msgstr ""
+msgstr " varmista &Lopetus "
 
 #: src/boxes.c:383
 msgid " confirm e&Xecute "
-msgstr ""
+msgstr " varmista &Suoritus "
 
 #: src/boxes.c:385
 msgid " confirm o&Verwrite "
-msgstr ""
+msgstr " vamista &Ylikirjoitus "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr ""
+msgstr " varmista &Poisto "
 
 #: src/boxes.c:393
 msgid " Confirmation "
-msgstr ""
+msgstr " Varmistus "
 
 #: src/boxes.c:461
 msgid "Full 8 bits output"
-msgstr ""
+msgstr "Täysi 8-bittinen tuloste"
 
 #: src/boxes.c:461
 msgid "ISO 8859-1"
-msgstr ""
+msgstr "ISO 8859-1"
 
 #: src/boxes.c:461
 msgid "7 bits"
-msgstr ""
+msgstr "7-bittinen"
 
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
-msgstr ""
+msgstr "Täysi &8-bittinen syöte"
 
 #: src/boxes.c:476
 msgid " Display bits "
-msgstr ""
+msgstr " Näytä bitit "
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
-msgstr ""
+msgstr "Käytä aina &ftp-proxyä"
 
 #: src/boxes.c:653
 msgid "sec"
-msgstr ""
+msgstr "sek."
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
-msgstr ""
+msgstr "ftpfs:n hakemistovälimuistin aikaraja: "
 
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
-msgstr ""
+msgstr "anonyymi-ftp:n salasana:"
 
 #: src/boxes.c:668
 msgid "Timeout for freeing VFSs:"
-msgstr ""
+msgstr "Aikaraja VFS:ien vapauttamiseen:"
 
 #: src/boxes.c:674
 msgid " Virtual File System Setting "
-msgstr ""
+msgstr " VFS - virtuaalitiedostojärjestelmäasetus "
 
 #: src/boxes.c:740
 msgid "Quick cd"
-msgstr ""
+msgstr "Pikainen hakemistonvaihto"
 
 #. want cd like completion
 #: src/boxes.c:745
 msgid "cd"
-msgstr ""
+msgstr "Hakemistonvaihto"
 
 #: src/boxes.c:796
 msgid "Symbolic link"
-msgstr ""
+msgstr "Symbolinen linkki"
 
 #: src/boxes.c:833
 msgid "Running "
-msgstr ""
+msgstr "Suoritetaan "
 
 #: src/boxes.c:834 src/find.c:716 src/find.c:957
 msgid "Stopped"
-msgstr ""
+msgstr "Pysäytetty"
 
 #: src/boxes.c:895
 msgid "&Stop"
-msgstr ""
+msgstr "&Pysäytä"
 
 #: src/boxes.c:896
 msgid "&Resume"
-msgstr ""
+msgstr "&Jatka"
 
 #: src/boxes.c:897
 msgid "&Kill"
-msgstr ""
+msgstr "&Tapa"
 
 #: src/boxes.c:936
 msgid "Background Jobs"
-msgstr ""
+msgstr "Taustatyöt"
 
 #: src/chmod.c:95
 msgid "execute/search by others"
-msgstr ""
+msgstr "suoritus/haku muilla"
 
 #: src/chmod.c:96
 msgid "write by others"
-msgstr ""
+msgstr "kirjoitus muilla"
 
 #: src/chmod.c:97
 msgid "read by others"
-msgstr ""
+msgstr "luku muilla"
 
 #: src/chmod.c:98
 msgid "execute/search by group"
-msgstr ""
+msgstr "suorits/haku ryhmällä"
 
 #: src/chmod.c:99
 msgid "write by group"
-msgstr ""
+msgstr "kirjoitus ryhmällä"
 
 #: src/chmod.c:100
 msgid "read by group"
-msgstr ""
+msgstr "luku ryhmällä"
 
 #: src/chmod.c:101
 msgid "execute/search by owner"
-msgstr ""
+msgstr "suoritus/haku omistajalla"
 
 #: src/chmod.c:102
 msgid "write by owner"
-msgstr ""
+msgstr "kirjoitus omistajalla"
 
 #: src/chmod.c:103
 msgid "read by owner"
-msgstr ""
+msgstr "luku omistajalla"
 
 #: src/chmod.c:104
 msgid "sticky bit"
-msgstr ""
+msgstr "tahmabitti"
 
 #: src/chmod.c:105
 msgid "set group ID on execution"
-msgstr ""
+msgstr "aseta GID suoritettaessa"
 
 #: src/chmod.c:106
 msgid "set user ID on execution"
-msgstr ""
+msgstr "aseta UID suoritettaessa"
 
 #: src/chmod.c:116
 msgid "C&lear marked"
-msgstr ""
+msgstr "&Tyhjennä merkityt"
 
 #: src/chmod.c:117
 msgid "S&et marked"
-msgstr ""
+msgstr "&Aseta merkityt"
 
 #: src/chmod.c:118
 msgid "&Marked all"
-msgstr ""
+msgstr "&Kaikki merkityt"
 
 #: src/chmod.c:152
 msgid "Permissions (Octal)"
-msgstr ""
+msgstr "Oikeudet (oktaalisena)"
 
 #: src/chmod.c:154
 msgid "Owner name"
-msgstr ""
+msgstr "Omistajan nimi"
 
 #: src/chmod.c:156
 msgid "Group name"
-msgstr ""
+msgstr "Ryhmän nimi"
 
 #: src/chmod.c:160
 msgid " Chmod command "
-msgstr ""
+msgstr " Chmod-komento "
 
 #: src/chmod.c:162 src/chown.c:120
 msgid " Permission "
-msgstr ""
+msgstr " Oikeudet "
 
 #: src/chmod.c:169
 msgid "Use SPACE to change"
-msgstr ""
+msgstr "Välilyönti muuttaa"
 
 #: src/chmod.c:171
 msgid "an option, ARROW KEYS"
-msgstr ""
+msgstr "valintaa, nuolinäppäimet"
 
 #: src/chmod.c:173
 msgid "to move between options"
-msgstr ""
+msgstr "liikkuvat valinnoissa,"
 
 #: src/chmod.c:175
 msgid "and T or INS to mark"
-msgstr ""
+msgstr "T/INS merkitsevät"
 
 #: src/chmod.c:233
 msgid "Chmod command"
-msgstr ""
+msgstr "Chmod-komento"
 
 #: src/chmod.c:321
 msgid " I can't run the Chmod command on an extfs "
-msgstr ""
+msgstr " En voi ajaa Chmod-komentoa extfs:lle "
 
 #: src/chown.c:81
 msgid "Set &users"
-msgstr ""
+msgstr "Aseta &käyttäjät"
 
 #: src/chown.c:82
 msgid "Set &groups"
-msgstr ""
+msgstr "Aseta &ryhmät"
 
 #: src/chown.c:112
 msgid " Name "
-msgstr ""
+msgstr " Nimi "
 
 #: src/chown.c:114
 msgid " Owner name "
-msgstr ""
+msgstr " Omistajan nimi "
 
 #: src/chown.c:116 src/chown.c:128
 msgid " Group name "
-msgstr ""
+msgstr " Ryhmän nimi "
 
 #: src/chown.c:118
 msgid " Size "
-msgstr ""
+msgstr " Koko "
 
 #: src/chown.c:124
 msgid " Chown command "
-msgstr ""
+msgstr " Chown-komento "
 
 #: src/chown.c:126
 msgid " User name "
-msgstr ""
+msgstr " Käyttäjän nimi "
 
 #: src/chown.c:192
 msgid "<Unknown user>"
-msgstr ""
+msgstr "<Tuntematon käyttäjä>"
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:193
 msgid "<Unknown group>"
-msgstr ""
+msgstr "<Tuntematon ryhmä>"
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on an extfs "
-msgstr ""
+msgstr " En voi suorittaa Chown-komentoa extfs:lle "
 
 #: src/chown.c:265
 msgid " I can't run the Chown command on a tarfs "
-msgstr ""
+msgstr " En voi suorittaa Chown-komentoa tarfs:lle "
 
 #: src/cmd.c:200
 #, c-format
 msgid " Can not fetch a local copy of %s "
-msgstr ""
+msgstr " En voi noutaa paikallista kopiota %s:sta "
 
 #: src/cmd.c:250
 msgid " CD "
-msgstr ""
+msgstr " CD "
 
 #: src/cmd.c:250
 msgid "Files tagged, want to cd?"
-msgstr ""
+msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
 
 #: src/cmd.c:256 src/cmd.c:715 src/cmd.c:729
 msgid "Could not change directory"
-msgstr ""
+msgstr "Ei voitu vaihtaa hakemistoa"
 
 #: src/cmd.c:285
 msgid " View file "
-msgstr ""
+msgstr " Näytä tiedosto "
 
 #: src/cmd.c:285
 msgid " Filename:"
-msgstr ""
+msgstr " Tiedostonimi:"
 
 #: src/cmd.c:302
 msgid " Filtered view "
-msgstr ""
+msgstr " Suodatettu näkymä "
 
 #: src/cmd.c:302
 msgid " Filter command and arguments:"
-msgstr ""
+msgstr " Suodinkomento ja parametrit:"
 
 #: src/cmd.c:390
 msgid "Create a new Directory"
-msgstr ""
+msgstr "Luo uusi hakemisto"
 
 #: src/cmd.c:390
 msgid " Enter directory name:"
-msgstr ""
+msgstr " Anna hakemiston nimi:"
 
 #: src/cmd.c:451
 msgid " Filter "
-msgstr ""
+msgstr " Suodatin "
 
 #: src/cmd.c:451
 msgid " Set expression for filtering filenames"
-msgstr ""
+msgstr " Anna lauseke tiedostonimien suodattamiseen"
 
 #: src/cmd.c:517
 msgid " Select "
-msgstr ""
+msgstr " Valitse "
 
 #: src/cmd.c:569
 msgid " Unselect "
-msgstr ""
+msgstr " Poista valinta"
 
 #: src/cmd.c:642
 msgid "Extension file edit"
-msgstr ""
+msgstr "Laajennustiedoston muokkaus"
 
 #: src/cmd.c:643
 msgid " Which extension file you want to edit? "
-msgstr ""
+msgstr " Mitä laajennustiedostoa haluat muokata? "
 
 #: src/cmd.c:644
 msgid "&User"
-msgstr ""
+msgstr "&Käyttäjä"
 
 #: src/cmd.c:644 src/cmd.c:670
 msgid "&System Wide"
-msgstr ""
+msgstr "&Järjestelmän laajuinen"
 
 #: src/cmd.c:667
 msgid "Menu file edit"
-msgstr ""
+msgstr "Valikkotiedoston muokkaus"
 
 #: src/cmd.c:668
 msgid " Which menu file will you edit? "
-msgstr ""
+msgstr " Mitä valikkotiedostoa haluat muokata? "
 
 #: src/cmd.c:670
 msgid "&Local"
-msgstr ""
+msgstr "&Paikallinen"
 
 #: src/cmd.c:670
 msgid "&Home"
-msgstr ""
+msgstr "&Koti"
 
 #: src/cmd.c:855
 msgid " Compare directories "
-msgstr ""
+msgstr " Vertaa hakemistoja "
 
 #: src/cmd.c:855
 msgid " Select compare method: "
-msgstr ""
+msgstr " Valitse vertaustapa: "
 
 #: src/cmd.c:856
 msgid "&Quick"
-msgstr ""
+msgstr "&Nopea"
 
 #: src/cmd.c:856
 msgid "&Size only"
-msgstr ""
+msgstr "&Vain koko"
 
 #: src/cmd.c:856
 msgid "&Thorough"
-msgstr ""
+msgstr "&Perusteellinen"
 
 #: src/cmd.c:866
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
+" Molempien paneelien tulisi olla listausnäkymässä tätä komentoa käyttääksesi"
 
 #: src/cmd.c:880
 msgid " The command history is empty "
-msgstr ""
+msgstr " Komentohistoria on tyhjä "
 
 #: src/cmd.c:886
 msgid " Command history "
-msgstr ""
+msgstr " Komentohistoria "
 
 #: src/cmd.c:928
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
+" Ei xterm tai Linux-konsoli; \n"
+" paneeleita ei voi asettaa. "
 
 #: src/cmd.c:967
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr ""
+msgstr "Kirjoita 'exit' palataksesi Midnight Commanderiin"
 
 #: src/cmd.c:1022
 #, c-format
@@ -3125,107 +3163,111 @@ msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
+" Ei voitu saada tietoja %s:sta \n"
+" %s "
 
 #: src/cmd.c:1031 src/cmd.c:1033
 msgid " Link "
-msgstr ""
+msgstr " Linkki "
 
 #: src/cmd.c:1032 src/cmd.c:1171 src/file.c:1685
 msgid " to:"
-msgstr ""
+msgstr " kohde:"
 
 #: src/cmd.c:1043
 #, c-format
 msgid " link: %s "
-msgstr ""
+msgstr " linkki: %s "
 
 #: src/cmd.c:1076
 #, c-format
 msgid " symlink: %s "
-msgstr ""
+msgstr " sym.link.: %s "
 
 #: src/cmd.c:1130
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr ""
+msgstr " Symbolinen linkki '%s' osoittaa kohteeseen: "
 
 #: src/cmd.c:1135
 msgid " Edit symlink "
-msgstr ""
+msgstr " Muokkaa symbolista linkkiä "
 
 #: src/cmd.c:1140
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr ""
+msgstr " symbolisen linkin muokkaus, ei voitu poistaa %s: %s "
 
 #: src/cmd.c:1144
 #, c-format
 msgid " edit symlink: %s "
-msgstr ""
+msgstr " muokkaa symbolista linkkiä: %s "
 
 #: src/cmd.c:1171
 msgid " Link symbolically "
-msgstr ""
+msgstr " Linkitä symbolisesti "
 
 #: src/cmd.c:1172
 msgid " Relative symlink "
-msgstr ""
+msgstr " Suhteellinen symbolinen linkki "
 
 #: src/cmd.c:1183
 #, c-format
 msgid " relative symlink: %s "
-msgstr ""
+msgstr " suhteellinen linkki: %s "
 
 #: src/cmd.c:1286
 msgid " Enter machine name (F1 for details): "
-msgstr ""
+msgstr " Anna koneen nimi (F1 antaa ohjeen): "
 
 #: src/cmd.c:1310
 #, c-format
 msgid " Could not chdir to %s "
-msgstr ""
+msgstr " Ei voitu vaihtaa hakemistoa %s:ksi "
 
 #: src/cmd.c:1317
 msgid " Link to a remote machine "
-msgstr ""
+msgstr " Linkki toiseen koneeseen "
 
 #: src/cmd.c:1323
 msgid " FTP to machine "
-msgstr ""
+msgstr " FTP koneeseen "
 
 #: src/cmd.c:1333
 msgid " Socket source routing setup "
-msgstr ""
+msgstr " Pistokkeen lähdereititysasetukset "
 
 #: src/cmd.c:1334
 msgid " Enter host name to use as a source routing hop: "
-msgstr ""
+msgstr " Anna lähdereitityshyppyyn käytettävän koneen nimi: "
 
 #: src/cmd.c:1341
 msgid " Host name "
-msgstr ""
+msgstr " Koneen nimi "
 
 #: src/cmd.c:1341
 msgid " Error while looking up IP address "
-msgstr ""
+msgstr " Virhe kyseltäessä IP-osoitetta "
 
 #: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
-msgstr ""
+msgstr " Palauta tuhottuja tiedostoja ext2-järjestelmästä "
 
 #: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
+" Anna laitetiedosto (ilman /dev/:iä) palauttaaksesi\n"
+"   tiedostoja: (F1 antaa ohjeen)"
 
 #: src/cmd.c:1403
 msgid " Setup saved to ~/"
-msgstr ""
+msgstr " Asetukset tallennettu ~/"
 
 #: src/cmd.c:1408
 msgid " Setup "
-msgstr ""
+msgstr " Asetukset "
 
 #: src/command.c:170
 #, c-format
@@ -3233,10 +3275,12 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
+" Ei voitu vaihtaa hakemistoa '%s':ksi \n"
+" %s "
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
-msgstr ""
+msgstr " Ei-paikallisesta tiedostojärjestelmästä ei voi suorittaa komentoja"
 
 #: src/dialog.c:56
 msgid ""
@@ -3247,72 +3291,78 @@ msgid ""
 "\n"
 "\n"
 msgstr ""
+"\n"
+"\n"
+"\n"
+"virkistyspinon alivuoto!\n"
+"\n"
+"\n"
 
 #: src/dir.c:61
 msgid "&Unsorted"
-msgstr ""
+msgstr "&Järjestämätön"
 
 #: src/dir.c:62
 msgid "&Name"
-msgstr ""
+msgstr "&Nimi"
 
 #: src/dir.c:63
 msgid "&Extension"
-msgstr ""
+msgstr "&Pääte"
 
 #: src/dir.c:64
 msgid "&Modify time"
-msgstr ""
+msgstr "&Muutosaika"
 
 #: src/dir.c:65
 msgid "&Access time"
-msgstr ""
+msgstr "&Lukuaika"
 
 #: src/dir.c:66
 msgid "&Change time"
-msgstr ""
+msgstr "&Luontiaika"
 
 #: src/dir.c:67
 msgid "&Size"
-msgstr ""
+msgstr "&Koko"
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr ""
+msgstr "&Inode"
 
 #. New sort orders
 #: src/dir.c:71
 msgid "&Type"
-msgstr ""
+msgstr "&Tyyppi"
 
 #: src/dir.c:72
 msgid "&Links"
-msgstr ""
+msgstr "&Linkkejä"
 
 #: src/dir.c:73
 msgid "N&GID"
-msgstr ""
+msgstr "N&GID"
 
 #: src/dir.c:74
 msgid "N&UID"
-msgstr ""
+msgstr "N&UID"
 
 #: src/dir.c:75
 msgid "&Owner"
-msgstr ""
+msgstr "&Omistaja"
 
 #: src/dir.c:76
 msgid "&Group"
-msgstr ""
+msgstr "&Ryhmä"
 
 #: src/dir.c:386
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr ""
+msgstr "Tiedosto on olemassa, mutta siitä ei saada tietoja: %s %s"
 
 #: src/dir.c:662
 msgid "Unknown"
-msgstr ""
+msgstr "Tuntematon"
 
 #: src/ext.c:137 src/user.c:507
 #, c-format
@@ -3320,30 +3370,32 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
+" Ei voitu luoda väliaikaiskomentotiedostoa \n"
+" %s "
 
 #: src/ext.c:151 src/user.c:534
 msgid " Parameter "
-msgstr ""
+msgstr " Parametri "
 
 #: src/ext.c:301
 msgid " Can't execute commands on a Virtual File System directory "
-msgstr ""
+msgstr " VFS-hakemistosta ei voida suorittaa komentoja "
 
 #: src/ext.c:398
 msgid " file error"
-msgstr ""
+msgstr " tiedostovirhe"
 
 #: src/ext.c:399
 msgid "Format of the "
-msgstr ""
+msgstr "Muoto: "
 
 #: src/ext.c:417
 msgid " file error "
-msgstr ""
+msgstr " tiedostovirhe "
 
 #: src/ext.c:418
 msgid "Format of the ~/"
-msgstr ""
+msgstr "Muoto: ~/"
 
 #: src/ext.c:418
 msgid ""
@@ -3351,36 +3403,41 @@ msgid ""
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
+" tiedosto on muuttunut\n"
+"versiosta 3.0. Halunnet joko kopioida\n"
+"sen "
 
 #: src/ext.c:420
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
+"mc.ext:stä tai käyttää ko.\n"
+"tiedostoa esimerkkinä omasi kirjoittamisessa.\n"
 
 #: src/ext.c:422
 msgid "mc.ext will be used for this moment."
-msgstr ""
+msgstr "mc.ext:iä käytetään toistaiseksi."
 
 #: src/file.c:154 src/tree.c:640
 msgid " Copy "
-msgstr ""
+msgstr " Kopioi "
 
 #: src/file.c:155 src/tree.c:678
 msgid " Move "
-msgstr ""
+msgstr " Siirrä "
 
 #: src/file.c:156 src/tree.c:746
 msgid " Delete "
-msgstr ""
+msgstr " Tuhoa "
 
 #: src/file.c:244
 msgid " Invalid target mask "
-msgstr ""
+msgstr " Virheellinen kohdemaski "
 
 #: src/file.c:342
 msgid " Could not make the hardlink "
-msgstr ""
+msgstr " Ei voitu luoda kovaa linkkiä "
 
 #: src/file.c:384
 #, c-format
@@ -3388,6 +3445,8 @@ msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
+" Ei voitu lukea lähdelinkkiä \"%s\" \n"
+" %s "
 
 #: src/file.c:394
 msgid ""
@@ -3395,6 +3454,9 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
+" Ei voida tehdä vakaita symbolisia linkkejä ei-paikallisten\n"
+" tiedostojärjestelmien välille.\n"
+" Valinta 'Vakaat symboliset linkit' ei vaikuta."
 
 #: src/file.c:442
 #, c-format
@@ -3402,6 +3464,8 @@ msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
+" Ei voitu luoda symbolista linkkiä \"%s\" \n"
+" %s "
 
 #: src/file.c:509
 #, c-format
@@ -3409,6 +3473,8 @@ msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
+" Ei voida ylikirjoittaa hakemistoa \"%s\" \n"
+" %s "
 
 #: src/file.c:518
 #, c-format
@@ -3416,11 +3482,13 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
+" Ei saada tietoja lähdetiedostosta \"%s\" \n"
+" %s "
 
 #: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
-msgstr ""
+msgstr " '%s' ja '%s' ovat sama tiedosto. "
 
 #: src/file.c:574
 #, c-format
@@ -3428,6 +3496,8 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
+" Ei voitu avata erityistiedostoa \"%s\" \n"
+" %s "
 
 #: src/file.c:583 src/file.c:812
 #, c-format
@@ -3435,6 +3505,8 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
+" Ei voitu muuttaa tiedoston \"%s\" omistajaa \n"
+" %s "
 
 #: src/file.c:592 src/file.c:831
 #, c-format
