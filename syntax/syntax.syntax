@@ -42,7 +42,7 @@ context default
     keyword whole magenta magenta
     keyword whole cyan cyan
     keyword whole lightgray lightgray
-    keyword whole gray lightgray
+    keyword whole gray gray black
     keyword whole brightred brightred
     keyword whole brightgreen brightgreen
     keyword whole yellow yellow

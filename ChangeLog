@@ -1,3 +1,7 @@
+2002-10-02  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/syntax.syntax: Fix highlighting for "gray".
+
 2002-10-01  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Expand $bindir and $datadir to show at the end.
