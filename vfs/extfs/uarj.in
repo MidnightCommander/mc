@@ -30,7 +30,6 @@ mcarjfs_list ()
 
    if ($0 ~ /^[0-9]+\) .*/) {
     filestr=$0
-#   file=substr($0, 6)
     sub(/^[0-9]*\) /, "")
     file=$0
     uid=uuid
@@ -56,7 +55,6 @@ mcarjfs_list ()
     owner=1
    }
   }'
- #2>/dev/null
 }
 
 
