@@ -1,3 +1,6 @@
+July 19, 1999 Elliot Lee
+	* Makefile.in: Remove doc-gnome* from codedirs variable. Fixes infinitely recursing make.
+
 1999-07-05  Miguel de Icaza  <miguel@gnu.org>
 
 	* Makefile.in (all): Makefile fix.
