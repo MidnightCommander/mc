@@ -42,7 +42,7 @@ if test -z "$MCVERSION" || test ! -f "$MCTARBALL"; then
 fi
 
 rm -f $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm
-rpm -tb "$MCTARBALL"
+rpmbuild -tb "$MCTARBALL"
 MC_RPM=`echo $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm`
 if test ! -f $MC_RPM; then
   echo "Failed to compile package!!!"
