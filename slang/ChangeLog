@@ -1,3 +1,7 @@
+2001-08-26  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am (AM_CPPFLAGS): Remove, it's not needed.
+
 2001-08-25  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Converted to ...
