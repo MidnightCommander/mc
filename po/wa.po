@@ -588,6 +588,8 @@ msgid ""
 "Could not stat %s\n"
 "%s"
 msgstr ""
+"Dji n' sai enonder li foncsion stat %s\n"
+"%s"
 
 #: gnome/gicon.c:154
 msgid "Default set of icons not found, please check your installation"
@@ -1639,7 +1641,7 @@ msgstr "Cawete:"
 #. NLS ?
 #: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
-msgstr " Aspougnî Môde Schaper "
+msgstr " Aspougnî Môde Schapaedje "
 
 #: gtkedit/editcmd.c:476
 msgid " Save As "
@@ -2088,7 +2090,7 @@ msgstr ""
 #. Not essential to translate
 #: gtkedit/editcmd.c:2786
 msgid " Error trying to stat file "
-msgstr ""
+msgstr " Yåk n' a nén stî come dji sayîve di fé on stat sol fitchî "
 
 # Viebe ou no?
 #: gtkedit/editcmd.c:2856
@@ -2269,7 +2271,7 @@ msgstr "copyî dins &Fitchî...  C-f"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
 msgid "a&Bout...            "
-msgstr "Å&dfait...                "
+msgstr "Å &dfait...               "
 
 #: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
 msgid "&Quit             F10"
@@ -2336,7 +2338,7 @@ msgid "&Goto line...            M-l"
 msgstr "&Potchî al roye...                 M-l"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
-msgid "insert &Literal...                  C-q"
+msgid "insert &Literal...       C-q"
 msgstr ""
 
 #: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
@@ -2591,7 +2593,7 @@ msgstr " No do fitchî: "
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-msgstr ""
+msgstr "Mi trûte a les balzins, co pés ki l' grîjhe cawe di m' pôve fayé vexhå !"
 
 #: gtkedit/gtkedit.c:802
 msgid ""
@@ -2674,7 +2676,7 @@ msgstr "%6d di %d"
 
 #: src/achown.c:391
 msgid " Chown advanced command "
-msgstr ""
+msgstr " Comande chown avanceye "
 
 #: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:285
 #: src/chmod.c:370
@@ -3178,6 +3180,8 @@ msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on stat %s \n"
+" %s "
 
 #: src/cmd.c:1029 src/cmd.c:1031
 msgid " Link "
@@ -3197,55 +3201,54 @@ msgstr " loyén: %s "
 msgid " symlink: %s "
 msgstr " loyén simbolike: %s "
 
-#  &&&
 #: src/cmd.c:1128
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr ""
+msgstr "'%s' e-st on loyén simbolike après: "
 
 #: src/cmd.c:1133
 msgid " Edit symlink "
-msgstr ""
+msgstr " Aspougnî li loyén simbolike "
 
 #: src/cmd.c:1138
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr ""
+msgstr " aspougnî li loyén simbolike, dji n' sai waester %s: %s "
 
 #: src/cmd.c:1142
 #, c-format
 msgid " edit symlink: %s "
-msgstr ""
+msgstr " aspougnî loyén simbolike : %s "
 
 #: src/cmd.c:1169
 msgid " Link symbolically "
-msgstr ""
+msgstr " Fé on loyén simbolike "
 
 #: src/cmd.c:1170
 msgid " Relative symlink "
-msgstr ""
+msgstr " Loyén simbolike relatif "
 
 #: src/cmd.c:1181
 #, c-format
 msgid " relative symlink: %s "
-msgstr ""
+msgstr " loyén simbolike relatif: %s "
 
 #: src/cmd.c:1284
 msgid " Enter machine name (F1 for details): "
-msgstr ""
+msgstr " Intrer li no di l' éndjole (F1 po ndè savu did pus): "
 
 #: src/cmd.c:1308
 #, c-format
 msgid " Could not chdir to %s "
-msgstr ""
+msgstr " Dji n' a savu fé on chdir viè %s "
 
 #: src/cmd.c:1315
 msgid " Link to a remote machine "
-msgstr ""
+msgstr " Loyén après ene éndjole å lon "
 
 #: src/cmd.c:1321
 msgid " FTP to machine "
-msgstr ""
+msgstr " FTP après ene éndjole "
 
 #: src/cmd.c:1331
 msgid " Socket source routing setup "
@@ -3257,29 +3260,31 @@ msgstr ""
 
 #: src/cmd.c:1339
 msgid " Host name "
-msgstr ""
+msgstr " No do lodjeu "
 
 #: src/cmd.c:1339
 msgid " Error while looking up IP address "
-msgstr ""
+msgstr " Yåk n' a nén stî come dji waitîve après l' adresse IP "
 
 #: src/cmd.c:1350
 msgid " Undelete files on an ext2 file system "
-msgstr ""
+msgstr " Disrafacer des fitchîs so on sistinme di fitchî ext2 "
 
 #: src/cmd.c:1351
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
+" Intrer l' éndjin (sins li /dev/) ki vos voloz \n"
+" disrafacer des fitchîs dsu: (F1 po ndè savu did pus)"
 
 #: src/cmd.c:1401
 msgid " Setup saved to ~/"
-msgstr ""
+msgstr " Apontiaedje schapé dins ~/"
 
 #: src/cmd.c:1406
 msgid " Setup "
-msgstr ""
+msgstr " Apontiaedje "
 
 #: src/command.c:170
 #, c-format
@@ -3287,10 +3292,12 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on chdir viè '%s' \n"
+" %s "
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
-msgstr ""
+msgstr " Vos n' poloz nén mete èn oûve des cmande so on sistinme di fitchî nén locå"
 
 #: src/dialog.c:56
 msgid ""
@@ -3304,69 +3311,75 @@ msgstr ""
 
 #: src/dir.c:61
 msgid "&Unsorted"
-msgstr ""
+msgstr "Nén r&elî"
 
 #: src/dir.c:62
 msgid "&Name"
-msgstr ""
+msgstr "&No"
 
 #: src/dir.c:63
 msgid "&Extension"
-msgstr ""
+msgstr "&Cawete"
 
-#: src/dir.c:64
+# FIXME: trover l' diferince inte "modify" èt "change" chal,
+# èt mete des nos walons mîs adaptés. Ces 3 dates la ci sont
+# les 3 dates ki li sistinme di fitchîs wåde po tchaeke fitchî
+# dj' a les pinses ki 'modify' c'est po on candjmint des prôpietés
+# do fitchî (owner,group,others,etc), et ki 'change' c'est po cwand
+# on ca candjî çu k' i gn a dvins l' fitchî
+#: src/dir.c:6
 msgid "&Modify time"
-msgstr ""
+msgstr "Date di &modificåcion"
 
 #: src/dir.c:65
 msgid "&Access time"
-msgstr ""
+msgstr "Date di &lijhaedje"
 
 #: src/dir.c:66
 msgid "&Change time"
-msgstr ""
+msgstr "Date di c&andjmint"
 
 #: src/dir.c:67
 msgid "&Size"
-msgstr ""
+msgstr "&Grande"
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr ""
+msgstr "&Inode"
 
 #. New sort orders
 #: src/dir.c:71
 msgid "&Type"
-msgstr ""
+msgstr "&Sôrt"
 
 #: src/dir.c:72
 msgid "&Links"
-msgstr ""
+msgstr "&Loyéns"
 
 #: src/dir.c:73
 msgid "N&GID"
-msgstr ""
+msgstr "Li N&GID"
 
 #: src/dir.c:74
 msgid "N&UID"
-msgstr ""
+msgstr "Li N&UID"
 
 #: src/dir.c:75
 msgid "&Owner"
-msgstr ""
+msgstr "&Da"
 
 #: src/dir.c:76
 msgid "&Group"
-msgstr ""
+msgstr "&Hopê"
 
 #: src/dir.c:386
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr ""
+msgstr "Li fitchî egzisteye mins dji n' sai fé on stat dissu: %s %s"
 
 #: src/dir.c:662
 msgid "Unknown"
-msgstr ""
+msgstr "Nén cnoxhu"
 
 #: src/ext.c:131 src/user.c:506
 #, c-format
@@ -3374,6 +3387,8 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
+" Dji n' sai produre on no di fitchî unike \n"
+" %s "
 
 #: src/ext.c:138 src/user.c:518
 #, c-format
@@ -3381,30 +3396,32 @@ msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on passant fitchî di cmande \n"
+" %s "
 
 #: src/ext.c:153 src/user.c:547
 msgid " Parameter "
-msgstr ""
+msgstr " Pondant "
 
 #: src/ext.c:303
 msgid " Can't execute commands on a Virtual File System directory "
-msgstr ""
+msgstr " Dji n' sai enonder des cmandes dins on ridant k' est so on forveyu sistinme di fitchîs "
 
 #: src/ext.c:400
 msgid " file error"
-msgstr ""
+msgstr " aroke è fitchî"
 
 #: src/ext.c:401
 msgid "Format of the "
-msgstr ""
+msgstr "Li cogne do fitchî "
 
 #: src/ext.c:419
 msgid " file error "
-msgstr ""
+msgstr " aroke è fitchî "
 
 #: src/ext.c:420
 msgid "Format of the ~/"
-msgstr ""
+msgstr "Li cogne do fitchî ~/"
 
 #: src/ext.c:420
 msgid ""
@@ -3412,36 +3429,42 @@ msgid ""
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
+" a candjî\n"
+"avou li modeye 3.0. Vos l' duvrîz seye-t i \n"
+"copyî foû di "
 
 #: src/ext.c:422
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
+"mc.ext, seye-t i eployî ci fitchî la\n"
+"come egzimpe por vos vey comint-ce k' on s' î prind.\n"
 
 #: src/ext.c:424
 msgid "mc.ext will be used for this moment."
-msgstr ""
+msgstr "Nos nos siervrans di mc.ext pol moumint."
 
 #: src/file.c:154 src/tree.c:640
 msgid " Copy "
-msgstr ""
+msgstr " Copyî "
 
 #: src/file.c:155 src/tree.c:678
 msgid " Move "
-msgstr ""
+msgstr " Bodjî "
 
 #: src/file.c:156 src/tree.c:746
 msgid " Delete "
-msgstr ""
+msgstr " Disfacer "
 
+# FIXME: Mask = umask (modele di cogne di fitchî?)??
 #: src/file.c:244
 msgid " Invalid target mask "
 msgstr ""
 
 #: src/file.c:342
 msgid " Could not make the hardlink "
-msgstr ""
+msgstr " Dji n' a savu fé li deur loyén "
 
 #: src/file.c:384
 #, c-format
@@ -3449,6 +3472,8 @@ msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai lére li loyén soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:394
 msgid ""
@@ -3456,6 +3481,9 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
+" Dji n' sai fé des stocaesses loyéns simbolike avou des sistinmes di fitchîs nén locås: \n"
+"\n"
+" Li tchûze 'Stocaesse loyéns simbolikes' ni serè nén èn alaedje "
 
 #: src/file.c:442
 #, c-format
@@ -3463,6 +3491,8 @@ msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé li loyén simbolike såme \"%s\" \n"
+" %s "
 
 #: src/file.c:509
 #, c-format
@@ -3470,6 +3500,8 @@ msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai spotchî li ridant \"%s\" \n"
+" %s "
 
 #: src/file.c:518
 #, c-format
@@ -3477,11 +3509,13 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on stat sol fitchî soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
-msgstr ""
+msgstr " '%s' eyèt '%s' sont li minme fitchî."
 
 #: src/file.c:574
 #, c-format
@@ -3489,6 +3523,8 @@ msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé li fitchî speciå \"%s\" \n"
+" %s "
 
 #: src/file.c:583 src/file.c:812
 #, c-format
@@ -3496,6 +3532,8 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on chown sol fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:592 src/file.c:831
 #, c-format
@@ -3503,6 +3541,8 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on chmod sol fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:609
 #, c-format
@@ -3510,7 +3550,10 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai drovi li fitchî soûrdant \"%s\" \n"
+" %s "
 
+# FIXME: reget ?
 #: src/file.c:619
 msgid " Reget failed, about to overwrite file "
 msgstr ""
@@ -3521,6 +3564,8 @@ msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on fstat sol fitchî soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:651
 #, c-format
@@ -3528,6 +3573,8 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé li fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:665
 #, c-format
@@ -3535,6 +3582,8 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on fstat sol fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:696
 #, c-format
@@ -3542,6 +3591,8 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai lére li fitchî soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:726
 #, c-format
@@ -3549,10 +3600,12 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai scrire li fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:745
 msgid "(stalled)"
-msgstr ""
+msgstr "(a djok)"
 
 #: src/file.c:783
 #, c-format
@@ -3560,6 +3613,8 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai cloyu li fitchî soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:792
 #, c-format
@@ -3567,10 +3622,12 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai cloyu li fitchî såme \"%s\" \n"
+" %s "
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
+msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
 
 #: src/file.c:803
 msgid "&Delete"
@@ -3586,6 +3643,8 @@ msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on stat sol ridant soûrdant \"%s\" \n"
+" %s "
 
 #: src/file.c:899
 #, c-format
@@ -3593,6 +3652,8 @@ msgid ""
 " Source directory \"%s\" is not a directory \n"
 " %s "
 msgstr ""
+" Li ridant soûrdant \"%s\" n' est nén on ridant \n"
+" %s "
 
 #. we found a cyclic symbolic link
 #: src/file.c:907
@@ -3601,6 +3662,8 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
+" Dji n' sai copyî on betchfessi loyén simbolike \n"
+" '%s' "
 
 #: src/file.c:964
 #, c-format
@@ -3608,6 +3671,8 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé li ridant såme \"%s\" \n"
+" %s "
 
 #: src/file.c:987
 #, c-format
@@ -3615,6 +3680,8 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on chown sol ridant såme \"%s\" \n"
+" %s "
 
 #. Source doesn't exist
 #: src/file.c:1100
@@ -3623,16 +3690,18 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai fé on stat sol fitchî \"%s\" \n"
+" %s "
 
 #: src/file.c:1122
 #, c-format
 msgid " `%s' and `%s' are the same file "
-msgstr ""
+msgstr " '%s' eyèt '%s' sont li minme fitchî "
 
 #: src/file.c:1129
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr ""
+msgstr " Dji n' såreu spotchî li ridant '%s' "
 
 #: src/file.c:1172
 #, c-format
@@ -3640,6 +3709,8 @@ msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' såreu bodjî li fitchî \"%s\" dins \"%s\" \n"
+" %s "
 
 #: src/file.c:1192
 #, c-format
@@ -3647,16 +3718,18 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai waester li fitchî \"%s\" \n"
+" %s "
 
 #: src/file.c:1246
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr ""
+msgstr " Dji n' sai spotchî li ridant \"%s\" %s "
 
 #: src/file.c:1248
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr ""
+msgstr " Dji n' sai spotchî \"%s\" %s "
 
 #: src/file.c:1275
 #, c-format
@@ -3664,6 +3737,8 @@ msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai bodjî li ridant \"%s\" dins \"%s\" \n"
+" %s "
 
 #: src/file.c:1338
 #, c-format
@@ -3671,6 +3746,8 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai disfacer li fitchî \"%s\" \n"
+" %s "
 
 #: src/file.c:1399 src/file.c:1469 src/file.c:1501
 #, c-format
@@ -3678,10 +3755,12 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
+" Dji n' sai waester li ridant \"%s\" \n"
+" %s "
 
 #: src/file.c:1540
 msgid " Internal error: get_file \n"
-msgstr ""
+msgstr " Divintrinne aroke: get_file \n"
 
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
@@ -3694,55 +3773,57 @@ msgstr ""
 #.
 #: src/file.c:1661
 msgid "1Copy"
-msgstr ""
+msgstr "1Copyî"
 
 #: src/file.c:1661
 msgid "1Move"
-msgstr ""
+msgstr "1Bodjî"
 
 #: src/file.c:1661
 msgid "1Delete"
-msgstr ""
+msgstr "1Disfacer"
 
+# FIXME: louki dins les soûrdants po veure çu k' c' est
+# mutwè i fåt candjî ene sacwè
 #: src/file.c:1676
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr ""
+msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1677
 #, c-format
 msgid "%o %d %f%m"
-msgstr ""
+msgstr "%o %d %f%m"
 
 #: src/file.c:1679
 #, c-format
 msgid "%o %f \"%s\"%e"
-msgstr ""
+msgstr "%o %f \"%s\"%e"
 
 #: src/file.c:1680
 #, c-format
 msgid "%o %d %f%e"
-msgstr ""
+msgstr "%o %d %f%e"
 
 #: src/file.c:1684
 msgid "file"
-msgstr ""
+msgstr "fitchî"
 
 #: src/file.c:1684
 msgid "files"
-msgstr ""
+msgstr "fitchîs"
 
 #: src/file.c:1684
 msgid "directory"
-msgstr ""
+msgstr "ridant"
 
 #: src/file.c:1684
 msgid "directories"
-msgstr ""
+msgstr "ridants"
 
 #: src/file.c:1685
 msgid "files/directories"
-msgstr ""
+msgstr "fitchîs/ridants"
 
 #: src/file.c:1685
 msgid " with source mask:"
@@ -3750,27 +3831,27 @@ msgstr ""
 
 #: src/file.c:1837
 msgid " Can't operate on \"..\"! "
-msgstr ""
+msgstr " Dji n' sai ovrer so \"..\"! "
 
 #: src/file.c:1856 src/screen.c:2092
 msgid "Yes"
-msgstr ""
+msgstr "Oyi"
 
 #: src/file.c:1856 src/screen.c:2092
 msgid "No"
-msgstr ""
+msgstr "Neni"
 
 #: src/file.c:1909
 msgid " Sorry, I could not put the job in background "
-msgstr ""
+msgstr " Dji rgrete, dji n' sai mete ci bezogne la è fond "
 
 #: src/file.c:1997 src/file.c:2081
 msgid " Internal failure "
-msgstr ""
+msgstr " Divintrinne aroke "
 
 #: src/file.c:1997 src/file.c:2081
 msgid " Unknown file operation "
-msgstr ""
+msgstr " Dji n' conoxhe nén cist ovraedje la so les fitchîs "
 
 #: src/file.c:2012
 #, c-format
@@ -3778,14 +3859,16 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
+" Li såme \"%s\" doet esse on ridant \n"
+" %s "
 
 #: src/file.c:2174
 msgid "&Retry"
-msgstr ""
+msgstr "&Rissayî"
 
 #: src/file.c:2174 src/file.c:2235 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
-msgstr ""
+msgstr "Ri&noncî"
 
 #: src/file.c:2226
 msgid ""
@@ -3793,6 +3876,9 @@ msgid ""
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
+"\n"
+"   Li ridant n' est nén vûde.   \n"
+"   El fåt-i disfacer avou tos ses efants? "
 
 #: src/file.c:2227
 msgid ""
@@ -3800,71 +3886,74 @@ msgid ""
 "   Background process: Directory not empty \n"
 "   Delete it recursively? "
 msgstr ""
+"\n"
+"   Bezogne di fond: li ridant n' est nén vûde \n"
+"   El fåt-i disfacer avou tos ses efants? "
 
 #: src/file.c:2234
 msgid "a&ll"
-msgstr ""
+msgstr "&Tertos"
 
 #: src/file.c:2234 src/filegui.c:595
 msgid "non&E"
-msgstr ""
+msgstr "&Nouk"
 
 #: src/file.c:2244
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr ""
+msgstr " Tapez 'oyi' si vos voloz disfacer PO DO BON "
 
 #: src/file.c:2246
 msgid "all the directories "
-msgstr ""
+msgstr "tos les ridants "
 
 #: src/file.c:2248
 msgid " Recursive Delete "
-msgstr ""
+msgstr " Disfacer les Efants "
 
 #: src/file.c:2249
 msgid " Background process: Recursive Delete "
-msgstr ""
+msgstr " Bezogne di fond: Disfacer avou ses efants "
 
 #: src/filegui.c:424
 msgid "File"
-msgstr ""
+msgstr "Fitchî"
 
 #: src/filegui.c:447
 msgid "Count"
-msgstr ""
+msgstr "Conter"
 
 #: src/filegui.c:468
 msgid "Bytes"
-msgstr ""
+msgstr "Octets"
 
 #: src/filegui.c:505
 msgid "Source"
-msgstr ""
+msgstr "Soûrdant"
 
 #: src/filegui.c:528
 msgid "Target"
-msgstr ""
+msgstr "Såme"
 
 #: src/filegui.c:550
 msgid "Deleting"
-msgstr ""
+msgstr "Dji disface"
 
 #: src/filegui.c:590
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr ""
+msgstr "Li fitchî såme \"%s\" egzisteye dedja!"
 
 #: src/filegui.c:593
 msgid "if &Size differs"
-msgstr ""
+msgstr "si li &Grandeu n' est nén li minme"
 
 #: src/filegui.c:596
 msgid "&Update"
-msgstr ""
+msgstr "&Mete a djoû"
 
 #: src/filegui.c:598
 msgid "Overwrite all targets?"
-msgstr ""
+msgstr "Sipotchî totes les såmes?"
 
 #: src/filegui.c:600
 msgid "&Reget"
@@ -3872,29 +3961,29 @@ msgstr ""
 
 #: src/filegui.c:601
 msgid "ap&Pend"
-msgstr ""
+msgstr "ra&Djouter å coron"
 
 #: src/filegui.c:604
 msgid "Overwrite this target?"
-msgstr ""
+msgstr "Sipotchî cisse såme chal?"
 
 #: src/filegui.c:606
 #, c-format
 msgid "Target date: %s, size %d"
-msgstr ""
+msgstr "Såme: date: %s, grandeu: %d"
 
 #: src/filegui.c:608
 #, c-format
 msgid "Source date: %s, size %d"
-msgstr ""
+msgstr "Soûrdant: date: %s, grandeu: %s"
 
 #: src/filegui.c:692
 msgid " File exists "
-msgstr ""
+msgstr " Li fitchî egzisteye dedja "
 
 #: src/filegui.c:693
 msgid " Background process: File exists "
-msgstr ""
+msgstr " Bezogne di fond: li fitchî egzisteye dedja "
 
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:805
@@ -3904,12 +3993,12 @@ msgstr ""
 #. &op_preserve
 #: src/filegui.c:807
 msgid "follow &Links"
-msgstr ""
+msgstr "shure les &Loyéns"
 
 #. &file_mask_op_follow_links
 #: src/filegui.c:809
 msgid "to:"
-msgstr ""
+msgstr "a:"
 
 #: src/filegui.c:810
 msgid "&Using shell patterns"
@@ -3917,16 +4006,16 @@ msgstr ""
 
 #: src/filegui.c:831
 msgid "&Background"
-msgstr ""
+msgstr "di &Fond"
 
 #: src/filegui.c:840
 msgid "&Stable Symlinks"
-msgstr ""
+msgstr "&Stocaesse loyéns simbolikes"
 
 #. &file_mask_stable_symlinks
 #: src/filegui.c:842
 msgid "&Dive into subdir if exists"
-msgstr ""
+msgstr "&Plonker ezès ridants efants, s' i gn a"
 
 #: src/filegui.c:1001
 #, c-format
@@ -3937,77 +4026,77 @@ msgstr ""
 
 #: src/find.c:130
 msgid "&Suspend"
-msgstr ""
+msgstr "Mete a &Djok"
 
 #: src/find.c:131
 msgid "Con&tinue"
-msgstr ""
+msgstr "&Tcheryî"
 
 #: src/find.c:132
 msgid "&Chdir"
-msgstr ""
+msgstr "&Chdir"
 
 #: src/find.c:133
 msgid "&Again"
-msgstr ""
+msgstr "&Eco on côp"
 
 #: src/find.c:134
 msgid "&Quit"
-msgstr ""
+msgstr "c&Witer"
 
 #: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"
-msgstr ""
+msgstr "Mete è &Panea"
 
 #: src/find.c:136
 msgid "&View - F3"
-msgstr ""
+msgstr "&Loukî - F3"
 
 #: src/find.c:137
 msgid "&Edit - F4"
-msgstr ""
+msgstr "&Aspougnî - F4"
 
 #: src/find.c:170
 msgid "Start at:"
-msgstr ""
+msgstr "Ataker a:"
 
 #: src/find.c:170
 msgid "Filename:"
-msgstr ""
+msgstr "No do fitchî:"
 
 #: src/find.c:170
 msgid "Content: "
-msgstr ""
+msgstr "Ådvins: "
 
 #: src/find.c:171 src/main.c:1236 src/main.c:1257
 msgid "&Tree"
-msgstr ""
+msgstr "Å&be"
 
 #: src/find.c:223
 msgid "Find File"
-msgstr ""
+msgstr "Trover Fitchî"
 
 #: src/find.c:452
 #, c-format
 msgid "Grepping in %s"
-msgstr ""
+msgstr "Dji cwîr dins %s"
 
 #: src/find.c:490
 msgid " Find/read "
-msgstr ""
+msgstr " Trover/Lére "
 
 #: src/find.c:490
 msgid " Problem reading from child "
-msgstr ""
+msgstr " Yåk ni va nén cwand dji saye di lére dins l' efant "
 
 #: src/find.c:537
 msgid "Finished"
-msgstr ""
+msgstr "Fwait"
 
 #: src/find.c:561 src/view.c:1509
 #, c-format
 msgid "Searching %s"
-msgstr ""
+msgstr "Dji cwîr %s"
 
 #: src/find.c:717 src/find.c:757
 msgid "Suspend"
@@ -4015,45 +4104,46 @@ msgstr ""
 
 #: src/find.c:717
 msgid "Restart"
-msgstr ""
+msgstr "Renonder"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
-msgstr ""
+msgstr "Dji cwîr"
 
 #: src/find.c:750 src/find.c:1031
 msgid "Find file"
-msgstr ""
+msgstr "Trover fitchî"
 
 #. The buttons
 #: src/find.c:755
 msgid "Change to this directory"
-msgstr ""
+msgstr "Potchî dins ci ridant chal"
 
 #: src/find.c:756
 msgid "Search again"
-msgstr ""
+msgstr "Cweri eco ene feye"
 
 #: src/find.c:761
 msgid "View this file"
-msgstr ""
+msgstr "Loukî ci fitchî chal"
 
 #: src/find.c:762
 msgid "Edit this file"
-msgstr ""
+msgstr "Aspougnî ci fitchî chal"
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
-msgstr ""
+msgstr "Evoyî li rezultat dins on panea"
 
 #: src/fixhlp.c:171
 msgid "Usage: fixhlp <width> <tocname>\n"
-msgstr ""
+msgstr "Po s' è siervi: fixhlp <width> <tocname>\n"
 
 #: src/fixhlp.c:176
 msgid "fixhlp: Cannot open toc for writing"
 msgstr ""
 
+# FIXME: ratoûrner [Contents]?
 #: src/fixhlp.c:179
 msgid ""
 "[Contents]\n"
@@ -4066,6 +4156,8 @@ msgid ""
 " Help file format error\n"
 ""
 msgstr ""
+" Ene sacwè ni va nén el cogne do fitchî d' aidance\n"
+""
 
 #: src/help.c:318
 msgid " Internal bug: Double start of link area "
@@ -4085,6 +4177,8 @@ msgid ""
 " Can't open file %s \n"
 " %s "
 msgstr ""
+" Dji n' sai drovi li fitchî %s \n"
+" %s "
 
 #: src/help.c:771
 #, c-format
@@ -4093,39 +4187,39 @@ msgstr ""
 
 #: src/help.c:808
 msgid "Index"
-msgstr ""
+msgstr "Index"
 
 #: src/help.c:810
 msgid "Prev"
-msgstr ""
+msgstr "Divant"
 
 #: src/hotlist.c:132
 msgid "&Move"
-msgstr ""
+msgstr "&Bodjî"
 
 #: src/hotlist.c:133 src/hotlist.c:1443 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
-msgstr ""
+msgstr "&Waester"
 
 #: src/hotlist.c:134 src/hotlist.c:818 src/hotlist.c:915
 msgid "&Append"
-msgstr ""
+msgstr "&Mete å coron"
 
 #: src/hotlist.c:135 src/hotlist.c:816 src/hotlist.c:913
 msgid "&Insert"
-msgstr ""
+msgstr "&Sititchî"
 
 #: src/hotlist.c:136
 msgid "New &Entry"
-msgstr ""
+msgstr "Novele &Intreye"
 
 #: src/hotlist.c:137
 msgid "New &Group"
-msgstr ""
+msgstr "Novea &Hopê"
 
 #: src/hotlist.c:139
 msgid "&Up"
-msgstr ""
+msgstr "&Dizeu"
 
 #: src/hotlist.c:140
 msgid "&Add current"
