@@ -424,16 +424,6 @@ static void show (Dlg_head *h, char *paint_start)
 	    case '\t':
 		col = (col/8 + 1) * 8;
 		break;
-	    case CHAR_MCLOGO:
-	    case CHAR_TEXTONLY_START:
-	    case CHAR_TEXTONLY_END:
-		break;
-	    case CHAR_XONLY_START:
-		while (*p && *p != CHAR_NODE_END && *p != CHAR_XONLY_END)
-		    p++;
-		if (*p == CHAR_NODE_END || !*p)
-		    p--;
-		break;
 	    default:
 		if (!painting)
 		    continue;

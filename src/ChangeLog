@@ -1,3 +1,8 @@
+2002-10-22  Pavel Roskin  <proski@gnu.org>
+
+	* help.h: Remove unused characters.
+	* help.c (show): Remove handling of unused characters.
+
 2002-10-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* popthelp.c (poptPrintHelp): Use POPT_ for "[OPTION...]",
