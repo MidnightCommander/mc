@@ -1,3 +1,9 @@
+2002-07-15  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: When checking for ncurses, check for
+	has_colors(), not curses_version() - the later is missing in
+	older version of ncurses.
+
 2002-07-13  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (AC_EXT2_UNDEL): Add ext2fs libraries to MC_LIBS,
