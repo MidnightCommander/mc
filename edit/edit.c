@@ -23,6 +23,13 @@
 #include <config.h>
 #include "edit.h"
 
+#include "src/cmd.h"		/* view_other_cmd() */
+#include "src/user.h"		/* user_menu_cmd() */
+#include "src/tty.h"		/* keys */
+#include "src/main.h"		/* edit_one_file */
+#include "src/key.h"		/* SHIFT_PRESSED */
+#include "src/wtools.h"		/* query_dialog() */
+
 #include "src/charsets.h"
 #include "src/selcodepage.h"
 

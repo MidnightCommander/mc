@@ -21,8 +21,13 @@
 */
 
 #include <config.h>
+
 #include "edit.h"
-#include "src/user.h"
+#include "src/wtools.h"		/* query_dialog() */
+#include "src/menu.h"		/* menu_entry */
+#include "src/tty.h"		/* KEY_F */
+#include "src/key.h"		/* XCTRL */
+#include "src/main.h"		/* drop_menus */
 
 #include "editcmddef.h"
 
@@ -415,7 +420,7 @@ static menu_entry OptMenuEmacs[] =
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
-Menu *EditMenuBar[N_menus];
+struct Menu *EditMenuBar[N_menus];
 
 void edit_init_menu_normal (void)
 {

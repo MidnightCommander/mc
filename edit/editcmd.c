@@ -29,6 +29,13 @@
 #include "edit.h"
 #include "editcmddef.h"
 
+#include "src/color.h"		/* dialog_colors */
+#include "src/tty.h"		/* LINES */
+#include "src/widget.h"		/* listbox_new() */
+#include "src/main.h"		/* mc_home */
+#include "src/help.h"		/* interactive_display() */
+#include "src/key.h"		/* XCTRL */
+#include "src/wtools.h"		/* message() */
 #include "src/charsets.h"
 
 /* globals: */

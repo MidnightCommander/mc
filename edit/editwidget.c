@@ -23,8 +23,13 @@
 #include <config.h>
 #include "edit.h"
 
+#include "src/tty.h"		/* LINES */
+#include "src/key.h"		/* get_modifier() */
+#include "src/widget.h"		/* redraw_labels() */
+#include "src/menu.h"		/* menubar_new() */
+
 WEdit *wedit;
-WMenu *edit_menubar;
+struct WMenu *edit_menubar;
 
 int column_highlighting = 0;
 

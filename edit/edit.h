@@ -43,25 +43,8 @@
 #endif
 
 #include "src/global.h"
-#include "src/tty.h"
-#include "src/main.h"		/* for char *shell */
-#include "src/dlg.h"
-#include "src/widget.h"
-#include "src/color.h"
-#include "src/dialog.h"
-#include "src/mouse.h"
-#include "src/help.h"
-#include "src/key.h"
-#include "src/wtools.h"		/* for QuickWidgets */
-#include "src/cmd.h"		/* for menu_edit_cmd */
-#include "src/win.h"
-#include "vfs/vfs.h"
-#include "src/menu.h"
-#include "edit-widget.h"
-#include "src/user.h" /* for user_menu_cmd, must be after edit-widget.h */
+#include "edit-widget.h"	/* WEdit */
 
-#    define WANT_WIDGETS
-     
 #    define WIDGET_COMMAND (WIDGET_USER + 10)
 #    define N_menus 5
 
@@ -349,9 +332,12 @@ extern char *home_dir;
    or EDIT_KEY_EMULATION_EMACS
  */
 extern int edit_key_emulation;
+
 extern WEdit *wedit;
-extern Menu *EditMenuBar[];
-extern WMenu *edit_menubar;
+struct Menu;
+extern struct Menu *EditMenuBar[];
+struct WMenu;
+extern struct WMenu *edit_menubar;
 
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;

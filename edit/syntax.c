@@ -22,6 +22,9 @@
 
 #include <config.h>
 #include "edit.h"
+#include "src/color.h"		/* use_colors */
+#include "src/main.h"		/* mc_home */
+#include "src/wtools.h"		/* message() */
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512

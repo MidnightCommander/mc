@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "src/wtools.h"		/* QuickDialog */
 
 #define OPT_DLG_H 15
 #define OPT_DLG_W 72

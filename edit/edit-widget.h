@@ -1,6 +1,8 @@
 #ifndef __EDIT_WIDGET_H
 #define __EDIT_WIDGET_H
 
+#include "src/dlg.h"		/* Widget */
+
 struct macro {
     short command;
     short ch;
@@ -36,7 +38,7 @@ struct _book_mark {
     struct _book_mark *prev;
 };
 
-struct editor_widget {
+typedef struct WEdit {
     Widget widget;
 #define from_here num_widget_lines
     int num_widget_lines;
@@ -118,9 +120,7 @@ struct editor_widget {
     int macro_i;		/* -1 if not recording index to macro[] otherwise */
     int macro_depth;		/* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
-};
-
-typedef struct editor_widget WEdit;
+} WEdit;
 
 #define EDIT_DIR           PATH_SEP_STR ".mc" PATH_SEP_STR "cedit"
 #define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"

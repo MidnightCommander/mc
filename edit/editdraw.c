@@ -25,6 +25,11 @@
 
 #define MAX_LINE_LEN 1024
 
+#include "src/color.h"		/* EDITOR_NORMAL_COLOR */
+#include "src/tty.h"		/* attrset() */
+#include "src/widget.h"		/* redraw_labels() */
+#include "src/key.h"		/* is_idle() */
+
 #include "src/charsets.h"
 
 /* Text styles */
