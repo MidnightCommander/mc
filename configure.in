@@ -1256,7 +1256,6 @@ edit/Makefile
 gtkedit/Makefile 
 syntax/Makefile
 new_icons/Makefile 
-icons/Makefile
 pc/Makefile
 
 lib/mc.ext
