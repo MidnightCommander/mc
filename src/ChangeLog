@@ -1,3 +1,8 @@
+2005-01-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* subshell.c (subshell_name_quote): Eliminate sprintf(d, "%c", ...).
+	(do_subshell_chdir): Eliminate strlcpy() and optimize.
+
 2005-01-14  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* subshell.c (do_subshell_chdir): Use mc_realpath() to fix tcsh's

@@ -724,8 +724,7 @@ subshell_name_quote (const char *s)
 	for (; *s; s++) {
 	    /* Must quote numbers, so that they are not glued to octals */
 	    if (isalpha ((unsigned char) *s)) {
-		sprintf (d, "%c", (unsigned char) *s);
-		d += 1;
+		*d++ = (unsigned char) *s;
 	    } else {
 		sprintf (d, "\\%03o", (unsigned char) *s);
 		d += 4;
@@ -734,8 +733,7 @@ subshell_name_quote (const char *s)
     } else {
 	for (; *s; s++) {
 	    if (isalnum ((unsigned char) *s)) {
-		sprintf (d, "%c", (unsigned char) *s);
-		d += 1;
+		*d++ = (unsigned char) *s;
 	    } else {
 		sprintf (d, "\\0%03o", (unsigned char) *s);
 		d += 5;
@@ -753,8 +751,6 @@ subshell_name_quote (const char *s)
 void
 do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
-    int bPathNotEq;
-
     if (!
 	(subshell_state == INACTIVE
 	 && strcmp (subshell_cwd, current_panel->cwd))) {
@@ -771,8 +767,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
        because we set "HISTCONTROL=ignorespace") */
     write (subshell_pty, " cd ", 4);
     if (*directory) {
-	char *temp;
-	temp = subshell_name_quote (directory);
+	char *temp = subshell_name_quote (directory);
 	if (temp) {
 	    write (subshell_pty, temp, strlen (temp));
 	    g_free (temp);
@@ -789,24 +784,30 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     subshell_state = RUNNING_COMMAND;
     feed_subshell (QUIETLY, FALSE);
 
-    if (subshell_type == TCSH) {
-	char rp_subshell_cwd[PATH_MAX];
-	char rp_current_panel_cwd[PATH_MAX];
+    if (subshell_alive) {
+	int bPathNotEq = strcmp (subshell_cwd, current_panel->cwd);
 
-	if (mc_realpath(subshell_cwd, rp_subshell_cwd) == NULL)
-	    strlcpy(rp_subshell_cwd, subshell_cwd, PATH_MAX);
+	if (bPathNotEq && subshell_type == TCSH) {
+	    char rp_subshell_cwd[PATH_MAX];
+	    char rp_current_panel_cwd[PATH_MAX];
 
-	if (mc_realpath(current_panel->cwd, rp_current_panel_cwd) == NULL)
-	    strlcpy(rp_current_panel_cwd, current_panel->cwd, PATH_MAX);
+	    char *p_subshell_cwd =
+		mc_realpath (subshell_cwd, rp_subshell_cwd);
+	    char *p_current_panel_cwd =
+		mc_realpath (current_panel->cwd, rp_current_panel_cwd);
 
-	bPathNotEq = strcmp (rp_subshell_cwd, rp_current_panel_cwd);
-    } else bPathNotEq = strcmp (subshell_cwd, current_panel->cwd);
+	    if (p_subshell_cwd == NULL)
+		p_subshell_cwd = subshell_cwd;
+	    if (p_current_panel_cwd == NULL)
+		p_current_panel_cwd = current_panel->cwd;
+	    bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
+	}
 
-    if (subshell_alive && bPathNotEq && strcmp (current_panel->cwd, ".")) {
-	char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
-	fprintf (stderr, _("Warning: Cannot change to %s.\n"),
-		 cwd);
-	g_free (cwd);
+	if (bPathNotEq && strcmp (current_panel->cwd, ".")) {
+	    char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
+	    fprintf (stderr, _("Warning: Cannot change to %s.\n"), cwd);
+	    g_free (cwd);
+	}
     }
 
     if (reset_prompt)
