@@ -278,7 +278,7 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New window"), N_("Opens a new window"), gnome_open_panel, NULL),
-	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New folder"),N_("Creates a folder"), mkdir_panel_cmd, NULL),
+	
 	/* We want to make a new menu entry here... */
 	/* For example: */
 	/* New-> */
@@ -289,14 +289,12 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	/*  etc... */
 
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("_Run"),               N_("Runs a command"), run_cmd, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
-	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Opens the selected files"), NULL },
-	{ GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Opens the selected files"), gnome_open_files },
+/*	{ GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },*/
 	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"), copy_cmd, NULL},
 	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Make directory..."), N_("Creates a new directory"), mkdir_cmd },
+/*	{ GNOME_APP_UI_ITEM, N_("_Make directory..."), N_("Creates a new directory"), mkdir_cmd },*/
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
@@ -341,7 +339,10 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO},
 	  
 	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),    N_("Run a command and put the results in a panel"), gnome_external_panelize },
+	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),               N_("Runs a command"), run_cmd, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
+	{ GNOME_APP_UI_ITEM, N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize },
+
 #ifdef USE_VFS					  
 	{ GNOME_APP_UI_ITEM, N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs },
 #endif

@@ -460,7 +460,19 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 
 	select_item (panel);
 }
-
+static int
+panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
+{
+	/* FIXME: This is still very broken. */
+	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3) {
+		gint row, column;
+		gtk_clist_get_selection_info (GTK_CLIST (file_list),
+					      event->button.x, event->button.y,
+					      &row, &column);
+		gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
+	}
+	return TRUE;
+}
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
@@ -494,10 +506,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 				new_panel_at (fullname);
 				free (fullname);
 			}
-			break;
-
-		case 3:
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
 			break;
 		}
 
@@ -1148,6 +1156,9 @@ panel_create_file_list (WPanel *panel)
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
+			    panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "button_press_event",
+			    GTK_SIGNAL_FUNC (panel_file_list_press_row),
 			    panel);
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 1, GTK_BUTTON_SELECTS | GTK_BUTTON_DRAGS);
 	gtk_clist_set_button_actions (GTK_CLIST (file_list), 2, GTK_BUTTON_SELECTS);
@@ -2297,10 +2308,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Put the icon list and the file listing in a nice frame
 	 */
-	table_frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (table_frame), GTK_SHADOW_IN);
-	gtk_widget_show (table_frame);
-	gtk_container_add (GTK_CONTAINER (table_frame), panel->view_table);
 
 	/* Add both the icon view and the listing view */
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->notebook, 0, 1, 0, 1,
@@ -2313,7 +2320,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
-	gtk_paned_add2 (GTK_PANED (panel->pane), table_frame);
+	gtk_paned_add2 (GTK_PANED (panel->pane), panel->view_table);
 
 #if 0
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,

@@ -1,3 +1,10 @@
+1999-01-12  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (gnome_open_files): now you can open multiple files.
+	* glayout.c: layout changed some.  moved run command.
+	commented out ftplink/mkdir command for now.  gonna do mkdir
+	next.  Why is the ftplink command needed?
+
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c (run_cmd): Add run command.  Add back FTP link

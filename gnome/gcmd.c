@@ -615,3 +615,34 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	gtk_widget_destroy (filter_dlg);
 }
+void
+gnome_open_files (GtkWidget *widget, WPanel *panel)
+{
+	GList *later = NULL;
+	GList *now;
+	gint i;
+
+	/* FIXME: this is the easy way to do things.  We want the
+	 * hard way sometime. */
+	for (i = 0; i < panel->count; i++) {
+		if (panel->dir.list [i].f.marked)
+			if (!do_enter_on_file_entry ((panel->dir.list) + i))
+				later = g_list_prepend (later, panel->dir.list + i);
+	}
+#if 0
+	/* This is sorta ugly.  Should we just skip these? There should be a better way. */
+	for (now = later; now; now = now->next) {
+		gchar *command;
+		command = input_expand_dialog (_(" Open with..."),
+					       _("Enter extra arguments:"), (WPanel *) now->data);
+		if (!command)
+			/* we break out. */
+			break;
+		execute (command);
+		free (command);
+	}
+#endif
+	g_list_free (later);
+	   
+}
+
