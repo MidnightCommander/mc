@@ -49,7 +49,6 @@ void vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
     *ent->prevp = ent->next;
     if (ent->next) ent->next->prevp = ent->prevp;
 
-    printf( "Freeing : %s\n", ent->name);
     free(ent->name);
     ent->name = NULL;
     if(ent->ino->st.st_nlink == 1) {
@@ -148,6 +147,7 @@ vfs_s_entry *vfs_s_automake(vfs *me, vfs_s_inode *dir, char *path, int flags)
     char *sep = strchr( path, DIR_SEP_CHAR );
     if (sep) *sep = 0;
     res = vfs_s_generate_entry(me, path, dir, flags & FL_MKDIR ? (0777 | S_IFDIR) : 0777 );
+    vfs_s_insert_entry(me, dir, res);
     if (sep) *sep = DIR_SEP_CHAR;
     return res;
 }
@@ -175,7 +175,7 @@ vfs_s_entry *vfs_s_find_entry(vfs *me, vfs_s_inode *root, char *path, int follow
 		break;
 
 	if (!ent && (flags & (FL_MKFILE | FL_MKDIR)))
-	    ent = vfs_s_automake(me, root, path+pseg, flags);
+	    ent = vfs_s_automake(me, root, path/*+pseg*/, flags);
 	if (!ent) ERRNOR (ENOENT, NULL);
 	path += pseg;
 	if (!vfs_s_resolve_symlink(me, ent, follow)) return NULL;

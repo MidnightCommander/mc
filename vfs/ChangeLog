@@ -1,3 +1,9 @@
+Wed Oct 28 17:06:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* direntry.c (vfs_s_automake): insert newly generated entry
+
+	* direntry.c (vfs_s_free_entry): Debugging printf() killed.
+
 Mon Oct 26 00:38:30 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* Make-mc.in: added xdirentry.h to VFSHDRS
