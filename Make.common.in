@@ -76,11 +76,9 @@ docdir      = $(rootdir)/doc
 mcsrclibdir = $(rootdir)/lib
 slangdir    = $(rootdir)/slang
 vfsdir      = $(rootdir)/vfs
-xvdir       = $(rootdir)/xv
-tkdir	    = $(rootdir)/tk
 gnomedir    = $(rootdir)/gnome
 
-hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir) -I$(xvdir) -I$(xvdir)/support/xview_private -I$(tkdir)
+hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir)
 
 # Rules
 first_rule: all

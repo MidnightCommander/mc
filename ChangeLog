@@ -1,3 +1,9 @@
+2000-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in, acconfig.h, configure.in, mc-aclocal.m4,
+	doc-gnome/Makefile.in, doc-gnome/C/Makefile.in: removed stuff
+	related to XView, libXPM, libXext and Tk
+
 2000-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in, lib/Makefile.in: adjusted lists of distributed

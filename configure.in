@@ -1161,22 +1161,6 @@ dnl
 AC_SUBST(SEDCMD)
 AC_SUBST(SEDCMD2)
 
-if test x$no_xview = xyes; then
-    :
-else
-    AC_LIB_XPM
-    if test x$ac_cv_has_xpm = xyes; then
-	XPM_LIB=-lXpm
-	AC_SUBST(XPM_LIB)
-	AC_X_SHAPE_EXTENSION
-        if test x$ac_cv_has_shape = xyes; then
-            AC_DEFINE(HAVE_XPM_SHAPE)
-	    XEXT_LIB=-lXext
-	    AC_SUBST(XEXT_LIB)
-        fi
-    fi
-fi
-
 
 dnl
 dnl This code should be moved to the ac_WITH_SLANG
@@ -1313,8 +1297,5 @@ Configuration:
   With subshell support:      ${subshell}
   X11 versions:               ${xvers}
   Internal editor:            ${EDIT_msg}
-  Install path:		      ${prefix}/bin, ${prefix}/lib/mc"
-if test -n "$xv_bindir"; then
-echo "  XView version install path: ${xv_bindir}"
-fi
-echo ""
+  Install path:		      ${prefix}/bin, ${prefix}/lib/mc
+"

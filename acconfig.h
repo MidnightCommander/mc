@@ -139,9 +139,6 @@
 /* Defined if you have the file command */
 #undef HAVE_FILECMD
 
-/* Defined if you have libXpm, <X11/xpm.h>, libXext, <X11/extensions/shape.h> */
-#undef HAVE_XPM_SHAPE
-
 /* Defined if you have shadow passwords on Linux */
 #undef LINUX_SHADOW
 
@@ -216,10 +213,6 @@
 
 #if defined(HAVE_LIBCRYPT) || defined(HAVE_LIBCRYPT_I)
 #    define HAVE_CRYPT
-#endif
-
-#ifdef HAVE_XVIEW
-#    include <xvmain.h>
 #endif
 
 #if defined(HAVE_SIGADDSET) && defined(HAVE_SIGEMPTYSET)
