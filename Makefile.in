@@ -5,7 +5,8 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=nt os2
-unixdirs=vfs lib doc slang edit src tk xv gnome icons intl @POSUB@
+codedirs=vfs lib doc slang edit src tk xv gnome icons 
+unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
 
@@ -20,7 +21,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		README.OS2 VERSION.in NLS mkinstalldirs
 
 all: 
-	@for dir in ${unixdirs}; do \
+	@for dir in ${codedirs} @INTLSUB@ @POSUB@; do \
 		cd $$dir; \
 		${MAKE} all || exit 1; \
 		cd .. ;\

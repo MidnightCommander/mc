@@ -15,6 +15,7 @@ exec_prefix = $(prefix)
 binprefix =
 manprefix =
 
+builddir   = @builddir@
 bindir     = $(exec_prefix)/bin
 libdir     = $(exec_prefix)/lib/mc
 suppbindir = $(libdir)/bin

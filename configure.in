@@ -935,6 +935,16 @@ AC_ARG_WITH(efence,
 	mem_debug="Electric Fence"
 fi])
 
+INTLSUB=""
+if test x$USE_NLS = xyes; then
+    if test $ac_cv_header_libintl_h = no; then
+	CPPFLAGS="$CPPFLAGS -I\$(builddir)/intl"
+	LIBS="-L\$(builddir)/intl $LIBS"
+    fi
+    INTLSUB=intl
+fi
+AC_SUBST(INTLSUB)
+
 dnl
 dnl To force mmap support
 dnl We use only part of the functionality of mmap, so on AIX,
@@ -1402,6 +1412,9 @@ else
     PCENTRULE="#"
 fi
 AC_SUBST(PCENTRULE)
+
+AC_SUBST(builddir)
+builddir=`pwd`
 
 dnl
 dnl Output configuration filesn
