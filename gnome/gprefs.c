@@ -72,24 +72,6 @@ typedef struct
 typedef GtkWidget* (*CustomCreateFunc) (PrefsDlg *dlg, Property *prop);
 typedef void (*CustomApplyFunc) (PrefsDlg *dlg, Property *prop);
 
-static void
-gnome_toggle_show_backup (void)
-{
-    show_backups = !show_backups;
-}
-
-static void
-gnome_toggle_show_hidden (void)
-{
-    show_dot_files = !show_dot_files;
-}
-
-static void
-toggle_mix_all_files (void)
-{
-    mix_all_files = !mix_all_files;
-}
-
 static Property file_display_props [] = 
 {
         {
@@ -135,11 +117,11 @@ static Property confirmation_props [] =
 static Property vfs_props [] =
 {
         {
-                N_("VFS Timeout :"), PROPERTY_INT,
+                N_("VFS Timeout:"), PROPERTY_INT,
                 &vfs_timeout, N_("Seconds"), NULL, NULL
         },
         {
-                N_("Anonymous FTP password :"), PROPERTY_STRING,
+                N_("Anonymous FTP password:"), PROPERTY_STRING,
                 &ftpfs_anonymous_passwd, NULL, NULL, NULL
         },
         {
@@ -252,7 +234,7 @@ apply_page_changes (PrefsDlg *dlg, gint pagenum)
         while (cur_prop.label != NULL) {
                 switch (cur_prop.type) {
                 case PROPERTY_NONE :
-                        g_warning ("Invalid case in gprefs.c:apply_page_changes");
+                        g_warning ("Invalid case in gprefs.c:  apply_page_changes");
                         break;
                 case PROPERTY_BOOL : 
                         apply_changes_bool (dlg, &cur_prop);
@@ -411,7 +393,7 @@ create_prop_widget (PrefsDlg *dlg, Property *prop)
 {
         switch (prop->type) {
         case PROPERTY_NONE :
-                g_warning ("Invalid case in gprefs.c - create_prop_widget");
+                g_warning ("Invalid case in gprefs.c:  create_prop_widget");
                 break;
         case PROPERTY_BOOL :
                 return create_prop_bool (dlg, prop);
@@ -458,8 +440,11 @@ create_prop_box (PrefsDlg *dlg)
 {
         gint i;
         PrefsPage *cur_page;
-        
-        dlg->prop_box = gnome_property_box_new ();
+
+	dlg->prop_box = gnome_property_box_new ();
+	gnome_dialog_set_parent (GNOME_DIALOG (dlg->prop_box), GTK_WINDOW (dlg->panel->xwindow));
+	gtk_window_set_modal (GTK_WINDOW (dlg->prop_box), TRUE);
+	gtk_window_set_title (GTK_WINDOW (dlg->prop_box), _("Preferences"));
 
         i = 0;
         cur_page = &(dlg->prefs_pages [i]);
@@ -468,19 +453,19 @@ create_prop_box (PrefsDlg *dlg)
                 i++;
                 cur_page = &(dlg->prefs_pages [i]);
         }
-        
+
         gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
                             GTK_SIGNAL_FUNC (apply_callback), dlg);
 }
+
 void
 gnome_configure_box (GtkWidget *widget, WPanel *panel)
 {
-        static PrefsDlg dlg;
+	static PrefsDlg dlg;
 
         dlg.panel = panel;
         dlg.prefs_pages = prefs_pages;
 
         create_prop_box (&dlg);
-
         gtk_widget_show (dlg.prop_box);
 }

@@ -1,3 +1,9 @@
+1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gprefs.c (create_prop_box): Make the preferences dialog modal.
+	Also, set the window title and set the window's parent.
+	Removed some unused functions.
+
 1999-02-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_popup): Handle popup menus for the desktop.
