@@ -261,13 +261,13 @@ Z       Extract compressed tar files to subdirectories
 	  set gzip -dc
           unset D
 	  case $i in
-	    *.tar.gz)  D="`basename $1 .tar.gz`";;
-	    *.tgz)     D="`basename $1 .tgz`";;
-	    *.tpz)     D="`basename $1 .tpz`";;
-	    *.tar.Z)   D="`basename $1 .tar.Z`";;
-	    *.tar.z)   D="`basename $1 .tar.z`";;
-	    *.tar.F)   D="`basename $1 .tar.F`"; set freeze -dc;;
-	    *.tar.bz2) D="`basename $1 .tar.bz2`"; set bunzip2 -c;;
+	    *.tar.gz)  D="`basename $i .tar.gz`";;
+	    *.tgz)     D="`basename $i .tgz`";;
+	    *.tpz)     D="`basename $i .tpz`";;
+	    *.tar.Z)   D="`basename $i .tar.Z`";;
+	    *.tar.z)   D="`basename $i .tar.z`";;
+	    *.tar.F)   D="`basename $i .tar.F`"; set freeze -dc;;
+	    *.tar.bz2) D="`basename $i .tar.bz2`"; set bunzip2 -c;;
           esac
 	  mkdir $D; (cd $D && $1 $2 ../$i | tar xvf -)||echo tag $i >>$MC_CONTROL_FILE
         done
