@@ -8,6 +8,7 @@
 	(file_date): Make fmt auto variable.
 	* color.c (color_table): Make constant array.
 	* widget.[ch] (label_new): Make text parameter const.
+	* menu.c (create_menu): Don't localize name, it is always done.
 
 2001-07-31  Pavel Roskin  <proski@gnu.org>
 

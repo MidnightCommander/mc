@@ -78,7 +78,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 	}
     }
 
-    menu->name = g_strdup ( _(name) );
+    menu->name = g_strdup (name);
     menu_scan_hotkey(menu);
     menu->start_x = 0;
     return menu;
