@@ -1,5 +1,7 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Remove parts used only when USE_VFS is not defined.
+
 	* vfs.h: Introduce new VFS flags instead of the old unused ones.
 	* vfs.c (vfs_file_class_flags): New function.
 	(vfs_file_is_ftp): Eliminate.

@@ -1,11 +1,6 @@
 #ifndef __VFS_H
 #define __VFS_H
 
-/* Flags of VFS classes */
-#define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
-#define VFSF_NOLINKS 2		/* Hard links not supported */
-
-#ifdef USE_VFS
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
 #endif
@@ -20,6 +15,10 @@ struct vfs_stamping;
  * (RelianUNIX), where it is bad idea to define struct vfs. That system
  * has include called <sys/vfs.h>, which contains things like vfs_t.
  */
+
+/* Flags of VFS classes */
+#define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
+#define VFSF_NOLINKS 2		/* Hard links not supported */
 
 typedef struct vfs_class vfs;
 
@@ -66,7 +65,8 @@ struct vfs_class {
     int (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (vfs *me, char *path, int mode, int dev);
 
-    vfsid (*getid) (vfs *me, const char *path, struct vfs_stamping ** parent);
+    vfsid (*getid) (vfs *me, const char *path,
+		    struct vfs_stamping ** parent);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
@@ -206,95 +206,23 @@ caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
 int mc_munmap (caddr_t addr, size_t len);
 #endif				/* HAVE_MMAP */
 
-#else
-
-#undef USE_NETCODE
-
-#define vfs_fill_names(x) do { } while (0)
-#define vfs_add_current_stamps() do { } while (0)
-#define vfs_current_is_local() 1
-#define vfs_file_is_local(x) 1
-#define vfs_file_class_flags(x) (VFSF_LOCAL)
-#define vfs_path(x) x
-#define vfs_strip_suffix_from_filename(x) g_strdup(x)
-#define vfs_release_path(x)
-#define mc_close close
-#define mc_read read
-#define mc_write write
-#define mc_lseek lseek
-#define mc_opendir opendir
-#define mc_readdir readdir
-#define mc_closedir closedir
-#define mc_telldir telldir
-#define mc_seekdir seekdir
-
-#define mc_get_current_wd(x,size) get_current_wd (x, size)
-#define mc_fstat fstat
-#define mc_lstat lstat
-
-#define mc_readlink readlink
-#define mc_symlink symlink
-#define mc_rename rename
-
-#define mc_open open
-#define mc_utime utime
-#define mc_chmod chmod
-#define mc_chown chown
-#define mc_chdir chdir
-#define mc_unlink unlink
-
-#define mc_mmap mmap
-#define mc_munmap munmap
-
-#define mc_ctl(a,b,c) 0
-static inline int
-mc_setctl (char *path, int ctlop, char *arg)
-{
-    return 0;
-}
-
-#define vfs_translate_url(s) g_strdup(s)
-
-#define mc_stat stat
-#define mc_mknod mknod
-#define mc_link link
-#define mc_mkdir mkdir
-#define mc_rmdir rmdir
-#define vfs_get_class(x) (struct vfs_class *)(NULL)
-#define vfs_init() do { } while (0)
-#define vfs_shut() do { } while (0)
-#define vfs_canon(p) g_strdup (canonicalize_pathname(p))
-#define vfs_timeout_handler() do { } while (0)
-#define vfs_timeouts() 0
-#define vfs_force_expire() do { } while (0)
-
-#define mc_getlocalcopy(x) NULL
-#define mc_ungetlocalcopy(x,y,z) do { } while (0)
-
-#define ftpfs_hint_reread(x) do { } while (0)
-#define ftpfs_flushdir() do { } while (0)
-
-#endif				/* USE_VFS */
-
 /* These functions are meant for use by vfs modules */
+int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
+		      char **linkname);
+int vfs_split_text (char *p);
+int vfs_parse_filetype (char c);
+int vfs_parse_filemode (const char *p);
+int vfs_parse_filedate (int idx, time_t * t);
 
-extern int vfs_parse_ls_lga (const char *p, struct stat *s,
-			     char **filename, char **linkname);
-extern int vfs_split_text (char *p);
-extern int vfs_parse_filetype (char c);
-extern int vfs_parse_filemode (const char *p);
-extern int vfs_parse_filedate (int idx, time_t * t);
-
-extern void vfs_die (const char *msg);
-extern char *vfs_get_password (char *msg);
+void vfs_die (const char *msg);
+char *vfs_get_password (char *msg);
 
 /* Flags for vfs_split_url() */
 #define URL_ALLOW_ANON 1
 #define URL_NOSLASH 2
 
-extern char *vfs_split_url (const char *path, char **host, char **user,
-			    int *port, char **pass, int default_port,
-			    int flags);
+char *vfs_split_url (const char *path, char **host, char **user, int *port,
+		     char **pass, int default_port, int flags);
 
 #ifdef WITH_SMBFS
 /* Interface for requesting SMB credentials.  */
@@ -312,9 +240,8 @@ struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
 					   const char *user);
 #endif				/* WITH_SMBFS */
 
-extern void vfs_print_stats (const char *fs_name, const char *action,
-			     const char *file_name, off_t have,
-			     off_t need);
+void vfs_print_stats (const char *fs_name, const char *action,
+		      const char *file_name, off_t have, off_t need);
 
 /* Don't use values 0..4 for a while -- 10/98, pavel@ucw.cz */
 #define MCCTL_REMOVELOCALCOPY   5
