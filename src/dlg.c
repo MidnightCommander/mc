@@ -188,8 +188,9 @@ common_dialog_repaint (struct Dlg_head *h)
     attrset (NORMALC);
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
-    attrset (HOT_NORMALC);
+
     if (h->title) {
+	attrset (HOT_NORMALC);
 	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
 	addstr (h->title);
     }
@@ -215,7 +216,6 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      char *help_ctx, const char *title, int flags)
 {
     Dlg_head *new_d;
-    char *t;
 
     if (flags & DLG_CENTER){
 	y1 = (LINES-lines)/2;
@@ -236,9 +236,12 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->flags = flags;
 
     /* Strip existing spaces, add one space before and after the title */
-    t = g_strstrip (g_strdup (title));
-    new_d->title = g_strconcat (" ", t, " ", NULL);
-    g_free (t);
+    if (title) {
+	char *t;
+	t = g_strstrip (g_strdup (title));
+	new_d->title = g_strconcat (" ", t, " ", NULL);
+	g_free (t);
+    }
 
     return (new_d);
 }
@@ -869,8 +872,7 @@ destroy_dlg (Dlg_head *h)
 	}
 	h->current = c;
     }
-    if (h->title)
-	g_free (h->title);
+    g_free (h->title);
     g_free (h);
 
     if (refresh_list)
