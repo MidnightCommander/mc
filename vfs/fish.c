@@ -268,30 +268,43 @@ open_archive_int (vfs *me, vfs_s_super *super)
 static int
 open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
 {
-    char *host, *user, *password;
+    char *host, *user, *password, *p;
     int flags;
 
-    vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, &password, 0, URL_NOSLASH);
-    SUP.host = g_strdup (host);
-    SUP.user = g_strdup (user);
+    p = vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, &password, 0, URL_NOSLASH);
+
+    if (p)
+	g_free (p);
+
+    SUP.host = host;
+    SUP.user = user;
     SUP.flags = flags;
     if (!strncmp( op, "rsh:", 4 ))
 	SUP.flags |= FISH_FLAG_RSH;
     SUP.home = NULL;
     if (password)
-	SUP.password = g_strdup (password);
+	SUP.password = password;
     return open_archive_int (me, super);
 }
 
 static int
 archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
-    char *host, *user, *dummy2;
+    char *host, *user;
     int flags;
-    vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, &dummy2, 0, URL_NOSLASH);
-    return ((strcmp (host, SUP.host) == 0) &&
+
+    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, 0, 0, URL_NOSLASH);
+
+    if (op)
+	g_free (op);
+
+    flags = ((strcmp (host, SUP.host) == 0) &&
 	    (strcmp (user, SUP.user) == 0) &&
 	    (flags == SUP.flags));
+    g_free (host);
+    g_free (user);
+
+    return flags;
 }
 
 int

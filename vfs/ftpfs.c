@@ -575,7 +575,7 @@ load_no_proxy_list ()
 }
 
 static int
-ftpfs_check_proxy (char *host)
+ftpfs_check_proxy (const char *host)
 {
     struct no_proxy_entry	*npe;
 
@@ -617,17 +617,15 @@ ftpfs_check_proxy (char *host)
 static void
 ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
 {
-    char *user, *pass, *dir;
+    char *user, *dir;
 
 #if defined(HSC_PROXY)
-    dir = vfs_split_url (proxy, host, &user, port, &pass, HSC_PROXY_PORT, URL_DEFAULTANON);
+    dir = vfs_split_url (proxy, host, &user, port, 0, HSC_PROXY_PORT, URL_DEFAULTANON);
 #else
-    dir = vfs_split_url (proxy, host, &user, port, &pass, FTP_COMMAND_PORT, URL_DEFAULTANON);
+    dir = vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT, URL_DEFAULTANON);
 #endif
 
     g_free (user);
-    if (pass)
-	wipe_password (pass);
     if (dir)
 	g_free (dir);
 }
@@ -768,10 +766,13 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     char *host, *user, *password;
     int port;
 
-    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, FTP_COMMAND_PORT, URL_DEFAULTANON);
+    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, FTP_COMMAND_PORT, URL_DEFAULTANON);
 
-    SUP.host = g_strdup (host);
-    SUP.user = g_strdup (user);
+    if (op)
+	g_free (op);
+
+    SUP.host = host;
+    SUP.user = user;
     SUP.port = port;
     SUP.home = NULL;
     SUP.proxy= 0;
@@ -784,23 +785,33 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     SUP.remote_is_amiga = 0;
     super->name = g_strdup("/");
 #if 0
-    super->name = g_strconcat( "/#ftp:", SUP.user, "@", SUP.host, "/", NULL );
+    super->name = g_strconcat( "/#ftp:", user, "@", host, "/", NULL );
 #endif
     super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755)); 
     if (password)
-	SUP.password = g_strdup (password);
+	SUP.password = password;
     return open_archive_int (me, super);
 }
 
 static int
 archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
-    char *host, *user, *dummy2;
+    char *host, *user;
     int port;
-    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &dummy2, 21, URL_DEFAULTANON);
-    return ((strcmp (host, SUP.host) == 0) &&
+
+    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &port, 0, 21, URL_DEFAULTANON);
+
+    if (op)
+	g_free (op);
+
+    port = ((strcmp (host, SUP.host) == 0) &&
 	    (strcmp (user, SUP.user) == 0) &&
 	    (port == SUP.port));
+
+    g_free (host);
+    g_free (user);
+
+    return port;
 }
 
 static int

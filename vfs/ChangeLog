@@ -1,3 +1,13 @@
+2000-04-05  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* utilfs.c (vfs_split_url): don't assign *pass if pass is NULL
+	* fish.c (archive_open, archive_same): memory allocated by
+	  vfs_split_url () must be released after use, don't strdup()
+	  values allocated by vfs_split_url () and NULL passed to 
+	  vfs_split_url () when password value is unused
+	* ftpfs.c (archive_open, archive_same): ditto plus same for
+	  ftpfs_get_proxy_host_and_port ()
+
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
 	* ftpfs.c (netrc_next): Turned strange "const char * const keywords"

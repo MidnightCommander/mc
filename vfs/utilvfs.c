@@ -56,7 +56,7 @@
  * If the user is empty, e.g. ftp://@roxanne/private, then your login name
  * is supplied.
  *
- * returns malloced host, user.
+ * returns malloced host, user and pass if pass is not null.
  * returns a malloced strings with the pathname relative to the host.
  * */
 
@@ -70,7 +70,8 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     char *pend   = pcopy + strlen (pcopy);
     int default_is_anon = flags & URL_DEFAULTANON;
     
-    *pass = NULL;
+    if (pass)
+	*pass = NULL;
     *port = default_port;
     *user = NULL;
     retval = NULL;
@@ -97,9 +98,7 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	if (inner_colon){
 	    *inner_colon = 0;
 	    inner_colon++;
-	    if (*inner_colon == '@')
-		*pass = NULL;
-	    else
+	    if (pass && (*inner_colon != '@'))
 		*pass = g_strdup (inner_colon);
 	}
 	if (*pcopy != 0)
@@ -134,19 +133,17 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	    if (*port <= 0 || *port >= 65536)
 	        *port = default_port;
 	} else {
-	    while(1) {
-	        colon++;
+	    while(*(++colon)){
 		switch(*colon) {
 		    case 'C': *port = 1;
 	                      break;
 		    case 'r': *port = 2;
 	                      break;
-		    case 0: goto done;
 		}
 	    }
 	}
     }
-done:
+
     *host = g_strdup (rest);
 
     g_free (pcopy);
