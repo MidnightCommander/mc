@@ -79,14 +79,14 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-desktop_icon_view(GtkWidget *widget, desktop_icon_info *dii)
+desktop_icon_view(GtkWidget *widget, DesktopIconInfo *dii)
 {
 	g_warning ("Not yet implemented\n");
 }
 
 /* Pops up the icon properties pages */
 void
-desktop_icon_properties (GtkWidget *widget, desktop_icon_info *dii)
+desktop_icon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	int retval;
 	char *path;
@@ -99,7 +99,7 @@ desktop_icon_properties (GtkWidget *widget, desktop_icon_info *dii)
 }
 
 void
-desktop_icon_execute (GtkWidget *ignored, desktop_icon_info *dii)
+desktop_icon_execute (GtkWidget *ignored, DesktopIconInfo *dii)
 {
 	desktop_icon_open (dii);
 }
@@ -117,19 +117,19 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-dicon_move (GtkWidget *widget, desktop_icon_info *dii)
+dicon_move (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	g_warning ("Implement this function!");
 }
 
 static void
-dicon_copy (GtkWidget *widget, desktop_icon_info *dii)
+dicon_copy (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	g_warning ("Implement this function!");
 }
 
 static void
-dicon_delete (GtkWidget *widget, desktop_icon_info *dii)
+dicon_delete (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	desktop_icon_delete (dii);
 }
@@ -245,7 +245,7 @@ static GnomeUIInfo desktop_icon_actions[] = {
  */
 static int
 create_actions (GtkWidget *menu, WPanel *panel,
-		desktop_icon_info *dii,
+		DesktopIconInfo *dii,
 		int panel_row, char *filename)
 {
 	gpointer closure;
@@ -393,7 +393,7 @@ mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
  */
 static void
 create_regexp_actions (GtkWidget *menu, WPanel *panel,
-		       desktop_icon_info *dii,
+		       DesktopIconInfo *dii,
 		       int panel_row, char *filename, int insert_pos)
 {
 	gpointer closure, regex_closure;
@@ -503,11 +503,9 @@ get_active_index (GtkMenu *menu)
  * be set to NULL.
  */
 int
-gpopup_do_popup (GdkEventButton *event,
-		 WPanel *from_panel,
-		 struct desktop_icon_info *dii,
-		 int panel_row,
-		 char *filename)
+gpopup_do_popup (GdkEventButton *event, WPanel *from_panel,
+		 DesktopIconInfo *dii,
+		 int panel_row, char *filename)
 {
 	GtkWidget *menu;
 	int pos;

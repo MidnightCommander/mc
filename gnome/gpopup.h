@@ -15,7 +15,7 @@
 #include "gdesktop.h"
 
 int gpopup_do_popup (GdkEventButton *event, WPanel *from_panel,
-		     desktop_icon_info *dii,
+		     DesktopIconInfo *dii,
 		     int panel_row, char *filename);
 
 

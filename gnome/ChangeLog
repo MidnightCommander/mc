@@ -1,3 +1,10 @@
+1998-12-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (find_icon_by_drag_context): Made static.
+
+	* gdesktop.h (DesktopIconInfo): Now that this type is public,
+	renamed it from struct desktop_icon_info, for consistency.
+
 1998-12-30  Jeff Garzik  <jgarzik@pobox.com>
 
 	* gprop.c, gpopup.c: s/g_copy_strings/g_strconcat/

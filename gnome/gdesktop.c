@@ -76,7 +76,7 @@ static struct layout_slot *layout_slots;
 #define l_slots(u, v) (layout_slots[(u) * layout_rows + (v)])
 
 /* The last icon to be selected */
-static struct desktop_icon_info *last_selected_icon;
+static DesktopIconInfo *last_selected_icon;
 
 /* Drag and drop sources and targets */
 
@@ -129,7 +129,7 @@ static int click_current_y;
 static int click_dragging;
 
 
-static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
+static DesktopIconInfo *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -205,7 +205,7 @@ get_icon_snap_pos (int *x, int *y)
 
 /* Removes an icon from the slot it is in, if any */
 static void
-remove_from_slot (struct desktop_icon_info *dii)
+remove_from_slot (DesktopIconInfo *dii)
 {
 	if (dii->slot == -1)
 		return;
@@ -224,7 +224,7 @@ remove_from_slot (struct desktop_icon_info *dii)
  * desktop_snap_icons flag is set.
  */
 static void
-desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, int ypos)
+desktop_icon_info_place (DesktopIconInfo *dii, int auto_pos, int xpos, int ypos)
 {
 	int u, v;
 	char *filename;
@@ -279,7 +279,7 @@ icon_exists (char *filename)
 {
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	for (i = 0; i < (layout_cols * layout_rows); i++)
 		for (l = layout_slots[i].icons; l; l = l->next) {
@@ -295,13 +295,15 @@ static GList *
 icon_exists_in_list (GList *list, char *filename)
 {
 	GList *l;
+	DesktopIconInfo *dii;
 
-	for (l = list; l; l = l->next){
-		struct desktop_icon_info *dii = l->data;
+	for (l = list; l; l = l->next) {
+		dii = l->data;
 
 		if (strcmp (filename, dii->filename) == 0)
 			return l;
 	}
+
 	return NULL;
 }
 
@@ -336,7 +338,7 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 	DIR *dir;
 	char *full_name;
 	int have_pos, x, y;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	GSList *need_position_list, *l;
 	GList *all_icons;
 
@@ -399,7 +401,7 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 		GList *l;
 		
 		for (l = all_icons; l; l = l->next){
-			struct desktop_icon_info *dii = l->data;
+			DesktopIconInfo *dii = l->data;
 
 			desktop_icon_destroy (dii);
 		}
@@ -428,7 +430,7 @@ destroy_desktop_icons (void)
 {
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	for (i = 0; i < (layout_cols * layout_rows); i++) {
 		l = layout_slots[i].icons;
@@ -459,11 +461,11 @@ reload_desktop_icons (int incremental, int x, int y)
 
 /* Unselects all the desktop icons except the one in exclude */
 static void
-unselect_all (struct desktop_icon_info *exclude)
+unselect_all (DesktopIconInfo *exclude)
 {
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	for (i = 0; i < (layout_cols * layout_rows); i++)
 		for (l = layout_slots[i].icons; l; l = l->next) {
@@ -480,16 +482,16 @@ unselect_all (struct desktop_icon_info *exclude)
  * last_selected_icon and ends at the specified icon.
  */
 static void
-select_range (struct desktop_icon_info *dii, int sel)
+select_range (DesktopIconInfo *dii, int sel)
 {
 	int du, dv, lu, lv;
 	int min_u, min_v;
 	int max_u, max_v;
 	int u, v;
 	GList *l;
-	struct desktop_icon_info *ldii;
-	struct desktop_icon_info *min_udii, *min_vdii;
-	struct desktop_icon_info *max_udii, *max_vdii;
+	DesktopIconInfo *ldii;
+	DesktopIconInfo *min_udii, *min_vdii;
+	DesktopIconInfo *max_udii, *max_vdii;
 
 	/* Find out the selection range */
 
@@ -548,7 +550,7 @@ select_range (struct desktop_icon_info *dii, int sel)
  * event_state is the state field of the event.
  */
 static void
-select_icon (struct desktop_icon_info *dii, int event_state)
+select_icon (DesktopIconInfo *dii, int event_state)
 {
 	int range;
 	int additive;
@@ -626,7 +628,7 @@ file_entry_free (file_entry *fe)
 static int
 text_changed (GnomeIconTextItem *iti, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	char *new_name;
 	char *source;
 	char *dest;
@@ -659,7 +661,7 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 static void
 editing_started (GnomeIconTextItem *iti, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	GdkCursor *ibeam;
 
 	dii = data;
@@ -690,7 +692,7 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 
 /* Sets up the specified icon as a drag source, but does not connect the signals */
 static void
-setup_icon_dnd_actions (struct desktop_icon_info *dii)
+setup_icon_dnd_actions (DesktopIconInfo *dii)
 {
 	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
 			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
@@ -706,7 +708,7 @@ setup_icon_dnd_actions (struct desktop_icon_info *dii)
 static void
 editing_stopped (GnomeIconTextItem *iti, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	dii = data;
 
@@ -721,7 +723,7 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 
 /* Used to open a desktop icon when the user double-clicks on it */
 void
-desktop_icon_open (struct desktop_icon_info *dii)
+desktop_icon_open (DesktopIconInfo *dii)
 {
 	char *filename;
 	file_entry *fe;
@@ -739,7 +741,7 @@ desktop_icon_open (struct desktop_icon_info *dii)
 }
 
 void
-desktop_icon_delete (struct desktop_icon_info *dii)
+desktop_icon_delete (DesktopIconInfo *dii)
 {
 	char *full_name;
 	struct stat s;
@@ -765,7 +767,7 @@ desktop_icon_delete (struct desktop_icon_info *dii)
 
 /* Used to execute the popup menu for desktop icons */
 static void
-do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
+do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 {
 	char *filename;
 
@@ -783,7 +785,7 @@ do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
 static gint
 window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	GtkWidget *parent;
 
 	dii = data;
@@ -815,7 +817,7 @@ window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 static gint
 icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	int retval;
 
 	dii = data;
@@ -880,7 +882,7 @@ icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 static gint
 icon_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	dii = data;
 
@@ -902,7 +904,7 @@ icon_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
 static gint
 icon_button_release_after (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	dii = data;
 
@@ -935,7 +937,7 @@ icon_button_release_after (GtkWidget *widget, GdkEventButton *event, gpointer da
 static void
 drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	DesktopIcon *dicon;
 	GtkArg args[3];
 	GdkImlibImage *im;
@@ -986,7 +988,7 @@ build_selected_icons_uri_list (int *len)
 {
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	char *filelist, *p;
 	int desktop_dir_len;
 
@@ -1041,7 +1043,7 @@ static void
 drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *selection_data,
 	       guint info, guint32 time, gpointer data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	char *filelist;
 	int len;
 	GList *files;
@@ -1081,7 +1083,7 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 
 /* Set up a desktop icon as a DnD source */
 static void
-setup_icon_dnd_source (struct desktop_icon_info *dii)
+setup_icon_dnd_source (DesktopIconInfo *dii)
 {
 	setup_icon_dnd_actions (dii);
 
@@ -1097,9 +1099,7 @@ setup_icon_dnd_source (struct desktop_icon_info *dii)
  * drop_on_file_entry
  */
 static void
-desktop_icon_drop_uri_list (struct desktop_icon_info *dii,
-			    GdkDragContext           *context,
-			    GtkSelectionData         *data)
+desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSelectionData *data)
 {
 	char *filename;
 	file_entry *fe;
@@ -1159,7 +1159,7 @@ static void
 icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	dii = user_data;
 
@@ -1175,7 +1175,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 /* Set up a desktop icon as a DnD destination */
 static void
-setup_icon_dnd_dest (struct desktop_icon_info *dii)
+setup_icon_dnd_dest (DesktopIconInfo *dii)
 {
 	char *filename;
 	file_entry *fe;
@@ -1222,10 +1222,10 @@ setup_icon_dnd_dest (struct desktop_icon_info *dii)
  * positioning trying to start at the specified coordinates.  It does
  * not show the icon.
  */
-static struct desktop_icon_info *
+static DesktopIconInfo *
 desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 {
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	file_entry *fe;
 	char *full_name;
 	GdkImlibImage *icon_im;
@@ -1236,7 +1236,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	fe = file_entry_from_file (full_name);
 	icon_im = gicon_get_icon_for_file_speed (fe, FALSE);
 
-	dii = g_new (struct desktop_icon_info, 1);
+	dii = g_new (DesktopIconInfo, 1);
 	dii->dicon = desktop_icon_new (icon_im, filename);
 	dii->x = 0;
 	dii->y = 0;
@@ -1290,7 +1290,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
  * widget.  Does not remove the structure from the desktop_icons list!
  */
 void
-desktop_icon_destroy (struct desktop_icon_info *dii)
+desktop_icon_destroy (DesktopIconInfo *dii)
 {
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
@@ -1450,13 +1450,13 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 }
 
 /* Returns the desktop icon that started the drag from the specified context */
-struct desktop_icon_info *
+static DesktopIconInfo *
 find_icon_by_drag_context (GdkDragContext *context)
 {
 	GtkWidget *source;
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	source = gtk_drag_get_source_widget (context);
 	if (!source)
@@ -1482,7 +1482,7 @@ find_icon_by_drag_context (GdkDragContext *context)
 static void
 drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
 {
-	struct desktop_icon_info *source_dii, *dii;
+	DesktopIconInfo *source_dii, *dii;
 	int dx, dy;
 	int i;
 	GList *l;
@@ -1698,7 +1698,7 @@ store_temp_selection (void)
 {
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 
 	for (i = 0; i < (layout_cols * layout_rows); i++)
 		for (l = layout_slots[i].icons; l; l = l->next) {
@@ -1716,7 +1716,7 @@ store_temp_selection (void)
  * area, or FALSE otherwise.
  */
 static int
-icon_is_in_area (struct desktop_icon_info *dii, int x1, int y1, int x2, int y2)
+icon_is_in_area (DesktopIconInfo *dii, int x1, int y1, int x2, int y2)
 {
 	DesktopIcon *dicon;
 
@@ -1756,7 +1756,7 @@ update_drag_selection (int x, int y)
 	int x1, y1, x2, y2;
 	int i;
 	GList *l;
-	struct desktop_icon_info *dii;
+	DesktopIconInfo *dii;
 	int additive, invert, in_area;
 
 	if (click_start_x < x) {

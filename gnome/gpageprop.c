@@ -48,7 +48,7 @@ kill_toplevel ()
 }
 
 int
-item_properties (GtkWidget *parent, char *fname, desktop_icon_info *di)
+item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 {
 	GtkWidget     *parent_window;
 	GdkCursor     *cursor;
@@ -89,7 +89,7 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_info *di)
 
 	name = gprop_filename_new (fname, base);
 	gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
-	if(di) {
+	if (dii) {
 	  gene = gprop_general_new(fname, base);
 	  gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
 	}
@@ -208,9 +208,9 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_info *di)
 	  move_file_file (fname, full_target, &count, &bytes);
 	  destroy_op_win ();
 			
-	  if (di) {
-	    free (di->filename);
-	    di->filename = full_target;
+	  if (dii) {
+	    free (dii->filename);
+	    dii->filename = full_target;
 	  } else
 	    free (full_target);
 			
@@ -219,9 +219,9 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_info *di)
 	
 	/* Check and change title and icon -- change is handled by caller */
 
-	if (di) {
+	if (dii) {
 	  gprop_general_get_data (gene, &new_title, NULL);
-	  desktop_icon_set_text(DESKTOP_ICON(di->dicon), new_title);
+	  desktop_icon_set_text(DESKTOP_ICON(dii->dicon), new_title);
 	  g_free(new_title);
 
 	  retval |= GPROP_TITLE;

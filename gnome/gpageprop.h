@@ -28,7 +28,7 @@ typedef enum {
 /* Returns a mask of the above specifying what changed.
  */
 
-int item_properties (GtkWidget *parent, char *fname, desktop_icon_info *di);
+int item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *di);
 
 
 #endif
