@@ -12,6 +12,8 @@
 #         (add by Michael Bramer Debian-mc-maintainer <grisu@debian.org>)
 #         (to allow access to package control files)
 #
+# Modified by Martin Bialasinski <martinb@debian.org> 1999
+#         (deal with change in tar format)
 #
 #
 # Copyright (C) 1997 Free Software Foundation
@@ -131,8 +133,9 @@ sub mcdebfs_copyout
 	}
 	else
 	{
+	# files can be prepended with ./ or not, depending on the version of tar
 		$filename=~s!^CONTENTS/!!;
-		system("dpkg-deb --fsys-tarfile $archive | tar xOf - $filename > $destfile");
+		system("dpkg-deb --fsys-tarfile $archive | tar xOf - $filename ./$filename > $destfile 2>/dev/null");
 	}
 }
 
@@ -167,7 +170,7 @@ sub mcdebfs_run
 $pressinstall=<<EOInstall;
 
                               WARNING
-     Don't use this method if you are not willing to reinstall everything...
+     Don\'t use this method if you are not willing to reinstall everything...
 
 This is not a real file. It is a way to install the package you are browsing.
 
