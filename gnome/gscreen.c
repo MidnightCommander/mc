@@ -174,7 +174,7 @@ panel_fill_panel_list (WPanel *panel)
 	/* which column holds the type information */
 	type_col = -1;
 
-	g_assert (items == GTK_CLIST (cl->columns));
+	g_assert (items == cl->columns);
 		  
 	texts [items] = NULL;
 	for (i = 0; i < top; i++){
