@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-05-27 22:15+0200\n"
+"POT-Creation-Date: 2002-06-07 09:30+0200\n"
 "PO-Revision-Date: 2001-09-30 20:25GMT+1\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italiano (use this)<tp@lists.linux.it> <it@li.org>\n"
@@ -171,7 +171,7 @@ msgstr "Annulla"
 msgid " Save as "
 msgstr " Salva come..."
 
-#: edit/editcmd.c:442 edit/editcmd.c:2094 src/view.c:389
+#: edit/editcmd.c:442 edit/editcmd.c:2094 src/view.c:390
 msgid " Error trying to save file. "
 msgstr " Errore nel salvataggio del file. "
 
@@ -223,11 +223,11 @@ msgid " Confirm save file? : "
 msgstr " Conferma:  salvo il file?: "
 
 #. Buttons to 'Confirm save file' query
-#: edit/editcmd.c:686
+#: edit/editcmd.c:686 src/view.c:389
 msgid " Save file "
 msgstr " Salva il file "
 
-#: edit/editcmd.c:686 edit/editwidget.c:236 src/view.c:2030
+#: edit/editcmd.c:686 edit/editwidget.c:236 src/view.c:2031
 msgid "Save"
 msgstr "Salva"
 
@@ -319,7 +319,7 @@ msgstr " Ordine dell'argomento di sostituzione es. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Inserire stringa di sostituzione:"
 
-#: edit/editcmd.c:1114 edit/editcmd.c:1183 src/view.c:1945
+#: edit/editcmd.c:1114 edit/editcmd.c:1183 src/view.c:1946
 msgid " Enter search string:"
 msgstr " Inserire stringa di ricerca"
 
@@ -331,7 +331,7 @@ msgstr " Sostituisci "
 #. in response to number of bookmarks added because of string being found %d times
 #: edit/editcmd.c:1197 edit/editcmd.c:1874 edit/editcmd.c:1876
 #: edit/editcmd.c:1904 src/view.c:1476 src/view.c:1555 src/view.c:1675
-#: src/view.c:1687 src/view.c:1903 src/view.c:1945
+#: src/view.c:1687 src/view.c:1904 src/view.c:1946
 msgid " Search "
 msgstr " Cerca "
 
@@ -375,15 +375,13 @@ msgstr "Annulla uscita"
 
 #: edit/editcmd.c:1922 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
-#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:391
-#: src/view.c:413
+#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:413
 msgid "&Yes"
 msgstr " &Sì"
 
 #: edit/editcmd.c:1922 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
-#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:391
-#: src/view.c:413
+#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:413
 msgid "&No"
 msgstr "&No"
 
@@ -788,7 +786,7 @@ msgid " Editor options "
 msgstr " Opzioni editor"
 
 #: edit/editwidget.c:235 src/help.c:811 src/main.c:1539 src/screen.c:2222
-#: src/tree.c:1018 src/view.c:2023
+#: src/tree.c:1018 src/view.c:2024
 msgid "Help"
 msgstr "Aiuto"
 
@@ -808,7 +806,7 @@ msgstr "Copia"
 msgid "Move"
 msgstr "Sposta"
 
-#: edit/editwidget.c:241 src/view.c:2038
+#: edit/editwidget.c:241 src/view.c:2039
 msgid "Search"
 msgstr "Cerca"
 
@@ -820,8 +818,8 @@ msgstr "Elimina"
 msgid "PullDn"
 msgstr "Menu"
 
-#: edit/editwidget.c:245 src/help.c:823 src/main.c:1542 src/view.c:2025
-#: src/view.c:2047
+#: edit/editwidget.c:245 src/help.c:823 src/main.c:1542 src/view.c:2026
+#: src/view.c:2048
 msgid "Quit"
 msgstr "Esci"
 
@@ -2116,7 +2114,7 @@ msgstr " Errore interno "
 msgid " Unknown file operation "
 msgstr " Operazione su file sconosciuta "
 
-#: src/file.c:2076
+#: src/file.c:2076 src/view.c:391
 msgid "&Retry"
 msgstr "&Riprova"
 
@@ -3712,7 +3710,7 @@ msgstr ""
 msgid "View"
 msgstr "Vista"
 
-#: src/screen.c:2225 src/view.c:2034
+#: src/screen.c:2225 src/view.c:2035
 msgid "Edit"
 msgstr "Cambia"
 
@@ -4028,10 +4026,6 @@ msgstr " Pipe fallita "
 msgid " Dup failed "
 msgstr " Dup fallita "
 
-#: src/view.c:390
-msgid " Try again ? "
-msgstr " Provare ancora? "
-
 #: src/view.c:410
 msgid ""
 "File: \n"
@@ -4148,63 +4142,63 @@ msgstr ""
 msgid " Goto Address "
 msgstr " Vai all'indirizzo "
 
-#: src/view.c:1903
+#: src/view.c:1904
 msgid " Enter regexp:"
 msgstr " Inserisci espressione regolare:"
 
-#: src/view.c:2026
+#: src/view.c:2027
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2026
+#: src/view.c:2027
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2027
+#: src/view.c:2028
 msgid "Goto"
 msgstr "Vai a"
 
-#: src/view.c:2027
+#: src/view.c:2028
 msgid "Line"
 msgstr "Linea"
 
-#: src/view.c:2030
+#: src/view.c:2031
 msgid "RxSrch"
 msgstr "CercaRx"
 
-#: src/view.c:2033
+#: src/view.c:2034
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2033
+#: src/view.c:2034
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2035
+#: src/view.c:2036
 msgid "UnWrap"
 msgstr "DesEnv"
 
-#: src/view.c:2035
+#: src/view.c:2036
 msgid "Wrap"
 msgstr "Envolver"
 
-#: src/view.c:2038
+#: src/view.c:2039
 msgid "HxSrch"
 msgstr "CercaHx"
 
-#: src/view.c:2041
+#: src/view.c:2042
 msgid "Raw"
 msgstr "Raw"
 
-#: src/view.c:2041
+#: src/view.c:2042
 msgid "Parse"
 msgstr "Processa"
 
-#: src/view.c:2045
+#: src/view.c:2046
 msgid "Unform"
 msgstr "Unformat"
 
-#: src/view.c:2045
+#: src/view.c:2046
 msgid "Format"
 msgstr "Formato"
 
@@ -4431,10 +4425,19 @@ msgstr ""
 "Fine prematura di un archivio cpio\n"
 "%s"
 
-#: vfs/cpio.c:311 vfs/cpio.c:361
+#: vfs/cpio.c:311
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Trovata intestazione cpio rovinata in\n"
+"%s"
+
+#: vfs/cpio.c:361
+#, c-format
+msgid ""
+"Corrupt cpio header encountered in\n"
 "%s"
 msgstr ""
 "Trovata intestazione cpio rovinata in\n"
@@ -4463,7 +4466,7 @@ msgstr ""
 msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s contiene voci duplicate! Saltato!"
 
-#: vfs/cpio.c:521
+#: vfs/cpio.c:523
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4989,3 +4992,6 @@ msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
+
+#~ msgid " Try again ? "
+#~ msgstr " Provare ancora? "
