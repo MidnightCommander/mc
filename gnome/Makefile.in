@@ -216,7 +216,7 @@ checklinks:
 links:
 	for I in $(LOBJS); do $(RMF) $$I; $(LN_S) ../src/$$I $$I >/dev/null 2>&1; done; true
 
-maksourcelinks:
+sourcelinks:
 	-cd $(gnomedir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; $(LN_S) ../src/*.inc .; true
 
 cleansourcelinks:
