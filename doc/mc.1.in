@@ -3217,7 +3217,7 @@ everywhere).
 .SH "FILES"
 Full paths below may vary between installations.  They are also affected
 by the MC_DATADIR environment variable.  If it's set, its value is used
-instead of @prefix@/share in the paths below.
+instead of @prefix@/share/mc in the paths below.
 .PP
 .I @prefix@/share/mc/mc.hlp
 .IP
