@@ -372,7 +372,7 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
     if (force_update & UP_RELOAD){
 	panel->is_panelized = 0;
 
-#if 0
+#if 1
 	ftpfs_flushdir ();
 #endif
 /* FIXME: Should supply flushdir method */
