@@ -1,7 +1,7 @@
 2003-05-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* info.c (info_show_info): Cast myfs_stats.avail to double to
-	fix integer overflow that can cause a negative precent number.
+	fix integer overflow that can cause a negative percent number.
 
 2003-05-05  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
