@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.54a\n"
 "POT-Creation-Date: 2001-07-19 12:44+0200\n"
-"PO-Revision-Date: 2001-07-24 21:27+0200\n"
+"PO-Revision-Date: 2001-08-01 13:11+0200\n"
 "Last-Translator: Stanislav Brabec <utx@penguin.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1962,7 +1962,7 @@ msgstr "Zru¹it"
 
 #: gtkedit/editcmd.c:566
 msgid " Save as "
-msgstr " Ulo¾ jako "
+msgstr " Ulo¾it jako "
 
 #: gtkedit/editcmd.c:566 gtkedit/editcmd.c:2825
 msgid " Error trying to save file. "
@@ -2000,16 +2000,16 @@ msgstr " Stisknìte novou hotkey pro makro: "
 #. This heads the 'Save Macro' dialog box
 #: gtkedit/editcmd.c:755
 msgid " Save macro "
-msgstr " Ulo¾ makro "
+msgstr " Ulo¾it makro "
 
 #: gtkedit/editcmd.c:765 gtkedit/editcmd.c:773
 msgid " Delete Macro "
-msgstr " Sma¾ makro "
+msgstr " Smazat makro "
 
 #. This heads the 'Load Macro' dialog box
 #: gtkedit/editcmd.c:823
 msgid " Load macro "
-msgstr " Naèti makro "
+msgstr " Naèíst makro "
 
 #: gtkedit/editcmd.c:837 gtkedit/editcmd.c:839
 msgid " Confirm save file? : "
@@ -2018,12 +2018,12 @@ msgstr " Potvrïte ulo¾ení souboru? : "
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:842
 msgid " Save file "
-msgstr " Ulo¾ soubor "
+msgstr " Ulo¾it soubor "
 
 #: gtkedit/editcmd.c:842 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1247
 #: src/view.c:2081
 msgid "Save"
-msgstr "Ulo¾"
+msgstr "Ulo¾it"
 
 #: gtkedit/editcmd.c:868 gtkedit/editcmd.c:893
 msgid ""
@@ -3380,7 +3380,7 @@ msgstr "pøi spu¹tìní nastavit èíslo u¾ivatele"
 
 #: src/chmod.c:112
 msgid "C&lear marked"
-msgstr "&Sma¾ oznaèené"
+msgstr "&Smazat oznaèené"
 
 #: src/chmod.c:113
 msgid "S&et marked"
