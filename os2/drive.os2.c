@@ -16,13 +16,13 @@
    
    */
 
+#include <config.h>
 #ifndef __os2__
 #error This file is for the OS/2 operating systems.
 #else
 
 #define INCL_DOSDEVICES   /* Device values */
 #define INCL_DOSERRORS    /* Error values */
-#include <config.h>
 #include <os2.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -163,9 +163,9 @@ static void drive_cmd()
          add_widgetl (drive_dlg, 
                       button_new (5, (m_drv-i-1)*2+4 - (MAX_LGH*2 - nDrivesAvail) * 2, 
                               B_DRIVE_BASE+((int) szTempBuf[0] - (int) 'A'), 
-                              szTempBuf, 
-                              szTempBuf[0], 
-                              0, NULL, NULL, NULL),
+                              HIDDEN_BUTTON,
+                              szTempBuf,
+                              0, NULL, NULL),
                       XV_WLAY_RIGHTOF); 
       }
    }
@@ -176,10 +176,9 @@ static void drive_cmd()
                     button_new (3, 
                                (m_drv-i-1)*2+4, 
                                B_DRIVE_BASE+((int)szTempBuf[0] - (int) 'A'), 
-                               szTempBuf, 
-                               szTempBuf[0], 
+                               HIDDEN_BUTTON,
+                               szTempBuf,
                                0, 
-                               NULL, 
                                NULL,
                                NULL), 
                    XV_WLAY_RIGHTOF);

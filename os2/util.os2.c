@@ -33,10 +33,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <config.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <io.h>
@@ -45,7 +42,6 @@
 #include <limits.h>		/* INT_MAX */
 #include <sys/time.h>		/* select: timeout */
 #include <sys/param.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <process.h>
@@ -366,12 +362,13 @@ char *tilde_expand (char *directory)
     return strdup (directory);
 }
 
+#ifndef __EMX__
 void 
 sleep(unsigned long dwMiliSecs)
 {
     DosSleep(dwMiliSecs);
 }
-
+#endif
 
 
 /* Canonicalize path, and return a new path. Do everything in situ.
@@ -690,6 +687,7 @@ geteuid(void)
    return 0;
 }
 
+#ifndef __EMX__
 char *
 getcwd(char *buffer, int size)
 {
@@ -717,6 +715,7 @@ getcwd(char *buffer, int size)
       return NULL;
    } /* endif */
 }
+#endif
 
 int
 mc_chdir(char *pathname)
@@ -762,7 +761,7 @@ conv_os2_unx_rc(int os2rc)
       case ERROR_SHARING_VIOLATION:
       case ERROR_SHARING_BUFFER_EXCEEDED:
       case ERROR_ACCESS_DENIED:
-         errCode = EOS2ERR;
+         errCode = EACCES;
          break;
       case ERROR_INVALID_PARAMETER:
          errCode = EINVAL;
@@ -876,7 +875,7 @@ getpid (void)
 int
 errno_dir_not_empty (int err)
 {
-    if (err == EACCESS)
+    if (err == ENOTEMPTY)
 	return 1;
     return 0;
 }
@@ -890,4 +889,15 @@ get_mc_lib_dir ()
    } else {
       return mchome;
    } /* endif */
+}
+
+int get_user_rights (struct stat *buf)
+{
+    return 2;
+}
+void init_groups (void)
+{
+}
+void delete_groups (void)
+{
 }

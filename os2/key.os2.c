@@ -19,6 +19,7 @@
 
 */
 
+#include <config.h>
 #ifndef __os2__
 #error This file is for OS/2 systems.
 #else
@@ -31,7 +32,6 @@
 #define INCL_DOSERRORS
 #define INCL_WININPUT
 #include <os2.h>
-#include <config.h>
 #include <stdio.h>
 #include "mouse.h"
 #include "global.h"
@@ -240,7 +240,7 @@ int get_key_code (int no_delay)
     if (no_delay) {
         /* Check if any input pending, otherwise return */
 	nodelay (stdscr, TRUE);
-        inp_ch = SLsys_getkey_ndelay();
+        inp_ch = SLsys_input_pending();
         if (inp_ch == 0) {
            return 0;
         } /* endif */
@@ -364,7 +364,7 @@ extern int max_dirt_limit;
 /* Also takes care of generated mouse events */
 /* Returns 0 if it is a mouse event */
 /* The current behavior is to block allways */
-int get_event (Gpm_Event *event, int redo_event)
+int get_event (Gpm_Event *event, int redo_event, int block)
 {
     int c;
 
@@ -403,7 +403,7 @@ int mi_getch ()
     Gpm_Event ev;
     int       key;
     
-    while ((key = get_event (&ev, 0)) == 0)
+    while ((key = get_event (&ev, 0, 1)) == 0)
 	;
     return key;
 }
@@ -444,5 +444,8 @@ void channels_down()
 void learn_keys()
 {
 	message (1, "Learn Keys", "Sorry, no learn keys on OS/2");
+}
+void init_key_input_fd (void)
+{
 }
 #endif /* __os2__ */

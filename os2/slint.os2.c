@@ -1,4 +1,4 @@
-/* Slang interface to the Midnight Commander for OS/2
+/* Slang interface to the Midnight Commander for Windows NT and OS/2
    This emulates some features of ncurses on top of slang
    S-lang is not fully consistent between its Unix and non-Unix versions.
    
@@ -17,9 +17,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
-#include "config.h"
+#include <config.h>
 #include <stdio.h>
-#include <os2.h>
 #include "tty.h"
 #include "mad.h"
 #include "color.h"
@@ -31,6 +30,47 @@
 
 #ifdef HAVE_SLANG
 
+/* {{{  Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK, */
+extern unsigned int SLang_Input_Buffer_Len;
+extern unsigned char SLang_Input_Buffer [];
+extern unsigned int SLsys_getkey (void);
+extern int SLsys_input_pending (int);
+
+static unsigned int SLang_getkey2 (void)
+{
+   unsigned int imax;
+   unsigned int ch;
+   
+   if (SLang_Input_Buffer_Len)
+     {
+	ch = (unsigned int) *SLang_Input_Buffer;
+	SLang_Input_Buffer_Len--;
+	imax = SLang_Input_Buffer_Len;
+   
+	memcpy ((char *) SLang_Input_Buffer, 
+		(char *) (SLang_Input_Buffer + 1), imax);
+	return(ch);
+     }
+   else return(SLsys_getkey ());
+}
+
+static int SLang_input_pending2 (int tsecs)
+{
+   int n;
+   unsigned char c;
+   if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
+   
+   n = SLsys_input_pending (tsecs);
+   
+   if (n <= 0) return 0;
+   
+   c = (unsigned char) SLang_getkey2 ();
+   SLang_ungetkey_string (&c, 1);
+   
+   return n;
+}
+/* }}} */
+
 //??
 static void slang_sigterm ()
 {
@@ -41,7 +81,7 @@ static int slinterrupt;
 
 void enable_interrupt_key(void)
 {
-//    SLang_set_abort_signal(NULL);
+    SLang_set_abort_signal(NULL);
     slinterrupt = 1;
 }
 void disable_interrupt_key(void)
@@ -83,7 +123,7 @@ void slang_shutdown ()
 {
     slang_shell_mode ();
     do_exit_ca_mode ();
-//    SLang_reset_tty ();
+    SLang_reset_tty ();
 
     /* reset the colors to those that were
      * active when the program was started up
@@ -192,7 +232,11 @@ void load_terminfo_keys ()
 
 int getch ()
 {
-   return _getch();
+    if (no_slang_delay)
+	if (SLang_input_pending2 (0) == 0)
+	    return -1;
+
+    return SLang_getkey2 ();
 }
 
 extern int slow_terminal;
@@ -208,6 +252,7 @@ int got_interrupt ()
 
 void mc_refresh (void)
 {
+/*  if (!we_are_background) (no background mode yet) */
     refresh ();
 }
 

@@ -1,6 +1,9 @@
 #define INCL_DOSFILEMGR
 #define INCL_DOSERRORS
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 #include <os2.h>
 #include <stdio.h>
 #include <stdlib.h>

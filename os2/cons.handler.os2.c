@@ -20,6 +20,7 @@
    
 */
 
+#include <config.h>
 #ifndef __os2__
 #error This file is for OS/2 operating systems.
 #else
@@ -32,7 +33,6 @@
 #define INCL_SUB
 #define INCL_DOSERRORS
 
-#include <config.h>
 #include <os2.h>
 
 #include "tty.h"

@@ -31,7 +31,27 @@
 #ifndef __CONFIG_H                    //Prevent multiple includes
 #define __CONFIG_H
 
-#include "../VERSION"
+#ifndef __BORLANDC__
+#   include <../VERSION>
+#else
+#   include <../VERSION.>
+#endif
+
+#ifndef OS2
+#   define OS2
+#endif
+
+#ifndef __os2__
+#   define __os2__
+#endif
+
+#ifndef pc_system
+#   define pc_system
+#endif
+
+#define OS2_NT
+#define FLOAT_TYPE
+#define MIDNIGHT
 
 // ---------------------------------------------------------------------------
 // Headers
@@ -44,17 +64,21 @@
 
 // ---------------------------------------------------------------------------
 // "Standard" Library
-#define HAS_MEMSET
-#define HAS_MEMCHR
-#define HAS_MEMCPY
-#define HAS_MEMCMP
+#define HAVE_MEMSET
+#define HAVE_MEMCHR
+#define HAVE_MEMCPY
+#define HAVE_MEMCMP
+#define HAVE_MEMMOVE
 #define HAVE_STRDUP
 #define HAVE_STRERROR
-#define HAVE_MEMMOVE
+#define HAVE_TRUNCATE
 #define REGEX_MALLOC
 
 #define NO_TERM
 #define NO_INFOMOUNT
+#ifndef __EMX__
+#define HAVE_SHORT_MKDIR
+#endif
 
 // ---------------------------------------------------------------------------
 // Windowing library
@@ -68,22 +92,25 @@
 
 // ---------------------------------------------------------------------------
 // Typedefs (some useless under NT)
+typedef unsigned int umode_t;
+#ifndef __EMX__
 typedef int gid_t;                 // Not defined in <sys/types.h>
 typedef int uid_t;
 typedef int mode_t;
 typedef int pid_t;
-typedef unsigned int umode_t;
 typedef unsigned int nlink_t;
 
 #define INLINE
 #define inline
-#define OS2_NT 1
 #define ENOTDIR -1
+#endif /* not __EMX__ */
+
 // ---------------------------------------------------------------------------
 // File attributes
-#define S_ISLNK(x) 0
-
 #define S_ISBLK(m)      0               /* Some of these are not actual values*/
+#define S_ISLNK(x)      0
+#ifndef __EMX__
+
 #define S_ISFIFO(x)     0
 #define S_IFBLK         0010000                         /* but don't worry, these are yet not possible on NT */
 #define S_IFLNK         0010000
@@ -124,15 +151,17 @@ typedef unsigned int nlink_t;
 #define W_OK    2       /*  Test for write permission   */
 #define X_OK    1       /*  Test for execute permission */
 #define F_OK    0       /*  Test for existence of file  */
-
+#endif /* __EMX__ */
 
 // ---------------------------------------------------------------------------
 // Inline definitions
 
 // Pipes
+#ifndef __EMX__
 #define popen   _popen
 #define pclose  _pclose
 #define pipe(p)  _pipe(p, 4096, 0x8000 /*_O_BINARY*/)
+#endif
 
 #ifndef MAX_PATH
 #  define MAX_PATH          260

@@ -16,19 +16,19 @@
 
 */
 
+#include <config.h>
 #ifndef __os2__
 #error This file is for the OS/2 operating system.
 #else
 
-#include <config.h>
 #define INCL_DOSFILEMGR
 #include <os2.h>
 #include <string.h>
 #include <stdio.h>
 /* for chmod and stat */
 #include <io.h>
-#include <sys\stat.h>
 #include <sys\types.h>
+#include <sys\stat.h>
 #include "tty.h"
 #include "mad.h"
 #include "util.h"
@@ -104,28 +104,27 @@ struct {
 };
 
 struct {
-    int         ret_cmd, y, x;
-    char        *text;
-    int         hkey, hpos;
+    int ret_cmd, flags, y, x;
+    char *text;
 } chmod_but[BUTTONS] = {
 
     {
-	B_CANCEL, 2, 33, "[ Cancel ]", 'c', 2,
+	B_CANCEL, NORMAL_BUTTON, 2, 33, "&Cancel",
     },
     {
-	B_ENTER, 2, 17, "[ Set ]", 's', 2,
+	B_ENTER, DEFPUSH_BUTTON, 2, 17, "&Set",
     },
     {
-	B_CLRMRK, 0, 42, "[ Clear marked ]", 'l', 3,
+	B_CLRMRK, NORMAL_BUTTON, 0, 42, "C&lear marked",
     },
     {
-	B_SETMRK, 0, 27, "[ Set marked ]", 'e', 3,
+	B_SETMRK, NORMAL_BUTTON, 0, 27, "S&et marked",
     },
     {
-	B_MARKED, 0, 12, "[ Marked all ]", 'm', 2,
+	B_MARKED, NORMAL_BUTTON, 0, 12, "&Marked all",
     },
     {
-	B_ALL, 0, 0, "[ Set all ]", 'a', 6,
+	B_ALL, NORMAL_BUTTON, 0, 0, "Set &all",
     },
 };
 
@@ -240,7 +239,7 @@ static void init_chmod (void)
     x_set_dialog_title (ch_dlg, "Chmod command");
 
 #define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
-                  chmod_but[i].ret_cmd, chmod_but[i].text, chmod_but[i].hkey,                    chmod_but[i].hpos, 0, 0, NULL
+     chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0, 0, NULL
 
     tk_new_frame (ch_dlg, "b.");
     for (i = 0; i < BUTTONS; i++) {
@@ -251,7 +250,7 @@ static void init_chmod (void)
     }
 
 
-#define XTRACT2(i) 0, check_perm [i].text, 0, -1, NULL
+#define XTRACT2(i) 0, check_perm [i].text, NULL
     tk_new_frame (ch_dlg, "c.");
     for (i = 0; i < PERMISSIONS; i++) {
 	check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
