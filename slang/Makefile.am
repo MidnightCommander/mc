@@ -1,4 +1,4 @@
-AM_CFLAGS = $(GLIB_CFLAGS) -Iinclude
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(srcdir)/include
 
 if INCLUDED_SLANG
 noinst_LIBRARIES = libmcslang.a
