@@ -5715,7 +5715,7 @@ msgstr "NumLock sul tastierino"
 msgid ""
 "Couldn't open %s archive\n"
 "%s"
-msgstr "Non posso aprire la pipe %s\n"
+msgstr "Non posso aprire l'archivio %s\n"
 "%s"
 
 #: vfs/extfs.c:298 vfs/extfs.c:318
