@@ -56,6 +56,7 @@ static long const emacs_key_map[] = {
     XCTRL ('b'), CK_Left,
     XCTRL ('e'), CK_End,
     XCTRL ('f'), CK_Right,
+    XCTRL ('g'), CK_Ignore_Key,
     XCTRL ('n'), CK_Down,
     XCTRL ('p'), CK_Up,
     XCTRL ('s'), CK_Find,
@@ -163,7 +164,7 @@ static long const common_key_map[] = {
 int
 edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 {
-    int command = -1;
+    int command = CK_Insert_Char;
     int char_for_insertion = -1;
     int i = 0;
     static const long *key_map;
@@ -194,7 +195,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 			      (_(" Execute Macro "),
 			       _(" Press macro hotkey: "), 1));
 		if (command == CK_Macro (0))
-		    command = -1;
+		    command = CK_Insert_Char;
 		goto fin;
 	    }
 	    goto fin;
@@ -225,7 +226,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 		      (_(" Execute Macro "), _(" Press macro hotkey: "),
 		       1));
 	if (command == CK_Macro (0))
-	    command = -1;
+	    command = CK_Insert_Char;
 	goto fin;
     }
     /* edit is a pointer to the widget */
@@ -250,20 +251,22 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* Commands specific to the key emulation */
     i = 0;
-    while (key_map[i] != x_key && (key_map[i] || key_map[i + 1]))
+    while (key_map[i] && (key_map[i] != x_key))
 	i += 2;
-    command = key_map[i + 1];
-    if (command)
+    if (key_map[i]) {
+	command = key_map[i + 1];
 	goto fin;
+    }
 
     /* Commands common for the key emulations */
     key_map = common_key_map;
     i = 0;
-    while (key_map[i] != x_key && (key_map[i] || key_map[i + 1]))
+    while (key_map[i] && (key_map[i] != x_key))
 	i += 2;
-    command = key_map[i + 1];
-    if (command)
+    if (key_map[i]) {
+	command = key_map[i + 1];
 	goto fin;
+    }
 
     /* Function still not found for this key, so try macros */
     /* This allows the same macro to be 
@@ -282,7 +285,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     *cmd = command;
     *ch = char_for_insertion;
 
-    if ((command == -1 || command == 0) && char_for_insertion == -1) {
+    if (command == CK_Insert_Char && char_for_insertion == -1) {
 	/* unchanged, key has no function here */
 	return 0;
     }

@@ -1,5 +1,11 @@
 2004-02-04  Pavel Roskin  <proski@gnu.org>
 
+	* editcmddef.h: Split CK_No_Command into CK_Insert_Char and
+	CK_Ignore_Key.
+	* editkeys.c (emacs_key_map): Ignore Ctrl-g.  Requested by
+	Paul Seelig <pseelig@uni-mainz.de>
+	(edit_translate_key): Implement CK_Ignore_Key.
+
 	* edit.c (edit_execute_key_command): Return void, the result is
 	never used.
 	(edit_execute_cmd): Likewise.

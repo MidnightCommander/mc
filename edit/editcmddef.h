@@ -4,8 +4,11 @@
 /*  in the distant future, keyboards will be invented with a
     separate key for each one of these commands   *sigh*      */
 
+/* special commands */
+#define CK_Insert_Char 		-1
+#define CK_Ignore_Key 		0
+
 /* cursor movements */
-#define CK_No_Command 		-1
 #define CK_BackSpace 		1
 #define CK_Delete 		2
 #define CK_Enter 		3
