@@ -35,12 +35,13 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <malloc.h>
 #ifdef USE_TERMNET
 #include <termnet.h>
 #endif
-
 #include <errno.h>
+
+#include "utilvfs.h"
+
 #include "vfs.h"
 
 /* Extract the hostname and username from the path */
@@ -65,7 +66,7 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
-    char *pcopy = strdup (path);
+    char *pcopy = g_strdup (path);
     char *pend   = pcopy + strlen (pcopy);
     int default_is_anon = flags & URL_DEFAULTANON;
     
@@ -77,13 +78,13 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     dir = pcopy;
     if (!(flags & URL_NOSLASH)) {
 	/* locate path component */
-	for (; *dir != '/' && *dir; dir++)
+	for (; *dir != PATH_SEP && *dir; dir++)
 	    ;
 	if (*dir){
-	    retval = strdup (dir);
+	    retval = g_strdup (dir);
 	    *dir = 0;
 	} else
-	    retval = strdup ("/");
+	    retval = g_strdup (PATH_SEP_STR);
     }
     
     /* search for any possible user */
@@ -99,10 +100,10 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	    if (*inner_colon == '@')
 		*pass = NULL;
 	    else
-		*pass = strdup (inner_colon);
+		*pass = g_strdup (inner_colon);
 	}
-	if (*pcopy != 0)
-	    *user = strdup (pcopy);
+	if (*pcopy != NULL)
+	    *user = g_strdup (pcopy);
 	else
 	    default_is_anon = 0;
 	
@@ -115,12 +116,12 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 
     if (!*user){
 	if (default_is_anon)
-	    *user = strdup ("anonymous");
+	    *user = g_strdup ("anonymous");
 	else {
 	    if ((passwd_info = getpwuid (geteuid ())) == NULL)
-		*user = strdup ("anonymous");
+		*user = g_strdup ("anonymous");
 	    else {
-		*user = strdup (passwd_info->pw_name);
+		*user = g_strdup (passwd_info->pw_name);
 	    }
 	    endpwent ();
 	}
@@ -146,10 +147,22 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	}
     }
 done:
-    *host = strdup (rest);
+    *host = g_strdup (rest);
 
-    free (pcopy);
+    g_free (pcopy);
     return retval;
+}
+
+/* Returns allocated string with trailing PATH_SEP */
+char*
+append_path_sep (char *path)
+{
+    int i = strlen(path) - 1;
+
+    if(path[i] == PATH_SEP)
+	return g_strndup(path, i);
+    else
+	return copy_strings (path, PATH_SEP_STR, NULL);
 }
 
 #ifdef test_get_host_and_username
@@ -229,9 +242,9 @@ main ()
     char *current;
     
     if ((passwd_info = getpwuid (geteuid ())) == NULL)
-	current = strdup ("anonymous");
+	current = g_strdup ("anonymous");
     else {
-		current= strdup (passwd_info->pw_name);
+		current= g_strdup (passwd_info->pw_name);
     }
     endpwent ();
     

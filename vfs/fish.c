@@ -35,15 +35,13 @@
 
 #undef HAVE_HACKED_SSH
 
+#include "utilvfs.h"
+
 #include "xdirentry.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
-#include "../src/main.h"
-#include "../src/mem.h"
 #include "vfs.h"
 #include "tcputil.h"
 #include "container.h"
 #include "fish.h"
-#include <glib.h>
 
 /*
  * Reply codes.
@@ -231,10 +229,10 @@ open_archive_int (vfs *me, vfs_s_super *super)
 		p = copy_strings (" fish: Password required for ", SUP.user, 
 				  " ", NULL);
 		op = vfs_get_password (p);
-		free (p);
+		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
-		SUP.password = strdup (op);
+		SUP.password = g_strdup (op);
 		wipe_password(op);
 	    }
 	    print_vfs_message( "fish: Sending password..." );
@@ -257,7 +255,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
 #if 0
     super->name = copy_strings( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
 #endif
-    super->name = strdup( "/" );
+    super->name = g_strdup(PATH_SEP_STR);
 
     super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755));
     return 0;
@@ -270,14 +268,14 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     int flags;
 
     vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, &password, 0, URL_NOSLASH);
-    SUP.host = strdup (host);
-    SUP.user = strdup (user);
+    SUP.host = g_strdup (host);
+    SUP.user = g_strdup (user);
     SUP.flags = flags;
     if (!strncmp( op, "rsh:", 4 ))
 	SUP.flags |= FISH_FLAG_RSH;
     SUP.home = NULL;
     if (password)
-	SUP.password = strdup (password);
+	SUP.password = g_strdup (password);
     return open_archive_int (me, super);
 }
 
@@ -374,7 +372,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 	              char *c;
 		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
 			  break;  /* We'll do . and .. ourself */
-		      ent->name = strdup(buffer+1); 
+		      ent->name = g_strdup(buffer+1); 
 		      if ((c=strchr(ent->name, ' ')))
 			  *c = 0; /* this is ugly, but we can not handle " " in name */
 		      break;
@@ -415,7 +413,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 		      ST.st_rdev = (maj << 8) | min;
 #endif
 	          }
-	case 'L': ent->ino->linkname = strdup(buffer+1);
+	case 'L': ent->ino->linkname = g_strdup(buffer+1);
 	          break;
 	}
     }
@@ -517,7 +515,7 @@ linear_abort (vfs *me, vfs_s_fh *fh)
 
     print_vfs_message( "Aborting transfer..." );
     do {
-	n = VFS_MIN(8192, fh->u.fish.total - fh->u.fish.got);
+	n = MIN(8192, fh->u.fish.total - fh->u.fish.got);
 	if (n)
 	    if ((n = read(SUP.sockr, buffer, n)) < 0)
 	        return;
@@ -534,7 +532,7 @@ linear_read (vfs *me, vfs_s_fh *fh, void *buf, int len)
 {
     vfs_s_super *super = FH_SUPER;
     int n = 0;
-    len = VFS_MIN( fh->u.fish.total - fh->u.fish.got, len );
+    len = MIN( fh->u.fish.total - fh->u.fish.got, len );
     disable_interrupt_key();
     while (len && ((n = read (SUP.sockr, buf, len))<0)) {
         if ((errno == EINTR) && !got_interrupt())
@@ -595,7 +593,7 @@ send_fish_command(vfs *me, vfs_s_super *super, char *cmd, int flags)
 }
 
 #define PREFIX \
-    char buf[999]; \
+    char buf[BUF_LARGE]; \
     char *rpath; \
     vfs_s_super *super; \
     if (!(rpath = vfs_s_get_path_mangle(me, path, &super, 0))) \
@@ -608,7 +606,7 @@ static int
 fish_chmod (vfs *me, char *path, int mode)
 {
     PREFIX
-    sprintf(buf, "#CHMOD %4.4o /%s\nchmod %4.4o /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\nchmod %4.4o /%s; echo '### 000'\n", 
 	    mode & 07777, rpath,
 	    mode & 07777, rpath);
     POSTFIX(OPT_FLUSH);
@@ -617,7 +615,7 @@ fish_chmod (vfs *me, char *path, int mode)
 #define FISH_OP(name, chk, string) \
 static int fish_##name (vfs *me, char *path1, char *path2) \
 { \
-    char buf[1024]; \
+    char buf[BUF_LARGE]; \
     char *rpath1 = NULL, *rpath2 = NULL; \
     vfs_s_super *super1, *super2; \
     if (!(rpath1 = vfs_s_get_path_mangle(me, path1, &super1, 0))) \
@@ -635,7 +633,7 @@ FISH_OP(link,   XTEST, "#LINK /%s /%s\nln /%s /%s; echo '### 000'" );
 static int fish_symlink (vfs *me, char *setto, char *path)
 {
     PREFIX
-    sprintf(buf, "#SYMLINK %s /%s\nln -s %s /%s; echo '### 000'\n", setto, rpath, setto, rpath);
+    g_snprintf(buf, sizeof(buf), "#SYMLINK %s /%s\nln -s %s /%s; echo '### 000'\n", setto, rpath, setto, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -646,12 +644,12 @@ fish_chown (vfs *me, char *path, int owner, int group)
     PREFIX
     sowner = getpwuid( owner )->pw_name;
     sgroup = getgrgid( group )->gr_name;
-    sprintf(buf, "#CHOWN /%s /%s\nchown /%s /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf), "#CHOWN /%s /%s\nchown /%s /%s; echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
     send_fish_command(me, super, buf, OPT_FLUSH); 
                   /* FIXME: what should we report if chgrp succeeds but chown fails? */
-    sprintf(buf, "#CHGRP /%s /%s\nchgrp /%s /%s; echo '### 000'\n", 
+    g_snprintf(buf, sizeof(buf), "#CHGRP /%s /%s\nchgrp /%s /%s; echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
     POSTFIX(OPT_FLUSH)
@@ -660,21 +658,21 @@ fish_chown (vfs *me, char *path, int owner, int group)
 static int fish_unlink (vfs *me, char *path)
 {
     PREFIX
-    sprintf(buf, "#DELE /%s\nrm -f /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf), "#DELE /%s\nrm -f /%s; echo '### 000'\n", rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
 static int fish_mkdir (vfs *me, char *path, mode_t mode)
 {
     PREFIX
-    sprintf(buf, "#MKD /%s\nmkdir /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf), "#MKD /%s\nmkdir /%s; echo '### 000'\n", rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
 static int fish_rmdir (vfs *me, char *path)
 {
     PREFIX
-    sprintf(buf, "#RMD /%s\nrmdir /%s; echo '### 000'\n", rpath, rpath);
+    g_snprintf(buf, sizeof(buf), "#RMD /%s\nrmdir /%s; echo '### 000'\n", rpath, rpath);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -732,7 +730,7 @@ error_3:
     close(handle);
     unlink(ino->localname);
 error_4:
-    free(ino->localname);
+    g_free(ino->localname);
     ino->localname = NULL;
     return -1;
 }

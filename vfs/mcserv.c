@@ -93,8 +93,9 @@
 #    endif
 #endif
 
-#include "../src/fs.h"
-#include "../src/mem.h"
+#include "utilvfs.h"
+
+#include "vfs.h"
 #include "mcfs.h"
 #include "tcputil.h"
 
@@ -178,7 +179,7 @@ void do_open (void)
     
     handle = open (arg, flags, mode);
     send_status (handle, errno);
-    free (arg);
+    g_free (arg);
 }
 
 void do_read (void)
@@ -187,7 +188,7 @@ void do_read (void)
     void *data;
    
     rpc_get (msock, RPC_INT, &handle, RPC_INT, &count, RPC_END);
-    data = malloc (count);
+    data = g_malloc (count);
     if (!data){
 	send_status (-1, ENOMEM);
 	return;
@@ -202,7 +203,7 @@ void do_read (void)
     send_status (n, 0);
     rpc_send (msock, RPC_BLOCK, n, data, RPC_END);
     
-    free (data);
+    g_free (data);
 }
 
 void do_write (void)
@@ -286,9 +287,9 @@ void send_time (int sock, time_t time)
 		  RPC_END);
     } else {
 	long ltime = (long) time;
-	char buf[2*sizeof(long) + 1];
+	char buf[BUF_SMALL];
 
-	sprintf (buf, "%lx", ltime);
+	g_snprintf (buf, sizeof(buf), "%lx", ltime);
 	rpc_send (msock,
 		  RPC_STRING, buf,
 		  RPC_END);
@@ -330,7 +331,7 @@ void do_lstat ()
     send_status (n, errno);
     if (n >= 0)
 	send_stat_info (&st);
-    free (file);
+    g_free (file);
 }
 
 void do_fstat (void)
@@ -360,7 +361,7 @@ void do_stat ()
     send_status (n, errno);
     if (n >= 0)
 	send_stat_info (&st);
-    free (file);
+    g_free (file);
 }
 
 /* }}} */
@@ -379,7 +380,7 @@ void close_handle (int handle)
     if (mcfs_DIR.dirs [handle])
 	closedir (mcfs_DIR.dirs [handle]);
     if (mcfs_DIR.names [handle])
-	free (mcfs_DIR.names [handle]);
+	g_free (mcfs_DIR.names [handle]);
     mcfs_DIR.dirs [handle] = 0;
     mcfs_DIR.names [handle] = 0;
 }
@@ -394,7 +395,7 @@ void do_opendir (void)
 
     if (mcfs_DIR.used == OPENDIR_HANDLES){
 	send_status (-1, ENFILE);	/* Error */
-	free (arg);
+	g_free (arg);
 	return;
     }
     
@@ -408,7 +409,7 @@ void do_opendir (void)
 
     if (handle == -1){
 	send_status (-1, EMFILE);
-	free (arg);
+	g_free (arg);
 	if (!inetd_started)
 	    fprintf (stderr, "OOPS! you have found a bug in mc - do_opendir()!\n");
 	return;
@@ -426,7 +427,7 @@ void do_opendir (void)
 
     } else {
 	send_status (-1, errno);
-	free (arg);
+	g_free (arg);
     }
 }
 
@@ -435,7 +436,7 @@ void do_readdir (void)
 {
     struct dirent *dirent;
     struct stat st;
-    int    handle, n, dnamelen;
+    int    handle, n;
     char   *fname = 0;
 
     rpc_get (msock, RPC_INT, &handle, RPC_END);
@@ -447,18 +448,17 @@ void do_readdir (void)
 
     /* We incremented it in opendir */
     handle --;
-    dnamelen = strlen (mcfs_DIR.names [handle]);
 
     while ((dirent = readdir (mcfs_DIR.dirs [handle]))){
 	int length = NLENGTH (dirent);
 
 	rpc_send (msock, RPC_INT, length, RPC_END);
 	rpc_send (msock, RPC_BLOCK, length, dirent->d_name, RPC_END);
-	fname = malloc (dnamelen + length + 2);
-	strcat (strcat (strcpy (fname, mcfs_DIR.names [handle]), "/"), dirent->d_name);
+	fname = copy_strings (mcfs_DIR.names [handle], 
+				PATH_SEP_STR, dirent->d_name, NULL);
 	n = lstat (fname, &st);
 	send_status (n, errno);
-	free (fname);
+	g_free (fname);
 	if (n >= 0)
 	    send_stat_info (&st);
     }
@@ -486,7 +486,7 @@ void do_chdir (void)
     
     status = chdir (file);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_rmdir (void)
@@ -498,7 +498,7 @@ void do_rmdir (void)
     
     status = rmdir (file);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_mkdir (void)
@@ -510,7 +510,7 @@ void do_mkdir (void)
     
     status = mkdir (file, mode);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_mknod (void)
@@ -522,7 +522,7 @@ void do_mknod (void)
     
     status = mknod (file, mode, dev);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_readlink (void)
@@ -538,7 +538,7 @@ void do_readlink (void)
         buffer [n] = 0;
 	rpc_send (msock, RPC_STRING, buffer, RPC_END);
     }
-    free (file);
+    g_free (file);
 }
 
 void do_unlink (void)
@@ -549,7 +549,7 @@ void do_unlink (void)
     rpc_get (msock, RPC_STRING, &file, RPC_END);
     status = unlink (file);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_rename (void)
@@ -560,7 +560,7 @@ void do_rename (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = rename (f1, f2);
     send_status (status, errno);
-    free (f1); free (f2);
+    g_free (f1); g_free (f2);
 }
 
 void do_symlink (void)
@@ -571,7 +571,7 @@ void do_symlink (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = symlink (f1, f2);
     send_status (status, errno);
-    free (f1); free (f2);
+    g_free (f1); g_free (f2);
 }
 
 void do_link (void)
@@ -582,7 +582,7 @@ void do_link (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = link (f1, f2);
     send_status (link (f1, f2), errno);
-    free (f1); free (f2);
+    g_free (f1); g_free (f2);
 }
 
 
@@ -608,7 +608,7 @@ void do_chmod (void)
     rpc_get (msock, RPC_STRING, &file, RPC_INT, &mode, RPC_END);
     status = chmod (file, mode);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_chown (void)
@@ -619,7 +619,7 @@ void do_chown (void)
     rpc_get (msock, RPC_STRING, &file,RPC_INT, &owner, RPC_INT,&group,RPC_END);
     status = chown (file, owner, group);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_utime (void)
@@ -640,13 +640,13 @@ void do_utime (void)
     sscanf (ms, "%lx", &mtime);
     if (verbose) printf ("Got a = %s, m = %s, comp a = %ld, m = %ld\n",
 			  as, ms, atime, mtime);
-    free (as);
-    free (ms);
+    g_free (as);
+    g_free (ms);
     times.actime  = (time_t) atime;
     times.modtime = (time_t) mtime;
     status = utime (file, &times);
     send_status (status, errno);
-    free (file);
+    g_free (file);
 }
 
 void do_quit ()
@@ -669,7 +669,7 @@ mc_pam_conversation (int messages, const struct pam_message **msg,
     struct user_pass *up = appdata_ptr;
     int status;
 
-    r = (struct pam_response *) malloc (sizeof (struct pam_response) * messages);
+    r = g_new (struct pam_response, messages);
     if (!r)
 	return PAM_CONV_ERR;
     *resp = r;
@@ -678,12 +678,12 @@ mc_pam_conversation (int messages, const struct pam_message **msg,
 	switch ((*msg)->msg_style){
 
 	case PAM_PROMPT_ECHO_ON: 
-	    r->resp = strdup (up->username);
+	    r->resp = g_strdup (up->username);
 	    r->resp_retcode  = PAM_SUCCESS;
 	    break;
 
 	case PAM_PROMPT_ECHO_OFF:
-	    r->resp = strdup (up->password);
+	    r->resp = g_strdup (up->password);
 	    r->resp_retcode = PAM_SUCCESS;
 	    break;
 
@@ -891,9 +891,9 @@ do_auth (char *username, char *password)
         return 0;
     
     if (this->pw_dir [strlen (this->pw_dir) - 1] == '/')
-        home_dir = strdup (this->pw_dir);
+        home_dir = g_strdup (this->pw_dir);
     else {
-        home_dir = malloc (strlen (this->pw_dir) + 2);
+        home_dir = g_malloc (strlen (this->pw_dir) + 2);
         if (home_dir) {
             strcpy (home_dir, this->pw_dir);
             strcat (home_dir, "/");
@@ -1284,30 +1284,39 @@ char *unix_error_string (int a)
     return "none";
 }
 
-#ifndef HAVE_MAD
-void *do_xmalloc (int size)
-{
-    void *m = malloc (size);
-
-    if (!m){
-	fprintf (stderr, "memory exhausted\n");
-	exit (1);
-    }
-    return m;
-}
-#endif
-
-#ifndef HAVE_STRDUP
-char *strdup (char *s)
-{
-    char *t = malloc (strlen (s)+1);
-    strcpy (t, s);
-    return t;
-}
-#endif
-
 void vfs_die( char *m )
 {
-    fprintf (stderr,m);
-    exit (1);
+    fprintf (stderr, m);
+	exit (1);
+    }
+#ifdef HAVE_MAD
+char *copy_strings (const char *first, ...)
+{
+    va_list ap;
+    long len;
+    char *data, *result;
+
+    if (!first)
+	return 0;
+    
+    len = strlen (first) + 1;
+    va_start (ap, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	len += strlen (data);
+
+    result = g_malloc (len);
+    
+    va_end (ap);
+
+    va_start (ap, first);
+    strcpy (result, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	strcat (result, data);
+
+    va_end (ap);
+
+    return result;
 }
+#endif /* HAVE_MAD */

@@ -62,19 +62,6 @@ int source_route = 0;
 int cd_symlinks = 0;
 
 /*
- * Required functions to make mc's vfs layer compile stand-alone
- */
-
-void *do_xmalloc (int size)
-{
-    void *m = malloc (size);
-
-    if (!m)
-	    vfs_die ("Memory exhausted\n");
-    return m;
-}
-
-/*
  * We do not want/need many of midnight's functions, stub routines.
  */
 
@@ -162,7 +149,7 @@ wipe_password (char *passwd)
     
     for (;*p; p++)
         *p = 0;
-    free (passwd);
+    g_free (passwd);
 }
 
 int

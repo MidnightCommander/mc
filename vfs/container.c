@@ -21,8 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "../src/mad.h"
-#include "../src/util.h"
+#include "utilvfs.h"
 #include "xdirentry.h"
 #include "container.h"
 
@@ -32,7 +31,7 @@ linklist_init(void)
 {
     struct linklist *head;
     
-    head = xmalloc(sizeof(struct linklist), "struct linklist");
+    head = g_new (struct linklist, 1);
     if (head) {
         head->prev = head->next = head;
 	head->data = NULL;
@@ -49,9 +48,9 @@ linklist_destroy(struct linklist *head, void (*destructor) (void *))
 	if (p->data && destructor)
 	    (*destructor) (p->data);
 	q = p->next;
-	free(p);
+	g_free(p);
     }
-    free(head);
+    g_free(head);
 }
 
 int 
@@ -59,7 +58,7 @@ linklist_insert(struct linklist *head, void *data)
 {
     struct linklist *p;
 
-    p = xmalloc(sizeof(struct linklist), "struct linklist");
+    p = g_new (struct linklist, 1);
     if (p == NULL)
         return 0;
     p->data = data;
@@ -78,7 +77,7 @@ linklist_delete_all(struct linklist *head, void (*destructor) (void *))
     for (p = head->next; p != head; p = q) {
 	destructor(p->data);
 	q = p->next;
-	free(p);
+	g_free(p);
     }
     head->next = head->prev = head;
     head->data = NULL;
@@ -93,7 +92,7 @@ linklist_delete(struct linklist *head, void *data)
 	if (h->data == data) {
 	    h->prev->next = h->next;
 	    h->next->prev = h->prev;
-	    free(h);
+	    g_free(h);
 	    return 1;
 	}
 	h = h->next;

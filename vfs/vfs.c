@@ -20,16 +20,13 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 /* Warning: funtions like extfs_lstat() have right to destroy any
- * strings you pass to them. This is acutally ok as you strdup what
+ * strings you pass to them. This is acutally ok as you g_strdup what
  * you are passing to them, anyway; still, beware.  */
 
 /* Namespace: exports *many* functions with vfs_ prefix; exports
    parse_ls_lga and friends which do not have that prefix. */
 
 #include <config.h>
-#include <glib.h>
-#undef MIN
-#undef MAX
 
 #include <syslog.h>
 #include <stdio.h>
@@ -38,7 +35,6 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <malloc.h>
 #include <fcntl.h>
 #include <signal.h>
 #ifdef SCO_FLAVOR
@@ -46,10 +42,10 @@
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <sys/time.h>
-#include "../src/fs.h"
-#include "../src/mad.h"
+
+#include "utilvfs.h"
+
 #include "../src/dir.h"
-#include "../src/util.h"
 #include "../src/main.h"
 #ifndef VFS_STANDALONE
 #include "../src/panel.h"
@@ -57,6 +53,7 @@
 #include "../src/layout.h"	/* For get_panel_widget and get_other_index */
 #include "../src/dialog.h"
 #endif
+
 #include "vfs.h"
 #include "extfs.h"		/* FIXME: we should not know anything about our modules */
 #include "names.h"
@@ -163,7 +160,7 @@ vfs_strip_suffix_from_filename (char *filename)
     if (!filename)
 	vfs_die("vfs_strip_suffix_from_path got NULL: impossible");
     
-    p = strdup (filename);
+    p = g_strdup (filename);
     if (!(semi = strrchr (p, '#')))
 	return p;
 
@@ -171,11 +168,11 @@ vfs_strip_suffix_from_filename (char *filename)
         if (vfs->which){
 	    if ((*vfs->which) (vfs, semi + 1) == -1)
 		continue;
-	    *semi = '\0'; /* Found valid suffix */
+	    *semi = NULL; /* Found valid suffix */
 	    return p;
 	}
 	if (!strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix))) {
-	    *semi = '\0'; /* Found valid suffix */
+	    *semi = NULL; /* Found valid suffix */
 	    return p;
         }
     }
@@ -198,7 +195,7 @@ path_magic (char *path)
 
 /*
  * Splits path '/p1#op/inpath' into inpath,op; returns which vfs it is.
- * What is left in path is p1. You still want to free(path), you DON'T
+ * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
  */
 vfs *
@@ -215,7 +212,7 @@ vfs_split (char *path, char **inpath, char **op)
     if (!semi || !path_magic(path))
 	return NULL;
 
-    slash = strchr (semi, '/');
+    slash = strchr (semi, PATH_SEP);
     *semi = 0;
 
     if (op)
@@ -236,7 +233,7 @@ vfs_split (char *path, char **inpath, char **op)
     }
 
     if (slash)
-	*slash = '/';
+	*slash = PATH_SEP;
     ret = vfs_split (path, inpath, op);
     *semi = '#';
     return ret;
@@ -257,7 +254,7 @@ vfs_rosplit (char *path)
     if (!semi || !path_magic (path))
 	return NULL;
     
-    slash = strchr (semi, '/');
+    slash = strchr (semi, PATH_SEP);
     *semi = 0;
     if (slash)
 	*slash = 0;
@@ -265,7 +262,7 @@ vfs_rosplit (char *path)
     ret = vfs_type_from_op (semi+1);
 
     if (slash)
-	*slash = '/';
+	*slash = PATH_SEP;
     if (!ret)
 	ret = vfs_rosplit (path);
 
@@ -310,13 +307,13 @@ vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 		gettimeofday(&(stamp->time), NULL);
                 return;
 	    }
-        stamp = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+        stamp = g_new (struct vfs_stamping, 1);
         stamp->v = v;
         stamp->id = id;
 	if (parent){
 	    struct vfs_stamping *st = stamp;
 	    for (; parent;){
-		st->parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+		st->parent = g_new (struct vfs_stamping, 1);
 		*st->parent = *parent;
 		parent = parent->parent;
 		st = st->parent;
@@ -359,9 +356,9 @@ vfs_rm_parents (struct vfs_stamping *stamp)
 
     if (stamp){
 	for (st2 = stamp, st3 = st2->parent; st3 != NULL; st2 = st3, st3 = st3->parent)
-	    free (st2);
+	    g_free (st2);
 
-	free (st2);
+	g_free (st2);
     }
 }
 
@@ -382,7 +379,7 @@ vfs_rmstamp (vfs *v, vfsid id, int removeparents)
             } else {
             	st1->next = stamp->next;
             }
-            free (stamp);
+            g_free (stamp);
 
             return;
         }
@@ -416,7 +413,7 @@ mc_open (char *file, int flags, ...)
 	vfs_die ("VFS must support open.\n");
 
     info = (*vfs->open) (vfs, file, flags, mode);	/* open must be supported */
-    free (file);
+    g_free (file);
     if (!info){
 	errno = ferrno (vfs);
 	return -1;
@@ -447,7 +444,7 @@ mc_open (char *file, int flags, ...)
 	}
 
 #define MC_NAMEOP(name, inarg, callarg) \
-  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, free (path); )
+  MC_OP (name, inarg, callarg, path = vfs_canon (path); vfs = vfs_type (path);, g_free (path); )
 #define MC_HANDLEOP(name, inarg, callarg) \
   MC_OP (name, inarg, callarg, if (handle == -1) return -1; vfs = vfs_op (handle);, )
 
@@ -476,7 +473,7 @@ mc_setctl (char *path, int ctlop, char *arg)
     path = vfs_canon (path);
     vfs = vfs_type (path);    
     result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;
-    free (path);
+    g_free (path);
     return result;
 }
 
@@ -510,22 +507,17 @@ mc_opendir (char *dirname)
     void *info;
     vfs  *vfs;
     char *p = NULL;
-    int i = strlen (dirname);
 
-    if (dirname [i - 1] != '/'){ 
     /* We should make possible reading of the root directory in a tar file */
-        p = xmalloc (i + 2, "slash");
-        strcpy (p, dirname);
-        strcpy (p + i, "/");
-        dirname = p;
-    }
+    dirname = p = append_path_sep (dirname);
+    
     dirname = vfs_canon (dirname);
     vfs = vfs_type (dirname);
 
     info = vfs->opendir ? (*vfs->opendir)(vfs, dirname) : NULL;
-    free (dirname);
+    g_free (dirname);
     if (p)
-        free (p);
+        g_free (p);
     if (!info){
         errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
@@ -534,7 +526,7 @@ mc_opendir (char *dirname)
     vfs_file_table [handle].fs_info = info;
     vfs_file_table [handle].operations = vfs;
 
-    handlep = (int *) xmalloc (sizeof (int), "opendir handle");
+    handlep = g_new (int, 1);
     *handlep = handle;
     return (DIR *) handlep;
 }
@@ -591,7 +583,7 @@ mc_closedir (DIR *dirp)
 
     result = vfs->closedir ? (*vfs->closedir)(vfs_info (handle)) : -1;
     vfs_free_bucket (handle);
-    free (dirp);
+    g_free (dirp);
     return result; 
 }
 
@@ -600,7 +592,7 @@ MC_NAMEOP   (lstat, (char *path, struct stat *buf), (vfs, vfs_name (path), buf))
 MC_HANDLEOP (fstat, (int handle, struct stat *buf), (vfs_info (handle), buf))
 
 /*
- * You must strdup whatever this function returns, static buffers are in use
+ * You must g_strdup whatever this function returns, static buffers are in use
  */
 
 char *
@@ -622,8 +614,8 @@ mc_return_cwd (void)
 	if (my_stat.st_ino != my_stat2.st_ino ||
 	    my_stat.st_dev != my_stat2.st_dev ||
 	    !cd_symlinks){
-	    free (current_dir);
-	    current_dir = strdup (p);
+	    g_free (current_dir);
+	    current_dir = g_strdup (p);
 	    return p;
 	} /* Otherwise we return current_dir below */
     } 
@@ -657,14 +649,14 @@ int mc_##name (char *name1, char *name2) \
     name2 = vfs_canon (name2); \
     if (vfs != vfs_type (name2)){ \
     	errno = EXDEV; \
-    	free (name1); \
-    	free (name2); \
+    	g_free (name1); \
+    	g_free (name2); \
 	return -1; \
     } \
 \
     result = vfs->name ? (*vfs->name)(vfs, vfs_name (name1), vfs_name (name2)) : -1; \
-    free (name1); \
-    free (name2); \
+    g_free (name1); \
+    g_free (name2); \
     if (result == -1) \
         errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
     return result; \
@@ -709,23 +701,23 @@ vfs_canon (char *path)
     	local = tilde_expand (path);
 	if (local){
 	    result = vfs_canon (local);
-	    free (local);
+	    g_free (local);
 	    return result;
 	} else 
-	    return strdup (path);
+	    return g_strdup (path);
     }
 
     /* Relative to current directory */
-    if (*path != '/'){ 
+    if (*path != PATH_SEP){ 
     	char *local, *result;
 
-	if (current_dir [strlen (current_dir) - 1] == '/')
+	if (current_dir [strlen (current_dir) - 1] == PATH_SEP)
 	    local = copy_strings (current_dir, path, NULL);
 	else
-	    local = copy_strings (current_dir, "/", path, NULL);
+	    local = copy_strings (current_dir, PATH_SEP_STR, path, NULL);
 
 	result = vfs_canon (local);
-	free (local);
+	g_free (local);
 	return result;
     }
 
@@ -737,23 +729,19 @@ vfs_canon (char *path)
     canonicalize_pathname (path);
     mad_check("(post-canonicalize)", 0);
 
-    return strdup (path);
+    return g_strdup (path);
 }
 
 vfsid
 vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
 {
     vfsid nvfsid;
-    int freeit = 0;
 
-    if (dir [strlen (dir) - 1] != '/'){
-        dir = copy_strings (dir, "/", NULL);    
-        freeit = 1;
+    dir = append_path_sep (dir);
 
-    }
     nvfsid = (*nvfs->getid)(nvfs, dir, par);
-    if (freeit)
-        free (dir);
+    
+    g_free (dir);
     return nvfsid;
 }
 
@@ -888,43 +876,36 @@ mc_chdir (char *path)
     char *a, *b;
     int result;
     char *p = NULL;
-    int i = strlen (path);
     vfs *oldvfs;
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 
-    if (path [i - 1] != '/'){
     /* We should make possible reading of the root directory in a tar archive */
-        p = xmalloc (i + 2, "slash");
-        strcpy (p, path);
-        strcpy (p + i, "/");
-        path = p;
-    }
+    path = p = append_path_sep (path);
 
     a = current_dir; /* Save a copy for case of failure */
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
-    b = strdup (current_dir);
+    b = g_strdup (current_dir);
     result = (*current_vfs->chdir) ?  (*current_vfs->chdir)(current_vfs, vfs_name (b)) : -1;
-    free (b);
+    g_free (b);
     if (result == -1){
 	errno = ferrno (current_vfs);
-    	free (current_dir);
+    	g_free (current_dir);
     	current_vfs = vfs_type (a);
     	current_dir = a;
     } else {
         oldvfs = vfs_type (a);
 	oldvfsid = vfs_ncs_getid (oldvfs, a, &parent);
-	free (a);
+	g_free (a);
         vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
 	vfs_rm_parents (parent);
     }
-    if (p)
-        free (p);
+    g_free (p);
 
     if (*current_dir){
 	p = strchr (current_dir, 0) - 1;
-	if (*p == '/' && p > current_dir)
+	if (*p == PATH_SEP && p > current_dir)
 	    *p = 0; /* Sometimes we assume no trailing slash on cwd */
     }
     return result;
@@ -958,7 +939,7 @@ vfs_file_is_local (char *filename)
     
     filename = vfs_canon (filename);
     vfs = vfs_type (filename);
-    free (filename);
+    g_free (filename);
     return vfs == &vfs_local_ops;
 }
 
@@ -970,7 +951,7 @@ vfs_file_is_ftp (char *filename)
     
     filename = vfs_canon (filename);
     vfs = vfs_type (filename);
-    free (filename);
+    g_free (filename);
     return vfs == &vfs_ftpfs_ops;
 #else
     return 0;
@@ -984,7 +965,7 @@ char *vfs_get_current_dir (void)
 
 static void vfs_setup_wd (void)
 {
-    current_dir = strdup ("/");
+    current_dir = g_strdup (PATH_SEP_STR);
     if (!(vfs_flags & FL_NO_CWDSETUP))
         mc_return_cwd();
 
@@ -1022,7 +1003,7 @@ mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
 	errno = ferrno (vfs);
 	return (caddr_t)-1;
     }
-    mcm = (struct mc_mmapping *) xmalloc (sizeof (struct mc_mmapping), "vfs: mmap handling");
+    mcm =g_new (struct mc_mmapping, 1);
     mcm->addr = result;
     mcm->vfs_info = vfs_info (fd);
     mcm->vfs = vfs;
@@ -1044,7 +1025,7 @@ mc_munmap (caddr_t addr, size_t len)
             	mcm2->next = mcm->next;
 	    if (*mcm->vfs->munmap)
 	        (*mcm->vfs->munmap)(mcm->vfs, addr, len, mcm->vfs_info);
-            free (mcm);
+            g_free (mcm);
             return 0;
         }
     }
@@ -1068,7 +1049,7 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
     if (fdout == -1){
         mc_close (fdin);
-	free (tmp);
+	g_free (tmp);
         return NULL;
     }
     while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
@@ -1094,7 +1075,7 @@ mc_getlocalcopy (char *path)
     vfs = vfs_type (path);    
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, vfs_name (path)) :
                                  mc_def_getlocalcopy (vfs, vfs_name (path));
-    free (path);
+    g_free (path);
     if (!result)
 	errno = ferrno (vfs);
     return result;
@@ -1110,14 +1091,14 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
         fdin = open (local, O_RDONLY);
         if (fdin == -1){
             unlink (local);
-            free (local);
+            g_free (local);
             return;
         }
         fdout = mc_open (filename, O_WRONLY | O_TRUNC);
         if (fdout == -1){
             close (fdin);
             unlink (local);
-            free (local);
+            g_free (local);
             return;
         }
         while ((i = read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
@@ -1129,7 +1110,7 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
         mc_close (fdout);
     }
     unlink (local);
-    free (local);
+    g_free (local);
 }
 
 void
@@ -1141,7 +1122,7 @@ mc_ungetlocalcopy (char *path, char *local, int has_changed)
     vfs = vfs_type (path);
     vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
                           mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
-    free (path);
+    g_free (path);
 }
 
 /*
@@ -1253,7 +1234,7 @@ vfs_shut (void)
     for (stamp = stamps, stamps = 0; stamp != NULL;){
 	(*stamp->v->free)(stamp->id);
 	st = stamp->next;
-	free (stamp);
+	g_free (stamp);
 	stamp = st;
     }
 
@@ -1261,7 +1242,7 @@ vfs_shut (void)
 	vfs_rmstamp (stamps->v, stamps->id, 1);
     
     if (current_dir)
-	free (current_dir);
+	g_free (current_dir);
 
     for (vfs=vfs_list; vfs; vfs=vfs->next)
         if (vfs->done)
@@ -1591,7 +1572,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
-    p_copy = strdup(p);
+    p_copy = g_strdup(p);
     if ((i = vfs_parse_filetype(*(p++))) == -1)
         goto error;
 
@@ -1616,8 +1597,8 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
             p++;
     }
 
-    free(p_copy);
-    p_copy = strdup(p);
+    g_free(p_copy);
+    p_copy = g_strdup(p);
     num_cols = vfs_split_text (p);
 
     s->st_nlink = atol (columns [0]);
@@ -1702,14 +1683,11 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	char *s;
 	    
 	if (filename){
-	    p = column_ptr [idx2] - column_ptr [idx];
-	    s = xmalloc (p, "filename");
-	    strncpy (s, p_copy + column_ptr [idx], p - 1);
-	    s[p - 1] = '\0';
+	    s = g_strndup (p_copy + column_ptr [idx], column_ptr [idx2] - column_ptr [idx] - 1);
 	    *filename = s;
 	}
 	if (linkname){
-	    s = strdup (p_copy + column_ptr [idx2+1]);
+	    s = g_strdup (p_copy + column_ptr [idx2+1]);
 	    p = strlen (s);
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
 		s [p-1] = 0;
@@ -1724,13 +1702,14 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	 */
 	if (filename){
 	    /* 
-	    *filename = strdup (columns [idx++]);
+	    *filename = g_strdup (columns [idx++]);
 	    */
 	    int p;
 	    char *s;
 	    
-	    s = strdup (p_copy + column_ptr [idx++]);
+	    s = g_strdup (p_copy + column_ptr [idx++]);
 	    p = strlen (s);
+	    /* g_strchomp(); */
 	    if (s [p-1] == '\r' || s [p-1] == '\n')
 	        s [p-1] = 0;
 	    if (s [p-2] == '\r' || s [p-2] == '\n')
@@ -1741,13 +1720,13 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	if (linkname)
 	    *linkname = NULL;
     }
-    free (p_copy);
+    g_free (p_copy);
     return 1;
 
 error:
     message_1s (1, "Could not parse:", p_copy);
     if (p_copy != p)		/* Carefull! */
-	free (p_copy);
+	g_free (p_copy);
     return 0;
 }
 
@@ -1779,13 +1758,13 @@ vfs_get_password (char *msg)
 
 /*
  * Returns vfs path corresponding to given url. If passed string is
- * not recognized as url, strdup(url) is returned.
+ * not recognized as url, g_strdup(url) is returned.
  */
 char *
 vfs_translate_url (char *url)
 {
     if (strncmp (url, "ftp://", 6) == 0)
-        return copy_strings ("/#ftp:", url + 6, 0);
+        return copy_strings ("/#ftp:", url + 6, NULL);
     else
-        return strdup (url);
+        return g_strdup (url);
 }

@@ -79,9 +79,9 @@ direntry_destructor (void *data)
 	
     if (fe->count > 0)
         return;
-    free(fe->name);
+    g_free(fe->name);
     if (fe->linkname)
-	free(fe->linkname);
+	g_free(fe->linkname);
     if (fe->local_filename) {
         if (fe->local_is_temp) {
             if (!fe->local_stat.st_mtime)
@@ -94,14 +94,14 @@ direntry_destructor (void *data)
 	            unlink (fe->local_filename); /* Delete only if it hasn't changed */
 	    }
 	}
-	free(fe->local_filename);
+	g_free(fe->local_filename);
 	fe->local_filename = NULL;
     }
     if (fe->remote_filename)
-	free(fe->remote_filename);
+	g_free(fe->remote_filename);
     if (fe->l_stat)
-	free(fe->l_stat);
-    free(fe);
+	g_free(fe->l_stat);
+    g_free(fe);
 }
 
 static void
@@ -112,9 +112,9 @@ dir_destructor(void *data)
     fd->count--;
     if (fd->count > 0) 
 	return;
-    free(fd->remote_path);
+    g_free(fd->remote_path);
     linklist_destroy(fd->file_list, direntry_destructor);
-    free(fd);
+    g_free(fd);
 }
 
 static int
@@ -147,18 +147,18 @@ free_bucket (void *data)
 {
     struct connection *bucket = data;
 
-    free(qhost(bucket));
-    free(quser(bucket));
+    g_free(qhost(bucket));
+    g_free(quser(bucket));
     if (qcdir(bucket))
-	free(qcdir(bucket));
+	g_free(qcdir(bucket));
     if (qhome(bucket))
-    	free(qhome(bucket));
+    	g_free(qhome(bucket));
     if (qupdir(bucket))
-        free(qupdir(bucket));
+        g_free(qupdir(bucket));
     if (bucket->password)
 	wipe_password (bucket->password);
     linklist_destroy(qdcache(bucket), dir_destructor);
-    free(bucket);
+    g_free(bucket);
 }
 
 
@@ -189,9 +189,9 @@ static void X_fill_names (vfs *me, void (*func)(char *))
 
 	    path_name = copy_strings ( X_myname, quser (bucket),
 				      "@",      qhost (bucket), 
-				      qcdir(bucket), 0);
+				      qcdir(bucket), NULL);
 	    (*func)(path_name);
-	    free (path_name);
+	    g_free (path_name);
 	}
 	lptr = lptr->next;
     } while (lptr != connections_list);
@@ -222,12 +222,12 @@ s_get_path (struct connection **bucket, char *path, char *name)
         my_errno = ENOENT;
     else {
         if ((*bucket = open_link (host, user, port, pass)) == NULL) {
-            free (remote_path);
+            g_free (remote_path);
 	    remote_path = NULL;
 	}
     }
-    free (host);
-    free (user);
+    g_free (host);
+    g_free (user);
     if (pass)
         wipe_password (pass);
 
@@ -245,7 +245,7 @@ s_get_path (struct connection **bucket, char *path, char *name)
 	if (f || !strncmp( remote_path, "/~/", 3 )) {
 	    char *s;
 	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
-	    free (remote_path);
+	    g_free (remote_path);
 	    remote_path = s;
 	}
     }
@@ -310,7 +310,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		if (!S_ISREG(fmode)) ERRNOR (EPERM, NULL);
 		if ((flags & O_EXCL) && (flags & O_CREAT)) ERRNOR (EEXIST, NULL);
 		if (ent->remote_filename == NULL)
-		    if (!(ent->remote_filename = strdup(file_name))) ERRNOR (ENOMEM, NULL);
+		    if (!(ent->remote_filename = g_strdup(file_name))) ERRNOR (ENOMEM, NULL);
 		if (ent->local_filename == NULL || 
 		    !ent->local_stat.st_mtime || 
 		    stat (ent->local_filename, &sb) < 0 || 
@@ -318,7 +318,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		    int handle;
 		    
 		    if (ent->local_filename){
-		        free (ent->local_filename);
+		        g_free (ent->local_filename);
 			ent->local_filename = NULL;
 		    }
 		    if (flags & O_TRUNC) {
@@ -351,15 +351,15 @@ _get_file_entry(struct connection *bucket, char *file_name,
     if ((op & DO_OPEN) && (flags & O_CREAT)) {
 	int handle;
 
-	ent = xmalloc(sizeof(struct direntry), "struct direntry");
+	ent = g_new (struct direntry, 1);
 	ent->freshly_created = 0;
 	if (ent == NULL) ERRNOR (ENOMEM, NULL);
 	ent->count = 1;
 	ent->linkname = NULL;
 	ent->l_stat = NULL;
 	ent->bucket = bucket;
-	ent->name = strdup(p);
-	ent->remote_filename = strdup(file_name);
+	ent->name = g_strdup(p);
+	ent->remote_filename = g_strdup(file_name);
 	ent->local_filename = tempnam (NULL, X "fs");
 	if (!ent->name && !ent->remote_filename && !ent->local_filename) {
 	    direntry_destructor(ent);
@@ -422,7 +422,7 @@ remove_temp_file (char *file_name)
 	if (strcmp (p, ent->name) == 0) {
 	    if (ent->local_filename) {
 		unlink (ent->local_filename);
-		free (ent->local_filename);
+		g_free (ent->local_filename);
 		ent->local_filename = NULL;
 		return 0;
 	    }
@@ -442,7 +442,7 @@ get_file_entry(char *path, int op, int flags)
 	return NULL;
     fe = _get_file_entry(bucket, remote_path, op,
 			 flags);
-    free(remote_path);
+    g_free(remote_path);
 #if 0
     if (op & DO_FREE_RESOURCE)
 	vfs_add_noncurrent_stamps (&vfs_X_ops, (vfsid) bucket, NULL);
@@ -477,18 +477,18 @@ static void *s_open (vfs *me, char *file, int flags, int mode)
     struct filp *fp;
     struct direntry *fe;
 
-    fp = xmalloc(sizeof(struct filp), "struct filp");
+    fp = g_new (struct filp, 1);
     if (fp == NULL) ERRNOR (ENOMEM, NULL);
     fe = get_file_entry(file, DO_OPEN | DO_RESOLVE_SYMLINK, flags);
     if (!fe) {
-	free(fp);
+	g_free(fp);
         return NULL;
     }
     fe->linear_state = IS_LINEAR(flags);
     if (!fe->linear_state) {
         fp->local_handle = open(fe->local_filename, flags, mode);
         if (fp->local_handle < 0) {
-	    free(fp);
+	    g_free(fp);
 	    ERRNOR (errno, NULL);
         }
     } else fp->local_handle = -1;
@@ -558,7 +558,7 @@ static int s_close (void *data)
         close(fp->local_handle);
     qlock(fp->fe->bucket)--;
     direntry_destructor(fp->fe);
-    free(fp);
+    g_free(fp);
     return result;
 }
 
@@ -592,7 +592,7 @@ static void *s_opendir (vfs *me, char *dirname)
 
     if (!(remote_path = get_path (&bucket, dirname)))
         return NULL;
-    dirp = xmalloc(sizeof(struct my_dirent), "struct my_dirent");
+    dirp = g_new (struct my_dirent, 1);
     if (dirp == NULL) {
 	my_errno = ENOMEM;
 	goto error_return;
@@ -601,13 +601,13 @@ static void *s_opendir (vfs *me, char *dirname)
     if (dirp->dcache == NULL)
         goto error_return;
     dirp->pos = dirp->dcache->file_list->next;
-    free(remote_path);
+    g_free(remote_path);
     dirp->dcache->count++;
     return (void *)dirp;
 error_return:
     vfs_add_noncurrent_stamps (&vfs_X_ops, (vfsid) bucket, NULL);
-    free(remote_path);
-    free(dirp);
+    g_free(remote_path);
+    g_free(dirp);
     return NULL;
 }
 
@@ -657,7 +657,7 @@ static int s_closedir (void *info)
 {
     struct my_dirent *dirp = info;
     dir_destructor(dirp->dcache);
-    free(dirp);
+    g_free(dirp);
     return 0;
 }
 
@@ -723,7 +723,7 @@ static int s_chdir (vfs *me, char *path)
     if (!(remote_path = get_path(&bucket, path)))
 	return -1;
     if (qcdir(bucket))
-        free(qcdir(bucket));
+        g_free(qcdir(bucket));
     qcdir(bucket) = remote_path;
     bucket->cwd_defered = 1;
     
@@ -758,7 +758,7 @@ static vfsid s_getid (vfs *me, char *p, struct vfs_stamping **parent)
     if (!(remote_path = get_path (&bucket, p)))
         return (vfsid) -1;
     else {
-	free(remote_path);
+	g_free(remote_path);
     	return (vfsid) bucket;
     }
 }
@@ -787,7 +787,7 @@ static char *s_getlocalcopy (vfs *me, char *path)
         s_close ((void *) fp);
         return NULL;
     }
-    p = strdup (fp->fe->local_filename);
+    p = g_strdup (fp->fe->local_filename);
     qlock(fp->fe->bucket)++;
     fp->fe->count++;
     s_close ((void *) fp);
@@ -885,7 +885,7 @@ error_3:
     close(local_handle);
     unlink(fe->local_filename);
 error_4:
-    free(fe->local_filename);
+    g_free(fe->local_filename);
     fe->local_filename = NULL;
     return 0;
 }

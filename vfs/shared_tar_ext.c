@@ -12,12 +12,12 @@
 static char *get_path (char *inname, struct archive **archive, int is_dir,
     int do_not_open)
 {
-    char *buf = strdup( inname );
+    char *buf = g_strdup (inname);
     char *res = get_path_mangle( buf, archive, is_dir, do_not_open );
     char *res2 = NULL;
     if (res)
-        res2 = strdup(res);
-    free(buf);
+        res2 = g_strdup(res);
+    g_free(buf);
     return res2;
 }
 
@@ -133,7 +133,7 @@ static void * s_opendir (vfs *me, char *dirname)
 	return NULL;
     if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, NULL);
 
-    info = (struct entry **) xmalloc (2*sizeof (struct entry *), "shared opendir");
+    info = g_new (struct entry *, 2);
     info[0] = entry->inode->first_in_subdir;
     info[1] = entry->inode->first_in_subdir;
 
@@ -190,7 +190,7 @@ static void s_seekdir (void *data, int offset)
 
 static int s_closedir (void *data)
 {
-    free (data);
+    g_free (data);
     return 0;
 }
 

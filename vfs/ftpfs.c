@@ -55,11 +55,9 @@
 #if HAVE_SYS_SELECT_H
 #   include <sys/select.h>
 #endif
-#include "../src/fs.h"
-#include "../src/mad.h"
+
 #include "../src/setup.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
-#include "../src/main.h"
+
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
@@ -73,18 +71,15 @@
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
 #include <sys/param.h>
-#undef MIN
-#undef MAX
-#include <glib.h>
 
 #ifdef USE_TERMNET
 #include <termnet.h>
 #endif
 
-#include "../src/mem.h"
+#include "utilvfs.h"
+
 #include "vfs.h"
 #include "tcputil.h"
-#include "../src/util.h"
 #include "../src/dialog.h"
 #include "container.h"
 #include "ftpfs.h"
@@ -251,7 +246,7 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     got_sigpipe = 0;
     enable_interrupt_key ();
     status = write (sock, str, strlen (str));
-    free (str);
+    g_free (str);
     
     if (status < 0){
 	code = 421;
@@ -315,11 +310,11 @@ login_server (struct connection *bucket, char *netrcpass)
 
     bucket->isbinary = TYPE_UNKNOWN;    
     if (netrcpass)
-        op = strdup (netrcpass);
+        op = g_strdup (netrcpass);
     else {
         if (!strcmp (quser (bucket), "anonymous") || 
             !strcmp (quser (bucket), "ftp")) {
-	    op = strdup (ftpfs_anonymous_passwd);
+	    op = g_strdup (ftpfs_anonymous_passwd);
 	    anon = 1;
          } else {
             char *p;
@@ -328,19 +323,19 @@ login_server (struct connection *bucket, char *netrcpass)
 		p = copy_strings (" FTP: Password required for ", quser (bucket), 
 				  " ", NULL);
 		op = vfs_get_password (p);
-		free (p);
+		g_free (p);
 		if (op == NULL)
 			ERRNOR (EPERM, 0);
-		bucket->password = strdup (op);
+		bucket->password = g_strdup (op);
 	    } else
-		op = strdup (bucket->password);
+		op = g_strdup (bucket->password);
         }
     }
 
     if (!anon || logfile)
-	pass = strdup (op);
+	pass = g_strdup (op);
     else
-	pass = copy_strings ("-", op, 0);
+	pass = copy_strings ("-", op, NULL);
     wipe_password (op);
 
     
@@ -352,27 +347,27 @@ login_server (struct connection *bucket, char *netrcpass)
 	p = my_get_host_and_username (ftpfs_proxy_host, &host, &proxyname,
 				      &port, &proxypass);
 	if (p)
-	    free (p);
+	    g_free (p);
 	
-	free (host);
+	g_free (host);
 	if (proxypass)
 	    wipe_password (proxypass);
 	p = copy_strings (" Proxy: Password required for ", proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);
-	free (p);
+	g_free (p);
 	if (proxypass == NULL) {
 	    wipe_password (pass);
-	    free (proxyname);
+	    g_free (proxyname);
 	    ERRNOR (EPERM, 0);
 	}
-	name = strdup (quser (bucket));
+	name = g_strdup (quser (bucket));
 #else
 	name = copy_strings (quser (bucket), "@", 
-		qhost (bucket)[0] == '!' ? qhost (bucket)+1 : qhost (bucket), 0);
+		qhost (bucket)[0] == '!' ? qhost (bucket)+1 : qhost (bucket), NULL);
 #endif
     } else 
-	name = strdup (quser (bucket));
+	name = g_strdup (quser (bucket));
     
     if (get_reply (qsock (bucket), NULL, 0) == COMPLETE) {
 #if defined(HSC_PROXY)
@@ -397,13 +392,13 @@ login_server (struct connection *bucket, char *netrcpass)
 		if (proxypass)
 		    wipe_password (proxypass);
 		wipe_password (pass);
-		free (proxyname);
-		free (name);
+		g_free (proxyname);
+		g_free (name);
 		ERRNOR (EPERM, 0);
 	    }
 	    if (proxypass)
 		wipe_password (proxypass);
-	    free (proxyname);
+	    g_free (proxyname);
 	}
 #endif
 	print_vfs_message ("ftpfs: sending login name");
@@ -418,7 +413,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	case COMPLETE:
 	    print_vfs_message ("ftpfs: logged in");
 	    wipe_password (pass);
-	    free (name);
+	    g_free (name);
 	    return 1;
 
 	default:
@@ -434,7 +429,7 @@ login_server (struct connection *bucket, char *netrcpass)
     print_vfs_message ("ftpfs: Login incorrect for user %s ", quser (bucket));
 login_fail:
     wipe_password (pass);
-    free (name);
+    g_free (name);
     ERRNOR (EPERM, 0);
 }
 
@@ -478,12 +473,11 @@ static void
 load_no_proxy_list ()
 {
     /* FixMe: shouldn't be hardcoded!!! */
-    char		s[258]; /* provide for 256 characters and nl */
+    char	s[BUF_LARGE]; /* provide for BUF_LARGE characters */
     struct no_proxy_entry *np, *current = 0;
     FILE	*npf;
     int		c;
-    char	*p;
-    char 	*mc_file;
+    char 	*p, *mc_file;
     static int	loaded;
 
     if (loaded)
@@ -492,9 +486,9 @@ load_no_proxy_list ()
     mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
     if (exist_file (mc_file) &&
 	(npf = fopen (mc_file, "r"))) {
-	while (fgets (s, 258, npf) || !(feof (npf) || ferror (npf))) {
+	while (fgets (s, sizeof(s), npf) || !(feof (npf) || ferror (npf))) {
 	    if (!(p = strchr (s, '\n'))) {	/* skip bogus entries */ 
-		while ((c = getc (npf)) != EOF && c != '\n')
+		while ((c = fgetc (npf)) != EOF && c != '\n')
 		    ;
 		continue;
 	    }
@@ -502,12 +496,11 @@ load_no_proxy_list ()
 	    if (p == s)
 		continue;
 
-	    *p = '\0';
-	    p = xmalloc (strlen (s), "load_no_proxy_list:1");
-	    np = xmalloc (sizeof (*np), "load_no_proxy_list:2");
-	    strcpy (p, s);
-	    np->domain = p;
-	    np->next   = 0;
+	    *p = NULL;
+	    
+	    np = g_new (struct no_proxy_entry, 1);
+	    np->domain = g_strdup (s);
+	    np->next   = NULL;
 	    if (no_proxy)
 		current->next = np;
 	    else
@@ -518,7 +511,7 @@ load_no_proxy_list ()
 	fclose (npf);
 	loaded = 1;
     }
-    free (mc_file);
+    g_free (mc_file);
 }
 
 static int
@@ -554,7 +547,7 @@ ftpfs_check_proxy (char *host)
 	    if (!ld)
 		return 0;
 	} else
-	    if (!strcasecmp (host, domain))
+	    if (!g_strcasecmp (host, domain))
 		return 0;
     }
 
@@ -573,11 +566,11 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
 #endif
     dir = vfs_split_url (proxy, host, &user, port, &pass, PORT, URL_DEFAULTANON);
 
-    free (user);
+    g_free (user);
     if (pass)
 	wipe_password (pass);
     if (dir)
-	free (dir);
+	g_free (dir);
 }
 
 static int
@@ -617,7 +610,7 @@ ftpfs_open_socket (struct connection *bucket)
 	    print_vfs_message ("ftpfs: Invalid host address.");
 	    my_errno = EINVAL;
 	    if (free_host)
-		free (host);
+		g_free (host);
 	    return -1;
 	}
 	server_address.sin_family = hp->h_addrtype;
@@ -634,14 +627,14 @@ ftpfs_open_socket (struct connection *bucket)
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
 	my_errno = errno;
         if (free_host)
-	    free (host);
+	    g_free (host);
 	return -1;
     }
     setup_source_route (my_socket, server_address.sin_addr.s_addr);
     
     print_vfs_message ("ftpfs: making connection to %s", host);
     if (free_host)
-	free (host);
+	g_free (host);
 
     enable_interrupt_key (); /* clear the interrupt flag */
 
@@ -667,8 +660,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     struct connection *bucket;
     int retry_seconds, count_down;
 
-    bucket = xmalloc(sizeof(struct connection), 
-		     "struct connection");
+    bucket = g_new (struct connection, 1);
     
     if (bucket == NULL)
 	    ERRNOR (ENOMEM, NULL);
@@ -680,8 +672,8 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 	    watch_free_pointer = host;
     }
 #endif
-    qhost (bucket) = strdup (host);
-    quser (bucket) = strdup (user);
+    qhost (bucket) = g_strdup (host);
+    quser (bucket) = g_strdup (user);
     qcdir (bucket) = NULL;
     qport (bucket) = port;
     qlock (bucket) = 0;
@@ -704,9 +696,9 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 
     if ((qdcache (bucket) = linklist_init ()) == NULL) {
 	my_errno = ENOMEM;
-	free (qhost (bucket));
-	free (quser (bucket));
-	free (bucket);
+	g_free (qhost (bucket));
+	g_free (quser (bucket));
+	g_free (bucket);
 	return NULL;
     }
     
@@ -751,8 +743,8 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     
     qhome (bucket) = ftpfs_get_current_directory (bucket);
     if (!qhome (bucket))
-        qhome (bucket) = strdup ("/");
-    qupdir (bucket) = strdup ("/"); /* FIXME: I changed behavior to ignore last_current_dir */
+        qhome (bucket) = g_strdup (PATH_SEP_STR);
+    qupdir (bucket) = g_strdup (PATH_SEP_STR); /* FIXME: I changed behavior to ignore last_current_dir */
     return bucket;
 }
 
@@ -851,7 +843,7 @@ ftpfs_get_current_directory (struct connection *bucket)
 		            *bufq++ = '/';
 		            *bufq = 0;
 		        }
-		        return strdup (bufp);
+		        return g_strdup (bufp);
 		    } else ERRNOR (EIO, NULL);
 		}
 	    }
@@ -1064,8 +1056,7 @@ resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
 			}
 			continue;
                     } else {
-	                fel->l_stat = xmalloc(sizeof(struct stat), 
-		 			 "resolve_symlink: struct stat");
+	                fel->l_stat = g_new (struct stat, 1);
 			if ( S_ISLNK (fe->s.st_mode))
  		            *fel->l_stat = *fe->l_stat;
 			else
@@ -1131,10 +1122,9 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
 	    }
 	    if (vfs_parse_ls_lga (buffer, &s, &filename, NULL)) {
 		int r = strcmp(fe->name, filename);
-		free(filename);
+		g_free(filename);
 		if (r == 0) {
-		    fe->l_stat = xmalloc(sizeof(struct stat), 
-					 "resolve_symlink: struct stat");
+		    fe->l_stat = g_new (struct stat, 1);
 		    if (fe->l_stat == NULL)
 			goto done;
 		    *fe->l_stat = s;
@@ -1213,7 +1203,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 		p->next->prev = p->prev;
 		p->prev->next = p->next;
 		dir_destructor(dcache);
-		free (p);
+		g_free (p);
 		break;
 	    }
 	}
@@ -1234,8 +1224,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     file_list = linklist_init();
     if (file_list == NULL)
 	    ERRNOR (ENOMEM, NULL);
-    dcache = xmalloc(sizeof(struct dir), 
-		     "struct dir");
+    dcache = g_new (struct dir, 1);
     if (dcache == NULL) {
 	my_errno = ENOMEM;
 	linklist_destroy(file_list, NULL);
@@ -1245,7 +1234,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     gettimeofday(&dcache->timestamp, NULL);
     dcache->timestamp.tv_sec += ftpfs_directory_timeout;
     dcache->file_list = file_list;
-    dcache->remote_path = strdup(remote_path);
+    dcache->remote_path = g_strdup(remote_path);
     dcache->count = 1;
     dcache->symlink_status = FTPFS_NO_SYMLINKS;
 
@@ -1254,9 +1243,9 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     else if (has_spaces)
         sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII, 0);
     else {
-	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", (char *) 0);
+	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", NULL);
 	sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII, 0);
-	free (path);
+	g_free (path);
     }
 
     if (sock == -1)
@@ -1294,7 +1283,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	}
 	if (buffer [0] == 0 && eof)
 	    break;
-	fe = xmalloc(sizeof(struct direntry), "struct direntry");
+	fe = g_new (struct direntry, 1);
 	fe->freshly_created = 0;
 	fe->local_filename = NULL;
 	if (fe == NULL) {
@@ -1311,13 +1300,13 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 		has_symlinks = 1;
 	    
 	    if (!linklist_insert(file_list, fe)) {
-		free(fe);
+		g_free(fe);
 		my_errno = ENOMEM;
 	        goto error_1;
 	    }
 	}
 	else
-	    free(fe);
+	    g_free(fe);
 	if (eof)
 	    break;
     }
@@ -1357,8 +1346,8 @@ error_2:
 #endif
     get_reply(qsock(bucket), NULL, 0);
 error_3:
-    free(dcache->remote_path);
-    free(dcache);
+    g_free(dcache->remote_path);
+    g_free(dcache);
     linklist_destroy(file_list, direntry_destructor);
     print_vfs_message("ftpfs: failed");
     return NULL;
@@ -1368,14 +1357,14 @@ fallback:
         /* It's our first attempt to get a directory listing from this
 	server (UNIX style LIST command) */
         bucket->strict_rfc959_list_cmd = 1;
-	free(dcache->remote_path);
-	free(dcache);
+	g_free(dcache->remote_path);
+	g_free(dcache);
 	linklist_destroy(file_list, direntry_destructor);
 	return retrieve_dir (bucket, remote_path, resolve_symlinks);
     }
     my_errno = EACCES;
-    free(dcache->remote_path);
-    free(dcache);
+    g_free(dcache->remote_path);
+    g_free(dcache);
     linklist_destroy(file_list, direntry_destructor);
     print_vfs_message("ftpfs: failed; nowhere to fallback to");
     return NULL;
@@ -1541,7 +1530,7 @@ send_ftp_command(char *filename, char *cmd, int flags)
     if (!(remote_path = get_path(&bucket, filename)))
 	return -1;
     r = command (bucket, WAIT_REPLY, cmd, remote_path);
-    free(remote_path);
+    g_free(remote_path);
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) bucket, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
@@ -1587,9 +1576,9 @@ ftpfs_init (vfs *me)
 
 static int ftpfs_chmod (vfs *me, char *path, int mode)
 {
-    char buf[40];
+    char buf[BUF_SMALL];
     
-    sprintf(buf, "SITE CHMOD %4.4o %%s", mode & 07777);
+    g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o %%s", mode & 07777);
     return send_ftp_command(path, buf, OPT_IGNORE_ERROR | OPT_FLUSH);
 }
 
@@ -1634,8 +1623,8 @@ ftpfs_chdir_internal (struct connection *bucket ,char *remote_path)
 	my_errno = EIO;
     } else {
 	if (qcdir(bucket))
-	    free(qcdir(bucket));
-	qcdir(bucket) = strdup (remote_path);
+	    g_free(qcdir(bucket));
+	qcdir(bucket) = g_strdup (remote_path);
 	bucket->cwd_defered = 0;
     }
     return r;
@@ -1678,15 +1667,15 @@ static void my_forget (char *file)
 
     file += 6;
     if (!(rp = my_get_host_and_username (file, &host, &user, &port, &pass))) {
-        free (host);
-	free (user);
+        g_free (host);
+	g_free (user);
 	if (pass)
 	    wipe_password (pass);
 	return;
     }
 
     /* we do not care about the path actually */
-    free (rp);
+    g_free (rp);
     
     for (l = connections_list->next; l != connections_list; l = l->next){
 	struct connection *bucket = l->data;
@@ -1706,8 +1695,8 @@ static void my_forget (char *file)
 	    break;
 	}
     }
-    free (host);
-    free (user);
+    g_free (host);
+    g_free (user);
     if (pass)
         wipe_password (pass);
 }
@@ -1770,7 +1759,7 @@ MMAPNULL
 };
 
 #ifdef USE_NETRC
-static char buffer[100];
+static char buffer[BUF_MEDIUM];
 static char *netrc, *netrcp;
 
 static int netrc_next (void)
@@ -1830,17 +1819,15 @@ int lookup_netrc (char *host, char **login, char **pass)
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
         if (!strcmp (host, rupp->host)) {
             if (rupp->login != NULL)
-                *login = strdup (rupp->login);
+                *login = g_strdup (rupp->login);
             if (rupp->pass != NULL)
-                *pass = strdup (rupp->pass);
+                *pass = g_strdup (rupp->pass);
             return 0;
         }
-    netrcname = xmalloc (strlen (home_dir) + strlen ("/.netrc") + 1, "netrc");
-    strcpy (netrcname, home_dir);
-    strcat (netrcname, "/.netrc");
+    netrcname = concat_dir_and_file (home_dir, ".netrc");
     netrcp = netrc = load_file (netrcname);
     if (netrc == NULL) {
-        free (netrcname);
+        g_free (netrcname);
 	return 0;
     }
     if (gethostname (hostname, sizeof (hostname)) < 0)
@@ -1852,10 +1839,10 @@ int lookup_netrc (char *host, char **login, char **pass)
         if (keyword == 2) {
 	    if (netrc_next () != 8)
 		continue;
-	    if (strcasecmp (host, buffer) &&
+	    if (g_strcasecmp (host, buffer) &&
 	        ((tmp = strchr (host, '.')) == NULL ||
-		strcasecmp (tmp, domain) ||
-		strncasecmp (host, buffer, tmp - host) ||
+		g_strcasecmp (tmp, domain) ||
+		g_strncasecmp (host, buffer, tmp - host) ||
 		buffer [tmp - host]))
 		continue;
 	} else if (keyword != 1)
@@ -1865,7 +1852,7 @@ int lookup_netrc (char *host, char **login, char **pass)
 		case 3:
 		    if (netrc_next ())
 			if (*login == NULL)
-			    *login = strdup (buffer);
+			    *login = g_strdup (buffer);
 			else if (strcmp (*login, buffer))
 			    keyword = 20;
 		    break;
@@ -1879,12 +1866,12 @@ int lookup_netrc (char *host, char **login, char **pass)
 							"Remove password or correct mode."));
 			    be_angry = 0;
 			}
-			free (netrc);
-			free (netrcname);
+			g_free (netrc);
+			g_free (netrcname);
 			return -1;
 		    }
 		    if (netrc_next () && *pass == NULL)
-			*pass = strdup (buffer);
+			*pass = g_strdup (buffer);
 		    break;
 		case 6:
 		    if (stat (netrcname, &mystat) >= 0 && 
@@ -1894,8 +1881,8 @@ int lookup_netrc (char *host, char **login, char **pass)
 							"Remove password or correct mode."));
 			    be_angry = 0;
 			}
-			free (netrc);
-			free (netrcname);
+			g_free (netrc);
+			g_free (netrcname);
 			return -1;
 		    }
 		    netrc_next ();
@@ -1919,35 +1906,20 @@ int lookup_netrc (char *host, char **login, char **pass)
 	else
 	    break;
     }
-    rupp = (struct rupcache *) xmalloc (sizeof (struct rupcache), "");
-    rupp->host = strdup (host);
+    rupp = g_new (struct rupcache, 1);
+    rupp->host = g_strdup (host);
     rupp->login = rupp->pass = 0;
     
     if (*login != NULL)
-        rupp->login = strdup (*login);
+        rupp->login = g_strdup (*login);
     if (*pass != NULL)
-        rupp->pass = strdup (*pass);
+        rupp->pass = g_strdup (*pass);
     rupp->next = rup_cache;
     rup_cache = rupp;
     
-    free (netrc);
-    free (netrcname);
+    g_free (netrc);
+    g_free (netrcname);
     return 0;
 }
 
-#ifndef HAVE_STRNCASECMP
-int strncasecmp (char *s, char *d, int l)
-{
-    int result;
-    
-    while (l--){
-	if (result = (0x20 | *s) - (0x20 | *d))
-	    break;
-	if (!*s)
-	    return 0;
-	s++;
-	d++;
-    }
-}
-#endif
 #endif /* USE_NETRC */

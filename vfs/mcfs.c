@@ -31,8 +31,6 @@
 #include <stdarg.h>
 #include <fcntl.h>
 #include <pwd.h>
-#include "../src/fs.h"
-#include "../src/mad.h"
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
@@ -46,11 +44,11 @@
 #include <termnet.h>
 #endif
 
-#include "../src/mem.h"
+#include "utilvfs.h"
+
 #include "vfs.h"
 #include "mcfs.h"
 #include "tcputil.h"
-#include "../src/util.h"
 #include "../src/dialog.h"
 
 #define MCFS_MAX_CONNECTIONS 32
@@ -91,17 +89,17 @@ static void mcfs_fill_names (vfs *me, void (*func)(char *))
 	if (mcfs_connections [i].host == 0)
 	    continue;
 	name = copy_strings ("/#mc:", mcfs_connections [i].user,
-			     "@",   mcfs_connections [i].host, 0);
+			     "@",   mcfs_connections [i].host, NULL);
 	(*func) (name);
-	free (name);
+	g_free (name);
     }
 }
 
 static void mcfs_free_bucket (int bucket)
 {
-    free (mcfs_connections [bucket].host);
-    free (mcfs_connections [bucket].user);
-    free (mcfs_connections [bucket].home);
+    g_free (mcfs_connections [bucket].host);
+    g_free (mcfs_connections [bucket].user);
+    g_free (mcfs_connections [bucket].home);
 
     /* Set all the fields to zero */
     mcfs_connections [bucket].host =
@@ -184,7 +182,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 	    }
 	}
 	if (netrcpass != NULL)
-	    pass = strdup (netrcpass);
+	    pass = g_strdup (netrcpass);
 	else
 	    pass = vfs_get_password (_(" MCFS Password required "));
 	if (!pass){
@@ -329,8 +327,8 @@ static mcfs_connection *mcfs_open_link (char *host, char *user, int *port, char 
     
     bucket = mcfs_get_free_bucket ();
     mcfs_open_connections++;
-    bucket->host    = strdup (host);
-    bucket->user    = strdup (user);
+    bucket->host    = g_strdup (host);
+    bucket->user    = g_strdup (user);
     bucket->home    = 0;
     bucket->port    = *port;
     bucket->sock    = sock;
@@ -374,11 +372,11 @@ static char *mcfs_get_path (mcfs_connection **mc, char *path)
     port = 0;
     if ((remote_path = mcfs_get_host_and_username(path, &host, &user, &port, &pass)))
 	if (!(*mc = mcfs_open_link (host, user, &port, pass))){
-	    free (remote_path);
+	    g_free (remote_path);
 	    remote_path = NULL;
 	}
-    free (host);
-    free (user);
+    g_free (host);
+    g_free (user);
     if (pass)
         wipe_password (pass);
 
@@ -391,7 +389,7 @@ static char *mcfs_get_path (mcfs_connection **mc, char *path)
 	if (f || !strncmp( remote_path, "/~/", 3 )) {
 	    char *s;
 	    s = concat_dir_and_file( mcfs_gethome (*mc), remote_path +3-f );
-	    free (remote_path);
+	    g_free (remote_path);
 	    remote_path = s;
 	}
     }
@@ -423,7 +421,7 @@ static int mcfs_rpc_two_paths (int command, char *s1, char *s2)
 	return -1;
 
     if ((r2 = mcfs_get_path (&mc, s2)) == 0){
-	free (r1);
+	g_free (r1);
 	return -1;
     }
     
@@ -432,8 +430,8 @@ static int mcfs_rpc_two_paths (int command, char *s1, char *s2)
 	      RPC_STRING, r1,
 	      RPC_STRING, r2,
 	      RPC_END);
-    free (r1);
-    free (r2);
+    g_free (r1);
+    g_free (r2);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -450,7 +448,7 @@ static int mcfs_rpc_path (int command, char *path)
 	      RPC_STRING, remote_file,
 	      RPC_END);
 
-    free (remote_file);
+    g_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -467,7 +465,7 @@ static int mcfs_rpc_path_int (int command, char *path, int data)
 	      RPC_STRING, remote_file,
 	      RPC_INT,    data, RPC_END);
 
-    free (remote_file);
+    g_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -486,7 +484,7 @@ static int mcfs_rpc_path_int_int (int command, char *path, int n1, int n2)
 	      RPC_INT, n2,
 	      RPC_END);
 
-    free (remote_file);
+    g_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -495,13 +493,13 @@ static char *mcfs_gethome (mcfs_connection *mc)
     char *buffer;
 
     if (mc->home)
-	return strdup (mc->home);
+	return g_strdup (mc->home);
     else {
 	rpc_send (mc->sock, RPC_INT, MC_GETHOME, RPC_END);
 	if (0 == rpc_get (mc->sock, RPC_STRING, &buffer, RPC_END))
-	    return strdup ("/");
+	    return g_strdup (PATH_SEP_STR);
 	mc->home = buffer;
-	return strdup (buffer);
+	return g_strdup (buffer);
     }
 }
 
@@ -518,7 +516,7 @@ static void *mcfs_open (vfs *me, char *file, int flags, int mode)
 
     rpc_send (mc->sock, RPC_INT, MC_OPEN, RPC_STRING, remote_file,
 	      RPC_INT, flags, RPC_INT, mode, RPC_END);
-    free (remote_file);    
+    g_free (remote_file);    
 
     if (0 == rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
 	return 0;
@@ -526,7 +524,7 @@ static void *mcfs_open (vfs *me, char *file, int flags, int mode)
     if (is_error (result, error_num))
 	return 0;
 
-    remote_handle = (mcfs_handle *) xmalloc (2 * sizeof (mcfs_handle), "mcfs_handle");
+    remote_handle = g_new (mcfs_handle, 2);
     remote_handle->handle  = result;
     remote_handle->conn    = mc;
     
@@ -596,7 +594,7 @@ static int mcfs_close (void *data)
     
     is_error (result, error);
 
-    free (data);
+    g_free (data);
     return result;
 }
 
@@ -631,7 +629,7 @@ static void *mcfs_opendir (vfs *me, char *dirname)
 	return 0;
 
     rpc_send (mc->sock, RPC_INT, MC_OPENDIR, RPC_STRING, remote_dir, RPC_END);
-    free (remote_dir);
+    g_free (remote_dir);
     
     if (0 == rpc_get  (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
 	return 0;
@@ -641,7 +639,7 @@ static void *mcfs_opendir (vfs *me, char *dirname)
 	    
     handle = result;
 
-    mcfs_info = (opendir_info *) xmalloc (sizeof(opendir_info),"mcfs_opendir");
+    mcfs_info = g_new (opendir_info, 1);
     mcfs_info->conn = mc;
     mcfs_info->handle = handle;
     mcfs_info->entries = 0;
@@ -671,9 +669,8 @@ static int mcfs_loaddir (opendir_info *mcfs_info)
 	if (entry_len == 0)
 	    break;
 
-	new_entry = xmalloc (sizeof (dir_entry), "mcfs_loaddir");
-	new_entry->text = xmalloc (entry_len + 1, "mcfs_loaddir");
-	new_entry->text [entry_len] = 0;
+	new_entry = g_new (dir_entry, 1);
+	new_entry->text = g_new0 (char, entry_len + 1);
 
 	new_entry->next = 0;
 	if (first){
@@ -710,8 +707,8 @@ static void mcfs_free_dir (dir_entry *de)
     if (!de)
 	return;
     mcfs_free_dir (de->next);
-    free (de->text);
-    free (de);
+    g_free (de->text);
+    g_free (de);
 }
 
 /* Explanation:
@@ -770,10 +767,10 @@ static int mcfs_closedir (void *info)
     for (p = mcfs_info->entries; p;){
 	q = p;
 	p = p->next;
-	free (q->text);
-	free (q);
+	g_free (q->text);
+	g_free (q);
     }
-    free (info);
+    g_free (info);
     return 0;
 }
 
@@ -804,7 +801,7 @@ static time_t mcfs_get_time (mcfs_connection *mc)
 		 RPC_STRING, &buf,
 		 RPC_END);
 	sscanf (buf, "%lx", &tm);
-	free (buf);
+	g_free (buf);
 
 	return (time_t) tm;
     }
@@ -855,7 +852,7 @@ static int mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, cmd, RPC_STRING, remote_file, RPC_END);
-    free (remote_file);
+    g_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return the_error (-1, errno);
 
@@ -931,15 +928,15 @@ static int mcfs_utime (vfs *me, char *path, struct utimbuf *times)
 
     status = 0;
     if (mc->version >= 2) {
-	char   abuf[2*sizeof(long) + 1];
-	char   mbuf[2*sizeof(long) + 1];
+	char   abuf[BUF_SMALL];
+	char   mbuf[BUF_SMALL];
 	long   atime, mtime;
 
 	atime = (long) times->actime;
 	mtime = (long) times->modtime;
 
-	sprintf (abuf, "%lx", atime);
-	sprintf (mbuf, "%lx", mtime);
+	g_snprintf (abuf, sizeof(abuf), "%lx", atime);
+	g_snprintf (mbuf, sizeof(mbuf), "%lx", mtime);
 
 	rpc_send (mc->sock, RPC_INT, MC_UTIME,
 			RPC_STRING, file,
@@ -949,7 +946,7 @@ static int mcfs_utime (vfs *me, char *path, struct utimbuf *times)
 	status = mcfs_handle_simple_error (mc->sock, 0);
     
     }
-    free (file);
+    g_free (file);
     return (status);
 }
 
@@ -963,7 +960,7 @@ static int mcfs_readlink (vfs *me, char *path, char *buf, int size)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, MC_READLINK, RPC_STRING, remote_file, RPC_END);
-    free (remote_file);
+    g_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return the_error (-1, EIO);
 
@@ -974,7 +971,7 @@ static int mcfs_readlink (vfs *me, char *path, char *buf, int size)
 	return the_error (-1, EIO);
     
     strncpy (buf, stat_str, size);
-    free (stat_str);
+    g_free (stat_str);
     return strlen (buf);
 }
 
@@ -1003,7 +1000,7 @@ static int mcfs_chdir (vfs *me, char *path)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, MC_CHDIR, RPC_STRING, remote_dir, RPC_END);
-    free (remote_dir);
+    g_free (remote_dir);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return the_error (-1, EIO);
     
@@ -1086,8 +1083,8 @@ my_forget (char *path)
 	path += 2;
 
     if ((p = mcfs_get_host_and_username (path, &host, &user, &port, &pass)) == 0) {
-	free (host);
-	free (user);
+	g_free (host);
+	g_free (user);
 	if (pass)
 	    wipe_password (pass);
 	return;
@@ -1104,9 +1101,9 @@ my_forget (char *path)
 	    mcfs_connections [i].sock = mcfs_open_tcp_link (host, user, &port, pass, &vers);
 	}
     }
-    free (p);
-    free (host);
-    free (user);
+    g_free (p);
+    g_free (host);
+    g_free (user);
     if (pass)
 	wipe_password (pass);
 }

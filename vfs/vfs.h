@@ -6,10 +6,6 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#if 0
-#include "src/mad.h"
-#endif
-
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H) || defined(IS_AIX)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
@@ -242,7 +238,7 @@ struct utimbuf {
 #   define vfs_current_is_tarfs() 0
 #   define vfs_current_is_extfs() 0
 #   define vfs_path(x) x
-#   define vfs_strip_suffix_from_filename(x) strdup(x)
+#   define vfs_strip_suffix_from_filename(x) g_strdup(x)
 #   define mc_close close
 #   define mc_read read
 #   define mc_write write
@@ -275,7 +271,7 @@ struct utimbuf {
 
 #   define mc_ctl(a,b,c) 0
 #   define mc_setctl(a,b,c) 0
-#   define vfs_translate_url strdup(s)
+#   define vfs_translate_url g_strdup(s)
 
 #   define mc_stat stat
 #   define mc_mknod mknod
@@ -286,7 +282,7 @@ struct utimbuf {
 #   define vfs_type(x) (vfs *)(NULL)
 #   define vfs_init()
 #   define vfs_shut()
-#   define vfs_canon(p) strdup (canonicalize_pathname(p))
+#   define vfs_canon(p) g_strdup (canonicalize_pathname(p))
 #   define vfs_free_resources()
 #   define vfs_timeout_handler()
 #   define vfs_timeouts() 0
@@ -393,9 +389,6 @@ extern void mc_vfs_done( void );
  * O_LINEAR allows filesystems not to create temporary file in some
  * cases (ftp transfer).				-- pavel@ucw.cz
  */
-
-#define VFS_MIN(a,b) ((a)<(b) ? (a) : (b))
-#define VFS_MAX(a,b) ((a)<(b) ? (b) : (a))
 
 #ifdef HAVE_MMAP
 #define MMAPNULL , NULL, NULL

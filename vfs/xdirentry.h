@@ -15,10 +15,6 @@
 #include <pwd.h>
 #include <grp.h>
 
-#include "../src/fs.h"
-#include "../src/util.h"
-#include "../src/mem.h"
-#include "../src/mad.h"
 #include "vfs.h"
 
 
@@ -220,7 +216,7 @@ int vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term);
 int vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd);
 
 /* If non-null, FREE */
-#define ifree(ptr) do { if (ptr) free(ptr); } while (0)
+#define ifree(ptr) do { if (ptr) g_free(ptr); } while (0)
 
 #define MEDATA ((struct vfs_s_data *) me->data)
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)

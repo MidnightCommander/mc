@@ -1,15 +1,13 @@
 #include <config.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <malloc.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include "../src/mad.h"
-#include "../src/fs.h"
 
 #include <fcntl.h>
-#include "../src/util.h"
+
+#include "utilvfs.h"
 
 #include "vfs.h"
 #include "local.h"
@@ -29,7 +27,7 @@ local_open (vfs *me, char *file, int flags, int mode)
     if (fd == -1)
 	return 0;
 
-    local_info = (int *) xmalloc (sizeof (int), "Local fs");
+    local_info = g_new (int, 1);
     *local_info = fd;
     
     return local_info;
@@ -64,7 +62,7 @@ local_close (void *data)
 	return -1;
     
     fd =  *(int *) data;
-    free (data);
+    g_free (data);
     return close (fd);
 }
 
@@ -84,7 +82,7 @@ local_opendir (vfs *me, char *dirname)
     if (!dir)
 	return 0;
 
-    local_info = (DIR **) xmalloc (sizeof (DIR *), "Local fs");
+    local_info = (DIR **) g_new (DIR *, 1);
     *local_info = dir;
     
     return local_info;
@@ -115,7 +113,7 @@ local_closedir (void *data)
 
     i = closedir (* (DIR **) data);
     if (data)
-	free (data);
+	g_free (data);
     return i;
 }
 
@@ -264,7 +262,7 @@ local_free (vfsid id)
 static char *
 local_getlocalcopy (vfs *me, char *path)
 {
-    return strdup (path);
+    return g_strdup (path);
 }
 
 static void

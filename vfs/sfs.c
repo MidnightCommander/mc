@@ -15,16 +15,12 @@
 #include <config.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <malloc.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include "../src/mad.h"
-#include "../src/fs.h"
-
 #include <fcntl.h>
-#include "../src/util.h"
-#include "../src/main.h"
+
+#include "utilvfs.h"
 
 #include "vfs.h"
 #include "local.h"
@@ -72,7 +68,7 @@ static int vfmake (vfs *me, char *name, char *cache)
     if (!(sfs_flags[w] & F_NOLOCALCOPY))
         name = mc_getlocalcopy (name);
     else 
-        name = strdup (name);
+        name = g_strdup (name);
     s = sfs_command[w];
 #define COPY_CHAR if (t-pad>10200) return -1; else *t++ = *s;
 #define COPY_STRING(a) if ((t-pad)+strlen(a)>10200) return -1; else { strcpy (t, a); t+= strlen(a); }
@@ -93,7 +89,7 @@ static int vfmake (vfs *me, char *name, char *cache)
 	}
 	s++;
     }
-    free (name);
+    g_free (name);
 
     if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, "/bin/sh", pad)) {
 	return -1;
@@ -129,9 +125,9 @@ redirect (vfs *me, char *name)
 
     close (handle);
 
-    xname = strdup (name);
+    xname = g_strdup (name);
     if (!vfmake (me, name, cache)){
-        cur = xmalloc (sizeof(struct cachedfile), "SFS cache");
+        cur = g_new (struct cachedfile, 1);
 	cur->name = xname;
 	cur->cache = cache;
 	cur->uid = uid;
@@ -143,7 +139,7 @@ redirect (vfs *me, char *name)
 
 	return cache;
     } else {
-        free(xname);
+        g_free(xname);
     }
     return "/I_MUST_NOT_EXIST";
 }
@@ -159,7 +155,7 @@ sfs_open (vfs *me, char *path, int flags, int mode)
     if (fd == -1)
 	return 0;
 
-    sfs_info = (int *) xmalloc (sizeof (int), "SF fs");
+    sfs_info = g_new (int, 1);
     *sfs_info = fd;
     
     return sfs_info;
@@ -224,14 +220,14 @@ static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
     *parent = NULL;
 
     {
-        char *path2 = strdup (path);
+        char *path2 = g_strdup (path);
 	v = vfs_split (path2, NULL, NULL);
 	id = (*v->getid) (v, path2, &par);
-	free (path2);
+	g_free (path2);
     }
 
     if (id != (vfsid)-1) {
-        *parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+        *parent = g_new (struct vfs_stamping, 1);
         (*parent)->v = v;
         (*parent)->id = id;
         (*parent)->parent = par;
@@ -277,7 +273,7 @@ static int sfs_nothingisopen (vfsid id)
 static char *sfs_getlocalcopy (vfs *me, char *path)
 {
     path = redirect (me, path);
-    return strdup (path);
+    return g_strdup (path);
 }
 
 static void sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
@@ -336,8 +332,8 @@ static int sfs_init (vfs *me)
 	if ((semi = strchr (c, '\n')))
 	    *semi = 0;
 
-	sfs_prefix [sfs_no] = strdup (key);
-	sfs_command [sfs_no] = strdup (c);
+	sfs_prefix [sfs_no] = g_strdup (key);
+	sfs_command [sfs_no] = g_strdup (c);
 	sfs_flags [sfs_no] = flags;
 	sfs_no++;
     }
@@ -351,8 +347,8 @@ sfs_done (vfs *me)
     int i;
 
     for (i = 0; i < sfs_no; i++){
-        free (sfs_prefix [i]);
-	free (sfs_command [i]);
+        g_free (sfs_prefix [i]);
+	g_free (sfs_command [i]);
 	sfs_prefix [i] = sfs_command [i] = NULL;
     }
     sfs_no = 0;

@@ -29,7 +29,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include <malloc.h>
 
 #ifdef HAVE_PMAP_SET
 #include <rpc/rpc.h>
@@ -46,9 +45,9 @@
 #include <errno.h>
 #include "tcputil.h"
 #include "../src/dialog.h"	/* for message () */
-#include "../src/mem.h"		/* for bcopy */
-#include "../src/util.h"	/* for unix_error_string */
-#include "../src/mad.h"
+
+#include "utilvfs.h"
+
 #include "mcfs.h"		/* for mcserver_port definition */
 
 #define CHECK_SIG_PIPE(sock) if (got_sigpipe) \
@@ -165,7 +164,7 @@ static void check_hooks (int sock)
 	} else {
 	    prev->link = callback->link;
 	}
-	free (callback);
+	g_free (callback);
 	return;
     }
 }
@@ -208,12 +207,12 @@ int rpc_get (int sock, ...)
 		}
 	    if (len > 128*1024)
 		    abort ();
-	    text = malloc (len+1);
+	    text = g_new0 (char, len+1);
 	    if (socket_read_block (sock, text, len) == 0)
 		return 0;
 	    str_dest = va_arg (ap, char **);
 	    *str_dest = text;
-	    text [len] = 0;
+	    text [len] = NULL;
 	    break;	    
 
 	case RPC_BLOCK:
@@ -233,14 +232,15 @@ void rpc_add_get_callback (int sock, void (*cback)(int))
 {
     sock_callback_t *new;
 
-    new = malloc (sizeof (sock_callback_t));
+    new = g_new (sock_callback_t, 1);
     new->cback = cback;
     new->sock = sock;
     new->link = sock_callbacks;
     sock_callbacks = new;
 }
 
-#if defined(IS_AIX) || defined(linux) || defined(SCO_FLAVOR) || defined(__QNX__)
+#if defined(IS_AIX) || defined(linux) || defined(SCO_FLAVOR) || defined(__QNX__) \
+    || defined(__FreeBSD__)
 static void sig_pipe (int unused)
 #else
 static void sig_pipe (void)

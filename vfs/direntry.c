@@ -26,6 +26,7 @@
 
 static volatile int total_inodes = 0, total_entries = 0;
 
+#include "utilvfs.h"
 #include "xdirentry.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
@@ -35,7 +36,7 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
 {
     vfs_s_inode *ino;
 
-    ino = xmalloc (sizeof (vfs_s_inode), "Dcache inode");
+    ino = g_new (vfs_s_inode, 1);
     if (!ino)
 	return NULL;
 
@@ -44,7 +45,6 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
     ino->subdir = NULL;
     if (initstat)
         ino->st = *initstat;
-
     ino->super = super;
     ino->ent = NULL;
     ino->flags = 0;
@@ -65,11 +65,11 @@ vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
 {
     vfs_s_entry *entry;
 
-    entry = (struct vfs_s_entry *) xmalloc (sizeof (struct vfs_s_entry), "Dcache entry");
+    entry = g_new (struct vfs_s_entry, 1);
     total_entries++;
 
     if (name)
-	entry->name = strdup (name);
+	entry->name = g_strdup (name);
     else
 	entry->name = NULL;
     entry->dir = NULL;
@@ -100,11 +100,11 @@ vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 	ifree (ino->linkname);
 	if (ino->localname){
 	    unlink (ino->localname);
-	    free (ino->localname);
+	    g_free(ino->localname);
 	}
 	total_inodes--;
 	ino->super->ino_usage--;
-	free (ino);
+	g_free(ino);
     } else ino->st.st_nlink--;
 }
 
@@ -112,7 +112,6 @@ void
 vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
 {
     int is_dot = 0;
-
     if (ent->prevp){	/* It is possible that we are deleting freshly created entry */
 	*ent->prevp = ent->next;
 	if (ent->next)
@@ -121,7 +120,7 @@ vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
 
     if (ent->name){
 	is_dot = (!strcmp (ent->name, ".")) || (!strcmp (ent->name, ".."));
-	free (ent->name);
+	g_free (ent->name);
 	ent->name = NULL;
     }
 	
@@ -132,7 +131,7 @@ vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
     }
 
     total_entries--;
-    free (ent);
+    g_free(ent);
 }
 
 void vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
@@ -182,7 +181,7 @@ vfs_s_add_dots (vfs *me, vfs_s_inode *dir, vfs_s_inode *parent)
     vfs_s_insert_entry (me, dir, dot);
     vfs_s_insert_entry (me, dir, dotdot);
     dir->st.st_nlink--;
-    parent->st.st_nlink--; /* We do not count "." and ".." into nlinks */
+    parent->st.st_nlink--;	/* We do not count "." and ".." into nlinks */
 }
 
 struct vfs_s_entry *
@@ -239,7 +238,6 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
 		;
 	if (!path [pseg])
 	    return ent;
-
 	path += pseg;
 
 	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++)
@@ -270,9 +268,7 @@ static void
 split_dir_name (vfs *me, char *path, char **dir, char **name, char **save)
 {
     char *s;
-
     s = strrchr (path, PATH_SEP);
-
     if (!s){
 	*save = NULL;
 	*name = path;
@@ -357,13 +353,10 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 {
     if (follow == LINK_NO_FOLLOW)
 	return entry;
-
     if (follow == 0)
 	ERRNOR (ELOOP, NULL);
-
     if (!entry)
 	ERRNOR (ENOENT, NULL);
-
     if (!S_ISLNK (entry->ino->st.st_mode))
 	return entry;
 
@@ -396,8 +389,7 @@ vfs_s_new_super (vfs *me)
 {
     vfs_s_super *super;
 
-    super = xmalloc (sizeof (struct vfs_s_super), "Direntry: superblock");
-    memset (super, 0, sizeof (struct vfs_s_super));
+    super = g_new0 (struct vfs_s_super, 1);
     super->root = NULL;
     super->name = NULL;
     super->fd_usage = 0;
@@ -443,7 +435,7 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
     CALL (free_archive) (me, super);
     ifree (super->name);
     super->name = NULL;
-    free (super);
+    g_free(super);
 }
 
 /* ------------------------------------------------------------------------= */
@@ -458,7 +450,7 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
     if (v == &vfs_local_ops){
 	parent = NULL;
     } else {
-	parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+	parent = g_new (struct vfs_stamping, 1);
 	parent->v = v;
 	parent->next = 0;
 	parent->id = (*v->getid) (v, fs_name, &(parent->parent));
@@ -517,14 +509,12 @@ return_success:
 char *
 vfs_s_get_path (vfs *me, char *inname, struct vfs_s_super **archive, int flags)
 {
-    char *buf = strdup (inname);
+    char *buf = g_strdup( inname );
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
     char *res2 = NULL;
-
     if (res)
-        res2 = strdup (res);
-    free (buf);
-
+        res2 = g_strdup(res);
+    g_free(buf);
     return res2;
 }
 
@@ -543,11 +533,10 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 /* For now, usable only on filesystems with _linear structure */
     if (MEDATA->find_entry != vfs_s_find_entry_linear)
 	vfs_die ("Implement me!");
-
     if ((!ino->ent) || (!ino->ent->dir) || (!ino->ent->dir->ent))
 	ERRNOR (EAGAIN, NULL);
-
-    return copy_strings (ino->ent->dir->ent->name, "/", ino->ent->name, NULL);
+    return copy_strings (ino->ent->dir->ent->name, PATH_SEP_STR, 
+			    ino->ent->name, NULL);
 }
 
 /* Support of archives */
@@ -601,7 +590,7 @@ void *
     if (!dir->subdir)	/* This can actually happen if we allow empty directories */
 	ERRNOR (EAGAIN, NULL);
 #endif
-    info = (struct dirhandle *) xmalloc (sizeof (struct dirhandle), "Shared opendir");
+    info = g_new (struct dirhandle, 1);
     info->cur = dir->subdir;
     info->dir = dir;
 
@@ -658,7 +647,6 @@ vfs_s_seekdir (void *data, int offset)
 {
     struct dirhandle *info = (struct dirhandle *) data;
     int i;
-
     info->cur = info->dir->subdir;
     for (i=0; i<offset; i++)
         vfs_s_readdir (data);
@@ -671,8 +659,7 @@ vfs_s_closedir (void *data)
     struct vfs_s_inode *dir = info->dir;
 
     vfs_s_free_inode (dir->super->me, dir);
-    free (data);
-
+    g_free (data);
     return 0;
 }
 
@@ -715,7 +702,6 @@ int
 vfs_s_fstat (void *fh, struct stat *buf)
 {
     *buf = FH->ino->st;
-
     return 0;
 }
 
@@ -730,10 +716,8 @@ vfs_s_readlink (vfs *me, char *path, char *buf, int size)
 
     if (!S_ISLNK (ino->st.st_mode))
 	ERRNOR (EINVAL, -1);
-
     strncpy (buf, ino->linkname, size);
     *(buf+size-1) = 0;
-
     return strlen (buf);
 }
 
@@ -759,7 +743,6 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
 	    return NULL;
 
 	split_dir_name (me, q, &dirname, &name, &save);
-
 /* FIXME: if vfs_s_find_inode returns NULL, this will do rather bad
    things. */
 	dir = vfs_s_find_inode (me, super->root, dirname, LINK_FOLLOW, FL_DIR);
@@ -775,7 +758,7 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     if (S_ISDIR (ino->st.st_mode))
 	ERRNOR (EISDIR, NULL);
     
-    fh = (struct vfs_s_fh *) xmalloc (sizeof (struct vfs_s_fh), "Direntry: filehandle");
+    fh = g_new (struct vfs_s_fh, 1);
     fh->pos = 0;
     fh->ino = ino;
     fh->handle = -1;
@@ -783,14 +766,14 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     fh->linear = 0;
     if (MEDATA->fh_open)
 	if (MEDATA->fh_open (me, fh, flags, mode)){
-	    free (fh);
+	    g_free(fh);
 	    return NULL;
 	}
 
     if (fh->ino->localname){
 	fh->handle = open (fh->ino->localname, flags, mode);
 	if (fh->handle == -1){
-	    free (fh);
+	    g_free(fh);
 	    ERRNOR (errno, NULL);
 	}
     }
@@ -892,7 +875,7 @@ vfs_s_close (void *fh)
 	if (v == &vfs_local_ops){
 	    parent = NULL;
 	} else {
-	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+	    parent = g_new (struct vfs_stamping, 1);
 	    parent->v = v;
 	    parent->next = 0;
 	    parent->id = (*v->getid) (v, FH_SUPER->name, &(parent->parent));
@@ -916,7 +899,7 @@ vfs_s_close (void *fh)
 	close (FH->handle);
 	
     vfs_s_free_inode (me, FH->ino);
-    free (fh);
+    g_free (fh);
     return res;
 }
 
@@ -929,10 +912,9 @@ vfs_s_fill_names (vfs *me, void (*func)(char *))
     char *name;
     
     while (a){
-	name = copy_strings  (a->name, "#", me->prefix, "/",
-			      /* a->current_dir->name, */ 0);
+	name = copy_strings ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
 	(*func)(name);
-	free (name);
+	g_free (name);
 	a = a->next;
     }
 }
@@ -961,7 +943,7 @@ vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
 		printf ("%s IGNORED\n", s);
 	    else
 		vfs_s_dump (me, s, ent->ino);
-	    free (s);
+	    g_free(s);
 	    ent = ent->next;
 	}
     }
@@ -986,10 +968,8 @@ int
 vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 {
     vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
-
     if (!ino)
 	return 0;
-    
     switch (ctlop){
     case MCCTL_WANT_STALE_DATA:
 	ino->super->want_stale = 1;
@@ -1006,7 +986,6 @@ vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 	return 0;
 #endif
     }
-
     return 0;
 }
 
@@ -1025,14 +1004,11 @@ vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent)
     *parent = NULL;
     if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
 	return (vfsid) -1;
-    
-    free (p);
-
+    g_free(p);
     v = vfs_type (archive->name);
     id = (*v->getid) (v, archive->name, &par);
-
     if (id != (vfsid)-1){
-        *parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
+        *parent = g_new (struct vfs_stamping, 1);
         (*parent)->v = v;
         (*parent)->id = id;
         (*parent)->parent = par;

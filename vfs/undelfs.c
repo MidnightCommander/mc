@@ -34,15 +34,8 @@
  
 #include <config.h>
 #include <errno.h>
-#include "../src/fs.h"
-#include "../src/mad.h"
-#include "../src/util.h"
-
-#include "../src/mem.h"
-#include "vfs.h"
 
 #include <stdio.h>
-#include <malloc.h>
 #include <fcntl.h>
 #include <stdlib.h>
 /* asm/types.h defines its own umode_t :-( */
@@ -50,6 +43,10 @@
 #include <linux/ext2_fs.h>
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
+
+#include "utilvfs.h"
+
+#include "vfs.h"
 
 void print_vfs_message(char *, ...);
 
@@ -92,13 +89,13 @@ undelfs_shutdown (void)
 	ext2fs_close (fs);
     fs = 0;
     if (ext2_fname)
-	free (ext2_fname);
+	g_free (ext2_fname);
     ext2_fname = 0;
     if (delarray)
-        free (delarray);
+        g_free (delarray);
     delarray = 0;
     if (block_buf)
-	free (block_buf);
+	g_free (block_buf);
     block_buf = 0;
 }
 
@@ -134,7 +131,7 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
     
     while (p > dirname){
 	if (*p == '/'){
-	    *file = strdup (p+1);
+	    *file = g_strdup (p+1);
 	    *p = 0;
 	    *ext2_fname = copy_strings ("/dev/", dirname, NULL);
 	    *p = '/';
@@ -142,7 +139,7 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
 	}
 	p--;
     }
-    *file = strdup ("");
+    *file = g_strdup ("");
     *ext2_fname = copy_strings ("/dev/", dirname, NULL);
     return;
 }
@@ -179,12 +176,12 @@ undelfs_loaddel (void)
     
     max_delarray = 100;
     num_delarray = 0;
-    delarray = malloc(max_delarray * sizeof(struct deleted_info));
+    delarray = g_new (struct deleted_info, max_delarray);
     if (!delarray) {
 	message_1s (1, undelfserr, " not enough memory ");
 	return 0;
     }
-    block_buf = malloc(fs->blocksize * 3);
+    block_buf = g_new (fs->blocksize, 3);
     if (!block_buf) {
 	message_1s (1, undelfserr, " while allocating block buffer ");
 	goto free_delarray;
@@ -255,10 +252,10 @@ undelfs_loaddel (void)
 error_out:    
     ext2fs_close_inode_scan (scan);
 free_block_buf:
-    free (block_buf);
+    g_free (block_buf);
     block_buf = 0;
 free_delarray:
-    free (delarray);
+    g_free (delarray);
     delarray = 0;
     return 0;
 }
@@ -267,10 +264,9 @@ void com_err (const char *str, long err_code, const char *s2, ...)
 {
     char *cptr;
 
-    cptr = xmalloc (strlen (s2) + strlen (str) + 60, "com_err");
-    sprintf (cptr, " %s (%s: %ld) ", s2, str, err_code);
+    cptr = g_strdup_printf (" %s (%s: %ld) ", s2, str, err_code);
     message_1s (1, " Ext2lib error ", cptr);
-    free (cptr);
+    g_free (cptr);
 }
 
 static void *
@@ -283,7 +279,7 @@ undelfs_opendir (vfs *me, char *dirname)
 	return 0;
 
     /* We don't use the file name */
-    free (f);
+    g_free (f);
     
     if (!ext2_fname || strcmp (ext2_fname, file)){
 	undelfs_shutdown ();
@@ -291,7 +287,7 @@ undelfs_opendir (vfs *me, char *dirname)
     } else {
 	/* To avoid expensive re-scannings */
 	readdir_ptr = READDIR_PTR_INIT;
-	free (file);
+	g_free (file);
 	return fs;
     }
 
@@ -347,11 +343,11 @@ undelfs_readdir (void *vfs_info)
     }
     if (readdir_ptr == num_delarray)
 	return NULL;
-    dirent_dest = &(undelfs_readdir_data.dent.d_name [0]);
+    dirent_dest = (char *) &(undelfs_readdir_data.dent.d_name [0]);
     if (readdir_ptr < 0)
-	sprintf (dirent_dest, "%s", readdir_ptr == -2 ? "." : "..");
+	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%s", readdir_ptr == -2 ? "." : "..");
     else
-	sprintf (dirent_dest, "%ld:%d",
+	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%ld:%d",
 		 (long)delarray [readdir_ptr].ino,
 		 delarray [readdir_ptr].num_blocks);
     readdir_ptr++;
@@ -399,8 +395,8 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
     
     if (!ext2_fname || strcmp (ext2_fname, file)){
 	message_1s (1, undelfserr, " You have to chdir to extract files first ");
-	free (file);
-	free (f);
+	g_free (file);
+	g_free (f);
 	return 0;
     }
     inode = atol (f);
@@ -411,17 +407,17 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
 	    continue;
 
 	/* Found: setup all the structures needed by read */
-	p = (void *) malloc (sizeof (undelfs_file));
+	p = g_new (undelfs_file, 1);
 	if (!p){
-	    free (file);
-	    free (f);
+	    g_free (file);
+	    g_free (f);
 	    return 0;
 	}
-	p->buf = malloc(fs->blocksize);
+	p->buf = g_new (fs->blocksize, 1);
 	if (!p->buf){
-	    free (p);
-	    free (file);
-	    free (f);
+	    g_free (p);
+	    g_free (file);
+	    g_free (f);
 	    return 0;
 	}
 	p->inode = inode;
@@ -431,8 +427,8 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
 	p->pos = 0;
 	p->size = delarray [i].size;
     }
-    free (file);
-    free (f);
+    g_free (file);
+    g_free (f);
     undelfs_usage++;
     return p;
 }
@@ -441,8 +437,8 @@ static 	int
 undelfs_close (void *vfs_info)
 {
     undelfs_file *p = vfs_info;
-    free (p->buf);
-    free (p);
+    g_free (p->buf);
+    g_free (p);
     undelfs_usage--;
     return 0;
 }
@@ -576,20 +572,20 @@ undelfs_lstat(vfs *me, char *path, struct stat *buf)
 	    f    = "sda1"                     f   ="401:1"
        If the first char in f is no digit -> return error */
     if (!isdigit (*f)) {
-	free (file);
-	free (f);
+	g_free (file);
+	g_free (f);
 	return -1;
     }
 	
     if (!ext2_fname || strcmp (ext2_fname, file)){
 	message_1s (1, undelfserr, " You have to chdir to extract files first ");
-	free (file);
-	free (f);
+	g_free (file);
+	g_free (f);
 	return 0;
     }
     inode_index = undelfs_getindex (f);
-    free (file);
-    free (f);
+    g_free (file);
+    g_free (f);
 
     if (inode_index == -1)
 	return -1;
@@ -627,13 +623,13 @@ undelfs_chdir(vfs *me, char *path)
     /* our vfs, but that is left as an excercise for the reader */
     if ((fd = open (file, O_RDONLY)) == -1){
 	message_2s (1, undelfserr, " Could not open file: %s ", file);
-	free (f);
-	free (file);
+	g_free (f);
+	g_free (file);
 	return -1;
     }
     close (fd);
-    free (f);
-    free (file);
+    g_free (f);
+    g_free (file);
     return 0;
 }
 
@@ -655,8 +651,8 @@ undelfs_getid(vfs *me, char *path, struct vfs_stamping **parent)
 
     if (!ext2_fname)
         return (vfsid) -1;
-    free (ext2_fname);
-    free (file);
+    g_free (ext2_fname);
+    g_free (file);
     return (vfsid)0;
 }
 

@@ -26,8 +26,9 @@
 #include <sys/timeb.h>	/* alex: for struct timeb definition */
 #endif /* SCO_FLAVOR */
 #include <time.h>
-#include "../src/fs.h"
-#include "../src/util.h"
+
+#include "utilvfs.h"
+
 #include "../src/dialog.h"	/* For MSG_ERROR */
 #include "tar.h"
 #include "names.h"
@@ -84,7 +85,7 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 	ERRNOR (ENOENT, -1);
     }
     
-    archive->name = strdup (name);
+    archive->name = g_strdup (name);
     mc_stat (name, &(archive->u.tar.tarstat));
     archive->u.tar.fd = -1;
 
@@ -98,7 +99,7 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 	result = mc_open (s, O_RDONLY);
 	if (result == -1) 
 	    message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), s);
-	free(s);
+	g_free(s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);
     }
@@ -272,8 +273,8 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 		 : &next_long_link);
 
 	if (*longp)
-	    free (*longp);
-	bp = *longp = (char *) xmalloc (hstat.st_size, "Tar: Long name");
+	    g_free (*longp);
+	bp = *longp = g_malloc (hstat.st_size);
 
 	for (size = hstat.st_size;
 	     size > 0;
@@ -306,7 +307,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 
 	current_file_name = (next_long_name
 			     ? next_long_name
-			     : strdup (header->header.arch_name));
+			     : g_strdup (header->header.arch_name));
 	len = strlen (current_file_name);
 	if (current_file_name[len - 1] == '/') {
 	    current_file_name[len - 1] = 0;
@@ -315,7 +316,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 
 	current_link_name = (next_long_link
 			     ? next_long_link
-			     : strdup (header->header.arch_linkname));
+			     : g_strdup (header->header.arch_linkname));
 	len = strlen (current_link_name);
 	if (len && current_link_name [len - 1] == '/')
 	    current_link_name[len - 1] = 0;
@@ -347,7 +348,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	        inode = parent;
 		entry = vfs_s_new_entry(me, p, inode);
 		vfs_s_insert_entry(me, parent, entry);
-		free (current_link_name);
+		g_free (current_link_name);
 		goto done;
 	    }
 	}
@@ -361,7 +362,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	entry = vfs_s_new_entry (me, p, inode);
 
 	vfs_s_insert_entry (me, parent, entry);
-	free (current_file_name);
+	g_free (current_file_name);
 
     done:
 	if (header->header.isextended) {
@@ -473,7 +474,7 @@ static int tar_read (void *fh, char *buffer, int count)
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 
         begin + FH->pos) ERRNOR (EIO, -1);
 
-    count = VFS_MIN(count, FH->ino->st.st_size - FH->pos);
+    count = MIN(count, FH->ino->st.st_size - FH->pos);
 
     if ((count = mc_read (fd, buffer, count)) == -1) ERRNOR (errno, -1);
 
