@@ -1115,8 +1115,7 @@ get_modifier (void)
     PhCursorInfo_t cursor_info;
     static void *ph_handle;
     char *ph_env;
-    struct stat st;
-#endif
+#endif				/* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_window) {
@@ -1139,7 +1138,7 @@ get_modifier (void)
 	    result |= KEY_M_CTRL;
 	return result;
     }
-#endif
+#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 #ifdef __QNXNTO__
 
     if (in_photon == 0) {
@@ -1149,26 +1148,23 @@ get_modifier (void)
 	ph_env = getenv ("PHOTON2_PATH");
 	if (ph_env != NULL) {
 	    sprintf (phlib_path, "%s/lib/libph.so.1", ph_env);
-	    if (fstat (phlib_path, &st)) {
-		/* QNX 6.x has no support for RTLD_LAZY */
-		ph_handle = dlopen (phlib_path, RTLD_NOW);
-		if (ph_handle != NULL) {
-		    ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
-		    ph_input_group =
-			(ph_ov_f) dlsym (ph_handle, "PhInputGroup");
-		    ph_query_cursor =
-			(ph_pqc_f) dlsym (ph_handle, "PhQueryCursor");
-		    if ((ph_attach != NULL) && (ph_input_group != NULL)
-			&& (ph_query_cursor != NULL)) {
-			if ((*ph_attach) (0, 0)) {	/* Attached */
-			    ph_ig = (*ph_input_group) (0);
-			    in_photon = 1;
-			}
+	    /* QNX 6.x has no support for RTLD_LAZY */
+	    ph_handle = dlopen (phlib_path, RTLD_NOW);
+	    if (ph_handle != NULL) {
+		ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
+		ph_input_group =
+		    (ph_ov_f) dlsym (ph_handle, "PhInputGroup");
+		ph_query_cursor =
+		    (ph_pqc_f) dlsym (ph_handle, "PhQueryCursor");
+		if ((ph_attach != NULL) && (ph_input_group != NULL)
+		    && (ph_query_cursor != NULL)) {
+		    if ((*ph_attach) (0, 0)) {	/* Attached */
+			ph_ig = (*ph_input_group) (0);
+			in_photon = 1;
 		    }
 		}
 	    }
 	}
-
     }
     /* We do not have Photon running. Assume we are in text 
        console or xterm */
@@ -1195,7 +1191,7 @@ get_modifier (void)
 	if (cursor_info.key_mods & 0x01)
 	    result |= KEY_M_SHIFT;
     }
-#endif
+#endif				/* __QNXNTO__ */
 #ifdef __linux__
     {
 	unsigned char modifiers = 6;
@@ -1215,7 +1211,7 @@ get_modifier (void)
     }
 #else
     return result;
-#endif
+#endif				/* !__linux__ */
 }
 
 static void k_dispose (key_def *k)

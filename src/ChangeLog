@@ -1,3 +1,8 @@
+2003-03-10  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (get_modifier) [__QNXNTO__]: Remove incorrect check for
+	the existance of libph.so.1.
+
 2003-03-10  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* key.c (get_modifier): Add support for QNX Photon pterm.
