@@ -793,7 +793,8 @@ int mi_getch ()
 {
     Gpm_Event ev;
     int       key;
-    
+
+    ev->x = -1;
     while ((key = get_event (&ev, 0, 1)) == 0)
 	;
     return key;

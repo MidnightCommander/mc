@@ -482,7 +482,9 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     dd->data  = qd->title;
 
     for (qw = qd->widgets; qw->widget_type; qw++){
-#ifndef HAVE_X
+#ifdef HAVE_X
+	xpos = ypos = 0;
+#else
 	xpos = (qd->xlen * qw->relative_x)/qw->x_divisions;
 	ypos = (qd->ylen * qw->relative_y)/qw->y_divisions;
 #endif

@@ -51,7 +51,7 @@ flags=ew
 
 [findfile-Widget-tree]
 geometry=4,6,1,1
-flags=
+flags=ns
 
 [findfile-Widget-ok]
 geometry=3,6,1,1

@@ -1,3 +1,16 @@
+1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (string_file_nlinks): The buffer was too small and we
+	were overwriting parts of it.
+
+	* subshell.c (do_subshell_chdir): Memory leak fix.
+
+	* find.c (do_search): Do not use undefined order of evaluation.
+
+	* user.c: Do not use undefined order of evaluation. 
+
+	* dlg.c (init_dlg): Do init the default return value.
+
 Sun Apr 12 03:09:17 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* cmd.c (view_other_cmd): #ifdef'd application_keypad_mode and

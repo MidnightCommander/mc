@@ -157,9 +157,11 @@ radio_toggle (GtkObject *object, WRadio *r)
 {
 	int idx = (int) gtk_object_get_data (object, "index");
 
+	printf ("WEEEEE RADIO!\n");
+	
 	if (!GTK_TOGGLE_BUTTON (object)->active)
 		return;
-	
+
 	g_return_if_fail (idx != 0);
 	idx--;
 	r->sel = idx;
@@ -264,7 +266,7 @@ x_update_input (WInput *in)
 	GnomeEntry *gnome_entry;
 	GtkEntry   *entry;
 	char       *text;
-	int        draw;
+	int        draw = 0;
 	
 	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
 	if (!in->widget.wdata)
@@ -475,6 +477,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 	}
 	gtk_widget_show (hbox);
 	bb->widget.wdata = (widget_data) hbox;
+	return 1;
 }
 
 void

@@ -353,7 +353,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 
 		/* Find out which one of the widgets is the WPanel */
 		p = (WPanel *) find_widget_type (h, (callback_fn) panel_callback);
-		g_return_if_fail (p != 0);
+		g_return_val_if_fail (p != 0, 0);
 
 		current_widget = (void *) h->current->widget;
 

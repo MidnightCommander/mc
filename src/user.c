@@ -549,7 +549,7 @@ void execute_menu_command (char *s)
 		    prompt [len] = *commands;
 		    prompt [len+1] = 0;
 		} else
-		    prompt [sizeof (prompt)] = 0;
+		    prompt [sizeof (prompt)-1] = 0;
 	    }
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
@@ -659,7 +659,9 @@ void user_menu_cmd (void)
 	    } else if (*p == '+'){
 		if (*(p+1) == '='){
 		    /* Combined adding and default */
-		    p = test_line (++p, &accept_entry);
+		    char *q = p++;
+		    
+		    p = test_line (q, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
@@ -668,8 +670,9 @@ void user_menu_cmd (void)
 		}
 	    } else if (*p == '='){
 		if (*(p+1) == '+'){
+		    char *q = p++;
 		    /* Combined adding and default */
-		    p = test_line (++p, &accept_entry);
+		    p = test_line (q, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {

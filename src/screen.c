@@ -264,7 +264,7 @@ string_file_permission (file_entry *fe, int len)
 char *
 string_file_nlinks (file_entry *fe, int len)
 {
-    static char buffer [16];
+    static char buffer [20];
 
     sprintf (buffer, "%16d", fe->buf.st_nlink);
     return buffer;

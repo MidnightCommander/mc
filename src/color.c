@@ -180,13 +180,13 @@ static void get_two_colors (char **cpp, struct colorpair *colorpairp)
 
 void configure_colors_string (char *the_color_string)
 {
-    char *color_string;
+    char *color_string, *p;
     int  i, found;
 
     if (!the_color_string)
 	return;
 
-    color_string = strdup (the_color_string);
+    p = color_string = strdup (the_color_string);
     while (color_string && *color_string){
 	while (*color_string == ' ' || *color_string == '\t')
 	    color_string++;
@@ -208,6 +208,7 @@ void configure_colors_string (char *the_color_string)
 			color_string++;
 	}
     }
+    free (p);
 }
 
 static void configure_colors (void)

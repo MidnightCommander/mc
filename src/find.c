@@ -569,7 +569,7 @@ do_search (struct Dlg_head *h)
     if (!(count & 31)){
 	if (verbose){
 #ifndef HAVE_X
-	    pos = (++pos) % 4;
+	    pos = (pos + 1) % 4;
 	    attrset (NORMALC);
 	    dlg_move (h, FIND2_Y-6, FIND2_X - 4);
 	    addch (rotating_dash [pos]);

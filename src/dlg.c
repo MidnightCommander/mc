@@ -758,6 +758,7 @@ void init_dlg (Dlg_head *h)
     while (!dlg_focus (h))
 	h->current = h->current->next;
 
+    h->ret_value = 0;
     h->running = 1;
     x_init_dlg (h);
 }

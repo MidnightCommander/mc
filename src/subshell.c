@@ -757,8 +757,6 @@ void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
 	return;
     }
     
-    temp = strdup (directory);
-	
     /* The initial space keeps this out of the command history (in bash
        because we set "HISTCONTROL=ignorespace") */
     write (subshell_pty, " cd ", 4);
@@ -766,8 +764,9 @@ void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
 	temp = name_quote (directory, 0);
 	write (subshell_pty, temp, strlen (temp));    
         free (temp);
-    } else
+    } else {
 	write (subshell_pty, "/", 1);
+    }
     write (subshell_pty, "\n", 1);
     
     subshell_state = RUNNING_COMMAND;
