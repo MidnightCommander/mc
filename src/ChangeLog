@@ -2,6 +2,7 @@
 
 	* tty.h (printwstr): Added a function to print a string
 	left-aligned in a bounded box.
+	* unixcompat.h (major/minor): Added support for AIX.
 
 2005-01-25  Roland Illig  <roland.illig@gmx.de>
 

@@ -14,6 +14,9 @@
 #ifdef HAVE_SYS_MKDEV_H
 # include <sys/mkdev.h>		/* Solaris 9 */
 #endif
+#ifdef HAVE_SYS_SYSMACROS_H
+# include <sys/sysmacros.h>	/* AIX */
+#endif
 
 #ifndef major
 # define major(devnum) (((devnum) >> 8) & 0xff)
