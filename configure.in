@@ -83,6 +83,26 @@ if test "x$USE_INCLUDED_LIBINTL" = xyes; then
     CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"
 fi
 
+dnl Determine which help translations we want to install.
+ALL_DOC_LINGUAS="es hu it pl ru"
+
+DOC_LINGUAS=
+if test "x$USE_NLS" = xyes; then
+    langs="${LINGUAS-$ALL_LINGUAS}"
+else
+    langs=
+fi
+
+for h_lang in $ALL_DOC_LINGUAS; do
+    for lang in $langs; do
+	if test "$lang" = "$h_lang"; then
+	    DOC_LINGUAS="$DOC_LINGUAS $lang"
+	    break
+	fi
+    done
+done
+AC_SUBST(DOC_LINGUAS)
+
 dnl
 dnl Hack to make extraconf.h visible even if compiling outside srcdir.
 dnl
