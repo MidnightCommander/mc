@@ -458,16 +458,16 @@ static BOOL handle_coding_system(char *pszParmValue,char **ptr);
 
 static void set_default_server_announce_type(void);
 
-static struct enum_list enum_protocol[] = {{PROTOCOL_NT1, "NT1"}, {PROTOCOL_LANMAN2, "LANMAN2"}, 
+static struct enum_list const enum_protocol[] = {{PROTOCOL_NT1, "NT1"}, {PROTOCOL_LANMAN2, "LANMAN2"}, 
 					   {PROTOCOL_LANMAN1, "LANMAN1"}, {PROTOCOL_CORE,"CORE"}, 
 					   {PROTOCOL_COREPLUS, "COREPLUS"}, 
 					   {PROTOCOL_COREPLUS, "CORE+"}, {-1, NULL}};
 
-static struct enum_list enum_security[] = {{SEC_SHARE, "SHARE"},  {SEC_USER, "USER"}, 
+static struct enum_list const enum_security[] = {{SEC_SHARE, "SHARE"},  {SEC_USER, "USER"}, 
 					   {SEC_SERVER, "SERVER"}, {SEC_DOMAIN, "DOMAIN"},
                                            {-1, NULL}};
 
-static struct enum_list enum_printing[] = {{PRINT_SYSV, "sysv"}, {PRINT_AIX, "aix"}, 
+static struct enum_list const enum_printing[] = {{PRINT_SYSV, "sysv"}, {PRINT_AIX, "aix"}, 
 					   {PRINT_HPUX, "hpux"}, {PRINT_BSD, "bsd"},
 					   {PRINT_QNX, "qnx"},   {PRINT_PLP, "plp"},
 					   {PRINT_LPRNG, "lprng"}, {PRINT_SOFTQ, "softq"},
@@ -479,11 +479,11 @@ static struct enum_list enum_printing[] = {{PRINT_SYSV, "sysv"}, {PRINT_AIX, "ai
 #define ANNOUNCE_AS_WFW 3
 #define ANNOUNCE_AS_NT_WORKSTATION 4
 
-static struct enum_list enum_announce_as[] = {{ANNOUNCE_AS_NT_SERVER, "NT"}, {ANNOUNCE_AS_NT_SERVER, "NT Server"}, {ANNOUNCE_AS_NT_WORKSTATION, "NT Workstation"}, {ANNOUNCE_AS_WIN95, "win95"}, {ANNOUNCE_AS_WFW, "WfW"}, {-1, NULL}};
+static struct enum_list const enum_announce_as[] = {{ANNOUNCE_AS_NT_SERVER, "NT"}, {ANNOUNCE_AS_NT_SERVER, "NT Server"}, {ANNOUNCE_AS_NT_WORKSTATION, "NT Workstation"}, {ANNOUNCE_AS_WIN95, "win95"}, {ANNOUNCE_AS_WFW, "WfW"}, {-1, NULL}};
 
-static struct enum_list enum_case[] = {{CASE_LOWER, "lower"}, {CASE_UPPER, "upper"}, {-1, NULL}};
+static struct enum_list const enum_case[] = {{CASE_LOWER, "lower"}, {CASE_UPPER, "upper"}, {-1, NULL}};
 
-static struct enum_list enum_lm_announce[] = {{0, "False"}, {1, "True"}, {2, "Auto"}, {-1, NULL}};
+static struct enum_list const enum_lm_announce[] = {{0, "False"}, {1, "True"}, {2, "Auto"}, {-1, NULL}};
 
 /* 
    Do you want session setups at user level security with a invalid
@@ -506,10 +506,10 @@ static struct enum_list enum_lm_announce[] = {{0, "False"}, {1, "True"}, {2, "Au
    level security.
 */
 
-static struct enum_list enum_map_to_guest[] = {{NEVER_MAP_TO_GUEST, "Never"}, {MAP_TO_GUEST_ON_BAD_USER, "Bad User"}, {MAP_TO_GUEST_ON_BAD_PASSWORD, "Bad Password"}, {-1, NULL}};
+static struct enum_list const enum_map_to_guest[] = {{NEVER_MAP_TO_GUEST, "Never"}, {MAP_TO_GUEST_ON_BAD_USER, "Bad User"}, {MAP_TO_GUEST_ON_BAD_PASSWORD, "Bad Password"}, {-1, NULL}};
 
 #ifdef WITH_SSL
-static struct enum_list enum_ssl_version[] = {{SMB_SSL_V2, "ssl2"}, {SMB_SSL_V3, "ssl3"},
+static struct enum_list const enum_ssl_version[] = {{SMB_SSL_V2, "ssl2"}, {SMB_SSL_V3, "ssl3"},
   {SMB_SSL_V23, "ssl2or3"}, {SMB_SSL_TLS1, "tls1"}, {-1, NULL}};
 #endif
 

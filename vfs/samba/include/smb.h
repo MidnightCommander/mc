@@ -875,7 +875,7 @@ struct parm_struct
 	parm_class class;
 	void *ptr;
 	BOOL (*special)(char *, char **);
-	struct enum_list *enum_list;
+	const struct enum_list *enum_list;
 	unsigned flags;
 	union {
 		BOOL bvalue;
