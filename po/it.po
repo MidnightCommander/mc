@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-11-04 16:39+0100\n"
+"POT-Creation-Date: 2002-11-12 21:11+0100\n"
 "PO-Revision-Date: 2002-10-25 12:12+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: edit/edit.c:161 edit/edit.c:287 edit/edit.c:292 edit/edit.c:330
 #: edit/edit.c:336 edit/edit.c:343 edit/edit.c:355 edit/edit.c:2593
 #: edit/editcmd.c:252 edit/editcmd.c:258 edit/editcmd.c:1570 src/wtools.c:132
-#: vfs/vfs.c:1790
+#: vfs/vfs.c:1789
 msgid "Error"
 msgstr "Errore"
 
@@ -125,7 +125,7 @@ msgstr "Fai i backup -->"
 #: edit/editcmd.c:1168 edit/editcmd.c:2362 edit/editoptions.c:62
 #: src/achown.c:71 src/boxes.c:140 src/boxes.c:277 src/boxes.c:372
 #: src/boxes.c:464 src/boxes.c:586 src/boxes.c:711 src/boxes.c:1009
-#: src/chmod.c:103 src/chown.c:75 src/cmd.c:881 src/filegui.c:773
+#: src/chmod.c:103 src/chown.c:75 src/cmd.c:885 src/filegui.c:773
 #: src/find.c:148 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:811
 #: src/hotlist.c:907 src/layout.c:364 src/learn.c:60 src/option.c:149
 #: src/panelize.c:74 src/view.c:381 src/wtools.c:57 src/wtools.c:374
@@ -145,8 +145,8 @@ msgid " Save As "
 msgstr " Salva con nome "
 
 #: edit/editcmd.c:421 edit/editcmd.c:705 edit/editcmd.c:730 edit/editcmd.c:878
-#: edit/editcmd.c:976 src/file.c:623 src/help.c:317 src/main.c:462
-#: src/screen.c:1365 src/screen.c:1938 src/selcodepage.c:106
+#: edit/editcmd.c:976 src/file.c:623 src/help.c:319 src/main.c:462
+#: src/screen.c:1392 src/screen.c:1968 src/selcodepage.c:106
 #: src/subshell.c:703 src/utilunix.c:355 src/utilunix.c:359 src/utilunix.c:381
 #: src/utilunix.c:433 vfs/mcfs.c:139
 msgid "Warning"
@@ -233,11 +233,11 @@ msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 msgid "O&ne"
 msgstr "&Nome"
 
-#: edit/editcmd.c:1035 src/file.c:2270 src/filegui.c:549
+#: edit/editcmd.c:1035 src/file.c:2265 src/filegui.c:549
 msgid "A&ll"
 msgstr "&Tutti"
 
-#: edit/editcmd.c:1037 src/file.c:2207 src/filegui.c:237
+#: edit/editcmd.c:1037 src/file.c:2202 src/filegui.c:237
 msgid "&Skip"
 msgstr "&Salta"
 
@@ -330,7 +330,7 @@ msgstr " La stringa cercata non è disponibile "
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d ricerche fatte, %d segnalibri aggiunti "
 
-#: edit/editcmd.c:1935 edit/editwidget.c:296 src/help.c:823 src/main.c:1419
+#: edit/editcmd.c:1935 edit/editwidget.c:296 src/help.c:825 src/main.c:1419
 #: src/view.c:396 src/view.c:2049 src/view.c:2074
 msgid "Quit"
 msgstr "Esci"
@@ -343,15 +343,15 @@ msgstr " Il file è stato modificato. Lo salvo uscendo? "
 msgid "Cancel quit"
 msgstr "Annulla l'uscita"
 
-#: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1877 src/file.c:2269
-#: src/filegui.c:554 src/hotlist.c:1030 src/main.c:625 src/screen.c:1926
-#: src/subshell.c:704 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
+#: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1872 src/file.c:2264
+#: src/filegui.c:554 src/hotlist.c:1030 src/main.c:625 src/screen.c:1956
+#: src/subshell.c:704 src/tree.c:755 src/view.c:398 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr " &Sì"
 
-#: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1877 src/file.c:2269
-#: src/filegui.c:553 src/hotlist.c:1030 src/main.c:625 src/screen.c:1927
-#: src/subshell.c:704 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
+#: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1872 src/file.c:2264
+#: src/filegui.c:553 src/hotlist.c:1030 src/main.c:625 src/screen.c:1957
+#: src/subshell.c:704 src/tree.c:755 src/view.c:398 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&No"
 
@@ -737,8 +737,8 @@ msgstr "Emulazione tasti"
 msgid " Editor options "
 msgstr " Opzioni editor"
 
-#: edit/editwidget.c:286 src/help.c:790 src/help.c:811 src/main.c:1415
-#: src/screen.c:2149 src/tree.c:1017 src/view.c:2047
+#: edit/editwidget.c:286 src/help.c:792 src/help.c:813 src/main.c:1415
+#: src/screen.c:2180 src/tree.c:1018 src/view.c:2047
 msgid "Help"
 msgstr "Aiuto"
 
@@ -750,7 +750,7 @@ msgstr "Marca"
 msgid "Replac"
 msgstr "Sostit"
 
-#: edit/editwidget.c:290 src/file.c:828 src/screen.c:2153 src/tree.c:1023
+#: edit/editwidget.c:290 src/file.c:828 src/screen.c:2184 src/tree.c:1024
 msgid "Copy"
 msgstr "Copia"
 
@@ -758,7 +758,7 @@ msgstr "Copia"
 msgid "Move"
 msgstr "Sposta"
 
-#: edit/editwidget.c:293 src/screen.c:2156
+#: edit/editwidget.c:293 src/screen.c:2187
 msgid "Delete"
 msgstr "Elimina"
 
@@ -848,7 +848,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Processo in background"
 
-#: src/background.c:275 src/file.c:2205
+#: src/background.c:275 src/file.c:2200
 msgid " Background process error "
 msgstr " Errore del processo in background"
 
@@ -1044,7 +1044,7 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Nome utente:"
 
-#: src/boxes.c:1008 vfs/vfs.c:1825
+#: src/boxes.c:1008 vfs/vfs.c:1824
 msgid "Password:"
 msgstr "Password"
 
@@ -1123,7 +1123,7 @@ msgstr "&Imp. marc."
 msgid "&Marked all"
 msgstr "M&od. tut."
 
-#: src/chmod.c:133 src/screen.c:375
+#: src/chmod.c:133 src/screen.c:405
 msgid "Name"
 msgstr "Nome"
 
@@ -1300,41 +1300,41 @@ msgstr "&Locale"
 msgid "&Home"
 msgstr "&Home"
 
-#: src/cmd.c:880
+#: src/cmd.c:883
 msgid " Compare directories "
 msgstr " Confronta directory "
 
-#: src/cmd.c:880
+#: src/cmd.c:884
 msgid " Select compare method: "
 msgstr " Seleziona metodo di confronto: "
 
-#: src/cmd.c:881
+#: src/cmd.c:884
 msgid "&Quick"
 msgstr "&Rapido"
 
-#: src/cmd.c:881
+#: src/cmd.c:885
 msgid "&Size only"
 msgstr "&Solo dimensione"
 
-#: src/cmd.c:881
+#: src/cmd.c:885
 msgid "&Thorough"
 msgstr "&Completo"
 
-#: src/cmd.c:891
+#: src/cmd.c:900
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Entrambi i pannelli devono essere in modalità lista per usare questo "
 "comando "
 
-#: src/cmd.c:906
+#: src/cmd.c:916
 msgid " The command history is empty "
 msgstr " Lo storico comandi è vuoto"
 
-#: src/cmd.c:912
+#: src/cmd.c:922
 msgid " Command history "
 msgstr " Storico comandi "
 
-#: src/cmd.c:951
+#: src/cmd.c:961
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1342,99 +1342,99 @@ msgstr ""
 " Non è né un xterm né una console; \n"
 " i pannelli non possono essere nascosti. "
 
-#: src/cmd.c:985
+#: src/cmd.c:995
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
-#: src/cmd.c:1034
+#: src/cmd.c:1044
 #, c-format
 msgid "Link %s to:"
 msgstr "Collega %s a:"
 
-#: src/cmd.c:1035
+#: src/cmd.c:1045
 msgid " Link "
 msgstr " Collegamento "
 
-#: src/cmd.c:1045
+#: src/cmd.c:1055
 #, c-format
 msgid " link: %s "
 msgstr " collegamento: %s"
 
-#: src/cmd.c:1073
+#: src/cmd.c:1083
 #, c-format
 msgid " symlink: %s "
 msgstr " coll. simbolico: %s "
 
-#: src/cmd.c:1107
+#: src/cmd.c:1117
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Il collegamento simbolico `%s' punta a: "
 
-#: src/cmd.c:1112
+#: src/cmd.c:1122
 msgid " Edit symlink "
 msgstr " Modifica coll. simbolico "
 
-#: src/cmd.c:1117
+#: src/cmd.c:1127
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " modifica collegamento simbolico, non riesco a rimuovere %s: %s "
 
-#: src/cmd.c:1121
+#: src/cmd.c:1131
 #, c-format
 msgid " edit symlink: %s "
 msgstr " Modifica il coll. simbolico: %s "
 
-#: src/cmd.c:1132
+#: src/cmd.c:1142
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' non è un coll. simbolico"
 
-#: src/cmd.c:1273
+#: src/cmd.c:1283
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Impossibile entrare in %s "
 
-#: src/cmd.c:1282
+#: src/cmd.c:1292
 msgid " Enter machine name (F1 for details): "
 msgstr " Inserire nome macchina (F1 per i dettagli): "
 
-#: src/cmd.c:1287 src/widget.c:1044
+#: src/cmd.c:1297 src/widget.c:1043
 msgid " Link to a remote machine "
 msgstr " Connessione remota "
 
-#: src/cmd.c:1294 src/widget.c:1045
+#: src/cmd.c:1304 src/widget.c:1044
 msgid " FTP to machine "
 msgstr " Connessione FTP "
 
-#: src/cmd.c:1300
+#: src/cmd.c:1310
 msgid " Shell link to machine "
 msgstr " Connessione Shell alla macchina "
 
-#: src/cmd.c:1307 src/widget.c:1046
+#: src/cmd.c:1317 src/widget.c:1045
 msgid " SMB link to machine "
 msgstr " Connessione SMB alla macchina "
 
-#: src/cmd.c:1318
+#: src/cmd.c:1328
 msgid " Socket source routing setup "
 msgstr " Configurazione del routing "
 
-#: src/cmd.c:1319
+#: src/cmd.c:1329
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Inserire nome host da usare come source routing hop: "
 
-#: src/cmd.c:1327
+#: src/cmd.c:1337
 msgid " Host name "
 msgstr " Nome dell'host "
 
-#: src/cmd.c:1327
+#: src/cmd.c:1337
 msgid " Error while looking up IP address "
 msgstr " Errore nella determinazione dell'IP address "
 
-#: src/cmd.c:1338
+#: src/cmd.c:1348
 msgid " Undelete files on an ext2 file system "
 msgstr " Ripristina file da un filesystem ext2 "
 
-#: src/cmd.c:1339
+#: src/cmd.c:1349
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1442,15 +1442,15 @@ msgstr ""
 " Inserire il nome del dispositivo (senza /dev/) dal quale\n"
 "   volete ripristinare i file: (F1 per i dettagli)"
 
-#: src/cmd.c:1389
+#: src/cmd.c:1399
 msgid " Setup saved to ~/"
 msgstr " Configurazione salvata su ~/"
 
-#: src/cmd.c:1391
+#: src/cmd.c:1401
 msgid " Setup "
 msgstr " Configurazione "
 
-#: src/command.c:170 src/screen.c:2141 src/tree.c:875
+#: src/command.c:170 src/screen.c:2172 src/tree.c:876
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1459,9 +1459,9 @@ msgstr ""
 " Non posso entrare in `%s' \n"
 " %s "
 
-#: src/command.c:201
+#: src/command.c:201 src/user.c:679
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " Non è possibile eseguire comandi su un Virtual File System (VFS) "
+msgstr " Non è possibile eseguire comandi su filesystem non locali "
 
 #: src/dialog.c:48
 msgid ""
@@ -1603,7 +1603,7 @@ msgstr " Copia "
 msgid " Move "
 msgstr " Sposta "
 
-#: src/file.c:142 src/tree.c:754
+#: src/file.c:142 src/tree.c:755
 msgid " Delete "
 msgstr " Cancella "
 
@@ -1812,7 +1812,7 @@ msgstr ""
 " Non posso copiare un link simbolico ciclico \n"
 " %s"
 
-#: src/file.c:972 src/file.c:2039
+#: src/file.c:972 src/file.c:2034 src/tree.c:695
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1969,19 +1969,19 @@ msgstr " a:"
 msgid " Cannot operate on \"..\"! "
 msgstr " Non posso operare su \"..\"! "
 
-#: src/file.c:1931
+#: src/file.c:1926
 msgid " Sorry, I could not put the job in background "
 msgstr " Spiacente, non posso mettere il programma in background "
 
-#: src/file.c:2207 src/view.c:381
+#: src/file.c:2202 src/view.c:381
 msgid "&Retry"
 msgstr "&Riprova"
 
-#: src/file.c:2208 src/file.c:2271 src/filegui.c:234 src/filegui.c:545
+#: src/file.c:2203 src/file.c:2266 src/filegui.c:234 src/filegui.c:545
 msgid "&Abort"
 msgstr "&Esci"
 
-#: src/file.c:2260
+#: src/file.c:2255
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -1991,7 +1991,7 @@ msgstr ""
 " La directory non è vuota.\n"
 " Cancellarla ricorsivamente?"
 
-#: src/file.c:2262
+#: src/file.c:2257
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2001,11 +2001,11 @@ msgstr ""
 " Processo in background: la directory non è vuota. \n"
 " Cancellarla ricorsivamente? "
 
-#: src/file.c:2264
+#: src/file.c:2259
 msgid " Delete: "
 msgstr " Cancella: "
 
-#: src/file.c:2270 src/filegui.c:547
+#: src/file.c:2265 src/filegui.c:547
 msgid "Non&e"
 msgstr "nessun&O"
 
@@ -2207,22 +2207,20 @@ msgstr "Cercando %s"
 msgid "Searching"
 msgstr "Cercando"
 
-#: src/help.c:278
-msgid ""
-" Help file format error\n"
-msgstr ""
-" Errore nel formato del file di aiuto\n"
+#: src/help.c:280
+msgid " Help file format error\n"
+msgstr " Errore nel formato del file di aiuto\n"
 
-#: src/help.c:317
+#: src/help.c:319
 msgid " Internal bug: Double start of link area "
 msgstr " Errore interno: Doppio inizio di area di link"
 
-#: src/help.c:557 src/help.c:775
+#: src/help.c:559 src/help.c:777
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " Non trovo il nodo %s nel file d'aiuto "
 
-#: src/help.c:761 src/user.c:696
+#: src/help.c:763 src/user.c:696
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -2231,11 +2229,11 @@ msgstr ""
 " Non posso aprire il file %s \n"
 " %s "
 
-#: src/help.c:813
+#: src/help.c:815
 msgid "Index"
 msgstr "Indice"
 
-#: src/help.c:815
+#: src/help.c:817
 msgid "Prev"
 msgstr "Precedente"
 
@@ -2623,7 +2621,7 @@ msgstr "Premi un tasto per continuare..."
 msgid " The shell is already running a command "
 msgstr " La shell sta già eseguendo un comando "
 
-#: src/main.c:623 src/screen.c:1925
+#: src/main.c:623 src/screen.c:1955
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -2905,7 +2903,7 @@ msgstr ""
 " forzare l'aggiornamento della visualizzazione.          \n"
 " Vedere le pagine man per i dettagli.            "
 
-#: src/main.c:1416 src/screen.c:2150
+#: src/main.c:1416 src/screen.c:2181
 msgid "Menu"
 msgstr "Menu"
 
@@ -3206,10 +3204,6 @@ msgstr " Aggiungi al visual. esterno..."
 msgid " Enter command label: "
 msgstr " Etichetta per il comando: "
 
-#: src/panelize.c:269 src/user.c:678
-msgid " Oops... "
-msgstr " Oops... "
-
 #: src/panelize.c:270
 msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
@@ -3264,109 +3258,109 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr "Uso:"
 
-#: src/screen.c:173
+#: src/screen.c:203
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
-#: src/screen.c:194
+#: src/screen.c:224
 msgid "SYMLINK"
 msgstr "SYMLINK"
 
-#: src/screen.c:198
+#: src/screen.c:228
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
-#: src/screen.c:376 src/screen.c:377
+#: src/screen.c:406 src/screen.c:407
 msgid "Size"
 msgstr "Dimensione"
 
-#: src/screen.c:379
+#: src/screen.c:409
 msgid "MTime"
 msgstr "MTime"
 
-#: src/screen.c:380
+#: src/screen.c:410
 msgid "ATime"
 msgstr "ATime"
 
-#: src/screen.c:381
+#: src/screen.c:411
 msgid "CTime"
 msgstr "CTime"
 
-#: src/screen.c:382
+#: src/screen.c:412
 msgid "Permission"
 msgstr "Permessi"
 
-#: src/screen.c:383
+#: src/screen.c:413
 msgid "Perm"
 msgstr "Perm"
 
-#: src/screen.c:384
+#: src/screen.c:414
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:385
+#: src/screen.c:415
 msgid "Inode"
 msgstr "Nodo-I"
 
-#: src/screen.c:386
+#: src/screen.c:416
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:387
+#: src/screen.c:417
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:388
+#: src/screen.c:418
 msgid "Owner"
 msgstr "Proprietario"
 
-#: src/screen.c:389
+#: src/screen.c:419
 msgid "Group"
 msgstr "Gruppo"
 
-#: src/screen.c:622
+#: src/screen.c:652
 #, c-format
 msgid "%s bytes in %d file"
 msgstr " %s byte in %d file"
 
-#: src/screen.c:622
+#: src/screen.c:652
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s byte in %d file"
 
-#: src/screen.c:648
+#: src/screen.c:678
 msgid "<readlink failed>"
 msgstr "<readlink fallito>"
 
-#: src/screen.c:1239
+#: src/screen.c:1268
 msgid "Unknown tag on display format: "
 msgstr "Campo sconosciuto per la visualizzazione: "
 
-#: src/screen.c:1365
+#: src/screen.c:1392
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Il formato utente fornito è errato, uso il default."
 
-#: src/screen.c:1926
+#: src/screen.c:1956
 msgid " Do you really want to execute? "
 msgstr " Vuoi veramente eseguirlo?"
 
-#: src/screen.c:1938
+#: src/screen.c:1968
 msgid " No action taken "
 msgstr " Nessuna azione intrapresa "
 
-#: src/screen.c:2151
+#: src/screen.c:2182
 msgid "View"
 msgstr "Vista"
 
-#: src/screen.c:2152 src/view.c:2060
+#: src/screen.c:2183 src/view.c:2060
 msgid "Edit"
 msgstr "Cambia"
 
-#: src/screen.c:2154 src/tree.c:1025
+#: src/screen.c:2185 src/tree.c:1026
 msgid "RenMov"
 msgstr "RinSpo"
 
-#: src/screen.c:2155 src/tree.c:1029
+#: src/screen.c:2186 src/tree.c:1030
 msgid "Mkdir"
 msgstr "CreDir"
 
@@ -3499,32 +3493,28 @@ msgstr ""
 "Non posso ottenere informazioni sulla destinazione \n"
 " %s "
 
-#: src/tree.c:695
-msgid " The destination isn't a directory "
-msgstr " La destinazione non è una directory "
-
-#: src/tree.c:753
+#: src/tree.c:754
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Elimino %s?  "
 
-#: src/tree.c:785
+#: src/tree.c:786
 msgid "Static"
 msgstr "Statico"
 
-#: src/tree.c:785
+#: src/tree.c:786
 msgid "Dynamc"
 msgstr "Dinamico"
 
-#: src/tree.c:1019
+#: src/tree.c:1020
 msgid "Rescan"
 msgstr "Ricarica"
 
-#: src/tree.c:1021
+#: src/tree.c:1022
 msgid "Forget"
 msgstr "Scorda"
 
-#: src/tree.c:1034
+#: src/tree.c:1035
 msgid "Rmdir"
 msgstr "CancDir"
 
@@ -3579,10 +3569,6 @@ msgid ""
 msgstr ""
 " Il file `%s' non appartiene a root o è scrivibile a tutti\n"
 " Usandolo potrebbe compromettere la sicurezza di sistema."
-
-#: src/user.c:679
-msgid " I can't run programs while logged on a non local directory "
-msgstr " Impossibile eseguire programmi su una directory non locale"
 
 #: src/user.c:777
 #, c-format
@@ -3762,199 +3748,199 @@ msgstr "NonForm"
 msgid "Format"
 msgstr "Formatt"
 
-#: src/widget.c:897
+#: src/widget.c:896
 msgid " History "
 msgstr " Storico comandi "
 
-#: src/win.c:186
+#: src/win.c:121
 msgid "Function key 1"
 msgstr "Tasto Funzione  1"
 
-#: src/win.c:187
+#: src/win.c:122
 msgid "Function key 2"
 msgstr "Tasto Funzione  2"
 
-#: src/win.c:188
+#: src/win.c:123
 msgid "Function key 3"
 msgstr "Tasto Funzione  3"
 
-#: src/win.c:189
+#: src/win.c:124
 msgid "Function key 4"
 msgstr "Tasto Funzione  4"
 
-#: src/win.c:190
+#: src/win.c:125
 msgid "Function key 5"
 msgstr "Tasto Funzione  5"
 
-#: src/win.c:191
+#: src/win.c:126
 msgid "Function key 6"
 msgstr "Tasto Funzione  6"
 
-#: src/win.c:192
+#: src/win.c:127
 msgid "Function key 7"
 msgstr "Tasto Funzione  7"
 
-#: src/win.c:193
+#: src/win.c:128
 msgid "Function key 8"
 msgstr "Tasto Funzione  8"
 
-#: src/win.c:194
+#: src/win.c:129
 msgid "Function key 9"
 msgstr "Tasto Funzione  9"
 
-#: src/win.c:195
+#: src/win.c:130
 msgid "Function key 10"
 msgstr "Tasto Funzione 10"
 
-#: src/win.c:196
+#: src/win.c:131
 msgid "Function key 11"
 msgstr "Tasto Funzione 11"
 
-#: src/win.c:197
+#: src/win.c:132
 msgid "Function key 12"
 msgstr "Tasto Funzione 12"
 
-#: src/win.c:198
+#: src/win.c:133
 msgid "Function key 13"
 msgstr "Tasto Funzione 13"
 
-#: src/win.c:199
+#: src/win.c:134
 msgid "Function key 14"
 msgstr "Tasto Funzione 14"
 
-#: src/win.c:200
+#: src/win.c:135
 msgid "Function key 15"
 msgstr "Tasto Funzione 15"
 
-#: src/win.c:201
+#: src/win.c:136
 msgid "Function key 16"
 msgstr "Tasto Funzione 16"
 
-#: src/win.c:202
+#: src/win.c:137
 msgid "Function key 17"
 msgstr "Tasto Funzione 17"
 
-#: src/win.c:203
+#: src/win.c:138
 msgid "Function key 18"
 msgstr "Tasto Funzione 18"
 
-#: src/win.c:204
+#: src/win.c:139
 msgid "Function key 19"
 msgstr "Tasto Funzione 19"
 
-#: src/win.c:205
+#: src/win.c:140
 msgid "Function key 20"
 msgstr "Tasto Funzione 20"
 
-#: src/win.c:206
+#: src/win.c:141
 msgid "Backspace key"
 msgstr "Tasto Backspace  "
 
-#: src/win.c:207
+#: src/win.c:142
 msgid "End key"
 msgstr "Tasto Fine       "
 
-#: src/win.c:208
+#: src/win.c:143
 msgid "Up arrow key"
 msgstr "Freccia Su       "
 
-#: src/win.c:209
+#: src/win.c:144
 msgid "Down arrow key"
 msgstr "Freccia Giù      "
 
-#: src/win.c:210
+#: src/win.c:145
 msgid "Left arrow key"
 msgstr "Freccia Sinistra "
 
-#: src/win.c:211
+#: src/win.c:146
 msgid "Right arrow key"
 msgstr "Freccia Destra   "
 
-#: src/win.c:212
+#: src/win.c:147
 msgid "Home key"
 msgstr "Tasto Inizio     "
 
-#: src/win.c:213
+#: src/win.c:148
 msgid "Page Down key"
 msgstr "Tasto Pagina giù "
 
-#: src/win.c:214
+#: src/win.c:149
 msgid "Page Up key"
 msgstr "Tasto Pagina su  "
 
-#: src/win.c:215
+#: src/win.c:150
 msgid "Insert key"
 msgstr "Tasto Ins        "
 
-#: src/win.c:216
+#: src/win.c:151
 msgid "Delete key"
 msgstr "Tasto Cancella   "
 
-#: src/win.c:217
+#: src/win.c:152
 msgid "Completion/M-tab"
 msgstr "Completam./M-Tab "
 
-#: src/win.c:218
+#: src/win.c:153
 msgid "+ on keypad"
 msgstr "+ sul tastierino "
 
-#: src/win.c:219
+#: src/win.c:154
 msgid "- on keypad"
 msgstr "- sul tastierino "
 
-#: src/win.c:220
+#: src/win.c:155
 msgid "* on keypad"
 msgstr "* sul tastierino "
 
-#: src/win.c:222
+#: src/win.c:157
 msgid "Left arrow keypad"
 msgstr "Freccia a sinistra sul tastierino"
 
-#: src/win.c:223
+#: src/win.c:158
 msgid "Right arrow keypad"
 msgstr "Freccia a destra sul tastierino"
 
-#: src/win.c:224
+#: src/win.c:159
 msgid "Up arrow keypad"
 msgstr "Freccia su sul tastierino"
 
-#: src/win.c:225
+#: src/win.c:160
 msgid "Down arrow keypad"
 msgstr "Freccia giù sul tastierino"
 
-#: src/win.c:226
+#: src/win.c:161
 msgid "Home on keypad"
 msgstr "Home sul tastierino"
 
-#: src/win.c:227
+#: src/win.c:162
 msgid "End on keypad"
 msgstr "Fine sul tastierino"
 
-#: src/win.c:228
+#: src/win.c:163
 msgid "Page Down keypad"
 msgstr "Pagina giù sul tastierino"
 
-#: src/win.c:229
+#: src/win.c:164
 msgid "Page Up keypad"
 msgstr "Pagina su sul tastierino"
 
-#: src/win.c:230
+#: src/win.c:165
 msgid "Insert on keypad"
 msgstr "Inserisci sul tastierino"
 
-#: src/win.c:231
+#: src/win.c:166
 msgid "Delete on keypad"
 msgstr "Cancella sul tastierino"
 
-#: src/win.c:232
+#: src/win.c:167
 msgid "Enter on keypad"
 msgstr "Invio sul tastierino"
 
-#: src/win.c:233
+#: src/win.c:168
 msgid "Slash on keypad"
 msgstr "/ sul tastierino"
 
-#: src/win.c:234
+#: src/win.c:169
 msgid "NumLock on keypad"
 msgstr "NumLock sul tastierino"
 
@@ -4081,12 +4067,12 @@ msgstr "fish: Connesso a %s"
 msgid "fish: Reading directory %s..."
 msgstr "fish: Lettura directory FTP %s..."
 
-#: vfs/fish.c:467 vfs/ftpfs.c:1323 vfs/undelfs.c:310
+#: vfs/fish.c:467 vfs/ftpfs.c:1324 vfs/undelfs.c:310
 #, c-format
 msgid "%s: done."
 msgstr "%s: fatto."
 
-#: vfs/fish.c:472 vfs/ftpfs.c:1275 vfs/undelfs.c:313
+#: vfs/fish.c:472 vfs/ftpfs.c:1276 vfs/undelfs.c:313
 #, c-format
 msgid "%s: failure"
 msgstr "%s: errore"
@@ -4192,45 +4178,45 @@ msgstr "ftpfs: interruzione del trasferimento."
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: errore di interruzione: %s"
 
-#: vfs/ftpfs.c:1003
+#: vfs/ftpfs.c:1005
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: interruzione fallita"
 
-#: vfs/ftpfs.c:1107 vfs/ftpfs.c:1212
+#: vfs/ftpfs.c:1108 vfs/ftpfs.c:1213
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD fallito."
 
-#: vfs/ftpfs.c:1117 vfs/ftpfs.c:1124
+#: vfs/ftpfs.c:1118 vfs/ftpfs.c:1125
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: non posso risolvere i collegamenti simbolici"
 
-#: vfs/ftpfs.c:1175
+#: vfs/ftpfs.c:1176
 msgid "Resolving symlink..."
 msgstr "Sto risolvendo il collegamenti simbolici..."
 
-#: vfs/ftpfs.c:1200
+#: vfs/ftpfs.c:1201
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Lettura directory FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1201
+#: vfs/ftpfs.c:1202
 msgid "(strict rfc959)"
 msgstr "(strettamente rfc959)"
 
-#: vfs/ftpfs.c:1202
+#: vfs/ftpfs.c:1203
 msgid "(chdir first)"
 msgstr "(antepone chdir)"
 
-#: vfs/ftpfs.c:1336
+#: vfs/ftpfs.c:1337
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fallito; non so dove rileggere"
 
-#: vfs/ftpfs.c:1401
+#: vfs/ftpfs.c:1402
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: memorizzazione file %lu (%lu)"
 
-#: vfs/ftpfs.c:1858
+#: vfs/ftpfs.c:1859
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4301,7 +4287,7 @@ msgstr ""
 "Attenzione: flag %c non valida in %s:\n"
 "%s\n"
 
-#: vfs/smbfs.c:565
+#: vfs/smbfs.c:567
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4310,31 +4296,31 @@ msgstr ""
 " riconnessione a %s fallita\n"
 " "
 
-#: vfs/smbfs.c:1101
+#: vfs/smbfs.c:1103
 msgid " Authentication failed "
 msgstr " Autenticazione fallita "
 
-#: vfs/smbfs.c:1588
+#: vfs/smbfs.c:1590
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " Errore %s nella creazione dir %s "
 
-#: vfs/smbfs.c:1611
+#: vfs/smbfs.c:1613
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " Errore %s nella rimozione dir %s "
 
-#: vfs/smbfs.c:1715 vfs/smbfs.c:1735
+#: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s apertura file remoto %s "
 
-#: vfs/smbfs.c:1803
+#: vfs/smbfs.c:1805
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s rimozione file remoto %s "
 
-#: vfs/smbfs.c:1841
+#: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s rinomina file\n"
@@ -4455,28 +4441,43 @@ msgstr " Devi prima fare chdir per estrarre i file "
 msgid " while iterating over blocks "
 msgstr " durante l'iterazione sui blocchi "
 
-#: vfs/vfs.c:1150
+#: vfs/vfs.c:1148
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
 
-#: vfs/vfs.c:1788
+#: vfs/vfs.c:1787
 msgid "Could not parse:"
 msgstr "Non riesco ad analizzare:"
 
-#: vfs/vfs.c:1790
+#: vfs/vfs.c:1789
 msgid "More parsing errors will be ignored."
 msgstr "Più errori di analisi saranno ignorati."
 
-#: vfs/vfs.c:1800
+#: vfs/vfs.c:1799
 msgid "Internal error:"
 msgstr " Errore interno:"
 
-#: vfs/vfs.c:1810
+#: vfs/vfs.c:1809
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 
-#: vfs/vfs.c:1811
+#: vfs/vfs.c:1810
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
+
+#~ msgid " Oops... "
+#~ msgstr " Oops... "
+
+#~ msgid ""
+#~ " I can't run external panelize while logged on a non local directory "
+#~ msgstr ""
+#~ " Impossibile pannellizzare comandi mentre si è connessi ad una directory "
+#~ "non locale "
+
+#~ msgid " The destination isn't a directory "
+#~ msgstr " La destinazione non è una directory "
+
+#~ msgid " I can't run programs while logged on a non local directory "
+#~ msgstr " Impossibile eseguire programmi su una directory non locale"
