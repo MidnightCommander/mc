@@ -24,7 +24,6 @@
 #include "edit.h"
 
 WEdit *wedit;
-Dlg_head *edit_dlg;
 WMenu *edit_menubar;
 
 int column_highlighting = 0;
@@ -152,6 +151,7 @@ edit (const char *_file, int line)
     static int made_directory = 0;
     int framed = 0;
     char *text = 0;
+    Dlg_head *edit_dlg;
     WButtonBar *edit_bar;
 
     if (option_backup_ext_int != -1) {
@@ -216,7 +216,6 @@ edit (const char *_file, int line)
 	edit_done_menu ();	/* editmenu.c */
 
     destroy_dlg (edit_dlg);
-    edit_dlg = NULL;
 
     return 1;
 }

@@ -1,5 +1,7 @@
 2002-09-24  Pavel Roskin  <proski@gnu.org>
 
+	* editwidget.c (edit): Make edit_dlg local variable.
+
 	* editmenu.c (edit_drop_menu_cmd): Don't use edit_dlg variable.
 
 	* edit.c: Remove all references to CR_LF_TRANSLATION.

@@ -352,7 +352,6 @@ extern char *home_dir;
 extern int edit_key_emulation;
 extern WEdit *wedit;
 extern Menu EditMenuBar[];
-extern Dlg_head *edit_dlg;
 extern WMenu *edit_menubar;
 
 extern int option_word_wrap_line_length;
