@@ -486,22 +486,22 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
     print_vfs_message(_("fish: store %s: sending command..."), name );
     /*
      * FIXME: Limit size to unsigned long for now.
-     * Files longer than 4096 * ULONG_MAX are not supported.
+     * Files longer than 256 * ULONG_MAX are not supported.
      */
     if (command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "> \"/%s\"\n"
 		 "echo '### 001'\n"
 		 "(\n"
-		   "dd bs=4096 count=%lu\n"
+		   "dd ibs=256 obs=4096 count=%lu\n"
 		   "dd bs=%lu count=1\n"
 		 ") 2>/dev/null | (\n"
 		   "cat > \"/%s\"\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
 		 (unsigned long) s.st_size, name, name,
-		 (unsigned long) (s.st_size >> 12),
-		 ((unsigned long) s.st_size) & (4096 - 1), name)
+		 (unsigned long) (s.st_size >> 8),
+		 ((unsigned long) s.st_size) & (256 - 1), name)
 	!= PRELIM) 
         ERRNOR(E_REMOTE, -1);
 
