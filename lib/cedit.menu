@@ -36,7 +36,8 @@ shell_patterns=0    # expression type
         unset LANG
 	unset LANGUAGE
 	LC_ALL=
-	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
@@ -127,7 +128,8 @@ a       sub ()
         unset LANG
 	unset LANGUAGE
 	LC_ALL=
-	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         #----------------------------------------------------------------------
         # Description:
@@ -219,7 +221,8 @@ a       sub ()
         unset LANG
 	unset LANGUAGE
 	LC_ALL=
-	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >> %b <<EOF
         /********************************************************************
         * Description:
@@ -420,7 +423,8 @@ a       Author description header
         unset LANG
 	unset LANGUAGE
 	LC_ALL=
-	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         cat >>%b <<EOF
         ----------------------------------------------------------------------
         Description:
@@ -440,7 +444,8 @@ a       Author description header
 #----------------------- Begin common section ---------------------------------
 I       Insert `Changelog' string
         DATE="`date +%%Y-%%m-%%d`"
-	AUTHOR="`awk -F: /^\`id -un\`:/'{print($5)}' /etc/passwd`"
+	MY_UID="`id | sed 's/^.*uid=\([^(]*\).*$/\1/'`"
+	AUTHOR="`awk -F: '$3 == '$MY_UID' {print $5}' /etc/passwd`"
         EMAIL="<$REPLYTO>"
         echo "$DATE  $AUTHOR  $EMAIL" >%b
 

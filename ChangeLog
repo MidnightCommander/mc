@@ -1,3 +1,8 @@
+2003-08-02  Pavel Roskin  <proski@gnu.org>
+
+	* lib/cedit.menu: Avoid using "id -u", it doesn't work on
+	Solaris.  From Andrew V. Samoilov <andrew@email.zp.ua>
+
 2003-07-23  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.lib: Add more "end" and "home" sequences for xterm.
