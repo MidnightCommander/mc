@@ -403,9 +403,28 @@ extern void mc_vfs_done( void );
 
 /* And now some defines for our errors. */
 
+#ifdef ENOSYS
 #define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
+#else
+#define E_NOTSUPP (ELAST+1)	/* for use in vfs when module does not provide function */
+#endif
+
+#ifdef ENOMSG
 #define E_UNKNOWN ENOMSG	/* if we do not know what error happened */
+#else
+#define E_UNKNOWN (ELAST+2)	/* if we do not know what error happened */
+#endif
+
+#ifdef EREMOTEIO
 #define E_REMOTE EREMOTEIO	/* if other side of ftp/fish reports error */
+#else
+#define E_REMOTE (ELAST+3)	/* if other side of ftp/fish reports error */
+#endif
+
+#ifdef EPROTO
 #define E_PROTO EPROTO		/* if other side fails to follow protocol */
+#else
+#define E_PROTO (ELAST+4)	/* if other side fails to follow protocol */
+#endif
 
 #endif /* __VFS_H */
