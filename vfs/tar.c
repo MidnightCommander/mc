@@ -61,7 +61,7 @@ static long from_oct (int digs, char *where)
 
 static struct stat hstat;		/* Stat struct corresponding */
 
-static void tar_free_archive (vfs *me, vfs_s_super *archive)
+static void tar_free_archive (struct vfs_class *me, vfs_s_super *archive)
 {
     if (archive->u.tar.fd != -1)
 	mc_close(archive->u.tar.fd);
@@ -71,7 +71,7 @@ static void tar_free_archive (vfs *me, vfs_s_super *archive)
 static int current_tar_position = 0;
 
 /* Returns fd of the open tar file */
-static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
+static int tar_open_archive (struct vfs_class *me, char *name, vfs_s_super *archive)
 {
     int result, type;
     mode_t mode;
@@ -141,7 +141,7 @@ static void skip_n_records (vfs_s_super *archive, int tard, int n)
     current_tar_position += n * RECORDSIZE;
 }
 
-static void fill_stat_from_header (vfs *me, struct stat *st, union record *header) 
+static void fill_stat_from_header (struct vfs_class *me, struct stat *st, union record *header) 
 {
     st->st_mode = from_oct (8, header->header.mode);
 
@@ -198,7 +198,7 @@ typedef enum {
  *
  */
 static ReadStatus
-read_header (vfs *me, vfs_s_super *archive, int tard)
+read_header (struct vfs_class *me, vfs_s_super *archive, int tard)
 {
     register int i;
     register long sum, signed_sum, recsum;
@@ -376,7 +376,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
  * Main loop for reading an archive.
  * Returns 0 on success, -1 on error.
  */
-static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
+static int open_archive (struct vfs_class *me, vfs_s_super *archive, char *name, char *op)
 {
     ReadStatus status = STATUS_EOFMARK;		/* Initial status at start of archive */
     ReadStatus prev_status;
@@ -435,7 +435,7 @@ static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
     return 0;
 }
 
-static void *tar_super_check(vfs *me, char *archive_name, char *op)
+static void *tar_super_check(struct vfs_class *me, char *archive_name, char *op)
 {
     static struct stat stat_buf;
     if (mc_stat (archive_name, &stat_buf))
@@ -444,7 +444,7 @@ static void *tar_super_check(vfs *me, char *archive_name, char *op)
 }
 
 static int
-tar_super_same (vfs *me, struct vfs_s_super *parc, char *archive_name,
+tar_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_name,
 		char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
@@ -468,7 +468,7 @@ static int tar_read (void *fh, char *buffer, int count)
 {
     off_t begin = FH->ino->u.tar.data_offset;
     int fd = FH_SUPER->u.tar.fd;
-    vfs *me = FH_SUPER->me;
+    struct vfs_class *me = FH_SUPER->me;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 
         begin + FH->pos) ERRNOR (EIO, -1);
@@ -481,7 +481,7 @@ static int tar_read (void *fh, char *buffer, int count)
     return count;
 }
 
-static int tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int tar_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
 {
 /* We do just nothing. (We are read only and do not need to free local,
    since it will be freed when tar archive will be freed */
@@ -489,7 +489,7 @@ static int tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed
     ERRNOR (EROFS, -has_changed);
 }
 
-static int tar_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
+static int tar_fh_open (struct vfs_class *me, vfs_s_fh *fh, int flags, int mode)
 {
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
     return 0;

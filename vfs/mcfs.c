@@ -91,7 +91,7 @@ mcfs_get_host_and_username (char *path, char **host, char **user,
 }
 
 static void
-mcfs_fill_names (vfs *me, void (*func) (char *))
+mcfs_fill_names (struct vfs_class *me, void (*func) (char *))
 {
     int i;
     char *name;
@@ -511,7 +511,7 @@ mcfs_gethome (mcfs_connection *mc)
 
 /* The callbacks */
 static void *
-mcfs_open (vfs *me, char *file, int flags, int mode)
+mcfs_open (struct vfs_class *me, char *file, int flags, int mode)
 {
     char *remote_file;
     mcfs_connection *mc;
@@ -610,7 +610,7 @@ mcfs_close (void *data)
 }
 
 static int
-mcfs_errno (vfs *me)
+mcfs_errno (struct vfs_class *me)
 {
     return my_errno;
 }
@@ -630,7 +630,7 @@ typedef struct {
 } opendir_info;
 
 static void *
-mcfs_opendir (vfs *me, char *dirname)
+mcfs_opendir (struct vfs_class *me, char *dirname)
 {
     opendir_info *mcfs_info;
     mcfs_connection *mc;
@@ -876,13 +876,13 @@ mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
 }
 
 static int
-mcfs_stat (vfs *me, char *path, struct stat *buf)
+mcfs_stat (struct vfs_class *me, char *path, struct stat *buf)
 {
     return mcfs_stat_cmd (MC_STAT, path, buf);
 }
 
 static int
-mcfs_lstat (vfs *me, char *path, struct stat *buf)
+mcfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
 {
     int path_len = strlen (path);
     int entry_len = strlen (mcfs_readdir_data.dent.d_name);
@@ -920,19 +920,19 @@ mcfs_fstat (void *data, struct stat *buf)
 }
 
 static int
-mcfs_chmod (vfs *me, char *path, int mode)
+mcfs_chmod (struct vfs_class *me, char *path, int mode)
 {
     return mcfs_rpc_path_int (MC_CHMOD, path, mode);
 }
 
 static int
-mcfs_chown (vfs *me, char *path, int owner, int group)
+mcfs_chown (struct vfs_class *me, char *path, int owner, int group)
 {
     return mcfs_rpc_path_int_int (MC_CHOWN, path, owner, group);
 }
 
 static int
-mcfs_utime (vfs *me, char *path, struct utimbuf *times)
+mcfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
 {
     mcfs_connection *mc;
     int status;
@@ -964,7 +964,7 @@ mcfs_utime (vfs *me, char *path, struct utimbuf *times)
 }
 
 static int
-mcfs_readlink (vfs *me, char *path, char *buf, int size)
+mcfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
     char *remote_file, *stat_str;
     int status, error;
@@ -994,25 +994,25 @@ mcfs_readlink (vfs *me, char *path, char *buf, int size)
 }
 
 static int
-mcfs_unlink (vfs *me, char *path)
+mcfs_unlink (struct vfs_class *me, char *path)
 {
     return mcfs_rpc_path (MC_UNLINK, path);
 }
 
 static int
-mcfs_symlink (vfs *me, char *n1, char *n2)
+mcfs_symlink (struct vfs_class *me, char *n1, char *n2)
 {
     return mcfs_rpc_two_paths (MC_SYMLINK, n1, n2);
 }
 
 static int
-mcfs_rename (vfs *me, char *a, char *b)
+mcfs_rename (struct vfs_class *me, char *a, char *b)
 {
     return mcfs_rpc_two_paths (MC_RENAME, a, b);
 }
 
 static int
-mcfs_chdir (vfs *me, char *path)
+mcfs_chdir (struct vfs_class *me, char *path)
 {
     char *remote_dir;
     mcfs_connection *mc;
@@ -1049,25 +1049,25 @@ mcfs_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-mcfs_mknod (vfs *me, char *path, int mode, int dev)
+mcfs_mknod (struct vfs_class *me, char *path, int mode, int dev)
 {
     return mcfs_rpc_path_int_int (MC_MKNOD, path, mode, dev);
 }
 
 static int
-mcfs_mkdir (vfs *me, char *path, mode_t mode)
+mcfs_mkdir (struct vfs_class *me, char *path, mode_t mode)
 {
     return mcfs_rpc_path_int (MC_MKDIR, path, mode);
 }
 
 static int
-mcfs_rmdir (vfs *me, char *path)
+mcfs_rmdir (struct vfs_class *me, char *path)
 {
     return mcfs_rpc_path (MC_RMDIR, path);
 }
 
 static int
-mcfs_link (vfs *me, char *p1, char *p2)
+mcfs_link (struct vfs_class *me, char *p1, char *p2)
 {
     return mcfs_rpc_two_paths (MC_LINK, p1, p2);
 }
@@ -1076,7 +1076,7 @@ mcfs_link (vfs *me, char *p1, char *p2)
  * out of them
  */
 static vfsid
-mcfs_getid (vfs *me, char *p, struct vfs_stamping **parent)
+mcfs_getid (struct vfs_class *me, const char *p, struct vfs_stamping **parent)
 {
     *parent = NULL;
 
@@ -1141,7 +1141,7 @@ my_forget (char *path)
 }
 
 static int
-mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
+mcfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
 {
     switch (ctlop) {
     case MCCTL_FORGET_ABOUT:
@@ -1151,7 +1151,7 @@ mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
     return 0;
 }
 
-vfs vfs_mcfs_ops = {
+struct vfs_class vfs_mcfs_ops = {
     NULL,			/* This is place of next pointer */
     "mcfs",
     0,				/* flags */

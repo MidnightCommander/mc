@@ -89,11 +89,11 @@ struct defer_inode {
 
 static int cpio_position;
 
-static int cpio_find_head(vfs *me, vfs_s_super *super);
-static int cpio_read_bin_head(vfs *me, vfs_s_super *super);
-static int cpio_read_oldc_head(vfs *me, vfs_s_super *super);
-static int cpio_read_crc_head(vfs *me, vfs_s_super *super);
-static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, char *name);
+static int cpio_find_head(struct vfs_class *me, vfs_s_super *super);
+static int cpio_read_bin_head(struct vfs_class *me, vfs_s_super *super);
+static int cpio_read_oldc_head(struct vfs_class *me, vfs_s_super *super);
+static int cpio_read_crc_head(struct vfs_class *me, vfs_s_super *super);
+static int cpio_create_entry(struct vfs_class *me, vfs_s_super *super, struct stat *stat, char *name);
 static int cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
@@ -127,13 +127,13 @@ static int cpio_skip_padding(vfs_s_super *super)
     }
 }
 
-static void cpio_free_archive(vfs *me, vfs_s_super *super)
+static void cpio_free_archive(struct vfs_class *me, vfs_s_super *super)
 {
     if(super->u.cpio.fd != -1)
 	mc_close(super->u.cpio.fd);
 }
 
-static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
+static int cpio_open_cpio_file(struct vfs_class *me, vfs_s_super *super, char *name)
 {
     int fd, type;
     mode_t mode;
@@ -182,7 +182,7 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
     return fd;
 }
 
-static int cpio_read_head(vfs *me, vfs_s_super *super)
+static int cpio_read_head(struct vfs_class *me, vfs_s_super *super)
 {
     switch(cpio_find_head(me, super)) {
     case CPIO_UNKNOWN:
@@ -205,7 +205,7 @@ static int cpio_read_head(vfs *me, vfs_s_super *super)
 #define SEEKBACK CPIO_SEEK_CUR(super, ptr - top)
 #define RETURN(x) return(super->u.cpio.type = (x))
 #define TYPEIS(x) ((super->u.cpio.type == CPIO_UNKNOWN) || (super->u.cpio.type == (x)))
-static int cpio_find_head(vfs *me, vfs_s_super *super)
+static int cpio_find_head(struct vfs_class *me, vfs_s_super *super)
 {
     char buf[256];
     int ptr = 0;
@@ -246,7 +246,7 @@ static int cpio_find_head(vfs *me, vfs_s_super *super)
 #undef SEEKBACK
 
 #define HEAD_LENGTH (26)
-static int cpio_read_bin_head(vfs *me, vfs_s_super *super)
+static int cpio_read_bin_head(struct vfs_class *me, vfs_s_super *super)
 {
     struct old_cpio_header buf;
     int len;
@@ -291,7 +291,7 @@ static int cpio_read_bin_head(vfs *me, vfs_s_super *super)
 #undef HEAD_LENGTH
 
 #define HEAD_LENGTH (76)
-static int cpio_read_oldc_head(vfs *me, vfs_s_super *super)
+static int cpio_read_oldc_head(struct vfs_class *me, vfs_s_super *super)
 {
     struct new_cpio_header hd;
     struct stat stat;
@@ -340,7 +340,7 @@ static int cpio_read_oldc_head(vfs *me, vfs_s_super *super)
 #undef HEAD_LENGTH
 
 #define HEAD_LENGTH (110)
-static int cpio_read_crc_head(vfs *me, vfs_s_super *super)
+static int cpio_read_crc_head(struct vfs_class *me, vfs_s_super *super)
 {
     struct new_cpio_header hd;
     struct stat stat;
@@ -393,7 +393,7 @@ static int cpio_read_crc_head(vfs *me, vfs_s_super *super)
     return cpio_create_entry(me, super, &stat, name);
 }
 
-static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, char *name)
+static int cpio_create_entry(struct vfs_class *me, vfs_s_super *super, struct stat *stat, char *name)
 {
     vfs_s_inode *inode = NULL;
     vfs_s_inode *root = super->root;
@@ -509,7 +509,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 
 /* Need to CPIO_SEEK_CUR to skip the file at the end of add entry!!!! */
 
-static int cpio_open_archive(vfs *me, vfs_s_super *super, char *name, char *op)
+static int cpio_open_archive(struct vfs_class *me, vfs_s_super *super, char *name, char *op)
 {
     int status = STATUS_START;
 
@@ -535,7 +535,7 @@ static int cpio_open_archive(vfs *me, vfs_s_super *super, char *name, char *op)
 }
 
 /* Remaining functions are exactly same as for tarfs (and were in fact just copied) */
-static void *cpio_super_check(vfs *me, char *archive_name, char *op)
+static void *cpio_super_check(struct vfs_class *me, char *archive_name, char *op)
 {
     static struct stat sb;
     if(mc_stat(archive_name, &sb))
@@ -544,7 +544,7 @@ static void *cpio_super_check(vfs *me, char *archive_name, char *op)
 }
 
 static int
-cpio_super_same (vfs *me, struct vfs_s_super *parc, char *archive_name,
+cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_name,
 		 char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
@@ -568,7 +568,7 @@ static int cpio_read(void *fh, char *buffer, int count)
 {
     off_t begin = FH->ino->u.tar.data_offset;
     int fd = FH_SUPER->u.tar.fd;
-    vfs *me = FH_SUPER->me;
+    struct vfs_class *me = FH_SUPER->me;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 
         begin + FH->pos) ERRNOR (EIO, -1);
@@ -581,14 +581,14 @@ static int cpio_read(void *fh, char *buffer, int count)
     return count;
 }
 
-static int cpio_ungetlocalcopy(vfs *me, char *path, char *local, int has_changed)
+static int cpio_ungetlocalcopy(struct vfs_class *me, char *path, char *local, int has_changed)
 {
 /* We do just nothing. (We are read only and do not need to free local,
    since it will be freed when tar archive will be freed */
     return 0;
 }
 
-static int cpio_fh_open(vfs *me, vfs_s_fh *fh, int flags, int mode)
+static int cpio_fh_open(struct vfs_class *me, vfs_s_fh *fh, int flags, int mode)
 {
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
     return 0;

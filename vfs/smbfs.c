@@ -273,7 +273,7 @@ smbfs_set_debugf (const char *filename)
 
 /********************** The callbacks ******************************/
 static int
-smbfs_init (vfs * me)
+smbfs_init (struct vfs_class * me)
 {
     char *servicesf = CONFIGDIR PATH_SEP_STR "smb.conf";
 
@@ -322,7 +322,7 @@ smbfs_init (vfs * me)
 }
 
 static void
-smbfs_fill_names (vfs *me, void (*func)(char *))
+smbfs_fill_names (struct vfs_class *me, void (*func)(char *))
 {
     int i;
     char *path;
@@ -394,7 +394,7 @@ smbfs_close (void *data)
 }
 
 static int
-smbfs_errno (vfs *me)
+smbfs_errno (struct vfs_class *me)
 {
 	DEBUG(3, ("smbfs_errno: %s\n", g_strerror(my_errno)));
     return my_errno;
@@ -815,7 +815,7 @@ smbfs_closedir (void *info)
 }
 
 static int
-smbfs_chmod (vfs *me, char *path, int mode)
+smbfs_chmod (struct vfs_class *me, char *path, int mode)
 {
 	DEBUG(3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
 /*	my_errno = EOPNOTSUPP;
@@ -824,7 +824,7 @@ smbfs_chmod (vfs *me, char *path, int mode)
 }
 
 static int
-smbfs_chown (vfs *me, char *path, int owner, int group)
+smbfs_chown (struct vfs_class *me, char *path, int owner, int group)
 {
 	DEBUG(3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path, owner, group));
 	my_errno = EOPNOTSUPP;	/* ready for your labotomy? */
@@ -832,7 +832,7 @@ smbfs_chown (vfs *me, char *path, int owner, int group)
 }
 
 static int
-smbfs_utime (vfs *me, char *path, struct utimbuf *times)
+smbfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
 {
 	DEBUG(3, ("smbfs_utime(path:%s)\n", path));
 	my_errno = EOPNOTSUPP;
@@ -840,7 +840,7 @@ smbfs_utime (vfs *me, char *path, struct utimbuf *times)
 }
 
 static int
-smbfs_readlink (vfs *me, char *path, char *buf, int size)
+smbfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
 	DEBUG(3, ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf, size));
 	my_errno = EOPNOTSUPP;
@@ -848,7 +848,7 @@ smbfs_readlink (vfs *me, char *path, char *buf, int size)
 }
 
 static int
-smbfs_symlink (vfs *me, char *n1, char *n2)
+smbfs_symlink (struct vfs_class *me, char *n1, char *n2)
 {
 	DEBUG(3, ("smbfs_symlink(n1:%s, n2:%s)\n", n1, n2));
 	my_errno = EOPNOTSUPP;
@@ -1178,7 +1178,7 @@ is_error (int result, int errno_num)
 #endif
 
 static void *
-smbfs_opendir (vfs *me, char *dirname)
+smbfs_opendir (struct vfs_class *me, char *dirname)
 {
     opendir_info *smbfs_info;
 	smbfs_connection *sc;
@@ -1427,7 +1427,7 @@ get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 }
 
 static int
-smbfs_chdir (vfs *me, char *path)
+smbfs_chdir (struct vfs_class *me, char *path)
 {
 	char *remote_dir;
 	smbfs_connection *sc;
@@ -1441,7 +1441,7 @@ smbfs_chdir (vfs *me, char *path)
 }
 
 static int
-loaddir(vfs *me, const char *path)
+loaddir(struct vfs_class *me, const char *path)
 {
 	void *info;
 	char *mypath, *p;
@@ -1463,7 +1463,7 @@ loaddir(vfs *me, const char *path)
 }
 
 static int
-smbfs_stat (vfs * me, char *path, struct stat *buf)
+smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
 {
     smbfs_connection *sc;
     pstring server_url;
@@ -1599,7 +1599,7 @@ smbfs_lseek (void *data, off_t offset, int whence)
 }
 
 static int
-smbfs_mknod (vfs *me, char *path, int mode, int dev)
+smbfs_mknod (struct vfs_class *me, char *path, int mode, int dev)
 {
 	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%d)\n", path, mode, dev));
 	my_errno = EOPNOTSUPP;
@@ -1607,7 +1607,7 @@ smbfs_mknod (vfs *me, char *path, int mode, int dev)
 }
 
 static int
-smbfs_mkdir (vfs * me, char *path, mode_t mode)
+smbfs_mkdir (struct vfs_class * me, char *path, mode_t mode)
 {
     smbfs_connection *sc;
     char *remote_file;
@@ -1630,7 +1630,7 @@ smbfs_mkdir (vfs * me, char *path, mode_t mode)
 }
 
 static int
-smbfs_rmdir (vfs *me, char *path)
+smbfs_rmdir (struct vfs_class *me, char *path)
 {
 	smbfs_connection *sc;
 	char *remote_file;
@@ -1654,7 +1654,7 @@ smbfs_rmdir (vfs *me, char *path)
 }
 
 static int
-smbfs_link (vfs *me, char *p1, char *p2)
+smbfs_link (struct vfs_class *me, char *p1, char *p2)
 {
     DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
     my_errno = EOPNOTSUPP;
@@ -1665,7 +1665,7 @@ smbfs_link (vfs *me, char *p1, char *p2)
  * out of them
  */
 static vfsid
-smbfs_getid (vfs *me, const char *p, struct vfs_stamping **parent)
+smbfs_getid (struct vfs_class *me, const char *p, struct vfs_stamping **parent)
 {
     *parent = NULL;
     DEBUG (3, ("smbfs_getid(p:%s)\n", p));
@@ -1727,7 +1727,7 @@ my_forget (char *path)
 }
 
 static int 
-smbfs_setctl (vfs *me, char *path, int ctlop, char *arg)
+smbfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
 {
 	DEBUG(3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
     switch (ctlop) {
@@ -1782,7 +1782,7 @@ open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 }
 
 static void *
-smbfs_open (vfs *me, char *file, int flags, int mode)
+smbfs_open (struct vfs_class *me, char *file, int flags, int mode)
 {
     char *remote_file, *p;
     void *ret;
@@ -1812,7 +1812,7 @@ smbfs_open (vfs *me, char *file, int flags, int mode)
 }
 
 static int
-smbfs_unlink (vfs *me, char *path)
+smbfs_unlink (struct vfs_class *me, char *path)
 {
     smbfs_connection *sc;
     char *remote_file, *p;
@@ -1835,7 +1835,7 @@ smbfs_unlink (vfs *me, char *path)
 }
 
 static int
-smbfs_rename (vfs *me, char *a, char *b)
+smbfs_rename (struct vfs_class *me, char *a, char *b)
 {
     smbfs_connection *sc;
     char *ra, *rb;
@@ -1887,7 +1887,7 @@ smbfs_fstat (void *data, struct stat *buf)
 	return 0;
 }
 
-vfs vfs_smbfs_ops = {
+struct vfs_class vfs_smbfs_ops = {
     NULL,	/* This is place of next pointer */
     "smbfs",
     VFSF_NOLINKS, /* flags */

@@ -34,11 +34,11 @@
 
 static volatile int total_inodes = 0, total_entries = 0;
 
-static vfs_s_entry *vfs_s_resolve_symlink (vfs * me, vfs_s_entry * entry,
+static vfs_s_entry *vfs_s_resolve_symlink (struct vfs_class * me, vfs_s_entry * entry,
 					   char *path, int follow);
 
 vfs_s_inode *
-vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
+vfs_s_new_inode (struct vfs_class *me, vfs_s_super *super, struct stat *initstat)
 {
     vfs_s_inode *ino;
 
@@ -62,7 +62,7 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
 }
 
 vfs_s_entry *
-vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
+vfs_s_new_entry (struct vfs_class *me, char *name, vfs_s_inode *inode)
 {
     vfs_s_entry *entry;
 
@@ -80,7 +80,7 @@ vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
 }
 
 static void
-vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
+vfs_s_free_inode (struct vfs_class *me, vfs_s_inode *ino)
 {
     if (!ino)
 	vfs_die ("Don't pass NULL to me");
@@ -104,7 +104,7 @@ vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 }
 
 void
-vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
+vfs_s_free_entry (struct vfs_class *me, vfs_s_entry *ent)
 {
     int is_dot = 0;
     if (ent->prevp){	/* It is possible that we are deleting freshly created entry */
@@ -130,7 +130,7 @@ vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
 }
 
 void
-vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
+vfs_s_insert_entry (struct vfs_class *me, vfs_s_inode *dir, vfs_s_entry *ent)
 {
     vfs_s_entry **ep;
 
@@ -145,7 +145,7 @@ vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
 }
 
 struct stat *
-vfs_s_default_stat (vfs *me, mode_t mode)
+vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 {
     static struct stat st;
     int myumask;
@@ -167,7 +167,7 @@ vfs_s_default_stat (vfs *me, mode_t mode)
 }
 
 void
-vfs_s_add_dots (vfs *me, vfs_s_inode *dir, vfs_s_inode *parent)
+vfs_s_add_dots (struct vfs_class *me, vfs_s_inode *dir, vfs_s_inode *parent)
 {
     struct vfs_s_entry *dot, *dotdot;
 
@@ -182,7 +182,7 @@ vfs_s_add_dots (vfs *me, vfs_s_inode *dir, vfs_s_inode *parent)
 }
 
 struct vfs_s_entry *
-vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mode)
+vfs_s_generate_entry (struct vfs_class *me, char *name, struct vfs_s_inode *parent, mode_t mode)
 {
     struct vfs_s_inode *inode;
     struct stat *st;
@@ -197,7 +197,7 @@ vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mo
 
 /* We were asked to create entries automagically */
 static vfs_s_entry *
-vfs_s_automake (vfs *me, vfs_s_inode *dir, char *path, int flags)
+vfs_s_automake (struct vfs_class *me, vfs_s_inode *dir, char *path, int flags)
 {
     struct vfs_s_entry *res;
     char *sep = strchr (path, PATH_SEP);
@@ -218,7 +218,7 @@ vfs_s_automake (vfs *me, vfs_s_inode *dir, char *path, int flags)
  *       == -1: do not follow links
  */
 vfs_s_entry *
-vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
+vfs_s_find_entry_tree (struct vfs_class *me, vfs_s_inode *root, char *path, int follow, int flags)
 {
     unsigned int pseg;
     vfs_s_entry *ent = NULL;
@@ -259,7 +259,7 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
 }
 
 static void
-split_dir_name (vfs *me, char *path, char **dir, char **name, char **save)
+split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char **save)
 {
     char *s;
     s = strrchr (path, PATH_SEP);
@@ -276,7 +276,7 @@ split_dir_name (vfs *me, char *path, char **dir, char **name, char **save)
 }
 
 vfs_s_entry *
-vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
+vfs_s_find_entry_linear (struct vfs_class *me, vfs_s_inode *root, char *path, int follow, int flags)
 {
     vfs_s_entry* ent = NULL;
 
@@ -332,7 +332,7 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
 }
 
 vfs_s_inode *
-vfs_s_find_inode (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
+vfs_s_find_inode (struct vfs_class *me, vfs_s_inode *root, char *path, int follow, int flags)
 {
     vfs_s_entry *ent;
     if ((MEDATA->find_entry == vfs_s_find_entry_tree) && (!*path))
@@ -344,7 +344,7 @@ vfs_s_find_inode (vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
 }
 
 static vfs_s_entry *
-vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
+vfs_s_resolve_symlink (struct vfs_class *me, vfs_s_entry *entry, char *path, int follow)
 {
     char buf[MC_MAXPATHLEN], *linkname;
 
@@ -402,7 +402,7 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 /* -------------------------------- superblock games -------------------------- */
 
 static vfs_s_super *
-vfs_s_new_super (vfs *me)
+vfs_s_new_super (struct vfs_class *me)
 {
     vfs_s_super *super;
 
@@ -412,7 +412,7 @@ vfs_s_new_super (vfs *me)
 }
 
 static void
-vfs_s_insert_super (vfs *me, vfs_s_super *super)
+vfs_s_insert_super (struct vfs_class *me, vfs_s_super *super)
 {
     super->next = MEDATA->supers;
     super->prevp = &MEDATA->supers;
@@ -423,7 +423,7 @@ vfs_s_insert_super (vfs *me, vfs_s_super *super)
 } 
 
 static void
-vfs_s_free_super (vfs *me, vfs_s_super *super)
+vfs_s_free_super (struct vfs_class *me, vfs_s_super *super)
 {
     if (super->root){
 	vfs_s_free_inode (me, super->root);
@@ -456,10 +456,10 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
 /* ------------------------------------------------------------------------= */
 
 static void
-vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
+vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup, char *fs_name)
 {
     struct vfs_stamping *parent;
-    vfs *v;
+    struct vfs_class *v;
  
     v = vfs_get_class (fs_name);
     if (v->flags & VFSF_LOCAL){
@@ -474,7 +474,7 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
 }
 
 char *
-vfs_s_get_path_mangle (vfs *me, char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **archive, int flags)
 {
     char *local, *op, *archive_name;
     int result = -1;
@@ -521,7 +521,7 @@ return_success:
 }
 
 static char *
-vfs_s_get_path (vfs *me, const char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **archive, int flags)
 {
     char *buf = g_strdup( inname );
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
@@ -532,7 +532,7 @@ vfs_s_get_path (vfs *me, const char *inname, struct vfs_s_super **archive, int f
 }
 
 void
-vfs_s_invalidate (vfs *me, vfs_s_super *super)
+vfs_s_invalidate (struct vfs_class *me, vfs_s_super *super)
 {
     if (!super->want_stale){
 	vfs_s_free_inode (me, super->root);
@@ -541,7 +541,7 @@ vfs_s_invalidate (vfs *me, vfs_s_super *super)
 }
 
 char *
-vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
+vfs_s_fullpath (struct vfs_class *me, vfs_s_inode *ino)
 {
 /* For now, usable only on filesystems with _linear structure */
     if (MEDATA->find_entry != vfs_s_find_entry_linear)
@@ -560,7 +560,7 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 /* ------------------------ readdir & friends ----------------------------- */
 
 static vfs_s_inode *
-vfs_s_inode_from_path (vfs *me, char *name, int flags)
+vfs_s_inode_from_path (struct vfs_class *me, char *name, int flags)
 {
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
@@ -582,7 +582,7 @@ struct dirhandle {
 };
 
 static void *
-vfs_s_opendir (vfs *me, char *dirname)
+vfs_s_opendir (struct vfs_class *me, char *dirname)
 {
     struct vfs_s_inode *dir;
     struct dirhandle *info;
@@ -666,7 +666,7 @@ vfs_s_closedir (void *data)
 }
 
 static int
-vfs_s_chdir (vfs *me, char *path)
+vfs_s_chdir (struct vfs_class *me, char *path)
 {
     void *data;
     if (!(data = vfs_s_opendir (me, path)))
@@ -678,7 +678,7 @@ vfs_s_chdir (vfs *me, char *path)
 /* --------------------------- stat and friends ---------------------------- */
 
 static int
-vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
+vfs_s_internal_stat (struct vfs_class *me, char *path, struct stat *buf, int flag)
 {
     struct vfs_s_inode *ino;
 
@@ -689,13 +689,13 @@ vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
 }
 
 static int
-vfs_s_stat (vfs *me, char *path, struct stat *buf)
+vfs_s_stat (struct vfs_class *me, char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
 }
 
 static int
-vfs_s_lstat (vfs *me, char *path, struct stat *buf)
+vfs_s_lstat (struct vfs_class *me, char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_NONE);
 }
@@ -708,7 +708,7 @@ vfs_s_fstat (void *fh, struct stat *buf)
 }
 
 static int
-vfs_s_readlink (vfs *me, char *path, char *buf, int size)
+vfs_s_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
     struct vfs_s_inode *ino;
 
@@ -728,7 +728,7 @@ vfs_s_readlink (vfs *me, char *path, char *buf, int size)
 }
 
 static void *
-vfs_s_open (vfs *me, char *file, int flags, int mode)
+vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
 {
     int was_changed = 0;
     struct vfs_s_fh *fh;
@@ -809,7 +809,7 @@ static int
 vfs_s_read (void *fh, char *buffer, int count)
 {
     int n;
-    vfs *me = FH_SUPER->me;
+    struct vfs_class *me = FH_SUPER->me;
 
     if (FH->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");
@@ -831,7 +831,7 @@ static int
 vfs_s_write (void *fh, char *buffer, int count)
 {
     int n;
-    vfs *me = FH_SUPER->me;
+    struct vfs_class *me = FH_SUPER->me;
     
     if (FH->linear)
 	vfs_die ("no writing to linear files, please");
@@ -878,12 +878,12 @@ static int
 vfs_s_close (void *fh)
 {
     int res = 0;
-    vfs *me = FH_SUPER->me;
+    struct vfs_class *me = FH_SUPER->me;
 
     FH_SUPER->fd_usage--;
     if (!FH_SUPER->fd_usage){
         struct vfs_stamping *parent;
-        vfs *v;
+        struct vfs_class *v;
         
 	v = vfs_get_class (FH_SUPER->name);
 	if (v->flags & VFSF_LOCAL) {
@@ -919,7 +919,7 @@ vfs_s_close (void *fh)
 }
 
 int
-vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino)
+vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
     off_t total = 0;
@@ -984,7 +984,7 @@ vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino)
 /* ------------------------------- mc support ---------------------------- */
 
 static void
-vfs_s_fill_names (vfs *me, void (*func)(char *))
+vfs_s_fill_names (struct vfs_class *me, void (*func)(char *))
 {
     struct vfs_s_super *a = MEDATA->supers;
     char *name;
@@ -998,13 +998,13 @@ vfs_s_fill_names (vfs *me, void (*func)(char *))
 }
 
 static int
-vfs_s_ferrno (vfs *me)
+vfs_s_ferrno (struct vfs_class *me)
 {
     return me->verrno;
 }
 
 static char *
-vfs_s_getlocalcopy (vfs *me, char *path)
+vfs_s_getlocalcopy (struct vfs_class *me, char *path)
 {
     struct vfs_s_inode *ino;
     char buf[MC_MAXPATHLEN];
@@ -1019,7 +1019,7 @@ vfs_s_getlocalcopy (vfs *me, char *path)
 }
 
 static int 
-vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
+vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
 {
     vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
     if (!ino)
@@ -1047,10 +1047,10 @@ vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 /* ----------------------------- Stamping support -------------------------- */
 
 static vfsid
-vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent)
+vfs_s_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
 {
     vfs_s_super *archive;
-    vfs *v;
+    struct vfs_class *v;
     char *p;
     vfsid id;
     struct vfs_stamping *par;
@@ -1138,7 +1138,7 @@ vfs_s_select_on_two (int fd1, int fd2)
 }
 
 int
-vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term)
+vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
 {
     FILE *logfile = MEDATA->logfile;
     int i, status;
@@ -1171,7 +1171,7 @@ vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term)
 }
 
 int
-vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd)
+vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd)
 {
     int n;
     int i;

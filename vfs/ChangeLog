@@ -1,5 +1,8 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Remove typedef vfs, it's too ambiguous.  Massive
+	changes to use struct vfs_class instead.
+
 	* vfs.c (vfs_setup_wd): Initialize current_vfs here, not
 	globally.
 	(vfs_type_from_op): Rename to vfs_prefix_to_class(), avoid using

@@ -6,9 +6,15 @@
 #endif
 
 
-/* Our virtual file system layer */
 typedef void *vfsid;
-struct vfs_stamping;
+
+struct vfs_stamping {
+    struct vfs_class *v;
+    vfsid id;
+    struct vfs_stamping *parent;	/* At the moment applies to tarfs only */
+    struct vfs_stamping *next;
+    struct timeval time;
+};
 
 /*
  * Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
@@ -20,70 +26,68 @@ struct vfs_stamping;
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
 
-typedef struct vfs_class vfs;
-
 struct vfs_class {
-    vfs *next;
+    struct vfs_class *next;
     char *name;			/* "FIles over SHell" */
     int flags;
     char *prefix;		/* "fish:" */
     void *data;			/* this is for filesystem's own use */
     int verrno;			/* can't use errno because glibc2 might define errno as function */
 
-    int (*init) (vfs *me);
-    void (*done) (vfs *me);
-    void (*fill_names) (vfs *me, void (*)(char *));
+    int (*init) (struct vfs_class *me);
+    void (*done) (struct vfs_class *me);
+    void (*fill_names) (struct vfs_class *me, void (*)(char *));
 
-    int (*which) (vfs *me, char *path);
+    int (*which) (struct vfs_class *me, char *path);
 
-    void *(*open) (vfs *me, char *fname, int flags, int mode);
+    void *(*open) (struct vfs_class *me, char *fname, int flags, int mode);
     int (*close) (void *vfs_info);
     int (*read) (void *vfs_info, char *buffer, int count);
     int (*write) (void *vfs_info, char *buf, int count);
 
-    void *(*opendir) (vfs *me, char *dirname);
+    void *(*opendir) (struct vfs_class *me, char *dirname);
     void *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
     int (*telldir) (void *vfs_info);
     void (*seekdir) (void *vfs_info, int offset);
 
-    int (*stat) (vfs *me, char *path, struct stat * buf);
-    int (*lstat) (vfs *me, char *path, struct stat * buf);
+    int (*stat) (struct vfs_class *me, char *path, struct stat * buf);
+    int (*lstat) (struct vfs_class *me, char *path, struct stat * buf);
     int (*fstat) (void *vfs_info, struct stat * buf);
 
-    int (*chmod) (vfs *me, char *path, int mode);
-    int (*chown) (vfs *me, char *path, int owner, int group);
-    int (*utime) (vfs *me, char *path, struct utimbuf * times);
+    int (*chmod) (struct vfs_class *me, char *path, int mode);
+    int (*chown) (struct vfs_class *me, char *path, int owner, int group);
+    int (*utime) (struct vfs_class *me, char *path, struct utimbuf * times);
 
-    int (*readlink) (vfs *me, char *path, char *buf, int size);
-    int (*symlink) (vfs *me, char *n1, char *n2);
-    int (*link) (vfs *me, char *p1, char *p2);
-    int (*unlink) (vfs *me, char *path);
-    int (*rename) (vfs *me, char *p1, char *p2);
-    int (*chdir) (vfs *me, char *path);
-    int (*ferrno) (vfs *me);
+    int (*readlink) (struct vfs_class *me, char *path, char *buf, int size);
+    int (*symlink) (struct vfs_class *me, char *n1, char *n2);
+    int (*link) (struct vfs_class *me, char *p1, char *p2);
+    int (*unlink) (struct vfs_class *me, char *path);
+    int (*rename) (struct vfs_class *me, char *p1, char *p2);
+    int (*chdir) (struct vfs_class *me, char *path);
+    int (*ferrno) (struct vfs_class *me);
     int (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (vfs *me, char *path, int mode, int dev);
+    int (*mknod) (struct vfs_class *me, char *path, int mode, int dev);
 
-    vfsid (*getid) (vfs *me, const char *path,
+    vfsid (*getid) (struct vfs_class *me, const char *path,
 		    struct vfs_stamping ** parent);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
-    char *(*getlocalcopy) (vfs *me, char *filename);
-    int (*ungetlocalcopy) (vfs *me, char *filename, char *local,
+    char *(*getlocalcopy) (struct vfs_class *me, char *filename);
+    int (*ungetlocalcopy) (struct vfs_class *me, char *filename, char *local,
 			   int has_changed);
 
-    int (*mkdir) (vfs *me, char *path, mode_t mode);
-    int (*rmdir) (vfs *me, char *path);
+    int (*mkdir) (struct vfs_class *me, char *path, mode_t mode);
+    int (*rmdir) (struct vfs_class *me, char *path);
 
     int (*ctl) (void *vfs_info, int ctlop, int arg);
-    int (*setctl) (vfs *me, char *path, int ctlop, char *arg);
+    int (*setctl) (struct vfs_class *me, char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
-    caddr_t (*mmap) (vfs *me, caddr_t addr, size_t len, int prot,
+    caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len, int prot,
 		     int flags, void *vfs_info, off_t offset);
-    int (*munmap) (vfs *me, caddr_t addr, size_t len, void *vfs_info);
+    int (*munmap) (struct vfs_class *me, caddr_t addr, size_t len, void *vfs_info);
 #endif
 };
 
@@ -105,26 +109,18 @@ void init_fish (void);
 void init_ftpfs (void);
 void init_tarfs (void);
 
-extern vfs vfs_local_ops;
-extern vfs vfs_smbfs_ops;
-extern vfs vfs_mcfs_ops;
-extern vfs vfs_extfs_ops;
-extern vfs vfs_sfs_ops;
-extern vfs vfs_undelfs_ops;
-
-struct vfs_stamping {
-    vfs *v;
-    vfsid id;
-    struct vfs_stamping *parent;	/* At the moment applies to tarfs only */
-    struct vfs_stamping *next;
-    struct timeval time;
-};
+extern struct vfs_class vfs_local_ops;
+extern struct vfs_class vfs_smbfs_ops;
+extern struct vfs_class vfs_mcfs_ops;
+extern struct vfs_class vfs_extfs_ops;
+extern struct vfs_class vfs_sfs_ops;
+extern struct vfs_class vfs_undelfs_ops;
 
 void vfs_init (void);
 void vfs_shut (void);
 
 struct vfs_class *vfs_get_class (const char *path);
-vfs *vfs_split (const char *path, char **inpath, char **op);
+struct vfs_class *vfs_split (const char *path, char **inpath, char **op);
 char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
@@ -141,9 +137,9 @@ vfs_file_is_local (const char *filename)
 
 extern int vfs_timeout;
 
-void vfs_stamp (vfs *, vfsid);
-void vfs_rmstamp (vfs *, vfsid, int);
-void vfs_add_noncurrent_stamps (vfs *, vfsid, struct vfs_stamping *);
+void vfs_stamp (struct vfs_class *, vfsid);
+void vfs_rmstamp (struct vfs_class *, vfsid, int);
+void vfs_add_noncurrent_stamps (struct vfs_class *, vfsid, struct vfs_stamping *);
 void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
 void vfs_expire (int);
@@ -194,8 +190,8 @@ int mc_mkdir (char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
 int mc_ungetlocalcopy (const char *pathname, char *local, int has_changed);
-char *mc_def_getlocalcopy (vfs *vfs, char *filename);
-int mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local,
+char *mc_def_getlocalcopy (struct vfs_class *vfs, char *filename);
+int mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local,
 			   int has_changed);
 int mc_ctl (int fd, int ctlop, int arg);
 int mc_setctl (char *path, int ctlop, char *arg);

@@ -72,7 +72,7 @@ static int current_year;
 
 static struct {
     void *fs_info;
-    vfs  *operations;
+    struct vfs_class *operations;
 } vfs_file_table [MAX_VFS_FILES];
 
 static int
@@ -90,7 +90,7 @@ get_bucket (void)
     return 0;
 }
 
-static vfs *vfs_list;
+static struct vfs_class *vfs_list;
 
 int
 vfs_register_class (struct vfs_class *vfs)
@@ -174,12 +174,12 @@ path_magic (const char *path)
  * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
  */
-vfs *
+struct vfs_class *
 vfs_split (const char *path, char **inpath, char **op)
 {
     char *semi;
     char *slash;
-    vfs *ret;
+    struct vfs_class *ret;
 
     if (!path)
 	vfs_die("Cannot split NULL");
@@ -216,12 +216,12 @@ vfs_split (const char *path, char **inpath, char **op)
     return ret;
 }
 
-static vfs *
+static struct vfs_class *
 _vfs_get_class (const char *path)
 {
     char *semi;
     char *slash;
-    vfs *ret;
+    struct vfs_class *ret;
 
     g_return_val_if_fail(path, NULL);
 
@@ -245,10 +245,10 @@ _vfs_get_class (const char *path)
     return ret;
 }
 
-vfs *
+struct vfs_class *
 vfs_get_class (const char *path)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
 
     vfs = _vfs_get_class(path);
 
@@ -272,7 +272,7 @@ vfs_timeouts ()
 }
 
 static void
-vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
+vfs_addstamp (struct vfs_class *v, vfsid id, struct vfs_stamping *parent)
 {
     if (!(v->flags & VFSF_LOCAL) && id != (vfsid)-1){
         struct vfs_stamping *stamp;
@@ -315,7 +315,7 @@ vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 }
 
 void
-vfs_stamp (vfs *v, vfsid id)
+vfs_stamp (struct vfs_class *v, vfsid id)
 {
     struct vfs_stamping *stamp;
 
@@ -343,7 +343,7 @@ vfs_rm_parents (struct vfs_stamping *stamp)
 }
 
 void
-vfs_rmstamp (vfs *v, vfsid id, int removeparents)
+vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
 {
     struct vfs_stamping *stamp, *st1;
     
@@ -366,7 +366,7 @@ vfs_rmstamp (vfs *v, vfsid id, int removeparents)
 }
 
 static int
-ferrno (vfs *vfs)
+ferrno (struct vfs_class *vfs)
 {
     return vfs->ferrno ? (*vfs->ferrno)(vfs) : E_UNKNOWN; 
     /* Hope that error message is obscure enough ;-) */
@@ -381,7 +381,7 @@ mc_open (const char *filename, int flags, ...)
     va_list ap;
 
     char *file = vfs_canon (filename);
-    vfs  *vfs  = vfs_get_class (file);
+    struct vfs_class *vfs = vfs_get_class (file);
 
     /* Get the mode flag */	/* FIXME: should look if O_CREAT is present */
     va_start (ap, flags);
@@ -413,7 +413,7 @@ mc_open (const char *filename, int flags, ...)
 #define MC_OP(name, inarg, callarg, pre, post) \
         int mc_##name inarg \
 	{ \
-	vfs *vfs; \
+	struct vfs_class *vfs; \
 	int result; \
 	\
 	pre \
@@ -434,7 +434,7 @@ MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buf
 int
 mc_ctl (int handle, int ctlop, int arg)
 {
-    vfs *vfs = vfs_op (handle);
+    struct vfs_class *vfs = vfs_op (handle);
 
     return vfs->ctl ? (*vfs->ctl)(vfs_info (handle), ctlop, arg) : 0;
 }
@@ -442,7 +442,7 @@ mc_ctl (int handle, int ctlop, int arg)
 int
 mc_setctl (char *path, int ctlop, char *arg)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
 
     if (!path)
@@ -458,7 +458,7 @@ mc_setctl (char *path, int ctlop, char *arg)
 int
 mc_close (int handle)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
 
     if (handle == -1 || !vfs_info (handle))
@@ -483,7 +483,7 @@ mc_opendir (char *dirname)
 {
     int  handle, *handlep;
     void *info;
-    vfs  *vfs;
+    struct vfs_class *vfs;
 
     dirname = vfs_canon (dirname);
     vfs = vfs_get_class (dirname);
@@ -507,7 +507,7 @@ void
 mc_seekdir (DIR *dirp, int offset)
 {
     int handle;
-    vfs *vfs;
+    struct vfs_class *vfs;
 
     if (!dirp){
 	errno = EFAULT;
@@ -525,7 +525,7 @@ mc_seekdir (DIR *dirp, int offset)
 type mc_##name (DIR *dirp) \
 { \
     int handle; \
-    vfs *vfs; \
+    struct vfs_class *vfs; \
     type result; \
 \
     if (!dirp){ \
@@ -547,7 +547,7 @@ int
 mc_closedir (DIR *dirp)
 {
     int handle = *(int *) dirp;
-    vfs *vfs = vfs_op (handle);
+    struct vfs_class *vfs = vfs_op (handle);
     int result;
 
     result = vfs->closedir ? (*vfs->closedir)(vfs_info (handle)) : -1;
@@ -557,7 +557,7 @@ mc_closedir (DIR *dirp)
 }
 
 int mc_stat (const char *filename, struct stat *buf) {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
     char *path;
     path = vfs_canon (filename); vfs = vfs_get_class (path);
@@ -569,7 +569,7 @@ int mc_stat (const char *filename, struct stat *buf) {
 }
 
 int mc_lstat (const char *filename, struct stat *buf) {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
     char *path;
     path = vfs_canon (filename); vfs = vfs_get_class (path);
@@ -581,7 +581,7 @@ int mc_lstat (const char *filename, struct stat *buf) {
 }
 
 int mc_fstat (int handle, struct stat *buf) {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
 
     if (handle == -1)
@@ -667,7 +667,7 @@ MC_NAMEOP (symlink, (char *name1, char *path), (vfs, name1, path))
 #define MC_RENAMEOP(name) \
 int mc_##name (const char *fname1, const char *fname2) \
 { \
-    vfs *vfs; \
+    struct vfs_class *vfs; \
     int result; \
 \
     char *name2, *name1 = vfs_canon (fname1); \
@@ -695,7 +695,7 @@ MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf,
 
 off_t mc_lseek (int fd, off_t offset, int whence)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     int result;
 
     if (fd == -1)
@@ -743,7 +743,7 @@ vfs_canon (const char *path)
 }
 
 static vfsid
-vfs_ncs_getid (vfs *nvfs, const char *dir, struct vfs_stamping **par)
+vfs_ncs_getid (struct vfs_class *nvfs, const char *dir, struct vfs_stamping **par)
 {
     vfsid nvfsid;
     char *dir1;
@@ -755,7 +755,7 @@ vfs_ncs_getid (vfs *nvfs, const char *dir, struct vfs_stamping **par)
 }
 
 static int
-is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
+is_parent (struct vfs_class * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 {
     struct vfs_stamping *stamp;
 
@@ -767,9 +767,9 @@ is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 }
 
 static void
-_vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
+_vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
 {
-    vfs *nvfs, *n2vfs, *n3vfs;
+    struct vfs_class *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
     struct vfs_stamping *par, *stamp;
     int f;
@@ -807,8 +807,8 @@ _vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
 	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f) 
 	    return;
     } else {
-	n2vfs = (vfs *) -1;
-	n2vfsid = (vfs *) -1;
+	n2vfs = (struct vfs_class *) -1;
+	n2vfsid = (struct vfs_class *) -1;
     }
     
     if (get_other_type () == view_listing){
@@ -819,8 +819,8 @@ _vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
 	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
 	    return;
     } else {
-	n3vfs = (vfs *)-1;
-	n3vfsid = (vfs *)-1;
+	n3vfs = (struct vfs_class *)-1;
+	n3vfsid = (struct vfs_class *)-1;
     }
     
     if ((*oldvfs->nothingisopen) (oldvfsid)){
@@ -847,7 +847,7 @@ _vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
 }
 
 void
-vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid,
+vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 			   struct vfs_stamping *parent)
 {
     _vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
@@ -857,7 +857,7 @@ vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid,
 static void
 vfs_stamp_path (char *path)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     vfsid id;
     struct vfs_stamping *par, *stamp;
     
@@ -894,7 +894,7 @@ int
 mc_chdir (char *path)
 {
     char *new_dir, *new_dir_copy;
-    vfs *old_vfs, *new_vfs;
+    struct vfs_class *old_vfs, *new_vfs;
     vfsid old_vfsid;
     struct vfs_stamping *parent;
     int result;
@@ -962,7 +962,7 @@ vfs_file_is_smb (const char *filename)
 {
 #ifdef WITH_SMBFS
 #ifdef USE_NETCODE
-    vfs *vfs;
+    struct vfs_class *vfs;
     char *fname = vfs_canon (filename);
     vfs = vfs_get_class (fname);
     g_free (fname);
@@ -980,14 +980,14 @@ MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, path, mode, dev))
 static struct mc_mmapping {
     caddr_t addr;
     void *vfs_info;
-    vfs *vfs;
+    struct vfs_class *vfs;
     struct mc_mmapping *next;
 } *mc_mmaparray = NULL;
 
 caddr_t
 mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
     caddr_t result;
     struct mc_mmapping *mcm;
 
@@ -1032,7 +1032,7 @@ mc_munmap (caddr_t addr, size_t len)
 #endif
 
 char *
-mc_def_getlocalcopy (vfs *vfs, char *filename)
+mc_def_getlocalcopy (struct vfs_class *vfs, char *filename)
 {
     char *tmp, *suffix, *basename;
     int fdin, fdout, i;
@@ -1092,7 +1092,7 @@ mc_getlocalcopy (const char *pathname)
 {
     char *result;
     char *path = vfs_canon (pathname);
-    vfs  *vfs  = vfs_get_class (path);    
+    struct vfs_class *vfs = vfs_get_class (path);    
 
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, path) :
                                  mc_def_getlocalcopy (vfs, path);
@@ -1103,7 +1103,7 @@ mc_getlocalcopy (const char *pathname)
 }
 
 int
-mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
+mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local, int has_changed)
 {	/* Dijkstra probably hates me... But he should teach me how to do this nicely. */
     int fdin = -1, fdout = -1, i;
     if (has_changed){
@@ -1150,7 +1150,7 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
 {
     int return_value = 0;
     char *path = vfs_canon (pathname);
-    vfs *vfs = vfs_get_class (path);
+    struct vfs_class *vfs = vfs_get_class (path);
 
     return_value = vfs->ungetlocalcopy ? 
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
@@ -1250,7 +1250,7 @@ void
 vfs_shut (void)
 {
     struct vfs_stamping *stamp, *st;
-    vfs *vfs;
+    struct vfs_class *vfs;
 
     for (stamp = stamps, stamps = 0; stamp != NULL;){
 	(*stamp->v->free)(stamp->id);
@@ -1277,7 +1277,7 @@ vfs_shut (void)
 void
 vfs_fill_names (void (*func)(char *))
 {
-    vfs *vfs;
+    struct vfs_class *vfs;
 
     for (vfs=vfs_list; vfs; vfs=vfs->next)
         if (vfs->fill_names)

@@ -79,7 +79,7 @@ struct pseudofile {
 
 static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
-static int extfs_which (vfs *me, char *path);
+static int extfs_which (struct vfs_class *me, char *path);
 static void remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 
@@ -91,7 +91,7 @@ static char *extfs_prefixes [MAXEXTFS];
 static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
 
-static void extfs_fill_names (vfs *me, void (*func)(char *))
+static void extfs_fill_names (struct vfs_class *me, void (*func)(char *))
 {
     struct archive *a = first_archive;
     char *name;
@@ -418,7 +418,7 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
     int result = -1;
     struct archive *parc;
     struct vfs_stamping *parent;
-    vfs *v;
+    struct vfs_class *v;
     int fstype;
 
     archive_name = inname;
@@ -426,7 +426,7 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
 
     /*
      * FIXME: we really should pass self pointer. But as we know that
-     * extfs_which does not touch vfs *me, it does not matter for now
+     * extfs_which does not touch struct vfs_class *me, it does not matter for now
      */
     fstype = extfs_which (NULL, op);
 
@@ -641,7 +641,7 @@ extfs_run (char *file)
 }
 
 static void *
-extfs_open (vfs *me, char *file, int flags, int mode)
+extfs_open (struct vfs_class *me, char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive;
@@ -747,7 +747,7 @@ extfs_close (void *data)
     file->archive->fd_usage--;
     if (!file->archive->fd_usage) {
 	struct vfs_stamping *parent;
-	vfs *v;
+	struct vfs_class *v;
 
 	if (!file->archive->name || !*file->archive->name
 	    || (v =
@@ -863,12 +863,12 @@ static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, i
 }
 
 
-static int s_errno (vfs *me)
+static int s_errno (struct vfs_class *me)
 {
     return my_errno;
 }
 
-static void * s_opendir (vfs *me, char *dirname)
+static void * s_opendir (struct vfs_class *me, char *dirname)
 {
     struct archive *archive;
     char *q;
@@ -980,12 +980,12 @@ static int s_internal_stat (char *path, struct stat *buf, int resolve)
     return 0;
 }
 
-static int s_stat (vfs *me, char *path, struct stat *buf)
+static int s_stat (struct vfs_class *me, char *path, struct stat *buf)
 {
     return s_internal_stat (path, buf, 1);
 }
 
-static int s_lstat (vfs *me, char *path, struct stat *buf)
+static int s_lstat (struct vfs_class *me, char *path, struct stat *buf)
 {
     return s_internal_stat (path, buf, 0);
 }
@@ -1001,7 +1001,7 @@ static int s_fstat (void *data, struct stat *buf)
 }
 
 static int
-s_readlink (vfs *me, char *path, char *buf, int size)
+s_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
     struct archive *archive;
     char *q;
@@ -1022,7 +1022,7 @@ s_readlink (vfs *me, char *path, char *buf, int size)
     return i;
 }
 
-static int extfs_chmod (vfs *me, char *path, int mode)
+static int extfs_chmod (struct vfs_class *me, char *path, int mode)
 {
     return 0;
 }
@@ -1035,7 +1035,7 @@ static int extfs_write (void *data, char *buf, int nbyte)
     return write (file->local_handle, buf, nbyte);
 }
 
-static int extfs_unlink (vfs *me, char *file)
+static int extfs_unlink (struct vfs_class *me, char *file)
 {
     struct archive *archive;
     char *q;
@@ -1059,7 +1059,7 @@ static int extfs_unlink (vfs *me, char *file)
     return 0;
 }
 
-static int extfs_mkdir (vfs *me, char *path, mode_t mode)
+static int extfs_mkdir (struct vfs_class *me, char *path, mode_t mode)
 {
     struct archive *archive;
     char *q;
@@ -1085,7 +1085,7 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
     return 0;
 }
 
-static int extfs_rmdir (vfs *me, char *path)
+static int extfs_rmdir (struct vfs_class *me, char *path)
 {
     struct archive *archive;
     char *q;
@@ -1109,7 +1109,7 @@ static int extfs_rmdir (vfs *me, char *path)
     return 0;
 }
 
-static int extfs_chdir (vfs *me, char *path)
+static int extfs_chdir (struct vfs_class *me, char *path)
 {
     struct archive *archive;
     char *q;
@@ -1136,10 +1136,10 @@ static int extfs_lseek (void *data, off_t offset, int whence)
     return lseek (file->local_handle, offset, whence);
 }
 
-static vfsid extfs_getid (vfs *me, const char *path, struct vfs_stamping **parent)
+static vfsid extfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
 {
     struct archive *archive;
-    vfs *v;
+    struct vfs_class *v;
     vfsid id;
     struct vfs_stamping *par;
     char *p;
@@ -1251,7 +1251,7 @@ static void extfs_free (vfsid id)
     free_archive (archive);
 }
 
-static char *extfs_getlocalcopy (vfs *me, char *path)
+static char *extfs_getlocalcopy (struct vfs_class *me, char *path)
 {
     struct pseudofile *fp = 
         (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
@@ -1269,7 +1269,7 @@ static char *extfs_getlocalcopy (vfs *me, char *path)
     return p;
 }
 
-static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int extfs_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
 {
     struct pseudofile *fp = 
         (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
@@ -1289,7 +1289,7 @@ static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chang
 }
 
 
-static int extfs_init (vfs *me)
+static int extfs_init (struct vfs_class *me)
 {
     FILE *cfg;
     char *mc_extfsini;
@@ -1349,7 +1349,7 @@ static int extfs_init (vfs *me)
 }
 
 /* Do NOT use me argument in this function */
-static int extfs_which (vfs *me, char *path)
+static int extfs_which (struct vfs_class *me, char *path)
 {
     int i;
 
@@ -1359,7 +1359,7 @@ static int extfs_which (vfs *me, char *path)
     return -1;
 }
 
-static void extfs_done (vfs *me)
+static void extfs_done (struct vfs_class *me)
 {
     int i;
 
@@ -1368,7 +1368,7 @@ static void extfs_done (vfs *me)
     extfs_no = 0;
 }
 
-static int extfs_setctl (vfs *me, char *path, int ctlop, char *arg)
+static int extfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
 {
     if (ctlop == MCCTL_EXTFS_RUN) {
         extfs_run (path);
@@ -1377,7 +1377,7 @@ static int extfs_setctl (vfs *me, char *path, int ctlop, char *arg)
     return 0;
 }
 
-vfs vfs_extfs_ops = {
+struct vfs_class vfs_extfs_ops = {
     NULL,	/* This is place of next pointer */
     "extfs",
     0,		/* flags */

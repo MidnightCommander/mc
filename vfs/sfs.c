@@ -47,7 +47,7 @@ static int uptodate (char *name, char *cache)
     return 1;
 }
 
-static int vfmake (vfs *me, char *name, char *cache)
+static int vfmake (struct vfs_class *me, char *name, char *cache)
 {
     char *inpath, *op;
     int w;
@@ -104,7 +104,7 @@ static int vfmake (vfs *me, char *name, char *cache)
 }
 
 static char *
-redirect (vfs *me, char *name)
+redirect (struct vfs_class *me, char *name)
 {
     struct cachedfile *cur = head;
     char *cache;
@@ -147,7 +147,7 @@ redirect (vfs *me, char *name)
 }
 
 static void *
-sfs_open (vfs *me, char *path, int flags, int mode)
+sfs_open (struct vfs_class *me, char *path, int flags, int mode)
 {
     int *sfs_info;
     int fd;
@@ -163,13 +163,13 @@ sfs_open (vfs *me, char *path, int flags, int mode)
     return sfs_info;
 }
 
-static int sfs_stat (vfs *me, char *path, struct stat *buf)
+static int sfs_stat (struct vfs_class *me, char *path, struct stat *buf)
 {
     path = redirect (me, path);
     return stat (path, buf);
 }
 
-static int sfs_lstat (vfs *me, char *path, struct stat *buf)
+static int sfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
 {
     path = redirect (me, path);
 #ifndef HAVE_STATLSTAT
@@ -179,34 +179,34 @@ static int sfs_lstat (vfs *me, char *path, struct stat *buf)
 #endif
 }
 
-static int sfs_chmod (vfs *me, char *path, int mode)
+static int sfs_chmod (struct vfs_class *me, char *path, int mode)
 {
     path = redirect (me, path);
     return chmod (path, mode);
 }
 
-static int sfs_chown (vfs *me, char *path, int owner, int group)
+static int sfs_chown (struct vfs_class *me, char *path, int owner, int group)
 {
     path = redirect (me, path);
     return chown (path, owner, group);
 }
 
-static int sfs_utime (vfs *me, char *path, struct utimbuf *times)
+static int sfs_utime (struct vfs_class *me, char *path, struct utimbuf *times)
 {
     path = redirect (me, path);
     return utime (path, times);
 }
 
-static int sfs_readlink (vfs *me, char *path, char *buf, int size)
+static int sfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 {
     path = redirect (me, path);
     return readlink (path, buf, size);
 }
 
 static vfsid
-sfs_getid (vfs *me, const char *path, struct vfs_stamping **parent)
+sfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
 {				/* FIXME: what should I do? */
-    vfs *v;
+    struct vfs_class *v;
     vfsid id;
     struct vfs_stamping *par;
     struct cachedfile *cur = head;
@@ -266,7 +266,7 @@ static void sfs_free (vfsid id)
     g_free (cur);
 }
 
-static void sfs_fill_names (vfs *me, void (*func)(char *))
+static void sfs_fill_names (struct vfs_class *me, void (*func)(char *))
 {
     struct cachedfile *cur = head;
 
@@ -283,19 +283,19 @@ static int sfs_nothingisopen (vfsid id)
     return 1;
 }
 
-static char *sfs_getlocalcopy (vfs *me, char *path)
+static char *sfs_getlocalcopy (struct vfs_class *me, char *path)
 {
     path = redirect (me, path);
     return g_strdup (path);
 }
 
-static int sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int sfs_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
 {
     g_free(local);
     return 0;
 }
 
-static int sfs_init (vfs *me)
+static int sfs_init (struct vfs_class *me)
 {
     char *mc_sfsini;
     FILE *cfg;
@@ -364,7 +364,7 @@ static int sfs_init (vfs *me)
 }
 
 static void
-sfs_done (vfs *me)
+sfs_done (struct vfs_class *me)
 {
     int i;
 
@@ -377,7 +377,7 @@ sfs_done (vfs *me)
 }
 
 static int
-sfs_which (vfs *me, char *path)
+sfs_which (struct vfs_class *me, char *path)
 {
     int i;
 
@@ -392,7 +392,7 @@ sfs_which (vfs *me, char *path)
     return -1;
 }
 
-vfs vfs_sfs_ops = {
+struct vfs_class vfs_sfs_ops = {
     NULL,	/* This is place of next pointer */
     "sfs",
     0,		/* flags */

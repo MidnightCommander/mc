@@ -269,7 +269,7 @@ void com_err (const char *str, long err_code, const char *s2, ...)
 }
 
 static void *
-undelfs_opendir (vfs *me, char *dirname)
+undelfs_opendir (struct vfs_class *me, char *dirname)
 {
     char *file, *f;
     
@@ -370,7 +370,7 @@ typedef struct {
 
 /* We do not support lseek */
 static void *
-undelfs_open (vfs *me, char *fname, int flags, int mode)
+undelfs_open (struct vfs_class *me, char *fname, int flags, int mode)
 {
     char *file, *f;
     ext2_ino_t  inode, i;
@@ -544,7 +544,7 @@ do_stat (int inode_index, struct stat *buf)
 }
 
 static int
-undelfs_lstat(vfs *me, char *path, struct stat *buf)
+undelfs_lstat(struct vfs_class *me, char *path, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
@@ -582,7 +582,7 @@ undelfs_lstat(vfs *me, char *path, struct stat *buf)
 }
 
 static int
-undelfs_stat(vfs *me, char *path, struct stat *buf)
+undelfs_stat(struct vfs_class *me, char *path, struct stat *buf)
 {
     return undelfs_lstat (me, path, buf);
 }
@@ -597,7 +597,7 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 }
 
 static int
-undelfs_chdir(vfs *me, char *path)
+undelfs_chdir(struct vfs_class *me, char *path)
 {
     char *file, *f;
     int fd;
@@ -629,7 +629,7 @@ undelfs_lseek(void *vfs_info, off_t offset, int whence)
 }
 
 static vfsid
-undelfs_getid(vfs *me, const char *path, struct vfs_stamping **parent)
+undelfs_getid(struct vfs_class *me, const char *path, struct vfs_stamping **parent)
 {
     char *ext2_fname, *file;
 
@@ -658,7 +658,7 @@ undelfs_free(vfsid id)
 
 #ifdef	ENABLE_NLS
 static int
-undelfs_init(vfs *me) {
+undelfs_init(struct vfs_class *me) {
     undelfserr = _(undelfserr);
     return 1;
 }
@@ -666,7 +666,7 @@ undelfs_init(vfs *me) {
 #define undelfs_init	NULL
 #endif
 
-vfs vfs_undelfs_ops = {
+struct vfs_class vfs_undelfs_ops = {
     NULL,	/* This is place of next pointer */
     "undelfs",
     0,	/* flags */
