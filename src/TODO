@@ -89,8 +89,6 @@ Search in the viewer should have an option for case sensitive search.
 Make "Find File" dialog more responsive.  Keep state in a structure and
 preserve it when the search is suspended.
 
-Locks for compressed files are not removed.
-
 Use KDGKBENT ioctl on Linux console to find the mapping for shifted
 functional keys.  Two mappings are widely used (Shift-F1 = F11 and
 Shift-F1 = F13).  mc should adjust the keys to the mapping.
