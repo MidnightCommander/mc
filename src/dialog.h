@@ -85,9 +85,9 @@ typedef struct Dlg_head {
 
     /* Set by the user */
     int flags;			/* User flags */
-    char *help_ctx;		/* Name of the help entry */
+    const char *help_ctx;	/* Name of the help entry */
     const int *color;		/* Color set */
-    char *title;		/* Title of the dialog */
+    const char *title;		/* Title of the dialog */
 
     /* Set and received by the user */
     int ret_value;		/* Result of run_dlg() */

@@ -19,5 +19,5 @@ enum {
 int rpc_get (int sock, ...);
 int rpc_send (int sock, ...);
 int socket_read_block (int sock, char *dest, int len);
-int socket_write_block (int sock, char *buffer, int len);
+int socket_write_block (int sock, const char *buffer, int len);
 #endif				/* !__MCFSUTIL_H */

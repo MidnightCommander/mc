@@ -774,7 +774,7 @@ static struct pam_conv conv = { &mc_pam_conversation, NULL };
 
 /* Return 0 if authentication failed, 1 otherwise */
 static int
-mc_pam_auth (char *username, char *password)
+mc_pam_auth (const char *username, const char *password)
 {
     pam_handle_t *pamh;
     struct user_pass up;
@@ -818,7 +818,7 @@ next_line (int socket)
 }
 
 static int
-ftp_answer (int sock, char *text)
+ftp_answer (int sock, const char *text)
 {
     char answer[4];
 
@@ -831,13 +831,13 @@ ftp_answer (int sock, char *text)
 }
 
 static int
-send_string (int sock, char *string)
+send_string (int sock, const char *string)
 {
     return socket_write_block (sock, string, strlen (string));
 }
 
 static int
-do_ftp_auth (char *username, char *password)
+do_ftp_auth (const char *username, const char *password)
 {
     struct sockaddr_in local_address;
     unsigned long inaddr;
@@ -892,10 +892,10 @@ do_ftp_auth (char *username, char *password)
 
 #ifdef HAVE_CRYPT
 static int
-do_classic_auth (char *username, char *password)
+do_classic_auth (const char *username, const char *password)
 {
     int ret = 0;
-    char *encr_pwd = NULL;
+    const char *encr_pwd = NULL;
     struct passwd *pw;
 #ifdef HAVE_SHADOW
     struct spwd *spw;
@@ -934,7 +934,7 @@ do_classic_auth (char *username, char *password)
    - try to contact the local ftp server and login (if -f flag used)
 */
 static int
-do_auth (char *username, char *password)
+do_auth (const char *username, const char *password)
 {
     int auth = 0;
     struct passwd *this;
@@ -1088,7 +1088,7 @@ do_login (void)
 /* This structure must be kept in synch with mcfs.h enums */
 
 static const struct _command {
-    char *command;
+    const char *command;
     void (*callback) (void);
 } commands[] = {
     {
@@ -1178,7 +1178,7 @@ server (int sock)
 
 /* {{{ Net support code */
 
-static char *
+static const char *
 get_client (int portnum)
 {
     int sock, clilen, newsocket;
@@ -1295,7 +1295,7 @@ register_port (int portnum, int abort_if_fail)
 int
 main (int argc, char *argv[])
 {
-    char *result;
+    const char *result;
     int c;
 
     while ((c = getopt (argc, argv, "fdiqp:v")) != -1) {

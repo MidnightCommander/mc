@@ -828,7 +828,7 @@ do_select (WPanel *panel, int i)
 }
 
 static inline void
-do_try_to_select (WPanel *panel, char *name)
+do_try_to_select (WPanel *panel, const char *name)
 {
     int i;
     char *subdir;

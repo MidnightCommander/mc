@@ -18,7 +18,7 @@ extern volatile int quit;
 /* If true, after executing a command, wait for a keystroke */
 enum { pause_never, pause_on_dumb_terminals, pause_always };
 
-void subshell_chdir (char *command);
+void subshell_chdir (const char *command);
 
 /* See main.c for details on these variables */
 extern int mark_moves_down;
@@ -65,7 +65,7 @@ extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;
 extern char cmd_buf [512];
-extern char *shell;
+extern const char *shell;
 
 /* Ugly hack in order to distinguish between left and right panel in menubar */
 extern int is_right;		/* If the selected menu was the right */
@@ -81,7 +81,7 @@ typedef struct {
     key_callback fn;
 } key_map;
 
-void update_panels (int force_update, char *current_file);
+void update_panels (int force_update, const char *current_file);
 void repaint_screen (void);
 void do_update_prompt (void);
 
@@ -90,7 +90,7 @@ enum cd_enum {
     cd_exact
 };
 
-int do_cd           (char *new_dir, enum cd_enum cd_type);	/* For find.c */
+int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
 void change_panel   (void);
 int load_prompt     (int fd, void *unused);
 void save_cwds_stat (void);
@@ -108,7 +108,7 @@ extern char *mc_home;
 char *get_mc_lib_dir (void);
 
 int maybe_cd (int char_code, int move_up_dir);
-void do_possible_cd (char *dir);
+void do_possible_cd (const char *dir);
 
 #ifdef WANT_WIDGETS
 extern WButtonBar *the_bar;
@@ -127,6 +127,6 @@ void init_menu (void);
 
 struct WPanel;
 void directory_history_add   (struct WPanel *panel, const char *dir);
-int  do_panel_cd             (struct WPanel *panel, char *new_dir, enum cd_enum cd_type);
+int  do_panel_cd             (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type);
 
 #endif /* !__MAIN_H */

@@ -57,8 +57,8 @@ struct poptOption {
     int argInfo;
     void * arg;			/* depends on argInfo */
     int val;			/* 0 means don't return, just update flag */
-    char * descrip;		/* description for autohelp -- may be NULL */
-    char * argDescrip;		/* argument description for autohelp */
+    const char * descrip;	/* description for autohelp -- may be NULL */
+    const char * argDescrip;	/* argument description for autohelp */
 };
 
 struct poptAlias {

@@ -7,7 +7,7 @@ typedef void (*callfn) (void);
 
 typedef struct {
     char first_letter;
-    char *text;
+    const char *text;
     int  hot_key;
     callfn call_back;
 } menu_entry;

@@ -70,7 +70,7 @@ socket_read_block (int sock, char *dest, int len)
 }
 
 int
-socket_write_block (int sock, char *buffer, int len)
+socket_write_block (int sock, const char *buffer, int len)
 {
     int left, status;
 

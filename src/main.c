@@ -272,7 +272,7 @@ static int edit_one_file_start_line = 0;
 int midnight_shutdown = 0;
 
 /* The user's shell */
-char *shell = NULL;
+const char *shell = NULL;
 
 /* mc_home: The home of MC */
 char *mc_home = NULL;
@@ -319,7 +319,7 @@ reload_panelized (WPanel *panel)
 
 static void
 update_one_panel_widget (WPanel *panel, int force_update,
-			 char *current_file)
+			 const char *current_file)
 {
     int free_pointer;
 
@@ -367,7 +367,7 @@ panel_clean_dir (WPanel *panel)
 }
 
 static void
-update_one_panel (int which, int force_update, char *current_file)
+update_one_panel (int which, int force_update, const char *current_file)
 {
     WPanel *panel;
 
@@ -387,7 +387,7 @@ update_one_panel (int which, int force_update, char *current_file)
  * will not reload the other panel.
 */
 void
-update_panels (int force_update, char *current_file)
+update_panels (int force_update, const char *current_file)
 {
     int reload_other = !(force_update & UP_ONLY_CURRENT);
     WPanel *panel;
@@ -418,7 +418,7 @@ save_cwds_stat (void)
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 void
-do_possible_cd (char *new_dir)
+do_possible_cd (const char *new_dir)
 {
     if (!do_cd (new_dir, cd_exact))
 	message (1, _("Warning"),
@@ -514,7 +514,7 @@ repaint_screen (void)
 
 /* Wrapper for do_subshell_chdir, check for availability of subshell */
 void
-subshell_chdir (char *directory)
+subshell_chdir (const char *directory)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell) {
@@ -543,7 +543,7 @@ directory_history_add (struct WPanel *panel, const char *dir)
  *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
  */
 static char *
-get_parent_dir_name (char *cwd, char *lwd)
+get_parent_dir_name (const char *cwd, const char *lwd)
 {
     char *p;
     if (strlen (lwd) > strlen (cwd))
@@ -558,7 +558,7 @@ get_parent_dir_name (char *cwd, char *lwd)
  * Don't record change in the directory history.
  */
 static int
-_do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
+_do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 {
     char *directory, *olddir;
     char temp[MC_MAXPATHLEN];
@@ -618,7 +618,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
  * Record change in the directory history.
  */
 int
-do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
+do_panel_cd (struct WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 {
     int r;
 
@@ -629,7 +629,7 @@ do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
 }
 
 int
-do_cd (char *new_dir, enum cd_enum exact)
+do_cd (const char *new_dir, enum cd_enum exact)
 {
     return (do_panel_cd (current_panel, new_dir, exact));
 }
@@ -2088,7 +2088,7 @@ handle_args (int argc, char *argv[])
  */
 
 static int
-do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
+do_mc_filename_rename (const char *mc_dir, const char *o_name, const char *n_name)
 {
     char *full_o_name = concat_dir_and_file (home_dir, o_name);
     char *full_n_name = g_strconcat (home_dir, MC_BASE, n_name, NULL);
