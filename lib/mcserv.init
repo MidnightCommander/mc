@@ -28,7 +28,7 @@ case "$1" in
   status)
         status mcserv
 	;;
-  restart)
+  restart|reload)
         $0 stop
 	$0 start
         ;;
@@ -39,7 +39,7 @@ case "$1" in
 	echo
 	;;
   *)
-	echo "Usage: mcserv.init {start|stop|status|restart}"
+	echo "Usage: mcserv.init {start|stop|status|restart|reload}"
 	exit 1
 esac
 
