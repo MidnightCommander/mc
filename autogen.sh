@@ -11,6 +11,7 @@ set -e
 : ${ACLOCAL=aclocal}
 : ${GETTEXTIZE=gettextize}
 : ${AUTOPOINT=autopoint}
+: ${XGETTEXT=xgettext}
 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
@@ -64,6 +65,12 @@ else
     mv po/ChangeLog~ po/ChangeLog
   fi
 fi
+
+# Generate po/POTFILES.in
+$XGETTEXT --keyword=_ --keyword=N_ --output=- --stringtable-output \
+	`find -name '*.[ch]'` | \
+	sed -ne 's/^\/\* File: \([^:]*\):.*$/\1/p' | sort | \
+	uniq | grep -v 'regex.c' >po/POTFILES.in
 
 ACLOCAL_INCLUDES="-I m4"
 
