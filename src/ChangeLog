@@ -1,3 +1,8 @@
+2003-10-27  Pavel Roskin  <proski@gnu.org>
+
+	* win.c (check_movement_keys): Add support for Ctrl-PgDown,
+	Ctrl-PgUp, Ctrl-Home and Ctrl-End.
+
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
 	* terms.c: Merge ...

@@ -64,12 +64,16 @@ check_movement_keys (int key, int page_size, void *data, movefn backfn,
 	break;
 
     case KEY_HOME:
+    case KEY_M_CTRL | KEY_HOME:
+    case KEY_M_CTRL | KEY_PPAGE:
     case KEY_A1:
     case ALT ('<'):
 	(*topfn) (data, 0);
 	break;
 
     case KEY_END:
+    case KEY_M_CTRL | KEY_END:
+    case KEY_M_CTRL | KEY_NPAGE:
     case KEY_C1:
     case ALT ('>'):
 	(*bottomfn) (data, 0);
