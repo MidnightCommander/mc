@@ -573,7 +573,7 @@ smbfs_reconnect(smbfs_connection *conn, int *retries)
 
    	if (!(conn->cli = smbfs_do_connect(host, conn->service))) {
 		message (1, MSG_ERROR,
-			_(" smbfs_reconnect to %s failed\n "), conn->host);
+			_(" reconnect to %s failed\n "), conn->host);
 		g_free(host);
 		return False;
 	}
