@@ -1526,10 +1526,10 @@ molte delle inpostazioni del Midnight Commander.
 .PP
 Il comando
 .\"LINK2"
-Mostra bit
-.\"Display bits"
-mostra una finestra di dialogo dalla quale è possibile selezionare quali
-caratteri il vostro terminale è capace di mostrare.
+Aspetto
+.\"Layout"
+mostra una finestra di dialogo con la quale è possibile impostare molte
+opzioni relative a come mc appare sullo schermo.
 .PP
 Il coamndo
 .\"LINK2"
@@ -1537,6 +1537,13 @@ Conferme
 .\"Confirmation"
 mostra una finestra di dialogo dalla quale è possibile specificare per 
 quali azioni si vuole una richiesta di conferma.
+.PP
+Il comando
+.\"LINK2"
+Mostra bit
+.\"Display bits"
+mostra una finestra di dialogo dalla quale è possibile selezionare quali
+caratteri il vostro terminale è capace di mostrare.
 .PP
 Il comando
 .\"LINK2"
@@ -1551,13 +1558,6 @@ Opzioni VFS
 .\"Virtual FS"
 mostra una finestra di dialogo con la quale è possibile impostare alcune
 opzioni relative al VFS.
-.PP
-Il comando
-.\"LINK2"
-Aspetto
-.\"Layout"
-mostra una finestra di dialogo con la quale è possibile impostare molte
-opzioni relative a come mc appare sullo schermo.
 .PP
 Il comando 
 .\"LINK2"
@@ -1733,6 +1733,52 @@ vuote deve essere confermata immettendo la parola
 \&. 
 Normalmente quest'opzione è disabilitata.
 .PP
+.\"NODE "    Layout"
+.SH "    Aspetto"
+La finestra di aspetto da la possibilità di cambiare l'aspetto generale
+dello schermo. Si può specificare la visibilità della barra dei menu, 
+della riga dei comandi, della riga dei suggerimenti o della riga dei
+tasti funzione. Sulle console Linux o SCO si può impostare quante righe
+siano visibili sulla finestra di uscita.
+.PP
+Il resto dell'area dello schermo viene usata per i due pannelli directory.
+Si può specificare se l'area venga divisa dai due pannelli in direzione 
+verticale o orizzontale. La divisione può essere uguale o si puo dividere
+in maniera asimmetrica.
+.PP
+Normalmente i contenuti dei pannelli directory sono visualizzati dello stesso
+colore, ma si può specificare se i 
+.I permessi 
+e i
+.I tipi di file
+siano evidenziati con speciali
+.\"LINK2"
+Colori.
+.\"Colors"
+Se l'evidenziazione dei permessi è abilitata, i campi
+.I permessi
+e 
+.I modalità
+.\"LINK2"
+dello schermo
+.\"Listing Mode..."
+valide per l'utente che usa il Midnight Commander 
+sono evidenziati con il colore definito con la parolachiave
+.I selezionata
+ . Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati a seconda
+del tipo (per esempio directory, file core, eseguibili, ...). 
+.PP
+Se l'opzione 
+.I Mostra mini-stato
+è abilitata, una linea di informazioni di stato circa la voce correntemente
+selezionata viene mostrata sul fondo dei pannelli.
+.PP
+.\"NODE "    Confirmation"
+.SH "    Conferme"
+In questo menu è possibile configurare le opzioni di conferma per la
+cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
+per l'uscita dal programma. 
+.PP
 .\"NODE "    Display bits"
 .SH "    Mostra bit"
 Viene usata per configurare la quantità dei caratteri visibili sullo
@@ -1740,12 +1786,6 @@ schermo. Quest'impostazione può essere 7 bit, se il terminale/libreria_curses
 supporta solo sette bit in uscita, ISO-8859-1 se mostra tutti i caratteri
 nella mappa ISO-8859-1 e uscita completa a 8 bit per quei terminali che possono
 visualizzare tutti i caratteri a 8 bit.
-.PP
-.\"NODE "    Confirmation"
-.SH "    Conferme"
-In questo menu è possibile configurare le opzioni di conferma per la
-cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
-per l'uscita dal programma. 
 .PP
 .\"NODE "    Learn keys"
 .SH "    Impara tasti"
@@ -1842,46 +1882,6 @@ Vedere la sezione
 File System FTP
 .\"FTP File System"
 per ulteriori informazioni.
-.PP
-.\"NODE "    Layout"
-.SH "    Aspetto"
-La finestra di aspetto da la possibilità di cambiare l'aspetto generale
-dello schermo. Si può specificare la visibilità della barra dei menu, 
-della riga dei comandi, della riga dei suggerimenti o della riga dei
-tasti funzione. Sulle console Linux o SCO si può impostare quante righe
-siano visibili sulla finestra di uscita.
-.PP
-Il resto dell'area dello schermo viene usata per i due pannelli directory.
-Si può specificare se l'area venga divisa dai due pannelli in direzione 
-verticale o orizzontale. La divisione può essere uguale o si puo dividere
-in maniera asimmetrica.
-.PP
-Normalmente i contenuti dei pannelli directory sono visualizzati dello stesso
-colore, ma si può specificare se i 
-.I permessi 
-e i
-.I tipi di file
-siano evidenziati con speciali
-.\"LINK2"
-Colori.
-.\"Colors"
-Se l'evidenziazione dei permessi è abilitata, i campi
-.I permessi
-e 
-.I modalità
-.\"LINK2"
-dello schermo
-.\"Listing Mode..."
-valide per l'utente che usa il Midnight Commander 
-sono evidenziati con il colore definito con la parolachiave
-.I selezionata
- . Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati a seconda
-del tipo (per esempio directory, file core, eseguibili, ...). 
-.PP
-Se l'opzione 
-.I Mostra mini-stato
-è abilitata, una linea di informazioni di stato circa la voce correntemente
-selezionata viene mostrata sul fondo dei pannelli.
 .PP
 .\"NODE "    Save Setup"
 .SH "    Salva configurazione"
