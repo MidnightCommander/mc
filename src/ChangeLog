@@ -1,3 +1,7 @@
+2002-10-17  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (view_ok_to_quit): Use the same dialog as the editor.
+
 2002-10-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* Makefile.am (man2hlp_LDADD): Set to $(GLIB_LIBS).

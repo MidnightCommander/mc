@@ -397,23 +397,19 @@ static int
 view_ok_to_quit (WView *view)
 {
     int r;
-    char *text;
-    
+
     if (!view->change_list)
 	return 1;
-    
-    query_set_sel (1);
-    text = g_strconcat (_("File: \n\n    "), view->filename,
-			 _("\n\nhas been modified, do you want to save the changes?\n"), NULL);
-	    
-    r = query_dialog (_(" Save changes "), text, 2, 3, _("&Yes"), _("&No"), _("&Cancel"));
-    g_free (text);
-    
+
+    r = query_dialog (_(" Quit "),
+		      _(" File was modified, Save with exit? "), 2, 3,
+		      _("Cancel quit"), _("&Yes"), _("&No"));
+
     switch (r) {
-    case 0:
+    case 1:
 	save_edit_changes (view);
 	return 1;
-    case 1:
+    case 2:
 	free_change_list (view);
 	return 1;
     default:
