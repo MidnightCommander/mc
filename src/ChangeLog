@@ -1,5 +1,8 @@
 2001-08-30  David Martin  <dmartina@excite.es>
 
+	* util.c (size_trunc_len): Print size values with some (little)
+	sense for tiny and even wee lengths (i.e. squeezed X terminals).
+
 	* info.c (info_show_info): Move comment line just before
 	translatable message so it's shown in .po files to alert
 	translators.  The message (translated) is used to set the start

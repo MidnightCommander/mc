@@ -328,13 +328,26 @@ size_trunc_len (char *buffer, int len, off_t size)
 	len = 9;
 
     for (j = 0; suffix [j] != NULL; j++) {
+	if (size == 0) {
+	    if (j == 0) {
+		/* Empty files will print "0" even with minimal width.  */
+		g_snprintf (buffer, len + 1, "0");
+		break;
+	    }
+
+	    /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
+	    g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
+			(j > 1) ? suffix[j - 1] : "B");
+	    break;
+	}
+
 	if (size < power10 [len - (j > 0)]) {
 	    g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, suffix[j]);
 	    break;
 	}
 
-	/* Powers of 1024, no rounding.  */
-	size = size >> 10;
+	/* Powers of 1024, with rounding.  */
+	size = (size + 512) >> 10;
     }
 }
 
