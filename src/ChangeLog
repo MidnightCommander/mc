@@ -1,5 +1,8 @@
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* widget.h: Eliminate listbox_cback.  Call listbox callback
+	whenever it's defined.  Adjust all users.
+
 	* widget.h: Use exact type in the listbox callback.  Adjust all
 	legitimate users, remove all unused callbacks.
 

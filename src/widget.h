@@ -94,9 +94,8 @@ typedef struct WLEntry {
 /* Listbox actions when selecting an option: */
 enum {
     listbox_nothing,
-    listbox_finish,		/* finish dialog */
-    listbox_cback		/* call the callback routine */
-} /* listbox_action */;
+    listbox_finish		/* finish dialog automatically */
+};
 
 struct WListbox;
 typedef struct WListbox WListbox;

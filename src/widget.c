@@ -1966,36 +1966,33 @@ listbox_key (WListbox *l, int key)
     return 0;
 }
 
-static int listbox_event (Gpm_Event *event, WListbox *l);
 static int
 listbox_callback (WListbox *l, int msg, int par)
 {
-    WLEntry  *e;
+    WLEntry *e;
     /* int selected_color; Never used */
     int ret_code;
-    
-    switch (msg){
+
+    switch (msg) {
     case WIDGET_INIT:
 	return 1;
-	
+
     case WIDGET_HOTKEY:
-	if ((e = listbox_check_hotkey (l, par)) != NULL){
+	if ((e = listbox_check_hotkey (l, par)) != NULL) {
 	    listbox_select_entry (l, e);
 
+	    if (l->cback)
+		l->action = (*l->cback) (l);
+
 	    /* Take the appropriate action */
-	    if (l->action == listbox_finish){
-		l->widget.parent->running   = 0;
+	    if (l->action == listbox_finish) {
+		l->widget.parent->running = 0;
 		l->widget.parent->ret_value = B_ENTER;
-	    } else if (l->action == listbox_cback){
-		if ((*l->cback)(l) == listbox_finish){
-		    l->widget.parent->running = 0;
-		    l->widget.parent->ret_value = B_ENTER;
-		}
 	    }
 	    return 1;
 	} else
 	    return 0;
-	
+
     case WIDGET_KEY:
 	if ((ret_code = listbox_key (l, par)))
 	    listbox_draw (l, 1);
@@ -2004,7 +2001,7 @@ listbox_callback (WListbox *l, int msg, int par)
     case WIDGET_CURSOR:
 	widget_move (&l->widget, l->cursor_y, 0);
 	return 1;
-	
+
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
@@ -2018,15 +2015,15 @@ static int
 listbox_event (Gpm_Event *event, WListbox *l)
 {
     int i;
-    
+
     Dlg_head *h = l->widget.parent;
-    
+
     /* Single click */
     if (event->type & GPM_DOWN)
 	dlg_select_widget (l->widget.parent, l);
     if (!l->list)
 	return MOU_NORMAL;
-    if (event->type & (GPM_DOWN|GPM_DRAG)){
+    if (event->type & (GPM_DOWN | GPM_DRAG)) {
 	if (event->x < 0 || event->x >= l->width)
 	    return MOU_REPEAT;
 	if (event->y < 1)
@@ -2036,9 +2033,10 @@ listbox_event (Gpm_Event *event, WListbox *l)
 	    for (i = event->y - l->height; i > 0; i--)
 		listbox_fwd (l);
 	else
-            listbox_select_entry (l, listbox_select_pos (l, l->top,
-	      					         event->y - 1));
-	
+	    listbox_select_entry (l,
+				  listbox_select_pos (l, l->top,
+						      event->y - 1));
+
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
 	listbox_callback (l, WIDGET_DRAW, 0);
@@ -2047,27 +2045,24 @@ listbox_event (Gpm_Event *event, WListbox *l)
     }
 
     /* Double click */
-    if ((event->type & (GPM_DOUBLE|GPM_UP)) == (GPM_UP|GPM_DOUBLE)){
-     	if (event->x < 0 || event->x >= l->width)
-     	    return MOU_NORMAL;
-     	if (event->y < 1 || event->y > l->height)
-     	    return MOU_NORMAL;
-	
+    if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE)) {
+	if (event->x < 0 || event->x >= l->width)
+	    return MOU_NORMAL;
+	if (event->y < 1 || event->y > l->height)
+	    return MOU_NORMAL;
+
 	dlg_select_widget (l->widget.parent, l);
-	listbox_select_entry (l, listbox_select_pos (l, l->top, event->y - 1)); 
+	listbox_select_entry (l,
+			      listbox_select_pos (l, l->top,
+						  event->y - 1));
 
-	switch (l->action){
-	case listbox_nothing:
-	    break;
+	if (l->cback)
+	    l->action = (*l->cback) (l);
 
-	case listbox_finish:
+	if (l->action == listbox_finish) {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	    return MOU_NORMAL;
-
-	case listbox_cback:
-	    if ((*l->cback)(l) == listbox_finish)
-		return MOU_NORMAL;
 	}
     }
     return MOU_NORMAL;
