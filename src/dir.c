@@ -471,14 +471,12 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
     int next_free = 0;
     struct stat st;
 
-    tree_store_start_check_cwd ();
-
-    dirp = mc_opendir (".");
+    dirp = mc_opendir (path);
     if (!dirp) {
 	message (1, MSG_ERROR, _("Cannot read directory contents"));
-	tree_store_end_check ();
 	return set_zero_dir (list);
     }
+    tree_store_start_check (path);
     for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
@@ -578,15 +576,14 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
     int marked_cnt;
     GHashTable *marked_files;
 
-    tree_store_start_check_cwd ();
-    dirp = mc_opendir (".");
+    dirp = mc_opendir (path);
     if (!dirp) {
 	message (1, MSG_ERROR, _("Cannot read directory contents"));
 	clean_dir (list, count);
-	tree_store_end_check ();
 	return set_zero_dir (list);
     }
 
+    tree_store_start_check (path);
     marked_files = g_hash_table_new (g_str_hash, g_str_equal);
     alloc_dir_copy (list->size);
     for (marked_cnt = i = 0; i < count; i++) {

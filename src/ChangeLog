@@ -1,3 +1,11 @@
+2003-10-23  Pavel Roskin  <proski@gnu.org>
+
+	* treestore.c (tree_store_start_check_cwd): Eliminate.
+	(tree_store_start_check): Make globally visible.
+	* dir.c (do_load_dir): Use path supplied as argument.  Call
+	tree_store_start_check() after the directory is opened.
+	(do_reload_dir): Likewise.
+
 2003-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* dir.c (do_reload_dir): Fix memory leaks.

@@ -633,7 +633,7 @@ tree_store_mark_checked(const char *subname)
 }
 
 /* Mark the subdirectories of the current directory for delete */
-static tree_entry *
+tree_entry *
 tree_store_start_check(char *path)
 {
     tree_entry *current, *retval;
@@ -680,15 +680,6 @@ tree_store_start_check(char *path)
     }
 
     return retval;
-}
-
-tree_entry *
-tree_store_start_check_cwd(void)
-{
-    char buffer[MC_MAXPATHLEN];
-
-    mc_get_current_wd(buffer, MC_MAXPATHLEN);
-    return tree_store_start_check(buffer);
 }
 
 /* Delete subdirectories which still have the deletion mark */
