@@ -575,11 +575,6 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
 	    return -1;
 	}
 
-	if (view->s.st_size < 0) {
-	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n File too large (%d) "),
-			_file, view->s.st_size);
-	    return -1;
-	}
 	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
 	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
 	else 

@@ -1,3 +1,9 @@
+Sat Apr 17 13:04:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* view.c (do_view_init): Enable viewing of files with negative
+	st_size (This reverts parts of a patch I commited recently. Miguel 
+	provided a better fix for this issue).
+
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* view.c (regexp_search): Use unsigned longs for all of the
