@@ -1,3 +1,9 @@
+1998-12-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ext.h: GNOME edition uses a different set of .ext files. 
+
+	* lib/mc-gnome.ext.in: New file with GNOME-specific bindings. 
+
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* GNORBA integration.  We now produce two binaries: gmc and
