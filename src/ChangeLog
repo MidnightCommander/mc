@@ -1,5 +1,7 @@
 2001-11-29  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c: Make more variables static.
+
 	* cons.saver.c: Define LINUX_CONS_SAVER_C so that some parts
 	of cons.saver.h can be omitted.
 	* cons.saver.h: Declare nothing but constants if

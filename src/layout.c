@@ -112,7 +112,7 @@ int output_start_y = 0;
 /* Janne gets around this, we will only manage two of them :-) */
 #define MAX_VIEWS 2
 
-struct {
+static struct {
     int    type;
     Widget *widget;
 } panels [MAX_VIEWS];
@@ -155,7 +155,8 @@ static char *s_split_direction [2] = {
     N_("&Vertical"), 
     N_("&Horizontal")
 };
-WRadio *radio_widget;
+
+static WRadio *radio_widget;
 
 static struct {
     char   *text;
