@@ -2665,7 +2665,7 @@ static struct argp_option argp_options [] = {
     { "color",          'c', NULL, 0, N_("Force color mode."), 0 },
     { "colors", 	'C', "COLORS", 0, N_("Specify colors (use --help-colors to get a list)."), 1 },
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "dbgsubshell", 	'X', NULL, 0, N_("[DEVEL-ONLY: Debug the subshell."), 0 },
+    { "dbgsubshell", 	'X', NULL, 0, N_("[DEVEL-ONLY: Debug the subshell]"), 0 },
 #endif
     { "edit", 		'e', "EDIT", 0, N_("Startup the internal editor."), 1 },
     { "help", 		'h', NULL, 0, N_("Shows this help message."), 0 },
@@ -2693,7 +2693,7 @@ static struct argp_option argp_options [] = {
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     { "termcap", 	't', NULL, 0, N_("Activate support for the TERMCAP variable."), 0 },
 #endif
-    { "version", 	'V', NULL, 0, N_("Report versionand configuration options."), 0 },
+    { "version", 	'V', NULL, 0, N_("Report version and configuration options."), 0 },
     { "view", 		'v', NULL, 0, N_("Start up into the viewer mode."), 0 },
     { "xterm", 		'x', NULL, 0, N_("Force xterm mouse support and screen save/restore"), 0 },
     { "geometry",       GEOMETRY_KEY,  "GEOMETRY", 0, N_("Geometry for the window"), 0 },

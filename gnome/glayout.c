@@ -266,7 +266,7 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New window"),        N_("Opens a new window"), gnome_open_panel },
-	{ GNOME_APP_UI_ITEM, N_("Open Terminal"),     N_("Opens a terminal"), gnome_open_terminal },
+	{ GNOME_APP_UI_ITEM, N_("New Terminal"),     N_("Opens a terminal"), gnome_open_terminal },
 	{ GNOME_APP_UI_SEPARATOR },	
 	{ GNOME_APP_UI_ITEM, N_("Copy..."),           N_("Copy files"),       copy_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Rename/Move..."),    N_("Rename or move files"), ren_cmd },
