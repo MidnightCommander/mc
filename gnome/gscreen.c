@@ -526,6 +526,7 @@ static struct {
 	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open_with },
 	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view },
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view_unfiltered },  
+	{ N_("Edit"),            F_PANEL | F_NOTDIR,             (context_menu_callback) panel_action_edit },
 	{ "",                    0,          	                 NULL },
 	{ N_("Link..."),         F_PANEL | F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
 	{ N_("Symlink..."),      F_PANEL | F_SINGLE,             (context_menu_callback) symlink_cmd },

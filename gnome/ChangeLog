@@ -1,3 +1,7 @@
+1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Hook to invoke the editor from the context menu.
+
 Fri Sep 18 13:51:16 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.in: Consequent "make" should not rebuild gmc every time
