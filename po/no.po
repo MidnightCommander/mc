@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 2000-05-16 11:14+0200\n"
-"PO-Revision-Date: 2000-05-16 11:14+02:00\n"
+"POT-Creation-Date: 2000-05-28 12:31+0200\n"
+"PO-Revision-Date: 2000-05-28 12:33+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -497,7 +497,7 @@ msgid "Desktop"
 msgstr "Skrivebord"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:141
+#: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "Hjemmekatalog"
 
@@ -664,7 +664,7 @@ msgstr "ferdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 msgid "Password:"
 msgstr "Passord:"
 
@@ -3034,7 +3034,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:669
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
 msgid " Oops... "
 msgstr " Oops... "
 
@@ -3588,15 +3588,15 @@ msgstr " Skriv inn maskinnavn (F1 for detaljer): "
 msgid " Could not chdir to %s "
 msgstr " Kunne ikke skifte katalog til %s "
 
-#: src/cmd.c:1382 src/widget.c:1163
+#: src/cmd.c:1382 src/widget.c:1162
 msgid " Link to a remote machine "
 msgstr " Lenke til en fjern maskin "
 
-#: src/cmd.c:1388 src/widget.c:1164
+#: src/cmd.c:1388 src/widget.c:1163
 msgid " FTP to machine "
 msgstr " FTP til maskin "
 
-#: src/cmd.c:1394 src/widget.c:1165
+#: src/cmd.c:1394 src/widget.c:1164
 msgid " SMB link to machine "
 msgstr " SMB-tilkobling til maskin "
 
@@ -3731,7 +3731,7 @@ msgstr "Filen '%s' eksisterer men jeg kan ikke kjøre stat på den: %s"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/ext.c:143 src/user.c:542
+#: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3740,7 +3740,7 @@ msgstr ""
 " Kan ikke generere et unikt filnavn \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:554
+#: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3749,7 +3749,7 @@ msgstr ""
 "Kan ikke opprette midlertidig kommandofil \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:576
+#: src/ext.c:165 src/user.c:578
 msgid " Parameter "
 msgstr " Parameter "
 
@@ -3757,23 +3757,37 @@ msgstr " Parameter "
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " Kan ikke kjøre kommandoer i en katalog på et virtuelt filsystem "
 
-#: src/ext.c:412
+#: src/ext.c:414
 msgid " file error"
 msgstr " filfeil"
 
-#: src/ext.c:413
+#: src/ext.c:415
 msgid "Format of the "
 msgstr "Formatet til "
 
-#: src/ext.c:431
+#: src/ext.c:417
+msgid ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package or in case you don't\n"
+"have any, get it from ftp://ftp.nuclecu.unam.mx."
+msgstr ""
+"mc.ext filen er endret\n"
+"i versjon 3.0. Det ser ut til at installasjonen\n"
+"feilet. Vennligst hent en ny kopi fra Midnight\n"
+"Commander pakken, eller hvis du ikke har denne,\n"
+"hent den fra ftp://ftp.nuclecu.unam.mx."
+
+#: src/ext.c:432
 msgid " file error "
 msgstr " filfeil "
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid "Format of the ~/"
 msgstr "Formatet til ~/"
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3783,7 +3797,7 @@ msgstr ""
 "siden versjon 3.0. Du kan enten \n"
 "kopiere den fra "
 
-#: src/ext.c:434
+#: src/ext.c:435
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3791,7 +3805,7 @@ msgstr ""
 "mc.ext eller bruke denne\n"
 "filen som et eksempel for hvordan den skal skrives.\n"
 
-#: src/ext.c:436
+#: src/ext.c:437
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext vil bli brukt foreløpig."
 
@@ -4630,7 +4644,7 @@ msgstr " Kan ikke finne noden [Innhold] i hjelpefilen "
 msgid " Help "
 msgstr " Hjelp "
 
-#: src/help.c:766 src/user.c:687
+#: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -6013,32 +6027,44 @@ msgstr ""
 "Kan ikke skrive til %s filen:\n"
 "%s\n"
 
-#: src/user.c:271
+#: src/user.c:137
+msgid " Format error on file Extensions File "
+msgstr " Formatfeil på filtypefilen "
+
+#: src/user.c:138
+msgid " The %%var macro does not have a default "
+msgstr " %%var makroen har ikke en standardverdi "
+
+#: src/user.c:139
+msgid " The %%var macros does not have a variable "
+msgstr " %%var makroen har ingen variabel "
+
+#: src/user.c:273
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Ugyldig mønsterdefinisjon for skall \"%c\". "
 
-#: src/user.c:424
+#: src/user.c:426
 msgid " Debug "
 msgstr " Avlus "
 
-#: src/user.c:433
+#: src/user.c:435
 msgid " ERROR: "
 msgstr " FEIL: "
 
-#: src/user.c:437
+#: src/user.c:439
 msgid " True:  "
 msgstr " Sann:  "
 
-#: src/user.c:439
+#: src/user.c:441
 msgid " False: "
 msgstr " Usann: "
 
-#: src/user.c:645
+#: src/user.c:647
 msgid " Warning -- ignoring file "
 msgstr " Advarsel -- ignorerer filen "
 
-#: src/user.c:646
+#: src/user.c:648
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6047,19 +6073,18 @@ msgstr ""
 "Filen %s er ikke eid av root eller er skrivbar for alle.\n"
 "Bruk av den kan kompromittere sikkerheten"
 
-#: src/user.c:670
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Jeg kan ikke kjøre programmer når jeg er logget på en ekstern katalog "
 
-#. FIXME: this message is not quite right
 #: src/user.c:770
 #, c-format
-msgid " Empty file %s "
-msgstr " Tom fil %s "
+msgid " No appropriative entries found in %s "
+msgstr " Ingen passende oppføringer funnet i %s "
 
 #. Create listbox
-#: src/user.c:779
+#: src/user.c:776
 msgid " User menu "
 msgstr " Brukermeny "
 
@@ -6264,7 +6289,7 @@ msgstr "Fjern format"
 msgid "Format"
 msgstr "Format"
 
-#: src/widget.c:995
+#: src/widget.c:994
 msgid " History "
 msgstr " Historikk "
 
@@ -6639,141 +6664,141 @@ msgstr "Feil rapportert etter avbrudd."
 msgid "Aborted transfer would be successful."
 msgstr "Avbrutt overføring ville vært i orden."
 
-#: vfs/ftpfs.c:318
+#: vfs/ftpfs.c:315
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Kobler fra %s"
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:373
 msgid " FTP: Password required for "
 msgstr " FTP: Passord nødvendig for "
 
-#: vfs/ftpfs.c:409
+#: vfs/ftpfs.c:402
 msgid " Proxy: Password required for "
 msgstr " Proxy: Passord nødvendig for "
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:428
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: sender innloggingsnavn for proxy"
 
-#: vfs/ftpfs.c:439
+#: vfs/ftpfs.c:432
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: sender brukers passord til proxy"
 
-#: vfs/ftpfs.c:443
+#: vfs/ftpfs.c:436
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: autentisering mot proxy i orden"
 
-#: vfs/ftpfs.c:447
+#: vfs/ftpfs.c:440
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: tilkoblet til %s"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:457
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sender innloggingsnavn"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:462
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sender brukers passord"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:467
 msgid "ftpfs: logged in"
 msgstr "ftpfs: logget inn"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:482
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Innlogging ukorrekt for bruker %s "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:514
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Kunne ikke sette opp kilderuting (%s)"
 
-#: vfs/ftpfs.c:647
+#: vfs/ftpfs.c:640
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ugyldig vertsnavn."
 
-#: vfs/ftpfs.c:667
+#: vfs/ftpfs.c:660
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ugyldig vertsadresse."
 
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:683
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: setter opp forbindelse til %s"
 
-#: vfs/ftpfs.c:700
+#: vfs/ftpfs.c:693
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: tilkobling avbrutt av bruker"
 
-#: vfs/ftpfs.c:702
+#: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: tilkobling til tjener feilet: %s"
 
-#: vfs/ftpfs.c:744
+#: vfs/ftpfs.c:736
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Venter på nytt forsøk... %d (Ctrl-C for å avbryte)"
 
-#: vfs/ftpfs.c:930
+#: vfs/ftpfs.c:922
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kunne ikke sette opp passiv modus"
 
-#: vfs/ftpfs.c:1005
+#: vfs/ftpfs.c:997
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: avbryter overføring."
 
-#: vfs/ftpfs.c:1007
+#: vfs/ftpfs.c:999
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: avbrytlsesfeil: %s"
 
-#: vfs/ftpfs.c:1012
+#: vfs/ftpfs.c:1004
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: avbrudd feilet"
 
-#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1200
+#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD feilet."
 
-#: vfs/ftpfs.c:1111 vfs/ftpfs.c:1118
+#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: kunne ikke følge symbolsk lenke"
 
-#: vfs/ftpfs.c:1169
+#: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
 msgstr "Finner symlink..."
 
-#: vfs/ftpfs.c:1188
+#: vfs/ftpfs.c:1180
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Leser FTP katalog %s... %s%s"
 
-#: vfs/ftpfs.c:1189
+#: vfs/ftpfs.c:1181
 msgid "(strict rfc959)"
 msgstr "(følg rfc959)"
 
-#: vfs/ftpfs.c:1190
+#: vfs/ftpfs.c:1182
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1287
+#: vfs/ftpfs.c:1279
 msgid "ftpfs: failed"
 msgstr "ftpfs: feilet"
 
-#: vfs/ftpfs.c:1297
+#: vfs/ftpfs.c:1289
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: feilet; ingen steder å falle tilbake til"
 
-#: vfs/ftpfs.c:1360
+#: vfs/ftpfs.c:1352
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: lagrer fil %d (%d)"
 
-#: vfs/ftpfs.c:1775
+#: vfs/ftpfs.c:1767
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6906,11 +6931,11 @@ msgstr ""
 msgid "Unexpected EOF on archive file"
 msgstr "Uventet EOF i arkivfilen"
 
-#: vfs/tar.c:339 vfs/tar.c:346
+#: vfs/tar.c:336 vfs/tar.c:343
 msgid "Inconsistent tar archive"
 msgstr "Ukonsistent tar-arkiv"
 
-#: vfs/tar.c:411
+#: vfs/tar.c:413
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6921,31 +6946,31 @@ msgstr ""
 "%s\n"
 "ser ikke ut som et tar-arkiv."
 
-#: vfs/vfs.c:1151
+#: vfs/vfs.c:1139
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
 
-#: vfs/vfs.c:1794
+#: vfs/vfs.c:1781
 msgid "Could not parse:"
 msgstr "Kunne ikke fortolke:"
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
 msgstr "Flere fortolkningsfeil vil bli ignorert."
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1783
 msgid "(sorry)"
 msgstr "(beklager)"
 
-#: vfs/vfs.c:1807
+#: vfs/vfs.c:1794
 msgid "Internal error:"
 msgstr "Intern feil:"
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1805
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes overført"
