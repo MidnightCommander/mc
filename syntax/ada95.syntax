@@ -1,0 +1,67 @@
+# Scott Billings
+
+context default
+
+	keyword whole with	yellow/24
+	keyword whole use	yellow/24
+	keyword whole loop	yellow/24
+	keyword whole is	yellow/24
+	keyword whole of	yellow/24
+	keyword whole range	yellow/24
+	keyword whole abs	yellow/24
+	keyword whole delta	yellow/24
+	keyword whole return	yellow/24
+
+# prevents - keyword from interfering with comment
+	keyword --	brown/22
+
+	keyword :=	brightgreen/6
+	keyword .	brightgreen/6
+	keyword ;	brightgreen/6
+	keyword ..	brightgreen/6
+	keyword :	brightgreen/6
+	keyword (	brightgreen/6
+	keyword )	brightgreen/6
+	keyword +	brightgreen/6
+	keyword -	brightgreen/6
+	keyword /	brightgreen/6
+	keyword *	brightgreen/6
+	keyword **	brightgreen/6
+	keyword #	brightgreen/6
+	keyword =>	brightgreen/6
+	keyword ,	brightgreen/6
+	keyword '	brightgreen/6
+	keyword =	brightgreen/6
+	keyword /=	brightgreen/6
+
+	keyword whole begin	brightred/18
+	keyword whole end	brightred/18
+	keyword whole for	brightred/18
+	keyword whole while	brightred/18
+	keyword whole if	brightred/18
+	keyword whole case	brightred/18
+	keyword whole when	brightred/18
+	keyword whole elsif	brightred/18
+
+	keyword whole integer	cyan/14
+	keyword whole float	cyan/14
+	keyword whole character	cyan/14
+	keyword whole string	cyan/14
+	keyword whole boolean	cyan/14
+	keyword whole fixed	cyan/14
+	keyword whole array	cyan/14
+
+	keyword whole type	brightcyan/16
+	keyword whole subtype	brightcyan/16
+	keyword whole new_line	brightcyan/16
+	keyword whole goto	brightcyan/16
+
+	keyword whole new	magenta/23
+	keyword whole package	magenta/23
+	keyword whole procedure	magenta/23
+	keyword whole function	magenta/23
+
+context exclusive -- \n	brown/22
+context " "	green/green
+
+
