@@ -5225,7 +5225,7 @@ msgstr " &Datei "
 
 #: src/main.c:1397
 msgid " &Command "
-msgstr " Befehl "
+msgstr " &Befehl "
 
 #: src/main.c:1398
 msgid " &Options "
