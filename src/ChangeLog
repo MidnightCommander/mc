@@ -5,7 +5,7 @@
 	* util.c (reverse_string): Remove.
 	(decompress_extension): Return const char *.
 	(strip_home_and_password): Make dir const.
-	* util.c (reverse_string): Fix declarations.
+	* util.h: Fix declarations.
 
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
