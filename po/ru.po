@@ -1561,7 +1561,7 @@ msgstr " ошибка файла "
 
 #: src/ext.c:529 src/ext.c:548
 msgid "Format of the "
-msgstr "Формат "
+msgstr "Формат файла "
 
 #: src/ext.c:530
 msgid ""
@@ -1570,7 +1570,7 @@ msgid ""
 "failed. Please fetch a fresh new copy from the\n"
 "Midnight Commander package."
 msgstr ""
-"mc.ext файл изменен\n"
+"mc.ext изменен\n"
 "с версии 3.0. Возможно произошел сбой при установке.\n"
 "Пожалуйста возьмите свежую копию из пакета\n"
 "Midnight Commander."
@@ -1581,7 +1581,7 @@ msgid ""
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
-" файла изменен\n"
+" изменен\n"
 "в версии 3.0. Вы можете или\n"
 "скопировать его из "
 
