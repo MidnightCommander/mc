@@ -92,6 +92,37 @@ void init_groups (void)
 		       g_strdup (grp->gr_name));
     }
 
+#ifdef HAVE_GETGROUPLIST
+    {
+        gid_t *groups = NULL;
+        int ng = 1;
+        //struct group *grp;
+        gid_t *newgroups = NULL;
+        
+        groups = (gid_t *) malloc(ng * sizeof(gid_t));
+
+        if (getgrouplist(pwd->pw_name, pwd->pw_gid, groups, &ng) == -1) {
+                newgroups = (gid_t *) malloc(ng * sizeof(gid_t));
+                if (newgroups != NULL) {
+                        free (groups);
+                        groups = newgroups;
+                        getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng);
+                } else
+			ng = 1;
+        }
+
+        for (i = 0; i < ng; i++) {
+            grp = getgrgid(groups[i]);
+            if (grp != NULL && !g_tree_lookup (current_user_gid, GUINT_TO_POINTER ((int) grp->gr_gid))) {
+                    g_tree_insert (current_user_gid,
+				   GUINT_TO_POINTER ((int) grp->gr_gid),
+				   g_strdup (grp->gr_name));
+            }
+        }
+
+	free(groups);
+    }
+#else
     setgrent ();
     while ((grp = getgrent ()) != NULL) {
 	for (i = 0; grp->gr_mem[i]; i++) {
@@ -106,6 +137,7 @@ void init_groups (void)
 	}
     }
     endgrent ();
+#endif
 }
 
 /* Return the index of the permissions triplet */
