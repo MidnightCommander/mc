@@ -9,7 +9,7 @@ Name:      mc
 Version:   %ver
 Release:   %rel
 Copyright: GPL
-Group:     System Environment/Shells
+Group:     Applications/File
 Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
@@ -24,7 +24,7 @@ files, and poke into RPMs for specific files.  :-)
 
 %package -n mc-common
 Summary:  Midnight Commander visual shell (common files)
-Group:    Interface/Desktops
+Group:    Applications/File
 
 %description -n mc-common
 Midnight Commander is a visual shell much like a file manager, only with
@@ -34,7 +34,7 @@ the GNOME editions.
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc-common >= %{PACKAGE_VERSION}
-Group:    Interface/Desktops
+Group:    User Interface/Desktops
 
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
@@ -86,12 +86,16 @@ rm -rf $RPM_BUILD_ROOT
 %files -n mc-common
 %defattr(-, root, root)
 %{prefix}/bin/mcmfmt
-%{prefix}/lib/mc/cedit.menu
-%{prefix}/lib/mc/edit.indent.rc
-%{prefix}/lib/mc/extfs/*
-%{prefix}/lib/mc/mc.*
+%config %{prefix}/lib/mc/cedit.menu
+%config %{prefix}/lib/mc/edit.indent.rc
+%config %{prefix}/lib/mc/extfs/*
+%config %{prefix}/lib/mc/mc.ext
+%config %{prefix}/lib/mc/mc.lib
+%config %{prefix}/lib/mc/mc.menu
+%{prefix}/lib/mc/mc.hint*
+%{prefix}/lib/mc/mc.hlp*
 %{prefix}/lib/mc/syntax/*
-%{prefix}/share/locale/*
+%{prefix}/share/locale/*/LC_MESSAGES/*
 %config /etc/mc.global
 %dir %{prefix}/lib/mc
 %dir %{prefix}/lib/mc/extfs
@@ -114,6 +118,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Fri May 25 2001 Pavel Roskin <proski@gnu.org>
+- Change groups. Don't include locale directories. More config files.
+
 * Sun May 20 2001 Pavel Roskin <proski@gnu.org>
 - Don't require stylesheets, since HTML files are now in the tarball.
 
