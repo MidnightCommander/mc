@@ -1091,10 +1091,23 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 				new_panel_at (point);
 			g_free (point);
 		} else {
+			int size;
+			char *buf;
+			
+			if (gnome_metadata_get (filename,"fm-open", &size, &buf) == 0){
+				g_free (buf);
+				gmc_open_filename (filename, NULL);
+				return;
+			}
+			
+			if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
+				g_free (buf);
+				gmc_open_filename (filename, NULL);
+				return;
+			}
+
 			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe)){
 				int needs_terminal = 0;
-				int size;
-				char *buf;
 				
 				if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
 					needs_terminal = strstr (buf, "needsterminal") != 0;

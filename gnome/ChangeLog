@@ -1,5 +1,9 @@
 1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_open): Ugly.  Needs to share more
+	code here.  Use the metadata first, and the is_exe to find out how
+	to launch an application.
+
 	* gnome-file-property-dialog.c (perm_group_new): Check the return
 	value of getgrgid.
 	(perm_group_new): Do not use a grp if it does not exist.
