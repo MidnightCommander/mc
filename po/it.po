@@ -3412,7 +3412,7 @@ msgstr "&VFS liberi"
 
 #: src/main.c:1218
 msgid "&Background jobs      C-x j"
-msgstr "Processsi in &Background    C-x j"
+msgstr "Processi in &Background    C-x j"
 
 #: src/main.c:1222
 msgid "&Undelete files (ext2fs only)"
