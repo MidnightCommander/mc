@@ -225,6 +225,9 @@ video/x-ms-video:
 image/*:
 	icon-filename=@icondir@/gnome-image-generic.png
 
+image/x-psd:
+	icon-filename=@icondir@/gnome-image-psd.png
+
 text/*:
 	icon-filename=@icondir@/gnome-textfile.png
 	open=gnome-edit %f

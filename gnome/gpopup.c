@@ -34,7 +34,8 @@ enum {
 	F_PANEL		= 1 << 6,       /* Applies to files from a panel window */
 	F_MOUNTABLE     = 1 << 7,       /* Only if the device is mountable */
 	F_UNMOUNTABLE   = 1 << 8,       /* Only if the device is unmountable */
-	F_EJECTABLE     = 1 << 9        /* Only if the device is ejectable */
+	F_EJECTABLE     = 1 << 9,       /* Only if the device is ejectable */
+	F_LOCAL         = 1 << 10       /* File must be on a local file system */
 };
 
 struct action {
@@ -260,9 +261,9 @@ static struct action file_actions[] = {
 	{ N_("Unmount device"),  F_SINGLE|F_UNMOUNTABLE|F_DICON, (GtkSignalFunc) dicon_unmount },
 	{ N_("Eject device"),    F_SINGLE|F_EJECTABLE|F_DICON,   (GtkSignalFunc) dicon_eject },
 	{ "",                    F_SINGLE,   	    	  	 NULL },
-	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open },
-	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) dicon_execute },
-	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open_with },
+	{ N_("Open"),            F_LOCAL| F_PANEL | F_ALL,	 (GtkSignalFunc) panel_action_open },
+	{ N_("Open"),            F_LOCAL | F_DICON | F_ALL, 	 (GtkSignalFunc) dicon_execute },
+	{ N_("Open with"),       F_LOCAL | F_PANEL | F_ALL, 	 (GtkSignalFunc) panel_action_open_with },
 	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view },
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view_unfiltered },  
 	{ N_("Edit"),            F_PANEL | F_NOTDIR,             (GtkSignalFunc) panel_action_edit },
