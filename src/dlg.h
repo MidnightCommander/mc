@@ -207,7 +207,7 @@ void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);
 int  dlg_select_nth_widget (Dlg_head *h, int n);
 int  dlg_item_number       (Dlg_head *h);
-Widget *find_widget_type   (Dlg_head *h, callback_fn signature);
+Widget *find_widget_type   (Dlg_head *h, void *callback);
 
 /* Sets/clear the specified flag in the options field */
 #define widget_option(w,f,i) \

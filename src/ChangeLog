@@ -1,5 +1,8 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (find_widget_type): Take pointer to void to avoid casts
+	everywhere.  Adjust all callers.
+
 	* main.c (midnight_callback): Fix for the last commit - repaint
 	the panel if the search mode is unset.
 

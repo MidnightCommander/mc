@@ -2599,7 +2599,7 @@ view_adjust_size (Dlg_head *h)
     WButtonBar *bar;
 
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    view = (WView *) find_widget_type (h, (callback_fn) view_callback);
+    view = (WView *) find_widget_type (h, view_callback);
     bar = find_buttonbar (h);
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
     widget_set_size (&bar->widget, LINES - 1, 0, 1, COLS);
