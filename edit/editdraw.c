@@ -182,6 +182,13 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 
 #define edit_move(x,y) widget_move(edit, y, x);
 
+/* Set colorpair without interpreting S-Lang "emulated attributes" */
+#ifdef HAVE_SLANG
+#define lowlevel_set_color(x) SLsmg_set_color(x & 0x7F)
+#else
+#define lowlevel_set_color(x) attrset(x)
+#endif
+
 static void print_to_widget (WEdit * edit, long row, int start_col, float start_col_real, long end_col, unsigned int line[])
 {
     int x = (float) start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
@@ -196,17 +203,21 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
     {
 	unsigned int *p = line;
 	int textchar = ' ';
-	long style;
+	int style;
+	int color;
 
 	while (*p) {
 	    style = *p >> 8;
 	    textchar = *p & 0xFF;
-#ifdef HAVE_SYNTAXH
-	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
-		SLsmg_set_color ((*p & 0x007F0000) >> 16);
-#endif
-	    if (style & MOD_ABNORMAL)
+	    color = *p >> 16;
+
+	    if (style & MOD_ABNORMAL) {
+		/* Non-printable - show as a dot on black background */
+		color = 0;
 		textchar = '.';
+	    }
+	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
+		lowlevel_set_color (color);
 	    if (style & MOD_HIGHLIGHTED) {
 		set_color (EDITOR_BOLD_COLOR);
 	    } else if (style & MOD_MARKED) {
@@ -299,8 +310,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		    if (is_printable (c)) {
 			*(p++) |= c;
 		    } else {
-			*(p++) = '.';
-			*p |= (256 * MOD_ABNORMAL);
+			*(p++) |= (256 * MOD_ABNORMAL);
 		    }
 		    col++;
 		    break;
