@@ -183,8 +183,7 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
 
 static int cpio_read_head(vfs *me, vfs_s_super *super)
 {
-    cpio_find_head(me, super);
-    switch(super->u.cpio.type) {
+    switch(cpio_find_head(me, super)) {
     case CPIO_UNKNOWN:
 	return -1;
     case CPIO_BIN:

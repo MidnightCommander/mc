@@ -1,3 +1,8 @@
+2001-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c (cpio_read_head): Check return value of cpio_find_head,
+	because it's not equal to super->u.cpio.type in case of errors.
+
 2001-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_free_super): Remove i18n on commented out
