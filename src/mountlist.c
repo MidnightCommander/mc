@@ -201,13 +201,13 @@ read_filesystem_list (int need_fs_type, int all_fs)
     mlist = mtail = me;
 
 #ifdef MOUNTED_GETMNTENT1	/* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
+#ifdef MOUNTED
     {
 	struct mntent *mnt;
-	char *table = MOUNTED;
 	FILE *fp;
 	char *devopt;
 
-	fp = setmntent (table, "r");
+	fp = setmntent (MOUNTED, "r");
 	if (fp == NULL)
 	    return NULL;
 
@@ -238,6 +238,7 @@ read_filesystem_list (int need_fs_type, int all_fs)
 	if (endmntent (fp) == 0)
 	    return NULL;
     }
+#endif /* MOUNTED */
 #endif /* MOUNTED_GETMNTENT1 */
 
 #ifdef MOUNTED_GETMNTINFO	/* 4.4BSD.  */
