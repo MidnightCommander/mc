@@ -1,5 +1,9 @@
 2002-02-21  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* lib/edit.indent.rc: Use "#! /bin/sh"
+	* lib/edit.spell.rc: Likewise.
+	* lib/mcserv.init: Likewise.
+
 	* lib/cedit.menu: Eliminate bashisms.
 	Add missed `:' in AUTHOR evaluation.
 	Unset LANGUAGE and make LC_ALL empty.

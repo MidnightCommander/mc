@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 # *** External Spell Checker for Cooledit.
 # arguments:
 #	$1 - edit file name  

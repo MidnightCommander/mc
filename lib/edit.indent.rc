@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 # *** External Formatter (Indenter) for key F19 cooledit.
 # args: 
 #	$1 - edit file name  

@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/sh
 #
 # skeleton      Example file to build /etc/init.d scripts.
 #
