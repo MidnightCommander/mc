@@ -1,3 +1,8 @@
+1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gicon.c (gicon_get_icon_for_file): First try to fetch the inline
+	icon data (i.e. thumbnails), second try the generic icon filename.
+
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gdesktop.c (window_button_press): Ehen cancelling editing

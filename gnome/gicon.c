@@ -223,23 +223,23 @@ gicon_get_icon_for_file (file_entry *fe)
 
 
 	/*
-	 * 2. Try to fetch the icon from the metadata.
-	 */
-	if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
-		image = gicon_get_by_filename (buf);
-
-		if (image)
-			return image;
-	}
-
-	/*
-	 * 3. Try to fetch the icon as an inline png from the metadata.
+	 * 2. Try to fetch the icon as an inline png from the metadata.
 	 */
 	if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
 		image = gdk_imlib_inlined_png_to_image (buf, size);
 
 		free (buf);
 		
+		if (image)
+			return image;
+	}
+
+	/*
+	 * 3. Try to fetch the icon from the metadata.
+	 */
+	if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
+		image = gicon_get_by_filename (buf);
+
 		if (image)
 			return image;
 	}
