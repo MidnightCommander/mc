@@ -1,4 +1,4 @@
-#! @PERL -w
+#! @PERL@ -w
 #
 # Written by Adam Byrtek <alpha@debian.org>, 2002
 # 
