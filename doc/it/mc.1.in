@@ -2524,27 +2524,27 @@ sostituzione a scanf e printf); evidenziazione di testo maiuscolo-freccia
 MSW-MAC (solo per la console Linux); scambio tra inserimento-rimpiazzo e
 un'opzionale flusso di blocchi di testo attraverso comandi shell come indent.
 .PP
-The editor is very easy to use and requires no tutoring.
-To see what keys do what, just consult the appropriate
-pull-down menu. Other keys are: Shift movement
-keys do text highlighting. 
+L'editor è molto semplice da usare e non richiede apprendimanto.
+Per vedere cosa fanno i tasti, basta consultare il menu a
+discesa appropriato. Gli altri tasti sono: maiusc + tasti freccia
+produce la selezione del testo.
 .B Ctrl-Ins
-copies to the file
-.B cooledit.clip and 
+copia nel file 
+.B cooledit.clip e
 .B Shift-Ins
-pastes from cooledit.clip.
+incolla da cooledit.clip.
 .B Shift-Del 
-cuts to 
+taglia in 
 .B cooledit.clip, 
-and 
+e
 .B Ctrl-Del
-deletes highlighted text. The completion key also does a Return
-with an automatic indent. Mouse highlighting also works, and you
-can override the mouse as usual by holding down the shift key
-while dragging the mouse to let normal terminal mouse highlighting
-work.
+cancella il testo selezionato. Il tasto di completamento esegue anche
+un Invio con indentamento automatico.
+Funziona anche l'evidenziazione con il mouse che, come al solito, si può 
+utilizzare come in un normale terminale, premendo contemporaneamente 
+il tasto Maiuscolo mentre si clicca trascinando con il mouse.
 .PP
-To define a macro, press 
+Per definire una macro, premere 
 .B Ctrl-R
 and then type out the key
 strokes you want to be executed. Press 
