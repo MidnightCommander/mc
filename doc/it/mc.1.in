@@ -37,7 +37,7 @@ Il formato di arg è documentato nella sezione
 .\"LINK2"
 Colori
 .\"Colors"
-.
+\&.
 .TP
 .I "\-d"
 Disabilita il supporto mouse.
@@ -191,7 +191,7 @@ può essere cambiata in valori differenti modificando il file
 .\"Save Setup"
 e cambiando il parametro
 .I mouse_repeat_rate
-.
+\&.
 .PP
 Se il Commander sta funzionando con il supporto mouse, si può saltarlo
 ed ottenere il funzionamento del mouse normale (taglia e incolla di testo)
@@ -304,14 +304,14 @@ Esegue il comando
 .\"LINK2"
 Pannellizza comando
 .\"External panelize"
-.
+\&.
 .PP
 .B C-x h
 Esegue il comando
 .\"LINK2"
 aggiungi directory alla lista directory favorite
 .\"Hotlist"
-.
+\&.
 .PP
 .B M-!,
 Esegue il comando Vista filtrata, descritto in
@@ -324,14 +324,14 @@ Esegui il comando
 .\"LINK2"
 Trova file
 .\"Find File"
-.
+\&.
 .PP
 .B M-c,
 Mostra la finestra
 .\"LINK2"
 cambia dir veloce
 .\"Quick cd"
-.
+\&.
 .PP
 .B C-o,
 Quando il programma viene eseguito in una console Linux o SCO o in un xterm,
@@ -641,7 +641,7 @@ L'apparenza dei pannelli directory è modificabile tramite i menu
 .B "Sinistra"
 e
 .B "Destra"
-.
+\&.
 .PP
 .\"NODE ""    Listing Mode..."
 .SH "    Modalità Lista..."
@@ -659,7 +659,7 @@ La modalità breve mostra solo il nome del file in due colonne
 (perciò mostrando il doppio del numero dei file che nelle altre
 modalità). La modalità lunga è simile a quella del comando 
 .B "ls -l"
-. La modalità lunga usa tutta l'ampiezza dello schermo.
+\&. La modalità lunga usa tutta l'ampiezza dello schermo.
 .PP
 Se si sceglie il formato definibile dall'utente, è necessario specificare 
 il formato della vista.
@@ -683,7 +683,7 @@ mostra l'ampiezza del file.
 .B bsize,
 è una forma alternativa del formato
 .B size
-. Mostra l'ampiezza del file e per le directory mostra solo 
+\&. Mostra l'ampiezza del file e per le directory mostra solo 
 SUB-DIR o UP--DIR.
 .PP
 .B type,
@@ -787,7 +787,7 @@ La vista ad albero è abbastanza simile al comando
 .\"LINK2"
 albero directory
 .\"Directory Tree"
-. Vedere la sezione corrispondente per maggiori informazioni.
+\&. Vedere la sezione corrispondente per maggiori informazioni.
 .TP 
 .B "Vista rapida"
 In questa modalità il pannello si imposta come un
@@ -878,7 +878,7 @@ Visualizzatore Interno di File
 ma se l'opzione "Usa Visualizzatore interno" è deselezionata, verrà invocato
 un visualizzatore esterno specificato dalla variabile ambiente
 .B PAGER 
-. Se 
+\&. Se 
 .B PAGER
 non è definita, verrà invocato il comando "view". Se si usa invece il comando
 Maiusc-F3, il visualizzatore verrà invocato senza nessun tipo di formattazione
