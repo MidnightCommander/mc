@@ -525,8 +525,13 @@ static struct {
     N_("&No"), BY - 2, 37, REPLACE_NO}, {
     N_("&Yes"), BY - 2, 28, REPLACE_YES}, {
     N_("Overwrite this target?"), BY - 2, 4, 0}, {
-    N_("Target date: %s, size %d"), 6, 4, 0}, {
-    N_("Source date: %s, size %d"), 5, 4, 0}
+#if defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64
+    N_("Target date: %s, size %llu"), 6, 4, 0}, {
+    N_("Source date: %s, size %llu"), 5, 4, 0}
+#else
+    N_("Target date: %s, size %u"), 6, 4, 0}, {
+    N_("Source date: %s, size %u"), 5, 4, 0}
+#endif
 };
 
 #define ADD_RD_BUTTON(i)\
@@ -635,9 +640,9 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
     ADD_RD_LABEL (ui, 11, 0, 0);
 
     ADD_RD_LABEL (ui, 12, file_date (ui->d_stat->st_mtime),
-		  (int) ui->d_stat->st_size);
+		  (off_t) ui->d_stat->st_size);
     ADD_RD_LABEL (ui, 13, file_date (ui->s_stat->st_mtime),
-		  (int) ui->s_stat->st_size);
+		  (off_t) ui->s_stat->st_size);
 }
 
 void

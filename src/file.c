@@ -824,8 +824,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
    function calls */
 int
 copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
-	      int move_over, int delete,
-	      struct link *parent_dirs,
+	      int move_over, int delete, struct link *parent_dirs,
 	      off_t *progress_count, double *progress_bytes)
 {
     struct dirent *next;
@@ -840,8 +839,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
   retry_src_stat:
     if ((*ctx->stat_func) (s, &cbuf)) {
 	return_status =
-	    file_error (_(" Cannot stat source directory \"%s\" \n %s "),
-			s);
+	    file_error (_(" Cannot stat source directory \"%s\" \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
 	return return_status;
@@ -866,9 +864,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
     if (!S_ISDIR (cbuf.st_mode)) {
 	return_status =
-	    file_error (_
-			(" Source \"%s\" is not a directory \n %s "),
-			s);
+	    file_error (_(" Source \"%s\" is not a directory \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
 	return return_status;
@@ -910,43 +906,26 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	 * or ( /bla doesn't exist )       /tmp/\* to /bla     ->  /bla/\*
 	 */
 	if (!S_ISDIR (buf.st_mode)) {
-	    return_status =
-		file_error (_
-			    (" Destination \"%s\" must be a directory \n %s "),
-			    d);
+	    return_status = file_error(
+		_(" Destination \"%s\" must be a directory \n %s "), d);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
 	    g_free (parent_dirs);
 	    return return_status;
 	}
-#if 1
-/* Again, I'm getting curious. Is not d already what we wanted, incl.
- *  masked source basename? Is not this just a relict of the past versions? 
- *  I'm afraid this will lead into a two level deep dive :(
- *
- * I think this is indeed the problem.  I cannot remember any case where
- * we actually would like that behavior -miguel
- *
- * It's a documented feature (option `Dive into subdir if exists' in the
- * copy/move dialog). -Norbert
- */
+	/* Dive into subdir if exists */
 	if (toplevel && ctx->dive_into_subdirs) {
 	    dest_dir = concat_dir_and_file (d, x_basename (s));
-	} else
-#endif
-	{
+	} else {
 	    dest_dir = g_strdup (d);
 	    goto dont_mkdir;
 	}
     }
-  retry_dst_mkdir:
-    if (my_mkdir (dest_dir, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU)) {
-	return_status =
-	    file_error (_(" Cannot create target directory \"%s\" \n %s "),
-			dest_dir);
-	if (return_status == FILE_RETRY)
-	    goto retry_dst_mkdir;
-	goto ret;
+    while (my_mkdir (dest_dir, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU)) {
+	return_status = file_error (
+	    _(" Cannot create target directory \"%s\" \n %s "), dest_dir);
+	if (return_status != FILE_RETRY)
+	    goto ret;
     }
 
     lp = g_new (struct link, 1);
@@ -959,10 +938,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
     if (ctx->preserve_uidgid) {
 	while (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid)) {
-	    return_status =
-		file_error (_
-			    (" Cannot chown target directory \"%s\" \n %s "),
-			    dest_dir);
+	    return_status = file_error (
+		_(" Cannot chown target directory \"%s\" \n %s "), dest_dir);
 	    if (return_status != FILE_RETRY)
 		goto ret;
 	}
@@ -995,15 +972,13 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	     * dir already exists. So, we give the recursive call the flag 0
 	     * meaning no toplevel.
 	     */
-	    return_status = copy_dir_dir (ctx, path, mdpath, 0, 0,
-					  delete, parent_dirs,
-					  progress_count, progress_bytes);
+	    return_status = copy_dir_dir (ctx, path, mdpath, 0, 0, delete,
+				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
-					    progress_count, progress_bytes,
-					    0);
+					    progress_count, progress_bytes, 0);
 	    g_free (dest_file);
 	}
 	if (delete && return_status == FILE_CONT) {
@@ -1025,7 +1000,6 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 		    return_status = erase_file (ctx, path, 0, 0, 0);
 	    }
 	}
-
 	g_free (path);
     }
     mc_closedir (reading);
