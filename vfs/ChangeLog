@@ -1,3 +1,8 @@
+2000-04-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* ftpfs.c (send_ftp_command): return from vfs_s_get_path_mangle is
+	not strdupped(), so it must not be g_free'd.
+
 2000-03-29  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* fish.c: Patch by <rebel@atrey.karlin.mff.cuni.cz>: make 

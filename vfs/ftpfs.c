@@ -1440,7 +1440,6 @@ send_ftp_command(vfs *me, char *filename, char *cmd, int flags)
     if (!(rpath = vfs_s_get_path_mangle(me, filename, &super, 0)))
 	return -1;
     p = translate_path (me, super, rpath);
-    g_free(rpath);
     r = command (me, super, WAIT_REPLY, cmd, p);
     g_free (p);
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) super, NULL);
