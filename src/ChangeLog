@@ -1,3 +1,7 @@
+2004-09-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* hotlist.c (add_new_entry_input): Fix warnings.
+
 2004-09-14  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* utilunix.c (tilde_expand): Fix extra slash in result from 
