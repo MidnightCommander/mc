@@ -72,7 +72,7 @@ delete_select_channel (int fd)
 	tclosure = 0;
 	g_list_foreach (select_list, find_select_closure_callback, &fd);
 	if (tclosure){
-		g_list_remove (select_list, tclosure);
+		select_list = g_list_remove (select_list, tclosure);
 		gdk_input_remove (tclosure->tag);
 		free (tclosure);
 	} else {

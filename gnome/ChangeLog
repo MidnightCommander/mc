@@ -1,3 +1,8 @@
+Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
+
+	* gkey.c (delete_select_channel): Fixed list handling
+	with g_list_remove().
+
 1998-12-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (dnd_select_icon_pending): Added this flag that
