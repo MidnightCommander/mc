@@ -1,5 +1,7 @@
 2002-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c (login_server) [HSC_PROXY]: Fix crash.
+
 	* ftpfs.c (ftp_split_url): Implement looking up password in
 	.netrc for known user.
 

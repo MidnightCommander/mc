@@ -460,8 +460,10 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 #if defined(HSC_PROXY)
 	char *p;
 	int port;
+	char *proxyhost = NULL;
 
-	ftp_split_url (ftpfs_proxy_host, 0, &proxyname, &port, 0);
+	ftp_split_url (ftpfs_proxy_host, &proxyhost, &proxyname, &port, 0);
+	g_free (proxyhost);
 	p = g_strconcat (_(" Proxy: Password required for "), proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);
