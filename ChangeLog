@@ -1,3 +1,7 @@
+2004-11-17  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* acinclude.m4: Fix compiling mc with system slang on FreeBSD.
+
 2004-11-16  Roland Illig  <roland.illig@gmx.de>
 
 	* TODO: Checked the remaining vfs/extfs shell scripts and
