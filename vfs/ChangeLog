@@ -1,3 +1,8 @@
+2002-12-12  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/patchfs.in: Print 4-digit year.  If str2time is not
+	available, use current time, not 0.
+
 2002-12-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/urar.in: rar lists directories after files, so sort "list"

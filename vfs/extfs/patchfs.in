@@ -20,7 +20,8 @@ sub timef
 {
     # format unix time
     my @time=localtime($_[0]);
-    return sprintf "%02d-%02d-%02d %02d:%02d", $time[4]+1, $time[3], $time[5]%100, $time[2], $time[1];
+    return sprintf "%02d-%02d-%02d %02d:%02d", $time[4]+1, $time[3],
+		   $time[5] + 1900, $time[2], $time[1];
 }
 
 sub datetime
@@ -30,7 +31,7 @@ sub datetime
     if ($parsedates && defined (my $t=str2time($_[0]))) {
 	return timef($t);
     }
-    return timef(0);
+    return timef(time);
 }
 
 sub list
