@@ -1326,6 +1326,8 @@ vfs_split_text (char *p)
     char *original = p;
     int  numcols;
 
+    memset (columns, 0, sizeof (columns));
+
     for (numcols = 0; *p && numcols < MAXCOLS; numcols++){
 	while (*p == ' ' || *p == '\r' || *p == '\n'){
 	    *p = 0;

@@ -1,5 +1,8 @@
 2001-05-22  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (vfs_split_text): Fill `columns' with zeroes before
+	writing new data into it.
+
 	* fish.c (free_archive): Use `exit' instead of `logout' - the
 	later fails under non-login shells.
 	(pipeopen): Redirect stderr of ssh to /dev/null.
