@@ -327,11 +327,10 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 {
 	GtkWidget *window;
 	GdkImlibImage *im;
-	static GdkCursor *cursor;
+	GdkCursor *cursor;
 
 	if (!g_file_exists (file))
 		return NULL;
-
 
 	im = image_cache_load_image (file);
 	if (!im)
@@ -352,10 +351,9 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 
 	set_window_text (window, im, text);
 
-	if (!cursor)
-		cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW); /* FIXME: this is never freed */
-
+	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
 	gdk_window_set_cursor (window->window, cursor);
+	gdk_cursor_destroy (cursor);
 
 	return window;
 }
