@@ -1,3 +1,8 @@
+1998-06-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_update_input): The previous hack was not
+	required, the right fix was to change Gtk.
+
 1998-06-22  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 
 	* gwidget.c: Don't call gtk_entry_scroll_adjust, it is a private member

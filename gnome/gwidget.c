@@ -344,9 +344,7 @@ x_update_input (WInput *in)
 #endif
 		/* This is a private member, hopefully the widget
                    properly updates itself */
-#ifndef GTK_HAVE_ACCEL_GROUP
 		gtk_entry_adjust_scroll (GTK_ENTRY (entry));
-#endif
 		gtk_widget_queue_draw (GTK_WIDGET (entry));
 	}
 }
