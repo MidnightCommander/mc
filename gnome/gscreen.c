@@ -1816,7 +1816,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel_update_marks (panel);
 	
 	/* ministatus */
-	panel->ministatus = gtk_clip_label_new ("");
+	panel->ministatus = gtk_label_new (""); /* was a cliplabel */
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
 	gtk_widget_show (panel->ministatus);
@@ -1842,7 +1842,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_border_width (GTK_CONTAINER (frame), 3);
 
-	panel->status = gtk_clip_label_new ("");
+	panel->status = gtk_label_new (""); /* used to be a cliplabel */
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
 	gtk_container_add (GTK_CONTAINER (frame), panel->status);
