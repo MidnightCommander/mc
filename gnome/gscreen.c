@@ -523,6 +523,8 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
+	int current_selection = panel->selected;
+	
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
@@ -537,6 +539,8 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
 				break;
 			/* fallback if shift-click is pressed */
+			do_file_mark_range (panel, row, current_selection);
+			break;
 			
 		case 2:
 			do_file_mark (panel, row, !panel->dir.list[row].f.marked);

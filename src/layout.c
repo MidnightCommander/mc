@@ -140,7 +140,6 @@ static int height;
 #define MINWIDTH 10
 #define MINHEIGHT 5
 
-#define BX      12
 #define BY      12
 
 #define B_2LEFT B_USER
@@ -173,6 +172,9 @@ static struct {
     { N_("&File types"),       &filetype_mode,   0, "ft" },
     { 0, 0, 0, 0 }
 };
+
+static int first_width, second_width;
+static char *layout_title, *title1, *title2, *title3, *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
 
@@ -272,20 +274,20 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
     	old_output_lines     = -1;
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
-	draw_box (h, 1, 1, 13, 56);
-	draw_box (h, 2, 4, 6, 23);
-	draw_box (h, 2, 29, 10, 25);
-	draw_box (h, 8, 4, 4, 23);
+	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
+	draw_box (h, 2, 4, 6, first_width);
+	draw_box (h, 8, 4, 4, first_width);
+	draw_box (h, 2, 5 + first_width, 10, second_width);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, 25);
-	addstr (_(" Layout "));
+	dlg_move (h, 1, (h->cols - strlen(layout_title))/2);
+	addstr (layout_title);
 	dlg_move (h, 2, 5);
-	addstr (_(" Panel split "));
+	addstr (title1);
 	dlg_move (h, 8, 5);
-	addstr (_(" Highlight... "));
-	dlg_move (h, 2, 30);
-	addstr (_(" Other options "));
+	addstr (title2);
+	dlg_move (h, 2, 6 + first_width);
+	addstr (title3);
 	update_split ();
 	dlg_move (h, 6, 13);
 	addch ('=');
@@ -293,9 +295,9 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 9, 40);
-		addstr (_("output lines"));
-		dlg_move (h, 9, 34);
+		dlg_move (h, 9, 16 + first_width);
+		addstr (output_lines_label);
+		dlg_move (h, 9, 10 + first_width);
 		printw ("%02d", _output_lines);
 	    }
 	}
@@ -342,7 +344,7 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 9, 34);
+		dlg_move (h, 9, 10 + first_width);
 		printw ("%02d", _output_lines);
 	    }
 	}
@@ -356,49 +358,120 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 
 static void init_layout (void)
 {
-    int i = sizeof (s_split_direction) / sizeof(char*) ;
     static int i18n_layt_flag = 0;
+	static int b1, b2, b3;
+    int i = sizeof (s_split_direction) / sizeof(char*) ;
+	char* ok_button = _("&Ok");
+	char* cancel_button = _("&Cancel");
+	char* save_button = _("&Save");
     
     if (!i18n_layt_flag)
     {
-	while (i--)
-	{
-	    s_split_direction [i] = _(s_split_direction [i]);
-	}
-	i18n_layt_flag = 1;
+		register int l1;
+		
+		first_width = 19; /* length of line with '<' '>' buttons */
+		
+		layout_title = _(" Layout ");
+		title1 = _(" Panel split ");
+		title2 = _(" Highlight... ");
+		title3 = _(" Other options ");
+		output_lines_label = _("output lines");
+		
+		while (i--)
+		{
+		    s_split_direction [i] = _(s_split_direction [i]);
+			l1 = strlen (s_split_direction [i]) + 7;
+			if (l1 > first_width)
+				first_width = l1;
+		}
+
+		for (i = 0; i <= 8; i++)
+		{
+			check_options[i].text = _(check_options[i].text);
+			l1 = strlen (check_options[i].text) + 7;
+			if (l1 > first_width)
+				first_width = l1;
+		}
+
+		l1 = strlen (title1) + 1;
+		if (l1 > first_width)
+			first_width = l1;
+		
+		l1 = strlen (title2) + 1;
+		if (l1 > first_width)
+			first_width = l1;
+		
+
+		second_width = strlen (title3) + 1;
+		for (i = 0; i < 6; i++)
+		{
+			check_options[i].text = _(check_options[i].text);
+			l1 = strlen (check_options[i].text) + 7;
+			if (l1 > second_width)
+				second_width = l1;
+		}
+		if (console_flag)
+		{
+			l1 = strlen (output_lines_label) + 13;
+			if (l1 > second_width)
+				second_width = l1;
+		}
+
+		/* 
+		 * alex@bcs.zp.ua:
+		 * To be completely correct, one need to check if layout_title
+		 * does not exceed dialog length and total length of 3 buttons
+		 * allows their placement in one row. But assuming this dialog
+		 * is wide enough, I don't include such a tests.
+		 *
+		 * Now the last thing to do - properly space buttons...
+		 */
+		l1 = 11 + strlen (ok_button)   /* 14 - all brackets and inner space */
+		 	+ strlen (save_button)     /* notice: it is 3 char less because */
+			+ strlen (cancel_button);  /* of '&' char in button text */
+		
+		i = (first_width + second_width - l1) / 4;
+		b1 = 5 + i;
+		b2 = b1 + strlen(ok_button) + i + 6;
+		b3 = b2 + strlen(save_button) + i + 4;
+
+		i18n_layt_flag = 1;
     }
 
-    layout_dlg = create_dlg (0, 0, 15, 58, dialog_colors, layout_callback,
-			     "[Layout]", "layout", DLG_CENTER | DLG_GRID);
+    layout_dlg = create_dlg (0, 0, 15, first_width + second_width + 9, 
+		dialog_colors, layout_callback,
+		"[Layout]", "layout", DLG_CENTER | DLG_GRID);
 			     
     x_set_dialog_title (layout_dlg, _("Layout"));
 
     add_widgetl (layout_dlg,
-		button_new (BY, BX+25, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "c"), 
+		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "c"), 
 		XV_WLAY_RIGHTOF);
     add_widgetl (layout_dlg,
-		button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, _("&Save"), 0, 0, "s"),
+		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "s"),
 		XV_WLAY_RIGHTOF);
     add_widgetl (layout_dlg,
-		button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "o"),
+		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "o"),
 		XV_WLAY_CENTERROW);
 #ifndef HAVE_X
     if (console_flag){
 	add_widget (layout_dlg,
-		    button_new (9, 36, B_MINUS, NARROW_BUTTON, "&-", bminus_cback, 0, NULL));
+		    button_new (9, 12 + first_width, B_MINUS, NARROW_BUTTON, "&-",
+			bminus_cback, 0, NULL));
 	add_widget (layout_dlg,
-		    button_new (9, 31, B_PLUS, NARROW_BUTTON, "&+", bplus_cback, 0, NULL));
+		    button_new (9, 7 + first_width, B_PLUS, NARROW_BUTTON, "&+", 
+			bplus_cback, 0, NULL));
     }
 #endif    
 
-#define XTRACT(i) *check_options[i].variable, _(check_options[i].text), check_options[i].tkname
+#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options[i].tkname
 
     for (i = 0; i < 6; i++){
-	check_options [i].widget = check_new (8 - i, 31, XTRACT(i));
+	check_options [i].widget = check_new (8 - i, 7 + first_width, XTRACT(i));
 	add_widgetl (layout_dlg, check_options [i].widget, XV_WLAY_BELOWCLOSE);
     }
 #ifdef HAVE_XVIEW
-    add_widgetl (layout_dlg, label_new (2, 30, _("Other options"), "oo"),
+    add_widgetl (layout_dlg, label_new (2, 7 + first_width, _("Other options"), "oo"),
         XV_WLAY_NEXTCOLUMN);
     add_widgetl (layout_dlg, label_new (8, 5, _("Highlight..."), "hl"),
         XV_WLAY_NEXTCOLUMN);

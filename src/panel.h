@@ -120,7 +120,7 @@ typedef struct {
 
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
-    int estimated_total; 
+    int estimated_total;
 #endif
 } WPanel;
 
@@ -226,6 +226,7 @@ void file_mark (WPanel *panel, int index, int val);
 void do_file_mark (WPanel *panel, int index, int val);
 int  file_compute_color (int attr, file_entry *fe);
 int  file_entry_color (file_entry *fe);
+void do_file_mark_range (WPanel *panel, int r1, int r2);
 
 /* NOTE: Have to be ifdefed for HAVE_X */
 void x_panel_select_item (WPanel *panel, int index, int val);

@@ -967,24 +967,24 @@ panel_new (char *panel_name)
     panel->dir_history = history_get (panel->hist_name);
     directory_history_add (panel, panel->cwd);
 
-    panel->dir.list    = (file_entry *) malloc (MIN_FILES * sizeof (file_entry));
-    panel->dir.size    = MIN_FILES;
-    panel->active      = 0;
-    panel->filter      = 0;
-    panel->split       = 0;
-    panel->top_file    = 0;
-    panel->selected    = 0;
-    panel->marked      = 0;
-    panel->total       = 0;
-    panel->reverse     = 0;
-    panel->dirty       = 1;
-    panel->searching   = 0;
-    panel->dirs_marked = 0;
-    panel->is_panelized  = 0;
-    panel->has_dir_sizes = 0;
-    panel->format	 = 0;
-    panel->status_format = 0;    
-    panel->format_modified = 1;
+    panel->dir.list         = (file_entry *) malloc (MIN_FILES * sizeof (file_entry));
+    panel->dir.size         = MIN_FILES;
+    panel->active           = 0;
+    panel->filter           = 0;
+    panel->split            = 0;
+    panel->top_file         = 0;
+    panel->selected         = 0;
+    panel->marked           = 0;
+    panel->total            = 0;
+    panel->reverse          = 0;
+    panel->dirty            = 1;
+    panel->searching        = 0;
+    panel->dirs_marked      = 0;
+    panel->is_panelized     = 0;
+    panel->has_dir_sizes    = 0;
+    panel->format	    = 0;
+    panel->status_format    = 0;    
+    panel->format_modified  = 1;
     
     panel->panel_name = strdup (panel_name);
     panel->user_format = strdup (DEFAULT_USER_FORMAT);
@@ -1861,6 +1861,19 @@ do_file_mark (WPanel *panel, int idx, int mark)
             panel->marked--;
         }
     }
+}
+
+void
+do_file_mark_range (WPanel *panel, int r1, int r2)
+{
+	const int start = min (r1, r2);
+	const int end   = max (r1, r2);
+	int i, mark;
+
+	mark = !panel->dir.list [start].f.marked;
+	
+	for (i = start; i < end; i++)
+	    do_file_mark (panel, i, mark);
 }
 
 static void

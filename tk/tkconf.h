@@ -14,6 +14,6 @@
 #define PORT_HAS_DISPLAY_MINI_INFO       1
 
 #define frontend_run_dlg(x)        tkrundlg_event (x)
-
+#define port_shutdown_extra_fds()  
 /* Other */
 #define COMPUTE_FORMAT_ALLOCATIONS

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1998-04-03 08:01+0300\n"
+"POT-Creation-Date: 1998-04-06 11:48+0300\n"
 "PO-Revision-Date: 1998-03-27 11:07+0200\n"
 "Last-Translator: Alex Tkachenko <alex@bcs.zp.ua>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -861,11 +861,11 @@ msgid ""
 msgstr ""
 
 #: src/achown.c:72 src/boxes.c:138 src/boxes.c:273 src/boxes.c:370
-#: src/boxes.c:415 src/boxes.c:557 src/boxes.c:678 src/boxes.c:720
+#: src/boxes.c:457 src/boxes.c:599 src/boxes.c:720 src/boxes.c:762
 #: src/chmod.c:115 src/chown.c:81 src/cmd.c:832 src/file.c:1953 src/find.c:156
-#: src/hotlist.c:140 src/hotlist.c:696 src/hotlist.c:777 src/layout.c:377
-#: src/learn.c:58 src/option.c:165 src/panelize.c:89 src/view.c:411
-#: src/wtools.c:114 src/wtools.c:401 src/wtools.c:573 src/wtools.c:642
+#: src/hotlist.c:140 src/hotlist.c:696 src/hotlist.c:777 src/layout.c:365
+#: src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:411
+#: src/wtools.c:114 src/wtools.c:401 src/wtools.c:573 src/wtools.c:653
 msgid "&Cancel"
 msgstr "&ğÒÅÒ×ÁÔØ"
 
@@ -994,9 +994,9 @@ msgid "user &Mini status"
 msgstr "óÔÒÏËÁ &ÍÉÎÉ-ÓÔÁÔÕÓÁ × ÆÏÒÍÁÔÅ ĞÏÌØÚÏ×ÁÔÅÌÑ"
 
 #: gnome/gtools.c:129 src/boxes.c:137 src/boxes.c:272 src/boxes.c:372
-#: src/boxes.c:417 src/boxes.c:559 src/boxes.c:679 src/boxes.c:722
-#: src/boxes.c:831 src/file.c:1960 src/find.c:160 src/layout.c:383
-#: src/option.c:173 src/wtools.c:295 src/wtools.c:575
+#: src/boxes.c:459 src/boxes.c:601 src/boxes.c:721 src/boxes.c:764
+#: src/boxes.c:873 src/file.c:1960 src/find.c:160 src/layout.c:364
+#: src/option.c:142 src/wtools.c:295 src/wtools.c:575
 msgid "&Ok"
 msgstr "&äÁÌØÛÅ"
 
@@ -1312,11 +1312,11 @@ msgstr ""
 
 #: src/cmd.c:417
 msgid " Filter "
-msgstr ""
+msgstr " Ã¥±¼©Ò "
 
 #: src/cmd.c:417
 msgid " Set expression for filtering filenames"
-msgstr ""
+msgstr " ‰€‰»©Š ×…Ò‰ÖŠ¾¥Š €±Ñ ¹©ˆ¹Ò‰ ¥ Š¾ ¯‰»±¹×"
 
 #: src/cmd.c:501
 msgid " Select "
@@ -1462,13 +1462,17 @@ msgstr ""
 msgid " relative symlink: %s "
 msgstr ""
 
+#: src/cmd.c:1228
+msgid " Enter machine name (F1 for details): "
+msgstr " ¦×Š€¥©Š ¥ Ñ  ‰¥¾… (€Š©‰±¥ º¹ F1): "
+
 #: src/cmd.c:1257
 msgid " Link to a remote machine "
-msgstr ""
+msgstr " ­¹Š€¥¾Š¾¥Š ª ¢€‰±Š¾¾¹»  ‰¥¾¹» "
 
 #: src/cmd.c:1263
 msgid " FTP to machine "
-msgstr ""
+msgstr " FTP-ª¹Š€¥¾Š¾¥Š ª ¢€‰±Š¾¾¹»  ‰¥¾¹» "
 
 #: src/cmd.c:1273
 msgid " Socket source routing setup "
@@ -3666,7 +3670,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: src/wtools.c:644
+#: src/wtools.c:655
 msgid "Ok"
 msgstr ""
 

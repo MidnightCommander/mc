@@ -9,10 +9,6 @@ VERSION=dummy
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "dummy")
 
-if test x$ALL_LINGUAS = x; then
-    ALL_LINGUAS="fr es"
-fi
-
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
 include_additional_path="/usr/local/include /opt/gnu/include"
@@ -86,6 +82,10 @@ if test x$GCC = xyes; then
 	cc_uses_g=no
     fi
 fi
+
+dnl Debug mode is turned ON for now
+CCOPTS='-g'
+
 if test "x$CCOPTS" = x; then
     if test x$GCC = xyes; then
         if test x$system = xLinux; then
@@ -165,6 +165,7 @@ AC_CHECK_FUNCS(strerror statfs getwd strcasecmp strncasecmp)
 AC_CHECK_FUNCS(strdup memmove pwdauth truncate initgroups putenv)
 AC_CHECK_FUNCS(memset memcpy tcsetattr tcgetattr cfgetospeed)
 AC_CHECK_FUNCS(sigaction sigemptyset sigprocmask sigaddset)
+AC_CHECK_FUNCS(sysconf)
 
 SHADOWLIB=
 if test x$system = xLinux; then

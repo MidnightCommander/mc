@@ -397,6 +397,9 @@
 /* Define if you have the strncasecmp function.  */
 #undef HAVE_STRNCASECMP
 
+/* Define if you have the sysconf function.  */
+#undef HAVE_SYSCONF
+
 /* Define if you have the tcgetattr function.  */
 #undef HAVE_TCGETATTR
 

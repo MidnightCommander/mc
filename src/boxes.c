@@ -389,6 +389,48 @@ static QuickDialog confirmation =
 
 void confirm_box ()
 {
+
+#ifdef ENABLE_NLS
+	static int i18n_flag = 0;
+	
+	if (!i18n_flag)
+	{
+		register int i = sizeof(conf_widgets)/sizeof(QuickWidget) - 1;
+		int l1, maxlen = 0;
+		while (i--)
+		{
+			conf_widgets [i].text = _(conf_widgets [i].text);
+			l1 = strlen (conf_widgets [i].text) + 3;
+			if (l1 > maxlen)
+				maxlen = l1;
+		}
+
+		/*
+		 * If buttons start on 4/6, checkboxes (with some add'l space)
+		 * must take not more than it.
+		 */
+		confirmation.xlen = (maxlen + 5) * 6 / 4;
+
+		/*
+		 * And this for the case when buttons with some space to the right
+		 * do not fit within 2/6
+		 */
+		l1 = strlen (conf_widgets [0].text) + 3;
+		i = strlen (conf_widgets [1].text) + 5;
+		if (i > l1)
+			l1 = i;
+
+		i = (l1 + 3) * 6 / 2;
+		if (i > confirmation.xlen)
+			confirmation.xlen = i;
+
+		confirmation.title = _(confirmation.title);
+		
+		i18n_flag = confirmation.i18n = 1;
+	}
+
+#endif /* ENABLE_NLS */
+
     my_delete    = confirm_delete;
     my_overwrite = confirm_overwrite;
     my_execute   = confirm_execute;

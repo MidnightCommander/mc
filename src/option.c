@@ -45,21 +45,11 @@
 #define PX	4
 #define PY	2
 
-#define RX      4
-#define RY      11
+#define RX	4
+#define RY	11
 
-#define CX	4
-#define CY	2
-
-#define BX	14
 #define BY	16
-
-#define OX	33
 #define OY	2
-
-#define TX	35
-#define TY	11
-
 
 static Dlg_head *conf_dlg;
 
@@ -70,6 +60,9 @@ static int r_but;
 extern int use_internal_edit;
 
 int dummy;
+
+static int OX = 33, first_width = 27, second_width = 27;
+static char *configure_title, *title1, *title2, *title3;
 
 static struct {
     char   *text;
@@ -117,20 +110,20 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 #ifndef HAVE_X    
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
-	draw_box (h, 1, 1, 17, 62);
-	draw_box (h, PY, PX, 8, 27);
-	draw_box (h, OY, OX, 14, 27);
-	draw_box (h, RY, RX, 5, 27);
+	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
+	draw_box (h, PY, PX, 8, first_width);
+	draw_box (h, RY, RX, 5, first_width);
+	draw_box (h, OY, OX, 14, second_width);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (62 - 20)/2);
-	addstr (_(" Configure options "));
+	dlg_move (h, 1, (h->cols - strlen(configure_title))/2);
+	addstr (configure_title);
 	dlg_move (h, OY, OX+1);
-	addstr (_(" Other options "));
+	addstr (title3);
 	dlg_move (h, RY, RX+1);
-	addstr (_(" Pause after run... "));
+	addstr (title2);
 	dlg_move (h, PY, PX+1);
-	addstr (_(" Panel options "));
+	addstr (title1);
 #endif
 	break;
 
@@ -145,35 +138,86 @@ static void init_configure (void)
 {
     int i;
 	static int i18n_config_flag = 0;
+	static int b1, b2, b3;
+	char* ok_button = _("&Ok");
+	char* cancel_button = _("&Cancel");
+	char* save_button = _("&Save");
 
 	if (!i18n_config_flag)
 	{
-		i = sizeof(pause_options)/sizeof(char*);
+		register int l1;
 
+		/* Similar code is in layout.c (init_layout())  */
+
+		configure_title = _(" Configure options ");
+		title1 = _(" Panel options ");
+		title2 = _(" Pause after run... ");
+		title3 = _(" Other options ");
+
+		first_width = strlen (title1) + 1;
+		for (i = 12; i < 18; i++)
+		{
+			check_options[i].text = _(check_options[i].text);
+			l1 = strlen (check_options[i].text) + 7;
+			if (l1 > first_width)
+				first_width = l1;
+		}
+
+		i = sizeof(pause_options)/sizeof(char*);
 		while (i--)
+		{
 			pause_options [i] = _(pause_options [i]);
+			l1 = strlen (pause_options [i]) + 7;
+			if (l1 > first_width)
+				first_width = l1;
+		}
+
+		l1 = strlen (title2) + 1;
+		if (l1 > first_width)
+			first_width = l1;
+
+		OX = first_width + 5;
+
+		second_width = strlen (title3) + 1;
+		for (i = 0; i < 12; i++)
+		{
+			check_options[i].text = _(check_options[i].text);
+			l1 = strlen (check_options[i].text) + 7;
+			if (l1 > second_width)
+				second_width = l1;
+		}
+
+		l1 = 11 + strlen (ok_button)
+		 	+ strlen (save_button)
+			+ strlen (cancel_button);
+		
+		i = (first_width + second_width - l1) / 4;
+		b1 = 5 + i;
+		b2 = b1 + strlen(ok_button) + i + 6;
+		b3 = b2 + strlen(save_button) + i + 4;
 
 		i18n_config_flag = 1;
 	}
 
-    conf_dlg = create_dlg (0, 0, 19, 64, dialog_colors,
-			   configure_callback, "[Options Menu]",
-			   "option", DLG_CENTER | DLG_GRID);
+    conf_dlg = create_dlg (0, 0, 19, first_width + second_width + 9,
+		dialog_colors, configure_callback, "[Options Menu]",
+		"option", DLG_CENTER | DLG_GRID);
+
     x_set_dialog_title (conf_dlg, _("Configure options"));
 
     add_widgetl (conf_dlg,
-	button_new (BY, BX+26, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "button-cancel"),
+	button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0, "button-cancel"),
 	XV_WLAY_RIGHTOF);
 
     add_widgetl (conf_dlg,
-	button_new (BY, BX+12, B_EXIT, NORMAL_BUTTON, _("&Save"), 0, 0, "button-save"),
+	button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "button-save"),
 	XV_WLAY_RIGHTOF);
     
     add_widgetl (conf_dlg,
-        button_new (BY, BX, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "button-ok"),
+        button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "button-ok"),
         XV_WLAY_CENTERROW);
 
-#define XTRACT(i) *check_options[i].variable, _(check_options[i].text), check_options [i].tk
+#define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options [i].tk
 
     /* Add all the checkboxes */
     for (i = 0; i < 12; i++){
@@ -182,7 +226,7 @@ static void init_configure (void)
 	    XV_WLAY_BELOWCLOSE);
     }
 
-    pause_radio = radio_new (RY+1, RX+1, 3, pause_options, 1, "pause-radio");
+    pause_radio = radio_new (RY+1, RX+2, 3, pause_options, 1, "pause-radio");
     pause_radio->sel = pause_after_run;
     add_widgetl (conf_dlg, pause_radio, XV_WLAY_BELOWCLOSE);
 

@@ -18,8 +18,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
-
-
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,6 +44,9 @@
 #ifdef HAVE_SYS_SELECT_H
 #  include <sys/select.h>
 #endif
+#include <gnome.h>
+#include <X11/Xlib.h>
+#include <gdk/gdkprivate.h>
 
 int my_system (int as_shell_command, const char *shell, const char *command)
 {
@@ -65,10 +66,11 @@ int my_system (int as_shell_command, const char *shell, const char *command)
 		return -1;
 	}
 	if (pid == 0){
+		const int top = max_open_files ();
 		sigaction (SIGINT,  &save_intr, NULL);
 		sigaction (SIGQUIT, &save_quit, NULL);
 
-		for (i = 3; i < 4096; i++)
+		for (i = 3; i < top; i++)
 			close (i);
 	
 		if (as_shell_command)
@@ -126,4 +128,14 @@ exec_direct (char *path, char *argv [])
 #endif /* SCO_FLAVOR */
 
 	return WEXITSTATUS(status);
+}
+
+void
+port_shutdown_extra_fds (void)
+{
+	const int top = max_open_files ();
+	int f;
+	
+	for (f = 0; f < top; f++)
+		close (f);
 }

@@ -1225,7 +1225,7 @@ char *get_random_hint (void)
 
 #ifdef USE_NETCODE
 
-static char *machine_str = " Enter machine name (F1 for details): ";
+static char *machine_str = N_(" Enter machine name (F1 for details): ");
 
 static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
 {

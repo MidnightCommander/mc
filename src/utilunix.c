@@ -74,6 +74,26 @@ extern struct mount_entry *mount_list;
 uid_t current_user_uid;
 user_in_groups *current_user_gid;
 
+int
+max_open_files (void)
+{
+	static int files;
+
+	if (files)
+		return files;
+
+#ifdef HAVE_SYSCONF
+	files = sysconf (_SC_OPEN_MAX);
+	if (files != -1)
+		return files;
+#endif
+#ifdef OPEN_MAX
+	return files = OPEN_MAX;
+#else
+	return files = 256;
+#endif
+}
+
 void init_groups (void)
 {
     int i;
@@ -436,7 +456,8 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
     pid_t pid;
 
 #define closepipes() close(pipe0[0]);close(pipe0[1]);close(pipe1[0]);close(pipe1[1])
-
+#define is_a_pipe_fd(f) ((pipe0[0] == f) || (pipe0[1] == f) || (pipe1[0] == f) || (pipe1[1] == f))
+    
     pipe (pipe0); pipe (pipe1);
     ignore.sa_handler = SIG_IGN;
     sigemptyset (&ignore.sa_mask);
@@ -447,10 +468,10 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
     sigaction (SIGTSTP, &startup_handler, &save_stop);
 
     switch (pid = fork ()) {
-    	case -1:
+    case -1:
             closepipes ();
 	    return -1;
-	case 0:
+    case 0: {
 	    sigaction (SIGINT, &save_intr, NULL);
 	    sigaction (SIGQUIT, &save_quit, NULL);
 
@@ -458,34 +479,35 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 	    	case -1:
 	    	    closepipes ();
 	    	    exit (1);
-	    	case 0:
-		    {
+	    	case 0: {
 #define MAXARGS 16
-		        int argno;
-			char *args[MAXARGS];
-			va_list ap;
-			int nulldevice;
+		     int argno;
+		     char *args[MAXARGS];
+		     va_list ap;
+		     int nulldevice;
 
-			nulldevice = open ("/dev/null", O_WRONLY);
-		        close (0);
-			dup (pipe0 [0]);
-			close (1);
-			dup (pipe1 [1]);
-			close (2);
-			dup (nulldevice);
-			close (nulldevice);
-			closepipes ();
-			va_start (ap, command);
-			argno = 0;
-			while ((args[argno++] = va_arg(ap, char *)) != NULL)
-			  if (argno == (MAXARGS - 1)) {
-			      args[argno] = NULL;
-			      break;
-			}
-			va_end (ap);
-			execvp (command, args);
-			exit (0);
-		      }
+		     port_shutdown_extra_fds ();
+	    
+		     nulldevice = open ("/dev/null", O_WRONLY);
+		     close (0);
+		     dup (pipe0 [0]);
+		     close (1);
+		     dup (pipe1 [1]);
+		     close (2);
+		     dup (nulldevice);
+		     close (nulldevice);
+		     closepipes ();
+		     va_start (ap, command);
+		     argno = 0;
+		     while ((args[argno++] = va_arg(ap, char *)) != NULL)
+		         if (argno == (MAXARGS - 1)) {
+			     args[argno] = NULL;
+			     break;
+		         }
+		     va_end (ap);
+		     execvp (command, args);
+		     exit (0);
+		}
 	    	default:
 	    	    {
 	    	    	char buffer [8192];
@@ -508,12 +530,15 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 	   		while (waitpid (pid, &i, 0) < 0)
 			    if (errno != EINTR)
 				break;
+
+			port_shutdown_extra_fds ();
 	   		exit (i);
 	    	    }
 	    }
-	default:
-	    *the_pid = pid;
-	    break;
+    }
+    default:
+	*the_pid = pid;
+	break;
     }
     close (pipe0 [0]);
     close (pipe0 [1]);

@@ -65,9 +65,9 @@ General Comments
    I think the thumb should follow in both cases. This is a gtk comment
    I'm sure.
 
- - some dialogs only had a single entry box (like the ftp link one),
-   when you hit return in the entrybox it would be nice if that mapped
-   to hitting 'Ok' so you wouldnt have to hit Ok manually.
+DONE - some dialogs only had a single entry box (like the ftp link one),
+DONE   when you hit return in the entrybox it would be nice if that mapped
+DONE   to hitting 'Ok' so you wouldnt have to hit Ok manually.
 
 
 Panel comments
@@ -113,14 +113,14 @@ Panel comments
    folder does the same thing, but in a long file listing its nice to
    just have a button to do it.
 
- - I got several 'sigpipes' when trying to view a ftpfs file, or
-   when trying to view RPM tags via the rpmfs.
+DONE - I got several 'sigpipes' when trying to view a ftpfs file, or
+DONE   when trying to view RPM tags via the rpmfs.
+DONE
+DONE   Open a RPM, then got into the INFO pseudo-dir, the VIEW a RPM tag. It
+DONE   will sigpipe.
 
-   Open a RPM, then got into the INFO pseudo-dir, the VIEW a RPM tag. It
-   will sigpipe.
-
- - is there a way to click and drag and select all the files you drag
-   over? Sortof a interactive 'select group' option.
+DONE - is there a way to click and drag and select all the files you drag
+DONE   over? Sortof a interactive 'select group' option.
 
  - the internal viewer, in hex mode, seems to shove the ASCII side of the
    view (the rightmost column) off the side of the window.
@@ -133,8 +133,8 @@ Panel comments
    guessing no association existed - if so it should tell me and let
    me create an association
 
- - I couldnt view files inside of a RPM which I was browsing via the ftpfs
-   is this just cause I'm nuts to try?
+DONE - I couldnt view files inside of a RPM which I was browsing via the ftpfs
+DONE   is this just cause I'm nuts to try?
 
  - I couldnt get the drag from one panel to another to work reliably - 
    I would drag and get a 'Copy Link Move' window, but I couldn't

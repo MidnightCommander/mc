@@ -1,3 +1,24 @@
+1998-04-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* wtools.c (quick_callback): Process DLG_KEY events on X. 
+
+	* utilunix.c (max_open_files): new routine;  Used to figure out
+	the number of available file descriptors.
+
+Sat Apr  4 00:16:49 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/layout.c: changes to layout dialog box i18n
+
+	* src/option.c: changes to configure box i18n
+	
+	* src/cmd.c: added N_() macro for machine_str
+	
+	* src/wtools.c (real_input_dialog_help): ok/cancel buttons are places
+	symmetrically spaced relatively to center of the box. It produces
+	nicer appearance with i18n (IMO :)
+	
+	* src/boxes.c (confirm_box): i18n stuff added.
+
 Mon Apr  6 07:48:22 1998 Pavel Roskin <pavel@absolute.spb.su>
 
 	* Makefile.in: "make dist" works with bash 1.x again

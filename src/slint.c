@@ -348,6 +348,7 @@ char *color_terminals [] = {
     "linux",
     "xterm-color",
     "color-xterm",
+    "dtterm",
     "xtermc",
     "ansi",
     0

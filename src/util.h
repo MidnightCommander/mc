@@ -177,6 +177,7 @@ void message_2s (int flags, char *title, char *str1, char *str2);
 void message_3s (int flags, char *title, char *str1, char *str2, const char *str3);
 void message_1s1d (int flags, char *title, char *str, int d);
 void tell_parent (int msg);
+int max_open_files (void);
 
 #ifdef OS2_NT
 #    define PATH_SEP '\\'

@@ -433,14 +433,13 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
 	dlg_move (h, 1,((h->cols-strlen (h->data))/2));
 	addstr (h->data);
 	break;
-
+#endif	
     case DLG_KEY:
 	if (id == '\n'){
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	    break;
 	}
-#endif	
     }
     return 0;
 }
@@ -604,6 +603,17 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     } else {
 	quick_widgets [INPUT_INDEX].value = 0;
     }
+
+#ifdef ENABLE_NLS
+	/* 
+	 * An attempt to place buttons symmetrically, based on actual i18n
+	 * length of the string. It looks nicer with i18n (IMO) - alex
+	 */
+	quick_widgets [0].relative_x = len/2 + 4;
+	quick_widgets [1].relative_x = 
+		len/2 - (strlen (_(quick_widgets [1].text)) + 9);
+	quick_widgets [0].x_divisions = quick_widgets [1].x_divisions = len;
+#endif /* ENABLE_NLS */
     
     Quick_input.xlen  = len;
     Quick_input.xpos  = -1;
