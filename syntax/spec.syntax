@@ -99,105 +99,105 @@ context exclusive whole linestart %changelog EOF lightgray
 
 #sections
 context exclusive linestart %build \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %clean \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %description \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %files \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %install \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %package \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %pre \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %prep \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %preun \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %post \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 context exclusive linestart %postun \n yellow
-    keyword -l brightred
-    keyword -n brightred
-    keyword -p brightred
+    keyword whole -l brightred
+    keyword whole -n brightred
+    keyword whole -p brightred
     keyword %{ brightcyan
     keyword { brightcyan
     keyword } brightcyan
 
 #triggers
 context exclusive %triggerin \n lightgray
-    keyword -n brightmagenta
-    keyword -p brightmagenta
-    keyword -- brightmagenta
+    keyword whole -n brightmagenta
+    keyword whole -p brightmagenta
+    keyword whole -- brightmagenta
 
 context exclusive %triggerun \n lightgray
-    keyword -n brightmagenta
-    keyword -p brightmagenta
-    keyword -- brightmagenta
+    keyword whole -n brightmagenta
+    keyword whole -p brightmagenta
+    keyword whole -- brightmagenta
 
 context exclusive %triggerpostun \n lightgray
-    keyword -n brightmagenta
-    keyword -p brightmagenta
-    keyword -- brightmagenta
+    keyword whole -n brightmagenta
+    keyword whole -p brightmagenta
+    keyword whole -- brightmagenta
