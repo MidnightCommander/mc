@@ -483,7 +483,7 @@ edit_save_as_cmd (WEdit *edit)
 		    if (edit_query_dialog2
 			(_("Warning"),
 			 _(" A file already exists with this name. "),
-			 _("Overwrite"), _("Cancel"))) {
+			 _("&Overwrite"), _("&Cancel"))) {
 			edit->force |= REDRAW_COMPLETELY;
 			g_free (exp);
 			return 0;
@@ -767,7 +767,7 @@ int edit_save_confirm_cmd (WEdit * edit)
     if (edit_confirm_save) {
 	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", 0);
 /* Buttons to 'Confirm save file' query */
-	if (edit_query_dialog2 (_(" Save file "), f, _("Save"), _("Cancel")))
+	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel")))
 	    return 0;
     }
     return edit_save_cmd (edit);
@@ -803,7 +803,7 @@ edit_save_cmd (WEdit *edit)
 int edit_new_cmd (WEdit * edit)
 {
     if (edit->modified) {
-	if (edit_query_dialog2 (_ ("Warning"), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	if (edit_query_dialog2 (_ ("Warning"), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("C&ontinue"), _ ("&Cancel"))) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
@@ -842,8 +842,8 @@ edit_load_cmd (WEdit *edit)
 	if (edit_query_dialog2
 	    (_("Warning"),
 	     _(" Current text was modified without a file save. \n"
-	       " Continue discards these changes. "), _("Continue"),
-	     _("Cancel"))) {
+	       " Continue discards these changes. "), _("C&ontinue"),
+	     _("&Cancel"))) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
@@ -1002,7 +1002,7 @@ edit_block_move_cmd (WEdit *edit)
 	    (_("Warning"),
 	     _
 	     (" Block is large, you may not be able to undo this action. "),
-	     _("Continue"), _("Cancel")))
+	     _("C&ontinue"), _("&Cancel")))
 	    return;
 
     edit_push_markers (edit);
@@ -1115,7 +1115,7 @@ edit_block_delete (WEdit *edit)
 	    (_("Warning"),
 	     _
 	     (" Block is large, you may not be able to undo this action. "),
-	     _("Continue"), _("Cancel"))) {
+	     _("C&ontinue"), _("&Cancel"))) {
 	    return 1;
 	}
     }
@@ -2116,7 +2116,7 @@ edit_ok_to_exit (WEdit *edit)
 
     switch (edit_query_dialog3
 	    (_("Quit"), _(" File was modified, Save with exit? "),
-	     _("Cancel quit"), _("&Yes"), _("&No"))) {
+	     _("&Cancel quit"), _("&Yes"), _("&No"))) {
     case 1:
 	edit_push_markers (edit);
 	edit_set_markers (edit, 0, 0, 0, 0);
