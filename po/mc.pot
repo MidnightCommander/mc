@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-01-20 01:16-0500\n"
+"POT-Creation-Date: 1999-01-20 05:41-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2653,7 +2653,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:557 gnome/gcmd.c:598 gnome/gcmd.c:603 gnome/gcmd.c:607
-#: gnome/gscreen.c:2384
+#: gnome/gscreen.c:2398
 msgid "Show all files"
 msgstr ""
 
@@ -3109,79 +3109,79 @@ msgstr ""
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gprefs.c:77
+#: gnome/gprefs.c:95
 msgid "Show backup files"
 msgstr ""
 
-#: gnome/gprefs.c:81
+#: gnome/gprefs.c:99
 msgid "Show hidden files"
 msgstr ""
 
-#: gnome/gprefs.c:85
+#: gnome/gprefs.c:103
 msgid "Mix files and directories"
 msgstr ""
 
-#: gnome/gprefs.c:89
+#: gnome/gprefs.c:107
 msgid "Use shell patterns instead of regular expressions"
 msgstr ""
 
-#: gnome/gprefs.c:98
+#: gnome/gprefs.c:116
 msgid "Confirm when deleting file"
 msgstr ""
 
-#: gnome/gprefs.c:102
+#: gnome/gprefs.c:120
 msgid "Confirm when overwriting files"
 msgstr ""
 
-#: gnome/gprefs.c:106
+#: gnome/gprefs.c:124
 msgid "Confirm when executing files"
 msgstr ""
 
-#: gnome/gprefs.c:110
+#: gnome/gprefs.c:128
 msgid "Show progress while operations are being performed"
 msgstr ""
 
-#: gnome/gprefs.c:119
+#: gnome/gprefs.c:137
 msgid "VFS Timeout :"
 msgstr ""
 
-#: gnome/gprefs.c:120 gnome/gprefs.c:145
+#: gnome/gprefs.c:138 gnome/gprefs.c:163
 msgid "Seconds"
 msgstr ""
 
-#: gnome/gprefs.c:123
+#: gnome/gprefs.c:141
 msgid "Anonymous FTP password :"
 msgstr ""
 
-#: gnome/gprefs.c:127
+#: gnome/gprefs.c:145
 msgid "Always use FTP proxy"
 msgstr ""
 
-#: gnome/gprefs.c:136
+#: gnome/gprefs.c:154
 msgid "Fast directory reload"
 msgstr ""
 
-#: gnome/gprefs.c:140
+#: gnome/gprefs.c:158
 msgid "Compute totals before copying files"
 msgstr ""
 
-#: gnome/gprefs.c:144
+#: gnome/gprefs.c:162
 msgid "FTP directory cache timeout :"
 msgstr ""
 
-#: gnome/gprefs.c:153
+#: gnome/gprefs.c:171
 msgid "File display"
 msgstr ""
 
-#: gnome/gprefs.c:157
+#: gnome/gprefs.c:175
 msgid "Confirmation"
 msgstr ""
 
-#: gnome/gprefs.c:161
+#: gnome/gprefs.c:179
 msgid "VFS"
 msgstr ""
 
-#: gnome/gprefs.c:165
+#: gnome/gprefs.c:183
 msgid "Caching"
 msgstr ""
 
@@ -3274,7 +3274,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2163
+#: gnome/gprop.c:521 gnome/gscreen.c:2180
 msgid "Icon"
 msgstr ""
 
@@ -3282,159 +3282,159 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1458
+#: gnome/gscreen.c:1478
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1460
+#: gnome/gscreen.c:1480
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1462
+#: gnome/gscreen.c:1482
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1464
+#: gnome/gscreen.c:1484
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1466
+#: gnome/gscreen.c:1486
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1468
+#: gnome/gscreen.c:1488
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1470
+#: gnome/gscreen.c:1490
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1472
+#: gnome/gscreen.c:1492
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1475
+#: gnome/gscreen.c:1495
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1477
+#: gnome/gscreen.c:1497
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1479
+#: gnome/gscreen.c:1499
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1481
+#: gnome/gscreen.c:1501
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1483
+#: gnome/gscreen.c:1503
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1485
+#: gnome/gscreen.c:1505
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1487
+#: gnome/gscreen.c:1507
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1489
+#: gnome/gscreen.c:1509
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1491
+#: gnome/gscreen.c:1511
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1618
+#: gnome/gscreen.c:1638
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1628
+#: gnome/gscreen.c:1648
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1628
+#: gnome/gscreen.c:1648
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1654 gnome/screen.c:693 src/screen.c:693
+#: gnome/gscreen.c:1674 gnome/screen.c:693 src/screen.c:693
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1708
+#: gnome/gscreen.c:1728
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2163
+#: gnome/gscreen.c:2180
 msgid "Switch view to an Icon view"
 msgstr ""
 
-#: gnome/gscreen.c:2165
+#: gnome/gscreen.c:2182
 msgid "Brief"
 msgstr ""
 
-#: gnome/gscreen.c:2165
+#: gnome/gscreen.c:2182
 msgid "Switch view to show just file name and type"
 msgstr ""
 
-#: gnome/gscreen.c:2167
+#: gnome/gscreen.c:2184
 msgid "Detailed"
 msgstr ""
 
-#: gnome/gscreen.c:2167
+#: gnome/gscreen.c:2184
 msgid "Switch view to show detailed file statistics"
 msgstr ""
 
-#: gnome/gscreen.c:2169
+#: gnome/gscreen.c:2186
 msgid "Custom"
 msgstr ""
 
-#: gnome/gscreen.c:2169
+#: gnome/gscreen.c:2186
 msgid ""
 "Switch view to show custom determined statistics.  You can set this in the "
 msgstr ""
 
-#: gnome/gscreen.c:2174
+#: gnome/gscreen.c:2191
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2174
+#: gnome/gscreen.c:2191
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2176
+#: gnome/gscreen.c:2193
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2176
+#: gnome/gscreen.c:2193
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2178
+#: gnome/gscreen.c:2195
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2178
+#: gnome/gscreen.c:2195
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2181
+#: gnome/gscreen.c:2198
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2181
+#: gnome/gscreen.c:2198
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2333
+#: gnome/gscreen.c:2347
 msgid "Location:"
 msgstr ""
 
