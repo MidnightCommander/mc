@@ -35,9 +35,6 @@ application/x-troff-me:
 application/x-gzip:
 	icon-filename=@icondir@/gnome-compressed.png
 
-application/x-tex:
-	icon-filename=@icondir@/gnome-tex.png
-
 application/x-object-file:
 	icon-filename=@icondir@/gnome-objectfile.png
 
@@ -144,6 +141,7 @@ application/x-tex:
 	flags.tex.flags=needsterminal
 	open.latex."LaTeX this file"=latex %f
 	flags.latex.flags=needsterminal
+	icon-filename=@icondir@/gnome-tex.png
 
 audio/*:
 	icon-filename=@icondir@/gnome-audio.png
