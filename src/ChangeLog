@@ -1,3 +1,8 @@
+2001-06-01  Pavel Roskin  <proski@gnu.org>
+
+	* file.c (copy_file_file): Initialize src_uid, src_gid, src_mode
+	and file_size to avoid a warning.
+
 2001-05-31  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c: Include config.h before everything else.

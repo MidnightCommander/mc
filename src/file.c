@@ -474,18 +474,18 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
                 int is_toplevel_file)
 {
 #ifndef OS2_NT
-    uid_t src_uid;
-    gid_t src_gid;
+    uid_t src_uid = (uid_t) -1;
+    gid_t src_gid = (gid_t) -1;
 #endif
     char *buf = NULL;
     int  buf_size = BUF_8K;
     int  src_desc, dest_desc = 0;
     int  n_read, n_written;
-    int  src_mode;		/* The mode of the source file */
+    int  src_mode = 0;		/* The mode of the source file */
     struct stat sb, sb2;
     struct utimbuf utb;
     int  dst_exists = 0, appending = 0;
-    long n_read_total = 0, file_size;
+    long n_read_total = 0, file_size = -1;
     int  return_status, temp_status;
     struct timeval tv_transfer_start;
 
