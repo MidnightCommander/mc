@@ -1,6 +1,7 @@
 2002-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ext.c (regex_command): Use "%s" as text argument.
+	* user.c (debug_out): Likewise.
 
 	* win.c (key_name_conv_tab): Fix initialization.
 

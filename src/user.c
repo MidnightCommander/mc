@@ -434,7 +434,7 @@ debug_out (char *start, char *end, int cond)
 	    len = strlen (msg);
 	    if (len)
 		msg [len - 1] = 0;
-	    message (0, _(" Debug "), msg);
+	    message (0, _(" Debug "), "%s", msg);
 	    debug_flag = 0;
 	}
     } else {
