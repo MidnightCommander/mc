@@ -1,4 +1,4 @@
-AM_CFLAGS = @GLIB_CFLAGS@
+AM_CFLAGS = $(GLIB_CFLAGS)
 AM_CPPFLAGS = -DREGEX_MALLOC -DLIBDIR=\""$(mclibdir)/"\" \
 	-DCONFDIR=\""$(confdir)/"\" -DLOCALEDIR=\""$(localedir)/"\"
 
@@ -24,7 +24,7 @@ man2hlp_SOURCES = man2hlp.c
 if INCLUDED_SLANG
 SLANGLIB = ../slang/libmcslang.a
 else
-SLANGLIB = @LSLANG@
+SLANGLIB = $(LSLANG)
 endif
 
 if USE_EDIT
@@ -36,42 +36,37 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	@LINTL@ @LGPM@ @TERMNET@ @MCLIBS@ @LIBICONV@
+	$(LINTL) $(LGPM) $(TERMNET) $(MCLIBS) $(LIBICONV)
+
+CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
+
+SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
+	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
+	command.c command.h complete.c complete.h cons.handler.c	\
+	cons.saver.h dialog.c dialog.h dir.c dir.h dlg.c dlg.h		\
+	eregex.h ext.c ext.h file.c filegui.c filegui.h file.h		\
+	filenot.c fileopctx.c fileopctx.h find.c find.h findme.c	\
+	findme.h fs.h fsusage.c fsusage.h global.h help.c help.h	\
+	hotlist.c hotlist.h i18n.h info.c info.h key.c key.h keys.h	\
+	keyxdef.c layout.c layout.h learn.c learn.h listmode.c		\
+	listmode.h mad.c mad.h main.c main.h mem.h menu.c menu.h	\
+	mountlist.c mountlist.h mouse.c mouse.h myslang.h option.c	\
+	option.h panel.h panelize.c panelize.h poptalloca.h popt.c	\
+	poptconfig.c popt.h popthelp.c poptint.h poptparse.c profile.c	\
+	profile.h regex.c rxvt.c screen.c setup.c setup.h slint.c	\
+	subshell.c subshell.h terms.c text.c textconf.c textconf.h	\
+	tree.c tree.h treestore.c treestore.h tty.h user.c user.h	\
+	util.c util.h utilunix.c view.c view.h widget.c widget.h	\
+	win.c win.h wtools.c wtools.h
 
 if CHARSET
-CHARSET_SRC = charsets.c selcodepage.c
+mc_SOURCES = $(SRCS) $(CHARSET_SRC)
 else
-CHARSET_SRC =
+mc_SOURCES = $(SRCS)
 endif
 
-SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c	\
-	file.c win.c color.c help.c find.c profile.c user.c view.c	\
-	ext.c mouse.c setup.c dlg.c option.c info.c			\
-	tree.c widget.c chmod.c mad.c					\
-	wtools.c cons.handler.c chown.c subshell.c terms.c boxes.c	\
-	hotlist.c achown.c layout.c fsusage.c mountlist.c regex.c	\
-	complete.c slint.c command.c cmd.c panelize.c learn.c		\
-	listmode.c utilunix.c background.c rxvt.c			\
-	text.c popt.c findme.c poptparse.c poptconfig.c popthelp.c	\
-	filegui.c filenot.c fileopctx.c treestore.c textconf.c		\
-	charsets.c selcodepage.c
-
-HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
-	util.h dir.h global.h menu.h panel.h win.h mem.h		\
-	help.h profile.h dlg.h option.h tree.h info.h			\
-	widget.h chmod.h cons.saver.h mad.h wtools.h chown.h		\
-	subshell.h view.h setup.h key.h ext.h boxes.h			\
-	hotlist.h layout.h fsusage.h mountlist.h eregex.h complete.h	\
-	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
-	learn.h listmode.h background.h					\
-	textconf.h i18n.h findme.h popt.h filegui.h keys.h		\
-	poptint.h poptalloca.h fileopctx.h treestore.h			\
-	charsets.h selcodepage.h
-
-mc_SOURCES = $(SRCS) $(HDRS) $(CHARSET_SRC)
-
 EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl ncurses.patch mc.hlp
+	gindex.pl ncurses.patch mc.hlp $(CHARSET_SRC)
 
 $(srcdir)/mc.hlp: $(top_srcdir)/doc/mc.1.in $(top_srcdir)/lib/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
 	- $(MAKE) man2hlp

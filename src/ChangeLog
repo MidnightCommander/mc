@@ -1,3 +1,8 @@
+2001-09-04  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Don't use substituted values directly.  Define
+	CHARSET_SRC unconditionally.  Join SRCS and HDRS.
+
 2001-09-03  Pavel Roskin  <proski@gnu.org>
 
 	* widget.c (label_new): Don't calculate dimensions of multiline
