@@ -19,7 +19,6 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
 #include <string.h>
 #include <stdio.h>
 #ifdef NEEDS_IO_H
@@ -29,6 +28,8 @@
 #include <sys/param.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include "tty.h"
+#include "x.h"
 #include "global.h"
 #include "win.h"
 #include "color.h"

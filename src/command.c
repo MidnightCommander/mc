@@ -23,8 +23,9 @@
 
 #include <config.h>
 #include <errno.h>
-#include "tty.h"
 #include <string.h>
+#include "tty.h"
+#include "x.h"
 #include "global.h"		/* home_dir */
 #include "dlg.h"
 #include "widget.h"

@@ -1,5 +1,16 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* background.c: Include "x.h".
+	* panelize.c: Likewise.
+	* treestore.c: Likewise.
+	* user.c: Likewise.
+	* util.c: Likewise.
+	* command.c: Reorder includes. Include "x.h".
+	* complete.c: Likewise.
+	* find.c: Likewise.
+	* user.h: Declare user_menu_cmd() inconditionally.
+	* i18n.h [GAVE_GNOME]: Remove code that is now in x.h.
+
 	* tty.h [HAVE_X]: Define beep() to gdk_beep().
 
 2001-06-14  Pavel Roskin  <proski@gnu.org>

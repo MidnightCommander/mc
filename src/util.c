@@ -72,6 +72,7 @@
 #include <regex.h>
 #endif
 #include "global.h"
+#include "x.h"
 #include "profile.h"
 #include "user.h"		/* expand_format */
 #include "main.h"		/* mc_home */

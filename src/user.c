@@ -26,6 +26,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include "global.h"
+#include "x.h"
 #include "dialog.h"
 #include "color.h"
 #include "dir.h"

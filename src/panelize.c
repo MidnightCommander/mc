@@ -37,6 +37,7 @@
 #   include <pwd.h>
 #endif
 #include "tty.h"
+#include "x.h"
 #include "global.h"
 #include "win.h"
 #include "color.h"

@@ -37,6 +37,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "tty.h"
+#include "x.h"
 #include "global.h"
 #include "dlg.h"
 #include "widget.h"

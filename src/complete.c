@@ -20,7 +20,6 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
 #include <stdio.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
@@ -57,7 +56,9 @@
 #   include <pwd.h>
 #endif
 
+#include "tty.h"
 #include "global.h"
+#include "x.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

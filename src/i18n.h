@@ -6,10 +6,7 @@
 #undef ENABLE_NLS
 #endif
 
-#ifdef HAVE_GNOME
-#    define GNOME_REGEX_H
-#    include <gnome.h>
-#else
+#ifndef HAVE_GNOME
 #    ifdef ENABLE_NLS
 #    	 include <libintl.h>
 #    	 define _(String) gettext (String)
@@ -28,6 +25,6 @@
 #    	 define _(String) (String)
 #    	 define N_(String) (String)
 #    endif
-#endif
+#endif /* !HAVE_GNOME */
 
 #endif /* _MC_I18N_H_ */

@@ -6,9 +6,9 @@
 #define MIDNIGHT
 #include "../gtkedit/edit-widget.h"
 #undef MIDNIGHT
-void user_menu_cmd (WEdit *edit_widget);
 #endif
 
+void user_menu_cmd (WEdit *edit_widget);
 char *expand_format (char, int);
 int check_format_view (const char *);
 int check_format_var (const char *, char **);

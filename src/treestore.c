@@ -43,6 +43,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "global.h"
+#include "x.h"
 #include "treestore.h"
 #include "../vfs/vfs.h"
 #ifdef NEEDS_IO_H
