@@ -1,3 +1,9 @@
+2000-06-20  Jacob Berkman  <jacob@helixcode.com>
+
+	* configure.in: check for gnome-libs with window icon support
+
+	* acconfig.h: add icon define
+
 2000-06-08  Matthias Warkus  <mawa@iname.com>
 
 	* new_icons/gnome-pack-*.png: Updated.

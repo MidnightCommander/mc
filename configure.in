@@ -552,6 +552,17 @@ GNOME_INIT_HOOK([
 	    xvers="Gnome+$xvers"
 	fi
 	gnomeicondir=`gnome-config --datadir`/pixmaps
+
+dnl Check for new enough gnome-libs
+	CFLAGS_save=$CFLAGS
+	LIBS_save=$LIBS
+	CFLAGS=`gnome-config --cflags gnomeui`
+	LIBS=`gnome-config --libs gnomeui`
+
+	AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, AC_DEFINE(HAVE_GNOME_WINDOW_ICON))
+
+	CFLAGS=$CFLAGS_save
+	LIBS=$LIBS_save
 ])
 AC_SUBST(gnomeicondir)
 AC_SUBST(mx)

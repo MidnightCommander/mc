@@ -257,3 +257,5 @@
 #endif
 #endif
 
+#undef HAVE_GNOME_WINDOW_ICON
+

@@ -142,6 +142,9 @@
 #include "gcorba.h"
 #include "gmain.h"
 #include "gsession.h"
+#ifdef HAVE_GNOME_WINDOW_ICON
+#    include <libgnomeui/gnome-window-icon.h>
+#endif
 #endif
 
 /* "$Id$" */
@@ -2844,9 +2847,12 @@ handle_args (int argc, char *argv [])
     init_corba_with_args (&argc, argv, &ctx);
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
-#endif
     maybe_display_linksdir ();
+#endif
 
+#ifdef HAVE_GNOME_WINDOW_ICON
+    gnome_window_icon_set_default_from_file (ICONDIR"/i-directory.png");
+#endif
     gtk_widget_push_visual (gdk_imlib_get_visual ());
     gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
