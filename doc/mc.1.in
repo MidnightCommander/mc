@@ -2363,16 +2363,13 @@ Reverse regular expression search.
 .B F7
 Normal search / hex mode search.
 .PP
-.B C-s.
+.B C-s, F17, n.
 Start normal search if there was no previous search expression else
 find next match.
 .PP
 .B C-r.
 Start reverse search if there was no previous search expression else
 find next match.
-.PP
-.B n.
-Find next match.
 .PP
 .B F8
 Toggle Raw/Parsed mode: This will show the file as found on disk or if
@@ -2404,8 +2401,11 @@ Scroll one line backward.
 .B C-l
 Refresh the screen.
 .PP
+.B C-o
+Switch to the subshell and show the command screen.
+.PP
 .B !
-Spawn a shell in the currently working directory.
+Like C-o, but run a new shell if the subshell is not running.
 .PP
 .B "[n] m"
 Set the mark n.
