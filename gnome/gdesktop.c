@@ -312,10 +312,10 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 }
 #endif /* OLD_DND */
 
-static int operation_value;
+static GdkDragAction operation_value;
 
 static void
-set_option (GtkWidget *widget, int value)
+set_option (GtkWidget *widget, GdkDragAction value)
 {
 	operation_value = value;
 	gtk_main_quit ();
@@ -324,48 +324,46 @@ set_option (GtkWidget *widget, int value)
 static void
 option_menu_gone ()
 {
-	operation_value = -1;
+	operation_value = GDK_ACTION_ASK;
 	gtk_main_quit ();
 }
 
-static int
+static GdkDragAction
 get_operation (guint32 timestamp, int x, int y)
 {
 	static GtkWidget *menu;
-	
+
 	if (!menu){
 		GtkWidget *item;
 		
 		menu = gtk_menu_new ();
 
 		item = gtk_menu_item_new_with_label (_("Copy"));
-		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_COPY);
+		gtk_signal_connect (GTK_OBJECT (item), "activate",
+				    GTK_SIGNAL_FUNC(set_option), (void *) GDK_ACTION_COPY);
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
 		
 		item = gtk_menu_item_new_with_label (_("Move"));
-		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_MOVE);
+		gtk_signal_connect (GTK_OBJECT (item), "activate",
+				    GTK_SIGNAL_FUNC(set_option), (void *) GDK_ACTION_MOVE);
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
 
 		/* Not yet implemented the Link bits, so better to not show what we dont have */
 		item = gtk_menu_item_new_with_label (_("Link"));
-		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_LINK);
+		gtk_signal_connect (GTK_OBJECT (item), "activate",
+				    GTK_SIGNAL_FUNC(set_option), (void *) GDK_ACTION_LINK);
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
 
 		gtk_signal_connect (GTK_OBJECT (menu), "hide", GTK_SIGNAL_FUNC(option_menu_gone), 0);
 	} 
 
-	/* Here, we could set the mask parameter (the last NULL) to a valid variable
-	 * and find out if the shift/control keys were set and do something smart
-	 * about that
-	 */
-	
 	gtk_widget_set_uposition (menu, x, y);
 
 	/* FIXME: We should catch any events that escape this menu and cancel it */
-	operation_value = -1;
+	operation_value = GDK_ACTION_ASK;
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 1, timestamp);
 	gtk_grab_add (menu);
 	gtk_main ();
@@ -375,41 +373,31 @@ get_operation (guint32 timestamp, int x, int y)
 	return operation_value;
 }
 
-/* Used by check_window_id_in_one_panel and find_panel_owning_window_id for finding
+/*
+ * Used by check_window_id_in_one_panel and find_panel_owning_window_id for finding
  * the panel that contains the specified window id (used to figure where the drag
  * started)
  */
 static WPanel *temp_panel;
 
 static void
-check_window_id_in_one_panel (gpointer data, gpointer user_data)
+check_window_in_one_panel (gpointer data, gpointer user_data)
 {
 	PanelContainer *pc    = (PanelContainer *) data;
-	int id                = (int) user_data;
+	GdkWindow *window     = user_data;
 	WPanel *panel         = pc->panel;
-	GdkWindowPrivate  *gdk_wp;
 
 	if (panel->list_type == list_icons){
 		GnomeIconList *icon_list = GNOME_ICON_LIST (panel->icons);
-		
-		gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (icon_list)->window;
 
-		if (gdk_wp->xwindow == id){
+		if (window == GTK_WIDGET (icon_list)->window){
 			temp_panel = panel;
 			return;
 		}
 	} else {
 		GtkCList *clist       = GTK_CLIST (panel->list);
-		
-		gdk_wp = (GdkWindowPrivate *) clist->clist_window;
-		if (gdk_wp->xwindow == id){
-			temp_panel = panel;
-			return;
-		}
-		
-		gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (clist)->window;
-		
-		if (gdk_wp->xwindow == id){
+
+		if (window == GTK_CLIST (panel->list)->clist_window){
 			temp_panel = panel;
 			return;
 		}
@@ -417,56 +405,58 @@ check_window_id_in_one_panel (gpointer data, gpointer user_data)
 }
 
 static WPanel *
-find_panel_owning_window_id (int id)
+find_panel_owning_window (GdkWindow *window)
 {
 	temp_panel = NULL;
-	g_list_foreach (containers, check_window_id_in_one_panel, (gpointer) id);
+	g_list_foreach (containers, check_window_in_one_panel, window);
+
 	return temp_panel;
 }
 
 static void
-perform_drop_on_directory (WPanel *source_panel, int operation, char *dest)
+perform_drop_on_directory (WPanel *source_panel, GdkDragAction action, char *dest)
 {
-	switch (operation){
-	case OPER_COPY:
+	switch (action){
+	case GDK_ACTION_COPY:
 		panel_operate (source_panel, OP_COPY, dest);
 		break;
 		
-	case OPER_MOVE:
+	case GDK_ACTION_MOVE:
 		panel_operate (source_panel, OP_MOVE, dest);
 		break;
 	}
 }
 
-#if OLD_DND
 static void
-perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *dest)
+perform_drop_manually (GList *names, GdkDragAction action, char *dest)
 {
 	struct stat buf;
-	int count = event->data_numbytes;
-	char *p   = event->data;
-	int len;
 
-	switch (operation){
-	case OPER_COPY:
+	switch (action){
+	case GDK_ACTION_COPY:
 		create_op_win (OP_COPY, 0);
 		break;
 		
-	case OPER_MOVE:
+	case GDK_ACTION_MOVE:
 		create_op_win (OP_MOVE, 0);
 		break;
+
+	default:
+		g_assert_not_reached ();
 	}
+
 	file_mask_defaults ();
-	
-	do {
+
+	for (; names; names = names->next){
+		char *p = names->data;
 		char *tmpf;
 		int res, v;
 		
-		len = 1 + strlen (p);
-		count -= len;
-		
-		switch (operation){
-		case OPER_COPY:
+		if (strncmp (p, "file:", 5) == 0)
+			p += 5;
+				
+		switch (action){
+		case GDK_ACTION_COPY:
 			tmpf = concat_dir_and_file (dest, x_basename (p));
 			do {
 				res = mc_stat (p, &buf);
@@ -484,7 +474,7 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 			free (tmpf);
 			break;
 			
-		case OPER_MOVE:
+		case GDK_ACTION_MOVE:
 			tmpf = concat_dir_and_file (dest, x_basename (p));
 			do {
 				res = mc_stat (p, &buf);
@@ -501,63 +491,33 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 			} while (res != 0);
 			free (tmpf);
 			break;
+
+		default:
+			g_assert_not_reached ();
 		}
-		p += len;
-	} while (count > 0);
-	
+	}
+
 	destroy_op_win ();
 }
 
 static void
-do_symlinks (GdkEventDropDataAvailable *event, char *dest)
+do_symlinks (GList *names, char *dest)
 {
-	int count = event->data_numbytes;
-	char *p = event->data;
-	int len;
-
-	do {
+	for (; names; names = names->next){
 		char *full_dest_name;
-		len = 1 + strlen (p);
-		count -= len;
+		char *name = names->data;
 
-		full_dest_name = concat_dir_and_file (dest, x_basename (p));
-		mc_symlink (p, full_dest_name);
+		full_dest_name = concat_dir_and_file (dest, x_basename (name));
+		if (strncmp (name, "file:", 5) == 0)
+			mc_symlink (name+5, full_dest_name);
+		else
+			mc_symlink (name, full_dest_name);
+
 		free (full_dest_name);
-		p += len;
-	} while (count > 0);
+	} 
 }
 
-void
-drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually)
-{
-	WPanel *source_panel;
-	int operation;
-	
-	operation = get_operation (event->timestamp, event->coords.x, event->coords.y);
-
-	if (operation == -1)
-		return;
-	
-	/* Optimization: if we are dragging from the same process, we can
-	 * display a nicer status bar.
-	 */
-	source_panel = find_panel_owning_window_id (event->requestor);
-
-	/* Symlinks do not use any panel/file.c optimization */
-	if (operation == OPER_LINK){
-		do_symlinks (event, dest);
-		return;
-	}
-	
-	if (source_panel  && !force_manually){
-		perform_drop_on_directory (source_panel, operation, dest);
-		update_one_panel_widget (source_panel, 0, UP_KEEPSEL);
-		panel_update_contents (source_panel);
-	} else
-		perform_drop_manually (operation, event, dest);
-	return;
-}
-
+#if OLD_DND
 static char **
 drops_from_event (GdkEventDropDataAvailable *event, int *argc)
 {
@@ -593,6 +553,57 @@ drops_from_event (GdkEventDropDataAvailable *event, int *argc)
 	return argv;
 }
 #endif /* OLD_DND */
+
+void
+drop_on_directory (GtkSelectionData *sel_data, GdkDragContext *context,
+		   GdkDragAction action, char *dest, int force_manually)
+{
+	WPanel *source_panel;
+	GList *names;
+
+	g_warning ("Figure out the data type\n");
+	if (sel_data->data == NULL)
+		return;
+
+	printf ("action=%d\n", action);
+	if (action == GDK_ACTION_ASK){
+		g_warning ("I need the event here\n");
+#if 0
+		action = get_operation (event->timestamp, event->coords.x, event->coords.y);
+#endif
+	}
+
+	printf ("action=%d\n", action);
+	if (action == GDK_ACTION_ASK)
+		return;
+	
+	/*
+	 * Optimization: if we are dragging from the same process, we can
+	 * display a nicer status bar.
+	 */
+	source_panel = find_panel_owning_window (context->source_window);
+
+	printf ("SOurce_Panel=%p\n", source_panel);
+
+	names = gnome_uri_list_extract_uris ((char *)sel_data->data);
+
+	/* Symlinks do not use any panel/file.c optimization */
+	if (action == GDK_ACTION_LINK){
+		do_symlinks (names, dest);
+		gnome_uri_list_free_strings (names);
+		return;
+	}
+	
+	if (source_panel  && !force_manually){
+		perform_drop_on_directory (source_panel, action, dest);
+		update_one_panel_widget (source_panel, 0, UP_KEEPSEL);
+		panel_update_contents (source_panel);
+	} else
+		perform_drop_manually (names, action, dest);
+
+	gnome_uri_list_free_strings (names);
+	return;
+}
 
 /*
  * destroys a desktop_icon_t structure and anything that was held there,

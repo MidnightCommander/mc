@@ -442,7 +442,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	if (width != -1 && height != -1)
 		gtk_widget_set_usize (GTK_WIDGET (app), width, height);
 	else
-		gtk_widget_set_usize (GTK_WIDGET (app), 500, 360);
+		gtk_widget_set_usize (GTK_WIDGET (app), 480, 360);
 	if (xpos != -1 && ypos != -1)
 		gtk_widget_set_uposition (GTK_WIDGET (app), xpos, ypos);
 

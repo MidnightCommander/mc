@@ -1,3 +1,11 @@
+1998-10-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_icon_display): Small size adjustment.
+
+	* glayout.c (create_container): Small size adjustment.
+
+	* gmain.c (xtoolkit_create_dialog): Center windows.
+
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_select_item): Force a canvas update when an icon

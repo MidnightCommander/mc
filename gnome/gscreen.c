@@ -64,16 +64,15 @@ static char *drag_types [] = { "text/plain", "file:ALL", "url:ALL" };
 static char *drop_types [] = { "url:ALL" };
 #endif
 
-enum {
-	TARGET_URI_LIST,
-	TARGET_URL_LIST,
-	TARGET_TEXT_PLAIN,
-};
-
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/url-list", 0, TARGET_URL_LIST },
 	{ "text/plain",    0, TARGET_TEXT_PLAIN },
+};
+
+static GtkTargetEntry drop_types [] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/url-list", 0, TARGET_URL_LIST },
 };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
@@ -1023,6 +1022,94 @@ panel_drag_data_get (GtkWidget        *widget,
 	}
 }
 
+/**
+ * panel_drag_data_delete:
+ *
+ * Invoked when the destination requests the information to be deleted
+ * possibly because the operation was MOVE.
+ */
+static void
+panel_drag_data_delete (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
+{
+	printf ("Destination request we delete the data we sent\n");
+}
+
+/**
+ * panel_icon_list_drag_data_received:
+ *
+ * Invoked on the target side of a Drag and Drop operation when data has been
+ * dropped.
+ */
+static void
+panel_icon_list_drag_data_received (GtkWidget          *widget,
+				    GdkDragContext     *context,
+				    gint                x,
+				    gint                y,
+				    GtkSelectionData   *selection_data,
+				    guint               info,
+				    guint32             time,
+				    WPanel              *panel)
+{
+	GnomeIconList *gil = GNOME_ICON_LIST (widget);
+	char *dir;
+	int idx;
+	
+	idx = gnome_icon_list_get_icon_at (gil, x, y);
+	if (idx == -1)
+		dir = g_strdup (panel->cwd);
+	else {
+		if (panel->dir.list [idx].f.link_to_dir ||
+		    S_ISDIR (panel->dir.list [idx].buf.st_mode))
+			dir = concat_dir_and_file (panel->cwd, panel->dir.list [idx].fname);
+		else
+			dir = g_strdup (panel->cwd);
+	}
+	drop_on_directory (selection_data, context, context->suggested_action, dir, 0);
+	free (dir);
+
+	update_one_panel_widget (panel, 0, UP_KEEPSEL);
+	panel_update_contents (panel);
+}
+
+/**
+ * panel_clist_drag_data_received:
+ *
+ * Invoked on the target side of a Drag and Drop operation when data has been
+ * dropped.
+ */
+static void
+panel_clist_drag_data_received (GtkWidget          *widget,
+				GdkDragContext     *context,
+				gint                x,
+				gint                y,
+				GtkSelectionData   *selection_data,
+				guint               info,
+				guint32             time,
+				WPanel              *panel)
+{
+	GtkCList *clist = GTK_CLIST (widget);
+	char *dir;
+	int idx;
+	int row;
+	
+	if (gtk_clist_get_selection_info (clist, x, y, &row, NULL) == 0)
+		dir = g_strdup (panel->cwd);
+	else {
+		g_assert (row < panel->count);
+
+		if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
+		    panel->dir.list [row].f.link_to_dir)
+			dir = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
+		else 
+			dir = g_strdup (panel->cwd);
+	}
+	drop_on_directory (selection_data, context, context->suggested_action, dir, 0);
+	free (dir);
+
+	update_one_panel_widget (panel, 0, UP_KEEPSEL);
+	panel_update_contents (panel);
+}
+
 #ifdef OLD_DND
 /*
  * Handler for text/plain and url:ALL drag types
@@ -1145,10 +1232,6 @@ panel_clist_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *d
 	else {
 		g_assert (row < panel->count);
 
-		if (S_ISDIR (panel->dir.list [row].buf.st_mode))
-			drop_dir = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
-		else 
-			drop_dir = panel->cwd;
 	}
 	drop_on_directory (data, drop_dir, 0);
 
@@ -1233,6 +1316,11 @@ load_dnd_icons (void)
 #endif
 }
 
+static void
+widget_connect_dnd_signals (GtkObject *obj, WPanel *panel)
+{
+}
+
 /*
  * Pixmaps can only be loaded once the window has been realized, so
  * this is why this hook is here
@@ -1240,7 +1328,7 @@ load_dnd_icons (void)
  * FIXME: We no longer need to configure DnD on the realize handler 
  */
 static void
-panel_realized (GtkWidget *file_list, WPanel *panel)
+panel_clist_realized (GtkWidget *file_list, WPanel *panel)
 {
 	GtkObject *obj = GTK_OBJECT (file_list);
 
@@ -1249,8 +1337,16 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK,
 			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
 
+	gtk_drag_dest_set (GTK_WIDGET (obj), GTK_DEST_DEFAULT_ALL,
+			   drop_types, ELEMENTS (drop_types),
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+
 	gtk_signal_connect (obj, "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
+	gtk_signal_connect (obj, "drag_data_delete",
+			    GTK_SIGNAL_FUNC (panel_drag_data_delete), panel);
+	gtk_signal_connect (obj, "drag_data_received",
+			    GTK_SIGNAL_FUNC (panel_clist_drag_data_received), panel);
 
 #if OLD_DND
 	/* DND: Drag setup */
@@ -1296,7 +1392,7 @@ panel_create_file_list (WPanel *panel)
 				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
 				  panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "realize",
-			    GTK_SIGNAL_FUNC (panel_realized),
+			    GTK_SIGNAL_FUNC (panel_clist_realized),
 			    panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
@@ -1536,8 +1632,16 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
+	gtk_drag_dest_set (GTK_WIDGET (obj), GTK_DEST_DEFAULT_ALL,
+			   drop_types, ELEMENTS (drop_types),
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+
 	gtk_signal_connect (obj, "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
+	gtk_signal_connect (obj, "drag_data_delete",
+			    GTK_SIGNAL_FUNC (panel_drag_data_delete), panel);
+	gtk_signal_connect (obj, "drag_data_received",
+			    GTK_SIGNAL_FUNC (panel_icon_list_drag_data_received), panel);
 
 	/*
 	 * These implement our drag-start activation code, as we have a pretty
@@ -1577,7 +1681,7 @@ panel_create_icon_display (WPanel *panel)
 {
 	GnomeIconList *icon_field;
 
-	icon_field = GNOME_ICON_LIST (gnome_icon_list_new (100, NULL, TRUE));
+	icon_field = GNOME_ICON_LIST (gnome_icon_list_new (90, NULL, TRUE));
 	gnome_icon_list_set_separators (icon_field, " /-_.");
 	gnome_icon_list_set_row_spacing (icon_field, 2);
 	gnome_icon_list_set_col_spacing (icon_field, 2);

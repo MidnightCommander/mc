@@ -3,6 +3,13 @@
 
 #define MC_LIB_DESKTOP "mc.desktop"
 
+/* Drag and drop types recognized by us */
+enum {
+	TARGET_URI_LIST,
+	TARGET_URL_LIST,
+	TARGET_TEXT_PLAIN,
+};
+
 
 /* Types of desktop icons:
  *
@@ -44,6 +51,8 @@ GtkWidget *create_transparent_text_window (char *file, char *text, int extra_eve
 GtkWidget *make_transparent_window (char *file);
 
 /* gdesktop.c */
+void drop_on_directory (GtkSelectionData *sel_data, GdkDragContext *context,
+			GdkDragAction action, char *dest, int force_manually);
 #if 0
 void drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually);
 void artificial_drag_start (GdkWindow *source_window, int x, int y);

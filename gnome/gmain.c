@@ -196,8 +196,10 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 	if (!(flags & DLG_NO_TOPLEVEL)){
 		if (flags & DLG_GNOME_APP)
 			win = gnome_app_new ("mc", h->name);
-		else 
+		else {
 			win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+			gtk_window_position (GTK_WINDOW (win), GTK_WIN_POS_MOUSE);
+		}
 	} else
 		win = 0;
 	
