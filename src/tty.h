@@ -11,6 +11,7 @@ int got_interrupt (void);
 #define mc_refresh() do {} while (0);
 #define enable_interrupt_key() do {} while (0);
 #define disable_interrupt_key() do {} while (0);
+#define beep() gdk_beep()
 
 #else /* HAVE_X */
 

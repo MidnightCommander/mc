@@ -1,3 +1,7 @@
+2001-06-15  Pavel Roskin  <proski@gnu.org>
+
+	* tty.h [HAVE_X]: Define beep() to gdk_beep().
+
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
 	* xtty.h: Remove, move contents ...
