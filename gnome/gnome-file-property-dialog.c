@@ -19,6 +19,7 @@
 
 #include <gnome.h>
 #include <time.h>
+#include <string.h>
 #include "gnome-file-property-dialog.h"
 #include "dir.h"
 #include "gdesktop.h"
@@ -31,6 +32,7 @@
 #include "../vfs/vfs.h"
 #include "gicon.h"
 #include "dialog.h"
+#include "util.h"
 
 static void gnome_file_property_dialog_init		(GnomeFilePropertyDialog	 *file_property_dialog);
 static void gnome_file_property_dialog_class_init	(GnomeFilePropertyDialogClass	 *klass);
@@ -812,7 +814,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		if (grp->gr_name)
 			fp_dlg->group_name = g_strdup (grp->gr_name);
 		else {
-			g_snprintf (grpnum, 9, "%d", grp->gr_gid);
+			g_snprintf (grpnum, 9, "%d", (int) grp->gr_gid);
 			fp_dlg->group_name = g_strdup (grpnum);
 		}
 
@@ -822,7 +824,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 			if (grp->gr_name)
 				grpname = grp->gr_name;
 			else {
-				g_snprintf (grpnum, 9, "%d", grp->gr_gid);
+				g_snprintf (grpnum, 9, "%d", (int) grp->gr_gid);
 				grpname = grpnum;
 			}
 		}
@@ -1141,9 +1143,16 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 			message (1, "Error", _("You cannot rename a file to something containing a '/' character"));
 			return 0;
 		} else {
+			char *p;
+			
 			/* create the files. */
 			base_name = g_strdup (fpd->file_name);
-			strrchr (base_name, '/')[0] = '\0';
+			
+			p = strrchr (base_name, '/');
+
+			if (p)
+				*p = '\0';
+			
 			full_target = concat_dir_and_file (base_name, new_name);
 
 			ctx = file_op_context_new ();

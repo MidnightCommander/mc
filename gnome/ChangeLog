@@ -1,3 +1,8 @@
+1999-02-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (apply_metadata_change): #include
+	string.h and replace references to rindex to strrchr.
+
 1999-02-07  Tomas Ogren  <stric@ing.umu.se>
 
 	* glayout.c, gnome-file-property-dialog.c: s/rindex/strrchr/
