@@ -1,5 +1,7 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Check for pwd.h.
+
 	* Make.common.in: Remove.
 	* configure.in: Remove all references to Make.common.in and
 	MCCPPFLAGS.
