@@ -132,10 +132,9 @@ static void extfs_make_dots (struct entry *ent)
     entry->dir = ent;
     inode->local_filename = NULL;
     inode->first_in_subdir = entry;
-    inode->last_in_subdir = entry;
     inode->nlink++;
     entry->next_in_dir = g_new (struct entry, 1);
-    entry=entry->next_in_dir;
+    entry = entry->next_in_dir;
     entry->name = g_strdup ("..");
     inode->last_in_subdir = entry;
     entry->next_in_dir = NULL;
@@ -170,7 +169,8 @@ static struct entry *extfs_generate_entry (struct archive *archive,
     inode = g_new (struct inode, 1);
     entry->inode = inode;
     inode->local_filename = NULL;
-    inode->linkname = 0;
+    inode->linkname = NULL;
+    inode->last_in_subdir = NULL;
     inode->inode = (archive->inode_counter)++;
     inode->dev = archive->rdev;
     inode->archive = archive;
@@ -351,11 +351,9 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		entry->name = g_strdup (p);
 		entry->next_in_dir = NULL;
 		entry->dir = pent;
-		if (pent != NULL) {
-		    if (pent->inode->last_in_subdir) {
-			pent->inode->last_in_subdir->next_in_dir = entry;
-			pent->inode->last_in_subdir = entry;
-		    }
+		if (pent->inode->last_in_subdir) {
+		    pent->inode->last_in_subdir->next_in_dir = entry;
+		    pent->inode->last_in_subdir = entry;
 		}
 		if (!S_ISLNK (hstat.st_mode) && current_link_name != NULL) {
 		    pent =
@@ -392,6 +390,8 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		    inode->mtime = hstat.st_mtime;
 		    inode->atime = hstat.st_atime;
 		    inode->ctime = hstat.st_ctime;
+		    inode->first_in_subdir = NULL;
+		    inode->last_in_subdir = NULL;
 		    if (current_link_name != NULL
 			&& S_ISLNK (hstat.st_mode)) {
 			inode->linkname = current_link_name;

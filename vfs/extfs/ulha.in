@@ -46,7 +46,7 @@ mc_lha_fs_list()
       # Print the line this way if there is no permission string
       $1 ~ /^\[.*\]/ {
          # Invent a generic permission
-         $1 = ($10 ~ /\/$/) ? "drwxr-xr-x":"-rwxr--r--";
+         $1 = ($NF ~ /\/$/) ? "drwxr-xr-x":"-rwxr--r--";
          # Print it
          printf "%s 1 %-8s %-8s %-8d %s %s %s %s\n",
                  $1, uid, gid, $2, $4, $5, $6, $7;

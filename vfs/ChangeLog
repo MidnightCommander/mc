@@ -1,3 +1,13 @@
+2004-12-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs.c (extfs_generate_entry): Initialize inode->last_in_subdir.
+	(extfs_read_archive): Likewise. Remove unneeded test.
+	Fix http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=286990
+
+	* extfs/ulha.in (mc_lha_fs_list): Use $NF instead of $10 as filename
+	for permission intention.
+	Fix http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=286990
+
 2004-12-10  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/uzip.in: Fix handling of archive member pathnames starting
