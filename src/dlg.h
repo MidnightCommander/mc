@@ -130,7 +130,11 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set,
 		      int (*callback) (struct Dlg_head *, int, int),
-		      char *help_ctx, char *name, int flags);
+		      char *help_ctx, const char *title, int flags);
+
+/* Set title - this function should go away */
+void x_set_dialog_title (Dlg_head *h, const char *title);
+
 
 /* The flags: */
 #define DLG_BACKWARD    32	/* Tab order is reverse to the index order */
@@ -211,10 +215,6 @@ Widget *find_widget_type   (Dlg_head *h, callback_fn signature);
 #define widget_want_postkey(w,i) widget_option(w, W_WANT_POSTKEY, i)
 
 typedef void (*movefn)(void *, int);
-
-/* Layout definitions */
-
-void x_set_dialog_title (Dlg_head *h, const char *title);
 
 /* Used in load_prompt() */
 void update_cursor (Dlg_head *h);

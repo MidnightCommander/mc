@@ -242,85 +242,92 @@ static int chl_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static void do_enter_key (Dlg_head *h, int f_pos)
+static void
+do_enter_key (Dlg_head * h, int f_pos)
 {
     Dlg_head *chl_dlg;
     WListbox *chl_list;
-    struct   passwd *chl_pass;
-    struct   group *chl_grp;
-    WLEntry  *fe;
-    int      lxx, lyy, chl_end, b_pos;
-    
+    struct passwd *chl_pass;
+    struct group *chl_grp;
+    WLEntry *fe;
+    int lxx, lyy, chl_end, b_pos;
+    int is_owner;
+    char *title;
+
     do {
-	lxx = (COLS - 74) / 2 + ((f_pos == 3) ? 35 : 53);
+	is_owner = (f_pos == 3);
+	title = is_owner ? _("owner") : _("group");
+
+	lxx = (COLS - 74) / 2 + (is_owner ? 35 : 53);
 	lyy = (LINES - 13) / 2;
 	chl_end = 0;
-	
-	chl_dlg = create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
-			      "[Advanced Chown]", "achown_enter", DLG_COMPACT);
-	
+
+	chl_dlg =
+	    create_dlg (lyy, lxx, 13, 17, dialog_colors, chl_callback,
+			"[Advanced Chown]", title, DLG_COMPACT);
+
 	/* get new listboxes */
 	chl_list = listbox_new (1, 1, 15, 11, 0, l_call, NULL);
-	
+
 	listbox_add_item (chl_list, 0, 0, "<Unknown>", NULL);
-	
-	if (f_pos == 3) {
+
+	if (is_owner) {
 	    /* get and put user names in the listbox */
 	    setpwent ();
 	    while ((chl_pass = getpwent ()))
 		listbox_add_item (chl_list, 0, 0, chl_pass->pw_name, NULL);
 	    endpwent ();
-	    fe = listbox_search_text (chl_list, get_owner (sf_stat->st_uid));
-	}
-	else
-	{
+	    fe = listbox_search_text (chl_list,
+				      get_owner (sf_stat->st_uid));
+	} else {
 	    /* get and put group names in the listbox */
-	    setgrent ();	
+	    setgrent ();
 	    while ((chl_grp = getgrent ())) {
 		listbox_add_item (chl_list, 0, 0, chl_grp->gr_name, NULL);
 	    }
 	    endgrent ();
-	    fe = listbox_search_text (chl_list, get_group (sf_stat->st_gid));
+	    fe = listbox_search_text (chl_list,
+				      get_group (sf_stat->st_gid));
 	}
-	
+
 	if (fe)
 	    listbox_select_entry (chl_list, fe);
-	
+
 	b_pos = chl_list->pos;
 	add_widget (chl_dlg, chl_list);
-	
+
 	run_dlg (chl_dlg);
-	
-	if (b_pos != chl_list->pos){
+
+	if (b_pos != chl_list->pos) {
 	    int ok = 0;
-	    if (f_pos == 3){
+	    if (is_owner) {
 		chl_pass = getpwnam (chl_list->current->text);
-		if (chl_pass){
+		if (chl_pass) {
 		    ok = 1;
 		    sf_stat->st_uid = chl_pass->pw_uid;
 		}
 	    } else {
 		chl_grp = getgrnam (chl_list->current->text);
-		if (chl_grp){
+		if (chl_grp) {
 		    sf_stat->st_gid = chl_grp->gr_gid;
 		    ok = 1;
 		}
 	    }
-	    if (ok){
-		ch_flags [f_pos + 6] = '+';
+	    if (ok) {
+		ch_flags[f_pos + 6] = '+';
 		get_ownership ();
 	    }
 	    dlg_focus (h);
 	    if (ok)
 		print_flags ();
 	}
-	if (chl_dlg->ret_value == KEY_LEFT){
-	    if (f_pos == 4)
+	if (chl_dlg->ret_value == KEY_LEFT) {
+	    if (!is_owner)
 		chl_end = 1;
 	    dlg_one_up (ch_dlg);
 	    f_pos--;
 	} else if (chl_dlg->ret_value == KEY_RIGHT) {
-	    if (f_pos == 3)
+	    if (is_owner)
 		chl_end = 1;
 	    dlg_one_down (ch_dlg);
 	    f_pos++;
@@ -526,7 +533,8 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static void init_chown_advanced (void)
+static void
+init_chown_advanced (void)
 {
     int i;
 
@@ -538,9 +546,10 @@ static void init_chown_advanced (void)
     flag_pos = 0;
     x_toggle = 070;
 
-    ch_dlg = create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
-			 "[Advanced Chown]", "achown", DLG_CENTER);
-    x_set_dialog_title (ch_dlg, _(" Chown advanced command "));
+    ch_dlg =
+	create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
+		    "[Advanced Chown]", _(" Chown advanced command "),
+		    DLG_CENTER);
 
 #define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
 	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, _(chown_advanced_but[i].text), \

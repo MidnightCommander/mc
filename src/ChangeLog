@@ -1,5 +1,12 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (create_dlg): Take title instead of unused name as the
+	8-th argument.
+	(x_set_dialog_title): Free old title.  Mark this function
+	obsolete.
+	* achown.c: Use new create_dlg().
+	(do_enter_key): Provide titles for popups.
+
 	* dlg.c: Remove unused code, make functions static if possible.
 
 	* chmod.c: Use common_dialog_repaint().

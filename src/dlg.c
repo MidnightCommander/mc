@@ -212,10 +212,10 @@ int default_dlg_callback (Dlg_head *h, int id, int msg)
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set,
 		      int (*callback) (struct Dlg_head *, int, int),
-		      char *help_ctx, char *name,
-		      int flags)
+		      char *help_ctx, const char *title, int flags)
 {
     Dlg_head *new_d;
+    char *t;
 
     if (flags & DLG_CENTER){
 	y1 = (LINES-lines)/2;
@@ -234,6 +234,12 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->cols = cols;
     new_d->lines = lines;
     new_d->flags = flags;
+
+    /* Strip existing spaces, add one space before and after the title */
+    t = g_strstrip (g_strdup (title));
+    new_d->title = g_strconcat (" ", t, " ", NULL);
+    g_free (t);
+
     return (new_d);
 }
 
@@ -956,10 +962,14 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
     return dlg_select_widget (h, w->widget);
 }
 
+/* Set dialog title.  This function should be eliminated.  */
 void
 x_set_dialog_title (Dlg_head * h, const char *title)
 {
-    char *t = g_strstrip (g_strdup (title));
+    char *t;
+
+    g_free (h->title);
+    t = g_strstrip (g_strdup (title));
     h->title = g_strconcat (" ", t, " ", NULL);
     g_free (t);
 }
