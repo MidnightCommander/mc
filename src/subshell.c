@@ -932,7 +932,14 @@ static int feed_subshell (int how, int fail_on_error)
 	    /* for (i=0; i<5; ++i)  * FIXME -- experimental */
 	    {
 		bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
-		if (bytes == -1 && errno != EIO)
+		/* Patch from viro@math.psu.edu 
+		 * add by MichaelBramer (Debian MC-Maintainer */
+                if (bytes == -1 && errno == EIO && !subshell_alive)
+                {
+                    return FALSE;
+                }
+                if (bytes == -1)
+		/* end from the patch */
 		{
 		    tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		    perror ("\n"__FILE__": read (subshell_pty...)");

@@ -1,3 +1,12 @@
+2000-01-02  viro@math.psu.edu 
+
+	* src/subshell.c: Reason: in feed_subshell() we are trying to read
+	from shell pty,check for retval==-1 && errno != EIO. In that case
+	we flame and exit. Otherwise we are trying to write what we've
+	read. Good luck doing it if we got errno==EIO, which is _normal_
+	for situation when shell just died. Resulting write(1,foo,~0U) is
+	somewhat excessively, erm, verbose.
+
 1999-12-21  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* src/main.c, src/view.c: #warning's replaced with FIXME's.
