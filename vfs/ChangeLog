@@ -1,5 +1,8 @@
 2002-08-26  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/urar.in: Use rar if unrar is missing.
+	From PLD Linux Distribution.
+
 	* extfs/a: Use more portable way to redirect all output to
 	/dev/null.  From PLD Linux Distribution.
 
