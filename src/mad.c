@@ -36,6 +36,7 @@
 #undef g_strdup
 #undef g_strndup
 #undef g_free
+#undef g_get_current_dir
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -180,7 +181,7 @@ void *mad_alloc (int size, const char *file, int line)
 }
 
 /* Reallocates a memory area. Used instead of realloc. */
-void *mad_realloc (void *ptr, int newsize, char *file, int line)
+void *mad_realloc (void *ptr, int newsize, const char *file, int line)
 {
     int i;
     char *area;
@@ -211,16 +212,15 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
     *(mem_areas [i].start_sig) = MAD_SIGNATURE;
     *(mem_areas [i].end_sig) = MAD_SIGNATURE;
 
-    if (strlen (file) >= MAD_MAX_FILE)
-	file [MAD_MAX_FILE - 1] = 0;
-    strcpy (mem_areas [i].file, file);
+    strncpy (mem_areas [i].file, file, MAD_MAX_FILE - 1);
+    mem_areas [i].file [MAD_MAX_FILE - 1] = 0;
     mem_areas [i].line = line;
 
     return mem_areas [i].data;
 }
 
 /* Allocates a memory area. Used instead of malloc and calloc. */
-void *mad_alloc0 (int size, char *file, int line)
+void *mad_alloc0 (int size, const char *file, int line)
 {
     char *t;
 
@@ -230,7 +230,7 @@ void *mad_alloc0 (int size, char *file, int line)
 }
 
 /* Duplicates a character string. Used instead of strdup. */
-char *mad_strdup (const char *s, char *file, int line)
+char *mad_strdup (const char *s, const char *file, int line)
 {
     if (s) {
 	char *t;
@@ -244,7 +244,7 @@ char *mad_strdup (const char *s, char *file, int line)
 
 /* Duplicates a character string. Used instead of strndup. */
 /* Dup of GLib's gstrfuncs.c:g_strndup() */
-char *mad_strndup (const char *s, int n, char *file, int line)
+char *mad_strndup (const char *s, int n, const char *file, int line)
 {
     if(s) {
         char *new_str = mad_alloc(n + 1, file, line);
@@ -257,7 +257,7 @@ char *mad_strndup (const char *s, int n, char *file, int line)
 }
 
 /* Frees a memory area. Used instead of free. */
-void mad_free (void *ptr, char *file, int line)
+void mad_free (void *ptr, const char *file, int line)
 {
     int i;
 
@@ -300,18 +300,18 @@ void mad_free (void *ptr, char *file, int line)
         Alloc_idx_hint = i;
 }
 
-char *mad_tempnam (char *a, char *b)
+char *mad_tempnam (char *a, char *b, const char *file, int line)
 {
     char *t, *u;
     t = tempnam(a,b); /* This malloc's internal buffer.. */
-    u = mad_strdup(t, "(mad_tempnam)", 0);
+    u = mad_strdup(t, file, line);
     free(t);
     return u;
 }
 
 /* Outputs a list of unfreed memory areas,
    to be called as a last thing before exiting */
-void mad_finalize (char *file, int line)
+void mad_finalize (const char *file, int line)
 {
     int i;
 
@@ -398,5 +398,14 @@ mad_strdup_printf (const char *format, ...)
   va_end (args);
 
   return buffer;
+}
+
+char*
+mad_get_current_dir (const char *file, int line)
+{
+    char *cwd = g_get_current_dir ();
+    char *ret = mad_strdup (cwd, file, line);
+    g_free (cwd);
+    return ret;
 }
 #endif /* HAVE_MAD */

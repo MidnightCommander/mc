@@ -30,7 +30,7 @@
 #   undef calloc
 #endif
 
-#define tempnam(x,y)	mad_tempnam (x, y)
+#define tempnam(x,y)	mad_tempnam (x, y, __FILE__, __LINE__)
 
 #define malloc(x)	mad_alloc (x, __FILE__, __LINE__)
 #define calloc(x, y)	mad_alloc0 ((x) * (y), __FILE__, __LINE__)
@@ -50,8 +50,8 @@
  * Define MAD_GLIB to debug allocations in glib as well.
  * This code is not functional yet.
  */
-#undef MAD_GLIB
 
+#define MAD_GLIB
 #ifdef MAD_GLIB
 /* These definitions are grabbed from GLib.h */
 #define g_new(type, count)	  \
@@ -70,22 +70,24 @@
 #define g_strconcat		mad_strconcat
 #define g_strdup_printf		mad_strdup_printf
 #define g_strdup_vprintf	mad_strdup_vprintf
+#define g_get_current_dir()	mad_get_current_dir (__FILE__, __LINE__)
 #endif /* MAD_GLIB */
 
 void mad_init (void);
 void mad_set_debug (const char *file);
 void mad_check (const char *file, int line);
 void *mad_alloc (int size, const char *file, int line);
-void *mad_alloc0 (int size, char *file, int line);
-void *mad_realloc (void *ptr, int newsize, char *file, int line);
-char *mad_strdup (const char *s, char *file, int line);
-char *mad_strndup (const char *s, int n, char *file, int line);
-void mad_free (void *ptr, char *file, int line);
-void mad_finalize (char *file, int line);
-char *mad_tempnam (char *s1, char *s2);
+void *mad_alloc0 (int size, const char *file, int line);
+void *mad_realloc (void *ptr, int newsize, const char *file, int line);
+char *mad_strdup (const char *s, const char *file, int line);
+char *mad_strndup (const char *s, int n, const char *file, int line);
+void mad_free (void *ptr, const char *file, int line);
+void mad_finalize (const char *file, int line);
+char *mad_tempnam (char *s1, char *s2, const char *file, int line);
 char *mad_strconcat (const char *first, ...);
 char *mad_strdup_printf (const char *format, ...);
 char *mad_strdup_vprintf (const char *format, va_list args);
+char *mad_get_current_dir (const char *file, int line);
 
 #else
 

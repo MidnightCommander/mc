@@ -1,3 +1,17 @@
+2001-11-12  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* mad.h: Enable glib support.
+
+	* mad.[ch] (mad_get_current_dir): New function to use instead
+	of g_get_current_dir.
+	(mad_tempnam): Add file and line parameters.
+	(mad_alloc0): Make file parameter const.
+	(mad_realloc): Likewise.
+	(mad_strdup): Likewise.
+	(mad_strndup): Likewise.
+	(mad_free): Likewise.
+	(mad_finalize): Likewise.
+
 2001-11-07  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cmd.c (guess_message_value): Make val static const array.
