@@ -42,6 +42,7 @@ typedef struct {
     char **str_result;		/* Input lines: destination  */
     char *histname;		/* Name of the section for saving history */
 } QuickWidget;
+#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL }
     
 typedef struct {
     int  xlen, ylen;
