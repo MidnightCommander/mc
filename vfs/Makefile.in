@@ -29,7 +29,7 @@ VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 VFSOBJS = $(NONETFILES) @NETFILES@
 
 EXTFSSTUFF = README extfs.ini a cpio.in deb.in ftplist.in lha.in lslR.in \
-	rar.in rpm zip.in zoo.in arfs patchfs mailfs hp48
+	rar.in rpm zip.in zoo.in patchfs mailfs hp48
 
 #
 # Commands to build standalone version (.so)
@@ -114,7 +114,6 @@ install.extfs:
 	$(INSTALL_DATA) $(srcdir)/extfs/README $(DESTDIR)$(libdir)/extfs/README
 	$(INSTALL_DATA) $(srcdir)/extfs/extfs.ini $(DESTDIR)$(libdir)/extfs/extfs.ini
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/a $(DESTDIR)$(libdir)/extfs/a
-	$(INSTALL_PROGRAM) $(srcdir)/extfs/arfs $(DESTDIR)$(libdir)/extfs/arfs
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/rpm  $(DESTDIR)$(libdir)/extfs/rpm
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/hp48  $(DESTDIR)$(libdir)/extfs/hp48
 	
@@ -134,7 +133,6 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/deb
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/zip
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/a
-	-$(RMF) $(DESTDIR)$(libdir)/extfs/arfs
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/zoo
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/lslR
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/ftplist
