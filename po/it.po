@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.5x\n"
-"POT-Creation-Date: 2001-08-01 14:03+0200\n"
+"POT-Creation-Date: 2001-08-01 14:10+0200\n"
 "PO-Revision-Date: 2001-08-01 10:06+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
@@ -71,8 +71,8 @@ msgstr ""
 msgid ""
 "\".\n"
 "\n"
-"To fix this error, bring up this file's properties and change the default "
-"%s-action."
+"To fix this error, bring up this file's properties and change the default %s-"
+"action."
 msgstr ""
 "\".\n"
 "\n"
@@ -1732,12 +1732,13 @@ msgid "Location:"
 msgstr "Posizione:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:396 gtkedit/editcmd.c:1273
-#: gtkedit/editcmd.c:1358 gtkedit/editcmd.c:3083 gtkedit/editoptions.c:69
-#: src/boxes.c:145 src/boxes.c:279 src/boxes.c:379 src/boxes.c:470
-#: src/boxes.c:617 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
-#: src/filegui.c:805 src/find.c:149 src/layout.c:369 src/option.c:135
-#: src/wtools.c:284 src/wtools.c:546
+#: gnome/gtools.c:105 gtkedit/edit.h:507 gtkedit/editcmd.c:396
+#: gtkedit/editcmd.c:1273 gtkedit/editcmd.c:1358 gtkedit/editcmd.c:3083
+#: gtkedit/editmenu.c:45 gtkedit/editoptions.c:69 src/boxes.c:145
+#: src/boxes.c:279 src/boxes.c:379 src/boxes.c:470 src/boxes.c:617
+#: src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056 src/filegui.c:805
+#: src/find.c:149 src/layout.c:369 src/option.c:135 src/wtools.c:284
+#: src/wtools.c:546
 msgid "&Ok"
 msgstr "&Ok"
 
@@ -1885,6 +1886,10 @@ msgstr "Menu utente disponibile solo in mcedit se chiamato da mc"
 #: gtkedit/edit.c:2801 gtkedit/editcmd.c:3001
 msgid "Error trying to stat file:"
 msgstr "Errore nel provare lo stat del file:"
+
+#: gtkedit/edit.h:506 gtkedit/gtkedit.c:66
+msgid "&Dismiss"
+msgstr "&Chiudi"
 
 #: gtkedit/editcmd.c:308
 msgid " Error writing to pipe: "
@@ -2911,10 +2916,6 @@ msgstr "Menu"
 #: src/main.c:1726 src/view.c:2076 src/view.c:2098
 msgid "Quit"
 msgstr "Esci"
-
-#: gtkedit/gtkedit.c:66
-msgid "&Dismiss"
-msgstr "&Chiudi"
 
 #: gtkedit/gtkedit.c:67
 msgid " Enter file name: "
@@ -4778,6 +4779,7 @@ msgid "File:       %s"
 msgstr "File:       %s"
 
 #: src/info.c:113
+#, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr "Nodi liberi: %d(%d%%) su %d"
 
@@ -4790,6 +4792,7 @@ msgid "Free space "
 msgstr "Spazio:"
 
 #: src/info.c:126
+#, c-format
 msgid " (%d%%) of "
 msgstr "(%d%%) di "
 
@@ -5363,8 +5366,8 @@ msgstr "-e, --edit         Esecuzione editor interno.\n"
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
-"-k, --resetsoft    Reset softkeys (HP terminals only) to their "
-"terminfo/termcap\n"
+"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
+"termcap\n"
 "                   default.\n"
 msgstr ""
 "-f, --libdir       Stampa percorsi configurati.\n"
@@ -6074,10 +6077,12 @@ msgid " Format error on file Extensions File "
 msgstr " Errore formato nel File Estensioni "
 
 #: src/user.c:140
+#, c-format
 msgid " The %%var macro has no default "
 msgstr " La macro %%var non ha un valore predefinito "
 
 #: src/user.c:141
+#, c-format
 msgid " The %%var macro has no variable "
 msgstr " Le macro %%var non hanno una variabile "
 
@@ -6912,12 +6917,12 @@ msgid "Warning: file %s not found\n"
 msgstr "Attenzione: file %s non trovato\n"
 
 #: vfs/sfs.c:329
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
 "%s\n"
 msgstr ""
-"Attenzione: linea %s non valida in sfs.ini:\n"
+"Attenzione: linea non valida in sfs.ini:\n"
 "%s\n"
 
 #: vfs/sfs.c:340
@@ -7112,6 +7117,7 @@ msgid "Internal error:"
 msgstr " Errore interno:"
 
 #: vfs/vfs.c:1805
+#, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld byte trasferiti)"
 
