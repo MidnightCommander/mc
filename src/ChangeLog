@@ -1,3 +1,7 @@
+1999-02-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* cmd.c (view_other_cmd): Do not use \r in translatable strings. 
+
 1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* widget.c (push_history): Only do check the history headings if

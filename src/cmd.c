@@ -964,7 +964,9 @@ view_other_cmd (void)
 	{
 	    if (output_starts_shell){
 		fprintf (stderr,
-		 _("Type `exit' to return to the Midnight Commander\n\r\n\r"));
+		 _("Type `exit' to return to the Midnight Commander"));
+		fprintf (stderr, "\n\r\n\r");
+			 
 		my_system (EXECUTE_AS_SHELL, shell, NULL);
 	    } else
 		get_key_code (0);
