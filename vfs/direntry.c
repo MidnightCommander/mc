@@ -1104,6 +1104,7 @@ vfs_s_free (vfsid id)
 
 /* ----------- Utility functions for networked filesystems  -------------- */
 
+#ifdef USE_NETCODE
 int
 vfs_s_select_on_two (int fd1, int fd2)
 {
@@ -1186,3 +1187,4 @@ vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd)
     buffer [size-1] = 0;
     return 0;
 }
+#endif /* USE_NETCODE */

@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c [!USE_NETCODE]: Disable functions used in networked
+	filesystems only.
+
 	* vfs.c (vfs_init) [!USE_NETCODE]: Don't register fish.
 
 	* ftpfs.c: Check for existance of arpa/inet.h when using it.
