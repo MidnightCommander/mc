@@ -3578,7 +3578,7 @@ msgstr "Не вда╓ться встановити в╕рн╕ права для каталога %s\n"
 #: src/utilunix.c:343
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Не вда╓ться створити тимчасовый каталог \"%s\": %s\n"
+msgstr "Не вда╓ться створити тимчасовий каталог \"%s\": %s\n"
 
 #: src/utilunix.c:373
 #, c-format
