@@ -463,7 +463,7 @@ msgstr "В╕дновити типов╕ п╕ктограми"
 
 #: gnome/gdesktop.c:2892
 msgid "Configure _Background Image"
-msgstr "Сконф╕гурувати зображення на тл╕"
+msgstr "Сконф╕╜урувати зображення на тл╕"
 
 #: gnome/gdesktop.c:2893
 msgid "Des_ktop Properties"
@@ -1305,7 +1305,7 @@ msgstr "Вибер╕ть програму для в╕дкриття нею \"%s\"."
 
 #: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
-msgstr ""
+msgstr "Вибер╕ть файл запуску"
 
 #. the file tree
 #: gnome/gnome-open-dialog.c:406
@@ -1515,7 +1515,7 @@ msgstr "Створю╓ тут новий каталог"
 
 #: gnome/gscreen.c:1437
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Очистити см╕тник"
 
 #: gnome/gscreen.c:1437
 msgid "Empties the Trash"
