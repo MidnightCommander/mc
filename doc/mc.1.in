@@ -1398,7 +1398,7 @@ Condition syntax: 	= <sub-cond>
 Sub-condition is one of following:
 
   y <pattern>		syntax of current file matching pattern?
-                        for edit menu only.
+			(for edit menu only)
   f <pattern>		current file matching pattern?
   F <pattern>		other file matching pattern?
   d <pattern>		current directory matching pattern?
@@ -2064,7 +2064,7 @@ files and directories.  It can be invoked with the C-x c key combination.
 The Chmod window has two parts -
 .I Permissions
 and
-.I File
+.IR File .
 .PP
 In the File section are displayed the name of the file or directory
 and its permissions in octal form, as well as its owner and group.
