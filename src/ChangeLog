@@ -1,3 +1,11 @@
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (mc_maybe_editor_or_viewer) [!USE_INTERNAL_EDIT]:
+	Reenable to make "mc -v" possible.
+	(do_nc): Call mc_maybe_editor_or_viewer() even if the editor
+	is not compiled in.
+	(argument_table) [!USE_INTERNAL_EDIT]: Disable "-e".
+
 2001-08-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (view_handle_key) [HAVE_CHARSET]: Remove unneeded

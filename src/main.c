@@ -2212,12 +2212,10 @@ prepend_cwd_on_local (char *filename)
 	return g_strdup (filename);
 }
 
-#ifdef USE_INTERNAL_EDIT
-
 static int
 mc_maybe_editor_or_viewer (void)
 {
-    char *path;
+    char *path = NULL;
 
     if (!(view_one_file || edit_one_file))
 	    return 0;
@@ -2230,6 +2228,7 @@ mc_maybe_editor_or_viewer (void)
 	    setup_dummy_mc (path);
 	    view_file (path, 0, 1);
     }
+#ifdef USE_INTERNAL_EDIT
     else {
 	    path = prepend_cwd_on_local ("");
 #ifndef HAVE_GNOME
@@ -2241,13 +2240,12 @@ mc_maybe_editor_or_viewer (void)
 	    exit (1);
 #endif
     }
+#endif /* USE_INTERNAL_EDIT */
     g_free (path);
     midnight_shutdown = 1;
     done_mc ();
     return 1;
 }
-
-#endif	/* USE_INTERNAL_EDIT */
 
 static void
 do_nc (void)
@@ -2255,11 +2253,9 @@ do_nc (void)
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback, "[main]", "midnight", 0);
     midnight_dlg->has_menubar = 1;
 
-#ifdef USE_INTERNAL_EDIT
     /* Check if we were invoked as an editor or file viewer */
     if (mc_maybe_editor_or_viewer ())
 	    return;
-#endif
     
     setup_mc ();
 
@@ -2684,8 +2680,11 @@ static const struct poptOption argument_table [] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "dbgsubshell", 	'X', POPT_ARG_NONE, 	&debug_subshell, 	 0 },
 #endif
+
+#ifdef USE_INTERNAL_EDIT
     { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0,
       N_("Edits one file") },
+#endif
 
 #ifndef HAVE_GNOME
     { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h',
