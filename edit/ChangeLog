@@ -1,5 +1,9 @@
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (user_menu): Don't move the cursor before and after
+	inserting the block.
+	Reported by Matthias Urban <murban@cs.uni-magdeburg.de>
+
 	* syntax.c (read_one_line): Clear errno before using it.  Don't
 	use the result of fgetc() if errno is EINTR.
 

@@ -2702,9 +2702,7 @@ void user_menu (WEdit *edit)
 	}
 
 	if (!rc) {
-	    edit_cursor_to_bol (edit);
 	    edit_insert_file (edit, block_file);
-	    edit_cursor_to_eol (edit);
 	}
     } else {
 	/* error file exists and is not empty */
