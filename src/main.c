@@ -1136,7 +1136,7 @@ copy_other_pathname (void)
 	return;
 
     command_insert (cmdline, opanel->cwd, 0);
-    if (cpanel->cwd[strlen (opanel->cwd) - 1] != PATH_SEP)
+    if (opanel->cwd[strlen (opanel->cwd) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
 }
 
