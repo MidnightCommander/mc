@@ -1,3 +1,8 @@
+2001-01-02  Pavel Roskin  <proski@gnu.org>
+
+	* samba/configure.in: Use explicit AC_CONFIG_AUX_DIR because
+	this setting is not inherited from the top-level configure.
+
 2001-12-31  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: convert to ...
