@@ -412,15 +412,31 @@ type mc_##name inarg \
 \
     if (!dirp){ \
 	errno = EFAULT; \
-	return NULL; \
+	return onerr; \
     } \
     handle = *(int *) dirp; \
     vfs = vfs_op (handle); \
     return vfs->name ? (*vfs->name) callarg : onerr; \
 }
 
+#define MC_DIROP_VOID(name, inarg, callarg ) \
+void mc_##name inarg \
+{ \
+    int handle; \
+    vfs *vfs; \
+\
+    if (!dirp){ \
+	errno = EFAULT; \
+	return; \
+    } \
+    handle = *(int *) dirp; \
+    vfs = vfs_op (handle); \
+    if (vfs->name) \
+         (*vfs->name) callarg; \
+}
+
 MC_DIROP (readdir, struct dirent *, (DIR *dirp), (vfs_info (handle)), NULL)
-MC_DIROP (seekdir, void, (DIR *dirp, int offset), (vfs_info (handle), offset), -1)
+MC_DIROP_VOID (seekdir, (DIR *dirp, int offset), (vfs_info (handle), offset))
 MC_DIROP (telldir, int, (DIR *dirp), (vfs_info (handle)), -1)
 
 int mc_closedir (DIR *dirp)
@@ -1504,6 +1520,6 @@ vfs_die (char *m)
 char *
 vfs_get_password (char *msg)
 {
-    return input_dialog (msg, _("Password:"), "");
+    return (char *) input_dialog (msg, _("Password:"), "");
 }
 #endif

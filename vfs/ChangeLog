@@ -1,3 +1,7 @@
+1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* vfs.c (MC_DIROP): Macro now returns the proper value. 
+
 1998-maj-18  Tamasi Gyorgy (gt_cosy@usa.net)
 
 	* Makefile.in ('install' target): 'mcserv' not installed, if
