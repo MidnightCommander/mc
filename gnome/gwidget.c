@@ -324,7 +324,7 @@ x_update_input (WInput *in)
 		in->first = 0;
 	}
 
-	text = GTK_ENTRY (entry)->text;
+	text = gtk_entry_get_text (GTK_ENTRY (entry));
 	
 	if (text && strcmp (text, in->buffer)){
 		gtk_entry_set_text (entry, in->buffer);
