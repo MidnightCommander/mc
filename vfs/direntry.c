@@ -1027,7 +1027,7 @@ vfs_s_getlocalcopy (vfs *me, char *path)
     struct vfs_s_inode *ino;
     char buf[MC_MAXPATHLEN];
 
-    strcpy (buf, path);
+    strncpy (buf, path, MC_MAXPATHLEN);
     ino = vfs_s_inode_from_path (me, path, FL_FOLLOW | FL_NONE);
 
     if (!ino->localname)

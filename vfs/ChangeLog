@@ -1,5 +1,8 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_getlocalcopy): Fix potentially dangerous
+	strcpy().
+
 	* extfs.c (s_readdir): Simplify.
 	* direntry.c (vfs_s_readdir): Use vfs_dirent.
 	* mcfs.c (mcfs_readdir): Likewise.
