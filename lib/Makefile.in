@@ -30,7 +30,6 @@ DISTLIB = \
 	xnc.hlp ncurses.h 	\
 	mcserv.init 		\
 	mcserv.pamd 		\
-	tkmc.wmconfig 		\
 	mc.ext.in.qnx.diff 	\
 	mc.global
 

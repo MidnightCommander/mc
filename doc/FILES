@@ -25,7 +25,6 @@ lib/tdiff		Tool to compare two terminfo databases
 lib/vt100.ti		Enhanced terminfo database for vt100 terminal
 lib/xnc.hlp		The part of the mc.hlp file not produced from the mc.1 file
 lib/xterm.ti		Enhanced terminfo database for xterm terminal
-lib/tkmc.wmconfig	MC registration file for AnotherLevel RH desktop
 lib/mcserv.pamd		PAM registration file for mcserv service
 lib/mcserv.init		mcserv SySV init script for RH Linux
 slang/			Directory: Slang screen manager (from Slang distribution)
