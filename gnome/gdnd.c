@@ -290,23 +290,20 @@ drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data
 /* Drop stuff on a directory */
 static int
 drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
-		   GdkDragAction action, char *directory, file_entry *dest_fe)
+		   GdkDragAction action, char *directory)
 {
-	char *full_name;
 	int retval;
 
 	retval = FALSE;
-	full_name = g_concat_dir_and_file (directory, dest_fe->fname);
 
 	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
-		drop_uri_list_on_directory (context, selection_data, action, full_name);
+		drop_uri_list_on_directory (context, selection_data, action, directory);
 		retval = TRUE;
 	} else if (gdnd_drag_context_has_target (context, TARGET_URL)) {
-		drop_url_on_directory (context, selection_data, full_name);
+		drop_url_on_directory (context, selection_data, directory);
 		retval = TRUE;
 	}
 
-	g_free (full_name);
 	return retval;
 }
 
@@ -337,7 +334,7 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 
 	mime_type = gnome_mime_type_or_default (full_name, NULL);
 	if (mime_type) {
-		char *action;
+		const char *action;
 
 		action = gnome_mime_get_value (mime_type, "drop-action");
 		if (action) {
@@ -413,7 +410,7 @@ gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
 		action = context->action;
 
 	if (S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir)
-		return drop_on_directory (context, selection_data, action, directory, dest_fe);
+		return drop_on_directory (context, selection_data, action, directory);
 	else
 		return drop_on_file (context, selection_data, directory, dest_fe);
 }

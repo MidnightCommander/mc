@@ -275,6 +275,15 @@ entry_release (GtkEditable *entry, GdkEvent *event, WInput *in)
 		in->first = 1;
 }
 
+static void
+wentry_changed (GtkEditable *editable, WInput *in)
+{
+	char *text = gtk_entry_get_text (GTK_ENTRY (editable));
+
+	assign_text (in, text);
+	input_set_point (in, editable->current_pos);
+}
+
 int
 x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 {
@@ -308,6 +317,9 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 
 	gtk_signal_connect (GTK_OBJECT (entry), "button_release_event",
 			    GTK_SIGNAL_FUNC (entry_release), in);
+	
+	gtk_signal_connect (GTK_OBJECT (entry), "changed",
+			    GTK_SIGNAL_FUNC (wentry_changed), in);
 	return 1;
 }
 
@@ -330,13 +342,19 @@ x_update_input (WInput *in)
 	entry = GTK_ENTRY (in->widget.wdata);
 #endif
 
+	/* Block the signal handler */
+	gtk_signal_handler_block_by_func (
+		GTK_OBJECT (entry),
+		GTK_SIGNAL_FUNC(wentry_changed), in);
+
+	/* Do the actual work */
 	if (in->first == -1){
 		gtk_editable_select_region (GTK_EDITABLE (entry), 0, 0);
 		in->first = 0;
 	}
 
 	text = gtk_entry_get_text (GTK_ENTRY (entry));
-	
+
 	if (text && strcmp (text, in->buffer)){
 		gtk_entry_set_text (entry, in->buffer);
 		draw = 1;
@@ -346,6 +364,12 @@ x_update_input (WInput *in)
 		gtk_entry_set_position (entry, in->point);
 		draw = 1;
 	}
+
+	/* Unblock the signal handler */
+	gtk_signal_handler_unblock_by_func (
+		GTK_OBJECT (entry),
+		GTK_SIGNAL_FUNC(wentry_changed), in);
+
 	
 	if (draw){
 #ifdef USE_GNOME_ENTRY

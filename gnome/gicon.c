@@ -121,7 +121,7 @@ ensure_icon_image (IconSet *iset, IconType type)
  * the file could not be loaded.
  */
 static IconSet *
-get_icon_set (char *filename)
+get_icon_set (const char *filename)
 {
 	GdkImlibImage *im;
 	IconSet *iset;
@@ -392,7 +392,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 
 	mime_type = gnome_mime_type_or_default (fe->fname, NULL);
 	if (mime_type) {
-		char *icon_name;
+		const char *icon_name;
 
 		icon_name = gnome_mime_get_value (mime_type, "icon-filename");
 		if (icon_name) {

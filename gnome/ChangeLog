@@ -1,3 +1,19 @@
+1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_drag_data_received): Simplify.
+
+	* gscreen.c (panel_icon_list_drag_data_received): Pass the full
+	path to gdnd_perform_drop.
+	(panel_clist_drag_data_received): same.
+
+	* gdnd.c (drop_on_directory): We no longer take a file_entry
+	here.  The directory we get passed is already a fully qualified
+	name of the target location.
+
+	* gwidget.c (x_create_input): Hook to the changed signal and sync
+	the input with our view of the entry.  This fixes the paste bug
+	reported. 
+
 Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 
 	* gmount.c: fix obvious typos, use str in option_has_user, fix

@@ -1991,20 +1991,14 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		drop_desktop_icons (context, data, x, y);
 	else {
 		file_entry *desktop_fe;
-		char *directory, *p;
 
 		desktop_fe = file_entry_from_file (desktop_directory);
 		if (!desktop_fe)
 			return; /* eeek */
 
-		p = strrchr (desktop_directory, PATH_SEP);
-		g_assert (p);
-		directory = g_strndup (desktop_directory, p - desktop_directory);
-
-		if (gdnd_perform_drop (context, data, directory, desktop_fe))
+		if (gdnd_perform_drop (context, data, desktop_directory, desktop_fe))
 			desktop_reload_icons (TRUE, x, y);
 
-		g_free (directory);
 		file_entry_free (desktop_fe);
 	}
 }

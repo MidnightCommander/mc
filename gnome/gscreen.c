@@ -805,7 +805,7 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 		free_fe = FALSE;
 	}
 
-	reload = gdnd_perform_drop (context, selection_data, panel->cwd, fe);
+	reload = gdnd_perform_drop (context, selection_data, file, fe);
 
 	if (free_file)
 		g_free (file);
@@ -860,7 +860,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 		free_fe = FALSE;
 	}
 
-	reload = gdnd_perform_drop (context, selection_data, panel->cwd, fe);
+	reload = gdnd_perform_drop (context, selection_data, file, fe);
 
 	if (free_file)
 		g_free (file);
