@@ -1,5 +1,8 @@
 1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-file-property-dialog.c (create_settings_pane): Simplify
+	the test and fix it.
+
 	* gdnd.c (drop_on_file): Fix these so that they can use the
 	metadata drop-action.
 

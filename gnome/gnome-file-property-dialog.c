@@ -569,7 +569,8 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *align;
 	GtkWidget *table;
 	struct stat linkstat;
-
+	int finish;
+	
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
 
@@ -591,7 +592,15 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	if (S_ISLNK (fp_dlg->st.st_mode))
 		mc_stat (fp_dlg->file_name, &linkstat);
 
-	if (!(S_ISREG (fp_dlg->st.st_mode) || (S_ISLNK (fp_dlg->st.st_mode) && !S_ISREG (linkstat.st_mode)))) {
+	finish = 0;
+	if (!S_ISREG (fp_dlg->st.st_mode))
+		finish = 1;
+
+	if (S_ISLNK (fp_dlg->st.st_mode))
+		if (!S_ISREG (linkstat.st_mode))
+			finish = 1;
+
+	if (finish){
 		if (!fp_dlg->can_set_icon) {
 			gtk_widget_unref (vbox);
 			vbox = NULL;
