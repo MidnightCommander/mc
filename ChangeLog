@@ -1,5 +1,7 @@
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Bump version to 4.6.0-pre1b.
+
 	* doc/hu/mc.hlp.hu: Rename to ...
 	* doc/hu/mc.hlp.hu.in: ... this.  Adjust paths.
 	* configure.in: Substitute doc/hu/mc.hlp.hu.
