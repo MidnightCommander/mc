@@ -1,6 +1,6 @@
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
-%define rel     1
+%define rel     2
 %define prefix  /usr
 
 Summary:   Midnight Commander visual shell
@@ -76,7 +76,7 @@ install lib/mc.global $RPM_BUILD_ROOT/etc
 chmod 755 $RPM_BUILD_ROOT%{prefix}/lib/mc/bin/cons.saver
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 %post   -n mcserv
 /sbin/chkconfig --add mcserv
@@ -120,9 +120,14 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/pixmaps/mc/*
 %{prefix}/share/mime-info/mc.keys
+%{prefix}/share/gnome/help/gmc/*
+%{prefix}/share/locale/*
 %config /etc/CORBA/servers/*
 
 %changelog
+* Mon Jul 12 1999 Kjartan Maraas  <kmaraas@online.no>
+- added help and locale files to %files
+
 * Tue Jun 22 1999 Vladimir Kondratiev <vkondra@iil.intel.com>
 - added syntax files to %files
 
