@@ -13,6 +13,8 @@ Changes made after 4.6.0-pre1.
 - Editor shows control characters in the caret notation.
 - Fixed segmentation fault when displaying messages from background
   process.
+- Screen library is now selected by the option --with-screen.
+- Fixed viewing and editing files on mcfs.
 
 
 Version 4.6.0-pre1.
