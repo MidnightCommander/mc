@@ -103,7 +103,7 @@ release_key_and_value (gpointer key, gpointer value, gpointer user_data)
 static gboolean
 remove_this_key (gpointer key, gpointer value, gpointer user_data)
 {
-	if (strcmp (key, user_data) == 0){
+	if (strcmp ((gchar *)key, (gchar *)user_data) == 0){
 		g_free (key);
 		g_free (value);
 		return TRUE;

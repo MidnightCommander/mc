@@ -19,6 +19,6 @@ typedef struct {
 
 GtkWidget *get_mime_clist (void);
 void init_mime_type (void);
-
+void add_clicked (GtkWidget *widget, gpointer data);
 
 #endif

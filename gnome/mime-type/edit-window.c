@@ -145,7 +145,7 @@ initialize_main_win ()
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp2_label, FALSE, FALSE, 0);
 
 	/* Actions box */
-	frame = gtk_frame_new (_("Mime-Type Actions"));
+	frame = gtk_frame_new (_("Mime Type Actions"));
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_SMALL);

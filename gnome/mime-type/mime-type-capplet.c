@@ -20,6 +20,19 @@ static void ok_callback ();
 static void cancel_callback ();
 static void help_callback ();
 GtkWidget *capplet;
+GtkWidget *delete_button;
+
+static GtkWidget *
+left_aligned_button (gchar *label)
+{
+  GtkWidget *button = gtk_button_new_with_label (label);
+  gtk_misc_set_alignment (GTK_MISC (GTK_BIN (button)->child),
+			  0.0, 0.5);
+  gtk_misc_set_padding (GTK_MISC (GTK_BIN (button)->child),
+			GNOME_PAD_SMALL, 0);
+
+  return button;
+}
 
 static void
 try_callback ()
@@ -56,15 +69,22 @@ init_mime_capplet ()
         GtkWidget *button;
 
 	capplet = capplet_widget_new ();
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
+        gtk_container_add (GTK_CONTAINER (capplet), hbox);
+        gtk_box_pack_start (GTK_BOX (hbox), get_mime_clist (), TRUE, TRUE, 0);
         vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-        gtk_container_add (GTK_CONTAINER (capplet), vbox);
-        gtk_box_pack_start (GTK_BOX (vbox), get_mime_clist (), TRUE, TRUE, 0);
-        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-        gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-        button = gtk_button_new_with_label (_("Edit"));
-        gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+        button = left_aligned_button (_("Add..."));
+        gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+        gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                            add_clicked, NULL);
+        button = left_aligned_button (_("Edit..."));
+        gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
         gtk_signal_connect (GTK_OBJECT (button), "clicked",
                             edit_clicked, NULL);
+        delete_button = left_aligned_button (_("Delete"));
+        gtk_box_pack_start (GTK_BOX (vbox), delete_button, FALSE, FALSE, 0);
         gtk_widget_show_all (capplet);
         gtk_signal_connect(GTK_OBJECT(capplet), "try",
                            GTK_SIGNAL_FUNC(try_callback), NULL);

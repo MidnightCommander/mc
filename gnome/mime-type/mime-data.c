@@ -13,16 +13,19 @@
 #include "edit-window.h"
 #include "mime-data.h"
 #include "mime-info.h"
+#include "new-mime-window.h"
 /* Prototypes */
-static void mime_fill_from_file (const char *filename);
+static void mime_fill_from_file (const char *filename, gboolean init_user);
 static void mime_load_from_dir (const char *mime_info_dir, gboolean system_dir);
-static void add_to_key (char *mime_type, char *def);
+static void add_to_key (char *mime_type, char *def, GHashTable *table);
 static char *get_priority (char *def, int *priority);
 
 
 /* Global variables */
 static char *current_lang;
 static GHashTable *mime_types = NULL;
+static GHashTable *initial_user_mime_types = NULL;
+static GHashTable *user_mime_types = NULL;
 static GtkWidget *clist = NULL;
 
 /* Initialization functions */
@@ -48,14 +51,14 @@ get_priority (char *def, int *priority)
 	return def;
 }
 static void
-add_to_key (char *mime_type, char *def)
+add_to_key (char *mime_type, char *def, GHashTable *table)
 {
 	int priority = 1;
 	char *s, *p, *ext;
 	int used;
 	MimeInfo *info;
-
-	info = g_hash_table_lookup (mime_types, (const void *) mime_type);
+        
+	info = g_hash_table_lookup (table, (const void *) mime_type);
 	if (info == NULL) {
 		info = g_malloc (sizeof (MimeInfo));
 		info->mime_type = g_strdup (mime_type);
@@ -68,7 +71,7 @@ add_to_key (char *mime_type, char *def)
                 info->ext_readable[0] = NULL;
                 info->ext_readable[1] = NULL;
                 info->keys = gnome_mime_get_keys (mime_type);
-		g_hash_table_insert (mime_types, mime_type, info);
+		g_hash_table_insert (table, mime_type, info);
 	}
 	if (strncmp (def, "ext", 3) == 0){
 		char *tokp;
@@ -111,7 +114,7 @@ add_to_key (char *mime_type, char *def)
 	}
 }
 static void
-mime_fill_from_file (const char *filename)
+mime_fill_from_file (const char *filename, gboolean init_user)
 {
 	FILE *f;
 	char buf [1024];
@@ -152,8 +155,11 @@ mime_fill_from_file (const char *filename)
 
 				if (*p == 0)
 					continue;
-				
-				add_to_key (current_key, p);
+				add_to_key (current_key, p, mime_types);
+				if (init_user) {
+                                        add_to_key (current_key, p, initial_user_mime_types);
+                                        add_to_key (current_key, p, user_mime_types);
+                                }
 				used = TRUE;
 			}
 		} else {
@@ -182,7 +188,7 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 		return;
 	if (system_dir) {
 		filename = g_concat_dir_and_file (mime_info_dir, "gnome.mime");
-		mime_fill_from_file (filename);
+		mime_fill_from_file (filename, FALSE);
 		g_free (filename);
 	}
 	while ((dent = readdir (dir)) != NULL){
@@ -200,12 +206,12 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 			continue;
 		
 		filename = g_concat_dir_and_file (mime_info_dir, dent->d_name);
-		mime_fill_from_file (filename);
+		mime_fill_from_file (filename, FALSE);
 		g_free (filename);
 	}
 	if (!system_dir) {
 		filename = g_concat_dir_and_file (mime_info_dir, "user.mime");
-		mime_fill_from_file (filename);
+		mime_fill_from_file (filename, TRUE);
 		g_free (filename);
 	}
 	closedir (dir);
@@ -285,6 +291,11 @@ edit_clicked ()
         if (mi)
                 launch_edit_window (mi);
 }
+void
+add_clicked (GtkWidget *widget, gpointer data)
+{
+        launch_new_mime_window ();
+}
 
 GtkWidget *
 get_mime_clist (void)
@@ -318,6 +329,8 @@ init_mime_type (void)
 	char *mime_info_dir;
 	
 	mime_types = g_hash_table_new (g_str_hash, g_str_equal);
+	initial_user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
+	user_mime_types = g_hash_table_new (g_str_hash, g_str_equal);
 
 	mime_info_dir = gnome_unconditional_datadir_file ("mime-info");
 	mime_load_from_dir (mime_info_dir, TRUE);
