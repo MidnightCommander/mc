@@ -786,6 +786,67 @@ int exit_subshell (void)
 
 /* }}} */
 
+/*
+ * Carefully quote directory name to allow entering any directory safely,
+ * no matter what weird characters it may contain in its name.
+ * NOTE: Treat directory name an untrusted data, don't allow it to cause
+ * executing any commands in the shell. Escape all control characters.
+ * Use following technique:
+ *
+ * for bash - echo with `-e', 3-digit octal numbers:
+ *   cd "`echo -e '\ooo...\ooo'`"
+ *
+ * for zsh and tcsh - echo without `-e', 4-digit octal numbers:
+ *   cd "`echo '\oooo...\oooo'`"
+ */
+static char *
+subshell_name_quote (const char *s)
+{
+    char *ret, *d;
+    const char bash_start[] = "\"`echo -e '";
+    const char nonbash_start[] = "\"`echo '";
+    const char common_end[] = "'`\"";
+
+    /*
+     * Factor 5 because we need \, 0 and 3 other digits per character
+     * in the worst case (tcsh and zsh).
+     */
+    d = ret = g_malloc (5 * strlen (s) + 16);
+
+    /* Prevent interpreting leading `-' as a switch for `cd' */
+    if (*s == '-') {
+        *d++ = '.';
+        *d++ = '/';
+    }
+
+    /*
+     * Print every character in octal format with the leading backslash.
+     * tcsh and zsh require leading 0, bash doesn't like 4-digit octals
+     * and requires `-e' for echo.
+     */
+    if (subshell_type == BASH) {
+	memcpy (d, bash_start, sizeof (bash_start) - 1);
+	d += sizeof (bash_start) - 1;
+	for (; *s; s++) {
+	    sprintf(d, "\\%03o", (unsigned char) *s);
+	    d += 4;
+	}
+    } else {
+	memcpy (d, nonbash_start, sizeof (nonbash_start) - 1);
+	d += sizeof (nonbash_start) - 1;
+	for (; *s; s++) {
+	    sprintf(d, "\\0%03o", (unsigned char) *s);
+	    d += 5;
+	}
+    }
+
+    memcpy (d, common_end, sizeof (common_end));
+
+    return ret;
+}
+
+
+
 /* {{{ do_subshell_chdir */
 /* If it actually changed the directory it returns true */
 void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
@@ -804,23 +865,10 @@ void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
        because we set "HISTCONTROL=ignorespace") */
     write (subshell_pty, " cd ", 4);
     if (*directory) {
-	struct termios old_mode, new_mode;
 	char *temp;
-
-	/* FIXME: Lines below are dirty hack to prevent command execution
-	 *        for directory names containing 0x03 (intr) 0x14.
-	 *	  See http://www.securityfocus.com/vdb/?id=2016 for details.
-	 *        Subshell still can't chdir to such directories */
-	tcgetattr (subshell_pty, &old_mode);
-	new_mode = old_mode;
-	new_mode.c_lflag &= ~ISIG;    /* Disable intr, quit & suspend chars */
-	tcsetattr (subshell_pty, TCSANOW, &new_mode);
-
-	temp = name_quote (directory, 0);
+	temp = subshell_name_quote (directory);
 	write (subshell_pty, temp, strlen (temp));
 	g_free (temp);
-
-	tcsetattr (subshell_pty, TCSANOW, &old_mode);
     } else {
 	write (subshell_pty, "/", 1);
     }

@@ -1,3 +1,11 @@
+2001-07-12  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (subshell_name_quote): New function. Quote all
+	characters as octals, use command substitution.
+	(do_subshell_chdir): Use subshell_name_quote(). Don't change
+	terminal settings when the quoted path is sent to the shell -
+	it's now safe.
+
 2001-07-12  Andrew V. Samoilov <kai@cmail.ru>
 
 	* main.c: Eliminate iconify_on_exec.
