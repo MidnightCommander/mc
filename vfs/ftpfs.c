@@ -996,11 +996,15 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     if (send (SUP.sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf)) {
 	print_vfs_message (_("ftpfs: abort error: %s"),
 			   unix_error_string (errno));
+	if (dsock != -1)
+	    close (dsock);
 	return;
     }
 
     if (command (me, super, NONE, "%cABOR", DM) != COMPLETE) {
 	print_vfs_message (_("ftpfs: abort failed"));
+	if (dsock != -1)
+	    close (dsock);
 	return;
     }
     if (dsock != -1) {
@@ -1019,11 +1023,8 @@ linear_abort (vfs *me, vfs_s_fh *fh)
 		}
 	    }
 	}
-    }
-
-    if (dsock != -1)
 	close (dsock);
-
+    }
     if ((get_reply (me, SUP.sock, NULL, 0) == TRANSIENT) && (code == 426))
 	get_reply (me, SUP.sock, NULL, 0);
 }

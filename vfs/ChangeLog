@@ -1,3 +1,7 @@
+2002-11-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (linear_abort): Close data socket dsock.
+
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h [USE_VFS] (mc_setctl): Specify argument types.
@@ -1998,7 +2002,7 @@
 	Return a strdupped string now.
 	(send_ftp_command): Release translate_path result here.
 	(open_data_connection): Release translate_path result here.
-	(ftpfs_chdir_internal): Reease it here too.
+	(ftpfs_chdir_internal): Release it here too.
 
 1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
