@@ -1,3 +1,9 @@
+2003-02-03  Pavel Roskin  <proski@gnu.org>
+
+	* slint.c (getch): If there is EOF on the input, exit
+	immediately, don't use quiet_quit_cmd().
+	Reported by Steven P. Ulrick <spu@faith4miracle.org>
+
 2003-01-28  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (name_quote): Don't quote ':', '~' and '@'.  Quote '#'

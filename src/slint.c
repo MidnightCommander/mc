@@ -507,8 +507,7 @@ getch (void)
 	fprintf (stderr,
 		 "SLang_getkey returned SLANG_GETKEY_ERROR\n"
 		 "Assuming EOF on stdin and exiting\n");
-	quiet_quit_cmd ();
-	return -1;
+	exit (1);
     }
     return c;
 }
