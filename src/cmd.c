@@ -931,6 +931,7 @@ view_other_cmd (void)
 				     " the panels cannot be toggled. "));
 	message_flag = FALSE;
     } else {
+	channels_down ();
 	disable_mouse ();
 	if (clear_before_exec)
 	    clr_scr ();
@@ -974,7 +975,14 @@ view_other_cmd (void)
 
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
+
+	/* Prevent screen flash when user did 'exit' or 'logout' within
+	   subshell */
+	if (quit)
+	    return;
+
 	enable_mouse ();
+	channels_up ();
         if (alternate_plus_minus)
             application_keypad_mode ();
 
@@ -991,10 +999,7 @@ view_other_cmd (void)
 #endif /* HAVE_SUBSHELL_SUPPORT */
         touchwin (stdscr);
 	
-	/* prevent screen flash when user did 'exit' or 'logout' within
-	   subshell */
-	if (!quit)
-	    repaint_screen ();
+	repaint_screen ();
     }
 }
 

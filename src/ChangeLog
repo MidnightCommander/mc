@@ -1,3 +1,9 @@
+2002-07-03  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (view_other_cmd): Shut down extra select channels before
+	switching to the shell.  Restore them afterwards, but not if
+	quit was requested.  Skip more code on quit.
+
 2002-07-02  Pavel Roskin  <proski@gnu.org>
 
 	* util.c: Eliminate get_small_endian_long() and CHECK macro.
