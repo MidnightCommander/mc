@@ -6,10 +6,6 @@ Don't allow stdout and stderr from extfs scripts pollute the screen.
 Add minimal UTF-8 support on Red Hat 8.0 to fix the frames or disable
 support for S-Lang library compiled with UTF-8 support.
 
-REGRESSION: Cursor position in the editor is incorrect when a substring
-is found and there are control characters on the left in the same
-string.
-
 REGRESSION: Allow minimal functionality on read-only filesystems.
 
 Don't rely on temporary scripts being executable.  Run shell explicitly.
@@ -58,7 +54,8 @@ Hard links in cpio have 0 length (if easy to fix).
 Add "Ignore" and "Ignore all" buttons when reporting permission
 problems.
 
-Better date parser - support files beginning with "2000 ".
+Better date parser - don't allow seconds and year in ftp listings on the
+same line.
 
 Report errors in fish operations and recover from them.
 
