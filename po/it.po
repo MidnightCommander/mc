@@ -2510,7 +2510,7 @@ msgstr "linee visibili"
 
 #: src/layout.c:438
 msgid "Layout"
-msgstr "Layout"
+msgstr "Aspetto"
 
 #: src/learn.c:75
 msgid "Learn keys"
