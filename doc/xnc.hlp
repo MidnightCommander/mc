@@ -13,7 +13,7 @@ Version 
 This is the main help screen for the GNU Midnight Commander.
 
 To learn more on how to use the interactive help facility
-just tap enterHow to use help. You may like to go directly to the
+just press enterHow to use help. You may like to go directly to the
 help contentsContents.
 
 The Midnight Commander is written by its authorsAUTHORS.
@@ -442,21 +442,20 @@ the button.
 How to use help
 
 You can use the cursor keys or mouse to navigate in the
-help viewer.
-Press down arrow to move to the next item or scroll down.
-Press up arrow to move to the previous item or scroll up.
-Press right arrow to follow the current link.
-Press left arrow to go back in the history of nodes that
-you have visited.
+help viewer.  Press down arrow to move to the next item or
+scroll down.  Press up arrow to move to the previous item
+or scroll up.  Press right arrow to follow the current
+link.  Press left arrow to go back in the history of nodes
+that you have visited.
 
 If you terminal doesn't support the cursor keys you can
-use the space bar to scroll forward and the 'b' key scroll
-back. Use the TAB key to move to the next item and press
-ENTER to follow the current link. The 'l' (last) key may
-be used to go back in the history of nodes that you have
-visited. Press ESC to exit the help viewer.
+use the space bar to scroll forward and the b (back) key
+scroll back.  Use the TAB key to move to the next item and
+press ENTER to follow the current link.  The l (last) key
+can be used to go back in the history of nodes you have
+visited.  Press ESC to exit the help viewer.
 
-The left mouse button will follow the link or scroll. The
+The left mouse button will follow the link or scroll.  The
 right mouse button can be used to go back in the history
 of nodes.
 
@@ -464,17 +463,17 @@ The full key list of the help viewer:
 
 General movement keysGeneral Movement Keys are accepted.
 
-tab           Move to the next item.
-M-tab         Move to the previous item.
-down          Move to the next item or scroll a line down.
-up            Move to the previous item or scroll a line up.
-right, enter  Follow the current link.
-left, l       Go back in the history of visited nodes.
-F1            Show the help for the help viewer.
-n             Go to the next node.
-p             Go to the previous node.
-c             Go to the Contents node.
-F10, esc      Exit the help viewer.
+tab           Move to the next item.
+M-tab         Move to the previous item.
+down          Move to the next item or scroll a line down.
+up            Move to the previous item or scroll a line up.
+right, enter  Follow the current link.
+left, l       Go back in the history of visited nodes.
+F1            Show the help for the help viewer.
+n             Go to the next node.
+p             Go to the previous node.
+c             Go to the Contents node.
+F10, esc      Exit the help viewer.
 
 Local variables:
 fill-column: 58
