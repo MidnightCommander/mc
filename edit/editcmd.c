@@ -388,7 +388,7 @@ void menu_save_mode_cmd (void)
 	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, "savemext"},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
-	 0, &save_mode_new, str, "t"},
+	 0, &save_mode_new, (char **) str, "t"},
 	NULL_QuickWidget};
     static QuickDialog dialog =
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",

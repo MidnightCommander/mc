@@ -1,3 +1,12 @@
+2004-09-03  Pavel S. Shirshov <pavelsh@mail.ru>
+
+	* editwidget.c (edit_adjust_size): Fix warnings.
+	(edit_dialog_callback): Likewise.
+	edit.c (menu_save_mode_cmd): Likewise.
+
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
+
+
 2004-09-02  Pavel S. Shirshov <pavelsh@mail.ru>
 
 	* editcmd.c (edit_save_as_cmd): Add hotkey to dialog.

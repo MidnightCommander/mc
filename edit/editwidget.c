@@ -127,7 +127,7 @@ edit_adjust_size (Dlg_head *h)
     WEdit *edit;
     WButtonBar *edit_bar;
 
-    edit = (WEdit *) find_widget_type (h, edit_callback);
+    edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
     edit_bar = find_buttonbar (h);
 
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
@@ -151,7 +151,7 @@ edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_VALIDATE:
-	edit = (WEdit *) find_widget_type (h, edit_callback);
+	edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
 	if (!edit_ok_to_exit (edit)) {
 	    h->running = 1;
 	}
