@@ -1,5 +1,9 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* background.c (background_attention): Unregister task before
+	calling message() to avoid recursion.
+	(message_3s): Fix the number of arguments.
+
 	* command.c (enter): Don't change current_dlg to NULL.  It
 	breaks repainting of the panels.  Simplify logic.
 

@@ -260,12 +260,14 @@ background_attention (int fd, void *closure)
     if (bytes < (sizeof (routine))){
 	char *background_process_error = _(" Background process error ");
 
+	unregister_task_running (ctx->pid, fd);
+	waitpid (ctx->pid, &status, 0);
+
 	if (errno == ECHILD)
 	    message (1, background_process_error, _(" Child died unexpectedly "));
 	else
 	    message (1, background_process_error, _(" Unknown error in child "));
-	unregister_task_running (ctx->pid, fd);
-	waitpid (ctx->pid, &status, 0);
+
 	return 0;
     }
 
@@ -495,7 +497,7 @@ message_3s (int flags, char *title, const char *str1,
 	    const char *str2, const char *str3)
 {
     if (we_are_background)
-	parent_call ((void *)real_message_3s, NULL, 3, sizeof (flags), &flags,
+	parent_call ((void *)real_message_3s, NULL, 5, sizeof (flags), &flags,
 		     strlen (title), title, strlen (str1), str1,
 	             strlen (str2), str2, strlen (str3), str3);
     else
