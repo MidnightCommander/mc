@@ -654,9 +654,7 @@ ftpfs_open_socket (vfs *me, vfs_s_super *super)
     memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = inet_addr (host);
-    if (server_address.sin_addr.s_addr != -1)
-	server_address.sin_family = AF_INET;
-    else {
+    if (server_address.sin_addr.s_addr == INADDR_NONE) {
 	hp = gethostbyname (host);
 	if (hp == NULL){
 	    print_vfs_message (_("ftpfs: Invalid host address."));
