@@ -1,5 +1,12 @@
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
+	* file.c (progress_update_one): Changed parameter type from int
+	to off_t.
+	
+	Fixes http://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=124241
+
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
 	* util.c (load_file_position): Fixed possible segmentation fault
 	when an $HOME/.mc/filepos did not contain a ';'.
 

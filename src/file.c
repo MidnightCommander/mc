@@ -428,7 +428,7 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 static int
 progress_update_one (FileOpContext *ctx,
 		     off_t *progress_count,
-		     double *progress_bytes, int add, int is_toplevel_file)
+		     double *progress_bytes, off_t add, int is_toplevel_file)
 {
     int ret;
 
