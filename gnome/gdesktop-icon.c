@@ -17,6 +17,7 @@
 
 static void desktop_icon_class_init (DesktopIconClass *class);
 static void desktop_icon_init       (DesktopIcon      *dicon);
+static void desktop_icon_realize    (GtkWidget        *widget);
 
 
 static GtkWindowClass *parent_class;
@@ -55,6 +56,8 @@ desktop_icon_class_init (DesktopIconClass *class)
 	widget_class = (GtkWidgetClass *) class;
 
 	parent_class = gtk_type_class (gtk_window_get_type ());
+
+	widget_class->realize = desktop_icon_realize;
 }
 
 /* Computes and sets a new window shape for the desktop icon */
@@ -194,6 +197,18 @@ desktop_icon_init (DesktopIcon *dicon)
 	dicon->h_changed_id = gtk_signal_connect (GTK_OBJECT (dicon->text), "height_changed",
 						  (GtkSignalFunc) size_changed,
 						  dicon);
+}
+
+static void
+desktop_icon_realize (GtkWidget *widget)
+{
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_DESKTOP_ICON (widget));
+
+	if (GTK_WIDGET_CLASS (parent_class)->realize)
+		(* GTK_WIDGET_CLASS (parent_class)->realize) (widget);
+
+	/* FIXME: set the appropriate WM hints for desktop icons */
 }
 
 GtkWidget *

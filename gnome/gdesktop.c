@@ -171,8 +171,6 @@ desktop_icon_set_position (desktop_icon_t *di)
 		}
 	}
 
-	gtk_widget_size_request (di->widget, &di->widget->requisition);
-	
 	if (icons_snap_to_grid){
 		if (x == -1){
 			x = current_x;
@@ -195,7 +193,7 @@ desktop_icon_set_position (desktop_icon_t *di)
 			x = current_x;
 			y = current_y;
 			
-			current_y += di->widget->requisition.height + 8;
+			current_y += DESKTOP_ICON (di)->height + 8;
 			if (current_y > gdk_screen_height ()){
 				current_x += SNAP_X;
 				current_y = 0;
@@ -1073,10 +1071,10 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 	/* 2. Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (child->data), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
 
+#endif
 	if (show)
 		gtk_widget_show (di->widget);
 
-#endif
 	/* lower the window */
 	gdk_window_lower (di->widget->window);
 }
