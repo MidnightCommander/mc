@@ -216,7 +216,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    return 0;
 	close (fd);
     } else
-	savename = (char *) strdup (filename);
+	savename = g_strdup (filename);
 
     if ((fd = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
 		    edit->stat1.st_mode)) == -1)
@@ -297,11 +297,11 @@ int edit_save_file (WEdit * edit, const char *filename)
 	if (rename (savename, filename) == -1)
 	    goto error_save;
     if (savename)
-	free (savename);
+	g_free (savename);
     return 1;
   error_save:
     if (savename)
-	free (savename);
+	g_free (savename);
     return 0;
 }
 
@@ -1636,11 +1636,12 @@ void edit_replace_cmd (WEdit * edit, int again)
 
     if (!exp1 || !*exp1) {
 	edit->force = REDRAW_COMPLETELY;
-	if (exp1) {
+	if (exp1)
 	    g_free (exp1);
+	if (exp2)
 	    g_free (exp2);
+	if (exp3)
 	    g_free (exp3);
-	}
 	return;
     }
     if (old1)
@@ -1661,7 +1662,8 @@ void edit_replace_cmd (WEdit * edit, int again)
 	s = exp3;
 	for (i = 0; i < NUM_REPL_ARGS; i++) {
 	    if (s != (char *)1 && *s) {
-		if ((ord = atoi (s))>0)
+		ord = atoi (s);
+		if ((ord > 0) && (ord < NUM_REPL_ARGS))
 		    argord[i] = ord - 1;
 		else
 		    argord[i] = i;

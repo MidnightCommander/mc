@@ -1,6 +1,11 @@
+2001-11-22  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* editcmd.c (edit_save_file): Use g_free() on the result of                 
+	mc_mkstemps().
+
 2001-11-19  Andrew V. Samoilov  <kai@cmail.ru>
 
-	edit.c (edit_renew): Release dir after use.
+	* edit.c (edit_renew): Release dir after use.
 
 	* editcmd.c (edit_replace_dialog): Eliminate tsearch_text,
 	treplace_text and targ_order.
