@@ -4,6 +4,7 @@
 	then compile mc against it.
 	* build-glib2.sh: New file - download and compile glib 2.x with
 	dependencies (gettext, pkgconfig), then compile mc against it.
+	* Makefile.am: Distribute them.
 
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 

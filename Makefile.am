@@ -7,6 +7,7 @@ SUBDIRS = intl po m4 vfs slang edit src lib doc syntax
 EXTRA_DIST = FAQ INSTALL.FAST MAINTAINERS README.QNX
 
 noinst_DATA = mc.spec
+dist_noinst_SCRIPTS = build-glib1.sh build-glib2.sh
 
 ACLOCAL_AMFLAGS = -I m4
 
