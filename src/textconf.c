@@ -59,12 +59,10 @@ static const char * const features [] =  {
 
     " ",
 
-#ifdef SLANG_TERMINFO
-    N_("with terminfo database"),
-#elif defined(USE_TERMCAP)
+#ifdef USE_TERMCAP
     N_("with termcap database"),
 #else
-    N_("with an unknown terminal database"),
+    N_("with terminfo database"),
 #endif
 
 #elif defined(USE_NCURSES)

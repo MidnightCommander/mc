@@ -1,3 +1,8 @@
+2002-09-07  Pavel Roskin  <proski@gnu.org>
+
+	* textconf.c: Don't use SLANG_TERMINFO, which is unused anywhere
+	else.  Assume that terminfo is used if USE_TERMCAP is undefined.
+
 2002-09-06  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (subshell_name_quote): Return NULL if we are out of
