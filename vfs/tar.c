@@ -465,10 +465,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	current_file_name =
 	    (next_long_name ? next_long_name :
 	     g_strdup (header->header.arch_name));
+	canonicalize_pathname (current_file_name);
 	len = strlen (current_file_name);
-	if (current_file_name[len - 1] == '/') {
-	    current_file_name[len - 1] = 0;
-	}
 
 	data_position = current_tar_position;
 
@@ -479,13 +477,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	} else {
 	    *(p++) = 0;
 	    q = current_file_name;
-	    /* FIXME: should be q = vfs_normalize_dir(q) */
-	    while (q[0] == '.' && q[1] == '/')
-	        q += 2;
-	    if (*q == '.' && *(q+1) == '\0')
-		q++;
 	}
-	canonicalize_pathname(q);
 
 	parent =
 	    vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);

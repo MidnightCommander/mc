@@ -1,3 +1,7 @@
+2004-11-01  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* tar.c (tar_read_header): Fix pathname canonicalization.
+
 2004-10-29  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs/iso9660.in (mcisofs_list): Fix regular expression for stripping
