@@ -760,13 +760,13 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 }
 
 /* Callback used when the root window receives a drop */
-static void  
+static void
 drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 		    GtkSelectionData *data, guint info, guint time, gpointer user_data)
 {
 	switch (info) {
 	case TARGET_URI_LIST:
-		printf ("uri list dropped on desktop!\n");
+		printf ("uri-list dropped on desktop!\n");
 
 		gdnd_drop_on_directory (context, data, desktop_directory);
 		reload_desktop_icons (); /* FIXME: this is inefficient and it sucks! */
@@ -793,7 +793,7 @@ setup_desktop_dnd (void)
 		g_warning ("Eeeeek, some moron is already taking drops on the root window!");
 
 	gtk_drag_dest_set (dnd_proxy_window,
-			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+			   GTK_DEST_DEFAULT_DROP,
 			   dnd_targets, dnd_ntargets,
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
 
