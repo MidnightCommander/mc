@@ -1,3 +1,8 @@
+2004-09-22  Roland Illig  <roland.illig@gmx.de>
+
+	* HACKING: added advice for using g_strdup for a modifiable
+	copy of a string.
+
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
 	* HACKING: added explanation for const_cast.

@@ -296,6 +296,22 @@ const_cast: We use many libraries that do not know about "const char *" and
 	function does with the string, we should use g_strdup to pass
 	dynamically allocated strings.
 
+g_free: g_free handles NULL argument too, no need for the comparison.
+	Bad way:
+	    if (old_dir) g_free (old_dir);
+	Right way:
+	    g_free (old_dir);
+
+g_strdup: If you use g_strdup to create a local copy of a string, use
+	the following pattern to keep the reference.
+
+	char * const pathref = g_strdup(argument);
+	/* ... */
+	g_free (pathref);
+
+	The "const" will make the pointer unmodifiable (local_copy++
+	is not possible), but you can still modify the string contents.
+	
 g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
 	to the included headers. This is because in glib-1.2 there is
 	no such function.
@@ -306,9 +322,3 @@ size_t: This data type is suitable for expressing sizes of memory or the
 
 strncpy: Don't use this function in newly created code. It is slow, insecure
 	and hard to use. A much better alternative is g_strlcpy (see there).
-
-g_free: g_free handles NULL argument too, no need for the comparison.
-	Bad way:
-	    if (old_dir) g_free (old_dir);
-	Right way:
-	    g_free (old_dir);
