@@ -1,5 +1,11 @@
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Complete rewrite of the screen library support.
+	Add new option --with-screen instead on --with-slang,
+	--with-included-slang and --with-ncurses.  Only allow
+	--with-termcap is using the included S-Lang library.
+	* aclocal.m4: Corresponding changes.
+
 	* syntax/mail.syntax: Replace "wholechars right" and "wholechars
 	left" with single "wholechars".
 	* syntax/nroff.syntax: Likewise.

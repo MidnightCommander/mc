@@ -258,12 +258,6 @@ if test x$use_vfs = xyes; then
 	vfs_type="Midnight Commander Virtual File System"
 fi
 
-dnl This should be unadorned "slang" or "ncurses"
-screen_type=""
-
-dnl Screen manager name (for the output only)
-screen_manager=unknown
-
 mouse_lib="xterm only"
 case $host_os in
 linux*)
@@ -291,31 +285,6 @@ linux*)
 	])
     ;;
 esac
-
-AC_ARG_WITH(ncurses,
-	[  --with-ncurses[[=base-dir]]    Compile with ncurses [[no]]],
-[if test x$withval != xno; then
-	if test x$withval != xyes; then
-		LDFLAGS="$LDFLAGS -L$withval/lib"
-		CPPFLAGS="$CPPFLAGS -I$withval/include"
-	fi
-
-	AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h],
-			 [ncurses_h_found=yes; break])
-	if test -z "$ncurses_h_found"; then
-	    AC_MSG_ERROR([Could not find ncurses header])
-	fi
-
-	dnl curses_version is specific to ncurses, it's not in old curses
-	AC_CHECK_LIB(ncurses, has_colors, [MCLIBS="$MCLIBS -lncurses"],
-		     [AC_MSG_ERROR([Could not find ncurses library])])
-
-	screen_type="ncurses"
-	screen_manager="ncurses"
-	AC_DEFINE(USE_NCURSES, 1,
-		  [Define to use ncurses for screen management])
-fi
-])
 
 dnl
 dnl Check for the -mandoc package
@@ -450,44 +419,44 @@ fi
 AC_MSG_RESULT([$result])
 subshell="$result"
 
-if test "x$screen_type" != xncurses; then
-	slang_check_lib=true
-	slang_term=""
-	slang_use_system_installed_lib=false
-	AC_CHECK_LIB(slang,SLang_init_tty,
-		[AC_CHECK_HEADERS([slang.h slang/slang.h],
-				  [slang_h_found=yes; break])
-		if test "x$slang_h_found" = xyes; then
-	             slang_use_system_installed_lib=true
-		     slang_check_lib=false
-		fi
-	])
-fi
 
-AC_ARG_WITH(slang,
-	[  --with-slang             Compile with S-Lang screen manager [[yes]]],
-	[if test x$withval = xyes; then
-		AC_WITH_SLANG
-	fi]
-)
+dnl
+dnl Select the screen library.  mcslang is the included S-Lang library.
+dnl
+AC_ARG_WITH(screen,
+	[  --with-screen=LIB        Compile with screen library: slang, mcslang or
+                           ncurses [[slang if found, else mcslang]]])
 
-AC_ARG_WITH(included-slang,
-	[  --with-included-slang    Use S-Lang library included with mc sources
-                           [[use installed library if found]]],
-	[if test x$withval = xyes; then
-	    slang_use_system_installed_lib=false
-	    slang_check_lib=true
-	fi]
-)
+case x$with_screen in
+xslang)
+	MC_WITH_SLANG(strict)
+	;;
+xmcslang)
+	MC_WITH_MCSLANG
+	;;
+xncurses)
+	MC_WITH_NCURSES
+	;;
+x)
+	MC_WITH_SLANG
+	;;
+*)
+	AC_MSG_ERROR([Value of the screen library is incorrect])
+	;;
+esac
 
+
+dnl
+dnl Force using termcap
+dnl
 AC_ARG_WITH(termcap,
-	[  --with-termcap           Same as above, and try using termcap database [[no]]],
-	[if test x$withval = xyes; then
-		AC_USE_TERMCAP
-		slang_check_lib=false
-		slang_use_system_installed_lib=false
-	fi]
-)
+	[  --with-termcap           Try using termcap database [[no]]],
+	[if test x$with_screen = xmcslang; then
+		MC_USE_TERMCAP
+	else
+		AC_MSG_ERROR([Option `--with-termcap' only works with `--with-screen=mcslang'])
+	fi
+])
 
 
 dnl
@@ -521,40 +490,6 @@ if test $use_vfs = yes; then
     ])
 fi
 
-
-dnl Ncurses specific checks
-dnl
-dnl If ncurses exports the ESCDELAY variable it should be set to 0
-dnl or you'll have to press Esc three times to dismiss a dialog box.
-dnl
-if test "x$screen_type" = xncurses; then
-  save_LIBS="$LIBS"
-  LIBS="$MCLIBS $LIBS"
-  AC_CACHE_CHECK([for ESCDELAY variable],
-		 [mc_cv_ncurses_escdelay],
-		 [AC_TRY_COMPILE([], [
-			extern int ESCDELAY;
-			int main ()
-			{
-			  ESCDELAY = 0;
-			}
-			],
-			[mc_cv_ncurses_escdelay=yes],
-			[mc_cv_ncurses_escdelay=no]
-		  )
-  ])
-  if test "$mc_cv_ncurses_escdelay" = yes; then
-    AC_DEFINE(HAVE_ESCDELAY, 1,
-	      [Define if ncurses has ESCDELAY variable])
-  fi
-
-  AC_CHECK_FUNCS(resizeterm)
-  LIBS="$save_LIBS"
-fi
-
-if test "x$screen_type" = "x"; then
-    AC_WITH_SLANG
-fi
 
 dnl
 dnl The variables used for expanding the auto saver.
@@ -600,34 +535,6 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-dnl
-dnl This code should be moved to the ac_WITH_SLANG
-dnl
-dnl We check for the existance of setupterm on curses library
-dnl this is required to load certain definitions on some termcaps
-dnl editions (AIX and OSF/1 I seem to remember).
-dnl Note that we avoid using setupterm 
-if test "x$screen_type" = xslang; then
-	case $host_os in
-	linux*)
-		;;
-	*)
-		AC_CHECK_LIB(curses,setupterm,
-			[AC_TRY_COMPILE([
-#include <curses.h>
-#include <term.h>],[
-   if (key_end == parm_insert_line)
- 	return 1;
-   return 0;
-],
-			[MCLIBS="$MCLIBS -lcurses"
-			AC_DEFINE(USE_SETUPTERM, 1,
-				  [Define to use function `setupterm'
-from `curses' library in S-Lang])])
-		])
-	esac
-fi
-
 LIBS="$LIBS $posix_libs"
 
 AC_SUBST(CFLAGS)
@@ -652,8 +559,7 @@ AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
-AM_CONDITIONAL(INCLUDED_SLANG,
-	       [test "x$slang_use_system_installed_lib" = xfalse])
+AM_CONDITIONAL(INCLUDED_SLANG, [test "x$with_screen" = xmcslang])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
@@ -700,10 +606,6 @@ po/Makefile.in
 
 AC_OUTPUT
 
-if test "x$screen_type" = xslang; then
-    screen_manager="${screen_manager}${slang_term}"
-fi
-
 echo "
 Configuration:
 
@@ -712,7 +614,7 @@ Configuration:
   Compiler flags:             ${CFLAGS}
   File system:                ${vfs_type}
                               ${vfs_flags}
-  Screen manager:             ${screen_manager}
+  Screen library:             ${screen_msg}
   Install console saver:      ${install_saver}
   Mouse support:              ${mouse_lib}
   X11 events support:         ${textmode_x11_support}

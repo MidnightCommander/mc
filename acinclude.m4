@@ -604,57 +604,163 @@ and uses `struct fs_data'])
     dnl fi
 ])
 
-AC_DEFUN([AC_USE_TERMCAP], [
-	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
-	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap library])
-	AC_CHECK_LIB(termcap, tgoto, [MCLIBS="$MCLIBS -ltermcap"], , [$LIBS])
-	slang_term=" with termcap"
-])
-	
-AC_DEFUN([AC_WITH_SLANG], [
-	AC_DEFINE(HAVE_SLANG, 1,
-		  [Define to use S-Lang library for screen management])
-	screen_type="slang"
-	if $slang_use_system_installed_lib
-	then
-	    AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
-		      [Define to use S-Lang library installed on the system])
-	    MCLIBS="-lslang $MCLIBS"
-	    screen_manager="SLang (system-installed library)"
-	    AC_MSG_NOTICE([using system installed S-Lang library])
-	    ac_save_LIBS="$LIBS"
-	    LIBS="$LIBS -lslang"
-	    AC_TRY_LINK(
-	    [ 
-	    #ifdef HAVE_SLANG_SLANG_H
-	    #include <slang/slang.h>
-	    #else
-	    #include <slang.h>
-	    #endif], [
-	    SLtt_get_terminfo();
-	    SLtt_tgetflag("");], 
-	    [LIBS="$ac_save_LIBS"],
-	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
-	else
-	    screen_manager="SLang"
-	fi
-	if $slang_check_lib
-	then
-	    use_terminfo=
-	    for dir in 	/usr/lib /usr/share/lib /usr/local/lib /lib \
-			/usr/local/share /usr/share
-	    do
-		if test -d $dir/terminfo; then
-		use_terminfo=yes
-		break
-		fi
-	    done
-	    if test -z "$use_terminfo"; then
-		AC_USE_TERMCAP
-	    fi
-        fi]
-)
 
+dnl
+dnl Try using termcap database and link with libtermcap if possible.
+dnl
+AC_DEFUN([MC_USE_TERMCAP], [
+	screen_msg="$screen_msg with termcap database"
+	AC_MSG_NOTICE([using S-Lang screen manager with termcap])
+	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap database])
+	AC_CHECK_LIB(termcap, tgoto, [MCLIBS="$MCLIBS -ltermcap"], , [$LIBS])
+])
+
+
+dnl
+dnl Common code for MC_WITH_SLANG and MC_WITH_MCSLANG
+dnl
+dnl We check for the existance of setupterm on curses library
+dnl this is required to load certain definitions on some termcaps
+dnl editions (AIX and OSF/1 I seem to remember).
+dnl Note that we avoid using setupterm 
+dnl
+AC_DEFUN([_MC_WITH_XSLANG], [
+    screen_type=slang
+    AC_DEFINE(HAVE_SLANG, 1,
+	      [Define to use S-Lang library for screen management])
+
+    case $host_os in
+    linux*)
+	;;
+    *)
+	AC_CHECK_LIB(curses,setupterm,
+		     [AC_TRY_COMPILE([
+#include <curses.h>
+#include <term.h>],
+			[return (key_end == parm_insert_line);],
+			[MCLIBS="$MCLIBS -lcurses"
+			AC_DEFINE(USE_SETUPTERM, 1,
+				  [Define to use function `setupterm'
+from `curses' library in S-Lang])])
+	])
+	;;
+    esac
+])
+
+
+dnl
+dnl Check if the system S-Lang library can be used.
+dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
+dnl
+AC_DEFUN([MC_WITH_SLANG], [
+    with_screen=slang
+    AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
+		 [with_screen=mcslang])
+
+    dnl Check the header
+    if test x$with_screen = xslang; then
+	slang_h_found=
+	AC_CHECK_HEADERS([slang.h slang/slang.h],
+			 [slang_h_found=yes; break])
+
+	if test -z "$slang_h_found"; then
+	    with_screen=mcslang
+	fi
+    fi
+
+    dnl Check if the installed S-Lang library uses termcap
+    if test x$with_screen = xslang; then
+	screen_type=slang
+	screen_msg="S-Lang library (installed on the system)"
+	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
+		  [Define to use S-Lang library installed on the system])
+	ac_save_LIBS="$LIBS"
+	LIBS="$LIBS -lslang"
+	AC_TRY_LINK([ 
+	#ifdef HAVE_SLANG_SLANG_H
+	#include <slang/slang.h>
+	#else
+	#include <slang.h>
+	#endif],
+	[SLtt_get_terminfo();
+	SLtt_tgetflag("");], 
+	[LIBS="$ac_save_LIBS"],
+	[LIBS="$ac_save_LIBS"; MC_USE_TERMCAP])
+        _MC_WITH_XSLANG
+    else
+	m4_if([$1], strict,
+	    [if test $with_screen != slang; then
+		AC_MSG_ERROR([S-Lang library not found])
+	    fi],
+	    [MC_WITH_MCSLANG]
+	)
+    fi
+])
+
+
+dnl
+dnl Use the included S-Lang library.
+dnl
+AC_DEFUN([MC_WITH_MCSLANG], [
+    screen_type=slang
+    screen_msg="Included S-Lang library (mcslang)"
+    _MC_WITH_XSLANG
+])
+
+
+dnl
+dnl Use the ncurses library.  It can only be requested explicitly,
+dnl so just fail if anything goes wrong.
+dnl
+dnl If ncurses exports the ESCDELAY variable it should be set to 0
+dnl or you'll have to press Esc three times to dismiss a dialog box.
+dnl
+AC_DEFUN([MC_WITH_NCURSES], [
+    dnl has_colors() is specific to ncurses, it's not in the old curses
+    AC_CHECK_LIB([ncurses], [has_colors], [MCLIBS="$MCLIBS -lncurses"],
+		 [AC_MSG_ERROR([Could not find ncurses library])])
+
+    dnl Check the header
+    ncurses_h_found=
+    AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h],
+		     [ncurses_h_found=yes; break])
+
+    if test -z "$ncurses_h_found"; then
+	AC_MSG_ERROR([Could not find ncurses header file])
+    fi
+
+    screen_type=ncurses
+    screen_msg="ncurses library"
+    AC_DEFINE(USE_NCURSES, 1,
+	      [Define to use ncurses for screen management])
+
+    save_LIBS="$LIBS"
+    LIBS="$LIBS -lncurses"
+    AC_CACHE_CHECK([for ESCDELAY variable],
+		   [mc_cv_ncurses_escdelay],
+		   [AC_TRY_COMPILE([], [
+			extern int ESCDELAY;
+			int main ()
+			{
+			  ESCDELAY = 0;
+			}
+			],
+			[mc_cv_ncurses_escdelay=yes],
+			[mc_cv_ncurses_escdelay=no])
+    ])
+    if test "$mc_cv_ncurses_escdelay" = yes; then
+	AC_DEFINE(HAVE_ESCDELAY, 1,
+		  [Define if ncurses has ESCDELAY variable])
+    fi
+
+    AC_CHECK_FUNCS(resizeterm)
+    LIBS="$save_LIBS"
+])
+
+
+dnl
+dnl Check for ext2fs recovery code
+dnl
 AC_DEFUN([AC_EXT2_UNDEL], [
   MC_UNDELFS_CHECKS
   if test "$ext2fs_undel" = yes; then
