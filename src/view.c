@@ -462,7 +462,7 @@ view_ok_to_quit (WView *view)
 
     r = query_dialog (_("Quit"),
 		      _(" File was modified, Save with exit? "), 2, 3,
-		      _("Cancel quit"), _("&Yes"), _("&No"));
+		      _("&Cancel quit"), _("&Yes"), _("&No"));
 
     switch (r) {
     case 1:

@@ -79,6 +79,10 @@ extern int alarm_colors[4];
 #define EDITOR_BOLD_COLOR            IF_COLOR (35, A_BOLD)
 #define EDITOR_MARKED_COLOR          IF_COLOR (36, A_REVERSE)
 
+/* Error dialog colors */
+#define ERROR_HOT_NORMAL   IF_COLOR (37, 0)
+#define ERROR_HOT_FOCUS    IF_COLOR (38, 0)
+
 #ifdef HAVE_SLANG
 #   define CTYPE const char *
 #else

@@ -96,6 +96,10 @@ static struct colorpair color_map [] = {
     { "editnormal=",     0, 0 },	/* normal */       /* 34 */
     { "editbold=",       0, 0 },	/* search->found */
     { "editmarked=",     0, 0 },	/* marked/selected */
+
+/* error dialog colors start at 37 */
+    { "errdhotnormal=",  0, 0 }, /* Error dialog normal/hot */ /* 37 */
+    { "errdhotfocus=",   0, 0 }, /* Error dialog focused/hot */
 };
 
 struct color_table_s {
@@ -156,7 +160,9 @@ static const char *default_colors =
 "special=black,blue:"
 "editnormal=lightgray,blue:"
 "editbold=yellow,blue:"
-"editmarked=black,cyan";
+"editmarked=black,cyan:"
+"errdhotnormal=yellow,red:"
+"errdhotfocus=yellow,lightgray";
 
 #ifdef HAVE_SLANG
 #   define color_value(i) color_table [i].name
@@ -269,8 +275,8 @@ load_dialog_colors (void)
 
     alarm_colors [0] = ERROR_COLOR;
     alarm_colors [1] = REVERSE_COLOR;
-    alarm_colors [2] = ERROR_COLOR;
-    alarm_colors [3] = COLOR_HOT_NORMAL;
+    alarm_colors [2] = ERROR_HOT_NORMAL;
+    alarm_colors [3] = ERROR_HOT_FOCUS;
 }
 
 void init_colors (void)
