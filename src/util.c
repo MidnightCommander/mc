@@ -868,31 +868,30 @@ char *get_current_wd (char *buffer, int size)
 static long
 get_small_endian_long (int fd)
 {
-    unsigned char a, b, c, d;
+    unsigned char buffer [4];
 
-    /* It needs to be read one byte at the time to avoid endianess
-       portability problems */
-    CHECK (mc_read (fd, &a, 1));
-    CHECK (mc_read (fd, &b, 1));
-    CHECK (mc_read (fd, &c, 1));
-    CHECK (mc_read (fd, &d, 1));
-    return (d << 24) | (c << 16) | (b << 8) | a;
+    CHECK (mc_read (fd, buffer, 4));
+    return (buffer [3] << 24) | (buffer [2] << 16) | (buffer [1] << 8) | buffer [0];
 }
+
+/*
+ * This constant makes the magic array on the stack be larger than
+ * it needs because Linux when reading the second byte of /proc/locks
+ * for example will write 2 bytes, even if we only asked for one
+ */
+#define LINUX_HAS_PROBLEMS_WHEN_READING_PROC_LOCKS_ON_SOME_KERNELS 40
 
 /* This function returns 0 if the file is not in gunzip format  */
 /* or how much memory must be allocated to load the gziped file */
 /* Warning: this function moves the current file pointer */
 long int is_gunzipable (int fd, int *type)
 {
-    unsigned char magic [4];
-	
+    unsigned char magic [4+LINUX_HAS_PROBLEMS_WHEN_READING_PROC_LOCKS_ON_SOME_KERNELS];
+    
     *type = ISGUNZIPABLE_GUNZIP;
 	
     /* Read the magic signature */
-    CHECK (mc_read (fd, &magic [0], 1));
-    CHECK (mc_read (fd, &magic [1], 1));
-    CHECK (mc_read (fd, &magic [2], 1));
-    CHECK (mc_read (fd, &magic [3], 1));
+    CHECK (mc_read (fd, &magic [0], 4));
 	
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
     if (magic [0] == 037 && (magic [1] == 0213 || magic [1] == 0236)){
@@ -905,8 +904,7 @@ long int is_gunzipable (int fd, int *type)
     if (magic [0] == 0120 && magic [1] == 0113 && magic [2] == 003 && magic [3] == 004){
 	/* Read compression type */
 	mc_lseek (fd, 8, SEEK_SET);
-	CHECK (mc_read (fd, &magic [0], 1));
-	CHECK (mc_read (fd, &magic [1], 1));
+	CHECK (mc_read (fd, &magic [0], 2));
 	
 	/* Gzip can handle only deflated (8) or stored (0) files */
 	if ((magic [0] != 8 && magic [0] != 0) || magic [1] != 0)

@@ -1,3 +1,7 @@
+1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* util.c: Provide workarounds for Linux kernel bug.
+
 Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 
 	* screen.c(string_file_size): Fixed (incorrect?) printing of device num-
