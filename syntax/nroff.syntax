@@ -1,3 +1,5 @@
+wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-+="'[]{}()
+wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-+="'[]{}()
 
 context default
     spellcheck
@@ -5,200 +7,200 @@ context default
     keyword \\fR brightgreen/6
     keyword \\fB brightgreen/6
     keyword \\fI brightgreen/6
-    keyword linestart .AS cyan/5
-    keyword linestart .Ar cyan/5
-    keyword linestart .At cyan/5
-    keyword linestart .BE cyan/5
-    keyword linestart .BH cyan/5
-    keyword linestart .BI cyan/5
-    keyword linestart .BR cyan/5
-    keyword linestart .BS cyan/5
-    keyword linestart .Bd cyan/5
-    keyword linestart .Bk cyan/5
-    keyword linestart .Bl cyan/5
-    keyword linestart .Bu cyan/5
-    keyword linestart .Bx cyan/5
-    keyword linestart .CE cyan/5
-    keyword linestart .CM cyan/5
-    keyword linestart .CS cyan/5
-    keyword linestart .CT cyan/5
-    keyword linestart .CW cyan/5
-    keyword linestart .Cm cyan/5
-    keyword linestart .Co cyan/5
-    keyword linestart .DA cyan/5
-    keyword linestart .DE cyan/5
-    keyword linestart .DS cyan/5
-    keyword linestart .DT cyan/5
-    keyword linestart .Dd cyan/5
-    keyword linestart .De cyan/5
-    keyword linestart .Dl cyan/5
-    keyword linestart .Dq cyan/5
-    keyword linestart .Ds cyan/5
-    keyword linestart .Dt cyan/5
-    keyword linestart .Dv cyan/5
-    keyword linestart .EE cyan/5
-    keyword linestart .EN cyan/5
-    keyword linestart .EQ cyan/5
-    keyword linestart .EX cyan/5
-    keyword linestart .Ed cyan/5
-    keyword linestart .Ee cyan/5
-    keyword linestart .Ek cyan/5
-    keyword linestart .El cyan/5
-    keyword linestart .Em cyan/5
-    keyword linestart .En cyan/5
-    keyword linestart .Ev cyan/5
-    keyword linestart .Ex cyan/5
-    keyword linestart .FI cyan/5
-    keyword linestart .FL cyan/5
-    keyword linestart .FN cyan/5
-    keyword linestart .FT cyan/5
-    keyword linestart .Fi cyan/5
-    keyword linestart .Fl cyan/5
-    keyword linestart .Fn cyan/5
-    keyword linestart .HP cyan/5
-    keyword linestart .HS cyan/5
-    keyword linestart .Hh cyan/5
-    keyword linestart .Hi cyan/5
-    keyword linestart .IB cyan/5
-    keyword linestart .IP cyan/5
-    keyword linestart .IR cyan/5
-    keyword linestart .IX cyan/5
-    keyword linestart .Ic cyan/5
-    keyword linestart .Id cyan/5
-    keyword linestart .Ip cyan/5
-    keyword linestart .It cyan/5
-    keyword linestart .LI cyan/5
-    keyword linestart .LO cyan/5
-    keyword linestart .LP cyan/5
-    keyword linestart .LR cyan/5
-    keyword linestart .Li cyan/5
-    keyword linestart .MF cyan/5
-    keyword linestart .ML cyan/5
-    keyword linestart .MU cyan/5
-    keyword linestart .MV cyan/5
-    keyword linestart .NF cyan/5
-    keyword linestart .Nd cyan/5
-    keyword linestart .Nm cyan/5
-    keyword linestart .No cyan/5
-    keyword linestart .OP cyan/5
-    keyword linestart .Oc cyan/5
-    keyword linestart .Oo cyan/5
-    keyword linestart .Op cyan/5
-    keyword linestart .Os cyan/5
-    keyword linestart .PD cyan/5
-    keyword linestart .PN cyan/5
-    keyword linestart .PP cyan/5
-    keyword linestart .PU cyan/5
-    keyword linestart .Pa cyan/5
-    keyword linestart .Pf cyan/5
-    keyword linestart .Pp cyan/5
-    keyword linestart .Pq cyan/5
-    keyword linestart .Pr cyan/5
-    keyword linestart .Ps cyan/5
-    keyword linestart .Ql cyan/5
-    keyword linestart .RB cyan/5
-    keyword linestart .RE cyan/5
-    keyword linestart .RI cyan/5
-    keyword linestart .RS cyan/5
-    keyword linestart .RT cyan/5
-    keyword linestart .Re cyan/5
-    keyword linestart .Rs cyan/5
-    keyword linestart .SB cyan/5
-    keyword linestart .SH cyan/5
-    keyword linestart .SM cyan/5
-    keyword linestart .SP cyan/5
-    keyword linestart .SS cyan/5
-    keyword linestart .Sa cyan/5
-    keyword linestart .Sh cyan/5
-    keyword linestart .Sm cyan/5
-    keyword linestart .Sp cyan/5
-    keyword linestart .Sq cyan/5
-    keyword linestart .Ss cyan/5
-    keyword linestart .St cyan/5
-    keyword linestart .Sx cyan/5
-    keyword linestart .Sy cyan/5
-    keyword linestart .TE cyan/5
-    keyword linestart .TH cyan/5
-    keyword linestart .TP cyan/5
-    keyword linestart .TQ cyan/5
-    keyword linestart .TS cyan/5
-    keyword linestart .Tn cyan/5
-    keyword linestart .Tp cyan/5
-    keyword linestart .UC cyan/5
-    keyword linestart .Uh cyan/5
-    keyword linestart .Ux cyan/5
-    keyword linestart .VE cyan/5
-    keyword linestart .VS cyan/5
-    keyword linestart .Va cyan/5
-    keyword linestart .Vb cyan/5
-    keyword linestart .Ve cyan/5
-    keyword linestart .Xc cyan/5
-    keyword linestart .Xe cyan/5
-    keyword linestart .Xr cyan/5
-    keyword linestart .YN cyan/5
-    keyword linestart .ad cyan/5
-    keyword linestart .am cyan/5
-    keyword linestart .bd cyan/5
-    keyword linestart .bp cyan/5
-    keyword linestart .br cyan/5
-    keyword linestart .ce cyan/5
-    keyword linestart .cs cyan/5
-    keyword linestart .de cyan/5
-    keyword linestart .ds cyan/5
-    keyword linestart .ec cyan/5
-    keyword linestart .eh cyan/5
-    keyword linestart .el cyan/5
-    keyword linestart .eo cyan/5
-    keyword linestart .ev cyan/5
-    keyword linestart .fc cyan/5
-    keyword linestart .fi cyan/5
-    keyword linestart .ft cyan/5
-    keyword linestart .hy cyan/5
-    keyword linestart .iX cyan/5
-    keyword linestart .ie cyan/5
-    keyword linestart .if cyan/5
-    keyword linestart .ig cyan/5
-    keyword linestart .in cyan/5
-    keyword linestart .ll cyan/5
-    keyword linestart .lp cyan/5
-    keyword linestart .ls cyan/5
-    keyword linestart .mk cyan/5
-    keyword linestart .na cyan/5
-    keyword linestart .ne cyan/5
-    keyword linestart .nf cyan/5
-    keyword linestart .nh cyan/5
-    keyword linestart .nr cyan/5
-    keyword linestart .ns cyan/5
-    keyword linestart .oh cyan/5
-    keyword linestart .ps cyan/5
-    keyword linestart .re cyan/5
-    keyword linestart .rm cyan/5
-    keyword linestart .rn cyan/5
-    keyword linestart .rr cyan/5
-    keyword linestart .so cyan/5
-    keyword linestart .sp cyan/5
-    keyword linestart .ss cyan/5
-    keyword linestart .ta cyan/5
-    keyword linestart .ti cyan/5
-    keyword linestart .tm cyan/5
-    keyword linestart .tr cyan/5
-    keyword linestart .ul cyan/5
-    keyword linestart .vs cyan/5
-    keyword linestart .zZ cyan/5
-    keyword linestart .B cyan/5
-    keyword linestart .F cyan/5
-    keyword linestart .I cyan/5
-    keyword linestart .R cyan/5
-    keyword linestart .P cyan/5
-    keyword linestart .L cyan/5
-    keyword linestart .V cyan/5
-    keyword linestart .F cyan/5
-    keyword linestart .T cyan/5
-    keyword linestart .X cyan/5
-    keyword linestart .Y cyan/5
-    keyword linestart .b cyan/5
-    keyword linestart .l cyan/5
-    keyword linestart .i cyan/5
+    keyword whole linestart .AS cyan/5
+    keyword whole linestart .Ar cyan/5
+    keyword whole linestart .At cyan/5
+    keyword whole linestart .BE cyan/5
+    keyword whole linestart .BH cyan/5
+    keyword whole linestart .BI cyan/5
+    keyword whole linestart .BR cyan/5
+    keyword whole linestart .BS cyan/5
+    keyword whole linestart .Bd cyan/5
+    keyword whole linestart .Bk cyan/5
+    keyword whole linestart .Bl cyan/5
+    keyword whole linestart .Bu cyan/5
+    keyword whole linestart .Bx cyan/5
+    keyword whole linestart .CE cyan/5
+    keyword whole linestart .CM cyan/5
+    keyword whole linestart .CS cyan/5
+    keyword whole linestart .CT cyan/5
+    keyword whole linestart .CW cyan/5
+    keyword whole linestart .Cm cyan/5
+    keyword whole linestart .Co cyan/5
+    keyword whole linestart .DA cyan/5
+    keyword whole linestart .DE cyan/5
+    keyword whole linestart .DS cyan/5
+    keyword whole linestart .DT cyan/5
+    keyword whole linestart .Dd cyan/5
+    keyword whole linestart .De cyan/5
+    keyword whole linestart .Dl cyan/5
+    keyword whole linestart .Dq cyan/5
+    keyword whole linestart .Ds cyan/5
+    keyword whole linestart .Dt cyan/5
+    keyword whole linestart .Dv cyan/5
+    keyword whole linestart .EE cyan/5
+    keyword whole linestart .EN cyan/5
+    keyword whole linestart .EQ cyan/5
+    keyword whole linestart .EX cyan/5
+    keyword whole linestart .Ed cyan/5
+    keyword whole linestart .Ee cyan/5
+    keyword whole linestart .Ek cyan/5
+    keyword whole linestart .El cyan/5
+    keyword whole linestart .Em cyan/5
+    keyword whole linestart .En cyan/5
+    keyword whole linestart .Ev cyan/5
+    keyword whole linestart .Ex cyan/5
+    keyword whole linestart .FI cyan/5
+    keyword whole linestart .FL cyan/5
+    keyword whole linestart .FN cyan/5
+    keyword whole linestart .FT cyan/5
+    keyword whole linestart .Fi cyan/5
+    keyword whole linestart .Fl cyan/5
+    keyword whole linestart .Fn cyan/5
+    keyword whole linestart .HP cyan/5
+    keyword whole linestart .HS cyan/5
+    keyword whole linestart .Hh cyan/5
+    keyword whole linestart .Hi cyan/5
+    keyword whole linestart .IB cyan/5
+    keyword whole linestart .IP cyan/5
+    keyword whole linestart .IR cyan/5
+    keyword whole linestart .IX cyan/5
+    keyword whole linestart .Ic cyan/5
+    keyword whole linestart .Id cyan/5
+    keyword whole linestart .Ip cyan/5
+    keyword whole linestart .It cyan/5
+    keyword whole linestart .LI cyan/5
+    keyword whole linestart .LO cyan/5
+    keyword whole linestart .LP cyan/5
+    keyword whole linestart .LR cyan/5
+    keyword whole linestart .Li cyan/5
+    keyword whole linestart .MF cyan/5
+    keyword whole linestart .ML cyan/5
+    keyword whole linestart .MU cyan/5
+    keyword whole linestart .MV cyan/5
+    keyword whole linestart .NF cyan/5
+    keyword whole linestart .Nd cyan/5
+    keyword whole linestart .Nm cyan/5
+    keyword whole linestart .No cyan/5
+    keyword whole linestart .OP cyan/5
+    keyword whole linestart .Oc cyan/5
+    keyword whole linestart .Oo cyan/5
+    keyword whole linestart .Op cyan/5
+    keyword whole linestart .Os cyan/5
+    keyword whole linestart .PD cyan/5
+    keyword whole linestart .PN cyan/5
+    keyword whole linestart .PP cyan/5
+    keyword whole linestart .PU cyan/5
+    keyword whole linestart .Pa cyan/5
+    keyword whole linestart .Pf cyan/5
+    keyword whole linestart .Pp cyan/5
+    keyword whole linestart .Pq cyan/5
+    keyword whole linestart .Pr cyan/5
+    keyword whole linestart .Ps cyan/5
+    keyword whole linestart .Ql cyan/5
+    keyword whole linestart .RB cyan/5
+    keyword whole linestart .RE cyan/5
+    keyword whole linestart .RI cyan/5
+    keyword whole linestart .RS cyan/5
+    keyword whole linestart .RT cyan/5
+    keyword whole linestart .Re cyan/5
+    keyword whole linestart .Rs cyan/5
+    keyword whole linestart .SB cyan/5
+    keyword whole linestart .SH cyan/5
+    keyword whole linestart .SM cyan/5
+    keyword whole linestart .SP cyan/5
+    keyword whole linestart .SS cyan/5
+    keyword whole linestart .Sa cyan/5
+    keyword whole linestart .Sh cyan/5
+    keyword whole linestart .Sm cyan/5
+    keyword whole linestart .Sp cyan/5
+    keyword whole linestart .Sq cyan/5
+    keyword whole linestart .Ss cyan/5
+    keyword whole linestart .St cyan/5
+    keyword whole linestart .Sx cyan/5
+    keyword whole linestart .Sy cyan/5
+    keyword whole linestart .TE cyan/5
+    keyword whole linestart .TH cyan/5
+    keyword whole linestart .TP cyan/5
+    keyword whole linestart .TQ cyan/5
+    keyword whole linestart .TS cyan/5
+    keyword whole linestart .Tn cyan/5
+    keyword whole linestart .Tp cyan/5
+    keyword whole linestart .UC cyan/5
+    keyword whole linestart .Uh cyan/5
+    keyword whole linestart .Ux cyan/5
+    keyword whole linestart .VE cyan/5
+    keyword whole linestart .VS cyan/5
+    keyword whole linestart .Va cyan/5
+    keyword whole linestart .Vb cyan/5
+    keyword whole linestart .Ve cyan/5
+    keyword whole linestart .Xc cyan/5
+    keyword whole linestart .Xe cyan/5
+    keyword whole linestart .Xr cyan/5
+    keyword whole linestart .YN cyan/5
+    keyword whole linestart .ad cyan/5
+    keyword whole linestart .am cyan/5
+    keyword whole linestart .bd cyan/5
+    keyword whole linestart .bp cyan/5
+    keyword whole linestart .br cyan/5
+    keyword whole linestart .ce cyan/5
+    keyword whole linestart .cs cyan/5
+    keyword whole linestart .de cyan/5
+    keyword whole linestart .ds cyan/5
+    keyword whole linestart .ec cyan/5
+    keyword whole linestart .eh cyan/5
+    keyword whole linestart .el cyan/5
+    keyword whole linestart .eo cyan/5
+    keyword whole linestart .ev cyan/5
+    keyword whole linestart .fc cyan/5
+    keyword whole linestart .fi cyan/5
+    keyword whole linestart .ft cyan/5
+    keyword whole linestart .hy cyan/5
+    keyword whole linestart .iX cyan/5
+    keyword whole linestart .ie cyan/5
+    keyword whole linestart .if cyan/5
+    keyword whole linestart .ig cyan/5
+    keyword whole linestart .in cyan/5
+    keyword whole linestart .ll cyan/5
+    keyword whole linestart .lp cyan/5
+    keyword whole linestart .ls cyan/5
+    keyword whole linestart .mk cyan/5
+    keyword whole linestart .na cyan/5
+    keyword whole linestart .ne cyan/5
+    keyword whole linestart .nf cyan/5
+    keyword whole linestart .nh cyan/5
+    keyword whole linestart .nr cyan/5
+    keyword whole linestart .ns cyan/5
+    keyword whole linestart .oh cyan/5
+    keyword whole linestart .ps cyan/5
+    keyword whole linestart .re cyan/5
+    keyword whole linestart .rm cyan/5
+    keyword whole linestart .rn cyan/5
+    keyword whole linestart .rr cyan/5
+    keyword whole linestart .so cyan/5
+    keyword whole linestart .sp cyan/5
+    keyword whole linestart .ss cyan/5
+    keyword whole linestart .ta cyan/5
+    keyword whole linestart .ti cyan/5
+    keyword whole linestart .tm cyan/5
+    keyword whole linestart .tr cyan/5
+    keyword whole linestart .ul cyan/5
+    keyword whole linestart .vs cyan/5
+    keyword whole linestart .zZ cyan/5
+    keyword whole linestart .B cyan/5
+    keyword whole linestart .F cyan/5
+    keyword whole linestart .I cyan/5
+    keyword whole linestart .R cyan/5
+    keyword whole linestart .P cyan/5
+    keyword whole linestart .L cyan/5
+    keyword whole linestart .V cyan/5
+    keyword whole linestart .F cyan/5
+    keyword whole linestart .T cyan/5
+    keyword whole linestart .X cyan/5
+    keyword whole linestart .Y cyan/5
+    keyword whole linestart .b cyan/5
+    keyword whole linestart .l cyan/5
+    keyword whole linestart .i cyan/5
 
 context exclusive linestart .SH \n brightred/18
     keyword \\fB*\\fP magenta/23
@@ -214,7 +216,7 @@ context exclusive linestart .B \n magenta/23
 context exclusive linestart .I \n yellow/24
     keyword \\fB*\\fP magenta/23
     spellcheck
-context exclusive linestart .nf linestart .fi green/15
+context exclusive whole linestart .nf linestart .fi green/15
     keyword \\fB*\\fP magenta/23
     keyword \\fI*\\fP yellow/24
     spellcheck
