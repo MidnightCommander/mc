@@ -1,12 +1,16 @@
 mc ()
 {
-        mkdir -p $HOME/.mc/tmp 2> /dev/null
-	chmod 700 $HOME/.mc/tmp
-	MC=$HOME/.mc/tmp/mc-$$
-	@prefix@/bin/mc -P "$@" > "$MC"
-	cd "`cat $MC`"
-	rm -f "$MC"
-        unset MC;
+	MC_PWD_FILE="/tmp/mc-$USER/mc.pwd.$$"
+	@prefix@/bin/mc -P "$MC_PWD_FILE" "$@"
+	if test -r "$MC_PWD_FILE"; then
+		MC_PWD="`cat $MC_PWD_FILE`"
+		if test -n "$MC_PWD" && test -d "$MC_PWD"; then
+			cd "$MC_PWD"
+		fi
+	fi
+	rm -f "$MC_PWD_FILE"
+	unset MC_PWD
+	unset MC_PWD_FILE
 }
 
 if test -n "$BASH_VERSION"; then
