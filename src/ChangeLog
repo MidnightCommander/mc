@@ -8,6 +8,7 @@
 	* hotlist.c (unlink_entry): Add missed brackets.
 	(add_new_entry_cmd): Fix memory leaks and double free()s.
 	(add2hotlist_cmd): Eliminate static label_string.
+	* regex.c: Define HAVE_WCTYPE_H to 0 if not defined to fix compilation.
 
 2004-11-09  Pavel Shirshov  <me@pavelsh.pp.ru>
 
