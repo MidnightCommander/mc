@@ -419,7 +419,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 
     if((stat->st_nlink > 1) &&
        (super->u.cpio.type == CPIO_NEWC ||
-	super->u.cpio.type == CPIO_CRC)) { /* For case of harlinked files */
+	super->u.cpio.type == CPIO_CRC)) { /* For case of hardlinked files */
 	struct defer_inode i, *l;
 	i.inumber = stat->st_ino;
 	i.device = stat->st_dev;
