@@ -51,7 +51,7 @@ include html.syntax
 file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
 
-file ..\*\\.(pp|PP|pas|PAS)$ Pascal\sProgram
+file ..\*\\.(pp|PP|pas|PAS|dpr|DPR|inc|INC)$ Pascal\sProgram
 include pascal.syntax
 
 file ..\*\\.(ada|adb|ads|ADA|ADB|ADS)$ Ada\sProgram
