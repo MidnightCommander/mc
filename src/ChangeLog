@@ -1,5 +1,10 @@
 2001-10-18  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (init_growing_view): Revert last change, it was wrong.
+	(view_hook): Don't check that the file is regular - it's now
+	done in do_view_init().  This fixes update problem in quick view
+	when moving cursor from a regular file to a directory.
+
 	* view.c (do_view_init): Only accept regular files.  Use stat(),
 	not fstat() because open() would hang on pipes.  Avoid opening
 	the file twice.

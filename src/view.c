@@ -426,7 +426,7 @@ set_view_init_error (WView *view, char *msg)
 
 /* return values: NULL for success, else points to error message */
 static char *
-init_growing_view (WView *view, char *name, int fd)
+init_growing_view (WView *view, char *name, char *filename)
 {
     view->growing_buffer = 1;
 
@@ -450,7 +450,8 @@ init_growing_view (WView *view, char *name, int fd)
 	}
     } else {
         view->stdfile = NULL;
-	view->file = fd;
+	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
+	    return set_view_init_error (view, _(" Could not open file "));
     }
     return NULL;
 }
@@ -468,7 +469,7 @@ static char *load_view_file (WView *view, int fd)
     if (view->s.st_size == 0){
 	/* Must be one of those nice files that grow (/proc) */
 	close_view_file (view);
-	return init_growing_view (view, 0, fd);
+	return init_growing_view (view, 0, view->filename);
     }
 
 #ifdef HAVE_MMAP
@@ -494,7 +495,7 @@ static char *load_view_file (WView *view, int fd)
         if (view->data != NULL)
 	    g_free (view->data);
 	close_view_file (view);
-	return init_growing_view (view, 0, fd);
+	return init_growing_view (view, 0, view->filename);
     }
     view->first = 0;
     view->bytes_read = view->s.st_size;
@@ -569,7 +570,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
     }
 
     if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
-	error = init_growing_view (view, _command, fd);
+	error = init_growing_view (view, _command, view->filename);
     else
 	error = load_view_file (view, fd);
 
@@ -2427,16 +2428,6 @@ view_hook (void *v)
     else
 	return;
 
-    if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
-        if (mc_stat (panel->dir.list [panel->selected].fname, &s) != 0)
-	    return;
-	if (!S_ISREG (s.st_mode))
-	    return;
-    } else {
-        if (!S_ISREG (panel->dir.list [panel->selected].buf.st_mode))
-	    return;
-    }
-    
     view_init (view, 0, panel->dir.list [panel->selected].fname, 0);
     display (view);
     view_status (view, TRUE);
