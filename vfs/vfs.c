@@ -55,7 +55,6 @@
 #endif
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
-static int vfs_flags = 0;    /* Flags */
 
 /* They keep track of the current directory */
 static vfs *current_vfs = &vfs_local_ops;
@@ -169,9 +168,6 @@ path_magic (const char *path)
 {
     struct stat buf;
 
-    if (vfs_flags & FL_ALWAYS_MAGIC)
-        return 1;
-
     if (!stat(path, &buf))
         return 0;
 
@@ -244,8 +240,6 @@ vfs_rosplit (char *path)
 	*slash = 0;
     
     ret = vfs_type_from_op (semi+1);
-    if (!ret && (vfs_flags & FL_NO_LOCALHASH))
-	return &vfs_nil_ops;
 
     if (slash)
 	*slash = PATH_SEP;
@@ -637,8 +631,7 @@ static void
 vfs_setup_wd (void)
 {
     current_dir = g_strdup (PATH_SEP_STR);
-    if (!(vfs_flags & FL_NO_CWDSETUP))
-	_vfs_get_cwd ();
+    _vfs_get_cwd ();
 
     if (strlen (current_dir) > MC_MAXPATHLEN - 2)
 	vfs_die ("Current dir too long.\n");

@@ -111,7 +111,6 @@
     void init_fish (void);
 
     extern vfs vfs_local_ops;
-    extern vfs vfs_nil_ops;
     extern vfs vfs_tarfs_ops;
     extern vfs vfs_ftpfs_ops;
     extern vfs vfs_smbfs_ops;
@@ -334,19 +333,6 @@ extern void vfs_print_stats (const char *fs_name, const char *action,
    they also make some operation 100 times faster. Use with caution. */
 #define MCCTL_WANT_STALE_DATA	9
 #define MCCTL_NO_STALE_DATA    10
-
-#define FL_ALWAYS_MAGIC 1
-#define FL_NO_MCFS 2
-#define FL_NO_FTPFS 4
-#define FL_NO_UNDELFS 8
-#define FL_NO_TARFS 16
-#define FL_NO_EXTFS 32
-#define FL_NO_SFS 64
-#define FL_NO_FISH 128
-
-#define FL_NO_LOCALHASH 0x20000000	/* When you never ever want vfs to work with regular files with # in name */
-#define FL_NO_CWDSETUP	0x40000000
-
 
 #define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
 /* Midnight commander code should _not_ use other flags than those
