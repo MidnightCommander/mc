@@ -266,7 +266,7 @@ static void new_key (TSecHeader *section, const char *KeyName, const char *Value
     section->Keys = key;
 }
 
-static char *
+static const char *
 GetSetProfileChar (int set, const char *AppName, const char *KeyName,
 		   const char *Default, const char *FileName)
 {
@@ -324,7 +324,7 @@ static short GetSetProfile (int set, const char * AppName, const char * KeyName,
 			    short Size, const char * FileName)
 
 {
-    char  *s;
+    const char  *s;
     
     s = GetSetProfileChar (set, AppName, KeyName, Default, FileName);
     if (!set)
@@ -340,7 +340,7 @@ short GetPrivateProfileString (const char * AppName, const char * KeyName,
     return (GetSetProfile (0, AppName, KeyName, Default, ReturnedString, Size, FileName));
 }
 
-char *get_profile_string (const char *AppName, const char *KeyName, const char *Default,
+const char *get_profile_string (const char *AppName, const char *KeyName, const char *Default,
 			  const char *FileName)
 {
     return GetSetProfileChar (0, AppName, KeyName, Default, FileName);

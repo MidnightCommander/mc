@@ -2,8 +2,8 @@
 #define __WIN_H
 
 /* Keys management */
-typedef void (*movefn) (void *, int);
-int check_movement_keys (int key, int page_size, void *data, movefn backfn,
+typedef void (*movefn) (const void *, int);
+int check_movement_keys (int key, int page_size, const void *data, movefn backfn,
 			 movefn forfn, movefn topfn, movefn bottomfn);
 int lookup_key (char *keyname);
 

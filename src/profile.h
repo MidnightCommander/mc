@@ -22,7 +22,7 @@ int WriteProfileString (const char * AppName, const char * KeyName, const char *
 void sync_profiles (void);
 
 void free_profiles (void);
-char *get_profile_string (const char *AppName, const char *KeyName, const char *Default,
+const char *get_profile_string (const char *AppName, const char *KeyName, const char *Default,
 			  const char *FileName);
 
 /* New profile functions */

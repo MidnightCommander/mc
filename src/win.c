@@ -39,7 +39,7 @@
  * the key was handled, 0 otherwise.
  */
 int
-check_movement_keys (int key, int page_size, void *data, movefn backfn,
+check_movement_keys (int key, int page_size, const void *data, movefn backfn,
 		     movefn forfn, movefn topfn, movefn bottomfn)
 {
     switch (key) {

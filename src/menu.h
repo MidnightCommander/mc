@@ -13,14 +13,14 @@ typedef struct {
 } menu_entry;
 
 typedef struct Menu {
-    const char   *name;
+    char   *name;
     int    count;
     int    max_entry_len;
     int    selected;
     int    hotkey;
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
-    const char   *help_node;
+    char   *help_node;
 } Menu;
 
 extern int menubar_visible;

@@ -1,3 +1,18 @@
+2004-09-18  Roland Illig <roland.illig@gmx.de>
+
+	* help.c (search_string): Fixed a warning about a const qualifier.
+	A local copy of the string is used for modifying.
+	* menu.h: Removed the const qualifier from Menu.name and
+	Menu.help_node as they are freed in destroy_menu.
+	* menu.c (destroy_menu): Removed the (now unnecessary) casts.
+	* popt.h: Removed a const qualifier to avoid compiler warnings.
+	* profile.c (get_profile_string): Added const qualifiers to
+	avoid compiler warnings. (GetSetProfile): likewise.
+	(GetSetProfileChar): likewise.
+	* profile.h (get_profile_string): likewise.
+	* win.c (check_movement_keys): likewise.
+	* win.h (check_movement_keys): likewise.
+
 2004-09-17  Pavel Shirshov  <pavelsh@mail.ru>
 
 	* ext.c (get_file_type_local): Fixes <zombies> in

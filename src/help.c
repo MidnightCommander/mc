@@ -125,12 +125,13 @@ static int acs2pc (int acscode)
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
 static const char *
-search_string (const char *start, char *text)
+search_string (const char *start, const char *text)
 {
-    char *d = text;
+    const char *result = NULL;
+    char *local_text = g_strdup (text);
+    char *d = local_text;
     const char *e = start;
 
-    /* FIXME: correct this bug elsewhere, not in this function */
     /* fmt sometimes replaces a space with a newline in the help file */
     /* Replace the newlines in the link name with spaces to correct the situation */
     while (*d){
@@ -139,15 +140,19 @@ search_string (const char *start, char *text)
 	d++;
     }
     /* Do search */
-    for (d = text; *e; e++){
+    for (d = local_text; *e; e++){
 	if (*d == *e)
 	    d++;
 	else
-	    d = text;
-	if (!*d)
-	    return e+1;
+	    d = local_text;
+	if (!*d) {
+	    result = e + 1;
+	    goto cleanup;
+	}
     }
-    return 0;
+cleanup:
+    g_free (local_text);
+    return result;
 }
 
 /* Searches text in the buffer pointed by start.  Search ends */
