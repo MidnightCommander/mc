@@ -46,6 +46,7 @@
 #include "mcfsutil.h"
 #include "tcputil.h"
 #include "utilvfs.h"
+#include "mcfs.h"	/* tcp_invalidate_socket() */
 
 #define CHECK_SIG_PIPE(sock) if (got_sigpipe) \
      { tcp_invalidate_socket (sock); return got_sigpipe = 0; }
