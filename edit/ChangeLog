@@ -1,3 +1,7 @@
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.c: Improved message formatting.
+
 2005-01-30  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Removed NO_INLINE_GETBYTE conditional. The name was
