@@ -30,13 +30,19 @@
 #include "dialog.h"
 #include "gdesktop.h"
 
+/* The pixmaps */
 #include "directory.xpm"
-
+#include "link.xpm"
+#include "dev.xpm"
 
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
-GdkPixmap *directory_pixmap;
-GdkBitmap *directory_mask;
+GdkPixmap *icon_directory_pixmap;
+GdkBitmap *icon_directory_mask;
+GdkPixmap *icon_link_pixmap;
+GdkBitmap *icon_link_mask;
+GdkPixmap *icon_dev_pixmap;
+GdkBitmap *icon_dev_mask;
 
 static char *drag_types [] = { "text/plain", "url:ALL" };
 static char *drop_types [] = { "url:ALL" };
@@ -58,8 +64,6 @@ show_dir (WPanel *panel)
 
 	list = g_list_alloc ();
 	g_list_append (list, panel->cwd);
-
-	printf ("show_dir to %s %s\n", panel->cwd, panel->filter ? panel->filter : "<no-filt>");
 }
 
 static void
@@ -68,7 +72,13 @@ panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, f
 	/* Here, add more icons */
 	switch (color){
 	case DIRECTORY_COLOR:
-		gtk_clist_set_pixmap (cl, row, column, directory_pixmap, directory_mask);
+		gtk_clist_set_pixmap (cl, row, column, icon_directory_pixmap, icon_directory_mask);
+		break;
+	case LINK_COLOR:
+		gtk_clist_set_pixmap (cl, row, column, icon_link_pixmap, icon_link_mask);
+		break;
+	case DEVICE_COLOR:
+		gtk_clist_set_pixmap (cl, row, column, icon_dev_pixmap, icon_dev_mask);
 		break;
 	}
 }
@@ -444,8 +454,6 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
-	printf ("panel_file_list_select_row\n");
-	
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
@@ -500,8 +508,6 @@ panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
 static void
 panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
 {
-	printf ("Aqui\n");
-
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
 	
 	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
@@ -540,14 +546,16 @@ panel_create_pixmaps (GtkWidget *parent)
 	GdkColor color = gtk_widget_get_style (parent)->bg [GTK_STATE_NORMAL];
 
 	pixmaps_ready = 1;
-	directory_pixmap = gdk_pixmap_create_from_xpm_d (parent->window, &directory_mask, &color, directory_xpm);
+	icon_directory_pixmap = gdk_pixmap_create_from_xpm_d (parent->window, &icon_directory_mask, &color, directory_xpm);
+	icon_link_pixmap      = gdk_pixmap_create_from_xpm_d (parent->window, &icon_link_mask,      &color, link_xpm);
+	icon_dev_pixmap       = gdk_pixmap_create_from_xpm_d (parent->window, &icon_dev_mask,       &color, dev_xpm);
 }
 
 static void
 panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
 {
 	if (!GTK_IS_ADJUSTMENT (adj)) {
-		fprintf (stderr, "CRAP!\n");
+		fprintf (stderr, "file_list_is_scrolled is called and there are not enough boats!\n");
 		exit (1);
 	}
 }
@@ -656,15 +664,32 @@ panel_drop_enter (GtkWidget *widget, GdkEvent *event)
 static void
 panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
 {
-	/* Sigh, the DropDataAvailable does not provide the location where the drag
-	 * happened, so for now, the only thing we can do is ask gdk to tell us
-	 * where the pointer is, even if it bears little resemblance with the
-	 * actual spot where the drop happened.
-	 * 
-	 * FIXME: gtk+ needs fixing here. 
-	 */
+	gint winx, winy;
+	gint dropx, dropy;
+	gint row;
+	char *drop_dir;
+	
+	gdk_window_get_origin (GTK_CLIST (widget)->clist_window, &winx, &winy);
+	dropx = data->coords.x - winx;
+	dropy = data->coords.y - winy;
 
-	drop_on_panel (data, panel->cwd);
+	if (dropx < 0 || dropy < 0)
+		return;
+
+	if (gtk_clist_get_selection_info (GTK_CLIST (widget), dropx, dropy, &row, NULL) == 0)
+		drop_dir = panel->cwd;
+	else {
+		g_assert (row < panel->count);
+
+		if (S_ISDIR (panel->dir.list [row].buf.st_mode))
+			drop_dir = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
+		else 
+			drop_dir = panel->cwd;
+	}
+	drop_on_panel (data, drop_dir);
+
+	if (drop_dir != panel->cwd)
+		free (drop_dir);
 }
 
 /* Workaround for the CList that is not adding its clist-window to the DND windows */
@@ -737,6 +762,7 @@ panel_create_file_list (WPanel *panel)
 	const int items = panel->format->items;
 	format_e  *format = panel->format;
 	GtkWidget *file_list;
+	GtkCList  *clist;
 	gchar     **titles;
 	int       i;
 
@@ -746,6 +772,7 @@ panel_create_file_list (WPanel *panel)
 			titles [i++] = format->title;
 
 	file_list = gtk_clist_new_with_titles (items, titles);
+	clist = GTK_CLIST (file_list);
 	panel_configure_file_list (panel, file_list);
 	free (titles);
 	
@@ -760,7 +787,6 @@ panel_create_file_list (WPanel *panel)
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
-
 	return file_list;
 }
 
@@ -803,8 +829,6 @@ panel_change_filter (GtkWidget *entry, WPanel *panel)
 	 * filters, instead of having the user have to click on a menu
 	 * item to bring up a "set filter" dialog box.
 	 */
-
-	printf ("panel_change_filter\n");
 
 	reg_exp = gtk_entry_get_text (GTK_ENTRY (entry));
 

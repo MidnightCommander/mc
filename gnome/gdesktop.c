@@ -271,11 +271,10 @@ drop_on_panel (GdkEventDropDataAvailable *event, char *dest)
 	int x, y;
 	int operation;
 	
-	gdk_window_get_pointer (NULL, &x, &y, NULL);
-	operation = get_operation (x, y);
+	operation = get_operation (event->coords.x, event->coords.y);
 	
 	source_panel = find_panel_owning_window_id (event->requestor);
-	
+
 	if (source_panel)
 		perform_drop_on_panel (source_panel, operation, dest);
 	else
@@ -569,13 +568,14 @@ desktop_setup_default (char *desktop_dir)
 	char *mc_desktop_dir;
 
 	mc_desktop_dir = concat_dir_and_file (mc_home, MC_LIB_DESKTOP);
-	
-	create_op_win (OP_COPY, 0);
-	file_mask_defaults ();
-	copy_dir_dir (mc_desktop_dir, desktop_dir);
-	destroy_op_win ();
-	free (mc_desktop_dir);
 
+	if (exist_file (mc_desktop_dir)){
+		create_op_win (OP_COPY, 0);
+		file_mask_defaults ();
+		copy_dir_dir (mc_desktop_dir, desktop_dir);
+		destroy_op_win ();
+	}
+	free (mc_desktop_dir);
 }
 
 void

@@ -125,6 +125,8 @@ translate_gdk_keysym_to_curses (GdkEventKey *event)
 	case GDK_BackSpace:
 		return KEY_BACKSPACE;
 	case GDK_Tab:
+		if (event->state & GDK_SHIFT_MASK)
+			return KEY_BACKTAB;
 		return '\t';
 	case GDK_KP_Enter:
 	case GDK_Return:

@@ -8,7 +8,7 @@ CFLAGS =   $(XCFLAGS) @X_CFLAGS@
 CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME
 LDFLAGS = $(XLDFLAGS) @X_LIBS@
 DEFS = $(XDEFS)
-LIBS = -lgnomeui -lgnome -lgtk -lgdk -lglib @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
+LIBS = -lgnomeui -lgdk_imlib -lgnome -lgnomesupport -lgtk -lgdk -lglib @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
 EXTRALIBS = @LVFS@ @LSLANG@ @LEDIT@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -58,7 +58,7 @@ OBJS = $(LOBJS) $(OOBJS) \
 # Distribution variables
 #
 
-PIXMAPS = directory.xpm
+PIXMAPS = directory.xpm link.xpm
 
 DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(GNOMESRCS) $(GNOMEHDRS) 
 

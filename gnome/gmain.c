@@ -184,12 +184,6 @@ x_panel_container_show (widget_data wdata)
 }
 
 void
-x_focus_widget (Widget_Item *p)
-{
-	gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
-}
-
-void
 x_add_widget (Dlg_head *h, Widget_Item *w)
 {
 	if (!(h->grided & DLG_NO_TED)){
@@ -218,6 +212,7 @@ x_init_dlg (Dlg_head *h)
 
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
+	x_focus_widget (h->current);
 }
 
 

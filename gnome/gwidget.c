@@ -17,6 +17,14 @@
 #include "dlg.h"
 
 void
+x_focus_widget (Widget_Item *p)
+{
+	GtkWidget *w = GTK_WIDGET (p->widget->wdata);
+
+	gtk_widget_grab_focus (GTK_WIDGET (p->widget->wdata));
+}
+
+void
 x_destroy_cmd (void *w)
 {
 	Widget *widget = (Widget *) w;
@@ -55,7 +63,7 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 	tag = gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
 	gtk_object_set_data (GTK_OBJECT (button), "click-signal-tag", (void *) tag);
 	b->widget.wdata = (widget_data) button;
-	
+		
 	return 1;
 }
 
@@ -76,6 +84,24 @@ x_button_set (WButton *b, char *text)
 }
 
 /* Radio buttons */
+
+void
+x_radio_focus_item (WRadio *radio)
+{
+	GList  *children = GTK_BOX (radio->widget.wdata)->children;
+	int    i;
+	
+	for (i = 0; i < radio->count; i++){
+		if (i == radio->pos){
+			GtkBoxChild *bc = (GtkBoxChild *) children->data;
+			
+			gtk_widget_grab_focus (GTK_WIDGET (bc->widget));
+			break;
+		}
+		children = children->next;
+	}
+}
+
 static void
 radio_toggle (GtkObject *object, WRadio *r)
 {
@@ -110,7 +136,7 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), w);
 	}
 	gtk_widget_show_all (vbox);
-
+			    
 	r->widget.wdata = (widget_data) vbox;
 	return 1;
 }

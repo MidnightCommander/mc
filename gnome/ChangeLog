@@ -1,3 +1,22 @@
+Tue Mar 10 00:10:32 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_drop_data_available): Now drop support uses the
+	new coords.x and coords.y fields from the DropDataAvailableEvent
+	to find out which directory receives the drop. 
+
+	* gwidget.c (x_radio_focus_item): Add support for focusing radio
+	buttons.
+
+Mon Mar  9 15:12:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtools.c (translate_gdk_keysym_to_curses), dlg.c
+	(dlg_key_event): Support for backtab.
+
+	* gwidget.c: highlight properly the focused radio entry.
+	
+	* gmain.c (x_init_dlg): After setting up the X widget, set the
+	Gtk focus to h->current;
+
 1998-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (x_panel_select_item): Set the colors of the row.

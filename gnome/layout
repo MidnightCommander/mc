@@ -136,7 +136,7 @@ flags=snew
 text=Directory path
 
 [option-Widget-button-ok]
-geometry=1,15,1,1
+geometry=2,15,1,1
 flags=w
 
 [option-Widget-safe-del]
@@ -220,7 +220,7 @@ geometry=2,2,1,1
 flags=w
 
 [option-Widget-pause-radio]
-geometry=2,12,1,5
+geometry=2,10,1,5
 flags=nw
 
 [option-Frame-Frame-1]
