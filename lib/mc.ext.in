@@ -105,7 +105,6 @@
 #
 # Postscript	Open: ps2svga [gs -DEVICE=jpeg|zgv or something]
 # Images		asciiview
-# RTF		rtf2html
 # 
 # All X Apps	[Nothing/Warning] if no DISPLAY
 # Not found	[Default/Warning]
@@ -276,13 +275,18 @@ regex/\.(midi?|MIDI?|Midi?|rmid?|RMID?|Rmid?)$
 ### Multimedia ###
 
 regex/\.(mpe?g|MPE?G|Mpe?g)$
-	Open=(gtv %f 2>/dev/null &)
+	Open=(mplayer %f >/dev/null 2>&1 &)
+	#Open=(gtv %f >/dev/null 2>&1 &)
 
 regex/\.(avi|AVI|Avi|mov|MOV|Mov)$
-	Open=(xanim %f 2>/dev/null &)
+	Open=(mplayer %f >/dev/null 2>&1 &)
+	#Open=(xanim %f >/dev/null 2>&1 &)
+
+regex/\.(asf|ASF|Asf|wmv|WMV|Wmv)$
+	Open=(mplayer %f >/dev/null 2>&1 &)
 
 regex/\.(rm|RM|Rm|ram|RAM|Ram)$
-	Open=(realplay %f &)
+	Open=(realplay %f >/dev/null 2>&1 &)
 
 
 ### Documents ###
@@ -315,14 +319,22 @@ shell/.abw
 
 # Microsoft Word Document
 regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
+	Open=(abiword %f >/dev/null 2>&1 &)
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
 type/^Microsoft\ Word
+	Open=(abiword %f >/dev/null 2>&1 &)
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
+
+# RTF document
+regex/\.(rtf|RTF|Rtf)$
+	Open=(abiword %f >/dev/null 2>&1 &)
 
 # Microsoft Excel Worksheet
 regex/\.([Xx]l[sw]|XL[SW])$
+	Open=(gnumeric %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 type/^Microsoft\ Excel
+	Open=(gnumeric %f >/dev/null 2>&1 &)
 	View=%view{ascii} xls2csv %f || strings %f
 
 # Use StarOffice to open any MS Office documents
