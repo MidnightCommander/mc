@@ -118,7 +118,7 @@ unregister_task_running (pid_t pid, int fd)
  * -1 on failure
  */
 int
-do_background (FileOpContext *ctx, char *info)
+do_background (struct FileOpContext *ctx, char *info)
 {
     int comm[2];		/* control connection stream */
     pid_t pid;
@@ -414,7 +414,7 @@ parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext
 }
 
 int
-parent_call (void *routine, FileOpContext *ctx, int argc, ...)
+parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
 {
     va_list ap;
     int i;

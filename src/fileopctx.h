@@ -19,7 +19,7 @@ typedef int (*mc_stat_fn) (char *filename, struct stat *buf);
 /* This structure describes a context for file operations.  It is used to update
  * the progress windows and pass around options.
  */
-typedef struct {
+typedef struct FileOpContext {
 	/* The estimated time of arrival in seconds */
 	double eta_secs;
 

@@ -1,5 +1,8 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* fileopctx.h: Define struct FileOpContext.
+	* background.h: Avoid conditional declarations.
+
 	* dir.h: Eliminate DIR_H_INCLUDE_HANDLE_DIRENT.  Adjust all
 	callers.  Remove unused code.
 	* dlg.h: Remove unused code.
