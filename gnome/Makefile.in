@@ -49,7 +49,6 @@ GNOMESRCS =					\
 	gmain.c					\
 	gmount.c				\
 	gmc-chargrid.c				\
-	gmenu.c					\
 	gmetadata.c				\
 	gpopup2.c				\
 	gprefs.c				\
@@ -61,7 +60,6 @@ GNOMESRCS =					\
 	gtools.c				\
 	gtkdtree.c				\
 	gtkflist.c				\
-	gtree.c					\
 	gutil.c					\
 	gview.c					\
 	gwidget.c
@@ -90,7 +88,6 @@ GNOMEHDRS =					\
 	gsession.h				\
 	gtkdtree.h				\
 	gtkflist.h				\
-	gtree.h					\
 	gwidget.h
 
 ICONS = 			\
@@ -119,7 +116,7 @@ OOBJS = dlg.o screen.o widget.o wtools.o			\
 	file.o find.o dialog.o view.o				\
 	panelize.o background.o dir.o util.o			\
 	win.o color.o profile.o user.o ext.o setup.o		\
-	regex.o complete.o command.o				\
+	regex.o complete.o					\
 	cmd.o utilunix.o xslint.o filenot.o			\
 	fileopctx.o treestore.o mad.o
 
@@ -149,7 +146,6 @@ OBJS =						\
 	glayout.o				\
 	gmain.o					\
 	gmc-chargrid.o				\
-	gmenu.o					\
 	gmetadata.o				\
 	gpopup2.o				\
 	gprefs.o				\
@@ -159,7 +155,6 @@ OBJS =						\
 	gscreen.o				\
 	gsession.o				\
 	gtools.o				\
-	gtree.o					\
 	gutil.o					\
 	gview.o					\
 	gtkdtree.o				\

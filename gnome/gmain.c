@@ -479,7 +479,6 @@ non_corba_create_panels (char *startup_dir)
 	desktop_init ();
 	gnome_init_panels ();
 
-	cmdline = command_new (0, 0, 0);
 	the_hint = label_new (0, 0, 0, NULL);
 	desktop_dlg = create_dlg (0, 0, 24, 80, 0,
 				  dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);

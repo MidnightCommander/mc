@@ -70,8 +70,6 @@ GnomeUIInfo panel_view_toolbar_uiinfo[] = {
 
 GList *containers = 0;
 
-int command_prompt = 0;
-
 PanelContainer *current_panel_ptr, *other_panel_ptr;
 
 WPanel *

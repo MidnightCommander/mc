@@ -1,5 +1,13 @@
 2001-06-18  Pavel Roskin  <proski@gnu.org>
 
+	* gtree.c: Remove.
+	* gtree.h: Likewise.
+	* gmenu.h: Likewise.
+	* Makefile.in: Changes for the above.
+	(OOBJS): Remove command.o.
+	* glayout.c: Remove command_prompt - it's unused.
+	* gmain.c (non_corba_create_panels): Don't create cmdline.
+
 	* Makefile.in (OOBJS): Remove fsusage.o and mountlist.o.
 	* gmain.h: Remove dead declaration of x_show_info().
 
