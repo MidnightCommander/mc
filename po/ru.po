@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2002-08-21 03:42-0400\n"
+"POT-Creation-Date: 2002-08-21 11:11-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -4517,12 +4517,12 @@ msgstr "fish: Соединение успешно, персональный каталог %s."
 msgid "fish: Reading directory %s..."
 msgstr "fish: Чтение каталога %s..."
 
-#: vfs/fish.c:469 vfs/ftpfs.c:1373 vfs/undelfs.c:313
+#: vfs/fish.c:469 vfs/ftpfs.c:1369 vfs/undelfs.c:313
 #, c-format
 msgid "%s: done."
 msgstr "%s: готово."
 
-#: vfs/fish.c:474 vfs/ftpfs.c:1325 vfs/undelfs.c:316
+#: vfs/fish.c:474 vfs/ftpfs.c:1321 vfs/undelfs.c:316
 #, c-format
 msgid "%s: failure"
 msgstr "%s: ошибка"
@@ -4679,16 +4679,16 @@ msgstr "(ограничение rfc959)"
 msgid "(chdir first)"
 msgstr "(сначала chdir)"
 
-#: vfs/ftpfs.c:1386
+#: vfs/ftpfs.c:1382
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
-#: vfs/ftpfs.c:1451
+#: vfs/ftpfs.c:1447
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: запись файла %lu (%lu)"
 
-#: vfs/ftpfs.c:1910
+#: vfs/ftpfs.c:1906
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
