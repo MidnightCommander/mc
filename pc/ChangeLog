@@ -97,7 +97,7 @@
 
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
-	* chmod.c: Remove all occurences of HAVE_X.
+	* chmod.c: Remove all occurrences of HAVE_X.
 	* drive.c: Likewise.
 
 2001-10-23  Pavel Roskin  <proski@gnu.org>
@@ -146,13 +146,13 @@
 
 Wed Oct 14 14:51:23 1998  Franco Bez  <franco.bez@augsburg.baynet.de>
 
-	* gtkedit/edit.c: Workarround for the CR/LF Translation problem.
+	* gtkedit/edit.c: Workaround for the CR/LF Translation problem.
 	This is vital, because otherwise CoolEdit corrupts files -
 	they keep growing each time you save the file.
 
 	* pc/key_nt.c: fixed the problem with the AltGr Key and the
 	Gray Keys. Still not optimal, but usable.
-	Especially usefull for international keyboard
+	Especially useful for international keyboard
 
 	* pc/util_nt.c: Provide a mc_doublepopen and mc_doublepclose
 	function. If one has an egrep.exe installed it's now possible
@@ -163,12 +163,12 @@ Tue May 12 17:16:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 	* Makefile.RSX, mc.rc: Resources support for RSX
 
 	* Makefile.PC, *.c: Some includes corrected for MinGW
-	compatability (dir.h exists both in mc and MinGW)
+	compatibility (dir.h exists both in mc and MinGW)
 
 Fri May  8 10:49:21 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* Makefile.PC, Makefile.MIN: support for custom extension
-	for compiled resourses
+	for compiled resources
 
 	* key_nt.c: Minor changes for MinGW
 
