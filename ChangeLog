@@ -1,3 +1,8 @@
+1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* doc-gnome/C/gmc.sgml: Set the book element's id to "index" so
+	that the correct index.html will be generated.
+
 1999-07-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* syntax/Makefile.in (ALLSYNTAX): Added the missing syntax files

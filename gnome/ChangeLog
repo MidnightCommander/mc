@@ -1,3 +1,17 @@
+1999-08-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (perm_group_new): Set the correct
+	group name in the group entry box.  BUGFIX: Red Hat bugzilla #3244.
+
+	* gmount.c (get_mountable_devices): Return the list in getmntent()
+	order.  BUGFIX: Red Hat bugzilla #3621.
+
+	* gprefs.c (help_callback): New help callback for the preferences
+	dialog.  It loads the "gmcprefs.html" section from the GMC user's
+	guide.  We need a better framework for this; we need to be able to
+	map DocBook identifiers (<foo id="bar">) to HTML files or
+	whatever.  BUGFIX: Red Hat bugzilla #3194.
+
 1999-08-01  David Martin <dmartina@usa.net>
 
 	* gcmd.c (gnome_about_cmd): Change strings in gmc "about" to

@@ -130,7 +130,7 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 
 	if (gfpd->mode_name)
 		g_free (gfpd->mode_name);
-	
+
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
@@ -257,9 +257,9 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 	}
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 8);
-	
+
 	/* Time Fields */
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 2);
@@ -313,7 +313,7 @@ create_url_properties (GnomeFilePropertyDialog *fp_dlg)
 	fp_dlg->caption_entry = gtk_entry_new ();
 	gtk_table_attach (GTK_TABLE (table), fp_dlg->caption_entry,
 			  2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, GNOME_PAD, GNOME_PAD);
-	
+
 	gtk_widget_show_all (table);
 	return table;
 }
@@ -327,13 +327,13 @@ metadata_toggled (GtkWidget *cbox, GnomeFilePropertyDialog *fp_dlg)
 	if (cbox == fp_dlg->open_cbox) {
 		if (GTK_TOGGLE_BUTTON (cbox)->active) {
 			gtk_widget_set_sensitive (fp_dlg->open_entry, FALSE);
-			if (fp_dlg->mime_fm_open) 
+			if (fp_dlg->mime_fm_open)
 				gtk_entry_set_text (GTK_ENTRY (fp_dlg->open_entry), fp_dlg->mime_fm_open);
 		} else {
 			gtk_widget_set_sensitive (fp_dlg->open_entry, TRUE);
 			if (fp_dlg->fm_open) {
 				gtk_entry_set_text (GTK_ENTRY (fp_dlg->open_entry), fp_dlg->fm_open);
-			} 
+			}
 		}
 	} else if (cbox == fp_dlg->prop1_cbox) {
 		if (GTK_TOGGLE_BUTTON (cbox)->active) {
@@ -351,7 +351,7 @@ metadata_toggled (GtkWidget *cbox, GnomeFilePropertyDialog *fp_dlg)
 				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->drop_target);
 			} else if (!fp_dlg->executable &&  fp_dlg->fm_view) {
 				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_view);
-			} 
+			}
 		}
 	} else {
 		if (GTK_TOGGLE_BUTTON (cbox)->active) {
@@ -435,7 +435,7 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 {
 	GtkWidget *retval;
 	gchar *icon;
-	
+
 	retval = gnome_icon_entry_new ("gmc_file_icon", _("Select an Icon"));
 	icon = g_strdup (gicon_get_filename_for_icon (fp_dlg->im));
 
@@ -480,7 +480,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 	gtk_signal_connect (GTK_OBJECT (fp_dlg->open_cbox), "toggled", metadata_toggled, fp_dlg);
 	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->open_cbox, 0, 2, 1, 2);
 
-	   
+
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, GNOME_PAD_SMALL);
 	gtk_table_attach_defaults (GTK_TABLE (table), vbox, 0, 2, 2, 3);
@@ -514,7 +514,7 @@ generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
 	gtk_misc_set_alignment (GTK_MISC (fp_dlg->prop2_label), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (fp_dlg->prop2_label), 2, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table),
-				   fp_dlg->prop2_label, 
+				   fp_dlg->prop2_label,
 				   0, 1, 6, 7);
 	fp_dlg->prop2_entry = gtk_entry_new ();
 	gtk_table_attach_defaults (GTK_TABLE (table),
@@ -568,7 +568,7 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *table;
 	struct stat linkstat;
 	int finish;
-	
+
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
 
@@ -618,7 +618,7 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fp_dlg->needs_terminal_check),
 				      fp_dlg->needs_terminal);
 	gtk_container_add (GTK_CONTAINER (frame), fp_dlg->needs_terminal_check);
-	
+
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	return vbox;
 }
@@ -648,21 +648,21 @@ perm_get_umode (GnomeFilePropertyDialog *fp_dlg)
 	SETBIT (fp_dlg->suid, S_ISUID);
 	SETBIT (fp_dlg->sgid, S_ISGID);
 	SETBIT (fp_dlg->svtx, S_ISVTX);
-	
+
 	SETBIT (fp_dlg->rusr, S_IRUSR);
 	SETBIT (fp_dlg->wusr, S_IWUSR);
 	SETBIT (fp_dlg->xusr, S_IXUSR);
-	
+
 	SETBIT (fp_dlg->rgrp, S_IRGRP);
 	SETBIT (fp_dlg->wgrp, S_IWGRP);
 	SETBIT (fp_dlg->xgrp, S_IXGRP);
-	
+
 	SETBIT (fp_dlg->roth, S_IROTH);
 	SETBIT (fp_dlg->woth, S_IWOTH);
 	SETBIT (fp_dlg->xoth, S_IXOTH);
 
 	return umode;
-	
+
 #undef SETBIT
 }
 
@@ -703,7 +703,7 @@ perm_check_new (char *text, int state, GnomeFilePropertyDialog *fp_dlg)
 
 	gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (check), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), state ? TRUE : FALSE);
-	
+
 	gtk_signal_connect (GTK_OBJECT (check), "toggled",
 			    (GtkSignalFunc) perm_set_mode_label,
 			    fp_dlg);
@@ -729,7 +729,7 @@ gtk_table_attach (GTK_TABLE (table), widget,		\
 	ATTACH (table, w, 2, 3, y, y + 1);				\
 	ATTACH (table, x, 3, 4, y, y + 1);				\
 } while (0);
-	
+
 static GtkWidget *
 perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 {
@@ -781,7 +781,7 @@ perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 	fp_dlg->suid = perm_check_new (_("Set UID"), fp_dlg->st.st_mode & S_ISUID, fp_dlg);
 	fp_dlg->sgid = perm_check_new (_("Set GID"), fp_dlg->st.st_mode & S_ISGID, fp_dlg);
 	fp_dlg->svtx = perm_check_new (_("Sticky"),  fp_dlg->st.st_mode & S_ISVTX, fp_dlg);
-	
+
 	ATTACH (table, fp_dlg->suid, 4, 5, 1, 2);
 	ATTACH (table, fp_dlg->sgid, 4, 5, 2, 3);
 	ATTACH (table, fp_dlg->svtx, 4, 5, 3, 4);
@@ -820,13 +820,11 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 {
 	GtkWidget *gentry;
 	struct group *grp;
-	gchar grpnum [50];
 	gboolean grp_flag = FALSE;
 	gchar *grpname = NULL;
 	GList *templist;
 	GList *list = NULL;
 
-	
 	/* Are we root?  Do we own the file? */
 	/* In this case we can change it. */
 	/* A little bit of this was swiped from kfm. */
@@ -877,7 +875,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 			}
 		}
 		endgrent ();
-		
+
 		/* we also might want to add the egid to the list. */
 		if (!grp_flag)
 			list = g_list_insert_sorted (list, g_strdup (grpname), (GCompareFunc)strcmp);
@@ -887,7 +885,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		for (templist = list; templist; templist = templist->next) {
 			g_free (templist->data);
 		}
-		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), grpname);
+		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), fp_dlg->group_name);
 		g_list_free (list);
 	} else {
 		/* we're neither so we just put an entry down */
@@ -957,7 +955,7 @@ create_perm_properties (GnomeFilePropertyDialog *fp_dlg)
 	gtk_box_pack_start (GTK_BOX (vbox), perm_mode_new (fp_dlg), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), perm_ownership_new (fp_dlg), TRUE, TRUE, 0);
 	return vbox;
-} 
+}
 
 /* finally the new dialog */
 static void
@@ -983,8 +981,8 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 		fp_dlg->needs_terminal = strstr (str, "needsterminal") != 0;
 		g_free (str);
 	} else
-		fp_dlg->needs_terminal = 0;  
-	
+		fp_dlg->needs_terminal = 0;
+
 	/* Mime stuff */
 	file_name = fp_dlg->file_name;
 	if (S_ISLNK (fp_dlg->st.st_mode)) {
@@ -994,7 +992,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 			file_name = link_name;
 		}
 	}
-	
+
 	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
 		fp_dlg->desktop_url = desktop_url;
 	else
@@ -1002,7 +1000,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 
 	if (gnome_metadata_get (fp_dlg->file_name, "icon-caption", &size, &fp_dlg->caption))
 		fp_dlg->caption = g_strdup (desktop_url);
-			
+
 	/*
 	 * Mime type.
 	 */
@@ -1027,7 +1025,7 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 	GtkWidget *new_page;
 	gchar *title_string;
 	mode_t mode;
-		
+
 	g_return_val_if_fail (file_name != NULL, NULL);
 	fp_dlg = gtk_type_new (gnome_file_property_dialog_get_type ());
 
@@ -1045,7 +1043,7 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 		if (mc_stat (file_name, &s) != -1)
 			mode = s.st_mode;
 	}
-	
+
 	if (fp_dlg->st.st_mode & (S_IXUSR | S_IXGRP |S_IXOTH)) {
 		fp_dlg->executable = TRUE;
 	} else {
@@ -1070,7 +1068,7 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  create_general_properties (fp_dlg),
 				  gtk_label_new (_("Statistics")));
-	
+
 	new_page = create_settings_pane (fp_dlg);
 	if (new_page)
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
@@ -1084,10 +1082,10 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 	title_string = g_strconcat (strrchr (file_name, '/') + 1, _(" Properties"), NULL);
 	gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
 	g_free (title_string);
-	
-	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
+
+	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg),
 				     GNOME_STOCK_BUTTON_OK);
-	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
+	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg),
 				     GNOME_STOCK_BUTTON_CANCEL);
 	gtk_widget_show_all (GNOME_DIALOG (fp_dlg)->vbox);
 
@@ -1122,7 +1120,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 
 	uid = fpd->st.st_uid;
 	gid = fpd->st.st_gid;
-	
+
 	/* we only check if our euid == 0 */
 	if (fpd->euid == 0) {
 		new_user_name = gtk_entry_get_text (GTK_ENTRY (fpd->owner_entry));
@@ -1146,7 +1144,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 	 * sensitive. */
 	if (GTK_WIDGET_IS_SENSITIVE (fpd->group_entry))
 		new_group_name = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (fpd->group_entry)->entry));
-	
+
 	if (fpd->group_name && new_group_name && strcmp (fpd->group_name, new_group_name)) {
 		g = getgrnam (new_group_name);
 		if (!g) {
@@ -1188,15 +1186,15 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 		} else {
 			char *p;
 			int s;
-			
+
 			/* create the files. */
 			base_name = g_strdup (fpd->file_name);
-			
+
 			p = strrchr (base_name, '/');
 
 			if (p)
 				*p = '\0';
-			
+
 			full_target = concat_dir_and_file (base_name, new_name);
 
 			ctx = file_op_context_new ();
@@ -1221,7 +1219,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 
 	/* If we don't have an open_cbox, that means we have no metadata
 	 * to set.
-	 */ 
+	 */
 	if (fpd->open_cbox != NULL) {
 		if (!GTK_TOGGLE_BUTTON (fpd->open_cbox)->active) {
 			text = gtk_entry_get_text (GTK_ENTRY (fpd->open_entry));
@@ -1313,7 +1311,7 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 
 		if (gnome_metadata_get (fpd->file_name, "flags", &size, &buf) == 0){
 			char *p;
-			
+
 			p = strstr (buf, "needsterminal");
 			if (toggled){
 				if (!p){
@@ -1342,23 +1340,23 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 								    strlen (p2)+1, p2);
 					g_free (p2);
 					g_free (p1);
-					
+
 				}
 			}
 		} else {
 			if (toggled){
 				gnome_metadata_set (fpd->file_name, "flags",
 						    sizeof ("needsterminal"), "needsterminal");
-			} 
+			}
 		}
 	}
-	
+
 	if (!fpd->can_set_icon)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */
 	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button));
 	/*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
-	
+
 	if (text) {
 		if (fpd->icon_filename == NULL || strcmp (fpd->icon_filename, text) != 0)
 			gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
@@ -1377,7 +1375,7 @@ gint
 gnome_file_property_dialog_make_changes (GnomeFilePropertyDialog *file_property_dialog)
 {
 	gint retval = 0;
-	
+
 	g_return_val_if_fail (file_property_dialog != NULL, 1);
 	g_return_val_if_fail (GNOME_IS_FILE_PROPERTY_DIALOG (file_property_dialog), 1);
 

@@ -1,6 +1,6 @@
 <!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
 ]>
-<book>
+<book id="index">
   <bookinfo>
     <title>Gnome Midnight Commander Documentation</title>
     <authorgroup>
@@ -556,7 +556,7 @@
     </listitem>
    </itemizedlist>
   </sect1>
-  <sect1 id=gmcprefs>
+  <sect1 id="gmcprefs">
    <title>Changing Your Preferences in The File Manager</title>
     <para>
     <indexterm>

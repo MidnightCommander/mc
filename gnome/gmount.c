@@ -214,7 +214,10 @@ get_mountable_devices (void)
 			list = g_list_prepend (list, dit);
 		}
 	}
+
 	endmntent (f);
+
+	list = g_list_reverse (list);
 	return list;
 }
 

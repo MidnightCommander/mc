@@ -467,6 +467,18 @@ create_page (PrefsDlg *dlg, PrefsPage *page)
                                         gtk_label_new (_(page->title)));
 }
 
+/* Help callback for the preferences dialog */
+static void
+help_callback (GnomePropertyBox *pb, gint page_num, gpointer data)
+{
+	static GnomeHelpMenuEntry entry = {
+		"gmc",
+		"gmcprefs.html"
+	};
+
+	gnome_help_display (NULL, &entry);
+}
+
 static void
 create_prop_box (PrefsDlg *dlg)
 {
@@ -492,6 +504,8 @@ create_prop_box (PrefsDlg *dlg)
 
         gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
                             GTK_SIGNAL_FUNC (apply_callback), dlg);
+	gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "help",
+			    GTK_SIGNAL_FUNC (help_callback), dlg);
 }
 
 void
