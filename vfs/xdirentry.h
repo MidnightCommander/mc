@@ -1,6 +1,8 @@
 #ifndef DIRENTRY_H
 #define DIRENTRY_H
 
+/* $Id$ */
+
 #include <config.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -239,6 +241,9 @@ int vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg);
 int vfs_s_select_on_two (int fd1, int fd2);
 int vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term);
 int vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd);
+
+/* misc */
+int vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino);
 
 /* If non-null, FREE */
 #define ifree(ptr) do { if (ptr) g_free(ptr); } while (0)
