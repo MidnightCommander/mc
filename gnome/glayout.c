@@ -253,7 +253,8 @@ save_panel_types (void)
 	for (p = containers; p; p = p->next){
 		PanelContainer *pc = p->data;
 
-		panel_save_setup (pc->panel, pc->panel->panel_name);
+		if (!is_a_desktop_panel (pc->panel))
+			panel_save_setup (pc->panel, pc->panel->panel_name);
 	}
 }
 

@@ -568,14 +568,16 @@ handle_open (GtkWidget *widget, WPanel *panel)
 	gchar *full_name;
 	DesktopIconInfo *dii;
 
+	full_name = get_full_filename (panel);
+
 	if (is_a_desktop_panel (panel)) {
-		dii = desktop_icon_info_get_by_filename (selection (panel)->fname);
+		dii = desktop_icon_info_get_by_filename (x_basename (full_name));
 		g_assert (dii != NULL);
+		g_free (full_name);
 		desktop_icon_info_open (dii);
 		return;
 	}
 
-	full_name = get_full_filename (panel);
 	if (gmc_open_filename (full_name, 0))
 		return;
 	gmc_open_with (full_name);
@@ -589,7 +591,7 @@ handle_mount (GtkWidget *widget, WPanel *panel)
 
 	g_assert (is_a_desktop_panel (panel));
 
-	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	full_name = get_full_filename (panel);
 	do_mount_umount (full_name, TRUE);
 	g_free (full_name);
 }
@@ -601,7 +603,7 @@ handle_unmount (GtkWidget *widget, WPanel *panel)
 
 	g_assert (is_a_desktop_panel (panel));
 
-	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	full_name = get_full_filename (panel);
 	do_mount_umount (full_name, FALSE);
 	g_free (full_name);
 }
@@ -613,7 +615,7 @@ handle_eject (GtkWidget *widget, WPanel *panel)
 
 	g_assert (is_a_desktop_panel (panel));
 
-	full_name = g_concat_dir_and_file (desktop_directory, selection (panel)->fname);
+	full_name = get_full_filename (panel);
 	do_mount_umount (full_name, FALSE);
 	do_eject (full_name);
 	g_free (full_name);
@@ -672,7 +674,6 @@ handle_properties (GtkWidget *widget, WPanel *panel)
 	gint retval = 0;
 	GtkWidget *dialog;
 	gchar *full_name = NULL;
-	DesktopIconInfo *dii;
 
 	full_name = get_full_filename (panel);
 	dialog = gnome_file_property_dialog_new (full_name,

@@ -1,5 +1,13 @@
 1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* glayout.c (save_panel_types): Do not save the setup of a desktop
+	panel.
+
+	* gpopup2.c (handle_mount): Use get_full_filename().
+	(handle_unmount): Likewise.
+	(handle_eject): Likewise.
+	(handle_open): Likewise.
+
 	* gdesktop.c (update_url): Made static.
 	(desktop_reload_icons): Call update_url() when updating an
 	existing icon.

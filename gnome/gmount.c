@@ -330,7 +330,6 @@ setup_devices (void)
 		gboolean release_format;
 		gboolean ejectable;
 
-
 		dev_name = dit->devname;
 		short_dev_name = x_basename (dev_name);
 
