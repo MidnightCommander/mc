@@ -1,13 +1,13 @@
 # -------------------------------------------------------
-# Copyright (C) 1999 Free Software Foundation, Inc.
-# Fatih Demir <kabalak@gmx.net>, 1999.
+# Copyright (C) 2000 Free Software Foundation, Inc.
+# Fatih Demir <kabalak@gmx.net>, 1999 - 2000.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.41\n"
+"Project-Id-Version: mc 4.5.43\n"
 "POT-Creation-Date: 1999-12-26 21:51+0100\n"
-"PO-Revision-Date: 1999-12-26 22:12+0100\n"
+"PO-Revision-Date: 2000-02-11 22:12+0100\n"
 "Last-Translator: Fatih Demir <kabalak@gmx.net>\n"
 "Language-Team: Turkish Gnome Tranlation Team <gnotrap@gmx.net>\n"
 "MIME-Version: 1.0\n"
@@ -2105,13 +2105,13 @@ msgstr ""
 #: src/filegui.c:603 src/hotlist.c:1035 src/main.c:861 src/screen.c:2165
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:404
 msgid "&Yes"
-msgstr ""
+msgstr "&Evet"
 
 #: gtkedit/editcmd.c:2288 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:602 src/hotlist.c:1035 src/main.c:861 src/screen.c:2165
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:404
 msgid "&No"
-msgstr ""
+msgstr "&Hayýr"
 
 #: gtkedit/editcmd.c:2292
 msgid " &Cancel quit "
@@ -2119,11 +2119,11 @@ msgstr ""
 
 #: gtkedit/editcmd.c:2292
 msgid " &Yes "
-msgstr ""
+msgstr " &Evet "
 
 #: gtkedit/editcmd.c:2292
 msgid " &No "
-msgstr ""
+msgstr " &Hayýr "
 
 #: gtkedit/editcmd.c:2524 gtkedit/editcmd.c:2599
 msgid " Copy to clipboard "
@@ -2238,7 +2238,7 @@ msgstr ""
 
 #: gtkedit/editmenu.c:74
 msgid " About "
-msgstr ""
+msgstr " Bilgi "
 
 #: gtkedit/editmenu.c:75
 msgid ""
@@ -2401,15 +2401,15 @@ msgstr ""
 
 #: gtkedit/editmenu.c:248 gtkedit/editmenu.c:257
 msgid "&General...  "
-msgstr ""
+msgstr "&Genel ..."
 
 #: gtkedit/editmenu.c:249 gtkedit/editmenu.c:258
 msgid "&Save mode..."
-msgstr ""
+msgstr "Ka&ydetme türü ..."
 
 #: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260 src/main.c:1353
 msgid "&Layout..."
-msgstr ""
+msgstr "&Dizinem ..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279 gtkedit/editmenu.c:396
@@ -2656,11 +2656,11 @@ msgstr ""
 #. 15
 #: gtkedit/editoptions.c:118
 msgid "Key emulation"
-msgstr ""
+msgstr "Tuþ ayarlarý"
 
 #: gtkedit/editoptions.c:159
 msgid " Editor options "
-msgstr ""
+msgstr " Yazman ayaralarý"
 
 #. Not essential to translate
 #: gtkedit/editwidget.c:317
@@ -2671,25 +2671,25 @@ msgstr ""
 #: src/main.c:1719 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
 #: src/view.c:2068
 msgid "Help"
-msgstr ""
+msgstr "Yardým"
 
 #: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
-msgstr ""
+msgstr "Iþaretle"
 
 #: gtkedit/editwidget.c:1096
 msgid "Replac"
-msgstr ""
+msgstr "Yerleþle"
 
 #: gtkedit/editwidget.c:1102 src/main.c:1721
 msgid "PullDn"
-msgstr ""
+msgstr "Aç"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
 #: src/main.c:1722 src/view.c:2070 src/view.c:2092
 msgid "Quit"
-msgstr ""
+msgstr "Çýk"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
@@ -2754,7 +2754,7 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1255 src/main.c:1720 src/screen.c:2396 src/screen.c:2426
 msgid "Menu"
-msgstr ""
+msgstr "Mönü"
 
 #: gtkedit/gtkedit.c:1255
 msgid "Pull down menu"
@@ -2942,27 +2942,27 @@ msgstr ""
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr ""
+msgstr " Sýralama tipi "
 
 #: src/boxes.c:68
 msgid "&Full file list"
-msgstr ""
+msgstr "&Tam dosya bakýþý"
 
 #: src/boxes.c:69
 msgid "&Brief file list"
-msgstr ""
+msgstr "&Kýsa dosya bakýþý"
 
 #: src/boxes.c:70
 msgid "&Long file list"
-msgstr ""
+msgstr "&Uzun dosya bakýþý"
 
 #: src/boxes.c:71
 msgid "&User defined:"
-msgstr ""
+msgstr "Ku&llanýcýya özgü :"
 
 #: src/boxes.c:72
 msgid "&Icon view"
-msgstr ""
+msgstr "&Ikona bakýþý"
 
 #: src/boxes.c:137
 msgid "user &Mini status"
@@ -2970,11 +2970,11 @@ msgstr ""
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr ""
+msgstr "Sýralama tipi"
 
 #: src/boxes.c:280
 msgid "&Reverse"
-msgstr ""
+msgstr "Te&rs"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
@@ -2982,43 +2982,43 @@ msgstr ""
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr ""
+msgstr "Sýralama türü"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
-msgstr ""
+msgstr " çýkmayý &onaylat "
 
 #: src/boxes.c:383
 msgid " confirm e&Xecute "
-msgstr ""
+msgstr " çalýþtýrmayý o&naylat "
 
 #: src/boxes.c:385
 msgid " confirm o&Verwrite "
-msgstr ""
+msgstr " ü&stüne yazmayý onaylat "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr ""
+msgstr " sil&meyi onaylar "
 
 #: src/boxes.c:393
 msgid " Confirmation "
-msgstr ""
+msgstr " Onaylama "
 
 #: src/boxes.c:461
 msgid "Full 8 bits output"
-msgstr ""
+msgstr "Tam 8-bitlik göster"
 
 #: src/boxes.c:461
 msgid "ISO 8859-1"
-msgstr ""
+msgstr "ISO 8859-1"
 
 #: src/boxes.c:461
 msgid "7 bits"
-msgstr ""
+msgstr "7 bit"
 
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
-msgstr ""
+msgstr "Tam 8-bitlik veri"
 
 #: src/boxes.c:476
 msgid " Display bits "
@@ -3026,11 +3026,11 @@ msgstr ""
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
-msgstr ""
+msgstr "Her z&aman ftp proxy'sini kullan"
 
 #: src/boxes.c:653
 msgid "sec"
-msgstr ""
+msgstr "san."
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
@@ -3071,15 +3071,15 @@ msgstr ""
 
 #: src/boxes.c:895
 msgid "&Stop"
-msgstr ""
+msgstr "&Durdur"
 
 #: src/boxes.c:896
 msgid "&Resume"
-msgstr ""
+msgstr "Y&eniden devam et"
 
 #: src/boxes.c:897
 msgid "&Kill"
-msgstr ""
+msgstr "&Öldür"
 
 #: src/boxes.c:936
 msgid "Background Jobs"
@@ -3203,36 +3203,36 @@ msgstr ""
 
 #: src/chown.c:112
 msgid " Name "
-msgstr ""
+msgstr " Ad "
 
 #: src/chown.c:114
 msgid " Owner name "
-msgstr ""
+msgstr " Iye adý "
 
 #: src/chown.c:116 src/chown.c:128
 msgid " Group name "
-msgstr ""
+msgstr " Kitle adý "
 
 #: src/chown.c:118
 msgid " Size "
-msgstr ""
+msgstr " Boyut "
 
 #: src/chown.c:124
 msgid " Chown command "
-msgstr ""
+msgstr " Yömle komutasý "
 
 #: src/chown.c:126
 msgid " User name "
-msgstr ""
+msgstr " Kullanýcý adý "
 
 #: src/chown.c:192
 msgid "<Unknown user>"
-msgstr ""
+msgstr "<Tanýnmayan kullanýcý>"
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:193
 msgid "<Unknown group>"
-msgstr ""
+msgstr "<Tanýnmayan kitle>"
 
 #: src/chown.c:261
 msgid " I can't run the Chown command on an extfs "
@@ -3261,11 +3261,11 @@ msgstr ""
 
 #: src/cmd.c:283
 msgid " View file "
-msgstr ""
+msgstr " Dosyayý göster "
 
 #: src/cmd.c:283
 msgid " Filename:"
-msgstr ""
+msgstr " Dosya adý :"
 
 #: src/cmd.c:300
 msgid " Filtered view "
@@ -3281,11 +3281,11 @@ msgstr ""
 
 #: src/cmd.c:388
 msgid " Enter directory name:"
-msgstr ""
+msgstr " Dizin adýný ver :"
 
 #: src/cmd.c:449
 msgid " Filter "
-msgstr ""
+msgstr " Filtra "
 
 #: src/cmd.c:449
 msgid " Set expression for filtering filenames"
@@ -3325,7 +3325,7 @@ msgstr ""
 
 #: src/cmd.c:668
 msgid "&Local"
-msgstr ""
+msgstr "Yere&l"
 
 #: src/cmd.c:668
 msgid "&Home"
@@ -4190,7 +4190,7 @@ msgstr ""
 
 #: src/find.c:171 src/main.c:1243 src/main.c:1267
 msgid "&Tree"
-msgstr ""
+msgstr "&Aðaç"
 
 #: src/find.c:223
 msgid "Find File"
@@ -4494,12 +4494,12 @@ msgstr ""
 #: src/info.c:83
 #, c-format
 msgid "Midnight Commander %s"
-msgstr ""
+msgstr "Midnight Commander %s"
 
 #: src/info.c:109
 #, c-format
 msgid "File:       %s"
-msgstr ""
+msgstr "Dosya :     %s"
 
 #: src/info.c:122
 msgid "Free nodes %d (%d%%) of %d"
@@ -4590,15 +4590,15 @@ msgstr ""
 
 #: src/layout.c:159
 msgid "&Vertical"
-msgstr ""
+msgstr "D&ikey"
 
 #: src/layout.c:160
 msgid "&Horizontal"
-msgstr ""
+msgstr "U&fki"
 
 #: src/layout.c:170
 msgid "&Xterm hintbar"
-msgstr ""
+msgstr "&Xterm yardým satrý"
 
 #: src/layout.c:171
 msgid "h&Intbar visible"
@@ -4610,7 +4610,7 @@ msgstr ""
 
 #: src/layout.c:173
 msgid "command &Prompt"
-msgstr ""
+msgstr "komuta"
 
 #: src/layout.c:174
 msgid "show &Mini status"
@@ -4622,11 +4622,11 @@ msgstr ""
 
 #: src/layout.c:176
 msgid "&Equal split"
-msgstr ""
+msgstr "&Eþit böl"
 
 #: src/layout.c:177
 msgid "pe&Rmissions"
-msgstr ""
+msgstr "hakla&r"
 
 #: src/layout.c:178
 msgid "&File types"
@@ -4639,19 +4639,19 @@ msgstr ""
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
 msgid " Layout "
-msgstr ""
+msgstr " Dizinim "
 
 #: src/layout.c:381
 msgid " Panel split "
-msgstr ""
+msgstr " Panle bölüþümü "
 
 #: src/layout.c:382
 msgid " Highlight... "
-msgstr ""
+msgstr " Yükselim ..."
 
 #: src/layout.c:383 src/option.c:156
 msgid " Other options "
-msgstr ""
+msgstr " Öbür ayarlar "
 
 #: src/layout.c:384
 msgid "output lines"
@@ -4659,15 +4659,15 @@ msgstr ""
 
 #: src/layout.c:451
 msgid "Layout"
-msgstr ""
+msgstr "Dizinim"
 
 #: src/learn.c:74
 msgid " Learn keys "
-msgstr ""
+msgstr " Tuþlarý öðren "
 
 #: src/learn.c:93
 msgid " Teach me a key "
-msgstr ""
+msgstr " Bana bir tuþu öðret "
 
 #: src/learn.c:94
 #, c-format
@@ -4693,7 +4693,7 @@ msgstr ""
 
 #: src/learn.c:170
 msgid "OK"
-msgstr ""
+msgstr "Oldu"
 
 #: src/learn.c:177
 msgid ""
@@ -4703,7 +4703,7 @@ msgstr ""
 
 #: src/learn.c:179
 msgid "&Discard"
-msgstr ""
+msgstr "U&nut"
 
 #: src/learn.c:183
 msgid ""
@@ -4753,31 +4753,31 @@ msgstr ""
 
 #: src/main.c:1240 src/main.c:1264
 msgid "&Listing mode..."
-msgstr ""
+msgstr "Sýra&lama türü ..."
 
 #: src/main.c:1241 src/main.c:1265
 msgid "&Quick view     C-x q"
-msgstr ""
+msgstr "Çab&uk bakýþ    C-x q"
 
 #: src/main.c:1242 src/main.c:1266
 msgid "&Info           C-x i"
-msgstr ""
+msgstr "B&ilgi          C-x i"
 
 #: src/main.c:1245 src/main.c:1269
 msgid "&Sort order..."
-msgstr ""
+msgstr "&sýralama türü ..."
 
 #: src/main.c:1247 src/main.c:1271
 msgid "&Filter..."
-msgstr ""
+msgstr "&Filtra ..."
 
 #: src/main.c:1250 src/main.c:1274
 msgid "&Network link..."
-msgstr ""
+msgstr "Þ&ebeke baðý ..."
 
 #: src/main.c:1251 src/main.c:1275
 msgid "FT&P link..."
-msgstr ""
+msgstr "FT&P baðý ..."
 
 #: src/main.c:1253 src/main.c:1277
 msgid "SM&B link..."
@@ -4785,143 +4785,143 @@ msgstr ""
 
 #: src/main.c:1258 src/main.c:1282
 msgid "&Drive...       M-d"
-msgstr ""
+msgstr "Sürü&cü ..      M-d"
 
 #: src/main.c:1260 src/main.c:1284
 msgid "&Rescan         C-r"
-msgstr ""
+msgstr "Yeniden ta&ra   C-r"
 
 #: src/main.c:1288
 msgid "&User menu          F2"
-msgstr ""
+msgstr "K&ullanýcý mönüsü   F2"
 
 #: src/main.c:1289
 msgid "&View               F3"
-msgstr ""
+msgstr "&Göster             F3"
 
 #: src/main.c:1290
 msgid "Vie&w file...         "
-msgstr ""
+msgstr "Dosyaya ba&k ..."
 
 #: src/main.c:1291
 msgid "&Filtered view     M-!"
-msgstr ""
+msgstr "&Filtralý bakýþ     M-!"
 
 #: src/main.c:1292
 msgid "&Edit               F4"
-msgstr ""
+msgstr "D&eðiþtir           F4"
 
 #: src/main.c:1293
 msgid "&Copy               F5"
-msgstr ""
+msgstr "&Kopyala            F5"
 
 #: src/main.c:1294
 msgid "c&Hmod           C-x c"
-msgstr ""
+msgstr "y&ömlr           C-x x"
 
 #: src/main.c:1296
 msgid "&Link            C-x l"
-msgstr ""
+msgstr "Bað&la           C-x l"
 
 #: src/main.c:1297
 msgid "&SymLink         C-x s"
-msgstr ""
+msgstr "Yumþak&Baðla     C-x s"
 
 #: src/main.c:1298
 msgid "edit s&Ymlink  C-x C-s"
-msgstr ""
+msgstr "YBaðý deðiþtir  C-x C-s"
 
 #: src/main.c:1299
 msgid "ch&Own           C-x o"
-msgstr ""
+msgstr "yö&mle           C-x o"
 
 #: src/main.c:1300
 msgid "&Advanced chown       "
-msgstr ""
+msgstr "Geliþmiþ y&ömle       "
 
 #: src/main.c:1302
 msgid "&Rename/Move        F6"
-msgstr ""
+msgstr "YenidenAd/&Taþý     F6"
 
 #: src/main.c:1303
 msgid "&Mkdir              F7"
-msgstr ""
+msgstr "D&izin yarat        F7"
 
 #: src/main.c:1304
 msgid "&Delete             F8"
-msgstr ""
+msgstr "&Sil                F8"
 
 #: src/main.c:1305
 msgid "&Quick cd          M-c"
-msgstr ""
+msgstr "Çabuk dizine geç   M-c"
 
 #: src/main.c:1307
 msgid "select &Group      M-+"
-msgstr ""
+msgstr "&Kitle seç          M-+"
 
 #: src/main.c:1308
 msgid "u&Nselect group    M-\\"
-msgstr ""
+msgstr "Kitle&yi seçme      M-\\"
 
 #: src/main.c:1309
 msgid "reverse selec&Tion M-*"
-msgstr ""
+msgstr "Kitleyi te&rsle     M-*"
 
 #: src/main.c:1311
 msgid "e&Xit              F10"
-msgstr ""
+msgstr "Çýk                F10"
 
 #: src/main.c:1321
 msgid "&Directory tree"
-msgstr ""
+msgstr "&Dizinler aðaçý"
 
 #: src/main.c:1323
 msgid "&Find file            M-?"
-msgstr ""
+msgstr "Dosya b&ul             M-?"
 
 #: src/main.c:1324
 msgid "s&Wap panels          C-u"
-msgstr ""
+msgstr "Panelleri &deðiþtir    C-u"
 
 #: src/main.c:1325
 msgid "switch &Panels on/off C-o"
-msgstr ""
+msgstr "&Panelleri kapat/aç    C-o"
 
 #: src/main.c:1326
 msgid "&Compare directories  C-x d"
-msgstr ""
+msgstr "Dizinleri karþýlaþtýr C-x d"
 
 #: src/main.c:1327
 msgid "e&Xternal panelize    C-x !"
-msgstr ""
+msgstr "D6ýþarýdan panelle    C-x !"
 
 #: src/main.c:1328
 msgid "show directory s&Izes"
-msgstr ""
+msgstr "diz&inlerin boyutunu göster"
 
 #: src/main.c:1330
 msgid "command &History"
-msgstr ""
+msgstr "komuta geçmiþi"
 
 #: src/main.c:1331
 msgid "di&Rectory hotlist    C-\\"
-msgstr ""
+msgstr "Di&zinler geçmiþi      C-\\"
 
 #: src/main.c:1333
 msgid "&Active VFS list      C-x a"
-msgstr ""
+msgstr "&Geçerli VFS listesi   C-x a"
 
 #: src/main.c:1334
 msgid "Fr&ee VFSs now"
-msgstr ""
+msgstr "VFS'i þimdi boþalt"
 
 #: src/main.c:1337
 msgid "&Background jobs      C-x j"
-msgstr ""
+msgstr "&Ardalan iþlemleri     C-x j"
 
 #: src/main.c:1341
 msgid "&Undelete files (ext2fs only)"
-msgstr ""
+msgstr "Dosyalarý k&urtar (sadece ext2fs'de)"
 
 #: src/main.c:1344
 msgid "&Listing format edit"
@@ -4929,67 +4929,67 @@ msgstr ""
 
 #: src/main.c:1346
 msgid "&Extension file edit"
-msgstr ""
+msgstr "Dosya son&eklerini deðiþtir"
 
 #: src/main.c:1347
 msgid "&Menu file edit"
-msgstr ""
+msgstr "Mön&üyü deðiþtir"
 
 #: src/main.c:1352
 msgid "&Configuration..."
-msgstr ""
+msgstr "&Ayarlar ..."
 
 #: src/main.c:1354
 msgid "c&Onfirmation..."
-msgstr ""
+msgstr "&Onaylama ..."
 
 #: src/main.c:1355
 msgid "&Display bits..."
-msgstr ""
+msgstr "Bitleri &göster ..."
 
 #: src/main.c:1357
 msgid "learn &Keys..."
-msgstr ""
+msgstr "Tu&þlarý öðren ..."
 
 #: src/main.c:1360
 msgid "&Virtual FS..."
-msgstr ""
+msgstr "&Sanal DYS (VFS) ..."
 
 #: src/main.c:1363
 msgid "&Save setup"
-msgstr ""
+msgstr "A&yarlarý kaydet"
 
 #: src/main.c:1379 src/main.c:1381
 msgid " &Left "
-msgstr ""
+msgstr " &Sol "
 
 #: src/main.c:1381
 msgid " &Above "
-msgstr ""
+msgstr " &Üst "
 
 #: src/main.c:1384
 msgid " &File "
-msgstr ""
+msgstr " &Dosya "
 
 #: src/main.c:1385
 msgid " &Command "
-msgstr ""
+msgstr " &Komuta "
 
 #: src/main.c:1386
 msgid " &Options "
-msgstr ""
+msgstr " &Ayarlar "
 
 #: src/main.c:1388 src/main.c:1390
 msgid " &Right "
-msgstr ""
+msgstr " &Sað "
 
 #: src/main.c:1390
 msgid " &Below "
-msgstr ""
+msgstr " &Alt"
 
 #: src/main.c:1445
 msgid " Information "
-msgstr ""
+msgstr " Bilgi       "
 
 #: src/main.c:1446
 msgid ""
@@ -5001,7 +5001,7 @@ msgstr ""
 
 #: src/main.c:1925
 msgid "Thank you for using GNU Midnight Commander"
-msgstr ""
+msgstr "GNU Midinight Commander'i kullandýðýn için teþekkürler"
 
 #: src/main.c:2284
 #, c-format
@@ -5141,7 +5141,7 @@ msgstr ""
 
 #: src/option.c:74
 msgid "safe de&Lete"
-msgstr ""
+msgstr "güvenilir si&lme"
 
 #: src/option.c:75
 msgid "cd follows lin&Ks"
@@ -5213,15 +5213,15 @@ msgstr ""
 
 #: src/option.c:95
 msgid "show &Hidden files"
-msgstr ""
+msgstr "gizli dosyalarý da göster"
 
 #: src/option.c:96
 msgid "show &Backup files"
-msgstr ""
+msgstr "yedek dosyalara da &bak"
 
 #: src/option.c:103
 msgid "&Never"
-msgstr ""
+msgstr "Hiç bir zama&n"
 
 #: src/option.c:104
 msgid "on dumb &Terminals"
@@ -5229,7 +5229,7 @@ msgstr ""
 
 #: src/option.c:105
 msgid "alwa&Ys"
-msgstr ""
+msgstr "her z&aman"
 
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:153
@@ -5250,7 +5250,7 @@ msgstr ""
 
 #: src/panelize.c:87
 msgid "&Add new"
-msgstr ""
+msgstr "Yeni bir t&ane ekle"
 
 #: src/panelize.c:99
 msgid " External panelize "
@@ -5262,7 +5262,7 @@ msgstr ""
 
 #: src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
 msgid "Other command"
-msgstr ""
+msgstr "Baþka komuta"
 
 #: src/panelize.c:260
 msgid " Add to external panelize "
@@ -5294,7 +5294,7 @@ msgstr ""
 
 #: src/popthelp.c:31
 msgid "Show this help message"
-msgstr ""
+msgstr "Bu yardým ileitisini göster"
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
@@ -5355,11 +5355,11 @@ msgstr ""
 
 #: src/screen.c:2400 src/screen.c:2430 src/tree.c:1016
 msgid "RenMov"
-msgstr ""
+msgstr "YenidenAd"
 
 #: src/screen.c:2401 src/screen.c:2431 src/tree.c:1020
 msgid "Mkdir"
-msgstr ""
+msgstr "Dizinle"
 
 #: src/screen.c:2417
 #, c-format
@@ -5383,7 +5383,7 @@ msgstr ""
 
 #: src/subshell.c:732
 msgid " Quit anyway? "
-msgstr ""
+msgstr " Illaki mi çýkayým mý ?"
 
 #: src/subshell.c:785
 #, c-format
@@ -5400,12 +5400,12 @@ msgstr ""
 #: src/tree.c:637
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr ""
+msgstr "\"%s\"'yi buraya kopyala :"
 
 #: src/tree.c:675
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr ""
+msgstr "\"%s\"'yi buraya taþý :"
 
 #: src/tree.c:682
 #, c-format
@@ -5421,15 +5421,15 @@ msgstr ""
 #: src/tree.c:744
 #, c-format
 msgid "  Delete %s?  "
-msgstr ""
+msgstr "  %s silinsin mi ?  "
 
 #: src/tree.c:776
 msgid "Static"
-msgstr ""
+msgstr "Statik"
 
 #: src/tree.c:776
 msgid "Dynamc"
-msgstr ""
+msgstr "Dinamik"
 
 #: src/tree.c:866
 #, c-format
@@ -5440,11 +5440,11 @@ msgstr ""
 
 #: src/tree.c:1012
 msgid "Forget"
-msgstr ""
+msgstr "Unut"
 
 #: src/tree.c:1025
 msgid "Rmdir"
-msgstr ""
+msgstr "Dizini sil"
 
 #: src/treestore.c:360
 #, c-format
@@ -5631,19 +5631,19 @@ msgstr ""
 
 #: src/view.c:2071
 msgid "Ascii"
-msgstr ""
+msgstr "Ascii"
 
 #: src/view.c:2071
 msgid "Hex"
-msgstr ""
+msgstr "Heksades."
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr ""
+msgstr "Git"
 
 #: src/view.c:2072
 msgid "Line"
-msgstr ""
+msgstr "Fýkra"
 
 #: src/view.c:2075
 msgid "RxSrch"
@@ -5659,11 +5659,11 @@ msgstr ""
 
 #: src/view.c:2080
 msgid "UnWrap"
-msgstr ""
+msgstr "Kýrma"
 
 #: src/view.c:2080
 msgid "Wrap"
-msgstr ""
+msgstr "Kýr"
 
 #: src/view.c:2083
 msgid "HxSrch"
@@ -5671,11 +5671,11 @@ msgstr ""
 
 #: src/view.c:2086
 msgid "Raw"
-msgstr ""
+msgstr "Saf"
 
 #: src/view.c:2086
 msgid "Parse"
-msgstr ""
+msgstr "Tara"
 
 #: src/view.c:2090
 msgid "Unform"
