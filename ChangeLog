@@ -1,5 +1,8 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (AC_STRUCT_LINGER): Remove, use AC_CHECK_MEMBERS
+	instead.
+
 	* configure.in: Define SLANG_POSIX_SIGNALS if all 4 required
 	functions are present.  Remove references to extraconf.h.
 	* extraconf.h: Eliminate.

@@ -137,7 +137,10 @@ AC_DEFUN([MC_WITH_VFS],[
     AC_SEARCH_LIBS(socket, [xnet bsd socket inet], [have_socket=yes])
     if test x$have_socket = xyes; then
       AC_SEARCH_LIBS(gethostbyname, [bsd socket inet netinet])
-      AC_STRUCT_LINGER
+      AC_CHECK_MEMBERS([struct linger.l_linger], , , [
+#include <sys/types.h>
+#include <sys/socket.h>
+		       ])
       AC_CHECK_FUNCS(pmap_set, , [
 	 AC_CHECK_LIB(rpc, pmap_set, [
 	   LIBS="-lrpc $LIBS"
@@ -253,37 +256,6 @@ AC_DEFUN([MC_VFS_CHECKS],[
 	esac
 ])
 
-
-
-dnl
-dnl Check for struct linger
-dnl
-AC_DEFUN([AC_STRUCT_LINGER], [
-av_struct_linger=no
-AC_MSG_CHECKING([struct linger is available])
-AC_TRY_RUN([
-#include <sys/types.h>
-#include <sys/socket.h>
-
-struct linger li;
-
-int main ()
-{
-    li.l_onoff = 1;
-    li.l_linger = 120;
-    return 0;
-}
-],[
-AC_DEFINE(HAVE_STRUCT_LINGER, 1,
-	  [Define if `struct linger' is available])
-av_struct_linger=yes
-],[
-av_struct_linger=no
-],[
-av_struct_linger=no
-])
-AC_MSG_RESULT([$av_struct_linger])
-])
 
 
 dnl
