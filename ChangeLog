@@ -1,3 +1,9 @@
+1999-06-07  Shooby Ban  <bansz@szif.hu>
+
+	* po/hu.po, configure.in: added hungarian translations... 
+	  I'm not sure it's OK, but it seems usable.
+	  Translators: Tamas Fejos and Andras Kadar
+
 1999-06-07  Kjartan Maraas  <kmaraas@online.no>
 
 	* configure.in, Makefile.in: added the gmc helpfile to the build
