@@ -36,6 +36,7 @@ struct _DesktopIcon {
 
 	GnomeCanvasItem *icon;		/* The item that contains the icon */
 	GnomeCanvasItem *text;		/* The item that contains the editable text */
+	GnomeCanvasItem *stipple;	/* The rectangle used as a stipple when the icon is selected */
 
 	int width, height;		/* Total size of the window */
 
@@ -62,6 +63,9 @@ void desktop_icon_set_text (DesktopIcon *dicon, char *text);
 
 /* Makes the desktop icon reshape itself (for when the global desktop_use_shaped_icons flag changes) */
 void desktop_icon_reshape (DesktopIcon *dicon);
+
+/* Selects or unselects the icon based on the value of sel (TRUE is selected, FALSE is unselected) */
+void desktop_icon_select (DesktopIcon *dicon, int sel);
 
 
 END_GNOME_DECLS

@@ -15,6 +15,13 @@
 #define SPACING 2
 
 
+/* The 50% gray stipple for selected icons */
+#define gray50_width 2
+#define gray50_height 2
+static char gray50_bits[] = {
+  0x02, 0x01, };
+
+
 static void desktop_icon_class_init (DesktopIconClass *class);
 static void desktop_icon_init       (DesktopIcon      *dicon);
 static void desktop_icon_realize    (GtkWidget        *widget);
@@ -88,6 +95,8 @@ canvas_size_allocated (GtkWidget *widget, GtkAllocation *allocation, gpointer da
 static void
 desktop_icon_init (DesktopIcon *dicon)
 {
+	GdkBitmap *stipple;
+
 	/* Set the window policy */
 
 	gtk_window_set_policy (GTK_WINDOW (dicon), TRUE, TRUE, TRUE);
@@ -119,6 +128,14 @@ desktop_icon_init (DesktopIcon *dicon)
 					     gnome_icon_text_item_get_type (),
 					     NULL);
 
+	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
+	dicon->stipple = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (dicon->canvas)),
+						gnome_canvas_rect_get_type (),
+						"fill_stipple", stipple,
+						NULL);
+	gnome_canvas_item_hide (dicon->stipple);
+	gdk_bitmap_unref (stipple);
+
 	dicon->w_changed_id = gtk_signal_connect (GTK_OBJECT (dicon->text), "width_changed",
 						  (GtkSignalFunc) size_changed,
 						  dicon);
@@ -130,8 +147,12 @@ desktop_icon_init (DesktopIcon *dicon)
 static void
 desktop_icon_realize (GtkWidget *widget)
 {
+	DesktopIcon *dicon;
+
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (IS_DESKTOP_ICON (widget));
+
+	dicon = DESKTOP_ICON (widget);
 
 	if (GTK_WIDGET_CLASS (parent_class)->realize)
 		(* GTK_WIDGET_CLASS (parent_class)->realize) (widget);
@@ -150,6 +171,12 @@ desktop_icon_realize (GtkWidget *widget)
 					    | WIN_HINTS_SKIP_WINLIST
 					    | WIN_HINTS_SKIP_TASKBAR));
 	}
+
+	/* Set the stipple color now that we have a style */
+
+	gnome_canvas_item_set (dicon->stipple,
+			       "fill_color_gdk", &widget->style->bg[GTK_STATE_SELECTED],
+			       NULL);
 }
 
 /* Sets the icon from the specified image file.  Does not re-create the window shape for the desktop
@@ -385,6 +412,12 @@ desktop_icon_reshape (DesktopIcon *dicon)
 			       "x", (dicon->width - icon_width) / 2.0,
 			       "y", 0.0,
 			       NULL);
+	gnome_canvas_item_set (dicon->stipple,
+			       "x1", 0.0,
+			       "y1", 0.0,
+			       "x2", (double) dicon->width,
+			       "y2", (double) icon_height,
+			       NULL);
 
 	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text), 0, icon_height + SPACING);
 
@@ -392,4 +425,26 @@ desktop_icon_reshape (DesktopIcon *dicon)
 
 	gtk_widget_set_usize (GTK_WIDGET (dicon), dicon->width, dicon->height);
 	create_window_shape (dicon, icon_width, icon_height, text_width, text_height);
+}
+
+/**
+ * desktop_icon_select
+ * @dicon:	The desktop icon which will be selected/unselected
+ * @sel:	TRUE if icon should be selected, FALSE if it should be unselected
+ *
+ * Selects or unselects the icon.  This means setting the selection flag of the icon text item as
+ * appropriate, and displaying the icon image as selected or not.
+ */
+void
+desktop_icon_select (DesktopIcon *dicon, int sel)
+{
+	g_return_if_fail (dicon != NULL);
+	g_return_if_fail (IS_DESKTOP_ICON (dicon));
+
+	if (sel)
+		gnome_canvas_item_show (dicon->stipple);
+	else
+		gnome_canvas_item_hide (dicon->stipple);
+
+	gnome_icon_text_item_select (GNOME_ICON_TEXT_ITEM (dicon->text), sel);
 }

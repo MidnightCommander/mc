@@ -1,3 +1,20 @@
+1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.h (DesktopIcon): Added a child item for stippling
+	the icon when it is selected.
+
+	* gdesktop-icon.c (desktop_icon_select): Show/hide the stippling
+	as appropriate.
+
+	* gdesktop.c (desktop_icon_info_event): Handler for events on
+	desktop icons.
+	(select_icon): New function that handles icon selection based on
+	mouse clicks and modifier keys.
+
+	* gdesktop.c (struct desktop_icon_info): Added a type field to the
+	structure.  It specifies the type of icon (file, directory), and
+	is used to determine the DnD and menu behavior.
+
 1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c: We are now using the new desktop icon code.  It is

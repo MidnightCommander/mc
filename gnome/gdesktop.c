@@ -20,11 +20,19 @@
 #define DESKTOP_DIR_NAME "desktop"
 
 
+/* Types of desktop icons */
+enum icon_type {
+	ICON_FILE,		/* Denotes a file (or symlink to a file) */
+	ICON_DIRECTORY		/* Denotes a directory (or symlink to one) */
+};
+
+
 /* This structure defines the information carried by a desktop icon */
 struct desktop_icon_info {
 	GtkWidget *dicon;	/* The desktop icon widget */
 	int x, y;		/* Position in the desktop */
 	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
+	enum icon_type type;	/* Type of icon, used to determine menu and DnD behavior */
 	int selected : 1;	/* Is the icon selected? */
 };
 
@@ -152,6 +160,101 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 	gtk_widget_set_uposition (dii->dicon, xpos, ypos);
 }
 
+/* Unselects all the desktop icons */
+static void
+unselect_all (void)
+{
+	GList *l;
+	struct desktop_icon_info *dii;
+
+	for (l = desktop_icons; l; l = l->next) {
+		dii = l->data;
+
+		if (dii->selected) {
+			desktop_icon_select (dii->dicon, FALSE);
+			dii->selected = FALSE;
+		}
+	}
+}
+
+/* Handles icon selection and unselection due to button presses */
+static void
+select_icon (struct desktop_icon_info *dii, GdkEventButton *event)
+{
+	if (!(event->state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
+		/* Click on an unselected icon unselects everything and selects the icon */
+		unselect_all ();
+		desktop_icon_select (dii->dicon, TRUE);
+		dii->selected = TRUE;
+	} else if (event->state & GDK_SHIFT_MASK) {
+		; /* FIXME: handle range selection */
+	} else if (event->state & GDK_CONTROL_MASK) {
+		/* Control-click on an icon toggles its selected state */
+		desktop_icon_select (dii->dicon, !dii->selected);
+		dii->selected = !dii->selected;
+	}
+}
+
+/* Handler for events on desktop icons.  The on_text flag specifies whether the event ocurred on the
+ * text item in the icon or not.
+ */
+static gint
+desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_text)
+{
+	int retval;
+
+	retval = FALSE;
+
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
+		if ((event->button.button == 1) && !(on_text && dii->selected)) {
+			select_icon (dii, (GdkEventButton *) event);
+			retval = TRUE;
+		} else if (event->button.button == 3)
+			retval = TRUE; /* FIXME: display menu */
+
+		break;
+
+	case GDK_2BUTTON_PRESS:
+		if (event->button.button != 1)
+			break;
+
+		/* FIXME: activate icon */
+
+		retval = TRUE;
+		break;
+
+	default:
+		break;
+	}
+
+	/* If we handled the event, do not pass it on to the icon text item */
+
+	if (on_text && retval)
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text),
+					      "event");
+
+	return retval;
+}
+
+/* Handler for button presses on the images on desktop icons.  The desktop icon info structure is
+ * passed in the user data.
+ */
+static gint
+icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
+{
+	return desktop_icon_info_event (data, event, FALSE);
+}
+
+/* Handler for button presses on the text on desktop icons.  The desktop icon info structure is
+ * passed in the user data.
+ */
+static gint
+text_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
+{
+	return desktop_icon_info_event (data, event, TRUE);
+}
+
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
  * If auto_pos is true, then the function will look for a place to position the icon automatically,
  * else it will use the specified coordinates.  It does not show the icon.
@@ -162,20 +265,44 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	struct desktop_icon_info *dii;
 	char *full_name;
 	char *icon_name;
+	struct stat s;
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
+
+	if (mc_stat (full_name, &s) != 0) {
+		g_warning ("Could not stat %s; will not use a desktop icon", full_name);
+		g_free (full_name);
+		return NULL;
+	}
+
+	/* Create the icon structure */
+
 	icon_name = meta_get_icon_for_file (full_name);
 
 	dii = g_new (struct desktop_icon_info, 1);
 	dii->dicon = desktop_icon_new (icon_name, filename);
 	dii->filename = g_strdup (filename);
+	dii->type = S_ISDIR (s.st_mode) ? ICON_DIRECTORY : ICON_FILE;
 	dii->selected = FALSE;
 
 	g_free (full_name);
 	g_free (icon_name);
 
-	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
+	/* Connect to the icon's signals */
 
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->icon), "event",
+			    (GtkSignalFunc) icon_event,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "event",
+			    (GtkSignalFunc) text_event,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->stipple), "event",
+			    (GtkSignalFunc) icon_event,
+			    dii);
+
+	/* Place the icon and append it to the list */
+
+	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
 	desktop_icons = g_list_append (desktop_icons, dii);
 
 	return dii;
