@@ -1349,6 +1349,9 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     if (!machine)
 	return;
 
+    to_home = 0;	/* FIXME: how to solve going to home nicely? /~/ is 
+			   ugly as hell and leads to problems in vfs layer */
+
     if (strncmp (prefix, machine, strlen (prefix)) == 0)
 	cd_path = g_strconcat (machine, to_home ? "/~/" : NULL, NULL);
     else 

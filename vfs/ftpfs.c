@@ -31,6 +31,27 @@
   etc., (tarfs as well), we should give there a user selectable timeout
   and assign a key sequence.  
 - use hash table instead of linklist to cache ftpfs directory.
+
+What to do with this?
+
+
+     * NOTE: Usage of tildes is deprecated, consider:
+     * cd /#ftp:pavel@hobit
+     * cd ~
+     * And now: what do I want to do? Do I want to go to /home/pavel or to
+     * /#ftp:hobit/home/pavel? I think first has better sense...
+     *
+    {
+        int f = !strcmp( remote_path, "/~" );
+	if (f || !strncmp( remote_path, "/~/", 3 )) {
+	    char *s;
+	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+	    g_free (remote_path);
+	    remote_path = s;
+	}
+    }
+
+
  */
 
 /* Namespace pollution: horrible */
@@ -459,7 +480,7 @@ login_server (vfs *me, vfs_s_super *super, char *netrcpass)
 	    goto login_fail;
 	}
     }
-    message_1s (1, _("ftpfs: Login incorrect for user %s "), SUP.user);
+    message_2s (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "), SUP.user);
 login_fail:
     wipe_password (pass);
     g_free (name);
@@ -1690,7 +1711,7 @@ static int netrc_next (void)
 {
     char *p;
     int i;
-    static const char const * keywords [] = { "default", "machine", 
+    static const char * const keywords [] = { "default", "machine", 
         "login", "password", "passwd", "account", "macdef" };
 
     while (1) {
@@ -1703,7 +1724,7 @@ static int netrc_next (void)
 	return 0;
     p = buffer;
     if (*netrcp == '"') {
-	for (;*netrcp != '"' && *netrcp; netrcp++) {
+	for (netrcp++; *netrcp != '"' && *netrcp; netrcp++) {
 	    if (*netrcp == '\\')
 		netrcp++;
 	    *p++ = *netrcp;
@@ -1725,13 +1746,29 @@ static int netrc_next (void)
     return i + 1;
 }
 
+static int netrc_has_incorrect_mode (char * netrcname, char * netrc)
+{
+    static int be_angry = 1;
+    struct stat mystat;
+
+    if (stat (netrcname, &mystat) >= 0 && (mystat.st_mode & 077)) {
+	if (be_angry) {
+	    message_1s (1, MSG_ERROR, _("~/.netrc file has not correct mode.\n"
+					"Remove password or correct mode."));
+	    be_angry = 0;
+	}
+	g_free (netrc);
+	g_free (netrcname);
+	return 1;
+    }
+    return 0;
+}
+
 int lookup_netrc (char *host, char **login, char **pass)
 {
     char *netrcname, *tmp;
     char hostname[MAXHOSTNAMELEN], *domain;
     int keyword;
-    struct stat mystat;
-    static int be_angry = 1;
     static struct rupcache {
         struct rupcache *next;
         char *host;
@@ -1782,30 +1819,14 @@ int lookup_netrc (char *host, char **login, char **pass)
 		case 4:
 		case 5:
 		    if (strcmp (*login, "anonymous") && strcmp (*login, "ftp") &&
-			stat (netrcname, &mystat) >= 0 &&
-			(mystat.st_mode & 077)) {
-			if (be_angry) {
-			    message_1s (1, MSG_ERROR, _("~/.netrc file has not correct mode.\n"
-							"Remove password or correct mode."));
-			    be_angry = 0;
-			}
-			g_free (netrc);
-			g_free (netrcname);
+			netrc_has_incorrect_mode (netrcname, netrc)) {
 			return -1;
 		    }
 		    if (netrc_next () && *pass == NULL)
 			*pass = g_strdup (buffer);
 		    break;
 		case 6:
-		    if (stat (netrcname, &mystat) >= 0 && 
-		        (mystat.st_mode & 077)) {
-			if (be_angry) {
-			    message_1s (1, MSG_ERROR, _("~/.netrc file has not correct mode.\n"
-							"Remove password or correct mode."));
-			    be_angry = 0;
-			}
-			g_free (netrc);
-			g_free (netrcname);
+		    if (netrc_has_incorrect_mode (netrcname, netrc)) {
 			return -1;
 		    }
 		    netrc_next ();
@@ -1817,7 +1838,7 @@ int lookup_netrc (char *host, char **login, char **pass)
 		        if (*netrcp != '\n')
 		            break;
 		        netrcp++;
-		    } while (*netrcp && *netrcp != '\n')
+		    } while (*netrcp && *netrcp != '\n');
 		    break;
 	    }
 	    if (keyword == 20)

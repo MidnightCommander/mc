@@ -316,7 +316,6 @@ vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path, int follow, int
     if (ent && (! (MEDATA->dir_uptodate) (me, ent->ino))){
 #if 1
 	print_vfs_message (_("Dir cache expired for %s"), path);
-	sleep(1);
 #endif
 	vfs_s_free_entry (me, ent);
 	ent = NULL;
