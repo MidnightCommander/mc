@@ -53,9 +53,10 @@
 #include "selcodepage.h"
 #endif
 
-#ifdef WITH_SMBFS
-#include "../vfs/vfs.h"		/* smb_authinfo */
-#endif /* WITH_SMBFS */
+#include "../vfs/vfs.h"		/* vfs_timeout */
+#ifdef USE_NETCODE
+#   include "../vfs/ftpfs.h"
+#endif
 
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
@@ -65,7 +66,6 @@ static WInput *user;
 static WInput *status;
 static WCheck *check_status;
 static int current_mode;
-extern int ftpfs_always_use_proxy;
 
 static char **displays_status;
 static char* display_title = N_(" Listing mode ");
@@ -264,9 +264,9 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     return result;
 }
 
-int SORT_X = 40, SORT_Y = 14;
+static int SORT_X = 40, SORT_Y = 14;
 
-char *sort_orders_names [SORT_TYPES];
+static char *sort_orders_names [SORT_TYPES];
 
 sortfn *
 sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
@@ -460,7 +460,7 @@ confirm_box ()
 static int new_mode;
 static int new_meta;
 
-char *display_bits_str [] =
+static char *display_bits_str [] =
 { N_("Full 8 bits output"), N_("ISO 8859-1"), N_("7 bits") };
 
 static QuickWidget display_widgets [] = {
@@ -547,7 +547,7 @@ display_bits_box ()
 #else /* HAVE_CHARSET */
 
 
-Dlg_head *dbits_dlg;
+static Dlg_head *dbits_dlg;
 
 static void dbits_refresh()
 {
@@ -573,8 +573,8 @@ static int dbits_callback( Dlg_head * h, int Par, int Msg )
 
 static int new_display_codepage;
 
-WLabel *cplabel;
-WCheck *inpcheck;
+static WLabel *cplabel;
+static WCheck *inpcheck;
 
 static int sel_charset_button( int action, void *param )
 {
@@ -724,14 +724,6 @@ tree_box (char *current_dir)
 #endif
 
 #define VFSX 56
-
-extern int vfs_timeout;
-extern int ftpfs_always_use_proxy;
-
-#if defined(USE_NETCODE)
-extern char *ftpfs_anonymous_passwd;
-extern char *ftpfs_proxy_host;
-#endif
 
 static char *ret_timeout;
 

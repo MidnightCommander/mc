@@ -52,11 +52,6 @@
 
 /* "$Id$" */
 
-#ifdef USE_VFS
-extern int vfs_timeout;
-extern int tar_gzipped_memlimit;
-#endif
-
 extern char *find_ignore_dirs;
 
 extern int num_history_items_recorded;

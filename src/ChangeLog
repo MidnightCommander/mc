@@ -1,5 +1,10 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.h: Remove user_format.
+	* boxes.c: Make more variables static, remove all extern
+	declarations.
+	* setup.c: Remove some extern declarations.
+
 	* mountlist.h: Move some internals ...
 	* mountlist.c: ... here.
 

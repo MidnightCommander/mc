@@ -1,8 +1,6 @@
 #ifndef __BOXES_H
 #define __BOXES_H
 
-extern char *user_format [];
-
 int     display_box      (WPanel *p, char **user, char **mini,
 			  int *use_msformat, int num);
 sortfn *sort_box         (sortfn *sort_fn, int *reverse,
