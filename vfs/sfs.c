@@ -93,10 +93,13 @@ static int vfmake (vfs *me, char *name, char *cache)
     }
     g_free (name);
 
+    open_error_pipe ();
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
+	close_error_pipe (1, NULL);
 	return -1;
     }
 
+    close_error_pipe (0, NULL);
     return 0; /* OK */
 }
 
