@@ -1,3 +1,9 @@
+2001-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (catstrs): Use interactive_display() without
+	specifying the help file.
+	From Andrew V. Samoilov.
+
 2001-06-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c [HAVE_CHARSET]: Really include charset.h.

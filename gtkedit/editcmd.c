@@ -169,9 +169,7 @@ char *catstrs (const char *first,...)
 
 void edit_help_cmd (WEdit * edit)
 {
-    char *hlpdir = concat_dir_and_file (mc_home, _("mc.hlp"));
-    interactive_display (hlpdir, "[Internal File Editor]");
-    free (hlpdir);
+    interactive_display (NULL, "[Internal File Editor]");
     edit->force |= REDRAW_COMPLETELY;
 }
 
