@@ -9,9 +9,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.5.51\n"
-"POT-Creation-Date: 2001-07-31 00:50+0200\n"
-"PO-Revision-Date: 2000-09-01 03:29+1\n"
+"Project-Id-Version: 4.5.5x\n"
+"POT-Creation-Date: 2001-08-01 14:03+0200\n"
+"PO-Revision-Date: 2001-08-01 10:06+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1935,7 +1935,7 @@ msgstr " Salva con nome "
 #: gtkedit/editcmd.c:562 gtkedit/editcmd.c:886 gtkedit/editcmd.c:911
 #: gtkedit/editcmd.c:1062 gtkedit/editcmd.c:1160 src/file.c:619 src/help.c:314
 #: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
-#: src/selcodepage.c:73 src/selcodepage.c:90 src/subshell.c:744
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:744
 #: src/subshell.c:770 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
 #: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
@@ -2097,7 +2097,7 @@ msgstr "espressione &Regolare"
 msgid "&Whole words only"
 msgstr "solo &Parole intere"
 
-#: gtkedit/editcmd.c:1287 gtkedit/editcmd.c:1368
+#: gtkedit/editcmd.c:1287 gtkedit/editcmd.c:1368 src/find.c:142
 msgid "case &Sensitive"
 msgstr "controllare &Maiuscole/minuscole"
 
@@ -3211,7 +3211,7 @@ msgstr "Modalità visualizzazione"
 msgid "&Reverse"
 msgstr "inve&Rti"
 
-#: src/boxes.c:282 src/find.c:142
+#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "controlla maiuscole/minuscole"
 
@@ -3259,7 +3259,7 @@ msgstr "Accetta in &Ingresso 8 bit"
 msgid " Display bits "
 msgstr " Mostra bit "
 
-#: src/boxes.c:585 src/selcodepage.c:47
+#: src/boxes.c:585 src/selcodepage.c:48
 msgid "Other 8 bit"
 msgstr "Altri 8 bit"
 
@@ -3328,7 +3328,7 @@ msgstr "&Ferma"
 msgid "Background Jobs"
 msgstr "Processi in background"
 
-#: src/charsets.c:171 src/charsets.c:184
+#: src/charsets.c:169 src/charsets.c:182
 #, c-format
 msgid "Can't translate from %s to %s"
 msgstr "Impossibile tradurre da %s a %s"
@@ -5844,15 +5844,15 @@ msgstr "RinSpo"
 msgid "Mkdir"
 msgstr "CreDir"
 
-#: src/selcodepage.c:32
+#: src/selcodepage.c:33
 msgid " Choose input codepage "
 msgstr " Scegli la codepage "
 
-#: src/selcodepage.c:36
+#: src/selcodepage.c:37
 msgid "-  < No translation >"
 msgstr "-  < Non tradotto >"
 
-#: src/selcodepage.c:74
+#: src/selcodepage.c:75
 msgid ""
 "Midnight Commander was compiled without iconv support,\n"
 "so charsets recoding feature is not available!"
@@ -5860,7 +5860,7 @@ msgstr ""
 "Midnight Commander è stato compilato senza supporto per iconv,\n"
 "perciò la funzione di registrazione dei set di caratteri non è disponibile!"
 
-#: src/selcodepage.c:91
+#: src/selcodepage.c:92
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -6129,17 +6129,17 @@ msgstr " Non trovo voci appropriate in %s "
 msgid " User menu "
 msgstr " Menu utente "
 
-#: src/util.c:250
+#: src/util.c:244
 msgid "name_trunc: too big"
 msgstr "name_trunc: troppo grande"
 
 #. strftime() format string for recent dates
-#: src/util.c:687 src/util.c:712
+#: src/util.c:682 src/util.c:708
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:688 src/util.c:710
+#: src/util.c:683 src/util.c:706
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -6929,7 +6929,7 @@ msgstr ""
 "Attenzione: flag %c non valida in sfs.ini:\n"
 "%s\n"
 
-#: vfs/smbfs.c:539
+#: vfs/smbfs.c:538
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6938,26 +6938,26 @@ msgstr ""
 " riconnessione a %s fallita\n"
 " "
 
-#: vfs/smbfs.c:1123
+#: vfs/smbfs.c:1119
 msgid " Authentication failed "
 msgstr " Autenticazione fallita "
 
-#: vfs/smbfs.c:1622
+#: vfs/smbfs.c:1617
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s creazione dir %s "
 
-#: vfs/smbfs.c:1643
+#: vfs/smbfs.c:1638
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s rimozione dir %s "
 
-#: vfs/smbfs.c:1748 vfs/smbfs.c:1768 vfs/smbfs.c:1829
+#: vfs/smbfs.c:1739 vfs/smbfs.c:1759 vfs/smbfs.c:1823
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s apertura file remoto %s "
 
-#: vfs/smbfs.c:1852
+#: vfs/smbfs.c:1856
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s rinomina file\n"
