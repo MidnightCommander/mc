@@ -105,8 +105,9 @@ static unsigned int SLang_getkey2 (void)
 
 static int SLang_input_pending2 (int tsecs)
 {
-   int n;
+   int n, i;
    unsigned char c;
+
    if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
 #if SLANG_VERSION >= 10000  
    n = _SLsys_input_pending (tsecs);
@@ -115,7 +116,10 @@ static int SLang_input_pending2 (int tsecs)
 #endif
    if (n <= 0) return 0;
    
-   c = (unsigned char) SLang_getkey2 ();
+   i = SLang_getkey2 ();
+   if (i == SLANG_GETKEY_ERROR)
+	return 0;  /* don't put crippled error codes into the input buffer */
+   c = (unsigned char)i;
    SLang_ungetkey_string (&c, 1);
    
    return n;
@@ -571,11 +575,18 @@ load_terminfo_keys ()
 
 int getch ()
 {
+    int c;
     if (no_slang_delay)
 	if (SLang_input_pending2 (0) == 0)
 	    return -1;
 
-    return (SLang_getkey2 ());
+    c = SLang_getkey2 ();
+    if (c == SLANG_GETKEY_ERROR) {
+	fprintf (stderr, "SLang_getkey returned SLANG_GETKEY_ERROR\n"
+                         "Assuming EOF on stdin and exiting\n");
+	quiet_quit_cmd ();
+    }
+    return (c);
 }
 
 extern int slow_terminal;

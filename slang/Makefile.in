@@ -51,10 +51,10 @@ TAGS: $(SLANGSRCS)
 	etags $(SLANGSRCS)
 
 clean:
-	$(RMF) *.o core a.out libmcslang.a slang.h
+	$(RMF) *.o core a.out libmcslang.a
 
 realclean: clean
-	$(RMF) .depend
+	$(RMF) .depend slang.h
 	$(RMF) TAGS
 	$(RMF) *~
 

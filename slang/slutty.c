@@ -462,6 +462,7 @@ static int handle_interrupt (void)
 unsigned int SLsys_getkey (void)
 {
    unsigned char c;
+   unsigned int i;
    
    if (TTY_Inited == 0)
      {
@@ -497,7 +498,7 @@ unsigned int SLsys_getkey (void)
 	break;			       /* let read handle it */
      }
    
-   while (-1 == read(SLang_TT_Read_FD, (char *) &c, 1))
+   while (-1 == (i = read(SLang_TT_Read_FD, (char *) &c, 1)))
      {
 	if (errno == EINTR) 
 	  {
@@ -532,6 +533,9 @@ unsigned int SLsys_getkey (void)
 	return SLANG_GETKEY_ERROR;
      }
 
+   if (i == 0)
+	return SLANG_GETKEY_ERROR;
+   
    return((unsigned int) c);
 }
 

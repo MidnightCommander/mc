@@ -795,25 +795,28 @@ AC_CHECK_LIB(slang,SLang_init_tty,
 
 AC_ARG_WITH(terminfo,
         [--with-terminfo            SLANG: Force usage of terminfo],[
-	AC_USE_TERMINFO
-	slang_check_lib=false
-	slang_use_system_installed_lib=false
-	]
+	if test x$withval = xyes; then
+		AC_USE_TERMINFO
+		slang_check_lib=false
+		slang_use_system_installed_lib=false
+	fi]
 )
 
 AC_ARG_WITH(termcap,
 	[--with-termcap             SLANG: Force usage of termcap],[
-	AC_USE_TERMCAP
-	slang_check_lib=false
-	slang_use_system_installed_lib=false
-	]
+	if test x$withval = xyes; then
+		AC_USE_TERMCAP
+		slang_check_lib=false
+		slang_use_system_installed_lib=false
+	fi]
 )
 
 AC_ARG_WITH(included-slang,
 	[--with-included-slang      SLANG: use the SLang library included here],[
+	if test x$withval = xyes; then
 	    slang_use_system_installed_lib=false
 	    slang_check_lib=true
-	]
+	fi]
 )
 
 AC_DEFUN(AC_WITH_SLANG,
@@ -917,8 +920,10 @@ AC_SUBST(LEDIT)
 
 AC_ARG_WITH(netrc,
 	[--with-netrc               Compile with ftp .netrc support],[
-	AC_DEFINE(USE_NETRC)
-	AC_MSG_RESULT(ftpfs will have .netrc parsing code)
+	if test x$withval = xyes; then
+		AC_DEFINE(USE_NETRC)
+		AC_MSG_RESULT(ftpfs will have .netrc parsing code)
+	fi
 ])
 
 undelfs_o=""

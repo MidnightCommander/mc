@@ -1,3 +1,11 @@
+Tue Apr 13 07:07:36 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* slutty.c (SLsys_getkey): handle EOF on stdin (return
+	SLANG_GETKEY_ERROR on EOF instead of returning garbage)
+
+	* Makefile.in (clean): remove the symbolic link slang.h on the 
+	distclean target and not on the clean target.
+
 Sun Feb 14 01:05:42 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* sldisply.c (SLtt_get_terminfo): use g_snprintf instead of
