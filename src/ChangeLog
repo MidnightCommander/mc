@@ -1,3 +1,8 @@
+Thu Nov  5 12:10:10 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* file.c (panel_operate): check for null pointer before passing it
+ 	to mc_setctl
+
 Wed Nov  4 17:51:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* src/findme.h: added from popt-1.2 by RedHat

@@ -2342,7 +2342,8 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
-    mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL);
+    if (dest)
+        mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL);
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
@@ -2491,7 +2492,8 @@ panel_operate (void *source_panel, int operation, char *thedefault)
  clean_up:
     /* Clean up */
     destroy_op_win ();
-    mc_setctl (dest, MCCTL_NO_STALE_DATA, NULL);
+    if (dest)
+        mc_setctl (dest, MCCTL_NO_STALE_DATA, NULL);
     ftpfs_hint_reread (1);
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
