@@ -1,5 +1,10 @@
 2004-10-18  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/hp48.in: Correct quoting from last patch. Avoid a
+	subshell when none is needed.
+
+2004-10-18  Roland Illig  <roland.illig@gmx.de>
+
 	* extfs/audio.in: Fix even more quoting issues.
 	* extfs/hp48.in: Likewise.
 

@@ -26,7 +26,7 @@ KERMIT="kermit -l /dev/ttyS1 -b 9600"
 
 hp48_cmd()
 {
-$KERMIT -C "SET EXIT WARNING OFF,REMOTE $@,QUIT"
+$KERMIT -C "SET EXIT WARNING OFF,REMOTE $1,QUIT"
 }
 
 hp48_cd()
@@ -64,15 +64,15 @@ done
 for HP48_DIR in $HP48_DIRS;
 do 
     HP48_PDIR="$HP48_CDIR"
-    HP48_CDIR="$HP48_CDIR/$HP48_DIR"; hp48_cmd HOST "$HP48_DIR" >/dev/null
+    HP48_CDIR="$HP48_CDIR/$HP48_DIR"; hp48_cmd "HOST $HP48_DIR" >/dev/null
     hp48_list
-    HP48_CDIR="$HP48_PDIR"; hp48_cmd HOST UPDIR >/dev/null
+    HP48_CDIR="$HP48_PDIR"; hp48_cmd "HOST UPDIR" >/dev/null
 done
 }
 
 hp48_list()
 {
-(hp48_cmd DIRECTORY;echo;echo EOF)|hp48_parser
+{ hp48_cmd "DIRECTORY"; echo; echo EOF; } | hp48_parser
 }
 
 # override any locale for dates
@@ -81,7 +81,7 @@ export LC_ALL
 
 case "$1" in
 list) HP48_CDIR=
-    hp48_cmd HOST HOME >/dev/null
+    hp48_cmd "HOST HOME" >/dev/null
     hp48_list
     exit 0;;
 copyout)
