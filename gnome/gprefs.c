@@ -164,7 +164,7 @@ static Property caching_and_optimization_props [] =
                 &ftpfs_directory_timeout, N_("Seconds"), NULL, NULL
         },
         {
-                N_("Allow customization of icons in panels"), PROPERTY_BOOL,
+                N_("Allow customization of icons in icon view"), PROPERTY_BOOL,
                 &we_can_afford_the_speed, NULL, NULL, NULL
         },
         PROPERTIES_DONE
