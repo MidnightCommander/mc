@@ -1,3 +1,7 @@
+2003-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't check for seekdir() and telldir().
+
 2003-09-23  Pavel Roskin  <proski@gnu.org>
 
 	* doc/sr/Makefile.am: Don't install mcserv documentation if mcfs

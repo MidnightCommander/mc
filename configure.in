@@ -184,7 +184,7 @@ AC_CHECK_FUNCS([strerror statfs strftime getsid \
 		memmove truncate initgroups putenv \
 		memset memcpy tcsetattr tcgetattr cfgetospeed \
 		sigaction sigemptyset sigprocmask sigaddset \
-		sysconf setuid setreuid telldir seekdir])
+		sysconf setuid setreuid])
 
 dnl
 dnl getpt is a GNU Extension (glibc 2.1.x)
