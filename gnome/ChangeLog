@@ -1,5 +1,18 @@
 1998-11-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* Makefile.in (OOBJS): Add filegui.o back until the GTK-specific
+	filegui is written.
+
+	* gdesktop.c (check_window_in_one_panel): Provide better error
+	messages here for debugging purposes.
+	
+	Disable stubs for filegui.c until they are actually implemented.
+	I need to debug stuff.
+
+	* gdnd.c (find_panel_owning_window): Use the new
+	gtk_drag_get_source_widget function to find out reliably if the
+	drag source happens to be in this application.
+
 	* gscreen.c (x_create_panel): Set the usize for the ministatus
 	label to be (0, -1), this means: do not request any horizontal
 	space, use any vertical space given.

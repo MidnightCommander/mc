@@ -65,23 +65,33 @@ get_action (void)
  * NULL.
  */
 static WPanel *
-find_panel_owning_window (GdkWindow *window)
+find_panel_owning_window (GdkDragContext *context)
 {
 	GList *list;
 	WPanel *panel;
 	GdkWindowPrivate *wp, *lwp;
+	GtkWidget *source_widget;
 
-	wp = (GdkWindowPrivate *) window;
+	source_widget = gtk_drag_get_source_widget (context);
+	if (!source_widget)
+		return NULL;
+
+	/*
+	 * We will scan the list of existing WPanels.  We
+	 * uniformize the thing by pulling the toplevel
+	 * widget for each WPanel and compare this to the
+	 * toplevel source_widget
+	 */
+	source_widget = gtk_widget_get_toplevel (source_widget);
 
 	for (list = containers; list; list = list->next) {
+		GtkWidget *panel_toplevel_widget;
+		
 		panel = ((PanelContainer *) list->data)->panel;
 
-		if (panel->list_type == list_icons)
-			lwp = (GdkWindowPrivate *) GTK_WIDGET (panel->icons)->window;
-		else
-			lwp = (GdkWindowPrivate *) GTK_CLIST (panel->list)->clist_window;
+		panel_toplevel_widget = panel->xwindow;
 
-		if (lwp->xwindow == wp->xwindow)
+		if (panel->xwindow == source_widget)
 			return panel;
 	}
 

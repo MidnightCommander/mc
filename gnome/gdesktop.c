@@ -680,7 +680,7 @@ desktop_destroy (void)
 
 
 
-#if 1
+#if 0
 /* Stubs for filegui.h */
 
 #include "file.h"
@@ -689,82 +689,82 @@ desktop_destroy (void)
 FileProgressStatus
 file_progress_show_source (char *path)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progres_show_source: Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_target (char *path)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progres_show_target: Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_deleting (char *path)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progress_show_deleting: Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show (long done, long total)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file-progress_show; Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_count (long done, long total)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progress_show_count: Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_bytes (long done, long total)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progress_show_bytes: Implement this function!\n");
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat, struct stat *_d_stat)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progress_real_query_replace: Implement this function!\n");
 	return FILE_CONT;
 }
 
 void
 file_progress_set_stalled_label (char *stalled_msg)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_progress_set_stalled_label: Implement this function!\n");
 }
 
 char *
 panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int only_one, struct stat* src_stat)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("panel_opreate_create_prompt: Implement this function!\n");
 	return NULL;
 }
 
 char *
 file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_one, int *do_background)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("file_mask_dialog: Implement this function!\n");
 	return NULL;
 }
 
 void
 create_op_win (FileOperation op, int with_eta)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("create_op_win: Implement this function!\n");
 }
 
 void
 destroy_op_win (void)
 {
-	g_warning ("Implement this function!\n");
+	g_warning ("destory_op_win: Implement this function!\n");
 }
 
 #endif
