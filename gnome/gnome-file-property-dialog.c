@@ -122,6 +122,8 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 		g_free (gfpd->icon_filename);
 	if (gfpd->desktop_url)
 		g_free (gfpd->desktop_url);
+	if (gfpd->caption)
+		g_free (gfpd->caption);
 	
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
@@ -153,6 +155,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	strrchr (direc, '/')[0] = '\0';
 	fe = file_entry_from_file (fp_dlg->file_name);
 	fp_dlg->im = gicon_get_icon_for_file_speed (direc, fe, FALSE);
+	file_entry_free (fe);
 	g_free (direc);
 	icon = gnome_pixmap_new_from_imlib (fp_dlg->im);
 	gtk_box_pack_start (GTK_BOX (vbox), icon, FALSE, FALSE, 0);
@@ -290,9 +293,22 @@ create_url_properties (GnomeFilePropertyDialog *fp_dlg)
 
 	table = gtk_table_new (0, 0, 0);
 
-	label = gtk_label_new (_("URL"));
+	label = gtk_label_new (_("URL:"));
+	gtk_table_attach (GTK_TABLE (table), label,
+			  1, 2, 1, 2, 0, 0, GNOME_PAD, GNOME_PAD);
+	fp_dlg->desktop_entry = gtk_entry_new ();
+	gtk_table_attach (GTK_TABLE (table), fp_dlg->desktop_entry,
+			  2, 3, 1, 2, GTK_FILL | GTK_EXPAND, 0, GNOME_PAD, GNOME_PAD);
+
+	label = gtk_label_new (_("Caption:"));
+	gtk_table_attach (GTK_TABLE (table), label,
+			  1, 2, 2, 3, 0, 0, GNOME_PAD, GNOME_PAD);
+	fp_dlg->caption_entry = gtk_entry_new ();
+	gtk_table_attach (GTK_TABLE (table), fp_dlg->caption_entry,
+			  2, 3, 2, 3, GTK_FILL | GTK_EXPAND, 0, GNOME_PAD, GNOME_PAD);
 	
-		
+	gtk_widget_show_all (table);
+	return table;
 }
 
 /* Settings Pane */
@@ -355,8 +371,10 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 
 	if (fp_dlg->desktop_url){
 		gtk_entry_set_text (GTK_ENTRY (fp_dlg->desktop_entry), fp_dlg->desktop_url);
+
+		gtk_entry_set_text (GTK_ENTRY (fp_dlg->caption_entry), fp_dlg->caption);
 	}
-	
+
 	if (fp_dlg->executable) {
 		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "Drop Action");
 		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default Drop Action options");
@@ -411,10 +429,15 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
 	icon = gicon_image_to_name (fp_dlg->im);
-	if (!icon || !icon[0])
+	if (!icon)
 		return retval;
-	g_print ("icon:%s:\n",icon);
+	
+	if (!icon[0]){
+		g_free (icon);
+		return retval;
+	}
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (retval), icon);
+	g_free (icon);
 	return retval;
 }
 static GtkWidget *
@@ -912,7 +935,7 @@ static void
 init_metadata (GnomeFilePropertyDialog *fp_dlg)
 {
 	gint size;
-	gchar *mime_type;
+	char *mime_type;
 	gchar link_name[60];
 	gint n;
 	gchar *file_name, *desktop_url;
@@ -934,7 +957,18 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 		}
 	}
 	
-	mime_type = gnome_mime_type_or_default (file_name, NULL);
+	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
+		fp_dlg->desktop_url = desktop_url;
+	else
+		fp_dlg->desktop_url = NULL;
+
+	if (gnome_metadata_get (fp_dlg->file_name, "icon-caption", &size, &fp_dlg->caption))
+		fp_dlg->caption = g_strdup (desktop_url);
+			
+	/*
+	 * Mime type.
+	 */
+	mime_type = (char *) gnome_mime_type_or_default (file_name, NULL);
 	if (!mime_type)
 		return;
 	fp_dlg->mime_fm_open = gnome_mime_get_value (mime_type, "fm-open");
@@ -950,11 +984,6 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	if (fp_dlg->icon_filename)
 		g_print ("we have an icon-filename:%s:\n", fp_dlg->icon_filename);
 
-	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
-		fp_dlg->desktop_url = desktop_url;
-	else
-		fp_dlg->desktop_url = NULL;
-	
 }
 GtkWidget *
 gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
@@ -1200,6 +1229,17 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 			}
 		}
 	}
+
+	if (fpd->desktop_url){
+		char *new_desktop_url = gtk_entry_get_text (GTK_ENTRY (fpd->desktop_entry));
+		char *new_caption     = gtk_entry_get_text (GTK_ENTRY (fpd->caption_entry));
+
+		gnome_metadata_set (fpd->file_name, "desktop-url",
+				    strlen (new_desktop_url)+1, new_desktop_url);
+		gnome_metadata_set (fpd->file_name, "icon-caption",
+				    strlen (new_caption)+1, new_caption);
+	}
+		
 	if (!fpd->can_set_icon)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */
@@ -1211,8 +1251,14 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 			 * default to the basic icon.  We prolly should check that this is a valid
 			 * file here, but I'm too tired to do it now -- jrb */
 			gnome_metadata_set (fpd->file_name, "icon-filename", strlen (text) + 1, text);
-		else
-			gnome_metadata_remove (fpd->file_name, "icon-filename");
+		else {
+			/* If text is equal to icon_name it means the user did not
+			 * touch it, not that he did remove it
+			 */
+			/*
+			  gnome_metadata_remove (fpd->file_name, "icon-filename");
+			*/
+		}
 	}
 	/* I suppose we should only do this if we know there's been a change -- I'll try to figure it
 	 * out later if it turns out to be important. */

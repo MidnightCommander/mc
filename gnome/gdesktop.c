@@ -123,7 +123,9 @@ static int click_dragging;
 
 
 static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url,
-					       int user_pos, int auto_pos, int xpos, int ypos);
+					       char *caption,
+					       int user_pos, int auto_pos,
+					       int xpos, int ypos);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -321,6 +323,7 @@ icon_exists_in_list (GList *list, char *filename)
 typedef struct {
 	char *filename;
 	char *url;
+	char *caption;
 } file_and_url_t;
 
 /*
@@ -339,7 +342,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	DesktopIconInfo *dii;
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
-	char *desktop_url;
+	char *desktop_url, *caption;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -397,23 +400,31 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 		if (gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url) != 0)
 			desktop_url = NULL;
 
+		caption = NULL;
+		gnome_metadata_get (full_name, "icon-caption", &size, &caption);
+		
 		if (have_pos) {
-			dii = desktop_icon_info_new (dirent->d_name, desktop_url, FALSE, FALSE, x, y);
+			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, FALSE, FALSE, x, y);
 			gtk_widget_show (dii->dicon);
 
 			g_free (full_name);
 		} else {
 			file_and_url_t *fau;
 
-			fau = g_new (file_and_url_t, 1);
+			fau = g_new0 (file_and_url_t, 1);
 			fau->filename = g_strdup (dirent->d_name);
-			fau->url = g_strdup (desktop_url);
-
+			if (desktop_url)
+				fau->url      = g_strdup (desktop_url);
+			if (caption)
+				fau->caption  = g_strdup (caption);
 			need_position_list = g_slist_prepend (need_position_list, fau);
 		}
 
 		if (desktop_url)
 			g_free (desktop_url);
+
+		if (caption)
+			g_free (caption);
 	}
 
 	mc_closedir (dir);
@@ -444,10 +455,13 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	for (sl = need_position_list; sl; sl = sl->next) {
 		file_and_url_t *fau = sl->data;
 
-		dii = desktop_icon_info_new (fau->filename, fau->url, user_pos, TRUE, xpos, ypos);
+		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, user_pos, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 
-		g_free (fau->url);
+		if (fau->url)
+			g_free (fau->url);
+		if (fau->caption)
+			g_free (fau->caption);
 		g_free (fau->filename);
 		g_free (fau);
 	}
@@ -683,7 +697,7 @@ text_changed_url (GnomeIconTextItem *iti, gpointer data)
 	
 	fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
 	new_text = gnome_icon_text_item_get_text (iti);
-	gnome_metadata_set (fullname, "desktop-url", strlen (new_text) + 1, new_text);
+	gnome_metadata_set (fullname, "icon-caption", strlen (new_text) + 1, new_text);
 
 	return TRUE;
 }
@@ -1338,14 +1352,13 @@ setup_icon_dnd_dest (DesktopIconInfo *dii)
  * desktop directory.  It does not show the icon.
  */
 static DesktopIconInfo *
-desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, int xpos, int ypos)
+desktop_icon_info_new (char *filename, char *url, char *caption, int user_pos, int auto_pos, int xpos, int ypos)
 {
 	DesktopIconInfo *dii;
 	file_entry *fe;
 	char *full_name;
 	GdkImlibImage *icon_im;
 	GtkSignalFunc text_changed_func;
-	char *caption;
 	
 	/* Create the icon structure */
 
@@ -1359,7 +1372,8 @@ desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, in
 
 	if (url){
 		dii->url = g_strdup (url);
-		caption = url;
+		if (!caption)
+			caption = url;
 	} else {
 		dii->url = NULL;
 		caption = filename;
@@ -1426,6 +1440,37 @@ desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, in
 
 	desktop_icon_info_place (dii, user_pos, auto_pos, xpos, ypos);
 	return dii;
+}
+
+/**
+ * desktop_icon_update_url:
+ * @dii: the desktop icon
+ *
+ * Loads from the metadata updated versions of the caption
+ * and the url
+ */
+void
+desktop_icon_update_url (DesktopIconInfo *dii)
+{
+	char *fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
+	char *caption = NULL;
+	char *url = NULL;
+	int size;
+	
+	gnome_metadata_get (fullname, "icon-caption", &size, &caption);
+	if (caption){
+		desktop_icon_set_text (DESKTOP_ICON (dii->dicon), caption);
+		g_free (caption);
+	}
+
+	gnome_metadata_get (fullname, "desktop-url", &size, &url);
+	if (url){
+		if (dii->url)
+			g_free (dii->url);
+		dii->url = url;
+	}
+	
+	g_free (fullname);
 }
 
 /**
@@ -2239,3 +2284,4 @@ desktop_destroy (void)
 	gtk_widget_destroy (proxy_invisible);
 	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
 }
+

@@ -14,7 +14,6 @@
 #include <config.h>
 #include <gnome.h>
 #include "../vfs/vfs.h"
-#include "global.h"
 #include "panel.h"
 #include "cmd.h"
 #include "dialog.h"
@@ -412,6 +411,7 @@ static void popup_handle_properties (GtkWidget *widget, WPanel *panel)
 	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
+	
 	gtk_widget_destroy (dlg);
 	 g_free (full_name);
 	if (retval)
