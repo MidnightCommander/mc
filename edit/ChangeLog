@@ -1,3 +1,10 @@
+2001-09-17  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Don't use macro `stat' - it's already a macro	on
+	Solaris 8 with large file support.
+	* editcmd.c: Replace stat() with mc_stat().
+	* edit.c: Likewise.
+
 2001-09-11  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (syntax_text): Remove, it's a separate file now.

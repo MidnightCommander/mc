@@ -341,7 +341,6 @@ void user_menu (WEdit *edit);
 #define close(f) mc_close(f)
 #define read(f,b,c) mc_read(f,b,c)
 #define write(f,b,c) mc_write(f,b,c)
-#define stat(f,s) mc_stat(f,s)
 #define mkdir(s,m) mc_mkdir(s,m)
 #define itoa MY_itoa
 

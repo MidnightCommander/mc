@@ -2269,7 +2269,7 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 
     /* insert result block */ 
     if (block) {
-	if (stat (e, &s) == 0) {
+	if (mc_stat (e, &s) == 0) {
 	    if (!s.st_size) {	/* no error messages */
 		if (edit_block_delete_cmd (edit))
 		    return;

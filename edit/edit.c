@@ -369,7 +369,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 	    return 2;
 	}
     }
-    if (stat ((char *) filename, st) < 0) {
+    if (mc_stat ((char *) filename, st) < 0) {
 	close (file);
 /* The file-name is printed after the ':' */
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
@@ -2651,9 +2651,9 @@ void user_menu (WEdit *edit)
     /* run shell scripts from menu */     
     user_menu_cmd (edit);
     
-    if (stat (error_file, &status) == 0) {
+    if (mc_stat (error_file, &status) == 0) {
         if (!status.st_size) {	/* no error messages */
-	    if (stat (block_file, &status) == 0)
+	    if (mc_stat (block_file, &status) == 0)
     		if (!status.st_size)
 		    return;  /* no block messages */
             if (! nomark) /* i.e. we have marked block */
