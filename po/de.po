@@ -1,13 +1,14 @@
-# mc de.po
+# German translation file for MC
 # Copyright (C) 1994-1999 Free Software Foundation, Inc.
-# joey@debian.org (Martin Schulze)
+# Martin Schulze <joey@debian.org>
+# Kai Lahmann <kl@linuxfaqs.de>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-12-03 11:44+0100\n"
-"PO-Revision-Date: 2000-12-03 11:45+0100\n"
-"Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
+"POT-Creation-Date: 2001-01-07 13:47+0100\n"
+"PO-Revision-Date: 2001-01-07 13:51+01:00\n"
+"Last-Translator: Benedikt Roth <Benedikt.Roth@gmx.net>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -54,8 +55,8 @@ msgstr ""
 msgid ""
 "\".\n"
 "\n"
-"To fix this, bring up the mime-properties editor in the GNOME Control Center, "
-"and edit the default %s-action for \"%s\"."
+"To fix this, bring up the mime-properties editor in the GNOME Control "
+"Center, and edit the default %s-action for \"%s\"."
 msgstr ""
 "\".\n"
 "\n"
@@ -73,8 +74,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"Um diesen Fehler zu reparieren, öffnen Sie die Eigenschaften dieser Datei und "
-"ändern Sie die voreingestellte %s-Aktion."
+"Um diesen Fehler zu reparieren, öffnen Sie die Eigenschaften dieser Datei "
+"und ändern Sie die voreingestellte %s-Aktion."
 
 #: gnome/gaction.c:51
 #, c-format
@@ -269,8 +270,7 @@ msgstr ""
 "*.png zeigt nur PNG-Bilder an"
 
 #: gnome/gcmd.c:913
-msgid ""
-"Enter a regular expression here to select files in the panel view with."
+msgid "Enter a regular expression here to select files in the panel view with."
 msgstr ""
 "Geben Sie einen regulären Ausdruck zur Dateiauswahl in der Fensteransicht an."
 
@@ -627,8 +627,8 @@ msgstr "Unterverzeichnisse rekursiv kopieren."
 #: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
 msgstr ""
-"Führt dazu, daß Unterverzeichnisse rekursiv durchlaufen und "
-"mitkopiert\nwerden"
+"Führt dazu, daß Unterverzeichnisse rekursiv durchlaufen und mitkopiert\n"
+"werden"
 
 #: gnome/gdialogs.c:780
 #, c-format
@@ -5432,8 +5432,8 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Bei schnellem Neuladen wird der Verzeichnisinhalt manchmal nicht     "
-"\n exakt dargestellt. In diesem Fall müssen Sie das Verzeichnis manuell \n"
+" Bei schnellem Neuladen wird der Verzeichnisinhalt manchmal nicht     \n"
+" exakt dargestellt. In diesem Fall müssen Sie das Verzeichnis manuell \n"
 " neu einlesen. Für mehr Information lesen Sie die Man-Page.           "
 
 #: src/main.c:1943
@@ -6099,8 +6099,8 @@ msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem beschrieben "
-"werden.\n"
+"Die Datei %s gehört weder root noch Ihnen oder sie kann von jedem "
+"beschrieben werden.\n"
 "Sie zu benutzen, kann Ihre Sicherheit gefährden"
 
 #: src/user.c:672
@@ -6124,12 +6124,12 @@ msgid "name_trunc: too big"
 msgstr "name_trun: zu groß"
 
 #. strftime() format string for recent dates
-#: src/util.c:599 src/util.c:624
+#: src/util.c:600 src/util.c:625
 msgid "%b %e %H:%M"
 msgstr "%d. %b %H.%M"
 
 #. strftime() format string for old dates
-#: src/util.c:600 src/util.c:622
+#: src/util.c:601 src/util.c:623
 msgid "%b %e  %Y"
 msgstr "%d. %b %Y"
 
@@ -6630,8 +6630,8 @@ msgstr "fish: Warte auf erste Zeile..."
 #: vfs/fish.c:228
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
-"Entschuldigung, aber wir können momentan noch keine "
-"paßwortgesicherten\nVerbindungen benutzen."
+"Entschuldigung, aber wir können momentan noch keine paßwortgesicherten\n"
+"Verbindungen benutzen."
 
 #: vfs/fish.c:233
 msgid " fish: Password required for "
@@ -6750,94 +6750,94 @@ msgstr "ftpfs: Login fehlgeschlagen für User %s "
 msgid " Could not set source routing (%s)"
 msgstr " Kann Source-Routing nicht setzen (%s)"
 
-#: vfs/ftpfs.c:638
+#: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ungültiger Rechnername."
 
-#: vfs/ftpfs.c:658
+#: vfs/ftpfs.c:657
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ungültige Rechneradresse."
 
-#: vfs/ftpfs.c:681
+#: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: stelle Verbindung her zu %s"
 
-#: vfs/ftpfs.c:691
+#: vfs/ftpfs.c:690
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: Verbindung durch Benutzer unterbrochen"
 
-#: vfs/ftpfs.c:693
+#: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: Verbindung zum Server fehlgeschlgen: %s"
 
-#: vfs/ftpfs.c:734
+#: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Warte bis zum nächsten Versuch... %d (Control-C zum Abbrechen)"
 
-#: vfs/ftpfs.c:920
+#: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: konnte passiven Modus nicht einstellen"
 
-#: vfs/ftpfs.c:996
+#: vfs/ftpfs.c:995
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: breche Transfer ab"
 
-#: vfs/ftpfs.c:998
+#: vfs/ftpfs.c:997
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Abbruch; Fehler: %s"
 
-#: vfs/ftpfs.c:1003
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: Abbruch fehlgeschlagen"
 
-#: vfs/ftpfs.c:1092 vfs/ftpfs.c:1191
+#: vfs/ftpfs.c:1091 vfs/ftpfs.c:1190
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD fehlgeschlagen."
 
-#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1109
+#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: konnte symbolischem Link nicht folgen"
 
-#: vfs/ftpfs.c:1160
+#: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
 msgstr "Folge Symlink..."
 
-#: vfs/ftpfs.c:1179
+#: vfs/ftpfs.c:1178
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Lese FTP-Verzeichnis %s... %s%s"
 
-#: vfs/ftpfs.c:1180
+#: vfs/ftpfs.c:1179
 msgid "(strict rfc959)"
 msgstr "(strikt nach RFC 959)"
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1180
 msgid "(chdir first)"
 msgstr "(zuerst chdir)"
 
-#: vfs/ftpfs.c:1305
+#: vfs/ftpfs.c:1304
 msgid "ftpfs: failed"
 msgstr "ftpfs: fehlgeschlagen"
 
-#: vfs/ftpfs.c:1315
+#: vfs/ftpfs.c:1314
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fehlgeschlagen; alle Stricke gerissen"
 
-#: vfs/ftpfs.c:1378
+#: vfs/ftpfs.c:1377
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: speichere Datei %d (%d)"
 
 #. This is place of next pointer
-#: vfs/ftpfs.c:1683
-msgid "File Tranfer Protocol (ftp)"
-msgstr "File Tranfer Protocol (ftp)"
+#: vfs/ftpfs.c:1682
+msgid "File Transfer Protocol (ftp)"
+msgstr "File Transfer Protocol (ftp)"
 
-#: vfs/ftpfs.c:1796
+#: vfs/ftpfs.c:1795
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -7119,4 +7119,3 @@ msgstr " Konnte Datei nicht öffnen: %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Undelete-Dateisystem für ext2"
-
