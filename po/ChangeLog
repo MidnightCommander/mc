@@ -1,3 +1,8 @@
+2002-10-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ru.po: Replace 0x96 with OK due to problems with xterm.
+	* uk.po: Likewise.
+
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
 	* *.po: Remove unused translations, there is too much stuff left

@@ -1,8 +1,8 @@
 # Russian translation of Midnight Commander
 # Copyright (C) 1998-2002 Free Software Foundation, Inc.
 # 
-# Current translator Andrew V. Samoilov <kai@cmail.ru>, 2000, 2001,
-# 	Pavel Roskin <proski@gnu.org>, 2001
+# Current translator Andrew V. Samoilov <kai@cmail.ru>, 2000-2002
+# 	Pavel Roskin <proski@gnu.org>, 2001-2002
 # Based on work of
 # 	Valek Filippov <frob@df.ru>, 2000
 # 	Evgeny Bulgakov <bgav@netvision.net.il>, 1999,
@@ -2621,7 +2621,7 @@ msgstr ""
 "и подождите, пока это сообщение пропадет.\n"
 "\n"
 "Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось '√'.\n"
+"что справа от ее названия появилось 'OK'.\n"
 "\n"
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
@@ -2637,7 +2637,7 @@ msgstr " Вы ввели \"%s\""
 
 #: src/learn.c:164
 msgid "OK"
-msgstr " √"
+msgstr "OK"
 
 #: src/learn.c:171
 msgid ""
