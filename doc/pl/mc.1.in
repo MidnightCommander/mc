@@ -1147,7 +1147,7 @@ przy u¿yciu tego menu, ³adowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu u¿ytkownika lub roota i mamy do niego
 prawa zapisu. Je¶li takiego nie ma próbuje siê z plikiem ~/.mc/menu z tymi
 samymi za³o¿eniami, je¶li jego te¿ nie ma - u¿ywa siê standardowego pliku
-systemowego, który znajduje siê w @prefix@/lib/mc/mc.menu.
+systemowego, który znajduje siê w @prefix@/share/mc/mc.menu.
 .PP
 Format pliku z menu u¿ytkownika jest bardzo prosty. Linie zaczynaj±ce siê
 od czegokolwiek innego ni¿ spacja lub tabulacja, s± traktowane jako
@@ -1584,7 +1584,7 @@ System plików FTP (FTP File System) po wiêcej szczegó³ów.
 .SH "    Zapisz ustawienia (Save Setup)"
 Na starcie Midnight Commander bêdzie próbowa³ odczytaæ opcje startowe
 z pliku ~/.mc/ini. Je¶li on nie istnieje, odczyta on konfiguracje z
-ogólnodostêpnego pliku @prefix@/lib/mc/mc.ini. Je¶li on te¿ nie istnieje MC
+ogólnodostêpnego pliku @prefix@/share/mc/mc.ini. Je¶li on te¿ nie istnieje MC
 u¿yje swoich domy¶lnych ustawieñ.
 .PP
 Komenda
@@ -2283,7 +2283,7 @@ Inn± mo¿liwo¶ci± jest ustawienie opcji
 w oknie konfiguracyjnym wirtualnego systemu plików. Skonfiguruje
 to program tak, aby zawsze
 u¿ywa³ serwera proxy. Je¶li ta zmienna jest ustawiona, program bêdzie robi³
-dwie rzeczy: konsultowa³ plik @prefix@/lib/mc.no_proxy w celu znalezienia linii
+dwie rzeczy: konsultowa³ plik @prefix@/share/mc.no_proxy w celu znalezienia linii
 zawieraj±cych nazwy serwerów, które s± lokalne (je¶li nazwa hosta zaczyna
 siê od kropki, uznaje siê, ¿e jest to domena) i sprawdza czy jakie¶ hosty
 bez kropek w nazwie s± widoczne bezpo¶rednio.
@@ -2785,11 +2785,11 @@ zupe³nie bezu¿ytecznych klawiszy).
 Program bêdzie pobiera³ wszystkie swoje informacje ze zmiennej MCHOME,
 je¶li jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
 .PP
-@prefix@/lib/mc.hlp
+@prefix@/share/mc.hlp
 .IP
 Plik pomocy dla programu.
 .PP
-@prefix@/lib/mc/mc.ext
+@prefix@/share/mc/mc.ext
 .IP
 Standardowy plik rozszerzeñ plików.
 .PP
@@ -2798,12 +2798,12 @@ Standardowy plik rozszerzeñ plików.
 W³asny plik u¿ytkownika, konfiguruje podgl±d i edycje plików. Ma wy¿szy
 priorytet ni¿ plik systemowy.
 .PP
-@prefix@/lib/mc/mc.ini
+@prefix@/share/mc/mc.ini
 .IP
 Standardowy plik setupu do Midnight Commandera, u¿ywany tylko wówczas,
 kiedy u¿ytkownik nie ma swojego w³asnego pliku ~/.mc/ini.
 .PP
-@prefix@/lib/mc/mc.lib
+@prefix@/share/mc/mc.lib
 .IP
 Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku s±
 uwzglêdniane przez wszystkie sesje Midnight Commandera, u¿yteczne do
@@ -2814,11 +2814,11 @@ definiowania ogólnosystemowych ustawieñ terminali.
 W³asny setup u¿ytkownika. Je¶li ten plik jest dostêpny, jest ³adowany
 zamiast pliku globalnego.
 .PP
-@prefix@/lib/mc/mc.hint
+@prefix@/share/mc/mc.hint
 .IP
 Plik zawieraj±cy podpowiedzi (hints) wy¶wietlane przez program.
 .PP
-@prefix@/lib/mc/mc.menu
+@prefix@/share/mc/mc.menu
 .IP
 Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
 .PP

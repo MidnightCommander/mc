@@ -63,9 +63,9 @@ para poder cambiar el directorio activo al directorio en uso dentro de Midnight 
 (Gracias a Torben Fjerdingstad y Sergey por su contribución con ésta función
 y el código que implementa esta opción).
 Consultar en los ficheros
-.B @prefix@/lib/mc/bin/mc.sh
+.B @prefix@/share/mc/bin/mc.sh
 (usarios de bash y zsh) y
-.B @prefix@/lib/mc/bin/mc.csh
+.B @prefix@/share/mc/bin/mc.csh
 (usuarios de tcsh) las correspondientes definiciones de esta función.
 .TP
 .I "\-s"
@@ -1363,7 +1363,7 @@ el fichero .mc.menu del directorio actual, pero sólo si es propiedad del
 usuario o del superusuario y no es modificable por todos.
 Si no se encuentra allí el fichero, se intenta de la misma manera con ~/.mc/menu,
 y si no, mc utiliza el menú por defecto para todo el sistema
-@prefix@/lib/mc/mc.menu.
+@prefix@/share/mc/mc.menu.
 .PP
 El formato del menú de fichero es muy simple. Las líneas que empiezan con
 todo excepto espacio o tab son consideradas entradas para el menú (para
@@ -1801,7 +1801,7 @@ serán liberados. El período por defecto es de un minuto.
 Al arrancar Midnight Commander se carga la información
 de inicio del fichero ~/.mc/ini. Si éste no existe,
 se cargará la información del fichero de configuración genérico del sistema,
-@prefix@/lib/mc/mc.ini. Si el fichero de configuración
+@prefix@/share/mc/mc.ini. Si el fichero de configuración
 genérico del sistema no existe, MC utiliza la configuración por defecto.
 .PP
 El comando
@@ -2608,7 +2608,7 @@ La opción
 .I Usar siempre proxy
 obliga al programa a
 utilizar siempre el proxy. Si está fijada, el programa
-hará dos cosas: consultar el fichero @prefix@/lib/mc.no_proxy para leer
+hará dos cosas: consultar el fichero @prefix@/share/mc.no_proxy para leer
 las líneas que contienen nombres de máquinas locales (si el nombre de máquina
 empieza con un punto, se supone que es un dominio) y se asume que cualquier
 cualquier máquina sin puntos en su nombre es directamente accesible.
@@ -3032,7 +3032,7 @@ seleccionado en cada momento.
 Midnight Commander permite hacer ajustes a la base de datos de terminales
 del sistema sin necesidad de privilegios de superusuario. El programa
 busca definciones de teclas en el fichero de inicialización del sistema
-.B @prefix@/lib/mc/mc.lib
+.B @prefix@/share/mc/mc.lib
 o en el del usuario
 .B ~/.mc/ini,
 en la sección "terminal:nuestro-terminal" y si no en "terminal:general".
@@ -3077,14 +3077,14 @@ infrautilizadas).
 .\"NODE "FILES"
 .SH "FICHEROS AUXILIARES"
 El programa localiza toda su información en el directorio designado
-por la variable de entorno MC_LIBDIR, o en su defecto, en el directorio
-@prefix@/lib/mc.
+por la variable de entorno MC_DATADIR, o en su defecto, en el directorio
+@prefix@/share/mc.
 .PP
-@prefix@/lib/mc.hlp
+@prefix@/share/mc.hlp
 .IP
 Fichero de ayuda.
 .PP
-@prefix@/lib/mc/mc.ext
+@prefix@/share/mc/mc.ext
 .IP
 Fichero de extensiones por defecto del sistema.
 .PP
@@ -3093,12 +3093,12 @@ Fichero de extensiones por defecto del sistema.
 Fichero de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los ficheros del sistema.
 .PP
-@prefix@/lib/mc/mc.ini
+@prefix@/share/mc/mc.ini
 .IP
 Fichero de configuración del sistema para Midnight Commander, sólo si
 el usuario no dispone de su propio ~/.mc/ini.
 .PP
-@prefix@/lib/mc/mc.lib
+@prefix@/share/mc/mc.lib
 .IP
 Opciones globales de Midnight Commander. Se aplican siempre a todos los
 usuarios, tengan ~/.mc/ini o no. Actualmente sólo se emplea para los
@@ -3112,12 +3112,12 @@ Configuración personal del usuario. Si este fichero está presente entonces
 se cargará la configuración desde aquí en lugar de desde el fichero de
 configuración del sistema.
 .PP
-@prefix@/lib/mc/mc.hint
+@prefix@/share/mc/mc.hint
 .IP
 Este fichero contiene los mensajes cortos de ayuda mostrados por el
 programa.
 .PP
-@prefix@/lib/mc/mc.menu
+@prefix@/share/mc/mc.menu
 .IP
 Este fichero contiene el menú de aplicaciones por defecto para el sistema.
 .PP

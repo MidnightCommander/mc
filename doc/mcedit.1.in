@@ -426,16 +426,16 @@ spacing clean.
 
 .PP
 .SH FILES
-@prefix@/lib/mc.hlp
+@prefix@/share/mc.hlp
 .IP
 The help file for the program.
 .PP
-@prefix@/lib/mc/mc.ini
+@prefix@/share/mc/mc.ini
 .IP
 The default system-wide setup for the Midnight Commander, used only if
 the user lacks his own ~/.mc/ini file.
 .PP
-@prefix@/lib/mc/mc.lib
+@prefix@/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file are
 global to any Midnight Commander, it is useful to define site-global

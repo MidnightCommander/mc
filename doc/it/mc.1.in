@@ -72,9 +72,9 @@ l'ultima directory corrente della shell come l'ultima directory in cui
 stava il Midnight Commander (grazie a Torben Fjerdingstad e Sergey per
 il contributo di questa funzione e per il codice che la implementa).
 Prelevate i file
-.B @prefix@/lib/mc/bin/mc.sh
+.B @prefix@/share/mc/bin/mc.sh
 (utenti bash e zsh) e rispettivamente
-.B @prefix@/lib/mc/bin/mc.csh
+.B @prefix@/share/mc/bin/mc.csh
 (utenti tcsh) per avere questa funzione definita.
 .TP
 .I "\-s"
@@ -1383,7 +1383,7 @@ utilizzato, se esiste, il file .mc.menu dalla directory corrente,
 ma solo se è di proprietà dell'utente o di root e se non è scrivibile
 a tutti. Se tale file non viene trovato, mc alla stessa maniera 
 prova con ~/.mc/menu altrimenti usa il menu di sistema
-@prefix@/lib/mc/mc.menu.
+@prefix@/share/mc/mc.menu.
 .PP
 Il formato del file menu è molto semplice. Le righe che cominciano
 con qualsiasi cosa che non sia uno spazio o una tabulazione sono
@@ -1900,7 +1900,7 @@ per ulteriori informazioni.
 Alla partenza il Midnight Commander prova a caricare le informazioni di
 inizializzazione dal file ~/.mc/ini. Se questo file non esiste, 
 caricherà le informazioni dal file di configurazione di sistema 
-posizionato in @prefix@/lib/mc/mc.ini. Se il file di configurazione di 
+posizionato in @prefix@/share/mc/mc.ini. Se il file di configurazione di 
 sistema non esiste, MC userà le impostazioni predefinite.
 .PP
 Il comando 
@@ -2564,7 +2564,7 @@ formatterà il blocco evidenziato correntemente (testo, codice
 o
 .B C++
 o altro). Questo comportamento viene controllato dal file 
-.B @prefix@/lib/mc/edit.indent.rc
+.B @prefix@/share/mc/edit.indent.rc
 che viene copiato nel 
 .B .mc/cedit/edit.indent.rc
 nella propria directory home la prima volta che lo si usa.
@@ -2724,7 +2724,7 @@ Virtual File System
 .\"Virtual FS"
 dialog box.  This will configure the program
 to always use the proxy host.  If this variable is set, the program
-will do two things: consult the @prefix@/lib/mc/mc.no_proxy file for
+will do two things: consult the @prefix@/share/mc/mc.no_proxy file for
 lines containing host names that are local (if the host name starts
 with a dot, it is assumed to be a domain) and to assume that any
 hostnames without dots in their names are directly accessible.
@@ -3190,14 +3190,14 @@ and unused keys everywhere).
 .SH "FILES"
 .PP
 The program will retrieve all of its information relative to the
-MC_LIBDIR environment variable, if this variable is not set, then it will
-fall back to the @prefix@/lib/mc directory.
+MC_DATADIR environment variable, if this variable is not set, then it will
+fall back to the @prefix@/share/mc directory.
 .PP
-@prefix@/lib/mc/mc.hlp
+@prefix@/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
-@prefix@/lib/mc/mc.ext
+@prefix@/share/mc/mc.ext
 .IP
 The default system-wide extensions file.
 .PP
@@ -3206,12 +3206,12 @@ The default system-wide extensions file.
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
-@prefix@/lib/mc/mc.ini
+@prefix@/share/mc/mc.ini
 .IP
 The default system-wide setup for the Midnight Commander, used only if
 the user doesn't have his own ~/.mc/ini file.
 .PP
-@prefix@/lib/mc/mc.lib
+@prefix@/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.mc/ini or not.  Currently, only
@@ -3225,11 +3225,11 @@ are loaded from mc.lib.
 User's own setup. If this file is present then the setup is loaded
 from here instead of the system-wide startup file.
 .PP
-@prefix@/lib/mc/mc.hint
+@prefix@/share/mc/mc.hint
 .IP
 This file contains the hints (cookies) displayed by the program.
 .PP
-@prefix@/lib/mc/mc.menu
+@prefix@/share/mc/mc.menu
 .IP
 This file contains the default system-wide applications menu.
 .PP
