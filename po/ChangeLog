@@ -1,3 +1,8 @@
+2002-01-28  Wang Jian  <lark@linux.net.cn>
+
+	* zh_CN.po: Updated Simplified Chinese translation,
+	and converted to UTF-8.
+
 2002-01-24  Alexander Shopov  <al_shopov@web.bg>
 
 	* bg.po: Added Bulgarian translation.
