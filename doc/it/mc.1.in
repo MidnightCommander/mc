@@ -330,9 +330,9 @@ pannellizza comando\&.
 .\"External panelize"
 .TP
 .B C-x h
-esegue il comando
+esegue il comando aggiungi directory alla lista
 .\"LINK2"
-aggiungi directory alla lista directory favorite\&.
+directory favorite\&.
 .\"Hotlist"
 .TP
 .B M-!
