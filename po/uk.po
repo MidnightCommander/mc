@@ -3210,7 +3210,11 @@ msgstr ""
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog файл  Записувати команди ftpfs у файл.\n"
 
-#: src/main.c:2098
+#: src/main.c:2114
+msgid "-D, --debuglevel N Set Smbfs debug level to N (0-10).\n"
+msgstr "-D, --debuglevel N Встановити р╕вень в╕длагодження smbfs у N (0-10).\n"
+
+#: src/main.c:2117
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -3988,7 +3992,12 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:317
+#: src/utilunix.c:330
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Не вда╓ться створити тимчасовый каталог \"%s\": %s\n"
+
+#: src/utilunix.c:352
 msgid " Pipe failed "
 msgstr " Зб╕й каналу "
 
