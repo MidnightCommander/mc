@@ -148,8 +148,8 @@ dnl         grantpt in  libpt.a
 dnl
 LCRYPT=""
 AC_CHECK_FUNCS(crypt, , [
-    AC_CHECK_LIB(crypt, crypt, LCRYPT="-lcrypt",[
-	AC_CHECK_LIB(crypt_i, crypt, LCRYPT="-lcrypt_i")])])
+    AC_CHECK_LIB(crypt, crypt, [LCRYPT="-lcrypt"], [
+	AC_CHECK_LIB(crypt_i, crypt, [LCRYPT="-lcrypt_i"])])])
 AC_SUBST(LCRYPT)
 
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
@@ -239,7 +239,8 @@ AC_CHECK_FUNC(gethostbyname, [have_gethostbyname=yes])
 if test $have_gethostbyname = no; then
   # gethostbyname is not in the default libraries.  See if it's in some other.
   for lib in bsd socket inet; do
-    AC_CHECK_LIB($lib, gethostbyname, [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
+    AC_CHECK_LIB([$lib], [gethostbyname],
+		 [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
   done
 fi
 
@@ -300,7 +301,7 @@ linux*)
 		mouse_lib="GPM and xterm"
 		MCLIBS="-lgpm $MCLIBS"],
 		[AC_MSG_WARN([libgpm is missing or older than 0.18])],
-		$LIBS)
+		[$LIBS])
 	])
     ;;
 esac
@@ -617,7 +618,7 @@ if test $use_vfs = yes; then
 		AC_EXT2_UNDEL
 	fi],[
 	dnl Default: detect
-	AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL],,-lcom_err)
+	AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL], , [-lcom_err])
     ])
 fi
 

@@ -46,7 +46,7 @@ AC_DEFUN([MC_WITH_VFS],[
   if test $have_socket = no; then
     # socket is not in the default libraries.  See if it's in some other.
     for lib in bsd socket inet; do
-      AC_CHECK_LIB($lib, socket, [
+      AC_CHECK_LIB([$lib], [socket], [
 	  LIBS="$LIBS -l$lib"
 	  have_socket=yes
 	  AC_DEFINE(HAVE_SOCKET)
@@ -59,7 +59,8 @@ AC_DEFUN([MC_WITH_VFS],[
   if test $have_gethostbyname = no; then
     # gethostbyname is not in the default libraries.  See if it's in some other.
     for lib in bsd socket inet; do
-      AC_CHECK_LIB($lib, gethostbyname, [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
+      AC_CHECK_LIB([$lib], [gethostbyname],
+		   [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
     done
   fi
 
@@ -439,7 +440,7 @@ can be used together])
       AC_MSG_WARN([could not determine how to read list of mounted fs])
     else
       AC_DEFINE(HAVE_INFOMOUNT_LIST, 1,
-		[Can determine list of mounted filesystems])
+		[Define if the list of mounted filesystems can be determined])
     fi
 
 dnl This configure.in code has been stolen from GNU fileutils-3.12.  Its
@@ -646,9 +647,9 @@ AC_DEFUN([AC_USE_TERMINFO], [
 
 AC_DEFUN([AC_USE_TERMCAP], [
 	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
-	AC_DEFINE(USE_TERMCAP, 1, [[Define to use termcap library]])
+	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap library])
 	dnl Check with $LIBS at the end so that it works with ELF libs.
-	AC_CHECK_LIB(termcap, tgoto, LIBS="$LIBS -ltermcap", , $LIBS)
+	AC_CHECK_LIB(termcap, tgoto, [LIBS="$LIBS -ltermcap"], , [$LIBS])
 	slang_term=" with termcap"
 ])
 	
