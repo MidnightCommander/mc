@@ -212,11 +212,8 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
 #define FTP_COMMAND_PORT   21
 #define HSC_PROXY_PORT   9875
 
-static char *
-my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
-{
-    return vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_DEFAULTANON);
-}
+#define my_get_host_and_username (path, host, user, port, pass) \
+	vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_DEFAULTANON)
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
 static int
@@ -386,26 +383,22 @@ login_server (vfs *me, vfs_s_super *super, char *netrcpass)
     }
 
     if (!anon || logfile)
-	pass = g_strdup (op);
-    else
+	pass = op;
+    else {
 	pass = g_strconcat ("-", op, NULL);
-    if (op)
-        wipe_password (op);
-
+	wipe_password (op);
+    }
     
     /* Proxy server accepts: username@host-we-want-to-connect*/
     if (SUP.proxy){
 #if defined(HSC_PROXY)
-	char *p, *host;
+	char *p;
 	int port;
-	p = my_get_host_and_username (ftpfs_proxy_host, &host, &proxyname,
-				      &port, &proxypass);
+	p = my_get_host_and_username (ftpfs_proxy_host, 0, &proxyname,
+				      &port, 0);
 	if (p)
 	    g_free (p);
-	
-	g_free (host);
-	if (proxypass)
-	    wipe_password (proxypass);
+
 	p = g_strconcat (_(" Proxy: Password required for "), proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);

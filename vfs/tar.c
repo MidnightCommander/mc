@@ -206,11 +206,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
     register long sum, signed_sum, recsum;
     register char *p;
     register union record *header;
-    char **longp;
-    char *bp, *data;
-    int size, written;
     static char *next_long_name = NULL, *next_long_link = NULL;
-    char *current_file_name, *current_link_name;
 
   recurse:
 
@@ -253,8 +249,8 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
      * linkflag on BSDI tar (pax) always '\000'
      */
     if (header->header.linkflag == '\000' &&
-	strlen(header->header.arch_name) &&
-	header->header.arch_name[strlen(header->header.arch_name) - 1] == '/')
+	(i = strlen(header->header.arch_name)) &&
+	header->header.arch_name[i - 1] == '/')
 	header->header.linkflag = LF_DIR;
     
     /*
@@ -268,6 +264,10 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
     header->header.arch_name[NAMSIZ - 1] = '\0';
     if (header->header.linkflag == LF_LONGNAME
 	|| header->header.linkflag == LF_LONGLINK) {
+	char **longp;
+	char *bp, *data;
+	int size, written;
+
 	longp = ((header->header.linkflag == LF_LONGNAME)
 		 ? &next_long_name
 		 : &next_long_link);
@@ -301,18 +301,9 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	struct vfs_s_entry *entry;
 	struct vfs_s_inode *inode, *parent;
 	long data_position;
-	char *p, *q;
+	char *q;
 	int len;
-	int isdir = 0;
-
-	current_file_name = (next_long_name
-			     ? next_long_name
-			     : g_strdup (header->header.arch_name));
-	len = strlen (current_file_name);
-	if (current_file_name[len - 1] == '/') {
-	    current_file_name[len - 1] = 0;
-	    isdir = 1;
-	}
+	char *current_file_name, *current_link_name;
 
 	current_link_name = (next_long_link
 			     ? next_long_link
@@ -321,14 +312,20 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	if (len > 1 && current_link_name [len - 1] == '/')
 	    current_link_name[len - 1] = 0;
 
-	next_long_link = next_long_name = NULL;
+	current_file_name = (next_long_name
+			     ? next_long_name
+			     : g_strdup (header->header.arch_name));
+	len = strlen (current_file_name);
+	if (current_file_name[len - 1] == '/') {
+	    current_file_name[len - 1] = 0;
+	}
 
 	data_position = current_tar_position;
 	
 	p = strrchr (current_file_name, '/');
 	if (p == NULL) {
 	    p = current_file_name;
-	    q = current_file_name + strlen (current_file_name); /* "" */
+	    q = current_file_name + len; /* "" */
 	} else {
 	    *(p++) = 0;
 	    q = current_file_name;
@@ -356,14 +353,19 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	inode = vfs_s_new_inode (me, archive, &st);
 
 	inode->u.tar.data_offset = data_position;
-	if (*current_link_name)
+	if (*current_link_name) {
 	    inode->linkname = current_link_name;
+	} else if (current_link_name != next_long_link) {
+	    g_free (current_link_name);
+	}
 	entry = vfs_s_new_entry (me, p, inode);
 
 	vfs_s_insert_entry (me, parent, entry);
 	g_free (current_file_name);
 
     done:
+	next_long_link = next_long_name = NULL;
+
 	if (header->header.isextended) {
 	    while (get_next_record (archive, tard)->ext_hdr.isextended);
 	    inode->u.tar.data_offset = current_tar_position;

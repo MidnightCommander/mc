@@ -1,3 +1,17 @@
+2000-05-15  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* tar.c (read_header): memory leaking for empty symlink's names fixed
+
+	* utilvfs.c (vfs_split_url): *host is not assigned if host is null
+
+	* ftpfs.c (login_server): new features of vfs_split_url () used,
+	  my_get_host_and_username became macro
+
+	* vfs.c (mc_opendir, mc_chdir): unneeded calls to concat_dir_and_file
+	  removed (vfs_canon removes trailing '/')
+
+	* sfs.c (vfmake, redirect): allocated memory realeased on errors
+
 2000-05-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* direntry.c (vfs_s_new_inode): Do not leave st_nlink uninitialized.

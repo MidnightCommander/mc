@@ -73,25 +73,27 @@ static int vfmake (vfs *me, char *name, char *cache)
 	g_free (s);
     } else 
         name = name_quote (name, 0);
-    s = sfs_command[w];
-#define COPY_CHAR if (t-pad>10200) return -1; else *t++ = *s;
-#define COPY_STRING(a) if ((t-pad)+strlen(a)>10200) return -1; else { strcpy (t, a); t+= strlen(a); }
-    while (*s) {
+#define COPY_CHAR if (t-pad>sizeof(pad)) { g_free (name); return -1; } else *t++ = *s;
+#define COPY_STRING(a) if ((t-pad)+strlen(a)>sizeof(pad)) { g_free (name); return -1; } else { strcpy (t, a); t+= strlen(a); }
+    for (s = sfs_command[w]; *s; s++) {
         if (was_percent) {
-	    switch (*s) {
-	    case '1': COPY_STRING (name); break;
-	    case '2': COPY_STRING (op + strlen (sfs_prefix[w])); break;
-	    case '3': COPY_STRING (cache); break;
-	    case '%': COPY_CHAR; break; 
-	    }
+
+	    char *ptr = NULL;
 	    was_percent = 0;
+
+	    switch (*s) {
+	    case '1': ptr = name; break;
+	    case '2': ptr = op + strlen (sfs_prefix[w]); break;
+	    case '3': ptr = cache; break;
+	    case '%': COPY_CHAR; continue; 
+	    }
+	    COPY_STRING (ptr);
 	} else {
 	    if (*s == '%')
 		was_percent = 1;
 	    else
 		COPY_CHAR;
 	}
-	s++;
     }
     g_free (name);
 
@@ -107,7 +109,7 @@ redirect (vfs *me, char *name)
 {
     struct cachedfile *cur = head;
     uid_t uid = vfs_uid;
-    char *cache, *xname;
+    char *cache;
     int handle;
 
     while (cur){
@@ -124,15 +126,16 @@ redirect (vfs *me, char *name)
 
     cache = tempnam (NULL, "sfs");
     handle = open (cache, O_RDWR | O_CREAT | O_EXCL, 0600);
-    if (handle == -1)
-        return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
+    if (handle == -1) {
+	g_free (cache);
+	return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
+    }
 
     close (handle);
 
-    xname = g_strdup (name);
     if (!vfmake (me, name, cache)){
-        cur = g_new (struct cachedfile, 1);
-	cur->name = xname;
+	cur = g_new (struct cachedfile, 1);
+	cur->name = g_strdup (name);
 	cur->cache = cache;
 	cur->uid = uid;
 	cur->next = head;
@@ -142,9 +145,8 @@ redirect (vfs *me, char *name)
 	vfs_rm_parents (NULL);
 
 	return cache;
-    } else {
-        g_free(xname);
     }
+    g_free (cache);
     return "/I_MUST_NOT_EXIST";
 }
 

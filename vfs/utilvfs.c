@@ -18,7 +18,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
-/* Namespace: exports vfs_get_host_and_username */
+/* Namespace: exports vfs_split_url */
 
 #ifndef test_get_host_and_username
 #include <config.h>
@@ -56,7 +56,7 @@
  * If the user is empty, e.g. ftp://@roxanne/private, then your login name
  * is supplied.
  *
- * returns malloced host, user and pass if pass is not null.
+ * returns malloced host if host isn't null, user and pass if pass is not null.
  * returns a malloced strings with the pathname relative to the host.
  * */
 
@@ -67,7 +67,7 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
     char *pcopy = g_strdup (path);
-    char *pend   = pcopy + strlen (pcopy);
+    char *pend  = pcopy + strlen (pcopy);
     int default_is_anon = flags & URL_DEFAULTANON;
     
     if (pass)
@@ -79,8 +79,8 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
     dir = pcopy;
     if (!(flags & URL_NOSLASH)) {
 	/* locate path component */
-	for (; *dir != PATH_SEP && *dir; dir++)
-	    ;
+	while (*dir != PATH_SEP && *dir)
+	    dir++;
 	if (*dir){
 	    retval = g_strdup (dir);
 	    *dir = 0;
@@ -98,7 +98,7 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	if (inner_colon){
 	    *inner_colon = 0;
 	    inner_colon++;
-	    if (pass && (*inner_colon != '@'))
+	    if (pass)
 		*pass = g_strdup (inner_colon);
 	}
 	if (*pcopy != 0)
@@ -143,8 +143,8 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	    }
 	}
     }
-
-    *host = g_strdup (rest);
+    if (host)
+	*host = g_strdup (rest);
 
     g_free (pcopy);
     return retval;

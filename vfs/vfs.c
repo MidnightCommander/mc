@@ -506,18 +506,12 @@ mc_opendir (char *dirname)
     int  handle, *handlep;
     void *info;
     vfs  *vfs;
-    char *p = NULL;
 
-    /* We should make possible reading of the root directory in a tar file */
-    dirname = p = concat_dir_and_file (dirname, "");
-    
     dirname = vfs_canon (dirname);
     vfs = vfs_type (dirname);
 
     info = vfs->opendir ? (*vfs->opendir)(vfs, dirname) : NULL;
     g_free (dirname);
-    if (p)
-        g_free (p);
     if (!info){
         errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
@@ -886,9 +880,6 @@ mc_chdir (char *path)
     vfsid oldvfsid;
     struct vfs_stamping *parent;
 
-    /* We should make possible reading of the root directory in a tar archive */
-    path = p = concat_dir_and_file (path, "");
-
     a = current_dir; /* Save a copy for case of failure */
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
@@ -907,7 +898,6 @@ mc_chdir (char *path)
         vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
 	vfs_rm_parents (parent);
     }
-    g_free (p);
 
     if (*current_dir){
 	p = strchr (current_dir, 0) - 1;
@@ -1792,7 +1782,7 @@ error:
 
       if (++errorcount < 5) {
 	message_1s (1, _("Could not parse:"), p_copy);
-      } else if (errorcount >= 5)
+      } else if (errorcount == 5)
 	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
     }
 
