@@ -24,7 +24,8 @@ LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
 LIBS = $(XLIBS) @TERMNET@
-EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@ @LIBICONV@
+INTLLIBS = @LINTL@ @LIBICONV@
+EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit $(INTLLIBS)
 DEPLIBS = $(top_builddir)/vfs/@LIBVFS@ \
 	$(top_builddir)/gtkedit/@libgtkedit@ @INTLDEPS@
 INSTALL = @INSTALL@
@@ -246,7 +247,7 @@ corba-gmc: $(OBJS) $(CORBAOBJS) $(DEPLIBS)
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS)
 
 gmc-client: $(CLIENTOBJS)
-	$(CC) -o gmc-client $(CLIENTOBJS) $(CORBA_LDFLAGS) $(LIBS)
+	$(CC) -o gmc-client $(CLIENTOBJS) $(INTLLIBS) $(CORBA_LDFLAGS) $(LIBS)
 
 mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' \

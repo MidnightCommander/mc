@@ -1,3 +1,9 @@
+2001-08-20  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Move i18n part of EXTRALIBS to INTLLIBS.  Use
+	INTLLIBS when linking gmc-client.
+	Reported by Christian Schaller <Uraeus@linuxrising.org>
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* gdesktop-icon.c: Include "global.h".
