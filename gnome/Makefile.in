@@ -25,7 +25,6 @@ INSTALL_DATA = @INSTALL_DATA@
 PIXMAPS =			\
 	dev.xpm			\
 	link.xpm		\
-	directory.xpm		\
 	listing-list.xpm	\
 	listing-iconic.xpm	\
 	listing-custom.xpm	\

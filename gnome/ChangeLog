@@ -1,3 +1,8 @@
+2001-04-30  Pavel Roskin  <proski@gnu.org>
+
+	* directory.xpm: Remove.
+	* Makefile.in: Remove directory.xpm.
+
 2001-04-20  Miguel de Icaza  <miguel@ximian.com>
 
 	* gdesktop.c (new_terminal): Use gnome_open_terminal, and do not
