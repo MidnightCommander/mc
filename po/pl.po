@@ -3643,7 +3643,7 @@ msgstr "Plik: %s"
 #: src/view.c:824
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Przesuniêcie 0x%08x"
+msgstr "Przesuniêcie 0x%08lx"
 
 #: src/view.c:826
 #, c-format

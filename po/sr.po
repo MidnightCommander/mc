@@ -3675,7 +3675,7 @@ msgstr "Датотека: %s"
 #: src/view.c:815
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Померај 0x%08x"
+msgstr "Померај 0x%08lx"
 
 #: src/view.c:817
 #, c-format

@@ -3630,7 +3630,7 @@ msgstr "文件：%s"
 #: src/view.c:824
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "偏移 0x%08x"
+msgstr "偏移 0x%08lx"
 
 #: src/view.c:826
 #, c-format

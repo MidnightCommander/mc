@@ -3662,7 +3662,7 @@ msgstr "Fails: %s"
 #: src/view.c:824
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Nobîde 0x%08x"
+msgstr "Nobîde 0x%08lx"
 
 #: src/view.c:826
 #, c-format

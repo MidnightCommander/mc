@@ -3655,7 +3655,7 @@ msgstr "ファイル: %s"
 #: src/view.c:824
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "オフセット 0x%08x"
+msgstr "オフセット 0x%08lx"
 
 #: src/view.c:826
 #, c-format
