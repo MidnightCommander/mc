@@ -1,4 +1,16 @@
-2000-03-31 Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-04-06  Timur Bakeyev  <mc@bat.ru>
+
+	* ftpfs.c (netrc_next): Turned strange "const char * const keywords"
+	into more alike "const char const * keywords". Still, think, it's
+	too strict.
+	
+	* smbfs.c: Add #define BOOL_DEFINED before inclusion of samba headers.
+	Libncurses(or slang?) defines BOOL and that can cause problems. (In fact,
+	I can't find references to that const, but sure, I hade reason to do that:)
+	
+	* util-alone.h: Declare load_anon_passwd() to avoid warnings.
+	
+2000-03-31  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* vfs.c (mc_def_getlocalcopy): free() replaced by g_free() to prevent
 	  crushes with mad, thanks to Timur I. Bakeyev <timur@bat.ru> 

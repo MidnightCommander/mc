@@ -29,6 +29,7 @@
    confilcts with definitions in other includes */
 #undef HAVE_LIBREADLINE
 #define NO_CONFIG_H
+#define BOOL_DEFINED
 #include "samba/include/includes.h"
 
 #include <string.h>

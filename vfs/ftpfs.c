@@ -1715,7 +1715,7 @@ static int netrc_next (void)
 {
     char *p;
     int i;
-    static const char * const keywords [] = { "default", "machine", 
+    static const char const * keywords [] = { "default", "machine", 
         "login", "password", "passwd", "account", "macdef" };
 
     while (1) {
