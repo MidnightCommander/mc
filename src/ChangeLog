@@ -1,3 +1,13 @@
+1998-05-19  Tamasi Gyorgy <gt_cosy@usa.net>
+
+	* src/*: Until I get a better ChangeLog:  Tamasi's port of the
+	code to QNX.
+
+1998-05-19  Alexander Lukyanov <lav@yars.free.net>
+
+	* Makefile.in: Distirbution fix so that people are not forced to
+	install gettext. 
+
 1998-05-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* ext.c: Memory leak fixed.
