@@ -357,6 +357,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     char buffer[8192];
     vfs_s_entry *ent = NULL;
     FILE *logfile;
+    char *quoted_path;
 
     logfile = MEDATA->logfile;
 
@@ -365,22 +366,22 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     gettimeofday(&dir->u.fish.timestamp, NULL);
     dir->u.fish.timestamp.tv_sec += 10; /* was 360: 10 is good for
 					   stressing direntry layer a bit */
-
+    quoted_path = name_quote (remote_path, 0);
     command(me, super, NONE,
 	    "#LIST /%s\n"
-	    "ls -lLa \"/%s\" 2>/dev/null | grep '^[^cbt]' | (\n"
+	    "ls -lLa /%s 2>/dev/null | grep '^[^cbt]' | (\n"
 	      "while read p x u g s m d y n; do\n"
 	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
-	    "ls -lLa \"/%s\" 2>/dev/null | grep '^[cb]' | (\n"
+	    "ls -lLa /%s 2>/dev/null | grep '^[cb]' | (\n"
 	      "while read p x u g a i m d y n; do\n"
 	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
 	    "echo '### 200'\n",
-	    remote_path, remote_path, remote_path);
-
+	    remote_path, quoted_path, quoted_path);
+    g_free (quoted_path);
 #define SIMPLE_ENTRY vfs_s_generate_entry(me, NULL, dir, 0)
     ent = SIMPLE_ENTRY;
     while (1) {
@@ -481,15 +482,20 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
     struct stat s;
     int was_error = 0;
     int h;
+    char *quoted_name;
 
-    h = open(localname, O_RDONLY);
+    h = open (localname, O_RDONLY);
 
-    if (fstat(h, &s)<0)
+    if (h == -1)
 	ERRNOR (EIO, -1);
-
+    if (fstat(h, &s)<0) {
+	close (h);
+	ERRNOR (EIO, -1);
+    }
     /* Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null ) */
 
     print_vfs_message(_("fish: store %s: sending command..."), name );
+    quoted_name = name_quote (name, 0);
     /*
      * FIXME: Limit size to unsigned long for now.
      * Files longer than 256 * ULONG_MAX are not supported.
@@ -497,18 +503,18 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
     if (!fh->u.fish.append)
 	n = command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
-		 "> \"/%s\"\n"
+		 "> /%s\n"
 		 "echo '### 001'\n"
 		 "(\n"
 		   "dd ibs=256 obs=4096 count=%lu\n"
 		   "dd bs=%lu count=1\n"
 		 ") 2>/dev/null | (\n"
-		   "cat > \"/%s\"\n"
+		   "cat > /%s\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
-		 (unsigned long) s.st_size, name, name,
+		 (unsigned long) s.st_size, name, quoted_name,
 		 (unsigned long) (s.st_size >> 8),
-		 ((unsigned long) s.st_size) & (256 - 1), name);
+		 ((unsigned long) s.st_size) & (256 - 1), quoted_name);
     else
 	n = command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
@@ -517,16 +523,18 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 		   "dd ibs=256 obs=4096 count=%lu\n"
 		   "dd bs=%lu count=1\n"
 		 ") 2>/dev/null | (\n"
-		   "cat >> \"/%s\"\n"
+		   "cat >> /%s\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
 		 (unsigned long) s.st_size, name,
 		 (unsigned long) (s.st_size >> 8),
-		 ((unsigned long) s.st_size) & (256 - 1), name);
+		 ((unsigned long) s.st_size) & (256 - 1), quoted_name);
 
-    if (n != PRELIM) 
+    g_free (quoted_name);
+    if (n != PRELIM) {
+	close (h);
         ERRNOR(E_REMOTE, -1);
-
+    }
     total = 0;
     
     while (1) {
@@ -549,9 +557,9 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 			  was_error ? _("zeros") : _("file"), total,
 			  (unsigned long) s.st_size);
     }
+    close(h);
     if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
-    close(h);
     return 0;
 error_return:
     close(h);
@@ -562,21 +570,25 @@ error_return:
 static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
 {
     char *name;
+    char *quoted_name;
     if (offset)
         ERRNOR (E_NOTSUPP, 0);
 /*    fe->local_stat.st_mtime = 0; FIXME: what is this good for? */
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
+    quoted_name = name_quote (name, 0);
+    g_free (name);
+    name = quoted_name;
     fh->u.fish.append = 0;
     offset = command(me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
-		"ls -l \"/%s\" 2>/dev/null | (\n"
+		"ls -l /%s 2>/dev/null | (\n"
 		  "read var1 var2 var3 var4 var5 var6\n"
 		  "echo \"$var5\"\n"
 		")\n"
 		"echo '### 100'\n"
-		"cat \"/%s\"\n"
+		"cat /%s\n"
 		"echo '### 200'\n", 
 		name, name, name );
     g_free (name);
@@ -681,9 +693,11 @@ send_fish_command(vfs *me, vfs_s_super *super, char *cmd, int flags)
     char *rpath; \
     vfs_s_super *super; \
     if (!(rpath = vfs_s_get_path_mangle(me, path, &super, 0))) \
-	return -1;
+	return -1; \
+    rpath = name_quote (rpath, 0);
 
 #define POSTFIX(flags) \
+    g_free (rpath); \
     return send_fish_command(me, super, buf, flags);
 
 static int
@@ -702,32 +716,38 @@ fish_chmod (vfs *me, char *path, int mode)
 static int fish_##name (vfs *me, char *path1, char *path2) \
 { \
     char buf[BUF_LARGE]; \
-    char *rpath1 = NULL, *rpath2 = NULL; \
+    char *rpath1, *rpath2; \
     vfs_s_super *super1, *super2; \
     if (!(rpath1 = vfs_s_get_path_mangle(me, path1, &super1, 0))) \
 	return -1; \
     if (!(rpath2 = vfs_s_get_path_mangle(me, path2, &super2, 0))) \
 	return -1; \
-    g_snprintf(buf, 1023, string "\n", rpath1, rpath2, rpath1, rpath2 ); \
+    rpath1 = name_quote (rpath1, 0); \
+    rpath2 = name_quote (rpath2, 0); \
+    g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
+    g_free (rpath1); \
+    g_free (rpath2); \
     return send_fish_command(me, super2, buf, OPT_FLUSH); \
 }
 
 #define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
 FISH_OP(rename, XTEST, "#RENAME /%s /%s\n"
-		       "mv \"/%s\" \"/%s\" 2>/dev/null\n"
+		       "mv /%s /%s 2>/dev/null\n"
 		       "echo '### 000'" )
 FISH_OP(link,   XTEST, "#LINK /%s /%s\n"
-		       "ln \"/%s\" \"/%s\" 2>/dev/null\n"
+		       "ln /%s /%s 2>/dev/null\n"
 		       "echo '### 000'" )
 
 static int fish_symlink (vfs *me, char *setto, char *path)
 {
     PREFIX
+    setto = name_quote (setto, 0);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
-	    "ln -s \"%s\" \"/%s\" 2>/dev/null\n"
+	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    setto, rpath, setto, rpath);
+    g_free (setto);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -749,15 +769,15 @@ fish_chown (vfs *me, char *path, int owner, int group)
     sgroup = gr->gr_name;
     g_snprintf(buf, sizeof(buf),
             "#CHOWN /%s /%s\n"
-	    "chown %s \"/%s\" 2>/dev/null\n"
+	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
     send_fish_command(me, super, buf, OPT_FLUSH); 
-                  /* FIXME: what should we report if chgrp succeeds but chown fails? */
+    /* FIXME: what should we report if chgrp succeeds but chown fails? */
     g_snprintf(buf, sizeof(buf),
             "#CHGRP /%s /%s\n"
-	    "chgrp %s \"/%s\" 2>/dev/null\n"
+	    "chgrp %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
@@ -770,7 +790,7 @@ static int fish_unlink (vfs *me, char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#DELE /%s\n"
-	    "rm -f \"/%s\" 2>/dev/null\n"
+	    "rm -f /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
@@ -781,7 +801,7 @@ static int fish_mkdir (vfs *me, char *path, mode_t mode)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#MKD /%s\n"
-	    "mkdir \"/%s\" 2>/dev/null\n"
+	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);
@@ -792,7 +812,7 @@ static int fish_rmdir (vfs *me, char *path)
     PREFIX
     g_snprintf(buf, sizeof(buf),
             "#RMD /%s\n"
-	    "rmdir \"/%s\" 2>/dev/null\n"
+	    "rmdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    rpath, rpath);
     POSTFIX(OPT_FLUSH);

@@ -1,3 +1,8 @@
+2002-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* fish.c: Use name_quote() to quote filenames.
+	(file_store): Close localname on error.
+
 2002-10-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* ftpfs.c (linear_abort): Close data socket, ProFTPD 1.2.6
@@ -515,8 +520,7 @@
 	fish.local_stat ...
 	* fish.c (linear_close): ... here.
 
-	* ftpfs.c (linear_read): Unset control_connection_buzy
-	on EOF.
+	* ftpfs.c (linear_read): Unset control_connection_buzy on EOF.
 	(ftpfs_fh_close): Call vfs_s_invalidate ().
 
 	* fish.c (fish_fh_open): Don't retrieve file if it is
@@ -1698,13 +1702,13 @@
 
 2000-04-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* utilfs.c (vfs_split_url): don't assign *pass if pass is NULL
+	* utilfs.c (vfs_split_url): Don't assign *pass if pass is NULL
 	* fish.c (archive_open, archive_same): memory allocated by
-	  vfs_split_url () must be released after use, don't strdup()
-	  values allocated by vfs_split_url () and NULL passed to
-	  vfs_split_url () when password value is unused
+	  vfs_split_url() must be released after use, don't strdup()
+	  values allocated by vfs_split_url() and NULL passed to
+	  vfs_split_url() when password value is unused
 	* ftpfs.c (archive_open, archive_same): ditto plus same for
-	  ftpfs_get_proxy_host_and_port ()
+	  ftpfs_get_proxy_host_and_port()
 
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
