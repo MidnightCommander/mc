@@ -145,7 +145,7 @@
 	goto fin;
     }
     if (x_key == XCTRL ('a') && edit_key_emulation != EDIT_KEY_EMULATION_EMACS) {
-	command = CK_Macro (edit_raw_key_query (" Execute Macro ", " Press macro hotkey: ", 1));
+	command = CK_Macro (edit_raw_key_query (_(" Execute Macro "), _(" Press macro hotkey: "), 1));
 	if (command == CK_Macro (0))
 	    command = -1;
 	goto fin;
