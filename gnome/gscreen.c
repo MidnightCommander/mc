@@ -40,6 +40,10 @@
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
 
+#ifndef MAX
+#   define MAX(a,b) ((a) > (b) ? a : b)
+#endif
+
 /* Whether to display the tree view on the left */
 int tree_panel_visible = -1;
 
