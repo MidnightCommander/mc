@@ -133,7 +133,7 @@ These are hints for the text mode edition:
 
 * Please read the manual page.
 
-* Read the file src/TODO for the current projects.
+* Read the file TODO for the current projects.
 
 You can access the whole documentation online with the F1 key,
 although it's not as nice as the groff printed manual page :-)

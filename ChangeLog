@@ -1,3 +1,7 @@
+2004-11-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* README: Fix typo.
+
 2004-11-04 Mike Gorchak <mike@malva.ua>
 
 	* mc.qpg.in: Synchronization with the latest file has been added
