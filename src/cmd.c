@@ -1015,21 +1015,8 @@ view_other_cmd (void)
 static void
 do_link (int symbolic_link, char *fname)
 {
-    struct stat s;
     char *dest, *src;
-    int  stat_r;
 
-    if (!symbolic_link){
-	stat_r = mc_stat (fname, &s);
-	if (stat_r != 0){
-	    message (1, MSG_ERROR, _(" Couldn't stat %s \n %s "),
-		     fname, unix_error_string (errno));
-	    return;
-	}
-	if (!S_ISREG (s.st_mode))
-	    return;
-    }
-    
     if (!symbolic_link){
         src = g_strconcat (_(" Link "), name_trunc (fname, 46), 
             _(" to:"), NULL);
@@ -1065,22 +1052,18 @@ do_link (int symbolic_link, char *fname)
             strcat(d, "/");
         symlink_dialog (s, d, &dest, &src);
 #endif /* !OLD_SYMLINK_VERSION */
-	if (!dest || !*dest) {
+	if (!dest || !*dest || !src || !*src) {
 	    if (src)
 	        g_free (src);
 	    if (dest)
 	        g_free (dest);
 	    return;
 	}
-	if (src){
-	    if (*src) {
-	        save_cwds_stat ();
-	        if (-1 == mc_symlink (dest, src))
-		    message (1, MSG_ERROR, _(" symlink: %s "),
-			     unix_error_string (errno));
-	    }
-	    g_free (src);
-	}
+	save_cwds_stat ();
+	if (-1 == mc_symlink (dest, src))
+	    message (1, MSG_ERROR, _(" symlink: %s "),
+		     unix_error_string (errno));
+	g_free (src);
     }
     g_free (dest);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);

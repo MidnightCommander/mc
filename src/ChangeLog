@@ -1,3 +1,8 @@
+2001-07-25  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (do_link): Simplify.  Don't silently exit if the source
+	file is not regular - let user see the error if any.
+
 2001-07-24  Pavel Roskin  <proski@gnu.org>
 
 	* achown.c (ch_perm): Make constant array.
