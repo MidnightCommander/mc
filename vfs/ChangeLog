@@ -1,5 +1,9 @@
 2003-10-10  Pavel Roskin  <proski@gnu.org>
 
+	* fish.c: Convert to calling vfs_register_class().
+	* fish.h: Eliminate.  Adjust all dependencies.
+	* direntry.c (vfs_s_init_class): Add missing vfs_s_setctl().
+
 	* vfs.h: Rename "struct _vfs" to "struct vfs_class".  Allow
 	calling vfs_register() in the file defining the VFS class.
 	* vfs.c (vfs_init): Register cpiofs in cpio.c.

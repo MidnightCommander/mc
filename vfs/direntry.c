@@ -1132,6 +1132,7 @@ vfs_s_init_class (struct vfs_class *vclass)
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
     vclass->getlocalcopy = vfs_s_getlocalcopy;
+    vclass->setctl = vfs_s_setctl;
 }
 
 /* ----------- Utility functions for networked filesystems  -------------- */

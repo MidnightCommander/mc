@@ -1240,7 +1240,7 @@ vfs_init (void)
 #ifdef USE_NETCODE
     tcp_init();
     vfs_register_class (&vfs_ftpfs_ops);
-    vfs_register_class (&vfs_fish_ops);
+    init_fish ();
 #ifdef WITH_SMBFS
     vfs_register_class (&vfs_smbfs_ops);
 #endif /* WITH_SMBFS */

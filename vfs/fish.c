@@ -44,7 +44,18 @@
 #include "xdirentry.h"
 #include "vfs.h"
 #include "tcputil.h"
-#include "fish.h"
+
+#define FISH_DIRECTORY_TIMEOUT 30 * 60
+
+#define DO_RESOLVE_SYMLINK 1
+#define DO_OPEN            2
+#define DO_FREE_RESOURCE   4
+
+#define FISH_FLAG_COMPRESSED 1
+#define FISH_FLAG_RSH	     2
+
+#define OPT_FLUSH        1
+#define OPT_IGNORE_ERROR 2
 
 /*
  * Reply codes.
@@ -65,6 +76,8 @@ static int force_expiration = 0;
 #define WAIT_REPLY  0x01
 #define WANT_STRING 0x02
 static char reply_str [80];
+
+static struct vfs_class vfs_fish_ops;
 
 static int
 command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
@@ -881,59 +894,24 @@ fish_fill_names (vfs *me, void (*func)(char *))
     }
 }
 
-vfs vfs_fish_ops = {
-    NULL,	/* This is place of next pointer */
-    "fish",
-    F_EXEC,	/* flags */
-    "sh:",	/* prefix */
-    &fish_data,	/* data */
-    0,		/* errno */
-    NULL,
-    NULL,
-    fish_fill_names,
-    NULL,
-
-    vfs_s_open,
-    vfs_s_close,
-    vfs_s_read,
-    vfs_s_write,
-    
-    vfs_s_opendir,
-    vfs_s_readdir,
-    vfs_s_closedir,
-    vfs_s_telldir,
-    vfs_s_seekdir,
-
-    vfs_s_stat,
-    vfs_s_lstat,
-    vfs_s_fstat,
-
-    fish_chmod,
-    fish_chown,
-    NULL,		/* utime */
-
-    vfs_s_readlink,
-    fish_symlink,		/* symlink */
-    fish_link,			/* link */
-    fish_unlink,
-
-    fish_rename,		/* rename */
-    vfs_s_chdir,
-    vfs_s_ferrno,
-    vfs_s_lseek,
-    NULL,		/* mknod */
-    
-    vfs_s_getid,
-    vfs_s_nothingisopen,
-    vfs_s_free,
-    
-    NULL, /* vfs_s_getlocalcopy, */
-    NULL, /* vfs_s_ungetlocalcopy, */
-
-    fish_mkdir,
-    fish_rmdir,
-    fish_ctl,
-    vfs_s_setctl
-
-MMAPNULL
-};
+void
+init_fish (void)
+{
+    vfs_s_init_class (&vfs_fish_ops);
+    vfs_fish_ops.name = "fish";
+    vfs_fish_ops.flags = F_EXEC;
+    vfs_fish_ops.prefix = "sh:";
+    vfs_fish_ops.data = &fish_data;
+    vfs_fish_ops.fill_names = fish_fill_names;
+    vfs_fish_ops.chmod = fish_chmod;
+    vfs_fish_ops.chown = fish_chown;
+    vfs_fish_ops.symlink = fish_symlink;
+    vfs_fish_ops.link = fish_link;
+    vfs_fish_ops.unlink = fish_unlink;
+    vfs_fish_ops.rename = fish_rename;
+    vfs_fish_ops.getlocalcopy = NULL;
+    vfs_fish_ops.mkdir = fish_mkdir;
+    vfs_fish_ops.rmdir = fish_rmdir;
+    vfs_fish_ops.ctl = fish_ctl;
+    vfs_register_class (&vfs_fish_ops);
+}

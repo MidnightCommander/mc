@@ -107,19 +107,17 @@
 
     /* Register a file system class */
     int vfs_register_class (struct vfs_class *vfs);
+    void init_cpiofs (void);
+    void init_fish (void);
+
     extern vfs vfs_local_ops;
     extern vfs vfs_nil_ops;
     extern vfs vfs_tarfs_ops;
-    void init_cpiofs (void);
-
     extern vfs vfs_ftpfs_ops;
     extern vfs vfs_smbfs_ops;
-    extern vfs vfs_fish_ops;
     extern vfs vfs_mcfs_ops;
-    
     extern vfs vfs_extfs_ops;
     extern vfs vfs_sfs_ops;
-
     extern vfs vfs_undelfs_ops;
 
     struct vfs_stamping {
