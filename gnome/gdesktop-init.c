@@ -107,7 +107,7 @@ desktop_init_at (const char *dir)
 			char *command;
 
 			desktop_quoted = name_quote (desktop_directory, 0);
-			command = g_strconcat (fname, " --desktop-dir", desktop_quoted, NULL);
+			command = g_strconcat (fname, " --desktop-dir=", desktop_quoted, NULL);
 			g_free (desktop_quoted);
 
 			my_system (EXECUTE_WAIT | EXECUTE_AS_SHELL, shell, command);
