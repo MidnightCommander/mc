@@ -1,3 +1,8 @@
+2000-10-23  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/Makefile.am: Workaround for buggy db2html
+	that cannot deal with "./gmc.sgml".
+
 2000-10-09  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: GNOME_M4_FILES renamed to ACLOCAL_M4_SOURCES so

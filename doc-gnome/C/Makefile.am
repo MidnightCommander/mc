@@ -27,7 +27,8 @@ CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf
 DISTCLEANFILES = gmc.sgm
 
 $(srcdir)/index.html: @MAINT@ $(SGML_FILES)
-@MAINT@	db2html $(srcdir)/gmc.sgml && \
+@MAINT@	fullsrcdir=`cd $(srcdir) >/dev/null 2>&1 && pwd` && \
+@MAINT@	db2html $$fullsrcdir/gmc.sgml && \
 @MAINT@	  rm -f $(srcdir)/*.html $(srcdir)/*.css && \
 @MAINT@	  mv gmc/*.html gmc/*.css $(srcdir)
 @MAINT@	rm -rf gmc
