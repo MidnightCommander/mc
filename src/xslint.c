@@ -4,8 +4,6 @@
 
    Author Miguel de Icaza
 
-   FIXME: This expects the user to always use slang instead of ncurses.
-   
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
@@ -36,9 +34,6 @@ disable_interrupt_key(void) {}
 /* FIXME: We could provide a better way of doing this */
 int
 got_interrupt () { return 0; }
-
-void
-slang_init (void) {}
 
 void
 attrset (int color) { }
