@@ -1,3 +1,7 @@
+2000-02-03 Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* setup.c (load_setup): call ftpfs_init_passwd to avoid segfault
+
 2000-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>             
 
 	* main.c (parse_control_file): add extra secutity checks for

@@ -98,7 +98,7 @@ int startup_right_mode;
 /* default panel values */
 int saving_setup;
 
-static struct {
+static const struct {
     char *key;
     sortfn *sort_type;
 } sort_names [] = {
@@ -113,7 +113,7 @@ static struct {
     { 0, 0 }
 };
 
-static struct {
+static const struct {
     char *key;
     int  list_type;
 } list_types [] = {
@@ -125,7 +125,7 @@ static struct {
     { 0, 0 }
 };
 
-static struct {
+static const struct {
     char *opt_name;
     int  opt_type;
 } panel_types [] = {
@@ -136,7 +136,7 @@ static struct {
     { 0, 0 }
 };
 
-static struct {
+static const struct {
     char *opt_name;
     int *opt_addr;
 } layout [] = {
@@ -163,7 +163,7 @@ static struct {
 extern int preserve_uidgid;
 #endif
 
-static struct {
+static const struct {
     char *opt_name;
     int  *opt_addr;
 } options [] = {
@@ -631,6 +631,11 @@ load_setup (void)
     /* Remove the temporal entries */
     profile_clean_section ("Temporal:New Left Panel", profile_name);
     profile_clean_section ("Temporal:New Right Panel", profile_name);
+#ifdef USE_VFS
+#ifdef USE_NETCODE
+    ftpfs_init_passwd ();
+#endif
+#endif
 }
 
 #ifdef USE_VFS
