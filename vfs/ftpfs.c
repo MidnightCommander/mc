@@ -162,6 +162,7 @@ static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 static int ftpfs_open_socket (vfs *me, vfs_s_super *super);
 static int login_server (vfs *me, vfs_s_super *super, const char *netrcpass);
+static int lookup_netrc (char *host, char **login, char **pass);
 
 static char *
 translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
@@ -814,6 +815,10 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755)); 
     if (password)
 	SUP.password = password;
+    /* try to get user and/or password from ~/.netrc */
+    else if (use_netrc)
+	lookup_netrc(SUP.host, &SUP.user, &SUP.password);
+
     return open_archive_int (me, super);
 }
 
@@ -821,12 +826,17 @@ static int
 archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *cookie)
 {	
     char *host, *user;
+    char *pass = NULL;
     int port;
 
     op = vfs_split_url (strchr(op, ':')+1, &host, &user, &port, 0, 21, URL_DEFAULTANON);
 
     if (op)
 	g_free (op);
+
+    /* replace the dummy user with the one from ~/.netrc */
+    if (use_netrc && !strcmp(user, "*netrc*"))
+	lookup_netrc(SUP.host, &user, &pass);
 
     port = ((strcmp (host, SUP.host) == 0) &&
 	    (strcmp (user, SUP.user) == 0) &&
@@ -1861,7 +1871,6 @@ void ftpfs_set_debug (const char *file)
 	ftp_data.logfile = logfile;
 }
 
-#ifdef USE_NETRC
 static char buffer[BUF_MEDIUM];
 static char *netrc, *netrcp;
 
@@ -1923,7 +1932,7 @@ static int netrc_has_incorrect_mode (char * netrcname, char * netrc)
     return 0;
 }
 
-int lookup_netrc (char *host, char **login, char **pass)
+static int lookup_netrc (char *host, char **login, char **pass)
 {
     char *netrcname, *tmp;
     char hostname[MAXHOSTNAMELEN], *domain;
@@ -1936,13 +1945,16 @@ int lookup_netrc (char *host, char **login, char **pass)
     } *rup_cache = NULL, *rupp;
 
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
-        if (!strcmp (host, rupp->host)) {
-            if (rupp->login != NULL)
-                *login = g_strdup (rupp->login);
-            if (rupp->pass != NULL)
-                *pass = g_strdup (rupp->pass);
-            return 0;
-        }
+	/* return from cache only if host AND user match! */
+        if ((!strcmp (host, rupp->host)) &&
+	    (rupp->login != NULL) &&
+	    (*login != NULL) &&
+	    (!strcmp(rupp->login, *login))) {
+        	*login = g_strdup (rupp->login);
+        	if (rupp->pass != NULL)
+            	    *pass = g_strdup (rupp->pass);
+        	return 0;
+	}
     netrcname = concat_dir_and_file (home_dir, ".netrc");
     netrcp = netrc = load_file (netrcname);
     if (netrc == NULL) {
@@ -1970,7 +1982,8 @@ int lookup_netrc (char *host, char **login, char **pass)
 	    switch (keyword) {
 		case 3:
 		    if (netrc_next ()) {
-			if (*login == NULL)
+			/* replace the dummy user with the one from ~/.netrc */
+			if ((*login == NULL) || !strcmp(*login, "*netrc*"))
 			    *login = g_strdup (buffer);
 			else if (strcmp (*login, buffer))
 			    keyword = 20;
@@ -2015,8 +2028,12 @@ int lookup_netrc (char *host, char **login, char **pass)
     rupp->host = g_strdup (host);
     rupp->login = rupp->pass = 0;
     
-    if (*login != NULL)
+    if (*login != NULL) {
+    	if (!strcmp(*login, "*netrc*"))
+	    /* no match in ~/.netrc, try anonymous */
+	    *login = g_strdup("anonymous");
         rupp->login = g_strdup (*login);
+    }
     if (*pass != NULL)
         rupp->pass = g_strdup (*pass);
     rupp->next = rup_cache;
@@ -2024,5 +2041,3 @@ int lookup_netrc (char *host, char **login, char **pass)
     
     return 0;
 }
-
-#endif /* USE_NETRC */

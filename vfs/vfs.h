@@ -167,6 +167,7 @@
 #ifdef USE_NETCODE
     void ftpfs_hint_reread(int reread);
     void ftpfs_flushdir(void);
+    extern int use_netrc;
 #else
 #   define ftpfs_flushdir()
 #   define ftpfs_hint_reread(x) 

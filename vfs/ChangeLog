@@ -1,5 +1,12 @@
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* tcputil.h: Move use_netrc declaration ...
+	* vfs.h: ... here.
+	* ftpfs.c: Implement .netrc support unconditionally.
+	(lookup_netrc): Make static.
+	* utilvfs.c: Initialize default_is_netrc.
+	From Thomas Zajic <zlatko@gmx.at>
+
 	* direntry.c (vfs_s_open): Don't pass O_LINEAR to open() -
 	this flag is for VFS only, and causes side effects in Cygwin.
 	* extfs.c (extfs_open): Likewise.

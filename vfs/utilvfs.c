@@ -69,6 +69,8 @@ char *vfs_split_url (const char *path, char **host, char **user,
     char *pcopy = g_strdup (path);
     char *pend  = pcopy + strlen (pcopy);
     int default_is_anon = flags & URL_DEFAULTANON;
+    /* get user from ~/.netrc if we're supposed to */
+    int default_is_netrc = use_netrc;
     
     if (pass)
 	*pass = NULL;
@@ -103,8 +105,11 @@ char *vfs_split_url (const char *path, char **host, char **user,
 	}
 	if (*pcopy != 0)
 	    *user = g_strdup (pcopy);
-	else
+	else {
 	    default_is_anon = 0;
+	    /* don't lookup ~/.netrc, use login name instead */
+	    default_is_netrc = 0;
+	}
 	
 	if (pend == at+1)
 	    rest = at;
@@ -112,6 +117,10 @@ char *vfs_split_url (const char *path, char **host, char **user,
 	    rest = at + 1;
     } else
 	rest = pcopy;
+
+    /* dummy user to be replaced in lookup_netrc() in ftpfs.c */
+    if (!*user && (default_is_netrc == 1))
+	    *user = g_strdup ("*netrc*");
 
     if (!*user){
 	if (default_is_anon)

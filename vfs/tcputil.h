@@ -25,5 +25,4 @@ char *get_host_and_username (char *path, char **host, char **user, int *port,
 			     int default_port, int default_to_anon, char **pass);
 
 extern int tcp_inited;
-extern int use_netrc;
 extern int got_sigpipe;
