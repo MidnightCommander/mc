@@ -12,6 +12,7 @@
 #include <string.h>
 #include <stdlib.h>		/* atoi */
 #include "fs.h"
+#include "mad.h"
 #include "x.h"
 #include "dir.h"
 #include "panel.h"
@@ -1206,7 +1207,7 @@ panel_create_file_list (WPanel *panel)
 	file_list = gtk_blist_new_with_titles (items, titles);
 	clist = GTK_CLIST (file_list);
 	panel_configure_file_list (panel, file_list);
-	free (titles);
+	g_free (titles);
 
 	gtk_signal_connect_after (GTK_OBJECT (file_list), "size_allocate",
 				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),

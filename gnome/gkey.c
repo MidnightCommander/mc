@@ -7,6 +7,7 @@
  */
 
 #include <config.h>
+#include "mad.h"
 #include "x.h"
 #include "key.h"
 

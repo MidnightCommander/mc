@@ -1,4 +1,12 @@
+1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* gdesktop.c: Include "mad.h", for xmalloc.
+	* gkey.c: Likewise.
+	* gscreen.c: Likewise.
+	(panel_create_file_list): Use `g_free', not `free'.
+
 Wed Aug 19 19:45:16 EDT 1998 The Rasterman <raster@redhat.com>
+
 	* gdesktop.c - changed dnd setting routine for desktop icon to set
           events on child window...
         * gtrans.c - chnaged routines to make window with child rawing area

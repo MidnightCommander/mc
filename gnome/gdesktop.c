@@ -11,6 +11,7 @@
 #include "gdesktop.h"
 #include "../vfs/vfs.h"
 #include <string.h>
+#include "mad.h"
 #include "main.h"
 #include "file.h"
 #include "global.h"
