@@ -201,7 +201,7 @@ option_menu_policy_callback (GtkWidget *menu, gpointer data)
 {
         minor_copy_status = (gint) data;
         copy_status = (gint) data;
-        gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (op_radio), TRUE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (op_radio), TRUE);
 }
 
 static void
@@ -430,7 +430,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
                             def_text);
         gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (fentry), def_text);
         cbox = gtk_check_button_new_with_label (_("Copy as a background process"));
-        gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), *do_background);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), *do_background);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, do_background);
 #if 0
         gnome_widget_add_help (cbox, "Selecting this will run the copying in the background.  "
@@ -454,7 +454,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
 
         cbox = gtk_check_button_new_with_label (_("Preserve symlinks"));
-        gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_stable_symlinks);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), file_mask_stable_symlinks);
         gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_stable_symlinks);
 #if 0
         gnome_widget_add_help (cbox, "FIXME: Add something here Miguel");
@@ -464,14 +464,14 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
 
         if (operation == OP_COPY) {
                 cbox = gtk_check_button_new_with_label (_("Follow links."));
-                gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), file_mask_op_follow_links);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), file_mask_op_follow_links);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &file_mask_op_follow_links);
                 gnome_widget_add_help (cbox, _("Selecting this will copy the files that symlinks point "
                                                "to instead of just copying the link."));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
                 cbox = gtk_check_button_new_with_label (_("Preserve file attributes."));
-                gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), op_preserve);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), op_preserve);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &op_preserve);
                 gnome_widget_add_help (cbox, _("Preserves the permissions and the UID/GID if possible"));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
@@ -479,7 +479,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
                 vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
                 gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
                 cbox = gtk_check_button_new_with_label (_("Recursively copy subdirectories."));
-                gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox), dive_into_subdirs);
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), dive_into_subdirs);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, &dive_into_subdirs);
                 gnome_widget_add_help (cbox, _("If set, this will copy the directories recursively"));
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);

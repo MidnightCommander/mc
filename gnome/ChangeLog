@@ -1,3 +1,10 @@
+1999-01-13  bertrand <Bertrand.Guiheneuf@inria.fr>
+	
+        * gdialogs.c
+	* gwidget.c: 
+	* gprop.c: 
+	s/gtk_toggle_button_state/gtk_toggle_button_active
+
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_drag_data_received): Drops on the desktop by

@@ -209,7 +209,7 @@ perm_check_new (char *text, int state, GpropPerm *gp)
 		check = gtk_check_button_new ();
 
 	gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (check), FALSE);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (check), state ? TRUE : FALSE);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), state ? TRUE : FALSE);
 
 	gtk_signal_connect (GTK_OBJECT (check), "toggled",
 			    (GtkSignalFunc) perm_set_mode_label,

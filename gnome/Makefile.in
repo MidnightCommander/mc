@@ -5,7 +5,7 @@ rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
 GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
-CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@ -I.
+CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@ -I. -I$(rootdir)/src
 CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) $(GNOMEDEFS)
 LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@

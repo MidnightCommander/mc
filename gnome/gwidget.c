@@ -177,7 +177,7 @@ x_radio_toggle (WRadio *radio)
 	for (i = 0; i < radio->count; i++){
 		GtkBoxChild *bc = (GtkBoxChild *) children->data;
 
-		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (bc->widget), (i == radio->sel) ? 1 : 0);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (bc->widget), (i == radio->sel) ? 1 : 0);
 		children = children->next;
 	}
 }
@@ -224,7 +224,7 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 			w = gtk_radio_button_new_with_label_from_widget (r->first_gtk_radio, text);
 
 		g_free (text);
-		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (i == r->sel));
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), (i == r->sel));
 		gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (radio_toggle), r);
 		gtk_object_set_data (GTK_OBJECT (w), "index", (void *) (i+1));
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), w);
@@ -250,7 +250,7 @@ x_create_check (Dlg_head *h, widget_data parent, WCheck *c)
 	GtkWidget *w;
 
 	w = gtk_check_button_new_with_label (c->text);
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (c->state & C_BOOL));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), (c->state & C_BOOL));
 	gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (x_check_changed), c);
 	gtk_widget_show (w);
 	c->widget.wdata = (widget_data) w;
