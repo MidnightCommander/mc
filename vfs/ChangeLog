@@ -1,3 +1,7 @@
+Wed Jun 17 Pavel Machek <pavel@ucw.cz>
+	* Modified code to use tempnam() instead of tmpnam(), fixed
+	tempnam() to use NULL instead of 0. 
+
 Wed Jun  3 Pavel Machek <pavel@ucw.cz>
 
 	* libvfs.c: adding libvfs.c which should contain things specific

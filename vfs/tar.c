@@ -347,7 +347,7 @@ static INLINE int uncompress_tar_file  (struct tarfs_archive *current_archive,
     char buffer [8192];	/* Changed to 8K: better transfer size */
     
     current_archive->is_gzipped = tar_uncompressed_local;
-    current_archive->tmpname = strdup (tmpnam (NULL));
+    current_archive->tmpname = strdup (tempnam (NULL, "tarfs"));
     
     /* Some security is sometimes neccessary :) */        
     command = copy_strings ("touch ", current_archive->tmpname,

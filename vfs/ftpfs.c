@@ -1754,7 +1754,7 @@ int retrieve_file(struct ftpentry *fe)
     if (fe->local_filename)
         return 1;
     fe->local_stat.st_mtime = 0;
-    fe->local_filename = tempnam (0, "ftpfs");
+    fe->local_filename = tempnam (NULL, "ftpfs");
     fe->local_is_temp = 1;
     if (fe->local_filename == NULL) {
 	ftpfserrno = ENOMEM;
@@ -1917,7 +1917,7 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 			ent->local_filename = 0;
 		    }
 		    if (flags & O_TRUNC) {
-			ent->local_filename = tempnam (0, "ftpfs");
+			ent->local_filename = tempnam (NULL, "ftpfs");
 			if (ent->local_filename == NULL) {
 			    ftpfserrno = ENOMEM;
 			    return NULL;
@@ -1970,7 +1970,7 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 	ent->bucket = bucket;
 	ent->name = strdup(p);
 	ent->remote_filename = strdup(file_name);
-	ent->local_filename = tempnam(0, "ftpfs");
+	ent->local_filename = tempnam (NULL, "ftpfs");
 	if (!ent->name && !ent->remote_filename && !ent->local_filename) {
 	    ftpentry_destructor(ent);
 	    ftpfserrno = ENOMEM;

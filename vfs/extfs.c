@@ -590,7 +590,7 @@ static void *extfs_open (char *file, int flags, int mode)
     if (entry->inode->local_filename == NULL) {
         char *cmd, *archive_name, *p;
         
-        entry->inode->local_filename = strdup (tmpnam (NULL));
+        entry->inode->local_filename = strdup (tempnam (NULL, "extfs"));
 	p = extfs_get_path_from_entry (entry);
 	q = name_quote (p, 0);
 	free (p);
