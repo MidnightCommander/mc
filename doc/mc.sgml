@@ -2076,13 +2076,14 @@ virtual file system switch. The virtual file system switch
 allows the Midnight Commander to manipulate files not
 located on the Unix file system.
 
-Currently the Midnight Commander is packaged with five Virtual File
+Currently the Midnight Commander is packaged with some Virtual File
 Systems (VFS): the <em/local/ file system, used for accessing the
 regular Unix file system; the <em/ftpfs/, used to manipulate files on
 remote systems with the FTP protocol; the <em/tarfs/, used to
 manipulate tar and compressed tar files; the <em/undelfs/, used to
-recover deleted files on et2 file systems (the default file system for
-Linux systems) and finally the <em/mcfs/ (Midnight Commander file
+recover deleted files on ext2 file systems (the default file system
+for Linux systems), fish (for manipulating files over shell connection
+such as rsh/ssh) and finally the <em/mcfs/ (Midnight Commander file
 system), a network based file system.
 
 The VFS switch code will interpret all of the path names
@@ -2099,7 +2100,7 @@ command FTP link (accessible from the menubar) or you may
 directly change your current directory to it using the cd
 command to a path name that looks like this:
 
-<em>ftp://&lsqb;!&rsqb&lsqb;user@&rsqb;machine&lsqb;:port&rsqb&lsqb;remote-dir&rsqb;</em>
+<em>/#ftp:&lsqb;!&rsqb&lsqb;user@&rsqb;machine&lsqb;:port&rsqb&lsqb;remote-dir&rsqb;</em>
 
 The, <em/user, port/ and <em/remote-dir/ elements are optional. If
 you specify the <em/user/ element, then the Midnight Commander
@@ -2113,11 +2114,11 @@ safe anyways).
 Examples:
 
 <tscreen><verb>
-    ftp://ftp.nuclecu.unam.mx/linux/local
-    ftp://tsx-11.mit.edu/pub/linux/packages
-    ftp://!behind.firewall.edu/pub
-    ftp://guest@remote-host.com:40/pub
-    ftp://miguel:xxx@server/pub
+    /#ftp:ftp.nuclecu.unam.mx/linux/local
+    /#ftp:tsx-11.mit.edu/pub/linux/packages
+    /#ftp:!behind.firewall.edu/pub
+    /#ftp:guest@remote-host.com:40/pub
+    /#ftp:miguel:xxx@server/pub
 </verb></tscreen>
 
 To connect to sites behind a firewall, you will need to use the prefix
@@ -2156,7 +2157,7 @@ command. To change your directory to a tar file, you
 change your current directory to the tar file by using the
 following syntax:
 
-<em/tar:filename.tar&lsqb;dir-inside-tar&rsqb;/
+<em/filename.tar#utar&lsqb;dir-inside-tar&rsqb;/
 
 The mc.ext file already provides a shortcut for tar files,
 this means that usually you just point to a tar file and
@@ -2166,11 +2167,42 @@ File Edit" id="Extension File Edit"> section for details on how this is done.
 Examples:
 
 <tscreen><verb>
-    tar:mc-3.0.tar.gz/mc-3.0/vfs
-    tar:/ftp/GCC/gcc-2.7.0.tar
+    mc-3.0.tar.gz#utar/mc-3.0/vfs
+    /ftp/GCC/gcc-2.7.0.tar#utar
 </verb></tscreen>
 
 The latter specifies the full path of the tar archive.
+
+<sect1>FIle transfer over SHell filesystem<label id="FISH">
+
+<p>
+The fish file system is a network based file system that allows you to
+manipulate the files in a remote machine as if they were local. To use
+this, the other side has to either run fish server, or has to have
+bash-compatible shell.
+
+To connect to a remote machine, you just need to chdir
+into a special directory which name is in the following
+format:
+
+<em>/#sh:&lsqb;user@&rsqb;machine&lsqb;:options&rsqb;/&lsqb;remote-dir&rsqb;</em>
+
+The, <em/user/, <em/options/ and <em/remote-dir/ elements are optional. If
+you specify the <em/user/ element then the Midnight Commander
+will try to logon on the remote machine as that user,
+otherwise it will use your login name.
+
+The <em/options/ are 'C' - use compression and 'rsh' use rsh instead
+of ssh. If the <em/remote-dir/ element is present, your current
+directory on the remote machine will be set to this one.
+
+Examples:
+
+<tscreen><verb>
+    /#sh:onlyrsh.mx:r/linux/local
+    /#sh:joe@want.compression.edu:C/private
+    /#sh:joe@noncompressed.ssh.edu/private
+</verb></tscreen>
 
 <sect1>Network File System<label id="Network File System">
 
@@ -2184,7 +2216,7 @@ To connect to a remote machine, you just need to chdir
 into a special directory which name is in the following
 format:
 
-<em/mc:&lsqb;user@&rsqb;machine&lsqb;:port&rsqb;&lsqb;remote-dir&rsqb;/
+<em>/#mc:&lsqb;user@&rsqb;machine&lsqb;:port&rsqb;/&lsqb;remote-dir&rsqb;</em>
 
 The, <em/user/, <em/port/ and <em/remote-dir/ elements are optional. If
 you specify the <em/user/ element then the Midnight Commander
@@ -2200,8 +2232,8 @@ machine will be set to this one.
 Examples:
 
 <tscreen><verb>
-    mc:ftp.nuclecu.unam.mx/linux/local
-    mc:joe@foo.edu:11321/private
+    /#mc:ftp.nuclecu.unam.mx/linux/local
+    /#mc:joe@foo.edu:11321/private
 </verb></tscreen>
 
 <sect1>Undelete File System<label id="Undelete File System">
@@ -2214,14 +2246,14 @@ retrieve all of the deleted files names on an ext2fs and provides and
 to extract the selected files into a regular partition.
 
 To use this file system, you have to chdir into the special file name
-formed by the "undel:" prefix and the file name where the actual
-file system resides.
+formed by the "/#undel:" prefix and the file name where the actual
+file system resides (without /dev/ prefix).
 
 For example, to recover deleted files on the second partition of the
 first scsi disk on Linux, you would use the following path name:
 
 <tscreen><verb>
-    undel:/dev/sda2
+    /#undel:sda2
 </verb></tscreen>
 
 It may take a while for the undelfs to load the required information
