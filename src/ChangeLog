@@ -1,3 +1,124 @@
+1998-maj-18  Tamasi Gyorgy (gt_cosy@usa.net)
+
+	* lib/mc.menu: 'Z' on 'tar.Z' and 'tar.z' files: '%f' -> '$1'.
+
+	* lib/mc.ext.in.qnx.diff, lib/mc.menu.qnx.diff (QNX): modified
+	'mc.ext.in' (tar -t: output to stderr); modified 'mc.menu' (tar is
+	not GNU tar: doesn't know '-z'); support for '*.tar.F':
+	'freeze'-compressed tar files [No automatic configure/install
+	implemented: patches must be applied before running 'configure'
+	(mc.ext.in.qnx.diff: this patch can be not only QNX-specific...)] 
+
+	* lib/Makefile.in: 'mc.ext.in.qnx.diff' and 'mc.menu.qnx.diff' added
+	to DISTLIB.
+
+	* slang/sldisply.c:
+
+	  SLTT_TRANSP_ACS_PATCH dependant code:
+
+	  The problem: some terminals (QNX/qansi*, SCO OS5/ansi [?]) map the
+	  whole upper half of the ASCII table to the lower half, when
+	  alt-char-set is activated with the smacs/as string-sequence. This
+	  means, that if 0 <= ch < 128 written to the terminal, it will be
+	  translated to (ch+128) automatically by the terminal: so not only
+	  the line-drawing characters can be written, when the alt-char-set
+	  is activated. It implicitly means, that space, NL, CR, etc.
+	  characters (exactly: anything besides the "standard" line drawing
+	  characters) can not be written directly to the terminal, when the
+	  alt-char-set is activated, because writing these characters
+	  doesn't cause an implicit/temporary switching-back to the standard
+	  char-set!
+
+	  The original code in SLang assumes that space, NL, CR, etc. can be
+	  printed when alt-char-set is activated. If SLTT_TRANSP_ACS_PATCH
+	  is defined, the modified code will not use this assumption.
+	  [Remark: the patch-code is not the most exact solution, but
+	  works...]
+
+	  QNX_QANSI_SLANG_COMPAT_ACS_PATCH dependant code:
+
+	  A more OS/terminal-specific solution for the problem mentioned
+	  above (->SLTT_TRANSP_ACS_PATCH).
+
+	  If QNX_QANSI_SLANG_COMPAT_ACS is defined, the default smacs/sa,
+	  rmacs/ae, acsc/ac [and sgr/sa, if it would be used!] command
+	  sequences will be replaced internally with the "old style"
+	  (pre-QNX 4.23) sequences in case of QNX/qansi terminals. Using
+	  these optional command sequences the terminal remains compatible
+	  with the original SLang code (without using the workaround-code
+	  enabled by defining SLTT_TRANSP_ACS_PATCH).
+
+	  Remark:
+
+	  Currently SLTT_TRANSP_ACS_PATCH is not auto-configured by
+	  'configure'. (Must be manually defined...)
+
+	  There is some (QNX-specific) auto-configuration hand-coded in the
+	  source:
+
+	    #ifdef SLTT_TRANSP_ACS_PATCH
+	    # if defined(__QNX__) && defined(QNX_QANSI_SLANG_COMPAT_ACS)
+	    #  undef SLTT_TRANSP_ACS_PATCH
+	    # endif
+	    #else
+	    # if defined(__QNX__) && !defined(QNX_QANSI_SLANG_COMPAT_ACS)
+	    #  define QNX_QANSI_SLANG_COMPAT_ACS 1
+	    # endif
+	    #endif
+
+	* slang/slutty.c: "newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);"
+	ECHO(0x08) is a c_lflag bit, it means PARMRK(0x08) in c_iflag. (!?!)
+
+	* src/file.c: 'do_reget' can be extern if (USE_VFS && USE_NETCODE),
+	not if (USE_VFS).
+
+	* src/find.c (search_content()): Variable 'i' "must be" 'int', not
+	'char'. ["i == -1": (buggy?) WCC 10.6 doesn't convert automatically
+	(int)(-1) to (char)(-1) (GCC does), so "comparison result always 0"
+	warning produced. It is cleaner to define 'i' as 'int', than cast
+	'-1' to 'char', because 'read()' returns 'int'.]
+
+	* src/key.c (init_key()): Call load_xtra_key_defines() and clear
+	'use_8th_bit_as_meta' by default under QNX, if a 'qnx*' terminal
+	detected. (A saved config file (mc.ini) can override it later...)
+
+	* src/key.h: Declare load_xtra_key_defines().
+
+	* src/keyxdef.c: Provides a method to define some platform-specific
+	additional key mappings. (e.g. QNX terminals can handle most of
+	META-? combinations as ALT-?...) ('keyxdef.c' currently not listed
+	in doc/FILES...)
+
+	* src/layout.c: TIOCGWINSZ must be available (so <sys/ioctl.h> (?)
+	included), because window-resizing code doesn't work, if not defined.
+
+	* src/main.c: 'print_usage()' is reserved name in the QNX run-time
+	library, so 'print_usage()' renamed to 'print_mc_usage()'
+
+	* src/mouse.c (QNX): ncurses 1.9.8a ported to QNX doesn't provide the
+	'SP' pointer as a global symbol in the library, so the keyok()
+	emulation currently can not be used under QNX (4.24 & Watcom C 10.6
+	release version).
+
+	* src/slint.c (QNX): 'qansi*' terminals added to the color_terminals[]
+	list.
+
+	* src/subshell.c, src/utilunix.c (QNX): include <unix.h> to get
+	prototype for exec*()!!! [See README.QNX/Section 1.4 about the
+	dangerous "No prototype for <function>" warnings emitted by Watcom C,
+	if <function> is a 'printf()'-style function having variable number
+	of arguments and you compile your source with the default register
+	calling convention!!!]
+
+	* Makefile.in: 'keyxdef' module added to SRCS and OBJS.
+
+	* <mc-root>/README.QNX: QNX-specific notes.
+
+	* <mc-root>/configure (line 3369), <mc-root>/configure.in (line 88):
+	'test x$CCOPTS = x;' modified to 'test "x$CCOPTS" = x;'
+
+	* <mc-root>/Makefile.in: README.QNX added to DISTMAIN.
+
 Thu May 21 00:09:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	
 	* menu.c (menubar_event): Don't set menubar->selected to the

@@ -1,3 +1,20 @@
+1998-05-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_create_input): Disable the use of the GNOME entries
+	for now, as they are very slow.  We need to figure out what is
+	wrong with this.  
+
+	With this change, dialog boxes close quickly instead of taking
+	ages to close. 
+
+	* gscreen.c, gdesktop.c (file_popup_add_context, file_popup):
+	Share the context menu code in gdesktop.c and gscreen.c.  The
+	desktop pop up menus now include all of the stuff that would have
+	appeared in the Panel. 
+
+	* gdesktop.c (desktop_icon_remove): Remove the file associated
+	with this desktop entry if it is on the ~/desktop directory.
+
 1998-05-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (load_dnd_icons): Remove the code and the icons that

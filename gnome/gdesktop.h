@@ -50,6 +50,14 @@ void artificial_drag_start (GdkWindow *source_window, int x, int y);
 void start_desktop (void);
 void stop_desktop (void);
 
+/* These get invoked by the context sensitive popup menu in gscreen.c */
+void desktop_icon_properties (GtkWidget *widget, desktop_icon_t *di);
+void desktop_icon_execute    (GtkWidget *widget, desktop_icon_t *di); 
+void desktop_icon_delete     (GtkWidget *widget, desktop_icon_t *di);
+
+/* Pops up the context sensitive menu for a WPanel or a desktop_icon_t */
+void file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename);
+
 extern int icons_snap_to_grid;
 
 #endif

@@ -637,7 +637,7 @@ desktop_icon_remove (desktop_icon_t *di)
 		/* a .destop file or a directory */
 		/* Remove the .desktop */
 		mc_unlink (di->dentry->location);
-		
+
 		if (strcmp (di->dentry->type, "Directory") == 0){
 			struct stat s;
 
@@ -648,6 +648,9 @@ desktop_icon_remove (desktop_icon_t *di)
 					if (!remove_directory (di->dentry->exec[0]))
 						return;
 			}
+		} else {
+			if (strncmp (di->dentry->exec [0], desktop_directory, strlen (desktop_directory)) == 0)
+				mc_unlink (di->dentry->exec [0]);
 		}
 	}
 	desktop_release_desktop_icon_t (di);
@@ -732,19 +735,17 @@ connect_drop_signals (GtkWidget *widget, desktop_icon_t *di)
 	gtk_signal_connect (o, "drop_data_available_event", GTK_SIGNAL_FUNC (drop_cb), di);
 }
 
-static void
-dentry_execute (desktop_icon_t *di)
+void
+desktop_icon_execute (GtkWidget *ignored, desktop_icon_t *di)
 {
-	GnomeDesktopEntry *dentry = di->dentry;
-
 	/* Ultra lame-o execute.  This should be replaced by the fixed regexp_command
 	 * invocation 
 	 */
 
-	if (strcmp (di->dentry->type, "Directory") == 0){
+	if (strcmp (di->dentry->type, "Directory") == 0)
 		new_panel_at (di->dentry->exec[0]);
-	} else 
-		gnome_desktop_entry_launch (dentry);
+	else 
+		gnome_desktop_entry_launch (di->dentry);
 }
 
 static void
@@ -902,8 +903,8 @@ desktop_icon_make_draggable (desktop_icon_t *di)
 }
 
 /* Called by the pop up menu: removes the icon from the desktop */
-static void
-icon_delete (GtkWidget *widget, desktop_icon_t *di)
+void
+desktop_icon_delete (GtkWidget *widget, desktop_icon_t *di)
 {
 	desktop_icon_remove (di);
 }
@@ -935,8 +936,11 @@ my_create_transparent_text_window (char *file, char *text)
 		if (!w)
 			return NULL;
 	}
+#if 0
+	/* Useless, really, we need to use the WM hints */
 	gtk_signal_connect(GTK_OBJECT(w), "expose_event",
 			   lower_window, NULL);
+#endif
 	return w;
 }
 
@@ -990,7 +994,7 @@ dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *d
 {
 	if (event->button == 1){
 		if (event->type == GDK_2BUTTON_PRESS)
-			dentry_execute (di);
+			desktop_icon_execute (widget, di);
 
 		return TRUE;
 	}
@@ -1029,8 +1033,8 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 }
 
 /* Pops up the icon properties pages */
-static void
-icon_properties (GtkWidget *widget, desktop_icon_t *di)
+void
+desktop_icon_properties (GtkWidget *widget, desktop_icon_t *di)
 {
 	int retval;
 
@@ -1072,6 +1076,8 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
          * the menu at the proper time.
 	 */
 
+	file_popup (event, NULL, di, 0, di->dentry->exec [0]);
+#if 0
 	item = gtk_menu_item_new_with_label (_("Properties"));
 	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_properties), di);
 	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
@@ -1087,6 +1093,7 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 	gtk_widget_show (item);
 
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 3, event->time);
+#endif
 }
 
 char *root_drop_types [] = {

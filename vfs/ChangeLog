@@ -1,3 +1,8 @@
+1998-maj-18  Tamasi Gyorgy (gt_cosy@usa.net)
+
+	* Makefile.in ('install' target): 'mcserv' not installed, if
+	net-code is not enabled by 'configure'.
+
 Thu May 14 02:05:52 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in (LIBS): add @LINTL@

@@ -269,13 +269,18 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	 */
 	if (in->widget.wdata)
 		return 1;
-	
+
+#ifdef USE_GNOME_ENTRY
 	gnome_entry = gnome_entry_new (in->widget.tkname);
+#else
+	entry = GTK_ENTRY (gnome_entry = gtk_entry_new ());
+#endif
 	gtk_widget_show (gnome_entry);
 	in->widget.wdata = (widget_data) gnome_entry;
 
+#ifdef USE_GNOME_ENTRY
 	entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gnome_entry)));
-	
+#endif
 	gtk_entry_set_text (entry, in->buffer);
 	gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
 	gtk_entry_set_position (entry, in->point);
@@ -300,8 +305,12 @@ x_update_input (WInput *in)
 	if (!in->widget.wdata)
 		return;
 
+#ifdef USE_GNOME_ENTRY
 	gnome_entry = GNOME_ENTRY (in->widget.wdata);
 	entry = GTK_ENTRY (gnome_entry_gtk_entry (gnome_entry));
+#else
+	entry = GTK_ENTRY (in->widget.wdata);
+#endif
 
 	if (in->first == -1){
 		gtk_editable_select_region (GTK_EDITABLE (entry), 0, 0);
@@ -321,7 +330,11 @@ x_update_input (WInput *in)
 	}
 	
 	if (draw){
+#ifdef USE_GNOME_ENTRY
 		gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
+#else
+		gtk_widget_draw (GTK_WIDGET (entry), NULL);
+#endif
 		gtk_entry_adjust_scroll (GTK_ENTRY (entry));
 		gtk_widget_queue_draw (GTK_WIDGET (entry));
 	}

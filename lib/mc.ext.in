@@ -484,7 +484,7 @@ type/executable
 	Open=./%f
 	View=%view
 	Drop=%f %q
-	Execute in XTerm=xterm -e ./%f &
+	Execute in XTerm=xterm -e %f &
 	View Required Libraries=%view{ascii} ldd %f
 	Strip binary=strip %f
 	Icon=application.xpm

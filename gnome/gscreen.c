@@ -69,7 +69,7 @@ GtkWidget *drag_directory_ok = NULL;
 GtkWidget *drag_multiple     = NULL;
 GtkWidget *drag_multiple_ok  = NULL;
 
-typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
+typedef void (*context_menu_callback)(GtkWidget *, void *);
 
 /*
  * Flags for the context-sensitive popup menus
@@ -79,6 +79,8 @@ typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
 #define F_SYMLINK     4
 #define F_SINGLE      8
 #define F_NOTDIR     16
+#define F_DICON      32		/* Only applies to desktop_icon_t */
+#define F_PANEL      64         /* Only applies to WPanel */
 
 static void panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height);
 
@@ -509,37 +511,50 @@ static struct {
 	int  flags;
 	context_menu_callback callback;
 } file_actions [] = {
-	{ N_("Properties"),      F_SINGLE,   	    panel_action_properties },
-	{ "",                    F_SINGLE,   	    NULL },
-	{ N_("Open"),            F_ALL,      	    panel_action_open },
-	{ N_("Open with"),       F_ALL,      	    panel_action_open_with },
-	{ N_("View"),            F_NOTDIR,   	    panel_action_view },
-	{ N_("View unfiltered"), F_NOTDIR,     	    panel_action_view_unfiltered },  
-	{ "",                    0,          	    NULL },
-	{ N_("Link..."),         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
-	{ N_("Symlink..."),      F_SINGLE,             (context_menu_callback) symlink_cmd },
-	{ N_("Edit symlink..."), F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
+	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (context_menu_callback) panel_action_properties },
+	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (context_menu_callback) desktop_icon_properties },
+	{ "",                    F_SINGLE,   	    	  	 NULL },
+	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open },
+	{ N_("Open"),            F_DICON | F_ALL, 	  	 (context_menu_callback) desktop_icon_execute },
+	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (context_menu_callback) panel_action_open_with },
+	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view },
+	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (context_menu_callback) panel_action_view_unfiltered },  
+	{ "",                    0,          	                 NULL },
+	{ N_("Link..."),         F_PANEL | F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
+	{ N_("Symlink..."),      F_PANEL | F_SINGLE,             (context_menu_callback) symlink_cmd },
+	{ N_("Edit symlink..."), F_PANEL | F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
 	{ NULL, 0, NULL },
 };
 
-/*
- * context menu, constant entries */
-static struct {
+typedef struct {
 	char *text;
 	context_menu_callback callback;
-} common_actions [] = {
+} common_menu_t;
+	
+/*
+ * context menu, constant entries
+ */
+common_menu_t common_panel_actions [] = {
 	{ N_("Copy..."),         (context_menu_callback) copy_cmd },
 	{ N_("Rename/move.."),   (context_menu_callback) ren_cmd },
 	{ N_("Delete..."),       (context_menu_callback) delete_cmd },
 	{ NULL, NULL }
 };
 
+common_menu_t common_dicon_actions [] = {
+	{ N_("Delete"),          (context_menu_callback) desktop_icon_delete },
+	{ NULL, NULL }
+};
+      
 static GtkWidget *
-create_popup_submenu (WPanel *panel, int row, char *filename)
+create_popup_submenu (WPanel *panel, desktop_icon_t *di, int row, char *filename)
 {
 	static int submenu_translated;
 	GtkWidget *menu;
 	int i;
+	void *closure;
+
+	closure = (panel != 0 ? (void *) panel : (void *)di);
 	
 	if (!submenu_translated){
 		/* FIXME translate it */
@@ -550,17 +565,24 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 	for (i = 0; file_actions [i].text; i++){
 		GtkWidget *item;
 
+		/* First, try F_PANEL and F_DICON flags */
+		if (di && (file_actions [i].flags & F_PANEL))
+			continue;
+
+		if (panel && (file_actions [i].flags & F_DICON))
+			continue;
+		
 		/* Items with F_ALL bypass any other condition */
 		if (!(file_actions [i].flags & F_ALL)){
 
 			/* Items with F_SINGLE require that ONLY ONE marked files exist */
-			if (file_actions [i].flags & F_SINGLE){
+			if (panel && file_actions [i].flags & F_SINGLE){
 				if (panel->marked > 1)
 					continue;
 			}
 
 			/* Items with F_NOTDIR requiere that the selection is not a directory */
-			if (file_actions [i].flags & F_NOTDIR){
+			if (panel && file_actions [i].flags & F_NOTDIR){
 				struct stat *s = &panel->dir.list [row].buf;
 
 				if (panel->dir.list [row].f.link_to_dir)
@@ -571,7 +593,7 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 			}
 			
 			/* Items with F_REGULAR do not accept any strange file types */
-			if (file_actions [i].flags & F_REGULAR){
+			if (panel && file_actions [i].flags & F_REGULAR){
 				struct stat *s = &panel->dir.list [row].buf;
 				
 				if (S_ISLNK (panel->dir.list [row].f.link_to_dir))
@@ -582,7 +604,7 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 			}
 
 			/* Items with F_SYMLINK only operate on symbolic links */
-			if (file_actions [i].flags & F_SYMLINK){
+			if (panel && file_actions [i].flags & F_SYMLINK){
 				if (!S_ISLNK (panel->dir.list [row].buf.st_mode))
 					continue;
 			}
@@ -595,7 +617,7 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 		gtk_widget_show (item);
 		if (file_actions [i].callback){
 			gtk_signal_connect (GTK_OBJECT (item), "activate",
-					    GTK_SIGNAL_FUNC(file_actions [i].callback), panel);
+					    GTK_SIGNAL_FUNC(file_actions [i].callback), closure);
 		}
 
 		gtk_menu_append (GTK_MENU (menu), item);
@@ -624,19 +646,45 @@ popup_activate_by_string (GtkMenuItem *item, WPanel *panel)
 }
 
 static void
-file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
+popup_activate_desktop_icon (GtkMenuItem *item, char *filename)
+{
+	char *action;
+	int movedir;
+	
+	action = GTK_LABEL (GTK_BIN (item)->child)->label;
+
+	regex_command (filename, action, NULL, &movedir);
+}
+
+static void
+file_popup_add_context (GtkMenu *menu, WPanel *panel, desktop_icon_t *di, char *filename)
 {
 	GtkWidget *item;
 	char *p, *q;
 	int c, i;
-
-	for (i = 0; common_actions [i].text; i++){
+	void *closure, *regex_closure;
+	common_menu_t *menu_p;
+	GtkSignalFunc regex_func;
+	
+	if (panel){
+		menu_p        = common_panel_actions;
+		closure       = panel;
+		regex_func    = GTK_SIGNAL_FUNC (popup_activate_by_string);
+		regex_closure = panel;
+	} else {
+		menu_p        = common_dicon_actions;
+		closure       = di;
+		regex_func    = GTK_SIGNAL_FUNC (popup_activate_desktop_icon);
+		regex_closure = di->dentry->exec [0];
+	}
+	
+	for (i = 0; menu_p [i].text; i++){
 		GtkWidget *item;
 
-		item = gtk_menu_item_new_with_label (_(common_actions [i].text));
+		item = gtk_menu_item_new_with_label (_(menu_p [i].text));
 		gtk_widget_show (item);
 		gtk_signal_connect (GTK_OBJECT (item), "activate",
-				    GTK_SIGNAL_FUNC (common_actions [i].callback), panel);
+				    GTK_SIGNAL_FUNC (menu_p [i].callback), closure);
 		gtk_menu_append (GTK_MENU (menu), item);
 	}
 	
@@ -661,8 +709,8 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 		
 		item = gtk_menu_item_new_with_label (p);
 		gtk_widget_show (item);
-		gtk_signal_connect (GTK_OBJECT(item), "activate",
-				    GTK_SIGNAL_FUNC(popup_activate_by_string), panel);
+
+		gtk_signal_connect (GTK_OBJECT(item), "activate", regex_func, regex_closure);
 		gtk_menu_append (menu, item);
 		if (!c)
 			break;
@@ -670,23 +718,41 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 	}
 }
 
-static void
-file_popup (GdkEvent *event, WPanel *panel, int row, char *filename)
+/*
+ * Create a context menu
+ * It can take either a WPanel or a GnomeDesktopEntry.  One of them should
+ * be set to NULL.
+ */
+void
+file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename)
 {
 	GtkWidget *menu = gtk_menu_new ();
 	GtkWidget *submenu;
 	GtkWidget *item;
-	
-	item = gtk_menu_item_new_with_label ( (panel->marked > 1)?"...":filename );
-	gtk_widget_show (item);
-	gtk_menu_append (GTK_MENU (menu), item);
+	WPanel      *panel = WPanel_pointer;
+	desktop_icon_t *di = desktop_icon_t_pointer;
+	char *str;
+		
+	g_return_if_fail (((panel != NULL) ^ (di != NULL)));
 
-	submenu = create_popup_submenu (panel, row, filename);
-	gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
+	if (panel)
+		str = (panel->marked > 1) ? "..." : filename;
+	else
+		str = filename;
 	
-	file_popup_add_context (GTK_MENU (menu), panel, filename);
+	if (panel){
+		item = gtk_menu_item_new_with_label (str);
+		gtk_widget_show (item);
+		gtk_menu_append (GTK_MENU (menu), item);
 
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->button.time);
+		submenu = create_popup_submenu (panel, di, row, filename);
+		gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
+	} else 
+		menu = create_popup_submenu (panel, di, row, filename);
+
+	file_popup_add_context (GTK_MENU (menu), panel, di, filename);
+
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->time);
 }
 
 static void
@@ -728,7 +794,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			break;
 
 		case 3:
-			file_popup (event, panel, row, panel->dir.list[row].fname);
+			file_popup (&event->button, panel, NULL, row, panel->dir.list[row].fname);
 			break;
 		}
 
@@ -1172,7 +1238,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3){
-			file_popup (event, panel, index, panel->dir.list [index].fname);
+			file_popup (&event->button, panel, NULL, index, panel->dir.list [index].fname);
 			return;
 		}
 		break;
@@ -1891,3 +1957,6 @@ x_panel_destroy (WPanel *panel)
 {
 	gtk_widget_destroy (GTK_WIDGET (panel->xwindow));
 }
+
+
+
