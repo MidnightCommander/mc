@@ -117,21 +117,22 @@ void dlg_erase (Dlg_head *h)
     }
 }
 
-void init_widget (Widget *w, int y, int x, int lines, int cols,
-		  int (*callback)(Dlg_head *, void *, int, int),
-		  destroy_fn destroy, mouse_h mouse_handler, char *tkname)
+void
+init_widget (Widget *w, int y, int x, int lines, int cols,
+	     callback_fn callback, destroy_fn destroy,
+	     mouse_h mouse_handler, char *tkname)
 {
     w->x = x;
     w->y = y;
     w->cols = cols;
     w->lines = lines;
     w->callback = callback;
-    w->destroy  = destroy;
+    w->destroy = destroy;
     w->mouse = mouse_handler;
     w->parent = 0;
     w->tkname = tkname;
 
-    if (tkname && *tkname == 0){
+    if (tkname && *tkname == 0) {
 	fprintf (stderr, "Got a null string for the tkname\n");
 	abort ();
     }
@@ -209,16 +210,16 @@ int default_dlg_callback (Dlg_head *h, int id, int msg)
     return MSG_NOT_HANDLED;
 }
 
-Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
-		      const int *color_set,
-		      int (*callback) (struct Dlg_head *, int, int),
-		      char *help_ctx, const char *title, int flags)
+Dlg_head *
+create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
+	    dlg_cb_fn callback, char *help_ctx, const char *title,
+	    int flags)
 {
     Dlg_head *new_d;
 
-    if (flags & DLG_CENTER){
-	y1 = (LINES-lines)/2;
-	x1 = (COLS-cols)/2;
+    if (flags & DLG_CENTER) {
+	y1 = (LINES - lines) / 2;
+	x1 = (COLS - cols) / 2;
     }
 
     if ((flags & DLG_TRYUP) && (y1 > 3))

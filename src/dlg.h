@@ -63,6 +63,10 @@ enum {
 } /* Dialog_Messages */;
 
 
+/* Dialog callback */
+struct Dlg_head;
+typedef int (*dlg_cb_fn)(struct Dlg_head *h, int Par, int Msg);
+
 typedef struct Dlg_head {
 
     /* Set by the user */
@@ -87,32 +91,36 @@ typedef struct Dlg_head {
     /* Internal variables */
     int count;			/* number of widgets */
     struct Widget_Item *current, *first, *last;
-    int (*callback) (struct Dlg_head *, int, int);
+    dlg_cb_fn callback;
     struct Widget_Item *initfocus;
     void *previous_dialog;	/* Pointer to the previously running Dlg_head */
 
 } Dlg_head;
 
 
+/* Call when the widget is destroyed */
+typedef void (*destroy_fn)(void *widget);
+
+/* Widget callback */
+typedef int (*callback_fn)(Dlg_head *h, void *widget, int Msg, int Par);
+
 /* Every Widget must have this as it's first element */
 typedef struct Widget {
     int x, y;
     int cols, lines;
     int options;
-    int (*callback)(Dlg_head *, void *, int, int);  /* The callback function */
-    void (*destroy)(void *);
+    callback_fn callback;  /* The callback function */
+    destroy_fn destroy;
     mouse_h mouse;
     struct Dlg_head *parent;
     char *tkname;		/* name used for history saving */
 } Widget;
 
 /* The options for the widgets */
-#define  W_WANT_POST_KEY     1
 #define  W_WANT_HOTKEY       2
 #define  W_WANT_CURSOR       4
 #define  W_WANT_IDLE         8
 #define  W_IS_INPUT         16
-#define  W_PANEL_HIDDEN     32
 
 /* Items in the circular buffer.  Each item refers to a widget.  */
 typedef struct Widget_Item {
@@ -130,8 +138,7 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 
 /* Creates a dialog head  */
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
-		      const int *color_set,
-		      int (*callback) (struct Dlg_head *, int, int),
+		      const int *color_set, dlg_cb_fn callback,
 		      char *help_ctx, const char *title, int flags);
 
 
@@ -162,9 +169,6 @@ void destroy_dlg          (Dlg_head *h);
 void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 
 void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
-
-typedef void  (*destroy_fn)(void *);
-typedef int   (*callback_fn)(Dlg_head *, void *, int, int);
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, destroy_fn destroy,

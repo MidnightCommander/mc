@@ -1,5 +1,10 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Define dlg_cb_fn - dialog callback function.  Improve
+	typedefs for callbacks and use them everywhere.  Clean up some
+	unused defines.
+	* dlg.c: Adjust declarations for match.
+
 	* wtools.h: Eliminate the_widget filed in QuickWidget.
 	* wtools.c (quick_callback): Allocate widget table dynamically.
 
