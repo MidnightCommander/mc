@@ -1,5 +1,7 @@
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* gconf.h: Remove some unused defines.
+
 	* gmc-client.c (main): Use translations from the "mc" domain.
 
 	* gfind.c (setup_gui): Register destroy handler.
