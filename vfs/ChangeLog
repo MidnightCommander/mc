@@ -452,7 +452,7 @@
 	* samba/architecture.doc: Likewise.
 	* samba/include/dlinklist.h: Remove, it's unused.  Adjust
 	dependencies.
-	* samba/libsmb/namequery.c (): Remove, it's unused.
+	* samba/libsmb/namequery.c (name_status): Remove, it's unused.
 	* Makefile.am: Remove unused Samba files.
 
 	* samba/include/smb.h: Remove unneeded includes.
