@@ -2,6 +2,9 @@ application/pdf:
 	open=xpdf %f
     icon-filename=@icondir@/gnome-application-pdf.png
 
+application/pgp:
+	icon-filename=@icondir@/gnome-application-pgp.png
+
 application/postscript:
 	open=gv %f
 	icon-filename=@icondir@/gnome-application-postscript.png
@@ -32,6 +35,9 @@ application/x-troff-ms:
 
 application/x-troff-me:
 	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
+
+application/x-generic-spreadsheet:
+	icon-filename=@icondir@/gnome-application-x-generic-spreadsheet.png
 
 application/x-gzip:
 	icon-filename=@icondir@/gnome-compressed.png
@@ -158,6 +164,12 @@ application/x-dvi:
 	view=xdvi %f
 	open.convert.Convert file to Postscript=dvips %f -o `basename %f .dvi`.ps
 
+application/x-gnome-app-info:
+	icon-filename=@icondir@/gnome-application-x-gnome-app-info.png
+
+application/x-kde-app-info:
+	icon-filename=@icondir@/gnome-application-x-kde-app-info.png
+
 application/x-tex:
 	open.tex."TeX this file"=tex %f
 	flags.tex.flags=needsterminal
@@ -186,9 +198,6 @@ audio/x-mp3:
 audio/x-pn-realaudio:
 	icon-filename=@icondir@/gnome-audio-x-pn-realaudio.png
 
-audio/x-s3m:
- 	icon-filename=@icondir@/gnome-audio-x-s3m.png
- 
 audio/x-stm:
  	icon-filename=@icondir@/gnome-audio-x-stm.png
 
@@ -211,13 +220,26 @@ audio/x-mod:
 	view=xmms %f
 
 audio/x-s3m:
+ 	icon-filename=@icondir@/gnome-audio-x-s3m.png
 	open=xmms %f
 	view=xmms %f
+
+audio/x-xi:
+	icon-filename=@icondir/gnome-audio-x-xi.png
 
 audio/x-xm:
+	icon-filename=@icondir@/gnome-audio-x-xm.png
 	open=xmms %f
 	view=xmms %f
 
+font/afm:
+	icon-filename=@icondir@/gnome-font-afm.png
+
+font/ttf:
+	icon-filename=@icondir@/gnome-font-ttf.png
+
+font/x-pcf:
+	icon-filename=@icondir@/gnome-font-x-pcf.png
 
 image/*:
 	icon-filename=@icondir@/gnome-image-generic.png
@@ -303,9 +325,26 @@ text/*:
 	edit=gnome-edit %f
 	fm-view=%view{ascii}
 
+text/x-authors:
+	icon-filename=@icondir@/gnome-text-x-authors.png
+
+text/x-copying:
+	icon-filename=@icondir@/gnome-text-x-copying.png
+	
+text/x-credits:
+	icon-filename=@icondir@/gnome-text-x-credits.png
+	
+text/x-install:
+	icon-filename=@icondir@/gnome-text-x-install.png
+	
+text/x-makefile:
+	icon-filename=@icondir@/gnome-text-x-makefile.png
+	
+text/x-readme:
+	icon-filename=@icondir@/gnome-text-x-readme.png
+
 text/x-vCard:
 	icon-filename=@gnomeicons@/gnome-calendar.png
-
 
 text/x-c:
 	icon-filename=@icondir@/gnome-application-x-c-source.png
