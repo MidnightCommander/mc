@@ -366,8 +366,6 @@ x_unselect_item (WPanel *panel)
 void
 x_filter_changed (WPanel *panel)
 {
-	assign_text (panel->filter_w, panel->filter ? panel->filter : "");
-	update_input (panel->filter_w, 1);
 }
 
 void
@@ -1837,54 +1835,6 @@ display_mini_info (WPanel *panel)
 	}
 }
 
-static GtkWidget *
-panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
-{
-	GtkWidget *fhbox;
-	GtkWidget *button;
-	GtkWidget *arrow;
-	GtkWidget *label;
-	GtkWidget *ihbox;
-	WInput *in;
-
-	fhbox = gtk_hbox_new (FALSE, 0);
-
-	/* Filter popup button */
-
-	button = gtk_button_new ();
-	gtk_signal_connect (GTK_OBJECT (button), "clicked",
-			    (GtkSignalFunc) show_filter_popup,
-			    panel);
-	GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_FOCUS);
-	gtk_box_pack_start (GTK_BOX (fhbox), button, FALSE, FALSE, 0);
-	gtk_widget_show (button);
-
-	ihbox = gtk_hbox_new (FALSE, 3);
-	gtk_container_add (GTK_CONTAINER (button), ihbox);
-	gtk_widget_show (ihbox);
-
-	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
-	gtk_box_pack_start (GTK_BOX (ihbox), arrow, TRUE, TRUE, 0);
-	gtk_widget_show (arrow);
-
-	label = gtk_label_new (_("Filter"));
-	gtk_box_pack_start (GTK_BOX (ihbox), label, TRUE, TRUE, 0);
-	gtk_widget_show (label);
-
-	/* Filter input line */
-
-	in = input_new (0, 0, 0, 10, "", "filter");
-	add_widget (h, in);
-
-	/* Force the creation of the gtk widget */
-	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
-	*filter_w = in;
-
-	gtk_box_pack_start (GTK_BOX (fhbox), GTK_WIDGET (in->widget.wdata), TRUE, TRUE, 0);
-
-	return fhbox;
-}
-
 /* Signal handler for DTree's "directory_changed" signal */
 static void
 panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
@@ -2465,11 +2415,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree_scrolled_window);
 	gtk_signal_connect (GTK_OBJECT (panel->tree_scrolled_window), "size_allocate",
 			    GTK_SIGNAL_FUNC (tree_size_allocate), panel);
-
-	/*
-	 * Filter
-	 */
-	filter = panel_create_filter (h, panel, &panel->filter_w);
 
 	/*
 	 * Current Working directory

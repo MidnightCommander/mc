@@ -1,3 +1,9 @@
+1999-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (gnome_close_panel): Remove filter_w
+
+	* gscreen.c (x_filter_changed): Update nothing.
+
 1999-05-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-open-dialog.c (gnome_open_dialog_generate_tree_helper):

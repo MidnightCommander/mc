@@ -430,12 +430,6 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 			if (is_a_panel (dh->widget)){
 				WPanel *p = (WPanel *) dh->widget;
 
-				if (current_widget == p->filter_w){
-					in = (WInput *) current_widget;
-					set_panel_filter_to (p, g_strdup (in->buffer));
-					return MSG_HANDLED;
-				}
-			
 				if (current_widget == p->current_dir){
 					WInput *in = p->current_dir;
 			

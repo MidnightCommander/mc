@@ -145,7 +145,6 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 
 	/* Remove the widgets from the dialog head */
 	remove_widget (h, panel->current_dir);
-	remove_widget (h, panel->filter_w);
 	remove_widget (h, panel);
 
 	/* Free our own internal stuff */
@@ -154,7 +153,6 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 
 	/* Kill the widgets */
 	destroy_widget (panel->current_dir);
-	destroy_widget (panel->filter_w);
 	destroy_widget ((Widget *)panel);
 
 	layout_panel_gone (panel);
