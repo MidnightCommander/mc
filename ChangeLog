@@ -1,5 +1,10 @@
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove the argument from --with-gpm-mouse.  The
+	directories for include files and libraries can be specified
+	using LDFLAGS and CPPFLAGS, as documented in the output of
+	"configure --help".
+
 	* configure.in: Complete rewrite of the screen library support.
 	Add new option --with-screen instead on --with-slang,
 	--with-included-slang and --with-ncurses.  Only allow

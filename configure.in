@@ -258,31 +258,25 @@ if test x$use_vfs = xyes; then
 	vfs_type="Midnight Commander Virtual File System"
 fi
 
+dnl
+dnl Check for gpm mouse support (Linux only)
+dnl
 mouse_lib="xterm only"
+AC_ARG_WITH(gpm-mouse, 
+	[  --with-gpm-mouse         Compile with gpm mouse support (Linux only)
+                           [[yes if found]]])
+
 case $host_os in
 linux*)
-    AC_ARG_WITH(gpm-mouse, 
-	[  --with-gpm-mouse[[=base-dir]]  Compile with gpm mouse support (Linux only)
-                               [[yes if found]]],
-	[if test x$withval != xno
-	then
-		if test x$withval != xyes
-		then
-			LDFLAGS="$LDFLAGS -L$withval/lib"
-			CPPFLAGS="$CPPFLAGS -I$withval/include"
-		fi
-		AC_DEFINE(HAVE_LIBGPM, 1,
-			  [Define to enable gpm mouse support on Linux])
-		mouse_lib="GPM and xterm"
-		MCLIBS="-lgpm $MCLIBS"
-	fi],
-	[AC_CHECK_LIB(gpm, Gpm_Repeat,
-		[AC_DEFINE(HAVE_LIBGPM)
-		mouse_lib="GPM and xterm"
-		MCLIBS="-lgpm $MCLIBS"],
-		[AC_MSG_WARN([libgpm is missing or older than 0.18])],
-		[$LIBS])
+    if test x$with_gpm_mouse != xno; then
+	AC_CHECK_LIB(gpm, Gpm_Repeat,
+	    [AC_DEFINE(HAVE_LIBGPM, 1,
+		       [Define to enable gpm mouse support on Linux])
+	    mouse_lib="gpm and xterm"
+	    MCLIBS="$MCLIBS -lgpm"],
+	    [AC_MSG_WARN([libgpm is missing or older than 0.18])
 	])
+    fi
     ;;
 esac
 
