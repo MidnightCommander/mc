@@ -1,5 +1,8 @@
 2001-08-16  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_free_super): Remove i18n on commented out
+	developer-only code.
+
 	* extfs.c (extfs_init): Internationalize error message, it's
 	already in sfs.c.
 

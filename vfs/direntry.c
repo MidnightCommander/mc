@@ -430,10 +430,12 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
 #if 0
     /* FIXME: We currently leak small ammount of memory, sometimes. Fix it if you can. */
     if (super->ino_usage)
-	message_1s1d (1, _(" Direntry warning "), _("Super ino_usage is %d, memory leak"), super->ino_usage);
+	message_1s1d (1, " Direntry warning ",
+			 "Super ino_usage is %d, memory leak",
+			 super->ino_usage);
 
     if (super->want_stale)
-	message_1s (1, _(" Direntry warning "), _("Super has want_stale set"));
+	message_1s (1, " Direntry warning ", "Super has want_stale set");
 #endif
 
     if (super->prevp){
