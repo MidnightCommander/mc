@@ -233,7 +233,7 @@ static void sfs_free (vfsid id)
 
     unlink( CUR->cache );
     while (CUR) {
-        if (CUR = which)
+        if (CUR == which)
 	    break;
 	CUR = CUR->next;
     }
