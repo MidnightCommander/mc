@@ -130,9 +130,12 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 /usr/bin/gmc
-
+/usr/lib/mc/layout
 
 %changelog
+* Wed Apr 8 1998 Marc Ewing <marc@redhat.com>
+- add /usr/lib/mc/layout to gmc
+
 * Tue Dec 23 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
 - added --without-debug to configure,
 - modification in %build and %install and cosmetic modification in packages
