@@ -2314,11 +2314,16 @@ the file type to display the information.  The internal file viewer
 will interpret some string sequences to set the bold and underline
 attributes, thus making a pretty display of your files.  
 .PP
-When in hex mode, the search function accepts text in quotes as well
-as hexadecimal constants.
+When in hex mode, the search function accepts text in quotes and
+constant numbers.  Text in quotes is matched exactly after removing
+the quotes.  Each number matches one byte.  You can mix quoted text
+with constants like this:
 .PP
-You can mix quoted text with constants like this: "String" 0xFE 0xBB
-"more text".  Text between constants and quoted text is just ignored. 
+.nf
+"String" -1 0xBB 012 "more text"
+.fi
+.PP
+Note that 012 is an octal number.  -1 is converted to 0xFF.
 .PP
 Some internal details about the viewer: On systems that provide the
 mmap(2) system call, the program maps the file instead of loading it;

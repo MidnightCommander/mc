@@ -1,5 +1,7 @@
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* doc/mc.1.in: Update documentation about hex search.
+
 	* edit/edit_key_translator.c (cooledit_key_map): Bind
 	Ctrl-Shift-Up and Ctrl-Shift-Down to scroll with highlight.
 	From Steef Boerrigter <sxmboer@sci.kun.nl>
