@@ -1,5 +1,7 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* chmod.c (stat_file): Allow chmod and chown on special files.
+
 	* cons.handler.c: Include "global.h" for exit().
 
 	* Makefile.in: Add dependencies between mc and static libraries

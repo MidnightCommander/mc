@@ -255,9 +255,6 @@ int stat_file (char *filename, struct stat *st)
 {
     if (mc_stat (filename, st))
 	return 0;
-    if (!(S_ISREG(st->st_mode) || S_ISDIR(st->st_mode) ||
-	  S_ISLNK(st->st_mode)))
-	return 0;
 
     return 1;
 }
