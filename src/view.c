@@ -68,12 +68,6 @@
 #define READ_BLOCK 8192
 #define VIEW_PAGE_SIZE 8192
 
-#ifdef IS_AIX
-#   define IFAIX(x) case (x):
-#else
-#   define IFAIX(x)
-#endif
-
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
 #define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
 

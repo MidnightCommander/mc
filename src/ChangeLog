@@ -6,6 +6,7 @@
 	* popthelp.c: Likewise.
 	* tree.c: Moved a macro from tree.h to here, as it is useless
 	outside tree.c.
+	* view.c: Removed unused macro.
 
 2004-12-02  Roland Illig  <roland.illig@gmx.de>
 
