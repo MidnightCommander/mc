@@ -1,5 +1,10 @@
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (string_file_size_brief): Represent non-regular files
+	of unknown kind by '?'.
+	(file_compute_color): Use for them the same color as for stale
+	links.
+
 	* main.c: Change default value of full_eight_bits to 0 - it's
 	reported to be broken on many terminals.
 

@@ -235,32 +235,34 @@ string_file_size_brief (file_entry *fe, int len)
 static const char *
 string_file_type (file_entry *fe, int len)
 {
-    static char buffer [2];
+    static char buffer[2];
 
     if (S_ISDIR (fe->buf.st_mode))
-	buffer [0] = PATH_SEP;
+	buffer[0] = PATH_SEP;
     else if (S_ISLNK (fe->buf.st_mode)) {
-        if (fe->f.link_to_dir)
-            buffer [0] = '~';
-        else if (fe->f.stale_link)
-            buffer [0] = '!';
-        else
-	    buffer [0] = '@';
+	if (fe->f.link_to_dir)
+	    buffer[0] = '~';
+	else if (fe->f.stale_link)
+	    buffer[0] = '!';
+	else
+	    buffer[0] = '@';
     } else if (S_ISCHR (fe->buf.st_mode))
-	buffer [0] = '-';
+	buffer[0] = '-';
     else if (S_ISSOCK (fe->buf.st_mode))
-	buffer [0] = '=';
+	buffer[0] = '=';
     else if (S_ISDOOR (fe->buf.st_mode))
-	buffer [0] = '>';
+	buffer[0] = '>';
     else if (S_ISBLK (fe->buf.st_mode))
-	buffer [0] = '+';
+	buffer[0] = '+';
     else if (S_ISFIFO (fe->buf.st_mode))
-	buffer [0] = '|';
+	buffer[0] = '|';
     else if (is_exe (fe->buf.st_mode))
-	buffer [0] = '*';
+	buffer[0] = '*';
+    else if (S_ISREG (fe->buf.st_mode))
+	buffer[0] = ' ';
     else
-	buffer [0] = ' ';
-    buffer [1] = '\0';
+	buffer[0] = '?';	/* non-regular of unknown kind */
+    buffer[1] = '\0';
     return buffer;
 }
 
@@ -461,7 +463,7 @@ to_buffer (char *dest, int just_mode, int len, const char *txt)
 static int
 file_compute_color (int attr, file_entry *fe)
 {
-    switch (attr){
+    switch (attr) {
     case SELECTED:
 	return (SELECTED_COLOR);
     case MARKED:
@@ -478,30 +480,35 @@ file_compute_color (int attr, file_entry *fe)
 
     /* if filetype_mode == true  */
     if (S_ISDIR (fe->buf.st_mode))
-        return (DIRECTORY_COLOR);
-    else if (S_ISLNK (fe->buf.st_mode)){
-        if (fe->f.link_to_dir)
-            return (DIRECTORY_COLOR);
-        else if (fe->f.stale_link)
-            return (STALE_LINK_COLOR);
-        else
-            return (LINK_COLOR);
+	return (DIRECTORY_COLOR);
+    else if (S_ISLNK (fe->buf.st_mode)) {
+	if (fe->f.link_to_dir)
+	    return (DIRECTORY_COLOR);
+	else if (fe->f.stale_link)
+	    return (STALE_LINK_COLOR);
+	else
+	    return (LINK_COLOR);
     } else if (S_ISSOCK (fe->buf.st_mode))
-        return (SPECIAL_COLOR);
+	return (SPECIAL_COLOR);
     else if (S_ISCHR (fe->buf.st_mode))
-        return (DEVICE_COLOR);
+	return (DEVICE_COLOR);
     else if (S_ISBLK (fe->buf.st_mode))
-        return (DEVICE_COLOR);
+	return (DEVICE_COLOR);
     else if (S_ISFIFO (fe->buf.st_mode))
-        return (SPECIAL_COLOR);
+	return (SPECIAL_COLOR);
     else if (S_ISDOOR (fe->buf.st_mode))
-        return (SPECIAL_COLOR);
+	return (SPECIAL_COLOR);
     else if (is_exe (fe->buf.st_mode))
-        return (EXECUTABLE_COLOR);
-    else if (fe->fname && (!strcmp (fe->fname, "core") || !strcmp (extension(fe->fname), "core")))
+	return (EXECUTABLE_COLOR);
+    else if (fe->fname
+	     && (!strcmp (fe->fname, "core")
+		 || !strcmp (extension (fe->fname), "core")))
 	return (CORE_COLOR);
+    else if (S_ISREG (fe->buf.st_mode))
+	return (NORMAL_COLOR);
 
-    return (NORMAL_COLOR); /* just for safeness */
+    /* non-regular file of unknown kind */
+    return (STALE_LINK_COLOR);
 }
 
 /* Formats the file number file_index of panel in the buffer dest */
