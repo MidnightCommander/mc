@@ -1,2 +1,2 @@
 [Special dirs]
-list=/afs,/coda,/:,/...,/net
+list=/afs,/coda,/:,/...,/net,/#smb
