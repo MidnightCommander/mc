@@ -186,9 +186,9 @@ file and changing the
 .I mouse_repeat_rate
 parameter.
 .PP
-If you are running the Commander with the mouse support, you can bypass
-the Commander and get the default mouse behavior (cutting and pasting
-text) by holding down the Shift key.
+If you are running the Midnight Commander with the mouse support, you
+can get the default mouse behavior (cutting and pasting text) by holding
+down the Shift key.
 .SH ""
 .SH "Keys"
 Some commands in the Midnight Commander involve the use of the
