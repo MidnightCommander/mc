@@ -1,3 +1,7 @@
+2003-10-16  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (process_args): Use VFS_SETCTL_LOGFILE for ftpfs.
+
 2003-10-15  Pavel Roskin  <proski@gnu.org>
 
 	* glibcompat.h: Define g_try_malloc as malloc for glib 1.2.x.
