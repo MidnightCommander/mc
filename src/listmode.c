@@ -314,6 +314,10 @@ listmode_edit (char *oldlistformat)
 	/* display file info */
 	attrset (SELECTED_COLOR);
 
+	/*
+	 * FIXME: Calling run_dlg() more than once doesn't work.
+	 * This code is broken.
+	 */
 	run_dlg (listmode_dlg);
 
 	switch (listmode_dlg->ret_value) {
