@@ -1,3 +1,7 @@
+2005-02-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* utilunix.c (init_groups): Use glib memory allocation functions.
+
 2005-01-31  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Eliminated two global variables and put them into the

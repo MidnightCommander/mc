@@ -94,33 +94,32 @@ void init_groups (void)
 
 #ifdef HAVE_GETGROUPLIST
     {
-        gid_t *groups = NULL;
-        int ng = 1;
-        //struct group *grp;
-        gid_t *newgroups = NULL;
-        
-        groups = (gid_t *) malloc(ng * sizeof(gid_t));
+	gid_t *groups = g_new (gid_t, 1);
+	int ng = 1;
+	gid_t *newgroups = NULL;
 
-        if (getgrouplist(pwd->pw_name, pwd->pw_gid, groups, &ng) == -1) {
-                newgroups = (gid_t *) malloc(ng * sizeof(gid_t));
-                if (newgroups != NULL) {
-                        free (groups);
-                        groups = newgroups;
-                        getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng);
-                } else
-			ng = 1;
-        }
+	if (getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng) == -1) {
+	    newgroups = g_new (gid_t, ng);
+	    if (newgroups != NULL) {
+		g_free (groups);
+		groups = newgroups;
+		getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng);
+	    } else
+		ng = 1;
+	}
 
-        for (i = 0; i < ng; i++) {
-            grp = getgrgid(groups[i]);
-            if (grp != NULL && !g_tree_lookup (current_user_gid, GUINT_TO_POINTER ((int) grp->gr_gid))) {
-                    g_tree_insert (current_user_gid,
-				   GUINT_TO_POINTER ((int) grp->gr_gid),
-				   g_strdup (grp->gr_name));
-            }
-        }
+	for (i = 0; i < ng; i++) {
+	    grp = getgrgid (groups[i]);
+	    if (grp != NULL
+		&& !g_tree_lookup (current_user_gid,
+				   GUINT_TO_POINTER ((int) grp->gr_gid))) {
+		g_tree_insert (current_user_gid,
+			       GUINT_TO_POINTER ((int) grp->gr_gid),
+			       g_strdup (grp->gr_name));
+	    }
+	}
 
-	free(groups);
+	g_free (groups);
     }
 #else
     setgrent ();
