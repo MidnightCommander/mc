@@ -274,6 +274,8 @@ reconnect (vfs *me, vfs_s_super *super)
 	SUP.sock = sock;
 	SUP.cwdir = NULL;
 	if (login_server (me, super, SUP.password)){
+	    if (!cwdir)
+		return 1;
 	    sock = ftpfs_chdir_internal (me, super, cwdir);
 	    g_free (cwdir);
 	    return sock == COMPLETE;
@@ -847,11 +849,11 @@ dir_uptodate(vfs *me, vfs_s_inode *ino)
 {
     struct timeval tim;
 
-    gettimeofday(&tim, NULL);
     if (force_expiration) {
 	force_expiration = 0;
 	return 0;
     }
+    gettimeofday(&tim, NULL);
     if (tim.tv_sec < ino->u.ftp.timestamp.tv_sec)
 	return 1;
     return 0;
@@ -1026,6 +1028,7 @@ linear_abort (vfs *me, vfs_s_fh *fh)
     char buf[1024];
     int dsock = FH_SOCK;
     FH_SOCK = -1;
+    SUP.control_connection_buzy = 0;
 
     print_vfs_message(_("ftpfs: aborting transfer."));
     if (send(SUP.sock, ipbuf, sizeof(ipbuf), MSG_OOB) != sizeof(ipbuf)) {
@@ -1447,6 +1450,7 @@ linear_start(vfs *me, vfs_s_fh *fh, int offset)
     if (FH_SOCK == -1)
 	ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
+    FH_SUPER->u.ftp.control_connection_buzy = 1;
     return 1;
 }
 
@@ -1683,11 +1687,64 @@ static void my_forget (char *file)
 
 static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
+    /* File will be written only, so no need to retrieve it from ftp server */
+    if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
+#ifdef HAVE_STRUCT_LINGER
+	struct linger li;
+#else
+	int li = 1;
+#endif
+	char * name;
+
+	/* linear_start() called, so data will be written
+	 * to local temporary file and stored to ftp server 
+	 * by vfs_s_close later
+	 */
+	if (FH_SUPER->u.ftp.control_connection_buzy)
+	    return 0;
+	name = vfs_s_fullpath (me, fh->ino);
+	if (!name)
+	    return -1;
+	fh->handle = open_data_connection(me, fh->ino->super,
+		    (flags & O_APPEND) ? "APPE" : "STOR", name, TYPE_BINARY, 0);
+	g_free (name);
+
+	if (fh->handle < 0)
+	    return -1;
+#ifdef HAVE_STRUCT_LINGER
+	li.l_onoff = 1;
+	li.l_linger = 120;
+#endif
+	setsockopt(fh->handle, SOL_SOCKET, SO_LINGER, &li, sizeof(li));
+
+	if (fh->ino->localname){
+	    unlink (fh->ino->localname);
+	    g_free (fh->ino->localname);
+	    fh->ino->localname = NULL;
+	}
+	return 0;
+    }
+
     if (!fh->ino->localname)
 	if (vfs_s_retrieve_file (me, fh->ino)==-1)
 	    return -1;
     if (!fh->ino->localname)
 	vfs_die( "retrieve_file failed to fill in localname" );
+    return 0;
+}
+
+static int ftpfs_fh_close (vfs *me, vfs_s_fh *fh)
+{
+    if (fh->handle != -1 && !fh->ino->localname){
+	close (fh->handle);
+	fh->handle = -1;
+	/* File is stored to destination already, so
+	 * we prevent MEDATA->file_store() call from vfs_s_close ()
+	 */
+	fh->changed = 0;
+	if (get_reply (me, fh->ino->SUP.sock, NULL, 0) != COMPLETE)
+	    ERRNOR (EIO, -1);
+    }
     return 0;
 }
 
@@ -1707,7 +1764,7 @@ static struct vfs_s_data ftp_data = {
     free_archive,
 
     ftpfs_fh_open, /* fh_open */
-    NULL, /* fh_close */
+    ftpfs_fh_close, /* fh_close */
 
     vfs_s_find_entry_linear,
     dir_load,

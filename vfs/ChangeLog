@@ -1,7 +1,20 @@
 2002-05-17  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* xdirentry.h (vfs_s_super): Add control_connection_buzy
+	field to ftp struct.
+
+	* ftpfs.c (linear_start): Set control_connection_buzy.
+	(linear_abort): Unset control_connection_buzy.
+	(ftpfs_fh_open): Don't retrieve file if it is
+	opened for writting only.  Open data connection as
+	fh->handle and unlink/unset local temporary file
+	if control connection isn't buzy.
+	(ftpfs_fh_close): New function to serve opened in
+	ftpfs_fh_open() data connection.  Unset fh->changed
+	to prevent MEDATA->file_store() call from vfs_s_close().
+
 	* direntry.c (vfs_s_read): Move MEDATA->linear_start() ...
-	* (vfs_s_open): ... here.
+	(vfs_s_open): ... here.
 
 	* samba/include/includes.h: Eliminate all references to
 	HAVE_LIBREADLINE.
@@ -10,7 +23,7 @@
 
 	* Makefile.am (noinst_LIBRARIES): Add samba/libsamba.a
 	if USE_SAMBA_FS is true.
-	* (libvfs-mc.a): Don't merge object files with libsamba.a.
+	(libvfs-mc.a): Don't merge object files with libsamba.a.
 
 2002-05-13  Andrew V. Samoilov  <kai@cmail.ru>
 
@@ -18,7 +31,7 @@
 
 	* vfs.c (MC_RENAMEOP): Make arguments const.
 	* vfs.h (mc_rename): Adjust declaration.
-	* (mc_link): Likewise.
+	(mc_link): Likewise.
 
 2002-05-11  Andrew V. Samoilov  <kai@cmail.ru>
 

@@ -113,6 +113,7 @@ typedef struct vfs_s_super {
 	    int strict; /* ftp server doesn't understand 
 					   "LIST -la <path>"; use "CWD <path>"/
 					   "LIST" instead */
+	    int control_connection_buzy;
 #define RFC_AUTODETECT 0
 #define RFC_DARING 1
 #define RFC_STRICT 2
