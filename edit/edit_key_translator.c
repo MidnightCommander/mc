@@ -145,6 +145,16 @@
 	break;
     }
 
+#ifdef HAVE_CHARSET
+    if (x_key == XCTRL('t')) {
+	do_select_codepage();
+
+	edit->force = REDRAW_COMPLETELY;
+	command = CK_Refresh;
+	goto fin;
+    }
+#endif
+
     if (x_key == XCTRL ('q')) {
 	char_for_insertion = edit_raw_key_query (_(" Insert Literal "), _(" Press any key: "), 0);
 	goto fin;
@@ -268,10 +278,17 @@
 	}
     }
 /* an ordinary insertable character */
+
+#ifndef HAVE_CHARSET
     if (x_key < 256 && is_printable (x_key)) {
 	char_for_insertion = x_key;
+#else
+    if (x_key < 256 && is_printable (conv_input [x_key])) {
+	char_for_insertion = conv_input [x_key];
+#endif
 	goto fin;
     }
+
 /* other commands */
     i = 0;
     while (key_map[i] != x_key && (key_map[i] || key_map[i + 1]))

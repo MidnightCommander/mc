@@ -1,5 +1,9 @@
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* edit/edit_key_translator.c [HAVE_CHARSET]: Add charset
+	conversion support.
+	From Walery Studennikov <hqsoftware@mail.ru>.
+
 	* extraconf.h [HAVE_X]: Undefine HAVE_TEXTMODE_X11_SUPPORT.
 
 2001-06-01  Pavel Roskin  <proski@gnu.org>
