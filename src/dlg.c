@@ -611,7 +611,6 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     if (!handled)
 	return 0;
 
-    (*h->callback) (h, 0, DLG_HOTKEY_HANDLED);
     previous = h->current;
     if (!dlg_unfocus (h))
 	return handled;
@@ -625,7 +624,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 }
 
 static int
-dlg_key_event (Dlg_head * h, int d_key)
+dlg_key_event (Dlg_head *h, int d_key)
 {
     int handled;
 
@@ -648,14 +647,16 @@ dlg_key_event (Dlg_head * h, int d_key)
 	if (!handled)
 	    handled = dlg_try_hotkey (h, d_key);
 
+	if (handled)
+	    (*h->callback) (h, 0, DLG_HOTKEY_HANDLED);
+
 	/* not used - then try widget_callback */
 	if (!handled)
-	    handled |=
-		callback (h) (h->current->widget, WIDGET_KEY, d_key);
+	    handled = callback (h) (h->current->widget, WIDGET_KEY, d_key);
 
 	/* not used- try to use the unhandled case */
 	if (!handled)
-	    handled |= (*h->callback) (h, d_key, DLG_UNHANDLED_KEY);
+	    handled = (*h->callback) (h, d_key, DLG_UNHANDLED_KEY);
 
 	if (!handled)
 	    dialog_handle_key (h, d_key);

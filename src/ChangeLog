@@ -1,3 +1,8 @@
+2003-09-06  Pavel Roskin  <proski@gnu.org>
+
+	* dlg.c: Fix a bug when DLG_HOTKEY_HANDLED would not be
+	delivered if the current widget already has focus.
+
 2003-09-04  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* user.c (execute_menu_command): Implement %view macro.
