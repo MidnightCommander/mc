@@ -961,6 +961,8 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 		return fullname;
 	}
 }
+
+#ifdef OLD_DND
 /*
  * Handler for text/plain and url:ALL drag types
  *
@@ -1133,6 +1135,7 @@ panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event)
 {
 	artificial_drag_start (window->clist_window, event->x, event->y);
 }
+#endif /* OLD_DND */
 
 static GtkWidget *
 load_transparent_image (char *base)
@@ -1177,7 +1180,8 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	GtkObject *obj = GTK_OBJECT (file_list);
 
 	load_dnd_icons ();
-	
+
+#if OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_clist_drag_request), panel);
 	gtk_signal_connect (obj, "drag_begin_event",   GTK_SIGNAL_FUNC (panel_drag_begin), panel);
@@ -1191,6 +1195,7 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_signal_connect (obj, "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_artificial_drag_start), panel);
 	gdk_window_dnd_drop_set (GTK_CLIST (file_list)->clist_window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+#endif
 }
 
 /*
@@ -1314,6 +1319,7 @@ load_imlib_icons (void)
 	loaded = 1;
 }
 
+#if OLD_DND
 static void
 panel_icon_list_artificial_drag_start (GtkObject *obj, GdkEventMotion *event)
 {
@@ -1372,6 +1378,7 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
 	panel_update_contents (panel);
 }
+#endif
 
 /*
  * Setup for the icon view
@@ -1384,6 +1391,7 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
+#ifdef OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);
 	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_begin), panel);
@@ -1397,6 +1405,7 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	gtk_signal_connect (obj, "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_icon_list_artificial_drag_start), panel);
 	gdk_window_dnd_drop_set (GTK_WIDGET (icon)->window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+#endif
 }
 
 /*

@@ -185,8 +185,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		bind_gtk_keys (GTK_WIDGET (ted), h);
 	}
 	if (win){
-		if (h->callback != dialog_panel_callback)
-			bind_gtk_keys (GTK_WIDGET (win), h);
+		bind_gtk_keys (GTK_WIDGET (win), h);
 	}
 	return (widget_data) win;
 }
@@ -412,7 +411,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	if (msg == DLG_UNHANDLED_KEY || msg == DLG_HOTKEY_HANDLED)
 		return midnight_callback (h, id, msg);
 
-	return default_dlg_callback (h, id, msg);
+	return 0;
 }
 
 extern GList *directory_list;

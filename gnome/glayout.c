@@ -483,7 +483,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	} else if (!other_panel_ptr)
 		other_panel_ptr = container;
 
-/*	bind_gtk_keys (GTK_WIDGET (app), h); */
+	bind_gtk_keys (GTK_WIDGET (app), h);
 	return panel;
 }
 

@@ -44,9 +44,12 @@ GtkWidget *create_transparent_text_window (char *file, char *text, int extra_eve
 GtkWidget *make_transparent_window (char *file);
 
 /* gdesktop.c */
+#if 0
 void drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually);
-void gnome_arrange_icons (void);
 void artificial_drag_start (GdkWindow *source_window, int x, int y);
+#endif
+
+void gnome_arrange_icons (void);
 void start_desktop (void);
 void stop_desktop (void);
 

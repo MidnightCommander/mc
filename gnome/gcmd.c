@@ -67,7 +67,7 @@ void
 gnome_about_cmd (void)
 {
         GtkWidget *about;
-        gchar *authors[] = {
+        const gchar *authors[] = {
 		"The Midnight Commander Team",
 		"http://www.gnome.org/mc/",
 		"bug reports: mc-bugs@nuclecu.unam.mx",

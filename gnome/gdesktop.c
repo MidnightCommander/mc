@@ -242,6 +242,7 @@ get_desktop_icon (char *pathname)
 /*
  * Hackisigh routine taken from GDK
  */
+#ifdef OLD_DND
 static void
 gdk_dnd_drag_begin (GdkWindow *initial_window)
 {
@@ -309,6 +310,7 @@ artificial_drag_start (GdkWindow *window, int x, int y)
         }
 #endif
 }
+#endif /* OLD_DND */
 
 static int operation_value;
 
@@ -436,6 +438,7 @@ perform_drop_on_directory (WPanel *source_panel, int operation, char *dest)
 	}
 }
 
+#if OLD_DND
 static void
 perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *dest)
 {
@@ -589,6 +592,7 @@ drops_from_event (GdkEventDropDataAvailable *event, int *argc)
 	
 	return argv;
 }
+#endif /* OLD_DND */
 
 /*
  * destroys a desktop_icon_t structure and anything that was held there,
@@ -672,6 +676,7 @@ desktop_icon_remove (desktop_icon_t *di)
 	desktop_release_desktop_icon_t (di, 1);
 }
 
+#ifdef OLD_DN
 static void
 drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
@@ -757,6 +762,7 @@ connect_drop_signals (GtkWidget *widget, desktop_icon_t *di)
 	gtk_signal_connect (o, "drop_leave_event", GTK_SIGNAL_FUNC (drop_enter_leave), di);
 	gtk_signal_connect (o, "drop_data_available_event", GTK_SIGNAL_FUNC (drop_cb), di);
 }
+#endif /* OLD DND */
 
 void
 desktop_icon_execute (GtkWidget *ignored, desktop_icon_t *di)
@@ -796,6 +802,7 @@ desktop_icon_configure_position (desktop_icon_t *di, int x, int y)
 	}
 }
 
+#ifdef OLD_DND 
 static void
 desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, desktop_icon_t *di)
 {
@@ -823,6 +830,7 @@ desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, deskto
 		desktop_icon_configure_position (di, drop_x, drop_y);
 	}
 }
+#endif
 
 static GtkWidget *root_drag_ok_window;
 static GtkWidget *root_drag_not_ok_window;
@@ -891,8 +899,10 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 		root_drag_ok_window     = make_transparent_window (fname);
 		root_drag_not_ok_window = make_transparent_window (fname);
 		if (root_drag_not_ok_window && root_drag_ok_window){
+#ifdef OLD_DND
 			gdk_dnd_set_drag_shape (root_drag_ok_window->window, &root_icon_drag_hotspot,
 						root_drag_not_ok_window->window, &root_icon_drag_hotspot);
+#endif
 			gtk_widget_show (root_drag_not_ok_window);
 			gtk_widget_show (root_drag_ok_window);
 		}
@@ -920,12 +930,15 @@ desktop_icon_make_draggable (desktop_icon_t *di)
         child = gtk_container_children(GTK_CONTAINER(di->widget));
         obj = GTK_OBJECT (child->data);
   /* To artificially start up drag and drop */
+
+#ifdef OLD_DND
 /*	gtk_signal_connect (obj, "motion_notify_event", GTK_SIGNAL_FUNC (start_icon_drag), di); */
 	gtk_widget_dnd_drag_set (GTK_WIDGET(child->data), TRUE, drag_types, ELEMENTS (drag_types));
 
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (desktop_icon_drag_request), di);
 	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (desktop_icon_drag_start), di);
 	gtk_signal_connect (obj, "drag_end_event", GTK_SIGNAL_FUNC (desktop_icon_drag_end), di);
+#endif
 }
 
 /* Called by the pop up menu: removes the icon from the desktop */
