@@ -163,13 +163,13 @@ void edit_options_dialog (void)
 
 	    if (p) {
 		option_word_wrap_line_length = atoi (p);
-		free (p);
+		g_free (p);
 	    }
 	    if (q) {
 		option_tab_spacing = atoi (q);
 		if (option_tab_spacing <= 0)
 		    option_tab_spacing = 8;
-		free (q);
+		g_free (q);
 	    }
 
 	    option_syntax_highlighting = tedit_syntax_highlighting;
