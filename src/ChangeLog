@@ -1,3 +1,8 @@
+2005-01-31  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Eliminated two global variables and put them into the
+	WView structure.
+
 2005-01-17  Roland Illig  <roland.illig@gmx.de>
 
 	* info.c (info_show_info): Enabled display of the device number,

@@ -159,6 +159,10 @@ struct WView {
 				 * -1 view previous file
 				 * 1 view next file
 				 */
+
+    offset_type update_steps;	/* The number of bytes between percent
+                                 * increments */
+    offset_type update_activate;/* Last point where we updated the status */
 };
 
 static void view_update_last_byte (WView *view)
@@ -1613,25 +1617,17 @@ get_line_at (WView *view, offset_type *p, offset_type *skipped)
     return buffer;
 }
 
-/** Search status optmizations **/
-
-/* The number of bytes between percent increments */
-static offset_type update_steps;
-
-/* Last point where we updated the status */
-static offset_type update_activate;
-
 static void
 search_update_steps (WView *view)
 {
     if (view->last_byte != 0)
-	update_steps = 40000;
+	view->update_steps = 40000;
     else /* viewing a data stream, not a file */
-	update_steps = view->last_byte / 100;
+	view->update_steps = view->last_byte / 100;
 
     /* Do not update the percent display but every 20 ks */
-    if (update_steps < 20000)
-	update_steps = 20000;
+    if (view->update_steps < 20000)
+	view->update_steps = 20000;
 }
 
 static void
@@ -1672,11 +1668,11 @@ search (WView *view, char *text,
 
     /* Compute the percent steps */
     search_update_steps (view);
-    update_activate = 0;
+    view->update_activate = 0;
 
     for (;; g_free (s)) {
-	if (p >= update_activate) {
-	    update_activate += update_steps;
+	if (p >= view->update_activate) {
+	    view->update_activate += view->update_steps;
 	    if (verbose) {
 		view_percent (view, p, w, TRUE);
 		mc_refresh ();
@@ -1763,12 +1759,12 @@ block_search (WView *view, const char *buffer, int len)
 				    : view->search_start;
 
     search_update_steps (view);
-    update_activate = 0;
+    view->update_activate = 0;
 
     if (direction == -1) {
 	for (d += len - 1;; e--) {
-	    if (e <= update_activate) {
-		update_activate -= update_steps;
+	    if (e <= view->update_activate) {
+		view->update_activate -= view->update_steps;
 		if (verbose) {
 		    view_percent (view, e, w, TRUE);
 		    mc_refresh ();
@@ -1793,8 +1789,8 @@ block_search (WView *view, const char *buffer, int len)
 	}
     } else {
 	while (e < view->last_byte) {
-	    if (e >= update_activate) {
-		update_activate += update_steps;
+	    if (e >= view->update_activate) {
+		view->update_activate += view->update_steps;
 		if (verbose) {
 		    view_percent (view, e, w, TRUE);
 		    mc_refresh ();
