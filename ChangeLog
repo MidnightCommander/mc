@@ -1,5 +1,10 @@
 2001-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Update list of browsers.  Don't fallback to
+	lynx since it cannot be run in background.
+	* lib/mc.ext.in: Redirect output of X11 browsers to /dev/null.
+	If no browser for X11 was found, use lynx.
+
 	* autogen.sh: Add a workaround to ensure that "depcomp" is
 	distributed.
 	* configure.in: Replace obsolete macros.  Use AC_MSG_NOTICE

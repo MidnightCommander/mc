@@ -27,10 +27,8 @@ AC_SYS_LARGEFILE
 
 AC_CHECK_TOOL(AR, ar, ar)
 
-AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)
-if test x"$X11_WWW" = x; then
-    X11_WWW=lynx
-fi
+dnl Only list browsers here that can be run in background (i.e. with `&')
+AC_CHECK_PROGS(X11_WWW, [gnome-moz-remote mozilla konqueror opera netscape])
 
 ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko lv nl no pl pt_BR ro ru sk sl sv uk ta tr wa zh_TW zh_CN.GB2312"
 
