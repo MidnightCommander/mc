@@ -36,8 +36,8 @@ GtkWidget *gtk_dtree_new                ();
 void       gtk_dtree_select_parent      (GtkDTree *dtree,
 					 char *directory);
 void       gtk_dtree_select_child       (GtkDTree *dtree);
-gboolean   gtk_dtree_add_dir_by_name    (GtkDTree *dtree,
-					 char *directory);
 void       gtk_dtree_remove_dir_by_name (GtkDTree *dtree,
-					 gchar *directory);
+					 char *directory);
+gboolean   gtk_dtree_select_dir         (GtkDTree *dtree,
+					 char *directory);
 #endif

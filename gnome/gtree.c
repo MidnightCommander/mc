@@ -37,11 +37,15 @@ gtk_dtree_get_row_path (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	path = g_strdup ("");
 	do {
 		char *new_path;
+		int val;
 		
-		gtk_ctree_node_get_pixtext (
+		val = gtk_ctree_node_get_pixtext (
 			ctree, row, column,
 			&node_text, NULL, NULL, NULL);
 
+		if (!val)
+			return path;
+		
 		new_path = g_concat_dir_and_file (node_text, path);
 		g_free (path);
 		path = new_path;
@@ -84,8 +88,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 		full_name = g_concat_dir_and_file (path, dirent->d_name);
 		res = stat (full_name, &s);
-		printf ("Statting %s\n", full_name);
-		
+
 		if (res == -1){
 			g_free (full_name);
 			continue;
@@ -124,7 +127,6 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	parent_class->tree_select_row (ctree, row, column);
 
-	gtk_clist_freeze (GTK_CLIST (ctree));
 	while (row == dtree->root_node)
 		return;
 
@@ -133,7 +135,10 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	dtree->last_node = row;
 
-	path = gtk_dtree_get_row_path (ctree, row, column);
+	gtk_clist_freeze (GTK_CLIST (ctree));
+	path = gtk_dtree_get_row_path (ctree, row, 0);
+	printf ("Selected: %s\n", path);
+	
 	if (dtree->current_path)
 		g_free (dtree->current_path);
 
@@ -157,6 +162,88 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	}
 
 	gtk_clist_thaw (GTK_CLIST (ctree));
+}
+
+static GtkCTreeNode *
+gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
+{
+	GtkCTreeNode *node;
+	
+	g_assert (dtree);
+	g_assert (parent);
+	g_assert (dirname);
+
+	node = GTK_CTREE_ROW (parent)->children;
+	
+	while (node && GTK_CTREE_ROW (node)->parent == parent){
+		char *text;
+		
+		gtk_ctree_node_get_pixtext (
+			GTK_CTREE (dtree), node, 0, &text,
+			NULL, NULL, NULL);
+
+		if (strcmp (dirname, text) == 0)
+			return node;
+
+		node = GTK_CTREE_NODE_NEXT (node);
+	}
+
+	return NULL;
+}
+
+/**
+ * gtk_dtree_select_dir:
+ * @dtree: the tree
+ * @path:  The path we want loaded into the tree
+ *
+ * Attemps to open all of the tree notes until
+ * path is reached.  It takes a fully qualified 
+ * pathname.
+ *
+ * Returns: TRUE if it succeeded, otherwise, FALSE
+ */
+gboolean
+gtk_dtree_select_dir (GtkDTree *dtree, char *path)
+{
+	GtkCTreeNode *current_node;
+	char *s, *current, *npath;
+	
+	g_return_if_fail (dtree != NULL);
+	g_return_if_fail (GTK_IS_DTREE (dtree));
+	g_return_if_fail (path != NULL);
+	g_return_if_fail (*path == '/');
+
+	s = alloca (strlen (path)+1);
+	strcpy (s, path);
+	current_node = dtree->root_node;
+
+	s++;
+	npath = g_strdup ("/");
+	while ((current = strtok (s, "/")) != NULL){
+		char *comp, *full_path;
+		GtkCTreeNode *node;
+		
+		full_path = g_concat_dir_and_file (npath, current);
+		g_free (npath);
+		npath = full_path;
+
+		node = gtk_dtree_lookup_dir (dtree, current_node, current);
+		if (!node){
+			printf ("Cargando: [%s]\n", current);
+			gtk_dtree_load_path (dtree, full_path, current_node, 2);
+
+			node = gtk_dtree_lookup_dir (dtree, current_node, current);
+		}
+		g_free (full_path);
+		
+		if (node)
+			current_node = node;
+		else
+			break;
+		
+		s = NULL;
+	}
+        g_free (npath);
 }
 
 static void
