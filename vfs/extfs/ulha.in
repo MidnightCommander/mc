@@ -34,15 +34,8 @@
 # Define your awk
 AWK=@AWK@
 
-if ls -de . >& /dev/null;
-then
-    LS_COMMAND="ls -le"
-else
-    LS_COMMAND="ls -l --full-time"
-fi
-
 # Define which archiver you are using with appropriate options
-LHA_LIST="lha l"
+LHA_LIST="lha lq"
 LHA_GET="lha pq"
 LHA_PUT="lha aq"
 
@@ -56,30 +49,22 @@ TMPCMD=$TMPDIR/run
 
 mc_lha_fs_list()
 {
-   # Get the year of the file timestamp in case we need to replace 'hh:mm'
-   YEAR=$($LS_COMMAND $1 | $AWK '{ print $10 }')
    # List the contents of the archive and sort it out    
-   $LHA_LIST $1 | $AWK -v uid=$(id -nu) -v gid=$(id -ng) -v year=$YEAR '
-      # Ignore the annotations, quit on the last one
-      /^\ PERMSSN/ { next }
-      /^-----/ { next }
-      /^\ Total/ { exit 0 }
+   $LHA_LIST $1 | $AWK -v uid=`id -nu` -v gid=`id -ng` '
       # Strip a leading '/' if present in a filepath
       $(NF) ~ /^\// { $(NF) = substr($NF,2) }
-      # Replace the year stamp if it is expressed as 'hh:mm'
-      $(NF-1) ~ /\:/ { $(NF-1) = year }
       # Print the line this way if there is no permission string
-      $1 ~ /^\[generic\]/ {
+      $1 ~ /^\[.*\]/ {
          # Invent a generic permission
          $1 = ($10 ~ /\/$/) ? "drwxr-xr-x":"-rwxr--r--";
          # Print it
-         printf "%s   1 %-8s %-8s %-8d %3s %2d %4d %s\n",
-                 $1,     uid, gid,  $2, $4, $5, $6, $7;
+         printf "%s 1 %-8s %-8s %-8d %s %s %s %s\n",
+                 $1, uid, gid, $2, $4, $5, $6, $7;
          # Get the next line of the list
          next;
       }
       # Do it this way for a defined permission
-      $1 !~ /^\[generic\]/ {
+      $1 !~ /^\[.*\]/ {
          # If the permissions and UID run together
          if ($1 ~ /\//) {
             $8 = $7;
@@ -100,8 +85,8 @@ mc_lha_fs_list()
          # UID:GID might not be the same as on your system so print numbers
          # Well, that is the intent.  At the moment mc is translating them.
          split($2, id, "/");
-         printf "%s   1 %-8d %-8d %-8d %3s %2d %4d %s\n",
-                 $1,     id[1], id[2],  $3, $5, $6, $7, $8;
+         printf "%s 1 %-8d %-8d %-8d %s %s %s %s\n",
+                 $1, id[1], id[2], $3, $5, $6, $7, $8;
          # Get the next line of the list
          next;
       }

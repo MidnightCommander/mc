@@ -1,3 +1,10 @@
+2001-12-18  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/ulha.in: Support for "[unknown]" and other permissions
+	in brackets.  Pass the date unchanged - mc can now deal with it.
+	Use "lha lq" to list the archive and don't remove headers and
+	footers of the listing.
+
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* undelfs.c: Use ext2_ino_t to avoid warnings with e2fsprogs
