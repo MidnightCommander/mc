@@ -24,7 +24,8 @@ static GnomeUIInfo actions[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Copy here"), NULL, NULL),
 	GNOMEUIINFO_ITEM_NONE (N_("Link here"), NULL, NULL),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Cancel drag"), NULL, NULL)
+	GNOMEUIINFO_ITEM_NONE (N_("Cancel drag"), NULL, NULL),
+	GNOMEUIINFO_END
 };
 
 /* Pops up a menu of actions to perform on dropped files */
