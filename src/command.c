@@ -268,7 +268,7 @@ command_callback (WInput *cmd, int msg, int par)
 WInput *
 command_new (int y, int x, int cols)
 {
-    WInput *cmd = g_new (WInput, 1);
+    WInput *cmd;
 
     cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
 

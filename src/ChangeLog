@@ -1,3 +1,8 @@
+2003-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* command.c (command_new): Fix memory leak.
+	* subshell.c (exit_subshell): Free pty_buffer.
+
 2003-06-05  Pavel Roskin  <proski@gnu.org>
 
 	* dir.c (do_load_dir): Add new argument "path" to avoid the need
