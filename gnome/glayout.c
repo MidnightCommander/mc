@@ -275,9 +275,15 @@ run_cmd (void)
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
+GnomeUIInfo gnome_panel_new_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("_Terminal"), N_("Launch a new terminal in the current directory"), NULL},
+	{ GNOME_APP_UI_ITEM, N_("_Directory..."), N_("Creates a new directory"), mkdir_cmd },
+	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
+};
+
 
 GnomeUIInfo gnome_panel_file_menu [] = {
-	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New window"), N_("Opens a new window"), gnome_open_panel, NULL),
+	GNOMEUIINFO_MENU_NEW_ITEM(N_("New _Window"), N_("Opens a new window"), gnome_open_panel, NULL),
 	
 	/* We want to make a new menu entry here... */
 	/* For example: */
@@ -287,14 +293,13 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	/*  Gnumeric Spreadsheet */
 	/*  Text Document */
 	/*  etc... */
-
+	{ GNOME_APP_UI_SUBTREE, N_("_New"), 	       NULL, gnome_panel_new_menu},
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Opens the selected files"), gnome_open_files },
 /*	{ GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },*/
 	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"), copy_cmd, NULL},
 	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
-/*	{ GNOME_APP_UI_ITEM, N_("_Make directory..."), N_("Creates a new directory"), mkdir_cmd },*/
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
@@ -445,7 +450,14 @@ static GtkWidget *create_toolbar (GtkWidget * window, GtkWidget *widget)
     }
     return toolbar;
 }
-
+static void
+create_new_menu (GnomeApp *app, WPanel *panel)
+{
+	gint pos;
+	GtkWidget *shell = NULL;
+	shell = gnome_app_find_menu_pos (app->menubar, _("File/New/Directory..."), &pos);
+	/*gtk_menu_shell_insert*/
+}
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {
@@ -475,7 +487,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
-
+	create_new_menu (app, panel);
 	/*
 	 * I am trying to unclutter the screen, so this toolbar is gone now
 	 */

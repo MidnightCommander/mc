@@ -1,3 +1,8 @@
+1999-01-12  Jonathan Blandford  <jrb@redhat.com>
+
+	* cmd.c (mkdir_cmd): now mkdir_cmd will accept relative, and
+	absolute directories.
+
 Tue Jan 12 13:40:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gtkedit(syntax.c): Fixed a typo in Pascal syntax.

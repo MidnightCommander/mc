@@ -385,23 +385,31 @@ void copymove_cmd_with_default (int copy, char *thedefault)
 
 void mkdir_cmd (WPanel *panel)
 {
+    char tempdir[MC_MAXPATHLEN];
     char *dir;
     
     panel = get_a_panel (panel);
-    dir = input_expand_dialog (_(" Mkdir "), _(" Enter directory name:") , "");
+    dir = input_expand_dialog (_("Create a new Directory"), _(" Enter directory name:") , "");
     
     if (!dir)
 	return;
-
+    if (dir[0] && (dir[0] == '/' || dir[0] == '~'))
+	    strncat (tempdir, dir, MC_MAXPATHLEN);
+    else {
+	    strncat (tempdir, panel->cwd, MC_MAXPATHLEN - strlen (dir) - 1);
+	    strcat (tempdir, "/");
+	    strcat (tempdir, dir);
+    }
+    printf ("%s\n", tempdir);
     save_cwds_stat ();
-    if (my_mkdir (dir, 0777) == 0){
-	update_panels (UP_OPTIMIZE, dir);
+    if (my_mkdir (tempdir, 0777) == 0){
+	update_panels (UP_OPTIMIZE, tempdir);
 	repaint_screen ();
 	select_item (cpanel);
-	free (dir);
+	free (tempdir);
 	return;
     }
-    free (dir);
+    free (tempdir);
     message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
 }
 

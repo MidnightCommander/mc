@@ -1,3 +1,9 @@
+1999-01-13  Jonathan Blandford  <jrb@redhat.com>
+
+	* glayout.c (create_container): beginnings of the New-> menu.  It
+	doesn't have much yet, hopefully we'll have a good way to let apps
+	register themselves with it.
+
 1999-01-13  bertrand <Bertrand.Guiheneuf@inria.fr>
 	
         * gdialogs.c
