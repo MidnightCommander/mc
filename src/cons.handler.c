@@ -152,7 +152,7 @@ void handle_console (unsigned char action)
 	    write (1, &console_flag, 1);
 	    close (1);
 	    close (0);
-	    exit (3);
+	    _exit (3);
 	} /* if (cons_saver_pid ...) */
 	break;
 
