@@ -1,1 +1,20 @@
 Bugzilla: 3436, 3194, 3621, 3244
+
+bugs.gnome.org:
+  Important: 216, 382, etc.
+  Major cosmetic: 272, 487
+  Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597
+  Non-essential: 779?, 448
+
+  216: If you drag a file into a directory that you don't have
+       permissions to move the file to, gmc goes boom. (Not sure if
+       this is the same bug as 216.)
+
+  382: Steps to reproduce: Start editing a file label.
+			   Drag as if to select part of the label
+			   text.
+			   gmc will fall over very soon afterwards.
+			   (e.g. if you try to select the same icon
+			   once or twice)
+
+  The drop-non-existent-file-from-panel bug.
