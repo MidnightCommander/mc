@@ -1,4 +1,4 @@
-2004-09-10  Jakub Jelinek  <jakub@redhat.com>
+2004-10-05  Jakub Jelinek  <jakub@redhat.com>
 
 	* cons.saver.c: Partly rewritten cons.saver.c.
 
