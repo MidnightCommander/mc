@@ -88,7 +88,7 @@ display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_UNFOCUS:
-	if ((WRadio *) h->current == my_radio) {
+	if (dlg_widget_active (my_radio)) {
 	    assign_text (status, displays_status[my_radio->sel]);
 	    input_set_point (status, 0);
 	}
@@ -96,28 +96,27 @@ display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
     case DLG_KEY:
 	if (parm == '\n') {
-	    if ((WRadio *) h->current == my_radio) {
+	    if (dlg_widget_active (my_radio)) {
 		assign_text (status, displays_status[my_radio->sel]);
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 
-	    if ((WInput *) h->current == user) {
+	    if (dlg_widget_active (user)) {
 		h->ret_value = B_USER + 6;
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 
-	    if ((WInput *) h->current == status) {
+	    if (dlg_widget_active (status)) {
 		h->ret_value = B_USER + 7;
 		dlg_stop (h);
 		return MSG_HANDLED;
 	    }
 	}
 
-	if (tolower (parm) == user_hotkey
-	    && h->current != (Widget *) user
-	    && h->current != (Widget *) status) {
+	if (tolower (parm) == user_hotkey && dlg_widget_active (user)
+	    && dlg_widget_active (status)) {
 	    my_radio->sel = 3;
 	    dlg_select_widget (h, my_radio);	/* force redraw */
 	    dlg_select_widget (h, user);

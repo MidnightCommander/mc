@@ -2309,7 +2309,7 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
     event->y -= 2;
     if ((event->type & (GPM_DOWN | GPM_DRAG))) {
 
-	if (&panel->widget != current_dlg->current)
+	if (!dlg_widget_active (panel))
 	    change_panel ();
 
 	if (event->y <= 0) {

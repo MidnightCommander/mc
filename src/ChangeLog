@@ -1,5 +1,11 @@
 2003-11-26  Pavel Roskin  <proski@gnu.org>
 
+	* dialog.h (dlg_widget_active): New function - check if the
+	widget is active.
+	* boxes.c (display_callback): Use it.
+	* layout.c (swap_panels): Likewise.
+	* screen.c (do_panel_event): Likewise.
+
 	* dialog.c: Eliminate callback macro.
 
 	* dialog.c (dlg_replace_widget): Use dlg_select_widget().

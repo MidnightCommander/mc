@@ -202,6 +202,14 @@ send_message (Widget *w, widget_msg_t msg, int parm)
     return (*(w->callback)) (w, msg, parm);
 }
 
+/* Return 1 if the widget is active, 0 otherwise */
+static inline int
+dlg_widget_active (void *w)
+{
+    Widget *w1 = (Widget *) w;
+    return (w1->parent->current == w1);
+}
+
 void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
 int  dlg_overlap          (Widget *a, Widget *b);
 void widget_erase         (Widget *);
