@@ -123,7 +123,7 @@ get_user_permissions (struct stat *buf) {
 void
 destroy_groups (void)
 {
-    g_tree_foreach (current_user_gid, mc_gid_destroy, NULL);
+    g_tree_traverse (current_user_gid, mc_gid_destroy, G_POST_ORDER, NULL);
     g_tree_destroy (current_user_gid);
 }
 
