@@ -1,5 +1,8 @@
 1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdnd.c (drop_on_file): Fix these so that they can use the
+	metadata drop-action.
+
 	* gdesktop.c (desktop_icon_info_open): Ugly.  Needs to share more
 	code here.  Use the metadata first, and the is_exe to find out how
 	to launch an application.
