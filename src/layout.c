@@ -599,6 +599,13 @@ void init_curses ()
 void init_curses (void)
 {
     initscr();
+#ifdef HAVE_ESCDELAY
+    /*
+     * If ncurses exports the ESCDELAY variable it should be set to 0
+     * or you'll have to press Esc three times to dismiss a dialog box.
+     */
+    ESCDELAY = 0;
+#endif
     if (!status_using_ncurses)
 	do_enter_ca_mode ();
     mc_raw_mode ();

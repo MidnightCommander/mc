@@ -1,3 +1,8 @@
+2001-05-30  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c (init_curses) [!HAVE_SLANG]: Set ESCDELAY to 0 if
+	possible to prevent ncurses from waiting after escape.
+
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (quick_cd_cmd) [HAVE_GNOME]: Disable.
