@@ -24,10 +24,6 @@
 # ./lha list Mystery.lha
 # to examine the output directly on the console.  The output string must be
 # precisely in the format described in the README in this directory.
-# Another helpful thing is to temporarily remove the redirection of error
-# output of awk (The '2> /dev/null' instruction near the end of mcfs_list())
-# The screen will get ugly if there's an error, but some useful text shows
-# at the bottom of the screen.  
 # Caveat emptor.
 # Learn Latin.
 
@@ -129,8 +125,8 @@ mc_lha_fs_run()
    # FIXME: Try harder to generate a unique directory if this fails
    mkdir -m 0700 $TMPDIR || exit 1
    $LHA_GET "$1" "$2" > $TMPCMD  
-   chmod a+x $TMPCMD  2> /dev/null
-   $TMPCMD 2> /dev/null
+   chmod a+x $TMPCMD
+   $TMPCMD
    rm -rf $TMPDIR
 }
 

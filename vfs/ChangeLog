@@ -1,5 +1,7 @@
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/ulha.in: Don't suppress stderr.
+
 	* extfs/uzoo.in: Always use "q" option to avoid processing junk.
 	Always create symlink, do it in a safer directory.
 
