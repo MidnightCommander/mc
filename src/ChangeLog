@@ -1,3 +1,8 @@
+2005-01-26  Roland Illig  <roland.illig@gmx.de>
+
+	* tty.h (printwstr): Added a function to print a string
+	left-aligned in a bounded box.
+
 2005-01-25  Roland Illig  <roland.illig@gmx.de>
 
 	* unixcompat.h: Provides macros and functions that are missing in
