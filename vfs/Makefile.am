@@ -111,7 +111,6 @@ SAMBA_DIST =			\
 	include/charset.h	\
 	include/client.h	\
 	include/config.h.in	\
-	include/dlinklist.h	\
 	include/includes.h	\
 	include/kanji.h		\
 	include/local.h		\
