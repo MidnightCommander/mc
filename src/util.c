@@ -242,10 +242,10 @@ char *size_trunc (double size)
     
     if (size > 999999999L){
 	divisor = 1024;
-	xtra = "Kb";
+	xtra = "K";
 	if (size/divisor > 999999999L){
 	    divisor = 1024*1024;
-	    xtra = "Mb";
+	    xtra = "M";
 	}
     }
     g_snprintf (x, sizeof (x), "%.0f%s", (size/divisor), xtra);

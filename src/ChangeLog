@@ -1,3 +1,9 @@
+2003-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* util.c (size_trunc): Remove "b" from the output - it's
+	redundant and wrong - the abbreviation for byte is "B".
+	Reported by Werner Lemberg <wl@gnu.org>
+
 2003-01-20  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (string_file_type): Check for "regularity" before
