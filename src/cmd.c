@@ -1021,9 +1021,8 @@ do_link (int symbolic_link, char *fname)
 {
     char *dest, *src;
 
-    if (!symbolic_link){
-        src = g_strconcat (_(" Link "), name_trunc (fname, 46), 
-            _(" to:"), NULL);
+    if (!symbolic_link) {
+	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
 	dest = input_expand_dialog (_(" Link "), src, "");
 	g_free (src);
 	if (!dest)
@@ -1034,7 +1033,8 @@ do_link (int symbolic_link, char *fname)
 	}
 	save_cwds_stat ();
 	if (-1 == mc_link (fname, dest))
-	    message (1, MSG_ERROR, _(" link: %s "), unix_error_string (errno));
+	    message (1, MSG_ERROR, _(" link: %s "),
+		     unix_error_string (errno));
     } else {
 	char *s;
 	char *d;
@@ -1048,15 +1048,15 @@ do_link (int symbolic_link, char *fname)
 	    d = g_strdup (fname);
 	}
 
-        symlink_dialog (s, d, &dest, &src);
+	symlink_dialog (s, d, &dest, &src);
 	g_free (d);
 	g_free (s);
 
 	if (!dest || !*dest || !src || !*src) {
 	    if (src)
-	        g_free (src);
+		g_free (src);
 	    if (dest)
-	        g_free (dest);
+		g_free (dest);
 	    return;
 	}
 	save_cwds_stat ();
@@ -1125,19 +1125,21 @@ void edit_symlink_cmd (void)
     }
 }
 
-void other_symlink_cmd (void)
+void
+other_symlink_cmd (void)
 {
     char *dest, *q, *p, *r, *s, *t;
 
     if (get_other_type () != view_listing)
-        return;
+	return;
 
     if (!strcmp (selection (opanel)->fname, ".."))
-        return;
+	return;
     p = concat_dir_and_file (cpanel->cwd, selection (cpanel)->fname);
     r = concat_dir_and_file (opanel->cwd, selection (cpanel)->fname);
-    
-    q = g_strconcat (_(" Link symbolically "), name_trunc (p, 32), _(" to:"), NULL);
+
+    q = g_strdup_printf (_("Link symbolically %s to:"),
+			 name_trunc (p, 32));
     dest = input_expand_dialog (_(" Relative symlink "), q, r);
     if (dest) {
 	if (*dest) {
@@ -1149,11 +1151,11 @@ void other_symlink_cmd (void)
 		if (s) {
 		    save_cwds_stat ();
 		    if (-1 == mc_symlink (dest, s))
-		        message (1, MSG_ERROR, _(" relative symlink: %s "),
+			message (1, MSG_ERROR, _(" relative symlink: %s "),
 				 unix_error_string (errno));
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
-		   g_free (s);
+		    g_free (s);
 		}
 	    }
 	}

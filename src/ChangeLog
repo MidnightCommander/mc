@@ -1,3 +1,9 @@
+2002-09-16  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (do_link): Avoid using g_strconcat() on translatable
+	strings.
+	(other_symlink_cmd): Likewise.
+
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Remove advanced_chfns variable.  Adjust all
