@@ -395,6 +395,8 @@ GnomeUIInfo gnome_panel_edit_menu [] = {
 	{ GNOME_APP_UI_ITEM,  N_("Select _All"),        N_("Select all files in the current Panel"), gnome_select_all_cmd,
 	  NULL, NULL, 0, NULL, 'a', GDK_CONTROL_MASK  },
 	GNOMEUIINFO_ITEM_NONE(N_("_Select Files..."),  N_("Select a group of files"), gnome_select),
+	GNOMEUIINFO_ITEM_NONE(N_("_Invert Selection"), N_("Reverses the list of tagged files"),
+			      gnome_reverse_selection_cmd_panel),
 	GNOMEUIINFO_SEPARATOR,
 	{ GNOME_APP_UI_ITEM, N_("Search"),		N_("Search for a file in the current Panel"), gnome_start_search,
 	  NULL, NULL, 0, NULL, 's', GDK_CONTROL_MASK  },

@@ -1,3 +1,22 @@
+1999-08-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gscreen.c (panel_fill_panel_list): Select or unselect the rows
+	as appropriate, not just select them.  This is needed because the
+	clist changes the selection under us when appending rows.
+	Finally, do not call select_item() at the end; just reset the
+	panel->selected value.
+	(panel_fill_panel_icons): Likewise.
+	(tree_drag_open_directory): Disabled the auto-collapse
+	functionality yet again, since it has numerous problems.  BUGFIX:
+	GNOME bug tracker #1656.
+
+	* gcmd.c (gnome_reverse_selection_cmd_panel): Re-enabled this
+	function.  The reverse selection bug was somewhere else after all.
+
+	* glayout.c (gnome_panel_edit_menu): Re-inserted the item for
+	reverse selection.  It was pointing to the wrong callback, that is
+	why it never worked.
+
 1999-08-12  Federico Mena Quintero  <federico@redhat.com>
 
 	* gtkdtree.c (scan_subtree): Scan the subtree unconditionally, as

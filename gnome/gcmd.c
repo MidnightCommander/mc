@@ -646,19 +646,20 @@ gnome_start_search (GtkWidget *widget, WPanel *panel)
 }
 
 void
-gnome_reverse_selection_cmd_panel (WPanel *panel)
+gnome_reverse_selection_cmd_panel (GtkWidget *widget, WPanel *panel)
 {
-    file_entry *file;
-    int i;
+	file_entry *file;
+	int i;
 
-    for (i = 0; i < panel->count; i++){
-	    if (!strcmp (panel->dir.list [i].fname, "..")) {
-		    continue;
-	    }
-	    file = &panel->dir.list [i];
-	    do_file_mark (panel, i, !file->f.marked);
-    }
-    paint_panel (panel);
+	for (i = 0; i < panel->count; i++) {
+		if (!strcmp (panel->dir.list [i].fname, ".."))
+			continue;
+
+		file = &panel->dir.list [i];
+		do_file_mark (panel, i, !file->f.marked);
+	}
+
+	paint_panel (panel);
 }
 
 void

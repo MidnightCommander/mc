@@ -230,13 +230,17 @@ panel_fill_panel_list (WPanel *panel)
 
 		if (fe->f.marked)
 			gtk_clist_select_row (cl, i, 0);
+		else
+			gtk_clist_unselect_row (cl, i, 0);
 
 	}
+
+	g_free (texts);
+
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
-	select_item (panel);
+
 	gtk_clist_thaw (GTK_CLIST (cl));
-	 g_free (texts);
 }
 
 /*
@@ -245,40 +249,32 @@ panel_fill_panel_list (WPanel *panel)
 static void
 panel_fill_panel_icons (WPanel *panel)
 {
-	GnomeIconList *icons = ILIST_FROM_SW (panel->icons);
 	const int top       = panel->count;
 	const int selected  = panel->selected;
+	GnomeIconList *icons = ILIST_FROM_SW (panel->icons);
 	int i;
 	GdkImlibImage *image;
 
 	gnome_icon_list_freeze (icons);
 	gnome_icon_list_clear (icons);
-#if 0
-	/*
-	 * HACK_BEGIN:
-	 *    Temporary hack for pre-gnome-libs-1.0.10
-	 *
-	 *    Remove after wildely deployed
-	 */
-	icons->last_selected = 0;
-	icons->last_clicked = 0;
-	/*
-	 * HACK_END:
-	 */
-#endif
+
 	for (i = 0; i < top; i++) {
 		file_entry *fe = &panel->dir.list [i];
 		int p;
 
 		image = gicon_get_icon_for_file (panel->cwd, fe, TRUE);
 		p = gnome_icon_list_append_imlib (icons, image, fe->fname);
+
 		if (fe->f.marked)
 			gnome_icon_list_select_icon (icons, p);
+		else
+			gnome_icon_list_unselect_icon (icons, p);
 	}
-	/* This is needed as the gtk_clist_append changes selected under us :-( */
+
+	/* This is needed as the gtk_gnome_icon_list_append_imlib changes selected under us :-( */
 	panel->selected = selected;
+
 	gnome_icon_list_thaw (icons);
-	select_item (panel);
 }
 
 /*
@@ -1827,7 +1823,10 @@ tree_drag_open_directory (gpointer data)
 	g_assert (node != NULL);
 
 	if (!GTK_CTREE_ROW (node)->expanded) {
+#if 0
+		/* FIXME: Disabled until fully debugged.  Should also be configurable. */
 		dtree->auto_expanded_nodes = g_list_append (dtree->auto_expanded_nodes, node);
+#endif
 		gtk_ctree_expand (GTK_CTREE (panel->tree), node);
 	}
 
