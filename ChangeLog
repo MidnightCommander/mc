@@ -1,3 +1,8 @@
+2002-03-12  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in (AC_CONFIG_FILES): Add doc/ru/Makefile.am.
+	* doc/ru/Makefile.am: New file.
+
 2002-03-08  Pavel Roskin  <proski@gnu.org>
 
 	* doc/Makefile.am (EXTRA_DIST): Distribute doc/ru/mc.1.
@@ -2161,4 +2166,3 @@ Thu Nov 26 12:20:06 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 	* configure.in: Use MC_HPUX_PROG_CC_STDC
 
 	* ChangeLog: There was no ChangeLog here, so I added one.
->>>>>>> 1.417
