@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "POT-Creation-Date: 1999-12-01 16:58+0100\n"
-"PO-Revision-Date: 1999-12-01 21:20+01:00\n"
+"PO-Revision-Date: 1999-12-06 03:11+01:00\n"
 "Last-Translator: Birger Langkjer <birger.langkjer@image.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -405,7 +405,7 @@ msgstr "Opretter en ny mappe"
 
 #: gnome/gdesktop.c:2624
 msgid "URL L_ink..."
-msgstr "URL-gen_vej..."
+msgstr "_URL-genvej..."
 
 #: gnome/gdesktop.c:2624
 msgid "Creates a new URL link"
@@ -425,7 +425,7 @@ msgstr "Efter _navn"
 
 #: gnome/gdesktop.c:2632
 msgid "By File _Type"
-msgstr "Efter fil_type"
+msgstr "Efter _filtype"
 
 #: gnome/gdesktop.c:2633
 msgid "By _Size"
@@ -1164,7 +1164,7 @@ msgstr "Ikon"
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
 msgid "File Actions"
-msgstr "Filhandling"
+msgstr "Filbehandling"
 
 #: gnome/gnome-file-property-dialog.c:616
 msgid "Open action"
