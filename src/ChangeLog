@@ -1,5 +1,8 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove declarations of non-existent functions.
+	[HAVE_X]: Disable color constants - they shouldn't be used.
+
 	* boxes.c [WITH_SMBFS] (vfs_smb_get_authinfo): Copied from
 	vfs/smbfs.c, function authinfo_get_authinfo_from_user().
 

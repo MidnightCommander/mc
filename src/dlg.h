@@ -2,11 +2,13 @@
 #define MC_DLG_H
 #include "mouse.h"
 
+#ifndef HAVE_X
 /* Color constants */
 #define FOCUSC           h->color[1]
 #define NORMALC          h->color[0]
 #define HOT_NORMALC      h->color[2]
 #define HOT_FOCUSC       h->color[3]
+#endif /* !HAVE_X */
 
 /* Possible directions */
 #define DIR_FORWARD     1
@@ -252,11 +254,6 @@ typedef void (*movefn)(void *, int);
 
 /* Layout definitions */
 
-void xv_Layout (void *first_widget, ...);
-void tk_layout (void *first_widget, ...);
-void tk_new_frame (Dlg_head *, char *);
-void tk_frame (Dlg_head *, char *);
-void tk_end_frame (void);
 void x_set_dialog_title (Dlg_head *h, const char *title);
 
 /* The inner workings of run_dlg, exported for the Tk and XView toolkits */
