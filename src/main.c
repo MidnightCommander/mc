@@ -2124,11 +2124,6 @@ probably_finish_program (void)
     }
 }
 
-enum {
-	GEOMETRY_KEY = -1,
-	NOWIN_KEY    = -2
-};
-
 static void
 process_args (poptContext ctx, int c, const char *option_arg)
 {
@@ -2367,7 +2362,7 @@ do_compatibility_move (char *mc_dir)
 
 	move = do_mc_filename_rename (mc_dir, ".mc.ini", "ini");
 	move += do_mc_filename_rename (mc_dir, ".mc.hot", "hotlist");
-	move += do_mc_filename_rename (mc_dir, ".mc.ext", "ext");
+	move += do_mc_filename_rename (mc_dir, ".mc.ext", "bindings");
 	move += do_mc_filename_rename (mc_dir, ".mc.menu", "menu");
 	move += do_mc_filename_rename (mc_dir, ".mc.bashrc", "bashrc");
 	move += do_mc_filename_rename (mc_dir, ".mc.inputrc", "inputrc");
@@ -2438,9 +2433,8 @@ main (int argc, char *argv [])
 	        if (!strcmp (p, ttyname (2)))
 	            dup2 (2, 1);
 	        else {
-	            fprintf (stderr,
-	            	     _("Couldn't open tty line. You have to run mc without the -P flag.\n"
-			       "On some systems you may want to run # `which mc`\n"));
+	            fputs (_("Couldn't open tty line. You have to run mc without the -P flag.\n"
+			     "On some systems you may want to run # `which mc`\n"), stderr);
 		    exit (1);
 	        }
 	        g_free (p);
