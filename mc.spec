@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      4.1.33
+%define ver      4.1.34
 %define rel      SNAP
 %define prefix   /usr
 
