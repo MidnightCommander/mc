@@ -1,5 +1,11 @@
 2002-12-12  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/apt.in: Fix Y2K bug.
+	* extfs/deba.in: Likewise.
+	* extfs/debd.in: Likewise.
+	* extfs/dpkg.in: Likewise.
+	Reported by Adam Byrtek <alpha@debian.org>
+
 	* extfs/patchfs.in: Print 4-digit year.  If str2time is not
 	available, use current time, not 0.
 
