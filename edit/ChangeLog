@@ -1,3 +1,8 @@
+2002-11-30  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_set_search_parameters): Use g_malloc().
+	(edit_complete_word_cmd): Use g_free().
+
 2002-11-29  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Don't define HAVE_SYNTAXH.
