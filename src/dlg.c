@@ -47,20 +47,6 @@ Dlg_head *current_dlg = 0;
 /* A hook list for idle events */
 Hook *idle_hook = 0;
 
-#ifndef HAVE_X
-#   define x_set_idle(d,x)
-#   define x_dialog_stop(d)
-#endif /* HAVE_X */
-
-#ifdef HAVE_X
-void widget_erase (Widget *w)
-{
-}
-
-void dlg_erase (Dlg_head *h)
-{
-}
-#else
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     move (h->y+y, h->x+x);
@@ -97,7 +83,7 @@ void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
     vline (ACS_VLINE, ys - 2);
 #else
     SLsmg_draw_box (h->y+y, h->x+x, ys, xs);
-#endif
+#endif /* HAVE_SLANG */
 }
 
 /* draw box in window */
@@ -107,7 +93,7 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
     draw_box (h, y, x, ys, xs);
 #else
     SLsmg_draw_double_box (h->y+y, h->x+x, ys, xs);
-#endif
+#endif /* HAVE_SLANG */
 }
 
 void widget_erase (Widget *w)
@@ -132,7 +118,6 @@ void dlg_erase (Dlg_head *h)
 	}
     }
 }
-#endif /* HAVE_X */
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  int (*callback)(Dlg_head *, void *, int, int),
@@ -208,9 +193,6 @@ int default_dlg_callback (Dlg_head *h, int id, int msg)
     return 0;
 }
 
-#ifdef HAVE_X
-int midnight_callback (struct Dlg_head *h, int id, int msg);
-#endif
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      int *color_set,
 		      int (*callback) (struct Dlg_head *, int, int),
@@ -219,12 +201,10 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 {
     Dlg_head *new_d;
 
-#ifndef HAVE_X
     if (flags & DLG_CENTER){
 	y1 = (LINES-lines)/2;
 	x1 = (COLS-cols)/2;
     }
-#endif
 
     if ((flags & DLG_TRYUP) && (y1 > 3))
 	y1 -= 2;
@@ -239,19 +219,12 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->cols = cols;
     new_d->lines = lines;
     new_d->name = name;
-#ifdef HAVE_X
-    if (callback != midnight_callback)
-        new_d->wdata = xtoolkit_create_dialog (new_d, flags);
-    else
-    	new_d->wdata = xtoolkit_get_main_dialog (new_d);
-#endif
     return (new_d);
 }
 
 void set_idle_proc (Dlg_head *d, int state)
 {
     d->send_idle_msg = state;
-    x_set_idle (d, state);
 }
 
 /* add component to dialog buffer */
@@ -314,9 +287,6 @@ int add_widget (Dlg_head *where, void *what)
     if (where->running){
 	send_message (where, widget, WIDGET_INIT, 0);
 	send_message (where, widget, WIDGET_DRAW, 0);
-#ifdef HAVE_GNOME
-	x_add_widget (where, where->current);
-#endif
     }
     return (where->count - 1);
 }
@@ -371,9 +341,6 @@ int send_message (Dlg_head *h, Widget *w, int msg, int par)
 void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
     Widget_Item *p, *first, *wi;
-#ifdef HAVE_GNOME
-    int was_panel;
-#endif
 
     if (!h->current)
 	    return;
@@ -381,35 +348,16 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
     if (reverse)
 	first = p = h->current->prev;
     else
-	/* FIXME: On XView the layout for the widget->next widget is
-	   invoked, and we should change the buttons order on query_dialog
-	   in order to use the HAVE_X part of the statement */
-#ifdef HAVE_X
-	first = p = h->current;
-#else
 	first = p = h->current->next;
-#endif
 
-#ifdef HAVE_GNOME
-    was_panel = FALSE;
-#endif
     do {
 	wi = p;
 	if (reverse)
 	    p = p->prev;
 	else
 	    p = p->next;
-/*	if (p->widget->options & flags) */
-#ifdef HAVE_GNOME
-	if (is_a_panel (wi->widget))
-	    was_panel |= TRUE;
-#endif
 	send_message (h, wi->widget, message, 0);
     } while (first != p);
-#ifdef HAVE_GNOME
-    if (was_panel && message == WIDGET_INIT)
-	h->current = h->current->prev;
-#endif
 }
 
 /* broadcast a message to all the widgets in a dialog */
@@ -611,7 +559,6 @@ void dlg_refresh (void *parameter)
 void dlg_stop (Dlg_head *h)
 {
     h->running = 0;
-    x_dialog_stop (h);
 }
 
 static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
@@ -632,7 +579,6 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	do_refresh ();
 	break;
 
-#ifndef HAVE_X
     case XCTRL('z'):
 	suspend_cmd ();
 	/* Fall through */
@@ -647,14 +593,12 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 #endif /* HAVE_SLANG */
 	mc_refresh ();
 	doupdate ();
-#endif /* !HAVE_X */
 	break;
 
     case '\n':
     case KEY_ENTER:
 	h->ret_value = B_ENTER;
 	h->running = 0;
-	x_dialog_stop (h);
 	break;
 
     case ESC_CHAR:
@@ -818,15 +762,11 @@ void init_dlg (Dlg_head *h)
     (*h->callback) (h, 0, DLG_INIT);
     dlg_broadcast_msg (h, WIDGET_INIT, 0);
 
-#ifdef HAVE_X
-    refresh_mode = REFRESH_COVERS_PART;
-#else
     if (h->x == 0 && h->y == 0 && h->cols == COLS && h->lines == LINES)
 	refresh_mode = REFRESH_COVERS_ALL;
     else
 	refresh_mode = REFRESH_COVERS_PART;
 
-#endif
     push_refresh (dlg_refresh, h, refresh_mode);
     h->refresh_pushed = 1;
 
@@ -887,7 +827,6 @@ void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 	dlg_key_event (h, key);
 }
 
-#ifndef HAVE_X
 static inline void
 frontend_run_dlg (Dlg_head *h)
 {
@@ -920,7 +859,6 @@ frontend_run_dlg (Dlg_head *h)
 	dlg_process_event (h, d_key, &event);
     }
 }
-#endif /* HAVE_X */
 
 /* Standard run dialog routine
  * We have to keep this routine small so that we can duplicate it's
@@ -930,11 +868,7 @@ frontend_run_dlg (Dlg_head *h)
 void run_dlg (Dlg_head *h)
 {
     init_dlg (h);
-#ifdef HAVE_X
-    gtkrundlg_event (h);
-#else
     frontend_run_dlg (h);
-#endif /* !HAVE_X */
     dlg_run_done (h);
 }
 
@@ -965,10 +899,8 @@ destroy_dlg (Dlg_head *h)
     x_destroy_dlg (h);
     g_free (h);
 
-#ifndef HAVE_X
     if (refresh_list)
 	do_refresh ();
-#endif
 }
 
 int std_callback (Dlg_head *h, int Msg, int Par)
@@ -1062,11 +994,9 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
     return dlg_select_widget (h, w->widget);
 }
 
-#ifndef HAVE_X
 void
 x_set_dialog_title (Dlg_head *h, const char *title)
 {
   h->title = g_strdup (title);
 }
-#endif /* !HAVE_X */
 

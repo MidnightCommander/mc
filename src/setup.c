@@ -58,12 +58,6 @@
 #   include "../vfs/ftpfs.h"
 #endif
 
-#ifdef HAVE_GNOME
-extern int tree_panel_visible;
-extern int we_can_afford_the_speed;
-int use_magic = 0;
-#endif
-
 /* "$Id$" */
 
 #ifdef USE_VFS
@@ -130,7 +124,6 @@ static const struct {
     { 0, 0 }
 };
 
-#ifndef HAVE_GNOME
 static const struct {
     char *opt_name;
     int *opt_addr;
@@ -148,7 +141,6 @@ static const struct {
     { "filetype_mode", &filetype_mode },
     { 0, 0 }
 };
-#endif
 
 
 #undef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
@@ -162,11 +154,7 @@ static const struct {
     int  *opt_addr;
 } options [] = {
     { "show_backups", &show_backups },
-#ifdef HAVE_GNOME
-    { "gnome_show_dot_files", &show_dot_files },
-#else
     { "show_dot_files", &show_dot_files },
-#endif
     { "verbose", &verbose },
     { "mark_moves_down", &mark_moves_down },
     { "pause_after_run", &pause_after_run },
@@ -185,15 +173,13 @@ static const struct {
     { "confirm_execute", &confirm_execute },
     { "confirm_exit", &confirm_exit },
     { "safe_delete", &know_not_what_am_i_doing },
-#ifndef HAVE_X
     { "mouse_repeat_rate", &mou_auto_repeat },
     { "double_click_speed", &double_click_speed },
 #ifndef HAVE_CHARSET
     { "eight_bit_clean", &eight_bit_clean },
     { "full_eight_bits", &full_eight_bits },
-#endif
+#endif /* !HAVE_CHARSET */
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
-#endif
     { "confirm_view_dir", &confirm_view_dir },
     { "mouse_move_pages", &mouse_move_pages },
     { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
@@ -202,15 +188,10 @@ static const struct {
     { "advanced_chown", &advanced_chfns },
     { "drop_menus", &drop_menus },
     { "wrap_mode",  &global_wrap_mode},
-#ifndef HAVE_X
     { "old_esc_mode", &old_esc_mode },
     { "cd_symlinks", &cd_symlinks },
-#endif
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
     { "have_fast_cpu", &have_fast_cpu },
-#if 0
-    { "iconify_on_exec", &iconify_on_exec },
-#endif
     { "torben_fj_mode", &torben_fj_mode },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &alternate_plus_minus },
@@ -220,16 +201,13 @@ static const struct {
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
-#ifdef HAVE_GNOME
-    { "use_magic", &use_magic },
-#endif
 #ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
     { "dive_into_subdirs", &dive_into_subdirs },
     { "preserve_uidgid", &preserve_uidgid },
     /* What about the other two options in the copy dialog
        (follow links, stable symlinks) -Norbert */
     { "tree_navigation_flag", &tree_navigation_flag },
-#endif
+#endif /* SAVE_CHANGES_OUTSIDE_OPTIONS_MENU */
 #ifdef USE_VFS
     { "vfs_timeout", &vfs_timeout },
 #ifdef USE_NETCODE
@@ -240,8 +218,8 @@ static const struct {
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
-#endif
-#endif
+#endif /* USE_NETCODE */
+#endif /* USE_VFS */
 #ifdef USE_INTERNAL_EDIT
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
     { "editor_key_emulation", &edit_key_emulation },
@@ -256,45 +234,10 @@ static const struct {
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },
     { "editor_edit_confirm_save", &edit_confirm_save },
     { "editor_syntax_highlighting", &option_syntax_highlighting },
-#endif
+#endif /* USE_INTERNAL_EDIT */
 
-#ifdef HAVE_GNOME
-    { "desktop_use_shaped_icons", &desktop_use_shaped_icons },
-    { "desktop_use_shaped_text", &desktop_use_shaped_text },
-    { "desktop_auto_placement", &desktop_auto_placement },
-    { "desktop_snap_icons", &desktop_snap_icons },
-    { "desktop_arr_r2l", &desktop_arr_r2l },
-    { "desktop_arr_b2t", &desktop_arr_b2t },
-    { "desktop_arr_rows", &desktop_arr_rows },
-    { "tree_panel_visible", &tree_panel_visible },
-    { "we_can_afford_the_speed", &we_can_afford_the_speed },
-
-    /* Keep the following in sync with panel.h */
-    { "column_width_brief_icon", &default_column_width[0] },
-    { "column_width_brief_filename", &default_column_width[1] },
-    { "column_width_detailed_icon", &default_column_width[2] },
-    { "column_width_detailed_filename", &default_column_width[3] },
-    { "column_width_detailed_size", &default_column_width[4] },
-    { "column_width_detailed_mtime", &default_column_width[5] },
-    { "column_width_custom_0", &default_column_width[6] },
-    { "column_width_custom_1", &default_column_width[7] },
-    { "column_width_custom_2", &default_column_width[8] },
-    { "column_width_custom_3", &default_column_width[9] },
-    { "column_width_custom_4", &default_column_width[10] },
-    { "column_width_custom_5", &default_column_width[11] },
-    { "column_width_custom_6", &default_column_width[12] },
-    { "column_width_custom_7", &default_column_width[13] },
-    { "column_width_custom_8", &default_column_width[14] },
-    { "column_width_custom_9", &default_column_width[15] },
-    { "column_width_custom_10", &default_column_width[16] },
-    { "column_width_custom_11", &default_column_width[17] },
-    { "column_width_custom_12", &default_column_width[18] },
-    { "column_width_custom_13", &default_column_width[19] },
-    { "column_width_custom_14", &default_column_width[20] },
-#else
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split",   &horizontal_split },
-#endif
     { 0, 0 }
 };
 
@@ -335,7 +278,6 @@ panel_save_setup (WPanel *panel, char *section)
 			       profile_name);
 }
 
-#ifndef HAVE_X
 void
 save_layout (void)
 {
@@ -353,7 +295,6 @@ save_layout (void)
 
     g_free (profile);
 }
-#endif /* !HAVE_X */
 
 void
 save_configure (void)
@@ -366,10 +307,6 @@ save_configure (void)
     /* Save integer options */
     for (i = 0; options [i].opt_name; i++)
 	set_int (profile, options [i].opt_name, *options [i].opt_addr);
-
-#ifdef HAVE_GNOME
-    save_string (app_text, "default_user_format", default_user_format, profile_name);
-#endif
 
     g_free (profile);
 }
@@ -414,7 +351,6 @@ save_setup (void)
 
     save_configure ();
 
-#ifndef HAVE_X
     save_layout ();
     save_string ("Dirs", "other_dir",
 			       get_other_type () == view_listing
@@ -423,26 +359,23 @@ save_setup (void)
 	    WritePrivateProfileString ("Dirs", "current_is_left",
 				       get_current_index () == 0 ? "1" : "0", profile);
     save_hotlist ();
-#endif /* !HAVE_X */
 
     save_panelize ();
     save_panel_types ();
 /*     directory_history_save (); */
 
-#ifdef USE_VFS
-#ifdef USE_NETCODE
+#if defined(USE_VFS) && defined (USE_NETCODE)
     WritePrivateProfileString ("Misc", "ftpfs_password",
 			       ftpfs_anonymous_passwd, profile);
     if (ftpfs_proxy_host)
 	WritePrivateProfileString ("Misc", "ftp_proxy_host",
 				   ftpfs_proxy_host, profile);
-#endif
-#endif
+#endif /* USE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     save_string( "Misc", "display_codepage",
     		 get_codepage_id( display_codepage ), profile_name );
-#endif
+#endif /* HAVE_CHARSET */
 
     g_free (profile);
     saving_setup = 0;
@@ -500,7 +433,6 @@ panel_load_setup (WPanel *panel, char *section)
 
 }
 
-#ifndef HAVE_X
 static void
 load_layout (char *profile_name)
 {
@@ -511,7 +443,6 @@ load_layout (char *profile_name)
 	    load_int ("Layout", layout [i].opt_name,
 				  *layout [i].opt_addr);
 }
-#endif /* !HAVE_X */
 
 static int
 load_mode (char *section)
@@ -582,12 +513,7 @@ load_setup (void)
 	*options [i].opt_addr =
 	    get_int (profile, options [i].opt_name, *options [i].opt_addr);
 
-#ifdef HAVE_X
-    g_free (default_user_format);
-    default_user_format = do_load_string (app_text, "default_user_format", DEFAULT_USER_FORMAT);
-#else
     load_layout (profile);
-#endif
 
     load_panelize ();
 
@@ -598,7 +524,6 @@ load_setup (void)
     if (startup_left_mode != view_listing && startup_right_mode!=view_listing)
 	startup_left_mode = view_listing;
 
-#ifndef HAVE_X
     if (!other_dir){
 	char *buffer;
 
@@ -613,7 +538,6 @@ load_setup (void)
 
     boot_current_is_left =
 	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);
-#endif /* !HAVE_X */
 
 #ifdef USE_NETCODE
     ftpfs_proxy_host = do_load_string ("Misc", "ftp_proxy_host", "gate");
@@ -637,11 +561,9 @@ load_setup (void)
     /* Remove the temporal entries */
     profile_clean_section ("Temporal:New Left Panel", profile_name);
     profile_clean_section ("Temporal:New Right Panel", profile_name);
-#ifdef USE_VFS
-#ifdef USE_NETCODE
+#if defined(USE_VFS) && defined (USE_NETCODE)
     ftpfs_init_passwd ();
-#endif
-#endif
+#endif /* USE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() > 0 ) {
@@ -654,11 +576,10 @@ load_setup (void)
 
     init_printable_table( display_codepage );
     init_translation_table( source_codepage, display_codepage );
-#endif
+#endif /* HAVE_CHARSET */
 }
 
-#ifdef USE_VFS
-#ifdef USE_NETCODE
+#if defined(USE_VFS) && defined (USE_NETCODE)
 char *
 load_anon_passwd ()
 {
@@ -670,20 +591,16 @@ load_anon_passwd ()
     else
 	return 0;
 }
-#endif
-#endif
+#endif /* USE_VFS && USE_NETCODE */
 
 void done_setup (void)
 {
     g_free (profile_name);
-#ifndef HAVE_X
     done_hotlist ();
-#endif /* HAVE_X */
     done_panelize ();
 /*    directory_history_free (); */
 }
 
-#ifndef HAVE_X
 static void
 load_keys_from_section (char *terminal, char *profile_name)
 {
@@ -732,4 +649,3 @@ void load_key_defs (void)
     free_profile_name (libfile);
     g_free (libfile);
 }
-#endif

@@ -2,13 +2,11 @@
 #define MC_DLG_H
 #include "mouse.h"
 
-#ifndef HAVE_X
 /* Color constants */
 #define FOCUSC           h->color[1]
 #define NORMALC          h->color[0]
 #define HOT_NORMALC      h->color[2]
 #define HOT_FOCUSC       h->color[3]
-#endif /* !HAVE_X */
 
 /* Possible directions */
 #define DIR_FORWARD     1
@@ -108,9 +106,6 @@ typedef struct Dlg_head {
     
     widget_data wdata;
     int  grided;	/* Does it use the automatic layout? */
-#ifdef HAVE_GNOME
-    int  idle_fn_tag;	/* Tag for the idle routine, -1 if none */
-#endif
 } Dlg_head;
 
 /* Every Widget must have this as it's first element */
@@ -210,16 +205,11 @@ int default_dlg_callback  (Dlg_head *h, int id, int msg);
 int std_callback          (Dlg_head *h, int Msg, int Par);
 int default_proc          (Dlg_head *h, int Msg, int Par);
 
-#ifdef HAVE_X
-#define widget_move(w,y,x)
-#define dlg_move(h,y,x)
-#else
 #define real_widget_move(w, _y, _x) move((w)->y + _y, (w)->x + _x)
 #define dlg_move(h, _y, _x) move(((Dlg_head *) h)->y + _y, \
 			     ((Dlg_head *) h)->x + _x)
 
 #define widget_move(w,y,x) real_widget_move((Widget*)w,y,x)
-#endif
 
 extern Dlg_head *current_dlg;
 
@@ -260,21 +250,11 @@ void x_set_dialog_title (Dlg_head *h, const char *title);
 int  dlg_key_event (Dlg_head *h, int d_key);
 void update_cursor (Dlg_head *h);
 
-#ifdef HAVE_X
-extern Dlg_head *midnight_dlg;
-void x_focus_widget      (Widget_Item *p);
-void x_unfocus_widget    (Widget_Item *p);
-void x_init_dlg          (Dlg_head *h);
-void x_destroy_dlg       (Dlg_head *h);
-void x_destroy_dlg_start (Dlg_head *h);
-void x_set_idle          (Dlg_head *h, int enable_idle);
-void x_dialog_stop       (Dlg_head *h);
-#else
-#    define x_focus_widget(x) {}
-#    define x_unfocus_widget(x) {}
-#    define x_init_dlg(x)     {}
-#    define x_destroy_dlg(x)  {}
-#    define x_destroy_dlg_start(x) {}
-#endif
+/* FIXME: Remove those functions */
+#define x_focus_widget(x) {}
+#define x_unfocus_widget(x) {}
+#define x_init_dlg(x)     {}
+#define x_destroy_dlg(x)  {}
+#define x_destroy_dlg_start(x) {}
 
 #endif /* MC_DLG_H */

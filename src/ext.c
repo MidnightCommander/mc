@@ -287,25 +287,16 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     	q[1] = 0;
     	do_cd (p, cd_parse_command);
     } else {
-#ifdef HAVE_X
-	if (needs_term)
-            gnome_open_terminal_with_cmd (file_name);
-	else
-	    shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
-#else
 	shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
-	if (console_flag)
-	{
+	if (console_flag) {
 	    handle_console (CONSOLE_SAVE);
-	    if (output_lines && keybar_visible)
-	    {
+	    if (output_lines && keybar_visible) {
 		show_console_contents (output_start_y,
 				       LINES-keybar_visible-output_lines-1,
 				       LINES-keybar_visible-1);
 
 	    }
 	}
-#endif /* !HAVE_X */
     }
     if (file_name) {
 	g_free (file_name);
@@ -342,7 +333,6 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
  */
-#ifndef HAVE_GNOME
 char *regex_command_title = NULL;
 char *regex_command (char *filename, char *action, char **drops, int *move_dir)
 {
@@ -684,4 +674,3 @@ match_file_output:
     easy_patterns = old_patterns;
     return to_return;
 }
-#endif /* !HAVE_GNOME */
