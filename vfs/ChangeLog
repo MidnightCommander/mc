@@ -1,3 +1,8 @@
+2001-10-02  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* sfc.c (sfs_getid): Don't use vfs_die(), return (vfsid)(-1)
+	instead.
+
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h [!USE_VFS]: Define macros with no effect to an empty

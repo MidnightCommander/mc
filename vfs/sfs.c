@@ -220,10 +220,11 @@ static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 	    break;
 	cur = cur->next;
     }
-    if (!cur)
-        vfs_die( "sfs_getid of noncached thingie?" );
 
     *parent = NULL;
+
+    if (!cur)
+	return (vfsid)(-1);
 
     {
         char *path2 = g_strdup (path);
