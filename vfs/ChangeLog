@@ -1,3 +1,11 @@
+Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+
+	* extfs/patchfs: %k replaced with more portable %H in the format
+	for "date" command
+
+	* extfs/extfs.ini: Added patchfs and mailfs. Some comments
+	changed
+
 Tue Aug 11 15:25:52 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 
 	* extfs/rpm: Fix for buggy "cut" on HP-UX 10.20 which ignores

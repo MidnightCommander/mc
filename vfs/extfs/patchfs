@@ -13,7 +13,7 @@ filelist=FILELIST         # names for "special" files
 
 patchfs_list ()
 {
-    date=`date +"%b %d %k:%M"`
+    date=`date +"%b %d %H:%M"`
     perm="-r--r--r--"
     uid=00000000
     gid=00000000
