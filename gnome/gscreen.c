@@ -458,7 +458,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 {
 	int current_selection = panel->selected;
 
-	printf ("Selecting %d %p, %d\n", row, event, event ? event->type : -1);
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
@@ -466,7 +465,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 
 	switch (event->type) {
 	case GDK_BUTTON_RELEASE:
-		printf ("1\n");
 		gtk_clist_unselect_row (CLIST_FROM_SW (panel->list), row, 0);
 		internal_select_item (file_list, panel, row);
 

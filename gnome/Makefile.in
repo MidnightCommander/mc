@@ -164,10 +164,11 @@ $(CORBA_SOURCES): $(CORBA_GENERATED)
 
 FileManager-impl.c: FileManager.h
 
+EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	
+
 DISTGNOME = \
-	Makefile.in gnome.TODO layout gmc.gnorba	\
-	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 	\
-	$(CORBA_SOURCES)
+	Makefile.in $(EXTRA_DIST) $(CORBA_SOURCES) \
+	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS)
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -201,6 +202,9 @@ image.metadata: image.metadata.in Makefile
 mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/mc.keys.in > mc.keys.tmp \
 	&& mv mc.keys.tmp mc.keys 
+
+mc.keys.in: mc.keys.in.in Makefile.in ../config.status
+	(cd ..; CONFIG_FILES=gnome/mc.keys.in CONFIG_HEADERS= ./config.status)
 
 @LIBVFS@:
 	cd ../vfs; $(MAKE) @LIBVFS@

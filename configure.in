@@ -1258,6 +1258,7 @@ doc/Makefile
 vfs/Makefile:vfs/Make-mc.in
 lib/Makefile
 gnome/Makefile 
+gnome/mc.keys.in
 idl/Makefile
 src/Makefile
 slang/Makefile 
