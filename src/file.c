@@ -715,6 +715,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	    gettimeofday (&tv_current, NULL);
 
 	    if (n_read > 0) {
+		char *t = buf;
 		n_read_total += n_read;
 
 		/* Windows NT ftp servers report that files have no
@@ -729,18 +730,18 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 
 		/* dst_write */
 		while ((n_written =
-			mc_write (dest_desc, buf, n_read)) < n_read) {
+			mc_write (dest_desc, t, n_read)) < n_read) {
 		    if (n_written > 0) {
 			n_read -= n_written;
+			t += n_written;
 			continue;
 		    }
 		    return_status =
 			file_error (_
 				    (" Cannot write target file \"%s\" \n %s "),
 				    dst_path);
-		    if (return_status == FILE_RETRY)
-			continue;
-		    goto ret;
+		    if (return_status != FILE_RETRY)
+			goto ret;
 		}
 	    }
 
@@ -1119,14 +1120,12 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 
     mc_refresh ();
 
-  retry_src_lstat:
-    if (mc_lstat (s, &src_stats) != 0) {
+    while (mc_lstat (s, &src_stats) != 0) {
 	/* Source doesn't exist */
 	return_status =
 	    file_error (_(" Cannot stat file \"%s\" \n %s "), s);
-	if (return_status == FILE_RETRY)
-	    goto retry_src_lstat;
-	return return_status;
+	if (return_status != FILE_RETRY)
+	    return return_status;
     }
 
     if (mc_lstat (d, &dst_stats) == 0) {
@@ -1181,7 +1180,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 #if 0
 /* Comparison to EXDEV seems not to work in nfs if you're moving from
    one nfs to the same, but on the server it is on two different
-   filesystems. Then nfs returns EIO instead of EXDEV. 
+   filesystems. Then nfs returns EIO instead of EXDEV.
    Hope it will not hurt if we always in case of error try to copy/delete. */
     else
 	errno = EXDEV;		/* Hack to copy (append) the file and then delete it */
