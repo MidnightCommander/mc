@@ -3,10 +3,9 @@ context default
 
 context linestart \t \n\n
     keyword wholeright +() brightmagenta/23
-    keyword \*\s*: brightcyan/17
+    keyword linestart \t\*\s*: brightcyan/17
     keyword (*): cyan/16
     keyword (*)\{\s\}[*]: cyan/16
-    keyword whole \* brightcyan/17
 
 context linestart \s\s\s\s\s\s\s\s \n\n
     keyword wholeright +() brightmagenta/23

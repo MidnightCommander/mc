@@ -1,5 +1,8 @@
 2002-07-28  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/changelog.syntax: Highlight "*" only after tab.  This
+	requires fixed syntax highlighting.
+
 	* lib/mc.ext.in: Open *.doc and *.rtf files with abiword by
 	default. Open *.xls with gnumeric.  Use mplayer for most video
 	formats.
