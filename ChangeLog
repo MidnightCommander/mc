@@ -1,5 +1,7 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* Make.common.in: Add -I$(top_srcdir) to XCPPFLAGS.
+
 	* Make.common.in: Remove hpath, it's unused.
 
 	* acconfig.h: Move constant parts ...
