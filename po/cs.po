@@ -4,13 +4,14 @@
 # David Sauer <davids@penguin.cz> (David ©auer), 1999.
 # Michal Svec <rebel@penguin.cz> (Michal ©vec), 2000.
 # Stanislav Brabec <utx@penguin.cz>, 2001, 2002.
+# Miloslav Trmac <mitr@volny.cz>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "POT-Creation-Date: 2003-01-22 02:37-0500\n"
-"PO-Revision-Date: 2002-08-07 11:54+0200\n"
-"Last-Translator: Stanislav Brabec <utx@penguin.cz>\n"
+"PO-Revision-Date: 2003-01-22 18:29+0100\n"
+"Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
@@ -53,7 +54,7 @@ msgstr "U¾ivatelské menu je k dispozici pouze v mcedit volaném z mc"
 
 #: edit/edit.c:2686
 msgid "Macro recursion is too deep"
-msgstr ""
+msgstr "Rekurze maker je pøíli¹ hluboká"
 
 #: edit/edit.h:264
 msgid "&Dismiss"
@@ -689,9 +690,8 @@ msgid "Synta&x highlighting"
 msgstr "zvýraznìní synta&Xe"
 
 #: edit/editoptions.c:91
-#, fuzzy
 msgid "Save file &position"
-msgstr " Ulo¾it soubor "
+msgstr "&Ulo¾it pozici v souboru"
 
 #: edit/editoptions.c:94
 msgid "Confir&m before saving"
@@ -955,9 +955,8 @@ msgid "&Select"
 msgstr "&Výbìr"
 
 #: src/boxes.c:715
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "&Re¾im ukládání..."
+msgstr "pou¾ívat pasivní &Re¾im"
 
 #: src/boxes.c:717
 msgid "&Use ~/.netrc"
@@ -1341,9 +1340,9 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Napi¹ `exit' pro návrat do Midnight Commander-u"
 
 #: src/cmd.c:1059
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " link: %s "
+msgstr "Link %s do:"
 
 #: src/cmd.c:1060
 msgid " Link "
@@ -1401,9 +1400,8 @@ msgid " FTP to machine "
 msgstr " Spojení pøes FTP "
 
 #: src/cmd.c:1310
-#, fuzzy
 msgid " Shell link to machine "
-msgstr " SMB spojení na poèítaè "
+msgstr " Shellové spojení na poèítaè "
 
 #: src/cmd.c:1317 src/widget.c:1050
 msgid " SMB link to machine "
@@ -1451,7 +1449,7 @@ msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-"Adresáø nelze zmìnit na \"%s\" \n"
+" Adresáø nelze zmìnit na \"%s\" \n"
 " %s "
 
 #: src/command.c:198 src/user.c:683
@@ -1531,9 +1529,8 @@ msgid "&Group"
 msgstr "&Skupina"
 
 #: src/dir.c:478 src/dir.c:584
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Není mo¾no zmìnit adresáø"
+msgstr "Nelze èíst obsah adresáøe"
 
 #: src/ext.c:106 src/user.c:568
 #, c-format
@@ -2451,9 +2448,8 @@ msgid "&Horizontal"
 msgstr "&Horizontální"
 
 #: src/layout.c:164
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "tipy v &Xtermu"
+msgstr "nadpis okna &Xtermu"
 
 #: src/layout.c:165
 msgid "h&Intbar visible"
@@ -2653,9 +2649,8 @@ msgid "FT&P link..."
 msgstr "FT&P spojení..."
 
 #: src/main.c:969 src/main.c:996
-#, fuzzy
 msgid "S&hell link..."
-msgstr "SM&B spojení..."
+msgstr "s&Hell spojení..."
 
 #: src/main.c:971 src/main.c:998
 msgid "SM&B link..."
@@ -2908,11 +2903,11 @@ msgstr "[pøíznaky] [aktuální_adresáø] [druhý_adresáø_panelu]\n"
 
 #: src/main.c:2132
 msgid "+number"
-msgstr ""
+msgstr "+èíslo"
 
 #: src/main.c:2133
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Nastavit poèáteèní èíslo øádku pro interní editor"
 
 #: src/main.c:2135
 msgid ""
@@ -2995,12 +2990,11 @@ msgstr "Zapí¹e dialog ftp do zadaného souboru"
 
 #: src/main.c:2246
 msgid "Set debug level"
-msgstr ""
+msgstr "Nastavit úroveò ladìní"
 
 #: src/main.c:2250
-#, fuzzy
 msgid "Print data directory"
-msgstr "adresáø"
+msgstr "Vytiskne adresáø dat"
 
 #: src/main.c:2252
 msgid "Requests to run in black and white"
@@ -3015,14 +3009,12 @@ msgid "Disables subshell support"
 msgstr "Vypne pou¾ití podshellu"
 
 #: src/main.c:2259
-#, fuzzy
 msgid "Force subshell execution"
-msgstr "pøi spu¹tìní nastavit èíslo u¾ivatele"
+msgstr "Vnutí spu¹tìní podshellu"
 
 #: src/main.c:2262
-#, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "Pøi ukonèení programu vytiskne pracovní adresáø"
+msgstr "Pøi ukonèení programu vytiskne pracovní adresáø do zadaného souboru"
 
 #: src/main.c:2264
 msgid "Resets soft keys on HP terminals"
@@ -3218,16 +3210,15 @@ msgstr "Nelze zavøít rouru"
 
 #: src/popt.c:547
 msgid "missing argument"
-msgstr ""
+msgstr "chybìjící argument"
 
 #: src/popt.c:549
-#, fuzzy
 msgid "unknown option"
-msgstr "<Neznámá>"
+msgstr "neznámá volba"
 
 #: src/popt.c:555
 msgid "invalid numeric value"
-msgstr ""
+msgstr "neplatná èíselná hodnota"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
@@ -3239,12 +3230,11 @@ msgstr "Zobrazit struènou nápovìdu"
 
 #: src/popthelp.c:60
 msgid "ARG"
-msgstr ""
+msgstr "ARG"
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "Jméno u¾ivatele:"
+msgstr "Pou¾ití:"
 
 #: src/screen.c:202
 msgid "UP--DIR"
@@ -3576,37 +3566,33 @@ msgid "%b %e  %Y"
 msgstr "%e.%b  %Y"
 
 #: src/utilunix.c:333
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "adresáø"
+msgstr "%s není adresáø\n"
 
 #: src/utilunix.c:335
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Nejste vlastníkem adresáøe %s\n"
 
 #: src/utilunix.c:338
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Nelze vytvoøit cílový adresáø \"%s\" \n"
-" %s "
+msgstr "Nelze nastavit správná práva pro adresáø %s\n"
 
 #: src/utilunix.c:343
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Nelze vytvoøit cílový adresáø \"%s\" \n"
-" %s "
+msgstr "Nelze vytvoøit doèasný adresáø %s: %s\n"
 
 #: src/utilunix.c:373
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Doèasné soubory se budou vytváøet v %s\n"
 
 #: src/utilunix.c:376
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Doèasné soubory se nebudou vytváøet\n"
 
 #: src/utilunix.c:401
 msgid " Pipe failed "
@@ -3622,7 +3608,7 @@ msgstr " Nelze vytvoøit proces potomka "
 
 #: src/view.c:548
 msgid "Empty output from child filter"
-msgstr ""
+msgstr "Prázdný výstup z filtru"
 
 #: src/view.c:554
 msgid " Cannot open file "
