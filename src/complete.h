@@ -8,8 +8,6 @@
 #define INPUT_COMPLETE_USERNAMES	16
 #define INPUT_COMPLETE_CD		32
 
-typedef char *CompletionFunction (char *, int);
-
 void free_completions (WInput *);
 void complete (WInput *);
 

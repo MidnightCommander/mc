@@ -41,6 +41,8 @@
 #include "main.h"
 #include "key.h"		/* XCTRL and ALT macros */
 
+typedef char *CompletionFunction (char *, int);
+
 /* This flag is used in filename_completion_function */
 static int ignore_filenames = 0;
 
