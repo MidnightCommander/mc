@@ -1,5 +1,7 @@
 2002-09-19  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (argument_table): Add missing descriptions.
+
 	* main.c [NATIVE_WIN32]: Remove -S option, it's useless.
 
 	* main.c (print_mc_usage): Use poptPrintHelp() instead of

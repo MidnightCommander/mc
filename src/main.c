@@ -2185,68 +2185,71 @@ process_args (poptContext ctx, int c, const char *option_arg)
     }
 }
 
-static const struct poptOption argument_table [] = {
+static const struct poptOption argument_table[] = {
 #ifdef WITH_BACKGROUND
-    { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0,
-      N_("Use to debug the background code") },
+    {"background", 'B', POPT_ARG_NONE, &background_wait, 0,
+     N_("Use to debug the background code")},
 #endif
-    { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c',
-      N_("Request to run in color mode") },
-    { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0,
-      N_("Specifies a color configuration") },
+    {"color", 'c', POPT_ARG_NONE, NULL, 'c',
+     N_("Request to run in color mode")},
+    {"colors", 'C', POPT_ARG_STRING, &command_line_colors, 0,
+     N_("Specifies a color configuration")},
 
 #ifdef USE_INTERNAL_EDIT
-    { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0,
-      N_("Edits one file") },
+    {"edit", 'e', POPT_ARG_STRING, &edit_one_file, 0,
+     N_("Edits one file")},
 #endif
 
-    { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h',
-      N_("Displays this help message") },
-    { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H',
-      N_("Displays a help screen on how to change the color scheme") },
+    {"help", 'h', POPT_ARG_NONE, NULL, 'h',
+     N_("Displays this help message")},
+    {"help-colors", 'H', POPT_ARG_NONE, NULL, 'H',
+     N_("Displays a help screen on how to change the color scheme")},
 #ifdef USE_NETCODE
-    { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l',
-      N_("Log ftp dialog to specified file") },
+    {"ftplog", 'l', POPT_ARG_STRING, NULL, 'l',
+     N_("Log ftp dialog to specified file")},
 #ifdef WITH_SMBFS
-    { "debuglevel",	'D', POPT_ARG_STRING,	NULL,			 'D'},
+    {"debuglevel", 'D', POPT_ARG_STRING, NULL, 'D',
+     N_("Set debug level")},
 #endif
 #endif
-    { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
-    { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0,
-      N_("Requests to run in black and white") },
-    { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd',
-      N_("Disable mouse support in text version") },
+    {"libdir", 'f', POPT_ARG_NONE, NULL, 'f',
+     N_("Print configured paths")},
+    {"nocolor", 'b', POPT_ARG_NONE, &disable_colors, 0,
+     N_("Requests to run in black and white")},
+    {"nomouse", 'd', POPT_ARG_NONE, NULL, 'd',
+     N_("Disable mouse support in text version")},
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u',
-      N_("Disables subshell support") },
-    { "forceexec",	'r', POPT_ARG_NONE, 	&force_subshell_execution,0 },
+    {"nosubshell", 'u', POPT_ARG_NONE, NULL, 'u',
+     N_("Disables subshell support")},
+    {"forceexec", 'r', POPT_ARG_NONE, &force_subshell_execution, 0,
+     N_("Force subshell execution")},
 #endif
-    { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0,
-      N_("Prints working directory at program exit") },
-    { "resetsoft", 	'k', POPT_ARG_NONE, 	&reset_hp_softkeys, 	  0,
-      N_("Resets soft keys on HP terminals") },
-    { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0,
-      N_("To run on slow terminals") },
+    {"printwd", 'P', POPT_ARG_NONE, &print_last_wd, 0,
+     N_("Prints working directory at program exit")},
+    {"resetsoft", 'k', POPT_ARG_NONE, &reset_hp_softkeys, 0,
+     N_("Resets soft keys on HP terminals")},
+    {"slow", 's', POPT_ARG_NONE, &slow_terminal, 0,
+     N_("To run on slow terminals")},
 #ifndef NATIVE_WIN32
-    { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0,
-      N_("Use stickchars to draw") },
-#endif /* !NATIVE_WIN32 */
+    {"stickchars", 'a', 0, &force_ugly_line_drawing, 0,
+     N_("Use stickchars to draw")},
+#endif				/* !NATIVE_WIN32 */
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "subshell", 	'U', POPT_ARG_NONE, 	&use_subshell,		  0,
-      N_("Enables subshell support (default)")},
+    {"subshell", 'U', POPT_ARG_NONE, &use_subshell, 0,
+     N_("Enables subshell support (default)")},
 #endif
 #if defined(HAVE_SLANG) && !defined(NATIVE_WIN32)
-    { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0,
-      N_("Tries to use termcap instead of terminfo") },
+    {"termcap", 't', 0, &SLtt_Try_Termcap, 0,
+     N_("Tries to use termcap instead of terminfo")},
 #endif
-    { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V',
-      N_("Displays the current version") },
-    { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0,
-      N_("Launches the file viewer on a file") },
-    { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0,
-      N_("Forces xterm features") },
+    {"version", 'V', POPT_ARG_NONE, NULL, 'V',
+     N_("Displays the current version")},
+    {"view", 'v', POPT_ARG_STRING, &view_one_file, 0,
+     N_("Launches the file viewer on a file")},
+    {"xterm", 'x', POPT_ARG_NONE, &force_xterm, 0,
+     N_("Forces xterm features")},
 
-    { NULL, 		0,			0, NULL, 0 }
+    {NULL, 0, 0, NULL, 0}
 };
 
 static void
