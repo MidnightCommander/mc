@@ -8,11 +8,13 @@
 static const char * const features [] =  {
 #ifdef USE_VFS
     N_("Virtual File System: tarfs, extfs"),
+    N_(", cpiofs"),
 #ifdef USE_NETCODE
     N_(", ftpfs"),
 #   ifdef HSC_PROXY
     N_(" (proxies: hsc proxy)"),
 #   endif
+    N_(", fish"),
 #   ifdef WITH_MCFS
     N_(", mcfs"),
 #   endif
@@ -22,12 +24,12 @@ static const char * const features [] =  {
 #   ifdef WITH_SMBFS
     N_(", smbfs"),
 #   endif
-#endif
+#endif /* USE_NETCODE */
 #ifdef USE_EXT2FSLIB
     N_(", undelfs"),
 #endif
     "\n",
-#endif
+#endif /* USE_VFS */
     
 #ifdef USE_INTERNAL_EDIT
     N_("With builtin Editor\n"),
