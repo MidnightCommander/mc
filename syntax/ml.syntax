@@ -84,7 +84,7 @@ context " " brightcyan
     keyword \\n brightmagenta
     keyword %% brightmagenta
     keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightmagenta
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightmagenta
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diuxX\} brightmagenta
     keyword %\[hl\]n brightmagenta
     keyword %\[.\]\[0123456789\]s brightmagenta
     keyword %[*] brightmagenta

@@ -1,3 +1,15 @@
+2003-03-14  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/c.syntax: Allow integer specifiers for %x and %X in C
+	format strings.
+	* syntax/cs.syntax: Likewise.
+	* syntax/java.syntax: Likewise.
+	* syntax/ml.syntax: Likewise.
+	* syntax/php.syntax: Likewise.
+	* syntax/python.syntax: Likewise.
+	* syntax/slang.syntax: Likewise.
+	* syntax/swig.syntax: Likewise.
+
 2003-03-11  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_ASM_LABELS): New macro to work around a bug

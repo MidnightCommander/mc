@@ -133,7 +133,7 @@ context " " green
     keyword \\" brightgreen
     keyword %% brightgreen
     keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
-    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diu\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
     keyword %\[hl\]n brightgreen
     keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
     keyword %[*] brightgreen
