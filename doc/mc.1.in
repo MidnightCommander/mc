@@ -1313,6 +1313,12 @@ matches
 is a regular expression.  File matches if its name matches the regular
 expression.
 .TP
+.I directory
+\-
+.I expr
+is a regular expression.  File matches if it is a directory and its name
+matches the regular expression.
+.TP
 .I type
 \-
 .I expr

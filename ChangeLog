@@ -1,3 +1,8 @@
+2004-08-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* doc/mc.1.in (Extension File Edit): Document "directory" keyword.
+	* doc/ru/mc.1.in: Likewise.
+
 2004-08-02  Pavel Shirshov <pavelsh@mail.ru>
 
         * autogen.sh: Fix unportable "\n" in sed.
