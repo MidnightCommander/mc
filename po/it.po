@@ -700,7 +700,7 @@ msgstr "Sintassi &Evidenziata"
 
 #: edit/editoptions.c:91
 msgid "Save file &position"
-msgstr "&Salva posizione cursore"
+msgstr "&Salva posizione file"
 
 #: edit/editoptions.c:94
 msgid "Confir&m before saving"
