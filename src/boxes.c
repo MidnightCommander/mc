@@ -609,7 +609,7 @@ tree (char *current_dir)
 #ifdef USE_VFS
 
 #if defined(USE_NETCODE)
-#define VFSY 12
+#define VFSY 14
 #else
 #define VFSY 8
 #endif
@@ -646,24 +646,24 @@ static QuickWidget confvfs_widgets [] = {
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&Ok"),
       0, B_ENTER, 0, 0, XV_WLAY_CENTERROW, "button-ok" },
 #if defined(USE_NETCODE)
-{ quick_input,    30, VFSX, 7, VFSY, "", 22, 0, 0, &ret_ftp_proxy,
+{ quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
       XV_WLAY_RIGHTDOWN, "input-ftp-proxy" },
-{ quick_checkbox,    4, VFSX, 7, VFSY, N_("&Always use ftp proxy"), 0, 0,
+{ quick_checkbox,  4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), 0, 0,
       &ftpfs_always_use_proxy, 0, XV_WLAY_RIGHTDOWN, "check-ftp-proxy" },
-{ quick_label,    46, VFSX, 6, VFSY, N_("sec"),
+{ quick_label,    49, VFSX, 7, VFSY, N_("sec"),
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec" },
-{ quick_input,    35, VFSX, 6, VFSY, "", 10, 0, 0, &ret_directory_timeout,
+{ quick_input,    38, VFSX, 7, VFSY, "", 10, 0, 0, &ret_directory_timeout,
       XV_WLAY_RIGHTDOWN, "input-timeout" },
-{ quick_label,     4, VFSX, 6, VFSY, N_("ftpfs directory cache timeout:"),
+{ quick_label,     4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-cache"},
-{ quick_input,    28, VFSX, 5, VFSY, "", 24, 0, 0, &ret_passwd,
+{ quick_input,     4, VFSX, 6, VFSY, "", 48, 0, 0, &ret_passwd,
       XV_WLAY_RIGHTDOWN, "input-passwd" },
 { quick_label,     4, VFSX, 5, VFSY, N_("ftp anonymous password:"),
       0, 0, 0, 0, XV_WLAY_NEXTROW, "label-pass"},
 #endif
-{ quick_label,    46, VFSX, 3, VFSY, "sec",
+{ quick_label,    49, VFSX, 3, VFSY, "sec",
       0, 0, 0, 0, XV_WLAY_RIGHTOF, "label-sec2" },
-{ quick_input,    35, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
+{ quick_input,    38, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
       XV_WLAY_RIGHTOF, "input-timo-vfs" },
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
       0, 0, 0, 0, XV_WLAY_BELOWCLOSE, "label-vfs" },
