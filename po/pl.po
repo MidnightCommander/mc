@@ -158,7 +158,7 @@ msgstr "Odwrócony porz±dek."
 
 #: gnome/gcmd.c:1
 msgid "Enter name."
-msgstr "Wprowad¼ nazwê"
+msgstr "Wprowad¼ nazwê."
 
 #: gnome/gcmd.c:1
 msgid "Enter label for command:"
@@ -170,7 +170,7 @@ msgstr "Znajd¼ wszystkie pliki 'code'"
 
 #: gnome/gcmd.c:1 src/panelize.c:1
 msgid "Find rejects after patching"
-msgstr ""
+msgstr "Znajd¼ odrzuty po patchowaniu"
 
 #: gnome/gcmd.c:1
 msgid "Run Command"
@@ -206,7 +206,7 @@ msgstr "Ustaw filtr"
 #: gnome/gcmd.c:1 gnome/gcmd.c:1 gnome/gcmd.c:1 gnome/gcmd.c:1
 #: gnome/gscreen.c:1
 msgid "Show all files"
-msgstr "Wy¶wietlaj wszystkie pliki"
+msgstr "Poka¿ wszystkie pliki"
 
 #: gnome/gcmd.c:1
 msgid "."
@@ -509,7 +509,7 @@ msgstr ""
 
 #: gnome/gdialogs.c:1
 msgid "Prompt me before overwriting any file."
-msgstr "Zapytaj przed nadpisaniem jakiegokolwiek pliku."
+msgstr "Zapytaj przed nadpisaniem pliku."
 
 #: gnome/gdialogs.c:1
 msgid "Don't overwrite any files."
@@ -595,7 +595,7 @@ msgstr "Zachowuje uprawnienia oraz UID/GID je¶li to mo¿liwe"
 
 #: gnome/gdialogs.c:1
 msgid "Recursively copy subdirectories."
-msgstr "Rekurencyjnie kopiuj podkatalogi."
+msgstr "Kopiuj katalogi rekursywnie."
 
 #: gnome/gdialogs.c:1
 msgid "If set, this will copy the directories recursively"
@@ -1321,11 +1321,11 @@ msgstr "W³a¶ciwo¶ci..."
 
 #: gnome/gprefs.c:1
 msgid "Show backup files"
-msgstr "Wy¶wietlanie plików zapasowych"
+msgstr "Pokazuj pliki kopii zapasowych"
 
 #: gnome/gprefs.c:1
 msgid "Show hidden files"
-msgstr "Wy¶wietlanie ukrytych plików"
+msgstr "Pokazuj ukryte pliki"
 
 #: gnome/gprefs.c:1
 msgid "Mix files and directories"
@@ -1349,7 +1349,7 @@ msgstr "Potwierdzanie wykonania pliku"
 
 #: gnome/gprefs.c:1
 msgid "Show progress while operations are being performed"
-msgstr "Wy¶wietlanie postêpu podczas wykowywania operacji"
+msgstr "Pokazuj stopieñ zaawansowania wykonywania operacji"
 
 #: gnome/gprefs.c:1
 msgid "VFS Timeout:"
@@ -1361,11 +1361,11 @@ msgstr "Sekund"
 
 #: gnome/gprefs.c:1
 msgid "Anonymous FTP password:"
-msgstr "Has³o anonimowego FTP:"
+msgstr "Has³o do anonimowego FTP:"
 
 #: gnome/gprefs.c:1
 msgid "Always use FTP proxy"
-msgstr "Wykorzystanie proxy FTP"
+msgstr "Zawsze u¿ywaj proxy do FTP"
 
 #: gnome/gprefs.c:1
 msgid "Fast directory reload"
@@ -1377,7 +1377,7 @@ msgstr "Obliczanie objêto¶ci przed kopiowaniem"
 
 #: gnome/gprefs.c:1
 msgid "FTP directory cache timeout :"
-msgstr "Czas przechowywania katalogu FTP : "
+msgstr "Czas buforowania katalogu FTP: "
 
 #: gnome/gprefs.c:1
 msgid "Allow customization of icons in icon view"
