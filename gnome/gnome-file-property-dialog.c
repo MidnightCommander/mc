@@ -900,7 +900,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		gentry = gtk_entry_new ();
 		gtk_widget_set_sensitive (gentry, FALSE);
 		grp = getgrgid (fp_dlg->st.st_gid);
-		gtk_entry_set_text (GTK_ENTRY (gentry), grpname);
+		gtk_entry_set_text (GTK_ENTRY (gentry), grp->gr_name);
 	}
 	return gentry;
 }
