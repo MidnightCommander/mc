@@ -1,3 +1,8 @@
+2000-08-08  Miguel de Icaza  <miguel@gnu.org>
+
+	* gdesktop.c (new_terminal): Add patch from Duncan Mak to use the
+	gnome terminal factory server
+
 2000-08-03  Pavel Roskin  <proski@gnu.org>
 
 	* gpopup2.h: Removed
