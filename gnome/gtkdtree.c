@@ -688,6 +688,10 @@ gtk_dtree_load_pixmap (char *pix[], GdkPixmap **pixmap, GdkBitmap **bitmap)
 	g_assert (bitmap);
 
 	image = gdk_imlib_create_image_from_xpm_data (pix);
+	*pixmap = NULL;
+	*bitmap = NULL;
+	g_return_if_fail(image);
+
 	gdk_imlib_render (image, image->rgb_width, image->rgb_height);
 	*pixmap = gdk_imlib_move_image (image);
 	*bitmap = gdk_imlib_move_mask (image);

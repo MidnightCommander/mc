@@ -1,3 +1,11 @@
+1999-11-01  Pavel Machek     <pavel@ucw.cz>
+
+	* make_thumb.c: close symlink hole
+
+	* *.c: add return_val_if_fail, it is better than crashing. Sorry
+	about that *image = NULL, but gcc should be able to optimize it
+	out in non-debugging case.
+
 1999-10-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop-init.c (desktop_init_at): Put an equal sign between the

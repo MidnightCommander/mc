@@ -19,7 +19,12 @@
 GtkWidget *
 get_gtk_widget (Widget_Item *p)
 {
-	GtkWidget *w = GTK_WIDGET (p->widget->wdata);
+	GtkWidget *w;
+
+	g_return_val_if_fail(p, NULL);
+	g_return_val_if_fail(p->widget, NULL);
+
+	w = GTK_WIDGET (p->widget->wdata);
 
 	if (GNOME_IS_ENTRY (w))
 		return (gnome_entry_gtk_entry ((GnomeEntry *)(w)));

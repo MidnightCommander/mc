@@ -1,29 +1,15 @@
+/*
+ * What is this good for? Who wrote it and when?
+ */
+
 #include <config.h>
 #include <gnome.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <fcntl.h>
 
-char *tmp_dir, *secure;
-
 static void
-get_temp_dir (void)
-{
-	int i = 5;		/* 5 attempts */
-	static char name [100];
-
-	do {
-		strcpy (name, "/tmp/.thumbXXXXXX");
-		tmp_dir = mktemp (name);
-		if (mkdir (tmp_dir, 0700) == 0){
-			secure = g_concat_dir_and_file (tmp_dir, "thumb.png");
-			return;
-		}
-	} while (i--);
-}
-
-static void
-put_in_metadata (char *dest, char *png_file)
+put_in_metadata (char *dest, char *png_file, char *secure)
 {
 	int f;
 	struct stat buf;
@@ -91,14 +77,21 @@ int
 main (int argc, char *argv [])
 {
 	int i;
+	char *secure;
 
 	gnome_init ("test", "test", argc, argv);
-	get_temp_dir ();
+
+	secure = tempnam (NULL, "makethumb");
+	i = open (secure, O_RDWR | O_CREAT | O_EXCL, 0600);
+	if (i == -1) {
+	    printf( "Someone is playing /tmp games with us\n" );
+	    exit(2);
+	}
+	close(i);
 
 	for (i = 1; i < argc; i++)
-		make_thumbnail (argv [i]);
+		make_thumbnail (argv [i], secure);
 
 	unlink (secure);
-	rmdir (tmp_dir);
 	return 0;
 }
