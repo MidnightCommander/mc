@@ -2,6 +2,9 @@
 
 	* man2hlp.c (main): Don't use freed structure member.
 
+	* ext.c (regex_command): Don't check same condition twice.
+	(exec_extension): Comment out useless loop.
+
 2002-07-30  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (main): Use only stream I/O.  Fix checks for error

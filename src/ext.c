@@ -276,9 +276,9 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     	char *q;
     	*p = 0;
     	p = buffer;
-    	while (*p == ' ' && *p == '\t')
-    	    p++;
-
+/*	while (*p == ' ' && *p == '\t')
+ *	    p++;
+ */
 	/* Search last non-space character. Start search at the end in order
 	   not to short filenames containing spaces. */
     	q = p + strlen (p) - 1;
@@ -472,9 +472,9 @@ file as an example of how to write it.\n\
 	            found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
 	        p += 6;
-	        if (*p == '.' && file_len >= (q - p)) {
-	            if (file_len >= (q - p) &&
-			 !strncmp (p, filename + file_len - (q - p), q - p))
+		if (*p == '.' && file_len >= (q - p)) {
+		    if (!strncmp (p, filename + file_len - (q - p),
+			q - p))
 	                found = 1;
 	        } else {
 	            if (q - p == file_len && !strncmp (p, filename, q - p))
