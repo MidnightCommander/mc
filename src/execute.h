@@ -3,6 +3,7 @@
 
 #define EXECUTE_INTERNAL   1
 #define EXECUTE_AS_SHELL   4
+#define EXECUTE_HIDE       8
 
 /* Execute functions that use the shell to execute */
 void shell_execute (const char *command, int flags);

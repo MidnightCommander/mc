@@ -1,3 +1,13 @@
+2004-11-18  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+	* user.c (execute_menu_command): Revert last changes. Execute
+	shell_execute() with flag EXECUTE_HIDE to prevent recording
+	in ~/.bash_history.
+	* execute.h: Add EXECUTE_HIDE flag. It's used to prefix the command
+	with a space.
+	* execute.c (shell_execute): Prefix the command with a space, if define
+	EXECUTE_HIDE flag.
+
 2004-11-17  Roland Illig  <roland.illig@gmx.de>
 
 	* screen.c (do_search): Ignore the backspace key on empty

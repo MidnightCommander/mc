@@ -546,7 +546,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     int  do_quote = 0;
     char prompt [80];
     int  col;
-    char *file_name, *space_file_name;
+    char *file_name;
     int run_view = 0;
 
     /* Skip menu entry title line */
@@ -632,16 +632,14 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     }
     fclose (cmd_file);
     chmod (file_name, S_IRWXU);
-    space_file_name = g_strconcat (" ", file_name, (char *) NULL);
     if (run_view) {
 	run_view = 0;
-	view (space_file_name, 0, &run_view, 0);
+	view (file_name, 0, &run_view, 0);
     } else {
-	shell_execute (space_file_name, 0);
+	shell_execute (file_name, EXECUTE_HIDE);
     }
     unlink (file_name);
     g_free (file_name);
-    g_free (space_file_name);
 }
 
 /* 
