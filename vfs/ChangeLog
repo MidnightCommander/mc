@@ -1,3 +1,8 @@
+2004-08-29  Roland Illig  <roland.illig@gmx.de>
+
+	* Code cleanup: Added const qualifier for variables and
+	function declarations where possible. No functional changes.
+
 2004-08-27  Andrew V. Samoilov  <sav bcs zp ua>
 
 	* smbfs.c (smbfs_open_readwrite): Implement O_APPEND via smbfs_lseek().
