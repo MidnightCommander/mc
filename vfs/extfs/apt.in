@@ -296,13 +296,13 @@ sub rm
        system("rm -f /etc/apt/apt.conf");
     } elsif( $archive eq 'sources.list' ) {
        system("rm -f /etc/apt/sources.list");
-# This interact with user - it can't be execute :-(
-#    } elsif( $archive =~ /\.deb[ad]?$/ ) {
-#       my $name = $archive;
-#       $name =~ s%.*/%%g;
-#       $name =~ s%_.*%%g;
-#       system("apt-get remove $name");
-#       die("extfs: $archive: Operation not permitted\n") if $? != 0;
+    } elsif( $archive =~ /\.debd?$/ ) {
+       # uncommented and changed to use dpkg - alpha
+       my $name = $archive;
+       $name =~ s%.*/%%g;
+       $name =~ s%_.*%%g;
+       system("dpkg --remove $name >/dev/null");
+       die("extfs: $archive: Operation not permitted\n") if $? != 0;
     } else {
        die "extfs: $archive: Operation not permitted\n";
     }
@@ -312,11 +312,10 @@ sub rm
 $pressupdate=<<EOInstall;
 
                               WARNING
-     Don\'t use this method if you are not willing to retrieve new lists
-                           of packages.
+  Don\'t use this method if you don't want to retrieve new lists of packages.
+  ==========================================================================
 
 This is not a real file. It is a way to retrieve new lists of packages.
-
 To update this information go back to the panel and press Enter on this file.
 
 EOInstall
@@ -324,10 +323,10 @@ EOInstall
 $pressupgrade=<<EOInstall;
 
                               WARNING
-    Don\'t use this method if you are not willing to perform an upgrade.
+     Don\'t use this method if you are not willing to perform an upgrade.
+     ===================================================================
 
 This is not a real file. It is a way to perform an upgrade.
-
 To upgrade this information go back to the panel and press Enter on this file.
 
 EOInstall
