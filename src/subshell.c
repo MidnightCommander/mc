@@ -74,6 +74,7 @@ static int feed_subshell (int how, int fail_on_error);
 static void synchronize (void);
 static int pty_open_master (char *pty_name);
 static int pty_open_slave (const char *pty_name);
+static int resize_tty (int fd);
 
 /* }}} */
 /* {{{ Definitions */
@@ -233,17 +234,7 @@ static void init_subshell_child (const char *pty_name)
 
     /* Set the pty's size (80x25 by default on Linux) according to the */
     /* size of the real terminal as calculated by ncurses, if possible */
-#if defined TIOCSWINSZ && !defined SCO_FLAVOR
-    {
-	struct winsize tty_size;
-	tty_size.ws_row = LINES;
-	tty_size.ws_col = COLS;
-	tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
-	if (ioctl (pty_slave, TIOCSWINSZ, &tty_size))
-	    perror (__FILE__": couldn't set pty size");
-    }
-#endif
+    resize_tty (pty_slave);
 
     /* }}} */
     /* {{{ Set up the subshell's environment and init file name */
@@ -691,10 +682,8 @@ int read_subshell_prompt (int how)
     return TRUE;
 }
 
-/* }}} */
-/* {{{ resize_subshell */
-
-void resize_subshell (void)
+/* Resize given terminal using TIOCSWINSZ, return ioctl() result */
+static int resize_tty (int fd)
 {
 #if defined TIOCSWINSZ && !defined SCO_FLAVOR
     struct winsize tty_size;
@@ -703,13 +692,15 @@ void resize_subshell (void)
     tty_size.ws_col = COLS;
     tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
 
-    if (ioctl (subshell_pty, TIOCSWINSZ, &tty_size))
-	perror (__FILE__": couldn't set pty size");
+    return ioctl (fd, TIOCSWINSZ, &tty_size);
 #endif
 }
 
-/* }}} */
-/* {{{ exit_subshell */
+/* Resize subshell_pty */
+void resize_subshell (void)
+{
+    resize_tty (subshell_pty);
+}
 
 int exit_subshell (void)
 {
@@ -1209,7 +1200,7 @@ static int pty_open_slave (const char *pty_name)
     if (!ioctl (pty_slave, I_FIND, "ptem"))
 	if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
 	{
-	    perror ("ioctl (pty_slave, I_PUSH, \"ptem\")");
+	    fprintf (stderr, "ioctl (pty_slave, I_PUSH, \"ptem\") failed\n");
 	    close (pty_slave);
 	    return -1;
 	}
@@ -1217,7 +1208,7 @@ static int pty_open_slave (const char *pty_name)
     if (!ioctl (pty_slave, I_FIND, "ldterm"))
         if (ioctl (pty_slave, I_PUSH, "ldterm") == -1)
 	{
-	    perror ("ioctl (pty_slave, I_PUSH, \"ldterm\")");
+	    fprintf (stderr, "ioctl (pty_slave, I_PUSH, \"ldterm\") failed\n");
 	    close (pty_slave);
 	    return -1;
 	}
@@ -1226,7 +1217,7 @@ static int pty_open_slave (const char *pty_name)
     if (!ioctl (pty_slave, I_FIND, "ttcompat"))
         if (ioctl (pty_slave, I_PUSH, "ttcompat") == -1)
 	{
-	    perror ("ioctl (pty_slave, I_PUSH, \"ttcompat\")");
+	    fprintf (stderr, "ioctl (pty_slave, I_PUSH, \"ttcompat\") failed\n");
 	    close (pty_slave);
 	    return -1;
 	}

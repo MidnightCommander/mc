@@ -1,5 +1,11 @@
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c: ioctl() doesn't set errno - don't use perror() to
+	report failures.  Use fprintf() instead, ignore errors from
+	TIOCSWINSZ.
+	(resize_tty): New function - code common for resize_subshell()
+	and init_subshell_child().
+
 	* global.h: Include vfs.h.
 	* boxes.c (configure_vfs): Ask whether .netrc should be used.
 	From Thomas Zajic <zlatko@gmx.at>
