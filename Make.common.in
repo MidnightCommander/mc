@@ -28,14 +28,15 @@ extfsdir   = $(libdir)/extfs
 datadir    = @datadir@
 icondir    = $(datadir)/pixmaps/mc
 localedir  = $(datadir)/locale
-basemandir = @mandir@
-mandir     = $(basemandir)/man1
+mandir     = @mandir@
+man1dir    = $(mandir)/man1
 manext     = 1
-man8dir    = $(basemandir)/man8
+man8dir    = $(mandir)/man8
 man8ext   = 8
 xv_bindir = @xv_bindir@
 
 # Tools & program stuff
+MKINSTALLDIRS = @MKINSTALLDIRS@
 SEDCMD = @SEDCMD@
 SEDCMD2 = @SEDCMD2@
 STRIP = @STRIP@
