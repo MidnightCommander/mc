@@ -1,8 +1,12 @@
+2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* uk.po: Updated Ukrainian translation.
+
 2004-02-05  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: updated italian translation.
 
-2004-01-26  Andrew V. Samoilov  <andrew@email.zp.ua>
+2004-01-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* POTFILES.in: Add vfs/utilvfs.c.
 
@@ -1053,7 +1057,7 @@
 
 1999-10-15  Sergey Panov  <sipan@mit.edu>
 
-	* ru.po: Updates from Andrej Samoilov  <sav@sav.bcs.zp.ua>
+	* ru.po: Updates from Andrej Samoilov  <sav@bcs.zp.ua>
 
 1999-10-06  Kjartan Maraas  <kmaraas@online.no>
 

@@ -1,9 +1,10 @@
 # Originally by Yury Sirota <rasta@renome.rovno.ua>
 # 2002 Volodymyr M. Lisivka <lvm@mystery.lviv.net
+# 2003-2004 Andrew V. Samoilov <sav@bcs.zp.ua>
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2003-07-10 12:40-0400\n"
 "PO-Revision-Date: 2003-07-09 12:24+0300\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
@@ -465,8 +466,11 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Файл \"%s\" вже редагу╓ться\n"
+"Користувач: %s\n"
+"╤дентиф╕катор процесу: %d"
 
-#: edit/editlock.c:152
+#: edit/editlock.c:153
 msgid "File locked"
 msgstr "Файл блоковано"
 
@@ -474,11 +478,11 @@ msgstr "Файл блоковано"
 msgid "&Grab lock"
 msgstr "Захватити замок"
 
-#: edit/editlock.c:153
+#: edit/editlock.c:154
 msgid "&Ignore lock"
-msgstr "Игнорувати замок"
+msgstr "╤гнорувати замок"
 
-#: edit/editmenu.c:53
+#: edit/editmenu.c:55
 msgid " About "
 msgstr " Про програму "
 
@@ -2292,12 +2296,11 @@ msgstr "&Угору"
 msgid "&Add current"
 msgstr "Додати &поточний"
 
-#: src/hotlist.c:126
-#, fuzzy
+#: src/hotlist.c:125
 msgid "&Refresh"
-msgstr "&Зворотн╕й"
+msgstr "&Оновити"
 
-#: src/hotlist.c:127
+#: src/hotlist.c:126
 msgid "Fr&ee VFSs now"
 msgstr "Зв&╕льнити ВФС зараз"
 
@@ -3408,7 +3411,7 @@ msgid ""
 "Subshell support will be disabled."
 msgstr ""
 "╤нший Midnight Commander вже працю╓\n"
-"на цьому терминал╕. Вбудовану командну\n"
+"на цьому терм╕нал╕. Вбудовану командну\n"
 "оболонку буде вимикнуто."
 
 #: src/subshell.c:425
