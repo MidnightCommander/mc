@@ -809,7 +809,7 @@ smbfs_chmod (vfs *me, char *path, int mode)
 {
 	DEBUG(3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
 /*	my_errno = EOPNOTSUPP;
-	return -1;	*/	/* cant chmod on smb filesystem */
+	return -1;	*/	/* cannot chmod on smb filesystem */
 	return 0;		/* make mc happy */
 }
 
@@ -1114,7 +1114,7 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
 }
 
 static char *
-smbfs_get_path (smbfs_connection ** sc, char *path)
+smbfs_get_path (smbfs_connection ** sc, const char *path)
 {
     char *user, *host, *remote_path, *pass;
     int port = SMB_PORT;
@@ -1223,34 +1223,52 @@ fake_server_stat(const char *server_url, const char *path, struct stat *buf)
 }
 
 static int
-fake_share_stat(const char *server_url, const char *path, struct stat *buf)
+fake_share_stat (const char *server_url, const char *path, struct stat *buf)
 {
-	dir_entry *dentry;
-	if (strlen(path) < strlen(server_url))
-		return -1;
-	path += strlen(server_url);	/*	we only want share name	*/
-	path++;
-
-	if (*path == '/')	/* '/' leading server name */
-		path++;			/* probably came from server browsing */
-
-	if (!current_share_info->entries) {
-		if (!smbfs_loaddir(current_share_info));	/* browse host */
-			return -1;
-	}
-	dentry = current_share_info->entries;
-	DEBUG(3, ("fake_share_stat: %s on %s\n", path, server_url));
-	while (dentry) {
-		if (strcmp(dentry->text, path) == 0) {
-			DEBUG(6, ("fake_share_stat: %s:%4o\n",
-				dentry->text, dentry->my_stat.st_mode));
-			memcpy(buf, &dentry->my_stat, sizeof(struct stat));
-			return 0;
-		}
-		dentry = dentry->next;
-	}
-	my_errno = ENOENT;
+    dir_entry *dentry;
+    if (strlen (path) < strlen (server_url))
 	return -1;
+
+    if (!current_share_info) {	/* Server was not stat()ed */
+	/* Make sure there is such share at server */
+	smbfs_connection *sc;
+	char *p;
+	p = smbfs_get_path (&sc, path);
+	g_free (p);
+	if (p) {
+	    memset (buf, 0, sizeof (*buf));
+	    /*      show this as dir        */
+	    buf->st_mode =
+		S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
+		S_IXOTH;
+	    return 0;
+	}
+	return -1;
+    }
+
+    path += strlen (server_url);	/* we only want share name */
+    path++;
+
+    if (*path == '/')		/* '/' leading server name */
+	path++;			/* probably came from server browsing */
+
+    if (!current_share_info->entries) {
+	if (!smbfs_loaddir (current_share_info))	/* browse host */
+	    return -1;
+    }
+    dentry = current_share_info->entries;
+    DEBUG (3, ("fake_share_stat: %s on %s\n", path, server_url));
+    while (dentry) {
+	if (strcmp (dentry->text, path) == 0) {
+	    DEBUG (6, ("fake_share_stat: %s:%4o\n",
+		       dentry->text, dentry->my_stat.st_mode));
+	    memcpy (buf, &dentry->my_stat, sizeof (struct stat));
+	    return 0;
+	}
+	dentry = dentry->next;
+    }
+    my_errno = ENOENT;
+    return -1;
 }
 
 /* stat a single file, get_remote_stat callback  */
@@ -1486,6 +1504,7 @@ smbfs_stat (vfs * me, char *path, struct stat *buf)
 	}
 	return fake_server_stat (server_url, path, buf);
     }
+
     if (!strchr (++pp, '/')) {
 	return fake_share_stat (server_url, path, buf);
     }

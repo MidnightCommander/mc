@@ -1,3 +1,10 @@
+2002-10-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (fake_share_stat): Make sure share exists by
+	smbfs_get_path() and fill buf with realistic data
+	if current_share_info is NULL.  Reformat function.
+	(smbfs_get_path): Add const qualifier to path.
+
 2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c: Allow username in URL (/#smb:[user@]machine) and
@@ -1691,13 +1698,14 @@
 
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
-	* ftpfs.c (netrc_next): Turned strange "const char * const keywords"
-	into more alike "const char const * keywords". Still, think, it's
-	too strict.
+	* ftpfs.c (netrc_next): Turned strange "const char * const
+	keywords" into more alike "const char const * keywords". Still,
+	think, it's too strict.
 
-	* smbfs.c: Add #define BOOL_DEFINED before inclusion of samba headers.
-	Libncurses(or slang?) defines BOOL and that can cause problems. (In fact,
-	I can't find references to that const, but sure, I hade reason to do that:)
+	* smbfs.c: Add #define BOOL_DEFINED before inclusion of samba
+	headers. Libncurses(or slang?) defines BOOL and that can cause
+	problems. (In fact, I can't find references to that const, but
+	sure, I hade reason to do that:)
 
 	* util-alone.h: Declare load_anon_passwd() to avoid warnings.
 
