@@ -283,7 +283,11 @@ int my_system (int flags, const char *shell, const char *command)
 
 #ifdef USE_VFS
 	if (flags & EXECUTE_SETUID)
+#if defined (HAVE_SETREUID)
 	    setreuid (vfs_uid, vfs_uid);
+#elif defined (HAVE_SETUID)
+	    setuid (vfs_uid);
+#endif
 #endif
 	
 	if (flags & EXECUTE_AS_SHELL)
