@@ -12,6 +12,7 @@ syntax_DATA =			\
 	html.syntax		\
 	java.syntax		\
 	latex.syntax		\
+	lisp.syntax		\
 	lsm.syntax		\
 	mail.syntax		\
 	makefile.syntax		\

@@ -1,0 +1,82 @@
+#
+# Lisp syntax highlighting
+#
+# Author: Mykolas Juraitis (juramyko@soften.ktu.lt)
+# Version: 6 Aug, 2002
+#
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-*0123456789
+
+context default
+    keyword whole apply yellow/24
+    keyword whole and yellow/24
+    keyword whole car yellow/24
+    keyword whole caar yellow/24
+    keyword whole cadr yellow/24
+    keyword whole cdar yellow/24
+    keyword whole cddr yellow/24
+    keyword whole cdr yellow/24
+    keyword whole close yellow/24
+    keyword whole cond yellow/24
+    keyword whole cons yellow/24
+    keyword whole count yellow/24
+    keyword whole defvar yellow/24
+    keyword whole defstruct yellow/24
+    keyword whole defun yellow/24
+    keyword whole do yellow/24
+    keyword whole eq yellow/24
+    keyword whole eql yellow/24
+    keyword whole equal yellow/24
+    keyword whole eval yellow/24
+    keyword whole format yellow/24
+    keyword whole if yellow/24
+    keyword whole let* yellow/24
+    keyword whole let yellow/24
+    keyword whole list yellow/24
+    keyword whole load yellow/24
+    keyword whole make-package yellow/24
+    keyword whole mapcar yellow/24
+    keyword whole not yellow/24
+    keyword whole null yellow/24
+    keyword whole numberp yellow/24
+    keyword whole open yellow/24
+    keyword whole or yellow/24
+    keyword whole pprint yellow/24
+    keyword whole prin1 yellow/24
+    keyword whole princ yellow/24
+    keyword whole print yellow/24
+    keyword whole provide yellow/24
+    keyword whole read yellow/24
+    keyword whole require yellow/24
+    keyword whole set yellow/24
+    keyword whole setf yellow/24
+    keyword whole setq yellow/24
+    keyword whole slot-value yellow/24
+    keyword whole sort yellow/24
+    keyword whole stringp yellow/24
+    keyword whole terpri yellow/24
+    keyword whole write yellow/24
+
+    keyword whole lambda brightred/18
+    keyword whole nil brightred/18
+    keyword whole t brightred/18
+
+    keyword #' brightmagenta/23
+    keyword ' brightmagenta/23
+    keyword , brightmagenta/23
+
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+
+# Keyword declarations and keywords
+
+    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white/19
+    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white/19
+
+# Comments
+
+context ; \n brown/22
+
+# Strings
+
+context " " green/6
