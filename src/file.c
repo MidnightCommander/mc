@@ -1775,28 +1775,30 @@ panel_operate_generate_prompt (WPanel* panel, int operation, int only_one,
  * structure, Returns 0 if user aborted
  */
 int
-panel_operate (void *source_panel, FileOperation operation, char *thedefault, int ask_user)
+panel_operate (void *source_panel, FileOperation operation,
+	       char *thedefault, int ask_user)
 {
     WPanel *panel = source_panel;
 #ifdef WITH_FULL_PATHS
     char *source_with_path = NULL;
 #else
 #   define source_with_path source
-#endif /* !WITH_FULL_PATHS */
+#endif				/* !WITH_FULL_PATHS */
     char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
-    int only_one = (get_current_type () == view_tree) || (panel->marked <= 1);
+    int only_one = (get_current_type () == view_tree)
+	|| (panel->marked <= 1);
     struct stat src_stat, dst_stat;
     int i, value;
     FileOpContext *ctx;
 
-    off_t  count = 0;         
+    off_t count = 0;
     double bytes = 0;
 
-    int  dst_result;
-    int  do_bg;			/* do background operation? */
+    int dst_result;
+    int do_bg;			/* do background operation? */
 
     ctx = file_op_context_new ();
 
@@ -1805,7 +1807,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
     if (get_current_type () == view_listing)
-	if (!panel->marked && !strcmp (selection (panel)->fname, "..")){
+	if (!panel->marked && !strcmp (selection (panel)->fname, "..")) {
 	    message (1, MSG_ERROR, _(" Cannot operate on \"..\"! "));
 	    file_op_context_destroy (ctx);
 	    return 0;
@@ -1817,26 +1819,28 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     }
 
     /* Generate confirmation prompt */
-    source = panel_operate_generate_prompt (panel, operation, only_one, &src_stat);
+    source =
+	panel_operate_generate_prompt (panel, operation, only_one,
+				       &src_stat);
 
     /* Show confirmation dialog */
-    if (operation == OP_DELETE && confirm_delete){
-        if (know_not_what_am_i_doing)
+    if (operation == OP_DELETE && confirm_delete) {
+	if (know_not_what_am_i_doing)
 	    query_set_sel (1);
 
-	i = query_dialog (_(op_names [operation]), cmd_buf,
+	i = query_dialog (_(op_names[operation]), cmd_buf,
 			  D_ERROR, 2, _("&Yes"), _("&No"));
 
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
 	    return 0;
 	}
-    } else if (operation != OP_DELETE){
+    } else if (operation != OP_DELETE) {
 	ctx->rx.buffer = (char *) g_malloc (MC_MAXPATHLEN);
 	ctx->rx.allocated = MC_MAXPATHLEN;
 	ctx->rx.translate = 0;
 
-        if (ask_user){
+	if (ask_user) {
 	    char *dest_dir;
 
 	    if (thedefault != NULL)
@@ -1846,13 +1850,15 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    else
 		dest_dir = panel->cwd;
 
-	    dest = file_mask_dialog (ctx, operation, cmd_buf, dest_dir, only_one, &do_bg);
-	    if (!dest){
+	    dest =
+		file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
+				  only_one, &do_bg);
+	    if (!dest) {
 		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
 		return 0;
 	    }
-	    if (!*dest){
+	    if (!*dest) {
 		g_free (ctx->rx.buffer);
 		file_op_context_destroy (ctx);
 		g_free (dest);
@@ -1867,26 +1873,28 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    dest = g_strdup (thedefault);
 	}
     }
-
 #ifdef WITH_BACKGROUND
     /* Did the user select to do a background operation? */
-    if (do_bg){
+    if (do_bg) {
 	int v;
 
-	v = do_background (ctx, g_strconcat (op_names [operation], ": ", panel->cwd, NULL));
-	if (v == -1){
-	    message (1, MSG_ERROR, _(" Sorry, I could not put the job in background "));
+	v = do_background (ctx,
+			   g_strconcat (op_names[operation], ": ",
+					panel->cwd, NULL));
+	if (v == -1) {
+	    message (1, MSG_ERROR,
+		     _(" Sorry, I could not put the job in background "));
 	}
 
 	/* If we are the parent */
-	if (v == 1){
+	if (v == 1) {
 	    mc_setctl (panel->cwd, MCCTL_FORGET_ABOUT, NULL);
-	    mc_setctl (dest,       MCCTL_FORGET_ABOUT, NULL);
+	    mc_setctl (dest, MCCTL_FORGET_ABOUT, NULL);
 /*  	    file_op_context_destroy (ctx); */
 	    return 0;
 	}
     }
-#endif /* WITH_BACKGROUND */
+#endif				/* WITH_BACKGROUND */
 
     /* Initialize things */
     /* We do not want to trash cache every time file is
@@ -1906,10 +1914,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (do_bg)
 	ctx->ui = NULL;
     else
-        file_op_context_create_ui (ctx, operation, 1);
-    
+	file_op_context_create_ui (ctx, operation, 1);
+
     /* This code is only called by the tree and panel code */
-    if (only_one){
+    if (only_one) {
 	/* We now have ETA in all cases */
 
 	/* One file: FIXME mc_chdir will take user out of any vfs */
@@ -1919,17 +1927,18 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	/* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
 	source_with_path = concat_dir_and_file (panel->cwd, source);
-#endif /* WITH_FULL_PATHS */
+#endif				/* WITH_FULL_PATHS */
 
 	if (operation == OP_DELETE) {
 	    if (S_ISDIR (src_stat.st_mode))
 		value = erase_dir (ctx, source_with_path, &count, &bytes);
 	    else
-		value = erase_file (ctx, source_with_path, &count, &bytes, 1);
+		value =
+		    erase_file (ctx, source_with_path, &count, &bytes, 1);
 	} else {
 	    temp = transform_source (ctx, source_with_path);
 
-	    if (temp == NULL){
+	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
 		temp = concat_dir_and_file (dest, temp);
@@ -1937,45 +1946,53 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 		dest = temp;
 		temp = 0;
 
-	        switch (operation) {
-	        case OP_COPY:
+		switch (operation) {
+		case OP_COPY:
 		    /*
 		     * we use file_mask_op_follow_links only with OP_COPY,
 		     */
-		    (* ctx->stat_func) (source_with_path, &src_stat);
+		    (*ctx->stat_func) (source_with_path, &src_stat);
 
 		    if (S_ISDIR (src_stat.st_mode))
-		        value = copy_dir_dir (ctx, source_with_path, dest, 1, 0, 0, 0,
-					      &count, &bytes);
+			value =
+			    copy_dir_dir (ctx, source_with_path, dest, 1,
+					  0, 0, 0, &count, &bytes);
 		    else
-		        value = copy_file_file (ctx, source_with_path, dest, 1, &count, &bytes, 1);
+			value =
+			    copy_file_file (ctx, source_with_path, dest, 1,
+					    &count, &bytes, 1);
 		    break;
 
-	        case OP_MOVE:
+		case OP_MOVE:
 		    if (S_ISDIR (src_stat.st_mode))
-		        value = move_dir_dir (ctx, source_with_path, dest, &count, &bytes);
+			value =
+			    move_dir_dir (ctx, source_with_path, dest,
+					  &count, &bytes);
 		    else
-		        value = move_file_file (ctx, source_with_path, dest, &count, &bytes);
+			value =
+			    move_file_file (ctx, source_with_path, dest,
+					    &count, &bytes);
 		    break;
 
-	        default:
-		    value = FILE_CONT;
-		    message_1s (1, _(" Internal failure "), _(" Unknown file operation "));
-	        }
+		default:
+		    /* Unknown file operation */
+		    abort ();
+		}
 	    }
-	} /* Copy or move operation */
+	}			/* Copy or move operation */
 
 	if (value == FILE_CONT)
 	    unmark_files (panel);
     } else {
-        /* Many files */
+	/* Many files */
 	/* Check destination for copy or move operation */
-	if (operation != OP_DELETE){
-	retry_many_dst_stat:
+	if (operation != OP_DELETE) {
+	  retry_many_dst_stat:
 	    dst_result = mc_stat (dest, &dst_stat);
-	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)){
-		if (file_error (_(" Destination \"%s\" must be a directory \n %s "),
-				dest) == FILE_RETRY)
+	    if (dst_result == 0 && !S_ISDIR (dst_stat.st_mode)) {
+		if (file_error
+		    (_(" Destination \"%s\" must be a directory \n %s "),
+		     dest) == FILE_RETRY)
 		    goto retry_many_dst_stat;
 		goto clean_up;
 	    }
@@ -1983,7 +2000,8 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 	/* Initialize variables for progress bars */
 	if (operation != OP_MOVE && verbose && file_op_compute_totals) {
-	    panel_compute_totals (panel, &ctx->progress_count, &ctx->progress_bytes);
+	    panel_compute_totals (panel, &ctx->progress_count,
+				  &ctx->progress_bytes);
 	    ctx->progress_totals_computed = 1;
 	} else {
 	    ctx->progress_totals_computed = 0;
@@ -1993,26 +2011,29 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++) {
-	    if (!panel->dir.list [i].f.marked)
+	    if (!panel->dir.list[i].f.marked)
 		continue;	/* Skip the unmarked ones */
 
-	    source = panel->dir.list [i].fname;
-	    src_stat = panel->dir.list [i].buf;
+	    source = panel->dir.list[i].fname;
+	    src_stat = panel->dir.list[i].buf;
 
 #ifdef WITH_FULL_PATHS
 	    if (source_with_path)
-	    	g_free (source_with_path);
+		g_free (source_with_path);
 	    source_with_path = concat_dir_and_file (panel->cwd, source);
-#endif /* WITH_FULL_PATHS */
+#endif				/* WITH_FULL_PATHS */
 
-	    if (operation == OP_DELETE){
+	    if (operation == OP_DELETE) {
 		if (S_ISDIR (src_stat.st_mode))
-		    value = erase_dir (ctx, source_with_path, &count, &bytes);
+		    value =
+			erase_dir (ctx, source_with_path, &count, &bytes);
 		else
-		    value = erase_file (ctx, source_with_path, &count, &bytes, 1);
+		    value =
+			erase_file (ctx, source_with_path, &count, &bytes,
+				    1);
 	    } else {
 		if (temp)
-		   g_free (temp);
+		    g_free (temp);
 
 		temp = transform_source (ctx, source_with_path);
 		if (temp == NULL)
@@ -2020,62 +2041,74 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 		else {
 		    temp = concat_dir_and_file (dest, temp);
 
-		    switch (operation){
+		    switch (operation) {
 		    case OP_COPY:
-		       /*
-			* we use file_mask_op_follow_links only with OP_COPY,
-		        */
-			(* ctx->stat_func) (source_with_path, &src_stat);
-		    	if (S_ISDIR (src_stat.st_mode))
-			    value = copy_dir_dir (ctx, source_with_path, temp, 1, 0, 0, 0,
-						  &count, &bytes);
-		    	else
-			    value = copy_file_file (ctx, source_with_path, temp, 1,
-						    &count, &bytes, 1);
+			/*
+			 * we use file_mask_op_follow_links only with OP_COPY,
+			 */
+			(*ctx->stat_func) (source_with_path, &src_stat);
+			if (S_ISDIR (src_stat.st_mode))
+			    value =
+				copy_dir_dir (ctx, source_with_path, temp,
+					      1, 0, 0, 0, &count, &bytes);
+			else
+			    value =
+				copy_file_file (ctx, source_with_path,
+						temp, 1, &count, &bytes,
+						1);
 			free_linklist (&dest_dirs);
-		    	break;
+			break;
 
 		    case OP_MOVE:
-		    	if (S_ISDIR (src_stat.st_mode))
-			    value = move_dir_dir (ctx, source_with_path, temp, &count, &bytes);
-		    	else
-		            value = move_file_file (ctx, source_with_path, temp, &count, &bytes);
-		        break;
+			if (S_ISDIR (src_stat.st_mode))
+			    value =
+				move_dir_dir (ctx, source_with_path, temp,
+					      &count, &bytes);
+			else
+			    value =
+				move_file_file (ctx, source_with_path,
+						temp, &count, &bytes);
+			break;
 
 		    default:
-		    	message_1s (1, _(" Internal failure "), _(" Unknown file operation "));
-		    	goto clean_up;
+			/* Unknown file operation */
+			abort ();
 		    }
 		}
-	    } /* Copy or move operation */
+	    }			/* Copy or move operation */
 
 	    if (value == FILE_ABORT)
 		goto clean_up;
 
 	    if (value == FILE_CONT)
-		    do_file_mark (panel, i, 0);
-	    
-	    if (file_progress_show_count (ctx, count, ctx->progress_count) == FILE_ABORT)
+		do_file_mark (panel, i, 0);
+
+	    if (file_progress_show_count (ctx, count, ctx->progress_count)
+		== FILE_ABORT)
 		goto clean_up;
 
-	    if (verbose && file_progress_show_bytes (ctx, bytes, ctx->progress_bytes) == FILE_ABORT)
+	    if (verbose
+		&& file_progress_show_bytes (ctx, bytes,
+					     ctx->progress_bytes) ==
+		FILE_ABORT)
 		goto clean_up;
 
-	    if (operation != OP_DELETE && verbose && file_progress_show (ctx, 0, 0) == FILE_ABORT)
+	    if (operation != OP_DELETE && verbose
+		&& file_progress_show (ctx, 0, 0) == FILE_ABORT)
 		goto clean_up;
 
 	    mc_refresh ();
-	} /* Loop for every file */
-    } /* Many files */
- clean_up:
+	}			/* Loop for every file */
+    }				/* Many files */
+  clean_up:
     /* Clean up */
 
     if (save_cwd) {
-        mc_setctl (save_cwd, MCCTL_NO_STALE_DATA, NULL);
+	mc_setctl (save_cwd, MCCTL_NO_STALE_DATA, NULL);
 	g_free (save_cwd);
     }
     if (save_dest) {
-        mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
+	mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
 	g_free (save_dest);
     }
 
@@ -2083,8 +2116,8 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     free_linklist (&dest_dirs);
 #ifdef WITH_FULL_PATHS
     if (source_with_path)
-    	g_free (source_with_path);
-#endif /* WITH_FULL_PATHS */
+	g_free (source_with_path);
+#endif				/* WITH_FULL_PATHS */
 
     if (dest)
 	g_free (dest);
@@ -2101,15 +2134,14 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	g_free (ctx->dest_mask);
 	ctx->dest_mask = NULL;
     }
-
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
     if (we_are_background) {
 	vfs_shut ();
 	tell_parent (MSG_CHILD_EXITING);
 	_exit (1);
-    } 
-#endif /* WITH_BACKGROUND */
+    }
+#endif				/* WITH_BACKGROUND */
 
     file_op_context_destroy (ctx);
     return 1;

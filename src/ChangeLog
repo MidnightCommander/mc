@@ -1,5 +1,8 @@
 2002-09-27  Pavel Roskin  <proski@gnu.org>
 
+	* file.c (panel_operate): Replace fancy internationalized
+	message boxes for unknown file operations with abort().
+
 	* util.c (name_trunc): Remove unused code, unhelpful error
 	message and workaround for bugs in the callers.
 
