@@ -70,7 +70,7 @@ if test x"$X11_WWW" = x; then
     X11_WWW=lynx
 fi
 
-ALL_LINGUAS="ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sv sk uk wa zh_TW.Big5 tr zh_CN.GB2312"
+ALL_LINGUAS="ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sl sv sk uk wa zh_TW.Big5 tr zh_CN.GB2312"
 
 dnl ultra ulgy hack to get MKINSTALLDIRS right
 AM_GNU_GETTEXT
