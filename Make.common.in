@@ -32,8 +32,6 @@ man8dir    = $(mandir)/man8
 man8ext    = 8
 
 # Tools & program stuff
-SEDCMD = @SEDCMD@
-SEDCMD2 = @SEDCMD2@
 @SET_MAKE@
 CC = @CC@
 CPP = @CPP@

@@ -882,15 +882,6 @@ AC_SUBST(cons_saver)
 AC_SUBST(PAMLIBS)
 
 dnl
-dnl We need sed in order to fix the library files 
-dnl
-    SEDCMD="sed 's/-man/$MANDOC/'"
-    SEDCMD2="sed 's%@prefix@%\$(prefix)%'"
-AC_SUBST(SEDCMD)
-AC_SUBST(SEDCMD2)
-
-
-dnl
 dnl Basic support for charset conversion.
 dnl May be useful e.g. for converting help and hints.
 dnl
