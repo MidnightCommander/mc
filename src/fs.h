@@ -19,6 +19,10 @@
 #   include <dirent.h>
 #   define NLENGTH(dirent) (strlen ((dirent)->d_name))
 #   define DIRENT_LENGTH_COMPUTED 1
+#elif defined(_MSC_VER)
+/* dirent provided by glib */
+#   define NLENGTH(dirent) (strlen ((dirent)->d_name))
+#   define DIRENT_LENGTH_COMPUTED 1
 #else
 #   define dirent direct
 #   define NLENGTH(dirent) ((dirent)->d_namlen)
