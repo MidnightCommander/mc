@@ -34,6 +34,8 @@ EXTFS_OUT = 			\
 	uha			\
 	uzip
 
-extfs_DATA = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_OUT)
+extfs_DATA = $(EXTFS_MISC)
+
+extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
 
 EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST)
