@@ -1,3 +1,8 @@
+1998-11-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panel.h (WPanel): Added the missing tree/pane/view_table fields
+	to the Gnome part of the structure.
+
 1998-11-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cons.saver.c (main): Make sure stderr is always valid.

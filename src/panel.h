@@ -126,6 +126,9 @@ typedef struct {
     void *scrollbar;
     void *status;
     void *ministatus;
+    void *tree;
+    void *pane;
+    void *view_table;
 
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
