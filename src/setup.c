@@ -54,6 +54,11 @@
 #     define PORT_LIST_MODE_DEFAULT "full"
 #endif
 
+#ifdef HAVE_CHARSET
+#include "dialog.h"
+#include "charsets.h"
+#endif
+
 #include "../vfs/vfs.h"
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
@@ -194,8 +199,10 @@ static const struct {
 #ifndef HAVE_X
     { "mouse_repeat_rate", &mou_auto_repeat },
     { "double_click_speed", &double_click_speed },
+#ifndef HAVE_CHARSET
     { "eight_bit_clean", &eight_bit_clean },
     { "full_eight_bits", &full_eight_bits },
+#endif
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
 #endif
     { "confirm_view_dir", &confirm_view_dir },
@@ -441,6 +448,12 @@ save_setup (void)
 				   ftpfs_proxy_host, profile);
 #endif
 #endif
+
+#ifdef HAVE_CHARSET
+    save_string( "Misc", "display_codepage",
+    		 get_codepage_id( display_codepage ), profile_name );
+#endif
+
     g_free (profile);
     saving_setup = 0;
 }
@@ -639,6 +652,27 @@ load_setup (void)
 #ifdef USE_NETCODE
     ftpfs_init_passwd ();
 #endif
+#endif
+
+#ifdef HAVE_CHARSET
+    if ( load_codepages_list() <= 0 ) {
+	char errmsg[256];
+	sprintf( errmsg, "Can't load %s", CHARSETS_INDEX );
+	message( 1, MSG_ERROR, errmsg );
+    } else {
+ 	char cpname[128];
+ 	load_string( "Misc", "display_codepage", "",
+ 		     cpname, sizeof(cpname) );
+	if ( cpname[0] != '\0' ) {
+ 	    char *errmsg;
+
+	    display_codepage = get_codepage_index( cpname );
+	    init_printable_table( display_codepage );
+	    errmsg = init_translation_table( source_codepage, display_codepage );
+	    if (errmsg)
+		message( 1, _(" Error "), errmsg );
+	}
+    }
 #endif
 }
 

@@ -76,6 +76,10 @@
 #include "user.h"		/* expand_format */
 #include "../vfs/vfs.h"
 
+#ifdef HAVE_CHARSET
+#include "charsets.h"
+#endif
+
 /* "$Id$" */
 
 char app_text [] = "Midnight-Commander";
@@ -101,14 +105,27 @@ int is_printable (int c)
     };
 
     extern int xterm_flag;
+#ifdef HAVE_CHARSET
+    extern int display_codepage;
+#else
     extern int eight_bit_clean;
     extern int full_eight_bits;
+#endif
 
 #ifdef HAVE_GNOME
     return 1;
 #endif
     
     c &= 0xff;
+#ifdef HAVE_CHARSET
+    if (display_codepage < 0) {
+ 	if (xterm_flag)
+ 	    return xterm_printable[c];
+ 	else
+ 	    return (c > 31 && c != 127 && c != 155);
+    } else
+	return printable[ c ];
+#else
     if (eight_bit_clean){
         if (full_eight_bits){
 	    if (xterm_flag)
@@ -119,6 +136,7 @@ int is_printable (int c)
 	    return ((c >31 && c < 127) || c >= 160);
     } else
 	return (c > 31 && c < 127);
+#endif
 }
 
 /* Returns the message dimensions (lines and columns) */

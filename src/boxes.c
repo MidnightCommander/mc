@@ -49,6 +49,11 @@
 #include "background.h"
 #include "x.h"
 
+#ifdef HAVE_CHARSET
+#include "charsets.h"
+#include "selcodepage.h"
+#endif
+
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
 static Dlg_head *dd;
@@ -446,6 +451,9 @@ confirm_box ()
 #define DISPY 11
 #define DISPX 46
 
+
+#ifndef HAVE_CHARSET
+
 static int new_mode;
 static int new_meta;
 
@@ -531,6 +539,128 @@ display_bits_box ()
 #endif
     use_8th_bit_as_meta = !new_meta;
 }
+
+
+#else /* HAVE_CHARSET */
+
+
+Dlg_head *dbits_dlg;
+
+static char* dbits_title = N_(" Display bits ");
+
+#ifndef HAVE_X
+static void dbits_refresh()
+{
+    attrset( COLOR_NORMAL );
+    dlg_erase( dbits_dlg );
+    
+    draw_box( dbits_dlg, 1, 2, dbits_dlg->lines - 2, dbits_dlg->cols - 4 );
+    
+    attrset( COLOR_HOT_NORMAL );
+    dlg_move( dbits_dlg, 1, (dbits_dlg->cols - strlen(dbits_title)) / 2 );
+    addstr( dbits_title );
+}
+#endif /* HAVE_X */
+
+static int dbits_callback( Dlg_head * h, int Par, int Msg )
+{
+    switch (Msg) {
+#ifndef HAVE_X
+	case DLG_DRAW:
+	    dbits_refresh();
+	    break;
+#endif /* HAVE_X */
+    }
+    return 0;
+}
+
+int new_display_codepage;
+
+WLabel *cplabel;
+WCheck *inpcheck;
+
+static int sel_charset_button( int action, void *param )
+{
+    char *cpname, buf[64];
+    new_display_codepage = select_charset( new_display_codepage, 1 );
+    cpname = (new_display_codepage < 0)
+	     ? "Other 8 bit"
+	     : codepages[ new_display_codepage ].name;
+    sprintf( buf, "%-27s", cpname ); // avoid strange bug with label repainting
+    label_set_text( cplabel, buf );
+    return 0;
+}
+
+void init_disp_bits_box()
+{
+    char *cpname;
+
+    do_refresh();
+
+    dbits_dlg = create_dlg( 0, 0, DISPY, DISPX, dialog_colors,
+		dbits_callback, "[Display bits]", "Display bits",
+		DLG_CENTER );
+    x_set_dialog_title( dbits_dlg, dbits_title );
+
+    add_widget( dbits_dlg,
+		label_new( 3, 4, _("Input / display codepage:"), NULL));
+
+    cpname = (new_display_codepage < 0)
+	     ? "Other 8 bit"
+	     : codepages[ new_display_codepage ].name;
+    cplabel = label_new( 4, 4, cpname, NULL);
+    add_widget( dbits_dlg, cplabel );
+	
+    add_widget( dbits_dlg,
+		button_new( DISPY - 3, DISPX / 2 + 3, B_CANCEL,
+			    NORMAL_BUTTON, _("&Cancel"), 0, 0, NULL ) );
+    add_widget( dbits_dlg,
+		button_new( DISPY - 3, 7, B_ENTER,
+			    NORMAL_BUTTON, _("&Ok"), 0, 0, NULL ) );
+
+    inpcheck = check_new( 6, 4, !use_8th_bit_as_meta,
+			  _("F&ull 8 bits input"), NULL );
+    add_widget( dbits_dlg, inpcheck );
+
+    add_widget( dbits_dlg,
+		button_new( 4, DISPX - 8 - strlen(_("&Select")) , B_USER,
+			    NORMAL_BUTTON, _("&Select"),
+			    sel_charset_button, 0, NULL ) );
+}
+
+void display_bits_box()
+{
+    new_display_codepage = display_codepage;
+
+#ifndef HAVE_X
+    application_keypad_mode ();
+#endif
+    init_disp_bits_box();
+
+    run_dlg( dbits_dlg );
+
+    if (dbits_dlg->ret_value == B_ENTER) {
+	char *errmsg;
+	display_codepage = new_display_codepage;
+	errmsg = init_translation_table( source_codepage, display_codepage );
+	if (errmsg)
+	    message( 1, _(" Error "), errmsg );
+#ifndef HAVE_X
+#ifndef HAVE_SLANG
+	meta( stdscr, display_codepage != 0 );
+#else
+	SLsmg_Display_Eight_Bit
+	    = (display_codepage != 0 && display_codepage != 1) ? 128 : 160;
+#endif
+#endif
+	use_8th_bit_as_meta = ! (inpcheck->state & C_BOOL);
+    }    
+    destroy_dlg( dbits_dlg );
+    repaint_screen();
+}
+
+#endif /* HAVE_CHARSET */
+
 
 #define TREE_Y 20
 #define TREE_X 60

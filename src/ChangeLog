@@ -1,5 +1,16 @@
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.c [HAVE_CHARSET]: New charset selection dialog.
+	* main.c [HAVE_CHARSET]: Don't use eight_bit_clean and
+	full_eight_bits. Use source_codepage and display_codepage to
+	deduce the terminal 8-bitness.
+	* main.h [HAVE_CHARSET]: Change to match main.c.
+	* setup.c [HAVE_CHARSET]: Implement saving and loading charset
+	settings.
+	* util.c (is_printable) [HAVE_CHARSET]: Use charset settings.
+	* view.c [HAVE_CHARSET]: Implement charset support.
+	From Walery Studennikov <hqsoftware@mail.ru>.
+
 	* selcodepage.c (do_select_codepage): New function.
 	* selcodepage.h: Declare it.
 	From Walery Studennikov <hqsoftware@mail.ru>.

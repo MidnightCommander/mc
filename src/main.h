@@ -67,8 +67,15 @@ extern int mou_auto_repeat;
 extern char *other_dir;
 extern int mouse_move_pages;
 extern int mouse_move_pages_viewer;
+
+#ifdef HAVE_CHARSET
+extern int source_codepage;
+extern int display_codepage;
+#else
 extern int eight_bit_clean;
 extern int full_eight_bits;
+#endif
+
 extern int confirm_view_dir;
 extern int fast_refresh;
 extern int navigate_with_arrows;

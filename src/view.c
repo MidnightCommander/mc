@@ -73,6 +73,10 @@
 #define WANT_WIDGETS
 #include "view.h"
 
+#ifdef HAVE_CHARSET
+#include "charsets.h"
+#endif
+
 #ifndef MAP_FILE
 #define MAP_FILE 0
 #endif
@@ -938,6 +942,10 @@ display (WView *view)
                 /* Print the corresponding ascii character */
 		view_gotoyx (view, row, text_start + bytes);
 		
+#ifdef HAVE_CHARSET
+		c = conv_displ[ c ];
+#endif
+
                 if (!is_printable (c))
                     c = '.';
                 switch (boldflag) {
@@ -1017,6 +1025,11 @@ display (WView *view)
 		&& col < width-view->start_col)
 	    {
 		view_gotoyx (view, row, col+view->start_col);
+
+#ifdef HAVE_CHARSET
+		c = conv_displ[ c ];
+#endif
+
        		if (!is_printable (c))
 		    c = '.';
 
@@ -1983,6 +1996,12 @@ normal_search (WView *view, int direction)
     char *exp = "";
 
     exp = old ? old : exp;
+
+#ifdef HAVE_CHARSET
+    if ( strlen(exp) > 0 )
+	convert_to_display( exp );
+#endif
+
     exp = input_dialog (_(" Search "), _(" Enter search string:"), exp);
     if ((!exp)){
 	return;
@@ -1994,6 +2013,10 @@ normal_search (WView *view, int direction)
     if (old)
 	g_free (old);
     old = exp;
+
+#ifdef HAVE_CHARSET
+    convert_from_input( exp );
+#endif
 
     view->direction = direction;
     do_normal_search (view, exp);
@@ -2135,7 +2158,14 @@ view_handle_key (WView *view, int c)
     int prev_monitor = view->monitor;
 
     set_monitor (view, off);
-    
+
+#ifdef HAVE_CHARSET
+    if (c >= 128 && c <= 255) {
+ 	int ch = conv_input[ c & 0xFF ];
+ 	c = (c & 0xFF00) | ch;
+    }
+#endif
+
     if (view->hex_mode) {
         switch (c) {
         case 0x09:		/* Tab key */
@@ -2304,6 +2334,14 @@ view_handle_key (WView *view, int c)
 	if (view_ok_to_quit (view))
 	    view->view_quit = 1;
 	return 1;
+
+#ifdef HAVE_CHARSET
+    case XCTRL('t'):
+	do_select_codepage();
+	view->dirty++;
+	view_update( view, TRUE );
+	return 1;
+#endif
 
     }
     if (c >= '0' && c <= '9')
