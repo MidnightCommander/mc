@@ -1,5 +1,8 @@
 1999-02-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (drag_data_get): Set the Netscape URL from the icon
+	if it is available.  Wheee!  We can now drop icons onto Netscape.
+
 	* gmain.h: Added prototype for gmc_open_filename().
 
 	* gdesktop.c (desktop_icon_info_open): Fixed call to

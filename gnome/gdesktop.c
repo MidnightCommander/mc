@@ -1150,16 +1150,25 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 					len);
 		break;
 
-        case TARGET_URL:
-		files = gnome_uri_list_extract_uris (filelist);
-		if (files) {
+	case TARGET_URL:
+		if (dii->url)
 			gtk_selection_data_set (selection_data,
 						selection_data->target,
 						8,
-						files->data,
-						strlen (files->data));
+						dii->url,
+						strlen (dii->url));
+		else {
+			files = gnome_uri_list_extract_uris (filelist);
+			if (files)
+				gtk_selection_data_set (selection_data,
+							selection_data->target,
+							8,
+							files->data,
+							strlen (files->data));
+
+			gnome_uri_list_free_strings (files);
 		}
-		gnome_uri_list_free_strings (files);
+
 		break;
 
 	default:
