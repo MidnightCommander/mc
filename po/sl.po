@@ -5499,12 +5499,12 @@ msgstr ""
 
 #: src/main.c:2503
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr "-l, --ftplog file  Pi¹i dnevnik ftpfs ukazov v datoteko.\n"
+msgstr "-l, --ftplog file  Pi¹i dnevnik ukazov ftpfs v datoteko.\n"
 
 #: src/main.c:2506
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
-"-M, --memory dato  [SAMO-RAZVOJ: Pi¹i dnevnik MAD sporoèil v datoteko.]\n"
+"-M, --memory dato  [SAMO-RAZVOJ: Pi¹i dnevnik sporoèil MAD v datoteko.]\n"
 
 #: src/main.c:2508
 msgid ""
