@@ -1,7 +1,11 @@
 2001-01-30  Pavel Roskin  <proski@gnu.org>
 
+	* macros/gnome-vfs.m4 (GNOME_WITH_VFS): Fix mishandling of
+	--without-samba due to a typo.
+
 	* configure.in: Only configure in vfs/samba if smbfs support is
-	enabled.
+	enabled. This optimization will only work with Autoconf-2.49c
+	and above.
 
 2001-01-13  Pavel Roskin  <proski@gnu.org>
 
