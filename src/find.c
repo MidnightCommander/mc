@@ -33,7 +33,6 @@
 #include "global.h"
 #include "win.h"
 #include "color.h"
-#include "global.h"
 #include "setup.h"
 #include "find.h"
 
@@ -51,10 +50,6 @@
 #include "cmd.h"		/* view_file_at_line */
 #include "../vfs/vfs.h"
 
-#ifndef PORT_HAS_FLUSH_EVENTS
-#    define x_flush_events()
-#endif
-
 /* Size of the find parameters window */
 #define FIND_Y 14
 static int FIND_X = 50;
@@ -62,12 +57,8 @@ static int FIND_X = 50;
 /* Size of the find window */
 #define FIND2_Y LINES-4
 
-#ifdef HAVE_X
-#   define FIND2_X_USE 35
-#else
-    static int FIND2_X = 64;
-#   define FIND2_X_USE FIND2_X-20
-#endif
+static int FIND2_X = 64;
+#define FIND2_X_USE FIND2_X-20
 
 /* A couple of extra messages we need */
 enum {
@@ -90,27 +81,13 @@ static char *content_pattern;	/* pattern to search inside files */
 static int count;		/* Number of files displayed */
 static int matches;		/* Number of matches */
 static int is_start;		/* Status of the start/stop toggle button */
-int max_loops_in_idle = 10;
 static char *old_dir;
 
 static Dlg_head *find_dlg;	/* The dialog */
 
-#ifdef HAVE_GNOME
-static GtkWidget *g_find_dlg;
-static GtkWidget *g_status_label;
-static GtkWidget *g_clist;
-static GtkWidget *g_start_stop;
-static GtkWidget *g_start_stop_label;
-static GtkWidget *g_view, *g_edit;
-static GtkWidget *g_panelize;
-static int current_row;
-static int idle_tag;
-static int stop;
-#else
 static WButton *stop_button;	/* pointer to the stop button */
 static WLabel *status_label;	/* Finished, Searching etc. */
 static WListbox *find_list;	/* Listbox with the file list */
-#endif
 
 /* This keeps track of the directory stack */
 typedef struct dir_stack {
@@ -118,9 +95,8 @@ typedef struct dir_stack {
     struct dir_stack *prev;
 } dir_stack ;
 
-dir_stack *dir_stack_base = 0;
+static dir_stack *dir_stack_base = 0;
 
-#ifndef HAVE_GNOME
 static struct {
 	char* text;
 	int len;	/* length including space and brackets */
@@ -135,7 +111,6 @@ static struct {
 	{ N_("&View - F3"), 13, 20 },
 	{ N_("&Edit - F4"), 13, 38 }
 };
-#endif /* !HAVE_GNOME */
 
 static char *add_to_list (char *text, void *closure);
 static void stop_idle (void *data);
@@ -162,9 +137,7 @@ static int
 find_parameters (char **start_dir, char **pattern, char **content)
 {
     int return_value;
-#ifndef HAVE_GNOME
     char *temp_dir;
-#endif
     WCheck *case_sense;
     static char* case_label = N_("case sensi&tive");
 
@@ -215,9 +188,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	
 #endif /* ENABLE_NLS */
 
-#ifndef HAVE_GNOME
 find_par_start:
-#endif
     if (!in_start_dir)
 	in_start_dir = g_strdup (".");
     if (!in_start_name)
@@ -233,10 +204,8 @@ find_par_start:
 
 	add_widget (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
 		buts[2], 0 ,0, "cancel"));
-#ifndef HAVE_GNOME
 	add_widget (find_dlg, button_new (11, b1, B_TREE, NORMAL_BUTTON,
 		buts[1], 0, 0, "tree"));
-#endif
 	add_widget (find_dlg, button_new (11, b0, B_ENTER, DEFPUSH_BUTTON,
 		buts[0], 0, 0, "ok"));
 
@@ -263,7 +232,6 @@ find_par_start:
 	return_value = 0;
 	break;
 
-#ifndef HAVE_GNOME
     case B_TREE:
 	temp_dir = g_strdup (in_start->buffer);
 	case_sensitive = case_sense->state & C_BOOL;
@@ -281,7 +249,6 @@ find_par_start:
 	/* Warning: Dreadful goto */
 	goto find_par_start;
 	break;
-#endif
 	
     default:
 	case_sensitive = case_sense->state & C_BOOL;
@@ -370,7 +337,6 @@ insert_file (char *dir, char *file)
 static void
 find_add_match (Dlg_head *h, char *dir, char *file)
 {
-#ifndef HAVE_GNOME
     int p = ++matches & 7;
 
     insert_file (dir, file);
@@ -384,34 +350,7 @@ find_add_match (Dlg_head *h, char *dir, char *file)
 	send_message (h, &find_list->widget, WIDGET_DRAW, 0);
 	if (p == 7)
 	    mc_refresh ();
-#else
-    insert_file (dir, file);
-#endif /* HAVE_GNOME */
 }
-
-#if 0
-static char *
-locate_egrep (void)
-{
-/* commented out because mc runs egrep via execvp() which searches PATH
-    itself. It is likely that egrep in PATH is better than in /bin */
-    char *paths [] = {
-	"/bin/egrep",
-	"/usr/bin/egrep",
-	"/sbin/egrep",
-	"/usr/sbin/egrep",
-	NULL
-    };
-    struct stat s;
-    char **p;
-    
-    for (p = &paths [0]; *p; p++){
-	if (stat (*p, &s) == 0)
-	    return *p;
-    }
-    return "egrep";
-}
-#endif
 
 /* 
  * search_content:
@@ -506,9 +445,7 @@ do_search (struct Dlg_head *h)
     static DIR  *dirp = 0;
     static char directory [MC_MAXPATHLEN+2];
     struct stat tmp_stat;
-#ifndef HAVE_X
     static int pos;
-#endif
     static int subdirs_left = 0;
     char *tmp_name;		/* For bulding file names */
 
@@ -520,9 +457,7 @@ do_search (struct Dlg_head *h)
         dp = 0;
 	return 1;
     }
-#ifndef HAVE_X
  do_search_begin:
-#endif
     while (!dp){
 	
 	if (dirp){
@@ -533,9 +468,7 @@ do_search (struct Dlg_head *h)
 	while (!dirp){
 	    char *tmp;
 
-#ifndef HAVE_X	    
 	    attrset (REVERSE_COLOR);
-#endif
 	    while (1) {
 		tmp = pop_directory ();
 		if (!tmp){
@@ -609,7 +542,6 @@ do_search (struct Dlg_head *h)
 
     /* Displays the nice dot */
     count++;
-#ifndef HAVE_X
     if (!(count & 31)){
 	/* For nice updating */
 	char *rotating_dash = "|/-\\";
@@ -623,8 +555,6 @@ do_search (struct Dlg_head *h)
 	}
     } else
 	goto do_search_begin;
-#endif
-    x_flush_events ();
     return 1;
 }
 
@@ -672,226 +602,6 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     g_free (fullname);
 }
 
-#ifdef HAVE_GNOME
-static void
-select_row (GtkCList *clist, gint row, gint column, GdkEvent *event)
-{
-	gtk_widget_set_sensitive (g_edit, TRUE);
-	gtk_widget_set_sensitive (g_view, TRUE);
-	current_row = row;
-}
-
-static void
-find_do_chdir (void)
-{
-	gtk_idle_remove (idle_tag);
-	idle_tag = 0;
-	stop = B_ENTER;
-	gtk_main_quit ();
-}
-
-static void
-find_do_again (void)
-{
-	gtk_idle_remove (idle_tag);
-	idle_tag = 0;
-	stop = B_AGAIN;
-	gtk_main_quit ();
-}
-
-static void
-find_do_panelize (void)
-{
-	gtk_idle_remove (idle_tag);
-	idle_tag = 0;
-	stop = B_PANELIZE;
-	gtk_main_quit ();}
-
-
-static void
-find_start_stop (void)
-{
-
-	if (is_start){
-		idle_tag = gtk_idle_add ((GtkFunction)do_search, g_find_dlg);
-	} else {
-		gtk_idle_remove (idle_tag);
-		idle_tag = 0;
-	}
-	
-	gtk_label_set_text (GTK_LABEL (g_start_stop_label),
-			    is_start ? _("Suspend") : _("Restart"));
-	is_start = !is_start;
-	status_update (is_start ? _("Stopped") : _("Searching"));
-}
-
-
-static void
-find_do_view (void)
-{
-	char *file, *dir;
-	
-        get_list_info (&file, &dir);
-
-	find_do_view_edit (0, 0, dir, file);
-}
-
-static void
-find_do_edit (void)
-{
-	char *file, *dir;
-	
-        get_list_info (&file, &dir);
-
-	find_do_view_edit (0, 1, dir, file);
-}
-
-static void
-setup_gui (void)
-{
-	GtkWidget *sw, *b1, *b2;
-	GtkWidget *box, *box2;
-	
-	g_find_dlg = gnome_dialog_new (
-		_("Find file"),
-		GNOME_STOCK_BUTTON_OK,
-		NULL);
-
-	/* The buttons */
-	b1 = gtk_button_new_with_label (_("Change to this directory"));
-	b2 = gtk_button_new_with_label (_("Search again"));
-	g_start_stop_label = gtk_label_new (_("Suspend"));
-	g_start_stop = gtk_button_new ();
-	gtk_container_add (GTK_CONTAINER (g_start_stop), g_start_stop_label);
-	
-	g_view = gtk_button_new_with_label (_("View this file"));
-	g_edit = gtk_button_new_with_label (_("Edit this file"));
-	g_panelize = gtk_button_new_with_label (_("Send the results to a Panel"));
-	
-	box = gtk_hbox_new (TRUE, GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (box), b1, 0, 1, 0);
-	gtk_box_pack_start (GTK_BOX (box), b2, 0, 1, 0);
-	gtk_box_pack_start (GTK_BOX (box), g_start_stop, 0, 1, 0);
-	
-/*	RECOONECT	_("Panelize contents"), */
-/*		_("View"),
-		_("Edit"), */
-	
-	sw = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
-					GTK_POLICY_NEVER,
-					GTK_POLICY_AUTOMATIC);
-	g_clist = gtk_clist_new (1);
-	gtk_clist_set_selection_mode (GTK_CLIST (g_clist), GTK_SELECTION_SINGLE);
-	gtk_widget_set_usize (g_clist, -1, 200);
-	gtk_container_add (GTK_CONTAINER (sw), g_clist);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (g_find_dlg)->vbox),
-			    sw, TRUE, TRUE, GNOME_PAD_SMALL);
-
-	current_row = -1;
-	stop = 0;
-	gtk_signal_connect (GTK_OBJECT (g_clist), "select_row",
-			    GTK_SIGNAL_FUNC (select_row), NULL);
-
-	/*
-	 * Connect the buttons
-	 */
-	gtk_signal_connect (
-		GTK_OBJECT (b1), "clicked", GTK_SIGNAL_FUNC (find_do_chdir), NULL);
-	gtk_signal_connect (
-		GTK_OBJECT (b2), "clicked", GTK_SIGNAL_FUNC (find_do_again), NULL);
-	gtk_signal_connect (
-		GTK_OBJECT (g_start_stop), "clicked", GTK_SIGNAL_FUNC (find_start_stop), NULL);
-	gtk_signal_connect (
-		GTK_OBJECT (g_panelize), "clicked", GTK_SIGNAL_FUNC (find_do_panelize), NULL);
-
-	/*
-	 * View/edit buttons
-	 */
-	gtk_signal_connect (
-		GTK_OBJECT (g_view), "clicked", GTK_SIGNAL_FUNC (find_do_view), NULL);
-	gtk_signal_connect (
-		GTK_OBJECT (g_edit), "clicked", GTK_SIGNAL_FUNC (find_do_edit), NULL);
-
-	gtk_widget_set_sensitive (g_view, FALSE);
-	gtk_widget_set_sensitive (g_edit, FALSE);
-	box2 = gtk_hbox_new (1, GNOME_PAD + GNOME_PAD);
-	gtk_box_pack_start (GTK_BOX (box2), g_view, 0, 0, 0);
-	gtk_box_pack_start (GTK_BOX (box2), g_edit, 0, 0, 0);
-
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (g_find_dlg)->vbox),
-			    box, TRUE, TRUE, GNOME_PAD_SMALL);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (g_find_dlg)->vbox),
-			    box2, TRUE, TRUE, GNOME_PAD_SMALL);
-	
-	g_status_label = gtk_label_new (_("Searching"));
-	gtk_misc_set_alignment (GTK_MISC (g_status_label), 0.0, 0.5);
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (g_find_dlg)->vbox),
-			    g_status_label, TRUE, TRUE, GNOME_PAD_SMALL);
-	
-	gtk_widget_show_all (g_find_dlg);
-	gtk_widget_hide (GTK_WIDGET (g_view));
-	gtk_widget_hide (GTK_WIDGET (g_edit));
-}
-
-static int
-run_process (void)
-{
-	idle_tag = gtk_idle_add ((GtkFunction)do_search, g_find_dlg);
-
-	gnome_dialog_run (GNOME_DIALOG (g_find_dlg));
-	g_start_stop = NULL;
-	
-	return stop;
-}
-
-static void
-kill_gui (void)
-{
-	gtk_object_destroy (GTK_OBJECT (g_find_dlg));
-}
-
-static void
-stop_idle (void *data)
-{
-	if (g_start_stop)
-		gtk_widget_set_sensitive (GTK_WIDGET (g_start_stop), FALSE);
-}
-
-static void
-status_update (char *text)
-{
-	gtk_label_set_text (GTK_LABEL (g_status_label), text);
-	x_flush_events ();
-}
-
-static char *
-add_to_list (char *text, void *data)
-{
-	int row;
-	char *texts [1];
-
-	texts [0] = text;
-	
-	row = gtk_clist_append (GTK_CLIST (g_clist), texts);
-	gtk_clist_set_row_data (GTK_CLIST (g_clist), row, data);
-#if 1
-	if (gtk_clist_row_is_visible (GTK_CLIST (g_clist), row) != GTK_VISIBILITY_FULL)
-		gtk_clist_moveto (GTK_CLIST (g_clist), row, 0, 0.5, 0.0);
-#endif
-	return text;
-}
-
-static void
-get_list_info (char **file, char **dir)
-{
-	if (current_row == -1)
-		*file = *dir = NULL;
-	gtk_clist_get_text (GTK_CLIST (g_clist), current_row, 0, file);
-	*dir = gtk_clist_get_row_data (GTK_CLIST (g_clist), current_row);
-}
-#else	/* HAVE_GNOME */
-
 static void
 get_list_info (char **file, char **dir)
 {
@@ -932,11 +642,9 @@ static int
 find_callback (struct Dlg_head *h, int id, int Msg)
 {
     switch (Msg){
-#ifndef HAVE_X    
     case DLG_DRAW:
         common_dialog_repaint (h);
 	break;
-#endif
 
     case DLG_KEY:
 	if (id == KEY_F(3) || id == KEY_F(13)){
@@ -1086,7 +794,6 @@ kill_gui (void)
     set_idle_proc (find_dlg, 0);
     destroy_dlg (find_dlg);
 }
-#endif	/* HAVE_GNOME */
 
 static int
 find_file (char *start_dir, char *pattern, char *content, char **dirname,  char **filename)
@@ -1117,7 +824,6 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     if (file_tmp)
 	*filename = g_strdup (file_tmp);
 
-#ifndef HAVE_GNOME
     if (return_value == B_PANELIZE && *filename){
 	int status, link_to_dir, stalled_link;
 	int next_free = 0;
@@ -1192,7 +898,6 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    }
 	}
     }
-#endif
 
     kill_gui ();
     do_search (0); /* force do_search to release resources */
