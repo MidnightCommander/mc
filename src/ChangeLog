@@ -1,8 +1,15 @@
+2001-01-21  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* subshell.c (do_subshell_chdir): temporary patch to prevent command
+	execution for directory names containing 0x03 (intr) 0x14.
+	See http://www.securityfocus.com/vdb/?id=2016 for details.
+	Subshell still can't chdir to such directories :(
+	
+	* subshell.[ch] (do_subshell_chdir): directory constified
+
 2001-01-17  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Respect LDFLAGS when linking cons.saver.
-
-2000-11-20  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* view.c: Fixed long existed bugs in internal viewer. When search is
 	doing in binary file it ignore skipped zero(es), so cursor is before
