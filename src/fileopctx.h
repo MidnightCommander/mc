@@ -67,7 +67,7 @@ typedef struct {
 	int preserve;
 
 	/* If running as root, preserve the original uid/gid (we don't want to
-	 * try chwon for non root) preserve_uidgid = preserve && uid == 0
+	 * try chown for non root) preserve_uidgid = preserve && uid == 0
 	 */
 	int preserve_uidgid;
 
