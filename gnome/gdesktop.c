@@ -236,7 +236,7 @@ get_desktop_icon (char *pathname)
 		free (full_fname);
 	}
 	
-	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
+	return gnome_unconditional_pixmap_file ("launcher-program.png");
 }
 
 /*
@@ -956,7 +956,7 @@ my_create_transparent_text_window (char *file, char *text)
 		static char *default_pix;
 
 		if (!default_pix){
-			default_pix = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+			default_pix = gnome_unconditional_pixmap_file ("launcher-program.png");
 		}
 		w = create_transparent_text_window (default_pix, text, events);
 		if (!w)
@@ -985,7 +985,7 @@ get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
 		static char exists;
 		
 		if (!default_icon_path) {
-			default_icon_path = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+			default_icon_path = gnome_unconditional_pixmap_file ("launcher-program.png");
 			if (g_file_exists (default_icon_path))
 				exists = 1;
 		}
