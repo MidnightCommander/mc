@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 2000-05-09 11:31+0200\n"
-"PO-Revision-Date: 2000-05-09 11:41+02:00\n"
+"POT-Creation-Date: 2000-05-16 11:14+0200\n"
+"PO-Revision-Date: 2000-05-16 11:14+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -350,28 +350,28 @@ msgstr "Synlige kolonner"
 msgid "Custom View"
 msgstr "Egendefinert visning"
 
-#: gnome/gdesktop.c:622 gnome/gmount.c:382
+#: gnome/gdesktop.c:629 gnome/gmount.c:382
 msgid "Warning"
 msgstr "Advarsel"
 
-#: gnome/gdesktop.c:623
+#: gnome/gdesktop.c:630
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kunne ikke åpne %s; vil ikke ha skrivebordsikoner"
 
-#: gnome/gdesktop.c:1298
+#: gnome/gdesktop.c:1347
 msgid "While running the mount/umount command"
 msgstr "Under kjøring av mount/umount kommandoen"
 
-#: gnome/gdesktop.c:1367
+#: gnome/gdesktop.c:1416
 msgid "While running the eject command"
 msgstr "Under kjøring av eject kommandoen"
 
-#: gnome/gdesktop.c:1551 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1600 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Feil"
 
-#: gnome/gdesktop.c:2775
+#: gnome/gdesktop.c:2832
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -385,84 +385,88 @@ msgstr ""
 "\n"
 "Kan ikke sette bakgrunnen."
 
-#: gnome/gdesktop.c:2798 gnome/glayout.c:362
+#: gnome/gdesktop.c:2855 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2798 gnome/glayout.c:363
+#: gnome/gdesktop.c:2855 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Starter en ny terminal i aktiv katalog"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2800 gnome/glayout.c:365
+#: gnome/gdesktop.c:2857 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "Katalog..."
 
-#: gnome/gdesktop.c:2800 gnome/glayout.c:366
+#: gnome/gdesktop.c:2857 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Oppretter en ny katalog"
 
-#: gnome/gdesktop.c:2801
+#: gnome/gdesktop.c:2858
 msgid "URL L_ink..."
 msgstr "URL-snarve_i..."
 
-#: gnome/gdesktop.c:2801
+#: gnome/gdesktop.c:2858
 msgid "Creates a new URL link"
 msgstr "Oppretter en ny URL-snarvei"
 
-#: gnome/gdesktop.c:2802
+#: gnome/gdesktop.c:2859
 msgid "_Launcher..."
 msgstr "_Oppstarter..."
 
-#: gnome/gdesktop.c:2802
+#: gnome/gdesktop.c:2859
 msgid "Creates a new launcher"
 msgstr "Oppretter en ny oppstarter"
 
-#: gnome/gdesktop.c:2808
+#: gnome/gdesktop.c:2865
 msgid "By _Name"
 msgstr "Etter _navn"
 
-#: gnome/gdesktop.c:2809
+#: gnome/gdesktop.c:2866
 msgid "By File _Type"
 msgstr "Etter _filtype"
 
-#: gnome/gdesktop.c:2810
+#: gnome/gdesktop.c:2867
 msgid "By _Size"
 msgstr "Etter _størrelse"
 
-#: gnome/gdesktop.c:2811
+#: gnome/gdesktop.c:2868
 msgid "By Time Last _Accessed"
 msgstr "Etter tid for siste _aksess"
 
-#: gnome/gdesktop.c:2812
+#: gnome/gdesktop.c:2869
 msgid "By Time Last _Modified"
 msgstr "Etter tid for siste _modifikasjon"
 
-#: gnome/gdesktop.c:2813
+#: gnome/gdesktop.c:2870
 msgid "By Time Last _Changed"
 msgstr "Etter tid for siste _endring"
 
-#: gnome/gdesktop.c:2821 gnome/glayout.c:462
+#: gnome/gdesktop.c:2878 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Plasser ikonene"
 
-#: gnome/gdesktop.c:2822
+#: gnome/gdesktop.c:2879
+msgid "_Tidy Icons"
+msgstr "_Rydd ikoner"
+
+#: gnome/gdesktop.c:2880
 msgid "Create _New Window"
 msgstr "Opprett _nytt vindu"
 
-#: gnome/gdesktop.c:2824 gnome/glayout.c:464
+#: gnome/gdesktop.c:2882 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "Oppdater skrivebor_dskatalogen"
 
-#: gnome/gdesktop.c:2825 gnome/glayout.c:465
+#: gnome/gdesktop.c:2883 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Oppdater en_heter"
 
-#: gnome/gdesktop.c:2826 gnome/glayout.c:466
+#: gnome/gdesktop.c:2884 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Lag standard_ikonene på nytt"
 
-#: gnome/gdesktop.c:2828
+#: gnome/gdesktop.c:2886
 msgid "Configure _Background Image"
 msgstr "Konfigurer _bakgrunnsbilde"
 
@@ -5491,8 +5495,10 @@ msgid ""
 msgstr ""
 "-v, --view fname   Start opp i visningsmodus.\n"
 "-V, --version      Vis versjon og konfigurasjonsvalg.\n"
-"-x, --xterm        Tvungen bruk av mus i xterm og lagring/gjenoppretting av skjerm\n"
-"+number            Startplassering for markøren i filen som kjøres i `mcedit'.\n"
+"-x, --xterm        Tvungen bruk av mus i xterm og lagring/gjenoppretting av "
+"skjerm\n"
+"+number            Startplassering for markøren i filen som kjøres i "
+"`mcedit'.\n"
 
 #: src/main.c:2538
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
@@ -6516,29 +6522,29 @@ msgstr ""
 "Uventet slutt på fil\n"
 "%s"
 
-#: vfs/direntry.c:300
+#: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Katalog-cache utgått for %s"
 
-#: vfs/direntry.c:430 vfs/direntry.c:433
+#: vfs/direntry.c:431 vfs/direntry.c:434
 msgid " Direntry warning "
 msgstr " Advarsel for katalogoppføring "
 
-#: vfs/direntry.c:430
+#: vfs/direntry.c:431
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage er %d, minnelekkasje"
 
-#: vfs/direntry.c:433
+#: vfs/direntry.c:434
 msgid "Super has want_stale set"
 msgstr "Super har want_stale sett"
 
-#: vfs/direntry.c:811
+#: vfs/direntry.c:812
 msgid "Starting linear transfer..."
 msgstr "Starter lineær overføring..."
 
-#: vfs/direntry.c:956
+#: vfs/direntry.c:957
 msgid "Getting file"
 msgstr "Henter fil"
 
