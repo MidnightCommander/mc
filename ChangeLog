@@ -1,6 +1,6 @@
 2003-01-29  Pavel Roskin  <proski@gnu.org>
 
-	* lib/mc.ext.in: Fix missing comma that affected viewing RPM
+	* lib/mc.ext.in: Fix missing semicolon that affected viewing RPM
 	packages.
 
 2003-01-24  Pavel Roskin  <proski@gnu.org>
