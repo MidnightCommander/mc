@@ -18,6 +18,12 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+
+# This script is incomplete!  It doesn't download libiconv.  This is OK
+# for glibc-based systems, but probably not for others.  This limitation
+# is known.  Please don't report it.
+
+
 : ${MC_TOPDIR=`pwd`}
 : ${TMP_INSTDIR=$MC_TOPDIR/tmp-inst}
 : ${GLIB_VERSION=2.2.3}
