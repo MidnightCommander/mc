@@ -612,12 +612,14 @@ static void
 handle_mount (GtkWidget *widget, WPanel *panel)
 {
 	perform_mount_unmount (panel, TRUE);
+	update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 static void
 handle_unmount (GtkWidget *widget, WPanel *panel)
 {
 	perform_mount_unmount (panel, FALSE);
+	update_panels (UP_RELOAD, UP_KEEPSEL);
 }
 
 static void
@@ -646,8 +648,9 @@ handle_eject (GtkWidget *widget, WPanel *panel)
 		do_mount_umount (full_name, FALSE);
 	
 	do_eject (lname);
-
+	
 	desktop_icon_set_busy (dii, FALSE);
+	update_panels (UP_RELOAD, UP_KEEPSEL);
 	g_free (lname);
 	g_free (full_name);
 }

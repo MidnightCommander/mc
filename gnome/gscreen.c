@@ -1429,6 +1429,13 @@ panel_icon_list_unselect_icon (GtkWidget *widget, int index, GdkEvent *event, WP
 }
 
 static int
+queue_reread_cmd (gpointer data)
+{
+	reread_cmd ();
+	return FALSE;
+}
+
+static int
 panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 {
 	char *source;
@@ -1437,6 +1444,8 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 	if (mc_rename (source, dest) == 0){
 		g_free (panel->dir.list [index].fname);
 		panel->dir.list [index].fname = g_strdup (dest);
+
+		gtk_idle_add (queue_reread_cmd, NULL);
 		return TRUE;
 	} else
 		return FALSE;

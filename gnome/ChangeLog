@@ -1,3 +1,9 @@
+1999-08-12  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c (handle_unmount): We refresh when we unmount/mount a cdrom.
+
+	* gscreen.c (queue_reread_cmd): We refresh when we make a change.
+
 1999-08-12  Federico Mena Quintero  <federico@redhat.com>
 
 	The two following entries are BUGFIX: GNOME bug tracker #1789.
