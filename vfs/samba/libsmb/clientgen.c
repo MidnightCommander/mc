@@ -535,7 +535,7 @@ BOOL cli_NetWkstaUserLogon(struct cli_state *cli,char *user, char *workstation)
 /****************************************************************************
 call a NetShareEnum - try and browse available connections on a host
 ****************************************************************************/
-BOOL cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, const char *))
+int cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, const char *, void *), void * state)
 {
   char *rparam = NULL;
   char *rdata = NULL;
@@ -579,7 +579,7 @@ BOOL cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, c
 		      int type = SVAL(p,14);
 		      int comment_offset = IVAL(p,16) & 0xFFFF;
 		      char *cmnt = comment_offset?(rdata+comment_offset-converter):"";
-		      fn(sname, type, cmnt);
+		      fn(sname, type, cmnt, state);
 	      }
       } else {
 	      DEBUG(4,("NetShareEnum res=%d\n", res));
@@ -605,7 +605,7 @@ The callback function takes 3 arguments: the machine name, the server type and
 the comment.
 ****************************************************************************/
 BOOL cli_NetServerEnum(struct cli_state *cli, char *workgroup, uint32 stype,
-		       void (*fn)(const char *, uint32, const char *))
+		       void (*fn)(const char *, uint32, const char *, void *), void *state)
 {
 	char *rparam = NULL;
 	char *rdata = NULL;
@@ -656,7 +656,7 @@ BOOL cli_NetServerEnum(struct cli_state *cli, char *workgroup, uint32 stype,
 
 				stype = IVAL(p,18) & ~SV_TYPE_LOCAL_LIST_ONLY;
 
-				fn(sname, stype, cmnt);
+				fn(sname, stype, cmnt, state);
 			}
 		}
 	}
@@ -1994,7 +1994,7 @@ static int interpret_long_filename(int level,char *p,file_info *finfo)
   do a directory listing, calling fn on each file found
   ****************************************************************************/
 int cli_list(struct cli_state *cli,const char *Mask,uint16 attribute, 
-	     void (*fn)(file_info *, const char *))
+	     void (*fn)(file_info *, const char *, void *), void *state)
 {
 	int max_matches = 512;
 	/* NT uses 260, OS/2 uses 2. Both accept 1. */
@@ -2145,7 +2145,7 @@ int cli_list(struct cli_state *cli,const char *Mask,uint16 attribute,
 
 	for (p=dirlist,i=0;i<total_received;i++) {
 		p += interpret_long_filename(info_level,p,&finfo);
-		fn(&finfo, Mask);
+		fn(&finfo, Mask, state);
 	}
 
 	/* free up the dirlist buffer */

@@ -416,9 +416,10 @@ BOOL cli_api(struct cli_state *cli,
 	     char **rparam, int *rprcnt,
 	     char **rdata, int *rdrcnt);
 BOOL cli_NetWkstaUserLogon(struct cli_state *cli,char *user, char *workstation);
-BOOL cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, const char *));
+int cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, const char *, void *), void *state);
 BOOL cli_NetServerEnum(struct cli_state *cli, char *workgroup, uint32 stype,
-		       void (*fn)(const char *, uint32, const char *));
+		       void (*fn)(const char *, uint32, const char *, void *),
+		       void *state);
 BOOL cli_session_setup(struct cli_state *cli, 
 		       char *user, 
 		       char *pass, int passlen,
@@ -461,7 +462,7 @@ BOOL cli_qfileinfo(struct cli_state *cli, int fnum,
 		   time_t *c_time, time_t *a_time, time_t *m_time, 
 		   time_t *w_time, SMB_INO_T *ino);
 int cli_list(struct cli_state *cli,const char *Mask,uint16 attribute, 
-	     void (*fn)(file_info *, const char *));
+	     void (*fn)(file_info *, const char *, void *), void *state);
 BOOL cli_oem_change_password(struct cli_state *cli, const char *user, const char *new_password,
                              const char *old_password);
 BOOL cli_negprot(struct cli_state *cli);

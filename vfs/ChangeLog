@@ -1,5 +1,13 @@
 2002-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* samba/libsmb/clientgen.c (cli_NetServerEnum): Add void* 
+	parameter to (*fn)() and void *state parameter.
+	(cli_list): Likewise.
+	(cli_RNetShareEnum): Likewise.  Return int.
+	* samba/include/proto.h: Adjust declarations.
+	* smbfs.c: Adjust all helpers and dependencies.
+	From Samba patchsets.
+
 	* smbfs.c (loaddir_helper): Remove write permissions if file
 	has readonly attribute.  Add execute permissions for directory.
 	Reformat whole function.

@@ -424,7 +424,7 @@ new_dir_entry (const char * name)
 
 /* browse for shares on server */
 static void
-browsing_helper (const char *name, uint32 type, const char *comment)
+browsing_helper (const char *name, uint32 type, const char *comment, void *state)
 {
     char *typestr = "";
 
@@ -452,7 +452,7 @@ browsing_helper (const char *name, uint32 type, const char *comment)
 }
 
 static void
-loaddir_helper (file_info * finfo, const char *mask)
+loaddir_helper (file_info * finfo, const char *mask, void *entry)
 {
     dir_entry *new_entry;
     time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
@@ -520,7 +520,7 @@ convert_path(char **remote_file, gboolean trailing_asterik)
 }
 
 static void
-server_browsing_helper (const char *name, uint32 m, const char *comment)
+server_browsing_helper (const char *name, uint32 m, const char *comment, void *state)
 {
     dir_entry *new_entry = new_dir_entry (name);
 
@@ -675,14 +675,14 @@ smbfs_loaddir (opendir_info *smbfs_info)
 			DEBUG(6, ("smbfs_loaddir: browsing %s\n", IPC));
 			/* browse for servers */
 			if (!cli_NetServerEnum(smbfs_info->conn->cli, smbfs_info->conn->domain,
-				SV_TYPE_ALL, server_browsing_helper))
+				SV_TYPE_ALL, server_browsing_helper, NULL), NULL)
 					return 0;
 			else
 				current_server_info = smbfs_info;
 			smbfs_info->server_list = TRUE;
 		} else {
 			/* browse for shares */
-			if (cli_RNetShareEnum(smbfs_info->conn->cli, browsing_helper) < 1)
+			if (cli_RNetShareEnum(smbfs_info->conn->cli, browsing_helper, NULL) < 1)
 					return 0;
 			else
 				current_share_info = smbfs_info;
@@ -705,7 +705,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 	DEBUG(6, ("smbfs_loaddir: calling cli_list with mask %s\n", my_dirname));
 	/* do file listing: cli_list returns number of files */
 	if (cli_list(
-		smbfs_info->conn->cli, my_dirname, attribute, loaddir_helper) < 0) {
+		smbfs_info->conn->cli, my_dirname, attribute, loaddir_helper, NULL) < 0) {
 		/* cli_list returns -1 if directory empty or cannot read socket */
 		my_errno = cli_error(smbfs_info->conn->cli, NULL, &err, NULL);
 		g_free (my_dirname);
@@ -1264,7 +1264,7 @@ fake_share_stat(const char *server_url, const char *path, struct stat *buf)
 static dir_entry *single_entry;
 
 static void
-statfile_helper (file_info * finfo, const char *mask)
+statfile_helper (file_info * finfo, const char *mask, void * entry)
 {
     time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
 
@@ -1316,7 +1316,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 
 	convert_path(&mypath, FALSE);
 
-	if (cli_list(sc->cli, mypath, attribute, statfile_helper) < 1) {
+	if (cli_list(sc->cli, mypath, attribute, statfile_helper, &single_entry) < 1) {
 		my_errno = ENOENT;
 		g_free (mypath);
 		return -1;	/* cli_list returns number of files */
