@@ -649,6 +649,7 @@ mc_return_cwd (void)
 	    current_dir = p;
 	    return p;
 	} /* Otherwise we return current_dir below */
+	g_free (p);
     } 
     return current_dir;
 }

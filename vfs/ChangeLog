@@ -1,3 +1,7 @@
+2001-11-02  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* vfs.c (mc_return_cwd): Memory leak fixed.
+
 2001-11-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/smblib/pwd_cache.c (pwd_read): Commented out.
