@@ -83,3 +83,9 @@ install_mcview:
 
 install_mcedit:
 	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcedit && $(LN_S) mc mcedit
+
+uninstall-hook:
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcview
+if USE_EDIT
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcedit
+endif
