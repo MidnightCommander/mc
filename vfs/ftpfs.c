@@ -1047,7 +1047,7 @@ resolve_symlink(struct connection *bucket, struct dir *dir)
                 strcat (tmp + 1, fel->linkname);
 	    }
 	    for ( ;; ) {
-		canonicalize_pathname (remote_path);
+		canonicalize_pathname (tmp);
                 fe = _get_file_entry(bucket, tmp, 0, 0);
                 if (fe) {
                     if (S_ISLNK (fe->s.st_mode) && fe->l_stat == 0) {

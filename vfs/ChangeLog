@@ -1,3 +1,8 @@
+Sat Oct  3 14:28:57 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (resolve_symlink): fixed cut'n paste error in my last
+	change, i.e. make it compile)
+	
 Sat Oct  3 01:03:37 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink): minor speed enhancement
