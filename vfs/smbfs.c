@@ -84,6 +84,7 @@ static struct _smbfs_connection {
 } smbfs_connections [SMBFS_MAX_CONNECTIONS];
 /* unique to each connection */
 
+/* modifies *share */
 static struct cli_state * smbfs_do_connect (const char *server, char *share);
 
 typedef struct _smbfs_connection smbfs_connection;
@@ -97,6 +98,12 @@ typedef struct {
 } smbfs_handle;
 
 static GSList *auth_list;
+
+static inline BOOL dbghdr_wrapper (int level, const char *file, const char *func, int line)
+{
+	return dbghdr (level, const_cast(char *, file), const_cast(char *, func), line);
+}
+#define dbghdr dbghdr_wrapper
 
 static void 
 smbfs_auth_free (struct smb_authinfo const *a)
@@ -264,7 +271,7 @@ smbfs_set_debugf (const char *filename)
     if (DEBUGLEVEL > 0) {
 	FILE *outfile = fopen (filename, "w");
 	if (outfile) {
-	    setup_logging ("", True);	/* No needs for timestamp for each message */
+	    setup_logging (const_cast(char *, ""), True);	/* No needs for timestamp for each message */
 	    dbf = outfile;
 	    setbuf (dbf, NULL);
 	    pstrcpy (debugf, filename);
@@ -276,7 +283,7 @@ smbfs_set_debugf (const char *filename)
 static int
 smbfs_init (struct vfs_class * me)
 {
-    char *servicesf = CONFIGDIR PATH_SEP_STR "smb.conf";
+    const char *servicesf = CONFIGDIR PATH_SEP_STR "smb.conf";
 
     /*  DEBUGLEVEL = 4; */
 
@@ -449,7 +456,7 @@ smbfs_new_dir_entry (const char *name)
 static void
 smbfs_browsing_helper (const char *name, uint32 type, const char *comment, void *state)
 {
-    char *typestr = "";
+    const char *typestr = "";
 
     dir_entry *new_entry = smbfs_new_dir_entry (name);
 
@@ -608,7 +615,7 @@ See if server has cut us off by checking for EPIPE when writing.
 Taken from cli_chkpath()
 ****************************************************************************/
 static BOOL
-smbfs_chkpath(struct cli_state *cli, char *path, BOOL send_only)
+smbfs_chkpath(struct cli_state *cli, const char *path, BOOL send_only)
 {
 	fstring path2;
 	char *p;
@@ -946,7 +953,7 @@ smbfs_do_connect (const char *server, char *share)
 	
 	DEBUG(3, (" session setup ok\n"));
 
-	if (!cli_send_tconX(c, share, "?????",
+	if (!cli_send_tconX(c, share, const_cast(char *, "?????"),
 			    current_bucket->password, strlen(current_bucket->password)+1)) {
 		DEBUG(1,("%s: tree connect failed: %s\n", share, cli_errstr(c)));
 		break;
@@ -976,7 +983,7 @@ smbfs_get_master_browser(char **host)
                              interpret_addr(lp_socket_address()), True ); 
 	if (fd == -1)
 		return 0;
-	set_socket_options(fd, "SO_BROADCAST");
+	set_socket_options(fd, const_cast(char *, "SO_BROADCAST"));
 	ip_list = iface_bcast(ipzero);
 	bcast_addr = *ip_list;
 	if ((ip_list = name_query(fd, "\01\02__MSBROWSE__\02", 1, True, 
@@ -1534,10 +1541,10 @@ smbfs_stat (struct vfs_class * me, const char *path, struct stat *buf)
 	return -1;
     {
 	int hostlen = strlen (current_bucket->host);
-	char *pp = service + strlen (service) - hostlen;
+	char *ppp = service + strlen (service) - hostlen;
 	char *sp = server_url + strlen (server_url) - hostlen;
 
-	if (strcmp (sp, pp) == 0) {
+	if (strcmp (sp, ppp) == 0) {
 	    /* make server name appear as directory */
 	    DEBUG (1, ("smbfs_stat: showing server as directory\n"));
 	    memset (buf, 0, sizeof (struct stat));
