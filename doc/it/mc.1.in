@@ -217,13 +217,16 @@ Alcuni comandi nel Midnight Commander presuppongono l'uso dei tasti
 .I Meta
 (talvolta chiamato ALT o anche Compose). In questo manuale si utilizzeranno
 le seguenti abbreviazioni:
-.PP
-C-<chr> significa premere il tasto control mentre si batte il carattere
+.TP
+.B C-<chr>
+significa premere il tasto control mentre si batte il carattere
 <chr>. Perciò C-f sarà: premi e tieni premuto il tasto Control e premi f.
-.PP
-M-<chr> significa premere il tasto Meta o Alt mentre si batte <chr>. Se
-non c'è un tasto Meta o Alt, premere ESC, rilasciarlo, poi premere il
-carattere <chr>. 
+.TP
+.B M-<chr>
+significa premere il tasto Meta o Alt mentre si batte <chr>. Se
+non c'è un tasto Meta o Alt, premere
+.IR ESC ,
+rilasciarlo, poi premere il carattere <chr>. 
 .PP
 Tutte le linee di ingresso nel Midnight Commander usano un'approssimazione
 dei tasti del GNU Emacs.
@@ -266,9 +269,9 @@ che le linee di ingresso nelle finestre di interrogazione.
 .SH "  Tasti Vari"
 Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
 altre categorie:
-.PP
-.B Invio.
-Se c'è del testo nella linea di comando (quella in fondo ai pannelli),
+.TP
+.B Invio
+se c'è del testo nella linea di comando (quella in fondo ai pannelli),
 allora quel comando viene eseguito. Se non c'è testo nella linea di
 comando allora se la barra di selezione è sopra una directory il
 Midnight Commander esegue un
@@ -281,72 +284,72 @@ delle estensioni presenti nel
 file estensioni\&,
 .\"Extension File Edit"
 il comando corrispondente viene eseguito.
-.PP
-.B C-l.
-Ridisegna tutto nel Midnight Commander.
-.PP
-.B C-x c.
-Esegue il comando
+.TP
+.B C-l
+ridisegna tutto nel Midnight Commander.
+.TP
+.B C-x c
+esegue il comando
 .\"LINK2"
 Chmod
 .\"Chmod"
 su un file o su un gruppo di file marcati.
-.PP
-.B C-x o.
-Esegue il comando
+.TP
+.B C-x o
+esegue il comando
 .\"LINK2"
 Chown
 .\"Chown"
 sul file corrente o sui file marcati.
-.PP
-.B C-x l.
-Crea un collegamento.
-.PP
-.B C-x s.
-Crea un collegamento simbolico.
-.PP
-.B C-x i.
-Imposta la modalità della visualizzazione dell'altro pannello a informazioni.
-.PP
-.B C-x q.
-Imposta la modalità della visualizzazione dell'altro pannello a vista rapida.
-.PP
-.B C-x !.
-Esegue il comando
+.TP
+.B C-x l
+crea un collegamento.
+.TP
+.B C-x s
+crea un collegamento simbolico.
+.TP
+.B C-x i
+imposta la modalità della visualizzazione dell'altro pannello a informazioni.
+.TP
+.B C-x q
+imposta la modalità della visualizzazione dell'altro pannello a vista rapida.
+.TP
+.B C-x !
+esegue il comando
 .\"LINK2"
 Pannellizza comando\&.
 .\"External panelize"
-.PP
+.TP
 .B C-x h
-Esegue il comando
+esegue il comando
 .\"LINK2"
 aggiungi directory alla lista directory favorite\&.
 .\"Hotlist"
-.PP
-.B M-!,
-Esegue il comando Vista filtrata, descritto in
+.TP
+.B M-!
+esegue il comando Vista filtrata, descritto in
 .\"LINK2"
 Vista filtrata\&.
 .\"Internal File Viewer"
-.PP
-.B M-?,
-Esegui il comando
+.TP
+.B M-?
+esegue il comando
 .\"LINK2"
 Trova file\&.
 .\"Find File"
-.PP
-.B M-c,
-Mostra la finestra
+.TP
+.B M-c
+mostra la finestra
 .\"LINK2"
 cambia dir veloce\&.
 .\"Quick cd"
-.PP
-.B C-o,
-Quando il programma viene eseguito in una console Linux o SCO o in un xterm,
+.TP
+.B C-o
+quando il programma viene eseguito in una console Linux o SCO o in un xterm,
 mostrerà il risultato del comando precedente. Eseguito in console Linux, il
 Midnight Commander usa un programma esterno (cons.saver) per gestire il
 salvataggio e recupero delle informazioni sullo schermo.
-.PP
+.IP
 Se è stato compilato il supporto alla subsell, è possibile premere C-o
 in ogni momento per tornare alla schermata principale del Midnight Commander;
 per tornare all'applicazione basta premere C-o. Se si ha un'applicazione
@@ -362,145 +365,144 @@ date un'occhiata alla sezione su
 .\"LINK2"
 Menu Sinistro e Destro\&.
 .\"Left and Right Menus"
-.PP
-.B Tab, C-i.
-Cambia il pannello corrente. L'altro pannello diventa il nuovo pannello 
+.TP
+.B Tab, C-i
+cambia il pannello corrente. L'altro pannello diventa il nuovo pannello 
 corrente mentre il pannello corrente diventa l'altro pannello.
 La barra di selezione si sposta dal vecchio pannello al nuovo corrente.
-.PP
-.B Ins, C-t.
-Per marcare i file si può usare il tasto di Inserimento (la sequenza
+.TP
+.B Ins, C-t
+per marcare i file si può usare il tasto di Inserimento (la sequenza
 teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
 basta marcare un file già marcato.
-.PP
-.B M-g, M-r, M-j.
-Usato per selezionare rispettivamente il file superiore, il file centrale o 
+.TP
+.B M-g, M-r, M-j
+usato per selezionare rispettivamente il file superiore, il file centrale o 
 quello inferiore in un pannello.
-.PP
-.B C-s, M-s.
-Inizia una ricerca nel nella directory. Quando la ricerca è attiva
+.TP
+.B C-s, M-s
+inizia una ricerca nel nella directory. Quando la ricerca è attiva
 i dati immessi dall'utente vengono aggiunti alla stringa di ricerca
 invece della riga di comando. Se l'opzione
-.I "Mostra mini-stato"
+.I Mostra mini-stato
 è abilitata, la stringa di ricerca viene mostrata nella riga di
 mini-stato. Scrivendo, la barra di selezione si muove al prossimo
 file che comincia con le lettere battute. Il tasti
-.I "backspace"
+.I backspace
 o
 .I canc 
 possono essere utilizzati per correggere errori di battitura. Se viene premuto
 nuovamente, viene ricercata la corrispondenza seguente.
-.PP
+.TP
 .B M-t
-Cambia il modo di visualizzazione corrente per mostrare la modalità
+cambia il modo di visualizzazione corrente per mostrare la modalità
 successiva. In questo modo è possibile cambiare velocemente da listati
 lunghi a listati normali a listati definiti dall'utente.
-.PP
-.B C-\\\\ (control-barra retroversa).
-Mostra le
+.TP
+.B C-\\\\ (control-barra retroversa)
+mostra le
 .\"LINK2"
 directory favorite
 .\"Hotlist"
 e va alla directory selezionata.
-.PP
-.B + \ (più).
-Viene utilizzato per selezionare (marcare) un gruppo di file. Il Midnight 
+.TP
+.B + \ (più)
+viene utilizzato per selezionare (marcare) un gruppo di file. Il Midnight 
 Commander richiederà un'espressione regolare per descrivere il gruppo.
 Quando i 
 .I modelli della shell
 sono abilitati, le espressioni regolari sono molto simili alle espressioni
-regolari in una shell (* significa zero o più caratteri e ? un carattere). Se
-i 
-.I modelli della shell 
+regolari in una shell (* significa zero o più caratteri e ? un carattere). Se i 
+.I modelli della shell
 sono disabilitati, la marcatura dei file viene fatta con le normali espressioni
 regolari (vedere (1)).
-.PP
+.IP
 Se l'espressione comincia o finisce con una barra (/), allora selezionerà
 directory invece che file.
-.PP
-.B \\\\ (barra retroversa).
-Usare il tasto "\\" per deselezionare un gruppo di file. Questo è l'opposto
+.TP
+.B \\\\ (barra retroversa)
+usare il tasto "\\" per deselezionare un gruppo di file. Questo è l'opposto
 del tasto più.
-.PP
-.B freccia-su, C-p.
-Sposta la barra di selezione alla voce precedente nel pannello.
-.PP
-.B freccia-giù, C-n.
-Sposta barra di selezione alla voce successiva nel pannello.
-.PP
-.B home, a1, M-<.
-Sposta la barra di selezione alla prima voce nel pannello.
-.PP
-.B fine, c1, M->.
-Sposta la barra di selezione all'ultima voce nel pannello.
-.PP
-.B pagina-giù, C-v.
-Sposta la barra di selezione di una pagina in basso.
-.PP
-.B pagina-su, M-v.
-Sposta la barra di selezione di una pagina in alto.
-.PP
-.B M-o.
-Se l'altro pannello è un elenco e si è su una directory nel
+.TP
+.B freccia-su, C-p
+sposta la barra di selezione alla voce precedente nel pannello.
+.TP
+.B freccia-giù, C-n
+sposta barra di selezione alla voce successiva nel pannello.
+.TP
+.B home, a1, M-<
+sposta la barra di selezione alla prima voce nel pannello.
+.TP
+.B fine, c1, M->
+sposta la barra di selezione all'ultima voce nel pannello.
+.TP
+.B pagina-giù, C-v
+sposta la barra di selezione di una pagina in basso.
+.TP
+.B pagina-su, M-v
+sposta la barra di selezione di una pagina in alto.
+.TP
+.B M-o
+se l'altro pannello è un elenco e si è su una directory nel
 pannello corrente, allora il contenuto dell'altro pannello viene
 impostato al contenuto della directory correntemente selezionata
 (come con il tasto C-o dired in Emacs) altrimenti il contenuto 
 dell'altro pannello viene impostato sulla directory madre della 
 dir corrente.
-.PP
-.B C-PaginaSu, C-PaginaGiù.
-Solo quando si esegue in console Linux: rispettivamente cambia 
+.TP
+.B C-PaginaSu, C-PaginaGiù
+solo quando si esegue in console Linux: rispettivamente cambia 
 directory a ".." e alla directory correntemente selezionata.
-.PP
-.B M-y.
-Sposta la directory precedente nello storico, equivalente a 
+.TP
+.B M-y
+sposta la directory precedente nello storico, equivalente a 
 premere '<' con il mouse.
-.PP
-.B M-u.
-Sposta la directory successiva nello storico, equivalente a 
+.TP
+.B M-u
+sposta la directory successiva nello storico, equivalente a 
 premere '>' con il mouse.
-.PP
-.B M-S-h, M-H.
-Mostra lo storico directory, equivalente a premere 'v' con il mouse.
+.TP
+.B M-S-h, M-H
+mostra lo storico directory, equivalente a premere 'v' con il mouse.
 .PP
 .\"NODE "  Shell Command Line"
 .SH "  Shell a riga di comando"
 Questa sezione elenca i tasti utili ad evitare troppe battiture
 nell'immissione dei comandi.
-.PP
-.B M-Invio.
-Copia nella riga di comando il nome del file attualmente selezionato.
-.PP
-.B C-Invio.
-Come M-Invio, ma funziona solo dalla console Linux.
-.PP
-.B M-Tab.
-Esegue automaticamente il 
+.TP
+.B M-Invio
+copia nella riga di comando il nome del file attualmente selezionato.
+.TP
+.B C-Invio
+come M-Invio, ma funziona solo dalla console Linux.
+.TP
+.B M-Tab
+esegue automaticamente il 
 .\"LINK2"
 completamento
 .\"Completion"
 del nome del file, variabile, nome utente e nome host.
-.PP
-.B C-x t, C-x C-t.
-Copia i file marcati (o se non vi sono file marcati, il file selezionato)
+.TP
+.B C-x t, C-x C-t
+copia i file marcati (o se non vi sono file marcati, il file selezionato)
 del pannello corrente (C-x t) o dell'altro pannello (C-x C-t) sulla
 riga di comando.
-.PP
-.B C-x p, C-x C-p.
-La prima sequenza di tasti copia il percorso corrente sulla riga di comando
+.TP
+.B C-x p, C-x C-p
+la prima sequenza di tasti copia il percorso corrente sulla riga di comando
 e la seconda copia il percorso del pannello non selezionato sulla riga
 di comando.
-.PP
-.B C-q.
-Il comando di inserimento letterale serve per inserire caratteri che 
+.TP
+.B C-q
+il comando di inserimento letterale serve per inserire caratteri che 
 sarebbero altrimenti interpretati dal Midnight Commander (come il simbolo '+')
-.PP
-.B M-p, M-n.
+.TP
+.B M-p, M-n
 Usa questi tasti per navigare attraverso lo storico comandi. M-p va alla voce
 precedente, M-n va alla successiva.
-.PP
-.B M-h.
-Mostra lo storico per la riga di ingresso corrente.
+.TP
+.B M-h
+mostra lo storico per la riga di ingresso corrente.
 .PP
 .\"NODE "  General Movement Keys"
 .SH "  Tasti Generali di Movimento"
@@ -511,39 +513,39 @@ altri tasti indipendenti.
 .PP
 Diverse parti del Midnight Commander usano gli stessi tasti di
 movimento, questa sezione riguarda quelle parti.
+.TP
+.B Su, C-p
+si sposta di una linea indietro.
+.TP
+.B Giu, C-n
+si sposta di una linea avanti.
+.TP
+.B Pagina Su, M-v
+si sposta di una pagina in alto.
+.TP
+.B Pagina Giu, C-v
+si sposta di una pagina in basso.
+.TP
+.B Home, A1
+si sposta all'inizio.
+.TP
+.B Fine, C1
+si sposta alla fine.
 .PP
-.B Su, C-p.
-Si sposta di una linea indietro.
-.PP
-.B Giu, C-n.
-Si sposta di una linea avanti.
-.PP
-.B Pagina Su, M-v.
-Si sposta di una pagina in alto.
-.PP
-.B Pagina Giu, C-v.
-Si sposta di una pagina in basso.
-.PP
-.B Home, A1.
-Si sposta all'inizio.
-.PP
-.B Fine, C1.
-Si sposta alla fine.
-.PP
-Il visualizzatore dell'aiuto accetta i seguenti tasti, in aggiunta a quelli
-menzionati sopra:
-.PP
-.B b, C-b, C-h, Backspace, Canc.
-Si sposta di una pagina in alto.
-.PP
-.B Barra spaziatrice.
-Si sposta di una pagina in basso.
-.PP
-.B u, d.
-Si sposta di mezza pagina in alto o in basso.
-.PP
-.B g, G.
-Si sposta all'inizio o alla fine.
+In aggiunta a quelli menzionati sopra, il visualizzatore dell'aiuto accetta 
+i seguenti tasti:
+.TP
+.B b, C-b, C-h, Backspace, Canc
+si sposta di una pagina in alto.
+.TP
+.B Barra spaziatrice
+si sposta di una pagina in basso.
+.TP
+.B u, d
+si sposta di mezza pagina in alto o in basso.
+.TP
+.B g, G
+si sposta all'inizio o alla fine.
 .PP
 .\"NODE "  Input Line Keys"
 .SH "  Tasti di Riga di Ingresso"
@@ -554,54 +556,54 @@ riga di comando
 .\"Shell Command Line"
 e per i dialoghi di richiesta dati nel programma) accettano
 questi tasti:
-.PP
+.TP
 .B C-a
 sposta il cursore all'inizio della linea.
-.PP
+.TP
 .B C-e
 sposta il cursore alla fine della linea
-.PP
+.TP
 .B C-b, freccia-sinistra
 sposta il cursore di una posizione a sinistra.
-.PP
+.TP
 .B C-f, freccia-destra
 sposta il cursore di una posizione a destra.
-.PP
+.TP
 .B M-f
 sposta il cursore di una parola in avanti.
-.PP
+.TP
 .B M-b
 sposta il cursore di una parola indietro.
-.PP
+.TP
 .B C-h, backspace
 cancella il carattere precedente.
-.PP
+.TP
 .B C-d, Canc
 cancella il carattere nel punto (sopra il cursore).
-.PP
+.TP
 .B C-@
 imposta il marcatore per tagliare.
-.PP
+.TP
 .B C-w
 copia il testo tra il cursore e il marcatore in un kill buffer 
 e rimuove il testo dalla linea di ingresso.
-.PP
+.TP
 .B M-w
 copia il testo tra il cursore ed il marcatore in un kill buffer.
-.PP
+.TP
 .B C-y
 inserisce il contenuto del kill buffer.
-.PP
+.TP
 .B C-k
 elimina il testo dal cursore alla fine della linea.
-.PP
+.TP
 .B M-p, M-n
 usa questi tasti per navigare attraverso lo storico dei comandi. M-p 
 posiziona sull'ultima voce, M-n posiziona sulla seguente.
-.PP
+.TP
 .B M-C-h, M-Backspace
 cancella una parola indietro.
-.PP
+.TP
 .B M-Tab
 fa del nomefile, comando, variabile, nomeutente e nomehost il
 .\"LINK2"
