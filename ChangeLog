@@ -1,3 +1,7 @@
+1999-11-01  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Bumped version number to 4.5.41.
+
 1999-09-23  Federico Mena Quintero  <federico@redhat.com>
 
 	* configure.in (VERSION): Set version number to 4.5.39.
