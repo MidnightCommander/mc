@@ -418,22 +418,24 @@ static opendir_info
 
 static gboolean first_direntry;
 
-static dir_entry * 
-new_dir_entry (const char * name)
+static dir_entry *
+new_dir_entry (const char *name)
 {
-	dir_entry *new_entry;
-	new_entry = g_new0 (dir_entry, 1);
-	new_entry->text = dos_to_unix (g_strdup (name), 1);
+    static int inode_counter;
+    dir_entry *new_entry;
+    new_entry = g_new0 (dir_entry, 1);
+    new_entry->text = dos_to_unix (g_strdup (name), 1);
 
-	if (first_direntry) {
-		current_info->entries = new_entry;
-		first_direntry = FALSE;
-	} else {
-		current_info->current->next = new_entry;
-	}
-	current_info->current = new_entry;
+    if (first_direntry) {
+	current_info->entries = new_entry;
+	first_direntry = FALSE;
+    } else {
+	current_info->current->next = new_entry;
+    }
+    current_info->current = new_entry;
+    new_entry->my_stat.st_ino = inode_counter++;
 
-	return new_entry;
+    return new_entry;
 }
 
 /* browse for shares on server */
