@@ -1,3 +1,7 @@
+2003-07-23  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add more "end" and "home" sequences for xterm.
+
 2003-07-22  Pavel Roskin  <proski@gnu.org>
 
 	Get rid of all references to NATIVE_WIN32.

@@ -87,9 +87,11 @@ bs=
 home=\e[1~
 home=\e[7~
 end=\eOF
+end=\e[F
 end=\e[4~
 end=\e[8~
 home=\eOH
+home=\e[H
 pgdn=\e[6~
 pgup=\e[5~
 
