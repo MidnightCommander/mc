@@ -33,6 +33,7 @@
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gmetadata.h"
+#include "gpopup.h"
 #include "../vfs/vfs.h"
 
 
@@ -335,6 +336,7 @@ static gint
 desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_text)
 {
 	int retval;
+	char *filename;
 
 	retval = FALSE;
 
@@ -343,8 +345,11 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 		if ((event->button.button == 1) && !(on_text && dii->selected)) {
 			select_icon (dii, (GdkEventButton *) event);
 			retval = TRUE;
-		} else if (event->button.button == 3)
-			retval = TRUE; /* FIXME: display menu */
+		} else if (event->button.button == 3) {
+			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+			gpopup_do_popup (filename, FALSE, (GdkEventButton *) event);
+			retval = TRUE;
+		}
 
 		break;
 

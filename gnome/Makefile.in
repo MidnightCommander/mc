@@ -15,49 +15,51 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
 GNOMESRCS = 		\
+	gblist.c	\
+	gcache.c	\
+	gcliplabel.c	\
+	gcmd.c		\
 	gdesktop-icon.c	\
-	gdnd.c		\
-	gkey.c 		\
-	gmain.c 	\
-	gmetadata.c	\
-	gscreen.c 	\
-	gwidget.c 	\
-	gmenu.c		\
-	ginfo.c 	\
-	ghelp.c 	\
-	glayout.c 	\
-	gtools.c 	\
 	gdesktop.c 	\
+	gdnd.c		\
+	ghelp.c 	\
+	ginfo.c 	\
+	gkey.c 		\
+	glayout.c 	\
+	gmain.c 	\
+	gmc-chargrid.c	\
+	gmenu.c		\
+	gmetadata.c	\
+	gpageprop.c	\
+	gpopup.c	\
+	gprop.c		\
+	gscreen.c 	\
+	gtools.c 	\
 	gutil.c		\
 	gview.c		\
-	gcmd.c		\
-	gprop.c		\
-	gmc-chargrid.c	\
-	gpageprop.c	\
-	gcliplabel.c	\
-	gcache.c	\
-	gblist.c
+	gwidget.c
 
 GNOMEHDRS = 		\
+	gblist.h	\
+	gcache.h	\
+	gcliplabel.h	\
+	gcmd.h		\
+	gconf.h		\
 	gdesktop-icon.h	\
+	gdesktop.h	\
 	gdnd.h		\
 	gmain.h 	\
-	gmetadata.h	\
-	gscreen.h	\
-	gwidget.h 	\
-	gdesktop.h	\
-	gconf.h		\
-	gcmd.h		\
-	gprop.h		\
-	gpageprop.h	\
 	gmc-chargrid.h	\
-	gcliplabel.h	\
-	gcache.h	\
-	gblist.h
+	gmetadata.h	\
+	gpageprop.h	\
+	gpopup.h	\
+	gprop.h		\
+	gscreen.h	\
+	gwidget.h
 
-ICONS = 				\
+ICONS = 			\
 	directory.xpm		\
-	i-directory.png	\
+	i-directory.png		\
 	i-executable.png	\
 	i-symlink.png		\
 	i-device.png		\
@@ -84,28 +86,29 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	option.o cmd.o utilunix.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
+	gblist.o	\
+	gcache.o	\
+	gcliplabel.o	\
+	gcmd.o		\
 	gdesktop-icon.o	\
+	gdesktop.o 	\
 	gdnd.o		\
-	gkey.o 		\
-	gmain.o 	\
-	gmetadata.o	\
-	gscreen.o 	\
-	gwidget.o 	\
-	gmenu.o 	\
 	ghelp.o 	\
 	ginfo.o 	\
+	gkey.o 		\
 	glayout.o 	\
-	gtools.o 	\
-	gdesktop.o 	\
-	gutil.o 	\
-	gcmd.o		\
+	gmain.o 	\
 	gmc-chargrid.o 	\
-	gview.o		\
-	gprop.o		\
+	gmenu.o 	\
+	gmetadata.o	\
 	gpageprop.o	\
-	gcliplabel.o	\
-	gcache.o	\
-	gblist.o
+	gpopup.o	\
+	gprop.o		\
+	gscreen.o 	\
+	gtools.o 	\
+	gutil.o 	\
+	gview.o		\
+	gwidget.o
 
 #
 # Distribution variables

@@ -1,3 +1,13 @@
+1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_event): Run the popup menu for the
+	icons in the desktop.
+
+	* gpopup.[ch]: New files that take care of the popup menus for
+	files in the desktop and in the panels.
+
+	* Makefile.in: Added gpopup.[ch] to the list of sources.
+
 1998-11-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_place): Save the icon position
