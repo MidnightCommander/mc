@@ -966,8 +966,7 @@ static int
 mcfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
 {
     char *remote_file, *stat_str;
-    int error;
-    size_t len;
+    int status, error;
     mcfs_connection *mc;
 
     if (!(remote_file = mcfs_get_path (&mc, path)))
@@ -985,9 +984,8 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, int size)
     if (!rpc_get (mc->sock, RPC_STRING, &stat_str, RPC_END))
 	return mcfs_set_error (-1, EIO);
 
-    len = strlen (stat_str);
-    size = len > (size - 1) ? size - 1 : len;
-    g_strlcpy (buf, stat_str, size + 1);
+    strncpy (buf, stat_str, size - 1);
+    buf[size - 1] = '\0';
     g_free (stat_str);
     return size;
 }

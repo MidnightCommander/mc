@@ -1,3 +1,8 @@
+2004-09-02  Roland Illig  <roland.illig@gmx.de>
+
+	* mcfs.c (mcfs_readlink): Fixed syntax error (usage of
+	undeclared variable). Simplified string copying.
+
 2004-09-02  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* extfs/uzip.in (mczipfs_list): Add support for negative 
