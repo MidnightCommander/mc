@@ -316,6 +316,7 @@ gnome_exit (void)
 		GNOME_STOCK_BUTTON_YES,
 		GNOME_STOCK_BUTTON_NO,
 		NULL);
+	gmc_window_setup_from_panel (GNOME_DIALOG (w), cpanel);
 	v = gnome_dialog_run (GNOME_DIALOG (w));
 	if (v != 0)
 		return;
@@ -329,6 +330,7 @@ gnome_exit (void)
 		GNOME_STOCK_BUTTON_OK,
 		GNOME_STOCK_BUTTON_CANCEL,
 		NULL);
+	gmc_window_setup_from_panel (GNOME_DIALOG (w), cpanel);
 	v = gnome_dialog_run (GNOME_DIALOG (w));
 	if (v == 0) {
 		/*

@@ -1,5 +1,8 @@
 2001-07-16  Pavel Roskin  <proski@gnu.org>
 
+	* glayout.c (gnome_exit): Position message boxes near the
+	current panel.
+
 	* gutil.c (port_shutdown_extra_fds): Remove, it's unused.
 	(exec_direct): Likewise.
 	* gconf.h: Remove declaration of port_shutdown_extra_fds().
