@@ -1,4 +1,10 @@
-2001-09-06  Timur Bakeyev <mc@bat.ru>
+2001-09-06  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/php.syntax: New file - PHP file highlighting.  Copied
+	from Cooledit 3.17.4.
+	* syntax/Makefile.am: Add php.syntax.
+
+2001-09-06  Timur Bakeyev  <mc@bat.ru>
 
 	* acconfig.h: Brought back couple of symbols, that are still necessary
 	due reference to them from configure.in.

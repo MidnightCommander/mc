@@ -1,0 +1,247 @@
+
+# PHP syntax file
+# kludges by Stephen Perez ;)
+
+# (comment highlighting modifications (alla Emacs) by Paul Sheer) */
+
+
+context default cyan/5
+    keyword <? brightcyan/17
+    keyword ?> brightcyan/17
+    keyword <% brightcyan/17
+    keyword %> brightcyan/17    
+
+
+context <!-- --> green/4
+    spellcheck
+
+context <! > green/4
+    spellcheck
+
+context < > brightcyan/17        
+    keyword <?*?> black/0 white/26
+    keyword <%*%> black/0 white/26
+    
+
+context exclusive <? ?> 
+    keyword whole __FILE__ yellow/24
+    keyword whole __LINE__ yellow/24
+    keyword whole and yellow/24
+    keyword whole array yellow/24
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole cfunction yellow/24
+    keyword whole class yellow/24
+    keyword whole const yellow/24
+    keyword whole continue yellow/24
+    keyword whole default yellow/24
+    keyword whole die yellow/24
+    keyword whole do yellow/24
+    keyword whole double yellow/24
+    keyword whole echo yellow/24
+    keyword whole else yellow/24
+    keyword whole elseif yellow/24
+    keyword whole empty yellow/24
+    keyword whole endfor yellow/24
+    keyword whole endif yellow/24
+    keyword whole endswitch yellow/24
+    keyword whole endwhile yellow/24
+    keyword whole eval yellow/24
+    keyword whole exit yellow/24
+    keyword whole extends yellow/24
+    keyword whole float yellow/24
+    keyword whole for yellow/24
+    keyword whole function yellow/24
+    keyword whole global yellow/24
+    keyword whole highlight_file yellow/24
+    keyword whole highlight_string yellow/24
+    keyword whole if yellow/24
+    keyword whole include yellow/24
+    keyword whole int yellow/24
+    keyword whole integer yellow/24
+    keyword whole isset yellow/24
+    keyword whole list yellow/24
+    keyword whole new yellow/24
+    keyword whole object yellow/24
+    keyword whole old_function yellow/24
+    keyword whole or yellow/24
+    keyword whole print yellow/24
+    keyword whole real yellow/24
+    keyword whole require yellow/24
+    keyword whole return yellow/24
+    keyword whole show_source yellow/24
+    keyword whole static yellow/24
+    keyword whole string yellow/24
+    keyword whole switch yellow/24
+    keyword whole unset yellow/24
+    keyword whole var yellow/24
+    keyword whole while yellow/24
+    keyword whole xor yellow/24
+    keyword whole php_array yellow/24
+    keyword whole php_const yellow/24
+    keyword whole php_echo yellow/24
+    keyword whole php_file yellow/24
+    keyword whole php_line yellow/24
+    keyword whole php_list yellow/24
+    keyword whole php_print yellow/24
+    keyword whole true yellow/24       
+    keyword whole false yellow/24    
+    keyword whole $this yellow/24
+    
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword . brightcyan/14
+    keyword ; brightcyan/14
+    keyword & yellow/24
+    keyword | yellow/24
+    keyword ^ yellow/24
+    keyword ? yellow/24
+    keyword : yellow/24
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword ! yellow/24
+    keyword != yellow/24
+    keyword == yellow/24    
+    
+
+#   comments
+    keyword /\**\*/ brown/22    
+    keyword linestart /\**\n brown/22    
+    keyword linestart \s\**\n brown/22    
+    keyword linestart \s\**/\n brown/22    
+    keyword \**/\n brown/22    
+    keyword //*\n brown/22    
+
+#   quotes (kludge that allows for 10 nested quotes)
+    keyword "*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*\\"*" brightmagenta/19    
+    keyword "*\\"*" brightmagenta/19    
+    keyword "*" brightmagenta/19    
+
+    keyword '*' green/4
+    
+#   variables
+    keyword $\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz1234567890\] brightred/18   
+
+context exclusive <% %> 
+    keyword whole __FILE__ yellow/24
+    keyword whole __LINE__ yellow/24
+    keyword whole and yellow/24
+    keyword whole array yellow/24
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole cfunction yellow/24
+    keyword whole class yellow/24
+    keyword whole const yellow/24
+    keyword whole continue yellow/24
+    keyword whole default yellow/24
+    keyword whole die yellow/24
+    keyword whole do yellow/24
+    keyword whole double yellow/24
+    keyword whole echo yellow/24
+    keyword whole else yellow/24
+    keyword whole elseif yellow/24
+    keyword whole empty yellow/24
+    keyword whole endfor yellow/24
+    keyword whole endif yellow/24
+    keyword whole endswitch yellow/24
+    keyword whole endwhile yellow/24
+    keyword whole eval yellow/24
+    keyword whole exit yellow/24
+    keyword whole extends yellow/24
+    keyword whole float yellow/24
+    keyword whole for yellow/24
+    keyword whole function yellow/24
+    keyword whole global yellow/24
+    keyword whole highlight_file yellow/24
+    keyword whole highlight_string yellow/24
+    keyword whole if yellow/24
+    keyword whole include yellow/24
+    keyword whole int yellow/24
+    keyword whole integer yellow/24
+    keyword whole isset yellow/24
+    keyword whole list yellow/24
+    keyword whole new yellow/24
+    keyword whole object yellow/24
+    keyword whole old_function yellow/24
+    keyword whole or yellow/24
+    keyword whole print yellow/24
+    keyword whole real yellow/24
+    keyword whole require yellow/24
+    keyword whole return yellow/24
+    keyword whole show_source yellow/24
+    keyword whole static yellow/24
+    keyword whole string yellow/24
+    keyword whole switch yellow/24
+    keyword whole unset yellow/24
+    keyword whole var yellow/24
+    keyword whole while yellow/24
+    keyword whole xor yellow/24
+    keyword whole php_array yellow/24
+    keyword whole php_const yellow/24
+    keyword whole php_echo yellow/24
+    keyword whole php_file yellow/24
+    keyword whole php_line yellow/24
+    keyword whole php_list yellow/24
+    keyword whole php_print yellow/24
+    keyword whole true yellow/24       
+    keyword whole false yellow/24    
+    keyword whole $this yellow/24    
+    
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword . brightcyan/14
+    keyword ; brightcyan/14
+    keyword & yellow/24
+    keyword | yellow/24
+    keyword ^ yellow/24
+    keyword ? yellow/24
+    keyword : yellow/24
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword ! yellow/24    
+    keyword != yellow/24
+    keyword == yellow/24    
+    
+
+
+    keyword /\**\*/ brown/22    
+    keyword linestart /\**\n brown/22    
+    keyword linestart \s\**\n brown/22    
+    keyword linestart \s\**/\n brown/22    
+    keyword //*\n brown/22    
+    keyword "*" brightmagenta/19    
+    keyword '*' green/4
+    
+
+    keyword $\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz1234567890\] brightred/18   
+
+
+
