@@ -96,17 +96,13 @@ AC_DEFUN([MC_WITH_VFS],[
       dnl
       dnl mcfs support
       dnl
-      mcfs="mcfs"
       AC_ARG_WITH(mcfs,
-	  [--with-mcfs	           Support mc's private file system],[
-	  if test "x$withval" = "xno"; then
-	    mcfs=""
+	  [--with-mcfs	           Support mc-specific networking file system],[
+	  if test "x$withval" != "xno"; then
+	    AC_DEFINE(WITH_MCFS, 1, [Define to enable mc-specific networking file system])
+            vfs_flags="$vfs_flags, mcfs"
 	  fi
       ])
-      if test "x$mcfs" != "x"; then
-	  AC_DEFINE(WITH_MCFS, 1, [Define to enable mc's private file system])
-          vfs_flags="$vfs_flags, mcfs"
-      fi
       vfs_flags="$vfs_flags, ftpfs, fish"
       use_net_code=true
   fi

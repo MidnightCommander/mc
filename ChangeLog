@@ -1,5 +1,7 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (MC_WITH_VFS): Disable mcfs by default.
+
 	* configure.in: Enable subshell support on all operating systems
 	by default.  Old issues are most likely solved by now.
 
