@@ -1,3 +1,25 @@
+Wed Mar  4 22:43:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtools.c (query_dialog): Rewritten to use the MC dialog/widget code. 
+
+	* gutil.c (my_system), acconfig.h: By default gnome will not have
+	a subshell (at least for now) and will now exec everything
+	asyncronously by default.
+
+	* gscreen.c: Exactly what was I thinking when I used the
+	g_panel_contents structure will remain a mistery for future
+	programming psycologists.  It was a huge mistake.
+
+	* gdesktop.c: Use the new icon/text display routine from
+	Federico. 
+
+Tue Mar  3 21:03:52 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (x_destroy_dlg): Call gtk_grab_remove when destroying
+	the dialog. 
+
+	* gmain.c (x_focus_widget): Handle special case of toplevels.
+
 1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c: Some hackish changes to work around idempotence bugs

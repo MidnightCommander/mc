@@ -28,6 +28,7 @@
 #include "gscreen.h"
 #include "dir.h"
 #include "dialog.h"
+#include "gdesktop.h"
 
 #include "directory.xpm"
 
@@ -42,6 +43,8 @@ static char *drop_types [] = { "url:ALL" };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
+GtkWidget *drag_directory = NULL;
+GtkWidget *drag_directory_ok = NULL;
 
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
@@ -692,15 +695,39 @@ fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_ac
 	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes);
 	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes);
 }
-				
+
+static void
+panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
+{
+	printf ("Drag starting\n");
+
+}
+
 static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
 {
+	GdkPoint hotspot = { 5, 5 };
 	GtkObject *obj = GTK_OBJECT (file_list);
+
+	if (!drag_directory)
+		drag_directory = make_transparent_window ("directory-ok.xpm");
+
+	if (!drag_directory_ok)
+		drag_directory_ok = make_transparent_window ("directory.xpm");
+
+	if (drag_directory && drag_directory_ok){
+		gtk_widget_show (drag_directory_ok);
+		gtk_widget_show (drag_directory);
+		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
+		drag_directory_ok->window, &hotspot);
+	}
 	
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event",
 			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
+	gtk_signal_connect (obj, "drag_begin_event",
+			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+
 	fixed_gtk_widget_dnd_drag_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types));
  
 	/* DND: Drop setup */
@@ -782,7 +809,7 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter_w, *statusbar, *vbox;
-	
+
 	panel->table = gtk_table_new (2, 1, 0);
 	gtk_widget_show (panel->table);
 	
