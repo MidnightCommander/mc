@@ -487,7 +487,7 @@ regex/\.trpm$
 # RPM packages (SuSE uses *.spm for source packages)
 regex/\.(rpm|spm)$
 	Open=%cd %p#rpm
-	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" fi ; $RPM -qivlp --scripts %f
+	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
 
 # deb
 regex/\.deb$
