@@ -8,22 +8,55 @@
 
 #include <config.h>
 #include <sys/stat.h>
-#include <gdk/gdkprivate.h>
-#include "gdnd.h"
 #include "file.h"
 #include "main.h"
 #include "panel.h"
 #include "gscreen.h"
 #include "../vfs/vfs.h"
+#include <gdk/gdkprivate.h>
+#include "gdnd.h"
 
+
+/* The menu of DnD actions */
+static GnomeUIInfo actions[] = {
+	GNOMEUIINFO_ITEM_NONE (N_("Move here"), NULL, NULL),
+	GNOMEUIINFO_ITEM_NONE (N_("Copy here"), NULL, NULL),
+	GNOMEUIINFO_ITEM_NONE (N_("Link here"), NULL, NULL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Cancel drag"), NULL, NULL)
+};
 
 /* Pops up a menu of actions to perform on dropped files */
 static GdkDragAction
 get_action (void)
 {
-	/* FIXME */
-	printf ("Should query for the action!\n");
-	return GDK_ACTION_LINK;
+	GtkWidget *menu;
+	int a;
+	GdkDragAction action;
+
+	menu = gnome_popup_menu_new (actions);
+	a = gnome_popup_menu_do_popup_modal (menu, NULL, NULL, NULL, NULL);
+
+	switch (action) {
+	case 0:
+		action = GDK_ACTION_MOVE;
+		break;
+
+	case 1:
+		action = GDK_ACTION_COPY;
+		break;
+
+	case 2:
+		action = GDK_ACTION_LINK;
+		break;
+
+	default:
+		action = GDK_ACTION_ASK; /* Magic value to indicate cancellation */
+	}
+
+	gtk_widget_destroy (menu);
+
+	return action;
 }
 
 /* Looks for a panel that has the specified window for its list display.  It is used to figure out

@@ -29,7 +29,6 @@ GNOMESRCS = 		\
 	gtools.c 	\
 	gdesktop.c 	\
 	gutil.c		\
-	gtrans.c	\
 	gview.c		\
 	gcmd.c		\
 	gprop.c		\
@@ -98,7 +97,6 @@ OBJS = $(LOBJS) $(OOBJS) \
 	glayout.o 	\
 	gtools.o 	\
 	gdesktop.o 	\
-	gtrans.o 	\
 	gutil.o 	\
 	gcmd.o		\
 	gmc-chargrid.o 	\

@@ -35,8 +35,6 @@
 #include "gmetadata.h"
 #include "../vfs/vfs.h"
 
-/* use grid? */
-int icons_snap_to_grid = 1;
 
 /* Name of the user's desktop directory (i.e. ~/desktop) */
 #define DESKTOP_DIR_NAME "desktop"

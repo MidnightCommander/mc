@@ -245,13 +245,7 @@ static struct {
     { "editor_syntax_highlighting", &option_syntax_highlighting },
 #endif
 
-#ifdef HAVE_GNOME
-#if 0
-    { "want_transparent_text", &want_transparent_text },
-    { "want_transparent_icons", &want_transparent_icons },
-    { "icons_snap_to_grid", &icons_snap_to_grid },
-#endif
-#else
+#ifndef HAVE_GNOME
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split", &horizontal_split },
 #endif

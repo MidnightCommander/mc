@@ -1,3 +1,8 @@
+1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* setup.c: Removed the icons_snap_to_grid and
+	want_transparent_{icons,text} options.
+
 Thu Nov  5 12:10:10 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* file.c (panel_operate): check for null pointer before passing it

@@ -1,3 +1,14 @@
+1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.in: Removed gtrans.c from the list of sources.
+
+	* gdesktop-icon.c: #ifdef cleanups.
+
+	* gscreen.c (panel_create_file_list): Doh.  Return the scrolled
+	window, not the clist.
+
+	* gdnd.c (get_action): Implement the DnD actions menu.
+
 1998-11-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdnd.c: New file that handles all the DnD stuff.  Mainly used to

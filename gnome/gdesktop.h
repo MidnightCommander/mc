@@ -25,7 +25,6 @@ extern int desktop_snap_icons;			/* Whether to snap icons to the grid or not */
 
 extern int want_transparent_icons;
 extern int want_transparent_text;
-extern int icons_snap_to_grid;
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
 void desktop_init (void);
@@ -62,7 +61,6 @@ typedef struct {
 	int               grid_x, grid_y;
 	char              *pathname;
 } desktop_icon_t;
-GtkWidget *make_transparent_window (char *file);
 
 #else
 

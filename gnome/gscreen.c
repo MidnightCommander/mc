@@ -1309,16 +1309,6 @@ panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event)
 }
 #endif /* OLD_DND */
 
-static GtkWidget *
-load_transparent_image (char *base)
-{
-	char *f = concat_dir_and_file (ICONDIR, base);
-	GtkWidget *w;
-
-	w = make_transparent_window (f);
-	g_free (f);
-	return w;
-}
 
 static void
 load_dnd_icons (void)
@@ -1453,7 +1443,7 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_widget_motion), panel);
 
-	return file_list;
+	return sw;
 }
 
 /*
