@@ -911,8 +911,11 @@ icon_delete (GtkWidget *widget, desktop_icon_t *di)
 static void
 lower_window(GtkWidget *widget)
 {
-  g_print("Lowering window\n");
-  gdk_window_lower(widget->window);
+  /* Note: Lowering the window has the problem of getting into a loop of
+   * flashing bitmaps on the desktop.  Do not enable this feature
+   */
+  /* gdk_window_lower(widget->window); */
+ 
 }
 
 GtkWidget *
