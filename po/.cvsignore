@@ -8,6 +8,7 @@ Makefile.in
 Makefile.in.in
 Makevars.template
 POTFILES
+POTFILES.in
 POTFILES.in.missing
 Rules-quot
 boldquot.sed
