@@ -1,0 +1,108 @@
+Midnight Commander for OS/2     -- version 3.5.42 (Development version)
+-----------------------------------------------------------------------
+                                   May 26, 1997
+
+
+This file contains special information for Midnight Commander for OS/2.
+For more information about Midnight Commander, please read the original FAQ.
+
+0. Hello
+--------
+
+This is the port of Midnight Commander to OS/2. I think it's now a
+BETA version still with some unknown bugs, use it as your own risk!
+
+
+1. Installation Instructions for binaries
+------------
+
+The default installation position for the binary files is D:\MC, just copy 
+all the files there and set the PATH to D:\MC. A small REXX program install.cmd
+will help you create a desktop icon. With this version, using -S switch will
+produce a batch file for you to change the directory to the last working place
+upon exit. The batch file nc.cmd will demonstrate this feature.
+
+
+2. Special notes
+-----------
+
+You can also change the drive with F11 and F12.
+
+Known bugs:
+    - CTRL-C to external program not possible
+    - CTRL-O not work.
+
+
+3. Operating System
+-----------
+
+I am using Warp 4 and IBM VisualAge C++ for this port. I don't think that
+it is a problem to run it with OS/2 2.x, but I can not verify it.
+Please drop me a mail and tell me how it works with the other OS versions.
+
+
+4. How to compile it
+-----------
+
+VisualAge C++ 3.0 was used for this port. You can recompile the program 
+with the following steps:
+
+  0. The source files are located in D:\work\mc\mc-3.5.xx\. You will have to 
+     replace this string with your location in the makefiles.
+
+     Goto \work\mc\mc-3.5.xx:
+
+  1. Copy all the files from os2\ into src\.
+  
+  2. Install Slang 0.99.38. (ftp://space.mit.edu/pub/davis)
+     Patch Slang to make it works with Midnight Commander.
+     (I have disabled the multithreaded key handling because the key 
+      control will be done in MC)
+
+  3. Copy the os2edit\ files to edit\.
+     Use Makefile.release to build a released version of libedit.lib or
+     Makefile.debug for a debug version.
+
+  4. Goto src\.
+     If you are going to use the WorkFrame for rebuild the makefile, 
+     you have to delete the following files from src\:
+                        achown.c
+			chmod.c
+			chown.c
+			cons.handler.c
+			cons.saver.c
+			cons.saver.h
+			fixhlp.c
+			key.c
+			key.unx.c
+			learn.c
+			learn.h
+			mad.c
+			Makefile.in
+			man2hlp.c
+			mfmt.c
+			slint.c
+			utilunix.c
+			xcurses.c
+     Otherwise, just type 
+		nmake /f makefile.release	(for release version)
+		nmake /f makefile.debug		(for debug version)
+
+
+4.1 Changes to main code:
+
+    They are enclosed in "#if defined(__os2__)" or OS2_NT blocks. Because of the
+    diffences between OS/2 and the other OSs, some of the files are completely
+    rewritten with call to APIs. They are named as *.os2.[ch].
+    
+5. Contact Information
+-----------
+
+Because of limited time and resources, this program has not been 
+thoroughly tested. Please report bugs (only those special under OS/2) 
+and comments via e-mail to:
+
+ado@software-ag.de
+
+----
+Alexander Dong

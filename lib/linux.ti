@@ -1,0 +1,49 @@
+
+# Linux terminfo entry, hacked together by converting the
+#  termcap entry and by reading the source for console.c
+# It is provided to give a working version and not necessarily a full
+#  implmentation.
+# vt100 mode in the console is incomplete, so keep using
+#  null-translation mode
+# Most users have TERM in the form con132x43. Modify the entry below
+#  and change lines and cols accordingly.
+# Remove the period before km if you console is configured to set msb
+#  high instead of sending escape
+#
+# Note that the statdard Linux console is now called 'linux' instead
+# of 'console'. terminals with sizes other than 80x25 need to append
+# their size to linux and add an entry like the one for 132x43 below
+#
+# changes from ncurses-1.8.6 terminfo: key definition for shifted
+# scan codes (kf13 through kf20).
+
+linux|console|Standard Linux Console,
+         cr=^M, cud1=^J, ind=^J, bel=^G, il1=\E[L, am, cub1=^H, ed=\E[J,
+         el=\E[K, clear=\E[H\E[J, bce, xenl, .km, eo, mir, msgr, xon,
+         colors#8, pairs#64, lines#25, cols#80,
+         hpa=\E[%i%p1%dG, vpa=\E[%i%p1%dd, ri=\EM, hts=\EH, tbc=\E[3g,
+         smir=\E[4h, rmir=\E[4l, civis=\E[?25l, cnorm=\E[?25h,
+         sc=\E7, rc=\E8,
+#acsc=l\332m\300k\277j\331u\264t\303v\301w\302q\304x\263n\053o\176s\137`\004a\260f\370g\361~\011+\020\,\021.\031-\030h\261i\0250\333,
+         acsc=llmmkkjjuuttvvwwqqxxnnooss``aaffgg~~++\,\,..--hhii,
+         cup=\E[%i%p1%d;%p2%dH, op=\E[37m\E[40m,
+         dch=\E[%p1%dP, dl=\E[%p1%dM, home=\E[H, it#8, ich=\E[%p1%d@,
+         bold=\E[1m, rev=\E[7m, blink=\E[5m, 
+         setf=\E[%p1%{30}%+%dm, setb=\E[%p1%{40}%+%dm,
+         kcuu1=\E[A, kcud1=\E[B, kcub1=\E[D, kcuf1=\E[C, kbs=\177,
+         cuf1=\E[C, ht=^I, cuu1=\E[A,
+         smacs=^N,rmacs=^O,
+         rmul=\E[24m, smul=\E[4m, rmso=\E[0m, smso=\E[1m,
+         kf1=\E[[A, kf2=\E[[B, kf3=\E[[C, kf4=\E[[D, kf5=\E[[E,
+         kf6=\E[17~, kf7=\E[18~, kf8=\E[19~, kf9=\E[20~, kf10=\E[21~,
+         kf11=\E[23~, kf12=\E[24~, kf13=\E[25~, kf14=\E[26~, 
+	 kf15=\E[28~, kf16=\E[29~, kf17=\E[31~, kf18=\E[32~,
+	 kf19=\E[33~,  kf20=\E[34~,
+	 kich1=\E[2~,
+         kdch1=\E[3~, kend=\E[4~, khome=\E[1~, knp=\E[6~, kpp=\E[5~,
+
+
+# This is the terminfo for a console in 132x43 mode
+# Modify according to your TERM variable
+linux-132x43,
+	lines#43, cols#132, use=linux,

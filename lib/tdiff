@@ -1,0 +1,22 @@
+#!/bin/sh
+# 
+# This scripts compares two terminfo files and prints out the differences.
+#
+sort_it ()
+{
+    sed 's/^#.*//' $1 |
+    tr '\t' ' ' |
+    sed 's/ *//g' |
+    tr , '\012' |
+    tr -s '\012' |
+    sort > $1.$2
+}
+
+sort_it $1 f1
+sort_it $2 f2
+
+diff $1.f1 $2.f2
+rm $1.f1 $2.f2
+
+
+

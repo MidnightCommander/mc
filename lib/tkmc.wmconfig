@@ -1,0 +1,6 @@
+tkmc name "Midnight Commander"
+tkmc description "A graphical filesystem browser"
+tkmc icon "FileManager.xpm"
+tkmc mini-icon "mini-filemgr.xpm"
+tkmc exec "tkmc &"
+tkmc group Utilities/File Management

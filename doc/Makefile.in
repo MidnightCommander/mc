@@ -1,0 +1,81 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+#
+# Distribution variables
+#
+
+DISTDOC =	Makefile.in LSM DEVEL FILES mc.sgml linuxdoc-sgml.diff \
+		mc.1.in mcedit.1.in mcserv.8.in
+LINUXDOCDIR =	/usr/local/linuxdoc-sgml
+
+all:
+
+install:
+	-$(SEDCMD2) < $(srcdir)/mc.1 > $(DESTDIR)$(mandir)/$(manprefix)mc.$(manext)
+	-$(SEDCMD2) < $(srcdir)/mcedit.1 > $(DESTDIR)$(mandir)/$(manprefix)mcedit.$(manext)
+	-$(SEDCMD2) < $(srcdir)/mcserv.8 > $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)
+
+uninstall:
+	-cd $(mandir); $(RMF) $(manprefix)mc.$(manext)
+	-cd $(mandir); $(RMF) $manprefix)mcedit.$(manext)
+	-cd $(man8dir); $(RMF) $(manprefix)mcserv.$(man8ext)
+
+check:
+	@echo no tests are supplied.
+
+TAGS:
+
+cross:
+
+alldoc: mc.html mc.info mc.dvi mc.ps mc.tex mc.txt mc.hlp mc.texi mc.1 mcedit.1
+
+mc.html: mc.sgml
+	-mkdir html
+	cd html; $(LN_S) $(srcdir)/mc.sgml .; $(LINUXDOCDIR)/bin/format -T htmlx mc; $(RMF) mc.sgml
+	if test -f html/FILEROOT.html; then mv html/FILEROOT.html html/mc.html; fi
+
+mc.info: mc.sgml
+	-mkdir info
+	cd info; $(LINUXDOCDIR)/bin/format -T info $(srcdir)/mc > mc.info
+
+mc.dvi: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T latex $(srcdir)/mc | $(LINUXDOCDIR)/bin/qtex -d > mc.dvi
+
+mc.ps: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T latex $(srcdir)/mc | $(LINUXDOCDIR)/bin/qtex > mc.ps
+
+mc.tex: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T latex $(srcdir)/mc > mc.tex
+
+mc.txt: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T ascii $(srcdir)/mc > mc.txt
+
+../src/fixhlp:
+	cd ../src; $(MAKE) fixhlp
+
+mc.hlp: mc.sgml ../src/fixhlp $(datadir)/xnc.hlp
+	$(LINUXDOCDIR)/bin/format -T hlp $(srcdir)/mc | ../src/fixhlp 58 mc.hlp.toc > mc.hlp.tmp
+	cat mc.hlp.toc mc.hlp.tmp $(datadir)/xnc.hlp > mc.hlp
+	$(RMF) mc.hlp.toc mc.hlp.tmp
+
+mc.texi: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T texi $(srcdir)/mc > mc.texi
+
+mc.1: mc.sgml
+	$(LINUXDOCDIR)/bin/format -T man $(srcdir)/mc > mc.1
+
+clean:
+
+realclean:
+
+distclean:
+	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile $(srcdir)/*.1 $(srcdir)/*.8
+
+distcopy:
+	$(CP) $(DISTDOC) ../../mc-$(VERSION)/doc
+
+depend dep:

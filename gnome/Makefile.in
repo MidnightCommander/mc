@@ -1,0 +1,138 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+CFLAGS =   $(XCFLAGS) @X_CFLAGS@
+CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME
+LDFLAGS = $(XLDFLAGS) @X_LIBS@
+DEFS = $(XDEFS)
+LIBS = -lgnomeui -lgnome -lgtk -lgdk -lglib @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
+EXTRALIBS = @LVFS@ @LSLANG@ @LEDIT@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+GNOMESRCS = gkey.c gmain.c gscreen.c gwidget.c \
+	gmenu.c ginfo.c ghelp.c glayout.c gtools.c
+
+GNOMEHDRS = gmain.h gscreen.h  gwidget.h gconf.h
+
+#
+# These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
+#
+LOBJS =  mad.o
+
+#
+# These objects from ../src do depend on HAVE_GNOME
+#
+OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
+        file.o find.o dialog.o help.o key.o chmod.o chown.o view.o \
+	panelize.o hotlist.o listmode.o background.o dir.o util.o \
+	win.o color.o profile.o user.o ext.o setup.o tree.o \
+	subshell.o terms.o achown.o fsusage.o mountlist.o \
+        @XCURSES@ @REGEX_O@ complete.o command.o \
+	option.o cmd.o utilunix.o dirhist.o popt.o xslint.o
+
+OBJS = $(LOBJS) $(OOBJS) \
+	gkey.o gmain.o gscreen.o gwidget.o gmenu.o ghelp.o ginfo.o \
+	glayout.o gtools.o gdesktop.o
+
+#
+# Distribution variables
+#
+
+PIXMAPS = directory.xpm
+
+DISTGNOME = Makefile.in gnome.TODO $(PIXMAPS) $(GNOMESRCS) $(GNOMEHDRS) 
+
+.c.o:
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
+
+all: @gmc@
+
+gmc: checklinks 
+	$(MAKE) mx
+
+mx: @LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@
+	$(CC) $(LDFLAGS) -o gmc $(OBJS) -L../vfs -L../slang -L../edit $(EXTRALIBS) $(LIBS) 
+	touch mx
+
+libvfs.a:
+	cd ../vfs; $(MAKE) libvfs.a
+@PCENTRULE@	-$(RMF) libvfs.a
+@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+
+libmcslang.a:
+	cd ../slang; $(MAKE) libmcslang.a
+@PCENTRULE@	-$(RMF) libmcslang.a
+@PCENTRULE@	$(LN_S) ../slang/libmcslang.a .
+
+libedit.a:
+	cd ../edit; $(MAKE) libedit.a
+@PCENTRULE@	-$(RMF) libedit.a
+@PCENTRULE@	$(LN_S) ../edit/libedit.a .
+
+checklinks:
+	@if test -f $(gnomedir)/regex.c; then echo ok; \
+	else $(MAKE) sourcelinks; fi
+	@if test -f regex.o; then echo ok; else $(MAKE) links; fi
+
+links:
+	for I in $(LOBJS); do $(RMF) $$I; $(LN_S) ../src/$$I $$I >/dev/null 2>&1; done; true
+
+sourcelinks:
+	-cd $(gnomedir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; $(LN_S) ../src/*.inc .; true
+
+cleansourcelinks:
+	-if test -f $(gnomedir)/regex.c; then \
+	    cd $(gnomedir); find . \( -lname '*.[ch]' -o -lname '*.inc' \) | xargs $(RM); \
+	fi
+
+check:
+	@echo no tests are supplied.
+
+cross:
+	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
+	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
+
+TAGS: $(GNOMESRCS)
+	etags $(GNOMESRCS)
+
+clean:
+	$(RMF) @tkmc@ *.o core a.out mx libvfs.a libedit.a libmcslang.a
+
+realclean: clean
+	$(RMF) .depend
+	$(RMF) TAGS
+	$(RMF) *~
+
+distclean: cleansourcelinks
+	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/tkmc $(srcdir)/core
+	-$(RMF) $(srcdir)/a.out
+	-if test $(srcdir) = .; then $(MAKE) realclean; fi
+	-$(RMF) $(srcdir)/Makefile gui.tcl
+
+distcopy:
+	$(CP) $(DISTGNOME) ../../mc-$(VERSION)/gnome
+
+install: install_@gmc@
+
+install_:
+
+install_gmc: all 
+	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
+
+uninstall: 
+	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
+
+depend dep: @gmcdep@
+
+gmcdep: checklinks mcdep
+
+fastdeploc: @fastdepslang@ @fastdepvfs@
+
+# ***Dependencies***Do not edit***
+@DOTDEPEND@
+# ***End of dependencies***

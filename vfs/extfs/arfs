@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Written by    Alex Kuchma <ask@bcs.zp.ua>
+#               Alex Tkachenko <alex@bcs.zp.ua>
+#
+# (C) 1997 The Free Software Foundation.
+#
+#
+XAR=ar
+XUNAR=ar
+XARINFO="ar tv"
+
+mcarfs_list ()
+{
+        YEAR=`date | cut -f 6 -d ' '`
+        XUID=`ls -l $1 | cut -c16-24`
+        XGID=`ls -l $1 | cut -c25-33`
+        $XARINFO $1 | awk -v uid=$XUID -v gid=$XGID -v year=$YEAR '
+        {
+                date = $(NF-1)
+                if ( date == year )
+                {   
+                    date = $(NF-2)
+                }
+                perms = substr($1, 1, 9)
+                printf "-%9s 1 %-8s %-8s %8d %s %s %s %s\n", perms, uid, gid, $(NF-5), $(NF-4), $(\
+NF-3), date, $(NF)
+        }' 2>/dev/null
+}
+
+mcarfs_copyout ()
+{
+    $XUNAR p $1 $2 > $3
+}
+
+# override any locale for dates
+LC_ALL=C
+export LC_ALL
+
+case "$1" in
+  list) mcarfs_list $2; exit 0;;
+  copyout) shift; mcarfs_copyout $*; exit 0;;
+  copyin) shift; mcarfs_copyin $*; exit 0;;
+esac
+exit 1

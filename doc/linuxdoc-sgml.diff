@@ -1,0 +1,814 @@
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/bin/format linuxdoc-sgml/bin/format
+--- /home/jj/src/mc-old/linuxdoc-sgml/bin/format	Sun Sep 17 23:34:49 1995
++++ linuxdoc-sgml/bin/format	Mon Sep 18 23:00:26 1995
+@@ -134,6 +134,16 @@
+ 		$SGMLS | $SGMLSASP $USERREP $REP | expand $TABS | \
+ 			mkinfo $SGMLFILE
+ 	;;
++	texi)
++		# format the document, writing to standard out
++		TYPE=info
++		SGML_PATH=$REPDIR/$TYPE/%N:$SGML_PATH
++		REP=$REPDIR/$TYPE/mapping;
++
++		sed 's/\@/\@\@/g' $SGMLFILE | \
++		$SGMLS | $SGMLSASP $USERREP $REP | expand $TABS | \
++			mkinfo $SGMLFILE -texi
++	;;
+ 	*)
+ 		# format the document, writing to standard out
+ 		REP=$REPDIR/$TYPE/mapping;
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/bin/mkinfo linuxdoc-sgml/bin/mkinfo
+--- /home/jj/src/mc-old/linuxdoc-sgml/bin/mkinfo	Thu Aug 24 20:24:19 1995
++++ linuxdoc-sgml/bin/mkinfo	Mon Sep 18 22:43:43 1995
+@@ -171,7 +171,11 @@
+    }
+ }
+ ' $TMP > $TMP2
++if test -n "$2"; then
++cat $TMP2
++else
+ $MAKEINFO $TMP2 -o $INFO
++fi
+ 
+ rm -f $TMP $TMP2
+ # end of mkinfo script 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/dtd/linuxdoc.dtd linuxdoc-sgml/dtd/linuxdoc.dtd
+--- /home/jj/src/mc-old/linuxdoc-sgml/dtd/linuxdoc.dtd	Sun Jun 18 21:02:42 1995
++++ linuxdoc-sgml/dtd/linuxdoc.dtd	Fri Sep 22 16:34:38 1995
+@@ -8,7 +8,7 @@
+ 
+ <!-- url added by HG; htmlurl added by esr -->
+ <!entity % xref
+-	" label|ref|pageref|cite|url|htmlurl|ncite " >
++	" label|ref|lnk|pageref|cite|url|htmlurl|ncite " >
+ 
+ <!entity % inline 
+ 	" (#pcdata | f| x| %emph; |sq| %xref | %index )* " >
+@@ -138,7 +138,7 @@
+       "^" circ
+       "{" lcub
+       "}" rcub
+-      "|" verbar>
++      "|" verbar >
+ -->
+ 
+ <!element figure - - ((eps | ph ), caption?)>
+@@ -257,7 +257,7 @@
+       "^" circ
+       "{" lcub
+       "}" rcub
+-      "|" verbar>
++      "|" verbar >
+ 
+ <!usemap   fmap     f >
+ 
+@@ -274,7 +274,7 @@
+       "^" circ
+       "{" lcub
+       "}" rcub
+-      "|" verbar>
++      "|" verbar >
+ 
+ <!usemap dmmap (dm,eq)>
+ <!element  fr       - - (nu,de) >
+@@ -312,7 +312,7 @@
+       "%" percnt
+       "^" circ
+       "{" lcub
+-      "}" rcub >
++      "}" rcub  >
+ 
+ <!usemap   arrmap   ar >
+ <!element  sup      - - ((%fbutxt;)*) -(tu) >
+@@ -350,7 +350,7 @@
+       "^" circ
+       "{" lcub
+       "}" rcub
+-      "|" verbar>
++      "|" verbar >
+ 
+ <!usemap global linuxdoc>
+ <!element label - o empty>
+@@ -362,6 +362,12 @@
+         id cdata #required
+         name cdata "&refnam">
+ 
++<!-- lnk -->
++<!element lnk - o empty>
++<!attlist lnk   
++        id cdata #required
++        name cdata "&refnam">
++
+ <!-- url entity added to have direct url references HG -->
+ <!element url - o empty>
+ <!attlist url   
+@@ -405,7 +411,14 @@
+         opts cdata "null">
+ 
+ <!-- Hacked by mdw, abstract now part of titlepag -->
+-<!element titlepag o o (title, author, date?, abstract?)>
++<!element titlepag o o (mantitle?, title, author, date?, abstract?)>
++<!element mantitle - o empty>
++<!attlist mantitle   
++        title cdata ""
++        sectnum cdata "1"
++	date cdata "1 January 1995"
++	name cdata "">
++
+ <!element title - o (%inline, subtitle?) +(newline)>
+ <!element subtitle - o (%inline)>
+ <!usemap oneline titlepag>
+@@ -532,7 +545,7 @@
+       "^" circ
+       "{" lcub
+       "}" rcub
+-      "|" verbar>
++      "|" verbar >
+ 
+ <!usemap manpage  manpage >
+ <!-- end of linuxdoc dtd -->
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/lib/linuxdoc-sgml.sty linuxdoc-sgml/lib/linuxdoc-sgml.sty
+--- /home/jj/src/mc-old/linuxdoc-sgml/lib/linuxdoc-sgml.sty	Tue Jun  7 21:13:36 1994
++++ linuxdoc-sgml/lib/linuxdoc-sgml.sty	Mon Sep 18 23:22:36 1995
+@@ -69,7 +69,8 @@
+ \noindent
+ {\huge\sf \@title}\\
+ \rule{\textwidth}{1mm}\\
+-\mbox{} \@author\ \hfill \@date\ \\
++\mbox{} \@author\ \\
++\mbox{} \@date\ \\
+ \vskip 1 ex
+ \noindent{\sf \@abstract}
+ \setcounter{footnote}{0}%
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/grops/general linuxdoc-sgml/rep/grops/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/grops/general	Tue Jun  7 21:13:44 1994
++++ linuxdoc-sgml/rep/grops/general	Fri Sep 22 23:43:44 1995
+@@ -88,6 +88,9 @@
+ <!entity commat sdata "\(at" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "\\" >
++<!entity bslshd sdata "\\" >
++<!entity bslshv sdata "\\" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "{" >
+ <!entity verbar sdata "\(ba" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/grops/mapping linuxdoc-sgml/rep/grops/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/grops/mapping	Tue Jun  7 21:13:44 1994
++++ linuxdoc-sgml/rep/grops/mapping	Fri Sep 22 23:57:42 1995
+@@ -562,6 +562,9 @@
+ 
+ <ps>		+	".LP\np.s."
+ 
++<url>			"[URL]"
++</url>
++
+ 
+ % end of roff replacement file
+ 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/general linuxdoc-sgml/rep/hlp/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/general	Thu Jan  1 01:00:00 1970
++++ linuxdoc-sgml/rep/hlp/general	Fri Sep 22 23:43:59 1995
+@@ -0,0 +1,114 @@
++
++<!-- hlp translation for general purpose qwertz characters.  If I
++was unable to think of an intuitive ASCII representation for some
++symbol or character, I just used its SGML representation. -->
++
++
++<!entity AElig sdata "AE" >
++<!entity Aacute sdata "A" >
++<!entity Acirc sdata "A" >
++<!entity Agrave sdata "A" >
++<!entity Atilde sdata "A" >
++<!entity Ccedil sdata "C" >
++<!entity Eacute sdata "E" >
++<!entity Egrave sdata "E" >
++<!entity Euml sdata "E" >
++<!entity Iacute sdata "I" >
++<!entity Icirc sdata "I" >
++<!entity Igrave sdata "I" >
++<!entity Iuml sdata "I" >
++<!entity Ntilde sdata "N" >
++<!entity Oacute sdata "O" >
++<!entity Ocirc sdata "O" >
++<!entity Ograve sdata "O" >
++<!entity Oslash sdata "O" >
++<!entity Uacute sdata "U" >
++<!entity Ugrave sdata "U" >
++<!entity Yacute sdata "Y" >
++<!entity aacute sdata "a" >
++<!entity acirc sdata "a" >
++<!entity aelig sdata "ae" >
++<!entity agrave sdata "a" >
++<!entity aring sdata "a" >
++<!entity atilde sdata "a" >
++<!entity ccedil sdata "c" >
++<!entity eacute sdata "e" >
++<!entity ecirc sdata "e" >
++<!entity egrave sdata "e" >
++<!entity euml sdata "e" >
++<!entity iacute sdata "i" >
++<!entity icirc sdata "i" >
++<!entity igrave sdata "i" >
++<!entity iuml sdata "i" >
++<!entity ntilde sdata "n" >
++<!entity oacute sdata "o" >
++<!entity ocirc sdata "o" >
++<!entity ograve sdata "o" >
++<!entity oslash sdata "o" >
++<!entity otilde sdata "o" >
++<!entity uacute sdata "u" >
++<!entity ucirc sdata "u" >
++<!entity ugrave sdata "u" >
++<!entity yacute sdata "y" >
++<!entity yuml sdata "y" >
++<!entity lt sdata "<" >
++<!entity amp sdata "&" >
++<!entity ero sdata "&" >
++<!entity etago sdata "</" >
++<!entity dquot sdata '"' >
++<!entity num sdata "#" >
++<!entity percnt sdata "%" >
++<!entity quot sdata "'" >
++<!entity lpar sdata "(" >
++<!entity rpar sdata ")" >
++<!entity ast sdata "*" >
++<!entity plus sdata "+" >
++<!entity comma sdata "," >
++<!entity hyphen sdata "-" >
++<!entity colon sdata ":" >
++<!entity semi sdata ";" >
++<!entity equals sdata "=" >
++<!entity commat sdata "@" >
++<!entity lsqb sdata "[" >
++<!entity rsqb sdata "]" >
++<!entity bslsh sdata "\" >
++<!entity bslshd sdata "\" >
++<!entity bslshv sdata "\" >
++<!entity circ sdata "^" >
++<!entity lowbar sdata "_" >
++<!entity lcub sdata "{" >
++<!entity verbar sdata "|" >
++<!entity rcub sdata "}" >
++<!entity tilde sdata "~" >
++<!entity bsol sdata "\e" >
++<!entity dollar sdata "$" >
++<!entity nbsp sdata " " >
++<!entity emsp sdata " " >
++<!entity ensp sdata " " >
++<!entity thinsp sdata " " >
++<!entity mdash sdata "--" >
++<!entity ndash sdata "-" >
++<!entity hellip sdata "..." >
++<!entity Auml sdata "Ae" >
++<!entity auml sdata "ae" >
++<!entity Ouml sdata "Oe" >
++<!entity ouml sdata "oe" >
++<!entity Uuml sdata "Ue" >
++<!entity uuml sdata "ue" >
++<!entity szlig sdata "ss" >
++<!entity gt sdata ">" >
++<!entity sect sdata "&sect " >
++<!entity para sdata "&para " >
++<!entity copy sdata "&copy " >
++<!entity iexcl sdata "&iexcl " >
++<!entity iquest sdata "&iquest " >
++<!entity cent sdata "&cent " >
++<!entity pound sdata "&pound " >
++<!entity bull sdata "-" >
++<!entity times sdata "*" >
++<!entity plusmn sdata "+-" >
++<!entity divide sdata "/" >
++<!entity mu sdata "u" >
++<!entity not sdata "~" >
++<!entity refnam sdata "">
++<!entity urlnam sdata "">
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/mapping linuxdoc-sgml/rep/hlp/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/mapping	Thu Jan  1 01:00:00 1970
++++ linuxdoc-sgml/rep/hlp/mapping	Thu Sep 21 23:04:06 1995
+@@ -0,0 +1,95 @@
++
++
++% qwertz manual replacement file
++% produces GNU Midnight Commander's hlp format
++
++<article>
++</article>
++
++<title>		+	"\""
++</title>
++<author>	+	"\""
++</author>
++<date>		+	"\""
++</date>
++
++<sect>		+	"\["
++</sect>
++<sect1>		+	"\[  "
++</sect1>
++<sect2>		+	"\[    "
++</sect2>
++<sect3>		+	"\[      "
++</sect3>
++<sect4>		+	"\[        "
++</sect4>
++<sect5>		+	"\[          "
++</sect5>
++
++<heading>	
++</heading>		"\n\n"
++
++<p>		+	"\n"		+
++</p>	
++
++
++<enum>			"7"
++</enum>			"1\n\n"
++<itemize>		"7"
++</itemize>		"1\n\n"
++<descrip>		"7"
++</descrip>		"1\n\n"
++
++% number register bi means "begin item".  Used in the .P macro to print
++% bullets or numbers at beginning of first paragraph of an item.
++% If bi=1 then the paragraph is the first one of the item.
++
++<item>			"\n4\n\no  7"		
++</item>	
++
++<tag>			"\n4\n\n"
++</tag>			"/7"
++
++<sq>			""
++</sq>			""	
++
++<lq>			""
++</lq>		
++
++<em>			""			
++</em>		 	""			
++
++<bf>			""			
++</bf>			""			
++
++<it>			""			
++</it>			""		
++
++<sf>			""		
++</sf>			""			
++
++<sl>			""		
++</sl>			""			
++
++<tt>			""
++</tt>			""
++
++
++<comment>	+	""		+
++</comment>	+	""			+
++
++<x>
++</x>
++
++% within code and verb, first turn off the escape mechanism
++
++<code>		+	"\nv"
++</code>		+	"n"
++<verb>		+	"\nv"
++</verb>		+	"n"
++<lnk>		+	"[NAME][ID]"
++</lnk>
++<ref>		+	"[NAME][ID]"
++</ref>
++<url>		+	"[URL]"
++</url>
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/math linuxdoc-sgml/rep/hlp/math
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/hlp/math	Thu Jan  1 01:00:00 1970
++++ linuxdoc-sgml/rep/hlp/math	Tue Jun  7 21:13:42 1994
+@@ -0,0 +1,114 @@
++<!--
++
++Math symbols and Greek letters.  Sed script for groff Also adds the
++"delim $$" declaration to the top of the file. Thus it is now
++unnecessary to pipe the ms file through eqn (or geqn) unless the
++file file contain formulas.
++
++1i\
++.EQ\
++delim $$\
++.EN
++-->
++
++<!entity circ sdata '{type "binary" \(ha}' >
++<!entity le sdata '{type "relation" \(<=}' >
++<!entity ge sdata '{type "relation" \(>=}' >
++<!entity congr sdata '{type "relation" \(=~}' >
++<!entity notin sdata '{type "relation" \(nm}' >
++<!entity nequiv sdata "\*[nequiv]" >
++<!entity divide sdata '{type "binary" \(di}' >
++<!entity cir sdata '{type "binary" \(ci}' >
++<!entity dot sdata '{type "binary" \(md}' >
++<!entity larr sdata '{type "relation" \(<-}' >
++<!entity rarr sdata '{type "relation" \(->}' >
++<!entity uarr sdata '{type "relation" \(ua}' >
++<!entity darr sdata '{type "relation" \(da}' >
++<!entity equiv sdata '{type "relation" \(==}' >
++<!entity ap sdata '{type "relation" \(~~}' >
++<!entity cap sdata '{type "binary" \(ca}' >
++<!entity cup sdata '{type "binary" \(cu}' >
++<!entity sub sdata '{type "relation" \(sb}' >
++<!entity sup sdata '{type "relation" \(sp}' >
++<!entity isin sdata '{type "relation" \(mo}' >
++<!entity sube sdata '{type "relation" \(ib}' >
++<!entity supe sdata '{type "relation" \(ip}' >
++<!entity not sdata "\(no" >
++<!entity infin sdata "\(if" >
++<!entity minus sdata "-" >
++<!entity ne sdata '{type "relation" \(!=}' >
++<!entity prop sdata "\(pt" >
++<!entity prime sdata "\(fm" >
++<!entity Prime sdata "\(sd" >
++<!entity empty sdata "\(es" >
++<!entity oplus sdata '{type "binary" \(c+}' >
++<!entity otimes sdata '{type "binary" \(c*}' >
++<!entity setmn sdata '{type "binary" \(rs}' >
++<!entity mid sdata '{type "binary" \(br}' >
++<!entity nsub sdata '\*[nsub]' >
++<!entity nsube sdata '\*[nsube]' >
++<!entity nsup sdata '\*[nsup]' >
++<!entity nsupe sdata '\*[nsupe]' >
++<!entity harr sdata '{type "relation" \(<>}' >
++<!entity and sdata '{type "relation" \(AN}' >
++<!entity or sdata '{type "relation" \(OR}' >
++<!entity bottom sdata "\(pp" >
++<!entity exist sdata "\(te" >
++<!entity forall sdata "\(fa" >
++<!entity hArr sdata '{type "relation" \(hA}' >
++<!entity lArr sdata '{type "relation" \(lA}' >
++<!entity rArr sdata '{type "relation" \(rA}' >
++<!entity vDash sdata '{type "relation" "\z\(br="}' >
++<!entity nvDash sdata '\*[nvDash]' >
++<!entity nvdash sdata '\*[nvdash]' >
++<!entity vdash sdata '{type "relation" "\z\(br\(en"}' >
++<!entity lang sdata '{type "opening" \(la}' >
++<!entity rang sdata '{type "closing" \(ra}' >
++<!entity uArr sdata '{type "relation" \(uA}' >
++<!entity dArr sdata '{type "relation" \(dA}' >
++<!entity square sdata "\(sq" >
++<!entity aleph sdata "\(Ah" >
++<!entity image sdata "\(Im" >
++<!entity real sdata "\(Re" >
++<!entity part sdata "\(pd" >
++<!entity nabla sdata "\(gr" >
++<!entity clubs sdata "\(CL" >
++<!entity hearts sdata "\(HE" >
++<!entity diams sdata "\(DI" >
++<!entity spades sdata "\(SP" >
++<!entity ang sdata " \(/_ " >
++<!entity alpha sdata " alpha " >
++<!entity beta sdata " beta " >
++<!entity gamma sdata " gamma " >
++<!entity Gamma sdata " GAMMA " >
++<!entity delta sdata " delta " >
++<!entity Delta sdata " DELTA " >
++<!entity epsi sdata " epsilon " >
++<!entity zeta sdata " zeta " >
++<!entity eta sdata " eta " >
++<!entity thetas sdata " theta " >
++<!entity Theta sdata " THETA " >
++<!entity iota sdata " iota " >
++<!entity kappa sdata " kappa " >
++<!entity lambda sdata " lambda " >
++<!entity mu sdata "\(*m" >
++<!entity nu sdata " nu " >
++<!entity xi sdata " xi " >
++<!entity Xi sdata " XI " >
++<!entity pi sdata " pi " >
++<!entity Pi sdata " PI " >
++<!entity rho sdata " rho " >
++<!entity sigma sdata " sigma " >
++<!entity sigmav sdata "\(ts" >
++<!entity Sigma sdata " SIGMA " >
++<!entity tau sdata " tau " >
++<!entity upsi sdata " upsilon " >
++<!entity Upsi sdata " UPSILON " >
++<!entity phis sdata " phi " >
++<!entity Phi sdata " PHI " >
++<!entity chi sdata " chi " >
++<!entity psi sdata " psi " >
++<!entity Psi sdata " PSI " >
++<!entity omega sdata " omega " >
++<!entity Omega sdata " OMEGA " >
++
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/html/general linuxdoc-sgml/rep/html/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/html/general	Tue Aug 15 06:15:35 1995
++++ linuxdoc-sgml/rep/html/general	Fri Sep 22 23:44:19 1995
+@@ -66,7 +66,10 @@
+ <!entity commat sdata "&commat;" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
+-<!entity circ sdata "&circ;" >
++<!entity bslsh sdata "\" >
++<!entity bslshd sdata "\" >
++<!entity bslshv sdata "\" >
++<!entity circ sdata "^" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "{" >
+ <!entity verbar sdata "|" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/html/mapping linuxdoc-sgml/rep/html/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/html/mapping	Wed Aug 16 04:36:12 1995
++++ linuxdoc-sgml/rep/html/mapping	Sun Sep 17 22:48:50 1995
+@@ -171,6 +171,11 @@
+ 			"<@@endref>"		+
+ </ref>
+ 
++<lnk>		+	"<@@ref>[ID]\n"
++			"[NAME] </a>\n"
++			"<@@endref>"		+
++</lnk>
++
+ <href>		+	"<@@ref>[ID]"		+
+ </href>
+ 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/info/general linuxdoc-sgml/rep/info/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/info/general	Sun Jun 25 04:13:41 1995
++++ linuxdoc-sgml/rep/info/general	Fri Sep 22 23:44:34 1995
+@@ -69,6 +69,9 @@
+ <!entity commat sdata "@@" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "\" >
++<!entity bslshd sdata "\" >
++<!entity bslshv sdata "\" >
+ <!entity circ sdata "^" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "@{" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/info/mapping linuxdoc-sgml/rep/info/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/info/mapping	Sun Jun 25 04:13:41 1995
++++ linuxdoc-sgml/rep/info/mapping	Fri Sep 22 23:58:20 1995
+@@ -166,6 +166,9 @@
+ <ref>		+	"@REF [ID]"
+ </ref>
+ 
++<lnk>		+	"[NAME]\n@REF [ID]"
++</lnk>
++
+ <pageref>		"@REF [ID]"
+ </pageref>
+ 
+@@ -330,6 +333,9 @@
+ 
+ <hline>		+	"\\hline"	+
+ </hline>
++
++<url>			"[URL]"
++</url>
+ 
+ % end of texinfo replacement file
+ 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/latex/general linuxdoc-sgml/rep/latex/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/latex/general	Tue Aug 15 06:13:56 1995
++++ linuxdoc-sgml/rep/latex/general	Fri Sep 22 23:44:54 1995
+@@ -67,6 +67,9 @@
+ <!entity commat sdata "@" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "$\backslash$" >
++<!entity bslshd sdata "$\backslash$" >
++<!entity bslshv sdata "\" >
+ <!entity circ sdata "\verb+^+" >
+ <!entity lowbar sdata "\_" >
+ <!entity lcub sdata "\{" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/latex/mapping linuxdoc-sgml/rep/latex/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/latex/mapping	Sun Jun 25 05:42:46 1995
++++ linuxdoc-sgml/rep/latex/mapping	Mon Sep 18 23:15:50 1995
+@@ -71,7 +71,7 @@
+ <inst>			" \\\\\n\\\\" 	+
+ </inst>
+ 
+-<date>		+	"\\date{"
++<date>		+	"\n\n\\date{"
+ </date>			"}"		  +
+ 
+ <newline>		"\\\\ "		  
+@@ -201,6 +201,9 @@
+ 
+ <ref>			"\\ref{[ID]}"
+ </ref>
++
++<lnk>			"[NAME] (see \\ref{[ID]})"
++</lnk>
+ 
+ <pageref>		"\\pageref{[ID]}"
+ </pageref>
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/latin1/general linuxdoc-sgml/rep/latin1/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/latin1/general	Tue Jun  7 21:13:40 1994
++++ linuxdoc-sgml/rep/latin1/general	Fri Sep 22 23:45:09 1995
+@@ -66,6 +66,9 @@
+ <!entity commat sdata "@" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "\\" >
++<!entity bslshd sdata "\\\\" >
++<!entity bslshv sdata "\\" >
+ <!entity circ sdata "^" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "{" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/latin1/mapping linuxdoc-sgml/rep/latin1/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/latin1/mapping	Tue Jun  7 21:13:41 1994
++++ linuxdoc-sgml/rep/latin1/mapping	Fri Sep 22 23:58:51 1995
+@@ -541,6 +541,9 @@
+ 
+ <ps>		+	".LP\np.s."
+ 
++<url>			"[URL]"
++</url>
++
+ 
+ % end of roff replacement file
+ 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/man/general linuxdoc-sgml/rep/man/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/man/general	Sun Aug  6 22:00:58 1995
++++ linuxdoc-sgml/rep/man/general	Fri Sep 22 23:45:23 1995
+@@ -71,6 +71,9 @@
+ <!entity commat sdata "@" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "\\" >
++<!entity bslshd sdata "\\\\" >
++<!entity bslshv sdata "\\" >
+ <!entity circ sdata "^" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "{" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/man/mapping linuxdoc-sgml/rep/man/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/man/mapping	Thu Jul 13 18:57:50 1995
++++ linuxdoc-sgml/rep/man/mapping	Fri Sep 22 23:59:07 1995
+@@ -3,12 +3,13 @@
+ % qwertz manual replacement file
+ % produces nroff using the man macros
+ 
++<mantitle>	+	".TH [TITLE] [SECTNUM] \"[DATE]\"\n.SH NAME\n[NAME]\n"
+ 
+-<manpage>	+	".if n .ds Q \\&\"\n"
++
++<article>	+	".if n .ds Q \\&\"\n"
+ 			".if t .ds Q ``\n"
+ 			".if n .ds U \\&\"\n"
+ 			".if t .ds U ''\n"	
+-			".TH [TITLE] [SECTNUM] \n" 
+ 
+ 			% James Clark's trick to prevent unintended paragraph
+ 			% breaks
+@@ -56,10 +57,27 @@
+ ".\\}\n"
+ "..\n"	
+ 
+-</manpage>
++</article>
++
++<title>		+	".\\\""
++</title>
++<author>	+	".\\\""
++</author>
++<date>		+	".\\\""
++</date>
+ 
++<sect>		+	".SH "
++</sect>
+ <sect1>		+	".SH "
+ </sect1>
++<sect2>		+	".SH "
++</sect2>
++<sect3>		+	".SH "
++</sect3>
++<sect4>		+	".SH "
++</sect4>
++<sect5>		+	".SH "
++</sect5>
+ 
+ <heading>	
+ </heading>		"\n\n"
+@@ -154,4 +172,11 @@
+ 			".ft P\n"
+ 			".sp"	+
+ 
++<lnk>		+	"[NAME]"
++</lnk>
++
++<ref>		+	"[NAME]"
++</ref>
+ 
++<url>		+	"[URL]"
++</url>
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/max/general linuxdoc-sgml/rep/max/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/max/general	Tue Jun  7 21:13:39 1994
++++ linuxdoc-sgml/rep/max/general	Fri Sep 22 23:45:39 1995
+@@ -66,6 +66,9 @@
+ <!entity commat sdata "&commat;" >
+ <!entity lsqb sdata "&lsqb;" >
+ <!entity rsqb sdata "&rsqb;" >
++<!entity bslsh sdata "&bslsh;" >
++<!entity bslshd sdata "&bslshd;" >
++<!entity bslshv sdata "&bslshv;" >
+ <!entity circ sdata "&circ;" >
+ <!entity lowbar sdata "&lowbar;" >
+ <!entity lcub sdata "&lcub;" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/max/mapping linuxdoc-sgml/rep/max/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/max/mapping	Tue Jun  7 21:13:38 1994
++++ linuxdoc-sgml/rep/max/mapping	Fri Sep 22 23:59:46 1995
+@@ -10,6 +10,9 @@
+ <article>	+ 	"<ARTICLE OPTS=\"[OPTS]\">"	+
+ </article>	+	"</ARTICLE>"	+
+ 
++<mantitle>	+	"<MANTITLE TITLE=\"[TITLE]\" SECTNUM=\"[SECTNUM]\" DATE=\"[DATE]\" NAME=\"[NAME]\""
++</mantitle>
++
+ <report>	+ 	"<REPORT OPTS=\"[OPTS]\">"	+
+ </report>	+	"</REPORT>"		+
+ 
+@@ -385,6 +388,9 @@
+ 
+ <ps>		+	"<PS>"		+
+ </ps>		+	"</PS>"		+
++
++<url>			"<URL>"
++</url>			"</URL>"
+ 
+ 
+ % end of max replacement file 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/mgm/mapping linuxdoc-sgml/rep/mgm/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/mgm/mapping	Tue Jun  7 21:13:37 1994
++++ linuxdoc-sgml/rep/mgm/mapping	Sat Sep 23 00:00:06 1995
+@@ -517,6 +517,9 @@
+ 
+ <ps>		+	".P 0\np.s."
+ 
++<url>			"[URL]"
++</url>
++
+ 
+ % end of roff replacement file
+ 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/min/general linuxdoc-sgml/rep/min/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/min/general	Tue Jun  7 21:13:40 1994
++++ linuxdoc-sgml/rep/min/general	Fri Sep 22 23:45:56 1995
+@@ -66,6 +66,9 @@
+ <!entity commat sdata "&commat;" >
+ <!entity lsqb sdata "&lsqb;" >
+ <!entity rsqb sdata "&rsqb;" >
++<!entity bslsh sdata "&bslsh;" >
++<!entity bslshd sdata "&bslshd;" >
++<!entity bslshv sdata "&bslshv;" >
+ <!entity circ sdata "&circ;" >
+ <!entity lowbar sdata "&lowbar;" >
+ <!entity lcub sdata "&lcub;" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/min/mapping linuxdoc-sgml/rep/min/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/min/mapping	Tue Jun  7 21:13:39 1994
++++ linuxdoc-sgml/rep/min/mapping	Sat Sep 23 00:00:28 1995
+@@ -11,6 +11,9 @@
+ <article>	+ 	"<article opts=\"[opts]\">"	+
+ </article>	+	"</article>"	+
+ 
++<mantitle>	+	"<mantitle title=\"[title]\" sectnum=\"[sectnum]\" date=\"[date]\" name=\"[name]\""
++</mantitle>
++
+ <report>	+ 	"<report opts=\"[opts]\">"	+
+ </report>	+	"</report>"		+
+ 
+@@ -385,6 +388,9 @@
+ 
+ <ps>		+	"<ps>"		+
+ </ps>		+	""		+
++
++<url>			"[URL]"
++</url>
+ 
+ 
+ % end of min replacement file 
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/nroff/general linuxdoc-sgml/rep/nroff/general
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/nroff/general	Tue Jul 18 04:51:59 1995
++++ linuxdoc-sgml/rep/nroff/general	Sat Sep 23 00:01:38 1995
+@@ -72,6 +72,9 @@
+ <!entity commat sdata "@" >
+ <!entity lsqb sdata "[" >
+ <!entity rsqb sdata "]" >
++<!entity bslsh sdata "\\" >
++<!entity bslshd sdata "\\\\" >
++<!entity bslshv sdata "\" >
+ <!entity circ sdata "^" >
+ <!entity lowbar sdata "_" >
+ <!entity lcub sdata "{" >
+diff -u -r -N /home/jj/src/mc-old/linuxdoc-sgml/rep/nroff/mapping linuxdoc-sgml/rep/nroff/mapping
+--- /home/jj/src/mc-old/linuxdoc-sgml/rep/nroff/mapping	Sun Jun 18 18:56:03 1995
++++ linuxdoc-sgml/rep/nroff/mapping	Sat Sep 23 00:00:48 1995
+@@ -637,5 +637,8 @@
+ 
+ <ps>		+	".LP\np.s."
+ 
++<url>			"[URL]"
++</url>
++
+ 
+ % end of roff replacement file

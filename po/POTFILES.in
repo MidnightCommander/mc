@@ -1,0 +1,12 @@
+# List of files which containing translatable strings.
+
+edit/edit.c
+edit/edit_key_translator.c
+edit/editcmd.c
+edit/editmenu.c
+edit/editoptions.c
+edit/editwidget.c
+src/dialog.c
+src/dir.c
+src/fixhlp.c
+src/help.c

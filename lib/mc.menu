@@ -1,0 +1,237 @@
+shell_patterns=0
++ ! t t
+@       Do something on the current file
+	CMD=%{Enter command}
+	$CMD ./%0f
+
++ t t
+@       Do something on the tagged files
+	set %u; CMD=%0{Enter command}
+	while [ -n "$1" ]; do
+	  $CMD "$1" || echo tag "$1" >>$MC_CONTROL_FILE
+	  shift
+	done
+	
+
+0       Edit a bug report and send it to root
+        ${EDITOR-vi} /tmp/mail.$$
+	test -r /tmp/mail.$$ && mail root < /tmp/mail.$$
+	rm -f /tmp/mail.$$
+
+=+ f \.1$ | f \.3$ | f \.4$ | f \.5$ | f \.6$ | f \.7$ | f \.8$ | f \.man$ & t r
+1       Display the file with roff -man
+	nroff -man %f | less
+
+2       Call the info hypertext browser
+        info
+
+= t d
+3       Make a release of the current subdirectory
+	Pwd=`basename %d /`
+	echo -n "Name of the distribution file (without extension) [$Pwd]: "
+	read tar
+        if [ "$tar"x = x ]; then tar=$Pwd; fi
+	cd .. && tar chf - $Pwd | gzip -f9 > $tar.tar.gz
+	echo ../${tar}.tar.gz created.
+#       tar=%{Name of the distribution file (without extension)}
+
+= f \.c$ & t r
++ f \.c$ & t r & ! t t
+5       Compile and link current .c file
+        make `basename %f .c` 2>/dev/null || cc -O -o `basename %f .c` %f
+
++ t r & ! t t
+a       Append file to opposite
+	cat %f >>%D/%f
+
++ t t
+A       Append files to opposite files
+	set %u
+	while [ -n "$1" ]; do
+	  cat $1 >>%D/$1 || echo tag $1 >>$MC_CONTROL_FILE
+	  shift
+	done
+
++ t r & ! t t
+d       Delete file if a copy exists in the other directory.
+	if [ "%d" = "%D" ]; then
+	  echo "The two directores must be different"
+	  exit 1
+	fi
+  	if [ -f %D/%f ]; then        # if two of them, then
+          if cmp -s %D/%f %f; then
+            rm %f && echo %f: DELETED
+          else
+            echo "%f and %D/%f differ: NOT deleted"
+            echo -n "Press RETURN "
+            read key
+          fi
+	else
+	  echo %f: No copy in %D/%f: NOT deleted.
+        fi
+
++ t t
+D       Delete tagged files if a copy exists in the other directory.
+	if [ "%d" = "%D" ]; then
+	  echo "The two directores must be different"
+	  exit 1
+	fi 
+        for i in %t
+        do 
+          if [ -f %D/$i ]; then
+            SUM1="`sum $i`"
+            SUM2="`sum %D/$i`"
+            if [ "$SUM1" = "$SUM2" ]; then
+	      rm $i && echo ${i}: DELETED
+	    else
+	      echo $i and %D/$i differ: NOT deleted.
+	    fi
+	  else
+	    echo %f has no copy in %D/%f: NOT deleted.
+          fi
+        done
+
+= f \.gz$ & t r
++ ! t t
+n       Inspect gzip'ed newsbatch file
+        dd if=%f bs=1 skip=12|zcat|${PAGER-more}
+        # assuming the cunbatch header is 12 bytes long.
+
+= t r &
++ ! t t
+h       Strip headers from current newsarticle
+	CHECK=`sed 1q < %f|awk '{print $1}'` 2>/dev/null
+	case $CHECK in
+	  Newsgroups:|Path:)
+	      cp %f /tmp/%f.$$ && sed '/^'"$CHECK"' /,/^$/d' /tmp/%f.$$ > %f
+              [ "$?" = "0" ] && rm /tmp/%f.$$
+	      echo %f: header removed
+		;;
+	  *)
+	      echo %f is not a news article.
+		;;
+	esac
+
++ t t
+H       Strip headers from the marked newsarticles
+	set %u
+	while [ -n "$1" ]; do
+	  CHECK=`sed 1q < $1|awk '{print $1}'` 2>/dev/null
+	  WFILE=/tmp/${1}.$$
+	  case $CHECK in
+	    Newsgroups:|Path:)
+	      cp $1 $WFILE && sed '/^'"$CHECK"' /,/^$/d' $WFILE > $1
+              if [ "$?" = "0" ]; then
+		rm $WFILE; echo $1 header removed. OK.
+	      else
+	        echo tag $1 >>$MC_CONTROL_FILE
+		echo "Oops! Please check $1 against $WFILE"
+	      fi
+		;;
+	    *)
+	      echo $1 skipped: Not a news article.
+	      echo tag $1 >>$MC_CONTROL_FILE
+		;;
+	  esac
+	  shift
+	done
+
+= t r
++ ! t t
+r       Copy file to remote host
+	echo -n "To which host?: "
+        read Host
+        echo -n "To which directory on $Host?: "
+        read Dir
+        rcp -p %f ${Host}:$Dir
+
++ t t
+R       Copy files to remote host (no error checking)
+	echo -n "Copy files to which host?: "
+        read Host
+        echo -n "To which directory on $Host? :"
+        read Dir
+        rcp -pr %u ${Host}:$Dir
+
+= f \.tex$ & t r
++ f \.tex$ & t r & ! t t
+t       Run latex on file and show it with xdvi
+        latex %f && xdvi `basename %f .tex`.dvi
+
+=+ f ^part | f ^Part | f uue & t r
++ t t
+U       Uudecode marked news articles (needs work)
+	set %u
+        (
+	while [ -n "$1" ]; do # strip headers
+          FIRST=`sed 1q < $1|awk '{print $1}'`
+	  cat $1 | sed '/^'"$FIRST"' /,/^$/d'; shift
+	done
+	) |sed '/^$/d' |sed -n '/^begin 6/,/^end$/p' | uudecode
+	if [ "$?" != "0" ]; then
+	  echo "Could not decode %t"
+	  for i in %t; do
+	    echo tag $i >>$MC_CONTROL_FILE
+	    shift
+	  done
+	fi
+	echo "Please test the output file before deleting anything"
+
+=+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$ & t r
+x       Extract the contents of a compressed tar file
+	tar xzvf %f
+
+= t r
++ ! t t
+y       Gzip or gunzip current file
+        unset DECOMP
+	echo %f|egrep -q "\.gz$|\.z$|\.Z$" && DECOMP=-d
+        gzip $DECOMP -v %f
+
++ t t
+Y       Gzip or gunzip tagged files
+        for i in %t
+        do
+          unset DECOMP
+	  echo $i|egrep -q "\.gz$|\.z$|\.Z$" && DECOMP=-d
+          gzip $DECOMP -v $i
+        done
+
++ f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ & t r & ! t t
+z       Extract compressed tar file to subdirectory
+        unset D
+	echo %f|egrep -q "\.tar.gz$" && EXT=tar_gz
+	echo %f|egrep -q "\.tgz$"    && EXT=tgz
+	echo %f|egrep -q "\.tpz$"    && EXT=tpz
+	echo %f|egrep -q "\.tar.Z$"    && EXT=tar_Z
+	echo %f|egrep -q "\.tar.z$"    && EXT=tar_z
+        case $EXT in
+          tar_gz) D="`basename %f .tar.gz`";;
+          tgz)    D="`basename %f .tgz`";;
+          tpz)    D="`basename %f .tpz`";;
+          tar_Z)  D="`basename %f .tar.Z`";;
+          tar_z)  D="`basename %f .tar.z`";;
+        esac
+        mkdir $D; cd $D && tar xvzof ../%f
+
++ t t
+Z       Extract compressed tar files to subdirectories
+	set %u
+	while [ -n "$1" ]
+        do
+          unset D
+	  echo $1|egrep -q "\.tar.gz$" && EXT=tar_gz
+	  echo $1|egrep -q "\.tgz$"    && EXT=tgz
+	  echo $1|egrep -q "\.tpz$"    && EXT=tpz
+	  echo %f|egrep -q "\.tar.Z$"    && EXT=tar_Z
+	  echo %f|egrep -q "\.tar.z$"    && EXT=tar_z
+          case $EXT in
+            tar_gz) D="`basename $1 .tar.gz`";;
+            tgz)    D="`basename $1 .tgz`";;
+            tpz)    D="`basename $1 .tpz`";;
+            tar_Z)  D="`basename %f .tar.Z`";;
+            tar_z)  D="`basename %f .tar.z`";;
+          esac
+          mkdir $D; (cd $D && tar xvzof ../$1)||echo tag $1 >>$MC_CONTROL_FILE
+	  shift
+        done

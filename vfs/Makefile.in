@@ -1,0 +1,138 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+CFLAGS = $(XCFLAGS)
+CPPFLAGS = $(XCPPFLAGS)
+LDFLAGS = $(XLDFLAGS)
+DEFS = $(XDEFS)
+LIBS = @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ $(XLIB)
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@ -m 755
+INSTALL_DATA = @INSTALL_DATA@
+AR = @AR@
+
+#
+# VFS code
+#
+NETFILES   = tcputil.o ftpfs.o mcfs.o utilvfs.o
+NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o @undelfs_o@
+
+VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c names.c \
+	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c
+
+VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
+	extfs.h undelfs.h
+
+VFSOBJS = $(NONETFILES) @NETFILES@
+
+EXTFSSTUFF = README extfs.ini a cpio.in deb.in ftplist.in lha.in lslR.in \
+	rar.in rpm zip.in zoo.in arfs patchfs mailfs 
+
+#
+# Distribution variables
+#
+
+DISTVFS = 	Makefile.in ChangeLog $(VFSSRCS) $(VFSHDRS)
+
+all: @LIBVFS@ @mcserv@
+
+.c.o:
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
+
+check:
+	@echo no tests are supplied.
+
+checklinks:
+	@if test -f $(vfsdir)/mad.c; then echo ok; \
+	else $(MAKE) sourcelinks; fi
+
+sourcelinks:
+	-cd $(vfsdir); $(LN_S) $(rootdir)/src/mad.c $(rootdir)/src/mad.h . >/dev/null 2>&1; true
+
+mcserv: checklinks
+	$(MAKE) mcservx
+
+mcservx: mcserv.o tcputil.o mad.o
+	$(CC) $(LDFLAGS) -o mcserv mcserv.o tcputil.o mad.o $(LIBS)
+	touch mcservx
+
+libvfs.a: $(VFSOBJS)
+	$(RMF) $@
+	$(AR) cr $@ $(VFSOBJS)
+	-$(RANLIB) $@
+
+showlibdep:
+	@echo 'OBJS="$(VFSOBJS)"'
+
+cross:
+	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
+	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
+
+TAGS: $(VFSSRCS)
+	etags $(VFSSRCS)
+
+clean:
+	$(RMF) mcserv *.o core a.out libvfs.a mcservx
+
+realclean: clean
+	$(RMF) .depend
+	$(RMF) TAGS
+	$(RMF) *~
+
+distclean:
+	-$(RMF) $(srcdir)/*~ $(srcdir)/mcserv $(srcdir)/*.o $(srcdir)/a.out
+	-$(RMF) $(srcdir)/core $(srcdir)/libvfs.a
+	-$(RMF) $(srcdir)/mad.c $(srcdir)/mad.h
+	-if test $(srcdir) = .; then $(MAKE) realclean; fi
+	-$(RMF) $(srcdir)/Makefile
+
+install: mcserv install.extfs
+	if test x@mcserv@ != x; then \
+	    $(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv; \
+	fi
+
+install.extfs:
+	$(INSTALL_DATA) $(srcdir)/extfs/README $(DESTDIR)$(libdir)/extfs/README
+	$(INSTALL_DATA) $(srcdir)/extfs/extfs.ini $(DESTDIR)$(libdir)/extfs/extfs.ini
+	$(INSTALL_PROGRAM) $(srcdir)/extfs/a $(DESTDIR)$(libdir)/extfs/a
+	$(INSTALL_PROGRAM) $(srcdir)/extfs/arfs $(DESTDIR)$(libdir)/extfs/arfs
+	$(INSTALL_PROGRAM) $(srcdir)/extfs/rpm  $(DESTDIR)$(libdir)/extfs/rpm
+
+	$(INSTALL_PROGRAM) extfs/cpio $(DESTDIR)$(libdir)/extfs/cpio
+	$(INSTALL_PROGRAM) extfs/deb  $(DESTDIR)$(libdir)/extfs/deb
+	$(INSTALL_PROGRAM) extfs/ftplist $(DESTDIR)$(libdir)/extfs/ftplist
+	$(INSTALL_PROGRAM) extfs/lslR $(DESTDIR)$(libdir)/extfs/lslR
+	$(INSTALL_PROGRAM) extfs/lha $(DESTDIR)$(libdir)/extfs/lha
+	$(INSTALL_PROGRAM) extfs/rar $(DESTDIR)$(libdir)/extfs/rar
+	$(INSTALL_PROGRAM) extfs/zip $(DESTDIR)$(libdir)/extfs/zip
+	$(INSTALL_PROGRAM) extfs/zoo $(DESTDIR)$(libdir)/extfs/zoo
+
+uninstall:
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/rpm
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/cpio
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/deb
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/zip
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/a
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/arfs
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/zoo
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/lslR
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/ftplist
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/extfs.ini
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/README
+	-rmdir $(DESTDIR)$(libdir)/extfs
+	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
+
+distcopy:
+	$(CP) $(DISTVFS) ../../mc-$(VERSION)/vfs
+	cd extfs; $(CP) $(EXTFSSTUFF) ../../../mc-$(VERSION)/vfs/extfs
+
+depend dep: mcdep
+
+fastdeploc:
+
+# ***Dependencies***Do not edit***
+@DOTDEPEND@
+# ***End of dependencies***

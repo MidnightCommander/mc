@@ -1,0 +1,57 @@
+Begin3
+
+Title:          Midnight Commander
+Version:        4.1
+Entered-date:   25DEC97
+
+Description:    File manager and visual shell with transparent support
+                for tar, ftp, rpm, deb (and others) as file systems.
+                Builtin hex and text, editor and viewer. Online help,
+                file type interpretation, and hundreds of powerful
+                features and short cuts.
+
+Keywords:       file directory manager shell browser utility curses
+                mouse menu visual user-friendly color vfs tar ftp gzip
+                undelete editor viewer
+
+Author:         borsenkow.msk@sni.de            (Andrej Borsenkow)
+                rodo@earn.cvut.cz               (Radek Doulik)
+                mr854307@cs.nthu.edu.tw         (Ching Hui)
+                miguel@roxanne.nuclecu.unam.mx  (Miguel de Icaza)
+                jj@sunsite.mff.cuni.cz          (Jakub Jelinek)
+                jtklehto@paju.oulu.fi           (Janne Kukonlehto)
+                fredl@nebula.ow.org             (Fred Leeflang)
+                mok@roxanne.nuclecu.unam.mx     (Mauricio Plaza)
+                dugan@b011.eunet.es             (Dugan Porter)
+                psheer@icon.co.za               (Paul Sheer)
+                k3190@fh-sw.de                  (Norbert Warmuth)
+
+Maintained-by:  miguel@roxanne.nuclecu.unam.mx  (Miguel de Icaza)
+
+Primary-site:   sunsite.unc.edu /pub/Linux/utils/file/managers/mc
+                1200k mc-4.1.tar.gz
+
+Alternate-site: ftp.nuclecu.unam.mx /linux/local
+                1200k mc-4.1.tar.gz
+
+Platforms:      alpha-dec-osf, alpha-linux, hppa-hp-hpux, ix86-bsdi,
+                ix86-freebsd, ix86-linux, ix86-os2, ix86-sco,
+                ix86-solaris, ix86-windows95, ix86-windows-nt,
+                m68k-apple-aux, mc88110-aviion-dgux, mips-sgi-irix,
+                mips-dec-ultrix, powerpc-ibm-aix, powerpc-linux,
+                rs6000-ibm-aix, sparc-sun-netbsd, sparc-sun-solaris,
+                sparc-sun-sunos, sparc-linux, unixware.
+
+                    If mouse support is required on the
+                Linux console, then the GPM mouse server.
+                (available at iride.unipv.it:/pub/gpm)
+                (ftp.nuclecu.unam.mx:/linux/local)
+
+                    It is also preferable to use Rxvt as an X
+                Terminal if you are using mc under X.
+                (available at ftp.math.fu-berlin.de:/pub/rxvt)
+                (ftp.nuclecu.unam.mx:/linux/local)
+
+Copying-policy: GPL
+
+End

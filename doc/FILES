@@ -1,0 +1,130 @@
+COPYING			GNU General public license
+INSTALL			Installing directions
+INSTALL.FAST		Short directions for busy people
+NEWS			List of new features by version
+README			Mini documentation
+create_vcs		Creates /dev/vcs? entries for Linux > 1.1.92
+mcfn_install.in		Templace for a script to install mc () function into your /etc/profile or ~/.profile
+mc.spec.in		Template for rpm specification file 
+mc.spec			rpm secification file
+doc/			Directory: Documentation files
+doc/DEVEL		Development hints
+doc/FILES		List of the files included in the distribution
+doc/LSM			Linux software map entry
+doc/mc.1.in		Template for MC anual page
+doc/mcedit.1.in		Template for MC edit anual page
+doc/mcserv.8.in		Template for MC file server manual page
+install-sh		Install command if BSD compatible install is not found
+lib/			Directory: Additional useful files
+lib/ansi.ti		Terminfo database for generic ansi terminal
+lib/linux.ti		Enhanced terminfo database for Linux console
+lib/mc.ext		Sample executable extension file
+lib/mc.menu		Sample user menu file
+lib/ncurses.h		To be used if the real ncurses is not available
+lib/tdiff		Tool to compare two terminfo databases
+lib/vt100.ti		Enhanced terminfo database for vt100 terminal
+lib/xnc.hlp		The part of the mc.hlp file not produced from the mc.1 file
+lib/xterm.ti		Enhanced terminfo database for xterm terminal
+lib/tkmc.wmconfig	MC registration file for AnotherLevel RH desktop
+lib/mcserv.pamd		PAM registration file for mcserv service
+lib/mcserv.init		mcserv SySV init script for RH Linux
+slang/			Directory: Slang screen manager (from Slang distribution)
+slang/slang.h
+slang/sldisply.c
+slang/slerr.c
+slang/slsmg.c
+slang/slutty.c
+src/			Directory: Midnight Commander source files
+src/ChangeLog		Detailed list of changes
+src/GNUmakefile		Makefile wrapper for GNU make
+src/Makefile.in		Makefile template for configure
+src/TODO		Things to be done, ongoing projects
+src/achown.c		Advanced chown/chmod dialog
+src/auto.c		Automatic mounting and unmounting
+src/auto.h		"
+src/boxes.c		Miscellaneous dialog boxes
+src/boxes.h		"
+src/chmod.c		Chown dialog
+src/chmod.h		"
+src/chown.c		Chmod dialog
+src/chown.h		"
+src/cmd.c		The commands implementation.
+src/cmd.h		"
+src/color.c		Color terminal detection and color definitions
+src/color.h		"
+src/complete.c		Completion of filenames etc.
+src/complete.h		"
+src/configure		Configures Midnight Commander for target machine
+src/configure.in	Configure template for GNU autoconf (2.x)
+src/cons.handler.c	API for taking advantage of cons.saver daemon
+src/cons.saver.c	Linux console image save and restore daemon
+src/cons.saver.h	Common header file for cons.handler.c and cons.saver.c
+src/dialog.c		Old dialog routines
+src/dialog.h		"
+src/dir.c		Loading and sorting of directory contents
+src/dir.h		"
+src/dlg.c		New dialog routines (see also widget.c)
+src/dlg.h		"
+src/ext.c		Executable extensions feature
+src/ext.h		"
+src/file.c		File operations (copy, move, delete)
+src/file.h		"
+src/find.c		File search feature
+src/find.h		"
+src/fsusage.c		File system space usage (from GNU fileutils)
+src/fsusage.h		"
+src/gindex.pl		Creates index for the mc.hlp file
+src/global.h		Some global definitions
+src/help.c		Hypertext help browser (for browsing the mc.hlp file)
+src/help.h		"
+src/hotlist.c		Directory hotlist
+src/hotlist.h		"
+src/key.c		Keyboard and mouse reading
+src/key.h		"
+src/layout.c		Division of the screen area between panels (layout dialog)
+src/layout.h		"
+src/mad.c		Simple memory allocation debugger (not normally used)
+src/mad.h		"
+src/main.c		Trash can
+src/main.h		"
+src/man2hlp.c		Creates mc.hlp and mc.html from mc.1
+src/mc.hlp		Hypertext help file
+src/mem.h		Strcpy, memcpy, bcopy and friends
+src/menu.c		Menu bar and its drop-down menus
+src/menu.h		"
+src/mountlist.c		List of mounted filesystems (from GNU fileutils)
+src/mountlist.h		"
+src/mouse.c		Mouse initialization, mouse events (see also key.c)
+src/mouse.h		"
+src/option.c		Configuration dialog
+src/option.h		"
+src/panel.h		Directory panel structure definition
+src/profile.c		Code to handle MS-Windows style INI files (from WINE)
+src/profile.h		"
+src/regex.c		Regular expression code (from GNU regex library)
+src/regex.h		"
+src/screen.c		Outputting of the directory panels to the screen
+src/setup.c		Loading and saving of the setup
+src/setup.h		"
+src/slint.c		Support file for Slang screen manager
+src/subshell.c		Concurrent shell support (optional)
+src/subshell.h		"
+src/terms.c		Enter and exit the cursor addressing mode (xterm)
+src/tree.c		Directory tree feature
+src/tree.h		"
+src/user.c		User menu handling and macro capabilities
+src/user.h		"
+src/util.c		Useful utility routines (don't output to screen)
+src/util.h		"
+src/vfs.c		Virtual file system (to support transparent ftp, tar, zip etc.)
+src/vfs.h		"
+src/view.c		Internal file viewer
+src/view.h		"
+src/widget.c		Widgets for dialog manager (see also dlg.c)
+src/widget.h		"
+src/win.c		Useful utility routines (which output to screen)
+src/win.h		"
+src/wtools.c		Listbox and query dialog routines etc.
+src/wtools.h		"
+src/xcurses.c		BSD curses support
+src/xmkdir		Replacement for "mkdir -p /dir" because some systems don't support the -p flag

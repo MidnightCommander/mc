@@ -1,0 +1,20 @@
+#
+# Procomm and some other ANSI emulations don't recognize all of the ANSI-
+# standard capabilities.  This entry deletes cuu, cuf, cud, cub, and vpa/hpa
+# capabilities, forcing curses to use repetitions of cuu1, cuf1, cud1 and cub1.
+#
+ansi|ansiterm|Generic ansi terminal,
+	am, xon,
+	cols#80, lines#24,
+	bel=^G, blink=\E[5m, bold=\E[1m, cbt=\E[Z,
+	clear=\E[H\E[J, cr=\r, cub1=\b,	cud1=\n, cuf1=\E[C,
+	cup=\E[%i%p1%d;%p2%dH, cuu1=\E[A,
+	dch1=\E[P, dl=\E[%p1%dM, dl1=\E[M, ed=\E[J, el=\E[K,
+	home=\E[H, ht=\t, hts=\EH,
+	ich=\E[%p1%d@, ich1=\E[@, il=\E[%p1%dL, il1=\E[L,
+	ind=\n, invis=\E[8m, kbs=\b, kcub1=\E[D, kcud1=\E[B,
+	kcuf1=\E[C, kcuu1=\E[A, khome=\E[H,
+	rep=%p1%c\E[%p2%{1}%-%db, rev=\E[7m, rmso=\E[m,
+	rmul=\E[m,
+	sgr=\E[%?%p1%t7;%;%?%p2%t4;%;%?%p3%t7;%;%?%p4%t5;%;%?%p6%t1;%;m,
+	sgr0=\E[0m, smso=\E[7m, smul=\E[4m, tbc=\E[2g,

@@ -1,0 +1,162 @@
+Tue Feb 24 18:37:36 1998  Stas Maximov <stmax@u213.srcc.msu.su>
+
+	* subshell.c: Set subshell_pid to 1 on startup
+
+Fri Feb 13 19:59:39 1998  Alexander Savelyev <fano@VCom.kiev.ua>
+
+	* screen.c: KEY_DC is also handled by delete_cmd.
+
+	* vfs/ftpfs.c (chdir): sending the CWD command is not necessary
+	(imho).
+
+	(ftpfs_connection_close): Do not use WAIT_REPLY, closes
+	connections faster. 
+
+	(open_data_connection): implement the reget command. 
+	
+	* boxes.c: bigger VFS dialog box.
+
+	* file.c (init_replace): Add support for copying files only if the
+	size differs, and support for regetting ftp files.
+
+Wed Feb 11 20:08:50 1998  Norbert Warmuth <k3190@fh-sw.de>
+
+        * user.c (execute_menu_command): Extented the syntax of %-macros
+        used in the user menu in order to switch quoting on (default) and
+        off, e.g. %0f means don't quote the expanded macro, %f and %1f mean
+        quote the expanded macro.
+
+
+Fri Jan 30 16:43:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* dlg.c (create_dlg): Now we pass the flags parameter to the
+	create_dialog routine. 
+
+	* tkmain.c (xtoolkit_create_dialog): Check for the grided value
+
+Fri Jan 23 07:28:54 1998  Peter Daum <gator@cs.tu-berlin.de>
+
+	* extfs.c (open_extfs_archive): Pass the filename to the list
+	command.
+
+	* extfs/mailfs: New file system for browsing mail files (support
+	for compressed mail fiels as well).
+
+Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel@absolute.spb.su>
+
+        * edit/edit.h: mc_mkdir requires 2 arguments for any operation
+        system. Obsolete #ifdef's removed.
+
+        * edit/editwidget.c: ansi standard violation removed
+	
+        * nt/Makefile.NT: default SLang directory is now ../slang. Most
+        of SLang sources are no more compiled for MC.
+
+        * nt/drive.h: new file. Copied from os2/drive.h with minor changes
+
+        * nt/ket.nt.c: new way for handling conflicting SHIFT_PRESSED
+        definitions. get_event can work without blocking. Copy, move
+        and delete operations work normally.
+
+        * nt/slint.nt.c: SLang_getkey2 and Slang_input_pending2 are
+        copied from src/slint.c
+
+        * nt/sys/param.h: annoying warnings temporaly suppressed.
+
+        * slang/slvideo.c, slang/slw32tty.c: new files. They contain
+        changes by Alexander Dong.
+
+        * src/myslang.h: definitions for acsii symbols removed, since
+        they are available in slang.h. Double lines are not used anymore.
+
+        * src/panelize.c: sys/wait.h is included only if HAVE_SYS_WAIT_H
+        is defined
+
+        * nt/Makefile.NT: text.c is added
+        
+	* nt/Makefile.VC4: "-debug" switch for linker is not used for
+        release version
+
+        * src/screen.c (show_dir): double lines are no more used by NT and
+        OS/2 ports.
+	
+        * src/wtools.c (real_input_dialog_help): layout of input dialog for
+        XView port is corrected
+
+        * edit/edit.h: mc_mkdir requires 2 arguments for any operation
+        system. Obsolete #ifdef's removed.
+
+        * edit/editwidget.c: ansi standard violation removed
+
+Wed Jan 21 14:01:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ext.c (regex_command): reverted the patch that changed tests for
+	*p == ' ' || *p == '\t' to isspace().  isspace() is true for tabs,
+	newlines, carriage-returns and vertical tabs as well.  Which is
+	not what we want.
+
+Wed Jan 21 11:58:39 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
+
+	* ftpfs.c (retrieve_dir): Avoid compiler warning by testing
+	explicitly the value. 
+	
+        screen.c (format_file): color not initialized when we met
+        empty_line.
+
+Wed Jan 21 11:28:21 1998  Alex Tkachenko  <alex@bcs.zp.ua>
+
+	* cmd.c, utilunix.c: cosmetic changes to reduce compiler warnings
+	
+	* utilunix.c (my_system): small fix for SCO zombies moved here;
+	now it returns WEXITSTATUS(status) instead of status itself. While
+	missing it may not hurt on i.e., linux, on SCO it gives incorrect
+	value.
+	
+	* vfs/extfs.c system() calls replaced with my_system() call; this
+	allows a greater degree of control - fixes SCO system() return value
+	processing. Notice: plain replacement system() with WEXITSTATUS(system)
+	does not produce correct behavior (don't ask me why).
+
+	* panelize.c (do_external_panelize): similar fixes for pclose()
+	return value on SCO.
+
+	view.c (load_view_file): inverted value of viewer_magic_flag to
+	put viewer decompression state in accordance with F8 label text.
+	Also default_nroff_flag is initialized to be 1; thus enabling all
+	filter processing by default easies mc usage for novice users.
+
+Sun Jan 18 13:47:37 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
+
+	* main.c
+	* panel.h, tkscreen.h : error when compile dlg.c
+	* tkconf.h : paint_frame
+	* screen.c : to include paint_frame
+	* tkmain.c : I just copied clr_scr() from the text.c
+
+Fri Jan 16 16:19:59 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (format_file): Do not invoke the file_compute_color
+	routine for empty lines. 
+
+	* gmain.c: Color scheme for Gnome
+
+	* gscreen.c: Color setup now allocated the GdkColor *.
+	
+	* color.c: Moved the default color setting to a per-port
+	location (text.c for the text mode edition);  new color
+	configuration: core;  Fixed the case where the color spec was
+	buggy and we kept on a infinite loop; 
+
+Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel@absolute.spb.su>
+	
+	* nt/drive.nt.c, nt/chmod.nt.c: Updated button_new and check_new
+	calls
+
+Fri Jan 16 12:47:39 1998  Norbert Warmuth <k3190@fh-sw.de>
+
+        * vfs/ftpfs.c (command): Don't log passwords when the dialog between
+        server and client is logged to a file (mc -l logfile).
+
+        * vfs/ftpfs.c (resolve_symlink, retrieve_dir): When a directory
+        contains spaces send two commands ("CWD path" and  "LIST .") instead of
+        one command ("LIST path") in order to get directory listings.

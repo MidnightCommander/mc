@@ -1,0 +1,82 @@
+#! /usr/bin/perl
+#
+# External filesystem for mc, using mtools
+# Written Ludek Brukner (lubr@barco.cz), 1997
+#
+# WARNING - This software is ALPHA - Absolutely NO WARRANTY
+# 
+
+### Change this when the commands are outside PATH
+$mdir = "mdir";
+$mcopy = "mcopy";
+###
+
+$disk = $0;
+$disk =~ s/^.*\/([^\/]*)$/\1/;
+
+sub get_dirs {
+    my ($path, $name, $size, $date, $time, $longname, @lst, @rv);
+
+    $path = shift(@_);
+    @rv = ();
+
+    open(FILE,"$mdir $disk:/$path |");
+    while ( <FILE> ) {
+	chomp();
+	/^ / && next;                            # ignore `non-file' lines
+	/^$/ && next;                            # ignore empty lines
+	/^\.\.?/ && next;                        # ignore `.' and `..'
+
+	$name = substr($_,0,12);
+	$name =~ s/^([^ ]*) +([^ ]+)[ \t]*$/$1.$2/;
+	$name =~ s/[ .]+$//;
+
+	$_ = substr($_,12);
+	s/^[ ]+//;
+
+	($size,$date,$time,$longname) = split(/[ \t]+/);
+
+        @lst = split(/([:ap])/, $time);
+        $lst[0] += 12 if ($lst[3] eq "p");
+	$time = sprintf("%02d:%02d", $lst[0], $lst[2]);
+	@lst = split(/-/, $date);
+	$lst[2] %= 100 if ($lst[2] > 100);
+	$date = sprintf ("%02d-%02d-%02d", @lst);
+
+	$name = $path . lc(($longname) ? $longname : $name);
+
+	if ($size =~ /DIR/) {
+	    printf("drwxr-xr-x   1 %-8d %-8d %8d %s %s %s\n", 0, 0, 0, $date, $time, $name);
+	   push @rv, $name;
+	}
+	else {
+	    printf("-rw-r--r--   1 %-8d %-8d %8d %s %s %s\n", 0, 0, $size, $date, $time, $name);
+	}
+    }
+    close(FILE);
+    return @rv;
+}
+
+sub a_list
+{
+    my (@files, $file);
+
+    @files = get_dirs("");
+    while ($file = shift(@files)) {
+	    push @files, get_dirs("$file/");
+    }
+}
+
+sub a_copyout
+{
+    my($archname,$filename,$dest) = @_;
+    system "$mcopy $disk:/$filename $dest";
+}
+
+#    system "touch /tmp/deb";
+
+if($ARGV[0] eq "list") { shift; &a_list(@ARGV); exit 0; }
+elsif($ARGV[0] eq "copyout") { shift; &a_copyout(@ARGV); exit 0; }
+
+exit 1;
+

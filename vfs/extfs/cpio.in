@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# Written by Erik Troan (ewt@redhat.com) 1996
+# Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996
+# (C) 1996 The Free Software Foundation.
+#
+#
+
+mccpiofs_list ()
+{
+    cpio -tv --quiet < $1
+}
+
+mccpiofs_copyout ()
+{
+    case "$2" in
+	*)
+	    TMPDIR=/tmp/mctmpdir.$$
+	    mkdir $TMPDIR
+	    cd $TMPDIR
+	    cpio -iumd --quiet $2 < $1 2>/dev/null
+	    mv $2 $3
+	    cd /
+	    rm -rf $TMPDIR;;
+    esac
+}
+
+case "$1" in
+  list) mccpiofs_list $2; exit 0;;
+  copyout) mccpiofs_copyout $2 $3 $4; exit 0;;
+esac
+exit 1

@@ -1,0 +1,9 @@
+
+- Drop targets on the desktop. 
+- Sync the screen panels with the real panels
+- Use containers instead of WPanels as the toplevel window displayed
+- widgets event forwarding in WInputs and WPanels.
+- Split view.
+- Menu organization
+- Intenrationalization
+- All of the dialogs.

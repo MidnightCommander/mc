@@ -1,0 +1,109 @@
+                     Solving keyboard related problems
+                               with XTERM
+                        and GNU Midnight Commander
+                       (and other programs as well).
+
+Xterm brings a handful of problems with input keys and their translations.
+Some of these problems include xterm's failure to make a difference between
+shifted and not shifted function keys (many keyboards do not have more than
+10 or 12 function keys, so it is useful to generate higher function keys (11
+- 20) by pressing Shift and function key - 10 (e.g. Shift+F3 is F13). Xterm
+also doesn't send Alt+character and Meta+character as something other than
+plain character. Also, home key does not work on most systems. And keypad
+operator characters (+, -, /, *) send different sequences than normal +, -,
+/, * (or sometimes do not send anything).
+
+Please note that if you want to use the Alt key on an XTerm, you have to
+make sure you use:
+
+XTerm*eightBitInput: false
+
+Otherwise, you will just get accented keys.
+
+Fortunately this can be solved, since xterm is written on top of the 
+X Toolkit Intrinsics, which has a built-in feature of event translation
+tables that can be specified using X resources. This doesn't apply to rxvt,
+where the only solution to this problem would be patching rxvt's sources and
+recompiling. So from now on, we are speaking only about xterm (and its
+modifications, like color_xterm and ansi_xterm).
+
+Xterm brings two new Xt widgets (if you don't know what they are it doesn't
+matter), vt100 and tek4014 (these are used for the terminal display in vt100
+and tektronics mode). The translation table is specified in
+*vt100.translations and *tek4014.translations resources.
+You can see a sample in xterm.ad file in this directory. 
+
+If you want to install these translations, bear in mind that you have to
+keep your terminfo and termcap in sync with these. So if you install
+xterm.ad, you have to install xterm.ti and xterm.tcap (or do necessary
+changes yourself).
+
+xterm.ad has to be loaded into the Xrm (X resource manager), either by xterm
+itself or by xrdb utility. There are many places you may want to install it
+to; the decision is yours. Preferably it should go to your personal
+$HOME/.Xdefaults file (if you have any). This file is automatically loaded
+using xrdb whenever you start the X server (it is done by startx and openwin
+scripts). Another possibility is to put this into
+$X11ROOT/lib/X11/app-defaults/XTerm or wherever your app-defaults file of
+xterm is and whatever is its name (sometimes it will have to be XTerm-ansi,
+XTerm-color etc.) Or you can put this anywhere and call 
+          xrdb xterm.ad
+from any script you run on X11 startup.
+
+xterm.ti (terminfo database source) is installed by running `tic xterm.ti'.
+tic will compile it and place it into your TERMINFO directory.
+
+xterm.tcap is the xterm (and xterm-color) termcap entry. It is based on the
+newest termcap database from http://www.ccil.org/~esr/ncurses.html, but
+contains a bunch of changes to make all the above mentioned keys work. Even
+if mc is compiled so that it uses terminfo, you need to install the termcap
+entry so that other programs which use termcap will behave correctly. You
+have to edit your /etc/termcap and replace xterm and xterm-color entries
+with those from xterm.tcap.
+
+The xterm.ad translation table contains many items (some of them may be
+unnecessary) but are included only to make it work on all different xterms
+(xterm terminfo and termcap databases have different sequences for the same
+keys in every different database, so xterm.ad works as a stardard to make
+xterm.ti and termcap happy). If you find that xterm works well even if you
+delete some lines from the translations, feel free to do it.
+
+By default,  Alt+character keys received by mc are generated in xterm.ad by
+Alt modifier plus the key. On some systems, you may want to change this to
+the Meta modifier (e.g. if the Alt modifier is missing). You do it by
+replacing a letter s at the beginning of table lines with letter m.
+
+And what you might want to know, if you are going to change anything, is:
+Each line looks like
+	modifiers<Key>keyname: string("something") \n\
+where modifiers can be:
+a for alt
+m for meta
+c for control
+button1 (2, 3) for mouse buttons.
+
+  The string is generated whenever the named key is pressed while the
+modifiers are in a state matching the specification.  Naming a modifier
+specifies that the modifier must be pressed.  A ~ in front of a modifier
+name specifies that the modifier must NOT be pressed.  If the set of
+modifiers is preceded by !, unmentioned modifiers must not be
+pressed; otherwise their state is ignored.
+
+After <Key> you specify a name of the key (if you don't know a canonical
+name of any key, see $X11ROOT/include/X11/keysymdef.h (keynames are the
+names there without leading XK_). Then there can be any sequence of string
+statements which send the string to the tty line, as if the user typed that
+sequence of characters. If it has the form string(0xXX), where X's are
+hexadecimal digits, then the ascii character of that value is sent rather
+than 0xXX.
+
+This is a subset of all the translation table features. If you want a
+complete reference, see xterm(1) and X Toolkit Intrinsics manual Appendix B.
+
+Please, if you find any problems or errors in this stuff, let me know by
+e-mail to 
+mc-devel@roxanne.nuclecu.unam.mx.
+
+
+
+

@@ -1,0 +1,126 @@
+srcdir = @srcdir@
+VPATH  = @srcdir@
+
+rootdir = $(srcdir)
+@MCFGR@@MCF@
+
+foreigndirs=nt os2
+unixdirs=vfs lib doc slang edit src tk xv gnome icons 
+alldirs=$(unixdirs) $(foreigndirs) 
+subdirs=$(alldirs)
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
+		Makefile.in FAQ COPYING create_vcs install-sh \
+		config.h.in aclocal.m4 acconfig.h VERSION mcfn_install.in \
+		Make.common.in README.NT mc.spec.in mc.spec README.OS2 \
+		VERSION.in
+
+all: 
+	@for dir in ${unixdirs}; do \
+		cd $$dir; \
+		${MAKE} all || exit 1; \
+		cd .. ;\
+	done
+
+static:
+	$(MAKE) _LDFLAGS="-static $(_LDFLAGS)"
+
+configure: configure.in aclocal.m4
+	cd $(srcdir); autoconf --localdir=$(srcdir) $(srcdir)/configure.in > configure
+	chmod 755 configure
+
+config.h.in: configure.in acconfig.h
+	cd $(srcdir); autoheader
+
+install: installdirs @vcs@
+	@for I in $(unixdirs); do cd $$I; $(MAKE) DESTDIR=$(DESTDIR) $@ || exit 1; cd ..; done
+	$(INSTALL_DATA) $(srcdir)/FAQ $(DESTDIR)$(libdir)/FAQ
+	$(INSTALL_PROGRAM) mcfn_install $(DESTDIR)$(suppbindir)/mcfn_install
+	chmod +x $(DESTDIR)$(suppbindir)/mcfn_install
+	@echo "Please verify that the configuration values are correctly"
+	@echo "set in the mc.ext file in $(libdir)"
+
+install.create_vcs:
+	$(INSTALL_PROGRAM) $(srcdir)/create_vcs $(DESTDIR)$(suppbindir)/create_vcs
+	if test x$(DESTDIR) = x; then $(SHELL) $(srcdir)/create_vcs; fi
+
+installdirs:
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir) $(DESTDIR)$(libdir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
+
+mcfninstall:
+	-/bin/sh ./mcfn_install
+
+uninstall:
+	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
+	-$(RMF) $(DESTDIR)$(libdir)/FAQ
+	-$(RMF) $(DESTDIR)$(suppbindir)/mcfn_install
+	@echo Midnight Commander uninstalled
+
+cross TAGS clean depend dep:
+	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
+
+Makefile: 
+	$(SHELL) config.status
+
+config.status: 
+	if test -x config.status; then config.status --recheck; \
+	else $(SHELL) configure; fi
+
+realclean: clean 
+	rm -f *~
+	rm -f config.cache
+
+# distclean goal is for making a clean source tree, but if you have run 
+# configure from a different directory, then doesn't destroy all your
+# hardly compiled and linked stuff. That's why there is always $(srcdir)/
+# In that case most of those commands do nothing, except cleaning *~
+# and cleaning source links.
+distclean:
+	rm -f $(srcdir)/*~ $(srcdir)/config.cache $(srcdir)/config.h
+	rm -f $(srcdir)/config.log $(srcdir)/config.status 
+	rm -f $(srcdir)/mcfn_install
+	@for I in $(alldirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
+	rm -f $(srcdir)/Makefile $(srcdir)/Make.common
+	rm -f lib/mc.ext mcfn_install vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar
+
+distdirs:
+	mkdir ../mc-$(VERSION); \
+	mkdir ../mc-$(VERSION)/src; \
+	mkdir ../mc-$(VERSION)/lib; \
+	mkdir ../mc-$(VERSION)/doc; \
+	mkdir ../mc-$(VERSION)/slang; \
+	mkdir ../mc-$(VERSION)/vfs; \
+	mkdir ../mc-$(VERSION)/vfs/extfs; \
+	mkdir ../mc-$(VERSION)/icons; \
+	mkdir ../mc-$(VERSION)/xv; \
+	mkdir ../mc-$(VERSION)/xv/support; \
+	mkdir ../mc-$(VERSION)/xv/support/xview_private; \
+	mkdir ../mc-$(VERSION)/tk; \
+	mkdir ../mc-$(VERSION)/gnome; \
+	mkdir ../mc-$(VERSION)/nt; \
+	mkdir ../mc-$(VERSION)/po; \
+	mkdir ../mc-$(VERSION)/edit;
+
+distcopy:
+	sed "s/@VERSION@/$(VERSION)/" mc.spec.in > mc.spec
+	sed "s/@VERSION@/$(VERSION)/" VERSION.in > VERSION
+	cp $(DISTMAIN) ../mc-$(VERSION);
+	cp po/Makefile.in.in ../mc-$(VERSION)/po;
+	cp po/POTFILES.in ../mc-$(VERSION)/po;
+	for I in $(alldirs); do \
+	    cd $$I ; \
+	    $(MAKE) distcopy || exit 1; \
+            cd ..; done
+	(cd ..; tar cvf - mc-$(VERSION) | \
+	gzip -f9 > mc-$(VERSION).tar.gz); \
+
+dist: configure config.h.in distdirs distcopy
+
+

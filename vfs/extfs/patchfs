@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.22)
+
+# paths to used programs:
+ncat=cat                  # regular cat
+zcat=zcat                 # gunzip to stdout
+bzcat="bzip2 -dc"         # bunzip2 to stdout
+file=file                 # "file" command
+sed=sed
+
+filelist=FILELIST         # names for "special" files
+
+patchfs_list ()
+{
+    date=`date +"%b %d %k:%M"`
+    perm="-r--r--r--"
+    uid=00000000
+    gid=00000000
+    size=00000000
+    nlink="  1"
+
+    echo "$perm $nlink $uid $gid $size $date $filelist"
+    $cat $1 | 
+    $sed -n "/^diff /{
+	s|^.* \([^ ]*\)$|$perm $nlink $uid $gid $size $date \1|gp
+    }"
+}
+
+patchfs_copyout ()
+{
+    if [ "$2" = "$filelist" ]; then  # list of all affected files
+	$cat $1 | 
+	$sed -n "/^diff /{
+	    s|^.* \([^ ]*\)$|\1|gp
+	}" > $3
+	exit 0
+     fi
+    
+    fn=`echo $2|$sed 's|/|\\\/|g'`   # escape '/' in filename
+    $cat $1 | 
+    $sed -n "/^diff .*$fn/,/^diff /{
+	/^diff ./{
+	    /$fn/p
+	    d
+	}
+	p
+    }" > $3
+}
+
+patchfs_run ()
+{
+    exit 0
+}
+
+type=`$file $2`
+case $type in
+    *bzip*) cat=$bzcat ;;
+    *gzip*) cat=$zcat ;;
+    *text*) cat=$ncat ;;
+    *) exit 1
+esac
+
+case "$1" in
+    list) patchfs_list $2; exit 0;;
+    copyout) patchfs_copyout $2 $3 $4; exit 0;;
+    run) patchfs_run; exit 0;;
+esac
+
+exit 1
+
+

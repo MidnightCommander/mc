@@ -1,0 +1,47 @@
+#!/bin/sh
+#
+# skeleton      Example file to build /etc/init.d scripts.
+#
+# Version:      @(#) /etc/init.d/mcserv  09-Apr-1997
+#
+# Author:       Tomasz K³oczko, <kloczek@rudy.mif.pg.gda.pl>
+#               Michele Marziani <marziani@fe.infn.it>
+#
+# chkconfig: - 86 30
+# description: The Midnight Commander server allows users on remote machines \
+#	       to use the Midnight Commander file manager to manipulate their \
+#	       files on the machine running the server. The server  \
+#              authenticates the user through PAM, which by default requires \
+#              a username/password combination before allowing access.
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# See how we were called.
+case "$1" in
+  start)
+        echo -n "Starting mcserv services: "
+	daemon /usr/bin/mcserv -d
+	touch /var/lock/subsys/mcserv
+	echo
+	;;
+  status)
+        status mcserv
+	;;
+  restart)
+        $0 stop
+	$0 start
+        ;;
+  stop)
+        echo -n "Shutting down mcserv services: "
+	killproc mcserv
+	rm -f /var/lock/subsys/mcserv
+	echo
+	;;
+  *)
+	echo "Usage: mcserv.init {start|stop|status|restart}"
+	exit 1
+esac
+
+exit 0
+

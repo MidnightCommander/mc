@@ -1,0 +1,178 @@
+# Makefile
+# Written by Dan Nicolaescu 
+# 970423 hacked by Juan f. Grigera 
+# 970525 hacked again by jfg to add internal editor
+# 971127 hacked by Pavel Roskin to make it work with mc-4.1.11
+#
+# This is the Makefile for Midnight Commander under Win32.
+#
+# Supported Compilers:
+#   
+#	makefile.vc4:	Microsoft Visual C++ 4.x
+#	...
+
+!IF "$(DEBUG)" == ""
+DEBUG=1
+!MESSAGE No configuration specified.  Defaulting to Debug.
+!ENDIF 
+
+!if  "$(DEBUG)" == "0"
+OBJS_DIR=release
+!else
+OBJS_DIR=debug
+!endif
+
+NULL=nul
+
+# ---- Directories
+MC_NT_DIR=.
+MC_SRC_DIR=..\src
+MC_INCLUDE_DIR=.
+VFS_DIR=..\vfs
+MCEDIT_SRC_DIR=..\edit
+MCEDIT_OBJS_DIR=$(MCEDIT_SRC_DIR)\$(OBJS_DIR)
+MCEDIT_LIB=$(MCEDIT_OBJS_DIR)\libedit.lib
+SLANG_SRC_DIR=..\slang
+SLANG_OBJS_DIR=$(SLANG_SRC_DIR)\$(OBJS_DIR)
+SLANG_LIB=$(SLANG_OBJS_DIR)\slang.lib
+
+# ---- Compiler specific defines
+!include "makefile.vc4"
+
+# --- Midnight Defines
+MC_DEFINES=$(SPECIFIC_DEFINES) -D_OS_NT -DOS2_NT -DWIN32 -D_CONSOLE  -DHAVE_CONFIG_H -Dpc_system -DUSE_INTERNAL_EDIT
+MC_INCLUDES=-I$(MC_SRC_DIR) -I$(MC_NT_DIR) -I$(SLANG_SRC_DIR)
+SLANG_DEFINES=$(SPECIFIC_DEFINES) -DWIN32 -DWIN32_LEAN_AND_MEAN -D_WINDOWS -Dpc_system -Dpc -D_OS_NT -D__WIN32__ -D__STDC__ -DHAVE_STDLIB_H -DFLOAT_TYPE -DMSWINDOWS -DHAVE_MEMCPY -DHAVE_MEMSET
+SLANG_INCLUDES=-I$(MC_NT_DIR) -I$(SLANG_SRC_DIR)
+MCEDIT_DEFINES=$(SPECIFIC_DEFINES) -D_OS_NT -DWIN32 -D_CONSOLE  -DHAVE_CONFIG_H -DMIDNIGHT
+MCEDIT_INCLUDES=-I$(MC_SRC_DIR) -I$(MC_NT_DIR) -I$(MC_SRC_DIR)\.. -I$(SLANG_SRC_DIR)
+
+CFLAGS=$(SPECIFIC_MC_CFLAGS) $(MC_INCLUDES) $(MC_DEFINES) -c
+LFLAGS=$(MC_LIBS) $(SLANG_LIB) $(MCEDIT_LIB) $(SPECIFIC_MC_LFLAGS)
+SLANG_CFLAGS=$(SPECIFIC_SLANG_CFLAGS) $(SLANG_INCLUDES) $(SLANG_DEFINES) -c
+SLANG_LINK_FLAGS=-nologo -out:"$(SLANG_LIB)" 
+MCEDIT_CFLAGS=$(SPECIFIC_MCEDIT_CFLAGS) $(MCEDIT_INCLUDES) $(MCEDIT_DEFINES) -c
+MCEDIT_LINK_FLAGS=-nologo -out:"$(MCEDIT_LIB)"
+RC_DEFINES=$(SPECIFIC_DEFINES)
+RSC_FLAGS=-l 0x409 -fo"$(OBJS_DIR)\mc.res" $(RC_DEFINES)
+
+
+
+
+all: object-dirs mc 
+object-dirs: $(OBJS_DIR) $(SLANG_OBJS_DIR) $(MCEDIT_OBJS_DIR)
+
+mc: $(OBJS_DIR)\mc.exe
+slang: $(SLANG_LIB)
+libedit: $(MCEDIT_LIB)
+
+clean: 
+	deltree -y $(OBJS_DIR)
+	deltree -y $(SLANG_OBJS_DIR)
+	deltree -y $(MCEDIT_OBJS_DIR)
+
+$(OBJS_DIR):
+    if not exist $@\$(NULL) mkdir $@
+
+$(SLANG_OBJS_DIR):
+    if not exist $@\$(NULL) mkdir $@
+
+$(MCEDIT_OBJS_DIR):
+    if not exist $@\$(NULL) mkdir $@
+
+.c{$(OBJS_DIR)}.obj:
+	$(CC) $(CFLAGS) -Fo$@ $<
+
+{$(MC_SRC_DIR)}.c{$(OBJS_DIR)}.obj:
+	$(CC) $(CFLAGS) -Fo$@ $<
+
+{$(SLANG_SRC_DIR)}.c{$(SLANG_OBJS_DIR)}.obj:
+   $(CC) $(SLANG_CFLAGS) -Fo$@ $<  
+
+{$(MCEDIT_SRC_DIR)}.c{$(MCEDIT_OBJS_DIR)}.obj:
+   $(CC) $(MCEDIT_CFLAGS) -Fo$@ $<  
+
+OBJS= 	$(EXTRA_MC_OBJS)\
+	$(OBJS_DIR)\util.Win32.obj\
+	$(OBJS_DIR)\util.WinNT.obj\
+	$(OBJS_DIR)\terms.obj \
+	$(OBJS_DIR)\user.obj \
+	$(OBJS_DIR)\utilnt.obj \
+	$(OBJS_DIR)\subshell.obj \
+	$(OBJS_DIR)\file.obj \
+	$(OBJS_DIR)\listmode.obj \
+	$(OBJS_DIR)\cmd.obj \
+	$(OBJS_DIR)\dirent.obj \
+	$(OBJS_DIR)\command.obj \
+	$(OBJS_DIR)\help.obj \
+	$(OBJS_DIR)\menu.obj \
+	$(OBJS_DIR)\view.obj \
+	$(OBJS_DIR)\dir.obj \
+	$(OBJS_DIR)\info.obj \
+	$(OBJS_DIR)\widget.obj \
+	$(OBJS_DIR)\cons.handler.nt.obj \
+	$(OBJS_DIR)\option.obj \
+	$(OBJS_DIR)\dlg.obj \
+	$(OBJS_DIR)\panelize.obj \
+	$(OBJS_DIR)\profile.obj \
+	$(OBJS_DIR)\util.obj \
+	$(OBJS_DIR)\dialog.obj \
+	$(OBJS_DIR)\ext.obj \
+	$(OBJS_DIR)\color.obj \
+	$(OBJS_DIR)\drive.nt.obj \
+	$(OBJS_DIR)\key.nt.obj \
+	$(OBJS_DIR)\layout.obj \
+	$(OBJS_DIR)\setup.obj \
+	$(OBJS_DIR)\regex.obj \
+	$(OBJS_DIR)\hotlist.obj \
+	$(OBJS_DIR)\slint.nt.obj \
+	$(OBJS_DIR)\tree.obj \
+	$(OBJS_DIR)\win.obj \
+	$(OBJS_DIR)\chmod.nt.obj \
+	$(OBJS_DIR)\complete.obj \
+	$(OBJS_DIR)\find.obj \
+	$(OBJS_DIR)\wtools.obj \
+	$(OBJS_DIR)\boxes.obj \
+	$(OBJS_DIR)\background.obj \
+	$(OBJS_DIR)\dirhist.obj \
+	$(OBJS_DIR)\main.obj \
+	$(OBJS_DIR)\popt.obj \
+	$(OBJS_DIR)\mouse.obj \
+	$(OBJS_DIR)\text.obj \
+	$(OBJS_DIR)\screen.obj
+
+MC_RES=$(OBJS_DIR)\mc.res 
+
+SLANG_OBJS= \
+	$(SLANG_OBJS_DIR)\slw32tty.obj \
+	$(SLANG_OBJS_DIR)\slerr.obj \
+	$(SLANG_OBJS_DIR)\slgetkey.obj \
+	$(SLANG_OBJS_DIR)\slsmg.obj \
+	$(SLANG_OBJS_DIR)\slvideo.obj
+
+MCEDIT_OBJS= \
+	$(MCEDIT_OBJS_DIR)\edit.obj\
+	$(MCEDIT_OBJS_DIR)\editcmd.obj\
+	$(MCEDIT_OBJS_DIR)\editdraw.obj\
+	$(MCEDIT_OBJS_DIR)\editmenu.obj\
+	$(MCEDIT_OBJS_DIR)\editoptions.obj\
+	$(MCEDIT_OBJS_DIR)\editwidget.obj\
+	$(MCEDIT_OBJS_DIR)\wordproc.obj
+
+$(OBJS_DIR)\mc.exe : $(OBJS_DIR) $(SLANG_LIB) $(MCEDIT_LIB) $(MC_RES) $(DEF_FILE) $(OBJS)
+    $(LINK)  $(LFLAGS) $(OBJS) 
+
+$(MC_NT_DIR)\mc.rc: $(MC_NT_DIR)\mc.ico	$(MC_NT_DIR)\config.h ..\VERSION
+
+$(OBJS_DIR)\mc.res : $(MC_NT_DIR)\mc.rc   $(OBJS_DIR)
+	$(RSC) $(RSC_FLAGS)  $(MC_NT_DIR)\mc.rc
+
+$(OBJS_DIR)\Mc.bsc : $(OBJS_DIR) $(BSC32_SBRS)
+    $(BSC32)  $(BSC32_FLAGS) $(BSC32_SBRS)
+
+$(SLANG_LIB) : $(SLANG_OBJS_DIR)  $(SLANG_OBJS)
+    $(SLANG_LINK) $(SLANG_LINK_FLAGS) $(SLANG_OBJS)
+
+$(MCEDIT_LIB) : $(MCEDIT_OBJS_DIR)  $(MCEDIT_OBJS)
+    $(MCEDIT_LINK) $(MCEDIT_LINK_FLAGS) $(MCEDIT_OBJS)
+

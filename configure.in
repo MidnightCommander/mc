@@ -1,0 +1,1440 @@
+dnl
+dnl Configure.in file for the Midnight Commander
+dnl
+AC_INIT(create_vcs)
+AC_CONFIG_HEADER(config.h)
+
+dnl This is path where we're looking for headers in addition to /usr/include
+dnl and whatever cpp defaults to.
+include_additional_path="/usr/local/include /opt/gnu/include"
+
+dnl This sets/resets compiling with -g by default. It should be set to yes for
+dnl development versions and set to no for release versions.
+use_cc_g_flag=yes
+
+dnl We want autoconf to check whether -g is available
+dnl We reset it back soon.
+CCOPTS="$CFLAGS"
+unset CFLAGS
+
+dnl Find out, if we should default to /usr/local or /usr
+AC_PREFIX_PROGRAM(mc)
+
+AC_PROG_MAKE_SET
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_RANLIB
+AC_PROG_LN_S
+AC_PROG_AWK
+if test x"$AWK" = x; then
+    AWK=":"
+    AWK_VAR_OPTION=""
+    dep=slowdep
+else
+    dep=fastdep
+
+    # test whether awk needs -v for variables (e.g. Solaris) or not (e.g. SunOs 4)
+    if test x"`echo | $AWK 'BEGIN { print variable; exit }' variable=123`" = x123; then
+        AWK_VAR_OPTION=""
+    else
+        AWK_VAR_OPTION="-v"
+    fi
+fi
+AC_SUBST(AWK_VAR_OPTION)
+AC_SUBST(dep)
+AC_PROG_GNU_MAKE
+
+AC_AIX
+AC_MINIX
+AC_ISC_POSIX
+fp_PROG_CC_STDC
+AC_HEADER_MAJOR
+AC_C_CONST
+AC_PATH_PROG(MV, mv, mv)
+AC_PATH_PROG(CP, cp, cp)
+AC_PATH_PROG(RM, rm, rm)
+AC_PATH_PROG(CHMOD, chmod, :)
+AC_PATH_PROG(AR, ar, ar)
+
+AC_CHECK_PROG(system,uname,`uname`,unknown)
+AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)
+if test x"$X11_WWW" = x; then
+    X11_WWW=lynx
+fi
+
+dnl
+dnl This part supplies reasonable defaults for CFLAGS, if they weren't
+dnl specified by ''CFLAGS=flags ./configure''
+dnl
+cc_uses_g=yes
+if test x$GCC = xyes; then
+    if test x$ac_cv_prog_gcc_g = xyes; then
+	:
+    else
+	cc_uses_g=no
+    fi
+fi
+if test "x$CCOPTS" = x; then
+    if test x$GCC = xyes; then
+        if test x$system = xLinux; then
+            CCOPTS='-O2 -fno-strength-reduce'
+	    if test x$use_cc_g_flag = xyes; then
+		if test $cc_uses_g = yes; then
+		    CCOPTS='-g -O'
+		fi
+	    fi
+	else
+            CCOPTS='-O'
+	    if test x$use_cc_g_flag = xyes; then
+		if test $cc_uses_g = yes; then
+		    CCOPTS='-g -O'
+		fi
+	    fi
+	fi
+    else
+	if test x$use_cc_g_flag = xyes; then
+	    CCOPTS="$CFLAGS"
+	else
+	    CCOPTS=
+	fi
+    fi
+fi
+CFLAGS="$CCOPTS"
+
+dnl
+dnl For A/UX.  Do not move
+dnl
+
+posix_libs=""
+if test $system = A/UX
+then
+    posix_libs="-lposix"
+    AC_DEFINE(_POSIX_SOURCE)
+fi
+
+AC_PROG_INSTALL
+AC_CHECK_HEADERS(unistd.h string.h memory.h crypt.h grp.h limits.h malloc.h)
+AC_CHECK_HEADERS(stdlib.h termios.h)
+
+if test x$ac_cv_header_malloc_h = xno; then
+    echo '/* NeXTStep malloc.h stub */' > $srcdir/malloc.h
+fi
+
+dnl (rx.h)
+AC_HEADER_SYS_WAIT
+AC_HEADER_DIRENT
+AC_SHORT_D_NAME_LEN
+AC_HEADER_STDC
+
+dnl
+dnl Let me check for an incompatible regcomp in HP-UX before making this
+dnl the default
+dnl
+dnl if test x$ac_cv_header_rx_h = xyes; then
+dnl AC_CHECK_FUNCS(regcomp)
+dnl if test x$ac_cv_func_regcomp = xyes; then
+dnl     REGEX_O=""
+dnl fi
+dnl fi
+
+REGEX_O="regex.o"
+AC_SUBST(REGEX_O)
+
+dnl Missing structure components
+AC_STRUCT_ST_BLKSIZE
+AC_STRUCT_ST_BLOCKS
+AC_STRUCT_ST_RDEV
+
+dnl
+dnl Check availability of some functions 
+dnl 
+
+AC_CHECK_FUNCS(strerror statfs getwd strcasecmp strncasecmp)
+AC_CHECK_FUNCS(strdup memmove pwdauth truncate initgroups putenv)
+AC_CHECK_FUNCS(memset memcpy tcsetattr tcgetattr cfgetospeed)
+AC_CHECK_FUNCS(sigaction sigemptyset sigprocmask sigaddset)
+
+SHADOWLIB=
+if test x$system = xLinux; then
+AC_CHECK_LIB(shadow,pw_encrypt,[
+shadow_header=no
+AC_CHECK_HEADERS(shadow.h)
+if test x$ac_cv_header_shadow_h = xyes; then
+    shadow_header=yes
+else
+AC_CHECK_HEADERS(shadow/shadow.h)
+    if test x$ac_cv_shadow_shadow_h = xyes; then
+        shadow_header=yes
+    fi
+fi
+if test $shadow_header = yes; then
+    AC_DEFINE(LINUX_SHADOW)
+    SHADOWLIB=-lshadow
+fi
+])
+fi
+AC_SUBST(SHADOWLIB)
+
+NEED_CRYPT_PROTOTYPE=yes
+if test x$ac_cv_header_crypt_h = xyes; then
+AC_TRY_WARNINGS([#include <crypt.h>], [char *p = crypt("xxx", "yyy");],[
+NEED_CRYPT_PROTOTYPE=no])
+else 
+    if test x$ac_cv_header_unistd_h = xyes; then
+AC_TRY_WARNINGS([#include <unistd.h>], [char *p = crypt("xxx", "yyy");],[
+NEED_CRYPT_PROTOTYPE=no])
+    fi
+fi
+if test x$NEED_CRYPT_PROTOTYPE=xyes; then
+AC_DEFINE(NEED_CRYPT_PROTOTYPE)
+fi
+
+dnl
+dnl AIX and Sequent need <sys/select.h> for fd_set
+dnl
+AC_CHECK_HEADERS(sys/select.h)
+
+dnl
+dnl On SCO, crypt is on libcrypt.a
+dnl         grantpt in  libpt.a
+dnl
+AC_CHECK_FUNCS(crypt, , [
+    AC_CHECK_LIB(crypt, crypt, LIBS="$LIBS -lcrypt",[
+	AC_CHECK_LIB(crypt_i, crypt, LIBS="$LIBS -lcrypt_i")])])
+
+dnl This is the correct version
+dnl AC_CHECK_FUNCS(grantpt, , AC_CHECK_LIB(pt, grantpt))
+dnl
+dnl And workaround for a Autoconf 2.4 bug:
+AC_CHECK_FUNCS(grantpt)
+if test x$ac_cv_func_grantpt = xyes; then
+    :
+else
+    AC_CHECK_LIB(pt, grantpt)
+fi
+
+dnl
+dnl libintl.a required on SCO to provide proper NLS support
+dnl (using native cc links it by default)
+dnl
+if test x$GCC = xyes; then
+    AC_CHECK_LIB(intl, tolower)
+fi
+
+dnl replacing lstat with statlstat on sco makes it more portable between
+dnl sco clones
+AC_CHECK_FUNCS(statlstat)
+
+dnl
+dnl If running under AIX, AC_AIX does not tell us that
+dnl
+AC_MSG_CHECKING(for AIX defines)
+AC_EGREP_CPP(yes,
+[#if defined(AIX) || defined(_AIX) || defined(__aix__) || defined(aix)
+yes
+#endif
+], [
+AC_DEFINE(IS_AIX)
+AC_MSG_RESULT(yes)
+], AC_MSG_RESULT(no))
+
+dnl   
+dnl This hack is here until autoconf adds it
+dnl Needed for Unixware: getmntent is on libgen.a
+dnl
+AC_CHECK_LIB(gen, getmntent, [LIBS="-lgen $LIBS"])
+
+dnl
+dnl This is from GNU fileutils, check aclocal.m4 for more information
+dnl
+AC_GET_FS_INFO
+
+dnl
+dnl Missing typedefs and replacements
+dnl 
+
+AC_TYPE_MODE_T
+AC_CHECK_TYPE(umode_t, int)
+AC_CHECK_TYPE(off_t, long)
+AC_TYPE_PID_T
+AC_TYPE_UID_T
+
+AC_FUNC_MMAP
+AC_FUNC_ALLOCA
+
+dnl
+dnl Cool hack, but we don't use it currently 
+dnl
+dnl AC_MSG_CHECKING(for token pasting method)
+dnl AC_EGREP_CPP(portable,[
+dnl #define tken(a, b) a##b
+dnl tken(port, able)
+dnl ], [AC_DEFINE(HAVE_PORTABLE_TOKEN_PASTING)
+dnl AC_MSG_RESULT(portable)
+dnl ], [
+dnl AC_MSG_RESULT(non-portable)
+dnl ])
+
+AC_PATH_XTRA
+
+xvers="none"
+mxc=""
+AC_PATH_XVIEW_XTRA
+if test "x$no_xview" != "xyes"; then
+    mxc="mxc"
+    xvers="XView"
+    xvdep="xvdep"
+else
+    mxc=""
+    xvdep=""
+fi
+AC_SUBST(mxc)
+AC_SUBST(xvdep)
+
+xv_bindir=
+if test -n "$mxc"; then
+AC_ARG_WITH(xv-bindir, 
+        [--with-xv-bindir=dir  Specifies directory where to install XView version],[
+    if test x$withval = xyes; then
+	AC_MSG_WARN(Usage is: --with-xv-bindir=basedir)
+    else
+	if test x$withval = xno; then
+	    AC_MSG_WARN(Usage is: --with-xv-bindir=basedir)
+	else
+	    xv_bindir=$withval
+	fi
+    fi
+])
+if test x$xv_bindir = x; then
+    xv_bindir=`echo $xv_includes | sed s/include/bin/`
+    if test ! -x $xv_bindir/openwin; then
+        if test ! -x $xv_bindir/olwm; then
+            if test ! -x $xv_bindir/olvwm; then
+                xv_bindir=
+            fi    
+        fi
+    fi
+fi
+if test x$xv_bindir = x; then
+    if test "$OPENWINHOME"; then
+        xv_bindir=$OPENWINHOME/bin
+    else
+	AC_PATH_PROG(ac_my_xp, openwin)
+	if test x$ac_my_xp = x; then
+	    AC_PATH_PROG(ac_my_xp, X)
+	    if test x$ac_my_xp = x; then
+		xv_bindir=""
+	    else
+		xv_bindir=`basename $ac_my_xp`
+ 	    fi
+	else
+	    xv_bindir=`basename $ac_my_xp`
+	fi
+    fi
+    if test ! -x $xv_bindir/openwin; then
+        if test ! -x $xv_bindir/olwm; then
+            if test ! -x $xv_bindir/olvwm; then
+		if test ! -x $xv_bindir/X; then
+                    xv_bindir=
+		fi
+            fi    
+        fi
+    fi
+fi
+if test x$xv_bindir = x; then
+    xv_bindir=$prefix/bin
+fi
+fi
+if test x$xv_bindir = xNONE/bin; then
+    xv_bindir=
+fi
+AC_SUBST(xv_bindir)
+
+dnl
+dnl Network related functions
+dnl
+
+AC_CHECK_LIB(nsl, t_accept)
+AC_CHECK_LIB(socket, socket)
+
+have_socket=no
+AC_CHECK_FUNCS(socket, have_socket=yes)
+if test $have_socket = no; then
+  # socket is not in the default libraries.  See if it's in some other.
+  for lib in bsd socket inet; do
+    AC_CHECK_LIB($lib, socket, [
+        LIBS="$LIBS -l$lib"
+	have_socket=yes
+	AC_DEFINE(HAVE_SOCKET)
+	break])
+  done
+fi
+
+have_gethostbyname=no
+AC_CHECK_FUNC(gethostbyname, have_gethostbyname=yes)
+if test $have_gethostbyname = no; then
+  # gethostbyname is not in the default libraries.  See if it's in some other.
+  for lib in bsd socket inet; do
+    AC_CHECK_LIB($lib, gethostbyname, [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
+  done
+fi
+
+AC_CHECK_FUNCS(socketpair)
+
+dnl
+dnl Sequent wants getprocessstats
+dnl
+AC_CHECK_LIB(seq, get_process_stats, [
+	LIBS="$LIBS -lseq"
+	AC_DEFINE(HAVE_GET_PROCESS_STATS)])
+
+NETFILES=""
+vfs_flags="tarfs"
+use_net_code=false
+if test $have_socket = yes; then
+    AC_STRUCT_LINGER
+    AC_CHECK_FUNCS(pmap_set, , [
+       AC_CHECK_LIB(rpc, pmap_set, [
+	 LIBS="-lrpc $LIBS"
+	AC_DEFINE(HAVE_PMAP_SET)
+	])])
+    AC_CHECK_FUNCS(pmap_getport pmap_getmaps rresvport)
+dnl add for source routing support setsockopt
+    AC_CHECK_HEADERS(rpc/pmap_clnt.h)
+    vfs_flags="$vfs_flags, mcfs, ftpfs"
+    NETFILES="\$(NETFILES)"
+    use_net_code=true
+fi
+AC_SUBST(NETFILES)
+
+screen_manager=unknown
+search_ncurses=false
+
+CFLAGS=${CFLAGS--O}
+LDFLAGS=${LDFLAGS--O}
+
+AC_DEFUN(AC_USE_SUNOS_CURSES, [
+	search_ncurses=false
+	screen_manager="SunOS 4.x /usr/5include curses"
+	AC_MSG_RESULT(Using SunOS 4.x /usr/5include curses)
+	AC_DEFINE(SUNOS_CURSES)
+	AC_DEFINE(NO_COLOR_SUPPORT)
+	AC_DEFINE(USE_SYSV_CURSES)
+	CPPFLAGS="$CPPFLAGS -I/usr/5include"
+	XCURSES="xcurses.o /usr/5lib/libcurses.a /usr/5lib/libtermcap.a"
+	AC_MSG_RESULT(Please note that some screen refreshs may fail)
+	AC_WARN(Reconsider using Slang)
+])
+
+AC_DEFUN(AC_USE_OSF1_CURSES, [
+       AC_MSG_RESULT(Using OSF1 curses)
+       search_ncurses=false
+       screen_manager="OSF1 curses"
+       AC_DEFINE(NO_COLOR_SUPPORT)
+       AC_DEFINE(USE_SYSV_CURSES)
+       XCURSES="xcurses.o"
+       LIBS="$LIBS -lcurses"
+])
+
+AC_DEFUN(AC_USE_SYSV_CURSES, [
+	AC_MSG_RESULT(Using SysV curses)
+	AC_DEFINE(USE_SYSV_CURSES)
+	XCURSES=""
+	search_ncurses=false
+	screen_manager="SysV/curses"
+	LIBS="$LIBS -lcurses"
+])
+
+XCURSES=""
+AC_SUBST(XCURSES)
+
+dnl AC_ARG_WITH(bsd-curses,
+dnl [--with-bsd-curses         Used to compile with bsd curses, not very fancy],
+dnl 	search_ncurses=false
+dnl	screen_manager="Ultrix/cursesX"
+dnl	if test $system = ULTRIX
+dnl	then
+dnl	    THIS_CURSES=cursesX
+dnl        else
+dnl	    THIS_CURSES=curses
+dnl	fi
+dnl
+dnl	LIBS="$LIBS -l$THIS_CURSES -ltermcap"
+dnl	AC_DEFINE(USE_BSD_CURSES)
+dnl	XCURSES="xcurses.o"
+dnl	AC_MSG_RESULT(Please note that some screen refreshs may fail)
+dnl	AC_WARN(Use of the bsdcurses extension has some)
+dnl	AC_WARN(display/input problems.)
+dnl	AC_WARN(Reconsider using xcurses)
+dnl)
+
+AC_ARG_WITH(sco,
+	[--with-sco                 Use this to turn on SCO-specific code],[
+	if test x$withval = xyes; then
+		AC_DEFINE(SCO_FLAVOR)
+		CFLAGS="$CFLAGS -D_SVID3"
+	fi
+])
+
+AC_ARG_WITH(sunos-curses,
+	[--with-sunos-curses        Used to force SunOS 4.x curses],[
+	if test x$withval = xyes; then
+		AC_USE_SUNOS_CURSES
+	fi
+])
+
+AC_ARG_WITH(osf1-curses,
+	[--with-osf1-curses	   Used to force OSF/1 curses],[
+	if test x$withval = xyes; then
+		AC_USE_OSF1_CURSES
+	fi
+])
+
+AC_ARG_WITH(vcurses,
+	[--with-vcurses[=incdir]    Used to force SysV curses],
+	if test x$withval = xyes; then
+		CPPFLAGS="$CPPFLAGS"
+        else
+		CPPFLAGS="$CPPFLAGS -I$withval"
+	fi
+	AC_USE_SYSV_CURSES
+)
+
+mouse_lib="xterm only"
+AC_ARG_WITH(gpm-mouse, 
+	[--with-gpm-mouse[=base-dir]  Compile with gpm mouse support],[
+	if test x$withval != xno
+	then
+		if test x$withval != xyes
+		then
+			LIBS="$LIBS -L$withval/lib"
+			CPPFLAGS="$CPPFLAGS -I$withval/include"
+		fi
+		AC_DEFINE(HAVE_LIBGPM)
+		mouse_lib="GPM and xterm"
+		LIBS="$LIBS -lgpm"
+	fi
+	],[
+	AC_CHECK_LIB(gpm, Gpm_Repeat,[
+		AC_DEFINE(HAVE_LIBGPM)
+		mouse_lib="GPM and xterm"
+		LIBS="$LIBS -lgpm"],[
+		if test $system = Linux
+		then 
+			AC_MSG_WARN("libgpm.a is missing or older than 0.18")
+		fi
+		], $LIBS)
+	]
+)
+
+AC_ARG_WITH(ncurses,
+	[--with-ncurses[=base-dir]    Compile with ncurses/locate base dir],
+	if test x$withval = xyes
+	then
+		search_ncurses=true
+	else
+		LIBS="$LIBS -L$withval/lib -lncurses"
+		CPPFLAGS="$CPPFLAGS -I$withval/include"
+		search_ncurses=false
+		screen_manager="ncurses"
+		AC_DEFINE(USE_NCURSES)
+	fi
+)
+
+AC_ARG_WITH(hsc,
+        [--with-hsc               Compile with support for the HSC firewall],
+        if test x$withval = xyes; then
+                AC_DEFINE(HSC_PROXY)
+        fi
+)
+
+AC_DEFUN(TK_MSG,[
+    	if test x$xvers = xnone; then
+        	xvers="Tk"
+    	else
+       		xvers="XView+Tk"
+    	fi
+])
+
+dnl
+dnl Check for Tcl/Tk, should switch to Guile/Tk soon :-)
+dnl
+tkmc=""
+tk_includes=""
+tk_libs=""
+if test x$no_x != xyes; then
+    AC_ARG_WITH(tk, 
+        [--with-tk                  Use the Tk toolkit],[
+    if test x$withval = xyes; then
+	tkmc="tkmc"
+    fi])
+    AC_ARG_WITH(tk-includes,
+        [--with-tk-includes=dir     Specifies the Tcl/Tk header directory],[
+    if test x$withval = xyes; then
+	AC_MSG_WARN(Usage is: --with-tk-includes=dir)
+    else
+	if test x$withval = xno; then
+	    AC_MSG_WARN(Usage is: --with-tk-includes=dir)
+	else
+	    tk_includes="-I$withval"
+	    tkmc="tkmc"
+	fi
+    fi])
+    AC_ARG_WITH(tk-libraries,
+        [--with-tk-libraries=dir    Specifies the Tcl/Tk library directory],[
+    if test x$withval = xyes; then
+	AC_MSG_WARN(Usage is: --with-tk-libraries=dir)
+    else
+	if test x$withval = xno; then
+	    AC_MSG_WARN(Usage is: --with-tk-libraries=dir)
+	else
+	    tk_libs="-L$withval"
+	    tkmc="tkmc"
+	fi
+    fi])
+    if test -n "$tkmc"; then 
+        AC_CHECKING(for Tcl/Tk)
+        AC_CHECK_LIB(dl, dlopen, LIBS="$LIBS -ldl")
+        tk_headers_found=no
+        if test ! -n "$tk_includes"; then
+	    AC_CHECK_HEADER_IN_PATH(tcl.h, $include_additional_path, [
+	        AC_CHECK_HEADER_IN_PATH(tk.h, $include_additional_path, [
+		    tk_headers_found=yes
+		    if test -n "$ac_cv_header_in_path_tcl_h"; then
+			tk_includes="-I$ac_cv_header_in_path_tcl_h";
+		    fi
+		    if test -n "$ac_cv_header_in_path_tk_h"; then
+			if test "$ac_cv_header_in_path_tk_h" != "$ac_cv_header_in_path_tcl_h"; then
+			    tk_includes="$tk_includes -I$ac_cv_header_in_path_tk_h" 
+			fi
+		    fi
+	        ])
+	    ])
+        else
+	    tk_headers_found=yes
+        fi
+        if test $tk_headers_found = no; then
+	    tkmc=""
+        else
+	    tk_libs_found=no
+	    ac_save_tk_LIBS="$LIBS"
+	    ac_save_tk_LDFLAGS="$LDFLAGS"
+	    LIBS="$X_EXTRA_LIBS -lX11 $X_PRE_LIBS $LIBS"
+	    LDFLAGS="$LDFLAGS $X_LIBS"
+            if test ! -n "$tk_libs"; then
+		AC_CHECK_LIB(tcl, Tcl_Eval, [
+		    AC_CHECK_LIB(tk, Tk_CreateWindow, [
+		    tk_libs_found=yes
+		    ], , -ltcl -lm)
+		], , -lm)
+	    else
+		tk_libs_found=yes
+	    fi
+	    LDFLAGS="$ac_save_tk_LDFLAGS"
+	    LIBS="$ac_save_tk_LIBS"
+	    if test $tk_libs_found = no; then
+		tkmc=""
+	    fi
+	fi
+    fi
+fi
+if test -n "$tkmc"; then
+    TK_MSG
+    tkdep="tkdep"
+else
+    tkdep=""
+fi
+AC_SUBST(tkmc)
+AC_SUBST(tkdep)
+AC_SUBST(tk_includes)
+AC_SUBST(tk_libs)
+
+dnl
+dnl Check for Gnome
+dnl
+gmc=""
+gmcdep=""
+if test x$no_x != xyes; then
+    AC_ARG_WITH(gnome,[--with-gnome               Compile the GNOME edition],[
+    if test x$withval = xyes; then
+	gmc=gmc
+ 	gmcdep=gmcdep
+	if test x"$xvers" = xnone; then
+	    xvers="Gnome"
+	else
+	    xvers="Gnome+$xvers"
+	fi
+    fi])
+fi
+AC_SUBST(gmc)
+AC_SUBST(gmcdep)
+
+dnl
+dnl Check for the -mandoc package
+dnl
+AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
+if $HAVE_nroff; then
+    AC_MSG_CHECKING(for manual formatting macros)
+    AC_CACHE_VAL(ac_cv_mandoc, [
+    nroff -mandoc < /dev/null > /dev/null 2>&1 /dev/null
+    if test $? = 0
+    then
+	ac_cv_mandoc=-mandoc
+    else
+	ac_cv_mandoc=-man
+    fi
+    ])
+    MANDOC=$ac_cv_mandoc
+    AC_MSG_RESULT($MANDOC)
+else
+    MANDOC=-man
+fi
+AC_SUBST(MANDOC)
+
+dnl
+dnl Check if nroff accepts -Tascii
+dnl
+if $HAVE_nroff; then
+    AC_MSG_CHECKING(If nroff accepts -Tascii)
+    AC_CACHE_VAL(ac_cv_nroff_tascii, [
+    nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
+    if test $? = 0
+    then
+	ac_cv_nroff_tascii=" -Tascii"
+        AC_MSG_RESULT(yes)
+    else
+	ac_cv_nroff_tascii=""
+        AC_MSG_RESULT(no)
+    fi
+    ])
+fi
+TROFFASCII="$ac_cv_nroff_tascii"
+AC_SUBST(TROFFASCII)
+
+dnl
+dnl Check for - option to file
+dnl
+AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
+if $HAVE_FILECMD; then
+    AC_MSG_CHECKING(for - option to file command)
+    AC_CACHE_VAL(ac_cv_filestdin, [
+    cat > conftest.c <<EOF
+/* A comment */
+#if 0
+#endif
+void main(void)
+{ return; }
+EOF
+    changequote(, )
+    cat > conftest.sed <<EOF
+s/^[^:]*:[\ \	]*//
+s/[\ \	]*$//
+EOF
+    filehyphen_1=`file conftest.c 2>/dev/null | sed -f conftest.sed`
+    filehyphen_2=`cat conftest.c | file - 2>/dev/null | sed -f conftest.sed`
+    if test "$filehyphen_1" = "$filehyphen_2"; then
+	ac_cv_filestdin=yes
+    else
+	ac_cv_filestdin=no
+    fi
+    changequote([, ])
+    rm conftest.c conftest.sed
+    unset filehyphen_1
+    unset filehyphen_2
+    ])
+
+    if test x$ac_cv_filestdin = xyes; then
+	AC_DEFINE(FILE_STDIN)
+    fi
+    filestdin=$ac_cv_filestdin
+    AC_MSG_RESULT($filestdin)
+
+    dnl
+    dnl Check for -L option to file
+    dnl
+
+AC_MSG_CHECKING(for -L option to file command)
+AC_CACHE_VAL(ac_cv_filel, [
+file -L . > /dev/null 2>&1
+if test $? = 0
+then
+    ac_cv_filel=yes
+else
+    ac_cv_filel=no
+fi
+])
+if test x$ac_cv_filel = xyes; then
+    AC_DEFINE(FILE_L)
+fi
+filel=$ac_cv_filel
+AC_MSG_RESULT($filel)
+fi 
+
+dnl
+dnl Check to see if grep program allowes dash to denote stdin 
+dnl
+AC_MSG_CHECKING(for - option to grep command)
+AC_CACHE_VAL(ac_cv_grep_stdin, [
+    grep ac_cv_grep_stdin - > /dev/null 2>&1 < ./configure
+    if test $? = 0; then
+	ac_cv_grep_stdin=yes
+    else
+	ac_cv_grep_stdin=no
+    fi
+])
+if test x$ac_cv_grep_stdin = xyes; then
+    AC_DEFINE(GREP_STDIN)
+fi
+AC_MSG_RESULT($ac_cv_grep_stdin)
+
+
+dnl
+dnl HAVE_DUSUM is on by default, only if you have a strange du, you can
+dnl turn it off by --without-dusum
+dnl
+have_dusum=yes
+AC_MSG_CHECKING(for du arguments)
+AC_ARG_WITH(dusum, 
+	[--with-dusum               Support the du -s summaries],[
+	if test x$withval = xno; then
+		have_dusum=no
+	fi
+])
+if test x$have_dusum = xyes; then
+    AC_DEFINE(HAVE_DUSUM)
+    AC_CACHE_VAL(ac_cv_dusum, [
+    du -s -b $srcdir/configure >/dev/null 2>&1
+    if test $? = 0; then
+        ac_cv_dusum='dusum_useb=yes; dusum_factor=1'
+    else
+	ac_cv_dusum='dusum_useb=; dusum_factor=512'
+    fi
+])
+    eval "$ac_cv_dusum"
+    if test x$dusum_useb = xyes; then
+	AC_DEFINE(DUSUM_USEB)
+	AC_MSG_RESULT(-b)
+    else
+	AC_MSG_RESULT(block size $dusum_factor)
+    fi
+    AC_DEFINE_UNQUOTED(DUSUM_FACTOR, $dusum_factor)
+fi
+
+dnl
+dnl The termnet support
+dnl
+termnet=false
+AC_ARG_WITH(termnet,
+	[--with-termnet             If you want a termified net support],[
+	if test x$withval = xyes; then
+		AC_DEFINE(USE_TERMNET)
+		termnet=true		
+	fi
+])
+
+dnl
+dnl The subshell support
+dnl
+
+AC_MSG_CHECKING(for subshell support)
+AC_ARG_WITH(subshell,
+	[--with-subshell            If you want to use a concurrent shell],
+	result=no
+	if test x$withval = xoptional
+	then
+		AC_DEFINE(SUBSHELL_OPTIONAL)
+		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
+		result="optional"
+	fi
+	if test x$withval = xyes
+        then 
+		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
+		result="yes"
+	fi,
+	dnl Default: provide the subshell support on non-ultrix machines
+	if test $system = ULTRIX	
+	then
+		result=no
+	else
+		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
+		result=yes
+	fi
+)
+AC_MSG_RESULT($result)
+subshell="$result"
+
+dnl
+dnl Check for GCC
+dnl
+if test x$GCC = x
+then
+	AC_DEFINE(OLD_TOOLS)
+	CPPFLAGS="$CPPFLAGS -Dinline="
+fi
+
+dnl
+dnl This option is only inteded for being used by me :-)
+dnl It has some nasty hacks built in.
+dnl
+mem_debug="none"
+AC_ARG_WITH(debug, 
+[--with-debug               For use by developers only: activates -Wall and MAD],
+	[if test x$withval = xyes; then
+	CFLAGS="$CFLAGS -Wall"
+	mem_debug="Janne's MAD library"
+	AC_DEFINE(HAVE_MAD)
+	AC_DEFINE(MCDEBUG)
+	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
+	then
+    	    CFLAGS="$CFLAGS -Wno-implicit"
+        fi
+	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
+		:
+	else
+	    if test $cc_uses_g = yes; then
+		CFLAGS="$CFLAGS -g"
+	    fi
+	fi
+	AC_MSG_RESULT(compiling with -Wall and the memory leak detector)
+fi])
+
+dnl
+dnl This option is only inteded for being used by me :-)
+dnl It has some nasty hacks built in.
+dnl
+AC_ARG_WITH(efence, 
+[--with-efence              Developers only: activates -Wall and efence],
+	[if test x$withval = xyes; then
+	CFLAGS="$CFLAGS -Wall"
+	AC_DEFINE(MCDEBUG)
+	LIBS="$LIBS -lefence"
+	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
+	then
+    	    CFLAGS="$CFLAGS -Wno-implicit"
+        fi
+	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
+		:
+	else
+	    if test $cc_uses_g = yes; then
+		CFLAGS="$CFLAGS -g"
+	    fi
+	fi
+	AC_MSG_RESULT(compiling with -Wall and Electric fence)
+	mem_debug="Electric Fence"
+fi])
+
+dnl
+dnl To force mmap support
+dnl We use only part of the functionality of mmap, so on AIX,
+dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
+dnl
+AC_ARG_WITH(mmap, 
+	[--with-mmap                To force using the mmap call (AIX)],
+	[if test x$withval = xyes; then
+	AC_DEFINE(HAVE_MMAP)
+        AC_MSG_RESULT(forcing MMAP support)
+fi])
+
+AC_DEFUN(AC_USE_TERMINFO,
+	AC_DEFINE(SLANG_TERMINFO)
+	AC_MSG_RESULT(Using SLang screen manager/terminfo)
+	slang_term=" with terminfo"
+)
+
+AC_DEFUN(AC_USE_TERMCAP,
+	AC_MSG_RESULT(Using SLang screen manager/termcap)
+	AC_DEFINE(USE_TERMCAP)
+	dnl Check with $LIBS at the end so that it works with ELF libs.
+	AC_CHECK_LIB(termcap, tgoto, LIBS="$LIBS -ltermcap", , $LIBS)
+	slang_term=" with termcap"
+)
+	
+slang_check_lib=true
+slang_term=""
+slang_use_system_installed_lib=false
+AC_CHECK_LIB(slang,SLang_init_tty,
+	AC_CHECK_HEADERS(slang.h)
+	if test x$ac_cv_header_slang_h = xyes
+	then
+             slang_use_system_installed_lib=true
+	     slang_check_lib=false
+        else
+	     AC_CHECK_HEADERS(slang/slang.h)
+	     if test x$ac_cv_header_slang_slang_h = xyes
+	     then
+		 slang_use_system_installed_lib=true
+		 slang_check_lib=false
+	         AC_DEFINE(SLANG_H_INSIDE_SLANG_DIR)
+	     fi
+	fi
+)
+
+AC_ARG_WITH(terminfo,
+        [--with-terminfo            SLANG: Force usage of terminfo],[
+	AC_USE_TERMINFO
+	slang_check_lib=false
+	slang_use_system_installed_lib=false
+	]
+)
+
+AC_ARG_WITH(termcap,
+	[--with-termcap             SLANG: Force usage of termcap],[
+	AC_USE_TERMCAP
+	slang_check_lib=false
+	slang_use_system_installed_lib=false
+	]
+)
+
+AC_ARG_WITH(our-slang,
+	[--with-our-slang           SLANG: Don't use system-installed SLang],[
+	    slang_use_system_installed_lib=false
+	    slang_check_lib=true
+	]
+)
+
+AC_DEFUN(AC_WITH_SLANG,
+	AC_DEFINE(HAVE_SLANG)
+	search_ncurses=false
+	if $slang_use_system_installed_lib
+	then
+	    AC_DEFINE(HAVE_SYSTEM_SLANG)
+	    LIBS="$LIBS -lslang"
+	    screen_manager="SLang (using system-installed library)"
+	    AC_MSG_RESULT(Using system installed SLang library)
+	else
+	    CPPFLAGS="$CPPFLAGS -I\$(slangdir)"
+    	    LIBSLANG="libmcslang.a"
+	    screen_manager="SLang"
+	    LSLANG="-lmcslang"
+	    fastdepslang=fastdepslang
+	fi
+	if $slang_check_lib
+	then
+	    use_terminfo=false
+	    if test -d /usr/lib/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if test -d /usr/share/lib/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if test -d /usr/local/lib/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if test -d /lib/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if test -d /usr/local/share/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if test -d /usr/share/terminfo; then
+		use_terminfo=true;
+	    fi
+	    if $use_terminfo; then
+		AC_USE_TERMINFO
+	    else
+		AC_USE_TERMCAP
+	    fi
+        fi
+)
+
+LIBSLANG=""
+LSLANG=""
+fastdepslang=""
+AC_ARG_WITH(slang,
+	[--with-slang		   Compile with the slang screen manager],[
+	if test x$withval = xyes; then
+		AC_WITH_SLANG
+	fi
+])
+
+AC_SUBST(LIBSLANG)
+AC_SUBST(LSLANG)
+AC_SUBST(fastdepslang)
+
+TERMNET=""
+AC_DEFUN(AC_WITH_VFS, [
+	AC_DEFINE(USE_VFS)
+	if $use_net_code; then
+	    AC_DEFINE(USE_NETCODE)
+        fi
+	LIBVFS="libvfs.a"
+	LVFS="-lvfs"
+	fastdepvfs=fastdepvfs
+	if test $have_socket = yes; then
+	    mcserv="mcserv"
+	    if $termnet; then
+		TERMNET="-ltermnet"
+	    fi
+        fi
+	CPPFLAGS="$CPPFLAGS -I\$(vfsdir)"
+	AC_MSG_RESULT(Using the VFS switch code)
+	vfs_type="Midnight Commander Virtual File System"
+])
+AC_SUBST(TERMNET)
+
+LIBVFS=""
+LVFS=""
+fastdepvfs=""
+mcserv=""
+vfs_type="normal"
+AC_ARG_WITH(vfs,
+	[--with-vfs		   Compile with the VFS code],
+	if test x$withval = xyes
+	then 
+		AC_WITH_VFS
+	else
+		vfs_flags=""
+	fi,
+	dnl Default: provide the VFS code
+	AC_WITH_VFS	
+)
+AC_SUBST(LIBVFS)
+AC_SUBST(LVFS)
+AC_SUBST(fastdepvfs)
+AC_SUBST(mcserv)
+
+AC_DEFUN(AC_WITH_EDIT, [
+	AC_DEFINE(USE_INTERNAL_EDIT)
+	LIBEDIT_A="libedit.a"
+	MCEDIT="mcedit"
+	LEDIT="-ledit"
+	CPPFLAGS="$CPPFLAGS -I\$(rootdir)"
+	EDIT_msg="yes"
+	AC_MSG_RESULT(will call internal editor)
+])
+
+LIBEDIT_A=""
+MCEDIT=""
+LEDIT=""
+EDIT_msg=""
+AC_ARG_WITH(edit,
+        [--with-edit                Define INTERNAL_EDIT],
+	if test x$withval = xyes
+	then
+		AC_WITH_EDIT
+	else
+		EDIT_msg="no"
+	fi, 
+	dnl Default: provide the internal editor
+	AC_WITH_EDIT
+)
+AC_SUBST(LIBEDIT_A)
+AC_SUBST(MCEDIT)
+AC_SUBST(LEDIT)
+
+AC_ARG_WITH(netrc,
+	[--with-netrc               Compile with ftp .netrc support],[
+	AC_DEFINE(USE_NETRC)
+	AC_MSG_RESULT(ftpfs will have .netrc parsing code)
+])
+
+undelfs_o=""
+AC_DEFUN(AC_EXT2_UNDEL, [
+	AC_CHECK_HEADERS(ext2fs/ext2fs.h linux/ext2_fs.h)
+	if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
+	then
+	    if test x$ac_cv_header_linux_ext2_fs_h = xyes
+	    then
+		AC_DEFINE(USE_EXT2FSLIB)
+		AC_MSG_RESULT(With ext2fs file recovery code)
+		vfs_flags="${vfs_flags} undelfs"
+		undelfs_o="undelfs.o"
+		LIBS="$LIBS -lext2fs -lcom_err"
+	    else
+		AC_MSG_WARN(No ext2fs file recovery code: linux/ext2_fs.h is missing)
+	    fi
+	else
+	    AC_MSG_WARN(No ext2fs file recovery code: ext2fs/ext2fs.h is missing)
+	fi
+])
+
+AC_ARG_WITH(ext2undel,
+        [--with-ext2undel           Compile with ext2 undelete code],[
+	if test x$withval = xyes;
+	then
+		AC_EXT2_UNDEL
+	fi],
+	dnl Default: detect
+	AC_CHECK_LIB(ext2fs, ext2fs_close, AC_EXT2_UNDEL,,-lcom_err)
+)
+
+AC_SUBST(undelfs_o)
+	
+dnl
+dnl Parameters: directory filename LIBS_append CPPFLAGS_append nicename
+dnl
+AC_DEFUN(AC_NCURSES, [
+    if $search_ncurses
+    then
+        if test -f $1/$2
+	then
+	    AC_MSG_RESULT(Found ncurses on $1/$2)
+ 	    LIBS="$LIBS $3"
+	    CPPFLAGS="$CPPFLAGS $4"
+	    search_ncurses=false
+	    screen_manager=$5
+	    AC_DEFINE(USE_NCURSES)
+	fi
+    fi
+])
+
+if $search_ncurses
+then
+    AC_CHECKING("location of ncurses.h file")
+
+    AC_NCURSES(/usr/include, ncurses.h, -lncurses,, "ncurses on /usr/include")
+    AC_NCURSES(/usr/include/ncurses, ncurses.h, -lncurses, -I/usr/include/ncurses, "ncurses on /usr/include/ncurses")
+    AC_NCURSES(/usr/local/include, ncurses.h, -lncurses -L/usr/local/lib, -I/usr/local/include, "ncurses on /usr/local")
+    AC_NCURSES(/usr/local/include/ncurses, ncurses.h, -lncurses -L/usr/local/lib -L/usr/local/lib/ncurses, -I/usr/local/include/ncurses, "ncurses on /usr/local/include/ncurses")
+
+    AC_NCURSES(/usr/local/include/ncurses, curses.h, -lncurses -L/usr/local/lib, -I/usr/local/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/local/.../ncurses")
+
+    AC_NCURSES(/usr/include/ncurses, curses.h, -lncurses, -I/usr/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/include/ncurses")
+
+    dnl
+    dnl We couldn't find ncurses, try SysV curses
+    dnl
+    if $search_ncurses 
+    then
+        AC_EGREP_HEADER(init_color, /usr/include/curses.h,
+	    AC_USE_SYSV_CURSES)
+	AC_EGREP_CPP(USE_NCURSES,[
+#include <curses.h>
+#ifdef __NCURSES_H
+#undef USE_NCURSES
+USE_NCURSES
+#endif
+],[
+	CPPFLAGS="$CPPFLAGS -DRENAMED_NCURSES"
+        AC_DEFINE(USE_NCURSES)
+        search_ncurses=false
+        screen_manager="ncurses installed as curses"
+])
+    fi
+
+    dnl
+    dnl Try SunOS 4.x /usr/5{lib,include} ncurses
+    dnl The flags SUNOS_CURSES, USE_BSD_CURSES and BUGGY_CURSES
+    dnl should be replaced by a more fine grained selection routine
+    dnl
+    if $search_ncurses
+    then
+	if test -f /usr/5include/curses.h
+	then
+	    AC_USE_SUNOS_CURSES
+        fi
+    else
+        # check for ncurses version, to properly ifdef mouse-fix
+	AC_MSG_CHECKING(for ncurses version)
+	ncurses_version=unknown
+cat > conftest.$ac_ext <<EOF
+[#]line __oline__ "configure"
+#include "confdefs.h"
+#ifdef RENAMED_NCURSES
+#include <curses.h>
+#else
+#include <ncurses.h>
+#endif
+#undef VERSION
+VERSION:NCURSES_VERSION
+EOF
+        if (eval "$ac_cpp conftest.$ac_ext") 2>&AC_FD_CC |
+  egrep "VERSION:" >conftest.out 2>&1; then
+changequote(,)dnl
+            ncurses_version=`cat conftest.out|sed -e 's/^[^"]*"//' -e 's/".*//'`
+changequote([,])dnl
+	fi
+	rm -rf conftext*
+        AC_MSG_RESULT($ncurses_version)
+	case "$ncurses_version" in
+changequote(,)dnl
+	4.[01])
+changequote([,])dnl
+            AC_DEFINE(NCURSES_970530,2)
+            ;;
+	1.9.9g)
+            AC_DEFINE(NCURSES_970530,1)
+            ;;
+	1*)
+            AC_DEFINE(NCURSES_970530,0)
+            ;;
+	esac
+    fi
+fi
+AC_CHECK_FUNCS(resizeterm keyok)
+
+if test "x$screen_manager" = "xunknown"; then
+    AC_WITH_SLANG
+fi
+
+dnl
+dnl The variables used for expanding the auto saver.
+dnl
+saver=""
+saver_target=""
+vcs=""
+install_saver="no"
+PAMLIBS=""
+if test $system = Linux
+then
+    saver="install.saver"
+    saver_target="cons.saver"
+    vcs="install.create_vcs"
+    install_saver="yes"
+
+    dnl
+    dnl On Linux, check for PAM authentication available
+    dnl
+    AC_CHECK_LIB(pam, pam_start, [
+	AC_DEFINE(HAVE_PAM)
+	PAMLIBS="-lpam -ldl"
+    ],[],[-ldl])
+
+fi
+AC_SUBST(saver_target)
+AC_SUBST(saver)
+AC_SUBST(vcs)
+AC_SUBST(PAMLIBS)
+
+dnl
+dnl We need sed in order to fix the library files 
+dnl
+    SEDCMD="sed 's/-man/$MANDOC/'"
+    SEDCMD2="sed 's%@prefix@%\$(prefix)%'"
+AC_SUBST(SEDCMD)
+AC_SUBST(SEDCMD2)
+
+if test x$no_xview = xyes; then
+    :
+else
+    AC_LIB_XPM
+    if test x$ac_cv_has_xpm = xyes; then
+	XPM_LIB=-lXpm
+	AC_SUBST(XPM_LIB)
+	AC_X_SHAPE_EXTENSION
+        if test x$ac_cv_has_shape = xyes; then
+            AC_DEFINE(HAVE_XPM_SHAPE)
+	    XEXT_LIB=-lXext
+	    AC_SUBST(XEXT_LIB)
+        fi
+    fi
+fi
+
+
+dnl
+dnl This code should be moved to the ac_WITH_SLANG
+dnl
+dnl We check for the existance of setupterm on curses library
+dnl this is required to load certain definitions on some termcaps
+dnl editions (AIX and OSF/1 I seem to remember).
+dnl Note that we avoid using setupterm 
+case $screen_manager in
+changequote(,)dnl
+	[Ss][Ll][Aa][Nn][Gg]*)
+changequote([, ])dnl
+		if test $system = Linux
+		then
+			echo
+		else
+		AC_CHECK_LIB(curses,setupterm,[
+			AC_TRY_COMPILE([
+#include <curses.h>
+#include <term.h>],[
+   if (key_end == parm_insert_line)
+ 	return 1;
+   return 0;
+],[
+			LIBS="$LIBS -lcurses"
+			AC_DEFINE(USE_SETUPTERM)])])
+		fi
+		;;
+esac
+
+LIBS="$LIBS $posix_libs"
+
+insticons=
+if test "x$no_xview" != "xyes"; then
+    insticons=install_icons
+fi
+AC_SUBST(insticons)
+
+CPPFLAGS="-I.. $CPPFLAGS"
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+AC_SUBST(LIBS)
+
+ac_cv_make_with_percent_rules=no
+if test x$ac_cv_prog_gnu_make = xyes; then
+    MCFG='include ../Make.common'
+    MCFGR='include ./Make.common'
+    MCF=/dev/null
+    PHONY='.PHONY:'
+    DOTDEPEND='ifeq (.depend,$(wildcard .depend)) \
+include .depend \
+endif'
+    WRITEDEP=":"
+    ac_cv_make_with_percent_rules=yes
+else
+    MCFG=""
+    MCFGR=""
+    MCF=./Make.common
+    PHONY='#'
+    DOTDEPEND=""
+    WRITEDEP='sed "/^. \*\*\*Dependencies\*\*\*/,/^. \*\*\*End of dependencies\*\*\*/d" < Makefile > Makefile.conf; { cat Makefile.conf; echo "# ***Dependencies***Do not edit***"; cat .depend; echo "# ***End of dependencies***" } > Makefile; $(RMF) Makefile.conf .depend'
+fi
+AC_SUBST(PHONY)
+AC_SUBST(WRITEDEP)
+AC_SUBST(MCFG)
+AC_SUBST(MCFGR)
+AC_SUBST(DOTDEPEND)
+AC_SUBST_FILE(MCF)
+
+if test x$ac_cv_make_with_percent_rules = xyes; then
+    PCENTRULE=""
+else
+    PCENTRULE="#"
+fi
+AC_SUBST(PCENTRULE)
+
+AC_OUTPUT(Make.common Makefile doc/Makefile vfs/Makefile lib/Makefile \
+	lib/mc.ext tk/Makefile gnome/Makefile xv/Makefile src/Makefile \
+	slang/Makefile edit/Makefile icons/Makefile mcfn_install \
+	vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR \
+	vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar \
+	doc/mc.1 doc/mcedit.1 doc/mcserv.8)
+
+if test x$srcdir != x; then
+    if test $srcdir != .; then
+	cp $srcdir/VERSION VERSION
+	mkdir nt
+	mkdir os2
+	cp $srcdir/nt/Makefile nt/Makefile
+	cp $srcdir/os2/Makefile os2/Makefile
+    fi
+fi
+
+if test "x$screen_manager" = xSLang; then
+    screen_manager="${screen_manager}${slang_term}"
+fi
+
+echo "
+Configuration:
+
+  Source code location:       ${srcdir}
+  Compiler:	              ${CC}
+  Compiler flags:             ${CFLAGS}
+  File system:                ${vfs_type}
+			      ${vfs_flags}
+  Text mode screen manager:   ${screen_manager}
+  Install console saver:      ${install_saver}
+  Text mode mouse library:    ${mouse_lib}
+  Debugger code:              ${mem_debug}
+  With subshell support:      ${subshell}
+  X11 versions:               ${xvers}
+  Internal editor:            ${EDIT_msg}
+  Install path:		      ${prefix}/bin, ${prefix}/lib/mc"
+if test -n "$xv_bindir"; then
+echo "  XView version install path: ${xv_bindir}"
+fi
+echo ""

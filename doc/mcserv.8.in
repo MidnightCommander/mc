@@ -1,0 +1,68 @@
+.TH mcserv 8 "16 May 1995"
+.SH NAME
+mcserv \- Midnight Commander file server.
+.SH USAGE
+.B mcserv
+[\-diqvf] [\-p portnum]
+.SH DESCRIPTION
+.LP
+mcserv is the server program for the Midnight Commander networking
+file system.  It provides access to the host file system to clients
+running the Midnight file system (currently, only the Midnight
+Commander file manager).
+.PP
+If the program is run as root the program will try to get a reserved
+port otherwise it will use 9876 as the port.
+.PP
+If the system has a portmapper running, then the port will be
+registered with the portmapper and thus clients will automatically
+connect to the right port.  If the system does not have a portmapper,
+then a port should be manually specified with the -p option (see
+below). 
+.PP
+.SH OPTIONS
+.TP
+.I "-d"
+Become a daemon, you should use this flag if you start the program
+from one of the system startup files.  This flag will make the program
+handle any number of incoming requests by forking a new copy of itself
+for each client.
+.TP
+.I "-q"
+Quiet mode.
+.TP
+.I "-p"
+To make the server listen on the specified 
+.B portnum
+port.
+.TP
+.I "-f"
+Force ftp authorization if classic fails. This is only useful on systems
+whose password checking method is not supported by this version of mcserv.
+Authorization is then done by trying to connect to the local ftp server
+and supplying user name and password. Ftp server then says whether are you
+successfuly logged in or whether you typed a wrong password. Use this with
+care and only when necessary.
+.TP
+.I "-v"
+Toggle on the verbose mode.
+.SH LICENSE
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation. See the built-in
+help for details on the License and the lack of warranty.
+.SH BUGS
+This program currently uses port 9876, and not a system secure port.
+This is a potential security problem since it could be run by any user
+on the system if the system daemon is not running.  
+.SH SEE ALSO
+mc(1), portmap(8)
+.PP
+.PP
+.nf
+The Midnight Commander page on the  World Wide Web:
+	http://mc.blackdown.org/mc/
+.fi
+.PP
+.SH AUTHORS
+Miguel de Icaza (miguel@roxanne.nuclecu.unam.mx).
+

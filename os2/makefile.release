@@ -1,0 +1,1185 @@
+# makefile.release
+# Erstellt von IBM WorkFrame/2 MakeMake um 21:20:03 am 8 Mai 1997
+#
+# Diese Make-Datei enth„lt folgende Aktionen:
+#  Compile::C++ Compiler
+#  Link::Linker
+
+.SUFFIXES: .c .obj 
+
+.all: \
+    .\mc.exe
+
+.c.obj:
+    @echo " Compile::C++ Compiler "
+    icc.exe /Tl5 /Id:\work\mc\mc-3.5.29\src /Id:\work\mc\mc-3.5.29\vfs /Id:\work\mc\mc-3.5.29 /Id:\work\mc\slang\os2src /D__os2__ /Dpc_system /DOS2_NT /DMIDNIGHT /DUSE_INTERNAL_EDIT /DHAVE_SLANG /DHAVE_CONFIG_H /DLIBDIR=\"D:\\mc\\\" /Ss /O /C %s
+
+{D:\WORK\mc\mc-3.5.29\src}.c.obj:
+    @echo " Compile::C++ Compiler "
+    icc.exe /Tl5 /Id:\work\mc\mc-3.5.29\src /Id:\work\mc\mc-3.5.29\vfs /Id:\work\mc\mc-3.5.29 /Id:\work\mc\slang\os2src /D__os2__ /Dpc_system /DOS2_NT /DMIDNIGHT /DUSE_INTERNAL_EDIT /DHAVE_SLANG /DHAVE_CONFIG_H /DLIBDIR=\"D:\\mc\\\" /Ss /O /C %s
+
+.\mc.exe: \
+    .\win.obj \
+    .\wtools.obj \
+    .\app_glob.obj \
+    .\background.obj \
+    .\boxes.obj \
+    .\chmod.os2.obj \
+    .\cmd.obj \
+    .\color.obj \
+    .\command.obj \
+    .\complete.obj \
+    .\cons.handler.os2.obj \
+    .\dialog.obj \
+    .\dir.obj \
+    .\dirent.os2.obj \
+    .\dirhist.obj \
+    .\dlg.obj \
+    .\drive.os2.obj \
+    .\ext.obj \
+    .\file.obj \
+    .\find.obj \
+    .\fsusage.obj \
+    .\getopt.obj \
+    .\help.obj \
+    .\hotlist.obj \
+    .\info.obj \
+    .\key.os2.obj \
+    .\layout.obj \
+    .\listmode.obj \
+    .\main.obj \
+    .\menu.obj \
+    .\mountlist.obj \
+    .\mouse.obj \
+    .\option.obj \
+    .\panelize.obj \
+    .\profile.obj \
+    .\regex.obj \
+    .\screen.obj \
+    .\setup.obj \
+    .\slint.os2.obj \
+    .\subshell.obj \
+    .\terms.obj \
+    .\tree.obj \
+    .\user.obj \
+    .\util.obj \
+    .\util.os2.obj \
+    .\view.obj \
+    .\widget.obj \
+    ..\..\slang\os2src\release\slang.lib \
+    ..\edit\libedit.lib \
+    {$(LIB)}mc.def
+    @echo " Link::Linker "
+    icc.exe @<<
+     /Femc.exe 
+     ..\..\slang\os2src\release\slang.lib 
+     ..\edit\libedit.lib 
+     mc.def
+     .\win.obj
+     .\wtools.obj
+     .\app_glob.obj
+     .\background.obj
+     .\boxes.obj
+     .\chmod.os2.obj
+     .\cmd.obj
+     .\color.obj
+     .\command.obj
+     .\complete.obj
+     .\cons.handler.os2.obj
+     .\dialog.obj
+     .\dir.obj
+     .\dirent.os2.obj
+     .\dirhist.obj
+     .\dlg.obj
+     .\drive.os2.obj
+     .\ext.obj
+     .\file.obj
+     .\find.obj
+     .\fsusage.obj
+     .\getopt.obj
+     .\help.obj
+     .\hotlist.obj
+     .\info.obj
+     .\key.os2.obj
+     .\layout.obj
+     .\listmode.obj
+     .\main.obj
+     .\menu.obj
+     .\mountlist.obj
+     .\mouse.obj
+     .\option.obj
+     .\panelize.obj
+     .\profile.obj
+     .\regex.obj
+     .\screen.obj
+     .\setup.obj
+     .\slint.os2.obj
+     .\subshell.obj
+     .\terms.obj
+     .\tree.obj
+     .\user.obj
+     .\util.obj
+     .\util.os2.obj
+     .\view.obj
+     .\widget.obj
+<<
+
+.\win.obj: \
+    D:\WORK\mc\mc-3.5.29\src\win.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h
+
+.\widget.obj: \
+    D:\WORK\mc\mc-3.5.29\src\widget.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}complete.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}xvmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkwidget.h
+
+.\view.obj: \
+    D:\WORK\mc\mc-3.5.29\src\view.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}help.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}regex.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mem.h
+
+.\util.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\util.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}config.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../VERSION
+
+.\util.obj: \
+    D:\WORK\mc\mc-3.5.29\src\util.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}regex.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mountlist.h
+
+.\user.obj: \
+    D:\WORK\mc\mc-3.5.29\src\user.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h
+
+.\tree.obj: \
+    D:\WORK\mc\mc-3.5.29\src\tree.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}help.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h
+
+.\terms.obj: \
+    D:\WORK\mc\mc-3.5.29\src\terms.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h
+
+.\subshell.obj: \
+    D:\WORK\mc\mc-3.5.29\src\subshell.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}subshell.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h
+
+.\slint.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\slint.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}config.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../VERSION
+
+.\setup.obj: \
+    D:\WORK\mc\mc-3.5.29\src\setup.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}hotlist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirhist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panelize.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/ftpfs.h
+
+.\screen.obj: \
+    D:\WORK\mc\mc-3.5.29\src\screen.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}ext.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkscreen.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}drive.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mem.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/extfs.h
+
+.\regex.obj: \
+    D:\WORK\mc\mc-3.5.29\src\regex.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}regex.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}lisp.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}buffer.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}syntax.h
+
+.\profile.obj: \
+    D:\WORK\mc\mc-3.5.29\src\profile.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h
+
+.\panelize.obj: \
+    D:\WORK\mc\mc-3.5.29\src\panelize.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h
+
+.\option.obj: \
+    D:\WORK\mc\mc-3.5.29\src\option.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h
+
+.\mouse.obj: \
+    D:\WORK\mc\mc-3.5.29\src\mouse.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h
+
+.\mountlist.obj: \
+    D:\WORK\mc\mc-3.5.29\src\mountlist.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mountlist.h
+
+.\menu.obj: \
+    D:\WORK\mc\mc-3.5.29\src\menu.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h
+
+.\main.obj: \
+    D:\WORK\mc\mc-3.5.29\src\main.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}complete.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}background.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}command.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}boxes.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}chmod.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}chown.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}hotlist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}subshell.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}ext.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirhist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}listmode.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mem.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}option.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panelize.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}learn.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/extfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../xv/xvmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}features.inc \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}xvkeydata.h
+
+.\listmode.obj: \
+    D:\WORK\mc\mc-3.5.29\src\listmode.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}listmode.h
+
+.\layout.obj: \
+    D:\WORK\mc\mc-3.5.29\src\layout.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}command.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}subshell.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkscreen.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}info.h
+
+.\key.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\key.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h
+
+.\info.obj: \
+    D:\WORK\mc\mc-3.5.29\src\info.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}info.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkinfo.h
+
+.\hotlist.obj: \
+    D:\WORK\mc\mc-3.5.29\src\hotlist.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}hotlist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkwidget.h
+
+.\help.obj: \
+    D:\WORK\mc\mc-3.5.29\src\help.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}help.h
+
+.\getopt.obj: \
+    D:\WORK\mc\mc-3.5.29\src\getopt.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}getopt.h
+
+.\fsusage.obj: \
+    D:\WORK\mc\mc-3.5.29\src\fsusage.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fsusage.h
+
+.\find.obj: \
+    D:\WORK\mc\mc-3.5.29\src\find.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}xvmain.h
+
+.\file.obj: \
+    D:\WORK\mc\mc-3.5.29\src\file.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}background.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}regex.h
+
+.\ext.obj: \
+    D:\WORK\mc\mc-3.5.29\src\ext.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}ext.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h
+
+.\drive.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\drive.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}drive.h
+
+.\dlg.obj: \
+    D:\WORK\mc\mc-3.5.29\src\dlg.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}help.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}xvmain.h
+
+.\dirhist.obj: \
+    D:\WORK\mc\mc-3.5.29\src\dirhist.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirhist.h
+
+.\dirent.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\dirent.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h
+
+.\dir.obj: \
+    D:\WORK\mc\mc-3.5.29\src\dir.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h
+
+.\dialog.obj: \
+    D:\WORK\mc\mc-3.5.29\src\dialog.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}background.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h
+
+.\cons.handler.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\cons.handler.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h
+
+.\complete.obj: \
+    D:\WORK\mc\mc-3.5.29\src\complete.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}complete.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h
+
+.\command.obj: \
+    D:\WORK\mc\mc-3.5.29\src\command.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}complete.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}command.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}subshell.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}user.h
+
+.\color.obj: \
+    D:\WORK\mc\mc-3.5.29\src\color.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h
+
+.\cmd.obj: \
+    D:\WORK\mc\mc-3.5.29\src\cmd.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    D:\WORK\mc\mc-3.5.29\src\app_glob.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}command.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}boxes.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cmd.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}view.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}find.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}hotlist.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}subshell.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}cons.saver.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}ext.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}help.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../edit/edit.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../vfs/vfs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkscreen.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}regex.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}lkeysym.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}coolwidget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}coollocal.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}stringtools.h
+
+.\chmod.os2.obj: \
+    D:\WORK\mc\mc-3.5.29\src\chmod.os2.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}chmod.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}achown.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}chown.h
+
+.\boxes.obj: \
+    D:\WORK\mc\mc-3.5.29\src\boxes.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}background.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}setup.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}profile.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}command.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dir.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}panel.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}boxes.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}main.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tree.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}layout.h
+
+.\background.obj: \
+    D:\WORK\mc\mc-3.5.29\src\background.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}file.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}background.h
+
+.\app_glob.obj: \
+    D:\WORK\mc\mc-3.5.29\src\app_glob.c
+
+.\wtools.obj: \
+    D:\WORK\mc\mc-3.5.29\src\wtools.c \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tty.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mad.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}global.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}util.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}win.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}color.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}mouse.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dlg.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}widget.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}menu.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}wtools.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}key.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dialog.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}complete.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}tkmain.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}../slang/slcurses.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}myslang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}fs.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}gpm-xterm.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}slang.h \
+    {D:\WORK\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\src;d:\work\mc\mc-3.5.29\vfs;d:\work\mc\mc-3.5.29;d:\work\mc\slang\os2src;$(INCLUDE);}dirent.h

@@ -1,0 +1,78 @@
+#! /bin/sh
+#
+# Written by Jakub Jelinek 1995
+#
+# (C) 1995 The Free Software Foundation.
+#
+#
+XZIP=zip
+XUNZIP=unzip
+XZIPINFO="unzip -Z"
+#
+#If you don't have zipinfo, set ZIPINFO=
+#
+
+mczipfs_list ()
+{
+DOZIPINFO=no
+if test -n "$XZIPINFO"; then
+    DOZIPINFO=
+    $XZIPINFO -l $1 | @AWK@ -v uid=${UID-0} -v zipfile=$1 -v xunzip=${XUNZIP-unzip} '
+/^Archive/ { next }
+/^[0-9]*\ file/ { next }
+/unx/ { 
+if ($1 ~ /^l/ ) {
+    arrow=" -> "
+    linkname=""
+    cmd=xunzip " -p " zipfile " " $10
+    cmd | getline linkname
+} else {
+    arrow=""
+    linkname=""
+}
+
+if ($10 ~ /^\^/)
+    $10=substr($10, 2)
+split($8, a, "-")
+if (a[3] < 50)
+    a[3] = 2000 + a[3]
+else
+    a[3] = 1900 + a[3]
+printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", $1, uid, 0, $4, a[2], a[1], a[3], $9, $10, arrow, linkname
+next
+}
+{
+exit 214
+}' 2>/dev/null
+    if test $? = 214; then
+        DOZIPINFO=no
+    fi
+fi
+if test -n "$DOZIPINFO"; then
+    $XUNZIP -v $1 | @AWK@ -v uid=${UID-0} '
+BEGIN { hyphens=0 }
+/^Archive/ { next }
+/^\ Length/ { next }
+/^\ ------/ { if (hyphens > 0) exit 0; hyphens=1; next }
+{ 
+if (hyphens < 1) next;
+if ($8 ~ /^\^/)
+    $8=substr($8, 2)
+if ($8 ~ /\/$/)
+    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s %s\n", uid, 0, $1, $5, $6, $8
+else
+    printf "-rw-r--r--   1 %-8d %-8d %8d %s %s %s\n", uid, 0, $1, $5, $6, $8 
+}' 2>/dev/null
+fi
+}
+
+mczipfs_copyout ()
+{
+    $XUNZIP -p $1 $2 > $3 2>/dev/null
+}
+
+case "$1" in
+  list) mczipfs_list $2; exit 0;;
+  copyout) mczipfs_copyout $2 $3 $4; exit 0;;
+esac
+exit 1

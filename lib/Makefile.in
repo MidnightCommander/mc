@@ -1,0 +1,54 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#
+# Distribution variables
+#
+
+DISTLIB = Makefile.in mc.menu mc.ext.in tdiff xnc.hlp xterm.ti \
+	vt100.ti ansi.ti linux.ti tdiff ncurses.h mc.hint mc.lib xterm.tcap \
+	xterm.ad README.xterm mc.sh mc.csh mcserv.init mcserv.pamd tkmc.wmconfig
+
+all:
+
+check:
+	@echo no tests are supplied.
+
+TAGS:
+
+cross:
+
+clean:
+
+realclean:
+
+distclean:
+	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+
+install:
+	$(INSTALL_DATA) mc.ext $(DESTDIR)$(libdir)/mc.ext
+	$(INSTALL_DATA) $(srcdir)/mc.menu $(DESTDIR)$(libdir)/mc.menu
+	$(INSTALL_DATA) $(srcdir)/mc.hint $(DESTDIR)$(libdir)/mc.hint
+	$(INSTALL_DATA) $(srcdir)/mc.lib $(DESTDIR)$(libdir)/mc.lib
+	$(INSTALL_DATA) $(srcdir)/ansi.ti $(DESTDIR)$(tidir)/ansi.ti
+	$(INSTALL_DATA) $(srcdir)/linux.ti $(DESTDIR)$(tidir)/linux.ti
+	$(INSTALL_DATA) $(srcdir)/vt100.ti $(DESTDIR)$(tidir)/vt100.ti
+	$(INSTALL_DATA) $(srcdir)/xterm.ti $(DESTDIR)$(tidir)/xterm.ti
+	$(INSTALL_DATA) $(srcdir)/xterm.tcap $(DESTDIR)$(tidir)/xterm.tcap
+	$(INSTALL_DATA) $(srcdir)/xterm.ad $(DESTDIR)$(tidir)/xterm.ad
+	$(INSTALL_DATA) $(srcdir)/README.xterm $(DESTDIR)$(tidir)/README.xterm
+
+uninstall:
+	cd $(libdir); $(RMF) mc.ext mc.hint mc.view mc.menu mc.edit
+
+distcopy:
+	$(CP) $(DISTLIB) ../../mc-$(VERSION)/lib
+
+depend dep:

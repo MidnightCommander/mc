@@ -1,0 +1,82 @@
+! This file causes when loaded using xrdb correct behaviour of xterm
+! is you are using enclosed xterm.tcap and xterm.ti.
+! Some keys would never normally work if they weren't here (like Alt
+! something), some key definitions differ from one termcap/terminfo
+! to the other. You may delete any line if you find out that mc
+! sends exactly that string which is mentioned here.
+! See xterm(1).
+! Either put this into your ~/.Xdefaults, or to app-defaults/XTerm
+! or wherever it will be loaded into xrm from.
+! To know, why this works, see Xt documentation (appendix B).
+! On some systems you may want to replace the a (alt) modifiers with
+! m (meta) modifier in fron of some <Key> events.
+*vt100.translations: #override \
+     <Key>Home: string(0x1b) string("[7~") \n\
+     <Key>End: string(0x1b) string("[8~") \n\
+     <Key>Insert: string(0x1b) string("[2~") \n\
+     <Key>Delete: string(0x1b) string("[3~") \n\
+     <Key>Page_Up: string(0x1b) string("[5~") \n\
+     <Key>Page_Down: string(0x1b) string("[6~") \n\
+     <Key>Left: string(0x1b) string("OD") \n\
+     <Key>Right: string(0x1b) string("OC") \n\
+     <Key>Up: string(0x1b) string("OA") \n\
+     <Key>Down: string(0x1b) string("OB") \n\
+     ~s<Key>F1: string(0x1b) string("[11~") \n\
+     ~s<Key>F2: string(0x1b) string("[12~") \n\
+     ~s<Key>F3: string(0x1b) string("[13~") \n\
+     ~s<Key>F4: string(0x1b) string("[14~") \n\
+     ~s<Key>F5: string(0x1b) string("[15~") \n\
+     ~s<Key>F6: string(0x1b) string("[17~") \n\
+     ~s<Key>F7: string(0x1b) string("[18~") \n\
+     ~s<Key>F8: string(0x1b) string("[19~") \n\
+     ~s<Key>F9: string(0x1b) string("[20~") \n\
+     ~s<Key>F10: string(0x1b) string("[21~") \n\
+     <Key>F11: string(0x1b) string("[23~") \n\
+     <Key>F12: string(0x1b) string("[24~") \n\
+     <Key>F13: string(0x1b) string("[25~") \n\
+     <Key>F14: string(0x1b) string("[26~") \n\
+     <Key>F15: string(0x1b) string("[28~") \n\
+     <Key>F16: string(0x1b) string("[29~") \n\
+     <Key>F17: string(0x1b) string("[31~") \n\
+     <Key>F18: string(0x1b) string("[32~") \n\
+     <Key>F19: string(0x1b) string("[33~") \n\
+     <Key>F20: string(0x1b) string("[34~") \n\
+     s<Key>F1: string(0x1b) string("[23~") \n\
+     s<Key>F2: string(0x1b) string("[24~") \n\
+     s<Key>F3: string(0x1b) string("[25~") \n\
+     s<Key>F4: string(0x1b) string("[26~") \n\
+     s<Key>F5: string(0x1b) string("[28~") \n\
+     s<Key>F6: string(0x1b) string("[29~") \n\
+     s<Key>F7: string(0x1b) string("[31~") \n\
+     s<Key>F8: string(0x1b) string("[32~") \n\
+     s<Key>F9: string(0x1b) string("[33~") \n\
+     s<Key>F10: string(0x1b) string("[34~") \n\
+     a<Key>Return: string(0x1b) string(0x0d) \n\
+     a<Key>Tab: string(0x1b) string(0x09) \n\
+     a<Key>space: string(0x1b) string(" ") \n\
+     a<Key>a: string(0x1b) string("a") \n\
+     a<Key>b: string(0x1b) string("b") \n\
+     a<Key>c: string(0x1b) string("c") \n\
+     a<Key>d: string(0x1b) string("d") \n\
+     a<Key>e: string(0x1b) string("e") \n\
+     a<Key>f: string(0x1b) string("f") \n\
+     a<Key>g: string(0x1b) string("g") \n\
+     a<Key>h: string(0x1b) string("h") \n\
+     a<Key>i: string(0x1b) string("i") \n\
+     a<Key>j: string(0x1b) string("j") \n\
+     a<Key>k: string(0x1b) string("k") \n\
+     a<Key>l: string(0x1b) string("l") \n\
+     a<Key>m: string(0x1b) string("m") \n\
+     a<Key>n: string(0x1b) string("n") \n\
+     a<Key>o: string(0x1b) string("o") \n\
+     a<Key>p: string(0x1b) string("p") \n\
+     a<Key>q: string(0x1b) string("q") \n\
+     a<Key>r: string(0x1b) string("r") \n\
+     a<Key>s: string(0x1b) string("s") \n\
+     a<Key>t: string(0x1b) string("t") \n\
+     a<Key>u: string(0x1b) string("u") \n\
+     a<Key>v: string(0x1b) string("v") \n\
+     a<Key>w: string(0x1b) string("w") \n\
+     a<Key>x: string(0x1b) string("x") \n\
+     a<Key>y: string(0x1b) string("y") \n\
+     a<Key>z: string(0x1b) string("z")

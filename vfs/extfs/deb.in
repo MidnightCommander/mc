@@ -1,0 +1,137 @@
+#!/usr/bin/perl
+#
+# Written by Fernando Alegre <alegre@debian.org> 1996
+#
+# Applied patch by Dimitri Maziuk <emaziuk@curtin.edu.au> 1997
+#         (to handle new tar format)
+#
+# Modified by Fernando Alegre <alegre@debian.org> 1997
+#         (to handle both new and old tar formats)
+#
+#
+# Copyright (C) 1997 Free Software Foundation
+#
+
+sub mcdebfs_list
+{
+#
+#	CAVEAT: Hard links are listed as if they were symlinks
+#		Empty directories do not appear at all
+#
+	local($archivename)=@_;
+	chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
+	chop($info_size=`dpkg -I $archivename | wc -c`);
+	$install_size=length($pressinstall);
+
+	print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";
+	print "-r--r--r--   1 root     root     $info_size $date INFO\n";
+	print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
+
+	if ( open(PIPEIN, "dpkg-deb -c $archivename |") )
+	{
+		while(<PIPEIN>)
+		{
+			split;
+
+			$perm=$_[0]; $owgr=$_[1]; $size=$_[2];
+			if($_[3] =~ /^\d\d\d\d\-/) { # New tar format
+				
+				($year,$mon,$day) = split(/-/,$_[3]);
+				$month = ("Gee","Jan","Feb","Mar","Apr","May","Jun",
+						  "Jul","Aug","Sep","Oct","Nov","Dec")[$mon] || "Gee";
+				$time=$_[4];
+				$pathindex=5;
+			}
+			else {
+				$month=$_[3];
+				$day=$_[4];
+				$time=$_[5];
+				$year=$_[6];
+				$pathindex=7;
+			}
+			
+			$path=$_[$pathindex++];
+			$arrow=$_[$pathindex++];
+			$link=$_[$pathindex++];
+			$link2=$_[$pathindex++];
+
+			$owgr=~s!/! !;
+			next if $path=~m!/$!;
+			if($arrow eq 'link')
+			{
+# report hard links as soft links
+				$arrow='->'; $link="/$link2"; 
+				substr($perm, 0, 1) = "l";
+			}
+			if($arrow ne '')
+			{
+				$arrow=' ' . $arrow;
+				$link= ' ' . $link;
+			}
+			print "$perm 1 $owgr $size $month $day $year $time CONTENTS/$path$arrow$link\n";
+		}
+	}
+}
+
+sub mcdebfs_copyout
+{
+	local($archive,$filename,$destfile)=@_;
+
+	if($filename eq "INFO")
+	{
+		system("dpkg-deb -I $archive > $destfile");
+	}
+	elsif($filename eq "INSTALL")
+	{
+		if ( open(FILEOUT,">$destfile") )
+		{
+			print FILEOUT $pressinstall;
+			close FILEOUT;
+			system("chmod a+x $destfile");
+		}
+	}
+	else
+	{
+		$filename=~s!^CONTENTS/!!;
+		system("dpkg-deb --fsys-tarfile $archive | tar xOf - $filename > $destfile");
+	}
+}
+
+sub mcdebfs_run
+{
+	local($archive,$filename)=@_;
+	if($filename eq "INSTALL")
+	{
+		print "Installing $archive\n";
+		system("dpkg -i $archive");
+	}
+	else
+	{
+		$tmpcmd="/tmp/mcdebfs.run.$$";
+		&mcdebfs_copyout($archive, $filename, $tmpcmd);
+		system("chmod u+x $tmpcmd");
+		system($tmpcmd);
+		unlink($tmpcmd);
+	}
+}
+
+$pressinstall=<<EOInstall;
+
+                              WARNING
+     Don't use this method if you are not willing to reinstall everything...
+
+This is not a real file. It is a way to install the package you are browsing.
+
+To install this package go back to the panel and press Enter on this file.
+
+In Debian systems, a package is automatically upgraded when you install a new
+version of it. There is no special upgrade option. Install always works.
+
+EOInstall
+
+if($ARGV[0] eq "list") { shift; &mcdebfs_list(@ARGV); exit 0; }
+elsif($ARGV[0] eq "copyout") { shift; &mcdebfs_copyout(@ARGV); exit 0; }
+elsif($ARGV[0] eq "run") { shift; &mcdebfs_run(@ARGV); exit 0; }
+
+exit 1;
+

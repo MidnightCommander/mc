@@ -1,0 +1,35 @@
+# Makefile.vc1
+#
+# Midnight Commander for Win32 makefile
+# for Microsoft Visual C++ 1.x 
+#
+# Hacked by Juan Grigera from Visual IDE mak
+# --------------------------------------------------------------------------
+
+MC_LIBS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib
+NOLOGO=-nologo
+MC_MISC_CFLAGS=-Fp"$(OBJS_DIR)/Mc.pch"
+
+CC=cl.exe
+RSC=rc.exe
+LINK=link.exe
+BSC=bscmake.exe
+SLANG_LINK=link.exe -lib
+MCEDIT_LINK=link.exe -lib
+
+!if  "$(DEBUG)" == "0"
+EXTRA_MC_OBJS=
+SPECIFIC_DEFINES=-DNDEBUG
+SPECIFIC_MC_CFLAGS=$(NOLOGO) -ML -GX -O2  -YX0 $(MC_MISC_CFLAGS)
+SPECIFIC_MC_LFLAGS_EXTRA=-debug -incremental:no
+SPECIFIC_SLANG_CFLAGS=-ML -W3 -GX -O2  -YX -Fp"$(SLANG_OBJS_DIR)/slang.pch"
+SPECIFIC_MCEDIT_CFLAGS=-ML -W3 -GX -O2  -YX -Fp"$(MCEDIT_OBJS_DIR)/slang.pch"
+!else
+EXTRA_MC_OBJS=$(OBJS_DIR)\util.debug.obj
+SPECIFIC_MC_CFLAGS==$(NOLOGO) -MLd -Gm -GX -Zi -Od -YX -Fd"$(OBJS_DIR)/" $(MC_MISC_CFLAGS)
+SPECIFIC_MC_LFLAGS_EXTRA=-debug -incremental:yes
+SPECIFIC_SLANG_CFLAGS=-MLd -W3 -GX -Z7 -Od -YX -Fr"$(SLANG_OBJS_DIR)/" -Fp"$(SLANG_OBJS_DIR)/slang.pch" 
+SPECIFIC_MCEDIT_CFLAGS=-MLd -W3 -GX -Z7 -Od -YX -Fr"$(MCEDIT_OBJS_DIR)/" -Fp"$(MCEDIT_OBJS_DIR)/slang.pch" 
+!endif
+
+SPECIFIC_MC_LFLAGS=-subsystem:console -pdb:"$(OBJS_DIR)/Mc.pdb" -out:"$(OBJS_DIR)/Mc.exe" $(SPECIFIC_MC_LFLAGS_EXTRA)

@@ -1,0 +1,51 @@
+#! /bin/sh
+ZOO=zoo
+
+mczoofs_list ()
+{
+    $ZOO l $1 | @AWK@ -v uid=${UID-0} '
+BEGIN { hyphens=0 }
+/^---/ { if (hyphens > 0) exit 0; hyphens=1; next }
+/^[^\ ]/ { next }
+{
+if (NF < 8)
+    next
+if ($8 ~ /^\^/)
+    $8=substr($8, 2)
+if ($6 > 50)
+    $6=$6 + 1900
+else
+    $6=$6 + 2000
+split($7, a, ":")
+if ($8 ~ /\/$/)
+    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $1, $5, $4, $6, a[1], a[2], $8
+else
+    printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $1, $5, $4, $6, a[1], a[2], $8
+}' 2>/dev/null
+    exit 0
+}
+
+mczoofs_copyout ()
+{
+    $ZOO xp $1 $2 | tail +6l > $3 2>/dev/null
+    exit 0
+}
+
+# zoo is stupid and won't be happy when the name has no extension.
+# We have to do a small trick :)
+if echo $2 | grep '\.zoo'; then
+  :
+else
+  SYMLINK=$2.zoo
+  if test -f $SYMLINK; then
+    SYMLINK=$2.
+  fi
+  ln -s $2 $SYMLINK
+  trap 'rm -f $SYMLINK' 0 1 2 3 5 13 15
+  $2=$SYMLINK
+fi
+case "$1" in
+  list) mczoofs_list $2; exit $?;;
+  copyout) mczoofs_copyout $2 $3 $4; exit $?;;
+esac
+exit 1

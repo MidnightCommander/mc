@@ -1,0 +1,2647 @@
+
+<!--
+  This is Linuxdoc-sgml source for GNU Midnight Commander documentation.
+  In order to compile this into different formats, you have to use
+  linuxdoc-sgml utilities by Matt Welsh with a small patch for MC's sake.
+
+  Note for those who will write this:
+  Special characters ([ ] \ < > " | $ ~ # %) bring some troubles and should
+  be written with care. Here is a key for using them:
+  Character(s) 
+   to achieve   |  Normal use  |  Inside tag (tag, em, tt, etc.)  |  Verbatim
+     [		     &lsqb;            &lsqb;                          [
+     ]		     &rsqb;            &rsqb;                          ]
+     \               &bslsh;           &bslshd;                     &bslshv;
+     <               &lt;              &lt;                            <
+     >               &gt;              &gt;                            >
+     </              &etago;           &etago;                       &etago;
+     "               &dquot;           &dquot;                         "
+     |               &verbar;          &verbar;                        |
+     $               &dollar;          &dollar;                        $
+     ~               &tilde;           &tilde;                         ~
+     #               &num;             &num;                           #
+     %               &percnt;          &percnt;                        %
+
+  Inside tag means between either <tag> and </tag>, <em> </em>, <tt> </tt>,
+  <bf> </bf> and some others (you have to check this by creating a manual
+  page and see if the \ is there correctly).
+  Verbatim means anywhere between <code> </code> and <verb> </verb>.
+  -->
+<!doctype linuxdoc system>
+
+<article>
+
+<mantitle title="mc" sectnum="1" date="20 October 1997" name="mc - Visual shell for Unix-like systems">
+<title>GNU Midnight Commander User's Guide
+<author>Written by the Midnight Commander development team <tt/mc-devel@nuclecu.unam.mx/
+<date>v 3.0, 16 September 1995
+<abstract>
+This document describes how to use the GNU Midnight Commander, Unix file manager.
+</abstract>
+
+<toc>
+
+<sect>Usage<label id="Usage">
+
+<p>
+<tt/mc/ &lsqb;-abcCdfhkPstuUVx?&rsqb; &lsqb;-l log &rsqb; &lsqb;dir1 &lsqb;dir2&rsqb;&rsqb;
+&lsqb;-v file&rsqb;  &lsqb;-l file&rsqb
+
+<sect>Description<label id="Description">
+
+<p>
+The Midnight Commander is a directory browser/file manager
+for Unix-like operating systems.
+
+<sect>Options<label id="Options">
+
+<p>
+<descrip>
+<tag/-a/ Disables the usage of graphisc characters for line drawing.
+<tag/-b/ Forces black and white display.
+<tag/-c/ Force color mode, please check the section <lnk name="Colors" id="Colors"> for
+more information.
+<tag/-C arg/ Used to specify a different color set in the
+command line. The format of arg is documented in the
+<lnk name="Colors" id="Colors"> section.
+<tag/-d/ Disables mouse support.
+<tag/-f/ Displays the compiled-in search paths for Midnight
+Commander files.
+<tag/-k/ Reset softkeys to their default from the termcap/terminfo
+database. Only useful on HP terminals when the function keys don't work.
+<tag/-l file/ Save the ftpfs dialog with the server in file.
+<tag/-P/ At program end, the Midnight Commander will print the
+last working directory; this, along with the shell
+function below, will allow you to browse through your
+directories and automatically move to the last directory
+you were in (thanks to Torben Fjerdingstad and Sergey for
+contributing this function and the code which implements
+this option).
+
+<tscreen><verb>
+
+bash and zsh users:
+
+mc ()
+{
+        MC=/tmp/mc$$-"$RANDOM"
+        @prefix@/bin/mc -P "$@" > "$MC"
+        cd "`cat $MC`"
+        rm "$MC"
+        unset MC;
+}
+
+tcsh usres:
+alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
+
+</verb></tscreen>
+I know the bash function could be shorter for zsh and bash but the
+backquotes on bash won't accept your suspension the program with
+C-z. 
+
+<tag/-s/ Turns on the slow terminal mode, in this mode the
+program will not draw expensive line drawing characters
+and will toggle verbose mode off.
+<tag/-t/ Used only if the code was compiled with Slang and
+terminfo: it makes the Midnight Commander use the value of
+the <tt/TERMCAP/ variable for the terminal information instead
+of the information on the system wide terminal database
+<tag/-u/ Disables the use of a concurrent shell (only makes
+sense if the Midnight Commander has been built with
+concurrent shell support).
+<tag/-v file/Enters the internal viewer to view the file specified.
+<tag/-e file/Enters the internal editor to edit the file specified.
+<tag/-U/ Enables the use of the concurrent shell support (only
+makes sense if the Midnight Commander was built with the
+subshell support set as an optional feature).
+<tag/-V/ Displays the version of the program.
+<tag/-x/ Forces xterm mode. Used when running on xterm-capable
+terminals (two screen modes, and able to send mouse escape sequences).
+</descrip>
+If specified, the first path name is the directory to show
+in the selected panel; the second path name is the
+directory to be shown in the other panel.
+
+<sect>Overview<label id="Overview">
+
+<p>
+The screen of the Midnight Commander is divided into four
+parts. Almost all of the screen space is taken up by two
+directory panels. By default, the second bottommost line
+of the screen is the shell command line, and the bottom
+line shows the function key labels. The topmost line is
+the <lnk name="menu bar line" id="Menu Bar">. The menu bar line may not be visible,
+but appears if you click the topmost line with the mouse
+or press the F9 key.
+
+The Midnight Commander provides a view of two directories
+at the same time. One of the panels is the current panel
+(a selection bar is in the current panel). Almost all
+operations take place on the current panel. Some file
+operations like Rename and Copy by default use the
+directory of the unselected panel as a destination (don't
+worry, they always ask you for confirmation first). For
+more information, see the sections on the <lnk name="Directory
+Panels" id="Directory Panels">, the <lnk name="Left and Right Menus" id="Left and Right Menus"> and the <lnk name="File Menu" id="File Menu">.
+
+You can execute system commands from the Midnight
+Commander by simply typing them. Everything you type will
+appear on the shell command line, and when you press Enter
+the Midnight Commander will execute the command line you
+typed; read the <lnk name="Shell Command Line" id="Shell Command Line"> and <lnk name="Input Line Keys" id="Input Line Keys">
+sections to learn more about the command line.
+
+<sect>Mouse Support<label id="Mouse Support">
+
+<p>
+The Midnight Commander comes with mouse support. It is
+activated whenever you are running on an <bf/xterm(1)/ terminal
+(it even works if you take a telnet or rlogin connection
+to another machine from the xterm) or if you are running
+on a Linux console and have the <bf/gpm(1)/ mouse server running.
+
+When you left click on a file in the directory panels,
+that file is selected; if you click with the right button,
+the file is marked (or unmarked, depending on the previous
+state).
+
+Double-clicking on a file will try to execute the command
+if it is an executable program; and if the
+<lnk name="extension file" id="Extension File Edit">
+has a program specified for the file's extension, the
+specified program is executed.
+
+Also, it is possible to execute the commands assigned to
+the function key labels by clicking on them.
+
+If a mouse button is clicked on the top frame line of the
+directory panel, it is scrolled one pageful backward.
+Correspondingly, a click on the bottom frame line will
+cause a scroll of one pageful forward. This frame line
+method works also in the <lnk name="Help Viewer" id="How to use help"> and the
+<lnk name="Directory Tree" id="Directory Tree">.
+
+The default auto repeat rate for the mouse buttons is 400
+milliseconds. This may be changed to other values by
+editing the <lnk name="~/.mc/ini" id="Save Setup"> file and changing the
+<em/mouse_repeat_rate/ parameter.
+
+If you are running the Commander with the mouse support,
+you can bypass the Commander and get the default mouse
+behavior (cutting and pasting text) by holding down the
+Shift key.
+
+<sect>Keys<label id="Keys">
+
+<p>
+Some commands in the Midnight Commander involve the use of
+the <em/Control/ (sometimes labeled CTRL or CTL) and the <em/Meta/
+(sometimes labeled ALT or even Compose) keys. In this
+manual we will use the following abbreviations:
+
+C-<em/chr/ means hold the Control key while typing the
+character <em/chr/. Thus C-f would be: hold the Control key
+and type f.
+
+M-<em/chr/ means hold the Meta or Alt key down while typing
+<em/chr/. If there is no Meta or Alt key, type ESC, release
+it, then type the character <em/chr/.
+
+All input lines in the Midnight Commander use an
+approximation to the GNU Emacs editor's key bindings.
+
+There are many sections which tell about the keys. The
+following are the most important.
+
+The <lnk name="File Menu" id="File Menu"> section documents
+the keyboard shortcuts for the commands appearing in the File menu.
+This section
+includes the function keys. Most of these commands perform
+some action, usually on the selected file or the tagged
+files.
+
+The <lnk name="Directory Panels" id="Directory Panels">
+section documents the keys which
+select a file or tag files as a target for a later action
+(the action is usually one from the file menu).
+
+The <lnk name="Shell Command Line" id="Shell Command Line">
+section list the keys which are
+used for entering and editing command lines. Most of these
+copy file names and such from the directory panels to the
+command line (to avoid excessive typing) or access the
+command line history.
+
+<lnk name="Input Line Keys" id="Input Line Keys">
+are used for editing input lines. This
+means both the command line and the input lines in the
+query dialogs.
+
+<sect1>Miscellaneous Keys<label id="Miscellaneous Keys">
+
+<p>
+Here are some keys which don't fall into any of the other
+categories:
+
+<descrip>
+<tag/Enter/ If there is some text in the command line (the one
+at the bottom of the panels), then that command is
+executed. If there is no text in the command line then if
+the selection bar is over a directory the Midnight
+Commander does a <bf/chdir(2)/ to the selected directory and
+reloads the information on the panel; if the selection is
+an executable file then it is executed. Finally, if the
+extension of the selected file name matches one of the
+extensions in the <lnk name="extensions file" id="Extension File Edit"> then the corresponding
+command is executed.
+<tag/C-l/ Repaint all the information in the Midnight
+Commander.
+<tag/C-x c/ Run the <lnk name="Chmod" id="Chmod"> command on a file or on the tagged
+files.
+<tag/C-x o/ Run the <lnk name="Chown" id="Chown"> command on the current file or on the
+tagged files.
+<tag/C-x l/ Run the link command.
+<tag/C-x s/ Run the symbolic link command.
+<tag/C-x C-l/ Create symbolic link to the selection in the current panel at
+the place specified in the dialog (defaults to a symlink in the other
+panel's directory), using a relative shortest possible symlink.
+<tag/C-x i/ Set the other panel display mode to information.
+<tag/C-x q/ Set the other panel display mode to quick view.
+<tag/C-x !/ Execute the <lnk name="External panelize" id="External panelize"> command.
+<tag/C-x h/ Run the <lnk name="add directory to hotlist" id="Hotlist"> command.
+<tag/M-!/ Executes the Filtered view command, described in the
+<lnk name="view command" id="Internal File Viewer">.
+<tag/M-?/ Executes the <lnk name="Find file" id="Find File"> command.
+<tag/M-c/ Pops up the <lnk name="quick cd" id="Quick cd"> dialog.
+<tag/C-o/ When the program is being run in the Linux or SCO console or
+under an xterm, it will show you the output of the
+previous command. When ran on the Linux console, the
+Midnight Commander uses an external program (<bf/cons.saver/)
+to handle saving and restoring of information on the
+screen.
+When the subshell support is compiled in, you can type <tt/C-o/
+at any time and you will be taken back to the Midnight
+Commander main screen, to return to your application just
+type <tt/C-o/. If you have an application suspended by using
+this trick, you won't be able to execute other programs
+from the Midnight Commander until you terminate the
+suspended application.
+</descrip>
+
+<sect1>Directory Panels<label id="Directory Panels">
+
+<p>
+This section lists the keys which operate on the directory
+panels. If you want to know how to change the appearance
+of the panels take a look at the section on <lnk name="Left and Right
+Menus" id="Left and Right Menus">.
+
+<descrip>
+<tag/Tab, C-i/ Change the current panel. The old other panel
+becomes the new current panel and the old current panel
+becomes the new other panel. The selection bar moves from
+the old current panel to the new current panel.
+<tag/Insert, C-t/ To tag files you may use the Insert key (the
+kich1 terminfo sequence) or the <tt/C-t/ (Control-t) sequence.
+To untag files, just retag a tagged file.
+<tag/M-g, M-h (or M-r), M-j/ Used to select the top file in a
+panel, the middle file and the bottom one, respectively.
+<tag/C-s, M-s/ Start a filename search in the directory
+listing. When the search is active the keypresses will be
+added to the search string instead of the command line. If
+the <em/Show mini-status/ option is enabled the search string
+is shown on the mini-status line. When typing, the
+selection bar will move to the next file starting with the
+typed letters. The <tt/backspace/ or <tt/DEL/ keys can be used to
+correct typing mistakes. If <tt/C-s/ is pressed again, the next
+match is searched for.
+<tag/M-t/Toggle the current display listing to show the next display listing
+mode.  With this it is possible to quickly switch from long listing
+to regular listing and the user defined listing mode.
+<tag/C-&bslshd; (control-backslash)/ Show the
+<lnk name="directory hotlist" id="Hotlist"> and change to the selected
+directory.
+<tag/+ (plus)/ This is used to select (tag) a group of files.
+The Midnight Commander will prompt for a regular
+expression describing the group. When <em/Shell Patterns/ are
+enabled, the regular expression is much like the regular
+expressions in the shell (* standing for zero or more
+characters and ? standing for one character). 
+If <em/Shell Patterns/ is off, then the tagging of files is done with
+normal regular expressions (see <bf/ed (1)/).
+If the expression starts or ends with a slash (<tt>/</tt>), then it
+will select directories instead of files.
+<tag/&bslshd; (backslash)/ Use the "&bslsh;" key to unselect a group of
+files. This is the opposite of the Plus key.
+<tag/up-key, C-p/ Move the selection bar to the previous entry
+in the panel.
+<tag/down-key, C-n/ Move the selection bar to the next entry in
+the panel.
+<tag/home, a1, M-&lt;/ Move the selection bar to the first entry
+in the panel.
+<tag/end, c1, M-&gt;/ Move the selection bar to the last entry in
+the panel.
+<tag/next-page, C-v/ Move the selection bar one page down.
+<tag/prev-page, M-v/ Move the selection bar one page up.
+<tag/M-o/ If the other panel is a listing panel and you are
+standing on a directory in the current panel, then the
+other panel contents are set to the contents of the
+currently selected directory (like Emacs' dired C-o key)
+otherwise the other panel contents are set to the parent
+dir of the current dir.
+<tag/C-PageUp, C-PageDown/ Only when ran on the Linux console:
+does a chdir to &dquot;..&dquot; and to the currently selected
+directory respectively.
+</descrip>
+
+<sect1>Shell Command Line<label id="Shell Command Line">
+
+<p>
+This section lists keys which are useful to avoid
+excessive typing when entering shell commands.
+
+<descrip>
+<tag/M-Enter/ Copy the currently selected file name to the
+command line.
+<tag/C-Enter/ Same a M-Enter, this one only works on the Linux
+console.
+<tag/M-Tab/ Does the filename, command, variable, username and
+hostname <lnk name="completion" id="Completion"> for you.
+<tag/C-x t, C-x C-t/ Copy the tagged files (or if there are no
+tagged files, the selected file) of the current panel (<tt/C-x t/) 
+or of the other panel (<tt/C-x C-t/) to the command line.
+<tag/C-x p, C-x C-p/ The first key sequence copies the current
+path name to the command line, and the second one copies
+the unselected panel's path name to the command line.
+<tag/C-x r, C-x C-r/ Copy value of current symlink (or current symlink
+in the other panel) to the command line.
+<tag/C-q/ The quote command can be used to insert characters
+that are otherwise interpreted by the Midnight Commander
+(like the <tt/+/ symbol).
+<tag/M-p, M-n/ Use these keys to browse through the command
+history. M-p takes you to the last entry, M-n takes you to
+the next one.
+<tag/M-h>  Displays the history for the current input line. 
+</descrip>
+
+<sect1>General Movement Keys<label id="General Movement Keys">
+
+<p>
+The help viewer, the file viewer and the directory tree
+use common code to handle moving. Therefore they accept
+exactly the same keys. Each of them also accepts some keys
+of its own.
+
+Other parts of the Midnight Commander use some of the same
+movement keys, so this section may be of use for those
+parts too.
+
+<descrip>
+<tag/Up, C-p/ Moves one line backward.
+<tag/Down, C-n/ Moves one line forward.
+<tag/Prev Page, Page Up, M-v/ Moves one pageful backward.
+<tag/Next Page, Page Down, C-v/ Moves one pageful forward.
+<tag/Home, A1/ Moves to the beginning.
+<tag/End, C1/ Move to the end.
+</descrip>
+
+The help viewer and the file viewer accept the following
+keys in addition the to ones mentioned above:
+
+<descrip>
+<tag/b, C-b, C-h, Backspace, Delete/ Moves one pageful
+backward.
+<tag/Space bar/ Moves one pageful forward.
+<tag/u, d/ Moves one half of a page backward or forward.
+<tag/g, G/ Moves to the beginning or to the end.
+</descrip>
+
+<sect1>Input Line Keys<label id="Input Line Keys">
+
+<p>
+The input lines (they are used for the <lnk name="command line" id="Shell Command Line"> and
+for the query dialogs in the program) accept these keys:
+
+<descrip>
+<tag/C-a/ puts the cursor at the beginning of line.
+<tag/C-e/ puts the cursor at the end of the line.
+<tag/C-b, move-left/ move the cursor one position left.
+<tag/C-f, move-right/ move the cursor one position right.
+<tag/M-f/ moves one word forward.
+<tag/M-b/ moves one word backward.
+<tag/C-h, backspace/ delete the previous character.
+<tag/C-d, Delete/ delete the character in the point (over the
+cursor).
+<tag/C-@/ sets the mark for cutting.
+<tag/C-w/ copies the text between the cursor and the mark to a
+kill buffer and removes the text from the input line.
+<tag/M-w/ copies the text between the cursor and the mark to a
+kill buffer.
+<tag/C-y/ yanks back the contents of the kill buffer.
+<tag/C-k/ kills the text from the cursor to the end of the line.
+<tag/M-p, M-n/ Use these keys to browse through the command
+history. <tt/M-p/ takes you to the last entry, <tt/M-n/ takes you to
+the next one.
+<tag/M-C-h, M-Backspace/ delete one word backward.
+<tag/M-Tab/ does the filename, command, variable, username and
+hostname <lnk name="completion" id="Completion"> for you.
+</descrip>
+
+<sect>Menu Bar<label id="Menu Bar">
+
+<p>
+The menu bar pops up when you press F9 or click the mouse
+on the top row of the screen. The menu bar has five menus:
+<em/Left/, <em/File/, <em/Command/, <em/Options/ and <em/Right/.
+
+The <lnk name="Left and Right Menus" id="Left and Right Menus"> allow you to modify the
+appearance of the left and right directory panels.
+
+The <lnk name="File Menu" id="File Menu"> lists the actions you can perform on the
+currently selected file or the tagged files.
+
+The <lnk name="Command Menu" id="Command Menu"> lists the actions which are more general
+and bear no relation to the currently selected file or the
+tagged files.
+
+<sect1>Left and Right Menus<label id="Left and Right Menus">
+
+<p>
+The outlook of the directory panels can be changed from
+the <bf/Left/ and <bf/Right/ menus.
+
+<sect2>Listing Mode...<label id="Listing Mode...">
+
+<p>
+The listing mode view is used to display a listing of
+files, there are four different listing modes available:
+<bf/Full/, <bf/Brief/, <bf/Long/ and <bf/User/. The full directory view shows
+the file name, the size of the file and the modification
+time.
+
+The brief view shows only the file name and it has two
+columns (therefore showing twice as many files as other
+views). The long view is similar to the output of <tt/ls -l/
+command. The long view takes the whole screen width.
+
+If you choose the <bf/User/ display format, then you have to
+specify the display format.
+
+The user display format must start with a panel size
+specifier. This may be <tt/half/ or <tt/full/, and they specify
+a half screen panel and a full screen panel respectively.
+
+After the panel size, you may specify the two columns mode
+on the panel, this is done by adding the number <tt/2/ to the
+user format string.
+
+After this you add the name of the fields with an optional
+size specifier. This are the available fields you may
+display:
+
+<descrip>
+<tag/name/ displays the file name.
+<tag/size/ displays the file size.
+<tag/bsize/ is an alternative form of the <bf>size</bf> format. It
+displays the size of the files and for directories it just shows
+<tt/SUB-DIR/ or <tt/UP--DIR/.
+<tag/type/ displays a one character field type. This character
+is a superset of what is displayed by ls with the <em/-F/ flag.
+An asterisk for executable files, a slash for directories,
+an at-sign for links, an equal sign for sockets, a hyphen
+for character devices, a plus sign for block devices, a
+pipe for fifos, a tilde for symbolic links to directories
+and an exclamation mark for stalled symlinks (links that
+point nowhere).
+<tag/mtime/ file's last modification time.
+<tag/atime/ file's last access time.
+<tag/ctime/ file's creation time.
+<tag/perm/ a string representing the current permission bits of
+the file.
+<tag/mode/ an octal value with the current permission bits of
+the file.
+<tag/nlink/ the number of links to the file.
+<tag/ngid/ the GID (numeric).
+<tag/nuid/ the UID (numeric).
+<tag/owner/ the owner of the file.
+<tag/group/ the group of the file.
+<tag/inode/ the inode of the file.
+</descrip>
+
+Also you may use these field names for arranging the
+display:
+
+<descrip>
+<tag/space/ a space in the display format.
+<tag/dot/ a dot in the display format.
+<tag/mark/ An asterisk if the file is tagged, a space if it's not.
+<tag/&verbar;/ This character is used to add a vertical line to the
+display format.
+</descrip>
+
+To force one field to a fixed size (a size specifier), you
+just add a <tt/:/ and then the number of characters you want
+the field to have, if the number is followed by the symbol
+<tt/+/, then the size specifies the minimum field size, if
+the program finds out that there is more space on the
+screen, it will then expand this field.
+
+For example, the <bf/Full/ display corresponds to this format:
+
+<tscreen><verb>
+half type,name,|,size,|,mtime
+</verb></tscreen>
+
+And the <bf/Long/ display corresponds to this format:
+
+<tscreen><verb>
+full perm,space,nlink,space,owner,space,group,space,
+     size,space,mtime,space,name
+</verb></tscreen>
+
+This is a nice user display format:
+
+<tscreen><verb>
+half name,|,size:7,|,type,mode:3
+</verb></tscreen>
+
+Panels may also be set to the following modes:
+
+<descrip>
+<tag/Info/ The info view display information related to the
+currently selected file and if possible information about
+the current file system.
+<tag/Tree/ The tree view is quite similar to the <lnk name="directory
+tree" id="Directory Tree"> feature. See the section about it for more
+information.
+<tag/Quick View/ In this mode, the panel will switch to a
+reduced <lnk name="viewer" id="Internal File Viewer"> that displays the contents of the
+currently selected file, if you select the panel (with the
+tab key or the mouse), you will have access to the usual
+viewer commands.
+</descrip>
+
+<sect2>Sort Order...<label id="Sort Order...">
+
+<p>
+The eight sort orders are by name, by extension, by
+modification time, by access time, and by inode
+information modification time, by size, by inode and
+unsorted. In the Sort order dialog box you can choose the
+sort order and you may also specify if you want to sort in
+reverse order by checking the reverse box.
+
+By default directories are sorted before files but this
+can be changed from the <lnk name="Configuration" id="Configuration">
+(option <em/"Mix all files"/).
+
+<sect2>Filter...<label id="Filter...">
+
+<p>
+The filter command allows you to specify a shell pattern
+(for example <tt/*.tar.gz/) which the files must match to be
+shown. Regardless of the filter pattern, the directories
+and the links to directories are always shown in the
+directory panel.
+
+<sect2>Reread<label id="Reread">
+
+<p>
+The reread command reload the list of files in the
+directory. It is useful if other processes have created or
+removed files. If you have panelized file names in a panel
+this will reload the directory contents and remove the
+panelized information (See the section <lnk name="External panelize" id="External panelize">
+for more information).
+
+<sect1>File Menu<label id="File Menu">
+
+<p>
+The Midnight Commander uses the F1 - F10 keys as keyboard
+shortcuts for commands appearing in the file menu. The
+escape sequences for the Fkeys are terminfo capabilities
+<tt/kf1/ trough <tt/kf10/. On terminals without function key
+support, you can achieve the same functionality by
+pressing the <tt/ESC/ key and then a number in the range 1
+through 9 and 0 (corresponding to F1 to F9 and F10
+respectively).
+
+The File menu has the following commands (keyboard
+shortcuts in parentheses):
+
+<descrip>
+<tag/Help (F1)/ Invokes the built-in hypertext help viewer. Inside the
+<lnk name="help viewer" id="How to use help">, you can use the Tab key to select the next
+link and the Enter key to follow that link. The keys Space
+and Backspace are used to move forward and backward in a
+help page. Press F1 again to get the full list of accepted
+keys.
+<tag/Menu (F2)/ Invoke the <lnk name="user menu" id="Menu File Edit">.
+The user menu provides an easy way
+to provide users with a menu and add extra features to the
+Midnight Commander.
+<tag/View (F3, Shift-F3)/ View the currently selected file.
+By default this invokes
+the <lnk name="Internal File Viewer" id="Internal File Viewer"> but if the option
+<em/Use internal view/ is off, it invokes an external file viewer specified
+by the <tt/PAGER/ environment variable. If <tt/PAGER/ is undefined,
+the <bf/view/ command is invoked. If you use <tt/Shift-F3/
+instead, the viewer will be invoked without doing any
+formatting or pre processing to the file.
+<tag/Filtered View (M-!)/ this command prompts for a command and it's arguments (the
+argument defaults to the currently selected file name),
+the output from such command is shown in the internal file
+viewer.
+<tag/Edit (F4)/ Currently it invokes the <tt/vi/ editor, or the editor
+specified in the <tt/EDITOR/ environment variable, or the
+<lnk name="Internal File Editor" id="Internal File Editor">
+if the use_internal_edit option is on.
+<tag/Copy (F5)/ Pop up an input dialog with destination that defaults to
+the directory in the non-selected panel and copies the
+currently selected file (or the tagged files, if there is
+at least one file tagged) to the directory specified by
+the user in the input dialog. During this process, you can
+press C-c or ESC to abort the operation. For details about
+source mask (which will be usually either * or ^&bslsh;(.*&bslsh;)&dollar;
+depending on setting of Use shell patterns) and possible
+wildcards in the destination see <lnk name="Mask copy/rename" id="Mask Copy/Rename">.
+On some systems, it is possible to do the copy in the background by
+clicking on the background button (or pressing M-b in the dialog
+box). The <lnk name="Background Jobs" id="Background jobs"> command is
+used to control the backgroun process.
+<tag/Link (C-x l)/ Create a hard link to the current file.
+<tag/SymLink (C-x s)/ Create a symbolic link to the current file. To those of
+you who don't know what links are: creating a link to a
+file is a bit like copying the file, but both the source
+filename and the destination filename represent the same
+file image. For example, if you edit one of these files,
+all changes you make will appear in both files. Some
+people call links aliases or shortcuts.
+A hard link appears as a real file. After making it, there
+is no way of telling which one is the original and which
+is the link. If you delete either one of them the other
+one is still intact. It is very difficult to notice that
+the files represent the same image. Use hard links when
+you don't even want to know.
+A symbolic link is a reference to the name of the original
+file. If the original file is deleted the symbolic link is
+useless. It is quite easy to notice that the files
+represent the same image. The Midnight Commander shows an
+<em/@/-sign in front of the file name if it is a symbolic
+link to somewhere (except to directory, where it shows a
+tilde (<em/&tilde;/)). The original file which the link points to is
+shown on mini-status line if the <em/Show mini-status/ option
+is enabled. Use symbolic links when you want to avoid the
+confusion that can be caused by hard links.
+<tag/Edit sYmlink C-x C-s/ Lets you edit the value of the current symbolic
+link (i.e. the absolute/relative path the symlink points to).
+<tag>Rename/Move (F6)</tag> Pop up an input dialog that
+defaults to the directory in
+the non-selected panel and moves the currently selected
+file (or the tagged files if there is at least one tagged
+file) to the directory specified by the user in the input
+dialog. During the process, you can press C-c or ESC to
+abort the operation. For more details look at Copy
+operation above, most of the things are quite similar.
+On some systems, it is possible to do the copy in the background by
+clicking on the background button (or pressing M-b in the dialog
+box). The <lnk name="Background Jobs" id="Background jobs"> command is
+used to control the backgroun process.
+<tag/Mkdir (F7)/ Pop up an input dialog and creates the directory
+specified.
+<tag/Delete (F8)/ Delete the currently selected file or the tagged files in
+the currently selected panel. During the process, you can
+press <tt/C-c/ or <tt/ESC/ to abort the operation.
+<tag/Quick cd (M-c)/ Use the <lnk name="quick cd" id="Quick cd"> command if you have full
+command line and want to cd somewhere.
+<tag/Select group (+)/ This is used to select (tag) a group of files. The
+Midnight Commander will prompt for a regular expression
+describing the group. When <em/Shell Patterns/ are enabled,
+the regular expression is much like the filename globbing
+in the shell (<tt/*/ standing for zero or more characters and <tt/?/
+standing for one character). If <em/Shell Patterns/ is off,
+then the tagging of files is done with normal regular
+expressions (see <bf/ed (1)/).
+To mark directories instead of files, the expression must
+start or end with a <tt>/</tt>.
+<tag/Unselect group (&bslshd;)/ Used for unselecting a group of files.
+This is the opposite of the <em/Select group/ command.
+<tag/Quit (F10, Shift-F10)/ Terminate the Midnight Commander.
+<tt/Shift-F10/ is used when you want to quit and you are using the shell wrapper.
+<tt/Shift-F10/ will not take you to the last directory you
+visited with the Midnight Commander, instead it will stay
+at the directory where you started the Midnight Commander.
+</descrip>
+
+<sect2>Quick cd<label id="Quick cd">
+
+<p>
+This command is useful if you have a full command line and
+want to <lnk name="cd" id="The cd internal command"> somewhere without
+having to yank and paste the command line. This command pops up a
+small dialog,
+where you enter everything you would enter after <tt/cd/ on
+the command line and then you press enter. This features
+all the things that are already in the <lnk name="internal cd
+command" id="The cd internal command">.
+
+<sect1>Command Menu<label id="Command Menu">
+
+<p>
+The <lnk name="Directory tree" id="Directory Tree"> command shows a tree figure of the
+directories.
+
+The <lnk name="Find file" id="Find File"> command allows you to search for a specific
+file. The "Swap panels" command swaps the contents of the
+two directory panels.
+
+The <bf>Panels on/off</bf> command shows the output of the last
+shell command. This works only on <bf/xterm/ and on Linux
+and SCO console.
+
+The <bf/Compare directories (C-x d)/ command compares the
+directory panels with each other. You can then use the
+<bf/Copy (F5)/ command to make the panels identical. There are
+three comparison methods. The quick method compares only file
+size and file date. The thorough method makes a full
+byte-by-byte compare. The thorough method is not available
+if the machine does not support the <bf/mmap(2)/ system call. The
+size-only compare method just compares the file sizes and does not
+check the contents or the date times, it just checks the file size.
+
+The <bf/Command history/ command shows a list of typed
+commands. The selected command is copied to the command
+line. The command history can also be accessed by typing
+<tt/M-p/ or <tt/M-n/.
+
+The <lnk name="Directory hotlist" id="Hotlist"> (C-&bslsh;) command makes changing of the
+current directory to often used directories faster.
+
+The <lnk name="External panelize" id="External panelize"> allows you to execute an external
+program, and make the output of that program the contents
+of the current panel.
+
+<lnk name="Extension file edit" id="Extension File Edit"> command allows you to specify
+programs to executed when you try to execute, view, edit
+and do a bunch of other thing on files with certain
+extensions (filename endings). The <lnk name="Menu file edit" id="Menu File Edit">
+command may be used for editing the user menu (which
+appears by pressing <tt/F2/).
+
+<sect2>Directory Tree<label id="Directory Tree">
+
+<p>
+The Directory Tree command shows a tree figure of the
+directories. You can select a directory from the figure
+and the Midnight Commander will change to that directory.
+
+There are two ways to invoke the tree. The real directory
+tree command is available from Commands menu. The other
+way is to select tree view from the Left or Right menu.
+
+To get rid of long delays the Midnight Commander creates
+the tree figure by scanning only a small subset of all the
+directories. If the directory which you want to see is
+missing, move to its parent directory and press <tt/C-r/ (or
+<tt/F2/).
+
+You can use the following keys:
+
+<lnk name="General movement keys" id="General Movement Keys"> are accepted.
+
+<descrip>
+<tag/Enter/ In the directory tree, exits the directory tree and
+changes to this directory in the current panel. In the
+tree view, changes to this directory in the other panel
+and stays in tree view mode in the current panel.
+<tag/C-r, F2 (Rescan)/ Rescan this directory. Use this when the
+tree figure is out of date: it is missing subdirectories
+or shows some subdirectories which don't exist any more.
+<tag/F3 (Forget)/ Delete this directory from the tree figure.
+Use this to remove clutter from the figure. If you want
+the directory back to the tree figure press <tt/F2/ in its
+parent directory.
+<tag>F4 (Static/Dynamic)</tag> Toggle between the dynamic navigation
+mode (default) and the static navigation mode.
+In the static navigation mode you can use the Up and Down
+keys to select a directory. All known directories are
+shown.
+In the dynamic navigation mode you can use the Up and Down
+keys to select a sibling directory, the Left key to move
+to the parent directory, and the Right key to move to a
+child directory. Only the parent, sibling and children
+directories are shown, others are left out. The tree
+figure changes dynamically as you traverse.
+<tag/F5 (Copy)/ Copy the directory.
+<tag/F6 (RenMov)/ Move the directory.
+<tag/F7 (Mkdir)/ Make a new directory below this directory.
+<tag/F8 (Delete)/ Delete this directory from the file system.
+<tag/C-s, M-s/ Search the next directory matching the search
+string. If there is no such directory these keys will move
+one line down.
+<tag/C-h, Backspace/ Delete the last character of the search
+string.
+<tag/Any other character/ Add the character to the search
+string and move to the next directory which starts with
+these characters. In the tree view you must first activate
+the search mode by pressing <tt/C-s/. The search string is
+shown in the mini status line.
+</descrip>
+
+The following actions are available only in the directory
+tree. They aren't supported in the tree view.
+
+<descrip>
+<tag/F1 (Help)/ Invoke the help viewer and show this section.
+<tag/Esc, F10/ Exit the directory tree. Do not change the
+directory.
+</descrip>
+
+The mouse is supported. A double-click behaves like <tt/Enter/.
+See also the section on <lnk name="mouse support" id="Mouse Support">.
+
+<sect2>Find File<label id="Find File">
+
+<p>
+The Find File feature first asks for the start directory
+for the search and the filename to be searched for. By
+pressing the Tree button you can select the start
+directory from the <lnk name="directory tree" id="Directory Tree"> figure. 
+
+The contents field accepts regular expressions similar to egrep(1). That
+means you have to escape characters with a special meaning to egrep with
+"&bslsh;", e.g. if you search for "strcmp (" you will have to input 
+"strcmp &bslsh;(" (without the double quotes).
+
+You can start the search by pressing the Ok button. During the search you 
+can stop from the Stop button and continue from the Start button.
+
+You can browse the filelist with the up and down arrow
+keys. The <em/Chdir/ button will change to the directory of the
+currently selected file. The <em/Again/ button will ask for the
+parameters for a new search. The <em/Quit/ button quits the
+search operation. The <em/Panelize/ button will place the found
+files to the current directory panel so that you can do
+additional operations on them (view, copy, move, delete
+and so on). After panelizing you can press <tt/C-r/ to return
+to the normal file listing.
+
+It is possible to have a list of directories that the Find File
+command should skip during the search (for example, you may want to
+avoid searches on a CDROM or on a NFS directory that is mounted across
+a slow link).
+
+Directories to be skipped should be set on the variable
+<tt/find_ignore_dirs/ in the  <tt/Misc/ section of your <tt>&tilde;/.mc/ini</tt> file.
+
+Directory components should be separated with a colon, here is an
+example: 
+
+<tscreen><verb>
+[Misc]
+find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
+</verb></tscreen>
+
+You may consider using the <lnk name="External panelize" id="External panelize"> command
+instead. <bf/Find file command/ is for simple queries only,
+while using <bf/External panelize/ you can do as mysterious
+searches as you would like.
+
+<sect2>External panelize<label id="External panelize">
+
+<p>
+The External panelize allows you to execute an external
+program, and make the output of that program the contents
+of the current panel.
+
+For example, if you want to manipulate in one of the
+panels all the symbolic links in the current directory,
+you can use external panelization to run the following
+command:
+
+<tscreen><verb>
+find . -type l -print
+</verb></tscreen>
+
+Upon command completion, the directory contents of the
+panel will no longer be the directory listing of the
+current directory, but all the files that are symbolic
+links.
+
+If you want to panelize all of the files that have been
+downloaded from your ftp server, you can use this awk
+command to extract the file name from the transfer log
+files:
+
+<tscreen><verb>
+awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
+</verb></tscreen>
+
+You may want to save often used panelize commands under a
+descriptive name, so that you can recall them quickly. You
+do this by typing the command on the input line and
+pressing Add new button. Then you enter a name under which
+you want the command to be saved. Next time, you just
+choose that command from the list and do not have to type
+it again.
+
+<sect2>Hotlist<label id="Hotlist">
+
+<p>
+The Directory hotlist command shows the labels of the
+directories in the directory hotlist. The Midnight
+Commander will change to the directory corresponding to
+the selected label. From the hotlist dialog, you can
+remove already created label/directory pairs and add new
+one. For adding you may want to use a standalone Add to
+hotlist command (<tt/C-x h/), which adds the current directory
+into the directory hotlist, as well. The user is prompted
+for a label for the directory.
+
+This makes cd to often used directories faster. You may also
+consider using the <tt/CDPATH/ variable as described in
+<lnk name="internal cd command" id="The cd internal command"> description.
+
+<sect2>Extension File Edit<label id="Extension File Edit">
+
+<p>
+This will invoke your editor on the file <tt>&tilde;/.mc/ext</tt>. The
+format of this file is as follows (the format has changed
+with version 3.0):
+
+All lines starting with <tt/&num;/ or empty lines are thrown away.
+
+Lines starting in the first column should have following
+format:
+
+<tt>keyword/descNL</tt>, i.e. everything after <tt>keyword/</tt> until new
+line is <tt/desc/
+
+<tt/keyword/ can be:
+
+<em/shell/ (desc is then any extension (no wildcards), i.e.
+matches all the files *desc. Example: .tar matches *.tar)
+
+<em/regex/ (desc is a regular expression)
+
+<em/type/ (file matches this if `file &percnt;f` matches regular
+expression desc (the filename: part from `file &percnt;f` islatex cur
+removed))
+
+<em/default/ (matches any file no matter what desc is)
+
+Other lines should start with a space or tab and should be
+of the format:
+
+<tt/keyword=commandNL/ (with no spaces around =), where <tt/keyword/
+should be:
+
+<em/Open/ (if the user presses Enter or doubleclicks it), <em/View/
+(F3), <em/Edit/ (F4), <em/Drop/ (user drops some files on it) or any
+other user defined name (those will be listed in the
+extension dependent pop-up menu). <em/Icon/ name is reserved
+for future use by mc.
+
+<tt/command/ is any one-line shell command, with the simple
+<lnk name="macro substitution" id="Macro Substitution">.
+
+Target are evaluated from top to bottom (order is thus
+important). If some actions are missing, search continues
+as if this target didn't match (i.e. if a file matches the
+first and second entry and View action is missing in the
+first one, then on pressing F3 the View action from the
+second entry will be used. default should catch all the
+actions.
+
+<sect2>Background jobs<label id="Background jobs">
+This lets you control the state of any background Midnight Commander
+process (only copy and move files operations can be done in the
+background).  You can stop, restart and kill a background job from
+here. 
+
+<sect2>Menu File Edit<label id="Menu File Edit">
+
+<p>
+The user menu is a menu of useful actions that can be
+customized by the user. When you access the user menu, the
+file <tt>.mc.menu</tt> from the current directory is used if it exists,
+but only if it is owned by user or root and is not world-writable.
+If no such file found, <tt>&tilde;/.mc/menu</tt> is tried in the same way, 
+and otherwise mc
+uses the default system-wide menu <tt>@prefix@/lib/mc/mc.menu</tt>.
+
+The format of the menu file is very simple. Lines that
+start with anything but space or tab are considered
+entries for the menu (in order to be able to use it like a
+hot key, the first character should be a letter). All the
+lines that start with a space or a tab are the commands
+that will be executed when the entry is selected.
+
+When an option is selected all the command lines of the
+option are copied to a temporary file in the temporary
+directory (usually <tt>/usr/tmp</tt>) and then that file is
+executed. This allows the user to put normal shell
+constructs in the menus. Also simple macro substitution
+takes place before executing the menu code. For more
+information, see <lnk name="macro substitution" id="Macro Substitution">.
+
+Here is a sample mc.menu file:
+
+<tscreen><verb>
+A	Dump the currently selected file
+	od -c %f
+
+B	Edit a bug report and send it to root
+	vi /tmp/mail.$$
+	mail -s "Midnight Commander bug" root &lt; /tmp/mail.$$
+
+M	Read mail
+	emacs -f rmail
+
+N	Read Usenet news
+	emacs -f gnus
+
+H	Call the info hypertext browser
+	info
+
+J	Copy current directory to other panel recursively
+	tar cf - . | (cd %D && tar xvpf -)
+
+K	Make a release of the current subdirectory
+	echo -n "Name of distribution file: "
+	read tar
+	ln -s %d `dirname %d`/$tar 
+	cd ..
+	tar cvhf ${tar}.tar $tar
+
+= f *.tar.gz | f *.tgz & t n
+X       Extract the contents of a compressed tar file
+	tar xzvf %f
+</verb></tscreen>
+
+<bf/Default Conditions/
+
+Each menu entry may be preceded by a condition. The
+condition must start from the first column with a <tt/=/
+character. If the condition is true, the menu entry will
+be the default entry.
+
+<tscreen><verb>
+Condition syntax:
+  <cond>          = <sub-cond>
+  or:		  = <cond> | <cond> ...
+  or:		  = <cond> & <cond> ... 
+</verb></tscreen>
+
+Sub-condition is one of following:
+
+<tscreen><verb>
+f <pattern>	current file matching pattern
+F <pattern>	other file matching pattern
+d <pattern>	current directory matching pattern
+D <pattern>	other directory matching pattern
+t <type>	current file of type
+T <type>	other file of type
+! <sub-cond>	negate the result of sub-condition
+</verb></tscreen>
+
+Pattern is a normal shell pattern or a regular expression,
+according to the shell patterns option. You can override
+the global value of the shell patterns option by writing
+<tt/shell_patterns=x/ on the first line of the menu file
+(where "x" is either 0 or 1).
+
+Type is one or more of the following characters:
+
+<itemize>
+<item><tt/n/ not directory
+<item><tt/r/ regular file
+<item><tt/d/ directory
+<item><tt/l/ link
+<item><tt/c/ char special
+<item><tt/b/ block special
+<item><tt/f/ fifo
+<item><tt/s/ socket
+<item><tt/x/ executable
+<item><tt/t/ tagged
+</itemize>
+
+For example <tt/rlf/ means either regular file, link or fifo.
+The <tt/t/ type is a little special because it acts on the
+panel instead of the file. The condition <tt/=t t/ is true if
+there are tagged files in the current panel and false if
+not.
+
+If the condition starts with <tt/=?/ instead of <tt/=/ a debug
+trace will be shown whenever the value of the condition is
+calculated.
+
+The conditions are calculated from left to right. This
+means
+
+<tscreen><verb>
+	= f *.tar.gz | f *.tgz & t n
+</verb></tscreen>
+
+is calculated as
+
+<tscreen><verb>
+	( (f *.tar.gz) | (f *.tgz) ) & (t n)
+</verb></tscreen>
+
+Here is a sample of the use of conditions:
+
+<tscreen><verb>
+= f *.tar.gz | f *.tgz & t n
+L	List the contents of a compressed tar-archive
+	gzip -cd %f | tar xvf -
+</verb></tscreen>
+
+<bf/Addition Conditions/
+
+If the condition begins with <tt/+/ (or <tt/+?/) instead of <tt/=/
+(or <tt/=?/) it is an addition condition. If the condition is
+true the menu entry will be included in the menu. If the
+condition is false the menu entry will not be included in
+the menu.
+
+You can combine default and addition conditions by
+starting condition with <tt/+=/ or <tt/=+/ (or <tt/+=?/ or <tt/=+?/ if
+you want debug trace). If you want to use two different
+conditions, one for adding and another for defaulting, you
+can precede a menu entry with two condition lines, one
+starting with <tt/+/ and another starting with <tt/=/.
+
+Comments are started with <tt/&num;/. The additional comment
+lines must start with <tt/&num;/, space or tab.
+
+<sect1>Options Menu<label id="Options Menu">
+
+<p>
+The <lnk name="Configuration" id="Configuration"> command pops up a dialog from which you
+can change most of settings of the Midnight Commander.
+
+The <lnk name="Display bits" id="Display bits"> command pops up a dialog from which you
+may select which characters is your terminal able to
+display.
+
+The <lnk name="Confirmation" id="Confirmation"> command pops up a dialog from which you
+specify which actions you want to confirm.
+
+The <lnk name="Learn keys" id="Learn keys"> command pops up a dialog from which you
+test some keys which are not working on some terminals and
+you may fix them.
+
+The <lnk name="Virtual FS" id="Virtual FS"> command pops up a dialog from which you
+specify some VFS related options.
+
+The <lnk name="Layout" id="Layout"> command pops up a dialog from which you specify
+a bunch of options how mc looks like on the screen.
+
+The <lnk name="Save setup" id="Save Setup"> command saves the current settings of the
+Left, Right and Options menus. A small number of other
+settings is saved, too.
+
+<sect2>Configuration<label id="Configuration">
+
+<p>
+The program has some options that may be toggled on and
+off from the Configuration dialog. Options are enabled if
+they have an asterisk or "x" in front of them. These
+options are divided into three groups: Screen Colors,
+Panel Options and Other Options.
+
+<bf/Screen Colors/ You can select whether your display supports color or not.
+Normally this information is in the terminfo database. If
+you want to know how to change individual colors see the
+section on <lnk name="Colors" id="Colors">.
+
+<bf/Panel Options/
+
+<descrip>
+<tag/Show Backup Files/ By default the Midnight Commander
+doesn't show files ending in '&tilde;' (like GNU's <tt/ls/ option
+<tt/-B/).
+<tag/Show Hidden Files/ By default the Midnight Commander will
+show all files that start with a dot (like <tt/ls -a/).
+<tag/Mark moves down/ By default when you mark a file (with
+either <tt/C-t/ or the Insert key) the selection bar will move
+down.
+<tag/Show Mini-Status/ If enabled, show one line of status
+information at the bottom of the panels about the
+currently selected item.
+<tag/Mix all files/ When this option is enabled, all files and
+directories are shown mixed together. If the option is
+off, directories (and links to directories) are shown at
+the beginning of the listing, and other files afterwards.
+<tag/Fast directory reload/ This option is off by default. If
+you activate the fast reload, the Midnight Commander will
+use a trick to determine if the directory contents have
+changed. The trick is to reload the directory only if the
+i-node of the directory has changed; this means that
+reloads only happen when files are created or deleted. If
+what changes is the i-node for a file in the directory
+(file size changes, mode or owner changes, etc) the
+display is not updated. In these cases, if you have the
+option on, you have to rescan the directory manually (with
+<tt/C-r/).
+</descrip>
+
+<bf/Other Options/
+
+<descrip>
+<tag/Verbose operation/ This toggles whether the file Copy,
+Rename and Delete operations are verbose (i.e. display a
+dialog box for each operation). If you have a slow
+terminal, you may wish to disable the verbose operation.
+It is automatically turned off if the speed of your
+terminal is less than 9600 bps.
+<tag/Pause after run/ After executing your commands, the
+Midnight Commander can pause, so that you can examine the
+output of the command. There are three possible settings
+for this variable: <em/Never/ Means that you do not want to see
+the output of your command. If you are using the Linux
+console or an xterm, you will be able to see the output of
+the command by typing <tt/C-o/. <em/"On dumb terminals"/ You will
+get the pause message on terminals that are not capable of
+showing the output of the last command executed (any
+terminal that is not an <bf/xterm/ or the Linux console).
+<em/Always/ The program will pause after executing all of your
+commands.
+<tag/Shell Patterns/ By default the Select, Unselect and Filter
+commands will use shell-like regular expressions. The
+following conversions are performed to achieve this: the
+'*' is replaced by '.*' (zero or more characters); the '?'
+is replaced by '.' (exactly one character) and '.' by the
+literal dot. If the option is disabled, then the regular
+expressions are the ones described in <bf/ed(1)/.
+<tag/Auto Save Setup/ If this option is enabled, when you exit
+the Midnight Commander the configurable options of the
+Midnight Commander are saved in the <tt>&tilde;/.mc/ini</tt> file.
+<tag/Auto menus/ If this option is enabled, the user menu will
+be invoked at startup. Useful for building menus for
+non-unixers.
+<tag/Use internal editor/ If this option is enabled, the
+built-in file editor is used to edit files. If the option
+is disabled, the editor specified in the <tt/EDITOR/ environment
+variable is used. If no editor is specified, <bf/vi/
+is used. See the section on the <lnk name="internal file
+editor" id="Internal File Editor">.
+<tag/Use internal viewer/ If this option is enabled, the
+built-in file viewer is used to view files. If the option
+is disabled, the pager specified in the <tt/PAGER/ environment
+variable is used. If no pager is specified, the <bf/view/
+command is used. See the section on the <lnk name="internal file
+viewer" id="Internal File Viewer">.
+<tag/Confirm Delete/ This option is toggled on by default, and
+will cause the Midnight Commander to ask for confirmation
+when deleting a single file.
+<tag/Cd follows links/ This option, if set, causes the Midnight
+Commander to follow the logical chain of directories when
+changing current directory either in the panels, or using
+the cd command. This is the default behavior of bash.
+When unset, the Midnight Commander follows the real
+directory structure, so <tt/cd ../ if you've entered that
+directory through a link will move you to the current
+directory's real parent and not to the directory where the
+link was present.
+</descrip>
+
+<sect2>Display bits<label id="Display bits">
+
+<p>
+This is used to configure the range of visible characters
+on the screen. This setting may be 7-bits if your
+terminal/curses supports only seven output bits,
+ISO-8859-1 displays all the characters in the ISO-8859-1
+map and full 8 bits is for those terminals that can
+display full 8 bit characters.
+
+<sect2>Confirmation<label id="Confirmation">
+
+<p>
+In this menu you configure the confirmation options for
+file deletion, overwriting, execution by pressing enter
+and quitting the program.
+
+<sect2>Learn keys<label id="Learn keys">
+
+<p>
+This dialog lets you test if your keys F1-F20, Home, End,
+etc. work properly on your terminal. They often don't,
+since many terminal databases are broken.
+
+You can move around with the <bf/Tab/ key, with the <tt/vi/ moving
+keys ('h' left, 'j' down, 'k' up and 'l' right) and after
+you press any arrow key once (this will mark it OK), then
+you can use that key as well.
+
+You test them just by pressing each of them. As soon as
+you press a key and the key works properly, OK should
+appear next to the name of that key. Once a key is marked
+OK it starts to work as usually, e.g. F1 for the first
+time will just check that F1 works OK, but from that time
+on it will show help. The same applies to the arrow keys.
+Tab key should be working always.
+
+If some keys do not work properly, then you won't see OK
+after the key name after you have pressed that key. You
+may then want to fix it. You do it by pressing the button
+of that key (either by mouse or using Tab and Enter). Then
+a red message will appear and you will be asked to type
+that key. If you want to abort this, press just Esc and
+wait until the message disappears. Otherwise type the key
+you're asked to type and also wait until the dialog
+disappears.
+
+When you finish with all the keys, you may want either to
+Save your key fixes into your <tt>&tilde;/.mc/ini</tt> file into the
+&lsqb;terminal:TERM&rsqb; section (where <tt/TERM/ is the name of your
+current terminal) or to discard them. If all your keys
+were working properly and you had not to fix any key, then
+(of course) no saving will occur.
+
+<sect2>Virtual FS<label id="Virtual FS">
+
+<p>
+This option gives you control over the settings of the
+<lnk name="Virtual File System" id="Virtual File System"> information cache.
+
+The Midnight Commander keeps in memory the information
+related to some of the virtual file systems to speed up
+the access to the files in the file system. Since the
+information that must be kept may be large (for example,
+compressed tar files may be kept in RAM for faster
+access), you may want to tune the parameters of the cached
+information to decrease your memory usage or to maximize
+the speed of access to frequently used file systems.
+
+The Tar file system is quite clever about how it handles
+tar files: it just loads the directory entries and when it
+needs to use the information contained in the tar file, it
+goes and grab it.
+
+In the wild, tar files are usually kept compressed (plain
+tar files are species in extinction), and because of the
+nature of those files (the directory entries for the tar
+files is not there waiting for us to be loaded), the tar
+file system has two choices: load the complete,
+uncompressed tar file into memory or uncompress the file
+in the disk in a temporary location and then access the
+uncompressed file as a regular tar file.
+
+In this dialog box you tell the Midnight Commander which
+sizes for compressed tar files you will tolerate to load
+into your precious memory. The default setting is set to
+one megabyte, this means that compressed tar files whose
+size is at most one megabyte will be loaded into core,
+otherwise a temporary uncompressed tar file will be
+created to access the contents (all of this is transparent
+to the user).
+
+The program will let you add a suffix to specify the units
+of the number you typed in, use 'k' for kilobyte and 'm'
+for megabyte. Our routine does not accept floating point
+numbers, so you can't use ".5 m" to specify 512 kilobytes,
+you will have to use "512 k" instead.
+
+Now, since we all love to browse files and tar files all
+over the disk, it's common that you will leave a tar file
+and the re-enter it later. Since uncompression is slow,
+the Midnight Commander will cache the information in
+memory for a limited amount of time, after you hit the
+timeout, all of the memory resources associated with the
+file system will be freed. The default timeout is set to
+one minute.
+
+<sect2>Layout<label id="Layout">
+
+<p>
+The layout dialog gives you a possibility to change the
+general layout of screen. You can specify whether the
+menubar, the command prompt, the hintbar and the function
+keybar are visible. On the Linux or SCO console you can specify
+how many lines are shown in the output window.
+
+The rest of the screen area is used for the two directory
+panels. You can specify whether the area is split to the
+panels in vertical or horizontal direction. The split can
+be equal or you can specify an unequal split.
+
+<sect2>Save Setup<label id="Save Setup">
+
+<p>
+At startup the Midnight Commander will try to load
+initialization information from the <tt>&tilde;/.mc/ini</tt> file. If
+this file doesn't exist, it will load the information from
+the system-wide configuration file, located in
+@prefix@/lib/mc/mc.ini. If the system-wide configuration
+file doesn't exist, MC uses the default settings.
+
+The <em/Save Setup/ command creates the <tt>&tilde;/.mc/ini</tt> file by
+saving the current settings of the <lnk name="Left, Right" id="Left and Right Menus"> and
+<lnk name="Options" id="Options Menu"> menus.
+
+If you activate the <em/auto save setup/ option, MC will always
+save the current settings when exiting.
+
+There also exist settings which can't be changed from the
+menus. To change these settings you have to edit the setup
+file with your favorite editor. See the section on <lnk name="Special
+Settings" id="Special Settings"> for more information.
+
+<sect>Executing operating system commands<label id="Executing operating system commands">
+
+<p>
+You may execute commands by typing them directly in the
+Midnight Commander's input line, or by selecting the
+program you want to execute with the selection bar in one
+of the panels and hitting <tt/Enter/.
+
+If you press Enter over a file that is not executable, the
+Midnight Commander checks the extension of the selected
+file against the extensions in the <lnk name="Extensions File" id="Extension File Edit">. If a
+match is found then the code associated with that
+extension is executed. A very simple <lnk name="macro expansion" id="Macro Substitution">
+takes place before executing the command.
+
+<sect1>The cd internal command<label id="The cd internal command">
+
+<p>
+The <em/cd/ command is interpreted by the Midnight Commander,
+it is not passed to the command shell for execution. Thus
+it may not handle all of the nice macro expansion and
+substitution that your shell does, although it does some of
+them:
+
+<em/Tilde substitution/ The (&tilde;) will be substituted with your
+home directory, if you append a username after the tilde,
+then it will be substituted with the login directory of
+the the specified user.
+
+For example, &tilde;guest is the home directory for the user
+guest, while &tilde;/guest is the directory guest in your home
+directory.
+
+<em/Previous directory/ You can jump to the directory you were
+previously by using the special directory name '-' like
+this: <tt/cd -/
+
+<em/CDPATH directories/ If the directory specified to the <tt/cd /
+command is not in the current directory, then The Midnight
+Commander uses the value in the environment variable
+<tt/CDPATH/ to search for the directory in any of the named
+directories.
+
+For example you could set your <tt/CDPATH/ variable to
+&tilde;/src:/usr/src, allowing you to change your directory to
+any of the directories inside the &tilde;/src and /usr/src
+directories, from any place in the file system by using
+it's relative name (for example cd linux could take you to
+/usr/src/linux).
+
+<sect1>Macro Substitution<label id="Macro Substitution">
+
+<p>
+When accessing a <lnk name="user menu" id="Menu File Edit"> or executing an
+<lnk name="extension dependent command" id="Extension File Edit">
+or running a command from the command
+line input, a simple macro substitution takes place.
+
+The macros are:
+
+<em/"&percnt;f"/ The current file name.
+
+<em/"&percnt;d"/ The current directory name.
+
+<em/"&percnt;F"/ The current file in the unselected panel.
+
+<em/"&percnt;D"/ The directory name of the unselected panel.
+
+<em/"&percnt;t"/ The currently tagged files.
+
+<em/"&percnt;T"/ The tagged files in the unselected panel.
+
+<descrip>
+
+<tag/"&percnt;u"/ and <em/"&percnt;U"/ Similar to the &percnt;t and &percnt;T macros, but in
+addition the files are untagged. You can use this macro
+only once per menu file entry or extension file entry,
+because next time there will be no tagged files.
+
+<tag/"&percnt;s"/ and <em/"&percnt;S"/ The selected files: The tagged files if
+there are any. Otherwise the current file.
+
+<tag/"&percnt;q"/ Dropped files. In all places except in the Drop
+action of the <lnk name="mc.ext file" id="Extension File Edit">, this will become a null
+string, in the Drop action it will be replaced with a
+space separated list of files that were dropped on the
+file.
+
+<tag/"&percnt;cd"/ This is a special macro that is used to change the
+current directory to the directory specified in front of
+it. This is used primarily as an interface to the <lnk name="Virtual
+File System" id="Virtual File System">.
+
+<tag/"&percnt;view"/ This macro is used to invoke the internal viewer.
+This macro can be used alone, or with arguments. If you
+pass any arguments to this macro, they should be enclosed
+in brackets. The arguments are: <em/ascii/ to force the viewer
+into ascii mode; <em/hex/ to force the viewer into hex mode;
+<em/nroff/ to tell the viewer that it should interpret the bold
+and underline sequences of nroff; <em/unformated/ to tell the
+viewer to not interpret nroff commands for making the text
+bold or underlined.
+
+<tag/"&percnt;&percnt;"/ The &percnt; character
+
+<tag/"&percnt;{some text}"/ Prompt for the substitution. An input box
+is shown and the text inside the braces is used as a
+prompt. The macro is substituted by the text typed by the
+user. The user can press ESC or F10 to cancel. This macro
+doesn't work on the command line yet.
+
+</descrip>
+
+<sect1>The subshell support<label id="The subshell support">
+
+<p>
+The subshell support is a compile time option, that works
+with the shells: <tt/bash/, <tt/tcsh/ and <tt/zsh/.
+
+When the subshell code is activated the Midnight Commander
+will spawn a concurrent copy of your shell (the one
+defined in the <tt/SHELL/ variable and if it is not defined,
+then the one in the /etc/passwd file) and run it in a
+pseudo terminal, instead of invoking a new shell each time
+you execute a command, the command will be passed to the
+subshell as if you had typed it. This also allows you to
+change the environment variables, use shell functions and
+define aliases that are valid until you quit the Midnight
+Commander.
+
+If you are using <tt/bash/ you can specify startup
+commands for the subshell in your <tt>&tilde;/.mc/bashrc</tt> file and
+special keyboard maps in the <tt>&tilde;/.mc/inputrc</tt> file.
+<tt/tcsh/ users may specify startup commands in the
+<tt>&tilde;/.mc/tcshrc</tt> file.
+
+When the subshell code is used, you can suspend
+applications at any time with the sequence C-o and jump
+back to the Midnight Commander, if you interrupt an
+application, you will not be able to run other external
+commands until you quit the application you interrupted.
+
+An extra added feature of using the subshell is that the
+prompt displayed by the Midnight Commander is the same
+prompt that you are currently using in your shell.
+
+The <lnk name="Options" id="Options"> section has more
+information on how you can control the subshell code.
+
+<sect1>Controlling Midnight Commander<label id="Controlling Midnight Commander">
+
+<p>
+The Midnight Commander defines an environment variable
+<tt/MC_CONTROL_FILE/. The commands executed by MC may give
+instructions to MC by writing to the file specified by
+this variable. This is only available if you compiled your
+copy of the Midnight Commander with the <tt/WANT_PARSE/ option.
+
+The following instructions are supported.
+
+<descrip>
+<tag/clear_tags/ Clear all tags.
+<tag/tag &lt;filename&gt;/ Tag specified file.
+<tag/untag &lt;filename&gt;/ Untag specified file.
+<tag/select &lt;filename&gt;/ Move pointer to file.
+<tag/change_panel/ Switch between panels.
+<tag/cd &lt;path&gt;/ Change directory.
+</descrip>
+
+If the first letter of the instruction is in lower case it
+operates on the current panel. If the letter is in upper
+case the instruction operates on the other panel. The
+additional letters must be in lower case. Instructions
+must be separated by exactly one space, tab or newline.
+The instructions don't work in the Info, Tree and Quick
+views. The first error causes the rest to be ignored.
+
+<sect>Chmod<label id="Chmod">
+
+<p>
+The Chmod window is used to change the attribute bits in a
+group of files and directories. It can be invoked with the
+<tt/C-x c/ key combination.
+
+The Chmod window has two parts - <em/Permissions/ and <em/File/.
+
+In the File section are displayed the name of the file or
+directory and its permissions in octal form, as well as
+its owner and group.
+
+In the Permissions section there is a set of check buttons
+which correspond to the file attribute bits. As you change
+the attribute bits, you can see the octal value change in
+the File section.
+
+To move between the widgets (buttons and check buttons)
+use the <tt/arrow keys/ or the <tt/Tab/ key. To change the state of
+the check buttons or to select a button use <tt/Space/. You can
+also use the hotkeys on the buttons to quickly activate
+that selection (they are the highlit letters on the
+buttons).
+
+To set the attribute bits, use the <tt/Enter/ key.
+
+When working with a group of files or directories, you
+just click on the bits you want to set or clear. Once you
+have selected the bits you want to change, you select one
+of the action buttons (Set marked or Clear marked).
+
+Finally, to set the attributes exactly to those specified,
+you can use the <bf/&lsqb;Set all&rsqb;/ button, which will act on all
+the tagged files.
+
+<bf/&lsqb;Marked all&rsqb;/ set only marked attributes to all selected
+files
+
+<bf/&lsqb;Set marked&rsqb;/ set marked bits in attributes of all selected
+files
+
+<bf/&lsqb;Clean marked&rsqb;/ clear marked bits in attributes of all
+selected files
+
+<bf/&lsqb;Set&rsqb;/ set the attributes of one file
+
+<bf/&lsqb;Cancel&rsqb;/ cancel the Chmod command
+
+<sect>Chown<label id="Chown">
+
+<p>
+The Chown command is used to change the owner/group of a
+file. The hot key for this command is <tt/C-x o/.
+
+<sect>File Operations<label id="File Operations">
+
+<p>
+When you copy, move or delete files the Midnight Commander
+shows the file operations dialog. It shows the files
+currently being operated on and there are at most three
+progress bars. The file bar tells how big part of the
+current file has been copied so far. The count bar tells
+how many of tagged files have been handled so far. The
+bytes bar tells how big part of total size of the tagged
+files has been handled so far. If the <em/verbose/ option is
+off the file and bytes bars are not shown.
+
+There are two buttons at the bottom of the dialog.
+Pressing the <bf/Skip/ button will skip the rest of the current
+file. Pressing the <bf/Abort/ button will abort the whole
+operation, the rest of the files are skipped.
+
+There are three other dialogs which you can run into
+during the file operations.
+
+The error dialog informs about error conditions and has
+three choices. Normally you select either the <bf/Skip/ button
+to skip the file or the <bf/Abort/ button to abort the
+operation altogether. You can also select the <bf/Retry/ button
+if you fixed the problem from another terminal.
+
+The replace dialog is shown when you attempt to copy or
+move a file on the top of an existing file. The dialog
+shows the dates and sizes of the both files. Press the <bf/Yes/
+button to overwrite the file, the <bf/No/ button to skip the
+file, the <bf/alL/ button to overwrite all the files, the <bf/nonE/
+button to never overwrite and the <bf/Update/ button to
+overwrite if the source file is newer than the target
+file. You can abort the whole operation by pressing the
+<bf/Abort/ button.
+
+The recursive delete dialog is shown when you try to
+delete a directory which is not empty. Press the <bf/Yes/
+button to delete the directory recursively, the <bf/No/ button
+to skip the directory, the <bf/alL/ button to delete all the
+directories and the <bf/nonE/ button to skip all the non-empty
+directories. You can abort the whole operation by pressing
+the <bf/Abort/ button.
+
+If you have tagged files and perform an operation on them
+only the files on which the operation succeeded are
+untagged. Failed and skipped files are left tagged.
+
+<sect>Mask Copy/Rename<label id="Mask Copy/Rename">
+
+<p>
+The copy/move operations lets you translate the names of
+files in an easy way. To do it, you have to specify the
+correct source mask and usually in the trailing part of
+the destination specify some wildcards. All the files
+matching the source mask are copied/renamed according to
+the target mask. If there are tagged files, only the
+tagged files matching the source mask are renamed.
+
+There are other option which you can set:
+
+<descrip>
+<tag/Follow links/ tells whether make the symlinks and
+hardlinks in the source directory (recursively in subdirectories) 
+new links in the target directory or whether would you like
+to copy their content.
+
+<tag/Stable symlinks/ commands Midnight Commander, that it should
+change symlinks in the target, so that they'll point to the same
+location as it did before. With absolute symbolic links this does
+nothing, but if you have a relative one, it will recompute its
+value, adding necessary ../ and other directory parts and
+making the value as short as possible (most modern filesystems
+keep short symlinks inside inodes and thus don't waste much disk space).
+
+<tag/Dive into subdirs/ tells what to do if in the target
+directory exists a directory with the same name as the
+file/directory being copied. The default action is to copy
+it into that directory, by disabling this you can copy a
+directory's content into that directory. Perhaps an
+example will help:
+
+You want to copy content of a directory foo to /bla/foo,
+which is an already existing directory. Normally (when
+Dive is set), mc would copy the content into /bla/foo/foo,
+because the directory already exists. By disabling this
+option you will copy it exactly into /bla/foo.
+
+<tag/Preserve attributes/ tells whether to preserve the 
+original files' permissions, timestamps and if you are
+root whether to preserve the original files' UID and GID. 
+If this option is not set the current value of the umask 
+will be respected.
+
+<tag/Use shell patterns on/
+
+When the shell patterns option is on you can use the '*'
+and '?' wildcards in the source mask. They work like they
+do in the shell. In the target mask only the '*' and
+'&bslsh;&lt;digit&gt;' wildcards are allowed. The first '*' wildcard in
+the target mask corresponds to the first wildcard group in
+the source mask, the second '*' corresponds to the second
+group and so on. The '&bslsh;1' wildcard corresponds to the
+first wildcard group in the source mask, the '&bslsh;2' wildcard
+corresponds to the second group and so on all the way up
+to '&bslsh;9'. The '&bslsh;0' wildcard is the whole filename of the
+source file.
+
+Two examples:
+
+If the source mask is "*.tar.gz", the destination is
+"/bla/*.tgz" and the file to be copied is "foo.tar.gz",
+the copy will be "foo.tgz" in "/bla".
+
+Let's suppose you want to swap basename and extension so
+that "file.c" will become "c.file" and so on. The source
+mask for this is "*.*" and the destination is "&bslsh;2.&bslsh;1".
+
+<tag/Use shell patterns off/
+
+When the shell patterns option is off the MC doesn't do
+automatic grouping anymore. You must use '&bslsh;(...&bslsh;)'
+expressions in the source mask to specify meaning for the
+wildcards in the target mask. This is more flexible but
+also requires more typing. Otherwise target masks are
+similar to the situation when the shell patterns option is
+on.
+
+Two examples:
+
+If the source mask is "^&bslsh;(.*&bslsh;)&bslsh;.tar&bslsh;.gz&dollar;", the destination
+is "/bla/*.tgz" and the file to be copied is "foo.tar.gz",
+the copy will be "/bla/foo.tgz".
+
+Let's suppose you want to swap basename and extension so
+that "file.c" will become "c.file" and so on. The source
+mask for this is "^&bslsh;(.*&bslsh;)&bslsh;.&bslsh;(.*&bslsh;)&dollar;" and the destination is
+"&bslsh;2.&bslsh;1".
+
+<tag/Case Conversions/
+
+You can also change the case of the filenames. If you use
+'&bslsh;u' or '&bslsh;l' in the target mask the next character will be
+converted to uppercase or lowercase correspondingly.
+
+If you use '&bslsh;U' or '&bslsh;L' in the target mask the next
+characters will be converted to uppercase or lowercase
+correspondingly up to the next '&bslsh;E' or next '&bslsh;U', '&bslsh;L' or
+the end of the file name.
+
+The '&bslsh;u' and '&bslsh;l' are stronger than '&bslsh;U' and '&bslsh;L'.
+
+For example, if the source mask is '*' (shell patterns on)
+or '^&bslsh;(.*&bslsh;)&dollar;' (shell patterns off) and the target mask is
+'&bslsh;L&bslsh;u*' the file names will be converted to have initial
+upper case and otherwise lower case.
+
+</descrip>
+
+You can also use '&bslsh;' as a quote character. For example,
+'&bslsh;&bslsh;' is a backslash and '&bslsh;*' is an asterisk.
+
+<sect>Internal File Viewer<label id="Internal File Viewer">
+
+<p>
+The internal file viewer provides two display modes: ASCII
+and hex. To toggle between modes, use the F4 key. If you
+have the GNU gzip program installed, it will be used to
+automatically decompress the files on demand.
+
+The viewer will try to use the best method provided by
+your system or the file type to display the information.
+The internal file viewer will interpret some string
+sequences to set the bold and underline attributes, thus
+making a pretty display of your files.
+
+When in hex mode, the search function accepts text in
+quotes as well as hexadecimal constants.
+
+You can mix quoted text with constants like this: <tt/"String"
+0xFE 0xBB "more text"/. Text between constants and quoted
+text is just ignored.
+
+Some internal details about the viewer: On systems that
+provide the <bf/mmap(2)/ system call, the program maps the file
+instead of loading it; if the system does not provide the
+<bf/mmap(2)/ system call or the file matches an action that
+requires a filter, then the viewer will use it's growing
+buffers, thus loading only those parts of the file that
+you actually access (this includes compressed files).
+
+Here is a listing of the actions associated with each key
+that the Midnight Commander handles in the internal file
+viewer.
+
+<descrip>
+<tag/F1/ Invoke the builtin hypertext help viewer.
+<tag/F2/ Toggle the wrap mode.
+<tag/F4/ Toggle the hex mode.
+<tag/F5/ Goto line.  This will prompt you for a line and will display
+that line.
+<tag>F6, /</tag> Regular expression search.
+<tag/?/ Reverse regular expression search.
+<tag/F7/ Normal search / hex mode search.
+<tag/C-s/ Start normal search if there was no previous search expression else
+find next match.
+<tag/C-r/ Start reverse search if there was no previous search expression else
+find next match.
+<tag/n/ Find next match.
+<tag/F8/ Toggle Raw/Parsed mode: This will show the file as
+found on disk or if a processing filter has been specified
+in the mc.ext file, then the output from the filter.
+Current mode is always the other than written on the
+button label, since on the button is the mode which you
+enter by that key.
+<tag/F9/ Toggle the format/unformat mode: when format mode is on
+the viewer will interpret some string sequences to show
+bold and underline with different colors. Also, on button
+label is the other mode than current.
+<tag/F10, Esc/ Exit the internal file viewer.
+<tag/next-page, space, C-v/ Scroll one page forward.
+<tag/prev-page, M-v, C-b, backspace/ Scroll one page backward.
+<tag/down-key/ Scroll one line forward.
+<tag/up-key/ Scroll one line backward.
+<tag/C-l/ Refresh the screen.
+<tag/!/ Spawn a shell in the currently working directory.
+<tag/&lsqb;n&rsqb m/ Set the mark n.
+<tag/&lsqb;n&rsqb r/ Jump to the mark n.
+<tag/C-f/ Jump to the next file.
+<tag/C-b/ Jump to the previous file.
+<tag/M-r/ Toggle the ruler.
+</descrip>
+
+It's possible to instruct the file viewer how to display a
+file, look at the <lnk name="Extension File Edit section" id="Extension File Edit">
+
+<sect>Internal File Editor<label id="Internal File Editor">
+
+<p>
+The internal file editor provides most of the features of
+common full screen editors. It is invoked using <bf>F4</bf> provided
+the <bf>use_internal_edit</bf> option is set in the initialization file. It has an
+extensible file size limit of sixteen megabytes and edits binary files
+flawlessly. The features it presently supports are: Block
+copy, move, delete, cut, paste; <bf>key for key undo</bf>; pull-down
+menus; file insertion; <bf>macro definition</bf>; <bf>regular expression</bf>
+search and replace (and our own scanf-printf search and
+replace); <bf>shift-arrow MSW-MAC text highlighting</bf> (for the
+linux console only); insert-overwrite toggle; word-wrap; a variety of
+tabbing options; and an option
+to pipe text blocks through shell commands like indent and ispell.
+
+<p>
+The editor is very easy to use and requires no tutoring.
+To see what keys do what, just consult the appropriate
+pull-down menu. Other keys are: Shift movement
+keys do text highlighting. <bf>Ctrl-Ins</bf> copies to the file
+<bf>cedit/cooledit.clip</bf> and <bf>Shift-Ins</bf>
+pastes from <bf>cedit/cooledit.clip</bf>.
+<bf>Shift-Del</bf> cuts to <bf>cedit/cooledit.clip</bf>, and
+<bf>Ctrl-Del</bf> deletes highlighted text (all Linux console only).
+The completion key also does a Return
+without an automatic indent. Mouse highlighting also works, and you
+can override the mouse as usual by holding down the shift key
+while dragging the mouse to let normal terminal mouse highlighting
+work.
+
+<p>
+You can also enable rudimentary Emacs key binding support
+by adding the line
+<tscreen><verb>
+    edit_key_emulation=1
+</verb></tscreen>
+in your <tt>&tilde;/.mc/ini</tt> file. A zero value is for normal
+keys.
+
+<p>
+To define a macro, press <bf/Ctrl-R/ and then type out the key
+strokes you want to be executed. Press <bf/Ctrl-R/ again when
+finished. You can then assign the macro to any key you like
+by pressing that key. The macro is executed when you
+press <bf>Ctrl-A</bf> and then the assigned key. The macro is also
+executed if you press Meta, Ctrl, or Esc and the assigned
+key, provided that the key is not used for any other
+function. Once defined, the macro commands go into the
+file <bf>cedit/cooledit.macros</bf> in your home directory.
+You can delete a macro by deleting the appropriate line in
+this file.
+
+<p>
+<bf>F19</bf> will format C code when it is highlighted
+and <bf>C-p</bf> will do spell checks. M-t will also
+run the <bf>sort</bf> shell command. To see how
+to set this up, look at the <bf>mcedit.1</bf>
+man page.
+
+<p>
+You can use scanf search and replace to search and replace 
+a C <bf>format string</bf>. First take a look at the <bf>sscanf</bf> 
+and <bf>sprintf</bf> man pages to see what a <bf>format string</bf> 
+is and how it works. An example is as follows: Suppose I want 
+to replace all occurences of say, an open bracket, three 
+comma seperated numbers, and a close bracket, with the 
+word &dquot;apples&dquot;, the third number, the word 
+&dquot;oranges&dquot; and then the second number, I would 
+fill in the <bf>Replace</bf> dialog 
+box as follows:
+
+<p>
+<tscreen><verb>
+ Enter search string
+(%d,%d,%d)
+ Enter replace string
+apples %d oranges %d
+ Enter replacement argument order
+3,2
+</verb></tscreen>
+
+<p>
+The last line specifies that the third and then the second
+number are to be used in place of the first and second.
+
+<p>
+It is advisable to use this feature with <bf/Prompt on replace/
+on, because a match is thought to be found whenever the number
+of arguments found matches the number given, which is not always
+a real match. Scanf also treats whitespace as being elastic.
+Note that the scanf format <bf>&percnt;&lsqb;</bf> is very useful for
+scanning strings, and whitespace.
+
+<p>
+The editor also displays non-us characters (160+). When editing
+binary files, you should set <bf>display bits</bf> to 7 bits in the
+options menu to keep the spacing clean.
+
+<p>
+See also the <bf>mcedit.1</bf> man page for lots more information.
+A variety of tabbing and indenting options are available which
+are described in this man page.
+
+<sect>Completion<label id="Completion">
+
+<p>
+Let the Midnight Commander type for you.
+
+Attempt to perform completion on the text before current
+position. MC attempts completion treating the text as
+variable (if the text begins with <bf/&dollar;/ ), username (if the
+text begins with <bf/&tilde;/ ), hostname (if the text begins with <bf/@/)
+or command (if you are on the command line in the
+position where you might type a command, possible
+completions then include shell reserved words and shell
+builtin commands as well) in turn. If none of these
+produces a match, filename completion is attempted.
+
+Filename, username, variable and hostname completion works
+on all input lines, command completion is command line
+specific. If the completion is ambiguous (there are more
+different possibilities), MC beeps and the following
+action depends on the setting of the <em/show_all_if_ambiguous/
+<lnk name="variable" id="Special Settings">
+in the Initialization file. If it is nonzero, a
+list of all possibilities pops up next to the current
+position and you can select with the arrow keys and <tt/Enter/
+the correct entry. You can also type the first letters in
+which the possibilities differ to move to a subset of all
+possibilities and complete as much as possible. If you
+press <tt/M-Tab/ again, only the subset will be shown in the
+listbox, otherwise the first item which matches all the
+previous characters will be highlighted. As soon as there
+is no ambiguity, dialog disappears, but you can hide it by
+canceling keys <tt/Esc,/ <tt/F10/ and left and right arrow keys. If
+<em/show_all_if_ambiguous/
+<lnk name="variable" id="Special Settings"> is set to zero, the dialog pops up
+only if you press <tt/M-Tab/ for the second time, for the first
+time MC just beeps.
+
+<sect>Virtual File System<label id="Virtual File System">
+
+<p>
+The Midnight Commander is provided with a code layer to
+access the file system; this code layer is known as the
+virtual file system switch. The virtual file system switch
+allows the Midnight Commander to manipulate files not
+located on the Unix file system.
+
+Currently the Midnight Commander is packaged with five Virtual File
+Systems (VFS): the <em/local/ file system, used for accessing the
+regular Unix file system; the <em/ftpfs/, used to manipulate files on
+remote systems with the FTP protocol; the <em/tarfs/, used to
+manipulate tar and compressed tar files; the <em/undelfs/, used to
+recover deleted files on et2 file systems (the default file system for
+Linux systems) and finally the <em/mcfs/ (Midnight Commander file
+system), a network based file system.
+
+The VFS switch code will interpret all of the path names
+used and will forward them to the correct file system, the
+formats used for each one of the file systems is described
+later in their own section.
+
+<sect1>FTP File System<label id="FTP File System">
+
+<p>
+The ftpfs allows you to manipulate files on remote
+machines, to actually use it, you may try to use the panel
+command FTP link (accessible from the menubar) or you may
+directly change your current directory to it using the cd
+command to a path name that looks like this:
+
+<em>ftp://&lsqb;!&rsqb&lsqb;user@&rsqb;machine&lsqb;:port&rsqb&lsqb;remote-dir&rsqb;</em>
+
+The, <em/user, port/ and <em/remote-dir/ elements are optional. If
+you specify the <em/user/ element, then the Midnight Commander
+will try to logon on the mremote machine as that user,
+otherwise it will use your login name. The optional <em/pass/ element,
+if present is the password used for the connection.  This use
+is not recomented (nor keeping this in your hotlist, unless you set
+the appropiate permissions there, and then, it may not be entirely
+safe anyways).
+
+Examples:
+
+<tscreen><verb>
+    ftp://ftp.nuclecu.unam.mx/linux/local
+    ftp://tsx-11.mit.edu/pub/linux/packages
+    ftp://!behind.firewall.edu/pub
+    ftp://guest@remote-host.com:40/pub
+    ftp://miguel:xxx@server/pub
+</verb></tscreen>
+
+To connect to sites behind a firewall, you will need to use the prefix
+ftp://! (ie, with a bang character after the double slash) to make the
+Midnight Commander use a proxy host for doing the ftp transfer.  You
+can define the proxy host in the <lnk name="Virtual FS" id="Virtual FS">
+Virtual File System dialog box.
+
+Another option is to set the <em/ftpfs_always_use_proxy/
+parameter in the initialization file.  This will configure the program
+to always use the proxy host.  If this variable is set, the program
+will do two things: consult the <tt>@prefix@/lib/mc.no_proxy</tt> file for
+lines containing host names that are local (if the host name starts
+with a dot, it is assumed to be a domain) and to assume that any
+hostnames without dots in their names are directly accessible.
+
+If you are using the ftpfs code with a filtering packet router that
+does not allow you to use the regular mode of opening files, you may
+want to force the program to use the passive-open mode.  To use this,
+set the <em/ftpfs_use_passive_connections/ option.
+
+The Midnight Commander keeps the directory listing in a cache.  The cache
+expire time is configurable in the <lnk name="Virtual FS" id="Virtual FS">
+dialog box.  This has the funny behavior that even if you make changes to a
+directory, they will not be reflected in the directory listing until you
+force a cache reload with the C-r key.  This is a feature (when you think
+it's a bug, think about manipulating files on the other side of the Atlantic
+with ftpfs).
+
+<sect1>Tar File System<label id="Tar File System">
+
+<p>
+The tar file system provides you with read-only access to
+your tar files and compressed tar files by using the chdir
+command. To change your directory to a tar file, you
+change your current directory to the tar file by using the
+following syntax:
+
+<em/tar:filename.tar&lsqb;dir-inside-tar&rsqb;/
+
+The mc.ext file already provides a shortcut for tar files,
+this means that usually you just point to a tar file and
+press return to enter into the tar file, see the <lnk name="Extension
+File Edit" id="Extension File Edit"> section for details on how this is done.
+
+Examples:
+
+<tscreen><verb>
+    tar:mc-3.0.tar.gz/mc-3.0/vfs
+    tar:/ftp/GCC/gcc-2.7.0.tar
+</verb></tscreen>
+
+The latter specifies the full path of the tar archive.
+
+<sect1>Network File System<label id="Network File System">
+
+<p>
+The Midnight Commander file system is a network base file
+system that allows you to manipulate the files in a remote
+machine as if they were local. To use this, the remote
+machine must be running the mcserv(8) server program.
+
+To connect to a remote machine, you just need to chdir
+into a special directory which name is in the following
+format:
+
+<em/mc:&lsqb;user@&rsqb;machine&lsqb;:port&rsqb;&lsqb;remote-dir&rsqb;/
+
+The, <em/user/, <em/port/ and <em/remote-dir/ elements are optional. If
+you specify the <em/user/ element then the Midnight Commander
+will try to logon on the remote machine as that user,
+otherwise it will use your login name.
+
+The <em/port/ element is used when the remote machine running
+on a special port (see the mcserv(8) manual page for more
+information about ports); finally, if the <em/remote-dir/
+element is present, your current directory on the remote
+machine will be set to this one.
+
+Examples:
+
+<tscreen><verb>
+    mc:ftp.nuclecu.unam.mx/linux/local
+    mc:joe@foo.edu:11321/private
+</verb></tscreen>
+
+<sect1>Undelete File System<label id="Undelete File System">
+
+On Linux systems, if you asked configure to use the ext2fs undelete
+facilities, you will have the undelete file system available.
+Recovery of deleted files is only available on ext2 file systems.  The
+undelete file system is just an interface to the ext2fs library to:
+retrieve all of the deleted files names on an ext2fs and provides and
+to extract the selected files into a regular partition.
+
+To use this file system, you have to chdir into the special file name
+formed by the "undel:" prefix and the file name where the actual
+file system resides.
+
+For example, to recover deleted files on the second partition of the
+first scsi disk on Linux, you would use the following path name:
+
+<tscreen><verb>
+    undel:/dev/sda2
+</verb></tscreen>
+
+It may take a while for the undelfs to load the required information
+before you start browsing files there. 
+
+<sect1>Colors<label id="Colors">
+
+<p>
+The Midnight Commander will try to detect if your terminal
+supports color using the terminal database and your
+terminal name. Sometimes it gets confused, so you may
+force color mode or disable color mode using the <tt/-c/ and <tt/-b/
+flag respectively.
+
+If the program is compiled with the Slang screen manager
+instead of ncurses, it will also check the variable
+<tt/COLORTERM/, if it is set, it has the same effect as the <tt/-c/
+flag.
+
+You may specify terminals that always force color mode
+by adding the <em/color_terminals/ variable to the Colors
+section of the initialization file. This will prevent the
+Midnight Commander from trying to detect if your terminal
+supports color. Example:
+
+<tscreen><verb>
+[Colors]
+color_terminals=linux,xterm
+</verb></tscreen>
+
+The format is:
+
+<tscreen><verb>
+color_terminals=terminal-name1,terminal-name2...
+</verb></tscreen>
+
+The program can be compiled with both ncurses and slang,
+ncurses does not provide a way to force color mode:
+ncurses uses just the information in the terminal
+database.
+
+The Midnight Commander provides a way to change the
+default colors. Currently the colors are configured using
+the environment variable <tt/MC_COLOR_TABLE/ or the Colors
+section in the initialization file.
+
+In the Colors section, the default color map is loaded
+from the <em/base_color/ variable. You can specify an
+alternate color map for a terminal by using the terminal
+name as the key in this section. Example:
+
+<tscreen><verb>
+[Colors]
+base_color=
+xterm=menu=magenta:marked=,magenta:markselect=,red
+</verb></tscreen>
+
+The format for the color definition is:
+
+<tscreen><verb>
+  <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
+</verb></tscreen>
+
+The colors are optional, and the keywords are: normal,
+selected, marked, markselect, errors, input, reverse menu,
+menusel, menuhot, menuhotsel, gauge; the dialog colors
+are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
+are: helpnormal, helpitalic, helpbold, helplink,
+helpslink;  Viewer color is: viewunderline; Special highlighting mode: 
+executable, directory, link, device, special.
+
+The dialog boxes use the following colors: <em/dnormal/ is
+used for the normal text, <em/dfocus/ is the color used for the
+currently selected component, <em/dhotnormal/ is the color used
+to differentiate the hotkey color in normal components,
+whereas the <em/dhotfocus/ color is used for the highlighted
+color in the currently selected component.
+
+Menus use the same scheme but uses the menu, menusel,
+menuhot and menuhotsel tags instead.
+
+Help uses the following colors: <em/helpnormal/ is used for
+normal text, <em/helpitalic/ is used for text which is
+emphasized in italic in the manual page, <em/helpbold/ is used
+for text which is emphasized in bold in the manual page,
+<em/helplink/ is used for not selected hyperlinks and <em/helpslink/
+is used for selected hyperlink.
+
+<em/gauge/ determines color of filled part of the progress bar
+(gauge), which shows how many percent of files were copied
+etc. in a graphical way.
+
+For file type highlighting mode <em/directory/ specifies the color in
+witch directories shows; <em/executable/ for executable files;
+<em/link/ is used to represent links; <em/device/ - for character and
+block devices; <em/special/ is for special files, such as FIFO and IPC
+sockets (see also: <lnk name="special settings" id="Special
+Settings">, option <tt/highlight_mode/), <em/core/ is for core files.
+
+The possible colors are: black, gray, red, brightred, green,
+brightgreen, brown, yellow, blue, brightblue, magenta,
+brightmagenta, cyan, brightcyan, lightgray and white.
+
+<sect>Special Settings<label id="Special Settings">
+
+<p>
+Most of the settings of the Midnight Commander can be
+changed from the menus. However, there is a small number
+of settings which can only be changed by editing the setup
+file.
+
+These variables may be set in your <tt>&tilde;/.mc/ini</tt> file:
+
+<descrip>
+<tag/clear_before_exec/ By default the Midnight Commander
+clears the screen before executing a command. If you would
+prefer to see the output of the command at the bottom of
+the screen, edit your &tilde;/mc.ini file and change the value
+of the field clear_before_exec to 0.
+<tag/confirm_view_dir/ If you press <tt/F3/ on a directory, normally
+MC enters that directory. If this flag is set to 1, then
+MC will ask for confirmation before changing the directory
+if you have files tagged.
+<tag/drop_menus/ If this variable is set, when you press the <tt/F9/
+key, the pull down menus will be activated, else, you will
+only be presented with the menu title, and you will have
+to select the entry with the arrow keys or the first
+letter and from there select your option in the menu.
+
+<tag/ftpfs_retry_seconds/
+This value is the number of seconds the Midnight Commander will wait
+before attempting a reconnection to an ftp server that has denied the
+login.  If the value is zero, the the program will not retry the login.
+
+<tag/ftpfs_use_passive_connections/
+This option is by off default.  This makes the ftpfs code use the
+passive open mode for transfering files.  This is used by people that
+are behind a filtering packet router.  This option just works if you
+are not using an ftp proxy.
+
+<tag/max_dirt_limit/ Specifies how many screen updates can be
+skipped at most in the internal file viewer. Normally this
+value is not significant, because the code automatically
+adjusts the number of updates to skip according to the
+rate of incoming keypresses. However, on very slow
+machines or terminals with a fast keyboard auto repeat, a
+big value can make screen updates too jumpy. It seems that
+setting max_dirt_limit to 10 causes the best behavior, and
+that is the default value.
+<tag/mouse_move_pages/ Controls whenever scrolling with the
+mouse is done by pages or line by line on the panels.
+<tag/mouse_move_pages_viewer/ Controls if scrolling with the
+mouse is done by pages or line by line on the internal
+file viewer.
+<tag/navigate_with_arrows/ If this setting is turned on, then
+you may use the arrows keys to automatically chdir if the
+current selection is a subdirectory and the shell command
+line is empty. By default, this setting is off.
+<tag/nice_rotating_dash/ When on, this flag causes the commander
+to show a rotating dash as a work in progress indicator.
+<tag/old_esc_mode/ By default the Midnight Commander treats the
+<tt/ESC/ key as a key prefix (old_esc_mode=0), if you set this
+option (old_esc_mode=1), then the <tt/ESC/ key will act as a
+prefix key for one second, and if no extra keys have
+arrived, then the <tt/ESC/ key is interpreted as a cancel key
+(<tt/ESC ESC/).
+<tag/only_leading_plus_minus/
+set special treatment for '+', '-', '*' in command line (select,
+unselect, reverse selection) only if command line is empty. No need to
+quote this characters in the middle of the command line. But we can not
+change selection when command line is not empty.
+<tag/panel_scroll_pages/
+If set (the default), panel will scroll by half the display when the
+cursor reaches the end or the beginning of the panel, otherwise it
+will just scroll a file at a time.
+<tag/preserve_uidgid/
+If this option is set (the default), when logged in as root the
+default will be to preserve the UID and the GID of files.  Some users
+prefer to disable this option, so that's why it's configurable.
+<tag/show_output_starts_shell/ 
+This variable only works if you are not using the subshell support.
+When you use the C-o keystroke to go back to the user screen, if this
+one is set, you will get a fresh shell.  Otherwise, pressing any key
+will bring you back to the Midnight Commander.
+<tag/show_all_if_ambiguous/ By default the Midnight Commander
+pops up all possible <lnk name="completions" id="Completion"> if the completion is
+ambiguous if you press <tt/M-Tab/ for the second time, for the
+first time it just completes as much as possible and in
+the case of ambiguity beeps. If you want to see all the
+possible completions already after the first <tt/M-Tab/
+pressing, set this option to 1.
+<tag/torben_fj_mode/ If this flag is set, then the home and end
+keys will work slightly different on the panels, instead
+of moving the selection to the first and last files in the
+panels, they will act as follows: The home key will: Go up
+to the middle line, if below it; else go to the top line
+unless it is already on the top line, in this case it will
+go to the first file in the panel. The end key has a
+similar behavior: Go down to the middle line, if over it;
+else go to the bottom line unless you already are at the
+bottom line, in such case it will move the selection to
+the last file name in the panel.
+<tag/highlight_mode/ By default all information on panels displayed with 
+the same color. If this variable is set to 1, then <em/perm/ or 
+<em/mode/ tokens in display format get ability to show access rights of the user
+to the shown file. Appropriate triplet of reading, writing and execution rights 
+highlighted with the yellow (<tt/selected/) color. In addition, if the variable 
+is equal to <tt/2/, then all lines are displaying by the color according to 
+their type (see <lnk name="Colors" id="Colors">). Permissions highlighting
+also works in this mode.
+<tag/use_file_to_guess_type/ If this variable is on (the
+default) it will spawn the file command to match the file
+types listed on the <lnk name="mc.ext file" id="Extension File Edit">.
+<tag/xterm_mode/If this variable is on (default is off) when you browse the file
+system on a Tree panel, it will automatically reload the other panel
+with the contents of the selected directory.
+</descrip>
+
+<sect>Terminal databases<label id="Terminal databases">
+
+<p>
+The Midnight Commander provides a way to fix your system
+terminal database without requiring root privileges. The
+Midnight Commander searches in the system initialization
+file (the mc.lib file located in the Midnight Commander
+library directory) or in the <tt>&tilde;/.mc/ini</tt> file for the
+section "terminal:your-terminal-name" and then for the
+section "terminal:general", each line of the section
+contains a key symbol that you want to define, followed by
+an equal sign and the definition for the key. You can use
+the special &bslsh;E form to represent the escape character and
+the ^x to represent the control-x character.
+
+The possible key symbols are:
+
+<tscreen><verb>
+f0 to f20     Function keys f0-f20
+bs	      backspace
+home          home key
+end           end key
+up            up arrow key
+down          down arrow key
+left          left arrow key
+right         right arrow key
+pgdn          page down key
+pgup          page up key
+insert        the insert character
+delete        the delete character
+complete      to do completion
+</verb></tscreen>
+
+For example, to define the key insert to be the
+<tt/Escape + &lsqb; + O + p/, you set this in the ini file:
+
+<tscreen><verb>
+insert=&bslshv;E[Op
+</verb></tscreen>
+
+The <em/complete/ key symbol represents the escape sequences
+used to invoke the completion process, this is invoked
+with <tt/M-tab/, but you can define other keys to do the same
+work (on those keyboard with tons of nice and unused keys
+everywhere).
+
+<sect>How to use help<label id="How to use help">
+
+<p>
+You can use the cursor keys or mouse to navigate in the
+internal help viewer.
+
+Press down arrow to move to the next item or scroll down.
+Press up arrow to move to the previous item or scroll up.
+Press right arrow to follow the current link.
+Press left arrow to go back in the history of nodes that
+you have visited.
+
+If you terminal doesn't support the cursor keys you can
+use the <tt/space bar/ to scroll forward and the <tt/b/ key scroll
+back. Use the <tt/TAB/ key to move to the next item and press
+<tt/ENTER/ to follow the current link. The <tt/l/ (last) key may
+be used to go back in the history of nodes that you have
+visited. Press <tt/ESC/ to exit the help viewer.
+
+The left mouse button will follow the link or scroll. The
+right mouse button can be used to go back in the history
+of nodes.
+
+The full key list of the help viewer:
+
+<lnk name="General movement keys" id="General Movement Keys"> are accepted.
+
+<descrip>
+<tag/tab/Move to the next item.
+<tag/M-tab/Move to the previous item.
+<tag/down/Move to the next item or scroll a line down.
+<tag/up/Move to the previous item or scroll a line up.
+<tag/right, enter/Follow the current link.
+<tag/left, l/Go back in the history of visited nodes.
+<tag/F1/Show the help for the help viewer.
+<tag/n/Go to the next node.
+<tag/p/Go to the previous node.
+<tag/c/Go to the Contents node.
+<tag/F10, esc/Exit the help viewer.
+</descrip>
+
+<sect>FILES<label id="FILES">
+
+<p>
+<descrip>
+<tag>@prefix@/lib/mc.hlp</tag> The help file for the program.
+<tag>@prefix@/lib/mc/mc.ext</tag> The default system-wide extensions
+file.
+<tag><tt>&tilde;/.mc/ext</tt></tag> User's own extension, view configuration and
+edit configuration file. They override the contents of the
+system wide files if present.
+<tag>@prefix@/lib/mc/mc.ini</tag> The default system-wide setup for
+the Midnight Commander, used only if the user lacks his
+own &tilde;/.mc/ini file.
+<tag>@prefix@/lib/mc/mc.lib</tag> Global settings for the Midnight
+Commander. Settings in this file are global to any
+Midnight Commander, it is useful to define site-global
+terminal settings.
+<tag><tt>&tilde;/.mc/ini</tt></tag> User's own setup. If this file is present
+then the setup is loaded from here instead of the
+system-wide startup file.
+<tag>@prefix@/lib/mc/mc.hint</tag> This file contains the hints
+(cookies) displayed by the program.
+<tag>@prefix@/lib/mc/mc.menu</tag> This file contains the default
+system-wide applications menu.
+<tag><tt>&tilde;/.mc/menu</tt></tag> User's own application menu. If this file
+is present it is used instead of the system-wide
+applications menu.
+<tag><tt>&tilde;/.mc/tree</tt></tag> The directory list for the directory tree
+and tree view features. Each line is one entry. The lines
+starting with a slash are full directory names. The lines
+starting with a number have that many characters equal to
+the previous directory. If you want you may create this
+file by giving the command
+
+<tscreen><verb> 
+find / -type d -print | sort < ~/.mc/tree
+</verb></tscreen>
+
+Normally there is no sense in doing it
+because the Midnight Commander automatically updates this
+file for you.
+<tag>./.mc.menu</tag> Local user-defined menu. If this file
+is present it is used instead of the home or system-wide
+applications menu.
+</descrip>
+
+<sect>AVAILABILITY<label id="AVAILABILITY">
+
+<p>
+The latest version of this program can be found at
+<url url="ftp://ftp.nuclecu.unam.mx/linux/local/"> and in
+Europe from <url url="ftp://sunsite.mff.cuni.cz/GNU/mc"> and
+<url url="ftp://ftp.teuto.de/lmb/mc">.
+
+<sect>SEE ALSO<label id="SEE ALSO">
+
+<p>
+<bf/ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1),
+bash(1), tcsh(1), zsh(1)/.
+
+The Midnight Commander page on the World Wide Web:
+<url url="http://mc.blackdown.org/mc/">
+
+<sect>AUTHORS<label id="AUTHORS">
+
+<p>
+<itemize>
+<item>Miguel de Icaza (<tt/miguel@roxanne.nuclecu.unam.mx/)
+<item>Janne Kukonlehto (<tt/jtklehto@paju.oulu.fi/)
+<item>Radek Doulik (<tt/rodo@earn.cvut.cz/)
+<item>Fred Leeflang (<tt/fredl@nebula.ow.org/)
+<item>Dugan Porter (<tt/dugan@b011.eunet.es/)
+<item>Jakub Jelinek (<tt/jj@sunsite.mff.cuni.cz/)
+<item>Ching Hui (<tt/mr854307@cs.nthu.edu.tw/)
+<item>Andrej Borsenkow (<tt/borsenkow.msk@sni.de/)
+<item>Norbert Warmuth (<tt/k3190@fh-sw.de/)
+<item>Mauricio Plaza (<tt/mok@roxanne.nuclecu.unam.mx/)
+<item>Paul Sheer (<tt/psheer@icon.co.za/)
+</itemize>
+
+Alessandro Rubini (<tt/rubini@ipvvis.unipv.it/) has been especially helpful
+debugging and enhancing the program's mouse support, John
+Davis (<tt/davis@space.mit.edu/) made his S-Lang library
+available to us under the GPL and answered my questions
+about it, and the following people have contributed code
+and many bug fixes (in alphabetical order):
+
+<itemize>
+<item>Adam Tla/lka (<tt/atlka@sunrise.pg.gda.pl/)
+<item>Alex I. Tkachenko (<tt/alex@bcs.zp.ua/)
+<item>Antonio Palama, DOS port (<tt/palama@posso.dm.unipi.it/)
+<item>Gerd Knorr (<tt/kraxel@cs.tu-berlin.de/)
+<item>Erwin van Eijk (<tt/wabbit@corner.iaf.nl/)
+<item>Jean-Daniel Luiset (<tt/luiset@cih.hcuge.ch/)
+<item>Jon Stevens (<tt/root@dolphin.csudh.edu/)
+<item>Juan Francisco Grigera, Win32 port (<tt/j-grigera@usa.net/)
+<item>Juan Jose Ciarlante (<tt/jjciarla@raiz.uncu.edu.ar/)
+<item>Ilya Rybkin (<tt/rybkin@rouge.phys.lsu.edu/)
+<item>Marcelo Roccasalva (<tt/mfroccas@raiz.uncu.edu.ar/)
+<item>Massimo Fontanelli (<tt/MC8737@mclink.it/)
+<item>Pavel Roskin (<tt/pavel@absolute.spb.su/)
+<item>Sergey Ya. Korshunoff (<tt/root@seyko.msk.su/)
+<item>Thomas Pundt (<tt/pundtt@math.uni-muenster.de/)
+<item>Timur Bakeyev (<tt/timur@goff.comtat.kazan.su/)
+<item>Tomasz Cholewo (<tt/tjchol01@mecca.spd.louisville.edu/)
+<item>Torben Fjerdingstad (<tt/torben.fjerdingstad@uni-c.dk/)
+<item>Vadim Sinolitis (<tt/vvs@nsrd.npi.msu.su/)
+<item>Wim Osterholt (<tt/wim@djo.wtm.tudelft.nl/)
+</itemize>
+
+<sect>BUGS<label id="BUGS">
+
+<p>
+See the file TODO in the distribution for information on
+what remains to be done.
+
+If you want to report a problem with the program, please send mail to
+this address: mc-bugs@roxanne.nuclecu.unam.mx.
+
+Provide a detailed description of the bug, the version of the program
+you are running (mc -V display this information), the operating system
+you are running the program on and if the program crashes, we would
+appreciate a stack trace.
+
+</article>

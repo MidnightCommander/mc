@@ -1,0 +1,5 @@
+ -+.\editmenu.obj &
+ -+.\editdraw.obj &
+ -+.\editwidget.obj &
+ -+.\edit.obj &
+ -+.\editcmd.obj;

@@ -1,0 +1,136 @@
+#! /bin/sh
+
+#
+# LHa Virtual filesystem executive v0.1
+# Copyright (C) 1996, 1997 Joseph M. Hinkle
+# May be distributed under the terms of the GNU Public License
+# <jhinkle@rockisland.com>
+#
+
+# Code for mc_lha_fs_run() suggested by:
+# Jan 97	Zdenek Kabelac <kabi@informatics.muni.cz>
+
+# Tested with mc 3.5.18 and gawk 3.0.0 on Linux 2.0.0
+# Tested with lha v1.01 and lharc v1.02
+# Information and sources for other forms of lha/lzh appreciated
+
+# Nota bene:
+# There are several compression utilities which produce *.lha files.
+# LHArc and LHa in exist several versions, and their listing output varies.
+# Another variable is the architecture on which the compressed file was made.
+# This program attempts to sort out the variables known to me, but it is likely
+# to display an empty panel if it encounters a mystery. 
+# In that case it will be useful to execute this file from the command line:
+# ./lha list Mystery.lha
+# to examine the output directly on the console.  The output string must be
+# precisely in the format described in the README in this directory.
+# Another helpful thing is to temporarily remove the redirection of error
+# output of awk (The '2> /dev/null' instruction near the end of mcfs_list())
+# The screen will get ugly if there's an error, but some useful text shows
+# at the bottom of the screen.  
+# Caveat emptor.
+# Learn Latin.
+
+# Define your awk
+AWK=@AWK@
+# Define which archiver you are using with appropriate options
+LHA_LIST="lha l"
+LHA_GET="lha pq"
+LHA_PUT="lha a"
+
+# Define the temporary name of a command to be run from the archive
+TMPCMD=/tmp/mc-cmd.$$
+
+# The 'list' command executive
+
+mc_lha_fs_list()
+{
+   # Get the year of the file timestamp in case we need to replace 'hh:mm'
+   YEAR=$(ls -le $1 | $AWK '{ print $10 }')
+   # List the contents of the archive and sort it out    
+   $LHA_LIST $1 | $AWK -v uid=$(id -nu) -v gid=$(id -ng) -v year=$YEAR '
+      # Ignore the annotations, quit on the last one
+      /^\ PERMSSN/ { next }
+      /^-----/ { next }
+      /^\ Total/ { exit 0 }
+      # Strip a leading '/' if present in a filepath
+      $(NF) ~ /^\// { $(NF) = substr($NF,2) }
+      # Replace the year stamp if it is expressed as 'hh:mm'
+      $(NF-1) ~ /\:/ { $(NF-1) = year }
+      # Print the line this way if there is no permission string
+      $1 ~ /^\[generic\]/ {
+         # Invent a generic permission
+         $1 = ($10 ~ /\/$/) ? "drwxr-xr-x":"-rwxr-xr-x";
+         # Print it
+         printf "%s   1 %-8s %-8s %-8d %3s %2d %4d %s\n",
+                 $1,     uid, gid,  $2, $4, $5, $6, $7;
+         # Get the next line of the list
+         next;
+      }
+      # Do it this way for a defined permission
+      $1 !~ /^\[generic\]/ {
+         # If the permissions and UID run together
+         if ($1 ~ /\//) {
+            $8 = $7;
+            $7 = $6;
+            $6 = $5;
+            $5 = $4;
+            $3 = $2;
+            $2 = substr($1,10);
+            $1 = substr($1,1,9);
+         }
+         # If the permission string is missing a type
+         if (length($1) == 9) {
+            if ($NF ~ /\/$/)
+               $1 = ("d" $1);
+            else
+               $1 = ("-" $1);
+         }
+         # UID:GID might not be the same as on your system so print numbers
+         # Well, that is the intent.  At the moment mc is translating them.
+         split($2, id, "/");
+         printf "%s   1 %-8d %-8d %-8d %3s %2d %4d %s\n",
+                 $1,     id[1], id[2],  $3, $5, $6, $7, $8;
+         # Get the next line of the list
+         next;
+      }
+
+   ' 2> /dev/null
+}
+
+# The 'copyout' command executive to copy displayed files to a destination
+
+mc_lha_fs_copyout()
+{
+   $LHA_GET $1 $2 > $3  2> /dev/null
+}
+
+# The 'copyin' command executive to add something to the archive
+
+mc_lha_fs_copyin ()
+{
+   # This isn't called from this version of mc
+   $LHA_PUT $1 $3  2> /dev/null
+}
+
+# The 'run' command executive to run a command from within an archive
+
+mc_lha_fs_run()
+{
+   trap "rm $TMPCMD; exit 0" 1 2 3 4 15
+   $LHA_GET $1 $2 > $TMPCMD  2> /dev/null
+   chmod a+x $TMPCMD  2> /dev/null
+   $TMPCMD 2> /dev/null
+   rm $TMPCMD
+}
+
+
+# The main routine
+case "$1" in
+   list) mc_lha_fs_list $2; exit $?;;
+   copyout) mc_lha_fs_copyout $2 $3 $4; exit $?;;
+   copyin)  mc_lha_fs_copyin  $2 $3 $4; exit $?;;
+   run)     mc_lha_fs_run     $2 $3 $4; exit $?;;
+esac
+exit 1
+

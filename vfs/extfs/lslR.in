@@ -1,0 +1,41 @@
+#! /bin/sh
+FILE=file
+ZCAT="gunzip -c"
+CAT=cat
+
+mclslRfs_list ()
+{
+MYCAT="$CAT"
+case "$1" in
+    *.gz) MYCAT="$ZCAT";;
+    *.z) MYCAT="$ZCAT";;
+    *.Z) MYCAT="$ZCAT";;
+esac
+    $MYCAT $1 | @AWK@ '
+BEGIN { dir="" }
+/^total\ [0-9]*$/ { next }
+/^$/ { next }
+/^[^\ \	]*:$/ {
+if ($0 ~ /^\//)
+    dir=substr($0, 2)
+else
+    dir=$0
+if (dir ~ /\/:$/)
+    sub(/:$/, "", dir)
+else
+    sub(/:$/, "/", dir)
+next
+}
+{ 
+printf "%s %3d %-8s %-8s %8d %3s %2d %5s %s%s", $1, $2, $3, $4, $5, $6, $7, $8, dir, $9
+if (NF > 9)
+    printf " %s %s\n", $10, $11
+else
+    printf "\n"
+}' 2>/dev/null
+}
+
+case "$1" in
+  list) mclslRfs_list $2; exit 0;;
+esac
+exit 1

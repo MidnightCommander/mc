@@ -1,0 +1,123 @@
+-*-outline-*-
+
+This is the developers' hint guide.
+Some parts are based on mail messages.
+
+Please feel free to add your name to this list:
+by Miguel de Icaza
+
+* Working with the Midnight Commander
+
+   If you plan on working on the Midnight Commander, here are some
+   tips on how to make your development easier and my job of merging
+   your code easier, I find them useful.
+
+o  Run make depend if you modify the source code structure (e.g. you
+   add/remove include files).  This is very important, it will help you
+   to get an accurate compilation.
+
+o  It's recommended that you use GNU Make (if you want to use the
+   depend feature).
+
+o  I work with the tags feature of GNU emacs.  Run the make tags
+   command to get an updated TAGS file.  The command Alt-. will take
+   you to any function or variable definition.
+
+o  Try to keep the indenting style as it is currently.  Normally if you
+   just created a new file with a different coding style, run the GNU
+   indent program on it (remember to make a backup copy first) like
+   this: indent -kr -pcs filename.c
+
+o  This code is distributed under the GNU General Public License and
+   Keep this in mind when adding code to the program.
+
+* Code structure.
+
+   The program uses extensively the dialog manager written by Radek
+   Doulik.  To understand how the dialog manager works, please read
+   the dlg.c and dlg.h.  You will find the basic widgets in the file
+   widget.c and the widget.h file.  If you understand this two files,
+   you are done.  The files option.c and boxes.c contain some examples
+   of how the dialog manager functions are used.  For a more complete
+   example, take a look at the main.c file.
+
+   Take a look at the FILES file in the doc/ directory.  It has a
+   roadmap of the files that make up the Midnight Commander.
+
+   The file util.c has a lot of utility functions.  Get familiar with
+   them, they are very simple. 
+
+   The code has almost no hardcoded limits, there are a lot of ways of
+   avoiding them.  For example, when you want to concatenate strings,
+   use the copy_strings functions, it is used like this:
+
+	new_text = copy_strings (username, " ", password, NULL);
+
+   This mallocs the required area, so it still needs to be freed.
+
+* Upcoming changes.
+
+* Panels
+
+* Input handling
+
+The routines for input handling on the Midnight Commander are:
+xgetch, get_key_code, mi_getch and get_event.
+
+xgetch is an interface to the low level system input mechanism.  It
+does not deal with the mouse.  
+
+    In the case of curses, this is a macro that translates to getch, on
+    BSD curses, it is an interface to x_getch.  This routine on curses
+    translates key sequences to key codes (\E[A to something like
+    KEY_UP or whatever).
+
+    In the case of slang there is no such conversion, that's why we
+    load a set of extra definitions.
+
+The get_key_code routine converts the data from xgetch to the
+constants the Midnight Commander uses. 
+
+    In the case of slang, it will actually do all the jobs that getch
+    does for curses.  In the case of curses it patches a couple of
+    sequences that are not available on some terminal databases.  This
+    routine is the one you want to use if you want a character without
+    the mouse support.
+
+get_event is the routine you want to use if you want to handle mouse
+events, it will return 0 on a mouse event, ERR if no input is
+available or a key code if there is some input available.  This
+routine in turn uses get_key_code to decode the input stream and
+convert it to useful constants.
+
+mi_getch is just a wrapper around get_event that ignores all the mouse
+events.  It's used only in a couple of places, this routine may return
+ERR if no input is available (if you have set the nodelay option of
+curses or slang with nodelay) or a character code if no such option is
+available. 
+
+* Mouse support.
+
+The mouse support in the Midnight Commander is based on the get_event
+routine.  The core of the mouse event dispatching is in the
+dlg.c:run_dlg routine.
+
+* ncurses
+
+We are dropping it in favor of slang, but we will still support it.  We
+basically are using a small subset of ncurses because we want to be
+compatible with Slang.
+
+
+* The Dialog manager and the Widgets
+
+** Button widget
+
+** Check box widget
+
+** Radio widget
+
+** Input widget
+
+** Listbox widget
+

@@ -1,0 +1,156 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+#
+# Ideally, we shouldn't need the LSLANG there anymore when we have
+# the XView code support finished
+#
+CFLAGS = $(XCFLAGS) @XVIEW_CFLAGS@
+CPPFLAGS = $(XCPPFLAGS) @XVIEW_CPPFLAGS@ -I$(xvdir) -I$(xvdir)/support \
+-I$(mcsrcdir) -DHAVE_XVIEW -DHAVE_X
+LDFLAGS = $(XLDFLAGS) @XVIEW_LIBS@
+DEFS = $(XDEFS)
+LIBS = -lxview -lolgx @XEXT_LIB@ @XPM_LIB@ @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB)
+EXTRALIBS = @LVFS@ @LSLANG@ @LEDIT@
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+XVSRCS = xvmain.c xvmenu.c xvscreen.c xvwidget.c \
+	 xverror.c xvaction.c paneltext.c xvinfo.c xvhelp.c \
+	 xvview.c xvicon.c
+
+XVHDRS = xvmain.h xvkeydata.h pictures.h \
+	paneltext.h paneltext_impl.h \
+	mc.icon help.icons xvicon.h xvscreen.h \
+	Directory.xpm Regular.xpm mc_icon.xpm panel_icon.xpm xvconf.h
+
+XVSUPPXVHDRS = draw_impl.h i18n_impl.h item_impl.h panel_impl.h portable.h \
+	scrn_vis.h
+
+#
+# These objects from ../src do not depend on HAVE_XVIEW of HAVE_X
+#
+LOBJS = dir.o util.o \
+	win.o profile.o user.o \
+	setup.o \
+	tree.o mad.o \
+	terms.o \
+	achown.o fsusage.o mountlist.o \
+	@XCURSES@ @REGEX_O@ complete.o command.o \
+	utilunix.o dirhist.o
+
+#
+# These objects from ../src do depend on HAVE_XVIEW or HAVE_X
+#
+OOBJS = main.o dlg.o screen.o widget.o wtools.o layout.o info.o boxes.o \
+        find.o file.o color.o dialog.o help.o cmd.o key.o view.o \
+	panelize.o hotlist.o listmode.o background.o \
+	subshell.o ext.o popt.o chmod.o chown.o xslint.o \
+	option.o 
+
+
+OBJS = $(LOBJS) $(OOBJS) \
+	xvmenu.o xvmain.o xvscreen.o xvwidget.o \
+	xverror.o xvaction.o paneltext.o xvinfo.o xvhelp.o \
+	xvview.o xvicon.o
+
+#
+# Distribution variables
+#
+
+DISTXV = Makefile.in $(XVSRCS) $(XVHDRS)
+
+.c.o:
+	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
+
+all: @mxc@
+
+# Midnight X commander
+mxc: checklinks 
+	$(MAKE) mx
+
+mx: @LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@
+	$(CC) $(LDFLAGS) -o mxc $(OBJS) -L../vfs -L../slang -L../edit $(EXTRALIBS) $(LIBS)
+	touch mx
+
+libvfs.a:
+	cd ../vfs; $(MAKE) libvfs.a
+@PCENTRULE@	-$(RMF) libvfs.a
+@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+
+libmcslang.a:
+	cd ../slang; $(MAKE) libmcslang.a
+@PCENTRULE@	-$(RMF) libmcslang.a
+@PCENTRULE@	$(LN_S) ../slang/libmcslang.a .
+
+libedit.a:
+	cd ../edit; $(MAKE) libedit.a
+@PCENTRULE@	-$(RMF) libedit.a
+@PCENTRULE@	$(LN_S) ../edit/libedit.a .
+
+checklinks:
+	@if test -f $(xvdir)/regex.c; then echo ok; \
+	else $(MAKE) sourcelinks; fi
+	@if test -f regex.o; then echo ok; else $(MAKE) links; fi
+
+links:
+	@for I in $(LOBJS); do $(RMF) $$I; $(LN_S) ../src/$$I $$I >/dev/null 2>&1; done; true
+
+sourcelinks:
+	@cd $(xvdir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; true
+
+cleansourcelinks:
+	-if test -f $(xvdir)/regex.c; then \
+	    cd $(xvdir); find . -lname '*.[ch]' | xargs $(RM); \
+	fi
+
+check:
+	@echo no tests are supplied.
+
+cross:
+	$(MAKE) CC=gcc-linux CPP="gcc-linux -E" \
+	CPPFLAGS="$(CPPFLAGS) -I/usr/local/lib/gcc-lib/i386-linux-linux/include/ncurses "
+
+TAGS: $(XVSRCS)
+	etags $(XVSRCS)
+
+clean:
+	$(RMF) @mxc@ *.o core a.out mx libvfs.a libedit.a libmcslang.a
+
+realclean: clean
+	$(RMF) .depend
+	$(RMF) TAGS
+	$(RMF) *~
+
+distclean: cleansourcelinks
+	-$(RMF) $(srcdir)/*~ $(srcdir)/mxc $(srcdir)/*.o $(srcdir)/core
+	-$(RMF) $(srcdir)/a.out 
+	-if test $(srcdir) = .; then $(MAKE) realclean; fi
+	-$(RMF) $(srcdir)/Makefile
+
+distcopy:
+	$(CP) $(DISTXV) ../../mc-$(VERSION)/xv
+	cd support/xview_private; $(CP) $(XVSUPPXVHDRS) ../../../../mc-$(VERSION)/xv/support/xview_private
+
+install: install_@mxc@
+
+install_:
+
+install_mxc:
+	$(INSTALL_PROGRAM) mxc $(DESTDIR)$(xv_bindir)/$(binprefix)mxc
+
+uninstall:
+
+depend dep: @xvdep@
+
+xvdep: checklinks mcdep
+
+fastdeploc: @fastdepslang@ @fastdepvfs@
+
+# ***Dependencies***Do not edit***
+@DOTDEPEND@
+# ***End of dependencies***

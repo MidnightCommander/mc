@@ -1,0 +1,113 @@
+#!/usr/bin/perl
+
+# MC extfs for (possibly compressed) Berkeley style mailbox files
+# Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.24)
+
+$zcat="zcat";                 # gunzip to stdout
+$bzcat="bzip2 -dc";           # bunzip2 to stdout
+$file="file";                 # "file" command
+$TZ='GMT';                    # default timezone (for Date module)
+
+if (eval "require Date::Parse") { # fancy date parsing available?
+    import Date::Parse;
+    $parse_date= 
+	sub {
+	    local $_ =localtime(str2time($_[0],$TZ));
+	    s/^... (.+) (\d\d:\d\d):\d\d (\d\d\d\d)$/$1 $3 $2/;
+	    return $_;
+	}
+} else {			# use "light" version
+    $parse_date= sub {
+	# assumes something like: Mon, 5 Jan 1998 16:08:19 +0200 (GMT+0200)
+	# if you have mails with another date format, add it here
+	if (/(\d\d?) ([A-Z][a-z][a-z]) (\d\d\d\d) (\d\d:\d\d):\d\d/) {
+	    return "$2 $1 $3 $4";
+	}
+    }
+}
+
+sub process_header {
+    while (<IN>) {
+	last if /^$/;
+	die "unexpeced EOF\n" if eof;
+	if (/^Date: (.*)$/) {
+	    $date=&$parse_date($1);
+	} elsif (/^Subject: (.*)$/) {
+	    $subj=$1;
+	    $subj=~ s/^(re: ?)+//gi;  # no leading Re:
+	    $subj=~ tr/a-zA-Z0-9//cd; # strip all "special" characters
+	} elsif (/^From: .*?(\w+)\@/) {
+	    $from=$1;
+	} elsif (/^To: .*?(\w+)\@/) {
+	    $to=$1;
+	}
+    }
+}
+
+sub print_dir_line {
+    $from=$to if ($from eq $user); # otherwise, it would look pretty boring
+    printf "-r-------- 1 $< $< %d %s %3.3d_%.16s\n", 
+    $line, $date, $msg_nr, "${from}_${subj}";
+}
+
+sub mailfs_list {
+    my $blank = 1;
+    $user=$ENV{USER}||getlogin||getpwuid($<) || "nobody";
+    
+    while(1) {
+	$_=<IN>;
+	if (!defined($_)) {	# EOF
+	    print_dir_line; 
+	    exit 0;
+	}
+	if($blank && /^From /) { # Start of header
+	    print_dir_line unless (!$msg_nr);
+	    $msg_nr++;
+	    ($from,$to,$subj,$date)=("none","none","none", "01-01-80");
+	    process_header;
+	    $line=$blank= 0;
+	} else {
+	    $line++;
+	    $blank= /^$/;
+	}
+    }
+}
+
+sub mailfs_copyout {
+    my($source,$dest)=@_;
+    exit 1 unless (open STDOUT, ">$dest");
+    ($nr)= ($source =~ /^(\d+)/); # extract message number from "filename"
+    
+    my $blank = 1;
+    while(<IN>) {
+	if($blank && /^From /) {
+	    $msg_nr++;
+	    exit(0) if ($msg_nr > $nr);
+	    $blank= 0;
+	} else {
+	    $blank= /^$/;
+	}
+	print if ($msg_nr == $nr);
+    }
+}
+
+# main {
+$msg_nr=0;
+$cmd=shift;
+$mbox_name=shift;
+$_=`$file $mbox_name`;
+
+if (/gzip/) {
+    exit 1 unless (open IN, "$zcat $mbox_name|");
+} elsif (/bzip/) {
+    exit 1 unless (open IN, "$bzcat $mbox_name|");
+} else {
+    exit 1 unless (open IN, "<$mbox_name");
+}
+
+if($cmd eq "list") { &mailfs_list; exit 0; }
+elsif($cmd eq "copyout") { &mailfs_copyout(@ARGV); exit 0; }
+
+exit 1;
+
+

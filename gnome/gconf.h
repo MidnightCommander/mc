@@ -1,0 +1,17 @@
+/* Defines which features are used on the GNOME edition */
+
+#define PORT_HAS_FRONTEND_RUN_DLG   1
+#define PORT_HAS_FILE_HANDLERS      1
+#define PORT_HAS_GETCH              1
+
+#define PORT_HAS_DIALOG_TITLE       1
+#define PORT_WANTS_CLEAN_BUTTON     1
+#define PORT_HAS_CREATE_PANELS      1
+#define PORT_HAS_PANEL_UPDATE_COLS  1
+#define PORT_HAS_PAINT_FRAME        1
+#define PORT_WANTS_GET_SORT_FN      1
+#define PORT_HAS_LLINES             1
+#define PORT_HAS_LOAD_HINT          1
+
+#define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
+#define frontend_run_dlg(x)        gtkrundlg_event (x)
