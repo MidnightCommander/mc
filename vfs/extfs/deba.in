@@ -8,16 +8,17 @@
 
 sub list
 {
-       my($archive) = map { s/([^\w\/.+-])/\\$1/g } @_;
+       my($qarchive)=@_;
+       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
        chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
-       chop($info_size=`apt-cache show $archive | wc -c`);
+       chop($info_size=`apt-cache show $qarchive | wc -c`);
        $install_size=length($pressinstall);
        $upgrade_size=length($pressupgrade);
 
        print "-r--r--r--   1 root     root     $info_size $date INFO\n";
 
-       chop($debd = `dpkg -s $archive | grep -i ^Version | sed 's/^version: //i'`);
-       chop($deba = `apt-cache show $archive | grep -i ^Version | sed 's/^version: //i'`);
+       chop($debd = `dpkg -s $qarchive | grep -i ^Version | sed 's/^version: //i'`);
+       chop($deba = `apt-cache show $qarchive | grep -i ^Version | sed 's/^version: //i'`);
        if( ! $debd ) {
            print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
        } elsif( $debd ne $deba ) {
@@ -27,21 +28,24 @@ sub list
 
 sub copyout
 {
-       my($archive,$filename,$destfile) = map { s/([^\w\/.+-])/\\$1/g } @_;
-
+       my($archive,$filename,$destfile)=@_;
+       my $qarchive = $archive;
+       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
+       my $qdestfile = $destfile;
+       $qdestfile =~ s/([^\w\/.+-])/\\$1/g;
        if($filename eq "INFO") {
-           system("apt-cache show $archive > $destfile");
+           system("apt-cache show $qarchive > $qdestfile");
         } elsif($filename eq "INSTALL")        {
-           if ( open(FILEOUT,">$destfile") ) {
+           if ( open(FILEOUT, "> $destfile") ) {
                print FILEOUT $pressinstall;
                close FILEOUT;
-               system("chmod a+x $destfile");
+               system("chmod a+x $qdestfile");
            }
        } elsif($filename eq "UPGRADE") {
-           if ( open(FILEOUT,">$destfile") ) {
+           if ( open(FILEOUT, ">, $destfile") ) {
                print FILEOUT $pressupgrade;
                close FILEOUT;
-               system("chmod a+x $destfile");
+               system("chmod a+x $qdestfile");
            }
        } else {
            die "extfs: $filename: No such file or directory\n";
@@ -50,11 +54,13 @@ sub copyout
 
 sub run
 {
-       my($archive,$filename) = map { s/([^\w\/.+-])/\\$1/g } @_;
+       my($archive,$filename)=@_;
+       my $qarchive = $archive;
+       $qarchive =~ s/([^\w\/.+-])/\\$1/g;
        if($filename eq "INSTALL") {
-           system("apt-get install $archive");
+           system("apt-get install $qarchive");
        } elsif($filename eq "UPGRADE") {
-           system("apt-get install $archive");
+           system("apt-get install $qarchive");
        } else {
            die "extfs: $filename: Permission denied\n";
        }

@@ -1,5 +1,12 @@
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/deba.in (list): Separated the use of quoted and unquoted
+	variables. (copyout): likewise. (run): likewise.
+	
+	From Leonard den Ottolander <leonard@den.ottolander.nl>
+
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
+
 	* extfs/deba.in (bt): deleted. (ft): deleted. (fm): deleted.
 	(ls): deleted. (list): correctly quoted shell command arguments.
 	(copyout): likewise. (run): likewise.
