@@ -1052,32 +1052,33 @@ mc_munmap (caddr_t addr, size_t len)
 char *
 mc_def_getlocalcopy (vfs *vfs, char *filename)
 {
-    char *tmp;
+    char *tmp, *suffix, *basename;
     int fdin, fdout, i;
     char buffer[8192];
     struct stat mystat;
-    char *ext = NULL;
-    char *ptr;
 
     fdin = mc_open (filename, O_RDONLY);
     if (fdin == -1)
-        return NULL;
+	return NULL;
 
-    /* Try to preserve existing extension */
-    for (ptr = filename + strlen(filename) - 1; ptr >= filename; ptr--) {
-	if (*ptr == '.') {
-	    ext = ptr;
-	    break;
-	}
+    /* retain original filename as a suffix for a temporary filename */
+    basename = strrchr (filename, PATH_SEP);
+    if (!basename)
+	basename = filename;
+    else
+	basename++;
 
-	if (!isalnum((unsigned char) *ptr))
-	    break;
+    suffix = g_strconcat ("-", basename, NULL);
+
+    if ((fdout = mc_mkstemps (&tmp, "vfs", suffix)) == -1) {
+	/* fallback for the case if the filename is too long */
+	fdout = mc_mkstemps (&tmp, "vfs", NULL);
     }
+    g_free (suffix);
 
-    fdout = mc_mkstemps (&tmp, "mclocalcopy", ext);
     if (fdout == -1)
 	goto fail;
-    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0){
+    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0) {
 	if (write (fdout, buffer, i) != i)
 	    goto fail;
     }
@@ -1085,19 +1086,21 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
 	goto fail;
     i = mc_close (fdin);
     fdin = -1;
-    if (i==-1)
+    if (i == -1)
 	goto fail;
-    if (close (fdout)==-1)
+    if (close (fdout) == -1)
 	goto fail;
 
-    if (mc_stat (filename, &mystat) != -1){
-        chmod (tmp, mystat.st_mode);
+    if (mc_stat (filename, &mystat) != -1) {
+	chmod (tmp, mystat.st_mode);
     }
     return tmp;
 
- fail:
-    if (fdout) close(fdout);
-    if (fdin) mc_close (fdin);
+  fail:
+    if (fdout)
+	close (fdout);
+    if (fdin)
+	mc_close (fdin);
     g_free (tmp);
     return NULL;
 }

@@ -633,7 +633,7 @@ extfs_run (char *file)
 }
 
 static void *
-extfs_open (vfs * me, char *file, int flags, int mode)
+extfs_open (vfs *me, char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive;
@@ -659,9 +659,17 @@ extfs_open (vfs * me, char *file, int flags, int mode)
 	ERRNOR (EISDIR, NULL);
 
     if (entry->inode->local_filename == NULL) {
-	char *local_filename;
+	char *local_filename, *suffix;
 
-	local_handle = mc_mkstemps (&local_filename, "extfs", NULL);
+	/* retain original filename as a suffix for a temporary filename */
+	suffix = g_strconcat ("-", entry->name, NULL);
+
+	if ((local_handle =
+	     mc_mkstemps (&local_filename, "extfs", suffix)) == -1) {
+	    /* fallback for the case if the filename is too long */
+	    local_handle = mc_mkstemps (&local_filename, "extfs", NULL);
+	}
+	g_free (suffix);
 
 	if (local_handle == -1)
 	    return NULL;
@@ -677,8 +685,8 @@ extfs_open (vfs * me, char *file, int flags, int mode)
 	entry->inode->local_filename = local_filename;
     }
 
-    local_handle = open (entry->inode->local_filename, NO_LINEAR (flags),
-			 mode);
+    local_handle =
+	open (entry->inode->local_filename, NO_LINEAR (flags), mode);
     if (local_handle == -1)
 	ERRNOR (EIO, NULL);
 

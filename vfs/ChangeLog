@@ -1,3 +1,9 @@
+2003-02-26  Adam Byrtek  <alpha@debian.org>
+
+	* extfs.c (extfs_open): Retain original filename as a suffix
+	for the temporary filename.
+	* vfs.c (mc_def_getlocalcopy): Likewise.
+
 2003-02-24  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: rm and proper copyin support, more
