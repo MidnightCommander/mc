@@ -30,17 +30,25 @@ if test ! -d config; then
 fi
 
 # Ensure that gettext is reasonably new.
-gettext_ver=`$GETTEXTIZE --version | \
-  sed '2,$d;			# remove all but the first line
-       s/.* //;			# take text after the last space
-       s/-.*//;			# strip "-pre" or "-rc" at the end
-       s/\([^.][^.]*\)/0\1/g;	# prepend 0 to every token
-       s/0\([^.][^.]\)/\1/g;	# strip leading 0 from long tokens
-       s/$/.00.00/;		# add .00.00 for short version strings
-       s/\.//g;			# remove dots
-       s/\(......\).*/\1/;	# leave only 6 leading digits
-       '`
 
+# remove all but the first line
+sed_cmd="sed -e '2,\$d'"
+# take text after the last space
+sed_cmd="${sed_cmd} -e 's/.* //'"
+# strip "-pre" or "-rc" at the end
+sed_cmd="${sed_cmd} -e 's/-.*//'"
+# prepend 0 to every token
+sed_cmd="${sed_cmd} -e 's/\\([^.][^.]*\\)/0\\1/g'"
+# strip leading 0 from long tokens
+sed_cmd="${sed_cmd} -e 's/0\\([^.][^.]\\)/\\1/g'"
+# add .00.00 for short version strings
+sed_cmd="${sed_cmd} -e 's/\$/.00.00/'"
+# remove dots
+sed_cmd="${sed_cmd} -e 's/\\.//g'"
+# leave only 6 leading digits
+sed_cmd="${sed_cmd} -e 's/\\(......\\).*/\\1/'"
+
+gettext_ver=`$GETTEXTIZE --version | eval ${sed_cmd}`
 if test -z "$gettext_ver"; then
   echo "Cannot determine version of gettext" 2>&1
   exit 1
