@@ -3295,7 +3295,7 @@ Midnight Commander-у манипулировать файлами, расположенными
 используемая в Linux по умолчанию);
 .br
 - файловой системы fish (для манипулирования файлами при
-работе с оболочкой через такие программы как rsh and ssh);
+работе с оболочкой через такие программы как rsh и ssh);
 .br
 - и, наконец, сетевой файловой системы nfs.
 .br
@@ -3307,21 +3307,30 @@ MC может быть собран с поддержкой файловой системы smbfs,
 все встречающиеся имена путей и формируют корректные обращения к 
 различным файловым системам. Форматы обращения к каждой из 
 виртуальных файловых систем описаны в отдельных разделах по каждой ВФС:
+.IP
 .\"LINK2"
 Файловая система ftpfs (FTP File System)
 .\"FTP File System"
+.br
 .\"LINK2"
 Файловая система tar 
 .\"Tar File System"
+.br
 .\"LINK2"
 Файловая система FISH (FIle transfer over SHell) 
 .\"FIle transfer over SHell filesystem"
+.br
 .\"LINK2"
 Файловая система NFS (Network File System) 
 .\"Network File System"
+.br
 .\"LINK2"
 Файловая система UFS (Undelete File System) 
 .\"Undelete File System"
+.br
+.\"LINK2"
+Файловая система smbfs
+.\"SMB File System"
 .PP
 .\"NODE "  FTP File System"
 .SH "Файловая система ftpfs (FTP File System)"
@@ -3620,7 +3629,7 @@ Windows 9x, Windows NT, Windows 2000 и Samba).
 Задание этой переменной дает тот же эффект,
 что и задание ключа -c.
 .PP
-вы можете указать терминалы, которые всегда должны работать
+Вы можете указать терминалы, которые всегда должны работать
 в цветном режиме, добавив строку 
 .I color_terminals
 в секцию Colors инициализационного файла. В этом случае Midnight
@@ -3895,7 +3904,9 @@ an ftp proxy).
 .\"If this variable is on (the default) it will spawn the file command to
 .\"match the file types listed on the
 Когда эта опция включена (что сделано по умолчанию), mc будет вызывать
-программу file для определения типа файла в соответствии с типами файлов,
+программу 
+.B file
+для определения типа файла в соответствии с типами файлов,
 указанными в 
 .\"LINK2"
 mc.ext.
