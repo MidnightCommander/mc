@@ -1,3 +1,8 @@
+1999-01-22  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.c (set_text): Update the call to
+	gnome_icon_text_item_configure() for the new API.
+
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_drag_data_received): Do not force links on

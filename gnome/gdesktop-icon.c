@@ -224,7 +224,8 @@ set_text (DesktopIcon *dicon, char *text)
 					DESKTOP_SNAP_X,
 					DESKTOP_ICON_FONT,
 					text,
-					TRUE);
+					TRUE,
+					FALSE);
 
 	gtk_signal_handler_unblock (GTK_OBJECT (dicon->text), dicon->w_changed_id);
 	gtk_signal_handler_unblock (GTK_OBJECT (dicon->text), dicon->h_changed_id);
