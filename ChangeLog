@@ -1,3 +1,8 @@
+1999-08-20  Norbert Warmuth <nwarmuth@privat.circular.de>
+
+	* configure.in (AC_WITH_SLANG): rm -f destination before makeing
+	a symbolic link (ln -sf doesn't work as expected on Solaris)
+
 1999-08-19  Elliot Lee <sopwith@redhat.com>
 	* */Makefile.in: Have 'make dist' work with builddir != srcdir.
 

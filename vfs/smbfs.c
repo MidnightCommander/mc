@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include "samba/include/config.h"
 #include "samba/include/includes.h"
+#include <string.h>
 
 #include "../src/global.h"
 
@@ -222,8 +223,7 @@ browsing_helper(const char *name, uint32 type, const char *comment)
 	fstring typestr;
 	dir_entry *new_entry;
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_new0 (char, strlen(name)+1);
-	pstrcpy(new_entry->text, name);
+    new_entry->text = g_strdup (name);
 
     new_entry->next = 0;
 
@@ -265,8 +265,7 @@ loaddir_helper(file_info *finfo, const char *mask)
 		return;	/* dont bother with hidden files, "~$" screws up mc */
 
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_new0 (char, strlen(finfo->name)+1);
-	pstrcpy(new_entry->text, finfo->name);
+    new_entry->text = g_strdup(finfo->name);
 
     new_entry->next = 0;
 
@@ -313,43 +312,29 @@ loaddir_helper(file_info *finfo, const char *mask)
 static int
 convert_path(char **remote_file, gboolean trailing_asterik)
 {
-	char *p1, *p2;
-	char *my_remote;
-	char *rname = g_new(char, strlen(*remote_file)*2);
-	my_remote = g_new(char, strlen(*remote_file)+1);
-	my_remote = g_strdup(*remote_file);
+	char *p, *my_remote;
 
+	my_remote = *remote_file;
     if (strncmp (my_remote, URL_HEADER, HEADER_LEN) == 0) {	/* if passed directly */
 		my_remote += 6;
 		if (*my_remote == '/')		/* from server browsing */
 			my_remote++;
-		p1 = strchr(my_remote, '/');
-		if (p1)
-			my_remote = p1+1;	/* advance to end of server name */
+		p = strchr(my_remote, '/');
+		if (p)
+			my_remote = p+1;	/* advance to end of server name */
 	}
 
     if (*my_remote == '/')
         my_remote++;  /* strip off leading '/' */
-    p1 = strchr(my_remote, '/');
-    if (p1)
-        my_remote = p1;   /* strip off share/service name */
+    p = strchr(my_remote, '/');
+    if (p)
+        my_remote = p;   /* strip off share/service name */
     /* create remote filename as understood by smb clientgen */
-    rname[0] = 0;
-    while ((p1 = strchr(my_remote, '/'))) {
-        pstrcat(rname, "\\");
-        p1++;
-        p2 = strchr(p1, '/');
-        if (p2) {
-            strncat(rname, p1, p2-p1);
-            my_remote = p2;
-        } else {    /* last time */
-            my_remote = p1;
-            pstrcat(rname, my_remote);
-        }
-    }
-	if (trailing_asterik)
-		pstrcat(rname, "\\*");	/* for directory listings */
-	*remote_file = g_strdup(rname);
+    p = *remote_file = g_strconcat (my_remote, 
+							        trailing_asterik ? "/*" : "", 
+								    0);
+    while ((p = strchr(p, '/')))
+        *p = '\\';
 	return 0;
 }
 
@@ -358,8 +343,7 @@ server_browsing_helper(const char *name, uint32 m, const char *comment)
 {
 	dir_entry *new_entry;
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_new0 (char, strlen(name)+1);
-	pstrcpy(new_entry->text, name);
+    new_entry->text = g_strdup (name);
 
     new_entry->next = 0;
 
@@ -505,8 +489,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 	int servlen = strlen(smbfs_info->conn->service);
 	char *p;
 /*	int retries = 0;	*/
-	char *my_dirname = g_new(char, sizeof(smbfs_info->dirname)+1);
-	my_dirname = g_strdup(smbfs_info->dirname);
+	char *my_dirname = g_strdup(smbfs_info->dirname);
 	p = my_dirname;
 
 	DEBUG(3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
@@ -1023,7 +1006,6 @@ smbfs_opendir (vfs *me, char *dirname)
 	/* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
 	smbfs_info->server_list = FALSE;
-    smbfs_info->path = g_new (char, strlen(dirname)+1);
     smbfs_info->path = g_strdup(dirname);		/* keep original */
 	smbfs_info->dirname = remote_dir;
     smbfs_info->conn = sc;
@@ -1136,8 +1118,7 @@ static int
 get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 {
 	uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
-	char *mypath = g_new(char, sizeof(path)+1);
-	mypath = g_strdup(path);
+	char *mypath = path;
 
 	DEBUG(3, ("get_remote_stat(): mypath:%s\n", mypath));
 
@@ -1145,6 +1126,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 
     if (cli_list(sc->cli, mypath, attribute, statfile_helper) < 1) {
 		my_errno = ENOENT;
+        g_free (mypath);
 		return -1;	/* cli_list returns number of files */
 	}
 
@@ -1153,6 +1135,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 /* dont free here, use for smbfs_fstat() */
 /*	g_free(single_entry->text);
 	g_free(single_entry);	*/
+    g_free (mypath);
 	return 0;
 }
 
@@ -1176,7 +1159,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 {
 	char *p, *mpp;
 	dir_entry *dentry = current_info->entries;
-	char *mypath = g_new(char, strlen(path)+1);
+	char *mypath;
 	mpp = mypath = g_strdup(path);
 
 	mypath++;				/* cut off leading '/' */
@@ -1197,7 +1180,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		/* now try to identify mypath as PARENT dir */
 	{
 		char *mdp;
-		char *mydir = g_new(char, strlen(current_info->dirname)+1);
+		char *mydir;
 		mdp = mydir = g_strdup(current_info->dirname);
 		while ((p = strchr(mydir, '/')))
 			mydir++;				/* advance util last '/' */
@@ -1279,7 +1262,6 @@ loaddir(vfs *me, char *path)
 {
 	void *info;
 	char *mypath, *p;
-	mypath = g_new(char, strlen(path)+1);
 	mypath = g_strdup(path);
 	p = mypath;
 	if (*p == '/')
@@ -1325,9 +1307,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	pstrcat(server_url, current_bucket->host);
 
 	/* check if stating server */
-	mypath = g_new(char, strlen(path)+1);
-	mypath = g_strdup(path);
-	p = mypath;
+	p = mypath = g_strdup(path);
 	if (strncmp(p, URL_HEADER, HEADER_LEN)) {
 		DEBUG(1, ("'%s' doesnt start with '%s' (length %d)\n",
 			p, URL_HEADER, HEADER_LEN));
@@ -1373,9 +1353,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		}
 	}
 	/* check if current_info is in share requested */
-	service = g_new(char, strlen(path)+1);
-	service = g_strdup(path);
-	p = service;
+	p = service = g_strdup(path);
 	if (strcmp(p, URL_HEADER))
 		p += HEADER_LEN;
 	if (*p== '/')
