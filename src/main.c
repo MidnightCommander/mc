@@ -2315,7 +2315,7 @@ OS_Setup ()
 	termvalue = "";
     }
 #ifndef HAVE_X
-    if (force_xterm || (strncmp (termvalue, "xterm", 5) == 0 || strcmp (termvalue, "dtterm") == 0){
+    if (force_xterm || (strncmp (termvalue, "xterm", 5) == 0 || strcmp (termvalue, "dtterm") == 0)){
 	use_mouse_p = XTERM_MOUSE;
 	xterm_flag = 1;
 #    ifdef SET_TITLE
