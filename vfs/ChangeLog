@@ -1,3 +1,8 @@
+2002-09-29  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_retrieve_file): Allow interrupt by Ctrl-C.
+	From Jindrich Makovicka <makovick@KMLinux.fjfi.cvut.cz>
+
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
 	* sfs.c (sfs_init): Parametrize sfs.ini to allow reuse of the

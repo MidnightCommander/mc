@@ -922,8 +922,8 @@ vfs_s_close (void *fh)
     return res;
 }
 
-int 
-vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
+int
+vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
     off_t total = 0;
@@ -932,7 +932,7 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
     off_t stat_size = ino->st.st_size;
     struct vfs_s_fh fh;
 
-    memset(&fh, 0, sizeof(fh));
+    memset (&fh, 0, sizeof (fh));
 
     fh.ino = ino;
     fh.handle = -1;
@@ -944,35 +944,43 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
     }
 
     if (!MEDATA->linear_start (me, &fh, 0))
-        goto error_3;
+	goto error_3;
 
     /* Clear the interrupt status */
-    
-    while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof(buffer)))) {
+    got_interrupt ();
+    enable_interrupt_key ();
+
+    while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof (buffer)))) {
 
 	if (n < 0)
 	    goto error_1;
 
 	total += n;
-	vfs_print_stats (me->name, _("Getting file"), ino->ent->name, total, stat_size);
+	vfs_print_stats (me->name, _("Getting file"), ino->ent->name,
+			 total, stat_size);
 
-        if (write(handle, buffer, n) < 0) {
+	if (got_interrupt ())
+	    goto error_1;
+
+	if (write (handle, buffer, n) < 0) {
 	    me->verrno = errno;
 	    goto error_1;
 	}
     }
     MEDATA->linear_close (me, &fh);
-    close(handle);
+    close (handle);
 
+    disable_interrupt_key ();
     return 0;
-error_1:
+
+  error_1:
     MEDATA->linear_close (me, &fh);
-error_3:
-    disable_interrupt_key();
-    close(handle);
-    unlink(ino->localname);
-error_4:
-    g_free(ino->localname);
+  error_3:
+    disable_interrupt_key ();
+    close (handle);
+    unlink (ino->localname);
+  error_4:
+    g_free (ino->localname);
     ino->localname = NULL;
     return -1;
 }
