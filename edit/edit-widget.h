@@ -3,9 +3,22 @@
 
 #include "src/dlg.h"		/* Widget */
 
+#define MAXBUFF 1024
+#define MAX_MACRO_LENGTH 1024
+
 struct macro {
     short command;
     short ch;
+};
+
+#define BOOK_MARK_COLOR ((25 << 8) | 5)
+#define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
+
+struct _book_mark {
+    int line;		/* line number */
+    int c;		/* color */
+    struct _book_mark *next;
+    struct _book_mark *prev;
 };
 
 struct syntax_rule {
@@ -13,29 +26,7 @@ struct syntax_rule {
     unsigned char end;
     unsigned char context;
     unsigned char _context;
-#define RULE_ON_LEFT_BORDER 1
-#define RULE_ON_RIGHT_BORDER 2
     unsigned char border;
-};
-
-/*there are a maximum of ... */
-#define MAXBUFF 1024
-#define MAX_MACRO_LENGTH 1024
-
-struct _syntax_marker {
-    long offset;
-    struct syntax_rule rule;
-    struct _syntax_marker *next;
-};
-
-struct _book_mark {
-    int line;		/* line number */
-/* #define BOOK_MARK_COLOR ((0 << 8) | 26) */		/* black on white */
-#define BOOK_MARK_COLOR ((25 << 8) | 5)
-#define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
-    int c;		/* colour */
-    struct _book_mark *next;
-    struct _book_mark *prev;
 };
 
 struct WEdit {

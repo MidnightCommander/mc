@@ -116,36 +116,6 @@ struct selection {
    int len;
 };
 
-#define MAX_WORDS_PER_CONTEXT	1024
-#define MAX_CONTEXTS		128
-
-struct key_word {
-    char *keyword;
-    unsigned char first;
-    char *whole_word_chars_left;
-    char *whole_word_chars_right;
-#define NO_COLOR 0x7FFFFFFF
-#define SPELLING_ERROR 0x7EFEFEFE
-    int line_start;
-    int color;
-};
-
-struct context_rule {
-    char *left;
-    unsigned char first_left;
-    char *right;
-    unsigned char first_right;
-    char line_start_left;
-    char line_start_right;
-    int between_delimiters;
-    char *whole_word_chars_left;
-    char *whole_word_chars_right;
-    char *keyword_first_chars;
-    int spelling;
-/* first word is word[1] */
-    struct key_word **keyword;
-};
-
 struct WEdit;
 typedef struct WEdit WEdit;
 

@@ -1,5 +1,8 @@
 2002-11-30  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c: Make structures key_word, context_rule and
+	_syntax_marker opaque.
+
 	* edit.c: Use g_malloc() and g_free() on buffers1 and buffers2.
 	Eliminate CMalloc.
 	(edit_get_buffer_as_text): Remove, it's unused.

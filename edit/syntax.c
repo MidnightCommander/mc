@@ -42,6 +42,43 @@
 
 #define UNKNOWN_FORMAT "unknown"
 
+#define MAX_WORDS_PER_CONTEXT	1024
+#define MAX_CONTEXTS		128
+
+#define RULE_ON_LEFT_BORDER 1
+#define RULE_ON_RIGHT_BORDER 2
+
+struct key_word {
+    char *keyword;
+    unsigned char first;
+    char *whole_word_chars_left;
+    char *whole_word_chars_right;
+    int line_start;
+    int color;
+};
+
+struct context_rule {
+    char *left;
+    unsigned char first_left;
+    char *right;
+    unsigned char first_right;
+    char line_start_left;
+    char line_start_right;
+    int between_delimiters;
+    char *whole_word_chars_left;
+    char *whole_word_chars_right;
+    char *keyword_first_chars;
+    int spelling;
+    /* first word is word[1] */
+    struct key_word **keyword;
+};
+
+struct _syntax_marker {
+    long offset;
+    struct syntax_rule rule;
+    struct _syntax_marker *next;
+};
+
 int option_syntax_highlighting = 1;
 
 static inline void *syntax_malloc (size_t x)
