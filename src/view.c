@@ -134,7 +134,7 @@ struct WView {
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
     char **block_ptr;		/* Pointer to the block pointers */
-    int          blocks;	/* The number of blocks in *block_ptr */
+    size_t blocks;		/* The number of blocks in *block_ptr */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
     /* view_update_last_byte() must be called after assignment to
@@ -224,7 +224,7 @@ static int regexp_view_search (WView * view, char *pattern, char *string,
 static void view_move_forward (WView * view, int i);
 static void view_labels (WView * view);
 static void set_monitor (WView * view, int set_on);
-static void view_update (WView * view, gboolean update_gui);
+static void view_update (WView * view);
 
 
 static void
@@ -239,7 +239,7 @@ close_view_file (WView *view)
 static void
 free_file (WView *view)
 {
-    int i;
+    size_t i;
 
 #ifdef HAVE_MMAP
     if (view->mmapping) {
@@ -441,7 +441,7 @@ view_handle_editkey (WView *view, int key)
 	node->value = byte_val;
     }
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
     move_right (view);
     return MSG_HANDLED;
 }
@@ -791,7 +791,7 @@ view_init (WView *view, const char *_command, const char *_file, int start_line)
 }
 
 static void
-view_percent (WView *view, int p, int w, gboolean update_gui)
+view_percent (WView *view, int p, int w)
 {
     int percent;
 
@@ -807,7 +807,7 @@ view_percent (WView *view, int p, int w, gboolean update_gui)
 }
 
 static void
-view_status (WView *view, gboolean update_gui)
+view_status (WView *view)
 {
     static int i18n_adjust = 0;
     static const char *file_label;
@@ -852,8 +852,7 @@ view_status (WView *view, gboolean update_gui)
 	    view_percent (view,
 			  view->hex_mode ? view->edit_cursor : view->
 			  start_display,
-			  view->widget.cols - view->have_frame + 1,
-			  update_gui);
+			  view->widget.cols - view->have_frame + 1);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -1186,14 +1185,14 @@ view_place_cursor (WView *view)
 }
 
 static void
-view_update (WView *view, gboolean update_gui)
+view_update (WView *view)
 {
     static int dirt_limit = 1;
 
     if (view->dirty > dirt_limit) {
 	/* Too many updates skipped -> force a update */
 	display (view);
-	view_status (view, update_gui);
+	view_status (view);
 	view->dirty = 0;
 	/* Raise the update skipping limit */
 	dirt_limit++;
@@ -1204,14 +1203,14 @@ view_update (WView *view, gboolean update_gui)
 	if (is_idle ()) {
 	    /* We have time to update the screen properly */
 	    display (view);
-	    view_status (view, update_gui);
+	    view_status (view);
 	    view->dirty = 0;
 	    if (dirt_limit > 1)
 		dirt_limit--;
 	} else {
 	    /* We are busy -> skipping full update,
 	       only the status line is updated */
-	    view_status (view, update_gui);
+	    view_status (view);
 	}
 	/* Here we had a refresh, if fast scrolling does not work
 	   restore the refresh, although this should not happen */
@@ -1346,7 +1345,7 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
    of lines up to there and then use move_forward2(p, something, 0), which we
    return */
 static offset_type
-move_backward2 (WView *view, offset_type current, int lines)
+move_backward2 (WView *view, offset_type current, unsigned int lines)
 {
     if (view->hex_mode) {
         if (view->edit_cursor >= lines * view->bytes_per_line) {
@@ -1515,6 +1514,8 @@ icase_search_p (WView *view, char *text, char *data, int nothing)
     int lng;
     const int direction = view->direction;
 
+    (void) nothing;
+
     /* If we are searching backwards, reverse the string */
     if (direction == -1) {
 	g_strreverse (text);
@@ -1674,7 +1675,7 @@ search (WView *view, char *text,
 	if (p >= view->update_activate) {
 	    view->update_activate += view->update_steps;
 	    if (verbose) {
-		view_percent (view, p, w, TRUE);
+		view_percent (view, p, w);
 		mc_refresh ();
 	    }
 	    if (got_interrupt ())
@@ -1766,7 +1767,7 @@ block_search (WView *view, const char *buffer, int len)
 	    if (e <= view->update_activate) {
 		view->update_activate -= view->update_steps;
 		if (verbose) {
-		    view_percent (view, e, w, TRUE);
+		    view_percent (view, e, w);
 		    mc_refresh ();
 		}
 		if (got_interrupt ())
@@ -1792,7 +1793,7 @@ block_search (WView *view, const char *buffer, int len)
 	    if (e >= view->update_activate) {
 		view->update_activate += view->update_steps;
 		if (verbose) {
-		    view_percent (view, e, w, TRUE);
+		    view_percent (view, e, w);
 		    mc_refresh ();
 		}
 		if (got_interrupt ())
@@ -1962,7 +1963,7 @@ do_regexp_search (void *xview, char *regexp)
     search (view, regexp, regexp_view_search);
     /* Had a refresh here */
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 static void
@@ -1977,7 +1978,7 @@ do_normal_search (void *xview, char *text)
 	search (view, text, icase_search_p);
     /* Had a refresh here */
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Real view only */
@@ -2002,7 +2003,7 @@ toggle_hexedit_mode (WView *view)
     }
     view_labels (view);
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Toggle between wrapped and unwrapped view */
@@ -2023,7 +2024,7 @@ toggle_wrap_mode (WView *view)
     }
     view_labels (view);
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Toggle between hex view and text view */
@@ -2046,7 +2047,7 @@ toggle_hex_mode (WView *view)
     get_bottom_first (view, 1, 1);
     view_labels (view);
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Text view */
@@ -2075,7 +2076,7 @@ goto_line (WView *view)
     }
     view->dirty++;
     view->wrap_mode = saved_wrap_mode;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Hex view */
@@ -2101,7 +2102,7 @@ goto_addr (WView *view)
 	g_free (line);
     }
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Both views */
@@ -2149,7 +2150,7 @@ regexp_search_cmd (WView *view)
 
 /* Both views */
 static void
-normal_search (WView *view, int direction)
+normal_search (WView *view)
 {
     static char *old;
     char *exp = old ? old : "";
@@ -2217,7 +2218,7 @@ normal_search (WView *view, int direction)
 static void
 normal_search_cmd (WView *view)
 {
-    normal_search (view, 1);
+    normal_search (view);
 }
 
 static void
@@ -2242,7 +2243,7 @@ change_viewer (WView *view)
 	g_free (t);
 	view_labels (view);
 	view->dirty++;
-	view_update (view, TRUE);
+	view_update (view);
     }
 }
 
@@ -2253,7 +2254,7 @@ change_nroff (WView *view)
     altered_nroff_flag = 1;
     view_labels (view);
     view->dirty++;
-    view_update (view, TRUE);
+    view_update (view);
 }
 
 /* Real view only */
@@ -2368,7 +2369,7 @@ continue_search (WView *view)
 	(*view->last_search) (view, view->search_exp);
     } else {
 	/* if not... then ask for an expression */
-	normal_search (view, 1);
+	normal_search (view);
     }
 }
 
@@ -2442,7 +2443,7 @@ view_handle_key (WView *view, int c)
 	if (view->last_search) {
 	    (*view->last_search) (view, view->search_exp);
 	} else {
-	    normal_search (view, -1);
+	    normal_search (view);
 	}
 	return MSG_HANDLED;
 
@@ -2547,7 +2548,7 @@ view_handle_key (WView *view, int c)
     case XCTRL ('t'):
 	do_select_codepage ();
 	view->dirty++;
-	view_update (view, TRUE);
+	view_update (view);
 	return MSG_HANDLED;
 #endif				/* HAVE_CHARSET */
 
@@ -2620,10 +2621,11 @@ view_event (WView *view, Gpm_Event *event, int *result)
 static int
 real_view_event (Gpm_Event *event, void *x)
 {
+    WView *view = (WView *) x;
     int result;
 
-    if (view_event ((WView *) x, event, &result))
-	view_update ((WView *) x, TRUE);
+    if (view_event (view, event, &result))
+	view_update (view);
     return result;
 }
 
@@ -2720,7 +2722,7 @@ view_hook (void *v)
 
     view_init (view, 0, panel->dir.list[panel->selected].fname, 0);
     display (view);
-    view_status (view, TRUE);
+    view_status (view);
 }
 
 static cb_ret_t
@@ -2742,7 +2744,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_DRAW:
 	display (view);
-	view_status (view, TRUE);
+	view_status (view);
 	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
@@ -2755,7 +2757,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 	if (view->view_quit && !view->have_frame)
 	    dlg_stop (h);
 	else {
-	    view_update (view, TRUE);
+	    view_update (view);
 	}
 	return i;
 
@@ -2764,7 +2766,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 	view->bottom_first = INVALID_OFFSET;
 	move_to_bottom (view);
 	display (view);
-	view_status (view, TRUE);
+	view_status (view);
 	sleep (1);
 	return MSG_HANDLED;
 
