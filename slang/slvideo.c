@@ -81,7 +81,7 @@ static unsigned char Color_Map [JMAX_COLORS] =
 };
 
 #define JMAX_COLOR_NAMES 16
-static char *Color_Names [JMAX_COLOR_NAMES] =
+static const char * const Color_Names [JMAX_COLOR_NAMES] =
 {
    "black", "blue", "green", "cyan",
      "red", "magenta", "brown", "lightgray",
