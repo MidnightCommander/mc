@@ -325,8 +325,8 @@ We also a set of mailing lists for the program:
 mc-announce: Announcements of new version of the Midnight Commander.
 mc-digest:   Digest version of the mc list.
 mc-patches:  Patches by mail (also on the ftp site).
-mc:          Discussion on the Midnight Commander file manager.
-mc-devel:    For discussion between the developers of the program.
+mc2:         Discussion on the Midnight Commander file manager.
+mc2-devel:   For discussion between the developers of the program.
 
 to subscribe to the mailing lists, send a message to:
 

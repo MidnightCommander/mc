@@ -9,7 +9,7 @@ Porada: Wybieranie katalogów: dodaj uko¶nik na koñcu wzorca dopasowania.
 Porada: Je¶li w twoim terminalu brak klawiszy funkcyjnych, u¿yj Esc+numer.
 Porada: Witryna Midnight Commandera jest pod adresem http://www.gnome.org/mc/
 Porada: Najnowsza wersja MC pod adresem ftp://ftp.gnome.org/pub/GNOME/sources/mc
-Porada: Opis b³êdów (w jêzyku angielskim) wysy³aj na mc-bugs@nuclecu.unam.mx
+Porada: Opis b³êdów (w jêzyku angielskim) wysy³aj na mc2-devel@nuclecu.unam.mx
 Porada: Strona domowa Midnight Commandera pod adresem http://www.gnome.org/mc
 Porada: Za pomoc± klawisza Tab zmienia siê bie¿±cy panel.
 Porada: VFS: naci¶nij Enter na archiwum tar, aby obejrzeæ jego zawarto¶æ.

@@ -124,7 +124,7 @@ Where to get more information:
 There is a mailing list for discussion on enhancing the program, future
 directions and announcements; if you want to subscribe, send mail to:
 
-majordomo@roxanne.nuclecu.unam.mx
+majordomo@nuclecu.unam.mx
 
 There is a WWW page for the Midnight Commander at http://www.gnome.org/mc.
 
@@ -143,7 +143,7 @@ federico@nuclecu.unam.mx
 
 or if it would benefit more people, to the mailing list:
 
-mc@roxanne.nuclecu.unam.mx
+mc2@nuclecu.unam.mx
 
 Help develop and enhance free software.
 
@@ -196,7 +196,7 @@ Reporting problems
 ------------------
 
 Please, send a detailed description of your problem to the
-mc-bugs@roxanne.nuclecu.unam.mx address.
+mc2-devel@nuclecu.unam.mx address.
 
 Include the version of the program, the operating system that you are
 using, the compiler and compiler flags used to compile the program (if

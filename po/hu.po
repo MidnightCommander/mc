@@ -6823,11 +6823,11 @@ msgstr "-X, --dbgsubshell  [FEJLESZTÕKNEK: háttér-shell debugolása].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-bugs@nuclecu.unam.mx\n"
+"to mc2-devel@nuclecu.unam.mx\n"
 msgstr ""
 "\n"
 "Hibajelentéseket (az `mc -V' kimenetét is mellékelve) a következõ\n"
-"címre várunk: mc-bugs@nuclecu.unam.mx\n"
+"címre várunk: mc2-devel@nuclecu.unam.mx\n"
 
 # src/main.c:2538
 #: src/main.c:2544

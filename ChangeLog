@@ -1,3 +1,19 @@
+2001-04-20  Pavel Roskin  <proski@gnu.org>
+
+	* FAQ: Change the mailing list addresses and the download
+	locations.
+	* INSTALL: Likewise.
+	* MAINTAINERS: Likewise.
+	* README: Likewise.
+	* doc/mc.1.in: Likewise.
+	* gnome/gmc-window.c: Likewise.
+	* lib/README.xterm: Likewise.
+	* lib/mc.ext.in: Likewise.
+	* lib/mc.hint*: Likewise.
+	* lib/mc.hlp.hu: Likewise.
+	* po/*.po: Likewise.
+	* src/main.c: Likewise.
+
 2001-04-19  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't install mcserv unless

@@ -5381,7 +5381,7 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-bugs@nuclecu.unam.mx\n"
+"to mc2-devel@nuclecu.unam.mx\n"
 msgstr ""
 
 #: src/main.c:2544

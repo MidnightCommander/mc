@@ -10,7 +10,7 @@ Ayudita: Para seleccionar directorios añadir "/" tras el patrón a buscar.
 Ayudita: Si no funcionan las teclas de función, ESC+número sirve.
 Ayudita: El WWW del Midnight Commander está en http://www.gnome.org/mc/
 Ayudita: La última versión de MC en ftp://ftp.gnome.org/pub/GNOME/sources/mc
-Ayudita: Comunique cualquier defecto a mc-bugs@nuclecu.unam.mx
+Ayudita: Comunique cualquier defecto a mc2-devel@nuclecu.unam.mx
 Ayudita: El sitio oficial del Midnight Commander es http://www.gnome.org/mc/
 Ayudita: El tabulador cambia de panel.
 Ayudita: ¡El mejor VFS! Al <entrar> en un archivo comprimido se ve su contenido.

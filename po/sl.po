@@ -5565,11 +5565,11 @@ msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: Razhro¹èuj podlupino].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-bugs@nuclecu.unam.mx\n"
+"to mc2-devel@nuclecu.unam.mx\n"
 msgstr ""
 "\n"
 "Prosimo po¹ljite poroèila o hro¹èih (vkljuèite izpis `mc -V')\n"
-"na mc-bugs@nuclecu.unam.mx\n"
+"na mc2-devel@nuclecu.unam.mx\n"
 
 #: src/main.c:2544
 msgid ""

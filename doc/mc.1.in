@@ -3197,7 +3197,7 @@ See the file TODO in the distribution for information on what
 remains to be done.
 .PP
 If you want to report a problem with the program, please send mail to
-this address: mc-bugs@roxanne.nuclecu.unam.mx.
+this address: mc2-devel@nuclecu.unam.mx.
 .PP
 Provide a detailed description of the bug, the version of the program
 you are running (mc -V display this information), the operating system

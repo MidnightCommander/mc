@@ -2527,7 +2527,7 @@ print_mc_usage (void)
 #endif
     N_("\n"
        "Please send any bug reports (including the output of `mc -V')\n"
-       "to mc-bugs@nuclecu.unam.mx\n"),
+       "to mc2-devel@nuclecu.unam.mx\n"),
     NULL    
     };
 

@@ -5562,11 +5562,11 @@ msgstr "-X, --dbgsubshell  [DLA-PROGRAMISTÓW: ¦ledzenie podpow³oki].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc-bugs@nuclecu.unam.mx\n"
+"to mc2-devel@nuclecu.unam.mx\n"
 msgstr ""
 "\n"
 "Wszelkie komunikaty o b³êdach (wraz z tre¶ciê `mc -V')\n"
-"wysy³aj na adres mc-bugs@nuclecu.unam.mx\n"
+"wysy³aj na adres mc2-devel@nuclecu.unam.mx\n"
 
 #: src/main.c:2544
 msgid ""

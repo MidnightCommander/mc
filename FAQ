@@ -197,13 +197,10 @@ Questions and Answers
    
 1.6 Where can I get Midnight Commander?
 
-   See http://www.gnome.org/mc/download.html. There are about seventy
-   download sites. Note that the newest files might not be present on all
-   the download sites yet.
-   
-   In short: the main site is ftp://ftp.nuclecu.unam.mx/linux/local/ and
-   the sunsite.unc.edu mirrors have MC in the
-   /pub/Linux/utils/file/managers/mc directory.
+   The main site is ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
+
+   For older versions and precompiled binaries see
+   http://www.gnome.org/mc/download.html
    
 1.7 I don't have FTP access. Where can I get MC?
 
@@ -860,8 +857,8 @@ into drive D:"?
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
    
-   Send your report/request to mc-devel@roxanne.nuclecu.unam.mx or
-   mc@roxanne.nuclecu.unam.mx. These mailing lists are the most certain
+   Send your report/request to mc2-devel@nuclecu.unam.mx or
+   mc2@nuclecu.unam.mx. These mailing lists are the most certain
    way to contact the developers. Remember to mention if you are not on
    the mailing list to make sure that you will receive a copy of replies.
    
@@ -889,7 +886,7 @@ into drive D:"?
 9.4 How can I join the development?
 
    To join the development just code the feature you want to add and send
-   your patch for inclusion. Email address is mc-devel@nuclecu.unam.mx.
+   your patch for inclusion. Email address is mc2-devel@nuclecu.unam.mx.
    Before you start coding check the latest development version. It might
    be that your feature has already been implemented.
    
@@ -910,13 +907,13 @@ answer?
    fixed in the new versions.
    
    If you still can't find an answer, post your question to the Midnight
-   Commander mailing list. Its address is mc@nuclecu.unam.mx.
+   Commander mailing list. Its address is mc2@nuclecu.unam.mx.
    
 10.2 What mailing lists are there for Midnight Commander?
 
    Following mailing lists discuss about Midnight Commander:
    
-   mc
+   mc2
           General discussion of the Midnight Commander
           
    mc-digest
@@ -928,14 +925,14 @@ answer?
    mc-patches
           The latest Commander patches
           
-   mc-devel
+   mc2-devel
           Technical development discussion
           
    mc-chat
           Non-MC related chatting by the developers (contact Miguel to
           subscribe)
           
-   To subscribe, send e-mail to majordomo@roxanne.nuclecu.unam.mx with
+   To subscribe, send e-mail to majordomo@nuclecu.unam.mx with
    the following line in the body of the message:
 
     subscribe <list-name> [optional-address]
@@ -979,7 +976,7 @@ answer?
 
    Send your comments about this document to janne@gnome.org
    
-   Send your comments about the Midnight Commander to mc@nuclecu.unam.mx
+   Send your comments about the Midnight Commander to mc2@nuclecu.unam.mx
    
 11.4 Disclaimer and copyright
 
