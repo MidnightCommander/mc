@@ -1,3 +1,8 @@
+2001-02-20  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for sys/time.h and sys/timeb.h. Use
+	AC_HEADER_TIME.
+
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
 	* autogen.sh: Create vfs/samba/include/stamp-h.in.
