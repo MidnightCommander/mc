@@ -1536,12 +1536,8 @@ cb_ret_t
 input_callback (WInput *in, widget_msg_t msg, int parm)
 {
     int v;
-    Dlg_head *h = in->widget.parent;
 
     switch (msg) {
-    case WIDGET_INIT:
-	return MSG_HANDLED;
-
     case WIDGET_KEY:
 	if (parm == XCTRL ('q')) {
 	    quote = 1;
@@ -1549,14 +1545,11 @@ input_callback (WInput *in, widget_msg_t msg, int parm)
 	    quote = 0;
 	    return v;
 	}
-	if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
-	    || parm == KEY_F (10) || parm == XCTRL ('g'))
-	    return MSG_NOT_HANDLED;		/* We don't handle up/down */
 
-	if (parm == '\n') {
-	    dlg_one_down (h);
-	    return MSG_HANDLED;
-	}
+	/* Keys we want others to handle */
+	if (parm == KEY_UP || parm == KEY_DOWN || parm == ESC_CHAR
+	    || parm == KEY_F (10) || parm == XCTRL ('g') || parm == '\n')
+	    return MSG_NOT_HANDLED;
 
 	/* When pasting multiline text, insert literal Enter */
 	if ((parm & ~KEY_M_MASK) == '\n') {
@@ -1572,7 +1565,7 @@ input_callback (WInput *in, widget_msg_t msg, int parm)
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
 	update_input (in, 0);
-	return default_proc (msg, parm);
+	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
 	widget_move (&in->widget, 0, in->point - in->first_shown);

@@ -1,5 +1,8 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (input_callback): Don't handle Enter.
+	Requested by Ali Akcaagac <aliakc@web.de>
+
 	* chmod.c (chmod_callback): Fix uninitialized variable.
 
 2003-09-11  Pavel Roskin  <proski@gnu.org>
