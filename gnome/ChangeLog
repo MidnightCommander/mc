@@ -1,5 +1,8 @@
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
+	* gmc-chargrid.c: Try 14-point clean and monospaced fonts
+	before resorting to "fixed".
+
 	* gfind.c (find_file): Add missing break.
 
 	* gdesktop.c (desktop_create_url): Accept new parameter

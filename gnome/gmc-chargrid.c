@@ -13,7 +13,8 @@
 
 #define DEFAULT_WIDTH  80
 #define DEFAULT_HEIGHT 25
-#define DEFAULT_FONT   "fixed,-*-*-medium-r-normal-*-12-*-*-*-*-*-*-*,*"
+#define DEFAULT_FONT "-*-*-medium-r-normal-*-14-*-*-*-c-*-*-*," \
+		     "-*-*-medium-r-normal-*-14-*-*-*-m-*-*-*,fixed,*"
 
 
 #define CHARS(cgrid) ((char *) cgrid->chars)
