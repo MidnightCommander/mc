@@ -296,7 +296,12 @@ then
 	vfs_type="Midnight Commander Virtual File System"
 fi
 
+dnl This should be unadorned "slang" or "ncurses"
+screen_type=""
+
+dnl Screen manager name (for the output only)
 screen_manager=unknown
+
 search_ncurses=false
 
 mouse_lib="xterm only"
@@ -335,6 +340,7 @@ AC_ARG_WITH(ncurses,
 		MCLIBS="$MCLIBS -L$withval/lib -lncurses"
 		CPPFLAGS="$CPPFLAGS -I$withval/include"
 		search_ncurses=false
+		screen_type="ncurses"
 		screen_manager="ncurses"
 		AC_DEFINE(USE_NCURSES)
 	fi
@@ -616,14 +622,18 @@ if $search_ncurses
 then
     AC_MSG_NOTICE([checking location of ncurses.h file])
 
-    AC_NCURSES(/usr/include, ncurses.h, -lncurses,, "ncurses on /usr/include")
-    AC_NCURSES(/usr/include/ncurses, ncurses.h, -lncurses, -I/usr/include/ncurses, "ncurses on /usr/include/ncurses")
-    AC_NCURSES(/usr/local/include, ncurses.h, -L/usr/local/lib -lncurses, -I/usr/local/include, "ncurses on /usr/local")
-    AC_NCURSES(/usr/local/include/ncurses, ncurses.h, -L/usr/local/lib -L/usr/local/lib/ncurses -lncurses, -I/usr/local/include/ncurses, "ncurses on /usr/local/include/ncurses")
-
-    AC_NCURSES(/usr/local/include/ncurses, curses.h, -L/usr/local/lib -lncurses, -I/usr/local/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/local/.../ncurses")
-
-    AC_NCURSES(/usr/include/ncurses, curses.h, -lncurses, -I/usr/include/ncurses -DRENAMED_NCURSES, "renamed ncurses on /usr/include/ncurses")
+    AC_NCURSES(/usr/include, ncurses.h, -lncurses,,
+	       [ncurses in /usr/include])
+    AC_NCURSES(/usr/include/ncurses, ncurses.h, -lncurses, -I/usr/include/ncurses,
+	       [ncurses in /usr/include/ncurses])
+    AC_NCURSES(/usr/local/include, ncurses.h, -L/usr/local/lib -lncurses, -I/usr/local/include,
+	       [ncurses in /usr/local])
+    AC_NCURSES(/usr/local/include/ncurses, ncurses.h, -L/usr/local/lib -L/usr/local/lib/ncurses -lncurses, -I/usr/local/include/ncurses,
+	       [ncurses in /usr/local/include/ncurses])
+    AC_NCURSES(/usr/local/include/ncurses, curses.h, -L/usr/local/lib -lncurses, -I/usr/local/include/ncurses -DRENAMED_NCURSES,
+	       [renamed ncurses in /usr/local/include/ncurses])
+    AC_NCURSES(/usr/include/ncurses, curses.h, -lncurses, -I/usr/include/ncurses -DRENAMED_NCURSES,
+	       [renamed ncurses in /usr/include/ncurses])
 fi
 
 
@@ -657,7 +667,7 @@ if test -n "$ncurses_version"; then
   LIBS="$save_LIBS"
 fi
 
-if test "x$screen_manager" = "xunknown"; then
+if test "x$screen_type" = "x"; then
     AC_WITH_SLANG
 fi
 
@@ -709,8 +719,7 @@ dnl We check for the existance of setupterm on curses library
 dnl this is required to load certain definitions on some termcaps
 dnl editions (AIX and OSF/1 I seem to remember).
 dnl Note that we avoid using setupterm 
-case $screen_manager in
-SLang*)
+if test "x$screen_type" = xslang; then
 	case $host_os in
 	linux*)
 		;;
@@ -729,8 +738,7 @@ SLang*)
 from `curses' library in S-Lang])])
 		])
 	esac
-	;;
-esac
+fi
 
 LIBS="$LIBS $posix_libs"
 
@@ -796,10 +804,9 @@ AC_CONFIG_COMMANDS(potfiles,
 
 AC_OUTPUT
 
-case $screen_manager in
-SLang*)
-    screen_manager="${screen_manager}${slang_term}" ;;
-esac
+if test "x$screen_type" = xslang; then
+    screen_manager="${screen_manager}${slang_term}"
+fi
 
 echo "
 Configuration:

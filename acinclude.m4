@@ -701,6 +701,7 @@ AC_DEFUN([AC_WITH_SLANG], [
 	AC_DEFINE(HAVE_SLANG, 1,
 		  [Define to use S-Lang library for screen management])
 	search_ncurses=false
+	screen_type="slang"
 	if $slang_use_system_installed_lib
 	then
 	    AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
@@ -777,7 +778,8 @@ AC_DEFUN([AC_NCURSES], [
  	    MCLIBS="$MCLIBS $3"
 	    CPPFLAGS="$CPPFLAGS $4"
 	    search_ncurses=false
-	    screen_manager=$5
+	    screen_type="ncurses"
+	    screen_manager="$5"
 	    AC_DEFINE(USE_NCURSES, 1,
 		      [Define to use ncurses for screen management])
 	fi
