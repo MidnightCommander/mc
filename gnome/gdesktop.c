@@ -532,6 +532,7 @@ arrange_desktop_icons (void)
 		remove_from_slot (l->data);
 
 	for (l = icons; l; l = l->next) {
+		xpos = ypos = 0;
 		get_icon_auto_pos (&xpos, &ypos);
 		desktop_icon_info_place (l->data, xpos, ypos);
 	}

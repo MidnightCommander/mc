@@ -1,5 +1,10 @@
 1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (arrange_desktop_icons): I am such a doofus, I did
+	not initialize two variables here.
+
+1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gdesktop.c (reload_desktop_icons): Take auto-positioning and
 	snap-positioning into account.  This is the right thing to do.
 	(get_icon_auto_pos): Do auto-positioning in two steps, first from
