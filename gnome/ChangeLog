@@ -1,3 +1,9 @@
+1999-02-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gcorba.c (do_window_close): It turns out that we *do* need to
+	call CORBA_free().  It was a bug in ORBit which was causing this
+	to crash.
+
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (drag_end): Reload the desktop when a drag from the
@@ -8,6 +14,7 @@
 	* gcorba.c (do_window_close): Removed call to CORBA_free, as
 	PortableServer_POA_deactivate_object already calls CORBA_free on
 	the object.
+
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* glayout.c (gnome_close_panel_event): This function should return
