@@ -1,3 +1,7 @@
+2001-04-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Bump version to 4.5.53a.
+
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit/editcmd.c: Remove support for XView layout attributes.
