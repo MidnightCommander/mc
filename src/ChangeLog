@@ -1,4 +1,4 @@
-2004-03-09  Pavel Roskin  <proski@gnu.org>
+2004-03-05  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c: Partly revert previous patch to preserve
 	translated strings.
