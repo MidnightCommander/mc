@@ -1,3 +1,8 @@
+2001-03-07  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* extfs/*uzip*: replace uzip with perl version by
+	Oskar Liljeblad <osk@hem.passagen.se>
+
 2001-03-05  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* vfs.[ch] (vfs_parse_ls_lga, vfs_parse_filemode): p constified
