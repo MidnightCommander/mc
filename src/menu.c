@@ -16,13 +16,14 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
 #include <string.h>
 #include <stdarg.h>
 #include <sys/types.h>
 #include <ctype.h>
 #include "global.h"
+#include "tty.h"
 #include "menu.h"
+#include "help.h"
 #include "dialog.h"
 #include "color.h"
 #include "main.h"
@@ -266,6 +267,29 @@ static int menubar_handle_key (WMenu *menubar, int key)
     
     if (is_abort_char (key)){
 	menubar_finish (menubar);
+	return 1;
+    }
+
+    if (key == KEY_F(1)) {
+	if (menubar->dropped) {
+	    switch (menubar->selected) {
+	    case 1:
+		interactive_display (NULL, "[File Menu]");
+		break;
+	    case 2:
+		interactive_display (NULL, "[Command Menu]");
+		break;
+	    case 3:
+		interactive_display (NULL, "[Options Menu]");
+		break;
+	    default:
+		interactive_display (NULL, "[Left and Right Menus]");
+		break;
+	    }
+	} else {
+	    interactive_display (NULL, "[Menu Bar]");
+	}
+	menubar_draw (menubar);
 	return 1;
     }
 

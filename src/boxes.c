@@ -187,7 +187,7 @@ display_init (int radio_sel, char *init_text,
         i18n_displays_flag = 1;
     }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
-		     display_callback, "[Left and Right Menus]", "display",
+		     display_callback, "[Listing Mode...]", "display",
 		     DLG_CENTER | DLG_GRID);
 
     x_set_dialog_title (dd, _("Listing mode"));
@@ -330,7 +330,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 	}
     
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, common_dialog_callback,
-		     "[Left and Right Menus]", "sort", DLG_CENTER | DLG_GRID);
+		     "[Sort Order...]", "sort", DLG_CENTER | DLG_GRID);
 		     
     x_set_dialog_title (dd, sort_title);
 

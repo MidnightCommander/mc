@@ -1,3 +1,12 @@
+2001-08-06  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c (display_init): Associate correct help topic.
+	(sort_box): Likewise.
+	(set_panel_filter): Likewise.
+	* option.c (init_configure): Likewise.
+	* menu.c (menubar_handle_key): Show help dependent on the active
+	menu.
+
 2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* mad.c (mad_strdup): Return NULL if NULL is passed.

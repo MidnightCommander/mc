@@ -449,7 +449,9 @@ void set_panel_filter (WPanel *p)
     
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
-    reg_exp = input_dialog (_(" Filter "), _(" Set expression for filtering filenames"), x);
+    reg_exp = input_dialog_help (_(" Filter "),
+				 _(" Set expression for filtering filenames"),
+				 "[Filter...]", x);
     if (!reg_exp)
 	return;
     set_panel_filter_to (p, reg_exp);

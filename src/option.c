@@ -193,7 +193,7 @@ static void init_configure (void)
 	}
 
     conf_dlg = create_dlg (0, 0, 20, first_width + second_width + 9,
-		dialog_colors, configure_callback, "[Options Menu]",
+		dialog_colors, configure_callback, "[Configuration]",
 		"option", DLG_CENTER | DLG_GRID);
 
     x_set_dialog_title (conf_dlg, _("Configure options"));
