@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-22 16:46-0400\n"
+"POT-Creation-Date: 2003-10-10 17:09-0400\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
 #: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2705
 #: edit/editcmd.c:273 edit/editcmd.c:281 edit/editcmd.c:1709 src/wtools.c:135
-#: vfs/vfs.c:1840
+#: vfs/vfs.c:1830
 msgid "Error"
 msgstr "Грешка"
 
@@ -113,7 +113,7 @@ msgid " Save As "
 msgstr " Сачувај као "
 
 #: edit/editcmd.c:473 edit/editcmd.c:794 edit/editcmd.c:831 edit/editcmd.c:990
-#: edit/editcmd.c:1103 src/file.c:612 src/help.c:319 src/main.c:434
+#: edit/editcmd.c:1103 src/file.c:612 src/help.c:319 src/main.c:435
 #: src/screen.c:1415 src/screen.c:1972 src/selcodepage.c:106
 #: src/subshell.c:319 src/subshell.c:653 src/utilunix.c:398 src/utilunix.c:402
 #: src/utilunix.c:424 src/utilunix.c:476 vfs/mcfs.c:139
@@ -302,7 +302,7 @@ msgstr " Тражена ниска није нађена "
 msgid " %d finds made, %d bookmarks added "
 msgstr " Нађено %d, додано %d обележивача "
 
-#: edit/editcmd.c:2078 edit/editwidget.c:296 src/help.c:827 src/main.c:1233
+#: edit/editcmd.c:2078 edit/editwidget.c:296 src/help.c:827 src/main.c:1234
 #: src/view.c:479 src/view.c:2242 src/view.c:2267
 msgid "Quit"
 msgstr "Заврши"
@@ -316,13 +316,13 @@ msgid "Cancel quit"
 msgstr "Поништи завршетак"
 
 #: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
-#: src/filegui.c:543 src/hotlist.c:1048 src/main.c:481 src/screen.c:1960
+#: src/filegui.c:543 src/hotlist.c:1048 src/main.c:482 src/screen.c:1960
 #: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Да"
 
 #: edit/editcmd.c:2079 src/cmd.c:199 src/file.c:1850 src/file.c:2223
-#: src/filegui.c:542 src/hotlist.c:1048 src/main.c:481 src/screen.c:1961
+#: src/filegui.c:542 src/hotlist.c:1048 src/main.c:482 src/screen.c:1961
 #: src/subshell.c:654 src/tree.c:764 src/view.c:481 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Не"
@@ -502,7 +502,7 @@ msgstr ""
 " Ауторска права (C) 1996 Задужбина за слободни софтвер\n"
 "\n"
 "     Пријатељски према кориснику уређивач текста написан\n"
-"                  за Поноћног командира.\n"
+"                  за Поноћног наредника.\n"
 
 #: edit/editmenu.c:283 edit/editmenu.c:301
 msgid "&Open file..."
@@ -672,7 +672,7 @@ msgstr "&Опште...  "
 msgid "&Save mode..."
 msgstr "&Режим чувања..."
 
-#: edit/editmenu.c:397 src/main.c:934
+#: edit/editmenu.c:397 src/main.c:935
 msgid "learn &Keys..."
 msgstr "Научи &тастере..."
 
@@ -764,7 +764,7 @@ msgstr "Имитација пречица"
 msgid " Editor options "
 msgstr " Избори уређивача "
 
-#: edit/editwidget.c:287 src/help.c:794 src/help.c:815 src/main.c:1230
+#: edit/editwidget.c:287 src/help.c:794 src/help.c:815 src/main.c:1231
 #: src/screen.c:2187 src/tree.c:1030 src/view.c:2240
 msgid "Help"
 msgstr "Помоћ"
@@ -789,15 +789,15 @@ msgstr "Прмсти"
 msgid "Delete"
 msgstr "Обриши"
 
-#: edit/editwidget.c:295 src/main.c:1232
+#: edit/editwidget.c:295 src/main.c:1233
 msgid "PullDn"
 msgstr "ПадМни"
 
-#: edit/syntax.c:1089 edit/syntax.c:1096
+#: edit/syntax.c:1100 edit/syntax.c:1107
 msgid " Load syntax file "
 msgstr " Учитај датотеку синтаксе "
 
-#: edit/syntax.c:1090 src/help.c:765 src/user.c:713
+#: edit/syntax.c:1101 src/help.c:765 src/user.c:713
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -806,7 +806,7 @@ msgstr ""
 " Не могу да отворим датотеку `%s' \n"
 " %s "
 
-#: edit/syntax.c:1097
+#: edit/syntax.c:1108
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Грешка у датотеци `%s' на реду %d "
@@ -876,27 +876,27 @@ msgstr ""
 " Не могу да променим власника `%s' \n"
 " %s "
 
-#: src/background.c:177
+#: src/background.c:164
 msgid "Background process:"
 msgstr "Позадински процес:"
 
-#: src/background.c:275 src/file.c:2159
+#: src/background.c:262 src/file.c:2159
 msgid " Background process error "
 msgstr " Грешка позадинског процеса "
 
-#: src/background.c:278
+#: src/background.c:265
 msgid " Child died unexpectedly "
 msgstr " Дете је изненадно завршило рад "
 
-#: src/background.c:280
+#: src/background.c:267
 msgid " Unknown error in child "
 msgstr " Непозната грешка у детету "
 
-#: src/background.c:295
+#: src/background.c:282
 msgid " Background protocol error "
 msgstr " Грешка позадинског протокола "
 
-#: src/background.c:296
+#: src/background.c:283
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -1048,7 +1048,7 @@ msgstr "Симболичка веза"
 msgid "Running "
 msgstr "Покренуто "
 
-#: src/boxes.c:881 src/find.c:734
+#: src/boxes.c:881 src/find.c:736
 msgid "Stopped"
 msgstr "Заустављено "
 
@@ -1076,7 +1076,7 @@ msgstr "Домен:"
 msgid "Username:"
 msgstr "Корисн. име:"
 
-#: src/boxes.c:1011 vfs/vfs.c:1875
+#: src/boxes.c:1011 vfs/vfs.c:1865
 msgid "Password:"
 msgstr "Лозинка:"
 
@@ -1239,7 +1239,7 @@ msgstr "<Непозната група>"
 msgid "Files tagged, want to cd?"
 msgstr "Датотеке означене, да пром.дир.?"
 
-#: src/cmd.c:204 src/cmd.c:674 src/cmd.c:736 src/main.c:706 src/screen.c:1933
+#: src/cmd.c:204 src/cmd.c:674 src/cmd.c:736 src/main.c:707 src/screen.c:1933
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
@@ -1570,7 +1570,7 @@ msgstr "Притисните било који тастер за наставак..."
 
 #: src/execute.c:234
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Унесите `exit' да бисте се вратили у Поноћног командира"
+msgstr "Унесите `exit' да бисте се вратили у Поноћног наредника"
 
 #: src/execute.c:342
 #, c-format
@@ -1608,7 +1608,7 @@ msgstr ""
 "Датотека mc.ext је измењена у верзији 3.0.\n"
 "Изгледа да инсталација није успела.\n"
 "Молим да преузмете свеж примерак из\n"
-"пакета Поноћног командира."
+"пакета Поноћног наредника."
 
 #: src/ext.c:545
 msgid ""
@@ -2218,11 +2218,11 @@ msgstr "Датотека:"
 msgid "Content: "
 msgstr "Садржај: "
 
-#: src/find.c:179 src/main.c:820 src/main.c:844
+#: src/find.c:179 src/main.c:821 src/main.c:845
 msgid "&Tree"
 msgstr "&Стабло"
 
-#: src/find.c:227 src/find.c:805
+#: src/find.c:227 src/find.c:807
 msgid "Find File"
 msgstr "Нађи датотеку"
 
@@ -2231,7 +2231,7 @@ msgstr "Нађи датотеку"
 msgid "Grepping in %s"
 msgstr "Тражим текст у %s"
 
-#: src/find.c:538
+#: src/find.c:537
 msgid "Finished"
 msgstr "Готово"
 
@@ -2240,7 +2240,7 @@ msgstr "Готово"
 msgid "Searching %s"
 msgstr "Тражим %s"
 
-#: src/find.c:734 src/find.c:831
+#: src/find.c:736 src/find.c:833
 msgid "Searching"
 msgstr "Тражим"
 
@@ -2385,7 +2385,7 @@ msgstr " Врховна група "
 
 #: src/hotlist.c:1412
 msgid "MC was unable to write ~/"
-msgstr "ПК не може да пише у датотеку ~/"
+msgstr "ПН не може да пише у датотеку ~/"
 
 #: src/hotlist.c:1413
 msgid " file, your old hotlist entries were not deleted"
@@ -2398,7 +2398,7 @@ msgstr " Учитај брзи списак "
 #: src/info.c:74
 #, c-format
 msgid "Midnight Commander %s"
-msgstr "Поноћни командир %s"
+msgstr "Поноћни наредник %s"
 
 #: src/info.c:91
 #, c-format
@@ -2639,271 +2639,271 @@ msgstr "поред којих не стоји ознака `Да'. Притисните размакницу на"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "недостајућима или прит. мишем за задавање. Креће се преко `Tab'-а."
 
-#: src/main.c:435
+#: src/main.c:436
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" Командир не може да уђе у директоријум за који\n"
+" Наредник не може да уђе у директоријум за који\n"
 " подљуска тврди да се у њему налазите. Можда сте\n"
 " обрисали ваш текући директоријум, или сте дали\n"
 " себи прешироке дозволе преко наредбе `su'? "
 
-#: src/main.c:479 src/screen.c:1959
+#: src/main.c:480 src/screen.c:1959
 msgid " The Midnight Commander "
-msgstr " Поноћни командир "
+msgstr " Поноћни наредник "
 
-#: src/main.c:480
+#: src/main.c:481
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Да ли заисте желите да завршите рад у Поноћном командиру? "
+msgstr " Да ли заисте желите да завршите рад у Поноћном нареднику? "
 
-#: src/main.c:817 src/main.c:841
+#: src/main.c:818 src/main.c:842
 msgid "&Listing mode..."
 msgstr "&Режим списка..."
 
-#: src/main.c:818 src/main.c:842
+#: src/main.c:819 src/main.c:843
 msgid "&Quick view     C-x q"
 msgstr "&Брзи преглед     C-x q"
 
-#: src/main.c:819 src/main.c:843
+#: src/main.c:820 src/main.c:844
 msgid "&Info           C-x i"
 msgstr "&Подаци           C-x i"
 
-#: src/main.c:822 src/main.c:846
+#: src/main.c:823 src/main.c:847
 msgid "&Sort order..."
 msgstr "&Поредак ређања..."
 
-#: src/main.c:824 src/main.c:848
+#: src/main.c:825 src/main.c:849
 msgid "&Filter..."
 msgstr "&Филтар..."
 
-#: src/main.c:828 src/main.c:852
+#: src/main.c:829 src/main.c:853
 msgid "&Network link..."
 msgstr "&Мрежно повезивање..."
 
-#: src/main.c:830 src/main.c:854
+#: src/main.c:831 src/main.c:855
 msgid "FT&P link..."
 msgstr "Повезивање FT&P-ом..."
 
-#: src/main.c:831 src/main.c:855
+#: src/main.c:832 src/main.c:856
 msgid "S&hell link..."
 msgstr "Повезивање &љуском..."
 
-#: src/main.c:833 src/main.c:857
+#: src/main.c:834 src/main.c:858
 msgid "SM&B link..."
 msgstr "Повезивање SM&B-ом..."
 
-#: src/main.c:837 src/main.c:861
+#: src/main.c:838 src/main.c:862
 msgid "&Rescan         C-r"
 msgstr "Осве&жи             C-r"
 
-#: src/main.c:865
+#: src/main.c:866
 msgid "&User menu          F2"
 msgstr "&Кориснички мени        F2"
 
-#: src/main.c:866
+#: src/main.c:867
 msgid "&View               F3"
 msgstr "&Прегледај              F3"
 
-#: src/main.c:867
+#: src/main.c:868
 msgid "Vie&w file...         "
 msgstr "Прегледај да&тотеку...    "
 
-#: src/main.c:868
+#: src/main.c:869
 msgid "&Filtered view     M-!"
 msgstr "&Филтрирано прегледање M-!"
 
-#: src/main.c:869
+#: src/main.c:870
 msgid "&Edit               F4"
 msgstr "&Уреди                  F4"
 
-#: src/main.c:870
+#: src/main.c:871
 msgid "&Copy               F5"
 msgstr "&Копирај                F5"
 
-#: src/main.c:871
+#: src/main.c:872
 msgid "c&Hmod           C-x c"
 msgstr "промени до&Зволе     C-x c"
 
-#: src/main.c:872
+#: src/main.c:873
 msgid "&Link            C-x l"
 msgstr "направи &Везу        C-x l"
 
-#: src/main.c:873
+#: src/main.c:874
 msgid "&SymLink         C-x s"
 msgstr "направи &СимВезу     C-x s"
 
-#: src/main.c:874
+#: src/main.c:875
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "уреди си&Мвезу     C-x C-s"
 
-#: src/main.c:875
+#: src/main.c:876
 msgid "ch&Own           C-x o"
 msgstr "промени в&Ласника    C-x o"
 
-#: src/main.c:876
+#: src/main.c:877
 msgid "&Advanced chown       "
 msgstr "&Напр. промена власника   "
 
-#: src/main.c:877
+#: src/main.c:878
 msgid "&Rename/Move        F6"
 msgstr "пр&Еименуј/премести     F6"
 
-#: src/main.c:878
+#: src/main.c:879
 msgid "&Mkdir              F7"
 msgstr "н&Аправи директоријум   F7"
 
-#: src/main.c:879
+#: src/main.c:880
 msgid "&Delete             F8"
 msgstr "&Обриши                 F8"
 
-#: src/main.c:880
+#: src/main.c:881
 msgid "&Quick cd          M-c"
 msgstr "&Брза пром.дир.        M-c"
 
-#: src/main.c:882
+#: src/main.c:883
 msgid "select &Group      M-+"
 msgstr "изабери &Групу         M-+"
 
-#: src/main.c:883
+#: src/main.c:884
 msgid "u&Nselect group    M-\\"
 msgstr "о&Дизабери групу       M-\\"
 
-#: src/main.c:884
+#: src/main.c:885
 msgid "reverse selec&Tion M-*"
 msgstr "обрни из&Бор           M-*"
 
-#: src/main.c:886
+#: src/main.c:887
 msgid "e&Xit              F10"
 msgstr "и&Злаз                 F10"
 
-#: src/main.c:894
+#: src/main.c:895
 msgid "&Directory tree"
 msgstr "&Стабло директоријума"
 
-#: src/main.c:895
+#: src/main.c:896
 msgid "&Find file            M-?"
 msgstr "&Нађи датотеку              M-?"
 
-#: src/main.c:896
+#: src/main.c:897
 msgid "s&Wap panels          C-u"
 msgstr "разм&Ени окна               C-u"
 
-#: src/main.c:897
+#: src/main.c:898
 msgid "switch &Panels on/off C-o"
 msgstr "искључи/укључи &Окна        C-o"
 
-#: src/main.c:898
+#: src/main.c:899
 msgid "&Compare directories  C-x d"
 msgstr "у&Пореди директоријуме     C-x d"
 
-#: src/main.c:899
+#: src/main.c:900
 msgid "e&Xternal panelize    C-x !"
 msgstr "критери&Јум попуне окна   C-x !"
 
-#: src/main.c:900
+#: src/main.c:901
 msgid "show directory s&Izes"
 msgstr "прикажи вели&Чине директоријума"
 
-#: src/main.c:902
+#: src/main.c:903
 msgid "command &History"
 msgstr "&Историја наредби"
 
-#: src/main.c:903
+#: src/main.c:904
 msgid "di&Rectory hotlist    C-\\"
 msgstr "брзи с&Писак директоријума  C-\\"
 
-#: src/main.c:905
+#: src/main.c:906
 msgid "&Active VFS list      C-x a"
 msgstr "списак &Активних ВСД      C-x a"
 
-#: src/main.c:908
+#: src/main.c:909
 msgid "&Background jobs      C-x j"
 msgstr "&Позадински послови       C-x j"
 
-#: src/main.c:912
+#: src/main.c:913
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Одобриши датотеке (само на ext2fs)"
 
-#: src/main.c:915
+#: src/main.c:916
 msgid "&Listing format edit"
 msgstr "&Уреди формат списка"
 
-#: src/main.c:920
+#: src/main.c:921
 msgid "Edit &extension file"
 msgstr "Уреди датотеку &врста"
 
-#: src/main.c:921
+#: src/main.c:922
 msgid "Edit &menu file"
 msgstr "Уреди датотеку &менија"
 
-#: src/main.c:923
+#: src/main.c:924
 msgid "Edit edi&tor menu file"
 msgstr "Уреди датотеку менија &уређивача"
 
-#: src/main.c:924
+#: src/main.c:925
 msgid "Edit &syntax file"
 msgstr "Уреди датотеку &синтаксе"
 
-#: src/main.c:930
+#: src/main.c:931
 msgid "&Configuration..."
 msgstr "&Подешавања..."
 
-#: src/main.c:931
+#: src/main.c:932
 msgid "&Layout..."
 msgstr "&Изглед..."
 
-#: src/main.c:932
+#: src/main.c:933
 msgid "c&Onfirmation..."
 msgstr "п&Отврде..."
 
-#: src/main.c:933
+#: src/main.c:934
 msgid "&Display bits..."
 msgstr "&Битова у приказу..."
 
-#: src/main.c:936
+#: src/main.c:937
 msgid "&Virtual FS..."
 msgstr "&Виртуални СД..."
 
-#: src/main.c:939
+#: src/main.c:940
 msgid "&Save setup"
 msgstr "&Сачувај подешавања"
 
-#: src/main.c:950
+#: src/main.c:951
 msgid " &Above "
 msgstr " &Изнад "
 
-#: src/main.c:950
+#: src/main.c:951
 msgid " &Left "
 msgstr " &Лево "
 
-#: src/main.c:954
+#: src/main.c:955
 msgid " &File "
 msgstr " &Датотека "
 
-#: src/main.c:957
+#: src/main.c:958
 msgid " &Command "
 msgstr " &Наредба "
 
-#: src/main.c:960
+#: src/main.c:961
 msgid " &Options "
 msgstr " &Избори "
 
-#: src/main.c:963
+#: src/main.c:964
 msgid " &Below "
 msgstr " и&Спод "
 
-#: src/main.c:963
+#: src/main.c:964
 msgid " &Right "
 msgstr " &Десно "
 
-#: src/main.c:1006
+#: src/main.c:1007
 msgid " Information "
 msgstr " Информације "
 
-#: src/main.c:1008
+#: src/main.c:1009
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2915,32 +2915,32 @@ msgstr ""
 " морати да ручно освежавате приказ. Погледајте упутство  \n"
 " за детаље.                                              "
 
-#: src/main.c:1231 src/screen.c:2188
+#: src/main.c:1232 src/screen.c:2188
 msgid "Menu"
 msgstr "Мени"
 
-#: src/main.c:1368
+#: src/main.c:1369
 msgid "The TERM environment variable is unset!\n"
 msgstr "Променљива љуске `TERM' није постављена!\n"
 
-#: src/main.c:1663 src/textconf.c:116
+#: src/main.c:1664 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "ГНУ-ов поноћни командир %s\n"
+msgstr "ГНУ-ов поноћни наредник %s\n"
 
-#: src/main.c:1869
+#: src/main.c:1870
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[прекидачи] [овај_дир] [дир_другог_окна]\n"
 
-#: src/main.c:1873
+#: src/main.c:1874
 msgid "+number"
 msgstr "+број"
 
-#: src/main.c:1874
+#: src/main.c:1875
 msgid "Set initial line number for the internal editor"
 msgstr "Поставите број почетног реда за уграђени уређивач"
 
-#: src/main.c:1876
+#: src/main.c:1877
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2950,7 +2950,7 @@ msgstr ""
 "Молим да пошаљете пријаве грешака (укључивши излаз наредбе `mc -V')\n"
 "на адресу mc-devel@gnome.org\n"
 
-#: src/main.c:1891
+#: src/main.c:1892
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2990,101 +2990,97 @@ msgstr ""
 "   brightcyan, lightgray и white\n"
 "\n"
 
-#: src/main.c:1966
-msgid "Use to debug the background code"
-msgstr "Користите да бисте поправљали позадински код"
-
-#: src/main.c:1969
-msgid "Request to run in color mode"
-msgstr "Захтевање обојеног режима"
-
-#: src/main.c:1971
-msgid "Specifies a color configuration"
-msgstr "Поставља подешавања боја"
-
-#: src/main.c:1975
-msgid "Edits one file"
-msgstr "Уређује једну датотеку"
-
-#: src/main.c:1979
+#: src/main.c:1967
 msgid "Displays this help message"
 msgstr "Приказује ову поруку помоћи"
 
-#: src/main.c:1981
-msgid "Displays a help screen on how to change the color scheme"
-msgstr "Приказује екран помоћи око промене шеме боја"
-
-#: src/main.c:1984
-msgid "Log ftp dialog to specified file"
-msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
-
-#: src/main.c:1987
-msgid "Set debug level"
-msgstr "Постављање нивоа поправљања"
-
-#: src/main.c:1991
-msgid "Print data directory"
-msgstr "Штампај директоријум са подацима"
-
-#: src/main.c:1993
-msgid "Requests to run in black and white"
-msgstr "Захтева покретање у режиму без боја"
-
-#: src/main.c:1995
-msgid "Disable mouse support in text version"
-msgstr "Искључи подршку за миша у текстуалној верзији"
-
-#: src/main.c:1998
-msgid "Disables subshell support"
-msgstr "Искључује подршку за подљуске"
-
-#: src/main.c:2001
-msgid "Print last working directory to specified file"
-msgstr "Штампај последњи радни директоријум у задану датотеку"
-
-#: src/main.c:2003
-msgid "Resets soft keys on HP terminals"
-msgstr "Поставља меке тастере на ХП-овим терминалима"
-
-#: src/main.c:2005
-msgid "To run on slow terminals"
-msgstr "Покретање на спором терминалу"
-
-#: src/main.c:2007
-msgid "Use stickchars to draw"
-msgstr "Користи квазиграфичке симболе за цртање"
-
-#: src/main.c:2010
-msgid "Enables subshell support (default)"
-msgstr "Укључује подршку за подљуске (подраз.)"
-
-#: src/main.c:2014
-msgid "Tries to use termcap instead of terminfo"
-msgstr "Покушава да користи termcap уместо terminfo-а"
-
-#: src/main.c:2017
+#: src/main.c:1969
 msgid "Displays the current version"
 msgstr "Приказује текућу верзију"
 
-#: src/main.c:2019
-msgid "Launches the file viewer on a file"
-msgstr "Покреће прегледач датотека над датотеком"
-
-#: src/main.c:2021
+#: src/main.c:1973
 msgid "Forces xterm features"
 msgstr "Захтева одлике Икс терминала"
 
-#: src/main.c:2234
+#: src/main.c:1975
+msgid "Disable mouse support in text version"
+msgstr "Искључи подршку за миша у текстуалној верзији"
+
+#: src/main.c:1978
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Покушава да користи termcap уместо terminfo-а"
+
+#: src/main.c:1981
+msgid "Resets soft keys on HP terminals"
+msgstr "Поставља меке тастере на ХП-овим терминалима"
+
+#: src/main.c:1983
+msgid "To run on slow terminals"
+msgstr "Покретање на спором терминалу"
+
+#: src/main.c:1985
+msgid "Use stickchars to draw"
+msgstr "Користи квазиграфичке симболе за цртање"
+
+#: src/main.c:1989
+msgid "Requests to run in black and white"
+msgstr "Захтева покретање у режиму без боја"
+
+#: src/main.c:1991
+msgid "Request to run in color mode"
+msgstr "Захтевање обојеног режима"
+
+#: src/main.c:1993
+msgid "Specifies a color configuration"
+msgstr "Поставља подешавања боја"
+
+#: src/main.c:1995
+msgid "Displays a help screen on how to change the color scheme"
+msgstr "Приказује екран помоћи око промене шеме боја"
+
+#: src/main.c:2000
+msgid "Log ftp dialog to specified file"
+msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
+
+#: src/main.c:2003
+msgid "Set debug level"
+msgstr "Постављање нивоа поправљања"
+
+#: src/main.c:2009
+msgid "Print data directory"
+msgstr "Штампај директоријум са подацима"
+
+#: src/main.c:2011
+msgid "Print last working directory to specified file"
+msgstr "Штампај последњи радни директоријум у задану датотеку"
+
+#: src/main.c:2016
+msgid "Enables subshell support (default)"
+msgstr "Укључује подршку за подљуске (подраз.)"
+
+#: src/main.c:2018
+msgid "Disables subshell support"
+msgstr "Искључује подршку за подљуске"
+
+#: src/main.c:2023
+msgid "Launches the file viewer on a file"
+msgstr "Покреће прегледач датотека над датотеком"
+
+#: src/main.c:2026
+msgid "Edits one file"
+msgstr "Уређује једну датотеку"
+
+#: src/main.c:2240
 msgid " Notice "
 msgstr " Објава "
 
-#: src/main.c:2235
+#: src/main.c:2241
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
 msgstr ""
-" Датотеке са подешавањима Поноћног командира \n"
+" Датотеке са подешавањима Поноћног наредника \n"
 " се сада смештају у директоријум `~/.mc';\n"
 " датотеке су сада премештене\n"
 
@@ -3400,7 +3396,7 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"ГНУ-ов поноћни командир је већ\n"
+"ГНУ-ов поноћни наредник је већ\n"
 "покренут на овом терминалу.\n"
 "Подршка за подљуске ће бити искључена."
 
@@ -4035,16 +4031,16 @@ msgstr ""
 "Неочекивани завршетак датотеке\n"
 "%s"
 
-#: vfs/direntry.c:301
+#: vfs/direntry.c:304
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Остава директоријума је истекла за %s"
 
-#: vfs/direntry.c:789
+#: vfs/direntry.c:783
 msgid "Starting linear transfer..."
 msgstr "Покрећем линеарни пренос..."
 
-#: vfs/direntry.c:963
+#: vfs/direntry.c:957
 msgid "Getting file"
 msgstr "Добављам датотеку"
 
@@ -4274,10 +4270,10 @@ msgstr ""
 "Датотека ~/.netrc нема исправне дозволе.\n"
 "Уклоните лозинку или исправите дозволе."
 
-# Систем датотека Поноћног командира
+# Систем датотека Поноћног наредника
 #: vfs/mcfs.c:123 vfs/mcfs.c:168
 msgid " MCFS "
-msgstr " СДПК "
+msgstr " СДПН "
 
 #: vfs/mcfs.c:124
 msgid " The server does not support this version "
@@ -4295,7 +4291,7 @@ msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " MCFS Password required "
-msgstr " Неопходна је лозинка за СДПК "
+msgstr " Неопходна је лозинка за СДПН "
 
 #: vfs/mcfs.c:168
 msgid " Invalid password "
@@ -4492,28 +4488,28 @@ msgstr " Морате да поставите дир. у који желите да издвајате "
 msgid " while iterating over blocks "
 msgstr " при итерацији блокова "
 
-#: vfs/vfs.c:1166
+#: vfs/vfs.c:1156
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
 
-#: vfs/vfs.c:1838
+#: vfs/vfs.c:1828
 msgid "Cannot parse:"
 msgstr "Не могу да рашчланим:"
 
-#: vfs/vfs.c:1840
+#: vfs/vfs.c:1830
 msgid "More parsing errors will be ignored."
 msgstr "Даље грешке ће бити занемарене."
 
-#: vfs/vfs.c:1850
+#: vfs/vfs.c:1840
 msgid "Internal error:"
 msgstr "Унутрашња грешка:"
 
-#: vfs/vfs.c:1860
+#: vfs/vfs.c:1850
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (пренесено %lu бајтова)"
 
-#: vfs/vfs.c:1861
+#: vfs/vfs.c:1851
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s пренесено %lu бајтова"
