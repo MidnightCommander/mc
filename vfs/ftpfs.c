@@ -213,7 +213,6 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
  */
 
 #define FTP_COMMAND_PORT   21
-#define HSC_PROXY_PORT   9875
 
 static void
 ftp_split_url(char *path, char **host, char **user, int *port, char **pass)
@@ -410,9 +409,6 @@ changetype (vfs *me, vfs_s_super *super, int binary)
 static int 
 login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 {
-#if defined(HSC_PROXY)
-    char *proxypass, *proxyname;
-#endif
     char *pass;
     char *op;
     char *name;			/* login user name */
@@ -454,27 +450,8 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
     
     /* Proxy server accepts: username@host-we-want-to-connect*/
     if (SUP.proxy){
-#if defined(HSC_PROXY)
-	char *p;
-	int port;
-	char *proxyhost = NULL;
-
-	ftp_split_url (ftpfs_proxy_host, &proxyhost, &proxyname, &port, 0);
-	g_free (proxyhost);
-	p = g_strconcat (_(" Proxy: Password required for "), proxyname, " ",
-			  NULL);
-	proxypass = vfs_get_password (p);
-	g_free (p);
-	if (proxypass == NULL) {
-	    wipe_password (pass);
-	    g_free (proxyname);
-	    ERRNOR (EPERM, 0);
-	}
-	name = g_strdup (SUP.user);
-#else
 	name = g_strconcat (SUP.user, "@", 
 		SUP.host[0] == '!' ? SUP.host+1 : SUP.host, NULL);
-#endif
     } else 
 	name = g_strdup (SUP.user);
     
@@ -485,37 +462,7 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n", SUP.remote_is_amiga);
 	    fflush (logfile);
 	}
-#if defined(HSC_PROXY)
-	if (SUP.proxy){
-	    print_vfs_message (_("ftpfs: sending proxy login name"));
-	    if (command (me, super, 1, "USER %s", proxyname) != CONTINUE)
-		goto proxyfail;
 
-	    print_vfs_message (_("ftpfs: sending proxy user password"));
-	    if (command (me, super, 1, "PASS %s", proxypass) != COMPLETE)
-		goto proxyfail;
-
-	    print_vfs_message (_("ftpfs: proxy authentication succeeded"));
-	    if (command (me, super, 1, "SITE %s", SUP.host+1) != COMPLETE)
-		goto proxyfail;
-
-	    print_vfs_message (_("ftpfs: connected to %s"), SUP.host+1);
-	    if (0) {
-	    proxyfail:
-		SUP.failed_on_login = 1;
-		/* my_errno = E; */
-		if (proxypass)
-		    wipe_password (proxypass);
-		wipe_password (pass);
-		g_free (proxyname);
-		g_free (name);
-		ERRNOR (EPERM, 0);
-	    }
-	    if (proxypass)
-		wipe_password (proxypass);
-	    g_free (proxyname);
-	}
-#endif
 	print_vfs_message (_("ftpfs: sending login name"));
 	code = command (me, super, WAIT_REPLY, "USER %s", name);
 
@@ -673,17 +620,11 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
 {
     char *user, *dir;
 
-#if defined(HSC_PROXY)
-    dir = vfs_split_url (proxy, host, &user, port, 0, HSC_PROXY_PORT, URL_ALLOW_ANON);
-#else
-    dir = vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT, URL_ALLOW_ANON);
-#endif
-
-    if (user)
-	g_free (user);
-
-    if (dir)
-	g_free (dir);
+    dir =
+	vfs_split_url (proxy, host, &user, port, 0, FTP_COMMAND_PORT,
+		       URL_ALLOW_ANON);
+    g_free (user);
+    g_free (dir);
 }
 
 static int

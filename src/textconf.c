@@ -28,9 +28,6 @@ static const char * const features [] =  {
     N_(", cpiofs"),
 #ifdef USE_NETCODE
     N_(", ftpfs"),
-#   ifdef HSC_PROXY
-    N_(" (proxies: hsc proxy)"),
-#   endif
     N_(", fish"),
 #   ifdef WITH_MCFS
     N_(", mcfs"),
