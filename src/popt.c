@@ -544,15 +544,15 @@ char * poptBadOption(poptContext con, int flags) {
 const char * poptStrerror(const int error) {
     switch (error) {
       case POPT_ERROR_NOARG:
-	return POPT_("missing argument");
+	return _("missing argument");
       case POPT_ERROR_BADOPT:
-	return POPT_("unknown option");
+	return _("unknown option");
       case POPT_ERROR_OPTSTOODEEP:
 	return POPT_("aliases nested too deeply");
       case POPT_ERROR_BADQUOTE:
 	return POPT_("error in parameter quoting");
       case POPT_ERROR_BADNUMBER:
-	return POPT_("invalid numeric value");
+	return _("invalid numeric value");
       case POPT_ERROR_OVERFLOW:
 	return POPT_("number too large or too small");
       case POPT_ERROR_ERRNO:

@@ -1,5 +1,10 @@
 2002-10-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* popthelp.c (poptPrintHelp): Use POPT_ for "[OPTION...]",
+	this message is eliminated by poptSetOtherOptionHelp().
+	* popt.c (poptStrerror): Use _ instead of POPT_ for useful
+	messages.
+
 	* utilunix.c (mc_tmpdir): Make directory only if not exists.
 	Use strncpy() instead of g_snprintf() - there can be printf()
 	pattern(s) in the $TMPDIR.
@@ -76,7 +81,8 @@
 
 2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* popt.h: Adjust poptHelpOptions[] declaration.
+	* popt.h: Adjust poptHelpOptions[] and poptPrintHelp()
+	declarations.
 
 	* popthelp.c: Replace POPT_ with _ for visible strings.
 	(singleOptionHelp): Eliminate format array.

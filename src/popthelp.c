@@ -194,7 +194,7 @@ int poptPrintHelp(poptContext con, FILE * f, int flags) {
     if (con->otherHelp)
 	fprintf(f, " %s\n", con->otherHelp);
     else
-	fprintf(f, " %s\n", _("[OPTION...]"));
+	fprintf(f, " %s\n", POPT_("[OPTION...]"));
 
     leftColWidth = maxArgWidth(con->options, NULL);
     singleTableHelp(f, con->options, leftColWidth, NULL);
