@@ -385,8 +385,8 @@ create_op_win (FileOperation op, int with_eta)
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
                 hbox = gtk_hbox_new (FALSE, 0);
                 gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("File ")), FALSE, FALSE, 0);
-                count_label = gtk_label_new ("");
-                gtk_box_pack_start (GTK_BOX (hbox), count_label, FALSE, FALSE, 0);
+                count_label = GTK_OBJECT (gtk_label_new (""));
+                gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (count_label), FALSE, FALSE, 0);
 
                 gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(" is ")), FALSE, FALSE, 0);
                 file_label = gtk_label_new ("");
@@ -399,10 +399,10 @@ create_op_win (FileOperation op, int with_eta)
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
                                     alignment, FALSE, FALSE, 0);
 
-                byte_prog = gtk_progress_bar_new ();
-                gtk_widget_set_usize (byte_prog, GDIALOG_PROGRESS_WIDTH, -1);
+                byte_prog = GTK_OBJECT (gtk_progress_bar_new ());
+                gtk_widget_set_usize (GTK_WIDGET (byte_prog), GDIALOG_PROGRESS_WIDTH, -1);
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
-                                    byte_prog, FALSE, FALSE, 0);
+                                    GTK_WIDGET (byte_prog), FALSE, FALSE, 0);
                 
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
                                     alignment, FALSE, FALSE, 0);
