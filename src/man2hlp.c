@@ -25,6 +25,7 @@
 
 #include <glib.h>
 #include "help.h"
+#include "glib-compat.h"
 
 #define BUFFER_SIZE 256
 
@@ -611,8 +612,7 @@ handle_link (char *buffer)
 	/* Bold text or italics text */
 	if (buffer[0] == '.' && (buffer[1] == 'I' || buffer[1] == 'B'))
 	    for (buffer += 2; *buffer == ' ' || *buffer == '\t'; buffer++);
-	strncpy (old, buffer, sizeof (old) - 1);
-	old[sizeof (old) - 1] = 0;
+	g_strlcpy (old, buffer, sizeof (old));
 	link_flag = 3;
 	break;
     case 3:

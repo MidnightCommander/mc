@@ -5,7 +5,7 @@
 
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
-	* man2hlp.c (handle_link): Reverted the last change because
+	* man2hlp.c (handle_link): Added header "glib-compat.h" because
 	glib-1.2 does not know g_strlcpy.
 
 2004-09-02  Pavel S. Shirshov <pavelsh@mail.ru>
