@@ -543,13 +543,7 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-dnl
-dnl Enforce coding standards
-dnl
-if test "x$GCC" = xyes -a x"$USE_MAINTAINER_MODE" = x"yes"; then
-dnl Prepend the flags to keep them user-overridable
-    CFLAGS="-Wall -W -Wstrict-prototypes -Wno-unused-parameter $CFLAGS"
-fi
+ri_GCC_WARNINGS()
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
