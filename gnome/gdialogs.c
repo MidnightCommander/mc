@@ -2,7 +2,7 @@
 /* New dialogs... */
 #include <config.h>
 #include "panel.h"
-#include <gnome.h>
+#include "x.h"
 #include "dialog.h"
 #include "global.h"
 #include "file.h"
@@ -1100,3 +1100,101 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
         if (ret != -1)
                 gtk_widget_destroy (dialog);
 }
+
+#ifdef WITH_SMBFS
+struct smb_authinfo *
+vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
+		      const char *user)
+{
+	struct smb_authinfo *return_value;
+	GtkWidget *smbauth_dialog;
+	GtkWidget *domain_entry, *user_entry, *passwd_entry;
+	GtkWidget *domain_label, *user_label, *passwd_label;
+
+	char *title;
+	static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password: ")};
+
+	if (!domain)
+	    domain = "";
+	if (!user)
+	    user = "";
+
+	title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
+
+	/* Create dialog */
+	smbauth_dialog =
+	    gnome_dialog_new(title, GNOME_STOCK_BUTTON_OK,
+			     GNOME_STOCK_BUTTON_CANCEL, NULL);
+	g_free (title);
+	gmc_window_setup_from_panel(GNOME_DIALOG(smbauth_dialog), cpanel);
+
+	domain_label = gtk_label_new(_(labs[0]));
+	gtk_misc_set_alignment(GTK_MISC(domain_label), 0.0, 0.5);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), domain_label, FALSE,
+			   FALSE, 0);
+
+	domain_entry = gnome_entry_new("domain");
+	gnome_entry_load_history(GNOME_ENTRY(domain_entry));
+	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(domain_entry))),
+			   domain);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), domain_entry, FALSE,
+			   FALSE, 0);
+
+	user_label = gtk_label_new(_(labs[1]));
+	gtk_misc_set_alignment(GTK_MISC(user_label), 0.0, 0.5);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), user_label, FALSE,
+			   FALSE, 0);
+
+	user_entry = gnome_entry_new("user");
+	gnome_entry_load_history(GNOME_ENTRY(user_entry));
+	gtk_entry_set_text(GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(user_entry))),
+			   user);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), user_entry, FALSE,
+			   FALSE, 0);
+
+	passwd_label = gtk_label_new(_(labs[2]));
+	gtk_misc_set_alignment(GTK_MISC(passwd_label), 0.0, 0.5);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), passwd_label, FALSE,
+			   FALSE, 0);
+
+	passwd_entry = gtk_entry_new();
+	gtk_entry_set_text(GTK_ENTRY(passwd_entry), "");
+	gtk_entry_set_visibility(GTK_ENTRY(passwd_entry), FALSE);
+	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(smbauth_dialog)->vbox), passwd_entry, FALSE,
+			   FALSE, 0);
+
+	gtk_widget_grab_focus(passwd_entry);
+	gnome_dialog_set_default(GNOME_DIALOG(smbauth_dialog), 0);
+
+	gtk_widget_show_all(GNOME_DIALOG(smbauth_dialog)->vbox);
+
+	switch (gnome_dialog_run(GNOME_DIALOG(smbauth_dialog))) {
+	case 0:
+		return_value = g_new (struct smb_authinfo, 1);
+		if (!return_value)
+			break;
+
+		return_value->host = g_strdup (host);
+		return_value->share = g_strdup (share);
+		return_value->domain =
+			g_strdup(gtk_entry_get_text
+				 (GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(domain_entry)))));
+		return_value->user =
+			g_strdup(gtk_entry_get_text
+				 (GTK_ENTRY(gnome_entry_gtk_entry(GNOME_ENTRY(user_entry)))));
+		return_value->password = g_strdup(gtk_entry_get_text(GTK_ENTRY(passwd_entry)));
+		break;
+
+	case 1:
+		return_value = 0;
+		break;
+
+	default:
+		return 0;
+	}
+
+	gtk_widget_destroy(smbauth_dialog);
+
+	return return_value;
+}
+#endif /* WITH_SMBFS */

@@ -1,5 +1,8 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* gnome/gdialogs.c [WITH_SMBFS] (vfs_smb_get_authinfo): New
+	function implementing SMB password dialog.
+
 	* gmain.c (gmc_window_setup_from_panel): Fix crash when called
 	early, before the panel is created.
 
