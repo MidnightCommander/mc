@@ -1,13 +1,11 @@
+This is the S-Lang library, version 1.4.5.  It has been radically
+stripped down to remove functions that are either unused by the Midnight
+Commander or already provided by the glib library.  The complete
+distribution can be downloaded from:
 
-This is the Slang Screen Manager, it has been modified a little to
-make it work with the Midnight Commander.  If you want to get the
-complete Slang distribution, you may grab it from:
+http://www.s-lang.org/
 
-http://space.mit.edu/~davis/slang.html
-ftp://space.mit.edu/pub/davis/slang
-
-All of the patches relevant to Slang have been sumbited to John Davis
-for inclusion in his Slang version, changes that are only useful for
-the Midnight Commander have not been submited.
-
-miguel.
+The sources in this directory are only used if you don't have the S-Lang
+library installed on your system or if you request to use these sources
+by specifying the option `--with-screen=mcslang' to the `configure'
+script.
