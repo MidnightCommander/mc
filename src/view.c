@@ -2437,6 +2437,7 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
 	    *move_dir_p = wview->move_dir;
     }
     destroy_dlg (our_dlg);
+    view_dlg = NULL;
 
     return !error;
 }
