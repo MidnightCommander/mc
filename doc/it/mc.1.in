@@ -3111,7 +3111,6 @@ allora il tasto ESC agirà come un tasto di prefisso per un secondo, e
 se non vengono premuti altri tasti, allora il tasto ESC sarà interpretato
 come un tasto di cancellazione (ESC ESC).
 .PP
-.PP
 .I only_leading_plus_minus
 .IP
 Imposta una gestione speciale per '+', '-', '*' nella riga di comando 
@@ -3119,6 +3118,7 @@ Imposta una gestione speciale per '+', '-', '*' nella riga di comando
 vuota. Non è necessario proteggere questi caratteri nel mezzo della riga
 di comando ma non è possibile cambiare selezione se la riga di comando
 non è vuota.
+.PP
 .I panel_scroll_pages
 .IP
 Se impostata (valore predefinito), i pannelli scorrono di metà
