@@ -445,7 +445,7 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 		char *tmpf;
 		int res, v;
 		
-		len = 1 + strlen (event->data);
+		len = 1 + strlen (p);
 		count -= len;
 		
 		switch (operation){

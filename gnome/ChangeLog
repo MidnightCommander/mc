@@ -1,5 +1,8 @@
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (perform_drop_manually): Use p to walk the dropped
+	data.  This is an important bug fix. 
+
 	* gmain.c (idle_destroy_window), main.c: Session management now
 	supports not showing a toplevel window (in case all of the windows
 	were closed). 
