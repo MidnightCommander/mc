@@ -1,6 +1,8 @@
 Before 4.6.1
 ============
 
+Dynamic loading for libgpm, libext2fs.
+
 Check if the archive was changed for extfs, tar and cpio.  Free the data
 associated with the old archive.
 
@@ -128,8 +130,6 @@ more shells (e.g. ksh).
 Internal terminal - no more console saving.
 
 Implement a really Advanced Chown/Chmod.
-
-Dynamic loading for libX11, libgpm.
 
 Support for multi-byte charsets (e.g. UTF-8).
 
