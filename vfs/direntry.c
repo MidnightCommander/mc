@@ -753,7 +753,9 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
 	vfs_s_entry *ent;
 	vfs_s_inode *dir;
 	int tmp_handle;
-	if (!(flags & O_CREAT))
+
+	/* If the filesystem is read-only, disable file creation */
+	if (!(flags & O_CREAT) || !(me->write))
 	    return NULL;
 
 	split_dir_name (me, q, &dirname, &name, &save);

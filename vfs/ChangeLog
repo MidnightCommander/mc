@@ -1,5 +1,8 @@
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_open): If the filesystem is read-only,
+	disable file creation.
+
 	* vfs.c (mc_chdir): Don't change current directory until the
 	low-level chdir succeeds.
 
