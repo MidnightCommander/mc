@@ -125,9 +125,6 @@ char *ftpfs_proxy_host = NULL;
 /* wether we have to use proxy by default? */
 int ftpfs_always_use_proxy;
 
-/* source routing host */
-extern int source_route;
-
 #ifdef FIXME_LATER_ALIGATOR
 static struct linklist *connections_list;
 #endif
@@ -760,8 +757,7 @@ open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_nam
     if (ftpfs_check_proxy (host))
 	SUP.proxy = ftpfs_proxy_host;
     SUP.password = password;
-    SUP.use_passive_connection = ftpfs_use_passive_connections | source_route;
-    SUP.use_source_route = source_route;
+    SUP.use_passive_connection = ftpfs_use_passive_connections;
     SUP.strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP.isbinary = TYPE_UNKNOWN;
     SUP.remote_is_amiga = 0;
@@ -902,7 +898,6 @@ again:
 	if (setup_passive (me, super, data, &data_addr))
 	    return data;
 
-	SUP.use_source_route = 0;
 	SUP.use_passive_connection = 0;
 	print_vfs_message (_("ftpfs: could not setup passive mode"));
 

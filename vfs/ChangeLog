@@ -1,5 +1,8 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Remove the rest of source routing code.
+	* xdirentry.h: Likewise.
+
 	* ftpfs.c (setup_source_route): Remove.  It's a badly
 	implemented hack that was never enabled.
 
