@@ -348,6 +348,12 @@ do_desktop_rescan_devices (void)
 	desktop_reload_icons (FALSE, 0, 0);
 }
 
+static void
+gnome_launch_mime_editor (void)
+{
+	my_system (EXECUTE_AS_SHELL, shell, "mime-type-capplet");
+}
+
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
@@ -409,6 +415,8 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
         GNOMEUIINFO_ITEM_STOCK(N_("_Find File..."), N_("Locate files on disk"), find_cmd, GNOME_STOCK_MENU_JUMP_TO),
 	  
 /*	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },*/
+	GNOMEUIINFO_ITEM_NONE(N_("_Edit mime types..."), N_("Edits the MIME type bindings"),
+			      gnome_launch_mime_editor),
 	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),               N_("Runs a command"), run_cmd, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
 	GNOMEUIINFO_ITEM_NONE(N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize),
@@ -582,6 +590,8 @@ create_new_menu_from (char *file, GtkWidget *shell, gint pos)
 		}
 		g_free (file2);
 	}
+	closedir (dir);
+	
 	return pos;
 }
 

@@ -1,3 +1,13 @@
+1999-03-22  David Martin <dmartina@mailexcite.com>
+	
+	* ftpfs.c: Internationalize the messages that are displayed as
+	hints. 
+
+1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* extfs.c (extfs_init): Fix the code here:  If the key is empty or
+	only contains a new line, C would be pointing into an invalid location.
+
 Mon Mar 22 02:56:23 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* Makefile-mc.in: s/$(libdir)\/extfs/$(extfsdir)/

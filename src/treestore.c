@@ -703,6 +703,7 @@ process_special_dirs (GList **special_dirs, char *file)
 		*special_dirs = g_list_prepend (*special_dirs, g_strdup (token));
 			s = NULL;
 	}
+	g_free (buffer);
 }
 
 gboolean
@@ -751,9 +752,11 @@ tree_store_rescan (char *dir)
 		for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
 			char *full_name;
 
-			if ((dp->d_name [0] == '.' && dp->d_name [1] == 0)
-			    || (dp->d_name [1] == '.' && dp->d_name [2] == 0))
-				continue;
+			if (dp->d_name [0] == '.'){
+				if (dp->d_name [1] == 0
+				    || (dp->d_name [1] == '.' && dp->d_name [2] == 0))
+					continue;
+			}
 
 			full_name = concat_dir_and_file (dir, dp->d_name);
 			if (mc_lstat (full_name, &buf) != -1){

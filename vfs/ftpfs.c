@@ -323,7 +323,7 @@ connection_close (void *data)
     struct connection *bucket = data;
 
     if (qsock (bucket) != -1){
-	print_vfs_message ("ftpfs: Disconnecting from %s", qhost (bucket));
+	print_vfs_message (_("ftpfs: Disconnecting from %s"), qhost (bucket));
 	command(bucket, NONE, "QUIT");
 	close(qsock(bucket));
     }
@@ -374,7 +374,7 @@ login_server (struct connection *bucket, char *netrcpass)
             char *p;
 
 	    if (!bucket->password){
-		p = g_strconcat (" FTP: Password required for ", quser (bucket), 
+		p = g_strconcat (_(" FTP: Password required for "), quser (bucket), 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
@@ -406,7 +406,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	g_free (host);
 	if (proxypass)
 	    wipe_password (proxypass);
-	p = g_strconcat (" Proxy: Password required for ", proxyname, " ",
+	p = g_strconcat (_(" Proxy: Password required for "), proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);
 	g_free (p);
@@ -432,19 +432,19 @@ login_server (struct connection *bucket, char *netrcpass)
 	}
 #if defined(HSC_PROXY)
 	if (qproxy (bucket)){
-	    print_vfs_message ("ftpfs: sending proxy login name");
+	    print_vfs_message (_("ftpfs: sending proxy login name"));
 	    if (command (bucket, 1, "USER %s", proxyname) != CONTINUE)
 		goto proxyfail;
 
-	    print_vfs_message ("ftpfs: sending proxy user password");
+	    print_vfs_message (_("ftpfs: sending proxy user password"));
 	    if (command (bucket, 1, "PASS %s", proxypass) != COMPLETE)
 		goto proxyfail;
 
-	    print_vfs_message ("ftpfs: proxy authentication succeeded");
+	    print_vfs_message (_("ftpfs: proxy authentication succeeded"));
 	    if (command (bucket, 1, "SITE %s", qhost (bucket)+1) != COMPLETE)
 		goto proxyfail;
 
-	    print_vfs_message ("ftpfs: connected to %s", qhost (bucket)+1);
+	    print_vfs_message (_("ftpfs: connected to %s"), qhost (bucket)+1);
 	    if (0) {
 	    proxyfail:
 		bucket->failed_on_login = 1;
@@ -461,17 +461,17 @@ login_server (struct connection *bucket, char *netrcpass)
 	    g_free (proxyname);
 	}
 #endif
-	print_vfs_message ("ftpfs: sending login name");
+	print_vfs_message (_("ftpfs: sending login name"));
 	code = command (bucket, WAIT_REPLY, "USER %s", name);
 
 	switch (code){
 	case CONTINUE:
-	    print_vfs_message ("ftpfs: sending user password");
+	    print_vfs_message (_("ftpfs: sending user password"));
             if (command (bucket, WAIT_REPLY, "PASS %s", pass) != COMPLETE)
 		break;
 
 	case COMPLETE:
-	    print_vfs_message ("ftpfs: logged in");
+	    print_vfs_message (_("ftpfs: logged in"));
 	    wipe_password (pass);
 	    g_free (name);
 	    return 1;
@@ -486,7 +486,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	    goto login_fail;
 	}
     }
-    print_vfs_message ("ftpfs: Login incorrect for user %s ", quser (bucket));
+    print_vfs_message (_("ftpfs: Login incorrect for user %s "), quser (bucket));
 login_fail:
     wipe_password (pass);
     g_free (name);
@@ -647,7 +647,7 @@ ftpfs_open_socket (struct connection *bucket)
     host = qhost (bucket);
 
     if (!host || !*host){
-	print_vfs_message ("ftpfs: Invalid host name.");
+	print_vfs_message (_("ftpfs: Invalid host name."));
         my_errno = EINVAL;
 	return -1;
     }
@@ -667,7 +667,7 @@ ftpfs_open_socket (struct connection *bucket)
     else {
 	hp = gethostbyname (host);
 	if (hp == NULL){
-	    print_vfs_message ("ftpfs: Invalid host address.");
+	    print_vfs_message (_("ftpfs: Invalid host address."));
 	    my_errno = EINVAL;
 	    if (free_host)
 		g_free (host);
@@ -692,7 +692,7 @@ ftpfs_open_socket (struct connection *bucket)
     }
     setup_source_route (my_socket, server_address.sin_addr.s_addr);
     
-    print_vfs_message ("ftpfs: making connection to %s", host);
+    print_vfs_message (_("ftpfs: making connection to %s"), host);
     if (free_host)
 	g_free (host);
 
@@ -702,9 +702,9 @@ ftpfs_open_socket (struct connection *bucket)
 	     sizeof (server_address)) < 0){
 	my_errno = errno;
 	if (errno == EINTR && got_interrupt ())
-	    print_vfs_message ("ftpfs: connection interrupted by user");
+	    print_vfs_message (_("ftpfs: connection interrupted by user"));
 	else
-	    print_vfs_message ("ftpfs: connection to server failed: %s",
+	    print_vfs_message (_("ftpfs: connection to server failed: %s"),
 				   unix_error_string(errno));
 	disable_interrupt_key();
 	close (my_socket);
@@ -788,7 +788,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 		retry_seconds = ftpfs_retry_seconds;
 		enable_interrupt_key ();
 		for (count_down = retry_seconds; count_down; count_down--){
-		    print_vfs_message ("Waiting to retry... %d (Control-C to cancel)", count_down);
+		    print_vfs_message (_("Waiting to retry... %d (Control-C to cancel)"), count_down);
 		    sleep (1);
 		    if (got_interrupt ()){
 			/* my_errno = E; */
@@ -982,7 +982,7 @@ initconn (struct connection *bucket)
 	
 	if ((c = setup_passive (data, bucket, &data_addr)))
 	    return data;
-	print_vfs_message("ftpfs: could not setup passive mode for source routing");
+	print_vfs_message(_("ftpfs: could not setup passive mode for source routing"));
 	bucket->use_source_route = 0;
     }
 #else
@@ -992,7 +992,7 @@ initconn (struct connection *bucket)
 
 	bucket->use_source_route = 0;
 	bucket->use_passive_connection = 0;
-	print_vfs_message ("ftpfs: could not setup passive mode");
+	print_vfs_message (_("ftpfs: could not setup passive mode"));
     }
 #endif
     /* If passive setup fails, fallback to active connections */
@@ -1063,14 +1063,14 @@ my_abort (struct connection *bucket, int dsock)
     fd_set mask;
     char buf[1024];
 
-    print_vfs_message("ftpfs: aborting transfer.");
+    print_vfs_message(_("ftpfs: aborting transfer."));
     if (send(qsock(bucket), ipbuf, sizeof(ipbuf), MSG_OOB) != sizeof(ipbuf)) {
-	print_vfs_message("ftpfs: abort error: %s", unix_error_string(errno));
+	print_vfs_message(_("ftpfs: abort error: %s"), unix_error_string(errno));
 	return;
     }
     
     if (command(bucket, NONE, "%cABOR", DM) != COMPLETE){
-	print_vfs_message ("ftpfs: abort failed");
+	print_vfs_message (_("ftpfs: abort failed"));
 	return;
     }
     if (dsock != -1) {
@@ -1156,7 +1156,7 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
     dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
     if (strchr (dir->remote_path, ' ')) {
         if (ftpfs_chdir_internal (bucket, dir->remote_path) != COMPLETE) {
-            print_vfs_message("ftpfs: CWD failed.");
+            print_vfs_message(_("ftpfs: CWD failed."));
 	    return;
         }
         sock = open_data_connection (bucket, "LIST -lLa", ".", TYPE_ASCII, 0);
@@ -1166,14 +1166,14 @@ resolve_symlink_with_ls_options(struct connection *bucket, struct dir *dir)
                                      dir->remote_path, TYPE_ASCII, 0);
 
     if (sock == -1) {
-	print_vfs_message("ftpfs: couldn't resolve symlink");
+	print_vfs_message(_("ftpfs: couldn't resolve symlink"));
 	return;
     }
     
     fp = fdopen(sock, "r");
     if (fp == NULL) {
 	close(sock);
-	print_vfs_message("ftpfs: couldn't resolve symlink");
+	print_vfs_message(_("ftpfs: couldn't resolve symlink"));
 	return;
     }
     enable_interrupt_key();
@@ -1218,7 +1218,7 @@ done:
 static void
 resolve_symlink(struct connection *bucket, struct dir *dir)
 {
-    print_vfs_message("Resolving symlink...");
+    print_vfs_message(_("Resolving symlink..."));
 
     if (bucket->strict_rfc959_list_cmd) 
 	resolve_symlink_without_ls_options(bucket, dir);
@@ -1321,16 +1321,16 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 
     has_symlinks = 0;
     if (bucket->strict_rfc959_list_cmd)
-        print_vfs_message("ftpfs: Reading FTP directory %s... (don't use UNIX ls options)", remote_path);
+        print_vfs_message(_("ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"), remote_path);
     else
-        print_vfs_message("ftpfs: Reading FTP directory %s...", remote_path);
+        print_vfs_message(_("ftpfs: Reading FTP directory %s..."), remote_path);
     if (has_spaces || bucket->strict_rfc959_list_cmd || ftpfs_first_cd_then_ls) {
         char *p;
     
         p = translate_path (bucket, remote_path);
         if (ftpfs_chdir_internal (bucket, p) != COMPLETE) {
             my_errno = ENOENT;
-	    print_vfs_message("ftpfs: CWD failed.");
+	    print_vfs_message(_("ftpfs: CWD failed."));
 	    return NULL;
         }
     }
@@ -1342,7 +1342,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     if (dcache == NULL) {
 	my_errno = ENOMEM;
 	linklist_destroy(file_list, NULL);
-	print_vfs_message("ftpfs: FAIL");
+	print_vfs_message(_("ftpfs: FAIL"));
 	return NULL;
     }
     gettimeofday(&dcache->timestamp, NULL);
@@ -1433,7 +1433,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     }
     if (got_intr){
 	disable_interrupt_key();
-	print_vfs_message("ftpfs: reading FTP directory interrupt by user");
+	print_vfs_message(_("ftpfs: reading FTP directory interrupt by user"));
 #ifdef OLD_READ
 	my_abort(bucket, fileno(fp));
 #else
@@ -1462,7 +1462,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         else
            dcache->symlink_status = FTPFS_UNRESOLVED_SYMLINKS;
     }
-    print_vfs_message("ftpfs: got listing");
+    print_vfs_message(_("ftpfs: got listing"));
     return dcache;
 error_1:
     disable_interrupt_key();
@@ -1475,7 +1475,7 @@ error_3:
     g_free(dcache->remote_path);
     g_free(dcache);
     linklist_destroy(file_list, direntry_destructor);
-    print_vfs_message("ftpfs: failed");
+    print_vfs_message(_("ftpfs: failed"));
     return NULL;
 
 fallback:
@@ -1492,7 +1492,7 @@ fallback:
     g_free(dcache->remote_path);
     g_free(dcache);
     linklist_destroy(file_list, direntry_destructor);
-    print_vfs_message("ftpfs: failed; nowhere to fallback to");
+    print_vfs_message(_("ftpfs: failed; nowhere to fallback to"));
     return NULL;
 }
 
@@ -1556,7 +1556,7 @@ store_file(struct direntry *fe)
 	    goto error_return;
 	}
 	total += n;
-	print_vfs_message("ftpfs: storing file %d (%d)", 
+	print_vfs_message(_("ftpfs: storing file %d (%d)"), 
 			  total, s.st_size);
     }
     disable_interrupt_key();

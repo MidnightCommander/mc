@@ -1,3 +1,14 @@
+1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c (process_special_dirs): Free memory here.
+	
+	Fix test: Skip only "." and "..", before it could skip "?.".
+
+1999-03-22  David Martin <dmartina@mailexcite.com>
+
+	* wtools.c (real_input_dialog_help): Do a strncmp with the lenght
+	of th same translated "Password:" string.
+
 Mon Mar 22 02:05:28 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c (file_entry_color): Dropped. Code went to file_compute_color.

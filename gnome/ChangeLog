@@ -1,3 +1,16 @@
+1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* glayout.c (create_new_menu_from): closedir after running.
+
+1999-03-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (apply_metadata_change): Fix the
+	test for setting the icon.  It was being done incorrectly and thus
+	it was never possible to change the icon.
+
+	* glayout.c (gnome_launch_mime_editor): Add mime-type-edit command
+	to the menu: this launches mime-type-capplet
+
 1999-03-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_metadata_change): Fixed

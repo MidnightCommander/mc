@@ -916,11 +916,15 @@ static int extfs_init (vfs *me)
 	if (*key == '#')
 	    continue;
 
-	if ((c = strchr( key, '\n')))
+	if ((c = strchr (key, '\n'))){
 	    *c = 0;
-	c = &key [strlen (key)-1];
+	    c = &key [strlen (key)-1];
+	} else {
+	    c = &key;
+	}
 	extfs_need_archive [extfs_no] = !(*c==':');
-	if (*c==':') *c = 0;
+	if (*c==':')
+		*c = 0;
 	if (!(*key))
 	    continue;
 
