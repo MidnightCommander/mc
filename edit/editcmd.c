@@ -1412,8 +1412,10 @@ string_regexp_search (char *pattern, char *string, int len, int match_type,
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
+typedef int (*edit_getbyte_fn) (WEdit *, long);
+
 static long
-edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
+edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
 {
     long p, q = 0;
     long l = strlen ((char *) exp), f = 0;
@@ -1571,7 +1573,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int 
 
 
 static long
-edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
+edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
 {				/*front end to find_string to check for
 				   whole words */
     long p;
@@ -1595,7 +1597,7 @@ edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_b
 }
 
 static long
-edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d)
+edit_find (long search_start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, void *d)
 {
     long p;
     if (replace_backwards) {
@@ -1843,8 +1845,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	long new_start;
 	new_start =
 	    edit_find (edit->search_start, (unsigned char *) exp1, &len,
-		       last_search, (int (*)(void *, long)) edit_get_byte,
-		       (void *) edit, pmatch);
+		       last_search, edit_get_byte, (void *) edit, pmatch);
 	if (new_start == -3) {
 	    regexp_error (edit);
 	    break;
@@ -2040,7 +2041,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		long p, q = 0;
 		for (;;) {
 		    p = edit_find (q, (unsigned char *) exp, &len, edit->last_byte,
-				   (int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
+				   edit_get_byte, (void *) edit, 0);
 		    if (p < 0)
 			break;
 		    found++;
@@ -2067,7 +2068,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		    edit->search_start++;
 
 		edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
-		(int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
+		                                edit_get_byte, (void *) edit, 0);
 
 		if (edit->search_start >= 0) {
 		    edit->found_start = edit->search_start;
@@ -2696,7 +2697,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	start =
 	    edit_find (start - 1, (unsigned char *) match_expr, &len,
 		       edit->last_byte,
-		       (int (*)(void *, long)) edit_get_byte,
+		       edit_get_byte,
 		       (void *) edit, 0);
 
 	/* not matched */
