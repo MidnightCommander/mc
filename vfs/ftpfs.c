@@ -1038,7 +1038,7 @@ resolve_symlink(struct connection *bucket, struct dir *dir)
     
     print_vfs_message("Resolving symlink...");
 
-    dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
+    dir->symlink_status = FTPFS_RESOLVING_SYMLINKS;
     for (flist = dir->file_list->next; flist != dir->file_list; flist = flist->next) {
         /* flist->data->l_stat is alread initialized with 0 */
         fel = flist->data;
@@ -1089,6 +1089,8 @@ resolve_symlink(struct connection *bucket, struct dir *dir)
 	    }
         }
     }
+    dir->symlink_status = FTPFS_RESOLVED_SYMLINKS;
+
 }
 
 
@@ -1130,7 +1132,8 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	    struct timeval tim;
 
 	    gettimeofday(&tim, NULL);
-	    if ((tim.tv_sec < dcache->timestamp.tv_sec) && !force_expiration) {
+	    if (((tim.tv_sec < dcache->timestamp.tv_sec) && !force_expiration)
+                || dcache->symlink_status == FTPFS_RESOLVING_SYMLINKS) {
                 if (resolve_symlinks && dcache->symlink_status == FTPFS_UNRESOLVED_SYMLINKS)
 	            resolve_symlink(bucket, dcache);
 		return dcache;

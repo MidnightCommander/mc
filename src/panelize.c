@@ -409,6 +409,9 @@ void do_external_panelize (char *command)
     /* Clear the counters */
     cpanel->total = cpanel->dirs_marked = cpanel->marked = 0;
     cpanel->has_dir_sizes = 0;
+    cpanel->top_file = 0;
+    cpanel->selected = 0;
+
     while (1) {
 	clearerr(external);
 	if (fgets (line, MC_MAXPATHLEN, external) == NULL) {
@@ -442,9 +445,10 @@ void do_external_panelize (char *command)
 	if (!(next_free & 32))
 	    rotate_dash ();
     }
+
+    cpanel->is_panelized = 1;
     if (next_free){
 	cpanel->count = next_free;
-	cpanel->is_panelized = 1;
 	if (list->list [0].fname [0] == PATH_SEP){
 	    strcpy (cpanel->cwd, PATH_SEP_STR);
 	    chdir (PATH_SEP_STR);

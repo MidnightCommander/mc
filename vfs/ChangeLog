@@ -1,3 +1,9 @@
+Thu Oct 22 20:30:28 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (resolve_symlink, retrieve_dir): Don't timeout and
+	free dcache while resolving symlinks (i.e. don't free some
+	pointers which are in use by resolve_symlink). 
+
 Mon Oct 19 11:44:47 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* mcfs.c: prefix is mc:, not mcfs:. So now mcfs actually works.

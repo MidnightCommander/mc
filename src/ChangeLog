@@ -1,3 +1,14 @@
+Thu Oct 22 20:41:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	*  configure.in (subshell): Don't define inline to be empty
+	when compiling with non-gcc compiler. AC_C_INLINE (invoked in
+	AM_GETTEXT_GNU) already defines inline if necessary.
+
+Thu Oct 22 20:41:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* panelize.c (do_external_panelize): Not zeroing some fields
+	in cpanel led sometimes to segfaults.
+
 Thu Oct 22 20:31:17 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* lib/mc.ext.in: *.jar and *.JAR treated like *.zip and *.ZIP

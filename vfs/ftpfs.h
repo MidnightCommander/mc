@@ -36,6 +36,7 @@ struct dir
 #define FTPFS_NO_SYMLINKS          0
 #define FTPFS_UNRESOLVED_SYMLINKS  1
 #define FTPFS_RESOLVED_SYMLINKS    2
+#define FTPFS_RESOLVING_SYMLINKS   3 
 
 struct connection {
     char *host;

@@ -888,7 +888,7 @@ dnl
 if test x$GCC = x
 then
 	AC_DEFINE(OLD_TOOLS)
-	CPPFLAGS="$CPPFLAGS -Dinline="
+	CPPFLAGS="$CPPFLAGS"
 fi
 
 dnl
