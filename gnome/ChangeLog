@@ -1,3 +1,11 @@
+1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (filter_items): New global variable full of filters.
+	Please, someone fill in the regexp parts, as I was too lazy to do
+	them :-)
+	(panel_create_filter): Now the filter has a very nice button that
+	pops up a menu for selecting the filter.
+
 Thu Mar 12 22:11:23 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): Use GnomeEntry widgets instead of

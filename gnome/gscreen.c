@@ -930,38 +930,205 @@ panel_change_filter (GtkWidget *entry, WPanel *panel)
 	set_panel_filter_to (panel, strdup (reg_exp));
 }
 
-/* FIXME!!!  These patterns only work if we are using glob (easy_patterns).
- * Find out a way to either change the contents of the history list or convert
- * them to a regexp if the user selects them when easy_patterns is activated.
- */
+/* FIXME: for now, this list is hardcoded.  We want a way to let the user configure it. */
 
-static char *default_filters[] = {
-	"*",
-	"*.(txt|tex|doc|ps|pdf|rtf)",
-	"*.(html|htm|sgml|sgm)",
-	"*.(gif|jpg|jpeg|png|tif|tiff|x[bp]m|p[bgpn]m|xcf|tga|rgb|iff|lbm|ilbm|bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits|)",
-	"*.(mpg|mpeg|mov|avi|fl[ichx]|dl)",
-	"*.(c|h|C|cc|cpp|cxx|H|m|scm|s|S|asm|awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)",
-	"*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)",
-	"*.(rpm|deb)",
-	"*.(au|wav|mp3|snd|mod|s3m|ra)",
-	"*.(pfa|pfb|afm|ttf|fon|pcf|spd)",
-	"*.(wk[s1]|xls)"
+/* FIXME!!!  fill in regexps */
+
+static struct filter_item {
+	char *text;
+	char *glob;
+	char *regexp;
+} filter_items [] = {
+	{ "All files",
+	  "*",
+	  "." },
+	{ "Archives and compressed files",
+	  "*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)",
+	  "." },
+	{ "RPM/DEB files",
+	  "*.(rpm|deb)",
+	  "." },
+	{ "Text/Document files",
+	  "*.(txt|tex|doc|rtf)",
+	  "." },
+	{ "HTML and SGML files",
+	  "*.{html|htm|sgml|sgm",
+	  "." },
+	{ "Postscript and PDF files",
+	  "*.(ps|pdf)",
+	  "." },
+	{ "Spreadsheet files",
+	  "*.(xls|wks|wk1)",
+	  "." },
+	{ "Image files",
+	  "*.(png|jpg|jpeg|xcf|gif|tif|tiff|xbm|xpm|pbm|pgm|ppm|tga|rgb|iff|lbm|ilbm|"
+	  "bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits)",
+	  "." },
+	{ "Video/animation files",
+	  "*.(mpg|mpeg|mov|avi|fli|flc|flh|flx|dl)",
+	  "." },
+	{ "Audio files",
+	  "*.(au|wav|mp3|snd|mod|s3m|ra)",
+	  "." },
+	{ "C program files",
+	  "*.[ch]",
+	  "." },
+	{ "C++ program files",
+	  "*.(cc|C|cpp|cxx|h|H)",
+	  "." },
+	{ "Objective-C program files",
+	  "*.[mh]",
+	  "." },
+	{ "Scheme program files",
+	  "*.scm",
+	  "." },
+	{ "Assembler program files",
+	  "*.(s|S|asm)",
+	  "." },
+	{ "Misc. program files",
+	  "*.(awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)",
+	  "." },
+	{ "Font files",
+	  "*.(pfa|pfb|afm|ttf|fon|pcf|pcf.gz|spd)",
+	  "." }
 };
+
+static GtkWidget *filter_menu;
+
+static void
+filter_item_select (GtkWidget *widget, gpointer data)
+{
+	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
+
+	set_hintbar (easy_patterns ? fi->glob : fi->regexp);
+}
+
+static void
+filter_item_deselect (GtkWidget *widget, gpointer data)
+{
+	set_hintbar ("");
+}
+
+static void
+filter_item_activate (GtkWidget *widget, gpointer data)
+{
+	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
+	WPanel *panel = data;
+
+	set_panel_filter_to (panel, g_strdup (easy_patterns ? fi->glob : fi->regexp));
+}
+
+static void
+build_filter_menu (WPanel *panel, GtkWidget *button)
+{
+	GtkWidget *item;
+	int i;
+
+	if (filter_menu)
+		return;
+
+	/* FIXME: the filter menu is global, and it is never destroyed */
+
+	filter_menu = gtk_menu_new ();
+
+	gtk_object_set_user_data (GTK_OBJECT (filter_menu), button);
+
+	for (i = 0; i < ELEMENTS (filter_items); i++) {
+		item = gtk_menu_item_new_with_label (filter_items[i].text);
+		gtk_object_set_user_data (GTK_OBJECT (item), &filter_items[i]);
+
+		gtk_signal_connect (GTK_OBJECT (item), "select",
+				    (GtkSignalFunc) filter_item_select,
+				    panel);
+		gtk_signal_connect (GTK_OBJECT (item), "deselect",
+				    (GtkSignalFunc) filter_item_deselect,
+				    panel);
+		gtk_signal_connect (GTK_OBJECT (item), "activate",
+				    (GtkSignalFunc) filter_item_activate,
+				    panel);
+
+		gtk_widget_show (item);
+		gtk_menu_append (GTK_MENU (filter_menu), item);
+	}
+}
+
+static void
+position_filter_popup (GtkMenu *menu, gint *x, gint *y, gpointer data)
+{
+	int screen_width, screen_height;
+	GtkWidget *wmenu = GTK_WIDGET (menu);
+	GtkWidget *button = GTK_WIDGET (data);
+
+	/* This code is mostly ripped off from gtkmenu.c - Federico */
+
+	screen_width = gdk_screen_width ();
+	screen_height = gdk_screen_height ();
+
+	gdk_window_get_origin (button->window, x, y);
+
+	*y += button->allocation.height;
+
+	if ((*x + wmenu->requisition.width) > screen_width)
+		*x -= (*x + wmenu->requisition.width) - screen_width;
+
+	if ((*y + wmenu->requisition.height) > screen_height)
+		*y -= (*y + wmenu->requisition.height) - screen_height;
+
+	if (*y < 0)
+		*y = 0;
+}
+
+static void
+show_filter_popup (GtkWidget *button, gpointer data)
+{
+	WPanel *panel;
+
+	panel = data;
+
+	build_filter_menu (panel, button);
+
+	gtk_menu_popup (GTK_MENU (filter_menu), NULL, NULL,
+			position_filter_popup,
+			button,
+			1,
+			GDK_CURRENT_TIME);
+}
 
 static GtkWidget *
 panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 {
-	GtkWidget *hbox;
+	GtkWidget *fhbox;
+	GtkWidget *button;
+	GtkWidget *arrow;
 	GtkWidget *label;
+	GtkWidget *ihbox;
 	WInput *in;
-	int i;
 
-	hbox = gtk_hbox_new (FALSE, 0);
+	fhbox = gtk_hbox_new (FALSE, 0);
 
-	label = gtk_label_new ("Filter:");
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
+	/* Filter popup button */
+
+	button = gtk_button_new ();
+	gtk_signal_connect (GTK_OBJECT (button), "clicked",
+			    (GtkSignalFunc) show_filter_popup,
+			    panel);
+	GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_FOCUS);
+	gtk_box_pack_start (GTK_BOX (fhbox), button, FALSE, FALSE, 0);
+	gtk_widget_show (button);
+
+	ihbox = gtk_hbox_new (FALSE, 3);
+	gtk_container_add (GTK_CONTAINER (button), ihbox);
+	gtk_widget_show (ihbox);
+
+	arrow = gtk_arrow_new (GTK_ARROW_DOWN, GTK_SHADOW_OUT);
+	gtk_box_pack_start (GTK_BOX (ihbox), arrow, TRUE, TRUE, 0);
+	gtk_widget_show (arrow);
+
+	label = gtk_label_new ("Filter");
+	gtk_box_pack_start (GTK_BOX (ihbox), label, TRUE, TRUE, 0);
 	gtk_widget_show (label);
+
+	/* Filter input line */
 
 	in = input_new (0, 0, 0, 10, "", "filter");
 	add_widget (h, in);
@@ -973,20 +1140,15 @@ panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
 	
-#if 0
-	for (i = 0; i < ELEMENTS (default_filters); i++)
-		gnome_entry_append_history (GNOME_ENTRY (*filter_w), FALSE, default_filters[i]);
-#endif
-
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (*filter_w))),
 			    "activate",
 			    (GtkSignalFunc) panel_change_filter,
 			    panel);
 
-	gtk_box_pack_start (GTK_BOX (hbox), *filter_w, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (fhbox), *filter_w, TRUE, TRUE, 0);
 	gtk_widget_show (*filter_w);
 
-	return hbox;
+	return fhbox;
 }
 
 void
