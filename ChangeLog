@@ -1,3 +1,9 @@
+2002-10-17  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Add node names.  Remove redundant paragraph
+	breaks at the start and the end of the sections.  Mention
+	"stalelink" as color keyword.
+
 2002-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Don't use "-dump" option with "links".

@@ -7,13 +7,13 @@ mc \- Visual shell for Unix-like systems.
 .SH "USAGE"
 .B mc
 [\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
+.\"NODE "DESCRIPTION"
 .SH "DESCRIPTION"
-.LP
 The Midnight Commander is a directory browser/file manager for
 Unix-like operating systems.
+.\"NODE "OPTIONS"
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
-.TP
 .I "\-a"
 Disables the usage of graphic characters for line drawing.
 .TP
@@ -95,7 +95,7 @@ screen modes, and able to send mouse escape sequences).
 If specified, the first path name is the directory to show in the
 selected panel; the second path name is the directory to be shown in
 the other panel.
-.PP
+.\"NODE "Overview"
 .SH "Overview"
 The screen of the Midnight Commander is divided into four parts.
 Almost all of the screen space is taken up by two directory panels.
@@ -139,7 +139,7 @@ and
 Input Line Keys
 .\"Input Line Keys"
 sections to learn more about the command line.
-.PP
+.\"NODE "Mouse Support"
 .SH "Mouse Support"
 The Midnight Commander comes with mouse support.  It is activated
 whenever you are running on an
@@ -190,6 +190,7 @@ If you are running the Midnight Commander with the mouse support, you
 can get the default mouse behavior (cutting and pasting text) by holding
 down the Shift key.
 .SH ""
+.\"NODE "Keys"
 .SH "Keys"
 Some commands in the Midnight Commander involve the use of the
 .I Control
@@ -242,7 +243,7 @@ Input Line Keys
 .\"Input Line Keys"
 are used for editing input lines. This means both the command line and
 the input lines in the query dialogs.
-.PP
+.\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
 Here are some keys which don't fall into any of the other categories:
 .PP
@@ -337,7 +338,7 @@ return to your application just type C-o.  If you have an application
 suspended by using this trick, you won't be able to execute other
 programs from the Midnight Commander until you terminate the suspended
 application.
-.PP
+.\"NODE "  Directory Panels"
 .SH "  Directory Panels"
 This section lists the keys which operate on the directory panels. If
 you want to know how to change the appearance of the panels take a
@@ -445,7 +446,7 @@ to depressing the '>' with the mouse.
 .B M-S-h, M-H
 Displays the directory history, equivalent to depressing the 'v' with
 the mouse.
-.PP
+.\"NODE "  Shell Command Line"
 .SH "  Shell Command Line"
 This section lists keys which are useful to avoid excessive typing when
 entering shell commands.
@@ -483,7 +484,7 @@ to the last entry, M-n takes you to the next one.
 .PP
 .B M-h.
 Displays the history for the current input line.
-.PP
+.\"NODE "  General Movement Keys"
 .SH "  General Movement Keys"
 The help viewer, the file viewer and the directory tree use common
 code to handle moving. Therefore they accept exactly the same
@@ -524,7 +525,7 @@ Moves one half of a page up or down.
 .PP
 .B g, G.
 Moves to the beginning or to the end.
-.PP
+.\"NODE "  Input Line Keys"
 .SH "  Input Line Keys"
 The input lines (they are used for the
 .\"LINK2"
@@ -585,8 +586,8 @@ does the filename, command, variable, username and hostname
 completion
 .\"Completion"
 for you.
-.PP
 .SH ""
+.\"NODE "Menu Bar"
 .SH "Menu Bar"
 The menu bar pops up when you press F9 or click the mouse on the top
 row of the screen. The menu bar has five menus: "Left", "File",
@@ -618,7 +619,6 @@ The
 Options Menu
 .\"Options Menu"
 lists the actions which allow you to customize the Midnight Commander.
-.PP
 .\"NODE "  Left and Right Menus"
 .SH "  Left and Right (Above and Below) Menus"
 The outlook of the directory panels can be changed from the
@@ -634,7 +634,7 @@ when the horizontal panel split is chosen from the
 Layout
 .\"Layout"
 options dialog).
-.PP
+.\"NODE "    Listing Mode..."
 .SH "    Listing Mode..."
 The listing mode view is used to display a listing of files, there are
 four different listing modes available:
@@ -789,7 +789,7 @@ viewer
 that displays the contents of the currently selected file, if you
 select the panel (with the tab key or the mouse), you will have access
 to the usual viewer commands.
-.PP
+.\"NODE "    Sort Order..."
 .SH "    Sort Order..."
 The eight sort orders are by name, by extension, by modification time,
 by access time, and by inode information modification time, by size,
@@ -804,14 +804,14 @@ Options menu
 .\"Options Menu"
 (option
 .BR "Mix all files" ).
-.PP
+.\"NODE "    Filter..."
 .SH "    Filter..."
 The filter command allows you to specify a shell pattern (for example
 .BR "*.tar.gz" )
 which the files must match to be shown. Regardless
 of the filter pattern, the directories and the links to directories
 are always shown in the directory panel.
-.PP
+.\"NODE "    Reread"
 .SH "    Reread"
 The reread command reload the list of files in the directory. It is
 useful if other processes have created or removed files.  If you
@@ -821,7 +821,7 @@ contents and remove the panelized information (See the section
 External panelize
 .\"External panelize"
 for more information).
-.PP
+.\"NODE "  File Menu"
 .SH "  File Menu"
 The Midnight Commander uses the F1 - F10 keys as keyboard shortcuts
 for commands appearing in the file menu.  The escape sequences for the
@@ -998,7 +998,7 @@ Terminate the Midnight Commander.  Shift-F10 is used when you want to
 quit and you are using the shell wrapper.  Shift-F10 will not take you
 to the last directory you visited with the Midnight Commander, instead
 it will stay at the directory where you started the Midnight Commander.
-.PP
+.\"NODE "    Quick cd"
 .SH "    Quick cd"
 This command is useful if you have a full command line and want to
 .\"LINK2"
@@ -1012,7 +1012,7 @@ that are already in the
 .\"LINK2"
 internal cd command.
 .\"The cd internal command"
-.PP
+.\"NODE "  Command Menu"
 .SH "  Command Menu"
 The
 .\"LINK2"
@@ -1068,7 +1068,7 @@ Menu file edit
 .\"Menu File Edit"
 command may be used for editing the user menu (which appears by
 pressing F2).
-.PP
+.\"NODE "    Directory Tree"
 .SH "    Directory Tree"
 The Directory Tree command shows a tree figure of the directories. You
 can select a directory from the figure and the Midnight Commander will
@@ -1158,7 +1158,7 @@ also the section on
 .\"LINK2"
 mouse support.
 .\"Mouse Support"
-.PP
+.\"NODE "    Find File"
 .SH "    Find File"
 The Find File feature first asks for the start directory for the
 search and the filename to be searched for. By pressing the Tree
@@ -1212,7 +1212,7 @@ External panelize
 command for some operations. Find file command is for simple queries
 only, while using External panelize you can do as mysterious searches
 as you would like.
-.PP
+.\"NODE "    External panelize"
 .SH "    External panelize"
 The External panelize allows you to execute an external program, and
 make the output of that program the contents of the current panel.
@@ -1242,7 +1242,7 @@ so that you can recall them quickly. You do this by typing the command on
 the input line and pressing Add new button. Then you enter a name under
 which you want the command to be saved. Next time, you just choose that
 command from the list and do not have to type it again.
-.PP
+.\"NODE "    Hotlist"
 .SH "    Hotlist"
 The Directory hotlist command shows the labels of the directories
 in the directory hotlist.  The Midnight Commander will change to the
@@ -1258,7 +1258,7 @@ CDPATH variable as described in
 internal cd command
 .\"The cd internal command"
 description.
-.PP
+.\"NODE "    Extension File Edit"
 .SH "    Extension File Edit"
 This will invoke your editor on the file ~/.mc/bindings. The format of this
 file is as follows (the format has changed with version 3.0):
@@ -1318,14 +1318,13 @@ If some actions are missing, search continues as if this target didn't
 match (i.e. if a file matches the first and second entry and View action
 is missing in the first one, then on pressing F3 the View action from
 the second entry will be used. default should catch all the actions.
-.PP
 .\"NODE "    Background jobs"
 .SH "    Background Jobs"
 This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the
 background).  You can stop, restart and kill a background job from
 here.
-.PP
+.\"NODE "    Menu File Edit"
 .SH "    Menu File Edit"
 The user menu is a menu of useful actions that can be customized by
 the user. When you access the user menu, the
@@ -1469,7 +1468,7 @@ starting with '+' and another starting with '='.
 .PP
 Comments are started with '#'. The additional comment lines must start
 with '#', space or tab.
-.PP
+.\"NODE "  Options Menu"
 .SH "  Options Menu"
 The Midnight Commander has some options that may be toggled on and
 off in several dialogs which are accessible from this menu. Options
@@ -1522,7 +1521,7 @@ Save setup
 .\"Save Setup"
 command saves the current settings of the Left, Right and Options
 menus. A small number of other settings is saved, too.
-.PP
+.\"NODE "    Configuration"
 .SH "    Configuration"
 The options in this dialog are divided into three groups:
 Panel Options, Pause after run and Other Options.
@@ -1686,7 +1685,7 @@ to the "No" button and deletion of non empty directories has to be
 confirmed by entering the word
 .IR yes .
 By default this option is disabled.
-.PP
+.\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
 of screen. You can specify whether the menubar, the command prompt,
@@ -1725,18 +1724,18 @@ If the
 option is enabled, one line of status
 information about the currently selected item is showed at the bottom
 of the panels.
-.PP
+.\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this menu you configure the confirmation options for file deletion,
 overwriting, execution by pressing enter and quitting the program.
-.PP
+.\"NODE "    Display bits"
 .SH "    Display bits"
 This is used to configure the range of visible characters on the
 screen.  This setting may be 7-bits if your terminal/curses supports
 only seven output bits, ISO-8859-1 displays all the characters in the
 ISO-8859-1 map and full 8 bits is for those terminals that can display
 full 8 bit characters.
-.PP
+.\"NODE "    Learn keys"
 .SH "    Learn keys"
 This dialog allows you to test and redefine functional keys, cursor
 arrows and some other keys to make them work properly on your terminal.
@@ -1766,7 +1765,7 @@ for the keys you have redefined will be written into the [terminal:TERM]
 section of your ~/.mc/ini file (where TERM is the name of your current
 terminal).  The definitions of the keys that were already working properly
 are not saved.
-.PP
+.\"NODE "    Virtual FS"
 .SH "    Virtual FS"
 This option gives you control over the settings of the
 .\"LINK2"
@@ -1832,7 +1831,7 @@ the section on
 FTP File System
 .\"FTP File System"
 for more information.
-.PP
+.\"NODE "    Save Setup"
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
 information from the ~/.mc/ini file. If this file doesn't exist,
@@ -1866,6 +1865,7 @@ Special Settings
 for more information.
 .PP
 .SH ""
+.\"NODE "Executing operating system commands"
 .SH "Executing operating system commands"
 You may execute commands by typing them directly in the Midnight
 Commander's input line, or by selecting the program you want to
@@ -1883,7 +1883,7 @@ executed. A very simple
 macro expansion
 .\"Macro Substitution"
 takes place before executing the command.
-.PP
+.\"NODE "  The cd internal command"
 .SH "  The cd internal command"
 The
 .I cd
@@ -1919,7 +1919,7 @@ variable to ~/src:/usr/src, allowing you to change your directory to
 any of the directories inside the ~/src and /usr/src directories, from
 any place in the file system by using it's relative name (for example
 cd linux could take you to /usr/src/linux).
-.PP
+.\"NODE "  Macro Substitution"
 .SH "  Macro Substitution"
 When accessing a
 .\"LINK2"
@@ -2052,7 +2052,7 @@ is unset, the
 is substituted.  Otherwise, the value of
 .I ENV
 is substituted.
-.PP
+.\"NODE "  The subshell support"
 .SH "  The subshell support"
 The subshell support is a compile time option, that works with the
 shells: bash, tcsh and zsh.
@@ -2089,7 +2089,7 @@ The
 OPTIONS
 .\"OPTIONS"
 section has more information on how you can control the subshell code.
-.PP
+.\"NODE "Chmod"
 .SH "Chmod"
 The Chmod window is used to change the attribute bits in a group of
 files and directories.  It can be invoked with the C-x c key combination.
@@ -2142,11 +2142,11 @@ set the attributes of one file
 .PP
 .B [Cancel]
 cancel the Chmod command
-.PP
+.\"NODE "Chown"
 .SH "Chown"
 The Chown command is used to change the owner/group of a file. The hot
 key for this command is C-x o.
-.PP
+.\"NODE "Advanced Chown"
 .SH "Advanced Chown"
 The Advanced Chown command is the
 .\"LINK2"
@@ -2158,7 +2158,7 @@ Chown
 .\"Chown"
 command combined into one window. You can change the permissions and
 owner/group of files at once.
-.PP
+.\"NODE "File Operations"
 .SH "File Operations"
 When you copy, move or delete files the Midnight Commander shows the
 file operations dialog. It shows the files currently being operated on
@@ -2203,7 +2203,7 @@ sure you want to do the recursive delete.
 If you have tagged files and perform an operation on them only the
 files on which the operation succeeded are untagged. Failed and
 skipped files are left tagged.
-.PP
+.\"NODE "Mask Copy/Rename"
 .SH "Mask Copy/Rename"
 The copy/move operations lets you translate the names of files in an easy
 way. To do it, you have to specify the correct source mask and usually in
@@ -2293,7 +2293,7 @@ will be converted to have initial upper case and otherwise lower case.
 .PP
 You can also use '\\' as a quote character. For example, '\\\\' is
 a backslash and '\\*' is an asterisk.
-.PP
+.\"NODE "Internal File Viewer"
 .SH "Internal File Viewer"
 The internal file viewer provides two display modes: ASCII and hex.
 To toggle between modes, use the F4 key.  If you have the GNU gzip
@@ -2412,6 +2412,7 @@ at the
 .\"LINK2"
 Extension File Edit section
 .\"Extension File Edit"
+.\"NODE "Internal File Editor"
 .SH "Internal File Editor"
 The internal file editor provides most of the features of
 common full screen editors. It is invoked using
@@ -2516,7 +2517,7 @@ The editor also displays non-us characters (160+). When editing
 binary files, you should set
 .B display bits
 to 7 bits in the options menu to keep the spacing clean.
-.PP
+.\"NODE "Completion"
 .SH "Completion"
 Let the Midnight Commander type for you.
 .PP
@@ -2562,7 +2563,7 @@ Complete: show all
 is disabled, the dialog pops up only if you press
 .B M-Tab
 for the second time, for the first time MC just beeps.
-.PP
+.\"NODE "Virtual File System"
 .SH "Virtual File System"
 The Midnight Commander is provided with a code layer to access the
 file system; this code layer is known as the virtual file system
@@ -2583,7 +2584,7 @@ manipulate files on remote systems with the SMB (CIFS) protocol.
 The VFS switch code will interpret all of the path names used and will
 forward them to the correct file system, the formats used for each one
 of the file systems is described later in their own section.
-.PP
+.\"NODE "  FTP File System"
 .SH "  FTP File System"
 The ftpfs allows you to manipulate files on remote machines, to
 actually use it, you may try to use the panel command FTP link
@@ -2653,7 +2654,7 @@ directory, they will not be reflected in the directory listing until you
 force a cache reload with the C-r key.  This is a feature (when you think
 it's a bug, think about manipulating files on the other side of the Atlantic
 with ftpfs).
-.PP
+.\"NODE "  Tar File System"
 .SH "  Tar File System"
 The tar file system provides you with read-only access to your tar
 files and compressed tar files by using the chdir command.  To change
@@ -2678,6 +2679,7 @@ Examples:
 .fi
 .PP
 The latter specifies the full path of the tar archive.
+.\"NODE "  FIle transfer over SHell filesystem"
 .SH "  FIle transfer over SHell filesystem"
 The fish file system is a network based file system that allows you to
 manipulate the files in a remote machine as if they were local. To use
@@ -2718,7 +2720,7 @@ Examples:
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
-.PP
+.\"NODE "  Network File System"
 .SH "  Network File System"
 The Midnight Commander file system is a network base file system that
 allows you to manipulate the files in a remote machine as if they
@@ -2754,7 +2756,7 @@ Examples:
     /#mc:ftp.nuclecu.unam.mx/linux/local
     /#mc:joe@foo.edu:11321/private
 .fi
-.PP
+.\"NODE "  Undelete File System"
 .SH "  Undelete File System"
 On Linux systems, if you asked configure to use the ext2fs undelete
 facilities, you will have the undelete file system available.
@@ -2776,7 +2778,7 @@ first SCSI disk on Linux, you would use the following path name:
 .PP
 It may take a while for the undelfs to load the required information
 before you start browsing files there.
-.PP
+.\"NODE "  SMB File System"
 .SH "  SMB File System"
 The smbfs allows you to manipulate files on remote machines with SMB
 (or CIFS) protocol.  These include Windows for Workgroups,
@@ -2805,7 +2807,7 @@ Examples:
     /#smb:other_machine
     /#smb:guest@machine/Public/Irlex
 .fi
-.PP
+.\"NODE "Colors"
 .SH "Colors"
 The Midnight Commander will try to detect if your terminal supports
 color using the terminal database and your terminal name.  Sometimes
@@ -2863,8 +2865,8 @@ markselect, errors, input, reverse, gauge.  Menu colors are: menu,
 menusel, menuhot, menuhotsel.  Dialog colors are: dnormal, dfocus,
 dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
 helpbold, helplink, helpslink.  Viewer color is: viewunderline.  Special
-highlighting colors are: executable, directory, link, device, special,
-core.  Editor colors are: editnormal, editbold, editmarked.
+highlighting colors are: executable, directory, link, stalelink, device,
+special, core.  Editor colors are: editnormal, editbold, editmarked.
 .PP
 .I input
 determines the color of input lines used in query dialogs.
@@ -2931,7 +2933,7 @@ used for background color. Example:
 [Colors]
 base_color=normal=white,default:marked=magenta,default
 .fi
-.PP
+.\"NODE "Special Settings"
 .SH "Special Settings"
 Most of the settings of the Midnight Commander can be changed from the
 menus. However, there are a small number of settings which can only be
@@ -3050,7 +3052,7 @@ mc.ext file.
 If this variable is on (default is off) when you browse the file
 system on a Tree panel, it will automatically reload the other panel
 with the contents of the selected directory.
-.PP
+.\"NODE "Terminal databases"
 .SH "Terminal databases"
 The Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges.  The Midnight Commander
@@ -3093,8 +3095,8 @@ key symbol represents the escape sequences used to invoke the
 completion process, this is invoked with M-tab, but you can define
 other keys to do the same work (on those keyboard with tons of nice
 and unused keys everywhere).
-.PP
 .SH ""
+.\"NODE "FILES"
 .SH "FILES"
 The program will retrieve all of its information relative to the
 MC_DATADIR environment variable, if this variable is not set, then it will
@@ -3160,10 +3162,12 @@ applications menu.
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation. See the built-in
 help for details on the License and the lack of warranty.
+.\"NODE "AVAILABILITY"
 .SH "AVAILABILITY"
 The latest version of this program can be found at
 ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
 mirrors listed on the GNOME site http://www.gnome.org/.
+.\"NODE "SEE ALSO"
 .SH "SEE ALSO"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
@@ -3172,7 +3176,7 @@ tcsh(1), zsh(1).
 The Midnight Commander page on the World Wide Web:
 	http://www.gnome.org/mc/
 .fi
-.PP
+.\"NODE "AUTHORS"
 .SH "AUTHORS"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
 (jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
@@ -3205,7 +3209,7 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
-.PP
+.\"NODE "BUGS"
 .SH "BUGS"
 See the file TODO in the distribution for information on what
 remains to be done.
