@@ -1,3 +1,10 @@
+2001-06-07  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/gmc.sgml: Remove index - it's not used in the
+	GNOME documentation template.
+	* doc-gnome/C/mkhtml: Don't generate index.
+	* doc-gnome/C/Makefile.am: Don't distribute genindex.sgml.
+
 2001-06-06  Pavel Roskin  <proski@gnu.org>
 
 	* lib/Makefile.am: Make compatible with Automake 1.4 - remove

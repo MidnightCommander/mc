@@ -27,7 +27,7 @@ systems where the GMC documentation fails to be generated.
 '
 
 # What to remove in case of failure
-CLEANFILES="*.html genindex.sgml HTML.index"
+CLEANFILES="*.html"
 rm -f $CLEANFILES
 
 # Trap if something goes wrong
@@ -42,20 +42,5 @@ done
 # Make sure $DSL exists. TODO: search in all known locations here.
 test -f "$DSL" || { echo "$DSL not found"; exit 1; }
 
-# Complicated bootstrap process - create empty genindex.sgml first,
-# then generate it and then generate html files again.
-echo >genindex.sgml
-
-# First pass
-echo "First pass"
-$JADE $JADEFLAGS -t sgml -i html -d "$DSL#html" -V html-index=1 gmc.sgml
-
-# collateindex.pl may not have /usr/bin/perl on the first line.
-echo "Generating index"
-perl /usr/bin/collateindex.pl HTML.index >genindex.sgml
-rm -f HTML.index
-
-# Second pass with the right genindex.sgml
-echo "Second pass"
 $JADE $JADEFLAGS -t sgml -i html -d "$DSL#html" gmc.sgml
 

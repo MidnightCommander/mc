@@ -8,7 +8,7 @@ noinst_SCRIPTS = mkhtml
 
 SGML_FILES = gmc.sgml
 
-EXTRA_DIST = topic.dat genindex.sgml $(SGML_FILES) $(noinst_SCRIPTS)
+EXTRA_DIST = topic.dat $(SGML_FILES) $(noinst_SCRIPTS)
 
 MOSTLYCLEANFILES = *.tex *.log *.aux
 CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf

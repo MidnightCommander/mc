@@ -1,9 +1,7 @@
 <!DOCTYPE ARTICLE PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
-<!ENTITY INDEX SYSTEM "genindex.sgml">
 ]>
 <article id="index">
   <articleinfo>
-
     <authorgroup>
       <author>
 	<firstname>Dave</firstname>
@@ -89,11 +87,6 @@
         becomes hidden in the tree view and the plus sign reappears.
       </para>
       <para>
-        <indexterm>
-          <primary>
-            Viewing Files
-          </primary>
-        </indexterm> 
         The directry window has a few viewing options you may wish
         to take advantage of: the icon view and three list views: brief,
         detailed and custom.
@@ -117,11 +110,6 @@
     <sect1 id="gmcnav">
       <title>Moving Around the GNOME File Manager</title>
       <para>
-        <indexterm>
-          <primary>
-            Moving around 
-          </primary>
-        </indexterm>
         Above the tree and main file windows in the GNOME File Manager there is
         a Location text box.
       </para>
@@ -130,11 +118,6 @@
         you would like to view in the main window.
       </para>
       <para>
-        <indexterm id="idx-a38">
-          <primary>
-            FTP
-          </primary>
-        </indexterm> 
         The GNOME File Manager is also equipped to view FTP
         sites. To view an FTP site you will need to be connected to the Internet
         either through a dial up account or a network. Type the FTP address in
@@ -167,21 +150,11 @@
     <sect1 id="gmcselect">
       <title>Selecting Files</title>
       <para>
-        <indexterm>
-          <primary>
-            Selecting Files
-          </primary>
-        </indexterm>
         Selecting files is done with your mouse by clicking on the file or files
         in the GNOME File Manager.  The file that is selected will then
         highlight to show you that it has been selected.  
       </para>
       <para>
-        <indexterm id="idx-a40">
-          <primary>
-            Selecting multiple files 
-          </primary>
-        </indexterm>
         There are a couple of ways to select more than one file. One way is to
         use the "rubber band" select by clicking and dragging the mouse cursor
         around several files. This action will produce a small dotted line, the
@@ -216,11 +189,6 @@
         <guimenu>Edit</guimenu> menu.
       </para>
       <para>
-        <indexterm>
-          <primary>
-            Filtering
-          </primary>
-        </indexterm>
         You may also filter your selection by using the <guimenuitem>Select
         Files</guimenuitem> menu item in the <guimenu>Edit</guimenu> menu. Using
         <guimenuitem>Select Files</guimenuitem> will display a simple dialog
@@ -235,16 +203,6 @@
     <sect1 id="gmccopy">
       <title>Copying and Moving Files</title>
       <para>
-        <indexterm>
-          <primary>
-            Copying files
-          </primary>
-        </indexterm>
-        <indexterm>
-          <primary>
-            Moving files
-          </primary>
-        </indexterm>
         The default action for dragging and dropping files between the GNOME
         File Manager and the desktop is to move them. But you can also use drag
         and drop to copy a file by pressing the <keycap>SHIFT</keycap> key while
@@ -258,11 +216,6 @@
         plus sign signifying that the directory will be copied, not moved.
       </para>
       <para>
-        <indexterm>
-          <primary>
-            Linking files
-          </primary>
-        </indexterm>
         You may also bring up a menu which lets you decide what action to
         perform with a drag by using the middle mouse button to drag a file or
         pressing the <keycap>ALT</keycap> key while dragging a file. Once you
@@ -284,11 +237,6 @@
             <graphic Format="png" Fileref="./figs/gmc_move" srccredit="dcm">
           </screenshot>
         </figure>
-        <indexterm>
-          <primary>
-            Move dialog
-          </primary>
-        </indexterm>
         To use the move dialog you simply type in the path where you wish to
         move the file. If you want to rename the file you may type the new name
         of the file in the path string. The Copy dialog looks and works exactly
@@ -309,11 +257,6 @@
     <sect1 id="gmcrename">
       <title>Renaming Files</title>
       <para>
-        <indexterm>
-          <primary>
-            Renaming files
-          </primary>
-        </indexterm>
         Renaming files in the GNOME File Manager window or on the desktop can be
         achieved in two ways.
       </para>
@@ -343,11 +286,6 @@
     <sect1 id="gmclaunch">
       <title>Launching Applications From the GNOME File Manager</title>
       <para>
-        <indexterm>
-          <primary>
-            Launching applications from
-          </primary>
-        </indexterm>
         The GNOME File Manager allows you to launch applications from the main
         window by simply double clicking your mouse on a file which has an
         application associated with it. You can change the way file types are
@@ -358,11 +296,6 @@
         File Manager.
       </para>
       <para>
-        <indexterm>
-          <primary>
-            Open with
-          </primary>
-        </indexterm>
         If the file does not have an associated application you can right mouse
         click on the file and select <guimenuitem>Open with</guimenuitem> from
         the <guimenuitem>pop-up</guimenuitem> menu. This will bring up a dialog
@@ -384,11 +317,6 @@
     <sect1 id="gmcfileprops">
       <title>File Properties and Actions</title>
       <para>
-        <indexterm id="idx-a48">
-          <primary>
-            File properties
-          </primary>
-        </indexterm>
         For any file in the main file display you may right mouse click on it
         and choose a variety of properties and actions for it from the
         <guimenu>pop-up</guimenu> menu:
@@ -525,11 +453,6 @@
     <sect1 id="gmcprefs">
       <title>Changing Your Preferences in The File Manager</title>
       <para>
-        <indexterm>
-          <primary>
-            Preferences
-          </primary>
-        </indexterm>
         There are many settings you can configure for the GNOME File Manager.
       </para>
       <para>
@@ -557,11 +480,6 @@
         <itemizedlist MARK="bullet">
           <listitem>
             <para>
-              <indexterm>
-                <primary>
-                  Display
-                </primary>
-              </indexterm>
               The <guilabel>File Display</guilabel> tab allows you to change the way 
               files are displayed in GMC.
             </para>
@@ -574,16 +492,6 @@
               </listitem>
               <listitem>
                 <para>
-                  <indexterm>
-                    <primary>
-                      Hidden Files
-                    </primary>
-                  </indexterm>
-                  <indexterm>
-                    <primary>
-                      Show hidden files
-                    </primary>
-                  </indexterm>
                   <guilabel>Show hidden files</guilabel> - This will show all
                   "dot files" or files that begin with a dot. These files
                   typically include configuration files and directories.
@@ -621,11 +529,6 @@
         <itemizedlist MARK="bullet">
           <listitem>
             <para>
-              <indexterm>
-                <primary>
-                  Confirmations
-                </primary>
-              </indexterm>
               This tab allows you to change which functions ask for your confirmation  
               before continuing.
             </para>
@@ -672,16 +575,6 @@
         <itemizedlist MARK="bullet">
           <listitem>
             <para>
-              <indexterm>
-                <primary>
-                  VFS
-                </primary>
-              </indexterm>
-              <indexterm>
-                <primary>
-                  Virtual File System
-                </primary><see>"VFS"</see>
-              </indexterm>
               This tab allows you to configure the options for your Virtual File 
               System.
             </para>
@@ -791,11 +684,6 @@
       <sect2 id="gmcprefs-desk">
 	<title>Desktop</title>
 	<para>
-	<indexterm>
-         <primary>
-          Desktop
-         </primary>
-	</indexterm>
          As you learned before, the GNOME desktop is controlled by the GNOME File
          Manager. The Desktop Dialog allows you to change the settings of the
          desktop.
@@ -840,11 +728,6 @@
    <sect2 id="gmcprefs-custom">
     <title>Custom View</title>
     <para>
-    <indexterm>
-     <primary>
-      Custom View
-     </primary>
-     </indexterm>
      The Custom View dialog allows you to set the way you would like the Custom 
      View to look in the GNOME File Manager. 
     </para>
@@ -881,11 +764,6 @@
   <sect1 id="gmcmenus">
    <title>Menu Guide to the GNOME File Manager</title>
    <para>
-   <indexterm>
-    <primary>
-     Menus
-    </primary>
-    </indexterm>
     In this section each menu item in the GNOME  File Manager will be described. 
    </para>
    <tip>
@@ -1196,11 +1074,6 @@
   <sect1 id="dragtour">
    <title>A Drag and Drop Tour of GNOME</title>
     <para>
-    <indexterm>
-     <primary>
-      Drag and Drop
-     </primary>
-    </indexterm>
      There are many tips and tricks  to the Desktop in GNOME. The Drag and Drop 
      functionality extends to many areas of GNOME making it easy to interconnect
      GNOME in many interesting ways. Below is a series of tips and tricks to 
@@ -1265,5 +1138,4 @@
     </listitem>
    </itemizedlist>
   </sect1>
-&INDEX;
 </article>
