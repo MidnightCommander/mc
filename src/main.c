@@ -1744,7 +1744,8 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 
 	/* Ctrl-Enter and Alt-Enter */
-	if ((id & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') {
+	if (((id & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n')
+	    && (id & (KEY_M_CTRL | KEY_M_ALT))) {
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}

@@ -1,3 +1,8 @@
+2002-12-26  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (midnight_callback): Fix the last change, so that plain
+	Enter is not affected.
+
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (copy_prog_name): Make static.
