@@ -26,13 +26,20 @@ EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 
 DIST = 	Makefile.in README.edit $(EDITSRC)
 
-all: @LIBEDIT_A@
+all: checklinks @LIBEDIT_A@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DMIDNIGHT $<
 
 check:
 	@echo no tests are supplied.
+
+checklinks:
+	@if test -f $(rootdir)/edit/edit.c; then echo ok; \
+	else $(MAKE) sourcelinks; fi
+
+sourcelinks:
+	-cd $(rootdir)/edit ; $(LN_S) ../gtkedit/*.[ch] . >/dev/null 2>&1 ; true
 
 libedit.a: $(EDITOBJS)
 	$(RMF) $@
