@@ -245,6 +245,7 @@ format_e *use_display_format (WPanel *panel, char *format, char **error, int iss
 char *panel_format (WPanel *panel);
 char *mini_status_format (WPanel *panel);
 int set_panel_formats (WPanel *p);
+void start_search (WPanel *panel);
 
 WPanel *get_current_panel (void);
 WPanel *get_other_panel (void);

@@ -942,6 +942,10 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 	if (!panel->maybe_start_drag)
 		return FALSE;
 
+	if (!((panel->maybe_start_drag == 1 && (event->state & GDK_BUTTON1_MASK))
+	      || (panel->maybe_start_drag == 2 && (event->state & GDK_BUTTON2_MASK))))
+		return FALSE;
+
 	/* This is the same threshold value that is used in gtkdnd.c */
 
 	if (MAX (abs (panel->click_x - event->x),
@@ -1456,10 +1460,13 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
 	int icon;
 
+	if (event->type != GDK_BUTTON_PRESS)
+		return FALSE;
+
 	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
 
 	if (icon == -1) {
-		if (event->type == GDK_BUTTON_PRESS && event->button == 3) {
+		if (event->button == 3) {
 			file_list_popup (event, panel);
 			return TRUE;
 		}

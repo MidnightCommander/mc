@@ -279,6 +279,9 @@ gtk_flist_button_press (GtkWidget *widget, GdkEventButton *event)
 		if (event->button != 1)
 			break;
 
+		flist->dnd_select_pending = FALSE;
+		flist->dnd_select_pending_state = 0;
+
 		gtk_signal_emit (GTK_OBJECT (flist), flist_signals[OPEN_ROW]);
 		retval = TRUE;
 		break;

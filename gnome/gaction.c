@@ -16,6 +16,7 @@
 #include "gmain.h"
 #include "dir.h"
 #include "dialog.h"
+#include "view.h"
 #include "gcmd.h"
 #include "../vfs/vfs.h"
 #include "gnome-open-dialog.h"
@@ -24,7 +25,6 @@ static void
 gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, const gchar *mime)
 {
 	GtkWidget *msg_dialog = NULL;
-	GtkWidget *hack_widget;
 	gchar *msg;
 	gchar *fix = NULL;
 	if (!strcmp (action, "x-gnome-app-info")) {

@@ -624,7 +624,6 @@ void
 gnome_check_super_user (void)
 {
 	GtkWidget *warning_dlg;
-	GnomeClient *client;
 
 	if (geteuid () != 0)
 		return;

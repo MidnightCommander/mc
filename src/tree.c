@@ -882,7 +882,7 @@ chdir_sel (WTree *tree)
 }
 
 static void
-start_search (WTree *tree)
+tree_start_search (WTree *tree)
 {
     int i;
 
@@ -926,8 +926,8 @@ static key_map tree_keymap [] = {
     { ALT('v'),   move_prevp   },
     { XCTRL('p'), move_up      },
     { XCTRL('p'), move_down    },
-    { XCTRL('s'), start_search },
-    { ALT('s'),   start_search },
+    { XCTRL('s'), tree_start_search },
+    { ALT('s'),   tree_start_search },
     { XCTRL('r'), tree_rescan_cmd },
     { KEY_DC,     tree_rmdir_cmd },
     { 0, 0 }
@@ -940,7 +940,7 @@ tree_key (WTree *tree, int key)
 
     for (i = 0; tree_keymap [i].key_code; i++){
 	if (key == tree_keymap [i].key_code){
-	    if (tree_keymap [i].fn != start_search)
+	    if (tree_keymap [i].fn != tree_start_search)
 	        tree->searching = 0;
 	    (*tree_keymap [i].fn)(tree);
 	    show_tree (tree);
@@ -975,7 +975,7 @@ tree_key (WTree *tree, int key)
 	}
 
 	if (!command_prompt) {
-	    start_search (tree);
+	    tree_start_search (tree);
 	    tree_do_search (tree, key);
 	    return 1;
 	}

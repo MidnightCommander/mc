@@ -1,3 +1,10 @@
+1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* tree.c (tree_start_search): Renamed from start_search() to avoid
+	collisions with screen.c:start_search().
+
+	* panel.h: Added prototype for start_search().
+
 1999-04-09  Rosanna Yuen  <rwsy@mit.edu>
 
 	* screen.c (do_enter_on_file_entry): split GNOME version and

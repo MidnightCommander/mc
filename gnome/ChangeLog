@@ -1,3 +1,14 @@
+1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_list_button_press): Ignore double clicks.
+	(panel_widget_motion): Don't do anything if the button state does
+	not match the button we are expecting.
+
+	* gtkflist.c (gtk_flist_button_press): Remove pending selections
+	when we receive a double click.
+
+	* gaction.c: #include "view.h"
+
 1999-04-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmount.c (is_block_device_mountable): Allow root to mount

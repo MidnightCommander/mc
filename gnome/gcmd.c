@@ -25,7 +25,6 @@
 #include "gdesktop.h"
 #include "../vfs/vfs.h"
 
-static void start_search (WPanel *panel);
 
 enum {
 	SORT_NAME,

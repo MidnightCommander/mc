@@ -1,3 +1,7 @@
+1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): Bumped version number to 4.5.30.
+
 1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* configure.in (VERSION): Bumped version number to 4.5.29.
