@@ -11,6 +11,10 @@
 	(smbfs_stat): Remove code duplication.
 	(smbfs_lstat): Define as smbfs_stat.
 
+	* samba/lib/system.c (sys_ftruncate): Commented out.
+	* samba/lib/util.c (set_filelen): Likewise.
+	(setbuffer): Likewise.
+
 2002-06-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_read_oldc_head): Use char[] for buf instead

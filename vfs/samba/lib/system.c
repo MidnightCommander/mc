@@ -203,12 +203,12 @@ int sys_lstat(const char *fname,SMB_STRUCT_STAT *sbuf)
 /*******************************************************************
  An ftruncate() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
-
+#if 0
 int sys_ftruncate(int fd, SMB_OFF_T offset)
 {
   return ftruncate(fd, offset);
 }
-
+#endif
 /*******************************************************************
  An lseek() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/

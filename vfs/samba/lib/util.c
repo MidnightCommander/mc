@@ -1594,7 +1594,7 @@ BOOL yesno(char *p)
 
   return(False);
 }
-#endif
+
 
 /****************************************************************************
 set the length of a file from a filedescriptor.
@@ -1654,7 +1654,7 @@ this is a version of setbuffer() for those machines that only have setvbuf
   setvbuf(f,buf,_IOFBF,bufsize);
 }
 #endif
-
+#endif /* 0 */
 
 /****************************************************************************
 parse out a filename from a path name. Assumes dos style filenames.
