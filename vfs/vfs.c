@@ -62,6 +62,10 @@
 #   include "tcputil.h"
 #endif
 
+#ifdef	VFS_STANDALONE
+#undef	WITH_SMBFS
+#endif
+
 extern int get_other_type (void);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
@@ -1361,7 +1365,7 @@ is_dos_date(char *str)
 static int
 is_week (char *str, struct tm *tim)
 {
-    static char *week = "SunMonTueWedThuFriSat";
+    char *week = "SunMonTueWedThuFriSat";
     char *pos;
 
     if((pos=strstr(week, str)) != NULL){
@@ -1375,7 +1379,7 @@ is_week (char *str, struct tm *tim)
 static int
 is_month (char *str, struct tm *tim)
 {
-    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     char *pos;
     
     if((pos=strstr(month, str)) != NULL){
@@ -1620,13 +1624,13 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 {
     int idx, idx2, num_cols;
     int i;
-    char *p_copy;
+    char *p_copy = NULL;
     char *t = NULL;
+    const char *line = p;
 
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
-    p_copy = g_strdup(p);
     if ((i = vfs_parse_filetype(*(p++))) == -1)
         goto error;
 
@@ -1653,7 +1657,6 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
             p++;
     }
 
-    g_free(p_copy);
     p_copy = g_strdup(p);
     num_cols = vfs_split_text (p_copy);
 
@@ -1778,12 +1781,13 @@ error:
       static int errorcount = 0;
 
       if (++errorcount < 5) {
-	message_1s (1, _("Could not parse:"), p_copy);
+	message_1s (1, _("Could not parse:"), p_copy ? p_copy : line);
       } else if (errorcount == 5)
 	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
     }
 
-    g_free (p_copy);
+    if (p_copy)
+	g_free (p_copy);
     return 0;
 }
 
