@@ -20,206 +20,6 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8-bit\n"
 
-#: gnome/gcmd.c:115 gnome/gmc-window.c:68
-msgid "GNU Midnight Commander"
-msgstr "Gnu Midnight Commander"
-
-#: gnome/gmc-window.c:69
-msgid "Copyright (C) 1998 The Free Software Foundation"
-msgstr "Ophavsret (C) 1998 The Free Software Foundation"
-
-#: gnome/gcmd.c:118 gnome/gmc-window.c:71
-msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "Gnome udgaven af Midnight Commander filhåndteringen."
-
-#: gnome/gmc-window.c:81
-msgid "Open _new window"
-msgstr "Åbn _nyt vindue"
-
-#: gnome/gmc-window.c:86
-msgid "_Close this window"
-msgstr "Luk dette vindue"
-
-#: gnome/gmc-window.c:88
-msgid "E_xit"
-msgstr "Afslut"
-
-#: gnome/gmc-window.c:95
-msgid "_Listing view"
-msgstr "_Listevisning"
-
-#: gnome/gmc-window.c:96
-msgid "_Icon view"
-msgstr "_Ikonvisning"
-
-#: gnome/gmc-window.c:102
-msgid "Display _tree view"
-msgstr "Vis _trævisning "
-
-#: gnome/gmc-window.c:112
-msgid "_About the Midnight Commander..."
-msgstr "Om Midnight Commander'en..."
-
-#: gnome/gmc-window.c:119
-msgid "_File"
-msgstr "_Filer"
-
-#: gnome/gmc-window.c:120
-msgid "_View"
-msgstr "_Vis"
-
-#: gnome/glayout.c:477 gnome/glayout.c:487 gnome/gmc-window.c:121
-msgid "_Help"
-msgstr "_Hjælp"
-
-#: gnome/gcmd.c:806 gnome/gpopup.c:53
-msgid " Open with..."
-msgstr " Åbn med..."
-
-#: gnome/gcmd.c:807 gnome/gpopup.c:54 gnome/olddnd.c:1546
-msgid "Enter extra arguments:"
-msgstr "Indtast ekstra argumenter:"
-
-#: gnome/gpopup.c:261 gnome/gpopup.c:264
-msgid "Properties"
-msgstr "Egenskaber"
-
-#: gnome/gpopup.c:262 gnome/gpopup.c:263 gnome/gpopup2.c:293
-#: gnome/olddnd.c:957 gtkedit/editwidget.c:1143 src/screen.c:2400
-#: src/screen.c:2430
-msgid "Delete"
-msgstr "Slet"
-
-#: gnome/gpopup.c:265 gnome/gpopup2.c:280
-msgid "Mount device"
-msgstr "Montér enhed"
-
-#: gnome/gpopup.c:266 gnome/gpopup2.c:281
-msgid "Unmount device"
-msgstr "Afmontér enhed"
-
-#: gnome/gpopup.c:267 gnome/gpopup2.c:282
-msgid "Eject device"
-msgstr "Skub enhed ud"
-
-#. we do open first
-#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup.c:269
-#: gnome/gpopup.c:270 gnome/gpopup2.c:278
-msgid "Open"
-msgstr "Åbn"
-
-#: gnome/gpopup.c:271
-msgid "Open with"
-msgstr "Åbn med"
-
-#: gnome/gnome-file-property-dialog.c:413
-#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup.c:272
-#: gnome/gpopup2.c:287 src/screen.c:2395 src/screen.c:2425
-msgid "View"
-msgstr "Vis"
-
-#: gnome/gpopup.c:273
-msgid "View unfiltered"
-msgstr "Vis ufiltreret"
-
-#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup.c:274
-#: gnome/gpopup2.c:289 src/screen.c:2396 src/screen.c:2426 src/view.c:2081
-msgid "Edit"
-msgstr "Redigér"
-
-#: gnome/gpopup.c:276
-msgid "Move/rename..."
-msgstr "Flyt/omdøb..."
-
-#: gnome/gpopup.c:277 gnome/gpopup2.c:291
-msgid "Copy..."
-msgstr "Kopiér..."
-
-#: gnome/gpopup.c:279
-msgid "Link..."
-msgstr "_Genvej..."
-
-#: gnome/gpopup.c:280 gnome/gpopup2.c:296
-msgid "Symlink..."
-msgstr "Symlænke..."
-
-#: gnome/gpopup.c:281
-msgid "Edit symlink..."
-msgstr "Redigér symlænke..."
-
-#: gnome/gdialogs.c:568 gnome/olddnd.c:649 gtkedit/editwidget.c:1140
-#: gtkedit/gtkedit.c:1250 src/file.c:802 src/screen.c:2397 src/screen.c:2427
-#: src/tree.c:1014
-msgid "Copy"
-msgstr "Kopiér"
-
-#: gnome/gdialogs.c:571 gnome/olddnd.c:655 gtkedit/editwidget.c:1141
-#: gtkedit/gtkedit.c:1252
-msgid "Move"
-msgstr "Flyt"
-
-#. Not yet implemented the Link bits, so better to not show what we dont have
-#: gnome/olddnd.c:662
-msgid "Link"
-msgstr "Lænke"
-
-#: gnome/olddnd.c:956
-msgid "Do you want to delete "
-msgstr "Vil du virkelig slette"
-
-#: gnome/olddnd.c:958 gnome/olddnd.c:1536 gtkedit/editcmd.c:2380 src/cmd.c:246
-#: src/file.c:1878 src/file.c:2249 src/filegui.c:603 src/hotlist.c:1035
-#: src/main.c:866 src/screen.c:2162 src/subshell.c:706 src/subshell.c:732
-#: src/tree.c:745 src/view.c:406
-msgid "&Yes"
-msgstr "&Ja"
-
-#: gnome/olddnd.c:958 gnome/olddnd.c:1536 gtkedit/editcmd.c:2380 src/cmd.c:246
-#: src/file.c:1878 src/file.c:2249 src/filegui.c:602 src/hotlist.c:1035
-#: src/main.c:866 src/screen.c:2162 src/subshell.c:706 src/subshell.c:732
-#: src/tree.c:745 src/view.c:406
-msgid "&No"
-msgstr "&Nej"
-
-#: gnome/olddnd.c:1534 src/main.c:864 src/screen.c:2113 src/screen.c:2160
-msgid " The Midnight Commander "
-msgstr " Midnight Commander'en "
-
-#: gnome/olddnd.c:1535 src/screen.c:2114 src/screen.c:2161
-msgid " Do you really want to execute? "
-msgstr " Vil du virkelig køre? "
-
-#: gnome/gpopup2.c:286 gnome/olddnd.c:1545
-msgid "Open with..."
-msgstr "Åbn med..."
-
-#. Warning message with a query to continue or cancel the operation
-#: gnome/olddnd.c:1681 gtkedit/editcmd.c:540 gtkedit/editcmd.c:863
-#: gtkedit/editcmd.c:888 gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137
-#: src/ext.c:315 src/file.c:619 src/help.c:318 src/main.c:711
-#: src/screen.c:1448 src/screen.c:2125 src/screen.c:2175 src/subshell.c:705
-#: src/subshell.c:731 src/utilunix.c:382 src/utilunix.c:386 src/utilunix.c:406
-#: src/utilunix.c:457 vfs/mcfs.c:172
-msgid " Warning "
-msgstr " Advarsel "
-
-#: gnome/olddnd.c:1681
-#, c-format
-msgid " Could not open %s directory"
-msgstr " Kunne ikke åbne mappen %s"
-
-#: vfs/direntry.c:812 vfs/shared_ftp_fish.c:521
-msgid "Starting linear transfer..."
-msgstr "Begynder lineær overførsel..."
-
-#: vfs/shared_ftp_fish.c:749
-msgid "Preparing reget..."
-msgstr "Forbereder reget..."
-
-#: vfs/direntry.c:957 vfs/shared_ftp_fish.c:866
-msgid "Getting file"
-msgstr "Henter fil: "
-
 #: edit/edit_key_translator.c:126
 msgid " Emacs key: "
 msgstr " Emacs-tast: "
@@ -321,6 +121,14 @@ msgstr "Midnight Commander-holdet"
 #: gnome/gcmd.c:103
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "fejl-rapporter: http://bugs.gnome.org, eller brug bug-buddy"
+
+#: gnome/gcmd.c:115
+msgid "GNU Midnight Commander"
+msgstr "Gnu Midnight Commander"
+
+#: gnome/gcmd.c:118
+msgid "The GNOME edition of the Midnight Commander file manager."
+msgstr "Gnome udgaven af Midnight Commander filhåndteringen."
 
 #: gnome/gcmd.c:291
 msgid "Sort By"
@@ -435,6 +243,14 @@ msgstr ""
 #: gnome/gcmd.c:746
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "Indtast et regulært udtryk som filter for filer i filvinduet."
+
+#: gnome/gcmd.c:806
+msgid " Open with..."
+msgstr " Åbn med..."
+
+#: gnome/gcmd.c:807
+msgid "Enter extra arguments:"
+msgstr "Indtast ekstra argumenter:"
 
 #: gnome/gcmd.c:877
 msgid "Desktop entry properties"
@@ -756,6 +572,15 @@ msgstr "Målfilen eksisterer allerede: %s"
 #: gnome/gdialogs.c:494
 msgid "Replace it?"
 msgstr "Erstat den?"
+
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1252
+#: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
+msgid "Copy"
+msgstr "Kopiér"
+
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1254
+msgid "Move"
+msgstr "Flyt"
 
 #: gnome/gdialogs.c:583
 msgid "Destination"
@@ -1151,6 +976,10 @@ msgstr "_Kommandoer"
 msgid "_Desktop"
 msgstr "Skrive_bord"
 
+#: gnome/glayout.c:477 gnome/glayout.c:487
+msgid "_Help"
+msgstr "_Hjælp"
+
 #: gnome/glayout.c:627
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Mappe..."
@@ -1311,6 +1140,12 @@ msgstr "Slip handling"
 msgid "Use default Drop Action options"
 msgstr "Brug standard for \"slip\" handling"
 
+#: gnome/gnome-file-property-dialog.c:413
+#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
+#: src/screen.c:2395 src/screen.c:2425
+msgid "View"
+msgstr "Vis"
+
 #: gnome/gnome-file-property-dialog.c:414
 msgid "Use default View options"
 msgstr "Brug standard visning"
@@ -1318,6 +1153,11 @@ msgstr "Brug standard visning"
 #: gnome/gnome-file-property-dialog.c:449
 msgid "Select an Icon"
 msgstr "Vælg en ikon"
+
+#. we do open first
+#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup2.c:278
+msgid "Open"
+msgstr "Åbn"
 
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Use default Open action"
@@ -1330,6 +1170,11 @@ msgstr "Brug standard \"Træk\" handling"
 #: gnome/gnome-file-property-dialog.c:514
 msgid "Use default View action"
 msgstr "Brug standard \"Vis\" handling"
+
+#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
+#: src/screen.c:2396 src/screen.c:2426 src/view.c:2081
+msgid "Edit"
+msgstr "Redigér"
 
 #: gnome/gnome-file-property-dialog.c:533
 msgid "Use default Edit action"
@@ -1459,17 +1304,42 @@ msgstr "Applikationer"
 msgid "Program to run"
 msgstr "Program som skal udføres"
 
+#: gnome/gpopup2.c:280
+msgid "Mount device"
+msgstr "Montér enhed"
+
+#: gnome/gpopup2.c:281
+msgid "Unmount device"
+msgstr "Afmontér enhed"
+
+#: gnome/gpopup2.c:282
+msgid "Eject device"
+msgstr "Skub enhed ud"
+
 #: gnome/gpopup2.c:283
 msgid "Empty Trash"
 msgstr "Tøm papirkurv"
+
+#: gnome/gpopup2.c:286
+msgid "Open with..."
+msgstr "Åbn med..."
 
 #: gnome/gpopup2.c:288
 msgid "View Unfiltered"
 msgstr "Vis ufiltreret"
 
+#: gnome/gpopup2.c:291
+msgid "Copy..."
+msgstr "Kopiér..."
+
 #: gnome/gpopup2.c:292
 msgid "Move to Trash"
 msgstr "Flyt til papirkurv"
+
+#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
+#: src/screen.c:2430
+msgid "Delete"
+msgstr "Slet"
 
 #: gnome/gpopup2.c:294
 msgid "Move..."
@@ -1478,6 +1348,10 @@ msgstr "Flyt..."
 #: gnome/gpopup2.c:295
 msgid "Hard Link..."
 msgstr "\"Hård\" lænke..."
+
+#: gnome/gpopup2.c:296
+msgid "Symlink..."
+msgstr "Symlænke..."
 
 #: gnome/gpopup2.c:297
 msgid "Edit Symlink..."
@@ -1937,7 +1811,7 @@ msgstr "Lav sikkerhedskopier -->"
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:858 src/filegui.c:822
-#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
+#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
 #: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
@@ -1956,6 +1830,15 @@ msgstr " Redigér gemmemåde "
 #: gtkedit/editcmd.c:526
 msgid " Save As "
 msgstr " Gem som "
+
+#. Warning message with a query to continue or cancel the operation
+#: gtkedit/editcmd.c:540 gtkedit/editcmd.c:863 gtkedit/editcmd.c:888
+#: gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137 src/ext.c:315 src/file.c:619
+#: src/help.c:318 src/main.c:711 src/screen.c:1448 src/screen.c:2125
+#: src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
+#: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
+msgid " Warning "
+msgstr " Advarsel "
 
 #: gtkedit/editcmd.c:541
 msgid " A file already exists with this name. "
@@ -2038,7 +1921,7 @@ msgstr " Bekræft gem fil? : "
 msgid " Save file "
 msgstr " Gem fil "
 
-#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1247
+#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1249
 #: src/view.c:2077
 msgid "Save"
 msgstr "Gem"
@@ -2320,6 +2203,18 @@ msgstr " Filen blev ændret, Gem ved afslutning? "
 #: gtkedit/editcmd.c:2380
 msgid "Cancel quit"
 msgstr "Annullér afslut"
+
+#: gtkedit/editcmd.c:2380 src/cmd.c:246 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:603 src/hotlist.c:1022 src/main.c:866 src/screen.c:2162
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+msgid "&Yes"
+msgstr "&Ja"
+
+#: gtkedit/editcmd.c:2380 src/cmd.c:246 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:602 src/hotlist.c:1022 src/main.c:866 src/screen.c:2162
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+msgid "&No"
+msgstr "&Nej"
 
 #: gtkedit/editcmd.c:2384
 msgid " &Cancel quit "
@@ -2904,13 +2799,13 @@ msgstr " Editorindstillinger "
 msgid "Error initialising editor.\n"
 msgstr "Fejl under initialisering af editor.\n"
 
-#: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1246 src/help.c:806
+#: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1726 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Hjælp"
 
-#: gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1248
+#: gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1250
 msgid "Mark"
 msgstr "Markér"
 
@@ -2923,107 +2818,107 @@ msgid "PullDn"
 msgstr "TrækNd"
 
 #. gtk_edit_menu
-#: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1256 src/help.c:818
+#: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1258 src/help.c:818
 #: src/main.c:1729 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Slut"
 
-#: gtkedit/gtkedit.c:65
+#: gtkedit/gtkedit.c:67
 msgid "&Dismiss"
 msgstr "&Forkast"
 
-#: gtkedit/gtkedit.c:66
+#: gtkedit/gtkedit.c:68
 msgid " Enter file name: "
 msgstr " Indtast filnavn: "
 
-#: gtkedit/gtkedit.c:111
+#: gtkedit/gtkedit.c:113
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr "Den hurtige brune ræv hopper over den dovne hund"
 
-#: gtkedit/gtkedit.c:802
+#: gtkedit/gtkedit.c:804
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 "gtkedit.c: HOME-miljøvariabelen er ikke sat og finder ikke adgangskode - "
 "afbryder\n"
 
-#: gtkedit/gtkedit.c:1246
+#: gtkedit/gtkedit.c:1248
 msgid "Interactive help browser"
 msgstr "Interaktiv hjælpevejleder"
 
-#: gtkedit/gtkedit.c:1247
+#: gtkedit/gtkedit.c:1249
 msgid "Save to current file name"
 msgstr "Gem som aktuelle filenavn"
 
-#: gtkedit/gtkedit.c:1248
+#: gtkedit/gtkedit.c:1250
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "Slå usynlig markør til/fra for at markere tekst"
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1251
 msgid "Replc"
 msgstr "Erstt"
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1251
 msgid "Find and replace strings/regular expressions"
 msgstr "Find og erstat tekst/regulære udtryk"
 
-#: gtkedit/gtkedit.c:1250
+#: gtkedit/gtkedit.c:1252
 msgid "Copy highlighted block to cursor position"
 msgstr "Kopiér valgte blok til markørens position"
 
-#: gtkedit/gtkedit.c:1252
+#: gtkedit/gtkedit.c:1254
 msgid "Move highlighted block to cursor position"
 msgstr "Flyt valgte blok til markørens position"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1255
 msgid "Find"
 msgstr "Find"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1255
 msgid "Find strings/regular expressions"
 msgstr "Find tekststreng/regulært udtryk"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1256
 msgid "Dlete"
 msgstr "Slet"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1256
 msgid "Delete highlighted text"
 msgstr "Slet markeret tekst"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1257 src/main.c:1727 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
 msgstr "Menu"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1257
 msgid "Pull down menu"
 msgstr "Rullegardinmenu"
 
-#: gtkedit/gtkedit.c:1256
+#: gtkedit/gtkedit.c:1258
 msgid "Exit editor"
 msgstr "Afslut editor"
 
-#: gtkedit/gtkedit.c:1290
+#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr "Ryd redigeringsbufferen"
 
-#: gtkedit/gtkedit.c:1295
+#: gtkedit/gtkedit.c:1297
 msgid "Insert File"
 msgstr "Indsæt fil"
 
-#: gtkedit/gtkedit.c:1295
+#: gtkedit/gtkedit.c:1297
 msgid "Insert text from a file"
 msgstr "Indsæt tekst fra en fil"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "Copy to file"
 msgstr "Kopiér til fil"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "copy a block to a file"
 msgstr "kopiér en blok til en fil"
 
-#: gtkedit/gtkedit.c:1337
+#: gtkedit/gtkedit.c:1339
 msgid "Search/Replace"
 msgstr "Søg/Erstat"
 
@@ -3175,23 +3070,23 @@ msgstr " Kan ikke køre avanceret chown-kommando på et tarfs "
 msgid "Background process:"
 msgstr "Baggrundsproces:"
 
-#: src/background.c:287 src/file.c:2189
+#: src/background.c:277 src/file.c:2189
 msgid " Background process error "
 msgstr " Fejl i baggrundsprocessen "
 
-#: src/background.c:294
+#: src/background.c:280
 msgid " Child died unexpectedly "
 msgstr " Barn døde uventet "
 
-#: src/background.c:296
+#: src/background.c:282
 msgid " Unknown error in child "
 msgstr " Ukendt fejl i barn "
 
-#: src/background.c:311
+#: src/background.c:297
 msgid " Background protocol error "
 msgstr " Fejl i baggrundsprotokol "
 
-#: src/background.c:312
+#: src/background.c:298
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -4223,7 +4118,7 @@ msgstr "En ikke-komplet fil blev hentet ned. Behold den?"
 msgid "&Delete"
 msgstr "&Slet"
 
-#: src/file.c:803 src/hotlist.c:1443
+#: src/file.c:803 src/hotlist.c:1430
 msgid "&Keep"
 msgstr "&Behold"
 
@@ -4794,15 +4689,15 @@ msgstr "Forr."
 msgid "&Move"
 msgstr "&Flyt"
 
-#: src/hotlist.c:133 src/hotlist.c:1443 src/panelize.c:88 src/wtools.c:383
+#: src/hotlist.c:133 src/hotlist.c:1430 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
 msgstr "&Fjern"
 
-#: src/hotlist.c:134 src/hotlist.c:818 src/hotlist.c:915
+#: src/hotlist.c:134 src/hotlist.c:805 src/hotlist.c:902
 msgid "&Append"
 msgstr "Tilføj"
 
-#: src/hotlist.c:135 src/hotlist.c:816 src/hotlist.c:913
+#: src/hotlist.c:135 src/hotlist.c:803 src/hotlist.c:900
 msgid "&Insert"
 msgstr "&Indsæt"
 
@@ -4826,65 +4721,65 @@ msgstr "&Tilføj nuværende"
 msgid "Change &To"
 msgstr "Skift &Til"
 
-#: src/hotlist.c:201
+#: src/hotlist.c:188
 msgid "Subgroup - press ENTER to see list"
 msgstr "Undergruppe - tryk RETUR for at se listen"
 
-#: src/hotlist.c:620
+#: src/hotlist.c:607
 msgid "Active VFS directories"
 msgstr "Aktive VFS-mapper"
 
-#: src/hotlist.c:620
+#: src/hotlist.c:607
 msgid "Directory hotlist"
 msgstr "Mappefavoritliste"
 
-#: src/hotlist.c:639
+#: src/hotlist.c:626
 msgid " Directory path "
 msgstr " Mappesti "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:642 src/hotlist.c:689
+#: src/hotlist.c:629 src/hotlist.c:676
 msgid " Directory label "
 msgstr " Mappeetiket "
 
-#: src/hotlist.c:663
+#: src/hotlist.c:650
 msgid "Moving "
 msgstr "Flytter "
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "New hotlist entry"
 msgstr "Nyt punkt i favoritlisten"
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "Directory label"
 msgstr "Mappeetiket"
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "Directory path"
 msgstr "Mappesti"
 
-#: src/hotlist.c:973
+#: src/hotlist.c:960
 msgid " New hotlist group "
 msgstr " Ny favoritgruppe "
 
-#: src/hotlist.c:973
+#: src/hotlist.c:960
 msgid "Name of new group"
 msgstr "Navn på den nye gruppe"
 
-#: src/hotlist.c:988
+#: src/hotlist.c:975
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etikette for \"%s\":"
 
-#: src/hotlist.c:992
+#: src/hotlist.c:979
 msgid " Add to hotlist "
 msgstr " Tilføj til favoritter "
 
-#: src/hotlist.c:1029
+#: src/hotlist.c:1016
 msgid " Remove: "
 msgstr " Fjern: "
 
-#: src/hotlist.c:1033
+#: src/hotlist.c:1020
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -4894,51 +4789,51 @@ msgstr ""
 " Gruppen er ikke tom.\n"
 " Fjern den?"
 
-#: src/hotlist.c:1378
+#: src/hotlist.c:1365
 msgid " Top level group "
 msgstr " Gruppe på topniveau "
 
-#: src/hotlist.c:1394
+#: src/hotlist.c:1381
 msgid "Hotlist is now kept in file ~/"
 msgstr "Favoritlisten er gemt i filen ~/"
 
-#: src/hotlist.c:1396
+#: src/hotlist.c:1383
 msgid "MC will load hotlist from ~/"
 msgstr "MC vil indlæse favoritlisten fra ~/"
 
-#: src/hotlist.c:1398
+#: src/hotlist.c:1385
 msgid "and then delete [Hotlist] section there"
 msgstr "og så slette [Favoritliste] sektionen der"
 
-#: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
+#: src/hotlist.c:1387 src/hotlist.c:1406 src/hotlist.c:1429 src/hotlist.c:1454
 msgid " Hotlist Load "
 msgstr " Indlæs favoritliste "
 
-#: src/hotlist.c:1416 src/hotlist.c:1464
+#: src/hotlist.c:1403 src/hotlist.c:1451
 msgid "MC was unable to write ~/"
 msgstr "MC kunne ikke skrive ~/"
 
-#: src/hotlist.c:1417
+#: src/hotlist.c:1404
 msgid " file, your old hotlist entries were not deleted"
 msgstr " filen, dine gamle favoritlisteelementer blev ikke slettet"
 
-#: src/hotlist.c:1431
+#: src/hotlist.c:1418
 msgid "You have ~/"
 msgstr "Du har ~/"
 
-#: src/hotlist.c:1431
+#: src/hotlist.c:1418
 msgid " file and [Hotlist] section in ~/"
 msgstr " filen og [Favoritliste] sektionen i ~/"
 
-#: src/hotlist.c:1432
+#: src/hotlist.c:1419
 msgid "Your ~/"
 msgstr "Din ~/"
 
-#: src/hotlist.c:1432
+#: src/hotlist.c:1419
 msgid " most probably was created\n"
 msgstr " er mest sandsynligt blevet oprettet\n"
 
-#: src/hotlist.c:1433
+#: src/hotlist.c:1420
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -4946,7 +4841,7 @@ msgstr ""
 "af en tidligere udviklingsversion af MC\n"
 "og er mere aktuel end ~/"
 
-#: src/hotlist.c:1434
+#: src/hotlist.c:1421
 msgid ""
 " entries\n"
 "\n"
@@ -4954,7 +4849,7 @@ msgstr ""
 " indgange\n"
 "\n"
 
-#: src/hotlist.c:1435
+#: src/hotlist.c:1422
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4964,7 +4859,7 @@ msgstr ""
 "\n"
 "  Fjern - fjern gammel favoritliste fra ~/"
 
-#: src/hotlist.c:1437
+#: src/hotlist.c:1424
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -4974,15 +4869,15 @@ msgstr ""
 "           det samme spørgsmål næste gang\n"
 "  Merge  - tilføj gamle punkter som gruppe \"Punkter fra ~/"
 
-#: src/hotlist.c:1443
+#: src/hotlist.c:1430
 msgid "&Merge"
 msgstr "Sammenføj"
 
-#: src/hotlist.c:1455
+#: src/hotlist.c:1442
 msgid " Entries from ~/"
 msgstr " Punkter fra ~/"
 
-#: src/hotlist.c:1465
+#: src/hotlist.c:1452
 msgid " file your old hotlist entries were not deleted"
 msgstr " fil dine gamle favoritlistepunkter er ikke slettet"
 
@@ -5254,6 +5149,10 @@ msgstr "Tryk på en tast for at fortsætte..."
 #: src/main.c:837
 msgid " The shell is already running a command "
 msgstr " Skallen kører allerede en kommando "
+
+#: src/main.c:864 src/screen.c:2113 src/screen.c:2160
+msgid " The Midnight Commander "
+msgstr " Midnight Commander'en "
 
 #: src/main.c:865
 msgid " Do you really want to quit the Midnight Commander? "
@@ -6031,6 +5930,10 @@ msgstr "Ukendt mærke på skærmformat: "
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Brugerdefineret format ser ugyldigt ud, bruger standard."
 
+#: src/screen.c:2114 src/screen.c:2161
+msgid " Do you really want to execute? "
+msgstr " Vil du virkelig køre? "
+
 #: src/screen.c:2125 src/screen.c:2175
 msgid " No action taken "
 msgstr " Ingen handling udført "
@@ -6673,6 +6576,14 @@ msgstr "Super ino_usage er %d, lagerlækage"
 msgid "Super has want_stale set"
 msgstr "Super har want_stale sat"
 
+#: vfs/direntry.c:812
+msgid "Starting linear transfer..."
+msgstr "Begynder lineær overførsel..."
+
+#: vfs/direntry.c:957
+msgid "Getting file"
+msgstr "Henter fil: "
+
 #: vfs/extfs.c:270
 #, c-format
 msgid ""
@@ -6885,20 +6796,20 @@ msgstr "(følg rfc959)"
 msgid "(chdir first)"
 msgstr "(chdir først)"
 
-#: vfs/ftpfs.c:1279
+#: vfs/ftpfs.c:1283
 msgid "ftpfs: failed"
 msgstr "ftpfs: fejlede"
 
-#: vfs/ftpfs.c:1289
+#: vfs/ftpfs.c:1293
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fejlede; ingen steder at falde tilbage på"
 
-#: vfs/ftpfs.c:1352
+#: vfs/ftpfs.c:1356
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: gemmer fil %d (%d)"
 
-#: vfs/ftpfs.c:1767
+#: vfs/ftpfs.c:1771
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -7180,3 +7091,63 @@ msgstr " Kunne ikke åbne filen %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "'Undelete'-filsystem til ext2"
+
+#~ msgid "Copyright (C) 1998 The Free Software Foundation"
+#~ msgstr "Ophavsret (C) 1998 The Free Software Foundation"
+
+#~ msgid "Open _new window"
+#~ msgstr "Åbn _nyt vindue"
+
+#~ msgid "_Close this window"
+#~ msgstr "Luk dette vindue"
+
+#~ msgid "E_xit"
+#~ msgstr "Afslut"
+
+#~ msgid "_Listing view"
+#~ msgstr "_Listevisning"
+
+#~ msgid "_Icon view"
+#~ msgstr "_Ikonvisning"
+
+#~ msgid "Display _tree view"
+#~ msgstr "Vis _trævisning "
+
+#~ msgid "_About the Midnight Commander..."
+#~ msgstr "Om Midnight Commander'en..."
+
+#~ msgid "_File"
+#~ msgstr "_Filer"
+
+#~ msgid "_View"
+#~ msgstr "_Vis"
+
+#~ msgid "Properties"
+#~ msgstr "Egenskaber"
+
+#~ msgid "Open with"
+#~ msgstr "Åbn med"
+
+#~ msgid "View unfiltered"
+#~ msgstr "Vis ufiltreret"
+
+#~ msgid "Move/rename..."
+#~ msgstr "Flyt/omdøb..."
+
+#~ msgid "Link..."
+#~ msgstr "_Genvej..."
+
+#~ msgid "Edit symlink..."
+#~ msgstr "Redigér symlænke..."
+
+#~ msgid "Link"
+#~ msgstr "Lænke"
+
+#~ msgid "Do you want to delete "
+#~ msgstr "Vil du virkelig slette"
+
+#~ msgid " Could not open %s directory"
+#~ msgstr " Kunne ikke åbne mappen %s"
+
+#~ msgid "Preparing reget..."
+#~ msgstr "Forbereder reget..."
