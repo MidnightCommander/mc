@@ -90,16 +90,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/share/mc/mc.hint*
 %{_prefix}/share/mc/mc.hlp*
 %{_prefix}/share/mc/syntax/*
-%{_prefix}/share/mc/term/*
 %{_prefix}/share/locale/*/LC_MESSAGES/*
 
 %dir %{_prefix}/lib/mc
 %dir %{_prefix}/share/mc
 %dir %{_prefix}/share/mc/extfs
 %dir %{_prefix}/share/mc/syntax
-%dir %{_prefix}/share/mc/term
 
 %changelog
+* Tue Sep 22 2003 Pavel Roskin <proski@gnu.org>
+- Remove term directory, it's obsolete and irrelevant on modern systems.
+
 * Sun Feb 16 2003 Pavel Roskin <proski@gnu.org>
 - Remove obsolete dependency on /sbin/chkconfig.
 
