@@ -1,3 +1,7 @@
+1998-08-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_make_local_copies_and_transfer): Fix.
+
 1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gmain.c (session_management_setup): Replaced
@@ -35,6 +39,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gwidget.c (x_create_input): Set the entry's visibility if it is
 	a password field.
 
+>>>>>>> 1.105
 1998-05-26  Marc Ewing <marc@redhat.com>
 
 	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a

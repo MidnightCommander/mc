@@ -1003,7 +1003,7 @@ panel_make_local_copies_and_transfer (GtkWidget *widget, GdkEventDragRequest *ev
 			p += strlen (p) + 1;
 		}
 	} else {
-		filename = concat_dir_and_file (panel->cwd, panel->dir.list [i].fname);
+		filename = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 		localname = mc_getlocalcopy (filename);
 		free (filename);
 		*data = localname;
