@@ -61,7 +61,7 @@ find_select_closure_callback (gpointer data, gpointer user_data)
 	struct trampoline *t = data;
 	int *pfd = (int *) user_data;
 	
-	if (t->fd = *pfd)
+	if (t->fd == *pfd)
 		tclosure = data;
 }
 

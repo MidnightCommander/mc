@@ -1,7 +1,5 @@
 Tue Mar 10 14:01:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c 
-
 	* gscreen.c (x_adjust_top_file): We no longer adjust the top
 	displayed filename.
 	
