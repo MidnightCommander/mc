@@ -54,7 +54,7 @@ Wed Jan 14 20:54:38 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* panel.h (format_e): we now have a couple of extra fields:
 	use_in_gui indicates that this field should be displayed on a GUI
-	(ie, only the text-mode decoration tags are ommited).
+	(ie, only the text-mode decoration tags are omitted).
 
 	expand field indicates that the field should be expanded.
 	

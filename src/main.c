@@ -2287,7 +2287,7 @@ static void
 print_color_usage (void)
 {
     fputs (_("--colors KEYWORD={FORE},{BACK}\n\n"
-	     "{FORE} and {BACK} can be ommited, and the default will be used\n"
+	     "{FORE} and {BACK} can be omitted, and the default will be used\n"
 	     "\n"
 	     "Keywords:\n"
 	     "   Global:       errors, reverse, gauge, input\n"
