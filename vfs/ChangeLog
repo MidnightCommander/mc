@@ -1,3 +1,8 @@
+2002-07-31  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/libsmb/clientgen.c (cli_send_tconX): Add missed 
+	unix_to_dos() call.
+
 2002-07-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/configure.in: Don't check for union semun.

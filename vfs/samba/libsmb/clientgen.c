@@ -865,6 +865,7 @@ BOOL cli_send_tconX(struct cli_state *cli,
 
 	slprintf(fullshare, sizeof(fullshare)-1,
 		 "\\\\%s\\%s", cli->desthost, share);
+	unix_to_dos(fullshare, True);
 	strupper(fullshare);
 
 	set_message(cli->outbuf,4,
