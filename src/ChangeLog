@@ -1,5 +1,8 @@
 2002-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (x_set_dialog_title): Force uniform spacing.
+	From Andrew Borodin <borodin@zarya-k.ru>
+
 	* utilunix.c (check_error_pipe): Check error_pipe[0], not
 	stdout.  From Pavel Tsekov <ptsekov@gmx.net>
 
