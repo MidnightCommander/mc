@@ -483,8 +483,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	    while (q[0] == '.' && q[1] == '/')
 	        q += 2;
 	    if (*q == '.' && *(q+1) == '\0')
-	        q = "";
+		q++;
 	}
+	canonicalize_pathname(q);
 
 	parent =
 	    vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
