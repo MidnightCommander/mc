@@ -1,3 +1,8 @@
+2001-08-20  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_GET_FS_INFO): Specify includes when checking
+	for sys/mount.h.
+
 2001-08-19  Andras Timar  <timar@gnome.hu>
 
 	* lib/Makefile.am: Added Hungarian hints
