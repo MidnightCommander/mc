@@ -1,5 +1,7 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Use nm to view object files.
+
 	* Make.common.in: Remove GNOME-specific and unused definitions.
 	Partly moved to gnome/Makefile.in.
 

@@ -184,8 +184,8 @@ shell/.h
 # Object
 shell/.o
 	#Open=%var{PAGER:more} %f
+	View=%view{ascii} nm %f
 	Link=%var{CC:cc} -O %f
-	Display object file symbols=%view{ascii} nm %f
 	Disassemble=%view{ascii} objdump -d -r %f
 
 # Asm
