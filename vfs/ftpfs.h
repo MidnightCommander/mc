@@ -14,6 +14,7 @@ extern int ftpfs_use_unix_list_options;
 extern int ftpfs_first_cd_then_ls;
 
 void ftpfs_init_passwd (void);
+void init_ftpfs (void);
 
 #define OPT_FLUSH        1
 #define OPT_IGNORE_ERROR 2

@@ -44,6 +44,10 @@
 #ifdef USE_NETCODE
 #   include "tcputil.h"
 #endif
+#include "ftpfs.h"
+#include "mcfs.h"
+#include "smbfs.h"
+#include "local.h"
 
 /* They keep track of the current directory */
 static struct vfs_class *current_vfs;

@@ -5,17 +5,6 @@
 #include <sys/mman.h>
 #endif
 
-void init_cpiofs (void);
-void init_extfs (void);
-void init_fish (void);
-void init_ftpfs (void);
-void init_localfs (void);
-void init_mcfs (void);
-void init_sfs (void);
-void init_smbfs (void);
-void init_tarfs (void);
-void init_undelfs (void);
-
 void vfs_init (void);
 void vfs_shut (void);
 

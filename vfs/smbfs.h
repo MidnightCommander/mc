@@ -1,9 +1,8 @@
-/* smbfs.h */
+#ifndef MC_VFS_SMBFS_H
+#define MC_VFS_SMBFS_H
 
-#if !defined(__SMBFS_H)
-#define __SMBFS_H
-
+void init_smbfs (void);
 extern void smbfs_set_debug (int arg);
 extern void smbfs_set_debugf (const char *filename);
 
-#endif /* __SMBFS_H*/
+#endif /* MC_VFS_SMBFS_H */

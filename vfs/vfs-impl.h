@@ -120,4 +120,11 @@ char *vfs_translate_url (const char *);
 extern int use_netrc;
 #endif
 
+void init_cpiofs (void);
+void init_extfs (void);
+void init_fish (void);
+void init_sfs (void);
+void init_tarfs (void);
+void init_undelfs (void);
+
 #endif

@@ -50,6 +50,7 @@ enum {
     MC_PASS
 };
 
+extern void init_mcfs (void);
 extern void tcp_invalidate_socket (int);
 
 #endif				/* __MCFS_H */
