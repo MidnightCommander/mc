@@ -1,5 +1,9 @@
 2002-10-22  Pavel Roskin  <proski@gnu.org>
 
+	* setup.c: Remove dead code surrounded by
+	SAVE_CHANGES_OUTSIDE_OPTIONS_MENU.
+	* tree.c: Make tree_navigation_flag static.
+
 	* help.h: Remove unused characters.
 	* help.c (show): Remove handling of unused characters.
 

@@ -24,7 +24,6 @@ void tree_chdir (WTree *tree, char *dir);
 
 void sync_tree (char *pathname);
 
-extern int tree_navigation_flag;
 extern int xtree_mode;
 
 WTree *tree_new (int is_panel, int y, int x, int lines, int cols);

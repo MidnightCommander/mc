@@ -132,13 +132,6 @@ static const struct {
     { 0, 0 }
 };
 
-
-#undef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
-
-#ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
-extern int preserve_uidgid;
-#endif
-
 static const struct {
     char *opt_name;
     int  *opt_addr;
@@ -189,13 +182,6 @@ static const struct {
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
-#ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
-    { "dive_into_subdirs", &dive_into_subdirs },
-    { "preserve_uidgid", &preserve_uidgid },
-    /* What about the other two options in the copy dialog
-       (follow links, stable symlinks) -Norbert */
-    { "tree_navigation_flag", &tree_navigation_flag },
-#endif /* SAVE_CHANGES_OUTSIDE_OPTIONS_MENU */
 #ifdef USE_VFS
     { "vfs_timeout", &vfs_timeout },
 #ifdef USE_NETCODE

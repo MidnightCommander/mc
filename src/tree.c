@@ -55,7 +55,7 @@ extern int command_prompt;
 #define TREE_NORMALC NORMALC
 
 /* Specifies the display mode: 1d or 2d */
-int tree_navigation_flag;
+static int tree_navigation_flag;
 
 /* Forwards */
 static void save_tree (WTree *tree);
