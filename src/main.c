@@ -39,7 +39,6 @@
 
 #include <errno.h>
 #include <ctype.h>
-#include <fcntl.h>	/* For O_RDWR */
 #include <signal.h>
 
 /* Program include files */

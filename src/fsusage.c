@@ -39,10 +39,6 @@
 
 #include <stdlib.h>
 
-#ifdef HAVE_FCNTL_H
-#include <fcntl.h>
-#endif
-
 #ifdef HAVE_SYS_STATFS_H
 #include <sys/statfs.h>
 #endif

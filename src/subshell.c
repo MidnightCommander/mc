@@ -36,7 +36,6 @@
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h> /* For ioctl() (surprise, surprise) */
 #endif
-#include <fcntl.h>	/* For open(), etc.		      */
 #include <string.h>	/* strstr(), strcpy(), etc.	      */
 #include <signal.h>	/* sigaction(), sigprocmask(), etc.   */
 #include <sys/stat.h>	/* Required by dir.h & panel.h below  */

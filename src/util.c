@@ -27,7 +27,6 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
 #include <sys/stat.h>

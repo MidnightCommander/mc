@@ -1,3 +1,8 @@
+2002-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* global.h: Move fcntl.h inclusion here.  Define O_BINARY.
+	* mountlist.c: Remove more includes already handled in global.h.
+
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (handle_alt_font): Implement .BR, .IR, .RB, .RI, .BI

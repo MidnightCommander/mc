@@ -36,7 +36,6 @@
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>
 #endif
-#include <fcntl.h>
 #include <ctype.h>	/* For toupper() */
 #include <errno.h>
 #include <limits.h>

@@ -67,7 +67,6 @@
 #   include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 #include <sys/stat.h>
-#include <fcntl.h>
 
 #include "global.h"
 #include "tty.h"

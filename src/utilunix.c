@@ -24,7 +24,6 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
 #include <sys/stat.h>
@@ -757,7 +756,6 @@ putenv (const char *string)
 #include <sys/types.h>
 #include <sys/stream.h>  /* defines queue_t */
 #include <stropts.h>     /* defines struct strtdinsert */
-#include <fcntl.h>
 
 #define SPX_DEVICE "/dev/spx"
 #define S_PIPE_HANDLE_ERRNO 1

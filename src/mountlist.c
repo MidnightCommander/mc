@@ -21,26 +21,6 @@
 
 #include <sys/types.h>
 #include <stdio.h>
-#include <fcntl.h>
-
-#ifdef STDC_HEADERS
-#include <stdlib.h>
-#else
-void free (void *ptr);
-#endif
-#if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
-#include <string.h>
-#else
-#include <strings.h>
-#endif
-
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
-
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
 
 #if defined (MOUNTED_GETFSSTAT)	/* __alpha running OSF_1 */
 #include <sys/mount.h>

@@ -22,7 +22,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <ctype.h>
 
 #include "global.h"

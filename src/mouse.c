@@ -25,7 +25,6 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <fcntl.h>
 #include <stdio.h>
 
 #include "global.h"

@@ -70,7 +70,6 @@
 #   include <unistd.h>
 #endif
 #include <sys/stat.h>
-#include <fcntl.h>
 
 #include "global.h"
 #include "tty.h"
