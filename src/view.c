@@ -2409,7 +2409,6 @@ view_hook (void *v)
 {
     WView *view = (WView *) v;
     WPanel *panel;
-    struct stat s;
 
     /* If the user is busy typing, wait until he finishes to update the
        screen */
