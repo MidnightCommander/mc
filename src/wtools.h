@@ -69,6 +69,10 @@ int run_chooser (Chooser *c);
 void destroy_chooser (Chooser *c);
 
 /* The input dialogs */
+
+/* Pass this as def_text to request a password */
+#define INPUT_PASSWORD ((char *) -1)
+
 char *input_dialog (char *header, char *text, char *def_text);
 char *input_dialog_help (char *header, char *text, char *help, char *def_text);
 char *input_expand_dialog (char *header, char *text, char *def_text);

@@ -452,12 +452,12 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
     
-    /* Translators should take care as "Password" or its translations
-    are used to identify password boxes and hide characters with "*" */
-    my_str = _("Password:");
-    if (strncmp (text, my_str, strlen (my_str)-1) == 0){
+    /* The special value of def_text is used to identify password boxes
+       and hide characters with "*".  Don't save passwords in history! */
+    if (def_text == INPUT_PASSWORD) {
 	quick_widgets [INPUT_INDEX].value = 1;
-	tk_name[3]=0;
+	tk_name[3] = 0;
+	def_text = "";
     } else {
 	quick_widgets [INPUT_INDEX].value = 0;
     }
