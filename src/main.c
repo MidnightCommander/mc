@@ -80,6 +80,7 @@
 #include <signal.h>
 
 /* Program include files */
+#include "x.h"
 #include "mad.h"
 #include "dir.h"
 #include "color.h"
@@ -130,7 +131,6 @@
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
 
-#include "x.h"
 
 #include "popt.h"
 
