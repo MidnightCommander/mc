@@ -548,10 +548,20 @@ void
 gnome_check_super_user (void)
 {
 	GtkWidget *warning_dlg;
+	GtkWidget *cbox;
+
+	gboolean show_dialog;
 
 	if (geteuid () != 0)
 		return;
 
+	gnome_config_push_prefix( "/gmc/Root/");
+	show_dialog = gnome_config_get_bool ("show_dialog=true");
+	gnome_config_pop_prefix ();
+	if (!show_dialog)
+		return;
+
+	cbox = gtk_check_button_new_with_label (_("Don't show this window again"));
 	warning_dlg = gnome_message_box_new (
 		_("You are running the GNOME File Manager as root.\n\n"
 		  "As root, you can damage your system, and the "
@@ -560,6 +570,16 @@ gnome_check_super_user (void)
 		  "account to the system.\n"),
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_OK, NULL);
-
+	gtk_widget_show (cbox);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (warning_dlg)->vbox), cbox, FALSE, FALSE, 0);
+	gnome_dialog_close_hides (GNOME_DIALOG (warning_dlg), TRUE);
 	gnome_dialog_run_and_close (GNOME_DIALOG (warning_dlg));
+	if (GTK_TOGGLE_BUTTON (cbox)->active) {
+		gnome_config_push_prefix( "/gmc/Root/");
+		gnome_config_set_bool ("show_dialog", FALSE);
+		gnome_config_pop_prefix ();
+	}
+	gnome_config_sync ();
+	gtk_widget_destroy (warning_dlg);
 }
+
