@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Mime Types
+Name[no]=Mime typer
 Comment=Configure how files are associated and started.
+Comment[no]=Konfigurer hvordan filer er assosiert og startet.
 Exec=mime-type-capplet
 Terminal=0
 Type=Application
