@@ -363,6 +363,43 @@ text_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 	return desktop_icon_info_event (data, event, TRUE);
 }
 
+/* Callback used when the user begins editing the icon text item in a desktop icon.  It installs the
+ * mouse and keyboard grabs that are required while an icon is being edited.
+ */
+static void
+editing_started (GnomeIconTextItem *iti, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	GdkCursor *ibeam;
+
+	dii = data;
+
+	ibeam = gdk_cursor_new (GDK_XTERM);
+	gdk_pointer_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window,
+			  FALSE,
+			  (GDK_BUTTON_PRESS_MASK
+			   | GDK_BUTTON_RELEASE_MASK
+			   | GDK_POINTER_MOTION_MASK
+			   | GDK_ENTER_NOTIFY_MASK
+			   | GDK_LEAVE_NOTIFY_MASK),
+			  NULL,
+			  ibeam,
+			  GDK_CURRENT_TIME);
+	gdk_cursor_destroy (ibeam);
+
+	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window, FALSE, GDK_CURRENT_TIME);
+}
+
+/* Callback used when the user finishes editing the icon text item in a desktop icon.  It removes
+ * the mouse and keyboard grabs.
+ */
+static void
+editing_stopped (GnomeIconTextItem *iti, gpointer data)
+{
+	gdk_pointer_ungrab (GDK_CURRENT_TIME);
+	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
+}
+
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
  * If auto_pos is true, then the function will look for a place to position the icon automatically,
  * else it will use the specified coordinates.  It does not show the icon.
@@ -409,6 +446,15 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->stipple), "event",
 			    (GtkSignalFunc) icon_event,
+			    dii);
+
+	/* Connect to the text item's signals */
+
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_started",
+			    (GtkSignalFunc) editing_started,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_stopped",
+			    (GtkSignalFunc) editing_stopped,
 			    dii);
 
 	/* Place the icon and append it to the list */
