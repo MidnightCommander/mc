@@ -1,9 +1,17 @@
-
-static struct dir *retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks);
-static int store_file(struct direntry *fe);
-static int retrieve_file_start(struct direntry *fe);
-static int retrieve_file(struct direntry *fe);
-static int remove_temp_file (char *file_name);
+/*
+ * Shared code between the fish.c and the ftp.c file systems
+ *
+ */
+static int         store_file           (struct direntry *fe);
+static int         retrieve_file_start  (struct direntry *fe);
+static int         retrieve_file        (struct direntry *fe);
+static int         remove_temp_file     (char *file_name);
+static int         linear_start         (struct direntry *fe);
+static int         linear_read          (struct direntry *fe, void *buf, int len);
+static int         linear_close         (struct direntry *fe);
+static struct dir *retrieve_dir         (struct connection *bucket,
+					 char *remote_path,
+					 int resolve_symlinks);
 
 static int
 select_on_two (int fd1, int fd2)

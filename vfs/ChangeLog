@@ -1,3 +1,8 @@
+1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* shared_ftp_fish.c: Addaed prototypes for linear_start, linear_read,
+	linear_close 
+
 Wed Sep 23 15:09:55 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* vfs.h (MIN, MAX): Only define if not already defined; glib.h
