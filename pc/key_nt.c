@@ -48,7 +48,7 @@ int use_8th_bit_as_meta = 0;
 struct {
     int key_code;
     int vkcode;
-} key_table [] = {
+} fkt_table [] = {
     { KEY_F(1),  VK_F1 },
     { KEY_F(2),  VK_F2 },
     { KEY_F(3),  VK_F3 },
@@ -118,9 +118,9 @@ static int VKtoCurses (int a_vkc)
 {
     int i;
 
-    for (i = 0; key_table[i].vkcode != 0; i++) 
-	if (a_vkc == key_table[i].vkcode) {
-	    return key_table[i].key_code;
+    for (i = 0; fkt_table[i].vkcode != 0; i++) 
+	if (a_vkc == fkt_table[i].vkcode) {
+	    return fkt_table[i].key_code;
 	}
     return 0;
 }
