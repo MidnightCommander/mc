@@ -573,8 +573,9 @@ handle_open (GtkWidget *widget, WPanel *panel)
 	if (is_a_desktop_panel (panel)) {
 		dii = desktop_icon_info_get_by_filename (x_basename (full_name));
 		g_assert (dii != NULL);
-		g_free (full_name);
+
 		desktop_icon_info_open (dii);
+		g_free (full_name);
 		return;
 	}
 
@@ -585,27 +586,33 @@ handle_open (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-handle_mount (GtkWidget *widget, WPanel *panel)
+perform_mount_unmount (WPanel *panel, int mount)
 {
 	char *full_name;
+	DesktopIconInfo *dii;
 
 	g_assert (is_a_desktop_panel (panel));
 
 	full_name = get_full_filename (panel);
-	do_mount_umount (full_name, TRUE);
+	dii = desktop_icon_info_get_by_filename (x_basename (full_name));
+	g_assert (dii != NULL);
+
+	desktop_icon_set_busy (dii, TRUE);
+	do_mount_umount (full_name, mount);
+	desktop_icon_set_busy (dii, FALSE);
 	g_free (full_name);
+}
+
+static void
+handle_mount (GtkWidget *widget, WPanel *panel)
+{
+	perform_mount_unmount (panel, TRUE);
 }
 
 static void
 handle_unmount (GtkWidget *widget, WPanel *panel)
 {
-	char *full_name;
-
-	g_assert (is_a_desktop_panel (panel));
-
-	full_name = get_full_filename (panel);
-	do_mount_umount (full_name, FALSE);
-	g_free (full_name);
+	perform_mount_unmount (panel, FALSE);
 }
 
 static void
@@ -613,13 +620,20 @@ handle_eject (GtkWidget *widget, WPanel *panel)
 {
 	char *full_name;
 	char *lname;
+	DesktopIconInfo *dii;
 	
 	g_assert (is_a_desktop_panel (panel));
 
 	full_name = get_full_filename (panel);
+	dii = desktop_icon_info_get_by_filename (x_basename (full_name));
+	g_assert (dii != NULL);
+
+	desktop_icon_set_busy (dii, TRUE);
+
 	lname = g_readlink (full_name);
 	if (!lname){
 		g_free (full_name);
+		desktop_icon_set_busy (dii, FALSE);
 		return;
 	}
 
@@ -628,6 +642,7 @@ handle_eject (GtkWidget *widget, WPanel *panel)
 	
 	do_eject (lname);
 
+	desktop_icon_set_busy (dii, FALSE);
 	g_free (lname);
 	g_free (full_name);
 }

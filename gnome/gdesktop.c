@@ -1109,18 +1109,14 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	int is_mounted;
 	char *point;
 	int launch;
-	GdkCursor *cursor;
 
 	filename = NULL;
 	fe = NULL;
 	launch = FALSE;
 
-	/* Set the cursor to wait */
+	/* Set the cursor */
 
-	cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (dii->dicon->window, cursor);
-	gdk_cursor_destroy (cursor);
-	gdk_flush ();
+	desktop_icon_set_busy (dii, TRUE);
 
 	/* Open the icon */
 
@@ -1192,10 +1188,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 
 	/* Reset the cursor */
 
-	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
-	gdk_window_set_cursor (dii->dicon->window, cursor);
-	gdk_cursor_destroy (cursor);
-	gdk_flush ();
+	desktop_icon_set_busy (dii, FALSE);
 }
 
 void
@@ -1232,6 +1225,29 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 
 	/* 2. Destroy the dicon */
 	desktop_icon_info_destroy (dii);
+}
+
+/**
+ * desktop_icon_set_busy:
+ * @dii: A desktop icon
+ * @busy: TRUE to set a watch cursor, FALSE to reset the normal arrow cursor
+ * 
+ * Sets a wait/normal cursor for a desktop icon.
+ **/
+void
+desktop_icon_set_busy (DesktopIconInfo *dii, int busy)
+{
+	GdkCursor *cursor;
+
+	g_return_if_fail (dii != NULL);
+
+	if (!GTK_WIDGET_REALIZED (dii->dicon))
+		return;
+
+	cursor = gdk_cursor_new (busy ? GDK_WATCH : GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor (dii->dicon->window, cursor);
+	gdk_cursor_destroy (cursor);
+	gdk_flush ();
 }
 
 /**

@@ -48,7 +48,7 @@ typedef struct {
 
 void desktop_icon_info_open      (DesktopIconInfo *dii);
 void desktop_icon_info_delete    (DesktopIconInfo *dii);
-void desktop_icon_update_url     (DesktopIconInfo *dii);
+void desktop_icon_set_busy       (DesktopIconInfo *dii, int busy);
 
 DesktopIconInfo *desktop_icon_info_get_by_filename (char *filename);
 

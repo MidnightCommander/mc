@@ -1,5 +1,14 @@
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gpopup2.c (perform_mount_unmount): Set the icon's cursor while it is
+	being operated on.
+	(handle_mount): Use perform_mount_unmount().
+	(handle_unmount): Likewise.
+	(handle_eject): Set the icon's cursor while it is being ejected.
+
+	* gdesktop.c (desktop_icon_set_busy): New function to set a watch
+	or normal cursor for a desktop icon.
+
 	* gdesktop.c (desktop_icon_info_open): Set the cursor to a watch
 	while the icon is being opened.  Also, fixed memory leaks.
 	(do_eject): Added a missing return value.
