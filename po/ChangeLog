@@ -1,3 +1,7 @@
+1999-01-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* POTFILES.in: Removed gmc-window.c.
+
 Mon Nov  9 00:48:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* de.po: Translation for 8-bit input/output were interchanged

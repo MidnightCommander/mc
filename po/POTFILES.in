@@ -5,7 +5,6 @@ gnome/gdialogs.c
 gnome/gdnd.c
 gnome/gicon.c
 gnome/glayout.c
-gnome/gmc-window.c
 gnome/gpopup.c
 gnome/gprop.c
 gnome/gscreen.c
