@@ -1,5 +1,7 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* help.c (interactive_display): User straight widget order.
+
 	* complete.c (complete_engine): Don't need DLG_REVERSE.
 	* widget.c (show_hist): Likewise.
 	* view.c (view): User straight widget order.
