@@ -1,3 +1,8 @@
+2001-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* chmod.c: Remove all occurences of HAVE_X.
+	* drive.c: Likewise.
+
 2001-10-23  Pavel Roskin  <proski@gnu.org>
 
 	* util_nt.c (_win32Trace): Add missing va_end().

@@ -215,11 +215,9 @@ static int chmod_callback (Dlg_head *h, int Par, int Msg)
 	    return 1;
 	}
 	break;
-#ifndef HAVE_X
     case DLG_DRAW:
 	chmod_refresh ();
 	break;
-#endif
     }
     return 0;
 }

@@ -195,11 +195,9 @@ void drive_chg(WPanel *panel)
 static int drive_dlg_callback (Dlg_head *h, int Par, int Msg)
 {
     switch (Msg) {
-#ifndef HAVE_X
     case DLG_DRAW:
 	drive_dlg_refresh ();
 	break;
-#endif
     }
     return 0;
 }
