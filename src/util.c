@@ -143,53 +143,58 @@ trim (char *s, char *d, int len)
     return d;
 }
 
+/*
+ * Quote the filename for the purpose of inserting it into the command
+ * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
+ * processed by the mc command line.
+ */
 char *
 name_quote (const char *s, int quote_percent)
 {
     char *ret, *d;
-    
-    d = ret = g_malloc (strlen (s)*2 + 2 + 1);
+
+    d = ret = g_malloc (strlen (s) * 2 + 2 + 1);
     if (*s == '-') {
-        *d++ = '.';
-        *d++ = '/';
+	*d++ = '.';
+	*d++ = '/';
     }
 
     for (; *s; s++, d++) {
-	switch (*s)
-	{
-	    case '%':
-		if (quote_percent)
-		    *d++ = '%';
-		break;
-	    case '\'':
-	    case '\\':
-	    case '\r':
-	    case '\n':
-	    case '\t':
-	    case '"':
-	    case ':':
-	    case ';':
-	    case ' ':
-	    case '?':
-	    case '|':
-	    case '[':
-	    case ']':
-	    case '{':
-	    case '}':
-	    case '<':
-	    case '>':
-	    case '`':
-	    case '~':
-	    case '!':
-	    case '@':
-	    case '#':
-	    case '$':
-	    case '^':
-	    case '&':
-	    case '*':
-	    case '(':
-	    case ')':
+	switch (*s) {
+	case '%':
+	    if (quote_percent)
+		*d++ = '%';
+	    break;
+	case '\'':
+	case '\\':
+	case '\r':
+	case '\n':
+	case '\t':
+	case '"':
+	case ';':
+	case ' ':
+	case '?':
+	case '|':
+	case '[':
+	case ']':
+	case '{':
+	case '}':
+	case '<':
+	case '>':
+	case '`':
+	case '!':
+	case '$':
+	case '&':
+	case '*':
+	case '(':
+	case ')':
+	    *d++ = '\\';
+	    break;
+	case '~':
+	case '#':
+	    if (d == ret)
 		*d++ = '\\';
+	    break;
 	}
 	*d = *s;
     }

@@ -1,5 +1,8 @@
 2003-01-28  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (name_quote): Don't quote ':', '~' and '@'.  Quote '#'
+	and '~' only if it's the first character.
+
 	* info.c (info_show_info): Cast nlink_t to int to avoid a
 	warning if nlink_t is short.
 	* screen.c (string_file_nlinks): Likewise.
