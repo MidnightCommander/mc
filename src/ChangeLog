@@ -1,3 +1,8 @@
+2005-03-19  Pavel Roskin  <proski@gnu.org>
+
+	* slint.c: Don't use private S-Lang functions if they are
+	unavailable.
+
 2005-03-17  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (chdir_other_panel): Prevent changing current

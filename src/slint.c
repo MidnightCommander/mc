@@ -76,7 +76,15 @@ static int slinterrupt;
 /* Controls whether we should wait for input in getch */
 static int no_slang_delay;
 
-/* {{{  Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK, */
+/* Forward declarations */
+static void load_terminfo_keys (void);
+
+#ifndef HAVE_SLANG_PRIVATE
+/* Private interfaces have been stripped, so we cannot use them */
+#define SLang_getkey2() SLang_getkey()
+#define SLang_input_pending2(s) SLang_input_pending(s)
+#else
+/* Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK. */
 extern unsigned char SLang_Input_Buffer [];
 #if SLANG_VERSION >= 10000
 extern unsigned int _SLsys_getkey (void);
@@ -85,9 +93,6 @@ extern int _SLsys_input_pending (int);
 extern unsigned int SLsys_getkey (void);
 extern int SLsys_input_pending (int);
 #endif
-
-/* Forward declarations */
-static void load_terminfo_keys (void);
 
 static unsigned int SLang_getkey2 (void)
 {
@@ -132,7 +137,7 @@ static int SLang_input_pending2 (int tsecs)
    
    return n;
 }
-/* }}} */
+#endif /* HAVE_SLANG_PRIVATE */
 
 static void
 slang_intr (int signo)
