@@ -1333,84 +1333,93 @@ search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 }
 
 static int
-get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
+get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 {
-	char *p;
+    char *p;
 #if 0
-	dir_entry *dentry = current_info->entries;
+    dir_entry *dentry = current_info->entries;
 #endif
-	const char *mypath = path;
+    const char *mypath = path;
 
-	mypath++;				/* cut off leading '/' */
-	if ((p = strrchr(mypath, '/')))
-		mypath = p + 1;			/* advance until last file/dir name */
-	DEBUG(3, ("get_stat_info: mypath:%s, current_info->dirname:%s\n",
-		mypath, current_info->dirname));
+    mypath++;			/* cut off leading '/' */
+    if ((p = strrchr (mypath, '/')))
+	mypath = p + 1;		/* advance until last file/dir name */
+    DEBUG (3, ("get_stat_info: mypath:%s, current_info->dirname:%s\n",
+	       mypath, current_info->dirname));
 #if 0
-	if (!dentry) {
-		DEBUG(1, ("No dir entries (empty dir) cached:'%s', wanted:'%s'\n", current_info->dirname, path));
-		return -1;
-	}
+    if (!dentry) {
+	DEBUG (1, ("No dir entries (empty dir) cached:'%s', wanted:'%s'\n",
+		   current_info->dirname, path));
+	return -1;
+    }
 #endif
-	if (!single_entry)	/* when found, this will be written too */
-		single_entry = g_new (dir_entry, 1);
-	if (search_dir_entry(current_info->entries, mypath, buf) == 0) {
-		return 0;
+    if (!single_entry)		/* when found, this will be written too */
+	single_entry = g_new (dir_entry, 1);
+    if (search_dir_entry (current_info->entries, mypath, buf) == 0) {
+	return 0;
+    }
+    /* now try to identify mypath as PARENT dir */
+    {
+	char *mdp;
+	char *mydir;
+	mdp = mydir = g_strdup (current_info->dirname);
+	if ((p = strrchr (mydir, '/')))
+	    *p = 0;		/* advance util last '/' */
+	if ((p = strrchr (mydir, '/')))
+	    mydir = p + 1;	/* advance util last '/' */
+	if (strcmp (mydir, mypath) == 0) {	/* fake a stat for ".." */
+	    memset (buf, 0, sizeof (struct stat));
+	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    memcpy (&single_entry->my_stat, buf, sizeof (struct stat));
+	    g_free (mdp);
+	    DEBUG (1, ("	PARENT:found in %s\n", current_info->dirname));
+	    return 0;
 	}
-		/* now try to identify mypath as PARENT dir */
-	{
-		char *mdp;
-		char *mydir;
-		mdp = mydir = g_strdup(current_info->dirname);
-		if ((p = strrchr(mydir, '/')))
-			*p = 0;				/* advance util last '/' */
-		if ((p = strrchr(mydir, '/')))
-			mydir = p + 1;			/* advance util last '/' */
-		if (strcmp(mydir, mypath) == 0) {	/* fake a stat for ".." */
-			memset(buf, 0, sizeof(struct stat));
-			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
-			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
-			g_free(mdp);
-			DEBUG(1, ("	PARENT:found in %s\n", current_info->dirname));
-			return 0;
-		}
-		g_free(mdp);
+	g_free (mdp);
+    }
+    /* now try to identify as CURRENT dir? */
+    {
+	char *dnp = current_info->dirname;
+	DEBUG (6, ("get_stat_info: is %s current dir? this dir is: %s\n",
+		   mypath, current_info->dirname));
+	if (*dnp == '/')
+	    dnp++;
+	else {
+	    return -1;
 	}
-		/* now try to identify as CURRENT dir? */
-	{
-		char *dnp = current_info->dirname;
-		DEBUG(6, ("get_stat_info: is %s current dir? this dir is: %s\n",
-			mypath, current_info->dirname));
-		if (*dnp == '/')
-			dnp++;
-		else {
-			return -1;
-		}
-		if (strcmp(mypath, dnp) == 0) {
-			memset(buf, 0, sizeof(struct stat));
-			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
-			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
-			DEBUG(1, ("	CURRENT:found in %s\n", current_info->dirname));
-			return 0;
-		}
+	if (strcmp (mypath, dnp) == 0) {
+	    memset (buf, 0, sizeof (struct stat));
+	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    memcpy (&single_entry->my_stat, buf, sizeof (struct stat));
+	    DEBUG (1, ("	CURRENT:found in %s\n", current_info->dirname));
+	    return 0;
 	}
-	DEBUG(3, ("'%s' not found in current_info '%s'\n", path, current_info->dirname));
-	/* try to find this in the PREVIOUS listing */
-	if (previous_info) {
-		if (search_dir_entry(previous_info->entries, mypath, buf) == 0)
-			return 0;
-		DEBUG(3, ("'%s' not found in previous_info '%s'\n", path, previous_info->dirname));
-	}
-	/* try to find this in the SHARE listing */
-	if (current_share_info && search_dir_entry(current_share_info->entries, mypath, buf) == 0)
-		return 0;
-	DEBUG(3, ("'%s' not found in share_info '%s'\n", path, current_share_info->dirname));
-	/* try to find this in the SERVER listing */
-	if (current_server_info && search_dir_entry(current_server_info->entries, mypath, buf) == 0)
-		return 0;
-	DEBUG(3, ("'%s' not found in server_info '%s'\n", path, current_server_info->dirname));
-	/* nothing found. get stat file info from server */
-	return get_remote_stat(sc, path, buf);
+    }
+    DEBUG (3, ("'%s' not found in current_info '%s'\n", path,
+	       current_info->dirname));
+    /* try to find this in the PREVIOUS listing */
+    if (previous_info) {
+	if (search_dir_entry (previous_info->entries, mypath, buf) == 0)
+	    return 0;
+	DEBUG (3, ("'%s' not found in previous_info '%s'\n", path,
+		   previous_info->dirname));
+    }
+    /* try to find this in the SHARE listing */
+    if (current_share_info) {
+	if (search_dir_entry (current_share_info->entries, mypath, buf) == 0)
+	    return 0;
+	DEBUG (3, ("'%s' not found in share_info '%s'\n", path,
+		   current_share_info->dirname));
+    }
+    /* try to find this in the SERVER listing */
+    if (current_server_info) {
+	if (search_dir_entry (current_server_info->entries, mypath, buf) == 0)
+	    return 0;
+	DEBUG (3, ("'%s' not found in server_info '%s'\n", path,
+		   current_server_info->dirname));
+    }
+    /* nothing found. get stat file info from server */
+    return get_remote_stat (sc, path, buf);
 }
 
 static int

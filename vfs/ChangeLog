@@ -1,5 +1,6 @@
 2002-09-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* (get_stat_info): Fix some possible NULL dereferences.
 	* smbfs.c (smbfs_set_debugf): New function to specify
 	logfile.
 	* smbfs.h: Declare smbfs_set_debugf().
