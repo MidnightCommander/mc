@@ -1,3 +1,10 @@
+2000-11-03  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* main.c (CmdMenu): don't include edit_user_menu_cmd () 
+	if USE_INTERNAL_EDIT is not defined
+	(main): call edit_init_file () if USE_INTERNAL_EDIT is defined only
+	(listmode_cmd): messages are localized
+
 2000-11-02  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c [PORT_NEEDS_CHANGE_SCREEN_SIZE]: Declare

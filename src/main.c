@@ -1229,15 +1229,15 @@ tree_box (void)
 
 #ifdef LISTMODE_EDITOR
 static void
-	listmode_cmd (void)
+listmode_cmd (void)
 {
     char *newmode;
     newmode = listmode_edit ("half <type,>name,|,size:8,|,perm:4+");
-    message (0, " Listing format edit ", " New mode is \"%s\" ", newmode);
+    message (0, _(" Listing format edit "), _(" New mode is \"%s\" "), newmode);
     g_free (newmode);
 }
 #endif /* LISTMODE_EDITOR */
-#endif /* HAVE_GNOME */
+#endif /* !HAVE_GNOME */
 
 #ifdef HAVE_GNOME
 void init_menu (void) {};
@@ -1358,7 +1358,9 @@ static menu_entry CmdMenu [] = {
 #endif
     { ' ', N_("&Extension file edit"),          'E', ext_cmd },
     { ' ', N_("&Menu file edit"),               'M', menu_edit_cmd },
-    {' ',  N_("Menu edi&Tor edit"),             'T', edit_user_menu_cmd}
+#ifdef USE_INTERNAL_EDIT
+    {' ',  N_("Menu edi&Tor edit"),		'T', edit_user_menu_cmd}
+#endif /* USE_INTERNAL_EDIT */
 };
 
 /* Must keep in sync with the constants in menu_cmd */
@@ -3007,7 +3009,9 @@ main (int argc, char *argv [])
     }
     
     vfs_init ();
+#ifdef USE_INTERNAL_EDIT
     edit_init_file();
+#endif /* USE_INTERNAL_EDIT */
     
 #ifdef HAVE_X
     /* NOTE: This call has to be before any our argument handling :) */
