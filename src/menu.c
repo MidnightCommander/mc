@@ -46,7 +46,46 @@ Menu create_menu (char *name, menu_entry *entries, int count)
     menu->count = count;
     menu->max_entry_len = 0;
     menu->entries = entries;
+
+#ifdef ENABLE_NLS
+	if (entries != (menu_entry*) 0)
+	{
+		register menu_entry* mp;
+		register char* cp;
+		for (mp = entries; count--; mp++)
+		{
+			if (mp->text[0] == '\0')
+				continue;
+
+			cp = _(mp->text);
+
+			if (mp->text != cp)
+			{
+				char tmpbuf[80]; /* hope it's long enough for menu entries */
+				register char *src = cp, *dest = tmpbuf;
+				while (*src)
+				{
+					if (*src == '&' && *++src)
+					{
+						/* Preserve non-ascii hotkeys */
+						if (mp->hot_key <= 256)
+							mp->hot_key = *src;
+						mp->hot_pos = src-cp-1;
+						continue;
+					}
+					*dest++ = *src++;
+				}
+				*dest = '\0';
+				mp->text = strdup(tmpbuf);
+			}
+		}
+    }
+    menu->name = _(name);
+#else
     menu->name = name;
+#endif /* ENABLE_NLS */
+
+	menu->start_x = 0;
     return menu;
 }
 
@@ -65,7 +104,10 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 {
     const Menu menu = menubar->menu [menubar->selected];
     const int y = 2 + idx;
-    const int x = (menubar->selected * 12) + 1;
+	int x = menubar-> menu[menubar->selected]->start_x;
+
+	if (x + menubar->max_entry_len + 3 > menubar->widget.cols)
+		x = menubar->widget.cols - menubar->max_entry_len - 3;
 
     widget_move (&menubar->widget, y, x);
     attrset (color);
@@ -77,26 +119,15 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
     } else {
 	char *text = menu->entries [idx].text;
 	int  hotkey = menu->entries [idx].hot_key;
-	char *save;
-	
+	int hotpos = menu->entries [idx].hot_pos;
+
         printw ("%c%-s", menu->entries [idx].first_letter, text);
 
 	if (!slow_terminal){
-	    save = text;
-
-	    /* First, try to highlight the hotkey */
-	    while (*text && *text != hotkey)
-		text++;
-
-	    if (!*text)
-		text = save;
-	    
-	    if (*text){
-		widget_move (&menubar->widget, y, x+text-save+1);
+		widget_move (&menubar->widget, y, x+hotpos+1);
 		attrset (color == MENU_SELECTED_COLOR ?
 			 MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-		addch (*text);
-	    }
+		addch (text[hotpos]);
 	}
     }
     widget_move (&menubar->widget, y, x + 1);
@@ -107,7 +138,10 @@ static INLINE void menubar_draw_drop (WMenu *menubar)
     const int count = (menubar->menu [menubar->selected])->count;
     int   i;
     int   sel = menubar->subsel;
-    int   column = (menubar->selected * 12);
+    int   column = menubar-> menu[menubar->selected]->start_x - 1;
+
+	if (column + menubar->max_entry_len + 4 > menubar->widget.cols)
+		column = menubar->widget.cols - menubar->max_entry_len - 4;
 
     attrset (SELECTED_COLOR);
     draw_box (menubar->widget.parent,
@@ -141,15 +175,15 @@ static void menubar_draw (WMenu *menubar)
     for (i = 0; i < items; i++){
 	if (menubar->active)
 	    attrset(i == menubar->selected?MENU_SELECTED_COLOR:SELECTED_COLOR);
-	widget_move (&menubar->widget, 0, menubar->widget.x + 2 + (i * 12));
-	printw ("%s", _(menubar->menu [i]->name));
+	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
+	printw ("%s", menubar->menu [i]->name);
     }
 
     if (menubar->dropped)
 	menubar_draw_drop (menubar);
     else 
-	widget_move (&menubar->widget, 0, menubar->widget.x + 3 +
-		     menubar->selected * 12);
+	widget_move (&menubar->widget, 0, 
+		menubar-> menu[menubar->selected]->start_x);
 }
 
 static INLINE void menubar_remove (WMenu *menubar)
@@ -283,7 +317,11 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	    if (m < 256 && ISASCII (m))
 	        m = tolower (m);
 	    if (key != m)
-		continue;
+		{
+			m = tolower (menu->entries[i].text[menu->entries[i].hot_pos]);
+			if (key != m)
+				continue;
+		}
 	    
 	    menubar_execute (menubar, i);
 	    return 1;
@@ -385,10 +423,12 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	    return MOU_NORMAL;
     
 	new_selection = 0;
-	if (event->x < menubar->items * 13)
-	    new_selection = event->x / 13;
-	else
-	    new_selection = menubar->items - 1;
+	while (new_selection < menubar->items 
+		&& event->x > menubar->menu[new_selection]->start_x
+	)
+		new_selection++;
+
+	--new_selection;
 	
 	if (!was_active){
 	    menubar->selected = new_selection;
@@ -415,8 +455,14 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	return MOU_NORMAL;
     
     /* Else, the mouse operation is on the menus or it is not */
-    left_x = menubar->selected * 12;
-    right_x = left_x + menubar->max_entry_len + 4;
+	left_x = menubar->menu[menubar->selected]->start_x;
+	right_x = left_x + menubar->max_entry_len + 4;
+	if (right_x > menubar->widget.cols)
+	{
+		left_x = menubar->widget.cols - menubar->max_entry_len - 3;
+		right_x = menubar->widget.cols - 1;
+	}
+
     bottom_y = (menubar->menu [menubar->selected])->count + 3;
 
     if ((event->x > left_x) && (event->x < right_x) && (event->y < bottom_y)){
@@ -442,10 +488,59 @@ static void menubar_destroy (WMenu *menubar)
 {
 }
 
+/*
+ * Properly space menubar items. Should be called when menubar is created
+ * and also when widget width is changed (i.e. upon xterm resize).
+ */
+void
+menubar_arrange(WMenu* menubar)
+{
+	register int i, start_x;
+	int items = menubar->items;
+	int gap = menubar->widget.cols - 2;
+
+	/* First, calculate gap between items... */
+	for (i = 0; i < items; i++)
+	{
+		/* preserve length here, to be used below */
+		gap -= (menubar->menu[i]->start_x = strlen(menubar->menu[i]->name));
+	}
+	gap /= (items - 1);
+
+	if (gap <= 0)
+	{
+		/* We are out of luck - window is too narrow... */
+		gap = 1;
+	}
+
+	/* ...and now fix start positions of menubar items */
+	for (i = 0, start_x = 1; i < items; i++)
+	{
+		int len = menubar->menu[i]->start_x;
+		menubar->menu[i]->start_x = start_x;
+		start_x += len + gap;
+	}
+ }
+
+void
+destroy_menu (Menu menu)
+{
+    int i;
+    menu_entry *e;
+    
+    for (i = 0, e = menu->entries; i < menu->count; i++){
+#ifdef ENABLE_NLS
+	free (e->text);
+#endif
+	e++;
+    }
+    free (menu);
+}
+
 WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
 {
     WMenu *menubar = (WMenu *) xmalloc (sizeof (WMenu), "menubar_new");
-
+   
     memset(menubar, 0, sizeof(*menubar)); /* FIXME: subsel used w/o being set */
     init_widget (&menubar->widget, y, x, 1, cols,
                  (callback_fn) menubar_callback,
@@ -457,6 +552,7 @@ WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
     menubar->items = items;
     menubar->selected = 0;
     widget_want_cursor (menubar->widget, 0);
-    
+    menubar_arrange(menubar);
+
     return menubar;
 }

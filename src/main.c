@@ -1116,71 +1116,71 @@ void init_menu () {};
 void done_menu () {};
 #else
 static menu_entry PanelMenu [] = {
-    { ' ', N_("Listing mode..."),	'L',  listing_cmd },
-    { ' ', N_("Quick view     C-x q"),  'Q',  quick_view_cmd }, 
-    { ' ', N_("Info           C-x i"),  'I',  info_cmd },
-    { ' ', N_("Tree"),                  'T',  tree_cmd },
+    { ' ', N_("Listing mode..."),          'L',  0, listing_cmd },
+    { ' ', N_("Quick view     C-x q"),     'Q',  0, quick_view_cmd }, 
+    { ' ', N_("Info           C-x i"),     'I',  0, info_cmd },
+    { ' ', N_("Tree"),                     'T',  0, tree_cmd },
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Sort order..."),         'S',  sort_cmd },
+    { ' ', N_("Sort order..."),            'S',  0, sort_cmd },
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Filter..."),	        'F',  filter_cmd },
+    { ' ', N_("Filter..."),                'F',  0, filter_cmd },
 #ifdef USE_NETCODE			    
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Network link..."),       'N',  netlink_cmd },
-    { ' ', N_("FTP link..."),           'P',  ftplink_cmd },
+    { ' ', N_("Network link..."),          'N',  0, netlink_cmd },
+    { ' ', N_("FTP link..."),              'P',  2, ftplink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
-    { ' ', N_("Drive...       M-d"),ALT('d'), drive_cmd_a },
+    { ' ', N_("Drive...       M-d"),   ALT('d'), 0, drive_cmd_a },
 #endif
-    { ' ', N_("Rescan         C-r"),XCTRL('R'), reread_cmd }
+    { ' ', N_("Rescan         C-r"), XCTRL('R'), 0, reread_cmd }
 };
 
 static menu_entry RightMenu [] = {
-    { ' ', N_("Listing mode..."),	'L',  listing_cmd },
-    { ' ', N_("Quick view     C-x q"),  'Q',  quick_view_cmd }, 
-    { ' ', N_("Info           C-x i"),  'I',  info_cmd },
-    { ' ', N_("Tree"),                  'T',  tree_cmd },
+    { ' ', N_("Listing mode..."),          'L',  0, listing_cmd },
+    { ' ', N_("Quick view     C-x q"),     'Q',  0, quick_view_cmd }, 
+    { ' ', N_("Info           C-x i"),     'I',  0, info_cmd },
+    { ' ', N_("Tree"),                     'T',  0, tree_cmd },
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Sort order..."),         'S',  sort_cmd },
+    { ' ', N_("Sort order..."),            'S',  0, sort_cmd },
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Filter..."),	        'F',  filter_cmd },
+    { ' ', N_("Filter..."),                'F',  0, filter_cmd },
 #ifdef USE_NETCODE			    
     { ' ', "", ' ', 0 },		    
-    { ' ', N_("Network link..."),       'N',  netlink_cmd },
-    { ' ', N_("FTP link..."),           'P',  ftplink_cmd },
+    { ' ', N_("Network link..."),          'N',  0, netlink_cmd },
+    { ' ', N_("FTP link..."),              'P',  2, ftplink_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef OS2_NT
-    { ' ', N_("Drive...       M-d"),ALT('d'),  drive_cmd_b },
+    { ' ', N_("Drive...       M-d"),  ALT('d'),  0, drive_cmd_b },
 #endif
-    { ' ', N_("Rescan         C-r"),XCTRL('R'), reread_cmd }
+    { ' ', N_("Rescan         C-r"), XCTRL('R'), 0, reread_cmd }
 };
 
 static menu_entry FileMenu [] = {
-    { ' ', N_("User menu          F2"), KEY_F(2),  user_menu_cmd },
-    { ' ', N_("View               F3"), KEY_F(3),  view_cmd },
-    { ' ', N_("Filtered view     M-!"), ALT('!'),  filtered_view_cmd },
-    { ' ', N_("Edit               F4"), KEY_F(4),  edit_cmd },
-    { ' ', N_("Copy               F5"), KEY_F(5),  copy_cmd },
-    { ' ', N_("Chmod           C-x c"), 'C',       chmod_cmd },
+    { ' ', N_("User menu          F2"), KEY_F(2),  0, user_menu_cmd },
+    { ' ', N_("View               F3"), KEY_F(3),  0, view_cmd },
+    { ' ', N_("Filtered view     M-!"), ALT('!'),  0, filtered_view_cmd },
+    { ' ', N_("Edit               F4"), KEY_F(4),  0, edit_cmd },
+    { ' ', N_("Copy               F5"), KEY_F(5),  2, copy_cmd },
+    { ' ', N_("Chmod           C-x c"), 'C',       0, chmod_cmd },
 #ifndef OS2_NT				       
-    { ' ', N_("Link            C-x l"), 'L',       link_cmd },
-    { ' ', N_("SymLink         C-x s"), 'S',       symlink_cmd },
-    { ' ', N_("edit sYmlink  C-x C-s"), 'Y',       edit_symlink_cmd },
-    { ' ', N_("chOwn           C-x o"), 'O',       chown_cmd },
-    { ' ', N_("Advanced chown       "), 'A',       chown_advanced_cmd },
+    { ' ', N_("Link            C-x l"), 'L',       0, link_cmd },
+    { ' ', N_("SymLink         C-x s"), 'S',       0, symlink_cmd },
+    { ' ', N_("Edit symlink  C-x C-s"), 'Y',       6, edit_symlink_cmd },
+    { ' ', N_("Chown           C-x o"), 'O',       2, chown_cmd },
+    { ' ', N_("Advanced chown       "), 'A',       0, chown_advanced_cmd },
 #endif					       
-    { ' ', N_("Rename/Move        F6"), KEY_F(6),  ren_cmd },
-    { ' ', N_("Mkdir              F7"), KEY_F(7),  mkdir_cmd },
-    { ' ', N_("Delete             F8"), KEY_F(8),  delete_cmd },
-    { ' ', N_("Quick cd          M-c"), ALT('c'),  quick_cd_cmd },
+    { ' ', N_("Rename/Move        F6"), KEY_F(6),  0, ren_cmd },
+    { ' ', N_("Mkdir              F7"), KEY_F(7),  0, mkdir_cmd },
+    { ' ', N_("Delete             F8"), KEY_F(8),  0, delete_cmd },
+    { ' ', N_("Quick cd          M-c"), ALT('c'),  0, quick_cd_cmd },
     { ' ', "", ' ', 0 },
-    { ' ', N_("Select group      M-+"), ALT('+'),  select_cmd },
-    { ' ', N_("Unselect group    M-\\"),ALT('\\'), unselect_cmd },
-    { ' ', N_("Reverse selection M-*"), ALT('*'),  reverse_selection_cmd },
+    { ' ', N_("Select group      M-+"), ALT('+'),  7, select_cmd },
+    { ' ', N_("Unselect group    M-\\"),ALT('\\'), 1, unselect_cmd },
+    { ' ', N_("Reverse selection M-*"), ALT('*'), 13, reverse_selection_cmd },
     { ' ', "", ' ', 0 },
-    { ' ', N_("Quit            F10"),   KEY_F(10), (callfn) quit_cmd }
+    { ' ', N_("Quit            F10"),   'Q',  0, (callfn) quit_cmd }
 };
 
 void external_panelize (void);
@@ -1189,51 +1189,51 @@ static menu_entry CmdMenu [] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-    { ' ', N_("Directory tree"),	        'D',	      tree_box },
-    { ' ', N_("Find file            M-?"),  ALT('?'),     find_cmd },
+    { ' ', N_("Directory tree"),           'D',        0, tree_box },
+    { ' ', N_("Find file            M-?"), ALT('?'),   0, find_cmd },
 #ifndef HAVE_XVIEW    
-    { ' ', N_("Swap panels          C-u"),  XCTRL('u'),   swap_cmd },
-    { ' ', N_("Switch panels on/off C-o"),  XCTRL('o'),   view_other_cmd },
+    { ' ', N_("sWap panels          C-u"), XCTRL('u'), 1, swap_cmd },
+    { ' ', N_("switch Panels on/off C-o"), XCTRL('o'), 7, view_other_cmd },
 #endif    
-    { ' ', N_("Compare directories"),	'C',	      compare_dirs_cmd },
-    { ' ', N_("eXternal panelize    C-x !"),'X',	      external_panelize },
+    { ' ', N_("Compare directories  C-x d"),'C',       0, compare_dirs_cmd },
+    { ' ', N_("eXternal panelize    C-x !"),'X',       1, external_panelize },
 #ifdef HAVE_DUSUM
-    { ' ', N_("show directory sIzes"),      'I',	      dirsizes_cmd },
+    { ' ', N_("show directory sIzes"),      'I',      16, dirsizes_cmd },
 #endif
     { ' ', "", ' ', 0 },
-    { ' ', N_("command History"),           'H',	      history_cmd },
-    { ' ', N_("Directory hotlist    C-\\"),  XCTRL('\\'), quick_chdir_cmd },
+    { ' ', N_("command History"),           'H',       8, history_cmd },
+    { ' ', N_("Directory hotlist    C-\\"), XCTRL('\\'), 13, quick_chdir_cmd },
 #ifdef USE_VFS
-    { ' ', N_("Active VFS list      C-x a"), 'A',         reselect_vfs },
+    { ' ', N_("Active VFS list      C-x a"), 'A',  0, reselect_vfs },
 #endif
 #ifdef WITH_BACKGROUND
-    { ' ', N_("Background jobs      C-x j"), 'B',         jobs_cmd },
+    { ' ', N_("Background jobs      C-x j"), 'B',  0, jobs_cmd },
 #endif
     { ' ', "", ' ', 0 },
 #ifdef USE_EXT2FSLIB
-    { ' ', N_("Undelete files (ext2fs only)"),'U',        undelete_cmd },
+    { ' ', N_("Undelete files (ext2fs only)"),'U', 0, undelete_cmd },
 #endif
 #ifdef VERSION_4
-    { ' ', N_("Listing format edit"),	'L',	      listmode_cmd},
+    { ' ', N_("Listing format edit"),        'L',  0, listmode_cmd},
 #endif
-    { ' ', N_("Extension file edit"),	'E',	      ext_cmd },
-    { ' ', N_("Menu file edit"),		'M',	      menu_edit_cmd }
+    { ' ', N_("Extension file edit"),        'E',  0, ext_cmd },
+    { ' ', N_("Menu file edit"),             'M',  0, menu_edit_cmd }
 };
 
 /* Must keep in sync with the constants in menu_cmd */
 static menu_entry OptMenu [] = {
-    { ' ', N_("Configuration..."),    'C', configure_box },
-    { ' ', N_("Layout..."),           'L', layout_cmd },
-    { ' ', N_("cOnfirmation..."),     'O', confirm_box },
-    { ' ', N_("Display bits..."),     'D', display_bits_box },
+    { ' ', N_("Configuration..."),    'C', 0, configure_box },
+    { ' ', N_("Layout..."),           'L', 0, layout_cmd },
+    { ' ', N_("cOnfirmation..."),     'O', 1, confirm_box },
+    { ' ', N_("Display bits..."),     'D', 0, display_bits_box },
 #if !defined(HAVE_X) && !defined(OS2_NT)
-    { ' ', N_("learn Keys..."),       'K', learn_keys },
+    { ' ', N_("learn Keys..."),       'K', 6, learn_keys },
 #endif
 #ifdef USE_VFS    
-    { ' ', N_("Virtual FS..."),	  'V', configure_vfs },
+    { ' ', N_("Virtual FS..."),       'V', 0, configure_vfs },
 #endif
     { ' ', "", ' ', 0 }, 
-    { ' ', N_("Save setup"),          'S', save_setup_cmd }
+    { ' ', N_("Save setup"),          'S', 0, save_setup_cmd }
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)

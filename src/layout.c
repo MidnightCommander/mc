@@ -435,6 +435,7 @@ void layout_change (void)
 	how the panel are split (horizontal/vertical). */
     done_menu();
     init_menu();
+	menubar_arrange(the_menubar);
 #endif
 }
 
@@ -713,6 +714,8 @@ void change_screen_size (void)
 	edit_adjust_size (edit_dlg);
 #endif
     
+	menubar_arrange(the_menubar);
+		
     /* Now, force the redraw */
     do_refresh ();
     touchwin (stdscr);

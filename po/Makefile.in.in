@@ -80,7 +80,7 @@ $(srcdir)/$(PACKAGE).pot: $(POTFILES)
 	  --add-comments --keyword=_ --keyword=N_ \
 	  --files-from=$(srcdir)/POTFILES.in
 	rm -f $(srcdir)/$(PACKAGE).pot
-	mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot
+	-mv $(PACKAGE).po $(srcdir)/$(PACKAGE).pot
 
 $(srcdir)/cat-id-tbl.c: stamp-cat-id; @:
 $(srcdir)/stamp-cat-id: $(PACKAGE).pot

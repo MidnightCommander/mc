@@ -1,6 +1,30 @@
 1998-03-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* menu.c (destroy_menu): Implement destroy_menu for all of the
+	ports as a routine that frees the menu entries if
+	internationalization has been enabled.
+
 	* wtools.c (quick_dialog_skip): Do not i18n any string that is empty.
+
+Sun Mar 29 23:02:09 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/menu.[ch]: new member to menu_entry (hot_pos) introduced to make
+	internationalized version of menu use externally defined hotkeys
+	(denoted with preceding &). create_menu() fixed to load intl text of
+	the entries. Some fixes around menu.c to enable usage of reloaded 
+	hotkeys.
+	
+	* main.c, editmenu.c: menu initialization code fixed to conform new
+	menu structure. editmenu init code includes N_(..) now.
+	
+	* menu.c, layout.c, editwidget.c: bar menu items displacement is made
+	dynamically upon initialization and window size changes. Mouse event
+	processing is fixed accordingly. 
+
+Sat Mar 28 13:18:36 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* src/screen.c: (repaint_file) last patches to format_file() in the
+	same file broke appearance of panels in brief mode -- fixed.
 
 Wed Mar 25 19:05:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 

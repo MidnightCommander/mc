@@ -575,10 +575,10 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
     if (!isstatus && panel->split){
 	
 	second_column = (file_index - panel->top_file) / llines (panel);
-	width = (panel->widget.cols/2 - 2) - 1;
+	width = (panel->widget.cols - 2)/2 - 1;
 	
 	if (second_column){
-	    offset = 2 + width;
+	    offset = 1 + width;
 	    width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1;
 	} 
     } else

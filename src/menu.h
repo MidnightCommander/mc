@@ -18,6 +18,7 @@ typedef struct {
     char first_letter;
     char *text;
     int  hot_key;
+    int  hot_pos;
     callfn call_back;
 } menu_entry;
 
@@ -32,16 +33,13 @@ typedef struct {
     int    max_entry_len;
     int    selected;
     menu_entry *entries;
+    int    start_x;		/* position relative to menubar start */
 } sMenu;
 typedef sMenu *Menu;
 #endif
 
 Menu create_menu (char *name, menu_entry *entries, int count);
-#ifdef HAVE_XVIEW
-    void destroy_menu (Menu menu);
-#else
-#   define destroy_menu(x) free(x)
-#endif
+void destroy_menu (Menu menu);
 
 extern int menubar_visible;
 

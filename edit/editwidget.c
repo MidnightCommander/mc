@@ -937,6 +937,8 @@ void edit_adjust_size (Dlg_head * h)
     edit_bar = (WButtonBar *) edit->widget.parent->current->next->widget;
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
     widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
+	menubar_arrange(edit_menubar);
 }
 
 void edit_update_screen (WEdit * e)
