@@ -8,9 +8,10 @@
  */
 
 #include <config.h>
+#include "global.h"
+#include <libgnorba/gnorba.h>
 #include "panel.h"
 #include "../vfs/vfs.h"
-#include <libgnorba/gnorba.h>
 #include "FileManager.h"
 #include "gcorba.h"
 #include "gdesktop.h"

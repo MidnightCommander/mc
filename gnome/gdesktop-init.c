@@ -7,7 +7,6 @@
 
 #include <config.h>
 #include <unistd.h>
-#include <libgnome/libgnome.h>
 #include "x.h"
 #include "main.h"
 #include "util.h"

@@ -110,6 +110,8 @@ typedef struct {
 
 
 
+#ifdef MOUNTED_GETMNTENT1
+
 static gboolean
 option_has_user (char *str)
 {
@@ -123,10 +125,6 @@ option_has_user (char *str)
 	}
 	return FALSE;
 }
-
-
-
-#ifdef MOUNTED_GETMNTENT1
 
 /* Returns whether the mount entry has the owner flag and our euid matches the
  * device file.
@@ -269,7 +267,7 @@ mount_point_to_device (char *mount_point)
 
 
 
-#else
+#else /* !MOUNTED_GETMNTENT1 */
 
 char *
 is_block_device_mountable (char *mount_point)
@@ -294,7 +292,7 @@ mount_point_to_device (char *mount_point)
 {
 	return NULL;
 }
-#endif
+#endif /* !MOUNTED_GETMNTENT1 */
 
 
 

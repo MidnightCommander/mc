@@ -1,3 +1,12 @@
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* gcorba.c: Include "global.h".
+	* gdesktop-init.c: Don't include <libgnome/libgnome.h>.
+	* gprint.c: Likewise.
+	* gdnd.c: Don't include <gdk/gdkprivate.h>.
+	* gmount.c (option_has_user) [!MOUNTED_GETMNTENT1]: Disable,
+	it's usused.
+
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
 	* gmc-window.c: Remove.
