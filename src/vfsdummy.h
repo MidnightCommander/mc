@@ -57,7 +57,6 @@ return_zero (void)
 
 #define vfs_current_is_local() 1
 #define vfs_file_is_local(x) 1
-#define vfs_canon(p) g_strdup (canonicalize_pathname(p))
 #define vfs_strip_suffix_from_filename(x) g_strdup(x)
 
 #define vfs_file_class_flags(x) (VFSF_LOCAL)
@@ -68,5 +67,13 @@ return_zero (void)
 #define vfs_add_current_stamps() do { } while (0)
 #define vfs_timeout_handler() do { } while (0)
 #define vfs_timeouts() 0
+
+static inline char *
+vfs_canon (const char *path)
+{
+    char *p = g_strdup (path);
+    canonicalize_pathname(p);
+    return p;
+}
 
 #endif				/* !__VFSDUMMY_H */

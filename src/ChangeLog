@@ -1,3 +1,8 @@
+2004-04-18  Pavel Roskin  <proski@gnu.org>
+
+	* vfsdummy.h [!USE_VFS]: Make sure that vfs_canon() doesn't
+	change the original string.  Fix compilation without VFS.
+
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* achown.c (init_chown_advanced) [ENABLE_NLS]: i18n fix.
