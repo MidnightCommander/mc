@@ -1,3 +1,10 @@
+2004-12-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs.c (struct inode): Remove unused linkflag field.
+	(extfs_internal_stat): Eliminate "inode" variable.
+	(extfs_fstat): Likewise.
+	(extfs_unlink): Fix memory leak if extfs_get_path_mangle() fails.
+
 2004-12-28  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
 
 	* fish.c (fish_linear_abort): Fix bug with FISH vfs. It freezes MC on

@@ -56,7 +56,6 @@ struct inode {
     gid_t gid;
     off_t size;
     time_t mtime;
-    char linkflag;
     char *linkname;
     time_t atime;
     time_t ctime;
@@ -410,10 +409,10 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 	    g_free (current_link_name);
 	}
     }
+    g_free (buffer);
 
     /* Check if extfs 'list' returned 0 */
     if (pclose (extfsd) != 0) {
-	g_free (buffer);
 	extfs_free (current_archive);
 	close_error_pipe (1, _("Inconsistent extfs archive"));
 	return -1;
@@ -421,7 +420,6 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 
     close_error_pipe (1, NULL);
     *pparc = current_archive;
-    g_free (buffer);
     return 0;
 }
 
@@ -902,7 +900,7 @@ static int extfs_closedir (void *data)
     return 0;
 }
 
-static void extfs_stat_move( struct stat *buf, struct inode *inode )
+static void extfs_stat_move (struct stat *buf, const struct inode *inode)
 {
     buf->st_dev = inode->dev;
     buf->st_ino = inode->inode;
@@ -925,13 +923,14 @@ static void extfs_stat_move( struct stat *buf, struct inode *inode )
     buf->st_ctime = inode->ctime;
 }
 
-static int extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, int resolve)
+static int
+extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf,
+		     int resolve)
 {
     struct archive *archive;
     char *q;
     struct entry *entry;
-    struct inode *inode;
-    char *path2 = g_strdup(path);
+    char *path2 = g_strdup (path);
     int result = -1;
 
     if ((q = extfs_get_path_mangle (me, path2, &archive, 0, 0)) == NULL)
@@ -941,8 +940,7 @@ static int extfs_internal_stat (struct vfs_class *me, const char *path, struct s
         goto cleanup;
     if (resolve && (entry = extfs_resolve_symlinks (entry)) == NULL)
         goto cleanup;
-    inode = entry->inode;
-    extfs_stat_move( buf, inode );
+    extfs_stat_move (buf, entry->inode);
     result = 0;
 cleanup:
     g_free (path2);
@@ -962,10 +960,8 @@ static int extfs_lstat (struct vfs_class *me, const char *path, struct stat *buf
 static int extfs_fstat (void *data, struct stat *buf)
 {
     struct pseudofile *file = (struct pseudofile *)data;
-    struct inode *inode;
     
-    inode = file->entry->inode;
-    extfs_stat_move( buf, inode );
+    extfs_stat_move (buf, file->entry->inode);
     return 0;
 }
 
@@ -1014,12 +1010,12 @@ static int extfs_write (void *data, const char *buf, int nbyte)
 static int extfs_unlink (struct vfs_class *me, const char *file)
 {
     struct archive *archive;
-    char *q, *mpath = g_strdup(file);
+    char *q, *mpath = g_strdup (file);
     struct entry *entry;
     int result = -1;
 
     if ((q = extfs_get_path_mangle (me, mpath, &archive, 0, 0)) == NULL)
-	return -1;
+	goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
         goto cleanup;
