@@ -61,11 +61,13 @@ cancel_callback ()
         write_initial_keys ();
         write_initial_mime ();
 }
+
 static void
 help_callback ()
 {
         /* Sigh... empty as always */
 }
+
 static void
 init_mime_capplet ()
 {
@@ -106,8 +108,10 @@ init_mime_capplet ()
                            GTK_SIGNAL_FUNC(hide_edit_window), NULL);
         gtk_signal_connect(GTK_OBJECT(capplet), "page_shown",
                            GTK_SIGNAL_FUNC(show_edit_window), NULL);
+#if 0
         gtk_signal_connect(GTK_OBJECT(capplet), "help",
                            GTK_SIGNAL_FUNC(help_callback), NULL);
+#endif
 }
 
 int
