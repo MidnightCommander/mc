@@ -744,8 +744,6 @@ void change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ && !defined SCO_FLAVOR
-    extern Dlg_head *view_dlg;
-    extern Dlg_head *edit_dlg;
     
 #ifndef NCURSES_VERSION
     mc_noraw_mode ();

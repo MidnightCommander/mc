@@ -180,12 +180,10 @@ extern WButtonBar *the_bar;
 extern WLabel     *the_prompt;
 extern WLabel     *the_hint;
 extern Dlg_head   *midnight_dlg;
-extern WLabel      *process_status;
+extern Dlg_head   *edit_dlg;
+extern WLabel     *process_status;
 #include "menu.h"
 extern WMenu      *the_menubar;
-
-extern Dlg_head *midnight_dlg;
-
 #endif /* WANT_WIDGETS */
 
 void edition_pre_exec (void);

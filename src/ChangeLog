@@ -1,3 +1,10 @@
+2001-08-21  Pavel Roskin  <proski@gnu.org>
+
+	* view.h: Declare view_dlg.
+	* main.h: Declare edit_dlg.
+	* layout.c (change_screen_size): Remove external declarations
+	inside the function.
+
 2001-08-20  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (load_view_file) [!HAVE_MMAP]: Warning fix.
