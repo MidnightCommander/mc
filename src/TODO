@@ -10,8 +10,6 @@
 
   - Make the buttonbar for the tree box work.
 
-  - Fix the tree: it displays similar entries wrong.
-
   - In the incremental search mode, when backspacing, select the
     correct file, do not stop in current file.
 
@@ -41,9 +39,9 @@
  
   - Click on the pathname should take you to that directory.
 
-  - Viewer breask with object libraries prev_color is miss computed.
+  - Viewer breaks with object libraries prev_color is miss computed.
 
-   - Tk/Winfo: The program should not recompute the file system information
+  - Tk/Winfo: The program should not recompute the file system information
     for each file, it should keep a cache
 
   - The control of the buttonbar is broken in Tk, try quick view and
@@ -61,6 +59,12 @@
   - Change of the listing mode is broken.
   
   - The mini status has not been coded.
+
+  - menubar_arrange, destroy_menu: implement
+
+  - Port the interal editor
+
+  - the interal editor adds it's entries to the wrong menu
 
 * XView/mc
 
@@ -84,8 +88,6 @@
     mc.1, mc.html, mc.hlp, mc.info, mc.tex, mc.txt etc. [3.x]
 
 * Extensions
-
-   - rename ~/.mc.XXX to ~/.mc/XXX
 
    - Hotlist should allow people to edit the entry (like we do in the external
      panelize thing).

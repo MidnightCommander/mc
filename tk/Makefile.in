@@ -14,10 +14,10 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
-TKSRCS = tkmain.c menu.c tkscreen.c tkwidget.c mc.tcl tkkey.c tkview.c \
+TKSRCS = tkmain.c tkmenu.c tkscreen.c tkwidget.c mc.tcl tkkey.c tkview.c \
 	 tkinfo.c gd.tcl
 
-TKHDRS = tkmain.h tkscreen.h tkwidget.h tkinfo.h tkconf.h menu.h
+TKHDRS = tkmain.h tkscreen.h tkwidget.h tkinfo.h tkconf.h
 
 GUIS   = gui.dbits.tcl gui.display.tcl gui.findfile.tcl gui.hotlist.tcl   \
 	gui.listbox.tcl gui.mfind.tcl gui.option.tcl gui.panelize.tcl     \
@@ -46,7 +46,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o layout.o boxes.o \
 	option.o cmd.o utilunix.o popt.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
-	menu.o tkmain.o tkscreen.o tkwidget.o tkkey.o tkview.o \
+	tkmenu.o tkmain.o tkscreen.o tkwidget.o tkkey.o tkview.o \
 	tkinfo.o
 
 #

@@ -1,3 +1,12 @@
+Fri Apr  3 12:23:28 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* TODO: Removed obsolete entries: Similar entries in tree view 
+	are displayed correct; user specific files has been moved 
+	to ~/.mc/
+	Added: Check what to do with menubar_arrange/destroy_menu stubs 
+	in tk/tkmenu.c; the interal editor (not portet yet) adds entries 
+	to the wrong menubar
+
 Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* key.c, key.h (numeric_keypad_mode, application_keypad_mode): New
