@@ -2638,7 +2638,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_SUBTREE (N_("_Arrange Icons"), desktop_arrange_icons_items),
 	GNOMEUIINFO_ITEM_NONE (N_("Create _New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop _Devices"), NULL, handle_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop De_vices"), NULL, handle_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop"), NULL, handle_rescan_desktop),
 	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
