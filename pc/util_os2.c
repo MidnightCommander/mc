@@ -19,6 +19,8 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+#include <config.h>
+
 #define INCL_DOS
 #define INCL_PM
 #define INCL_DOSPROCESS
@@ -26,13 +28,11 @@
 #define INCL_DOSDEVICES   /* Device values */
 #define INCL_DOSDATETIME
 #define INCL_DOSERRORS
-#include "config.h"
 #include <os2.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
-#include <config.h>
 #include <ctype.h>
 #include <sys/stat.h>
 #include <errno.h>
@@ -45,9 +45,9 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <process.h>
-#include <fs.h>
-#include "util.h"
-#include "dialog.h"
+#include "../src/fs.h"
+#include "../src/util.h"
+#include "../src/dialog.h"
 
 #ifndef ENOTEMPTY
 #define ENOTEMPTY ERROR_DIR_NOT_EMPTY
