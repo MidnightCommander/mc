@@ -405,13 +405,13 @@ static void show (Dlg_head *h, char *paint_start)
 		addstr (VERSION);
 		col += strlen (VERSION);
 		break;
-	    case CHAR_BOLD_ON:
+	    case CHAR_FONT_BOLD:
 		attrset (HELP_BOLD_COLOR);
 		break;
-	    case CHAR_ITALIC_ON:
+	    case CHAR_FONT_ITALIC:
 		attrset (HELP_ITALIC_COLOR);
 		break;
-	    case CHAR_BOLD_OFF:
+	    case CHAR_FONT_NORMAL:
 		attrset (HELP_NORMAL_COLOR);
 		break;
 	    case '\n':

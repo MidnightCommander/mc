@@ -400,7 +400,7 @@ handle_command (char *buffer)
 	    return;
 	}
 
-	*buffer = (buffer[1] == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON;
+	*buffer = (buffer[1] == 'I') ? CHAR_FONT_ITALIC : CHAR_FONT_BOLD;
 
 	/* Attempt to handle backslash quoting */
 	for (w = &buffer[1]; *p; p++) {
@@ -412,7 +412,7 @@ handle_command (char *buffer)
 	    *w++ = *p;
 	}
 
-	*w++ = CHAR_BOLD_OFF;
+	*w++ = CHAR_FONT_NORMAL;
 	*w = 0;
 	print_string (buffer);
     } else if ((strcmp (buffer, ".TP") == 0)

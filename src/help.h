@@ -11,8 +11,8 @@
 #define CHAR_ALTERNATE		'\05'
 #define CHAR_NORMAL		'\06'
 #define CHAR_VERSION		'\07'
-#define CHAR_BOLD_ON		'\010'
-#define CHAR_BOLD_OFF		'\013'
+#define CHAR_FONT_BOLD		'\010'
+#define CHAR_FONT_NORMAL	'\013'
 #define CHAR_MCLOGO		'\014'
 #define CHAR_TEXTONLY_START	'\016'
 #define CHAR_TEXTONLY_END	'\017'
@@ -20,7 +20,7 @@
 #define CHAR_XONLY_END		'\021'
 #define CHAR_TITLE_ON		'\022'
 #define CHAR_TITLE_OFF		'\023'
-#define CHAR_ITALIC_ON		'\024'
+#define CHAR_FONT_ITALIC	'\024'
 #define CHAR_RESERVED		'\025'
 #define STRING_LINK_START	"\01"
 #define STRING_LINK_POINTER	"\02"

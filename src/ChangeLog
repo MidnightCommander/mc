@@ -1,5 +1,9 @@
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* help.h: Replace CHAR_BOLD_ON, CHAR_BOLD_OFF and CHAR_ITALIC_ON
+	with  CHAR_FONT_BOLD, CHAR_FONT_NORMAL and CHAR_FONT_ITALIC
+	respectively for better consistency.
+
 	* util.c (is_printable): Disable "Full 8 bits output" on xterm,
 	fall back to "ISO 8859-1" due to problems with gnome-terminal,
 	which identifies itself as xterm.
