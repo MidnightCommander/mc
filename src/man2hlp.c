@@ -373,6 +373,15 @@ handle_command (char *buffer)
 	    print_error ("Syntax error: .\\\"TOPICS: no text");
 	    return;
 	}
+	/* Remove quotes */
+	if (buffer[0] == '"') {
+	    buffer++;
+	    len = strlen (buffer);
+	    if (buffer[len - 1] == '"') {
+		len--;
+		buffer[len] = 0;
+	    }
+	}
 	Topics = strdup (buffer);
     } else {
 	/* Other commands are ignored */

@@ -1,5 +1,7 @@
 2002-08-25  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (handle_command): Remove quotes from TOPIC.
+
 	* key.c (get_event): Check gpm_fd before using it in FD_SET.  If
 	gpm_fd is -1 (gpm has died), disable mouse support.
 
