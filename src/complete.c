@@ -442,6 +442,7 @@ hostname_completion_function (char *text, int state)
 static char *
 command_completion_function (char *text, int state)
 {
+    static char *path_end;
     static int isabsolute;
     static int phase;
     static int text_len;
@@ -471,17 +472,12 @@ command_completion_function (char *text, int state)
 	    words = bash_reserved;
 	    phase = 0;
 	    text_len = strlen (text);
-	    p = getenv ("PATH");
-	    if (!p)
-	    	path = NULL;
-	    else {
-	    	path = g_malloc (strlen (p) + 2);
-	    	strcpy (path, p);
-	    	path [strlen (p) + 1] = 0;
-	    	p = strchr (path, PATH_ENV_SEP);
-	    	while (p){
-	    	    *p = 0;
-	    	    p = strchr (p + 1, PATH_ENV_SEP);
+	    path = getenv ("PATH");
+	    if (path){
+		p = path = g_strdup (path);
+		path_end = strchr (p, 0);
+		while ((p = strchr (p, PATH_ENV_SEP))){
+		    *p++ = 0;
 	    	}
 	    }
 	}
@@ -520,9 +516,9 @@ command_completion_function (char *text, int state)
 	        if (!cur_word){
 		    char *expanded;
 		    
-	            if (!*cur_path)
+		    if (cur_path >= path_end)
 	            	break;
-		    expanded = tilde_expand (cur_path);
+		    expanded = tilde_expand (*cur_path ? cur_path : ".");
 		    if (!expanded){
 			g_free (path);
 			path = NULL;
