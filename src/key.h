@@ -9,33 +9,16 @@ void done_key (void);
 
 int get_event (Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
-int ctrl_pressed (void);
 
 int mi_getch (void);
 /* Possible return values from get_event: */
 #define EV_MOUSE   -2
 #define EV_NONE    -1
 
-/* Used to get the modifier information          */
-/* Currently, it just works on the Linux console */
-#ifdef NATIVE_WIN32
-#   ifndef SHIFT_PRESSED
-#   define SHIFT_PRESSED 0x0010
-#   endif
-#else
-#   define SHIFT_PRESSED 1
-#endif
-#define ALTR_PRESSED 2
-#define CONTROL_PRESSED 4
-#define ALTL_PRESSED 8
-int get_modifier (void);
-
 
 /*
  * Internal representation of the key modifiers.  It is used in the
- * sequence tables.  In the future, it will be part of the key code.
- * Currently those bits are stripped in correct_key_code() and
- * remembered in the last_modifiers variable.
+ * sequence tables and the keycodes in the mc sources.
  */
 #define KEY_M_SHIFT 0x1000
 #define KEY_M_ALT   0x2000

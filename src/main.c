@@ -1741,8 +1741,8 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (id == '\t')
 	    free_completions (cmdline);
 
-	/* On Linux, we can tell the difference */
-	if (id == '\n' && ctrl_pressed ()) {
+	/* Ctrl-Enter */
+	if (id == ('\n' | KEY_M_CTRL)) {
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}

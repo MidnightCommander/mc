@@ -48,7 +48,7 @@
 #include "panel.h"		/* cpanel */
 #include "main.h"		/* repaint_screen */
 #include "hotlist.h"
-#include "key.h"		/* ctrl_pressed */
+#include "key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
 
 #define UX		5
@@ -385,9 +385,9 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 
     case DLG_UNHANDLED_KEY:
 	switch (Par) {
+	case KEY_M_CTRL | '\n':
+	    goto l1;
 	case '\n':
-	    if (ctrl_pressed())
-		goto l1;
 	case KEY_ENTER:
 	case KEY_RIGHT:
 	    if (hotlist_button_callback (B_ENTER, 0)) {

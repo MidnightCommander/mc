@@ -1190,21 +1190,26 @@ backward_word (WInput *in)
 static void
 key_left (WInput *in)
 {
-    if (ctrl_pressed ())
-	backward_word (in);
-    else
-	backward_char (in);
+    backward_char (in);
+}
+
+static void
+key_ctrl_left (WInput *in)
+{
+    backward_word (in);
 }
 
 static void
 key_right (WInput *in)
 {
-    if (ctrl_pressed ())
-	forward_word (in);
-    else
-	forward_char (in);
+    forward_char (in);
 }
-    
+
+static void
+key_ctrl_right (WInput *in)
+{
+    forward_word (in);
+}
 static void
 backward_delete (WInput *in)
 {
@@ -1396,9 +1401,11 @@ static const struct {
     { KEY_END,            end_of_line },
     { KEY_C1,             end_of_line },
     { KEY_LEFT,           key_left },
+    { KEY_LEFT | KEY_M_CTRL, key_ctrl_left },
     { XCTRL('b'),         backward_char },
     { ALT('b'),           backward_word },
     { KEY_RIGHT,          key_right },
+    { KEY_RIGHT | KEY_M_CTRL, key_ctrl_right },
     { XCTRL('f'),         forward_char },
     { ALT('f'),           forward_word },
 		          

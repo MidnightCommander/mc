@@ -1,5 +1,10 @@
 2002-12-21  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (get_modifier): Make static.  Return the mc internal
+	representation, not the Linux console code.
+	(correct_key_code): Add the modifier, not strip it.
+	(ctrl_pressed): Remove.  Adjust all dependencies.
+
 	* key.h: Add definitions for the keyboard modifiers that can be
 	part of the key code.
 	* key.c (xterm_key_defines): Add some common key definitions

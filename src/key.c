@@ -60,6 +60,13 @@
 /* timeout for old_esc_mode in usec */
 #define ESCMODE_TIMEOUT 1000000
 
+/* Linux console keyboard modifiers */
+#define SHIFT_PRESSED 1
+#define ALTR_PRESSED 2
+#define CONTROL_PRESSED 4
+#define ALTL_PRESSED 8
+
+
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
@@ -82,6 +89,7 @@ static key_def *keys = 0;
 static int input_fd;
 static int disabled_channels = 0; /* Disable channels checking */
 static int xgetch_second (void);
+static int get_modifier (void);
 
 /* File descriptor monitoring add/remove routines */
 typedef struct SelectList {
@@ -450,14 +458,12 @@ int define_sequence (int code, char *seq, int action)
 }
 
 static int *pending_keys;
-static int last_modifiers;
 
 static int
 correct_key_code (int c)
 {
-    /* Remember key modifiers and strip them from the code */
-    last_modifiers = c & KEY_M_MASK;
-    c &= ~KEY_M_MASK;
+    /* Add key modifiers that cannot be deduced from the sequences */
+    c |= get_modifier ();
 
     /* This is needed on some OS that do not support ncurses and */
     /* do some magic after read()ing the data */
@@ -979,19 +985,17 @@ int is_idle (void)
 }
 
 
-/* Get modifier state (shift, alt, ctrl) for the last key pressed */
-int
+/*
+ * Get modifier state (shift, alt, ctrl) for the last key pressed.
+ * We are assuming that the state didn't change since the key press.
+ * This is only correct if get_modifier() is called very fast after
+ * the input was received, so that the user didn't release the
+ * modifier keys yet.
+ */
+static int
 get_modifier (void)
 {
     int result = 0;
-
-    /* Data about modifiers determined from the escape sequences */
-    if (last_modifiers & KEY_M_SHIFT)
-	result |= SHIFT_PRESSED;
-    if (last_modifiers & KEY_M_ALT)
-	result |= ALTL_PRESSED;
-    if (last_modifiers & KEY_M_CTRL)
-	result |= CONTROL_PRESSED;
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_display) {
@@ -1006,33 +1010,34 @@ get_modifier (void)
 			   &root_y, &win_x, &win_y, &mask);
 
 	if (mask & ShiftMask)
-	    result |= SHIFT_PRESSED;
+	    result |= KEY_M_SHIFT;
 	if (mask & ControlMask)
-	    result |= CONTROL_PRESSED;
+	    result |= KEY_M_CTRL;
 	return result;
-    } else
+    }
 #endif
 #ifdef __linux__
     {
 	unsigned char modifiers = 6;
 
-	if (ioctl (0, TIOCLINUX, &modifiers) >= 0)
-	    result |= modifiers;
+	if (ioctl (0, TIOCLINUX, &modifiers) < 0)
+	    return 0;
+
+	/* Translate Linux modifiers into mc modifiers */
+	if (modifiers & SHIFT_PRESSED)
+	    result |= KEY_M_SHIFT;
+	if (modifiers & ALTL_PRESSED)
+	    result |= KEY_M_ALT;
+	if (modifiers & ALTR_PRESSED)
+	    result |= KEY_M_ALT;
+	if (modifiers & CONTROL_PRESSED)
+	    result |= KEY_M_CTRL;
 
 	return result;
     }
 #else
-	return 0;
+    return 0;
 #endif
-}
-
-int
-ctrl_pressed (void)
-{
-    if (get_modifier () & CONTROL_PRESSED)
-	return 1;
-    else
-	return 0;
 }
 
 static void k_dispose (key_def *k)

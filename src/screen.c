@@ -1661,13 +1661,9 @@ prev_page (WPanel *panel)
 }
 
 static void
-prev_page_key (WPanel *panel)
+ctrl_prev_page (WPanel *panel)
 {
-    if (ctrl_pressed ()){
-	do_cd ("..", cd_exact);
-    } else {
-	prev_page (panel);
-    }
+    do_cd ("..", cd_exact);
 }
 
 static void
@@ -1676,17 +1672,17 @@ next_page (WPanel *panel)
     int items;
 
     if (panel->selected == panel->count - 1)
-    	return;
+	return;
     unselect_item (panel);
     items = ITEMS (panel);
     if (panel->top_file > panel->count - 2 * items)
-    	items = panel->count - items - panel->top_file;
+	items = panel->count - items - panel->top_file;
     if (panel->top_file + items < 0)
-    	items = - panel->top_file;
+	items = -panel->top_file;
     if (!items)
-    	panel->selected = panel->count - 1;
+	panel->selected = panel->count - 1;
     else
-    	panel->selected += items;
+	panel->selected += items;
     panel->top_file += items;
 
     /* This keeps the selection in it's relative position */
@@ -1698,14 +1694,12 @@ next_page (WPanel *panel)
     paint_dir (panel);
 }
 
-static void next_page_key (WPanel *panel)
+static void
+ctrl_next_page (WPanel *panel)
 {
-    if (ctrl_pressed() &&
-	(S_ISDIR(selection (panel)->buf.st_mode) ||
-	 link_isdir (selection (panel)))) {
-        do_cd (selection (panel)->fname, cd_exact);
-    } else {
-	next_page (panel);
+    if ((S_ISDIR (selection (panel)->buf.st_mode)
+	 || link_isdir (selection (panel)))) {
+	do_cd (selection (panel)->fname, cd_exact);
     }
 }
 
@@ -2058,8 +2052,10 @@ static const key_map panel_keymap [] = {
     { KEY_C1,     move_end },
     { KEY_END,    move_end },
     { KEY_A1,     move_home },
-    { KEY_NPAGE,  next_page_key },
-    { KEY_PPAGE,  prev_page_key },
+    { KEY_NPAGE,  next_page },
+    { KEY_PPAGE,  prev_page },
+    { KEY_NPAGE | KEY_M_CTRL, ctrl_next_page },
+    { KEY_PPAGE | KEY_M_CTRL, ctrl_prev_page },
 
     /* To quickly move in the panel */
     { ALT('g'),   goto_top_file },
