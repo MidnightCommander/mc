@@ -58,6 +58,7 @@ context default
 	#=========================
 	# Autoconf and Automake macros
 	keyword whole AC_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan
+	keyword whole AS_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan
 	keyword whole AM_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan
 
 	#=========================
