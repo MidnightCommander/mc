@@ -1,6 +1,10 @@
 Before 4.6.0-pre2
 =================
 
+acs_map[] from ncurses is const on Cygwin - test and disable "-a".
+
+Redirect stderr from the extfs list operation.
+
 Finish work on position saving.
 
 get_byte() in view.c produces warnings in Valgrind.
