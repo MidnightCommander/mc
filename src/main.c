@@ -933,11 +933,11 @@ char *p, *q;
 #ifdef USE_VFS
 	    if((q=strrchr(p, '#')) != 0){
 		/* Here we need proper VFS function */
-		if(!strcmp(q+1, "utar") || extfs_which(q+1) >= 0 || sfs_which(q+1) >= 0)
+		if(!strcmp((q+1), "utar") || extfs_which(q+1) >= 0 || sfs_which(q+1) >= 0)
 		    *q = '\0';
 	    }
 #endif /* USE_VFS */
-	return p;
+	return (p+1);
 	}
     return NULL;
 }
