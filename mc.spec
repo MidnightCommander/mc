@@ -1,6 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      4.5.5
-%define rel      SNAP
+%define ver      4.5.7
 %define prefix   /usr
 
 Summary:   Midnight Commander visual shell
@@ -44,7 +43,7 @@ Midnight file system (currently, only the Midnight Commander file manager).
 %setup
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./autogen.sh \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{prefix} \
 	--with-gnome \
 	--without-debug
