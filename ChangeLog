@@ -1,3 +1,10 @@
+2002-07-18  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sql.syntax: New file.
+	* syntax/Syntax: Add sql.syntax.
+	* syntax/Makefile.am: Likewise.
+	From Walery Studennikov <despair@sama.ru> with minor changes.
+
 2002-07-16  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Remove handling of executables.  They should
