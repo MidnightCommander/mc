@@ -169,7 +169,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 }
 
 static void
-fish_pipeopen(struct vfs_s_super *super, char *path, char *argv[])
+fish_pipeopen(struct vfs_s_super *super, const char *path, const char *argv[])
 {
     int fileset1[2], fileset2[2];
     int res;
@@ -193,7 +193,7 @@ fish_pipeopen(struct vfs_s_super *super, char *path, char *argv[])
 	/* stderr to /dev/null */
 	open ("/dev/null", O_WRONLY);
 	close(fileset2[0]); close(fileset2[1]);
-	execvp(path, argv);
+	execvp(path, const_cast(char **, argv));
 	_exit(3);
     }
 }
@@ -854,7 +854,7 @@ static void
 fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct vfs_s_super *super = MEDATA->supers;
-    char *flags;
+    const char *flags;
     char *name;
     
     while (super){

@@ -206,7 +206,7 @@ mcfs_get_remote_port (struct sockaddr_in *sin, int *version)
 /* This used to be in utilvfs.c, but as it deals with portmapper, it
    is probably useful for mcfs */
 static int
-mcfs_create_tcp_link (char *host, int *port, int *version, char *caller)
+mcfs_create_tcp_link (const char *host, int *port, int *version, const char *caller)
 {
     struct sockaddr_in server_address;
     unsigned long inaddr;
