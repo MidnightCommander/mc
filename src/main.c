@@ -1590,9 +1590,6 @@ init_xterm_support (void)
 	if (use_mouse_p != MOUSE_DISABLED) {
 	    use_mouse_p = MOUSE_XTERM;
 	}
-#if 0				/* It works on xterm, but not on rxvt */
-	printf (ESC_STR "]0;GNU Midnight Commander\7");
-#endif
     }
 }
 
