@@ -17,7 +17,7 @@ void flush_extension_file (void);
 #        define MC_USER_EXT ".mc/gnome.ext" 
 #        define MC_LIB_EXT  "mc-gnome.ext"
 #    else
-#        define MC_USER_EXT ".mc/ext" 
+#        define MC_USER_EXT ".mc/bindings" 
 #        define MC_LIB_EXT  "mc.ext"
 #    endif
 #endif
