@@ -168,11 +168,10 @@ cb_ret_t default_proc (widget_msg_t msg, int parm);
 /* Default paint routine for dialogs */
 void common_dialog_repaint (struct Dlg_head *h);
 
-#define real_widget_move(w, _y, _x) move((w)->y + _y, (w)->x + _x)
-#define dlg_move(h, _y, _x) move(((Dlg_head *) h)->y + _y, \
-			     ((Dlg_head *) h)->x + _x)
-
-#define widget_move(w,y,x) real_widget_move((Widget*)w,y,x)
+#define widget_move(w, _y, _x) move(((Widget *)(w))->y + _y, \
+				    ((Widget *)(w))->x + _x)
+#define dlg_move(h, _y, _x) move(((Dlg_head *)(h))->y + _y, \
+				 ((Dlg_head *)(h))->x + _x)
 
 extern Dlg_head *current_dlg;
 
@@ -202,7 +201,6 @@ void dlg_select_by_id (Dlg_head *h, int id);
 
 #define widget_want_cursor(w,i) widget_option(w, W_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_option(w, W_WANT_HOTKEY, i)
-#define widget_want_postkey(w,i) widget_option(w, W_WANT_POSTKEY, i)
 
 /* Used in load_prompt() */
 void update_cursor (Dlg_head *h);

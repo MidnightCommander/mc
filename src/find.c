@@ -36,7 +36,6 @@
 #include "widget.h"
 
 #include "dialog.h"     /* For do_refresh() */
-#define  DIR_H_INCLUDE_HANDLE_DIRENT
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* do_cd, try_to_select */

@@ -33,16 +33,12 @@ int do_load_dir (char *path, dir_list * list, sortfn * sort, int reverse,
 		 int case_sensitive, char *filter);
 void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
 	      int case_sensitive);
-dir_list *do_collect_stat (dir_list * dir, int top);
 int do_reload_dir (char *path, dir_list * list, sortfn * sort, int count,
 		   int reverse, int case_sensitive, char *filter);
 void clean_dir (dir_list * list, int count);
 int set_zero_dir (dir_list * list);
-
-#ifdef DIR_H_INCLUDE_HANDLE_DIRENT
-int handle_path (dir_list *list, char *path, struct stat *buf1, int next_free, 
-		   int *link_to_dir, int *stale_link);
-#endif
+int handle_path (dir_list *list, char *path, struct stat *buf1,
+		 int next_free, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
 int unsorted   (const file_entry *a, const file_entry *b);

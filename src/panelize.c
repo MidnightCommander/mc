@@ -29,8 +29,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-/* Needed for the extern declarations of integer parameters */
-#define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "global.h"
 #include "tty.h"		/* attrset() */
 #include "win.h"

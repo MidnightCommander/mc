@@ -1,3 +1,10 @@
+2003-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* dir.h: Eliminate DIR_H_INCLUDE_HANDLE_DIRENT.  Adjust all
+	callers.  Remove unused code.
+	* dlg.h: Remove unused code.
+	* panel.h: Likewise.
+
 2003-10-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* dir.c (if_link_is_exe): Check mc_stat() return value.

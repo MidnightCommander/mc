@@ -31,7 +31,6 @@ enum panel_display_enum {
 };
 
 struct format_e;
-struct hist_entry;
 
 typedef struct WPanel {
     Widget   widget;
