@@ -1690,8 +1690,7 @@ unintentionally will get more difficult. The default
 selection in the confirmation dialog changes from the "Yes"
 to the "No" button and deletion of non empty directories has to be
 confirmed by entering the word
-.I yes
-\&.
+.IR yes .
 By default this option is disabled.
 .PP
 .SH "    Layout"
