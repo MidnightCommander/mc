@@ -70,7 +70,7 @@ repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 void
 show_dir (WPanel *panel)
 {
-	gtk_label_set (GTK_LABEL (panel->current_dir), panel->cwd);
+	gtk_entry_set_text (GTK_ENTRY (panel->current_dir), panel->cwd);
 }
 
 static void
@@ -902,13 +902,29 @@ panel_switch_new_display_mode (WPanel *panel)
 	panel_update_contents (panel);
 }
 
-static GtkWidget *
-panel_create_cwd (WPanel *panel)
+static void
+change_cwd (GtkWidget *entry, WPanel *panel)
 {
-	GtkWidget *label = gtk_label_new ("");
+	printf ("Cambiando a...%s\n", "xxx");
+}
 
-	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_RIGHT);
-	return label;
+static GtkWidget *
+panel_create_cwd (Dlg_head *h, WPanel *panel, GtkWidget **the_entry)
+{
+	WInput *in;
+
+	in = input_new (0, 0, 0, 10, "", "cwd");
+	add_widget (h, in);
+
+	/* Force the creation of the gtk widget */
+	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
+
+	*the_entry = gnome_entry_gtk_entry (GNOME_ENTRY (in->widget.wdata));
+	gtk_signal_connect (GTK_OBJECT (*the_entry),
+			    "activate",
+			    GTK_SIGNAL_FUNC (change_cwd), panel);
+	
+	return GTK_WIDGET (in->widget.wdata);
 }
 
 static void
@@ -1176,13 +1192,13 @@ panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 	/* Force the creation of the gtk widget */
 	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
 	*filter_w = (GtkWidget *) in->widget.wdata;
-	
+
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
 	
 	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (*filter_w))),
 			    "activate",
-			    (GtkSignalFunc) panel_change_filter,
+			    GTK_SIGNAL_FUNC (panel_change_filter),
 			    panel);
 
 	gtk_box_pack_start (GTK_BOX (fhbox), *filter_w, TRUE, TRUE, 0);
@@ -1194,14 +1210,14 @@ panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
-	GtkWidget *status_line, *filter, *statusbar, *vbox;
-	GtkWidget *ministatus_align;
+	GtkWidget *status_line, *filter, *vbox;
+	GtkWidget *ministatus_align, *frame, *cwd;
 
 	panel->table = gtk_table_new (2, 1, 0);
 	
 	panel->list  = panel_create_file_list (panel);
 
-	panel->current_dir = panel_create_cwd (panel);
+	cwd = panel_create_cwd (h, panel, &panel->current_dir);
 
 	filter = panel_create_filter (h, panel, (GtkWidget **) &panel->filter_w);
 
@@ -1212,10 +1228,15 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	status_line = gtk_hbox_new (0, 0);
 	
-	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 1, 1, 0);
+	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 0);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
 
-	panel->status = statusbar = gtk_label_new ("");
+	/* The statusbar */
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_container_border_width (GTK_CONTAINER (frame), 3);
+	panel->status = gtk_label_new ("");
+	gtk_container_add (GTK_CONTAINER (frame), panel->status);
 	
 	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
@@ -1229,7 +1250,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
 	
-	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 3, 4,
+	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
 	

@@ -1,3 +1,8 @@
+Mon Mar 23 14:04:07 1998  Philippe De Muyter  <phdm@macqel.be>
+
+	* configure.in (nlink_t): Check it using AC_CHECK_TYPE.
+	* acconfig.h (nlink_t): New define slot.
+
 Mon Mar 23 08:17:55 1998 Pavel Roskin <pavel@absolute.spb.su>
 
 	* src/main.c: mcedit can be named mce or mcedit.exe - only

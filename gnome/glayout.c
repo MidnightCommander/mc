@@ -186,6 +186,7 @@ void save_panel_types (void)
 void configure_box (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
+	{ GNOME_APP_UI_ITEM, "New panel",         "Opens a new panel", gnome_open_panel },
 	{ GNOME_APP_UI_ITEM, "Open Terminal",     "Opens a terminal", gnome_open_terminal },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, "Copy",              "Copy files",       copy_cmd },

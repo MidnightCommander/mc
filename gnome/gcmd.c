@@ -67,3 +67,8 @@ gnome_quit_cmd (void)
 	gtk_main_quit ();
 }
 
+void
+gnome_open_panel (GtkWidget *widget, WPanel *panel)
+{
+	new_panel_at (panel->cwd);
+}

@@ -526,7 +526,7 @@ desktop_icon_make_draggable (desktop_icon_t *di)
 	char *drag_types [] = { "icon/root", "url:ALL" };
 
 	/* To artificially start up drag and drop */
-	gtk_signal_connect (obj, "motion_notify_event", GTK_SIGNAL_FUNC (start_icon_drag), di);
+/*	gtk_signal_connect (obj, "motion_notify_event", GTK_SIGNAL_FUNC (start_icon_drag), di); */
 	gtk_widget_dnd_drag_set (di->widget, TRUE, drag_types, ELEMENTS (drag_types));
 
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (desktop_icon_drag_request), di);
@@ -628,8 +628,10 @@ get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
 static int
 dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
-	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
-		dentry_execute (di);
+	if (event->button == 1){
+		if (event->type == GDK_2BUTTON_PRESS)
+			dentry_execute (di);
+
 		return TRUE;
 	}
 

@@ -43,8 +43,11 @@
 #undef STAT_STATFS4
 #undef STAT_STATVFS
 
-/* Does your system provide the umode_t typedef? */
+/* Define umode_t if your system does not provide it */
 #undef umode_t
+
+/* Define nlink_t if your system does not provide it */
+#undef nlink_t
 
 /* Does the file command accepts the -L option */
 #undef FILE_L

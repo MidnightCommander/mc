@@ -6,5 +6,6 @@ void gnome_compare_panels (void);
 void gnome_open_terminal (void);
 void gnome_about_cmd (void);
 void gnome_quit_cmd (void);
+void gnome_open_panel (GtkWidget *widget, WPanel *panel);
 
 #endif /* __GCMD_H */
