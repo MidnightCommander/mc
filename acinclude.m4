@@ -14,7 +14,8 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 #include <linux/ext2_fs.h>])
     if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
     then
-      AC_DEFINE(USE_EXT2FSLIB)
+      AC_DEFINE(USE_EXT2FSLIB, 1,
+		[Define to enable undelete support on ext2])
       ext2fs_undel=yes
       EXT2FS_UNDEL_LIBS="-lext2fs -lcom_err"
     fi
@@ -92,7 +93,7 @@ AC_DEFUN([MC_WITH_VFS],[
   AC_ARG_WITH(samba,
   	  [--with-samba	            Support smb virtual file system],[
   	  if test "x$withval" != "xno"; then
-  		  AC_DEFINE(WITH_SMBFS)
+  		  AC_DEFINE(WITH_SMBFS, 1, [Define to enable VFS over SMB])
 	          vfs_flags="$vfs_flags, smbfs"
 		  smbfs="smbfs.o"
 		  SAMBAFILES="\$(SAMBAFILES)"
@@ -108,15 +109,16 @@ AC_DEFUN([MC_WITH_VFS],[
   AC_ARG_WITH(termnet,
 	  [--with-termnet             If you want a termified net support],[
 	  if test x$withval = xyes; then
-		  AC_DEFINE(USE_TERMNET)
+		  AC_DEFINE(USE_TERMNET, 1,
+			    [Define to enable `term' firewall support])
 		  termnet=true		
 	  fi
   ])
 
   TERMNET=""
-  AC_DEFINE(USE_VFS)
+  AC_DEFINE(USE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
-     AC_DEFINE(USE_NETCODE)
+     AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])
   fi
   mcserv=
   if test $have_socket = yes; then
@@ -171,7 +173,8 @@ int main ()
     return 0;
 }
 ],[
-AC_DEFINE(HAVE_STRUCT_LINGER)
+AC_DEFINE(HAVE_STRUCT_LINGER, 1,
+	  [Define if `struct linger' is available])
 av_struct_linger=yes
 ],[
 av_struct_linger=no
@@ -215,7 +218,8 @@ int main ()
 CFLAGS="$OCFLAGS"
 ])
 if test x$ac_cv_dnamesize = xno; then
-    AC_DEFINE(NEED_EXTRA_DIRENT_BUFFER)
+    AC_DEFINE(NEED_EXTRA_DIRENT_BUFFER, 1,
+	      [Define if using `struct dirent' can overwrite stack])
 fi
 AC_MSG_RESULT([$ac_cv_dnamesize])
 ])
@@ -263,7 +267,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	fu_cv_sys_d_ino_in_dirent=no)])
     AC_MSG_RESULT([$fu_cv_sys_d_ino_in_dirent])
     if test $fu_cv_sys_d_ino_in_dirent = yes; then
-      AC_DEFINE(D_INO_IN_DIRENT)
+      AC_DEFINE(D_INO_IN_DIRENT, 1,
+		[Define if `d_ino' is member of `struct directory'])
     fi
 
     # Determine how to get the list of mounted filesystems.
@@ -288,7 +293,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	AC_MSG_RESULT([$fu_cv_sys_mounted_getmntent2])
 	if test $fu_cv_sys_mounted_getmntent2 = yes; then
 	  list_mounted_fs=found
-	  AC_DEFINE(MOUNTED_GETMNTENT2)
+	  AC_DEFINE(MOUNTED_GETMNTENT2, 1,
+		    [Define if function `getmntent' takes 2 arguments])
 	fi
       fi
 
@@ -302,7 +308,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	AC_MSG_RESULT([$fu_cv_sys_mounted_getmntent1])
 	if test $fu_cv_sys_mounted_getmntent1 = yes; then
 	  list_mounted_fs=found
-	  AC_DEFINE(MOUNTED_GETMNTENT1)
+	  AC_DEFINE(MOUNTED_GETMNTENT1, 1,
+		    [Define if function `getmntent' takes 1 argument])
 	fi
       fi
 
@@ -323,7 +330,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_getsstat])
       if test $fu_cv_sys_mounted_getsstat = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_GETFSSTAT)
+	AC_DEFINE(MOUNTED_GETFSSTAT, 1,
+		  [Define if function `getfsstat' can be used])
       fi
     fi
 
@@ -337,7 +345,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_vmount])
       if test $fu_cv_sys_mounted_vmount = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_VMOUNT)
+	AC_DEFINE(MOUNTED_VMOUNT, 1,
+		  [Define if function `mntctl' and `struct vmount' can be used])
       fi
     fi
 
@@ -354,7 +363,9 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_fread_fstyp])
       if test $fu_cv_sys_mounted_fread_fstyp = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_FREAD_FSTYP)
+	AC_DEFINE(MOUNTED_FREAD_FSTYP, 1,
+		  [Define if sys/statfs.h, sys/fstyp.h and mnttab.h
+can be used together])
       fi
     fi
 
@@ -375,7 +386,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_getmntinfo])
       if test $fu_cv_sys_mounted_getmntinfo = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_GETMNTINFO)
+	AC_DEFINE(MOUNTED_GETMNTINFO, 1,
+		  [Define if `getmntinfo' function can be used])
 	AC_MSG_CHECKING([if struct statfs has f_fstypename])
 	AC_CACHE_VAL(fu_cv_sys_mounted_f_fstypename,
 	  [AC_EGREP_HEADER([f_fstypename],
@@ -385,7 +397,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	  ])
 	AC_MSG_RESULT([$fu_cv_sys_mounted_f_fstypename])
         if test $fu_cv_sys_mounted_f_fstypename = yes; then
-	  AC_DEFINE(HAVE_F_FSTYPENAME)
+	  AC_DEFINE(HAVE_F_FSTYPENAME, 1,
+		    [Define if `f_fstypename' is member of `struct statfs'])
 	fi
       fi
     fi
@@ -402,7 +415,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_getmnt])
       if test $fu_cv_sys_mounted_getmnt = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_GETMNT)
+	AC_DEFINE(MOUNTED_GETMNT, 1,
+		  [Define if `getmnt' function can be used])
       fi
     fi
 
@@ -416,7 +430,8 @@ AC_DEFUN([AC_GET_FS_INFO], [
       AC_MSG_RESULT([$fu_cv_sys_mounted_fread])
       if test $fu_cv_sys_mounted_fread = yes; then
 	list_mounted_fs=found
-	AC_DEFINE(MOUNTED_FREAD)
+	AC_DEFINE(MOUNTED_FREAD, 1,
+		 [Define if it's possible to resort to fread on /etc/mnttab])
       fi
     fi
 
@@ -440,7 +455,8 @@ dnl job is to detect a method to get file system information.
       AC_CHECK_FUNCS(statvfs)
       if test $ac_cv_func_statvfs = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATVFS)
+	AC_DEFINE(STAT_STATVFS, 1,
+		  [Define if function `statfs' can be used])
       fi
     fi
 
@@ -464,7 +480,8 @@ dnl job is to detect a method to get file system information.
       AC_MSG_RESULT($fu_cv_sys_stat_statfs3_osf1)
       if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATFS3_OSF1)
+	AC_DEFINE(STAT_STATFS3_OSF1, 1,
+		  [Define if function `statfs' takes 3 arguments])
       fi
     fi
 
@@ -494,7 +511,9 @@ dnl job is to detect a method to get file system information.
       AC_MSG_RESULT([$fu_cv_sys_stat_statfs2_bsize])
       if test $fu_cv_sys_stat_statfs2_bsize = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATFS2_BSIZE)
+	AC_DEFINE(STAT_STATFS2_BSIZE, 1,
+		  [Define if function `statfs' takes two arguments and
+`bsize' is member of `struct statfs'])
       fi
     fi
 
@@ -515,7 +534,8 @@ dnl job is to detect a method to get file system information.
       AC_MSG_RESULT([$fu_cv_sys_stat_statfs4])
       if test $fu_cv_sys_stat_statfs4 = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATFS4)
+	AC_DEFINE(STAT_STATFS4, 1,
+		  [Define if function `statfs' takes 4 arguments])
       fi
     fi
 
@@ -543,7 +563,9 @@ dnl job is to detect a method to get file system information.
       AC_MSG_RESULT([$fu_cv_sys_stat_statfs2_fsize])
       if test $fu_cv_sys_stat_statfs2_fsize = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATFS2_FSIZE)
+	AC_DEFINE(STAT_STATFS2_FSIZE, 1,
+		  [Define if function `statfs' takes two arguments and
+`fsize' is member of `struct statfs'])
       fi
     fi
 
@@ -575,7 +597,9 @@ dnl job is to detect a method to get file system information.
       AC_MSG_RESULT([$fu_cv_sys_stat_fs_data])
       if test $fu_cv_sys_stat_fs_data = yes; then
 	space=yes
-	AC_DEFINE(STAT_STATFS2_FS_DATA)
+	AC_DEFINE(STAT_STATFS2_FS_DATA, 1,
+		  [Define if function `statfs' takes two arguments
+and uses `struct fs_data'])
       fi
     fi
 
@@ -614,25 +638,27 @@ rm -f conftest*]
 )
 
 AC_DEFUN([AC_USE_TERMINFO], [
-	AC_DEFINE(SLANG_TERMINFO)
+	AC_DEFINE(SLANG_TERMINFO, 1, [Define to use S-Lang with terminfo])
 	AC_MSG_RESULT([Using SLang screen manager/terminfo])
 	slang_term=" with terminfo"
 ])
 
 AC_DEFUN([AC_USE_TERMCAP], [
 	AC_MSG_RESULT([Using SLang screen manager/termcap])
-	AC_DEFINE(USE_TERMCAP)
+	AC_DEFINE(USE_TERMCAP, 1, [[Define to use termcap library]])
 	dnl Check with $LIBS at the end so that it works with ELF libs.
 	AC_CHECK_LIB(termcap, tgoto, LIBS="$LIBS -ltermcap", , $LIBS)
 	slang_term=" with termcap"
 ])
 	
 AC_DEFUN([AC_WITH_SLANG], [
-	AC_DEFINE(HAVE_SLANG)
+	AC_DEFINE(HAVE_SLANG, 1,
+		  [Define to use S-Lang library for screen management])
 	search_ncurses=false
 	if $slang_use_system_installed_lib
 	then
-	    AC_DEFINE(HAVE_SYSTEM_SLANG)
+	    AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
+		      [Define to use S-Lang library installed on the system])
 	    MCLIBS="-lslang $MCLIBS"
 	    screen_manager="SLang (system-installed library)"
 	    AC_MSG_RESULT([Using system installed SLang library])
@@ -684,7 +710,8 @@ AC_DEFUN([AC_WITH_SLANG], [
 )
 
 AC_DEFUN([AC_WITH_EDIT], [
-	AC_DEFINE(USE_INTERNAL_EDIT)
+	AC_DEFINE(USE_INTERNAL_EDIT, 1,
+		  [Define to enable internal editor])
 	LIBEDIT_A="libedit.a"
 	MCEDIT="mcedit"
 	LEDIT="-ledit"
@@ -717,7 +744,8 @@ AC_DEFUN([AC_NCURSES], [
 	    CPPFLAGS="$CPPFLAGS $4"
 	    search_ncurses=false
 	    screen_manager=$5
-	    AC_DEFINE(USE_NCURSES)
+	    AC_DEFINE(USE_NCURSES, 1,
+		      [Define to use ncurses for screen management])
 	fi
     fi
 ])

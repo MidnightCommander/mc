@@ -119,7 +119,8 @@ linux*)
 		[AC_CHECK_HEADERS(shadow/shadow.h,,
 			[shadow_header=no])])
 	if test $shadow_header = yes; then
-	    AC_DEFINE(LINUX_SHADOW)
+	    AC_DEFINE(LINUX_SHADOW, 1,
+		      [Define to use shadow passwords on Linux])
 	    SHADOWLIB=-lshadow
 	fi])
     ;;
@@ -141,7 +142,8 @@ NEED_CRYPT_PROTOTYPE=no])
     fi
 fi
 if test x$NEED_CRYPT_PROTOTYPE = xyes; then
-AC_DEFINE(NEED_CRYPT_PROTOTYPE)
+AC_DEFINE(NEED_CRYPT_PROTOTYPE, 1,
+	  [Define if function `crypt' needs a prototype])
 fi
 
 dnl
@@ -215,7 +217,8 @@ AC_ARG_WITH(tm-x-support,
 	[if test x$withval = xyes; then
 		MCCFLAGS="$X_CFLAGS"
 		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
-		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT)
+		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
+			  [Define to enable getting events from X Window System])
 		textmode_x11_support="yes"
 	fi
 ])
@@ -256,7 +259,9 @@ dnl Sequent wants getprocessstats
 dnl
 AC_CHECK_LIB(seq, get_process_stats, [
 	LIBS="$LIBS -lseq"
-	AC_DEFINE(HAVE_GET_PROCESS_STATS)])
+	AC_DEFINE(HAVE_GET_PROCESS_STATS, 1,
+		  [Define if you have function `get_process_stats' and
+have to use that instead of gettimeofday])])
 
 MC_VFS_CHECKS
 
@@ -294,7 +299,8 @@ linux*)
 			LIBS="$LIBS -L$withval/lib"
 			CPPFLAGS="$CPPFLAGS -I$withval/include"
 		fi
-		AC_DEFINE(HAVE_LIBGPM)
+		AC_DEFINE(HAVE_LIBGPM, 1,
+			  [Define to enable gpm mouse support on Linux])
 		mouse_lib="GPM and xterm"
 		MCLIBS="-lgpm $MCLIBS"
 	fi],
@@ -464,8 +470,10 @@ AC_ARG_WITH(subshell,
 	[result=no
 	if test x$withval = xoptional
 	then
-		AC_DEFINE(SUBSHELL_OPTIONAL)
-		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
+		AC_DEFINE(SUBSHELL_OPTIONAL, 1,
+			  [Define to make subshell support optional])
+		AC_DEFINE(HAVE_SUBSHELL_SUPPORT, 1,
+			  [Define to enable subshell support])
 		result="optional"
 	fi
 	if test x$withval = xyes
@@ -495,7 +503,8 @@ AC_ARG_WITH(mad,
 [--with-mad                 Developers only: activates MAD (memory debugger)],
 	[if test x$withval = xyes; then
 	mem_debug="Janne's MAD library"
-	AC_DEFINE(HAVE_MAD)
+	AC_DEFINE(HAVE_MAD, 1,
+		  [Define to use Memory Allocation Debugger (MAD)])
 	AC_MSG_RESULT([compiling with memory leak detector])
 fi])
 
@@ -662,7 +671,9 @@ EOF
         AC_MSG_RESULT([$ncurses_version])
 	case "$ncurses_version" in
 	4.[[01]])
-            AC_DEFINE(NCURSES_970530,2)
+            AC_DEFINE(NCURSES_970530,2,
+		      [Define according to ncurses version,
+see configure.in for details])
             ;;
 	1.9.9g)
             AC_DEFINE(NCURSES_970530,1)
@@ -721,7 +732,8 @@ linux*)
     dnl On Linux, check for PAM authentication available
     dnl
     AC_CHECK_LIB(pam, pam_start, [
-	AC_DEFINE(HAVE_PAM)
+	AC_DEFINE(HAVE_PAM, 1,
+		  [Define if PAM (Pluggable Authentication Modules) is available])
 	PAMLIBS="-lpam -ldl"
     ],[],[-ldl])
     ;;
@@ -768,7 +780,9 @@ SLang*)
    return 0;
 ],
 			[LIBS="$LIBS -lcurses"
-			AC_DEFINE(USE_SETUPTERM)])
+			AC_DEFINE(USE_SETUPTERM, 1,
+				  [Define to use function `setupterm'
+from `curses' library in S-Lang])])
 		])
 	esac
 	;;
@@ -796,6 +810,8 @@ AM_CONDITIONAL(INCLUDED_SLANG,
 	       [test "x$slang_use_system_installed_lib" = xfalse])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
+
+AH_BOTTOM([#include <extraconf.h>])
 
 AC_OUTPUT([
 Makefile 
