@@ -11,7 +11,7 @@
 
 2004-08-26  Pavel S. Shirshov  <pavelsh@mail.ru>
 
-	* direntry.c: Use g_strlcpy instead strncpy for fix buffer overrun
+	* direntry.c: Use g_strlcpy() instead strncpy() for fix buffer overrun
 	* extfs.c: Likewise.
 	* mcfs.c: Likewise.
 	* smbfs.c: Likewise.
