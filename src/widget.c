@@ -152,7 +152,7 @@ button_event (Gpm_Event *event, WButton *b)
 	dlg_select_widget (h, b);
 	if (event->type & GPM_UP){
 	    button_callback (b, WIDGET_KEY, ' ');
-	    (*h->callback) (h, ' ', DLG_POST_KEY);
+	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
     }
@@ -273,7 +273,7 @@ radio_callback (WRadio *r, int Msg, int Par)
 	switch (Par){
 	case ' ':
 	    r->sel = r->pos;
-    	    (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
+    	    (*h->callback) (h, DLG_ACTION, h->current->dlg_id);
 	    radio_callback (r, WIDGET_FOCUS, ' ');
 	    return 1;
 
@@ -295,7 +295,7 @@ radio_callback (WRadio *r, int Msg, int Par)
 	return 0;
 
     case WIDGET_CURSOR:
-	(*h->callback) (h, h->current->dlg_id, DLG_ACTION);
+	(*h->callback) (h, DLG_ACTION, h->current->dlg_id);
 	radio_callback (r, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	break;
@@ -339,7 +339,7 @@ radio_event (Gpm_Event *event, WRadio *r)
 	if (event->type & GPM_UP){
 	    radio_callback (r, WIDGET_KEY, ' ');
 	    radio_callback (r, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, ' ', DLG_POST_KEY);
+	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
     }
@@ -400,7 +400,7 @@ check_callback (WCheck *c, int Msg, int Par)
 	    break;
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
-        (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
+        (*h->callback) (h, DLG_ACTION, h->current->dlg_id);
 	check_callback (c, WIDGET_FOCUS, ' ');
 	return 1;
 
@@ -435,7 +435,7 @@ check_event (Gpm_Event *event, WCheck *c)
 	if (event->type & GPM_UP){
 	    check_callback (c, WIDGET_KEY, ' ');
 	    check_callback (c, WIDGET_FOCUS, 0);
-	    (*h->callback) (h, ' ', DLG_POST_KEY);
+	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
     }

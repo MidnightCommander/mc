@@ -1,5 +1,8 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c: Fix remaining callback calls.
+	* widget.c: Likewise.
+
 	* dlg.h: Use new types for dialog callbacks.
 	(dlg_cb_fn): Swap msg and parm arguments for consistency with
 	widget callbacks.  Adjust all dependencies.

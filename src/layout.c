@@ -782,8 +782,8 @@ change_screen_size (void)
     setup_panels ();
 
     /* Inform currently running dialog */
-    (*current_dlg->callback) (current_dlg, current_dlg->current->dlg_id,
-			      DLG_RESIZE);
+    (*current_dlg->callback) (current_dlg, DLG_RESIZE,
+			      current_dlg->current->dlg_id);
 
 #ifdef RESIZABLE_MENUBAR
     menubar_arrange (the_menubar);
