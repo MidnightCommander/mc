@@ -270,18 +270,18 @@ tilde_expand (const char *directory)
 
     p = directory + 1;
 
-    q = strchr (p, PATH_SEP);
-
     /* d = "~" or d = "~/" */
     if (!(*p) || (*p == PATH_SEP)) {
 	passwd = getpwuid (geteuid ());
 	q = (*p == PATH_SEP) ? p + 1 : "";
     } else {
+	q = strchr (p, PATH_SEP);
 	if (!q) {
 	    passwd = getpwnam (p);
 	} else {
 	    name = g_strndup (p, q - p);
 	    passwd = getpwnam (name);
+	    q++;
 	    g_free (name);
 	}
     }
