@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: mc VERSION\n"
+"Project-Id-Version: mc 4.5.0\n"
 "POT-Creation-Date: 1998-09-28 22:03+0200\n"
-"PO-Revision-Date: 1998-09-26 01:56:37+0900\n"
+"PO-Revision-Date: 1998-09-29 06:58:11+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1163,11 +1163,11 @@ msgstr "cd"
 
 #: gnome/boxes.c:835 src/boxes.c:835
 msgid "Symbolic link filename:"
-msgstr "심볼릭링크 파일이름:"
+msgstr "심볼릭링크 파일명:"
 
 #: gnome/boxes.c:837 src/boxes.c:837
 msgid "Existing filename (filename symlink will point to):"
-msgstr "대상 파일이름 (심볼릭링크 파일이 가리킬 파일):"
+msgstr "대상 파일명 (심볼릭링크 파일이 가리킬 파일):"
 
 #: gnome/boxes.c:866 src/boxes.c:866
 msgid "Running "
@@ -1365,11 +1365,11 @@ msgstr "선택된 파일이 있는 데, 그래도 자료방을 바꿀까요?"
 
 #: gnome/cmd.c:280 src/cmd.c:280
 msgid " View file "
-msgstr ""
+msgstr " 파일 보기 "
 
 #: gnome/cmd.c:280 src/cmd.c:280
 msgid " Filename:"
-msgstr ""
+msgstr " 파일명:"
 
 #: gnome/cmd.c:297 src/cmd.c:297
 msgid " Filtered view "
@@ -1393,7 +1393,7 @@ msgstr " 거르개 "
 
 #: gnome/cmd.c:437 src/cmd.c:437
 msgid " Set expression for filtering filenames"
-msgstr " 필터링할 파일 이름 설정 "
+msgstr " 필터링할 파일명 설정 "
 
 #: gnome/cmd.c:521 src/cmd.c:521
 msgid " Select "
@@ -2343,7 +2343,7 @@ msgstr "시작위치:"
 
 #: gnome/find.c:157 src/find.c:157
 msgid "Filename:"
-msgstr "파일이름:"
+msgstr "파일명:"
 
 #: gnome/find.c:157 src/find.c:157
 msgid "Content: "
@@ -2704,7 +2704,7 @@ msgstr "이 풀그림 정보"
 
 #: gnome/glayout.c:345
 msgid "_File"
-msgstr ""
+msgstr "파일(_F)"
 
 #: gnome/glayout.c:346
 msgid "Window"
@@ -2724,7 +2724,7 @@ msgstr "탁상"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
-msgstr "파일이름"
+msgstr "파일명"
 
 #: gnome/gprop.c:67
 msgid "Full name: "
@@ -4811,6 +4811,3 @@ msgstr ""
 "흠,...\n"
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
-
-#~ msgid "&Continue"
-#~ msgstr "계속(&C)"
