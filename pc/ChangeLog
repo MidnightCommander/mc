@@ -1,0 +1,5 @@
+Fri May  1 17:33:11 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+
+	* chmod.c: Updated call to update_panels()
+
+	* config.h, Makefile.MIN: Support for MinGW added

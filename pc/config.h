@@ -107,6 +107,25 @@ typedef unsigned int umode_t;
 
 #endif /* __EMX__ */
 
+#ifdef __MINGW32__
+
+#define S_IRGRP         0000040
+#define S_IWGRP         0000020
+#define S_IXGRP         0000010
+#define S_IROTH         0000004
+#define S_IWOTH         0000002
+#define S_IXOTH         0000001
+
+#define pipe(p)  _pipe(p, 4096, 0x8000 /* O_BINARY */)
+
+typedef int mode_t;
+typedef unsigned int nlink_t;
+typedef int gid_t;
+typedef int uid_t;
+typedef int pid_t;
+
+#endif /* __MINGW32__ */
+
 #ifdef _MSC_VER
 
 #pragma include_alias(<utime.h>, <sys/utime.h>)
