@@ -759,7 +759,8 @@ void edit_delete_macro_cmd (WEdit * edit)
     int command;
 
 #ifdef MIDNIGHT
-    command = CK_Macro (edit_raw_key_query (_ (" Delete Macro "), _ (" Press macro hotkey: "), 1));
+    command = edit_raw_key_query (_ (" Delete Macro "),
+				  _ (" Press macro hotkey: "), 1);
 #else
 /* This heads the 'Delete Macro' dialog box */
 #ifdef GTK

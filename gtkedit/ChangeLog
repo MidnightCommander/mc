@@ -1,5 +1,8 @@
 2001-02-26  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_delete_macro_cmd) [MIDNIGHT]: Don't use
+	CK_Macro on the argument to edit_delete_macro().
+
 	* edit.c (edit_init_file): Remove, it's useless. All the
 	necessary files should be created when needed.
 	* edit.h: Remove declaration of edit_init_file().
