@@ -1,4 +1,4 @@
-Midnight Commander (c) 1995-1997 The Free Software Foundation
+Midnight Commander (c) 1995-2001 The Free Software Foundation
 Dritta: Usa C-x t per copiare i file selezionati sulla linea di comando.
 Dritta: Usa C-x p per copiare il percorso corrente sulla linea di comando.
 Dritta: Completamento: usa M-Tab (o Esc+Tab).  Due volte per la lista.
@@ -8,7 +8,6 @@ Dritta: Stanco di questi messaggi? Disattivali dal menu Opzioni/Aspetto.
 Dritta: Selezione directory: inserisci uno slash alla fine della selezione.
 Dritta: Se al tuo terminale mancano i tasti funzione usa ESC+numero tasto.
 Dritta: L'URL del Midnight Commander è: http://www.gnome.org/mc/
-Dritta: L'ultima versione di mc è in: ftp://ftp.gnome.org/pub/GNOME/sources/mc
 Dritta: Prego spedire i bug report a mc-devel@gnome.org
 Dritta: La home page del Midnight Commander: http://www.gnome.org/mc
 Dritta: Tab cambia il pannello corrente.

@@ -1,4 +1,4 @@
-Midnight Commander (c) 1995-1997, Free Software Foundation
+Midnight Commander (c) 1995-2001, Free Software Foundation
 Porada: Za pomoc± C-x t kopiuje siê nazwy zaznaczoych plików do wiersza poleceñ.
 Porada: Za pomoc± C-x p kopiuje siê nazwê bie¿±cej ¶cie¿ki do wiersza poleceñ.
 Porada: Uzupe³nianie: M-Tab (lub Esc+Tab). Podwójne wci¶niêcie wywo³uje listê.
@@ -8,7 +8,6 @@ Porada: Zmêczony poradami? Wy³±cz je w menu Opcje|Uk³ad...
 Porada: Wybieranie katalogów: dodaj uko¶nik na koñcu wzorca dopasowania.
 Porada: Je¶li w twoim terminalu brak klawiszy funkcyjnych, u¿yj Esc+numer.
 Porada: Witryna Midnight Commandera jest pod adresem http://www.gnome.org/mc/
-Porada: Najnowsza wersja MC pod adresem ftp://ftp.gnome.org/pub/GNOME/sources/mc
 Porada: Opis b³êdów (w jêzyku angielskim) wysy³aj na mc-devel@gnome.org
 Porada: Strona domowa Midnight Commandera pod adresem http://www.gnome.org/mc
 Porada: Za pomoc± klawisza Tab zmienia siê bie¿±cy panel.

@@ -1,4 +1,4 @@
-Midnight Commander (c) 1995-1999, Free Software Foundation
+Midnight Commander (c) 1995-2001, Free Software Foundation
 Tip: C-x t vlo¾í na pøíkazovou øádku oznaèené soubory.
 Tip: C-x p vlo¾í na pøíkazovou øádku jméno aktuálního adresáøe.
 Tip: K doplòování pou¾ijte M-Tab (nebo Esc+Tab). Dvojitým zadání získáte seznam.
@@ -8,7 +8,6 @@ Tip: Nechcete ji¾ vidìt tipy? Vypnìte je v Nastavení/Zobrazení/Dal¹í nastavení.
 Tip: Adresáøe vyberete pøidáním lomítka na konec vzorku.
 Tip: Pokud Vá¹ terminál nezní nebo nemá funkèní klávesy, pou¾ijte Esc+èíslo.
 Tip: Domácí stránka programu Midnight Commander je na http://www.gnome.org/mc/
-Tip: Poslední verze programu Midnight Commander je na ftp://ftp.gnome.org/pub/GNOME/sources/mc
 Tip: Zprávy o chybách posílejte na mc-devel@gnome.org (anglicky).
 Tip: Pomocí klávesy Tab zmìníte aktuální panel.
 Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.

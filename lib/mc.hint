@@ -1,4 +1,4 @@
-Midnight Commander (c) 1995-1997 The Free Software Foundation
+Midnight Commander (c) 1995-2001 The Free Software Foundation
 Hint: Use C-x t to copy tagged file names to the command line.
 Hint: Use C-x p to copy the current pathname to the command line.
 Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
@@ -8,7 +8,6 @@ Hint: Tired of these messages?  Turn them off from the Options/Layout menu.
 Hint: Selecting directories: add a slash to the end of the matching pattern.
 Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 Hint: There is a Midnight Commander URL: http://www.gnome.org/mc/
-Hint: The latest version of the Commander is in: ftp://ftp.gnome.org/pub/GNOME/sources/mc
 Hint: Please send any bug reports to mc-devel@gnome.org
 Hint: Midnight Commander home site: http://www.gnome.org/mc
 Hint: Tab changes your current panel.

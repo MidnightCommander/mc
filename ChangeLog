@@ -1,5 +1,15 @@
 2001-08-01  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.hint.nl: New file.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+	* lib/Makefile.am: Add mc.hint.nl.
+	* lib/mc.hint: Remove ftp site.  Update copyright.
+	* lib/mc.hint.cs: Likewise.
+	* lib/mc.hint.es: Likewise.
+	* lib/mc.hint.it: Likewise.
+	* lib/mc.hint.pl: Likewise.
+	* lib/mc.hint.ru: Likewise.  Shorten some lines.
+
 	* edit/Makefile.in: Allow running "make install" before "make all".
 	* gtkedit/Makefile.in: Likewise.
 
