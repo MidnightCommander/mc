@@ -1,5 +1,7 @@
 2004-01-23  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (canonicalize_pathname): Add support for UNC paths.
+
 	* utilunix.c (canonicalize_pathname): Return void to make it
 	clear that the conversion is done in place.  Adjust all callers.
 

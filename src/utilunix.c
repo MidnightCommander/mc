@@ -450,24 +450,37 @@ close_error_pipe (int error, char *text)
     return 1;
 }
 
-/* Canonicalize path, and return a new path. Do everything in situ.
-   The new path differs from path in:
-	Multiple `/'s are collapsed to a single `/'.
-	Leading `./'s and trailing `/.'s are removed.
-	Trailing `/'s are removed.
-	Non-leading `../'s and trailing `..'s are handled by removing
-	portions of the path. */
+/*
+ * Canonicalize path, and return a new path.  Do everything in place.
+ * The new path differs from path in:
+ *	Multiple `/'s are collapsed to a single `/'.
+ *	Leading `./'s and trailing `/.'s are removed.
+ *	Trailing `/'s are removed.
+ *	Non-leading `../'s and trailing `..'s are handled by removing
+ *	portions of the path.
+ * Well formed UNC paths are modified only in the local part.
+ */
 void
 canonicalize_pathname (char *path)
 {
     char *p, *s;
     int len;
+    char *lpath = path;	/* path without leading UNC part */
 
-    if (!path[0] || !path[1])
+    /* Detect and preserve UNC paths: //server/... */
+    if (path[0] == PATH_SEP && path[1] == PATH_SEP) {
+	p = path + 2;
+	while (p[0] && p[0] != '/')
+	    p++;
+	if (p[0] == '/' && p > path + 2)
+	    lpath = p;
+    }
+
+    if (!lpath[0] || !lpath[1])
 	return;
 
     /* Collapse multiple slashes */
-    p = path;
+    p = lpath;
     while (*p) {
 	if (p[0] == PATH_SEP && p[1] == PATH_SEP) {
 	    s = p + 1;
@@ -478,7 +491,7 @@ canonicalize_pathname (char *path)
     }
 
     /* Collapse "/./" -> "/" */
-    p = path;
+    p = lpath;
     while (*p) {
 	if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
 	    strcpy (p, p + 2);
@@ -487,39 +500,39 @@ canonicalize_pathname (char *path)
     }
 
     /* Remove trailing slashes */
-    p = path + strlen (path) - 1;
-    while (p > path && *p == PATH_SEP)
+    p = lpath + strlen (lpath) - 1;
+    while (p > lpath && *p == PATH_SEP)
 	*p-- = 0;
 
     /* Remove leading "./" */
-    if (path[0] == '.' && path[1] == PATH_SEP) {
-	if (path[2] == 0) {
-	    path[1] = 0;
+    if (lpath[0] == '.' && lpath[1] == PATH_SEP) {
+	if (lpath[2] == 0) {
+	    lpath[1] = 0;
 	    return;
 	} else {
-	    strcpy (path, path + 2);
+	    strcpy (lpath, lpath + 2);
 	}
     }
 
     /* Remove trailing "/" or "/." */
-    len = strlen (path);
+    len = strlen (lpath);
     if (len < 2)
 	return;
-    if (path[len - 1] == PATH_SEP) {
-	path[len - 1] = 0;
+    if (lpath[len - 1] == PATH_SEP) {
+	lpath[len - 1] = 0;
     } else {
-	if (path[len - 1] == '.' && path[len - 2] == PATH_SEP) {
+	if (lpath[len - 1] == '.' && lpath[len - 2] == PATH_SEP) {
 	    if (len == 2) {
-		path[1] = 0;
+		lpath[1] = 0;
 		return;
 	    } else {
-		path[len - 2] = 0;
+		lpath[len - 2] = 0;
 	    }
 	}
     }
 
     /* Collapse "/.." with the previous part of path */
-    p = path;
+    p = lpath;
     while (p[0] && p[1] && p[2]) {
 	if ((p[0] != PATH_SEP || p[1] != '.' || p[2] != '.')
 	    || (p[3] != PATH_SEP && p[3] != 0)) {
@@ -529,7 +542,7 @@ canonicalize_pathname (char *path)
 
 	/* search for the previous token */
 	s = p - 1;
-	while (s >= path && *s != PATH_SEP)
+	while (s >= lpath && *s != PATH_SEP)
 	    s--;
 
 	s++;
@@ -541,27 +554,27 @@ canonicalize_pathname (char *path)
 	}
 
 	if (p[3] != 0) {
-	    if (s == path && *s == PATH_SEP) {
+	    if (s == lpath && *s == PATH_SEP) {
 		/* "/../foo" -> "/foo" */
 		strcpy (s + 1, p + 4);
 	    } else {
 		/* "token/../foo" -> "foo" */
 		strcpy (s, p + 4);
 	    }
-	    p = (s > path) ? s - 1 : s;
+	    p = (s > lpath) ? s - 1 : s;
 	    continue;
 	}
 
 	/* trailing ".." */
-	if (s == path) {
+	if (s == lpath) {
 	    /* "token/.." -> "." */
-	    if (path[0] != PATH_SEP) {
-		path[0] = '.';
+	    if (lpath[0] != PATH_SEP) {
+		lpath[0] = '.';
 	    }
-	    path[1] = 0;
+	    lpath[1] = 0;
 	} else {
 	    /* "foo/token/.." -> "foo" */
-	    if (s == path + 1)
+	    if (s == lpath + 1)
 		s[0] = 0;
 	    else
 		s[-1] = 0;
