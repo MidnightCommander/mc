@@ -19,7 +19,7 @@ mcmfmt_SOURCES = mfmt.c
 
 cons_saver_SOURCES = cons.saver.c
 
-man2hlp_SOURCES = man2hlp.c
+man2hlp_SOURCES = man2hlp.c glibcompat.c
 
 if INCLUDED_SLANG
 SLANGLIB = ../slang/libmcslang.a
