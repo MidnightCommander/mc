@@ -1,3 +1,8 @@
+2005-03-17  Pavel Roskin  <proski@gnu.org>
+
+	* achown.c (update_permissions): Partly revert recent changes
+	because they cause infinite recusion.
+
 2005-03-10  Roland Illig  <roland.illig@gmx.de>
 
 	* x11conn.c: Separated X11 connection handling from key.c. Added
@@ -58,7 +63,7 @@
 
 2004-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * glibcompat.c: Add g_strlcat() declaration for glib 1.2.x
+	* glibcompat.c: Add g_strlcat() declaration for glib 1.2.x
 
 2005-02-11  Roland Illig  <roland.illig@gmx.de>
 

@@ -70,9 +70,9 @@ static struct {
     { B_SETALL, NORMAL_BUTTON, 4,  0, N_("Set &all")},
     { B_ENTER,  NARROW_BUTTON, 0, 47, ""},
     { B_ENTER,  NARROW_BUTTON, 0, 29, ""},
-    { B_ENTER,  NARROW_BUTTON, 0, 19, ""},
-    { B_ENTER,  NARROW_BUTTON, 0, 11, ""},
-    { B_ENTER,  NARROW_BUTTON, 0,  3, ""}
+    { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
+    { B_ENTER,  NARROW_BUTTON, 0, 11, "   "},
+    { B_ENTER,  NARROW_BUTTON, 0,  3, "   "}
 };
 
 static WButton *b_att[3];	/* permission */
@@ -138,13 +138,9 @@ static void set_perm_by_flags (char *s, int f_p)
 
 static void update_permissions (void)
 {
-    char flags[] = "---";
-    set_perm_by_flags (flags, 0);
-    button_set_text (b_att[0], flags);
-    set_perm_by_flags (flags, 3);
-    button_set_text (b_att[1], flags);
-    set_perm_by_flags (flags, 6);
-    button_set_text (b_att[2], flags);
+    set_perm_by_flags (b_att[0]->text, 0);
+    set_perm_by_flags (b_att[1]->text, 3);
+    set_perm_by_flags (b_att[2]->text, 6);
 }
 
 static umode_t get_perm (char *s, int base)
