@@ -1225,6 +1225,7 @@ panelization to run the following command:
 .nf
 find . -type l -print
 .fi
+.PP
 Upon command completion, the directory contents of the panel will no
 longer be the directory listing of the current directory, but all the
 files that are symbolic links.
@@ -1575,18 +1576,18 @@ if you have the option on, you have to rescan the directory manually
 After executing your commands, the Midnight Commander can pause, so
 that you can examine the output of the command.  There are three
 possible settings for this variable:
-.IP
-.I Never
+.PP
+.I Never.
 Means that you do not want to see the output of your command.  If you
 are using the Linux or SCO console or an xterm, you will be able to see the
 output of the command by typing C-o.
-.IP
-.I "On dumb terminals"
+.PP
+.I On dumb terminals.
 You will get the pause message on terminals that are not capable of
 showing the output of the last command executed (any terminal that is
 not an xterm or the Linux console).
-.IP
-.I Always
+.PP
+.I Always.
 The program will pause after executing all of your commands.
 .PP
 .B Other Options
@@ -1898,7 +1899,7 @@ the command shell for execution.  Thus it may not handle all of the
 nice macro expansion and substitution that your shell does, although it
 does some of them:
 .PP
-.I Tilde substitution
+.I Tilde substitution.
 The (~) will be substituted with your home directory, if you append a
 username after the tilde, then it will be substituted with the login
 directory of the the specified user.
@@ -1906,12 +1907,12 @@ directory of the the specified user.
 For example, ~guest is the home directory for the user guest, while
 ~/guest is the directory guest in your home directory.
 .PP
-.I Previous directory
+.I Previous directory.
 You can jump to the directory you were previously by using the special
 directory name '-' like this:
 .B cd -
 .PP
-.I CDPATH directories
+.I CDPATH directories.
 If the directory specified to the
 .B cd
 command is not in the current directory, then The Midnight Commander
@@ -2949,33 +2950,33 @@ changed by editing the setup file.
 .PP
 These variables may be set in your ~/.mc/ini file:
 .PP
-.I clear_before_exec.
+.I clear_before_exec
 .IP
 By default the Midnight Commander clears the screen before executing a
 command. If you would prefer to see the output of the command at the
 bottom of the screen, edit your ~/.mc/ini file and change the value of
 the field clear_before_exec to 0.
 .PP
-.I confirm_view_dir.
+.I confirm_view_dir
 .IP
 If you press F3 on a directory, normally MC enters that directory. If
 this flag is set to 1, then MC will ask for confirmation before
 changing the directory if you have files tagged.
 .PP
-.I ftpfs_retry_seconds.
+.I ftpfs_retry_seconds
 .IP
 This value is the number of seconds the Midnight Commander will wait
 before attempting to reconnect to an ftp server that has denied the login.
 If the value is zero, the login will no be retried.
 .PP
-.I ftpfs_use_passive_connections.
+.I ftpfs_use_passive_connections
 .IP
 This option is off by default.  This makes the ftpfs code use the
 passive open mode for transferring files.  This is used by people that
 are behind a filtering packet router.  This option just works if you
 are not using an ftp proxy.
 .PP
-.I max_dirt_limit.
+.I max_dirt_limit
 .IP
 Specifies how many screen updates can be skipped at most in the internal
 file viewer.  Normally this value is not significant, because the code
@@ -2987,12 +2988,12 @@ too jumpy.
 It seems that setting max_dirt_limit to 10 causes the best behavior,
 and that is the default value.
 .PP
-.I mouse_move_pages.
+.I mouse_move_pages
 .IP
 Controls whenever scrolling with the mouse is done by pages or line by
 line on the panels.
 .PP
-.I mouse_move_pages_viewer.
+.I mouse_move_pages_viewer
 .IP
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
@@ -3005,7 +3006,6 @@ ESC key will act as a prefix key for one second, and if no extra keys
 have arrived, then the ESC key is interpreted as a cancel key (ESC
 ESC).
 .PP
-.PP
 .I only_leading_plus_minus
 .IP
 Allow special treatment for '+', '-', '*' in the command line (select,
@@ -3013,6 +3013,7 @@ unselect, reverse selection) only if the command line is empty.  You
 don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
+.PP
 .I panel_scroll_pages
 .IP
 If set (the default), panel will scroll by half the display when the
