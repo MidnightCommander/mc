@@ -1,3 +1,8 @@
+2003-01-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit-widget.h (struct macro): Move definition ...
+	* edit.h: ... here to fix compilation on HP-UX.
+
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
 	* editkeys.c: Move key maps to the file scope.  Put common keys

@@ -7,11 +7,6 @@
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
 
-struct macro {
-    short command;
-    short ch;
-};
-
 #define BOOK_MARK_COLOR ((25 << 8) | 5)
 #define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
 

@@ -102,9 +102,14 @@
 #define MARK_2 700000000
 #define KEY_PRESS 1400000000
 
-/*Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
+/* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
 #define TAB_SIZE		option_tab_spacing
 #define HALF_TAB_SIZE		((int) option_tab_spacing / 2)
+
+struct macro {
+    short command;
+    short ch;
+};
 
 struct selection {
    unsigned char * text;
@@ -221,7 +226,6 @@ void edit_left_word_move (WEdit * edit, int s);
 void edit_right_word_move (WEdit * edit, int s);
 void edit_get_selection (WEdit * edit);
 
-struct macro;
 int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n);
 int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k);
 void edit_delete_macro_cmd (WEdit * edit);
