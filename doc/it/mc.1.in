@@ -643,7 +643,7 @@ e
 .B "Destra"
 \&.
 .PP
-.\"NODE ""    Listing Mode..."
+.\"NODE "    Listing Mode..."
 .SH "    Modalità Lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
@@ -1570,320 +1570,326 @@ anche un piccolo numero di altre opzioni.
 Le opzioni in questa finestra sono divise in tre gruppi:
 Opzioni del pannello, Pausa dopo l'esecuzione e Altre opzioni.
 .PP
-.B Panel Options
+.B Opzioni del pannello
 .PP
-.I Show Backup Files.
-If enabled, the Midnight Commander will show files ending with a tilde.
-Otherwise, they won't be shown (like GNU's ls option -B).
+.I mostra file di backup.
+Se abilitata, il Midnight Commander mostrerà i file che terminano con una tilde.
+Altrimenti essi non verranno mostrati (come nell'opzione -B del comando GNU ls).
 .PP
-.I Show Hidden Files.
-If enabled, the Midnight Commander will show all files that start with
-a dot (like ls -a).
+.I Mostra file nascosti.
+Se abilitata, il Midnight Commander mostrerà tutti i file che cominciano con
+un punto (come ls -a).
 .PP
-.I Mark moves down.
-If enabled, the selection bar will move down when you mark a file (with
-either C-t or the Insert key).
+.I cursore in basso mentre seleziona.
+Se abilitata, la barra di selezione si muoverà in basso dopo aver selezionato
+un file (sia con C-t che con il tasto Ins).
 .PP
-.I Drop down menus.
-When this option is enabled, the pull down menus will be activated as
-soon as you press the 
+.I Rilascia menu a cascata.
+Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
+si preme il tasto
 .B F9
-key.  Otherwise, you will only get the menu title, and you will have
-to activate the menu either with the arrow keys or with the hotkeys.
-It is recommended if you are using hotkeys.
+ .  Altrimenti si avrà solo il titolo del menu e si dovrà attivare il menu con
+i tasti freccia o con i tasti di selezione rapida.
+E' raccomanda se si sta usando i tasti di selezione rapida.
 .PP
-.I Mix all files.
-If this option is enabled, all files and directories are shown mixed
-together.  If the option is off, directories (and links to directories)
-are shown at the beginning of the listing, and other files below.
+.I Mescola tutti i file.
+Se quest'opzione è abilitata, tutti i file e directory vengono mostrati
+mescolati insieme, Se l'opzione è spenta, le directory (e i collegamenti a
+directory) vengono mostrati all'inizio dell'elenco e gli altri file più
+sotto.
 .PP
-.I Fast directory reload.
-If this option is enabled, the Midnight Commander will use a trick to
-determine if the directory contents have changed.  The trick is to reload
-the directory only if the i-node of the directory has changed; this means
-that reloads only happen when files are created or deleted.  If what
-changes is the i-node for a file in the directory (file size changes,
-mode or owner changes, etc) the display is not updated.  In these cases,
-if you have the option on, you have to rescan the directory manually
-(with C-r).
+.I Aggiornamento rapido directory.
+Se quest'opzione è abilitata, il Midnight Commander userà un trucco per
+determinare se i contenuti della directory sono cambiati. Il trucco consiste
+nel ricaricare la directory solo se l'i-node della directory è cambiato.
+Ciò significa che la ricarica accade solo quando i file vengono creati o
+cancellati. Se quello che cambia è l'i-node di un file nella directory 
+(cambia l'ampiezza di un file, cambiano il proprietario o le flag, etc.)
+la visualizzazione non viene aggiornata. In questi casi se l'opzione è
+abilitata, è necessario ricaricare la directory manualmente (con C-r).
 .PP
-.B Pause after run
+.B Pausa dopo l'esecuzione
 .PP
-After executing your commands, the Midnight Commander can pause, so
-that you can examine the output of the command.  There are three
-possible settings for this variable:
+Dopo l'esecuzione di comandi, il Midnight Commander può fermarsi, in
+maniera da permettere di esaminare il risultato del comando. Ci sono
+tre possibili impostazioni per questa variabile:
 .IP
-.I Never
-Means that you do not want to see the output of your command.  If you
-are using the Linux or SCO console or an xterm, you will be able to see the
-output of the command by typing C-o.
+.I Mai
+Significa che non si vuole vedere il risultato del comando. Se si sta
+usando la console Linux o SCO o un xterm, ci sarà la possibilità di vedere
+il risultato del comando premendo C-o.
 .IP
-.I "On dumb terminals"
-You will get the pause message on terminals that are not capable of
-showing the output of the last command executed (any terminal that is
-not an xterm or the Linux console).
+.I su terminali stupidi
+Si avrà il messaggio di pausa su quei terminali che non sono in grado di
+mostrare il risultato dell'ultimo comando eseguito (qualsiasi terminale che
+non sia un xterm o una console Linux o SCO).
 .IP
-.I Always
-The program will pause after executing all of your commands.
+.I Sempre
+Il programma si fermerà dopo l'esecuzione di tutti i comandi.
 .PP
-.B Other Options
+.B Altre opzioni
 .PP
-.I Verbose operation.
-This toggles whether the file Copy, Rename and Delete operations are
-verbose (i.e., display a dialog box for each operation). If you have a
-slow terminal, you may wish to disable the verbose operation. It is
-automatically turned off if the speed of your terminal is less than
-9600 bps.
+.I Operazioni prolisse.
+Quest'opzione decide se le operationi di Copia, Spostamento o Cancellazione
+saranno prolisse (cioè se mostreranno una finestra di dialogo per ogni 
+operazione). Se si ha un terminale lento potresti voler disabilitare 
+quest'opzione. Viene automaticamente spenta se la velocità del proprio 
+terminale è inferiore a 9600 bps.
 .PP
-.I Compute totals.
-If this option is enabled, the Midnight
-Commander computes total byte sizes and total number of files
-prior to any Copy, Rename and Delete operations. This will
-provide you with a more accurate progress bar at the expense
-of some speed. This option has no effect, if 
-.I Verbose operation
-is disabled.
+.I Calcola totali.
+Se quest'opzione è abilitata, il Midnight Commander calcolerà i totali 
+delle ampiezze in byte e il numero totale dei file prima di ogni operazione di 
+Copia, Spostamento o Cancellazione. Questo genererà una barra di progressione
+più accurata a discapito di un po' di velocità. Quest'opzione non ha effetto se
+.I Operazioni prolisse
+è disabilitata.
 .PP
-.I Shell Patterns.
-By default the Select, Unselect and Filter commands will use shell-like
-regular expressions. The following conversions are performed to achieve
-this: the '*' is replaced by '.*' (zero or more characters); the '?'
-is replaced by '.' (exactly one character) and '.' by the literal
-dot. If the option is disabled, then the regular expressions are the
-ones described in ed(1).
+.I Modelli della shell.
+Normalmente i comandi Seleziona, De-seleziona e Filtro usano espressioni
+regolari di tipo shell. Le seguenti conversioni vengono eseguite per
+ottennere questo risultato: '*' viene rimpiazzato da '.*' (zero o più
+caratteri); '?' viene rimpiazzato da '.' (esattamente un carattere) e '.' 
+dal carattere letterale punto. Se l'opzione è disabilitata, allora le 
+espressioni regolari sono quelle descritte in ed(1).
 .PP
-.I Auto Save Setup.
-If this option is enabled, when you exit the Midnight Commander the
-configurable options of the Midnight Commander are saved in the
-~/.mc/ini file.
+.I Autosalva configurazione.
+Se quest'opzione è abilitata, quando si esce dal Midnight Commander le
+opzioni configurabili del Midnight Commander vengono salvate nel file
+~/.mc/ini.
 .PP
-.I Auto menus.
-If this option is enabled, the user menu will be invoked at startup.
-Useful for building menus for non-unixers.
+.I Menu automatici.
+Se quest'opzione è abilitata, il menu utente sarà invocato alla partenza.
+Utile per creare menu per utenti non abituati a unix.
 .PP
-.I Use internal editor.
-If this option is enabled, the built-in file editor is used to edit
-files. If the option is disabled, the editor specified in the
+.I Usa editor interno.
+Se quest'opzione è abilitata, verrà usato l'editor integrato interno per
+modificare i file. Se l'opzione è disabilitata, verrà usato l'editor
+specificato dalla variabile ambiente
 .B EDITOR
-environment variable is used.
-If no editor is specified, 
+ . 
+Se non nessun editor è specificato, verrà usato  
 .B vi
-is used.  See the section on the
+ . Vedere la sezione
 .\"LINK2"
-internal file editor.
+editor di file interno.
 .\"Internal File Editor"
 .PP
-.I Use internal viewer.
-If this option is enabled, the built-in file viewer is used to view
-files. If the option is disabled, the pager specified in the
+.I Usa il visualizzatore interno.
+Se quest'opzione è abilitata, verrà usato il visualizzatore di file 
+interno per visualizzare i file. Se l'opzione è disabilitata, verrà
+utilizzato il visualizzatore specificato dalla variabile ambiente
 .B PAGER
-environment variable is used.
+ . Se il visualizzatore non è definito, verrà usato il comando
 If no pager is specified, the 
 .B view
-command is used.  See the section on the
+ . Vedere sezione
 .\"LINK2"
-internal file viewer.
+visualizzatore file interno.
 .\"Internal File Viewer"
 .PP
-.I Complete: show all.
-By default the Midnight Commander
-pops up all possible 
+.I Completamento: visualizza tutto
+Normalmente il Midnight Commander
+mostra tutti i possibili 
 .\"LINK2"
-completions
+completamenti
 .\"Completion"
-if the completion is
-ambiguous if you press 
+se il completamento è
+ambiguo se si preme 
 .B M-Tab
-for the second time, for the
-first time it just completes as much as possible and in
-the case of ambiguity beeps. If you want to see all the
-possible completions already after the first
+una seconda volta, la prima completa per quanto possibile
+e, in caso di ambiguità, emette un suono. Se si vuole vedere
+tutti i possibili completamenti già al pressione del primo
 .B M-Tab
-pressing, enable this option.
+, abilitare quest'opzione.
 .PP
-.I Rotating dash.
-If this option is enabled, the 
-Midnight Commander shows a rotating dash in the upper right corner
-as a work in progress indicator.
+.I Barre che girano.
+Se quest'opzione è abilitata, il Midnight Commander mostra
+una barra rotante nell'angolo in alto a destra come indicatore
+di progressione.
 .PP
-.I Lynx-like motion.
-If this option is enabled, 
-you may use the arrows keys to automatically chdir if the
-current selection is a subdirectory and the shell command
-line is empty. By default, this setting is off.
+.I Navigazione stile Lynx.
+Se quest'opzione è abilitata, è possibile usare i tasti freccia per
+cambiare automaticamente directory se la selezione corrente è
+una subdirectory e se la riga di comando è vuota. Normalmente
+quest'opzione è spenta.
 .PP
-.I Advanced chown.
-If this option is enabled, the 
+.I proprietario avanzato.
+Se quest'opzione è abilitata, il comando
 .\"LINK2"
-Advanced Chown
+Proprietario avanzato
 .\"Advanced Chown"
-command will be invoked if you run the 
+sarà invocate sia se si esegue il comando
 .\"LINK2"
-Chmod
+Permessi
 .\"Chmod"
-or 
+che 
 .\"LINK2"
-Chown
+Proprietario
 .\"Chown"
-command.
+ .
 .PP
-.I Cd follows links.
-This option, if set, causes the Midnight Commander to follow the
-logical chain of directories when changing current directory
-either in the panels, or using the cd command. This is the default
-behavior of bash. When unset, the Midnight Commander follows the
-real directory structure, so cd .. if you've entered that directory
-through a link will move you to the current directory's real parent
-and not to the directory where the link was present.
+.I Cd segue i collegamenti.
+Quest'opzione, se impostata, fa in modo che il Midnight Commander
+segua la catena logica delle directory, quando si cambia la directory
+corrente in ogni pannello o usando il comando cd. Questo è il
+comportamento predefinito di bash. Quando non è impostata, il
+Midnight Commander segue la reale struttura della directory, perciò
+eseguendo cd .. se si è entrati in una directory attraverso un
+collegamento, ci porterà alla genitrice reale della directory corrente
+e non alla directory dov'era il collegamento.
 .PP
-.I Safe delete.
-If this option is enabled, deleting files 
-unintentionally will get more difficult. The default
-selection in the confirmation dialog changes from the "Yes"
-to the "No" button and deletion of non empty directories has to be 
-confirmed by entering the word 
-.I yes
+.I Cancellazione sicura.
+Se quest'opzione è abilitata, la cancellazione non intenzionale dei file
+sarà più difficile. La preimpostazione della finestra di dialogo della
+conferma cambia da "Si" a "No" e la cancellazione delle directory non 
+vuote deve essere confermata immettendo la parola 
+.I si
 \&. 
-By default this option is disabled.
+Normalmente quest'opzione è disabilitata.
 .PP
-.SH "    Display bits"
-This is used to configure the range of visible characters on the
-screen.  This setting may be 7-bits if your terminal/curses supports
-only seven output bits, ISO-8859-1 displays all the characters in the
-ISO-8859-1 map and full 8 bits is for those terminals that can display
-full 8 bit characters.
+.\"NODE "    Display bits"
+.SH "    Mostra bit"
+Viene usata per configurare la quantità dei caratteri visibili sullo
+schermo. Quest'impostazione può essere 7 bit, se il terminale/libreria_curses 
+supporta solo sette bit in uscita, ISO-8859-1 se mostra tutti i caratteri
+nella mappa ISO-8859-1 e uscita completa a 8 bit per quei terminali che possono
+visualizzare tutti i caratteri a 8 bit.
 .PP
-.SH "    Confirmation"
-In this menu you configure the confirmation options for file deletion,
-overwriting, execution by pressing enter and quitting the program.
+.\"NODE "    Confirmation"
+.SH "    Conferme"
+In questo menu è possibile configurare le opzioni di conferma per la
+cancellazione e sovrascrittura dei file, esecuzione dei file premendo invio e
+per l'uscita dal programma. 
 .PP
-.SH "    Learn keys"
-This dialog allows you to test and redefine functional keys, cursor
-arrows and some other keys to make them work properly on your terminal.
-They often don't, since many terminal databases are incomplete or broken.
+.\"NODE "    Learn keys"
+.SH "    Impara tasti"
+Questa finestra di dialogo permette di controllare e ridefinire i tasti
+funzione, i tasti freccia e alcuni altri tasti per farli funzionare
+correttamente sul terminale corrente. Spesso non funzionano dato che
+molti database di terminali sono incompleti o errati.
 .PP
-You can move around with the Tab key and with the vi moving keys ('h'
-left, 'j' down, 'k' up and 'l' right).  Once you press any cursor movement
-key and it is recognized, you can use that key as well.
+Ci si può muovere con il tasto Tab e con i tasti di movimento di vi ('h'
+sinistra, 'j' giù, 'k' su e 'l' destra). Una volta premuti e riconosciuti
+i tasti di movimento del cursore, si possono tranquillamente utilizzare.
 .PP
-You can test keys just by pressing each of them.  When you press a
-key and it is recognized properly, OK should appear next to the name
-of that key.  Once a key is marked OK it starts working as usually,
-e.g. F1 pressed the first time will just check that the F1 key works,
-but after that it will show help.  The same applies to the arrow keys.
-The Tab key should be working always.
+E' possibile provare i tasti semplicemente premendoli ogniuno. Quando si preme
+un tasto ed è riconosciuto correttamente, appare un OK accanto al nome di
+quel tasto. Una volta che il tasto è marcato OK, esso comincia a funzionare
+regolarmente, per esempio premendo il tasto F1, la prima volta controllerà
+il funzionamento, ma dopodichè mostrerà la schermata di aiuto. Lo stesso
+dicasi per i tasti freccia. 
+Il tasto Tab dovrebbe funzionare sempre.
 .PP
-If some keys do not work properly then you won't see OK appear after
-pressing that key.  Then you may want to redefine it.  Do it by pressing
-the button with the name of that key (either by the mouse or by Enter
-or Space after selecting the button with Tab or arrows).  Then a message
-box will appear asking you to press that key.  Do it and wait until the
-message box disappears.  If you want to abort, just press Escape once
-and wait.
+Se alcuni tasti non funzionano correttamente, non si vedrà apparire 
+l'OK dopo la pressione di quel tasto. Allora è possibile ridefinirlo.
+Fatelo, premendo il bottone corrispondente al nome del tasto (con il mouse
+o premendo Invio o Spazio, dopo aver selezionato il bottone con Tab o con
+le frecce). Ecco che un messaggio apparirà richiedendo di premere quel tasto.
+Fatelo ed aspettate che la finestra sparisca. Se si vuole annullare, basta 
+premere Esc una volta ed aspettare.
 .PP
-When you finish with all the keys, you can Save them.  The definitions
-for the keys you have redefined will be written into the [terminal:TERM]
-section of your ~/.mc/ini file (where TERM is the name of your current
-terminal).  The definitions of the keys that were already working properly
-are not saved.
+Quando si è finito con tutti i tasti, è possibile salvarli. Le definizioni
+dei tasti che si è ridefinito saranno scritte nella sezione [terminal:TERM]
+del vostro ~/.mc/ini file (dove TERM è il nome del terminale corrente). Le
+definizioni dei tasti che già funzionavano correttamente non vengono salvate.
 .PP
-.SH "    Virtual FS"
-This option gives you control over the settings of the 
+.\"NODE "    Virtual FS"
+.SH "    FS Virtuale "
+Quest'opzione permette di controllare l'impostazione della cache informazioni del
 .\"LINK2"
-Virtual File System 
+File System Virtuale
 .\"Virtual File System"
-information cache.  
+ .
 .PP
-The Midnight Commander keeps in memory the information
-related to some of the virtual file systems to speed up
-the access to the files in the file system (for example,
-directory listings fetched from ftp servers). 
+Il Midnight Commander tiene in memoria le informazioni
+relative ad alcuni dei file system virtuali per accelerare
+l'accesso all'elenco dei file nel file system (per esempio,
+l'elenco dei file scaricato dai server ftp).
 .PP
-Moreover in order to access the contents of compressed files 
-(for example, compressed tar files) the Midnight Commander 
-has to create a temporary uncompressed file on your disk.
+Inoltre, per accedere al contenuto dei file compressi (per
+esempio file tar compressi) il Midnight Commander deve creare
+un file temporaneo non compresso sul disco.
 .PP
-Since both the information in memory and the temporary files on
-disk take up resources, you may want to tune the parameters of 
-the cached information to decrease your resource usage or to maximize
-the speed of access to frequently used file systems.
+Siccome sia le informazioni in memoria che i file temporanei su
+disco occupano risorse, si può voler impostare i parametri delle
+informazioni della cache per ridurre l'uso delle risorse o per
+massimizzare la velocità di accesso ai file system usati spesso.
 .PP
-The Tar file system is quite clever about how it handles
-tar files: it just loads the directory entries and when it
-needs to use the information contained in the tar file, it
-goes and grab it.
+Il file system Tar è piuttosto furbo riguardo la gestione
+dei file tar: semplicemente carica le voci delle directory
+e quando si ha bisogno di usare le informazioni nel file tar,
+va e se le carica.
 .PP
-In the wild, tar files are usually kept compressed (plain
-tar files are species in extinction), and because of the
-nature of those files (the directory entries for the tar
-files is not there waiting for us to be loaded), the tar
-file system has to uncompress the file
-on the disk in a temporary location and then access the
-uncompressed file as a regular tar file.
+Nella pratica, i file tar sono normalmente compressi (file
+tar non compressi sono una specie in via di estinzione), e 
+data la natura di questi file (le voci delle directory nei 
+file tar non sono accessibili direttamente), il file system 
+tar deve decomprimere il file su disco, in una locazione
+temporanea per poi accedervi come un file tar normale.
 .PP
-Now, since we all love to browse files and tar files all
-over the disk, it's common that you will leave a tar file
-and the re-enter it later. Since uncompression is slow,
-the Midnight Commander will cache the information in
-memory for a limited amount of time, after you hit the
-timeout, all of the resources associated with the
-file system will be freed. The default timeout is set to
-one minute.
+Ora, visto che noi tutti amiamo navigare nei file e nei
+file tar dappertutto su disco, succede spesso che si lascia
+un file tar per poi rientrarvi successivamente. Siccome la
+decompressione è lenta, il Midnight Commander conserverà
+l'informazione in memoria per un tempo limitato, allo 
+scadere del quale, tutte le risorse associate al file
+system verranno liberate. La scadenza predefinita è
+impostata a un minuto.
 .PP
-The 
+Il
 .\"LINK2"
-FTP File System
+File System FTP
 .\"FTP File System"
-keeps the directory listing it fetches from a ftp server
-in a cache.  The cache
-expire time is configurable with the 
-.I ftpfs directory cache timeout
-option.  
-A low value for this
-option may slow down every operation on the ftp file System
-because every operation is accompanied by a query of the
-ftp server. 
+mantiene l'elenco della directory che scarica dal server ftp
+in una cache. Il tempo di scadenza della cache è configurabile
+con l'opzione 
+.I Scadenza cache directory ftpfs
+ .  
+Un valore basso per quest'opzione può rallentare ogni operazione sul
+file system ftp perché ogni operazione è accompagnata da una
+richiesta al server ftp.
 .PP
-Moreover you can define a proxy host for doing ftp transfers 
-and configure the Midnight Commander to always use the proxy host. 
-See
-the section on
+Inoltre è possibile definire un host proxy per fare trasferimenti ftp
+e configurare il Midnight Commander per usare sempre il proxy.
+Vedere la sezione
 .\"LINK2"
-FTP File System
+File System FTP
 .\"FTP File System"
-for more information.
+per ulteriori informazioni.
 .PP
-.SH "    Layout"
-The layout dialog gives you a possibility to change the general layout
-of screen. You can specify whether the menubar, the command prompt,
-the hintbar and the function keybar are visible. On the Linux or SCO console
-you can specify how many lines are shown in the output window.
+.\"NODE "    Layout"
+.SH "    Aspetto"
+La finestra di aspetto da la possibilità di cambiare l'aspetto generale
+dello schermo. Si può specificare la visibilità della barra dei menu, 
+della riga dei comandi, della riga dei suggerimenti o della riga dei
+tasti funzione. Sulle console Linux o SCO si può impostare quante righe
+siano visibili sulla finestra di uscita.
 .PP
-The rest of the screen area is used for the two directory panels. You
-can specify whether the area is split to the panels in vertical or
-horizontal direction. The split can be equal or you can specify an
-unequal split.
+Il resto dell'area dello schermo viene usata per i due pannelli directory.
+Si può specificare se l'area venga divisa dai due pannelli in direzione 
+verticale o orizzontale. La divisione può essere uguale o si puo dividere
+in maniera asimmetrica.
 .PP
-By default all contents of the directory panels are displayed with 
-the same color, but you can specify whether 
-.I permissions 
-and 
-.I file types
-are highlighted with special 
+Normalmente i contenuti dei pannelli directory sono visualizzati dello stesso
+colore, ma si può specificare se i 
+.I permessi 
+e i
+.I tipi di file
+siano evidenziati con speciali
 .\"LINK2"
-Colors.
+Colori.
 .\"Colors"
-If permission highlighting is enabled, the parts of the 
-.I perm
-and
-.I mode
+Se l'evidenziazione dei permessi è abilitata, i campi
+.I permessi
+e 
+.I modalità
 .\"LINK2"
-display fields
+dello schermo
 .\"Listing Mode..."
-which are valid for the user running Midnight Commander
-are highlighted with the color defined with the
-.I selected
-keyword. If file type highlighting is enabled, files are colored according
+valide per l'utente che usa il Midnight Commander 
+sono evidenziati con il colore definito con la parolachiave
+.I selezionata
+ . If file type highlighting is enabled, files are colored according
 to their file type (e.g. directory, core file, executable, ...). 
 .PP
 If the 
