@@ -1,5 +1,7 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove DLG_PRE_EVENT, it's unused now.
+
 	* main.c (make_panels_dirty): Remove, it's unneded now.
 	(midnight_callback): Don't call make_panels_dirty().  Mark
 	current panel dirty if the search mode is unset.  No need to set

@@ -57,7 +57,6 @@ enum {
     DLG_IDLE,			/* The idle state is active */
     DLG_UNHANDLED_KEY,		/* Key that no widget handled */
     DLG_HOTKEY_HANDLED,		/* A widget has got the hotkey */
-    DLG_PRE_EVENT,		/* About to get new event */
     DLG_VALIDATE		/* Dialog is to be closed */
 } /* Dialog_Messages */ ;
 

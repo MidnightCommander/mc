@@ -799,7 +799,6 @@ frontend_run_dlg (Dlg_head *h)
 	}
 
 	update_cursor (h);
-	(*h->callback) (h, 0, DLG_PRE_EVENT);
 
 	/* Clear interrupt flag */
 	got_interrupt ();
