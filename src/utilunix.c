@@ -323,8 +323,14 @@ mc_tmpdir (void)
     }
 
     pwd = getpwuid (getuid ());
-    g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
+
+    if (pwd)
+	g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
 		pwd->pw_name);
+    else
+	g_snprintf (buffer, sizeof (buffer), "%s/mc-%d", sys_tmp,
+		getuid ());
+
     canonicalize_pathname (buffer);
 
     if (lstat (buffer, &st) == 0) {
