@@ -69,6 +69,10 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
+#: edit/edit.h:351 edit/edit.h:352
+msgid " Enter file name: "
+msgstr " Введите имя файла: "
+
 #: edit/edit.h:355
 msgid "&Dismiss"
 msgstr "Закрыть"
