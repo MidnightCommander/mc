@@ -37,13 +37,13 @@ struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 char *default_edition_colors =
 "normal=black:"
 "selected=white,darkblue:"
-"viewunderline=brightred,blue:"
+"viewunderline=red,blue:"
 "directory=blue:"
 "markselect=yellow,darkblue:"
 "marked=yellow,seagreen:"
 "execute=slateblue:"
 "link=green:"
-"stalledlink=brightred:"
+"stalledlink=red:"
 "device=magenta:"
 "core=red:"
 "menuhotsel=cyan,black:"
@@ -86,14 +86,21 @@ void
 get_color (char *cpp, GdkColor **colp)
 {
 	GdkColor *new_color;
-	gint     status;
+	int result;
+	gint status;
 
 	new_color = g_new (GdkColor, 1);
-	gdk_color_parse (cpp, new_color);
+	result = gdk_color_parse (cpp, new_color);
 	new_color->pixel = 0;
-	status = 0;
-	gdk_color_context_get_pixels (mc_cc, &new_color->red, &new_color->green, &new_color->blue, 1,
-				      &new_color->pixel, &status);
+
+	if (result) {
+		status = 0;
+		gdk_color_context_get_pixels (mc_cc,
+					      &new_color->red, &new_color->green, &new_color->blue,
+					      1, &new_color->pixel, &status);
+	} else
+		new_color->red = new_color->green = new_color->blue = 0;
+
 	*colp = new_color;
 }
 

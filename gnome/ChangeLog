@@ -1,3 +1,9 @@
+1999-08-16  Federico Mena Quintero  <federico@redhat.com>
+
+	* gmain.c (default_edition_colors): "brightred" is not a standard
+	X color; use "red" instead.
+	(get_color): Take into account the result of gdk_color_parse().
+
 1999-08-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* gscreen.c (rename_file_with_context): Moved the try_rename()
