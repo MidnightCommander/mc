@@ -685,7 +685,7 @@ subshell_chdir (char *directory)
 }
 
 void
-directory_history_add (WPanel *panel, char *s)
+directory_history_add (struct WPanel *panel, char *s)
 {
     if (!panel->dir_history) {
 	panel->dir_history = g_new0 (Hist, 1);
@@ -793,7 +793,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 }
 
 int
-do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
+do_panel_cd (struct WPanel *panel, char *new_dir, enum cd_enum cd_type)
 {
     int r;
 
@@ -1691,7 +1691,7 @@ make_panels_dirty (void)
 #   define check_key_backslash(x) ((x) == '\\')
 #endif
 
-int
+static int
 midnight_callback (struct Dlg_head *h, int id, int msg)
 {
     int i;

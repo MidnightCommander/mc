@@ -1,5 +1,9 @@
 2002-11-13  Pavel Roskin  <proski@gnu.org>
 
+	* main.h: Don't check if panel.h was included.  Use forward
+	declaration of WPanel, change prototypes to use struct WPanel.
+	(midnight_callback): Make static.
+
 	* cmd.c (do_view_cmd): Don't take WPanel argument - always use
 	the current panel.
 	(view_cmd): Likewise.

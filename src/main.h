@@ -175,17 +175,8 @@ void exec_shell (void);
 #    define MC_BASE "/.mc/"
 #endif /* !NATIVE_WIN32 */
 
-/* Back hack to define the following routines only if the client code
- * has included panel.h
- */
-#ifdef __PANEL_H
-
-#ifndef PANEL_DEFS_DONE
-#define PANEL_DEFS_DONE
-void directory_history_add   (WPanel *panel, char *s);
-int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
-int  midnight_callback       (struct Dlg_head *h, int id, int msg);
-#endif /* !PANEL_DEFS_DONE */
-#endif /* __PANEL_H */
+struct WPanel;
+void directory_history_add   (struct WPanel *panel, char *s);
+int  do_panel_cd             (struct WPanel *panel, char *new_dir, enum cd_enum cd_type);
 
 #endif /* !__MAIN_H */
