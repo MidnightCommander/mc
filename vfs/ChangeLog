@@ -6,7 +6,7 @@
 
 	* extfs.c (read_archive): Free archive if the "list" command
 	returned non-zero, return -1.
-	Initial implemntation from Adam Byrtek <alpha@debian.org>
+	Initial implementation from Adam Byrtek <alpha@debian.org>
 
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
