@@ -1,6 +1,8 @@
 /*
  * Shared code between the fish.c and the ftp.c file systems
  *
+ * Actually, this code is not being used by fish.c any more :-).
+ *
  * Namespace pollution: X_hint_reread, X_flushdir.
  */
 static int         store_file           (struct direntry *fe);

@@ -79,7 +79,7 @@ static char *mcfs_gethome (mcfs_connection *mc);
 static char *mcfs_get_host_and_username (char *path, char **host, char **user,
 				  int *port, char **pass)
 {
-    return vfs_get_host_and_username (path, host, user, port, 0, 0, pass); 
+    return vfs_split_url (path, host, user, port, pass, 0, 0); 
 }
 
 static void mcfs_fill_names (vfs *me, void (*func)(char *))

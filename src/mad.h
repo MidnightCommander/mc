@@ -26,6 +26,9 @@
 #   undef calloc
 #endif
 
+#define tempnam(x,y)	mad_tempnam (x, y)
+
+
 #define malloc(x)	mad_alloc (x, __FILE__, __LINE__)
 #define calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
 #define realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
@@ -39,6 +42,8 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line);
 char *mad_strdup (const char *s, char *file, int line);
 void mad_free (void *ptr, char *file, int line);
 void mad_finalize (char *file, int line);
+char *mad_tempnam (char *s1, char *s2);
+
 #else
 
 #define mad_finalize(x, y)

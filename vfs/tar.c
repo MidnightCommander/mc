@@ -67,8 +67,6 @@ static void tar_free_archive (vfs *me, vfs_s_super *archive)
 {
     if (archive->u.tar.fd != -1)
 	mc_close(archive->u.tar.fd);
-
-    free (archive->name);
 }
 
 struct tar_super {
@@ -119,9 +117,10 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     if (mode & 0004) mode |= 0001;
     mode |= S_IFDIR;
 
-    root = vfs_s_new_inode (me, &archive->u.tar.tarstat);
+    root = vfs_s_new_inode (me, archive, &archive->u.tar.tarstat);
     root->st.st_mode = mode;
     root->u.tar.data_offset = -1;
+    root->st.st_nlink++;
     vfs_s_add_dots (me, root, NULL);
     archive->root = root;
 
@@ -340,7 +339,6 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	        message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
 	        inode = parent;
-		inode->st.st_nlink++;
 		entry = vfs_s_new_entry(me, p, inode);
 		vfs_s_insert_entry(me, parent, entry);
 		free (current_link_name);
@@ -349,16 +347,11 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	}
 
 	fill_stat_from_header (me, &st, header);
-	inode = vfs_s_new_inode (me, &st);
+	inode = vfs_s_new_inode (me, archive, &st);
 
 	inode->u.tar.data_offset = data_position;
-	if (*current_link_name) {
+	if (*current_link_name)
 	    inode->linkname = current_link_name;
-	} else {
-	    free (current_link_name);
-	    inode->linkname = NULL;
-	}
-
 	entry = vfs_s_new_entry (me, p, inode);
 
 	vfs_s_insert_entry (me, parent, entry);
@@ -387,7 +380,6 @@ static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
     if ((tard = tar_open_archive (me, name, archive)) == -1)	/* Open for reading */
 	return -1;
 
-    archive->name = strdup(name);
     for (;;) {
 	prev_status = status;
 	status = read_header (me, archive, tard);
@@ -433,7 +425,7 @@ void *tar_super_check(vfs *me, char *archive_name, char *op)
     return &stat_buf;
 }
 
-int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, void *cookie)
+int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
 {	
     struct stat *archive_stat = cookie;	/* stat of main archive */
 
@@ -457,8 +449,8 @@ int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, void *
 static int tar_read (void *fh, char *buffer, int count)
 {
     off_t begin = FH->ino->u.tar.data_offset;
-    int fd = FH->super->u.tar.fd;
-    vfs *me = FH->super->me;
+    int fd = FH_SUPER->u.tar.fd;
+    vfs *me = FH_SUPER->me;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 
         begin + FH->pos) ERRNOR (EIO, -1);
@@ -477,10 +469,17 @@ static void tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_change
    since it will be freed when tar archive will be freed */
 }
 
+static int tar_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
+{
+    if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
+    return 0;
+}
+
 static struct vfs_s_data tarfs_data = {
     NULL,
     0,
     0,
+    NULL, /* logfile */
 
     NULL, /* init_inode */
     NULL, /* free_inode */
@@ -491,10 +490,12 @@ static struct vfs_s_data tarfs_data = {
     open_archive,
     tar_free_archive,
 
-    NULL, /* load_dir */
+    tar_fh_open, /* fh_open */
+    NULL, /* fh_close */
 
-    NULL, /* fh_open */
-    NULL /* fh_close */
+    vfs_s_find_entry_tree,
+    NULL,
+    NULL
 };
 
 vfs vfs_tarfs_ops =

@@ -41,6 +41,7 @@
 #endif
 
 #include <errno.h>
+#include "vfs.h"
 
 /* Extract the hostname and username from the path */
 /* path is in the form: [user@]hostname:port/remote-dir, e.g.:
@@ -58,27 +59,31 @@
  * returns a malloced strings with the pathname relative to the host.
  * */
 
-char *vfs_get_host_and_username (char *path, char **host, char **user, int *port,
-				 int default_port, int default_is_anon, char **pass)
+char *vfs_split_url (char *path, char **host, char **user, int *port, char **pass,
+				 int default_port, int flags)
 {
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
     char *pcopy = strdup (path);
     char *pend   = pcopy + strlen (pcopy);
+    int default_is_anon = flags & URL_DEFAULTANON;
     
     *pass = NULL;
     *port = default_port;
     *user = NULL;
     
-    /* locate path component */
-    for (dir = pcopy; *dir != '/' && *dir; dir++)
-	;
-    if (*dir){
-	retval = strdup (dir);
-	*dir = 0;
-    } else
-	retval = strdup ("/");
+    dir = pcopy;
+    if (!flags & URL_NOSLASH) {
+	/* locate path component */
+	for (; *dir != '/' && *dir; dir++)
+	    ;
+	if (*dir){
+	    retval = strdup (dir);
+	    *dir = 0;
+	} else
+	    retval = strdup ("/");
+    }
     
     /* search for any possible user */
     at    = strchr (pcopy, '@');

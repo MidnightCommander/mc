@@ -40,13 +40,13 @@ EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 # Commands to build standalone version (.so)
 #
 
-VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so fish.so
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so fish.so direntry.so
 
 %.sor:	../src/%.c
-	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+	$(CC) -c -fpic $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
 
 %.so:	%.c
-	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+	$(CC) -c -fpic $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
 
 libvfs.so: $(VFSSOOBJS)
 	gcc $(VFSSOOBJS) -shared -o libvfs.so

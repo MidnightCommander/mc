@@ -1,3 +1,15 @@
+Sat Nov  7 20:19:14 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c: Converted g_return_if_fail into vfs_dies(), removed them
+ 	where unneccessary. I do not see why passing NULL to vfs_add_stamp
+ 	should be invalid -> removed check.
+
+Mon Nov  2 23:09:55 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* direntry.c, xdirentry.h: should be now prepared to handle
+ 	ftp-like filesystems. This is rather BIG change, altrough it does
+ 	not look so. I hope I do not break too many things.
+
 Mon Nov 16 16:39:39 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* vfs.c (vfs_parse_ls_lga): Report unrecognized lines.

@@ -1,6 +1,14 @@
 #ifndef __VFS_H
 #define __VFS_H
 
+#include <config.h>
+#include <sys/stat.h>
+#include <dirent.h>
+
+#if 0
+#include "src/mad.h"
+#endif
+
 #if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H)
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
@@ -316,21 +324,21 @@ extern int vfs_parse_filedate(int idx, time_t *t);
 
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
-extern char *vfs_get_host_and_username (char *path, char **host, char **user, int *port,
-					int default_port, int default_is_anon, char **pass);
+extern char *vfs_split_url (char *path, char **host, char **user, int *port, char **pass,
+					int default_port, int flags);
+#define URL_DEFAULTANON 1
+#define URL_NOSLASH 2
 extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need);
 
-#define MCCTL_SETREMOTECOPY	0
-#define MCCTL_ISREMOTECOPY	1
-#define MCCTL_REMOTECOPYCHUNK	2
-#define MCCTL_FINISHREMOTE	3
-#define MCCTL_FLUSHDIR          4	/* Unreferenced */
+/* Dont use values 0..4 for a while -- 10/98, pavel@ucw.cz */
 #define MCCTL_REMOVELOCALCOPY   5
 #define MCCTL_IS_NOTREADY	6
 #define MCCTL_FORGET_ABOUT	7
 #define MCCTL_EXTFS_RUN		8
+/* These two make vfs layer give out potentially incorrect data, but
+   they also make some operation 100 times faster. Use with caution. */
 #define MCCTL_WANT_STALE_DATA	9
-#define MCCTL_NO_STALE_DATA	10
+#define MCCTL_NO_STALE_DATA    10
 
 extern int vfs_flags;
 extern uid_t vfs_uid;
@@ -392,5 +400,12 @@ extern void mc_vfs_done( void );
 #endif
 
 #define DIR_SEP_CHAR '/'
+
+/* And now some defines for our errors. */
+
+#define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
+#define E_UNKNOWN ENOMSG	/* if we do not know what error happened */
+#define E_REMOTE EREMOTEIO	/* if other side of ftp/fish reports error */
+#define E_PROTO EPROTO		/* if other side fails to follow protocol */
 
 #endif /* __VFS_H */

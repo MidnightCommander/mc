@@ -225,6 +225,15 @@ void mad_free (void *ptr, char *file, int line)
     mem_areas [i].in_use = 0;
 }
 
+char *mad_tempnam (char *a, char *b)
+{
+    char *t, *u;
+    t = tempnam(a,b);
+    u = mad_strdup(t, "(mad_tempnam)", 0);
+    free(t);
+    return u;    
+}
+
 /* Outputs a list of unfreed memory areas,
    to be called as a last thing before exiting */
 void mad_finalize (char *file, int line)

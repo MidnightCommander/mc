@@ -260,11 +260,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 		return 0;
 	    savedir[slashpos - filename + 1] = '\0';
 	}
-#ifdef HAVE_MAD
-	savename = strdup (tempnam (savedir, "cooledit"));
-#else
 	savename = tempnam (savedir, "cooledit");
-#endif
 	if (slashpos)
 	    free (savedir);
 	if (!savename)

@@ -173,7 +173,7 @@ static char    *get_path                    (struct connection **bucket,
 static char *
 my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
 {
-    return vfs_get_host_and_username (path, host, user, port, 21, 1, pass);
+    return vfs_split_url (path, host, user, port, pass, 21, URL_DEFAULTANON);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
@@ -230,6 +230,7 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     int sock = qsock (bucket);
     
     va_start (ap, fmt);
+
     fmt_str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
@@ -265,7 +266,6 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     
     if (wait_reply)
 	return get_reply (sock, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
-
     return COMPLETE;
 }
 
@@ -562,13 +562,12 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
     char *user, *pass, *dir;
 
 #if defined(HSC_PROXY)
-#define HSC_DEFAULT_PORT 9875
-    dir = vfs_get_host_and_username(proxy, host, &user, port, HSC_DEFAULT_PORT, 1,
-				    &pass);
+#define PORT 9875
 #else
-    dir = vfs_get_host_and_username(proxy, host, &user, port, 21, 1,
-				    &pass);
+#define PORT 21
 #endif
+    dir = vfs_split_url(proxy, host, &user, port, &pass, PORT, URL_DEFAULTANON);
+
     free(user);
     if (pass)
 	wipe_password (pass);

@@ -115,7 +115,7 @@ vfs_register (vfs *vfs)
 {
     int res;
 
-    g_return_if_fail (vfs != NULL);
+    if (!vfs) vfs_die("You can not register NULL.");
     
     res = (vfs->init) ? (*vfs->init)(vfs) : 1;
 
@@ -132,9 +132,10 @@ vfs_type_from_op (char *path)
 {
     vfs *vfs;
 
-    g_return_if_fail (path != NULL);
+    if (!path) vfs_die( "vfs_type_from_op got NULL: impossible" );
     
     for (vfs = vfs_list; vfs; vfs = vfs->next){
+	/* FIXME: this code could be much more elegant */
         if (vfs == &vfs_local_ops)	/* local catches all */ 
 	    return NULL;
         if (vfs->which) {
@@ -155,8 +156,6 @@ path_magic (char *path)
 {
     struct stat buf;
 
-    g_return_if_fail (path != NULL);
-    
     if (vfs_flags & FL_ALWAYS_MAGIC)
         return 1;
 
@@ -178,7 +177,7 @@ vfs_split (char *path, char **inpath, char **op)
     char *slash;
     vfs *ret;
 
-    g_return_val_if_fail (path != NULL, NULL);
+    if (!path) vfs_die("Can not split NULL");
     
     semi = strrchr (path, '#');
     if (!semi || !path_magic(path))
@@ -218,7 +217,7 @@ vfs_rosplit (char *path)
     char *slash;
     vfs *ret;
 
-    g_return_val_if_fail (path != NULL, NULL);
+    if (!path) vfs_die( "Can not rosplit NULL" );
     semi = strrchr (path, '#');
     
     if (!semi || !path_magic (path))
@@ -245,8 +244,6 @@ vfs_type (char *path)
 {
     vfs *vfs;
 
-    g_return_val_if_fail (path != NULL, NULL);
-
     vfs = vfs_rosplit(path);
 
     if (!vfs)
@@ -271,8 +268,6 @@ vfs_timeouts ()
 void
 vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
-    g_return_if_fail (v != NULL);
-
     if (v != &vfs_local_ops && id != (vfsid)-1){
         struct vfs_stamping *stamp, *st1;
         
@@ -312,8 +307,6 @@ vfs_stamp (vfs *v, vfsid id)
 {
     struct vfs_stamping *stamp;
 
-    g_return_if_fail (v != NULL);
-    
     for (stamp = stamps; stamp != NULL; stamp = stamp->next)
         if (stamp->v == v && stamp->id == id){
 
@@ -364,7 +357,7 @@ vfs_rmstamp (vfs *v, vfsid id, int removeparents)
 static int
 ferrno (vfs *vfs)
 {
-    return vfs->ferrno ? (*vfs->ferrno)(vfs) : EOPNOTSUPP; 
+    return vfs->ferrno ? (*vfs->ferrno)(vfs) : E_UNKNOWN; 
     /* Hope that error message is obscure enough ;-) */
 }
 
@@ -415,7 +408,7 @@ mc_open (char *file, int flags, ...)
 	result = vfs->name ? (*vfs->name)callarg : -1; \
         post \
 	if (result == -1) \
-	    errno = vfs->name ? ferrno (vfs) : EOPNOTSUPP; \
+	    errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
 	return result; \
 	}
 
@@ -482,6 +475,8 @@ mc_opendir (char *dirname)
     char *p = NULL;
     int i = strlen (dirname);
 
+message_1s(1, " Opening ", dirname );
+
     if (dirname [i - 1] != '/'){ 
     /* We should make possible reading of the root directory in a tar file */
         p = xmalloc (i + 2, "slash");
@@ -497,7 +492,7 @@ mc_opendir (char *dirname)
     if (p)
         free (p);
     if (!info){
-        errno = vfs->opendir ? ferrno (vfs) : EOPNOTSUPP;
+        errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
     }
     handle = get_bucket ();
@@ -527,7 +522,7 @@ mc_seekdir (DIR *dirp, int offset)
     if (vfs->seekdir)
         (*vfs->seekdir) (vfs_info (handle), offset);
     else
-        errno = EOPNOTSUPP;
+        errno = E_NOTSUPP;
 }
 
 #define MC_DIROP(name, type, onerr ) \
@@ -545,7 +540,7 @@ type mc_##name (DIR *dirp) \
     vfs = vfs_op (handle); \
     result = vfs->name ? (*vfs->name) (vfs_info (handle)) : onerr; \
     if (result == onerr) \
-        errno = vfs->name ? ferrno(vfs) : EOPNOTSUPP; \
+        errno = vfs->name ? ferrno(vfs) : E_NOTSUPP; \
     return result; \
 }
 
@@ -639,7 +634,7 @@ int mc_##name (char *name1, char *name2) \
     free (name1); \
     free (name2); \
     if (result == -1) \
-        errno = vfs->name ? ferrno (vfs) : EOPNOTSUPP; \
+        errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
     return result; \
 }
 
@@ -659,7 +654,7 @@ off_t mc_lseek (int fd, off_t offset, int whence)
     vfs = vfs_op (fd);
     result = vfs->lseek ? (*vfs->lseek)(vfs_info (fd), offset, whence) : -1;
     if (result == -1)
-        errno = vfs->lseek ? ferrno (vfs) : EOPNOTSUPP;
+        errno = vfs->lseek ? ferrno (vfs) : E_NOTSUPP;
     return result;
 }
 
@@ -672,7 +667,7 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 char *
 vfs_canon (char *path)
 {
-    g_return_if_fail (path != NULL);
+    if (!path) vfs_die("Can not canonize NULL");
 
     /* Tilde expansion */
     if (*path == '~'){ 
@@ -705,7 +700,9 @@ vfs_canon (char *path)
      * So we have path of following form:
      * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
+    mad_check( "(pre-canonicalize)", 0);
     canonicalize_pathname (path);
+    mad_check( "(post-canonicalize)", 0);
 
     return strdup (path);
 }
