@@ -71,7 +71,7 @@ char *learn_key (void);
 /* Returns a key code (interpreted) */
 int get_key_code (int nodelay);
 
-typedef struct {
+typedef const struct {
     int code;
     char *name;
     char *longname;

@@ -4,6 +4,7 @@
 
 	* ext.c (regex_command): Don't check same condition twice.
 	(exec_extension): Comment out useless loop.
+	* key.h (key_code_name_t): Typedef const.
 
 2002-07-30  Pavel Roskin  <proski@gnu.org>
 
