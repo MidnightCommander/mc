@@ -157,7 +157,7 @@ struct utimbuf {
     void vfs_rm_parents (struct vfs_stamping *stamp);
     char *vfs_path (char *path);
     char *vfs_strip_suffix_from_filename (char *filename);
-    char *vfs_canon (char *path);
+    char *vfs_canon (const char *path);
     char *mc_get_current_wd (char *buffer, int bufsize);
     int vfs_current_is_local (void);
 #if 0
@@ -165,7 +165,7 @@ struct utimbuf {
     int vfs_current_is_tarfs (void);
     int vfs_current_is_cpiofs (void);
 #endif
-    int vfs_file_is_local (char *name);
+    int vfs_file_is_local (const char *name);
     int vfs_file_is_ftp (char *filename);
     int vfs_file_is_smb (char *filename);
     char *vfs_get_current_dir (void);

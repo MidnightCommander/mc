@@ -123,7 +123,7 @@ typedef struct vfs_s_super {
 	    int fd;
 	    struct stat stat;
 	    int type; /* Type of the archive */
-	    /* int pos; /* In case reentrancy will be needed */
+	  /*int pos;    In case reentrancy will be needed */
 	    struct defer_inode *defered; /* List of inodes for which another entries may appear */
 	} cpio;
     } u;
