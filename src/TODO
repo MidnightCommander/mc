@@ -103,6 +103,8 @@ After 4.6.1 on 4.6.x branch
 Make the internal editor reentrant.  Add "edit menu file" to the editor
 menu.
 
+Safe and restore file position in the viewer.
+
 Consistent support for mc.lib.
 
 Consistent support for terminal-specific settings.
