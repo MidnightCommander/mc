@@ -10,6 +10,8 @@ Alt-O doesn't save new directory in the history.
 
 Remove duplicate history entries.
 
+Allow calling directory hotlist from Copy, Move and Find File dialogs.
+
 Allow modifiers for keys in mc.lib, like "shift-up".
 
 Backup config files when writing them.
