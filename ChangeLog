@@ -1,3 +1,7 @@
+2001-12-27 Duarte Loreto <happyguy_pt@hotmail.com>
+
+        * configure.in: Added portuguese to ALL_LINGUAS
+
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (AC_WITH_SLANG): Don't add ../slang to includes.
