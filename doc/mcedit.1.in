@@ -97,15 +97,18 @@ cuts to
 .BR ~/.mc/cedit/cooledit.clip, 
 and 
 .B Ctrl-Del 
-deletes highlighted text - all linux console only. 
-The completion key (see 
-.BR "mc.1") 
-also does a hard return
-without an automatic indent. Mouse highlighting also works, and you
-can override the mouse as usual by holding down the shift key
-while dragging the mouse to let normal terminal mouse highlighting
-work.
-
+deletes highlighted text - all linux console only.  Mouse highlighting
+also works, and you can override the mouse as usual by holding down
+the shift key while dragging the mouse to let normal terminal mouse
+highlighting work.
+.PP
+The completion key (usually
+.B "Alt-Tab"
+or
+.BR "Espace-Tab")
+completes the word under the cursor using the words used earlier in the
+file.
+.PP
 To define a macro, press 
 .B Ctrl-R 
 and then type out the key
