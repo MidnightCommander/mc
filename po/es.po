@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"POT-Creation-Date: 2001-08-17 13:24+0200\n"
+"POT-Creation-Date: 2001-08-17 10:30-0400\n"
 "PO-Revision-Date: 2001-08-16 22:00+0200\n"
 "Last-Translator: David Martín <dmartina@excite.es>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -67,8 +67,8 @@ msgstr ""
 msgid ""
 "\".\n"
 "\n"
-"To fix this error, bring up this file's properties and change the default "
-"%s-action."
+"To fix this error, bring up this file's properties and change the default %s-"
+"action."
 msgstr ""
 "\".\n"
 "\n"
@@ -1684,12 +1684,13 @@ msgid "Location:"
 msgstr "Ubicación:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:415 gtkedit/editcmd.c:1292
-#: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:69
-#: src/boxes.c:145 src/boxes.c:279 src/boxes.c:379 src/boxes.c:470
-#: src/boxes.c:617 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
-#: src/filegui.c:805 src/find.c:149 src/layout.c:369 src/option.c:135
-#: src/wtools.c:284 src/wtools.c:546
+#: gnome/gtools.c:105 gtkedit/edit.h:507 gtkedit/editcmd.c:415
+#: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3102
+#: gtkedit/editmenu.c:45 gtkedit/editoptions.c:69 src/boxes.c:145
+#: src/boxes.c:279 src/boxes.c:379 src/boxes.c:470 src/boxes.c:617
+#: src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056 src/filegui.c:805
+#: src/find.c:149 src/layout.c:369 src/option.c:135 src/wtools.c:284
+#: src/wtools.c:546
 msgid "&Ok"
 msgstr "&Aceptar"
 
@@ -1837,6 +1838,10 @@ msgstr "Menú de usuario sólo disponible en mcedit invocado desde mc"
 #: gtkedit/edit.c:2804 gtkedit/editcmd.c:3020
 msgid "Error trying to stat file:"
 msgstr "Error al tratar de identificar archivo:"
+
+#: gtkedit/edit.h:506 gtkedit/gtkedit.c:66
+msgid "&Dismiss"
+msgstr "&Abandonar"
 
 #: gtkedit/editcmd.c:327
 msgid " Error writing to pipe: "
@@ -2864,10 +2869,6 @@ msgstr "Menú"
 msgid "Quit"
 msgstr "Salir"
 
-#: gtkedit/gtkedit.c:66
-msgid "&Dismiss"
-msgstr "&Abandonar"
-
 #: gtkedit/gtkedit.c:67
 msgid " Enter file name: "
 msgstr " Teclee el nombre del archivo: "
@@ -2998,11 +2999,11 @@ msgstr ""
 " Error comunicando con \"ispell\". \n"
 " \"ispell\" se está reiniciando. "
 
-#: gtkedit/syntax.c:1386 gtkedit/syntax.c:1388
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid " Load Syntax Rules "
 msgstr " Cargar reglas de sintaxis "
 
-#: gtkedit/syntax.c:1386 gtkedit/syntax.c:1388
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -3012,15 +3013,15 @@ msgstr ""
 " Un nuevo archivo de reglas va a ser instalado. \n"
 " Su antiguo archivo se conservará con extensión .OLD "
 
-#: gtkedit/syntax.c:1534 gtkedit/syntax.c:1541
+#: gtkedit/syntax.c:1537 gtkedit/syntax.c:1544
 msgid " Load syntax file "
 msgstr " Cargar archivo de sintaxis "
 
-#: gtkedit/syntax.c:1534
+#: gtkedit/syntax.c:1537
 msgid " File access error "
 msgstr " Error de acceso a archivo "
 
-#: gtkedit/syntax.c:1540
+#: gtkedit/syntax.c:1543
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Error en el archivo %s (línea %d) "
@@ -4705,6 +4706,7 @@ msgid "File:       %s"
 msgstr "Archivo:     %s"
 
 #: src/info.c:113
+#, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr " y %d (%d%%) de %d inodos"
 
@@ -4717,6 +4719,7 @@ msgid "Free space "
 msgstr "Disponible "
 
 #: src/info.c:126
+#, c-format
 msgid " (%d%%) of "
 msgstr " (%d%%) de"
 
@@ -5289,8 +5292,8 @@ msgstr "-e, --edit         Ejecutar el editor interno.\n"
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
-"-k, --resetsoft    Reset softkeys (HP terminals only) to their "
-"terminfo/termcap\n"
+"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
+"termcap\n"
 "                   default.\n"
 msgstr ""
 "-f, --libdir       Mostrar las rutas preestablecidas.\n"
@@ -6002,10 +6005,12 @@ msgid " Format error on file Extensions File "
 msgstr " Error de formato en el Archivo de Extensiones "
 
 #: src/user.c:140
+#, c-format
 msgid " The %%var macro has no default "
 msgstr " La macro %%var no tiene valor predeterminado "
 
 #: src/user.c:141
+#, c-format
 msgid " The %%var macro has no variable "
 msgstr " La macro %%var no contiene variables "
 
@@ -7031,6 +7036,7 @@ msgid "Internal error:"
 msgstr "Error interno:"
 
 #: vfs/vfs.c:1805
+#, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes transferidos)"
 
