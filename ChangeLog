@@ -1,3 +1,9 @@
+2002-12-11  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_EXTFS_CHECKS): Add check for Perl.
+	* configure.in: Substitute Perl location in all extfs scripts
+	written in Perl.
+
 2002-12-11  David Martin  <dmartina@excite.com>
 
 	* doc/xnc.hlp: Update GPL (change FSF address

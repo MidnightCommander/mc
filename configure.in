@@ -575,12 +575,20 @@ m4/Makefile
 
 lib/mc.ext
 
+vfs/extfs/a
+vfs/extfs/apt
 vfs/extfs/audio
 vfs/extfs/deb
+vfs/extfs/deba
+vfs/extfs/debd
+vfs/extfs/dpkg
 vfs/extfs/lslR
+vfs/extfs/mailfs
+vfs/extfs/patchfs
+vfs/extfs/rpms
 vfs/extfs/uar
-vfs/extfs/ulha 
 vfs/extfs/uha
+vfs/extfs/ulha 
 vfs/extfs/urar
 vfs/extfs/uzip
 vfs/extfs/uzoo
