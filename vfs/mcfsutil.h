@@ -1,11 +1,11 @@
 #ifndef __MCFSUTIL_H
 #define __MCFSUTIL_H
 
-/* Operations of the RPC manager */
-
 /*
- * Please note that the RPC manager uses 4-byte integers for the
- * communication - may be a problem on systems with longer pointers.
+ * FIXME: This protocol uses 32-bit integers for the communication.
+ * It is a problem on systems with large file support, which is now
+ * default.  This means that lseek is broken unless --disable-largefile
+ * is used.  64-bit systems are probably broken even more.
  */
 
 enum {
