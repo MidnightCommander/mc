@@ -182,26 +182,6 @@ check_eject_func (WPanel *panel, DesktopIconInfo *dii)
 	return retval;
 }
 
-static gboolean
-check_edit_func  (WPanel *panel, DesktopIconInfo *dii)
-{
-	/* As far as I can tell, by looking at gactions.c, edit will _ALWAYS work */
-	return TRUE;
-}
-
-static gboolean
-check_view_func  (WPanel *panel, DesktopIconInfo *dii)
-{
-	gchar *full_name;
-	if (is_a_desktop_panel (panel)) {
-		g_assert (dii != NULL);
-		full_name = g_concat_dir_and_file (panel->cwd, dii->filename);
-	} else
-		full_name = g_concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
-
-	return gmc_can_view_file (full_name);
-}
-
 /* global vars */
 extern int we_can_afford_the_speed;
 
@@ -213,9 +193,9 @@ static struct action file_actions[] = {
 	{ "",				F_NOTDEV | F_SINGLE,			NULL, 			NULL },
 	{ "",				F_MIME_ACTIONS | F_SINGLE,		NULL, 			NULL },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with, 	NULL },
-	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view, 		check_view_func },
+	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view, 		NULL },
 	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered, NULL },
-	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit,  		check_edit_func },
+	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit,  		NULL },
 	{ "",				F_REGULAR | F_SINGLE, 			NULL, 			NULL },
 	{ N_("Copy..."),		F_ALL, 					handle_copy, 		NULL },
 	{ N_("Delete"),			F_ALL, 					handle_delete, 		NULL },
@@ -570,7 +550,8 @@ gpopup_do_popup2 (GdkEventButton *event, WPanel *panel, DesktopIconInfo *dii)
 			REMOVE (flags, F_NOTDEV);
 	}
 
-	g_assert (marked > 0);
+	if (market == 0)
+		return;
 
 	if (marked > 1)
 		REMOVE (flags, F_SINGLE);

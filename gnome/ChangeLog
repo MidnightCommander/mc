@@ -1,3 +1,16 @@
+1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gpopup2.c (gpopup_do_popup2): Until Federico look over this, I
+	am fixing this crash.
+
+1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gpopup2.c: Sigh.  It happened again.  More features killed by
+	the merge.  
+
+	If a file does not have any metadata/mime way of viewing it, the
+	viewer will always work.
+
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (text_changed): Rename the metadata and refresh the

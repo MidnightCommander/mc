@@ -230,18 +230,6 @@ gmc_view_command (gchar *filename)
 	}
 	return NULL;
 }
-gboolean
-gmc_can_view_file (char *filename)
-{
-	char *cmd;
-
-	cmd = gmc_view_command (filename);
-	if (cmd) {
-		g_free (cmd);
-		return 1;
-	}
-	return 0;
-}
 	
 int
 gmc_view (char *filename, int start_line)
@@ -253,6 +241,7 @@ gmc_view (char *filename, int start_line)
 		gmc_run_view (filename, cmd);
 		g_free (cmd);
 		return 1;
-	}
+	} else
+		view (NULL, filename, 0, 0);
 	return 0;
 }
