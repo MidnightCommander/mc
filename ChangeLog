@@ -1,3 +1,10 @@
+2000-09-17  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: Added the "dvi" target for "make distcheck"
+	to go further
+	* doc-gnome/C/Makefile.in: converted to ...
+	* doc-gnome/C/Makefile.am: ... this
+
 2000-09-15  Pavel Roskin  <proski@gnu.org>
 
 	* acconfig.h, configure.in: Require autoconf 2.13 or above.

@@ -107,4 +107,7 @@ mcdep: @dep@
 
 dummy:
 
+# Added for compatability with Automake
+dvi:
+
 # End of Make.common
