@@ -104,33 +104,29 @@ void init_groups (void)
     int i;
     struct passwd *pwd;
     struct group *grp;
-    
-    current_user_uid = getuid ();
 
+    current_user_uid = getuid ();
     pwd = getpwuid (current_user_uid);
-    
     g_return_if_fail (pwd != NULL);
-    
-    grp = getgrgid (pwd->pw_gid);
-    
-    g_return_if_fail (grp != NULL);
-    
+
     current_user_gid = g_tree_new (mc_gid_compare);
 
-    g_tree_insert (current_user_gid, 
-      GUINT_TO_POINTER(grp->gr_gid), g_strdup(grp->gr_name));
-    
+    /* Put user's primary group first. */
+    if ((grp = getgrgid (pwd->pw_gid)) != NULL) {
+	g_tree_insert (current_user_gid,
+		       GUINT_TO_POINTER (grp->gr_gid),
+		       g_strdup (grp->gr_name));
+    }
+
     setgrent ();
-    
-    while ((grp = getgrent ()))
-    {
-	for (i = 0; grp->gr_mem[i]; i++)
-	{
-    	    if (!strcmp (pwd->pw_name, grp->gr_mem[i]) &&
-	      !g_tree_lookup (current_user_gid, GUINT_TO_POINTER(grp->gr_gid)))
-	    {
-		g_tree_insert (current_user_gid, 
-		  GUINT_TO_POINTER(grp->gr_gid), g_strdup(grp->gr_name));
+    while ((grp = getgrent ()) != NULL) {
+	for (i = 0; grp->gr_mem[i]; i++) {
+	    if (!strcmp (pwd->pw_name, grp->gr_mem[i]) &&
+		!g_tree_lookup (current_user_gid,
+				GUINT_TO_POINTER (grp->gr_gid))) {
+		g_tree_insert (current_user_gid,
+			       GUINT_TO_POINTER (grp->gr_gid),
+			       g_strdup (grp->gr_name));
 		break;
 	    }
 	}
