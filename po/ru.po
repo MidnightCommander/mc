@@ -585,7 +585,7 @@ msgstr "Команды"
 
 #: gnome/glayout.c:476
 msgid "File/New/Directory..."
-msgstr "каталог"
+msgstr "Файл/Новые/Каталог"
 
 #: gnome/gpopup.c:257 gnome/gpopup.c:258
 msgid "Properties"
@@ -4669,7 +4669,7 @@ msgstr " Сохранить изменения "
 
 #: src/view.c:446
 msgid " Can't spawn child program "
-msgstr " Не могу породить дочерний процесс "
+msgstr " Невозможно породить дочерний процесс "
 
 #: src/view.c:455
 msgid " Empty output from child filter "
@@ -4677,11 +4677,11 @@ msgstr " У дочернего процесса вывод отсутствует "
 
 #: src/view.c:460
 msgid " Could not open file "
-msgstr " Не могу открыть файл "
+msgstr " Невозможно открыть файл "
 
 #: src/view.c:475
 msgid " Can't open file \""
-msgstr " Не могу открыть файл \""
+msgstr " Невозможно открыть файл \""
 
 #: src/view.c:482
 msgid ""
@@ -4703,9 +4703,9 @@ msgid "  [grow]"
 msgstr ""
 
 #: src/view.c:1457
-#, fuzzy, c-format
+#, c-format
 msgid "Searching for `%s'"
-msgstr "Ищем в %s"
+msgstr "Ищем %s"
 
 #: src/view.c:1564 src/view.c:1686
 msgid " Search string not found "
@@ -5031,14 +5031,12 @@ msgid ""
 msgstr ""
 
 #: vfs/mcfs.c:174
-#, fuzzy
 msgid " Yes "
-msgstr " &Да "
+msgstr " Да "
 
 #: vfs/mcfs.c:174
-#, fuzzy
 msgid " No "
-msgstr " &Нет "
+msgstr " Нет "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
@@ -5078,144 +5076,3 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-
-#, fuzzy
-#~ msgid "_New"
-#~ msgstr "Новый\tC-n"
-
-#, fuzzy
-#~ msgid "_Open"
-#~ msgstr " Настройка "
-
-#, fuzzy
-#~ msgid "_About"
-#~ msgstr "&Прервать"
-
-#, fuzzy
-#~ msgid "_File"
-#~ msgstr "Файл"
-
-#, fuzzy
-#~ msgid "_Edit"
-#~ msgstr "Правка"
-
-#, fuzzy
-#~ msgid "_Help"
-#~ msgstr "Помощь"
-
-#, fuzzy
-#~ msgid "_Mode"
-#~ msgstr "1Перенести"
-
-#, fuzzy
-#~ msgid "New"
-#~ msgstr "Новый\tC-n"
-
-#, fuzzy
-#~ msgid "Save As"
-#~ msgstr " Сохранить как "
-
-#, fuzzy
-#~ msgid "Copy selection to clipboard"
-#~ msgstr " Скопировать в буфер "
-
-#, fuzzy
-#~ msgid "Cut selection to clipboard"
-#~ msgstr " Вырезать в буфер "
-
-#, fuzzy
-#~ msgid "Paste clipboard"
-#~ msgstr " Вырезать в буфер "
-
-#, fuzzy
-#~ msgid "Find"
-#~ msgstr "&FTP-соединение"
-
-#, fuzzy
-#~ msgid "Find string/regular expression"
-#~ msgstr " Регулярные выражения "
-
-#, fuzzy
-#~ msgid "Find again"
-#~ msgstr " Поиск файла "
-
-#, fuzzy
-#~ msgid "About..."
-#~ msgstr "&Внешний вид"
-
-#, fuzzy
-#~ msgid "_View"
-#~ msgstr "Файл"
-
-#, fuzzy
-#~ msgid "E_xit"
-#~ msgstr "Правка"
-
-#, fuzzy
-#~ msgid "_Display mode..."
-#~ msgstr "&Биты символов..."
-
-#, fuzzy
-#~ msgid "_Network link..."
-#~ msgstr "Се&тевое соединение..."
-
-#, fuzzy
-#~ msgid "FT_P link..."
-#~ msgstr "&FTP-соединение"
-
-#, fuzzy
-#~ msgid "_Confirmation..."
-#~ msgstr "&Конфигурация"
-
-#, fuzzy
-#~ msgid "_Options..."
-#~ msgstr " Настройка "
-
-#, fuzzy
-#~ msgid "_Virtual FS..."
-#~ msgstr "Виртуальные &ФС..."
-
-#, fuzzy
-#~ msgid "_Save setup"
-#~ msgstr "&Сохранить настройки"
-
-#, fuzzy
-#~ msgid "_Find..."
-#~ msgstr "&FTP-соединение"
-
-#, fuzzy
-#~ msgid "_Hotlist..."
-#~ msgstr "Цветовыделение"
-
-#, fuzzy
-#~ msgid "_External panelize..."
-#~ msgstr "Внешняя панелизация"
-
-#, fuzzy
-#~ msgid "_Undelete files (ext2fs only)..."
-#~ msgstr "Восстановление файлов (только ext2fs)"
-
-#~ msgid "Cannot invoke du command."
-#~ msgstr "Не могу вызвать команду 'du'."
-
-#, fuzzy
-#~ msgid "Do you want to delete "
-#~ msgstr " Наберите 'yes' если Вы ДЕЙСТВИТЕЛЬНО хотите "
-
-#~ msgid "Other options"
-#~ msgstr "Прочие настройки"
-
-#~ msgid "Highlight..."
-#~ msgstr "Цветовыделение"
-
-#~ msgid "Panel split"
-#~ msgstr "Разбиение панелей"
-
-#~ msgid "Pause after run..."
-#~ msgstr "Пауза после запуска..."
-
-#~ msgid " Can not fetch local copy "
-#~ msgstr " Не могу извлечь локальную копию "
-
-#~ msgid "&Continue"
-#~ msgstr "&Продолжить"
