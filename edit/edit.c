@@ -27,24 +27,13 @@
 #include <config.h>
 #if defined(NEEDS_IO_H)
 #    include <io.h>
-#    include <fcntl.h>
 #    define CR_LF_TRANSLATION
 #endif
 #include "edit.h"
 
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>
-#endif /* SCO_FLAVOR */
-#include <time.h>	/* for ctime() */
-#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
-#include "mad.h"
-#endif
-
-#include "../src/dialog.h" /* MSG_ERROR */
-
 #ifdef HAVE_CHARSET
-#include "../src/charsets.h"
-#include "../src/selcodepage.h"
+#include "src/charsets.h"
+#include "src/selcodepage.h"
 #endif
 
 extern char *edit_one_file;
@@ -373,7 +362,6 @@ int edit_insert_file (WEdit * edit, const char *filename)
 static int check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
-#if defined(MIDNIGHT) || defined(GTK)
     if ((file = open ((char *) filename, O_RDONLY)) < 0) {
 	close (creat ((char *) filename, 0666));
 	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
@@ -381,12 +369,6 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 	    return 2;
 	}
     }
-#else
-    if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
-	return 1;
-    }
-#endif
     if (stat ((char *) filename, st) < 0) {
 	close (file);
 /* The file-name is printed after the ':' */
@@ -421,10 +403,8 @@ int edit_open_file (WEdit * edit, const char *filename, const char *text, unsign
     } else {
 	int r;
 	r = check_file_access (edit, filename, &st);
-#if defined(MIDNIGHT) || defined(GTK)
 	if (r == 2)
 	    return edit->delete_file = 1;
-#endif
 	if (r)
 	    return 1;
 	edit->stat1 = st;
@@ -440,20 +420,7 @@ int edit_open_file (WEdit * edit, const char *filename, const char *text, unsign
     return init_dynamic_edit_buffers (edit, filename, text);
 }
 
-#ifdef MIDNIGHT
 #define space_width 1
-#else
-int space_width;
-extern int option_long_whitespace;
-
-void edit_set_space_width (int s)
-{
-    space_width = s;
-}
-
-int (*edit_file_is_open) (char *) = 0;
-
-#endif
 
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
@@ -461,12 +428,6 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     char *f;
     int to_free = 0;
     int use_filter = 0;
-#ifndef MIDNIGHT
-    if (option_long_whitespace)
-	edit_set_space_width (FONT_PER_CHAR[' '] * 2);
-    else
-	edit_set_space_width (FONT_PER_CHAR[' ']);
-#endif
     if (!edit) {
 #ifdef ENABLE_NLS
 	/* 
@@ -497,9 +458,6 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	to_free = 1;
     }
     memset (&(edit->from_here), 0, (unsigned long) &(edit->to_here) - (unsigned long) &(edit->from_here));
-#ifndef MIDNIGHT
-    edit->max_column = columns * FONT_MEAN_WIDTH;
-#endif
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -511,14 +469,6 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     f = (char *) filename;
     if (filename) {
 	f = catstrs (dir, filename, 0);
-#ifndef MIDNIGHT
-	if (edit_file_is_open)
-	    if ((*edit_file_is_open) (f)) {
-		if (to_free)
-		    free (edit);
-		return 0;
-	    }
-#endif
     }
     if (edit_find_filter (f) < 0) {
 #ifdef CR_LF_TRANSLATION
@@ -1208,7 +1158,6 @@ long edit_move_backward (WEdit * edit, long current, int lines)
     return current;
 }
 
-#ifdef MIDNIGHT
 /* If cols is zero this returns the count of columns from current to upto. */
 /* If upto is zero returns index of cols across from current. */
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
@@ -1248,7 +1197,6 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
     }
     return col;
 }
-#endif
 
 /* returns the current column position of the cursor */
 int edit_get_col (WEdit * edit)
@@ -1280,8 +1228,6 @@ void edit_scroll_upward (WEdit * edit, unsigned long i)
 	edit->start_display = edit_move_backward (edit, edit->start_display, i);
 	edit->force |= REDRAW_PAGE;
 	edit->force &= (0xfff - REDRAW_CHAR_ONLY);
-#ifndef MIDNIGHT
-#endif
     }
     edit_update_curs_row (edit);
 }
@@ -1299,8 +1245,6 @@ void edit_scroll_downward (WEdit * edit, int i)
 	edit->start_display = edit_move_forward (edit, edit->start_display, i, 0);
 	edit->force |= REDRAW_PAGE;
 	edit->force &= (0xfff - REDRAW_CHAR_ONLY);
-#ifndef MIDNIGHT
-#endif
     }
     edit_update_curs_row (edit);
 }
@@ -1922,9 +1866,6 @@ int edit_indent_width (WEdit * edit, long p)
 
 void edit_insert_indent (WEdit * edit, int indent)
 {
-#ifndef MIDNIGHT
-    indent /= space_width;
-#endif
     if (!option_fill_tabs_with_spaces) {
 	while (indent >= TAB_SIZE) {
 	    edit_insert (edit, '\t');
@@ -1994,16 +1935,8 @@ static void check_and_wrap_line (WEdit * edit)
     if (!option_typewriter_wrap)
 	return;
     edit_update_curs_col (edit);
-#ifdef MIDNIGHT
     if (edit->curs_col < option_word_wrap_line_length)
 	return;
-#else
-    CPushFont ("editor", 0);
-    c = FONT_MEAN_WIDTH;
-    CPopFont ();
-    if (edit->curs_col < option_word_wrap_line_length * c)
-	return;
-#endif
     curs = edit->curs1;
     for (;;) {
 	curs--;
@@ -2027,7 +1960,6 @@ void edit_execute_macro (WEdit * edit, struct macro macro[], int n);
 /* either command or char_for_insertion must be passed as -1 */
 int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 
-#ifdef MIDNIGHT
 int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch)
 {
     int command = -1;
@@ -2042,7 +1974,6 @@ int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_
 	return 0;
     return 1;
 }
-#endif
 
 void edit_push_key_press (WEdit * edit)
 {
@@ -2165,17 +2096,8 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
     return r;
 }
 
-#ifdef MIDNIGHT
 static const char *shell_cmd[] = SHELL_COMMANDS_i
 void edit_mail_dialog (WEdit * edit);
-
-#else
-static void (*user_commamd) (WEdit *, int) = 0;
-void edit_set_user_command (void (*func) (WEdit *, int))
-{
-    user_commamd = func;
-}
-#endif
 
 /* 
    This executes a command at a lower level than macro recording.
@@ -2408,13 +2330,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 
     case CK_Toggle_Insert:
 	edit->overwrite = (edit->overwrite == 0);
-#ifndef MIDNIGHT
-#ifdef GTK
-/* *** */
-#else
-	CSetCursorColor (edit->overwrite ? color_palette (24) : color_palette (19));
-#endif
-#endif
 	break;
 
     case CK_Mark:
@@ -2510,25 +2425,12 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
 
     case CK_Save_As:
-#ifndef MIDNIGHT
-/*	if (COptionsOf (edit->widget) & EDITOR_NO_FILE) */
-	if (edit->widget->options & EDITOR_NO_FILE)
-	    break;
-#endif
 	edit_save_as_cmd (edit);
 	break;
     case CK_Save:
-#ifndef MIDNIGHT
-	if (COptionsOf (edit->widget) & EDITOR_NO_FILE)
-	    break;
-#endif
 	edit_save_confirm_cmd (edit);
 	break;
     case CK_Load:
-#ifndef MIDNIGHT
-	if (COptionsOf (edit->widget) & EDITOR_NO_FILE)
-	    break;
-#endif
 	edit_load_cmd (edit);
 	break;
     case CK_Save_Block:
@@ -2595,7 +2497,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Match_Bracket:
 	edit_goto_matching_bracket (edit);
 	break;
-#ifndef GTK
     case CK_User_Menu:
 	if (edit_one_file) {
 	    message (1, MSG_ERROR, _("User menu available only in mcedit invoked from mc"));
@@ -2604,8 +2505,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	else
 	    user_menu (edit);
 	break;
-#endif /* !GTK */
-#ifdef MIDNIGHT
     case CK_Sort:
 	edit_sort_cmd (edit);
 	break;
@@ -2615,10 +2514,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Shell:
 	view_other_cmd ();
 	break;
-#endif /* MIDNIGHT */
 
 /* These commands are not handled and must be handled by the user application */
-#ifndef MIDNIGHT
+#if 0
     case CK_Sort:
     case CK_Mail:
     case CK_Find_File:
@@ -2647,19 +2545,10 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	result = 0;
 	break;
     case CK_Menu:
-#ifdef GTK
-	if (edit->widget->menubar)
-	    gtk_menu_popup (GTK_MENU(
-		(GTK_MENU_ITEM (g_list_nth_data (GTK_MENU_BAR (edit->widget->menubar)->menu_shell.children, 0)))->submenu
-	    ), 0, 0, 0, 0, 1, 0);
-	result = 1;
-#else
 	result = 0;
-#endif
 	break;
     }
 
-#ifdef MIDNIGHT
 /* CK_Pipe_Block */
     if ((command / 1000) == 1)	/* a shell command */
 	edit_block_process_cmd (edit, shell_cmd[command - 1000], 1);
@@ -2669,17 +2558,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	if ((result = edit_load_macro_cmd (edit, m, &nm, command - 2000)))
 	    edit_execute_macro (edit, m, nm);
     }
-#else
-    if (IS_USER_COMMAND (command))	/* a user defined command */
-	if (user_commamd)
-	    (*user_commamd) (edit, command & 0xFFFF);
-    if (IS_MACRO_COMMAND (command)) {	/* a macro command */
-	struct macro m[MAX_MACRO_LENGTH];
-	int nm;
-	if ((result = edit_load_macro_cmd (edit, m, &nm, command & 0xFFFF)))
-	    edit_execute_macro (edit, m, nm);
-    }
-#endif
 
 /* keys which must set the col position, and the search vars */
     switch (command) {
@@ -2760,7 +2638,6 @@ void edit_execute_macro (WEdit * edit, struct macro macro[], int n)
     edit_update_screen (edit);
 }
 
-#ifndef GTK
 /* User edit menu, like user menu (F2) but only in editor. */
 void user_menu (WEdit *edit)
 {
@@ -2809,4 +2686,3 @@ void user_menu (WEdit *edit)
     edit->force |= REDRAW_COMPLETELY;
     return;
 }
-#endif /* !GTK */

@@ -23,159 +23,58 @@
 #ifndef __EDIT_H
 #define __EDIT_H
 
-#ifdef HAVE_SYS_PARAM_H
-#    include <sys/param.h>
-#endif
-
-#ifdef MIDNIGHT
-
 #ifdef HAVE_SLANG
-#define HAVE_SYNTAXH 1
+#    define HAVE_SYNTAXH 1
 #endif
 
-#    include <stdio.h>
-#    include <stdarg.h>
-#    include <sys/types.h>
-#    ifdef HAVE_UNISTD_H
-#    	 include <unistd.h>
-#    endif
-#    include <string.h>
-#    include <ctype.h>
-#    include <errno.h>
-#    include "src/tty.h"
-#    include <sys/stat.h>
-#    include <errno.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <sys/types.h>
+#ifdef HAVE_UNISTD_H
+#    include <unistd.h>
+#endif
+#include <string.h>
+#include <ctype.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <errno.h>
 
-#    include <fcntl.h>
+#include <fcntl.h>
 
-#    include <stdlib.h>
-#    if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
-#	 include <malloc.h>
-#    endif
+#include <stdlib.h>
+#if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
+#    include <malloc.h>
+#endif
 
-#else       /* ! MIDNIGHT */
-
-#    include "global.h"
-#    include <stdio.h>
-#    include <stdarg.h>
-#    include <sys/types.h>
-     
-#    	 ifdef HAVE_UNISTD_H
-#    	     include <unistd.h>
-#    	 endif
-     
-#ifdef GTK
-#    include <string.h>
+#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
+#    include <rx.h>
 #else
-#    include <my_string.h>
-#endif
-#    include <ctype.h>
-#    include <errno.h>
-#    include <sys/stat.h>
-     
-#    ifdef HAVE_FCNTL_H
-#    	 include <fcntl.h>
-#    endif
-     
-#    include <stdlib.h>
-#    include <stdarg.h>
-
-#    if TIME_WITH_SYS_TIME
-#    	 include <sys/time.h>
-#    	 include <time.h>
-#    else
-#    	 if HAVE_SYS_TIME_H
-#    	     include <sys/time.h>
-#    	 else
-#    	     include <time.h>
-#    	 endif
-#    endif
- 
-#    include "regex.h"
-
-#endif
-
-#ifndef MIDNIGHT
-
-#    include <signal.h>
-#    include <X11/Xlib.h>
-#    include <X11/Xutil.h>
-#    include <X11/Xresource.h>
-#    include "lkeysym.h"
-#ifndef GTK
-#    include "coolwidget.h"
-#    include "app_glob.c"
-#    include "coollocal.h"
-#    include "stringtools.h"
-#else
-#    include <gtk/gtk.h>
-#    include <gdk/gdkprivate.h>
-#    include <gdk/gdk.h>
-#    include "gtkedit.h"
-#    include "editcmddef.h"
-#    ifndef _
-#        define _(x) x
-#        define N_(x) x
-#    endif
-#endif
-
-#else
-
-#    include "src/global.h"
-#    include "src/main.h"		/* for char *shell */
-#    include "src/mad.h"
-#    include "src/dlg.h"
-#    include "src/widget.h"
-#    include "src/color.h"
-#    include "src/dialog.h"
-#    include "src/mouse.h"
-#    include "src/help.h"
-#    include "src/key.h"
-#    include "src/wtools.h"		/* for QuickWidgets */
-#    include "src/cmd.h"		/* for menu_edit_cmd */
-#    include "src/win.h"
-#    include "vfs/vfs.h"
-#    include "src/menu.h"
 #    include <regex.h>
+#endif
+
+#include "src/global.h"
+#include "src/tty.h"
+#include "src/main.h"		/* for char *shell */
+#include "src/mad.h"
+#include "src/dlg.h"
+#include "src/widget.h"
+#include "src/color.h"
+#include "src/dialog.h"
+#include "src/mouse.h"
+#include "src/help.h"
+#include "src/key.h"
+#include "src/wtools.h"		/* for QuickWidgets */
+#include "src/cmd.h"		/* for menu_edit_cmd */
+#include "src/win.h"
+#include "vfs/vfs.h"
+#include "src/menu.h"
+#include "edit-widget.h"
+#include "src/user.h" /* for user_menu_cmd, must be after edit-widget.h */
+
 #    define WANT_WIDGETS
      
 #    define WIDGET_COMMAND (WIDGET_USER + 10)
 #    define N_menus 5
-
-#endif
-
-#ifdef GTK
-/* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-#   include <dirent.h>
-#   define NLENGTH(dirent) (strlen ((dirent)->d_name))
-#else
-#   define dirent direct
-#   define NLENGTH(dirent) ((dirent)->d_namlen)
-
-#   ifdef HAVE_SYS_NDIR_H
-#       include <sys/ndir.h>
-#   endif /* HAVE_SYS_NDIR_H */
-
-#   ifdef HAVE_SYS_DIR_H
-#       include <sys/dir.h>
-#   endif /* HAVE_SYS_DIR_H */
-
-#   ifdef HAVE_NDIR_H
-#       include <ndir.h>
-#   endif /* HAVE_NDIR_H */
-#endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
-#   ifndef _
-#      define _(x) x
-#      define N_(x) x
-#   endif
-#include "vfs/vfs.h"
-#include "src/dialog.h"		/* for input_dialog() */
-#include "src/util.h"		/* for is_printable() */
-#    define CDisplay gdk_display
-#    define CRoot gdk_root_parent
-#    define Window GtkEdit *
-#endif
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	1
 #define SEARCH_DIALOG_OPTION_NO_REGEX	2
@@ -205,20 +104,10 @@
 #define MOD_CURSOR		(1 << 6)
 #define MOD_INVERSE		(1 << 7)
 
-#ifndef MIDNIGHT
-#    ifdef GTK
-#        define EDIT_TEXT_HORIZONTAL_OFFSET 0
-#        define EDIT_TEXT_VERTICAL_OFFSET 0
-#    else
-#        define EDIT_TEXT_HORIZONTAL_OFFSET 4
-#        define EDIT_TEXT_VERTICAL_OFFSET 3
-#    endif
-#else
-#    define EDIT_TEXT_HORIZONTAL_OFFSET 0
-#    define EDIT_TEXT_VERTICAL_OFFSET 1
-#    define FONT_OFFSET_X 0
-#    define FONT_OFFSET_Y 0
-#endif
+#define EDIT_TEXT_HORIZONTAL_OFFSET 0
+#define EDIT_TEXT_VERTICAL_OFFSET 1
+#define FONT_OFFSET_X 0
+#define FONT_OFFSET_Y 0
 
 #define EDIT_RIGHT_EXTREME option_edit_right_extreme
 #define EDIT_LEFT_EXTREME option_edit_left_extreme
@@ -300,34 +189,6 @@ struct context_rule {
     struct key_word **keyword;
 };
 
-#include "edit-widget.h"
-
-#ifndef MIDNIGHT
-
-void edit_render_expose (WEdit * edit, XExposeEvent * xexpose);
-#ifndef GTK
-void edit_render_tidbits (struct cool_widget *w);
-int eh_editor (CWidget * w, XEvent * xevent, CEvent * cwevent);
-#endif
-void edit_draw_menus (Window parent, int x, int y);
-void edit_run_make (void);
-void edit_change_directory (void);
-int edit_man_page_cmd (WEdit * edit);
-void edit_search_replace_dialog (Window parent, int x, int y, char **search_text, char **replace_text, char **arg_order, char *heading, int option);
-void edit_search_dialog (WEdit * edit, char **search_text);
-long edit_find (long search_start, unsigned char *expr, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d);
-void edit_set_foreground_colors (unsigned long normal, unsigned long bold, unsigned long italic);
-void edit_set_background_colors (unsigned long normal, unsigned long abnormal, unsigned long marked, unsigned long marked_abnormal, unsigned long highlighted);
-void edit_set_cursor_color (unsigned long c);
-void draw_options_dialog (Window parent, int x, int y);
-void CRefreshEditor (WEdit * edit);
-void edit_set_user_command (void (*func) (WEdit *, int));
-void edit_draw_this_line_proportional (WEdit * edit, long b, int curs_row, int start_column, int end_column);
-unsigned char get_international_character (unsigned char key_press);
-void edit_set_user_key_function (int (*user_def_key_func) (unsigned int, unsigned int, KeySym keysym));
-
-#else
-
 int edit_drop_hotkey_menu (WEdit * e, int key);
 void edit_menu_cmd (WEdit * e);
 void edit_init_menu_emacs (void);
@@ -337,8 +198,6 @@ int edit_raw_key_query (char *heading, char *query, int cancel);
 char *strcasechr (const unsigned char *s, int c);
 int edit (const char *_file, int line);
 int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch);
-
-#endif
 
 #ifndef NO_INLINE_GETBYTE
 int edit_get_byte (WEdit * edit, long byte_index);
@@ -443,11 +302,7 @@ void edit_paste_from_history (WEdit *edit);
 
 void edit_split_filename (WEdit * edit, const char *name);
 
-#ifdef MIDNIGHT
 #define CWidget Widget
-#elif defined(GTK)
-#define CWidget GtkEdit
-#endif
 void edit_set_syntax_change_callback (void (*callback) (CWidget *));
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
@@ -466,199 +321,63 @@ void book_mark_dec (WEdit * edit, int line);
 
 void user_menu (WEdit *edit);
 
-#ifdef MIDNIGHT
-
-#include "src/user.h" /* for user_menu_cmd, must be after edit-widget.h */
-
 #define CPushFont(x,y)
 #define CPopFont()
 #define FIXED_FONT 1
 
 /* put OS2/NT/WIN95 defines here */
 
-#    ifdef USE_O_TEXT
-#    	 define MY_O_TEXT O_TEXT
-#    else
-#    	 define MY_O_TEXT 0
-#    endif
+#ifdef USE_O_TEXT
+#    define MY_O_TEXT O_TEXT
+#else
+#    define MY_O_TEXT 0
+#endif
 
-#    define FONT_PIX_PER_LINE 1
-#    define FONT_MEAN_WIDTH 1
+#define FONT_PIX_PER_LINE 1
+#define FONT_MEAN_WIDTH 1
      
-#    define get_sys_error(s) (s)
-#    define open mc_open
-#    define close(f) mc_close(f)
-#    define read(f,b,c) mc_read(f,b,c)
-#    define write(f,b,c) mc_write(f,b,c)
-#    define stat(f,s) mc_stat(f,s)
-#    define mkdir(s,m) mc_mkdir(s,m)
-#    define itoa MY_itoa
+#define get_sys_error(s) (s)
+#define open mc_open
+#define close(f) mc_close(f)
+#define read(f,b,c) mc_read(f,b,c)
+#define write(f,b,c) mc_write(f,b,c)
+#define stat(f,s) mc_stat(f,s)
+#define mkdir(s,m) mc_mkdir(s,m)
+#define itoa MY_itoa
 
-#    define edit_get_load_file(d,f,h) input_dialog (h, " Enter file name: ", f)
-#    define edit_get_save_file(d,f,h) input_dialog (h, " Enter file name: ", f)
-#    define CMalloc(x) malloc(x)
+#define edit_get_load_file(d,f,h) input_dialog (h, " Enter file name: ", f)
+#define edit_get_save_file(d,f,h) input_dialog (h, " Enter file name: ", f)
+#define CMalloc(x) malloc(x)
      
-#    define set_error_msg(s) edit_init_error_msg = strdup(s)
+#define set_error_msg(s) edit_init_error_msg = strdup(s)
 
-#    ifdef _EDIT_C
+#ifdef _EDIT_C
 
-#         define edit_error_dialog(h,s) set_error_msg(s)
+#define edit_error_dialog(h,s) set_error_msg(s)
 char *edit_init_error_msg = NULL;
 
-#    else				/* ! _EDIT_C */
+#else				/* ! _EDIT_C */
 
-#    define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
-#    define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, _("&Ok"))
+#define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
+#define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, _("&Ok"))
 extern char *edit_init_error_msg;
 
-#    endif				/* ! _EDIT_C */
+#endif				/* ! _EDIT_C */
 
 
-#    define get_error_msg(s) edit_init_error_msg
-#    define edit_query_dialog2(h,t,a,b) query_dialog(h,t,0,2,a,b)
-#    define edit_query_dialog3(h,t,a,b,c) query_dialog(h,t,0,3,a,b,c)
-#    define edit_query_dialog4(h,t,a,b,c,d) query_dialog(h,t,0,4,a,b,c,d)
+#define get_error_msg(s) edit_init_error_msg
+#define edit_query_dialog2(h,t,a,b) query_dialog(h,t,0,2,a,b)
+#define edit_query_dialog3(h,t,a,b,c) query_dialog(h,t,0,3,a,b,c)
+#define edit_query_dialog4(h,t,a,b,c,d) query_dialog(h,t,0,4,a,b,c,d)
 
-#else				/* ! MIDNIGHT */
+#define COLOR_BLACK 0
+#define COLOR_WHITE 1
+#define CURSOR_TYPE_EDITOR 0
 
-#    ifdef GTK
-#        define CPushFont(x,y)
-#        define CPopFont()
-#        define FIXED_FONT gtk_edit_fixed_font
-#        define get_sys_error(s) (s)
-
-#        define open mc_open
-#        define close(f) mc_close(f)
-#        define read(f,b,c) mc_read(f,b,c)
-#        define write(f,b,c) mc_write(f,b,c)
-#        define stat(f,s) mc_stat(f,s)
-#        define mkdir(s,m) mc_mkdir(s,m)
-
-#        define itoa MY_itoa
-#        define CMalloc(x) malloc(x)
-
-#        define EDITOR_NO_FILE			(1<<3)
-#        define EDITOR_NO_SCROLL		(1<<4)
-#        define EDITOR_NO_TEXT			(1<<5)
-#        define EDITOR_HORIZ_SCROLL		(1<<6)
-
-#include <gdk/gdkprivate.h>
-#        define CWindowOf(w) (w)
-#        define CHeightOf(w) ((w)->editable.widget.allocation.height)
-#        define CWidthOf(w) ((w)->editable.widget.allocation.width)
-#        define COptionsOf(w) ((w)->options)
-
-#        define cache_type unsigned int
-
-/* font dimensions */
-#        define FONT_OVERHEAD		gtk_edit_option_text_line_spacing
-#        define FONT_BASE_LINE		(FONT_OVERHEAD + gtk_edit_option_font_ascent)
-#        define FONT_HEIGHT		(gtk_edit_option_font_ascent + gtk_edit_option_font_descent)
-#        define FONT_PIX_PER_LINE	(FONT_OVERHEAD + FONT_HEIGHT)
-#        define FONT_MEAN_WIDTH	gtk_edit_option_font_mean_width
-
-#        define EDIT_FRAME_H 3
-#        define EDIT_FRAME_W 3
-
-#        define FONT_OFFSET_X 0
-#        define FONT_OFFSET_Y		FONT_BASE_LINE
-
-#        define FONT_PER_CHAR gtk_edit_font_width_per_char
-
-#        ifndef _GTK_EDIT_C
-extern guchar gtk_edit_font_width_per_char[256];
-extern int gtk_edit_option_text_line_spacing;
-extern int gtk_edit_option_font_ascent;
-extern int gtk_edit_option_font_descent;
-extern int gtk_edit_option_font_mean_width;
-extern int gtk_edit_fixed_font;
-#        endif
-
-/* start temporary */
-
-#        define COLOR_BLACK 0
-#        define COLOR_WHITE 1
-#        define CURSOR_TYPE_EDITOR 0
-
-#        define WIN_MESSAGES GTK_WINDOW_TOPLEVEL, 20, 20
-#        define option_text_line_spacing 1
-#        define fixed_font 0
+#define option_text_line_spacing 1
+#define fixed_font 0
 
 #define color_palette(x) win->color[x].pixel
-
-#define DndNotDnd	-1
-#define DndUnknown	0
-#define DndRawData	1
-#define DndFile		2
-#define DndFiles	3
-#define DndText		4
-#define DndDir		5
-#define DndLink		6
-#define DndExe		7
-#define DndURL		8
-#define DndMIME         9
-
-#define DndEND		10
-
-#define dnd_null_term_type(d) \
-	((d) == DndFile || (d) == DndText || (d) == DndDir || \
-	(d) == DndLink || (d) == DndExe || (d) == DndURL)
-
-
-
-/* end temporary */
-
-#    else
-
-#        define WIN_MESSAGES edit->widget ? edit->widget->mainid : CRoot, 20, 20
-
-#    endif
-
-#    define MY_O_TEXT 0
-
-#    ifdef GTK
-
-#        ifndef min
-#            define min(x,y)     (((x) < (y)) ? (x) : (y))
-#        endif
-
-#        ifndef max
-#            define max(x,y)     (((x) > (y)) ? (x) : (y))
-#        endif
-
-/*
-extern Display             *gdk_display;
-extern Window               gdk_root_window;
-*/
-
-#        define edit_get_load_file(d,f,h) gtk_edit_dialog_get_load_file(d,f,h)
-#        define edit_get_save_file(d,f,h) gtk_edit_dialog_get_save_file(d,f,h)
-#        define edit_error_dialog(h,t) gtk_edit_dialog_error(h,"%s",t)
-#        define edit_message_dialog(h,t) gtk_edit_dialog_message(h,"%s",t)
-#        define edit_query_dialog2(h,t,a,b) gtk_edit_dialog_query(h,t,a,b,0)
-#        define edit_query_dialog3(h,t,a,b,c) gtk_edit_dialog_query(h,t,a,b,c,0)
-#        define edit_query_dialog4(h,t,a,b,c,d) gtk_edit_dialog_query(h,t,a,b,c,d,0)
-
-#        define CError(x) printf("Error: %s\n",x)
-#        define CIsDropAcknowledge(a,b) DndNotDnd
-#        define CGetDrop(e,d,s,x,y) DndNotDnd
-#        define CDropAcknowledge(x) 
-/* #        define edit_get_syntax_color(e,i,f,b)  */
-#        define get_international_character(k) 0
-#        define compose_key_pressed 0
-
-#    else
-
-#        define edit_get_load_file(d,f,h) CGetLoadFile(WIN_MESSAGES,d,f,h)
-#        define edit_get_save_file(d,f,h) CGetSaveFile(WIN_MESSAGES,d,f,h)
-#        define edit_error_dialog(h,t) CErrorDialog(WIN_MESSAGES,h,"%s",t)
-#        define edit_message_dialog(h,t) CMessageDialog(WIN_MESSAGES,0,h,"%s",t)
-#        define edit_query_dialog2(h,t,a,b) CQueryDialog(WIN_MESSAGES,h,t,a,b,0)
-#        define edit_query_dialog3(h,t,a,b,c) CQueryDialog(WIN_MESSAGES,h,t,a,b,c,0)
-#        define edit_query_dialog4(h,t,a,b,c,d) CQueryDialog(WIN_MESSAGES,h,t,a,b,c,d,0)
-#    endif
-
-#endif				/* ! MIDNIGHT */
 
 extern char *home_dir;
 
@@ -689,16 +408,14 @@ struct selection selection_history[NUM_SELECTION_HISTORY] =
     {0, 0},
     {0, 0},
     {0, 0},
-    {0, 0},
+    {0, 0}
 };
 
-#ifdef MIDNIGHT
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
    or EDIT_KEY_EMULATION_EMACS
  */
 int edit_key_emulation = EDIT_KEY_EMULATION_NORMAL;
-#endif	/* ! MIDNIGHT */
 
 int option_word_wrap_line_length = 72;
 int option_typewriter_wrap = 0;
@@ -740,14 +457,12 @@ extern struct selection selection;
 extern struct selection selection_history[];
 extern int current_selection;
 
-#ifdef MIDNIGHT
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
    or EDIT_KEY_EMULATION_EMACS
  */
 extern int edit_key_emulation;
 extern WEdit *wedit;
-#endif	/* ! MIDNIGHT */
 
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
