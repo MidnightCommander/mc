@@ -755,8 +755,9 @@ ftpfs_open_socket(struct ftpfs_connection *bucket)
 	    return -1;
 	}
 	server_address.sin_family = hp->h_addrtype;
-	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr,
-	       hp->h_length);
+
+	/* We copy only 4 bytes, we can not trust hp->h_length, as it comes from the DNS */
+	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr, 4);
     }
 
 #define THE_PORT qproxy(bucket) ? port : qport (bucket)

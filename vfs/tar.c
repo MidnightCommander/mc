@@ -543,17 +543,25 @@ static int read_header (struct tarfs_archive *archive, int tard)
 
     if (sum == 8 * ' ') {
 	/*
-		 * This is a zeroed record...whole record is 0's except
-		 * for the 8 blanks we faked for the checksum field.
-		 */
+	 * This is a zeroed record...whole record is 0's except
+	 * for the 8 blanks we faked for the checksum field.
+	 */
 	return 2;
     }
     if (sum != recsum && signed_sum != recsum)
 	return 0;
-
+    
     /*
-	 * Good record.  Decode file size and return.
-	 */
+     * linkflag on BSDI tar (pax) always '\000'
+     */
+    if(header->header.linkflag == '\000' &&
+       strlen(header->header.arch_name) &&
+       header->header.arch_name[strlen(header->header.arch_name) - 1] == '/')
+	header->header.linkflag = LF_DIR;
+    
+     /*
+     * Good record.  Decode file size and return.
+     */
     if (header->header.linkflag == LF_LINK || header->header.linkflag == LF_DIR)
 	hstat.st_size = 0;	/* Links 0 size on tape */
     else

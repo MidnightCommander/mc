@@ -1,3 +1,12 @@
+1998-08-07  Timur Bakeyev (timur@comtat.ru)
+
+	* tar.c (read_header): Support for linkflag on BSDI tar (pax), it
+	is always 0.
+
+1998-06-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ftpfs.c (ftpfs_open_socket): Potential security break fix.
+
 1998-08-06  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (BUILT_SOURCES): Make it `make dist' friendly.
@@ -80,6 +89,7 @@ Thu May 28 16:42:31 1998  Pavel Machek <pavel@ucw.cz>
  	tar:/path.tar/file. Now, syntax is /path.tar#utar/file, which has
  	better defined meaning. Similar changes are done to all other
  	protocols. This change touched really _many_ places of code.
+
 
 1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
