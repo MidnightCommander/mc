@@ -423,7 +423,7 @@ set_attr (unsigned attr)
     bc = (attr >> 4) & 0xF;
 
     printf ("\x1B[%d;%d;3%d;4%dm", (bc & 8) ? 5 : 25, (tc & 8) ? 1 : 22,
-	    color_map[tc & 7], color_map[bc & 7]
+	    color_map[tc & 7], color_map[bc & 7]);
 }
 
 #define cursor_to(x, y) do {				\

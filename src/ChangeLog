@@ -1,3 +1,8 @@
+2003-03-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cons.handler.c (set_attr) [__FreeBSD__]: Fix compilation.
+	Reported by Dmitry Alexeyev <dmi_a@qnx.org.ru>.
+
 2003-03-22  Adam Byrtek  <alpha@debian.org>
 
 	* command.c (enter): Check subshell state early and return if
