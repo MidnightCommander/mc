@@ -491,24 +491,22 @@ AC_ARG_WITH(termcap,
 	fi]
 )
 
-LIBEDIT_A=""
-MCEDIT=""
-LEDIT=""
-EDIT_msg=""
+
+dnl
+dnl Internal editor support.
+dnl
 AC_ARG_WITH(edit,
-        [  --with-edit              Enable internal editor [[yes]]],
-	[if test x$withval = xyes
-	then
-		AC_WITH_EDIT
-	else
-		EDIT_msg="no"
-	fi], 
-	[dnl Default: provide the internal editor
-	AC_WITH_EDIT
-])
-AC_SUBST(LIBEDIT_A)
-AC_SUBST(MCEDIT)
-AC_SUBST(LEDIT)
+        [  --with-edit              Enable internal editor [[yes]]])
+
+if test x$with_edit != xno; then
+	AC_DEFINE(USE_INTERNAL_EDIT, 1, [Define to enable internal editor])
+	use_edit=yes
+	EDIT_msg="yes"
+	AC_MSG_NOTICE([using internal editor])
+else
+	EDIT_msg="no"
+fi
+
 
 undelfs_o=""
 
@@ -654,7 +652,7 @@ if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi
 
-AM_CONDITIONAL(USE_EDIT, [test -n "$LIBEDIT_A"])
+AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])

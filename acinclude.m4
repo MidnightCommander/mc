@@ -655,16 +655,6 @@ AC_DEFUN([AC_WITH_SLANG], [
         fi]
 )
 
-AC_DEFUN([AC_WITH_EDIT], [
-	AC_DEFINE(USE_INTERNAL_EDIT, 1,
-		  [Define to enable internal editor])
-	LIBEDIT_A="libedit.a"
-	MCEDIT="mcedit"
-	LEDIT="-ledit"
-	EDIT_msg="yes"
-	AC_MSG_NOTICE([using internal editor])
-])
-
 AC_DEFUN([AC_EXT2_UNDEL], [
   MC_UNDELFS_CHECKS
   if test "$ext2fs_undel" = yes; then

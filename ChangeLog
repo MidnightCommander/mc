@@ -1,5 +1,9 @@
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Simplify processing of without-edit.  Replace
+	several variables with use_edit.
+	* acinclude.m4: Remove AC_WITH_EDIT.
+
 	* acinclude.m4: Replace smbfs and SAMBAFILES variables with
 	use_smbfs.
 	* configure.in: Likewise.
