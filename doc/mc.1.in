@@ -2659,7 +2659,7 @@ and
 elements are optional.  If you specify the
 .I user
 element, the Midnight Commander will login to the remote machine as that
-user, otherwise it will use your login name or the login name from the
+user, otherwise it will use anonymous login or the login name from the
 .I ~/.netrc
 file.  The optional
 .I pass
@@ -2789,7 +2789,7 @@ Examples:
 On Linux systems, if you asked configure to use the ext2fs undelete
 facilities, you will have the undelete file system available.
 Recovery of deleted files is only available on ext2 file systems.  The
-undelete file system is just an interface to the ext2fs library to:
+undelete file system is just an interface to the ext2fs library to
 retrieve all of the deleted files names on an ext2fs and provides and
 to extract the selected files into a regular partition.
 .PP
