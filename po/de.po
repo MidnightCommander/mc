@@ -2,16 +2,19 @@
 # Copyright (C) 1994-2001 Free Software Foundation, Inc.
 # Martin Schulze <joey@debian.org>
 # Kai Lahmann <kl@linuxfaqs.de>, 2000.
-# 
+# Christian Meyer <chrisime@gnome.org>, 2001.
+#
+# 2001-03-06 Da Nautilus der zukünftige GNOME Filemanager ist, werden dir mc-Meldungen# nicht mehr infinitivisch umgeformt.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.x\n"
-"POT-Creation-Date: 2001-02-28 20:00+0100\n"
-"PO-Revision-Date: 2001-02-28 20:00+0100\n"
+"POT-Creation-Date: 2001-03-06 12:31+0100\n"
+"PO-Revision-Date: 2001-03-06 12:26+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: edit/edit_key_translator.c:126
@@ -679,7 +682,7 @@ msgstr "fertig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1817
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1811
 msgid "Password:"
 msgstr "Paßwort:"
 
@@ -6941,7 +6944,7 @@ msgstr "Passwort: "
 msgid "Password for \\\\%s\\%s"
 msgstr "Paßwort für \\\\%s\\%s"
 
-#: vfs/smbfs.c:667
+#: vfs/smbfs.c:668
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6950,29 +6953,34 @@ msgstr ""
 " Neuverbindung mit %s fehlgeschlagen\n"
 " "
 
-#: vfs/smbfs.c:1243
+#: vfs/smbfs.c:1244
 msgid " Authentication failed "
 msgstr " Authentikation fehlgeschlagen "
 
-#: vfs/smbfs.c:1738
+#: vfs/smbfs.c:1739
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s beim mkdir von %s "
 
-#: vfs/smbfs.c:1759
+#: vfs/smbfs.c:1760
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s beim rmdir von %s "
 
-#: vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
+#: vfs/smbfs.c:1865 vfs/smbfs.c:1885 vfs/smbfs.c:1946
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s beim Öffnen von entfernter Datei %s "
 
-#: vfs/smbfs.c:1972
+#: vfs/smbfs.c:1969
 #, c-format
 msgid " %s renaming files\n"
 msgstr "  %s beim Umbenennen von Dateien\n"
+
+#. This is place of next pointer
+#: vfs/smbfs.c:1995
+msgid "netbios over tcp/ip"
+msgstr "netbios über TCP/IP"
 
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
@@ -7002,31 +7010,31 @@ msgstr ""
 "%s\n"
 "sieht nicht wie ein tar-Archiv aus."
 
-#: vfs/vfs.c:1135
+#: vfs/vfs.c:1138
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
 
-#: vfs/vfs.c:1778
+#: vfs/vfs.c:1773
 msgid "Could not parse:"
 msgstr "Konnte nicht verarbeiten:"
 
-#: vfs/vfs.c:1780
+#: vfs/vfs.c:1775
 msgid "More parsing errors will be ignored."
 msgstr "Weitere Verarbeitungsfehler werden ignoriert."
 
-#: vfs/vfs.c:1780
+#: vfs/vfs.c:1775
 msgid "(sorry)"
 msgstr "(Entschuldigung)"
 
-#: vfs/vfs.c:1791
+#: vfs/vfs.c:1785
 msgid "Internal error:"
 msgstr "Interner Fehler:"
 
-#: vfs/vfs.c:1801
+#: vfs/vfs.c:1795
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld Bytes übertragen)"
 
-#: vfs/vfs.c:1802
+#: vfs/vfs.c:1796
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld Bytes übertragen"
