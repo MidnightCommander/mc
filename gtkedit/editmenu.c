@@ -56,7 +56,7 @@ static void menu_key (int i)
     send_message (wedit->widget.parent, (Widget *) wedit, WIDGET_KEY, i);
 }
 
-void edit_wrap_cmd ()
+void edit_wrap_cmd (void)
 {
     char *f;
     char s[12];
@@ -71,7 +71,7 @@ void edit_wrap_cmd ()
     }
 }
 
-void edit_about_cmd ()
+void edit_about_cmd (void)
 {
     edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
 		      _("\n"

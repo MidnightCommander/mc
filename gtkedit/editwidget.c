@@ -1152,7 +1152,7 @@ void edit_labels (WEdit * edit)
 }
 
 
-long get_key_state ()
+long get_key_state (void)
 {
     return (long) get_modifier ();
 }

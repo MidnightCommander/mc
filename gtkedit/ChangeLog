@@ -1,5 +1,9 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* editmenu.c (edit_wrap_cmd): Fix declaration.
+	(edit_about_cmd): Likewise.
+	* editwidget.c (get_key_state): Likewise.
+
 	* editcmd.c (edit_quit_cmd): Don't use strcmp on the result of
 	gtk_dialog_cauldron() since it's NULL if the dialog has been
 	closed without using buttons.
