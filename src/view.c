@@ -6,6 +6,7 @@
                1996 Joseph M. Hinkle
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
+	       2004 Roland Illig <roland.illig@gmx.de>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -79,6 +80,7 @@
 /* Offset in bytes into a file */
 typedef unsigned long offset_type;
 #define INVALID_OFFSET ((offset_type) -1)
+#define OFFSETTYPE_MAX (~((offset_type) 0))
 
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
@@ -99,13 +101,15 @@ struct WView {
     int have_frame;
     
     unsigned char *data;	/* Memory area for the file to be viewed */
+    size_t datasize;		/* Number of bytes in the data */
+    /* view_update_last_byte() must be called after assignment to datasize */
 
     /* File information */
     int file;			/* File descriptor (for mmap and munmap) */
     FILE *stdfile;		/* Stdio struct for reading file in parts */
     int reading_pipe;		/* Flag: Reading from pipe(use popen/pclose) */
-    offset_type bytes_read;     /* How much of file is read */
     int mmapping;		/* Did we use mmap on the file? */
+    size_t mmappedsize;		/* Number of bytes that are mmapped; used only for munmap() */
 
     /* Display information */
     offset_type last;           /* Last byte shown */
@@ -137,7 +141,10 @@ struct WView {
     int growing_buffer;		/* Use the growing buffers? */
     char **block_ptr;		/* Pointer to the block pointers */
     int          blocks;	/* The number of blocks in *block_ptr */
-
+    size_t growbuf_lastindex;   /* Number of bytes in the last page of the
+                                   growing buffer */
+    /* view_update_last_byte() must be called after assignment to
+       growing_buffer, blocks, growbuf_lastindex */
     
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
@@ -159,8 +166,20 @@ struct WView {
 				 * -1 view previous file
 				 * 1 view next file
 				 */
-    struct stat s;		/* stat for file */
 };
+
+static void view_update_last_byte (WView *view)
+{
+    if (view->growing_buffer) {
+        if (view->blocks == 0)
+            view->last_byte = 0;
+        else
+            view->last_byte = ((offset_type) view->blocks - 1)
+                              * VIEW_PAGE_SIZE + view->growbuf_lastindex;
+    } else
+        view->last_byte = view->datasize;
+    view->bottom_first = INVALID_OFFSET;
+}
 
 static void view_move_cursor_to_eol(WView *view)
 {
@@ -227,7 +246,7 @@ free_file (WView *view)
 
 #ifdef HAVE_MMAP
     if (view->mmapping) {
-	mc_munmap (view->data, view->s.st_size);
+	mc_munmap (view->data, view->mmappedsize);
 	close_view_file (view);
     } else
 #endif				/* HAVE_MMAP */
@@ -280,56 +299,67 @@ view_done (WView *view)
 
 static void view_hook (void *);
 
+/* Copies the output from the pipe to the growing buffer, until either
+ * the end-of-pipe is reached or the interval [0..ofs) of the growing
+ * buffer is completely filled. */
+static void
+view_growbuf_read_until (WView *view, offset_type ofs)
+{
+    ssize_t nread;
+    unsigned char *p;
+    size_t bytesfree;
+
+    /* g_assert (view->growing_buffer, NULL); */
+    while (view->last_byte < ofs) {
+        if (view->blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+            char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
+            char **newblocks = g_try_malloc (sizeof (char *) * (view->blocks + 1));
+            if (!newblock || !newblocks) {
+                g_free (newblock);
+                return;
+            }
+            memcpy (newblocks, view->block_ptr, sizeof (char *) * view->blocks);
+            g_free (view->block_ptr);
+            view->block_ptr = newblocks;
+            view->block_ptr[view->blocks++] = newblock;
+            view->growbuf_lastindex = 0;
+            view_update_last_byte (view);
+        }
+        p = view->block_ptr[view->blocks - 1] + view->growbuf_lastindex;
+        bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
+        if (view->stdfile != NULL)
+            nread = fread (p, 1, bytesfree, view->stdfile);
+        else
+            nread = mc_read (view->file, p, bytesfree);
+
+        if (nread == -1 || nread == 0)
+            return;
+        view->growbuf_lastindex += nread;
+        view_update_last_byte (view);
+    }
+}
+
 static int
 get_byte (WView *view, unsigned int byte_index)
 {
-    int page = byte_index / VIEW_PAGE_SIZE + 1;
-    int offset = byte_index % VIEW_PAGE_SIZE;
-    int i, n;
-
     if (view->growing_buffer) {
-	if (page > view->blocks) {
-	    view->block_ptr = g_realloc (view->block_ptr,
-					 page * sizeof (char *));
-	    for (i = view->blocks; i < page; i++) {
-		char *p = g_try_malloc (VIEW_PAGE_SIZE);
-		view->block_ptr[i] = p;
-		if (!p)
-		    return '\n';
-		if (view->stdfile != NULL)
-		    n = fread (p, 1, VIEW_PAGE_SIZE, view->stdfile);
-		else
-		    n = mc_read (view->file, p, VIEW_PAGE_SIZE);
-/*
- * FIXME: Errors are ignored at this point
- * Also should report preliminary EOF
- */
-		if (n != -1)
-		    view->bytes_read += n;
-		if (view->s.st_size < view->bytes_read) {
-		    view->bottom_first = INVALID_OFFSET; /* Invalidate cache */
-		    view->s.st_size = view->bytes_read;
-		    view->last_byte = view->bytes_read;
-		    if (view->reading_pipe)
-			view->last_byte = view->first + view->bytes_read;
-		}
-		/* To force loading the next page */
-		if (n == VIEW_PAGE_SIZE && view->reading_pipe) {
-		    view->last_byte++;
-		}
-	    }
-	    view->blocks = page;
+        size_t pageno = byte_index / VIEW_PAGE_SIZE;
+        size_t pageindex = byte_index % VIEW_PAGE_SIZE;
+
+        view_growbuf_read_until (view, byte_index + 1);
+        if (view->blocks == 0)
+            return -1;
+        if (pageno < view->blocks - 1)
+            return view->block_ptr[pageno][pageindex];
+        if (pageno == view->blocks - 1 && pageindex < view->growbuf_lastindex)
+            return view->block_ptr[pageno][pageindex];
+        return -1;
 	}
-	if (byte_index >= view->bytes_read) {
-	    return -1;
-	} else
-	    return view->block_ptr[page - 1][offset];
-    } else {
-	if (byte_index >= view->last_byte)
-	    return -1;
-	else
-	    return view->data[byte_index];
-    }
+
+    /* g_assert (view->data != NULL); */
+    if (byte_index < view->datasize)
+        return view->data[byte_index];
+    return -1;
 }
 
 static void
@@ -495,8 +525,9 @@ set_view_init_error (WView *view, const char *msg)
     view->first = 0;
     view->last_byte = 0;
     if (msg) {
-	view->bytes_read = strlen (msg);
-	return g_strdup (msg);
+        view->datasize = strlen (msg);
+        view_update_last_byte (view);
+        return g_strdup (msg);
     }
     return NULL;
 }
@@ -508,10 +539,13 @@ init_growing_view (WView *view, const char *name, const char *filename)
     const char *err_msg = NULL;
 
     view->growing_buffer = 1;
+    view->block_ptr = NULL;
+    view->blocks = 0;
+    view->growbuf_lastindex = 0; /* unused */
+    view_update_last_byte (view);
 
     if (name) {
 	view->reading_pipe = 1;
-	view->s.st_size = 0;
 
 	open_error_pipe ();
 	if ((view->stdfile = popen (name, "r")) == NULL) {
@@ -522,8 +556,8 @@ init_growing_view (WView *view, const char *name, const char *filename)
 	}
 
 	/* First, check if filter produced any output */
-	get_byte (view, 0);
-	if (view->bytes_read <= 0) {
+	view_growbuf_read_until (view, 1);
+	if (view->last_byte == 0) {
 	    pclose (view->stdfile);
 	    view->stdfile = NULL;
 	    /* Avoid two messages.  Message from stderr has priority.  */
@@ -546,26 +580,28 @@ init_growing_view (WView *view, const char *name, const char *filename)
    error message instead of the file buffer (quick_view feature).
 */
 static char *
-load_view_file (WView *view, int fd)
+load_view_file (WView *view, int fd, const struct stat *st)
 {
     view->file = fd;
 
-    if (view->s.st_size == 0) {
+    if (st->st_size == 0) {
 	/* Must be one of those nice files that grow (/proc) */
 	close_view_file (view);
 	return init_growing_view (view, 0, view->filename);
     }
 #ifdef HAVE_MMAP
-    if ((size_t) view->s.st_size == view->s.st_size)
-	view->data = mc_mmap (0, view->s.st_size, PROT_READ,
-			      MAP_FILE | MAP_SHARED, view->file, 0);
+    if ((size_t) st->st_size == st->st_size)
+        view->data = mc_mmap (0, st->st_size, PROT_READ,
+            MAP_FILE | MAP_SHARED, view->file, 0);
     else
 	view->data = (caddr_t) -1;
     if ((caddr_t) view->data != (caddr_t) - 1) {
 	/* mmap worked */
 	view->first = 0;
-	view->bytes_read = view->s.st_size;
+    view->mmappedsize = st->st_size;
+    view->datasize = st->st_size;
 	view->mmapping = 1;
+    view_update_last_byte (view);
 	return NULL;
     }
 #endif				/* HAVE_MMAP */
@@ -575,20 +611,21 @@ load_view_file (WView *view, int fd)
      * for any reason, so we use this as fallback (pavel@ucw.cz) */
 
     /* Make sure view->s.st_size is not truncated when passed to g_malloc */
-    if ((gulong) view->s.st_size == view->s.st_size)
-	view->data = (unsigned char *) g_try_malloc ((gulong) view->s.st_size);
+    if ((gulong) st->st_size == st->st_size)
+        view->data = (unsigned char *) g_try_malloc ((gulong) st->st_size);
     else
 	view->data = NULL;
 
     if (view->data == NULL || mc_lseek (view->file, 0, SEEK_SET) != 0
 	|| mc_read (view->file, view->data,
-		    view->s.st_size) != view->s.st_size) {
+		    st->st_size) != st->st_size) {
 	g_free (view->data);
 	close_view_file (view);
 	return init_growing_view (view, 0, view->filename);
     }
     view->first = 0;
-    view->bytes_read = view->s.st_size;
+    view->datasize = st->st_size;
+    view_update_last_byte (view);
     return NULL;
 }
 
@@ -601,23 +638,24 @@ do_view_init (WView *view, const char *_command, const char *_file,
     int i, type;
     int fd = -1;
     char tmp[BUF_MEDIUM];
+    struct stat st;
 
     if (view->view_active)
 	view_done (view);
 
     /* Set up the state */
-    view->block_ptr = 0;
     view->data = NULL;
+    view->datasize = 0;
     view->growing_buffer = 0;
     view->reading_pipe = 0;
     view->mmapping = 0;
     view->blocks = 0;
-    view->block_ptr = 0;
-    view->first = view->bytes_read = 0;
-    view->last_byte = 0;
+    view->block_ptr = NULL;
+    view->first = 0;
     view->filename = g_strdup (_file);
     view->command = 0;
     view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view_update_last_byte (view);
 
     /* Clear the markers */
     view->marker = 0;
@@ -642,7 +680,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	}
 
 	/* Make sure we are working with a regular file */
-	if (mc_fstat (fd, &view->s) == -1) {
+	if (mc_fstat (fd, &st) == -1) {
 	    mc_close (fd);
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
 			_file, unix_error_string (errno));
@@ -650,7 +688,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	    goto finish;
 	}
 
-	if (!S_ISREG (view->s.st_mode)) {
+	if (!S_ISREG (st.st_mode)) {
 	    mc_close (fd);
 	    g_snprintf (tmp, sizeof (tmp),
 			_(" Cannot view: not a regular file "));
@@ -673,7 +711,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
 		g_strconcat (_file, decompress_extension (type), (char *) NULL);
 	}
 
-	error = load_view_file (view, fd);
+	error = load_view_file (view, fd, &st);
     }
 
   finish:
@@ -699,10 +737,10 @@ do_view_init (WView *view, const char *_command, const char *_file,
     /* Special case: The data points to the error message */
     if (error) {
 	view->data = error;
+        view->datasize = strlen (error);
+        view_update_last_byte (view);
 	view->file = -1;
-	view->s.st_size = view->bytes_read = strlen (view->data);
     }
-    view->last_byte = view->first + view->s.st_size;
 
     if (start_line > 1 && !error) {
 	int saved_wrap_mode = view->wrap_mode;
@@ -759,14 +797,12 @@ view_percent (WView *view, int p, int w, gboolean update_gui)
 {
     int percent;
 
-    percent = (view->s.st_size == 0
-	       || view->last_byte == view->last) ? 100 : (p >
-							  (INT_MAX /
-							   100) ? p /
-							  (view->s.
-							   st_size /
-							   100) : p * 100 /
-							  view->s.st_size);
+    if (view->last_byte == 0 || view->last_byte == view->last)
+        percent = 100;
+    else if (p > (INT_MAX / 100))
+        percent = p / (view->last_byte / 100);
+    else
+        percent = p * 100 / view->last_byte;
 
 #if 0
     percent = view->s.st_size == 0 ? 100 :
@@ -813,7 +849,7 @@ view_status (WView *view, gboolean update_gui)
 	}
 	if (w > 62) {
 	    widget_move (view, view->have_frame, 43 + view->have_frame);
-	    printw (const_cast(char *, _("%s bytes")), size_trunc (view->s.st_size));
+	    printw (const_cast(char *, _("%s bytes")), size_trunc (view->last_byte));
 	}
 	if (w > 70) {
 	    printw (" ");
@@ -1068,10 +1104,8 @@ display (WView *view)
 	    }
 	}
     } else {
-	if (view->growing_buffer && from == view->last_byte)
-	    get_byte (view, from);
-	for (; row < height && from < view->last_byte; from++) {
-	    c = get_byte (view, from);
+	/* the get_byte() call below might modify view->last_byte */
+	for (; row < height && ((void) (c = get_byte (view, from)), from < view->last_byte); from++) {
 	    if ((c == '\n') || (col >= width && view->wrap_mode)) {
 		col = frame_shift;
 		row++;
@@ -1384,15 +1418,8 @@ get_bottom_first (WView *view, int do_not_cache, int really)
 	return view->bottom_first;
 
     /* Force loading */
-    if (view->growing_buffer) {
-	offset_type old_last_byte;
-
-	old_last_byte = INVALID_OFFSET;
-	while (old_last_byte != view->last_byte) {
-	    old_last_byte = view->last_byte;
-	    get_byte (view, view->last_byte + VIEW_PAGE_SIZE);
-	}
-    }
+    if (view->growing_buffer)
+        view_growbuf_read_until (view, OFFSETTYPE_MAX);
 
     bottom_first = move_backward2 (view, view->last_byte, vheight - 1);
 
@@ -1609,7 +1636,7 @@ static offset_type update_activate;
 static void
 search_update_steps (WView *view)
 {
-    if (view->s.st_size)
+    if (view->last_byte != 0)
 	update_steps = 40000;
     else /* viewing a data stream, not a file */
 	update_steps = view->last_byte / 100;
@@ -2784,7 +2811,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->viewer_magic_flag = default_magic_flag;
     view->viewer_nroff_flag = default_nroff_flag;
     view->have_frame = is_panel;
-    view->last_byte = -1;
     view->wrap_mode = global_wrap_mode;
 
     widget_want_cursor (view->widget, 0);

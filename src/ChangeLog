@@ -1,3 +1,11 @@
+2004-12-02  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (struct WView): Renamed some variables to reflect the
+	actual use. (view_growbuf_read_until): Moved the growing buffer
+	handling out of get_byte.
+	* view.c: Cleaned up the code. Added error handling for the
+	growing buffer case.
+
 2004-12-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* file.c (make_symlink): Constify r.
