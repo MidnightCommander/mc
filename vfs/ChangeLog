@@ -1,3 +1,7 @@
+2004-11-29  Jindrich Novy  <jnovy@redhat.com>
+
+	* direntry.c (vfs_s_readlink): Correctly calculate link length.
+
 2004-11-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* fish.c (fish_file_store): Check write() more carefully.

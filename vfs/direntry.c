@@ -700,7 +700,7 @@ vfs_s_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     if (ino->linkname == NULL)
 	ERRNOR (EFAULT, -1);
 
-    len = strlen (buf);
+    len = strlen (ino->linkname);
     if (size < len)
        len = size;
     /* readlink() does not append a NUL character to buf */
