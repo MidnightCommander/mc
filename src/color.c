@@ -40,18 +40,26 @@ int dialog_colors [4];
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
+
+
 #ifdef HAVE_GNOME
-#   define CTYPE GdkColor *
+#	 define  CTYPE GdkColor *
 void init_pair (int, CTYPE, CTYPE);
 #else
-#    ifdef HAVE_SLANG
-#        define CTYPE char *
-#    else
-#        define CTYPE int
-#        define color_map_fg(n) (color_map[n].fg % COLORS)
-#        define color_map_bg(n) (color_map[n].bg % COLORS)
-#    endif
+#	  ifdef HAVE_SLANG
+#	      define CTYPE char *
+#	  else
+#	      define CTYPE int
+#	      define color_map_fg(n) (color_map[n].fg % COLORS)
+#	      define color_map_bg(n) (color_map[n].bg % COLORS)
+#	  endif
 #endif
+
+static struct colorpair {
+    char *name;			/* Name of the entry */
+    CTYPE fg;			/* foreground color */
+    CTYPE bg;			/* background color */
+};
 
 #ifndef color_map_fg
 #   define color_map_fg(n) color_map[n].fg

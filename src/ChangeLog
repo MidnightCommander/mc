@@ -1,3 +1,7 @@
+1998-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* color.h: Move the CTYPE definition 
+
 Fri Apr 24 16:43:25 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* main.h, setup.c: editor_syntax_highlighting option added

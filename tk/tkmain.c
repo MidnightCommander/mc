@@ -481,3 +481,8 @@ edition_pre_exec (void)
     if (iconify_on_exec)
 	tk_evalf ("wm iconify .");
 }
+
+int
+try_alloc_color_pair (char *fg, char *bg)
+{
+}

@@ -10,13 +10,6 @@ extern int use_colors;
 extern int disable_colors;
 
 extern int attr_pairs [];
-
-struct colorpair {
-    char *name;			/* Name of the entry */
-    char *fg;			/* foreground color */
-    char *bg;			/* background color */
-};
-
 #ifdef HAVE_GNOME
 #   define MY_COLOR_PAIR(x) x
 #   define PORT_COLOR(co,bw) co

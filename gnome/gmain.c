@@ -46,6 +46,12 @@ char *default_edition_colors =
 /* The Dlg_head for the whole desktop */
 Dlg_head *desktop_dlg;
 
+/* This is only used by the editor, so we provide a dummy implementation */
+void
+try_alloc_color_pair (char *str, char *str2)
+{
+}
+
 void
 init_pair (int index, GdkColor *fore, GdkColor *back)
 {
