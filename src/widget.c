@@ -39,9 +39,10 @@
 #include "widget.h"
 #include "win.h"
 #include "complete.h"
-#include "key.h"		/* XCTRL and ALT macros  */
+#include "key.h"	/* XCTRL and ALT macros  */
 #include "profile.h"	/* for history loading and saving */
-#include "wtools.h"		/* For common_dialog_repaint() */
+#include "wtools.h"	/* For common_dialog_repaint() */
+#include "main.h"	/* for `slow_terminal' */
 
 static int button_event (Gpm_Event *event, WButton *b);
 
@@ -1656,7 +1657,6 @@ static int listbox_cdiff (WLEntry *s, WLEntry *e);
 static void
 listbox_drawscroll (WListbox *l)
 {
-    extern int slow_terminal;
     int line;
     int i, top;
     int max_line = l->height-1;
@@ -2096,7 +2096,6 @@ WListbox *
 listbox_new (int y, int x, int width, int height, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
-    extern int slow_terminal;
 
     init_widget (&l->widget, y, x, height, width,
 		 (callback_fn) listbox_callback,

@@ -1,3 +1,8 @@
+2004-11-30  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* widget.c (listbox_drawscroll): Fix declaration of `slow_terminal'.
+	(listbox_new): Likewise.
+
 2004-11-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* main.c (midnight_callback): Make the the keystrokes the invoke
