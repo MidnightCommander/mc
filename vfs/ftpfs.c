@@ -212,7 +212,7 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
 #define FTP_COMMAND_PORT   21
 #define HSC_PROXY_PORT   9875
 
-#define my_get_host_and_username (path, host, user, port, pass) \
+#define my_get_host_and_username(path, host, user, port, pass) \
 	vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_DEFAULTANON)
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
@@ -706,7 +706,6 @@ int
 open_archive_int (vfs *me, vfs_s_super *super)
 {
     int retry_seconds, count_down;
-    char *netrcpass = NULL;
 
     /* We do not want to use the passive if we are using proxies */
     if (SUP.use_proxy)
@@ -720,7 +719,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
 	if (SUP.sock == -1)
 	    return -1;
 
-	if (login_server (me, super, netrcpass)) {
+	if (login_server (me, super, NULL)) {
 	    /* Logged in, no need to retry the connection */
 	    break;
 	} else {

@@ -1,3 +1,8 @@
+2000-05-18  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* ftpfs.c: (my_get_host_and_username) space between macro name and
+	  parentheses removed
+
 2000-05-15  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* tar.c (read_header): memory leaking for empty symlink's names fixed
