@@ -115,6 +115,7 @@ gmc_open_filename (char *fname, GList *args)
 		mime_type = gnome_mime_type_or_default_of_file (fname, NULL);
 	else
 		mime_type = gnome_mime_type_or_default (fname, NULL);
+
 	/*
 	 * We accept needs_terminal as -1, which means our caller
 	 * did not want to do the work
@@ -122,12 +123,13 @@ gmc_open_filename (char *fname, GList *args)
 	if (gnome_metadata_get (fname, "flags", &size, &buf) == 0){
 		needs_terminal = (strstr (buf, "needsterminal") != 0);
 		g_free (buf);
+		buf = NULL;
 	} else if (mime_type)
-		needs_terminal = gnome_mime_needsterminal (mime_type, NULL);
+		needs_terminal = gnome_mime_needsterminal (mime_type, "open.flags");
 
-	if (gnome_metadata_get (fname, "fm-open", &size, &buf) != 0) {
+	if (gnome_metadata_get (fname, "fm-open", &size, &buf) != 0)
 		gnome_metadata_get (fname, "open", &size, &buf);
-	}
+
 	if (buf) {
 		if (gmc_check_exec_string (buf))
 			gmc_execute (fname, buf, needs_terminal);
@@ -136,6 +138,7 @@ gmc_open_filename (char *fname, GList *args)
 		g_free (buf);
 		return 1;
 	}
+
 	if (!mime_type)
 		return 0;
 
@@ -152,10 +155,12 @@ gmc_open_filename (char *fname, GList *args)
 		return 1;
 	}
 
-	if (strcmp (mime_type, "application/x-gnome-app-info")  == 0){
+	if ((strcmp (mime_type, "application/x-gnome-app-info")  == 0) ||
+	    (strcmp (mime_type, "application/x-kde-app-info")  == 0)){
 		GnomeDesktopEntry *entry;
 
 		entry = gnome_desktop_entry_load (fname);
+
 		if (entry){
 			gnome_desktop_entry_launch (entry);
 			gnome_desktop_entry_free (entry);
@@ -165,6 +170,7 @@ gmc_open_filename (char *fname, GList *args)
 			return 1;
 		}
 	}
+
 	/* We just struck out.  Prompt the user. */
 	return 0;
 }
