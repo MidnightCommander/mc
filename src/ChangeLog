@@ -1,3 +1,8 @@
+2004-11-07  Leonard den Ottolander <leonard * den ottolander nl>
+
+	* slint.c (slang_init): Allow upto 512 lines and cols if the
+	SLang library can handle it.
+
 2004-11-07  Roland Illig  <roland.illig@gmx.de>
 
 	* key.c (use_8th_bit_as_meta): Use 8bit input as default.

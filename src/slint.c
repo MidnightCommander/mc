@@ -183,7 +183,10 @@ slang_init (void)
     * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
     * small, large and negative screen dimensions.
     */
-    if ((COLS < 10) || (LINES < 5) || (COLS > 255) || (LINES > 255)) {
+    if ((COLS < 10) || (LINES < 5) ||
+    (SLang_Version < 10407 && (COLS > 255 || LINES > 255)) ||
+    (SLang_Version >= 10407 && (COLS > 512 || LINES > 512))) {
+
 	fprintf (stderr,
 		 _("Screen size %dx%d is not supported.\n"
 		   "Check the TERM environment variable.\n"),
