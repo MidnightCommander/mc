@@ -120,8 +120,6 @@ Implement logging, not just for VFS.
 
 "Find file" should remember full starting path, not "." in the history.
 
-chdir to '~' doesn't work.
-
 
 In the 4.7 branch
 =================
