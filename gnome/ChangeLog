@@ -1,3 +1,15 @@
+1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_drag_request): All of the drag_request code is
+	now shared by both the Icon View and the Listing view;
+	New drag request type:  file:ALL.  If the user is looking at a
+	remote site, and the target application does not have VFS support
+	it should not list url:ALL but file:ALL as the accepted drop
+	type. 
+
+	This will make copies of the remote files and pass the files to
+	the application.  
+
 1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtrans.c (set_window_text): Pass new justification parameter to

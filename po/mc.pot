@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-19 21:39:56-0500\n"
+"Date: 1998-05-20 14:56:59-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -3121,7 +3121,7 @@ msgstr ""
 msgid "External panelize"
 msgstr ""
 
-#: src/panelize.c:208
+#: gnome/gprop.c:109 src/panelize.c:208
 msgid "Command"
 msgstr ""
 
@@ -3189,11 +3189,11 @@ msgstr ""
 msgid "UID"
 msgstr ""
 
-#: gnome/gprop.c:335 src/screen.c:433
+#: gnome/gprop.c:390 src/screen.c:433
 msgid "Owner"
 msgstr ""
 
-#: gnome/gprop.c:225 gnome/gprop.c:350 src/screen.c:434
+#: gnome/gprop.c:280 gnome/gprop.c:405 src/screen.c:434
 msgid "Group"
 msgstr ""
 
@@ -4010,76 +4010,83 @@ msgstr ""
 msgid "Desktop"
 msgstr ""
 
-#: gnome/gprop.c:54 gnome/gprop.c:71
+#: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
 msgstr ""
 
-#: gnome/gprop.c:63
+#: gnome/gprop.c:67
 msgid "Full name: "
 msgstr ""
 
-#: gnome/gprop.c:193
+#: gnome/gprop.c:119
+msgid "Command:"
+msgstr ""
+
+#: gnome/gprop.c:129
+msgid "Use terminal"
+msgstr ""
+
+#: gnome/gprop.c:248
 msgid "File mode (permissions)"
 msgstr ""
 
-#: gnome/gprop.c:204
+#: gnome/gprop.c:259
 msgid "Current mode: "
 msgstr ""
 
-#. Headings
-#: gnome/gprop.c:217
+#: gnome/gprop.c:272
 msgid "Read"
 msgstr ""
 
-#: gnome/gprop.c:218
+#: gnome/gprop.c:273
 msgid "Write"
 msgstr ""
 
-#: gnome/gprop.c:219
+#: gnome/gprop.c:274
 msgid "Exec"
 msgstr ""
 
-#: gnome/gprop.c:220
+#: gnome/gprop.c:275
 msgid "Special"
 msgstr ""
 
-#: gnome/gprop.c:224
+#: gnome/gprop.c:279
 msgid "User"
 msgstr ""
 
-#: gnome/gprop.c:226
+#: gnome/gprop.c:281
 msgid "Other"
 msgstr ""
 
-#: gnome/gprop.c:230
+#: gnome/gprop.c:285
 msgid "Set UID"
 msgstr ""
 
-#: gnome/gprop.c:231
+#: gnome/gprop.c:286
 msgid "Set GID"
 msgstr ""
 
-#: gnome/gprop.c:232
+#: gnome/gprop.c:287
 msgid "Sticky"
 msgstr ""
 
-#: gnome/gprop.c:266 gnome/gprop.c:292
+#: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
 msgstr ""
 
-#: gnome/gprop.c:440
+#: gnome/gprop.c:495
 msgid "General"
 msgstr ""
 
-#: gnome/gprop.c:451
+#: gnome/gprop.c:506
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:467
+#: gnome/gprop.c:522
 msgid "Icon"
 msgstr ""
 
-#: gnome/gprop.c:481
+#: gnome/gprop.c:536
 msgid "Select icon"
 msgstr ""
 

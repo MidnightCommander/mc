@@ -323,7 +323,7 @@ x_update_input (WInput *in)
 	if (draw){
 		gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
 		gtk_entry_adjust_scroll (GTK_ENTRY (entry));
-		gtk_widget_queue_draw (entry);
+		gtk_widget_queue_draw (GTK_WIDGET (entry));
 	}
 }
 
