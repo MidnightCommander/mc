@@ -451,7 +451,7 @@ int edit_save_as_cmd (WEdit * edit)
 		return 1;
 	    } else {
 		g_free (exp);
-		edit_error_dialog (_(" Save as "), get_sys_error (_(" Error trying to save file. ")));
+		edit_error_dialog (_(" Save As "), get_sys_error (_(" Error trying to save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
@@ -1802,7 +1802,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    if (times_replaced) {
 		message (0, _(" Replace "), _(" %ld replacements made. "), times_replaced);
 	    } else
-		edit_message_dialog (_ (" Replace "), _ (" Search string not found. "));
+		edit_message_dialog (_ (" Replace "), _ (" Search string not found "));
 	    replace_continue = 0;
 	}
     } while (replace_continue);
@@ -1880,7 +1880,7 @@ void edit_search_cmd (WEdit * edit, int again)
 /* in response to number of bookmarks added because of string being found %d times */
 		    message (0, _(" Search "), _(" %d finds made, %d bookmarks added "), found, books);
 		} else {
-		    edit_error_dialog (_ (" Search "), _ (" Search string not found. "));
+		    edit_error_dialog (_ (" Search "), _ (" Search string not found "));
 		}
 	    } else {
 
@@ -1908,7 +1908,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		    regexp_error (edit);
 		} else {
 		    edit->search_start = edit->curs1;
-		    edit_error_dialog (_ (" Search "), _ (" Search string not found. "));
+		    edit_error_dialog (_ (" Search "), _ (" Search string not found "));
 		}
 	    }
 	}

@@ -488,12 +488,14 @@ regex_command (char *filename, char *action, int *move_dir)
 		    char *msg2;
 		    msg =
 			g_strconcat (" ", mc_home, MC_LIB_EXT,
-				     _(" file error"), NULL);
+				     _(" file error "), NULL);
 		    msg2 =
-			g_strconcat (_("Format of the "), mc_home, _("mc.ext file has changed\n\
-with version 3.0. It seems that installation\n\
-failed. Please fetch a fresh new copy from the\n\
-Midnight Commander package."), NULL);
+			g_strconcat (_("Format of the "), mc_home,
+				     _("mc.ext file has changed\n"
+				       "with version 3.0. It seems that installation\n"
+				       "failed. Please fetch a fresh new copy from the\n"
+				       "Midnight Commander package."),
+				     NULL);
 		    message (1, msg, "%s", msg2);
 		    g_free (msg);
 		    g_free (msg2);
@@ -507,11 +509,14 @@ Midnight Commander package."), NULL);
 	    msg =
 		g_strconcat (" ~/", MC_USER_EXT, _(" file error "), NULL);
 	    msg2 =
-		g_strconcat (_("Format of the ~/"), MC_USER_EXT, _(" file has changed\n\
-with version 3.0. You may want either to\n\
-copy it from "), mc_home, _("mc.ext or use that\n\
-file as an example of how to write it.\n\
-"), mc_home, _("mc.ext will be used for this moment."),
+		g_strconcat (_("Format of the "), "~/", MC_USER_EXT,
+			     _(" file has changed\n"
+			       "with version 3.0. You may want either to\n"
+			       "copy it from "), mc_home,
+			     _("mc.ext or use that\n"
+			       "file as an example of how to write it.\n"),
+			     mc_home,
+			     _("mc.ext will be used for this moment."),
 			     NULL);
 	    message (1, msg, "%s", msg2);
 	    g_free (msg);

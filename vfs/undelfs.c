@@ -611,7 +611,7 @@ undelfs_chdir(vfs *me, char *path)
     /* this could be fixed by making an ext2fs io manager to use */
     /* our vfs, but that is left as an excercise for the reader */
     if ((fd = open (file, O_RDONLY)) == -1){
-	message_2s (1, undelfserr, _(" Could not open file: %s "), file);
+	message_2s (1, undelfserr, _(" Could not open file %s "), file);
 	g_free (f);
 	g_free (file);
 	return -1;

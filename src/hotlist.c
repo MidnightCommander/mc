@@ -1447,7 +1447,7 @@ void load_hotlist (void)
 		    char *str;
 
 		    str = g_strconcat (_("MC was unable to write ~/"), HOTLIST_FILENAME,
-					_(" file your old hotlist entries were not deleted"), NULL);
+					_(" file, your old hotlist entries were not deleted"), NULL);
 
 		    message (D_ERROR, _(" Hotlist Load "), str);
 		    g_free (str);
