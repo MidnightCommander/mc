@@ -831,6 +831,37 @@ static struct vfs_s_data fish_data = {
     linear_close
 };
 
+static void
+fish_fill_names (vfs *me, void (*func)(char *))
+{
+    struct vfs_s_super * super = fish_data.supers;
+    char *flags;
+    char *name;
+    
+    while (super){
+	switch (SUP.flags & (FISH_FLAG_RSH | FISH_FLAG_COMPRESSED)) {
+	case 0:
+		flags = "";
+		break;
+	case FISH_FLAG_RSH:
+		flags = ":r";
+		break;
+	case FISH_FLAG_COMPRESSED:
+		flags = ":C";
+		break;
+	case FISH_FLAG_RSH | FISH_FLAG_COMPRESSED:
+		flags = "";
+		break;
+	}
+
+	name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags,
+			    "/", SUP.cwdir, NULL);
+	(*func)(name);
+	g_free (name);
+	super = super->next;
+    }
+}
+
 vfs vfs_fish_ops = {
     NULL,	/* This is place of next pointer */
     "fish",
@@ -840,7 +871,7 @@ vfs vfs_fish_ops = {
     0,		/* errno */
     NULL,
     NULL,
-    vfs_s_fill_names,
+    fish_fill_names,
     NULL,
 
     vfs_s_open,

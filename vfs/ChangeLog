@@ -1,5 +1,8 @@
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* fish.c (fish_fill_names): New function, replacement for
+	generic vfs_s_fill_names() which didn't work right with fish.
+
 	* undelfs.c (undelfs_opendir): Use parametrized messages without
 	VFS name for success and failure.
 	* fish.c (dir_load): Use new messages from undelfs.c, indicate
