@@ -28,6 +28,15 @@ otherwise:
 History
 =======
 
+2001-08-07  Oskar Liljeblad  <osk@hem.passagen.se>
+
+	* Release 1.4.0.
+	* Fixed so that files with filenames containing *, ?, [, ]
+	and \\ can be extracted or added to zip archives etc. These
+	characters has to be escaped once more, because Info-ZIP zip
+	and unzip interprets them as wildcards (despite the fact that
+	the shell already expands wildcards).
+
 2001-03-01  Oskar Liljeblad  <osk@hem.passagen.se>
 
 	* Release 1.3.0.
@@ -107,6 +116,8 @@ Known problems and Unsupported features
 
 Files added to the archive get listed with a+x permissions in MC.
 This appears to be a problem with the MC extfs, and (probably) not uzip.
+(It is only temporary though. When restarting MC and reading the
+archive, the files will no longer be listed as executable.)
 
 Extracted files do not have the same modification/access date as
 in the archive. The same applies for permissions and ownership.

@@ -1,3 +1,8 @@
+2001-08-07  Oskar Liljeblad  <osk@hem.passagen.se>
+
+	* extfs/uzip: Update to version 1.4.0.
+	* extfs/README.uzip: Likewise.
+
 2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* smbfs.c: Eliminate smbfs_get_free_bucket_init.  convert_path 
