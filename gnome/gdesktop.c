@@ -394,7 +394,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
 
-		if (!gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url))
+		if (gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url) != 0)
 			desktop_url = NULL;
 
 		if (have_pos) {
@@ -1359,14 +1359,13 @@ desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, in
 
 	if (url){
 		dii->url = g_strdup (url);
-		icon_im = gicon_get_url_image ();
 		caption = url;
 	} else {
 		dii->url = NULL;
-		icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
 		caption = filename;
 	}
 	
+	icon_im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
 	dii->dicon = desktop_icon_new (icon_im, caption);
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;

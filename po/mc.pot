@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-04 19:44-0600\n"
+"POT-Creation-Date: 1999-02-05 17:17-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:347 gnome/gdesktop.c:1490
+#: gnome/gdesktop.c:347 gnome/gdesktop.c:1500
 msgid "Warning"
 msgstr ""
 
@@ -190,16 +190,16 @@ msgstr ""
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1456
+#: gnome/gdesktop.c:1466
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1486
+#: gnome/gdesktop.c:1496
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1491
+#: gnome/gdesktop.c:1501
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -366,11 +366,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome/gicon.c:83 gnome/gtools.c:50
+#: gnome/gicon.c:86 gnome/gtools.c:50
 msgid "Error"
 msgstr ""
 
-#: gnome/gicon.c:83
+#: gnome/gicon.c:86
 msgid "Default set of icons not found, check your installation"
 msgstr ""
 

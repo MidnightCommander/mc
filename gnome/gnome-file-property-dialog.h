@@ -68,7 +68,8 @@ struct _GnomeFilePropertyDialog
 	GtkWidget *prop1_label, *prop1_entry, *prop1_cbox;
 	GtkWidget *prop2_label, *prop2_entry, *prop2_cbox, *prop2_hline;
 	GtkWidget *button;
-
+	GtkWidget *desktop_entry;
+	
 	gchar *fm_open;
 	gchar *fm_view;
 	gchar *drop_target;
@@ -78,6 +79,7 @@ struct _GnomeFilePropertyDialog
 	gchar *mime_drop_target;
 	gchar *mime_edit;
 	gchar *icon_filename;
+	gchar *desktop_url;
 	gboolean can_set_icon;
 	GdkImlibImage *im;
 

@@ -1,3 +1,13 @@
+1999-02-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c
+	(gnome_file_property_dialog_finalize): Release all of the
+	resources allocated (metadata routines alwayre return an allocated
+	block of memory).
+
+	* gdnd.c (drop_url_on_directory): Better set the icon-filename
+	metadata entry instead of hard coding it.
+
 1999-02-05  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_reverse_selection_cmd_panel): new function -- does

@@ -110,6 +110,19 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 		g_free (gfpd->file_name);
 	if (gfpd->im)
 		gdk_imlib_destroy_image (gfpd->im);
+	if (gfpd->fm_open)
+		g_free (gfpd->fm_open);
+	if (gfpd->fm_view)
+		g_free (gfpd->fm_view);
+	if (gfpd->edit)
+		g_free (gfpd->edit);
+	if (gfpd->drop_target)
+		g_free (gfpd->drop_target);
+	if (gfpd->icon_filename)
+		g_free (gfpd->icon_filename);
+	if (gfpd->desktop_url)
+		g_free (gfpd->desktop_url);
+	
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
@@ -270,7 +283,17 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	return vbox;
 }
 
+static GtkWidget *
+create_url_properties (GnomeFilePropertyDialog *fp_dlg)
+{
+	GtkWidget *table, *label;
 
+	table = gtk_table_new (0, 0, 0);
+
+	label = gtk_label_new (_("URL"));
+	
+		
+}
 
 /* Settings Pane */
 static void
@@ -329,6 +352,13 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 	if (NULL == fp_dlg->prop1_label)
 		return;
 	fp_dlg->changing = TRUE;
+
+	if (fp_dlg->desktop_url){
+		gtk_entry_set_text (GTK_ENTRY (fp_dlg->desktop_entry), fp_dlg->desktop_url);
+		fp_dlg->changing = FALSE;
+		return;
+	}
+	
 	if (fp_dlg->executable) {
 		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "Drop Action");
 		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default Drop Action options");
@@ -887,7 +917,7 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	gchar *mime_type;
 	gchar link_name[60];
 	gint n;
-	gchar *file_name;
+	gchar *file_name, *desktop_url;
 
 	if (gnome_metadata_get (fp_dlg->file_name, "fm-open", &size, &fp_dlg->fm_open) != 0)
 		gnome_metadata_get (fp_dlg->file_name, "open", &size, &fp_dlg->fm_open);
@@ -921,6 +951,12 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	gnome_metadata_get (fp_dlg->file_name, "icon-filename", &size, &fp_dlg->icon_filename);
 	if (fp_dlg->icon_filename)
 		g_print ("we have an icon-filename:%s:\n", fp_dlg->icon_filename);
+
+	if (gnome_metadata_get (fp_dlg->file_name, "desktop-url", &size, &desktop_url) == 0)
+		fp_dlg->desktop_url = desktop_url;
+	else
+		fp_dlg->desktop_url = NULL;
+	
 }
 GtkWidget *
 gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
@@ -957,22 +993,31 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 
 	/* and now, we set up the gui. */
 	notebook = gtk_notebook_new ();
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-				  create_general_properties (fp_dlg),
-				  gtk_label_new (_("Statistics")));
-	new_page = create_settings_pane (fp_dlg);
-	if (new_page)
+
+	if (fp_dlg->desktop_url)
 		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-					  new_page,
-					  gtk_label_new (_("Options")));
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-				  create_perm_properties (fp_dlg),
-				  gtk_label_new (_("Permissions")));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fp_dlg)->vbox),
-			    notebook, TRUE, TRUE, 0);
-	title_string = g_strconcat (rindex (file_name, '/') + 1, _(" Properties"), NULL);
-	gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
-	g_free (title_string);
+					  create_url_properties (fp_dlg),
+					  gtk_label_new (_("URL")));
+	else {
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+					  create_general_properties (fp_dlg),
+					  gtk_label_new (_("Statistics")));
+	
+		new_page = create_settings_pane (fp_dlg);
+		if (new_page)
+			gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+						  new_page,
+						  gtk_label_new (_("Options")));
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+					  create_perm_properties (fp_dlg),
+					  gtk_label_new (_("Permissions")));
+		gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fp_dlg)->vbox),
+				    notebook, TRUE, TRUE, 0);
+		title_string = g_strconcat (rindex (file_name, '/') + 1, _(" Properties"), NULL);
+		gtk_window_set_title (GTK_WINDOW (fp_dlg), title_string);
+		g_free (title_string);
+	}
+	
 	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
 				     GNOME_STOCK_BUTTON_OK);
 	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
