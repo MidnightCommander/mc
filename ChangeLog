@@ -1,3 +1,7 @@
+2001-11-16  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mcedit.1.in: Fix help file location.
+
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_UNDELFS_CHECKS): Check for ext2_ino_t,

@@ -423,7 +423,7 @@ spacing clean.
 
 .PP
 .SH FILES
-@prefix@/mc.hlp
+@prefix@/lib/mc.hlp
 .IP
 The help file for the program.
 .PP
