@@ -963,7 +963,8 @@ void edit_delete_column_of_text (WEdit * edit)
 }
 
 /* if success return 0 */
-int edit_block_delete (WEdit * edit)
+int
+edit_block_delete (WEdit *edit)
 {
     long count;
     long start_mark, end_mark;
@@ -971,10 +972,16 @@ int edit_block_delete (WEdit * edit)
 	return 0;
     if (column_highlighting && edit->mark2 < 0)
 	edit_mark_cmd (edit, 0);
-    if ((end_mark - start_mark) > option_max_undo / 2)
-/* Warning message with a query to continue or cancel the operation */
-	if (edit_query_dialog2 (_ ("Warning"), _ (" Block is large, you may not be able to undo this action. "), _ (" Continue "), _ (" Cancel ")))
+    if ((end_mark - start_mark) > option_max_undo / 2) {
+	/* Warning message with a query to continue or cancel the operation */
+	if (edit_query_dialog2
+	    (_("Warning"),
+	     _
+	     (" Block is large, you may not be able to undo this action. "),
+	     _("Continue"), _("Cancel"))) {
 	    return 1;
+	}
+    }
     edit_push_markers (edit);
     edit_cursor_move (edit, start_mark - edit->curs1);
     edit_scroll_screen_over_cursor (edit);
