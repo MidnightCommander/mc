@@ -933,7 +933,7 @@ msgstr ""
 
 #: src/boxes.c:71
 msgid " Listing mode "
-msgstr " Modalità vista "
+msgstr " Modalità lista "
 
 #: src/boxes.c:76
 msgid "&Full file list"
@@ -961,7 +961,7 @@ msgstr "&Mini stato utente"
 
 #: src/boxes.c:192
 msgid "Listing mode"
-msgstr "Modalità vista"
+msgstr "Modalità lista"
 
 #: src/boxes.c:280
 msgid "&Reverse"
@@ -2884,7 +2884,7 @@ msgstr " Il nuovo modo è \"%s\" "
 
 #: src/main.c:954 src/main.c:981
 msgid "&Listing mode..."
-msgstr "&Modalità vista..."
+msgstr "Modalità &Lista..."
 
 #: src/main.c:955 src/main.c:982
 msgid "&Quick view     C-x q"
