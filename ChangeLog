@@ -1,5 +1,7 @@
 2002-07-18  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/unknown.syntax: Don't highlight anything by default.
+
 	* syntax/changelog.syntax: Highlight functions without
 	filenames.
 	* syntax/Syntax: Match *ChangeLog*.
