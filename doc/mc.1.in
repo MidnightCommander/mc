@@ -3054,7 +3054,7 @@ the Midnight Commander library directory) and in the ~/.mc/ini file
 for the section "terminal:your-terminal-name" and then for the section
 "terminal:general", each line of the section contains a key symbol
 that you want to define, followed by an equal sign and the definition
-for the key.  You can use the special \\E form to represent the escape
+for the key.  You can use the special \\e form to represent the escape
 character and the ^x to represent the control-x character.
 .PP
 The possible key symbols are:
@@ -3079,7 +3079,7 @@ For example, to define the key insert to be the Escape + [ + O + p, you
 set this in the ini file:
 .PP
 .nf
-insert=\\E[Op
+insert=\\e[Op
 .fi
 .PP
 The 

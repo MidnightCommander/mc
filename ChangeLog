@@ -1,3 +1,7 @@
+2001-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in (Terminal databases): Recommend using \e, not \E.
+
 2001-08-14  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.lib: Add popular sequences for "home" and "end" in
