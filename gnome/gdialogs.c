@@ -116,7 +116,6 @@ file_progress_show (long done, long total)
 {
         static gchar count[10];
         snprintf (count, 9, "%d%%", (gint)(100.0 *(gfloat)done/(gfloat)total));
-        g_print ("%d\t%d\n",done, total);
         gtk_label_set (GTK_LABEL (file_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -417,7 +416,6 @@ create_op_win (FileOperation op, int with_eta)
 void
 destroy_op_win (void)
 {
-        g_print ("\n");
         if (op_win)
                  gtk_widget_destroy (op_win);
 }
