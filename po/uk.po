@@ -1790,7 +1790,7 @@ msgstr ""
 
 #: gtkedit/edit.c:2594
 msgid "User menu available only in mcedit invoked from mc"
-msgstr ""
+msgstr "Меню користувача доступне лише в mcedit викликаному з mc"
 
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
 msgid "Error trying to stat file:"
@@ -2819,7 +2819,7 @@ msgstr "Вих╕д"
 
 #: gtkedit/gtkedit.c:67
 msgid "&Dismiss"
-msgstr ""
+msgstr "Закрити"
 
 #: gtkedit/gtkedit.c:68
 msgid " Enter file name: "
