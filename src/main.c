@@ -1249,10 +1249,7 @@ listmode_cmd (void)
 #endif /* LISTMODE_EDITOR */
 #endif /* !HAVE_GNOME */
 
-#ifdef HAVE_GNOME
-void init_menu (void) {};
-void done_menu (void) {};
-#else
+#ifndef HAVE_GNOME
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static menu_entry PanelMenu [] = {
     { ' ', N_("&Listing mode..."),          'L', listing_cmd },
@@ -1857,46 +1854,42 @@ setup_pre (void)
     SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
 #endif
 }
-#else
-#define setup_pre()
-#define setup_sigwinch()
-#endif
 
 static void
 setup_post (void)
 {
     setup_sigwinch ();
     
-#ifndef HAVE_X
     if (baudrate () < 9600 || slow_terminal){
 	verbose = 0;
     }
     if (use_mouse_p)
 	init_mouse ();
-#endif
 
     midnight_colors [0] = 0;
     midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
     midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
     midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
 }
+#endif /* !HAVE_X */
 
 static void setup_mc (void)
 {
+#ifndef HAVE_X
     setup_pre ();
     init_menu ();
     create_panels ();
-
-#ifndef HAVE_GNOME
     setup_panels ();
-    
+
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
 	add_select_channel (subshell_pty, load_prompt, 0);
-#endif
-    
+#endif /* !HAVE_SUBSHELL_SUPPORT */
+
     setup_post ();
-#endif
+#else
+    create_panels ();
+#endif /* !HAVE_X */
 }
 
 static void setup_dummy_mc (const char *file)
@@ -1918,7 +1911,9 @@ static void setup_dummy_mc (const char *file)
 
 static void done_mc (void)
 {
+#ifndef HAVE_X
     done_menu ();
+#endif /* !HAVE_X */
     
     /* Setup shutdown
      *
@@ -1930,8 +1925,8 @@ static void done_mc (void)
 #ifndef HAVE_X
     else
 	save_hotlist();
-#endif /* !HAVE_X */
     done_screen ();
+#endif /* !HAVE_X */
     vfs_add_current_stamps ();
 #ifndef HAVE_X
     if (xterm_flag && xterm_hintbar)

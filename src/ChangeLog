@@ -1,5 +1,7 @@
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* main.c [HAVE_X]: Eliminate setup_post() and partly done_mc().
+
 	* utilunix.c (uid_cache): Make static.
 	(gid_cache): Likewise.
 	(init_uid_gid_cache): Remove.
