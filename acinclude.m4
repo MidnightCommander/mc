@@ -657,6 +657,13 @@ AC_DEFUN([MC_WITH_SLANG], [
     AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
 		 [with_screen=mcslang])
 
+    dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
+    m4_if([$1], strict, ,
+	  [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
+			[AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
+it doesn't work well])
+			with_screen=mcslang])])
+
     dnl Check the header
     if test x$with_screen = xslang; then
 	slang_h_found=
