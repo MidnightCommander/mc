@@ -1,5 +1,10 @@
 2002-09-06  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (subshell_name_quote): Return NULL if we are out of
+	memory.  Use "echo -e" with zsh (Debian bug #150996).
+	(do_subshell_chdir): Be prepared to get NULL from
+	subshell_name_quote().
+
 	* profile.c: Remove unused code.  Eliminate global variables.
 	(is_loaded): Rename to find_loaded().  return matching profile.
 	Adjust all dependencies.

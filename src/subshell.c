@@ -722,28 +722,35 @@ int exit_subshell (void)
  * Carefully quote directory name to allow entering any directory safely,
  * no matter what weird characters it may contain in its name.
  * NOTE: Treat directory name an untrusted data, don't allow it to cause
- * executing any commands in the shell. Escape all control characters.
+ * executing any commands in the shell.  Escape all control characters.
  * Use following technique:
  *
  * for bash - echo with `-e', 3-digit octal numbers:
  *   cd "`echo -e '\ooo...\ooo'`"
  *
- * for zsh and tcsh - echo without `-e', 4-digit octal numbers:
+ * for zsh - echo with `-e', 4-digit octal numbers:
+ *   cd "`echo '\oooo...\oooo'`"
+ *
+ * for tcsh - echo without `-e', 4-digit octal numbers:
  *   cd "`echo '\oooo...\oooo'`"
  */
 static char *
 subshell_name_quote (const char *s)
 {
     char *ret, *d;
-    const char bash_start[] = "\"`echo -e '";
-    const char nonbash_start[] = "\"`echo '";
+    const char echo_cmd[] = "\"`echo '";
+    const char echo_e_cmd[] = "\"`echo -e '";
     const char common_end[] = "'`\"";
+    const char *cmd_start;
+    int len;
 
     /*
      * Factor 5 because we need \, 0 and 3 other digits per character
      * in the worst case (tcsh and zsh).
      */
     d = ret = g_malloc (5 * strlen (s) + 16);
+    if (!d)
+	return NULL;
 
     /* Prevent interpreting leading `-' as a switch for `cd' */
     if (*s == '-') {
@@ -751,21 +758,27 @@ subshell_name_quote (const char *s)
         *d++ = '/';
     }
 
+    /* echo in tcsh doesn't understand the "-e" option */
+    if (subshell_type == TCSH)
+	cmd_start = echo_cmd;
+    else
+	cmd_start = echo_e_cmd;
+
+    /* Copy the beginning of the command to the buffer */
+    len = strlen (cmd_start);
+    memcpy (d, cmd_start, len);
+    d += len;
+
     /*
      * Print every character in octal format with the leading backslash.
-     * tcsh and zsh require leading 0, bash doesn't like 4-digit octals
-     * and requires `-e' for echo.
+     * tcsh and zsh may require 4-digit octals, bash doesn't like them.
      */
     if (subshell_type == BASH) {
-	memcpy (d, bash_start, sizeof (bash_start) - 1);
-	d += sizeof (bash_start) - 1;
 	for (; *s; s++) {
 	    sprintf(d, "\\%03o", (unsigned char) *s);
 	    d += 4;
 	}
     } else {
-	memcpy (d, nonbash_start, sizeof (nonbash_start) - 1);
-	d += sizeof (nonbash_start) - 1;
 	for (; *s; s++) {
 	    sprintf(d, "\\0%03o", (unsigned char) *s);
 	    d += 5;
@@ -799,8 +812,14 @@ void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     if (*directory) {
 	char *temp;
 	temp = subshell_name_quote (directory);
-	write (subshell_pty, temp, strlen (temp));
-	g_free (temp);
+	if (temp) {
+	    write (subshell_pty, temp, strlen (temp));
+	    g_free (temp);
+	} else {
+	    /* Should not happen unless the directory name is so long
+	       that we don't have memory to quote it.  */
+	    write (subshell_pty, ".", 1);
+	}
     } else {
 	write (subshell_pty, "/", 1);
     }
