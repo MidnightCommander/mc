@@ -1,3 +1,11 @@
+2004-09-22  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* direnty.c (vfs_s_new_entry): Revert last changes.
+	(vfs_s_generate_entry): Likewise.
+	(vfs_s_find_entry_linear): Likewise.
+	(vfs_s_find_inode): Likewise.
+	* xdirentry.h: likewise.
+
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
 	* direntry.c: Added const qualifier to function declarations and
