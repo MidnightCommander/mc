@@ -20,26 +20,26 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <sys/types.h>
 
-struct extfs_inode;
+struct inode;
 
-struct extfs_entry {
+struct entry {
     int has_changed;
-    struct extfs_entry *next_in_dir;
-    struct extfs_entry *dir;
+    struct entry *next_in_dir;
+    struct entry *dir;
     char *name;
-    struct extfs_inode *inode;
+    struct inode *inode;
 };
 
-struct extfs_archive;
+struct archive;
 
-struct extfs_inode {
+struct inode {
     int has_changed;
     nlink_t nlink;
-    struct extfs_entry *first_in_subdir; /* only used if this is a directory */
-    struct extfs_entry *last_in_subdir;
+    struct entry *first_in_subdir; /* only used if this is a directory */
+    struct entry *last_in_subdir;
     ino_t inode;        /* This is inode # */
     dev_t dev;		/* This is an internal identification of the extfs archive */
-    struct extfs_archive *archive; /* And this is an archive structure */
+    struct archive *archive; /* And this is an archive structure */
     dev_t rdev;
     umode_t mode;
     uid_t uid;
@@ -53,7 +53,7 @@ struct extfs_inode {
     char *local_filename;
 };
 
-struct extfs_archive {
+struct archive {
     int fstype;
     char *name;
     char *local_name;
@@ -62,9 +62,9 @@ struct extfs_archive {
     dev_t rdev;
     int fd_usage;
     ino_t __inode_counter;
-    struct extfs_entry *root_entry;
-    struct extfs_entry *current_dir;
-    struct extfs_archive *next;
+    struct entry *root_entry;
+    struct entry *current_dir;
+    struct archive *next;
 };
 
 void extfs_init (void);
@@ -74,3 +74,5 @@ char *extfs_get_prefix (int fstype);
 char *extfs_analysis (char *path, char **arc_name, int *fstype, int is_dir);
 void extfs_run (char *path);
 void extfs_done (void);
+
+typedef struct archive extfs_archive; 	/* Do _not_ use this inside extfs.c */

@@ -157,34 +157,34 @@ union record {
 
 #ifndef TAR_NAMES
 
-struct tarfs_inode;
+struct inode;
 
-struct tarfs_entry {
+struct entry {
     int has_changed;
     long header_offset; /* -1 if not in stored in archive */
     int header_size;
-    struct tarfs_entry *next_in_dir;
-    struct tarfs_entry *dir;
+    struct entry *next_in_dir;
+    struct entry *dir;
     long extended_offset; /* -1 if not present */
     int extended_size;
     
     char *name;
-    struct tarfs_inode *inode;
+    struct inode *inode;
 };
 
-struct tarfs_archive;
+struct archive;
 
-struct tarfs_inode {
+struct inode {
     int has_changed;
     int is_open;
     nlink_t nlink;
-    struct tarfs_entry *first_in_subdir; /* only used if linkflag == L_DIR */
-    struct tarfs_entry *last_in_subdir;
+    struct entry *first_in_subdir; /* only used if linkflag == L_DIR */
+    struct entry *last_in_subdir;
     long data_offset; 
     char *local_filename;
     ino_t inode;        /* This is inode # */
     dev_t dev;		/* This is an internal identification of the tar archive */
-    struct tarfs_archive *archive; /* And this is an archive structure */
+    struct archive *archive; /* And this is an archive structure */
     dev_t rdev;
     int std;		/* 0 if old Unix inode */
     
@@ -199,15 +199,15 @@ struct tarfs_inode {
     time_t ctime;
 };
 
-struct tarfs_archive {
+struct archive {
     char *name;
     struct stat tarstat;
     int is_gzipped;
     dev_t rdev;
     ino_t __inode_counter;
-    struct tarfs_entry *root_entry;
-    struct tarfs_entry *current_dir;
-    struct tarfs_archive *next;
+    struct entry *root_entry;
+    struct entry *current_dir;
+    struct archive *next;
     long current_tar_position;
     int fd;
     int fd_usage; /* Zero means fd is invalid, otherwise is number of

@@ -18,10 +18,10 @@ AR = @AR@
 # VFS code
 #
 NETFILES   = tcputil.o ftpfs.o mcfs.o utilvfs.o
-NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o sfs.o @undelfs_o@
+NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o sfs.o fish.o @undelfs_o@
 
 VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c names.c \
-	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c sfs.c
+	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c sfs.c fish.c
 
 VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 	extfs.h
@@ -40,7 +40,7 @@ EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 # Commands to build standalone version (.so)
 #
 
-VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so fish.so
 
 %.sor:	../src/%.c
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
@@ -48,8 +48,8 @@ VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.
 %.so:	%.c
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
 
-libvfs.so: $(VFSSOOBJS) libvfs.o
-	gcc $(VFSSOOBJS) libvfs.o -shared -o libvfs.so
+libvfs.so: $(VFSSOOBJS)
+	gcc $(VFSSOOBJS) -shared -o libvfs.so
 
 
 #
@@ -96,7 +96,7 @@ TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
 clean:
-	$(RMF) mcserv *.o core a.out libvfs-mc.a mcservx libvfs.so
+	$(RMF) mcserv *.o core a.out libvfs-mc.a mcservx *.so
 
 realclean: clean
 	$(RMF) .depend

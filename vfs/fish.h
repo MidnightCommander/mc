@@ -1,7 +1,7 @@
-/*  ftpfs.h */
+/*  fish.h */
 
-#if !defined(__FTPFS_H)
-#define __FTPFS_H
+#if !defined(__FISH_H)
+#define __FISH_H
 
 struct direntry
 {
@@ -11,12 +11,12 @@ struct direntry
     char *local_filename;
     int local_is_temp:1;
     int freshly_created:1;
-    int tmp_reget;
     struct stat local_stat;
     char *remote_filename;
     struct stat s;
     struct stat *l_stat;
     struct connection *bucket;
+    int tmp_reget;
 };
 
 struct dir
@@ -34,8 +34,8 @@ struct connection {
     char *home;
     char *updir;
     char *password;
-    int port;
-    int sock;
+    int flags;
+    int sockr, sockw;
     struct linklist *dcache;
     ino_t __inode_counter;
     int lock;
@@ -52,8 +52,9 @@ struct connection {
 #define qhost(b) (b)->host
 #define quser(b) (b)->user
 #define qcdir(b) (b)->current_directory
-#define qport(b) (b)->port
-#define qsock(b) (b)->sock
+#define qflags(b) (b)->flags
+#define qsockr(b) (b)->sockr
+#define qsockw(b) (b)->sockw
 #define qlock(b) (b)->lock
 #define qdcache(b) (b)->dcache
 #define qhome(b) (b)->home
@@ -61,16 +62,13 @@ struct connection {
 #define qproxy(b) (b)->use_proxy
 
 /* Increased since now we may use C-r to reread the contents */
-#define FTPFS_DIRECTORY_TIMEOUT 30 * 60
+#define FISH_DIRECTORY_TIMEOUT 30 * 60
 
 #define DO_RESOLVE_SYMLINK 1
 #define DO_OPEN            2
 #define DO_FREE_RESOURCE   4
 
-extern char *ftpfs_anonymous_passwd;
-extern char *ftpfs_proxy_host;
-extern int ftpfs_directory_timeout;
-extern int ftpfs_always_use_proxy;
+#define FISH_FLAG_COMPRESSED 1
+#define FISH_FLAG_RSH	     2
 
-void ftpfs_init_passwd ();
 #endif

@@ -6,9 +6,9 @@
 #else
 #define BROKEN_PATHS
 /*
- * We should really only allow /:ftp/ tree to export ftp, but midnight's users may 
+ * We should really only allow /#ftp/ tree to export ftp, but midnight's users may 
  * like to be able to cd .. to get back where there were before ftp. How to solve?
- * Ok, we'll allow /any/path/:ftp/ to access ftp tree. Broken, yes.
+ * Ok, we'll allow /any/path/#ftp/ to access ftp tree. Broken, yes.
  */ 
 #endif
 
@@ -90,6 +90,7 @@ struct utimbuf {
     extern vfs tarfs_vfs_ops;
 
     extern vfs ftpfs_vfs_ops;
+    extern vfs fish_vfs_ops;
     extern vfs mcfs_vfs_ops;
     
     extern vfs extfs_vfs_ops;
@@ -316,8 +317,6 @@ extern int vfs_flags;
 extern uid_t vfs_uid;
 extern gid_t vfs_gid;
 
-
-
 #define FL_ALWAYS_MAGIC 1
 #define FL_NO_MCFS 2
 #define FL_NO_FTPFS 4
@@ -325,6 +324,14 @@ extern gid_t vfs_gid;
 #define FL_NO_TARFS 16
 #define FL_NO_EXTFS 32
 #define FL_NO_SFS 64
+#define FL_NO_FISH 128
+
+#define FL_NO_CWDSETUP	0x40000000
+
+#ifdef VFS_STANDALONE
+extern void mc_vfs_init( void );
+extern void mc_vfs_done( void );
+#endif
 
 #endif /* __VFS_H */
 

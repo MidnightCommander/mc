@@ -178,12 +178,24 @@ char *get_host_and_username (char *path, char **host, char **user, int *port,
     /* Check if the host comes with a port spec, if so, chop it */
     colon = strchr (rest, ':');
     if (colon){
-	*port = atoi (colon+1);
-
-	if (*port <= 0 || *port >= 65536)
-	    *port = 21;
 	*colon = 0;
+        if (sscanf(colon+1, "%d", port)==1) {
+	    if (*port <= 0 || *port >= 65536)
+	        *port = default_port;
+	} else {
+	    while(1) {
+	        colon++;
+		switch(*colon) {
+		    case 'C': *port = 1;
+	                      break;
+		    case 'r': *port = 2;
+	                      break;
+		    case 0: goto done;
+		}
+	    }
+	}
     }
+done:
     *host = strdup (rest);
 
     free (pcopy);

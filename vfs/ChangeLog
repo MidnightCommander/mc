@@ -1,3 +1,12 @@
+Fri Sep 11 22:36:38 1998  Pavel Machek <pavel@ucw.cz>
+	* sfs.c: memory leak fixed
+
+	* vfs.c: split parse_ls_lga into more functions
+
+	* fish.c added, now you can access files over rsh/ssh connection
+
+	* shared*.c: reworked a bit not to include so many of ugly X_'s
+
 Wed Sep  2 13:59:47 1998  Pavel Machek <pavel@ucw.cz>
 
 	* ftpfs.c: cleanup of code, few static's added

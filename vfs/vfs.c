@@ -19,6 +19,10 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+/* Warning: funtions like extfs_lstat() have right to destroy any
+ * strings you pass to them. This is acutally ok as you strdup what
+ * you are passing to them, anyway; still, beware.  */
+
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
@@ -86,7 +90,7 @@ static struct {
     vfs  *operations;
 } vfs_file_table [MAX_VFS_FILES];
 
-static int get_bucket ()
+static int get_bucket (void)
 {
     int i;
 
@@ -95,8 +99,7 @@ static int get_bucket ()
 	if (!vfs_file_table [i].fs_info)
 	    return i;
     }
-    fprintf (stderr, "No more virtual file handles\n");
-    exit (1);
+    vfs_die ("No more virtual file handles");
 }
 
 vfs *vfs_type_from_op (char *path)
@@ -111,6 +114,8 @@ vfs *vfs_type_from_op (char *path)
     if (!(vfs_flags & FL_NO_UNDELFS) && !strncmp (path, "undel:", 6))
 	return &undelfs_vfs_ops;
 #endif
+    if (!(vfs_flags & FL_NO_FISH) && !strncmp (path, "sh:", 3))
+        return &fish_vfs_ops;
     if (!(vfs_flags & FL_NO_TARFS) && !strcmp (path, "utar"))
         return &tarfs_vfs_ops;
     if (!(vfs_flags & FL_NO_EXTFS) && extfs_which (path) != -1)
@@ -122,12 +127,12 @@ vfs *vfs_type_from_op (char *path)
 
 int path_magic( char *path )
 {
-int res;
+    int res;
 
-res = !strncmp( path, "/#/", 3 );
-if (res)
-    path[1] = '/';
-return res || (vfs_flags & FL_ALWAYS_MAGIC);
+    res = !strncmp( path, "/#/", 3 );
+    if (res)
+        path[1] = '/';
+    return res || (vfs_flags & FL_ALWAYS_MAGIC);
 }
 
 /*
@@ -742,7 +747,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
     }
     
     if ((*oldvfs->nothingisopen) (oldvfsid)){
-	if (oldvfs == &extfs_vfs_ops && ((struct extfs_archive *) oldvfsid)->name == 0){
+	if (oldvfs == &extfs_vfs_ops && ((extfs_archive *) oldvfsid)->name == 0){
 	    /* Free the resources immediatly when we leave a mtools fs
 	       ('cd a:') instead of waiting for the vfs-timeout */
 	    (oldvfs->free) (oldvfsid);
@@ -755,7 +760,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 		stamp->id == (vfsid) - 1 ||
 		!(*stamp->v->nothingisopen) (stamp->id))
 		break;
-	    if (stamp->v == &extfs_vfs_ops && ((struct extfs_archive *) stamp->id)->name == 0){
+	    if (stamp->v == &extfs_vfs_ops && ((extfs_archive *) stamp->id)->name == 0){
 		(stamp->v->free) (stamp->id);
 		vfs_rmstamp (stamp->v, stamp->id, 0);
 	    } else
@@ -888,7 +893,8 @@ char *vfs_get_current_dir (void)
 void vfs_setup_wd (void)
 {
     current_dir = strdup ("/");
-    mc_return_cwd(); 	/* mc_return_cwd will fixup current_dir for us */
+    if (!(vfs_flags & FL_NO_CWDSETUP))
+        mc_return_cwd();
 
     if (strlen(current_dir)>MC_MAXPATHLEN-2)
         vfs_die ("Current dir too long.\n");
@@ -1084,6 +1090,7 @@ void vfs_init (void)
     tcp_init();
     ftpfs_init();
 #endif
+    fish_init ();
     extfs_init ();
     sfs_init ();
     vfs_setup_wd ();
@@ -1134,11 +1141,11 @@ void vfs_shut (void)
 	free (current_dir);
 
     extfs_done ();
-
+    sfs_done();
 #ifdef USE_NETCODE
+    fish_done();
     ftpfs_done();
 #endif
-
 }
 
 /* These ones grab information from the VFS
@@ -1149,6 +1156,7 @@ void vfs_fill_names (void (*func)(char *))
 #ifdef USE_NETCODE
     mcfs_fill_names (func);
     ftpfs_fill_names (func);
+    fish_fill_names (func);
 #endif
     tarfs_fill_names (func);
     extfs_fill_names (func);
@@ -1161,7 +1169,7 @@ void vfs_fill_names (void (*func)(char *))
 static char *columns [MAXCOLS];	/* Points to the string in column n */
 static int   column_ptr [MAXCOLS]; /* Index from 0 to the starting positions of the columns */
 
-static int split_text (char *p)
+int split_text (char *p)
 {
     char *original = p;
     int  numcols;
@@ -1182,7 +1190,7 @@ static int split_text (char *p)
 
 static int is_num (int idx)
 {
-    if (columns [idx][0] < '0' || columns [idx][0] > '9')
+    if (!columns [idx] || columns [idx][0] < '0' || columns [idx][0] > '9')
 	return 0;
     return 1;
 }
@@ -1230,37 +1238,173 @@ static int is_year(char *str, struct tm *tim)
 where "2904 1234" is filename. Well, this code decodes it as year :-(.
  */
 
+int parse_filetype (char c)
+{
+    switch (c){
+        case 'd': return S_IFDIR; 
+        case 'b': return S_IFBLK;
+        case 'c': return S_IFCHR;
+        case 'l': return S_IFLNK;
+        case 's':
+#ifdef IS_IFSOCK /* And if not, we fall through to IFIFO, which is pretty close */
+	          return S_IFSOCK;
+#endif
+        case 'p': return S_IFIFO;
+        case 'm': case 'n':		/* Don't know what these are :-) */
+        case '-': case '?': return S_IFREG;
+        default: return -1;
+    }
+}
+
+int parse_filemode (char *p)
+{	/* converts rw-rw-rw- into 0666 */
+    int res = 0;
+    switch (*(p++)){
+	case 'r': res |= 0400; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'w': res |= 0200; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'x': res |= 0100; break;
+	case 's': res |= 0100 | S_ISUID; break;
+	case 'S': res |= S_ISUID; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'r': res |= 0040; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'w': res |= 0020; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'x': res |= 0010; break;
+	case 's': res |= 0010 | S_ISGID; break;
+	case 'S': res |= S_ISGID; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'r': res |= 0004; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'w': res |= 0002; break;
+	case '-': break;
+	default: return -1;
+    }
+    switch (*(p++)){
+	case 'x': res |= 0001; break;
+	case 't': res |= 0001 | S_ISVTX; break;
+	case 'T': res |= S_ISVTX; break;
+	case '-': break;
+	default: return -1;
+    }
+    return res;
+}
+
+
+int parse_filedate(int idx, time_t *t)
+{	/* This thing parses from idx in columns[] array */
+    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    static char *week = "SunMonTueWedThuFriSat";
+    char *p, *pos;
+    int extfs_format_date = 0;
+    struct tm tim;
+
+    /* Let's setup default time values */
+    tim.tm_year = current_year;
+    tim.tm_mon  = current_mon;
+    tim.tm_mday = current_mday;
+    tim.tm_hour = 0;
+    tim.tm_min  = 0;
+    tim.tm_sec  = 0;
+    tim.tm_isdst = 0;
+    
+    p = columns [idx++];
+    
+    if((pos=strstr(week, p)) != NULL){
+        tim.tm_wday = (pos - week)/3;
+	p = columns [idx++];
+	}
+
+    if((pos=strstr(month, p)) != NULL)
+        tim.tm_mon = (pos - month)/3;
+    else {
+        /* This case should not normaly happen, but in extfs we allow these
+           date formats:
+           Mon DD hh:mm
+           Mon DD YYYY
+           Mon DD YYYY hh:mm
+	   Wek Mon DD hh:mm:ss YYYY
+           MM-DD-YY hh:mm
+           where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
+           YYYY four digit year, hh, mm two digit hour and minute. */
+
+        if (strlen (p) == 8 && p [2] == '-' && p [5] == '-'){
+            p [2] = 0;
+            p [5] = 0;
+            tim.tm_mon = (int) atol (p);
+            if (!tim.tm_mon)
+                return 0;
+            else
+                tim.tm_mon--;
+            tim.tm_mday = (int) atol (p + 3);
+            tim.tm_year = (int) atol (p + 6);
+            if (tim.tm_year < 70)
+                tim.tm_year += 70;
+            extfs_format_date = 1;
+        } else
+            return 0;
+    }
+
+    if (!extfs_format_date){
+        if (!is_num (idx))
+	    return 0;
+        tim.tm_mday = (int)atol (columns [idx++]);
+    }
+    
+    if (is_num (idx)) {
+        if(is_time(columns[idx], &tim) || is_year(columns[idx], &tim)) {
+	idx++;
+	 
+	if(is_num (idx) && 
+	    (is_year(columns[idx], &tim) || is_time(columns[idx], &tim)))
+	    idx++; /* time & year or reverse */
+	 } /* only time or date */
+    }
+    else 
+        return 0; /* Nor time or date */
+
+    if ((*t = mktime(&tim)) ==-1)
+        *t = 0;
+    return idx;
+}
+
 #define free_and_return(x) { free (p_copy); return (x); }
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
-    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
-    static char *week = "SunMonTueWedThuFriSat";
-    char *pos;
     int idx, idx2, num_cols, isconc = 0;
     int i;
-    struct tm tim;
-    int extfs_format_date = 0;
     char *p_copy;
     
-    s->st_mode = 0;
-    if (strncmp (p, "total", 5) == 0){
+    if (strncmp (p, "total", 5) == 0)
         return 0;
-    }
-    switch (*(p++)){
-        case 'd': s->st_mode |= S_IFDIR; break;
-        case 'b': s->st_mode |= S_IFBLK; break;
-        case 'c': s->st_mode |= S_IFCHR; break;
-        case 'm': s->st_mode |= S_IFREG; break; /* Don't know what it is :-) */
-        case 'n': s->st_mode |= S_IFREG; break; /* and this as well */
-        case 'l': s->st_mode |= S_IFLNK; break;
-#ifdef IS_IFSOCK        
-        case 's': s->st_mode |= S_IFSOCK; break;
-#endif
-        case 'p': s->st_mode |= S_IFIFO; break;
-        case '-': s->st_mode |= S_IFREG; break;
-        case '?': s->st_mode |= S_IFREG; break;
-        default: return 0;
-    }
+
+    if ((i = parse_filetype(*(p++))) == -1)
+        return 0;
+
+    s->st_mode = i;
     if (*p == '['){
 	if (strlen (p) <= 8 || p [8] != ']')
 	    return 0;
@@ -1271,57 +1415,10 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	switch (*(p++)){
-	 case 'r': s->st_mode |= 0400; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'w': s->st_mode |= 0200; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'x': s->st_mode |= 0100; break;
-	 case 's': s->st_mode |= 0100 | S_ISUID; break;
-	 case 'S': s->st_mode |= S_ISUID; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'r': s->st_mode |= 0040; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'w': s->st_mode |= 0020; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'x': s->st_mode |= 0010; break;
-	 case 's': s->st_mode |= 0010 | S_ISGID; break;
-	 case 'S': s->st_mode |= S_ISGID; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'r': s->st_mode |= 0004; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'w': s->st_mode |= 0002; break;
-	 case '-': break;
-	 default: return 0;
-	}
-	switch (*(p++)){
-	 case 'x': s->st_mode |= 0001; break;
-	 case 't': s->st_mode |= 0001 | S_ISVTX; break;
-	 case 'T': s->st_mode |= S_ISVTX; break;
-	 case '-': break;
-	 default: return 0;
-	}
+	if ((i = parse_filemode(p)) ==-1)
+	    return 0;
+        s->st_mode |= i;
+	p += 9;
     }
 	
     p_copy = strdup (p);
@@ -1391,76 +1488,11 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 #endif
     }
 
-    /* Let's setup default time values */
-    tim.tm_year = current_year;
-    tim.tm_mon  = current_mon;
-    tim.tm_mday = current_mday;
-    tim.tm_hour = 0;
-    tim.tm_min  = 0;
-    tim.tm_sec  = 0;
-    tim.tm_isdst = 0;
-    
-    p = columns [idx++];
-    
-    if((pos=strstr(week, p)) != NULL){
-        tim.tm_wday = (pos - week)/3;
-	p = columns [idx++];
-	}
-
-    if((pos=strstr(month, p)) != NULL)
-        tim.tm_mon = (pos - month)/3;
-    else {
-        /* This case should not normaly happen, but in extfs we allow these
-           date formats:
-           Mon DD hh:mm
-           Mon DD YYYY
-           Mon DD YYYY hh:mm
-	   Wek Mon DD hh:mm:ss YYYY
-           MM-DD-YY hh:mm
-           where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
-           YYYY four digit year, hh, mm two digit hour and minute. */
-
-        if (strlen (p) == 8 && p [2] == '-' && p [5] == '-'){
-            p [2] = 0;
-            p [5] = 0;
-            tim.tm_mon = (int) atol (p);
-            if (!tim.tm_mon)
-                free_and_return (0)
-            else
-                tim.tm_mon--;
-            tim.tm_mday = (int) atol (p + 3);
-            tim.tm_year = (int) atol (p + 6);
-            if (tim.tm_year < 70)
-                tim.tm_year += 70;
-            extfs_format_date = 1;
-        } else
-            free_and_return (0);
-    }
-
-    if (!extfs_format_date){
-        if (!is_num (idx))
-	    free_and_return (0);
-        tim.tm_mday = (int)atol (columns [idx++]);
-    }
-    
-    if (is_num (idx)) {
-        if(is_time(columns[idx], &tim) || is_year(columns[idx], &tim)) {
-	idx++;
-	 
-	if(is_num (idx) && 
-	    (is_year(columns[idx], &tim) || is_time(columns[idx], &tim)))
-	    idx++; /* time & year or reverse */
-	 } /* only time or date */
-    }
-    else 
-        free_and_return (0); /* Nor time or date */
-
-    /* Use resultimg time value */    
-    s->st_mtime = mktime (&tim);
-    if (s->st_mtime == -1)
-        s->st_mtime = 0;
-    s->st_atime = s->st_mtime;
-    s->st_ctime = s->st_mtime;
+    idx = parse_filedate(idx, &s->st_mtime);
+    if (!idx)
+        free_and_return (0);
+    /* Use resulting time value */
+    s->st_atime = s->st_ctime = s->st_mtime;
     s->st_dev = 0;
     s->st_ino = 0;
 #ifdef HAVE_ST_BLKSIZE

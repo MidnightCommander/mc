@@ -5,11 +5,11 @@
  * 1998 Pavel Machek
  */
 
-static char *X_get_path (char *inname, struct X_archive **archive, int is_dir,
+static char *get_path (char *inname, struct archive **archive, int is_dir,
     int do_not_open)
 {
     char *buf = strdup( inname );
-    char *res = X_get_path_mangle( buf, archive, is_dir, do_not_open );
+    char *res = get_path_mangle( buf, archive, is_dir, do_not_open );
     char *res2 = NULL;
     if (res)
         res2 = strdup(res);
@@ -17,11 +17,11 @@ static char *X_get_path (char *inname, struct X_archive **archive, int is_dir,
     return res2;
 }
 
-static struct X_entry*
-__X_find_entry (struct X_entry *dir, char *name, 
-		     struct X_loop_protect *list, int make_dirs, int make_file)
+static struct entry*
+__find_entry (struct entry *dir, char *name, 
+		     struct loop_protect *list, int make_dirs, int make_file)
 {
-    struct X_entry *pent, *pdir;
+    struct entry *pent, *pdir;
     char *p, *q, *name_end;
     char c;
 
@@ -46,7 +46,7 @@ __X_find_entry (struct X_entry *dir, char *name,
 	    if (!strcmp (p, "..")) 
 		pent = pent->dir;
 	    else {
-		if ((pent = __X_resolve_symlinks (pent, list))==NULL){
+		if ((pent = __resolve_symlinks (pent, list))==NULL){
 		    *q = c;
 		    return NULL;
 		}
@@ -87,22 +87,22 @@ __X_find_entry (struct X_entry *dir, char *name,
 	    q = strchr (p, 0);
     }
     if (pent == NULL)
-    	Xerrno = ENOENT;
+    	my_errno = ENOENT;
     return pent;
 }
 
-static struct X_entry *X_find_entry (struct X_entry *dir, char *name, int make_dirs, int make_file)
+static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, int make_file)
 {
-    struct X_entry *res;
+    struct entry *res;
     
     errloop = 0;
     notadir = 0;
-    res = __X_find_entry (dir, name, NULL, make_dirs, make_file);
+    res = __find_entry (dir, name, NULL, make_dirs, make_file);
     if (res == NULL) {
     	if (errloop)
-    	    Xerrno = ELOOP;
+    	    my_errno = ELOOP;
     	else if (notadir)
-    	    Xerrno = ENOTDIR;
+    	    my_errno = ENOTDIR;
     }
     return res;
 }
@@ -110,29 +110,29 @@ static struct X_entry *X_find_entry (struct X_entry *dir, char *name, int make_d
 
 static int s_errno (void)
 {
-    return Xerrno;
+    return my_errno;
 }
 
 static void * s_opendir (char *dirname)
 {
-    struct X_archive *archive;
+    struct archive *archive;
     char *q;
-    struct X_entry *entry;
-    struct X_entry **info;
+    struct entry *entry;
+    struct entry **info;
 
-    if ((q = X_get_path_mangle (dirname, &archive, 1, 0)) == NULL)
+    if ((q = get_path_mangle (dirname, &archive, 1, 0)) == NULL)
 	return NULL;
-    entry = X_find_entry (archive->root_entry, q, 0, 0);
+    entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return NULL;
-    if ((entry = X_resolve_symlinks (entry)) == NULL)
+    if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
     if (!S_ISDIR (entry->inode->mode)) {
-    	Xerrno = ENOTDIR;
+    	my_errno = ENOTDIR;
     	return NULL;
     }
 
-    info = (struct X_entry **) xmalloc (2*sizeof (struct X_entry *), "shared opendir");
+    info = (struct entry **) xmalloc (2*sizeof (struct entry *), "shared opendir");
     info[0] = entry->inode->first_in_subdir;
     info[1] = entry->inode->first_in_subdir;
 
@@ -148,7 +148,7 @@ static void * s_readdir (void *data)
 #endif
     } dir;
 
-    struct X_entry **info = (struct X_entry **) data;
+    struct entry **info = (struct entry **) data;
 
     if (!*info)
     	return NULL;
@@ -165,8 +165,8 @@ static void * s_readdir (void *data)
 
 static int s_telldir (void *data)
 {
-    struct X_entry **info = (struct X_entry **) data;
-    struct X_entry *cur;
+    struct entry **info = (struct entry **) data;
+    struct entry *cur;
     int num = 0;
 
     cur = info[1];
@@ -180,7 +180,7 @@ static int s_telldir (void *data)
 
 static void s_seekdir (void *data, int offset)
 {
-    struct X_entry **info = (struct X_entry **) data;
+    struct entry **info = (struct entry **) data;
     int i;
     info[0] = info[1];
     for (i=0; i<offset; i++)
@@ -193,7 +193,7 @@ static int s_closedir (void *data)
     return 0;
 }
 
-static void stat_move( struct stat *buf, struct X_inode *inode )
+static void stat_move( struct stat *buf, struct inode *inode )
 {
     buf->st_dev = inode->dev;
     buf->st_ino = inode->inode;
@@ -218,20 +218,20 @@ static void stat_move( struct stat *buf, struct X_inode *inode )
 
 static int s_internal_stat (char *path, struct stat *buf, int resolve)
 {
-    struct X_archive *archive;
+    struct archive *archive;
     char *q;
-    struct X_entry *entry;
-    struct X_inode *inode;
+    struct entry *entry;
+    struct inode *inode;
 char debugbuf[10240];
 strcpy( debugbuf, path );
 
 
-    if ((q = X_get_path_mangle (path, &archive, 0, 0)) == NULL)
+    if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
-    entry = X_find_entry (archive->root_entry, q, 0, 0);
+    entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return -1;
-    if (resolve && (entry = X_resolve_symlinks (entry)) == NULL)
+    if (resolve && (entry = my_resolve_symlinks (entry)) == NULL)
 	return -1;
     inode = entry->inode;
     stat_move( buf, inode );
@@ -250,8 +250,8 @@ static int s_lstat (char *path, struct stat *buf)
 
 static int s_fstat (void *data, struct stat *buf)
 {
-    struct X_pseudofile *file = (struct X_pseudofile *)data;
-    struct X_inode *inode;
+    struct pseudofile *file = (struct pseudofile *)data;
+    struct inode *inode;
     
     inode = file->entry->inode;
     stat_move( buf, inode );
@@ -260,18 +260,18 @@ static int s_fstat (void *data, struct stat *buf)
 
 static int s_readlink (char *path, char *buf, int size)
 {
-    struct X_archive *archive;
+    struct archive *archive;
     char *q;
     int i;
-    struct X_entry *entry;
+    struct entry *entry;
 
-    if ((q = X_get_path_mangle (path, &archive, 0, 0)) == NULL)
+    if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
 	return -1;
-    entry = X_find_entry (archive->root_entry, q, 0, 0);
+    entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
     	return -1;
     if (!S_ISLNK (entry->inode->mode)) {
-        Xerrno = EINVAL;
+        my_errno = EINVAL;
         return -1;
     }
     if (size > (i = strlen (entry->inode->linkname))) {
