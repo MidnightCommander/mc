@@ -160,7 +160,7 @@ void endfilepwent(void *vp, int *file_lock_depth)
   fclose(fp);
   DEBUG(7, ("endfilepwent: closed file.\n"));
 }
-#endif
+
 
 /*************************************************************************
  Return the current position in the file list as an SMB_BIG_UINT.
@@ -260,7 +260,7 @@ int getfileline(void *vp, char *linebuf, int linebuf_size)
 	}
 	return -1;
 }
-
+#endif	/* 0 */
 
 /****************************************************************************
 read a line from a file with possible \ continuation chars. 
