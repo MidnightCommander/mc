@@ -45,8 +45,6 @@
 #include "util.h"
 #include "ext.h" /* regex_command */
 
-void do_enter (WPanel *panel);
-
 extern Server_image iconRegular [2];
 extern Server_image iconDirectory [2];
 

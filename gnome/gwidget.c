@@ -238,7 +238,7 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	 * Look in gscreen.c for an example
 	 */
 	if (in->widget.wdata)
-		return;
+		return 1;
 	
 	gnome_entry = gnome_entry_new (in->widget.tkname);
 	gtk_widget_show (gnome_entry);
@@ -466,7 +466,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 		char buffer [40];
 		GtkButton *b;
 
-		sprintf (buffer, "F%d %s", bb->labels [i].text ? bb->labels [i].text : "      ");
+		sprintf (buffer, "F%d %s", i+1, bb->labels [i].text ? bb->labels [i].text : "      ");
 		b = (GtkButton *) gtk_button_new_with_label (buffer);
 		gtk_signal_connect (GTK_OBJECT (b), "clicked",
 				    GTK_SIGNAL_FUNC (buttonbar_clicked), bb);

@@ -1,4 +1,10 @@
+Sun Apr 12 02:48:26 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* xv/xvscreen.c: removed duplicate (conflicting) definition
+	of do_enter()
+
 Sun Apr 12 02:24:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
 
 	* text.c (edition_post_exec), cmd.c (view_other_cmd): Don't change 
 	the keypad mode when we don't use the alternate plus minus. Pavel
