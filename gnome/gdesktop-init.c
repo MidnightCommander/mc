@@ -1,4 +1,4 @@
-/* 
+/* Customizable desktop links for the Midnight Commander
  *
  * Copyright (C) 1998-1999 The Free Software Foundation
  *
@@ -20,7 +20,7 @@ desktop_load_init_from (const char *file)
 {
 	void *iterator_handle;
 	char *config_path = g_strconcat ("=", file, "=", NULL);
-	
+
 	iterator_handle = gnome_config_init_iterator_sections (config_path);
 
 	do {
@@ -45,7 +45,7 @@ desktop_load_init_from (const char *file)
 			int  used;
 			char *icon = NULL, *url;
 			char *icon2 = NULL;
-			
+
 			url = gnome_config_get_string ("url");
 			icon = gnome_config_get_string_with_default ("icon=", &used);
 			if (!icon)
@@ -57,9 +57,8 @@ desktop_load_init_from (const char *file)
 			}
 			if (url && *url){
 				char *filename = g_concat_dir_and_file (desktop_directory, key);
-													
-				desktop_create_url (filename, title, url, icon2);
 
+				desktop_create_url (filename, title, url, icon2);
 				g_free (filename);
 			}
 
@@ -132,7 +131,7 @@ desktop_init_at (const char *dir)
 }
 
 void
-gdesktop_init (void)
+gdesktop_links_init (void)
 {
 	char *dir;
 
@@ -143,7 +142,4 @@ gdesktop_init (void)
 		desktop_init_at (dir);
 		g_free (dir);
 	}
-	gmount_setup_devices ();
-	gprint_setup_devices ();
 }
-

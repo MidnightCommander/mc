@@ -1,7 +1,7 @@
-[gnews]
+[gnotices]
 title=GNOME News
 type=url
-url=http://www.gnome.org/news
+url=http://news.gnome.org/gnome-news
 
 [slashdot]
 title=Slashdot

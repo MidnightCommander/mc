@@ -1,3 +1,7 @@
+1999-09-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* lib/startup.links: Changed the news link to Gnotices
+
 1999-09-19  David Martin <dmartina@usa.net>
 
 	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that 

@@ -135,6 +135,27 @@ option_has_user (char *str)
 
 #ifdef MOUNTED_GETMNTENT1
 
+/* Returns whether the mount entry has the owner flag and our euid matches the
+ * device file.
+ */
+static gboolean
+option_has_owner (struct mntent *mnt)
+{
+	char *p;
+	struct stat st;
+
+	if (strstr (mnt->mnt_opts, "owner") == NULL)
+		return FALSE;
+
+	if (stat (mnt->mnt_fsname, &st) != 0)
+		return FALSE;
+
+	if (st.st_uid != geteuid ())
+		return FALSE;
+
+	return TRUE;
+}
+
 /* Returns whether devname is mountable: NULL if it is not or g_strdup()ed
  * string with the mount point.
  */
@@ -163,7 +184,7 @@ is_block_device_mountable (char *mount_point)
 			break;
 		}
 
-		if (option_has_user (mnt->mnt_opts)) {
+		if (option_has_user (mnt->mnt_opts) || option_has_owner (mnt)) {
 			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}
@@ -207,7 +228,7 @@ get_mountable_devices (void)
 	}
 
 	while ((mnt = getmntent (f)) != NULL) {
-		if (option_has_user (mnt->mnt_opts)) {
+		if (option_has_user (mnt->mnt_opts) || option_has_owner (mnt)) {
 			devname_info_t *dit;
 
 			dit = g_new0 (devname_info_t, 1);
@@ -295,7 +316,7 @@ automounter_is_running (void)
 	gboolean result = FALSE;
 
 	CORBA_exception_init (&ev);
-	
+
         server = goad_server_activate_with_id (NULL,
 					       "GOAD:magicdev:19990913",
                                                GOAD_ACTIVATE_EXISTING_ONLY,
@@ -305,12 +326,12 @@ automounter_is_running (void)
 		result = GNOME_MagicDev_is_running (server, &ev);
 		if (ev._major != CORBA_NO_EXCEPTION)
 			result = FALSE;
-		
+
 		CORBA_Object_release (server, &ev);
 	}
 
 	return result;
-		
+
 #else  /* !HAVE_CORBA */
 	return FALSE;
 #endif /* HAVE_CORBA */

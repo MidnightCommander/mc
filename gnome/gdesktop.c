@@ -27,6 +27,7 @@
 #include "gcmd.h"
 #include "gdnd.h"
 #include "gpopup.h"
+#include "gprint.h"
 #include "gscreen.h"
 #include "../vfs/vfs.h"
 #include "main.h"
@@ -2211,7 +2212,11 @@ create_desktop_dir (void)
 		}
 		g_free (home_link_name);
 
-		gdesktop_init ();
+		/* Create the default set of icons */
+
+		gdesktop_links_init ();
+		gmount_setup_devices ();
+		gprint_setup_devices ();
 	}
 }
 
@@ -2551,7 +2556,7 @@ void
 desktop_rescan_devices (void)
 {
 	desktop_cleanup_devices ();
-	gdesktop_init ();
+	gmount_setup_devices ();
 	desktop_reload_icons (FALSE, 0, 0);
 }
 
@@ -2633,7 +2638,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_SUBTREE (N_("_Arrange Icons"), desktop_arrange_icons_items),
 	GNOMEUIINFO_ITEM_NONE (N_("Create _New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop _Shortcuts"), NULL, handle_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop _Devices"), NULL, handle_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan _Desktop"), NULL, handle_rescan_desktop),
 	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
 	GNOMEUIINFO_END
