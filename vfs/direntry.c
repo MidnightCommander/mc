@@ -970,9 +970,6 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
     MEDATA->linear_close (me, &fh);
     close(handle);
 
-    if (stat (ino->localname, &ino->u.fish.local_stat) < 0)
-        ino->u.fish.local_stat.st_mtime = 0;
-    
     return 0;
 error_1:
     MEDATA->linear_close (me, &fh);

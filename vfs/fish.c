@@ -610,7 +610,9 @@ static void
 linear_close (vfs *me, vfs_s_fh *fh)
 {
     if (fh->u.fish.total != fh->u.fish.got)
-        linear_abort(me, fh);
+	linear_abort(me, fh);
+    else if (stat (fh->ino->localname, &fh->ino->u.fish.local_stat) < 0)
+	fh->ino->u.fish.local_stat.st_mtime = 0;
 }
 
 static int
