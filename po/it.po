@@ -5360,6 +5360,10 @@ msgid ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
+"Uso:\n"
+"\n"
+"mc [flag] [questa_dir] [altra_dir_pannello]\n"
+"\n"
 
 #: src/main.c:2490
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
@@ -6420,6 +6424,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
+"Fine prematura di un archivio cpio\n"
+"%s"
 
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
@@ -6765,12 +6771,12 @@ msgid " Can't locate hostname: %s "
 msgstr "Nome host irraggiungibile: %s "
 
 #: vfs/mcfs.c:253
-#, fuzzy, c-format
+#, c-format
 msgid " Can't create socket: %s "
 msgstr " Non riesco a creare il socket: %s "
 
 #: vfs/mcfs.c:259
-#, fuzzy, c-format
+#, c-format
 msgid " Can't connect to server: %s "
 msgstr " Non riesco a connettermi al server: %s "
 
@@ -6811,7 +6817,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1242
 msgid " Authentication failed "
-msgstr ""
+msgstr " Autenticazione fallita "
 
 #: vfs/smbfs.c:1737
 #, c-format
