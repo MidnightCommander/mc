@@ -572,7 +572,7 @@ static void init_chown_advanced (void)
 			 "[Chown-advanced]", "achown", DLG_CENTER);
 
 #define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
-	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, chown_advanced_but[i].text, \
+	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, _(chown_advanced_but[i].text), \
         0, 0, NULL
 
     for (i = 0; i < BUTTONS - 5; i++)

@@ -1,3 +1,7 @@
+1999-01-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* achown.c (XTRACT): Add missing call to _().
+
 1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* panel.h: Fixup #includes.
