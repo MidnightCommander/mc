@@ -914,10 +914,8 @@ view_other_cmd (void)
 	if (clear_before_exec)
 	    clr_scr ();
 #endif
-	
-	if (alternate_plus_minus && (console_flag || xterm_flag)) {
-	    fprintf (stdout, "\033>"); fflush (stdout);
-	}
+
+	numeric_keypad_mode ();
 #ifndef HAVE_SLANG
 	/* With slang we don't want any of this, since there
 	 * is no mc_raw_mode supported
@@ -953,10 +951,8 @@ view_other_cmd (void)
 
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
-	    
-	if (alternate_plus_minus && (console_flag || xterm_flag)) {
-	    fprintf (stdout, "\033="); fflush (stdout);
-	}
+
+	application_keypad_mode ();
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
 #ifndef HAVE_X	

@@ -63,9 +63,7 @@ edition_post_exec (void)
     channels_up ();
     if (use_mouse_p)
 	init_mouse ();
-    if (alternate_plus_minus && (console_flag || xterm_flag)) {
-        fprintf (stdout, "\033="); fflush (stdout);
-    }
+    application_keypad_mode ();
 }
 
 void
@@ -86,9 +84,7 @@ edition_pre_exec (void)
     keypad (stdscr, FALSE);
     endwin ();
     
-    if (alternate_plus_minus && (console_flag || xterm_flag)) {
-        fprintf (stdout, "\033>"); fflush (stdout);
-    }
+    numeric_keypad_mode ();
     
     /* on xterms: maybe endwin did not leave the terminal on the shell
      * screen page: do it now.
