@@ -772,8 +772,8 @@ do_select (WPanel *panel, int i)
     }
 }
 
-void
-Xtry_to_select (WPanel *panel, char *name)
+static inline void
+do_try_to_select (WPanel *panel, char *name)
 {
     int i;
     char *subdir;
@@ -806,7 +806,7 @@ Xtry_to_select (WPanel *panel, char *name)
 void
 try_to_select (WPanel *panel, char *name)
 {
-    Xtry_to_select (panel, name);
+    do_try_to_select (panel, name);
     select_item (panel);
     display_mini_info (panel);
 }

@@ -1,5 +1,8 @@
 2002-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (Xtry_to_select): Make static, rename to
+	do_try_to_select().
+
 	* screen.c (chdir_other_panel): Change behavior of Alt-O -
 	change the other panel to the current directory, put it to the
 	listing mode if needed.  Based on a patch from PLD Linux
