@@ -1,5 +1,7 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c: Constify arguments of many functions.
+
 	* undelfs.c (undelfs_get_path): Constify first argument.
 	* vfs.h (struct vfs_class): Constify path.  Fix all dependencies.
 

@@ -79,23 +79,23 @@ struct vfs_class {
     int (*ctl) (void *vfs_info, int ctlop, int arg);
     int (*setctl) (vfs *me, char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
-     caddr_t (*mmap) (vfs *me, caddr_t addr, size_t len, int prot,
-		      int flags, void *vfs_info, off_t offset);
+    caddr_t (*mmap) (vfs *me, caddr_t addr, size_t len, int prot,
+		     int flags, void *vfs_info, off_t offset);
     int (*munmap) (vfs *me, caddr_t addr, size_t len, void *vfs_info);
 #endif
 };
 
-    /*
-     * This union is used to ensure that there is enough space for the
-     * filename (d_name) when the dirent structure is created.
-     */
+/*
+ * This union is used to ensure that there is enough space for the
+ * filename (d_name) when the dirent structure is created.
+ */
 union vfs_dirent {
     struct dirent dent;
     char _extra_buffer[((int) &((struct dirent *) 0)->d_name) +
 		       MC_MAXPATHLEN + 1];
 };
 
-    /* Register a file system class */
+/* Register a file system class */
 int vfs_register_class (struct vfs_class *vfs);
 void init_cpiofs (void);
 void init_fish (void);
@@ -120,17 +120,17 @@ struct vfs_stamping {
 void vfs_init (void);
 void vfs_shut (void);
 
-struct vfs_class *vfs_get_class (char *path);
-vfs *vfs_split (char *path, char **inpath, char **op);
+struct vfs_class *vfs_get_class (const char *path);
+vfs *vfs_split (const char *path, char **inpath, char **op);
 void vfs_rm_parents (struct vfs_stamping *stamp);
-char *vfs_path (char *path);
+char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
 char *mc_get_current_wd (char *buffer, int bufsize);
 int vfs_current_is_local (void);
 int vfs_file_is_local (const char *name);
-int vfs_file_is_ftp (char *filename);
-int vfs_file_is_smb (char *filename);
+int vfs_file_is_ftp (const char *filename);
+int vfs_file_is_smb (const char *filename);
 char *vfs_get_current_dir (void);
 
 extern int vfs_timeout;
@@ -142,10 +142,10 @@ void vfs_add_current_stamps (void);
 void vfs_timeout_handler (void);
 void vfs_expire (int);
 int vfs_timeouts (void);
-void vfs_release_path (char *dir);
+void vfs_release_path (const char *dir);
 
 void vfs_fill_names (void (*)(char *));
-char *vfs_translate_url (char *);
+char *vfs_translate_url (const char *);
 
 void ftpfs_set_debug (const char *file);
 #ifdef USE_NETCODE
@@ -157,7 +157,7 @@ extern int use_netrc;
 #   define ftpfs_hint_reread(x)
 #endif
 
-    /* Only the routines outside of the VFS module need the emulation macros */
+/* Only the routines outside of the VFS module need the emulation macros */
 
 int mc_open (const char *filename, int flags, ...);
 int mc_close (int handle);

@@ -180,7 +180,7 @@ path_magic (const char *path)
  * want to free neither *inpath nor *op
  */
 vfs *
-vfs_split (char *path, char **inpath, char **op)
+vfs_split (const char *path, char **inpath, char **op)
 {
     char *semi;
     char *slash;
@@ -222,7 +222,7 @@ vfs_split (char *path, char **inpath, char **op)
 }
 
 static vfs *
-_vfs_get_class (char *path)
+_vfs_get_class (const char *path)
 {
     char *semi;
     char *slash;
@@ -251,7 +251,7 @@ _vfs_get_class (char *path)
 }
 
 vfs *
-vfs_get_class (char *path)
+vfs_get_class (const char *path)
 {
     vfs *vfs;
 
@@ -746,15 +746,14 @@ vfs_canon (const char *path)
 }
 
 static vfsid
-vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
+vfs_ncs_getid (vfs *nvfs, const char *dir, struct vfs_stamping **par)
 {
     vfsid nvfsid;
+    char *dir1;
 
-    dir = concat_dir_and_file (dir, "");
-
-    nvfsid = (*nvfs->getid)(nvfs, dir, par);
-    
-    g_free (dir);
+    dir1 = concat_dir_and_file (dir, "");
+    nvfsid = (*nvfs->getid) (nvfs, dir1, par);
+    g_free (dir1);
     return nvfsid;
 }
 
@@ -951,14 +950,13 @@ vfs_file_is_local (const char *file)
 }
 
 int
-vfs_file_is_ftp (char *filename)
+vfs_file_is_ftp (const char *filename)
 {
 #ifdef USE_NETCODE
     vfs *vfs;
-    
-    filename = vfs_canon (filename);
-    vfs = vfs_get_class (filename);
-    g_free (filename);
+    char *fname = vfs_canon (filename);
+    vfs = vfs_get_class (fname);
+    g_free (fname);
     return vfs == &vfs_ftpfs_ops;
 #else
     return 0;
@@ -966,15 +964,14 @@ vfs_file_is_ftp (char *filename)
 }
 
 int
-vfs_file_is_smb (char *filename)
+vfs_file_is_smb (const char *filename)
 {
 #ifdef WITH_SMBFS
 #ifdef USE_NETCODE
     vfs *vfs;
-    
-    filename = vfs_canon (filename);
-    vfs = vfs_get_class (filename);
-    g_free (filename);
+    char *fname = vfs_canon (filename);
+    vfs = vfs_get_class (fname);
+    g_free (fname);
     return vfs == &vfs_smbfs_ops;
 #endif /* USE_NETCODE */
 #endif /* WITH_SMBFS */
@@ -1863,7 +1860,7 @@ vfs_get_password (char *msg)
  * not recognized as url, g_strdup(url) is returned.
  */
 char *
-vfs_translate_url (char *url)
+vfs_translate_url (const char *url)
 {
     if (strncmp (url, "ftp://", 6) == 0)
         return  g_strconcat ("/#ftp:", url + 6, NULL);
@@ -1875,7 +1872,7 @@ vfs_translate_url (char *url)
 
 
 void
-vfs_release_path (char *dir)
+vfs_release_path (const char *dir)
 {
     struct vfs_class *oldvfs;
     vfsid oldvfsid;
