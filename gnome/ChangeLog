@@ -1,5 +1,10 @@
 1998-03-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (icon_properties): Whoops, actually save the dentry.
+	(post_setup_desktop_icon): Moved the icon positioning call outside
+	of this function so that property-changed icons will not move on
+	the desktop.
+
 	* gdesktop.c (desktop_icon_context_popup): It is not necessary to
 	set the menu position.
 	(desktop_icon_context_popup): gtk_signal_connect_object_after to the menu

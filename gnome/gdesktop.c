@@ -648,7 +648,6 @@ char *drop_types [] = {
 static void
 post_setup_desktop_icon (desktop_icon_t *di)
 {
-	desktop_icon_set_position (di);
 	desktop_icon_make_draggable (di);
 
 	/* Setup the widget to make it useful: */
@@ -677,6 +676,7 @@ icon_properties (GtkWidget *widget, desktop_icon_t *di)
 		di->widget = get_transparent_window_for_dentry (di->dentry);
 
 		post_setup_desktop_icon (di);
+		gnome_desktop_entry_save (di->dentry);
 	}
 }
 
@@ -736,6 +736,7 @@ desktop_load_from_dentry (GnomeDesktopEntry *dentry)
 	desktop_icons = g_list_prepend (desktop_icons, di);
 
 	post_setup_desktop_icon (di);
+	desktop_icon_set_position (di);
 }
 
 /*
