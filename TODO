@@ -9,6 +9,8 @@ Need a separate color for hotkeys in red dialogs.
 Crash when opening tar archives with links on the top level pointing
 inside a directory.
 
+Tilde not expanded in copy and move dialogs.
+
 
 Before 4.6.2
 ============
