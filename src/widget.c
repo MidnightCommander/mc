@@ -628,9 +628,17 @@ label_destroy (WLabel *l)
 WLabel *
 label_new (int y, int x, const char *text, char *tkname)
 {
-    WLabel *l = g_new (WLabel, 1);
+    WLabel *l;
+    int width;
 
-    init_widget (&l->widget, y, x, 1, text ? strlen (text) : 0,
+    /* Multiline labels are immutable - no need to compute their sizes */
+    if (!text || strchr(text, '\n'))
+	width = 1;
+    else
+	width = strlen (text);
+
+    l = g_new (WLabel, 1);
+    init_widget (&l->widget, y, x, 1, width,
 		 (callback_fn) label_callback,
 		 (destroy_fn) label_destroy, NULL, tkname);
     l->text = text ? g_strdup (text) : 0;

@@ -1,5 +1,9 @@
 2001-09-03  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (label_new): Don't calculate dimensions of multiline
+	labels, since they cannot be changed and msglen() is already
+	used when the dialog is created.
+
 	* Makefile.in: Converted to ...
 	* Makefile.am: ... this.
 
