@@ -1,3 +1,8 @@
+2002-10-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* ftpfs.c (linear_abort): Close data socket, ProFTPD 1.2.6
+	expects the client to close it.
+
 2002-10-13  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Remove tar_gzipped_memlimit.

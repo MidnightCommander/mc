@@ -1019,6 +1019,10 @@ linear_abort (vfs *me, vfs_s_fh *fh)
 	    }
 	}
     }
+
+    if (dsock != -1)
+	close (dsock);
+
     if ((get_reply (me, SUP.sock, NULL, 0) == TRANSIENT) && (code == 426))
 	get_reply (me, SUP.sock, NULL, 0);
 }
