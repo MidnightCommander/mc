@@ -1,9 +1,15 @@
+2002-07-26  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (display): Don't highlight characters as bold if the
+	character before the backspace was different.
+	From Roland Illig <roland.illig@gmx.de>
+
 2002-07-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* wtools.c (message): Fix possible buffer overflow.
 
 	* slint.c [HAVE_MAD] (dealloc_color_pairs): Move ...
-	* color.c [HAVE_MAD]: ... here and make accessible from 
+	* color.c [HAVE_MAD]: ... here and make accessible from
 	other files to fix compilation.
 	* color.h [HAVE_MAD]: Declare dealloc_color_pairs.
 

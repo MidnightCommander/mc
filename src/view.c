@@ -776,7 +776,7 @@ view_display_clean (WView *view, int height, int width)
 
 /* Shows the file pointed to by *start_display on view_win */
 static long
-display (WView *view)
+display (WView * view)
 {
     const int frame_shift = view->have_frame;
     int col = 0 + frame_shift;
@@ -786,7 +786,7 @@ display (WView *view)
     int c;
     int boldflag = 0;
     struct hexedit_change_node *curr = view->change_list;
- 
+
     height = view->widget.lines - frame_shift;
     width = view->widget.cols - frame_shift;
     from = view->start_display;
@@ -796,232 +796,242 @@ display (WView *view)
     view_display_clean (view, height, width);
 
     /* Optionally, display a ruler */
-    if ((!view->hex_mode) && (ruler)){
+    if ((!view->hex_mode) && (ruler)) {
 	char r_buff[10];
 	int cl;
-	
+
 	view_set_color (view, BOLD_COLOR);
 	for (c = frame_shift; c < width; c++) {
-	    cl = c-view->start_col;  
+	    cl = c - view->start_col;
 	    if (ruler == 1)
 		view_gotoyx (view, row, c);
 	    else
-		view_gotoyx (view, row+height-2, c);
+		view_gotoyx (view, row + height - 2, c);
 	    r_buff[0] = '-';
 	    if ((cl % 10) == 0)
-		r_buff[0] = '|'; 
-	    else
-		if ((cl % 5) == 0)
-		    r_buff[0] = '*'; 
+		r_buff[0] = '|';
+	    else if ((cl % 5) == 0)
+		r_buff[0] = '*';
 	    view_add_character (view, r_buff[0]);
-	    if ((cl != 0) && (cl % 10) == 0){
-		g_snprintf(r_buff, sizeof (r_buff), "%03d", cl);
+	    if ((cl != 0) && (cl % 10) == 0) {
+		g_snprintf (r_buff, sizeof (r_buff), "%03d", cl);
 		if (ruler == 1) {
 		    widget_move (view, row + 1, c - 1);
 		} else {
 		    widget_move (view, row + height - 3, c - 1);
 		}
-                view_add_string (view, r_buff);
-	    }   
-	}    
+		view_add_string (view, r_buff);
+	    }
+	}
 	view_set_color (view, DEF_COLOR);
-	if (ruler == 1) 
+	if (ruler == 1)
 	    row += 2;
 	else
-	    height -= 2;    
+	    height -= 2;
     }
 
     /* Find the first displayable changed byte */
     while (curr && (curr->offset < from)) {
-        curr = curr->next;
+	curr = curr->next;
     }
-    if (view->hex_mode){
-        char hex_buff[10];   /* A temporary buffer for sprintf and mvwaddstr */
-        int bytes;	     /* Number of bytes already printed on the line */
+    if (view->hex_mode) {
+	char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
+	int bytes;		/* Number of bytes already printed on the line */
 
 	/* Start of text column */
-        int text_start = width - view->bytes_per_line - 1 + frame_shift;
+	int text_start = width - view->bytes_per_line - 1 + frame_shift;
 
-        for (;row < height && from < view->last_byte; row++){
-            /* Print the hex offset */
-            view_set_color (view, BOLD_COLOR);
-            g_snprintf (hex_buff, sizeof (hex_buff), "%08X", (int) (from - view->first));
+	for (; row < height && from < view->last_byte; row++) {
+	    /* Print the hex offset */
+	    view_set_color (view, BOLD_COLOR);
+	    g_snprintf (hex_buff, sizeof (hex_buff), "%08X",
+			(int) (from - view->first));
 	    view_gotoyx (view, row, frame_shift);
-            view_add_string (view, hex_buff);
-            view_set_color (view, DEF_COLOR);
-	    
-            /* Hex dump starts from column nine */
-            col = 9;
-	    
-            /* Each hex number is two digits */
-            hex_buff[2] = 0;
-            for (bytes = 0; bytes < view->bytes_per_line
-		 && from < view->last_byte; bytes++, from++){
-                /* Display and mark changed bytes */
-                if (curr && from == curr->offset) {
-                    c = curr->value;
-                    curr = curr->next;
-                    boldflag = 3;
-                    view_set_color (view, 7);
-                } else
-                c = (unsigned char) get_byte (view, from);
-		
-	    	if (view->found_len && from >= view->search_start
-		    && from < view->search_start + view->found_len){
-	    	    boldflag = 1;
+	    view_add_string (view, hex_buff);
+	    view_set_color (view, DEF_COLOR);
+
+	    /* Hex dump starts from column nine */
+	    col = 9;
+
+	    /* Each hex number is two digits */
+	    hex_buff[2] = 0;
+	    for (bytes = 0;
+		 bytes < view->bytes_per_line && from < view->last_byte;
+		 bytes++, from++) {
+		/* Display and mark changed bytes */
+		if (curr && from == curr->offset) {
+		    c = curr->value;
+		    curr = curr->next;
+		    boldflag = 3;
+		    view_set_color (view, 7);
+		} else
+		    c = (unsigned char) get_byte (view, from);
+
+		if (view->found_len && from >= view->search_start
+		    && from < view->search_start + view->found_len) {
+		    boldflag = 1;
 		    view_set_color (view, BOLD_COLOR);
-	    	}
-                /* Display the navigation cursor */
-                if (from == view->edit_cursor) {
-		    if (view->view_side == view_side_left){
+		}
+		/* Display the navigation cursor */
+		if (from == view->edit_cursor) {
+		    if (view->view_side == view_side_left) {
 			view->cursor_row = row;
 			view->cursor_col = col;
 		    }
-                    boldflag = 2;
-                    view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (15, 33));
-                }
+		    boldflag = 2;
+		    view_set_color (view,
+				    view->view_side ==
+				    view_side_left ? PICK_COLOR (15, 33));
+		}
 
-                /* Print a hex number (sprintf is too slow) */
-                hex_buff [0] = hex_char [(c >> 4)];
-                hex_buff [1] = hex_char [c & 15];
+		/* Print a hex number (sprintf is too slow) */
+		hex_buff[0] = hex_char[(c >> 4)];
+		hex_buff[1] = hex_char[c & 15];
 		view_gotoyx (view, row, col);
-                view_add_string (view, hex_buff);
-                col += 3;
-                /* Turn off the cursor or changed byte highlighting here */
-                if (boldflag > 1)
-                    view_set_color (view, DEF_COLOR);
-                if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line){
-                    /* Turn off the search highlighting */
-                    if (boldflag == 1 &&
-                            from == view->search_start + view->found_len - 1)
-                        view_set_color (view, DEF_COLOR);
-		    
-                    /* Hex numbers are printed in the groups of four */
-                    /* Groups are separated by a vline */
+		view_add_string (view, hex_buff);
+		col += 3;
+		/* Turn off the cursor or changed byte highlighting here */
+		if (boldflag > 1)
+		    view_set_color (view, DEF_COLOR);
+		if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
+		    /* Turn off the search highlighting */
+		    if (boldflag == 1
+			&& from ==
+			view->search_start + view->found_len - 1)
+			view_set_color (view, DEF_COLOR);
 
-                    view_gotoyx (view, row, col-1);
-                    view_add_character (view, ' ');
-                    view_gotoyx (view, row, col);
-                    view_add_one_vline ();
-                    col += 2;
-                    
-                    if (boldflag && from==view->search_start+view->found_len-1)
-                    	view_set_color (view, BOLD_COLOR);
-		    
-                }
-                if (boldflag && 
-                    from < view->search_start + view->found_len - 1 &&
-                    bytes != view->bytes_per_line - 1) {
-		        view_gotoyx (view, row, col);
-                        view_add_character (view, ' ');
-                }
-		
-                /* Print the corresponding ascii character */
+		    /* Hex numbers are printed in the groups of four */
+		    /* Groups are separated by a vline */
+
+		    view_gotoyx (view, row, col - 1);
+		    view_add_character (view, ' ');
+		    view_gotoyx (view, row, col);
+		    view_add_one_vline ();
+		    col += 2;
+
+		    if (boldflag
+			&& from ==
+			view->search_start + view->found_len - 1)
+			view_set_color (view, BOLD_COLOR);
+
+		}
+		if (boldflag
+		    && from < view->search_start + view->found_len - 1
+		    && bytes != view->bytes_per_line - 1) {
+		    view_gotoyx (view, row, col);
+		    view_add_character (view, ' ');
+		}
+
+		/* Print the corresponding ascii character */
 		view_gotoyx (view, row, text_start + bytes);
-		
+
 #ifdef HAVE_CHARSET
-		c = conv_displ[ c ];
+		c = conv_displ[c];
 #endif
 
-                if (!is_printable (c))
-                    c = '.';
-                switch (boldflag) {
-                    default:
-                        break;
-                    case 1:
-                        view_set_color (view, BOLD_COLOR);
-                        goto setcursor;
-                    case 2:
-                        view_set_color (view, view->view_side == view_side_left ? PICK_COLOR (33, 15));
-                        goto setcursor;
-                    case 3:
-                        view_set_color (view, 7);
+		if (!is_printable (c))
+		    c = '.';
+		switch (boldflag) {
+		default:
+		    break;
+		case 1:
+		    view_set_color (view, BOLD_COLOR);
+		    goto setcursor;
+		case 2:
+		    view_set_color (view,
+				    view->view_side ==
+				    view_side_left ? PICK_COLOR (33, 15));
+		    goto setcursor;
+		case 3:
+		    view_set_color (view, 7);
 
-                    setcursor:
-		    if (view->view_side == view_side_right){
+		  setcursor:
+		    if (view->view_side == view_side_right) {
 			view->cursor_col = text_start + bytes;
 			view->cursor_row = row;
 		    }
 		}
 		view_add_character (view, c);
-		
-                if (boldflag){
-                    boldflag = 0;
-                    view_set_color (view, DEF_COLOR);
-                }
-            }
-        }
+
+		if (boldflag) {
+		    boldflag = 0;
+		    view_set_color (view, DEF_COLOR);
+		}
+	    }
+	}
     } else {
-        if (view->growing_buffer && from == view->last_byte)
-            get_byte (view, from);
-    	for (; row < height && from < view->last_byte; from++){
+	if (view->growing_buffer && from == view->last_byte)
+	    get_byte (view, from);
+	for (; row < height && from < view->last_byte; from++) {
 	    c = get_byte (view, from);
-    	    if ((c == '\n') || (col == width && view->wrap_mode)){
-       	        col = frame_shift;
-       	        row++;
+	    if ((c == '\n') || (col == width && view->wrap_mode)) {
+		col = frame_shift;
+		row++;
 		if (c == '\n' || row >= height)
 		    continue;
-       	    }
+	    }
 	    if (c == '\r')
 		continue;
-       	    if (c == '\t'){
-       	        col = ((col - frame_shift)/8)*8 + 8 + frame_shift;
-       	        continue;
-       	    }
-	    if (view->viewer_nroff_flag && c == '\b'){
-	    	if (from + 1 < view->last_byte
-		    && is_printable (get_byte (view, from + 1)) &&
-	    	    from > view->first
-		    && is_printable (get_byte (view, from - 1)))
-		{
-		    if (col <= frame_shift){
-		    	/* So it has to be wrap_mode - do not need to check for it */
-		    	if (row == 1 + frame_shift){
-		    	    from++;
-		    	    continue; /* There had to be a bold character on the rightmost position
-		    	    		 of the previous undisplayed line */
-		    	}
-		    	row--;
-		    	col = width;
+	    if (c == '\t') {
+		col = ((col - frame_shift) / 8) * 8 + 8 + frame_shift;
+		continue;
+	    }
+	    if (view->viewer_nroff_flag && c == '\b') {
+		int c_prev;
+		int c_next;
+
+		if (from + 1 < view->last_byte
+		    && is_printable ((c_next = get_byte (view, from + 1)))
+		    && from > view->first
+		    && is_printable ((c_prev = get_byte (view, from - 1)))
+		    && (c_prev == c_next || c_prev == '_')) {
+		    if (col <= frame_shift) {
+			/* So it has to be wrap_mode - do not need to check for it */
+			if (row == 1 + frame_shift) {
+			    from++;
+			    continue;	/* There had to be a bold character on the rightmost position
+					   of the previous undisplayed line */
+			}
+			row--;
+			col = width;
 		    }
 		    col--;
 		    boldflag = 1;
-		    if (get_byte (view, from - 1) == '_' && get_byte (view, from + 1) != '_')
-		    	view_set_color (view, UNDERLINE_COLOR);
+		    if (c_prev == '_' && c_next != '_')
+			view_set_color (view, UNDERLINE_COLOR);
 		    else
-		    	view_set_color (view, BOLD_COLOR);
+			view_set_color (view, BOLD_COLOR);
 		    continue;
 		}
 	    }
 	    if (view->found_len && from >= view->search_start
-		&& from < view->search_start + view->found_len){
-	    	boldflag = 1;
+		&& from < view->search_start + view->found_len) {
+		boldflag = 1;
 		view_set_color (view, MARK_COLOR);
 	    }
-       	    if (col >= frame_shift-view->start_col
-		&& col < width-view->start_col)
-	    {
-		view_gotoyx (view, row, col+view->start_col);
+	    if (col >= frame_shift - view->start_col
+		&& col < width - view->start_col) {
+		view_gotoyx (view, row, col + view->start_col);
 
 #ifdef HAVE_CHARSET
-		c = conv_displ[ c ];
+		c = conv_displ[c];
 #endif
 
-       		if (!is_printable (c))
+		if (!is_printable (c))
 		    c = '.';
 
 		view_add_character (view, c);
-       	    } 
+	    }
 	    col++;
-	    if (boldflag){
+	    if (boldflag) {
 		boldflag = 0;
 		view_set_color (view, DEF_COLOR);
 	    }
 
 	    /* Very last thing */
-	    if (view->growing_buffer && from+1 == view->last_byte)
-		 get_byte (view, from+1);
-        }
+	    if (view->growing_buffer && from + 1 == view->last_byte)
+		get_byte (view, from + 1);
+	}
     }
     view->last = from;
     view_thaw (view);
