@@ -1,3 +1,7 @@
+1999-07-25  Jacob Berkman  <jberkman@andrew.cmu.edu>
+
+	* configure.in (undelfs_o): test against 'xyes' and not 'yes'
+
 1999-07-21  Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkedit.c, edit.c, editcmd.c, syntax.c, edit.h, bookmark.c,
