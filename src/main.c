@@ -806,7 +806,7 @@ listmode_cmd (void)
 #endif				/* LISTMODE_EDITOR */
 
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
-static menu_entry PanelMenu[] = {
+static menu_entry LeftMenu[] = {
     {' ', N_("&Listing mode..."), 'L', listing_cmd},
     {' ', N_("&Quick view     C-x q"), 'Q', quick_view_cmd},
     {' ', N_("&Info           C-x i"), 'I', info_cmd},
@@ -941,7 +941,7 @@ init_menu (void)
 {
     MenuBar[0] =
 	create_menu (horizontal_split ? _(" &Above ") : _(" &Left "),
-		     PanelMenu, menu_entries (PanelMenu),
+		     LeftMenu, menu_entries (LeftMenu),
 		     "[Left and Right Menus]");
     MenuBar[1] =
 	create_menu (_(" &File "), FileMenu, menu_entries (FileMenu),
@@ -954,7 +954,7 @@ init_menu (void)
 		     "[Options Menu]");
     MenuBar[4] =
 	create_menu (horizontal_split ? _(" &Below ") : _(" &Right "),
-		     RightMenu, menu_entries (PanelMenu),
+		     RightMenu, menu_entries (RightMenu),
 		     "[Left and Right Menus]");
 }
 
