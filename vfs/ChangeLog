@@ -1,3 +1,7 @@
+2001-08-11  Pavel Roskin  <proski@gnu.org>
+
+	* sfs.c (sfs_init): Use g_free(), not free() on mc_sfsini.
+
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.h: Move private structures ...

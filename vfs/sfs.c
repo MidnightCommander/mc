@@ -299,10 +299,10 @@ static int sfs_init (vfs *me)
 
     if (!cfg){
 	fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
-	free (mc_sfsini);
+	g_free (mc_sfsini);
 	return 0;
     }
-    free (mc_sfsini);
+    g_free (mc_sfsini);
 
     sfs_no = 0;
     while (sfs_no < MAXFS){
