@@ -799,8 +799,10 @@ dnl or you'll have to press Esc three times to dismiss a dialog box.
 dnl
 AC_DEFUN([MC_WITH_NCURSES], [
     dnl has_colors() is specific to ncurses, it's not in the old curses
-    AC_CHECK_LIB([ncurses], [has_colors], [MCLIBS="$MCLIBS -lncurses"],
-		 [AC_MSG_ERROR([Cannot find ncurses library])])
+    save_LIBS="$LIBS"
+    LIBS=
+    AC_SEARCH_LIBS([has_colors], [ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
+		   [AC_MSG_ERROR([Cannot find ncurses library])])
 
     dnl Check the header
     ncurses_h_found=
@@ -816,8 +818,6 @@ AC_DEFUN([MC_WITH_NCURSES], [
     AC_DEFINE(USE_NCURSES, 1,
 	      [Define to use ncurses for screen management])
 
-    save_LIBS="$LIBS"
-    LIBS="$LIBS -lncurses"
     AC_CACHE_CHECK([for ESCDELAY variable],
 		   [mc_cv_ncurses_escdelay],
 		   [AC_TRY_COMPILE([], [

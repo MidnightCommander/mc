@@ -1,3 +1,8 @@
+2003-01-30  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* acinclude.m4 (MC_WITH_NCURSES): Check -lcurses if -lncurses
+	doesn't work.  Useful on OpenBSD 3.2.
+
 2003-01-29  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Fix missing semicolon that affected viewing RPM
