@@ -115,9 +115,11 @@ distclean: clean
 # on systems without symlinks.
 #
 install: mc mcmfmt @saver@
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	$(mkinstalldirs) $(DESTDIR)$(mclibdir)
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
 	$(INSTALL_PROGRAM) mcmfmt $(DESTDIR)$(bindir)/$(binprefix)mcmfmt
-	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/$(libprefix)mc.hlp 
+	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/mc.hlp 
 	$(MAKE) install_mcview
 	$(MAKE) install_@MCEDIT@
 
@@ -139,7 +141,7 @@ uninstall:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mc
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcmfmt
 	rm -f $(DESTDIR)$(suppbindir)/cons.saver
-	rm -f $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
+	rm -f $(DESTDIR)$(mclibdir)/mc.hlp
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcview
 

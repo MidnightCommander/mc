@@ -1,5 +1,8 @@
 2001-01-11  Pavel Roskin  <proski@gnu.org>
 
+	* src/Makefile.in: Create directories before installing files.
+	Removed all occurences of libprefix - it's never defined.
+
 	* configure.in: All macros from configure.in moved to
 	acinclude.m4. Added missing quotes in several places.
 	* acinclude.m4: Likewise.
