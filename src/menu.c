@@ -239,7 +239,7 @@ static void menubar_execute (WMenu *menubar, int entry)
        change_panel () work which is used in quick_view_cmd () -- Norbert
     */
     menubar_finish (menubar);
-    (*call_back)(0);
+    (*call_back) ();
     do_refresh ();
 }
 

@@ -611,35 +611,10 @@ void ext_cmd (void)
    flush_extension_file ();
 }
 
-#ifdef USE_INTERNAL_EDIT
-void edit_syntax_cmd (void)
-{
-    char *buffer;
-    char *extdir;
-    int  dir = 0;
-
-    if (geteuid () == 0){
-	dir = query_dialog (_("Syntax file edit"),
-			    _(" Which syntax file you want to edit? "), 0, 2,
-			    _("&User"), _("&System Wide"));
-    }
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
-
-    if (dir == 0){
-	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
-	check_for_default (extdir, buffer);
-	do_edit (buffer);
-	g_free (buffer);
-    } else if (dir == 1)
-	do_edit (extdir);
-
-    g_free (extdir);
-}
-#endif
-
-/* where  = 0 - do edit a file menu for mc */
-/* where  = 1 - do edit a file menu for cool edit */
-void menu_edit_cmd (int where)
+/* where  = 0 - do edit file menu for mc */
+/* where  = 1 - do edit file menu for mcedit */
+static void
+menu_edit_cmd (int where)
 {
     char *buffer;
     char *menufile;
@@ -695,6 +670,49 @@ void quick_chdir_cmd (void)
 	    message (1, MSG_ERROR, _("Could not change directory") );
     g_free (target);
 }
+
+/* edit file menu for mc */
+void
+edit_mc_menu_cmd (void)
+{
+    menu_edit_cmd (0);
+}
+
+#ifdef USE_INTERNAL_EDIT
+/* edit file menu for mcedit */
+void
+edit_user_menu_cmd (void)
+{
+    menu_edit_cmd (1);
+}
+
+/* edit syntax file for mcedit */
+void
+edit_syntax_cmd (void)
+{
+    char *buffer;
+    char *extdir;
+    int dir = 0;
+
+    if (geteuid () == 0) {
+	dir =
+	    query_dialog (_("Syntax file edit"),
+			  _(" Which syntax file you want to edit? "), 0, 2,
+			  _("&User"), _("&System Wide"));
+    }
+    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+
+    if (dir == 0) {
+	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
+	check_for_default (extdir, buffer);
+	do_edit (buffer);
+	g_free (buffer);
+    } else if (dir == 1)
+	do_edit (extdir);
+
+    g_free (extdir);
+}
+#endif
 
 #ifdef USE_VFS
 void free_vfs_now (void)

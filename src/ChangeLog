@@ -1,3 +1,10 @@
+2002-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (menu_edit_cmd): Make static, provide separate functions
+	without arguments to access it.
+	* menu.h: Make callfn function without arguments - we are not
+	using any arguments now.
+
 2002-11-13  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (persistent_fread): Return error for len <= 0.

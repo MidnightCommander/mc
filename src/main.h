@@ -141,8 +141,6 @@ void load_hint      (void);
 void print_vfs_message(char *msg, ...)
     __attribute__ ((format (printf, 1, 2)));
 
-void edit_user_menu_cmd (void);
-
 extern char *prompt;
 extern char *mc_home;
 char *get_mc_lib_dir (void);

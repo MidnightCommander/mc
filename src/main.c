@@ -1064,7 +1064,7 @@ static menu_entry CmdMenu[] = {
     {' ', "", ' ', 0},
 #endif
     {' ', N_("&Extension file edit"), 'E', ext_cmd},
-    {' ', N_("&Menu file edit"), 'M', menu_edit_cmd},
+    {' ', N_("&Menu file edit"), 'M', edit_mc_menu_cmd},
 #ifdef USE_INTERNAL_EDIT
     {' ', N_("Menu edi&Tor edit"), 'T', edit_user_menu_cmd},
     {' ', N_("&Syntax file edit"), 'S', edit_syntax_cmd}

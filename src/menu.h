@@ -4,10 +4,7 @@
 #include "dlg.h"
 #include "widget.h"
 
-typedef void (*callfn) ();
-/* FIXME: We have to leave this type ambiguous, because `callfn' is
-   used both for functions that take an argument and ones that don't.
-   That ought to be cleared up. */
+typedef void (*callfn) (void);
 
 typedef struct {
     char first_letter;
