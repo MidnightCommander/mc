@@ -483,7 +483,6 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			break;
 
 		case 3:
-			/* FIXME: this should happen on button press, not button release */
 			gpopup_do_popup ((GdkEventButton *) event, panel, row, panel->dir.list[row].fname);
 			break;
 		}
@@ -894,11 +893,9 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 {
 	GtkTargetList *list;
 	GdkDragContext *context;
-
+	int action;
+		
 	if (!panel->maybe_start_drag)
-		return FALSE;
-
-	if (panel->maybe_start_drag == 3)
 		return FALSE;
 
 	if ((abs (event->x - panel->click_x) < 4) ||
@@ -907,8 +904,12 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
-	context = gtk_drag_begin (widget, list,
-				  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK,
+	if (panel->maybe_start_drag == 3)
+		action = GDK_ACTION_ASK;
+	else
+		action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK;
+	
+	context = gtk_drag_begin (widget, list, action,
 				  panel->maybe_start_drag, (GdkEvent *) event);
 	gtk_drag_set_icon_default (context);
 
@@ -1116,10 +1117,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
-		if (event->button.button == 3) {
-			gpopup_do_popup ((GdkEventButton *) event, panel, index, panel->dir.list[index].fname);
-			return;
-		} else if (event->button.button == 2){
+		if (event->button.button == 2){
 			char *fullname;
 
 			if (S_ISDIR (panel->dir.list [index].buf.st_mode) ||
@@ -1131,6 +1129,13 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 		}
 		break;
 
+	case GDK_BUTTON_RELEASE:
+		if (event->button.button != 3)
+			return;
+		
+		gpopup_do_popup ((GdkEventButton *) event, panel, index, panel->dir.list[index].fname);
+		return;
+		
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1)
 			do_enter (panel);

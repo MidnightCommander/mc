@@ -67,7 +67,7 @@ file_progress_show_source (char *path)
 
         if (path == NULL){
                 gtk_label_set (GTK_LABEL (op_source_label), "");
-                return;
+                return FILE_CONT;
         }
         
         if (!from_width){
@@ -98,7 +98,7 @@ file_progress_show_target (char *path)
 
         if (path == NULL){
                 gtk_label_set (GTK_LABEL (op_target_label), "");
-                return;
+                return FILE_CONT;
         }
         
         if (!to_width) 
@@ -120,6 +120,7 @@ FileProgressStatus
 file_progress_show_deleting (char *path)
 {
 	g_warning ("memo: file_progress_show_deleting!\npath\t%s\n",path);
+        return FILE_CONT;
 }
 
 FileProgressStatus
@@ -156,61 +157,15 @@ file_progress_show_bytes (double done, double total)
 	return FILE_CONT;
 }
 
-FileProgressStatus
-file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat,
-				  struct stat *_d_stat)
-{
-    g_warning ("memo: file_progress_real_query_replace!\n");
-
-    /* Better to have something than nothing at all */
-    if (file_progress_replace_result < REPLACE_ALWAYS){
-	file_progress_replace_filename = destname;
-	s_stat = _s_stat;
-	d_stat = _d_stat;
-	init_replace (mode);
-	run_dlg (replace_dlg);
-	file_progress_replace_result = replace_dlg->ret_value;
-	if (file_progress_replace_result == B_CANCEL)
-	    file_progress_replace_result = REPLACE_ABORT;
-	destroy_dlg (replace_dlg);
-    }
-
-    switch (file_progress_replace_result){
-    case REPLACE_UPDATE:
-	do_refresh ();
-	if (_s_stat->st_mtime > _d_stat->st_mtime)
-	    return FILE_CONT;
-	else
-	    return FILE_SKIP;
-
-    case REPLACE_SIZE:
-	do_refresh ();
-	if (_s_stat->st_size == _d_stat->st_size)
-	    return FILE_SKIP;
-	else
-	    return FILE_CONT;
-	
-    case REPLACE_REGET:
-	/* Carefull: we fall through and set do_append */
-	file_progress_do_reget = _d_stat->st_size;
-	
-    case REPLACE_APPEND:
-        file_progress_do_append = 1;
-	
-    case REPLACE_YES:
-    case REPLACE_ALWAYS:
-	do_refresh ();
-	return FILE_CONT;
-    case REPLACE_NO:
-    case REPLACE_NEVER:
-	do_refresh ();
-	return FILE_SKIP;
-    case REPLACE_ABORT:
-    default:
-	return FILE_ABORT;
-    }
-}
-
+/*
+ * I have placed the old code because it is importatn.
+ * It is in temp-hack for now.
+ *
+ * When the new code for replace_dlg is done, we can
+ * kill it.
+ *                 -miguel.
+ */ 
+#include "temp-hack.c"
 
 void
 file_progress_set_stalled_label (char *stalled_msg)
