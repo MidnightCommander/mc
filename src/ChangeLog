@@ -2,8 +2,7 @@
 
 	* widget.h: Renamed define_label to buttonbar_set_label. Renamed
 	define_label_data to buttonbar_set_label_data. Renamed
-	redraw_labels to buttonbar_redraw. Provided compatibility macros
-	to enable a smooth transition between the old and the new names.
+	redraw_labels to buttonbar_redraw.
 	* widget.c: Likewise.
 	* help.c, main.c, screen.c, tree.v, view.c: Likewise.
 

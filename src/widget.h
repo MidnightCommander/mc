@@ -202,11 +202,8 @@ typedef void (*voidfn)(void);
 WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
-#define define_label buttonbar_set_label
 void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
 			       buttonbarfn cback, void *data);
-#define define_label_data buttonbar_set_label_data
 void buttonbar_redraw (Dlg_head *h);
-#define redraw_labels buttonbar_redraw
 
 #endif
