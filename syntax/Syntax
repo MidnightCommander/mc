@@ -26,7 +26,7 @@ include lsm.syntax
 file ..\*\\.sh$ Shell\sScript ^#!\s\*/.\*/([a-z]?|ba|pdk)sh
 include sh.syntax
 
-file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!\s\*/.\*/perl
+file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!\s\*(/.\*/perl|@PERL@)
 include perl.syntax
 
 file ..\*\\.(py|PY)$ Python\sProgram ^#!\s\*/.\*/python
