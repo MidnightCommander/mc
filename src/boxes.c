@@ -751,11 +751,7 @@ configure_vfs (void)
     char buffer2[BUF_TINY];
 #if defined(USE_NETCODE)
     char buffer3[BUF_TINY];
-#endif
 
-    g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
-    confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
-#if defined(USE_NETCODE)
     ret_use_netrc = use_netrc;
     ret_ftpfs_use_passive_connections = ftpfs_use_passive_connections;
     g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
@@ -763,6 +759,8 @@ configure_vfs (void)
     confvfs_widgets[9].text = ftpfs_anonymous_passwd;
     confvfs_widgets[4].text = ftpfs_proxy_host;
 #endif
+    g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
+    confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
         vfs_timeout = atoi (ret_timeout);
@@ -783,34 +781,32 @@ configure_vfs (void)
     }
 }
 
-#endif
+#endif	/* USE_VFS */
 
 char *
 cd_dialog (void)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_input,  6, 57, 5, 0, "", 50, 0, 0, 0, "input" },
-    { quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
-    { 0 } };
-    
+	{ quick_input,  6, 57, 2, 0, "", 50, 0, 0, 0, "input" },
+	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
+	{ 0 }
+    };
     char *my_str;
-	int len;
-    
+    int len;
+
     Quick_input.xlen  = 57;
     Quick_input.title = _("Quick cd");
     Quick_input.help  = "[Quick cd]";
-    quick_widgets [0].text = "";
     quick_widgets [0].value = 2; /* want cd like completion */
     quick_widgets [1].text = _("cd");
     quick_widgets [1].y_divisions =
 	quick_widgets [0].y_divisions = Quick_input.ylen = 5;
 
-	len = strlen (quick_widgets [1].text);
+    len = strlen (quick_widgets [1].text);
 
-	quick_widgets [1].relative_x = 3;
-	quick_widgets [0].relative_x = 
-		quick_widgets [1].relative_x + len + 1;
+    quick_widgets [0].relative_x =
+	quick_widgets [1].relative_x + len + 1;
 
     Quick_input.xlen = len + quick_widgets [0].hotkey_pos + 7;
 	quick_widgets [0].x_divisions =
@@ -819,12 +815,11 @@ cd_dialog (void)
     Quick_input.i18n = 1;
     Quick_input.xpos = 2;
     Quick_input.ypos = LINES - 2 - Quick_input.ylen;
-    quick_widgets [0].relative_y = 2;
     quick_widgets [0].str_result = &my_str;
     
     Quick_input.widgets = quick_widgets;
     if (quick_dialog (&Quick_input) != B_CANCEL){
-	return *(quick_widgets [0].str_result);
+	return my_str;
     } else
 	return 0;
 }
@@ -1008,12 +1003,12 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 		      const char *user)
 {
     static int dialog_x = 44;
-    int dialog_y = 12;
+    enum { b0 = 3, dialog_y = 12};
     struct smb_authinfo *return_value;
     static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
     static char* buts[] = {N_("&OK"), N_("&Cancel")};
     static int ilen = 30, istart = 14;
-    static int b0 = 3, b2 = 30;
+    static int b2 = 30;
     char *title;
     WInput *in_password;
     WInput *in_user;

@@ -1,7 +1,7 @@
-2002-11-01  Andrew W. Nosenko  <awn@bcs.zp.ua>
+2002-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* boxes.c (configure_vfs): Ask whether passive connections
-	should be used.
+	should be used.  Asked by Andrew W. Nosenko <awn@bcs.zp.ua>.
 
 2002-11-01  Pavel Roskin  <proski@gnu.org>
 
