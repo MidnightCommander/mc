@@ -1,3 +1,7 @@
+2001-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add check for stropts.h.
+
 2001-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* lib/edit.indent.rc: Create cooledit.error right away to
