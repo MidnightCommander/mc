@@ -3,7 +3,9 @@
 
 /* This file is included by help.c and man2hlp.c */
 
-/* Some useful constants */
+#define HELP_TEXT_WIDTH 58
+
+/* Markers used in the help files */
 #define CHAR_NODE_END		'\04'
 #define CHAR_LINK_START		'\01'
 #define CHAR_LINK_POINTER	'\02'
@@ -22,10 +24,6 @@
 #define CHAR_TITLE_OFF		'\023'
 #define CHAR_FONT_ITALIC	'\024'
 #define CHAR_RESERVED		'\025'
-#define STRING_LINK_START	"\01"
-#define STRING_LINK_POINTER	"\02"
-#define STRING_LINK_END		"\03"
-#define STRING_NODE_END		"\04"
 
 void interactive_display (char *filename, char *node);
 #endif	/* __HELP_H */

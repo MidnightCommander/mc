@@ -56,9 +56,12 @@
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
-#define HELP_WINDOW_WIDTH 62
+#define HELP_WINDOW_WIDTH (HELP_TEXT_WIDTH + 4)
 
-/* "$Id$" */
+#define STRING_LINK_START	"\01"
+#define STRING_LINK_POINTER	"\02"
+#define STRING_LINK_END		"\03"
+#define STRING_NODE_END		"\04"
 
 static char *data;		/* Pointer to the loaded data file */
 static int help_lines;		/* Lines in help viewer */

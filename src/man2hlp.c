@@ -27,7 +27,6 @@
 
 #define BUFFER_SIZE 256
 
-static int width;		/* Output width in characters */
 static int col = 0;		/* Current output column */
 static int out_row = 1;		/* Current output row */
 static int in_row = 0;		/* Current input row */
@@ -235,7 +234,7 @@ print_string (char *buffer)
 	    if (*(buffer)) {
 		len = string_len (buffer);
 		/* Change the line if about to break the right margin */
-		if (col + len >= width)
+		if (col + len >= HELP_TEXT_WIDTH)
 		    newline ();
 		/* Words are separated by spaces */
 		if (col > 0) {
@@ -519,15 +518,15 @@ main (int argc, char **argv)
     long file_end;		/* Length of the output file */
 
     /* Validity check for arguments */
-    if ((argc != 5) || ((width = atoi (argv[1])) <= 10)) {
+    if (argc != 4) {
 	fprintf (stderr,
-		 "Usage: man2hlp width file.man template_file helpfile\n");
+		 "Usage: man2hlp file.man template_file helpfile\n");
 	return 3;
     }
 
-    c_man = argv[2];
-    c_tmpl = argv[3];
-    c_out = argv[4];
+    c_man = argv[1];
+    c_tmpl = argv[2];
+    c_out = argv[3];
 
     /* First stage - process the manual, write to the output file */
     f_man = fopen_check (c_man, "r");

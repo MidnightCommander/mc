@@ -1,5 +1,10 @@
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c: Take text width from help.h, not from the command
+	line.
+	* help.h: Declare HELP_TEXT_WIDTH.
+	* help.c: Use HELP_TEXT_WIDTH.
+
 	* help.h: Replace CHAR_BOLD_ON, CHAR_BOLD_OFF and CHAR_ITALIC_ON
 	with  CHAR_FONT_BOLD, CHAR_FONT_NORMAL and CHAR_FONT_ITALIC
 	respectively for better consistency.
