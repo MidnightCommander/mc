@@ -575,6 +575,7 @@ m4/Makefile
 
 lib/mc.ext
 
+vfs/extfs/audio
 vfs/extfs/deb
 vfs/extfs/lslR
 vfs/extfs/uar
