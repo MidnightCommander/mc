@@ -54,7 +54,7 @@ extern int command_prompt;
 #define TREE_NORMALC HOT_FOCUSC
 
 /* Specifies the display mode: 1d or 2d */
-static int tree_navigation_flag;
+int tree_navigation_flag;
 
 /* Forwards */
 static void save_tree (WTree *tree);

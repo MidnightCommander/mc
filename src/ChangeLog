@@ -1,5 +1,7 @@
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
+	* tree.c (tree_navigation_flag): Should not be static.
+
 	* screen.c (panel_format_modified): Use more portable cast.
 
 	* fileopctx.h: Define new type mc_stat_fn.
