@@ -229,9 +229,11 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     if (tmp)
 	g_free (tmp);
     g_free (mc_extfsdir);
+    open_error_pipe ();
     result = popen (cmd, "r");
     g_free (cmd);
     if (result == NULL) {
+	close_error_pipe (1, NULL);
         if (local_name != NULL && uses_archive)
             mc_ungetlocalcopy (name, local_name, 0);
     	return NULL;
@@ -317,10 +319,10 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
                     goto read_extfs_continue;
                 pent = find_entry (current_archive->root_entry, q, 1, 0) ;
                 if (pent == NULL) {
-                    message_1s (1, MSG_ERROR, _("Inconsistent extfs archive"));
                     /* FIXME: Should clean everything one day */
                     g_free (buffer);
 		    pclose (extfsd);
+		    close_error_pipe (1, _("Inconsistent extfs archive"));
                     return -1;
                 }
 		entry = g_new (struct entry, 1);
@@ -336,10 +338,10 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
 		if (!S_ISLNK (hstat.st_mode) && current_link_name != NULL) {
 	            pent = find_entry (current_archive->root_entry, current_link_name, 0, 0);
 	            if (pent == NULL) {
-	                message_1s (1, MSG_ERROR, _("Inconsistent extfs archive"));
                     /* FIXME: Should clean everything one day */
 			g_free (buffer);
 			pclose (extfsd);
+			close_error_pipe (1, _("Inconsistent extfs archive"));
 	                return -1;
 	            } else {
 			entry->inode = pent->inode;
@@ -384,6 +386,7 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
         }
     }
     pclose (extfsd);
+    close_error_pipe (1, NULL);
 #ifdef SCO_FLAVOR
     waitpid(-1,NULL,WNOHANG);
 #endif /* SCO_FLAVOR */
@@ -395,7 +398,7 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
 static char *get_path (char *inname, struct archive **archive, int is_dir,
     int do_not_open);
 
-/* Returns path inside argument. Returned char* is inside inname, which is mangled	
+/* Returns path inside argument. Returned char* is inside inname, which is mangled
  * by this operation (so you must not free it's return value)
  */
 static char *get_path_mangle (char *inname, struct archive **archive, int is_dir,
@@ -723,7 +726,7 @@ static int extfs_close (void *data)
         vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive), parent);
 	vfs_rm_parents (parent);
     }
-	
+
     g_free (data);
     if (errno_code) ERRNOR (EIO, -1);
     return 0;
@@ -793,7 +796,7 @@ __find_entry (struct entry *dir, char *name,
 			}
 			break;
 		    }
-		
+
 		/* When we load archive, we create automagically
 		 * non-existant directories
 		 */

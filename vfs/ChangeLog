@@ -1,3 +1,9 @@
+2002-12-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs.c (open_archive): Use open_error_pipe before popen() and
+	close_error_pipe() if popen() fails to handle stderr.
+	(read_archive): Use close_error_pipe() after pclose().
+
 2002-12-05  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c: Define INADDR_NONE if it's not already defined.
