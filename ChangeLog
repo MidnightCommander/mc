@@ -2,7 +2,7 @@
 
 	* syntax/ada95.syntax: Highlight "then" and "else".
 	From Victor Porton <porton@ex-code.com>.
-	Higlight "exit".
+	Highlight "exit".
 
 2002-11-06  Pavel Roskin  <proski@gnu.org>
 
@@ -88,7 +88,7 @@
 2002-10-13  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.hint*: Remove all references to "-1" - hints file is no
-	substitute to unambigous GUI.
+	substitute to unambiguous GUI.
 	From Christian Laubscher <christian.laubscher@tiscalinet.ch>
 
 2002-10-12  Pavel Roskin  <proski@gnu.org>
@@ -403,7 +403,7 @@
 	* configure.in: Restore AM_INIT_AUTOMAKE with two arguments for
 	now, otherwise Automake 1.5 breaks.  Remove version number from
 	AC_INIT, the version from AM_INIT_AUTOMAKE takes preference.
-	Substiture RH_VERSION, which is VERSION without dashes, needed
+	Substitute RH_VERSION, which is VERSION without dashes, needed
 	for RedHat specfile.
 
 	* configure.in: Bump version to 4.6.0-pre1a.  Don't use
@@ -457,7 +457,7 @@
 	of %u to preserve tags in case of failure.
 
 	* vfs/extfs/ftplist.in: Remove support for running commands, it
-	makes no sence.
+	makes no sense.
 
 2002-08-16  Pavel Roskin  <proski@gnu.org>
 
@@ -502,7 +502,7 @@
 2002-08-09  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Remove all unrecognized actions (e.g. Extract)
-	and entries that are obsolete or make no sence.
+	and entries that are obsolete or make no sense.
 
 	* doc/xnc.hlp: Add translatable titles for topics "QueryBox" and
 	"How to use help".
@@ -631,7 +631,7 @@
 
 	* acinclude.m4 (AC_NCURSES): Remove.
 	* configure.in: Use AC_CHECK_HEADERS to find ncurses headers and
-	AC_CHECK_LIB to check existance of ncurses library.  Eliminate
+	AC_CHECK_LIB to check existence of ncurses library.  Eliminate
 	variables force_ncurses and search_ncurses.
 
 2002-07-10  Pavel Roskin  <proski@gnu.org>
