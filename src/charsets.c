@@ -6,8 +6,9 @@
 #include <string.h>
 #include <iconv.h>
 
+#include "global.h"
+#include "x.h"
 #include "charsets.h"
-#include "i18n.h"
 
 int n_codepages = 0;
 
@@ -21,17 +22,20 @@ int load_codepages_list(void)
 {
     int result = -1;
     FILE *f;
+    char *fname;
     char buf[256];
     extern char* mc_home;
     extern int display_codepage;
     char * default_codepage = NULL;
 
-    strcpy ( buf, mc_home );
-    strcat ( buf, "/" CHARSETS_INDEX );
-    if ( !( f = fopen( buf, "r" ) ) )
+    fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
+    if ( !( f = fopen( fname, "r" ) ) ) {
+	g_free (fname);
 	return -1;
+    }
+    g_free (fname);
 
-    for ( n_codepages=0; fgets( buf, sizeof buf, f ); )
+    for ( n_codepages=0; fgets( buf, sizeof (buf), f ); )
 	if ( buf[0] != '\n' && buf[0] != '\0' && buf [0] != '#' )
 	    ++n_codepages;
     rewind( f );

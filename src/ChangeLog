@@ -1,5 +1,7 @@
 2001-08-11  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c (load_codepages_list): Use concat_dir_and_file().
+
 	* mad.h: Disable glib support - it doesn't work properly.
 
 2001-08-07  Pavel Roskin  <proski@gnu.org>
