@@ -1,0 +1,178 @@
+# syntax rules version 62
+# (after the slash is a Cooledit color, 0-26 or any of the X colors in rgb.txt)
+# black
+# red
+# green
+# brown
+# blue
+# magenta
+# cyan
+# lightgray
+# gray
+# brightred
+# brightgreen
+# yellow
+# brightblue
+# brightmagenta
+# brightcyan
+# white
+
+file gobledy_gook #\sHelp\ssupport\sother\sfile\stypes
+context default
+file gobledy_gook #\sby\scoding\srules\sin\s~/.cedit/syntax.
+context default
+file gobledy_gook #\sSee\sman/syntax\sin\sthe\ssource\sdistribution
+context default
+file gobledy_gook #\sand\sconsult\sthe\sman\spage.
+context default
+
+
+file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^diff
+include diff.syntax
+
+file ..\*\\.lsm$ LSM\sFile
+include lsm.syntax
+
+file ..\*\\.sh$ Shell\sScript ^#!\s\*/.\*/([a-z]?|ba|pdk)sh
+include sh.syntax
+
+file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!\s\*/.\*/perl
+include perl.syntax
+
+file ..\*\\.(py|PY)$ Python\sProgram ^#!\s\*/.\*/python
+include python.syntax
+
+file ..\*\\.(man|[0-9n]|[0-9]x)$ NROFF\sSource
+include nroff.syntax
+
+file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
+include html.syntax
+
+file ..\*\\.(pp|PP|pas|PAS)$ Pascal\sProgram
+include pascal.syntax
+
+file ..\*\\.(ada|adb|ads|ADA|ADB|ADS)$ Ada\sProgram
+include ada95.syntax
+
+file ..\*\\.(sl|SL)$ S-Lang\sProgram
+include slang.syntax
+
+file ..\*\\.tex$ LaTeX\s2.09\sDocument
+include latex.syntax
+
+file ..\*\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
+include texinfo.syntax
+
+file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C\+\+\sProgram
+include c.syntax
+
+file ..\*\\.[fF]$ Fortran\sProgram
+include fortran.syntax
+
+file ..\*\\.i$ SWIG\sSource
+include swig.syntax
+
+file ..\*\\.(php|PHP)[0-9]?$ PHP\sProgram
+include php.syntax
+
+file ..\*\\.(java|JAVA|Java|jav)$ Java\sProgram
+include java.syntax
+
+file ..\*\\.(st)$ SmallTalk\sProgram
+include smalltalk.syntax
+
+file ..\*\\.(ml|mli|mly|mll|mlp)$ ML\sProgram
+include ml.syntax
+
+file ..\*\\.m$ Matlab\sor\sOctave\sFile
+include octave.syntax
+
+file .\*ChangeLog$ GNU\sDistribution\sChangeLog\sFile
+include changelog.syntax
+
+file .\*[Mm]akefile[\\\.a-z]\*$ Makefile
+include makefile.syntax
+
+file ..\*\\.(po|pot|pox)$ PO\sFile
+include po.syntax
+
+file Don_t_match_me Mail\sfolder ^From\s
+include mail.syntax
+
+file .\*syntax$ Syntax\sHighlighting\sdefinitions
+
+context default
+    keyword whole spellch\eck yellow/24
+    keyword whole keyw\ord yellow/24
+    keyword whole whole\[\t\s\]l\inestart brightcyan/17
+    keyword whole whole\[\t\s\]l\inestart brightcyan/17
+    keyword whole wh\oleleft\[\t\s\]l\inestart brightcyan/17
+    keyword whole wh\oleright\[\t\s\]l\inestart brightcyan/17
+    keyword whole l\inestart\[\t\s\]wh\ole
+    keyword whole l\inestart\[\t\s\]wh\ole
+    keyword whole l\inestart\[\t\s\]wh\oleleft
+    keyword whole l\inestart\[\t\s\]wh\oleright
+    keyword wholeleft whole\s brightcyan/17
+    keyword wholeleft whole\t brightcyan/17
+    keyword whole wh\oleleft brightcyan/17
+    keyword whole wh\oleright brightcyan/17
+    keyword whole lin\[e\]start brightcyan/17
+    keyword whole c\ontext\[\t\s\]exclusive brightred/18
+    keyword whole c\ontext\[\t\s\]default brightred/18
+    keyword whole c\ontext brightred/18
+    keyword whole wh\olechars\[\t\s\]left brightcyan/17
+    keyword whole wh\olechars\[\t\s\]right brightcyan/17
+    keyword whole wh\olechars brightcyan/17
+    keyword whole f\ile brightgreen/6
+    keyword whole in\clude brightred/18
+
+    keyword whole 0 lightgray/0	blue/26
+    keyword whole 1 lightgray/1	blue/26
+    keyword whole 2 lightgray/2	blue/26
+    keyword whole 3 lightgray/3	blue/26
+    keyword whole 4 lightgray/4	blue/26
+    keyword whole 5 lightgray/5	blue/26
+    keyword whole 6 lightgray/6
+    keyword whole 7 lightgray/7
+    keyword whole 8 lightgray/8
+    keyword whole 9 lightgray/9
+    keyword whole 10 lightgray/10
+    keyword whole 11 lightgray/11
+    keyword whole 12 lightgray/12
+    keyword whole 13 lightgray/13
+    keyword whole 14 lightgray/14
+    keyword whole 15 lightgray/15
+    keyword whole 16 lightgray/16
+    keyword whole 17 lightgray/17
+    keyword whole 18 lightgray/18
+    keyword whole 19 lightgray/19
+    keyword whole 20 lightgray/20
+    keyword whole 21 lightgray/21
+    keyword whole 22 lightgray/22
+    keyword whole 23 lightgray/23
+    keyword whole 24 lightgray/24
+    keyword whole 25 lightgray/25
+    keyword whole 26 lightgray/26
+
+    keyword wholeleft black\/ black/0
+    keyword wholeleft red\/ red/DarkRed
+    keyword wholeleft green\/ green/green3
+    keyword wholeleft brown\/ brown/saddlebrown
+    keyword wholeleft blue\/ blue/blue3
+    keyword wholeleft magenta\/ magenta/magenta3
+    keyword wholeleft cyan\/ cyan/cyan3
+    keyword wholeleft lightgray\/ lightgray/lightgray
+    keyword wholeleft gray\/ gray/gray
+    keyword wholeleft brightred\/ brightred/red
+    keyword wholeleft brightgreen\/ brightgreen/green1
+    keyword wholeleft yellow\/ yellow/yellow
+    keyword wholeleft brightblue\/ brightblue/blue1
+    keyword wholeleft brightmagenta\/ brightmagenta/magenta
+    keyword wholeleft brightcyan\/ brightcyan/cyan1
+    keyword wholeleft white\/ white/26
+
+context linestart # \n brown/22
+
+file .\* unknown
+include unknown.syntax
+

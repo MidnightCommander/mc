@@ -1,5 +1,8 @@
 2001-09-11  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/Syntax: New file, extracted from edit/syntax.c.
+	* syntax/Makefile.am: Add Syntax.
+
 	* configure.in: Add -lcurses (for use with S-Lang) to MCLIBS not
 	to LIBS.  Don't use unportable "grep -q", use "case" instead.
 

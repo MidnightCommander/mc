@@ -2,6 +2,7 @@ mclibdir = $(libdir)/mc
 syntaxdir = $(mclibdir)/syntax
 
 syntax_DATA =			\
+	Syntax			\
 	ada95.syntax		\
 	c.syntax		\
 	changelog.syntax	\
