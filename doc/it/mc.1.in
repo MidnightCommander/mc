@@ -1149,10 +1149,10 @@ visualizzare l'albero completo premere F2 nella sua directory genitrice.
 .B F4 (Statico/Dynamico).
 Cambia tra modo di navigazione dinamico (predefinito) e statico.
 .PP
-Nella navigazione statica si usano i tasti Su e Giu per 
+Nella navigazione statica si usano i tasti Su e Giù per 
 selezionare la directory. Tutte le directory conosciute vengono mostrate.
 .PP
-Nella navigazione dinamica si usano i tasti Su e Giu per selezionare
+Nella navigazione dinamica si usano i tasti Su e Giù per selezionare
 una directory sorella, il tasto Sinistra sposta sulla directory genitrice
 e il tasto Destra sposta sulla directory figlia. Solo i parenti, sorelle
 e figlie, vengono mostrate; le altre sono tralasciate. La rappresentazione
@@ -3149,7 +3149,7 @@ Il tasto inizio: va alla riga centrale, se sotto di essa, altrimenti
 va alla riga in cima a meno che non ci sia già; in tal caso andrà al
 primo file del pannello.
 .IP
-Il tasto fine ha un comportamento simile: va giu alla riga centrale
+Il tasto fine ha un comportamento simile: va giù alla riga centrale
 se era sopra di essa, altrimenti va alla riga di fondo a meno che non 
 ci sia già; in tal caso sposterà la selezione all'ultimo file del
 pannello.
