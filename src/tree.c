@@ -1189,7 +1189,9 @@ static void
 tree_rmdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
-
+    long count = 0;
+    double bytes = 0;
+    
     if (tree->selected_ptr){
 	if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
 	    return;
@@ -1209,7 +1211,7 @@ tree_rmdir_cmd (WTree *tree)
 	    }
 	}
 	create_op_win (OP_DELETE, 0);
-	if (erase_dir (tree->selected_ptr->name) == FILE_CONT)
+	if (erase_dir (tree->selected_ptr->name, &count, &bytes) == FILE_CONT)
 	    tree_forget_cmd (tree);
 	destroy_op_win ();
 	mc_chdir (old_dir);
