@@ -1,3 +1,8 @@
+Sat Feb 13 01:39:17 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Make Timur's libtermcap check work with SLang
+	0.99.98, too.
+
 1999-02-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* new_icons/Makefile.in (ALLICONS): Added Tigert's new icons for

@@ -831,7 +831,7 @@ AC_DEFUN(AC_WITH_SLANG,
 	    #include <slang.h>
 	    #endif
 	    int main(void){
-		SLtt_initialize("");
+		SLtt_get_terminfo();
 		SLtt_tgetflag("");
 		return 0;
 	    } ], 
