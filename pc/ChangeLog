@@ -1,3 +1,8 @@
+2002-07-15  Pavel Roskin  <proski@gnu.org>
+
+	* chmod.c: Remove all translatable strings - gettext doesn't
+	work in the PC port, no need to waste translators' time.
+
 2002-07-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* util_nt.c: Eliminate C++ comments everywhere.

@@ -94,16 +94,16 @@ struct {
 } check_perm[PERMISSIONS] = {
 
     {	
-	FILE_ARCHIVED, N_("Archive"), 0, 0,
+	FILE_ARCHIVED, "Archive", 0, 0,
     },
     {
-	FILE_READONLY, N_("Read Only"), 0, 0,
+	FILE_READONLY, "Read Only", 0, 0,
     },
     {
-	FILE_HIDDEN, N_("Hidden"), 0, 0,
+	FILE_HIDDEN, "Hidden", 0, 0,
     },
     {
-	FILE_SYSTEM, N_("System"), 0, 0,
+	FILE_SYSTEM, "System", 0, 0,
     },
 };
 
@@ -113,22 +113,22 @@ struct {
 } chmod_but[BUTTONS] = {
 
     {
-	B_CANCEL, NORMAL_BUTTON, 2, 33, N_("&Cancel"),
+	B_CANCEL, NORMAL_BUTTON, 2, 33, "&Cancel",
     },
     {
-	B_ENTER, DEFPUSH_BUTTON, 2, 17, N_("&Set"),
+	B_ENTER, DEFPUSH_BUTTON, 2, 17, "&Set",
     },
     {
-	B_CLRMRK, NORMAL_BUTTON, 0, 42, N_("C&lear marked"),
+	B_CLRMRK, NORMAL_BUTTON, 0, 42, "C&lear marked",
     },
     {
-	B_SETMRK, NORMAL_BUTTON, 0, 27, N_("S&et marked"),
+	B_SETMRK, NORMAL_BUTTON, 0, 27, "S&et marked",
     },
     {
-	B_MARKED, NORMAL_BUTTON, 0, 12, N_("&Marked all"),
+	B_MARKED, NORMAL_BUTTON, 0, 12, "&Marked all",
     },
     {
-	B_ALL, NORMAL_BUTTON, 0, 0, N_("Set &all"),
+	B_ALL, NORMAL_BUTTON, 0, 0, "Set &all",
     },
 };
 
@@ -154,32 +154,32 @@ static void chmod_refresh (void)
     draw_box (ch_dlg, FY, FX, 10, 25);
 
     dlg_move (ch_dlg, FY + 1, FX + 2);
-    addstr (_("Name"));
+    addstr ("Name");
     dlg_move (ch_dlg, FY + 3, FX + 2);
-    addstr (_("Permissions (Octal)"));
+    addstr ("Permissions (Octal)");
     dlg_move (ch_dlg, FY + 5, FX + 2);
-    addstr (_("Owner name"));
+    addstr ("Owner name");
     dlg_move (ch_dlg, FY + 7, FX + 2);
-    addstr (_("Group name"));
+    addstr ("Group name");
 
     attrset (title_color);
     dlg_move (ch_dlg, 1, 28);
-    addstr (_(" Chmod command "));
+    addstr (" Chmod command ");
     dlg_move (ch_dlg, PY, PX + 1);
-    addstr (_(" Permission "));
+    addstr (" Permission ");
     dlg_move (ch_dlg, FY, FX + 1);
-    addstr (_(" File "));
+    addstr (" File ");
 
     attrset (selection_color);
 
     dlg_move (ch_dlg, TY, TX);
-    addstr (_("Use SPACE to change"));
+    addstr ("Use SPACE to change");
     dlg_move (ch_dlg, TY + 1, TX);
-    addstr (_("an option, ARROW KEYS"));
+    addstr ("an option, ARROW KEYS");
     dlg_move (ch_dlg, TY + 2, TX);
-    addstr (_("to move between options"));
+    addstr ("to move between options");
     dlg_move (ch_dlg, TY + 3, TX);
-    addstr (_("and T or INS to mark"));
+    addstr ("and T or INS to mark");
 }
 
 static int chmod_callback (Dlg_head *h, int Par, int Msg)
@@ -232,9 +232,9 @@ static void init_chmod (void)
     }
 
     ch_dlg = create_dlg (0, 0, 22 - single_set, 70, dialog_colors,
-			 chmod_callback, _("[Chmod]"), _("chmod"), DLG_CENTER);
+			 chmod_callback, "[Chmod]", "chmod", DLG_CENTER);
 			
-    x_set_dialog_title (ch_dlg, _("Chmod command"));
+    x_set_dialog_title (ch_dlg, "Chmod command");
 
 #define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
      chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0, 0, NULL
@@ -337,9 +337,9 @@ void chmod_cmd (void)
 	/* Set the labels */
 	c_fname = name_trunc (fname, 21);
 	add_widget (ch_dlg, label_new (FY+2, FX+2, c_fname, NULL));
-	c_fown = _("unknown");
+	c_fown = "unknown";
 	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown, NULL));
-	c_fgrp = _("unknown");
+	c_fgrp = "unknown";
 	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp, NULL));
 	sprintf (buffer, "%o", c_stat);
 	statl = label_new (FY+4, FX+2, buffer, NULL);
