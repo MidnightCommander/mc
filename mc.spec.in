@@ -108,7 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/bin/gmc
 %{_prefix}/bin/plain-gmc
 # %{_prefix}/bin/gmc-client ?
-%{_prefix}/lib/mc/layout
 %{_prefix}/share/gnome/help/gmc/*
 %{_prefix}/share/idl/*
 %{_prefix}/share/mime-info/mc.keys
@@ -120,6 +119,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/pixmaps/mc
 
 %changelog
+* Sun Jul 15 2001 Pavel Roskin <proski@gnu.org>
+- Remove /usr/lib/mc/layout.
+
 * Sat Jun 09 2001 Pavel Roskin <proski@gnu.org>
 - Use %{_prefix} and %{_mandir}. Specify --mandir to configure.
 
