@@ -13,8 +13,13 @@ PKGC_DIR="pkgconfig-$PKGC_VERSION"
 PKGC_TARBALL="pkgconfig-$PKGC_VERSION.tar.gz"
 PKGC_URL="http://www.freedesktop.org/software/pkgconfig/releases/$PKGC_TARBALL"
 
+GETTEXT_VERSION="0.11.5"
+GETTEXT_DIR="gettext-$GETTEXT_VERSION"
+GETTEXT_TARBALL="gettext-$GETTEXT_VERSION.tar.gz"
+GETTEXT_URL="ftp://ftp.gnu.org/gnu/gettext/$GETTEXT_TARBALL"
+
 MC_TOPDIR=`pwd`
-TMP_INSTDIR="$MC_TOPDIR/glib-inst"
+TMP_INSTDIR="$MC_TOPDIR/tmp-inst"
 
 if test -f src/dir.c; then : ; else
   echo "Not in the top-level directory of GNU Midnight Commander." 2>&1
@@ -25,6 +30,30 @@ if test -f configure; then : ; else
   ./autogen.sh --help >/dev/null || exit 1
 fi
 
+rm -rf "$TMP_INSTDIR"
+PATH="$TMP_INSTDIR/bin:$PATH"
+export PATH
+
+# Compile gettext
+cd "$MC_TOPDIR"
+if gzip -vt "$GETTEXT_TARBALL"; then : ; else
+  wget "$GETTEXT_URL" || curl -o "$GETTEXT_TARBALL" "$GETTEXT_URL" || exit 1
+fi
+
+rm -rf "$GETTEXT_DIR"
+gzip -cd "$GETTEXT_TARBALL" | tar xf -
+cd "$GETTEXT_DIR"
+if test -f src/gettext.c; then : ; else
+  echo "gettext source is incomplete" 2>&1
+  exit 1
+fi
+
+./configure --disable-shared --disable-nls --prefix="$TMP_INSTDIR" || exit 1
+make all || exit 1
+make install || exit 1
+
+# Compile pkgconfig
+cd "$MC_TOPDIR"
 if gzip -vt "$PKGC_TARBALL"; then : ; else
   wget "$PKGC_URL" || curl -o "$PKGC_TARBALL" "$PKGC_URL" || exit 1
 fi
@@ -37,11 +66,11 @@ if test -f pkg.c; then : ; else
   exit 1
 fi
 
-rm -rf "$TMP_INSTDIR"
 ./configure --disable-shared --prefix="$TMP_INSTDIR" || exit 1
 make all || exit 1
 make install || exit 1
 
+# Compile glib
 cd "$MC_TOPDIR"
 if gzip -vt "$GLIB_TARBALL"; then : ; else
   wget "$GLIB_URL" || curl -o "$GLIB_TARBALL" "$GLIB_URL" || exit 1
@@ -56,7 +85,9 @@ if test -f glib/glist.c; then : ; else
 fi
 
 ./configure --disable-shared --prefix="$TMP_INSTDIR" \
-	    PKG_CONFIG="$TMP_INSTDIR/bin/pkg-config" || exit 1
+	    PKG_CONFIG="$TMP_INSTDIR/bin/pkg-config" \
+	    CPPFLAGS="-I$TMP_INSTDIR/include" \
+	    LDFLAGS="-L$TMP_INSTDIR/lib" || exit 1
 make all || exit 1
 make install || exit 1
 
