@@ -68,6 +68,11 @@
 #define B_APPEND	(B_USER + 6)
 #define B_MOVE		(B_USER + 7)
 
+#ifdef	USE_VFS
+#define B_FREE_ALL_VFS	(B_USER + 8)
+#define B_REFRESH_VFS	(B_USER + 9)
+#endif
+
 static WListbox *l_hotlist;
 static WListbox *l_movelist;
 
@@ -117,6 +122,10 @@ static struct _hotlist_but {
     { B_CANCEL, NORMAL_BUTTON,       0,   53, N_("&Cancel"),     "cc",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
     { B_UP_GROUP, NORMAL_BUTTON,     0,   42, N_("&Up"),         "up",   LIST_HOTLIST|LIST_MOVELIST},
     { B_ADD_CURRENT, NORMAL_BUTTON,  0,   20, N_("&Add current"),"ad",   LIST_HOTLIST},
+#ifdef	USE_VFS
+    { B_REFRESH_VFS, NORMAL_BUTTON,  0,   43, N_("&Refresh"), "r",       LIST_VFSLIST},
+    { B_FREE_ALL_VFS, NORMAL_BUTTON, 0,   20, N_("Fr&ee VFSs now"), "f", LIST_VFSLIST},
+#endif
     { B_ENTER, DEFPUSH_BUTTON,       0,    0, N_("Change &To"),  "ct",   LIST_HOTLIST|LIST_VFSLIST|LIST_MOVELIST},
 };
 
@@ -252,6 +261,13 @@ unlink_entry (struct hotlist *entry)
 	entry->up = 0;
 }
     
+#ifdef USE_VFS
+static void add_name_to_list (char *path)
+{
+    listbox_add_item (l_hotlist, 0, 0, path, 0);
+}
+#endif /* !USE_VFS */
+
 static int hotlist_button_callback (int action, void *data)
 {
     switch (action) {
@@ -369,6 +385,18 @@ static int hotlist_button_callback (int action, void *data)
 	break;
 	}
 
+#ifdef	USE_VFS
+    case B_FREE_ALL_VFS:
+    	vfs_expire (1);
+	/* fall through */
+
+    case B_REFRESH_VFS:
+	listbox_remove_list (l_hotlist);
+	listbox_add_item (l_hotlist, 0, 0, home_dir, 0);
+	vfs_fill_names (add_name_to_list);
+	return 0;
+#endif	/* USE_VFS */
+
     default:
 	return 1;
 	break;
@@ -477,13 +505,6 @@ static int l_call (void *l)
     hotlist_callback (dlg, 'u', DLG_POST_KEY);
     return listbox_nothing;
 }
-
-#ifdef USE_VFS
-static void add_name_to_list (char *path)
-{
-    listbox_add_item (l_hotlist, 0, 0, path, 0);
-}
-#endif /* !USE_VFS */
 
 /*
  * Expands all button names (once) and recalculates button positions.

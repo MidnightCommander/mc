@@ -1,3 +1,10 @@
+2003-06-27  David Sterba  <dave@jikos.cz>
+
+	* hotlist.c: Add buttons "Refresh" and "Free VFSs now" to Active
+	VFS dialog.
+	(hotlist_button_callback): Handle the buttons.
+	* main.c: Remove the 'Free VFS now' menu item.
+
 2003-06-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ext.c (regex_check_type): Fix previous change.

@@ -917,7 +917,6 @@ static menu_entry CmdMenu[] = {
     {' ', N_("di&Rectory hotlist    C-\\"), 'R', quick_chdir_cmd},
 #ifdef USE_VFS
     {' ', N_("&Active VFS list      C-x a"), 'A', reselect_vfs},
-    {' ', N_("Fr&ee VFSs now"), 'E', free_vfs_now},
 #endif
 #ifdef WITH_BACKGROUND
     {' ', N_("&Background jobs      C-x j"), 'B', jobs_cmd},
