@@ -25,8 +25,6 @@ int erase_dir_iff_empty (FileOpContext *ctx, char *s);
 
 int   panel_operate      (void *source_panel, FileOperation op,
 			  char *thedefault, int ask_user);
-char *file_mask_dialog   (FileOpContext *ctx, FileOperation operation, char *text, char *def_text,
-			  int only_one, int *do_background);
 
 extern int file_op_compute_totals;
 
