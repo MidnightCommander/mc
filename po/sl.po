@@ -2,13 +2,10 @@
 # Copyright (C) 2000 Free Software Foundation, Inc.
 # Andraz Tori <andraz.tori1@guest.arnes.si> 2000
 #
-#. Not essential to translate
-#: gtkedit/edit.c:2768 gtkedit/editcmd.c:2880 gtkedit/editcmd.c:2886
-#: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"POT-Creation-Date: 2000-06-29 00:59+0200\n"
+"POT-Creation-Date: 2000-09-04 21:39+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -26,7 +23,7 @@ msgstr " Izvedi Makro "
 
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-#: gtkedit/editcmd.c:760 gtkedit/editcmd.c:769
+#: gtkedit/editcmd.c:761 gtkedit/editcmd.c:770
 msgid " Press macro hotkey: "
 msgstr " Pritisni vroèo tipko za makro: "
 
@@ -118,11 +115,11 @@ msgstr "Skupina Polnoènega Poveljnika"
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "poroèila o hro¹èih: http://bugs.gnome.org ali uporabite gnome-bug"
 
-#: gnome/gcmd.c:115
+#: gnome/gcmd.c:115 gnome/gmc-window.c:68
 msgid "GNU Midnight Commander"
 msgstr "GNU Polnoèni Poveljnik"
 
-#: gnome/gcmd.c:118
+#: gnome/gcmd.c:118 gnome/gmc-window.c:71
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "GNOME izvedba upravljalnika datotek Polnoèni Poveljnik."
 
@@ -272,7 +269,7 @@ msgstr ""
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Vnesite regularni izraz za izibiro datotek v pultnem pogledu."
 
-#: gnome/gcmd.c:959 src/cmd.c:540 src/cmd.c:591
+#: gnome/gcmd.c:959 src/cmd.c:541 src/cmd.c:592
 msgid "  Malformed regular expression  "
 msgstr "  Napaèno formuliran regularni izraz  "
 
@@ -353,7 +350,7 @@ msgstr "Prikazani Stolpci"
 msgid "Custom View"
 msgstr "Pogled Po Meri"
 
-#: gnome/gdesktop.c:629 gnome/gmount.c:382
+#: gnome/gdesktop.c:629 gnome/gmount.c:385
 msgid "Warning"
 msgstr "Opozorilo"
 
@@ -569,12 +566,12 @@ msgstr "Ciljna datoteka ¾e obstja: %s"
 msgid "Replace it?"
 msgstr "Zamejaj jo?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1250
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
 #: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
 msgid "Move"
 msgstr "Prestavi"
 
@@ -875,7 +872,7 @@ msgstr "_Obrni Izbiro"
 msgid "Reverses the list of tagged files"
 msgstr "Obrne seznam izbranih datotek"
 
-#: gnome/glayout.c:408 gtkedit/editwidget.c:1142 src/view.c:2085
+#: gnome/glayout.c:408 gtkedit/editwidget.c:1143 src/view.c:2085
 msgid "Search"
 msgstr "Iskanje"
 
@@ -972,7 +969,7 @@ msgstr "_Ukazi"
 msgid "_Desktop"
 msgstr "Namizje"
 
-#: gnome/glayout.c:477 gnome/glayout.c:487
+#: gnome/glayout.c:477 gnome/glayout.c:487 gnome/gmc-window.c:121
 msgid "_Help"
 msgstr "_Pomoè"
 
@@ -992,36 +989,76 @@ msgstr ""
 "Èe niste pazljivi lahko kot root po¹kodujete sistem in GNOME Upravljalnik "
 "Datotek vam tega ne bo prepreèil."
 
+#: gnome/gmc-window.c:69
+msgid "Copyright (C) 1998 The Free Software Foundation"
+msgstr "Avtorske pravice pridr¾ane (C) 1998 Fundacija za prosto programje"
+
+#: gnome/gmc-window.c:81
+msgid "Open _new window"
+msgstr "Odpri _novo okno"
+
+#: gnome/gmc-window.c:86
+msgid "_Close this window"
+msgstr "_Zapri to okno"
+
+#: gnome/gmc-window.c:88
+msgid "E_xit"
+msgstr "_Izhod"
+
+#: gnome/gmc-window.c:95
+msgid "_Listing view"
+msgstr "_Seznamski pogled"
+
+#: gnome/gmc-window.c:96
+msgid "_Icon view"
+msgstr "_Ikonski pogled"
+
+#: gnome/gmc-window.c:102
+msgid "Display _tree view"
+msgstr " Ka¾i _drevesni pogled "
+
+#: gnome/gmc-window.c:112
+msgid "_About the Midnight Commander..."
+msgstr " _O Polnoènem Poveljniku..."
+
+#: gnome/gmc-window.c:119
+msgid "_File"
+msgstr "_Datoteka"
+
+#: gnome/gmc-window.c:120
+msgid "_View"
+msgstr "_Pogled"
+
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
 msgstr "Ne morem odpreti datoteke /etc/fstab"
 
-#: gnome/gmount.c:383
+#: gnome/gmount.c:386
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr "Ne morem simbolno povezati %s na %s. Take namizne ikone ne bo."
 
-#: gnome/gmount.c:439
+#: gnome/gmount.c:444
 #, c-format
 msgid "CD-ROM %d"
 msgstr "CD-ROM %d"
 
-#: gnome/gmount.c:451
+#: gnome/gmount.c:456
 #, c-format
 msgid "Floppy %d"
 msgstr "Disketnik %d"
 
-#: gnome/gmount.c:457
+#: gnome/gmount.c:462
 #, c-format
 msgid "Disk %d"
 msgstr "Disk %d"
 
-#: gnome/gmount.c:462
+#: gnome/gmount.c:467
 #, c-format
 msgid "NFS dir %s"
 msgstr "NFS imenik %s"
 
-#: gnome/gmount.c:466
+#: gnome/gmount.c:471
 #, c-format
 msgid "Device %d"
 msgstr "Naprava %d"
@@ -1330,7 +1367,7 @@ msgstr "Kopiraj..."
 msgid "Move to Trash"
 msgstr "Prestavi v smeti"
 
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
+#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 #: src/screen.c:2430
 msgid "Delete"
 msgstr "Zbri¹i"
@@ -1579,8 +1616,8 @@ msgid "Location:"
 msgstr "Lokacija:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:386 gtkedit/editcmd.c:1235
-#: gtkedit/editcmd.c:1320 gtkedit/editcmd.c:3027 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:387 gtkedit/editcmd.c:1236
+#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3022 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
@@ -1729,7 +1766,7 @@ msgstr "Zapri okna, katerih imeniki niso dostopni"
 #: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
 #: gtkedit/edit.c:341 gtkedit/edit.c:373 gtkedit/edit.c:379 gtkedit/edit.c:386
 #: gtkedit/edit.c:393 gtkedit/edit.c:399 gtkedit/editcmd.c:298
-#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2031 gtkedit/editwidget.c:1023
+#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1024
 #: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Napaka "
@@ -1770,12 +1807,12 @@ msgstr ""
 " \n"
 " Poveèajte edit.h:MAXBUF in na novo prevedite urejevalnik. "
 
-#: gtkedit/edit.c:2571
+#: gtkedit/edit.c:2567
 msgid "User menu avalaible only in mcedit invoked from mc"
 msgstr "Uporabni¹ki menu je dostopen le kadar je mcedit pognan iz mc-ja"
 
 #. Not essential to translate
-#: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
+#: gtkedit/edit.c:2765 gtkedit/editcmd.c:2939
 msgid "Error trying to stat file:"
 msgstr "Napak ob poskusu poizvedbe stanja datoteke:"
 
@@ -1787,140 +1824,140 @@ msgstr " Napaka pri pisanju v cev: "
 msgid " Failed trying to open pipe for writing: "
 msgstr " Napaka pri odpiranju cevi za pisanje: "
 
-#: gtkedit/editcmd.c:379
+#: gtkedit/editcmd.c:380
 msgid "Quick save "
 msgstr "Hitra shranitev"
 
-#: gtkedit/editcmd.c:380
+#: gtkedit/editcmd.c:381
 msgid "Safe save "
 msgstr "Varna shranitev"
 
-#: gtkedit/editcmd.c:381
+#: gtkedit/editcmd.c:382
 msgid "Do backups -->"
 msgstr "Delaj varnostne kopije -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1189 gtkedit/editcmd.c:1233
-#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:3025 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:385 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
+#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3020 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:858 src/filegui.c:822
-#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
+#: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
+#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
 #: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
 msgid "&Cancel"
 msgstr "&Preklièi"
 
-#: gtkedit/editcmd.c:390
+#: gtkedit/editcmd.c:391
 msgid "Extension:"
 msgstr "Pripona:"
 
 #. NLS ?
-#: gtkedit/editcmd.c:397
+#: gtkedit/editcmd.c:398
 msgid " Edit Save Mode "
 msgstr " Uredi Shranjevalni Naèin"
 
-#: gtkedit/editcmd.c:525
+#: gtkedit/editcmd.c:526
 msgid " Save As "
 msgstr " Shrani Kot "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:539 gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
-#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1136 src/ext.c:315 src/file.c:619
-#: src/help.c:318 src/main.c:711 src/screen.c:1448 src/screen.c:2125
+#: gtkedit/editcmd.c:540 gtkedit/editcmd.c:863 gtkedit/editcmd.c:888
+#: gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137 src/ext.c:315 src/file.c:619
+#: src/help.c:318 src/main.c:712 src/screen.c:1448 src/screen.c:2125
 #: src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Opozorilo "
 
-#: gtkedit/editcmd.c:540
+#: gtkedit/editcmd.c:541
 msgid " A file already exists with this name. "
 msgstr " Datoteka s tem imenom ¾e obstaja. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:542
+#: gtkedit/editcmd.c:543
 msgid "Overwrite"
 msgstr "Prepi¹i"
 
-#: gtkedit/editcmd.c:542 gtkedit/editcmd.c:609 gtkedit/editcmd.c:836
-#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887 gtkedit/editcmd.c:1038
-#: gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:543 gtkedit/editcmd.c:610 gtkedit/editcmd.c:837
+#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888 gtkedit/editcmd.c:1039
+#: gtkedit/editcmd.c:1672
 msgid "Cancel"
 msgstr "Preklièi"
 
-#: gtkedit/editcmd.c:561
+#: gtkedit/editcmd.c:562
 msgid " Save as "
 msgstr " Shrani kot "
 
-#: gtkedit/editcmd.c:561 gtkedit/editcmd.c:2771
+#: gtkedit/editcmd.c:562 gtkedit/editcmd.c:2772
 msgid " Error trying to save file. "
 msgstr " Napaka ob poskusu shranjenja datoteke. "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:679 gtkedit/editcmd.c:687 gtkedit/editcmd.c:712
+#: gtkedit/editcmd.c:680 gtkedit/editcmd.c:688 gtkedit/editcmd.c:713
 msgid " Delete macro "
 msgstr " Zbri¹i makro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:681
+#: gtkedit/editcmd.c:682
 msgid " Error trying to open temp file "
 msgstr " Napaka ob poskusu odprtja zaèasne datoteke "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:689 gtkedit/editcmd.c:750 gtkedit/editcmd.c:818
+#: gtkedit/editcmd.c:690 gtkedit/editcmd.c:751 gtkedit/editcmd.c:819
 msgid " Error trying to open macro file "
 msgstr " Napaka ob poskusu odprtja datoteke z makri"
 
-#: gtkedit/editcmd.c:694 gtkedit/editcmd.c:702 gtkedit/editcmd.c:738
-#: gtkedit/editcmd.c:793
+#: gtkedit/editcmd.c:695 gtkedit/editcmd.c:703 gtkedit/editcmd.c:739
+#: gtkedit/editcmd.c:794
 #, c-format
 msgid "key '%d 0': "
 msgstr "ljuè '%d 0': "
 
-#: gtkedit/editcmd.c:713
+#: gtkedit/editcmd.c:714
 msgid " Error trying to overwrite macro file "
 msgstr " Napaka ob poskusu prepisa datoteke z makri"
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:729
+#: gtkedit/editcmd.c:730
 msgid " Macro "
 msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:731
+#: gtkedit/editcmd.c:732
 msgid " Press the macro's new hotkey: "
 msgstr " Pritisnite makrovo novo vroèo tipko:"
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:750
+#: gtkedit/editcmd.c:751
 msgid " Save macro "
 msgstr " Shrani makro"
 
-#: gtkedit/editcmd.c:760 gtkedit/editcmd.c:767
+#: gtkedit/editcmd.c:761 gtkedit/editcmd.c:768
 msgid " Delete Macro "
 msgstr " Zbri¹i Makro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:817
+#: gtkedit/editcmd.c:818
 msgid " Load macro "
 msgstr " Nalo¾i makro "
 
-#: gtkedit/editcmd.c:831 gtkedit/editcmd.c:833
+#: gtkedit/editcmd.c:832 gtkedit/editcmd.c:834
 msgid " Confirm save file? : "
 msgstr " Potrdi shranitev datoteke? :"
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:836
+#: gtkedit/editcmd.c:837
 msgid " Save file "
 msgstr " Shrani datoteko"
 
-#: gtkedit/editcmd.c:836 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1247
+#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
 #: src/view.c:2077
 msgid "Save"
 msgstr "Shrani"
 
-#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
+#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1928,113 +1965,113 @@ msgstr ""
 " Trenutno besedilo je bilo spremenjeno, a ne shranjeno. \n"
 " Z Nadaljuj bodo te spremembe zavr¾ene. "
 
-#: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887 gtkedit/editcmd.c:1038
+#: gtkedit/editcmd.c:863 gtkedit/editcmd.c:888 gtkedit/editcmd.c:1039
 msgid "Continue"
 msgstr "Nadaljuj"
 
-#: gtkedit/editcmd.c:893
+#: gtkedit/editcmd.c:894
 msgid " Load "
 msgstr " Nalo¾i "
 
-#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1136
+#: gtkedit/editcmd.c:1039 gtkedit/editcmd.c:1137
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok je velik, tega dejanja ne bo mogoèe razveljaviti. "
 
-#: gtkedit/editcmd.c:1136
+#: gtkedit/editcmd.c:1137
 msgid " Continue "
 msgstr " Nadaljuj "
 
-#: gtkedit/editcmd.c:1136
+#: gtkedit/editcmd.c:1137
 msgid " Cancel "
 msgstr " Preklièi "
 
-#: gtkedit/editcmd.c:1191
+#: gtkedit/editcmd.c:1192
 msgid "o&Ne"
 msgstr "e&Na"
 
-#: gtkedit/editcmd.c:1193 src/filegui.c:597
+#: gtkedit/editcmd.c:1194 src/filegui.c:597
 msgid "al&L"
 msgstr "&vse"
 
-#: gtkedit/editcmd.c:1195 src/file.c:2190 src/filegui.c:267
+#: gtkedit/editcmd.c:1196 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
 msgstr "Pre&skoèi"
 
-#: gtkedit/editcmd.c:1197
+#: gtkedit/editcmd.c:1198
 msgid "&Replace"
 msgstr "&Zamenjaj"
 
-#: gtkedit/editcmd.c:1203 gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:1204 gtkedit/editcmd.c:1672
 msgid " Replace with: "
 msgstr " Zamenjaj z: "
 
-#: gtkedit/editcmd.c:1207
+#: gtkedit/editcmd.c:1208
 msgid " Confirm replace "
 msgstr " Potrdi zamenjavo"
 
-#: gtkedit/editcmd.c:1237 gtkedit/editcmd.c:1322
+#: gtkedit/editcmd.c:1238 gtkedit/editcmd.c:1323
 msgid "scanf &Expression"
 msgstr "scanf &Izraz"
 
-#: gtkedit/editcmd.c:1239
+#: gtkedit/editcmd.c:1240
 msgid "replace &All"
 msgstr "zamenjaj &vse"
 
-#: gtkedit/editcmd.c:1241
+#: gtkedit/editcmd.c:1242
 msgid "pr&Ompt on replace"
 msgstr "p&Otrdimo ob zamenjavi"
 
-#: gtkedit/editcmd.c:1243 gtkedit/editcmd.c:1324
+#: gtkedit/editcmd.c:1244 gtkedit/editcmd.c:1325
 msgid "&Backwards"
 msgstr "&Nazaj"
 
-#: gtkedit/editcmd.c:1245 gtkedit/editcmd.c:1326
+#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1327
 msgid "&Regular expression"
 msgstr "&Regularni izraz"
 
-#: gtkedit/editcmd.c:1247 gtkedit/editcmd.c:1328
+#: gtkedit/editcmd.c:1248 gtkedit/editcmd.c:1329
 msgid "&Whole words only"
 msgstr "&Le cele besede"
 
-#: gtkedit/editcmd.c:1249 gtkedit/editcmd.c:1330
+#: gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1331
 msgid "case &Sensitive"
 msgstr "ra_zlikuj velike in male èrke"
 
-#: gtkedit/editcmd.c:1253
+#: gtkedit/editcmd.c:1254
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Vnesite vrstni red zamenjave argumentov npr. 3,2,1,4"
 
-#: gtkedit/editcmd.c:1257
+#: gtkedit/editcmd.c:1258
 msgid " Enter replacement string:"
 msgstr " Vnesite nadomestni niz:"
 
-#: gtkedit/editcmd.c:1261 gtkedit/editcmd.c:1334 src/view.c:2000
+#: gtkedit/editcmd.c:1262 gtkedit/editcmd.c:1335 src/view.c:2000
 msgid " Enter search string:"
 msgstr " Vnesite niz za iskanje:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:1584 gtkedit/editcmd.c:1671
-#: gtkedit/editcmd.c:2210 gtkedit/editcmd.c:2241 gtkedit/editcmd.c:2243
+#: gtkedit/editcmd.c:1281 gtkedit/editcmd.c:1585 gtkedit/editcmd.c:1672
+#: gtkedit/editcmd.c:2211 gtkedit/editcmd.c:2242 gtkedit/editcmd.c:2244
 msgid " Replace "
 msgstr " Zamenjaj "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1348 gtkedit/editcmd.c:1578 gtkedit/editcmd.c:2309
-#: gtkedit/editcmd.c:2311 gtkedit/editcmd.c:2339 src/view.c:1528
+#: gtkedit/editcmd.c:1349 gtkedit/editcmd.c:1579 gtkedit/editcmd.c:2310
+#: gtkedit/editcmd.c:2312 gtkedit/editcmd.c:2340 src/view.c:1528
 #: src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
 msgid " Search "
 msgstr " Iskanje "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1402
+#: gtkedit/editcmd.c:1403
 msgid " Enter search text : "
 msgstr " Vnesite iskano besedilo :"
 
-#: gtkedit/editcmd.c:1409
+#: gtkedit/editcmd.c:1410
 msgid " Enter replace text : "
 msgstr " Vnesite besedilo za zamenjavo : "
 
-#: gtkedit/editcmd.c:1412 gtkedit/editcmd.c:1413
+#: gtkedit/editcmd.c:1413 gtkedit/editcmd.c:1414
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2043,12 +2080,12 @@ msgstr ""
 "Vnesete lahko regularne izraze %s\n"
 "(ne \\1, \\2 kot sed) nato pa uporabite \"Vpi¹i ... vrstni red\""
 
-#: gtkedit/editcmd.c:1415
+#: gtkedit/editcmd.c:1416
 msgid " Enter argument (or substring) order : "
 msgstr " Vnesite vrstni red argumentov (ali podnizov) : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1419 gtkedit/editcmd.c:1420
+#: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2057,19 +2094,19 @@ msgstr ""
 "doloèilnikov naèina izpisa ali regularnih izrazov, npr.: 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1425
+#: gtkedit/editcmd.c:1426
 msgid " Whole words only "
 msgstr " Le cele besede "
 
-#: gtkedit/editcmd.c:1427
+#: gtkedit/editcmd.c:1428
 msgid " Case sensitive "
 msgstr " Razlikuj velike in male èrke "
 
-#: gtkedit/editcmd.c:1430
+#: gtkedit/editcmd.c:1431
 msgid " Regular expression "
 msgstr " Regularni izraz "
 
-#: gtkedit/editcmd.c:1431 gtkedit/editcmd.c:1432
+#: gtkedit/editcmd.c:1432 gtkedit/editcmd.c:1433
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2077,48 +2114,48 @@ msgstr ""
 "Poglejte si priroènik o regularnih izrazih (man regex), \n"
 "za navodila kako narediti regularni izraz"
 
-#: gtkedit/editcmd.c:1440
+#: gtkedit/editcmd.c:1441
 msgid " Backwards "
 msgstr " Nazaj "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1442 gtkedit/editcmd.c:1443
+#: gtkedit/editcmd.c:1443 gtkedit/editcmd.c:1444
 msgid "Warning: Searching backward can be slow"
 msgstr "Opozorilo: Iskanje nazaj je lahko poèasno"
 
-#: gtkedit/editcmd.c:1464
+#: gtkedit/editcmd.c:1465
 msgid " Prompt on replace "
 msgstr " Potrdimo ob zamenjavi "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1466
+#: gtkedit/editcmd.c:1467
 msgid "Ask before making each replacement"
 msgstr "Vpra¹aj preden izvr¹i¹ zamenjavo "
 
-#: gtkedit/editcmd.c:1468
+#: gtkedit/editcmd.c:1469
 msgid " Replace all "
 msgstr " Zamenjaj vse "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1470
+#: gtkedit/editcmd.c:1471
 msgid "Replace repeatedly"
 msgstr "Zamenjuj zaporedoma"
 
-#: gtkedit/editcmd.c:1474
+#: gtkedit/editcmd.c:1475
 msgid " Bookmarks "
 msgstr " Zaznamki "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1476 gtkedit/editcmd.c:1477
+#: gtkedit/editcmd.c:1477 gtkedit/editcmd.c:1478
 msgid "Create bookmarks at all lines found"
 msgstr "Ustvari zaznamke ob vseh najdenih vrsticah"
 
-#: gtkedit/editcmd.c:1480
+#: gtkedit/editcmd.c:1481
 msgid " Scanf expression "
 msgstr " Scanf izraz "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1482
+#: gtkedit/editcmd.c:1483
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
@@ -2127,62 +2164,62 @@ msgstr ""
 "poglejte si priroènik o scanf (man scanf)"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1507
+#: gtkedit/editcmd.c:1508
 msgid "Begin search, Enter"
 msgstr "Zaèni iskanje, Enter"
 
-#: gtkedit/editcmd.c:1508
+#: gtkedit/editcmd.c:1509
 msgid "Abort this dialog, Esc"
 msgstr "Zavrni ta dialog, Esc"
 
-#: gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:1672
 msgid "Replace"
 msgstr "Zamenjaj"
 
-#: gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:1672
 msgid "Skip"
 msgstr "Preskoèi"
 
-#: gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:1672
 msgid "Replace all"
 msgstr "Zamenjaj vse"
 
-#: gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:1672
 msgid "Replace one"
 msgstr "Zamenjaj enega"
 
-#: gtkedit/editcmd.c:2031
+#: gtkedit/editcmd.c:2032
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Neveljaven regularni izraz, ali scanf izraz s prevelikim ¹tevilom pretvorb "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2212
+#: gtkedit/editcmd.c:2213
 msgid " Error in replacement format string. "
 msgstr " Napaka v zamenjalnem formatnem nizu. "
 
-#: gtkedit/editcmd.c:2240
+#: gtkedit/editcmd.c:2241
 #, c-format
 msgid " %ld replacements made. "
 msgstr " storjenih je bilo %ld zamenjav. "
 
-#: gtkedit/editcmd.c:2243 gtkedit/editcmd.c:2311 gtkedit/editcmd.c:2339
+#: gtkedit/editcmd.c:2244 gtkedit/editcmd.c:2312 gtkedit/editcmd.c:2340
 msgid " Search string not found. "
 msgstr " Iskan niz ni bil najden. "
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2308
+#: gtkedit/editcmd.c:2309
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d najdb, %d dodanih zaznamkov"
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2379 gtkedit/editcmd.c:2382
+#: gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2380 gtkedit/editcmd.c:2383
 msgid " Quit "
 msgstr " Konèaj "
 
-#: gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2383
+#: gtkedit/editcmd.c:2366 gtkedit/editcmd.c:2384
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -2190,148 +2227,148 @@ msgstr ""
 " Trenutno besedilo je bilo spremenjeno brez shranitve. \n"
 " Shranim ob izhodu? "
 
-#: gtkedit/editcmd.c:2379
+#: gtkedit/editcmd.c:2380
 msgid " File was modified, Save with exit? "
 msgstr " Datoteka je bila spremenjena. Shranim ob izhodu? "
 
-#: gtkedit/editcmd.c:2379
+#: gtkedit/editcmd.c:2380
 msgid "Cancel quit"
 msgstr "Preklièi izhod"
 
-#: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:866 src/screen.c:2162
+#: gtkedit/editcmd.c:2380 src/cmd.c:247 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:603 src/hotlist.c:1022 src/main.c:867 src/screen.c:2162
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&Yes"
 msgstr "&Da"
 
-#: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:866 src/screen.c:2162
+#: gtkedit/editcmd.c:2380 src/cmd.c:247 src/file.c:1878 src/file.c:2249
+#: src/filegui.c:602 src/hotlist.c:1022 src/main.c:867 src/screen.c:2162
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&No"
 msgstr "&Ne"
 
-#: gtkedit/editcmd.c:2383
+#: gtkedit/editcmd.c:2384
 msgid " &Cancel quit "
 msgstr " &Preklièi izhod "
 
-#: gtkedit/editcmd.c:2383
+#: gtkedit/editcmd.c:2384
 msgid " &Yes "
 msgstr " &Da "
 
-#: gtkedit/editcmd.c:2383
+#: gtkedit/editcmd.c:2384
 msgid " &No "
 msgstr " &Ne "
 
-#: gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2690
+#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2691
 msgid " Copy to clipboard "
 msgstr " Kopiraj na odlo¾i¹èe "
 
-#: gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2637 gtkedit/editcmd.c:2690
-#: gtkedit/editcmd.c:2703
+#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2691
+#: gtkedit/editcmd.c:2704
 msgid " Unable to save to file. "
 msgstr " Ne morem shraniti v datoteko. "
 
-#: gtkedit/editcmd.c:2637 gtkedit/editcmd.c:2703
+#: gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2704
 msgid " Cut to clipboard "
 msgstr " Izre¾i in postavi na odlo¾i¹èe "
 
-#: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
-#: gtkedit/editcmd.c:2737 src/view.c:1915
+#: gtkedit/editcmd.c:2726 gtkedit/editcmd.c:2730 gtkedit/editcmd.c:2735
+#: gtkedit/editcmd.c:2738 src/view.c:1915
 msgid " Goto line "
 msgstr " Skoèi na vrstico "
 
-#: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
-#: gtkedit/editcmd.c:2737
+#: gtkedit/editcmd.c:2726 gtkedit/editcmd.c:2730 gtkedit/editcmd.c:2735
+#: gtkedit/editcmd.c:2738
 msgid " Enter line: "
 msgstr " Vpi¹i vrstico: "
 
-#: gtkedit/editcmd.c:2758 gtkedit/editcmd.c:2771
+#: gtkedit/editcmd.c:2759 gtkedit/editcmd.c:2772
 msgid " Save Block "
 msgstr " Shrani Blok "
 
-#: gtkedit/editcmd.c:2785
+#: gtkedit/editcmd.c:2786
 msgid " Insert File "
 msgstr " Vstavi Datoteko "
 
-#: gtkedit/editcmd.c:2798
+#: gtkedit/editcmd.c:2799
 msgid " Insert file "
 msgstr " Vstavi datoteko "
 
-#: gtkedit/editcmd.c:2798
+#: gtkedit/editcmd.c:2799
 msgid " Error trying to insert file. "
 msgstr " Napaka ob poskusu vstavitve datoteke. "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2820
+#: gtkedit/editcmd.c:2821
 msgid " Sort block "
 msgstr " Sortiraj blok"
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2820 gtkedit/editcmd.c:2908
+#: gtkedit/editcmd.c:2821 gtkedit/editcmd.c:2907
 msgid " You must first highlight a block of text. "
 msgstr " Najprej morate oznaèiti blok besedila. "
 
-#: gtkedit/editcmd.c:2827
+#: gtkedit/editcmd.c:2826
 msgid " Run Sort "
 msgstr " Po¾eni Sortiranje "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2829
+#: gtkedit/editcmd.c:2828
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " Vnesite mo¾nosti sortiranja (poglejte strani man), loèite jih s presledki: "
 
-#: gtkedit/editcmd.c:2840 gtkedit/editcmd.c:2846
+#: gtkedit/editcmd.c:2839 gtkedit/editcmd.c:2845
 msgid " Sort "
 msgstr " Sortiraj "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2842
+#: gtkedit/editcmd.c:2841
 msgid " Error trying to execute sort command "
 msgstr " Napaka ob poskusu izvedbe ukaza sort"
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2848
+#: gtkedit/editcmd.c:2847
 msgid " Sort returned non-zero: "
 msgstr " Program sort je vrnil ne-nièelno vrednost: "
 
-#: gtkedit/editcmd.c:2881
+#: gtkedit/editcmd.c:2880
 msgid "Error create script:"
 msgstr "Napaka ob ustvarjanju skripte:"
 
-#: gtkedit/editcmd.c:2887
+#: gtkedit/editcmd.c:2886
 msgid "Error read script:"
 msgstr "Napaka ob branju skripte:"
 
-#: gtkedit/editcmd.c:2894
+#: gtkedit/editcmd.c:2893
 msgid "Error close script:"
 msgstr "Napaka ob zapiranju skripte:"
 
-#: gtkedit/editcmd.c:2899
+#: gtkedit/editcmd.c:2898
 msgid "Script created:"
 msgstr "Skripta ustvarjena:"
 
-#: gtkedit/editcmd.c:2906
+#: gtkedit/editcmd.c:2905
 msgid "Process block"
 msgstr "Procesiraj blok"
 
-#: gtkedit/editcmd.c:3018
+#: gtkedit/editcmd.c:3013
 msgid " Mail "
 msgstr " Po¹ta "
 
-#: gtkedit/editcmd.c:3031
+#: gtkedit/editcmd.c:3026
 msgid " Copies to"
 msgstr " Skopira se v"
 
-#: gtkedit/editcmd.c:3035
+#: gtkedit/editcmd.c:3030
 msgid " Subject"
 msgstr " Zadeva"
 
-#: gtkedit/editcmd.c:3039
+#: gtkedit/editcmd.c:3034
 msgid " To"
 msgstr " Za"
 
-#: gtkedit/editcmd.c:3041
+#: gtkedit/editcmd.c:3036
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <predmet> -c <cc> <za>"
 
@@ -2531,7 +2568,7 @@ msgstr "&Splo¹no...  "
 msgid "&Save mode..."
 msgstr "naèin &Shranjevanja..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1360
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1363
 msgid "&Layout..."
 msgstr "&Postavitev..."
 
@@ -2791,130 +2828,130 @@ msgid " Editor options "
 msgstr " Mo¾nosti urejevalnika"
 
 #. Not essential to translate
-#: gtkedit/editwidget.c:323
+#: gtkedit/editwidget.c:324
 msgid "Error initialising editor.\n"
 msgstr "Napaka ob inicializaciji urejevalnika.\n"
 
-#: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1726 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
+#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
+#: src/main.c:1729 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Pomoè"
 
-#: gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1248
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
 msgid "Mark"
 msgstr "Oznaka"
 
-#: gtkedit/editwidget.c:1139
+#: gtkedit/editwidget.c:1140
 msgid "Replac"
 msgstr "Zamenj"
 
-#: gtkedit/editwidget.c:1145 src/main.c:1728
+#: gtkedit/editwidget.c:1146 src/main.c:1731
 msgid "PullDn"
 msgstr "Potegni Dol"
 
 #. gtk_edit_menu
-#: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1729 src/view.c:2072 src/view.c:2094
+#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
+#: src/main.c:1732 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Konèaj"
 
-#: gtkedit/gtkedit.c:65
+#: gtkedit/gtkedit.c:67
 msgid "&Dismiss"
 msgstr "&Opusti"
 
-#: gtkedit/gtkedit.c:66
+#: gtkedit/gtkedit.c:68
 msgid " Enter file name: "
 msgstr " Vpnesi ime datoteke: "
 
-#: gtkedit/gtkedit.c:111
+#: gtkedit/gtkedit.c:113
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr "Pi¹kur Molèe Grabi Fi¾ol Iz Dna Cezijeve Hoste"
 
-#: gtkedit/gtkedit.c:802
+#: gtkedit/gtkedit.c:804
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 "gtkedit.c: HOME okoljska spremenljivka ni nastavljena in ni gesla - "
 "konèujem\n"
 
-#: gtkedit/gtkedit.c:1246
+#: gtkedit/gtkedit.c:1248
 msgid "Interactive help browser"
 msgstr "Interaktivni brskalnik pomoèi"
 
-#: gtkedit/gtkedit.c:1247
+#: gtkedit/gtkedit.c:1249
 msgid "Save to current file name"
 msgstr "Shrani v trentno datoteko"
 
-#: gtkedit/gtkedit.c:1248
+#: gtkedit/gtkedit.c:1250
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "Vklopi/Izklopi nevidni oznaènik za osvetljevanje besedila"
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1251
 msgid "Replc"
 msgstr "Zamen"
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1251
 msgid "Find and replace strings/regular expressions"
 msgstr "Poi¹èi in zamenjaj nize/regularne izraze"
 
-#: gtkedit/gtkedit.c:1250
+#: gtkedit/gtkedit.c:1252
 msgid "Copy highlighted block to cursor position"
 msgstr "Kopiraj osvetljen blok na pozicijo kazalca"
 
-#: gtkedit/gtkedit.c:1252
+#: gtkedit/gtkedit.c:1254
 msgid "Move highlighted block to cursor position"
 msgstr "Premakni osvetljen blok na pozicijo kazalca"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1255
 msgid "Find"
 msgstr "Poi¹èi"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1255
 msgid "Find strings/regular expressions"
 msgstr "Poi¹èi nize/regularne izraze"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1256
 msgid "Dlete"
 msgstr "Bri¹i"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1256
 msgid "Delete highlighted text"
 msgstr "Zbri¹i osvetljeno besedilo"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1727 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1257 src/main.c:1730 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
 msgstr "Menu"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1257
 msgid "Pull down menu"
 msgstr "Spustni menu"
 
-#: gtkedit/gtkedit.c:1256
+#: gtkedit/gtkedit.c:1258
 msgid "Exit editor"
 msgstr "Zapusti urejevalnik"
 
-#: gtkedit/gtkedit.c:1290
+#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr "Poèisti urejevalni¹ki medpomnilnik"
 
-#: gtkedit/gtkedit.c:1295
+#: gtkedit/gtkedit.c:1297
 msgid "Insert File"
 msgstr "Vstavi Datoteko"
 
-#: gtkedit/gtkedit.c:1295
+#: gtkedit/gtkedit.c:1297
 msgid "Insert text from a file"
 msgstr "Vstavi besedilo iz datoteke"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "Copy to file"
 msgstr "Kopiraj v datoteko"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1299
 msgid "copy a block to a file"
 msgstr "kopiraj blok v datoteko"
 
-#: gtkedit/gtkedit.c:1337
+#: gtkedit/gtkedit.c:1339
 msgid "Search/Replace"
 msgstr "I¹èi/Zamenjaj"
 
@@ -2961,11 +2998,11 @@ msgstr ""
 " Napaka ob branju iz programa ispell. \n"
 " Program bo znova zagnan. "
 
-#: gtkedit/syntax.c:1372 gtkedit/syntax.c:1374
+#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
 msgid " Load Syntax Rules "
 msgstr " Nalo¾i sintaktièna pravila"
 
-#: gtkedit/syntax.c:1372 gtkedit/syntax.c:1374
+#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -2975,15 +3012,15 @@ msgstr ""
 " Nova pravila se name¹èajo. \n"
 " Va¹a stara pravila bodo shranjena s pripono .OLD. "
 
-#: gtkedit/syntax.c:1517 gtkedit/syntax.c:1524
+#: gtkedit/syntax.c:1515 gtkedit/syntax.c:1522
 msgid " Load syntax file "
 msgstr " Nalo¾i datoteko s sintakso"
 
-#: gtkedit/syntax.c:1517
+#: gtkedit/syntax.c:1515
 msgid " File access error "
 msgstr " Napaka ob dostopanju do datoteke"
 
-#: gtkedit/syntax.c:1523
+#: gtkedit/syntax.c:1521
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Napaka v datoteki %s v vrstici %d"
@@ -3066,23 +3103,23 @@ msgstr " Ne morem pognati Naprednega Chown ukaza na tarfs"
 msgid "Background process:"
 msgstr "Proces v ozadju:"
 
-#: src/background.c:287 src/file.c:2189
+#: src/background.c:277 src/file.c:2189
 msgid " Background process error "
 msgstr " Napaka procesa v ozadju "
 
-#: src/background.c:294
+#: src/background.c:280
 msgid " Child died unexpectedly "
 msgstr " Otrok je umru nepricakovano "
 
-#: src/background.c:296
+#: src/background.c:282
 msgid " Unknown error in child "
 msgstr " Neznana napaka v otroku "
 
-#: src/background.c:311
+#: src/background.c:297
 msgid " Background protocol error "
 msgstr " Napaka protokola v ozadju "
 
-#: src/background.c:312
+#: src/background.c:298
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -3392,128 +3429,128 @@ msgstr " Ne morem pognati Chown ukaza na extfs"
 msgid " I can't run the Chown command on a tarfs "
 msgstr " Ne morem pognati Chown ukaza na tarfs"
 
-#: src/cmd.c:195
+#: src/cmd.c:196
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " Ne morem dobiti krajevne kopije %s"
 
-#: src/cmd.c:245
+#: src/cmd.c:246
 msgid " CD "
 msgstr " CD "
 
-#: src/cmd.c:245
+#: src/cmd.c:246
 msgid "Files tagged, want to cd?"
 msgstr "Datoteke oznaèene, ¾elite spremeniti imenik"
 
-#: src/cmd.c:251 src/cmd.c:712 src/cmd.c:731
+#: src/cmd.c:252 src/cmd.c:713 src/cmd.c:732
 msgid "Could not change directory"
 msgstr "Ne morem spremeniti imenika"
 
-#: src/cmd.c:280
+#: src/cmd.c:281
 msgid " View file "
 msgstr " Pogled datoteke"
 
-#: src/cmd.c:280
+#: src/cmd.c:281
 msgid " Filename:"
 msgstr " Ime datoteke:"
 
-#: src/cmd.c:297
+#: src/cmd.c:298
 msgid " Filtered view "
 msgstr " Fitriran pogled"
 
-#: src/cmd.c:297
+#: src/cmd.c:298
 msgid " Filter command and arguments:"
 msgstr " Ukaz in argumenti za filtriranje:"
 
-#: src/cmd.c:385
+#: src/cmd.c:386
 msgid "Create a new Directory"
 msgstr "Ustvari nov Imenik"
 
-#: src/cmd.c:385
+#: src/cmd.c:386
 msgid " Enter directory name:"
 msgstr " Vpi¹ite ime imenika:"
 
-#: src/cmd.c:446
+#: src/cmd.c:447
 msgid " Filter "
 msgstr " Filter "
 
-#: src/cmd.c:446
+#: src/cmd.c:447
 msgid " Set expression for filtering filenames"
 msgstr " Nastavi izraz za filtriranje imen datotek"
 
-#: src/cmd.c:512
+#: src/cmd.c:513
 msgid " Select "
 msgstr " Izberi "
 
-#: src/cmd.c:564
+#: src/cmd.c:565
 msgid " Unselect "
 msgstr " Preklièi izbor "
 
-#: src/cmd.c:637
+#: src/cmd.c:638
 msgid "Extension file edit"
 msgstr "Uredi datoteko s priponami"
 
-#: src/cmd.c:638
+#: src/cmd.c:639
 msgid " Which extension file you want to edit? "
 msgstr " Katero datoteko s priponami ¾elite urejati? "
 
-#: src/cmd.c:639
+#: src/cmd.c:640
 msgid "&User"
 msgstr "&Uporabnik"
 
-#: src/cmd.c:639 src/cmd.c:667
+#: src/cmd.c:640 src/cmd.c:668
 msgid "&System Wide"
 msgstr "&Sistemsko"
 
-#: src/cmd.c:664
+#: src/cmd.c:665
 msgid " Menu edit "
 msgstr " Urejanje menujev"
 
-#: src/cmd.c:665
+#: src/cmd.c:666
 msgid " Which menu file will you edit ? "
 msgstr " Katero datoteko z menuji ¾elite urejati?"
 
-#: src/cmd.c:667
+#: src/cmd.c:668
 msgid "&Local"
 msgstr "&Krajevno"
 
-#: src/cmd.c:667
+#: src/cmd.c:668
 msgid "&Home"
 msgstr "&Dom"
 
-#: src/cmd.c:857
+#: src/cmd.c:858
 msgid " Compare directories "
 msgstr " Primerjaj imenike "
 
-#: src/cmd.c:857
+#: src/cmd.c:858
 msgid " Select compare method: "
 msgstr " Izberi metodo primerjave: "
 
-#: src/cmd.c:858
+#: src/cmd.c:859
 msgid "&Quick"
 msgstr "&Hitro"
 
-#: src/cmd.c:858
+#: src/cmd.c:859
 msgid "&Size only"
 msgstr "Le &Velikost"
 
-#: src/cmd.c:858
+#: src/cmd.c:859
 msgid "&Thorough"
 msgstr "&Popolno"
 
-#: src/cmd.c:868
+#: src/cmd.c:869
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr "Oba pulta morata biti v seznamskem naèinu za uporabo tega ukaza"
 
-#: src/cmd.c:882
+#: src/cmd.c:883
 msgid " The command history is empty "
 msgstr " Zgodovina ukazov je prazna "
 
-#: src/cmd.c:888
+#: src/cmd.c:889
 msgid " Command history "
 msgstr " Zgodovina ukazov"
 
-#: src/cmd.c:930
+#: src/cmd.c:931
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -3521,11 +3558,11 @@ msgstr ""
 " To ni xterm ali Linux konzola; \n"
 " pulta ne morata biti ugasnjena. "
 
-#: src/cmd.c:969
+#: src/cmd.c:970
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Napi¹ite `exit' za vrnitev v Polnoènega Poveljnika"
 
-#: src/cmd.c:1024
+#: src/cmd.c:1025
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
@@ -3534,109 +3571,109 @@ msgstr ""
 " Nisem mogel dobiti stanja %s \n"
 " %s "
 
-#: src/cmd.c:1033 src/cmd.c:1035
+#: src/cmd.c:1034 src/cmd.c:1036
 msgid " Link "
 msgstr " Pove¾i "
 
-#: src/cmd.c:1034 src/cmd.c:1173 src/file.c:1704
+#: src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
 msgid " to:"
 msgstr " v:"
 
-#: src/cmd.c:1045
+#: src/cmd.c:1046
 #, c-format
 msgid " link: %s "
 msgstr " povezava: %s"
 
-#: src/cmd.c:1078
+#: src/cmd.c:1079
 #, c-format
 msgid " symlink: %s "
 msgstr " simbolna povezava: %s"
 
-#: src/cmd.c:1132
+#: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Simbolna povezava `%s' ka¾e na: "
 
-#: src/cmd.c:1137
+#: src/cmd.c:1138
 msgid " Edit symlink "
 msgstr " Uredi simbolno povezavo "
 
-#: src/cmd.c:1142
+#: src/cmd.c:1143
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " uredi simbolno povezavo, ne morem odstraniti %s: %s"
 
-#: src/cmd.c:1146
+#: src/cmd.c:1147
 #, c-format
 msgid " edit symlink: %s "
 msgstr " uredi simbolno povezavo: %s"
 
-#: src/cmd.c:1173
+#: src/cmd.c:1174
 msgid " Link symbolically "
 msgstr " Pove¾i simbolno"
 
-#: src/cmd.c:1174
+#: src/cmd.c:1175
 msgid " Relative symlink "
 msgstr " Relativna simbolièna povezava"
 
-#: src/cmd.c:1185
+#: src/cmd.c:1186
 #, c-format
 msgid " relative symlink: %s "
 msgstr " relativna simbolièna povezava: %s "
 
-#: src/cmd.c:1260
+#: src/cmd.c:1261
 msgid "Using default locale"
 msgstr "Uporabljam privzet 'locale' (lokalizacijske nastavitve)"
 
-#: src/cmd.c:1262
+#: src/cmd.c:1263
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "Uporabljam 'locale' \"%s\" (iz okolijske spremenljivke %s)"
 
-#: src/cmd.c:1348
+#: src/cmd.c:1349
 msgid " Enter machine name (F1 for details): "
 msgstr " Vnesite ime raèunalnika (F1 za podrobnosti):"
 
-#: src/cmd.c:1375
+#: src/cmd.c:1376
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Nisem mogel iti v imenik %s"
 
-#: src/cmd.c:1382 src/widget.c:1162
+#: src/cmd.c:1383 src/widget.c:1162
 msgid " Link to a remote machine "
 msgstr " Pove¾i se z oddaljenim raèunalnikom"
 
-#: src/cmd.c:1388 src/widget.c:1163
+#: src/cmd.c:1389 src/widget.c:1163
 msgid " FTP to machine "
 msgstr " FTP dostop do raèunalnika"
 
-#: src/cmd.c:1394 src/widget.c:1164
+#: src/cmd.c:1395 src/widget.c:1164
 msgid " SMB link to machine "
 msgstr " SMB povezava do raèunalnika"
 
-#: src/cmd.c:1404
+#: src/cmd.c:1405
 msgid " Socket source routing setup "
 msgstr " Nastavitev usmerjanja vtièev z izvora"
 
-#: src/cmd.c:1405
+#: src/cmd.c:1406
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 " Vpi¹ite ime raèunalnika, ki naj ga uporabim za preskok pri usmerjanju z "
 "izvora: "
 
-#: src/cmd.c:1413
+#: src/cmd.c:1414
 msgid " Host name "
 msgstr " Ime raèunalnika "
 
-#: src/cmd.c:1413
+#: src/cmd.c:1414
 msgid " Error while looking up IP address "
 msgstr " Napaka ob poizkusu poizvedbe IP naslova"
 
-#: src/cmd.c:1424
+#: src/cmd.c:1425
 msgid " Undelete files on an ext2 file system "
 msgstr " Odbri¹i datoteke na ext2 datoteènem sistemu"
 
-#: src/cmd.c:1425
+#: src/cmd.c:1426
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3644,11 +3681,11 @@ msgstr ""
 " Vnesite napravo (brez /dev/) za odbrisanje\n"
 "   datoteke na: (F1 za podrobnosti)"
 
-#: src/cmd.c:1475
+#: src/cmd.c:1476
 msgid " Setup saved to ~/"
 msgstr " Nastavitve shranjene v ~/"
 
-#: src/cmd.c:1480
+#: src/cmd.c:1481
 msgid " Setup "
 msgstr " Nastavi "
 
@@ -3826,109 +3863,109 @@ msgstr ""
 msgid "mc.ext will be used for this moment."
 msgstr "zaenkrat bo uporalbjen mc.ext."
 
-#: src/features.inc:8
+#: src/features.c:12
 msgid "Edition: "
 msgstr "Edicija: "
 
-#: src/features.inc:11
-msgid "XView"
-msgstr "XView"
-
-#: src/features.inc:13
-msgid "Tk"
-msgstr "Tk"
-
-#: src/features.inc:16
+#: src/features.c:13
 msgid "text mode"
 msgstr "besedilni naèin"
 
-#: src/features.inc:18
+#: src/features.c:15
 msgid " with X11 support to read modifiers"
 msgstr " z X11 podporo za branje sprememb"
 
-#: src/features.inc:24
+#: src/features.c:20
 msgid "Virtual File System: tarfs, extfs"
 msgstr "Navidtezni Datoteèni sistem (VFS): tarfs, extfs"
 
-#: src/features.inc:26
+#: src/features.c:22
 msgid ", ftpfs"
 msgstr ", ftpfs"
 
-#: src/features.inc:28
+#: src/features.c:24
 msgid " (proxies: hsc proxy)"
 msgstr " (posredniki: hsc proxy)"
 
-#: src/features.inc:30
+#: src/features.c:26
 msgid ", mcfs"
 msgstr ", mcfs"
 
-#: src/features.inc:32
+#: src/features.c:28
 msgid " (with termnet support)"
 msgstr " (s termnet podporo)"
 
-#: src/features.inc:35
+#: src/features.c:31
 msgid ", smbfs"
 msgstr ", smbfs"
 
-#: src/features.inc:39
+#: src/features.c:35
 msgid ", undelfs"
 msgstr ", undelfs"
 
-#: src/features.inc:45
+#: src/features.c:41
 msgid "With builtin Editor\n"
 msgstr "Z vgrajenim urejevalnikom\n"
 
-#: src/features.inc:48
+#: src/features.c:44
 msgid "Using "
 msgstr "Uporabljam "
 
-#: src/features.inc:51
+#: src/features.c:47
 msgid "system-installed "
 msgstr "sistemsko name¹èeno "
 
-#: src/features.inc:53
+#: src/features.c:49
 msgid "S-lang library with "
 msgstr "S-lang knji¾ico z "
 
-#: src/features.inc:56
+#: src/features.c:52
 msgid "terminfo"
 msgstr "terminfo"
 
-#: src/features.inc:59
+#: src/features.c:55
 msgid "termcap"
 msgstr "termcap"
 
-#: src/features.inc:61
+#: src/features.c:57
 msgid "an unknown terminal"
 msgstr "neznan terminal"
 
-#: src/features.inc:64
+#: src/features.c:60
 msgid " database"
 msgstr " zbirka podatkov"
 
-#: src/features.inc:67
+#: src/features.c:63
 msgid "the ncurses library"
 msgstr "knji¾nica ncruses"
 
-#: src/features.inc:69
+#: src/features.c:65
 msgid "some unknown curses library"
 msgstr "neznana curses knji¾nica"
 
-#: src/features.inc:74
+#: src/features.c:70
 msgid "With subshell support: "
 msgstr "S podporo podlupinam: "
 
-#: src/features.inc:76
+#: src/features.c:72
 msgid "optional"
 msgstr "ni nujno"
 
-#: src/features.inc:78
+#: src/features.c:74
 msgid "as default"
 msgstr "kot privzeto"
 
-#: src/features.inc:84
+#: src/features.c:80
 msgid "With support for background operations\n"
 msgstr "S podporo operacijam v ozadju\n"
+
+#: src/features.c:84
+msgid "with mouse support on xterm and the Linux console.\n"
+msgstr "s podporo za mi¹ko v xterm-u in Linux konzoli.\n"
+
+#: src/features.c:86
+msgid "with mouse support on xterm.\n"
+msgstr "s podporo za mi¹ko v xterm-u.\n"
 
 #: src/file.c:154 src/tree.c:639
 msgid " Copy "
@@ -4117,7 +4154,7 @@ msgstr "Datoteka je bila prene¹ena nepopolno. Naj ostane?"
 msgid "&Delete"
 msgstr "&Zbri¹i"
 
-#: src/file.c:803 src/hotlist.c:1443
+#: src/file.c:803 src/hotlist.c:1430
 msgid "&Keep"
 msgstr "&Obdr¾i"
 
@@ -4557,7 +4594,7 @@ msgstr "Ime datoteke:"
 msgid "Content: "
 msgstr "Vsebina: "
 
-#: src/find.c:171 src/main.c:1248 src/main.c:1272
+#: src/find.c:171 src/main.c:1249 src/main.c:1273
 msgid "&Tree"
 msgstr "&Drevo"
 
@@ -4624,15 +4661,15 @@ msgstr "Uredi to datoteko"
 msgid "Send the results to a Panel"
 msgstr "Po¹lji rezultate v pult"
 
-#: src/fixhlp.c:171
+#: src/fixhlp.c:169
 msgid "Usage: fixhlp <width> <tocname>\n"
 msgstr "Uporaba: fixhlp <¹irina> <naslov_kazala>\n"
 
-#: src/fixhlp.c:176
+#: src/fixhlp.c:174
 msgid "fixhlp: Cannot open toc for writing"
 msgstr "fixhlp: Ne morem odpreti stvarnega kazala za pisanje"
 
-#: src/fixhlp.c:179
+#: src/fixhlp.c:177
 msgid ""
 "[Contents]\n"
 " Topics:\n"
@@ -4688,15 +4725,15 @@ msgstr "Nazaj"
 msgid "&Move"
 msgstr "&Prestavi"
 
-#: src/hotlist.c:133 src/hotlist.c:1443 src/panelize.c:88 src/wtools.c:383
+#: src/hotlist.c:133 src/hotlist.c:1430 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
 msgstr "&Odstrani"
 
-#: src/hotlist.c:134 src/hotlist.c:818 src/hotlist.c:915
+#: src/hotlist.c:134 src/hotlist.c:805 src/hotlist.c:902
 msgid "&Append"
 msgstr "&Pripni"
 
-#: src/hotlist.c:135 src/hotlist.c:816 src/hotlist.c:913
+#: src/hotlist.c:135 src/hotlist.c:803 src/hotlist.c:900
 msgid "&Insert"
 msgstr "&Vstavi"
 
@@ -4720,65 +4757,65 @@ msgstr "&Dodaj trenutno"
 msgid "Change &To"
 msgstr "Pojdi &V"
 
-#: src/hotlist.c:201
+#: src/hotlist.c:188
 msgid "Subgroup - press ENTER to see list"
 msgstr "Podskupina - pritisnite ENTER za ogled seznama"
 
-#: src/hotlist.c:620
+#: src/hotlist.c:607
 msgid "Active VFS directories"
 msgstr "Dejavni VFS imeniki"
 
-#: src/hotlist.c:620
+#: src/hotlist.c:607
 msgid "Directory hotlist"
 msgstr " Vroèa lista imenikov"
 
-#: src/hotlist.c:639
+#: src/hotlist.c:626
 msgid " Directory path "
 msgstr " Pot imenika "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:642 src/hotlist.c:689
+#: src/hotlist.c:629 src/hotlist.c:676
 msgid " Directory label "
 msgstr " Oznaka imenika "
 
-#: src/hotlist.c:663
+#: src/hotlist.c:650
 msgid "Moving "
 msgstr "Premikam "
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "New hotlist entry"
 msgstr "Nov vpis v vroè seznam"
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "Directory label"
 msgstr "Oznaka imenika"
 
-#: src/hotlist.c:892
+#: src/hotlist.c:879
 msgid "Directory path"
 msgstr "Pot imenika"
 
-#: src/hotlist.c:973
+#: src/hotlist.c:960
 msgid " New hotlist group "
 msgstr " Nova skupina v vroèem seznamu"
 
-#: src/hotlist.c:973
+#: src/hotlist.c:960
 msgid "Name of new group"
 msgstr "Ime nove skupine"
 
-#: src/hotlist.c:988
+#: src/hotlist.c:975
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Oznaka za \"%s\":"
 
-#: src/hotlist.c:992
+#: src/hotlist.c:979
 msgid " Add to hotlist "
 msgstr " Dodaj na vroèi seznam"
 
-#: src/hotlist.c:1029
+#: src/hotlist.c:1016
 msgid " Remove: "
 msgstr " Odstrani: "
 
-#: src/hotlist.c:1033
+#: src/hotlist.c:1020
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -4788,51 +4825,51 @@ msgstr ""
 " Skupina ni prazna.\n"
 " Naj jo odstranim?"
 
-#: src/hotlist.c:1378
+#: src/hotlist.c:1365
 msgid " Top level group "
 msgstr " Vrhnja skupina "
 
-#: src/hotlist.c:1394
+#: src/hotlist.c:1381
 msgid "Hotlist is now kept in file ~/"
 msgstr "Vroèi seznam je sedaj v datoteki ~/"
 
-#: src/hotlist.c:1396
+#: src/hotlist.c:1383
 msgid "MC will load hotlist from ~/"
 msgstr "Polnoèni Poveljnik bo nalo¾il vroèi seznam iz  ~/"
 
-#: src/hotlist.c:1398
+#: src/hotlist.c:1385
 msgid "and then delete [Hotlist] section there"
 msgstr "in nato zbrisal [Hotlist] sekcijo tam"
 
-#: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
+#: src/hotlist.c:1387 src/hotlist.c:1406 src/hotlist.c:1429 src/hotlist.c:1454
 msgid " Hotlist Load "
 msgstr " Nalo¾i vroèi seznam"
 
-#: src/hotlist.c:1416 src/hotlist.c:1464
+#: src/hotlist.c:1403 src/hotlist.c:1451
 msgid "MC was unable to write ~/"
 msgstr "Polnoèni Poveljnik ni mogel zapisati ~/"
 
-#: src/hotlist.c:1417
+#: src/hotlist.c:1404
 msgid " file, your old hotlist entries were not deleted"
 msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
-#: src/hotlist.c:1431
+#: src/hotlist.c:1418
 msgid "You have ~/"
 msgstr "Imate  ~/"
 
-#: src/hotlist.c:1431
+#: src/hotlist.c:1418
 msgid " file and [Hotlist] section in ~/"
 msgstr " datoteko in [Hotlist] sekcijo v  ~/"
 
-#: src/hotlist.c:1432
+#: src/hotlist.c:1419
 msgid "Your ~/"
 msgstr "Va¹ ~/"
 
-#: src/hotlist.c:1432
+#: src/hotlist.c:1419
 msgid " most probably was created\n"
 msgstr " je bil zelo verjetno ustvarjen\n"
 
-#: src/hotlist.c:1433
+#: src/hotlist.c:1420
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -4840,7 +4877,7 @@ msgstr ""
 "s strani starej¹e razvojne razlièice Polnoènega Poveljnika\n"
 "in je bolj aktualen kot ~/"
 
-#: src/hotlist.c:1434
+#: src/hotlist.c:1421
 msgid ""
 " entries\n"
 "\n"
@@ -4848,7 +4885,7 @@ msgstr ""
 " vpisov\n"
 "\n"
 
-#: src/hotlist.c:1435
+#: src/hotlist.c:1422
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4858,7 +4895,7 @@ msgstr ""
 "\n"
 "  Odstrani - odstranite stare vpise v vroèi seznam ~/"
 
-#: src/hotlist.c:1437
+#: src/hotlist.c:1424
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -4868,15 +4905,15 @@ msgstr ""
 "           bo zastavljeno prihodnjiè\n"
 "  Zdru¾i  - dodajte stare vnose v vroèi seznam kot skup¹ino \"Vnosi iz ~/"
 
-#: src/hotlist.c:1443
+#: src/hotlist.c:1430
 msgid "&Merge"
 msgstr "&Zdru¾i"
 
-#: src/hotlist.c:1455
+#: src/hotlist.c:1442
 msgid " Entries from ~/"
 msgstr " Vnosi iz ~/"
 
-#: src/hotlist.c:1465
+#: src/hotlist.c:1452
 msgid " file your old hotlist entries were not deleted"
 msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
@@ -5130,7 +5167,7 @@ msgstr ""
 "manjkajoèi tipki ali jo kliknite z mi¹ko, da jo definirate. Okoli se "
 "premikate s Tabulatorjem."
 
-#: src/main.c:712
+#: src/main.c:713
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -5142,267 +5179,267 @@ msgstr ""
 " va¹ delovni imenik ali pa ste si dali dodatna \n"
 " dostopna dovoljenja z ukazom \"su\"? "
 
-#: src/main.c:787
+#: src/main.c:788
 msgid "Press any key to continue..."
 msgstr "Pritisnite katerokoli tipko za nadaljevanje..."
 
-#: src/main.c:837
+#: src/main.c:838
 msgid " The shell is already running a command "
 msgstr " Lupina ¾e izvaja ukaz "
 
-#: src/main.c:864 src/screen.c:2113 src/screen.c:2160
+#: src/main.c:865 src/screen.c:2113 src/screen.c:2160
 msgid " The Midnight Commander "
 msgstr " Polnoèni Poveljnik"
 
-#: src/main.c:865
+#: src/main.c:866
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Zares ¾elite zapreti Polnoènega Poveljnika? "
 
-#: src/main.c:1245 src/main.c:1269
+#: src/main.c:1246 src/main.c:1270
 msgid "&Listing mode..."
 msgstr "&Seznamski naèin..."
 
-#: src/main.c:1246 src/main.c:1270
+#: src/main.c:1247 src/main.c:1271
 msgid "&Quick view     C-x q"
 msgstr "&Hitri pogled   C-x q"
 
-#: src/main.c:1247 src/main.c:1271
+#: src/main.c:1248 src/main.c:1272
 msgid "&Info           C-x i"
 msgstr "&Podatki        C-x i"
 
-#: src/main.c:1250 src/main.c:1274
+#: src/main.c:1251 src/main.c:1275
 msgid "&Sort order..."
 msgstr "&Vrstni red..."
 
-#: src/main.c:1252 src/main.c:1276
+#: src/main.c:1253 src/main.c:1277
 msgid "&Filter..."
 msgstr "&Filter..."
 
-#: src/main.c:1255 src/main.c:1279
+#: src/main.c:1256 src/main.c:1280
 msgid "&Network link..."
 msgstr "&Mre¾na povezava..."
 
-#: src/main.c:1256 src/main.c:1280
+#: src/main.c:1257 src/main.c:1281
 msgid "FT&P link..."
 msgstr "FT&P povezava..."
 
-#: src/main.c:1258 src/main.c:1282
+#: src/main.c:1259 src/main.c:1283
 msgid "SM&B link..."
 msgstr "SM&B povezava..."
 
-#: src/main.c:1263 src/main.c:1287
+#: src/main.c:1264 src/main.c:1288
 msgid "&Drive...       M-d"
 msgstr "&Pogon...       M-d"
 
-#: src/main.c:1265 src/main.c:1289
+#: src/main.c:1266 src/main.c:1290
 msgid "&Rescan         C-r"
 msgstr "&Osve¾i         C-r"
 
-#: src/main.c:1293
+#: src/main.c:1295
 msgid "&User menu          F2"
 msgstr "&Uporabni¹ki menu   F2"
 
-#: src/main.c:1294
+#: src/main.c:1296
 msgid "&View               F3"
 msgstr "&Pogled             F3"
 
-#: src/main.c:1295
+#: src/main.c:1297
 msgid "Vie&w file...         "
 msgstr "Po&glej datoteko...   "
 
-#: src/main.c:1296
+#: src/main.c:1298
 msgid "&Filtered view     M-!"
 msgstr "&Filtriran pogled  M-!"
 
-#: src/main.c:1297
+#: src/main.c:1299
 msgid "&Edit               F4"
 msgstr "ur&Edi              F4"
 
-#: src/main.c:1298
+#: src/main.c:1300
 msgid "&Copy               F5"
 msgstr "&Kopiraj            F5"
 
-#: src/main.c:1299
+#: src/main.c:1301
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
 
-#: src/main.c:1301
+#: src/main.c:1303
 msgid "&Link            C-x l"
 msgstr "&Povezava        X-x l"
 
-#: src/main.c:1302
+#: src/main.c:1304
 msgid "&SymLink         C-x s"
 msgstr "&Simb. povezava  C-x s"
 
-#: src/main.c:1303
+#: src/main.c:1305
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "uredi s&imb. povez. C-x C-s"
 
-#: src/main.c:1304
+#: src/main.c:1306
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
-#: src/main.c:1305
+#: src/main.c:1307
 msgid "&Advanced chown       "
 msgstr "&Napredni chown"
 
-#: src/main.c:1307
+#: src/main.c:1309
 msgid "&Rename/Move        F6"
 msgstr "p&Reimenuj/Prestavi F6"
 
-#: src/main.c:1308
+#: src/main.c:1310
 msgid "&Mkdir              F7"
 msgstr "Ustvari &Imenik     F7"
 
-#: src/main.c:1309
+#: src/main.c:1311
 msgid "&Delete             F8"
 msgstr "&Zbri¹i             F8"
 
-#: src/main.c:1310
+#: src/main.c:1312
 msgid "&Quick cd          M-c"
 msgstr "&Hitra sprememba imenika M-c"
 
-#: src/main.c:1312
+#: src/main.c:1314
 msgid "select &Group      M-+"
 msgstr "izberi &Skupino    M-+"
 
-#: src/main.c:1313
+#: src/main.c:1315
 msgid "u&Nselect group    M-\\"
 msgstr "o&Dizberi skupino  M-\\"
 
-#: src/main.c:1314
+#: src/main.c:1316
 msgid "reverse selec&Tion M-*"
 msgstr "obrni iz&Biro      M-*"
 
-#: src/main.c:1316
+#: src/main.c:1318
 msgid "e&Xit              F10"
 msgstr "&Izhod             F10"
 
-#: src/main.c:1326
+#: src/main.c:1329
 msgid "&Directory tree"
 msgstr "&Drevo imenikov"
 
-#: src/main.c:1328
+#: src/main.c:1331
 msgid "&Find file            M-?"
 msgstr "&Poi¹èi datoteko      M-?"
 
-#: src/main.c:1329
+#: src/main.c:1332
 msgid "s&Wap panels          C-u"
 msgstr "za&Menjaj pulta       C-u"
 
-#: src/main.c:1330
+#: src/main.c:1333
 msgid "switch &Panels on/off C-o"
 msgstr "v/izklopi &Pulta      C-o"
 
-#: src/main.c:1331
+#: src/main.c:1334
 msgid "&Compare directories  C-x d"
 msgstr "&Primerjaj imenika    C-x d"
 
-#: src/main.c:1332
+#: src/main.c:1335
 msgid "e&Xternal panelize    C-x !"
 msgstr "&V pult od zunaj      C-x !"
 
-#: src/main.c:1333
+#: src/main.c:1336
 msgid "show directory s&Izes"
 msgstr "ka¾i velikosti &Imenikov"
 
-#: src/main.c:1335
+#: src/main.c:1338
 msgid "command &History"
 msgstr "zgodovina &Ukazov"
 
-#: src/main.c:1336
+#: src/main.c:1339
 msgid "di&Rectory hotlist    C-\\"
 msgstr "v&Roè seznam imenikov  C-\\"
 
-#: src/main.c:1338
+#: src/main.c:1341
 msgid "&Active VFS list      C-x a"
 msgstr "dej&Avni VFS seznam   C-x a"
 
-#: src/main.c:1339
+#: src/main.c:1342
 msgid "Fr&ee VFSs now"
 msgstr "&Takoj sprosti VFS-je"
 
-#: src/main.c:1342
+#: src/main.c:1345
 msgid "&Background jobs      C-x j"
 msgstr "Posli v &Ozadju       C-x j"
 
-#: src/main.c:1346
+#: src/main.c:1349
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Odbri¹i datoteke (samo ext2fs)"
 
-#: src/main.c:1349
+#: src/main.c:1352
 msgid "&Listing format edit"
 msgstr "uredi izpis &Seznama"
 
-#: src/main.c:1352
+#: src/main.c:1355
 msgid "&Extension file edit"
 msgstr "uredi datoteko s &Priponami"
 
-#: src/main.c:1353
+#: src/main.c:1356
 msgid "&Menu file edit"
 msgstr "uredi datoteko z &Menuji"
 
-#: src/main.c:1354
+#: src/main.c:1357
 msgid "Menu edi&Tor edit"
 msgstr "Uredi &Urejevalnik menujev"
 
-#: src/main.c:1359
+#: src/main.c:1362
 msgid "&Configuration..."
 msgstr "&Nastavitve..."
 
-#: src/main.c:1361
+#: src/main.c:1364
 msgid "c&Onfirmation..."
 msgstr "&Potrditev..."
 
-#: src/main.c:1362
+#: src/main.c:1365
 msgid "&Display bits..."
 msgstr "&Ka¾i bite..."
 
-#: src/main.c:1364
+#: src/main.c:1367
 msgid "learn &Keys..."
 msgstr "nauèi se &Tipk..."
 
-#: src/main.c:1367
+#: src/main.c:1370
 msgid "&Virtual FS..."
 msgstr "&Navidezni Datoteèni Sistem..."
 
-#: src/main.c:1370
+#: src/main.c:1373
 msgid "&Save setup"
 msgstr "&Shrani nastavitve"
 
-#: src/main.c:1386 src/main.c:1388
+#: src/main.c:1389 src/main.c:1391
 msgid " &Left "
 msgstr " &Levo "
 
-#: src/main.c:1388
+#: src/main.c:1391
 msgid " &Above "
 msgstr " &Zgoraj "
 
-#: src/main.c:1391
+#: src/main.c:1394
 msgid " &File "
 msgstr " &Datoteka "
 
-#: src/main.c:1392
+#: src/main.c:1395
 msgid " &Command "
 msgstr " &Ukaz "
 
-#: src/main.c:1393
+#: src/main.c:1396
 msgid " &Options "
 msgstr " &Mo¾nosti "
 
-#: src/main.c:1395 src/main.c:1397
+#: src/main.c:1398 src/main.c:1400
 msgid " &Right "
 msgstr " &Desno "
 
-#: src/main.c:1397
+#: src/main.c:1400
 msgid " &Below "
 msgstr " &Pod "
 
-#: src/main.c:1452
+#: src/main.c:1455
 msgid " Information "
 msgstr " Obvestilo "
 
-#: src/main.c:1453
+#: src/main.c:1456
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5414,23 +5451,15 @@ msgstr ""
 " roèno osve¾iti imenik. Poglejte si priroènik (man)  \n"
 " za podrobnosti.                                     "
 
-#: src/main.c:1932
+#: src/main.c:1937
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Hvala, ker ste uporabljali GNU Polnoènega Poveljnika"
 
-#: src/main.c:2290
-msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "s podporo za mi¹ko v xterm-u in Linux konzoli.\n"
-
-#: src/main.c:2291
-msgid "with mouse support on xterm.\n"
-msgstr "s podporo za mi¹ko v xterm-u.\n"
-
-#: src/main.c:2392
+#: src/main.c:2370
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM okolijska spremenljivka ni nastavljena!\n"
 
-#: src/main.c:2498
+#: src/main.c:2477
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5442,19 +5471,19 @@ msgstr ""
 "mc [zastavice] [ta_imenik] [imenik_drugega_pulta]\n"
 "\n"
 
-#: src/main.c:2501
+#: src/main.c:2480
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Prisili uporabo +, -, | za risanje èrt.\n"
 
-#: src/main.c:2503
+#: src/main.c:2482
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Prisili èrnobel prikaz.\n"
 
-#: src/main.c:2505
+#: src/main.c:2484
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [SAMO-RAZVOJ: Razhro¹èuj kodo ozadja]\n"
 
-#: src/main.c:2507
+#: src/main.c:2486
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5464,11 +5493,11 @@ msgstr ""
 "-C, --colors       Doloèi barve (uporabi --help-colors za seznam).\n"
 "-d, --nomouse      Izkljuèi podporo za mi¹ko\n"
 
-#: src/main.c:2511
+#: src/main.c:2490
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit        Za¾eni notranji urejevalnik.\n"
 
-#: src/main.c:2513
+#: src/main.c:2492
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5482,16 +5511,16 @@ msgstr ""
 "terminfo/termcap\n"
 "                   privzete nastavitve.\n"
 
-#: src/main.c:2518
+#: src/main.c:2497
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  Pi¹i dnevnik ftpfs ukazov v datoteko.\n"
 
-#: src/main.c:2521
+#: src/main.c:2500
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory dato  [SAMO-RAZVOJ: Pi¹i dnevnik MAD sporoèil v datoteko.]\n"
 
-#: src/main.c:2523
+#: src/main.c:2502
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5499,18 +5528,18 @@ msgstr ""
 "-P, --printwd      Ob izhodu, izpi¹i zadnji delovni imenik.\n"
 "-s, --slow         Ikljuèi podrobno obve¹èanje (za poèasne terminale).\n"
 
-#: src/main.c:2526
+#: src/main.c:2505
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Aktiviraj podporo za TERMCAP spremenljivko.\n"
 
-#: src/main.c:2529
+#: src/main.c:2508
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Ustvari datoteko z ukazi, ki nastavi privzet imenik ob "
 "izhodu.\n"
 
-#: src/main.c:2532
+#: src/main.c:2511
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5520,7 +5549,7 @@ msgstr ""
 "-U, --subshell     Prisili hkratni podlupinski naèin.\n"
 "-r, --forceexec    Prisili izvajanje v podlupini.\n"
 
-#: src/main.c:2536
+#: src/main.c:2515
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5533,11 +5562,11 @@ msgstr ""
 "shranjevanje/obnavljanje zaslona.\n"
 "+¹tevilka          ©tevilka je zaèetna vrstica datoteke za `mcedit'.\n"
 
-#: src/main.c:2541
+#: src/main.c:2520
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [SAMO-RAZVOJ: Razhro¹èuj podlupino].\n"
 
-#: src/main.c:2543
+#: src/main.c:2522
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5547,7 +5576,7 @@ msgstr ""
 "Prosimo po¹ljite poroèila o hro¹èih (vkljuèite izpis `mc -V')\n"
 "na mc-bugs@nuclecu.unam.mx\n"
 
-#: src/main.c:2559
+#: src/main.c:2538
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5585,122 +5614,122 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2608
+#: src/main.c:2590
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Imenik s knji¾nicami za Polnoènega Poveljnika: %s\n"
 
-#: src/main.c:2622
+#: src/main.c:2604
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Mo¾nost -m je zastarela. Prosim poglejte pod ka¾i bite... v menuju Mo¾nosti\n"
 
-#: src/main.c:2699
+#: src/main.c:2681
 msgid "Use to debug the background code"
 msgstr "Uporabi za razhro¹èevanje kod ozadja"
 
-#: src/main.c:2705
+#: src/main.c:2687
 msgid "Request to run in color mode"
 msgstr "Pro¹nja za izvajanje v barvnem naèinu"
 
-#: src/main.c:2707
+#: src/main.c:2689
 msgid "Specifies a color configuration"
 msgstr "Doloèi nastavitve barv"
 
-#: src/main.c:2712
+#: src/main.c:2694
 msgid "Edits one file"
 msgstr "Urejuje eno datoteko"
 
-#: src/main.c:2716
+#: src/main.c:2698
 msgid "Displays this help message"
 msgstr "Poka¾e to sporoèilo s pomoèjo"
 
-#: src/main.c:2719
+#: src/main.c:2701
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Poka¾e poroèilo s pomoèjo o menjavi barvne sheme"
 
-#: src/main.c:2722
+#: src/main.c:2704
 msgid "Log ftp dialog to specified file"
 msgstr "Pi¹i dnevnik ftp dialogov v doloèeno datoteko"
 
-#: src/main.c:2729
+#: src/main.c:2711
 msgid "Obsolete"
 msgstr "Zastarelo"
 
-#: src/main.c:2731
+#: src/main.c:2713
 msgid "Requests to run in black and white"
 msgstr "Pro¹nja za izvajanje v èrnobelem naèinu"
 
-#: src/main.c:2733
+#: src/main.c:2715
 msgid "Disable mouse support in text version"
 msgstr "Ikljuèi podporo za mi¹ko v tekstovni razlièici"
 
-#: src/main.c:2736
+#: src/main.c:2718
 msgid "Disables subshell support"
 msgstr "Izkljuèi podporo za podlupine"
 
-#: src/main.c:2740
+#: src/main.c:2722
 msgid "Prints working directory at program exit"
 msgstr "Izpi¹e delavni imenik ob izhodu iz programa"
 
-#: src/main.c:2742
+#: src/main.c:2724
 msgid "Resets soft keys on HP terminals"
 msgstr "Ponastavi mehke tipke na HP terminalih"
 
-#: src/main.c:2744
+#: src/main.c:2726
 msgid "To run on slow terminals"
 msgstr "Za poganjanje na poèasnih terminalih"
 
-#: src/main.c:2747
+#: src/main.c:2729
 msgid "Use stickchars to draw"
 msgstr "Uporabi lepljive znake za risanje"
 
-#: src/main.c:2751
+#: src/main.c:2733
 msgid "Enables subshell support (default)"
 msgstr "Vklopi podporo za podlupino (privzeto)"
 
-#: src/main.c:2756
+#: src/main.c:2738
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Posku¹a uporabiti termcap namesto terminfa"
 
-#: src/main.c:2760
+#: src/main.c:2742
 msgid "Displays the current version"
 msgstr "Poka¾e trenutno razlièico"
 
-#: src/main.c:2762
+#: src/main.c:2744
 msgid "Launches the file viewer on a file"
 msgstr "Za¾ene pogled datoteke"
 
-#: src/main.c:2764
+#: src/main.c:2746
 msgid "Forces xterm features"
 msgstr "Prisili uporabo xterm dodatkov"
 
-#: src/main.c:2766
+#: src/main.c:2748
 msgid "Geometry for the window"
 msgstr "Geometrija Okna"
 
-#: src/main.c:2766
+#: src/main.c:2748
 msgid "GEOMETRY"
 msgstr "GEOMETRIJA"
 
-#: src/main.c:2767
+#: src/main.c:2749
 msgid "No windows opened at startup"
 msgstr "Ob prièetku ni odprtih oken"
 
-#: src/main.c:2768
+#: src/main.c:2750
 msgid "No desktop icons"
 msgstr "Ni namiznih ikon"
 
-#: src/main.c:2769
+#: src/main.c:2751
 msgid "Look more like traditional gmc"
 msgstr "Izgleda bolj kot tradicionalni GNOME Polnoèni Poveljnik"
 
-#: src/main.c:2771
+#: src/main.c:2753
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Izpi¹i imenik, ki vsebuje .links zaèetne datoteke in konèaj"
 
-#: src/main.c:3087
+#: src/main.c:3069
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5709,11 +5738,11 @@ msgstr ""
 "zastavice.\n"
 "Na nekaterih sistemih ¾elite pognati # `which mc`\n"
 
-#: src/main.c:3165
+#: src/main.c:3147
 msgid " Notice "
 msgstr " Opomba "
 
-#: src/main.c:3166
+#: src/main.c:3148
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -6802,20 +6831,20 @@ msgstr "(striktni rfc959)"
 msgid "(chdir first)"
 msgstr "(najprej spremeni imenik)"
 
-#: vfs/ftpfs.c:1279
+#: vfs/ftpfs.c:1283
 msgid "ftpfs: failed"
 msgstr "ftpfs: ni uspel"
 
-#: vfs/ftpfs.c:1289
+#: vfs/ftpfs.c:1293
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: spodletel; ni veè mo¾nih re¹itev"
 
-#: vfs/ftpfs.c:1352
+#: vfs/ftpfs.c:1356
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: shranjujem datoteko %d (%d)"
 
-#: vfs/ftpfs.c:1767
+#: vfs/ftpfs.c:1771
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -7097,6 +7126,12 @@ msgstr " Ne morem odpreti datoteke %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Odbrisljiv datoteèni sistem za ext2"
+
+#~ msgid "XView"
+#~ msgstr "XView"
+
+#~ msgid "Tk"
+#~ msgstr "Tk"
 
 #~ msgid "  %s bytes in %d file"
 #~ msgstr "  %s bajtov v %d datoteki"
