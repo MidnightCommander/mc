@@ -3,6 +3,9 @@
 	* tty.h: Moved the function printwstr to slint.c, because the
 	SunPro compiler does not eliminate unused inline functions.
 	* slint.c: printwstr has been moved to here.
+	* unixcompat.h: Only include <sys/sysmacros.h> if we're on AIX,
+	as Solaris defines the macros twice---once in <sys/mkdev.h>,
+	and once in <sys/sysmacros.h>.
 
 2005-02-23  Roland Illig  <roland.illig@gmx.de>
 

@@ -14,7 +14,7 @@
 #ifdef HAVE_SYS_MKDEV_H
 # include <sys/mkdev.h>		/* Solaris 9 */
 #endif
-#ifdef HAVE_SYS_SYSMACROS_H
+#if defined(_AIX) && defined(HAVE_SYS_SYSMACROS_H)
 # include <sys/sysmacros.h>	/* AIX */
 #endif
 
