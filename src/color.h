@@ -85,5 +85,13 @@ extern int dialog_colors   [4];
 #define EDITOR_MARKED_COLOR          (PORT_COLOR (MY_COLOR_PAIR (36),A_REVERSE))
 #define EDITOR_UNDERLINED_COLOR      VIEW_UNDERLINED_COLOR
 
-#endif /* __COLOR_H */
+#ifdef HAVE_SLANG
+#   define CTYPE char *
+#else
+#   define CTYPE int
+#endif
 
+void mc_init_pair (int index, CTYPE foreground, CTYPE background);
+int try_alloc_color_pair (char *fg, char *bg);
+
+#endif /* __COLOR_H */

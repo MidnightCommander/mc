@@ -87,7 +87,6 @@ void slang_keypad (int set);
 void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
-void init_pair (int, char *, char *);
 
 /* copied from slcurses.h (MC version 4.0.7) */
 #define move(x, y) SLsmg_gotorc(x, y)

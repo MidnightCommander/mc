@@ -39,9 +39,9 @@ int dialog_colors [4];
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
 #ifdef HAVE_SLANG
-#   define CTYPE char *
+#   define color_map_fg(n) color_map[n].fg
+#   define color_map_bg(n) color_map[n].bg
 #else
-#   define CTYPE int
 #   define color_map_fg(n) (color_map[n].fg % COLORS)
 #   define color_map_bg(n) (color_map[n].bg % COLORS)
 #endif
@@ -51,11 +51,6 @@ struct colorpair {
     CTYPE fg;			/* foreground color */
     CTYPE bg;			/* background color */
 };
-
-#ifndef color_map_fg
-#   define color_map_fg(n) color_map[n].fg
-#   define color_map_bg(n) color_map[n].bg
-#endif
 
 struct colorpair color_map [] = {
     { "normal=",     0, 0 },	/* normal */               /*  1 */
@@ -277,7 +272,7 @@ void init_colors (void)
 	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, "default", "default");
 #else
 	    /* Always white on black */
-	    init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
+	    mc_init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
 #endif /* !HAVE_SLANG */
 	}
 
@@ -285,13 +280,12 @@ void init_colors (void)
             if (!color_map [i].name)
                 continue;
 
-	    init_pair (i+1, color_map_fg(i), color_map_bg(i));
+	    mc_init_pair (i+1, color_map_fg(i), color_map_bg(i));
 
 #ifndef HAVE_SLANG
 	    /*
-	     * As a convenience, for the SVr4 curses configuration, we have
-	     * OR'd the A_BOLD attribute to the color number.  We'll need that
-	     * later, to set the attribute with the colors.
+	     * ncurses doesn't remember bold attribute in the color pairs,
+	     * so we should keep track of it in a separate array.
 	     */
 	     attr_pairs [i+1] = color_map [i].fg & A_BOLD;
 #endif /* !HAVE_SLANG */
@@ -299,3 +293,116 @@ void init_colors (void)
     }
     load_dialog_colors ();
 }
+
+/* Functions necessary to implement syntax highlighting  */
+
+static int max_index = 0;
+
+static int
+alloc_color_pair (CTYPE foreground, CTYPE background)
+{
+    mc_init_pair (++max_index, foreground, background);
+    return max_index;
+}
+
+struct colors_avail {
+    struct colors_avail *next;
+    char *fg, *bg;
+    int index;
+};
+
+#ifdef HAVE_SLANG
+void
+mc_init_pair (int index, CTYPE foreground, CTYPE background)
+{
+    /* hack for transparent background for Eterm, rxvt or else */
+    if (background && !strcmp (background, "default"))
+       background = NULL;
+    /* if foreground is default, I guess we should use normal fore-color. */
+
+    SLtt_set_color (index, "", foreground, background);
+    if (index > max_index)
+	max_index = index;
+}
+
+int
+try_alloc_color_pair (char *fg, char *bg)
+{
+    static struct colors_avail c = { 0, 0, 0, 0 };
+    struct colors_avail *p = &c;
+
+    c.index = EDITOR_NORMAL_COLOR_INDEX;
+    for (;;) {
+	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
+	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
+	    return p->index;
+	if (!p->next)
+	    break;
+	p = p->next;
+    }
+    p->next = g_new (struct colors_avail, 1);
+    p = p->next;
+    p->next = 0;
+    p->fg = fg ? g_strdup (fg) : 0;
+    p->bg = bg ? g_strdup (bg) : 0;
+    if (!fg)
+        /* Index in color_map array = COLOR_INDEX - 1 */
+	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
+    if (!bg)
+	bg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
+    p->index = alloc_color_pair (fg, bg);
+    return p->index;
+}
+
+#else /* !HAVE_SLANG */
+void
+mc_init_pair (int index, CTYPE foreground, CTYPE background)
+{
+    init_pair (index, foreground, background);
+    if (index > max_index)
+	max_index = index;
+}
+
+int
+try_alloc_color_pair (char *fg, char *bg)
+{
+    static struct colors_avail c = { 0, 0, 0, 0 };
+    int fg_index, bg_index;
+    int bold_attr;
+    struct colors_avail *p = &c;
+
+    c.index = EDITOR_NORMAL_COLOR_INDEX;
+    for (;;) {
+	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
+	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
+	    return p->index;
+	if (!p->next)
+	    break;
+	p = p->next;
+    }
+    p->next = g_new (struct colors_avail, 1);
+    p = p->next;
+    p->next = 0;
+    p->fg = fg ? g_strdup (fg) : 0;
+    p->bg = bg ? g_strdup (bg) : 0;
+    if (!fg)
+        /* Index in color_map array = COLOR_INDEX - 1 */
+	fg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
+    else
+	get_color (fg, &fg_index);
+
+    if (!bg)
+	bg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
+    else
+	get_color (bg, &bg_index);
+
+    bold_attr = fg_index & A_BOLD;
+    fg_index = fg_index % COLORS;
+    bg_index = bg_index % COLORS;
+
+    p->index = alloc_color_pair (fg_index, bg_index);
+    attr_pairs [p->index] = bold_attr;
+    return p->index;
+}
+#endif /* !HAVE_SLANG */
+

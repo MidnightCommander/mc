@@ -1,5 +1,10 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* slint.c: Move functions for allocating color pairs ...
+	* color.c: ... here.  Implement ncurses equivalents.  Rename
+	init_pair() to mc_init_pair() and keep tack of max_index with
+	ncurses.  Adjust all dependencies.
+
 	* mem.h: Clean up obsolete definitions, incorporate into ...
 	* global.h: ... this.
 	* Makefile.am: Remove mem.h.

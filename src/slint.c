@@ -367,68 +367,6 @@ vline (int character, int len)
     }
 }
 
-static int max_index = 0;
-
-void
-init_pair (int index, char *foreground, char *background)
-{
-    /* hack for transparent background for Eterm, rxvt or else */
-    if (background && !strcmp (background, "default"))
-       background = NULL;
-    /* if foreground is default, I guess we should use normal fore-color. */
-
-    SLtt_set_color (index, "", foreground, background);
-    if (index > max_index)
-	max_index = index;
-}
-
-static int
-alloc_color_pair (char *foreground, char *background)
-{
-    init_pair (++max_index, foreground, background);
-    return max_index;
-}
-
-extern struct colorpair {
-    char *name, *fg, *bg;
-} color_map[];
-
-struct colors_avail {
-    struct colors_avail *next;
-    char *fg, *bg;
-    int index;
-};
-
-static struct colors_avail c = { 0, 0, 0, 0 };
-
-int
-try_alloc_color_pair (char *fg, char *bg)
-{
-    struct colors_avail *p = &c;
-
-    c.index = EDITOR_NORMAL_COLOR_INDEX;
-    for (;;) {
-	if (((fg && p->fg) ? !strcmp (fg, p->fg) : fg == p->fg) != 0
-	    && ((bg && p->bg) ? !strcmp (bg, p->bg) : bg == p->bg) != 0)
-	    return p->index;
-	if (!p->next)
-	    break;
-	p = p->next;
-    }
-    p->next = g_new (struct colors_avail, 1);
-    p = p->next;
-    p->next = 0;
-    p->fg = fg ? g_strdup (fg) : 0;
-    p->bg = bg ? g_strdup (bg) : 0;
-    if (!fg)
-        /* Index in color_map array = COLOR_INDEX - 1 */
-	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
-    if (!bg)
-	bg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].bg;
-    p->index = alloc_color_pair (fg, bg);
-    return p->index;
-}
-
 #ifdef	HAVE_MAD
 static void
 dealloc_color_pairs (void)
@@ -512,12 +450,12 @@ int has_colors (void)
     /* Setup emulated colors */
     if (SLtt_Use_Ansi_Colors){
         if (use_colors){
-            init_pair (A_REVERSE, "black", "white");
-	    init_pair (A_BOLD, "white", "black");
+	    mc_init_pair (A_REVERSE, "black", "white");
+	    mc_init_pair (A_BOLD, "white", "black");
 	} else {
-	    init_pair (A_REVERSE, "black", "lightgray");
-	    init_pair (A_BOLD, "white", "black");
-	    init_pair (A_BOLD_REVERSE, "white", "lightgray");
+	    mc_init_pair (A_REVERSE, "black", "lightgray");
+	    mc_init_pair (A_BOLD, "white", "black");
+	    mc_init_pair (A_BOLD_REVERSE, "white", "lightgray");
 	} 
     } else {
 	SLtt_set_mono (A_BOLD,    NULL, SLTT_BOLD_MASK);
