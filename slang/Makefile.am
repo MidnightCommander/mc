@@ -1,9 +1,9 @@
 AM_CFLAGS = @CFLAGS@ @GLIB_CFLAGS@
 
 if INCLUDED_SLANG
-lib_LIBRARIES = libmcslang.a
+noinst_LIBRARIES = libmcslang.a
 else
-lib_LIBRARIES =
+noinst_LIBRARIES =
 endif
 
 libmcslang_a_SOURCES = sldisply.c slerr.c slsmg.c slutty.c slgetkey.c \
