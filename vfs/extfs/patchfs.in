@@ -46,7 +46,7 @@ sub error
 # list files affected by patch
 sub list
 {
-    my ($archive)=@_;
+    my ($archive)=(quotemeta $_[0]);
     my ($state,$pos,$npos,$time);
     my ($f,$fsrc,$fdst,$prefix);
 
@@ -55,7 +55,7 @@ sub list
 
     import Date::Parse if ($parsedates);
     
-    # state==1 means diff contents, state==0 mens comments
+    # state==1 means diff contents, state==0 means comments
     $state=1; $f="";
     while (<I>) {
 	if (/^-{3} /) {
@@ -193,9 +193,9 @@ sub openread
 
     $_=`$file $archive`;
     if (/bzip/) {
-	open I, "$bzip -dc $ARGV[1] |";
+	open I, "$bzip -dc $archive |";
     } elsif (/gzip/) {
-	open I, "$gzip -dc $ARGV[1] |";
+	open I, "$gzip -dc $archive |";
     } else {
 	open I, "< $ARGV[1]";
     }

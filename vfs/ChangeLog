@@ -1,3 +1,9 @@
+2002-12-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/patchfs.in (openread): Use quoted $archive when opening
+	archives.
+	(list): Set $archive to quoted $_[0].
+
 2002-12-16  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/rpm: Don't check package signatures - it creates a lot
