@@ -1,3 +1,8 @@
+2005-03-21  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (init_key): Load xterm_key_defines for terminals with
+	names starting with "rxvt".
+
 2005-03-19  Pavel Roskin  <proski@gnu.org>
 
 	* slint.c: Don't use private S-Lang functions if they are

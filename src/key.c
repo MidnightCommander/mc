@@ -422,22 +422,24 @@ init_key_x11 (void)
 
 /* This has to be called before slang_init or whatever routine
    calls any define_sequence */
-void init_key (void)
+void
+init_key (void)
 {
     const char *term = getenv ("TERM");
-    
+
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
     define_sequences (mc_default_keys);
 
     /* Terminfo on irix does not have some keys */
-    if (term && 
-        ((!strncmp (term, "iris-ansi", 9)) || (!strncmp (term, "xterm", 5))))
+    if (term
+	&& (!strncmp (term, "iris-ansi", 9) || !strncmp (term, "xterm", 5)
+	    || !strncmp (term, "rxvt", 4)))
 	define_sequences (xterm_key_defines);
 
     /* load some additional keys (e.g. direct Alt-? support) */
-    load_xtra_key_defines();
-    
+    load_xtra_key_defines ();
+
 #ifdef __QNX__
     if (term && strncmp (term, "qnx", 3) == 0) {
 	/* Modify the default value of use_8th_bit_as_meta: we would
@@ -455,17 +457,16 @@ void init_key (void)
 	 */
 	use_8th_bit_as_meta = 0;
     }
-#endif /* __QNX__ */
+#endif				/* __QNX__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_key_x11 ();
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 
     /* Load the qansi-m key definitions 
        if we are running under the qansi-m terminal */
-    if ((term) && (strncmp (term, "qansi-m", 7) == 0))
-    {
-       define_sequences(qansi_key_defines);
+    if ((term) && (strncmp (term, "qansi-m", 7) == 0)) {
+	define_sequences (qansi_key_defines);
     }
 }
 
