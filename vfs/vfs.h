@@ -44,7 +44,7 @@ struct utimbuf {
 #define F_NET 2
         char  *prefix;		/* "#fish:" */
         void  *data;		/* this is for filesystem's own use */
-        int   errno;
+        int   verrno;           /* can't use errno because glibc2 might define errno as function */
         int   (*init)(struct vfs *me);	/* 1..initialized succesfully */
         void  (*done)(struct vfs *me);
         void  (*fill_names)(struct vfs *me, void (*)(char *));

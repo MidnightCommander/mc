@@ -108,8 +108,8 @@ libvfs.so: $(VFSSOOBJS) libvfs.o
 	gcc $(VFSSOOBJS) libvfs.o -shared -o libvfs.so
 
 
-Makefile: $(srcdir)/Make-mc.in $(srcdir)/../config.status
-	cd $(rootdir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
 
 
 #

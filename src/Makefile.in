@@ -59,8 +59,8 @@ DISTFILES = \
 
 all: mc mcmfmt @saver_target@ Makefile
 
-Makefile: $(srcdir)/Makefile.in $(rootdir)/config.status
-	cd $(rootdir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=$@ CONFIG_HEADERS= $(SHELL) ./config.status
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-05-06 14:14:45+0900\n"
+"POT-Creation-Date: 1998-09-28 22:03+0200\n"
 "PO-Revision-Date: 1998-09-26 01:56:37+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -317,8 +317,7 @@ msgstr "모두 바꿈"
 #: gtkedit/editcmd.c:1932
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
-msgstr ""
-" 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
+msgstr " 이상한 정규표현식 혹은 너무 많이 바꿔야 하는 scanf 표현 "
 
 #. "Invalid regexp string or scanf string"
 #: gtkedit/editcmd.c:2096
@@ -2310,8 +2309,9 @@ msgid "&Suspend"
 msgstr "일시중지(&S)"
 
 #: gnome/find.c:125 src/find.c:125
-msgid "&Continue"
-msgstr "계속(&C)"
+#, fuzzy
+msgid "Con&tinue"
+msgstr "계속"
 
 #: gnome/find.c:126 src/find.c:126
 msgid "&Chdir"
@@ -4127,7 +4127,8 @@ msgstr " 명령어 꼬리표 입력: "
 
 #: gnome/panelize.c:302 src/panelize.c:302
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr " 원격 자료방으로 로그한 경우에는 외부 패널화 명령을 실행할 수 없습니다 "
+msgstr ""
+" 원격 자료방으로 로그한 경우에는 외부 패널화 명령을 실행할 수 없습니다 "
 
 #: gnome/panelize.c:351 src/panelize.c:351
 msgid "Find rejects after patching"
@@ -4685,7 +4686,7 @@ msgstr "Slash on keypad"
 msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
 
-#: gnome/wtools.c:609 src/wtools.c:609 vfs/vfs.c:1598
+#: gnome/wtools.c:609 src/wtools.c:609 vfs/vfs.c:1604
 msgid "Password:"
 msgstr "비밀번호:"
 
@@ -4713,7 +4714,7 @@ msgstr ""
 msgid " Could not set source routing (%s)"
 msgstr " 소스 라우팅 (%s)를 설정할 수 없습니다"
 
-#: vfs/ftpfs.c:1773 vfs/ftpfs.c:1788
+#: vfs/ftpfs.c:1782 vfs/ftpfs.c:1797
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4810,3 +4811,6 @@ msgstr ""
 "흠,...\n"
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
+
+#~ msgid "&Continue"
+#~ msgstr "계속(&C)"

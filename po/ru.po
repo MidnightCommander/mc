@@ -5,49 +5,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-04-28 09:38+0300\n"
+"POT-Creation-Date: 1998-09-28 22:03+0200\n"
 "PO-Revision-Date: 1998-04-28 12:50+0300\n"
 "Last-Translator: Alex Tkachenko <alex@bcs.zp.ua>\n"
 "Language-Team: russian <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. The file-name is printed after the ':'
-#: edit/edit.c:113 edit/edit.c:161 edit/edit.c:168 edit/edit.c:175
-#: edit/edit.c:182 edit/edit.c:188 edit/edit.c:227 edit/edit.c:262
-#: edit/editcmd.c:1683 edit/editwidget.c:879 src/tree.c:1138 src/tree.c:1144
-#: src/wtools.c:225
-msgid " Error "
-msgstr " Ошибка "
-
-#: edit/edit.c:113 edit/edit.c:168
-msgid " Fail trying to open file for reading: "
-msgstr " Ошибка открытия файла на чтение: "
-
-#: edit/edit.c:175
-msgid " Cannot get size/permissions info on file: "
-msgstr " Не могу получить размер/права доступа для файла: "
-
-#: edit/edit.c:182
-msgid " Not an ordinary file: "
-msgstr " Не обычный файл: "
-
-#: edit/edit.c:188
-msgid " File is too large: "
-msgstr " Слишком большой файл: "
-
-#: edit/edit.c:189
-msgid ""
-" \n"
-" Increase edit.h:MAXBUF and recompile the editor. "
-msgstr ""
-" \n"
-" Увеличьте edit.h:MAXBUF и перекомпилируйте редактор. "
-
-#: edit/edit.c:227 edit/edit.c:262
-msgid " Error allocating memory "
-msgstr " Ошибка выделения памяти "
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
@@ -58,7 +22,7 @@ msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:133 edit/editcmd.c:620 edit/editcmd.c:625
+#: edit/edit_key_translator.c:133 gtkedit/editcmd.c:698 gtkedit/editcmd.c:707
 msgid " Press macro hotkey: "
 msgstr " Нажмите клавишу для макроса: "
 
@@ -70,104 +34,145 @@ msgstr " Вставить литерал "
 msgid " Press any key: "
 msgstr " Нажмите любую клавишу: "
 
-#. This heads the 'Save As' dialog box
-#: edit/editcmd.c:394
+#. The file-name is printed after the ':'
+#: gnome/tree.c:1140 gnome/tree.c:1146 gnome/wtools.c:225 gtkedit/edit.c:118
+#: gtkedit/edit.c:166 gtkedit/edit.c:173 gtkedit/edit.c:180 gtkedit/edit.c:187
+#: gtkedit/edit.c:193 gtkedit/edit.c:236 gtkedit/edit.c:272
+#: gtkedit/editcmd.c:1932 gtkedit/editwidget.c:1016 src/tree.c:1140
+#: src/tree.c:1146 src/wtools.c:225
+msgid " Error "
+msgstr " Ошибка "
+
+#: gtkedit/edit.c:118 gtkedit/edit.c:173
+#, fuzzy
+msgid " Failed trying to open file for reading: "
+msgstr " Ошибка открытия файла на чтение: "
+
+#: gtkedit/edit.c:180
+msgid " Cannot get size/permissions info on file: "
+msgstr " Не могу получить размер/права доступа для файла: "
+
+#: gtkedit/edit.c:187
+msgid " Not an ordinary file: "
+msgstr " Не обычный файл: "
+
+#: gtkedit/edit.c:193
+msgid " File is too large: "
+msgstr " Слишком большой файл: "
+
+#: gtkedit/edit.c:194
+msgid ""
+" \n"
+" Increase edit.h:MAXBUF and recompile the editor. "
+msgstr ""
+" \n"
+" Увеличьте edit.h:MAXBUF и перекомпилируйте редактор. "
+
+#: gtkedit/edit.c:236 gtkedit/edit.c:272
+msgid " Error allocating memory "
+msgstr " Ошибка выделения памяти "
+
+#: gtkedit/editcmd.c:468
 msgid " Save As "
 msgstr " Сохранить как "
 
 #. Warning message with a query to continue or cancel the operation
-#: edit/editcmd.c:409 edit/editcmd.c:718 edit/editcmd.c:730 edit/editcmd.c:831
-#: edit/editcmd.c:914 gnome/gdesktop.c:1258 src/ext.c:295 src/help.c:320
-#: src/main.c:683 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374
-#: src/utilunix.c:378 src/utilunix.c:444
+#: gnome/ext.c:295 gnome/gdesktop.c:1356 gnome/help.c:320 gnome/main.c:651
+#: gnome/subshell.c:700 gnome/subshell.c:726 gnome/utilunix.c:381
+#: gnome/utilunix.c:385 gnome/utilunix.c:451 gtkedit/editcmd.c:482
+#: gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978
+#: gtkedit/editcmd.c:1075 src/ext.c:295 src/help.c:320 src/main.c:651
+#: src/subshell.c:700 src/subshell.c:726 src/utilunix.c:381 src/utilunix.c:385
+#: src/utilunix.c:451 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Предупреждение "
 
-#: edit/editcmd.c:410
+#: gtkedit/editcmd.c:483
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: edit/editcmd.c:412
+#: gtkedit/editcmd.c:485
 msgid "Overwrite"
 msgstr "Заменить"
 
-#: edit/editcmd.c:412 edit/editcmd.c:691 edit/editcmd.c:718 edit/editcmd.c:730
-#: edit/editcmd.c:831 edit/editcmd.c:1317
+#: gtkedit/editcmd.c:485 gtkedit/editcmd.c:774 gtkedit/editcmd.c:801
+#: gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1565
 msgid "Cancel"
 msgstr "Прервать"
 
-#: edit/editcmd.c:428
+#: gtkedit/editcmd.c:501
 msgid " Save as "
 msgstr " Сохранить как "
 
-#: edit/editcmd.c:428 edit/editcmd.c:2263
+#: gtkedit/editcmd.c:501 gtkedit/editcmd.c:2597
 msgid " Error trying to save file. "
 msgstr " Ошибка при сохранении файла "
 
 #. This heads the delete macro error dialog box
-#: edit/editcmd.c:539 edit/editcmd.c:547 edit/editcmd.c:572
+#: gtkedit/editcmd.c:617 gtkedit/editcmd.c:625 gtkedit/editcmd.c:650
 msgid " Delete macro "
 msgstr " Удалить макрос "
 
 #. 'Open' = load temp file
-#: edit/editcmd.c:541
+#: gtkedit/editcmd.c:619
 msgid " Error trying to open temp file "
 msgstr " Ошибка при открытии временного файла "
 
 #. 'Open' = load temp file
-#: edit/editcmd.c:549 edit/editcmd.c:610 edit/editcmd.c:673
+#: gtkedit/editcmd.c:627 gtkedit/editcmd.c:688 gtkedit/editcmd.c:756
 msgid " Error trying to open macro file "
 msgstr " Ошибка при открытии файла макросов "
 
-#: edit/editcmd.c:554 edit/editcmd.c:562 edit/editcmd.c:598 edit/editcmd.c:648
+#: gtkedit/editcmd.c:632 gtkedit/editcmd.c:640 gtkedit/editcmd.c:676
+#: gtkedit/editcmd.c:731
 #, c-format
 msgid "key '%d 0': "
 msgstr "клавиша '%d 0': "
 
-#: edit/editcmd.c:573
+#: gtkedit/editcmd.c:651
 msgid " Error trying to overwrite macro file "
 msgstr " Ошибка при перезаписи файла макросов "
 
 #. This heads the 'Macro' dialog box
-#: edit/editcmd.c:590
+#: gtkedit/editcmd.c:668
 msgid " Macro "
 msgstr " Макрос "
 
 #. Input line for a single key press follows the ':'
-#: edit/editcmd.c:592
+#: gtkedit/editcmd.c:670
 msgid " Press the macro's new hotkey: "
 msgstr " Нажмите новую клавишу макроса "
 
 #. This heads the 'Save Macro' dialog box
-#: edit/editcmd.c:610
+#: gtkedit/editcmd.c:688
 msgid " Save macro "
 msgstr " Сохранить макрос "
 
-#. This heads the 'Delete Macro' dialog box
-#: edit/editcmd.c:620 edit/editcmd.c:623
+#: gtkedit/editcmd.c:698 gtkedit/editcmd.c:705
 msgid " Delete Macro "
 msgstr " Удалить макрос "
 
 #. This heads the 'Load Macro' dialog box
-#: edit/editcmd.c:672
+#: gtkedit/editcmd.c:755
 msgid " Load macro "
 msgstr " Загрузить макрос "
 
-#: edit/editcmd.c:686 edit/editcmd.c:688
+#: gtkedit/editcmd.c:769 gtkedit/editcmd.c:771
 msgid " Confirm save file? : "
 msgstr " Подтверждаете запись файла?: "
 
 #. Buttons to 'Confirm save file' query
-#: edit/editcmd.c:691
+#: gtkedit/editcmd.c:774
 msgid " Save file "
 msgstr " Сохранить файл "
 
-#: edit/editcmd.c:691 edit/editwidget.c:993 src/view.c:1982
+#: gnome/view.c:1993 gtkedit/editcmd.c:774 gtkedit/editwidget.c:1130
+#: src/view.c:1993
 msgid "Save"
 msgstr "Запись"
 
-#: edit/editcmd.c:718 edit/editcmd.c:730
+#: gtkedit/editcmd.c:801 gtkedit/editcmd.c:831
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -175,187 +180,167 @@ msgstr ""
 " Текущий текст был модифицирован и не сохранен. \n"
 " Продолжение операции приведет к потере изменений. "
 
-#: edit/editcmd.c:718 edit/editcmd.c:730 edit/editcmd.c:831
+#: gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978
 msgid "Continue"
 msgstr "Продолжить"
 
 #. Heads the 'Load' file dialog box
-#: edit/editcmd.c:733 edit/editcmd.c:750
+#: gtkedit/editcmd.c:820 gtkedit/editcmd.c:834
 msgid " Load "
 msgstr " Загрузить "
 
-#: edit/editcmd.c:750
+#: gtkedit/editcmd.c:820
 msgid " Error trying to open file for reading "
 msgstr " Ошибка при открытии файла для чтения "
 
-#: edit/editcmd.c:831 edit/editcmd.c:914
+#: gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блок слишком велик, Вам может не удастся откатить эту операцию "
 
-#: edit/editcmd.c:914
+#: gtkedit/editcmd.c:1075
 msgid " Continue "
 msgstr " Продолжить "
 
-#: edit/editcmd.c:914
+#: gtkedit/editcmd.c:1075
 msgid " Cancel "
 msgstr " Прервать "
 
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: edit/editcmd.c:966 edit/editcmd.c:1315
+#: gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1563
 msgid " Replace with: "
 msgstr " Заменить на: "
 
 #. Heads the 'Replace' dialog box
-#: edit/editcmd.c:970 edit/editcmd.c:1047 edit/editcmd.c:1297
-#: edit/editcmd.c:1313 edit/editcmd.c:1845 edit/editcmd.c:1876
-#: edit/editcmd.c:1878
+#: gtkedit/editcmd.c:1140 gtkedit/editcmd.c:1217 gtkedit/editcmd.c:1467
+#: gtkedit/editcmd.c:1561 gtkedit/editcmd.c:2094 gtkedit/editcmd.c:2125
+#: gtkedit/editcmd.c:2127
 msgid " Replace "
 msgstr " Заменить "
 
 #. Heads the 'Search' dialog box
-#: edit/editcmd.c:1115 edit/editcmd.c:1291 edit/editcmd.c:1947 src/view.c:1469
-#: src/view.c:1559 src/view.c:1681 src/view.c:1877 src/view.c:1909
+#: gnome/view.c:1475 gnome/view.c:1565 gnome/view.c:1687 gnome/view.c:1886
+#: gnome/view.c:1918 gtkedit/editcmd.c:1285 gtkedit/editcmd.c:1461
+#: gtkedit/editcmd.c:2196 src/view.c:1475 src/view.c:1565 src/view.c:1687
+#: src/view.c:1886 src/view.c:1918
 msgid " Search "
 msgstr " Поиск "
 
 #. An input line comes after the ':'
-#: edit/editcmd.c:1163
+#: gtkedit/editcmd.c:1335
 msgid " Enter search text : "
 msgstr " Введите текст для поиска: "
 
-#: edit/editcmd.c:1170
+#: gtkedit/editcmd.c:1342
 msgid " Enter replace text : "
 msgstr " Введите текст для замены: "
 
-#: edit/editcmd.c:1174
+#: gtkedit/editcmd.c:1346
 msgid " Enter argument order : "
 msgstr " Введите порядок аргументов: "
 
 #. Tool hint
-#: edit/editcmd.c:1178 edit/editcmd.c:1179
+#: gtkedit/editcmd.c:1350 gtkedit/editcmd.c:1351
 msgid "Enter the order of replacement of your scanf format specifiers"
 msgstr "Введите порядок замены Ваших спецификаторов формата scanf"
 
 #. The following are check boxes
-#: edit/editcmd.c:1184
+#: gtkedit/editcmd.c:1356
 msgid " Whole words only "
 msgstr " Только полные слова "
 
-#: edit/editcmd.c:1186
+#: gtkedit/editcmd.c:1358
 msgid " Case sensitive "
 msgstr " Учитывать регистр "
 
-#: edit/editcmd.c:1189
+#: gtkedit/editcmd.c:1361
 msgid " Regular expression "
 msgstr " Регулярные выражения "
 
-#: edit/editcmd.c:1190 edit/editcmd.c:1191
+#: gtkedit/editcmd.c:1362 gtkedit/editcmd.c:1363
 msgid "See the regex man page for how to compose a regular expression"
 msgstr ""
 "Правила составления регулярных выражений описаны на страничке man regexp"
 
-#: edit/editcmd.c:1197
+#: gtkedit/editcmd.c:1369
 msgid " Backwards "
 msgstr " Назад "
 
 #. Tool hint
-#: edit/editcmd.c:1199 edit/editcmd.c:1200
+#: gtkedit/editcmd.c:1371 gtkedit/editcmd.c:1372
 msgid "Warning: Searching backward can be slow"
 msgstr "Предупреждение: обратный поиск может быть медленным"
 
-#: edit/editcmd.c:1213
+#: gtkedit/editcmd.c:1385
 msgid " Prompt on replace "
 msgstr " Подтверждение на замену "
 
 #. Tool hint
-#: edit/editcmd.c:1215
+#: gtkedit/editcmd.c:1387
 msgid "Ask before making each replacement"
 msgstr "В каждом случае запрашивать подтверждение на замену"
 
-#: edit/editcmd.c:1217
+#: gtkedit/editcmd.c:1389
 msgid " Replace all "
 msgstr " Заменить все "
 
-#: edit/editcmd.c:1220
+#: gtkedit/editcmd.c:1392
 msgid " Scanf expression "
 msgstr " выражения scanf "
 
 #. Tool hint
-#: edit/editcmd.c:1222
+#: gtkedit/editcmd.c:1394
 msgid "Allows entering of a C format string, see the scanf man page"
 msgstr "Позволяет задавать строку в формате scanf(3)"
 
 #. Tool hint
-#: edit/editcmd.c:1227
+#: gtkedit/editcmd.c:1399
 msgid "Begin search, Enter"
 msgstr "Начать поиск, Enter"
 
 #. Tool hint
-#: edit/editcmd.c:1230
+#: gtkedit/editcmd.c:1402
 msgid "Abort this dialog, Esc"
 msgstr "Прервать этот диалог, Esc"
 
 #. Buttons for the confirm replace dialog box.
-#: edit/editcmd.c:1317
+#: gtkedit/editcmd.c:1565
 msgid "Replace"
 msgstr "Замена"
 
-#: edit/editcmd.c:1317
+#: gtkedit/editcmd.c:1565
 msgid "Skip"
 msgstr "Пропустить"
 
-#: edit/editcmd.c:1317
+#: gtkedit/editcmd.c:1565
 msgid "Replace all"
 msgstr "Заменить все"
 
-#: edit/editcmd.c:1683
+#: gtkedit/editcmd.c:1932
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Неверное регулярное выражение или в scanf-формате много преобразований"
 
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1847
+#: gtkedit/editcmd.c:2096
 msgid " Error in replacement format string. "
 msgstr " Ошибка в формате строки замены "
 
-#: edit/editcmd.c:1875
+#: gtkedit/editcmd.c:2124
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Осуществлено подстановок: %ld "
 
-#: edit/editcmd.c:1878 edit/editcmd.c:1947
+#: gtkedit/editcmd.c:2127 gtkedit/editcmd.c:2196
 msgid " Search string not found. "
 msgstr " Искомая строка не найдена. "
 
 #. Confirm 'Quit' dialog box
-#: edit/editcmd.c:1965 edit/editcmd.c:1968
+#: gtkedit/editcmd.c:2220 gtkedit/editcmd.c:2235 gtkedit/editcmd.c:2238
 msgid " Quit "
 msgstr " Выход "
 
-#: edit/editcmd.c:1965
-msgid " File was modified, Save with exit? "
-msgstr " Файл был изменен, сохранить при выходе? "
-
-#: edit/editcmd.c:1965
-msgid "Cancel quit"
-msgstr "Прервать выход"
-
-#: edit/editcmd.c:1965 gnome/gcmd.c:94 gnome/gdesktop.c:1073 src/cmd.c:241
-#: src/file.c:2315 src/file.c:2641 src/file.c:2831 src/hotlist.c:1027
-#: src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723
-#: src/tree.c:1195 src/view.c:410
-msgid "&Yes"
-msgstr "&Да"
-
-#: edit/editcmd.c:1965 gnome/gcmd.c:94 gnome/gdesktop.c:1073 src/cmd.c:241
-#: src/file.c:2315 src/file.c:2640 src/file.c:2831 src/hotlist.c:1027
-#: src/main.c:838 src/screen.c:1983 src/subshell.c:697 src/subshell.c:723
-#: src/tree.c:1195 src/view.c:410
-msgid "&No"
-msgstr "&Нет"
-
-#: edit/editcmd.c:1969
+#: gtkedit/editcmd.c:2221 gtkedit/editcmd.c:2239
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -363,1047 +348,1131 @@ msgstr ""
 " Текущий текст был модифицирован и не сохранен. \n"
 " Сохранить при выходе? "
 
-#: edit/editcmd.c:1969
+#: gtkedit/editcmd.c:2235
+msgid " File was modified, Save with exit? "
+msgstr " Файл был изменен, сохранить при выходе? "
+
+#: gtkedit/editcmd.c:2235
+msgid "Cancel quit"
+msgstr "Прервать выход"
+
+#: gnome/cmd.c:248 gnome/file.c:2313 gnome/file.c:2638 gnome/file.c:2828
+#: gnome/gcmd.c:94 gnome/gdesktop.c:629 gnome/gdesktop.c:1211
+#: gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2036
+#: gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197
+#: gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2313
+#: src/file.c:2638 src/file.c:2828 src/hotlist.c:1029 src/main.c:806
+#: src/screen.c:2036 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197
+#: src/view.c:411
+msgid "&Yes"
+msgstr "&Да"
+
+#: gnome/cmd.c:248 gnome/file.c:2313 gnome/file.c:2637 gnome/file.c:2828
+#: gnome/gcmd.c:94 gnome/gdesktop.c:629 gnome/gdesktop.c:1211
+#: gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2036
+#: gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197
+#: gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2313
+#: src/file.c:2637 src/file.c:2828 src/hotlist.c:1029 src/main.c:806
+#: src/screen.c:2036 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197
+#: src/view.c:411
+msgid "&No"
+msgstr "&Нет"
+
+#: gtkedit/editcmd.c:2239
 msgid " &Cancel quit "
 msgstr "&Прервать выход"
 
-#: edit/editcmd.c:1969
+#: gtkedit/editcmd.c:2239
 msgid " &Yes "
 msgstr " &Да "
 
-#: edit/editcmd.c:1969
+#: gtkedit/editcmd.c:2239
 msgid " &No "
 msgstr " &Нет "
 
-#: edit/editcmd.c:2138 edit/editcmd.c:2189
+#: gtkedit/editcmd.c:2434 gtkedit/editcmd.c:2515
 msgid " Copy to clipboard "
 msgstr " Скопировать в буфер "
 
-#: edit/editcmd.c:2138 edit/editcmd.c:2153 edit/editcmd.c:2189
-#: edit/editcmd.c:2202
+#: gtkedit/editcmd.c:2434 gtkedit/editcmd.c:2458 gtkedit/editcmd.c:2515
+#: gtkedit/editcmd.c:2528
 msgid " Unable to save to file. "
 msgstr " Невозможно сохранить файл. "
 
-#: edit/editcmd.c:2153 edit/editcmd.c:2202
+#: gtkedit/editcmd.c:2458 gtkedit/editcmd.c:2528
 msgid " Cut to clipboard "
 msgstr " Вырезать в буфер "
 
-#: edit/editcmd.c:2224 edit/editcmd.c:2226 src/view.c:1850
+#: gnome/view.c:1858 gtkedit/editcmd.c:2550 gtkedit/editcmd.c:2554
+#: gtkedit/editcmd.c:2559 src/view.c:1858
 msgid " Goto line "
 msgstr " Перейти к строке "
 
-#: edit/editcmd.c:2224 edit/editcmd.c:2226
+#: gtkedit/editcmd.c:2550 gtkedit/editcmd.c:2554 gtkedit/editcmd.c:2559
 msgid " Enter line: "
 msgstr " Введите номер строки: "
 
-#: edit/editcmd.c:2246 edit/editcmd.c:2263
+#: gtkedit/editcmd.c:2580 gtkedit/editcmd.c:2597
 msgid " Save Block "
 msgstr " Сохранить блок "
 
-#: edit/editcmd.c:2297
+#: gtkedit/editcmd.c:2631
 msgid " Insert File "
 msgstr " Вставить файл "
 
-#: edit/editcmd.c:2312
+#: gtkedit/editcmd.c:2646
 msgid " Insert file "
 msgstr " Вставить файл "
 
-#: edit/editcmd.c:2312
+#: gtkedit/editcmd.c:2646
 msgid " Error trying to insert file. "
 msgstr " Ошибка при вставке файла. "
 
 #. Not essential to translate
-#: edit/editcmd.c:2332
+#: gtkedit/editcmd.c:2666
 msgid " Sort block "
 msgstr " Сортировать блок "
 
 #. Not essential to translate
-#: edit/editcmd.c:2332 edit/editcmd.c:2386
+#: gtkedit/editcmd.c:2666 gtkedit/editcmd.c:2720
 msgid " You must first highlight a block of text. "
 msgstr " Вы должны сначала выделить блок текста. "
 
-#: edit/editcmd.c:2339
+#: gtkedit/editcmd.c:2673
 msgid " Run Sort "
 msgstr " Выполнить сортировку "
 
 #. Not essential to translate
-#: edit/editcmd.c:2341
+#: gtkedit/editcmd.c:2675
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами "
 
-#: edit/editcmd.c:2352 edit/editcmd.c:2358
+#: gtkedit/editcmd.c:2686 gtkedit/editcmd.c:2692
 msgid " Sort "
 msgstr " Сортировка "
 
 #. Not essential to translate
-#: edit/editcmd.c:2354
+#: gtkedit/editcmd.c:2688
 msgid " Error trying to execute sort command "
 msgstr " Ошибка при выполнении команды sort "
 
 #. Not essential to translate
-#: edit/editcmd.c:2360
+#: gtkedit/editcmd.c:2694
 msgid " Sort returned non-zero: "
 msgstr " Сортировка вернула ненулевой код: "
 
 #. Not essential to translate
-#: edit/editcmd.c:2384 edit/editcmd.c:2414
+#: gtkedit/editcmd.c:2718 gtkedit/editcmd.c:2748
 msgid " Process block "
 msgstr " Обработать блок "
 
 #. Not essential to translate
-#: edit/editcmd.c:2416
+#: gtkedit/editcmd.c:2750
 msgid " Error trying to stat file "
 msgstr ""
 
-#: edit/editcmd.c:2486
+#: gtkedit/editcmd.c:2820
 msgid " Mail "
 msgstr " Почта "
 
-#: edit/editmenu.c:56
+#: gtkedit/editmenu.c:56
 msgid " Word wrap "
 msgstr ""
 
 #. Not essential to translate
-#: edit/editmenu.c:58
+#: gtkedit/editmenu.c:58
 msgid " Enter line length, 0 for off: "
 msgstr ""
 
-#: edit/editmenu.c:117 edit/editmenu.c:133
+#: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
 msgid "&Open/load...     C-o"
 msgstr "&Открыть файл...      C-o"
 
-#: edit/editmenu.c:118
+#: gtkedit/editmenu.c:119
 msgid "&New              C-n"
 msgstr "&Новый файл           C-n"
 
-#: edit/editmenu.c:120 edit/editmenu.c:136
+#: gtkedit/editmenu.c:121 gtkedit/editmenu.c:137
 msgid "&Save              F2"
 msgstr "&Сохранить             F2"
 
-#: edit/editmenu.c:121 edit/editmenu.c:137
+#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
 msgid "save &As...       F12"
 msgstr "Сохранить &как...     F12"
 
-#: edit/editmenu.c:123 edit/editmenu.c:139
+#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
 msgid "&Insert file...   F15"
 msgstr "&Вставить файл...     F15"
 
-#: edit/editmenu.c:124
+#: gtkedit/editmenu.c:125
 msgid "copy to &File...  C-f"
 msgstr "&Копировать в файл... C-f"
 
-#: edit/editmenu.c:126 edit/editmenu.c:142
+#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
 msgid "a&Bout...            "
 msgstr "Об &авторах..."
 
-#: edit/editmenu.c:128 edit/editmenu.c:144
+#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
 msgid "&Quit             F10"
 msgstr "Вы&ход                F10"
 
-#: edit/editmenu.c:134
+#: gtkedit/editmenu.c:135
 msgid "&New            C-x k"
 msgstr "&Новый файл         C-x k"
 
-#: edit/editmenu.c:140
+#: gtkedit/editmenu.c:141
 msgid "copy to &File...     "
 msgstr "&Копировать в файл...     "
 
-#: edit/editmenu.c:149 edit/editmenu.c:165
+#: gtkedit/editmenu.c:150 gtkedit/editmenu.c:167
 msgid "&Toggle Mark       F3"
 msgstr "&Выделение блока        F3"
 
-#: edit/editmenu.c:151 edit/editmenu.c:167
+#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
+msgid "&Mark Columns    S-F3"
+msgstr ""
+
+#: gtkedit/editmenu.c:153 gtkedit/editmenu.c:170
 msgid "toggle &Ins/overw Ins"
 msgstr "&Режим вставки/замены  Ins"
 
-#: edit/editmenu.c:153 edit/editmenu.c:169
+#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
 msgid "&Copy              F5"
 msgstr "&Копировать блок        F5"
 
-#: edit/editmenu.c:154 edit/editmenu.c:170
+#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Move              F6"
 msgstr "&Переместить блок       F6"
 
-#: edit/editmenu.c:155 edit/editmenu.c:171
+#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Delete            F8"
 msgstr "&Удалить блок           F8"
 
-#: edit/editmenu.c:157 edit/editmenu.c:173
+#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
 msgid "&Undo             C-u"
 msgstr "&Откат операции        C-u"
 
-#: edit/editmenu.c:159 edit/editmenu.c:175
+#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
 msgid "&Beginning     C-PgUp"
 msgstr "&Начало файла       C-PgUp"
 
-#: edit/editmenu.c:160 edit/editmenu.c:176
+#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&End           C-PgDn"
 msgstr "Конец &файла        C-PgDn"
 
-#: edit/editmenu.c:181 edit/editmenu.c:188
+#: gtkedit/editmenu.c:184 gtkedit/editmenu.c:191
 msgid "&Search...         F7"
 msgstr "&Поиск...          F7"
 
-#: edit/editmenu.c:182 edit/editmenu.c:189
+#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
 msgid "search &Again     F17"
 msgstr "&Искать дальше    F17"
 
-#: edit/editmenu.c:183 edit/editmenu.c:190
+#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
 msgid "&Replace...        F4"
 msgstr "&Замена...         F4"
 
-#: edit/editmenu.c:195 edit/editmenu.c:217
+#: gtkedit/editmenu.c:198 gtkedit/editmenu.c:220
 msgid "&Goto line...            M-l"
 msgstr "&Перейти к строке           M-l"
 
-#: edit/editmenu.c:197 edit/editmenu.c:219
+#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
 msgid "insert &Literal...       C-q"
 msgstr "Вставить &литерал...        C-q"
 
-#: edit/editmenu.c:199 edit/editmenu.c:221
+#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:224
 msgid "&Refresh screen          C-l"
 msgstr "Пере&рисовать экран         C-l"
 
-#: edit/editmenu.c:201 edit/editmenu.c:223
+#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:226
 msgid "&Start record macro      C-r"
 msgstr "&Начать запись макроса      C-r"
 
-#: edit/editmenu.c:202 edit/editmenu.c:224
+#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
 msgid "&Finish record macro...  C-r"
 msgstr "&Окончить запись макроса... C-r"
 
-#: edit/editmenu.c:203
+#: gtkedit/editmenu.c:206
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Выполнить макрос...   C-a, KEY"
 
-#: edit/editmenu.c:204 edit/editmenu.c:226
+#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
 msgid "delete macr&O...            "
 msgstr "&Удалить макрос"
 
-#: edit/editmenu.c:206 edit/editmenu.c:228
+#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
 msgid "insert &Date/time           "
 msgstr "Вставить &Дату/время"
 
-#: edit/editmenu.c:208 edit/editmenu.c:230
+#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:233
 msgid "format p&Aragraph        M-p"
 msgstr "Форматировать &абзац        M-p"
 
-#: edit/editmenu.c:209
+#: gtkedit/editmenu.c:212
 msgid "'ispell' s&Pell check    C-p"
 msgstr "&Контроль орфографии        C-p"
 
-#: edit/editmenu.c:210 edit/editmenu.c:232
+#: gtkedit/editmenu.c:213 gtkedit/editmenu.c:235
 msgid "sor&T...                 M-t"
 msgstr "&Сортировка                 M-t"
 
-#: edit/editmenu.c:211 edit/editmenu.c:233
+#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
 msgid "'indent' &C Formatter    F19"
 msgstr "&Форматировать С-программу  F19"
 
-#: edit/editmenu.c:212
+#: gtkedit/editmenu.c:215
 msgid "&Mail...                    "
 msgstr "&Электронная почта...          "
 
-#: edit/editmenu.c:225
+#: gtkedit/editmenu.c:228
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Выполнить макро...  C-x e, KEY"
 
-#: edit/editmenu.c:231
+#: gtkedit/editmenu.c:234
 msgid "'ispell' s&Pell check    M-$"
 msgstr "&Контроль орфографии        M-$"
 
-#: edit/editmenu.c:240 edit/editmenu.c:249
+#: gtkedit/editmenu.c:243 gtkedit/editmenu.c:252
 msgid "&General...  "
 msgstr "&Разное..."
 
-#: edit/editmenu.c:241 edit/editmenu.c:250
+#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
 msgid "&Save mode..."
 msgstr "Режим &сохранения..."
 
-#: edit/editmenu.c:243 edit/editmenu.c:252 src/main.c:1308
+#: gnome/main.c:1319 gtkedit/editmenu.c:246 gtkedit/editmenu.c:255
+#: src/main.c:1319
 msgid "&Layout..."
 msgstr "&Внешний вид"
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174
-#: src/chown.c:131 src/main.c:1339
+#: gnome/chmod.c:174 gnome/chown.c:131 gtkedit/editmenu.c:265
+#: gtkedit/editmenu.c:274 gtkedit/editmenu.c:391 src/chmod.c:174
+#: src/chown.c:131
 msgid " File "
 msgstr " Файл "
 
-#: edit/editmenu.c:263 edit/editmenu.c:272 edit/editmenu.c:404
+#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
 msgid " Edit "
 msgstr " Редактирование "
 
-#: edit/editmenu.c:264 edit/editmenu.c:273
+#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276
 msgid " Sear/Repl "
 msgstr " Поиск "
 
-#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1340
+#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277 gtkedit/editmenu.c:442
 msgid " Command "
 msgstr " Команда "
 
-#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1341
+#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
 msgid " Options "
 msgstr " Настройка "
 
-#: edit/editmenu.c:389
+#: gtkedit/editmenu.c:392
 msgid "Open...\tC-o"
 msgstr "Открыть...\tC-o"
 
-#: edit/editmenu.c:390
+#: gtkedit/editmenu.c:393
 msgid "New\tC-n"
 msgstr "Новый\tC-n"
 
-#: edit/editmenu.c:392
+#: gtkedit/editmenu.c:395
 msgid "Save\tF2"
 msgstr "Сохранить\tF2"
 
-#: edit/editmenu.c:393
+#: gtkedit/editmenu.c:396
 msgid "Save as...\tF12"
 msgstr "Сохранить как...\tF12"
 
-#: edit/editmenu.c:395
+#: gtkedit/editmenu.c:398
 msgid "Insert file...\tF15"
 msgstr "Вставить файл...\tF15"
 
-#: edit/editmenu.c:396
+#: gtkedit/editmenu.c:399
 msgid "Copy to file...\tC-f"
 msgstr "Копировать в файл...\tC-f"
 
 #. Tool hint
-#: edit/editmenu.c:399
+#: gtkedit/editmenu.c:402
 msgid "Disk operations"
 msgstr "Дисковые операции"
 
-#: edit/editmenu.c:405
+#: gtkedit/editmenu.c:408
 msgid "Toggle mark\tF3"
 msgstr "Выделение блока\tF3"
 
-#: edit/editmenu.c:407
+#: gtkedit/editmenu.c:409
+#, fuzzy
+msgid "Toggle mark columns\tC-b"
+msgstr "Выделение блока\tF3"
+
+#: gtkedit/editmenu.c:411
 msgid "Toggle insert/overwrite\tIns"
 msgstr ""
 
-#: edit/editmenu.c:409
+#: gtkedit/editmenu.c:413
 msgid "Copy block to cursor\tF5"
 msgstr ""
 
-#: edit/editmenu.c:410
+#: gtkedit/editmenu.c:414
 msgid "Move block to cursor\tF6"
 msgstr ""
 
-#: edit/editmenu.c:411
+#: gtkedit/editmenu.c:415
 msgid "Delete block\tF8/C-Del"
 msgstr ""
 
-#: edit/editmenu.c:413
+#: gtkedit/editmenu.c:417
 msgid "Copy block to clipbrd\tC-Ins"
 msgstr ""
 
-#: edit/editmenu.c:414
+#: gtkedit/editmenu.c:418
 msgid "Cut block to clipbrd\tS-Del"
 msgstr ""
 
-#: edit/editmenu.c:415
+#: gtkedit/editmenu.c:419
 msgid "Paste block from clipbrd\tS-Ins"
 msgstr ""
 
-#: edit/editmenu.c:416
+#: gtkedit/editmenu.c:420
 msgid "Selection history\tM-Ins"
 msgstr ""
 
-#: edit/editmenu.c:418
+#: gtkedit/editmenu.c:422
 msgid "Undo\tC-BackSpace"
 msgstr ""
 
 #. Tool hint
-#: edit/editmenu.c:421
+#: gtkedit/editmenu.c:425
 msgid "Manipulating blocks of text"
 msgstr ""
 
-#: edit/editmenu.c:426
+#: gtkedit/editmenu.c:430
 msgid " Srch/Replce "
 msgstr ""
 
-#: edit/editmenu.c:427
+#: gtkedit/editmenu.c:431
 msgid "Search...\tF7"
 msgstr ""
 
-#: edit/editmenu.c:428
+#: gtkedit/editmenu.c:432
 msgid "Search again\tF17"
 msgstr ""
 
-#: edit/editmenu.c:429
+#: gtkedit/editmenu.c:433
 msgid "Replace...\tF4"
 msgstr ""
 
-#: edit/editmenu.c:430
+#: gtkedit/editmenu.c:434
 msgid "Replace again\tF14"
 msgstr ""
 
 #. Tool hint
-#: edit/editmenu.c:433
+#: gtkedit/editmenu.c:437
 msgid "Search for and replace text"
 msgstr ""
 
-#: edit/editmenu.c:439
+#: gtkedit/editmenu.c:443
 msgid "Goto line...\tM-l"
 msgstr ""
 
-#: edit/editmenu.c:441
+#: gtkedit/editmenu.c:445
 msgid "Start record macro\tC-r"
 msgstr ""
 
-#: edit/editmenu.c:442
+#: gtkedit/editmenu.c:446
 msgid "Finish record macro...\tC-r"
 msgstr ""
 
-#: edit/editmenu.c:443
+#: gtkedit/editmenu.c:447
 msgid "Execute macro...\tC-a, KEY"
 msgstr ""
 
-#: edit/editmenu.c:444
+#: gtkedit/editmenu.c:448
 msgid "Delete macro...\t"
 msgstr ""
 
-#: edit/editmenu.c:446
+#: gtkedit/editmenu.c:450
 msgid "Insert date/time\tC-d"
 msgstr ""
 
-#: edit/editmenu.c:447
+#: gtkedit/editmenu.c:451
 msgid "Format paragraph\tM-p"
 msgstr ""
 
+#: gtkedit/editmenu.c:453
+msgid "Refresh display\tC-l"
+msgstr ""
+
 #. Tool hint
-#: edit/editmenu.c:450
+#: gtkedit/editmenu.c:456
 msgid "Macros and internal commands"
 msgstr ""
 
-#: edit/editoptions.c:37
+#: gtkedit/editoptions.c:37
 msgid "None"
 msgstr ""
 
-#: edit/editoptions.c:37
+#: gtkedit/editoptions.c:37
 msgid "Dynamic paragraphing"
 msgstr ""
 
-#: edit/editoptions.c:37
+#: gtkedit/editoptions.c:37
 msgid "Type writer wrap"
 msgstr ""
 
 #. 13
-#: edit/editoptions.c:100
+#: gtkedit/editoptions.c:100
 msgid "Wrap mode"
 msgstr ""
 
 #. 15
-#: edit/editoptions.c:106
+#: gtkedit/editoptions.c:106
 msgid "Key emulation"
 msgstr ""
 
 #. Not essential to translate
-#: edit/editwidget.c:91
+#: gtkedit/editwidget.c:325
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:992 gnome/glayout.c:358 src/help.c:812 src/main.c:1670
-#: src/screen.c:2194 src/screen.c:2228 src/tree.c:1451 src/view.c:1977
+#: gnome/glayout.c:350 gnome/help.c:810 gnome/main.c:1695 gnome/screen.c:2252
+#: gnome/screen.c:2286 gnome/tree.c:1453 gnome/view.c:1988
+#: gtkedit/editwidget.c:1129 src/help.c:810 src/main.c:1695 src/screen.c:2252
+#: src/screen.c:2286 src/tree.c:1453 src/view.c:1988
 msgid "Help"
 msgstr "Помощь"
 
-#: edit/editwidget.c:994
+#: gtkedit/editwidget.c:1131
 msgid "Mark"
 msgstr "Блок"
 
-#: edit/editwidget.c:995
+#: gtkedit/editwidget.c:1132
 msgid "Replac"
 msgstr "Замена"
 
-#: edit/editwidget.c:996 gnome/gdesktop.c:337 gnome/glayout.c:279
-#: src/screen.c:2198 src/screen.c:2232 src/tree.c:1457
+#: gnome/gdesktop.c:339 gnome/screen.c:2256 gnome/screen.c:2290
+#: gnome/tree.c:1459 gtkedit/editwidget.c:1133 src/screen.c:2256
+#: src/screen.c:2290 src/tree.c:1459
 msgid "Copy"
 msgstr "Копия"
 
-#: edit/editwidget.c:997 gnome/gdesktop.c:342
+#: gnome/gdesktop.c:344 gtkedit/editwidget.c:1134
 msgid "Move"
 msgstr ""
 
-#: edit/editwidget.c:998 gnome/gview.c:291 gnome/gview.c:315 src/view.c:1990
+#: gnome/gview.c:291 gnome/gview.c:315 gnome/view.c:2001
+#: gtkedit/editwidget.c:1135 src/view.c:2001
 msgid "Search"
 msgstr "Поиск"
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:970 gnome/glayout.c:282
-#: src/screen.c:2201 src/screen.c:2235
+#: gnome/gdesktop.c:628 gnome/gscreen.c:553 gnome/screen.c:2259
+#: gnome/screen.c:2293 gtkedit/editwidget.c:1136 src/screen.c:2259
+#: src/screen.c:2293
 msgid "Delete"
 msgstr ""
 
-#: edit/editwidget.c:1001 src/main.c:1672
+#: gnome/main.c:1697 gtkedit/editwidget.c:1138 src/main.c:1697
 msgid "PullDn"
 msgstr "МенюMC"
 
-#: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1673
-#: src/view.c:1979 src/view.c:1999
+#: gnome/gview.c:286 gnome/help.c:822 gnome/main.c:1698 gnome/view.c:1990
+#: gnome/view.c:2010 gtkedit/editwidget.c:1139 src/help.c:822 src/main.c:1698
+#: src/view.c:1990 src/view.c:2010
 msgid "Quit"
 msgstr "Выход"
 
-#: src/fixhlp.c:173
-msgid "Usage: fixhlp <width> <tocname>\n"
+#: gtkedit/syntax.c:2849 gtkedit/syntax.c:2856
+#, fuzzy
+msgid " Load syntax file "
+msgstr " Не могу открыть файл "
+
+#: gtkedit/syntax.c:2849
+#, fuzzy
+msgid " File access error "
+msgstr " Файл существует "
+
+#: gtkedit/syntax.c:2855
+#, c-format
+msgid " Syntax error in file %s on line %d "
 msgstr ""
 
-#: src/fixhlp.c:178
-msgid "fixhlp: Cannot open toc for writing"
-msgstr ""
-
-#: src/fixhlp.c:181
-msgid ""
-"[Contents]\n"
-" Topics:\n"
-"\n"
-msgstr ""
-
-#: src/achown.c:72 src/boxes.c:139 src/boxes.c:274 src/boxes.c:371
-#: src/boxes.c:458 src/boxes.c:637 src/boxes.c:758 src/boxes.c:811
-#: src/chmod.c:115 src/chown.c:81 src/cmd.c:833 src/file.c:1948 src/find.c:158
-#: src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365
-#: src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410
-#: src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: gnome/achown.c:72 gnome/boxes.c:140 gnome/boxes.c:279 gnome/boxes.c:376
+#: gnome/boxes.c:463 gnome/boxes.c:641 gnome/boxes.c:762 gnome/boxes.c:815
+#: gnome/chmod.c:115 gnome/chown.c:81 gnome/cmd.c:852 gnome/file.c:1945
+#: gnome/find.c:158 gnome/hotlist.c:140 gnome/hotlist.c:812
+#: gnome/hotlist.c:905 gnome/layout.c:372 gnome/learn.c:59 gnome/option.c:143
+#: gnome/panelize.c:89 gnome/view.c:411 gnome/wtools.c:114 gnome/wtools.c:408
+#: gnome/wtools.c:581 gnome/wtools.c:661 src/achown.c:72 src/boxes.c:140
+#: src/boxes.c:279 src/boxes.c:376 src/boxes.c:463 src/boxes.c:641
+#: src/boxes.c:762 src/boxes.c:815 src/chmod.c:115 src/chown.c:81
+#: src/cmd.c:852 src/file.c:1945 src/find.c:158 src/hotlist.c:140
+#: src/hotlist.c:812 src/hotlist.c:905 src/layout.c:372 src/learn.c:59
+#: src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114
+#: src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr "&Прервать"
 
-#: src/achown.c:73 src/chmod.c:116 src/chown.c:82
+#: gnome/achown.c:73 gnome/chmod.c:116 gnome/chown.c:82 src/achown.c:73
+#: src/chmod.c:116 src/chown.c:82
 msgid "&Set"
 msgstr ""
 
-#: src/achown.c:74
+#: gnome/achown.c:74 src/achown.c:74
 msgid "S&kip"
 msgstr ""
 
-#: src/achown.c:75 src/chmod.c:120 src/chown.c:85
+#: gnome/achown.c:75 gnome/chmod.c:120 gnome/chown.c:85 src/achown.c:75
+#: src/chmod.c:120 src/chown.c:85
 msgid "Set &all"
 msgstr ""
 
-#: src/achown.c:350 src/achown.c:357
+#: gnome/achown.c:350 gnome/achown.c:357 src/achown.c:350 src/achown.c:357
 msgid "owner"
 msgstr ""
 
-#: src/achown.c:352 src/achown.c:359
+#: gnome/achown.c:352 gnome/achown.c:359 src/achown.c:352 src/achown.c:359
 msgid "group"
 msgstr ""
 
-#: src/achown.c:354
+#: gnome/achown.c:354 src/achown.c:354
 msgid "other"
 msgstr ""
 
-#: src/achown.c:362
+#: gnome/achown.c:362 src/achown.c:362
 msgid "On"
 msgstr ""
 
-#: src/achown.c:364
+#: gnome/achown.c:364 src/achown.c:364
 msgid "Flag"
 msgstr ""
 
-#: gnome/gview.c:316 src/achown.c:366
+#: gnome/achown.c:366 gnome/gview.c:316 src/achown.c:366
 msgid "Mode"
 msgstr ""
 
-#: src/achown.c:371
+#: gnome/achown.c:371 src/achown.c:371
 #, c-format
 msgid "%6d of %d"
 msgstr ""
 
-#: src/achown.c:379
+#: gnome/achown.c:379 src/achown.c:379
 msgid " Chown advanced command "
 msgstr ""
 
-#: src/achown.c:613 src/achown.c:629 src/achown.c:686 src/chmod.c:297
-#: src/chmod.c:380
+#: gnome/achown.c:613 gnome/achown.c:629 gnome/achown.c:686 gnome/chmod.c:297
+#: gnome/chmod.c:380 src/achown.c:613 src/achown.c:629 src/achown.c:686
+#: src/chmod.c:297 src/chmod.c:380
 #, c-format
 msgid ""
 " Couldn't chmod \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/achown.c:618 src/achown.c:633 src/achown.c:690 src/chown.c:223
-#: src/chown.c:340
+#: gnome/achown.c:618 gnome/achown.c:633 gnome/achown.c:690 gnome/chown.c:223
+#: gnome/chown.c:340 src/achown.c:618 src/achown.c:633 src/achown.c:690
+#: src/chown.c:223 src/chown.c:340
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
 " %s "
 msgstr ""
 
+#: gnome/achown.c:647 gnome/achown.c:651 gnome/chmod.c:329 gnome/chmod.c:333
+#: gnome/chown.c:256 gnome/chown.c:260 gnome/panelize.c:301 gnome/user.c:625
 #: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333
 #: src/chown.c:256 src/chown.c:260 src/panelize.c:301 src/user.c:625
 msgid " Oops... "
 msgstr " Ой... "
 
-#: src/achown.c:648
+#: gnome/achown.c:648 src/achown.c:648
 msgid " I can't run the Advanced Chown command on an extfs "
 msgstr ""
 
-#: src/achown.c:652
+#: gnome/achown.c:652 src/achown.c:652
 msgid " I can't run the Advanced Chown command on a tarfs "
 msgstr ""
 
-#: src/background.c:179
+#: gnome/background.c:179 src/background.c:179
 msgid "Background process:"
 msgstr ""
 
-#: src/background.c:284 src/file.c:2553
+#: gnome/background.c:284 gnome/file.c:2551 src/background.c:284
+#: src/file.c:2551
 msgid " Background process error "
 msgstr ""
 
-#: src/background.c:289
+#: gnome/background.c:289 src/background.c:289
 msgid " Child died unexpectedly "
 msgstr ""
 
-#: src/background.c:291
+#: gnome/background.c:291 src/background.c:291
 msgid " Unknown error in child "
 msgstr ""
 
-#: src/background.c:306
+#: gnome/background.c:306 src/background.c:306
 msgid " Background protocol error "
 msgstr ""
 
-#: src/background.c:307
+#: gnome/background.c:307 src/background.c:307
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
 
-#: src/boxes.c:65
+#: gnome/boxes.c:66 src/boxes.c:66
 msgid " Listing mode "
 msgstr " Формат списка файлов "
 
-#: src/boxes.c:70
+#: gnome/boxes.c:71 src/boxes.c:71
 msgid "&Full file list"
 msgstr "&Стандартный"
 
-#: src/boxes.c:70
+#: gnome/boxes.c:72 src/boxes.c:72
 msgid "&Brief file list"
 msgstr "&Укороченный"
 
-#: src/boxes.c:70
+#: gnome/boxes.c:73 src/boxes.c:73
 msgid "&Long file list"
 msgstr "&Расширенный"
 
-#: src/boxes.c:71
+#: gnome/boxes.c:74 src/boxes.c:74
 msgid "&User defined:"
 msgstr "&Определенный пользователем"
 
-#: src/boxes.c:137
+#: gnome/boxes.c:75 src/boxes.c:75
+msgid "&Icon view"
+msgstr ""
+
+#: gnome/boxes.c:138 src/boxes.c:138
 msgid "user &Mini status"
 msgstr "Строка &мини-статуса в формате пользователя"
 
-#: gnome/gtools.c:130 src/boxes.c:138 src/boxes.c:273 src/boxes.c:373
-#: src/boxes.c:460 src/boxes.c:639 src/boxes.c:759 src/boxes.c:813
-#: src/boxes.c:924 src/file.c:1965 src/find.c:158 src/layout.c:364
-#: src/option.c:142 src/wtools.c:302 src/wtools.c:583
+#: gnome/boxes.c:139 gnome/boxes.c:278 gnome/boxes.c:378 gnome/boxes.c:465
+#: gnome/boxes.c:643 gnome/boxes.c:763 gnome/boxes.c:817 gnome/boxes.c:928
+#: gnome/file.c:1962 gnome/find.c:158 gnome/gtools.c:130 gnome/layout.c:371
+#: gnome/option.c:142 gnome/wtools.c:302 gnome/wtools.c:583 src/boxes.c:139
+#: src/boxes.c:278 src/boxes.c:378 src/boxes.c:465 src/boxes.c:643
+#: src/boxes.c:763 src/boxes.c:817 src/boxes.c:928 src/file.c:1962
+#: src/find.c:158 src/layout.c:371 src/option.c:142 src/wtools.c:302
+#: src/wtools.c:583
 msgid "&Ok"
 msgstr "&Дальше"
 
-#: src/boxes.c:186
+#: gnome/boxes.c:187 src/boxes.c:187
 msgid "Listing mode"
 msgstr "Формат списка файлов"
 
-#: src/boxes.c:275
+#: gnome/boxes.c:280 src/boxes.c:280
 msgid "&Reverse"
 msgstr "&Обратный"
 
-#: src/boxes.c:276
+#: gnome/boxes.c:281 src/boxes.c:281
 msgid "case sensi&tive"
 msgstr "Учет ре&гистра"
 
-#: src/boxes.c:277
+#: gnome/boxes.c:282 src/boxes.c:282
 msgid "Sort order"
 msgstr " Порядок сортировки "
 
-#: src/boxes.c:376
+#: gnome/boxes.c:381 src/boxes.c:381
 msgid " confirm &Exit "
 msgstr "перед &Выходом"
 
-#: src/boxes.c:378
+#: gnome/boxes.c:383 src/boxes.c:383
 msgid " confirm e&Xecute "
 msgstr "перед &Исполнением"
 
-#: src/boxes.c:380
+#: gnome/boxes.c:385 src/boxes.c:385
 msgid " confirm o&Verwrite "
 msgstr "перед &Перезаписью"
 
-#: src/boxes.c:382
+#: gnome/boxes.c:387 src/boxes.c:387
 msgid " confirm &Delete "
 msgstr "перед &Удалением"
 
-#: src/boxes.c:388
+#: gnome/boxes.c:393 src/boxes.c:393
 msgid " Confirmation "
 msgstr " Запрос подтверждения "
 
-#: src/boxes.c:455
+#: gnome/boxes.c:460 src/boxes.c:460
 msgid "Full 8 bits output"
 msgstr "Полный &8-битный вывод"
 
-#: src/boxes.c:455
+#: gnome/boxes.c:460 src/boxes.c:460
 msgid "ISO 8859-1"
 msgstr ""
 
-#: src/boxes.c:455
+#: gnome/boxes.c:460 src/boxes.c:460
 msgid "7 bits"
 msgstr "&7 бит"
 
-#: src/boxes.c:462
+#: gnome/boxes.c:467 src/boxes.c:467
 msgid "F&ull 8 bits input"
 msgstr "Полный 8-битный &ввод"
 
-#: src/boxes.c:470
+#: gnome/boxes.c:475 src/boxes.c:475
 msgid " Display bits "
 msgstr " Отображение символов "
 
-#: src/boxes.c:634
+#: gnome/boxes.c:638 src/boxes.c:638
 msgid "Always to memory"
 msgstr ""
 
-#: src/boxes.c:634
+#: gnome/boxes.c:638 src/boxes.c:638
 msgid "If size less than:"
 msgstr ""
 
-#: src/boxes.c:644
+#: gnome/boxes.c:648 src/boxes.c:648
 msgid "&Always use ftp proxy"
 msgstr ""
 
-#: src/boxes.c:646
+#: gnome/boxes.c:650 src/boxes.c:650
 msgid "sec"
 msgstr ""
 
-#: src/boxes.c:650
+#: gnome/boxes.c:654 src/boxes.c:654
 msgid "ftpfs directory cache timeout:"
 msgstr ""
 
-#: src/boxes.c:654
+#: gnome/boxes.c:658 src/boxes.c:658
 msgid "ftp anonymous password:"
 msgstr ""
 
-#: src/boxes.c:661
+#: gnome/boxes.c:665 src/boxes.c:665
 msgid "Gzipped tar archive extract:"
 msgstr ""
 
-#: src/boxes.c:667
+#: gnome/boxes.c:671 src/boxes.c:671
 msgid "Timeout for freeing VFSs:"
 msgstr ""
 
-#: src/boxes.c:673
+#: gnome/boxes.c:677 src/boxes.c:677
 msgid " Virtual File System Setting "
 msgstr ""
 
-#: src/boxes.c:771
+#: gnome/boxes.c:775 src/boxes.c:775
 msgid "Quick cd"
 msgstr " Смена рабочего каталога "
 
 #. want cd like completion
-#: src/boxes.c:776
+#: gnome/boxes.c:780 src/boxes.c:780
 msgid "cd"
 msgstr "Перейти в"
 
-#: src/boxes.c:831
+#: gnome/boxes.c:835 src/boxes.c:835
 msgid "Symbolic link filename:"
 msgstr ""
 
-#: src/boxes.c:833
+#: gnome/boxes.c:837 src/boxes.c:837
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: src/boxes.c:862
+#: gnome/boxes.c:866 src/boxes.c:866
 msgid "Running "
 msgstr "Выполняется "
 
-#: src/boxes.c:863 src/find.c:664
+#: gnome/boxes.c:867 gnome/find.c:665 src/boxes.c:867 src/find.c:665
 msgid "Stopped"
 msgstr "Остановлен"
 
-#: src/boxes.c:921
+#: gnome/boxes.c:925 src/boxes.c:925
 msgid "&Stop"
 msgstr "&Остановить"
 
-#: src/boxes.c:922
+#: gnome/boxes.c:926 src/boxes.c:926
 msgid "&Resume"
 msgstr "&Возобновить"
 
-#: src/boxes.c:923
+#: gnome/boxes.c:927 src/boxes.c:927
 msgid "&Kill"
 msgstr "&Снять"
 
-#: src/boxes.c:962
+#: gnome/boxes.c:966 src/boxes.c:966
 msgid "Background Jobs"
 msgstr " Фоновые задания "
 
-#: src/chmod.c:96
+#: gnome/chmod.c:96 src/chmod.c:96
 msgid "execute/search by others"
 msgstr ""
 
-#: src/chmod.c:97
+#: gnome/chmod.c:97 src/chmod.c:97
 msgid "write by others"
 msgstr ""
 
-#: src/chmod.c:98
+#: gnome/chmod.c:98 src/chmod.c:98
 msgid "read by others"
 msgstr ""
 
-#: src/chmod.c:99
+#: gnome/chmod.c:99 src/chmod.c:99
 msgid "execute/search by group"
 msgstr ""
 
-#: src/chmod.c:100
+#: gnome/chmod.c:100 src/chmod.c:100
 msgid "write by group"
 msgstr ""
 
-#: src/chmod.c:101
+#: gnome/chmod.c:101 src/chmod.c:101
 msgid "read by group"
 msgstr ""
 
-#: src/chmod.c:102
+#: gnome/chmod.c:102 src/chmod.c:102
 msgid "execute/search by owner"
 msgstr ""
 
-#: src/chmod.c:103
+#: gnome/chmod.c:103 src/chmod.c:103
 msgid "write by owner"
 msgstr ""
 
-#: src/chmod.c:104
+#: gnome/chmod.c:104 src/chmod.c:104
 msgid "read by owner"
 msgstr ""
 
-#: src/chmod.c:105
+#: gnome/chmod.c:105 src/chmod.c:105
 msgid "sticky bit"
 msgstr ""
 
-#: src/chmod.c:106
+#: gnome/chmod.c:106 src/chmod.c:106
 msgid "set group ID on execution"
 msgstr ""
 
-#: src/chmod.c:107
+#: gnome/chmod.c:107 src/chmod.c:107
 msgid "set user ID on execution"
 msgstr ""
 
-#: src/chmod.c:117
+#: gnome/chmod.c:117 src/chmod.c:117
 msgid "C&lear marked"
 msgstr ""
 
-#: src/chmod.c:118
+#: gnome/chmod.c:118 src/chmod.c:118
 msgid "S&et marked"
 msgstr ""
 
-#: src/chmod.c:119
+#: gnome/chmod.c:119 src/chmod.c:119
 msgid "&Marked all"
 msgstr ""
 
-#: src/chmod.c:160 src/screen.c:418
+#: gnome/chmod.c:160 gnome/screen.c:422 src/chmod.c:160 src/screen.c:422
 msgid "Name"
 msgstr "Имя"
 
-#: src/chmod.c:162
+#: gnome/chmod.c:162 src/chmod.c:162
 msgid "Permissions (Octal)"
 msgstr ""
 
-#: src/chmod.c:164
+#: gnome/chmod.c:164 src/chmod.c:164
 msgid "Owner name"
 msgstr ""
 
-#: src/chmod.c:166
+#: gnome/chmod.c:166 src/chmod.c:166
 msgid "Group name"
 msgstr ""
 
-#: src/chmod.c:170
+#: gnome/chmod.c:170 src/chmod.c:170
 msgid " Chmod command "
 msgstr ""
 
-#: src/chmod.c:172 src/chown.c:121
+#: gnome/chmod.c:172 gnome/chown.c:121 src/chmod.c:172 src/chown.c:121
 msgid " Permission "
 msgstr ""
 
-#: src/chmod.c:179
+#: gnome/chmod.c:179 src/chmod.c:179
 msgid "Use SPACE to change"
 msgstr ""
 
-#: src/chmod.c:181
+#: gnome/chmod.c:181 src/chmod.c:181
 msgid "an option, ARROW KEYS"
 msgstr ""
 
-#: src/chmod.c:183
+#: gnome/chmod.c:183 src/chmod.c:183
 msgid "to move between options"
 msgstr ""
 
-#: src/chmod.c:185
+#: gnome/chmod.c:185 src/chmod.c:185
 msgid "and T or INS to mark"
 msgstr ""
 
-#: src/chmod.c:243
+#: gnome/chmod.c:243 src/chmod.c:243
 msgid "Chmod command"
 msgstr ""
 
-#: src/chmod.c:330
+#: gnome/chmod.c:330 src/chmod.c:330
 msgid " I can't run the Chmod command on an extfs "
 msgstr ""
 
-#: src/chown.c:83
+#: gnome/chown.c:83 src/chown.c:83
 msgid "Set &users"
 msgstr ""
 
-#: src/chown.c:84
+#: gnome/chown.c:84 src/chown.c:84
 msgid "Set &groups"
 msgstr ""
 
-#: src/chown.c:113
+#: gnome/chown.c:113 src/chown.c:113
 msgid " Name "
 msgstr ""
 
-#: src/chown.c:115
+#: gnome/chown.c:115 src/chown.c:115
 msgid " Owner name "
 msgstr ""
 
-#: src/chown.c:117 src/chown.c:129
+#: gnome/chown.c:117 gnome/chown.c:129 src/chown.c:117 src/chown.c:129
 msgid " Group name "
 msgstr ""
 
-#: src/chown.c:119
+#: gnome/chown.c:119 src/chown.c:119
 msgid " Size "
 msgstr ""
 
-#: src/chown.c:125
+#: gnome/chown.c:125 src/chown.c:125
 msgid " Chown command "
 msgstr ""
 
-#: src/chown.c:127
+#: gnome/chown.c:127 src/chown.c:127
 msgid " User name "
 msgstr ""
 
-#: src/chown.c:191
+#: gnome/chown.c:191 src/chown.c:191
 msgid "<Unknown user>"
 msgstr ""
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:192
+#: gnome/chown.c:192 src/chown.c:192
 msgid "<Unknown group>"
 msgstr ""
 
-#: src/chown.c:257
+#: gnome/chown.c:257 src/chown.c:257
 msgid " I can't run the Chown command on an extfs "
 msgstr ""
 
-#: src/chown.c:261
+#: gnome/chown.c:261 src/chown.c:261
 msgid " I can't run the Chown command on a tarfs "
 msgstr ""
 
-#: src/cmd.c:190
+#: gnome/cmd.c:197 src/cmd.c:197
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr ""
 
-#: src/cmd.c:240
+#: gnome/cmd.c:247 src/cmd.c:247
 msgid " CD "
 msgstr ""
 
-#: src/cmd.c:240
+#: gnome/cmd.c:247 src/cmd.c:247
 msgid "Files tagged, want to cd?"
 msgstr ""
 
-#: src/cmd.c:278
+#: gnome/cmd.c:280 src/cmd.c:280
+#, fuzzy
+msgid " View file "
+msgstr " Ошибка создания канала "
+
+#: gnome/cmd.c:280 src/cmd.c:280
+#, fuzzy
+msgid " Filename:"
+msgstr "Шаблон имени:"
+
+#: gnome/cmd.c:297 src/cmd.c:297
 msgid " Filtered view "
 msgstr " Просмотр вывода команды "
 
-#: src/cmd.c:278
+#: gnome/cmd.c:297 src/cmd.c:297
 msgid " Filter command and arguments:"
 msgstr " Введите команду и ее аргументы: "
 
-#: src/cmd.c:363
+#: gnome/cmd.c:382 src/cmd.c:382
 msgid " Mkdir "
 msgstr ""
 
-#: src/cmd.c:363
+#: gnome/cmd.c:382 src/cmd.c:382
 msgid " Enter directory name:"
 msgstr ""
 
-#: src/cmd.c:418
+#: gnome/cmd.c:437 src/cmd.c:437
 msgid " Filter "
 msgstr " Фильтр "
 
-#: src/cmd.c:418
+#: gnome/cmd.c:437 src/cmd.c:437
 msgid " Set expression for filtering filenames"
 msgstr " Задайте выражение для отбора имен файлов"
 
-#: src/cmd.c:502
+#: gnome/cmd.c:521 src/cmd.c:521
 msgid " Select "
 msgstr ""
 
-#: src/cmd.c:530 src/cmd.c:581
+#: gnome/cmd.c:549 gnome/cmd.c:600 src/cmd.c:549 src/cmd.c:600
 msgid "  Malformed regular expression  "
 msgstr ""
 
-#: src/cmd.c:554
+#: gnome/cmd.c:573 src/cmd.c:573
 msgid " Unselect "
 msgstr ""
 
-#: src/cmd.c:623
+#: gnome/cmd.c:642 src/cmd.c:642
 msgid "Extension file edit"
 msgstr " Редактирование файла расширений "
 
-#: src/cmd.c:624
+#: gnome/cmd.c:643 src/cmd.c:643
 msgid " Which extension file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
 
-#: src/cmd.c:625
+#: gnome/cmd.c:644 src/cmd.c:644
 msgid "&User"
 msgstr "&Пользовательский"
 
-#: src/cmd.c:625 src/cmd.c:651
+#: gnome/cmd.c:644 gnome/cmd.c:670 src/cmd.c:644 src/cmd.c:670
 msgid "&System Wide"
 msgstr "&Общесистемный"
 
-#: src/cmd.c:648
+#: gnome/cmd.c:667 src/cmd.c:667
 msgid "Menu file edit"
 msgstr " Редактирование файла меню "
 
-#: src/cmd.c:649
+#: gnome/cmd.c:668 src/cmd.c:668
 msgid " Which menu file will you edit? "
 msgstr " Какой файл меню Вы хотите редактировать? "
 
-#: src/cmd.c:651
+#: gnome/cmd.c:670 src/cmd.c:670
 msgid "&Local"
 msgstr "&Текущий"
 
-#: src/cmd.c:651
+#: gnome/cmd.c:670 src/cmd.c:670
 msgid "&Home"
 msgstr "&Домашний"
 
-#: src/cmd.c:832
+#: gnome/cmd.c:851 src/cmd.c:851
 msgid " Compare directories "
 msgstr " Сравнить каталоги "
 
-#: src/cmd.c:832
+#: gnome/cmd.c:851 src/cmd.c:851
 msgid " Select compare method: "
 msgstr " Выберите метод сравнения: "
 
-#: src/cmd.c:833
+#: gnome/cmd.c:852 src/cmd.c:852
 msgid "&Quick"
 msgstr "&Быстрый"
 
-#: src/cmd.c:833
+#: gnome/cmd.c:852 src/cmd.c:852
 msgid "&Size only"
 msgstr "По &размеру"
 
-#: src/cmd.c:833
+#: gnome/cmd.c:852 src/cmd.c:852
 msgid "&Thorough"
 msgstr "По&байтный"
 
-#: src/cmd.c:843
+#: gnome/cmd.c:862 src/cmd.c:862
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
 
-#: src/cmd.c:857
+#: gnome/cmd.c:876 src/cmd.c:876
 msgid " The command history is empty "
 msgstr " История командной строки пуста "
 
-#: src/cmd.c:863
+#: gnome/cmd.c:882 src/cmd.c:882
 msgid " Command history "
 msgstr " История командной строки "
 
-#: src/cmd.c:905
+#: gnome/cmd.c:924 src/cmd.c:924
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1411,7 +1480,7 @@ msgstr ""
 " Это не xterm и не консоль Linux/SCO; \n"
 "    Панели не могут быть отключены. "
 
-#: src/cmd.c:942
+#: gnome/cmd.c:961 src/cmd.c:961
 msgid ""
 "Type `exit' to return to the Midnight Commander\n"
 "\r\n"
@@ -1421,134 +1490,135 @@ msgstr ""
 "\r\n"
 "\r"
 
-#: src/cmd.c:993
+#: gnome/cmd.c:1012 src/cmd.c:1012
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
 
-#: src/cmd.c:1002 src/cmd.c:1004
+#: gnome/cmd.c:1021 gnome/cmd.c:1023 src/cmd.c:1021 src/cmd.c:1023
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1003 src/cmd.c:1108
+#: gnome/cmd.c:1022 gnome/cmd.c:1127 src/cmd.c:1022 src/cmd.c:1127
 msgid " to:"
 msgstr ""
 
-#: src/cmd.c:1014
+#: gnome/cmd.c:1033 src/cmd.c:1033
 #, c-format
 msgid " link: %s "
 msgstr ""
 
-#: src/cmd.c:1047
+#: gnome/cmd.c:1066 src/cmd.c:1066
 #, c-format
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1073
+#: gnome/cmd.c:1092 src/cmd.c:1092
 msgid " Symlink "
 msgstr ""
 
-#: src/cmd.c:1073
+#: gnome/cmd.c:1092 src/cmd.c:1092
 msgid " points to:"
 msgstr ""
 
-#: src/cmd.c:1078
+#: gnome/cmd.c:1097 src/cmd.c:1097
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1084
+#: gnome/cmd.c:1103 src/cmd.c:1103
 #, c-format
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1108
+#: gnome/cmd.c:1127 src/cmd.c:1127
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1109
+#: gnome/cmd.c:1128 src/cmd.c:1128
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1120
+#: gnome/cmd.c:1139 src/cmd.c:1139
 #, c-format
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1223
+#: gnome/cmd.c:1242 src/cmd.c:1242
 msgid " Enter machine name (F1 for details): "
 msgstr " Введите имя машины (детали по F1): "
 
-#: src/cmd.c:1247
+#: gnome/cmd.c:1266 src/cmd.c:1266
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Не могу перейти в %s "
 
-#: src/cmd.c:1254
+#: gnome/cmd.c:1273 src/cmd.c:1273
 msgid " Link to a remote machine "
 msgstr " Соединение с удаленной машиной "
 
-#: src/cmd.c:1260
+#: gnome/cmd.c:1279 src/cmd.c:1279
 msgid " FTP to machine "
 msgstr " FTP-соединение с удаленной машиной "
 
-#: src/cmd.c:1270
+#: gnome/cmd.c:1289 src/cmd.c:1289
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1271
+#: gnome/cmd.c:1290 src/cmd.c:1290
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1278
+#: gnome/cmd.c:1297 src/cmd.c:1297
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1278
+#: gnome/cmd.c:1297 src/cmd.c:1297
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1289
+#: gnome/cmd.c:1308 src/cmd.c:1308
 msgid " Undelete files on an ext2 file system "
 msgstr " Восстановление файлов на файловой системе ext2 "
 
-#: src/cmd.c:1290
+#: gnome/cmd.c:1309 src/cmd.c:1309
+#, fuzzy
 msgid ""
-" Enter the file system name where you want to run the\n"
-"  undelete file system on: (F1 for details)"
+" Enter device (without /dev/) to undelete\n"
+"   files on: (F1 for details)"
 msgstr ""
 " Введите имя устройства, связанного с файловой системой,\n"
 " на которой Вы хотите восстановить файл: (детали по F1)"
 
-#: src/cmd.c:1382
+#: gnome/cmd.c:1401 src/cmd.c:1401
 msgid "Show directory sizes"
 msgstr "Показывать размеры каталогов"
 
-#: src/cmd.c:1382 src/panelize.c:459
+#: gnome/cmd.c:1401 gnome/panelize.c:460 src/cmd.c:1401 src/panelize.c:460
 msgid "Pipe close failed"
 msgstr "Ошибка при закрытии канала"
 
-#: src/cmd.c:1395
+#: gnome/cmd.c:1414 src/cmd.c:1414
 msgid "Cannot invoke du command."
 msgstr "Не могу вызвать команду 'du'."
 
-#: src/cmd.c:1406
+#: gnome/cmd.c:1425 src/cmd.c:1425
 msgid " Setup saved to ~/"
 msgstr " Параметры сохранены в ~/"
 
-#: src/cmd.c:1411
+#: gnome/cmd.c:1430 src/cmd.c:1430
 msgid " Setup "
 msgstr " Настройка "
 
-#: src/command.c:173
+#: gnome/command.c:173 src/command.c:173
 #, c-format
 msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
 
-#: src/dialog.c:59
+#: gnome/dialog.c:59 src/dialog.c:59
 msgid ""
 "\n"
 "\n"
@@ -1558,307 +1628,293 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/dir.c:56
+#: gnome/dir.c:56 src/dir.c:56
 msgid "&Unsorted"
 msgstr "&Без сортировки"
 
-#: src/dir.c:57
+#: gnome/dir.c:57 src/dir.c:57
 msgid "&Name"
 msgstr "&Наименование"
 
-#: src/dir.c:58
+#: gnome/dir.c:58 src/dir.c:58
 msgid "&Extension"
 msgstr "Рас&ширение"
 
-#: src/dir.c:59
+#: gnome/dir.c:59 src/dir.c:59
 msgid "&Modify time"
 msgstr "Время &модификации"
 
-#: src/dir.c:60
+#: gnome/dir.c:60 src/dir.c:60
 msgid "&Access time"
 msgstr "Время &доступа"
 
-#: src/dir.c:61
+#: gnome/dir.c:61 src/dir.c:61
 msgid "&Change time"
 msgstr "Время &изменения"
 
-#: src/dir.c:62
+#: gnome/dir.c:62 src/dir.c:62
 msgid "&Size"
 msgstr "&Размер"
 
-#: src/dir.c:63
+#: gnome/dir.c:63 src/dir.c:63
 msgid "&Inode"
 msgstr "Номер &узла"
 
 #. New sort orders
-#: src/dir.c:66
+#: gnome/dir.c:66 src/dir.c:66
 msgid "&Type"
 msgstr "&Тип"
 
-#: src/dir.c:67
+#: gnome/dir.c:67 src/dir.c:67
 msgid "&Links"
 msgstr "&Ссылки"
 
-#: src/dir.c:68
+#: gnome/dir.c:68 src/dir.c:68
 msgid "N&GID"
 msgstr ""
 
-#: src/dir.c:69
+#: gnome/dir.c:69 src/dir.c:69
 msgid "N&UID"
 msgstr ""
 
-#: src/dir.c:70
+#: gnome/dir.c:70 src/dir.c:70
 msgid "&Owner"
 msgstr "&Владелец"
 
-#: src/dir.c:71
+#: gnome/dir.c:71 src/dir.c:71
 msgid "&Group"
 msgstr "&Группа"
 
-#: src/dir.c:645
+#: gnome/dir.c:645 src/dir.c:645
 msgid "Unknown"
 msgstr ""
 
-#: src/ext.c:139 src/user.c:507
+#: gnome/ext.c:139 gnome/user.c:507 src/ext.c:139 src/user.c:507
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:152 src/user.c:534
+#: gnome/ext.c:152 gnome/user.c:534 src/ext.c:152 src/user.c:534
 msgid " Parameter "
 msgstr ""
 
-#: src/ext.c:295
+#: gnome/ext.c:295 src/ext.c:295
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr ""
 
-#: src/ext.c:392
+#: gnome/ext.c:392 src/ext.c:392
 msgid " file error"
 msgstr ""
 
-#: src/ext.c:393
+#: gnome/ext.c:393 src/ext.c:393
 msgid "Format of the "
 msgstr ""
 
-#: src/ext.c:411
+#: gnome/ext.c:411 src/ext.c:411
 msgid " file error "
 msgstr ""
 
-#: src/ext.c:412
+#: gnome/ext.c:412 src/ext.c:412
 msgid "Format of the ~/"
 msgstr ""
 
-#: src/ext.c:412
+#: gnome/ext.c:412 src/ext.c:412
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
 
-#: src/ext.c:414
+#: gnome/ext.c:414 src/ext.c:414
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
 
-#: src/ext.c:416
+#: gnome/ext.c:416 src/ext.c:416
 msgid "mc.ext will be used for this moment."
 msgstr ""
 
-#: src/file.c:250 src/tree.c:1100
+#: gnome/file.c:250 gnome/tree.c:1102 src/file.c:250 src/tree.c:1102
 msgid " Copy "
 msgstr " Копирование "
 
-#: src/file.c:250 src/tree.c:1133
+#: gnome/file.c:250 gnome/tree.c:1135 src/file.c:250 src/tree.c:1135
 msgid " Move "
 msgstr " Перемещение "
 
-#: src/file.c:250 src/tree.c:1195
+#: gnome/file.c:250 gnome/tree.c:1197 src/file.c:250 src/tree.c:1197
 msgid " Delete "
 msgstr " Удаление "
 
-#: src/file.c:391 src/file.c:2554 src/file.c:2630 src/file.c:2831
+#: gnome/file.c:391 gnome/file.c:2552 gnome/file.c:2627 gnome/file.c:2828
+#: src/file.c:391 src/file.c:2552 src/file.c:2627 src/file.c:2828
 msgid "&Abort"
 msgstr "&Прервать"
 
-#: src/file.c:394 src/file.c:2554
+#: gnome/file.c:394 gnome/file.c:2552 src/file.c:394 src/file.c:2552
 msgid "&Skip"
 msgstr "П&ропустить"
 
-#: src/file.c:482
+#: gnome/file.c:482 src/file.c:482
 msgid "Source"
 msgstr "Источник"
 
-#: src/file.c:496
+#: gnome/file.c:496 src/file.c:496
 msgid "Target"
 msgstr "Приемник"
 
-#: src/file.c:509
+#: gnome/file.c:509 src/file.c:509
 msgid "Deleting"
 msgstr "Удаляем"
 
-#: gnome/glayout.c:353 gnome/gview.c:314 src/file.c:562
+#: gnome/file.c:564 gnome/gview.c:314 src/file.c:564
 msgid "File"
 msgstr "Файл"
 
-#: src/file.c:576
+#: gnome/file.c:578 src/file.c:578
 msgid "Count"
 msgstr ""
 
-#: src/file.c:588
+#: gnome/file.c:590 src/file.c:590
 msgid "Bytes"
 msgstr ""
 
-#: src/file.c:672
+#: gnome/file.c:674 src/file.c:674
 msgid " Invalid target mask "
 msgstr ""
 
-#: src/file.c:819
+#: gnome/file.c:821 src/file.c:821
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:828
+#: gnome/file.c:830 src/file.c:830
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
 
-#: src/file.c:876
+#: gnome/file.c:878 src/file.c:878
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:919
+#: gnome/file.c:918 src/file.c:918
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:930 src/file.c:1047
+#: gnome/file.c:929 src/file.c:929
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:944
+#: gnome/file.c:943 src/file.c:943
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr ""
 
-#: src/file.c:984
+#: gnome/file.c:983 src/file.c:983
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:995 src/file.c:1263
+#: gnome/file.c:994 gnome/file.c:1219 src/file.c:994 src/file.c:1219
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1004
-#, c-format
-msgid ""
-" Cannnot chmod target file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1020
-#, c-format
-msgid ""
-" Cannot open source file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1034
-#, c-format
-msgid ""
-" Cannot fstat source file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1074
-#, c-format
-msgid ""
-" Cannot create target file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1091
-#, c-format
-msgid ""
-" Cannot fstat target file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1112
-#, c-format
-msgid ""
-" Cannot read source file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1126
-#, c-format
-msgid ""
-" Cannot write target file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1152
-msgid " Can't open target file "
-msgstr ""
-
-#: src/file.c:1157
-msgid " Can't write to local target file "
-msgstr ""
-
-#: src/file.c:1195
-msgid "(stalled)"
-msgstr ""
-
-#: src/file.c:1234
-#, c-format
-msgid ""
-" Cannot close source file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1244
-#, c-format
-msgid ""
-" Cannot close target file \"%s\" \n"
-" %s "
-msgstr ""
-
-#: src/file.c:1277
+#: gnome/file.c:1003 gnome/file.c:1233 src/file.c:1003 src/file.c:1233
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1314
+#: gnome/file.c:1022 src/file.c:1022
+#, c-format
+msgid ""
+" Cannot open source file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1034 src/file.c:1034
+#, c-format
+msgid ""
+" Cannot fstat source file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1058 src/file.c:1058
+#, c-format
+msgid ""
+" Cannot create target file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1074 src/file.c:1074
+#, c-format
+msgid ""
+" Cannot fstat target file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1105 src/file.c:1105
+#, c-format
+msgid ""
+" Cannot read source file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1135 src/file.c:1135
+#, c-format
+msgid ""
+" Cannot write target file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1153 src/file.c:1153
+msgid "(stalled)"
+msgstr ""
+
+#: gnome/file.c:1193 src/file.c:1193
+#, c-format
+msgid ""
+" Cannot close source file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1203 src/file.c:1203
+#, c-format
+msgid ""
+" Cannot close target file \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/file.c:1270 src/file.c:1270
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1337
+#: gnome/file.c:1293 src/file.c:1293
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -1866,21 +1922,21 @@ msgid ""
 msgstr " Исходный каталог \"%s\" каталогом не является "
 
 #. we found a cyclic symbolic link
-#: src/file.c:1345
+#: gnome/file.c:1301 src/file.c:1301
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
 
-#: src/file.c:1395
+#: gnome/file.c:1354 src/file.c:1354
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1414
+#: gnome/file.c:1373 src/file.c:1373
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1888,103 +1944,104 @@ msgid ""
 msgstr ""
 
 #. Source doesn't exist
-#: src/file.c:1522
+#: gnome/file.c:1481 src/file.c:1481
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1544
+#: gnome/file.c:1503 src/file.c:1503
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr ""
 
-#: src/file.c:1551
+#: gnome/file.c:1510 src/file.c:1510
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
-#: src/file.c:1591
+#: gnome/file.c:1550 src/file.c:1550
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1609
+#: gnome/file.c:1568 src/file.c:1568
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1650
+#: gnome/file.c:1610 src/file.c:1610
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr ""
 
-#: src/file.c:1652
+#: gnome/file.c:1612 src/file.c:1612
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Не могу переписать файл \"%s\" %s "
 
-#: src/file.c:1675
+#: gnome/file.c:1635 src/file.c:1635
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1731
+#: gnome/file.c:1690 src/file.c:1690
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1785 src/file.c:1818 src/file.c:1844
+#: gnome/file.c:1744 gnome/file.c:1811 gnome/file.c:1840 src/file.c:1744
+#: src/file.c:1811 src/file.c:1840
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1880
+#: gnome/file.c:1876 src/file.c:1876
 msgid " Internal error: get_file \n"
 msgstr " Внутренняя ошибка: get_file \n"
 
 #. follow symlinks and preserve Attributes must be the first
-#: src/file.c:1922
+#: gnome/file.c:1919 src/file.c:1919
 msgid "preserve &Attributes"
 msgstr "Сохранять &атрибуты"
 
-#: src/file.c:1924
+#: gnome/file.c:1921 src/file.c:1921
 msgid "follow &Links"
 msgstr "&Разыменовывать ссылки"
 
-#: src/file.c:1933
+#: gnome/file.c:1930 src/file.c:1930
 msgid "to:"
 msgstr "в:"
 
-#: src/file.c:1934
+#: gnome/file.c:1931 src/file.c:1931
 msgid "&Using shell patterns"
 msgstr "&Метасимволы shell"
 
-#: src/file.c:1957
+#: gnome/file.c:1954 src/file.c:1954
 msgid "&Background"
 msgstr "На &фоне"
 
 # msgstr "На &фоне"
-#: src/file.c:1966
+#: gnome/file.c:1963 src/file.c:1963
 msgid "&Stable Symlinks"
 msgstr "&Сохранять символические ссылки"
 
-#: src/file.c:1968
+#: gnome/file.c:1965 src/file.c:1965
 msgid "&Dive into subdir if exists"
 msgstr "&Внутрь каталога, если есть"
 
-#: src/file.c:2115
+#: gnome/file.c:2112 src/file.c:2112
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2002,15 +2059,15 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:2155
+#: gnome/file.c:2153 src/file.c:2153
 msgid "1Copy"
 msgstr "1Копировать"
 
-#: src/file.c:2155
+#: gnome/file.c:2153 src/file.c:2153
 msgid "1Move"
 msgstr "1Перенести"
 
-#: src/file.c:2155
+#: gnome/file.c:2153 src/file.c:2153
 msgid "1Delete"
 msgstr "1Удалить"
 
@@ -2022,123 +2079,123 @@ msgstr "1Удалить"
 #. * %s - source name (truncated)
 #. * %d - number of marked files
 #.
-#: src/file.c:2165
+#: gnome/file.c:2163 src/file.c:2163
 #, c-format
 msgid "%o %f \"%s\"%m"
 msgstr ""
 
-#: src/file.c:2166
+#: gnome/file.c:2164 src/file.c:2164
 #, c-format
 msgid "%o %d %f%m"
 msgstr "%o отмеченные %f (%d)%m"
 
-#: src/file.c:2170
+#: gnome/file.c:2168 src/file.c:2168
 msgid "file"
 msgstr "файл"
 
-#: src/file.c:2170
+#: gnome/file.c:2168 src/file.c:2168
 msgid "files"
 msgstr "файлы"
 
-#: src/file.c:2170
+#: gnome/file.c:2168 src/file.c:2168
 msgid "directory"
 msgstr "каталог"
 
-#: src/file.c:2170
+#: gnome/file.c:2168 src/file.c:2168
 msgid "directories"
 msgstr "каталоги"
 
-#: src/file.c:2171
+#: gnome/file.c:2169 src/file.c:2169
 msgid "files/directories"
 msgstr "файлы/каталоги"
 
-#: src/file.c:2171
+#: gnome/file.c:2169 src/file.c:2169
 msgid " with source mask:"
 msgstr " с исходным шаблоном:"
 
-#: src/file.c:2300
+#: gnome/file.c:2298 src/file.c:2298
 msgid " Can't operate on \"..\"! "
 msgstr " Не могу выполнить указанную операцию на \"..\"! "
 
-#: src/file.c:2350
+#: gnome/file.c:2348 src/file.c:2348
 msgid " Sorry, I could not put the job in background "
 msgstr " Извините, я не могу сделать это в фоновом режиме "
 
-#: src/file.c:2413 src/file.c:2483
+#: gnome/file.c:2411 gnome/file.c:2481 src/file.c:2411 src/file.c:2481
 msgid " Internal failure "
 msgstr " Внутренняя ошибка "
 
-#: src/file.c:2413 src/file.c:2484
+#: gnome/file.c:2411 gnome/file.c:2482 src/file.c:2411 src/file.c:2482
 msgid " Unknown file operation "
 msgstr " Неизвестная файловая операция "
 
-#: src/file.c:2429
+#: gnome/file.c:2427 src/file.c:2427
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr " Назначение \"%s\" должно быть каталогом  %s "
 
-#: src/file.c:2554
+#: gnome/file.c:2552 src/file.c:2552
 msgid "&Retry"
 msgstr "По&вторить"
 
-#: src/file.c:2592 src/file.c:2628
+#: gnome/file.c:2625 src/file.c:2625
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Файл-приемник \"%s\" уже существует!"
 
-#: src/file.c:2631
+#: gnome/file.c:2628 src/file.c:2628
 msgid "if &Size differs"
 msgstr "&Различающиеся по длине"
 
-#: src/file.c:2633 src/file.c:2831
+#: gnome/file.c:2630 gnome/file.c:2828 src/file.c:2630 src/file.c:2828
 msgid "non&E"
 msgstr "ни &Одного"
 
-#: src/file.c:2634
+#: gnome/file.c:2631 src/file.c:2631
 msgid "&Update"
 msgstr "&Устаревшие"
 
-#: src/file.c:2635
+#: gnome/file.c:2632 src/file.c:2632
 msgid "al&L"
 msgstr "&Все"
 
-#: src/file.c:2636
+#: gnome/file.c:2633 src/file.c:2633
 msgid "Overwrite all targets?"
 msgstr "Переписать все файлы?"
 
-#: src/file.c:2638
+#: gnome/file.c:2635 src/file.c:2635
 msgid "&Reget"
 msgstr "пере&Читать"
 
-#: src/file.c:2639
+#: gnome/file.c:2636 src/file.c:2636
 msgid "ap&Pend"
 msgstr "дописать в &Конец"
 
-#: src/file.c:2642
+#: gnome/file.c:2639 src/file.c:2639
 msgid "Overwrite this target?"
 msgstr "Переписать этот файл?"
 
-#: src/file.c:2644
+#: gnome/file.c:2641 src/file.c:2641
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Дата модификации приемника: %s, длина %d"
 
-#: src/file.c:2646
+#: gnome/file.c:2643 src/file.c:2643
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Дата модификации источника: %s, длина %d"
 
-#: src/file.c:2734
+#: gnome/file.c:2731 src/file.c:2731
 msgid " File exists "
 msgstr " Файл существует "
 
-#: src/file.c:2734
+#: gnome/file.c:2731 src/file.c:2731
 msgid " Background process: File exists "
 msgstr " Фоновый процесс: файл существует "
 
-#: src/file.c:2824
+#: gnome/file.c:2821 src/file.c:2821
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2148,7 +2205,7 @@ msgstr ""
 "   Каталог не пуст.    \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2825
+#: gnome/file.c:2822 src/file.c:2822
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2158,1748 +2215,123 @@ msgstr ""
 "   Фоновый процесс: каталог не пуст \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2831
+#: gnome/file.c:2828 src/file.c:2828
 msgid "a&ll"
 msgstr "&Все"
 
-#: src/file.c:2839
+#: gnome/file.c:2836 src/file.c:2836
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Наберите 'yes' если Вы ДЕЙСТВИТЕЛЬНО хотите "
 
-#: src/file.c:2841
+#: gnome/file.c:2838 src/file.c:2838
 msgid "all the directories "
 msgstr "удалить все каталоги"
 
-#: src/file.c:2842
+#: gnome/file.c:2839 src/file.c:2839
 msgid " Recursive Delete "
 msgstr " Рекурсивное удаление "
 
-#: src/file.c:2843
+#: gnome/file.c:2840 src/file.c:2840
 msgid " Background process: Recursive Delete "
 msgstr " Фоновый процесс: Рекурсивное удаление "
 
-#: src/find.c:124
+#: gnome/find.c:124 src/find.c:124
 msgid "&Suspend"
 msgstr "&Остановить"
 
-#: src/find.c:125
-msgid "&Continue"
-msgstr "&Продолжить"
+#: gnome/find.c:125 src/find.c:125
+#, fuzzy
+msgid "Con&tinue"
+msgstr "Продолжить"
 
-#: src/find.c:126
+#: gnome/find.c:126 src/find.c:126
 msgid "&Chdir"
 msgstr "Пере&ход"
 
-#: src/find.c:127
+#: gnome/find.c:127 src/find.c:127
 msgid "&Again"
 msgstr "Пов&тор"
 
-#: src/find.c:128
+#: gnome/find.c:128 src/find.c:128
 msgid "&Quit"
 msgstr "&Выход"
 
-#: src/find.c:129 src/panelize.c:92
+#: gnome/find.c:129 gnome/panelize.c:92 src/find.c:129 src/panelize.c:92
 msgid "Pane&lize"
 msgstr "Па&нелизация"
 
-#: src/find.c:130
+#: gnome/find.c:130 src/find.c:130
 msgid "&View - F3"
 msgstr "Прос&мотр - F3"
 
-#: src/find.c:131
+#: gnome/find.c:131 src/find.c:131
 msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
-#: src/find.c:157
+#: gnome/find.c:157 src/find.c:157
 msgid "Start at:"
 msgstr " От каталога:"
 
-#: src/find.c:157
+#: gnome/find.c:157 src/find.c:157
 msgid "Filename:"
 msgstr "Шаблон имени:"
 
-#: src/find.c:157
+#: gnome/find.c:157 src/find.c:157
 msgid "Content: "
 msgstr "  Содержание:"
 
-#: src/find.c:158 src/main.c:1204 src/main.c:1225
+#: gnome/find.c:158 gnome/main.c:1214 gnome/main.c:1235 src/find.c:158
+#: src/main.c:1214 src/main.c:1235
 msgid "&Tree"
 msgstr "Д&ерево"
 
-#: src/find.c:210
+#: gnome/find.c:210 src/find.c:210
 msgid "Find File"
 msgstr " Поиск файла "
 
-#: src/find.c:424
+#: gnome/find.c:425 src/find.c:425
 #, c-format
 msgid "Grepping in %s"
 msgstr "Ищем в %s"
 
-#: src/find.c:462
+#: gnome/find.c:463 src/find.c:463
 msgid " Find/read "
 msgstr " Поиск/чтение "
 
-#: src/find.c:462
+#: gnome/find.c:463 src/find.c:463
 msgid " Problem reading from child "
 msgstr " Проблемы со чтением вывода дочернего процесса "
 
-#: src/find.c:506
+#: gnome/find.c:507 src/find.c:507
 msgid "Finished"
 msgstr "Готово"
 
-#: src/find.c:526 src/view.c:1469
+#: gnome/find.c:527 gnome/view.c:1475 src/find.c:527 src/view.c:1475
 #, c-format
 msgid "Searching %s"
 msgstr "Ищем в %s"
 
-#: src/find.c:664 src/find.c:781
+#: gnome/find.c:665 gnome/find.c:782 src/find.c:665 src/find.c:782
 msgid "Searching"
 msgstr "Ищем"
 
-#: src/find.c:756
+#: gnome/find.c:757 src/find.c:757
 msgid "Find file"
 msgstr " Поиск файла "
 
-#: src/help.c:281
+#: gnome/fixhlp.c:173 src/fixhlp.c:173
+msgid "Usage: fixhlp <width> <tocname>\n"
+msgstr ""
+
+#: gnome/fixhlp.c:178 src/fixhlp.c:178
+msgid "fixhlp: Cannot open toc for writing"
+msgstr ""
+
+#: gnome/fixhlp.c:181 src/fixhlp.c:181
 msgid ""
-" Help file format error\n"
-""
-msgstr ""
-
-#: src/help.c:320
-msgid " Internal bug: Double start of link area "
-msgstr ""
-
-#: src/help.c:574
-msgid " Can't find node [Contents] in help file "
-msgstr ""
-
-#: src/help.c:749
-msgid " Help "
-msgstr ""
-
-#: src/help.c:772 src/user.c:641
-#, c-format
-msgid ""
-" Can't open file %s \n"
-" %s "
-msgstr ""
-
-#: src/help.c:777
-#, c-format
-msgid " Can't find node %s in help file "
-msgstr ""
-
-#: src/help.c:814
-msgid "Index"
-msgstr "Содерж"
-
-#: src/help.c:816
-msgid "Prev"
-msgstr "Назад"
-
-#: src/hotlist.c:134
-msgid "&Move"
-msgstr "Пере&местить"
-
-#: src/hotlist.c:135 src/hotlist.c:1431 src/panelize.c:91 src/wtools.c:405
-msgid "&Remove"
-msgstr "&Удалить"
-
-#: src/hotlist.c:136 src/hotlist.c:814 src/hotlist.c:907
-msgid "&Append"
-msgstr "В &Конец"
-
-#: src/hotlist.c:137 src/hotlist.c:812 src/hotlist.c:905
-msgid "&Insert"
-msgstr "В &Начало"
-
-#: src/hotlist.c:138
-msgid "New &Entry"
-msgstr "Новая &Запись"
-
-#: src/hotlist.c:139
-msgid "New &Group"
-msgstr "Новая &Группа"
-
-#: src/hotlist.c:141
-msgid "&Up"
-msgstr "&Вверх"
-
-#: src/hotlist.c:142
-msgid "&Add current"
-msgstr "Добавить &Текущий"
-
-#: src/hotlist.c:143
-msgid "Change &To"
-msgstr "Пере&йти"
-
-#: src/hotlist.c:203
-msgid "Subgroup - press ENTER to see list"
-msgstr "Подгруппа - для разворачивания нажмите ENTER"
-
-#: src/hotlist.c:620
-msgid "Active VFS directories"
-msgstr "Активные каталоги ВФС"
-
-#: src/hotlist.c:620
-msgid "Directory hotlist"
-msgstr " Справочник каталогов "
-
-#: src/hotlist.c:639
-msgid " Directory path "
-msgstr " Путь к каталогу "
-
-#. This one holds the displayed pathname
-#: src/hotlist.c:642 src/hotlist.c:689
-msgid " Directory label "
-msgstr " Метка каталога "
-
-#: src/hotlist.c:663
-msgid "Moving "
-msgstr "Перемещаем "
-
-#: src/hotlist.c:884
-msgid "New hotlist entry"
-msgstr " Добавление записи в справочник "
-
-#: src/hotlist.c:884
-msgid "Directory label"
-msgstr " Метка каталога"
-
-#: src/hotlist.c:884
-msgid "Directory path"
-msgstr " Путь к каталогу"
-
-#: src/hotlist.c:964
-msgid " New hotlist group "
-msgstr " Добавление группы в справочник "
-
-#: src/hotlist.c:964
-msgid "Name of new group"
-msgstr " Имя новой группы"
-
-#: src/hotlist.c:979
-#, c-format
-msgid "Label for \"%s\":"
-msgstr " Метка для \"%s\": "
-
-#: src/hotlist.c:984
-msgid " Add to hotlist "
-msgstr " Добавить в справочник каталогов "
-
-#: src/hotlist.c:1021
-msgid " Remove: "
-msgstr " Удалить: "
-
-#: src/hotlist.c:1025
-msgid ""
+"[Contents]\n"
+" Topics:\n"
 "\n"
-" Group not empty.\n"
-" Remove it?"
-msgstr ""
-"\n"
-" Группа не пуста.\n"
-" Удалить ее?"
-
-#: src/hotlist.c:1369
-msgid " Top level group "
-msgstr "Группа верхнего уровня"
-
-#: src/hotlist.c:1385
-msgid "Hotlist is now kept in file ~/"
-msgstr "Справочник сохранен в файле ~/"
-
-#: src/hotlist.c:1386
-msgid "MC will load hotlist from ~/"
-msgstr "MC загрузит справочник каталогов из ~/"
-
-#: src/hotlist.c:1387
-msgid "and then delete [Hotlist] section there"
-msgstr "а затем удалит там секцию [Hotlist]"
-
-#: src/hotlist.c:1388 src/hotlist.c:1407 src/hotlist.c:1430 src/hotlist.c:1455
-msgid " Hotlist Load "
-msgstr " Загрузка справочника "
-
-#: src/hotlist.c:1404 src/hotlist.c:1452
-msgid "MC was unable to write ~/"
-msgstr "MC не может писать в файл ~/,"
-
-#: src/hotlist.c:1405
-msgid " file, your old hotlist entries were not deleted"
-msgstr "Ваш старый справочник каталогов не удален"
-
-#: src/hotlist.c:1419
-msgid "You have ~/"
-msgstr "У Вас есть файл ~/"
-
-#: src/hotlist.c:1419
-msgid " file and [Hotlist] section in ~/"
-msgstr "и секция [Hotlist] в ~/"
-
-#: src/hotlist.c:1420
-msgid "Your ~/"
-msgstr "Ваш ~/"
-
-#: src/hotlist.c:1420
-msgid " most probably was created\n"
-msgstr " скорее всего создан\n"
-
-#: src/hotlist.c:1421
-msgid ""
-"by an earlier development version of MC\n"
-"and is more actual than ~/"
-msgstr ""
-"более ранней промежуточной версией MC\n"
-"и более актуален, чем найденный в ~/"
-
-#: src/hotlist.c:1422
-msgid ""
-" entries\n"
-"\n"
-msgstr " \n"
-
-#: src/hotlist.c:1423
-msgid ""
-"You can choose between\n"
-"\n"
-"  Remove - remove old hotlist entries from ~/"
-msgstr ""
-
-#: src/hotlist.c:1425
-msgid ""
-"  Keep   - keep your old entries; you will be asked\n"
-"           the same question next time\n"
-"  Merge  - add old entries to hotlist as group \"Entries from ~/"
-msgstr ""
-
-#: src/hotlist.c:1431
-msgid "&Keep"
-msgstr ""
-
-#: src/hotlist.c:1431
-msgid "&Merge"
-msgstr ""
-
-#: src/hotlist.c:1443
-msgid " Entries from ~/"
-msgstr ""
-
-#: src/hotlist.c:1453
-msgid " file your old hotlist entries were not deleted"
-msgstr ""
-
-#: src/info.c:78
-#, c-format
-msgid "Midnight Commander %s"
-msgstr ""
-
-#: src/info.c:110
-msgid "Free nodes %d (%d%%) of %d"
-msgstr ""
-
-#: src/info.c:116
-msgid "No node information"
-msgstr ""
-
-#: src/info.c:121
-msgid "Free space "
-msgstr ""
-
-#: src/info.c:123
-msgid " (%d%%) of "
-msgstr ""
-
-#: src/info.c:127
-msgid "No space information"
-msgstr ""
-
-#: src/info.c:131
-#, c-format
-msgid "Type:      %s "
-msgstr ""
-
-#: src/info.c:131
-msgid "non-local vfs"
-msgstr ""
-
-#: src/info.c:137
-#, c-format
-msgid "Device:    %s"
-msgstr ""
-
-#: src/info.c:141
-#, c-format
-msgid "Filesystem: %s"
-msgstr ""
-
-#: src/info.c:146
-#, c-format
-msgid "Accessed:  %s"
-msgstr ""
-
-#: src/info.c:150
-#, c-format
-msgid "Modified:  %s"
-msgstr ""
-
-#: src/info.c:154
-#, c-format
-msgid "Created:   %s"
-msgstr ""
-
-#: src/info.c:167
-msgid "Size:      "
-msgstr ""
-
-#: src/info.c:170
-#, c-format
-msgid " (%d blocks)"
-msgstr ""
-
-#: src/info.c:176
-#, c-format
-msgid "Owner:     %s/%s"
-msgstr ""
-
-#: src/info.c:181
-#, c-format
-msgid "Links:     %d"
-msgstr ""
-
-#: src/info.c:185
-#, c-format
-msgid "Mode:      %s (%04o)"
-msgstr ""
-
-#: src/info.c:190
-#, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr ""
-
-#: src/info.c:196
-#, c-format
-msgid "File:       %s"
-msgstr ""
-
-#: src/info.c:200
-msgid "File:       None"
-msgstr ""
-
-#: src/layout.c:153
-msgid "&Vertical"
-msgstr "&Вертикальное"
-
-#: src/layout.c:154
-msgid "&Horizontal"
-msgstr "&Горизонтальное"
-
-#: src/layout.c:164
-msgid "&Xterm hintbar"
-msgstr "Подсказка в &xterm"
-
-#: src/layout.c:165
-msgid "h&Intbar visible"
-msgstr "С&трока подсказки"
-
-#: src/layout.c:166
-msgid "&Keybar visible"
-msgstr "М&етки клавиш"
-
-#: src/layout.c:167
-msgid "command &Prompt"
-msgstr "&Командная строка"
-
-#: src/layout.c:168
-msgid "show &Mini status"
-msgstr "&Мини-статус"
-
-#: src/layout.c:169
-msgid "menu&Bar visible"
-msgstr "&Линейка меню"
-
-#: src/layout.c:170
-msgid "&Equal split"
-msgstr "&Равные размеры"
-
-#: src/layout.c:171
-msgid "pe&Rmissions"
-msgstr "Права д&оступа"
-
-#: src/layout.c:172
-msgid "&File types"
-msgstr "Типы &файлов"
-
-#: src/layout.c:366 src/learn.c:59 src/learn.c:178 src/option.c:144
-msgid "&Save"
-msgstr "&Сохранить"
-
-#. length of line with '<' '>' buttons
-#: src/layout.c:374
-msgid " Layout "
-msgstr " Внешний вид "
-
-#: src/layout.c:375
-msgid " Panel split "
-msgstr " Разбиение панелей "
-
-#: src/layout.c:376
-msgid " Highlight... "
-msgstr " Цветовыделение "
-
-#: src/layout.c:377 src/option.c:155
-msgid " Other options "
-msgstr " Прочие настройки "
-
-#: src/layout.c:378
-msgid "output lines"
-msgstr "строки вывода"
-
-#: src/layout.c:445
-msgid "Layout"
-msgstr "Внешний вид"
-
-#: src/layout.c:474 src/option.c:241
-msgid "Other options"
-msgstr "Прочие настройки"
-
-#: src/layout.c:476
-msgid "Highlight..."
-msgstr "Цветовыделение"
-
-#: src/layout.c:478
-msgid "Panel split"
-msgstr "Разбиение панелей"
-
-#: src/learn.c:73
-msgid " Learn keys "
-msgstr " Распознавание клавиш "
-
-#: src/learn.c:92
-msgid " Teach me a key "
-msgstr " Обучите меня клавише "
-
-#: src/learn.c:93
-#, c-format
-msgid ""
-"Please press the %s\n"
-"and then wait until this message disappears.\n"
-"\n"
-"Then, press it again to see if OK appears\n"
-"next to its button.\n"
-"\n"
-"If you want to escape, press a single Escape key\n"
-"and wait as well."
-msgstr ""
-"Пожалуйста, нажмите клавишу %s\n"
-"и подождите, пока это сообщение пропадет.\n"
-"\n"
-"Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось 'OK'.\n"
-"\n"
-"Если вы хотите прервать обучение, нажмите\n"
-"клавишу Esc и тоже немного подождите."
-
-#: src/learn.c:121
-msgid " Cannot accept this key "
-msgstr " Не могу принять эту клавишу "
-
-#: src/learn.c:122
-#, c-format
-msgid " You have entered \"%s\""
-msgstr " Вы ввели \"%s\""
-
-#: src/learn.c:169
-msgid "OK"
-msgstr ""
-
-#: src/learn.c:176
-msgid ""
-"It seems that all your keys already\n"
-"work fine. That's great."
-msgstr ""
-"Похоже, что все Ваши клавиши уже\n"
-"работают нормально. Это здорово."
-
-#: src/learn.c:178
-msgid "&Discard"
-msgstr "Отменить"
-
-#: src/learn.c:182
-msgid ""
-"Great! You have a complete terminal database!\n"
-"All your keys work well."
-msgstr ""
-"Здорово! Ваша база описаний терминалов полная.\n"
-"Все Ваши клавиши работают хорошо."
-
-#: src/learn.c:266
-msgid "Learn keys"
-msgstr "Распознавание клавиш"
-
-#: src/learn.c:299
-msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
-
-#: src/learn.c:301
-msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "какие клавиши не имеют пометки OK. Для обучения клавише выберите"
-
-#: src/learn.c:303
-msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "ее при помощи Tab или мышкой и нажмите пробел."
-
-#: src/main.c:684
-msgid ""
-" The Commander can't change to the directory that \n"
-" the subshell claims you are in.  Perhaps you have \n"
-" deleted your working directory, or given yourself \n"
-" extra access permissions with the \"su\" command? "
-msgstr ""
-" Командир не может перейти в каталог который ему \n"
-" сообщил дочерний процесс интерпретатора. Может Вы \n"
-" удалили рабочий каталог или дали себе дополнительные \n"
-" привилегии доступа при помощи команды \"su\"? "
-
-#: src/main.c:759
-msgid "Press any key to continue..."
-msgstr "Для продолжения нажмите любую клавишу..."
-
-#: src/main.c:809
-msgid " The shell is already running a command "
-msgstr " Интерпретатор уже озабочен выполнением команды "
-
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1071 src/main.c:836 src/screen.c:1981
-msgid " The Midnight Commander "
-msgstr ""
-
-#: gnome/gcmd.c:93 src/main.c:837
-msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Вы действительно хотите выйти из Midnight Commander? "
-
-#: src/main.c:1201 src/main.c:1222
-msgid "&Listing mode..."
-msgstr "Фор&мат списка..."
-
-#: src/main.c:1202 src/main.c:1223
-msgid "&Quick view     C-x q"
-msgstr "&Быстрый просмотр   C-x q"
-
-#: src/main.c:1203 src/main.c:1224
-msgid "&Info           C-x i"
-msgstr "&Информация         C-x i"
-
-#: src/main.c:1206 src/main.c:1227
-msgid "&Sort order..."
-msgstr "Порядок &сортировки"
-
-#: src/main.c:1208 src/main.c:1229
-msgid "&Filter..."
-msgstr "&Фильтр"
-
-#: src/main.c:1211 src/main.c:1232
-msgid "&Network link..."
-msgstr "Се&тевое соединение..."
-
-#: src/main.c:1212 src/main.c:1233
-msgid "FT&P link..."
-msgstr "&FTP-соединение"
-
-#: src/main.c:1216 src/main.c:1237
-msgid "&Drive...       M-d"
-msgstr "&Диск...              M-d"
-
-#: src/main.c:1218 src/main.c:1239
-msgid "&Rescan         C-r"
-msgstr "&Перечитать           C-r"
-
-#: src/main.c:1243
-msgid "&User menu          F2"
-msgstr "&Меню пользователя     F2"
-
-#: src/main.c:1244
-msgid "&View               F3"
-msgstr "Просмотр &файла        F3"
-
-#: src/main.c:1245
-msgid "&Filtered view     M-!"
-msgstr "&Просмотр команды     M-!"
-
-#: src/main.c:1246
-msgid "&Edit               F4"
-msgstr "&Редактирование        F4"
-
-#: src/main.c:1247
-msgid "&Copy               F5"
-msgstr "&Копирование           F5"
-
-#: src/main.c:1248
-msgid "c&Hmod           C-x c"
-msgstr "Права &доступа      C-x c"
-
-#: src/main.c:1250
-msgid "&Link            C-x l"
-msgstr "&Жесткая ссылка     C-x l"
-
-#: src/main.c:1251
-msgid "&SymLink         C-x s"
-msgstr "&Символич. ссылка   C-x s"
-
-#: src/main.c:1252
-msgid "edit s&Ymlink  C-x C-s"
-msgstr "Правка ссы&лки    C-x C-s"
-
-#: src/main.c:1253
-msgid "ch&Own           C-x o"
-msgstr "&Владелец/группа    C-x o"
-
-#: src/main.c:1254
-msgid "&Advanced chown       "
-msgstr "Пр&ава (расширенные)    "
-
-#: src/main.c:1256
-msgid "&Rename/Move        F6"
-msgstr "Пере&именование        F6"
-
-#: src/main.c:1257
-msgid "&Mkdir              F7"
-msgstr "Со&здание каталога     F7"
-
-#: src/main.c:1258
-msgid "&Delete             F8"
-msgstr "&Удаление              F8"
-
-#: src/main.c:1259
-msgid "&Quick cd          M-c"
-msgstr "Сме&на каталога       M-c"
-
-#: src/main.c:1261
-msgid "select &Group      M-+"
-msgstr "Отметить &группу      M-+"
-
-#: src/main.c:1262
-msgid "u&Nselect group    M-\\"
-msgstr "Снять &отметку        M-\\"
-
-#: src/main.c:1263
-msgid "reverse selec&Tion M-*"
-msgstr "Инвер&тировать отметку  *"
-
-#: src/main.c:1265
-msgid "e&Xit              F10"
-msgstr "Вы&ход                F10"
-
-#. I know, I'm lazy, but the tree widget when it's not running
-#. * as a panel still has some problems, I have not yet finished
-#. * the WTree widget port, sorry.
-#.
-#: src/main.c:1274
-msgid "&Directory tree"
-msgstr "&Дерево каталогов"
-
-#: src/main.c:1275
-msgid "&Find file            M-?"
-msgstr "Поиск &файла           M-?"
-
-#: src/main.c:1277
-msgid "s&Wap panels          C-u"
-msgstr "&Переставить панели    C-u"
-
-#: src/main.c:1278
-msgid "switch &Panels on/off C-o"
-msgstr "&Отключить панели      C-o"
-
-#: src/main.c:1280
-msgid "&Compare directories  C-x d"
-msgstr "&Сравнить каталоги     C-x d"
-
-#: src/main.c:1281
-msgid "e&Xternal panelize    C-x !"
-msgstr "&Критерий панелизации  C-x !"
-
-#: src/main.c:1283
-msgid "show directory s&Izes"
-msgstr "&Размеры каталогов"
-
-#: src/main.c:1286
-msgid "command &History"
-msgstr "&История команд"
-
-#: src/main.c:1287
-msgid "di&Rectory hotlist    C-\\"
-msgstr "Справочник ката&логов  C-\\"
-
-#: src/main.c:1289
-msgid "&Active VFS list      C-x a"
-msgstr "Список &активных ВФС   C-x a"
-
-#: src/main.c:1292
-msgid "&Background jobs      C-x j"
-msgstr "Фо&новые задания       C-x j"
-
-#: src/main.c:1296
-msgid "&Undelete files (ext2fs only)"
-msgstr "&Восстановление файлов"
-
-#: src/main.c:1299
-msgid "&Listing format edit"
-msgstr "&Редактирование формата"
-
-#: src/main.c:1301
-msgid "&Extension file edit"
-msgstr "Файл рас&ширений"
-
-#: src/main.c:1302
-msgid "&Menu file edit"
-msgstr "Файл &меню"
-
-#: src/main.c:1307
-msgid "&Configuration..."
-msgstr "&Конфигурация"
-
-#: src/main.c:1309
-msgid "c&Onfirmation..."
-msgstr "&Подтверждение"
-
-#: src/main.c:1310
-msgid "&Display bits..."
-msgstr "&Биты символов..."
-
-#: src/main.c:1312
-msgid "learn &Keys..."
-msgstr "&Распознавание клавиш..."
-
-#: src/main.c:1315
-msgid "&Virtual FS..."
-msgstr "Виртуальные &ФС..."
-
-#: src/main.c:1318
-msgid "&Save setup"
-msgstr "&Сохранить настройки"
-
-#: src/main.c:1334 src/main.c:1336
-msgid " Left "
-msgstr " Левая "
-
-#: src/main.c:1336
-msgid " Above "
-msgstr " Верхняя "
-
-#: src/main.c:1344 src/main.c:1346
-msgid " Right "
-msgstr " Правая "
-
-#: src/main.c:1346
-msgid " Below "
-msgstr " Нижняя "
-
-#: src/main.c:1407
-msgid " Information "
-msgstr " Информация "
-
-#: src/main.c:1408
-msgid ""
-" Using the fast reload option may not reflect the exact \n"
-" directory contents. In this cases you'll need to do a  \n"
-" manual reload of the directory. See the man page for   \n"
-" the details.                                           "
-msgstr ""
-
-#: src/main.c:1671 src/screen.c:2195 src/screen.c:2229
-msgid "Menu"
-msgstr "Меню"
-
-#: src/main.c:1885
-msgid "Thank you for using GNU Midnight Commander"
-msgstr "Благодарим Вас за использование GNU Midnight Commander"
-
-#: src/main.c:2231
-#, c-format
-msgid "with mouse support on xterm%s.\n"
-msgstr "с поддержкой мыши на xterm\n"
-
-#: src/main.c:2232
-msgid " and the Linux console"
-msgstr "и Linux-консоли"
-
-#: src/main.c:2323
-msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
-
-#: src/main.c:2570
-#, c-format
-msgid "Library directory for the Midnight Commander: %s\n"
-msgstr "Библиотечный каталог Midnight Commander: %s\n"
-
-#: src/main.c:2575
-msgid ""
-"Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
-msgstr ""
-
-#: src/main.c:2638
-msgid "[DEVEL-ONLY: Debug the background code]"
-msgstr ""
-
-#: src/main.c:2641
-msgid "Create command file to set default directory upon exit."
-msgstr ""
-
-#: src/main.c:2643
-msgid "Force color mode."
-msgstr ""
-
-#: src/main.c:2644
-msgid "Specify colors (use --help-colors to get a list)."
-msgstr ""
-
-#: src/main.c:2646
-msgid "[DEVEL-ONLY: Debug the subshell."
-msgstr ""
-
-#: src/main.c:2648
-msgid "Startup the internal editor."
-msgstr ""
-
-#: src/main.c:2649
-msgid "Shows this help message."
-msgstr ""
-
-#: src/main.c:2650
-msgid "Help on how to specify colors."
-msgstr ""
-
-#: src/main.c:2652
-msgid "Log ftpfs commands to the file."
-msgstr ""
-
-#: src/main.c:2654
-msgid "Prints out the configured paths."
-msgstr ""
-
-#: src/main.c:2656
-msgid "Force black and white display."
-msgstr ""
-
-#: src/main.c:2657
-msgid "Disable mouse support."
-msgstr ""
-
-#: src/main.c:2659
-msgid "Force the concurrent subshell mode"
-msgstr ""
-
-#: src/main.c:2660
-msgid "Disable the concurrent subshell mode."
-msgstr ""
-
-#: src/main.c:2661
-msgid "Force subshell execution."
-msgstr ""
-
-#: src/main.c:2663
-msgid "At exit, print the last working directory."
-msgstr ""
-
-#: src/main.c:2664
-msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
-msgstr ""
-
-#: src/main.c:2665
-msgid "Disables verbose operation (for slow terminals)."
-msgstr ""
-
-#: src/main.c:2667
-msgid "Use simple symbols for line drawing."
-msgstr ""
-
-#: src/main.c:2672
-msgid "Activate support for the TERMCAP variable."
-msgstr ""
-
-#: src/main.c:2674
-msgid "Report versionand configuration options."
-msgstr ""
-
-#: src/main.c:2675
-msgid "Start up into the viewer mode."
-msgstr ""
-
-#: src/main.c:2676
-msgid "Force xterm mouse support and screen save/restore"
-msgstr ""
-
-#: src/main.c:2745
-msgid "[this dir] [other dir]"
-msgstr ""
-
-#: src/main.c:2986
-msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
-"On some systems you may want to run # `which mc`\n"
-msgstr ""
-
-#: src/main.c:3074
-msgid " Notice "
-msgstr ""
-
-#: src/main.c:3075
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Файлы конфигурации Midnight Commander \n"
-" теперь хранятся в каталоге ~/.mc, старые \n"
-" файлы сейчас туда перемещены\n"
-
-#: src/option.c:74
-msgid "safe de&Lete"
-msgstr "Безопасное &удаление"
-
-#: src/option.c:75
-msgid "cd follows lin&Ks"
-msgstr "Смена &каталога по ссылкам"
-
-#: src/option.c:76
-msgid "advanced cho&Wn"
-msgstr "Расширенная команда cho&Wn"
-
-#: src/option.c:77
-msgid "l&Ynx-like motion"
-msgstr "Навигация в стиле l&Ynx"
-
-#: src/option.c:79
-msgid "Animation"
-msgstr "Анимация"
-
-#: src/option.c:81
-msgid "ro&Tating dash"
-msgstr "Вращающийся &индикатор"
-
-#: src/option.c:83
-msgid "co&Mplete: show all"
-msgstr "Допо&лнение: показывать все"
-
-#: src/option.c:84
-msgid "&Use internal view"
-msgstr "Встро&енный просмотр"
-
-#: src/option.c:85
-msgid "use internal ed&It"
-msgstr "Встроенный &редактор"
-
-#: src/option.c:86
-msgid "auto m&Enus"
-msgstr "Автоматические &меню"
-
-#: src/option.c:87
-msgid "&Auto save setup"
-msgstr "&Автосохранение настроек"
-
-#: src/option.c:88
-msgid "shell &Patterns"
-msgstr "Образцы в стиле &shell"
-
-#: src/option.c:89
-msgid "&Verbose operation"
-msgstr "Детали операци&й"
-
-#: src/option.c:90
-msgid "&Fast dir reload"
-msgstr "&Быстрая загрузка каталога"
-
-#: src/option.c:91
-msgid "mi&X all files"
-msgstr "Смешивать &файлы/каталоги"
-
-#: src/option.c:92
-msgid "&Drop down menus"
-msgstr "Выпадение мен&ю при вызове"
-
-#: src/option.c:93
-msgid "ma&Rk moves down"
-msgstr "&Отметка перемещает курсор"
-
-#: src/option.c:94
-msgid "show &Hidden files"
-msgstr "Показывать скр&ытые файлы"
-
-#: src/option.c:95
-msgid "show &Backup files"
-msgstr "Показывать ре&зервные файлы"
-
-#: src/option.c:102
-msgid "&Never"
-msgstr "&Никогда"
-
-#: src/option.c:103
-msgid "on dumb &Terminals"
-msgstr "На &тупых терминалах"
-
-#: src/option.c:104
-msgid "alwa&Ys"
-msgstr "&Всегда"
-
-#. Similar code is in layout.c (init_layout())
-#: src/option.c:152
-msgid " Configure options "
-msgstr " Параметры конфигурации "
-
-#: src/option.c:153
-msgid " Panel options "
-msgstr " Настройки панелей "
-
-#: src/option.c:154
-msgid " Pause after run... "
-msgstr " Пауза после исполнения... "
-
-#: src/option.c:206
-msgid "Configure options"
-msgstr "Параметры конфигурации"
-
-#: src/option.c:243
-msgid "Pause after run..."
-msgstr "Пауза после запуска..."
-
-#: src/option.c:245
-msgid "Panel options"
-msgstr "Настройки панелей"
-
-#: src/panelize.c:90
-msgid "&Add new"
-msgstr "&Добавить"
-
-#: src/panelize.c:102
-msgid " External panelize "
-msgstr " Внешняя панелизация "
-
-#: gnome/glayout.c:326 src/panelize.c:197 src/panelize.c:459
-msgid "External panelize"
-msgstr "Внешняя панелизация"
-
-#: src/panelize.c:208
-msgid "Command"
-msgstr "Команда"
-
-#: src/panelize.c:222 src/panelize.c:278 src/panelize.c:348 src/panelize.c:369
-msgid "Other command"
-msgstr "Новая команда"
-
-#: src/panelize.c:262
-msgid " Add to external panelize "
-msgstr " Добавить в список команд "
-
-#: src/panelize.c:263
-msgid " Enter command label: "
-msgstr " Введите название команды: "
-
-#: src/panelize.c:302
-msgid " I can't run external panelize while logged on a non local directory "
-msgstr " Я не могу выполнить это команду будучи в нелокальном каталоге "
-
-#: src/panelize.c:351
-msgid "Find rejects after patching"
-msgstr "Найти корректуры, отвергнутые командой patch"
-
-#: src/panelize.c:352
-msgid "Find *.orig after patching"
-msgstr "Найти оригиналы (*.orig) после команды patch"
-
-#: src/panelize.c:353
-msgid "Find SUID and SGID programs"
-msgstr "Найти программы со взведенным SUID/SGID битами"
-
-#: src/panelize.c:404
-msgid "Cannot invoke command."
-msgstr "Не могу исполнить команду."
-
-#: src/screen.c:419 src/screen.c:422
-msgid "Size"
-msgstr "Размер"
-
-#: src/screen.c:421
-msgid "MTime"
-msgstr "Время правки"
-
-#: src/screen.c:423
-msgid "Permission"
-msgstr "Атрибуты"
-
-#: src/screen.c:424
-msgid "Perm"
-msgstr "Права"
-
-#: src/screen.c:425
-msgid "|"
-msgstr ""
-
-#: src/screen.c:426
-msgid "Nl"
-msgstr "Кс"
-
-#: src/screen.c:427
-msgid "GID"
-msgstr ""
-
-#: src/screen.c:428
-msgid "UID"
-msgstr ""
-
-#. Owner
-#: gnome/gprop.c:335 src/screen.c:429
-msgid "Owner"
-msgstr "Владелец"
-
-#. Group
-#: gnome/gprop.c:225 gnome/gprop.c:350 src/screen.c:430
-msgid "Group"
-msgstr "Группа"
-
-#: src/screen.c:431
-msgid "ATime"
-msgstr "Посл. доступ"
-
-#: src/screen.c:432
-msgid "CTime"
-msgstr "Изм. узла"
-
-#: src/screen.c:436
-msgid "Inode"
-msgstr "Узел"
-
-#: src/screen.c:640
-#, c-format
-msgid "  %s bytes in %d file%s"
-msgstr ""
-
-#: gnome/gscreen.c:1200 src/screen.c:667
-msgid "<readlink failed>"
-msgstr ""
-
-#: src/screen.c:1289
-msgid "Unknow tag on display format: "
-msgstr ""
-
-#: gnome/gdesktop.c:1072 src/screen.c:1982
-msgid " Do you really want to execute? "
-msgstr ""
-
-#: gnome/glayout.c:284 gnome/gscreen.c:369 src/screen.c:2196 src/screen.c:2230
-msgid "View"
-msgstr ""
-
-#: src/screen.c:2197 src/screen.c:2231 src/view.c:1986
-msgid "Edit"
-msgstr "Правка"
-
-#: src/screen.c:2199 src/screen.c:2233 src/tree.c:1459
-msgid "RenMov"
-msgstr ""
-
-#: gnome/glayout.c:281 src/screen.c:2200 src/screen.c:2234 src/tree.c:1463
-msgid "Mkdir"
-msgstr ""
-
-#: src/subshell.c:283
-#, c-format
-msgid "Couldn't open named pipe %s\n"
-msgstr ""
-
-#: src/subshell.c:696
-msgid " The shell is still active. Quit anyway? "
-msgstr ""
-
-#: src/subshell.c:722
-msgid " There are stopped jobs."
-msgstr ""
-
-#: src/subshell.c:723
-msgid " Quit anyway? "
-msgstr ""
-
-#: src/subshell.c:776
-#, c-format
-msgid "Warning: Couldn't change to %s.\n"
-msgstr ""
-
-#: src/tree.c:626
-#, c-format
-msgid ""
-"Can't open the %s file for writing:\n"
-"%s\n"
-msgstr ""
-
-#: src/tree.c:639
-#, c-format
-msgid ""
-"Can't write to the %s file:\n"
-"%s\n"
-msgstr ""
-
-#: src/tree.c:1098
-#, c-format
-msgid "Copy \"%s\" directory to:"
-msgstr ""
-
-#: src/tree.c:1131
-#, c-format
-msgid "Move \"%s\" directory to:"
-msgstr ""
-
-#: src/tree.c:1138
-#, c-format
-msgid ""
-" Can't stat the destination \n"
-" %s "
-msgstr ""
-
-#: src/tree.c:1144
-msgid " The destination isn't a directory "
-msgstr ""
-
-#: src/tree.c:1194
-#, c-format
-msgid "  Delete %s?  "
-msgstr ""
-
-#: src/tree.c:1232
-msgid "Static"
-msgstr ""
-
-#: src/tree.c:1232
-msgid "Dynamc"
-msgstr ""
-
-#: src/tree.c:1313
-#, c-format
-msgid ""
-" Can't chdir to \"%s\" \n"
-" %s "
-msgstr ""
-
-#: gnome/glayout.c:301 src/tree.c:1453
-msgid "Rescan"
-msgstr ""
-
-#: src/tree.c:1455
-msgid "Forget"
-msgstr "Забыть"
-
-#: src/tree.c:1468
-msgid "Rmdir"
-msgstr ""
-
-#: src/user.c:263
-#, c-format
-msgid " Invalid shell pattern defination \"%c\". "
-msgstr ""
-
-#: src/user.c:395
-msgid " Debug "
-msgstr " Отладка "
-
-#: src/user.c:404
-msgid " ERROR: "
-msgstr " ОШИБКА: "
-
-#: src/user.c:408
-msgid " True:  "
-msgstr " Истина: "
-
-#: src/user.c:410
-msgid " False: "
-msgstr " Ложь: "
-
-#: src/user.c:607
-msgid " Warning -- ignoring file "
-msgstr " Предупреждение - файл игнорируется "
-
-#: src/user.c:608
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"и доступен другим на запись. Использование такого файла неприемлемо\n"
-"c точки зрения безопасности."
-
-#: src/user.c:626
-msgid " I can't run programs while logged on a non local directory "
-msgstr " Я не могу исполнять программы, будучи на виртуальной файловой системе"
-
-#. Create listbox
-#: src/user.c:713
-msgid " User menu "
-msgstr " Меню пользователя "
-
-#: src/util.c:232
-msgid "name_trunc: too big"
-msgstr ""
-
-#: src/utilunix.c:374
-msgid " Pipe failed "
-msgstr " Ошибка создания канала "
-
-#: src/utilunix.c:378
-msgid " Dup failed "
-msgstr " Ошибка дублирования дескриптора "
-
-#: src/view.c:407
-msgid ""
-"File: \n"
-"\n"
-"    "
-msgstr ""
-"Файл: \n"
-"\n"
-"    "
-
-#: src/view.c:408
-msgid ""
-"\n"
-"\n"
-"has been modified, do you want to save the changes?\n"
-msgstr ""
-"\n"
-"\n"
-"был модифицирован, Вы хотите сохранить изменения?\n"
-
-#: src/view.c:410
-msgid " Save changes "
-msgstr " Сохранить изменения "
-
-#: src/view.c:452
-msgid " Can't spawn child program "
-msgstr " Не могу породить дочерний процесс "
-
-#: src/view.c:462
-msgid " Empty output from child filter "
-msgstr " У дочернего процесса вывод отсутствует "
-
-#: src/view.c:468
-msgid " Could not open file "
-msgstr " Не могу открыть файл "
-
-#: src/view.c:486
-msgid " Can't open file \""
-msgstr " Не могу открыть файл \""
-
-#: src/view.c:494
-msgid ""
-" Can't stat file \n"
-" "
-msgstr ""
-
-#: src/view.c:500
-msgid " Can't view: not a regular file "
-msgstr " Просмотр невозможен: не обычный файл "
-
-#: src/view.c:520
-msgid " Can not fetch local copy "
-msgstr " Не могу извлечь локальную копию "
-
-#: src/view.c:703
-#, c-format
-msgid "File: %s"
-msgstr "Файл: %s"
-
-#: gnome/gview.c:119 src/view.c:708
-#, c-format
-msgid "Offset 0x%08x"
-msgstr ""
-
-#: gnome/gview.c:121 src/view.c:710
-#, c-format
-msgid "Col %d"
-msgstr ""
-
-#: gnome/gview.c:125 src/view.c:714
-#, c-format
-msgid "%s bytes"
-msgstr ""
-
-#: src/view.c:719
-msgid "  [grow]"
-msgstr ""
-
-#: src/view.c:1559 src/view.c:1681
-msgid " Search string not found "
-msgstr ""
-
-#: src/view.c:1720
-msgid " Invalid regular expression "
-msgstr ""
-
-#: src/view.c:1848
-#, c-format
-msgid ""
-" The current line number is %d.\n"
-" Enter the new line number:"
-msgstr ""
-
-#: src/view.c:1877
-msgid " Enter regexp:"
-msgstr ""
-
-#: src/view.c:1909
-msgid " Enter search string:"
-msgstr ""
-
-#: src/view.c:1980
-msgid "Ascii"
-msgstr ""
-
-#: gnome/gview.c:308 src/view.c:1980
-msgid "Hex"
-msgstr ""
-
-#: src/view.c:1981
-msgid "Line"
-msgstr "Строка"
-
-#: src/view.c:1982
-msgid "RxSrch"
-msgstr "РегВыр"
-
-#: src/view.c:1985
-msgid "EdText"
-msgstr ""
-
-#: src/view.c:1985
-msgid "EdHex"
-msgstr ""
-
-#: src/view.c:1987
-msgid "UnWrap"
-msgstr ""
-
-#: gnome/gview.c:300 src/view.c:1987
-msgid "Wrap"
-msgstr ""
-
-#: src/view.c:1990
-msgid "HxSrch"
-msgstr ""
-
-#: src/view.c:1993
-msgid "Raw"
-msgstr ""
-
-#: src/view.c:1993
-msgid "Parse"
-msgstr ""
-
-#: src/view.c:1997
-msgid "Unform"
-msgstr ""
-
-#: src/view.c:1997
-msgid "Format"
-msgstr ""
-
-#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
-#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
-#: src/win.c:216
-msgid "Function key 1"
-msgstr ""
-
-#: src/win.c:217
-msgid "Function key 2"
-msgstr ""
-
-#: src/win.c:218
-msgid "Function key 3"
-msgstr ""
-
-#: src/win.c:219
-msgid "Function key 4"
-msgstr ""
-
-#: src/win.c:220
-msgid "Function key 5"
-msgstr ""
-
-#: src/win.c:221
-msgid "Function key 6"
-msgstr ""
-
-#: src/win.c:222
-msgid "Function key 7"
-msgstr ""
-
-#: src/win.c:223
-msgid "Function key 8"
-msgstr ""
-
-#: src/win.c:224
-msgid "Function key 9"
-msgstr ""
-
-#: src/win.c:225
-msgid "Function key 10"
-msgstr ""
-
-#: src/win.c:226
-msgid "Function key 11"
-msgstr ""
-
-#: src/win.c:227
-msgid "Function key 12"
-msgstr ""
-
-#: src/win.c:228
-msgid "Function key 13"
-msgstr ""
-
-#: src/win.c:229
-msgid "Function key 14"
-msgstr ""
-
-#: src/win.c:230
-msgid "Function key 15"
-msgstr ""
-
-#: src/win.c:231
-msgid "Function key 16"
-msgstr ""
-
-#: src/win.c:232
-msgid "Function key 17"
-msgstr ""
-
-#: src/win.c:233
-msgid "Function key 18"
-msgstr ""
-
-#: src/win.c:234
-msgid "Function key 19"
-msgstr ""
-
-#: src/win.c:235
-msgid "Function key 20"
-msgstr ""
-
-#: src/win.c:236
-msgid "Backspace key"
-msgstr ""
-
-#: src/win.c:237
-msgid "End key"
-msgstr ""
-
-#: src/win.c:238
-msgid "Up arrow key"
-msgstr ""
-
-#: src/win.c:239
-msgid "Down arrow key"
-msgstr ""
-
-#: src/win.c:240
-msgid "Left arrow key"
-msgstr ""
-
-#: src/win.c:241
-msgid "Right arrow key"
-msgstr ""
-
-#: src/win.c:242
-msgid "Home key"
-msgstr ""
-
-#: src/win.c:243
-msgid "Page Down key"
-msgstr ""
-
-#: src/win.c:244
-msgid "Page Up key"
-msgstr ""
-
-#: src/win.c:245
-msgid "Insert key"
-msgstr ""
-
-#: src/win.c:246
-msgid "Delete key"
-msgstr ""
-
-#: src/win.c:247
-msgid "Completion/M-tab"
-msgstr ""
-
-#: src/win.c:248
-msgid "+ on keypad"
-msgstr ""
-
-#: src/win.c:249
-msgid "- on keypad"
-msgstr ""
-
-#: src/win.c:250
-msgid "* on keypad"
-msgstr ""
-
-#. From here on, these won't be shown in Learn keys (no space)
-#: src/win.c:252
-msgid "Left arrow keypad"
-msgstr ""
-
-#: src/win.c:253
-msgid "Right arrow keypad"
-msgstr ""
-
-#: src/win.c:254
-msgid "Up arrow keypad"
-msgstr ""
-
-#: src/win.c:255
-msgid "Down arrow keypad"
-msgstr ""
-
-#: src/win.c:256
-msgid "Home on keypad"
-msgstr ""
-
-#: src/win.c:257
-msgid "End on keypad"
-msgstr ""
-
-#: src/win.c:258
-msgid "Page Down keypad"
-msgstr ""
-
-#: src/win.c:259
-msgid "Page Up keypad"
-msgstr ""
-
-#: src/win.c:260
-msgid "Insert on keypad"
-msgstr ""
-
-#: src/win.c:261
-msgid "Delete on keypad"
-msgstr ""
-
-#: src/win.c:262
-msgid "Enter on keypad"
-msgstr ""
-
-#: src/win.c:263
-msgid "Slash on keypad"
-msgstr ""
-
-#: src/win.c:264
-msgid "NumLock on keypad"
-msgstr ""
-
-#: src/wtools.c:609
-msgid "Password"
-msgstr ""
-
-#: src/wtools.c:663
-msgid "Ok"
 msgstr ""
 
 #: gnome/gcmd.c:42
@@ -3914,465 +2346,566 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1209 gnome/main.c:804 gnome/screen.c:2034
+#: src/main.c:804 src/screen.c:2034
+msgid " The Midnight Commander "
+msgstr ""
+
+#: gnome/gcmd.c:93 gnome/main.c:805 src/main.c:805
+msgid " Do you really want to quit the Midnight Commander? "
+msgstr " Вы действительно хотите выйти из Midnight Commander? "
+
 #. Not yet implemented the Link bits, so better to not show what we dont have
-#: gnome/gdesktop.c:348
+#: gnome/gdesktop.c:350
 msgid "Link"
 msgstr ""
 
-#. We connect_object_after to the items so that we can destroy
-#. * the menu at the proper time.
-#.
-#: gnome/gdesktop.c:963 gnome/gscreen.c:365
-msgid "Properties"
+#: gnome/gdesktop.c:627
+#, fuzzy
+msgid "Do you want to delete "
+msgstr " Наберите 'yes' если Вы ДЕЙСТВИТЕЛЬНО хотите "
+
+#: gnome/gdesktop.c:1210 gnome/screen.c:2035 src/screen.c:2035
+msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/gdesktop.c:1082
+#: gnome/gdesktop.c:1220
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1083 gnome/gscreen.c:321
+#: gnome/gdesktop.c:1221 gnome/gscreen.c:467
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1258
+#: gnome/gdesktop.c:1356
 #, c-format
 msgid " Could not open %s directory"
 msgstr ""
 
-#: gnome/glayout.c:276
-msgid "New panel"
+#: gnome/glayout.c:268
+msgid "New window"
 msgstr ""
 
-#: gnome/glayout.c:276
-msgid "Opens a new panel"
+#: gnome/glayout.c:268
+msgid "Opens a new window"
 msgstr ""
 
-#: gnome/glayout.c:277
-msgid "Open Terminal"
-msgstr ""
+#: gnome/glayout.c:269
+#, fuzzy
+msgid "New Terminal"
+msgstr "На &тупых терминалах"
 
-#: gnome/glayout.c:277
+#: gnome/glayout.c:269
 msgid "Opens a terminal"
 msgstr ""
 
-#: gnome/glayout.c:279
+#: gnome/glayout.c:271 gnome/gscreen.c:546
+msgid "Copy..."
+msgstr ""
+
+#: gnome/glayout.c:271
 msgid "Copy files"
 msgstr ""
 
-#: gnome/glayout.c:280
-msgid "Rename/Move"
-msgstr ""
+#: gnome/glayout.c:272
+#, fuzzy
+msgid "Rename/Move..."
+msgstr "Пере&именование        F6"
 
-#: gnome/glayout.c:280
+#: gnome/glayout.c:272
 msgid "Rename or move files"
 msgstr ""
 
-#: gnome/glayout.c:281
+#: gnome/glayout.c:273
+#, fuzzy
+msgid "New directory..."
+msgstr "каталог"
+
+#: gnome/glayout.c:273
 msgid "Creates a new folder"
 msgstr ""
 
-#: gnome/glayout.c:282
+#: gnome/glayout.c:274 gnome/gscreen.c:548
+msgid "Delete..."
+msgstr ""
+
+#: gnome/glayout.c:274
 msgid "Delete files from disk"
 msgstr ""
 
-#: gnome/glayout.c:284
+#: gnome/glayout.c:276 gnome/gscreen.c:527 gnome/screen.c:2254
+#: gnome/screen.c:2288 src/screen.c:2254 src/screen.c:2288
+msgid "View"
+msgstr ""
+
+#: gnome/glayout.c:276
 msgid "View file"
 msgstr ""
 
-#: gnome/glayout.c:285
+#: gnome/glayout.c:277
 msgid "View raw"
 msgstr ""
 
-#: gnome/glayout.c:285
+#: gnome/glayout.c:277
 msgid "View the file without further processing"
 msgstr ""
 
-#: gnome/glayout.c:287
-msgid "Select group"
+#: gnome/glayout.c:279
+msgid "Select group by pattern..."
 msgstr ""
 
-#: gnome/glayout.c:287
-msgid "Selects a group of files"
+#: gnome/glayout.c:279
+msgid "Select a group of files"
 msgstr ""
 
-#: gnome/glayout.c:288
-msgid "Unselect group"
+#: gnome/glayout.c:280
+msgid "Unselect group by pattern..."
 msgstr ""
 
-#: gnome/glayout.c:288
+#: gnome/glayout.c:280
 msgid "Un-selects a group of marked files"
 msgstr ""
 
-#: gnome/glayout.c:289
+#: gnome/glayout.c:281
 msgid "Reverse selection"
 msgstr ""
 
-#: gnome/glayout.c:289
+#: gnome/glayout.c:281
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:291
+#: gnome/glayout.c:283
 msgid "Close"
 msgstr ""
 
-#: gnome/glayout.c:291
+#: gnome/glayout.c:283
 msgid "Close this panel"
 msgstr ""
 
-#: gnome/glayout.c:292
+#: gnome/glayout.c:284
 msgid "Exit"
 msgstr ""
 
-#: gnome/glayout.c:292
+#: gnome/glayout.c:284
 msgid "Exit program"
 msgstr ""
 
-#: gnome/glayout.c:298
+#: gnome/glayout.c:290
 msgid "Display mode..."
 msgstr ""
 
-#: gnome/glayout.c:298
+#: gnome/glayout.c:290
 msgid "Set the display mode for the panel"
 msgstr ""
 
-#: gnome/glayout.c:299
+#: gnome/glayout.c:291
 msgid "Sort order..."
 msgstr "Порядок &сортировки"
 
-#: gnome/glayout.c:299
+#: gnome/glayout.c:291
 msgid "Changes the sort order of the files"
 msgstr ""
 
-#: gnome/glayout.c:300
+#: gnome/glayout.c:292
 msgid "Filter..."
 msgstr "&Фильтр"
 
-#: gnome/glayout.c:300
+#: gnome/glayout.c:292
 msgid "Set a filter for the files"
 msgstr ""
 
-#: gnome/glayout.c:301
+#: gnome/glayout.c:293 gnome/tree.c:1455 src/tree.c:1455
+msgid "Rescan"
+msgstr ""
+
+#: gnome/glayout.c:293
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:304
+#: gnome/glayout.c:296
 msgid "Network link..."
 msgstr "Се&тевое соединение..."
 
-#: gnome/glayout.c:304
+#: gnome/glayout.c:296
 msgid "Connect to a remote machine"
 msgstr ""
 
-#: gnome/glayout.c:305
+#: gnome/glayout.c:297
 msgid "FTP link..."
 msgstr "&FTP-соединение"
 
-#: gnome/glayout.c:305
+#: gnome/glayout.c:297
 msgid "Connect to a remote machine with FTP"
 msgstr ""
 
-#: gnome/glayout.c:311
-msgid "Confirmation"
-msgstr ""
+#: gnome/glayout.c:303
+#, fuzzy
+msgid "Confirmation..."
+msgstr "&Конфигурация"
 
-#: gnome/glayout.c:311
+#: gnome/glayout.c:303
 msgid "Confirmation settings"
 msgstr ""
 
-#: gnome/glayout.c:312 gnome/glayout.c:356
-msgid "Options"
-msgstr ""
+#: gnome/glayout.c:304
+#, fuzzy
+msgid "Options..."
+msgstr " Настройка "
 
-#: gnome/glayout.c:312
+#: gnome/glayout.c:304
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:315
-msgid "Virtual FS"
-msgstr ""
+#: gnome/glayout.c:307
+#, fuzzy
+msgid "Virtual FS..."
+msgstr "Виртуальные &ФС..."
 
-#: gnome/glayout.c:315
+#: gnome/glayout.c:307
 msgid "Virtual File System settings"
 msgstr ""
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:310
 msgid "Save setup"
 msgstr "&Сохранить настройки"
 
-#: gnome/glayout.c:323
-msgid "Find"
-msgstr ""
+#: gnome/glayout.c:315
+#, fuzzy
+msgid "Find..."
+msgstr "&FTP-соединение"
 
-#: gnome/glayout.c:323
+#: gnome/glayout.c:315
 msgid "Locate files on disk"
 msgstr ""
 
-#: gnome/glayout.c:324
-msgid "Hotlist"
-msgstr ""
+#: gnome/glayout.c:316
+#, fuzzy
+msgid "Hotlist..."
+msgstr "Цветовыделение"
 
-#: gnome/glayout.c:324
+#: gnome/glayout.c:316
 msgid "List of favorite sites"
 msgstr ""
 
-#: gnome/glayout.c:325
-msgid "Compare panels"
+#: gnome/glayout.c:317
+msgid "Compare panels..."
 msgstr ""
 
-#: gnome/glayout.c:325
+#: gnome/glayout.c:317
 msgid "Compare panel contents"
 msgstr ""
 
-#: gnome/glayout.c:328
-msgid "Active VFS list"
-msgstr ""
+#: gnome/glayout.c:318
+#, fuzzy
+msgid "External panelize..."
+msgstr "Внешняя панелизация"
 
-#: gnome/glayout.c:328
+#: gnome/glayout.c:320
+#, fuzzy
+msgid "Active VFS list..."
+msgstr "Список &активных ВФС   C-x a"
+
+#: gnome/glayout.c:320
 msgid "List of active virtual file systems"
 msgstr ""
 
-#: gnome/glayout.c:331
-msgid "Undelete files (ext2fs only)"
+#: gnome/glayout.c:323
+#, fuzzy
+msgid "Undelete files (ext2fs only)..."
 msgstr "Восстановление файлов (только ext2fs)"
 
-#: gnome/glayout.c:331
+#: gnome/glayout.c:323
 msgid "Recover deleted files"
 msgstr ""
 
-#: gnome/glayout.c:334
-msgid "Background jobs"
-msgstr ""
+#: gnome/glayout.c:326
+#, fuzzy
+msgid "Background jobs..."
+msgstr " Фоновые задания "
 
-#: gnome/glayout.c:334
+#: gnome/glayout.c:326
 msgid "List of background operations"
 msgstr ""
 
-#: gnome/glayout.c:340
+#: gnome/glayout.c:332
 msgid "Arrange icons"
 msgstr "Выровнять иконки"
 
-#: gnome/glayout.c:340
+#: gnome/glayout.c:332
 msgid "Arranges the icons on the desktop"
 msgstr ""
 
-#: gnome/glayout.c:346
+#: gnome/glayout.c:338
 msgid "About"
 msgstr ""
 
-#: gnome/glayout.c:346
+#: gnome/glayout.c:338
 msgid "Information on this program"
 msgstr ""
 
-#: gnome/glayout.c:354
-msgid "Panel"
+#: gnome/glayout.c:345
+#, fuzzy
+msgid "_File"
+msgstr "Файл"
+
+#: gnome/glayout.c:346
+msgid "Window"
 msgstr ""
 
-#: gnome/glayout.c:355
+#: gnome/glayout.c:347
 msgid "Commands"
 msgstr ""
 
-#: gnome/glayout.c:357
+#: gnome/glayout.c:348
+msgid "Options"
+msgstr ""
+
+#: gnome/glayout.c:349
 msgid "Desktop"
 msgstr ""
 
-#: gnome/gprop.c:54 gnome/gprop.c:71
+#: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
 msgstr ""
 
-#: gnome/gprop.c:63
+#: gnome/gprop.c:67
 msgid "Full name: "
 msgstr ""
 
-#: gnome/gprop.c:193
+#: gnome/gprop.c:109 gnome/panelize.c:208 src/panelize.c:208
+msgid "Command"
+msgstr "Команда"
+
+#: gnome/gprop.c:119
+#, fuzzy
+msgid "Command:"
+msgstr "Команда"
+
+#: gnome/gprop.c:129
+#, fuzzy
+msgid "Use terminal"
+msgstr "Встро&енный просмотр"
+
+#: gnome/gprop.c:248
 msgid "File mode (permissions)"
 msgstr ""
 
-#: gnome/gprop.c:204
+#: gnome/gprop.c:259
 msgid "Current mode: "
 msgstr ""
 
 #. Headings
-#: gnome/gprop.c:217
+#: gnome/gprop.c:272
 msgid "Read"
 msgstr ""
 
-#: gnome/gprop.c:218
+#: gnome/gprop.c:273
 msgid "Write"
 msgstr ""
 
-#: gnome/gprop.c:219
+#: gnome/gprop.c:274
 msgid "Exec"
 msgstr ""
 
-#: gnome/gprop.c:220
+#: gnome/gprop.c:275
 msgid "Special"
 msgstr ""
 
 #. Permissions
-#: gnome/gprop.c:224
+#: gnome/gprop.c:279
 msgid "User"
 msgstr ""
 
-#: gnome/gprop.c:226
+#. Group
+#: gnome/gprop.c:280 gnome/gprop.c:405 gnome/screen.c:434 src/screen.c:434
+msgid "Group"
+msgstr "Группа"
+
+#: gnome/gprop.c:281
 msgid "Other"
 msgstr ""
 
 #. Special
-#: gnome/gprop.c:230
+#: gnome/gprop.c:285
 msgid "Set UID"
 msgstr ""
 
-#: gnome/gprop.c:231
+#: gnome/gprop.c:286
 msgid "Set GID"
 msgstr ""
 
-#: gnome/gprop.c:232
+#: gnome/gprop.c:287
 msgid "Sticky"
 msgstr ""
 
-#: gnome/gprop.c:266 gnome/gprop.c:292
+#: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
 msgstr ""
 
-#: gnome/gprop.c:428
+#. Owner
+#: gnome/gprop.c:390 gnome/screen.c:433 src/screen.c:433
+msgid "Owner"
+msgstr "Владелец"
+
+#: gnome/gprop.c:495
 msgid "General"
 msgstr ""
 
-#: gnome/gprop.c:439
+#: gnome/gprop.c:506
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:455
+#: gnome/gprop.c:522
 msgid "Icon"
 msgstr ""
 
-#: gnome/gprop.c:461
+#: gnome/gprop.c:536
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:320
+#: gnome/gscreen.c:466
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:367
+#: gnome/gscreen.c:521 gnome/gscreen.c:522
+msgid "Properties"
+msgstr ""
+
+#: gnome/gscreen.c:524 gnome/gscreen.c:525
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:368
+#: gnome/gscreen.c:526
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:370
+#: gnome/gscreen.c:528
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:372
+#: gnome/gscreen.c:529 gnome/screen.c:2255 gnome/screen.c:2289
+#: gnome/view.c:1997 src/screen.c:2255 src/screen.c:2289 src/view.c:1997
+msgid "Edit"
+msgstr "Правка"
+
+#: gnome/gscreen.c:531
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:373
+#: gnome/gscreen.c:532
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:374
+#: gnome/gscreen.c:533
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:382
-msgid "Copy..."
+#: gnome/gscreen.c:547
+msgid "Rename/move..."
 msgstr ""
 
-#: gnome/gscreen.c:383
-msgid "Rename/move.."
-msgstr ""
-
-#: gnome/gscreen.c:384
-msgid "Delete..."
-msgstr ""
-
-#: gnome/gscreen.c:1008
+#: gnome/gscreen.c:1458
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1010
+#: gnome/gscreen.c:1460
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1012
+#: gnome/gscreen.c:1462
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1014
+#: gnome/gscreen.c:1464
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1016
+#: gnome/gscreen.c:1466
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1018
+#: gnome/gscreen.c:1468
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1020
+#: gnome/gscreen.c:1470
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1022
+#: gnome/gscreen.c:1472
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1025
+#: gnome/gscreen.c:1475
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1027
+#: gnome/gscreen.c:1477
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1029
+#: gnome/gscreen.c:1479
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1031
+#: gnome/gscreen.c:1481
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1033
+#: gnome/gscreen.c:1483
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1035
+#: gnome/gscreen.c:1485
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1037
+#: gnome/gscreen.c:1487
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1039
+#: gnome/gscreen.c:1489
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1041
+#: gnome/gscreen.c:1491
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1166
+#: gnome/gscreen.c:1616
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1176
+#: gnome/gscreen.c:1626
 #, c-format
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1246
+#: gnome/gscreen.c:1650 gnome/screen.c:671 src/screen.c:671
+msgid "<readlink failed>"
+msgstr ""
+
+#: gnome/gscreen.c:1701
 msgid "Filter"
 msgstr ""
 
 #: gnome/gtools.c:48
 msgid "Error"
+msgstr ""
+
+#: gnome/gview.c:119 gnome/view.c:713 src/view.c:713
+#, c-format
+msgid "Offset 0x%08x"
+msgstr ""
+
+#: gnome/gview.c:121 gnome/view.c:715 src/view.c:715
+#, c-format
+msgid "Col %d"
+msgstr ""
+
+#: gnome/gview.c:125 gnome/view.c:719 src/view.c:719
+#, c-format
+msgid "%s bytes"
 msgstr ""
 
 #: gnome/gview.c:284
@@ -4415,6 +2948,10 @@ msgstr ""
 msgid "Continue searching"
 msgstr ""
 
+#: gnome/gview.c:300 gnome/view.c:1998 src/view.c:1998
+msgid "Wrap"
+msgstr ""
+
 #: gnome/gview.c:300
 msgid "Wrap the text"
 msgstr ""
@@ -4423,30 +2960,1766 @@ msgstr ""
 msgid "Formatted"
 msgstr ""
 
-#: gnome/gwidget.c:88
-msgid "ok"
-msgstr ""
-
-#: gnome/gwidget.c:90
-msgid "cancel"
+#: gnome/gview.c:308 gnome/view.c:1991 src/view.c:1991
+msgid "Hex"
 msgstr ""
 
 #: gnome/gwidget.c:92
-msgid "help"
+msgid "ok"
 msgstr ""
 
 #: gnome/gwidget.c:94
-msgid "yes"
+msgid "cancel"
 msgstr ""
 
 #: gnome/gwidget.c:96
-msgid "no"
+msgid "help"
 msgstr ""
 
 #: gnome/gwidget.c:98
-msgid "exit"
+msgid "yes"
 msgstr ""
 
 #: gnome/gwidget.c:100
+msgid "no"
+msgstr ""
+
+#: gnome/gwidget.c:102
+msgid "exit"
+msgstr ""
+
+#: gnome/gwidget.c:104
 msgid "abort"
 msgstr ""
+
+#: gnome/help.c:281 src/help.c:281
+msgid ""
+" Help file format error\n"
+""
+msgstr ""
+
+#: gnome/help.c:320 src/help.c:320
+msgid " Internal bug: Double start of link area "
+msgstr ""
+
+#: gnome/help.c:574 src/help.c:574
+msgid " Can't find node [Contents] in help file "
+msgstr ""
+
+#: gnome/help.c:747 src/help.c:747
+msgid " Help "
+msgstr ""
+
+#: gnome/help.c:770 gnome/user.c:641 src/help.c:770 src/user.c:641
+#, c-format
+msgid ""
+" Can't open file %s \n"
+" %s "
+msgstr ""
+
+#: gnome/help.c:775 src/help.c:775
+#, c-format
+msgid " Can't find node %s in help file "
+msgstr ""
+
+#: gnome/help.c:812 src/help.c:812
+msgid "Index"
+msgstr "Содерж"
+
+#: gnome/help.c:814 src/help.c:814
+msgid "Prev"
+msgstr "Назад"
+
+#: gnome/hotlist.c:134 src/hotlist.c:134
+msgid "&Move"
+msgstr "Пере&местить"
+
+#: gnome/hotlist.c:135 gnome/hotlist.c:1436 gnome/panelize.c:91
+#: gnome/wtools.c:405 src/hotlist.c:135 src/hotlist.c:1436 src/panelize.c:91
+#: src/wtools.c:405
+msgid "&Remove"
+msgstr "&Удалить"
+
+#: gnome/hotlist.c:136 gnome/hotlist.c:816 gnome/hotlist.c:909
+#: src/hotlist.c:136 src/hotlist.c:816 src/hotlist.c:909
+msgid "&Append"
+msgstr "В &Конец"
+
+#: gnome/hotlist.c:137 gnome/hotlist.c:814 gnome/hotlist.c:907
+#: src/hotlist.c:137 src/hotlist.c:814 src/hotlist.c:907
+msgid "&Insert"
+msgstr "В &Начало"
+
+#: gnome/hotlist.c:138 src/hotlist.c:138
+msgid "New &Entry"
+msgstr "Новая &Запись"
+
+#: gnome/hotlist.c:139 src/hotlist.c:139
+msgid "New &Group"
+msgstr "Новая &Группа"
+
+#: gnome/hotlist.c:141 src/hotlist.c:141
+msgid "&Up"
+msgstr "&Вверх"
+
+#: gnome/hotlist.c:142 src/hotlist.c:142
+msgid "&Add current"
+msgstr "Добавить &Текущий"
+
+#: gnome/hotlist.c:143 src/hotlist.c:143
+msgid "Change &To"
+msgstr "Пере&йти"
+
+#: gnome/hotlist.c:203 src/hotlist.c:203
+msgid "Subgroup - press ENTER to see list"
+msgstr "Подгруппа - для разворачивания нажмите ENTER"
+
+#: gnome/hotlist.c:622 src/hotlist.c:622
+msgid "Active VFS directories"
+msgstr "Активные каталоги ВФС"
+
+#: gnome/hotlist.c:622 src/hotlist.c:622
+msgid "Directory hotlist"
+msgstr " Справочник каталогов "
+
+#: gnome/hotlist.c:641 src/hotlist.c:641
+msgid " Directory path "
+msgstr " Путь к каталогу "
+
+#. This one holds the displayed pathname
+#: gnome/hotlist.c:644 gnome/hotlist.c:691 src/hotlist.c:644 src/hotlist.c:691
+msgid " Directory label "
+msgstr " Метка каталога "
+
+#: gnome/hotlist.c:665 src/hotlist.c:665
+msgid "Moving "
+msgstr "Перемещаем "
+
+#: gnome/hotlist.c:886 src/hotlist.c:886
+msgid "New hotlist entry"
+msgstr " Добавление записи в справочник "
+
+#: gnome/hotlist.c:886 src/hotlist.c:886
+msgid "Directory label"
+msgstr " Метка каталога"
+
+#: gnome/hotlist.c:886 src/hotlist.c:886
+msgid "Directory path"
+msgstr " Путь к каталогу"
+
+#: gnome/hotlist.c:966 src/hotlist.c:966
+msgid " New hotlist group "
+msgstr " Добавление группы в справочник "
+
+#: gnome/hotlist.c:966 src/hotlist.c:966
+msgid "Name of new group"
+msgstr " Имя новой группы"
+
+#: gnome/hotlist.c:981 src/hotlist.c:981
+#, c-format
+msgid "Label for \"%s\":"
+msgstr " Метка для \"%s\": "
+
+#: gnome/hotlist.c:986 src/hotlist.c:986
+msgid " Add to hotlist "
+msgstr " Добавить в справочник каталогов "
+
+#: gnome/hotlist.c:1023 src/hotlist.c:1023
+msgid " Remove: "
+msgstr " Удалить: "
+
+#: gnome/hotlist.c:1027 src/hotlist.c:1027
+msgid ""
+"\n"
+" Group not empty.\n"
+" Remove it?"
+msgstr ""
+"\n"
+" Группа не пуста.\n"
+" Удалить ее?"
+
+#: gnome/hotlist.c:1371 src/hotlist.c:1371
+msgid " Top level group "
+msgstr "Группа верхнего уровня"
+
+#: gnome/hotlist.c:1387 src/hotlist.c:1387
+msgid "Hotlist is now kept in file ~/"
+msgstr "Справочник сохранен в файле ~/"
+
+#: gnome/hotlist.c:1389 src/hotlist.c:1389
+msgid "MC will load hotlist from ~/"
+msgstr "MC загрузит справочник каталогов из ~/"
+
+#: gnome/hotlist.c:1391 src/hotlist.c:1391
+msgid "and then delete [Hotlist] section there"
+msgstr "а затем удалит там секцию [Hotlist]"
+
+#: gnome/hotlist.c:1393 gnome/hotlist.c:1412 gnome/hotlist.c:1435
+#: gnome/hotlist.c:1460 src/hotlist.c:1393 src/hotlist.c:1412
+#: src/hotlist.c:1435 src/hotlist.c:1460
+msgid " Hotlist Load "
+msgstr " Загрузка справочника "
+
+#: gnome/hotlist.c:1409 gnome/hotlist.c:1457 src/hotlist.c:1409
+#: src/hotlist.c:1457
+msgid "MC was unable to write ~/"
+msgstr "MC не может писать в файл ~/,"
+
+#: gnome/hotlist.c:1410 src/hotlist.c:1410
+msgid " file, your old hotlist entries were not deleted"
+msgstr "Ваш старый справочник каталогов не удален"
+
+#: gnome/hotlist.c:1424 src/hotlist.c:1424
+msgid "You have ~/"
+msgstr "У Вас есть файл ~/"
+
+#: gnome/hotlist.c:1424 src/hotlist.c:1424
+msgid " file and [Hotlist] section in ~/"
+msgstr "и секция [Hotlist] в ~/"
+
+#: gnome/hotlist.c:1425 src/hotlist.c:1425
+msgid "Your ~/"
+msgstr "Ваш ~/"
+
+#: gnome/hotlist.c:1425 src/hotlist.c:1425
+msgid " most probably was created\n"
+msgstr " скорее всего создан\n"
+
+#: gnome/hotlist.c:1426 src/hotlist.c:1426
+msgid ""
+"by an earlier development version of MC\n"
+"and is more actual than ~/"
+msgstr ""
+"более ранней промежуточной версией MC\n"
+"и более актуален, чем найденный в ~/"
+
+#: gnome/hotlist.c:1427 src/hotlist.c:1427
+msgid ""
+" entries\n"
+"\n"
+msgstr " \n"
+
+#: gnome/hotlist.c:1428 src/hotlist.c:1428
+msgid ""
+"You can choose between\n"
+"\n"
+"  Remove - remove old hotlist entries from ~/"
+msgstr ""
+
+#: gnome/hotlist.c:1430 src/hotlist.c:1430
+msgid ""
+"  Keep   - keep your old entries; you will be asked\n"
+"           the same question next time\n"
+"  Merge  - add old entries to hotlist as group \"Entries from ~/"
+msgstr ""
+
+#: gnome/hotlist.c:1436 src/hotlist.c:1436
+msgid "&Keep"
+msgstr ""
+
+#: gnome/hotlist.c:1436 src/hotlist.c:1436
+msgid "&Merge"
+msgstr ""
+
+#: gnome/hotlist.c:1448 src/hotlist.c:1448
+msgid " Entries from ~/"
+msgstr ""
+
+#: gnome/hotlist.c:1458 src/hotlist.c:1458
+msgid " file your old hotlist entries were not deleted"
+msgstr ""
+
+#: gnome/info.c:78 src/info.c:78
+#, c-format
+msgid "Midnight Commander %s"
+msgstr ""
+
+#: gnome/info.c:110 src/info.c:110
+msgid "Free nodes %d (%d%%) of %d"
+msgstr ""
+
+#: gnome/info.c:116 src/info.c:116
+msgid "No node information"
+msgstr ""
+
+#: gnome/info.c:121 src/info.c:121
+msgid "Free space "
+msgstr ""
+
+#: gnome/info.c:123 src/info.c:123
+msgid " (%d%%) of "
+msgstr ""
+
+#: gnome/info.c:127 src/info.c:127
+msgid "No space information"
+msgstr ""
+
+#: gnome/info.c:131 src/info.c:131
+#, c-format
+msgid "Type:      %s "
+msgstr ""
+
+#: gnome/info.c:131 src/info.c:131
+msgid "non-local vfs"
+msgstr ""
+
+#: gnome/info.c:137 src/info.c:137
+#, c-format
+msgid "Device:    %s"
+msgstr ""
+
+#: gnome/info.c:141 src/info.c:141
+#, c-format
+msgid "Filesystem: %s"
+msgstr ""
+
+#: gnome/info.c:146 src/info.c:146
+#, c-format
+msgid "Accessed:  %s"
+msgstr ""
+
+#: gnome/info.c:150 src/info.c:150
+#, c-format
+msgid "Modified:  %s"
+msgstr ""
+
+#: gnome/info.c:154 src/info.c:154
+#, c-format
+msgid "Created:   %s"
+msgstr ""
+
+#: gnome/info.c:167 src/info.c:167
+msgid "Size:      "
+msgstr ""
+
+#: gnome/info.c:170 src/info.c:170
+#, c-format
+msgid " (%d blocks)"
+msgstr ""
+
+#: gnome/info.c:176 src/info.c:176
+#, c-format
+msgid "Owner:     %s/%s"
+msgstr ""
+
+#: gnome/info.c:181 src/info.c:181
+#, c-format
+msgid "Links:     %d"
+msgstr ""
+
+#: gnome/info.c:185 src/info.c:185
+#, c-format
+msgid "Mode:      %s (%04o)"
+msgstr ""
+
+#: gnome/info.c:190 src/info.c:190
+#, c-format
+msgid "Location:  %Xh:%Xh"
+msgstr ""
+
+#: gnome/info.c:196 src/info.c:196
+#, c-format
+msgid "File:       %s"
+msgstr ""
+
+#: gnome/info.c:200 src/info.c:200
+msgid "File:       None"
+msgstr ""
+
+#: gnome/layout.c:160 src/layout.c:160
+msgid "&Vertical"
+msgstr "&Вертикальное"
+
+#: gnome/layout.c:161 src/layout.c:161
+msgid "&Horizontal"
+msgstr "&Горизонтальное"
+
+#: gnome/layout.c:171 src/layout.c:171
+msgid "&Xterm hintbar"
+msgstr "Подсказка в &xterm"
+
+#: gnome/layout.c:172 src/layout.c:172
+msgid "h&Intbar visible"
+msgstr "С&трока подсказки"
+
+#: gnome/layout.c:173 src/layout.c:173
+msgid "&Keybar visible"
+msgstr "М&етки клавиш"
+
+#: gnome/layout.c:174 src/layout.c:174
+msgid "command &Prompt"
+msgstr "&Командная строка"
+
+#: gnome/layout.c:175 src/layout.c:175
+msgid "show &Mini status"
+msgstr "&Мини-статус"
+
+#: gnome/layout.c:176 src/layout.c:176
+msgid "menu&Bar visible"
+msgstr "&Линейка меню"
+
+#: gnome/layout.c:177 src/layout.c:177
+msgid "&Equal split"
+msgstr "&Равные размеры"
+
+#: gnome/layout.c:178 src/layout.c:178
+msgid "pe&Rmissions"
+msgstr "Права д&оступа"
+
+#: gnome/layout.c:179 src/layout.c:179
+msgid "&File types"
+msgstr "Типы &файлов"
+
+#: gnome/layout.c:373 gnome/learn.c:60 gnome/learn.c:179 gnome/option.c:144
+#: src/layout.c:373 src/learn.c:60 src/learn.c:179 src/option.c:144
+msgid "&Save"
+msgstr "&Сохранить"
+
+#. length of line with '<' '>' buttons
+#: gnome/layout.c:381 src/layout.c:381
+msgid " Layout "
+msgstr " Внешний вид "
+
+#: gnome/layout.c:382 src/layout.c:382
+msgid " Panel split "
+msgstr " Разбиение панелей "
+
+#: gnome/layout.c:383 src/layout.c:383
+msgid " Highlight... "
+msgstr " Цветовыделение "
+
+#: gnome/layout.c:384 gnome/option.c:155 src/layout.c:384 src/option.c:155
+msgid " Other options "
+msgstr " Прочие настройки "
+
+#: gnome/layout.c:385 src/layout.c:385
+msgid "output lines"
+msgstr "строки вывода"
+
+#: gnome/layout.c:452 src/layout.c:452
+msgid "Layout"
+msgstr "Внешний вид"
+
+#: gnome/layout.c:481 gnome/option.c:241 src/layout.c:481 src/option.c:241
+msgid "Other options"
+msgstr "Прочие настройки"
+
+#: gnome/layout.c:483 src/layout.c:483
+msgid "Highlight..."
+msgstr "Цветовыделение"
+
+#: gnome/layout.c:485 src/layout.c:485
+msgid "Panel split"
+msgstr "Разбиение панелей"
+
+#: gnome/learn.c:74 src/learn.c:74
+msgid " Learn keys "
+msgstr " Распознавание клавиш "
+
+#: gnome/learn.c:93 src/learn.c:93
+msgid " Teach me a key "
+msgstr " Обучите меня клавише "
+
+#: gnome/learn.c:94 src/learn.c:94
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Пожалуйста, нажмите клавишу %s\n"
+"и подождите, пока это сообщение пропадет.\n"
+"\n"
+"Затем нажмите ее еще раз, чтобы убедиться,\n"
+"что справа от ее названия появилось 'OK'.\n"
+"\n"
+"Если вы хотите прервать обучение, нажмите\n"
+"клавишу Esc и тоже немного подождите."
+
+#: gnome/learn.c:122 src/learn.c:122
+msgid " Cannot accept this key "
+msgstr " Не могу принять эту клавишу "
+
+#: gnome/learn.c:123 src/learn.c:123
+#, c-format
+msgid " You have entered \"%s\""
+msgstr " Вы ввели \"%s\""
+
+#: gnome/learn.c:170 src/learn.c:170
+msgid "OK"
+msgstr ""
+
+#: gnome/learn.c:177 src/learn.c:177
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Похоже, что все Ваши клавиши уже\n"
+"работают нормально. Это здорово."
+
+#: gnome/learn.c:179 src/learn.c:179
+msgid "&Discard"
+msgstr "Отменить"
+
+#: gnome/learn.c:183 src/learn.c:183
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Здорово! Ваша база описаний терминалов полная.\n"
+"Все Ваши клавиши работают хорошо."
+
+#: gnome/learn.c:267 src/learn.c:267
+msgid "Learn keys"
+msgstr "Распознавание клавиш"
+
+#: gnome/learn.c:300 src/learn.c:300
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
+
+#: gnome/learn.c:302 src/learn.c:302
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "какие клавиши не имеют пометки OK. Для обучения клавише выберите"
+
+#: gnome/learn.c:304 src/learn.c:304
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "ее при помощи Tab или мышкой и нажмите пробел."
+
+#: gnome/main.c:652 src/main.c:652
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" Командир не может перейти в каталог который ему \n"
+" сообщил дочерний процесс интерпретатора. Может Вы \n"
+" удалили рабочий каталог или дали себе дополнительные \n"
+" привилегии доступа при помощи команды \"su\"? "
+
+#: gnome/main.c:727 src/main.c:727
+msgid "Press any key to continue..."
+msgstr "Для продолжения нажмите любую клавишу..."
+
+#: gnome/main.c:777 src/main.c:777
+msgid " The shell is already running a command "
+msgstr " Интерпретатор уже озабочен выполнением команды "
+
+#: gnome/main.c:1211 gnome/main.c:1232 src/main.c:1211 src/main.c:1232
+msgid "&Listing mode..."
+msgstr "Фор&мат списка..."
+
+#: gnome/main.c:1212 gnome/main.c:1233 src/main.c:1212 src/main.c:1233
+msgid "&Quick view     C-x q"
+msgstr "&Быстрый просмотр   C-x q"
+
+#: gnome/main.c:1213 gnome/main.c:1234 src/main.c:1213 src/main.c:1234
+msgid "&Info           C-x i"
+msgstr "&Информация         C-x i"
+
+#: gnome/main.c:1216 gnome/main.c:1237 src/main.c:1216 src/main.c:1237
+msgid "&Sort order..."
+msgstr "Порядок &сортировки"
+
+#: gnome/main.c:1218 gnome/main.c:1239 src/main.c:1218 src/main.c:1239
+msgid "&Filter..."
+msgstr "&Фильтр"
+
+#: gnome/main.c:1221 gnome/main.c:1242 src/main.c:1221 src/main.c:1242
+msgid "&Network link..."
+msgstr "Се&тевое соединение..."
+
+#: gnome/main.c:1222 gnome/main.c:1243 src/main.c:1222 src/main.c:1243
+msgid "FT&P link..."
+msgstr "&FTP-соединение"
+
+#: gnome/main.c:1226 gnome/main.c:1247 src/main.c:1226 src/main.c:1247
+msgid "&Drive...       M-d"
+msgstr "&Диск...              M-d"
+
+#: gnome/main.c:1228 gnome/main.c:1249 src/main.c:1228 src/main.c:1249
+msgid "&Rescan         C-r"
+msgstr "&Перечитать           C-r"
+
+#: gnome/main.c:1253 src/main.c:1253
+msgid "&User menu          F2"
+msgstr "&Меню пользователя     F2"
+
+#: gnome/main.c:1254 src/main.c:1254
+msgid "&View               F3"
+msgstr "Просмотр &файла        F3"
+
+#: gnome/main.c:1255 src/main.c:1255
+#, fuzzy
+msgid "Vie&w file...         "
+msgstr "&Поиск...          F7"
+
+#: gnome/main.c:1256 src/main.c:1256
+msgid "&Filtered view     M-!"
+msgstr "&Просмотр команды     M-!"
+
+#: gnome/main.c:1257 src/main.c:1257
+msgid "&Edit               F4"
+msgstr "&Редактирование        F4"
+
+#: gnome/main.c:1258 src/main.c:1258
+msgid "&Copy               F5"
+msgstr "&Копирование           F5"
+
+#: gnome/main.c:1259 src/main.c:1259
+msgid "c&Hmod           C-x c"
+msgstr "Права &доступа      C-x c"
+
+#: gnome/main.c:1261 src/main.c:1261
+msgid "&Link            C-x l"
+msgstr "&Жесткая ссылка     C-x l"
+
+#: gnome/main.c:1262 src/main.c:1262
+msgid "&SymLink         C-x s"
+msgstr "&Символич. ссылка   C-x s"
+
+#: gnome/main.c:1263 src/main.c:1263
+msgid "edit s&Ymlink  C-x C-s"
+msgstr "Правка ссы&лки    C-x C-s"
+
+#: gnome/main.c:1264 src/main.c:1264
+msgid "ch&Own           C-x o"
+msgstr "&Владелец/группа    C-x o"
+
+#: gnome/main.c:1265 src/main.c:1265
+msgid "&Advanced chown       "
+msgstr "Пр&ава (расширенные)    "
+
+#: gnome/main.c:1267 src/main.c:1267
+msgid "&Rename/Move        F6"
+msgstr "Пере&именование        F6"
+
+#: gnome/main.c:1268 src/main.c:1268
+msgid "&Mkdir              F7"
+msgstr "Со&здание каталога     F7"
+
+#: gnome/main.c:1269 src/main.c:1269
+msgid "&Delete             F8"
+msgstr "&Удаление              F8"
+
+#: gnome/main.c:1270 src/main.c:1270
+msgid "&Quick cd          M-c"
+msgstr "Сме&на каталога       M-c"
+
+#: gnome/main.c:1272 src/main.c:1272
+msgid "select &Group      M-+"
+msgstr "Отметить &группу      M-+"
+
+#: gnome/main.c:1273 src/main.c:1273
+msgid "u&Nselect group    M-\\"
+msgstr "Снять &отметку        M-\\"
+
+#: gnome/main.c:1274 src/main.c:1274
+msgid "reverse selec&Tion M-*"
+msgstr "Инвер&тировать отметку  *"
+
+#: gnome/main.c:1276 src/main.c:1276
+msgid "e&Xit              F10"
+msgstr "Вы&ход                F10"
+
+#. I know, I'm lazy, but the tree widget when it's not running
+#. * as a panel still has some problems, I have not yet finished
+#. * the WTree widget port, sorry.
+#.
+#: gnome/main.c:1285 src/main.c:1285
+msgid "&Directory tree"
+msgstr "&Дерево каталогов"
+
+#: gnome/main.c:1286 src/main.c:1286
+msgid "&Find file            M-?"
+msgstr "Поиск &файла           M-?"
+
+#: gnome/main.c:1288 src/main.c:1288
+msgid "s&Wap panels          C-u"
+msgstr "&Переставить панели    C-u"
+
+#: gnome/main.c:1289 src/main.c:1289
+msgid "switch &Panels on/off C-o"
+msgstr "&Отключить панели      C-o"
+
+#: gnome/main.c:1291 src/main.c:1291
+msgid "&Compare directories  C-x d"
+msgstr "&Сравнить каталоги     C-x d"
+
+#: gnome/main.c:1292 src/main.c:1292
+msgid "e&Xternal panelize    C-x !"
+msgstr "&Критерий панелизации  C-x !"
+
+#: gnome/main.c:1294 src/main.c:1294
+msgid "show directory s&Izes"
+msgstr "&Размеры каталогов"
+
+#: gnome/main.c:1297 src/main.c:1297
+msgid "command &History"
+msgstr "&История команд"
+
+#: gnome/main.c:1298 src/main.c:1298
+msgid "di&Rectory hotlist    C-\\"
+msgstr "Справочник ката&логов  C-\\"
+
+#: gnome/main.c:1300 src/main.c:1300
+msgid "&Active VFS list      C-x a"
+msgstr "Список &активных ВФС   C-x a"
+
+#: gnome/main.c:1303 src/main.c:1303
+msgid "&Background jobs      C-x j"
+msgstr "Фо&новые задания       C-x j"
+
+#: gnome/main.c:1307 src/main.c:1307
+msgid "&Undelete files (ext2fs only)"
+msgstr "&Восстановление файлов"
+
+#: gnome/main.c:1310 src/main.c:1310
+msgid "&Listing format edit"
+msgstr "&Редактирование формата"
+
+#: gnome/main.c:1312 src/main.c:1312
+msgid "&Extension file edit"
+msgstr "Файл рас&ширений"
+
+#: gnome/main.c:1313 src/main.c:1313
+msgid "&Menu file edit"
+msgstr "Файл &меню"
+
+#: gnome/main.c:1318 src/main.c:1318
+msgid "&Configuration..."
+msgstr "&Конфигурация"
+
+#: gnome/main.c:1320 src/main.c:1320
+msgid "c&Onfirmation..."
+msgstr "&Подтверждение"
+
+#: gnome/main.c:1321 src/main.c:1321
+msgid "&Display bits..."
+msgstr "&Биты символов..."
+
+#: gnome/main.c:1323 src/main.c:1323
+msgid "learn &Keys..."
+msgstr "&Распознавание клавиш..."
+
+#: gnome/main.c:1326 src/main.c:1326
+msgid "&Virtual FS..."
+msgstr "Виртуальные &ФС..."
+
+#: gnome/main.c:1329 src/main.c:1329
+msgid "&Save setup"
+msgstr "&Сохранить настройки"
+
+#: gnome/main.c:1345 gnome/main.c:1347 src/main.c:1345 src/main.c:1347
+#, fuzzy
+msgid " &Left "
+msgstr " Левая "
+
+#: gnome/main.c:1347 src/main.c:1347
+#, fuzzy
+msgid " &Above "
+msgstr " Верхняя "
+
+#: gnome/main.c:1350 src/main.c:1350
+#, fuzzy
+msgid " &File "
+msgstr " Файл "
+
+#: gnome/main.c:1351 src/main.c:1351
+#, fuzzy
+msgid " &Command "
+msgstr " Команда "
+
+#: gnome/main.c:1352 src/main.c:1352
+#, fuzzy
+msgid " &Options "
+msgstr " Настройка "
+
+#: gnome/main.c:1355 gnome/main.c:1357 src/main.c:1355 src/main.c:1357
+#, fuzzy
+msgid " &Right "
+msgstr " Правая "
+
+#: gnome/main.c:1357 src/main.c:1357
+#, fuzzy
+msgid " &Below "
+msgstr " Нижняя "
+
+#: gnome/main.c:1418 src/main.c:1418
+msgid " Information "
+msgstr " Информация "
+
+#: gnome/main.c:1419 src/main.c:1419
+msgid ""
+" Using the fast reload option may not reflect the exact \n"
+" directory contents. In this cases you'll need to do a  \n"
+" manual reload of the directory. See the man page for   \n"
+" the details.                                           "
+msgstr ""
+
+#: gnome/main.c:1696 gnome/screen.c:2253 gnome/screen.c:2287 src/main.c:1696
+#: src/screen.c:2253 src/screen.c:2287
+msgid "Menu"
+msgstr "Меню"
+
+#: gnome/main.c:1903 src/main.c:1903
+msgid "Thank you for using GNU Midnight Commander"
+msgstr "Благодарим Вас за использование GNU Midnight Commander"
+
+#: gnome/main.c:2265 src/main.c:2265
+#, c-format
+msgid "with mouse support on xterm%s.\n"
+msgstr "с поддержкой мыши на xterm\n"
+
+#: gnome/main.c:2266 src/main.c:2266
+msgid " and the Linux console"
+msgstr "и Linux-консоли"
+
+#: gnome/main.c:2361 src/main.c:2361
+msgid "The TERM environment variable is unset!\n"
+msgstr "Переменная среды TERM не определена!\n"
+
+#: gnome/main.c:2618 src/main.c:2618
+#, c-format
+msgid "Library directory for the Midnight Commander: %s\n"
+msgstr "Библиотечный каталог Midnight Commander: %s\n"
+
+#: gnome/main.c:2623 src/main.c:2623
+msgid ""
+"Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
+msgstr ""
+
+#: gnome/main.c:2684 src/main.c:2684
+msgid "[DEVEL-ONLY: Debug the background code]"
+msgstr ""
+
+#: gnome/main.c:2687 src/main.c:2687
+msgid "Create command file to set default directory upon exit."
+msgstr ""
+
+#: gnome/main.c:2689 src/main.c:2689
+msgid "Force color mode."
+msgstr ""
+
+#: gnome/main.c:2690 src/main.c:2690
+msgid "Specify colors (use --help-colors to get a list)."
+msgstr ""
+
+#: gnome/main.c:2692 src/main.c:2692
+msgid "[DEVEL-ONLY: Debug the subshell]"
+msgstr ""
+
+#: gnome/main.c:2694 src/main.c:2694
+msgid "Startup the internal editor."
+msgstr ""
+
+#: gnome/main.c:2695 src/main.c:2695
+msgid "Shows this help message."
+msgstr ""
+
+#: gnome/main.c:2696 src/main.c:2696
+msgid "Help on how to specify colors."
+msgstr ""
+
+#: gnome/main.c:2698 src/main.c:2698
+msgid "Log ftpfs commands to the file."
+msgstr ""
+
+#: gnome/main.c:2700 src/main.c:2700
+msgid "Prints out the configured paths."
+msgstr ""
+
+#: gnome/main.c:2702 src/main.c:2702
+msgid "Force black and white display."
+msgstr ""
+
+#: gnome/main.c:2703 src/main.c:2703
+msgid "Disable mouse support."
+msgstr ""
+
+#: gnome/main.c:2705 src/main.c:2705
+msgid "Force the concurrent subshell mode"
+msgstr ""
+
+#: gnome/main.c:2706 src/main.c:2706
+msgid "Disable the concurrent subshell mode."
+msgstr ""
+
+#: gnome/main.c:2707 src/main.c:2707
+msgid "Force subshell execution."
+msgstr ""
+
+#: gnome/main.c:2709 src/main.c:2709
+msgid "At exit, print the last working directory."
+msgstr ""
+
+#: gnome/main.c:2710 src/main.c:2710
+msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
+msgstr ""
+
+#: gnome/main.c:2711 src/main.c:2711
+msgid "Disables verbose operation (for slow terminals)."
+msgstr ""
+
+#: gnome/main.c:2713 src/main.c:2713
+msgid "Use simple symbols for line drawing."
+msgstr ""
+
+#: gnome/main.c:2718 src/main.c:2718
+msgid "Activate support for the TERMCAP variable."
+msgstr ""
+
+#: gnome/main.c:2720 src/main.c:2720
+msgid "Report version and configuration options."
+msgstr ""
+
+#: gnome/main.c:2721 src/main.c:2721
+msgid "Start up into the viewer mode."
+msgstr ""
+
+#: gnome/main.c:2722 src/main.c:2722
+msgid "Force xterm mouse support and screen save/restore"
+msgstr ""
+
+#: gnome/main.c:2723 src/main.c:2723
+msgid "Geometry for the window"
+msgstr ""
+
+#: gnome/main.c:2724 src/main.c:2724
+msgid "No windows opened at startup"
+msgstr ""
+
+#: gnome/main.c:2801 src/main.c:2801
+msgid "[this dir] [other dir]"
+msgstr ""
+
+#: gnome/main.c:3043 src/main.c:3043
+msgid ""
+"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"On some systems you may want to run # `which mc`\n"
+msgstr ""
+
+#: gnome/main.c:3131 src/main.c:3131
+msgid " Notice "
+msgstr ""
+
+#: gnome/main.c:3132 src/main.c:3132
+msgid ""
+" The Midnight Commander configuration files \n"
+" are now stored in the ~/.mc directory, the \n"
+" files have been moved now\n"
+msgstr ""
+" Файлы конфигурации Midnight Commander \n"
+" теперь хранятся в каталоге ~/.mc, старые \n"
+" файлы сейчас туда перемещены\n"
+
+#: gnome/option.c:74 src/option.c:74
+msgid "safe de&Lete"
+msgstr "Безопасное &удаление"
+
+#: gnome/option.c:75 src/option.c:75
+msgid "cd follows lin&Ks"
+msgstr "Смена &каталога по ссылкам"
+
+#: gnome/option.c:76 src/option.c:76
+msgid "advanced cho&Wn"
+msgstr "Расширенная команда cho&Wn"
+
+#: gnome/option.c:77 src/option.c:77
+msgid "l&Ynx-like motion"
+msgstr "Навигация в стиле l&Ynx"
+
+#: gnome/option.c:79 src/option.c:79
+msgid "Animation"
+msgstr "Анимация"
+
+#: gnome/option.c:81 src/option.c:81
+msgid "ro&Tating dash"
+msgstr "Вращающийся &индикатор"
+
+#: gnome/option.c:83 src/option.c:83
+msgid "co&Mplete: show all"
+msgstr "Допо&лнение: показывать все"
+
+#: gnome/option.c:84 src/option.c:84
+msgid "&Use internal view"
+msgstr "Встро&енный просмотр"
+
+#: gnome/option.c:85 src/option.c:85
+msgid "use internal ed&It"
+msgstr "Встроенный &редактор"
+
+#: gnome/option.c:86 src/option.c:86
+msgid "auto m&Enus"
+msgstr "Автоматические &меню"
+
+#: gnome/option.c:87 src/option.c:87
+msgid "&Auto save setup"
+msgstr "&Автосохранение настроек"
+
+#: gnome/option.c:88 src/option.c:88
+msgid "shell &Patterns"
+msgstr "Образцы в стиле &shell"
+
+#: gnome/option.c:89 src/option.c:89
+msgid "&Verbose operation"
+msgstr "Детали операци&й"
+
+#: gnome/option.c:90 src/option.c:90
+msgid "&Fast dir reload"
+msgstr "&Быстрая загрузка каталога"
+
+#: gnome/option.c:91 src/option.c:91
+msgid "mi&X all files"
+msgstr "Смешивать &файлы/каталоги"
+
+#: gnome/option.c:92 src/option.c:92
+msgid "&Drop down menus"
+msgstr "Выпадение мен&ю при вызове"
+
+#: gnome/option.c:93 src/option.c:93
+msgid "ma&Rk moves down"
+msgstr "&Отметка перемещает курсор"
+
+#: gnome/option.c:94 src/option.c:94
+msgid "show &Hidden files"
+msgstr "Показывать скр&ытые файлы"
+
+#: gnome/option.c:95 src/option.c:95
+msgid "show &Backup files"
+msgstr "Показывать ре&зервные файлы"
+
+#: gnome/option.c:102 src/option.c:102
+msgid "&Never"
+msgstr "&Никогда"
+
+#: gnome/option.c:103 src/option.c:103
+msgid "on dumb &Terminals"
+msgstr "На &тупых терминалах"
+
+#: gnome/option.c:104 src/option.c:104
+msgid "alwa&Ys"
+msgstr "&Всегда"
+
+#. Similar code is in layout.c (init_layout())
+#: gnome/option.c:152 src/option.c:152
+msgid " Configure options "
+msgstr " Параметры конфигурации "
+
+#: gnome/option.c:153 src/option.c:153
+msgid " Panel options "
+msgstr " Настройки панелей "
+
+#: gnome/option.c:154 src/option.c:154
+msgid " Pause after run... "
+msgstr " Пауза после исполнения... "
+
+#: gnome/option.c:206 src/option.c:206
+msgid "Configure options"
+msgstr "Параметры конфигурации"
+
+#: gnome/option.c:243 src/option.c:243
+msgid "Pause after run..."
+msgstr "Пауза после запуска..."
+
+#: gnome/option.c:245 src/option.c:245
+msgid "Panel options"
+msgstr "Настройки панелей"
+
+#: gnome/panelize.c:90 src/panelize.c:90
+msgid "&Add new"
+msgstr "&Добавить"
+
+#: gnome/panelize.c:102 src/panelize.c:102
+msgid " External panelize "
+msgstr " Внешняя панелизация "
+
+#: gnome/panelize.c:197 gnome/panelize.c:460 src/panelize.c:197
+#: src/panelize.c:460
+msgid "External panelize"
+msgstr "Внешняя панелизация"
+
+#: gnome/panelize.c:222 gnome/panelize.c:278 gnome/panelize.c:348
+#: gnome/panelize.c:369 src/panelize.c:222 src/panelize.c:278
+#: src/panelize.c:348 src/panelize.c:369
+msgid "Other command"
+msgstr "Новая команда"
+
+#: gnome/panelize.c:262 src/panelize.c:262
+msgid " Add to external panelize "
+msgstr " Добавить в список команд "
+
+#: gnome/panelize.c:263 src/panelize.c:263
+msgid " Enter command label: "
+msgstr " Введите название команды: "
+
+#: gnome/panelize.c:302 src/panelize.c:302
+msgid " I can't run external panelize while logged on a non local directory "
+msgstr " Я не могу выполнить это команду будучи в нелокальном каталоге "
+
+#: gnome/panelize.c:351 src/panelize.c:351
+msgid "Find rejects after patching"
+msgstr "Найти корректуры, отвергнутые командой patch"
+
+#: gnome/panelize.c:352 src/panelize.c:352
+msgid "Find *.orig after patching"
+msgstr "Найти оригиналы (*.orig) после команды patch"
+
+#: gnome/panelize.c:353 src/panelize.c:353
+msgid "Find SUID and SGID programs"
+msgstr "Найти программы со взведенным SUID/SGID битами"
+
+#: gnome/panelize.c:404 src/panelize.c:404
+msgid "Cannot invoke command."
+msgstr "Не могу исполнить команду."
+
+#: gnome/screen.c:423 gnome/screen.c:426 src/screen.c:423 src/screen.c:426
+msgid "Size"
+msgstr "Размер"
+
+#: gnome/screen.c:425 src/screen.c:425
+msgid "MTime"
+msgstr "Время правки"
+
+#: gnome/screen.c:427 src/screen.c:427
+msgid "Permission"
+msgstr "Атрибуты"
+
+#: gnome/screen.c:428 src/screen.c:428
+msgid "Perm"
+msgstr "Права"
+
+#: gnome/screen.c:429 src/screen.c:429
+msgid "|"
+msgstr ""
+
+#: gnome/screen.c:430 src/screen.c:430
+msgid "Nl"
+msgstr "Кс"
+
+#: gnome/screen.c:431 src/screen.c:431
+msgid "GID"
+msgstr ""
+
+#: gnome/screen.c:432 src/screen.c:432
+msgid "UID"
+msgstr ""
+
+#: gnome/screen.c:435 src/screen.c:435
+msgid "ATime"
+msgstr "Посл. доступ"
+
+#: gnome/screen.c:436 src/screen.c:436
+msgid "CTime"
+msgstr "Изм. узла"
+
+#: gnome/screen.c:440 src/screen.c:440
+msgid "Inode"
+msgstr "Узел"
+
+#: gnome/screen.c:644 src/screen.c:644
+#, c-format
+msgid "  %s bytes in %d file%s"
+msgstr ""
+
+#: gnome/screen.c:1295 src/screen.c:1295
+msgid "Unknow tag on display format: "
+msgstr ""
+
+#: gnome/screen.c:2257 gnome/screen.c:2291 gnome/tree.c:1461 src/screen.c:2257
+#: src/screen.c:2291 src/tree.c:1461
+msgid "RenMov"
+msgstr ""
+
+#: gnome/screen.c:2258 gnome/screen.c:2292 gnome/tree.c:1465 src/screen.c:2258
+#: src/screen.c:2292 src/tree.c:1465
+msgid "Mkdir"
+msgstr ""
+
+#: gnome/subshell.c:287 src/subshell.c:287
+#, c-format
+msgid "Couldn't open named pipe %s\n"
+msgstr ""
+
+#: gnome/subshell.c:700 src/subshell.c:700
+msgid " The shell is still active. Quit anyway? "
+msgstr ""
+
+#: gnome/subshell.c:726 src/subshell.c:726
+msgid " There are stopped jobs."
+msgstr ""
+
+#: gnome/subshell.c:727 src/subshell.c:727
+msgid " Quit anyway? "
+msgstr ""
+
+#: gnome/subshell.c:780 src/subshell.c:780
+#, c-format
+msgid "Warning: Couldn't change to %s.\n"
+msgstr ""
+
+#: gnome/tree.c:626 src/tree.c:626
+#, c-format
+msgid ""
+"Can't open the %s file for writing:\n"
+"%s\n"
+msgstr ""
+
+#: gnome/tree.c:639 src/tree.c:639
+#, c-format
+msgid ""
+"Can't write to the %s file:\n"
+"%s\n"
+msgstr ""
+
+#: gnome/tree.c:1100 src/tree.c:1100
+#, c-format
+msgid "Copy \"%s\" directory to:"
+msgstr ""
+
+#: gnome/tree.c:1133 src/tree.c:1133
+#, c-format
+msgid "Move \"%s\" directory to:"
+msgstr ""
+
+#: gnome/tree.c:1140 src/tree.c:1140
+#, c-format
+msgid ""
+" Can't stat the destination \n"
+" %s "
+msgstr ""
+
+#: gnome/tree.c:1146 src/tree.c:1146
+msgid " The destination isn't a directory "
+msgstr ""
+
+#: gnome/tree.c:1196 src/tree.c:1196
+#, c-format
+msgid "  Delete %s?  "
+msgstr ""
+
+#: gnome/tree.c:1234 src/tree.c:1234
+msgid "Static"
+msgstr ""
+
+#: gnome/tree.c:1234 src/tree.c:1234
+msgid "Dynamc"
+msgstr ""
+
+#: gnome/tree.c:1315 src/tree.c:1315
+#, c-format
+msgid ""
+" Can't chdir to \"%s\" \n"
+" %s "
+msgstr ""
+
+#: gnome/tree.c:1457 src/tree.c:1457
+msgid "Forget"
+msgstr "Забыть"
+
+#: gnome/tree.c:1470 src/tree.c:1470
+msgid "Rmdir"
+msgstr ""
+
+#: gnome/user.c:263 src/user.c:263
+#, c-format
+msgid " Invalid shell pattern defination \"%c\". "
+msgstr ""
+
+#: gnome/user.c:395 src/user.c:395
+msgid " Debug "
+msgstr " Отладка "
+
+#: gnome/user.c:404 src/user.c:404
+msgid " ERROR: "
+msgstr " ОШИБКА: "
+
+#: gnome/user.c:408 src/user.c:408
+msgid " True:  "
+msgstr " Истина: "
+
+#: gnome/user.c:410 src/user.c:410
+msgid " False: "
+msgstr " Ложь: "
+
+#: gnome/user.c:607 src/user.c:607
+msgid " Warning -- ignoring file "
+msgstr " Предупреждение - файл игнорируется "
+
+#: gnome/user.c:608 src/user.c:608
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
+"и доступен другим на запись. Использование такого файла неприемлемо\n"
+"c точки зрения безопасности."
+
+#: gnome/user.c:626 src/user.c:626
+msgid " I can't run programs while logged on a non local directory "
+msgstr " Я не могу исполнять программы, будучи на виртуальной файловой системе"
+
+#. Create listbox
+#: gnome/user.c:713 src/user.c:713
+msgid " User menu "
+msgstr " Меню пользователя "
+
+#: gnome/util.c:235 src/util.c:235
+msgid "name_trunc: too big"
+msgstr ""
+
+#: gnome/utilunix.c:381 src/utilunix.c:381
+msgid " Pipe failed "
+msgstr " Ошибка создания канала "
+
+#: gnome/utilunix.c:385 src/utilunix.c:385
+msgid " Dup failed "
+msgstr " Ошибка дублирования дескриптора "
+
+#: gnome/view.c:408 src/view.c:408
+msgid ""
+"File: \n"
+"\n"
+"    "
+msgstr ""
+"Файл: \n"
+"\n"
+"    "
+
+#: gnome/view.c:409 src/view.c:409
+msgid ""
+"\n"
+"\n"
+"has been modified, do you want to save the changes?\n"
+msgstr ""
+"\n"
+"\n"
+"был модифицирован, Вы хотите сохранить изменения?\n"
+
+#: gnome/view.c:411 src/view.c:411
+msgid " Save changes "
+msgstr " Сохранить изменения "
+
+#: gnome/view.c:453 src/view.c:453
+msgid " Can't spawn child program "
+msgstr " Не могу породить дочерний процесс "
+
+#: gnome/view.c:463 src/view.c:463
+msgid " Empty output from child filter "
+msgstr " У дочернего процесса вывод отсутствует "
+
+#: gnome/view.c:469 src/view.c:469
+msgid " Could not open file "
+msgstr " Не могу открыть файл "
+
+#: gnome/view.c:487 src/view.c:487
+msgid " Can't open file \""
+msgstr " Не могу открыть файл \""
+
+#: gnome/view.c:495 src/view.c:495
+msgid ""
+" Can't stat file \n"
+" "
+msgstr ""
+
+#: gnome/view.c:501 src/view.c:501
+msgid " Can't view: not a regular file "
+msgstr " Просмотр невозможен: не обычный файл "
+
+#: gnome/view.c:521 src/view.c:521
+msgid " Can not fetch local copy "
+msgstr " Не могу извлечь локальную копию "
+
+#: gnome/view.c:708 src/view.c:708
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#: gnome/view.c:724 src/view.c:724
+msgid "  [grow]"
+msgstr ""
+
+#: gnome/view.c:1565 gnome/view.c:1687 src/view.c:1565 src/view.c:1687
+msgid " Search string not found "
+msgstr ""
+
+#: gnome/view.c:1726 src/view.c:1726
+msgid " Invalid regular expression "
+msgstr ""
+
+#: gnome/view.c:1856 src/view.c:1856
+#, c-format
+msgid ""
+" The current line number is %d.\n"
+" Enter the new line number:"
+msgstr ""
+
+#: gnome/view.c:1886 src/view.c:1886
+msgid " Enter regexp:"
+msgstr ""
+
+#: gnome/view.c:1918 src/view.c:1918
+msgid " Enter search string:"
+msgstr ""
+
+#: gnome/view.c:1991 src/view.c:1991
+msgid "Ascii"
+msgstr ""
+
+#: gnome/view.c:1992 src/view.c:1992
+msgid "Line"
+msgstr "Строка"
+
+#: gnome/view.c:1993 src/view.c:1993
+msgid "RxSrch"
+msgstr "РегВыр"
+
+#: gnome/view.c:1996 src/view.c:1996
+msgid "EdText"
+msgstr ""
+
+#: gnome/view.c:1996 src/view.c:1996
+msgid "EdHex"
+msgstr ""
+
+#: gnome/view.c:1998 src/view.c:1998
+msgid "UnWrap"
+msgstr ""
+
+#: gnome/view.c:2001 src/view.c:2001
+msgid "HxSrch"
+msgstr ""
+
+#: gnome/view.c:2004 src/view.c:2004
+msgid "Raw"
+msgstr ""
+
+#: gnome/view.c:2004 src/view.c:2004
+msgid "Parse"
+msgstr ""
+
+#: gnome/view.c:2008 src/view.c:2008
+msgid "Unform"
+msgstr ""
+
+#: gnome/view.c:2008 src/view.c:2008
+msgid "Format"
+msgstr ""
+
+#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
+#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
+#: gnome/win.c:216 src/win.c:216
+msgid "Function key 1"
+msgstr ""
+
+#: gnome/win.c:217 src/win.c:217
+msgid "Function key 2"
+msgstr ""
+
+#: gnome/win.c:218 src/win.c:218
+msgid "Function key 3"
+msgstr ""
+
+#: gnome/win.c:219 src/win.c:219
+msgid "Function key 4"
+msgstr ""
+
+#: gnome/win.c:220 src/win.c:220
+msgid "Function key 5"
+msgstr ""
+
+#: gnome/win.c:221 src/win.c:221
+msgid "Function key 6"
+msgstr ""
+
+#: gnome/win.c:222 src/win.c:222
+msgid "Function key 7"
+msgstr ""
+
+#: gnome/win.c:223 src/win.c:223
+msgid "Function key 8"
+msgstr ""
+
+#: gnome/win.c:224 src/win.c:224
+msgid "Function key 9"
+msgstr ""
+
+#: gnome/win.c:225 src/win.c:225
+msgid "Function key 10"
+msgstr ""
+
+#: gnome/win.c:226 src/win.c:226
+msgid "Function key 11"
+msgstr ""
+
+#: gnome/win.c:227 src/win.c:227
+msgid "Function key 12"
+msgstr ""
+
+#: gnome/win.c:228 src/win.c:228
+msgid "Function key 13"
+msgstr ""
+
+#: gnome/win.c:229 src/win.c:229
+msgid "Function key 14"
+msgstr ""
+
+#: gnome/win.c:230 src/win.c:230
+msgid "Function key 15"
+msgstr ""
+
+#: gnome/win.c:231 src/win.c:231
+msgid "Function key 16"
+msgstr ""
+
+#: gnome/win.c:232 src/win.c:232
+msgid "Function key 17"
+msgstr ""
+
+#: gnome/win.c:233 src/win.c:233
+msgid "Function key 18"
+msgstr ""
+
+#: gnome/win.c:234 src/win.c:234
+msgid "Function key 19"
+msgstr ""
+
+#: gnome/win.c:235 src/win.c:235
+msgid "Function key 20"
+msgstr ""
+
+#: gnome/win.c:236 src/win.c:236
+msgid "Backspace key"
+msgstr ""
+
+#: gnome/win.c:237 src/win.c:237
+msgid "End key"
+msgstr ""
+
+#: gnome/win.c:238 src/win.c:238
+msgid "Up arrow key"
+msgstr ""
+
+#: gnome/win.c:239 src/win.c:239
+msgid "Down arrow key"
+msgstr ""
+
+#: gnome/win.c:240 src/win.c:240
+msgid "Left arrow key"
+msgstr ""
+
+#: gnome/win.c:241 src/win.c:241
+msgid "Right arrow key"
+msgstr ""
+
+#: gnome/win.c:242 src/win.c:242
+msgid "Home key"
+msgstr ""
+
+#: gnome/win.c:243 src/win.c:243
+msgid "Page Down key"
+msgstr ""
+
+#: gnome/win.c:244 src/win.c:244
+msgid "Page Up key"
+msgstr ""
+
+#: gnome/win.c:245 src/win.c:245
+msgid "Insert key"
+msgstr ""
+
+#: gnome/win.c:246 src/win.c:246
+msgid "Delete key"
+msgstr ""
+
+#: gnome/win.c:247 src/win.c:247
+msgid "Completion/M-tab"
+msgstr ""
+
+#: gnome/win.c:248 src/win.c:248
+msgid "+ on keypad"
+msgstr ""
+
+#: gnome/win.c:249 src/win.c:249
+msgid "- on keypad"
+msgstr ""
+
+#: gnome/win.c:250 src/win.c:250
+msgid "* on keypad"
+msgstr ""
+
+#. From here on, these won't be shown in Learn keys (no space)
+#: gnome/win.c:252 src/win.c:252
+msgid "Left arrow keypad"
+msgstr ""
+
+#: gnome/win.c:253 src/win.c:253
+msgid "Right arrow keypad"
+msgstr ""
+
+#: gnome/win.c:254 src/win.c:254
+msgid "Up arrow keypad"
+msgstr ""
+
+#: gnome/win.c:255 src/win.c:255
+msgid "Down arrow keypad"
+msgstr ""
+
+#: gnome/win.c:256 src/win.c:256
+msgid "Home on keypad"
+msgstr ""
+
+#: gnome/win.c:257 src/win.c:257
+msgid "End on keypad"
+msgstr ""
+
+#: gnome/win.c:258 src/win.c:258
+msgid "Page Down keypad"
+msgstr ""
+
+#: gnome/win.c:259 src/win.c:259
+msgid "Page Up keypad"
+msgstr ""
+
+#: gnome/win.c:260 src/win.c:260
+msgid "Insert on keypad"
+msgstr ""
+
+#: gnome/win.c:261 src/win.c:261
+msgid "Delete on keypad"
+msgstr ""
+
+#: gnome/win.c:262 src/win.c:262
+msgid "Enter on keypad"
+msgstr ""
+
+#: gnome/win.c:263 src/win.c:263
+msgid "Slash on keypad"
+msgstr ""
+
+#: gnome/win.c:264 src/win.c:264
+msgid "NumLock on keypad"
+msgstr ""
+
+#: gnome/wtools.c:609 src/wtools.c:609 vfs/vfs.c:1604
+msgid "Password:"
+msgstr ""
+
+#: gnome/wtools.c:609 src/wtools.c:609
+msgid "Password"
+msgstr ""
+
+#: gnome/wtools.c:663 src/wtools.c:663
+msgid "Ok"
+msgstr ""
+
+#: vfs/extfs.c:270
+#, fuzzy, c-format
+msgid ""
+"Couldn't open %s archive\n"
+"%s"
+msgstr " Не могу открыть файл "
+
+#: vfs/extfs.c:302 vfs/extfs.c:322
+msgid "Inconsistent extfs archive"
+msgstr ""
+
+#: vfs/ftpfs.c:470
+#, c-format
+msgid " Could not set source routing (%s)"
+msgstr ""
+
+#: vfs/ftpfs.c:1782 vfs/ftpfs.c:1797
+msgid ""
+"~/.netrc file has not correct mode.\n"
+"Remove password or correct mode."
+msgstr ""
+
+#: vfs/mcfs.c:156
+msgid " MCFS "
+msgstr ""
+
+#: vfs/mcfs.c:156
+msgid " The server does not support this version "
+msgstr ""
+
+#: vfs/mcfs.c:173
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+
+#: vfs/mcfs.c:176
+#, fuzzy
+msgid " Yes "
+msgstr " &Да "
+
+#: vfs/mcfs.c:176
+#, fuzzy
+msgid " No "
+msgstr " &Нет "
+
+#: vfs/mcfs.c:178
+msgid " The remote server is running on strange port. Giving up.\n"
+msgstr ""
+
+#: vfs/mcfs.c:190
+msgid " MCFS Password required "
+msgstr ""
+
+#: vfs/mcfs.c:204
+msgid " Invalid password "
+msgstr ""
+
+#: vfs/mcfs.c:270
+msgid " Too many open connections "
+msgstr ""
+
+#. Open for reading
+#: vfs/tar.c:367 vfs/tar.c:729
+#, fuzzy, c-format
+msgid ""
+"Couldn't open tar archive\n"
+"%s"
+msgstr " Не могу открыть файл "
+
+#: vfs/tar.c:388
+#, c-format
+msgid ""
+"Couldn't load compressed tar\n"
+"%s"
+msgstr ""
+
+#: vfs/tar.c:395
+#, c-format
+msgid ""
+"Couldn't uncompress tar archive\n"
+"%s"
+msgstr ""
+
+#: vfs/tar.c:554
+msgid "Unexpected EOF on archive file"
+msgstr ""
+
+#: vfs/tar.c:608 vfs/tar.c:629
+msgid "Inconsistent tar archive"
+msgstr ""
+
+#. Error on first record
+#: vfs/tar.c:748
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+
+#~ msgid "&Continue"
+#~ msgstr "&Продолжить"

@@ -1,3 +1,11 @@
+Mon Sep 28 21:55:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* find.c: Changed hotkey of the continue-button (both Chdir and
+	Continue used `C').
+
+	* Makefile.in: search config.status in builddir and not in rootdir, 
+	i.e. make it compile for builddir != srcdir
+
 Wed Sep 23 14:06:44 1998  Pavel Machek <pavel@atrey.karlin.mff.cuni.cz>
 
 	* src/file.c: Made file.c use new O_LINEAR mode (so copying from

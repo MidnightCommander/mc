@@ -122,7 +122,7 @@ static struct {
 	int x;
 } fbuts [] = {
 	{ N_("&Suspend"),   11, 29 },
-	{ N_("&Continue"),  12, 29 },
+	{ N_("Con&tinue"),  12, 29 },
 	{ N_("&Chdir"),     11, 3  },
 	{ N_("&Again"),     9,  17 },
 	{ N_("&Quit"),      8,  43 },
