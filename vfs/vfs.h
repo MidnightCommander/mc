@@ -74,8 +74,8 @@ struct vfs_class {
     int (*mkdir) (struct vfs_class *me, char *path, mode_t mode);
     int (*rmdir) (struct vfs_class *me, char *path);
 
-    int (*ctl) (void *vfs_info, int ctlop, int arg);
-    int (*setctl) (struct vfs_class *me, char *path, int ctlop, char *arg);
+    int (*ctl) (void *vfs_info, int ctlop, void *arg);
+    int (*setctl) (struct vfs_class *me, char *path, int ctlop, void *arg);
 #ifdef HAVE_MMAP
     caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len, int prot,
 		     int flags, void *vfs_info, off_t offset);
@@ -183,8 +183,8 @@ int mc_ungetlocalcopy (const char *pathname, char *local, int has_changed);
 char *mc_def_getlocalcopy (struct vfs_class *vfs, char *filename);
 int mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local,
 			   int has_changed);
-int mc_ctl (int fd, int ctlop, int arg);
-int mc_setctl (char *path, int ctlop, char *arg);
+int mc_ctl (int fd, int ctlop, void *arg);
+int mc_setctl (char *path, int ctlop, void *arg);
 #ifdef HAVE_MMAP
 caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
 int mc_munmap (caddr_t addr, size_t len);
@@ -227,15 +227,21 @@ struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
 void vfs_print_stats (const char *fs_name, const char *action,
 		      const char *file_name, off_t have, off_t need);
 
-/* Don't use values 0..4 for a while -- 10/98, pavel@ucw.cz */
-#define MCCTL_REMOVELOCALCOPY   5
-#define MCCTL_IS_NOTREADY	6
-#define MCCTL_FORGET_ABOUT	7
-#define MCCTL_EXTFS_RUN		8
-/* These two make vfs layer give out potentially incorrect data, but
-   they also make some operation 100 times faster. Use with caution. */
-#define MCCTL_WANT_STALE_DATA	9
-#define MCCTL_NO_STALE_DATA    10
+/* Operations for mc_ctl - on open file */
+enum {
+    VFS_CTL_IS_NOTREADY
+};
+
+/* Operations for mc_setctl - on path */
+enum {
+    VFS_SETCTL_FORGET,
+    VFS_SETCTL_RUN,
+    VFS_SETCTL_LOGFILE,
+
+    /* Setting this makes vfs layer give out potentially incorrect data,
+       but it also makes some operations much faster. Use with caution. */
+    VFS_SETCTL_STALE_DATA
+};
 
 #define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
 /* Midnight commander code should _not_ use other flags than those

@@ -645,11 +645,11 @@ linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 }
 
 static int
-fish_ctl (void *fh, int ctlop, int arg)
+fish_ctl (void *fh, int ctlop, void *arg)
 {
     return 0;
     switch (ctlop) {
-        case MCCTL_IS_NOTREADY:
+        case VFS_CTL_IS_NOTREADY:
 	    {
 	        int v;
 

@@ -1345,10 +1345,11 @@ static void extfs_done (struct vfs_class *me)
     extfs_no = 0;
 }
 
-static int extfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
+static int
+extfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
-    if (ctlop == MCCTL_EXTFS_RUN) {
-        extfs_run (path);
+    if (ctlop == VFS_SETCTL_RUN) {
+	extfs_run (path);
 	return 1;
     }
     return 0;

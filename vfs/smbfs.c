@@ -1727,14 +1727,14 @@ my_forget (char *path)
     g_free (user);
 }
 
-static int 
-smbfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
+static int
+smbfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
-	DEBUG(3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
+    DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
     switch (ctlop) {
-        case MCCTL_FORGET_ABOUT:
-	    my_forget(path);
-	    return 0;
+    case VFS_SETCTL_FORGET:
+	my_forget (path);
+	return 0;
     }
     return 0;
 }

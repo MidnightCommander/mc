@@ -1506,10 +1506,10 @@ linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
         linear_abort(me, fh);
 }
 
-static int ftpfs_ctl (void *fh, int ctlop, int arg)
+static int ftpfs_ctl (void *fh, int ctlop, void *arg)
 {
     switch (ctlop) {
-        case MCCTL_IS_NOTREADY:
+        case VFS_CTL_IS_NOTREADY:
 	    {
 	        int v;
 		

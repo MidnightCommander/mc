@@ -1959,7 +1959,7 @@ do_enter_on_file_entry (file_entry *fe)
 	int ret;
 
 	tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
-	ret = mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL);
+	ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
 	g_free (tmp);
 	/* We took action only if the dialog was shown or the execution
 	 * was successful */

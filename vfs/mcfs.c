@@ -1141,10 +1141,10 @@ my_forget (char *path)
 }
 
 static int
-mcfs_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
+mcfs_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
     switch (ctlop) {
-    case MCCTL_FORGET_ABOUT:
+    case VFS_SETCTL_FORGET:
 	my_forget (path);
 	return 0;
     }

@@ -688,7 +688,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 
 	for (;;) {
 	    /* src_read */
-	    if (mc_ctl (src_desc, MCCTL_IS_NOTREADY, 0))
+	    if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
 		n_read = -1;
 	    else
 		while ((n_read = mc_read (src_desc, buf, buf_size)) < 0) {
@@ -1896,8 +1896,8 @@ panel_operate (void *source_panel, FileOperation operation,
 
 	/* If we are the parent */
 	if (v == 1) {
-	    mc_setctl (panel->cwd, MCCTL_FORGET_ABOUT, NULL);
-	    mc_setctl (dest, MCCTL_FORGET_ABOUT, NULL);
+	    mc_setctl (panel->cwd, VFS_SETCTL_FORGET, NULL);
+	    mc_setctl (dest, VFS_SETCTL_FORGET, NULL);
 /*  	    file_op_context_destroy (ctx); */
 	    return 0;
 	}
@@ -1909,11 +1909,11 @@ panel_operate (void *source_panel, FileOperation operation,
        created/touched. However, this will make our cache contain
        invalid data. */
     if (dest) {
-	if (mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL))
+	if (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1))
 	    save_dest = g_strdup (dest);
     }
     if (panel->cwd) {
-	if (mc_setctl (panel->cwd, MCCTL_WANT_STALE_DATA, NULL))
+	if (mc_setctl (panel->cwd, VFS_SETCTL_STALE_DATA, (void *) 1))
 	    save_cwd = g_strdup (panel->cwd);
     }
 
@@ -2112,11 +2112,11 @@ panel_operate (void *source_panel, FileOperation operation,
     /* Clean up */
 
     if (save_cwd) {
-	mc_setctl (save_cwd, MCCTL_NO_STALE_DATA, NULL);
+	mc_setctl (save_cwd, VFS_SETCTL_STALE_DATA, NULL);
 	g_free (save_cwd);
     }
     if (save_dest) {
-	mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
+	mc_setctl (save_dest, VFS_SETCTL_STALE_DATA, NULL);
 	g_free (save_dest);
     }
 

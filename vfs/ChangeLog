@@ -1,5 +1,11 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Rename commands for mc_ctl() and mc_setctl() to make it
+	clear which function they are used with.
+	* vfs.c (mc_ctl): Change last argument to (void*).
+	(mc_set): Likewise.
+	Adjust all dependencies.
+
 	* xdirentry.h: Move system includes to the files that need them.
 
 	* xdirentry.h: Fix typos in field names.

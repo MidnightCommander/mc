@@ -992,27 +992,21 @@ vfs_s_getlocalcopy (struct vfs_class *me, char *path)
     return g_strdup (ino->localname);
 }
 
-static int 
-vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, char *arg)
+static int
+vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
     struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
     if (!ino)
 	return 0;
-    switch (ctlop){
-    case MCCTL_WANT_STALE_DATA:
-	ino->super->want_stale = 1;
+    switch (ctlop) {
+    case VFS_SETCTL_STALE_DATA:
+	if (arg)
+	    ino->super->want_stale = 1;
+	else {
+	    ino->super->want_stale = 0;
+	    vfs_s_invalidate (me, ino->super);
+	}
 	return 1;
-    case MCCTL_NO_STALE_DATA:
-	ino->super->want_stale = 0;
-	vfs_s_invalidate(me, ino->super);
-	return 1;
-#if 0	/* FIXME: We should implement these */
-    case MCCTL_REMOVELOCALCOPY:
-	return remove_temp_file (path);
-    case MCCTL_FORGET_ABOUT:
-	my_forget(path);
-	return 0;
-#endif
     }
     return 0;
 }

@@ -434,7 +434,7 @@ mc_open (const char *filename, int flags, ...)
 MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
 
 int
-mc_ctl (int handle, int ctlop, int arg)
+mc_ctl (int handle, int ctlop, void *arg)
 {
     struct vfs_class *vfs = vfs_op (handle);
 
@@ -442,7 +442,7 @@ mc_ctl (int handle, int ctlop, int arg)
 }
 
 int
-mc_setctl (char *path, int ctlop, char *arg)
+mc_setctl (char *path, int ctlop, void *arg)
 {
     struct vfs_class *vfs;
     int result;
