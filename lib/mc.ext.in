@@ -32,15 +32,7 @@
 #
 #    Open (if the user presses Enter or doubleclicks it), 
 #
-#    View (F3), Edit (F4), Drop (user drops some files on it) or any other
-#
-#    user defined name (those will be listed in the extension dependent popup
-#    menu). This is not implemented yet for the text edition but will be
-#    implemented some day so feel free to add useful actions here.
-#
-#    Title is the default icon title for objects. %p is expanded into the
-#    name of that file and %d/%p to a name with full path. Default title
-#    (if none is specified) is %p
+#    View (F3), Edit (F4)
 #
 #    Include is the keyword used to add any further entries from an include/
 #    section
@@ -81,9 +73,6 @@
 #       to the value of the VAR variable in the environment if it's set
 #       otherwise the value in default will be used.  This is similar to
 #       the Bourne shell ${VAR-default} construct.
-#
-# %q -> will be replaced with a list of files user dropped on it
-#	with full pathnames (only applicable in the Drop command).
 #
 # Rules are applied from top to bottom, thus the order is important.
 # If some actions are missing, search continues as if this target didn't
