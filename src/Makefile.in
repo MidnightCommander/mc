@@ -77,11 +77,8 @@ check:
 mc: $(OBJS) @LIBVFS@ @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
-mfmt: mfmt.o
-	$(CC) $(LDFLAGS) mfmt.o -o mfmt 
-
-mcmfmt: mfmt
-	cp mfmt mcmfmt
+mcmfmt: mfmt.o
+	$(CC) $(LDFLAGS) mfmt.o -o mcmfmt 
 
 libvfs-mc.a:
 	cd ../vfs; $(MAKE) libvfs-mc.a
@@ -113,7 +110,7 @@ TAGS: $(SRCS)
 
 clean:
 	$(RMF) mc cons.saver man2hlp fixhlp *.o core a.out mc.html mcmfmt
-	$(RMF) libvfs-mc.a libedit.a libmcslang.a mfmt
+	$(RMF) libvfs-mc.a libedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend
@@ -122,7 +119,6 @@ realclean: clean
 
 distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
-	-$(RMF) $(srcdir)/mfmt
 	-$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
 	-$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
 	-$(RMF) $(srcdir)/libvfs-mc.a $(srcdir)/libmcslang.a $(srcdir)/libedit.a

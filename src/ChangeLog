@@ -1,3 +1,7 @@
+2000-08-11  Frederic L. W. Meunier" <fredlwm@pervalidus.net>
+
+	* Makefile.in: Don't compile mfmt, compile mcmfmt directly.
+
 2000-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (done_hotlist): static tkn_buf, tkn_buf_length and 
