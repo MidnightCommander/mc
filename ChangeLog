@@ -1,5 +1,8 @@
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: fixes for improper usage of $(srcdir), cleanup
+	in the "distclean" target
+
 	* doc-gnome/Makefile.in: Fixed some abuses of $(srcdir)
 	Removed all XVIEW-related stuff
 

@@ -93,13 +93,11 @@ realclean: clean
 # In that case most of those commands do nothing, except cleaning *~
 # and cleaning source links.
 distclean:
-	rm -f $(srcdir)/*~ $(srcdir)/config.cache $(srcdir)/config.h
-	rm -f $(srcdir)/mcfn_install
-	@for I in $(alldirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
-	rm -f $(srcdir)/Makefile $(srcdir)/Make.common
+	rm -f *~ config.cache config.h
+	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
+	rm -f Makefile Make.common
 	rm -f lib/mc.ext mcfn_install 
-	rm -f vfs/extfs/{ftplist,uzip,uzoo,lslR,ulha,ucpio,deb,urar,uar}
-	rm -f $(srcdir)/config.log $(srcdir)/config.status 
+	rm -f config.log config.status 
 	cd vfs/samba && $(MAKE) $@
 
 distcopy:
