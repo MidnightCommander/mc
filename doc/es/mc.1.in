@@ -1,11 +1,11 @@
 .\" Traducido el 6 de septiembre de 1998 por
 .\"	Francisco Gabriel Aroca Tapia <fgat1@alu.um.es>
 .\"
-.\" Actualizado el 6 agosto de 2002 por
+.\" Actualizado desde el 6 agosto de 2002 por
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "Enero de 2003" "MC Versión 4.6.0" "GNU Midnight Commander"
+.TH MC 1 "Enero de 2004" "MC Versión 4.6.1" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -22,84 +22,85 @@ sistemas operativos tipo Unix.
 .\".\"DONT_SPLIT"
 .SH "OPCIONES"
 .TP
-.I "\-a"
+.I \-a, \-\-stickchars
 Deshabilita el uso de caracteres gráficos para el dibujo de líneas.
 .TP
-.I "\-b"
+.I \-b, \-\-nocolor
 Fuerza el uso de la pantalla de Blanco y Negro.
 .TP
-.I "\-c"
-Fuerza el uso del modo color, por favor chequear la sección
+.I \-c, \-\-color
+Fuerza el uso del modo color. Véase la sección
 .\"LINK2"
 Colores
 .\"Colors"
 para más información.
 .TP
-.I "\-C arg"
-Usado para especificar un juego de colores diferentes en la línea de órdenes.
-El formato de arg está documentado en la sección
+.I \-C arg, \-\-colors=arg
+Usado para especificar un juego de colores diferentes desde la línea de
+órdenes.  El formato de arg está documentado en la sección
 .\"LINK2"
 Colores\&. 
 .\"Colors"
 .TP
-.I "\-d"
+.I \-d, \-\-nomouse
 Deshabilita el soporte de ratón.
 .TP
-.I "\-e [arch]"
+.I \-e [arch], \-\-edit[=arch]
 Iniciar el editor interno. Si se indica un archivo, editarlo. Véase la
 página de manual de
 .BR "mcedit (1)" .
 .TP
-.I "\-f"
+.I \-f, \-\-datadir
 Muestra las rutas de búsqueda compiladas para archivos de Midnight Commander.
 .TP
-.I "\-k"
+.I \-k, \-\-resetsoft
 Resetea softkeys a su valor por defecto según la base de datos de termcap/terminfo.
 Sólo útil en terminales HP cuando la función keys no funciona.
 .TP
-.I "\-l reg"
+.I \-l reg, \-\-ftplog=reg
 Guarda el diálogo FTPfs con el servidor en el archivo.
 .TP
-.I "\-P"
-Al salir del programa, Midnight Commander imprimirá el último directorio de trabajo.
-Esta opción no debe ser usada directamente, sino desde una función de la shell adecuada
-para poder cambiar el directorio activo al directorio en uso dentro de Midnight Commander.
-(Gracias a Torben Fjerdingstad y Sergey por su contribución con esta función
-y el código que implementa esta opción).
-Consultar en los archivos
+.I \-P arch, \-\-printwd=arch
+Al salir del programa, Midnight Commander registrará el último
+directorio de trabajo en el archivo indicado.  Esta opción no debe ser
+usada directamente, sino desde un guión de shell adecuado, para dejar
+como directorio activo el directorio que estaba en uso dentro de
+Midnight Commander.  Consúltese en los archivos
 .B @prefix@/share/mc/bin/mc.sh
 (usuarios de bash y zsh) y
 .B @prefix@/share/mc/bin/mc.csh
-(usuarios de tcsh) las correspondientes definiciones de esta función.
+(usuarios de tcsh) la manera de definir
+.B mc
+como un alias para el correspondiente guión de shell.
 .TP
-.I "\-s"
+.I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
 .TP
-.I "\-t"
+.I \-t, \-\-termcap
 Usado sólo si el código fue compilado con Slang y terminfo: hace que
 Midnight Commander use el valor de la variable de entorno
 .B TERMCAP
-para obtener información de terminal en vez de la
-la base de datos de terminales del sistema.
+para obtener la información del terminal, en vez de la base de datos de
+terminales del sistema.
 .TP
-.I "\-u"
+.I \-u, \-\-nosubshell
 Deshabilita el uso de shell concurrente (sólo tiene sentido si este
 Midnight Commander fue construido con soporte de shell concurrente).
 .TP
-.I "\-U"
+.I \-U, \-\-subshell
 Habilita el uso de shell concurrente (sólo tiene sentido si este
 Midnight Commander fue construido con soporte de subshell opcional).
 .TP
-.I "\-v arch"
+.I \-v arch, \-\-view=arch
 Iniciar el visor interno para ver el archivo indicado. Véase la página
 de manual de
 .BR "mcview (1)" .
 .TP
-.I "\-V"
+.I \-V, \-\-version
 Muestra la versión del programa.
 .TP
-.I "\-x"
+.I \-x, \-\-xterm
 Fuerza el modo xterm. Usado cuando se ejecuta en terminales con características de xterm (dos
 modos de pantalla, y pueden enviar secuencias de escape de ratón).
 .PP
@@ -460,7 +461,12 @@ cuando se introducen órdenes del sistema.
 copia el nombre de archivo seleccionado a la línea de órdenes.
 .TP
 .B C-Intro
-igual a M-Intro, esto sólo funciona bajo Linux.
+igual que M-Intro.  Puede no funcionar en ciertos sistemas o con algunos
+terminales.
+.TP
+.B C-S-Intro
+copia la ruta completa del archivo actual en la línea de órdenes. Puede
+no funcionar en ciertos sistemas o con algunos terminales.
 .TP
 .B M-Tab
 realiza una
@@ -3182,8 +3188,9 @@ infrautilizadas).
 .SH ""
 .\"NODE "FILES"
 .SH "ARCHIVOS AUXILIARES"
-El programa localiza toda su información en el directorio designado
-por la variable de entorno MC_DATADIR, o en su defecto, en el directorio
+Los directorios indicados a continuación pueden variar de una
+instalación a otra.  También se pueden modificar con la variable de
+entorno MC_DATADIR, que de estar definida se emplearía en vez de
 @prefix@/share/mc.
 .PP
 .I @prefix@/share/mc.hlp
@@ -3262,12 +3269,12 @@ La página web de Midnight Commander está en:
 	http://www.ibiblio.org/mc/
 .fi
 .PP
-La presente documentación recoge información relativa a la versión 4.6.0
-(Agosto de 2002). Esta traducción no está actualizada con la versión
-original en inglés. Para acceder a información sobre versiones recientes
-consultar la página de manual en inglés que contiene información más
-completa y actualizada. Para ver el susodicho manual original ejecutar
-en la línea de órdenes:
+La presente documentación recoge información relativa a la versión 4.6.1
+(Enero de 2004).  Esta traducción no está completamente actualizada con
+la versión original en inglés.  Para acceder a información sobre
+versiones recientes consultar la página de manual en inglés que contiene
+información más completa y actualizada.  Para ver el susodicho manual
+original ejecutar en la línea de órdenes:
 .nf
         LANG= LC_ALL= man mc
 .fi
@@ -3290,7 +3297,7 @@ también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David
-Martín, 2002.
+Martín, 2002-2004.
 .PP
 Midnight Commander traducido a castellano por David Martín
 <dmartina@excite.com>.

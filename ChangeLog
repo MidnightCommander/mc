@@ -1,3 +1,8 @@
+2003-12-30  David Martin  <dmartina@excite.com>
+
+	* doc/mc.1.in: Synchronized latest fixes (long options) and
+	moved year and version number.
+
 2003-12-24  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Release 4.6.1-pre1.
