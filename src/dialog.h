@@ -32,12 +32,11 @@ enum {
     REFRESH_COVERS_ALL		/* If the refresh fn convers all the screen */
 };
 
-void push_refresh (void (*new_refresh)(void *), void *data, int flags);
+typedef void (*refresh_fn) (void *);
+void push_refresh (refresh_fn new_refresh, void *parameter, int flags);
 void pop_refresh (void);
 void do_refresh (void);
 char *input_dialog (char *header, char *text, char *def_text);
 char *input_expand_dialog (char *header, char *text, char *def_text);
-
-extern Refresh *refresh_list;
 
 #endif	/* __DIALOG_H */

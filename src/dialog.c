@@ -26,9 +26,10 @@
 #include "main.h"		/* fast_refresh */
 
 
-Refresh *refresh_list = 0;
+static Refresh *refresh_list;
 
-void push_refresh (void (*new_refresh)(void *), void *parameter, int flags)
+void
+push_refresh (refresh_fn new_refresh, void *parameter, int flags)
 {
     Refresh *new;
 
@@ -36,14 +37,15 @@ void push_refresh (void (*new_refresh)(void *), void *parameter, int flags)
     new->next = (struct Refresh *) refresh_list;
     new->refresh_fn = new_refresh;
     new->parameter = parameter;
-    new->flags     = flags;
+    new->flags = flags;
     refresh_list = new;
 }
 
-void pop_refresh (void)
+void
+pop_refresh (void)
 {
     Refresh *old;
-    
+
     if (!refresh_list)
 	fprintf (stderr, _("\n\n\nrefresh stack underflow!\n\n\n"));
     else {
@@ -53,31 +55,27 @@ void pop_refresh (void)
     }
 }
 
-static void do_complete_refresh (Refresh *refresh_list)
+static void
+do_complete_refresh (Refresh *refresh_list)
 {
     if (!refresh_list)
 	return;
 
     if (refresh_list->flags != REFRESH_COVERS_ALL)
 	do_complete_refresh (refresh_list->next);
-    
-    (*(refresh_list->refresh_fn))(refresh_list->parameter);
+
+    (*(refresh_list->refresh_fn)) (refresh_list->parameter);
 }
 
-void do_refresh (void)
+void
+do_refresh (void)
 {
-    if (we_are_background)
+    if (we_are_background || !refresh_list)
 	return;
 
-    if (!refresh_list)
-	return;
+    if (fast_refresh)
+	(*(refresh_list->refresh_fn)) (refresh_list->parameter);
     else {
-	if (fast_refresh)
-	    (*(refresh_list->refresh_fn))(refresh_list->parameter);
-	else {
-	    do_complete_refresh (refresh_list);
-	}
+	do_complete_refresh (refresh_list);
     }
 }
-
-

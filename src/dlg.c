@@ -854,8 +854,7 @@ destroy_dlg (Dlg_head *h)
     g_free (h->title);
     g_free (h);
 
-    if (refresh_list)
-	do_refresh ();
+    do_refresh ();
 }
 
 void widget_set_size (Widget *widget, int y, int x, int lines, int cols)

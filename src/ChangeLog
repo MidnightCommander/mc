@@ -1,5 +1,8 @@
 2002-11-14  Pavel Roskin  <proski@gnu.org>
 
+	* dialog.c (refresh_list): Make static.
+	* dialog.h: Add typedef refresh_fn.
+
 	* cmd.c (menu_edit_cmd): Make static, provide separate functions
 	without arguments to access it.
 	* menu.h: Make callfn function without arguments - we are not
