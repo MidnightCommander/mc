@@ -450,6 +450,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     int ret;
     char *my_str;
     char histname[64] = "inp|";
+    char *p_text;
 
     /* we need a unique name for histname because widget.c:history_tool()
        needs a unique name for each dialog - using the header is ideal */
@@ -482,11 +483,12 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     Quick_input.xlen = len;
     Quick_input.xpos = -1;
-    Quick_input.title = const_cast(char *, header);
-    Quick_input.help = const_cast(char *, help);
+    Quick_input.title = header;
+    Quick_input.help = help;
     Quick_input.i18n = 0;
-    quick_widgets[INPUT_INDEX + 1].text = g_strstrip (g_strdup (text));
-    quick_widgets[INPUT_INDEX].text = const_cast(char *, def_text);
+    p_text = g_strstrip (g_strdup (text));
+    quick_widgets[INPUT_INDEX + 1].text = p_text;
+    quick_widgets[INPUT_INDEX].text = def_text;
 
     for (i = 0; i < 4; i++)
 	quick_widgets[i].y_divisions = lines + 6;
@@ -499,10 +501,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     Quick_input.widgets = quick_widgets;
     ret = quick_dialog (&Quick_input);
-    g_free (quick_widgets[INPUT_INDEX + 1].text);
+    g_free (p_text);
 
     if (ret != B_CANCEL) {
-	return *(quick_widgets[INPUT_INDEX].str_result);
+	return my_str;
     } else
 	return 0;
 }

@@ -35,7 +35,7 @@ typedef struct {
     int relative_y;
     int y_divisions;
 
-    char *text;			/* Text */
+    const char *text;		/* Text */
     int  hotkey_pos;		/* the hotkey position */
     int  value;			/* Buttons only: value of button */
     int  *result;		/* Checkbutton: where to store result */
