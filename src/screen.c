@@ -583,6 +583,10 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
     } else
         width = (panel->widget.cols - 2);
 
+    /* Nothing to paint */
+    if (width <= 0)
+	return;
+
     if (mv){
 	if (!isstatus && panel->split){
 	    widget_move (&panel->widget,

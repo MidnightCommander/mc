@@ -1,5 +1,8 @@
 2002-01-22  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c: Don't try to paint anything if width is 0 or less.
+	Reported by Pawel Sakowski <pawel@sakowski.eu.org>
+
 	* screen.c: Make functions static whenever possible.  Remove
 	unused functions.
 	* panel.h: Remove corresponding declarations.
