@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Spreadsheet
+Name[pt_BR]=planilha
 Name[da]=Regneark
 Name[es]=Hoja de cАlculo
 Name[fi]=Taulukko
@@ -12,6 +13,7 @@ Name[pl]=Arkusz kalkulacyjny
 Name[sv]=Kalkylblad
 Name[uk]=Електронна таблиця
 Comment=Create a new spreadsheet
+Comment[pt_BR]=Criar uma nova planilha
 Comment[da]=Opret nyt regneark
 Comment[es]=Crea una nueva hoja de cАlculo
 Comment[fi]=Luo uusi taulukko

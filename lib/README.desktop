@@ -17,6 +17,7 @@ The file should contain an ini-like file whose contents are as follows:
 
 [linkname]
 title=Title in english
+title[pt_BR]=Título em inglês
 title[NN]=Title in language NN
 type=url
 url=some-url

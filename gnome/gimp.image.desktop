@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Image
+Name[pt_BR]=Imagem
 Name[ca]=Imatge
 Name[da]=Billede
 Name[de]=Grafik
@@ -15,6 +16,7 @@ Name[sv]=Bild
 Name[uk]=Зображення
 Name[wa]=ImЕdje
 Comment=Create a new Image
+Comment[pt_BR]=Criar uma nova Imagem
 Comment[ca]=Crear una nova imatge
 Comment[da]=Opret nyt billede
 Comment[de]=Eine neue Grafik erzeugen
