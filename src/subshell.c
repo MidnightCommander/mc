@@ -396,6 +396,7 @@ void init_subshell (void)
     static char pty_name[BUF_SMALL];
     int pty_slave = -1;
 
+#ifdef HAVE_GETSID
     switch (check_sid ()) {
     case 1:
 	use_subshell = FALSE;
@@ -405,6 +406,7 @@ void init_subshell (void)
 	midnight_shutdown = 1;
 	return;
     }
+#endif				/* HAVE_GETSID */
     
 #ifdef SYNC_PTY_SIDES
 	/* Used to wait for a SIGUSR1 signal from the subprocess */
