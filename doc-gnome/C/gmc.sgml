@@ -1,0 +1,1277 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+]>
+<book>
+  <bookinfo>
+    <title>Gnome Midnight Commander Documentation</title>
+    <authorgroup>
+      <author>
+	<firstname>Dave</firstname>
+	<surname>Mason</surname>
+	<affiliation>
+	  <address>
+            <email>dcm@redhat.com</email>
+          </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>1998,1999</year>
+      <holder>Red Hat Software and David A. Wheeler</holder>
+    </copyright>
+    <legalnotice>
+      <para>This documentation is free software; you can redistribute
+        it and/or modify it under the terms of the GNU General Public
+        License as published by the Free Software Foundation; either
+        version 2 of the License, or (at your option) any later
+        version.</para>
+
+      <para>This program is distributed in the hope that it will be
+        useful, but WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+        PURPOSE.  See the GNU General Public License for more
+        details.</para>
+
+      <para>You should have received a copy of the GNU General Public
+        License along with this program; if not, write to the Free
+        Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+        MA 02111-1307 USA</para>
+
+      <para>For more details see the file COPYING that should have 
+        been included in this distribution of the Gnome Midnight Commander.
+      </para>
+    </legalnotice>
+  </bookinfo>
+  <toc></toc>
+  <chapter id="gmc">
+  <title>The GNOME File Manager</title>
+  <sect1>
+   <title>Introduction</title>
+   <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+    </indexterm>
+    <indexterm>
+     <primary> 
+      GMC
+     </primary><see>"Gnome File Manager"</see>
+    </indexterm>
+    <indexterm>
+     <primary>
+      GNU Midnight Commander
+     </primary><see>"GNOME File Manager"</see>
+    </indexterm>
+    GNOME includes  a file manager  that allows you to  manipulate the
+    files  on  your  system  in  a  comfortable,  powerful,  graphical
+    environment. This  File Manager is  known as GMC for  GNU Midnight
+    Commander.  GMC is based  on the  Midnight Commander  file manager
+    which can be run in a terminal.
+   </para>
+   <para>
+    Midnight Commander has  long been known for its  power and ease of
+    use. GMC has taken the power and ease of use from MC and added the
+    GNOME graphical frontend.
+   </para>
+   <para> 
+    As mentioned in the previous chapter, the GNOME File Manager
+    provides  the  desktop functionality  for  GNOME.   The GNOME  File
+    Manager also provides a place to manipulate files on your system by
+    using the GNOME File Manager window.
+    <figure>
+     <title>GNU Midnight Commander - The GNOME File Manager</title>
+    <screenshot>
+     <screeninfo>GMC</screeninfo>
+      <Graphic Format="gif" Fileref="./figs/gmc1" srccredit="dcm">
+      </graphic>
+    </screenshot>
+    </figure>
+   </para>
+   <para>
+    There are two  main windows within the GNOME  File Manager. On the
+    left is the  tree view which represents all  of the directories on
+    your system  by their hierarchical  position. On the right  is the
+    directory window which will show you the contents of the directory
+    which you have selected in the tree view.
+   </para>
+   <para>
+    To select a  directory in the tree view simply  use a single mouse
+    click. This will change the main directory view, showing the files
+    in  the  directory  you  have  chosen. If  there  are  directories
+    contained within the directory, you  may click on the plus sign in
+    the tree view to expand the directory.
+   </para>
+   <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Viewing Files
+     </secondary>
+    </indexterm>     
+    The main file view has a  few viewing options you may wish to take
+    advantage of: the  icon view and detailed views.  
+   </para>
+   <para>
+    The icon view is the default view and will display large icons for
+    each file.  The Brief  view shows the  files and directories  in a
+    list  but without  any extra  information shown.The  Detailed view
+    will  display  a list  view  of the  files  in  the directory  and
+    information about the files. The  Custom view is a list view which
+    allows you to select the information you want to view about files.
+   </para>
+   <para>
+    In the  Brief, Detailed, and Custom  views if you click  on one of
+    the information titles  on the top of the window  it will sort the
+    files according to  that information. For example, if  you want to
+    find the largest files in the  directory you can click on the Size
+    title  and  the files  will  be sorted  by  size  from largest  to
+    smallest. One more click on the Size title will change the sorting
+    from smallest to largest.
+   </para>
+  </sect1>
+  <sect1 id="gmcnav" >
+   <title>Moving Around the GNOME File Manager</title>
+   <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Moving around 
+     </secondary>
+    </indexterm>
+    Above the  tree and  main file windows  in the GNOME  File Manager
+    there is  a Location text box.  
+   </para>
+   <para>
+    Within this text box you can type the path location of the file in
+    which you would like to view in the main window.
+   </para>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     FTP
+    </secondary>
+   </indexterm>      
+    The GNOME File Manager is also equipped to view FTP sites. To view
+    an FTP site  you will need to be connected  to the Internet either
+    through a  dial up account or  a network. Type the  FTP address in
+    Location text box using and the GNOME File Manager will attempt to
+    connect to the site.
+   </para>
+   <para>
+    Make  sure you  type in  FTP  addresses in  the following  manner:
+    <programlisting>ftp://[site address]</programlisting>
+   </para>
+   <para>
+    Next to  the Location  text box are  navigation buttons  you might
+    wish to use. These buttons with  the arrow icons allow you to move
+    within the  directories adjacent to the  one you are  in. The left
+    button will  take you to the  previous directory you  were in, the
+    middle  button  will  take  you  up one  level  in  the  directory
+    hierarchy,  and  the  right  button  will take  you  to  the  next
+    directory if you have just moved backwards.
+   </para>
+   <tip>
+    <title>TIP</title>
+    <para>
+     You can open a secondary  window by using your middle mouse button
+     on any directory.  Press the middle mouse button (or both left and
+     right mouse buttons  if you have emulation) on  a directory in the
+     main window and a new window will open showing the contents of the
+     directory you clicked on.
+    </para>
+   </tip>
+  </sect1>
+  <sect1 id="gmcselect" >
+   <title>Selecting Files</title>
+    <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Selecting Files
+     </secondary>
+    </indexterm>
+     Selecting files is  done with your mouse by  clicking on the file
+     or files  in the GNOME File  Manager.  The file  that is selected
+     will  then highlight  to  show  you that  it  has been  selected.
+    </para> 
+    <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Selecting multiple files 
+     </secondary>
+    </indexterm>
+     There are a couple of ways to select more than one
+     file. One way is to use  the "rubber band" select by clicking and
+     dragging the mouse cursor  around several files. This action will
+     produce a small  dotted line, the "rubber band",  to show you the
+     area in which files will be selected.
+    </para>
+     <figure>
+      <title>"Rubber Band Select"</title>
+     <screenshot>
+      <screeninfo>Rubber Band Select</screeninfo>
+       <Graphic format="gif" Fileref="./figs/rubberband" srccredit="dcm">
+       </graphic>
+     </screenshot>
+     </figure>
+    <para>
+      If  you  wish to  be  more selective  about  the  files you  are
+      choosing,  or the  files  you need  do  not reside  next to  one
+      another, you  may use the <keycap>CTRL</keycap> key  to keep the
+      files you have selected while you are selecting more. This works
+      by    selecting    a   file,    pressing    and   holding    the
+      <keycap>CTRL</keycap> key and  selecting another file. While the
+      <keycap>CTRL</keycap> key is pressed you  will be able to add to
+      the "list" of  files that are selected.  Once  you have selected
+      multiple files by either method you may copy or move the files.
+    </para>
+    <para>
+     You  may also select  all files  in a  directory by  selecting the
+    <guimenuitem>Select   All</guimenuitem>   menu   item   from   the
+    <guimenu>Edit</guimenu> menu.
+   </para>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     filtering
+    </secondary>
+   </indexterm>
+     You   may    also   filter   your   selection    by   using   the
+    <guimenuitem>Select   Files</guimenuitem>   menu   item   in   the
+    <guimenu>Edit</guimenu> menu. Using <guimenuitem>Select
+    Files</guimenuitem> will display a simple dialog which will allow
+    you to type in criteria for your selection. In this field, the
+    symbol <keycap>*</keycap> is interpreted as a wildcard, E.g., it
+    matches any string.  For example, if you would like to select all
+    files in the directory that start with the letter
+    <keycap>D</keycap>, you can type <keycap>D*</keycap> (note that
+    filenames in Unix are case-sensitive).
+   </para>
+  </sect1>
+  <sect1 id="gmccopy" >
+   <title>Copying and Moving Files</title>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary> 
+     Copying files
+    </secondary>
+   </indexterm>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Moving files
+    </secondary>
+   </indexterm>
+    The default action for drag and  drop in the GNOME File Manager is
+    to move files. But  you can also use drag and drop  to copy a file
+    by  pressing  the <keycap>SHIFT</keycap>  key  while dragging  the
+    file(s). This  will work the  same for any  files you drag  to the
+    desktop.
+   </para>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Linking files
+    </secondary>
+   </indexterm>
+    You may  also toggle a menu  which lets you decide  what action to
+    perform with  a drag by  using the middle  mouse button to  drag a
+    file  or pressing  the <keycap>ALT</keycap>  Key while  dragging a
+    file. Once you  release the drag you will get  a pop-up menu which
+    contains the options Copy, Move, Link, and Cancel Drag.
+   </para>
+   <para>
+    Another way  to copy  or move  files is to  take advantage  of the
+    right  mouse  click  <guimenu>pop-up</guimenu> menu.  Right  mouse
+    click  on  the   file  you  want  to  copy   or  move  and  select
+    <guimenuitem>Move/rename</guimenuitem>                           or
+    <guimenuitem>Copy</guimenuitem> from the <guimenu>pop-up</guimenu>
+    menu.   This will  bring up  a dialog  in which  to  perform these
+    tasks.
+   </para>
+   <para>
+    <figure>
+     <title>The Move Dialog</title>
+    <screenshot>
+     <screeninfo>Move Dialog</screeninfo>
+      <Graphic Format="gif" Fileref="./figs/gmc_move" srccredit="dcm">
+      </graphic>
+    </screenshot>
+    </figure>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Moving files
+    </secondary>
+   </indexterm>
+    To use the move dialog you  simply type in the path where you wish
+    to move the  file. If you want to rename the  file you may type
+    the new name of the file in the path string. The Copy dialog looks
+    and works exactly the same way as the Move/rename dialog.
+   </para>
+   <para>
+    If the file you are moving  has a symbolic link associated with it
+    -- that is, a  virtual link to where the  file actually resides --
+    you may  select the <guilabel>Advanced  Options</guilabel> tab and
+    select  <guilabel>Preserve  symlinks</guilabel>.   Selecting  this
+    will make sure the link is preserved despite the move.
+   </para>
+   <para>
+    It is recommended that you use  this method of moving a file if it
+    has a symbolic link associated to it.
+   </para>
+  </sect1>
+  <sect1 id="gmcrename" >
+   <title>Renaming Files</title>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Renaming files
+    </secondary>
+   </indexterm>
+    Renaming files in the GNOME  File Manager window or on the desktop
+    can  be achieved  in two  ways. 
+   </para>
+   <para>
+    One method of renaming a file is to right mouse click on the
+    file  and  choose  the <guimenuitem>Properties</guimenuitem>  menu
+    item  from the  <guimenu>pop-up</guimenu> menu.   In  the Filename
+    text box you may type in the new name as you wish it to appear.
+   </para>
+    <figure>
+     <title>File Properties</title>
+     <screenshot>
+      <screeninfo>File Properties</screeninfo>
+       <Graphic format="gif" Fileref="./figs/fileprops" srccredit="dcm">
+       </graphic>
+     </screenshot>
+     </figure>
+   <para>
+    A shortcut  method to rename a  file is to slowly  double click on
+    the file.   Make sure this is slow  so you do not  launch the file
+    but you simply  highlight and then click again.  At this point the
+    name  of the file  will enter  into the  editing mode,  your mouse
+    cursor will change to an editing line, and you can type in the new
+    name.
+   </para>
+   </sect1>
+  <sect1 id="gmclaunch" >
+   <title> Launching Applications From the GNOME File Manager</title>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Launching applications from
+    </secondary>
+   </indexterm>
+    The GNOME File Manager allows  you to launch applications from the
+    main window by  simply double clicking your mouse  on a file which
+    has an application  associated with it. You can change the way
+    file types are handled by reading <xref linkend="gccmime">
+   </para>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     Open with
+    </secondary>
+   </indexterm>
+    If the file does not  have an associated application you can right
+    mouse   click   on   the   file   and   select   <guimenuitem>Open
+    with</guimenuitem>   from   the  <guimenuitem>pop-up</guimenuitem>
+    menu.  This will bring up a  dialog which allows you to define the
+    application which will  launch the file. For example,  if you want
+    to      edit      my       file      names      test.txt      with
+    <application>Emacs</application> (a  popular text  editor)  you can
+    right  mouse  click   on  test.txt  and  choose  <guimenuitem>Open
+    with</guimenuitem>.  When you get  the Open with dialog box simply
+    type in emacs in front of  the test.txt file name.  When you press
+    <guibutton>OK</guibutton>   <application>Emacs</application>  will
+    open the file.
+   </para>
+   <figure>
+    <title>The Open With Dialog</title>
+   <screenshot>
+    <screeninfo>Open With Dialog</screeninfo>
+     <graphic Format="gif" Fileref="./figs/open_with" srccredit="dcm">
+     </graphic>
+   </screenshot>
+   </figure>
+  </sect1>
+  <sect1 id="gmcfileprops"
+   <title>File Properties and Actions</title>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     File properties
+    </secondary>
+   </indexterm>
+    For any file in the main file display you may right mouse click on
+    it and choose a variety of properties and actions for it from the
+    <guimenu>pop-up</guimenu> menu: 
+   </para>
+   <ITEMIZEDLIST mark="bullet">
+    <listitem>
+     <para>
+      <guimenuitem>Open</guimenuitem> - This will open the file with
+      the proper application associated with it. You may read more
+      about editing these associations in <xref
+      linkend="gccmime">.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>Open With</guimenuitem> - You may open a file with
+      any application using this menu item. You may read more about
+      this in <xref linkend="gmclaunch">.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>View</guimenuitem> - This will view the file with a
+      basic text viewer.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>Edit</guimenuitem> - This will launch an editor to
+      edit the file. The editor launched is determined by the
+      application associated with that file type. You may read more
+      about editing this association in <xref linkend="gccmime">.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>Copy</guimenuitem> - This will copy the file to the
+      clipboard so that it can be pasted elsewhere.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>Delete</guimenuitem> - This will delete the file.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      <guimenuitem>Move</guimenuitem> - This will bring up the
+      <guilabel>Move</guilabel> dialog which will allow you to move
+      the file. You can read more about this dialog and moving files
+      in <xref linkend="gmccopy">.
+     </para>
+    </listitem>
+<!--<listitem>
+     <para>
+      <guimenuitem>Symlink</guimenuitem> - 
+     </para>
+    </listitem>-->
+    <listitem>
+     <para>
+      <guimenuitem>Properties</guimenuitem> - The Properties menu item
+      will launch the properties dialog. The Properties dialog allows
+      you to edit and view the properties for the selected file.
+     </para>
+     <para> 
+      The Properties dialog consists of three tabs, Statistics,
+      Options, and Permissions.
+     </para>
+     <figure>
+      <title>File Properties</title>
+      <screenshot>
+       <screeninfo>File Properties</screeninfo>
+       <Graphic format="gif" Fileref="./figs/fileprops" srccredit="dcm">
+       </graphic>
+      </screenshot>
+     </figure>
+      <ITEMIZEDLIST mark="bullet">
+       <listitem>
+        <para>
+         <guilabel>Statistics</guilabel> - This tab will show you the
+         file information including the name, type, size, and
+         history. You may change the name of the file in the
+         <guilabel>File Name</guilabel> text box.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guilabel>Options</guilabel> - This tab will allow you to
+         change the action options for the file. You can define how to
+         open, view, and edit the file. If you need to open it in a
+         terminal window you may select the <guilabel>Needs terminal
+         to run</guilabel> checkbox.
+        </para>
+        <note>
+         <title>NOTE</title>
+         <para>
+          If you bring up the Properties dialog from an icon on the
+          desktop you will be able to change the icon for that file in
+          the <guilabel>Options</guilabel> tab.
+         </para>
+	</note>
+       </listitem>
+       <listitem>
+        <para>
+         <guilabel>Permissions</guilabel> - This tab allows you to
+         change the permissions and ownership of a file if you have
+         access to do so. You may select Read, Write, and Exec
+         permissions for the User, Group, and Others. You may also set
+         the UID, GID and Sticky as well as define who owns the file.
+        </para>
+       </listitem>
+      </itemizedlist>
+    </listitem>
+   </itemizedlist>
+  </sect1>
+  <sect1 id=gmcprefs>
+   <title>Changing Your Preferences in The File Manager</title>
+    <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Preferences
+     </secondary>
+    </indexterm>
+     There  are many  settings you  can configure  for the  GNOME File
+     Manager. 
+    </para>
+    <para>
+     These  settings may  be accessed from  the <guilabel>GMC
+     Preferences</guilabel>  dialog.  You  may launch  this  dialog by
+     selecting  the  <guimenuitem>Preferences</guimenuitem> menu  item
+     from the <guimenu>Edit</guimenu> menu.
+    </para>
+    <para>
+     The <guilabel>GMC  Preferences</guilabel> dialog is  divided into
+     Five    major   sections:    <guilabel>File   Display</guilabel>,
+     <guilabel>Confirmation</guilabel>,                <guilabel>Custom
+     View</guilabel>,  <guilabel>Caching Optimizations</guilabel>, and
+     <guilabel>VFS</guilabel>.
+    </para>
+    <sect2 id="gmcprefs-file">
+     <title>File Display</title>
+    <figure>
+     <title>File Display Preferences</title>
+     <screenshot>
+      <screeninfo>File Display Preferences</screeninfo>
+      <graphic Format="gif" Fileref="./figs/gmcprops1" srccredit="dcm">
+      </graphic>
+     </screenshot>
+     </figure>
+     <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+        <indexterm>
+         <primary>
+          GNOME File Manager
+         </primary>
+         <secondary>
+          Display
+         </secondary>
+        </indexterm>
+         The   <guilabel>File
+         Display</guilabel> tab allows you to change the way files are
+         displayed in GMC.
+        </para>
+        <ITEMIZEDLIST MARK="bullet">
+         <listitem>
+          <para>
+           <guilabel>Show backup files</guilabel> - This will show any
+           backup file which might be on your system.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+          <indexterm>
+           <primary>
+            GNOME File Manager
+           </primary>
+           <secondary>
+            Hidden Files
+           </secondary>
+          </indexterm>
+          <indexterm>
+           <primary>
+            GNOME File Manager
+           </primary>
+           <secondary>
+            Show hidden files
+           </secondary>
+          </indexterm>
+           <guilabel>Show hidden files</guilabel> - This will show all
+           "dot  files" or  files that  begin with  a dot.  This files
+           typically include configuration files and directories.
+          </para>
+          </listitem>
+          <listitem>
+          <para>
+           <guilabel>Mix  files   and  directories</guilabel>  -  This
+           option will display files  and directories in the order you
+           sort them instead of  always having directories shown above
+           files.
+          </para>
+          </listitem>
+          <listitem>
+          <para>
+           <guilabel>Use    shell   patterns   instead    of   regular
+           expressions</guilabel> - This  option is for advanced users
+           only. If  you are  unfamiliar with Regular  Expressions you
+           should not use this option. If you are familiar with how to
+           create regular  expressions you  may select this  option to
+           use them in your sorts and filters.
+          </para>
+         </listitem>
+        </itemizedlist>
+       </listitem>
+      </itemizedlist>
+      </sect2>
+      <sect2 id="gmcprefs-confirm">
+       <title>Confirmation</title>
+        <figure>
+         <title>Confirmation Preferences</title>
+         <screenshot>
+          <screeninfo>Confirmation Preferences</screeninfo>
+          <graphic Format="gif" Fileref="./figs/gmcprops2" srccredit="dcm">
+          </graphic>
+         </screenshot>
+        </figure>
+       <ITEMIZEDLIST MARK="bullet">
+        <listitem>
+        <para>
+        <indexterm>
+         <primary>
+          GNOME File Manager
+         </primary>
+         <secondary>
+          Confirmations
+         </secondary>
+        </indexterm>
+         This  tab allows  you to
+         change  which  functions  ask  for your  confirmation  before
+         continuing.
+        </para>
+        <ITEMIZEDLIST MARK="bullet">
+         <listitem>
+          <para>
+           <guilabel>Confirm when deleting file</guilabel> - This will
+           bring up a confirmation screen before deleting a file.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Confirm when  overwriting files</guilabel> - This
+           will bring  up a  confirmation screen before  overwriting a
+           file.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Confirm  when executing  files</guilabel>  - This
+           will  bring up  a  confirmation screen  before executing  a
+           file.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Show   progress   while   operations  are   being
+           performed</guilabel> -  This will  bring up a  progress bar
+           while  certain  operations  are  being  performed  such  as
+           copying, moving, deleting, etc.
+          </para>
+         </listitem>
+        </itemizedlist>
+       </listitem>
+      </itemizedlist>
+      </sect2>
+      <sect2 id="gmcprefs-VFS"
+        <title>VFS</title>
+        <figure>
+         <title>VFS Preferences</title>
+         <screenshot>
+          <screeninfo>VFS Preferences</screeninfo>
+          <graphic Format="gif" Fileref="./figs/gmcprops3" srccredit="dcm">
+          </graphic>
+         </screenshot>
+        </figure>
+      <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+        <indexterm>
+         <primary>
+          GNOME File Manager
+         </primary>
+         <secondary>
+          VFS
+         </secondary>
+        </indexterm>
+        <indexterm>
+         <primary>
+          Virtual File System
+         </primary><see>"GNOME File Manager - VFS"</see>
+        </indexterm>
+         This tab allows  you to configure
+         the options for your Virtual File System.
+        </para>
+        <para> 
+         The Virtual File  System allows you to manipulate files
+         that are  not located  on your local  file system.  There are
+         different version  of the VFS including ftpfs  and tarfs. The
+         ftpfs allows you  to work on FTP sites  while the tarfs gives
+         you access inside .tar files. 
+        </para>
+        <note>
+         <title>NOTE</title>
+         <para>
+          The .tar file is the standard UNIX archive format
+         </para>
+        </note>
+        <ITEMIZEDLIST MARK="bullet">
+         <listitem>
+          <para>   
+           <guilabel>VFS   Timeout</guilabel>   -  This   will
+           determine how long you will  be connected to any VFS without
+           activity. The timeout is measured in seconds.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Anonymous  FTP password</guilabel> -  This allows
+           you  to  set a  password  for  logging  into anonymous  FTP
+           sites.  Usually  you will  want  to  make  this your  email
+           address.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Always use FTP proxy</guilabel>  - If you need to
+           use a proxy to connect to FTP sites you will want to enable
+           this.
+          </para>
+         </listitem>
+        </itemizedlist> 
+       </listitem>
+      </itemizedlist>
+      </sect2>
+      <sect2 id="gmcprefs-cache">
+       <title>Caching</title>
+        <figure>
+         <title>Caching Preferences</title>
+         <screenshot>
+          <screeninfo>Caching Preferences</screeninfo>
+          <graphic Format="gif" Fileref="./figs/gmcprops4" srccredit="dcm">
+          </graphic>
+         </screenshot>
+        </figure>
+      <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+         This  tab  allows   you  to
+         configure items that  will enhance the speed of  GMC by using
+         caching.
+        </para>
+        <ITEMIZEDLIST MARK="bullet">
+         <listitem>
+          <para> 
+           <guilabel>Fast  directory  reload</guilabel> -  This
+           option will store directory  information in cache so that it
+           can load faster.
+          </para>
+          <important>
+           <title>IMPORTANT</title>
+           <para>
+            If    you     enable    the    <guilabel>Fast    directory
+            reload</guilabel>  you may  experience  problems with  not
+            seeing new files that have been added to directories.
+           </para>
+          </important>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Compute totals  before copying files</guilabel> -
+           This will  make GMC determine  the number of files  you are
+           copying before it performs the task so that it can give you
+           information about the process as its happening.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>FTP  directory  cache  timeout</guilabel> -  This
+           option will  keep recently visited FTP  site information in
+           cache  for the  amount of  time  you specify.  The time  is
+           measured in seconds.
+          </para>
+         </listitem>
+         <listitem>
+          <para>
+           <guilabel>Allow    customization   of    icons    in   icon
+           view</guilabel> -  This will allow you to  change the icons
+           in  the icon  view  by  right mouse  clicking  on them  and
+           selecting  the  <guimenuitem>Properties</guimenuitem>  menu
+           item. You can always change  the icons of items that are on
+           your desktop but you can only change the icons in the icon
+           view with this option turned on.
+          </para>
+          <important>
+           <title>IMPORTANT</title>
+           <para>
+            Turning on  the <guilabel>Allow customization  of icons in
+            icon  view</guilabel>  function  may  result in  a  slower
+            system.
+           </para>
+          </important>
+         </listitem>
+        </itemizedlist>
+       </listitem>
+      </itemizedlist>
+   </sect2>
+   <sect2>
+    <title>Custom View</title>
+    <para>
+    <indexterm>
+     <primary>
+      GNOME File Manager
+     </primary>
+     <secondary>
+      Custom View
+     </secondary>
+     </indexterm>
+     The Custom View dialog allows you to set the way you would like
+     the Custom View to look in the GNOME File Manager. 
+    </para>
+     <figure>
+      <title>The Custom View Dialog</title>
+      <screenshot>
+       <screeninfo>The Custom View Dialog</screeninfo>
+       <Graphic Format="gif" Fileref="./figs/custom-view" srccredit="dcm">
+       </graphic>
+      </screenshot>
+     </figure>
+    <para>
+     There are two main columns in the <guilabel>Custom
+     View</guilabel>, the <guilabel>Possible Columns</guilabel> and
+     the <guilabel>Displayed Columns</guilabel>.
+    </para>
+    <para>
+     The <guilabel>Possible Columns</guilabel> list includes all of
+     the information types that can be displayed. If you would like to
+     include on you may press the <guibutton>Add</guibutton> button
+     and it will be added to the <guilabel>Displayed
+     Columns</guilabel> list.
+    </para>
+    <para>
+     The <guilabel>Displayed Columns</guilabel> list shows you the
+     current information types that will be included in your Custom
+     View. If you wish to remove any you may press the
+     <guibutton>Remove</guibutton> button.
+    </para>
+    <para>
+     If you would like to re-arrange the items in the
+     <guilabel>Displayed Columns</guilabel> list you may drag them to
+     the desired location with your mouse.
+    </para>
+   </sect2>
+  </sect1>
+  <sect1 id="gmcmenus" >
+   <title>Menu Guide to the GNOME File Manager</title>
+   <para>
+   <indexterm>
+    <primary>
+     GNOME File Manager
+    </primary>
+    <secondary>
+     menus
+    </secondary>
+    </indexterm>
+    In this section each menu item in the GNOME  File Manager will be
+    described. 
+   </para>
+   <tip>
+    <title>Tip</title>
+    <para>
+     All  menus  in  the  GNOME  File Manager  are  enabled  with  the
+     tear-away feature. If  you would like any menu  to "float" on the
+     desktop in its  own window simply select the  perforation line at
+     the top of the menu.
+    </para>
+   </tip>
+   <ITEMIZEDLIST MARK="bullet">
+    <listitem>
+     <para>
+      <guimenu>File</guimenu>   -  The   File   Menu  contains   items
+      associated with files and higher level activity.
+     </para>
+      <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+         <guimenuitem>New Window</guimenuitem> -  This will open a new
+         File Manager Window.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Open</guimenuitem> - This will open the file you
+         have selected with your mouse cursor.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Copy</guimenuitem> -  This will launch  the Copy
+         dialog  to  enable  you  to  copy  the  selected  file  to  a
+         destination you choose.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Move</guimenuitem>   -  This  will   launch  the
+         Move/rename  dialog  to enable  you  to  move  or rename  the
+         selected file to a destination you choose.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+        <guimenuitem>Delete</guimenuitem> - This  will delete the file
+        you have selected.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+        <guimenuitem>Close</guimenuitem> -  This will close  the GNOME
+        File Manager
+        </para>
+       </listitem>
+     </itemizedlist>
+    </listitem>
+   </itemizedlist>
+   <ITEMIZEDLIST MARK="bullet">
+    <listitem>
+     <para>
+      <guimenu>Edit</guimenu> - The Edit  menu contains items that are
+      associated with editing and selecting files.
+     </para>
+     <ITEMIZEDLIST MARK="bullet">
+      <listitem>
+       <para>
+        <guimenuitem>Select All</guimenuitem>  - This will  select all
+        of  the files in  the directory  you are  currently in  in the
+        GNOME File Manager.
+       </para>
+      </listitem>
+      <listitem>
+       <para>
+        <guimenuitem>Select Files</guimenuitem>  - This will  launch a
+        simple  dialog box  which will  allow  you to  specify a  file
+        selection range.  For Example, if you wish to select all files
+        beginning with the  letter D you can simple  type d* and press
+        OK.
+       </para>
+      </listitem>
+      <listitem>
+       <para>
+        <guimenuitem>Invert Selection</guimenuitem> - This will invert
+        the  current  selection. For  example,  if  you  have 7  files
+        selected  in  a  directory  with 10  files,  selecting  Invert
+        Selection will  select the three remaining  files and unselect
+        the 7 files that were previously selected.
+       </para>
+      </listitem>
+      <listitem>
+       <para>
+        <guimenuitem>Rescan Directory</guimenuitem> - This will rescan
+        the current directory in case  the files in the directory have
+        changed.
+       </para>
+      </listitem>
+      <listitem>
+       <para>
+        <guimenuitem>Preferences</guimenuitem> -  This will launch the
+        Preferences dialog  so that you  can customize the  GNOME File
+        Manager.
+       </para>
+      </listitem>
+     </itemizedlist>
+    </listitem>
+   </itemizedlist>
+   <ITEMIZEDLIST MARK="bullet">
+    <listitem>
+     <para>
+      <guimenu>Layout</guimenu>  - This menu  contains items  that are
+      associated with the layout in GNOME File Manager.
+     </para>
+      <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+         <guimenuitem>Sort  By</guimenuitem>  -  This  will  launch  a
+         dialog box  which will allow you  to select how  you wish the
+         files to be sorted in  the current directory. You may sort by
+         one of the following:
+        </para>
+         <ITEMIZEDLIST mark="none">
+          <listitem>
+           <para>Name</para>
+          </listitem>
+          <listitem>       
+           <para>File Type</para>
+          </listitem>
+          <listitem>
+           <para>Size</para>
+          </listitem>
+          <listitem>   
+           <para>Time Last Accessed</para>
+          </listitem>
+          <listitem>
+           <para>Time Last Modified</para>
+          </listitem>
+          <listitem>
+           <para>Time Last Changed</para>
+          </listitem>
+         </itemizedlist>
+        </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Filter View</guimenuitem> - This will bring up a
+         simple  dialog  which allows  you  to  only  view files  with
+         certain  attributes. For example,  if you  wish to  only view
+         files in the  directory that start with the  letter D you can
+         type d* into the dialog and press OK.  If you wish to see all
+         files again  you will need  to launch the Filter  View dialog
+         again and clear the dialog or type in a *.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Icon  View</guimenuitem> -  Selecting  this will
+         display the files in the main view as large icons.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Partial View</guimenuitem> - Selecting this will
+         display the files  in the main view as a  list with only file
+         names.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Full  View</guimenuitem> -  Selecting  this will
+         display the  files in the main  view as a list  with all file
+         information.
+        </para>
+       </listitem>
+      <listitem>
+        <para>
+         <guimenuitem>Custom View</guimenuitem> - 
+         The <guimenuitem>Custom View</guimenuitem> mane item switches
+         your view to the Custom View which is a list view displaying
+         the information about your files that you specify. 
+         To customize the Custom view you will need to use the
+         <guilabel>Custom View Editor</guilabel> in the
+         <guilabel>Preferences</guilabel> dialog. You may read more
+         about the <guilabel>Preferences</guilabel> dialog in <xref
+         linkend="gmcprefs">.
+        </para>
+       </listitem>
+      </itemizedlist>
+     </listitem>
+    </itemizedlist>
+   <ITEMIZEDLIST MARK="bullet">
+     <listitem>
+      <para>
+       <guimenu>Commands</guimenu> -  The Command menu  contains items
+       that are commands to run on files in the GNOME File Manager.
+      </para>
+      <ITEMIZEDLIST MARK="bullet">
+       <listitem>
+        <para>
+         <guimenuitem>Find File</guimenuitem> -  Find File brings up a
+         dialog  which allows you  to search  for particular  files on
+         your system.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Edit mime types</guimenuitem> - This option will
+         launch the GNOME Control Center Capplet that allows you to
+         edit Mime Types for GNOME. Mime types determine, among other
+         things, what application will handle particular file
+         types. You can read more about mime types in <xref
+         linkend="gccmime">
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Run  Command</guimenuitem>   -  This  menu  item
+         allows you to run a command from GMC.
+        </para>
+       </listitem>
+       <listitem>
+        <para>
+         <guimenuitem>Run Command  in panel</guimenuitem> -  This menu
+         item lets you run  preloaded commands or commands you specify
+         within the directory that you are currently in. Such commands
+         might be to find SUID or SGID programs, etc.
+        </para>
+       </listitem>
+      <!-- <listitem>
+        <para>
+         <guimenuitem>Active VFS list</guimenuitem> - The Virtual File
+         System allows you to manipulate files that are not located on
+         your local file system.
+        </para>
+        <para> There are different  version of the VFS including ftpfs
+         and tarfs.  The ftpfs allows you  to work on  FTP sites while
+         the tarfs gives you access  inside .tar files. These can both
+         be very  useful in your  work environment and the  Active VFS
+         list allows you to see  which VFS's are currently open.  When
+         you  select  the  <guimenuitem>Active VFS</guimenuitem>  menu
+         item you get a list of the current VFSs you have opened.
+        </para>
+        <para> There is also an option to change to a different VFS by
+         pressing the <guibutton>Change To</guibutton> button.
+        </para>
+       </listitem> -->
+       <listitem>
+        <para>
+         <guimenuitem>Exit</guimenuitem> - This will allow you to exit
+         out of the GNOME File Manager. 
+        </para>
+        <important>
+         <title>IMPORTANT</title>
+         <para>
+          This will exit all GNOME File Manager processes which
+          include the GNOME Desktop. If you exit you will lose all
+          functionality on your desktop. This option is not
+          recommended.
+         </para>
+        </important>
+       </listitem>         
+      </itemizedlist>
+     </listitem>
+    </itemizedlist>
+  </sect1>
+  <sect1 id="dragtour">
+   <title>A Drag and Drop Tour of GNOME</title>
+    <para>
+    <indexterm>
+     <primary>
+      GNOME
+     </primary>
+     <secondary>
+      Drag and Drop
+     </secondary>
+    </indexterm>
+     There are many tips and tricks  to the Desktop in GNOME. The Drag
+     and Drop functionality  extends to many areas of  GNOME making it
+     easy to interconnect  GNOME in many interesting ways.  Below is a
+     series of tips and tricks to using GNOME Drag and Drop. This is a
+     good tour of GNOME and will  show you how to utilize GNOME to its
+     fullest extent.
+    </para>
+   <ITEMIZEDLIST  MARK="bullet">
+    <listitem>
+     <para>
+      Drag a Color onto the Panel - Whenever you have a color selector
+      displayed you  may drag a color  from the selected  color bar to
+      the Panel and it will change the Panel to that color.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Drag a Pixmap to the Background  Selector - If you would like to
+      change the background to an  image, you can drag that image from
+      your GNOME File  Manager to the Monitor Image  in the Background
+      Capplet of the Control Center and it will change to that image.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Drag to an Application  - Many GNOME compliant applications will
+      accept  drag and  drop.  If  you would  like to  open a  file in
+      Gnumeric,  a GNOME  compliant spreadsheet  application,  you may
+      simply drag the  file from the GNOME File  Manager onto Gnumeric
+      and it  will open the file.   The same is  true for applications
+      built using  Motif.  You may drag  a saved URL  onto Netscape 4x
+      and it  will open the  URL. This can  be very useful if  you are
+      working within the GNOME File Manager and wish to quickly open a
+      file.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Adding an Application Launcher to  the Panel - If you would like
+      to add  an application  launcher to the  Panel you may  drag and
+      drop any  executable file  from the GNOME  File Manager,  or the
+      Desktop, onto the Panel.   This will display the Create Launcher
+      applet dialog box  which will allow you to select  a name and an
+      icon for that launcher.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Dragging Files  - There are  many ways to  use drag and  drop to
+      help you manage your system. You can open two GNOME File Manager
+      windows to two different directories then drag files between the
+      two windows  to copy,  move, or link  files. You can  drag files
+      from  the  File   Manager  to  the  desktop  to   make  it  more
+      accessible. Use  the middle mouse  button or the right  and left
+      mouse  buttons  together and  Drag  a  directory  folder to  the
+      desktop. Choose the  link option from the pop-up  menu to make a
+      link to  the desktop. This will  give you a quick  way to launch
+      the File Manager to that directory.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      Dragging Directories - You can drag a directory out of the GNOME
+      File Manger  and place it on  the Panel. This will  create a new
+      menu  which  allows  you  easy  access  to  the  files  in  that
+      directory.
+     </para>
+    </listitem>
+    <listitem>
+     <para>
+      You may drag any sub menu from  the Main Menu to the panel and a
+     new  menu launcher  is added  to the  panel.  This  allows easier
+     access to that sub-set of menus.
+     </para>
+    </listitem>
+   </itemizedlist>
+  </sect1>
+ </chapter>
+
+</book>
+
