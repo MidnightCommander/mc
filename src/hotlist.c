@@ -502,7 +502,7 @@ static int
 init_i18n_stuff(int list_type, int cols)
 {
 	register int i;
-	static char* cancel_but = "&Cancel";
+	static char* cancel_but = N_("&Cancel");
 
 #ifdef ENABLE_NLS
 	static int hotlist_i18n_flag = 0;
@@ -742,6 +742,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 
 }
 
+#ifdef ENABLE_NLS
 /*
  * Support routine for add_new_entry_input()/add_new_group_input()
  * Change positions of buttons (first three widgets).
@@ -767,6 +768,7 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 		qw [i].x_divisions = len;
 	}
 }
+#endif /* ENABLE_NLS */
 
 static int add_new_entry_input (char *header, char *text1, char *text2, char *help, char **r1, char **r2)
 {
