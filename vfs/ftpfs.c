@@ -269,27 +269,25 @@ command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
     int sock = SUP.sock;
     
     va_start (ap, fmt);
-
     fmt_str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    str = g_strconcat (fmt_str, "\r\n", NULL);
-    g_free (fmt_str);
+    status = strlen (fmt_str);
+    str = g_realloc (fmt_str, status + 3);
+    strcpy (str + status, "\r\n");
 
     if (logfile){
         if (strncmp (str, "PASS ", 5) == 0){
-            char *tmp = "PASS <Password not logged>\r\n";
-	    
-            fwrite (tmp, strlen (tmp), 1, logfile);
+            fputs ("PASS <Password not logged>\r\n", logfile);
         } else
-	    fwrite (str, strlen (str), 1, logfile);
+	    fwrite (str, status + 2, 1, logfile);
 
 	fflush (logfile);
     }
 
     got_sigpipe = 0;
     enable_interrupt_key ();
-    status = write (SUP.sock, str, strlen (str));
+    status = write (SUP.sock, str, status + 2);
     g_free (str);
     
     if (status < 0){
@@ -962,7 +960,9 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
     }
     if (remote) {
 	char * remote_path = translate_path (me, super, remote);
-	j = command (me, super, WAIT_REPLY, "%s /%s", cmd, remote_path);
+	j = command (me, super, WAIT_REPLY, "%s /%s", cmd, 
+	    /* WarFtpD can't STORE //filename */
+	    (*remote_path == '/') ? remote_path + 1 : remote_path);
 	g_free (remote_path);
     } else
     	j = command (me, super, WAIT_REPLY, "%s", cmd);
@@ -973,12 +973,11 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
 	data = s;
     else {
 	data = accept (s, (struct sockaddr *)&from, &fromlen);
+	close(s);
 	if (data < 0) {
 	    my_errno = errno;
-	    close(s);
 	    return -1;
 	}
-	close(s);
     } 
     disable_interrupt_key();
     return data;
@@ -1222,7 +1221,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     enable_interrupt_key ();
     
     while (1) {
-        int i, j;
+	int i;
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), sock);
 	if (!res)
 	    break;
@@ -1238,12 +1237,11 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
 	ent = vfs_s_generate_entry(me, NULL, dir, 0);
 	i = ent->ino->st.st_nlink;
-        j = vfs_parse_ls_lga (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname);
-	ent->ino->st.st_nlink = i; /* Ouch, we need to preserve our counts :-( */
-	if (!j) {
+	if (!vfs_parse_ls_lga (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname)) {
 	    vfs_s_free_entry (me, ent);
 	    continue;
 	}
+	ent->ino->st.st_nlink = i; /* Ouch, we need to preserve our counts :-( */
 	num_entries++;
 	if ((!strcmp(ent->name, ".")) || (!strcmp (ent->name, ".."))) {
 	    g_free (ent->name);
@@ -1566,11 +1564,6 @@ static int ftpfs_rmdir (vfs *me, char *path)
     return send_ftp_command(me, path, "RMD /%s", OPT_FLUSH);
 }
 
-void ftpfs_set_debug (const char *file)
-{
-    logfile = fopen (file, "w+");
-}
-
 #ifdef FIXME_LATER_ALIGATOR
 static void my_forget (char *file)
 {
@@ -1637,7 +1630,7 @@ static struct vfs_s_data ftp_data = {
     NULL,
     0,
     0,
-    NULL,
+    NULL, /* logfile */
 
     NULL, /* init_inode */
     NULL, /* free_inode */
@@ -1663,13 +1656,13 @@ static struct vfs_s_data ftp_data = {
 
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
-    "File Tranfer Protocol (ftp)",
+    N_("File Tranfer Protocol (ftp)"),
     F_NET,	/* flags */
     "ftp:",	/* prefix */
     &ftp_data,	/* data */
     0,		/* errno */
-    NULL,
-    NULL,
+    NULL,	/* init */
+    NULL,	/* done */
     vfs_s_fill_names,
     NULL,
 
@@ -1717,6 +1710,13 @@ vfs vfs_ftpfs_ops = {
 
 MMAPNULL
 };
+
+void ftpfs_set_debug (const char *file)
+{
+    logfile = fopen (file, "w+");
+    if (logfile)
+	ftp_data.logfile = logfile;
+}
 
 #ifdef USE_NETRC
 static char buffer[BUF_MEDIUM];
