@@ -9,14 +9,14 @@
 	unquoted variables. (mcdebfs_copyout): likewise.
 	(mcdebfs_run): likewise.
 	
-	From Leonard den Ottolander <leonard@den.ottolander.nl>
+	From Leonard den Ottolander <leonard *den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/deba.in (list): Separated the use of quoted and unquoted
 	variables. (copyout): likewise. (run): likewise.
 	
-	From Leonard den Ottolander <leonard@den.ottolander.nl>
+	From Leonard den Ottolander <leonard *den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
@@ -24,7 +24,7 @@
 	(ls): deleted. (list): correctly quoted shell command arguments.
 	(copyout): likewise. (run): likewise.
 	
-	From Leonard den Ottolander <leonard@den.ottolander.nl>
+	From Leonard den Ottolander <leonard *den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
@@ -38,7 +38,7 @@
 	* extfs/rpm: Command line parameters fix for UPGRADE.
 	Fix mcrpmfs_copyout for INFO/OBSOLETES and INFO/LICENSE 
 
-	From Leonard den Ottolander <leonard@den.ottolander.nl>
+	From Leonard den Ottolander <leonard *den.ottolander.nl>
 
 2004-08-16  Pavel S. Shirshov  <pavelsh@mail.ru>
 
