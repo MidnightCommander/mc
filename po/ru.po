@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2002-12-26 16:32-0500\n"
-"PO-Revision-Date: 2000-08-21 12:24+00:00\n"
-"Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
+"PO-Revision-Date: 2003-01-15 21:01+02:00\n"
+"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8-r\n"
@@ -298,7 +298,7 @@ msgstr " Ошибка в формате строки замены. "
 #: edit/editcmd.c:1891
 #, c-format
 msgid " %ld replacements made. "
-msgstr " Осуществлено %ld подстановок "
+msgstr " Осуществлено подстановок: %ld "
 
 #: edit/editcmd.c:1894 edit/editcmd.c:1972 edit/editcmd.c:2000 src/view.c:1681
 #: src/view.c:1813
@@ -1488,7 +1488,7 @@ msgstr "Рас&ширение"
 
 #: src/dir.c:53
 msgid "&Modify time"
-msgstr "Время &модификации"
+msgstr "Время &правки"
 
 #: src/dir.c:54
 msgid "&Access time"
@@ -1496,7 +1496,7 @@ msgstr "Время &доступа"
 
 #: src/dir.c:55
 msgid "&Change time"
-msgstr "Время &изменения"
+msgstr "Время изменения &атрибутов"
 
 #: src/dir.c:56
 msgid "&Size"
