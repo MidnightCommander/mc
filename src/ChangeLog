@@ -1,3 +1,9 @@
+2004-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* wtools.h: Fix warnings.
+	* selcodepage.c (select_charset): Likewise.
+	* boxes.c (display_bits_box): Likewise.
+
 2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* color.c (mc_init_pair): Use cast to avoid warning.

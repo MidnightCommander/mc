@@ -91,7 +91,7 @@ select_charset (int current_charset, int seldisplay)
 int
 do_select_codepage (void)
 {
-    char *errmsg;
+    const char *errmsg;
 
     if (display_codepage > 0) {
 	source_codepage = select_charset (source_codepage, 0);

@@ -614,7 +614,7 @@ display_bits_box (void)
     run_dlg (dbits_dlg);
 
     if (dbits_dlg->ret_value == B_ENTER) {
-	char *errmsg;
+	const char *errmsg;
 	display_codepage = new_display_codepage;
 	errmsg =
 	    init_translation_table (source_codepage, display_codepage);
