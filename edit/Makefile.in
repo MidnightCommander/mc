@@ -34,7 +34,7 @@ check:
 	@echo no tests are supplied.
 
 checklinks:
-	@if test -f $(rootdir)/edit/edit.c; then echo ok; \
+	@if test -f $(rootdir)/edit/edit.c && test -f $(rootdir)/edit/bookmark.c; then echo ok; \
 	else $(MAKE) sourcelinks; fi
 
 sourcelinks:
