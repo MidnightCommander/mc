@@ -5,6 +5,7 @@
 #%define _with_charset 1	# enable experimental code for charset conversion
 #%define _with_samba 1		# enable SMB/CIFS virtual file system
 #%define _with_glib2 1		# compile against glib2
+#%define _with_ext2undel 1	# compile with ext2 undelete code [if available]
 
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
@@ -47,7 +48,8 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 %{?_with_included_slang: --with-screen=mcslang} \
 %{?_with_charset: --enable-charset} \
 %{?_with_samba: --with-samba} \
-%{?_with_glib2: --with-glib2}
+%{?_with_glib2: --with-glib2} \
+%{?_with_ext2undel: --with-ext2undel}
 
 make
 
@@ -99,6 +101,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Mon Nov 04 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Handle --with ext2undel.
+
 * Fri Nov 01 2002 Pavel Roskin <proski@gnu.org>
 - Add wrappers to support setting last directory on exit.  Keep all
   scripts in their original directory, just copy them.
@@ -118,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Mon Sep 30 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Don't require slang-devel if _with_ncurses.
-- Add --with samba.
+- Handle --with samba.
 
 * Sun Sep 29 2002 Pavel Roskin <proski@gnu.org>
 - Use --with-screen instead of --with-ncurses and --with-included-slang.
