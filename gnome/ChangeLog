@@ -1,3 +1,8 @@
+1998-03-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtrans.c (create_transparent_text_window): Set the window's
+	cursor to the normal top-left arrow.
+
 Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gtools.c (translate_gdk_keysym_to_curses): renamed KEY_BACKTAB

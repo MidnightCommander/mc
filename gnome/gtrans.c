@@ -248,6 +248,7 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 {
 	GtkWidget *window;
 	GdkImlibImage *im;
+	static GdkCursor *cursor;
 	
 	if (!g_file_exists (file))
 		return NULL;
@@ -272,6 +273,11 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	set_window_text (window, im, text);
 
 	gdk_imlib_destroy_image (im);
+
+	if (!cursor)
+		cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW); /* FIXME: this is never freed */
+
+	gdk_window_set_cursor (window->window, cursor);
 
 	return window;
 }
@@ -298,6 +304,7 @@ make_transparent_window (char *file)
 	gtk_widget_pop_visual ();
 
 	gtk_widget_realize (window);
+
 	xwa.save_under = True;
 	XChangeWindowAttributes (GDK_WINDOW_XDISPLAY (window->window),
 				 GDK_WINDOW_XWINDOW (window->window),
