@@ -1,0 +1,51 @@
+#! /bin/sh
+#
+# Written by Pavel Machek
+# CDDB support by Adam Byrtek
+#
+# (C) 2000 The Free Software Foundation.
+#
+
+set -e
+
+CDDB_SERVER="http://freedb.freedb.org"
+CDDB_HANDSHAKE="hello=user+localhost+mc+1.0&proto=1"
+
+
+audiofs_list ()
+{
+    echo "-r--r--r-- 1 0 0 0 Jan 1 0:00 CDDB"
+    cdparanoia -Q -d $1 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while true
+    do
+    read A B C || break
+    A=`echo $A | sed 's/\.//'`
+    SIZE=$[44+$B*2352]
+    if (( $A < 10 )); then A="0$A"; fi
+    echo "-r--r--r-- 1 0 0 $SIZE Jan 1 0:00 track-${A}.wav"
+    done
+}
+
+audiofs_copyout ()
+{
+    if [ "$2" == "CDDB" ]; then
+        DISCID=`cd-discid $1 | tr " " "+"`
+        RESPONSE=`wget -q -T 60 -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+query+$DISCID&$CDDB_HANDSHAKE"  | @AWK@ '/^200/ { print $2,$3; }'`
+	wget -q -T 60 -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" > $3
+    else
+        TRACK=`echo $2 | sed 's/track-0*//' | sed 's/\.wav//'`
+        cdparanoia -q -d $1 $TRACK $3 >/dev/null
+    fi
+}
+
+if [ ! -b $2 ]
+    then
+    BASE=/dev/cdrom
+else
+    BASE=$2
+fi
+
+case "$1" in
+  list) audiofs_list $BASE; exit 0;;
+  copyout) audiofs_copyout $BASE $3 $4; exit 0;;
+esac
+exit 1

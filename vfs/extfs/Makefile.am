@@ -4,11 +4,12 @@ extfsdir = $(pkgdatadir)/extfs
 EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
 
 # Filters that don't need adaptation to the local system
-EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm bpp \
+EXTFS_CONST = a apt deba debd dpkg hp48 mailfs patchfs rpm bpp \
 	rpms trpm uarj
 
 # Filters that need adaptation to the local system - source files
 EXTFS_IN    = 			\
+	audio.in		\
 	deb.in 			\
 	lslR.in 		\
 	urar.in 		\
@@ -20,6 +21,7 @@ EXTFS_IN    = 			\
 
 # Filters that need adaptation to the local system - files to install
 EXTFS_OUT = 			\
+	audio			\
 	deb 			\
 	lslR 			\
 	urar 			\
