@@ -1,3 +1,11 @@
+1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (panel_reload): Set panel->selected to zero here, this
+	will at least guarantee that we do not try to fetch anything
+	outside of bounds.
+
+	* main.c: The bar2 is gone as well.
+	
 Tue Dec  8 19:19:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* cmd.c (dirsizes_cmd): Fixed possible buffer overflow

@@ -243,10 +243,6 @@ WLabel *the_hint;
 /* The button bar */
 WButtonBar *the_bar;
 
-#ifdef HAVE_X
-WButtonBar *the_bar2;
-#endif
-
 /* For slow terminals */
 int slow_terminal = 0;
 
