@@ -241,7 +241,7 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 {
     struct context_rule *r;
     int context, contextchanged = 0, keyword, c1, c2;
-    int found_right = 0, found_left = 0;
+    int found_right = 0, found_left = 0, keyword_foundleft = 0;
     int done = 0;
     unsigned long border;
     context = (rule & RULE_CONTEXT) >> RULE_CONTEXT_SHIFT;
@@ -259,8 +259,11 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
     if (keyword) {
 	struct key_word *k;
 	k = edit->rules[context]->keyword[keyword];
-	if ((k->last == c1 && compare_word_to_left (edit, i - 1, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) || (c2 == '\n')) {
+	if (c1 == '\n')
 	    keyword = 0;
+	if (k->last == c1 && compare_word_to_left (edit, i - 1, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+	    keyword = 0;
+	    keyword_foundleft = 1;
 	    debug_printf ("keyword=%d ", keyword);
 	}
     }
@@ -283,7 +286,8 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 		debug_printf ("A:4 ", 0);
 		found_left = 1;
 		border = 0;
-		context = 0;
+		if (!keyword_foundleft)
+		    context = 0;
 	    } else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
 		       &&(rule & RULE_ON_LEFT_BORDER)) {
 /* never turn off a context at 2 */
@@ -409,7 +413,7 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 {
     struct context_rule *r;
     int context, contextchanged = 0, keyword, c2, c1;
-    int found_left = 0, found_right = 0;
+    int found_left = 0, found_right = 0, keyword_foundright = 0;
     int done = 0;
     unsigned long border;
     context = (rule & RULE_CONTEXT) >> RULE_CONTEXT_SHIFT;
@@ -427,8 +431,11 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
     if (keyword) {
 	struct key_word *k;
 	k = edit->rules[context]->keyword[keyword];
-	if ((k->first == c2 && compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) || (c1 == '\n')) {
+	if (c2 == '\n')
 	    keyword = 0;
+	if ((k->first == c2 && compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) || (c2 == '\n')) {
+	    keyword = 0;
+	    keyword_foundright = 1;
 	    debug_printf ("keyword=%d ", keyword);
 	}
     }
@@ -451,7 +458,8 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 		debug_printf ("A:1 ", 0);
 		found_right = 1;
 		border = 0;
-		context = 0;
+		if (!keyword_foundright)
+		    context = 0;
 	    } else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
 		       &&(rule & RULE_ON_RIGHT_BORDER)) {
 /* never turn off a context at 2 */
