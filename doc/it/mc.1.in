@@ -363,7 +363,7 @@ La barra di selezione si sposta dal vecchio pannello al nuovo corrente.
 .B Insert, C-t.
 Per marcare i file si può usare il tasto di Inserimento (la sequenza
 teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
-basta marcare un file gia marcato.
+basta marcare un file già marcato.
 .PP
 .B M-g, M-h (o M-r), M-j.
 Usato per selezionare rispettivamente il file superiore, il file centrale o 
@@ -1029,7 +1029,7 @@ per cambiare directory senza dover cancellare e riscrivere la riga di comando.
 Questo comando fa uscire una piccola finestra di dialogo che richiede 
 l'immissione degli stessi argomenti che si darebbero al comando 
 .B cd 
-a riga di comando. Questo ha le stesse caratteristiche gia presenti nel
+a riga di comando. Questo ha le stesse caratteristiche già presenti nel
 comando
 .\"LINK2"
 comando interno cd.
@@ -1251,108 +1251,112 @@ eseguire il seguente:
 .nf
 find . -type l -print
 .fi
-Upon command completion, the directory contents of the panel will no
-longer be the directory listing of the current directory, but all the
-files that are symbolic links.
+Al completamento del comando, il contenuto del pannello non sarà più
+il listato della directory ma tutti i file che rappresentano
+collegamenti simbolici.
 .PP
-If you want to panelize all of the files that have been downloaded
-from your ftp server, you can use this awk command to extract the file
-name from the transfer log files:
+Volendo pannellizzare tutti i file che sono stati scaricati dal
+proprio server ftp preferito, si può usare questo comando awk per
+estrarre il nome del file dal file di log del traferimento:
 .PP
 .nf
 awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
 .fi
 .PP
-You may want to save often used panelize commands under a descriptive name,
-so that you can recall them quickly. You do this by typing the command on
-the input line and pressing Add new button. Then you enter a name under
-which you want the command to be saved. Next time, you just choose that
-command from the list and do not have to type it again.
+Se si desidera si può salvare i comandi di pannellizzazione usati più 
+spesso con uno nome più descrittivo, in maniera da richiamarli più velocemente.
+Per fare ciò basta battere il comando sulla riga di ingresso e premere il tasto
+Aggiungi nuovo. Poi si deve dare un nome al quale associare il comando che si
+desidera salvare. La prossima volta sarà possibile scegliere quel comando 
+dall'elenco e non servirà ribatterlo nuovamente.
 .PP
-.SH "    Hotlist"
-The Directory hotlist command shows the labels of the directories
-in the directory hotlist.  The Midnight Commander will change to the
-directory corresponding to the selected label.  From the hotlist dialog,
-you can remove already created label/directory pairs and add new ones.
-To add new directories quickly, you can use the Add to hotlist command
-(C-x h), which adds the current directory into the directory hotlist,
-asking just for the label for the directory.
+.\"NODE "    Hotlist"
+.SH "    Directory Favorite"
+Il comando Directory favorite mostra le etichette delle directory nell'elenco
+delle favorite. Il The Midnight Commander andrà alla directory corrispondente
+all'etichetta selezionata. Dalla finestra delle favorite si possono rimuovere
+etichette/directory già create ed aggiungerne di nuove. Per aggiungere 
+velocemente nuove directory basta usare il comando Aggiungi alle favorite 
+(C-x h), che aggiunge la directory corrente alla lista delle favorite,
+richiedendo l'etichetta per identificarla.
 .PP
-This makes cd to often used directories faster. You may consider using the
-CDPATH variable as described in
+Questo rende più veloce il cd verso directory usate spesso. Considera l'uso della
+variabile CDPATH come descritto in
 .\"LINK2"
-internal cd command
+comando cd interno 
 .\"The cd internal command"
-description.
+ .
 .PP
-.SH "    Extension File Edit"
-This will invoke your editor on the file ~/.mc/bindings. The format of this
-file is as follows (the format has changed with version 3.0):
+.\"NODE "    Extension File Edit"
+.SH "    Modifica File Estensioni"
+Questo comando invocherà l'editor sul file ~/.mc/bindings. Il fomato di questo
+file è il seguente (il formato è cambiato dalla versione 3.0):
 .PP
-All lines starting with # or empty lines are thrown away.
+Tutte le righe che iniziano per # vengono ignorate.
 .PP
-Lines starting in the first column should have following format:
+Le righe che cominciano dalla prima colonna devono avere il seguente formato:
 .PP
-.I keyword/descNL,
-i.e. everything after 
-.I keyword/
-until new line is 
-.I desc
+.I parolachiave/descrizioneNL,
+i.e. qualsiasi cosa dopo
+.I parolachiave/
+fino al fine riga è 
+.I descrizione
 .PP
-keyword can be: 
+parolachiave può essere: 
 .PP
 .I shell
 .IP
-(desc is then any extension (no wildcards), i.e. matches all the files 
-*desc . Example: .tar matches *.tar)
+(allora descrizione è qualsiasi estensione (no caratteri jolly), cioè corrisponde a tutti i file 
+*descrizione . Esempio: .tar corrisponde a *.tar)
 .PP
 .I regex
 .IP
-(desc is a regular expression)
+(descrizione è un'espressione regolare)
 .PP
 .I type
 .IP
-(file matches this if `file %f` matches regular expression desc
-(the filename: part from `file %f` is removed))
+(file corrisponde se `file %f` corrisponde all'espressione regolare descrizione
+(nome del file: a partire da `file %f` viene rimosso))
 .PP
 .I default
 .IP
-(matches any file no matter what desc is)
+(corrisponde a qualsiasi file indipendentemente da descrizione)
 .PP
-Other lines should start with a space or tab and should be of the format:
+Le altre linee devono cominciare con uno spazio o una tabulazione e devono essere nel formato:
 .PP
-.I keyword=commandNL
-(with no spaces around =), where 
-.I keyword
-should be: 
+.I parolachiave=comandoNL
+(senza spazi intorno a =), dove
+.I parolachiave
+deve essere: 
 .PP
 .I Open
-(if the user presses Enter or doubleclicks it), 
+(se l'utente preme Invio o fa doppio click), 
 .I View
 (F3), 
 .I Edit
 (F4), 
 .I Drop
-(user drops some files on it) or any other
-user defined name (those will be listed in the extension dependent pop-up
-menu). 
+(l'utente scarica alcuni file su di esso) o qualsiasi altro nome definito
+dall'utente (questi saranno elencati nella finestra menu dipendente 
+dall'estensione). 
 .I Icon
-name is reserved for future use by mc.
+il nome è riservato per usi futuri da mc.
 .PP
 .I command
-is any one-line shell command, with the simple 
+è qualsiasi comando shell di una riga, con la semplice
 .\"LINK2"
-macro substitution.
+sostituzione macro.
 .\"Macro Substitution"
 .PP
-Target are evaluated from top to bottom (order is thus important).
-If some actions are missing, search continues as if this target didn't
-match (i.e. if a file matches the first and second entry and View action
-is missing in the first one, then on pressing F3 the View action from
-the second entry will be used. default should catch all the actions.
+Gli obiettivi sono valutati dalla cima al fondo (l'ordine perciò è 
+importante). Se alcune azioni mancano, la ricerca continua come se 
+l'obiettivo non corrispondesse (cioè se un file corrisponde alla prima e
+alla seconda voce e manca la voce View in cima, premendo F3 verrà
+usata l'azione View della seconda voce. Normalmente dovrebbero
+corrispondere tutte le azioni.
 .PP
 .\"NODE "    Background jobs"
-.SH "    Background Jobs"
+.SH "    Processi in Background"
 This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the
 background).  You can stop, restart and kill a background job from
