@@ -37,7 +37,7 @@
  *   try to define a superset of the possible key identifiers here.
  *
  */
-
+#include <config.h>
 #include "mouse.h" /* required before key.h */
 #include "key.h"
 #include "myslang.h"
