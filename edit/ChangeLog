@@ -1,3 +1,8 @@
+2001-08-26  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Converted to ...
+	* Makefile.am: ... this.
+
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in (EDITSRC): Add headers.
