@@ -1,7 +1,7 @@
-# Makefile.vc4
+# Makefile.VC4
 #
 # Midnight Commander for Win32 makefile
-# for Microsoft Visual C++ 4.x 
+# for Microsoft Visual C++ 4.x and above
 #
 # Hacked by Dan Nicolaescu from Visual IDE mak
 # Hacked by Pavel Roskin to make it work with cmd.exe from Windows NT4

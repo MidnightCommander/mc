@@ -1,12 +1,13 @@
-# Makefile
+# Makefile.PC
+#
+# This is the Makefile for Midnight Commander under OS/2 and Windows NT
+#
 # Written by Dan Nicolaescu 
 # 970423 hacked by Juan f. Grigera 
 # 970525 hacked again by jfg to add internal editor
 # 971127 hacked by Pavel Roskin to make it work with mc-4.1.11
 # 980206 hacked by Pavel Roskin to make it work with GNU make
 # 980329 changed by Pavel Roskin to make it common for OS/2 and NT
-#
-# This is the Makefile for Midnight Commander under OS/2 and Windows NT
 #
 # Supported Compilers:
 #
