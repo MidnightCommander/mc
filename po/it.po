@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-01-24 13:01+0100\n"
+"POT-Creation-Date: 2002-02-19 23:39+0100\n"
 "PO-Revision-Date: 2001-09-30 20:25GMT+1\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italiano (use this)<tp@lists.linux.it> <it@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: edit/edit.c:187 edit/edit.c:353 edit/edit.c:358 edit/edit.c:372
 #: edit/edit.c:376 edit/edit.c:413 edit/edit.c:421 edit/edit.c:429
 #: edit/edit.c:436 edit/editcmd.c:248 edit/editcmd.c:254 edit/editcmd.c:1572
-#: src/dir.c:391 src/wtools.c:204
+#: src/wtools.c:204
 msgid " Error "
 msgstr " Errore "
 
@@ -145,10 +145,10 @@ msgstr " Salva con nome "
 
 #. Warning message with a query to continue or cancel the operation
 #: edit/editcmd.c:424 edit/editcmd.c:713 edit/editcmd.c:738 edit/editcmd.c:885
-#: edit/editcmd.c:983 src/file.c:596 src/help.c:314 src/main.c:624
-#: src/screen.c:1384 src/screen.c:1997 src/selcodepage.c:75
-#: src/selcodepage.c:92 src/subshell.c:723 src/subshell.c:749
-#: src/utilunix.c:366 src/utilunix.c:370 src/utilunix.c:390 src/utilunix.c:441
+#: edit/editcmd.c:983 src/file.c:593 src/help.c:314 src/main.c:624
+#: src/screen.c:1388 src/screen.c:2001 src/selcodepage.c:75
+#: src/selcodepage.c:92 src/subshell.c:719 src/subshell.c:745
+#: src/utilunix.c:363 src/utilunix.c:367 src/utilunix.c:387 src/utilunix.c:438
 #: vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Attenzione "
@@ -267,7 +267,7 @@ msgstr "&Nome"
 msgid "al&L"
 msgstr "&Tutti"
 
-#: edit/editcmd.c:1039 src/file.c:2085 src/filegui.c:248
+#: edit/editcmd.c:1039 src/file.c:2076 src/filegui.c:248
 msgid "&Skip"
 msgstr "&Ignora"
 
@@ -373,15 +373,15 @@ msgstr " Il file è stato modificato. Lo salvo uscendo? "
 msgid "Cancel quit"
 msgstr "Annulla uscita"
 
-#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1784 src/file.c:2143
-#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1984
-#: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
+#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
+#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:398
 msgid "&Yes"
 msgstr " &Sì"
 
-#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1784 src/file.c:2143
-#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1984
-#: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
+#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
+#: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:398
 msgid "&No"
 msgstr "&No"
 
@@ -785,7 +785,7 @@ msgstr "Emulazione tasti"
 msgid " Editor options "
 msgstr " Opzioni editor"
 
-#: edit/editwidget.c:235 src/help.c:811 src/main.c:1534 src/screen.c:2218
+#: edit/editwidget.c:235 src/help.c:811 src/main.c:1534 src/screen.c:2222
 #: src/tree.c:1018 src/view.c:2010
 msgid "Help"
 msgstr "Aiuto"
@@ -798,7 +798,7 @@ msgstr "Marca"
 msgid "Replac"
 msgstr "Sostit"
 
-#: edit/editwidget.c:239 src/file.c:774 src/screen.c:2222 src/tree.c:1024
+#: edit/editwidget.c:239 src/file.c:771 src/screen.c:2226 src/tree.c:1024
 msgid "Copy"
 msgstr "Copia"
 
@@ -810,7 +810,7 @@ msgstr "Sposta"
 msgid "Search"
 msgstr "Cerca"
 
-#: edit/editwidget.c:242 src/screen.c:2225
+#: edit/editwidget.c:242 src/screen.c:2229
 msgid "Delete"
 msgstr "Elimina"
 
@@ -823,15 +823,15 @@ msgstr "Menu"
 msgid "Quit"
 msgstr "Esci"
 
-#: edit/syntax.c:993 edit/syntax.c:998
+#: edit/syntax.c:996 edit/syntax.c:1001
 msgid " Load syntax file "
 msgstr " Carica file sintassi "
 
-#: edit/syntax.c:993
+#: edit/syntax.c:996
 msgid " File access error "
 msgstr " Errore di accesso al file "
 
-#: edit/syntax.c:999
+#: edit/syntax.c:1002
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Errore nel file %s alla linea %d "
@@ -989,7 +989,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Processo in background"
 
-#: src/background.c:276 src/file.c:2084
+#: src/background.c:276 src/file.c:2075
 msgid " Background process error "
 msgstr " Errore del processo in background"
 
@@ -1195,12 +1195,12 @@ msgstr "Password: "
 msgid "Password for \\\\%s\\%s"
 msgstr "Password per \\\\%s\\%s"
 
-#: src/charsets.c:32 vfs/extfs.c:1337 vfs/sfs.c:302
+#: src/charsets.c:31 vfs/extfs.c:1343 vfs/sfs.c:302
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Attenzione: file %s non trovato\n"
 
-#: src/charsets.c:189 src/charsets.c:202
+#: src/charsets.c:173 src/charsets.c:186
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Impossibile tradurre da %s a %s"
@@ -1437,7 +1437,7 @@ msgstr "Premi `exit' per tornare a Midnight Commander"
 msgid " Link "
 msgstr " Collegamento "
 
-#: src/cmd.c:983 src/cmd.c:1097 src/file.c:1622
+#: src/cmd.c:983 src/cmd.c:1097 src/file.c:1613
 msgid " to:"
 msgstr " a: "
 
@@ -1711,15 +1711,15 @@ msgstr " Sposta "
 msgid " Delete "
 msgstr " Cancella "
 
-#: src/file.c:233
+#: src/file.c:230
 msgid " Invalid target mask "
 msgstr " La maschera di destinazione è errata"
 
-#: src/file.c:331
+#: src/file.c:328
 msgid " Could not make the hardlink "
 msgstr " Non posso creare il link fisico "
 
-#: src/file.c:373
+#: src/file.c:370
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -1728,7 +1728,7 @@ msgstr ""
 " Non posso leggere il link sorgente \"%s\" \n"
 " %s "
 
-#: src/file.c:383
+#: src/file.c:380
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -1738,7 +1738,7 @@ msgstr ""
 "\n"
 " L'opzione Link simbolici stabili sarà disabilitata "
 
-#: src/file.c:431
+#: src/file.c:428
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -1747,7 +1747,7 @@ msgstr ""
 " Non posso creare il link simbolico di destinazione \"%s\" \n"
 " %s "
 
-#: src/file.c:498
+#: src/file.c:495
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1756,7 +1756,7 @@ msgstr ""
 " Non posso sovrascrivere la directory \"%s\" \n"
 " %s "
 
-#: src/file.c:507
+#: src/file.c:504
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -1765,12 +1765,12 @@ msgstr ""
 " Non trovo le informazioni sul file \"%s\" \n"
 " %s "
 
-#: src/file.c:520
+#: src/file.c:517
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' e `%s' sono lo stesso file. "
 
-#: src/file.c:557
+#: src/file.c:554
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1779,7 +1779,7 @@ msgstr ""
 " Non posso creare il file speciale \"%s\" \n"
 " %s "
 
-#: src/file.c:566 src/file.c:784
+#: src/file.c:563 src/file.c:781
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1788,7 +1788,7 @@ msgstr ""
 " Non posso cambiare il proprietario/gruppo del file: \"%s\" \n"
 " %s "
 
-#: src/file.c:574 src/file.c:799
+#: src/file.c:571 src/file.c:796
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1797,7 +1797,7 @@ msgstr ""
 " Non posso cambiare proprietario/gruppo del file \"%s\" \n"
 " %s "
 
-#: src/file.c:586
+#: src/file.c:583
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1806,11 +1806,11 @@ msgstr ""
 " Non posso aprire il file sorgente \"%s\" \n"
 " %s"
 
-#: src/file.c:596
+#: src/file.c:593
 msgid " Reget failed, about to overwrite file "
 msgstr " Reget ha fallito, sto riscrivendo il file "
 
-#: src/file.c:602
+#: src/file.c:599
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1819,7 +1819,7 @@ msgstr ""
 " Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
 " %s "
 
-#: src/file.c:623
+#: src/file.c:620
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1828,7 +1828,7 @@ msgstr ""
 " Non posso creare il file \"%s\" \n"
 " %s "
 
-#: src/file.c:637
+#: src/file.c:634
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1837,7 +1837,7 @@ msgstr ""
 "  Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
 " %s"
 
-#: src/file.c:668
+#: src/file.c:665
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1846,7 +1846,7 @@ msgstr ""
 " Il file \"%s\" non ha permessi in lettura  \n"
 " %s"
 
-#: src/file.c:698
+#: src/file.c:695
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1855,11 +1855,11 @@ msgstr ""
 " Non posso scrivere il file \"%s\" \n"
 " %s"
 
-#: src/file.c:717
+#: src/file.c:714
 msgid "(stalled)"
 msgstr "(in attesa)"
 
-#: src/file.c:755
+#: src/file.c:752
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1868,7 +1868,7 @@ msgstr ""
 " Non posso chiudere il file sorgente \"%s\" \n"
 " %s"
 
-#: src/file.c:764
+#: src/file.c:761
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1877,19 +1877,19 @@ msgstr ""
 " Non posso chiudere il file di destinazione \"%s\" \n"
 " %s"
 
-#: src/file.c:774
+#: src/file.c:771
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Il file recuperato è incompleto. Lo vuoi tenere?"
 
-#: src/file.c:775
+#: src/file.c:772
 msgid "&Delete"
 msgstr "Elimina"
 
-#: src/file.c:775 src/hotlist.c:1410
+#: src/file.c:772 src/hotlist.c:1410
 msgid "&Keep"
 msgstr "Mantenere"
 
-#: src/file.c:840
+#: src/file.c:837
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1898,7 +1898,7 @@ msgstr ""
 " Non posso avere informazioni sulla directory sorgente \"%s\" \n"
 " %s"
 
-#: src/file.c:863
+#: src/file.c:860
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -1908,7 +1908,7 @@ msgstr ""
 " %s "
 
 #. we found a cyclic symbolic link
-#: src/file.c:871
+#: src/file.c:868
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1917,7 +1917,7 @@ msgstr ""
 " Non posso copiare un link simbolico ciclico \n"
 " %s"
 
-#: src/file.c:904 src/file.c:1933
+#: src/file.c:901 src/file.c:1924
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1926,7 +1926,7 @@ msgstr ""
 " La destinazione \"%s\" deve essere una directory \n"
 " %s "
 
-#: src/file.c:932
+#: src/file.c:929
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1935,7 +1935,7 @@ msgstr ""
 " Non posso creare la directory di destinazione \"%s\" \n"
 " %s "
 
-#: src/file.c:950
+#: src/file.c:947
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1945,7 +1945,7 @@ msgstr ""
 " %s "
 
 #. Source doesn't exist
-#: src/file.c:1051
+#: src/file.c:1048
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1954,17 +1954,17 @@ msgstr ""
 " Non posso ottenere informazioni sul file \"%s\" \n"
 " %s "
 
-#: src/file.c:1073
+#: src/file.c:1070
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' e `%s' sono lo stesso file "
 
-#: src/file.c:1080
+#: src/file.c:1077
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Non posso rinominare la directory `%s' "
 
-#: src/file.c:1114
+#: src/file.c:1111
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1973,7 +1973,7 @@ msgstr ""
 " Non posso rinominare il file `%s' in `%s' \n"
 " %s "
 
-#: src/file.c:1134
+#: src/file.c:1131
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1982,24 +1982,24 @@ msgstr ""
 " Non posso rimuovere il file `%s' \n"
 " %s"
 
-#: src/file.c:1185
+#: src/file.c:1182
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' e `%s' sono lo stesso file "
 
-#: src/file.c:1204
+#: src/file.c:1201
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Non posso sovrascrivere la directory \"%s\" %s "
 
-#: src/file.c:1206
+#: src/file.c:1203
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
 " Non posso sovrascrivere il file `%s' \n"
 " %s "
 
-#: src/file.c:1229
+#: src/file.c:1226
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -2008,7 +2008,7 @@ msgstr ""
 " Non posso rinominare la directory `%s' in `%s' \n"
 " %s "
 
-#: src/file.c:1292
+#: src/file.c:1289
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -2017,7 +2017,7 @@ msgstr ""
 " Non posso cancellare il file `%s' \n"
 " %s "
 
-#: src/file.c:1346 src/file.c:1414 src/file.c:1444
+#: src/file.c:1344 src/file.c:1409 src/file.c:1436
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -2035,15 +2035,15 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1601
+#: src/file.c:1592
 msgid "1Copy"
 msgstr "1Copia"
 
-#: src/file.c:1601
+#: src/file.c:1592
 msgid "1Move"
 msgstr "1Sposta"
 
-#: src/file.c:1601
+#: src/file.c:1592
 msgid "1Delete"
 msgstr "1Cancella"
 
@@ -2056,65 +2056,65 @@ msgstr "1Cancella"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1616
+#: src/file.c:1607
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1618
+#: src/file.c:1609
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1621 vfs/fish.c:526
+#: src/file.c:1612 vfs/fish.c:526
 msgid "file"
 msgstr "file"
 
-#: src/file.c:1621
+#: src/file.c:1612
 msgid "files"
 msgstr "file"
 
-#: src/file.c:1621
+#: src/file.c:1612
 msgid "directory"
 msgstr "directory"
 
-#: src/file.c:1621
+#: src/file.c:1612
 msgid "directories"
 msgstr "directory"
 
-#: src/file.c:1622
+#: src/file.c:1613
 msgid "files/directories"
 msgstr "file/directory"
 
-#: src/file.c:1622
+#: src/file.c:1613
 msgid " with source mask:"
 msgstr " con maschera sorgente:"
 
-#: src/file.c:1765
+#: src/file.c:1756
 msgid " Cannot operate on \"..\"! "
 msgstr " Non posso operare su \"..\"! "
 
-#: src/file.c:1834
+#: src/file.c:1825
 msgid " Sorry, I could not put the job in background "
 msgstr " Spiacente, non posso mettere il programma in background "
 
-#: src/file.c:1919 src/file.c:2002
+#: src/file.c:1910 src/file.c:1993
 msgid " Internal failure "
 msgstr " Errore interno "
 
-#: src/file.c:1919 src/file.c:2002
+#: src/file.c:1910 src/file.c:1993
 msgid " Unknown file operation "
 msgstr " Operazione su file sconosciuta "
 
-#: src/file.c:2085
+#: src/file.c:2076
 msgid "&Retry"
 msgstr "&Riprova"
 
-#: src/file.c:2085 src/file.c:2145 src/filegui.c:246 src/filegui.c:552
+#: src/file.c:2076 src/file.c:2136 src/filegui.c:246 src/filegui.c:552
 msgid "&Abort"
 msgstr "&Esci"
 
-#: src/file.c:2136
+#: src/file.c:2127
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2124,7 +2124,7 @@ msgstr ""
 " La directory non è vuota.\n"
 "Cancellarla ricorsivamente?"
 
-#: src/file.c:2137
+#: src/file.c:2128
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2134,39 +2134,39 @@ msgstr ""
 " Processo in background: la directory non è vuota. \n"
 " Cancellarla ricorsivamente? "
 
-#: src/file.c:2138
+#: src/file.c:2129
 msgid " Delete: "
 msgstr " Cancella: "
 
-#: src/file.c:2144
+#: src/file.c:2135
 msgid "a&ll"
 msgstr "&Tutto"
 
-#: src/file.c:2144 src/filegui.c:555
+#: src/file.c:2135 src/filegui.c:555
 msgid "non&E"
 msgstr "non&E"
 
-#: src/file.c:2154
+#: src/file.c:2145
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Batti `si' se VERAMENTE vuoi cancellare "
 
-#: src/file.c:2156
+#: src/file.c:2147
 msgid "all the directories "
 msgstr "tutte le directory "
 
-#: src/file.c:2158
+#: src/file.c:2149
 msgid " Recursive Delete "
 msgstr " Cancella Ricorsivamente "
 
-#: src/file.c:2159
+#: src/file.c:2150
 msgid " Background process: Recursive Delete "
 msgstr " Processo in background: cancellazione ricorsiva "
 
-#: src/file.c:2160
+#: src/file.c:2151
 msgid "no"
 msgstr "no"
 
-#: src/file.c:2162
+#: src/file.c:2153
 msgid "yes"
 msgstr "si"
 
@@ -2855,7 +2855,7 @@ msgstr "Premi un tasto per continuare..."
 msgid " The shell is already running a command "
 msgstr " La shell sta già eseguendo un comando "
 
-#: src/main.c:772 src/screen.c:1982
+#: src/main.c:772 src/screen.c:1986
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -3133,7 +3133,7 @@ msgstr ""
 " forzare l'aggiornamento della visualizzazione.          \n"
 " Vedere le pagine del manuale per i dettagli.            "
 
-#: src/main.c:1535 src/screen.c:2219
+#: src/main.c:1535 src/screen.c:2223
 msgid "Menu"
 msgstr "MenuUt"
 
@@ -3635,37 +3635,37 @@ msgstr "Proprietario"
 msgid "Group"
 msgstr "Gruppo"
 
-#: src/screen.c:638
+#: src/screen.c:642
 #, c-format
 msgid "%s bytes in %d file"
 msgstr " %s byte in %d file"
 
-#: src/screen.c:638
+#: src/screen.c:642
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s byte in %d file"
 
-#: src/screen.c:664
+#: src/screen.c:668
 msgid "<readlink failed>"
 msgstr "<readlink fallito>"
 
-#: src/screen.c:1258
+#: src/screen.c:1262
 msgid "Unknown tag on display format: "
 msgstr "Campo sconosciuto per la visualizzazione: "
 
-#: src/screen.c:1384
+#: src/screen.c:1388
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Il formato utente fornito è errato, uso il default."
 
-#: src/screen.c:1983
+#: src/screen.c:1987
 msgid " Do you really want to execute? "
 msgstr " Vuoi veramente eseguirlo?"
 
-#: src/screen.c:1997
+#: src/screen.c:2001
 msgid " No action taken "
 msgstr " Nessuna azione intrapresa "
 
-#: src/screen.c:2210 src/tree.c:876
+#: src/screen.c:2214 src/tree.c:876
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -3674,19 +3674,19 @@ msgstr ""
 " Non posso entrare in `%s' \n"
 " %s "
 
-#: src/screen.c:2220
+#: src/screen.c:2224
 msgid "View"
 msgstr "Vista"
 
-#: src/screen.c:2221 src/view.c:2021
+#: src/screen.c:2225 src/view.c:2021
 msgid "Edit"
 msgstr "Cambia"
 
-#: src/screen.c:2223 src/tree.c:1026
+#: src/screen.c:2227 src/tree.c:1026
 msgid "RenMov"
 msgstr "RinSpo"
 
-#: src/screen.c:2224 src/tree.c:1030
+#: src/screen.c:2228 src/tree.c:1030
 msgid "Mkdir"
 msgstr "CreDir"
 
@@ -3725,24 +3725,24 @@ msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
 
-#: src/subshell.c:430
+#: src/subshell.c:426
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Non posso aprire la pipe %s\n"
 
-#: src/subshell.c:723
+#: src/subshell.c:719
 msgid " The shell is still active. Quit anyway? "
 msgstr " La shell è ancora attiva. Esco comunque?"
 
-#: src/subshell.c:749
+#: src/subshell.c:745
 msgid " There are stopped jobs."
 msgstr " Esistono processi latenti."
 
-#: src/subshell.c:750
+#: src/subshell.c:746
 msgid " Quit anyway? "
 msgstr " Esco comunque?? "
 
-#: src/subshell.c:863
+#: src/subshell.c:859
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
@@ -3972,25 +3972,25 @@ msgstr " Non trovo voci appropriate in %s "
 msgid " User menu "
 msgstr " Menu utente "
 
-#: src/util.c:210
+#: src/util.c:207
 msgid "name_trunc: too big"
 msgstr "name_trunc: troppo grande"
 
 #. strftime() format string for recent dates
-#: src/util.c:640 src/util.c:666
+#: src/util.c:637 src/util.c:663
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:641 src/util.c:664
+#: src/util.c:638 src/util.c:661
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:366
+#: src/utilunix.c:363
 msgid " Pipe failed "
 msgstr " Pipe fallita "
 
-#: src/utilunix.c:370
+#: src/utilunix.c:367
 msgid " Dup failed "
 msgstr " Dup fallita "
 
@@ -4375,7 +4375,7 @@ msgstr "NumLock sul tastierino"
 msgid "Password:"
 msgstr "Password"
 
-#: vfs/cpio.c:142 vfs/cpio.c:158
+#: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -4384,7 +4384,7 @@ msgstr ""
 "Non posso aprire l'archivio cpio\n"
 "%s"
 
-#: vfs/cpio.c:224
+#: vfs/cpio.c:223
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -4393,7 +4393,7 @@ msgstr ""
 "Fine prematura di un archivio cpio\n"
 "%s"
 
-#: vfs/cpio.c:310 vfs/cpio.c:360
+#: vfs/cpio.c:309 vfs/cpio.c:359
 #, c-format
 msgid ""
 "Corrupt cpio header encountered in\n"
@@ -4402,7 +4402,7 @@ msgstr ""
 "Trovata intestazione cpio rovinata in\n"
 "%s"
 
-#: vfs/cpio.c:430
+#: vfs/cpio.c:429
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4420,12 +4420,12 @@ msgstr ""
 #. file and than a record for a directory it is in; cpio would die with
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
-#: vfs/cpio.c:453
+#: vfs/cpio.c:452
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
 msgstr "%s contiene voci duplicate! Saltato!"
 
-#: vfs/cpio.c:520
+#: vfs/cpio.c:519
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4538,141 +4538,141 @@ msgstr "Errori dopo l'interruzione."
 msgid "Aborted transfer would be successful."
 msgstr "L'interruzione trasferimento sarebbe riuscita."
 
-#: vfs/ftpfs.c:315
+#: vfs/ftpfs.c:346
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Disconnessione da %s"
 
-#: vfs/ftpfs.c:373
+#: vfs/ftpfs.c:404
 msgid " FTP: Password required for "
 msgstr " FTP: Password richiesta per "
 
-#: vfs/ftpfs.c:402
+#: vfs/ftpfs.c:433
 msgid " Proxy: Password required for "
 msgstr " Proxy: Password richiesta per "
 
-#: vfs/ftpfs.c:428
+#: vfs/ftpfs.c:459
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: spedizione al proxy nome utente"
 
-#: vfs/ftpfs.c:432
+#: vfs/ftpfs.c:463
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: spedizione al proxy password utente"
 
-#: vfs/ftpfs.c:436
+#: vfs/ftpfs.c:467
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: autentificazione proxy avvenuta"
 
-#: vfs/ftpfs.c:440
+#: vfs/ftpfs.c:471
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: connesso a %s"
 
-#: vfs/ftpfs.c:457
+#: vfs/ftpfs.c:488
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: spedizione nome utente"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:493
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: spedizione password utente"
 
-#: vfs/ftpfs.c:467
+#: vfs/ftpfs.c:498
 msgid "ftpfs: logged in"
 msgstr "ftpfs: collegamento effettuato"
 
-#: vfs/ftpfs.c:482
+#: vfs/ftpfs.c:513
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: login errato per utente %s "
 
-#: vfs/ftpfs.c:514
+#: vfs/ftpfs.c:545
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Impossibile impostare instradamento sorgente (%s)"
 
-#: vfs/ftpfs.c:639
+#: vfs/ftpfs.c:670
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nome host non valido."
 
-#: vfs/ftpfs.c:659
+#: vfs/ftpfs.c:690
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Indirizzo host non valido."
 
-#: vfs/ftpfs.c:682
+#: vfs/ftpfs.c:713
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: mi sto collegando a %s"
 
-#: vfs/ftpfs.c:692
+#: vfs/ftpfs.c:723
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: collegamento interrotto dall'utente"
 
-#: vfs/ftpfs.c:694
+#: vfs/ftpfs.c:725
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: connessione al server fallita: %s"
 
-#: vfs/ftpfs.c:735
+#: vfs/ftpfs.c:766
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Pausa per riprovare...%d (Control-C per annullare)"
 
-#: vfs/ftpfs.c:921
+#: vfs/ftpfs.c:958
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: non è possibile impostare la modalità passiva"
 
-#: vfs/ftpfs.c:997
+#: vfs/ftpfs.c:1030
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: interruzione del trasferimento."
 
-#: vfs/ftpfs.c:999
+#: vfs/ftpfs.c:1032
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: errore di interruzione: %s"
 
-#: vfs/ftpfs.c:1004
+#: vfs/ftpfs.c:1037
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: interruzione fallita"
 
-#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1195
+#: vfs/ftpfs.c:1126 vfs/ftpfs.c:1228
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD fallito."
 
-#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
+#: vfs/ftpfs.c:1136 vfs/ftpfs.c:1143
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: non posso risolvere i collegamenti simbolici"
 
-#: vfs/ftpfs.c:1161
+#: vfs/ftpfs.c:1194
 msgid "Resolving symlink..."
 msgstr "Sto risolvendo il collegamenti simbolici..."
 
-#: vfs/ftpfs.c:1183
+#: vfs/ftpfs.c:1216
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Lettura directory FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1184
+#: vfs/ftpfs.c:1217
 msgid "(strict rfc959)"
 msgstr "(strettamente rfc959)"
 
-#: vfs/ftpfs.c:1185
+#: vfs/ftpfs.c:1218
 msgid "(chdir first)"
 msgstr "(antepone chdir)"
 
-#: vfs/ftpfs.c:1309
+#: vfs/ftpfs.c:1295
 msgid "ftpfs: failed"
 msgstr "ftpfs: fallito"
 
-#: vfs/ftpfs.c:1319
+#: vfs/ftpfs.c:1355
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fallito; non so dove rileggere"
 
-#: vfs/ftpfs.c:1382
+#: vfs/ftpfs.c:1419
 #, c-format
-msgid "ftpfs: storing file %d (%lu)"
-msgstr "ftpfs: memorizzazione file %d (%lu)"
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: memorizzazione file %lu (%lu)"
 
-#: vfs/ftpfs.c:1814
+#: vfs/ftpfs.c:1851
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4944,10 +4944,10 @@ msgstr " Errore interno:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld byte trasferiti)"
+msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld byte trasferiti"
+msgid "%s: %s: %s %lu bytes transfered"
+msgstr "%s: %s: %s %lu byte trasferiti"
