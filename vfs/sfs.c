@@ -5,13 +5,8 @@
  *
  * This defines whole class of filesystems which contain single file
  * inside. It is somehow similar to extfs, except that extfs makes
- * whole virtual trees and we do only single virtual files. */
-
-/*TODO Pridat sfs_fill_names na spravne misto.
-
-Pridat tam nejake add_noncurrent_stamps().
-
-*/
+ * whole virtual trees and we do only single virtual files. 
+ */
 
 #include <config.h>
 #include <errno.h>
@@ -99,6 +94,7 @@ static int vfmake( char *name, char *cache )
     return 0; /* OK */
 }
 
+#define CUR (*cur)
 static char *redirect( char *name )
 {
     struct cachedfile *cur = head;
@@ -109,7 +105,11 @@ static char *redirect( char *name )
         if ((!strcmp( name, cur->name )) &&
 	    (uid == cur->uid) &&
 	    (uptodate( cur->name, cur->cache )))
+	  /* FIXME: when not uptodate, we might want to kill cache
+	   * file immediately, not to wait until timeout. */ {
+	    vfs_stamp( &sfs_vfs_ops, cur );
 	    return cur->cache;
+	}
 	cur = cur->next;
     }
     cache = tempnam( NULL, "sfs" );
@@ -121,6 +121,10 @@ static char *redirect( char *name )
 	cur->uid = uid;
 	cur->next = head;
 	head = cur;
+
+	vfs_add_noncurrent_stamps (&sfs_vfs_ops, (vfsid) head, NULL);
+	vfs_rm_parents (NULL);
+
 	return cache;
     } else {
         free(xname);
@@ -187,7 +191,6 @@ static int sfs_readlink (char *path, char *buf, int size)
     return readlink (path, buf, size);
 }
 
-#define CUR (*cur)
 static vfsid sfs_getid (char *path, struct vfs_stamping **parent)
 {	/* FIXME: what should I do? */
     vfs *v;
@@ -225,9 +228,17 @@ static vfsid sfs_getid (char *path, struct vfs_stamping **parent)
 
 static void sfs_free (vfsid id)
 {
-    struct cachedfile **cur = (struct cachedfile **) id;
+    struct cachedfile *which = (struct cachedfile *) id;
+    struct cachedfile **cur = &head;
 
     unlink( CUR->cache );
+    while (CUR) {
+        if (CUR = which)
+	    break;
+	CUR = CUR->next;
+    }
+    if (!CUR)
+    	vfs_die( "Free of thing which is unknown to me\n" );
     *cur = CUR->next;
 }
 #undef CUR
@@ -242,7 +253,6 @@ void sfs_fill_names (void (*func)(char *))
 	cur = cur->next;
     }
 }
-
 
 static int sfs_nothingisopen (vfsid id)
 {
@@ -380,6 +390,17 @@ void sfs_init (void)
 	sfs_no++;
     }
     fclose(cfg);
+}
+
+void sfs_done (void)
+{
+    int i;
+    for (i=0; i<sfs_no; i++) {
+        free(sfs_prefix [i]);
+	free(sfs_command [i]);
+	sfs_prefix [i] = sfs_command [i] = NULL;
+    }
+    sfs_no = 0;
 }
 
 int sfs_which (char *path)
