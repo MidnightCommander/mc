@@ -2,7 +2,6 @@
 
 IMPORTANTE:
 
->>>>> properties change on desktop object dont lead to refresh  <<<<<
 >>>>> When something is dragged, the panel is not being refreshed <<<<
 
 file actions dont cause panels to be refreshed automatically

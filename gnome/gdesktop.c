@@ -860,6 +860,20 @@ get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
 	return window;
 }
 
+static GtkWidget *
+get_transparent_window_for_di (desktop_icon_t *di)
+{
+	GtkWidget *window;
+	char *icon_label, *icon;
+
+	icon_label = x_basename (di->pathname);
+
+	icon = get_desktop_icon (di->pathname);
+	window = my_create_transparent_text_window (icon, icon_label);
+	g_free (icon);
+	return window;
+}
+
 static int
 dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
@@ -908,13 +922,24 @@ icon_properties (GtkWidget *widget, desktop_icon_t *di)
 
 	retval = item_properties (di->widget, di->pathname, di);
 
-	if (retval & (GPROP_TITLE | GPROP_ICON)) {
+	if (retval & (GPROP_TITLE | GPROP_ICON | GPROP_FILENAME)) {
 		gtk_widget_destroy (di->widget);
 
-		di->widget = get_transparent_window_for_dentry (di->dentry);
+		if (di->dentry)
+			di->widget = get_transparent_window_for_dentry (di->dentry);
+		else
+			di->widget = get_transparent_window_for_di (di);
 
+		if (icons_snap_to_grid && di->grid_x != -1){
+			gtk_widget_size_request (di->widget, &di->widget->requisition);
+			get_icon_screen_x_y (di, &di->x, &di->y);
+		}
+		gtk_widget_set_uposition (di->widget, di->x, di->y);
+		
 		post_setup_desktop_icon (di, 1);
-		gnome_desktop_entry_save (di->dentry);
+		
+		if (di->dentry)
+			gnome_desktop_entry_save (di->dentry);
 	}
 }
 
@@ -1223,6 +1248,7 @@ static void
 desktop_reload (char *desktop_dir)
 {
 	struct dirent *dent;
+	GList *l;
 	DIR *dir;
 	
 	dir = mc_opendir (desktop_dir);
@@ -1246,19 +1272,19 @@ desktop_reload (char *desktop_dir)
 		desktop_setup_icon (dent->d_name, full);
 		free (full);
 	}
-}
 
-static void
-desktop_load (char *desktop_dir)
-{
-	GList *l;
-	
-	desktop_reload (desktop_dir);
+	/* Show all of the widgets */
 	for (l = desktop_icons; l; l = l->next){
 		desktop_icon_t *di = l->data;
 		
 		gtk_widget_show (di->widget);
 	}
+}
+
+static void
+desktop_load (char *desktop_dir)
+{
+	desktop_reload (desktop_dir);
 }
 
 /*
