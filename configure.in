@@ -418,60 +418,25 @@ AC_SUBST(MAN_FLAGS)
 
 
 dnl
-dnl Check for - option to file
+dnl Check for -L option to file
 dnl
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
-    AC_MSG_CHECKING([for - option to file command])
-    AC_CACHE_VAL(ac_cv_filestdin, [[
-    cat > conftest.c <<\EOF
-/* A comment */
-#if 0
-#endif
-void main(void)
-{ return; }
-EOF
-    cat > conftest.sed <<\EOF
-s/^[^:]*:[ 	]*//
-s/[ 	]*$//
-EOF
-    filehyphen_1=`file conftest.c 2>/dev/null | sed -f conftest.sed`
-    filehyphen_2=`cat conftest.c | file - 2>/dev/null | sed -f conftest.sed`
-    if test "x$filehyphen_1" = "x$filehyphen_2"; then
-	ac_cv_filestdin=yes
+    AC_MSG_CHECKING([for -L option to file command])
+    AC_CACHE_VAL(ac_cv_filel, [
+    file -L . > /dev/null 2>&1
+    if test $? = 0; then
+	ac_cv_filel=yes
     else
-	ac_cv_filestdin=no
+	ac_cv_filel=no
     fi
-    rm conftest.c conftest.sed
-    ]])
-
-    if test x$ac_cv_filestdin = xyes; then
-	AC_DEFINE(FILE_STDIN, 1,
-		  [Define if the file command accepts - for stdin])
+    ])
+    if test x$ac_cv_filel = xyes; then
+	AC_DEFINE(FILE_L, 1, [Define if the file command accepts the -L option])
     fi
-    filestdin=$ac_cv_filestdin
-    AC_MSG_RESULT([$filestdin])
-
-    dnl
-    dnl Check for -L option to file
-    dnl
-
-AC_MSG_CHECKING([for -L option to file command])
-AC_CACHE_VAL(ac_cv_filel, [
-file -L . > /dev/null 2>&1
-if test $? = 0
-then
-    ac_cv_filel=yes
-else
-    ac_cv_filel=no
+    filel=$ac_cv_filel
+    AC_MSG_RESULT([$filel])
 fi
-])
-if test x$ac_cv_filel = xyes; then
-    AC_DEFINE(FILE_L, 1, [Define if the file command accepts the -L option])
-fi
-filel=$ac_cv_filel
-AC_MSG_RESULT([$filel])
-fi 
 
 
 AC_MSG_CHECKING([for subshell support])
