@@ -1,3 +1,9 @@
+2003-01-23  Pavel Roskin  <proski@gnu.org>
+
+	* slint.c (slang_init): Limit screen size to 255x255 because of
+	S-Lang limitations.
+	Reported by Tero Peippola <top@ees2.oulu.fi>
+
 2003-01-22  Adam Byrtek  <alpha@debian.org>
 
 	* cmd.c (view_other_cmd): Update path in the xterm title after
