@@ -1,3 +1,8 @@
+2003-01-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* man2hlp.c (handle_command): Fix possible buffer overflow.
+	(handle_link): Likewise.
+
 2002-12-27  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c (setup_panels): Revert unnecessary part of the
