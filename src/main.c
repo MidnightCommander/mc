@@ -2524,9 +2524,7 @@ handle_args (int argc, char *argv [])
     } else {
        	/* sets the current dir and the other dir */
 	if (tmp) {
-    	    char buffer[MC_MAXPATHLEN + 2];
 	    this_dir = g_strdup (tmp);
-	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
 	    if ((tmp = poptGetArg (ctx)))
 	        other_dir = g_strdup (tmp);
 	}

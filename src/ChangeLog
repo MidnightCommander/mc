@@ -1,5 +1,7 @@
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (handle_args): Don't call mc_get_current_wd().
+
 	* main.c (directory_history_list): Report error if cannot change
 	directory.
 
