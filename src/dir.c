@@ -655,7 +655,7 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	 * If we have marked files in the copy, scan through the copy
 	 * to find matching file.  Decrease number of remaining marks if
 	 * we copied one.
-	 * TODO: Use binary search.
+	 * TODO: Use hash table.
 	 */
 	if (marked_cnt > 0) {
 	    for (i = 0; i < count; i++) {
