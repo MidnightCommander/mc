@@ -965,6 +965,7 @@ static menu_entry PanelMenu [] = {
     { ' ', N_("&Network link..."),          'N', netlink_cmd },
 #endif
     { ' ', N_("FT&P link..."),              'P', ftplink_cmd },
+    { ' ', N_("S&hell link..."),            'H', fishlink_cmd },
 #ifdef WITH_SMBFS
     { ' ', N_("SM&B link..."),              'B', smblink_cmd },
 #endif
@@ -991,6 +992,7 @@ static menu_entry RightMenu [] = {
     { ' ', N_("&Network link..."),       'N', netlink_cmd },
 #endif
     { ' ', N_("FT&P link..."),           'P', ftplink_cmd },
+    { ' ', N_("S&hell link..."),         'H', fishlink_cmd },
 #ifdef WITH_SMBFS
     { ' ', N_("SM&B link..."),           'B', smblink_cmd },
 #endif

@@ -1,5 +1,8 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (fishlink_cmd): Implement user interface for FiSH.
+	* main.c: Add it to the menu.
+
 	* help.c (help_follow_link): Made static.
 
 2002-08-18  Pavel Roskin  <proski@gnu.org>

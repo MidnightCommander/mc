@@ -1318,6 +1318,11 @@ void ftplink_cmd (void)
     nice_cd (_(" FTP to machine "), _(machine_str),
 	     "[FTP File System]", "/#ftp:", 1);
 }
+void fishlink_cmd (void)
+{
+    nice_cd (_(" Shell link to machine "), _(machine_str),
+	     "[FIle transfer over SHell filesystem]", "/#sh:", 1);
+}
 #ifdef WITH_SMBFS
 void smblink_cmd (void)
 {
