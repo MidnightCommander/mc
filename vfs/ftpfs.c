@@ -6,6 +6,7 @@
                1995, 1996, 1997 Miguel de Icaza
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
+
    $Id$   
 
    This program is free software; you can redistribute it and/or
@@ -937,7 +938,7 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
     } else
     	j = command (me, super, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
-	    ERRNOR (EPERM, -1);
+	ERRNOR (EPERM, -1);
     enable_interrupt_key();
     if (SUP.use_passive_connection)
 	data = s;
@@ -1220,7 +1221,6 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 	}
 
 	vfs_s_insert_entry(me, dir, ent);
-	continue;
     }
 
     close(sock);
@@ -1452,7 +1452,6 @@ ftpfs_init_passwd(void)
     else
 	ftpfs_anonymous_passwd = g_strconcat (p, "@", hostname, NULL);
     endpwent ();
-    return; 
 }
 
 static int ftpfs_chmod (vfs *me, char *path, int mode)
@@ -1691,9 +1690,8 @@ static int netrc_next (void)
 {
     char *p;
     int i;
-    static char *keywords [] = { "default", "machine", 
-        "login", "password", "passwd",
-        "account", "macdef" };
+    static const char const * keywords [] = { "default", "machine", 
+        "login", "password", "passwd", "account", "macdef" };
 
     while (1) {
         netrcp = skip_separators (netrcp);
@@ -1812,15 +1810,14 @@ int lookup_netrc (char *host, char **login, char **pass)
 		    }
 		    netrc_next ();
 		    break;
-		case 7:
-		    for (;;) {
-		        while (*netrcp != '\n' && *netrcp);
+		case 7:	/* macdef: skip it */
+		    do {
+		        while (*netrcp && *netrcp != '\n')
+			    netrcp++;
 		        if (*netrcp != '\n')
 		            break;
 		        netrcp++;
-		        if (*netrcp == '\n' || !*netrcp)
-		            break;
-		    }
+		    } while (*netrcp && *netrcp != '\n')
 		    break;
 	    }
 	    if (keyword == 20)

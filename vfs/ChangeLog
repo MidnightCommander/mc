@@ -1,3 +1,13 @@
+2000-01-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* ftpfs.c: cosmetic fixes + killed ugly infinite loop, patch
+	from Andrew V. Samoilov
+
+2000-01-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* extfs.c (extfs_chdir): removed unneeded statment, plus applied
+	cosmetics fixes from Andrew V. Samoilov
+
 2000-01-02  Martin Bialasinski <martin@internet-treff.uni-koeln.de>
 
 	* extfs/deb.in: Change to the deb vfs. tar has changed, and
