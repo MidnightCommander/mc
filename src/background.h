@@ -3,8 +3,8 @@
 
 /* Background code requires socketpair to be available */
 /* Do not add the background code if it is not supported */
-#ifdef USE_NETCODE
-#        define WITH_BACKGROUND
+#ifdef HAVE_SOCKETPAIR
+#    define WITH_BACKGROUND
 #endif
 
 /* Used for parent/child communication.  These are numbers that

@@ -18,10 +18,11 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifndef NO_INFOMOUNT
 
-#include <stdio.h>
 #include <sys/types.h>
+#include <stdio.h>
+#include <fcntl.h>
+
 #ifdef STDC_HEADERS
 #include <stdlib.h>
 #else
@@ -35,6 +36,10 @@ void free (void *ptr);
 
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
+#endif
+
+#ifdef HAVE_UNISTD_H
+#    include <unistd.h>
 #endif
 
 #if defined (MOUNTED_GETFSSTAT)	/* __alpha running OSF_1 */
@@ -82,6 +87,19 @@ void free (void *ptr);
 #include <sys/vfs.h>
 #endif
 
+#ifdef HAVE_SYS_STATFS_H
+#include <sys/statfs.h>
+#endif
+
+#if defined (__QNX__) && !defined (__QNXNTO__)
+#define HAVE_QNX_MOUNT
+#endif
+
+#ifdef HAVE_QNX_MOUNT
+#include <sys/disk.h>
+#include <sys/fsys.h>
+#endif
+
 #include "mountlist.h"
 #include "fsusage.h"
 #include "util.h"
@@ -98,6 +116,8 @@ void free (void *ptr);
 /* Return the value of the hexadecimal number represented by CP.
    No prefix (like '0x') or suffix (like 'h') is expected to be
    part of CP. */
+
+#ifndef NO_INFOMOUNT
 
 static struct mount_entry *mount_list = NULL;
 
@@ -457,7 +477,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 }
 #endif /* NO_INFOMOUNT */
 
-#if defined(NO_INFOMOUNT) && defined(__QNX__)
+#if defined(NO_INFOMOUNT) && defined(HAVE_QNX_MOUNT)
 /*
 ** QNX has no [gs]etmnt*(), [gs]etfs*(), or /etc/mnttab, but can do
 ** this via the following code.
@@ -465,19 +485,6 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 ** structure. See my_statfs() in utilunix.c for the "other side" of
 ** this hack.
 */
-
-#include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
-#include <sys/disk.h>
-#include <sys/fsys.h>
-#include <sys/statfs.h>
-
-#include "mountlist.h"
 
 struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
 {
@@ -537,7 +544,7 @@ struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
 
 	return (me);
 }
-#endif /* __QNX__ */
+#endif /* HAVE_QNX_MOUNT */
 
 void init_my_statfs (void)
 {
@@ -548,9 +555,8 @@ void init_my_statfs (void)
 
 void my_statfs (struct my_statfs *myfs_stats, char *path)
 {
-    int i, len = 0;
-
 #ifndef NO_INFOMOUNT
+    int i, len = 0;
     struct mount_entry *entry = NULL;
     struct mount_entry *temp = mount_list;
     struct fs_usage fs_use;
@@ -578,7 +584,7 @@ void my_statfs (struct my_statfs *myfs_stats, char *path)
 	myfs_stats->nodes = fs_use.fsu_files;
     } else
 #endif
-#if defined(NO_INFOMOUNT) && defined(__QNX__)
+#if defined(NO_INFOMOUNT) && defined(HAVE_QNX_MOUNT)
 /*
 ** This is the "other side" of the hack to read_filesystem_list() in
 ** mountlist.c.

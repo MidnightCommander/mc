@@ -42,7 +42,11 @@
 #include "key.h"
 #include "tty.h"
 
-#ifdef __QNX__
+#if defined (__QNX__) && !defined (__QNXNTO__)
+#define HAVE_QNX_KEYS
+#endif
+
+#ifdef HAVE_QNX_KEYS
 
 /* select implementation: use QNX/term interface */
 #define __USE_QNX_TI
@@ -67,7 +71,7 @@
     
 #endif /* __USE_QNX_TI */
     
-#endif /* __QNX__ */
+#endif /* HAVE_QNX_KEYS */
 
 
 /* {{{ */
@@ -234,7 +238,7 @@
 
 /* }}} */
 
-#ifdef __QNX__
+#ifdef HAVE_QNX_KEYS
 
 /* don't force pre-defining of base keys under QNX */
 #define FORCE_BASE_KEY_DEFS 0
@@ -286,7 +290,7 @@ typedef struct qnx_key_define_s {
 
 #endif /* __USE_QNX_TI */
 
-#endif /* __QNX__ */
+#endif /* HAVE_QNX_KEYS */
 
 
 #ifdef xtra_key_define_t
@@ -364,7 +368,7 @@ xtra_key_define_t xtra_key_defines[] = {
 #endif  /* xtra_key_define_t */
 
 
-#ifdef __QNX__
+#ifdef HAVE_QNX_KEYS
 
 #ifdef __USE_QNX_TI
 
@@ -403,13 +407,13 @@ void load_qnx_key_defines (void)
 
 #endif /* __USE_QNX_TI */
 
-#endif /* __QNX__ */
+#endif /* HAVE_QNX_KEYS */
 
 
 /* called from key.c/init_key() */
 void load_xtra_key_defines (void)
 {
-#ifdef __QNX__
+#ifdef HAVE_QNX_KEYS
     load_qnx_key_defines();
 #endif
 }

@@ -18,15 +18,12 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#if !defined(NO_INFOMOUNT) || defined(__QNX__)
 
-#if defined(__QNX__)
-#define STAT_STATFS4
+#if defined (__QNX__) && !defined (__QNXNTO__)
+#define HAVE_QNX_MOUNT
 #endif
 
 #include <sys/types.h>
-
-#include "fsusage.h"
 
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
@@ -61,6 +58,11 @@
 #ifdef HAVE_SYS_STATVFS_H	/* SVR4.  */
 #include <sys/statvfs.h>
 #endif
+
+#include "fsusage.h"
+
+
+#if !defined(NO_INFOMOUNT) || defined(HAVE_QNX_MOUNT)
 
 /* Return the number of TOSIZE-byte blocks used by
    BLOCKS FROMSIZE-byte blocks, rounding away from zero.
@@ -191,4 +193,4 @@ int get_fs_usage (char *path, struct fs_usage *fsp)
     return 0;
 }
 
-#endif /* NO_INFOMOUNT */
+#endif /* !NO_INFOMOUNT || HAVE_QNX_MOUNT */

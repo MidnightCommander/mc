@@ -1,3 +1,13 @@
+2001-06-19  Pavel Roskin  <proski@gnu.org>
+
+	* background.h: Correct condition when WITH_BACKGROUND is
+	defined.
+	* fsusage.c: Rearrange the includes. Define HAVE_QNX_MOUNT
+	for old QNX and use it instead of __QNX__.
+	* mountlist.c: Likewise.
+	* keyxdef.c: Define HAVE_QNX_KEYS for old QNX and use it instead
+	of __QNX__.
+
 2001-06-18  Pavel Roskin  <proski@gnu.org>
 
 	* main.c [HAVE_X]: Disable change_panel(),
