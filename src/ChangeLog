@@ -1,3 +1,9 @@
+2003-09-03  Pavel Roskin  <proski@gnu.org>
+
+	* learn.c: Don't track button hotkeys.
+	(learn_check_key): Consume all alphanumeric keys, regardless of
+	button hotkeys.
+
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
 	* listmode.c: Create all buttons in one place.  Remove unneeded

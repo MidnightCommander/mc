@@ -54,11 +54,10 @@
 
 static struct {
     int ret_cmd, flags, y, x;
-	unsigned int hotkey;
     char *text;
 } learn_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 39, 'C', N_("&Cancel") },
-    { B_ENTER, DEFPUSH_BUTTON, 0, 25, 'S', N_("&Save") }
+    { B_CANCEL, NORMAL_BUTTON, 0, 39, N_("&Cancel") },
+    { B_ENTER, DEFPUSH_BUTTON, 0, 25, N_("&Save") }
 };
 
 static Dlg_head *learn_dlg;
@@ -201,13 +200,9 @@ learn_check_key (int c)
     }
 
     /* Prevent from disappearing if a non-defined sequence is pressed
-       and contains s or c. Use ALT('s') or ALT('c'). */
-    if (c < 255 && isalpha (c)) {
-	c = toupper (c);
-	for (i = 0; i < BUTTONS; i++)
-	    if (c == learn_but[i].hotkey)
+       and contains a button hotkey.  Only recognize hotkeys with ALT.  */
+    if (c < 255 && isalnum (c))
 		return 1;
-    }
 
     return 0;
 }
@@ -234,19 +229,11 @@ init_learn (void)
 #ifdef ENABLE_NLS
     static int i18n_flag = 0;
     if (!i18n_flag) {
-	char *cp;
-
 	learn_but[0].text = _(learn_but[0].text);
 	learn_but[0].x = 78 / 2 + 4;
 
 	learn_but[1].text = _(learn_but[1].text);
 	learn_but[1].x = 78 / 2 - (strlen (learn_but[1].text) + 9);
-
-	for (i = 0; i < BUTTONS; i++) {
-	    cp = strchr (learn_but[i].text, '&');
-	    if (cp != NULL && *++cp != '\0')
-		learn_but[i].hotkey = toupper (*cp);
-	}
 
 	learn_title = _(learn_title);
 	i18n_flag = 1;
