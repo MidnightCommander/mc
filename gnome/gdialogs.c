@@ -84,16 +84,17 @@ trim_file_name (FileOpContextUI *ui, gchar *path, gint length, gint cur_length)
 
         length -= dotdotdot;
         len = (gint) ((1.0 - (gfloat) length / (gfloat) cur_length) * strlen (path));
-        
+
         /* we guess a starting point */
         if (gdk_string_width (ui->op_source_label->style->font, path + len) < length) {
                 while (gdk_string_width (ui->op_source_label->style->font, path + len) < length)
-                        len --;
+                        len--;
                 len++;
         } else {
                 while (gdk_string_width (ui->op_source_label->style->font, path + len) > length)
-                        len ++;
+                        len++;
         }
+
         path_copy = g_strdup_printf ("...%s", path + len);
         return path_copy;
 }
@@ -134,7 +135,7 @@ file_progress_show_source (FileOpContext *ctx, char *path)
         else {
                 path_copy = trim_file_name (ui, path, GDIALOG_PROGRESS_WIDTH - from_width,
                                             path_width);
-                
+
                 gtk_label_set_text (GTK_LABEL (ui->op_source_label), path_copy);
                 g_free (path_copy);
         }
@@ -167,7 +168,7 @@ file_progress_show_target (FileOpContext *ctx, char *path)
                 return FILE_CONT;
         }
 
-        if (!to_width) 
+        if (!to_width)
                 to_width = gdk_string_width (ui->op_target_label->style->font,
                                              _(gdialog_to_string));
         path_width = gdk_string_width (ui->op_target_label->style->font, path);
@@ -216,7 +217,7 @@ file_progress_show_deleting (FileOpContext *ctx, char *path)
         else {
                 path_copy = trim_file_name (ui, path, GDIALOG_PROGRESS_WIDTH - deleting_width,
                                             path_width);
-                
+
                 gtk_label_set_text (GTK_LABEL (ui->op_source_label), path_copy);
                 g_free (path_copy);
         }
@@ -235,12 +236,12 @@ file_progress_show (FileOpContext *ctx, long done, long total)
         /* ctx->ui might be NULL for background processes */
         if (ctx->ui == NULL)
                 return FILE_CONT;
-        
+
         ui = ctx->ui;
 
         if (ui->aborting)
                 return FILE_ABORT;
-        
+
         if (total > 0) {
                 perc = (double) done / (double) total;
                 snprintf (count, 9, "%3d%% ", (gint) (100.0 * perc));
@@ -262,7 +263,7 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
         /* ctx->ui might be NULL for background processes */
         if (ctx->ui == NULL)
                 return FILE_CONT;
-        
+
         ui = ctx->ui;
 
         if (ui->aborting)
@@ -549,7 +550,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         GtkWidget *notebook;
         GtkWidget *hbox;
         GtkWidget *vbox, *label;
-        GtkWidget *alignment;
         GtkWidget *fentry;
         GtkWidget *cbox;
         GtkWidget *icon;
@@ -558,45 +558,60 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         const char *error;
         struct stat buf;
         int run;
-        
+
         g_return_val_if_fail (ctx != NULL, NULL);
 
         ctx->stable_symlinks = 0;
 
         /* Basic window */
         if (operation == OP_COPY)
-                fmd_win = gnome_dialog_new (_("Copy"), GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new (_("Copy"), GNOME_STOCK_BUTTON_OK,
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
         else if (operation == OP_MOVE)
-                fmd_win = gnome_dialog_new (_("Move"), GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new (_("Move"), GNOME_STOCK_BUTTON_OK,
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
 
         gtk_window_set_position (GTK_WINDOW (fmd_win), GTK_WIN_POS_MOUSE);
-        
-        hbox = gtk_hbox_new (FALSE, GNOME_PAD);
+
         notebook = gtk_notebook_new ();
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (fmd_win)->vbox),
                             notebook, FALSE, FALSE, 0);
-        /*FIXME: I wan't a bigger, badder, better Icon here... */
+
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD);
+        gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+                                  hbox,
+                                  gtk_label_new (_("Destination")));
+
+        /* FIXME: I want a bigger, badder, better Icon here... */
         icon = gnome_stock_pixmap_widget (hbox, GNOME_STOCK_PIXMAP_HELP);
         gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+
         vbox = gtk_vbox_new (FALSE, GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
         gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
-        gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-                                  hbox, 
-                                  gtk_label_new (_("Destination")));
-        alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+
         label = gtk_label_new (text);
-        gtk_container_add (GTK_CONTAINER (alignment), label);
+        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
         fentry = gnome_file_entry_new ("gmc-copy-file", _("Find Destination Folder"));
         gnome_file_entry_set_directory (GNOME_FILE_ENTRY (fentry), TRUE);
         gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (fentry))),
                             def_text);
         gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (fentry), def_text);
+        gnome_file_entry_set_modal (GNOME_FILE_ENTRY (fentry), TRUE);
+        gtk_box_pack_start (GTK_BOX (vbox), fentry, FALSE, FALSE, 0);
+
+        /* Background operations are completely hosed, so we olympically disable
+         * them.  How's that for foolproof bugfixing.
+         */
+
+        *do_background = FALSE;
+#if 0
         cbox = gtk_check_button_new_with_label (_("Copy as a background process"));
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), *do_background);
-        gtk_signal_connect (GTK_OBJECT (cbox), "toggled", (GtkSignalFunc) fmd_check_box_callback, do_background);
+        gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
+                            (GtkSignalFunc) fmd_check_box_callback, do_background);
 #if 0
         gnome_widget_add_help (cbox, "Selecting this will run the copying in the background.  "
                                "This is useful for transfers over networks that might take a long "
@@ -604,16 +619,13 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
 #endif
         gtk_box_pack_end (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 0);
-        gtk_box_pack_end (GTK_BOX (vbox), fentry, FALSE, FALSE, 0);
-        gnome_file_entry_set_modal(GNOME_FILE_ENTRY (fentry),TRUE);
-
-        gtk_box_pack_end (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
+#endif
 
         /* Advanced Options */
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
         vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
-                                  hbox, 
+                                  hbox,
                                   gtk_label_new (_("Advanced Options")));
         gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD);
         gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
@@ -644,7 +656,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
                                     (GtkSignalFunc) fmd_check_box_callback, &ctx->op_preserve);
 #if 0
-                gnome_widget_add_help (cbox, _("Preserves the permissions and the UID/GID if possible"));
+                gnome_widget_add_help (cbox,
+                                       _("Preserves the permissions and the UID/GID if possible"));
 #endif
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
 
@@ -653,9 +666,11 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 cbox = gtk_check_button_new_with_label (_("Recursively copy subdirectories."));
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cbox), ctx->dive_into_subdirs);
                 gtk_signal_connect (GTK_OBJECT (cbox), "toggled",
-                                    (GtkSignalFunc) fmd_check_box_callback, &ctx->dive_into_subdirs);
+                                    (GtkSignalFunc) fmd_check_box_callback,
+                                    &ctx->dive_into_subdirs);
 #if 0
-                gnome_widget_add_help (cbox, _("If set, this will copy the directories recursively"));
+                gnome_widget_add_help (cbox,
+                                       _("If set, this will copy the directories recursively"));
 #endif
                 gtk_box_pack_start (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         }
@@ -667,7 +682,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
 
         /* Off to the races!!! */
         run = gnome_dialog_run (GNOME_DIALOG (fmd_win));
-        
+
         if (run == 1) {
                 gtk_widget_destroy (fmd_win);
                 return NULL;
@@ -676,7 +691,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         if (run == -1)
                 return NULL;
 
-        dest_dir = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (fentry), FALSE);
+        dest_dir = gnome_file_entry_get_full_path (GNOME_FILE_ENTRY (fentry), FALSE);
         gtk_widget_destroy (fmd_win);
         easy_patterns = 1;
         if (!dest_dir || !*dest_dir)
@@ -735,12 +750,13 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         else
                 ctx->dest_mask++;
         orig_mask = ctx->dest_mask;
-        if (!*ctx->dest_mask || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask) &&
-                                 (!only_one || (!mc_stat (dest_dir, &buf)
-                                                && S_ISDIR (buf.st_mode)))) ||
-            (ctx->dive_into_subdirs && ((!only_one && !is_wildcarded (ctx->dest_mask)) ||
-                                        (only_one && !mc_stat (dest_dir, &buf)
-                                         && S_ISDIR (buf.st_mode)))))
+        if (!*ctx->dest_mask
+            || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
+                && (!only_one || (!mc_stat (dest_dir, &buf)
+                                  && S_ISDIR (buf.st_mode))))
+            || (ctx->dive_into_subdirs && ((!only_one && !is_wildcarded (ctx->dest_mask))
+                                           || (only_one && !mc_stat (dest_dir, &buf)
+                                               && S_ISDIR (buf.st_mode)))))
                 ctx->dest_mask = g_strdup ("*");
         else {
                 ctx->dest_mask = g_strdup (ctx->dest_mask);
@@ -764,7 +780,8 @@ file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar 
         gboolean rest_same;
 
         if (ctx->recursive_result < RECURSIVE_ALWAYS) {
-                msg = g_strdup_printf(_("%s\n\nDirectory not empty. Delete it recursively?"), name_trunc (s, 80));
+                msg = g_strdup_printf (_("%s\n\nDirectory not empty. Delete it recursively?"),
+                                       name_trunc (s, 80));
                 dialog = gnome_message_box_new (msg,
                                                 GNOME_MESSAGE_BOX_QUESTION,
                                                 GNOME_STOCK_BUTTON_YES,
@@ -772,7 +789,7 @@ file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar 
                                                 GNOME_STOCK_BUTTON_CANCEL,
                                                 NULL);
                 g_free (msg);
-                
+
                 title = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", NULL);
                 gtk_window_set_title (GTK_WINDOW (dialog), title);
                 g_free (title);
@@ -781,14 +798,14 @@ file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar 
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox),
                                     togglebutton, FALSE, FALSE, 0);
                 gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
-                
+
                 gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
-                
+
                 button = gnome_dialog_run (GNOME_DIALOG (dialog));
                 rest_same = GTK_TOGGLE_BUTTON (togglebutton)->active;
 
                 gtk_widget_destroy (dialog);
-                
+
                 switch (button) {
                 case 0:
                         ctx->recursive_result = rest_same ? RECURSIVE_ALWAYS : RECURSIVE_YES;
@@ -801,22 +818,22 @@ file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar 
                         break;
                 default:
                 }
-                
+
                 if (ctx->recursive_result != RECURSIVE_ABORT)
                         do_refresh ();
         }
-                
+
         switch (ctx->recursive_result){
         case RECURSIVE_YES:
         case RECURSIVE_ALWAYS:
                 return FILE_CONT;
-                
+
         case RECURSIVE_NO:
         case RECURSIVE_NEVER:
                 return FILE_SKIP;
-                
+
         case RECURSIVE_ABORT:
-                
+
         default:
                 return FILE_ABORT;
         }
@@ -883,19 +900,22 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
                 hbox = gtk_hbox_new (FALSE, 0);
                 gtk_container_add (GTK_CONTAINER (alignment), hbox);
-                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_from_string)), FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_from_string)),
+                                    FALSE, FALSE, 0);
                 ui->op_source_label = gtk_label_new ("");
 
                 gtk_box_pack_start (GTK_BOX (hbox), ui->op_source_label, FALSE, FALSE, 0);
                 gtk_box_set_spacing (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox), GNOME_PAD_SMALL);
-                gtk_container_set_border_width (GTK_CONTAINER (GNOME_DIALOG (ui->op_win)->vbox), GNOME_PAD);
+                gtk_container_set_border_width (GTK_CONTAINER (GNOME_DIALOG (ui->op_win)->vbox),
+                                                GNOME_PAD);
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox),
                                     alignment, FALSE, FALSE, 0);
 
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
                 hbox = gtk_hbox_new (FALSE, 0);
                 gtk_container_add (GTK_CONTAINER (alignment), hbox);
-                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_to_string)), FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_to_string)),
+                                    FALSE, FALSE, 0);
                 ui->op_target_label = gtk_label_new ("");
                 gtk_box_pack_start (GTK_BOX (hbox), ui->op_target_label, FALSE, FALSE, 0);
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox),
@@ -905,15 +925,18 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
                 alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
                 hbox = gtk_hbox_new (FALSE, 0);
                 gtk_container_add (GTK_CONTAINER (alignment), hbox);
-                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_deleting_string)), FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(gdialog_deleting_string)),
+                                    FALSE, FALSE, 0);
                 ui->op_source_label = gtk_label_new ("");
-                
+
                 gtk_box_pack_start (GTK_BOX (hbox), ui->op_source_label, FALSE, FALSE, 0);
                 gtk_box_set_spacing (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox), GNOME_PAD_SMALL);
-                gtk_container_set_border_width (GTK_CONTAINER (GNOME_DIALOG (ui->op_win)->vbox), GNOME_PAD);
+                gtk_container_set_border_width (GTK_CONTAINER (GNOME_DIALOG (ui->op_win)->vbox),
+                                                GNOME_PAD);
                 gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox),
                                     alignment, FALSE, FALSE, 0);
-        }        
+        }
+
         alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
         hbox = gtk_hbox_new (FALSE, 0);
         gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("File ")), FALSE, FALSE, 0);
@@ -948,7 +971,7 @@ file_op_context_destroy_ui (FileOpContext *ctx)
 
         if (ctx->ui == NULL)
                 return;
-        
+
         ui = ctx->ui;
 
         gtk_widget_destroy (ui->op_win);

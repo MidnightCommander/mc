@@ -129,7 +129,7 @@ static void
 panel_cancel_drag_scroll (WPanel *panel)
 {
 	g_return_if_fail (panel != NULL);
-	
+
 	if (panel->timer_id != -1){
 		gtk_timeout_remove (panel->timer_id);
 		panel->timer_id = -1;
@@ -194,7 +194,7 @@ panel_fill_panel_list (WPanel *panel)
 	type_col = -1;
 
 	g_assert (items == cl->columns);
-		  
+
 	texts [items] = NULL;
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
@@ -224,7 +224,7 @@ panel_fill_panel_list (WPanel *panel)
 
 		if (fe->f.marked)
 			gtk_clist_select_row (cl, i, 0);
-		
+
 	}
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
@@ -263,7 +263,7 @@ panel_fill_panel_icons (WPanel *panel)
 	for (i = 0; i < top; i++) {
 		file_entry *fe = &panel->dir.list [i];
 		int p;
-		
+
 		image = gicon_get_icon_for_file (panel->cwd, fe, TRUE);
 		p = gnome_icon_list_append_imlib (icons, image, fe->fname);
 		if (fe->f.marked)
@@ -424,7 +424,7 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 			used_columns += 2;
 		else
 			used_columns += format->field_len;
-		
+
 		items++;
 		if (format->expand)
 			expandables++;
@@ -801,7 +801,7 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 			file = panel->cwd;
 			free_file = FALSE;
 		}
-		
+
 		free_fe = FALSE;
 	}
 
@@ -862,7 +862,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 			file = panel->cwd;
 			free_file = FALSE;
 		}
-		
+
 		free_fe = FALSE;
 	}
 
@@ -2018,7 +2018,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 			on_drag_row = strcmp (row_path, dtree->drag_dir) == 0;
 		} else
 			on_drag_row = FALSE;
-			
+
 		action = gdnd_validate_action (context,
 					       FALSE,
 					       source_widget != NULL,
@@ -2102,10 +2102,10 @@ static void
 panel_tree_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
 	GtkWidget *popup;
-	
+
 	if (event->type != GDK_BUTTON_PRESS)
 		return;
-	
+
 	if (event->button != 3)
 		return;
 
@@ -2267,12 +2267,12 @@ static GnomeUIInfo toolbar[] = {
 };
 
 static void
-do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
+do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
 		GnomeUIBuilderData *uibdata)
 {
 	if (uiinfo->moreinfo)
-		gtk_signal_connect (GTK_OBJECT (uiinfo->widget), 
-				    signal_name, uiinfo->moreinfo, uibdata->data ? 
+		gtk_signal_connect (GTK_OBJECT (uiinfo->widget),
+				    signal_name, uiinfo->moreinfo, uibdata->data ?
 				    uibdata->data : uiinfo->user_data);
 }
 
@@ -2383,7 +2383,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * We fall back to icon view if a certain listing type is not supported.
 	 * Be sure to keep this in sync with the uiinfo arrays in glayout.c.
 	 */
-	
+
 	if (panel->list_type == list_brief)
 		gtk_toggle_button_set_active (
 			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[1].widget), TRUE);
@@ -2545,7 +2545,7 @@ void
 x_reset_sort_labels (WPanel *panel)
 {
 	int page;
-		
+
 	if (!panel->notebook)
 		return;
 
