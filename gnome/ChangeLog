@@ -2,6 +2,16 @@
 
 	* gscreen.c (panel_icon_list_drag_data_received): Do not update
 	contents if nothing was done (ie, the drop was cancelled).
+	(panel_create_file_list): Duh.  Restore this, as, ahem, we dont
+	have banding selection on CList.
+	(panel_icon_list_select_icon): Open the new panel only on button
+	release.
+	(panel_file_list_select_row): New panel started on clist when you
+	press middle button.
+
+	(panel_create_file_list): Ahaha!  I found that CList now has a
+	gtk_clist_set_buttion_actions.  Go figure why we need this and why
+	it was implemented, but now buttons work as they should on clist.
 
 	* gdnd.c (gdnd_drop_on_directory): Do nothing if the files dragged
 	are on the same directory we are.

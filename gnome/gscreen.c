@@ -465,7 +465,8 @@ static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
 	int current_selection = panel->selected;
-
+	char *fullname;
+	
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
@@ -478,15 +479,21 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 
 		switch (event->button.button) {
 		case 1:
-			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
-				break;
-
-			/* fallback if shift-click is pressed */
-			do_file_mark_range (panel, row, current_selection);
+			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))){
+				do_file_mark (panel, row, !panel->dir.list[row].f.marked);
+			} else {
+				/* if shift-click is pressed */
+				do_file_mark_range (panel, row, current_selection);
+			}
 			break;
 
 		case 2:
-			do_file_mark (panel, row, !panel->dir.list[row].f.marked);
+			if (S_ISDIR (panel->dir.list [current_selection].buf.st_mode) ||
+			    panel->dir.list [current_selection].f.link_to_dir){
+				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [current_selection].fname);
+				new_panel_at (fullname);
+				free (fullname);
+			}
 			break;
 
 		case 3:
@@ -1142,7 +1149,9 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
 			    panel);
-
+	gtk_clist_set_button_actions (GTK_CLIST (file_list), 1, GTK_BUTTON_SELECTS | GTK_BUTTON_DRAGS);
+	gtk_clist_set_button_actions (GTK_CLIST (file_list), 2, GTK_BUTTON_SELECTS);
+	
 	/* Set up drag and drop */
 
 	load_dnd_icons ();
@@ -1151,6 +1160,11 @@ panel_create_file_list (WPanel *panel)
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
 
+	/* Make directories draggable */
+	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
+			     drag_types, ELEMENTS (drag_types),
+			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
+	
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_delete",
@@ -1206,6 +1220,11 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
+		if (event->button.button == 3)
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
+		break;
+
+	case GDK_BUTTON_RELEASE:
 		if (event->button.button == 2){
 			char *fullname;
 
@@ -1217,10 +1236,8 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 			}
 			break;
 		} 
-		if (event->button.button == 3)
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
 		break;
-
+		
 	case GDK_2BUTTON_PRESS:
 		if (event->button.button == 1)
 			do_enter (panel);
