@@ -1,3 +1,8 @@
+2001-05-25  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Match both "mail" and "Mail", but only if they
+	are in the beginning of the "file" output.
+
 2001-05-23  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Add associations for viewing RPM files.

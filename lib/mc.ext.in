@@ -377,7 +377,7 @@ shell/^RMAIL$
 	Start Emacs on this RMAIL file=emacs %f
 	Open=emacs %f
 
-type/mail
+type/^(M|m)ail
 	Open=elm -f %f
 	View=%view{ascii} mcmfmt < %f
 
