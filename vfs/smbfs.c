@@ -60,7 +60,6 @@ static uint32 err;
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
 extern pstring myhostname;
-static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
 static gboolean got_user = FALSE;
@@ -258,50 +257,49 @@ smbfs_set_debug(int arg)
 
 /********************** The callbacks ******************************/
 static int
-smbfs_init(vfs *me)
+smbfs_init (vfs * me)
 {
-	char *servicesf = CONFIGDIR "/smb.conf";
+    char *servicesf = CONFIGDIR PATH_SEP_STR "smb.conf";
 
-	DEBUGLEVEL = 0;
+    /*  DEBUGLEVEL = 4; */
 
-	setup_logging("mc", True);
-    TimeInit();
-    charset_initialise();
+    setup_logging ("mc", True);
+    TimeInit ();
+    charset_initialise ();
 
-	DEBUG(3, ("smbfs_init(%s)\n", me->name));
+    DEBUG (3, ("smbfs_init(%s)\n", me->name));
 
-	if(!get_myname(myhostname,NULL))
-        DEBUG(0,("Failed to get my hostname.\n"));
+    if (!get_myname (myhostname, NULL))
+	DEBUG (0, ("Failed to get my hostname.\n"));
 
-	if (!lp_load(servicesf,True,False,False))
-		DEBUG(0, ("Cannot load %s - run testparm to debug it\n", servicesf));
+    if (!lp_load (servicesf, True, False, False))
+	DEBUG (0, ("Cannot load %s - run testparm to debug it\n", servicesf));
 
-    codepage_initialise(lp_client_code_page());
+    codepage_initialise (lp_client_code_page ());
 
-    load_interfaces();
-    myumask = umask(0);
-    umask(myumask);
+    load_interfaces ();
 
-    if (getenv("USER")) {
-		char *p;
-        pstrcpy(username, getenv("USER"));
-		got_user = TRUE;
-		DEBUG(3, ("smbfs_init(): $USER:%s\n", username));
-        if ((p = strchr(username, '%'))) {
-            *p = 0;
-            pstrcpy(password, p+1);
-            got_pass = TRUE;
-            memset(strchr(getenv("USER"), '%')+1, 'X', strlen(password));
-			DEBUG(3, ("smbfs_init(): $USER%%pass: %s%%%s\n",
-				username, password));
-        }
-        strupper(username);
+    if (getenv ("USER")) {
+	char *p;
+
+	pstrcpy (username, getenv ("USER"));
+	got_user = TRUE;
+	DEBUG (3, ("smbfs_init(): $USER:%s\n", username));
+	if ((p = strchr (username, '%'))) {
+	    *p = 0;
+	    pstrcpy (password, p + 1);
+	    got_pass = TRUE;
+	    memset (strchr (getenv ("USER"), '%') + 1, 'X', strlen (password));
+	    DEBUG (3, ("smbfs_init(): $USER%%pass: %s%%%s\n",
+		       username, password));
+	}
+	strupper (username);
     }
-    if (getenv("PASSWD")) {
-        pstrcpy(password, getenv("PASSWD"));
-        got_pass = TRUE;
+    if (getenv ("PASSWD")) {
+	pstrcpy (password, getenv ("PASSWD"));
+	got_pass = TRUE;
     }
-	return 1;
+    return 1;
 }
 
 static void
