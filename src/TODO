@@ -3,9 +3,6 @@ Before 4.6.0-pre2
 
 Test for groff and for -P-c option to groff to disable ANSI colors.
 
-Write a document explaining how to report bugs and ask questions in the
-mailing lists.
-
 Work around bug in Red Hat 8.0 S-Lang that hides non-ascii characters in
 POSIX locale or disable Red Hat 8.0 S-Lang by default.
 
