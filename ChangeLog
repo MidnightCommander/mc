@@ -1,5 +1,7 @@
 2002-08-25  Pavel Roskin  <proski@gnu.org>
 
+	* mc.sh.in: Only bash needs the mc() function to be exported.
+
 	* doc/pl/mc.1.in: Add node names and options.  Use @prefix@
 	instead of /usr where appropriate.
 	* doc/Makefile.am: Enable generation of the help file.
