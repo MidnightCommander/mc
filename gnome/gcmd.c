@@ -25,6 +25,8 @@
 #include "gdesktop.h"
 #include "../vfs/vfs.h"
 
+static void start_search (WPanel *panel);
+
 enum {
 	SORT_NAME,
 	SORT_EXTENSION,
@@ -610,6 +612,12 @@ gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	paint_panel (panel);
 	do_refresh ();
+}
+
+void
+gnome_start_search (GtkWidget *widget, WPanel *panel)
+{
+	start_search (panel);
 }
 
 void

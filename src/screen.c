@@ -2030,14 +2030,14 @@ do_search (WPanel *panel, int c_code)
 #endif
 }
 
-static void
+void
 start_search (WPanel *panel)
 {
     if (panel->searching){
 	if (panel->selected+1 == panel->count)
 	    panel->selected = 0;
 	else
-	    move_down (panel);
+	    do_move_down (panel);
 	do_search (panel, 0);
     } else {
 	panel->searching = 1;
