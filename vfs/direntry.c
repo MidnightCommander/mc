@@ -46,6 +46,7 @@ vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat)
     if (initstat)
         ino->st = *initstat;
     ino->super = super;
+    ino->st.st_nlink = 0;
     ino->st.st_ino = MEDATA->inode_counter++;
     ino->st.st_dev = MEDATA->rdev;
 

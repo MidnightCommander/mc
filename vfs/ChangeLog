@@ -1,3 +1,7 @@
+2000-05-10  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* direntry.c (vfs_s_new_inode): Do not leave st_nlink uninitialized.
+
 2000-05-08  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
 	vfs/extfs/uha.in: add HSC type archives
