@@ -1,3 +1,9 @@
+1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* subshell.c (pty_open_slave): Glibc-2.1-based Linux kernels have
+	grantpt() but they do lack SysV streams.  Handle this.  Noticed by
+	Jakub Jelinek
+
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* util.h: Added prototype for g_readlink().  Miggie boy should add
