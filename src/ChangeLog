@@ -1,3 +1,9 @@
+2001-08-27  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (learn_key): Turn off keypad to disable intepreting keys
+	by ncurses.
+	Reported by Frederic L. W. Meunier <fredlwm@pervalidus.net>
+
 2001-08-26  Pavel Roskin  <proski@gnu.org>
 
 	* xcurses.c: Remove.

@@ -870,10 +870,12 @@ char *learn_key (void)
     fd_set Read_FD_Set;
     struct timeval endtime;
     struct timeval timeout;
-    int c = xgetch ();
+    int c;
     char buffer [256];
     char *p = buffer;
     
+    keypad(stdscr, FALSE); /* disable intepreting keys by ncurses */
+    c = xgetch ();
     while (c == ERR)
         c = xgetch (); /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
@@ -904,8 +906,9 @@ char *learn_key (void)
         }
         if (c == ERR)
             break;
-	learn_store_key (buffer, &p, c);        
+	learn_store_key (buffer, &p, c);
     }
+    keypad(stdscr, TRUE);
 #ifdef BUGGY_CURSES
     notimeout (stdscr, TRUE);
 #else
