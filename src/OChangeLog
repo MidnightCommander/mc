@@ -62,7 +62,7 @@ Wed Jan 14 12:55:19 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
 
 	* mc.tcl: find a user specific 'tkmc' file in the ~/.mc
 
-Tue Jan 13 17:15:21 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Tue Jan 13 17:15:21 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	
         * main.c (pre_exec): reset_prog_mode is not called if mc is
         compiled with SLang. Otherwise, raw_mode in invoke_subshell()
@@ -309,7 +309,7 @@ Tue Dec 30 15:06:52 1997  Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
 
 	* mc.spec.in: Cosmetic changes.
 	
-Tue Dec 30 14:30:09 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Tue Dec 30 14:30:09 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* vfs/extfs/arfs: UID and GID shell variables renamed because they
 	are read-only under Linux.
@@ -336,7 +336,7 @@ Mon Dec 22 15:28:25 1997  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	the current selection if torben_fj_mode is on, this allows the
 	history to be used with Alt-h.
 
-Mon Dec 22 15:14:22 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Dec 22 15:14:22 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* mc.sgml, mc.1, mcedit.1, mc.hlp, main.c: gray and brightred
 	colors was not mentioned.
@@ -516,7 +516,7 @@ Mon Dec 22 11:21:17 1997  Bakeyev I. Timur timur@goff.comtat.kazan.su
 	* widget.c (history_put): Check for a tkname in a couple of extra
 	places. 
 
-1997-12-16  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+1997-12-16  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* src/popt.c: Include config.h to get the HAVE_MMAP definition.
 
@@ -605,7 +605,7 @@ Wed Dec 10 10:28:44 1997  Norbert Warmuth <k3190@fh-sw.de>
 	* tk/gui.quick_file_mask_copy.tcl: Changed the order of the 
 	checkbuttons
 
-Wed Dec 10 10:19:52 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Wed Dec 10 10:19:52 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* gnome/Makefile.in: popt.c is compiled with the gnome version
 	   gwidget.c: clean_button is not needed anymore
@@ -725,7 +725,7 @@ Thu Nov 27 19:14:33 1997  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	* util.c (get_current_wd): Replace HAVE_VFS with USE_VFS, thanks
 	to Pavel for submiting the relevant information.
 
-Thu Nov 27 19:05:12 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Thu Nov 27 19:05:12 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* boxes.c: very small patch for src/boxes.c Some array was
  	incorrectly initialized, XV_WLAY_DONTCARE was at a wrong position.
@@ -739,7 +739,7 @@ Thu Nov 27 11:48:06 1997  Norbert Warmuth <k3190@fh-sw.de>
  	enlarges on some system the chance that free can give back memory
  	to the operating system when the memory for the tar file is freed.
 
-Wed Nov 26 11:16:01 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Wed Nov 26 11:16:01 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* src/background.c, cons.handler.c, utilunix.c, extfs.c, tar.c:
 	Include sys/wait.h only if HAVE_SYS_WAIT_H is defined. 
@@ -754,7 +754,7 @@ Mon Nov 24 16:48:16 1997  Norbert Warmuth <k3190@fh-sw.de>
 	* utilunix.c (init_groups): Check the return value of getpwuid(),
         it can be NULL.
 
-Fri Nov 21 18:08:54 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Fri Nov 21 18:08:54 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* view.c: Double escape on save dialog was save old changes. Now
 	it cancels quit.
@@ -813,7 +813,7 @@ Mon Nov 10 21:41:53 1997  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c, gwidget.c: GNOME versions of the main and widget bits. 
 	
-Mon Nov 10 20:10:01 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Nov 10 20:10:01 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* file.h: added missing declaration for erase_file
 
@@ -1183,7 +1183,7 @@ Tue Oct  7 21:53:57 1997  Paul Sheer <psheer@icon.co.za>
 	replace. Also, a mail command was added to mail the edit
 	buffer.
 
-Thu Oct 2 12:37:00 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Thu Oct  2 12:37:00 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
         * view.c: F17 works as "Next search". Improved look of the
         save dialog. Suppressed some warning about "incompatible
@@ -1209,7 +1209,7 @@ Mon Sep 22 12:35:53 1997  Norbert Warmuth <k3190@fh-sw.de>
   	At the moment that's only for HP-UX the case.  When we know that
  	some compiler need special flags we can add them later again.
 
-Tue Sep 16 16:39:39 1997  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Tue Sep 16 16:39:39 1997  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* src/main.c: Pressing of "tab" correctly refreshes the command
  	prompt.

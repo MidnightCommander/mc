@@ -4,7 +4,7 @@ Mon Aug 31 12:40:29 1998  Pavel Machek <pavel@ucw.cz>
  	_very_ usefull with vfs (now you can browse web with mc: try
  	/#url:http:||atrey.karlin.mff.cuni.cz|~pavel#uhtml)
 
-Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Make.common.in: Don't define VERSION anymore
 
@@ -22,7 +22,7 @@ Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
 	* mad.h: Include stdlib.h/malloc.h first, to prevent prototypes
 	from being clobbered by the subsequent macro defines.
 
-Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* edit.h: added "../" before some includes to avoid unnecessary
 	"-I" options for the PC port makefiles.
@@ -32,7 +32,7 @@ Sun Aug  9 22:39:12 1998  Janne Kukonlehto  <jtklehto@paju.oulu.fi>
 	* mad.h (calloc): Added parentheses around the arguments as
  	suggested by Steef Boerrigter <sxmboer@sci.kun.nl>.
 
-Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
+Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* syntax.c: makefile* will be highlighted as Makefile*
 
@@ -62,7 +62,7 @@ Thu Jul 23 22:44:16 1998  Tom Tromey  <tromey@cygnus.com>
 	macros instead of in-line checks.  Create vfs/Makefile from
 	vfs/Make-mc.in.
 
-Thu Jul 23 19:49:12 1998  Pavel Roskin <pavel.roski@ecsoft.co.uk>
+Thu Jul 23 19:49:12 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* hotlist.c: corrected layout of the warning which appears
 	if ~/.mc doesn't exist. Appropriate changes in translations.
@@ -811,7 +811,7 @@ Sat Apr  4 00:16:49 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	
 	* src/boxes.c (confirm_box): i18n stuff added.
 
-Mon Apr  6 07:48:22 1998 Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Apr  6 07:48:22 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.in: "make dist" works with bash 1.x again
 
@@ -968,7 +968,7 @@ Mon Mar 23 14:04:07 1998  Philippe De Muyter  <phdm@macqel.be>
 	* configure.in (nlink_t): Check it using AC_CHECK_TYPE.
 	* acconfig.h (nlink_t): New define slot.
 
-Mon Mar 23 08:17:55 1998 Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Mar 23 08:17:55 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* src/main.c: mcedit can be named mce or mcedit.exe - only
 	3 first letters are significant. The same for mcview.
@@ -1043,7 +1043,7 @@ Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 	* file.c (file_mask_dialog): Free the source_mask after calling
 	convert_pattern().
 
-Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* cmd.c: Internal edit is used by default. vi may be
         confusing for some users.
@@ -1157,7 +1157,7 @@ Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (handle_args): Added parentheses around assignment/truth value.
 
-Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
         * src/complete.c: obsolete hack for OS/2 and NT removed.
         Completion works for NT now (not very good)
@@ -1316,7 +1316,7 @@ Fri Jan 23 07:28:54 1998  Peter Daum <gator@cs.tu-berlin.de>
 	* extfs/mailfs: New file system for browsing mail files (support
 	for compressed mail fiels as well).
 
-Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
         * edit/edit.h: mc_mkdir requires 2 arguments for any operation
         system. Obsolete #ifdef's removed.
@@ -1421,7 +1421,7 @@ Fri Jan 16 16:19:59 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	configuration: core;  Fixed the case where the color spec was
 	buggy and we kept on a infinite loop; 
 
-Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	
 	* nt/drive.nt.c, nt/chmod.nt.c: Updated button_new and check_new
 	calls

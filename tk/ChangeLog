@@ -23,7 +23,7 @@ Fri Mar 20 18:41:40 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* tkmain.c (x_init_dlg): added dummy function to make it
 	compile
 
-Mon Mar 16 13:05:47 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Mar 16 13:05:47 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* tkview.c: Include stdio.h;  Minor spelling corrections added. 
 

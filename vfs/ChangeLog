@@ -23,7 +23,7 @@ Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
 
 	* libvfs.c: adding variable mc_home
 
-Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* extfs.c: mc_extfsdir was not defined in extfs_open()
 
@@ -49,7 +49,7 @@ Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
 	* Makefile.am (mad.c, mad.h): Create symlinks to counterparts in
 	`mc-src'. 
 
-Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* extfs/patchfs: %k replaced with more portable %H in the format
 	for "date" command
@@ -57,7 +57,7 @@ Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 	* extfs/extfs.ini: Added patchfs and mailfs. Some comments
 	changed
 
-Tue Aug 11 15:25:52 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Tue Aug 11 15:25:52 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* extfs/rpm: Fix for buggy "cut" on HP-UX 10.20 which ignores
 	lines without enf-of-line.
@@ -90,7 +90,7 @@ Fri Jul 24 00:22:30 1998  Tom Tromey  <tromey@cygnus.com>
 	* Make-mc.in: Renamed from Makefile.in.
 	* Makefile.in: Removed.
 
-Mon Jun 29 15:12:55 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+Mon Jun 29 15:12:55 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.in: Rewritten stuff concerning extfs files.
 
