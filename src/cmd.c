@@ -897,8 +897,8 @@ compare_dirs_cmd (void)
 	paint_panel (opanel);
     } else {
 	message (1, MSG_ERROR,
-		 _(" Both panels should be on the "
-		   "listing view mode to use this command "));
+		 _(" Both panels should be in the "
+		   "listing mode to use this command "));
     }
 }
 

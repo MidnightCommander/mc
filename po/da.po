@@ -44,7 +44,7 @@ msgid " Not an ordinary file: "
 msgstr " Ikke en normal fil: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
 
 #: edit/edit.c:357
@@ -1323,7 +1323,7 @@ msgid "&Thorough"
 msgstr "&Grundig"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Begge paneler bør være i listevisningsmodus for at bruge denne kommando "
 
@@ -1462,7 +1462,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Kan ikke køre kommandoer på ikke-lokale filsystemer"
 
 #: src/dialog.c:48
@@ -3231,7 +3231,7 @@ msgid " Oops... "
 msgstr " Ups... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr " Kan ikke køre eksternt panel på en ikke-lokal mappe "
 
 #: src/panelize.c:319

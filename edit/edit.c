@@ -340,7 +340,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     /* If the file has just been created, we don't have valid stat yet, so do it now */
     if (!stat_ok && mc_fstat (file, st) < 0) {
 	mc_close (file);
-	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
+	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot get size/permissions info for file: "), filename, " ", 0)));
 	return 1;
     }
     mc_close (file);

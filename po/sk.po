@@ -39,7 +39,7 @@ msgid " Not an ordinary file: "
 msgstr " Toto nie je súbor ordinálneho typu: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Nemôžem získať info súbor o veľkosti/právach: "
 
 #: edit/edit.c:357
@@ -1316,7 +1316,7 @@ msgid "&Thorough"
 msgstr "ú&Plná"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " Oba panely môžu použiť pre režim prezerania tento príkaz "
 
 #: src/cmd.c:906
@@ -1454,7 +1454,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Nemôžete spustiť príkazy na nelokálnych súborových systémoch"
 
 #: src/dialog.c:48
@@ -3221,7 +3221,7 @@ msgid " Oops... "
 msgstr " Hop....."
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr "Nemôžem povrchovo paneliz. pokiaľ som činný v nemiestnom adresári "
 
 #: src/panelize.c:319

@@ -198,7 +198,7 @@ enter (WInput * cmdline)
 	    if (!vfs_current_is_local ()) {
 		message (1, MSG_ERROR,
 			 _
-			 (" You can not execute commands on non-local filesystems"));
+			 (" Cannot execute commands on non-local filesystems"));
 
 		return MSG_NOT_HANDLED;
 	    }

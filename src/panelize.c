@@ -266,8 +266,8 @@ external_panelize (void)
     char *target = NULL;
 
     if (!vfs_current_is_local ()){
-	message (1, _(" Oops... "),
-		 _(" I can't run external panelize while logged on a non local directory "));
+	message (1, MSG_ERROR,
+		 _(" Cannot run external panelize in a non-local directory "));
 	return;
     }
 

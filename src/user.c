@@ -675,8 +675,8 @@ void user_menu_cmd (WEdit *edit_widget)
     Listbox *listbox;
     
     if (!vfs_current_is_local ()){
-	message (1, _(" Oops... "),
-		 _(" I can't run programs while logged on a non local directory "));
+	message (1, MSG_ERROR,
+		 _(" Cannot execute commands on non-local filesystems"));
 	return;
     }
     

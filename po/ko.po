@@ -36,7 +36,7 @@ msgid " Not an ordinary file: "
 msgstr " 일반 파일 아님: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " 파일 크기/허용 정보 얻기 실패: "
 
 #: edit/edit.c:357
@@ -1311,7 +1311,7 @@ msgid "&Thorough"
 msgstr "자세히(&T)"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " 이 명령을 사용하려면 양쪽 판텔이 모두 보여야 합니다 "
 
 #: src/cmd.c:906
@@ -1448,7 +1448,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " 가상 파일 체계 디렉토리에서는 명령을 실행할 수 없어요 "
 
 #: src/dialog.c:48
@@ -3214,7 +3214,7 @@ msgid " Oops... "
 msgstr " 으윽... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 " 원격 디렉토리으로 로그한 경우에는 외부 패널화 명령을 실행할 수 없습니다 "
 

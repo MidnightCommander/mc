@@ -40,7 +40,7 @@ msgid " Not an ordinary file: "
 msgstr " Nem közönséges fájl: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Méret-/hozzáférési adatok lekérdezése nem sikerült: "
 
 #: edit/edit.c:357
@@ -1330,7 +1330,7 @@ msgid "&Thorough"
 msgstr "&Alapos (tartalom)"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " Mindkét panelnak fájllista-módban kell lennie ehhez a parancshoz. "
 
 #: src/cmd.c:906
@@ -1468,7 +1468,7 @@ msgstr ""
 
 # error boxban, pl. FTP-nel
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Távoli fájlrendszeren nem lehet parancsokat futtatni. "
 
 #: src/dialog.c:48
@@ -3252,7 +3252,7 @@ msgid " Oops... "
 msgstr " Ajjaj... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr " Távoli könyvtáron nem lehet külsõ panel-parancsot futtatni. "
 
 #: src/panelize.c:319

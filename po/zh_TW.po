@@ -38,7 +38,7 @@ msgid " Not an ordinary file: "
 msgstr " 不是常規檔案： "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " 無法獲得檔案的大小/權限資訊： "
 
 #: edit/edit.c:357
@@ -1315,7 +1315,7 @@ msgid "&Thorough"
 msgstr "徹底的"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " 使用此一指令時，兩個面板都要在列表顯示模式 "
 
 #: src/cmd.c:906
@@ -1453,7 +1453,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " 不能在非本地端的檔案系統上執行指令 "
 
 #: src/dialog.c:48
@@ -3222,7 +3222,7 @@ msgid " Oops... "
 msgstr " 糟了... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr " 登入在非本地端檔案系統時無法執行外部面板化 "
 
 #: src/panelize.c:319

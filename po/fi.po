@@ -39,7 +39,7 @@ msgid " Not an ordinary file: "
 msgstr " Ei tavallinen tiedosto: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Koko- ja oikeustietoja tiedostosta ei saatu: "
 
 #: edit/edit.c:357
@@ -1331,7 +1331,7 @@ msgid "&Thorough"
 msgstr "&Perusteellinen"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Molempien paneelien tulisi olla listausn‰kym‰ss‰ t‰t‰ komentoa k‰ytt‰‰ksesi"
 
@@ -1469,7 +1469,7 @@ msgid ""
 msgstr ""
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Ei-paikallisesta tiedostoj‰rjestelm‰st‰ ei voi suorittaa komentoja"
 
 #: src/dialog.c:48
@@ -3134,7 +3134,7 @@ msgid " Oops... "
 msgstr " Hups... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 
 #: src/panelize.c:319

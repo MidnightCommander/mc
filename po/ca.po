@@ -38,7 +38,7 @@ msgid " Not an ordinary file: "
 msgstr " No és un fitxer ordinari: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " No puc obtenir mida/permisos del fitxer: "
 
 #: edit/edit.c:357
@@ -1320,7 +1320,7 @@ msgid "&Thorough"
 msgstr "&Detallat"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " Cal que ambdós quadres siguin en mode llistat per usar l'ordre "
 
 #: src/cmd.c:906
@@ -1459,7 +1459,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 
 #: src/dialog.c:48
@@ -3234,7 +3234,7 @@ msgid " Oops... "
 msgstr " Ieeep... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 " No puc executar un quadre de cerca externa mentre estigui connectat a un "
 "directori no-local "

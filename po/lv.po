@@ -37,7 +37,7 @@ msgid " Not an ordinary file: "
 msgstr " Neparasts fails: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
 
 #: edit/edit.c:357
@@ -1319,7 +1319,7 @@ msgid "&Thorough"
 msgstr "&Pamatîgi"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr " Abiem paneïiem jâbût saraksta skata reþîmâ, lai lietotu ðo komandu "
 
 #: src/cmd.c:906
@@ -1457,7 +1457,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Tu nevari palaist komandas uz ne-vietçjâm failsistçmâm"
 
 #: src/dialog.c:48
@@ -3229,7 +3229,7 @@ msgid " Oops... "
 msgstr " Oops... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 " Nevar palaist ârçjo panelçðanu kamçr ielogojoes ne-vietçjâ direktorijâ "
 

@@ -41,7 +41,7 @@ msgid " Not an ordinary file: "
 msgstr " To nie jest zwyk³y plik: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do pliku: "
 
 #: edit/edit.c:357
@@ -1318,7 +1318,7 @@ msgid "&Thorough"
 msgstr "Dok³adna"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
 " Aby wykorzystaæ to polecenie, nale¿y ustawiæ oba okna na wy¶wietlanie listy "
 "plików "
@@ -1458,7 +1458,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Polecenia mo¿na wykonywaæ tylko na lokalnym systemie plików"
 
 #: src/dialog.c:48
@@ -3224,7 +3224,7 @@ msgid " Oops... "
 msgstr " Uups... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr " Filtr zewnêtrzny mo¿na uruchamiaæ tylko w lokalnym katalogu "
 
 #: src/panelize.c:319

@@ -34,7 +34,7 @@ msgid " Not an ordinary file: "
 msgstr " Незвичайний файл: "
 
 #: edit/edit.c:345
-msgid " Cannot get size/permissions info on file: "
+msgid " Cannot get size/permissions info for file: "
 msgstr " Не вда╓ться отримати розм╕р/права доступу для файла: "
 
 #: edit/edit.c:357
@@ -1309,7 +1309,7 @@ msgid "&Thorough"
 msgstr "По&байтний"
 
 #: src/cmd.c:891
-msgid " Both panels should be on the listing view mode to use this command "
+msgid " Both panels should be in the listing mode to use this command "
 msgstr "Для виконання ц╕╓╖ команди обидв╕ панел╕ повинн╕ бути у режим╕ списку"
 
 #: src/cmd.c:906
@@ -1446,7 +1446,7 @@ msgstr ""
 " %s "
 
 #: src/command.c:201
-msgid " You can not execute commands on non-local filesystems"
+msgid " Cannot execute commands on non-local filesystems"
 msgstr " Ви не можете виконувати команди на нелокальних файлових системах"
 
 #: src/dialog.c:48
@@ -3206,7 +3206,7 @@ msgid " Oops... "
 msgstr " Ой... "
 
 #: src/panelize.c:270
-msgid " I can't run external panelize while logged on a non local directory "
+msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 " Не можу виконати цю команду, коли знаходжуся не у локальному каталоз╕ "
 
