@@ -1,3 +1,8 @@
+2001-03-02  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (mi_getch): Discard non-events (EV_NONE), but not
+	keycode 0 (Ctrl-@).
+
 2001-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (edit_cmd) [HAVE_GNOME]: Use gmc_edit(). Don't use
