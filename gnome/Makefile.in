@@ -289,7 +289,6 @@ clean: mostlyclean
 	  $(CORBA_GENERATED) $(MAGICDEV_GENERATED)
 
 distclean: clean cleansourcelinks
-	rm -f .depend
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
@@ -335,12 +334,5 @@ uninstall:
 	rm -f $(DESTDIR)$(corbadir)/gmc.gnorba
 	-rmdir $(DESTDIR)$(corbadir)
 
-depend dep: @gmcdep@
+depend:
 
-gmcdep: checklinks mcdep
-
-fastdeploc: @fastdepslang@ @fastdepvfs@
-
-# ***Dependencies***Do not edit***
-@DOTDEPEND@
-# ***End of dependencies***

@@ -1,3 +1,15 @@
+2001-05-27  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: Remove obsolete dependency tracking system.
+	* configure.in: Likewise.
+	* edit/Makefile.in: Likewise.
+	* gnome/Makefile.in: Likewise.
+	* gtkedit/Makefile.in: Likewise.
+	* slang/Makefile.in: Likewise.
+	* src/Makefile.in: Likewise.
+	* vfs/Make-mc.in: Likewise.
+	* src/depend.awk: Remove.
+
 2001-05-26  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit/syntax.c (syntax_text): Add support for Octave files.

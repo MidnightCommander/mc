@@ -15,22 +15,6 @@ AC_PROG_CPP
 AC_PROG_RANLIB
 AC_PROG_LN_S
 AC_PROG_AWK
-if test x"$AWK" = x; then
-    AWK=":"
-    AWK_VAR_OPTION=""
-    dep=slowdep
-else
-    dep=fastdep
-
-    # test whether awk needs -v for variables (e.g. Solaris) or not (e.g. SunOs 4)
-    if test x"`echo | $AWK 'BEGIN { print variable; exit }' variable=123`" = x123; then
-        AWK_VAR_OPTION=""
-    else
-        AWK_VAR_OPTION="-v"
-    fi
-fi
-AC_SUBST(AWK_VAR_OPTION)
-AC_SUBST(dep)
 AC_PROG_GNU_MAKE
 
 AC_AIX
@@ -303,20 +287,17 @@ AC_SUBST(NETFILES)
 
 LIBVFS=""
 LVFS=""
-fastdepvfs=""
 vfs_type="normal"
 if test $use_vfs = yes
 then
 	LIBVFS="libvfs-mc.a"
 	LVFS="-lvfs-mc"
-	fastdepvfs=fastdepvfs
 	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
 	AC_MSG_RESULT([Using the VFS switch code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
 AC_SUBST(LIBVFS)
 AC_SUBST(LVFS)
-AC_SUBST(fastdepvfs)
 
 screen_manager=unknown
 search_ncurses=false
@@ -422,13 +403,11 @@ dnl
 dnl Check for Gnome
 dnl
 mx=""
-gmcdep=""
 libgtkedit=""
 xvers="none"
 
 GNOME_INIT_HOOK([
 	mx=mx
- 	gmcdep=gmcdep
 	libgtkedit="libgtkedit.a"
 	if test x"$xvers" = xnone; then
 	    xvers="Gnome"
@@ -451,7 +430,6 @@ dnl Check for new enough gnome-libs
 ])
 AC_SUBST(gnomeicondir)
 AC_SUBST(mx)
-AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
 AC_SUBST(GNOMEGNORBA_LIBS)
 AM_CONDITIONAL(GNOME, [test x"$mx" = xmx])
@@ -715,7 +693,6 @@ AC_ARG_WITH(included-slang,
 
 LIBSLANG=""
 LSLANG=""
-fastdepslang=""
 AC_ARG_WITH(slang,
 	[--with-slang		   Compile with the slang screen manager],[
 	if test x$withval = xyes; then
@@ -725,7 +702,6 @@ AC_ARG_WITH(slang,
 
 AC_SUBST(LIBSLANG)
 AC_SUBST(LSLANG)
-AC_SUBST(fastdepslang)
 
 LIBEDIT_A=""
 MCEDIT=""
@@ -937,18 +913,8 @@ AC_SUBST(LIBS)
 
 ac_cv_make_with_percent_rules=no
 if test x$ac_cv_prog_gnu_make = xyes; then
-    PHONY='.PHONY:'
-    DOTDEPEND='-include .depend'
-    WRITEDEP=":"
     ac_cv_make_with_percent_rules=yes
-else
-    PHONY='#'
-    DOTDEPEND=""
-    WRITEDEP='sed "/^. \*\*\*Dependencies\*\*\*/,/^. \*\*\*End of dependencies\*\*\*/d" < Makefile > Makefile.conf; { cat Makefile.conf; echo "# ***Dependencies***Do not edit***"; cat .depend; echo "# ***End of dependencies***" } > Makefile; $(RMF) Makefile.conf .depend'
 fi
-AC_SUBST(PHONY)
-AC_SUBST(WRITEDEP)
-AC_SUBST(DOTDEPEND)
 
 MCF=./Make.common
 AC_SUBST_FILE(MCF)

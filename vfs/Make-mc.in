@@ -209,9 +209,6 @@ libvfs.so: $(VFSSOOBJS)
 samba/libsamba.a:
 	cd samba && $(MAKE) libsamba.a
 
-showlibdep:
-	@echo 'OBJS="$(VFSOBJS)"'
-
 TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
@@ -235,7 +232,6 @@ distclean: clean
 	  (cd samba && $(MAKE) distclean); \
 	else :;	fi
 	rm -f $(SRC_LINKS)
-	rm -f .depend
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
@@ -272,10 +268,5 @@ distdir:
 	  cp -p $(srcdir)/samba/$$I $(distdir)/samba/$$I \
 	  || exit 1; done
 	
-depend dep: mcdep
+depend:
 
-fastdeploc:
-
-# ***Dependencies***Do not edit***
-@DOTDEPEND@
-# ***End of dependencies***

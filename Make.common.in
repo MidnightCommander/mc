@@ -51,7 +51,6 @@ MV = mv
 CP = cp
 LN_S = @LN_S@
 AWK = @AWK@
-AWK_VAR_OPTION = @AWK_VAR_OPTION@
 
 # Flags & libs
 # No way, to make make happy (except GNU), we cannot use := to append
@@ -83,32 +82,13 @@ hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir)
 # Rules
 first_rule: all
 
-@PHONY@ all check cross TAGS clean install uninstall distcopy depend dep
-@PHONY@ fastdep fastdepslang fastdepvfs fastdeploc slowdep
+.PHONY: all check cross TAGS clean install uninstall distcopy depend
 
 @PCENTRULE@../slang/%.o : ../slang/%.c
 @PCENTRULE@	cd ../slang; $(MAKE) libmcslang.a
 
 @PCENTRULE@../vfs/%.o : ../vfs/%.c
 @PCENTRULE@	cd ../vfs; $(MAKE) libvfs.a
-
-fastdep: dummy
-	if test x"`echo $(srcdir)/*.[ch]`" != x'$(srcdir)/*.[ch]'; then { cd $(srcdir); $(AWK) -f $(mcsrcdir)/depend.awk $(AWK_VAR_OPTION) hpath="$(hpath)" $(AWK_VAR_OPTION) srcdir="$(srcdir)" *.[ch];} > .depend; fi
-	-$(MAKE) fastdeploc
-	@WRITEDEP@
-
-fastdepslang:
-@PCENTRULE@	{ { { cd ../slang; $(MAKE) showlibdep;} | grep OBJS; cat .depend;} | { cd $(slangdir); $(AWK) -f $(mcsrcdir)/depend.awk $(AWK_VAR_OPTION) dolib="../slang libmcslang.a" $(AWK_VAR_OPTION) hpath="$(hpath)" $(AWK_VAR_OPTION) srcdir="$(slangdir)";};} >> .depend
-
-fastdepvfs:
-@PCENTRULE@	{ { { cd ../vfs; $(MAKE) showlibdep;} | grep OBJS; cat .depend;} | { cd $(vfsdir); $(AWK) -f $(mcsrcdir)/depend.awk $(AWK_VAR_OPTION) dolib="../vfs libvfs.a" $(AWK_VAR_OPTION) hpath="$(hpath)" $(AWK_VAR_OPTION) srcdir="$(vfsdir)";};} >> .depend
-
-slowdep: dummy
-	if test x"`echo $(srcdir)/*.[ch]`" != x'$(srcdir)/*.[ch]'; then \
-	$(CPP) -M $(CPPFLAGS) $(DEFS) $(CFLAGS) $(srcdir)/*.c > .depend; fi
-	@WRITEDEP@
-
-mcdep: @dep@
 
 dummy:
 

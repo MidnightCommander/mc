@@ -45,9 +45,6 @@ libmcslang.a: $(SLANGOBJS)
 	$(AR) cr $@ $(SLANGOBJS)
 	-$(RANLIB) $@
 
-showlibdep:
-	@echo 'OBJS="$(SLANGOBJS)"'
-
 TAGS: $(SLANGSRCS)
 	etags $(SLANGSRCS)
 
@@ -58,7 +55,7 @@ clean: mostlyclean
 	rm -f libmcslang.a
 
 distclean: clean
-	rm -f .depend slang.h
+	rm -f slang.h
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
@@ -72,10 +69,5 @@ distdir:
 
 install uninstall:
 
-depend dep: mcdep
+depend:
 
-fastdeploc:
-
-# ***Dependencies***Do not edit***
-@DOTDEPEND@
-# ***End of dependencies***

@@ -59,7 +59,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 
 DISTFILES = \
 	$(HDRS) $(SRCS) Makefile.in TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl cons.saver.c ncurses.patch mc.hlp depend.awk mfmt.c
+	gindex.pl cons.saver.c ncurses.patch mc.hlp mfmt.c
 
 all: mc mcmfmt $(srcdir)/mc.hlp @cons_saver@ Makefile
 
@@ -107,7 +107,6 @@ clean: mostlyclean
 	rm -f mc cons.saver man2hlp mc.html mcmfmt
 
 distclean: clean
-	rm -f .depend
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
@@ -156,10 +155,5 @@ distdir: $(srcdir)/mc.hlp
 	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
 	done
 
-depend dep: mcdep
+depend:
 
-fastdeploc: @fastdepslang@ @fastdepvfs@
-
-# ***Dependencies***Do not edit***
-@DOTDEPEND@
-# ***End of dependencies***

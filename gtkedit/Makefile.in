@@ -50,9 +50,6 @@ mcedit:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
 	$(LN_S) mc $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
-showlibdep:
-	@echo 'OBJS="$(EDITOBJS)"'
-
 TAGS: $(EDITSRC)
 	etags $(EDITSRC)
 
@@ -63,7 +60,6 @@ clean: mostlyclean
 	rm -f libgtkedit.a
 
 distclean: clean
-	rm -f .depend
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
@@ -79,10 +75,5 @@ distdir:
 	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
 	done
 
-depend dep: mcdep
+depend:
 
-fastdeploc:
-
-# ***Dependencies***Do not edit***
-@DOTDEPEND@
-# ***End of dependencies***
