@@ -528,10 +528,10 @@ load_no_proxy_list ()
     struct no_proxy_entry *np, *current = 0;
     FILE	*npf;
     int		c;
-    char 	*p, *mc_file;
-    static int	loaded;
+    char 	*p;
+    static char	*mc_file;
 
-    if (loaded)
+    if (mc_file)
 	return;
 
     mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
@@ -560,7 +560,6 @@ load_no_proxy_list ()
 	}
 
 	fclose (npf);
-	loaded = 1;
     }
     g_free (mc_file);
 }
@@ -1176,9 +1175,9 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     
     int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);
 
-    print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path, 
-		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "", 
-		      cd_first ? _("(chdir first)"):"");
+    print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,
+		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "",
+		      cd_first ? _("(chdir first)") : "");
 
     if (cd_first) {
         char *p;
@@ -1680,7 +1679,7 @@ static struct vfs_s_data ftp_data = {
 
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_("File Tranfer Protocol (ftp)"),
+    N_("File Transfer Protocol (ftp)"),
     F_NET,	/* flags */
     "ftp:",	/* prefix */
     &ftp_data,	/* data */
