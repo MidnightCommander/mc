@@ -285,6 +285,7 @@ Z       Extract compressed tar files to subdirectories
 	    tar_gz|tgz|tpz|tar_Z|tar_z) mkdir $D; (cd $D && gzip -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
 	    tar_F)                      mkdir $D; (cd $D && freeze -dc ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE;;
 	    tar_bz2)			mkdir $D; (cd $D && bunzip2 -c ../$1 | tar xvf -)||echo tag $1 >>$MC_CONTROL_FILE
+	  esac
 	  shift
         done
 
