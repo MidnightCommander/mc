@@ -1,3 +1,8 @@
+2005-02-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/lib/username.c (map_username): Comment out.
+	(user_in_list): Ditto.
+
 2005-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* cpio.c (cpio_read_crc_head): Fixed device number handling for

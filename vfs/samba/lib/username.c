@@ -40,6 +40,7 @@ char *get_home_dir(char *user)
 }
 
 
+#if 0 /* Fix possible buffer overflow in sscanf(unixname,"%s",user) if uncomment */
 /*******************************************************************
 map a username from a dos name to a unix name by looking in the username
 map. Note that this modifies the name in place.
@@ -142,6 +143,7 @@ BOOL map_username(char *user)
 
   return mapped_user;
 }
+#endif /* 0 */
 
 /****************************************************************************
 Get_Pwnam wrapper
@@ -226,6 +228,7 @@ struct passwd *Get_Pwnam(char *user,BOOL allow_change)
   return(NULL);
 }
 
+#if 0
 /****************************************************************************
 check if a user is in a netgroup user list
 ****************************************************************************/
@@ -366,6 +369,7 @@ BOOL user_in_list(char *user,char *list)
   }
   return(False);
 }
+#endif /* 0 */
 
 /* The functions below have been taken from password.c and slightly modified */
 /****************************************************************************
