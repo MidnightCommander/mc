@@ -110,8 +110,6 @@ be deleted before the application has time to load it.
 
 Allow running executables from remote VFS.  Possibly warn the user.
 
-canonicalize_pathname() doesn't strip leading "./"
-
 Add print dialog in the internal editor.
 
 Implement logging, not just for VFS.
