@@ -95,9 +95,9 @@ static GtkTargetEntry dnd_targets[] = {
 
 static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
 
+/* Proxy window for DnD on the root window */
 static GtkWidget *dnd_proxy_window;
 
-	
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
  * it.  "Free" means it either has zero icons in it, or it has the minimum number of icons of all
@@ -492,7 +492,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
 
-	if (mc_stat (full_name, &s) != 0) {
+	if (mc_lstat (full_name, &s) != 0) {
 		g_warning ("Could not stat %s; will not use a desktop icon", full_name);
 		g_free (full_name);
 		return NULL;
@@ -598,17 +598,37 @@ create_desktop_dir (void)
 	}
 }
 
-/* Reads the ~/Desktop directory and creates the initial desktop icons */
+/* Returns TRUE if there is already an icon in the desktop for the specified filename, FALSE otherwise. */
+static int
+icon_exists (char *filename)
+{
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+			if (strcmp (filename, dii->filename) == 0)
+				return TRUE;
+		}
+
+	return FALSE;
+}
+
+/* Reads the ~/Desktop directory and creates the desktop icons.  If incremental is TRUE, then an
+ * icon will not be created for a file if there is already an icon for it, and icons will be created
+ * starting at the specified position.
+ */
 static void
-load_desktop_icons (void)
+load_desktop_icons (int incremental, int xpos, int ypos)
 {
 	struct dirent *dirent;
 	DIR *dir;
 	char *full_name;
 	int have_pos, x, y;
-	int i;
-	GList *l;
 	struct desktop_icon_info *dii;
+	GSList *need_position_list, *l;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -619,28 +639,48 @@ load_desktop_icons (void)
 		return;
 	}
 
+	/* First create the icons for all the files that do have their icon position set.  Build a
+	 * list of the icons that do not have their position set.
+	 */
+
+	need_position_list = NULL;
+
 	while ((dirent = mc_readdir (dir)) != NULL) {
 		if (((dirent->d_name[0] == '.') && (dirent->d_name[1] == 0))
 		    || ((dirent->d_name[0] == '.') && (dirent->d_name[1] == '.') && (dirent->d_name[2] == 0)))
 			continue;
 
+		if (incremental && icon_exists (dirent->d_name))
+			continue;
+
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
 		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
-		desktop_icon_info_new (dirent->d_name, !have_pos, x, y);
 
-		g_free (full_name);
+		if (have_pos) {
+			dii = desktop_icon_info_new (dirent->d_name, FALSE, x, y);
+			gtk_widget_show (dii->dicon);
+
+			g_free (full_name);
+		} else
+			need_position_list = g_slist_prepend (need_position_list, g_strdup (dirent->d_name));
 	}
 
 	mc_closedir (dir);
 
-	/* Show all the icons */
+	/* Now create the icons for all the files that did not have their position set.  This makes
+	 * auto-placement work correctly without overlapping icons.
+	 */
 
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			dii = l->data;
-			gtk_widget_show (dii->dicon);
-		}
+	need_position_list = g_slist_reverse (need_position_list);
+
+	for (l = need_position_list; l; l = l->next) {
+		dii = desktop_icon_info_new (l->data, FALSE, xpos, ypos);
+		gtk_widget_show (dii->dicon);
+		g_free (l->data);
+	}
+
+	g_slist_free (need_position_list);
 }
 
 /* Destroys all the current desktop icons */
@@ -663,12 +703,16 @@ destroy_desktop_icons (void)
 	}
 }
 
-/* Reloads the desktop icons */
+/* Reloads the desktop icons.  If incremental is TRUE, then the existing icons will not be destroyed
+ * first, and the new icons will be put at the specified position.
+ */
 static void
-reload_desktop_icons (void)
+reload_desktop_icons (int incremental, int x, int y)
 {
-	destroy_desktop_icons ();
-	load_desktop_icons ();
+	if (!incremental)
+		destroy_desktop_icons ();
+
+	load_desktop_icons (incremental, x, y);
 }
 
 /* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */
@@ -764,15 +808,25 @@ static void
 drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 		    GtkSelectionData *data, guint info, guint time, gpointer user_data)
 {
+	int retval;
+	gint dx, dy;
+
 	switch (info) {
 	case TARGET_URI_LIST:
-		printf ("uri-list dropped on desktop!\n");
+		/* Fix the proxy window offsets */
+		gdk_window_get_position (widget->window, &dx, &dy);
+		x += dx;
+		y += dy;
 
-		gdnd_drop_on_directory (context, data, desktop_directory);
-		reload_desktop_icons (); /* FIXME: this is inefficient and it sucks! */
-		
+		/* Drop! */
+
+		retval = gdnd_drop_on_directory (context, data, desktop_directory);
+
+		if (retval)
+			reload_desktop_icons (TRUE, x, y);
+
 		/* FIXME: return TRUE for delete if appropriate */
-		gtk_drag_finish (context, TRUE, FALSE, time);
+		gtk_drag_finish (context, retval, FALSE, time);
 		return;
 
 	default:
@@ -793,9 +847,9 @@ setup_desktop_dnd (void)
 		g_warning ("Eeeeek, some moron is already taking drops on the root window!");
 
 	gtk_drag_dest_set (dnd_proxy_window,
-			   GTK_DEST_DEFAULT_DROP,
+			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
 			   dnd_targets, dnd_ntargets,
-			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
 	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_data_received",
 			    GTK_SIGNAL_FUNC (drag_data_received), NULL);
@@ -812,7 +866,7 @@ desktop_init (void)
 {
 	create_layout_info ();
 	create_desktop_dir ();
-	load_desktop_icons ();
+	load_desktop_icons (FALSE, 0, 0);
 	setup_desktop_dnd ();
 }
 

@@ -1,15 +1,47 @@
+1998-12-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (load_desktop_icons): Added arguments that specify
+	where to place the newly-created icons.  This needs some tweaking still.
+	(reload_desktop_icons): Now takes arguments for the position of
+	the new icons.
+	(drag_data_received): Pass in the drop position to reload_desktop_icons().
+
+	* gscreen.c (panel_tree_drag_motion): Added missing variable declaration.
+
+	* gdesktop.c (load_desktop_icons): Added an incremental flag that
+	specifies whether icon creation is unconditional regardless of
+	whether there is an icon for a file or not.
+	(reload_desktop_icons): Use the incremental flag in load_desktop_icons().
+	(drag_data_received): Reload the desktop incrementally, to avoid flicker.
+	(desktop_icon_info_new): Use mc_lstat(), not mc_stat().  We do
+	want to read symlinks, even dangling ones, if they exist.
+	(load_desktop_icons): While we are reading the desktop directory,
+	first place all the icons that have their metadata icon-position
+	set, and build a list of the ones that don't.  *Then* place
+	those.  This fixes overlapping icons on weird situations.
+
+	* directory.xpm: Removed bogus garbage.  There was a stale pixmap here.
+
+	* gdesktop.c (setup_desktop_dnd): Allow for GDK_ACTION_ASK as well.
+
+	* gscreen.c (panel_widget_motion): The action argument to
+	gtk_drag_begin() is a mask of possible actions, not a single action.
+
+	* gdesktop.c (drag_data_received): Only reload the icons if the
+	drop was successful.
+
 1998-12-03  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdialogs.c (create_op_win): starting the op_win dialog stuff
 
 1998-12-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (panel_create_icon_display, panel_create_file_list):
+	Hook up to drag_begin and drag_end events.
+
 	* gscreen.c (panel_tree_drag_motion): Improve interactivity
 	(x_create_panel): Add a little decorating frame.
 
-
-
-	
 	(panel_create_icon_display, panel_create_file_list):
 	Hook up to drag_begin and drag_end events.
 

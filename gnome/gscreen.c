@@ -15,8 +15,9 @@
 #include "mad.h"
 #include "x.h"
 #include "dir.h"
-#include "panel.h"
 #include "command.h"
+#include "panel.h"
+#define WANT_WIDGETS		/* bleah */
 #include "main.h"
 #include "color.h"
 #include "mouse.h"
@@ -59,11 +60,6 @@ static GdkImlibImage *icon_view_device;
 static GdkImlibImage *icon_view_regular;
 static GdkImlibImage *icon_view_core;
 static GdkImlibImage *icon_view_sock;
-
-#ifdef OLD_DND
-static char *drag_types [] = { "text/plain", "file:ALL", "url:ALL" };
-static char *drop_types [] = { "url:ALL" };
-#endif
 
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
@@ -1061,36 +1057,27 @@ panel_clist_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *pa
 	return FALSE;
 }
 
-#define MAX(a,b) ((a > b) ? a : b)
-
 static int
 panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 {
 	GtkTargetList *list;
-	GdkDragAction action;
 	GdkDragContext *context;
-	
+
 	if (!panel->maybe_start_drag)
 		return FALSE;
 
 	if (panel->maybe_start_drag == 3)
 		return FALSE;
 	
-	if ((abs (event->x - panel->click_x) < 4) || 
+	if ((abs (event->x - panel->click_x) < 4) ||
 	    (abs (event->y - panel->click_y) < 4))
 		return FALSE;
 	
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
-	/* Control+Shift = LINK */
-	if ((event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK | GDK_CONTROL_MASK))
-		action = GDK_ACTION_LINK;
-	else if (event->state & (GDK_SHIFT_MASK))
-		action = GDK_ACTION_MOVE;
-	else
-		action = GDK_ACTION_COPY;
-		
-	context = gtk_drag_begin (widget, list, action, panel->maybe_start_drag, (GdkEvent *) event);
+	context = gtk_drag_begin (widget, list,
+				  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK,
+				  panel->maybe_start_drag, (GdkEvent *) event);
 	gtk_drag_set_icon_default (context);
 	
 	return FALSE;
