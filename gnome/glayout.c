@@ -342,7 +342,7 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("File"),     NULL, &gnome_panel_file_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_File"),     NULL, &gnome_panel_file_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Window"),    NULL, &gnome_panel_panel_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Commands"), NULL, &gnome_panel_commands_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Options"),  NULL, &gnome_panel_options_menu },

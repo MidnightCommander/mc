@@ -2922,6 +2922,11 @@ and unused keys everywhere).
 .PP
 .SH ""
 .SH FILES
+.PP
+The program will retrieve all of its information relative to the
+MCHOME environment variable, if this variable is not set, then it will
+fall back to the @prefix@ directory.
+.PP
 @prefix@/lib/mc.hlp
 .IP
 The help file for the program.

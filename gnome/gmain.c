@@ -137,8 +137,10 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 	}
 	
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (win), "key_press_event");
-	dlg_key_event (h, key);
-	return TRUE;
+	if (dlg_key_event (h, key))
+		return TRUE;
+	else
+		return FALSE;
 }
 
 void

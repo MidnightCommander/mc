@@ -2,9 +2,9 @@
 		FIles transferred over SHell protocol (V 0.0.2)
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This protocol was designed for transferring files over secureshell
-(ssh) connection. It can be as well used for transfers over rsh, and
-there may be other uses.
+This protocol was designed for transferring files over a remote shell
+connection (rsh and compatibles). It can be as well used for transfers over 
+rsh, and there may be other uses.
 
 Client sends requests of following form:
 

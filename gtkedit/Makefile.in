@@ -77,7 +77,7 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distcopy:
-	$(CP) $(DIST) ../../mc-$(VERSION)/edit
+	$(CP) $(DIST) ../../mc-$(VERSION)/gtkedit
 
 depend dep: mcdep
 
