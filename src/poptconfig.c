@@ -6,16 +6,13 @@
 #include "config.h"
 #endif
 
+#include "poptalloca.h"
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-#if HAVE_ALLOCA_H
-# include <alloca.h>
-#endif
 
 #include "popt.h"
 #include "poptint.h"

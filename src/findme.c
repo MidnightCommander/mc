@@ -6,6 +6,7 @@
 #include "config.h"
 #endif
 
+#include "poptalloca.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,10 +15,6 @@
 /* access macros are not declared in non posix mode in unistd.h -
  don't try to use posix on NeXTstep 3.3 ! */ 
 #include <libc.h>
-#endif
-
-#if HAVE_ALLOCA_H
-# include <alloca.h>
 #endif
 
 #include "findme.h"

@@ -1,3 +1,17 @@
+1999-08-03  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* poptalloca.h: New file with definitions for alloca. Note: alloca
+	is defined as malloc on systems which fail to support alloca. Don't
+	include this file if you frequently use alloca.
+
+	* findme.c, popt*.c: include poptalloca.h
+
+	* Makefile.in: added poptalloca.h
+
+	* menu.c (create_menu): set minimum menu width to 20 characters as
+	it used to be (this was part of davids patches but I haven't
+	applied it, yet).
+
 1999-08-01  David Martin <dmartina@usa.net>
 
 	* menu.c (create_menu, menubar_drop_compute, menubar_paint_idx): 

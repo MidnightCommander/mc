@@ -54,7 +54,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 
     menu = (Menu) g_malloc (sizeof (*menu));
     menu->count = count;
-    menu->max_entry_len = 0;
+    menu->max_entry_len = 20;
     menu->entries = entries;
 
 #ifdef ENABLE_NLS
