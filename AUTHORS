@@ -7,7 +7,7 @@ Authors of GNU Midnight Commander:
 ==================================
 
 Andrej Borsenkow <borsenkow.msk@sni.de>
-Andrew V. Samoilov <kai@cmail.ru>
+Andrew V. Samoilov <sav@bcs.zp.ua>
 Ching Hui <mr854307@cs.nthu.edu.tw>
 Dugan Porter <dugan@b011.eunet.es>
 Fred Leeflang <fredl@nebula.ow.org>
@@ -79,5 +79,8 @@ Vadim Sinolitis <vvs@nsrd.npi.msu.su>
 
 Walery Studennikov <despair@sama.ru>
 Charset conversion support.
+
+Wayne Roberts <wroberts1@home.com>
+SMBfs support.
 
 Wim Osterholt <wim@djo.wtm.tudelft.nl>
