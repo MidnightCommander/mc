@@ -179,7 +179,7 @@ distclean: cleansourcelinks
 	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/gmc $(srcdir)/core
 	-$(RMF) $(srcdir)/a.out
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
-	-$(RMF) $(srcdir)/Makefile gui.tcl
+	-$(RMF) $(srcdir)/Makefile
 
 distcopy:
 	$(CP) $(DISTGNOME) ../../mc-$(VERSION)/gnome
