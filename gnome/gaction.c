@@ -33,7 +33,7 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 			_("Unable to execute\n\"%s\".\n\n"
 			"Please check it to see if it points to a valid command."),
 			fname);
-		
+
 	} else {
 		if (mime)
 			fix = g_strdup_printf (
@@ -41,7 +41,7 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 				"in the GNOME Control Center, and edit the default %s"
 				"-action for \"%s\"."),
 				action, mime);
-		else 
+		else
 			fix = g_strdup_printf (
 				_("\".\n\nTo fix this error, bring up this file's properties "
 				"and change the default %s-action."),
@@ -50,7 +50,7 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 		msg = g_strdup_printf (
 			_("Unable to %s\n\"%s\"\nwith the command:\n\"%s\"%s"),
 			action, fname, command, fix);
-			
+
 		g_free (fix);
 	}
 	msg_dialog = gnome_message_box_new (msg,
@@ -81,7 +81,7 @@ gmc_check_exec_string (const char *buf)
 	gint retval, i;
 	gchar *prog;
 	gchar **argv;
-	
+
 	gnome_config_make_vector (buf, &argc, &argv);
 	if (argc < 1)
 		return FALSE;
@@ -117,13 +117,9 @@ gmc_open_filename (char *fname, GList *args)
 	if (gnome_metadata_get (fname, "flags", &size, &buf) == 0){
 		needs_terminal = (strstr (buf, "needsterminal") != 0);
 		g_free (buf);
-	} else if (mime_type){
-		const char *flags;
-		
-		flags = gnome_mime_type_or_default (mime_type, "flags");
-		needs_terminal = (strstr (flags, "needsterminal") != 0);
-	}
-	
+	} else if (mime_type)
+		needs_terminal = gnome_mime_needsterminal (mime_type, NULL);
+
 	if (gnome_metadata_get (fname, "fm-open", &size, &buf) != 0) {
 		gnome_metadata_get (fname, "open", &size, &buf);
 	}
@@ -137,16 +133,16 @@ gmc_open_filename (char *fname, GList *args)
 	}
 	if (!mime_type)
 		return 0;
-	
+
 	cmd = gnome_mime_get_value (mime_type, "fm-open");
 	if (cmd == NULL) {
 		cmd = gnome_mime_get_value (mime_type, "open");
 	}
-	
+
 	if (cmd){
 		if (gmc_check_exec_string (cmd))
 			gmc_execute (fname, cmd, needs_terminal);
-		else 
+		else
 			gmc_unable_to_execute_dlg (fname, cmd, _("open"), mime_type);
 		return 1;
 	}
@@ -190,7 +186,7 @@ gmc_edit (char *fname)
 	mime_type = gnome_mime_type_or_default (fname, NULL);
 	if (mime_type){
 		cmd = gnome_mime_get_value (mime_type, "edit");
-	
+
 		if (cmd){
 			if (gmc_check_exec_string (cmd))
 				gmc_execute (fname, cmd, 0);
@@ -202,7 +198,7 @@ gmc_edit (char *fname)
 
 	gnome_config_push_prefix( "/editor/Editor/");
 	type = gnome_config_get_string ("EDITOR_TYPE=executable");
-	
+
 	if (strcmp (type, "mc-internal") == 0){
 		g_free (type);
 		do_edit (fname);
@@ -216,13 +212,13 @@ gmc_edit (char *fname)
 	if (on_terminal){
 		char *quoted = name_quote (fname, 0);
 		char *editor_cmd = g_strconcat (editor, " ", quoted, NULL);
-		
+
 		gnome_open_terminal_with_cmd (editor_cmd);
 		g_free (quoted);
 		g_free (editor_cmd);
 	} else {
 		char *cmd = g_strconcat (editor, " %s", NULL);
-		
+
 		gmc_execute (fname, cmd, 0);
 		g_free (cmd);
 	}
@@ -303,20 +299,20 @@ gmc_view_command (gchar *filename)
 	mime_type = gnome_mime_type_or_default (filename, NULL);
 	if (!mime_type)
 		return NULL;
-	
-		
+
+
 	cmd = gnome_mime_get_value (mime_type, "fm-view");
-	
+
 	if (cmd)
 		return g_strdup (cmd);
-	
+
 	cmd = gnome_mime_get_value (mime_type, "view");
 	if (cmd){
 		return g_strdup (cmd);
 	}
 	return NULL;
 }
-	
+
 int
 gmc_view (char *filename, int start_line)
 {

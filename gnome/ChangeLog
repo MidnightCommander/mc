@@ -1,3 +1,10 @@
+2000-01-02  Federico Mena Quintero  <federico@helixcode.com>
+
+	* gaction.c (gmc_open_filename): Use gnome_mime_needsterminal()
+	instead of gnome_mime_type_or_default().  This was a thinko.
+	Thanks to Aaron Lehmann <aaronl@vitelus.com> for pointing this
+	out.
+
 1999-12-28  Matthias Warkus  <mawa@iname.com>
 
 	* mc.keys.in.in: Added a whole slew of new icons.
