@@ -1,3 +1,11 @@
+1998-12-10 Paul Sheer <psheer@obsidian.co.za>
+
+	* syntax.c: perl syntax highlighting. syntax highlighting
+	bug fizes for python and sh.
+
+	* edit.c: new method of finding line offsets from line
+	number (for cooledit for python stuff).
+
 Mon Nov 30 21:10:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (copy_file_file): minor code beatifulling: replace goto's
