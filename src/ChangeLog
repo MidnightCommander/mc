@@ -1,3 +1,13 @@
+1999-11-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* layout.c: always display status line. It contains vital
+	information for ftpfs
+
+1999-03-19  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* profile.c (str_translate_newline_dup): someone likes to pass
+	NULL's around. Warn instead of segfault.
+
 1999-11-02  Miguel de Icaza  <miguel@gnu.org>
 
 	* main.c (OS_Setup): Do not warn if TERM is not set for the GNOME edition.

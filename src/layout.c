@@ -856,9 +856,22 @@ void print_vfs_message (char *msg, ...)
     g_vsnprintf (str, 126, msg, ap);
     va_end (ap);
     
-    if (midnight_shutdown || !the_hint || !the_hint->widget.parent)
+    if (midnight_shutdown)
 	return;
-    
+
+    if (!message_visible || !the_hint || !the_hint->widget.parent) {
+        int i;
+
+	if (!nice_rotating_dash || (ok_to_refresh <= 0))
+	    return;
+	move (0, 0);
+	printw (str);
+	for (i=strlen(str); i<COLS-1; i++)
+	    printw (" ");
+	mc_refresh ();
+	return;
+    }
+
     if (message_visible || (xterm_flag && xterm_hintbar)) {
         set_hintbar(str);
     }

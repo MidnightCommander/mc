@@ -1951,8 +1951,6 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    save_cwd = g_strdup (panel->cwd);
     }
 
-    ftpfs_hint_reread (0);
-
     /* Now, let's do the job */
 
     if (do_bg)
@@ -2141,7 +2139,6 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
         mc_setctl (save_dest, MCCTL_NO_STALE_DATA, NULL);
 	g_free (save_dest);
     }
-    ftpfs_hint_reread (1);
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);

@@ -78,6 +78,7 @@ str_untranslate_newline_dup (char *s)
 {
     int l = 0;
     char *p = s, *q;
+    g_return_val_if_fail(s, NULL);
     while (*p) {
 	l++;
 	l += (*p == '\n' || *p == TRANSLATION_CHAR);
@@ -113,6 +114,7 @@ static char *
 str_translate_newline_dup (char *s)
 {
     char *p, *q;
+    g_return_val_if_fail(s,NULL);
     q = p = g_malloc (strlen (s) + 1);
     if (!q)
 	return 0;
