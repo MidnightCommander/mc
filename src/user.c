@@ -544,7 +544,7 @@ static char *test_line (WEdit *edit_widget, char *p, int *result)
 
 /* FIXME: recode this routine on version 3.0, it could be cleaner */
 static void
-execute_menu_command (WEdit *edit_widget, char *commands)
+execute_menu_command (WEdit *edit_widget, const char *commands)
 {
     FILE *cmd_file;
     int  cmd_file_fd;
@@ -554,6 +554,7 @@ execute_menu_command (WEdit *edit_widget, char *commands)
     char prompt [80];
     int  col;
     char *file_name;
+    int run_view = 0;
 
     /* Skip menu entry title line */
     commands = strchr (commands, '\n');
@@ -561,7 +562,7 @@ execute_menu_command (WEdit *edit_widget, char *commands)
 	return;
     }
 
-    cmd_file_fd = mc_mkstemps(&file_name, "mcusr", SCRIPT_SUFFIX);
+    cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1){
 	message (1, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
@@ -621,15 +622,26 @@ execute_menu_command (WEdit *edit_widget, char *commands)
 	    }
 	} else {
 	    if (*commands == '%') {
-		do_quote = 1; /* Default: Quote expanded macro */
-		expand_prefix_found = 1;
+		int i = check_format_view (commands + 1);
+		if (i) {
+		    commands += i;
+		    run_view = 1;
+		} else {
+		    do_quote = 1; /* Default: Quote expanded macro */
+		    expand_prefix_found = 1;
+		}
 	    } else
 		fputc (*commands, cmd_file);
 	}
     }
     fclose (cmd_file);
     chmod (file_name, S_IRWXU);
-    shell_execute (file_name, 0);
+    if (run_view) {
+	run_view = 0;
+	view (file_name, 0, &run_view, 0);
+    } else {
+	shell_execute (file_name, 0);
+    }
     unlink (file_name);
     g_free (file_name);
 }
