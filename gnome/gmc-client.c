@@ -228,8 +228,8 @@ main (int argc, char **argv)
 	CORBA_ORB orb;
 	int result = FALSE;
 
-	bindtextdomain ("gmc-client", LOCALEDIR);
-	textdomain ("gmc-client");
+	bindtextdomain ("mc", LOCALEDIR);
+	textdomain ("mc");
 
 	CORBA_exception_init (&ev);
 	orb = gnome_CORBA_init_with_popt_table ("gmc-client", VERSION,
