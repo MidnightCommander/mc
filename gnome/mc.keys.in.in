@@ -26,10 +26,12 @@ application/x-rpm:
 	fm-open=%cd %p#rpm
 	open.install.Install this RPM=rpm -i %f
 	open.upgrade.Upgrade this RPM=rpm -U %f
+	icon-filename=@icondir@/gnome-pack-rpm.png
 
 application/x-deb:
 	fm-open=%cd %p#deb
 	fm-view=%view{ascii} dpkg-deb -c %f
+	icon-filename=@icondir@/gnome-pack-deb.png
 	
 application/zip:
 	icon-filename=@icondir@/zip.xpm
