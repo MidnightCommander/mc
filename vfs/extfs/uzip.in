@@ -21,7 +21,7 @@ mczipfs_list ()
 DOZIPINFO=no
 if test -n "$XZIPINFO"; then
     DOZIPINFO=
-    $XZIPINFO -l "$1" | @AWK@ -v uid=${UID-0} -v zipfile=$1 -v xunzip=${XUNZIP-unzip} '
+    $XZIPINFO -l "$1" | @AWK@ -v uid=${UID-0} -v zipfile="$1" -v xunzip=${XUNZIP-unzip} '
 /^Archive/ { next }
 /^[0-9]*\ file/ { next }
 /unx/ { 
@@ -107,7 +107,7 @@ mczipfs_copyin ()
 
 mczipfs_copyout ()
 {
-    $XUNZIP -p "$1" "$2" > $3 2>/dev/null
+    $XUNZIP -p "$1" "$2" > "$3" 2>/dev/null
 }
 
 mczipfs_rm ()
@@ -128,7 +128,7 @@ case "$1" in
   rm)      mczipfs_rm      "$2" "$3" ; exit 0;;
   rmdir)   mczipfs_rmdir   "$2" "$3" ; exit 0;;
   mkdir)   mczipfs_mkdir   "$2" "$3" ; exit 0;;
-  copyin)  mczipfs_copyin  "$2" "$3" $4 ; exit 0;;
-  copyout) mczipfs_copyout "$2" "$3" $4 ; exit 0;;
+  copyin)  mczipfs_copyin  "$2" "$3" "$4" ; exit 0;;
+  copyout) mczipfs_copyout "$2" "$3" "$4" ; exit 0;;
 esac
 exit 1

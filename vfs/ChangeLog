@@ -1,3 +1,9 @@
+1999-08-31  Federico Mena Quintero  <federico@redhat.com>
+
+	* extfs/uzip.in: Handle filenames with spaces better.  Thanks to
+	Spyridon Papadimitriou <Spyridon_Papadimitriou@gs91.sp.cs.cmu.edu>
+	for the patch.
+
 1999-08-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* ftpfs.c (translate_path): Remove static buffer from here.

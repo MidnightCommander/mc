@@ -7,7 +7,7 @@ bugs.gnome.org:
 		  874, 931, 956/1126, 1022.1, 1045, 1047, 904, 1329,
 		  1468, 1508, 1750
   Non-essential or feature: 779?, 448, 1133, 1121, 1122, 1251
-  Look at bug yourself: 1613, 1458, 1773
+  Look at bug yourself: 1773
 
   1006: Try going to 'ftp://ftp.cs.cuc.edu/' and then clicking on the
         root window. I think the pointer grab stays around or
