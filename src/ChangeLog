@@ -1,5 +1,8 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* user.h: Remove all dirty tricks with "MIDNIGHT" - they are not
+	needed anymore.
+
 	* global.h: Include io.h, pwd.h, grp.h and utime.h.  Adjust all
 	sources not to include them and to include global.h at the right
 	place.

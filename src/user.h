@@ -1,12 +1,8 @@
 #ifndef __USER_H
 #define __USER_H
 
-#ifndef MIDNIGHT
 #include "panel.h"
-#define MIDNIGHT
-#include "../edit/edit-widget.h"
-#undef MIDNIGHT
-#endif
+#include "edit/edit-widget.h"
 
 void user_menu_cmd (WEdit *edit_widget);
 char *expand_format (WEdit *edit_widget, char c, int quote);
