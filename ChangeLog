@@ -1,3 +1,10 @@
+2000-08-17  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.sgml: made compatible with sgml-tools 1.0.9
+	* doc/linuxdoc-sgml.diff: removed
+	* doc/Makefile.in: don't distribute linuxdoc-sgml.diff,
+	distribute gnome.sgml
+
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: fixes for improper usage of $(srcdir), cleanup

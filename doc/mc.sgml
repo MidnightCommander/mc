@@ -2,7 +2,7 @@
 <!--
   This is Linuxdoc-sgml source for GNU Midnight Commander documentation.
   In order to compile this into different formats, you have to use
-  linuxdoc-sgml utilities by Matt Welsh with a small patch for MC's sake.
+  sgml-tools by Matt Welsh.
 
   Note for those who will write this:
   Special characters ([ ] \ < > " | $ ~ # %) bring some troubles and should
@@ -11,7 +11,7 @@
    to achieve   |  Normal use  |  Inside tag (tag, em, tt, etc.)  |  Verbatim
      [		     &lsqb;            &lsqb;                          [
      ]		     &rsqb;            &rsqb;                          ]
-     \               &bslsh;           &bslshd;                     &bslshv;
+     \               &bsol;            &bsol;                        &bsol;
      <               &lt;              &lt;                            <
      >               &gt;              &gt;                            >
      </              &etago;           &etago;                       &etago;
@@ -31,7 +31,6 @@
 
 <article>
 
-<mantitle title="mc" sectnum="1" date="30 October 1998" name="mc - Visual shell for Unix-like systems">
 <title>GNU Midnight Commander User's Guide
 <author>Written by the Midnight Commander development team <tt/mc-devel@nuclecu.unam.mx/
 <date>v 3.0, 16 September 1995
@@ -59,11 +58,11 @@ for Unix-like operating systems.
 <descrip>
 <tag/-a/ Disables the usage of graphics characters for line drawing.
 <tag/-b/ Forces black and white display.
-<tag/-c/ Force color mode, please check the section <lnk name="Colors" id="Colors"> for
+<tag/-c/ Force color mode, please check the section <ref name="Colors" id="Colors"> for
 more information.
 <tag/-C arg/ Used to specify a different color set in the
 command line. The format of arg is documented in the
-<lnk name="Colors" id="Colors"> section.
+<ref name="Colors" id="Colors"> section.
 <tag/-d/ Disables mouse support.
 <tag/-f/ Displays the compiled-in search paths for Midnight
 Commander files.
@@ -138,7 +137,7 @@ parts. Almost all of the screen space is taken up by two
 directory panels. By default, the second bottommost line
 of the screen is the shell command line, and the bottom
 line shows the function key labels. The topmost line is
-the <lnk name="menu bar line" id="Menu Bar">. The menu bar line may not be visible,
+the <ref name="menu bar line" id="Menu Bar">. The menu bar line may not be visible,
 but appears if you click the topmost line with the mouse
 or press the F9 key.
 
@@ -149,14 +148,14 @@ operations take place on the current panel. Some file
 operations like Rename and Copy by default use the
 directory of the unselected panel as a destination (don't
 worry, they always ask you for confirmation first). For
-more information, see the sections on the <lnk name="Directory
-Panels" id="Directory Panels">, the <lnk name="Left and Right Menus" id="Left and Right Menus"> and the <lnk name="File Menu" id="File Menu">.
+more information, see the sections on the <ref name="Directory
+Panels" id="Directory Panels">, the <ref name="Left and Right Menus" id="Left and Right Menus"> and the <ref name="File Menu" id="File Menu">.
 
 You can execute system commands from the Midnight
 Commander by simply typing them. Everything you type will
 appear on the shell command line, and when you press Enter
 the Midnight Commander will execute the command line you
-typed; read the <lnk name="Shell Command Line" id="Shell Command Line"> and <lnk name="Input Line Keys" id="Input Line Keys">
+typed; read the <ref name="Shell Command Line" id="Shell Command Line"> and <ref name="Input Line Keys" id="Input Line Keys">
 sections to learn more about the command line.
 
 <sect>Mouse Support<label id="Mouse Support">
@@ -175,7 +174,7 @@ state).
 
 Double-clicking on a file will try to execute the command
 if it is an executable program; and if the
-<lnk name="extension file" id="Extension File Edit">
+<ref name="extension file" id="Extension File Edit">
 has a program specified for the file's extension, the
 specified program is executed.
 
@@ -186,12 +185,12 @@ If a mouse button is clicked on the top frame line of the
 directory panel, it is scrolled one pageful backward.
 Correspondingly, a click on the bottom frame line will
 cause a scroll of one pageful forward. This frame line
-method works also in the <lnk name="Help Viewer" id="How to use help"> and the
-<lnk name="Directory Tree" id="Directory Tree">.
+method works also in the <ref name="Help Viewer" id="How to use help"> and the
+<ref name="Directory Tree" id="Directory Tree">.
 
 The default auto repeat rate for the mouse buttons is 400
 milliseconds. This may be changed to other values by
-editing the <lnk name="~/.mc/ini" id="Save Setup"> file and changing the
+editing the <ref name="~/.mc/ini" id="Save Setup"> file and changing the
 <em/mouse_repeat_rate/ parameter.
 
 If you are running the Commander with the mouse support,
@@ -221,26 +220,26 @@ approximation to the GNU Emacs editor's key bindings.
 There are many sections which tell about the keys. The
 following are the most important.
 
-The <lnk name="File Menu" id="File Menu"> section documents
+The <ref name="File Menu" id="File Menu"> section documents
 the keyboard shortcuts for the commands appearing in the File menu.
 This section
 includes the function keys. Most of these commands perform
 some action, usually on the selected file or the tagged
 files.
 
-The <lnk name="Directory Panels" id="Directory Panels">
+The <ref name="Directory Panels" id="Directory Panels">
 section documents the keys which
 select a file or tag files as a target for a later action
 (the action is usually one from the file menu).
 
-The <lnk name="Shell Command Line" id="Shell Command Line">
+The <ref name="Shell Command Line" id="Shell Command Line">
 section list the keys which are
 used for entering and editing command lines. Most of these
 copy file names and such from the directory panels to the
 command line (to avoid excessive typing) or access the
 command line history.
 
-<lnk name="Input Line Keys" id="Input Line Keys">
+<ref name="Input Line Keys" id="Input Line Keys">
 are used for editing input lines. This
 means both the command line and the input lines in the
 query dialogs.
@@ -260,13 +259,13 @@ Commander does a <bf/chdir(2)/ to the selected directory and
 reloads the information on the panel; if the selection is
 an executable file then it is executed. Finally, if the
 extension of the selected file name matches one of the
-extensions in the <lnk name="extensions file" id="Extension File Edit"> then the corresponding
+extensions in the <ref name="extensions file" id="Extension File Edit"> then the corresponding
 command is executed.
 <tag/C-l/ Repaint all the information in the Midnight
 Commander.
-<tag/C-x c/ Run the <lnk name="Chmod" id="Chmod"> command on a file or on the tagged
+<tag/C-x c/ Run the <ref name="Chmod" id="Chmod"> command on a file or on the tagged
 files.
-<tag/C-x o/ Run the <lnk name="Chown" id="Chown"> command on the current file or on the
+<tag/C-x o/ Run the <ref name="Chown" id="Chown"> command on the current file or on the
 tagged files.
 <tag/C-x l/ Run the link command.
 <tag/C-x s/ Run the symbolic link command.
@@ -275,12 +274,12 @@ the place specified in the dialog (defaults to a symlink in the other
 panel's directory), using a relative shortest possible symlink.
 <tag/C-x i/ Set the other panel display mode to information.
 <tag/C-x q/ Set the other panel display mode to quick view.
-<tag/C-x !/ Execute the <lnk name="External panelize" id="External panelize"> command.
-<tag/C-x h/ Run the <lnk name="add directory to hotlist" id="Hotlist"> command.
+<tag/C-x !/ Execute the <ref name="External panelize" id="External panelize"> command.
+<tag/C-x h/ Run the <ref name="add directory to hotlist" id="Hotlist"> command.
 <tag/M-!/ Executes the Filtered view command, described in the
-<lnk name="view command" id="Internal File Viewer">.
-<tag/M-?/ Executes the <lnk name="Find file" id="Find File"> command.
-<tag/M-c/ Pops up the <lnk name="quick cd" id="Quick cd"> dialog.
+<ref name="view command" id="Internal File Viewer">.
+<tag/M-?/ Executes the <ref name="Find file" id="Find File"> command.
+<tag/M-c/ Pops up the <ref name="quick cd" id="Quick cd"> dialog.
 <tag/C-o/ When the program is being run in the Linux or SCO console or
 under an xterm, it will show you the output of the
 previous command. When ran on the Linux console, the
@@ -301,7 +300,7 @@ suspended application.
 <p>
 This section lists the keys which operate on the directory
 panels. If you want to know how to change the appearance
-of the panels take a look at the section on <lnk name="Left and Right
+of the panels take a look at the section on <ref name="Left and Right
 Menus" id="Left and Right Menus">.
 
 <descrip>
@@ -326,8 +325,8 @@ match is searched for.
 <tag/M-t/Toggle the current display listing to show the next display listing
 mode.  With this it is possible to quickly switch from long listing
 to regular listing and the user defined listing mode.
-<tag/C-&bslshd; (control-backslash)/ Show the
-<lnk name="directory hotlist" id="Hotlist"> and change to the selected
+<tag/C-&bsol; (control-backslash)/ Show the
+<ref name="directory hotlist" id="Hotlist"> and change to the selected
 directory.
 <tag/+ (plus)/ This is used to select (tag) a group of files.
 The Midnight Commander will prompt for a regular
@@ -339,7 +338,7 @@ If <em/Shell Patterns/ is off, then the tagging of files is done with
 normal regular expressions (see <bf/ed (1)/).
 If the expression starts or ends with a slash (<tt>/</tt>), then it
 will select directories instead of files.
-<tag/&bslshd; (backslash)/ Use the "&bslsh;" key to unselect a group of
+<tag/&bsol; (backslash)/ Use the "&bsol;" key to unselect a group of
 files. This is the opposite of the Plus key.
 <tag/up-key, C-p/ Move the selection bar to the previous entry
 in the panel.
@@ -380,7 +379,7 @@ command line.
 <tag/C-Enter/ Same a M-Enter, this one only works on the Linux
 console.
 <tag/M-Tab/ Does the filename, command, variable, username and
-hostname <lnk name="completion" id="Completion"> for you.
+hostname <ref name="completion" id="Completion"> for you.
 <tag/C-x t, C-x C-t/ Copy the tagged files (or if there are no
 tagged files, the selected file) of the current panel (<tt/C-x t/) 
 or of the other panel (<tt/C-x C-t/) to the command line.
@@ -433,7 +432,7 @@ backward.
 <sect1>Input Line Keys<label id="Input Line Keys">
 
 <p>
-The input lines (they are used for the <lnk name="command line" id="Shell Command Line"> and
+The input lines (they are used for the <ref name="command line" id="Shell Command Line"> and
 for the query dialogs in the program) accept these keys:
 
 <descrip>
@@ -458,7 +457,7 @@ history. <tt/M-p/ takes you to the last entry, <tt/M-n/ takes you to
 the next one.
 <tag/M-C-h, M-Backspace/ delete one word backward.
 <tag/M-Tab/ does the filename, command, variable, username and
-hostname <lnk name="completion" id="Completion"> for you.
+hostname <ref name="completion" id="Completion"> for you.
 </descrip>
 
 <sect>Menu Bar<label id="Menu Bar">
@@ -468,13 +467,13 @@ The menu bar pops up when you press F9 or click the mouse
 on the top row of the screen. The menu bar has five menus:
 <em/Left/, <em/File/, <em/Command/, <em/Options/ and <em/Right/.
 
-The <lnk name="Left and Right Menus" id="Left and Right Menus"> allow you to modify the
+The <ref name="Left and Right Menus" id="Left and Right Menus"> allow you to modify the
 appearance of the left and right directory panels.
 
-The <lnk name="File Menu" id="File Menu"> lists the actions you can perform on the
+The <ref name="File Menu" id="File Menu"> lists the actions you can perform on the
 currently selected file or the tagged files.
 
-The <lnk name="Command Menu" id="Command Menu"> lists the actions which are more general
+The <ref name="Command Menu" id="Command Menu"> lists the actions which are more general
 and bear no relation to the currently selected file or the
 tagged files.
 
@@ -585,11 +584,11 @@ Panels may also be set to the following modes:
 <tag/Info/ The info view display information related to the
 currently selected file and if possible information about
 the current file system.
-<tag/Tree/ The tree view is quite similar to the <lnk name="directory
+<tag/Tree/ The tree view is quite similar to the <ref name="directory
 tree" id="Directory Tree"> feature. See the section about it for more
 information.
 <tag/Quick View/ In this mode, the panel will switch to a
-reduced <lnk name="viewer" id="Internal File Viewer"> that displays the contents of the
+reduced <ref name="viewer" id="Internal File Viewer"> that displays the contents of the
 currently selected file, if you select the panel (with the
 tab key or the mouse), you will have access to the usual
 viewer commands.
@@ -606,7 +605,7 @@ sort order and you may also specify if you want to sort in
 reverse order by checking the reverse box.
 
 By default directories are sorted before files but this
-can be changed from the <lnk name="Configuration" id="Configuration">
+can be changed from the <ref name="Configuration" id="Configuration">
 (option <em/"Mix all files"/).
 
 <sect2>Filter...<label id="Filter...">
@@ -625,7 +624,7 @@ The reread command reload the list of files in the
 directory. It is useful if other processes have created or
 removed files. If you have panelized file names in a panel
 this will reload the directory contents and remove the
-panelized information (See the section <lnk name="External panelize" id="External panelize">
+panelized information (See the section <ref name="External panelize" id="External panelize">
 for more information).
 
 <sect1>File Menu<label id="File Menu">
@@ -645,18 +644,18 @@ shortcuts in parentheses):
 
 <descrip>
 <tag/Help (F1)/ Invokes the built-in hypertext help viewer. Inside the
-<lnk name="help viewer" id="How to use help">, you can use the Tab key to select the next
+<ref name="help viewer" id="How to use help">, you can use the Tab key to select the next
 link and the Enter key to follow that link. The keys Space
 and Backspace are used to move forward and backward in a
 help page. Press F1 again to get the full list of accepted
 keys.
-<tag/Menu (F2)/ Invoke the <lnk name="user menu" id="Menu File Edit">.
+<tag/Menu (F2)/ Invoke the <ref name="user menu" id="Menu File Edit">.
 The user menu provides an easy way
 to provide users with a menu and add extra features to the
 Midnight Commander.
 <tag/View (F3, Shift-F3)/ View the currently selected file.
 By default this invokes
-the <lnk name="Internal File Viewer" id="Internal File Viewer"> but if the option
+the <ref name="Internal File Viewer" id="Internal File Viewer"> but if the option
 <em/Use internal view/ is off, it invokes an external file viewer specified
 by the <tt/PAGER/ environment variable. If <tt/PAGER/ is undefined,
 the <bf/view/ command is invoked. If you use <tt/Shift-F3/
@@ -668,7 +667,7 @@ the output from such command is shown in the internal file
 viewer.
 <tag/Edit (F4)/ Currently it invokes the <tt/vi/ editor, or the editor
 specified in the <tt/EDITOR/ environment variable, or the
-<lnk name="Internal File Editor" id="Internal File Editor">
+<ref name="Internal File Editor" id="Internal File Editor">
 if the use_internal_edit option is on.
 <tag/Copy (F5)/ Pop up an input dialog with destination that defaults to
 the directory in the non-selected panel and copies the
@@ -676,12 +675,12 @@ currently selected file (or the tagged files, if there is
 at least one file tagged) to the directory specified by
 the user in the input dialog. During this process, you can
 press C-c or ESC to abort the operation. For details about
-source mask (which will be usually either * or ^&bslsh;(.*&bslsh;)&dollar;
+source mask (which will be usually either * or ^&bsol;(.*&bsol;)&dollar;
 depending on setting of Use shell patterns) and possible
-wildcards in the destination see <lnk name="Mask copy/rename" id="Mask Copy/Rename">.
+wildcards in the destination see <ref name="Mask copy/rename" id="Mask Copy/Rename">.
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing M-b in the dialog
-box). The <lnk name="Background Jobs" id="Background jobs"> command is
+box). The <ref name="Background Jobs" id="Background jobs"> command is
 used to control the background process.
 <tag/Link (C-x l)/ Create a hard link to the current file.
 <tag/SymLink (C-x s)/ Create a symbolic link to the current file. To those of
@@ -719,14 +718,14 @@ abort the operation. For more details look at Copy
 operation above, most of the things are quite similar.
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing M-b in the dialog
-box). The <lnk name="Background Jobs" id="Background jobs"> command is
+box). The <ref name="Background Jobs" id="Background jobs"> command is
 used to control the background process.
 <tag/Mkdir (F7)/ Pop up an input dialog and creates the directory
 specified.
 <tag/Delete (F8)/ Delete the currently selected file or the tagged files in
 the currently selected panel. During the process, you can
 press <tt/C-c/ or <tt/ESC/ to abort the operation.
-<tag/Quick cd (M-c)/ Use the <lnk name="quick cd" id="Quick cd"> command if you have full
+<tag/Quick cd (M-c)/ Use the <ref name="quick cd" id="Quick cd"> command if you have full
 command line and want to cd somewhere.
 <tag/Select group (+)/ This is used to select (tag) a group of files. The
 Midnight Commander will prompt for a regular expression
@@ -738,7 +737,7 @@ then the tagging of files is done with normal regular
 expressions (see <bf/ed (1)/).
 To mark directories instead of files, the expression must
 start or end with a <tt>/</tt>.
-<tag/Unselect group (&bslshd;)/ Used for unselecting a group of files.
+<tag/Unselect group (&bsol;)/ Used for unselecting a group of files.
 This is the opposite of the <em/Select group/ command.
 <tag/Quit (F10, Shift-F10)/ Terminate the Midnight Commander.
 <tt/Shift-F10/ is used when you want to quit and you are using the shell wrapper.
@@ -751,21 +750,21 @@ at the directory where you started the Midnight Commander.
 
 <p>
 This command is useful if you have a full command line and
-want to <lnk name="cd" id="The cd internal command"> somewhere without
+want to <ref name="cd" id="The cd internal command"> somewhere without
 having to yank and paste the command line. This command pops up a
 small dialog,
 where you enter everything you would enter after <tt/cd/ on
 the command line and then you press enter. This features
-all the things that are already in the <lnk name="internal cd
+all the things that are already in the <ref name="internal cd
 command" id="The cd internal command">.
 
 <sect1>Command Menu<label id="Command Menu">
 
 <p>
-The <lnk name="Directory tree" id="Directory Tree"> command shows a tree figure of the
+The <ref name="Directory tree" id="Directory Tree"> command shows a tree figure of the
 directories.
 
-The <lnk name="Find file" id="Find File"> command allows you to search for a specific
+The <ref name="Find file" id="Find File"> command allows you to search for a specific
 file. The "Swap panels" command swaps the contents of the
 two directory panels.
 
@@ -788,17 +787,17 @@ commands. The selected command is copied to the command
 line. The command history can also be accessed by typing
 <tt/M-p/ or <tt/M-n/.
 
-The <lnk name="Directory hotlist" id="Hotlist"> (C-&bslsh;) command makes changing of the
+The <ref name="Directory hotlist" id="Hotlist"> (C-&bsol;) command makes changing of the
 current directory to often used directories faster.
 
-The <lnk name="External panelize" id="External panelize"> allows you to execute an external
+The <ref name="External panelize" id="External panelize"> allows you to execute an external
 program, and make the output of that program the contents
 of the current panel.
 
-<lnk name="Extension file edit" id="Extension File Edit"> command allows you to specify
+<ref name="Extension file edit" id="Extension File Edit"> command allows you to specify
 programs to executed when you try to execute, view, edit
 and do a bunch of other thing on files with certain
-extensions (filename endings). The <lnk name="Menu file edit" id="Menu File Edit">
+extensions (filename endings). The <ref name="Menu file edit" id="Menu File Edit">
 command may be used for editing the user menu (which
 appears by pressing <tt/F2/).
 
@@ -821,7 +820,7 @@ missing, move to its parent directory and press <tt/C-r/ (or
 
 You can use the following keys:
 
-<lnk name="General movement keys" id="General Movement Keys"> are accepted.
+<ref name="General movement keys" id="General Movement Keys"> are accepted.
 
 <descrip>
 <tag/Enter/ In the directory tree, exits the directory tree and
@@ -872,7 +871,7 @@ directory.
 </descrip>
 
 The mouse is supported. A double-click behaves like <tt/Enter/.
-See also the section on <lnk name="mouse support" id="Mouse Support">.
+See also the section on <ref name="mouse support" id="Mouse Support">.
 
 <sect2>Find File<label id="Find File">
 
@@ -880,12 +879,12 @@ See also the section on <lnk name="mouse support" id="Mouse Support">.
 The Find File feature first asks for the start directory
 for the search and the filename to be searched for. By
 pressing the Tree button you can select the start
-directory from the <lnk name="directory tree" id="Directory Tree"> figure. 
+directory from the <ref name="directory tree" id="Directory Tree"> figure. 
 
 The contents field accepts regular expressions similar to egrep(1). That
 means you have to escape characters with a special meaning to egrep with
-"&bslsh;", e.g. if you search for "strcmp (" you will have to input 
-"strcmp &bslsh;(" (without the double quotes).
+"&bsol;", e.g. if you search for "strcmp (" you will have to input 
+"strcmp &bsol;(" (without the double quotes).
 
 You can start the search by pressing the Ok button. During the search you 
 can stop from the Stop button and continue from the Start button.
@@ -916,7 +915,7 @@ example:
 find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 </verb></tscreen>
 
-You may consider using the <lnk name="External panelize" id="External panelize"> command
+You may consider using the <ref name="External panelize" id="External panelize"> command
 instead. <bf/Find file command/ is for simple queries only,
 while using <bf/External panelize/ you can do as mysterious
 searches as you would like.
@@ -974,7 +973,7 @@ for a label for the directory.
 
 This makes cd to often used directories faster. You may also
 consider using the <tt/CDPATH/ variable as described in
-<lnk name="internal cd command" id="The cd internal command"> description.
+<ref name="internal cd command" id="The cd internal command"> description.
 
 <sect2>Extension File Edit<label id="Extension File Edit">
 
@@ -1017,7 +1016,7 @@ extension dependent pop-up menu). <em/Icon/ name is reserved
 for future use by mc.
 
 <tt/command/ is any one-line shell command, with the simple
-<lnk name="macro substitution" id="Macro Substitution">.
+<ref name="macro substitution" id="Macro Substitution">.
 
 Target are evaluated from top to bottom (order is thus
 important). If some actions are missing, search continues
@@ -1057,7 +1056,7 @@ directory (usually <tt>/usr/tmp</tt>) and then that file is
 executed. This allows the user to put normal shell
 constructs in the menus. Also simple macro substitution
 takes place before executing the menu code. For more
-information, see <lnk name="macro substitution" id="Macro Substitution">.
+information, see <ref name="macro substitution" id="Macro Substitution">.
 
 Here is a sample mc.menu file:
 
@@ -1199,27 +1198,27 @@ off in several dialogs which are accessible from this menu. Options
 are enabled if they have an asterisk or "x" in front of them. 
 
 <p>
-The <lnk name="Configuration" id="Configuration"> command pops up a dialog from which you
+The <ref name="Configuration" id="Configuration"> command pops up a dialog from which you
 can change most of settings of the Midnight Commander.
 
-The <lnk name="Display bits" id="Display bits"> command pops up a dialog from which you
+The <ref name="Display bits" id="Display bits"> command pops up a dialog from which you
 may select which characters is your terminal able to
 display.
 
-The <lnk name="Confirmation" id="Confirmation"> command pops up a dialog from which you
+The <ref name="Confirmation" id="Confirmation"> command pops up a dialog from which you
 specify which actions you want to confirm.
 
-The <lnk name="Learn keys" id="Learn keys"> command pops up a dialog from which you
+The <ref name="Learn keys" id="Learn keys"> command pops up a dialog from which you
 test some keys which are not working on some terminals and
 you may fix them.
 
-The <lnk name="Virtual FS" id="Virtual FS"> command pops up a dialog from which you
+The <ref name="Virtual FS" id="Virtual FS"> command pops up a dialog from which you
 specify some VFS related options.
 
-The <lnk name="Layout" id="Layout"> command pops up a dialog from which you specify
+The <ref name="Layout" id="Layout"> command pops up a dialog from which you specify
 a bunch of options how mc looks like on the screen.
 
-The <lnk name="Save setup" id="Save Setup"> command saves the current settings of the
+The <ref name="Save setup" id="Save Setup"> command saves the current settings of the
 Left, Right and Options menus. A small number of other
 settings is saved, too.
 
@@ -1311,16 +1310,16 @@ non-unixers.
 built-in file editor is used to edit files. If the option
 is disabled, the editor specified in the <tt/EDITOR/ environment
 variable is used. If no editor is specified, <bf/vi/
-is used. See the section on the <lnk name="internal file
+is used. See the section on the <ref name="internal file
 editor" id="Internal File Editor">.
 <tag/Use internal viewer/ If this option is enabled, the
 built-in file viewer is used to view files. If the option
 is disabled, the pager specified in the <tt/PAGER/ environment
 variable is used. If no pager is specified, the <bf/view/
-command is used. See the section on the <lnk name="internal file
+command is used. See the section on the <ref name="internal file
 viewer" id="Internal File Viewer">.
 <tag/Complete: show all/ By default the Midnight Commander
-pops up all possible <lnk name="completions" id="Completion"> if the completion is
+pops up all possible <ref name="completions" id="Completion"> if the completion is
 ambiguous if you press <tt/M-Tab/ for the second time, for the
 first time it just completes as much as possible and in
 the case of ambiguity beeps. If you want to see all the
@@ -1334,9 +1333,9 @@ you may use the arrows keys to automatically chdir if the
 current selection is a subdirectory and the shell command
 line is empty. By default, this setting is off.
 <tag/Advanced chown/ If this option is enabled, the 
-<lnk name="Advanced Chown" id="Advanced Chown"> 
+<ref name="Advanced Chown" id="Advanced Chown"> 
 command will be invoked if you run the 
-<lnk name="Chmod" id="Chmod"> or <lnk name="Chown" id="Chown"> command.
+<ref name="Chmod" id="Chmod"> or <ref name="Chown" id="Chown"> command.
 <tag/Cd follows links/ This option, if set, causes the Midnight
 Commander to follow the logical chain of directories when
 changing current directory either in the panels, or using
@@ -1412,7 +1411,7 @@ were working properly and you had not to fix any key, then
 
 <p>
 This option gives you control over the settings of the
-<lnk name="Virtual File System" id="Virtual File System"> information cache.
+<ref name="Virtual File System" id="Virtual File System"> information cache.
 
 The Midnight Commander keeps in memory the information
 related to some of the virtual file systems to speed up
@@ -1450,7 +1449,7 @@ timeout, all of the resources associated with the
 file system will be freed. The default timeout is set to
 one minute.
 
-The <lnk name ="FTP File System" id="FTP File System">
+The <ref name ="FTP File System" id="FTP File System">
 keeps the directory listing it fetches from a ftp server
 in a cache.  The cache
 expire time is configurable with the option 
@@ -1461,7 +1460,7 @@ ftp server.
 
 Moreover you can define a proxy host for doing ftp transfers 
 and configure the Midnight Commander to always use the proxy host. See
-the section on <lnk name ="FTP File System" id="FTP File System">
+the section on <ref name ="FTP File System" id="FTP File System">
 for more information.
 
 <sect2>Layout<label id="Layout">
@@ -1480,9 +1479,9 @@ be equal or you can specify an unequal split.
 
 By default all contents of the directory panels are displayed with 
 the same color, but you can specify whether <em/permissions/ and 
-<em/file types/ are highlighted with special <lnk name="Colors" id="Colors">.
+<em/file types/ are highlighted with special <ref name="Colors" id="Colors">.
 If permission highlighting is enabled, the parts of the <em/perm/ 
-and <em/mode/ <lnk name="display fields" lnk id="Listing Mode..."> 
+and <em/mode/ <ref name="display fields" id="Listing Mode..."> 
 which are valid for the user running Midnight Commander
 are highlighted with the color defined with the <em/selected/ 
 keyword.
@@ -1504,15 +1503,15 @@ the system-wide configuration file, located in
 file doesn't exist, MC uses the default settings.
 
 The <em/Save Setup/ command creates the <tt>&tilde;/.mc/ini</tt> file by
-saving the current settings of the <lnk name="Left, Right" id="Left and Right Menus"> and
-<lnk name="Options" id="Options Menu"> menus.
+saving the current settings of the <ref name="Left, Right" id="Left and Right Menus"> and
+<ref name="Options" id="Options Menu"> menus.
 
 If you activate the <em/auto save setup/ option, MC will always
 save the current settings when exiting.
 
 There also exist settings which can't be changed from the
 menus. To change these settings you have to edit the setup
-file with your favorite editor. See the section on <lnk name="Special
+file with your favorite editor. See the section on <ref name="Special
 Settings" id="Special Settings"> for more information.
 
 <sect>Executing operating system commands<label id="Executing operating system commands">
@@ -1525,9 +1524,9 @@ of the panels and hitting <tt/Enter/.
 
 If you press Enter over a file that is not executable, the
 Midnight Commander checks the extension of the selected
-file against the extensions in the <lnk name="Extensions File" id="Extension File Edit">. If a
+file against the extensions in the <ref name="Extensions File" id="Extension File Edit">. If a
 match is found then the code associated with that
-extension is executed. A very simple <lnk name="macro expansion" id="Macro Substitution">
+extension is executed. A very simple <ref name="macro expansion" id="Macro Substitution">
 takes place before executing the command.
 
 <sect1>The cd internal command<label id="The cd internal command">
@@ -1568,8 +1567,8 @@ it's relative name (for example cd linux could take you to
 <sect1>Macro Substitution<label id="Macro Substitution">
 
 <p>
-When accessing a <lnk name="user menu" id="Menu File Edit"> or executing an
-<lnk name="extension dependent command" id="Extension File Edit">
+When accessing a <ref name="user menu" id="Menu File Edit"> or executing an
+<ref name="extension dependent command" id="Extension File Edit">
 or running a command from the command
 line input, a simple macro substitution takes place.
 
@@ -1613,14 +1612,14 @@ because next time there will be no tagged files.
 there are any. Otherwise the current file.
 
 <tag/"&percnt;q"/ Dropped files. In all places except in the Drop
-action of the <lnk name="mc.ext file" id="Extension File Edit">, this will become a null
+action of the <ref name="mc.ext file" id="Extension File Edit">, this will become a null
 string, in the Drop action it will be replaced with a
 space separated list of files that were dropped on the
 file.
 
 <tag/"&percnt;cd"/ This is a special macro that is used to change the
 current directory to the directory specified in front of
-it. This is used primarily as an interface to the <lnk name="Virtual
+it. This is used primarily as an interface to the <ref name="Virtual
 File System" id="Virtual File System">.
 Possible to use only in mc.ext .
 
@@ -1678,7 +1677,7 @@ An extra added feature of using the subshell is that the
 prompt displayed by the Midnight Commander is the same
 prompt that you are currently using in your shell.
 
-The <lnk name="Options" id="Options"> section has more
+The <ref name="Options" id="Options"> section has more
 information on how you can control the subshell code.
 
 <sect1>Controlling Midnight Commander<label id="Controlling Midnight Commander">
@@ -1767,8 +1766,8 @@ file. The hot key for this command is <tt/C-x o/.
 <sect>Advanced Chown<label id="Advanced Chown">
 
 <p>
-The Advanced Chown command is the <lnk name="Chmod" id="Chmod">
-and <lnk name="Chown" id="Chown"> command combined into one
+The Advanced Chown command is the <ref name="Chmod" id="Chmod">
+and <ref name="Chown" id="Chown"> command combined into one
 window. You can change the permissions and owner/group of
 files at once.
 
@@ -1873,13 +1872,13 @@ will be respected.
 When the shell patterns option is on you can use the '*'
 and '?' wildcards in the source mask. They work like they
 do in the shell. In the target mask only the '*' and
-'&bslsh;&lt;digit&gt;' wildcards are allowed. The first '*' wildcard in
+'&bsol;&lt;digit&gt;' wildcards are allowed. The first '*' wildcard in
 the target mask corresponds to the first wildcard group in
 the source mask, the second '*' corresponds to the second
-group and so on. The '&bslsh;1' wildcard corresponds to the
-first wildcard group in the source mask, the '&bslsh;2' wildcard
+group and so on. The '&bsol;1' wildcard corresponds to the
+first wildcard group in the source mask, the '&bsol;2' wildcard
 corresponds to the second group and so on all the way up
-to '&bslsh;9'. The '&bslsh;0' wildcard is the whole filename of the
+to '&bsol;9'. The '&bsol;0' wildcard is the whole filename of the
 source file.
 
 Two examples:
@@ -1890,12 +1889,12 @@ the copy will be "foo.tgz" in "/bla".
 
 Let's suppose you want to swap basename and extension so
 that "file.c" will become "c.file" and so on. The source
-mask for this is "*.*" and the destination is "&bslsh;2.&bslsh;1".
+mask for this is "*.*" and the destination is "&bsol;2.&bsol;1".
 
 <tag/Use shell patterns off/
 
 When the shell patterns option is off the MC doesn't do
-automatic grouping anymore. You must use '&bslsh;(...&bslsh;)'
+automatic grouping anymore. You must use '&bsol;(...&bsol;)'
 expressions in the source mask to specify meaning for the
 wildcards in the target mask. This is more flexible but
 also requires more typing. Otherwise target masks are
@@ -1904,37 +1903,37 @@ on.
 
 Two examples:
 
-If the source mask is "^&bslsh;(.*&bslsh;)&bslsh;.tar&bslsh;.gz&dollar;", the destination
+If the source mask is "^&bsol;(.*&bsol;)&bsol;.tar&bsol;.gz&dollar;", the destination
 is "/bla/*.tgz" and the file to be copied is "foo.tar.gz",
 the copy will be "/bla/foo.tgz".
 
 Let's suppose you want to swap basename and extension so
 that "file.c" will become "c.file" and so on. The source
-mask for this is "^&bslsh;(.*&bslsh;)&bslsh;.&bslsh;(.*&bslsh;)&dollar;" and the destination is
-"&bslsh;2.&bslsh;1".
+mask for this is "^&bsol;(.*&bsol;)&bsol;.&bsol;(.*&bsol;)&dollar;" and the destination is
+"&bsol;2.&bsol;1".
 
 <tag/Case Conversions/
 
 You can also change the case of the filenames. If you use
-'&bslsh;u' or '&bslsh;l' in the target mask the next character will be
+'&bsol;u' or '&bsol;l' in the target mask the next character will be
 converted to uppercase or lowercase correspondingly.
 
-If you use '&bslsh;U' or '&bslsh;L' in the target mask the next
+If you use '&bsol;U' or '&bsol;L' in the target mask the next
 characters will be converted to uppercase or lowercase
-correspondingly up to the next '&bslsh;E' or next '&bslsh;U', '&bslsh;L' or
+correspondingly up to the next '&bsol;E' or next '&bsol;U', '&bsol;L' or
 the end of the file name.
 
-The '&bslsh;u' and '&bslsh;l' are stronger than '&bslsh;U' and '&bslsh;L'.
+The '&bsol;u' and '&bsol;l' are stronger than '&bsol;U' and '&bsol;L'.
 
 For example, if the source mask is '*' (shell patterns on)
-or '^&bslsh;(.*&bslsh;)&dollar;' (shell patterns off) and the target mask is
-'&bslsh;L&bslsh;u*' the file names will be converted to have initial
+or '^&bsol;(.*&bsol;)&dollar;' (shell patterns off) and the target mask is
+'&bsol;L&bsol;u*' the file names will be converted to have initial
 upper case and otherwise lower case.
 
 </descrip>
 
-You can also use '&bslsh;' as a quote character. For example,
-'&bslsh;&bslsh;' is a backslash and '&bslsh;*' is an asterisk.
+You can also use '&bsol;' as a quote character. For example,
+'&bsol;&bsol;' is a backslash and '&bsol;*' is an asterisk.
 
 <sect>Internal File Viewer<label id="Internal File Viewer">
 
@@ -2008,7 +2007,7 @@ label is the other mode than current.
 </descrip>
 
 It's possible to instruct the file viewer how to display a
-file, look at the <lnk name="Extension File Edit section" id="Extension File Edit">
+file, look at the <ref name="Extension File Edit section" id="Extension File Edit">
 
 <sect>Internal File Editor<label id="Internal File Editor">
 
@@ -2135,7 +2134,7 @@ on all input lines, command completion is command line
 specific. If the completion is ambiguous (there are more
 different possibilities), MC beeps and the following
 action depends on the setting of the <em/Complete: show all/
-option in the <lnk name="Configuration" id="Configuration">
+option in the <ref name="Configuration" id="Configuration">
 dialog. If it is enabled, a
 list of all possibilities pops up next to the current
 position and you can select with the arrow keys and <tt/Enter/
@@ -2148,7 +2147,7 @@ previous characters will be highlighted. As soon as there
 is no ambiguity, dialog disappears, but you can hide it by
 canceling keys <tt/Esc,/ <tt/F10/ and left and right arrow keys. If
 <em/Complete: show all/
-<lnk name="Configuration" id="Configuration"> is disabled, 
+<ref name="Configuration" id="Configuration"> is disabled, 
 the dialog pops up
 only if you press <tt/M-Tab/ for the second time, for the first
 time MC just beeps.
@@ -2210,11 +2209,11 @@ Examples:
 To connect to sites behind a firewall, you will need to use the prefix
 ftp://! (ie, with a bang character after the double slash) to make the
 Midnight Commander use a proxy host for doing the ftp transfer.  You
-can define the proxy host in the <lnk name="Virtual FS" id="Virtual FS">
+can define the proxy host in the <ref name="Virtual FS" id="Virtual FS">
 Virtual File System dialog box.
 
 Another option to set is the <em/Always use ftp proxy/
-option in the <lnk name="Virtual FS" id="Virtual FS">
+option in the <ref name="Virtual FS" id="Virtual FS">
 dialog box.  This will configure the program
 to always use the proxy host.  If this variable is set, the program
 will do two things: consult the <tt>@prefix@/lib/mc.no_proxy</tt> file for
@@ -2228,7 +2227,7 @@ want to force the program to use the passive-open mode.  To use this,
 set the <em/ftpfs_use_passive_connections/ option in the initialization file.
 
 The Midnight Commander keeps the directory listing in a cache.  The cache
-expire time is configurable in the <lnk name="Virtual FS" id="Virtual FS">
+expire time is configurable in the <ref name="Virtual FS" id="Virtual FS">
 dialog box.  This has the funny behavior that even if you make changes to a
 directory, they will not be reflected in the directory listing until you
 force a cache reload with the C-r key.  This is a feature (when you think
@@ -2248,7 +2247,7 @@ following syntax:
 
 The mc.ext file already provides a shortcut for tar files,
 this means that usually you just point to a tar file and
-press return to enter into the tar file, see the <lnk name="Extension
+press return to enter into the tar file, see the <ref name="Extension
 File Edit" id="Extension File Edit"> section for details on how this is done.
 
 Examples:
@@ -2439,7 +2438,7 @@ is used for a selected hyperlink.
 
 Special highlight colors determine how files are displayed 
 when file highlighting is enabled (see the section on
-<lnk name="Layout" id="Layout>).
+<ref name="Layout" id="Layout">).
 <em/directory/ is used for directories or symbolic links to directories; 
 <em/executable/ for executable files;
 <em/link/ is used for symbolic links which are neither stalled nor linked
@@ -2541,7 +2540,7 @@ bottom line, in such case it will move the selection to
 the last file name in the panel.
 <tag/use_file_to_guess_type/ If this variable is on (the
 default) it will spawn the file command to match the file
-types listed on the <lnk name="mc.ext file" id="Extension File Edit">.
+types listed on the <ref name="mc.ext file" id="Extension File Edit">.
 <tag/xterm_mode/If this variable is on (default is off) when you browse the file
 system on a Tree panel, it will automatically reload the other panel
 with the contents of the selected directory.
@@ -2559,7 +2558,7 @@ section "terminal:your-terminal-name" and then for the
 section "terminal:general", each line of the section
 contains a key symbol that you want to define, followed by
 an equal sign and the definition for the key. You can use
-the special &bslsh;E form to represent the escape character and
+the special &bsol;E form to represent the escape character and
 the ^x to represent the control-x character.
 
 The possible key symbols are:
@@ -2584,7 +2583,7 @@ For example, to define the key insert to be the
 <tt/Escape + &lsqb; + O + p/, you set this in the ini file:
 
 <tscreen><verb>
-insert=&bslshv;E[Op
+insert=&bsol;E[Op
 </verb></tscreen>
 
 The <em/complete/ key symbol represents the escape sequences
@@ -2618,7 +2617,7 @@ of nodes.
 
 The full key list of the help viewer:
 
-<lnk name="General movement keys" id="General Movement Keys"> are accepted.
+<ref name="General movement keys" id="General Movement Keys"> are accepted.
 
 <descrip>
 <tag/tab/Move to the next item.

@@ -8,7 +8,7 @@ rootdir = $(srcdir)/..
 # Distribution variables
 #
 
-DISTDOC =	Makefile.in LSM DEVEL FILES mc.sgml linuxdoc-sgml.diff \
+DISTDOC =	Makefile.in LSM DEVEL FILES mc.sgml gnome.sgml \
 		mc.1.in mcedit.1.in mcserv.8.in
 LINUXDOCDIR =	/usr/local/linuxdoc-sgml
 
