@@ -475,7 +475,7 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 			  was_error ? "zeros" : "file", total, s.st_size);
     }
     if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
-        ERRNOR (E_REMOTE, 0);
+        ERRNOR (E_REMOTE, -1);
     close(h);
     return 0;
 error_return:

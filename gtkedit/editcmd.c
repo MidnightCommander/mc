@@ -1196,7 +1196,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
 	 0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
 	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
-	 0, 0, 0, XV_WLAY_DONTCARE, 0},
+	 0, 0, 0, 0, XV_WLAY_DONTCARE, 0},
 	{0}};
 
     quick_widgets[4].text = catstrs (_ (" Replace with: "), replace_text, 0);

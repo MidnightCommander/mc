@@ -386,7 +386,7 @@ static QuickWidget conf_widgets [] = {
       10, 0, &my_overwrite, 0, XV_WLAY_BELOWCLOSE, "ov" },
 { quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
       9, 0, &my_delete, 0, XV_WLAY_BELOWCLOSE, "de" },
-{ 0,              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE }
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
 };
 
 static QuickDialog confirmation =
@@ -667,7 +667,7 @@ static QuickWidget confvfs_widgets [] = {
       XV_WLAY_RIGHTOF, "input-timo-vfs" },
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
       0, 0, 0, 0, XV_WLAY_BELOWCLOSE, "label-vfs" },
-{ 0,              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
+{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, 0 }
 };
 
 static QuickDialog confvfs_dlg =

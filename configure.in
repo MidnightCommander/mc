@@ -974,7 +974,7 @@ AC_DEFUN(AC_EXT2_UNDEL, [
   GNOME_UNDELFS_CHECKS
   if test "$ext2fs_undel" = yes; then
      AC_MSG_RESULT(With ext2fs file recovery code)
-     vfs_flags="${vfs_flags}, undelfs"
+     vfs_flags=["${vfs_flags}, undelfs"]
      undelfs_o="undelfs.o"
      LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
   else
@@ -992,10 +992,10 @@ AC_ARG_WITH(ext2undel,
 			CPPFLAGS="$CPPFLAGS -I$withval/include"
 		fi
 		AC_EXT2_UNDEL
-	fi],
+	fi],[
 	dnl Default: detect
 	AC_CHECK_LIB(ext2fs, ext2fs_close, AC_EXT2_UNDEL,,-lcom_err)
-)
+])
 
 AC_SUBST(undelfs_o)
 	
@@ -1245,9 +1245,8 @@ SHELL=${SHELL-"/bin/sh"}
 AC_SUBST(SHELL)
 
 dnl
-dnl Output configuration filesn
+dnl Output configuration files
 dnl
-
 AC_CONFIG_SUBDIRS(vfs/samba)
 
 AC_OUTPUT([

@@ -603,7 +603,7 @@ static void parse_control_file (void)
     /* Security: Check that the user owns the control file and this file 
        is not group/world writable to prevent other users from playing tricks 
        on him/her. */
-    if (s.st_uid != getuid () || ((s.st_mode) & (S_IWGRP|S_IWOTH)){
+    if (s.st_uid != getuid () || ((s.st_mode) & (S_IWGRP|S_IWOTH))) {
 	fclose (file);
 	return;
     }

@@ -204,12 +204,13 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
  *
  */
 
-#define PORT 21
+#define FTP_COMMAND_PORT   21
+#define HSC_PROXY_PORT   9875
 
 static char *
 my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
 {
-    return vfs_split_url (path, host, user, port, pass, PORT, URL_DEFAULTANON);
+    return vfs_split_url (path, host, user, port, pass, FTP_COMMAND_PORT, URL_DEFAULTANON);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
@@ -614,11 +615,10 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
     char *user, *pass, *dir;
 
 #if defined(HSC_PROXY)
-#define PORT 9875
+    dir = vfs_split_url (proxy, host, &user, port, &pass, HSC_PROXY_PORT, URL_DEFAULTANON);
 #else
-#define PORT 21
+    dir = vfs_split_url (proxy, host, &user, port, &pass, FTP_COMMAND_PORT, URL_DEFAULTANON);
 #endif
-    dir = vfs_split_url (proxy, host, &user, port, &pass, PORT, URL_DEFAULTANON);
 
     g_free (user);
     if (pass)
@@ -763,7 +763,7 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     char *host, *user, *password;
     int port;
 
-    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, PORT, URL_DEFAULTANON);
+    vfs_split_url (strchr(op, ':')+1, &host, &user, &port, &password, FTP_COMMAND_PORT, URL_DEFAULTANON);
 
     SUP.host = g_strdup (host);
     SUP.user = g_strdup (user);
@@ -1186,8 +1186,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     }
 
     gettimeofday(&dir->u.ftp.timestamp, NULL);
-    dir->u.ftp.timestamp.tv_sec += 10; /* was 360: 10 is good for
-					   stressing direntry layer a bit */
+    dir->u.ftp.timestamp.tv_sec += ftpfs_directory_timeout;
 
     if (SUP.strict == RFC_STRICT) 
         sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
@@ -1293,12 +1292,12 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 
     h = open(localname, O_RDONLY);
     if (h == -1)
-	    ERRNOR (EIO, 0);
+	    ERRNOR (EIO, -1);
     fstat(h, &s);
     sock = open_data_connection(me, super, "STOR", name, TYPE_BINARY, 0);
     if (sock < 0) {
 	close(h);
-	return 0;
+	return -1;
     }
 #ifdef HAVE_STRUCT_LINGER
     li.l_onoff = 1;
@@ -1345,8 +1344,8 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
     close(sock);
     close(h);
     if (get_reply (me, SUP.sock, NULL, 0) != COMPLETE)
-	    ERRNOR (EIO, 0);
-    return 1;
+	    ERRNOR (EIO, -1);
+    return 0;
 error_return:
     disable_interrupt_key();
     close(sock);

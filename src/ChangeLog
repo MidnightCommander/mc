@@ -1,3 +1,10 @@
+2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* main.c (parse_control_file): add missing right parentheses
+
+	* boxes.c: fix incorrect initialization of array of structure (gcc
+	version 2.96 20000131 chokes on it).
+
 2000-02-18  Paul Sheer <psheer@obsidian.co.za>
 
 	* gtkedit/*.[ch], edit.c et al: updates to reflect

@@ -1,3 +1,18 @@
+2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c: Definition of PORT changed in the middle of ftpfs.c
+	with unexpected side effects (only when HSC_PROXY was
+	defined). Introduce HSC_PROXY_PORT and FTP_COMMAND_PORT and use
+	where appropriate.
+
+	(dir_load): Do not hard code the directory cache timeout to 10
+	seconds. Instead use the setting from Options/Virtual VFS ... 
+
+	* fish.c (file_store): honour changed semantics for return value
+	(on error -1 is expected).
+
+	* ftpfs.c (file_store): dito
+
 2000-02-22  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cpio.c: added. Thanx to Jan Hudec <bulb@centrum.cz>, who wrote
