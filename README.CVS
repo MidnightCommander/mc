@@ -3,10 +3,11 @@ Commander.
 
 To compile MC from CVS, the following software is required:
 
-Autoconf (recent stable version)
-Automake (recent stable version)
-Gettext 0.10.38 - 0.10.40 or 0.11.5 and above.
-Glib 1.2.6 and above on the 1.2.x branch.
+Autoconf 2.52 and above
+Automake 1.5 and above
+Gettext 0.10.38 - 0.10.40 or (preferrably) 0.11.5 and above.
+Glib 1.2.6 and above on the 1.2.x branch or 2.0.x (experimental, has to
+be explicitly enabled by `--with-glib2').
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
@@ -19,8 +20,8 @@ to `autogen.sh' are passed to `configure'.  Then run `make' as usually.
 The distribution tarball is created by the command `make distcheck'. 
 This command can take a while.
 
-The next version, mc-4.6.0, is expected to be released with the
-following tools:
+The next version, mc-4.6.0, is expected to be released using the latest
+versions of the GNU tools, which are currently:
 
 Autoconf 2.54
 Automake 1.6.3
