@@ -1,5 +1,10 @@
 2001-01-09  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/figs/Makefile.am: New file.
+	* doc-gnome/C/Makefile.am: Don't handle figs, let the new
+	makefile do it.
+	* configure: Substitute doc-gnome/C/figs/Makefile.
+
 	* lib/Makefile.am: Distribute files listed in LOCALIZED_HELP.
 
 2001-01-08  Szabolcs Ban <shooby@gnome.hu>

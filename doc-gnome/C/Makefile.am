@@ -1,26 +1,12 @@
-gmc_helpdir = $(datadir)/gnome/help/gmc/C
-gmc_helpfigdir = $(datadir)/gnome/help/gmc/C/figs
+SUBDIRS = figs
 
-DISTFIGS = \
-	figs/fileprops.png \
-	figs/gccmime.png \
-	figs/gmc1.png \
-	figs/gmc_move.png \
-	figs/gmcprops1.png \
-	figs/gmcprops2.png \
-	figs/gmcprops3.png \
-	figs/gmcprops4.png \
-	figs/gmcprops5.png \
-	figs/gmcprops6.png \
-	figs/open_with.png \
-	figs/rubberband.png
+gmc_helpdir = $(datadir)/gnome/help/gmc/C
 
 gmc_help_DATA = index.html topic.dat
-gmc_helpfig_DATA = $(DISTFIGS)
 
 SGML_FILES = gmc.sgml
 
-EXTRA_DIST = topic.dat $(SGML_FILES) $(DISTFIGS)
+EXTRA_DIST = topic.dat $(SGML_FILES)
 
 MOSTLYCLEANFILES = *.tex *.log *.aux
 CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf

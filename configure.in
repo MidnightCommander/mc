@@ -1122,6 +1122,7 @@ mc.spec
 doc/Makefile 
 doc-gnome/Makefile
 doc-gnome/C/Makefile
+doc-gnome/C/figs/Makefile
 vfs/Makefile:vfs/Make-mc.in
 vfs/extfs/Makefile
 lib/Makefile
