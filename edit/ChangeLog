@@ -1,3 +1,11 @@
+2002-10-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_insert_column_of_text): Fix infinite loop if
+	block of text is copied past the end of the buffer.
+	By Paul Sheer <psheer@icon.co.za>.
+
+	(stacked): Don't initialize static arrays by zeros.
+
 2002-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* edit.h (struct key_word): Remove time field.

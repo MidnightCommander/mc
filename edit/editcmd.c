@@ -101,8 +101,7 @@ char *itoa (int i)
 }
 
 /* Temporary strings */
-static char *stacked[16] =
-{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+static char *stacked[16];
 
 /*
    This joins strings end on end and allocates memory for the result.
@@ -419,7 +418,7 @@ int edit_save_as_cmd (WEdit * edit)
 	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
 		int file;
 		different_filename = 1;
-		if ((file = mc_open ((char *) exp, O_RDONLY | O_BINARY)) != -1) {	/* the file exists */
+		if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1) {	/* the file exists */
 		    mc_close (file);
 		    if (edit_query_dialog2 (_(" Warning "), 
 		    _(" A file already exists with this name. "), 
@@ -791,8 +790,12 @@ void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, in
 		}
 	    }
 	    for (p = edit->curs1;; p++) {
-		if (p == edit->last_byte)
+		if (p == edit->last_byte) {
+		    edit_cursor_move (edit, edit->last_byte - edit->curs1);
 		    edit_insert_ahead (edit, '\n');
+		    p++;
+		    break;
+		}
 		if (edit_get_byte (edit, p) == '\n') {
 		    p++;
 		    break;
@@ -1782,15 +1785,16 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    }
 	    edit_scroll_screen_over_cursor (edit);
 	} else {
+	    char *msg = _(" Replace ");
 	    edit->search_start = edit->curs1;	/* try and find from right here for next search */
 	    edit_update_curs_col (edit);
 
 	    edit->force |= REDRAW_PAGE;
 	    edit_render_keypress (edit);
 	    if (times_replaced) {
-		message (0, _(" Replace "), _(" %ld replacements made. "), times_replaced);
+		message (0, msg, _(" %ld replacements made. "), times_replaced);
 	    } else
-		edit_message_dialog (_ (" Replace "), _ (" Search string not found "));
+		edit_message_dialog (msg, _ (" Search string not found "));
 	    replace_continue = 0;
 	}
     } while (replace_continue);
@@ -1821,7 +1825,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
 	    return;
-	exp = (char *) g_strdup (old);
+	exp = g_strdup (old);
     } else {
 
 #ifdef HAVE_CHARSET
@@ -1844,7 +1848,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	    int len = 0;
 	    if (old)
 		g_free (old);
-	    old = (char *) g_strdup (exp);
+	    old = g_strdup (exp);
 
 	    if (search_create_bookmark) {
 		int found = 0, books = 0;
@@ -1972,7 +1976,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
     int len, file;
 
     if ((file =
-	 mc_open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC,
+	 mc_open (filename, O_CREAT | O_WRONLY | O_TRUNC,
 		  S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY)) == -1)
 	return 0;
 
