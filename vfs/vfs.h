@@ -25,37 +25,37 @@ struct vfs_class {
     void (*done) (struct vfs_class *me);
     void (*fill_names) (struct vfs_class *me, void (*)(char *));
 
-    int (*which) (struct vfs_class *me, char *path);
+    int (*which) (struct vfs_class *me, /*FIXME:const*/ char *path);
 
     void *(*open) (struct vfs_class *me, const char *fname, int flags,
 		   int mode);
     int (*close) (void *vfs_info);
     int (*read) (void *vfs_info, char *buffer, int count);
-    int (*write) (void *vfs_info, char *buf, int count);
+    int (*write) (void *vfs_info, /*FIXME:const*/ char *buf, int count);
 
     void *(*opendir) (struct vfs_class *me, const char *dirname);
     void *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
 
-    int (*stat) (struct vfs_class *me, char *path, struct stat * buf);
-    int (*lstat) (struct vfs_class *me, char *path, struct stat * buf);
+    int (*stat) (struct vfs_class *me, /*FIXME:const*/ char *path, struct stat * buf);
+    int (*lstat) (struct vfs_class *me, /*FIXME:const*/ char *path, struct stat * buf);
     int (*fstat) (void *vfs_info, struct stat * buf);
 
-    int (*chmod) (struct vfs_class *me, char *path, int mode);
-    int (*chown) (struct vfs_class *me, char *path, int owner, int group);
-    int (*utime) (struct vfs_class *me, char *path,
+    int (*chmod) (struct vfs_class *me, /*FIXME:const*/ char *path, int mode);
+    int (*chown) (struct vfs_class *me, /*FIXME:const*/ char *path, int owner, int group);
+    int (*utime) (struct vfs_class *me, /*FIXME:const*/ char *path,
 		  struct utimbuf * times);
 
-    int (*readlink) (struct vfs_class *me, char *path, char *buf,
+    int (*readlink) (struct vfs_class *me, /*FIXME:const*/ char *path, char *buf,
 		     int size);
-    int (*symlink) (struct vfs_class *me, char *n1, char *n2);
-    int (*link) (struct vfs_class *me, char *p1, char *p2);
-    int (*unlink) (struct vfs_class *me, char *path);
-    int (*rename) (struct vfs_class *me, char *p1, char *p2);
+    int (*symlink) (struct vfs_class *me, /*FIXME:const*/ char *n1, /*FIXME:const*/ char *n2);
+    int (*link) (struct vfs_class *me, /*FIXME:const*/ char *p1, /*FIXME:const*/ char *p2);
+    int (*unlink) (struct vfs_class *me, /*FIXME:const*/ char *path);
+    int (*rename) (struct vfs_class *me, /*FIXME:const*/ char *p1, /*FIXME:const*/ char *p2);
     int (*chdir) (struct vfs_class *me, const char *path);
     int (*ferrno) (struct vfs_class *me);
     int (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (struct vfs_class *me, char *path, int mode, int dev);
+    int (*mknod) (struct vfs_class *me, /*FIXME:const*/ char *path, int mode, int dev);
 
     vfsid (*getid) (struct vfs_class *me, const char *path);
 
@@ -66,11 +66,11 @@ struct vfs_class {
     int (*ungetlocalcopy) (struct vfs_class *me, const char *filename,
 			   const char *local, int has_changed);
 
-    int (*mkdir) (struct vfs_class *me, char *path, mode_t mode);
-    int (*rmdir) (struct vfs_class *me, char *path);
+    int (*mkdir) (struct vfs_class *me, /*FIXME:const*/ char *path, mode_t mode);
+    int (*rmdir) (struct vfs_class *me, /*FIXME:const*/ char *path);
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
-    int (*setctl) (struct vfs_class *me, char *path, int ctlop,
+    int (*setctl) (struct vfs_class *me, /*FIXME:const*/ char *path, int ctlop,
 		   void *arg);
 #ifdef HAVE_MMAP
     caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len,
