@@ -1,3 +1,7 @@
+2000-08-03  Pavel Roskin  <proski@gnu.org>
+
+	* undelfs.h: Removed
+
 2000-08-02  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Filters apt, audio, deba, debd and dpkg are now
