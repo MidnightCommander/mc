@@ -146,10 +146,12 @@ void handle_console (unsigned char action)
 	    /* Bind standard error to /dev/null */
 	    close (2);
 	    open ("/dev/null", O_WRONLY);
-	    /* Exec the console save/restore handler */
-	    mc_conssaver = concat_dir_and_file (mc_home, "bin/cons.saver");
-	    execl (mc_conssaver, "cons.saver", tty_name, NULL);
-	    /* Exec failed */
+	    if (tty_name) {
+		/* Exec the console save/restore handler */
+		mc_conssaver = concat_dir_and_file (mc_home, "bin/cons.saver");
+		execl (mc_conssaver, "cons.saver", tty_name, NULL);
+	    }
+	    /* Console is not a tty or execl() failed */
 	    console_flag = 0;
 	    write (1, &console_flag, 1);
 	    close (1);

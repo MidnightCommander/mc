@@ -1,5 +1,7 @@
 2001-01-27  Pavel Roskin  <proski@gnu.org>
 
+	* cons.handler.c (handle_console): Check the result of ttyname().
+
 	* main.c (handle_args): Exit if no arguments are given to mcview.
 	[HAVE_GNOME]: Don't examine argv[0] - it's done separately.
 
