@@ -111,9 +111,9 @@ funkcióért és a funkcióhoz szükséges kódért Torben
 Fjerdingstad-nek és  Sergey-nek közremûködésükért). Kérlek,
 ne csinálj szó szerinti másolatot a funkció beállításairól.
 A fájlok forrása a
-/usr/lib/mc/bin/mc.sh (bash és
+@prefix@/share/mc/bin/mc.sh (bash és
 zsh felhasználóknak), illetõleg a
-/usr/lib/mc/bin/mc.csh (tcsh
+@prefix@/share/mc/bin/mc.csh (tcsh
 felhasználóknak) fájl. Ilyenkor, amikor a funkció
 beállításokat változtatod, a profil értékeket nem
 szükséges megváltoztatnod, csak arról gondoskodj, hogy az
@@ -126,14 +126,14 @@ mc ()
     mkdir -p ~/.mc/tmp 2> /dev/null
     chmod 700 ~/.mc/tmp
     MC=~/.mc/tmp/mc-$$
-    /usr/bin/mc -P "$@" > "$MC"
+    @prefix@/bin/mc -P "$@" > "$MC"
     cd "`cat $MC`"
     rm "$MC"
     unset MC;
 }
 
 tcsh felhasználóknak: alias mc 'setenv MC
-`/usr/bin/mc -P \!*`; cd $MC;
+`@prefix@/bin/mc -P \!*`; cd $MC;
 unsetenv MC'
 
 Tudom, a bash funkciók rövidebbek lehetnek a bash-nál és a
@@ -1258,7 +1258,7 @@ tulajdonosa, és nem leget bárki számára írható. Ha
 nem talál ilyen fájlt, az ~/.mc/menu keresése a következõ 
 lépés, egyébként pedig az mc az alapértelmezett 
 rendszerszintû menüt használja, pl.:
-/usr/lib/mc/mc.menu.
+@prefix@/share/mc/mc.menu.
 
 A menü fájl formátuma nagyon egyszerû. A sorok, amelyek
 bármivel kezdõdhetnek, de a space, vagy a tab
@@ -1719,7 +1719,7 @@ A Midnight Commander indításkor megpróbálja az indítási
 információkat beolvasni az ~/.mc/ini fájlból. Ha ez
 a fájl nem létezik, ezeket az információkat a rendszerszintû
 konfigurációs fájlból fogja beolvasni, amelyek a
-/usr/lib/mc/mc.ini fájlban
+@prefix@/share/mc/mc.ini fájlban
 találhatóak meg. Ha ez a rendszerszintû konfigurációs fájl
 sem létezik, a MC az alapértelmezett beállításokat
 használja.
@@ -2385,7 +2385,7 @@ A Csatolt fájlrendszer...Virtual FS dialógus ablak másik beállítandó
 opciója az ftp proxy-n keresztül opció. Ez beállítja a 
 program számára azt, hogy mindig használja a proxy host-ot. 
 Ha ez a változó be van állítva, akkor a program két dolgot 
-csinál: konzultál a /usr/lib/mc.no_proxy fájl soraival, 
+csinál: konzultál a @prefix@/share/mc.no_proxy fájl soraival, 
 hogy azok tartalmazzák-e a host nevet, mint helyi eszközt 
 (ha a host neve ponttal kezdõdik, akkor ezt domainként 
 tartja számon), és feltételezi azt, hogy a pont nélküli 
@@ -2772,20 +2772,20 @@ A progam minden ezzel kapcsolatos infomációt az MCHOME
 környezeti változóban tárol. Ha ezt a változót nem állítottuk 
 be, akkor ez vissza fog állítódni a /usr könyvtárra.
 
-A /usr/lib/mc/mc.hlp A program súgó fájlja.
+A @prefix@/share/mc/mc.hlp A program súgó fájlja.
 
-/usr/lib/mc/mc.ext Az alapértelmezett rendszerszintû 
+@prefix@/share/mc/mc.ext Az alapértelmezett rendszerszintû 
 kiterjesztés fájl.
 
 ~/.mc/ext A felhasználó saját kiterjesztései, nézet
 beállítások és szerkesztési beállítások. Ezek felülbírálják
 a rendszerszintû fájl bejegyzéseit, ha van ilyen.
 
-/usr/lib/mc/mc.ini Az alapértelmezett rendszerszintû Midnight 
+@prefix@/share/mc/mc.ini Az alapértelmezett rendszerszintû Midnight 
 Commander beállítás, amelyet csak akkor használ, ha a 
 felhasználónak nincs saját ~/.mc/ini fájlja.
 
-/usr/lib/mc/mc.lib A Midnight Commander globális beállításai. 
+@prefix@/share/mc/mc.lib A Midnight Commander globális beállításai. 
 Az ebben a fájlban elvégzett beállítások minden felhasználó
 Midnight Commander-jére vonatkoznak, ez használható a 
 site-globális terminál beállításaihoz.
@@ -2794,10 +2794,10 @@ site-globális terminál beállításaihoz.
 elérhetõ, akkor a beállítások ebbõl a fájlból olvasódnak be
 a rendszerszintû indító fájl helyett.
 
-/usr/lib/mc/mc.hint Ez a fájl tartalmazza a program által 
+@prefix@/share/mc/mc.hint Ez a fájl tartalmazza a program által 
 megjelenített útmutattásokat (cookie-kat).
 
-/usr/lib/mc/mc.menu Ez a fájl azonos a rendszerszintû 
+@prefix@/share/mc/mc.menu Ez a fájl azonos a rendszerszintû 
 alkalmazás menüvel.
 
 ~/.mc/menu A falhasználó saját alkalmazás menüje. Ha ez a

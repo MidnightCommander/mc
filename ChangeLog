@@ -1,5 +1,13 @@
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
+	* doc/hu/mc.hlp.hu: Rename to ...
+	* doc/hu/mc.hlp.hu.in: ... this.  Adjust paths.
+	* configure.in: Substitute doc/hu/mc.hlp.hu.
+	* doc/hu/Makefile.am: Don't distribute mc.hlp.hu.
+
+	* doc/mc.1.in: Update path to data the files.  Rename MC_LIBDIR
+	to MC_DATADIR.  Make the same changes in the translations.
+
 	* */Makefile.am: Replace mclibdir with pkgdatadir to use "share"
 	directory for architecture-independent files.
 
