@@ -2394,17 +2394,16 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
     WView *wview;
     WButtonBar *bar;
     Dlg_head *our_dlg;
-    
+
     /* Create dialog and widgets, put them on the dialog */
-    our_dlg = create_dlg (0, 0, LINES, COLS, NULL,
-			   view_mode_callback, "[Internal File Viewer]",
-			   "view",
-			   DLG_NONE);
+    our_dlg =
+	create_dlg (0, 0, LINES, COLS, NULL, view_mode_callback,
+		    "[Internal File Viewer]", NULL, DLG_NONE);
 
     view_dlg = our_dlg;
-    wview = view_new (0, 0, COLS, LINES-1, 0);
+    wview = view_new (0, 0, COLS, LINES - 1, 0);
 
-    bar  = buttonbar_new (1);
+    bar = buttonbar_new (1);
 
     add_widget (our_dlg, wview);
     add_widget (our_dlg, bar);
@@ -2417,13 +2416,13 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
      * you have to modify view_adjust_size to
      * be aware of it
      */
-    if (!error){
+    if (!error) {
 	run_dlg (our_dlg);
 	if (move_dir_p)
 	    *move_dir_p = wview->move_dir;
     }
     destroy_dlg (our_dlg);
-    
+
     return !error;
 }
 

@@ -1920,7 +1920,7 @@ do_nc (void)
     midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
 
     midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
-			       midnight_callback, "[main]", "midnight",
+			       midnight_callback, "[main]", NULL,
 			       DLG_HAS_MENUBAR);
 
     /* Check if we were invoked as an editor or file viewer */

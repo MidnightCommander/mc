@@ -665,7 +665,7 @@ tree_box (char *current_dir)
 
     /* Create the components */
     dlg = create_dlg (0, 0, TREE_Y, TREE_X, dialog_colors,
-		      tree_callback, "[Directory Tree]", "tree", DLG_CENTER);
+		      tree_callback, "[Directory Tree]", NULL, DLG_CENTER);
     mytree = tree_new (0, 2, 2, TREE_Y - 6, TREE_X - 5);
     add_widget (dlg, mytree);
     bar = buttonbar_new(1);
