@@ -43,46 +43,58 @@ static int sfs_flags[ MAXFS ];
 #define F_NOLOCALCOPY 4
 #define F_FULLMATCH 8
 
-static int sfs_uptodate (char *name, char *cache)
+static int
+sfs_uptodate (char *name, char *cache)
 {
     return 1;
 }
 
-static int sfs_vfmake (struct vfs_class *me, char *name, char *cache)
+static int
+sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 {
     char *inpath, *op;
     int w;
-    char pad [10240];
+    char pad[10240];
     char *s, *t = pad;
     int was_percent = 0;
 
     vfs_split (name, &inpath, &op);
     if ((w = (*me->which) (me, op)) == -1)
-        vfs_die ("This cannot happen... Hopefully.\n");
+	vfs_die ("This cannot happen... Hopefully.\n");
 
-    if ((sfs_flags[w] & F_1) || (!strcmp (name, "/"))) ; else return -1;
+    if ((sfs_flags[w] & F_1) || (!strcmp (name, "/")));
+    else
+	return -1;
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
     if (!(sfs_flags[w] & F_NOLOCALCOPY)) {
-        s = mc_getlocalcopy (name);
+	s = mc_getlocalcopy (name);
 	if (!s)
 	    return -1;
-        name = name_quote (s, 0);
+	name = name_quote (s, 0);
 	g_free (s);
-    } else 
-        name = name_quote (name, 0);
-#define COPY_CHAR if (t-pad>sizeof(pad)) { g_free (name); return -1; } else *t++ = *s;
-#define COPY_STRING(a) if ((t-pad)+strlen(a)>sizeof(pad)) { g_free (name); return -1; } else { strcpy (t, a); t+= strlen(a); }
+    } else
+	name = name_quote (name, 0);
+#define COPY_CHAR if (t-pad>sizeof(pad)) { return -1; } else *t++ = *s;
+#define COPY_STRING(a) if ((t-pad)+strlen(a)>sizeof(pad)) { return -1; } else { strcpy (t, a); t+= strlen(a); }
     for (s = sfs_command[w]; *s; s++) {
-        if (was_percent) {
+	if (was_percent) {
 
-	    char *ptr = NULL;
+	    const char *ptr = NULL;
 	    was_percent = 0;
 
 	    switch (*s) {
-	    case '1': ptr = name; break;
-	    case '2': ptr = op + strlen (sfs_prefix[w]); break;
-	    case '3': ptr = cache; break;
-	    case '%': COPY_CHAR; continue; 
+	    case '1':
+		ptr = name;
+		break;
+	    case '2':
+		ptr = op + strlen (sfs_prefix[w]);
+		break;
+	    case '3':
+		ptr = cache;
+		break;
+	    case '%':
+		COPY_CHAR;
+		continue;
 	    }
 	    COPY_STRING (ptr);
 	} else {
@@ -92,7 +104,6 @@ static int sfs_vfmake (struct vfs_class *me, char *name, char *cache)
 		COPY_CHAR;
 	}
     }
-    g_free (name);
 
     open_error_pipe ();
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
@@ -101,11 +112,11 @@ static int sfs_vfmake (struct vfs_class *me, char *name, char *cache)
     }
 
     close_error_pipe (0, NULL);
-    return 0; /* OK */
+    return 0;			/* OK */
 }
 
 static char *
-sfs_redirect (struct vfs_class *me, char *name)
+sfs_redirect (struct vfs_class *me, const char *name)
 {
     struct cachedfile *cur = head;
     char *cache;
@@ -146,19 +157,19 @@ sfs_redirect (struct vfs_class *me, char *name)
 }
 
 static void *
-sfs_open (struct vfs_class *me, char *path, int flags, int mode)
+sfs_open (struct vfs_class *me, const char *path, int flags, int mode)
 {
     int *sfs_info;
     int fd;
 
     path = sfs_redirect (me, path);
-    fd = open (path, NO_LINEAR(flags), mode);
+    fd = open (path, NO_LINEAR (flags), mode);
     if (fd == -1)
 	return 0;
 
     sfs_info = g_new (int, 1);
     *sfs_info = fd;
-    
+
     return sfs_info;
 }
 
@@ -282,15 +293,18 @@ static int sfs_nothingisopen (vfsid id)
     return 1;
 }
 
-static char *sfs_getlocalcopy (struct vfs_class *me, char *path)
+static char *
+sfs_getlocalcopy (struct vfs_class *me, const char *path)
 {
     path = sfs_redirect (me, path);
     return g_strdup (path);
 }
 
-static int sfs_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
+static int
+sfs_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
+		    int has_changed)
 {
-    g_free(local);
+    g_free (local);
     return 0;
 }
 

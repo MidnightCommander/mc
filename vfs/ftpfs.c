@@ -741,7 +741,8 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 }
 
 static int
-ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
+ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
+		    const char *archive_name, char *op)
 {
     char *host, *user, *password;
     int port;
@@ -760,15 +761,17 @@ ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archi
     SUP.strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP.isbinary = TYPE_UNKNOWN;
     SUP.remote_is_amiga = 0;
-    super->name = g_strdup("/");
-    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat(me, S_IFDIR | 0755)); 
+    super->name = g_strdup ("/");
+    super->root =
+	vfs_s_new_inode (me, super,
+			 vfs_s_default_stat (me, S_IFDIR | 0755));
 
     return ftpfs_open_archive_int (me, super);
 }
 
 static int
 ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
-		    char *archive_name, char *op, void *cookie)
+		    const char *archive_name, char *op, void *cookie)
 {
     char *host, *user;
     int port;

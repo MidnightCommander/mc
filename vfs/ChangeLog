@@ -1,5 +1,8 @@
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Constify some arguments for many functions.
+	* xdirentry.h: Likewise.  Adjust all dependencies.
+
 	* *.c: Rename functions that don't have an a prefix indicating
 	what file they are defined in.  This simplifies debugging.
 

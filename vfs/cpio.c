@@ -129,42 +129,44 @@ static void cpio_free_archive(struct vfs_class *me, struct vfs_s_super *super)
 	mc_close(super->u.arch.fd);
 }
 
-static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, char *name)
+static int
+cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
+		     const char *name)
 {
     int fd, type;
     mode_t mode;
     struct vfs_s_inode *root;
 
-    if((fd = mc_open(name, O_RDONLY)) == -1) {
+    if ((fd = mc_open (name, O_RDONLY)) == -1) {
 	message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
 	return -1;
     }
 
-    super->name = g_strdup(name);
-    super->u.arch.fd = -1; /* for now */
-    mc_stat(name, &(super->u.arch.st));
+    super->name = g_strdup (name);
+    super->u.arch.fd = -1;	/* for now */
+    mc_stat (name, &(super->u.arch.st));
     super->u.arch.type = CPIO_UNKNOWN;
 
-    type = get_compression_type(fd);
+    type = get_compression_type (fd);
     if (type != COMPRESSION_NONE) {
 	char *s;
 
-	mc_close(fd);
-	s = g_strconcat(name, decompress_extension(type), NULL);
-	if((fd = mc_open(s, O_RDONLY)) == -1) {
+	mc_close (fd);
+	s = g_strconcat (name, decompress_extension (type), NULL);
+	if ((fd = mc_open (s, O_RDONLY)) == -1) {
 	    message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
-	    g_free(s);
+	    g_free (s);
 	    return -1;
 	}
-	g_free(s);
+	g_free (s);
     }
 
     super->u.arch.fd = fd;
     mode = super->u.arch.st.st_mode & 07777;
-    mode |= (mode & 0444) >> 2; /* set eXec where Read is */
+    mode |= (mode & 0444) >> 2;	/* set eXec where Read is */
     mode |= S_IFDIR;
 
-    root = vfs_s_new_inode(me, super, &(super->u.arch.st));
+    root = vfs_s_new_inode (me, super, &(super->u.arch.st));
     root->st.st_mode = mode;
     root->data_offset = -1;
     root->st.st_nlink++;
@@ -172,7 +174,7 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
 
     super->root = root;
 
-    CPIO_SEEK_SET(super, 0);
+    CPIO_SEEK_SET (super, 0);
 
     return fd;
 }
@@ -505,17 +507,19 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 
 /* Need to CPIO_SEEK_CUR to skip the file at the end of add entry!!!! */
 
-static int cpio_open_archive(struct vfs_class *me, struct vfs_s_super *super, char *name, char *op)
+static int
+cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super,
+		   const char *name, char *op)
 {
     int status = STATUS_START;
 
-    if(cpio_open_cpio_file(me, super, name) == -1)
+    if (cpio_open_cpio_file (me, super, name) == -1)
 	return -1;
 
-    for(;;) {
-	status = cpio_read_head(me, super);
+    for (;;) {
+	status = cpio_read_head (me, super);
 
-	switch(status) {
+	switch (status) {
 	case STATUS_EOF:
 	    message (1, MSG_ERROR, _("Unexpected end of file\n%s"), name);
 	    return 0;
@@ -531,17 +535,18 @@ static int cpio_open_archive(struct vfs_class *me, struct vfs_s_super *super, ch
 }
 
 /* Remaining functions are exactly same as for tarfs (and were in fact just copied) */
-static void *cpio_super_check(struct vfs_class *me, char *archive_name, char *op)
+static void *
+cpio_super_check (struct vfs_class *me, const char *archive_name, char *op)
 {
     static struct stat sb;
-    if(mc_stat(archive_name, &sb))
+    if (mc_stat (archive_name, &sb))
 	return NULL;
     return &sb;
 }
 
 static int
-cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_name,
-		 char *op, void *cookie)
+cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
+		 const char *archive_name, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
 

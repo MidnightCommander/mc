@@ -199,7 +199,7 @@ static void extfs_free_archive (struct archive *archive)
 }
 
 static FILE *
-extfs_open_archive (int fstype, char *name, struct archive **pparc)
+extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 {
     static dev_t __extfs_no = 0;
     FILE *result;
@@ -242,7 +242,7 @@ extfs_open_archive (int fstype, char *name, struct archive **pparc)
 
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
-    current_archive->name = name ? g_strdup (name) : name;
+    current_archive->name = name ? g_strdup (name) : NULL;
     current_archive->local_name = local_name;
 
     if (local_name != NULL)
@@ -279,16 +279,17 @@ extfs_open_archive (int fstype, char *name, struct archive **pparc)
  * Return 0 on success, -1 on error.
  */
 static int
-extfs_read_archive (int fstype, char *name, struct archive **pparc)
+extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 {
     FILE *extfsd;
     char *buffer;
     struct archive *current_archive;
     char *current_file_name, *current_link_name;
 
-    if ((extfsd = extfs_open_archive (fstype, name, &current_archive)) == NULL) {
+    if ((extfsd =
+	 extfs_open_archive (fstype, name, &current_archive)) == NULL) {
 	message (1, MSG_ERROR, _("Cannot open %s archive\n%s"),
-		    extfs_prefixes[fstype], name);
+		 extfs_prefixes[fstype], name);
 	return -1;
     }
 
@@ -320,7 +321,9 @@ extfs_read_archive (int fstype, char *name, struct archive **pparc)
 		if (S_ISDIR (hstat.st_mode)
 		    && (!strcmp (p, ".") || !strcmp (p, "..")))
 		    goto read_extfs_continue;
-		pent = extfs_find_entry (current_archive->root_entry, q, 1, 0);
+		pent =
+		    extfs_find_entry (current_archive->root_entry, q, 1,
+				      0);
 		if (pent == NULL) {
 		    /* FIXME: Should clean everything one day */
 		    g_free (buffer);
@@ -341,7 +344,7 @@ extfs_read_archive (int fstype, char *name, struct archive **pparc)
 		if (!S_ISLNK (hstat.st_mode) && current_link_name != NULL) {
 		    pent =
 			extfs_find_entry (current_archive->root_entry,
-				    current_link_name, 0, 0);
+					  current_link_name, 0, 0);
 		    if (pent == NULL) {
 			/* FIXME: Should clean everything one day */
 			g_free (buffer);
@@ -412,10 +415,11 @@ extfs_read_archive (int fstype, char *name, struct archive **pparc)
  * mangled by this operation (so you must not free its return value).
  */
 static char *
-extfs_get_path_mangle (char *inname, struct archive **archive, int is_dir,
-		 int do_not_open)
+extfs_get_path_mangle (const char *inname, struct archive **archive,
+		       int is_dir, int do_not_open)
 {
-    char *local, *archive_name, *op;
+    char *local, *op;
+    const char *archive_name;
     int result = -1;
     struct archive *parc;
     struct vfs_stamping *parent;
@@ -448,7 +452,9 @@ extfs_get_path_mangle (char *inname, struct archive **archive, int is_dir,
 	    }
 	}
 
-    result = do_not_open ? -1 : extfs_read_archive (fstype, archive_name, &parc);
+    result =
+	do_not_open ? -1 : extfs_read_archive (fstype, archive_name,
+					       &parc);
     if (result == -1)
 	ERRNOR (EIO, NULL);
 
@@ -642,7 +648,7 @@ extfs_run (char *file)
 }
 
 static void *
-extfs_open (struct vfs_class *me, char *file, int flags, int mode)
+extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive;
@@ -1228,17 +1234,18 @@ static void extfs_free (vfsid id)
     extfs_free_archive (archive);
 }
 
-static char *extfs_getlocalcopy (struct vfs_class *me, char *path)
+static char *
+extfs_getlocalcopy (struct vfs_class *me, const char *path)
 {
-    struct pseudofile *fp = 
-        (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
+    struct pseudofile *fp =
+	(struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
     char *p;
-    
+
     if (fp == NULL)
-        return NULL;
+	return NULL;
     if (fp->entry->inode->local_filename == NULL) {
-        extfs_close ((void *) fp);
-        return NULL;
+	extfs_close ((void *) fp);
+	return NULL;
     }
     p = g_strdup (fp->entry->inode->local_filename);
     fp->archive->fd_usage++;
@@ -1246,22 +1253,24 @@ static char *extfs_getlocalcopy (struct vfs_class *me, char *path)
     return p;
 }
 
-static int extfs_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
+static int
+extfs_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
+		      int has_changed)
 {
-    struct pseudofile *fp = 
-        (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
-    
+    struct pseudofile *fp =
+	(struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
+
     if (fp == NULL)
-        return 0;
+	return 0;
     if (!strcmp (fp->entry->inode->local_filename, local)) {
-        fp->archive->fd_usage--;
-        fp->has_changed |= has_changed;
-        extfs_close ((void *) fp);
-        return 0;
+	fp->archive->fd_usage--;
+	fp->has_changed |= has_changed;
+	extfs_close ((void *) fp);
+	return 0;
     } else {
-        /* Should not happen */
-        extfs_close ((void *) fp);
-        return mc_def_ungetlocalcopy (me, path, local, has_changed);
+	/* Should not happen */
+	extfs_close ((void *) fp);
+	return mc_def_ungetlocalcopy (me, path, local, has_changed);
     }
 }
 

@@ -121,11 +121,11 @@ struct vfs_s_subclass {
     void (*free_inode) (struct vfs_class *me, struct vfs_s_inode *ino);	/* optional */
     int (*init_entry) (struct vfs_class *me, struct vfs_s_entry *entry);	/* optional */
 
-    void *(*archive_check) (struct vfs_class *me, char *name, char *op);	/* optional */
+    void *(*archive_check) (struct vfs_class *me, const char *name, char *op);	/* optional */
     int (*archive_same) (struct vfs_class *me, struct vfs_s_super *psup,
-			 char *archive_name, char *op, void *cookie);
+			 const char *archive_name, char *op, void *cookie);
     int (*open_archive) (struct vfs_class *me, struct vfs_s_super *psup,
-			 char *archive_name, char *op);
+			 const char *archive_name, char *op);
     void (*free_archive) (struct vfs_class *me,
 			  struct vfs_s_super *psup);
 
@@ -180,7 +180,7 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
 
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass);
-char *vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
+char *vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
 			     struct vfs_s_super **archive, int flags);
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);

@@ -198,18 +198,20 @@ static void tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 static int current_tar_position = 0;
 
 /* Returns fd of the open tar file */
-static int tar_tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_super *archive)
+static int
+tar_open_archive_int (struct vfs_class *me, const char *name,
+		      struct vfs_s_super *archive)
 {
     int result, type;
     mode_t mode;
     struct vfs_s_inode *root;
-    
+
     result = mc_open (name, O_RDONLY);
     if (result == -1) {
-        message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
+	message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
 	ERRNOR (ENOENT, -1);
     }
-    
+
     archive->name = g_strdup (name);
     mc_stat (name, &(archive->u.arch.st));
     archive->u.arch.fd = -1;
@@ -219,21 +221,24 @@ static int tar_tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_
     mc_lseek (result, 0, SEEK_SET);
     if (type != COMPRESSION_NONE) {
 	char *s;
-	mc_close( result );
-	s = g_strconcat ( archive->name, decompress_extension (type), NULL );
+	mc_close (result);
+	s = g_strconcat (archive->name, decompress_extension (type), NULL);
 	result = mc_open (s, O_RDONLY);
-	if (result == -1) 
+	if (result == -1)
 	    message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
-	g_free(s);
+	g_free (s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);
     }
-   
+
     archive->u.arch.fd = result;
     mode = archive->u.arch.st.st_mode & 07777;
-    if (mode & 0400) mode |= 0100;
-    if (mode & 0040) mode |= 0010;
-    if (mode & 0004) mode |= 0001;
+    if (mode & 0400)
+	mode |= 0100;
+    if (mode & 0040)
+	mode |= 0010;
+    if (mode & 0004)
+	mode |= 0001;
     mode |= S_IFDIR;
 
     root = vfs_s_new_inode (me, archive, &archive->u.arch.st);
@@ -514,7 +519,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
  */
 static int
 tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
-		  char *name, char *op)
+		  const char *name, char *op)
 {
     /* Initial status at start of archive */
     ReadStatus status = STATUS_EOFMARK;
@@ -523,7 +528,7 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
 
     current_tar_position = 0;
     /* Open for reading */
-    if ((tard = tar_tar_open_archive (me, name, archive)) == -1)
+    if ((tard = tar_open_archive_int (me, name, archive)) == -1)
 	return -1;
 
     for (;;) {
@@ -580,7 +585,8 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
     return 0;
 }
 
-static void *tar_super_check(struct vfs_class *me, char *archive_name, char *op)
+static void *
+tar_super_check (struct vfs_class *me, const char *archive_name, char *op)
 {
     static struct stat stat_buf;
     if (mc_stat (archive_name, &stat_buf))
@@ -589,8 +595,8 @@ static void *tar_super_check(struct vfs_class *me, char *archive_name, char *op)
 }
 
 static int
-tar_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_name,
-		char *op, void *cookie)
+tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
+		const char *archive_name, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
 

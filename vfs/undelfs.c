@@ -380,19 +380,20 @@ typedef struct {
 
 /* We do not support lseek */
 static void *
-undelfs_open (struct vfs_class *me, char *fname, int flags, int mode)
+undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
 {
     char *file, *f;
-    ext2_ino_t  inode, i;
+    ext2_ino_t inode, i;
     undelfs_file *p = NULL;
-    
+
     /* Only allow reads on this file system */
     undelfs_get_path (fname, &file, &f);
     if (!file)
 	return 0;
-    
-    if (!ext2_fname || strcmp (ext2_fname, file)){
-	message (1, undelfserr, _(" You have to chdir to extract files first "));
+
+    if (!ext2_fname || strcmp (ext2_fname, file)) {
+	message (1, undelfserr,
+		 _(" You have to chdir to extract files first "));
 	g_free (file);
 	g_free (f);
 	return 0;
@@ -400,19 +401,19 @@ undelfs_open (struct vfs_class *me, char *fname, int flags, int mode)
     inode = atol (f);
 
     /* Search the file into delarray */
-    for (i = 0; i < num_delarray; i++){
-	if (inode != delarray [i].ino)
+    for (i = 0; i < num_delarray; i++) {
+	if (inode != delarray[i].ino)
 	    continue;
 
 	/* Found: setup all the structures needed by read */
 	p = g_new (undelfs_file, 1);
-	if (!p){
+	if (!p) {
 	    g_free (file);
 	    g_free (f);
 	    return 0;
 	}
 	p->buf = g_malloc (fs->blocksize);
-	if (!p->buf){
+	if (!p->buf) {
 	    g_free (p);
 	    g_free (file);
 	    g_free (f);
@@ -423,7 +424,7 @@ undelfs_open (struct vfs_class *me, char *fname, int flags, int mode)
 	p->f_index = i;
 	p->error_code = 0;
 	p->pos = 0;
-	p->size = delarray [i].size;
+	p->size = delarray[i].size;
     }
     g_free (file);
     g_free (f);

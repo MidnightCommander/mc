@@ -306,12 +306,14 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 }
 
 static int
-fish_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op)
+fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
+		   const char *archive_name, char *op)
 {
     char *host, *user, *password, *p;
     int flags;
 
-    p = vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, &password, 0, URL_NOSLASH);
+    p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
+		       &password, 0, URL_NOSLASH);
 
     if (p)
 	g_free (p);
@@ -319,7 +321,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archiv
     SUP.host = host;
     SUP.user = user;
     SUP.flags = flags;
-    if (!strncmp( op, "rsh:", 4 ))
+    if (!strncmp (op, "rsh:", 4))
 	SUP.flags |= FISH_FLAG_RSH;
     SUP.cwdir = NULL;
     if (password)
@@ -328,19 +330,20 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super, char *archiv
 }
 
 static int
-fish_archive_same(struct vfs_class *me, struct vfs_s_super *super, char *archive_name, char *op, void *cookie)
-{	
+fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
+		   const char *archive_name, char *op, void *cookie)
+{
     char *host, *user;
     int flags;
 
-    op = vfs_split_url (strchr(op, ':')+1, &host, &user, &flags, 0, 0, URL_NOSLASH);
+    op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
+			URL_NOSLASH);
 
     if (op)
 	g_free (op);
 
-    flags = ((strcmp (host, SUP.host) == 0) &&
-	    (strcmp (user, SUP.user) == 0) &&
-	    (flags == SUP.flags));
+    flags = ((strcmp (host, SUP.host) == 0)
+	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));
     g_free (host);
     g_free (user);
 

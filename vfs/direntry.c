@@ -420,13 +420,14 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 /* ------------------------------------------------------------------------= */
 
 static void
-vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup, char *fs_name)
+vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup,
+		const char *fs_name)
 {
     struct vfs_stamping *parent;
     struct vfs_class *v;
- 
+
     v = vfs_get_class (fs_name);
-    if (v->flags & VFSF_LOCAL){
+    if (v->flags & VFSF_LOCAL) {
 	parent = NULL;
     } else {
 	parent = g_new (struct vfs_stamping, 1);
@@ -438,27 +439,33 @@ vfs_s_stamp_me (struct vfs_class *me, struct vfs_s_super *psup, char *fs_name)
 }
 
 char *
-vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
+		       struct vfs_s_super **archive, int flags)
 {
-    char *local, *op, *archive_name;
+    char *local, *op;
+    const char *archive_name;
     int result = -1;
     struct vfs_s_super *super;
     void *cookie = NULL;
-    
+
     archive_name = inname;
     vfs_split (inname, &local, &op);
     if (!local)
-        local = "";
+	local = "";
 
     if (MEDATA->archive_check)
-	if (! (cookie = MEDATA->archive_check (me, archive_name, op)))
+	if (!(cookie = MEDATA->archive_check (me, archive_name, op)))
 	    return NULL;
 
-    for (super = MEDATA->supers; super != NULL; super = super->next){
-	int i; /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-	if ((i = MEDATA->archive_same (me, super, archive_name, op, cookie))){
-	    if (i==1) goto return_success;
-	    else break;
+    for (super = MEDATA->supers; super != NULL; super = super->next) {
+	/* 0 == other, 1 == same, return it, 2 == other but stop scanning */
+	int i;
+	if ((i =
+	     MEDATA->archive_same (me, super, archive_name, op, cookie))) {
+	    if (i == 1)
+		goto return_success;
+	    else
+		break;
 	}
     }
 
@@ -467,7 +474,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
 
     super = vfs_s_new_super (me);
     result = MEDATA->open_archive (me, super, archive_name, op);
-    if (result == -1){
+    if (result == -1) {
 	vfs_s_free_super (me, super);
 	ERRNOR (EIO, NULL);
     }
@@ -479,7 +486,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname, struct vfs_s_super **
     vfs_s_insert_super (me, super);
     vfs_s_stamp_me (me, super, archive_name);
 
-return_success:
+  return_success:
     *archive = super;
     return local;
 }
@@ -536,7 +543,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 /* ------------------------ readdir & friends ----------------------------- */
 
 static struct vfs_s_inode *
-vfs_s_inode_from_path (struct vfs_class *me, char *name, int flags)
+vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
 {
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
@@ -684,7 +691,7 @@ vfs_s_readlink (struct vfs_class *me, char *path, char *buf, int size)
 }
 
 static void *
-vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
+vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     int was_changed = 0;
     struct vfs_s_fh *fh;
@@ -697,7 +704,7 @@ vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
     ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
 	ERRNOR (EEXIST, NULL);
-    if (!ino){ 
+    if (!ino) {
 	char *dirname, *name, *save;
 	struct vfs_s_entry *ent;
 	struct vfs_s_inode *dir;
@@ -724,7 +731,7 @@ vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
 
     if (S_ISDIR (ino->st.st_mode))
 	ERRNOR (EISDIR, NULL);
-    
+
     fh = g_new (struct vfs_s_fh, 1);
     fh->pos = 0;
     fh->ino = ino;
@@ -732,28 +739,29 @@ vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
     fh->changed = was_changed;
     fh->linear = 0;
 
-    if (IS_LINEAR(flags)) {
+    if (IS_LINEAR (flags)) {
 	if (MEDATA->linear_start) {
 	    print_vfs_message (_("Starting linear transfer..."));
-	    if (!MEDATA->linear_start (me, fh, 0)){
-		g_free(fh);
+	    if (!MEDATA->linear_start (me, fh, 0)) {
+		g_free (fh);
 		return NULL;
 	    }
 	}
-    } else if ((MEDATA->fh_open) && (MEDATA->fh_open (me, fh, flags, mode))){
-	    g_free(fh);
-	    return NULL;
-	}
+    } else if ((MEDATA->fh_open)
+	       && (MEDATA->fh_open (me, fh, flags, mode))) {
+	g_free (fh);
+	return NULL;
+    }
 
-    if (fh->ino->localname){
-	fh->handle = open (fh->ino->localname, NO_LINEAR(flags), mode);
-	if (fh->handle == -1){
-	    g_free(fh);
+    if (fh->ino->localname) {
+	fh->handle = open (fh->ino->localname, NO_LINEAR (flags), mode);
+	if (fh->handle == -1) {
+	    g_free (fh);
 	    ERRNOR (errno, NULL);
 	}
     }
 
-     /* i.e. we had no open files and now we have one */
+    /* i.e. we had no open files and now we have one */
     vfs_rmstamp (me, (vfsid) super, 1);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
@@ -959,16 +967,13 @@ vfs_s_ferrno (struct vfs_class *me)
 }
 
 static char *
-vfs_s_getlocalcopy (struct vfs_class *me, char *path)
+vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
 {
     struct vfs_s_inode *ino;
-    char buf[MC_MAXPATHLEN];
 
-    strncpy (buf, path, MC_MAXPATHLEN);
     ino = vfs_s_inode_from_path (me, path, FL_FOLLOW | FL_NONE);
-
     if (!ino->localname)
-	ino->localname = mc_def_getlocalcopy (me, buf);
+	ino->localname = mc_def_getlocalcopy (me, path);
     /* FIXME: fd_usage++ missing */
     return g_strdup (ino->localname);
 }

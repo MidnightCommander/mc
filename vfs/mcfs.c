@@ -83,7 +83,7 @@ static struct vfs_class vfs_mcfs_ops;
 /* Extract the hostname and username from the path */
 /* path is in the form: hostname:user/remote-dir */
 static char *
-mcfs_get_host_and_username (char *path, char **host, char **user,
+mcfs_get_host_and_username (const char *path, char **host, char **user,
 			    int *port, char **pass)
 {
     return vfs_split_url (path, host, user, port, pass, 0, 0);
@@ -361,7 +361,7 @@ mcfs_set_error (int result, int errno_num)
 }
 
 static char *
-mcfs_get_path (mcfs_connection **mc, char *path)
+mcfs_get_path (mcfs_connection **mc, const char *path)
 {
     char *user, *host, *remote_path;
     char *pass;
@@ -510,7 +510,7 @@ mcfs_gethome (mcfs_connection *mc)
 
 /* The callbacks */
 static void *
-mcfs_open (struct vfs_class *me, char *file, int flags, int mode)
+mcfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     char *remote_file;
     mcfs_connection *mc;
@@ -520,8 +520,8 @@ mcfs_open (struct vfs_class *me, char *file, int flags, int mode)
     if (!(remote_file = mcfs_get_path (&mc, file)))
 	return 0;
 
-    rpc_send (mc->sock, RPC_INT, MC_OPEN, RPC_STRING, remote_file,
-	      RPC_INT, flags, RPC_INT, mode, RPC_END);
+    rpc_send (mc->sock, RPC_INT, MC_OPEN, RPC_STRING, remote_file, RPC_INT,
+	      flags, RPC_INT, mode, RPC_END);
     g_free (remote_file);
 
     if (0 ==

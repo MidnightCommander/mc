@@ -1791,7 +1791,7 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 }
 
 static void *
-smbfs_open (struct vfs_class *me, char *file, int flags, int mode)
+smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     char *remote_file, *p;
     void *ret;

@@ -34,7 +34,8 @@ struct vfs_class {
 
     int (*which) (struct vfs_class *me, char *path);
 
-    void *(*open) (struct vfs_class *me, char *fname, int flags, int mode);
+    void *(*open) (struct vfs_class *me, const char *fname, int flags,
+		   int mode);
     int (*close) (void *vfs_info);
     int (*read) (void *vfs_info, char *buffer, int count);
     int (*write) (void *vfs_info, char *buf, int count);
@@ -49,9 +50,11 @@ struct vfs_class {
 
     int (*chmod) (struct vfs_class *me, char *path, int mode);
     int (*chown) (struct vfs_class *me, char *path, int owner, int group);
-    int (*utime) (struct vfs_class *me, char *path, struct utimbuf * times);
+    int (*utime) (struct vfs_class *me, char *path,
+		  struct utimbuf * times);
 
-    int (*readlink) (struct vfs_class *me, char *path, char *buf, int size);
+    int (*readlink) (struct vfs_class *me, char *path, char *buf,
+		     int size);
     int (*symlink) (struct vfs_class *me, char *n1, char *n2);
     int (*link) (struct vfs_class *me, char *p1, char *p2);
     int (*unlink) (struct vfs_class *me, char *path);
@@ -67,19 +70,21 @@ struct vfs_class {
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
-    char *(*getlocalcopy) (struct vfs_class *me, char *filename);
-    int (*ungetlocalcopy) (struct vfs_class *me, char *filename, char *local,
-			   int has_changed);
+    char *(*getlocalcopy) (struct vfs_class *me, const char *filename);
+    int (*ungetlocalcopy) (struct vfs_class *me, const char *filename,
+			   char *local, int has_changed);
 
     int (*mkdir) (struct vfs_class *me, char *path, mode_t mode);
     int (*rmdir) (struct vfs_class *me, char *path);
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
-    int (*setctl) (struct vfs_class *me, char *path, int ctlop, void *arg);
+    int (*setctl) (struct vfs_class *me, char *path, int ctlop,
+		   void *arg);
 #ifdef HAVE_MMAP
-    caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len, int prot,
-		     int flags, void *vfs_info, off_t offset);
-    int (*munmap) (struct vfs_class *me, caddr_t addr, size_t len, void *vfs_info);
+    caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len,
+		     int prot, int flags, void *vfs_info, off_t offset);
+    int (*munmap) (struct vfs_class *me, caddr_t addr, size_t len,
+		   void *vfs_info);
 #endif
 };
 
@@ -175,9 +180,9 @@ int mc_mkdir (char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
 int mc_ungetlocalcopy (const char *pathname, char *local, int has_changed);
-char *mc_def_getlocalcopy (struct vfs_class *vfs, char *filename);
-int mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local,
-			   int has_changed);
+char *mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename);
+int mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
+			   char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (char *path, int ctlop, void *arg);
 #ifdef HAVE_MMAP

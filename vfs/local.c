@@ -19,18 +19,18 @@
 static struct vfs_class vfs_local_ops;
 
 static void *
-local_open (struct vfs_class *me, char *file, int flags, int mode)
+local_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     int *local_info;
     int fd;
 
-    fd = open (file, NO_LINEAR(flags), mode);
+    fd = open (file, NO_LINEAR (flags), mode);
     if (fd == -1)
 	return 0;
 
     local_info = g_new (int, 1);
     *local_info = fd;
-    
+
     return local_info;
 }
 
@@ -249,13 +249,14 @@ local_free (vfsid id)
 }
 
 static char *
-local_getlocalcopy (struct vfs_class *me, char *path)
+local_getlocalcopy (struct vfs_class *me, const char *path)
 {
     return g_strdup (path);
 }
 
 static int
-local_ungetlocalcopy (struct vfs_class *me, char *path, char *local, int has_changed)
+local_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
+		      int has_changed)
 {
     return 0;
 }
