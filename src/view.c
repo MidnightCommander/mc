@@ -1386,7 +1386,7 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     if (view->growing_buffer) {
 	offset_type old_last_byte;
 
-	old_last_byte = EOF_offset;
+	old_last_byte = INVALID_OFFSET;
 	while (old_last_byte != view->last_byte) {
 	    old_last_byte = view->last_byte;
 	    get_byte (view, view->last_byte + VIEW_PAGE_SIZE);
