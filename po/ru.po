@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2002-09-19 02:43-0400\n"
+"POT-Creation-Date: 2002-09-22 15:44-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -21,42 +21,42 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit.c:187 edit/edit.c:353 edit/edit.c:358 edit/edit.c:372
-#: edit/edit.c:376 edit/edit.c:414 edit/edit.c:420 edit/edit.c:427
-#: edit/edit.c:439 edit/editcmd.c:257 edit/editcmd.c:263 edit/editcmd.c:1573
+#: edit/edit.c:175 edit/edit.c:341 edit/edit.c:346 edit/edit.c:360
+#: edit/edit.c:364 edit/edit.c:402 edit/edit.c:408 edit/edit.c:415
+#: edit/edit.c:427 edit/editcmd.c:257 edit/editcmd.c:263 edit/editcmd.c:1573
 #: src/wtools.c:134 vfs/vfs.c:1845
 msgid " Error "
 msgstr " Ошибка "
 
-#: edit/edit.c:187 edit/edit.c:376 edit/edit.c:420
+#: edit/edit.c:175 edit/edit.c:364 edit/edit.c:408
 msgid " Failed trying to open file for reading: "
 msgstr " Сбой открытия файла для чтения: "
 
-#: edit/edit.c:353
+#: edit/edit.c:341
 msgid " Error reading from pipe: "
 msgstr " Ошибка чтения из канала: "
 
-#: edit/edit.c:358
+#: edit/edit.c:346
 msgid " Failed trying to open pipe for reading: "
 msgstr " Сбой открытия канала для чтения: "
 
-#: edit/edit.c:372
+#: edit/edit.c:360
 msgid " Error reading file: "
 msgstr " Ошибка чтения файла: "
 
-#: edit/edit.c:414
+#: edit/edit.c:402
 msgid " Not an ordinary file: "
 msgstr " Необычный файл: "
 
-#: edit/edit.c:427
+#: edit/edit.c:415
 msgid " Cannot get size/permissions info on file: "
 msgstr " Невозможно получить размер/права доступа для файла: "
 
-#: edit/edit.c:439
+#: edit/edit.c:427
 msgid " File is too large: "
 msgstr " Слишком большой файл: "
 
-#: edit/edit.c:440
+#: edit/edit.c:428
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -64,19 +64,19 @@ msgstr ""
 " \n"
 " Увеличьте edit.h:MAXBUF и перекомпилируйте редактор. "
 
-#: edit/edit.c:2544
+#: edit/edit.c:2532
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
-#: edit/edit.h:341 edit/edit.h:342
+#: edit/edit.h:343 edit/edit.h:344
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
 
-#: edit/edit.h:345
+#: edit/edit.h:347
 msgid "&Dismiss"
 msgstr "Закрыть"
 
-#: edit/edit.h:347 edit/editcmd.c:344 edit/editcmd.c:1092 edit/editcmd.c:1173
+#: edit/edit.h:349 edit/editcmd.c:344 edit/editcmd.c:1092 edit/editcmd.c:1173
 #: edit/editcmd.c:2346 edit/editmenu.c:32 edit/editoptions.c:65
 #: src/boxes.c:137 src/boxes.c:274 src/boxes.c:372 src/boxes.c:464
 #: src/boxes.c:587 src/boxes.c:710 src/boxes.c:938 src/boxes.c:1007
@@ -151,10 +151,10 @@ msgid " Save As "
 msgstr " Сохранить как "
 
 #: edit/editcmd.c:433 edit/editcmd.c:717 edit/editcmd.c:742 edit/editcmd.c:886
-#: edit/editcmd.c:984 src/file.c:592 src/help.c:314 src/main.c:466
+#: edit/editcmd.c:984 src/file.c:592 src/help.c:317 src/main.c:466
 #: src/screen.c:1375 src/screen.c:1995 src/selcodepage.c:101
 #: src/subshell.c:703 src/utilunix.c:352 src/utilunix.c:356 src/utilunix.c:378
-#: src/utilunix.c:430 vfs/mcfs.c:126
+#: src/utilunix.c:430 vfs/mcfs.c:127
 msgid " Warning "
 msgstr " Предупреждение "
 
@@ -219,7 +219,7 @@ msgstr " Подтверждаете запись файла?: "
 msgid " Save file "
 msgstr " Сохранить файл "
 
-#: edit/editcmd.c:693 edit/editwidget.c:226 src/view.c:2048
+#: edit/editcmd.c:693 edit/editwidget.c:258 src/view.c:2048
 msgid "Save"
 msgstr "Запись"
 
@@ -761,40 +761,40 @@ msgstr "Эмуляция раскладки клавиш"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-#: edit/editwidget.c:225 src/help.c:797 src/help.c:818 src/main.c:1397
+#: edit/editwidget.c:257 src/help.c:800 src/help.c:821 src/main.c:1395
 #: src/screen.c:2206 src/tree.c:1019 src/view.c:2041
 msgid "Help"
 msgstr "Помощь"
 
-#: edit/editwidget.c:227
+#: edit/editwidget.c:259
 msgid "Mark"
 msgstr "Блок"
 
-#: edit/editwidget.c:228
+#: edit/editwidget.c:260
 msgid "Replac"
 msgstr "Замена"
 
-#: edit/editwidget.c:229 src/file.c:770 src/screen.c:2210 src/tree.c:1025
+#: edit/editwidget.c:261 src/file.c:770 src/screen.c:2210 src/tree.c:1025
 msgid "Copy"
 msgstr "Копия"
 
-#: edit/editwidget.c:230
+#: edit/editwidget.c:262
 msgid "Move"
 msgstr "Переместить"
 
-#: edit/editwidget.c:231 src/view.c:2056
+#: edit/editwidget.c:263 src/view.c:2056
 msgid "Search"
 msgstr "Поиск"
 
-#: edit/editwidget.c:232 src/screen.c:2213
+#: edit/editwidget.c:264 src/screen.c:2213
 msgid "Delete"
 msgstr "Удалить"
 
-#: edit/editwidget.c:234 src/main.c:1399
+#: edit/editwidget.c:266 src/main.c:1397
 msgid "PullDn"
 msgstr "МенюMC"
 
-#: edit/editwidget.c:235 src/help.c:830 src/main.c:1400 src/view.c:2043
+#: edit/editwidget.c:267 src/help.c:833 src/main.c:1398 src/view.c:2043
 #: src/view.c:2065
 msgid "Quit"
 msgstr "Выход"
@@ -1361,11 +1361,11 @@ msgstr "По&байтный"
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
 
-#: src/cmd.c:896
+#: src/cmd.c:897
 msgid " The command history is empty "
 msgstr " История командной строки пуста "
 
-#: src/cmd.c:902
+#: src/cmd.c:903
 msgid " Command history "
 msgstr " История командной строки "
 
@@ -1494,7 +1494,7 @@ msgstr ""
 " Невозможно перейти в '%s' \n"
 " %s "
 
-#: src/command.c:198
+#: src/command.c:201
 msgid " You can not execute commands on non-local filesystems"
 msgstr " Невозможно выполнять команды на не локальных файловых системах"
 
@@ -2283,7 +2283,7 @@ msgstr "Ищем %s"
 msgid "Searching"
 msgstr "Ищем"
 
-#: src/help.c:275
+#: src/help.c:278
 msgid ""
 " Help file format error\n"
 ""
@@ -2291,16 +2291,16 @@ msgstr ""
 "Ошибка формата файла помощи\n"
 ""
 
-#: src/help.c:314
+#: src/help.c:317
 msgid " Internal bug: Double start of link area "
 msgstr " Внутренняя ошибка: Двойное начало области ссылки "
 
-#: src/help.c:564 src/help.c:782
+#: src/help.c:567 src/help.c:785
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " Невозможно найти узел %s в файле помощи "
 
-#: src/help.c:768 src/user.c:688
+#: src/help.c:771 src/user.c:688
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -2309,11 +2309,11 @@ msgstr ""
 " Невозможно открыть файл %s \n"
 " %s "
 
-#: src/help.c:820
+#: src/help.c:823
 msgid "Index"
 msgstr "Содерж"
 
-#: src/help.c:822
+#: src/help.c:825
 msgid "Prev"
 msgstr "Назад"
 
@@ -3045,24 +3045,24 @@ msgstr ""
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
-#: src/main.c:1398 src/screen.c:2207
+#: src/main.c:1396 src/screen.c:2207
 msgid "Menu"
 msgstr "Меню"
 
-#: src/main.c:1536
+#: src/main.c:1534
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
-#: src/main.c:1635
+#: src/main.c:1633
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Благодарим Вас за использование GNU Midnight Commander"
 
-#: src/main.c:1827 src/textconf.c:115
+#: src/main.c:1825 src/textconf.c:112
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
-#: src/main.c:2081
+#: src/main.c:2079
 msgid ""
 "Usage is:\n"
 "\n"
@@ -3074,15 +3074,15 @@ msgstr ""
 "mc [флаги] [этот_каталог] [каталог_другой_панели]\n"
 "\n"
 
-#: src/main.c:2087
+#: src/main.c:2085
 msgid "+number"
 msgstr "+число"
 
-#: src/main.c:2088
+#: src/main.c:2086
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
 
-#: src/main.c:2090
+#: src/main.c:2088
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3092,7 +3092,7 @@ msgstr ""
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-devel@gnome.org\n"
 
-#: src/main.c:2099
+#: src/main.c:2097
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3130,100 +3130,95 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#: src/main.c:2148
-#, c-format
-msgid "Library directory for the Midnight Commander: %s\n"
-msgstr "Библиотечный каталог Midnight Commander: %s\n"
-
-#: src/main.c:2191
+#: src/main.c:2189
 msgid "Use to debug the background code"
 msgstr "Использовать для отладки фонового кода"
 
-#: src/main.c:2194
+#: src/main.c:2192
 msgid "Request to run in color mode"
 msgstr "Принудительно установить цветной режим"
 
-#: src/main.c:2196
+#: src/main.c:2194
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
-#: src/main.c:2200
+#: src/main.c:2198
 msgid "Edits one file"
 msgstr "Редактировать файл"
 
-#: src/main.c:2204
+#: src/main.c:2202
 msgid "Displays this help message"
 msgstr "Показать это справочное сообщение"
 
-#: src/main.c:2206
+#: src/main.c:2204
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Показать справку, как изменить цветовую схему"
 
-#: src/main.c:2209
+#: src/main.c:2207
 msgid "Log ftp dialog to specified file"
 msgstr "Записывать диалог с FTP в заданный файл"
 
-#: src/main.c:2212
+#: src/main.c:2210
 msgid "Set debug level"
 msgstr "Установить уровень отладки"
 
-#: src/main.c:2216
-msgid "Print configured paths"
-msgstr "Показать сконфигурированные пути"
+#: src/main.c:2214
+msgid "Print data directory"
+msgstr "Распечатать имя каталога для данных"
 
-#: src/main.c:2218
+#: src/main.c:2216
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
 
-#: src/main.c:2220
+#: src/main.c:2218
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
-#: src/main.c:2223
+#: src/main.c:2221
 msgid "Disables subshell support"
 msgstr "Отключить поддержку встроенной командной оболочки"
 
-#: src/main.c:2225
+#: src/main.c:2223
 msgid "Force subshell execution"
 msgstr "Принудетельное исполнение во встроенной командной оболочке"
 
-#: src/main.c:2228
+#: src/main.c:2226
 msgid "Prints working directory at program exit"
 msgstr "Печатать рабочий каталог при выходе из программы"
 
-#: src/main.c:2230
+#: src/main.c:2228
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#: src/main.c:2232
+#: src/main.c:2230
 msgid "To run on slow terminals"
 msgstr "Подразумевать медленный терминал"
 
-#: src/main.c:2235
+#: src/main.c:2233
 msgid "Use stickchars to draw"
 msgstr "Использовать псевдографика для рисования"
 
-#: src/main.c:2239
+#: src/main.c:2237
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
-#: src/main.c:2243
+#: src/main.c:2241
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Пытаться использовать termcap вместо terminfo"
 
-#: src/main.c:2246
+#: src/main.c:2244
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
 
-#: src/main.c:2248
+#: src/main.c:2246
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
-#: src/main.c:2250
+#: src/main.c:2248
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
-#: src/main.c:2441
+#: src/main.c:2439
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3231,11 +3226,11 @@ msgstr ""
 "Невозможно открыть tty линию. Вы должны запустить mc без флага -P.\n"
 "На некоторых системах вы можете захотеть запустить # `which mc`\n"
 
-#: src/main.c:2504
+#: src/main.c:2502
 msgid " Notice "
 msgstr " Предупреждение "
 
-#: src/main.c:2505
+#: src/main.c:2503
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3345,55 +3340,51 @@ msgstr "Параметры конфигурации"
 msgid "&Add new"
 msgstr "&Добавить"
 
-#: src/panelize.c:89
-msgid " External panelize "
-msgstr " Внешняя панелизация "
-
-#: src/panelize.c:167 src/panelize.c:430
+#: src/panelize.c:164 src/panelize.c:427
 msgid "External panelize"
 msgstr "Внешняя панелизация"
 
-#: src/panelize.c:177
+#: src/panelize.c:174
 msgid "Command"
 msgstr "Команда"
 
-#: src/panelize.c:191 src/panelize.c:248 src/panelize.c:319 src/panelize.c:340
+#: src/panelize.c:188 src/panelize.c:245 src/panelize.c:316 src/panelize.c:337
 msgid "Other command"
 msgstr "Новая команда"
 
-#: src/panelize.c:232
+#: src/panelize.c:229
 msgid " Add to external panelize "
 msgstr " Добавить в список команд "
 
-#: src/panelize.c:233
+#: src/panelize.c:230
 msgid " Enter command label: "
 msgstr " Введите название команды: "
 
-#: src/panelize.c:272 src/user.c:670
+#: src/panelize.c:269 src/user.c:670
 msgid " Oops... "
 msgstr " Ой... "
 
-#: src/panelize.c:273
+#: src/panelize.c:270
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr " Невозможно выполнить эту команду, находясь не в локальном каталоге "
 
-#: src/panelize.c:322
+#: src/panelize.c:319
 msgid "Find rejects after patching"
 msgstr "Найти корректуры, отвергнутые командой patch"
 
-#: src/panelize.c:323
+#: src/panelize.c:320
 msgid "Find *.orig after patching"
 msgstr "Найти оригиналы (*.orig) после команды patch"
 
-#: src/panelize.c:324
+#: src/panelize.c:321
 msgid "Find SUID and SGID programs"
 msgstr "Найти программы со взведенным SUID/SGID битами"
 
-#: src/panelize.c:375
+#: src/panelize.c:372
 msgid "Cannot invoke command."
 msgstr "Невозможно исполнить команду."
 
-#: src/panelize.c:430
+#: src/panelize.c:427
 msgid "Pipe close failed"
 msgstr "Сбой закрытия канала"
 
@@ -3573,79 +3564,75 @@ msgstr ", cpiofs"
 msgid ", ftpfs"
 msgstr ", ftpfs"
 
-#: src/textconf.c:32
-msgid " (proxies: hsc proxy)"
-msgstr " (прокси: hsc)"
-
-#: src/textconf.c:34
+#: src/textconf.c:31
 msgid ", fish"
 msgstr ", fish"
 
-#: src/textconf.c:36
+#: src/textconf.c:33
 msgid ", mcfs"
 msgstr ", mcfs"
 
-#: src/textconf.c:39
+#: src/textconf.c:36
 msgid ", smbfs"
 msgstr ", smbfs"
 
-#: src/textconf.c:43
+#: src/textconf.c:40
 msgid ", undelfs"
 msgstr ", undelfs"
 
-#: src/textconf.c:49
+#: src/textconf.c:46
 msgid "With builtin Editor\n"
 msgstr "Со встроенным редактором\n"
 
-#: src/textconf.c:55
+#: src/textconf.c:52
 msgid "Using system-installed S-Lang library"
 msgstr "С установленной в системе библиотекой S-Lang"
 
-#: src/textconf.c:57
+#: src/textconf.c:54
 msgid "Using included S-Lang library"
 msgstr "С включенной библиотекой S-Lang"
 
-#: src/textconf.c:63
+#: src/textconf.c:60
 msgid "with termcap database"
 msgstr "с базой данных termcap"
 
-#: src/textconf.c:65
+#: src/textconf.c:62
 msgid "with terminfo database"
 msgstr "с базой данных terminfo"
 
-#: src/textconf.c:69
+#: src/textconf.c:66
 msgid "Using the ncurses library"
 msgstr "С библиотекой ncurses"
 
-#: src/textconf.c:78
+#: src/textconf.c:75
 msgid "With optional subshell support"
 msgstr "С опциональной поддержкой внутренней командной оболочки"
 
-#: src/textconf.c:80
+#: src/textconf.c:77
 msgid "With subshell support as default"
 msgstr "C поддержкой внутренней командной оболочки"
 
-#: src/textconf.c:86
+#: src/textconf.c:83
 msgid "With support for background operations\n"
 msgstr "С поддержкой фоновых операций\n"
 
-#: src/textconf.c:90
+#: src/textconf.c:87
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "С поддержкой мыши в xterm и консоли Linux\n"
 
-#: src/textconf.c:92
+#: src/textconf.c:89
 msgid "With mouse support on xterm\n"
 msgstr "С поддержкой мыши в xterm\n"
 
-#: src/textconf.c:96
+#: src/textconf.c:93
 msgid "With support for X11 events\n"
 msgstr "С поддержкой событий X11\n"
 
-#: src/textconf.c:100
+#: src/textconf.c:97
 msgid "With internationalization support\n"
 msgstr "С поддержкой интернационализации\n"
 
-#: src/textconf.c:104
+#: src/textconf.c:101
 msgid "With multiple codepages support\n"
 msgstr "С поддержкой многих кодировок\n"
 
@@ -3777,15 +3764,15 @@ msgstr " Не найдено подходящих записей в %s"
 msgid " User menu "
 msgstr " Меню пользователя "
 
-#: src/util.c:215
+#: src/util.c:223
 msgid "name_trunc: too big"
 msgstr "name_trunc: Слишком большой"
 
-#: src/util.c:665 src/util.c:691
+#: src/util.c:673 src/util.c:699
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:666 src/util.c:689
+#: src/util.c:674 src/util.c:697
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -4289,12 +4276,12 @@ msgstr "fish: Соединение успешно, персональный каталог %s."
 msgid "fish: Reading directory %s..."
 msgstr "fish: Чтение каталога %s..."
 
-#: vfs/fish.c:469 vfs/ftpfs.c:1367 vfs/undelfs.c:313
+#: vfs/fish.c:469 vfs/ftpfs.c:1308 vfs/undelfs.c:313
 #, c-format
 msgid "%s: done."
 msgstr "%s: готово."
 
-#: vfs/fish.c:474 vfs/ftpfs.c:1319 vfs/undelfs.c:316
+#: vfs/fish.c:474 vfs/ftpfs.c:1260 vfs/undelfs.c:316
 #, c-format
 msgid "%s: failure"
 msgstr "%s: ошибка"
@@ -4329,137 +4316,116 @@ msgstr "Отмечена ошибка после прерывания."
 msgid "Aborted transfer would be successful."
 msgstr "Передача успешно прервана."
 
-#: vfs/ftpfs.c:379
+#: vfs/ftpfs.c:378
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Отсоединение от %s"
 
-#: vfs/ftpfs.c:436
+#: vfs/ftpfs.c:432
 msgid " FTP: Password required for "
 msgstr " FTP: Требуется пароль для "
 
-#: vfs/ftpfs.c:464
-msgid " Proxy: Password required for "
-msgstr " Прокси: Требуется пароль для "
-
-#: vfs/ftpfs.c:490
-msgid "ftpfs: sending proxy login name"
-msgstr "ftpfs: Посылается имя пользователя прокси"
-
-#: vfs/ftpfs.c:494
-msgid "ftpfs: sending proxy user password"
-msgstr "ftpfs: Посылается пароль пользователя прокси"
-
-#: vfs/ftpfs.c:498
-msgid "ftpfs: proxy authentication succeeded"
-msgstr "ftpfs: Авторизация на прокси успешна"
-
-#: vfs/ftpfs.c:502
-#, c-format
-msgid "ftpfs: connected to %s"
-msgstr "ftpfs: Подключен к %s"
-
-#: vfs/ftpfs.c:519
+#: vfs/ftpfs.c:466
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Посылается имя пользователя"
 
-#: vfs/ftpfs.c:524
+#: vfs/ftpfs.c:471
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: Посылается пароль пользователя"
 
-#: vfs/ftpfs.c:529
+#: vfs/ftpfs.c:476
 msgid "ftpfs: logged in"
 msgstr "ftpfs: зарегистрирован"
 
-#: vfs/ftpfs.c:544
+#: vfs/ftpfs.c:491
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Ошибка регистрации пользователя %s "
 
-#: vfs/ftpfs.c:576
+#: vfs/ftpfs.c:523
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr "Невозможно установить распределение источника (%s)"
 
-#: vfs/ftpfs.c:703
+#: vfs/ftpfs.c:644
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Неверное имя системы."
 
-#: vfs/ftpfs.c:723
+#: vfs/ftpfs.c:664
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Неверный адрес системы."
 
-#: vfs/ftpfs.c:746
+#: vfs/ftpfs.c:687
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: осуществляется соединение с %s"
 
-#: vfs/ftpfs.c:756
+#: vfs/ftpfs.c:697
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: соединение прервано пользователем"
 
-#: vfs/ftpfs.c:758
+#: vfs/ftpfs.c:699
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: сбой соединения с сервером: %s"
 
-#: vfs/ftpfs.c:799
+#: vfs/ftpfs.c:740
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
 
-#: vfs/ftpfs.c:982
+#: vfs/ftpfs.c:923
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: невозможно установить пассивный режим"
 
-#: vfs/ftpfs.c:1055
+#: vfs/ftpfs.c:996
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: прерывание передачи."
 
-#: vfs/ftpfs.c:1057
+#: vfs/ftpfs.c:998
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Ошибка прерывания: %s"
 
-#: vfs/ftpfs.c:1062
+#: vfs/ftpfs.c:1003
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: сбой прерывания"
 
-#: vfs/ftpfs.c:1151 vfs/ftpfs.c:1256
+#: vfs/ftpfs.c:1092 vfs/ftpfs.c:1197
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
 
-#: vfs/ftpfs.c:1161 vfs/ftpfs.c:1168
+#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1109
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: невозможно распознать символическую ссылку"
 
-#: vfs/ftpfs.c:1219
+#: vfs/ftpfs.c:1160
 msgid "Resolving symlink..."
 msgstr "Распознается символическая ссылка..."
 
-#: vfs/ftpfs.c:1244
+#: vfs/ftpfs.c:1185
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Чтение каталога FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1245
+#: vfs/ftpfs.c:1186
 msgid "(strict rfc959)"
 msgstr "(ограничение rfc959)"
 
-#: vfs/ftpfs.c:1246
+#: vfs/ftpfs.c:1187
 msgid "(chdir first)"
 msgstr "(сначала chdir)"
 
-#: vfs/ftpfs.c:1380
+#: vfs/ftpfs.c:1321
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
-#: vfs/ftpfs.c:1445
+#: vfs/ftpfs.c:1386
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: запись файла %lu (%lu)"
 
-#: vfs/ftpfs.c:1904
+#: vfs/ftpfs.c:1845
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4467,15 +4433,15 @@ msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения."
 
-#: vfs/mcfs.c:111 vfs/mcfs.c:154
+#: vfs/mcfs.c:112 vfs/mcfs.c:155
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:111
+#: vfs/mcfs.c:112
 msgid " The server does not support this version "
 msgstr " Сервер не поддерживает данную версию "
 
-#: vfs/mcfs.c:127
+#: vfs/mcfs.c:128
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4485,38 +4451,38 @@ msgstr ""
 " Требуется пароль для входа в систему, но это может быть \n"
 " небезопасно для информации на удаленной стороне. Продолжать?\n"
 
-#: vfs/mcfs.c:130
+#: vfs/mcfs.c:131
 msgid " Yes "
 msgstr " Да "
 
-#: vfs/mcfs.c:130
+#: vfs/mcfs.c:131
 msgid " No "
 msgstr " Нет "
 
-#: vfs/mcfs.c:140
+#: vfs/mcfs.c:141
 msgid " MCFS Password required "
 msgstr " Требуется пароль MCFS "
 
-#: vfs/mcfs.c:154
+#: vfs/mcfs.c:155
 msgid " Invalid password "
 msgstr " Неверный пароль "
 
-#: vfs/mcfs.c:185
+#: vfs/mcfs.c:186
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Невозможно определить имя машины: %s"
 
-#: vfs/mcfs.c:203
+#: vfs/mcfs.c:204
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Невозможно создать сокет: %s "
 
-#: vfs/mcfs.c:209
+#: vfs/mcfs.c:210
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr "Невозможно соединиться с сервером: %s "
 
-#: vfs/mcfs.c:275
+#: vfs/mcfs.c:276
 msgid " Too many open connections "
 msgstr " Слишком много открытых соединений "
 
