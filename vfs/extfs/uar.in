@@ -25,7 +25,7 @@ mcarfs_copyin ()
     TMPDIR=/tmp/mctmpdir-uar.$$
     mkdir $TMPDIR || exit 1
     name=`basename "$2"`
-    (cd $TMPDIR && cp -f "$3" $name && $XAR r "$1" $name)
+    (cd $TMPDIR && cp -fp "$3" $name && $XAR r "$1" $name)
     rm -rf $TMPDIR
 }
 
