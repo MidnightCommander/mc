@@ -104,8 +104,8 @@ VFSSOOBJS = tcputil.so fish.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
 %.so:	%.c
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
 
-libvfs.so: $(VFSSOOBJS) libvfs.o
-	gcc $(VFSSOOBJS) libvfs.o -shared -o libvfs.so
+libvfs.so: $(VFSSOOBJS)
+	gcc $(VFSSOOBJS) -shared -o libvfs.so
 
 
 Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
@@ -156,7 +156,7 @@ TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
 clean:
-	$(RMF) mcserv *.o core a.out libvfs-mc.a mcservx libvfs.so
+	$(RMF) mcserv *.o core a.out libvfs-mc.a mcservx *.so *.sor
 
 realclean: clean
 	$(RMF) .depend
