@@ -1,3 +1,10 @@
+2002-08-03  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/mail.syntax: Colors changed to be more readable.
+
+	* syntax/html.syntax: Don't require character entities to be
+	whole, but check their validity.
+
 2002-08-02  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: No longer need to define REGEX_MALLOC.
