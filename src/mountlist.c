@@ -38,6 +38,10 @@ void free (void *ptr);
 #    include <unistd.h>
 #endif
 
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+
 #if defined (MOUNTED_GETFSSTAT)	/* __alpha running OSF_1 */
 #include <sys/mount.h>
 #include <sys/fs_types.h>

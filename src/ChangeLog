@@ -1,3 +1,10 @@
+2001-09-06  Pavel Roskin  <proski@gnu.org>
+
+	* fsusage.c: Include sys/param.h before sys/mount.h - it's
+	required on some systems.
+	* mountlist.c: Likewise.
+	From Timur Bakeyev <mc@bat.ru>
+
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Don't use substituted values directly.  Define
