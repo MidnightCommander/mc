@@ -132,6 +132,7 @@ static Property confirmation_props [] =
         PROPERTIES_DONE
 };
 
+#ifdef USE_VFS
 static Property vfs_props [] =
 {
         {
@@ -148,6 +149,7 @@ static Property vfs_props [] =
         },
         PROPERTIES_DONE
 };
+#endif /* !USE_VFS */
 
 static Property caching_and_optimization_props [] =
 {
@@ -159,10 +161,12 @@ static Property caching_and_optimization_props [] =
                 N_("Compute totals before copying files"), PROPERTY_BOOL,
                 &file_op_compute_totals, NULL, NULL, NULL
         },
+#ifdef USE_VFS
         {
                 N_("FTP directory cache timeout :"), PROPERTY_INT,
                 &ftpfs_directory_timeout, N_("Seconds"), NULL, NULL
         },
+#endif /* !USE_VFS */
         {
                 N_("Allow customization of icons in icon view"), PROPERTY_BOOL,
                 &we_can_afford_the_speed, NULL, NULL, NULL
@@ -180,10 +184,12 @@ static PrefsPage prefs_pages [] =
                 N_("Confirmation"),
                 confirmation_props
         },
+#ifdef USE_VFS
         {
                 N_("VFS"),
                 vfs_props
         },
+#endif /* !USE_VFS */
         {
                 N_("Caching"),
                 caching_and_optimization_props
