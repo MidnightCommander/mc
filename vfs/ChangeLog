@@ -1,3 +1,8 @@
+2001-10-16  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* samba/libsmb/clientgen.c (cli_RNetShareEnum): Fix Win2k 
+	"out of server memory" error. From samba 2.0.7 patchset.
+
 2001-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_parse_filetype): Fix fallback to fifo if sockets

@@ -553,12 +553,16 @@ BOOL cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, c
   pstrcpy(p,"B13BWz");
   p = skip_string(p,1);
   SSVAL(p,0,1);
-  SSVAL(p,2,0xFFFF);
+  /*
+   * Win2k needs a *smaller* buffer than 0xFFFF here -
+   * it returns "out of server memory" with 0xFFFF !!! JRA.
+   */
+  SSVAL(p,2,0xFFE0);
   p += 4;
 
   if (cli_api(cli, 
               param, PTR_DIFF(p,param), 1024,  /* Param, length, maxlen */
-              NULL, 0, 0xFFFF,            /* data, length, maxlen */
+              NULL, 0, 0xFFE0,            /* data, length, maxlen - Win2k needs a small buffer here too ! */
               &rparam, &rprcnt,                /* return params, length */
               &rdata, &rdrcnt))                /* return data, length */
     {
