@@ -83,8 +83,7 @@ typedef enum {
     STRCOLL_TEST	
 } strcoll_status;
 
-static int
-string_sortcomp (char *str1, char *str2)
+static int string_sortcomp (char *str1, char *str2)
 {
     static strcoll_status use_strcoll = STRCOLL_TEST;
 
@@ -594,75 +593,91 @@ alloc_dir_copy (int size)
 
 /* If filter is null, then it is a match */
 int
-do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
+do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	       int case_sensitive, char *filter)
 {
-    DIR           *dirp;
+    DIR *dirp;
     struct dirent *dp;
-    int           next_free = 0;
-    int           i, found, status, link_to_dir, stalled_link;
-    struct stat   buf;
-    int		  tmp_len;  /* For optimisation */
-    int 	  dotdot_found = 0;
+    int next_free = 0;
+    int i, status, link_to_dir, stalled_link;
+    struct stat buf;
+    int tmp_len;		/* For optimisation */
+    int dotdot_found = 0;
+    int marked_cnt;
 
     tree_store_start_check_cwd ();
     dirp = mc_opendir (".");
     if (!dirp) {
- 	clean_dir (list, count);
+	clean_dir (list, count);
 	tree_store_end_check ();
 	return set_zero_dir (list);
     }
 
     alloc_dir_copy (list->size);
-    for (i = 0; i < count; i++){
-	dir_copy.list [i].fnamelen = list->list [i].fnamelen;
-	dir_copy.list [i].fname =    list->list [i].fname;
-	dir_copy.list [i].f.marked = list->list [i].f.marked;
-        dir_copy.list [i].f.dir_size_computed = list->list [i].f.dir_size_computed;
-	dir_copy.list [i].f.link_to_dir = list->list [i].f.link_to_dir;
-	dir_copy.list [i].f.stalled_link = list->list [i].f.stalled_link;
+    for (marked_cnt = i = 0; i < count; i++) {
+	dir_copy.list[i].fnamelen = list->list[i].fnamelen;
+	dir_copy.list[i].fname = list->list[i].fname;
+	dir_copy.list[i].f.marked = list->list[i].f.marked;
+	dir_copy.list[i].f.dir_size_computed =
+	    list->list[i].f.dir_size_computed;
+	dir_copy.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
+	dir_copy.list[i].f.stalled_link = list->list[i].f.stalled_link;
+	if (list->list[i].f.marked)
+	    marked_cnt++;
     }
 
-    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)){
-	status = handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
-	    &stalled_link);
+    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
+	status =
+	    handle_dirent (list, filter, dp, &buf, next_free, &link_to_dir,
+			   &stalled_link);
 	if (status == 0)
 	    continue;
 	if (status == -1) {
 	    mc_closedir (dirp);
 	    /* Norbert (Feb 12, 1997):
-	     Just in case someone finds this memory leak:
-	     -1 means big trouble (at the moment no memory left),
-	     I don't bother with further cleanup because if one gets to
-	     this point he will have more problems than a few memory
-	     leaks and because one 'clean_dir' would not be enough (and
-	     because I don't want to spent the time to make it working,
-             IMHO it's not worthwhile).
-	    clean_dir (&dir_copy, count);
-             */
+	       Just in case someone finds this memory leak:
+	       -1 means big trouble (at the moment no memory left),
+	       I don't bother with further cleanup because if one gets to
+	       this point he will have more problems than a few memory
+	       leaks and because one 'clean_dir' would not be enough (and
+	       because I don't want to spent the time to make it working,
+	       IMHO it's not worthwhile).
+	       clean_dir (&dir_copy, count);
+	     */
 	    tree_store_end_check ();
 	    return next_free;
 	}
 
+	list->list[next_free].f.marked = 0;
 	tmp_len = NLENGTH (dp);
-	for (found = i = 0; i < count; i++)
-	    if (tmp_len == dir_copy.list [i].fnamelen
-		&& !strcmp (dp->d_name, dir_copy.list [i].fname)){
-		list->list [next_free].f.marked = dir_copy.list [i].f.marked;
-                found = 1;
-		break;
+
+	/*
+	 * If we have marked files in the copy, scan through the copy
+	 * to find matching file.  Decrease number of remaining marks if
+	 * we copied one.
+	 * TODO: Use binary search.
+	 */
+	if (marked_cnt > 0) {
+	    for (i = 0; i < count; i++) {
+		if (tmp_len == dir_copy.list[i].fnamelen
+		    && !strcmp (dp->d_name, dir_copy.list[i].fname)) {
+		    list->list[next_free].f.marked =
+			dir_copy.list[i].f.marked;
+		    if (dir_copy.list[i].f.marked) {
+			marked_cnt--;
+		    }
+		    break;
+		}
 	    }
+	}
 
-	if (!found)
-	    list->list [next_free].f.marked = 0;
-
-	list->list [next_free].fnamelen = tmp_len;
-	list->list [next_free].fname = g_strdup (dp->d_name);
-	list->list [next_free].f.link_to_dir = link_to_dir;
-	list->list [next_free].f.stalled_link = stalled_link;
-        list->list [next_free].f.dir_size_computed = 0;
-	list->list [next_free].buf = buf;
-	if (strcmp (dp->d_name, ".." ) == 0)
+	list->list[next_free].fnamelen = tmp_len;
+	list->list[next_free].fname = g_strdup (dp->d_name);
+	list->list[next_free].f.link_to_dir = link_to_dir;
+	list->list[next_free].f.stalled_link = stalled_link;
+	list->list[next_free].f.dir_size_computed = 0;
+	list->list[next_free].buf = buf;
+	if (strcmp (dp->d_name, "..") == 0)
 	    dotdot_found = 1;
 	next_free++;
 	if (!(next_free % 16))
@@ -673,9 +688,8 @@ do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     if (next_free) {
 	if (!dotdot_found)
 	    add_dotdot_to_list (list, next_free++);
-	do_sort (list, sort, next_free-1, rev, case_sensitive);
-    }
-    else
+	do_sort (list, sort, next_free - 1, rev, case_sensitive);
+    } else
 	next_free = set_zero_dir (list);
     clean_dir (&dir_copy, count);
     return next_free;

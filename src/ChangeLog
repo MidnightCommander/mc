@@ -1,3 +1,10 @@
+2001-12-03  Pavel Roskin  <proski@gnu.org>
+
+	* dir.c (do_reload_dir): Optimize the logic - count the marks
+	and only match new entries against old entries if at least one
+	mark has not been transferred.
+	From Björn Eriksson <mdeans@algonet.se>
+
 2001-11-29  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (midnight_callback): Implement "auto menus".
