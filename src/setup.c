@@ -203,6 +203,7 @@ static const struct {
     { "editor_backspace_through_tabs", &option_backspace_through_tabs },
     { "editor_fake_half_tabs", &option_fake_half_tabs },
     { "editor_option_save_mode", &option_save_mode },
+    { "editor_option_save_position", &option_save_position },
     { "editor_option_backup_ext_int", &option_backup_ext_int },
     { "editor_option_auto_para_formatting", &option_auto_para_formatting },
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },

@@ -1,3 +1,7 @@
+2002-11-29  Pavel Roskin  <proski@gnu.org>
+
+	* setup.c: Add option_save_position to the options table.
+
 2002-11-28  Pavel Roskin  <proski@gnu.org>
 
 	* tree.c: Make struct WTree opaque.  Remove "done" flag - it's
