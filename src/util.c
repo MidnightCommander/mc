@@ -1019,10 +1019,11 @@ void wipe_password (char *passwd)
 
 /* Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key */
 /* Returns a newly allocated string */
-char *convert_controls (char *s)
+char *convert_controls (const char *s)
 {
     char *valcopy = g_strdup (s);
-    char *p, *q;
+    const char *p;
+    char *q;
 
     /* Parse the escape special character */
     for (p = s, q = valcopy; *p;){
@@ -1038,9 +1039,10 @@ char *convert_controls (char *s)
 		if (*p == '^')
 		    *q++ = *p++;
 		else {
-		    *p = (*p | 0x20);
-		    if (*p >= 'a' && *p <= 'z') {
-		        *q++ = *p++ - 'a' + 1;
+		    char c = (*p | 0x20);
+		    if (c >= 'a' && c <= 'z') {
+		        *q++ = c - 'a' + 1;
+			p++;
 		    } else
 		        p++;
 		}

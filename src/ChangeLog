@@ -1,3 +1,8 @@
+2004-09-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* complete.c [__linux__ && !__USE_GNU]: Fix compilation on Red Hat 7.3
+	* util.c (convert_controls): Fix compilation.
+
 2004-09-26  Roland Illig  <roland.illig@gmx.de>
 
 	* pipethrough.c: #include <string.h> to compile on Solaris.
