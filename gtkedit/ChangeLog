@@ -1,3 +1,10 @@
+2001-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c [HAVE_CHARSET]: Include charsets.h and selcodepage.h.
+	* editcmd.c [HAVE_CHARSET]: Add charset conversion support.
+	* editdraw.c [HAVE_CHARSET]: Likewise.
+	From Walery Studennikov <hqsoftware@mail.ru>.
+
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit.h: Warning fix - use stricter declarations for

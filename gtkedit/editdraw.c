@@ -33,6 +33,10 @@
 #include "mad.h"
 #endif
 
+#ifdef HAVE_CHARSET
+#include "../src/charsets.h"
+#endif
+
 extern int column_highlighting;
 
 #if defined (MIDNIGHT) || defined (GTK)
@@ -440,6 +444,10 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		case '\r':
 		    break;
 		default:
+#ifdef HAVE_CHARSET
+		    if (c >= 0 && c <= 255)
+			c = conv_displ[ c ];
+#endif
 		    if (is_printable (c)) {
 			*(p++) |= c;
 		    } else {

@@ -42,6 +42,11 @@
 
 #include <../src/dialog.h> /* MSG_ERROR */
 
+#ifdef HAVE_CHARSET
+#include "../src/charsets.h"
+#include "../src/selcodepage.h"
+#endif
+
 extern char *edit_one_file;
 
 /*

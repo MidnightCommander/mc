@@ -41,6 +41,10 @@
 #endif
 #endif
 
+#ifndef HAVE_CHARSET
+#include "../src/charsets.h"
+#endif
+
 /* globals: */
 
 /* search and replace: */
@@ -1202,7 +1206,16 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	 0, 0, 0, 0, 0},
 	{0}};
 
+#ifndef HAVE_CHARSET
     quick_widgets[5].text = catstrs (_ (" Replace with: "), replace_text, 0);
+#else
+    char *msg; 
+
+    quick_widgets[5].text = catstrs (msg = _(" Replace with: "), replace_text, 0);
+
+    if (*replace_text)
+	convert_to_display (quick_widgets[5].text + strlen (msg));
+#endif
 
     {
 	QuickDialog Quick_input =
@@ -2090,7 +2103,23 @@ void edit_replace_cmd (WEdit * edit, int again)
 	exp3 = (char *) strdup (old3);
     } else {
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
+
+#ifdef HAVE_CHARSET
+	if (exp1 && *exp1)
+	    convert_to_display (exp1);
+	if (exp2 && *exp2)
+	    convert_to_display (exp2);
+#endif
+
 	edit_replace_dialog (edit, &exp1, &exp2, &exp3);
+
+#ifdef HAVE_CHARSET
+	if (exp1 && *exp1)
+	    convert_from_input (exp1);
+	if (exp2 && *exp2)
+	    convert_from_input (exp2);
+#endif
+
 	treplace_prompt = replace_prompt;
     }
 
@@ -2287,7 +2316,19 @@ void edit_search_cmd (WEdit * edit, int again)
 	    return;
 	exp = (char *) strdup (old);
     } else {
+
+#ifdef HAVE_CHARSET
+	if (exp && *exp)
+	    convert_to_display (exp);
+#endif
+
 	edit_search_dialog (edit, &exp);
+
+#ifdef HAVE_CHARSET
+	if (exp && *exp)
+	    convert_from_input (exp);
+#endif
+
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
     }
 
