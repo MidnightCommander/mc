@@ -41,6 +41,9 @@
 #include "../vfs/vfs.h"
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
+#ifdef HAVE_GMODULE
+#include <gmodule.h>
+#endif /* HAVE_GMODULE */
 #include <X11/Xlib.h>
 #endif
 
@@ -247,9 +250,54 @@ define_sequences (key_define_t *kd)
 }
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
+
+#ifdef HAVE_GMODULE
+static Display *(*func_XOpenDisplay) (_Xconst char *);
+static int (*func_XCloseDisplay) (Display *);
+static Bool (*func_XQueryPointer) (Display *, Window, Window *, Window *,
+				   int *, int *, int *, int *,
+				   unsigned int *);
+
+static GModule *x11_module;
+#endif /* HAVE_GMODULE */
+
 static Display *x11_display;
 static Window x11_window;
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+
+static void
+init_key_x11 (void)
+{
+#ifdef HAVE_GMODULE
+    gchar *x11_module_fname;
+
+    x11_module_fname = g_module_build_path (NULL, "X11");
+
+    if (!x11_module_fname)
+	return;
+
+    x11_module = g_module_open (x11_module_fname, G_MODULE_BIND_LAZY);
+    g_free (x11_module_fname);
+
+    if (!x11_module)
+	return;
+
+    if (g_module_symbol
+	(x11_module, "XOpenDisplay", (gpointer *) & func_XOpenDisplay)
+	&& g_module_symbol (x11_module, "XCloseDisplay",
+			    (gpointer *) & func_XCloseDisplay)
+	&& g_module_symbol (x11_module, "XQueryPointer",
+			    (gpointer *) & func_XQueryPointer)) {
+	x11_display = (*func_XOpenDisplay) (0);
+    }
+#else
+    x11_display = XOpenDisplay (0);
+#endif				/* HAVE_GMODULE */
+
+    if (x11_display)
+	x11_window = DefaultRootWindow (x11_display);
+}
+#endif				/* HAVE_TEXTMODE_X11_SUPPORT */
+
 
 /* This has to be called before slang_init or whatever routine
    calls any define_sequence */
@@ -290,9 +338,7 @@ void init_key (void)
 #endif /* __QNX__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    x11_display = XOpenDisplay (0);
-    if (x11_display)
-        x11_window = DefaultRootWindow (x11_display);
+    init_key_x11 ();
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 }
 
@@ -1043,14 +1089,19 @@ get_modifier (void)
     int result = 0;
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_display) {
+    if (x11_window) {
 	Window root, child;
 	int root_x, root_y;
 	int win_x, win_y;
 	unsigned int mask;
 
+#ifdef HAVE_GMODULE
+	(*func_XQueryPointer) (x11_display, x11_window, &root, &child,
+			       &root_x, &root_y, &win_x, &win_y, &mask);
+#else
 	XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
 		       &root_y, &win_x, &win_y, &mask);
+#endif /* HAVE_GMODULE */
 
 	if (mask & ShiftMask)
 	    result |= KEY_M_SHIFT;
@@ -1105,7 +1156,14 @@ void done_key ()
     s_dispose (select_list);
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
+#ifdef HAVE_GMODULE
+    if (x11_display)
+	(*func_XCloseDisplay) (x11_display);
+    if (x11_module)
+	g_module_close (x11_module);
+#else
     if (x11_display)
 	XCloseDisplay (x11_display);
+#endif /* HAVE_GMODULE */
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
 }

@@ -1,3 +1,7 @@
+2003-02-22  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* key.c: Add support for dynamic loading of libX11.
+
 2003-02-21  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (destroy_groups): Revert last change, it doesn't
