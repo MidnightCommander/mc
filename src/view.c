@@ -27,6 +27,7 @@
 # include <config.h>
 #endif
 
+#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <limits.h>
@@ -36,9 +37,6 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef HAVE_MMAP
-# include <sys/mman.h>
-#endif
 #include <unistd.h>
 
 #include "global.h"
@@ -64,12 +62,7 @@
 #include "charsets.h"
 #include "selcodepage.h"
 
-#ifndef MAP_FILE
-#define MAP_FILE 0
-#endif
-
 /* Block size for reading files in parts */
-#define READ_BLOCK 8192
 #define VIEW_PAGE_SIZE 8192
 
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
@@ -90,6 +83,15 @@ struct hexedit_change_node {
    unsigned char              value;
 };
 
+/* data sources of the view */
+enum view_ds {
+    DS_NONE,			/* No data available */
+    DS_STDIO_PIPE,		/* Data comes from a pipe using popen/pclose */
+    DS_VFS_PIPE,		/* Data comes from a piped-in VFS file */
+    DS_FILE,			/* Data comes from a VFS file */
+    DS_STRING			/* Data comes from a string in memory */
+};
+
 struct WView {
     Widget widget;
 
@@ -98,16 +100,25 @@ struct WView {
     int view_active;
     int have_frame;
 
-    unsigned char *data;	/* Memory area for the file to be viewed */
-    size_t datasize;		/* Number of bytes in the data */
-    /* view_update_last_byte() must be called after assignment to datasize */
+    enum view_ds datasource;	/* Where the displayed data comes from */
 
-    /* File information */
-    int file;			/* File descriptor (for mmap and munmap) */
-    FILE *stdfile;		/* Stdio struct for reading file in parts */
-    int reading_pipe;		/* Flag: Reading from pipe(use popen/pclose) */
-    int mmapping;		/* Did we use mmap on the file? */
-    size_t mmappedsize;		/* Number of bytes that are mmapped; used only for munmap() */
+    /* stdio pipe data source */
+    FILE *ds_stdio_pipe;	/* Output of a shell command */
+
+    /* vfs pipe data source */
+    int ds_vfs_pipe;		/* Non-seekable vfs file descriptor */
+
+    /* vfs file data source */
+    int ds_file_fd;		/* File with random access */
+    off_t ds_file_size;		/* Size of the file */
+    off_t ds_file_offset;	/* Offset of the currently loaded data */
+    char *ds_file_data;		/* Currently loaded data */
+    size_t ds_file_datalen;	/* Number of valid bytes in file_data */
+    size_t ds_file_datasize;	/* Number of allocated bytes in file_data */
+
+    /* string data source */
+    char *ds_string_data;	/* The characters of the string */
+    size_t ds_string_len;	/* The length of the string */
 
     /* Display information */
     offset_type last;           /* Last byte shown */
@@ -141,8 +152,6 @@ struct WView {
     size_t blocks;		/* The number of blocks in *block_ptr */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
-    /* view_update_last_byte() must be called after assignment to
-       growing_buffer, blocks, growbuf_lastindex */
 
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
@@ -169,23 +178,15 @@ struct WView {
     offset_type update_activate;/* Last point where we updated the status */
 };
 
-static void view_update_last_byte (WView *view)
-{
-    if (view->growing_buffer) {
-        if (view->blocks == 0)
-            view->last_byte = 0;
-        else
-            view->last_byte = ((offset_type) view->blocks - 1)
-                              * VIEW_PAGE_SIZE + view->growbuf_lastindex;
-    } else
-        view->last_byte = view->datasize;
-    view->bottom_first = INVALID_OFFSET;
-}
+static offset_type view_get_filesize (WView *view);
 
 static void view_move_cursor_to_eol(WView *view)
 {
-    offset_type last_line = (view->last_byte - 1) / view->bytes_per_line;
-    offset_type current_line = view->edit_cursor / view->bytes_per_line;
+    offset_type filesize, last_line, current_line;
+
+    filesize     = view_get_filesize (view);
+    last_line    = (filesize - 1) / view->bytes_per_line;
+    current_line = view->edit_cursor / view->bytes_per_line;
 
     if (current_line == last_line) {
         view->edit_cursor = view->last_byte - 1;
@@ -230,46 +231,19 @@ static void view_labels (WView * view);
 static void set_monitor (WView * view, int set_on);
 static void view_update (WView * view);
 
+/* Return the data at the specified offset, cast to an unsigned char,
+ * or the value -1. */
+static int get_byte (WView *, offset_type);
 
-static void
-close_view_file (WView *view)
-{
-    if (view->file != -1) {
-	mc_close (view->file);
-	view->file = -1;
-    }
-}
+static void view_close_datasource (WView *);
+static offset_type view_growbuf_filesize (WView *view);
+static inline void view_update_last_byte (WView *);
 
-static void
-free_file (WView *view)
-{
-    size_t i;
-
-#ifdef HAVE_MMAP
-    if (view->mmapping) {
-	mc_munmap (view->data, view->mmappedsize);
-	close_view_file (view);
-    } else
-#endif				/* HAVE_MMAP */
-    {
-	if (view->reading_pipe) {
-	    /* Close pipe */
-	    pclose (view->stdfile);
-	    view->stdfile = NULL;
-
-	    /* Close error pipe and show warnings if any */
-	    close_error_pipe (0, NULL);
-	} else
-	    close_view_file (view);
-    }
-    /* Block_ptr may be zero if the file was a file with 0 bytes */
-    if (view->growing_buffer && view->block_ptr) {
-	for (i = 0; i < view->blocks; i++) {
-	    g_free (view->block_ptr[i]);
-	}
-	g_free (view->block_ptr);
-    }
-}
+static void view_set_datasource_none (WView *view);
+static void view_set_datasource_vfs_pipe (WView *view, int fd);
+static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
+static void view_set_datasource_string (WView *view, const char *s);
+static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
 
 /* Valid parameters for second parameter to set_monitor */
 enum { off, on };
@@ -280,14 +254,8 @@ view_done (WView *view)
 {
     set_monitor (view, off);
 
-    /* alex: release core, used to replace mmap */
-    if (!view->mmapping && !view->growing_buffer && view->data != NULL) {
-	g_free (view->data);
-	view->data = NULL;
-    }
-
     if (view->view_active) {
-	free_file (view);
+	view_close_datasource (view);
 	g_free (view->filename);
 	g_free (view->command);
     }
@@ -310,13 +278,17 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     unsigned char *p;
     size_t bytesfree;
 
-    /* g_assert (view->growing_buffer, NULL); */
-    while (view->last_byte < ofs) {
+    assert (view->growing_buffer);
+    assert (view->datasource == DS_STDIO_PIPE
+	|| view->datasource == DS_VFS_PIPE);
+
+    while (ofs > view_growbuf_filesize (view)) {
         if (view->blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
             char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
             char **newblocks = g_try_malloc (sizeof (char *) * (view->blocks + 1));
             if (!newblock || !newblocks) {
                 g_free (newblock);
+		g_free (newblocks);
                 return;
             }
             memcpy (newblocks, view->block_ptr, sizeof (char *) * view->blocks);
@@ -328,10 +300,11 @@ view_growbuf_read_until (WView *view, offset_type ofs)
         }
         p = view->block_ptr[view->blocks - 1] + view->growbuf_lastindex;
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
-        if (view->stdfile != NULL)
-            nread = fread (p, 1, bytesfree, view->stdfile);
-        else
-            nread = mc_read (view->file, p, bytesfree);
+
+	if (view->datasource == DS_STDIO_PIPE)
+	    nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
+	else
+	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
 
         if (nread == -1 || nread == 0)
             return;
@@ -340,28 +313,6 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     }
 }
 
-static int
-get_byte (WView *view, unsigned int byte_index)
-{
-    if (view->growing_buffer) {
-        size_t pageno = byte_index / VIEW_PAGE_SIZE;
-        size_t pageindex = byte_index % VIEW_PAGE_SIZE;
-
-        view_growbuf_read_until (view, byte_index + 1);
-        if (view->blocks == 0)
-            return -1;
-        if (pageno < view->blocks - 1)
-            return view->block_ptr[pageno][pageindex];
-        if (pageno == view->blocks - 1 && pageindex < view->growbuf_lastindex)
-            return view->block_ptr[pageno][pageindex];
-        return -1;
-    }
-
-    /* g_assert (view->data != NULL); */
-    if (byte_index < view->datasize)
-        return view->data[byte_index];
-    return -1;
-}
 
 static void
 enqueue_change (struct hexedit_change_node **head,
@@ -430,13 +381,7 @@ view_handle_editkey (WView *view, int key)
 	    g_new (struct hexedit_change_node, 1);
 
 	if (node) {
-#ifndef HAVE_MMAP
-	    /* alex@bcs.zaporizhzhe.ua: here we are using file copy
-	     * completely loaded into memory, so we can replace bytes in
-	     * view->data array to allow changes to be reflected when
-	     * user switches back to text mode */
-	    view->data[view->edit_cursor] = byte_val;
-#endif				/* !HAVE_MMAP */
+	    /* FIXME: Hexedit changes are not shown in textview mode. */
 	    node->offset = view->edit_cursor;
 	    node->value = byte_val;
 	    enqueue_change (&view->change_list, node);
@@ -522,13 +467,10 @@ view_ok_to_quit (WView *view)
 static char *
 set_view_init_error (WView *view, const char *msg)
 {
-    view->growing_buffer = 0;
-    view->reading_pipe = 0;
     view->first = 0;
     view->last_byte = 0;
     if (msg) {
-        view->datasize = strlen (msg);
-        view_update_last_byte (view);
+	view_set_datasource_string (view, msg);    
         return g_strdup (msg);
     }
     return NULL;
@@ -540,94 +482,40 @@ init_growing_view (WView *view, const char *name, const char *filename)
 {
     const char *err_msg = NULL;
 
-    view->growing_buffer = 1;
-    view->block_ptr = NULL;
-    view->blocks = 0;
-    view->growbuf_lastindex = 0; /* unused */
+    view_close_datasource (view);
     view_update_last_byte (view);
 
     if (name) {
-	view->reading_pipe = 1;
+	FILE *fp;
 
 	open_error_pipe ();
-	if ((view->stdfile = popen (name, "r")) == NULL) {
+	if ((fp = popen (name, "r")) == NULL) {
 	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
+	    if (!close_error_pipe (view->have_frame ? -1 : 1, NULL))
 		err_msg = _(" Cannot spawn child program ");
 	    return set_view_init_error (view, err_msg);
 	}
 
 	/* First, check if filter produced any output */
-	view_growbuf_read_until (view, 1);
-	if (view->last_byte == 0) {
-	    pclose (view->stdfile);
-	    view->stdfile = NULL;
+	view_set_datasource_stdio_pipe (view, fp);
+	if (get_byte (view, 0) == -1) {
+	    view_close_datasource (view);
+
 	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
+	    if (!close_error_pipe (view->have_frame ? -1 : 1, NULL))
 		err_msg = _("Empty output from child filter");
 	    return set_view_init_error (view, err_msg);
 	}
     } else {
-	view->stdfile = NULL;
-	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
-	    return set_view_init_error (view, _(" Cannot open file "));
+	int fd;
+
+	fd = mc_open (filename, O_RDONLY);
+	if (fd == -1) {
+	    err_msg = _(" Cannot open file ");
+	    return set_view_init_error (view, err_msg);
+	}
+	view_set_datasource_vfs_pipe (view, fd);
     }
-    return NULL;
-}
-
-/* Load filename into core */
-/* returns:
-   -1 on failure.
-   if (have_frame), we return success, but data points to a
-   error message instead of the file buffer (quick_view feature).
-*/
-static char *
-load_view_file (WView *view, int fd, const struct stat *st)
-{
-    view->file = fd;
-
-    if (st->st_size == 0) {
-	/* Must be one of those nice files that grow (/proc) */
-	close_view_file (view);
-	return init_growing_view (view, 0, view->filename);
-    }
-#ifdef HAVE_MMAP
-    if ((size_t) st->st_size == st->st_size)
-        view->data = mc_mmap (0, st->st_size, PROT_READ,
-            MAP_FILE | MAP_SHARED, view->file, 0);
-    else
-	view->data = (caddr_t) -1;
-    if ((caddr_t) view->data != (caddr_t) - 1) {
-	/* mmap worked */
-	view->first = 0;
-    view->mmappedsize = st->st_size;
-    view->datasize = st->st_size;
-	view->mmapping = 1;
-    view_update_last_byte (view);
-	return NULL;
-    }
-#endif				/* HAVE_MMAP */
-
-    /* For the OSes that don't provide mmap call, try to load all the
-     * file into memory (alex@bcs.zaporizhzhe.ua).  Also, mmap can fail
-     * for any reason, so we use this as fallback (pavel@ucw.cz) */
-
-    /* Make sure view->s.st_size is not truncated when passed to g_malloc */
-    if ((gulong) st->st_size == st->st_size)
-        view->data = (unsigned char *) g_try_malloc ((gulong) st->st_size);
-    else
-	view->data = NULL;
-
-    if (view->data == NULL || mc_lseek (view->file, 0, SEEK_SET) != 0
-	|| mc_read (view->file, view->data,
-		    st->st_size) != st->st_size) {
-	g_free (view->data);
-	close_view_file (view);
-	return init_growing_view (view, 0, view->filename);
-    }
-    view->first = 0;
-    view->datasize = st->st_size;
-    view_update_last_byte (view);
     return NULL;
 }
 
@@ -646,13 +534,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	view_done (view);
 
     /* Set up the state */
-    view->data = NULL;
-    view->datasize = 0;
-    view->growing_buffer = 0;
-    view->reading_pipe = 0;
-    view->mmapping = 0;
-    view->blocks = 0;
-    view->block_ptr = NULL;
+    view_set_datasource_none (view);
     view->first = 0;
     view->filename = g_strdup (_file);
     view->command = 0;
@@ -705,15 +587,18 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	    fcntl (fd, F_SETFL, cntlflags);
 	}
 
-	type = get_compression_type (fd);
+	if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1) {
+	    /* Must be one of those nice files that grow (/proc) */
+	    view_set_datasource_vfs_pipe (view, fd);
+	} else {
+	    type = get_compression_type (fd);
 
-	if (view->viewer_magic_flag && (type != COMPRESSION_NONE)) {
-	    g_free (view->filename);
-	    view->filename =
-		g_strconcat (_file, decompress_extension (type), (char *) NULL);
+	    if (view->viewer_magic_flag && (type != COMPRESSION_NONE)) {
+		g_free (view->filename);
+		view->filename = g_strconcat (_file, decompress_extension (type), (char *) NULL);
+	    }
+	    view_set_datasource_file (view, fd, &st);
 	}
-
-	error = load_view_file (view, fd, &st);
     }
 
   finish:
@@ -726,23 +611,15 @@ do_view_init (WView *view, const char *_command, const char *_file,
     }
 
     view->view_active = 1;
-    if (_command)
-	view->command = g_strdup (_command);
-    else
-	view->command = 0;
+    view->command = g_strdup (_command);
     view->search_start = view->start_display = view->start_save =
 	view->first;
     view->found_len = 0;
     view->start_col = 0;
     view->last_search = 0;	/* Start a new search */
 
-    /* Special case: The data points to the error message */
-    if (error) {
-	view->data = error;
-        view->datasize = strlen (error);
-        view_update_last_byte (view);
-	view->file = -1;
-    }
+    if (error)
+	view_set_datasource_string (view, error);    
 
     if (start_line > 1 && !error) {
 	int saved_wrap_mode = view->wrap_mode;
@@ -1430,7 +1307,7 @@ static void
 view_move_forward (WView *view, int i)
 {
     view->start_display = move_forward2 (view, view->start_display, i, 0);
-    if (!view->reading_pipe
+    if (!view->growing_buffer
 	&& view->start_display > get_bottom_first (view, 0, 0))
 	view->start_display = view->bottom_first;
     view->search_start = view->start_display;
@@ -2236,10 +2113,7 @@ change_viewer (WView *view)
 	altered_magic_flag = 1;
 	view->viewer_magic_flag = !view->viewer_magic_flag;
 	s = g_strdup (view->filename);
-	if (view->command)
-	    t = g_strdup (view->command);
-	else
-	    t = 0;
+	t = g_strdup (view->command);
 
 	view_done (view);
 	view_init (view, t, s, 0);
@@ -2810,6 +2684,263 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->wrap_mode = global_wrap_mode;
 
     widget_want_cursor (view->widget, 0);
+    view_set_datasource_none (view);
 
     return view;
+}
+
+static offset_type
+view_growbuf_filesize (WView *view)
+{
+    assert(view->growing_buffer);
+
+    if (view->blocks == 0)
+        return 0;
+    else
+        return ((offset_type) view->blocks - 1)
+	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
+}
+
+static offset_type
+view_get_filesize (WView *view)
+{
+    switch (view->datasource) {
+	case DS_NONE:
+	    return 0;
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    return view_growbuf_filesize (view);
+	case DS_FILE:
+	    return view->ds_file_size;
+	case DS_STRING:
+	    return view->ds_string_len;
+	default:
+	    assert(!"Unknown datasource type");
+	    return 0;
+    }
+}
+
+static inline void
+view_update_last_byte (WView *view)
+{
+    view->bottom_first = INVALID_OFFSET;
+    view->last_byte    = view_get_filesize (view);
+}
+
+static void
+view_free_growing_buffer (WView *view)
+{
+    if (view->growing_buffer) {
+	/* block_ptr may be zero if the file was a file with 0 bytes */
+	if (view->block_ptr) {
+	    size_t i;
+
+	    for (i = 0; i < view->blocks; i++)
+	        g_free (view->block_ptr[i]);
+	    g_free (view->block_ptr);
+	    view->block_ptr = NULL;
+	}
+	view->growing_buffer = FALSE;
+    }
+}
+
+static void
+view_close_datasource (WView *view)
+{
+    switch (view->datasource) {
+	case DS_NONE:
+	    break;
+	case DS_STDIO_PIPE:
+	    (void) pclose (view->ds_stdio_pipe);
+	    close_error_pipe (0, NULL);
+	    view->ds_stdio_pipe = NULL;
+	    view_free_growing_buffer (view);
+	    break;
+	case DS_VFS_PIPE:
+	    (void) mc_close (view->ds_vfs_pipe);
+	    view->ds_vfs_pipe = -1;
+	    view_free_growing_buffer (view);
+	    break;
+	case DS_FILE:
+	    (void) mc_close (view->ds_file_fd);
+	    view->ds_file_fd = -1;
+	    g_free (view->ds_file_data);
+	    view->ds_file_data = NULL;
+	    break;
+	case DS_STRING:
+	    g_free (view->ds_string_data);
+	    view->ds_string_data = NULL;
+	    break;
+	default:
+	    assert (!"Unknown datasource type");
+    }
+    view->datasource = DS_NONE;
+}
+
+/* returns TRUE if the idx lies in the half-open interval
+ * [offset; offset + size), FALSE otherwise.
+ */
+static gboolean
+already_loaded (offset_type offset, offset_type idx, size_t size)
+{
+    return (offset <= idx && idx - offset < size) ? TRUE : FALSE;
+}
+
+static void
+view_file_load_data (WView *view, offset_type byte_index)
+{
+    offset_type blockoffset;
+    ssize_t res;
+    size_t bytes_read;
+
+    if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
+	return;
+
+    /* ds_file_datasize must be a power of two. */
+    assert ((view->ds_file_datasize & (view->ds_file_datasize - 1)) == 0);
+    blockoffset = byte_index &- (view->ds_file_datasize);
+
+    if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
+	goto error;
+
+    bytes_read = 0;
+    while (bytes_read < view->ds_file_datasize) {
+	res = mc_read (view->ds_file_fd, view->ds_file_data + bytes_read, view->ds_file_datasize - bytes_read);
+	if (res == -1)
+	    goto error;
+	if (res == 0)
+	    break;
+	bytes_read += (size_t) res;
+    }
+    view->ds_file_offset  = blockoffset;
+    view->ds_file_datalen = bytes_read;
+    return;
+
+error:
+    view->ds_file_datalen  = 0;
+}
+
+static int
+get_byte_none (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_NONE);
+    (void) byte_index;
+    return -1;
+}
+
+static int
+get_byte_growing_buffer (WView *view, offset_type byte_index)
+{
+    size_t pageno = byte_index / VIEW_PAGE_SIZE;
+    size_t pageindex = byte_index % VIEW_PAGE_SIZE;
+
+    assert (view->growing_buffer);
+    assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
+
+    view_growbuf_read_until (view, byte_index + 1);
+    if (view->blocks == 0)
+	return -1;
+    if (pageno < view->blocks - 1)
+	return (unsigned char) view->block_ptr[pageno][pageindex];
+    if (pageno == view->blocks - 1 && pageindex < view->growbuf_lastindex)
+	return (unsigned char) view->block_ptr[pageno][pageindex];
+    return -1;
+}
+
+static int
+get_byte_file (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_FILE);
+
+    view_file_load_data (view, byte_index);
+    if (already_loaded(view->ds_file_offset, byte_index, view->ds_file_datalen))
+	return (unsigned char) view->ds_file_data[byte_index - view->ds_file_offset];
+    return -1;
+}
+
+static int
+get_byte_string (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_STRING);
+    if (byte_index < view->ds_string_len)
+	return (unsigned char) view->ds_string_data[byte_index];
+    return -1;
+}
+
+static int
+get_byte (WView *view, offset_type offset)
+{
+    switch (view->datasource) {
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    return get_byte_growing_buffer (view, offset);
+	case DS_FILE:
+	    return get_byte_file (view, offset);
+	case DS_STRING:
+	    return get_byte_string (view, offset);
+	case DS_NONE:
+	    return get_byte_none (view, offset);
+    }
+    assert(!"Unknown datasource type");
+    return -1;
+}
+
+static void
+view_set_datasource_none (WView *view)
+{
+    view->datasource = DS_NONE;
+
+    view_update_last_byte (view);
+}
+
+static void
+view_set_datasource_vfs_pipe (WView *view, int fd)
+{
+    view->datasource        = DS_VFS_PIPE;
+    view->ds_vfs_pipe       = fd;
+    view->growing_buffer    = TRUE;
+    view->block_ptr         = NULL;
+    view->blocks            = 0;
+    view->growbuf_lastindex = 0;
+
+    view_update_last_byte (view);
+}
+
+static void
+view_set_datasource_stdio_pipe (WView *view, FILE *fp)
+{
+    view->datasource        = DS_STDIO_PIPE;
+    view->ds_stdio_pipe     = fp;
+    view->growing_buffer    = TRUE;
+    view->block_ptr         = NULL;
+    view->blocks            = 0;
+    view->growbuf_lastindex = 0;
+
+    view_update_last_byte (view);
+}
+
+static void
+view_set_datasource_string (WView *view, const char *s)
+{
+    view_close_datasource (view);
+
+    view->datasource     = DS_STRING;
+    view->ds_string_data = g_strdup (s);
+    view->ds_string_len  = strlen (s);
+
+    view_update_last_byte (view);
+}
+
+static void
+view_set_datasource_file (WView *view, int fd, const struct stat *st)
+{
+    view->datasource       = DS_FILE;
+    view->ds_file_fd       = fd;
+    view->ds_file_size     = st->st_size;
+    view->ds_file_offset   = 0;
+    view->ds_file_data     = g_malloc (4096);
+    view->ds_file_datalen  = 0;
+    view->ds_file_datasize = 4096;
+
+    view_update_last_byte (view);
 }

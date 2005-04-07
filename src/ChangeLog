@@ -1,5 +1,12 @@
 2005-04-07  Roland Illig  <roland.illig@gmx.de>
 
+	* view.c: Removed mmap(2) support. Now regular files are
+	accessed using mc_read(). Added a framework for datasources.
+	Introduced assertions. Removed some variables (e.g. view->data)
+	that were used for many things simultaneously.
+
+2005-04-07  Roland Illig  <roland.illig@gmx.de>
+
 	* dialog.h: Removed a comma at the end of an enumeration, because
 	ANSI does not permit it.
 
