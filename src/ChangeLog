@@ -1,3 +1,8 @@
+2005-04-07  Roland Illig  <roland.illig@gmx.de>
+
+	* dialog.h: Removed a comma at the end of an enumeration, because
+	ANSI does not permit it.
+
 2005-04-06  Roland Illig  <roland.illig@gmx.de>
 
 	* x11conn.c (x_io_error_handler): Close the X11 connection when
