@@ -116,7 +116,7 @@ while test $# -ne 0; do
 					do_configure=no
 					do_make_clean=no
 					do_make_all=yes;;
-		-nice)			shift; nice_value="$1"; shift;;
+		-nice)			shift; mc_nice_value="$1"; shift;;
 		-quiet)			shift; quiet="yes";;
 
 		--) shift; break;;
