@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-28 23:48-0500\n"
-"PO-Revision-Date: 2005-03-27 00:49+0100\n"
+"POT-Creation-Date: 2005-04-11 20:16-0400\n"
+"PO-Revision-Date: 2005-04-06 00:49+0100\n"
 "Last-Translator: Vaidrius Petrauskas <vaidrius@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -55,6 +55,19 @@ msgstr " Byla „%s“ per didelė "
 msgid "Macro recursion is too deep"
 msgstr "Makrosų rekursija per gili"
 
+#: edit/edit.h:228
+msgid "&Dismiss"
+msgstr "At&mesti"
+
+#: edit/edit.h:230 edit/editcmd.c:399 edit/editcmd.c:1242 edit/editcmd.c:1326
+#: edit/editcmd.c:2618 edit/editmenu.c:53 edit/editoptions.c:88
+#: src/boxes.c:142 src/boxes.c:279 src/boxes.c:375 src/boxes.c:467
+#: src/boxes.c:594 src/boxes.c:717 src/boxes.c:838 src/boxes.c:948
+#: src/boxes.c:1016 src/filegui.c:767 src/find.c:208 src/layout.c:356
+#: src/option.c:112 src/subshell.c:324 src/view.c:2051 src/wtools.c:444
+msgid "&OK"
+msgstr "&Gerai"
+
 #: edit/editcmd.c:59 edit/editcmd.c:60
 msgid " Enter file name: "
 msgstr " Įveskite bylos pavadinimą: "
@@ -88,19 +101,9 @@ msgstr "Daryti kopijas -->"
 #: src/chown.c:71 src/cmd.c:822 src/filegui.c:749 src/find.c:208
 #: src/hotlist.c:122 src/hotlist.c:526 src/hotlist.c:839 src/hotlist.c:942
 #: src/layout.c:357 src/learn.c:59 src/option.c:113 src/panelize.c:66
-#: src/view.c:491 src/view.c:2171 src/wtools.c:47 src/wtools.c:442
+#: src/view.c:436 src/view.c:2048 src/wtools.c:47 src/wtools.c:442
 msgid "&Cancel"
 msgstr "&Atsisakyti"
-
-#: edit/editcmd.c:399 edit/editcmd.c:1242 edit/editcmd.c:1326
-#: edit/editcmd.c:2618 edit/edit.h:230 edit/editmenu.c:53
-#: edit/editoptions.c:88 src/boxes.c:142 src/boxes.c:279 src/boxes.c:375
-#: src/boxes.c:467 src/boxes.c:594 src/boxes.c:717 src/boxes.c:838
-#: src/boxes.c:948 src/boxes.c:1016 src/filegui.c:767 src/find.c:208
-#: src/layout.c:356 src/option.c:112 src/subshell.c:324 src/view.c:2174
-#: src/wtools.c:444
-msgid "&OK"
-msgstr "&Gerai"
 
 #: edit/editcmd.c:403
 msgid "Extension:"
@@ -130,7 +133,7 @@ msgstr " Byla šiuo pavadinimu jau yra. "
 msgid "&Overwrite"
 msgstr "Perraš&yti"
 
-#: edit/editcmd.c:542 edit/editcmd.c:2343 src/view.c:490
+#: edit/editcmd.c:542 edit/editcmd.c:2343 src/view.c:435
 msgid " Cannot save file. "
 msgstr " Nepavyko išsaugoti bylos. "
 
@@ -174,7 +177,7 @@ msgstr " Įkelti makrosą "
 msgid " Confirm save file? : "
 msgstr " Įrašyti bylą? : "
 
-#: edit/editcmd.c:778 src/view.c:489
+#: edit/editcmd.c:778 src/view.c:434
 msgid " Save file "
 msgstr " Įrašyti bylą "
 
@@ -240,7 +243,7 @@ msgstr "P&akeisti viską"
 msgid "pr&Ompt on replace"
 msgstr "Praneš&ti keičiant"
 
-#: edit/editcmd.c:1250 edit/editcmd.c:1330 src/view.c:2177
+#: edit/editcmd.c:1250 edit/editcmd.c:1330 src/view.c:2054
 msgid "&Backwards"
 msgstr "At&bulai"
 
@@ -264,7 +267,7 @@ msgstr " Įveskite pakeitimo argumentų tvarką, pvz. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Įveskite pakeitimo eilutę:"
 
-#: edit/editcmd.c:1268 edit/editcmd.c:1340 src/view.c:2182
+#: edit/editcmd.c:1268 edit/editcmd.c:1340 src/view.c:2059
 msgid " Enter search string:"
 msgstr " Įveskite ieškomą eilutę:"
 
@@ -273,9 +276,9 @@ msgid " Replace "
 msgstr " Pakeisti "
 
 #: edit/editcmd.c:1356 edit/editcmd.c:2084 edit/editcmd.c:2086
-#: edit/editcmd.c:2114 edit/editwidget.c:313 src/view.c:1660 src/view.c:1739
-#: src/view.c:1894 src/view.c:1906 src/view.c:2128 src/view.c:2180
-#: src/view.c:2187 src/view.c:2301
+#: edit/editcmd.c:2114 edit/editwidget.c:313 src/view.c:1537 src/view.c:1616
+#: src/view.c:1771 src/view.c:1783 src/view.c:2005 src/view.c:2057
+#: src/view.c:2064 src/view.c:2175
 msgid "Search"
 msgstr "Paieška"
 
@@ -299,8 +302,8 @@ msgstr " Pakeitimo eilutė per ilga. "
 msgid " %ld replacements made. "
 msgstr " Atlikta %ld pakeitimų. "
 
-#: edit/editcmd.c:2010 edit/editcmd.c:2086 edit/editcmd.c:2114 src/view.c:1739
-#: src/view.c:1906
+#: edit/editcmd.c:2010 edit/editcmd.c:2086 edit/editcmd.c:2114 src/view.c:1616
+#: src/view.c:1783
 msgid " Search string not found "
 msgstr " Ieškoma eilutė nerasta "
 
@@ -310,27 +313,27 @@ msgid " %d items found, %d bookmarks added "
 msgstr " surasta %d, pridėta %d žymų  "
 
 #: edit/editcmd.c:2136 edit/editwidget.c:316 src/help.c:841 src/main.c:1211
-#: src/view.c:506 src/view.c:2280 src/view.c:2311
+#: src/view.c:451 src/view.c:2154 src/view.c:2185
 msgid "Quit"
 msgstr "Išeiti"
 
-#: edit/editcmd.c:2136 src/view.c:507
+#: edit/editcmd.c:2136 src/view.c:452
 msgid " File was modified, Save with exit? "
 msgstr " Byla pakeista, įrašyti išeinant? "
 
-#: edit/editcmd.c:2137 src/view.c:508
+#: edit/editcmd.c:2137 src/view.c:453
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
 
 #: edit/editcmd.c:2137 src/cmd.c:191 src/file.c:1780 src/file.c:2140
 #: src/filegui.c:525 src/hotlist.c:1068 src/main.c:468 src/screen.c:1981
-#: src/subshell.c:651 src/tree.c:709 src/view.c:508 vfs/mcfs.c:153
+#: src/subshell.c:651 src/tree.c:709 src/view.c:453 vfs/mcfs.c:153
 msgid "&Yes"
 msgstr "&Taip"
 
 #: edit/editcmd.c:2137 src/cmd.c:191 src/file.c:1780 src/file.c:2140
 #: src/filegui.c:524 src/hotlist.c:1068 src/main.c:468 src/screen.c:1982
-#: src/subshell.c:651 src/tree.c:709 src/view.c:508 vfs/mcfs.c:153
+#: src/subshell.c:651 src/tree.c:709 src/view.c:453 vfs/mcfs.c:153
 msgid "&No"
 msgstr "&Ne"
 
@@ -354,7 +357,7 @@ msgstr " Nepavyko įrašyti į bylą. "
 msgid " Cut to clipboard "
 msgstr " Iškirpti į krepšį "
 
-#: edit/editcmd.c:2293 src/view.c:2073
+#: edit/editcmd.c:2293 src/view.c:1950
 msgid " Goto line "
 msgstr " Eiti į eilutę "
 
@@ -457,10 +460,6 @@ msgstr " Kam"
 #: edit/editcmd.c:2632
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <kopija> <kam>"
-
-#: edit/edit.h:228
-msgid "&Dismiss"
-msgstr "At&mesti"
 
 #: edit/editkeys.c:196
 msgid " Emacs key: "
@@ -784,11 +783,11 @@ msgid " Editor options "
 msgstr " Nustatymai "
 
 #: edit/editwidget.c:307 src/help.c:808 src/help.c:829 src/main.c:1208
-#: src/screen.c:2259 src/tree.c:977 src/view.c:2278
+#: src/screen.c:2259 src/tree.c:977 src/view.c:2152
 msgid "Help"
 msgstr "Pagalba"
 
-#: edit/editwidget.c:308 src/view.c:2285
+#: edit/editwidget.c:308 src/view.c:2159
 msgid "Save"
 msgstr "Įrašyti"
 
@@ -1073,7 +1072,7 @@ msgstr "Sustojo"
 
 #: src/boxes.c:945
 msgid "&Stop"
-msgstr "&stabdyti"
+msgstr "&Stabdyti"
 
 #: src/boxes.c:946
 msgid "&Resume"
@@ -1987,7 +1986,7 @@ msgstr " Negalima dirbti su „..“! "
 msgid " Sorry, I could not put the job in background "
 msgstr " Nepavyko nukelti darbo į foną "
 
-#: src/file.c:2078 src/view.c:491
+#: src/file.c:2078 src/view.c:436
 msgid "&Retry"
 msgstr "&Iš naujo"
 
@@ -2226,7 +2225,7 @@ msgstr "Ieškoma byloje %s"
 msgid "Finished"
 msgstr "Baigta"
 
-#: src/find.c:667 src/view.c:1660
+#: src/find.c:667 src/view.c:1537
 #, c-format
 msgid "Searching %s"
 msgstr "Ieškoma %s"
@@ -2861,7 +2860,7 @@ msgstr " &Aukščiau "
 
 #: src/main.c:928
 msgid " &Left "
-msgstr " &Kairė "
+msgstr " &Kairysis skydas "
 
 #: src/main.c:932
 msgid " &File "
@@ -2881,7 +2880,7 @@ msgstr " Ž&emiau "
 
 #: src/main.c:941
 msgid " &Right "
-msgstr " &Dešinė "
+msgstr " &Dešinysis skydas "
 
 #: src/main.c:984
 msgid " Information "
@@ -3337,7 +3336,7 @@ msgstr " Ar tikrai norite paleisti? "
 msgid "View"
 msgstr "Rodyti"
 
-#: src/screen.c:2262 src/view.c:2296
+#: src/screen.c:2262 src/view.c:2170
 msgid "Edit"
 msgstr "Taisyti"
 
@@ -3621,19 +3620,19 @@ msgstr " Konvejeris nepavyko "
 msgid " Dup failed "
 msgstr " „Dup“ nepavyko "
 
-#: src/view.c:556
+#: src/view.c:495
 msgid " Cannot spawn child program "
 msgstr " Nepavyko sukurti vaiko "
 
-#: src/view.c:567
+#: src/view.c:506
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
-#: src/view.c:573
+#: src/view.c:514
 msgid " Cannot open file "
 msgstr " Nepavyko atverti bylos "
 
-#: src/view.c:678
+#: src/view.c:560
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3642,7 +3641,7 @@ msgstr ""
 " Nepavyko atverti „%s“\n"
 " %s "
 
-#: src/view.c:687
+#: src/view.c:569
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3651,43 +3650,43 @@ msgstr ""
 " Nepavyko sužinoti „%s“ būklės („stat“) \n"
 " %s "
 
-#: src/view.c:696
+#: src/view.c:578
 msgid " Cannot view: not a regular file "
 msgstr " Nepavyko parodyti: byla nėra įprastinė "
 
-#: src/view.c:827
+#: src/view.c:704
 #, c-format
 msgid "File: %s"
 msgstr "Byla: %s"
 
-#: src/view.c:842
+#: src/view.c:719
 #, c-format
 msgid "Offset 0x%08lx"
 msgstr "Poslinkis 0x%08lx"
 
-#: src/view.c:844
+#: src/view.c:721
 #, c-format
 msgid "Col %d"
 msgstr "Stlp %d"
 
-#: src/view.c:848
+#: src/view.c:725
 #, c-format
 msgid "%s bytes"
 msgstr "%s baitų"
 
-#: src/view.c:853
+#: src/view.c:730
 msgid "  [grow]"
 msgstr "  [daugiau]"
 
-#: src/view.c:1894
+#: src/view.c:1771
 msgid "Invalid hex search expression"
 msgstr "Netaisyklinga šešioliktainės paieškos išraiška"
 
-#: src/view.c:1948
+#: src/view.c:1825
 msgid " Invalid regular expression "
 msgstr " Netaisyklinga reguliari išraiška "
 
-#: src/view.c:2071
+#: src/view.c:1948
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3696,7 +3695,7 @@ msgstr ""
 " Esamos eilutės numeris: %d.\n"
 " Įveskite naują numerį:"
 
-#: src/view.c:2094
+#: src/view.c:1971
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3705,67 +3704,67 @@ msgstr ""
 " Esamas adresas: 0x%lx.\n"
 " Įveskite naują adresą:"
 
-#: src/view.c:2096
+#: src/view.c:1973
 msgid " Goto Address "
 msgstr " Eiti adresu "
 
-#: src/view.c:2128
+#: src/view.c:2005
 msgid " Enter regexp:"
 msgstr " Įveskite reguliarą išraišką: "
 
-#: src/view.c:2281
+#: src/view.c:2155
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2281
+#: src/view.c:2155
 msgid "Hex"
 msgstr "Šešiol"
 
-#: src/view.c:2283
+#: src/view.c:2157
 msgid "Goto"
 msgstr "Eiti į"
 
-#: src/view.c:2283
+#: src/view.c:2157
 msgid "Line"
 msgstr "Eilutė"
 
-#: src/view.c:2285
+#: src/view.c:2159
 msgid "RxSrch"
 msgstr "RxPšk"
 
-#: src/view.c:2290
+#: src/view.c:2164
 msgid "EdHex"
 msgstr "RedŠšl"
 
-#: src/view.c:2290
+#: src/view.c:2164
 msgid "EdText"
 msgstr "RedTkst"
 
-#: src/view.c:2298
+#: src/view.c:2172
 msgid "UnWrap"
 msgstr "Nelauž."
 
-#: src/view.c:2298
+#: src/view.c:2172
 msgid "Wrap"
 msgstr "Laužyti"
 
-#: src/view.c:2301
+#: src/view.c:2175
 msgid "HxSrch"
 msgstr "ŠšlPšk"
 
-#: src/view.c:2304
+#: src/view.c:2178
 msgid "Raw"
 msgstr "Pirmin."
 
-#: src/view.c:2304
+#: src/view.c:2178
 msgid "Parse"
 msgstr "Apdorot."
 
-#: src/view.c:2309
+#: src/view.c:2183
 msgid "Unform"
 msgstr "Išform."
 
-#: src/view.c:2309
+#: src/view.c:2183
 msgid "Format"
 msgstr "Formuot"
 
