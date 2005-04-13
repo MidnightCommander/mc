@@ -1,3 +1,8 @@
+2005-04-13  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Add -DNDEBUG to CPPFLAGS if the maintainer mode
+	is not enabled.
+
 2005-03-19  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_WITH_SLANG): Partly restore original order of

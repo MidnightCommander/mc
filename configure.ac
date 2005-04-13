@@ -559,6 +559,8 @@ if test x"$USE_MAINTAINER_MODE" = x"yes"; then
             CFLAGS="-Wall $CFLAGS"
         fi
     fi
+else
+    CPPFLAGS="-DNDEBUG ${CPPFLAGS}"
 fi
 
 ri_GCC_WARNINGS
