@@ -1136,6 +1136,7 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 static offset_type
 view_move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 {
+    const int frame_shift = view->have_frame;
     const int bpl = view->bytes_per_line;
     offset_type q, p, linestart;
     int i, line;
