@@ -122,7 +122,6 @@ struct WView {
 
     /* Display information */
     offset_type last;           /* Last byte shown */
-    offset_type last_byte;      /* Last byte of file */
     offset_type first;		/* First byte in file */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
@@ -148,10 +147,11 @@ struct WView {
 
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
-    char **block_ptr;		/* Pointer to the block pointers */
+    unsigned char **block_ptr;	/* Pointer to the block pointers */
     size_t blocks;		/* The number of blocks in *block_ptr */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
+    gboolean growbuf_finished;	/* TRUE when all data has been read. */
 
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
@@ -177,24 +177,6 @@ struct WView {
                                  * increments */
     offset_type update_activate;/* Last point where we updated the status */
 };
-
-static offset_type view_get_filesize (WView *view);
-
-static void view_move_cursor_to_eol(WView *view)
-{
-    offset_type filesize, last_line, current_line;
-
-    filesize     = view_get_filesize (view);
-    last_line    = (filesize - 1) / view->bytes_per_line;
-    current_line = view->edit_cursor / view->bytes_per_line;
-
-    if (current_line == last_line) {
-        view->edit_cursor = view->last_byte - 1;
-    } else {
-        view->edit_cursor = (1 + current_line) * view->bytes_per_line - 1;
-    }
-    view->dirty++;
-}
 
 /* Maxlimit for skipping updates */
 int max_dirt_limit = 10;
@@ -236,7 +218,7 @@ static void view_update (WView * view);
 static int get_byte (WView *, offset_type);
 
 static void view_close_datasource (WView *);
-static offset_type view_growbuf_filesize (WView *view);
+static offset_type view_growbuf_filesize (WView *view, gboolean *);
 static inline void view_update_last_byte (WView *);
 
 static void view_set_datasource_none (WView *view);
@@ -247,6 +229,33 @@ static void view_set_datasource_file (WView *view, int fd, const struct stat *st
 
 /* Valid parameters for second parameter to set_monitor */
 enum { off, on };
+
+static offset_type view_get_filesize (WView *);
+static offset_type view_get_filesize_with_exact (WView *, gboolean *);
+
+static inline int
+get_byte_indexed (WView *view, offset_type base, offset_type ofs)
+{
+    if (base <= OFFSETTYPE_MAX - ofs)
+	return get_byte (view, base + ofs);
+    return -1;
+}
+
+static void view_hexview_move_to_eol(WView *view)
+{
+    offset_type filesize, linestart;
+
+    assert(view->bytes_per_line >= 1);
+
+    linestart = view->edit_cursor - view->edit_cursor % view->bytes_per_line;
+    if (get_byte_indexed (view, linestart, view->bytes_per_line - 1) != -1) {
+        view->edit_cursor = linestart + view->bytes_per_line - 1;
+    } else {
+	filesize = view_get_filesize (view);
+        view->edit_cursor = (filesize != 0) ? filesize - 1 : 0;
+    }
+    view->dirty++;
+}
 
 /* Both views */
 static void
@@ -282,16 +291,19 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     assert (view->datasource == DS_STDIO_PIPE
 	|| view->datasource == DS_VFS_PIPE);
 
-    while (ofs > view_growbuf_filesize (view)) {
+    if (view->growbuf_finished)
+	return;
+
+    while (view_growbuf_filesize (view, NULL) < ofs) {
         if (view->blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
-            char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
-            char **newblocks = g_try_malloc (sizeof (char *) * (view->blocks + 1));
+            unsigned char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
+            unsigned char **newblocks = g_try_malloc (sizeof (*newblocks) * (view->blocks + 1));
             if (!newblock || !newblocks) {
                 g_free (newblock);
 		g_free (newblocks);
                 return;
             }
-            memcpy (newblocks, view->block_ptr, sizeof (char *) * view->blocks);
+            memcpy (newblocks, view->block_ptr, sizeof (*newblocks) * view->blocks);
             g_free (view->block_ptr);
             view->block_ptr = newblocks;
             view->block_ptr[view->blocks++] = newblock;
@@ -301,13 +313,24 @@ view_growbuf_read_until (WView *view, offset_type ofs)
         p = view->block_ptr[view->blocks - 1] + view->growbuf_lastindex;
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
-	if (view->datasource == DS_STDIO_PIPE)
+	if (view->datasource == DS_STDIO_PIPE) {
 	    nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
-	else
+	    if (nread == 0) {
+		view->growbuf_finished = TRUE;
+		(void) pclose (view->ds_stdio_pipe);
+		close_error_pipe (0, NULL);
+		view->ds_stdio_pipe = NULL;
+		return;
+	    }
+	} else {
 	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
-
-        if (nread == -1 || nread == 0)
-            return;
+	    if (nread == -1 || nread == 0) {
+		view->growbuf_finished = TRUE;
+		(void) mc_close (view->ds_vfs_pipe);
+		view->ds_vfs_pipe = -1;
+		return;
+	    }
+	}
         view->growbuf_lastindex += nread;
         view_update_last_byte (view);
     }
@@ -468,7 +491,6 @@ static char *
 set_view_init_error (WView *view, const char *msg)
 {
     view->first = 0;
-    view->last_byte = 0;
     if (msg) {
 	view_set_datasource_string (view, msg);    
         return g_strdup (msg);
@@ -672,16 +694,22 @@ view_init (WView *view, const char *_command, const char *_file, int start_line)
 }
 
 static void
-view_percent (WView *view, int p, int w)
+view_percent (WView *view, offset_type p, int w)
 {
     int percent;
+    gboolean exact;
+    offset_type filesize;
 
-    if (view->last_byte == 0 || view->last_byte == view->last)
+    filesize = view_get_filesize_with_exact (view, &exact);
+    if (!exact)
+	return;
+
+    if (filesize == 0 || filesize == view->last)
         percent = 100;
     else if (p > (INT_MAX / 100))
-        percent = p / (view->last_byte / 100);
+        percent = p / (filesize / 100);
     else
-        percent = p * 100 / view->last_byte;
+        percent = p * 100 / filesize;
 
     widget_move (view, view->have_frame, w - 5);
     printw ("%3d%%", percent);
@@ -721,13 +749,15 @@ view_status (WView *view)
 		printw (const_cast(char *, _("Col %d")), -view->start_col);
 	}
 	if (w > 62) {
+	    offset_type filesize;
+	    gboolean exact;
+	    filesize = view_get_filesize_with_exact (view, &exact);
 	    widget_move (view, view->have_frame, 43 + view->have_frame);
-	    printw (const_cast(char *, _("%s bytes")), size_trunc (view->last_byte));
-	}
-	if (w > 70) {
-	    printw (" ");
-	    if (view->growing_buffer)
-		addstr (_("  [grow]"));
+	    if (exact) {
+		printw (const_cast(char *, _("%s bytes")), size_trunc (filesize));
+	    } else {
+		printw (const_cast(char *, _(">= %s bytes")), size_trunc (filesize));
+	    }
 	}
 	if (w > 26) {
 	    view_percent (view,
@@ -777,7 +807,8 @@ typedef enum {
 static inline int view_count_backspaces (WView *view, off_t offset)
 {
     int backspaces = 0;
-    while (get_byte (view, offset - 2 * backspaces) == '\b')
+    while (offset >= 2 * backspaces
+	   && get_byte (view, offset - 2 * backspaces) == '\b')
         backspaces++;
     return backspaces;
 }
@@ -849,8 +880,8 @@ display (WView *view)
 	/* Start of text column */
 	int text_start = width - view->bytes_per_line - 1 + frame_shift;
 
-	for (; (void) get_byte (view, from + view->bytes_per_line),
-	       row < height && from < view->last_byte; row++) {
+	for (; get_byte_indexed (view, from, view->bytes_per_line) != -1
+	       && row < height; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
 	    g_snprintf (hex_buff, sizeof (hex_buff), "%08X",
@@ -868,7 +899,8 @@ display (WView *view)
 	    /* Each hex number is two digits */
 	    hex_buff[2] = 0;
 	    for (bytes = 0;
-		 bytes < view->bytes_per_line && from < view->last_byte;
+		 bytes < view->bytes_per_line
+		 && (c = get_byte (view, from)) != -1;
 		 bytes++, from++) {
 		/* Display and mark changed bytes */
 		if (curr && from == curr->offset) {
@@ -876,8 +908,7 @@ display (WView *view)
 		    curr = curr->next;
 		    boldflag = MARK_CHANGED;
 		    attrset (VIEW_UNDERLINED_COLOR);
-		} else
-		    c = (unsigned char) get_byte (view, from);
+		}
 
 		if (view->found_len && from >= view->search_start
 		    && from < view->search_start + view->found_len) {
@@ -976,8 +1007,7 @@ display (WView *view)
 	    }
 	}
     } else {
-	/* the get_byte() call below might modify view->last_byte */
-	for (; row < height && ((void) (c = get_byte (view, from)), from < view->last_byte); from++) {
+	for (; row < height && (c = get_byte (view, from)) != -1; from++) {
 	    if ((c == '\n') || (col >= width && view->wrap_mode)) {
 		col = frame_shift;
 		row++;
@@ -994,10 +1024,11 @@ display (WView *view)
 		int c_prev;
 		int c_next;
 
-		if (from + 1 < view->last_byte
-		    && is_printable ((c_next = get_byte (view, from + 1)))
-		    && from > view->first
-		    && is_printable ((c_prev = get_byte (view, from - 1)))
+		if ((c_next = get_byte_indexed (view, from, 1)) != -1
+		    && is_printable (c_next)
+		    && from >= view->first + 1
+		    && (c_prev = get_byte (view, from - 1)) != -1
+		    && is_printable (c_prev)
 		    && (c_prev == c_next || c_prev == '_'
 		        || (c_prev == '+' && c_next == 'o'))) {
 		    if (col <= frame_shift) {
@@ -1040,10 +1071,6 @@ display (WView *view)
 		boldflag = MARK_NORMAL;
 		attrset (NORMAL_COLOR);
 	    }
-
-	    /* Very last thing */
-	    if (view->growing_buffer && from + 1 == view->last_byte)
-		get_byte (view, from + 1);
 	}
     }
     view->last = from;
@@ -1108,35 +1135,30 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 /* If the last parameter is nonzero, it means we want get the count of lines
    from current up to the the upto position inclusive */
 static offset_type
-move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
+view_move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 {
-    offset_type q, p;
-    int line;
+    const int bpl = view->bytes_per_line;
+    offset_type q, p, linestart;
+    int i, line;
     int col = 0;
 
     if (view->hex_mode) {
-	p = current + lines * view->bytes_per_line;
-	p = (p >= view->last_byte) ? current : p;
-	if (lines == 1) {
-	    q = view->edit_cursor + view->bytes_per_line;
-	    line = q / view->bytes_per_line;
-	    col = (view->last_byte - 1) / view->bytes_per_line;
-	    view->edit_cursor = (line > col) ? view->edit_cursor : q;
-	    view->edit_cursor = (view->edit_cursor < view->last_byte) ?
-		view->edit_cursor : view->last_byte - 1;
-	    q = current + ((LINES - 2) * view->bytes_per_line);
-	    p = (view->edit_cursor < q) ? current : p;
-	} else {
-	    view->edit_cursor = (view->edit_cursor < p) ?
-		p : view->edit_cursor;
+	linestart = current - current % bpl;
+	/* try to move as many lines down as possible */
+	for (i = lines; i != 0; i--) {
+	    if (get_byte_indexed (view, linestart, i * bpl) != -1)
+		break;
 	}
-	return p;
+	view->edit_cursor += i * bpl;
+	return current + i * bpl;
     } else {
 	if (upto) {
 	    lines = -1;
 	    q = upto;
 	} else
-	    q = view->last_byte;
+	    q = view_get_filesize (view);
+
+	/* FIXME: what if get_byte() returns -1? */
 	if (get_byte (view, q) != '\n')
 	    q++;
 	for (line = col = 0, p = current; p < q; p++) {
@@ -1145,6 +1167,7 @@ move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 	    if (lines != -1 && line >= lines)
 		return p;
 
+	    /* FIXME: what if get_byte() returns -1? */
 	    c = get_byte (view, p);
 
 	    if (view->wrap_mode) {
@@ -1157,18 +1180,17 @@ move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 		else
 		    col++;
 		if (view->viewer_nroff_flag && c == '\b') {
-		    if (p + 1 < view->last_byte
-			&& is_printable (get_byte (view, p + 1))
-			&& p > view->first
-			&& is_printable (get_byte (view, p - 1)))
+		    int cc;
+		    if ((cc = get_byte_indexed (view, p, 1)) != -1
+			&& is_printable (cc)
+			&& p >= view->first + 1
+			&& (cc = get_byte (view, p - 1)) != -1
+			&& is_printable (cc))
 			col -= 2;
 		} else if (col == vwidth) {
-		    /* FIXME: the c in is_printable was a p, that is a bug,
-		       I suspect I got that fix from Jakub, same applies
-		       for d. */
-		    int d = get_byte (view, p + 2);
+		    int d = get_byte_indexed (view, p, 2);
 
-		    if (p + 2 >= view->last_byte || !is_printable (c) ||
+		    if (d == -1 || !is_printable (c) ||
 			!view->viewer_nroff_flag
 			|| get_byte (view, p + 1) != '\b'
 			|| !is_printable (d)) {
@@ -1197,7 +1219,10 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
     offset_type p, q, pm;
     int line;
 
-    if (current == view->last_byte && get_byte (view, current - 1) != '\n')
+    if (current == view->first)
+	return current;
+
+    if (get_byte (view, current) == -1 && get_byte (view, current - 1) != '\n')
         /* There is one virtual '\n' at the end,
            so that the last line is shown */
         line = 1;
@@ -1207,12 +1232,12 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
     for (q = p = current - 1; p > view->first; p--) {
         if (get_byte (view, p) == '\n' || p == view->first) {
             pm = p > view->first ? p + 1 : view->first;
-            line += move_forward2 (view, pm, 0, q);
+            line += view_move_forward2 (view, pm, 0, q);
             if (line >= lines) {
                 if (line == lines)
                     return pm;
                 else
-                    return move_forward2 (view, pm, line - lines, 0);
+                    return view_move_forward2 (view, pm, line - lines, 0);
             }
             q = p + 1;
         }
@@ -1222,8 +1247,8 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
 
 /* returns the new current pointer */
 /* Cause even the forward routine became very complex, we in the wrap_mode
-   just find the nearest '\n', use move_forward2(p, 0, q) to get the count
-   of lines up to there and then use move_forward2(p, something, 0), which we
+   just find the nearest '\n', use view_move_forward2(p, 0, q) to get the count
+   of lines up to there and then use view_move_forward2(p, something, 0), which we
    return */
 static offset_type
 move_backward2 (WView *view, offset_type current, unsigned int lines)
@@ -1252,7 +1277,7 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
 
         /* There is one virtual '\n' at the end,
          * so that the last line is shown */
-        if (current == view->last_byte && get_byte (view, current - 1) != '\n')
+        if (get_byte (view, current) == -1 && get_byte (view, current - 1) != '\n')
             lines--;
         while (current > view->first && get_byte(view, current - 1) != '\n')
             current--;
@@ -1293,11 +1318,13 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     if (view->growing_buffer)
         view_growbuf_read_until (view, OFFSETTYPE_MAX);
 
-    bottom_first = move_backward2 (view, view->last_byte, vheight - 1);
+    bottom_first = move_backward2 (view, view_get_filesize (view), vheight - 1);
 
-    if (view->hex_mode)
-	bottom_first = (bottom_first + view->bytes_per_line - 1)
-	    / view->bytes_per_line * view->bytes_per_line;
+    if (view->hex_mode && bottom_first % view->bytes_per_line != 0) {
+	bottom_first -= bottom_first % view->bytes_per_line;
+	if (bottom_first <= OFFSETTYPE_MAX - view->bytes_per_line)
+	    bottom_first += view->bytes_per_line;
+    }
     view->bottom_first = bottom_first;
 
     return view->bottom_first;
@@ -1306,8 +1333,8 @@ get_bottom_first (WView *view, int do_not_cache, int really)
 static void
 view_move_forward (WView *view, int i)
 {
-    view->start_display = move_forward2 (view, view->start_display, i, 0);
-    if (!view->growing_buffer
+    view->start_display = view_move_forward2 (view, view->start_display, i, 0);
+    if ((!view->growing_buffer || view->growbuf_finished)
 	&& view->start_display > get_bottom_first (view, 0, 0))
 	view->start_display = view->bottom_first;
     view->search_start = view->start_display;
@@ -1354,8 +1381,8 @@ move_right (WView *view)
 	    if (view->nib_shift)
 		return;
 	}
-	view->edit_cursor = (++view->edit_cursor < view->last_byte) ?
-	    view->edit_cursor : view->last_byte - 1;
+	if (get_byte_indexed (view, view->edit_cursor, 1) != -1)
+	    view->edit_cursor++;
 	if (view->edit_cursor >= view->last) {
 	    view->edit_cursor -= view->bytes_per_line;
 	    view_move_forward (view, 1);
@@ -1502,10 +1529,11 @@ get_line_at (WView *view, offset_type *p, offset_type *skipped)
 static void
 search_update_steps (WView *view)
 {
-    if (view->last_byte != 0)
+    offset_type filesize = view_get_filesize (view);
+    if (filesize != 0)
 	view->update_steps = 40000;
     else /* viewing a data stream, not a file */
-	view->update_steps = view->last_byte / 100;
+	view->update_steps = filesize / 100;
 
     /* Do not update the percent display but every 20 ks */
     if (view->update_steps < 20000)
@@ -1670,7 +1698,7 @@ block_search (WView *view, const char *buffer, int len)
 		break;
 	}
     } else {
-	while (e < view->last_byte) {
+	while (get_byte (view, e) != -1) {
 	    if (e >= view->update_activate) {
 		view->update_activate += view->update_steps;
 		if (verbose) {
@@ -1941,9 +1969,12 @@ goto_line (WView *view)
     offset_type i;
 
     view->wrap_mode = 0;
+
+    /* FIXME: this is awfully slow */
     for (i = view->first; i < view->start_display; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline++;
+
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current line number is %d.\n"
 		  " Enter the new line number:"), oldline);
@@ -1974,7 +2005,7 @@ goto_addr (WView *view)
     if (line) {
 	if (*line) {
 	    addr = strtoul (line, &error, 0);
-	    if ((*error == '\0') && (addr <= view->last_byte)) {
+	    if ((*error == '\0') && get_byte (view, addr) != -1) {
 		move_to_top (view);
 		view_move_forward (view, addr / view->bytes_per_line);
 		view->edit_cursor = addr;
@@ -2012,11 +2043,6 @@ regexp_search (WView *view, int direction)
     }
     g_free (old);
     old = regexp;
-#if 0
-    /* Mhm, do we really need to load all the file in the core? */
-    if (view->bytes_read < view->last_byte)
-	get_byte (view, view->last_byte - 1);	/* Get the whole file in to memory */
-#endif
     view->direction = direction;
     do_regexp_search (view, regexp);
 
@@ -2278,7 +2304,7 @@ view_handle_key (WView *view, int c)
 	    return MSG_HANDLED;
 
 	case XCTRL ('e'):	/* End of line */
-	    view_move_cursor_to_eol (view);
+	    view_hexview_move_to_eol (view);
 	    return MSG_HANDLED;
 
 	case XCTRL ('f'):	/* Character forward */
@@ -2690,10 +2716,12 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 }
 
 static offset_type
-view_growbuf_filesize (WView *view)
+view_growbuf_filesize (WView *view, gboolean *ret_exact)
 {
     assert(view->growing_buffer);
 
+    if (ret_exact)
+	*ret_exact = view->growbuf_finished;
     if (view->blocks == 0)
         return 0;
     else
@@ -2701,18 +2729,36 @@ view_growbuf_filesize (WView *view)
 	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
 }
 
+/* Return the current size of the data source. This may be less
+ * than the real size in case of growing buffers.
+ */
 static offset_type
 view_get_filesize (WView *view)
 {
+    gboolean exact;
+
+    return view_get_filesize_with_exact (view, &exact);
+}
+
+/* Return the size of the data that is available to the viewer.
+ * The ''exact'' return value is TRUE when the data source has a fixed
+ * size, and is FALSE when the data source is still growing.
+ */
+static offset_type
+view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
+{
     switch (view->datasource) {
 	case DS_NONE:
+	    *ret_exact = TRUE;
 	    return 0;
 	case DS_STDIO_PIPE:
 	case DS_VFS_PIPE:
-	    return view_growbuf_filesize (view);
+	    return view_growbuf_filesize (view, ret_exact);
 	case DS_FILE:
+	    *ret_exact = TRUE;
 	    return view->ds_file_size;
 	case DS_STRING:
+	    *ret_exact = TRUE;
 	    return view->ds_string_len;
 	default:
 	    assert(!"Unknown datasource type");
@@ -2724,7 +2770,6 @@ static inline void
 view_update_last_byte (WView *view)
 {
     view->bottom_first = INVALID_OFFSET;
-    view->last_byte    = view_get_filesize (view);
 }
 
 static void
@@ -2751,14 +2796,18 @@ view_close_datasource (WView *view)
 	case DS_NONE:
 	    break;
 	case DS_STDIO_PIPE:
-	    (void) pclose (view->ds_stdio_pipe);
-	    close_error_pipe (0, NULL);
-	    view->ds_stdio_pipe = NULL;
+	    if (view->ds_stdio_pipe != NULL) {
+		(void) pclose (view->ds_stdio_pipe);
+		close_error_pipe (0, NULL);
+		view->ds_stdio_pipe = NULL;
+	    }
 	    view_free_growing_buffer (view);
 	    break;
 	case DS_VFS_PIPE:
-	    (void) mc_close (view->ds_vfs_pipe);
-	    view->ds_vfs_pipe = -1;
+	    if (view->ds_vfs_pipe != -1) {
+		(void) mc_close (view->ds_vfs_pipe);
+		view->ds_vfs_pipe = -1;
+	    }
 	    view_free_growing_buffer (view);
 	    break;
 	case DS_FILE:
@@ -2886,6 +2935,16 @@ get_byte (WView *view, offset_type offset)
 }
 
 static void
+view_init_growbuf (WView *view)
+{
+    view->growing_buffer    = TRUE;
+    view->block_ptr         = NULL;
+    view->blocks            = 0;
+    view->growbuf_lastindex = 0;
+    view->growbuf_finished  = FALSE;
+}
+
+static void
 view_set_datasource_none (WView *view)
 {
     view->datasource = DS_NONE;
@@ -2898,11 +2957,8 @@ view_set_datasource_vfs_pipe (WView *view, int fd)
 {
     view->datasource        = DS_VFS_PIPE;
     view->ds_vfs_pipe       = fd;
-    view->growing_buffer    = TRUE;
-    view->block_ptr         = NULL;
-    view->blocks            = 0;
-    view->growbuf_lastindex = 0;
 
+    view_init_growbuf (view);
     view_update_last_byte (view);
 }
 
@@ -2911,11 +2967,8 @@ view_set_datasource_stdio_pipe (WView *view, FILE *fp)
 {
     view->datasource        = DS_STDIO_PIPE;
     view->ds_stdio_pipe     = fp;
-    view->growing_buffer    = TRUE;
-    view->block_ptr         = NULL;
-    view->blocks            = 0;
-    view->growbuf_lastindex = 0;
 
+    view_init_growbuf (view);
     view_update_last_byte (view);
 }
 

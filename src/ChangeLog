@@ -4,6 +4,35 @@
 	macro from global.h.
 	* util.c (str_unconst): Likewise.
 
+	* view.c (struct WView): Removed the last_byte field, because it
+	got too complex maintaining it together with the new datasource
+	framework. The function view_get_filesize() now takes its place.
+	Corrected the type of the growing buffer to unsigned char. Added
+	a field growbuf_finished to indicate when all data has been read.
+	* view.c (view_move_cursor_to_eol): Renamed to
+	view_hexview_move_to_eol().
+	* view.c (view_get_filesize): Added.
+	* view.c (view_get_filesize_with_exact): Added.
+	* view.c (get_byte_indexed): get_byte with bounds checking.
+	* view.c (view_growbuf_read_until): Closes the datasource after
+	reading has finished.
+	* view.c (view_percent): The percentage is only shown when its
+	exact value can be computed.
+	* view.c (view_status): The [grow] field has been removed from
+	the status line. Instead, the filesize is reported as ">= n"
+	bytes.
+	* view.c (count_backspaces): Added a bounds check.
+	* view.c (display): Using get_byte_indexed instead of get_byte.
+	* view.c (move_forward2): Renamed to view_move_forward2 because
+	of the equally-named function in src/help.c. Replaced the
+	algorithm for the hexview mode by a much simpler version. Now
+	we have 5 ?: operators less than before.
+	* view.c (get_bottom_first): Added bounds checking.
+	* view.c (move_right): Simplified the code.
+	* view.c (goto_addr): Fixed an off-by-one error.
+	* view.c (view_close_datasource): For the growing buffer cases,
+	check if the datasource has already been closed before.
+
 2005-04-07  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Removed mmap(2) support. Now regular files are
