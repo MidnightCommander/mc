@@ -33,6 +33,8 @@
 	* view.c (view_close_datasource): For the growing buffer cases,
 	check if the datasource has already been closed before.
 	* view.c (view_handle_editkey): Simplified the code.
+	* view.c (view_move_forward2): Simplified the code.
+	* view.c (get_byte_growing_buffer): Added bounds checking.
 
 2005-04-07  Roland Illig  <roland.illig@gmx.de>
 

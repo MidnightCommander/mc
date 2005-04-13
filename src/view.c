@@ -63,7 +63,7 @@
 #include "selcodepage.h"
 
 /* Block size for reading files in parts */
-#define VIEW_PAGE_SIZE 8192
+#define VIEW_PAGE_SIZE		((size_t) 8192)
 
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
 #define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
@@ -98,7 +98,6 @@ struct WView {
     char *filename;		/* Name of the file */
     char *command;		/* Command used to pipe data in */
     int view_active;
-    int have_frame;
 
     enum view_ds datasource;	/* Where the displayed data comes from */
 
@@ -121,6 +120,7 @@ struct WView {
     size_t ds_string_len;	/* The length of the string */
 
     /* Display information */
+    int have_frame;
     offset_type last;           /* Last byte shown */
     offset_type first;		/* First byte in file */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
@@ -1169,9 +1169,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 		if (c == '\r')
 		    continue;	/* This characters is never displayed */
 		else if (c == '\t')
-		    col =
-			((col - view->have_frame) / 8) * 8 + 8 +
-			view->have_frame;
+		    col = ((col - frame_shift) / 8) * 8 + 8 + frame_shift;
 		else
 		    col++;
 		if (view->viewer_nroff_flag && c == '\b') {
@@ -2875,11 +2873,14 @@ get_byte_none (WView *view, offset_type byte_index)
 static int
 get_byte_growing_buffer (WView *view, offset_type byte_index)
 {
-    size_t pageno = byte_index / VIEW_PAGE_SIZE;
-    size_t pageindex = byte_index % VIEW_PAGE_SIZE;
+    offset_type pageno    = byte_index / VIEW_PAGE_SIZE;
+    offset_type pageindex = byte_index % VIEW_PAGE_SIZE;
 
     assert (view->growing_buffer);
     assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
+
+    if ((size_t) pageno != pageno)
+	return -1;
 
     view_growbuf_read_until (view, byte_index + 1);
     if (view->blocks == 0)
