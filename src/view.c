@@ -400,15 +400,10 @@ view_handle_editkey (WView *view, int key)
 	    return MSG_NOT_HANDLED;
     }
     if (!node) {
-	node = (struct hexedit_change_node *)
-	    g_new (struct hexedit_change_node, 1);
-
-	if (node) {
-	    /* FIXME: Hexedit changes are not shown in textview mode. */
-	    node->offset = view->edit_cursor;
-	    node->value = byte_val;
-	    enqueue_change (&view->change_list, node);
-	}
+	node = g_new (struct hexedit_change_node, 1);
+	node->offset = view->edit_cursor;
+	node->value = byte_val;
+	enqueue_change (&view->change_list, node);
     } else {
 	node->value = byte_val;
     }

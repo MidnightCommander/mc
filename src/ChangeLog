@@ -32,6 +32,7 @@
 	* view.c (goto_addr): Fixed an off-by-one error.
 	* view.c (view_close_datasource): For the growing buffer cases,
 	check if the datasource has already been closed before.
+	* view.c (view_handle_editkey): Simplified the code.
 
 2005-04-07  Roland Illig  <roland.illig@gmx.de>
 
