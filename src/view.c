@@ -1,5 +1,8 @@
-/* View file module for the Midnight Commander
+/*
+   Internal file viewer for the Midnight Commander
+
    Copyright (C) 1994, 1995, 1996 The Free Software Foundation
+
    Written by: 1994, 1995, 1998 Miguel de Icaza
                1994, 1995 Janne Kukonlehto
                1995 Jakub Jelinek
@@ -21,7 +24,8 @@
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
