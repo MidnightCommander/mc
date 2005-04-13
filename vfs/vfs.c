@@ -389,8 +389,8 @@ int mc_##name inarg \
     return result; \
 }
 
-MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
-MC_HANDLEOP (write, (int handle, const char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
+MC_HANDLEOP(read, (int handle, void *buffer, int count), (vfs_info (handle), buffer, count) )
+MC_HANDLEOP (write, (int handle, const void *buf, int nbyte), (vfs_info (handle), buf, nbyte))
 
 
 #define MC_RENAMEOP(name) \

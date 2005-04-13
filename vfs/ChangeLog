@@ -1,3 +1,9 @@
+2005-04-13  Roland Illig  <roland.illig@gmx.de>
+
+	* vfs.h: Fixed prototypes for mc_read() and mc_write(). Now they
+	get void * instead of char *.
+	* vfs.c: Likewise.
+
 2005-03-31  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs/uarj.in (mcarjfs_copyout): Use the regular extract command,
