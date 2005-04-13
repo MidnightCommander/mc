@@ -1,3 +1,9 @@
+2005-04-13  Roland Illig  <roland.illig@gmx.de>
+
+	* util.h (str_unconst): Provide a replacement for the const_cast
+	macro from global.h.
+	* util.c (str_unconst): Likewise.
+
 2005-04-07  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Removed mmap(2) support. Now regular files are

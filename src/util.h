@@ -3,6 +3,12 @@
 
 #include <sys/types.h>
 
+/* Returns its argument as a "modifiable" string. This function is
+ * intended to pass strings to legacy libraries that don't know yet
+ * about the "const" modifier. The return value of this function
+ * MUST NOT be modified. */
+extern char *str_unconst (const char *);
+
 /* String managing functions */
 
 extern const char *cstrcasestr (const char *haystack, const char *needle);
