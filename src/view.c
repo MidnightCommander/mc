@@ -2732,7 +2732,8 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->viewer_magic_flag = default_magic_flag;
     view->viewer_nroff_flag = default_nroff_flag;
 
-    view_init_growbuf (view);
+    view->growing_buffer    = FALSE;
+    /* leave the other growbuf fields uninitialized */
 
     view->search_start      = 0;
     view->found_len         = 0;
