@@ -129,6 +129,7 @@ struct WView {
     gboolean hexedit_mode;	/* Hexedit */
     gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
     gboolean text_nroff_mode;	/* Nroff-style highlighting */
+    gboolean magic_mode;	/* Preprocess the file using external programs */
 
     /* Display information */
     int have_frame;
@@ -149,7 +150,6 @@ struct WView {
 
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
-    int viewer_magic_flag:1;	/* Selected viewer */
 
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
@@ -280,7 +280,7 @@ view_done (WView *view)
     g_free (view->command), view->command = NULL;
     default_hex_mode = view->hex_mode;
     default_nroff_flag = view->text_nroff_mode;
-    default_magic_flag = view->viewer_magic_flag;
+    default_magic_flag = view->magic_mode;
     global_wrap_mode = view->wrap_mode;
 }
 
@@ -573,7 +573,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view->start_col = 0;
     }
 
-    if (_command && (view->viewer_magic_flag || _file[0] == '\0')) {
+    if (_command && (view->magic_mode || _file[0] == '\0')) {
 	error = init_growing_view (view, _command, view->filename);
     } else if (_file[0]) {
 	int cntlflags;
@@ -616,7 +616,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	} else {
 	    type = get_compression_type (fd);
 
-	    if (view->viewer_magic_flag && (type != COMPRESSION_NONE)) {
+	    if (view->magic_mode && (type != COMPRESSION_NONE)) {
 		g_free (view->filename);
 		view->filename = g_strconcat (_file, decompress_extension (type), (char *) NULL);
 	    }
@@ -2132,7 +2132,7 @@ change_viewer (WView *view)
 
     if (*view->filename) {
 	altered_magic_flag = 1;
-	view->viewer_magic_flag = !view->viewer_magic_flag;
+	view->magic_mode = !view->magic_mode;
 	s = g_strdup (view->filename);
 	t = g_strdup (view->command);
 
@@ -2196,7 +2196,7 @@ view_labels (WView *view)
     my_define (h, 7, view->hex_mode ? _("HxSrch") : _("Search"),
 	       normal_search_cmd, view);
 
-    my_define (h, 8, view->viewer_magic_flag ? _("Raw") : _("Parse"),
+    my_define (h, 8, view->magic_mode ? _("Raw") : _("Parse"),
 	       change_viewer, view);
 
     if (!view->have_frame) {
@@ -2683,7 +2683,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->wrap_mode         = global_wrap_mode;
     view->hex_mode          = default_hex_mode;
     view->bytes_per_line    = 1;
-    view->viewer_magic_flag = default_magic_flag;
+    view->magic_mode        = default_magic_flag;
     view->text_nroff_mode   = default_nroff_flag;
 
     view->growing_buffer    = FALSE;

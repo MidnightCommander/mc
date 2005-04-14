@@ -16,6 +16,7 @@
 	text_nroff_mode.
 	* view.c (struct WView): Moved hexedit_mode into the "Editor
 	modes" section.
+	* view.c (struct WView): Renamed viewer_magic_flag to magic_mode.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
