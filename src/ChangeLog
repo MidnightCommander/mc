@@ -1,3 +1,11 @@
+2005-04-14  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (struct WView): Removed the view_active field. It was
+	practically equivalent to view->datasource != DS_NONE.
+	* view.c (do_view_init): Renamed to view_load().
+	* view.c (view_new): Every field of the WView is initialized
+	explicitly.
+
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h (str_unconst): Provide a replacement for the const_cast

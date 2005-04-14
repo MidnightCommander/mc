@@ -103,7 +103,6 @@ struct WView {
 
     char *filename;		/* Name of the file */
     char *command;		/* Command used to pipe data in */
-    int view_active;
 
     enum view_ds datasource;	/* Where the displayed data comes from */
 
@@ -239,6 +238,8 @@ enum { off, on };
 static offset_type view_get_filesize (WView *);
 static offset_type view_get_filesize_with_exact (WView *, gboolean *);
 
+static void view_init_growbuf (WView *);
+
 static inline int
 get_byte_indexed (WView *view, offset_type base, offset_type ofs)
 {
@@ -280,12 +281,9 @@ view_done (WView *view)
 {
     set_monitor (view, off);
 
-    if (view->view_active) {
-	view_close_datasource (view);
-	g_free (view->filename);
-	g_free (view->command);
-    }
-    view->view_active = 0;
+    view_close_datasource (view);
+    g_free (view->filename), view->filename = NULL;
+    g_free (view->command), view->command = NULL;
     default_hex_mode = view->hex_mode;
     default_nroff_flag = view->viewer_nroff_flag;
     default_magic_flag = view->viewer_magic_flag;
@@ -554,9 +552,9 @@ init_growing_view (WView *view, const char *name, const char *filename)
 }
 
 /* Return zero on success, -1 on failure */
-static int
-do_view_init (WView *view, const char *_command, const char *_file,
-	      int start_line)
+int
+view_load (WView *view, const char *_command, const char *_file,
+	   int start_line)
 {
     char *error = NULL;
     int i, type;
@@ -564,8 +562,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
     char tmp[BUF_MEDIUM];
     struct stat st;
 
-    if (view->view_active)
-	view_done (view);
+    view_done (view);
 
     /* Set up the state */
     view_set_datasource_none (view);
@@ -644,7 +641,6 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	}
     }
 
-    view->view_active = 1;
     view->command = g_strdup (_command);
     view->search_start = view->start_display = view->start_save =
 	view->first;
@@ -691,18 +687,6 @@ view_update_bytes_per_line (WView *view)
 	view->bytes_per_line++;	/* To avoid division by 0 */
 
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
-}
-
-/* Both views */
-/* Return zero on success, -1 on failure */
-int
-view_init (WView *view, const char *_command, const char *_file, int start_line)
-{
-    if (!view->view_active || strcmp (_file, view->filename)
-	|| altered_magic_flag)
-	return do_view_init (view, _command, _file, start_line);
-    else
-	return 0;
 }
 
 static void
@@ -2161,7 +2145,7 @@ change_viewer (WView *view)
 	t = g_strdup (view->command);
 
 	view_done (view);
-	view_init (view, t, s, 0);
+	view_load (view, t, s, 0);
 	g_free (s);
 	g_free (t);
 	view_labels (view);
@@ -2602,7 +2586,7 @@ view (const char *_command, const char *_file, int *move_dir_p, int start_line)
     add_widget (view_dlg, bar);
     add_widget (view_dlg, wview);
 
-    error = view_init (wview, _command, _file, start_line);
+    error = view_load (wview, _command, _file, start_line);
     if (move_dir_p)
 	*move_dir_p = 0;
 
@@ -2643,7 +2627,7 @@ view_hook (void *v)
     else
 	return;
 
-    view_init (view, 0, panel->dir.list[panel->selected].fname, 0);
+    view_load (view, 0, panel->dir.list[panel->selected].fname, 0);
     display (view);
     view_status (view);
 }
@@ -2720,16 +2704,49 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     init_widget (&view->widget, y, x, lines, cols,
 		 (callback_fn) view_callback,
 		 (mouse_h) real_view_event);
+    widget_want_cursor (view->widget, 0);
 
-    view->hex_mode = default_hex_mode;
-    view->hexedit_mode = default_hexedit_mode;
+    view->filename          = NULL;
+    view->command           = NULL;
+
+    view_set_datasource_none (view);
+
+    view->have_frame        = is_panel ? 1 : 0;
+    view->last              = 0;
+    view->first             = 0;
+    view->bottom_first      = INVALID_OFFSET;
+    view->start_display     = 0;
+    view->start_col         = 0;
+    view->edit_cursor       = 0;
+    view->hexedit_mode      = default_hexedit_mode;
+    view->nib_shift         = FALSE;
+    view->hexedit_text      = FALSE;
+    view->start_save        = 0;
+    view->cursor_col        = 0;
+    view->cursor_row        = 0;
+    view->change_list       = NULL;
+    view->dirty             = 0;
+    view->wrap_mode         = global_wrap_mode;
+    view->hex_mode          = default_hex_mode;
+    view->bytes_per_line    = 1;
     view->viewer_magic_flag = default_magic_flag;
     view->viewer_nroff_flag = default_nroff_flag;
-    view->have_frame = is_panel;
-    view->wrap_mode = global_wrap_mode;
 
-    widget_want_cursor (view->widget, 0);
-    view_set_datasource_none (view);
+    view_init_growbuf (view);
+
+    view->search_start      = 0;
+    view->found_len         = 0;
+    view->search_exp        = NULL;
+    view->direction         = 1; /* forward */
+    view->last_search       = 0; /* it's a function */
+
+    view->view_quit         = 0;
+    view->monitor           = 0;
+    view->marker            = 0;
+    /* leave view->marks uninitialized */
+    view->move_dir          = 0;
+    view->update_steps      = 0;
+    view->update_activate   = 0;
 
     return view;
 }
