@@ -7,7 +7,15 @@
  * intended to pass strings to legacy libraries that don't know yet
  * about the "const" modifier. The return value of this function
  * MUST NOT be modified. */
+#ifdef INLINE_STR_UNCONST
+static char *str_unconst_inlined (const char *s)
+{
+    return (char *) s;
+}
+#define str_unconst(s) str_unconst_inlined(s)
+#else
 extern char *str_unconst (const char *);
+#endif
 
 /* String managing functions */
 
