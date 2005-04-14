@@ -12,6 +12,8 @@
 	* view.c (struct WView): Renamed hexedit_text to hexview_in_text.
 	* view.c (struct WView): Changed the type of hex_mode to gboolean.
 	Fixed one non-boolean operation in toggle_wrap_mode().
+	* view.c (struct WView): Renamed viewer_nroff_flag to
+	text_nroff_mode.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

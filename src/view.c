@@ -127,6 +127,7 @@ struct WView {
     /* Editor modes */
     gboolean hex_mode;		/* Hexview or Hexedit */
     gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
+    gboolean text_nroff_mode;	/* Nroff-style highlighting */
 
     /* Display information */
     int have_frame;
@@ -149,7 +150,6 @@ struct WView {
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
     int viewer_magic_flag:1;	/* Selected viewer */
-    int viewer_nroff_flag:1;	/* Do we do nroff style highlighting? */
 
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
@@ -279,7 +279,7 @@ view_done (WView *view)
     g_free (view->filename), view->filename = NULL;
     g_free (view->command), view->command = NULL;
     default_hex_mode = view->hex_mode;
-    default_nroff_flag = view->viewer_nroff_flag;
+    default_nroff_flag = view->text_nroff_mode;
     default_magic_flag = view->viewer_magic_flag;
     global_wrap_mode = view->wrap_mode;
 }
@@ -1005,7 +1005,7 @@ display (WView *view)
 		col = ((col - frame_shift) / 8) * 8 + 8 + frame_shift;
 		continue;
 	    }
-	    if (view->viewer_nroff_flag && c == '\b') {
+	    if (view->text_nroff_mode && c == '\b') {
 		int c_prev;
 		int c_next;
 
@@ -1174,7 +1174,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 		    col = ((col - frame_shift) / 8) * 8 + 8 + frame_shift;
 		else
 		    col++;
-		if (view->viewer_nroff_flag && c == '\b') {
+		if (view->text_nroff_mode && c == '\b') {
 		    int cc;
 		    if ((cc = get_byte_indexed (view, p, 1)) != -1
 			&& is_printable (cc)
@@ -1186,7 +1186,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 		    int d = get_byte_indexed (view, p, 2);
 
 		    if (d == -1 || !is_printable (c) ||
-			!view->viewer_nroff_flag
+			!view->text_nroff_mode
 			|| get_byte (view, p + 1) != '\b'
 			|| !is_printable (d)) {
 			col = 0;
@@ -2149,7 +2149,7 @@ change_viewer (WView *view)
 static void
 change_nroff (WView *view)
 {
-    view->viewer_nroff_flag = !view->viewer_nroff_flag;
+    view->text_nroff_mode = !view->text_nroff_mode;
     altered_nroff_flag = 1;
     view_labels (view);
     view->dirty++;
@@ -2201,7 +2201,7 @@ view_labels (WView *view)
 
     if (!view->have_frame) {
 	my_define (h, 9,
-		   view->viewer_nroff_flag ? _("Unform") : _("Format"),
+		   view->text_nroff_mode ? _("Unform") : _("Format"),
 		   change_nroff, view);
 	my_define (h, 3, _("Quit"), view_quit_cmd, view);
     }
@@ -2684,7 +2684,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->hex_mode          = default_hex_mode;
     view->bytes_per_line    = 1;
     view->viewer_magic_flag = default_magic_flag;
-    view->viewer_nroff_flag = default_nroff_flag;
+    view->text_nroff_mode   = default_nroff_flag;
 
     view->growing_buffer    = FALSE;
     /* leave the other growbuf fields uninitialized */
