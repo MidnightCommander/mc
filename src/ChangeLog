@@ -10,6 +10,8 @@
 	* view.c (struct WView): Removed the "first" field, as it was
 	always 0.
 	* view.c (struct WView): Renamed hexedit_text to hexview_in_text.
+	* view.c (struct WView): Changed the type of hex_mode to gboolean.
+	Fixed one non-boolean operation in toggle_wrap_mode().
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

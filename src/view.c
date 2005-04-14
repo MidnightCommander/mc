@@ -125,6 +125,7 @@ struct WView {
     size_t ds_string_len;	/* The length of the string */
 
     /* Editor modes */
+    gboolean hex_mode;		/* Hexview or Hexedit */
     gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
 
     /* Display information */
@@ -146,7 +147,6 @@ struct WView {
     int wrap_mode:1;		/* wrap_mode */
 
     /* Mode variables */
-    int hex_mode:1;		/* Hexadecimal mode flag */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
     int viewer_magic_flag:1;	/* Selected viewer */
     int viewer_nroff_flag:1;	/* Do we do nroff style highlighting? */
@@ -1935,7 +1935,7 @@ toggle_wrap_mode (WView *view)
 static void
 toggle_hex_mode (WView *view)
 {
-    view->hex_mode = 1 - view->hex_mode;
+    view->hex_mode = !view->hex_mode;
 
     if (view->hex_mode) {
 	/* Shift the line start to 0x____0 on entry, restore it for text */
