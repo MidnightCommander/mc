@@ -19,6 +19,8 @@
 	* view.c (struct WView): Renamed viewer_magic_flag to magic_mode.
 	* view.c (struct WView): Renamed wrap_mode to text_wrap_mode, as
 	it only applies to the text viewer.
+	* view.c (struct WView): Renamed growing_buffer to growbuf_in_use,
+	blocks to growbuf_blocks, block_ptr to growbuf_blockptr.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

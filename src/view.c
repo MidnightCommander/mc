@@ -152,9 +152,9 @@ struct WView {
     int bytes_per_line;		/* Number of bytes per line in hex mode */
 
     /* Growing buffers information */
-    int growing_buffer;		/* Use the growing buffers? */
-    unsigned char **block_ptr;	/* Pointer to the block pointers */
-    size_t blocks;		/* The number of blocks in *block_ptr */
+    gboolean growbuf_in_use;	/* Use the growing buffers? */
+    unsigned char **growbuf_blockptr; /* Pointer to the block pointers */
+    size_t growbuf_blocks;	/* The number of blocks in *block_ptr */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
     gboolean growbuf_finished;	/* TRUE when all data has been read. */
@@ -296,7 +296,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     unsigned char *p;
     size_t bytesfree;
 
-    assert (view->growing_buffer);
+    assert (view->growbuf_in_use);
     assert (view->datasource == DS_STDIO_PIPE
 	|| view->datasource == DS_VFS_PIPE);
 
@@ -304,22 +304,22 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	return;
 
     while (view_growbuf_filesize (view, NULL) < ofs) {
-        if (view->blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+        if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
             unsigned char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
-            unsigned char **newblocks = g_try_malloc (sizeof (*newblocks) * (view->blocks + 1));
+            unsigned char **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
             if (!newblock || !newblocks) {
                 g_free (newblock);
 		g_free (newblocks);
                 return;
             }
-            memcpy (newblocks, view->block_ptr, sizeof (*newblocks) * view->blocks);
-            g_free (view->block_ptr);
-            view->block_ptr = newblocks;
-            view->block_ptr[view->blocks++] = newblock;
+            memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
+            g_free (view->growbuf_blockptr);
+            view->growbuf_blockptr = newblocks;
+            view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
             view->growbuf_lastindex = 0;
             view_update_last_byte (view);
         }
-        p = view->block_ptr[view->blocks - 1] + view->growbuf_lastindex;
+        p = view->growbuf_blockptr[view->growbuf_blocks - 1] + view->growbuf_lastindex;
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
 	if (view->datasource == DS_STDIO_PIPE) {
@@ -1310,7 +1310,7 @@ get_bottom_first (WView *view, int do_not_cache, int really)
 	return view->bottom_first;
 
     /* Force loading */
-    if (view->growing_buffer)
+    if (view->growbuf_in_use)
         view_growbuf_read_until (view, OFFSETTYPE_MAX);
 
     bottom_first = move_backward2 (view, view_get_filesize (view), vheight - 1);
@@ -1329,7 +1329,7 @@ static void
 view_move_forward (WView *view, int i)
 {
     view->start_display = view_move_forward2 (view, view->start_display, i, 0);
-    if ((!view->growing_buffer || view->growbuf_finished)
+    if ((!view->growbuf_in_use || view->growbuf_finished)
 	&& view->start_display > get_bottom_first (view, 0, 0))
 	view->start_display = view->bottom_first;
     view->search_start = view->start_display;
@@ -2185,7 +2185,7 @@ view_labels (WView *view)
 	    my_define (h, 2, view->hexview_in_text ? _("EdHex") : _("EdText"),
 		       toggle_hexedit_mode, view);
 	else {
-	    if (view->growing_buffer || view->have_frame)
+	    if (view->growbuf_in_use || view->have_frame)
 		my_define (h, 2, "", NULL, view);
 	    else
 		my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
@@ -2686,7 +2686,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->magic_mode        = default_magic_flag;
     view->text_nroff_mode   = default_nroff_flag;
 
-    view->growing_buffer    = FALSE;
+    view->growbuf_in_use    = FALSE;
     /* leave the other growbuf fields uninitialized */
 
     view->search_start      = 0;
@@ -2708,14 +2708,14 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 static offset_type
 view_growbuf_filesize (WView *view, gboolean *ret_exact)
 {
-    assert(view->growing_buffer);
+    assert(view->growbuf_in_use);
 
     if (ret_exact)
 	*ret_exact = view->growbuf_finished;
-    if (view->blocks == 0)
+    if (view->growbuf_blocks == 0)
         return 0;
     else
-        return ((offset_type) view->blocks - 1)
+        return ((offset_type) view->growbuf_blocks - 1)
 	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
 }
 
@@ -2765,17 +2765,17 @@ view_update_last_byte (WView *view)
 static void
 view_free_growing_buffer (WView *view)
 {
-    if (view->growing_buffer) {
+    if (view->growbuf_in_use) {
 	/* block_ptr may be zero if the file was a file with 0 bytes */
-	if (view->block_ptr) {
+	if (view->growbuf_blockptr) {
 	    size_t i;
 
-	    for (i = 0; i < view->blocks; i++)
-	        g_free (view->block_ptr[i]);
-	    g_free (view->block_ptr);
-	    view->block_ptr = NULL;
+	    for (i = 0; i < view->growbuf_blocks; i++)
+	        g_free (view->growbuf_blockptr[i]);
+	    g_free (view->growbuf_blockptr);
+	    view->growbuf_blockptr = NULL;
 	}
-	view->growing_buffer = FALSE;
+	view->growbuf_in_use = FALSE;
     }
 }
 
@@ -2873,19 +2873,19 @@ get_byte_growing_buffer (WView *view, offset_type byte_index)
     offset_type pageno    = byte_index / VIEW_PAGE_SIZE;
     offset_type pageindex = byte_index % VIEW_PAGE_SIZE;
 
-    assert (view->growing_buffer);
+    assert (view->growbuf_in_use);
     assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
 
     if ((size_t) pageno != pageno)
 	return -1;
 
     view_growbuf_read_until (view, byte_index + 1);
-    if (view->blocks == 0)
+    if (view->growbuf_blocks == 0)
 	return -1;
-    if (pageno < view->blocks - 1)
-	return (unsigned char) view->block_ptr[pageno][pageindex];
-    if (pageno == view->blocks - 1 && pageindex < view->growbuf_lastindex)
-	return (unsigned char) view->block_ptr[pageno][pageindex];
+    if (pageno < view->growbuf_blocks - 1)
+	return (unsigned char) view->growbuf_blockptr[pageno][pageindex];
+    if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex)
+	return (unsigned char) view->growbuf_blockptr[pageno][pageindex];
     return -1;
 }
 
@@ -2930,9 +2930,9 @@ get_byte (WView *view, offset_type offset)
 static void
 view_init_growbuf (WView *view)
 {
-    view->growing_buffer    = TRUE;
-    view->block_ptr         = NULL;
-    view->blocks            = 0;
+    view->growbuf_in_use    = TRUE;
+    view->growbuf_blockptr  = NULL;
+    view->growbuf_blocks    = 0;
     view->growbuf_lastindex = 0;
     view->growbuf_finished  = FALSE;
 }
