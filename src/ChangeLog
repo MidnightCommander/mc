@@ -28,6 +28,8 @@
 	blocks to growbuf_blocks, block_ptr to growbuf_blockptr.
 	* view.c (struct WView): Renamed ds_file_size to ds_file_filesize,
 	to avoid confusion with ds_file_datasize.
+	* layout.c: Followed the renaming of view_init() to view_load().
+	* view.h: Likewise.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

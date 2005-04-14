@@ -966,7 +966,7 @@ void set_display_type (int num, int type)
 	else
 	    file_name = "";
 	
-	view_init ((WView *) new_widget, 0, file_name, 0);
+	view_load ((WView *) new_widget, 0, file_name, 0);
 	break;
     }
     panels [num].type = type;

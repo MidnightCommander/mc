@@ -6,7 +6,7 @@ typedef struct WView WView;
 
 /* Creation/initialization of a new view widget */
 WView *view_new (int y, int x, int cols, int lines, int is_panel);
-int view_init (WView *view, const char *_command, const char *_file,
+int view_load (WView *view, const char *_command, const char *_file,
 	       int start_line);
 
 /* Command: view a _file, if _command != NULL we use popen on _command */
