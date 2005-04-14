@@ -114,7 +114,7 @@ struct WView {
 
     /* vfs file data source */
     int ds_file_fd;		/* File with random access */
-    off_t ds_file_size;		/* Size of the file */
+    off_t ds_file_filesize;	/* Size of the file */
     off_t ds_file_offset;	/* Offset of the currently loaded data */
     char *ds_file_data;		/* Currently loaded data */
     size_t ds_file_datalen;	/* Number of valid bytes in file_data */
@@ -2746,7 +2746,7 @@ view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
 	    return view_growbuf_filesize (view, ret_exact);
 	case DS_FILE:
 	    *ret_exact = TRUE;
-	    return view->ds_file_size;
+	    return view->ds_file_filesize;
 	case DS_STRING:
 	    *ret_exact = TRUE;
 	    return view->ds_string_len;
@@ -2982,7 +2982,7 @@ view_set_datasource_file (WView *view, int fd, const struct stat *st)
 {
     view->datasource       = DS_FILE;
     view->ds_file_fd       = fd;
-    view->ds_file_size     = st->st_size;
+    view->ds_file_filesize = st->st_size;
     view->ds_file_offset   = 0;
     view->ds_file_data     = g_malloc (4096);
     view->ds_file_datalen  = 0;

@@ -21,6 +21,8 @@
 	it only applies to the text viewer.
 	* view.c (struct WView): Renamed growing_buffer to growbuf_in_use,
 	blocks to growbuf_blocks, block_ptr to growbuf_blockptr.
+	* view.c (struct WView): Renamed ds_file_size to ds_file_filesize,
+	to avoid confusion with ds_file_datasize.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
