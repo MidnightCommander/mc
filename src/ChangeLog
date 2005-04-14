@@ -24,16 +24,13 @@
 	* view.c (count_backspaces): Added a bounds check.
 	* view.c (display): Using get_byte_indexed instead of get_byte.
 	* view.c (move_forward2): Renamed to view_move_forward2 because
-	of the equally-named function in src/help.c. Replaced the
-	algorithm for the hexview mode by a much simpler version. Now
-	we have 5 ?: operators less than before.
+	of the equally-named function in src/help.c.
 	* view.c (get_bottom_first): Added bounds checking.
 	* view.c (move_right): Simplified the code.
 	* view.c (goto_addr): Fixed an off-by-one error.
 	* view.c (view_close_datasource): For the growing buffer cases,
 	check if the datasource has already been closed before.
 	* view.c (view_handle_editkey): Simplified the code.
-	* view.c (view_move_forward2): Simplified the code.
 	* view.c (get_byte_growing_buffer): Added bounds checking.
 
 2005-04-07  Roland Illig  <roland.illig@gmx.de>

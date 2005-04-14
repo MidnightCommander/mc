@@ -1137,20 +1137,28 @@ static offset_type
 view_move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 {
     const int frame_shift = view->have_frame;
-    const int bpl = view->bytes_per_line;
-    offset_type q, p, linestart;
-    int i, line;
+    offset_type q, p, last_byte;
+    int line;
     int col = 0;
 
     if (view->hex_mode) {
-	linestart = current - current % bpl;
-	/* try to move as many lines down as possible */
-	for (i = lines; i != 0; i--) {
-	    if (get_byte_indexed (view, linestart, i * bpl) != -1)
-		break;
+	last_byte = view_get_filesize (view);
+	p = current + lines * view->bytes_per_line;
+	p = (p >= last_byte) ? current : p;
+	if (lines == 1) {
+	    q = view->edit_cursor + view->bytes_per_line;
+	    line = q / view->bytes_per_line;
+	    col = (last_byte - 1) / view->bytes_per_line;
+	    view->edit_cursor = (line > col) ? view->edit_cursor : q;
+	    view->edit_cursor = (view->edit_cursor < last_byte) ?
+		view->edit_cursor : last_byte - 1;
+	    q = current + ((LINES - 2) * view->bytes_per_line);
+	    p = (view->edit_cursor < q) ? current : p;
+	} else {
+	    view->edit_cursor = (view->edit_cursor < p) ?
+		p : view->edit_cursor;
 	}
-	view->edit_cursor += i * bpl;
-	return current + i * bpl;
+	return p;
     } else {
 	if (upto) {
 	    lines = -1;
