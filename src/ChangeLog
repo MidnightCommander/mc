@@ -14,6 +14,8 @@
 	Fixed one non-boolean operation in toggle_wrap_mode().
 	* view.c (struct WView): Renamed viewer_nroff_flag to
 	text_nroff_mode.
+	* view.c (struct WView): Moved hexedit_mode into the "Editor
+	modes" section.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

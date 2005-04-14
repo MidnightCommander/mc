@@ -126,6 +126,7 @@ struct WView {
 
     /* Editor modes */
     gboolean hex_mode;		/* Hexview or Hexedit */
+    gboolean hexedit_mode;	/* Hexedit */
     gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
     gboolean text_nroff_mode;	/* Nroff-style highlighting */
 
@@ -137,7 +138,6 @@ struct WView {
     offset_type start_display;  /* First char displayed */
     int start_col;		/* First displayed column, negative */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
-    int hexedit_mode:1;		/* Hexadecimal editing mode flag */
     int nib_shift:1;		/* Set if editing the least significant nibble */
     screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
