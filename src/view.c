@@ -167,7 +167,6 @@ struct WView {
                                 /* Pointer to the last search command */
     int view_quit:1;		/* Quit flag */
 
-    int monitor;		/* Monitor file growth (like tail -f) */
     /* Markers */
     int marker;			/* mark to use */
     offset_type marks [10];	/* 10 marks: 0..9 */
@@ -215,7 +214,6 @@ static int regexp_view_search (WView * view, char *pattern, char *string,
 			       int match_type);
 static void view_move_forward (WView * view, int i);
 static void view_labels (WView * view);
-static void set_monitor (WView * view, int set_on);
 static void view_update (WView * view);
 
 /* Return the data at the specified offset, cast to an unsigned char,
@@ -231,9 +229,6 @@ static void view_set_datasource_vfs_pipe (WView *view, int fd);
 static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
 static void view_set_datasource_string (WView *view, const char *s);
 static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
-
-/* Valid parameters for second parameter to set_monitor */
-enum { off, on };
 
 static offset_type view_get_filesize (WView *);
 static offset_type view_get_filesize_with_exact (WView *, gboolean *);
@@ -279,8 +274,6 @@ static void view_hexview_move_to_eol(WView *view)
 static void
 view_done (WView *view)
 {
-    set_monitor (view, off);
-
     view_close_datasource (view);
     g_free (view->filename), view->filename = NULL;
     g_free (view->command), view->command = NULL;
@@ -2253,23 +2246,6 @@ check_left_right_keys (WView *view, int c)
 }
 
 static void
-set_monitor (WView *view, int set_on)
-{
-    int old = view->monitor;
-
-    view->monitor = set_on;
-
-    if (view->monitor) {
-	move_to_bottom (view);
-	view->bottom_first = INVALID_OFFSET;
-	set_idle_proc (view->widget.parent, 1);
-    } else {
-	if (old)
-	    set_idle_proc (view->widget.parent, 0);
-    }
-}
-
-static void
 continue_search (WView *view)
 {
     if (view->last_search) {
@@ -2284,10 +2260,6 @@ continue_search (WView *view)
 static cb_ret_t
 view_handle_key (WView *view, int c)
 {
-    int prev_monitor = view->monitor;
-
-    set_monitor (view, off);
-
     c = convert_from_input_c (c);
 
     if (view->hex_mode) {
@@ -2411,10 +2383,6 @@ view_handle_key (WView *view, int c)
 	exec_shell ();
 	return MSG_HANDLED;
 
-    case 'F':
-	set_monitor (view, on);
-	return MSG_HANDLED;
-
     case 'b':
 	view_move_backward (view, vheight - 1);
 	return MSG_HANDLED;
@@ -2462,9 +2430,6 @@ view_handle_key (WView *view, int c)
     }
     if (c >= '0' && c <= '9')
 	view->marker = c - '0';
-
-    /* Restore the monitor status */
-    set_monitor (view, prev_monitor);
 
     /* Key not used */
     return MSG_NOT_HANDLED;
@@ -2668,15 +2633,6 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 	}
 	return i;
 
-    case WIDGET_IDLE:
-	/* This event is generated when the user is using the 'F' flag */
-	view->bottom_first = INVALID_OFFSET;
-	move_to_bottom (view);
-	display (view);
-	view_status (view);
-	sleep (1);
-	return MSG_HANDLED;
-
     case WIDGET_FOCUS:
 	view_labels (view);
 	return MSG_HANDLED;
@@ -2742,7 +2698,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->last_search       = 0; /* it's a function */
 
     view->view_quit         = 0;
-    view->monitor           = 0;
     view->marker            = 0;
     /* leave view->marks uninitialized */
     view->move_dir          = 0;

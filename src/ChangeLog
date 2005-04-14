@@ -5,6 +5,8 @@
 	* view.c (do_view_init): Renamed to view_load().
 	* view.c (view_new): Every field of the WView is initialized
 	explicitly.
+	* view.c: Removed the "file monitor" feature (tail -f). It has
+	not been working since at least mc-4.6.0.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
