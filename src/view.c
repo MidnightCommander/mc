@@ -129,6 +129,7 @@ struct WView {
     gboolean hexedit_mode;	/* Hexedit */
     gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
     gboolean text_nroff_mode;	/* Nroff-style highlighting */
+    gboolean text_wrap_mode;	/* Wrap text lines to fit them on the screen */
     gboolean magic_mode;	/* Preprocess the file using external programs */
 
     /* Display information */
@@ -146,7 +147,6 @@ struct WView {
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
-    int wrap_mode:1;		/* wrap_mode */
 
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
@@ -281,7 +281,7 @@ view_done (WView *view)
     default_hex_mode = view->hex_mode;
     default_nroff_flag = view->text_nroff_mode;
     default_magic_flag = view->magic_mode;
-    global_wrap_mode = view->wrap_mode;
+    global_wrap_mode = view->text_wrap_mode;
 }
 
 static void view_hook (void *);
@@ -644,12 +644,12 @@ view_load (WView *view, const char *_command, const char *_file,
 	view_set_datasource_string (view, error);    
 
     if (start_line > 1 && !error) {
-	int saved_wrap_mode = view->wrap_mode;
+	int saved_wrap_mode = view->text_wrap_mode;
 
-	view->wrap_mode = 0;
+	view->text_wrap_mode = 0;
 	get_byte (view, 0);
 	view_move_forward (view, start_line - 1);
-	view->wrap_mode = saved_wrap_mode;
+	view->text_wrap_mode = saved_wrap_mode;
     }
     view->edit_cursor = 0;
     view->nib_shift = 0;
@@ -993,7 +993,7 @@ display (WView *view)
 	}
     } else {
 	for (; row < height && (c = get_byte (view, from)) != -1; from++) {
-	    if ((c == '\n') || (col >= width && view->wrap_mode)) {
+	    if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
 		col = frame_shift;
 		row++;
 		if (c == '\n' || row >= height)
@@ -1017,7 +1017,7 @@ display (WView *view)
 		    && (c_prev == c_next || c_prev == '_'
 		        || (c_prev == '+' && c_next == 'o'))) {
 		    if (col <= frame_shift) {
-			/* So it has to be wrap_mode - do not need to check for it */
+			/* So it has to be text_wrap_mode - do not need to check for it */
 			if (row == 1 + frame_shift) {
 			    from++;
 			    continue;	/* There had to be a bold character on the rightmost position
@@ -1167,7 +1167,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    /* FIXME: what if get_byte() returns -1? */
 	    c = get_byte (view, p);
 
-	    if (view->wrap_mode) {
+	    if (view->text_wrap_mode) {
 		if (c == '\r')
 		    continue;	/* This characters is never displayed */
 		else if (c == '\t')
@@ -1241,7 +1241,7 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
 }
 
 /* returns the new current pointer */
-/* Cause even the forward routine became very complex, we in the wrap_mode
+/* Cause even the forward routine became very complex, we in the text_wrap_mode
    just find the nearest '\n', use view_move_forward2(p, 0, q) to get the count
    of lines up to there and then use view_move_forward2(p, something, 0), which we
    return */
@@ -1267,7 +1267,7 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
         if (current == 0)
             return current;
 
-        if (view->wrap_mode)
+        if (view->text_wrap_mode)
             return move_backward2_textmode_wrap (view, current, lines);
 
         /* There is one virtual '\n' at the end,
@@ -1366,7 +1366,7 @@ move_to_bottom (WView *view)
 static void
 move_right (WView *view)
 {
-    if (view->wrap_mode && !view->hex_mode)
+    if (view->text_wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
 	view->last = ((LINES - 2) * view->bytes_per_line);
@@ -1390,7 +1390,7 @@ move_right (WView *view)
 static void
 move_left (WView *view)
 {
-    if (view->wrap_mode && !view->hex_mode)
+    if (view->text_wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
 	if (view->hex_mode && !view->hexview_in_text) {
@@ -1914,9 +1914,9 @@ toggle_hexedit_mode (WView *view)
 static void
 toggle_wrap_mode (WView *view)
 {
-    view->wrap_mode = 1 - view->wrap_mode;
+    view->text_wrap_mode = 1 - view->text_wrap_mode;
     get_bottom_first (view, 1, 1);
-    if (view->wrap_mode)
+    if (view->text_wrap_mode)
 	view->start_col = 0;
     else {
 	if (have_fast_cpu) {
@@ -1960,10 +1960,10 @@ goto_line (WView *view)
 {
     char *line, prompt[BUF_SMALL];
     int oldline = 1;
-    int saved_wrap_mode = view->wrap_mode;
+    int saved_wrap_mode = view->text_wrap_mode;
     offset_type i;
 
-    view->wrap_mode = 0;
+    view->text_wrap_mode = 0;
 
     /* FIXME: this is awfully slow */
     for (i = 0; i < view->start_display; i++)
@@ -1982,7 +1982,7 @@ goto_line (WView *view)
 	g_free (line);
     }
     view->dirty++;
-    view->wrap_mode = saved_wrap_mode;
+    view->text_wrap_mode = saved_wrap_mode;
     view_update (view);
 }
 
@@ -2190,7 +2190,7 @@ view_labels (WView *view)
 	    else
 		my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
     } else
-	my_define (h, 2, view->wrap_mode ? _("UnWrap") : _("Wrap"),
+	my_define (h, 2, view->text_wrap_mode ? _("UnWrap") : _("Wrap"),
 		   toggle_wrap_mode, view);
 
     my_define (h, 7, view->hex_mode ? _("HxSrch") : _("Search"),
@@ -2224,7 +2224,7 @@ check_left_right_keys (WView *view, int c)
     }
 
     /* Ctrl with arrows moves by 10 postions in the unwrap mode */
-    if (view->hex_mode || view->wrap_mode)
+    if (view->hex_mode || view->text_wrap_mode)
 	return MSG_NOT_HANDLED;
 
     if (c == (KEY_M_CTRL | KEY_LEFT)) {
@@ -2455,7 +2455,7 @@ view_event (WView *view, Gpm_Event *event, int *result)
     }
 
     /* Scrolling left and right */
-    if (!view->wrap_mode) {
+    if (!view->text_wrap_mode) {
 	if (event->x < view->widget.cols / 4) {
 	    move_left (view);
 	    goto processed;
@@ -2680,7 +2680,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->cursor_row        = 0;
     view->change_list       = NULL;
     view->dirty             = 0;
-    view->wrap_mode         = global_wrap_mode;
+    view->text_wrap_mode    = global_wrap_mode;
     view->hex_mode          = default_hex_mode;
     view->bytes_per_line    = 1;
     view->magic_mode        = default_magic_flag;
