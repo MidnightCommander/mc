@@ -161,7 +161,7 @@ Thanks to glib, the code has almost no hardcoded limits, since there are
 many ways to avoid them.  For example, when you want to concatenate
 strings, use the g_strconcat() function:
 
-	new_text = g_strconcat (username, " ", password, NULL);
+	new_text = g_strconcat (username, " ", password, (char *)0);
 
 This allocates new memory for the string, so you should use g_free() on
 the result.
@@ -322,14 +322,7 @@ const: For every function taking a string argument, decide whether you
 	"const char *". If your implementation needs to modify the string,
 	use g_strdup to create a local copy.
 
-const_cast: We use many libraries that do not know about "const char *" and
-	thus declare their functions to require "char *". In cases where we
-	know the function does not modify the string, we can use the macro
-	const_cast(char *, string_var) instead of a simple (char *) string_var
-	to make the intent clear. In cases where we are not sure what the
-	function does with the string, we should use g_strdup to pass
-	dynamically allocated strings.
-
+const_cast: Has been replaced by str_unconst.
 g_free: g_free handles NULL argument too, no need for the comparison.
 	Bad way:
 	    if (old_dir) g_free (old_dir);
@@ -351,7 +344,7 @@ g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
 	no such function.
 
 NULL: When you pass NULL as an argument of a varargs function, cast the
-	NULL to the appropriate data type. If a system #defines NULL to
+	0 to the appropriate data type. If a system #defines NULL to
 	be 0 (at least NetBSD and OpenBSD do), and the sizes of int and
 	a pointer are different, the argument will be passed as int 0,
 	not as a pointer.
@@ -362,7 +355,7 @@ NULL: When you pass NULL as an argument of a varargs function, cast the
 	rpc_get (vfs/mcfsutil.h), rpc_send (vfs/mcfsutil.h).
 
 	example:
-	char *path = g_strconcat("dir", "/", "file", (char *) NULL);
+	char *path = g_strconcat("dir", "/", "file", (char *)0);
 
 size_t: This data type is suitable for expressing sizes of memory or the
 	length of strings. This type is unsigned, so you need not check
@@ -370,3 +363,11 @@ size_t: This data type is suitable for expressing sizes of memory or the
 
 strncpy: Don't use this function in newly created code. It is slow, insecure
 	and hard to use. A much better alternative is g_strlcpy (see there).
+
+str_unconst: We use many libraries that do not know about "const char *"
+	and thus declare their functions to require "char *". If you
+	know for sure that an external function does not modify the
+	string, you can "unconst" a string using the function
+	str_unconst(). If you are not sure whether the function modifies
+	the string, you should use g_strdup() to pass a copy of a string
+	to the function. Don't forget to call g_free() after work is done.
