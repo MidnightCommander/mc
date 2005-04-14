@@ -68,6 +68,7 @@
 
 /* Block size for reading files in parts */
 #define VIEW_PAGE_SIZE		((size_t) 8192)
+#define STATUS_LINES		1
 
 #define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
 #define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
@@ -76,6 +77,7 @@
 typedef unsigned long offset_type;
 #define INVALID_OFFSET ((offset_type) -1)
 #define OFFSETTYPE_MAX (~((offset_type) 0))
+#define OFFSETTYPE_PRIX		"%08lX"
 
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
@@ -249,7 +251,7 @@ static inline int
 view_get_datalines (WView *view)
 {
     const int framelines = view->have_frame ? 2 : 0;
-    const int statuslines = 1;
+    const int statuslines = STATUS_LINES;
 
     if (view->widget.lines < framelines + statuslines)
 	return 0;
@@ -805,8 +807,6 @@ view_display_clean (WView *view, int height, int width)
 #define view_freeze(view)
 #define view_thaw(view)
 
-#define STATUS_LINES 1
-
 typedef enum {
     MARK_NORMAL = 0,
     MARK_SELECTED = 1,
@@ -894,8 +894,7 @@ display (WView *view)
 	       && row < height; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
-	    g_snprintf (hex_buff, sizeof (hex_buff), "%08X",
-			(int) (from - view->first));
+	    g_snprintf (hex_buff, sizeof (hex_buff), OFFSETTYPE_PRIX, from);
 	    view_gotoyx (view, row, frame_shift);
 	    view_add_string (view, hex_buff);
 	    attrset (NORMAL_COLOR);
