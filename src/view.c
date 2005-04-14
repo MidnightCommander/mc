@@ -245,6 +245,17 @@ get_byte_indexed (WView *view, offset_type base, offset_type ofs)
     return -1;
 }
 
+static inline int
+view_get_datalines (WView *view)
+{
+    const int framelines = view->have_frame ? 2 : 0;
+    const int statuslines = 1;
+
+    if (view->widget.lines < framelines + statuslines)
+	return 0;
+    return view->widget.lines - (framelines + statuslines);
+}
+
 static void view_hexview_move_to_eol(WView *view)
 {
     offset_type filesize, linestart;
@@ -879,7 +890,7 @@ display (WView *view)
 	/* Start of text column */
 	int text_start = width - view->bytes_per_line - 1 + frame_shift;
 
-	for (; get_byte_indexed (view, from, view->bytes_per_line) != -1
+	for (; get_byte (view, from) != -1
 	       && row < height; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
@@ -1138,25 +1149,28 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 {
     const int frame_shift = view->have_frame;
     offset_type q, p, last_byte;
-    int line;
+    int line, nextline, lastline, datalines;
     int col = 0;
 
     if (view->hex_mode) {
 	last_byte = view_get_filesize (view);
 	p = current + lines * view->bytes_per_line;
-	p = (p >= last_byte) ? current : p;
+	if (p >= last_byte)
+	    p = current;
+
 	if (lines == 1) {
-	    q = view->edit_cursor + view->bytes_per_line;
-	    line = q / view->bytes_per_line;
-	    col = (last_byte - 1) / view->bytes_per_line;
-	    view->edit_cursor = (line > col) ? view->edit_cursor : q;
-	    view->edit_cursor = (view->edit_cursor < last_byte) ?
-		view->edit_cursor : last_byte - 1;
-	    q = current + ((LINES - 2) * view->bytes_per_line);
-	    p = (view->edit_cursor < q) ? current : p;
+	    nextline = view->edit_cursor / view->bytes_per_line + 1;
+	    lastline = (last_byte - 1) / view->bytes_per_line;
+	    if (nextline <= lastline)
+		view->edit_cursor += view->bytes_per_line;
+	    if (view->edit_cursor >= last_byte)
+		view->edit_cursor = last_byte - 1;
+	    datalines = view_get_datalines (view);
+	    if (view->edit_cursor < current + datalines * view->bytes_per_line)
+		p = current;
 	} else {
-	    view->edit_cursor = (view->edit_cursor < p) ?
-		p : view->edit_cursor;
+	    if (view->edit_cursor < p)
+		view->edit_cursor = p;
 	}
 	return p;
     } else {
