@@ -7,6 +7,8 @@
 	explicitly.
 	* view.c: Removed the "file monitor" feature (tail -f). It has
 	not been working since at least mc-4.6.0.
+	* view.c (struct WView): Removed the "first" field, as it was
+	always 0.
 
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 

@@ -127,7 +127,6 @@ struct WView {
     /* Display information */
     int have_frame;
     offset_type last;           /* Last byte shown */
-    offset_type first;		/* First byte in file */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
     offset_type start_display;  /* First char displayed */
@@ -493,7 +492,6 @@ view_ok_to_quit (WView *view)
 static char *
 set_view_init_error (WView *view, const char *msg)
 {
-    view->first = 0;
     if (msg) {
 	view_set_datasource_string (view, msg);    
         return g_strdup (msg);
@@ -559,10 +557,9 @@ view_load (WView *view, const char *_command, const char *_file,
 
     /* Set up the state */
     view_set_datasource_none (view);
-    view->first = 0;
     view->filename = g_strdup (_file);
     view->command = 0;
-    view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view->last = ((LINES - 2) * view->bytes_per_line);
     view_update_last_byte (view);
 
     /* Clear the markers */
@@ -636,7 +633,7 @@ view_load (WView *view, const char *_command, const char *_file,
 
     view->command = g_strdup (_command);
     view->search_start = view->start_display = view->start_save =
-	view->first;
+	0;
     view->found_len = 0;
     view->start_col = 0;
     view->last_search = 0;	/* Start a new search */
@@ -652,7 +649,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view_move_forward (view, start_line - 1);
 	view->wrap_mode = saved_wrap_mode;
     }
-    view->edit_cursor = view->first;
+    view->edit_cursor = 0;
     view->nib_shift = 0;
     view->hexedit_text = 0;
     view->change_list = NULL;
@@ -1012,7 +1009,7 @@ display (WView *view)
 
 		if ((c_next = get_byte_indexed (view, from, 1)) != -1
 		    && is_printable (c_next)
-		    && from >= view->first + 1
+		    && from >= 1
 		    && (c_prev = get_byte (view, from - 1)) != -1
 		    && is_printable (c_prev)
 		    && (c_prev == c_next || c_prev == '_'
@@ -1179,7 +1176,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 		    int cc;
 		    if ((cc = get_byte_indexed (view, p, 1)) != -1
 			&& is_printable (cc)
-			&& p >= view->first + 1
+			&& p >= 1
 			&& (cc = get_byte (view, p - 1)) != -1
 			&& is_printable (cc))
 			col -= 2;
@@ -1215,7 +1212,7 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
     offset_type p, q, pm;
     int line;
 
-    if (current == view->first)
+    if (current == 0)
 	return current;
 
     if (get_byte (view, current) == -1 && get_byte (view, current - 1) != '\n')
@@ -1225,9 +1222,9 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
     else
         line = 0;
 
-    for (q = p = current - 1; p > view->first; p--) {
-        if (get_byte (view, p) == '\n' || p == view->first) {
-            pm = p > view->first ? p + 1 : view->first;
+    for (q = p = current - 1; p > 0; p--) {
+        if (get_byte (view, p) == '\n') {
+            pm = p > 0 ? p + 1 : 0;
             line += view_move_forward2 (view, pm, 0, q);
             if (line >= lines) {
                 if (line == lines)
@@ -1238,7 +1235,7 @@ move_backward2_textmode_wrap (WView * view, offset_type current, int lines)
             q = p + 1;
         }
     }
-    return p > view->first ? p : view->first;
+    return p;
 }
 
 /* returns the new current pointer */
@@ -1265,7 +1262,7 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
         }
         return current;
     } else {
-        if (current == view->first)
+        if (current == 0)
             return current;
 
         if (view->wrap_mode)
@@ -1275,13 +1272,13 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
          * so that the last line is shown */
         if (get_byte (view, current) == -1 && get_byte (view, current - 1) != '\n')
             lines--;
-        while (current > view->first && get_byte(view, current - 1) != '\n')
+        while (current >= 1 && get_byte(view, current - 1) != '\n')
             current--;
         while (lines > 0) {
-            if (current > view->first)
+            if (current > 0)
                 current--;
             lines--;
-            while (current > view->first && get_byte(view, current - 1) != '\n')
+            while (current >= 1 && get_byte(view, current - 1) != '\n')
                 current--;
         }
         return current;
@@ -1295,7 +1292,7 @@ view_move_backward (WView *view, int i)
     view->search_start = view->start_display =
 	move_backward2 (view, view->start_display, i);
     view->found_len = 0;
-    view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
 }
 
@@ -1335,7 +1332,7 @@ view_move_forward (WView *view, int i)
 	view->start_display = view->bottom_first;
     view->search_start = view->start_display;
     view->found_len = 0;
-    view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
 }
 
@@ -1343,9 +1340,9 @@ view_move_forward (WView *view, int i)
 static void
 move_to_top (WView *view)
 {
-    view->search_start = view->start_display = view->first;
+    view->search_start = view->start_display = 0;
     view->found_len = 0;
-    view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view->last = ((LINES - 2) * view->bytes_per_line);
     view->nib_shift = 0;
     view->edit_cursor = view->start_display;
     view->dirty++;
@@ -1357,7 +1354,7 @@ move_to_bottom (WView *view)
     view->search_start = view->start_display =
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
-    view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+    view->last = ((LINES - 2) * view->bytes_per_line);
     view->edit_cursor = (view->edit_cursor < view->start_display) ?
 	view->start_display : view->edit_cursor;
     view->dirty++;
@@ -1370,7 +1367,7 @@ move_right (WView *view)
     if (view->wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
-	view->last = view->first + ((LINES - 2) * view->bytes_per_line);
+	view->last = ((LINES - 2) * view->bytes_per_line);
 
 	if (view->hex_mode && !view->hexedit_text) {
 	    view->nib_shift = !view->nib_shift;
@@ -1399,7 +1396,7 @@ move_left (WView *view)
 	    if (!view->nib_shift)
 		return;
 	}
-	if (view->edit_cursor > view->first)
+	if (view->edit_cursor > 0)
 	    --view->edit_cursor;
 	if (view->edit_cursor < view->start_display) {
 	    view->edit_cursor += view->bytes_per_line;
@@ -1967,7 +1964,7 @@ goto_line (WView *view)
     view->wrap_mode = 0;
 
     /* FIXME: this is awfully slow */
-    for (i = view->first; i < view->start_display; i++)
+    for (i = 0; i < view->start_display; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline++;
 
@@ -2669,7 +2666,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view->have_frame        = is_panel ? 1 : 0;
     view->last              = 0;
-    view->first             = 0;
     view->bottom_first      = INVALID_OFFSET;
     view->start_display     = 0;
     view->start_col         = 0;
