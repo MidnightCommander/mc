@@ -113,7 +113,7 @@ include spec.syntax
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
 
-file (.\*[Mm]akefile[\\\.a-z0-9]\*|..\*\\.mk)$ Makefile
+file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk)$ Makefile
 include makefile.syntax
 
 file (..\*\\.m4$|configure\\.in|configure\\.ac) M4\sMacroprocessor\sSource

@@ -1,3 +1,7 @@
+2005-04-14  Leonard den Ottolander <leonard * den ottolander nl>
+
+	* syntax/Syntax: Catch Makefiles with capitals in the extension.
+
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
 	* doc/mc.1.in (Internal File Viewer): Rewrote some documentation.
