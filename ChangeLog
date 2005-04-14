@@ -1,3 +1,9 @@
+2005-04-14  Roland Illig  <roland.illig@gmx.de>
+
+	* doc/mc.1.in (Internal File Viewer): Rewrote some documentation.
+	Removed the paragraph about the growing buffers. It's generally
+	uninteresting to users.
+
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
 	* configure.ac: Add -DNDEBUG to CPPFLAGS if the maintainer mode

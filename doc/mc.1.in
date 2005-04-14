@@ -2355,14 +2355,13 @@ a backslash and '\\*' is an asterisk.
 .\"NODE "Internal File Viewer"
 .SH "Internal File Viewer"
 The internal file viewer provides two display modes: ASCII and hex.
-To toggle between modes, use the F4 key.  If you have the GNU gzip
-program installed, it will be used to automatically decompress the
-files on demand.
+To toggle between modes, use the F4 key.
 .PP
 The viewer will try to use the best method provided by your system or
-the file type to display the information.  The internal file viewer
-will interpret some string sequences to set the bold and underline
-attributes, thus making a pretty display of your files.
+the file type to display the information.
+Some character sequences, which appear most often in preformatted manual
+pages, are displayed bold and underlined, thus making a pretty display
+of your files.
 .PP
 When in hex mode, the search function accepts text in quotes and
 constant numbers.  Text in quotes is matched exactly after removing
@@ -2374,13 +2373,6 @@ with constants like this:
 .fi
 .PP
 Note that 012 is an octal number.  -1 is converted to 0xFF.
-.PP
-Some internal details about the viewer: On systems that provide the
-mmap(2) system call, the program maps the file instead of loading it;
-if the system does not provide the mmap(2) system call or the file
-matches an action that requires a filter, then the viewer will use
-its growing buffers, thus loading only those parts of the file that
-you actually access (this includes compressed files).
 .PP
 Here is a listing of the actions associated with each key that the
 Midnight Commander handles in the internal file viewer.
