@@ -124,6 +124,9 @@ struct WView {
     char *ds_string_data;	/* The characters of the string */
     size_t ds_string_len;	/* The length of the string */
 
+    /* Editor modes */
+    gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
+
     /* Display information */
     int have_frame;
     offset_type last;           /* Last byte shown */
@@ -134,7 +137,6 @@ struct WView {
     offset_type edit_cursor;    /* HexEdit cursor position in file */
     int hexedit_mode:1;		/* Hexadecimal editing mode flag */
     int nib_shift:1;		/* Set if editing the least significant nibble */
-    int hexedit_text:1;		/* Set if hexedit is in the text mode */
     screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
@@ -376,7 +378,7 @@ view_handle_editkey (WView *view, int key)
     while (node && (node->offset != view->edit_cursor))
 	node = node->next;
 
-    if (!view->hexedit_text) {
+    if (!view->hexview_in_text) {
 	/* Hex editing */
 	unsigned int hexvalue = 0;
 
@@ -651,7 +653,7 @@ view_load (WView *view, const char *_command, const char *_file,
     }
     view->edit_cursor = 0;
     view->nib_shift = 0;
-    view->hexedit_text = 0;
+    view->hexview_in_text = FALSE;
     view->change_list = NULL;
 
     return 0;
@@ -900,14 +902,14 @@ display (WView *view)
 		}
 		/* Display the navigation cursor */
 		if (from == view->edit_cursor) {
-		    if (!view->hexedit_text) {
+		    if (!view->hexview_in_text) {
 			view->cursor_row = row;
 			view->cursor_col = col;
 		    }
 		    boldflag = MARK_CURSOR;
-		    attrset (view->
-			     hexedit_text ? MARKED_SELECTED_COLOR :
-			     VIEW_UNDERLINED_COLOR);
+		    attrset (view->hexview_in_text
+			? MARKED_SELECTED_COLOR
+			: VIEW_UNDERLINED_COLOR);
 		}
 
 		/* Print a hex number (sprintf is too slow) */
@@ -967,7 +969,7 @@ display (WView *view)
 		    attrset (MARKED_COLOR);
 		    break;
 		case MARK_CURSOR:
-		    if (view->hexedit_text) {
+		    if (view->hexview_in_text) {
 			/* Our side is active */
 			view->cursor_col = text_start + bytes;
 			view->cursor_row = row;
@@ -1066,7 +1068,7 @@ view_place_cursor (WView *view)
 {
     int shift;
 
-    if (!view->hexedit_text && view->nib_shift)
+    if (!view->hexview_in_text && view->nib_shift)
 	shift = 1;
     else
 	shift = 0;
@@ -1369,7 +1371,7 @@ move_right (WView *view)
     if (view->hex_mode) {
 	view->last = ((LINES - 2) * view->bytes_per_line);
 
-	if (view->hex_mode && !view->hexedit_text) {
+	if (view->hex_mode && !view->hexview_in_text) {
 	    view->nib_shift = !view->nib_shift;
 	    if (view->nib_shift)
 		return;
@@ -1391,7 +1393,7 @@ move_left (WView *view)
     if (view->wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
-	if (view->hex_mode && !view->hexedit_text) {
+	if (view->hex_mode && !view->hexview_in_text) {
 	    view->nib_shift = !view->nib_shift;
 	    if (!view->nib_shift)
 		return;
@@ -1899,7 +1901,7 @@ toggle_hexedit_mode (WView *view)
 {
     get_bottom_first (view, 1, 1);
     if (view->hexedit_mode) {
-	view->hexedit_text = !view->hexedit_text;
+	view->hexview_in_text = !view->hexview_in_text;
     } else {
 	view->hexedit_mode = !view->hexedit_mode;
     }
@@ -2180,7 +2182,7 @@ view_labels (WView *view)
 
     if (view->hex_mode)
 	if (view->hexedit_mode)
-	    my_define (h, 2, view->hexedit_text ? _("EdHex") : _("EdText"),
+	    my_define (h, 2, view->hexview_in_text ? _("EdHex") : _("EdText"),
 		       toggle_hexedit_mode, view);
 	else {
 	    if (view->growing_buffer || view->have_frame)
@@ -2262,7 +2264,7 @@ view_handle_key (WView *view, int c)
     if (view->hex_mode) {
 	switch (c) {
 	case 0x09:		/* Tab key */
-	    view->hexedit_text = !view->hexedit_text;
+	    view->hexview_in_text = !view->hexview_in_text;
 	    view->dirty++;
 	    return MSG_HANDLED;
 
@@ -2672,7 +2674,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->edit_cursor       = 0;
     view->hexedit_mode      = default_hexedit_mode;
     view->nib_shift         = FALSE;
-    view->hexedit_text      = FALSE;
+    view->hexview_in_text   = FALSE;
     view->start_save        = 0;
     view->cursor_col        = 0;
     view->cursor_row        = 0;
