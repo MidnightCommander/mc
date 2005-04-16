@@ -14,6 +14,8 @@
 	* view.c: Added the `byte' type as an alias for unsigned char.
 	Converted some datasources to using byte as the base type.
 	Removed the superfluous type conversions.
+	* view.c (vwidth, vheight): Replaced these two macros with their
+	expansion. They looked like variables, which was irritating.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 

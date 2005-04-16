@@ -70,9 +70,6 @@
 #define VIEW_PAGE_SIZE		((size_t) 8192)
 #define STATUS_LINES		1
 
-#define vwidth (view->widget.cols - 2 * view->dpy_frame_size)
-#define vheight (view->widget.lines - 2 * view->dpy_frame_size)
-
 typedef unsigned char byte;
 
 /* Offset in bytes into a file */
@@ -1185,7 +1182,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 			&& (cc = get_byte (view, p - 1)) != -1
 			&& is_printable (cc))
 			col -= 2;
-		} else if (col == vwidth) {
+		} else if (col == view->widget.cols - 2 * view->dpy_frame_size) {
 		    int d = get_byte_indexed (view, p, 2);
 
 		    if (d == -1 || !is_printable (c) ||
@@ -1316,7 +1313,8 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     if (view->growbuf_in_use)
         view_growbuf_read_until (view, OFFSETTYPE_MAX);
 
-    bottom_first = move_backward2 (view, view_get_filesize (view), vheight - 1);
+    bottom_first = move_backward2 (view, view_get_filesize (view),
+	view_get_datalines (view));
 
     if (view->hex_mode && bottom_first % view->bytes_per_line != 0) {
 	bottom_first -= bottom_first % view->bytes_per_line;
@@ -2304,9 +2302,9 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     if (check_movement_keys
-	(c, vheight, view, (movefn) view_move_backward,
-	 (movefn) view_move_forward, (movefn) move_to_top,
-	 (movefn) move_to_bottom)) {
+	(c, view_get_datalines (view) + 1, view,
+	 (movefn) view_move_backward, (movefn) view_move_forward,
+	 (movefn) move_to_top, (movefn) move_to_bottom)) {
 	return MSG_HANDLED;
     }
     switch (c) {
@@ -2361,11 +2359,11 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'd':
-	view_move_forward (view, vheight / 2);
+	view_move_forward (view, (view_get_datalines (view) + 1) / 2);
 	return MSG_HANDLED;
 
     case 'u':
-	view_move_backward (view, vheight / 2);
+	view_move_backward (view, (view_get_datalines (view) + 1) / 2);
 	return MSG_HANDLED;
 
     case 'k':
@@ -2379,7 +2377,7 @@ view_handle_key (WView *view, int c)
 
     case ' ':
     case 'f':
-	view_move_forward (view, vheight - 1);
+	view_move_forward (view, view_get_datalines (view));
 	return MSG_HANDLED;
 
     case XCTRL ('o'):
@@ -2392,7 +2390,7 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'b':
-	view_move_backward (view, vheight - 1);
+	view_move_backward (view, view_get_datalines (view));
 	return MSG_HANDLED;
 
     case KEY_IC:
@@ -2468,7 +2466,7 @@ view_event (WView *view, Gpm_Event *event, int *result)
 	    move_left (view);
 	    goto processed;
 	}
-	if (event->x > 3 * vwidth / 4) {
+	if (event->x > 3 * (view->widget.cols - 2 * view->dpy_frame_size) / 4) {
 	    move_right (view);
 	    goto processed;
 	}
@@ -2477,13 +2475,13 @@ view_event (WView *view, Gpm_Event *event, int *result)
     /* Scrolling up and down */
     if (event->y < view->widget.lines / 3) {
 	if (mouse_move_pages_viewer)
-	    view_move_backward (view, view->widget.lines / 2 - 1);
+	    view_move_backward (view, view_get_datalines (view) / 2);
 	else
 	    view_move_backward (view, 1);
 	goto processed;
-    } else if (event->y > 2 * vheight / 3) {
+    } else if (event->y > 2 * view_get_datalines (view) / 3) {
 	if (mouse_move_pages_viewer)
-	    view_move_forward (view, vheight / 2 - 1);
+	    view_move_forward (view, view_get_datalines (view) / 2);
 	else
 	    view_move_forward (view, 1);
 	goto processed;
@@ -2871,6 +2869,7 @@ static int
 get_byte_none (WView *view, offset_type byte_index)
 {
     assert (view->datasource == DS_NONE);
+    (void) &view;
     (void) byte_index;
     return -1;
 }
