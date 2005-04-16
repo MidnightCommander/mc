@@ -1,3 +1,11 @@
+2005-04-16  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (struct WView): Renamed have_frame to dpy_frame_size.
+	* view.c (view_is_in_panel): Added.
+	* view.c (view_percent): Removed the last parameter, as it has
+	always the same value.
+	* view.c: Code cleanup.
+
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h (str_unconst): Added a conditional INLINE_STR_UNCONST

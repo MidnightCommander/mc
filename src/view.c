@@ -70,8 +70,8 @@
 #define VIEW_PAGE_SIZE		((size_t) 8192)
 #define STATUS_LINES		1
 
-#define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
-#define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
+#define vwidth (view->widget.cols - 2 * view->dpy_frame_size)
+#define vheight (view->widget.lines - 2 * view->dpy_frame_size)
 
 /* Offset in bytes into a file */
 typedef unsigned long offset_type;
@@ -133,7 +133,7 @@ struct WView {
     gboolean magic_mode;	/* Preprocess the file using external programs */
 
     /* Display information */
-    int have_frame;
+    int dpy_frame_size;		/* Size of the frame surrounding the real viewer */
     offset_type last;           /* Last byte shown */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
@@ -236,6 +236,12 @@ static offset_type view_get_filesize_with_exact (WView *, gboolean *);
 
 static void view_init_growbuf (WView *);
 
+static inline gboolean
+view_is_in_panel (WView *view)
+{
+    return (view->dpy_frame_size != 0);
+}
+
 static inline int
 get_byte_indexed (WView *view, offset_type base, offset_type ofs)
 {
@@ -247,7 +253,7 @@ get_byte_indexed (WView *view, offset_type base, offset_type ofs)
 static inline int
 view_get_datalines (WView *view)
 {
-    const int framelines = view->have_frame ? 2 : 0;
+    const int framelines = 2 * view->dpy_frame_size;
     const int statuslines = STATUS_LINES;
 
     if (view->widget.lines < framelines + statuslines)
@@ -516,7 +522,7 @@ init_growing_view (WView *view, const char *name, const char *filename)
 	open_error_pipe ();
 	if ((fp = popen (name, "r")) == NULL) {
 	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view->have_frame ? -1 : 1, NULL))
+	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
 		err_msg = _(" Cannot spawn child program ");
 	    return set_view_init_error (view, err_msg);
 	}
@@ -527,7 +533,7 @@ init_growing_view (WView *view, const char *name, const char *filename)
 	    view_close_datasource (view);
 
 	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view->have_frame ? -1 : 1, NULL))
+	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
 		err_msg = _("Empty output from child filter");
 	    return set_view_init_error (view, err_msg);
 	}
@@ -569,7 +575,7 @@ view_load (WView *view, const char *_command, const char *_file,
     for (i = 0; i < 10; i++)
 	view->marks[i] = 0;
 
-    if (!view->have_frame) {
+    if (!view_is_in_panel (view)) {
 	view->start_col = 0;
     }
 
@@ -626,7 +632,7 @@ view_load (WView *view, const char *_command, const char *_file,
 
   finish:
     if (error) {
-	if (!view->have_frame) {
+	if (!view_is_in_panel (view)) {
 	    message (1, MSG_ERROR, "%s", error);
 	    g_free (error);
 	    return -1;
@@ -662,12 +668,7 @@ view_load (WView *view, const char *_command, const char *_file,
 static void
 view_update_bytes_per_line (WView *view)
 {
-    int cols;
-
-    if (view->have_frame)
-	cols = view->widget.cols - 2;
-    else
-	cols = view->widget.cols;
+    const int cols = view->widget.cols - 2 * view->dpy_frame_size;
 
     view->bottom_first = INVALID_OFFSET;
     if (cols < 80)
@@ -682,8 +683,9 @@ view_update_bytes_per_line (WView *view)
 }
 
 static void
-view_percent (WView *view, offset_type p, int w)
+view_percent (WView *view, offset_type p)
 {
+    const int xpos = view->widget.cols - view->dpy_frame_size - 4;
     int percent;
     gboolean exact;
     offset_type filesize;
@@ -699,7 +701,7 @@ view_percent (WView *view, offset_type p, int w)
     else
         percent = p * 100 / filesize;
 
-    widget_move (view, view->have_frame, w - 5);
+    widget_move (view, view->dpy_frame_size, xpos);
     printw ("%3d%%", percent);
 }
 
@@ -709,11 +711,11 @@ view_status (WView *view)
     static int i18n_adjust = 0;
     static const char *file_label;
 
-    int w = view->widget.cols - (view->have_frame * 2);
+    const int w = view->widget.cols - 2 * view->dpy_frame_size;
     int i;
 
     attrset (SELECTED_COLOR);
-    widget_move (view, view->have_frame, view->have_frame);
+    widget_move (view, view->dpy_frame_size, view->dpy_frame_size);
     hline (' ', w);
 
     if (!i18n_adjust) {
@@ -730,7 +732,7 @@ view_status (WView *view)
 					view->command ? view->command : "",
 					i));
 	if (w > 46) {
-	    widget_move (view, view->have_frame, 24 + view->have_frame);
+	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 24);
 	    if (view->hex_mode)
 		printw (const_cast(char *, _("Offset 0x%08lx")), view->edit_cursor);
 	    else
@@ -740,7 +742,7 @@ view_status (WView *view)
 	    offset_type filesize;
 	    gboolean exact;
 	    filesize = view_get_filesize_with_exact (view, &exact);
-	    widget_move (view, view->have_frame, 43 + view->have_frame);
+	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
 	    if (exact) {
 		printw (const_cast(char *, _("%s bytes")), size_trunc (filesize));
 	    } else {
@@ -748,10 +750,9 @@ view_status (WView *view)
 	    }
 	}
 	if (w > 26) {
-	    view_percent (view,
-			  view->hex_mode ? view->edit_cursor : view->
-			  start_display,
-			  view->widget.cols - view->have_frame + 1);
+	    view_percent (view, view->hex_mode
+		? view->edit_cursor
+		: view->start_display);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -761,7 +762,7 @@ static inline void
 view_display_clean (WView *view, int height, int width)
 {
     /* FIXME: Should I use widget_erase only and repaint the box? */
-    if (view->have_frame) {
+    if (view->dpy_frame_size) {
 	int i;
 
 	draw_double_box (view->widget.parent, view->widget.y,
@@ -803,7 +804,8 @@ static inline int view_count_backspaces (WView *view, off_t offset)
 static offset_type
 display (WView *view)
 {
-    const int frame_shift = view->have_frame;
+    /* FIXME: replace with better named variables */
+    const int frame_shift = view->dpy_frame_size;
     int col = 0 + frame_shift;
     int row = STATUS_LINES + frame_shift;
     int height, width;
@@ -876,10 +878,7 @@ display (WView *view)
 	    attrset (NORMAL_COLOR);
 
 	    /* Hex dump starts from column nine */
-	    if (view->have_frame)
-		col = 10;
-	    else
-		col = 9;
+	    col = view->dpy_frame_size + 9;
 
 	    /* Each hex number is two digits */
 	    hex_buff[2] = 0;
@@ -934,8 +933,7 @@ display (WView *view)
 		    view_gotoyx (view, row, col - 1);
 		    view_add_character (view, ' ');
 		    view_gotoyx (view, row, col);
-		    if ((view->have_frame && view->widget.cols < 82)
-			|| view->widget.cols < 80)
+		    if (view->widget.cols - 2 * view->dpy_frame_size)
 			col += 1;
 		    else {
 			view_add_one_vline ();
@@ -1122,7 +1120,7 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 static offset_type
 view_move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
 {
-    const int frame_shift = view->have_frame;
+    const int frame_shift = view->dpy_frame_size;
     offset_type q, p, last_byte;
     int line, nextline, lastline, datalines;
     int col = 0;
@@ -1539,8 +1537,6 @@ static void
 search (WView *view, char *text,
 	int (*search) (WView *, char *, char *, int))
 {
-    const int w = view->widget.cols - view->have_frame + 1;
-
     char *s = NULL;	/*  The line we read from the view buffer */
     offset_type p, beginning, search_start;
     int found_len;
@@ -1579,7 +1575,7 @@ search (WView *view, char *text,
 	if (p >= view->update_activate) {
 	    view->update_activate += view->update_steps;
 	    if (verbose) {
-		view_percent (view, p, w);
+		view_percent (view, p);
 		mc_refresh ();
 	    }
 	    if (got_interrupt ())
@@ -1647,7 +1643,6 @@ search (WView *view, char *text,
 static offset_type
 block_search (WView *view, const char *buffer, int len)
 {
-    const int w = view->widget.cols - view->have_frame + 1;
     int direction = view->direction;
     const char *d = buffer;
     char b;
@@ -1671,7 +1666,7 @@ block_search (WView *view, const char *buffer, int len)
 	    if (e <= view->update_activate) {
 		view->update_activate -= view->update_steps;
 		if (verbose) {
-		    view_percent (view, e, w);
+		    view_percent (view, e);
 		    mc_refresh ();
 		}
 		if (got_interrupt ())
@@ -1697,7 +1692,7 @@ block_search (WView *view, const char *buffer, int len)
 	    if (e >= view->update_activate) {
 		view->update_activate += view->update_steps;
 		if (verbose) {
-		    view_percent (view, e, w);
+		    view_percent (view, e);
 		    mc_refresh ();
 		}
 		if (got_interrupt ())
@@ -2185,7 +2180,9 @@ view_labels (WView *view)
 	    my_define (h, 2, view->hexview_in_text ? _("EdHex") : _("EdText"),
 		       toggle_hexedit_mode, view);
 	else {
-	    if (view->growbuf_in_use || view->have_frame)
+	    /* FIXME: add new function view_datasource_is_editable() */
+	    /* FIXME: why is editing in panel mode disabled? */
+	    if (view->growbuf_in_use || view_is_in_panel (view))
 		my_define (h, 2, "", NULL, view);
 	    else
 		my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
@@ -2199,7 +2196,8 @@ view_labels (WView *view)
     my_define (h, 8, view->magic_mode ? _("Raw") : _("Parse"),
 	       change_viewer, view);
 
-    if (!view->have_frame) {
+    /* don't override the key to access the main menu */
+    if (!view_is_in_panel (view)) {
 	my_define (h, 9,
 		   view->text_nroff_mode ? _("Unform") : _("Format"),
 		   change_nroff, view);
@@ -2404,13 +2402,12 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
 	/*  Use to indicate parent that we want to see the next/previous file */
-	/* Only works on full screen mode */
+	/* Does not work in panel mode */
     case XCTRL ('f'):
     case XCTRL ('b'):
-	if (!view->have_frame)
+	if (!view_is_in_panel (view))
 	    view->move_dir = c == XCTRL ('f') ? 1 : -1;
-	/* fall */
-
+	/* FALLTHROUGH */
     case 'q':
     case XCTRL ('g'):
     case ESC_CHAR:
@@ -2607,7 +2604,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_INIT:
 	view_update_bytes_per_line (view);
-	if (view->have_frame)
+	if (view_is_in_panel (view))
 	    add_hook (&select_file_hook, view_hook, view);
 	else
 	    view_labels (view);
@@ -2625,7 +2622,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
 	i = view_handle_key ((WView *) view, parm);
-	if (view->view_quit && !view->have_frame)
+	if (view->view_quit && !view_is_in_panel (view))
 	    dlg_stop (h);
 	else {
 	    view_update (view);
@@ -2638,7 +2635,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_DESTROY:
 	view_done (view);
-	if (view->have_frame)
+	if (view_is_in_panel (view))
 	    delete_hook (&select_file_hook, view_hook);
 	return MSG_HANDLED;
 
@@ -2666,7 +2663,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view_set_datasource_none (view);
 
-    view->have_frame        = is_panel ? 1 : 0;
+    view->dpy_frame_size    = is_panel ? 1 : 0;
     view->last              = 0;
     view->bottom_first      = INVALID_OFFSET;
     view->start_display     = 0;
