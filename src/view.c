@@ -793,9 +793,6 @@ view_display_clean (WView *view, int height, int width)
 #define view_add_string(view,s)    addstr (s)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 
-#define view_freeze(view)
-#define view_thaw(view)
-
 typedef enum {
     MARK_NORMAL = 0,
     MARK_SELECTED = 1,
@@ -831,7 +828,6 @@ display (WView *view)
     from = view->dpy_text_start;
     attrset (NORMAL_COLOR);
 
-    view_freeze (view);
     view_display_clean (view, height, width);
 
     /* Optionally, display a ruler */
@@ -1071,7 +1067,6 @@ display (WView *view)
 	}
     }
     view->last = from;
-    view_thaw (view);
     return from;
 }
 

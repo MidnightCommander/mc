@@ -18,6 +18,9 @@
 	expansion. They looked like variables, which was irritating.
 	* view.c (view_get_datacolumns): Added. Replaced equivalent
 	expressions to call this function.
+	* view.c (display): Removed the call to the empty macros
+	view_freeze() and view_thaw(). Deleted these macros, as they
+	are otherwise unused.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
