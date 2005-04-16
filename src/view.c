@@ -375,7 +375,7 @@ enqueue_change (struct hexedit_change_node **head,
 	    node->next = curr;
 	    return;
 	}
-	head = (struct hexedit_change_node **) curr;
+	head = &(curr->next);
 	curr = curr->next;
     }
     *head = node;

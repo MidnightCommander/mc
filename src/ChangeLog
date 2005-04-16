@@ -21,6 +21,9 @@
 	* view.c (display): Removed the call to the empty macros
 	view_freeze() and view_thaw(). Deleted these macros, as they
 	are otherwise unused.
+	* view.c (enqueue_change): Made the algorithm independent of the
+	memory layout (especially the order) of the fields in struct
+	hexedit_change_node.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
