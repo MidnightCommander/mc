@@ -107,21 +107,21 @@ struct WView {
     enum view_ds datasource;	/* Where the displayed data comes from */
 
     /* stdio pipe data source */
-    FILE *ds_stdio_pipe;	/* Output of a shell command */
+    FILE  *ds_stdio_pipe;	/* Output of a shell command */
 
     /* vfs pipe data source */
-    int ds_vfs_pipe;		/* Non-seekable vfs file descriptor */
+    int    ds_vfs_pipe;		/* Non-seekable vfs file descriptor */
 
     /* vfs file data source */
-    int ds_file_fd;		/* File with random access */
-    off_t ds_file_filesize;	/* Size of the file */
-    off_t ds_file_offset;	/* Offset of the currently loaded data */
-    char *ds_file_data;		/* Currently loaded data */
+    int    ds_file_fd;		/* File with random access */
+    off_t  ds_file_filesize;	/* Size of the file */
+    off_t  ds_file_offset;	/* Offset of the currently loaded data */
+    char  *ds_file_data;	/* Currently loaded data */
     size_t ds_file_datalen;	/* Number of valid bytes in file_data */
     size_t ds_file_datasize;	/* Number of allocated bytes in file_data */
 
     /* string data source */
-    char *ds_string_data;	/* The characters of the string */
+    char  *ds_string_data;	/* The characters of the string */
     size_t ds_string_len;	/* The length of the string */
 
     /* Editor modes */
