@@ -249,6 +249,7 @@ get_byte_indexed (WView *view, offset_type base, offset_type ofs)
     return -1;
 }
 
+/* the number of lines that can be used for displaying data */
 static inline int
 view_get_datalines (WView *view)
 {
@@ -258,6 +259,17 @@ view_get_datalines (WView *view)
     if (view->widget.lines < framelines + statuslines)
 	return 0;
     return view->widget.lines - (framelines + statuslines);
+}
+
+/* the number of columns that can be used for displaying data */
+static inline int
+view_get_datacolumns (WView *view)
+{
+    const int framelines = 2 * view->dpy_frame_size;
+
+    if (framelines < view->widget.cols)
+	return view->widget.cols - framelines;
+    return 0;
 }
 
 static void view_hexview_move_to_eol(WView *view)
@@ -667,7 +679,7 @@ view_load (WView *view, const char *_command, const char *_file,
 static void
 view_update_bytes_per_line (WView *view)
 {
-    const int cols = view->widget.cols - 2 * view->dpy_frame_size;
+    const int cols = view_get_datacolumns (view);
 
     view->bottom_first = INVALID_OFFSET;
     if (cols < 80)
@@ -710,7 +722,7 @@ view_status (WView *view)
     static int i18n_adjust = 0;
     static const char *file_label;
 
-    const int w = view->widget.cols - 2 * view->dpy_frame_size;
+    const int w = view_get_datacolumns (view);
     int i;
 
     attrset (SELECTED_COLOR);
@@ -934,7 +946,7 @@ display (WView *view)
 		    view_gotoyx (view, row, col - 1);
 		    view_add_character (view, ' ');
 		    view_gotoyx (view, row, col);
-		    if (view->widget.cols - 2 * view->dpy_frame_size)
+		    if (view_get_datacolumns (view) < 80)
 			col += 1;
 		    else {
 			view_add_one_vline ();
@@ -1182,7 +1194,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 			&& (cc = get_byte (view, p - 1)) != -1
 			&& is_printable (cc))
 			col -= 2;
-		} else if (col == view->widget.cols - 2 * view->dpy_frame_size) {
+		} else if (col == view_get_datacolumns (view)) {
 		    int d = get_byte_indexed (view, p, 2);
 
 		    if (d == -1 || !is_printable (c) ||
@@ -2462,11 +2474,11 @@ view_event (WView *view, Gpm_Event *event, int *result)
 
     /* Scrolling left and right */
     if (!view->text_wrap_mode) {
-	if (event->x < view->widget.cols / 4) {
+	if (event->x < 1 * view_get_datacolumns (view) / 4) {
 	    move_left (view);
 	    goto processed;
 	}
-	if (event->x > 3 * (view->widget.cols - 2 * view->dpy_frame_size) / 4) {
+	if (event->x > 3 * view_get_datacolumns (view) / 4) {
 	    move_right (view);
 	    goto processed;
 	}

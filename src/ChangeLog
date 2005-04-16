@@ -16,6 +16,8 @@
 	Removed the superfluous type conversions.
 	* view.c (vwidth, vheight): Replaced these two macros with their
 	expansion. They looked like variables, which was irritating.
+	* view.c (view_get_datacolumns): Added. Replaced equivalent
+	expressions to call this function.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
