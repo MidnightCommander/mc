@@ -323,6 +323,7 @@ const: For every function taking a string argument, decide whether you
 	use g_strdup to create a local copy.
 
 const_cast: Has been replaced by str_unconst.
+
 g_free: g_free handles NULL argument too, no need for the comparison.
 	Bad way:
 	    if (old_dir) g_free (old_dir);
@@ -371,3 +372,13 @@ str_unconst: We use many libraries that do not know about "const char *"
 	str_unconst(). If you are not sure whether the function modifies
 	the string, you should use g_strdup() to pass a copy of a string
 	to the function. Don't forget to call g_free() after work is done.
+
+unused: Unused arguments of a function can be marked like this:
+
+	void do_nothing(int data)
+	{
+	    (void) &data;
+	}
+
+	This tells the GNU C Compiler not to emit a warning, and has no
+	side effects for other compilers.
