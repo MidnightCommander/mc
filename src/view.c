@@ -370,11 +370,8 @@ enqueue_change (struct hexedit_change_node **head,
     struct hexedit_change_node *curr = *head;
 
     while (curr) {
-	if (node->offset < curr->offset) {
-	    *head = node;
-	    node->next = curr;
-	    return;
-	}
+	if (node->offset < curr->offset)
+	    break;
 	head = &(curr->next);
 	curr = curr->next;
     }

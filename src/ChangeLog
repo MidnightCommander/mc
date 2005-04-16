@@ -23,7 +23,7 @@
 	are otherwise unused.
 	* view.c (enqueue_change): Made the algorithm independent of the
 	memory layout (especially the order) of the fields in struct
-	hexedit_change_node.
+	hexedit_change_node. Rewrote it.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
