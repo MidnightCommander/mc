@@ -1,3 +1,8 @@
+2005-04-16  Roland Illig  <roland.illig@gmx.de>
+
+	* lib/mc.ext.in: Recognize either *.udeb or *.deb as Debian
+	packages. Fixes Savannah patch #3899.
+
 2005-04-14  Leonard den Ottolander <leonard * den ottolander nl>
 
 	* syntax/Syntax: Catch Makefiles with capitals in the extension.
