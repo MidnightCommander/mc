@@ -439,13 +439,13 @@ view_handle_editkey (WView *view, int key)
 static void
 free_change_list (WView *view)
 {
-    struct hexedit_change_node *n = view->change_list;
+    struct hexedit_change_node *curr, *next;
 
-    while (n) {
-	view->change_list = n->next;
-	g_free (n);
-	n = view->change_list;
+    for (curr = view->change_list; curr != NULL; curr = next) {
+	next = curr->next;
+	g_free (curr);
     }
+    view->change_list = NULL;
     view->dirty++;
 }
 

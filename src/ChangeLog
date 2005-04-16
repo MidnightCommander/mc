@@ -24,6 +24,8 @@
 	* view.c (enqueue_change): Made the algorithm independent of the
 	memory layout (especially the order) of the fields in struct
 	hexedit_change_node. Rewrote it.
+	* view.c (free_change_list): Don't use view->change_list as
+	scratch variable.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
