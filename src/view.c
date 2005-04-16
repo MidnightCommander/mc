@@ -367,14 +367,16 @@ static void
 enqueue_change (struct hexedit_change_node **head,
 		struct hexedit_change_node *node)
 {
-    struct hexedit_change_node *curr = *head;
+    /* chnode always either points to the head of the list or */
+    /* to one of the ->next fields in the list. The value at  */
+    /* this location will be overwritten with the new node.   */
+    struct hexedit_change_node **chnode = head;
 
-    while (curr != NULL && curr->offset < node->offset) {
-	head = &(curr->next);
-	curr = curr->next;
-    }
-    *head = node;
-    node->next = curr;
+    while (*chnode != NULL && (*chnode)->offset < node->offset)
+	chnode = &((*chnode)->next);
+
+    node->next = *chnode;
+    *chnode = node;
 }
 
 static void move_right (WView *);
