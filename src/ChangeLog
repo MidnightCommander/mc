@@ -11,6 +11,9 @@
 	dpy_text_start_col. Code cleanup, as usual.
 	* view.c (struct WView): Renamed start_display to dpy_text_start.
 	Fixed one invalid use of bit arithmetics (line 1819).
+	* view.c: Added the `byte' type as an alias for unsigned char.
+	Converted some datasources to using byte as the base type.
+	Removed the superfluous type conversions.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 

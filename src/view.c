@@ -73,6 +73,8 @@
 #define vwidth (view->widget.cols - 2 * view->dpy_frame_size)
 #define vheight (view->widget.lines - 2 * view->dpy_frame_size)
 
+typedef unsigned char byte;
+
 /* Offset in bytes into a file */
 typedef unsigned long offset_type;
 #define INVALID_OFFSET ((offset_type) -1)
@@ -86,7 +88,7 @@ typedef unsigned int screen_dimen;
 struct hexedit_change_node {
    struct hexedit_change_node *next;
    offset_type                offset;
-   unsigned char              value;
+   byte                       value;
 };
 
 /* data sources of the view */
@@ -116,12 +118,12 @@ struct WView {
     int    ds_file_fd;		/* File with random access */
     off_t  ds_file_filesize;	/* Size of the file */
     off_t  ds_file_offset;	/* Offset of the currently loaded data */
-    char  *ds_file_data;	/* Currently loaded data */
+    byte  *ds_file_data;	/* Currently loaded data */
     size_t ds_file_datalen;	/* Number of valid bytes in file_data */
     size_t ds_file_datasize;	/* Number of allocated bytes in file_data */
 
     /* string data source */
-    char  *ds_string_data;	/* The characters of the string */
+    byte  *ds_string_data;	/* The characters of the string */
     size_t ds_string_len;	/* The length of the string */
 
     /* Editor modes */
@@ -133,7 +135,7 @@ struct WView {
     gboolean magic_mode;	/* Preprocess the file using external programs */
 
     /* Display information */
-    int dpy_frame_size;		/* Size of the frame surrounding the real viewer */
+    int         dpy_frame_size;	/* Size of the frame surrounding the real viewer */
     offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
     offset_type dpy_text_start_col;
     				/* Column at the left side of the viewer */
@@ -154,7 +156,7 @@ struct WView {
 
     /* Growing buffers information */
     gboolean growbuf_in_use;	/* Use the growing buffers? */
-    unsigned char **growbuf_blockptr; /* Pointer to the block pointers */
+    byte **growbuf_blockptr;	/* Pointer to the block pointers */
     size_t growbuf_blocks;	/* The number of blocks in *block_ptr */
     size_t growbuf_lastindex;   /* Number of bytes in the last page of the
                                    growing buffer */
@@ -218,8 +220,7 @@ static void view_move_forward (WView * view, int i);
 static void view_labels (WView * view);
 static void view_update (WView * view);
 
-/* Return the data at the specified offset, cast to an unsigned char,
- * or the value -1. */
+/* Return the data at the specified offset, or the value -1. */
 static int get_byte (WView *, offset_type);
 
 static void view_close_datasource (WView *);
@@ -300,7 +301,7 @@ static void
 view_growbuf_read_until (WView *view, offset_type ofs)
 {
     ssize_t nread;
-    unsigned char *p;
+    byte *p;
     size_t bytesfree;
 
     assert (view->growbuf_in_use);
@@ -312,8 +313,8 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 
     while (view_growbuf_filesize (view, NULL) < ofs) {
         if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
-            unsigned char *newblock = g_try_malloc (VIEW_PAGE_SIZE);
-            unsigned char **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
+            byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
+            byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
             if (!newblock || !newblocks) {
                 g_free (newblock);
 		g_free (newblocks);
@@ -378,7 +379,7 @@ static cb_ret_t
 view_handle_editkey (WView *view, int key)
 {
     struct hexedit_change_node *node;
-    unsigned char byte_val;
+    byte byte_val;
 
     /* Has there been a change at this position ? */
     node = view->change_list;
@@ -1839,7 +1840,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
 	    old_pattern = 0;
 	}
 	for (i = 0; pattern[i] != 0; i++) {
-	    if (isupper ((unsigned char) pattern[i])) {
+	    if (isupper ((byte) pattern[i])) {
 		flags = 0;
 		break;
 	    }
@@ -2890,9 +2891,9 @@ get_byte_growing_buffer (WView *view, offset_type byte_index)
     if (view->growbuf_blocks == 0)
 	return -1;
     if (pageno < view->growbuf_blocks - 1)
-	return (unsigned char) view->growbuf_blockptr[pageno][pageindex];
+	return view->growbuf_blockptr[pageno][pageindex];
     if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex)
-	return (unsigned char) view->growbuf_blockptr[pageno][pageindex];
+	return view->growbuf_blockptr[pageno][pageindex];
     return -1;
 }
 
@@ -2903,7 +2904,7 @@ get_byte_file (WView *view, offset_type byte_index)
 
     view_file_load_data (view, byte_index);
     if (already_loaded(view->ds_file_offset, byte_index, view->ds_file_datalen))
-	return (unsigned char) view->ds_file_data[byte_index - view->ds_file_offset];
+	return view->ds_file_data[byte_index - view->ds_file_offset];
     return -1;
 }
 
@@ -2912,7 +2913,7 @@ get_byte_string (WView *view, offset_type byte_index)
 {
     assert (view->datasource == DS_STRING);
     if (byte_index < view->ds_string_len)
-	return (unsigned char) view->ds_string_data[byte_index];
+	return view->ds_string_data[byte_index];
     return -1;
 }
 
