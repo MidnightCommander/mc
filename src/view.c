@@ -134,12 +134,12 @@ struct WView {
 
     /* Display information */
     int dpy_frame_size;		/* Size of the frame surrounding the real viewer */
+    offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
     offset_type dpy_text_start_col;
     				/* Column at the left side of the viewer */
     offset_type last;           /* Last byte shown */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
-    offset_type start_display;  /* First char displayed */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
     int nib_shift:1;		/* Set if editing the least significant nibble */
     screen_dimen start_save;	/* Line start shift between text and hex */
@@ -641,7 +641,7 @@ view_load (WView *view, const char *_command, const char *_file,
     }
 
     view->command = g_strdup (_command);
-    view->search_start = view->start_display = view->start_save =
+    view->search_start = view->dpy_text_start = view->start_save =
 	0;
     view->found_len = 0;
     view->dpy_text_start_col = 0;
@@ -754,7 +754,7 @@ view_status (WView *view)
 	if (w > 26) {
 	    view_percent (view, view->hex_mode
 		? view->edit_cursor
-		: view->start_display);
+		: view->dpy_text_start);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -802,7 +802,7 @@ static inline int view_count_backspaces (WView *view, off_t offset)
     return backspaces;
 }
 
-/* Shows the file pointed to by *start_display on view_win */
+/* Shows the file pointed to by *dpy_text_start on view_win */
 static offset_type
 display (WView *view)
 {
@@ -818,7 +818,7 @@ display (WView *view)
 
     height = view->widget.lines - frame_shift;
     width = view->widget.cols - frame_shift;
-    from = view->start_display;
+    from = view->dpy_text_start;
     attrset (NORMAL_COLOR);
 
     view_freeze (view);
@@ -1293,8 +1293,8 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
 static void
 view_move_backward (WView *view, int i)
 {
-    view->search_start = view->start_display =
-	move_backward2 (view, view->start_display, i);
+    view->search_start = view->dpy_text_start =
+	move_backward2 (view, view->dpy_text_start, i);
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
@@ -1330,11 +1330,11 @@ get_bottom_first (WView *view, int do_not_cache, int really)
 static void
 view_move_forward (WView *view, int i)
 {
-    view->start_display = view_move_forward2 (view, view->start_display, i, 0);
+    view->dpy_text_start = view_move_forward2 (view, view->dpy_text_start, i, 0);
     if ((!view->growbuf_in_use || view->growbuf_finished)
-	&& view->start_display > get_bottom_first (view, 0, 0))
-	view->start_display = view->bottom_first;
-    view->search_start = view->start_display;
+	&& view->dpy_text_start > get_bottom_first (view, 0, 0))
+	view->dpy_text_start = view->bottom_first;
+    view->search_start = view->dpy_text_start;
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
@@ -1344,23 +1344,23 @@ view_move_forward (WView *view, int i)
 static void
 move_to_top (WView *view)
 {
-    view->search_start = view->start_display = 0;
+    view->search_start = view->dpy_text_start = 0;
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
     view->nib_shift = 0;
-    view->edit_cursor = view->start_display;
+    view->edit_cursor = view->dpy_text_start;
     view->dirty++;
 }
 
 static void
 move_to_bottom (WView *view)
 {
-    view->search_start = view->start_display =
+    view->search_start = view->dpy_text_start =
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
-    view->edit_cursor = (view->edit_cursor < view->start_display) ?
-	view->start_display : view->edit_cursor;
+    view->edit_cursor = (view->edit_cursor < view->dpy_text_start) ?
+	view->dpy_text_start : view->edit_cursor;
     view->dirty++;
 }
 
@@ -1402,7 +1402,7 @@ move_left (WView *view)
 	}
 	if (view->edit_cursor > 0)
 	    --view->edit_cursor;
-	if (view->edit_cursor < view->start_display) {
+	if (view->edit_cursor < view->dpy_text_start) {
 	    view->edit_cursor += view->bytes_per_line;
 	    view_move_backward (view, 1);
 	}
@@ -1624,9 +1624,9 @@ search (WView *view, char *text,
 
 	if (t != beginning) {
 	    if (t > get_bottom_first (view, 0, 0))
-		view->start_display = view->bottom_first;
+		view->dpy_text_start = view->bottom_first;
 	    else
-		view->start_display = t;
+		view->dpy_text_start = t;
 	}
 
 	g_free (s);
@@ -1816,9 +1816,9 @@ hex_search (WView *view, const char *text)
     view->nib_shift = 0;
 
     /* Adjust the file offset */
-    view->start_display = (pos & (~(view->bytes_per_line - 1)));
-    if (view->start_display > get_bottom_first (view, 0, 0))
-	view->start_display = view->bottom_first;
+    view->dpy_text_start = pos - pos % view->bytes_per_line;
+    if (view->dpy_text_start > get_bottom_first (view, 0, 0))
+	view->dpy_text_start = view->bottom_first;
 }
 
 static int
@@ -1921,8 +1921,8 @@ toggle_wrap_mode (WView *view)
 	view->dpy_text_start_col = 0;
     else {
 	if (have_fast_cpu) {
-	    if (view->bottom_first < view->start_display)
-		view->search_start = view->start_display =
+	    if (view->bottom_first < view->dpy_text_start)
+		view->search_start = view->dpy_text_start =
 		    view->bottom_first;
 	    view->found_len = 0;
 	}
@@ -1940,12 +1940,12 @@ toggle_hex_mode (WView *view)
 
     if (view->hex_mode) {
 	/* Shift the line start to 0x____0 on entry, restore it for text */
-	view->start_save = view->start_display;
-	view->start_display -= view->start_display % view->bytes_per_line;
-	view->edit_cursor = view->start_display;
+	view->start_save = view->dpy_text_start;
+	view->dpy_text_start -= view->dpy_text_start % view->bytes_per_line;
+	view->edit_cursor = view->dpy_text_start;
 	view->widget.options |= W_WANT_CURSOR;
     } else {
-	view->start_display = view->start_save;
+	view->dpy_text_start = view->start_save;
 	view->widget.options &= ~W_WANT_CURSOR;
     }
     altered_hex_mode = 1;
@@ -1967,7 +1967,7 @@ goto_line (WView *view)
     view->text_wrap_mode = 0;
 
     /* FIXME: this is awfully slow */
-    for (i = 0; i < view->start_display; i++)
+    for (i = 0; i < view->dpy_text_start; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline++;
 
@@ -2403,11 +2403,11 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'm':
-	view->marks[view->marker] = view->start_display;
+	view->marks[view->marker] = view->dpy_text_start;
 	return MSG_HANDLED;
 
     case 'r':
-	view->start_display = view->marks[view->marker];
+	view->dpy_text_start = view->marks[view->marker];
 	view->dirty++;
 	return MSG_HANDLED;
 
@@ -2676,7 +2676,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->dpy_frame_size    = is_panel ? 1 : 0;
     view->last              = 0;
     view->bottom_first      = INVALID_OFFSET;
-    view->start_display     = 0;
+    view->dpy_text_start    = 0;
     view->dpy_text_start_col = 0;
     view->edit_cursor       = 0;
     view->hexedit_mode      = default_hexedit_mode;

@@ -9,6 +9,8 @@
 	dpy_text_start_col, which has a similar function like start_col,
 	but does not have negative values. Added bounds checking for
 	dpy_text_start_col. Code cleanup, as usual.
+	* view.c (struct WView): Renamed start_display to dpy_text_start.
+	Fixed one invalid use of bit arithmetics (line 1819).
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
