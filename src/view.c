@@ -134,11 +134,12 @@ struct WView {
 
     /* Display information */
     int dpy_frame_size;		/* Size of the frame surrounding the real viewer */
+    offset_type dpy_text_start_col;
+    				/* Column at the left side of the viewer */
     offset_type last;           /* Last byte shown */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
     offset_type start_display;  /* First char displayed */
-    int start_col;		/* First displayed column, negative */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
     int nib_shift:1;		/* Set if editing the least significant nibble */
     screen_dimen start_save;	/* Line start shift between text and hex */
@@ -576,7 +577,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view->marks[i] = 0;
 
     if (!view_is_in_panel (view)) {
-	view->start_col = 0;
+	view->dpy_text_start_col = 0;
     }
 
     if (_command && (view->magic_mode || _file[0] == '\0')) {
@@ -643,7 +644,7 @@ view_load (WView *view, const char *_command, const char *_file,
     view->search_start = view->start_display = view->start_save =
 	0;
     view->found_len = 0;
-    view->start_col = 0;
+    view->dpy_text_start_col = 0;
     view->last_search = 0;	/* Start a new search */
 
     if (error)
@@ -733,10 +734,11 @@ view_status (WView *view)
 					i));
 	if (w > 46) {
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 24);
+	    /* FIXME: the format strings need to be changed when offset_type changes */
 	    if (view->hex_mode)
 		printw (const_cast(char *, _("Offset 0x%08lx")), view->edit_cursor);
 	    else
-		printw (const_cast(char *, _("Col %d")), -view->start_col);
+		printw (const_cast(char *, _("Col %lu")), view->dpy_text_start_col);
 	}
 	if (w > 62) {
 	    offset_type filesize;
@@ -829,7 +831,8 @@ display (WView *view)
 
 	attrset (MARKED_COLOR);
 	for (c = frame_shift; c < width; c++) {
-	    cl = c - view->start_col;
+	    /* FIXME: possible integer overflow */
+	    cl = c + view->dpy_text_start_col;
 	    if (ruler == 1)
 		view_gotoyx (view, row, c);
 	    else
@@ -1038,9 +1041,10 @@ display (WView *view)
 		boldflag = MARK_SELECTED;
 		attrset (SELECTED_COLOR);
 	    }
-	    if (col >= frame_shift - view->start_col
-		&& col < width - view->start_col) {
-		view_gotoyx (view, row, col + view->start_col);
+	    /* FIXME: incompatible widths in integer types */
+	    if (col >= frame_shift + view->dpy_text_start_col
+		&& col < width + view->dpy_text_start_col) {
+		view_gotoyx (view, row, col - view->dpy_text_start_col);
 
 		c = convert_to_display_c (c);
 
@@ -1380,8 +1384,8 @@ move_right (WView *view)
 	    view->edit_cursor -= view->bytes_per_line;
 	    view_move_forward (view, 1);
 	}
-    } else if (--view->start_col > 0)
-	view->start_col = 0;
+    } else
+	view->dpy_text_start_col++;
     view->dirty++;
 }
 
@@ -1402,8 +1406,10 @@ move_left (WView *view)
 	    view->edit_cursor += view->bytes_per_line;
 	    view_move_backward (view, 1);
 	}
-    } else if (++view->start_col > 0)
-	view->start_col = 0;
+    } else {
+	if (view->dpy_text_start_col > 0)
+	    view->dpy_text_start_col--;
+    }
     view->dirty++;
 }
 
@@ -1912,7 +1918,7 @@ toggle_wrap_mode (WView *view)
     view->text_wrap_mode = 1 - view->text_wrap_mode;
     get_bottom_first (view, 1, 1);
     if (view->text_wrap_mode)
-	view->start_col = 0;
+	view->dpy_text_start_col = 0;
     else {
 	if (have_fast_cpu) {
 	    if (view->bottom_first < view->start_display)
@@ -2226,15 +2232,19 @@ check_left_right_keys (WView *view, int c)
 	return MSG_NOT_HANDLED;
 
     if (c == (KEY_M_CTRL | KEY_LEFT)) {
-	view->start_col = view->start_col + 10;
-	if (view->start_col > 0)
-	    view->start_col = 0;
+	if (view->dpy_text_start_col >= 10)
+	    view->dpy_text_start_col -= 10;
+	else
+	    view->dpy_text_start_col = 0;
 	view->dirty++;
 	return MSG_HANDLED;
     }
 
     if (c == (KEY_M_CTRL | KEY_RIGHT)) {
-	view->start_col = view->start_col - 10;
+        if (view->dpy_text_start_col <= OFFSETTYPE_MAX - 10)
+	    view->dpy_text_start_col += 10;
+	else
+	    view->dpy_text_start_col = OFFSETTYPE_MAX;
 	view->dirty++;
 	return MSG_HANDLED;
     }
@@ -2667,7 +2677,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->last              = 0;
     view->bottom_first      = INVALID_OFFSET;
     view->start_display     = 0;
-    view->start_col         = 0;
+    view->dpy_text_start_col = 0;
     view->edit_cursor       = 0;
     view->hexedit_mode      = default_hexedit_mode;
     view->nib_shift         = FALSE;

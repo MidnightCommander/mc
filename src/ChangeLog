@@ -5,6 +5,10 @@
 	* view.c (view_percent): Removed the last parameter, as it has
 	always the same value.
 	* view.c: Code cleanup.
+	* view.c (struct WView): Removed start_col. Added
+	dpy_text_start_col, which has a similar function like start_col,
+	but does not have negative values. Added bounds checking for
+	dpy_text_start_col. Code cleanup, as usual.
 
 2005-04-14  Roland Illig  <roland.illig@gmx.de>
 
