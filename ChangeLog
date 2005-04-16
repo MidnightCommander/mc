@@ -1,3 +1,10 @@
+2005-04-17  Leonard den Ottolander <leonard * den ottolander nl>
+	* syntax/eiffel.syntax: dos2unix; removed redundant cooledit
+	colour definitions.
+	* syntax/perl.syntax: Removed redundant cooledit definitions.
+	* syntax/php.syntax: ' ' and " " context fixes.
+	* syntax/syntax.syntax: Removed 2 duplicate lines.
+
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 
 	* lib/mc.ext.in: Recognize either *.udeb or *.deb as Debian

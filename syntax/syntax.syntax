@@ -7,12 +7,10 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.\\[]{
 context default
 # Invalid combinations, not highlighted
     keyword whole linestart\[\t\s\]whole
-    keyword whole linestart\[\t\s\]whole
     keyword whole linestart\[\t\s\]wholeleft
     keyword whole linestart\[\t\s\]wholeright
 
 # Combinations below are valid
-    keyword whole whole\[\t\s\]linestart brightcyan
     keyword whole whole\[\t\s\]linestart brightcyan
     keyword whole wholeleft\[\t\s\]linestart brightcyan
     keyword whole wholeright\[\t\s\]linestart brightcyan
@@ -53,4 +51,3 @@ context default
     keyword whole white white
 
 context linestart # \n brown
-

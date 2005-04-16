@@ -1,5 +1,8 @@
 # PHP syntax file
 
+# 2005-04-16  Leonard den Ottolander <leonard den ottolander nl>
+#	* ' ' and " " context fixes
+
 # 2004-09-04  Leonard den Ottolander <leonard * den ottolander nl>
 #	* function keywords regenerated from the docs at http://www.php.net
 #	* separated classes and methods
@@ -22,7 +25,7 @@
 context default
 
 ######################
-# Control srtuctures
+# Control structures
 
     keyword whole break brightmagenta
     keyword whole case brightmagenta
@@ -3651,10 +3654,6 @@ context default
 
     keyword wholeright $+ brightgreen
 
-    keyword " green
-
-    keyword '*' brightgreen
-
     keyword /\* brown
     keyword \*/ brown
     keyword // brown
@@ -3710,7 +3709,7 @@ context exclusive // \n brown
 context linestart # \n brown
     spellcheck
 
-context exclusive " " green
+context " " green
     spellcheck
     keyword \\" brightgreen
     keyword \\\n brightgreen
@@ -3725,3 +3724,7 @@ context exclusive " " green
     keyword \\\\ brightgreen
     keyword \\' brightgreen
     keyword \\\{abtnvfr\} brightgreen
+
+context ' ' brightgreen
+    spellcheck
+    keyword \\' brightcyan
