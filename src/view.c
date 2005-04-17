@@ -869,18 +869,18 @@ display (WView *view)
     const int frame_shift = view->dpy_frame_size;
     int col = 0 + frame_shift;
     int row = STATUS_LINES + frame_shift;
-    int height, width;
+    int bottom, right;
     offset_type from;
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 
-    height = view->widget.lines - frame_shift;
-    width = view->widget.cols - frame_shift;
+    bottom = view_get_bottom (view);
+    right = view_get_right (view);
     from = view->dpy_text_start;
     attrset (NORMAL_COLOR);
 
-    view_display_clean (view, height, width);
+    view_display_clean (view, bottom, right);
 
     /* Optionally, display a ruler */
     if ((!view->hex_mode) && (ruler)) {
@@ -889,13 +889,13 @@ display (WView *view)
 	int cl;
 
 	attrset (MARKED_COLOR);
-	for (c = frame_shift; c < width; c++) {
+	for (c = frame_shift; c < right; c++) {
 	    /* FIXME: possible integer overflow */
 	    cl = c + view->dpy_text_start_col;
 	    if (ruler == 1)
 		view_gotoyx (view, row, c);
 	    else
-		view_gotoyx (view, row + height - 2, c);
+		view_gotoyx (view, bottom - 1, c);
 	    view_add_character (view, ruler_chars[cl % 10]);
 
 	    if ((cl != 0) && (cl % 10) == 0) {
@@ -903,7 +903,7 @@ display (WView *view)
 		if (ruler == 1) {
 		    widget_move (view, row + 1, c - 1);
 		} else {
-		    widget_move (view, row + height - 3, c - 1);
+		    widget_move (view, bottom - 2, c - 1);
 		}
 		view_add_string (view, r_buff);
 	    }
@@ -912,7 +912,7 @@ display (WView *view)
 	if (ruler == 1)
 	    row += 2;
 	else
-	    height -= 2;
+	    bottom -= 2;
     }
 
     /* Find the first displayable changed byte */
@@ -923,11 +923,11 @@ display (WView *view)
 	char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
 	int bytes;		/* Number of bytes already printed on the line */
 
-	/* Start of text column */
-	int text_start = width - view->bytes_per_line - 1 + frame_shift;
+	/* Start of text column; keep the last column empty */
+	int text_start = frame_shift + right - (view->bytes_per_line + 1);
 
 	for (; get_byte (view, from) != -1
-	       && row < height; row++) {
+	       && row < bottom; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
 	    g_snprintf (hex_buff, sizeof (hex_buff), OFFSETTYPE_PRIX, from);
@@ -1049,11 +1049,11 @@ display (WView *view)
 	}
 	view_place_cursor (view);
     } else {
-	for (; row < height && (c = get_byte (view, from)) != -1; from++) {
-	    if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
+	for (; row < bottom && (c = get_byte (view, from)) != -1; from++) {
+	    if ((c == '\n') || (col >= right && view->text_wrap_mode)) {
 		col = frame_shift;
 		row++;
-		if (c == '\n' || row >= height)
+		if (c == '\n' || row >= bottom)
 		    continue;
 	    }
 	    if (c == '\r')
@@ -1081,7 +1081,7 @@ display (WView *view)
 					   of the previous undisplayed line */
 			}
 			row--;
-			col = width;
+			col = right;
 		    }
 		    col--;
 		    boldflag = MARK_SELECTED;
@@ -1099,7 +1099,7 @@ display (WView *view)
 	    }
 	    /* FIXME: incompatible widths in integer types */
 	    if (col >= frame_shift + view->dpy_text_start_col
-		&& col < width + view->dpy_text_start_col) {
+		&& col < right + view->dpy_text_start_col) {
 		view_gotoyx (view, row, col - view->dpy_text_start_col);
 
 		c = convert_to_display_c (c);

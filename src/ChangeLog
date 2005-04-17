@@ -21,6 +21,9 @@
 	view_get_datalines() and view_get_datacolumns() in terms of
 	these four functions.
 	* view.c (display): Simplified the ruler drawing code.
+	* view.c (display): Renamed width and height to right and bottom.
+	The values of the variables aren't really the width and height
+	of anything.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 
