@@ -565,6 +565,7 @@ static char *
 set_view_init_error (WView *view, const char *msg)
 {
     if (msg) {
+	view_close_datasource (view);
 	view_set_datasource_string (view, msg);    
         return g_strdup (msg);
     }
@@ -709,8 +710,10 @@ view_load (WView *view, const char *_command, const char *_file,
     view->dpy_text_start_col = 0;
     view->last_search = 0;	/* Start a new search */
 
-    if (error)
+    if (error) {
+	view_close_datasource (view);
 	view_set_datasource_string (view, error);    
+    }
 
     if (start_line > 1 && !error) {
 	int saved_wrap_mode = view->text_wrap_mode;
@@ -3052,8 +3055,6 @@ view_set_datasource_stdio_pipe (WView *view, FILE *fp)
 static void
 view_set_datasource_string (WView *view, const char *s)
 {
-    view_close_datasource (view);
-
     view->datasource     = DS_STRING;
     view->ds_string_data = g_strdup (s);
     view->ds_string_len  = strlen (s);
