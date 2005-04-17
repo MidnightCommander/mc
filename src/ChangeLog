@@ -6,6 +6,9 @@
 	* view.c (view_set_byte): Added for save_edit_changes().
 	* view.c (display): view_place_cursor() is called after displaying
 	in hex mode.
+	* view.c (save_edit_changes): Changed return type to gboolean.
+	* view.c (view_ok_to_quit): Changed return type to gboolean.
+	Adjusted returned values.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 

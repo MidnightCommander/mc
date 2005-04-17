@@ -456,7 +456,7 @@ free_change_list (WView *view)
     view->dirty++;
 }
 
-static void
+static gboolean
 save_edit_changes (WView *view)
 {
     struct hexedit_change_node *curr, *next;
@@ -491,7 +491,7 @@ save_edit_changes (WView *view)
 	g_free (error);
     }
     view_update (view);
-    return;
+    return TRUE;
 
   save_error:
     error = g_strdup (strerror (errno));
@@ -505,9 +505,10 @@ save_edit_changes (WView *view)
 
     if (answer == 0)
 	goto retry_save;
+    return FALSE;
 }
 
-static int
+static gboolean
 view_ok_to_quit (WView *view)
 {
     int r;
@@ -521,13 +522,12 @@ view_ok_to_quit (WView *view)
 
     switch (r) {
     case 1:
-	save_edit_changes (view);
-	return 1;
+	return save_edit_changes (view);
     case 2:
 	free_change_list (view);
-	return 1;
+	return TRUE;
     default:
-	return 0;
+	return FALSE;
     }
 }
 
