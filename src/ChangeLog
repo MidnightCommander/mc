@@ -1,3 +1,12 @@
+2005-04-17  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (save_edit_changes): Completely rewritten to be robust
+	on errors. All changed bytes that could not be saved are kept
+	in the change list, so that the user can try to save them later.
+	* view.c (view_set_byte): Added for save_edit_changes().
+	* view.c (display): view_place_cursor() is called after displaying
+	in hex mode.
+
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (struct WView): Renamed have_frame to dpy_frame_size.

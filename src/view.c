@@ -220,6 +220,12 @@ static void view_update (WView * view);
 /* Return the data at the specified offset, or the value -1. */
 static int get_byte (WView *, offset_type);
 
+/* Calling this function has the effect that the viewer will show
+ * the given byte at this offset. This function is designed only for use
+ * by the hexedit component after saving its changes. Inspect the
+ * source before you want to use it for other purposes. */
+static void view_set_byte (WView *, offset_type, byte);
+
 static void view_close_datasource (WView *);
 static offset_type view_growbuf_filesize (WView *view, gboolean *);
 static inline void view_update_last_byte (WView *);
@@ -234,6 +240,7 @@ static offset_type view_get_filesize (WView *);
 static offset_type view_get_filesize_with_exact (WView *, gboolean *);
 
 static void view_init_growbuf (WView *);
+static void view_place_cursor (WView *view);
 
 static inline gboolean
 view_is_in_panel (WView *view)
@@ -452,33 +459,52 @@ free_change_list (WView *view)
 static void
 save_edit_changes (WView *view)
 {
-    struct hexedit_change_node *node = view->change_list;
-    int fp;
+    struct hexedit_change_node *curr, *next;
+    int fp, answer;
+    char *text, *error;
 
-    do {
-	fp = open (view->filename, O_WRONLY);
-	if (fp >= 0) {
-	    while (node) {
-		if (lseek (fp, node->offset, SEEK_SET) == -1 ||
-		    write (fp, &node->value, 1) != 1) {
-		    close (fp);
-		    fp = -1;
-		    break;
-		}
-		node = node->next;
-	    }
-	    if (fp != -1)
-		close (fp);
-	}
+  retry_save:
+    /* FIXME: why not use mc_open()? */
+    fp = open (view->filename, O_WRONLY);
+    if (fp == -1)
+	goto save_error;
 
-	if (fp == -1) {
-	    fp = query_dialog (_(" Save file "),
-			       _(" Cannot save file. "),
-			       2, 2, _("&Retry"), _("&Cancel")) - 1;
-	}
-    } while (fp == -1);
+    for (curr = view->change_list; curr != NULL; curr = next) {
+	next = curr->next;
 
-    free_change_list (view);
+	if (lseek (fp, curr->offset, SEEK_SET) == -1
+	    || write (fp, &(curr->value), 1) != 1)
+	    goto save_error;
+
+	/* delete the saved item from the change list */
+	view->change_list = next;
+	view->dirty++;
+	view_set_byte (view, curr->offset, curr->value);
+	g_free (curr);
+    }
+
+    if (close (fp) == -1) {
+	error = g_strdup (strerror (errno));
+	message (D_ERROR, _(" Save file "),
+	    _(" Error while closing the file: \n %s \n"
+	      " Data may have been written or not. "), error);
+	g_free (error);
+    }
+    view_update (view);
+    return;
+
+  save_error:
+    error = g_strdup (strerror (errno));
+    text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
+    g_free (error);
+    (void) close (fp);
+
+    answer = query_dialog (_(" Save file "), text, D_ERROR,
+	2, _("&Retry"), _("&Cancel"));
+    g_free (text);
+
+    if (answer == 0)
+	goto retry_save;
 }
 
 static int
@@ -995,6 +1021,7 @@ display (WView *view)
 		}
 	    }
 	}
+	view_place_cursor (view);
     } else {
 	for (; row < height && (c = get_byte (view, from)) != -1; from++) {
 	    if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
@@ -2936,6 +2963,29 @@ get_byte (WView *view, offset_type offset)
     }
     assert(!"Unknown datasource type");
     return -1;
+}
+
+static void
+view_set_byte (WView *view, offset_type offset, byte b)
+{
+    assert (offset < view_get_filesize (view));
+
+    switch (view->datasource) {
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    view->growbuf_blockptr[offset / VIEW_PAGE_SIZE][offset % VIEW_PAGE_SIZE] = b;
+	    break;
+	case DS_FILE:
+	    view->ds_file_datalen = 0; /* just force reloading */
+	    break;
+	case DS_STRING:
+	    view->ds_string_data[offset] = b;
+	    break;
+	case DS_NONE:
+	    break;
+	default:
+	    assert(!"Unknown datasource type");
+    }
 }
 
 static void
