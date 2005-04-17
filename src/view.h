@@ -9,10 +9,12 @@ WView *view_new (int y, int x, int cols, int lines, int is_panel);
 int view_load (WView *view, const char *_command, const char *_file,
 	       int start_line);
 
-/* Command: view a _file, if _command != NULL we use popen on _command */
-/* move direction should be a pointer that will hold the direction in which */
-/* the user wants to move (-1 previous file, 1 next file, 0 do nothing) */
-int view (const char *_command, const char *_file, int *move_direction,
+/* View a ''file'' or the output of a ''command'' in the internal viewer,
+ * starting in line ''start_line''. ''ret_move_direction'' may be NULL or
+ * point to a variable that will receive the direction in which the user
+ * wants to move (-1 = previous file, 1 = next file, 0 = do nothing).
+ */
+int view (const char *command, const char *file, int *ret_move_direction,
 	  int start_line);
 
 extern int mouse_move_pages_viewer;

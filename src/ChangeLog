@@ -9,6 +9,10 @@
 	* view.c (save_edit_changes): Changed return type to gboolean.
 	* view.c (view_ok_to_quit): Changed return type to gboolean.
 	Adjusted returned values.
+	* view.c (view_load): Changed return type to gboolean. Adjusted
+	returned values.
+	* view.c (view): Rewrote the code a little bit.
+	* view.h (view): Rewrote the comment.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 

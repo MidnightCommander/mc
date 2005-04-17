@@ -584,8 +584,7 @@ init_growing_view (WView *view, const char *name, const char *filename)
     return NULL;
 }
 
-/* Return zero on success, -1 on failure */
-int
+gboolean
 view_load (WView *view, const char *_command, const char *_file,
 	   int start_line)
 {
@@ -669,7 +668,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	if (!view_is_in_panel (view)) {
 	    message (1, MSG_ERROR, "%s", error);
 	    g_free (error);
-	    return -1;
+	    return FALSE;
 	}
     }
 
@@ -696,7 +695,7 @@ view_load (WView *view, const char *_command, const char *_file,
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
 
-    return 0;
+    return TRUE;
 }
 
 static void
@@ -2570,7 +2569,7 @@ view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 int
 view (const char *_command, const char *_file, int *move_dir_p, int start_line)
 {
-    int error;
+    gboolean succeeded;
     WView *wview;
     WButtonBar *bar;
     Dlg_head *view_dlg;
@@ -2587,22 +2586,18 @@ view (const char *_command, const char *_file, int *move_dir_p, int start_line)
     add_widget (view_dlg, bar);
     add_widget (view_dlg, wview);
 
-    error = view_load (wview, _command, _file, start_line);
-    if (move_dir_p)
-	*move_dir_p = 0;
-
-    /* Please note that if you add another widget,
-     * you have to modify view_adjust_size to
-     * be aware of it
-     */
-    if (!error) {
+    succeeded = view_load (wview, _command, _file, start_line);
+    if (succeeded) {
 	run_dlg (view_dlg);
 	if (move_dir_p)
 	    *move_dir_p = wview->move_dir;
+    } else {
+	if (move_dir_p)
+	    *move_dir_p = 0;
     }
     destroy_dlg (view_dlg);
 
-    return !error;
+    return succeeded;
 }
 
 static void
