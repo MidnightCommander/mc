@@ -13,6 +13,7 @@
 	returned values.
 	* view.c (view): Rewrote the code a little bit.
 	* view.h (view): Rewrote the comment.
+	* view.c: Eliminated some ?: operators.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 

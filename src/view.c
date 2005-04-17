@@ -290,7 +290,7 @@ static void view_hexview_move_to_eol(WView *view)
         view->edit_cursor = linestart + view->bytes_per_line - 1;
     } else {
 	filesize = view_get_filesize (view);
-        view->edit_cursor = (filesize != 0) ? filesize - 1 : 0;
+        view->edit_cursor = (filesize >= 1) ? filesize - 1 : 0;
     }
     view->dirty++;
 }
@@ -394,7 +394,7 @@ view_handle_editkey (WView *view, int key)
     struct hexedit_change_node *node;
     byte byte_val;
 
-    /* Has there been a change at this position ? */
+    /* Has there been a change at this position? */
     node = view->change_list;
     while (node && (node->offset != view->edit_cursor))
 	node = node->next;
@@ -1388,8 +1388,8 @@ move_to_bottom (WView *view)
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
-    view->edit_cursor = (view->edit_cursor < view->dpy_text_start) ?
-	view->dpy_text_start : view->edit_cursor;
+    if (view->edit_cursor < view->dpy_text_start)
+	view->edit_cursor = view->dpy_text_start;
     view->dirty++;
 }
 
@@ -1596,9 +1596,9 @@ search (WView *view, char *text,
     search_start = view->search_start;
 
     if (view->direction == 1) {
-	p = found_len ? search_start + 1 : search_start;
+	p = search_start + ((found_len) ? 1 : 0);
     } else {
-	p = (found_len && search_start) ? search_start - 1 : search_start;
+	p = search_start - ((found_len && search_start >= 1) ? 1 : 0);
     }
     beginning = p;
 
@@ -1687,11 +1687,10 @@ block_search (WView *view, const char *buffer, int len)
     got_interrupt ();
     enable_interrupt_key ();
     if (direction == 1)
-	e = view->found_len ? view->search_start + 1 : view->search_start;
+	e = view->search_start + ((view->found_len) ? 1 : 0);
     else
-	e = (view->found_len
-	     && view->search_start) ? view->search_start - 1
-				    : view->search_start;
+	e = view->search_start
+	  - ((view->found_len && view->search_start >= 1) ? 1 : 0);
 
     search_update_steps (view);
     view->update_activate = 0;
@@ -2057,7 +2056,8 @@ regexp_search (WView *view, int direction)
 	return;
     }
 
-    regexp = old ? old : regexp;
+    if (old)
+	regexp = old;
     regexp = input_dialog (_("Search"), _(" Enter regexp:"), regexp);
     if ((!regexp)) {
 	return;
@@ -2854,7 +2854,7 @@ view_close_datasource (WView *view)
 static gboolean
 already_loaded (offset_type offset, offset_type idx, size_t size)
 {
-    return (offset <= idx && idx - offset < size) ? TRUE : FALSE;
+    return (offset <= idx && idx - offset < size);
 }
 
 static void
