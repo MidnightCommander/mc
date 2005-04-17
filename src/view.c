@@ -884,6 +884,7 @@ display (WView *view)
 
     /* Optionally, display a ruler */
     if ((!view->hex_mode) && (ruler)) {
+	const char ruler_chars[] = "|----*----";
 	char r_buff[10];
 	int cl;
 
@@ -895,12 +896,8 @@ display (WView *view)
 		view_gotoyx (view, row, c);
 	    else
 		view_gotoyx (view, row + height - 2, c);
-	    r_buff[0] = '-';
-	    if ((cl % 10) == 0)
-		r_buff[0] = '|';
-	    else if ((cl % 5) == 0)
-		r_buff[0] = '*';
-	    view_add_character (view, r_buff[0]);
+	    view_add_character (view, ruler_chars[cl % 10]);
+
 	    if ((cl != 0) && (cl % 10) == 0) {
 		g_snprintf (r_buff, sizeof (r_buff), "%03d", cl);
 		if (ruler == 1) {
