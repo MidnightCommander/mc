@@ -24,6 +24,8 @@
 	* view.c (display): Renamed width and height to right and bottom.
 	The values of the variables aren't really the width and height
 	of anything.
+	* view.c (display): Renamed frame_shift to left or top, whatever
+	is more appropriate.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 

@@ -865,10 +865,10 @@ static inline int view_count_backspaces (WView *view, off_t offset)
 static offset_type
 display (WView *view)
 {
-    /* FIXME: replace with better named variables */
-    const int frame_shift = view->dpy_frame_size;
-    int col = 0 + frame_shift;
-    int row = STATUS_LINES + frame_shift;
+    const int left = view_get_left (view);
+    const int top  = view_get_top (view);
+    int col = left;
+    int row = view_get_top (view);
     int bottom, right;
     offset_type from;
     int c;
@@ -889,7 +889,7 @@ display (WView *view)
 	int cl;
 
 	attrset (MARKED_COLOR);
-	for (c = frame_shift; c < right; c++) {
+	for (c = left; c < right; c++) {
 	    /* FIXME: possible integer overflow */
 	    cl = c + view->dpy_text_start_col;
 	    if (ruler == 1)
@@ -923,15 +923,15 @@ display (WView *view)
 	char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
 	int bytes;		/* Number of bytes already printed on the line */
 
-	/* Start of text column; keep the last column empty */
-	int text_start = frame_shift + right - (view->bytes_per_line + 1);
+	/* Start of text column */
+	int text_start = right - view->bytes_per_line
+	    - view_is_in_panel (view) ? 0 : 1;
 
-	for (; get_byte (view, from) != -1
-	       && row < bottom; row++) {
+	for (; get_byte (view, from) != -1 && row < bottom; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
 	    g_snprintf (hex_buff, sizeof (hex_buff), OFFSETTYPE_PRIX, from);
-	    view_gotoyx (view, row, frame_shift);
+	    view_gotoyx (view, row, left);
 	    view_add_string (view, hex_buff);
 	    attrset (NORMAL_COLOR);
 
@@ -1051,7 +1051,7 @@ display (WView *view)
     } else {
 	for (; row < bottom && (c = get_byte (view, from)) != -1; from++) {
 	    if ((c == '\n') || (col >= right && view->text_wrap_mode)) {
-		col = frame_shift;
+		col = left;
 		row++;
 		if (c == '\n' || row >= bottom)
 		    continue;
@@ -1059,7 +1059,7 @@ display (WView *view)
 	    if (c == '\r')
 		continue;
 	    if (c == '\t') {
-		col = ((col - frame_shift) / 8) * 8 + 8 + frame_shift;
+		col = ((col - left) / 8) * 8 + 8 + left;
 		continue;
 	    }
 	    if (view->text_nroff_mode && c == '\b') {
@@ -1073,9 +1073,10 @@ display (WView *view)
 		    && is_printable (c_prev)
 		    && (c_prev == c_next || c_prev == '_'
 		        || (c_prev == '+' && c_next == 'o'))) {
-		    if (col <= frame_shift) {
+		    if (col <= left) {
 			/* So it has to be text_wrap_mode - do not need to check for it */
-			if (row == 1 + frame_shift) {
+			/* FIXME: what about the ruler? */
+			if (row == 1 + top) {
 			    from++;
 			    continue;	/* There had to be a bold character on the rightmost position
 					   of the previous undisplayed line */
@@ -1098,7 +1099,7 @@ display (WView *view)
 		attrset (SELECTED_COLOR);
 	    }
 	    /* FIXME: incompatible widths in integer types */
-	    if (col >= frame_shift + view->dpy_text_start_col
+	    if (col >= left + view->dpy_text_start_col
 		&& col < right + view->dpy_text_start_col) {
 		view_gotoyx (view, row, col - view->dpy_text_start_col);
 
