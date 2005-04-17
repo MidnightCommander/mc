@@ -279,7 +279,8 @@ view_get_datacolumns (WView *view)
     return 0;
 }
 
-static void view_hexview_move_to_eol(WView *view)
+static void
+view_hexview_move_to_eol(WView *view)
 {
     offset_type filesize, linestart;
 
@@ -311,7 +312,7 @@ view_done (WView *view)
 static void view_hook (void *);
 
 /* Copies the output from the pipe to the growing buffer, until either
- * the end-of-pipe is reached or the interval [0..ofs) of the growing
+ * the end-of-pipe is reached or the interval [0..ofs) or the growing
  * buffer is completely filled. */
 static void
 view_growbuf_read_until (WView *view, offset_type ofs)
@@ -517,7 +518,7 @@ view_ok_to_quit (WView *view)
 	return 1;
 
     r = query_dialog (_("Quit"),
-		      _(" File was modified, Save with exit? "), 2, 3,
+		      _(" File was modified, Save with exit? "), D_NORMAL, 3,
 		      _("&Cancel quit"), _("&Yes"), _("&No"));
 
     switch (r) {
