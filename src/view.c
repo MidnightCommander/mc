@@ -256,26 +256,55 @@ get_byte_indexed (WView *view, offset_type base, offset_type ofs)
     return -1;
 }
 
+static inline int
+view_get_top (WView *view)
+{
+    return view->dpy_frame_size + STATUS_LINES;
+}
+
+static inline int
+view_get_left (WView *view)
+{
+    return view->dpy_frame_size;
+}
+
+static inline int
+view_get_bottom (WView *view)
+{
+    if (view->widget.lines >= view->dpy_frame_size)
+	return view->widget.lines - view->dpy_frame_size;
+    return 0;
+}
+
+static inline int
+view_get_right (WView *view)
+{
+    if (view->widget.cols >= view->dpy_frame_size)
+	return view->widget.cols - view->dpy_frame_size;
+    return 0;
+}
+
 /* the number of lines that can be used for displaying data */
 static inline int
 view_get_datalines (WView *view)
 {
-    const int framelines = 2 * view->dpy_frame_size;
-    const int statuslines = STATUS_LINES;
+    const int top    = view_get_top (view);
+    const int bottom = view_get_bottom (view);
 
-    if (view->widget.lines < framelines + statuslines)
-	return 0;
-    return view->widget.lines - (framelines + statuslines);
+    if (bottom >= top)
+	return bottom - top;
+    return 0;
 }
 
 /* the number of columns that can be used for displaying data */
 static inline int
 view_get_datacolumns (WView *view)
 {
-    const int framelines = 2 * view->dpy_frame_size;
+    const int left  = view_get_left (view);
+    const int right = view_get_right (view);
 
-    if (framelines < view->widget.cols)
-	return view->widget.cols - framelines;
+    if (right >= left)
+	return right - left;
     return 0;
 }
 

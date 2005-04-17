@@ -15,6 +15,9 @@
 	* view.h (view): Rewrote the comment.
 	* view.c: Eliminated some ?: operators.
 	* view.c: Corrected some typos and indentation.
+	* view.c: Added four functions view_get_top(), view_get_left(),
+	view_get_bottom(), view_get_right() to mark the bounds of the
+	rectangle that can be used for displaying data.
 
 2005-04-16  Roland Illig  <roland.illig@gmx.de>
 
