@@ -338,8 +338,6 @@ view_done (WView *view)
     global_wrap_mode = view->text_wrap_mode;
 }
 
-static void view_hook (void *);
-
 /* Copies the output from the pipe to the growing buffer, until either
  * the end-of-pipe is reached or the interval [0..ofs) or the growing
  * buffer is completely filled. */
@@ -398,7 +396,6 @@ view_growbuf_read_until (WView *view, offset_type ofs)
         view_update_last_byte (view);
     }
 }
-
 
 static void
 enqueue_change (struct hexedit_change_node **head,
@@ -829,7 +826,7 @@ static inline void
 view_display_clean (WView *view, int height, int width)
 {
     /* FIXME: Should I use widget_erase only and repaint the box? */
-    if (view->dpy_frame_size) {
+    if (view->dpy_frame_size != 0) {
 	int i;
 
 	draw_double_box (view->widget.parent, view->widget.y,
@@ -855,7 +852,8 @@ typedef enum {
     MARK_CHANGED = 3
 } mark_t;
 
-static inline int view_count_backspaces (WView *view, off_t offset)
+static inline int
+view_count_backspaces (WView *view, off_t offset)
 {
     int backspaces = 0;
     while (offset >= 2 * backspaces
