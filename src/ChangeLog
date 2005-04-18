@@ -2,6 +2,8 @@
 
 	* view.c (struct WView): Moved the growing buffer variables
 	between the data source and the display section.
+	* view.c (save_edit_changes): Renamed to
+	view_hexedit_save_changes().
 
 2005-04-17  Roland Illig  <roland.illig@gmx.de>
 

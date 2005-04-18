@@ -487,7 +487,7 @@ free_change_list (WView *view)
 }
 
 static gboolean
-save_edit_changes (WView *view)
+view_hexedit_save_changes (WView *view)
 {
     struct hexedit_change_node *curr, *next;
     int fp, answer;
@@ -552,7 +552,7 @@ view_ok_to_quit (WView *view)
 
     switch (r) {
     case 1:
-	return save_edit_changes (view);
+	return view_hexedit_edit_changes (view);
     case 2:
 	free_change_list (view);
 	return TRUE;
@@ -2083,7 +2083,7 @@ regexp_search (WView *view, int direction)
     if (view->hex_mode) {
 	/* Save it without a confirmation prompt */
 	if (view->change_list)
-	    save_edit_changes (view);
+	    view_hexedit_save_changes (view);
 	return;
     }
 
