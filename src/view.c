@@ -552,7 +552,7 @@ view_ok_to_quit (WView *view)
 
     switch (r) {
     case 1:
-	return view_hexedit_edit_changes (view);
+	return view_hexedit_save_changes (view);
     case 2:
 	free_change_list (view);
 	return TRUE;
