@@ -1,3 +1,8 @@
+2005-04-18  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (struct WView): Moved the growing buffer variables
+	between the data source and the display section.
+
 2005-04-17  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (save_edit_changes): Completely rewritten to be robust

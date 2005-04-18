@@ -123,6 +123,14 @@ struct WView {
     byte  *ds_string_data;	/* The characters of the string */
     size_t ds_string_len;	/* The length of the string */
 
+    /* Growing buffers information */
+    gboolean growbuf_in_use;	/* Use the growing buffers? */
+    byte   **growbuf_blockptr;	/* Pointer to the block pointers */
+    size_t   growbuf_blocks;	/* The number of blocks in *block_ptr */
+    size_t   growbuf_lastindex;	/* Number of bytes in the last page of the
+                                   growing buffer */
+    gboolean growbuf_finished;	/* TRUE when all data has been read. */
+
     /* Editor modes */
     gboolean hex_mode;		/* Hexview or Hexedit */
     gboolean hexedit_mode;	/* Hexedit */
@@ -150,14 +158,6 @@ struct WView {
 
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
-
-    /* Growing buffers information */
-    gboolean growbuf_in_use;	/* Use the growing buffers? */
-    byte **growbuf_blockptr;	/* Pointer to the block pointers */
-    size_t growbuf_blocks;	/* The number of blocks in *block_ptr */
-    size_t growbuf_lastindex;   /* Number of bytes in the last page of the
-                                   growing buffer */
-    gboolean growbuf_finished;	/* TRUE when all data has been read. */
 
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
