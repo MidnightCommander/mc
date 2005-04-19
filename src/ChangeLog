@@ -9,6 +9,8 @@
 	* view.c (view_move_forward2): Early return if get_byte() returns
 	-1.
 	* view.c: Replaced const_cast with str_unconst.
+	* view.c (display): Extracted the code for drawing the ruler into
+	its own function, view_display_ruler(). Rewrote it.
 
 2005-04-18  Roland Illig  <roland.illig@gmx.de>
 

@@ -77,6 +77,7 @@ typedef unsigned long offset_type;
 #define INVALID_OFFSET ((offset_type) -1)
 #define OFFSETTYPE_MAX (~((offset_type) 0))
 #define OFFSETTYPE_PRIX		"%08lX"
+#define OFFSETTYPE_PRId		"%lu"
 
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
@@ -864,6 +865,38 @@ view_count_backspaces (WView *view, off_t offset)
     return backspaces;
 }
 
+static void
+view_display_ruler (WView *view)
+{
+    const char ruler_chars[] = "|----*----";
+
+    const int top    = view_get_top (view);
+    const int left   = view_get_left (view);
+    const int bottom = view_get_bottom (view);
+    const int right  = view_get_right (view);
+
+    const int line_row = (ruler == 1) ? top + 0 : (bottom - 1) - 0;
+    const int nums_row = (ruler == 1) ? top + 1 : (bottom - 1) - 1;
+    char r_buff[10];
+    offset_type cl;
+    int c;
+
+    attrset (MARKED_COLOR);
+    for (c = left; c < right; c++) {
+	/* FIXME: possible integer overflow */
+	cl = c + view->dpy_text_start_col;
+	view_gotoyx (view, line_row, c);
+	view_add_character (view, ruler_chars[cl % 10]);
+
+	if ((cl != 0) && (cl % 10) == 0) {
+	    g_snprintf (r_buff, sizeof (r_buff), OFFSETTYPE_PRId, cl);
+	    widget_move (view, nums_row, c - 1);
+	    view_add_string (view, r_buff);
+	}
+    }
+    attrset (NORMAL_COLOR);
+}
+
 /* Shows the file pointed to by *dpy_text_start on view_win */
 static offset_type
 display (WView *view)
@@ -887,31 +920,7 @@ display (WView *view)
 
     /* Optionally, display a ruler */
     if ((!view->hex_mode) && (ruler)) {
-	const char ruler_chars[] = "|----*----";
-	char r_buff[10];
-	int cl;
-
-	attrset (MARKED_COLOR);
-	for (c = left; c < right; c++) {
-	    /* FIXME: possible integer overflow */
-	    cl = c + view->dpy_text_start_col;
-	    if (ruler == 1)
-		view_gotoyx (view, row, c);
-	    else
-		view_gotoyx (view, bottom - 1, c);
-	    view_add_character (view, ruler_chars[cl % 10]);
-
-	    if ((cl != 0) && (cl % 10) == 0) {
-		g_snprintf (r_buff, sizeof (r_buff), "%03d", cl);
-		if (ruler == 1) {
-		    widget_move (view, row + 1, c - 1);
-		} else {
-		    widget_move (view, bottom - 2, c - 1);
-		}
-		view_add_string (view, r_buff);
-	    }
-	}
-	attrset (NORMAL_COLOR);
+	view_display_ruler (view);
 	if (ruler == 1)
 	    row += 2;
 	else
