@@ -139,6 +139,9 @@ struct WView {
     gboolean text_wrap_mode;	/* Wrap text lines to fit them on the screen */
     gboolean magic_mode;	/* Preprocess the file using external programs */
 
+    /* Additional editor state */
+    gboolean hexedit_lownibble;	/* Are we editing the last significant nibble? */
+
     /* Display information */
     int         dpy_frame_size;	/* Size of the frame surrounding the real viewer */
     offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
@@ -148,7 +151,6 @@ struct WView {
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
-    int nib_shift:1;		/* Set if editing the least significant nibble */
     screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
@@ -444,10 +446,10 @@ view_handle_editkey (WView *view, int key)
 	else
 	    byte_val = get_byte (view, view->edit_cursor);
 
-	if (!view->nib_shift) {
-	    byte_val = (byte_val & 0x0f) | (hexvalue << 4);
-	} else {
+	if (view->hexedit_lownibble) {
 	    byte_val = (byte_val & 0xf0) | (hexvalue);
+	} else {
+	    byte_val = (byte_val & 0x0f) | (hexvalue << 4);
 	}
     } else {
 	/* Text editing */
@@ -721,7 +723,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view->text_wrap_mode = saved_wrap_mode;
     }
     view->edit_cursor = 0;
-    view->nib_shift = 0;
+    view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
 
@@ -1127,7 +1129,7 @@ view_place_cursor (WView *view)
 {
     int shift;
 
-    if (!view->hexview_in_text && view->nib_shift)
+    if (!view->hexview_in_text && view->hexedit_lownibble)
 	shift = 1;
     else
 	shift = 0;
@@ -1405,7 +1407,7 @@ move_to_top (WView *view)
     view->search_start = view->dpy_text_start = 0;
     view->found_len = 0;
     view->last = ((LINES - 2) * view->bytes_per_line);
-    view->nib_shift = 0;
+    view->hexedit_lownibble = FALSE;
     view->edit_cursor = view->dpy_text_start;
     view->dirty++;
 }
@@ -1432,8 +1434,8 @@ move_right (WView *view)
 	view->last = ((LINES - 2) * view->bytes_per_line);
 
 	if (view->hex_mode && !view->hexview_in_text) {
-	    view->nib_shift = !view->nib_shift;
-	    if (view->nib_shift)
+	    view->hexedit_lownibble = !view->hexedit_lownibble;
+	    if (view->hexedit_lownibble)
 		return;
 	}
 	if (get_byte_indexed (view, view->edit_cursor, 1) != -1)
@@ -1454,8 +1456,8 @@ move_left (WView *view)
 	return;
     if (view->hex_mode) {
 	if (view->hex_mode && !view->hexview_in_text) {
-	    view->nib_shift = !view->nib_shift;
-	    if (!view->nib_shift)
+	    view->hexedit_lownibble = !view->hexedit_lownibble;
+	    if (!view->hexedit_lownibble)
 		return;
 	}
 	if (view->edit_cursor > 0)
@@ -1870,7 +1872,7 @@ hex_search (WView *view, const char *text)
     view->found_len = block_len;
     /* Set the edit cursor to the search position, left nibble */
     view->edit_cursor = view->search_start;
-    view->nib_shift = 0;
+    view->hexedit_lownibble = FALSE;
 
     /* Adjust the file offset */
     view->dpy_text_start = pos - pos % view->bytes_per_line;
@@ -2734,7 +2736,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->dpy_text_start_col = 0;
     view->edit_cursor       = 0;
     view->hexedit_mode      = default_hexedit_mode;
-    view->nib_shift         = FALSE;
+    view->hexedit_lownibble = FALSE;
     view->hexview_in_text   = FALSE;
     view->start_save        = 0;
     view->cursor_col        = 0;
