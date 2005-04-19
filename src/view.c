@@ -793,16 +793,16 @@ view_status (WView *view)
 			    view->command ? view->command : "", w));
     else {
 	i = (w > 22 ? 22 : w) - i18n_adjust;
-	printw (const_cast(char *, file_label), name_trunc (view->filename ? view->filename :
+	printw (str_unconst (file_label), name_trunc (view->filename ? view->filename :
 					view->command ? view->command : "",
 					i));
 	if (w > 46) {
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
 	    if (view->hex_mode)
-		printw (const_cast(char *, _("Offset 0x%08lx")), view->edit_cursor);
+		printw (str_unconst (_("Offset 0x%08lx")), view->edit_cursor);
 	    else
-		printw (const_cast(char *, _("Col %lu")), view->dpy_text_start_col);
+		printw (str_unconst (_("Col %lu")), view->dpy_text_start_col);
 	}
 	if (w > 62) {
 	    offset_type filesize;
@@ -810,9 +810,9 @@ view_status (WView *view)
 	    filesize = view_get_filesize_with_exact (view, &exact);
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
 	    if (exact) {
-		printw (const_cast(char *, _("%s bytes")), size_trunc (filesize));
+		printw (str_unconst (_("%s bytes")), size_trunc (filesize));
 	    } else {
-		printw (const_cast(char *, _(">= %s bytes")), size_trunc (filesize));
+		printw (str_unconst (_(">= %s bytes")), size_trunc (filesize));
 	    }
 	}
 	if (w > 26) {
