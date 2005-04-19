@@ -4,6 +4,8 @@
 	ds_file_datasize to be a power of two.
 	* view.c (struct WView): Renamed nib_shift to hexedit_lownibble.
 	Replaced 0 literals with FALSE.
+	* view.c (view_free_growing_buffer): Renamed to
+	view_growbuf_free(). Simplified the code.
 
 2005-04-18  Roland Illig  <roland.illig@gmx.de>
 

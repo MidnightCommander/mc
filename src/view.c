@@ -2826,20 +2826,17 @@ view_update_last_byte (WView *view)
 }
 
 static void
-view_free_growing_buffer (WView *view)
+view_growbuf_free (WView *view)
 {
-    if (view->growbuf_in_use) {
-	/* block_ptr may be zero if the file was a file with 0 bytes */
-	if (view->growbuf_blockptr) {
-	    size_t i;
+    size_t i;
 
-	    for (i = 0; i < view->growbuf_blocks; i++)
-	        g_free (view->growbuf_blockptr[i]);
-	    g_free (view->growbuf_blockptr);
-	    view->growbuf_blockptr = NULL;
-	}
-	view->growbuf_in_use = FALSE;
-    }
+    assert (view->growbuf_in_use);
+
+    for (i = 0; i < view->growbuf_blocks; i++)
+	g_free (view->growbuf_blockptr[i]);
+    g_free (view->growbuf_blockptr);
+    view->growbuf_blockptr = NULL;
+    view->growbuf_in_use = FALSE;
 }
 
 static void
@@ -2854,14 +2851,14 @@ view_close_datasource (WView *view)
 		close_error_pipe (0, NULL);
 		view->ds_stdio_pipe = NULL;
 	    }
-	    view_free_growing_buffer (view);
+	    view_growbuf_free (view);
 	    break;
 	case DS_VFS_PIPE:
 	    if (view->ds_vfs_pipe != -1) {
 		(void) mc_close (view->ds_vfs_pipe);
 		view->ds_vfs_pipe = -1;
 	    }
-	    view_free_growing_buffer (view);
+	    view_growbuf_free (view);
 	    break;
 	case DS_FILE:
 	    (void) mc_close (view->ds_file_fd);
