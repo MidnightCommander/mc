@@ -6,6 +6,8 @@
 	Replaced 0 literals with FALSE.
 	* view.c (view_free_growing_buffer): Renamed to
 	view_growbuf_free(). Simplified the code.
+	* view.c (view_move_forward2): Early return if get_byte() returns
+	-1.
 
 2005-04-18  Roland Illig  <roland.illig@gmx.de>
 

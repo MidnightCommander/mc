@@ -1225,8 +1225,9 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    if (lines != -1 && line >= lines)
 		return p;
 
-	    /* FIXME: what if get_byte() returns -1? */
-	    c = get_byte (view, p);
+	    /* end of file or reading error -- stop going forward */
+	    if ((c = get_byte (view, p)) == -1)
+		return p;
 
 	    if (view->text_wrap_mode) {
 		if (c == '\r')
