@@ -2896,10 +2896,7 @@ view_file_load_data (WView *view, offset_type byte_index)
     if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
 	return;
 
-    /* ds_file_datasize must be a power of two. */
-    assert ((view->ds_file_datasize & (view->ds_file_datasize - 1)) == 0);
-    blockoffset = byte_index &- (view->ds_file_datasize);
-
+    blockoffset = byte_index - byte_index % view->ds_file_datasize;
     if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
 	goto error;
 

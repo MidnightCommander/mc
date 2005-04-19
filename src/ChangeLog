@@ -1,3 +1,8 @@
+2005-04-19  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_file_load_data): Removed the requirement for
+	ds_file_datasize to be a power of two.
+
 2005-04-18  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (struct WView): Moved the growing buffer variables
