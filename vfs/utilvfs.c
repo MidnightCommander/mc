@@ -336,17 +336,21 @@ is_month (const char *str, struct tm *tim)
 
 /*
  * Check for possible locale's abbreviated month name (Jan..Dec).
- * Any 3 bytes long string without digit and control characters.
+ * Any 3 bytes long string without digit, control and punctuation characters.
  * isalpha() is locale specific, so it cannot be used if current
  * locale is "C" and ftp server use Cyrillic.
- * TODO: Punctuation characters also cannot be part of month name.
  * NB: It is assumed there are no whitespaces in month.
  */
 static int
 is_localized_month (const unsigned char *month)
 {
     int i = 0;
-    while ((i < 3) && *month && !isdigit (*month) && !iscntrl (*month)) {
+
+    if (!month)
+	return 0;
+
+    while ((i < 3) && *month && !isdigit (*month) && !iscntrl (*month)
+	   && !ispunct (*month)) {
 	i++;
 	month++;
     }

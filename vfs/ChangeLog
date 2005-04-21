@@ -1,3 +1,8 @@
+2005-04-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* utilvfs.c (is_localized_month): Check "month" for NULL and
+	forbid punctuation characters in localized month abbreviation.
+
 2005-04-13  Roland Illig  <roland.illig@gmx.de>
 
 	* vfs.h: Fixed prototypes for mc_read() and mc_write(). Now they
