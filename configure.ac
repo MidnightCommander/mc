@@ -553,17 +553,7 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-if test x"$USE_MAINTAINER_MODE" = x"yes"; then
-    if test x"${enable_gcc_warnings+set}" != x"set"; then
-        if test x"${GCC}" = x"yes"; then
-            CFLAGS="-Wall $CFLAGS"
-        fi
-    fi
-else
-    CPPFLAGS="-DNDEBUG ${CPPFLAGS}"
-fi
-
-ri_GCC_WARNINGS
+MC_ARG_ENABLE_DEVELOPER_MODE()
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
