@@ -316,6 +316,25 @@ Programming Tips
 
 (This list should be sorted alphabetically.)
 
+?: This operator has a precedence that is easy to use the wrong way. You
+	might think that
+
+		int right = 25 + have_frame() ? 1 : 0; /* WRONG */
+
+	results in either 25 or 26. This is not the case. The C compiler
+	sees this as:
+
+		int right = (25 + have_frame()) ? 1 : 0; /* WRONG */
+
+	To avoid this, put the ?: in parentheses, like this
+
+		int right = 25 + (have_frame() ? 1 : 0); /* RIGHT */
+
+	If the condition is more complicated, put it in additional
+	parentheses:
+
+		int right = 25 + ((have_frame()) ? 1 : 0); /* RIGHT */
+
 const: For every function taking a string argument, decide whether you
 	(as a user of the function) would expect that the string is modi-
 	fied by the function. If not, declare the string argument as
