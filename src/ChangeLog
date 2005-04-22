@@ -3,6 +3,8 @@
 	* view.c (view_move_forward2): Fixed a bug discovered by
 	Jindrich Makovicka. The return value did not take into account
 	the value of the `upto' parameter.
+	* view.c (view_move_forward2): Added more assertions. Rewrote
+	condition for breaking out of the loop when upto == 0.
 
 2005-04-19  Roland Illig  <roland.illig@gmx.de>
 

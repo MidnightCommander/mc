@@ -1187,7 +1187,7 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
     buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, view);
 }
 
-/* If the last parameter is nonzero, it means we want get the count of lines
+/* If the last argument is nonzero, it means we want get the count of lines
    from current up to the the upto position inclusive */
 static offset_type
 view_move_forward2 (WView *view, offset_type current, int lines, offset_type upto)
@@ -1196,6 +1196,9 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
     offset_type q, p, last_byte;
     int line, nextline, lastline, datalines;
     int col = 0;
+
+    assert (lines >= 0);
+    assert (lines == 0 || upto == 0);
 
     if (view->hex_mode) {
 	assert (upto == 0);
@@ -1221,11 +1224,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	}
 	return p;
     } else {
-	if (upto) {
-	    lines = -1;
-	    q = upto;
-	} else
-	    q = view_get_filesize (view);
+	q = (upto) ? upto : view_get_filesize (view);
 
 	/* FIXME: what if get_byte() returns -1? */
 	if (get_byte (view, q) != '\n')
@@ -1233,7 +1232,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	for (line = col = 0, p = current; p < q; p++) {
 	    int c;
 
-	    if (lines != -1 && line >= lines)
+	    if (upto == 0 && line >= lines)
 		break;
 
 	    /* end of file or reading error -- stop going forward */
