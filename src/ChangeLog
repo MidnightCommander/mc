@@ -5,6 +5,8 @@
 	the value of the `upto' parameter.
 	* view.c (view_move_forward2): Added more assertions. Rewrote
 	condition for breaking out of the loop when upto == 0.
+	* view.c (display): Fixed operator precedence with ?: in hex
+	display.
 
 2005-04-19  Roland Illig  <roland.illig@gmx.de>
 

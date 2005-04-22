@@ -937,7 +937,7 @@ display (WView *view)
 
 	/* Start of text column */
 	int text_start = right - view->bytes_per_line
-	    - view_is_in_panel (view) ? 0 : 1;
+	    - (view_is_in_panel (view) ? 0 : 1);
 
 	for (; get_byte (view, from) != -1 && row < bottom; row++) {
 	    /* Print the hex offset */
