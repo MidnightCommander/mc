@@ -1198,6 +1198,8 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
     int col = 0;
 
     if (view->hex_mode) {
+	assert (upto == 0);
+
 	last_byte = view_get_filesize (view);
 	p = current + lines * view->bytes_per_line;
 	if (p >= last_byte)
@@ -1232,12 +1234,12 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    int c;
 
 	    if (lines != -1 && line >= lines)
-		return p;
+		break;
 
 	    /* end of file or reading error -- stop going forward */
 	    if ((c = get_byte (view, p)) == -1)
-		return p;
-
+		break;
+	    
 	    if (view->text_wrap_mode) {
 		if (c == '\r')
 		    continue;	/* This characters is never displayed */
