@@ -1273,10 +1273,8 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    } else if (c == '\n')
 		line++;
 	}
-	if (upto)
-	    return line;
+	return (upto) ? line : p;
     }
-    return current;
 }
 
 /* special case for text (non-hex) mode with line wrapping. */
