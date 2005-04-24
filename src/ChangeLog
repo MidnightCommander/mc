@@ -1,3 +1,11 @@
+2005-04-25  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_move_forward2): Fixed a bug related to the return
+	value, which had made the down and page-down keys no-ops.
+	* view.c (init_growing_view): Renamed to
+	view_load_command_output(). Removed dead code. Removed unused
+	parameter.
+
 2005-04-22  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_move_forward2): Fixed a bug discovered by
@@ -7,8 +15,6 @@
 	condition for breaking out of the loop when upto == 0.
 	* view.c (display): Fixed operator precedence with ?: in hex
 	display.
-	* view.c (view_move_forward2): Fixed a bug related to the return
-	value, which had made the down and page-down keys no-ops.
 
 2005-04-19  Roland Illig  <roland.illig@gmx.de>
 

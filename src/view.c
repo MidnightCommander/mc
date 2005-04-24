@@ -574,18 +574,16 @@ set_view_init_error (WView *view, const char *msg)
 
 /* return values: NULL for success, else points to error message */
 static char *
-init_growing_view (WView *view, const char *name, const char *filename)
+view_load_command_output (WView *view, const char *command)
 {
     const char *err_msg = NULL;
+    FILE *fp;
 
     view_close_datasource (view);
     view_update_last_byte (view);
 
-    if (name) {
-	FILE *fp;
-
 	open_error_pipe ();
-	if ((fp = popen (name, "r")) == NULL) {
+	if ((fp = popen (command, "r")) == NULL) {
 	    /* Avoid two messages.  Message from stderr has priority.  */
 	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
 		err_msg = _(" Cannot spawn child program ");
@@ -602,16 +600,6 @@ init_growing_view (WView *view, const char *name, const char *filename)
 		err_msg = _("Empty output from child filter");
 	    return set_view_init_error (view, err_msg);
 	}
-    } else {
-	int fd;
-
-	fd = mc_open (filename, O_RDONLY);
-	if (fd == -1) {
-	    err_msg = _(" Cannot open file ");
-	    return set_view_init_error (view, err_msg);
-	}
-	view_set_datasource_vfs_pipe (view, fd);
-    }
     return NULL;
 }
 
@@ -644,7 +632,7 @@ view_load (WView *view, const char *_command, const char *_file,
     }
 
     if (_command && (view->magic_mode || _file[0] == '\0')) {
-	error = init_growing_view (view, _command, view->filename);
+	error = view_load_command_output (view, _command);
     } else if (_file[0]) {
 	int cntlflags;
 
