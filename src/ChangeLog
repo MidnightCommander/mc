@@ -7,6 +7,9 @@
 	parameter.
 	* view.c (offset_type): Adjusted the PRI[dX] constants to be
 	like the ISO C99 PRI* constants.
+	* view.c (struct WView): Replaced view->last with
+	view->dpy_complete. The former variable's name didn't match its
+	value.
 
 2005-04-22  Roland Illig  <roland.illig@gmx.de>
 

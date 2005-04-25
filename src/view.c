@@ -148,7 +148,7 @@ struct WView {
     offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
     offset_type dpy_text_start_col;
     				/* Column at the left side of the viewer */
-    offset_type last;           /* Last byte shown */
+    gboolean    dpy_complete;	/* The complete file fits on one screen */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
@@ -619,7 +619,6 @@ view_load (WView *view, const char *_command, const char *_file,
     view_set_datasource_none (view);
     view->filename = g_strdup (_file);
     view->command = 0;
-    view->last = ((LINES - 2) * view->bytes_per_line);
     view_update_last_byte (view);
 
     /* Clear the markers */
@@ -748,7 +747,7 @@ view_percent (WView *view, offset_type p)
     if (!exact)
 	return;
 
-    if (filesize == 0 || filesize == view->last)
+    if (filesize == 0 || view->dpy_complete)
         percent = 100;
     else if (p > (INT_MAX / 100))
         percent = p / (filesize / 100);
@@ -1117,7 +1116,7 @@ display (WView *view)
 	    }
 	}
     }
-    view->last = from;
+    view->dpy_complete = (get_byte (view, from) == -1);
     return from;
 }
 
@@ -1352,7 +1351,6 @@ view_move_backward (WView *view, int i)
     view->search_start = view->dpy_text_start =
 	move_backward2 (view, view->dpy_text_start, i);
     view->found_len = 0;
-    view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
 }
 
@@ -1393,7 +1391,6 @@ view_move_forward (WView *view, int i)
 	view->dpy_text_start = view->bottom_first;
     view->search_start = view->dpy_text_start;
     view->found_len = 0;
-    view->last = ((LINES - 2) * view->bytes_per_line);
     view->dirty++;
 }
 
@@ -1403,7 +1400,6 @@ move_to_top (WView *view)
 {
     view->search_start = view->dpy_text_start = 0;
     view->found_len = 0;
-    view->last = ((LINES - 2) * view->bytes_per_line);
     view->hexedit_lownibble = FALSE;
     view->edit_cursor = view->dpy_text_start;
     view->dirty++;
@@ -1415,7 +1411,6 @@ move_to_bottom (WView *view)
     view->search_start = view->dpy_text_start =
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
-    view->last = ((LINES - 2) * view->bytes_per_line);
     if (view->edit_cursor < view->dpy_text_start)
 	view->edit_cursor = view->dpy_text_start;
     view->dirty++;
@@ -1425,11 +1420,11 @@ move_to_bottom (WView *view)
 static void
 move_right (WView *view)
 {
+    offset_type bytes_on_screen;
+
     if (view->text_wrap_mode && !view->hex_mode)
 	return;
     if (view->hex_mode) {
-	view->last = ((LINES - 2) * view->bytes_per_line);
-
 	if (view->hex_mode && !view->hexview_in_text) {
 	    view->hexedit_lownibble = !view->hexedit_lownibble;
 	    if (view->hexedit_lownibble)
@@ -1437,7 +1432,8 @@ move_right (WView *view)
 	}
 	if (get_byte_indexed (view, view->edit_cursor, 1) != -1)
 	    view->edit_cursor++;
-	if (view->edit_cursor >= view->last) {
+	bytes_on_screen = view_get_datalines (view) * view->bytes_per_line;
+	if (view->edit_cursor >= view->dpy_text_start + bytes_on_screen) {
 	    view->edit_cursor -= view->bytes_per_line;
 	    view_move_forward (view, 1);
 	}
@@ -2727,7 +2723,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view_set_datasource_none (view);
 
     view->dpy_frame_size    = is_panel ? 1 : 0;
-    view->last              = 0;
     view->bottom_first      = INVALID_OFFSET;
     view->dpy_text_start    = 0;
     view->dpy_text_start_col = 0;
