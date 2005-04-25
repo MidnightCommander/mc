@@ -76,8 +76,8 @@ typedef unsigned char byte;
 typedef unsigned long offset_type;
 #define INVALID_OFFSET ((offset_type) -1)
 #define OFFSETTYPE_MAX (~((offset_type) 0))
-#define OFFSETTYPE_PRIX		"%08lX"
-#define OFFSETTYPE_PRId		"%lu"
+#define OFFSETTYPE_PRIX		"lX"
+#define OFFSETTYPE_PRId		"lu"
 
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
@@ -877,7 +877,7 @@ view_display_ruler (WView *view)
 	view_add_character (view, ruler_chars[cl % 10]);
 
 	if ((cl != 0) && (cl % 10) == 0) {
-	    g_snprintf (r_buff, sizeof (r_buff), OFFSETTYPE_PRId, cl);
+	    g_snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
 	    widget_move (view, nums_row, c - 1);
 	    view_add_string (view, r_buff);
 	}
@@ -930,7 +930,7 @@ display (WView *view)
 	for (; get_byte (view, from) != -1 && row < bottom; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
-	    g_snprintf (hex_buff, sizeof (hex_buff), OFFSETTYPE_PRIX, from);
+	    g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
 	    view_gotoyx (view, row, left);
 	    view_add_string (view, hex_buff);
 	    attrset (NORMAL_COLOR);

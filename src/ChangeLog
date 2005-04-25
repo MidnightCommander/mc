@@ -5,6 +5,8 @@
 	* view.c (init_growing_view): Renamed to
 	view_load_command_output(). Removed dead code. Removed unused
 	parameter.
+	* view.c (offset_type): Adjusted the PRI[dX] constants to be
+	like the ISO C99 PRI* constants.
 
 2005-04-22  Roland Illig  <roland.illig@gmx.de>
 
