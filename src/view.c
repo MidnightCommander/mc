@@ -147,7 +147,7 @@ struct WView {
     int         dpy_frame_size;	/* Size of the frame surrounding the real viewer */
     offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
     offset_type dpy_text_start_col;
-    				/* Column at the left side of the viewer */
+				/* Column at the left side of the viewer */
     gboolean    dpy_complete;	/* The complete file fits on one screen */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
@@ -566,7 +566,7 @@ set_view_init_error (WView *view, const char *msg)
 {
     if (msg) {
 	view_close_datasource (view);
-	view_set_datasource_string (view, msg);    
+	view_set_datasource_string (view, msg);
         return g_strdup (msg);
     }
     return NULL;
@@ -699,7 +699,7 @@ view_load (WView *view, const char *_command, const char *_file,
 
     if (error) {
 	view_close_datasource (view);
-	view_set_datasource_string (view, error);    
+	view_set_datasource_string (view, error);
     }
 
     if (start_line > 1 && !error) {
@@ -1225,7 +1225,7 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    /* end of file or reading error -- stop going forward */
 	    if ((c = get_byte (view, p)) == -1)
 		break;
-	    
+
 	    if (view->text_wrap_mode) {
 		if (c == '\r')
 		    continue;	/* This characters is never displayed */
