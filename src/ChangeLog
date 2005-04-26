@@ -1,3 +1,8 @@
+2005-04-26  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Added some calls to str_unconst() to get rid of the
+	GCC warnings.
+
 2005-04-25  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_move_forward2): Fixed a bug related to the return

@@ -755,7 +755,7 @@ view_percent (WView *view, offset_type p)
         percent = p * 100 / filesize;
 
     widget_move (view, view->dpy_frame_size, xpos);
-    printw ("%3d%%", percent);
+    printw (str_unconst ("%3d%%"), percent);
 }
 
 static void
@@ -824,7 +824,7 @@ view_display_clean (WView *view, int height, int width)
 			 view->widget.cols);
 	for (i = 1; i < height; i++) {
 	    widget_move (view, i, 1);
-	    printw ("%*s", width - 1, "");
+	    printw (str_unconst ("%*s"), width - 1, "");
 	}
     } else
 	widget_erase ((Widget *) view);
@@ -2069,7 +2069,7 @@ goto_addr (WView *view)
 static void
 regexp_search (WView *view, int direction)
 {
-    char *regexp = "";
+    char *regexp = str_unconst ("");
     static char *old = 0;
 
     /* This is really an F6 key handler */
@@ -2109,7 +2109,7 @@ static void
 normal_search (WView *view)
 {
     static char *old;
-    char *exp = old ? old : "";
+    char *exp = old ? old : str_unconst ("");
 
     enum {
 	SEARCH_DLG_HEIGHT = 8,
