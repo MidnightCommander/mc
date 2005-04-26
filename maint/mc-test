@@ -21,6 +21,7 @@ LC_ALL="C"; export LC_ALL
 ### set default configuration ###
 
 mc_nice_value="19"
+mc_maxlines="10"
 
 mc_basedir="/tmp/mc-current-build"
 mc_srcdir=""			# default: ${mc_basedir}/src
@@ -81,6 +82,7 @@ usage: `basename $0` [options ...] [<testname ...>]
 
 	-fast			only do what's necessary
 	-nice <n>		set the nice(1) value (default: ${mc_nice_value})
+	-maxlines <n>		the maximum number of lines for each phase (default: ${mc_maxlines})
 	-quiet			disable most status messages (default: ${quiet:-"no"}${quiet+"yes"})
 EOF
 	exit 1
@@ -117,6 +119,7 @@ while test $# -ne 0; do
 					do_make_clean=no
 					do_make_all=yes;;
 		-nice)			shift; mc_nice_value="$1"; shift;;
+		-maxlines)		shift; mc_maxlines="$1"; shift;;
 		-quiet)			shift; quiet="yes";;
 
 		--) shift; break;;
@@ -160,7 +163,7 @@ fi
 show_file() {
 	if test -f "$1"; then
 		echo "" 1>&2
-		sed -e '10s,.*,(more lines follow ...),' -e '10q' "$1" 1>&2
+		sed -e "${mc_maxlines}s,.*,(more lines follow ...)," -e "${mc_maxlines}q" "$1" 1>&2
 		echo "" 1>&2
 	fi
 	return 0
