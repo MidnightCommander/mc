@@ -1,3 +1,8 @@
+2005-04-26  Roland Illig  <roland.illig@gmx.de>
+
+	* acinclude.m4: Renamed AS_HELP_STRING to AC_HELP_STRING for
+	compatibility with autoconf-2.57.
+
 2005-04-22  Roland Illig  <roland.illig@gmx.de>
 
 	* acinclude.m4: Added macro MC_ARG_ENABLE_DEVELOPER_MODE.

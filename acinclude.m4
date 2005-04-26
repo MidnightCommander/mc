@@ -960,7 +960,7 @@ fi
 
 AC_DEFUN([MC_ARG_ENABLE_DEVELOPER_MODE],
 [AC_ARG_ENABLE([developer-mode],
-  AS_HELP_STRING([--enable-developer-mode], [Enable debugging help]))
+  AC_HELP_STRING([--enable-developer-mode], [Enable debugging help]))
 AM_CONDITIONAL([DEVELOPER], [test x"$enable_developer_mode" = x"yes"])
 if test x"$enable_developer_mode" = x"yes"; then
   AC_DEFINE([MC_ENABLE_DEBUGGING_CODE], [1], [Enable debugging code])
