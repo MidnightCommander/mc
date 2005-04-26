@@ -2,6 +2,8 @@
 
 	* view.c: Added some calls to str_unconst() to get rid of the
 	GCC warnings.
+	* global.h: Define NDEBUG (used by assert() depending on
+	MC_ENABLE_DEBUGGING_CODE).
 
 2005-04-25  Roland Illig  <roland.illig@gmx.de>
 
