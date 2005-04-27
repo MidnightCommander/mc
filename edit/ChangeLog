@@ -1,3 +1,8 @@
+2005-04-27  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* editdraw.c (status_string): Added casts on 2 parameters to
+	g_snprintf.
+
 2005-03-17  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_replace_cmd): Restore correct behavior of

@@ -70,12 +70,12 @@ static void status_string (WEdit * edit, char *s, int w)
      */
     if (edit->curs1 < edit->last_byte) {
 	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	g_snprintf (byte_str, sizeof(byte_str), "%c %3d 0x%02X",
-		    is_printable(cur_byte) ? cur_byte : '.',
-		    cur_byte,
-		    cur_byte);
+	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
+		    is_printable (cur_byte) ? cur_byte : '.',
+		    (int) cur_byte,
+		    (unsigned) cur_byte);
     } else {
-	strcpy(byte_str, "<EOF>");
+	strcpy (byte_str, "<EOF>");
     }
 
     /* The field lengths just prevent the status line from shortening too much */
