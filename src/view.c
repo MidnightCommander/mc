@@ -705,7 +705,7 @@ view_load (WView *view, const char *_command, const char *_file,
     if (start_line > 1 && !error) {
 	int saved_wrap_mode = view->text_wrap_mode;
 
-	view->text_wrap_mode = 0;
+	view->text_wrap_mode = FALSE;
 	get_byte (view, 0);
 	view_move_forward (view, start_line - 1);
 	view->text_wrap_mode = saved_wrap_mode;
@@ -1967,7 +1967,7 @@ toggle_hexedit_mode (WView *view)
 static void
 toggle_wrap_mode (WView *view)
 {
-    view->text_wrap_mode = 1 - view->text_wrap_mode;
+    view->text_wrap_mode = !view->text_wrap_mode;
     get_bottom_first (view, 1, 1);
     if (view->text_wrap_mode)
 	view->dpy_text_start_col = 0;
@@ -2016,7 +2016,7 @@ goto_line (WView *view)
     int saved_wrap_mode = view->text_wrap_mode;
     offset_type i;
 
-    view->text_wrap_mode = 0;
+    view->text_wrap_mode = FALSE;
 
     /* FIXME: this is awfully slow */
     for (i = 0; i < view->dpy_text_start; i++)
