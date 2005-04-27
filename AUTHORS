@@ -62,9 +62,16 @@ Ilya Rybkin <rybkin@rouge.phys.lsu.edu>
 John Davis <davis@space.mit.edu>
 Wrote S-Lang library and answered questions about it.
 
+Leonard den Ottolander <leonard * den ottolander nl>
+Reworking and pushing downstream (security) patches for 4.6.0.
+Vfs/extfs quoting fixes
+
 Marcelo Roccasalva <mfroccas@raiz.uncu.edu.ar>
 
 Massimo Fontanelli <MC8737@mclink.it>
+
+Pavel Shirshov <me@pavelsh.pp.ru>
+Committing downstream (security) patches for 4.6.0.
 
 Sergey Ya. Korshunoff <root@seyko.msk.su>
 
