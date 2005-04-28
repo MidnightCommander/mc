@@ -1,4 +1,5 @@
-2005-04-27  Leonard den Ottolander <leonard * den ottolander nl>
+2005-04-27  Leonard den Ottolander  <leonard * den ottolander nl>
+
 	* AUTHORS: Added Pavel Shirshov and myself as contributors.
 
 2005-04-26  Roland Illig  <roland.illig@gmx.de>
@@ -12,7 +13,7 @@
 	* configure.ac: Using MC_ARG_ENABLE_DEVELOPER_MODE instead of
 	the --maintainer-mode.
 
-2005-04-17  Leonard den Ottolander <leonard * den ottolander nl>
+2005-04-17  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* syntax/eiffel.syntax: dos2unix; removed redundant cooledit
 	colour definitions.
@@ -25,7 +26,7 @@
 	* lib/mc.ext.in: Recognize either *.udeb or *.deb as Debian
 	packages. Fixes Savannah patch #3899.
 
-2005-04-14  Leonard den Ottolander <leonard * den ottolander nl>
+2005-04-14  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* syntax/Syntax: Catch Makefiles with capitals in the extension.
 
