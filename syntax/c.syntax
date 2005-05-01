@@ -75,26 +75,29 @@ context default
     keyword '\\0' brightgreen
     keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > yellow
-    keyword < yellow
-    keyword \+ yellow
-    keyword - yellow
-    keyword \* yellow
-    keyword / yellow
+# punctuation characters, sorted by ASCII code
+    keyword ! yellow
     keyword % yellow
-    keyword = yellow
-    keyword != yellow
-    keyword == yellow
-    keyword { brightcyan
-    keyword } brightcyan
+    keyword & yellow
     keyword ( brightcyan
     keyword ) brightcyan
+    keyword \* yellow
+    keyword \+ yellow
+    keyword , brightcyan
+    keyword - yellow
+    keyword / yellow
+    keyword : brightcyan
+    keyword ; brightmagenta
+    keyword < yellow
+    keyword = yellow
+    keyword > yellow
+    keyword ? brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
-    keyword , brightcyan
-    keyword : brightcyan
-    keyword ? brightcyan
-    keyword ; brightmagenta
+    keyword ^ yellow
+    keyword { brightcyan
+    keyword | yellow
+    keyword } brightcyan
 
 context exclusive /\* \*/ brown
     spellcheck

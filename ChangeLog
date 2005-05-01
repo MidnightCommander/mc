@@ -1,3 +1,7 @@
+2005-05-01  Roland Illig  <roland.illig@gmx.de>
+
+	* syntax/c.syntax: Added missing punctuation characters.
+
 2005-04-28  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/Syntax: Don't highlight csh scripts.  Allow using
