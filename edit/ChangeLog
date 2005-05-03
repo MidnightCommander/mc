@@ -1,3 +1,8 @@
+2005-05-03  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Use D_ERROR for edit_error_dialog, D_NORMAL for query
+	dialogs.  Remove unused edit_query_dialog4.
+
 2005-04-27  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* editdraw.c (status_string): Added casts on 2 parameters to
