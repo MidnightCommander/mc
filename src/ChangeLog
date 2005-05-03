@@ -1,3 +1,9 @@
+2005-04-03  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (try_to_select): Don't call display_mini_info(), it
+	will be called later because select_item sets panel->dirty.
+	This fixes the mini status appearing first after Ctrl-O.
+
 2005-04-27  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Changed use of view->text_wrap_mode to reflect its

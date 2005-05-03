@@ -895,7 +895,6 @@ try_to_select (WPanel *panel, const char *name)
 {
     do_try_to_select (panel, name);
     select_item (panel);
-    display_mini_info (panel);
 }
 
 void
