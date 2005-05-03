@@ -1,5 +1,9 @@
 2005-05-03  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Use char instead of unsigned char to fix
+	warnings from gcc 4.0.
+	* editcmd.c: Likewise.
+
 	* edit.h: Use D_ERROR for edit_error_dialog, D_NORMAL for query
 	dialogs.  Remove unused edit_query_dialog4.
 

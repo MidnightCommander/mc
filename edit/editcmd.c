@@ -60,8 +60,8 @@
 #define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
 
 struct selection {
-   unsigned char * text;
-   int len;
+    char *text;
+    int len;
 };
 
 /* globals: */
@@ -91,12 +91,13 @@ static inline int my_lower_case (int c)
     return tolower(c & 0xFF);
 }
 
-static const char *strcasechr (const unsigned char *s, int c)
+static const char *
+strcasechr (const char *s, int c)
 {
     for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
 	if (*s == '\0')
 	    return 0;
-    return (const char *) s;
+    return s;
 }
 
 #ifndef HAVE_MEMMOVE
