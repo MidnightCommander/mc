@@ -39,7 +39,7 @@ DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
 # DIR="/public/html/mc/snapshots"
 
 # Command for building RPM
-RPMBUILD="lsb-rpm --target i386-unknown-linux-gnu"
+RPMBUILD=lsb-rpm
 
 cd "$MC_CVS_DIR"
 cvs up -dPA
