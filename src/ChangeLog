@@ -1,3 +1,8 @@
+2005-05-10  Roland Illig  <roland.illig@gmx.de>
+
+	* find.c (find_parameters): Moved around and reordered dialog
+	items to make their meaning clearer.
+
 2005-04-03  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (try_to_select): Don't call display_mini_info(), it

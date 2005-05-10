@@ -47,7 +47,7 @@
 #include "key.h"
 
 /* Size of the find parameters window */
-#define FIND_Y 16
+#define FIND_Y 15
 static int FIND_X = 50;
 
 /* Size of the find window */
@@ -195,7 +195,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     int return_value;
     char *temp_dir;
     static const char *case_label = N_("case &Sensitive");
-    static char *recurs_label = N_("find Re&cursively");
+    static const char *recurs_label = N_("find Re&cursively");
 
     WCheck *recursively_cbox;
 
@@ -258,26 +258,26 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		    DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,
-		button_new (13, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
+		button_new (12, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
     add_widget (find_dlg,
-		button_new (13, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
+		button_new (12, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
     add_widget (find_dlg,
-		button_new (13, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+		button_new (12, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
     recursively_cbox =
-	check_new (11, 3, find_recursively, recurs_label);
-     add_widget (find_dlg, recursively_cbox);
+	check_new (6, istart, find_recursively, recurs_label);
  
-    find_regex_cbox = check_new (10, 3, find_regex_flag, _("&Regular expression"));
+    find_regex_cbox = check_new (10, istart, find_regex_flag, _("&Regular expression"));
     add_widget (find_dlg, find_regex_cbox);
 
-    case_sense = check_new (9, 3, case_sensitive, case_label);
+    case_sense = check_new (9, istart, case_sensitive, case_label);
     add_widget (find_dlg, case_sense);
 
     in_with =
-	input_new (7, istart, INPUT_COLOR, ilen, in_contents, "content");
+	input_new (8, istart, INPUT_COLOR, ilen, in_contents, "content");
     add_widget (find_dlg, in_with);
 
+    add_widget (find_dlg, recursively_cbox);
     in_name =
 	input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name");
     add_widget (find_dlg, in_name);
@@ -286,7 +286,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start");
     add_widget (find_dlg, in_start);
 
-    add_widget (find_dlg, label_new (7, 3, labs[2]));
+    add_widget (find_dlg, label_new (8, 3, labs[2]));
     add_widget (find_dlg, label_new (5, 3, labs[1]));
     add_widget (find_dlg, label_new (3, 3, labs[0]));
 
