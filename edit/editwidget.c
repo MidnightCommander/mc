@@ -22,8 +22,6 @@
 
 #include <config.h>
 
-#include <errno.h>
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -34,7 +32,6 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-#include <errno.h>
 
 #include <stdlib.h>
 

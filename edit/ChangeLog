@@ -1,3 +1,7 @@
+2005-05-10  Pavel Roskin  <proski@gnu.org>
+
+	* *.c: Remove duplicate includes.
+
 2005-05-03  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h: Use char instead of unsigned char to fix
