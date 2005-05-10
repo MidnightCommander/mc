@@ -1,5 +1,10 @@
 2005-05-10  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Revert signedness fixes.  We need unsigned char
+	for character classification.
+	* editcmd.c: Likewise.  Use casts to suppress warnings instead.
+	Thanks to Roland Illig <roland.illig@gmx.de>
+
 	* *.c: Remove duplicate includes.
 
 2005-05-03  Pavel Roskin  <proski@gnu.org>

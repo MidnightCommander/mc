@@ -37,8 +37,8 @@ struct WEdit {
     /* dynamic buffers and cursor position for editor: */
     long curs1;			/* position of the cursor from the beginning of the file. */
     long curs2;			/* position from the end of the file */
-    char *buffers1[MAXBUFF + 1];	/* all data up to curs1 */
-    char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
+    unsigned char *buffers1[MAXBUFF + 1];	/* all data up to curs1 */
+    unsigned char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
 
     /* search variables */
     long search_start;		/* First character to start searching from */

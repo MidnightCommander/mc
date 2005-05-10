@@ -58,8 +58,8 @@
 #define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
 
 struct selection {
-    char *text;
-    int len;
+   unsigned char * text;
+   int len;
 };
 
 /* globals: */
@@ -2716,16 +2716,14 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			  int *num)
 {
     int len, max_len = 0, i, skip;
-    char *bufpos;
+    unsigned char *bufpos;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
     while (*num < MAX_WORD_COMPLETIONS) {
 	/* get next match */
 	start =
 	    edit_find (start - 1, (unsigned char *) match_expr, &len,
-		       edit->last_byte,
-		       edit_get_byte,
-		       (void *) edit, 0);
+		       edit->last_byte, edit_get_byte, (void *) edit, 0);
 
 	/* not matched */
 	if (start < 0)
@@ -2738,8 +2736,10 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	skip = 0;
 	for (i = 0; i < *num; i++) {
 	    if (strncmp
-		(&compl[i].text[word_len], &bufpos[word_len],
-		 max (len, compl[i].len) - word_len) == 0) {
+		((char *) &compl[i].text[word_len],
+		 (char *) &bufpos[word_len], max (len,
+						  compl[i].len) -
+		 word_len) == 0) {
 		skip = 1;
 		break;		/* skip it, already added */
 	    }
@@ -2764,15 +2764,15 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 
 /* let the user select its preferred completion */
 static void
-edit_completion_dialog (WEdit *edit, int max_len, int word_len,
+edit_completion_dialog (WEdit * edit, int max_len, int word_len,
 			struct selection *compl, int num_compl)
 {
     int start_x, start_y, offset, i;
     char *curr = NULL;
     Dlg_head *compl_dlg;
     WListbox *compl_list;
-    int compl_dlg_h;	/* completion dialog height */
-    int compl_dlg_w;	/* completion dialog width */
+    int compl_dlg_h;		/* completion dialog height */
+    int compl_dlg_w;		/* completion dialog width */
 
     /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;
@@ -2809,7 +2809,7 @@ edit_completion_dialog (WEdit *edit, int max_len, int word_len,
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_compl; i++)
-	listbox_add_item (compl_list, 0, 0, compl[i].text, NULL);
+	listbox_add_item (compl_list, 0, 0, (char *) compl[i].text, NULL);
 
     /* pop up the dialog */
     run_dlg (compl_dlg);
@@ -2836,7 +2836,7 @@ edit_complete_word_cmd (WEdit *edit)
 {
     int word_len = 0, i, num_compl = 0, max_len;
     long word_start = 0;
-    char *bufpos;
+    unsigned char *bufpos;
     char *match_expr;
     struct selection compl[MAX_WORD_COMPLETIONS];	/* completions */
 
