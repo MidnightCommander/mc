@@ -24,6 +24,9 @@ set -e
 # The source tree should be available in uncompressed form
 BASE_VERSION="4.6.0"
 
+# Version of the snapshot
+MCVERSION=`date "+%Y-%m-%d-%H" --utc`
+
 # Local directories
 MC_BASE_DIR="$HOME/src/mc-$BASE_VERSION"
 MC_CVS_DIR="$HOME/src/mc"
@@ -36,7 +39,7 @@ DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
 # DIR="/public/html/mc/snapshots"
 
 # Command for building RPM
-RPMBUILD=lsb-rpm
+RPMBUILD="lsb-rpm --target i386-unknown-linux-gnu"
 
 cd "$MC_CVS_DIR"
 cvs up -dPA
@@ -53,7 +56,6 @@ fi
 
 # Remove old tarballs and build the new one
 rm -f "mc*.tar.gz"
-MCVERSION=`date "+%Y-%m-%d-%H" --utc`
 cp -f configure.ac configure.ac.cvs
 sed "s/AM_INIT_AUTOMAKE([^)]*)/AM_INIT_AUTOMAKE(mc, $MCVERSION)/" \
   configure.ac.cvs >configure.ac
@@ -92,9 +94,11 @@ if test ! -d $MC_BASE_DIR; then
   exit 1
 fi
 rm -f $MC_PATCH $MC_PATCH_BZ2
+rm -rf mc-$MCVERSION
+gzip -cd $MCTARBALL | tar xf -
 
-# Sometimes GNU diff returns 1 for unclear reasons
-diff -urN -x '*.gmo' $MC_BASE_DIR mc-*/ >$MC_PATCH || :
+# GNU diff should return 0 or 1.  2 means failure or incomplete diff.
+diff -urN -x '*.gmo' -x pc $MC_BASE_DIR mc-$MCVERSION/ >$MC_PATCH || test $? = 1
 bzip2 $MC_PATCH
 
 upload "$MCTARBALL" "mc*.tar.gz"
