@@ -64,7 +64,6 @@
 #include "info.h"		/* The Info widget */
 #include "view.h"		/* The view widget */
 
-#define WANT_WIDGETS
 #include "setup.h"		/* For save_setup() */
 
 /* Controls the display of the rotating dash on the verbose mode */

@@ -59,8 +59,7 @@
 #include "panel.h"		/* Needed for current_panel and other_panel */
 #include "win.h"
 #include "execute.h"
-#include "main.h"		/* For the externs */
-#define WANT_WIDGETS
+#include "main.h"		/* slow_terminal */
 #include "view.h"
 
 #include "charsets.h"

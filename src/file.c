@@ -57,8 +57,7 @@
 #include "win.h"
 #include "dialog.h"
 #include "widget.h"
-#define WANT_WIDGETS
-#include "main.h"		/* WANT_WIDGETS-> we get the the_hint def */
+#include "main.h"		/* cmd_buf */
 #include "layout.h"
 #include "widget.h"
 #include "wtools.h"

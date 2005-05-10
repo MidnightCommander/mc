@@ -1,3 +1,10 @@
+2005-05-10  Pavel Roskin  <proski@gnu.org>
+
+	* file.c: Remove unneeded WANT_WIDGETS.
+	* layout.c: Likewise.
+	* setup.c: Likewise.
+	* view.c: Likewise.
+
 2005-05-10  Roland Illig  <roland.illig@gmx.de>
 
 	* find.c (find_parameters): Moved around and reordered dialog

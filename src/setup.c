@@ -30,7 +30,6 @@
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
 #include "profile.h"
-#define WANT_WIDGETS
 #include "setup.h"
 #include "mouse.h"		/* To make view.h happy */
 #include "view.h"		/* For the externs */
