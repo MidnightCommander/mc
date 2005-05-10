@@ -207,7 +207,7 @@ vfs_findgid (const char *gname)
 int
 vfs_mkstemps (char **pname, const char *prefix, const char *basename)
 {
-    const unsigned char *p;
+    const char *p;
     char *suffix, *q;
     int shift;
     int fd;
@@ -229,7 +229,7 @@ vfs_mkstemps (char **pname, const char *prefix, const char *basename)
     /* Protection against unusual characters */
     q = suffix;
     while (*p && (*p != '#')) {
-	if (strchr (".-_@", *p) || isalnum (*p))
+	if (strchr (".-_@", *p) || isalnum ((unsigned char) *p))
 	    *q++ = *p;
 	p++;
     }
@@ -342,15 +342,16 @@ is_month (const char *str, struct tm *tim)
  * NB: It is assumed there are no whitespaces in month.
  */
 static int
-is_localized_month (const unsigned char *month)
+is_localized_month (const char *month)
 {
     int i = 0;
 
     if (!month)
 	return 0;
 
-    while ((i < 3) && *month && !isdigit (*month) && !iscntrl (*month)
-	   && !ispunct (*month)) {
+    while ((i < 3) && *month && !isdigit ((unsigned char) *month)
+	   && !iscntrl ((unsigned char) *month)
+	   && !ispunct ((unsigned char) *month)) {
 	i++;
 	month++;
     }

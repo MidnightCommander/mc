@@ -1,5 +1,7 @@
 2005-05-10  Pavel Roskin  <proski@gnu.org>
 
+	* utilvfs.c: Fix gcc 4.0 warnings.
+
 	* samba/include/includes.h: Don't include grp.h twice.
 
 2005-04-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
