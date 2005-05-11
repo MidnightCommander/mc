@@ -1,5 +1,7 @@
 2005-05-11  Pavel Roskin  <proski@gnu.org>
 
+	* samba/lib/util_sock.c: Fix gcc 4.0 warnings.
+
 	* samba/lib/debug.c (dbghdr): Constify arguments file and func.
 
 2005-05-10  Pavel Roskin  <proski@gnu.org>

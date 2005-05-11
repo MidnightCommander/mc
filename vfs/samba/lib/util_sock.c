@@ -50,7 +50,8 @@ determine if a file descriptor is in fact a socket
 ****************************************************************************/
 BOOL is_a_socket(int fd)
 {
-  int v,l;
+  int v;
+  unsigned int l;
   l = sizeof(int);
   return(getsockopt(fd, SOL_SOCKET, SO_TYPE, (char *)&v, &l) == 0);
 }
@@ -200,7 +201,7 @@ ssize_t read_udp_socket(int fd,char *buf,size_t len)
 {
   ssize_t ret;
   struct sockaddr_in sock;
-  int socklen;
+  unsigned int socklen;
   
   socklen = sizeof(sock);
   memset((char *)&sock,'\0',socklen);
@@ -807,7 +808,7 @@ char *client_name(int fd)
 {
 	struct sockaddr sa;
 	struct sockaddr_in *sockin = (struct sockaddr_in *) (&sa);
-	int     length = sizeof(sa);
+	unsigned int length = sizeof(sa);
 	static pstring name_buf;
 	struct hostent *hp;
 	static int last_fd=-1;
@@ -853,7 +854,7 @@ char *client_addr(int fd)
 {
 	struct sockaddr sa;
 	struct sockaddr_in *sockin = (struct sockaddr_in *) (&sa);
-	int     length = sizeof(sa);
+	unsigned int length = sizeof(sa);
 	static fstring addr_buf;
 	static int last_fd = -1;
 
