@@ -18,7 +18,7 @@ void add_char_string(char *s);
 
 void setup_logging( char *pname, BOOL interactive );
 void dbgflush( void );
-BOOL dbghdr( int level, char *file, char *func, int line );
+BOOL dbghdr( int level, const char *file, const char *func, int line );
 
 /* The following definitions come from lib/interface.c  */
 

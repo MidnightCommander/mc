@@ -300,7 +300,7 @@ void dbgflush( void )
  *
  * ************************************************************************** **
  */
-BOOL dbghdr( int level, char *file, char *func, int line )
+BOOL dbghdr( int level, const char *file, const char *func, int line )
   {
   if( format_pos )
     {
