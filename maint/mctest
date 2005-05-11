@@ -55,9 +55,17 @@ echo "Checking the configuration with experimental and rarely used options"
 distcheck 5 with_screen=mcslang with_termcap=yes \
      with_mmap=no with_subshell=optional enable_netcode=no
 
-if test -x /usr/bin/rpmbuild; then
+RPMBUILD=/usr/bin/rpmbuild
+if test -x $RPMBUILD; then
 	echo "Building RPM package"
-	/usr/bin/rpmbuild -ta mc-*.tar.gz >test-rpm.out 2>test-rpm.err
+	RPM_SRC_DIR="`pwd`/rpm"
+	rm -rf $RPM_SRC_DIR
+	mkdir "$RPM_SRC_DIR"
+	mkdir "$RPM_SRC_DIR/BUILD"
+	mkdir "$RPM_SRC_DIR/RPMS"
+	mkdir "$RPM_SRC_DIR/RPMS/`lsb-rpm --eval='%{_host_cpu}'`"
+	mkdir "$RPM_SRC_DIR/SPECS"
+	$RPMBUILD -tb --define="_topdir $RPM_SRC_DIR" >test-rpm.out 2>test-rpm.err
 else
 	echo "rpmbuild not found"
 fi
