@@ -1,13 +1,14 @@
-This directory contains m4 macro files for GNU Midnight Commander,
-Neither of those files is maintainted here.  Don't change those
-files unless:
+This directory contains m4 macro files for GNU Midnight Commander.
+
+None of those files is maintained here!
+Don't change those files unless:
 
 1) you are upgrading them from the latest version of the package where
 they are maintained
 
 OR
 
-2) it's a fix that is needed right now AND this fix has been submitted
-to the proper maintainer.
+2) the fix is needed right now AND this fix has been submitted to the
+proper maintainer.
 
 Otherwise, your changes will be lost.
