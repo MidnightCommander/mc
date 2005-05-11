@@ -1,3 +1,8 @@
+2005-05-11  Roland Illig  <roland.illig@gmx.de>
+
+	* charsets.c (translate_character): Fixed checking of the return
+	value of iconv().
+
 2005-05-10  Pavel Roskin  <proski@gnu.org>
 
 	* .c: Sanitize all calls to functions from ctype.h.  Fix gcc 4.0

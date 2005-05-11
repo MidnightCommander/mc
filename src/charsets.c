@@ -153,7 +153,7 @@ translate_character (iconv_t cd, char c)
     obuflen = 4;
 
     count = iconv (cd, &ibuf, &ibuflen, &obuf, &obuflen);
-    if (count >= 0 && ibuflen == 0)
+    if (count != ((size_t) -1) && ibuflen == 0)
 	return outbuf[0];
 
     return UNKNCHAR;
