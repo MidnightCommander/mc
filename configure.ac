@@ -553,7 +553,12 @@ if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
 
-MC_ARG_ENABLE_DEVELOPER_MODE()
+dnl If default CFLAGS is used with gcc, add -Wall
+if test -z "$ac_env_CFLAGS_set"; then
+    if test -n "$GCC"; then
+	CFLAGS="$CFLAGS -Wall"
+    fi
+fi
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)

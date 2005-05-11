@@ -957,20 +957,3 @@ if test "$mc_cv_asm_labels" != yes; then
 	      [Define if functions cannot be renamed by asm labels])
 fi
 ])
-
-AC_DEFUN([MC_ARG_ENABLE_DEVELOPER_MODE],
-[AC_ARG_ENABLE([developer-mode],
-  AC_HELP_STRING([--enable-developer-mode], [Enable debugging help]))
-AM_CONDITIONAL([DEVELOPER], [test x"$enable_developer_mode" = x"yes"])
-if test x"$enable_developer_mode" = x"yes"; then
-  AC_DEFINE([MC_ENABLE_DEBUGGING_CODE], [1], [Enable debugging code])
-  if test x"$GCC" = x"yes"; then
-dnl Developers get some useful warnings and debugging support.
-dnl This will make the backtrace output more readable.
-    CFLAGS="-W -Wall -ggdb ${CFLAGS}"
-  fi
-elif test x"$GCC" = x"yes"; then
-dnl Some warnings cannot hurt at all
-  CFLAGS="-Wall"
-fi
-])
