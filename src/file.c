@@ -141,33 +141,33 @@ static int files_error (const char *format, const char *file1,
 enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
 	4, LOW_SECT = 8 };
 
-static int
-convert_case (int c, enum CaseConvs *conversion)
+static char
+convert_case (char c, enum CaseConvs *conversion)
 {
     if (*conversion & UP_CHAR) {
 	*conversion &= ~UP_CHAR;
-	return toupper (c);
+	return toupper ((unsigned char) c);
     } else if (*conversion & LOW_CHAR) {
 	*conversion &= ~LOW_CHAR;
-	return tolower (c);
+	return tolower ((unsigned char) c);
     } else if (*conversion & UP_SECT) {
-	return toupper (c);
+	return toupper ((unsigned char) c);
     } else if (*conversion & LOW_SECT) {
-	return tolower (c);
+	return tolower ((unsigned char) c);
     } else
 	return c;
 }
 
 static int transform_error = 0;
 
-static const unsigned char *
-do_transform_source (FileOpContext *ctx, const unsigned char *source)
+static const char *
+do_transform_source (FileOpContext *ctx, const char *source)
 {
     size_t j, k, l, len;
-    unsigned const char *fnsource = x_basename (source);
+    const char *fnsource = x_basename (source);
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
-    static unsigned char fntarget[MC_MAXPATHLEN];
+    static char fntarget[MC_MAXPATHLEN];
 
     len = strlen (fnsource);
     j = re_match (&ctx->rx, fnsource, len, 0, &ctx->regs);
@@ -233,12 +233,12 @@ do_transform_source (FileOpContext *ctx, const unsigned char *source)
     return fntarget;
 }
 
-static const unsigned char *
-transform_source (FileOpContext *ctx, const unsigned char *source)
+static const char *
+transform_source (FileOpContext *ctx, const char *source)
 {
-    unsigned char *s = g_strdup (source);
-    unsigned char *q;
-    const unsigned char *p;
+    char *s = g_strdup (source);
+    char *q;
+    const char *p;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */

@@ -73,9 +73,9 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
 			     const char *translation_domain) {
     int indentLength = maxLeftCol + 5;
     int lineLength = 79 - indentLength;
-    const unsigned char * help = D_(translation_domain, opt->descrip);
+    const char * help = D_(translation_domain, opt->descrip);
     int helpLength;
-    const unsigned char * ch;
+    const char * ch;
     char * left;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
 
@@ -104,14 +104,14 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
     helpLength = strlen(help);
     while (helpLength > lineLength) {
 	ch = help + lineLength - 1;
-	while (ch > help && !isspace(*ch)) ch--;
+	while (ch > help && !isspace((unsigned char) *ch)) ch--;
 	if (ch == help) break;		/* give up */
-	while (ch > (help + 1) && isspace(*ch)) ch--;
+	while (ch > (help + 1) && isspace((unsigned char) *ch)) ch--;
 	ch++;
 
 	fprintf(f, "%.*s\n%*s", (int) (ch - help), help, indentLength, " ");
 	help = ch;
-	while (isspace(*help) && *help) help++;
+	while (isspace((unsigned char) *help) && *help) help++;
 	helpLength = strlen(help);
     }
 

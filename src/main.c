@@ -1604,12 +1604,12 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 void
 update_xterm_title_path (void)
 {
-    unsigned char *p, *s;
+    char *p, *s;
 
     if (xterm_flag && xterm_title) {
 	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
 	do {
-	    if (!is_printable (*s))
+	    if (!is_printable ((unsigned char) *s))
 		*s = '?';
 	} while (*++s);
 	fprintf (stdout, "\33]0;mc - %s\7", p);

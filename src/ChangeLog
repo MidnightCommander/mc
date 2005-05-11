@@ -1,5 +1,8 @@
 2005-05-10  Pavel Roskin  <proski@gnu.org>
 
+	* .c: Sanitize all calls to functions from ctype.h.  Fix gcc 4.0
+	warnings.
+
 	* file.c: Remove unneeded WANT_WIDGETS.
 	* layout.c: Likewise.
 	* setup.c: Likewise.

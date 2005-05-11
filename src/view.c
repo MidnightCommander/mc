@@ -1890,7 +1890,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
 	    old_pattern = 0;
 	}
 	for (i = 0; pattern[i] != 0; i++) {
-	    if (isupper ((byte) pattern[i])) {
+	    if (isupper ((unsigned char) pattern[i])) {
 		flags = 0;
 		break;
 	    }
@@ -3041,7 +3041,7 @@ static void
 view_set_datasource_string (WView *view, const char *s)
 {
     view->datasource     = DS_STRING;
-    view->ds_string_data = g_strdup (s);
+    view->ds_string_data = (byte *) g_strdup (s);
     view->ds_string_len  = strlen (s);
 
     view_update_last_byte (view);

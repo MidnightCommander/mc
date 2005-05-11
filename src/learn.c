@@ -76,7 +76,7 @@ static const char* learn_title = N_("Learn keys");
 
 static int learn_button (int action)
 {
-    unsigned char *seq;
+    char *seq;
     Dlg_head *d = create_message (D_ERROR, _(" Teach me a key "),
 _("Please press the %s\n"
 "and then wait until this message disappears.\n\n"

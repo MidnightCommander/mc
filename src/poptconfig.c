@@ -17,7 +17,7 @@
 #include "popt.h"
 #include "poptint.h"
 
-static void configLine(poptContext con, unsigned char * line) {
+static void configLine(poptContext con, char * line) {
     int nameLength = strlen(con->appName);
     char * opt;
     struct poptAlias alias;
@@ -27,19 +27,19 @@ static void configLine(poptContext con, unsigned char * line) {
     
     if (strncmp(line, con->appName, nameLength)) return;
     line += nameLength;
-    if (!*line || !isspace(*line)) return;
-    while (*line && isspace(*line)) line++;
+    if (!*line || !isspace((unsigned char) *line)) return;
+    while (*line && isspace((unsigned char) *line)) line++;
     entryType = line;
 
-    while (!*line || !isspace(*line)) line++;
+    while (!*line || !isspace((unsigned char) *line)) line++;
     *line++ = '\0';
-    while (*line && isspace(*line)) line++;
+    while (*line && isspace((unsigned char) *line)) line++;
     if (!*line) return;
     opt = line;
 
-    while (!*line || !isspace(*line)) line++;
+    while (!*line || !isspace((unsigned char) *line)) line++;
     *line++ = '\0';
-    while (*line && isspace(*line)) line++;
+    while (*line && isspace((unsigned char) *line)) line++;
     if (!*line) return;
 
     if (opt[0] == '-' && opt[1] == '-')
@@ -101,7 +101,7 @@ int poptReadConfigFile(poptContext con, const char * fn) {
 	  case '\n':
 	    *dst = '\0';
 	    dst = buf;
-	    while (*dst && isspace((unsigned)*dst)) dst++;
+	    while (*dst && isspace((unsigned char) *dst)) dst++;
 	    if (*dst && *dst != '#') {
 		configLine(con, dst);
 	    }

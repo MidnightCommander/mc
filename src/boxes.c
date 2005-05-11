@@ -178,7 +178,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 	/* get hotkey of user-defined format string */
 	cp = strchr (displays[USER_TYPE], '&');
 	if (cp != NULL && *++cp != '\0')
-	    user_hotkey = tolower (*cp);
+	    user_hotkey = tolower ((unsigned char) *cp);
 
 	i18n_displays_flag = 1;
     }

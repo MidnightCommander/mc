@@ -597,7 +597,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 static int
 check_is_cd (const char *text, int start, int flags)
 {
-    const unsigned char *p, *q;
+    const char *p, *q;
 
     if (flags & INPUT_COMPLETE_CD)
 	return 1;
@@ -606,13 +606,14 @@ check_is_cd (const char *text, int start, int flags)
 	return 0;
 
     /* Skip initial spaces */
-    p = (const unsigned char *) text;
-    q = (const unsigned char *) text + start;
-    while (p < q && *p && isspace (*p))
+    p = text;
+    q = text + start;
+    while (p < q && *p && isspace ((unsigned char) *p))
 	p++;
 
     /* Check if the command is "cd" and the cursor is after it */
-    if (p[0] == 'c' && p[1] == 'd' && isspace (p[2]) && (p + 2 < q))
+    if (p[0] == 'c' && p[1] == 'd' && isspace ((unsigned char) p[2])
+	&& (p + 2 < q))
 	return 1;
 
     return 0;

@@ -78,7 +78,7 @@ button_callback (WButton *b, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 
-	if (b->hotkey == parm || toupper (b->hotkey) == parm) {
+	if (b->hotkey == tolower (parm)) {
 	    button_callback (b, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}
@@ -212,7 +212,7 @@ button_scan_hotkey (WButton *b)
 
     if (cp != NULL && cp[1] != '\0') {
 	g_strlcpy (cp, cp + 1, strlen (cp));
-	b->hotkey = tolower (*cp);
+	b->hotkey = tolower ((unsigned char) *cp);
 	b->hotpos = cp - b->text;
     }
 }
@@ -275,7 +275,7 @@ radio_callback (WRadio *r, int msg, int parm)
 	    for (i = 0; i < r->count; i++) {
 		cp = strchr (r->texts[i], '&');
 		if (cp != NULL && cp[1] != '\0') {
-		    int c = tolower (cp[1]);
+		    int c = tolower ((unsigned char) cp[1]);
 
 		    if (c != lp)
 			continue;
@@ -324,7 +324,7 @@ radio_callback (WRadio *r, int msg, int parm)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
-	    register const unsigned char *cp;
+	    register const char *cp;
 	    attrset ((i == r->pos
 		      && msg == WIDGET_FOCUS) ? FOCUSC : NORMALC);
 	    widget_move (&r->widget, i, 0);
@@ -490,7 +490,7 @@ check_new (int y, int x, int state, const char *text)
 	}
 	s++;
 	if (*s){
-	    c->hotkey = tolower (*s);
+	    c->hotkey = tolower ((unsigned char) *s);
 	    c->hotpos = t - c->text;
 	}
 	*t = *s;
@@ -1173,13 +1173,15 @@ forward_char (WInput *in)
 }
 
 static void
-forward_word (WInput *in)
+forward_word (WInput * in)
 {
-    unsigned char *p = in->buffer+in->point;
+    char *p = in->buffer + in->point;
 
-    while (*p && (isspace (*p) || ispunct (*p)))
+    while (*p
+	   && (isspace ((unsigned char) *p)
+	       || ispunct ((unsigned char) *p)))
 	p++;
-    while (*p && isalnum (*p))
+    while (*p && isalnum ((unsigned char) *p))
 	p++;
     in->point = p - in->buffer;
 }
@@ -1187,11 +1189,13 @@ forward_word (WInput *in)
 static void
 backward_word (WInput *in)
 {
-    unsigned char *p = in->buffer+in->point;
+    char *p = in->buffer + in->point;
 
-    while (p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1))))
+    while (p - 1 > in->buffer - 1 && (isspace ((unsigned char) *(p - 1))
+				      || ispunct ((unsigned char)
+						  *(p - 1))))
 	p--;
-    while (p-1 > in->buffer-1 && isalnum (*(p-1)))
+    while (p - 1 > in->buffer - 1 && isalnum ((unsigned char) *(p - 1)))
 	p--;
     in->point = p - in->buffer;
 }

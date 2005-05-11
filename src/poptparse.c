@@ -45,7 +45,7 @@ int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr) {
 		if (*src != quote) *buf++ = '\\';
 	    }
 	    *buf++ = *src;
-	} else if (isspace((unsigned)*src)) {
+	} else if (isspace((unsigned char) *src)) {
 	    if (*argv[argc]) {
 		buf++, argc++;
 		if (argc == argvAlloced) {

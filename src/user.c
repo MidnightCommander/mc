@@ -180,7 +180,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     if (c == '%')
 	return g_strdup ("%");
 
-    if (islower ((unsigned) c))
+    if (islower ((unsigned char) c))
 	panel = current_panel;
     else {
 	if (get_other_type () != view_listing)
@@ -195,7 +195,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     else
 	quote_func = fake_name_quote;
 
-    c_lc = tolower (c);
+    c_lc = tolower ((unsigned char) c);
     fname = panel->dir.list[panel->selected].fname;
 
     switch (c_lc) {
@@ -605,9 +605,9 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    }
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
-	    if (isdigit ((unsigned)*commands)) {
+	    if (isdigit ((unsigned char) *commands)) {
 		do_quote = atoi (commands);
-		while (isdigit ((unsigned)*commands))
+		while (isdigit ((unsigned char) *commands))
 		    commands++;
 	    }
 	    if (*commands == '{')

@@ -821,7 +821,7 @@ const char *skip_separators (const char *s)
 const char *skip_numbers (const char *s)
 {
     for (;*s; s++)
-	if (!isdigit ((int) (unsigned char) *s))
+	if (!isdigit ((unsigned char) *s))
 	    break;
     return s;
 }
@@ -1424,20 +1424,19 @@ save_file_position (const char *filename, long line, long column)
 extern const char *
 cstrcasestr (const char *haystack, const char *needle)
 {
-    const unsigned char *uhaystack = (const unsigned char *) haystack;
-    const unsigned char *uneedle = (const unsigned char *) needle;
-    const unsigned char *hptr;
+    const char *hptr;
     size_t i, needle_len;
 
-    needle_len = strlen(needle);
-    for (hptr = uhaystack; *hptr != '\0'; hptr++) {
+    needle_len = strlen (needle);
+    for (hptr = haystack; *hptr != '\0'; hptr++) {
 	for (i = 0; i < needle_len; i++) {
-	    if (toupper(hptr[i]) != toupper(uneedle[i]))
+	    if (toupper ((unsigned char) hptr[i]) !=
+		toupper ((unsigned char) needle[i]))
 		goto next_try;
-    	}
-    	return hptr;
-    next_try:
-        (void) 0;
+	}
+	return hptr;
+      next_try:
+	(void) 0;
     }
     return NULL;
 }

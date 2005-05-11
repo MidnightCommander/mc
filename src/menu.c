@@ -43,7 +43,7 @@ menu_scan_hotkey (Menu *menu)
 
     if (cp != NULL && cp[1] != '\0') {
 	g_strlcpy (cp, cp + 1, strlen (cp));
-	menu->hotkey = tolower (*cp);
+	menu->hotkey = tolower ((unsigned char) *cp);
     } else
 	menu->hotkey = 0;
 }
@@ -69,7 +69,7 @@ create_menu (const char *name, menu_entry *entries, int count, const char *help_
 	        cp = strchr (mp->text,'&');
 
 		if (cp != NULL && *(cp+1) != '\0') {
-		    mp->hot_key = tolower (*(cp+1));
+		    mp->hot_key = tolower ((unsigned char) *(cp+1));
 		    menu->max_entry_len = max ((int) (strlen (mp->text) - 1),
 			menu->max_entry_len);
 		} else {
@@ -109,7 +109,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         widget_move (&menubar->widget, y, x + 1);
     	hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
     } else {
-	const unsigned char *text;
+	const char *text;
 
 	addch((unsigned char)menu->entries [idx].first_letter);
 	for (text = menu->entries [idx].text; *text; text++)
