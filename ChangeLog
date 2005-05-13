@@ -1,3 +1,8 @@
+2005-05-13  Nerijus Baliunas  <nerijus@users.sourceforge.net>
+
+	* lib/mc.ext.in: Add OpenOffice.org 2 extensions, use o3totxt
+	to view OpenOffice.org documents.
+
 2005-05-11  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4: Remove MC_ARG_ENABLE_DEVELOPER_MODE.
