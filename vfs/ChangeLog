@@ -1,3 +1,7 @@
+2005-05-13  Roland Illig  <roland.illig@gmx.de>
+
+	* ftpfs.c: Using HAVE_SOCKLEN_T instead of HAVE_C_TYPE_SOCKLEN_T.
+
 2005-05-11  Pavel Roskin  <proski@gnu.org>
 
 	* samba/lib/util_sock.c: Fix gcc 4.0 warnings.

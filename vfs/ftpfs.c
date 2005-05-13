@@ -96,7 +96,7 @@ What to do with this?
 #define RFC_DARING 1
 #define RFC_STRICT 2
 
-#ifndef HAVE_C_TYPE_SOCKLEN_T
+#ifndef HAVE_SOCKLEN_T
 typedef int socklen_t;
 #endif
 
