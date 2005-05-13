@@ -8,7 +8,6 @@ m4files = \
 	inttypes-pri.m4 \
 	inttypes.m4 \
 	inttypes_h.m4 \
-	isc-posix.m4 \
 	lcmessage.m4 \
 	lib-ld.m4 \
 	lib-link.m4 \

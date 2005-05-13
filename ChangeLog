@@ -1,3 +1,9 @@
+2005-05-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.ac: Require Autoconf 2.53 or newer.
+	* m4/Makefile.am: Remove isc-posix.m4, it's obsolete.
+	* m4/isc-posix.m4: Remove.
+
 2005-05-13  Nerijus Baliunas  <nerijus@users.sourceforge.net>
 
 	* lib/mc.ext.in: Add OpenOffice.org 2 extensions, use o3totxt
