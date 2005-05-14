@@ -10,6 +10,7 @@ context default yellow
 context exclusive linestart @@*@@ \n brightcyan
 context exclusive linestart Index:\s \n black white
 context exclusive linestart \s \n lightgray blue
+context exclusive linestart \t \n lightgray blue
 context linestart diff \n white red
 context linestart ---\s \n brightmagenta
 context linestart \+\+\+\s \n brightmagenta

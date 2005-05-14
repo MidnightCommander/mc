@@ -1,3 +1,9 @@
+2005-05-14  Roland Illig  <roland.illig@gmx.de>
+
+	* syntax/diff.syntax: Lines starting with a <tab> character are
+	displayed like lines starting with a <space>. This is for the
+	cvs diff -T option.
+
 2005-05-13  Pavel Roskin  <proski@gnu.org>
 
 	* configure.ac: Require Autoconf 2.53 or newer.
