@@ -3,6 +3,9 @@
 	* syntax/diff.syntax: Lines starting with a <tab> character are
 	displayed like lines starting with a <space>. This is for the
 	cvs diff -T option.
+	* syntax/makefile.syntax: Highlight $$ (a literal $) in
+	brightcyan. This way $${var} is not highlighted as if it were a
+	Makefile variables.
 
 2005-05-13  Pavel Roskin  <proski@gnu.org>
 

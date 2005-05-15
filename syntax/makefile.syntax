@@ -1,5 +1,6 @@
 
 context default
+    keyword $$ brightcyan
     keyword $(*) yellow
     keyword ${*} brightgreen
     keyword whole linestart define magenta
@@ -29,6 +30,7 @@ context linestart # \n brown
 
 context exclusive = \n brightcyan
     keyword \\\n yellow
+    keyword $$ brightcyan
     keyword $(*) yellow
     keyword ${*} brightgreen
     keyword linestart \t lightgray red
@@ -37,6 +39,7 @@ context exclusive = \n brightcyan
 
 context exclusive linestart \t \n
     keyword \\\n yellow
+    keyword $$ brightcyan
     keyword $(*) yellow
     keyword ${*} brightgreen
     keyword linestart \t lightgray red
