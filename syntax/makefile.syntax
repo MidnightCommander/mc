@@ -1,4 +1,3 @@
-
 context default
     keyword $$ brightcyan
     keyword $(*) yellow
@@ -23,11 +22,13 @@ context default
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
+# comment
 context linestart # \n brown
     spellcheck
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
+# right part of an assignment
 context exclusive = \n brightcyan
     keyword \\\n yellow
     keyword $$ brightcyan
@@ -37,6 +38,7 @@ context exclusive = \n brightcyan
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
 
+# shell code
 context exclusive linestart \t \n
     keyword \\\n yellow
     keyword $$ brightcyan
@@ -45,6 +47,3 @@ context exclusive linestart \t \n
     keyword linestart \t lightgray red
     keyword whole @+@ brightmagenta black
     keyword @+@ brightmagenta black
-
-
-

@@ -5,7 +5,7 @@
 	cvs diff -T option.
 	* syntax/makefile.syntax: Highlight $$ (a literal $) in
 	brightcyan. This way $${var} is not highlighted as if it were a
-	Makefile variables.
+	Makefile variables. Also added useful comments before the contexts.
 
 2005-05-13  Pavel Roskin  <proski@gnu.org>
 
