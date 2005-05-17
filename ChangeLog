@@ -1,3 +1,8 @@
+2005-05-17  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Removed the extra definition of
+	HAVE_C_TYPE_SOCKLEN_T, which is unused.
+
 2005-05-14  Roland Illig  <roland.illig@gmx.de>
 
 	* syntax/diff.syntax: Lines starting with a <tab> character are

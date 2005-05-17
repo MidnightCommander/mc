@@ -216,10 +216,11 @@ AC_CHECK_TYPE(off_t, long)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)
-AC_CHECK_TYPES([socklen_t],
-  AC_DEFINE([HAVE_C_TYPE_SOCKLEN_T], [1], [Define to 1 if socklen_t is defined by <sys/socket.h>]),,
-[#include <sys/types.h>
-#include <sys/socket.h>])
+AC_CHECK_TYPES([socklen_t],,,
+[
+#include <sys/types.h>
+#include <sys/socket.h>
+])
 
 dnl This is needed for regex.c only
 AC_CHECK_TYPE(uintptr_t,
