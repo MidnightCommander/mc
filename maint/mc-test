@@ -88,6 +88,13 @@ EOF
 	exit 1
 }
 
+eval_arg() {
+	_shquote_var=`echo x"$1" | sed -e '1s,^x\([^=]*\)=.*,\1,' -e '1q'`
+	_shquote_val=`echo x"$1" | sed '1s,^x[^=]*=\(.*\),\1,'`
+	_shquote_qval=`echo x"${_shquote_val}" | sed -e '1s,.,,' -e s,\',\'\\\\\\\\\'\',g`
+	eval "${_shquote_var}='${_shquote_qval}'"
+}
+
 while test $# -ne 0; do
 	case "$1" in
 		-config)		shift; case "$1" in /*) . "$1";; *) . "./$1";; esac; shift;;
@@ -121,7 +128,7 @@ while test $# -ne 0; do
 		-nice)			shift; mc_nice_value="$1"; shift;;
 		-maxlines)		shift; mc_maxlines="$1"; shift;;
 		-quiet)			shift; quiet="yes";;
-		mc_*=*)			eval "$1"; shift;;
+		mc_*=*)			eval_arg "$1"; shift;;
 
 		--) shift; break;;
 		-) shift; break;;
