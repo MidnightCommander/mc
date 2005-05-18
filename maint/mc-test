@@ -65,7 +65,7 @@ do_make_install=yes
 
 usage() {
 	cat >&2 <<EOF
-usage: `basename $0` [options ...] [<testname ...>]
+usage: `basename $0` [options ...] [var=value...] [<testname ...>]
 
 	-config <file>		load the configuration from <file>
 	-basedir <dir>		set the base directory
@@ -121,6 +121,7 @@ while test $# -ne 0; do
 		-nice)			shift; mc_nice_value="$1"; shift;;
 		-maxlines)		shift; mc_maxlines="$1"; shift;;
 		-quiet)			shift; quiet="yes";;
+		mc_*=*)			eval "$1"; shift;;
 
 		--) shift; break;;
 		-) shift; break;;
