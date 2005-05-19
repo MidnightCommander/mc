@@ -1,2 +1,4 @@
 When you commit a translation, please strip the #: lines before. This
-makes it much easier to view diffs.
+makes it much easier to view diffs. Example:
+
+	./strip-location *.po
