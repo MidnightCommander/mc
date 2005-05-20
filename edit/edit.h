@@ -227,7 +227,6 @@ void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
 
 #define edit_error_dialog(h,s) query_dialog (h, s, D_ERROR, 1, _("&Dismiss"))
 
-#define edit_message_dialog(h,s) query_dialog (h, s, D_NORMAL, 1, _("&OK"))
 #define edit_query_dialog2(h,t,a,b) query_dialog (h, t, D_NORMAL, 2, a, b)
 #define edit_query_dialog3(h,t,a,b,c) query_dialog (h, t, D_NORMAL, 3, a, b, c)
 

@@ -48,10 +48,6 @@
 #include "edit-widget.h"
 #include "editcmddef.h"
 
-#undef edit_message_dialog
-#define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&OK"))
-#define CFocus(x)
-
 static void
 menu_cmd (int command)
 {
@@ -67,15 +63,12 @@ static void menu_key (int i)
 static void
 edit_about_cmd (void)
 {
-    edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
-		      _("\n"
-		      "                Cooledit  v3.11.5\n"
-		      "\n"
-		      " Copyright (C) 1996 the Free Software Foundation\n"
-		      "\n"
-		      "       A user friendly text editor written\n"
-		      "           for the Midnight Commander.\n")
-	);
+    query_dialog (_(" About "),
+		  _("\n                Cooledit  v3.11.5\n\n"
+		    " Copyright (C) 1996 the Free Software Foundation\n\n"
+		    "       A user friendly text editor written\n"
+		    "           for the Midnight Commander.\n"), D_NORMAL,
+		  1, _("&OK"));
 }
 
 static void

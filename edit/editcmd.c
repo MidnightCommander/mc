@@ -2006,7 +2006,8 @@ edit_replace_cmd (WEdit *edit, int again)
 		message (0, msg, _(" %ld replacements made. "),
 			 times_replaced);
 	    } else
-		edit_message_dialog (msg, _(" Search string not found "));
+		query_dialog (msg, _(" Search string not found "),
+			      D_NORMAL, 1, _("&OK"));
 	    replace_continue = 0;
 	}
     } while (replace_continue);

@@ -1,3 +1,8 @@
+2005-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Eliminate edit_message_dialog macro - it's used
+	inconsistently.  Fix all callers to use query_dialog().
+
 2005-05-10  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h: Revert signedness fixes.  We need unsigned char
