@@ -209,14 +209,14 @@ dlg_widget_active (void *w)
     return (w1->parent->current == w1);
 }
 
-void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
+void dlg_replace_widget   (Widget *old, Widget *new);
 int  dlg_overlap          (Widget *a, Widget *b);
 void widget_erase         (Widget *);
 void dlg_erase            (Dlg_head *h);
 void dlg_stop             (Dlg_head *h);
 
 /* Widget selection */
-void dlg_select_widget     (Dlg_head *h, void *widget);
+void dlg_select_widget     (void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);

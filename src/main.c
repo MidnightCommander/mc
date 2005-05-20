@@ -959,7 +959,7 @@ menu_last_selected_cmd (void)
     the_menubar->active = 1;
     the_menubar->dropped = drop_menus;
     the_menubar->previous_widget = midnight_dlg->current->dlg_id;
-    dlg_select_widget (midnight_dlg, the_menubar);
+    dlg_select_widget (the_menubar);
 }
 
 static void
@@ -1664,9 +1664,9 @@ setup_panels_and_run_mc (void)
     init_labels ();
 
     if (boot_current_is_left)
-	dlg_select_widget (midnight_dlg, get_panel_widget (0));
+	dlg_select_widget (get_panel_widget (0));
     else
-	dlg_select_widget (midnight_dlg, get_panel_widget (1));
+	dlg_select_widget (get_panel_widget (1));
 
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);

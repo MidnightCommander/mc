@@ -121,8 +121,8 @@ display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (tolower (parm) == user_hotkey && dlg_widget_active (user)
 	    && dlg_widget_active (status)) {
 	    my_radio->sel = 3;
-	    dlg_select_widget (h, my_radio);	/* force redraw */
-	    dlg_select_widget (h, user);
+	    dlg_select_widget (my_radio);	/* force redraw */
+	    dlg_select_widget (user);
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;

@@ -170,7 +170,7 @@ button_event (Gpm_Event *event, WButton *b)
 {
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h=b->widget.parent;
-	dlg_select_widget (h, b);
+	dlg_select_widget (b);
 	if (event->type & GPM_UP){
 	    button_callback (b, WIDGET_KEY, ' ');
 	    (*h->callback) (h, DLG_POST_KEY, ' ');
@@ -355,7 +355,7 @@ radio_event (Gpm_Event *event, WRadio *r)
     	Dlg_head *h = r->widget.parent;
 	
 	r->pos = event->y - 1;
-	dlg_select_widget (h, r);
+	dlg_select_widget (r);
 	if (event->type & GPM_UP){
 	    radio_callback (r, WIDGET_KEY, ' ');
 	    radio_callback (r, WIDGET_FOCUS, 0);
@@ -455,7 +455,7 @@ check_event (Gpm_Event *event, WCheck *c)
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h = c->widget.parent;
 	
-	dlg_select_widget (h, c);
+	dlg_select_widget (c);
 	if (event->type & GPM_UP){
 	    check_callback (c, WIDGET_KEY, ' ');
 	    check_callback (c, WIDGET_FOCUS, 0);
@@ -1594,7 +1594,7 @@ static int
 input_event (Gpm_Event * event, WInput * in)
 {
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
-	dlg_select_widget (in->widget.parent, in);
+	dlg_select_widget (in);
 
 	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1
 	    && should_show_history_button (in)) {
@@ -2056,7 +2056,7 @@ listbox_event (Gpm_Event *event, WListbox *l)
 
     /* Single click */
     if (event->type & GPM_DOWN)
-	dlg_select_widget (l->widget.parent, l);
+	dlg_select_widget (l);
     if (!l->list)
 	return MOU_NORMAL;
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
@@ -2089,7 +2089,7 @@ listbox_event (Gpm_Event *event, WListbox *l)
 	if (event->y < 1 || event->y > l->height)
 	    return MOU_NORMAL;
 
-	dlg_select_widget (l->widget.parent, l);
+	dlg_select_widget (l);
 	listbox_select_entry (l,
 			      listbox_select_pos (l, l->top,
 						  event->y - 1));

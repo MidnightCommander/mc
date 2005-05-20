@@ -425,7 +425,7 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
 	
 	if (!was_active){
 	    menubar->selected = new_selection;
-	    dlg_select_widget (menubar->widget.parent, menubar);
+	    dlg_select_widget (menubar);
 	    menubar_drop_compute (menubar);
 	    menubar_draw (menubar);
 	    return MOU_NORMAL;

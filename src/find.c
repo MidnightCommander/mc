@@ -166,7 +166,7 @@ find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 	if (regcomp (r, in_with->buffer, flags)) {
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
-	    dlg_select_widget (h, in_with);
+	    dlg_select_widget (in_with);
 	    h->running = 1;	/* Don't stop the dialog */
 	}
 	return MSG_HANDLED;
@@ -290,7 +290,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, label_new (5, 3, labs[1]));
     add_widget (find_dlg, label_new (3, 3, labs[0]));
 
-    dlg_select_widget (find_dlg, in_name);
+    dlg_select_widget (in_name);
 
     run_dlg (find_dlg);
 

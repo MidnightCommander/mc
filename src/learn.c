@@ -121,7 +121,7 @@ _("Please press the %s\n"
     
     dlg_run_done (d);
     destroy_dlg (d);
-    dlg_select_widget (learn_dlg, learnkeys [action - B_USER].button);
+    dlg_select_widget (learnkeys [action - B_USER].button);
     return 0; /* Do not kill learn_dlg */
 }
 
@@ -145,7 +145,7 @@ static int learn_move (int right)
                 else
                     i += (totalcols - 1) * ROWS;
             }
-            dlg_select_widget (learn_dlg, (void *) learnkeys [i].button);
+            dlg_select_widget (learnkeys [i].button);
             return 1;
         }
     return 0;
@@ -160,7 +160,7 @@ learn_check_key (int c)
 	if (key_name_conv_tab[i].code != c || learnkeys[i].ok)
 	    continue;
 
-	dlg_select_widget (learn_dlg, learnkeys[i].button);
+	dlg_select_widget (learnkeys[i].button);
 	/* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
 	label_set_text ((WLabel *) learnkeys[i].label, _("OK"));
 	learnkeys[i].ok = 1;

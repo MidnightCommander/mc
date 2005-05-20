@@ -1,3 +1,9 @@
+2005-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* dialog.c (dlg_select_widget): Remove first argument, it's
+	redundant.  Adjust all callers.
+	(dlg_replace_widget): Likewise.
+
 2005-05-11  Roland Illig  <roland.illig@gmx.de>
 
 	* charsets.c (translate_character): Fixed checking of the return

@@ -165,7 +165,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	add_widget (query_dlg, label_new (2, 3, text));
 
 	if (defbutton)
-	    dlg_select_widget (query_dlg, defbutton);
+	    dlg_select_widget (defbutton);
 
 	/* run dialog and make result */
 	run_dlg (query_dlg);

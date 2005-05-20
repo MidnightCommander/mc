@@ -411,7 +411,7 @@ dlg_select_by_id (Dlg_head *h, int id)
     } while (w != h->current);
 
     if (w_found)
-	dlg_select_widget(h, w_found);
+	dlg_select_widget(w_found);
 }
 
 
@@ -464,9 +464,9 @@ do_select_widget (Dlg_head *h, Widget *w, select_dir_t dir)
  * Try to select widget in the dialog.
  */
 void
-dlg_select_widget (Dlg_head *h, void *w)
+dlg_select_widget (void *w)
 {
-    do_select_widget (h, w, SELECT_NEXT);
+    do_select_widget (((Widget *) w)->parent, w, SELECT_NEXT);
 }
 
 
@@ -830,10 +830,11 @@ void widget_set_size (Widget *widget, int y, int x, int lines, int cols)
     send_message (widget, WIDGET_RESIZED, 0 /* unused */);
 }
 
-/* Replace widget old_w for widget new_w in the dialog h */
+/* Replace widget old_w for widget new_w in the dialog */
 void
-dlg_replace_widget (Dlg_head *h, Widget *old_w, Widget *new_w)
+dlg_replace_widget (Widget *old_w, Widget *new_w)
 {
+    Dlg_head *h = old_w->parent;
     int should_focus = 0;
 
     if (!h->current)
@@ -863,7 +864,7 @@ dlg_replace_widget (Dlg_head *h, Widget *old_w, Widget *new_w)
     send_message (new_w, WIDGET_INIT, 0);
 
     if (should_focus)
-	dlg_select_widget (h, new_w);
+	dlg_select_widget (new_w);
 
     send_message (new_w, WIDGET_DRAW, 0);
 }

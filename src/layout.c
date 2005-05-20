@@ -230,8 +230,8 @@ static int b2left_cback (int action)
 	/* Turn equal split off */
 	_equal_split = 0;
 	check_options [6].widget->state = check_options [6].widget->state & ~C_BOOL;
-	dlg_select_widget (layout_dlg, check_options [6].widget);
-	dlg_select_widget (layout_dlg, bleft_widget);
+	dlg_select_widget (check_options [6].widget);
+	dlg_select_widget (bleft_widget);
     }
     _first_panel_size++;
     return 0;
@@ -245,8 +245,8 @@ static int b2right_cback (int action)
 	/* Turn equal split off */
 	_equal_split = 0;
 	check_options [6].widget->state = check_options [6].widget->state & ~C_BOOL;
-	dlg_select_widget (layout_dlg, check_options [6].widget);
-	dlg_select_widget (layout_dlg, bright_widget);
+	dlg_select_widget (check_options [6].widget);
+	dlg_select_widget (bright_widget);
     }
     _first_panel_size--;
     return 0;
@@ -977,7 +977,7 @@ void set_display_type (int num, int type)
     /* We use replace to keep the circular list of the dialog in the */
     /* same state.  Maybe we could just kill it and then replace it  */
     if (midnight_dlg && old_widget){
-	dlg_replace_widget (midnight_dlg, old_widget, panels [num].widget);
+	dlg_replace_widget (old_widget, panels [num].widget);
     }
     if (type == view_listing){
 	if (num == 0)
@@ -1044,9 +1044,9 @@ void swap_panels ()
             current_panel = panel1;
 
         if (dlg_widget_active (panels[0].widget))
-            dlg_select_widget (midnight_dlg, (void *) panels [1].widget);
+            dlg_select_widget (panels [1].widget);
         else if (dlg_widget_active (panels[1].widget))
-            dlg_select_widget (midnight_dlg, (void *) panels [0].widget);
+            dlg_select_widget (panels [0].widget);
     } else {
 	WPanel *tmp_panel;
 	

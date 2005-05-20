@@ -467,9 +467,9 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
     case DLG_POST_KEY:
 	if (hotlist_state.moving)
-	    dlg_select_widget (movelist_dlg, l_movelist);
+	    dlg_select_widget (l_movelist);
 	else
-	    dlg_select_widget (hotlist_dlg, l_hotlist);
+	    dlg_select_widget (l_hotlist);
 	/* always stay on hotlist */
 	/* fall through */
 
