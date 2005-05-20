@@ -437,11 +437,42 @@ void edit_init_menu_emacs (struct Menu *EditMenuBar[])
 				    "[Internal File Editor]");
 }
 
-void edit_done_menu (struct Menu *EditMenuBar[])
+struct WMenu *
+edit_init_menu (void)
+{
+    struct Menu **EditMenuBar = g_new(struct Menu *, N_menus);
+
+    switch (edit_key_emulation) {
+    case EDIT_KEY_EMULATION_NORMAL:
+	edit_init_menu_normal (EditMenuBar);
+	break;
+    case EDIT_KEY_EMULATION_EMACS:
+	edit_init_menu_emacs (EditMenuBar);
+	break;
+    }
+    return menubar_new (0, 0, COLS, EditMenuBar, N_menus);
+}
+
+void
+edit_done_menu (struct WMenu *wmenu)
 {
     int i;
     for (i = 0; i < N_menus; i++)
-	destroy_menu (EditMenuBar[i]);
+	destroy_menu (wmenu->menu[i]);
+
+    g_free(wmenu->menu);
+}
+
+
+void
+edit_reload_menu (void)
+{
+    struct WMenu *new_edit_menubar;
+
+    new_edit_menubar = edit_init_menu ();
+    dlg_replace_widget (&edit_menubar->widget, &new_edit_menubar->widget);
+    edit_done_menu (edit_menubar);
+    edit_menubar = new_edit_menubar;
 }
 
 

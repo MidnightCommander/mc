@@ -1,5 +1,14 @@
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
+	* editwidget.c (edit_file): Move menu initialization ...
+	* editmenu.c (edit_init_menu): ... here.  Allocate menu
+	dynamically.
+	(edit_done_menu): Take Wmenu argument rather than Menu.  Free
+	menu.
+	(edit_reload_menu): New function, reload the menu.
+	(edit_options_dialog): Reload the menu if key emulation has
+	changed.
+
 	* edit.h: Eliminate global EditMenuBar.  Fix all dependencies.
 
 	* edit.h: Eliminate edit_message_dialog macro - it's used

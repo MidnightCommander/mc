@@ -212,7 +212,11 @@ edit_options_dialog (void)
 	option_typewriter_wrap = 0;
     }
 
-    edit_key_emulation = tedit_key_emulation;
+    /* Reload menu if key emulation has changed */
+    if (edit_key_emulation != tedit_key_emulation) {
+	edit_key_emulation = tedit_key_emulation;
+	edit_reload_menu ();
+    }
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
