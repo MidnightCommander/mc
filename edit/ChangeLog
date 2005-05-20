@@ -1,5 +1,7 @@
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h: Eliminate global EditMenuBar.  Fix all dependencies.
+
 	* edit.h: Eliminate edit_message_dialog macro - it's used
 	inconsistently.  Fix all callers to use query_dialog().
 

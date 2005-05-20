@@ -47,6 +47,7 @@
 
 WEdit *wedit;
 struct WMenu *edit_menubar;
+struct Menu *EditMenuBar[N_menus];
 
 int column_highlighting = 0;
 
@@ -216,10 +217,10 @@ edit_file (const char *_file, int line)
 
     switch (edit_key_emulation) {
     case EDIT_KEY_EMULATION_NORMAL:
-	edit_init_menu_normal ();	/* editmenu.c */
+	edit_init_menu_normal (EditMenuBar);	/* editmenu.c */
 	break;
     case EDIT_KEY_EMULATION_EMACS:
-	edit_init_menu_emacs ();	/* editmenu.c */
+	edit_init_menu_emacs (EditMenuBar);	/* editmenu.c */
 	break;
     }
     edit_menubar = menubar_new (0, 0, COLS, EditMenuBar, N_menus);
@@ -230,7 +231,7 @@ edit_file (const char *_file, int line)
 
     run_dlg (edit_dlg);
 
-    edit_done_menu ();		/* editmenu.c */
+    edit_done_menu (EditMenuBar);		/* editmenu.c */
 
     destroy_dlg (edit_dlg);
 

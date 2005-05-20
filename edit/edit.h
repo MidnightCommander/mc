@@ -107,12 +107,13 @@ struct macro {
 
 struct WEdit;
 typedef struct WEdit WEdit;
+struct Menu;
 
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-void edit_init_menu_emacs (void);
-void edit_init_menu_normal (void);
-void edit_done_menu (void);
+void edit_init_menu_emacs (struct Menu *EditMenuBar[]);
+void edit_init_menu_normal (struct Menu *EditMenuBar[]);
+void edit_done_menu (struct Menu *EditMenuBar[]);
 void menu_save_mode_cmd (void);
 int edit_raw_key_query (const char *heading, const char *query, int cancel);
 int edit_file (const char *_file, int line);
@@ -249,8 +250,6 @@ void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
 extern int edit_key_emulation;
 
 extern WEdit *wedit;
-struct Menu;
-extern struct Menu *EditMenuBar[];
 struct WMenu;
 extern struct WMenu *edit_menubar;
 
