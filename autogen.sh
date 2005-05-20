@@ -50,19 +50,19 @@ sed_cmd="${sed_cmd} -e 's/\\(......\\).*/\\1/'"
 
 gettext_ver=`$GETTEXTIZE --version | eval ${sed_cmd}`
 if test -z "$gettext_ver"; then
-  echo "Cannot determine version of gettext" 2>&1
+  echo "Cannot determine version of gettext" >&2
   exit 1
 fi
 
 if test "$gettext_ver" -lt 01038; then
-  echo "Don't use gettext older than 0.10.38" 2>&1
+  echo "Don't use gettext older than 0.10.38" >&2
   exit 1
 fi
 
 rm -rf intl
 if test "$gettext_ver" -ge 01100; then
   if test "$gettext_ver" -lt 01105; then
-    echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
+    echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" >&2
     exit 1
   fi
   $AUTOPOINT --force || exit 1
@@ -87,15 +87,15 @@ ACLOCAL_INCLUDES="-I m4"
 
 $ACLOCAL $ACLOCAL_INCLUDES $ACLOCAL_FLAGS
 test -f aclocal.m4 || \
-  { echo "aclocal failed to generate aclocal.m4" 2>&1; exit 1; }
+  { echo "aclocal failed to generate aclocal.m4" >&2; exit 1; }
 
 $AUTOHEADER || exit 1
 test -f config.h.in || \
-  { echo "autoheader failed to generate config.h.in" 2>&1; exit 1; }
+  { echo "autoheader failed to generate config.h.in" >&2; exit 1; }
 
 $AUTOCONF || exit 1
 test -f configure || \
-  { echo "autoconf failed to generate configure" 2>&1; exit 1; }
+  { echo "autoconf failed to generate configure" >&2; exit 1; }
 
 # Workaround for Automake 1.5 to ensure that depcomp is distributed.
 if test "`$AUTOMAKE --version|awk '{print $NF;exit}'`" = '1.5' ; then
@@ -103,18 +103,18 @@ if test "`$AUTOMAKE --version|awk '{print $NF;exit}'`" = '1.5' ; then
 fi
 $AUTOMAKE -a
 test -f Makefile.in || \
-  { echo "automake failed to generate Makefile.in" 2>&1; exit 1; }
+  { echo "automake failed to generate Makefile.in" >&2; exit 1; }
 
 cd vfs/samba
 date -u >include/stamp-h.in
 
 $AUTOHEADER
 test -f include/config.h.in || \
-  { echo "autoheader failed to generate vfs/samba/include/config.h.in" 2>&1; exit 1; }
+  { echo "autoheader failed to generate vfs/samba/include/config.h.in" >&2; exit 1; }
 
 $AUTOCONF
 test -f configure || \
-  { echo "autoconf failed to generate vfs/samba/configure" 2>&1; exit 1; }
+  { echo "autoconf failed to generate vfs/samba/configure" >&2; exit 1; }
 ) || exit 1
 
 if test -x $srcdir/configure.mc; then
