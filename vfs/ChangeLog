@@ -1,3 +1,7 @@
+2005-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c: Fix warnings reported by gcc 4.0.0.
+
 2005-05-13  Roland Illig  <roland.illig@gmx.de>
 
 	* ftpfs.c: Using HAVE_SOCKLEN_T instead of HAVE_C_TYPE_SOCKLEN_T.

@@ -635,7 +635,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
 static void
 extfs_run (struct vfs_class *me, const char *file)
 {
-    struct archive *archive;
+    struct archive *archive = NULL;
     char *p, *q, *archive_name, *mc_extfsdir;
     char *cmd;
 
@@ -659,7 +659,7 @@ static void *
 extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
-    struct archive *archive;
+    struct archive *archive = NULL;
     char *q;
     struct entry *entry;
     int local_handle;
@@ -865,7 +865,7 @@ static int extfs_errno (struct vfs_class *me)
 
 static void * extfs_opendir (struct vfs_class *me, const char *dirname)
 {
-    struct archive *archive;
+    struct archive *archive = NULL;
     char *q;
     struct entry *entry;
     struct entry **info;
@@ -1118,7 +1118,7 @@ cleanup:
 static int
 extfs_chdir (struct vfs_class *me, const char *path)
 {
-    struct archive *archive;
+    struct archive *archive = NULL;
     char *q;
     struct entry *entry;
 
@@ -1146,7 +1146,7 @@ static int extfs_lseek (void *data, off_t offset, int whence)
 static vfsid
 extfs_getid (struct vfs_class *me, const char *path)
 {
-    struct archive *archive;
+    struct archive *archive = NULL;
     char *p;
 
     if (!(p = extfs_get_path (me, path, &archive, 1)))
