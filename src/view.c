@@ -1947,7 +1947,7 @@ view_help_cmd (void)
      */
 }
 
-/* Toggle between text edit and hex edit */
+/* Toggle between hexview and hexedit mode */
 static void
 toggle_hexedit_mode (WView *view)
 {
