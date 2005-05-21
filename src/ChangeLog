@@ -5,7 +5,8 @@
 	and hex mode can be done with <tab>, as before.
 	* view.c: Renamed dpy_text_start to dpy_topleft, as it does not
 	only apply to text mode. Renamed dpy_text_start_col to
-	dpy_text_column.
+	dpy_text_column. Renamed edit_cursor to hex_cursor, as it is
+	used in hexview mode, too.
 
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 

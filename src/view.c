@@ -151,7 +151,7 @@ struct WView {
 				 * end of file? */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
-    offset_type edit_cursor;    /* Hexview cursor position in file */
+    offset_type hex_cursor;	/* Hexview cursor position in file */
     screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
@@ -318,12 +318,12 @@ view_hexview_move_to_eol(WView *view)
 
     assert(view->bytes_per_line >= 1);
 
-    linestart = view->edit_cursor - view->edit_cursor % view->bytes_per_line;
+    linestart = view->hex_cursor - view->hex_cursor % view->bytes_per_line;
     if (get_byte_indexed (view, linestart, view->bytes_per_line - 1) != -1) {
-        view->edit_cursor = linestart + view->bytes_per_line - 1;
+        view->hex_cursor = linestart + view->bytes_per_line - 1;
     } else {
 	filesize = view_get_filesize (view);
-        view->edit_cursor = (filesize >= 1) ? filesize - 1 : 0;
+        view->hex_cursor = (filesize >= 1) ? filesize - 1 : 0;
     }
     view->dirty++;
 }
@@ -426,7 +426,7 @@ view_handle_editkey (WView *view, int key)
 
     /* Has there been a change at this position? */
     node = view->change_list;
-    while (node && (node->offset != view->edit_cursor))
+    while (node && (node->offset != view->hex_cursor))
 	node = node->next;
 
     if (!view->hexview_in_text) {
@@ -445,7 +445,7 @@ view_handle_editkey (WView *view, int key)
 	if (node)
 	    byte_val = node->value;
 	else
-	    byte_val = get_byte (view, view->edit_cursor);
+	    byte_val = get_byte (view, view->hex_cursor);
 
 	if (view->hexedit_lownibble) {
 	    byte_val = (byte_val & 0xf0) | (hexvalue);
@@ -461,7 +461,7 @@ view_handle_editkey (WView *view, int key)
     }
     if (!node) {
 	node = g_new (struct hexedit_change_node, 1);
-	node->offset = view->edit_cursor;
+	node->offset = view->hex_cursor;
 	node->value = byte_val;
 	enqueue_change (&view->change_list, node);
     } else {
@@ -710,7 +710,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view_move_forward (view, start_line - 1);
 	view->text_wrap_mode = saved_wrap_mode;
     }
-    view->edit_cursor = 0;
+    view->hex_cursor = 0;
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
@@ -788,7 +788,7 @@ view_status (WView *view)
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
 	    if (view->hex_mode)
-		printw (str_unconst (_("Offset 0x%08lx")), view->edit_cursor);
+		printw (str_unconst (_("Offset 0x%08lx")), view->hex_cursor);
 	    else
 		printw (str_unconst (_("Col %lu")), view->dpy_text_column);
 	}
@@ -805,7 +805,7 @@ view_status (WView *view)
 	}
 	if (w > 26) {
 	    view_percent (view, view->hex_mode
-		? view->edit_cursor
+		? view->hex_cursor
 		: view->dpy_topleft);
 	}
     }
@@ -957,7 +957,7 @@ display (WView *view)
 		    attrset (MARKED_COLOR);
 		}
 		/* Display the navigation cursor */
-		if (from == view->edit_cursor) {
+		if (from == view->hex_cursor) {
 		    if (!view->hexview_in_text) {
 			view->cursor_row = row;
 			view->cursor_col = col;
@@ -1196,18 +1196,18 @@ view_move_forward2 (WView *view, offset_type current, int lines, offset_type upt
 	    p = current;
 
 	if (lines == 1) {
-	    nextline = view->edit_cursor / view->bytes_per_line + 1;
+	    nextline = view->hex_cursor / view->bytes_per_line + 1;
 	    lastline = (last_byte - 1) / view->bytes_per_line;
 	    if (nextline <= lastline)
-		view->edit_cursor += view->bytes_per_line;
-	    if (view->edit_cursor >= last_byte)
-		view->edit_cursor = last_byte - 1;
+		view->hex_cursor += view->bytes_per_line;
+	    if (view->hex_cursor >= last_byte)
+		view->hex_cursor = last_byte - 1;
 	    datalines = view_get_datalines (view);
-	    if (view->edit_cursor < current + datalines * view->bytes_per_line)
+	    if (view->hex_cursor < current + datalines * view->bytes_per_line)
 		p = current;
 	} else {
-	    if (view->edit_cursor < p)
-		view->edit_cursor = p;
+	    if (view->hex_cursor < p)
+		view->hex_cursor = p;
 	}
 	return p;
     } else {
@@ -1306,12 +1306,12 @@ static offset_type
 move_backward2 (WView *view, offset_type current, unsigned int lines)
 {
     if (view->hex_mode) {
-        if (view->edit_cursor >= lines * view->bytes_per_line) {
-            view->edit_cursor -= lines * view->bytes_per_line;
+        if (view->hex_cursor >= lines * view->bytes_per_line) {
+            view->hex_cursor -= lines * view->bytes_per_line;
         } else {
-            view->edit_cursor %= view->bytes_per_line;
+            view->hex_cursor %= view->bytes_per_line;
         }
-        if (current > view->edit_cursor) {
+        if (current > view->hex_cursor) {
             /* cursor is out-of-view -- adjust the view */
             if (current >= lines * view->bytes_per_line) {
                 current -= lines * view->bytes_per_line;
@@ -1401,7 +1401,7 @@ move_to_top (WView *view)
     view->search_start = view->dpy_topleft = 0;
     view->found_len = 0;
     view->hexedit_lownibble = FALSE;
-    view->edit_cursor = view->dpy_topleft;
+    view->hex_cursor = view->dpy_topleft;
     view->dirty++;
 }
 
@@ -1411,8 +1411,8 @@ move_to_bottom (WView *view)
     view->search_start = view->dpy_topleft =
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
-    if (view->edit_cursor < view->dpy_topleft)
-	view->edit_cursor = view->dpy_topleft;
+    if (view->hex_cursor < view->dpy_topleft)
+	view->hex_cursor = view->dpy_topleft;
     view->dirty++;
 }
 
@@ -1430,11 +1430,11 @@ move_right (WView *view)
 	    if (view->hexedit_lownibble)
 		return;
 	}
-	if (get_byte_indexed (view, view->edit_cursor, 1) != -1)
-	    view->edit_cursor++;
+	if (get_byte_indexed (view, view->hex_cursor, 1) != -1)
+	    view->hex_cursor++;
 	bytes_on_screen = view_get_datalines (view) * view->bytes_per_line;
-	if (view->edit_cursor >= view->dpy_topleft + bytes_on_screen) {
-	    view->edit_cursor -= view->bytes_per_line;
+	if (view->hex_cursor >= view->dpy_topleft + bytes_on_screen) {
+	    view->hex_cursor -= view->bytes_per_line;
 	    view_move_forward (view, 1);
 	}
     } else
@@ -1453,10 +1453,10 @@ move_left (WView *view)
 	    if (!view->hexedit_lownibble)
 		return;
 	}
-	if (view->edit_cursor > 0)
-	    --view->edit_cursor;
-	if (view->edit_cursor < view->dpy_topleft) {
-	    view->edit_cursor += view->bytes_per_line;
+	if (view->hex_cursor > 0)
+	    --view->hex_cursor;
+	if (view->hex_cursor < view->dpy_topleft) {
+	    view->hex_cursor += view->bytes_per_line;
 	    view_move_backward (view, 1);
 	}
     } else {
@@ -1864,7 +1864,7 @@ hex_search (WView *view, const char *text)
     view->search_start = pos;
     view->found_len = block_len;
     /* Set the edit cursor to the search position, left nibble */
-    view->edit_cursor = view->search_start;
+    view->hex_cursor = view->search_start;
     view->hexedit_lownibble = FALSE;
 
     /* Adjust the file offset */
@@ -1990,7 +1990,7 @@ toggle_hex_mode (WView *view)
 	/* Shift the line start to 0x____0 on entry, restore it for text */
 	view->start_save = view->dpy_topleft;
 	view->dpy_topleft -= view->dpy_topleft % view->bytes_per_line;
-	view->edit_cursor = view->dpy_topleft;
+	view->hex_cursor = view->dpy_topleft;
 	view->widget.options |= W_WANT_CURSOR;
     } else {
 	view->dpy_topleft = view->start_save;
@@ -2044,7 +2044,7 @@ goto_addr (WView *view)
 
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current address is 0x%lx.\n"
-		  " Enter the new address:"), view->edit_cursor);
+		  " Enter the new address:"), view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, "");
     if (line) {
 	if (*line) {
@@ -2052,7 +2052,7 @@ goto_addr (WView *view)
 	    if ((*error == '\0') && get_byte (view, addr) != -1) {
 		move_to_top (view);
 		view_move_forward (view, addr / view->bytes_per_line);
-		view->edit_cursor = addr;
+		view->hex_cursor = addr;
 	    }
 	}
 	g_free (line);
@@ -2325,7 +2325,7 @@ view_handle_key (WView *view, int c)
 	    return MSG_HANDLED;
 
 	case XCTRL ('a'):	/* Beginning of line */
-	    view->edit_cursor -= view->edit_cursor % view->bytes_per_line;
+	    view->hex_cursor -= view->hex_cursor % view->bytes_per_line;
 	    view->dirty++;
 	    return MSG_HANDLED;
 
@@ -2721,7 +2721,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->bottom_first      = INVALID_OFFSET;
     view->dpy_topleft       = 0;
     view->dpy_text_column   = 0;
-    view->edit_cursor       = 0;
+    view->hex_cursor        = 0;
     view->hexedit_mode      = default_hexedit_mode;
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text   = FALSE;
