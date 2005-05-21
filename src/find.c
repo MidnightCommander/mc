@@ -1067,7 +1067,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 void
 do_find (void)
 {
-    char *start_dir, *pattern, *content;
+    char *start_dir = NULL, *pattern = NULL, *content = NULL;
     char *filename, *dirname;
     int  v, dir_and_file_set;
     regex_t rx; /* Compiled content_pattern to search inside files */

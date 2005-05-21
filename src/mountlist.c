@@ -609,6 +609,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
     }
 
     if (entry){
+	memset (&fs_use, 0, sizeof (struct fs_usage));
 	get_fs_usage (entry->me_mountdir, &fs_use);
 
 	myfs_stats->type = entry->me_dev;

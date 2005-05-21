@@ -1329,7 +1329,7 @@ use_display_format (WPanel *panel, const char *format, char **error, int isstatu
 #define MAX_EXPAND 4
     int  expand_top = 0;               /* Max used element in expand */
     int  usable_columns;               /* Usable columns in the panel */
-    int  total_cols;
+    int  total_cols = 0;
     const char *expand_list [MAX_EXPAND];    /* Expand at most 4 fields. */
     int  i;
     format_e *darr, *home;

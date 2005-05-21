@@ -1,5 +1,10 @@
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
+	* find.c: Fix warnings reported by gcc 4.0.0.
+	* mountlist.c: Likewise.
+	* screen.c: Likewise.
+	* view.c: Likewise.
+
 	* dialog.c (dlg_select_widget): Remove first argument, it's
 	redundant.  Adjust all callers.
 	(dlg_replace_widget): Likewise.

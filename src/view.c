@@ -739,7 +739,7 @@ view_percent (WView *view, offset_type p)
 {
     const int xpos = view->widget.cols - view->dpy_frame_size - 4;
     int percent;
-    gboolean exact;
+    gboolean exact = FALSE;
     offset_type filesize;
 
     filesize = view_get_filesize_with_exact (view, &exact);
@@ -793,7 +793,7 @@ view_status (WView *view)
 	}
 	if (w > 62) {
 	    offset_type filesize;
-	    gboolean exact;
+	    gboolean exact = FALSE;
 	    filesize = view_get_filesize_with_exact (view, &exact);
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
 	    if (exact) {
@@ -1606,7 +1606,7 @@ search (WView *view, char *text,
     /* the position returned after the line has been read */
     offset_type forward_line_start;
     offset_type reverse_line_start;
-    offset_type t;
+    offset_type t = 0;
     /* Clear interrupt status */
     got_interrupt ();
 
