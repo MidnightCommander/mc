@@ -147,10 +147,11 @@ struct WView {
     offset_type dpy_topleft;	/* Offset of the byte in the top left corner */
     offset_type dpy_text_column;/* Number of skipped columns in non-wrap
 				 * text mode */
-    gboolean    dpy_complete;	/* The complete file fits on one screen */
+    gboolean    dpy_complete;	/* Has the last call to display() reached the
+				 * end of file? */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
-    offset_type edit_cursor;    /* HexEdit cursor position in file */
+    offset_type edit_cursor;    /* Hexview cursor position in file */
     screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
