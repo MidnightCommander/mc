@@ -144,9 +144,9 @@ struct WView {
 
     /* Display information */
     int         dpy_frame_size;	/* Size of the frame surrounding the real viewer */
-    offset_type dpy_text_start;	/* Offset of the top left corner in text mode */
-    offset_type dpy_text_start_col;
-				/* Column at the left side of the viewer */
+    offset_type dpy_topleft;	/* Offset of the byte in the top left corner */
+    offset_type dpy_text_column;/* Number of skipped columns in non-wrap
+				 * text mode */
     gboolean    dpy_complete;	/* The complete file fits on one screen */
     offset_type bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
@@ -626,7 +626,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	view->marks[i] = 0;
 
     if (!view_is_in_panel (view)) {
-	view->dpy_text_start_col = 0;
+	view->dpy_text_column = 0;
     }
 
     if (_command && (view->magic_mode || _file[0] == '\0')) {
@@ -690,10 +690,10 @@ view_load (WView *view, const char *_command, const char *_file,
     }
 
     view->command = g_strdup (_command);
-    view->search_start = view->dpy_text_start = view->start_save =
+    view->search_start = view->dpy_topleft = view->start_save =
 	0;
     view->found_len = 0;
-    view->dpy_text_start_col = 0;
+    view->dpy_text_column = 0;
     view->last_search = 0;	/* Start a new search */
 
     if (error) {
@@ -789,7 +789,7 @@ view_status (WView *view)
 	    if (view->hex_mode)
 		printw (str_unconst (_("Offset 0x%08lx")), view->edit_cursor);
 	    else
-		printw (str_unconst (_("Col %lu")), view->dpy_text_start_col);
+		printw (str_unconst (_("Col %lu")), view->dpy_text_column);
 	}
 	if (w > 62) {
 	    offset_type filesize;
@@ -805,7 +805,7 @@ view_status (WView *view)
 	if (w > 26) {
 	    view_percent (view, view->hex_mode
 		? view->edit_cursor
-		: view->dpy_text_start);
+		: view->dpy_topleft);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -870,7 +870,7 @@ view_display_ruler (WView *view)
     attrset (MARKED_COLOR);
     for (c = left; c < right; c++) {
 	/* FIXME: possible integer overflow */
-	cl = c + view->dpy_text_start_col;
+	cl = c + view->dpy_text_column;
 	view_gotoyx (view, line_row, c);
 	view_add_character (view, ruler_chars[cl % 10]);
 
@@ -883,7 +883,7 @@ view_display_ruler (WView *view)
     attrset (NORMAL_COLOR);
 }
 
-/* Shows the file pointed to by *dpy_text_start on view_win */
+/* Shows the file pointed to by *dpy_topleft on view_win */
 static offset_type
 display (WView *view)
 {
@@ -899,7 +899,7 @@ display (WView *view)
 
     bottom = view_get_bottom (view);
     right = view_get_right (view);
-    from = view->dpy_text_start;
+    from = view->dpy_topleft;
     attrset (NORMAL_COLOR);
 
     view_display_clean (view, bottom, right);
@@ -1097,9 +1097,9 @@ display (WView *view)
 		attrset (SELECTED_COLOR);
 	    }
 	    /* FIXME: incompatible widths in integer types */
-	    if (col >= left + view->dpy_text_start_col
-		&& col < right + view->dpy_text_start_col) {
-		view_gotoyx (view, row, col - view->dpy_text_start_col);
+	    if (col >= left + view->dpy_text_column
+		&& col < right + view->dpy_text_column) {
+		view_gotoyx (view, row, col - view->dpy_text_column);
 
 		c = convert_to_display_c (c);
 
@@ -1347,8 +1347,8 @@ move_backward2 (WView *view, offset_type current, unsigned int lines)
 static void
 view_move_backward (WView *view, int i)
 {
-    view->search_start = view->dpy_text_start =
-	move_backward2 (view, view->dpy_text_start, i);
+    view->search_start = view->dpy_topleft =
+	move_backward2 (view, view->dpy_topleft, i);
     view->found_len = 0;
     view->dirty++;
 }
@@ -1384,11 +1384,11 @@ get_bottom_first (WView *view, int do_not_cache, int really)
 static void
 view_move_forward (WView *view, int i)
 {
-    view->dpy_text_start = view_move_forward2 (view, view->dpy_text_start, i, 0);
+    view->dpy_topleft = view_move_forward2 (view, view->dpy_topleft, i, 0);
     if ((!view->growbuf_in_use || view->growbuf_finished)
-	&& view->dpy_text_start > get_bottom_first (view, 0, 0))
-	view->dpy_text_start = view->bottom_first;
-    view->search_start = view->dpy_text_start;
+	&& view->dpy_topleft > get_bottom_first (view, 0, 0))
+	view->dpy_topleft = view->bottom_first;
+    view->search_start = view->dpy_topleft;
     view->found_len = 0;
     view->dirty++;
 }
@@ -1397,21 +1397,21 @@ view_move_forward (WView *view, int i)
 static void
 move_to_top (WView *view)
 {
-    view->search_start = view->dpy_text_start = 0;
+    view->search_start = view->dpy_topleft = 0;
     view->found_len = 0;
     view->hexedit_lownibble = FALSE;
-    view->edit_cursor = view->dpy_text_start;
+    view->edit_cursor = view->dpy_topleft;
     view->dirty++;
 }
 
 static void
 move_to_bottom (WView *view)
 {
-    view->search_start = view->dpy_text_start =
+    view->search_start = view->dpy_topleft =
 	get_bottom_first (view, 0, 1);
     view->found_len = 0;
-    if (view->edit_cursor < view->dpy_text_start)
-	view->edit_cursor = view->dpy_text_start;
+    if (view->edit_cursor < view->dpy_topleft)
+	view->edit_cursor = view->dpy_topleft;
     view->dirty++;
 }
 
@@ -1432,12 +1432,12 @@ move_right (WView *view)
 	if (get_byte_indexed (view, view->edit_cursor, 1) != -1)
 	    view->edit_cursor++;
 	bytes_on_screen = view_get_datalines (view) * view->bytes_per_line;
-	if (view->edit_cursor >= view->dpy_text_start + bytes_on_screen) {
+	if (view->edit_cursor >= view->dpy_topleft + bytes_on_screen) {
 	    view->edit_cursor -= view->bytes_per_line;
 	    view_move_forward (view, 1);
 	}
     } else
-	view->dpy_text_start_col++;
+	view->dpy_text_column++;
     view->dirty++;
 }
 
@@ -1454,13 +1454,13 @@ move_left (WView *view)
 	}
 	if (view->edit_cursor > 0)
 	    --view->edit_cursor;
-	if (view->edit_cursor < view->dpy_text_start) {
+	if (view->edit_cursor < view->dpy_topleft) {
 	    view->edit_cursor += view->bytes_per_line;
 	    view_move_backward (view, 1);
 	}
     } else {
-	if (view->dpy_text_start_col > 0)
-	    view->dpy_text_start_col--;
+	if (view->dpy_text_column > 0)
+	    view->dpy_text_column--;
     }
     view->dirty++;
 }
@@ -1676,9 +1676,9 @@ search (WView *view, char *text,
 
 	if (t != beginning) {
 	    if (t > get_bottom_first (view, 0, 0))
-		view->dpy_text_start = view->bottom_first;
+		view->dpy_topleft = view->bottom_first;
 	    else
-		view->dpy_text_start = t;
+		view->dpy_topleft = t;
 	}
 
 	g_free (s);
@@ -1867,9 +1867,9 @@ hex_search (WView *view, const char *text)
     view->hexedit_lownibble = FALSE;
 
     /* Adjust the file offset */
-    view->dpy_text_start = pos - pos % view->bytes_per_line;
-    if (view->dpy_text_start > get_bottom_first (view, 0, 0))
-	view->dpy_text_start = view->bottom_first;
+    view->dpy_topleft = pos - pos % view->bytes_per_line;
+    if (view->dpy_topleft > get_bottom_first (view, 0, 0))
+	view->dpy_topleft = view->bottom_first;
 }
 
 static int
@@ -1965,11 +1965,11 @@ toggle_wrap_mode (WView *view)
     view->text_wrap_mode = !view->text_wrap_mode;
     get_bottom_first (view, 1, 1);
     if (view->text_wrap_mode)
-	view->dpy_text_start_col = 0;
+	view->dpy_text_column = 0;
     else {
 	if (have_fast_cpu) {
-	    if (view->bottom_first < view->dpy_text_start)
-		view->search_start = view->dpy_text_start =
+	    if (view->bottom_first < view->dpy_topleft)
+		view->search_start = view->dpy_topleft =
 		    view->bottom_first;
 	    view->found_len = 0;
 	}
@@ -1987,12 +1987,12 @@ toggle_hex_mode (WView *view)
 
     if (view->hex_mode) {
 	/* Shift the line start to 0x____0 on entry, restore it for text */
-	view->start_save = view->dpy_text_start;
-	view->dpy_text_start -= view->dpy_text_start % view->bytes_per_line;
-	view->edit_cursor = view->dpy_text_start;
+	view->start_save = view->dpy_topleft;
+	view->dpy_topleft -= view->dpy_topleft % view->bytes_per_line;
+	view->edit_cursor = view->dpy_topleft;
 	view->widget.options |= W_WANT_CURSOR;
     } else {
-	view->dpy_text_start = view->start_save;
+	view->dpy_topleft = view->start_save;
 	view->widget.options &= ~W_WANT_CURSOR;
     }
     altered_hex_mode = 1;
@@ -2014,7 +2014,7 @@ goto_line (WView *view)
     view->text_wrap_mode = FALSE;
 
     /* FIXME: this is awfully slow */
-    for (i = 0; i < view->dpy_text_start; i++)
+    for (i = 0; i < view->dpy_topleft; i++)
 	if (get_byte (view, i) == '\n')
 	    oldline++;
 
@@ -2279,19 +2279,19 @@ check_left_right_keys (WView *view, int c)
 	return MSG_NOT_HANDLED;
 
     if (c == (KEY_M_CTRL | KEY_LEFT)) {
-	if (view->dpy_text_start_col >= 10)
-	    view->dpy_text_start_col -= 10;
+	if (view->dpy_text_column >= 10)
+	    view->dpy_text_column -= 10;
 	else
-	    view->dpy_text_start_col = 0;
+	    view->dpy_text_column = 0;
 	view->dirty++;
 	return MSG_HANDLED;
     }
 
     if (c == (KEY_M_CTRL | KEY_RIGHT)) {
-        if (view->dpy_text_start_col <= OFFSETTYPE_MAX - 10)
-	    view->dpy_text_start_col += 10;
+        if (view->dpy_text_column <= OFFSETTYPE_MAX - 10)
+	    view->dpy_text_column += 10;
 	else
-	    view->dpy_text_start_col = OFFSETTYPE_MAX;
+	    view->dpy_text_column = OFFSETTYPE_MAX;
 	view->dirty++;
 	return MSG_HANDLED;
     }
@@ -2450,11 +2450,11 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'm':
-	view->marks[view->marker] = view->dpy_text_start;
+	view->marks[view->marker] = view->dpy_topleft;
 	return MSG_HANDLED;
 
     case 'r':
-	view->dpy_text_start = view->marks[view->marker];
+	view->dpy_topleft = view->marks[view->marker];
 	view->dirty++;
 	return MSG_HANDLED;
 
@@ -2718,8 +2718,8 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view->dpy_frame_size    = is_panel ? 1 : 0;
     view->bottom_first      = INVALID_OFFSET;
-    view->dpy_text_start    = 0;
-    view->dpy_text_start_col = 0;
+    view->dpy_topleft       = 0;
+    view->dpy_text_column   = 0;
     view->edit_cursor       = 0;
     view->hexedit_mode      = default_hexedit_mode;
     view->hexedit_lownibble = FALSE;

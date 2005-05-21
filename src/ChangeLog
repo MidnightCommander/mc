@@ -3,6 +3,9 @@
 	* view.c: Made the F2 key action much simpler---now it just
 	toggles between hexview and hexedit mode. Switching between text
 	and hex mode can be done with <tab>, as before.
+	* view.c: Renamed dpy_text_start to dpy_topleft, as it does not
+	only apply to text mode. Renamed dpy_text_start_col to
+	dpy_text_column.
 
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
