@@ -9,6 +9,9 @@
 	used in hexview mode, too.
 	* view.c (view_labels): Simplified the code that decides whether
 	the user can switch to hexedit mode.
+	* win.h: Removed a const qualifier from the type movefn, as these
+	functions typically modify their object.
+	* win.c: Likewise.
 
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
