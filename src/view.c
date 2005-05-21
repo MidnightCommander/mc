@@ -1952,11 +1952,7 @@ static void
 toggle_hexedit_mode (WView *view)
 {
     get_bottom_first (view, 1, 1);
-    if (view->hexedit_mode) {
-	view->hexview_in_text = !view->hexview_in_text;
-    } else {
-	view->hexedit_mode = !view->hexedit_mode;
-    }
+    view->hexedit_mode = !view->hexedit_mode;
     view_labels (view);
     view->dirty++;
     view_update (view);
@@ -2235,8 +2231,7 @@ view_labels (WView *view)
 
     if (view->hex_mode)
 	if (view->hexedit_mode)
-	    my_define (h, 2, view->hexview_in_text ? _("EdHex") : _("EdText"),
-		       toggle_hexedit_mode, view);
+	    my_define (h, 2, _("View"), toggle_hexedit_mode, view);
 	else {
 	    /* FIXME: add new function view_datasource_is_editable() */
 	    /* FIXME: why is editing in panel mode disabled? */

@@ -1,3 +1,9 @@
+2005-05-21  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Made the F2 key action much simpler---now it just
+	toggles between hexview and hexedit mode. Switching between text
+	and hex mode can be done with <tab>, as before.
+
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
 	* find.c: Fix warnings reported by gcc 4.0.0.
