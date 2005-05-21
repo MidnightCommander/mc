@@ -2230,16 +2230,14 @@ view_labels (WView *view)
     my_define (h, 6, view->hex_mode ? _("Save") : _("RxSrch"),
 	       regexp_search_cmd, view);
 
-    if (view->hex_mode)
-	if (view->hexedit_mode)
+    if (view->hex_mode) {
+	if (view->hexedit_mode) {
 	    my_define (h, 2, _("View"), toggle_hexedit_mode, view);
-	else {
-	    /* FIXME: add new function view_datasource_is_editable() */
-	    /* FIXME: why is editing in panel mode disabled? */
-	    if (view->growbuf_in_use || view_is_in_panel (view))
-		my_define (h, 2, "", NULL, view);
-	    else
-		my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
+	} else if (view->datasource == DS_FILE) {
+	    my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
+	} else {
+	    my_define (h, 2, "", NULL, view);
+	}
     } else
 	my_define (h, 2, view->text_wrap_mode ? _("UnWrap") : _("Wrap"),
 		   toggle_wrap_mode, view);

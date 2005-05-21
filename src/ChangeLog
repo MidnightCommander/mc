@@ -7,6 +7,8 @@
 	only apply to text mode. Renamed dpy_text_start_col to
 	dpy_text_column. Renamed edit_cursor to hex_cursor, as it is
 	used in hexview mode, too.
+	* view.c (view_labels): Simplified the code that decides whether
+	the user can switch to hexedit mode.
 
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
