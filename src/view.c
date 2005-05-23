@@ -740,7 +740,7 @@ view_percent (WView *view, offset_type p)
 {
     const int xpos = view->widget.cols - view->dpy_frame_size - 4;
     int percent;
-    gboolean exact = FALSE;
+    gboolean exact;
     offset_type filesize;
 
     filesize = view_get_filesize_with_exact (view, &exact);
@@ -794,7 +794,7 @@ view_status (WView *view)
 	}
 	if (w > 62) {
 	    offset_type filesize;
-	    gboolean exact = FALSE;
+	    gboolean exact;
 	    filesize = view_get_filesize_with_exact (view, &exact);
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
 	    if (exact) {
@@ -1526,6 +1526,8 @@ get_line_at (WView *view, offset_type *p, offset_type *skipped)
     offset_type i = 0;
     int prev = 0;
 
+    *skipped = 0;
+
     if (!pos && direction == -1)
 	return 0;
 
@@ -1607,7 +1609,7 @@ search (WView *view, char *text,
     /* the position returned after the line has been read */
     offset_type forward_line_start;
     offset_type reverse_line_start;
-    offset_type t = 0;
+    offset_type t;
     /* Clear interrupt status */
     got_interrupt ();
 
@@ -2785,18 +2787,16 @@ view_get_filesize (WView *view)
 static offset_type
 view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
 {
+    *ret_exact = TRUE;
     switch (view->datasource) {
 	case DS_NONE:
-	    *ret_exact = TRUE;
 	    return 0;
 	case DS_STDIO_PIPE:
 	case DS_VFS_PIPE:
 	    return view_growbuf_filesize (view, ret_exact);
 	case DS_FILE:
-	    *ret_exact = TRUE;
 	    return view->ds_file_filesize;
 	case DS_STRING:
-	    *ret_exact = TRUE;
 	    return view->ds_string_len;
 	default:
 	    assert(!"Unknown datasource type");
