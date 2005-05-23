@@ -220,8 +220,10 @@ static void info_hook (void *data)
 }
 
 static cb_ret_t
-info_callback (struct WInfo *info, widget_msg_t msg, int parm)
+info_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    struct WInfo *info = (struct WInfo *) w;
+
     switch (msg) {
 
     case WIDGET_INIT:
@@ -250,8 +252,7 @@ struct WInfo *info_new ()
 {
     struct WInfo *info = g_new (struct WInfo, 1);
 
-    init_widget (&info->widget, 0, 0, 0, 0, (callback_fn)
-		 info_callback, NULL);
+    init_widget (&info->widget, 0, 0, 0, 0, info_callback, NULL);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

@@ -10,6 +10,7 @@
 	* filegui.c: Removed unnecessary function casts.
 	* fileopctx.c: Likewise.
 	* help.c: Removed function casts.
+	* info.c: Removed function casts.
 
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
