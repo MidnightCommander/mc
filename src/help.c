@@ -245,10 +245,8 @@ static void move_backward (int i)
     currentpoint = move_backward2 (currentpoint, ++i);
 }
 
-static void move_to_top (int dummy)
+static void move_to_top (void)
 {
-    (void) dummy;
-
     while (currentpoint > data && *currentpoint != CHAR_NODE_END)
 	currentpoint--;
     while (*currentpoint != ']')
@@ -257,10 +255,8 @@ static void move_to_top (int dummy)
     selected_item = NULL;
 }
 
-static void move_to_bottom (int dummy)
+static void move_to_bottom (void)
 {
-    (void) dummy;
-
     while (*currentpoint && *currentpoint != CHAR_NODE_END)
 	currentpoint++;
     currentpoint--;
@@ -614,19 +610,38 @@ mousedispatch_new (int y, int x, int yl, int xl)
     return w;
 }
 
+static void help_cmk_move_backward(void *data, int lines) {
+    (void) &data;
+    move_backward(lines);
+}
+static void help_cmk_move_forward(void *data, int lines) {
+    (void) &data;
+    move_forward(lines);
+}
+static void help_cmk_moveto_top(void *data, int lines) {
+    (void) &data;
+    (void) &lines;
+    move_to_top();
+}
+static void help_cmk_moveto_bottom(void *data, int lines) {
+    (void) &data;
+    (void) &lines;
+    move_to_bottom();
+}
+
 static cb_ret_t
 help_handle_key (struct Dlg_head *h, int c)
 {
     const char *new_item;
 
     if (c != KEY_UP && c != KEY_DOWN &&
-	check_movement_keys (c, help_lines, currentpoint,
-			     (movefn) move_backward2,
-			     (movefn) move_forward2,
-			     (movefn) move_to_top,
-			     (movefn) move_to_bottom))
+	check_movement_keys (c, help_lines, NULL,
+			     help_cmk_move_backward,
+			     help_cmk_move_forward,
+			     help_cmk_moveto_top,
+			     help_cmk_moveto_bottom)) {
 	/* Nothing */;
-    else switch (c){
+    } else switch (c){
     case 'l':
     case KEY_LEFT:
 	prev_node_cmd (h);

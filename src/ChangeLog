@@ -1,3 +1,8 @@
+2005-05-23  Roland Illig  <roland.illig@gmx.de>
+
+	* help.c: Fixed the use of check_movement_keys(). This had been
+	really ugly code, involving casts on incompatible functions.
+
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* view.c: Better fix for the gcc 4.0.0 warnings.  Fix callees
