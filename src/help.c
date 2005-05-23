@@ -475,8 +475,10 @@ static void help_show (Dlg_head *h, const char *paint_start)
 	dlg_move (h, active_line, active_col);
 }
 
-static int help_event (Gpm_Event *event, Widget *w)
+static int
+help_event (Gpm_Event *event, void *data)
 {
+    Widget *w = data;
     Link_Area *current_area;
 
     if (! (event->type & GPM_UP))
@@ -546,8 +548,9 @@ static int help_event (Gpm_Event *event, Widget *w)
 
 /* show help */
 static void
-help_help_cmd (Dlg_head *h)
+help_help_cmd (void *data)
 {
+    Dlg_head *h = data;
     history_ptr = (history_ptr+1) % HISTORY_SIZE;
     history [history_ptr].page = currentpoint;
     history [history_ptr].link = selected_item;
@@ -557,8 +560,9 @@ help_help_cmd (Dlg_head *h)
 }
 
 static void
-help_index_cmd (Dlg_head * h)
+help_index_cmd (void *data)
 {
+    Dlg_head *h = data;
     const char *new_item;
 
     if (!(new_item = search_string (data, "[Contents]"))) {
@@ -581,8 +585,9 @@ static void help_quit_cmd (void *x)
     dlg_stop ((Dlg_head *)x);
 }
 
-static void prev_node_cmd (Dlg_head *h)
+static void prev_node_cmd (void *data)
 {
+    Dlg_head *h = data;
     currentpoint = startpoint = history [history_ptr].page;
     selected_item = history [history_ptr].link;
     history_ptr--;
@@ -604,8 +609,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
 {
     Widget *w = g_new (Widget, 1);
 
-    init_widget (w, y, x, yl, xl, (callback_fn) md_callback,
-		 (mouse_h) help_event);
+    init_widget (w, y, x, yl, xl, md_callback, help_event);
 
     return w;
 }
@@ -841,12 +845,9 @@ interactive_display (const char *filename, const char *node)
     add_widget (whelp, md);
     add_widget (whelp, help_bar);
 
-    buttonbar_set_label_data (whelp, 1, _("Help"), (buttonbarfn) help_help_cmd,
-		       whelp);
-    buttonbar_set_label_data (whelp, 2, _("Index"), (buttonbarfn) help_index_cmd,
-		       whelp);
-    buttonbar_set_label_data (whelp, 3, _("Prev"), (buttonbarfn) prev_node_cmd,
-		       whelp);
+    buttonbar_set_label_data (whelp, 1, _("Help"), help_help_cmd, whelp);
+    buttonbar_set_label_data (whelp, 2, _("Index"), help_index_cmd, whelp);
+    buttonbar_set_label_data (whelp, 3, _("Prev"), prev_node_cmd, whelp);
     buttonbar_set_label (whelp, 4, "", 0);
     buttonbar_set_label (whelp, 5, "", 0);
     buttonbar_set_label (whelp, 6, "", 0);
@@ -859,4 +860,3 @@ interactive_display (const char *filename, const char *node)
     interactive_display_finish ();
     destroy_dlg (whelp);
 }
-
