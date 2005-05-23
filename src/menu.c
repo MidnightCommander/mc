@@ -340,8 +340,10 @@ static int menubar_handle_key (WMenu *menubar, int key)
 }
 
 static cb_ret_t
-menubar_callback (WMenu *menubar, widget_msg_t msg, int parm)
+menubar_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WMenu *menubar = (WMenu *) w;
+
     switch (msg) {
 	/* We do not want the focus unless we have been activated */
     case WIDGET_FOCUS:
@@ -392,8 +394,9 @@ menubar_callback (WMenu *menubar, widget_msg_t msg, int parm)
 }
 
 static int
-menubar_event    (Gpm_Event *event, WMenu *menubar)
+menubar_event    (Gpm_Event *event, void *data)
 {
+    WMenu *menubar = data;
     int was_active;
     int new_selection;
     int left_x, right_x, bottom_y;
@@ -540,8 +543,7 @@ menubar_new (int y, int x, int cols, Menu *menu[], int items)
     WMenu *menubar = g_new0 (WMenu, 1);	/* FIXME: subsel used w/o being set */
 
     init_widget (&menubar->widget, y, x, 1, cols,
-		 (callback_fn) menubar_callback,
-		 (mouse_h) menubar_event);
+		 menubar_callback, menubar_event);
     menubar->menu = menu;
     menubar->active = 0;
     menubar->dropped = 0;
