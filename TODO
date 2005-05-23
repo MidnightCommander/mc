@@ -1,6 +1,16 @@
 Before 4.6.2
 ============
 
+Remove all instances of type casts on function pointers. Run the
+following command to get a list of function pointer types.
+    grep -r 'typedef.*(\*' . \
+    | sed -n 's/.*(\*\([[:alnum:]_]*\)).*/(\1)/p' \
+    | sort -u \
+    > fn-types.txt
+Then use fgrep to find illegal uses of these types.
+    fgrep -r "`cat fn-types.txt`" .
+Fix these uses by writing small wrapper functions.
+
 Due to problems in the VFS, files are not written back after being edited
 over VFS with an external editor.
 
