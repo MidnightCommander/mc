@@ -263,8 +263,10 @@ enter (WInput *cmdline)
 }
 
 static cb_ret_t
-command_callback (WInput *cmd, widget_msg_t msg, int parm)
+command_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WInput *cmd = (WInput *) w;
+
     switch (msg) {
     case WIDGET_FOCUS:
 	/* Never accept focus, otherwise panels will be unselected */
@@ -290,7 +292,7 @@ command_new (int y, int x, int cols)
     cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
 
     /* Add our hooks */
-    cmd->widget.callback = (callback_fn) command_callback;
+    cmd->widget.callback = command_callback;
     cmd->completion_flags |= INPUT_COMPLETE_COMMANDS;
 
     return cmd;
