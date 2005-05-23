@@ -106,8 +106,8 @@ int filetype_mode = 1;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-static cb_ret_t panel_callback (WPanel *p, widget_msg_t msg, int parm);
-static int panel_event (Gpm_Event *event, WPanel *panel);
+static cb_ret_t panel_callback (Widget *, widget_msg_t msg, int parm);
+static int panel_event (Gpm_Event *event, void *);
 static void paint_frame (WPanel *panel);
 static const char *panel_format (WPanel *panel);
 static const char *mini_status_format (WPanel *panel);
@@ -986,8 +986,7 @@ panel_new (const char *panel_name)
     panel = g_new0 (WPanel, 1);
 
     /* No know sizes of the panel at startup */
-    init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
-		 panel_callback, (mouse_h) panel_event);
+    init_widget (&panel->widget, 0, 0, 0, 0, panel_callback, panel_event);
 
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
@@ -2230,8 +2229,9 @@ panel_key (WPanel *panel, int key)
 }
 
 static cb_ret_t
-panel_callback (WPanel *panel, widget_msg_t msg, int parm)
+panel_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WPanel *panel = (WPanel *) w;
     Dlg_head *h = panel->widget.parent;
 
     switch (msg) {
@@ -2432,8 +2432,9 @@ do_panel_event (Gpm_Event *event, WPanel *panel, int *redir)
 
 /* Mouse callback of the panel */
 static int
-panel_event (Gpm_Event *event, WPanel *panel)
+panel_event (Gpm_Event *event, void *data)
 {
+    WPanel *panel = data;
     int ret;
     int redir = 0;
 

@@ -14,6 +14,7 @@
 	* main.h: Changed the type of quiet_quit_cmd() from int to void.
 	* main.c: Likewise. Removed function cast.
 	* menu.c: Removed function casts.
+	* screen.c: Removed function casts.
 
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
