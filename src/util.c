@@ -1441,6 +1441,12 @@ cstrcasestr (const char *haystack, const char *needle)
     return NULL;
 }
 
+const char *
+cstrstr (const char *haystack, const char *needle)
+{
+    return strstr(haystack, needle);
+}
+
 extern char *
 str_unconst (const char *s)
 {

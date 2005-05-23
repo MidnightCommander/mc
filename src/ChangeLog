@@ -3,6 +3,8 @@
 	* help.c: Fixed the use of check_movement_keys(). This had been
 	really ugly code, involving casts on incompatible functions.
 	* command.c: Removed casts on function pointer types.
+	* util.h: Added const-preserving version of strstr().
+	* util.c: Likewise.
 
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
