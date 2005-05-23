@@ -487,12 +487,11 @@ quit_cmd (void)
     quit_cmd_internal (0);
 }
 
-int
+void
 quiet_quit_cmd (void)
 {
     print_last_revert = 1;
     quit_cmd_internal (1);
-    return quit;
 }
 
 /*
@@ -1253,7 +1252,7 @@ nothing (void)
 
 static const key_map default_map[] = {
     {KEY_F (19), menu_last_selected_cmd},
-    {KEY_F (20), (key_callback) quiet_quit_cmd},
+    {KEY_F (20), quiet_quit_cmd},
 
     /* Copy useful information to the command line */
     {ALT ('a'), copy_current_pathname},

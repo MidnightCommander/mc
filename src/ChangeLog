@@ -11,6 +11,8 @@
 	* fileopctx.c: Likewise.
 	* help.c: Removed function casts.
 	* info.c: Removed function casts.
+	* main.h: Changed the type of quiet_quit_cmd() from int to void.
+	* main.c: Likewise. Removed function cast.
 
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 

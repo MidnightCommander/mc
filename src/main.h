@@ -99,7 +99,7 @@ int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c *
 void change_panel   (void);
 int load_prompt     (int, void *);
 void save_cwds_stat (void);
-int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
+void quiet_quit_cmd (void);	/* For cmd.c and command.c */
 
 void touch_bar      (void);
 void update_xterm_title_path (void);
