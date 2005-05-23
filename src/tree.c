@@ -74,7 +74,7 @@ struct WTree {
 
 /* Forwards */
 static void save_tree (WTree *tree);
-static void tree_rescan_cmd (WTree *tree);
+static void tree_rescan_cmd (WTree *);
 
 static tree_entry *back_ptr (tree_entry *ptr, int *count)
 {
@@ -462,7 +462,8 @@ sync_tree (const char *path)
 }
 
 /* Handle mouse click */
-static void tree_event (WTree *tree, int y)
+static void
+tree_event (WTree *tree, int y)
 {
     if (tree->tree_shown [y]){
 	tree->selected_ptr = tree->tree_shown [y];
@@ -482,8 +483,11 @@ static void maybe_chdir (WTree *tree)
 }
 
 /* Mouse callback */
-static int event_callback (Gpm_Event *event, WTree *tree)
+static int
+event_callback (Gpm_Event *event, void *data)
 {
+    WTree *tree = data;
+
     if (!(event->type & GPM_UP))
 	return MOU_NORMAL;
 
@@ -561,7 +565,8 @@ static void tree_do_search (WTree *tree, int key)
     maybe_chdir (tree);
 }
 
-static void tree_rescan_cmd (WTree *tree)
+static void
+tree_rescan_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
@@ -573,11 +578,12 @@ static void tree_rescan_cmd (WTree *tree)
     mc_chdir (old_dir);
 }
 
-static int tree_forget_cmd (WTree *tree)
+static void
+tree_forget_cmd (void *data)
 {
+    WTree *tree = data;
     if (tree->selected_ptr)
 	tree_remove_entry (tree, tree->selected_ptr->name);
-    return 1;
 }
 
 static void tree_copy (WTree *tree, const char *default_dest)
@@ -609,15 +615,17 @@ static void tree_copy (WTree *tree, const char *default_dest)
     g_free (dest);
 }
 
-static void tree_help_cmd (void)
+static void
+tree_help_cmd (void)
 {
     interactive_display (NULL,  "[Directory Tree]");
 }
 
-static int tree_copy_cmd (WTree *tree)
+static void
+tree_copy_cmd (void *data)
 {
+    WTree *tree = data;
     tree_copy (tree, "");
-    return 1;
 }
 
 static void tree_move (WTree *tree, const char *default_dest)
@@ -660,31 +668,30 @@ static void tree_move (WTree *tree, const char *default_dest)
     g_free (dest);
 }
 
-static int
-tree_move_cmd (WTree *tree)
+static void
+tree_move_cmd (void *data)
 {
+    WTree *tree = data;
     tree_move (tree, "");
-    return 1;
 }
 
 #if 0
-static int
+static void
 tree_mkdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
     if (!tree->selected_ptr)
-	return 0;
+	return;
     if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
-	return 0;
+	return;
     if (chdir (tree->selected_ptr->name))
-	return 0;
+	return;
     /* FIXME
     mkdir_cmd (tree);
     */
     tree_rescan_cmd (tree);
     chdir (old_dir);
-    return 1;
 }
 #endif
 
@@ -723,8 +730,10 @@ tree_rmdir_cmd (WTree *tree)
 static void set_navig_label (WTree *tree);
 
 static void
-tree_toggle_navig (WTree *tree)
+tree_toggle_navig (void *data)
 {
+    WTree *tree = data;
+    /* FIXME: invalid use of boolean variable */
     tree_navigation_flag = 1 - tree_navigation_flag;
     set_navig_label (tree);
 }
@@ -734,7 +743,7 @@ set_navig_label (WTree *tree)
 {
     buttonbar_set_label_data (tree->widget.parent, 4,
 		       tree_navigation_flag ? _("Static") : _("Dynamc"),
-		       (buttonbarfn) tree_toggle_navig, tree);
+		       tree_toggle_navig, tree);
 }
 
 static void
@@ -957,10 +966,24 @@ tree_frame (Dlg_head *h, WTree *tree)
     }
 }
 
+static void
+tree_rescan_command (void *data)
+{
+    WTree *tree = data;
+    tree_rescan_cmd (tree);
+}
+
+static void
+tree_rmdir_command (void *data)
+{
+    WTree *tree = data;
+    tree_rmdir_cmd (tree);
+}
 
 static cb_ret_t
-tree_callback (WTree *tree, widget_msg_t msg, int parm)
+tree_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WTree *tree = (WTree *) w;
     Dlg_head *h = tree->widget.parent;
 
     switch (msg) {
@@ -974,24 +997,19 @@ tree_callback (WTree *tree, widget_msg_t msg, int parm)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	buttonbar_set_label (h, 1, _("Help"), (voidfn) tree_help_cmd);
+	buttonbar_set_label (h, 1, _("Help"), tree_help_cmd);
 	buttonbar_set_label_data (h, 2, _("Rescan"),
-			   (buttonbarfn) tree_rescan_cmd, tree);
-	buttonbar_set_label_data (h, 3, _("Forget"),
-			   (buttonbarfn) tree_forget_cmd, tree);
-	buttonbar_set_label_data (h, 5, _("Copy"), (buttonbarfn) tree_copy_cmd,
-			   tree);
-	buttonbar_set_label_data (h, 6, _("RenMov"), (buttonbarfn) tree_move_cmd,
-			   tree);
+	    tree_rescan_command, tree);
+	buttonbar_set_label_data (h, 3, _("Forget"), tree_forget_cmd, tree);
+	buttonbar_set_label_data (h, 5, _("Copy"), tree_copy_cmd, tree);
+	buttonbar_set_label_data (h, 6, _("RenMov"), tree_move_cmd, tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	buttonbar_set_label_data (h, 7, _("Mkdir"), (buttonbarfn) tree_mkdir_cmd,
-			   tree);
+	buttonbar_set_label_data (h, 7, _("Mkdir"), tree_mkdir_cmd, tree);
 #else
 	buttonbar_set_label (h, 7, "", 0);
 #endif
-	buttonbar_set_label_data (h, 8, _("Rmdir"), (buttonbarfn) tree_rmdir_cmd,
-			   tree);
+	buttonbar_set_label_data (h, 8, _("Rmdir"), tree_rmdir_command, tree);
 	set_navig_label (tree);
 	buttonbar_redraw (h);
 
@@ -1024,7 +1042,7 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     WTree *tree = g_new (WTree, 1);
 
     init_widget (&tree->widget, y, x, lines, cols,
-		 (callback_fn) tree_callback, (mouse_h) event_callback);
+		 tree_callback, event_callback);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 
