@@ -553,7 +553,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    pos = last_pos;
 	}
 
-	search_func = (case_sensitive) ? (search_fn) strstr : cstrcasestr;
+	search_func = (case_sensitive) ? cstrstr : cstrcasestr;
 	
 	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
 	    if (found == 0){	/* Search in binary line once */
