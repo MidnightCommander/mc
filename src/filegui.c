@@ -909,9 +909,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     g_free (def_text_secure);
 
     if (ctx->follow_links)
-	ctx->stat_func = (mc_stat_fn) mc_stat;
+	ctx->stat_func = mc_stat;
     else
-	ctx->stat_func = (mc_stat_fn) mc_lstat;
+	ctx->stat_func = mc_lstat;
 
     if (ctx->op_preserve) {
 	ctx->preserve = 1;

@@ -7,6 +7,7 @@
 	* util.c: Likewise.
 	* find.c: Removed a function cast by using the wrapper function
 	cstrstr().
+	* filegui.c: Removed unnecessary function casts.
 
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
