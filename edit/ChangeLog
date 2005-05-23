@@ -1,3 +1,7 @@
+2005-05-23  Roland Illig  <roland.illig@gmx.de>
+
+	* editwidget.c: Removed casts on function pointer types.
+
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c (edit_file): Move menu initialization ...

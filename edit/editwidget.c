@@ -50,7 +50,7 @@ struct WMenu *edit_menubar;
 
 int column_highlighting = 0;
 
-static cb_ret_t edit_callback (WEdit *edit, widget_msg_t msg, int parm);
+static cb_ret_t edit_callback (Widget *, widget_msg_t msg, int parm);
 
 static int
 edit_event (WEdit * edit, Gpm_Event * event, int *result)
@@ -143,7 +143,7 @@ edit_adjust_size (Dlg_head *h)
     WEdit *edit;
     WButtonBar *edit_bar;
 
-    edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
+    edit = (WEdit *) find_widget_type (h, edit_callback);
     edit_bar = find_buttonbar (h);
 
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
@@ -167,7 +167,7 @@ edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_VALIDATE:
-	edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
+	edit = (WEdit *) find_widget_type (h, edit_callback);
 	if (!edit_ok_to_exit (edit)) {
 	    h->running = 1;
 	}
@@ -207,8 +207,8 @@ edit_file (const char *_file, int line)
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
-		 (callback_fn) edit_callback,
-		 (mouse_h) edit_mouse_event);
+		 edit_callback,
+		 edit_mouse_event);
 
     widget_want_cursor (wedit->widget, 1);
 
@@ -232,6 +232,7 @@ edit_file (const char *_file, int line)
 static void edit_my_define (Dlg_head * h, int idx, const char *text,
 			    void (*fn) (WEdit *), WEdit * edit)
 {
+    /* function-cast ok */
     buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, edit);
 }
 
@@ -326,8 +327,10 @@ void edit_update_screen (WEdit * e)
 }
 
 static cb_ret_t
-edit_callback (WEdit *e, widget_msg_t msg, int parm)
+edit_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WEdit *e = (WEdit *) w;
+
     switch (msg) {
     case WIDGET_INIT:
 	e->force |= REDRAW_COMPLETELY;
