@@ -3,6 +3,7 @@
 	* samba/param/loadparm.c: Fixed warnings reported by gcc-2.95.
 	* dirent.c (split_dir_name): Don't assign a string literal to a
 	char *. Use '\0' instead of 0 when operating on characters.
+	* samba/lib/charcnv.c: Added const qualifiers.
 
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
