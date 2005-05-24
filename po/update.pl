@@ -1,4 +1,5 @@
-#!/usr/bin/perl -w
+#!/usr/bin/env perl
+use warnings;
 
 #  GNOME po update utility.
 #  (C) 2000 The Free Software Foundation
@@ -87,7 +88,7 @@ if ($LANG=~/^-(.)*/){
             open FILE, "<$file";
             while (<FILE>) {
                 if ($_=~/_\s*\(\"/o){
-                    $file = unpack("x3 A*",$file) . "\n";
+                    $file = unpack("x4 A*",$file) . "\n";
                     push @buff1, $file;
                     last;
                 }
