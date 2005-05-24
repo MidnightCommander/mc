@@ -1,21 +1,25 @@
-# syntax rules version 62
-# (after the slash is a Cooledit color, 0-26 or any of the X colors in rgb.txt)
-# black
-# red
-# green
-# brown
-# blue
-# magenta
-# cyan
-# lightgray
-# gray
-# brightred
-# brightgreen
+# This file describes which highlighting scheme is applied to a particular
+# file in mcedit.
+#
+# Each entry consists of two lines: a "file" specification and the
+# corresponding highlighting definition ("include"). A file specification
+# can have two or three fields, each separated by white-space characters.
+#
+# The first field is a regular expression that is matched against the file
+# name. The second field is a description of the file type and is
+# currently unused. The third (optional) field is a regular expression
+# that is matched against the first line of the file. The first entry
+# that matches wins, that is, all the entries below are ignored.
+#
+# Certain characters must be quoted in these fields. These are space (\s),
+# tabs (\t), backslashes(\\), plus (\+) and asterisk (\*). Braces {} and
+# brackets [] must not be quoted in this file.
+#
+# You can use the following colors in the syntax highlighting files:
+# black, blue, brightblue, brightcyan, brightgreen, brightmagenta,
+# brightred, brown, cyan, gray, green, lightgray, magenta, red, white,
 # yellow
-# brightblue
-# brightmagenta
-# brightcyan
-# white
+#
 
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 include syntax.syntax
@@ -29,16 +33,16 @@ include diff.syntax
 file ..\*\\.lsm$ LSM\sFile
 include lsm.syntax
 
-file ..\*\\.sh$ Shell\sScript ^#!.\*[\s/]([abd-z]?|ba|pdk)sh
+file ..\*\\.sh$ Shell\sScript ^#!.\*([\s/]([abd-z]?|ba|pdk)sh|@SH@)
 include sh.syntax
 
-file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!.\*[\s/]perl
+file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
 
-file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*[\s/]python
+file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
 include python.syntax
 
-file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*[\s/]ruby
+file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
 file ..\*\\.(man|[0-9n]|[0-9]x)$ NROFF\sSource

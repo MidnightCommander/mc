@@ -3,6 +3,10 @@
 	* python.syntax: Added chunk from Savannah bug #7872. This
 	changes the color for """long strings""" from brown to green and
 	adds embedded highlighting for escape sequences.
+	* Syntax: Added a comment introducing the file format, based on
+	the current implementation in edit/syntax.c. Changed the
+	first-line regular expressions of sh, perl, python and ruby to
+	also match @SH@, @PERL@, @PYTHON@ and @RUBY@.
 
 2005-05-24  Roland Illig  <roland.illig@gmx.de>
 
