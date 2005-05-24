@@ -1,3 +1,7 @@
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
+	* widget.c: Fixed all but one casts on function pointers.
+
 2005-05-23  Roland Illig  <roland.illig@gmx.de>
 
 	* help.c: Fixed the use of check_movement_keys(). This had been

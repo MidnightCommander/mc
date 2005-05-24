@@ -48,13 +48,14 @@
 
 #define HISTORY_FILE_NAME ".mc/history"
 
-static int button_event (Gpm_Event *event, WButton *b);
+static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;
 
 static cb_ret_t
-button_callback (WButton *b, widget_msg_t msg, int parm)
+button_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WButton *b = (WButton *) w;
     char buf[BUF_SMALL];
     int stop = 0;
     int off = 0;
@@ -69,17 +70,17 @@ button_callback (WButton *b, widget_msg_t msg, int parm)
 	 * handled by the current widget.
 	 */
 	if (parm == '\n' && h->current == &b->widget) {
-	    button_callback (b, WIDGET_KEY, ' ');
+	    button_callback (w, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}
 
 	if (parm == '\n' && b->flags == DEFPUSH_BUTTON) {
-	    button_callback (b, WIDGET_KEY, ' ');
+	    button_callback (w, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}
 
 	if (b->hotkey == tolower (parm)) {
-	    button_callback (b, WIDGET_KEY, ' ');
+	    button_callback (w, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}
 
@@ -166,13 +167,15 @@ button_callback (WButton *b, widget_msg_t msg, int parm)
 }
 
 static int
-button_event (Gpm_Event *event, WButton *b)
+button_event (Gpm_Event *event, void *data)
 {
+    WButton *b = data;
+
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h=b->widget.parent;
 	dlg_select_widget (b);
 	if (event->type & GPM_UP){
-	    button_callback (b, WIDGET_KEY, ' ');
+	    button_callback ((Widget *) data, WIDGET_KEY, ' ');
 	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
@@ -224,8 +227,7 @@ button_new (int y, int x, int action, int flags, const char *text,
     WButton *b = g_new (WButton, 1);
 
     init_widget (&b->widget, y, x, 1, button_len (text, flags),
-		 (callback_fn) button_callback,
-		 (mouse_h) button_event);
+		 button_callback, button_event);
     
     b->action = action;
     b->flags  = flags;
@@ -258,11 +260,12 @@ button_set_text (WButton *b, const char *text)
 
 
 /* Radio button widget */
-static int radio_event (Gpm_Event *event, WRadio *r);
+static int radio_event (Gpm_Event *event, void *);
 
 static cb_ret_t
-radio_callback (WRadio *r, int msg, int parm)
+radio_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WRadio *r = (WRadio *) w;
     int i;
     Dlg_head *h = r->widget.parent;
 
@@ -282,7 +285,7 @@ radio_callback (WRadio *r, int msg, int parm)
 		    r->pos = i;
 
 		    /* Take action */
-		    radio_callback (r, WIDGET_KEY, ' ');
+		    radio_callback (w, WIDGET_KEY, ' ');
 		    return MSG_HANDLED;
 		}
 	    }
@@ -294,7 +297,7 @@ radio_callback (WRadio *r, int msg, int parm)
 	case ' ':
 	    r->sel = r->pos;
 	    (*h->callback) (h, DLG_ACTION, 0);
-	    radio_callback (r, WIDGET_FOCUS, ' ');
+	    radio_callback (w, WIDGET_FOCUS, ' ');
 	    return MSG_HANDLED;
 
 	case KEY_UP:
@@ -316,7 +319,7 @@ radio_callback (WRadio *r, int msg, int parm)
 
     case WIDGET_CURSOR:
 	(*h->callback) (h, DLG_ACTION, 0);
-	radio_callback (r, WIDGET_FOCUS, ' ');
+	radio_callback (w, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	return MSG_HANDLED;
 
@@ -349,16 +352,19 @@ radio_callback (WRadio *r, int msg, int parm)
 }
 
 static int
-radio_event (Gpm_Event *event, WRadio *r)
+radio_event (Gpm_Event *event, void *data)
 {
+    WRadio *r = data;
+    Widget *w = data;
+
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h = r->widget.parent;
 	
 	r->pos = event->y - 1;
 	dlg_select_widget (r);
 	if (event->type & GPM_UP){
-	    radio_callback (r, WIDGET_KEY, ' ');
-	    radio_callback (r, WIDGET_FOCUS, 0);
+	    radio_callback (w, WIDGET_KEY, ' ');
+	    radio_callback (w, WIDGET_FOCUS, 0);
 	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
@@ -380,8 +386,7 @@ radio_new (int y, int x, int count, const char **texts, int use_hotkey)
 	    max = m;
     }
 
-    init_widget (&r->widget, y, x, count, max, (callback_fn) radio_callback,
-		 (mouse_h) radio_event);
+    init_widget (&r->widget, y, x, count, max, radio_callback, radio_event);
     r->state = 1;
     r->pos = 0;
     r->sel = 0;
@@ -396,11 +401,12 @@ radio_new (int y, int x, int count, const char **texts, int use_hotkey)
 
 /* Checkbutton widget */
 
-static int check_event (Gpm_Event *event, WCheck *b);
+static int check_event (Gpm_Event *event, void *);
 
 static cb_ret_t
-check_callback (WCheck *c, widget_msg_t msg, int parm)
+check_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WCheck *c = (WCheck *) w;
     Dlg_head *h = c->widget.parent;
 
     switch (msg) {
@@ -408,7 +414,7 @@ check_callback (WCheck *c, widget_msg_t msg, int parm)
 	if (c->hotkey == parm
 	    || (c->hotkey >= 'a' && c->hotkey <= 'z'
 		&& c->hotkey - 32 == parm)) {
-	    check_callback (c, WIDGET_KEY, ' ');	/* make action */
+	    check_callback (w, WIDGET_KEY, ' ');	/* make action */
 	    return MSG_HANDLED;
 	}
 	return MSG_NOT_HANDLED;
@@ -419,7 +425,7 @@ check_callback (WCheck *c, widget_msg_t msg, int parm)
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
 	(*h->callback) (h, DLG_ACTION, 0);
-	check_callback (c, WIDGET_FOCUS, ' ');
+	check_callback (w, WIDGET_FOCUS, ' ');
 	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
@@ -450,15 +456,18 @@ check_callback (WCheck *c, widget_msg_t msg, int parm)
 }
 
 static int
-check_event (Gpm_Event *event, WCheck *c)
+check_event (Gpm_Event *event, void *data)
 {
+    WCheck *c = data;
+    Widget *w = data;
+
     if (event->type & (GPM_DOWN|GPM_UP)){
     	Dlg_head *h = c->widget.parent;
 	
 	dlg_select_widget (c);
 	if (event->type & GPM_UP){
-	    check_callback (c, WIDGET_KEY, ' ');
-	    check_callback (c, WIDGET_FOCUS, 0);
+	    check_callback (w, WIDGET_KEY, ' ');
+	    check_callback (w, WIDGET_FOCUS, 0);
 	    (*h->callback) (h, DLG_POST_KEY, ' ');
 	    return MOU_NORMAL;
 	}
@@ -474,8 +483,7 @@ check_new (int y, int x, int state, const char *text)
     char *t;
     
     init_widget (&c->widget, y, x, 1, strlen (text),
-		 (callback_fn)check_callback,
-		 (mouse_h) check_event);
+	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
     c->text = g_strdup (text);
     c->hotkey = 0;
@@ -502,9 +510,10 @@ check_new (int y, int x, int state, const char *text)
 
 /* Label widget */
 
-static int
-label_callback (WLabel *l, int msg, int parm)
+static cb_ret_t
+label_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WLabel *l = (WLabel *) w;
     Dlg_head *h = l->widget.parent;
 
     switch (msg) {
@@ -579,7 +588,7 @@ label_set_text (WLabel *label, const char *text)
 	label->text = 0;
     
     if (label->widget.parent)
-	label_callback (label, WIDGET_DRAW, 0);
+	label_callback ((Widget *) label, WIDGET_DRAW, 0);
 
     if (newcols < label->widget.cols)
         label->widget.cols = newcols;
@@ -598,8 +607,7 @@ label_new (int y, int x, const char *text)
 	width = strlen (text);
 
     l = g_new (WLabel, 1);
-    init_widget (&l->widget, y, x, 1, width,
-		 (callback_fn) label_callback, NULL);
+    init_widget (&l->widget, y, x, 1, width, label_callback, NULL);
     l->text = text ? g_strdup (text) : 0;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
@@ -612,9 +620,10 @@ label_new (int y, int x, const char *text)
 /* Currently width is hardcoded here for text mode */
 #define gauge_len 47
 
-static int
-gauge_callback (WGauge *g, int msg, int parm)
+static cb_ret_t
+gauge_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WGauge *g = (WGauge *) w;
     Dlg_head *h = g->widget.parent;
 
     if (msg == WIDGET_INIT)
@@ -666,7 +675,7 @@ gauge_set_value (WGauge *g, int max, int current)
 
     g->current = current;
     g->max = max;
-    gauge_callback (g, WIDGET_DRAW, 0);
+    gauge_callback ((Widget *) g, WIDGET_DRAW, 0);
 }
 
 void
@@ -675,7 +684,7 @@ gauge_show (WGauge *g, int shown)
     if (g->shown == shown)
         return;
     g->shown = shown;
-    gauge_callback (g, WIDGET_DRAW, 0);
+    gauge_callback ((Widget *) g, WIDGET_DRAW, 0);
 }
 
 WGauge *
@@ -683,8 +692,7 @@ gauge_new (int y, int x, int shown, int max, int current)
 {
     WGauge *g = g_new (WGauge, 1);
 
-    init_widget (&g->widget, y, x, 1, gauge_len,
-		 (callback_fn) gauge_callback, NULL);
+    init_widget (&g->widget, y, x, 1, gauge_len, gauge_callback, NULL);
     g->shown = shown;
     if (max == 0)
         max = 1; /* I do not like division by zero :) */
@@ -1543,8 +1551,9 @@ input_set_point (WInput *in, int pos)
 }
 
 cb_ret_t
-input_callback (WInput *in, widget_msg_t msg, int parm)
+input_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WInput *in = (WInput *) w;
     int v;
 
     switch (msg) {
@@ -1591,8 +1600,10 @@ input_callback (WInput *in, widget_msg_t msg, int parm)
 }
 
 static int
-input_event (Gpm_Event * event, WInput * in)
+input_event (Gpm_Event * event, void *data)
 {
+    WInput *in = data;
+
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
 	dlg_select_widget (in);
 
@@ -1618,8 +1629,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
 
-    init_widget (&in->widget, y, x, 1, len, (callback_fn) input_callback,
-		 (mouse_h) input_event);
+    init_widget (&in->widget, y, x, 1, len, input_callback, input_event);
 
     /* history setup */
     in->history = NULL;
@@ -1993,9 +2003,10 @@ listbox_destroy (WListbox *l)
     }
 }
 
-static int
-listbox_callback (WListbox *l, int msg, int parm)
+static cb_ret_t
+listbox_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WListbox *l = (WListbox *) w;
     int ret_code;
     WLEntry *e;
     Dlg_head *h = l->widget.parent;
@@ -2048,8 +2059,10 @@ listbox_callback (WListbox *l, int msg, int parm)
 }
 
 static int
-listbox_event (Gpm_Event *event, WListbox *l)
+listbox_event (Gpm_Event *event, void *data)
 {
+    WListbox *l = data;
+    Widget *w = data;
     int i;
 
     Dlg_head *h = l->widget.parent;
@@ -2075,7 +2088,7 @@ listbox_event (Gpm_Event *event, WListbox *l)
 
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
-	listbox_callback (l, WIDGET_DRAW, 0);
+	listbox_callback (w, WIDGET_DRAW, 0);
 	mc_refresh ();
 	return MOU_REPEAT;
     }
@@ -2114,8 +2127,7 @@ listbox_new (int y, int x, int width, int height, lcback callback)
     WListbox *l = g_new (WListbox, 1);
 
     init_widget (&l->widget, y, x, height, width,
-		 (callback_fn) listbox_callback,
-		 (mouse_h) listbox_event);
+		 listbox_callback, listbox_event);
 
     l->list = l->top = l->current = 0;
     l->pos = 0;
@@ -2233,9 +2245,10 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 }
 
 
-static int
-buttonbar_callback (WButtonBar *bb, int msg, int parm)
+static cb_ret_t
+buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WButtonBar *bb = (WButtonBar *) w;
     int i;
 
     switch (msg) {
@@ -2280,8 +2293,9 @@ buttonbar_callback (WButtonBar *bb, int msg, int parm)
 }
 
 static int
-buttonbar_event (Gpm_Event *event, WButtonBar *bb)
+buttonbar_event (Gpm_Event *event, void *data)
 {
+    WButtonBar *bb = data;
     int button;
 
     if (!(event->type & GPM_UP))
@@ -2301,8 +2315,7 @@ buttonbar_new (int visible)
     WButtonBar *bb = g_new (WButtonBar, 1);
 
     init_widget (&bb->widget, LINES-1, 0, 1, COLS,
-		 (callback_fn) buttonbar_callback,
-		 (mouse_h) buttonbar_event);
+		 buttonbar_callback, buttonbar_event);
     
     bb->visible = visible;
     for (i = 0; i < 10; i++){
@@ -2329,7 +2342,7 @@ find_buttonbar (Dlg_head *h)
 {
     WButtonBar *bb;
 
-    bb = (WButtonBar *) find_widget_type (h, (callback_fn) buttonbar_callback);
+    bb = (WButtonBar *) find_widget_type (h, buttonbar_callback);
     return bb;
 }
 
@@ -2350,7 +2363,7 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cb
 void
 buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
 {
-    buttonbar_set_label_data (h, idx, text, (buttonbarfn) cback, 0);
+    buttonbar_set_label_data (h, idx, text, cback, 0);
 }
 
 void
@@ -2365,8 +2378,10 @@ buttonbar_redraw (Dlg_head *h)
 }
 
 static cb_ret_t
-groupbox_callback (WGroupbox *g, widget_msg_t msg, int parm)
+groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WGroupbox *g = (WGroupbox *) w;
+
     switch (msg) {
     case WIDGET_INIT:
 	return MSG_HANDLED;
@@ -2400,8 +2415,7 @@ groupbox_new (int x, int y, int width, int height, const char *title)
 {
     WGroupbox *g = g_new (WGroupbox, 1);
 
-    init_widget (&g->widget, y, x, height, width,
-		 (callback_fn) groupbox_callback, NULL);
+    init_widget (&g->widget, y, x, height, width, groupbox_callback, NULL);
 
     g->widget.options &= ~W_WANT_CURSOR;
     widget_want_hotkey (g->widget, 0);
