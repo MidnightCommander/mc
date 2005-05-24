@@ -301,14 +301,14 @@ split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char 
     (void) me;
 
     s = strrchr (path, PATH_SEP);
-    if (!s){
+    if (s == NULL) {
 	*save = NULL;
 	*name = path;
-	*dir = "";
+	*dir = path + strlen(path); /* an empty string */
     } else {
 	*save = s;
 	*dir = path;
-	*s++ = 0;
+	*s++ = '\0';
 	*name = s;
     }
 }
