@@ -1,3 +1,7 @@
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
+	* samba/param/loadparm.c: Fixed warnings reported by gcc-2.95.
+
 2005-05-20  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c: Fix warnings reported by gcc 4.0.0.
