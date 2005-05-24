@@ -1,0 +1,4 @@
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
+	* Syntax: Extended the patterns for #! interpreters to match
+	almost everything that looks like the interpreter.
