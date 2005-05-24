@@ -216,8 +216,23 @@ context default
 
     keyword whole __+__ brightred
 
-context """ """ brown
-    spellcheck
+context """ """ green
+	keyword \\" brightgreen
+	keyword \\\n brightgreen
+	keyword %% brightgreen
+	keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+	keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
+	keyword %\[hl\]n brightgreen
+	keyword %\[.\]\[0123456789\]s brightgreen
+	keyword %[*] brightgreen
+	keyword %c brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+	keyword \\\\{01234567\}\{01234567\} brightgreen
+	keyword \\\\{01234567\} brightgreen
+	keyword \\\\ brightgreen
+	keyword \\' brightgreen
+	keyword \\\{abtnvfr\} brightgreen
+   
 context # \n brown
     spellcheck
 context " " green

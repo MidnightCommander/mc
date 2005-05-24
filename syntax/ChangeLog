@@ -1,4 +1,10 @@
 2005-05-24  Roland Illig  <roland.illig@gmx.de>
 
+	* python.syntax: Added chunk from Savannah bug #7872. This
+	changes the color for """long strings""" from brown to green and
+	adds embedded highlighting for escape sequences.
+
+2005-05-24  Roland Illig  <roland.illig@gmx.de>
+
 	* Syntax: Extended the patterns for #! interpreters to match
 	almost everything that looks like the interpreter.
