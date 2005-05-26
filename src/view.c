@@ -339,7 +339,62 @@ view_get_datacolumns (WView *view)
 
 /* TODO: move all data sources code to here. */
 
-static void view_growbuf_read_until (WView *, offset_type);
+/* Copies the output from the pipe to the growing buffer, until either
+ * the end-of-pipe is reached or the interval [0..ofs) or the growing
+ * buffer is completely filled. */
+static void
+view_growbuf_read_until (WView *view, offset_type ofs)
+{
+    ssize_t nread;
+    byte *p;
+    size_t bytesfree;
+
+    assert (view->growbuf_in_use);
+    assert (view->datasource == DS_STDIO_PIPE
+	|| view->datasource == DS_VFS_PIPE);
+
+    if (view->growbuf_finished)
+	return;
+
+    while (view_growbuf_filesize (view, NULL) < ofs) {
+        if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+            byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
+            byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
+            if (!newblock || !newblocks) {
+                g_free (newblock);
+		g_free (newblocks);
+                return;
+            }
+            memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
+            g_free (view->growbuf_blockptr);
+            view->growbuf_blockptr = newblocks;
+            view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
+            view->growbuf_lastindex = 0;
+        }
+        p = view->growbuf_blockptr[view->growbuf_blocks - 1] + view->growbuf_lastindex;
+        bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
+
+	if (view->datasource == DS_STDIO_PIPE) {
+	    nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
+	    if (nread == 0) {
+		view->growbuf_finished = TRUE;
+		(void) pclose (view->ds_stdio_pipe);
+		close_error_pipe (0, NULL);
+		view->ds_stdio_pipe = NULL;
+		return;
+	    }
+	} else {
+	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
+	    if (nread == -1 || nread == 0) {
+		view->growbuf_finished = TRUE;
+		(void) mc_close (view->ds_vfs_pipe);
+		view->ds_vfs_pipe = -1;
+		return;
+	    }
+	}
+        view->growbuf_lastindex += nread;
+    }
+}
 
 /* {{{ The Coordinate Cache }}} */
 
@@ -867,63 +922,6 @@ view_done (WView *view)
     default_nroff_flag = view->text_nroff_mode;
     default_magic_flag = view->magic_mode;
     global_wrap_mode = view->text_wrap_mode;
-}
-
-/* Copies the output from the pipe to the growing buffer, until either
- * the end-of-pipe is reached or the interval [0..ofs) or the growing
- * buffer is completely filled. */
-static void
-view_growbuf_read_until (WView *view, offset_type ofs)
-{
-    ssize_t nread;
-    byte *p;
-    size_t bytesfree;
-
-    assert (view->growbuf_in_use);
-    assert (view->datasource == DS_STDIO_PIPE
-	|| view->datasource == DS_VFS_PIPE);
-
-    if (view->growbuf_finished)
-	return;
-
-    while (view_growbuf_filesize (view, NULL) < ofs) {
-        if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
-            byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
-            byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
-            if (!newblock || !newblocks) {
-                g_free (newblock);
-		g_free (newblocks);
-                return;
-            }
-            memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
-            g_free (view->growbuf_blockptr);
-            view->growbuf_blockptr = newblocks;
-            view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
-            view->growbuf_lastindex = 0;
-        }
-        p = view->growbuf_blockptr[view->growbuf_blocks - 1] + view->growbuf_lastindex;
-        bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
-
-	if (view->datasource == DS_STDIO_PIPE) {
-	    nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
-	    if (nread == 0) {
-		view->growbuf_finished = TRUE;
-		(void) pclose (view->ds_stdio_pipe);
-		close_error_pipe (0, NULL);
-		view->ds_stdio_pipe = NULL;
-		return;
-	    }
-	} else {
-	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
-	    if (nread == -1 || nread == 0) {
-		view->growbuf_finished = TRUE;
-		(void) mc_close (view->ds_vfs_pipe);
-		view->ds_vfs_pipe = -1;
-		return;
-	    }
-	}
-        view->growbuf_lastindex += nread;
-    }
 }
 
 static void
