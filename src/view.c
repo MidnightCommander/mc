@@ -233,7 +233,6 @@ static cb_ret_t view_callback (WView *view, widget_msg_t msg, int parm);
 static int regexp_view_search (WView * view, char *pattern, char *string,
 			       int match_type);
 static void view_labels (WView * view);
-static void view_update (WView * view);
 
 static void view_init_growbuf (WView *);
 static void view_place_cursor (WView *view);
@@ -1207,165 +1206,6 @@ view_done (WView *view)
     global_wrap_mode = view->text_wrap_mode;
 }
 
-static void
-enqueue_change (struct hexedit_change_node **head,
-		struct hexedit_change_node *node)
-{
-    /* chnode always either points to the head of the list or */
-    /* to one of the ->next fields in the list. The value at  */
-    /* this location will be overwritten with the new node.   */
-    struct hexedit_change_node **chnode = head;
-
-    while (*chnode != NULL && (*chnode)->offset < node->offset)
-	chnode = &((*chnode)->next);
-
-    node->next = *chnode;
-    *chnode = node;
-}
-
-static cb_ret_t
-view_handle_editkey (WView *view, int key)
-{
-    struct hexedit_change_node *node;
-    byte byte_val;
-
-    /* Has there been a change at this position? */
-    node = view->change_list;
-    while (node && (node->offset != view->hex_cursor))
-	node = node->next;
-
-    if (!view->hexview_in_text) {
-	/* Hex editing */
-	unsigned int hexvalue = 0;
-
-	if (key >= '0' && key <= '9')
-	    hexvalue =  0 + (key - '0');
-	else if (key >= 'A' && key <= 'F')
-	    hexvalue = 10 + (key - 'A');
-	else if (key >= 'a' && key <= 'f')
-	    hexvalue = 10 + (key - 'a');
-	else
-	    return MSG_NOT_HANDLED;
-
-	if (node)
-	    byte_val = node->value;
-	else
-	    byte_val = get_byte (view, view->hex_cursor);
-
-	if (view->hexedit_lownibble) {
-	    byte_val = (byte_val & 0xf0) | (hexvalue);
-	} else {
-	    byte_val = (byte_val & 0x0f) | (hexvalue << 4);
-	}
-    } else {
-	/* Text editing */
-	if (key < 256 && (is_printable (key) || (key == '\n')))
-	    byte_val = key;
-	else
-	    return MSG_NOT_HANDLED;
-    }
-    if (!node) {
-	node = g_new (struct hexedit_change_node, 1);
-	node->offset = view->hex_cursor;
-	node->value = byte_val;
-	enqueue_change (&view->change_list, node);
-    } else {
-	node->value = byte_val;
-    }
-    view->dirty++;
-    view_update (view);
-    view_move_right (view, 1);
-    return MSG_HANDLED;
-}
-
-static void
-free_change_list (WView *view)
-{
-    struct hexedit_change_node *curr, *next;
-
-    for (curr = view->change_list; curr != NULL; curr = next) {
-	next = curr->next;
-	g_free (curr);
-    }
-    view->change_list = NULL;
-    view->dirty++;
-}
-
-static gboolean
-view_hexedit_save_changes (WView *view)
-{
-    struct hexedit_change_node *curr, *next;
-    int fp, answer;
-    char *text, *error;
-
-  retry_save:
-    /* FIXME: why not use mc_open()? */
-    fp = open (view->filename, O_WRONLY);
-    if (fp == -1)
-	goto save_error;
-
-    for (curr = view->change_list; curr != NULL; curr = next) {
-	next = curr->next;
-
-	if (lseek (fp, curr->offset, SEEK_SET) == -1
-	    || write (fp, &(curr->value), 1) != 1)
-	    goto save_error;
-
-	/* delete the saved item from the change list */
-	view->change_list = next;
-	view->dirty++;
-	view_set_byte (view, curr->offset, curr->value);
-	g_free (curr);
-    }
-
-    if (close (fp) == -1) {
-	error = g_strdup (strerror (errno));
-	message (D_ERROR, _(" Save file "),
-	    _(" Error while closing the file: \n %s \n"
-	      " Data may have been written or not. "), error);
-	g_free (error);
-    }
-    view_update (view);
-    return TRUE;
-
-  save_error:
-    error = g_strdup (strerror (errno));
-    text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
-    g_free (error);
-    (void) close (fp);
-
-    answer = query_dialog (_(" Save file "), text, D_ERROR,
-	2, _("&Retry"), _("&Cancel"));
-    g_free (text);
-
-    if (answer == 0)
-	goto retry_save;
-    return FALSE;
-}
-
-static gboolean
-view_ok_to_quit (WView *view)
-{
-    int r;
-
-    if (!view->change_list)
-	return 1;
-
-    r = query_dialog (_("Quit"),
-		      _(" File was modified, Save with exit? "), D_NORMAL, 3,
-		      _("&Cancel quit"), _("&Yes"), _("&No"));
-
-    switch (r) {
-    case 1:
-	return view_hexedit_save_changes (view);
-    case 2:
-	free_change_list (view);
-	return TRUE;
-    default:
-	return FALSE;
-    }
-}
-
 static char *
 set_view_init_error (WView *view, const char *msg)
 {
@@ -1513,6 +1353,8 @@ view_load (WView *view, const char *_command, const char *_file,
 
     return TRUE;
 }
+
+/* {{{ Display management }}} */
 
 static void
 view_update_bytes_per_line (WView *view)
@@ -1965,6 +1807,169 @@ view_update (WView *view)
 	}
 	/* Here we had a refresh, if fast scrolling does not work
 	   restore the refresh, although this should not happen */
+    }
+}
+
+/* {{{ Hex editor }}} */
+
+static void
+enqueue_change (struct hexedit_change_node **head,
+		struct hexedit_change_node *node)
+{
+    /* chnode always either points to the head of the list or */
+    /* to one of the ->next fields in the list. The value at  */
+    /* this location will be overwritten with the new node.   */
+    struct hexedit_change_node **chnode = head;
+
+    while (*chnode != NULL && (*chnode)->offset < node->offset)
+	chnode = &((*chnode)->next);
+
+    node->next = *chnode;
+    *chnode = node;
+}
+
+static cb_ret_t
+view_handle_editkey (WView *view, int key)
+{
+    struct hexedit_change_node *node;
+    byte byte_val;
+
+    /* Has there been a change at this position? */
+    node = view->change_list;
+    while (node && (node->offset != view->hex_cursor))
+	node = node->next;
+
+    if (!view->hexview_in_text) {
+	/* Hex editing */
+	unsigned int hexvalue = 0;
+
+	if (key >= '0' && key <= '9')
+	    hexvalue =  0 + (key - '0');
+	else if (key >= 'A' && key <= 'F')
+	    hexvalue = 10 + (key - 'A');
+	else if (key >= 'a' && key <= 'f')
+	    hexvalue = 10 + (key - 'a');
+	else
+	    return MSG_NOT_HANDLED;
+
+	if (node)
+	    byte_val = node->value;
+	else
+	    byte_val = get_byte (view, view->hex_cursor);
+
+	if (view->hexedit_lownibble) {
+	    byte_val = (byte_val & 0xf0) | (hexvalue);
+	} else {
+	    byte_val = (byte_val & 0x0f) | (hexvalue << 4);
+	}
+    } else {
+	/* Text editing */
+	if (key < 256 && (is_printable (key) || (key == '\n')))
+	    byte_val = key;
+	else
+	    return MSG_NOT_HANDLED;
+    }
+    if (!node) {
+	node = g_new (struct hexedit_change_node, 1);
+	node->offset = view->hex_cursor;
+	node->value = byte_val;
+	enqueue_change (&view->change_list, node);
+    } else {
+	node->value = byte_val;
+    }
+    view->dirty++;
+    view_update (view);
+    view_move_right (view, 1);
+    return MSG_HANDLED;
+}
+
+static void
+free_change_list (WView *view)
+{
+    struct hexedit_change_node *curr, *next;
+
+    for (curr = view->change_list; curr != NULL; curr = next) {
+	next = curr->next;
+	g_free (curr);
+    }
+    view->change_list = NULL;
+    view->dirty++;
+}
+
+static gboolean
+view_hexedit_save_changes (WView *view)
+{
+    struct hexedit_change_node *curr, *next;
+    int fp, answer;
+    char *text, *error;
+
+  retry_save:
+    /* FIXME: why not use mc_open()? */
+    fp = open (view->filename, O_WRONLY);
+    if (fp == -1)
+	goto save_error;
+
+    for (curr = view->change_list; curr != NULL; curr = next) {
+	next = curr->next;
+
+	if (lseek (fp, curr->offset, SEEK_SET) == -1
+	    || write (fp, &(curr->value), 1) != 1)
+	    goto save_error;
+
+	/* delete the saved item from the change list */
+	view->change_list = next;
+	view->dirty++;
+	view_set_byte (view, curr->offset, curr->value);
+	g_free (curr);
+    }
+
+    if (close (fp) == -1) {
+	error = g_strdup (strerror (errno));
+	message (D_ERROR, _(" Save file "),
+	    _(" Error while closing the file: \n %s \n"
+	      " Data may have been written or not. "), error);
+	g_free (error);
+    }
+    view_update (view);
+    return TRUE;
+
+  save_error:
+    error = g_strdup (strerror (errno));
+    text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
+    g_free (error);
+    (void) close (fp);
+
+    answer = query_dialog (_(" Save file "), text, D_ERROR,
+	2, _("&Retry"), _("&Cancel"));
+    g_free (text);
+
+    if (answer == 0)
+	goto retry_save;
+    return FALSE;
+}
+
+/* {{{ Miscellaneous functions }}} */
+
+static gboolean
+view_ok_to_quit (WView *view)
+{
+    int r;
+
+    if (!view->change_list)
+	return 1;
+
+    r = query_dialog (_("Quit"),
+		      _(" File was modified, Save with exit? "), D_NORMAL, 3,
+		      _("&Cancel quit"), _("&Yes"), _("&No"));
+
+    switch (r) {
+    case 1:
+	return view_hexedit_save_changes (view);
+    case 2:
+	free_change_list (view);
+	return TRUE;
+    default:
+	return FALSE;
     }
 }
 
