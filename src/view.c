@@ -308,6 +308,26 @@ view_get_datacolumns (WView *view)
 
 /* {{{ Data sources }}} */
 
+/*
+    The data source provides the viewer with data from either a file, a
+    string or the output of a command. The get_byte() function can be
+    used to get the value of a byte at a specific offset. If the offset
+    is out of range, -1 is returned. The function get_byte_indexed(a,b)
+    returns the byte at the offset a+b, or -1 if a+b is out of range.
+
+    The view_set_byte() function has the effect that later calls to
+    get_byte() will return the specified byte for this offset. This
+    function is designed only for use by the hexedit component after
+    saving its changes. Inspect the source before you want to use it for
+    other purposes.
+
+    The view_get_filesize() function returns the current size of the
+    data source. If the growing buffer is used, this size may increase
+    later on. Use the view_get_filesize_with_exact() when you want to
+    know if the size can change later.
+    
+ */
+
 /* TODO: move all data sources code to here. */
 
 static offset_type
@@ -324,10 +344,6 @@ view_growbuf_filesize (WView *view, gboolean *ret_exact)
 	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
 }
 
-/* Return the size of the data that is available to the viewer.
- * The ''exact'' return value is TRUE when the data source has a fixed
- * size, and is FALSE when the data source is still growing.
- */
 static offset_type
 view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
 {
@@ -348,9 +364,6 @@ view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
     }
 }
 
-/* Return the current size of the data source. This may be less
- * than the real size in case of growing buffers.
- */
 static offset_type
 view_get_filesize (WView *view)
 {
@@ -366,13 +379,7 @@ static void view_set_datasource_string (WView *view, const char *s);
 static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
 static void view_close_datasource (WView *);
 
-/* Return the data at the specified offset, or the value -1. */
 static int get_byte (WView *, offset_type);
-
-/* Calling this function has the effect that the viewer will show
- * the given byte at this offset. This function is designed only for use
- * by the hexedit component after saving its changes. Inspect the
- * source before you want to use it for other purposes. */
 static void view_set_byte (WView *, offset_type, byte);
 
 /* Copies the output from the pipe to the growing buffer, until either
