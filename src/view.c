@@ -306,29 +306,31 @@ view_get_datacolumns (WView *view)
     return 0;
 }
 
-/* {{{ Data sources }}} */
+/* {{{ Growing buffer }}} */
 
-/*
-    The data source provides the viewer with data from either a file, a
-    string or the output of a command. The get_byte() function can be
-    used to get the value of a byte at a specific offset. If the offset
-    is out of range, -1 is returned. The function get_byte_indexed(a,b)
-    returns the byte at the offset a+b, or -1 if a+b is out of range.
+static void
+view_init_growbuf (WView *view)
+{
+    view->growbuf_in_use    = TRUE;
+    view->growbuf_blockptr  = NULL;
+    view->growbuf_blocks    = 0;
+    view->growbuf_lastindex = 0;
+    view->growbuf_finished  = FALSE;
+}
 
-    The view_set_byte() function has the effect that later calls to
-    get_byte() will return the specified byte for this offset. This
-    function is designed only for use by the hexedit component after
-    saving its changes. Inspect the source before you want to use it for
-    other purposes.
+static void
+view_growbuf_free (WView *view)
+{
+    size_t i;
 
-    The view_get_filesize() function returns the current size of the
-    data source. If the growing buffer is used, this size may increase
-    later on. Use the view_get_filesize_with_exact() when you want to
-    know if the size can change later.
-    
- */
+    assert (view->growbuf_in_use);
 
-/* TODO: move all data sources code to here. */
+    for (i = 0; i < view->growbuf_blocks; i++)
+	g_free (view->growbuf_blockptr[i]);
+    g_free (view->growbuf_blockptr);
+    view->growbuf_blockptr = NULL;
+    view->growbuf_in_use = FALSE;
+}
 
 static offset_type
 view_growbuf_filesize (WView *view, gboolean *ret_exact)
@@ -343,44 +345,6 @@ view_growbuf_filesize (WView *view, gboolean *ret_exact)
         return ((offset_type) view->growbuf_blocks - 1)
 	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
 }
-
-static offset_type
-view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
-{
-    *ret_exact = TRUE;
-    switch (view->datasource) {
-	case DS_NONE:
-	    return 0;
-	case DS_STDIO_PIPE:
-	case DS_VFS_PIPE:
-	    return view_growbuf_filesize (view, ret_exact);
-	case DS_FILE:
-	    return view->ds_file_filesize;
-	case DS_STRING:
-	    return view->ds_string_len;
-	default:
-	    assert(!"Unknown datasource type");
-	    return 0;
-    }
-}
-
-static offset_type
-view_get_filesize (WView *view)
-{
-    gboolean exact;
-
-    return view_get_filesize_with_exact (view, &exact);
-}
-
-static void view_set_datasource_none (WView *view);
-static void view_set_datasource_vfs_pipe (WView *view, int fd);
-static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
-static void view_set_datasource_string (WView *view, const char *s);
-static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
-static void view_close_datasource (WView *);
-
-static int get_byte (WView *, offset_type);
-static void view_set_byte (WView *, offset_type, byte);
 
 /* Copies the output from the pipe to the growing buffer, until either
  * the end-of-pipe is reached or the interval [0..ofs) or the growing
@@ -439,12 +403,279 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     }
 }
 
+static int
+get_byte_growing_buffer (WView *view, offset_type byte_index)
+{
+    offset_type pageno    = byte_index / VIEW_PAGE_SIZE;
+    offset_type pageindex = byte_index % VIEW_PAGE_SIZE;
+
+    assert (view->growbuf_in_use);
+    assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
+
+    if ((size_t) pageno != pageno)
+	return -1;
+
+    view_growbuf_read_until (view, byte_index + 1);
+    if (view->growbuf_blocks == 0)
+	return -1;
+    if (pageno < view->growbuf_blocks - 1)
+	return view->growbuf_blockptr[pageno][pageindex];
+    if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex)
+	return view->growbuf_blockptr[pageno][pageindex];
+    return -1;
+}
+
+/* {{{ Data sources }}} */
+
+/*
+    The data source provides the viewer with data from either a file, a
+    string or the output of a command. The get_byte() function can be
+    used to get the value of a byte at a specific offset. If the offset
+    is out of range, -1 is returned. The function get_byte_indexed(a,b)
+    returns the byte at the offset a+b, or -1 if a+b is out of range.
+
+    The view_set_byte() function has the effect that later calls to
+    get_byte() will return the specified byte for this offset. This
+    function is designed only for use by the hexedit component after
+    saving its changes. Inspect the source before you want to use it for
+    other purposes.
+
+    The view_get_filesize() function returns the current size of the
+    data source. If the growing buffer is used, this size may increase
+    later on. Use the view_get_filesize_with_exact() when you want to
+    know if the size can change later.
+ */
+
+static offset_type
+view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
+{
+    *ret_exact = TRUE;
+    switch (view->datasource) {
+	case DS_NONE:
+	    return 0;
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    return view_growbuf_filesize (view, ret_exact);
+	case DS_FILE:
+	    return view->ds_file_filesize;
+	case DS_STRING:
+	    return view->ds_string_len;
+	default:
+	    assert(!"Unknown datasource type");
+	    return 0;
+    }
+}
+
+static offset_type
+view_get_filesize (WView *view)
+{
+    gboolean exact;
+
+    return view_get_filesize_with_exact (view, &exact);
+}
+
+/* returns TRUE if the idx lies in the half-open interval
+ * [offset; offset + size), FALSE otherwise.
+ */
+static gboolean
+already_loaded (offset_type offset, offset_type idx, size_t size)
+{
+    return (offset <= idx && idx - offset < size);
+}
+
+static void
+view_file_load_data (WView *view, offset_type byte_index)
+{
+    offset_type blockoffset;
+    ssize_t res;
+    size_t bytes_read;
+
+    if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
+	return;
+
+    blockoffset = byte_index - byte_index % view->ds_file_datasize;
+    if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
+	goto error;
+
+    bytes_read = 0;
+    while (bytes_read < view->ds_file_datasize) {
+	res = mc_read (view->ds_file_fd, view->ds_file_data + bytes_read, view->ds_file_datasize - bytes_read);
+	if (res == -1)
+	    goto error;
+	if (res == 0)
+	    break;
+	bytes_read += (size_t) res;
+    }
+    view->ds_file_offset  = blockoffset;
+    if (bytes_read > view->ds_file_filesize - view->ds_file_offset) {
+	/* the file has grown in the meantime -- stick to the old size */
+	view->ds_file_datalen = view->ds_file_filesize - view->ds_file_offset;
+    } else {
+	view->ds_file_datalen = bytes_read;
+    }
+    return;
+
+error:
+    view->ds_file_datalen  = 0;
+}
+
+static int
+get_byte_none (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_NONE);
+    (void) &view;
+    (void) byte_index;
+    return -1;
+}
+
+static int
+get_byte_file (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_FILE);
+
+    view_file_load_data (view, byte_index);
+    if (already_loaded(view->ds_file_offset, byte_index, view->ds_file_datalen))
+	return view->ds_file_data[byte_index - view->ds_file_offset];
+    return -1;
+}
+
+static int
+get_byte_string (WView *view, offset_type byte_index)
+{
+    assert (view->datasource == DS_STRING);
+    if (byte_index < view->ds_string_len)
+	return view->ds_string_data[byte_index];
+    return -1;
+}
+
+static int
+get_byte (WView *view, offset_type offset)
+{
+    switch (view->datasource) {
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    return get_byte_growing_buffer (view, offset);
+	case DS_FILE:
+	    return get_byte_file (view, offset);
+	case DS_STRING:
+	    return get_byte_string (view, offset);
+	case DS_NONE:
+	    return get_byte_none (view, offset);
+    }
+    assert(!"Unknown datasource type");
+    return -1;
+}
+
 static inline int
 get_byte_indexed (WView *view, offset_type base, offset_type ofs)
 {
     if (base <= OFFSETTYPE_MAX - ofs)
 	return get_byte (view, base + ofs);
     return -1;
+}
+
+static void
+view_set_byte (WView *view, offset_type offset, byte b)
+{
+    assert (offset < view_get_filesize (view));
+
+    switch (view->datasource) {
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    view->growbuf_blockptr[offset / VIEW_PAGE_SIZE][offset % VIEW_PAGE_SIZE] = b;
+	    break;
+	case DS_FILE:
+	    view->ds_file_datalen = 0; /* just force reloading */
+	    break;
+	case DS_STRING:
+	    view->ds_string_data[offset] = b;
+	    break;
+	case DS_NONE:
+	    break;
+	default:
+	    assert(!"Unknown datasource type");
+    }
+}
+
+static void
+view_set_datasource_none (WView *view)
+{
+    view->datasource = DS_NONE;
+}
+
+static void
+view_set_datasource_vfs_pipe (WView *view, int fd)
+{
+    view->datasource = DS_VFS_PIPE;
+    view->ds_vfs_pipe = fd;
+
+    view_init_growbuf (view);
+}
+
+static void
+view_set_datasource_stdio_pipe (WView *view, FILE *fp)
+{
+    view->datasource = DS_STDIO_PIPE;
+    view->ds_stdio_pipe = fp;
+
+    view_init_growbuf (view);
+}
+
+static void
+view_set_datasource_string (WView *view, const char *s)
+{
+    view->datasource = DS_STRING;
+    view->ds_string_data = (byte *) g_strdup (s);
+    view->ds_string_len  = strlen (s);
+}
+
+static void
+view_set_datasource_file (WView *view, int fd, const struct stat *st)
+{
+    view->datasource = DS_FILE;
+    view->ds_file_fd = fd;
+    view->ds_file_filesize = st->st_size;
+    view->ds_file_offset = 0;
+    view->ds_file_data = g_malloc (4096);
+    view->ds_file_datalen = 0;
+    view->ds_file_datasize = 4096;
+}
+
+static void
+view_close_datasource (WView *view)
+{
+    switch (view->datasource) {
+	case DS_NONE:
+	    break;
+	case DS_STDIO_PIPE:
+	    if (view->ds_stdio_pipe != NULL) {
+		(void) pclose (view->ds_stdio_pipe);
+		close_error_pipe (0, NULL);
+		view->ds_stdio_pipe = NULL;
+	    }
+	    view_growbuf_free (view);
+	    break;
+	case DS_VFS_PIPE:
+	    if (view->ds_vfs_pipe != -1) {
+		(void) mc_close (view->ds_vfs_pipe);
+		view->ds_vfs_pipe = -1;
+	    }
+	    view_growbuf_free (view);
+	    break;
+	case DS_FILE:
+	    (void) mc_close (view->ds_file_fd);
+	    view->ds_file_fd = -1;
+	    g_free (view->ds_file_data);
+	    view->ds_file_data = NULL;
+	    break;
+	case DS_STRING:
+	    g_free (view->ds_string_data);
+	    view->ds_string_data = NULL;
+	    break;
+	default:
+	    assert (!"Unknown datasource type");
+    }
+    view->datasource = DS_NONE;
 }
 
 /* {{{ The Coordinate Cache }}} */
@@ -958,6 +1189,7 @@ view_move_right (WView *view, offset_type columns)
     view_movement_fixups (view, FALSE);
 }
 
+/* {{{ Miscellaneous functions }}} */
 
 /* Both views */
 static void
@@ -3027,247 +3259,3 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     return view;
 }
-
-static void
-view_growbuf_free (WView *view)
-{
-    size_t i;
-
-    assert (view->growbuf_in_use);
-
-    for (i = 0; i < view->growbuf_blocks; i++)
-	g_free (view->growbuf_blockptr[i]);
-    g_free (view->growbuf_blockptr);
-    view->growbuf_blockptr = NULL;
-    view->growbuf_in_use = FALSE;
-}
-
-static void
-view_close_datasource (WView *view)
-{
-    switch (view->datasource) {
-	case DS_NONE:
-	    break;
-	case DS_STDIO_PIPE:
-	    if (view->ds_stdio_pipe != NULL) {
-		(void) pclose (view->ds_stdio_pipe);
-		close_error_pipe (0, NULL);
-		view->ds_stdio_pipe = NULL;
-	    }
-	    view_growbuf_free (view);
-	    break;
-	case DS_VFS_PIPE:
-	    if (view->ds_vfs_pipe != -1) {
-		(void) mc_close (view->ds_vfs_pipe);
-		view->ds_vfs_pipe = -1;
-	    }
-	    view_growbuf_free (view);
-	    break;
-	case DS_FILE:
-	    (void) mc_close (view->ds_file_fd);
-	    view->ds_file_fd = -1;
-	    g_free (view->ds_file_data);
-	    view->ds_file_data = NULL;
-	    break;
-	case DS_STRING:
-	    g_free (view->ds_string_data);
-	    view->ds_string_data = NULL;
-	    break;
-	default:
-	    assert (!"Unknown datasource type");
-    }
-    view->datasource = DS_NONE;
-}
-
-/* returns TRUE if the idx lies in the half-open interval
- * [offset; offset + size), FALSE otherwise.
- */
-static gboolean
-already_loaded (offset_type offset, offset_type idx, size_t size)
-{
-    return (offset <= idx && idx - offset < size);
-}
-
-static void
-view_file_load_data (WView *view, offset_type byte_index)
-{
-    offset_type blockoffset;
-    ssize_t res;
-    size_t bytes_read;
-
-    if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
-	return;
-
-    blockoffset = byte_index - byte_index % view->ds_file_datasize;
-    if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
-	goto error;
-
-    bytes_read = 0;
-    while (bytes_read < view->ds_file_datasize) {
-	res = mc_read (view->ds_file_fd, view->ds_file_data + bytes_read, view->ds_file_datasize - bytes_read);
-	if (res == -1)
-	    goto error;
-	if (res == 0)
-	    break;
-	bytes_read += (size_t) res;
-    }
-    view->ds_file_offset  = blockoffset;
-    if (bytes_read > view->ds_file_filesize - view->ds_file_offset) {
-	/* the file has grown in the meantime -- stick to the old size */
-	view->ds_file_datalen = view->ds_file_filesize - view->ds_file_offset;
-    } else {
-	view->ds_file_datalen = bytes_read;
-    }
-    return;
-
-error:
-    view->ds_file_datalen  = 0;
-}
-
-static int
-get_byte_none (WView *view, offset_type byte_index)
-{
-    assert (view->datasource == DS_NONE);
-    (void) &view;
-    (void) byte_index;
-    return -1;
-}
-
-static int
-get_byte_growing_buffer (WView *view, offset_type byte_index)
-{
-    offset_type pageno    = byte_index / VIEW_PAGE_SIZE;
-    offset_type pageindex = byte_index % VIEW_PAGE_SIZE;
-
-    assert (view->growbuf_in_use);
-    assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
-
-    if ((size_t) pageno != pageno)
-	return -1;
-
-    view_growbuf_read_until (view, byte_index + 1);
-    if (view->growbuf_blocks == 0)
-	return -1;
-    if (pageno < view->growbuf_blocks - 1)
-	return view->growbuf_blockptr[pageno][pageindex];
-    if (pageno == view->growbuf_blocks - 1 && pageindex < view->growbuf_lastindex)
-	return view->growbuf_blockptr[pageno][pageindex];
-    return -1;
-}
-
-static int
-get_byte_file (WView *view, offset_type byte_index)
-{
-    assert (view->datasource == DS_FILE);
-
-    view_file_load_data (view, byte_index);
-    if (already_loaded(view->ds_file_offset, byte_index, view->ds_file_datalen))
-	return view->ds_file_data[byte_index - view->ds_file_offset];
-    return -1;
-}
-
-static int
-get_byte_string (WView *view, offset_type byte_index)
-{
-    assert (view->datasource == DS_STRING);
-    if (byte_index < view->ds_string_len)
-	return view->ds_string_data[byte_index];
-    return -1;
-}
-
-static int
-get_byte (WView *view, offset_type offset)
-{
-    switch (view->datasource) {
-	case DS_STDIO_PIPE:
-	case DS_VFS_PIPE:
-	    return get_byte_growing_buffer (view, offset);
-	case DS_FILE:
-	    return get_byte_file (view, offset);
-	case DS_STRING:
-	    return get_byte_string (view, offset);
-	case DS_NONE:
-	    return get_byte_none (view, offset);
-    }
-    assert(!"Unknown datasource type");
-    return -1;
-}
-
-static void
-view_set_byte (WView *view, offset_type offset, byte b)
-{
-    assert (offset < view_get_filesize (view));
-
-    switch (view->datasource) {
-	case DS_STDIO_PIPE:
-	case DS_VFS_PIPE:
-	    view->growbuf_blockptr[offset / VIEW_PAGE_SIZE][offset % VIEW_PAGE_SIZE] = b;
-	    break;
-	case DS_FILE:
-	    view->ds_file_datalen = 0; /* just force reloading */
-	    break;
-	case DS_STRING:
-	    view->ds_string_data[offset] = b;
-	    break;
-	case DS_NONE:
-	    break;
-	default:
-	    assert(!"Unknown datasource type");
-    }
-}
-
-static void
-view_init_growbuf (WView *view)
-{
-    view->growbuf_in_use    = TRUE;
-    view->growbuf_blockptr  = NULL;
-    view->growbuf_blocks    = 0;
-    view->growbuf_lastindex = 0;
-    view->growbuf_finished  = FALSE;
-}
-
-static void
-view_set_datasource_none (WView *view)
-{
-    view->datasource = DS_NONE;
-}
-
-static void
-view_set_datasource_vfs_pipe (WView *view, int fd)
-{
-    view->datasource        = DS_VFS_PIPE;
-    view->ds_vfs_pipe       = fd;
-
-    view_init_growbuf (view);
-}
-
-static void
-view_set_datasource_stdio_pipe (WView *view, FILE *fp)
-{
-    view->datasource        = DS_STDIO_PIPE;
-    view->ds_stdio_pipe     = fp;
-
-    view_init_growbuf (view);
-}
-
-static void
-view_set_datasource_string (WView *view, const char *s)
-{
-    view->datasource     = DS_STRING;
-    view->ds_string_data = (byte *) g_strdup (s);
-    view->ds_string_len  = strlen (s);
-}
-
-static void
-view_set_datasource_file (WView *view, int fd, const struct stat *st)
-{
-    view->datasource       = DS_FILE;
-    view->ds_file_fd       = fd;
-    view->ds_file_filesize = st->st_size;
-    view->ds_file_offset   = 0;
-    view->ds_file_data     = g_malloc (4096);
-    view->ds_file_datalen  = 0;
-    view->ds_file_datasize = 4096;
-
-}
-
