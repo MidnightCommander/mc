@@ -259,31 +259,6 @@ static offset_type view_get_filesize_with_exact (WView *, gboolean *);
 static void view_init_growbuf (WView *);
 static void view_place_cursor (WView *view);
 
-static void view_coord_to_offset (WView *,
-	offset_type *ret_offset, offset_type line, offset_type col);
-static void view_offset_to_coord (WView *,
-	offset_type *ret_line, offset_type *ret_col, offset_type offset);
-
-/* Absolute cursor movement */
-static void view_moveto_top (WView *);
-static void view_moveto_bottom (WView *);
-static void view_moveto_bol (WView *);
-static void view_moveto_eol (WView *);
-static void view_moveto (WView *, offset_type line, offset_type column);
-static void view_moveto_offset (WView *, offset_type);
-
-/* Relative cursor movement */
-static void view_move_up (WView *, offset_type lines);
-static void view_move_down (WView *, offset_type lines);
-static void view_move_left (WView *, offset_type columns);
-static void view_move_right (WView *, offset_type columns);
-
-static void view_fix_cursor_position (WView *);
-
-#ifdef MC_ENABLE_DEBUGGING_CODE
-static void view_ccache_dump (WView *);
-#endif
-
 /* {{{ Helper Functions }}} */
 
 static offset_type
@@ -618,6 +593,10 @@ view_offset_to_coord (WView *view, offset_type *ret_line,
    non-wrap mode dpy_topleft and dpy_text_column are normalized such
    that dpy_text_column < view_get_datacolumns().
 */
+
+/* prototypes for functions used by view_moveto_bottom() */
+static void view_move_up (WView *, offset_type);
+static void view_moveto_bol (WView *);
 
 static void
 view_fix_cursor_position (WView *view)
