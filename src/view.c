@@ -311,23 +311,6 @@ view_get_datacolumns (WView *view)
     return 0;
 }
 
-static void
-view_hexview_move_to_eol(WView *view)
-{
-    offset_type filesize, linestart;
-
-    assert(view->bytes_per_line >= 1);
-
-    linestart = view->hex_cursor - view->hex_cursor % view->bytes_per_line;
-    if (get_byte_indexed (view, linestart, view->bytes_per_line - 1) != -1) {
-        view->hex_cursor = linestart + view->bytes_per_line - 1;
-    } else {
-	filesize = view_get_filesize (view);
-        view->hex_cursor = (filesize >= 1) ? filesize - 1 : 0;
-    }
-    view->dirty++;
-}
-
 /* Both views */
 static void
 view_done (WView *view)
@@ -2309,6 +2292,23 @@ continue_search (WView *view)
 	/* if not... then ask for an expression */
 	normal_search (view);
     }
+}
+
+static void
+view_hexview_move_to_eol(WView *view)
+{
+    offset_type filesize, linestart;
+
+    assert(view->bytes_per_line >= 1);
+
+    linestart = view->hex_cursor - view->hex_cursor % view->bytes_per_line;
+    if (get_byte_indexed (view, linestart, view->bytes_per_line - 1) != -1) {
+        view->hex_cursor = linestart + view->bytes_per_line - 1;
+    } else {
+	filesize = view_get_filesize (view);
+        view->hex_cursor = (filesize >= 1) ? filesize - 1 : 0;
+    }
+    view->dirty++;
 }
 
 /* Both views */
