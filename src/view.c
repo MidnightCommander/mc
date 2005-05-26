@@ -235,27 +235,6 @@ static int regexp_view_search (WView * view, char *pattern, char *string,
 static void view_labels (WView * view);
 static void view_update (WView * view);
 
-/* Return the data at the specified offset, or the value -1. */
-static int get_byte (WView *, offset_type);
-
-/* Calling this function has the effect that the viewer will show
- * the given byte at this offset. This function is designed only for use
- * by the hexedit component after saving its changes. Inspect the
- * source before you want to use it for other purposes. */
-static void view_set_byte (WView *, offset_type, byte);
-
-static void view_close_datasource (WView *);
-static offset_type view_growbuf_filesize (WView *view, gboolean *);
-
-static void view_set_datasource_none (WView *view);
-static void view_set_datasource_vfs_pipe (WView *view, int fd);
-static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
-static void view_set_datasource_string (WView *view, const char *s);
-static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
-
-static offset_type view_get_filesize (WView *);
-static offset_type view_get_filesize_with_exact (WView *, gboolean *);
-
 static void view_init_growbuf (WView *);
 static void view_place_cursor (WView *view);
 
@@ -273,14 +252,6 @@ static inline gboolean
 view_is_in_panel (WView *view)
 {
     return (view->dpy_frame_size != 0);
-}
-
-static inline int
-get_byte_indexed (WView *view, offset_type base, offset_type ofs)
-{
-    if (base <= OFFSETTYPE_MAX - ofs)
-	return get_byte (view, base + ofs);
-    return -1;
 }
 
 static inline int
@@ -339,6 +310,26 @@ view_get_datacolumns (WView *view)
 
 /* TODO: move all data sources code to here. */
 
+static void view_set_datasource_none (WView *view);
+static void view_set_datasource_vfs_pipe (WView *view, int fd);
+static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
+static void view_set_datasource_string (WView *view, const char *s);
+static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
+static void view_close_datasource (WView *);
+
+static offset_type view_get_filesize (WView *);
+static offset_type view_get_filesize_with_exact (WView *, gboolean *);
+static offset_type view_growbuf_filesize (WView *view, gboolean *);
+
+/* Return the data at the specified offset, or the value -1. */
+static int get_byte (WView *, offset_type);
+
+/* Calling this function has the effect that the viewer will show
+ * the given byte at this offset. This function is designed only for use
+ * by the hexedit component after saving its changes. Inspect the
+ * source before you want to use it for other purposes. */
+static void view_set_byte (WView *, offset_type, byte);
+
 /* Copies the output from the pipe to the growing buffer, until either
  * the end-of-pipe is reached or the interval [0..ofs) or the growing
  * buffer is completely filled. */
@@ -394,6 +385,14 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	}
         view->growbuf_lastindex += nread;
     }
+}
+
+static inline int
+get_byte_indexed (WView *view, offset_type base, offset_type ofs)
+{
+    if (base <= OFFSETTYPE_MAX - ofs)
+	return get_byte (view, base + ofs);
+    return -1;
 }
 
 /* {{{ The Coordinate Cache }}} */
