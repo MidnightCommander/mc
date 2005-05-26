@@ -1,3 +1,13 @@
+2005-05-26  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Completely rewrote the cursor movement code. Now all
+	cursor movement functions are based on two functions that
+	translate file offsets into line/column pairs and vice versa.
+	This change made it possible that the line/column is displayed
+	in the status line. The beginning-of-line and end-of-line
+	functions now work in text mode, too. Switching from non-wrap to
+	wrap mode does not cause the whole file to be loaded.
+
 2005-05-24  Roland Illig  <roland.illig@gmx.de>
 
 	* widget.c: Fixed all but one casts on function pointers.
