@@ -310,16 +310,61 @@ view_get_datacolumns (WView *view)
 
 /* TODO: move all data sources code to here. */
 
+static offset_type
+view_growbuf_filesize (WView *view, gboolean *ret_exact)
+{
+    assert(view->growbuf_in_use);
+
+    if (ret_exact)
+	*ret_exact = view->growbuf_finished;
+    if (view->growbuf_blocks == 0)
+        return 0;
+    else
+        return ((offset_type) view->growbuf_blocks - 1)
+	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
+}
+
+/* Return the size of the data that is available to the viewer.
+ * The ''exact'' return value is TRUE when the data source has a fixed
+ * size, and is FALSE when the data source is still growing.
+ */
+static offset_type
+view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
+{
+    *ret_exact = TRUE;
+    switch (view->datasource) {
+	case DS_NONE:
+	    return 0;
+	case DS_STDIO_PIPE:
+	case DS_VFS_PIPE:
+	    return view_growbuf_filesize (view, ret_exact);
+	case DS_FILE:
+	    return view->ds_file_filesize;
+	case DS_STRING:
+	    return view->ds_string_len;
+	default:
+	    assert(!"Unknown datasource type");
+	    return 0;
+    }
+}
+
+/* Return the current size of the data source. This may be less
+ * than the real size in case of growing buffers.
+ */
+static offset_type
+view_get_filesize (WView *view)
+{
+    gboolean exact;
+
+    return view_get_filesize_with_exact (view, &exact);
+}
+
 static void view_set_datasource_none (WView *view);
 static void view_set_datasource_vfs_pipe (WView *view, int fd);
 static void view_set_datasource_stdio_pipe (WView *view, FILE *fp);
 static void view_set_datasource_string (WView *view, const char *s);
 static void view_set_datasource_file (WView *view, int fd, const struct stat *st);
 static void view_close_datasource (WView *);
-
-static offset_type view_get_filesize (WView *);
-static offset_type view_get_filesize_with_exact (WView *, gboolean *);
-static offset_type view_growbuf_filesize (WView *view, gboolean *);
 
 /* Return the data at the specified offset, or the value -1. */
 static int get_byte (WView *, offset_type);
@@ -2974,55 +3019,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->update_activate   = 0;
 
     return view;
-}
-
-static offset_type
-view_growbuf_filesize (WView *view, gboolean *ret_exact)
-{
-    assert(view->growbuf_in_use);
-
-    if (ret_exact)
-	*ret_exact = view->growbuf_finished;
-    if (view->growbuf_blocks == 0)
-        return 0;
-    else
-        return ((offset_type) view->growbuf_blocks - 1)
-	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
-}
-
-/* Return the current size of the data source. This may be less
- * than the real size in case of growing buffers.
- */
-static offset_type
-view_get_filesize (WView *view)
-{
-    gboolean exact;
-
-    return view_get_filesize_with_exact (view, &exact);
-}
-
-/* Return the size of the data that is available to the viewer.
- * The ''exact'' return value is TRUE when the data source has a fixed
- * size, and is FALSE when the data source is still growing.
- */
-static offset_type
-view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
-{
-    *ret_exact = TRUE;
-    switch (view->datasource) {
-	case DS_NONE:
-	    return 0;
-	case DS_STDIO_PIPE:
-	case DS_VFS_PIPE:
-	    return view_growbuf_filesize (view, ret_exact);
-	case DS_FILE:
-	    return view->ds_file_filesize;
-	case DS_STRING:
-	    return view->ds_string_len;
-	default:
-	    assert(!"Unknown datasource type");
-	    return 0;
-    }
 }
 
 static void
