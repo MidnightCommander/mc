@@ -692,7 +692,7 @@ tree_box (const char *current_dir)
 #ifdef USE_VFS
 
 #if defined(USE_NETCODE)
-#define VFSY 16
+#define VFSY 17
 #define VFS_WIDGETBASE 9
 #else
 #define VFSY 8
@@ -709,6 +709,7 @@ static char *ret_directory_timeout;
 static char *ret_ftp_proxy;
 static int ret_use_netrc;
 static int ret_ftpfs_use_passive_connections;
+static int ret_ftpfs_use_passive_connections_over_proxy;
 #endif
 
 static QuickWidget confvfs_widgets [] = {
@@ -717,6 +718,8 @@ static QuickWidget confvfs_widgets [] = {
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&OK"),
       0, B_ENTER, 0, 0, "button-ok" },
 #if defined(USE_NETCODE)
+{ quick_checkbox,  4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"), 0, 0,
+      &ret_ftpfs_use_passive_connections_over_proxy, 0, "check-use-passive-mode-proxy" },
 { quick_checkbox,  4, VFSX, 11, VFSY, N_("Use &passive mode"), 0, 0,
       &ret_ftpfs_use_passive_connections, 0, "check-use-passive-mode" },
 { quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
@@ -758,13 +761,14 @@ configure_vfs (void)
 
     ret_use_netrc = use_netrc;
     ret_ftpfs_use_passive_connections = ftpfs_use_passive_connections;
+    ret_ftpfs_use_passive_connections_over_proxy = ftpfs_use_passive_connections_over_proxy;
     g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
-    confvfs_widgets[7].text = buffer3;
-    confvfs_widgets[9].text = ftpfs_anonymous_passwd;
-    confvfs_widgets[4].text = ftpfs_proxy_host;
+    confvfs_widgets[8].text = buffer3;
+    confvfs_widgets[10].text = ftpfs_anonymous_passwd;
+    confvfs_widgets[5].text = ftpfs_proxy_host;
 #endif
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
-    confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
+    confvfs_widgets [4 + VFS_WIDGETBASE].text = buffer2;
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
         vfs_timeout = atoi (ret_timeout);
@@ -779,6 +783,7 @@ configure_vfs (void)
 	ftpfs_directory_timeout = atoi(ret_directory_timeout);
 	use_netrc = ret_use_netrc;
 	ftpfs_use_passive_connections = ret_ftpfs_use_passive_connections;
+	ftpfs_use_passive_connections_over_proxy = ret_ftpfs_use_passive_connections_over_proxy;
 	g_free (ret_directory_timeout);
 #endif
     }

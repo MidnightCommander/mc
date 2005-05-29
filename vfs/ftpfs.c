@@ -108,6 +108,7 @@ int ftpfs_retry_seconds = 30;
 
 /* Method to use to connect to ftp sites */
 int ftpfs_use_passive_connections = 1;
+int ftpfs_use_passive_connections_over_proxy = 0;
 
 /* Method used to get directory listings:
  * 1: try 'LIST -la <path>', if it fails
@@ -703,8 +704,8 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
     /* We do not want to use the passive if we are using proxies */
     if (SUP.proxy)
-	SUP.use_passive_connection = 0;
-    
+	SUP.use_passive_connection = ftpfs_use_passive_connections_over_proxy;
+
     retry_seconds = 0;
     do { 
 	SUP.failed_on_login = 0;

@@ -8,6 +8,7 @@ extern int ftpfs_always_use_proxy;
 
 extern int ftpfs_retry_seconds;
 extern int ftpfs_use_passive_connections;
+extern int ftpfs_use_passive_connections_over_proxy;
 extern int ftpfs_use_unix_list_options;
 extern int ftpfs_first_cd_then_ls;
 
