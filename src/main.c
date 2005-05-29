@@ -1487,9 +1487,14 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (parm == '\t')
 	    free_completions (cmdline);
 
-	if (parm == '\n' && cmdline->buffer[0]) {
-	    send_message ((Widget *) cmdline, WIDGET_KEY, parm);
-	    return MSG_HANDLED;
+	if (parm == '\n') {
+	    for (i = 0; cmdline->buffer[i] && cmdline->buffer[i] == ' '; i++);
+	    if (cmdline->buffer[i]) {
+	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
+		return MSG_HANDLED;
+	    }
+	    stuff (cmdline, "", 0);
+	    cmdline->point = 0;
 	}
 
 	/* Ctrl-Enter and Alt-Enter */
@@ -1524,7 +1529,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
-	    } else if (!command_prompt || !strlen (cmdline->buffer)) {
+	    } else if (!command_prompt || !cmdline->buffer[0]) {
 		/* Special treatement '+', '-', '\', '*' only when this is 
 		 * first char on input line
 		 */

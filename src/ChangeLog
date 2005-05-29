@@ -1,3 +1,8 @@
+2005-05-29  Jindrich Novy  <jnovy@redhat.com>
+
+	* main.c (midnight_callback): Fix blocking of panel cd-ing when
+	there are only spaces on the command line.
+
 2005-05-26  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Completely rewrote the cursor movement code. Now all
