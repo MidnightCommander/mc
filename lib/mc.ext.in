@@ -104,6 +104,137 @@
 # Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
 
 
+### Archives ###
+
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
+regex/\.t([gp]?z|ar\.g?[zZ])$
+	Open=%cd %p#utar
+	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
+
+regex/\.tar\.bz$
+	# Open=%cd %p#utar
+	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
+
+regex/\.t(ar\.bz2|bz|b2)$
+	Open=%cd %p#utar
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
+
+# .tar.F - used in QNX
+regex/\.tar\.F$
+	# Open=%cd %p#utar
+	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
+
+# .qpr/.qpk - QNX Neutrino package installer files 
+regex/\.(qp[rk])$
+	Open=%cd %p#utar
+	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
+
+# tar
+regex/\.(tar|TAR)$
+	Open=%cd %p#utar
+	View=%view{ascii} tar tvvf %f
+
+# zip
+type/^([Zz][Ii][Pp])\ archive
+	Open=%cd %p#uzip
+	View=%view{ascii} unzip -v %f
+
+# zoo
+regex/\.([Zz][Oo][Oo])$
+	Open=%cd %p#uzoo
+	View=%view{ascii} zoo l %f
+	
+# lha
+type/^LHa\ .*archive
+	Open=%cd %p#ulha
+	View=%view{ascii} lha l %f
+
+# arj
+regex/\.a(rj|[0-9][0-9])$
+	Open=%cd %p#uarj
+	View=%view{ascii} unarj l %f
+
+# ha
+regex/\.([Hh][Aa])$
+	Open=%cd %p#uha
+	View=%view{ascii} ha lf %f
+
+# rar
+regex/\.[rR]([aA][rR]|[0-9][0-9])$
+	Open=%cd %p#urar
+	View=%view{ascii} rar v -c- %f
+
+# cpio
+shell/.cpio.Z
+	Open=%cd %p#ucpio
+	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
+
+shell/.cpio.gz
+	Open=%cd %p#ucpio
+	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
+
+shell/.cpio
+	Open=%cd %p#ucpio
+	View=%view{ascii} cpio -itv <'%f' 2>/dev/null
+
+# ls-lR
+regex/(^|\.)ls-?lR(\.g?z|Z|bz2)?$
+	Open=%cd %p#lslR
+
+# patch
+regex/\.(diff|patch)(\.(bz2|gz|Z))?$
+        Open=%cd %p#patchfs
+
+# gzip
+type/^gzip
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+
+# bzip2
+type/^bzip2
+	Open=bzip2 -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+
+# bzip
+type/^bzip
+	Open=bzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip -dc %f 2>/dev/null
+
+# compress
+type/^compress
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+
+# ar library
+regex/\.s?a$
+	Open=%cd %p#uar
+	#Open=%view{ascii} ar tv %f
+	View=%view{ascii} file %f && nm %f
+
+# trpm
+regex/\.trpm$
+	Open=%cd %p#trpm
+	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
+
+# RPM packages (SuSE uses *.spm for source packages)
+regex/\.(rpm|spm)$
+	Open=%cd %p#rpm
+	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
+
+# deb
+regex/\.u?deb$
+	Open=%cd %p#deb
+	View=%view{ascii} dpkg-deb -c %f
+
+# ISO9660
+regex/\.iso$
+	Open=%cd %p#iso9660
+	View=%view{ascii} isoinfo -l -i %f
+
+# 7zip archives (they are not man pages)
+shell/.7z
+	View=%view{ascii} 7za l %f 2>/dev/null
+
 ### Sources ###
 
 # C
@@ -389,134 +520,6 @@ regex/\.([dD][bB][fF])$
 # REXX script
 regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
-
-
-### Archives ###
-
-# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
-regex/\.t([gp]?z|ar\.g?[zZ])$
-	Open=%cd %p#utar
-	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
-
-regex/\.tar\.bz$
-	# Open=%cd %p#utar
-	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
-
-regex/\.t(ar\.bz2|bz|b2)$
-	Open=%cd %p#utar
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
-
-# .tar.F - used in QNX
-regex/\.tar\.F$
-	# Open=%cd %p#utar
-	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
-
-# .qpr/.qpk - QNX Neutrino package installer files 
-regex/\.(qp[rk])$
-	Open=%cd %p#utar
-	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
-
-# tar
-regex/\.(tar|TAR)$
-	Open=%cd %p#utar
-	View=%view{ascii} tar tvvf %f
-
-# zip
-type/^([Zz][Ii][Pp])\ archive
-	Open=%cd %p#uzip
-	View=%view{ascii} unzip -v %f
-
-# zoo
-regex/\.([Zz][Oo][Oo])$
-	Open=%cd %p#uzoo
-	View=%view{ascii} zoo l %f
-	
-# lha
-type/^LHa\ .*archive
-	Open=%cd %p#ulha
-	View=%view{ascii} lha l %f
-
-# arj
-regex/\.a(rj|[0-9][0-9])$
-	Open=%cd %p#uarj
-	View=%view{ascii} unarj l %f
-
-# ha
-regex/\.([Hh][Aa])$
-	Open=%cd %p#uha
-	View=%view{ascii} ha lf %f
-
-# rar
-regex/\.[rR]([aA][rR]|[0-9][0-9])$
-	Open=%cd %p#urar
-	View=%view{ascii} rar v -c- %f
-
-# cpio
-shell/.cpio.Z
-	Open=%cd %p#ucpio
-	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
-
-shell/.cpio.gz
-	Open=%cd %p#ucpio
-	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
-
-shell/.cpio
-	Open=%cd %p#ucpio
-	View=%view{ascii} cpio -itv <'%f' 2>/dev/null
-
-# ls-lR
-regex/(^|\.)ls-?lR(\.g?z|Z|bz2)?$
-	Open=%cd %p#lslR
-
-# patch
-regex/\.(diff|patch)(\.(bz2|gz|Z))?$
-        Open=%cd %p#patchfs
-
-# gzip
-type/^gzip
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-
-# bzip2
-type/^bzip2
-	Open=bzip2 -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null
-
-# bzip
-type/^bzip
-	Open=bzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip -dc %f 2>/dev/null
-
-# compress
-type/^compress
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-
-# ar library
-regex/\.s?a$
-	Open=%cd %p#uar
-	#Open=%view{ascii} ar tv %f
-	View=%view{ascii} file %f && nm %f
-
-# trpm
-regex/\.trpm$
-	Open=%cd %p#trpm
-	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
-
-# RPM packages (SuSE uses *.spm for source packages)
-regex/\.(rpm|spm)$
-	Open=%cd %p#rpm
-	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
-
-# deb
-regex/\.u?deb$
-	Open=%cd %p#deb
-	View=%view{ascii} dpkg-deb -c %f
-
-# ISO9660
-regex/\.iso$
-	Open=%cd %p#iso9660
-	View=%view{ascii} isoinfo -l -i %f
 
 
 ### Default ###

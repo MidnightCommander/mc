@@ -1,3 +1,7 @@
+2005-05-29  Martin Petricek  <tux@centrum.cz>
+
+	* lib/mc.ext.in: Added support for .7z archives.
+
 2005-05-26  Pavel Roskin  <proski@gnu.org>
 
 	* *: Update postal address of Free Software Foundation.
