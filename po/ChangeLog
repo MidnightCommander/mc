@@ -1,3 +1,7 @@
+2005-05-31  David Martin  <dmartina@excite.com>
+
+	* es.po: Updated Spanish translation.
+
 2005-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* Makevars: Add --no-location to msgmerge arguments.
