@@ -1,3 +1,10 @@
+2005-05-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* pkginfo.in: New file. Configuration files for Sun Solaris pkgmk(1).
+	* prototype.in: Likewise.
+	* configure.ac: Likewise.
+	* Makefile.am: Likewise.
+
 2005-05-29  Martin Petricek  <tux@centrum.cz>
 
 	* lib/mc.ext.in: Added support for .7z archives.

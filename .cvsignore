@@ -23,6 +23,8 @@ mc.qpg
 mc.spec
 missing
 mkinstalldirs
+pkginfo
+prototype
 stamp-h
 stamp-h?
 stamp-h.in

@@ -1,0 +1,130 @@
+#! /usr/bin/pkgmk -f
+# Sun Solaris prototype file for pkgmk(1)
+# 
+!prefix=@prefix@
+!bindir=$prefix/bin
+!libdir=$prefix/lib
+!datadir=$prefix/share
+!mandir=$prefix/man
+!docdir=$prefix/doc
+!search . $bindir $libdir $datadir $datadir/mc
+i pkginfo=pkginfo
+!default 755 root bin
+l none $bindir/mcedit=mc
+f none $bindir/mc 
+d none $libdir/mc
+d none $datadir/mc
+d none $datadir/mc/bin
+d none $datadir/mc/extfs
+d none $datadir/mc/syntax
+d none $docdir/mc
+#
+!default 644 root bin
+f none $datadir/mc/cedit.menu
+f none $datadir/mc/edit.indent.rc
+f none $datadir/mc/edit.spell.rc
+f none $datadir/mc/mc.ext
+f none $datadir/mc/mc.hint
+f none $datadir/mc/mc.hint.cs
+f none $datadir/mc/mc.hint.es
+f none $datadir/mc/mc.hint.hu
+f none $datadir/mc/mc.hint.it
+f none $datadir/mc/mc.hint.nl
+f none $datadir/mc/mc.hint.pl
+f none $datadir/mc/mc.hint.ru
+f none $datadir/mc/mc.hint.uk
+f none $datadir/mc/mc.hint.zh
+f none $datadir/mc/mc.hlp
+f none $datadir/mc/mc.hlp.es
+f none $datadir/mc/mc.hlp.hu
+f none $datadir/mc/mc.hlp.it
+f none $datadir/mc/mc.hlp.pl
+f none $datadir/mc/mc.hlp.ru
+f none $datadir/mc/mc.lib
+f none $datadir/mc/mc.menu
+#
+!search $datadir/mc/bin
+#
+f none $datadir/mc/bin/mc.csh
+f none $datadir/mc/bin/mc.sh
+f none $datadir/mc/bin/mc-wrapper.csh
+f none $datadir/mc/bin/mc-wrapper.sh
+#
+!search $datadir/mc/extfs
+#
+f none $datadir/mc/extfs/a
+f none $datadir/mc/extfs/apt
+f none $datadir/mc/extfs/audio
+f none $datadir/mc/extfs/bpp
+f none $datadir/mc/extfs/deb
+f none $datadir/mc/extfs/deba
+f none $datadir/mc/extfs/debd
+f none $datadir/mc/extfs/dpkg
+f none $datadir/mc/extfs/extfs.ini
+f none $datadir/mc/extfs/hp48
+f none $datadir/mc/extfs/lslR
+f none $datadir/mc/extfs/mailfs
+f none $datadir/mc/extfs/patchfs
+f none $datadir/mc/extfs/README
+f none $datadir/mc/extfs/rpm
+f none $datadir/mc/extfs/rpms
+f none $datadir/mc/extfs/sfs.ini
+f none $datadir/mc/extfs/trpm
+f none $datadir/mc/extfs/uar
+f none $datadir/mc/extfs/uarj
+f none $datadir/mc/extfs/uha
+f none $datadir/mc/extfs/ulha
+f none $datadir/mc/extfs/urar
+f none $datadir/mc/extfs/uzip
+f none $datadir/mc/extfs/uzoo
+#
+!search $datadir/mc/syntax
+#
+f none $datadir/mc/syntax/ada95.syntax
+f none $datadir/mc/syntax/changelog.syntax
+f none $datadir/mc/syntax/c.syntax
+f none $datadir/mc/syntax/diff.syntax
+f none $datadir/mc/syntax/dos.syntax
+f none $datadir/mc/syntax/fortran.syntax
+f none $datadir/mc/syntax/html.syntax
+f none $datadir/mc/syntax/java.syntax
+f none $datadir/mc/syntax/js.syntax
+f none $datadir/mc/syntax/latex.syntax
+f none $datadir/mc/syntax/lisp.syntax
+f none $datadir/mc/syntax/lsm.syntax
+f none $datadir/mc/syntax/m4.syntax
+f none $datadir/mc/syntax/mail.syntax
+f none $datadir/mc/syntax/makefile.syntax
+f none $datadir/mc/syntax/ml.syntax
+f none $datadir/mc/syntax/nroff.syntax
+f none $datadir/mc/syntax/octave.syntax
+f none $datadir/mc/syntax/pascal.syntax
+f none $datadir/mc/syntax/perl.syntax
+f none $datadir/mc/syntax/php.syntax
+f none $datadir/mc/syntax/po.syntax
+f none $datadir/mc/syntax/python.syntax
+f none $datadir/mc/syntax/sh.syntax
+f none $datadir/mc/syntax/slang.syntax
+f none $datadir/mc/syntax/smalltalk.syntax
+f none $datadir/mc/syntax/spec.syntax
+f none $datadir/mc/syntax/sql.syntax
+f none $datadir/mc/syntax/swig.syntax
+f none $datadir/mc/syntax/Syntax
+f none $datadir/mc/syntax/syntax.syntax
+f none $datadir/mc/syntax/tcl.syntax
+f none $datadir/mc/syntax/texinfo.syntax
+f none $datadir/mc/syntax/unknown.syntax
+f none $datadir/mc/syntax/xml.syntax
+!search $docdir/mc
+f none $docdir/mc/ABOUT-NLS
+f none $docdir/mc/AUTHORS
+f none $docdir/mc/ChangeLog
+f none $docdir/mc/COPYING
+f none $docdir/mc/FAQ
+f none $docdir/mc/INSTALL
+f none $docdir/mc/INSTALL.FAST
+f none $docdir/mc/MAINTAINERS
+f none $docdir/mc/NEWS
+f none $docdir/mc/README
+f none $docdir/mc/README.PC
+f none $docdir/mc/README.QNX

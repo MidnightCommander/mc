@@ -591,6 +591,8 @@ AC_CONFIG_FILES([
 Makefile 
 mc.spec
 mc.qpg
+pkginfo
+prototype
 doc/Makefile 
 vfs/Makefile
 vfs/extfs/Makefile

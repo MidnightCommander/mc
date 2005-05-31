@@ -1,0 +1,9 @@
+PKG=GNUmc
+NAME=Midnight Commander visual shell
+DESC=Midnight Commander visual shell
+VENDOR=Free Software Foundation
+VERSION=@VERSION@
+CLASSES=none
+CATEGORY=application
+EMAIL=mc-devel@gnome.org
+PSTAMP=20030205
