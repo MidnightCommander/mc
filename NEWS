@@ -72,7 +72,8 @@ Release candidate for 4.6.1.
 	- Fix bugs for mcedit compiled with ncurses.
 	- New status string format in mcedit.
 	- Support for large syntax files.
-	- Temporarily disable safe save and backups on remote VFS because it doesn't work.
+	- Temporarily disable safe save and backups on remote VFS
+	  because it doesn't work.
 	- Enable user menu in mcedit.
 	- Add syntax file for the ASP.NET technology.
 	- Add syntax file for the Eiffel programming language.
@@ -83,6 +84,7 @@ Release candidate for 4.6.1.
 	- Improve perl.syntax.
 	- Improve diff.syntax.
 	- Improve makefile.syntax.
+	- Add "define" keyword for syntax files.
 
 - VFS.
 	- Full audit of quoting of parameters in vfs scripts (CAN-2004-0494).
