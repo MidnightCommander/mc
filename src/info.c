@@ -154,7 +154,7 @@ info_show_info (struct WInfo *info)
 	widget_move (&info->widget, 8, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
 	if (S_ISCHR (st.st_mode) || S_ISBLK(st.st_mode))
-	    printw ("Inode dev: major: %lu, minor: %lu",
+	    printw (_("Dev. type: major %lu, minor %lu"),
 		    (unsigned long) major (st.st_rdev),
 		    (unsigned long) minor (st.st_rdev));
 	else
