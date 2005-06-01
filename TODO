@@ -11,6 +11,13 @@ Then use fgrep to find illegal uses of these types.
     fgrep -r "`cat fn-types.txt`" .
 Fix these uses by writing small wrapper functions.
 
+When saving a file is not possible, mcedit should ask the user what to
+do:
+- su(1) to another user and try again
+- sudo
+- change permissions of the file or the containg directory
+- other smart things
+
 Due to problems in the VFS, files are not written back after being edited
 over VFS with an external editor.
 
