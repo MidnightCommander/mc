@@ -3,8 +3,9 @@ Current
 - Core functionality
 	- Device numbers are displayed correctly.
 	- Improved message formatting for i18n.
-	- recursive option added for internal grep.
-	- Better error handling in the internal viewer.
+	- Recursive option added for internal grep.
+	- Almost completely rewritten internal viewer.
+	- mmap(2) support removed from internal viewer.
 	- Fixed X11 connection problems.
 
 - VFS
@@ -12,15 +13,17 @@ Current
 	- Even more quoting issues fixed.
 	- zipfs can handle zip files that contain pathnames starting
 	  with "./".
-
-
-Version 4.6.1-pre4.
+	- Passive FTP over proxies is possible.
 
 - Editor.
 	- Add syntax file for the x86 assembler.
 	- Add syntax file for the Vision(tm) Ray Tracer.
         - Add syntax file for the CORBA IDL.
         - Add syntax file for the LUA programming language.
+	- Some fixes in C, Makefile, Python syntax files.
+
+- Miscellaneous
+	- Code cleanup in various places
 
 
 Version 4.6.1-pre3.
