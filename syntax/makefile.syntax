@@ -2,6 +2,7 @@ context default
     keyword $$ brightcyan
     keyword $(*) yellow
     keyword ${*} brightgreen
+# GNU Makefiles
     keyword whole linestart define magenta
     keyword whole linestart endef magenta
     keyword whole linestart include magenta
@@ -12,6 +13,16 @@ context default
     keyword whole linestart ifeq magenta
     keyword whole linestart ifneq magenta
     keyword whole linestart else magenta
+# BSD Makefiles
+    keyword whole linestart .\[\s\t\]elif magenta
+    keyword whole linestart .\[\s\t\]else magenta
+    keyword whole linestart .\[\s\t\]endfor magenta
+    keyword whole linestart .\[\s\t\]endif magenta
+    keyword whole linestart .\[\s\t\]for magenta
+    keyword whole linestart .\[\s\t\]if magenta
+    keyword whole linestart .\[\s\t\]include magenta
+    keyword whole linestart .\[\s\t\]undef magenta
+
     keyword linestart \t lightgray red
     keyword whole .PHONY white
     keyword whole .NOEXPORT white
