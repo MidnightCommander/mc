@@ -922,7 +922,7 @@ view_offset_to_coord (WView *view, offset_type *ret_line,
    In all viewer modes, dpy_topleft marks the offset of the top-left
    corner on the screen.  In hex mode, hex_cursor is the offset of the
    cursor.  In non-wrapping text mode, dpy_text_column is the number of
-   columns that are hidden on the left side on the screen. 
+   columns that are hidden on the left side on the screen.
 
    In hex mode, dpy_topleft is updated by the view_fix_cursor_position()
    function in order to keep the other functions simple.  In text
