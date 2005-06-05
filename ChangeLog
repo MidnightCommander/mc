@@ -1,3 +1,7 @@
+2005-06-06  Roland Illig  <roland.illig@gmx.de>
+
+	* NEWS: Added the differences between pre3 and HEAD.
+
 2005-05-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* pkginfo.in: New file. Configuration files for Sun Solaris pkgmk(1).
