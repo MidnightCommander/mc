@@ -2,6 +2,18 @@
 
 	* makefile.syntax: Added rules for BSD style Makefiles.
 
+2005-05-31  Roland Illig  <roland.illig@gmx.de>
+
+	* c.syntax: Added missing punctuation characters.
+
+        * diff.syntax: Lines starting with a <tab> character are
+        displayed like lines starting with a <space>. This is for the
+        cvs diff -T option.
+
+        * makefile.syntax: Highlight $$ (a literal $) in
+        brightcyan. This way $${var} is not highlighted as if it were a
+        Makefile variables. Also added useful comments before the contexts.
+
 2005-05-24  Roland Illig  <roland.illig@gmx.de>
 
 	* python.syntax: Added chunk from Savannah bug #7872. This
