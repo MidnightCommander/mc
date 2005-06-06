@@ -444,7 +444,7 @@ type/^PDF
 
 # html
 regex/\.([hH][tT][mM][lL]?)$
-	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) >/dev/null 2>&1; else links %f 2>/dev/null || lynx -force_html %f; fi
+	Open=(if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) 1>&2; else links %f || lynx -force_html %f || ${PAGER:-more} %f; fi) 2>/dev/null
 	View=%view{ascii} lynx -dump -force_html %f
 
 # StarOffice 5.2

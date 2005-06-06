@@ -1,6 +1,8 @@
 2005-06-06  Roland Illig  <roland.illig@gmx.de>
 
 	* NEWS: Added the differences between pre3 and HEAD.
+	* lib/mc.ext.in: Added ${PAGER} as fallback if neither lynx nor
+	links is installed.
 
 2005-05-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
