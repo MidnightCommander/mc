@@ -170,9 +170,9 @@ fi
 
 show_file() {
 	if test -f "$1"; then
-		echo "" 1>&2
-		sed -e "${mc_maxlines}s,.*,(more lines follow ...)," -e "${mc_maxlines}q" "$1" 1>&2
-		echo "" 1>&2
+		echo ""
+		sed -e "${mc_maxlines}s,.*,(more lines follow ...)," -e "${mc_maxlines}q" "$1"
+		echo ""
 	fi
 	return 0
 }
