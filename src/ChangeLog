@@ -3,6 +3,9 @@
 	* view.c (view_ccache_lookup): Replaced the min_nroff_column
 	variable with a state chart, which makes the code clearer and
 	fixes a bug in translating line/column pairs into offsets.
+	* view.c (view_move_up): In text wrap mode, don't display parts
+	of lines that only consist of the (invisible) newline character.
+	* view.c (view_move_down): Likewise.
 
 2005-05-31  David Martin  <dmartina@excite.com>
 

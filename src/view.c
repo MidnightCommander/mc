@@ -1120,7 +1120,14 @@ view_move_up (WView *view, offset_type lines)
 	    } else if (line >= 1) {
 		view_coord_to_offset (view, &linestart, line, 0);
 		view_offset_to_coord (view, &line, &col, linestart - 1);
-		col -= col % width;
+
+		/* if the only thing that would be displayed were a
+		 * single newline character, advance to the previous
+		 * part of the line. */
+		if (col > 0 && col % width == 0)
+		    col -= width;
+		else
+		    col -= col % width;
 	    } else {
 		/* nothing to do */
 	    }
@@ -1157,12 +1164,20 @@ view_move_down (WView *view, offset_type lines)
 
 	if (view->text_wrap_mode) {
 	    for (i = 0; i < lines; i++) {
+		offset_type new_offset, chk_line, chk_col;
+
 		view_offset_to_coord (view, &line, &col, view->dpy_topleft);
 		col += view_get_datacolumns (view);
-		/* if col is too big here, view_coord_to_offset()
-		 * automatically sets dpy_topleft to the beginning
-		 * of the next line. */
-		view_coord_to_offset (view, &(view->dpy_topleft), line, col);
+		view_coord_to_offset (view, &new_offset, line, col);
+
+		/* skip to the next line if the only thing that would be
+		 * displayed is the newline character. */
+		view_offset_to_coord (view, &chk_line, &chk_col, new_offset);
+		if (chk_line == line && chk_col == col
+		    && get_byte (view, new_offset) == '\n')
+		    new_offset++;
+
+		view->dpy_topleft = new_offset;
 	    }
 	} else {
 	    view_offset_to_coord (view, &line, &col, view->dpy_topleft);
