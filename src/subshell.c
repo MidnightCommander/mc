@@ -650,16 +650,18 @@ exit_subshell (void)
 			   _(" The shell is still active. Quit anyway? "),
 			   0, 2, _("&Yes"), _("&No"));
 
-    if (quit && subshell_type == TCSH) {
-	if (unlink (tcsh_fifo) == -1)
-	    fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
-		     tcsh_fifo, unix_error_string (errno));
-    }
+    if (quit) {
+	if (subshell_type == TCSH) {
+	    if (unlink (tcsh_fifo) == -1)
+		fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
+			 tcsh_fifo, unix_error_string (errno));
+	}
 
-    g_free (subshell_prompt);
-    g_free (pty_buffer);
-    subshell_prompt = NULL;
-    pty_buffer = NULL;
+	g_free (subshell_prompt);
+	g_free (pty_buffer);
+	subshell_prompt = NULL;
+	pty_buffer = NULL;
+    }
 
     return quit;
 }
