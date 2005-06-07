@@ -1,3 +1,8 @@
+2005-06-07  Jindrich Novy  <jnovy@redhat.com>
+
+	* command.c (command_callback): Fixed gcc warning about
+	incompatible pointer types.
+
 2005-06-07  Pavel Tsekov <ptsekov@gmx.net>
 
         * subshell.c (exit_subshell): Do not blindly perform cleanup.

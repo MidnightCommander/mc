@@ -280,7 +280,7 @@ command_callback (Widget *w, widget_msg_t msg, int parm)
 	/* fall through */
 
     default:
-	return input_callback (cmd, msg, parm);
+	return input_callback (w, msg, parm);
     }
 }
 
