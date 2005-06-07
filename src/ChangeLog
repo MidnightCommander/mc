@@ -1,3 +1,9 @@
+2005-06-07  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_ccache_lookup): Replaced the min_nroff_column
+	variable with a state chart, which makes the code clearer and
+	fixes a bug in translating line/column pairs into offsets.
+
 2005-05-31  David Martin  <dmartina@excite.com>
 
 	* info.c: Localize label.

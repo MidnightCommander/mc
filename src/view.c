@@ -783,6 +783,21 @@ view_ccache_dump (WView *view)
 }
 #endif
 
+static gboolean
+is_nroff_sequence (WView *view, offset_type offset)
+{
+    int c0, c1, c2, retval;
+
+    c0 = get_byte_indexed (view, offset, 0);
+    c1 = get_byte_indexed (view, offset, 1);
+    c2 = get_byte_indexed (view, offset, 2);
+
+    retval = (c0 != -1 && c1 != -1 && c2 != -1
+	&& is_printable (c0)  && c1 == '\b' && is_printable (c2)
+	&& (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o')));
+    return retval;
+}
+
 /* Look up the missing components of ''coord'', which are given by
  * ''lookup_what''. The function returns the smallest value that
  * matches the existing components of ''coord''.
@@ -794,7 +809,12 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
     guint i;
     struct coord_cache_entry *cache, current, entry;
     enum ccache_type sorter;
-    offset_type limit, min_nroff_column;
+    offset_type limit;
+    enum {
+	NROFF_START,
+	NROFF_BACKSPACE,
+	NROFF_CONTINUATION
+    } nroff_state;
 
     if (!view->coord_cache) {
 	view->coord_cache = g_array_new (FALSE, FALSE, sizeof(struct coord_cache_entry));
@@ -822,21 +842,22 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
     else
 	limit = current.cc_offset + VIEW_COORD_CACHE_GRANUL;
 
-    min_nroff_column = 0;
     entry = current;
+    nroff_state = NROFF_START;
     for (; current.cc_offset < limit; current.cc_offset++) {
-	int c, cprev, cnext;
+	offset_type saved_offset = current.cc_offset;
+	int c;
 
 	if ((c = get_byte (view, current.cc_offset)) == -1)
 	    break;
 
-	if (!view->text_nroff_mode || min_nroff_column <= current.cc_nroff_column)
+	if (!view->text_nroff_mode || nroff_state == NROFF_START)
 	    entry = current;
 
 	if (!coord_cache_entry_less (&current, coord, sorter, view->text_nroff_mode)) {
 	    if (lookup_what == CCACHE_OFFSET
 		&& view->text_nroff_mode
-		&& current.cc_nroff_column < min_nroff_column) {
+		&& nroff_state != NROFF_START) {
 		/* don't break here */
 	    } else {
 		break;
@@ -845,14 +866,7 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 
 	if (c == '\r') {
 	    /* This character is never displayed */
-	} else if (c == '\b'
-	    && (cnext = get_byte_indexed (view, current.cc_offset, 1)) != -1
-	    && is_printable (cnext)
-	    && current.cc_column >= 1
-	    && current.cc_offset >= 1
-	    && (cprev = get_byte (view, current.cc_offset - 1)) != -1
-	    && is_printable (cprev)) {
-	    min_nroff_column = current.cc_nroff_column + 1;
+	} else if (nroff_state == NROFF_BACKSPACE) {
 	    current.cc_column++;
 	    current.cc_nroff_column--;
 	} else if (c == '\t') {
@@ -860,15 +874,27 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 	    current.cc_nroff_column =
 		offset_rounddown (current.cc_nroff_column, 8) + 8;
 	} else if (c == '\n') {
-	    min_nroff_column = 0;
 	    current.cc_line++;
 	    current.cc_column = 0;
 	    current.cc_nroff_column = 0;
 	} else {
 	    current.cc_column++;
 	    current.cc_nroff_column++;
-	    if (min_nroff_column <= current.cc_nroff_column)
+	    if (nroff_state == NROFF_START)
 		entry = current;
+	}
+
+	switch (nroff_state) {
+	    case NROFF_START:
+	    case NROFF_CONTINUATION:
+		if (is_nroff_sequence (view, saved_offset))
+		    nroff_state = NROFF_BACKSPACE;
+		else
+		    nroff_state = NROFF_START;
+		break;
+	    case NROFF_BACKSPACE:
+	        nroff_state = NROFF_CONTINUATION;
+		break;
 	}
     }
 
