@@ -1,36 +1,53 @@
 This document describes step by step the release procedure of GNU
 Midnight Commander.
 
+${dotted_version} shall be replaced by something like 4.6
+${underscore_version} shall be replaced by something like 4_6
 
-Announce the intention to release the next version in both mailing lists
-at least 3 days before the release date, unless it's a security release.
+=== day 0 (translator's prerelease) ===
 
-Update the working directory from CVS, review last-minute changes.
+* Check out a fresh copy from the CVS repository.
 
-Review the English version of the manual and fix it if necessary.  Check
-the date in the .TH macro of the English manual and update it if
-significant changes have been done since the previous release.
+* Update the translation files NOT to contain line number information.
+  Commit them.
+* Tag the CVS tree as "MC_${underscore_version}_translators".
+* Update the translation files to contain line number information.
+  DON'T commit them.
+* Run "make dist".
+* Upload the distribution tarballs and the individual translation files
+  somewhere where the translators can download it.
+* Announce the availibility of the translator's prerelease on mc-devel.
+  Inform the translators of the prerelease.
+  Inform the developers of a fourteen-day "feature-freeze".
 
-Make sure that all significant user-visible changes are in the NEWS
-file.  Group changes by topics to improve readability.
+=== day 11 (reminder) ===
 
-Update configure.ac with the new version.
+* announce a reminder on mc-devel that the release will occur in three
+  days.
 
-Make sure that maint/mctest covers most features of the current code and
-run it in a clean working directory.
+=== day 14 (official release) ===
 
-Review files with stdout and stderr from every build.  Make sure that
-all warnings (if any) are caused by other software and cannot be avoided
-without significant damage to the code.
+* Review the English version of the manual and fix it if necessary.
+  Update the date in the .TH macro of the English manual.
+* Update the NEWS file to contain all user-visible changes.
+* Fix wrong formatting in the ChangeLog files.
+* Set the version number in configure.ac to "${dotted_version}".
+  Commit it.
+* Update the translation files NOT to contain line number information.
+  Commit them.
+* Run the test suites maint/mctest and maint/mc-test and make sure
+  all warnings are ok.
+* Tag the CVS tree as "MC_${underscore_version}_release".
+* Create a CVS branch "MC_${underscore_version}".
+* Run "make dist".
+* Upload the resulting tarballs to the Savannah repository.
+* Announce the new release on the mc-devel and mc mailing lists.
+* Update the homepage.
 
-Regenerate and commit po-files.
+=== post-release actions ===
 
-Tag CVS tree.
+* Create binary packages from the uploaded tarballs as necessary.
 
-Upload the resulting tarball and binary packages to login.ibiblio.org.
+=== back to work ===
 
-Change the homepage to mention the new version.
-
-Announce the release in both mailing lists.
-
-Bump the version in configure.ac.
+* Discuss milestones for the next release on the mc-devel list.
