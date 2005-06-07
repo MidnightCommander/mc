@@ -1488,7 +1488,8 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    free_completions (cmdline);
 
 	if (parm == '\n') {
-	    for (i = 0; cmdline->buffer[i] && cmdline->buffer[i] == ' '; i++);
+	    for (i = 0; cmdline->buffer[i] && (cmdline->buffer[i] == ' ' ||
+		cmdline->buffer[i] == '\t'); i++);
 	    if (cmdline->buffer[i]) {
 	        send_message ((Widget *) cmdline, WIDGET_KEY, parm);
 		return MSG_HANDLED;
