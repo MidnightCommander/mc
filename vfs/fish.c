@@ -675,6 +675,7 @@ fish_ctl (void *fh, int ctlop, void *arg)
 {
     (void) arg;
     return 0;
+#if 0
     switch (ctlop) {
         case VFS_CTL_IS_NOTREADY:
 	    {
@@ -693,6 +694,7 @@ fish_ctl (void *fh, int ctlop, void *arg)
         default:
 	    return 0;
     }
+#endif
 }
 
 static int

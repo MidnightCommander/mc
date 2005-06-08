@@ -1,6 +1,8 @@
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 
 	* smbfs.c (free_after): Moved here from src/util.h.
+	* fish.c (fish_ctl): Commented out some unused code with
+	#if 0 ... #endif. This fixes a warning from SunPro.
 
 2005-05-29  Leonard den Ottolander  <leonard * den ottolander nl>
 
