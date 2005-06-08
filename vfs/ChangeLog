@@ -1,3 +1,7 @@
+2005-06-08  Roland Illig  <roland.illig@gmx.de>
+
+	* smbfs.c (free_after): Moved here from src/util.h.
+
 2005-05-29  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* ftpfs.[ch]: Added variables and assignment to allow passive

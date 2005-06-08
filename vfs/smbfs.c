@@ -109,6 +109,18 @@ static inline BOOL dbghdr_wrapper (int level, const char *file, const char *func
 }
 #define dbghdr dbghdr_wrapper
 
+/* this function allows you to write:
+ * char *s = g_strdup("hello, world");
+ * s = free_after(g_strconcat(s, s, (char *)0), s);
+ */
+static inline char *
+free_after (char *result, char *string_to_free)
+{
+	g_free(string_to_free);
+	return result;
+}
+
+
 static void 
 smbfs_auth_free (struct smb_authinfo const *a)
 {

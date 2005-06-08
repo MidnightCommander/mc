@@ -1,3 +1,10 @@
+2005-06-08  Roland Illig  <roland.illig@gmx.de>
+
+	* util.h (free_after): Moved to vfs/smbfs.c, as this is the only
+	place where it is used. This is necessary because the SunPro
+	compiler creates external references even for functions that are
+	only referred to in unused inline functions.
+
 2005-06-07  Leonard den Ottolander <leonard den ottolander nl>
 
 	* main.c (midnight_callback): Also match tabs as empty command.
