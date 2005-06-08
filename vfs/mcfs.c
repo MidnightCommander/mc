@@ -207,9 +207,9 @@ mcfs_get_remote_port (struct sockaddr_in *sin, int *version)
 	if (port = pmap_getport (sin, RPC_PROGNUM, *version, IPPROTO_TCP))
 	    return port;
 #endif				/* HAVE_PMAP_GETPORT */
-#endif				/* HAVE_PMAP_GETMAPS */
     *version = 1;
     return mcserver_port;
+#endif				/* HAVE_PMAP_GETMAPS */
 }
 
 /* This used to be in utilvfs.c, but as it deals with portmapper, it
