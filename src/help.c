@@ -848,12 +848,12 @@ interactive_display (const char *filename, const char *node)
     buttonbar_set_label_data (whelp, 1, _("Help"), help_help_cmd, whelp);
     buttonbar_set_label_data (whelp, 2, _("Index"), help_index_cmd, whelp);
     buttonbar_set_label_data (whelp, 3, _("Prev"), prev_node_cmd, whelp);
-    buttonbar_set_label (whelp, 4, "", 0);
-    buttonbar_set_label (whelp, 5, "", 0);
-    buttonbar_set_label (whelp, 6, "", 0);
-    buttonbar_set_label (whelp, 7, "", 0);
-    buttonbar_set_label (whelp, 8, "", 0);
-    buttonbar_set_label (whelp, 9, "", 0);
+    buttonbar_clear_label (whelp, 4);
+    buttonbar_clear_label (whelp, 5);
+    buttonbar_clear_label (whelp, 6);
+    buttonbar_clear_label (whelp, 7);
+    buttonbar_clear_label (whelp, 8);
+    buttonbar_clear_label (whelp, 9);
     buttonbar_set_label_data (whelp, 10, _("Quit"), help_quit_cmd, whelp);
 
     run_dlg (whelp);
