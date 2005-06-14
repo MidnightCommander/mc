@@ -147,7 +147,7 @@ edit_adjust_size (Dlg_head *h)
     edit_bar = find_buttonbar (h);
 
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size ((Widget *) edit_bar, LINES - 1, 0, 1, COLS);
     widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
 
 #ifdef RESIZABLE_MENUBAR

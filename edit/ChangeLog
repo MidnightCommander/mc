@@ -1,3 +1,7 @@
+2005-06-14  Roland Illig  <roland.illig@gmx.de>
+
+	* editwidget.c: Don't dereference WButtonBar.
+
 2005-05-23  Roland Illig  <roland.illig@gmx.de>
 
 	* editwidget.c: Removed casts on function pointer types.
