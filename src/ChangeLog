@@ -1,3 +1,8 @@
+2005-06-14  Roland Illig  <roland.illig@gmx.de>
+
+	* achown.c (advanced_chown_callback): Swapped the arguments of a
+	recursive function call -- the types didn't match.
+
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h (free_after): Moved to vfs/smbfs.c, as this is the only

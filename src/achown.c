@@ -514,7 +514,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		break;
 	    ch_flags[flag_pos] = parm;
 	    update_mode (h);
-	    advanced_chown_callback (h, KEY_RIGHT, DLG_KEY);
+	    advanced_chown_callback (h, DLG_KEY, KEY_RIGHT);
 	    if (flag_pos > 8 || !(flag_pos % 3))
 		dlg_one_down (h);
 
