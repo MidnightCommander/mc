@@ -9,6 +9,12 @@
 	* widget.c: Added code to handle multiple types of functions for
 	commands.
 	* widget.h: Likewise.
+	* widget.h (struct WButtonBar): Moved into widget.c.
+	* widget.c (struct WButtonBar): Moved from widget.h.
+	* boxes.c: Don't dereference WButtonBar.
+	* help.c: Likewise.
+	* layout.c: Likewise.
+	* view.c: Likewise.
 
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 

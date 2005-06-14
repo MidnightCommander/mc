@@ -48,6 +48,20 @@
 
 #define HISTORY_FILE_NAME ".mc/history"
 
+struct WButtonBar {
+    Widget widget;
+    int    visible;		/* Is it visible? */
+    struct {
+	char   *text;
+	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
+	union {
+	    voidfn fn_void;
+	    buttonbarfn fn_ptr;
+	} u;
+	void   *data;
+    } labels [10];
+};
+
 static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;
@@ -2399,6 +2413,12 @@ buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_VOID;
     bb->labels[idx - 1].u.fn_void = cback;
+}
+
+void
+buttonbar_set_visible (WButtonBar *bb, gboolean visible)
+{
+    bb->visible = visible;
 }
 
 void

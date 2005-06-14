@@ -837,8 +837,8 @@ interactive_display (const char *filename, const char *node)
     }
 
     help_bar = buttonbar_new (1);
-    help_bar->widget.y -= whelp->y;
-    help_bar->widget.x -= whelp->x;
+    ((Widget *) help_bar)->y -= whelp->y;
+    ((Widget *) help_bar)->x -= whelp->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 

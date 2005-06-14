@@ -676,8 +676,8 @@ tree_box (const char *current_dir)
     add_widget (dlg, mytree);
     bar = buttonbar_new(1);
     add_widget (dlg, bar);
-    bar->widget.x = 0;
-    bar->widget.y = LINES - 1;
+    ((Widget *) bar)->x = 0;
+    ((Widget *) bar)->y = LINES - 1;
     
     run_dlg (dlg);
     if (dlg->ret_value == B_ENTER)

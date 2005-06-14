@@ -123,23 +123,6 @@ typedef struct WGroupbox {
     char *title;
 } WGroupbox;
 
-typedef void (*voidfn)(void);
-typedef void (*buttonbarfn)(void *);
-
-typedef struct {
-    Widget widget;
-    int    visible;		/* Is it visible? */
-    struct {
-	char   *text;
-	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
-	union {
-	    voidfn fn_void;
-	    buttonbarfn fn_ptr;
-	} u;
-	void   *data;
-    } labels [10];
-} WButtonBar;
-
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
@@ -201,13 +184,20 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 
 /* Hintbar routines */
 
-/* Buttonbar routines */
+/* Buttonbar */
+
+typedef void (*voidfn)(void);
+typedef void (*buttonbarfn)(void *);
+
+typedef struct WButtonBar WButtonBar;
+
 WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 void buttonbar_clear_label (Dlg_head *, int idx);
 void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
 void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
 			       buttonbarfn cback, void *data);
+void buttonbar_set_visible (WButtonBar *, gboolean);
 void buttonbar_redraw (Dlg_head *h);
 
 #endif

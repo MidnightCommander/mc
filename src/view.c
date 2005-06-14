@@ -3118,7 +3118,7 @@ view_adjust_size (Dlg_head *h)
     view = (WView *) find_widget_type (h, (callback_fn) view_callback);
     bar = find_buttonbar (h);
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&bar->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
 
     view_update_bytes_per_line (view);
 }
