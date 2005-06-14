@@ -15,6 +15,7 @@
 	* help.c: Likewise.
 	* layout.c: Likewise.
 	* view.c: Likewise.
+	* view.c: Fixed an integer wraparound bug.
 
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 

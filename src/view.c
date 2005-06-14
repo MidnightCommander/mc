@@ -1103,9 +1103,13 @@ static void
 view_move_up (WView *view, offset_type lines)
 {
     if (view->hex_mode) {
-	if (view->hex_cursor >= lines * view->bytes_per_line) {
-	    view->hex_cursor -= lines * view->bytes_per_line;
-	    view->dpy_topleft -= lines * view->bytes_per_line;
+	offset_type bytes = lines * view->bytes_per_line;
+	if (view->hex_cursor >= bytes) {
+	    view->hex_cursor -= bytes;
+	    if (view->dpy_topleft >= bytes)
+		view->dpy_topleft -= bytes;
+	    else 
+		view->dpy_topleft = 0;
 	} else {
 	    view->hex_cursor %= view->bytes_per_line;
 	}
