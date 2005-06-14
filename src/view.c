@@ -332,12 +332,10 @@ view_growbuf_free (WView *view)
 }
 
 static offset_type
-view_growbuf_filesize (WView *view, gboolean *ret_exact)
+view_growbuf_filesize (WView *view)
 {
     assert(view->growbuf_in_use);
 
-    if (ret_exact)
-	*ret_exact = view->growbuf_finished;
     if (view->growbuf_blocks == 0)
         return 0;
     else
@@ -362,7 +360,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     if (view->growbuf_finished)
 	return;
 
-    while (view_growbuf_filesize (view, NULL) < ofs) {
+    while (view_growbuf_filesize (view) < ofs) {
         if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
             byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
             byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
@@ -446,15 +444,14 @@ get_byte_growing_buffer (WView *view, offset_type byte_index)
  */
 
 static offset_type
-view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
+view_get_filesize (WView *view)
 {
-    *ret_exact = TRUE;
     switch (view->datasource) {
 	case DS_NONE:
 	    return 0;
 	case DS_STDIO_PIPE:
 	case DS_VFS_PIPE:
-	    return view_growbuf_filesize (view, ret_exact);
+	    return view_growbuf_filesize (view);
 	case DS_FILE:
 	    return view->ds_file_filesize;
 	case DS_STRING:
@@ -465,12 +462,10 @@ view_get_filesize_with_exact (WView *view, gboolean *ret_exact)
     }
 }
 
-static offset_type
-view_get_filesize (WView *view)
+static gboolean
+view_may_still_grow (WView *view)
 {
-    gboolean exact;
-
-    return view_get_filesize_with_exact (view, &exact);
+    return (view->growbuf_in_use && !view->growbuf_finished);
 }
 
 /* returns TRUE if the idx lies in the half-open interval
@@ -1425,9 +1420,9 @@ view_percent (WView *view, offset_type p)
     gboolean exact;
     offset_type filesize;
 
-    filesize = view_get_filesize_with_exact (view, &exact);
-    if (!exact)
+    if (view_may_still_grow (view))
 	return;
+    filesize = view_get_filesize (view);
 
     if (filesize == 0 || view->dpy_complete)
         percent = 100;
@@ -1481,10 +1476,9 @@ view_status (WView *view)
 	}
 	if (w > 62) {
 	    offset_type filesize;
-	    gboolean exact;
-	    filesize = view_get_filesize_with_exact (view, &exact);
+	    filesize = view_get_filesize (view);
 	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
-	    if (exact) {
+	    if (!view_may_still_grow (view)) {
 		printw (str_unconst (_("%s bytes")), size_trunc (filesize));
 	    } else {
 		printw (str_unconst (_(">= %s bytes")), size_trunc (filesize));
