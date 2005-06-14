@@ -24,9 +24,6 @@ enum {
 } /* quick_t */;
 
 /* The widget is placed on relative_?/divisions_? of the parent widget */
-/* Please note that the contents of the fields in the union are just */
-/* used for setting up the dialog.  They are a convenient place to put */
-/* the values for a widget */
 
 typedef struct {
     int widget_type;
