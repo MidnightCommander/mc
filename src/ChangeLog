@@ -2,6 +2,8 @@
 
 	* achown.c (advanced_chown_callback): Swapped the arguments of a
 	recursive function call -- the types didn't match.
+	* widget.h (buttonbar_clear_label): Added.
+	* widget.c: Likewise.
 
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 

@@ -2347,6 +2347,18 @@ find_buttonbar (Dlg_head *h)
 }
 
 void
+buttonbar_clear_label (Dlg_head *h, int idx)
+{
+    WButtonBar *bb = find_buttonbar (h);
+
+    if (!bb)
+	return;
+
+    set_label_text (bb, idx, "");
+    bb->labels[idx - 1].function = 0;
+}
+
+void
 buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
 		   void *data)
 {
