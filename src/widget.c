@@ -2244,6 +2244,23 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 	*extra = l->current->data;
 }
 
+/* returns TRUE if a function has been called, FALSE otherwise. */
+static gboolean
+buttonbar_call (WButtonBar *bb, int i)
+{
+    switch (bb->labels[i].tag) {
+	case BBFUNC_NONE:
+	    break;
+	case BBFUNC_VOID:
+	    bb->labels[i].u.fn_void ();
+	    return TRUE;
+	case BBFUNC_PTR:
+	    bb->labels[i].u.fn_ptr (bb->labels[i].data);
+	    return TRUE;
+    }
+    return FALSE;
+}
+
 
 static cb_ret_t
 buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
@@ -2257,10 +2274,8 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_HOTKEY:
 	for (i = 0; i < 10; i++) {
-	    if (parm == KEY_F (i + 1) && bb->labels[i].function) {
-		(*bb->labels[i].function) (bb->labels[i].data);
+	    if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
 		return MSG_HANDLED;
-	    }
 	}
 	return MSG_NOT_HANDLED;
 
@@ -2303,8 +2318,8 @@ buttonbar_event (Gpm_Event *event, void *data)
     if (event->y == 2)
 	return MOU_NORMAL;
     button = event->x / 8;
-    if (button < 10 && bb->labels [button].function)
-	(*bb->labels [button].function)(bb->labels [button].data);
+    if (button < 10)
+	buttonbar_call (bb, button);
     return MOU_NORMAL;
 }
 
@@ -2319,8 +2334,8 @@ buttonbar_new (int visible)
     
     bb->visible = visible;
     for (i = 0; i < 10; i++){
-	bb->labels [i].text     = 0;
-	bb->labels [i].function = 0;
+	bb->labels[i].text = NULL;
+	bb->labels[i].tag = BBFUNC_NONE;
     }
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
@@ -2355,7 +2370,7 @@ buttonbar_clear_label (Dlg_head *h, int idx)
 	return;
 
     set_label_text (bb, idx, "");
-    bb->labels[idx - 1].function = 0;
+    bb->labels[idx - 1].tag = BBFUNC_NONE;
 }
 
 void
@@ -2368,14 +2383,22 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cb
 	return;
 
     set_label_text (bb, idx, text);
-    bb->labels[idx - 1].function = cback;
+    bb->labels[idx - 1].tag = BBFUNC_PTR;
+    bb->labels[idx - 1].u.fn_ptr = cback;
     bb->labels[idx - 1].data = data;
 }
 
 void
 buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
 {
-    buttonbar_set_label_data (h, idx, text, cback, 0);
+    WButtonBar *bb = find_buttonbar (h);
+
+    if (!bb)
+	return;
+
+    set_label_text (bb, idx, text);
+    bb->labels[idx - 1].tag = BBFUNC_VOID;
+    bb->labels[idx - 1].u.fn_void = cback;
 }
 
 void

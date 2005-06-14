@@ -6,6 +6,9 @@
 	* widget.c: Likewise.
 	* help.c: Use buttonbar_clear_label().
 	* tree.c: Likewise.
+	* widget.c: Added code to handle multiple types of functions for
+	commands.
+	* widget.h: Likewise.
 
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 

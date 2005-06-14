@@ -123,6 +123,7 @@ typedef struct WGroupbox {
     char *title;
 } WGroupbox;
 
+typedef void (*voidfn)(void);
 typedef void (*buttonbarfn)(void *);
 
 typedef struct {
@@ -130,7 +131,11 @@ typedef struct {
     int    visible;		/* Is it visible? */
     struct {
 	char   *text;
-	buttonbarfn function;
+	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
+	union {
+	    voidfn fn_void;
+	    buttonbarfn fn_ptr;
+	} u;
 	void   *data;
     } labels [10];
 } WButtonBar;
@@ -197,8 +202,6 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 /* Hintbar routines */
 
 /* Buttonbar routines */
-typedef void (*voidfn)(void);
-
 WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 void buttonbar_clear_label (Dlg_head *, int idx);
