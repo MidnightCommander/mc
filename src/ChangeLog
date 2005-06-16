@@ -16,8 +16,9 @@
 	* layout.c: Likewise.
 	* view.c: Likewise.
 	* view.c: Fixed an integer wraparound bug.
-	* view.c (view_get_filesize_with_exact): Removed. I didn't like
-	the name. Replaced with a new function view_may_still_grow().
+	* view.c (view_get_filesize_with_exact): Removed. The replacement
+	function is view_may_still_grow(), which does not overlap with
+	view_get_filesize().
 
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 
