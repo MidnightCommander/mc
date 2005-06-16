@@ -1,3 +1,8 @@
+2005-06-16  Mykolas Juraitis  <mykolas.juraitis@gmail.com>
+
+	* octave.syntax: Support for Matlab multi line comments
+	(starting with '%{' and ending with '%}')
+
 2005-06-06  Roland Illig  <roland.illig@gmx.de>
 
 	* makefile.syntax: Added rules for BSD style Makefiles.

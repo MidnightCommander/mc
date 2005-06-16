@@ -1,3 +1,4 @@
+# Octave/Matlab syntax file
 
 context default
     keyword whole function white
@@ -359,6 +360,9 @@ context default
     keyword whole stairs yellow
     keyword whole scatter yellow
     keyword whole roze yellow
+
+context %{ %} brown
+    spellcheck
 
 context # \n brown
     spellcheck
