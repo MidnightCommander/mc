@@ -1,3 +1,8 @@
+2005-05-20  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (ftpfs_get_current_directory): Warning fix - "missing
+	sentinel in function call".
+
 2005-06-08  Roland Illig  <roland.illig@gmx.de>
 
 	* smbfs.c (free_after): Moved here from src/util.h.

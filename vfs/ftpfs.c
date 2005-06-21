@@ -841,7 +841,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 			    /* If the remote server is an Amiga a leading slash
 			       might be missing. MC needs it because it is used
 			       as separator between hostname and path internally. */
-			    return g_strconcat( "/", bufp, 0);
+			    return g_strconcat( "/", bufp, NULL);
 			}
 		    } else {
 			ftpfs_errno = EIO;
