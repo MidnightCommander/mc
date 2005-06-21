@@ -1,4 +1,4 @@
-2005-05-20  Pavel Roskin  <proski@gnu.org>
+2005-06-21  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c (ftpfs_get_current_directory): Warning fix - "missing
 	sentinel in function call".
