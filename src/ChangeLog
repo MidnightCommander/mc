@@ -1,3 +1,7 @@
+2005-06-21  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (view_percent): Remove unused variable.
+
 2005-06-14  Roland Illig  <roland.illig@gmx.de>
 
 	* achown.c (advanced_chown_callback): Swapped the arguments of a
@@ -27,7 +31,7 @@
 	compiler creates external references even for functions that are
 	only referred to in unused inline functions.
 
-2005-06-07  Leonard den Ottolander <leonard den ottolander nl>
+2005-06-07  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* main.c (midnight_callback): Also match tabs as empty command.
 
@@ -36,9 +40,9 @@
 	* command.c (command_callback): Fixed gcc warning about
 	incompatible pointer types.
 
-2005-06-07  Pavel Tsekov <ptsekov@gmx.net>
+2005-06-07  Pavel Tsekov  <ptsekov@gmx.net>
 
-        * subshell.c (exit_subshell): Do not blindly perform cleanup.
+	* subshell.c (exit_subshell): Do not blindly perform cleanup.
 
 2005-06-07  Roland Illig  <roland.illig@gmx.de>
 

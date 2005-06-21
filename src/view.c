@@ -1417,7 +1417,6 @@ view_percent (WView *view, offset_type p)
 {
     const int xpos = view->widget.cols - view->dpy_frame_size - 4;
     int percent;
-    gboolean exact;
     offset_type filesize;
 
     if (view_may_still_grow (view))
