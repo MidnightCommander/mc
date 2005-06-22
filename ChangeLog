@@ -1,3 +1,7 @@
+2005-06-21  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Support opening for 7-Zip archives.
+
 2005-06-06  Roland Illig  <roland.illig@gmx.de>
 
 	* NEWS: Added the differences between pre3 and HEAD.

@@ -233,6 +233,7 @@ regex/\.iso$
 
 # 7zip archives (they are not man pages)
 shell/.7z
+	Open=%cd %p#u7z
 	View=%view{ascii} 7za l %f 2>/dev/null
 
 ### Sources ###
