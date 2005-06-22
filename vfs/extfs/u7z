@@ -1,0 +1,67 @@
+#! /bin/sh
+#
+# extfs support for p7zip
+# Written by Pavel Roskin <proski@gnu.org>
+# Licensed under GNU GPL version 2 or later version.
+
+P7ZIP=7za
+
+mcu7zip_list ()
+{
+	# Symlinks are not shown - no idea how to distinguish them
+	# Read-only files are not shown as such - it's rarely useful
+	ugid="`id -nu` `id -ng`"
+	date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)'
+	date_mc='\2-\3-\1 \4'
+	size_re='............'
+	$P7ZIP l "$1" | sed -n "s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p;s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p"
+}
+
+mcu7zip_copyout ()
+{
+	$P7ZIP e -so "$1" "$2" > "$3" 2>/dev/null
+}
+
+mcu7zip_copyin ()
+{
+	$P7ZIP a -si"$2" "$1" <"$3" >/dev/null 2>&1
+}
+
+mcu7zip_mkdir ()
+{
+	dir=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-u7z.XXXXXX"` || exit 1
+	mkdir -p "$dir"/"$2"
+	$P7ZIP a -w"$dir" "$1" "$2" >/dev/null 2>&1
+	rm -rf "$dir"
+}
+
+mcu7zip_rm ()
+{
+	# NOTE: Version 4.20 fails to delete files in subdirectories
+	$P7ZIP d "$1" "$2" >/dev/null 2>&1
+}
+
+mcu7zip_rmdir ()
+{
+	$P7ZIP d "$1" "$2"/ >/dev/null 2>&1
+}
+
+# override any locale for dates
+LC_ALL=C
+export LC_ALL
+
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+  list)    mcu7zip_list    "$@" ;;
+  copyout) mcu7zip_copyout "$@" ;;
+  copyin)  mcu7zip_copyin  "$@" ;;
+  mkdir)   mcu7zip_mkdir   "$@" ;;
+  rm)      mcu7zip_rm      "$@" ;;
+  rmdir)   mcu7zip_rmdir   "$@" ;;
+  *) exit 1 ;;
+esac
+exit 0

@@ -1,5 +1,9 @@
 2005-06-21  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/u7z: New file - support for 7zip archives.
+	* extfs/Makefile.am: Add u7z.
+	* extfs/extfs.ini: Likewise.
+
 	* ftpfs.c (ftpfs_get_current_directory): Warning fix - "missing
 	sentinel in function call".
 

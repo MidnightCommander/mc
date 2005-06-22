@@ -4,7 +4,7 @@ extfsdir = $(pkgdatadir)/extfs
 EXTFS_MISC  = README extfs.ini sfs.ini
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp rpm trpm
+EXTFS_CONST = bpp rpm trpm u7z
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
