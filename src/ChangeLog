@@ -1,3 +1,12 @@
+2005-06-22  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* main.h: Export edit_one_file.
+	* main.c (setup_dummy_mc): Remove dummy dir_list and remove argument.
+	* main.c (mc_maybe_editor_or_viewer): Fix a double free and restructure
+	according to fixes to setup_dummy_mc().
+	* dir.c (expand_format): Use edit_widget->filename as fname when
+	invoked as mcedit.
+
 2005-06-21  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (view_percent): Remove unused variable.

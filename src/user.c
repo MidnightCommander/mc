@@ -171,7 +171,7 @@ strip_ext(char *ss)
 char *
 expand_format (struct WEdit *edit_widget, char c, int quote)
 {
-    WPanel *panel;
+    WPanel *panel = NULL;
     char *(*quote_func) (const char *, int);
     char *fname;
     char *result;
@@ -180,15 +180,18 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     if (c == '%')
 	return g_strdup ("%");
 
-    if (islower ((unsigned char) c))
-	panel = current_panel;
+    if (edit_one_file != NULL)
+	fname = edit_widget->filename;
     else {
-	if (get_other_type () != view_listing)
-	    return g_strdup ("");
-	panel = other_panel;
+	if (islower ((unsigned char) c))
+	    panel = current_panel;
+	else {
+	    if (get_other_type () != view_listing)
+		return g_strdup ("");
+	    panel = other_panel;
+	}
+	fname = panel->dir.list[panel->selected].fname;
     }
-    if (!panel)
-	panel = current_panel;
 
     if (quote)
 	quote_func = name_quote;
@@ -196,7 +199,6 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	quote_func = fake_name_quote;
 
     c_lc = tolower ((unsigned char) c);
-    fname = panel->dir.list[panel->selected].fname;
 
     switch (c_lc) {
     case 'f':
@@ -205,7 +207,23 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     case 'x':
 	return (*quote_func) (extension (fname), 0);
     case 'd':
-	return (*quote_func) (panel->cwd, 0);
+	{
+	    char *cwd;
+	    char *qstr;
+
+	    cwd = g_malloc(MC_MAXPATHLEN + 1);
+
+	    if (panel)
+		g_strlcpy(cwd, panel->cwd, MC_MAXPATHLEN + 1);
+	    else
+		mc_get_current_wd(cwd, MC_MAXPATHLEN + 1);
+
+	    qstr = (*quote_func) (cwd, 0);
+
+	    g_free (cwd);
+
+	    return qstr;
+	}
     case 'i':			/* indent equal number cursor position in line */
 	if (edit_widget)
 	    return g_strnfill (edit_widget->curs_col, ' ');
@@ -235,7 +253,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    return (*quote_func) (menu, 0);
 	break;
     case 's':
-	if (!panel->marked)
+	if (!panel || !panel->marked)
 	    return (*quote_func) (fname, 0);
 
 	/* Fall through */
@@ -245,6 +263,9 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	{
 	    int length = 2, i;
 	    char *block, *tmp;
+
+	    if (!panel)
+		return g_strdup ("");
 
 	    for (i = 0; i < panel->count; i++)
 		if (panel->dir.list[i].f.marked)

@@ -257,7 +257,7 @@ char *command_line_colors = NULL;
 static const char *view_one_file = NULL;
 
 /* File name to edit if argument was supplied */
-static const char *edit_one_file = NULL;
+const char *edit_one_file = NULL;
 
 /* Line to start the editor on */
 static int edit_one_file_start_line = 0;
@@ -1400,21 +1400,13 @@ setup_mc (void)
 }
 
 static void
-setup_dummy_mc (const char *file)
+setup_dummy_mc ()
 {
     char d[MC_MAXPATHLEN];
 
     mc_get_current_wd (d, MC_MAXPATHLEN);
     setup_mc ();
     mc_chdir (d);
-
-    /* Create a fake current_panel, this is needed because the
-     * expand_format routine will use current panel.
-     */
-    strcpy (current_panel->cwd, d);
-    current_panel->selected = 0;
-    current_panel->count = 1;
-    current_panel->dir.list[0].fname = (char *) file;
 }
 
 static void
@@ -1701,27 +1693,25 @@ prepend_cwd_on_local (const char *filename)
 static int
 mc_maybe_editor_or_viewer (void)
 {
-    char *path = NULL;
-
     if (!(view_one_file || edit_one_file))
 	return 0;
+
+    setup_dummy_mc ();
 
     /* Invoke the internal view/edit routine with:
      * the default processing and forcing the internal viewer/editor
      */
     if (view_one_file) {
+	char *path = NULL;
 	path = prepend_cwd_on_local (view_one_file);
-	setup_dummy_mc (path);
 	view_file (path, 0, 1);
+	g_free (path);
     }
 #ifdef USE_INTERNAL_EDIT
     else {
-	path = prepend_cwd_on_local ("");
-	setup_dummy_mc (path);
 	edit_file (edit_one_file, edit_one_file_start_line);
     }
 #endif				/* USE_INTERNAL_EDIT */
-    g_free (path);
     midnight_shutdown = 1;
     done_mc ();
     return 1;
