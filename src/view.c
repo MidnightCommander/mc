@@ -239,7 +239,7 @@ static void view_place_cursor (WView *view);
 
 /* {{{ Helper Functions }}} */
 
-static offset_type
+static inline offset_type
 offset_rounddown (offset_type a, offset_type b)
 {
 	return a - a % b;
@@ -462,7 +462,7 @@ view_get_filesize (WView *view)
     }
 }
 
-static gboolean
+static inline gboolean
 view_may_still_grow (WView *view)
 {
     return (view->growbuf_in_use && !view->growbuf_finished);
@@ -778,7 +778,7 @@ view_ccache_dump (WView *view)
 }
 #endif
 
-static gboolean
+static inline gboolean
 is_nroff_sequence (WView *view, offset_type offset)
 {
     int c0, c1, c2;
