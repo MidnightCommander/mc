@@ -4,6 +4,7 @@
 	functions as inline.
 	* view.c: Renamed view_quit to want_to_quit and changed its type
 	to gboolean.
+	* view.c: Eliminated the need for function pointer casts.
 
 2005-06-22  Pavel Tsekov  <ptsekov@gmx.net>
 

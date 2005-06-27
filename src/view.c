@@ -228,7 +228,7 @@ static const char hex_char[] = "0123456789ABCDEF";
 /* {{{ Function Prototypes }}} */
 
 /* Our widget callback */
-static cb_ret_t view_callback (WView *view, widget_msg_t msg, int parm);
+static cb_ret_t view_callback (Widget *, widget_msg_t, int);
 
 static int regexp_view_search (WView * view, char *pattern, char *string,
 			       int match_type);
@@ -3119,7 +3119,7 @@ view_adjust_size (Dlg_head *h)
     WButtonBar *bar;
 
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    view = (WView *) find_widget_type (h, (callback_fn) view_callback);
+    view = (WView *) find_widget_type (h, view_callback);
     bar = find_buttonbar (h);
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
     widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
@@ -3205,8 +3205,9 @@ view_hook (void *v)
 }
 
 static cb_ret_t
-view_callback (WView *view, widget_msg_t msg, int parm)
+view_callback (Widget *w, widget_msg_t msg, int parm)
 {
+    WView *view = (WView *) w;
     cb_ret_t i;
     Dlg_head *h = view->widget.parent;
 
@@ -3265,8 +3266,8 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     WView *view = g_new0 (WView, 1);
 
     init_widget (&view->widget, y, x, lines, cols,
-		 (callback_fn) view_callback,
-		 (mouse_h) real_view_event);
+		 view_callback,
+		 real_view_event);
     widget_want_cursor (view->widget, 0);
 
     view->filename          = NULL;
