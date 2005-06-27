@@ -693,7 +693,7 @@ enum ccache_type {
     CCACHE_LINECOL
 };
 
-static gboolean
+static inline gboolean
 coord_cache_entry_less (const struct coord_cache_entry *a,
 	const struct coord_cache_entry *b, enum ccache_type crit,
 	gboolean nroff_mode)

@@ -2,6 +2,8 @@
 
 	* view.c (is_nroff_sequence): Reordered the statements to gain
 	a speed-off of 30 percent on a 10 MB file.
+	(coord_cache_entry_less): Another speed-up by declaring the
+	function as inline.
 
 2005-06-22  Pavel Tsekov  <ptsekov@gmx.net>
 
