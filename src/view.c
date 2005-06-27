@@ -781,16 +781,23 @@ view_ccache_dump (WView *view)
 static gboolean
 is_nroff_sequence (WView *view, offset_type offset)
 {
-    int c0, c1, c2, retval;
+    int c0, c1, c2;
+
+    /* The following commands are ordered to speed up the calculation. */
+
+    c1 = get_byte_indexed (view, offset, 1);
+    if (c1 == -1 || c1 != '\b')
+	return FALSE;
 
     c0 = get_byte_indexed (view, offset, 0);
-    c1 = get_byte_indexed (view, offset, 1);
-    c2 = get_byte_indexed (view, offset, 2);
+    if (c0 == -1 || !is_printable(c0))
+	return FALSE;
 
-    retval = (c0 != -1 && c1 != -1 && c2 != -1
-	&& is_printable (c0)  && c1 == '\b' && is_printable (c2)
-	&& (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o')));
-    return retval;
+    c2 = get_byte_indexed (view, offset, 2);
+    if (c2 == -1 || !is_printable(c2))
+	return FALSE;
+
+    return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
 }
 
 /* Look up the missing components of ''coord'', which are given by
