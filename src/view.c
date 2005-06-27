@@ -471,13 +471,13 @@ view_may_still_grow (WView *view)
 /* returns TRUE if the idx lies in the half-open interval
  * [offset; offset + size), FALSE otherwise.
  */
-static gboolean
+static inline gboolean
 already_loaded (offset_type offset, offset_type idx, size_t size)
 {
     return (offset <= idx && idx - offset < size);
 }
 
-static void
+static inline void
 view_file_load_data (WView *view, offset_type byte_index)
 {
     offset_type blockoffset;
@@ -522,7 +522,7 @@ get_byte_none (WView *view, offset_type byte_index)
     return -1;
 }
 
-static int
+static inline int
 get_byte_file (WView *view, offset_type byte_index)
 {
     assert (view->datasource == DS_FILE);
@@ -542,7 +542,7 @@ get_byte_string (WView *view, offset_type byte_index)
     return -1;
 }
 
-static int
+static inline int
 get_byte (WView *view, offset_type offset)
 {
     switch (view->datasource) {
