@@ -180,7 +180,7 @@ struct WView {
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(void *, char *);
                                 /* Pointer to the last search command */
-    int view_quit:1;		/* Quit flag */
+    gboolean want_to_quit;	/* Prepare for cleanup ... */
 
     /* Markers */
     int marker;			/* mark to use */
@@ -3022,7 +3022,7 @@ view_handle_key (WView *view, int c)
     case XCTRL ('g'):
     case ESC_CHAR:
 	if (view_ok_to_quit (view))
-	    view->view_quit = 1;
+	    view->want_to_quit = TRUE;
 	return MSG_HANDLED;
 
 #ifdef HAVE_CHARSET
@@ -3233,7 +3233,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
 	i = view_handle_key ((WView *) view, parm);
-	if (view->view_quit && !view_is_in_panel (view))
+	if (view->want_to_quit && !view_is_in_panel (view))
 	    dlg_stop (h);
 	else {
 	    view_update (view);
@@ -3300,7 +3300,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->direction         = 1; /* forward */
     view->last_search       = 0; /* it's a function */
 
-    view->view_quit         = 0;
+    view->want_to_quit      = FALSE;
     view->marker            = 0;
     /* leave view->marks uninitialized */
     view->move_dir          = 0;

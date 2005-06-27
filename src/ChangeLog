@@ -2,6 +2,8 @@
 
 	* view.c: Massive speed-ups by reordering statements and declaring
 	functions as inline.
+	* view.c: Renamed view_quit to want_to_quit and changed its type
+	to gboolean.
 
 2005-06-22  Pavel Tsekov  <ptsekov@gmx.net>
 
