@@ -1,3 +1,7 @@
+2005-06-28  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Simplified error handling when loading files.
+
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Massive speed-ups by reordering statements and declaring

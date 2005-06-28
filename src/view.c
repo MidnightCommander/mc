@@ -1253,19 +1253,19 @@ view_done (WView *view)
     global_wrap_mode = view->text_wrap_mode;
 }
 
-static char *
-set_view_init_error (WView *view, const char *msg)
+static void
+view_show_error (WView *view, const char *msg)
 {
-    if (msg) {
-	view_close_datasource (view);
+    view_close_datasource (view);
+    if (view_is_in_panel (view)) {
 	view_set_datasource_string (view, msg);
-        return g_strdup (msg);
+    } else {
+	message (1, MSG_ERROR, "%s", msg);
     }
-    return NULL;
 }
 
 /* return values: NULL for success, else points to error message */
-static char *
+static gboolean
 view_load_command_output (WView *view, const char *command)
 {
     const char *err_msg = NULL;
@@ -1277,8 +1277,8 @@ view_load_command_output (WView *view, const char *command)
 	if ((fp = popen (command, "r")) == NULL) {
 	    /* Avoid two messages.  Message from stderr has priority.  */
 	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
-		err_msg = _(" Cannot spawn child program ");
-	    return set_view_init_error (view, err_msg);
+		view_show_error (view, _(" Cannot spawn child process "));
+	    return FALSE;
 	}
 
 	/* First, check if filter produced any output */
@@ -1288,10 +1288,10 @@ view_load_command_output (WView *view, const char *command)
 
 	    /* Avoid two messages.  Message from stderr has priority.  */
 	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
-		err_msg = _("Empty output from child filter");
-	    return set_view_init_error (view, err_msg);
+		view_show_error (view, _("Empty output from child filter"));
+	    return FALSE;
 	}
-    return NULL;
+    return TRUE;
 }
 
 gboolean
@@ -1303,6 +1303,7 @@ view_load (WView *view, const char *_command, const char *_file,
     int fd = -1;
     char tmp[BUF_MEDIUM];
     struct stat st;
+    gboolean retval = FALSE;
 
     view_done (view);
 
@@ -1321,7 +1322,7 @@ view_load (WView *view, const char *_command, const char *_file,
     }
 
     if (_command && (view->magic_mode || _file[0] == '\0')) {
-	error = view_load_command_output (view, _command);
+	retval = view_load_command_output (view, _command);
     } else if (_file[0]) {
 	int cntlflags;
 
@@ -1329,7 +1330,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	if ((fd = mc_open (_file, O_RDONLY | O_NONBLOCK)) == -1) {
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
 			_file, unix_error_string (errno));
-	    error = set_view_init_error (view, tmp);
+	    view_show_error (view, tmp);
 	    goto finish;
 	}
 
@@ -1338,15 +1339,13 @@ view_load (WView *view, const char *_command, const char *_file,
 	    mc_close (fd);
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
 			_file, unix_error_string (errno));
-	    error = set_view_init_error (view, tmp);
+	    view_show_error (view, tmp);
 	    goto finish;
 	}
 
 	if (!S_ISREG (st.st_mode)) {
 	    mc_close (fd);
-	    g_snprintf (tmp, sizeof (tmp),
-			_(" Cannot view: not a regular file "));
-	    error = set_view_init_error (view, tmp);
+	    view_show_error (view, _(" Cannot view: not a regular file "));
 	    goto finish;
 	}
 
@@ -1369,17 +1368,10 @@ view_load (WView *view, const char *_command, const char *_file,
 	    }
 	    view_set_datasource_file (view, fd, &st);
 	}
+	retval = TRUE;
     }
 
   finish:
-    if (error) {
-	if (!view_is_in_panel (view)) {
-	    message (1, MSG_ERROR, "%s", error);
-	    g_free (error);
-	    return FALSE;
-	}
-    }
-
     view->command = g_strdup (_command);
     view->dpy_topleft = 0;
     view->search_start = 0;
@@ -1387,18 +1379,13 @@ view_load (WView *view, const char *_command, const char *_file,
     view->dpy_text_column = 0;
     view->last_search = 0;	/* Start a new search */
 
-    if (error) {
-	view_close_datasource (view);
-	view_set_datasource_string (view, error);
-    } else {
-	view_moveto (view, (start_line >= 1) ? start_line - 1 : 0, 0);
-    }
+    view_moveto (view, (start_line >= 1) ? start_line - 1 : 0, 0);
 
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;
 
-    return TRUE;
+    return retval;
 }
 
 /* {{{ Display management }}} */
