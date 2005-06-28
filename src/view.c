@@ -1264,7 +1264,6 @@ view_show_error (WView *view, const char *msg)
     }
 }
 
-/* return values: NULL for success, else points to error message */
 static gboolean
 view_load_command_output (WView *view, const char *command)
 {
