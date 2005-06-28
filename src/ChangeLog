@@ -1,6 +1,7 @@
 2005-06-28  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Simplified error handling when loading files.
+	* view.c (normal_search): Replaced with normal_search_cmd().
 
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 

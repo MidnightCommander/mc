@@ -2627,7 +2627,7 @@ regexp_search_cmd (WView *view)
 
 /* Both views */
 static void
-normal_search (WView *view)
+normal_search_cmd (WView *view)
 {
     static char *old;
     char *exp = old ? old : str_unconst ("");
@@ -2690,12 +2690,6 @@ normal_search (WView *view)
     view->direction = replace_backwards ? -1 : 1;
     do_normal_search (view, exp);
     view->last_search = do_normal_search;
-}
-
-static void
-normal_search_cmd (WView *view)
-{
-    normal_search (view);
 }
 
 static void
@@ -2830,7 +2824,7 @@ continue_search (WView *view)
 	(*view->last_search) (view, view->search_exp);
     } else {
 	/* if not... then ask for an expression */
-	normal_search (view);
+	normal_search_cmd (view);
     }
 }
 
@@ -2914,7 +2908,7 @@ view_handle_key (WView *view, int c)
 	if (view->last_search) {
 	    (*view->last_search) (view, view->search_exp);
 	} else {
-	    normal_search (view);
+	    normal_search_cmd (view);
 	}
 	return MSG_HANDLED;
 
