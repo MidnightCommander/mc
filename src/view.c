@@ -178,7 +178,7 @@ struct WView {
     offset_type found_len;	/* Length of found string or 0 if none was found */
     char *search_exp;		/* The search expression */
     int  direction;		/* 1= forward; -1 backward */
-    void (*last_search)(void *, char *);
+    void (*last_search)(WView *, char *);
                                 /* Pointer to the last search command */
     gboolean want_to_quit;	/* Prepare for cleanup ... */
 
@@ -1296,7 +1296,6 @@ gboolean
 view_load (WView *view, const char *_command, const char *_file,
 	   int start_line)
 {
-    char *error = NULL;
     int i, type;
     int fd = -1;
     char tmp[BUF_MEDIUM];
@@ -2453,10 +2452,8 @@ regexp_view_search (WView *view, char *pattern, char *string,
 }
 
 static void
-do_regexp_search (void *xview, char *regexp)
+do_regexp_search (WView *view, char *regexp)
 {
-    WView *view = (WView *) xview;
-
     view->search_exp = regexp;
     search (view, regexp, regexp_view_search);
     /* Had a refresh here */
@@ -2465,10 +2462,8 @@ do_regexp_search (void *xview, char *regexp)
 }
 
 static void
-do_normal_search (void *xview, char *text)
+do_normal_search (WView *view, char *text)
 {
-    WView *view = (WView *) xview;
-
     view->search_exp = text;
     if (view->hex_mode)
 	hex_search (view, text);

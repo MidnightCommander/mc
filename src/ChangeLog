@@ -2,6 +2,8 @@
 
 	* view.c: Simplified error handling when loading files.
 	* view.c (normal_search): Replaced with normal_search_cmd().
+	(do_regexp_search): Removed unnecessary type cast.
+	(do_normal_search): Likewise.
 
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 
