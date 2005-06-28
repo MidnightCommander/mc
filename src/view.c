@@ -1110,7 +1110,7 @@ view_move_up (WView *view, offset_type lines)
 	    view->hex_cursor -= bytes;
 	    if (view->dpy_topleft >= bytes)
 		view->dpy_topleft -= bytes;
-	    else 
+	    else
 		view->dpy_topleft = 0;
 	} else {
 	    view->hex_cursor %= view->bytes_per_line;
@@ -1555,12 +1555,164 @@ view_display_ruler (WView *view)
     attrset (NORMAL_COLOR);
 }
 
-/* Displays as much data from view->dpy_topleft as fits on the screen */
 static void
-display (WView *view)
+view_display_hex (WView *view)
 {
     const int left = view_get_left (view);
-    const int top  = view_get_top (view);
+    const int right = view_get_right (view);
+    int col = left;
+    int row = view_get_top (view);
+    int bottom;
+    offset_type from;
+    int c;
+    mark_t boldflag = MARK_NORMAL;
+    struct hexedit_change_node *curr = view->change_list;
+
+    char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
+    int bytes;		/* Number of bytes already printed on the line */
+
+    /* Start of text column */
+    int text_start = right - view->bytes_per_line;
+
+    bottom = view_get_bottom (view);
+    from = view->dpy_topleft;
+    attrset (NORMAL_COLOR);
+
+    view_display_clean (view, bottom, right);
+
+    /* Find the first displayable changed byte */
+    while (curr && (curr->offset < from)) {
+	curr = curr->next;
+    }
+
+    for (; get_byte (view, from) != -1 && row < bottom; row++) {
+	/* Print the hex offset */
+	attrset (MARKED_COLOR);
+	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
+	view_gotoyx (view, row, left);
+	view_add_string (view, hex_buff);
+	attrset (NORMAL_COLOR);
+
+	/* Hex dump starts from column nine */
+	col = view->dpy_frame_size + 9;
+
+	/* Each hex number is two digits */
+	hex_buff[2] = 0;
+	for (bytes = 0;
+	     bytes < view->bytes_per_line
+	     && (c = get_byte (view, from)) != -1;
+	     bytes++, from++) {
+	    /* Display and mark changed bytes */
+	    if (curr && from == curr->offset) {
+	        c = curr->value;
+		curr = curr->next;
+		boldflag = MARK_CHANGED;
+		attrset (VIEW_UNDERLINED_COLOR);
+	    }
+
+	    if (view->found_len && from >= view->search_start
+		&& from < view->search_start + view->found_len) {
+		boldflag = MARK_SELECTED;
+		attrset (MARKED_COLOR);
+	    }
+	    /* Display the navigation cursor */
+	    if (from == view->hex_cursor) {
+		if (!view->hexview_in_text) {
+		    view->cursor_row = row;
+		    view->cursor_col = col;
+		}
+		boldflag = MARK_CURSOR;
+		attrset (view->hexview_in_text
+		    ? MARKED_SELECTED_COLOR
+		    : VIEW_UNDERLINED_COLOR);
+	    }
+
+	    /* Print a hex number (sprintf is too slow) */
+	    hex_buff[0] = hex_char[(c >> 4)];
+	    hex_buff[1] = hex_char[c & 15];
+	    view_gotoyx (view, row, col);
+	    view_add_string (view, hex_buff);
+	    col += 3;
+	    /* Turn off the cursor or changed byte highlighting here */
+	    if (boldflag == MARK_CURSOR || boldflag == MARK_CHANGED)
+	        attrset (NORMAL_COLOR);
+	    if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
+		/* Turn off the search highlighting */
+		if (boldflag == MARK_SELECTED
+		    && from ==
+		    view->search_start + view->found_len - 1)
+		    attrset (NORMAL_COLOR);
+
+		/* Hex numbers are printed in the groups of four */
+		/* Groups are separated by a vline */
+
+		view_gotoyx (view, row, col - 1);
+		view_add_character (view, ' ');
+		view_gotoyx (view, row, col);
+		if (view_get_datacolumns (view) < 80)
+		    col += 1;
+		else {
+		    view_add_one_vline ();
+		    col += 2;
+		}
+
+		if (boldflag != MARK_NORMAL
+		    && from ==
+		    view->search_start + view->found_len - 1)
+		    attrset (MARKED_COLOR);
+	    }
+	    if (boldflag != MARK_NORMAL
+		&& from < view->search_start + view->found_len - 1
+		&& bytes != view->bytes_per_line - 1) {
+		view_gotoyx (view, row, col);
+		view_add_character (view, ' ');
+	    }
+
+	    /* Print corresponding character on the text side */
+	    view_gotoyx (view, row, text_start + bytes);
+
+	    c = convert_to_display_c (c);
+
+	    if (!is_printable (c))
+		c = '.';
+	    switch (boldflag) {
+	    case MARK_NORMAL:
+		break;
+	    case MARK_SELECTED:
+		attrset (MARKED_COLOR);
+		break;
+	    case MARK_CURSOR:
+		if (view->hexview_in_text) {
+		    /* Our side is active */
+		    view->cursor_col = text_start + bytes;
+		    view->cursor_row = row;
+		    attrset (VIEW_UNDERLINED_COLOR);
+		} else {
+		    /* Other side is active */
+		    attrset (MARKED_SELECTED_COLOR);
+		}
+		break;
+	    case MARK_CHANGED:
+		attrset (VIEW_UNDERLINED_COLOR);
+		break;
+	    }
+	    view_add_character (view, c);
+
+	    if (boldflag != MARK_NORMAL) {
+		boldflag = MARK_NORMAL;
+		attrset (NORMAL_COLOR);
+	    }
+	}
+    }
+    view_place_cursor (view);
+    view->dpy_complete = (get_byte (view, from) == -1);
+}
+
+static void
+view_display_text (WView * view)
+{
+    const int left = view_get_left (view);
+    const int top = view_get_top (view);
     int col = left;
     int row = view_get_top (view);
     int bottom, right;
@@ -1576,8 +1728,12 @@ display (WView *view)
 
     view_display_clean (view, bottom, right);
 
+    /* Find the first displayable changed byte */
+    while (curr && (curr->offset < from)) {
+	curr = curr->next;
+    }
     /* Optionally, display a ruler */
-    if ((!view->hex_mode) && (ruler)) {
+    if (ruler) {
 	view_display_ruler (view);
 	if (ruler == 1)
 	    row += 2;
@@ -1585,210 +1741,87 @@ display (WView *view)
 	    bottom -= 2;
     }
 
-    /* Find the first displayable changed byte */
-    while (curr && (curr->offset < from)) {
-	curr = curr->next;
-    }
-    if (view->hex_mode) {
-	char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
-	int bytes;		/* Number of bytes already printed on the line */
+    for (; row < bottom && (c = get_byte (view, from)) != -1; from++) {
+	if (view->text_nroff_mode && c == '\b') {
+	    int c_prev;
+	    int c_next;
 
-	/* Start of text column */
-	int text_start = right - view->bytes_per_line;
-
-	for (; get_byte (view, from) != -1 && row < bottom; row++) {
-	    /* Print the hex offset */
-	    attrset (MARKED_COLOR);
-	    g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
-	    view_gotoyx (view, row, left);
-	    view_add_string (view, hex_buff);
-	    attrset (NORMAL_COLOR);
-
-	    /* Hex dump starts from column nine */
-	    col = view->dpy_frame_size + 9;
-
-	    /* Each hex number is two digits */
-	    hex_buff[2] = 0;
-	    for (bytes = 0;
-		 bytes < view->bytes_per_line
-		 && (c = get_byte (view, from)) != -1;
-		 bytes++, from++) {
-		/* Display and mark changed bytes */
-		if (curr && from == curr->offset) {
-		    c = curr->value;
-		    curr = curr->next;
-		    boldflag = MARK_CHANGED;
+	    if ((c_next = get_byte_indexed (view, from, 1)) != -1
+		&& is_printable (c_next)
+		&& from >= 1
+		&& (c_prev = get_byte (view, from - 1)) != -1
+		&& is_printable (c_prev)
+		&& (c_prev == c_next || c_prev == '_'
+		    || (c_prev == '+' && c_next == 'o'))) {
+		if (col <= left) {
+		    /* So it has to be text_wrap_mode - do not need to check for it */
+		    /* FIXME: what about the ruler? */
+		    if (row == 1 + top) {
+			from++;
+			continue;	/* There had to be a bold character on the rightmost position
+					   of the previous undisplayed line */
+		    }
+		    row--;
+		    col = right;
+		}
+		col--;
+		boldflag = MARK_SELECTED;
+		if (c_prev == '_' && (c_next != '_' || view_count_backspaces (view, from) == 1))
 		    attrset (VIEW_UNDERLINED_COLOR);
-		}
-
-		if (view->found_len && from >= view->search_start
-		    && from < view->search_start + view->found_len) {
-		    boldflag = MARK_SELECTED;
+		else
 		    attrset (MARKED_COLOR);
-		}
-		/* Display the navigation cursor */
-		if (from == view->hex_cursor) {
-		    if (!view->hexview_in_text) {
-			view->cursor_row = row;
-			view->cursor_col = col;
-		    }
-		    boldflag = MARK_CURSOR;
-		    attrset (view->hexview_in_text
-			? MARKED_SELECTED_COLOR
-			: VIEW_UNDERLINED_COLOR);
-		}
-
-		/* Print a hex number (sprintf is too slow) */
-		hex_buff[0] = hex_char[(c >> 4)];
-		hex_buff[1] = hex_char[c & 15];
-		view_gotoyx (view, row, col);
-		view_add_string (view, hex_buff);
-		col += 3;
-		/* Turn off the cursor or changed byte highlighting here */
-		if (boldflag == MARK_CURSOR || boldflag == MARK_CHANGED)
-		    attrset (NORMAL_COLOR);
-		if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
-		    /* Turn off the search highlighting */
-		    if (boldflag == MARK_SELECTED
-			&& from ==
-			view->search_start + view->found_len - 1)
-			attrset (NORMAL_COLOR);
-
-		    /* Hex numbers are printed in the groups of four */
-		    /* Groups are separated by a vline */
-
-		    view_gotoyx (view, row, col - 1);
-		    view_add_character (view, ' ');
-		    view_gotoyx (view, row, col);
-		    if (view_get_datacolumns (view) < 80)
-			col += 1;
-		    else {
-			view_add_one_vline ();
-			col += 2;
-		    }
-
-		    if (boldflag != MARK_NORMAL
-			&& from ==
-			view->search_start + view->found_len - 1)
-			attrset (MARKED_COLOR);
-
-		}
-		if (boldflag != MARK_NORMAL
-		    && from < view->search_start + view->found_len - 1
-		    && bytes != view->bytes_per_line - 1) {
-		    view_gotoyx (view, row, col);
-		    view_add_character (view, ' ');
-		}
-
-		/* Print corresponding character on the text side */
-		view_gotoyx (view, row, text_start + bytes);
-
-		c = convert_to_display_c (c);
-
-		if (!is_printable (c))
-		    c = '.';
-		switch (boldflag) {
-		case MARK_NORMAL:
-		    break;
-		case MARK_SELECTED:
-		    attrset (MARKED_COLOR);
-		    break;
-		case MARK_CURSOR:
-		    if (view->hexview_in_text) {
-			/* Our side is active */
-			view->cursor_col = text_start + bytes;
-			view->cursor_row = row;
-			attrset (VIEW_UNDERLINED_COLOR);
-		    } else {
-			/* Other side is active */
-			attrset (MARKED_SELECTED_COLOR);
-		    }
-		    break;
-		case MARK_CHANGED:
-		    attrset (VIEW_UNDERLINED_COLOR);
-		    break;
-		}
-		view_add_character (view, c);
-
-		if (boldflag != MARK_NORMAL) {
-		    boldflag = MARK_NORMAL;
-		    attrset (NORMAL_COLOR);
-		}
+		continue;
 	    }
 	}
-	view_place_cursor (view);
-    } else {
-	for (; row < bottom && (c = get_byte (view, from)) != -1; from++) {
-	    if (view->text_nroff_mode && c == '\b') {
-		int c_prev;
-		int c_next;
-
-		if ((c_next = get_byte_indexed (view, from, 1)) != -1
-		    && is_printable (c_next)
-		    && from >= 1
-		    && (c_prev = get_byte (view, from - 1)) != -1
-		    && is_printable (c_prev)
-		    && (c_prev == c_next || c_prev == '_'
-		        || (c_prev == '+' && c_next == 'o'))) {
-		    if (col <= left) {
-			/* So it has to be text_wrap_mode - do not need to check for it */
-			/* FIXME: what about the ruler? */
-			if (row == 1 + top) {
-			    from++;
-			    continue;	/* There had to be a bold character on the rightmost position
-					   of the previous undisplayed line */
-			}
-			row--;
-			col = right;
-		    }
-		    col--;
-		    boldflag = MARK_SELECTED;
-		    if (c_prev == '_' && (c_next != '_' || view_count_backspaces (view, from) == 1))
-			attrset (VIEW_UNDERLINED_COLOR);
-		    else
-			attrset (MARKED_COLOR);
-		    continue;
-		}
-	    }
-	    if ((c == '\n') || (col >= right && view->text_wrap_mode)) {
-		col = left;
-		row++;
-		if (c == '\n' || row >= bottom)
-		    continue;
-	    }
-	    if (c == '\r')
+	if ((c == '\n') || (col >= right && view->text_wrap_mode)) {
+	    col = left;
+	    row++;
+	    if (c == '\n' || row >= bottom)
 		continue;
-	    if (c == '\t') {
-		/* FIXME: in text wrap mode, tabulators are not stable. */
-		col = ((col - left) / 8) * 8 + 8 + left;
-		continue;
-	    }
-	    if (view->found_len && from >= view->search_start
-		&& from < view->search_start + view->found_len) {
-		boldflag = MARK_SELECTED;
-		attrset (SELECTED_COLOR);
-	    }
-	    /* FIXME: incompatible widths in integer types */
-	    if (col >= 0
-	        && (unsigned int) col >= left + view->dpy_text_column
-		&& (unsigned int) col < right + view->dpy_text_column) {
-		view_gotoyx (view, row, col - view->dpy_text_column);
+	}
+	if (c == '\r')
+	    continue;
+	if (c == '\t') {
+	    /* FIXME: in text wrap mode, tabulators are not stable. */
+	    col = ((col - left) / 8) * 8 + 8 + left;
+	    continue;
+	}
+	if (view->found_len && from >= view->search_start
+	    && from < view->search_start + view->found_len) {
+	    boldflag = MARK_SELECTED;
+	    attrset (SELECTED_COLOR);
+	}
+	/* FIXME: incompatible widths in integer types */
+	if (col >= 0
+	    && (unsigned int) col >= left + view->dpy_text_column
+	    && (unsigned int) col < right + view->dpy_text_column) {
+	    view_gotoyx (view, row, col - view->dpy_text_column);
 
-		c = convert_to_display_c (c);
+	    c = convert_to_display_c (c);
 
-		if (!is_printable (c))
-		    c = '.';
+	    if (!is_printable (c))
+		c = '.';
 
-		view_add_character (view, c);
-	    }
-	    col++;
-	    if (boldflag != MARK_NORMAL) {
-		boldflag = MARK_NORMAL;
-		attrset (NORMAL_COLOR);
-	    }
+	    view_add_character (view, c);
+	}
+	col++;
+	if (boldflag != MARK_NORMAL) {
+	    boldflag = MARK_NORMAL;
+	    attrset (NORMAL_COLOR);
 	}
     }
     view->dpy_complete = (get_byte (view, from) == -1);
+}
+
+/* Displays as much data from view->dpy_topleft as fits on the screen */
+static void
+display (WView *view)
+{
+    if (view->hex_mode) {
+	view_display_hex (view);
+    } else {
+	view_display_text (view);
+    }
 }
 
 static void

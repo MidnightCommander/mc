@@ -5,6 +5,8 @@
 	(do_regexp_search): Removed unnecessary type cast.
 	(do_normal_search): Likewise.
 	* view.c (display): Changed return type to void.
+	* view.c (display): Splitted up into view_display_hex() and
+	view_display_text().
 
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 
