@@ -1556,7 +1556,7 @@ view_display_ruler (WView *view)
 }
 
 /* Displays as much data from view->dpy_topleft as fits on the screen */
-static offset_type
+static void
 display (WView *view)
 {
     const int left = view_get_left (view);
@@ -1789,7 +1789,6 @@ display (WView *view)
 	}
     }
     view->dpy_complete = (get_byte (view, from) == -1);
-    return from;
 }
 
 static void

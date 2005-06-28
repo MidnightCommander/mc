@@ -4,6 +4,7 @@
 	* view.c (normal_search): Replaced with normal_search_cmd().
 	(do_regexp_search): Removed unnecessary type cast.
 	(do_normal_search): Likewise.
+	* view.c (display): Changed return type to void.
 
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 
