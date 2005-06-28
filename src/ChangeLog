@@ -7,6 +7,8 @@
 	* view.c (display): Changed return type to void.
 	* view.c (display): Splitted up into view_display_hex() and
 	view_display_text().
+	* ext.c (get_file_type_local): Redirect error messages from
+	file(1) to /dev/null.
 
 2005-06-27  Roland Illig  <roland.illig@gmx.de>
 
