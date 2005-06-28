@@ -1268,7 +1268,6 @@ view_show_error (WView *view, const char *msg)
 static gboolean
 view_load_command_output (WView *view, const char *command)
 {
-    const char *err_msg = NULL;
     FILE *fp;
 
     view_close_datasource (view);
