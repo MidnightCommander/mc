@@ -5,6 +5,8 @@
 	assertion. (view_file_load_data): Make sure the right datasource
 	is selected. (view_set_byte): This function is only expected to
 	be called when datasource == DS_FILE. Removed unused code.
+	* global.h: Don't use MC_ENABLE_DEBUGGING_CODE to decide whether
+	to enable or disable assertions. Just use the default value.
 
 2005-06-28  Roland Illig  <roland.illig@gmx.de>
 

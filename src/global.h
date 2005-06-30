@@ -190,11 +190,13 @@ void refresh_screen (void *);
 /* C++ style type casts */
 #define const_cast(m_type, m_expr) ((m_type) (m_expr))
 
+#if 0
 #ifdef MC_ENABLE_DEBUGGING_CODE
 # undef NDEBUG
 #else
 # define NDEBUG
 #endif
 #include <assert.h>
+#endif
 
 #endif
