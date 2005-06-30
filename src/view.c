@@ -482,7 +482,7 @@ view_file_load_data (WView *view, offset_type byte_index)
     ssize_t res;
     size_t bytes_read;
 
-    assert (view->datasource == DS_VFS_FILE);
+    assert (view->datasource == DS_FILE);
 
     if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
 	return;
