@@ -1289,6 +1289,7 @@ view_load (WView *view, const char *_command, const char *_file,
     struct stat st;
     gboolean retval = FALSE;
 
+    assert (view->bytes_per_line != 0);
     view_done (view);
 
     /* Set up the state */
@@ -1363,6 +1364,7 @@ view_load (WView *view, const char *_command, const char *_file,
     view->dpy_text_column = 0;
     view->last_search = 0;	/* Start a new search */
 
+    assert (view->bytes_per_line != 0);
     view_moveto (view, (start_line >= 1) ? start_line - 1 : 0, 0);
 
     view->hexedit_lownibble = FALSE;
@@ -1388,6 +1390,7 @@ view_update_bytes_per_line (WView *view)
 	view->bytes_per_line++;	/* To avoid division by 0 */
 
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
+    assert (view->bytes_per_line != 0);
 }
 
 static void
