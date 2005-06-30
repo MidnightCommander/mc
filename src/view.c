@@ -354,8 +354,6 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     size_t bytesfree;
 
     assert (view->growbuf_in_use);
-    assert (view->datasource == DS_STDIO_PIPE
-	|| view->datasource == DS_VFS_PIPE);
 
     if (view->growbuf_finished)
 	return;
@@ -388,6 +386,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 		return;
 	    }
 	} else {
+	    assert (view->datasource == DS_VFS_PIPE);
 	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
 	    if (nread == -1 || nread == 0) {
 		view->growbuf_finished = TRUE;
@@ -407,7 +406,6 @@ get_byte_growing_buffer (WView *view, offset_type byte_index)
     offset_type pageindex = byte_index % VIEW_PAGE_SIZE;
 
     assert (view->growbuf_in_use);
-    assert (view->datasource == DS_STDIO_PIPE || view->datasource == DS_VFS_PIPE);
 
     if ((size_t) pageno != pageno)
 	return -1;
@@ -483,6 +481,8 @@ view_file_load_data (WView *view, offset_type byte_index)
     offset_type blockoffset;
     ssize_t res;
     size_t bytes_read;
+
+    assert (view->datasource == DS_VFS_FILE);
 
     if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
 	return;
@@ -572,23 +572,8 @@ static void
 view_set_byte (WView *view, offset_type offset, byte b)
 {
     assert (offset < view_get_filesize (view));
-
-    switch (view->datasource) {
-	case DS_STDIO_PIPE:
-	case DS_VFS_PIPE:
-	    view->growbuf_blockptr[offset / VIEW_PAGE_SIZE][offset % VIEW_PAGE_SIZE] = b;
-	    break;
-	case DS_FILE:
-	    view->ds_file_datalen = 0; /* just force reloading */
-	    break;
-	case DS_STRING:
-	    view->ds_string_data[offset] = b;
-	    break;
-	case DS_NONE:
-	    break;
-	default:
-	    assert(!"Unknown datasource type");
-    }
+    assert (view->datasource == DS_FILE);
+    view->ds_file_datalen = 0; /* just force reloading */
 }
 
 static void
@@ -600,6 +585,7 @@ view_set_datasource_none (WView *view)
 static void
 view_set_datasource_vfs_pipe (WView *view, int fd)
 {
+    assert (fd != -1);
     view->datasource = DS_VFS_PIPE;
     view->ds_vfs_pipe = fd;
 
@@ -609,6 +595,7 @@ view_set_datasource_vfs_pipe (WView *view, int fd)
 static void
 view_set_datasource_stdio_pipe (WView *view, FILE *fp)
 {
+    assert (fp != NULL);
     view->datasource = DS_STDIO_PIPE;
     view->ds_stdio_pipe = fp;
 

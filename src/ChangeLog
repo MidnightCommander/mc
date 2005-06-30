@@ -1,3 +1,11 @@
+2005-06-30  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_growbuf_load_until): Check the datasource in the
+	right place. (get_byte_growing_buffer): Removed an unnecessary
+	assertion. (view_file_load_data): Make sure the right datasource
+	is selected. (view_set_byte): This function is only expected to
+	be called when datasource == DS_FILE. Removed unused code.
+
 2005-06-28  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Simplified error handling when loading files.
