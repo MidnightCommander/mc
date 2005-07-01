@@ -969,7 +969,8 @@ view_fix_cursor_position (WView *view)
 
 	columns = view_get_datacolumns (view);
 	view_offset_to_coord (view, &line, &col, view->dpy_topleft + view->dpy_text_column);
-	col = offset_rounddown (col, columns);
+	if (columns != 0)
+	    col = offset_rounddown (col, columns);
 	view_coord_to_offset (view, &(view->dpy_topleft), line, col);
 	view->dpy_text_column = 0;
     } else {
