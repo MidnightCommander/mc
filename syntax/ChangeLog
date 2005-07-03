@@ -1,6 +1,9 @@
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
 	* perl.syntax: The inside of qw(...) gets green.
+	* c.syntax: The bit-wise and, or, xor, not operators are
+	formatted in brightmagenta to make them distinguishable from the
+	boolean operators. (This also affects the address-of operator.)
 
 2005-06-16  Mykolas Juraitis  <mykolas.juraitis@gmail.com>
 

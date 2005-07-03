@@ -78,7 +78,8 @@ context default
 # punctuation characters, sorted by ASCII code
     keyword ! yellow
     keyword % yellow
-    keyword & yellow
+    keyword && yellow
+    keyword & brightmagenta
     keyword ( brightcyan
     keyword ) brightcyan
     keyword \* yellow
@@ -94,10 +95,12 @@ context default
     keyword ? brightcyan
     keyword [ brightcyan
     keyword ] brightcyan
-    keyword ^ yellow
+    keyword ^ brightmagenta
     keyword { brightcyan
-    keyword | yellow
+    keyword || yellow
+    keyword | brightmagenta
     keyword } brightcyan
+    keyword ~ brightmagenta
 
 context exclusive /\* \*/ brown
     spellcheck
