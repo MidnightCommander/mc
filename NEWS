@@ -1,35 +1,82 @@
 Current
 
-- Core functionality
+- Core functionality.
 	- Device numbers are displayed correctly.
 	- Improved message formatting for i18n.
 	- Recursive option added for internal grep.
+
+- Viewer.
 	- Almost completely rewritten internal viewer.
 	- mmap(2) support removed from internal viewer.
-	- Fixed X11 connection problems.
 
-- VFS
+- VFS.
 	- Fixed device number handling.
-	- Even more quoting issues fixed.
 	- zipfs can handle zip files that contain pathnames starting
 	  with "./".
 	- Passive FTP over proxies is possible.
 
+- Miscellaneous.
+	- Code cleanup in various places
+
+
+Version 4.6.1-pre5.
+
+- Core functionality.
+	- Fix double free in mc_maybe_editor_or_viewer().
+	- Do not blindly cleanup in exit_subshell().
+	- Fix blocking of panel cd-ing with white space command.
+	- Fix mini status after first Ctrl-O.
+	- Fix dynamic loading of Photon library for shift keys.
+
+- Security.
+	- See also VFS.
+
+- Portability.
+	- Added configuration files for Sun Solaris pkgmk(1).
+
+- Editor.
+	- Fix position save bug.
+	- Improve c.syntax.
+	- Improve makefile.syntax.
+	- Improve python.syntax.
+	- Improve eiffel.syntax.
+	- Improve syntax.syntax.
+
+- Viewer.
+	- Add .7z archives extensions to mc.ext.in.
+	- Add OpenOffice.org 2 extensions to mc.ext.in.
+	- Recognize both .udeb and .deb as Debian packages.
+
+- Screen libraries.
+	- Backport S-Lang fixes from HEAD.
+
+- VFS.
+	- Extensive samba cleanup.
+	- Fix possible crash on broken cpio archives.
+	- Quote fixes in urar.in.
+
+- Translations.
+	- Updated translations: German.
+	- Updated translations: Italian.
+
+
+Version 4.6.1-pre4.
+
+- Core functionality.
+	- Fix X11 connection handling.
+
 - Editor.
 	- Add syntax file for the x86 assembler.
 	- Add syntax file for the Vision(tm) Ray Tracer.
-        - Add syntax file for the CORBA IDL.
-        - Add syntax file for the LUA programming language.
-	- Some fixes in C, Makefile, Python syntax files.
-
-- Miscellaneous
-	- Code cleanup in various places
+	- Add syntax file for the CORBA IDL.
+	- Add syntax file for the LUA programming language.
 
 
 Version 4.6.1-pre3.
 
 - Core functionality.
 	- Improve support for tcsh.
+
 - Translations.
 	- Updated translations: Spain.
 
@@ -98,7 +145,8 @@ Release candidate for 4.6.1.
 - Translations.
 	- New translations: Mongolian, Serbian and Lithuanian.
 	- Updated translations: Ukrainian, Italian, Hungarian.
- 
+
+
 Version 4.6.0.
 
 - Core functionality.
