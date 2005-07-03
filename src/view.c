@@ -571,6 +571,7 @@ get_byte_indexed (WView *view, offset_type base, offset_type ofs)
 static void
 view_set_byte (WView *view, offset_type offset, byte b)
 {
+    (void) &b;
     assert (offset < view_get_filesize (view));
     assert (view->datasource == DS_FILE);
     view->ds_file_datalen = 0; /* just force reloading */
