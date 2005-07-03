@@ -1,6 +1,10 @@
 Before 4.6.2
 ============
 
+Make mc work with 64 bit data types. This includes support for 64 bit
+processors, 64 bit operating systems and 64 bit file sizes. Generalizing
+this, mc should use datatypes as they are appropriate.
+
 Remove all instances of type casts on function pointers. Run the
 following command to get a list of function pointer types.
     grep -r 'typedef.*(\*' . \
