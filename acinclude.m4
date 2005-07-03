@@ -144,7 +144,6 @@ AC_DEFUN([MC_WITH_VFS],[
 
   if test "x$enable_netcode" != xno; then
     dnl FIXME: network checks should probably be in their own macro.
-    AC_CHECK_LIB(nsl, main)
     AC_SEARCH_LIBS(socket, [xnet bsd socket inet], [have_socket=yes])
     if test x$have_socket = xyes; then
       AC_SEARCH_LIBS(gethostbyname, [bsd socket inet netinet])

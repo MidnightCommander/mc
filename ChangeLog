@@ -1,3 +1,12 @@
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
+	* acinclude.m4 (MC_WITH_VFS): Don't link with libnsl
+	unnecessarily.
+	* configure.ac: Simplified detection of the necessary libraries
+	for socket() and gethostbyname().
+
+	Patch provided by Tomasz Kloczko at 2005-06-15 on mc-devel.
+
 2005-06-21  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Support opening for 7-Zip archives.

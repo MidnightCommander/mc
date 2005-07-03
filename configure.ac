@@ -294,31 +294,8 @@ dnl
 dnl Network related functions
 dnl
 
-AC_CHECK_LIB(nsl, t_accept)
-AC_CHECK_LIB(socket, socket)
-
-have_socket=no
-AC_CHECK_FUNCS(socket, have_socket=yes)
-if test $have_socket = no; then
-  # socket is not in the default libraries.  See if it's in some other.
-  for lib in bsd socket inet; do
-    AC_CHECK_LIB($lib, socket, [
-        LIBS="$LIBS -l$lib"
-	have_socket=yes
-	AC_DEFINE(HAVE_SOCKET)
-	break])
-  done
-fi
-
-have_gethostbyname=no
-AC_CHECK_FUNC(gethostbyname, [have_gethostbyname=yes])
-if test $have_gethostbyname = no; then
-  # gethostbyname is not in the default libraries.  See if it's in some other.
-  for lib in bsd socket inet; do
-    AC_CHECK_LIB([$lib], [gethostbyname],
-		 [LIBS="$LIBS -l$lib"; have_gethostbyname=yes; break])
-  done
-fi
+AC_SEARCH_LIBS([socket], [socket])
+AC_SEARCH_LIBS([gethostbyname], [nsl])
 
 dnl
 dnl Sequent wants getprocessstats
