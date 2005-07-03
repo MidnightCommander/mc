@@ -19,7 +19,10 @@
 
 #include <config.h>
 
+#include <limits.h>
 #include <stdio.h>
+
+#include <sys/types.h>
 
 #include "global.h"
 
@@ -133,4 +136,6 @@ show_version (int verbose)
 
     for (i = 0; features[i]; i++)
 	printf ("%s", _(features[i]));
+
+    (void)printf("Using %d bits for file sizes\n", CHAR_BIT * sizeof(off_t));
 }

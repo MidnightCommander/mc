@@ -1,3 +1,7 @@
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
+	* textconf.c: mc --version prints the number of bits of off_t.
+
 2005-07-01  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_fix_cursor_position): Fixed a division-by-zero
