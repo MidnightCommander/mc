@@ -4,9 +4,9 @@
    Copyright (C) 1994, 1995, 1996 The Free Software Foundation
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
-               1994, 1995 Janne Kukonlehto
-               1995 Jakub Jelinek
-               1996 Joseph M. Hinkle
+	       1994, 1995 Janne Kukonlehto
+	       1995 Jakub Jelinek
+	       1996 Joseph M. Hinkle
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
 	       2004 Roland Illig <roland.illig@gmx.de>
@@ -141,7 +141,7 @@ struct WView {
     byte   **growbuf_blockptr;	/* Pointer to the block pointers */
     size_t   growbuf_blocks;	/* The number of blocks in *block_ptr */
     size_t   growbuf_lastindex;	/* Number of bytes in the last page of the
-                                   growing buffer */
+				   growing buffer */
     gboolean growbuf_finished;	/* TRUE when all data has been read. */
 
     /* Editor modes */
@@ -179,7 +179,7 @@ struct WView {
     char *search_exp;		/* The search expression */
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(WView *, char *);
-                                /* Pointer to the last search command */
+				/* Pointer to the last search command */
     gboolean want_to_quit;	/* Prepare for cleanup ... */
 
     /* Markers */
@@ -193,7 +193,7 @@ struct WView {
 				 */
 
     offset_type update_steps;	/* The number of bytes between percent
-                                 * increments */
+				 * increments */
     offset_type update_activate;/* Last point where we updated the status */
 };
 
@@ -337,9 +337,9 @@ view_growbuf_filesize (WView *view)
     assert(view->growbuf_in_use);
 
     if (view->growbuf_blocks == 0)
-        return 0;
+	return 0;
     else
-        return ((offset_type) view->growbuf_blocks - 1)
+	return ((offset_type) view->growbuf_blocks - 1)
 	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
 }
 
@@ -359,22 +359,22 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	return;
 
     while (view_growbuf_filesize (view) < ofs) {
-        if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
-            byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
-            byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
-            if (!newblock || !newblocks) {
-                g_free (newblock);
+	if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+	    byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
+	    byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
+	    if (!newblock || !newblocks) {
+		g_free (newblock);
 		g_free (newblocks);
-                return;
-            }
-            memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
-            g_free (view->growbuf_blockptr);
-            view->growbuf_blockptr = newblocks;
-            view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
-            view->growbuf_lastindex = 0;
-        }
-        p = view->growbuf_blockptr[view->growbuf_blocks - 1] + view->growbuf_lastindex;
-        bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
+		return;
+	    }
+	    memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
+	    g_free (view->growbuf_blockptr);
+	    view->growbuf_blockptr = newblocks;
+	    view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
+	    view->growbuf_lastindex = 0;
+	}
+	p = view->growbuf_blockptr[view->growbuf_blocks - 1] + view->growbuf_lastindex;
+	bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
 	if (view->datasource == DS_STDIO_PIPE) {
 	    nread = fread (p, 1, bytesfree, view->ds_stdio_pipe);
@@ -395,7 +395,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 		return;
 	    }
 	}
-        view->growbuf_lastindex += nread;
+	view->growbuf_lastindex += nread;
     }
 }
 
@@ -883,7 +883,7 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 		    nroff_state = NROFF_START;
 		break;
 	    case NROFF_BACKSPACE:
-	        nroff_state = NROFF_CONTINUATION;
+		nroff_state = NROFF_CONTINUATION;
 		break;
 	}
     }
@@ -961,7 +961,7 @@ view_fix_cursor_position (WView *view)
 
 	if (topleft + displaysize <= cursor)
 	    topleft = offset_rounddown (cursor, bytes)
-	            - (displaysize - bytes);
+		    - (displaysize - bytes);
 	if (cursor < topleft)
 	    topleft = offset_rounddown (cursor, bytes);
 	view->dpy_topleft = topleft;
@@ -1407,11 +1407,11 @@ view_percent (WView *view, offset_type p)
     filesize = view_get_filesize (view);
 
     if (filesize == 0 || view->dpy_complete)
-        percent = 100;
+	percent = 100;
     else if (p > (INT_MAX / 100))
-        percent = p / (filesize / 100);
+	percent = p / (filesize / 100);
     else
-        percent = p * 100 / filesize;
+	percent = p * 100 / filesize;
 
     widget_move (view, view->dpy_frame_size, xpos);
     printw (str_unconst ("%3d%%"), percent);
@@ -1511,7 +1511,7 @@ view_count_backspaces (WView *view, off_t offset)
     int backspaces = 0;
     while (offset >= 2 * backspaces
 	   && get_byte (view, offset - 2 * backspaces) == '\b')
-        backspaces++;
+	backspaces++;
     return backspaces;
 }
 
@@ -1596,7 +1596,7 @@ view_display_hex (WView *view)
 	     bytes++, from++) {
 	    /* Display and mark changed bytes */
 	    if (curr && from == curr->offset) {
-	        c = curr->value;
+		c = curr->value;
 		curr = curr->next;
 		boldflag = MARK_CHANGED;
 		attrset (VIEW_UNDERLINED_COLOR);
@@ -1627,7 +1627,7 @@ view_display_hex (WView *view)
 	    col += 3;
 	    /* Turn off the cursor or changed byte highlighting here */
 	    if (boldflag == MARK_CURSOR || boldflag == MARK_CHANGED)
-	        attrset (NORMAL_COLOR);
+		attrset (NORMAL_COLOR);
 	    if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
 		/* Turn off the search highlighting */
 		if (boldflag == MARK_SELECTED
@@ -2825,7 +2825,7 @@ check_left_right_keys (WView *view, int c)
     }
 
     if (c == (KEY_M_CTRL | KEY_RIGHT)) {
-        if (view->dpy_text_column <= OFFSETTYPE_MAX - 10)
+	if (view->dpy_text_column <= OFFSETTYPE_MAX - 10)
 	    view->dpy_text_column += 10;
 	else
 	    view->dpy_text_column = OFFSETTYPE_MAX;
@@ -3250,7 +3250,7 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_RESIZED:
-        view_update_bytes_per_line (view);
+	view_update_bytes_per_line (view);
 	/* FALLTROUGH */
 
     default:
