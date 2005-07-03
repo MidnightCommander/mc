@@ -1,22 +1,22 @@
 # translation of hu.po to Hungarian
 # Midnight Commander - hu.po
-# Copyright (C) 2000,2003, 2004 Free Software Foundation, Inc.
+# Copyright (C) 2000,2003, 2004, 2005 Free Software Foundation, Inc.
 # Szabolcs Szasz <sz@szasz.hu>, 2001.
 # Szabolcs Ban <shooby@gnome.hu>, 2001.
-# Arpad Biro <biro_arpad@yahoo.com>, 2003, 2004.
+# Arpad Biro <biro_arpad@yahoo.com>, 2003, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
-"PO-Revision-Date: 2004-01-19 00:15+0100\n"
+"POT-Creation-Date: 2005-01-15 12:37+0500\n"
+"PO-Revision-Date: 2005-01-23 23:04+0100\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.2\n"
+"X-Generator: KBabel 1.9\n"
 
 #
 msgid "Error"
@@ -89,9 +89,8 @@ msgstr "Figyelem"
 msgid " A file already exists with this name. "
 msgstr " Már létezik ilyen nevû fájl. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Felülírás"
+msgstr "&Felülírás"
 
 msgid " Cannot save file. "
 msgstr " Nem sikerült a mentés. "
@@ -139,9 +138,8 @@ msgstr ""
 " A szöveg módosult a legutóbbi mentés óta. \n"
 " Ha továbblép, ezek a változások elvesznek. "
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Tovább"
+msgstr "&Tovább"
 
 msgid " Load "
 msgstr " Betöltés "
@@ -208,17 +206,14 @@ msgstr " Csere "
 msgid "Search"
 msgstr "Keresés"
 
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
+msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgstr " Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
 
 msgid " Error in replacement format string. "
 msgstr " Hibás a csere-formátumszöveg "
 
-#, fuzzy
 msgid " Replacement too long. "
-msgstr " Csereszöveg:"
+msgstr " A csereszöveg túl hosszú. "
 
 #, c-format
 msgid " %ld replacements made. "
@@ -237,9 +232,8 @@ msgstr "Kilép"
 msgid " File was modified, Save with exit? "
 msgstr " A dokumentum módosult. Kívánja menteni kilépéskor? "
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Mégse legyen kilépés"
+msgstr "&Mégse legyen kilépés"
 
 msgid "&Yes"
 msgstr "&Igen"
@@ -1701,20 +1695,20 @@ msgid "Overwrite this target?"
 msgstr "Felülírja ezt a fájlt?"
 
 # space-ek: hogy egymás alatt legyen a másolandó és a meglevõ
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Meglevõ fájl dátuma:   %s, mérete: %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Másolandó fájl dátuma: %s, mérete: %llu"
 
 # space-ek: hogy egymás alatt legyen a másolandó és a meglevõ
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
 msgstr "Meglevõ fájl dátuma:   %s, mérete: %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
 msgstr "Másolandó fájl dátuma: %s, mérete: %u"
 
@@ -2360,7 +2354,6 @@ msgstr ""
 "Hibajelentéseket (az \"mc -V\" parancs kimenetét is mellékelve) a következõ\n"
 "címre lehet küldeni: mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2389,17 +2382,19 @@ msgstr ""
 "\n"
 "Kulcsszavak:\n"
 "   Globális:       errors (hibák), reverse (inverz), gauge (folyamatjelzõ),\n"
-"                   input (bevitel)\n"
-"   Fájllista:      normal (normál), selected (jelenlegi), marked "
-"(kijelölt),\n"
+"                   input (bevitel), viewunderline (aláhúzott a megjelenítõben)\n"
+"   Fájllista:      normal (normál), selected (jelenlegi), marked (kijelölt),\n"
 "                   markselect (kijelölt + jelenlegi)\n"
 "   Párbeszédablakok:  dnormal (normál), dfocus (fókusz), dhotnormal\n"
-"                      (gyorsbillentyû), dhotfocus (gyorsbillentyû + fókusz)\n"
-"   Menük:          menu (menü), menuhot (gyorsbillentyû), menusel "
-"(kijelölt),\n"
+"                      (gyorsbillentyû), dhotfocus (gyorsbillentyû + fókusz),\n"
+"                      errdhotnormal (gyorsbillentyû hibaablakban),\n"
+"                      errdhotfocus (gyorsbillentyû + fókusz hibaablakban)\n"
+"   Menük:          menu (menü), menuhot (gyorsbillentyû), menusel (kijelölt),\n"
 "                   menuhotsel (gyorsbillentyû + kijelölt)\n"
-"   Súgó:           helpnormal (normál), helpitalic (dõlt), helplink (link),\n"
-"                   helpslink (kijelölt + link)\n"
+"   Szerkesztõ:     editnormal (normál), editbold (félkövér), editmarked\n"
+"                   (kijelölt)\n"
+"   Súgó:           helpnormal (normál), helpitalic (dõlt), helpbold (félkövér),\n"
+"                   helplink (link), helpslink (kijelölt + link)\n"
 "   Fájltípusok:    directory (könyvtár), executable (végrehajtható), link\n"
 "                   (link), stalelink (hibás link), device (eszköz), special\n"
 "                   (speciális), core (hibakeresési információ)\n"
@@ -2581,8 +2576,7 @@ msgid " Enter command label: "
 msgstr " A parancshoz tartozó leírás: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Távoli/virtuális könyvtáron nem lehet végrehajtani külsõ panel-parancsot "
+msgstr " Távoli/virtuális könyvtáron nem lehet végrehajtani külsõ panel-parancsot "
 
 msgid "Find rejects after patching"
 msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
@@ -3637,3 +3631,4 @@ msgstr "Belsõ programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+

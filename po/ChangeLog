@@ -1,5 +1,10 @@
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
+	* hu.po: Updated hungarian translation, provided by Arpad Biro
+	at 2005-01-23 on mc-devel.
+
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
 	* *.po: Removed line numbers.
 
 2005-06-06  Marco Ciampa  <ciampix@libero.it>
