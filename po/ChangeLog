@@ -1,5 +1,10 @@
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
+	* Makevars: Rewrote the MSGMERGE flags selection so that the
+	--no-location can be overridden more easily.
+
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
 	* hu.po: Updated hungarian translation, provided by Arpad Biro
 	at 2005-01-23 on mc-devel.
 

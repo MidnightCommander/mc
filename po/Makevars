@@ -40,6 +40,7 @@ MSGID_BUGS_ADDRESS = mc-devel@gnome.org
 # message catalogs shall be used.  It is usually empty.
 EXTRA_LOCALE_CATEGORIES =
 
-# Suppress location information
-MSGMERGE = msgmerge --no-location
-MSGMERGE_UPDATE = msgmerge --update --no-location
+# Suppress location information by default
+MSGMERGE_FLAGS ?=	--no-location
+MSGMERGE =		msgmerge ${MSGMERGE_FLAGS}
+MSGMERGE_UPDATE =	msgmerge --update ${MSGMERGE_FLAGS}
