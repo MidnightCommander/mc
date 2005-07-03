@@ -1,5 +1,11 @@
 2005-07-03  Leonard den Ottolander  <leonard * den ottolander nl>
 
+	* lib/mc.ext.in: Match files in /log/ or /logs/ directories as plain
+	text not man page; match local man pages; add fixes for gzipped man
+	pages to plain and bzipped man pages.
+
+2005-07-03  Leonard den Ottolander  <leonard * den ottolander nl>
+
 	* lib/mc.ext.in: Move matches for plain compressed files down.
 
 2005-07-03  Roland Illig  <roland.illig@gmx.de>

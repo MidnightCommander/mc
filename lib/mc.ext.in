@@ -251,9 +251,9 @@ shell/.info
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} file %f && nm %f
 
-regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
-	Open=nroff @MAN_FLAGS@ @MANDOC@ %f | %var{PAGER:more}
-	View=%view{ascii,nroff} nroff @MAN_FLAGS@ @MANDOC@ %f
+regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
+	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac
 
 # Troff with me macros.
 # Exception - "read.me" is not a nroff file.
@@ -271,17 +271,17 @@ shell/.ms
 	View=%view{ascii,nroff} nroff @MAN_FLAGS@ -ms %f
 
 # Manual page - compressed
-regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.g?[Zz]$
-	Open=gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d in /var/log*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.g?[Zz]$
+	Open=case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
-regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
-	Open=bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz$
+	Open=case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip -dc %f ;; *) bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
-regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
-	Open=bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz2$
+	Open=case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) bzip2 -dc %f ;; *) bzip2 -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
 
 ### Images ###
