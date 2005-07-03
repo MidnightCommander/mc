@@ -134,16 +134,6 @@ regex/\.(tar|TAR)$
 	Open=%cd %p#utar
 	View=%view{ascii} tar tvvf %f
 
-# zip
-type/^([Zz][Ii][Pp])\ archive
-	Open=%cd %p#uzip
-	View=%view{ascii} unzip -v %f
-
-# zoo
-regex/\.([Zz][Oo][Oo])$
-	Open=%cd %p#uzoo
-	View=%view{ascii} zoo l %f
-	
 # lha
 type/^LHa\ .*archive
 	Open=%cd %p#ulha
@@ -185,26 +175,6 @@ regex/(^|\.)ls-?lR(\.g?z|Z|bz2)?$
 regex/\.(diff|patch)(\.(bz2|gz|Z))?$
         Open=%cd %p#patchfs
 
-# gzip
-type/^gzip
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-
-# bzip2
-type/^bzip2
-	Open=bzip2 -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null
-
-# bzip
-type/^bzip
-	Open=bzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip -dc %f 2>/dev/null
-
-# compress
-type/^compress
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-
 # ar library
 regex/\.s?a$
 	Open=%cd %p#uar
@@ -233,8 +203,8 @@ regex/\.iso$
 
 # 7zip archives (they are not man pages)
 shell/.7z
-	Open=%cd %p#u7z
 	View=%view{ascii} 7za l %f 2>/dev/null
+
 
 ### Sources ###
 
@@ -262,6 +232,7 @@ shell/.s
 # C++
 regex/\.(C|cc|cpp)$
 	Open=%var{EDITOR:vi} %f
+
 
 ### Documentation ###
 
@@ -426,6 +397,7 @@ include/video
 	#Open=(gtv %f >/dev/null 2>&1 &)
 	#Open=(xanim %f >/dev/null 2>&1 &)
 
+
 ### Documents ###
 
 # Postscript
@@ -521,6 +493,39 @@ regex/\.([dD][bB][fF])$
 # REXX script
 regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
+
+
+### Plain compressed files ###
+
+# zip
+type/^([Zz][Ii][Pp])\ archive
+	Open=%cd %p#uzip
+	View=%view{ascii} unzip -v %f
+
+# zoo
+regex/\.([Zz][Oo][Oo])$
+	Open=%cd %p#uzoo
+	View=%view{ascii} zoo l %f
+	
+# gzip
+type/^gzip
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+
+# bzip2
+type/^bzip2
+	Open=bzip2 -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+
+# bzip
+type/^bzip
+	Open=bzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip -dc %f 2>/dev/null
+
+# compress
+type/^compress
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
 
 
 ### Default ###
