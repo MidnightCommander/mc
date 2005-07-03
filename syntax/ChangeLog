@@ -1,3 +1,7 @@
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
+	* perl.syntax: The inside of qw(...) gets green.
+
 2005-06-16  Mykolas Juraitis  <mykolas.juraitis@gmail.com>
 
 	* octave.syntax: Support for Matlab multi line comments

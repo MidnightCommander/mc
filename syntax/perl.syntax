@@ -353,6 +353,7 @@ context " " green
 context ' ' brightgreen
     keyword \\' green
     keyword \\\\ green
+context exclusive qw( ) green
 
 context exclusive ` ` white black
 
