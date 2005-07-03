@@ -15,178 +15,120 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit.c:153 edit/edit.c:331
 #, c-format
 msgid " Cannot open %s for reading "
 msgstr " Nepavyko atverti „%s“ skaitymui "
 
-#: edit/edit.c:154 edit/edit.c:276 edit/edit.c:284 edit/edit.c:370
-#: edit/edit.c:2628 edit/editcmd.c:299 edit/editcmd.c:307 edit/editcmd.c:1759
-#: src/wtools.c:121 src/wtools.c:278
 msgid "Error"
 msgstr "Klaida"
 
-#: edit/edit.c:275
 #, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Klaida skaitant iš konvejerio: %s "
 
-#: edit/edit.c:283
 #, c-format
 msgid " Cannot open pipe for reading: %s "
 msgstr " Nepavyko atverti konvejerio skaitymui: %s "
 
-#: edit/edit.c:342
 #, c-format
 msgid " Cannot get size/permissions for %s "
 msgstr " Nepavyko sužinoti bylos „%s“ dydžio/leidimų "
 
-#: edit/edit.c:349
 #, c-format
 msgid " %s is not a regular file "
 msgstr " „%s“ nėra įprastinė byla "
 
-#: edit/edit.c:363
 #, c-format
 msgid " File %s is too large "
 msgstr " Byla „%s“ per didelė "
 
-#: edit/edit.c:2628
 msgid "Macro recursion is too deep"
 msgstr "Makrosų rekursija per gili"
 
-#: edit/edit.h:228
 msgid "&Dismiss"
 msgstr "At&mesti"
 
-#: edit/edit.h:230 edit/editcmd.c:399 edit/editcmd.c:1242 edit/editcmd.c:1326
-#: edit/editcmd.c:2618 edit/editmenu.c:53 edit/editoptions.c:88
-#: src/boxes.c:142 src/boxes.c:279 src/boxes.c:375 src/boxes.c:467
-#: src/boxes.c:594 src/boxes.c:717 src/boxes.c:838 src/boxes.c:948
-#: src/boxes.c:1016 src/filegui.c:767 src/find.c:208 src/layout.c:356
-#: src/option.c:112 src/subshell.c:324 src/view.c:2051 src/wtools.c:444
 msgid "&OK"
 msgstr "&Gerai"
 
-#: edit/editcmd.c:59 edit/editcmd.c:60
 msgid " Enter file name: "
 msgstr " Įveskite bylos pavadinimą: "
 
-#: edit/editcmd.c:300
 msgid " Error writing to pipe: "
 msgstr " Klaida rašant į konvejerį: "
 
-#: edit/editcmd.c:310
 msgid " Cannot open pipe for writing: "
 msgstr " Nepavyko atverti konvejerio rašymui: "
 
-#: edit/editcmd.c:392
 msgid "Quick save "
 msgstr "Greitas įrašymas "
 
-#: edit/editcmd.c:393
 msgid "Safe save "
 msgstr "Saugus įrašymas "
 
-#: edit/editcmd.c:394
 msgid "Do backups -->"
 msgstr "Daryti kopijas -->"
 
-#: edit/editcmd.c:397 edit/editcmd.c:500 edit/editcmd.c:778 edit/editcmd.c:814
-#: edit/editcmd.c:854 edit/editcmd.c:1013 edit/editcmd.c:1126
-#: edit/editcmd.c:1179 edit/editcmd.c:1240 edit/editcmd.c:1324
-#: edit/editcmd.c:2616 edit/editoptions.c:85 src/achown.c:67 src/boxes.c:143
-#: src/boxes.c:280 src/boxes.c:373 src/boxes.c:465 src/boxes.c:592
-#: src/boxes.c:715 src/boxes.c:836 src/boxes.c:1016 src/chmod.c:100
-#: src/chown.c:71 src/cmd.c:822 src/filegui.c:749 src/find.c:208
-#: src/hotlist.c:122 src/hotlist.c:526 src/hotlist.c:839 src/hotlist.c:942
-#: src/layout.c:357 src/learn.c:59 src/option.c:113 src/panelize.c:66
-#: src/view.c:436 src/view.c:2048 src/wtools.c:47 src/wtools.c:442
 msgid "&Cancel"
 msgstr "&Atsisakyti"
 
-#: edit/editcmd.c:403
 msgid "Extension:"
 msgstr "Plėtinys:"
 
-#: edit/editcmd.c:409
 msgid " Edit Save Mode "
 msgstr " Keisti įrašymo režimą "
 
-#: edit/editcmd.c:481 edit/editcmd.c:540
 msgid " Save As "
 msgstr " Įrašyti kaip "
 
-#: edit/editcmd.c:498 edit/editcmd.c:814 edit/editcmd.c:851
-#: edit/editcmd.c:1010 edit/editcmd.c:1123 src/file.c:592 src/help.c:332
-#: src/main.c:421 src/screen.c:1442 src/selcodepage.c:106 src/subshell.c:320
-#: src/subshell.c:649 src/utilunix.c:456 src/utilunix.c:460 src/utilunix.c:482
-#: vfs/mcfs.c:148
 msgid "Warning"
 msgstr "Įspėjimas"
 
-#: edit/editcmd.c:499
 msgid " A file already exists with this name. "
 msgstr " Byla šiuo pavadinimu jau yra. "
 
-#: edit/editcmd.c:500
 msgid "&Overwrite"
 msgstr "Perraš&yti"
 
-#: edit/editcmd.c:542 edit/editcmd.c:2343 src/view.c:435
 msgid " Cannot save file. "
 msgstr " Nepavyko išsaugoti bylos. "
 
-#: edit/editcmd.c:585
 msgid "Cancel"
 msgstr "Atsisakyti"
 
-#: edit/editcmd.c:643 edit/editcmd.c:649 edit/editcmd.c:672 edit/editcmd.c:716
 msgid " Delete macro "
 msgstr " Pašalinti makrosą "
 
-#: edit/editcmd.c:644
 msgid " Cannot open temp file "
 msgstr " Nepavyko atverti laikinosios bylos "
 
-#: edit/editcmd.c:650 edit/editcmd.c:707 edit/editcmd.c:765
 msgid " Cannot open macro file "
 msgstr " Nepavyko atverti makroso bylos "
 
-#: edit/editcmd.c:673
 msgid " Cannot overwrite macro file "
 msgstr " Nepavyko perrašyti makroso bylos "
 
-#: edit/editcmd.c:688 edit/editcmd.c:707
 msgid " Save macro "
 msgstr " Įrašyti makrosą "
 
-#: edit/editcmd.c:689
 msgid " Press the macro's new hotkey: "
 msgstr " Nuspauskite naują greitųjų klavišų kombinaciją makrosui: "
 
-#: edit/editcmd.c:717 edit/editkeys.c:211 edit/editkeys.c:241
 msgid " Press macro hotkey: "
 msgstr " Nuspauskite greituosius makroso klavišus: "
 
-#: edit/editcmd.c:764
 msgid " Load macro "
 msgstr " Įkelti makrosą "
 
-#: edit/editcmd.c:777
 msgid " Confirm save file? : "
 msgstr " Įrašyti bylą? : "
 
-#: edit/editcmd.c:778 src/view.c:434
 msgid " Save file "
 msgstr " Įrašyti bylą "
 
-#: edit/editcmd.c:778 src/layout.c:358 src/learn.c:60 src/learn.c:175
-#: src/option.c:114
 msgid "&Save"
 msgstr "Į&rašyti"
 
-#: edit/editcmd.c:814 edit/editcmd.c:852
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -194,290 +136,212 @@ msgstr ""
 " Esama byla buvo pakeista ir neįrašyta. \n"
 " Tęsdami atmesite visus pakeitimus. "
 
-#: edit/editcmd.c:814 edit/editcmd.c:853 edit/editcmd.c:1013
-#: edit/editcmd.c:1126
 msgid "C&ontinue"
 msgstr "&Tęsti"
 
-#: edit/editcmd.c:860
 msgid " Load "
 msgstr " Įkelti "
 
-#: edit/editcmd.c:1012 edit/editcmd.c:1125
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokas didelis, gali nepavykti atšaukti šio veiksmo. "
 
-#: edit/editcmd.c:1181
 msgid "O&ne"
 msgstr "Vie&nas"
 
-#: edit/editcmd.c:1183 src/file.c:2141 src/filegui.c:520
 msgid "A&ll"
 msgstr "&Visi"
 
-#: edit/editcmd.c:1185 src/file.c:2078 src/filegui.c:211
 msgid "&Skip"
 msgstr "Pralei&sti"
 
-#: edit/editcmd.c:1187
 msgid "&Replace"
 msgstr "Pa&keisti"
 
-#: edit/editcmd.c:1193
 msgid " Replace with: "
 msgstr " Pakeisti su: "
 
-#: edit/editcmd.c:1205
 msgid " Confirm replace "
 msgstr " Patvirtinti pakeitimą "
 
-#: edit/editcmd.c:1244 edit/editcmd.c:1328
 msgid "scanf &Expression"
 msgstr "„scanf“ iš&raiška"
 
-#: edit/editcmd.c:1246
 msgid "replace &All"
 msgstr "P&akeisti viską"
 
-#: edit/editcmd.c:1248
 msgid "pr&Ompt on replace"
 msgstr "Praneš&ti keičiant"
 
-#: edit/editcmd.c:1250 edit/editcmd.c:1330 src/view.c:2054
 msgid "&Backwards"
 msgstr "At&bulai"
 
-#: edit/editcmd.c:1252 edit/editcmd.c:1332 src/find.c:271
 msgid "&Regular expression"
 msgstr "&Reguliari išraiška"
 
-#: edit/editcmd.c:1254 edit/editcmd.c:1334
 msgid "&Whole words only"
 msgstr "&Tik žodžius"
 
-#: edit/editcmd.c:1256 edit/editcmd.c:1336 src/find.c:197
 msgid "case &Sensitive"
 msgstr "&Skirti ABC nuo abc"
 
-#: edit/editcmd.c:1260
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Įveskite pakeitimo argumentų tvarką, pvz. 3,2,1,4 "
 
-#: edit/editcmd.c:1264
 msgid " Enter replacement string:"
 msgstr " Įveskite pakeitimo eilutę:"
 
-#: edit/editcmd.c:1268 edit/editcmd.c:1340 src/view.c:2059
 msgid " Enter search string:"
 msgstr " Įveskite ieškomą eilutę:"
 
-#: edit/editcmd.c:1289 edit/editcmd.c:1972 edit/editcmd.c:1999
 msgid " Replace "
 msgstr " Pakeisti "
 
-#: edit/editcmd.c:1356 edit/editcmd.c:2084 edit/editcmd.c:2086
-#: edit/editcmd.c:2114 edit/editwidget.c:313 src/view.c:1537 src/view.c:1616
-#: src/view.c:1771 src/view.c:1783 src/view.c:2005 src/view.c:2057
-#: src/view.c:2064 src/view.c:2175
 msgid "Search"
 msgstr "Paieška"
 
-#: edit/editcmd.c:1759
 msgid ""
 " Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Klaida reguliarioje išraiškoje, arba „scanf“ išraiška turi per daug "
 "konvertavimų "
 
-#: edit/editcmd.c:1976
 msgid " Error in replacement format string. "
 msgstr " Klaida pakeitimo eilutės formate. "
 
-#: edit/editcmd.c:1977
 msgid " Replacement too long. "
 msgstr " Pakeitimo eilutė per ilga. "
 
-#: edit/editcmd.c:2007
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Atlikta %ld pakeitimų. "
 
-#: edit/editcmd.c:2010 edit/editcmd.c:2086 edit/editcmd.c:2114 src/view.c:1616
-#: src/view.c:1783
 msgid " Search string not found "
 msgstr " Ieškoma eilutė nerasta "
 
-#: edit/editcmd.c:2084
 #, c-format
 msgid " %d items found, %d bookmarks added "
 msgstr " surasta %d, pridėta %d žymų  "
 
-#: edit/editcmd.c:2136 edit/editwidget.c:316 src/help.c:841 src/main.c:1211
-#: src/view.c:451 src/view.c:2154 src/view.c:2185
 msgid "Quit"
 msgstr "Išeiti"
 
-#: edit/editcmd.c:2136 src/view.c:452
 msgid " File was modified, Save with exit? "
 msgstr " Byla pakeista, įrašyti išeinant? "
 
-#: edit/editcmd.c:2137 src/view.c:453
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
 
-#: edit/editcmd.c:2137 src/cmd.c:191 src/file.c:1780 src/file.c:2140
-#: src/filegui.c:525 src/hotlist.c:1068 src/main.c:468 src/screen.c:1981
-#: src/subshell.c:651 src/tree.c:709 src/view.c:453 vfs/mcfs.c:153
 msgid "&Yes"
 msgstr "&Taip"
 
-#: edit/editcmd.c:2137 src/cmd.c:191 src/file.c:1780 src/file.c:2140
-#: src/filegui.c:524 src/hotlist.c:1068 src/main.c:468 src/screen.c:1982
-#: src/subshell.c:651 src/tree.c:709 src/view.c:453 vfs/mcfs.c:153
 msgid "&No"
 msgstr "&Ne"
 
-#: edit/editcmd.c:2243
 msgid " Error "
 msgstr " Klaida "
 
-#: edit/editcmd.c:2243
 msgid " This function is not implemented. "
 msgstr " Ši funkcija nerealizuota. "
 
-#: edit/editcmd.c:2252
 msgid " Copy to clipboard "
 msgstr " Kopijuoti į krepšį "
 
-#: edit/editcmd.c:2252 edit/editcmd.c:2265
 msgid " Unable to save to file. "
 msgstr " Nepavyko įrašyti į bylą. "
 
-#: edit/editcmd.c:2265
 msgid " Cut to clipboard "
 msgstr " Iškirpti į krepšį "
 
-#: edit/editcmd.c:2293 src/view.c:1950
 msgid " Goto line "
 msgstr " Eiti į eilutę "
 
-#: edit/editcmd.c:2293
 msgid " Enter line: "
 msgstr " Įveskite eilutę: "
 
-#: edit/editcmd.c:2328 edit/editcmd.c:2341
 msgid " Save Block "
 msgstr " Įrašyti bloką "
 
-#: edit/editcmd.c:2357 edit/editcmd.c:2370
 msgid " Insert File "
 msgstr " Įterpti bylą "
 
-#: edit/editcmd.c:2372
 msgid " Cannot insert file. "
 msgstr " Nepavyko įterpti bylos. "
 
-#: edit/editcmd.c:2389
 msgid " Sort block "
 msgstr " Rūšiuoti bloką "
 
-#: edit/editcmd.c:2389 edit/editcmd.c:2514
 msgid " You must first highlight a block of text. "
 msgstr " Pažymėkite teksto bloką. "
 
-#: edit/editcmd.c:2396
 msgid " Run Sort "
 msgstr " Rūšiuoti "
 
-#: edit/editcmd.c:2397
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Nurodykite rūšiavimo nustatymus, atskirtus tarpu: "
 
-#: edit/editcmd.c:2407 edit/editcmd.c:2412
 msgid " Sort "
 msgstr " Rūšiuoti "
 
-#: edit/editcmd.c:2408
 msgid " Cannot execute sort command "
 msgstr " Nepavyko įvykdyti „sort“ komandos "
 
-#: edit/editcmd.c:2413
 msgid " Sort returned non-zero: "
 msgstr " „Sort“ grąžino nenulinę reikšmę: "
 
-#: edit/editcmd.c:2437
 msgid "Paste output of external command"
 msgstr "Įdėti išorinės komandos išvestį"
 
-#: edit/editcmd.c:2438
 msgid "Enter shell command(s):"
 msgstr "Įveskite aplinkos komandą (-as):"
 
-#: edit/editcmd.c:2447
 msgid "External command"
 msgstr "Išorinė komanda"
 
-#: edit/editcmd.c:2448
 msgid "Cannot execute command"
 msgstr "Nepavyko įvykdyti išorinės komandos"
 
-#: edit/editcmd.c:2482
 msgid "Error creating script:"
 msgstr "Klaida kuriant skriptą:"
 
-#: edit/editcmd.c:2490
 msgid "Error reading script:"
 msgstr "Klaida skaitant skriptą:"
 
-#: edit/editcmd.c:2499
 msgid "Error closing script:"
 msgstr "Klaida užveriant skriptą:"
 
-#: edit/editcmd.c:2505
 msgid "Script created:"
 msgstr "Skriptas sukurtas:"
 
-#: edit/editcmd.c:2512
 msgid "Process block"
 msgstr "Apdoroti bloką"
 
-#: edit/editcmd.c:2611
 msgid " Mail "
 msgstr " Laiškas "
 
-#: edit/editcmd.c:2622
 msgid " Copies to"
 msgstr " Kopijos"
 
-#: edit/editcmd.c:2626
 msgid " Subject"
 msgstr " Tema"
 
-#: edit/editcmd.c:2630
 msgid " To"
 msgstr " Kam"
 
-#: edit/editcmd.c:2632
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <kopija> <kam>"
 
-#: edit/editkeys.c:196
 msgid " Emacs key: "
 msgstr " „Emacs“ klavišas: "
 
-#: edit/editkeys.c:210 edit/editkeys.c:241
 msgid " Execute Macro "
 msgstr " Įvykdyti makrosą "
 
-#: edit/editkeys.c:233
 msgid " Insert Literal "
 msgstr " Įterpti simbolį "
 
-#: edit/editkeys.c:234
 msgid " Press any key: "
 msgstr " Paspauskite bet kurį klavišą: "
 
-#: edit/editlock.c:167
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
@@ -488,23 +352,18 @@ msgstr ""
 "Naudotojas: %s\n"
 "Proceso ID: %d"
 
-#: edit/editlock.c:172
 msgid "File locked"
 msgstr "Byla užblokuota"
 
-#: edit/editlock.c:172
 msgid "&Grab lock"
 msgstr "&Paimti bloką"
 
-#: edit/editlock.c:173
 msgid "&Ignore lock"
 msgstr "&Ignoruoti bloką"
 
-#: edit/editmenu.c:71
 msgid " About "
 msgstr " Apie "
 
-#: edit/editmenu.c:72
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -522,304 +381,228 @@ msgstr ""
 "       Naudotojui draugiškas redaktorius, \n"
 "         parašytas „Midnight Commander“.\n"
 
-#: edit/editmenu.c:299 edit/editmenu.c:317
 msgid "&Open file..."
 msgstr "At&verti bylą..."
 
-#: edit/editmenu.c:300
 msgid "&New              C-n"
 msgstr "&Nauja            C-n"
 
-#: edit/editmenu.c:302 edit/editmenu.c:320
 msgid "&Save              F2"
 msgstr "Į&rašyti           F2"
 
-#: edit/editmenu.c:303 edit/editmenu.c:321
 msgid "Save &as...       F12"
 msgstr "Įrašyti &kaip...  F12"
 
-#: edit/editmenu.c:305 edit/editmenu.c:323
 msgid "&Insert file...   F15"
 msgstr "Įterpt&i bylą...  F15"
 
-#: edit/editmenu.c:306
 msgid "Copy to &file...  C-f"
 msgstr "Kopijuoti į &bylą C-f"
 
-#: edit/editmenu.c:308 edit/editmenu.c:326
 msgid "&User menu...     F11"
 msgstr "Naudotojo meni&u  F11"
 
-#: edit/editmenu.c:310 edit/editmenu.c:328
 msgid "A&bout...            "
 msgstr "A&pie...             "
 
-#: edit/editmenu.c:312 edit/editmenu.c:330
 msgid "&Quit             F10"
 msgstr "Iš&eiti           F10"
 
-#: edit/editmenu.c:318
 msgid "&New            C-x k"
 msgstr "&Nauja          C-x k"
 
-#: edit/editmenu.c:324
 msgid "Copy to &file...     "
 msgstr "Kopijuoti į &bylą... "
 
-#: edit/editmenu.c:335
 msgid "&Toggle Mark       F3"
 msgstr "Keis&ti žymėjimą   F3"
 
-#: edit/editmenu.c:336
 msgid "&Mark Columns    S-F3"
 msgstr "Žy&mėti stulpelius   "
 
-#: edit/editmenu.c:338
 msgid "Toggle &ins/overw Ins"
 msgstr "Keisti įterpimo rež. "
 
-#: edit/editmenu.c:340
 msgid "&Copy              F5"
 msgstr "&Kopijuoti         F5"
 
-#: edit/editmenu.c:341
 msgid "&Move              F6"
 msgstr "&Perkelti          F6"
 
-#: edit/editmenu.c:342
 msgid "&Delete            F8"
 msgstr "Ša&linti           F9"
 
-#: edit/editmenu.c:344
 msgid "&Undo             C-u"
 msgstr "Atša&ukti         C-u"
 
-#: edit/editmenu.c:346
 msgid "&Beginning     C-PgUp"
 msgstr "Į pra&džią     C-PgUp"
 
-#: edit/editmenu.c:347
 msgid "&End           C-PgDn"
 msgstr "Į &galą        C-PgDn"
 
-#: edit/editmenu.c:354
 msgid "&Search...         F7"
 msgstr "&Paieška...        F7"
 
-#: edit/editmenu.c:355
 msgid "Search &again     F17"
 msgstr "Iešk&oti vėl      F17"
 
-#: edit/editmenu.c:356
 msgid "&Replace...        F4"
 msgstr "Pa&keisti...       F4"
 
-#: edit/editmenu.c:363 edit/editmenu.c:387
 msgid "&Go to line...            M-l"
 msgstr "&Eiti į eilutę...         M-l"
 
-#: edit/editmenu.c:364 edit/editmenu.c:388
 msgid "Go to matching &bracket   M-b"
 msgstr "Eiti į porinį skliaustelį M-b"
 
-#: edit/editmenu.c:366 edit/editmenu.c:390
 msgid "Insert &literal...       C-q"
 msgstr "Įterpti simbo&lį...      C-q"
 
-#: edit/editmenu.c:368 edit/editmenu.c:392
 msgid "&Refresh screen          C-l"
 msgstr "atnau&jinti ekraną       C-l"
 
-#: edit/editmenu.c:370 edit/editmenu.c:394
 msgid "&Start record macro      C-r"
 msgstr "Pradėti makro&so įrašą   C-r"
 
-#: edit/editmenu.c:371 edit/editmenu.c:395
 msgid "&Finish record macro...  C-r"
 msgstr "&Baigti makroso įrašą...  C-r"
 
-#: edit/editmenu.c:372
 msgid "&Execute macro...   C-a, KEY"
 msgstr "Pal&eisti makrosą... C-a,KLV"
 
-#: edit/editmenu.c:373 edit/editmenu.c:397
 msgid "Delete macr&o...            "
 msgstr "Šalinti makr&osą..."
 
-#: edit/editmenu.c:375 edit/editmenu.c:399
 msgid "Insert &date/time           "
 msgstr "Įterpti &datą/laiką         "
 
-#: edit/editmenu.c:377 edit/editmenu.c:401
 msgid "Format p&aragraph        M-p"
 msgstr "Formuoti p&astraipą      M-p"
 
-#: edit/editmenu.c:378
 msgid "'ispell' s&pell check    C-p"
 msgstr "„ispell“ rašybos patikra C-p"
 
-#: edit/editmenu.c:379 edit/editmenu.c:403
 msgid "Sor&t...                 M-t"
 msgstr "Rikiuo&ti...             M-t"
 
-#: edit/editmenu.c:380 edit/editmenu.c:404
 msgid "Paste o&utput of...      M-u"
 msgstr "Įdėti iš&vestį...        M-u"
 
-#: edit/editmenu.c:381 edit/editmenu.c:405
 msgid "E&xternal Formatter      F19"
 msgstr "Išo&rinis formatas       F19"
 
-#: edit/editmenu.c:382 edit/editmenu.c:406
 msgid "&Mail...                    "
 msgstr "Paš&tas..."
 
-#: edit/editmenu.c:396
 msgid "&Execute macro... C-x e, KEY"
 msgstr "V&ykdyti makrosą... C-x e,KL"
 
-#: edit/editmenu.c:402
 msgid "'ispell' s&pell check    M-$"
 msgstr "„ispell“ rašybos patikra M-$"
 
-#: edit/editmenu.c:411
 msgid "&General...  "
 msgstr "&Bendrosios..."
 
-#: edit/editmenu.c:412
 msgid "&Save mode..."
 msgstr "Įrašymo režima&s..."
 
-#: edit/editmenu.c:413 src/main.c:912
 msgid "learn &Keys..."
 msgstr "Mokyti &klavišų..."
 
-#: edit/editmenu.c:424 edit/editmenu.c:438 src/chmod.c:150 src/chown.c:118
 msgid " File "
 msgstr " Byla "
 
-#: edit/editmenu.c:426 edit/editmenu.c:440
 msgid " Edit "
 msgstr " Taisa "
 
-#: edit/editmenu.c:428 edit/editmenu.c:442
 msgid " Sear/Repl "
 msgstr " Rasti/pakeisti "
 
-#: edit/editmenu.c:430 edit/editmenu.c:444
 msgid " Command "
 msgstr " Komanda "
 
-#: edit/editmenu.c:432 edit/editmenu.c:446
 msgid " Options "
 msgstr " Nustatymai "
 
-#: edit/editoptions.c:53
 msgid "Intuitive"
 msgstr "Intuityvus"
 
-#: edit/editoptions.c:53
 msgid "Emacs"
 msgstr "„Emacs“"
 
-#: edit/editoptions.c:56
 msgid "None"
 msgstr "Joks"
 
-#: edit/editoptions.c:56
 msgid "Dynamic paragraphing"
 msgstr "Dinamiškos pastraipos"
 
-#: edit/editoptions.c:56
 msgid "Type writer wrap"
 msgstr "Kaip rašom. mašinėlėje"
 
-#: edit/editoptions.c:92
 msgid "Word wrap line length: "
 msgstr "Laužyti eilutes ties: "
 
-#: edit/editoptions.c:98
 msgid "Tab spacing: "
 msgstr "Tabuliacijos ilgis: "
 
-#: edit/editoptions.c:105
 msgid "Synta&x highlighting"
 msgstr "Sintak&sės ryškinimas"
 
-#: edit/editoptions.c:108
 msgid "Save file &position"
 msgstr "Išsaugoti vietą by&loje"
 
-#: edit/editoptions.c:111
 msgid "Confir&m before saving"
 msgstr "Patvirtinti pri&eš įrašant"
 
-#: edit/editoptions.c:114
 msgid "Fill tabs with &spaces"
 msgstr "Tabuliacija tarpai&s"
 
-#: edit/editoptions.c:117
 msgid "&Return does autoindent"
 msgstr "„&Return“ autom. įtraukia"
 
-#: edit/editoptions.c:120
 msgid "&Backspace through tabs"
 msgstr "Trinti ta&buliaciją"
 
-#: edit/editoptions.c:123
 msgid "&Fake half tabs"
 msgstr "Netikra pusinė tabuliacija"
 
-#: edit/editoptions.c:129
 msgid "Wrap mode"
 msgstr "Eilučių laužymas"
 
-#: edit/editoptions.c:136
 msgid "Key emulation"
 msgstr "Klavišų išdėstymas"
 
-#: edit/editoptions.c:141
 msgid " Editor options "
 msgstr " Nustatymai "
 
-#: edit/editwidget.c:307 src/help.c:808 src/help.c:829 src/main.c:1208
-#: src/screen.c:2259 src/tree.c:977 src/view.c:2152
 msgid "Help"
 msgstr "Pagalba"
 
-#: edit/editwidget.c:308 src/view.c:2159
 msgid "Save"
 msgstr "Įrašyti"
 
-#: edit/editwidget.c:309
 msgid "Mark"
 msgstr "Žymėti"
 
-#: edit/editwidget.c:310
 msgid "Replac"
 msgstr "Keisti"
 
-#: edit/editwidget.c:311 src/file.c:779 src/screen.c:2263 src/tree.c:982
 msgid "Copy"
 msgstr "Kopij."
 
-#: edit/editwidget.c:312
 msgid "Move"
 msgstr "Perkelti"
 
-#: edit/editwidget.c:314 src/screen.c:2266
 msgid "Delete"
 msgstr "Šalinti"
 
-#: edit/editwidget.c:315 src/main.c:1210
 msgid "PullDn"
 msgstr "Meniu"
 
-#: edit/syntax.c:1134 edit/syntax.c:1139
 msgid " Load syntax file "
 msgstr " Įkelti sintaksės bylą "
 
-#: edit/syntax.c:1135 src/help.c:779 src/user.c:708
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -828,58 +611,44 @@ msgstr ""
 " Nepavyko atverti bylos „%s“ \n"
 " %s "
 
-#: edit/syntax.c:1140
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Klaida bylos %s eilutėje %d "
 
-#: src/achown.c:68 src/chmod.c:101 src/chown.c:72
 msgid "&Set"
 msgstr "&Nustatyti"
 
-#: src/achown.c:69
 msgid "S&kip"
 msgstr "P&raleisti"
 
-#: src/achown.c:70 src/chmod.c:105 src/chown.c:75
 msgid "Set &all"
 msgstr "Nustatyti &visus"
 
-#: src/achown.c:248 src/achown.c:336 src/achown.c:343
 msgid "owner"
 msgstr "savin."
 
-#: src/achown.c:248 src/achown.c:338 src/achown.c:345
 msgid "group"
 msgstr "grupė"
 
-#: src/achown.c:340
 msgid "other"
 msgstr "kiti"
 
-#: src/achown.c:348
 msgid "On"
 msgstr "Ką:"
 
-#: src/achown.c:350
 msgid "Flag"
 msgstr "Būs."
 
-#: src/achown.c:352
 msgid "Mode"
 msgstr "Rež."
 
-#: src/achown.c:356
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d iš %d"
 
-#: src/achown.c:566
 msgid " Chown advanced command "
 msgstr " Išplėstinė „chown“ komanda "
 
-#: src/achown.c:624 src/achown.c:640 src/achown.c:687 src/chmod.c:245
-#: src/chmod.c:315
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
@@ -888,8 +657,6 @@ msgstr ""
 " Nepavyko pakeisti „%s“ režimo \n"
 " %s "
 
-#: src/achown.c:629 src/achown.c:645 src/achown.c:692 src/chown.c:213
-#: src/chown.c:321
 #, c-format
 msgid ""
 " Cannot chown \"%s\" \n"
@@ -898,23 +665,18 @@ msgstr ""
 " Nepavyko pakeisti „%s“ nuosavybės \n"
 " %s "
 
-#: src/background.c:209 src/file.c:2076
 msgid " Background process error "
 msgstr " Foninio proceso klaida "
 
-#: src/background.c:215
 msgid " Unknown error in child "
 msgstr " Nežinoma vaiko klaida "
 
-#: src/background.c:223
 msgid " Child died unexpectedly "
 msgstr " Vaikas netikėtai mirė "
 
-#: src/background.c:230
 msgid " Background protocol error "
 msgstr " Fono protokolo klaida "
 
-#: src/background.c:231
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -922,462 +684,348 @@ msgstr ""
 " Foninis procesas prašo daugiau argumentų \n"
 " nei mes galime pateikti. \n"
 
-#: src/boxes.c:78
 msgid "&Full file list"
 msgstr "Pilnas &bylų sąrašas"
 
-#: src/boxes.c:79
 msgid "&Brief file list"
 msgstr "Tru&mpas bylų sąrašas"
 
-#: src/boxes.c:80
 msgid "&Long file list"
 msgstr "I&lgas bylų sąrašas"
 
-#: src/boxes.c:81
 msgid "&User defined:"
 msgstr "Kit&oks:"
 
-#: src/boxes.c:139
 msgid "Listing mode"
 msgstr "Režimas"
 
-#: src/boxes.c:141
 msgid "user &Mini status"
 msgstr "Sutraukta būs&ena"
 
-#: src/boxes.c:281
 msgid "&Reverse"
 msgstr "A&tbulai"
 
-#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "Skir&ti ABC nuo abc"
 
-#: src/boxes.c:283
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
 
-#: src/boxes.c:378
 msgid " confirm &Exit "
 msgstr " patvirtinti išė&jimą "
 
-#: src/boxes.c:380
 msgid " confirm e&Xecute "
 msgstr " patvirtinti &vykdymą "
 
-#: src/boxes.c:382
 msgid " confirm o&Verwrite "
 msgstr " patvirtinti perrašy&mą "
 
-#: src/boxes.c:384
 msgid " confirm &Delete "
 msgstr " patvirtinti ša&linimą "
 
-#: src/boxes.c:390 src/cmd.c:190
 msgid " Confirmation "
 msgstr " Patvirtinimas "
 
-#: src/boxes.c:462
 msgid "Full 8 bits output"
 msgstr "Pilna 8 bitų išvestis"
 
-#: src/boxes.c:462
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:462
 msgid "7 bits"
 msgstr "7 bitai"
 
-#: src/boxes.c:469 src/boxes.c:598
 msgid "F&ull 8 bits input"
 msgstr "Pilna 8 bitų į&vestis"
 
-#: src/boxes.c:477 src/boxes.c:579
 msgid " Display bits "
 msgstr " Išvesties bitai "
 
-#: src/boxes.c:560 src/boxes.c:585 src/selcodepage.c:71
 msgid "Other 8 bit"
 msgstr "Kita 8 bitų"
 
-#: src/boxes.c:582
 msgid "Input / display codepage:"
 msgstr "Įvesties / išvesties kodų lentelė:"
 
-#: src/boxes.c:601
 msgid "&Select"
 msgstr "Ž&ymėti"
 
-#: src/boxes.c:720
 msgid "Use &passive mode"
 msgstr "&Pasyvus režimas"
 
-#: src/boxes.c:722
 msgid "&Use ~/.netrc"
 msgstr "Na&udoti „~/.netrc“"
 
-#: src/boxes.c:726
 msgid "&Always use ftp proxy"
 msgstr "N&audoti FTP tarpinę stotį:"
 
-#: src/boxes.c:728
 msgid "sec"
 msgstr "sek."
 
-#: src/boxes.c:732
 msgid "ftpfs directory cache timeout:"
 msgstr "„ftpfs“ katalogų kešo galiojimas:"
 
-#: src/boxes.c:736
 msgid "ftp anonymous password:"
 msgstr "ftp anonimo slaptažodis"
 
-#: src/boxes.c:743
 msgid "Timeout for freeing VFSs:"
 msgstr "VFS galiojimas:"
 
-#: src/boxes.c:749
 msgid " Virtual File System Setting "
 msgstr " Virtualios bylų sistemos nustatymai "
 
-#: src/boxes.c:802
 msgid "Quick cd"
 msgstr "Greitas „cd“"
 
-#: src/boxes.c:805
 msgid "cd"
 msgstr "Eiti į: "
 
-#: src/boxes.c:840
 msgid "Symbolic link filename:"
 msgstr "Simbolinės nuorodos pavadinimas:"
 
-#: src/boxes.c:844
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Esančios bylos pavad. (į kurią nuoroda bus nukreipta):"
 
-#: src/boxes.c:851
 msgid "Symbolic link"
 msgstr "Simbolinė nuoroda"
 
-#: src/boxes.c:884
 msgid "Running "
 msgstr "Veikia "
 
-#: src/boxes.c:885 src/find.c:826
 msgid "Stopped"
 msgstr "Sustojo"
 
-#: src/boxes.c:945
 msgid "&Stop"
 msgstr "&Stabdyti"
 
-#: src/boxes.c:946
 msgid "&Resume"
 msgstr "&Tęsti"
 
-#: src/boxes.c:947
 msgid "&Kill"
 msgstr "N&užudyti"
 
-#: src/boxes.c:984
 msgid "Background Jobs"
 msgstr "Darbai fone"
 
-#: src/boxes.c:1015
 msgid "Domain:"
 msgstr "Domenas:"
 
-#: src/boxes.c:1015
 msgid "Username:"
 msgstr "Prisijungimo vardas:"
 
-#: src/boxes.c:1015 vfs/utilvfs.c:874
 msgid "Password:"
 msgstr "Slaptažodis:"
 
-#: src/boxes.c:1066
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s slaptažodis"
 
-#: src/charsets.c:53 vfs/extfs.c:1301 vfs/sfs.c:337
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Įspėjimas: byla %s nerasta\n"
 
-#: src/charsets.c:200 src/charsets.c:214
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Nepavyko išversti iš %s į %s"
 
-#: src/chmod.c:81
 msgid "execute/search by others"
 msgstr "vykdyti/ieškoti kitiems"
 
-#: src/chmod.c:82
 msgid "write by others"
 msgstr "rašyti kitiems"
 
-#: src/chmod.c:83
 msgid "read by others"
 msgstr "skaityti kitiems"
 
-#: src/chmod.c:84
 msgid "execute/search by group"
 msgstr "vykdyti/ieškoti grupei"
 
-#: src/chmod.c:85
 msgid "write by group"
 msgstr "rašyti grupei"
 
-#: src/chmod.c:86
 msgid "read by group"
 msgstr "skaityti grupei"
 
-#: src/chmod.c:87
 msgid "execute/search by owner"
 msgstr "vykdyti/ieškoti savininkui"
 
-#: src/chmod.c:88
 msgid "write by owner"
 msgstr "rašyti savininkui"
 
-#: src/chmod.c:89
 msgid "read by owner"
 msgstr "skaityti savininkui"
 
-#: src/chmod.c:90
 msgid "sticky bit"
 msgstr "limpa"
 
-#: src/chmod.c:91
 msgid "set group ID on execution"
 msgstr "grupės ID vykdymui"
 
-#: src/chmod.c:92
 msgid "set user ID on execution"
 msgstr "naudotojo ID vykdymui"
 
-#: src/chmod.c:102
 msgid "C&lear marked"
 msgstr "Išva&lyti pažymėtus"
 
-#: src/chmod.c:103
 msgid "S&et marked"
 msgstr "Nustat&yti pažymėtus"
 
-#: src/chmod.c:104
 msgid "&Marked all"
 msgstr "Pažy&mėti visi"
 
-#: src/chmod.c:128 src/screen.c:432
 msgid "Name"
 msgstr "Pavadinimas:"
 
-#: src/chmod.c:130
 msgid "Permissions (Octal)"
 msgstr "Leidimai (aštuonet.):"
 
-#: src/chmod.c:132
 msgid "Owner name"
 msgstr "Savininkas:"
 
-#: src/chmod.c:134
 msgid "Group name"
 msgstr "Grupė:"
 
-#: src/chmod.c:137
 msgid "Use SPACE to change"
 msgstr "Tarpu keiskite nustatymus."
 
-#: src/chmod.c:139
 msgid "an option, ARROW KEYS"
 msgstr "RODYKLėMIS eikite prie kitų"
 
-#: src/chmod.c:141
 msgid "to move between options"
 msgstr "nustatymų. Norėdami žymėti,"
 
-#: src/chmod.c:143
 msgid "and T or INS to mark"
 msgstr "naudokite T ar INS"
 
-#: src/chmod.c:148 src/chown.c:110
 msgid " Permission "
 msgstr " Leidimai "
 
-#: src/chmod.c:200
 msgid "Chmod command"
 msgstr "„chmod“ komanda"
 
-#: src/chown.c:73
 msgid "Set &users"
 msgstr "N&ustatyti naudot."
 
-#: src/chown.c:74
 msgid "Set &groups"
 msgstr "Nustatyti &grupes"
 
-#: src/chown.c:102
 msgid " Name "
 msgstr " Pavad. "
 
-#: src/chown.c:104
 msgid " Owner name "
 msgstr " Savininkas "
 
-#: src/chown.c:106 src/chown.c:116
 msgid " Group name "
 msgstr " Grupė "
 
-#: src/chown.c:108
 msgid " Size "
 msgstr " Dydis "
 
-#: src/chown.c:114
 msgid " User name "
 msgstr " Prisijungimo vardas "
 
-#: src/chown.c:157
 msgid " Chown command "
 msgstr " „chown“ komanda "
 
-#: src/chown.c:177
 msgid "<Unknown user>"
 msgstr "<Nežinomas naud.>"
 
-#: src/chown.c:178
 msgid "<Unknown group>"
 msgstr "<Nežnoma grupė>"
 
-#: src/cmd.c:190
 msgid "Files tagged, want to cd?"
 msgstr "Bylos pažymėtos, norite įvykdyti „cd“?"
 
-#: src/cmd.c:196 src/cmd.c:636 src/cmd.c:693 src/main.c:681 src/screen.c:1962
 msgid "Cannot change directory"
 msgstr " Nepavyko pakeisti katalogo "
 
-#: src/cmd.c:229
 msgid " View file "
 msgstr " Rodyti bylą "
 
-#: src/cmd.c:229
 msgid " Filename:"
 msgstr " Bylos pavadinimas:"
 
-#: src/cmd.c:251
 msgid " Filtered view "
 msgstr " Filtruotas vaizdas "
 
-#: src/cmd.c:252
 msgid " Filter command and arguments:"
 msgstr " Filtro komanda ir argumentai:"
 
-#: src/cmd.c:351
 msgid "Create a new Directory"
 msgstr "Sukurti naują katalogą"
 
-#: src/cmd.c:352
 msgid " Enter directory name:"
 msgstr " Įveskite katalogo pavadinimą: "
 
-#: src/cmd.c:423
 msgid " Filter "
 msgstr " Filtras  "
 
-#: src/cmd.c:424
 msgid " Set expression for filtering filenames"
 msgstr " Nustatyti bylų vardų filtro išraišką"
 
-#: src/cmd.c:511 src/find.c:168
 msgid "  Malformed regular expression  "
 msgstr "  Netaisyklinga reguliari išraiška  "
 
-#: src/cmd.c:524
 msgid " Select "
 msgstr " Pažymėti "
 
-#: src/cmd.c:529
 msgid " Unselect "
 msgstr " Atžymėti "
 
-#: src/cmd.c:562
 msgid "Extension file edit"
 msgstr "Plėtinių bylos keitimas"
 
-#: src/cmd.c:563
 msgid " Which extension file you want to edit? "
 msgstr " Kurią plėtinių bylą norite keisti? "
 
-#: src/cmd.c:564 src/cmd.c:667
 msgid "&User"
 msgstr "&Naudotojo"
 
-#: src/cmd.c:564 src/cmd.c:593 src/cmd.c:667
 msgid "&System Wide"
 msgstr "&Sisteminę"
 
-#: src/cmd.c:590
 msgid " Menu edit "
 msgstr " Meniu keitimas "
 
-#: src/cmd.c:591
 msgid " Which menu file do you want to edit? "
 msgstr " Kurią meniu bylą norite keisti? "
 
-#: src/cmd.c:593
 msgid "&Local"
 msgstr "&Lokalią"
 
-#: src/cmd.c:593
 msgid "&Home"
 msgstr "&Namų"
 
-#: src/cmd.c:665
 msgid "Syntax file edit"
 msgstr "Sintaksės bylos keitimas"
 
-#: src/cmd.c:666
 msgid " Which syntax file you want to edit? "
 msgstr " Kurią sintaksės bylą norite keisti? "
 
-#: src/cmd.c:820
 msgid " Compare directories "
 msgstr " Palyginti katalogus "
 
-#: src/cmd.c:821
 msgid " Select compare method: "
 msgstr " Parinkite lyginimo metodą: "
 
-#: src/cmd.c:821
 msgid "&Quick"
 msgstr "&Greitas"
 
-#: src/cmd.c:822
 msgid "&Size only"
 msgstr "Tik dydi&s"
 
-#: src/cmd.c:822
 msgid "&Thorough"
 msgstr "&Pilnas"
 
-#: src/cmd.c:835
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Norint naudoti šią komandą, abu skydeliai turėtų būti sąrašo režime "
 
-#: src/cmd.c:851
 msgid " The command history is empty "
 msgstr " Komandų istorija yra tuščia "
 
-#: src/cmd.c:855
 msgid " Command history "
 msgstr " Komandų istorija "
 
-#: src/cmd.c:891
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1385,79 +1033,62 @@ msgstr ""
 " Ne „xterm“ ar „Linux“ konsolė; \n"
 " skydeliai negali būti išjungti. "
 
-#: src/cmd.c:905
 #, c-format
 msgid "Link %s to:"
 msgstr "Sukurti nuorodą iš „%s“ į:"
 
-#: src/cmd.c:906
 msgid " Link "
 msgstr " Nuoroda "
 
-#: src/cmd.c:911
 #, c-format
 msgid " link: %s "
 msgstr " nuoroda: %s "
 
-#: src/cmd.c:934
 #, c-format
 msgid " symlink: %s "
 msgstr " simb. nuoroda: %s "
 
-#: src/cmd.c:970
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Simb. nuoroda „%s“ rodo į: "
 
-#: src/cmd.c:975
 msgid " Edit symlink "
 msgstr " Keisti simb. nuorodą "
 
-#: src/cmd.c:980
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " taisykite simb. nuorodą, nepavyko pašalinti „%s“: %s "
 
-#: src/cmd.c:984
 #, c-format
 msgid " edit symlink: %s "
 msgstr " Keisti simb. nuorodą: %s"
 
-#: src/cmd.c:995
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "„%s“ nėra simbolinė nuoroda"
 
-#: src/cmd.c:1113
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " Nepavyko įeiti į %s "
 
-#: src/cmd.c:1122
 msgid " Enter machine name (F1 for details): "
 msgstr " Įveskite adresą (F1 - pagalba): "
 
-#: src/cmd.c:1127 src/widget.c:1062
 msgid " Link to a remote machine "
 msgstr " Ryšys "
 
-#: src/cmd.c:1134 src/widget.c:1063
 msgid " FTP to machine "
 msgstr " FTP ryšys "
 
-#: src/cmd.c:1140
 msgid " Shell link to machine "
 msgstr " Aplinkos ryšys "
 
-#: src/cmd.c:1147 src/widget.c:1064
 msgid " SMB link to machine "
 msgstr " SMB ryšys "
 
-#: src/cmd.c:1156
 msgid " Undelete files on an ext2 file system "
 msgstr " Atkurti „ext2fs“ bylų sistemos bylas "
 
-#: src/cmd.c:1157
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1465,15 +1096,12 @@ msgstr ""
 " Nurodykite įtaisą (be „/dev/“) iš kurio\n"
 "   atkurti bylas: (F1 - pagalba)"
 
-#: src/cmd.c:1206
 msgid " Setup saved to ~/"
 msgstr " Nustatymai įrašyti į ~/"
 
-#: src/cmd.c:1208
 msgid " Setup "
 msgstr " Nustatymai "
 
-#: src/command.c:185 src/screen.c:2248 src/tree.c:824
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1482,90 +1110,69 @@ msgstr ""
 " Nepavyko įeiti į „%s“ \n"
 " %s "
 
-#: src/command.c:219 src/user.c:691
 msgid " Cannot execute commands on non-local filesystems"
 msgstr "Negalima vykdyti komandą nevietinėje bylų sistemoje"
 
-#: src/command.c:228 src/execute.c:192
 msgid " The shell is already running a command "
 msgstr " Aplinkoje jau vykdoma komanda "
 
-#: src/dir.c:51
 msgid "&Unsorted"
 msgstr "Nerūši&uotai"
 
-#: src/dir.c:52
 msgid "&Name"
 msgstr "Pavadi&nimas"
 
-#: src/dir.c:53
 msgid "&Extension"
 msgstr "Plė&tinys"
 
-#: src/dir.c:54
 msgid "&Modify time"
 msgstr "*Modif. laikas"
 
-#: src/dir.c:55
 msgid "&Access time"
 msgstr "P&asiek. laikas"
 
-#: src/dir.c:56
 msgid "&Change time"
 msgstr "Pakei&t. laikas"
 
-#: src/dir.c:57
 msgid "&Size"
 msgstr "Dydi&s"
 
-#: src/dir.c:58
 msgid "&Inode"
 msgstr "„&Inode“"
 
-#: src/dir.c:61
 msgid "&Type"
 msgstr "&Tipas"
 
-#: src/dir.c:62
 msgid "&Links"
 msgstr "&Nuorodos"
 
-#: src/dir.c:63
 msgid "N&GID"
 msgstr "N&GID"
 
-#: src/dir.c:64
 msgid "N&UID"
 msgstr "N&UID"
 
-#: src/dir.c:65
 msgid "&Owner"
 msgstr "&Savin."
 
-#: src/dir.c:66
 msgid "&Group"
 msgstr "&Grupė"
 
-#: src/dir.c:481 src/dir.c:582
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti katalogo turinio"
 
-#: src/execute.c:135 src/utilunix.c:432
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Paspauskite bet kurį klavišą..."
 
-#: src/execute.c:246
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Parašykite „exit“, norėdami grįžti į „Midnight Commander“"
 
-#: src/execute.c:354
 #, c-format
 msgid " Cannot fetch a local copy of %s "
 msgstr " Negaliu pasiekti lokalios „%s“ kopijos "
 
-#: src/ext.c:103 src/user.c:562
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1574,16 +1181,13 @@ msgstr ""
 " Nepavyko sukurti laikinos komandų bylos \n"
 "  %s "
 
-#: src/ext.c:116 src/user.c:586
 msgid " Parameter "
 msgstr " Parametras "
 
-#: src/ext.c:464
 #, c-format
 msgid " %s%s file error"
 msgstr " „%s%s“ bylos klaida"
 
-#: src/ext.c:466
 #, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
@@ -1593,12 +1197,10 @@ msgstr ""
 "3.0 versijoje pasikeitė „%smc.ext“ bylos formatas. Panašu, kad įdiegimas "
 "nepavyko. Įsidiekite naują „Midnight Commander“ versiją."
 
-#: src/ext.c:478
 #, c-format
 msgid " ~/%s file error "
 msgstr " „ „~/%s“ bylos klaida "
 
-#: src/ext.c:479
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
@@ -1608,27 +1210,21 @@ msgstr ""
 "3.0 versijoje pasikeitė „~/%s“ bylos formatas. Galite ją nukopijuoti iš „%"
 "smc.ext“ arba naudoti tą bylą kaip pavyzdį naujos parašymui."
 
-#: src/file.c:123 src/tree.c:594
 msgid " Copy "
 msgstr " Kopijuoti "
 
-#: src/file.c:124 src/tree.c:635
 msgid " Move "
 msgstr " Perkelti "
 
-#: src/file.c:125 src/tree.c:709
 msgid " Delete "
 msgstr " Šalinti "
 
-#: src/file.c:218
 msgid " Invalid target mask "
 msgstr " Netaisyklingas paskirties formatas "
 
-#: src/file.c:318
 msgid " Cannot make the hardlink "
 msgstr " Nepavyko sukurti „hardlink“ "
 
-#: src/file.c:362
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -1637,7 +1233,6 @@ msgstr ""
 " Nepavyko perskaityti duotosios nuorodos „%s“ \n"
 " %s "
 
-#: src/file.c:373
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -1647,7 +1242,6 @@ msgstr ""
 "\n"
 " „Stabilių simb. nuorodų“ nustatymas bus išjungtas "
 
-#: src/file.c:422
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -1656,7 +1250,6 @@ msgstr ""
 " Nepavyko pakeisti „%s“ režimo \n"
 " %s "
 
-#: src/file.c:495
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1665,7 +1258,6 @@ msgstr ""
 " Nepavyko perrašyti katalogo „%s“ \n"
 " %s "
 
-#: src/file.c:507
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -1674,12 +1266,10 @@ msgstr ""
 " Nepavyko nustatyti bylos „%s“ būklės („stat“) \n"
 " %s "
 
-#: src/file.c:517 src/file.c:1058
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " „%s“ ir „%s“ yra ta pati byla "
 
-#: src/file.c:552
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1688,7 +1278,6 @@ msgstr ""
 " Nepavyko sukurti specialiosios bylos „%s“ \n"
 " %s "
 
-#: src/file.c:562 src/file.c:789
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1697,7 +1286,6 @@ msgstr ""
 " Nepavyko pakeisti bylos „%s“ nuosavybės teisių \n"
 " %s "
 
-#: src/file.c:570 src/file.c:800
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1706,7 +1294,6 @@ msgstr ""
 " Nepavyko pakeisti bylos „%s“ režimo \n"
 " %s "
 
-#: src/file.c:583
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1715,11 +1302,9 @@ msgstr ""
 " Nepavyko atverti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:593
 msgid " Reget failed, about to overwrite file "
 msgstr " Atsiuntimas iš naujo nepavyko, bus perrašyta byla "
 
-#: src/file.c:600
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1728,7 +1313,6 @@ msgstr ""
 " Nepavyko nustatyti bylos „%s“ būklės („fstat“) \n"
 " %s "
 
-#: src/file.c:620
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1737,7 +1321,6 @@ msgstr ""
 " Nepavyko atverti paskirties bylos „%s“ \n"
 " %s "
 
-#: src/file.c:634
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1746,7 +1329,6 @@ msgstr ""
 " Nepavyko nustatyti paskirties bylos „%s“ būklės („fstat“) \n"
 " %s "
 
-#: src/file.c:666
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1755,7 +1337,6 @@ msgstr ""
 " Nepavyko perskaityti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:697
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1764,11 +1345,9 @@ msgstr ""
 " Nepavyko įrašyti į bylą „%s“ \n"
 " %s "
 
-#: src/file.c:715
 msgid "(stalled)"
 msgstr "(sustojo)"
 
-#: src/file.c:759
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1777,7 +1356,6 @@ msgstr ""
 " Nepavyko užverti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:769
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1786,19 +1364,15 @@ msgstr ""
 " Nepavyko užverti paskirties bylos „%s“ \n"
 " %s "
 
-#: src/file.c:780
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Gauta nepilna byla. Ar ją išlaikyti?"
 
-#: src/file.c:781
 msgid "&Delete"
 msgstr "Š&alinti"
 
-#: src/file.c:781
 msgid "&Keep"
 msgstr "Išlai&kyti"
 
-#: src/file.c:841
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1807,7 +1381,6 @@ msgstr ""
 " Nepavyko nustatyti katalogo „%s“ būklės („stat“) \n"
 " %s "
 
-#: src/file.c:866
 #, c-format
 msgid ""
 " Source \"%s\" is not a directory \n"
@@ -1816,7 +1389,6 @@ msgstr ""
 " Šaltinis „%s“ nėra katalogas \n"
 " %s "
 
-#: src/file.c:875
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1825,7 +1397,6 @@ msgstr ""
 " Negalima kopijuoti ciklinės simbolinės nuorodos \n"
 " „%s“ "
 
-#: src/file.c:909 src/file.c:1928 src/tree.c:649
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1834,7 +1405,6 @@ msgstr ""
 " Paskirtis „%s“ turi būti katalogas \n"
 " %s "
 
-#: src/file.c:925
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1843,7 +1413,6 @@ msgstr ""
 " Nepavyko sukurti paskirties katalogo „%s“ \n"
 " %s "
 
-#: src/file.c:941
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1852,7 +1421,6 @@ msgstr ""
 " Nepavyko pakeisti „%s“ nuosavybės \n"
 " %s "
 
-#: src/file.c:1039
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1861,12 +1429,10 @@ msgstr ""
 " Nepavyko patikrinti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:1065
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nepavyko perrašyti katalogo „%s“ "
 
-#: src/file.c:1100
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1875,7 +1441,6 @@ msgstr ""
 " Nepavyko perkelti bylos „%s“ į „%s“ \n"
 " %s "
 
-#: src/file.c:1124
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1884,24 +1449,20 @@ msgstr ""
 " Nepavyko pašalinti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:1176
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " „%s“ ir „%s“ yra tas pats katalogas "
 
-#: src/file.c:1195
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Nepavyko perrašyti katalogo „%s“ %s "
 
-#: src/file.c:1199
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
 " Nepavyko perrašyti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:1225
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -1910,7 +1471,6 @@ msgstr ""
 " Nepavyko perkelti katalogo „%s“ į „%s“ \n"
 " %s "
 
-#: src/file.c:1295
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -1919,7 +1479,6 @@ msgstr ""
 " Nepavyko pašalinti bylos „%s“ \n"
 " %s "
 
-#: src/file.c:1355 src/file.c:1424 src/file.c:1452
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -1928,73 +1487,56 @@ msgstr ""
 " Nepavyko pašalinti katalogo „%s“ \n"
 " %s "
 
-#: src/file.c:1600
 msgid "1Copy"
 msgstr "1Kopijuoti"
 
-#: src/file.c:1600
 msgid "1Move"
 msgstr "1Perkelti"
 
-#: src/file.c:1600
 msgid "1Delete"
 msgstr "1Šalinti"
 
-#: src/file.c:1615
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f „%s“%m"
 
-#: src/file.c:1617
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1619 vfs/fish.c:576
 msgid "file"
 msgstr "bylą"
 
-#: src/file.c:1619
 msgid "files"
 msgstr "bylas"
 
-#: src/file.c:1619
 msgid "directory"
 msgstr "katalogą"
 
-#: src/file.c:1619
 msgid "directories"
 msgstr "katalogus"
 
-#: src/file.c:1620
 msgid "files/directories"
 msgstr "bylas/katalogus"
 
-#: src/file.c:1620
 msgid " with source mask:"
 msgstr ", tokiu formatu:"
 
-#: src/file.c:1620
 msgid " to:"
 msgstr " į:"
 
-#: src/file.c:1764
 msgid " Cannot operate on \"..\"! "
 msgstr " Negalima dirbti su „..“! "
 
-#: src/file.c:1820
 msgid " Sorry, I could not put the job in background "
 msgstr " Nepavyko nukelti darbo į foną "
 
-#: src/file.c:2078 src/view.c:436
 msgid "&Retry"
 msgstr "&Iš naujo"
 
-#: src/file.c:2079 src/file.c:2142 src/filegui.c:208 src/filegui.c:516
 msgid "&Abort"
 msgstr "Nutr&aukti"
 
-#: src/file.c:2131
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2004,7 +1546,6 @@ msgstr ""
 "   Katalogas netuščias.   \n"
 "   Šalinti rekursyviai?   "
 
-#: src/file.c:2133
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2014,144 +1555,111 @@ msgstr ""
 "   Fonini procesas: Katalogas netuščias. \n"
 "   alinti rekursyviai?    "
 
-#: src/file.c:2135
 msgid " Delete: "
 msgstr " Šalinti: "
 
-#: src/file.c:2141 src/filegui.c:518
 msgid "Non&e"
 msgstr "&Joks"
 
-#: src/filegui.c:322
 #, c-format
 msgid "ETA %d:%02d.%02d"
 msgstr "Liko %d:%02d.%02d"
 
-#: src/filegui.c:345
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f MB/s"
 
-#: src/filegui.c:348
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f KB/s"
 
-#: src/filegui.c:351
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#: src/filegui.c:374
 msgid "File"
 msgstr "Byla"
 
-#: src/filegui.c:397
 msgid "Count"
 msgstr "Kiekis"
 
-#: src/filegui.c:418
 msgid "Bytes"
 msgstr "Baitai"
 
-#: src/filegui.c:452
 msgid "Source"
 msgstr "Iš"
 
-#: src/filegui.c:475
 msgid "Target"
 msgstr "Į"
 
-#: src/filegui.c:497
 msgid "Deleting"
 msgstr "Trinama"
 
-#: src/filegui.c:515
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Paskirties byla „%s“ jau yra!"
 
-#: src/filegui.c:517
 msgid "If &size differs"
 msgstr "Jei &skiriasi dydis"
 
-#: src/filegui.c:519
 msgid "&Update"
 msgstr "Atna&ujinti"
 
-#: src/filegui.c:521
 msgid "Overwrite all targets?"
 msgstr "Perrašyti visas paskirtis?"
 
-#: src/filegui.c:522
 msgid "&Reget"
 msgstr "Iš nau&jo"
 
-#: src/filegui.c:523
 msgid "A&ppend"
 msgstr "&Papildyti"
 
-#: src/filegui.c:526
 msgid "Overwrite this target?"
 msgstr "Perrašyti šią paskirtį?"
 
-#: src/filegui.c:528
 #, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Paskirties data: %s, dydis %llu"
 
-#: src/filegui.c:529
 #, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Šaltinio data: %s, dydis %llu"
 
-#: src/filegui.c:531
 #, c-format
 msgid "Target date: %s, size %u"
 msgstr "Paskirties data: %s, dydis %u"
 
-#: src/filegui.c:532
 #, c-format
 msgid "Source date: %s, size %u"
 msgstr "Šaltinio data: %s, dydis %u"
 
-#: src/filegui.c:608
 msgid " File exists "
 msgstr " Byla jau yra "
 
-#: src/filegui.c:610
 msgid " Background process: File exists "
 msgstr " Foninis procesas: byla jau yra "
 
-#: src/filegui.c:732
 msgid "preserve &Attributes"
 msgstr "Išsaugoti &atributus"
 
-#: src/filegui.c:734
 msgid "follow &Links"
 msgstr "Sekti &nuorodomis"
 
-#: src/filegui.c:736
 msgid "to:"
 msgstr "į:"
 
-#: src/filegui.c:737
 msgid "&Using shell patterns"
 msgstr "Na&udojant aplinkos išraiškas"
 
-#: src/filegui.c:758
 msgid "&Background"
 msgstr "&Fonas"
 
-#: src/filegui.c:768
 msgid "&Stable Symlinks"
 msgstr "&Stabilios simb. nuor."
 
-#: src/filegui.c:770
 msgid "&Dive into subdir if exists"
 msgstr "&Jei yra, &ir pakatalogius"
 
-#: src/filegui.c:948
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2160,204 +1668,155 @@ msgstr ""
 "Netaisyklingas šaltinio formatas „%s“ \n"
 " %s "
 
-#: src/find.c:117
 msgid "&Suspend"
 msgstr "&Stabdyti"
 
-#: src/find.c:118
 msgid "Con&tinue"
 msgstr "&Tęsti"
 
-#: src/find.c:119
 msgid "&Chdir"
 msgstr "&Eiti į katal."
 
-#: src/find.c:120
 msgid "&Again"
 msgstr "Iš n&aujo"
 
-#: src/find.c:121 src/subshell.c:324
 msgid "&Quit"
 msgstr "&Išeiti"
 
-#: src/find.c:122 src/panelize.c:69
 msgid "Pane&lize"
 msgstr "Į skyde&lį"
 
-#: src/find.c:123
 msgid "&View - F3"
 msgstr "&Rodyti - F3"
 
-#: src/find.c:124
 msgid "&Edit - F4"
 msgstr "K&eisti - F4 "
 
-#: src/find.c:198
 msgid "find Re&cursively"
 msgstr "Rasti re&kursyviai"
 
-#: src/find.c:207
 msgid "Start at:"
 msgstr "Pradėti nuo:"
 
-#: src/find.c:207
 msgid "Filename:"
 msgstr "Bylos pavad.:"
 
-#: src/find.c:207
 msgid "Content: "
 msgstr "Turinys: "
 
-#: src/find.c:208 src/main.c:798 src/main.c:822
 msgid "&Tree"
 msgstr "&Medis"
 
-#: src/find.c:257 src/find.c:901
 msgid "Find File"
 msgstr "Rasti bylą"
 
-#: src/find.c:531
 #, c-format
 msgid "Grepping in %s"
 msgstr "Ieškoma byloje %s"
 
-#: src/find.c:643
 msgid "Finished"
 msgstr "Baigta"
 
-#: src/find.c:667 src/view.c:1537
 #, c-format
 msgid "Searching %s"
 msgstr "Ieškoma %s"
 
-#: src/find.c:826 src/find.c:927
 msgid "Searching"
 msgstr "Ieškoma"
 
-#: src/help.c:293
 msgid " Help file format error\n"
 msgstr " Pagalbos bylos formato klaida\n"
 
-#: src/help.c:332
 msgid " Internal bug: Double start of link area "
 msgstr " Vidinė klaida: „Double start of link area“ "
 
-#: src/help.c:569 src/help.c:793
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " Nepavyko rasti „%s“ mazgo pagalbos byloje "
 
-#: src/help.c:831
 msgid "Index"
 msgstr "Rodyklė"
 
-#: src/help.c:833
 msgid "Prev"
 msgstr "Atgal"
 
-#: src/hotlist.c:116
 msgid "&Move"
 msgstr "&Perkelti"
 
-#: src/hotlist.c:117 src/panelize.c:68
 msgid "&Remove"
 msgstr "Ša&linti"
 
-#: src/hotlist.c:118 src/hotlist.c:843 src/hotlist.c:946
 msgid "&Append"
 msgstr "P&apildyti"
 
-#: src/hotlist.c:119 src/hotlist.c:841 src/hotlist.c:944
 msgid "&Insert"
 msgstr "Įterpt&i"
 
-#: src/hotlist.c:120
 msgid "New &Entry"
 msgstr "Naujas į&rašas"
 
-#: src/hotlist.c:121
 msgid "New &Group"
 msgstr "Nauja &grupė"
 
-#: src/hotlist.c:123
 msgid "&Up"
 msgstr "A&ukštyn"
 
-#: src/hotlist.c:124
 msgid "&Add current"
 msgstr "Pridėti d&abartinį"
 
-#: src/hotlist.c:126
 msgid "&Refresh"
 msgstr "A&tnaujinti"
 
-#: src/hotlist.c:127
 msgid "Fr&ee VFSs now"
 msgstr "Atlais&vinti VFS dabar"
 
-#: src/hotlist.c:129
 msgid "Change &To"
 msgstr "Ei&ti į"
 
-#: src/hotlist.c:179
 msgid "Subgroup - press ENTER to see list"
 msgstr "Yra vidinių grupių - ENTER jų sąrašui"
 
-#: src/hotlist.c:612
 msgid "Active VFS directories"
 msgstr "Aktyvūs VFS katalogai"
 
-#: src/hotlist.c:615
 msgid "Directory hotlist"
 msgstr "Katalogų sąrašas"
 
-#: src/hotlist.c:643
 msgid " Directory path "
 msgstr " Katalogo kelias "
 
-#: src/hotlist.c:646 src/hotlist.c:695
 msgid " Directory label "
 msgstr " Katalogo žymė "
 
-#: src/hotlist.c:671
 #, c-format
 msgid "Moving %s"
 msgstr "Perkeliama „%s“"
 
-#: src/hotlist.c:916
 msgid "New hotlist entry"
 msgstr "Naujas sąrašo punktas"
 
-#: src/hotlist.c:916
 msgid "Directory label"
 msgstr "Katalogo žymė"
 
-#: src/hotlist.c:917
 msgid "Directory path"
 msgstr "Katalogo kelias"
 
-#: src/hotlist.c:1002
 msgid " New hotlist group "
 msgstr " Nauja sąrašo grupė "
 
-#: src/hotlist.c:1002
 msgid "Name of new group"
 msgstr "Naujos grupės pavadinimas"
 
-#: src/hotlist.c:1017
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "„%s“ žymė:"
 
-#: src/hotlist.c:1024
 msgid " Add to hotlist "
 msgstr " Pridėti į sąrašą  "
 
-#: src/hotlist.c:1062
 msgid " Remove: "
 msgstr " Šalinti: "
 
-#: src/hotlist.c:1066
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -2367,196 +1826,152 @@ msgstr ""
 " Grupė netuščia.\n"
 " Šalinti?"
 
-#: src/hotlist.c:1408
 msgid " Top level group "
 msgstr " Aukščiausio lygio grupė "
 
-#: src/hotlist.c:1431
 msgid "MC was unable to write ~/"
 msgstr "Nepavyko įrašyti ~/"
 
-#: src/hotlist.c:1432
 msgid " file, your old hotlist entries were not deleted"
 msgstr " bylos, seni įrašai išliko"
 
-#: src/hotlist.c:1434
 msgid " Hotlist Load "
 msgstr " Katalogų sąrašo įkėlimas "
 
-#: src/info.c:77
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:94
 #, c-format
 msgid "File:       %s"
 msgstr "Byla:       %s"
 
-#: src/info.c:106
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
 msgstr "Laisvi mazgai: %d (%d%%) iš %d"
 
-#: src/info.c:112
 msgid "No node information"
 msgstr "Nėra informacijos apie mazgą"
 
-#: src/info.c:120
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Laisvos vietos: %s (%d%%) iš %s"
 
-#: src/info.c:124
 msgid "No space information"
 msgstr "Nėra informacijos apie vietą"
 
-#: src/info.c:128
 #, c-format
 msgid "Type:      %s "
 msgstr "Tipas:     %s "
 
-#: src/info.c:128
 msgid "non-local vfs"
 msgstr "nevietinė VFS"
 
-#: src/info.c:134
 #, c-format
 msgid "Device:    %s"
 msgstr "Įtaisas:   %s"
 
-#: src/info.c:138
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Bylų sistema: %s"
 
-#: src/info.c:143
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Pasiekta:  %s"
 
-#: src/info.c:147
 #, c-format
 msgid "Modified:  %s"
 msgstr "Keista:    %s"
 
-#: src/info.c:151
 #, c-format
 msgid "Created:   %s"
 msgstr "Sukurta:   %s"
 
-#: src/info.c:165
 #, c-format
 msgid "Size:      %s"
 msgstr "Dydis:     %s"
 
-#: src/info.c:168
 #, c-format
 msgid " (%ld block)"
 msgstr " (%ld blokas)"
 
-#: src/info.c:168
 #, c-format
 msgid " (%ld blocks)"
 msgstr " (%ld blokų)"
 
-#: src/info.c:174
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Savininkas: %s/%s"
 
-#: src/info.c:179
 #, c-format
 msgid "Links:     %d"
 msgstr "Nuorodos:   %d"
 
-#: src/info.c:183
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Režimas:    %s (%04o)"
 
-#: src/info.c:188
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Vieta:      %Xh:%Xh"
 
-#: src/info.c:198
 msgid "File:       None"
 msgstr "Byla:       nėra"
 
-#: src/layout.c:151
 msgid "&Vertical"
 msgstr "&Vertikalus"
 
-#: src/layout.c:152
 msgid "&Horizontal"
 msgstr "&horizontalus"
 
-#: src/layout.c:162
 msgid "&Xterm window title"
 msgstr "„&Xterm“ lango antraštė"
 
-#: src/layout.c:163
 msgid "h&Intbar visible"
 msgstr "Patar&imai"
 
-#: src/layout.c:164
 msgid "&Keybar visible"
 msgstr "&Klavišai"
 
-#: src/layout.c:165
 msgid "command &Prompt"
 msgstr "Komandų eilu&tė"
 
-#: src/layout.c:166
 msgid "show &Mini status"
 msgstr "&Mini būsena"
 
-#: src/layout.c:167
 msgid "menu&Bar visible"
 msgstr "&Meniu juosta"
 
-#: src/layout.c:168
 msgid "&Equal split"
 msgstr "P&o lygiai"
 
-#: src/layout.c:169
 msgid "pe&Rmissions"
 msgstr "Lei&dimai"
 
-#: src/layout.c:170
 msgid "&File types"
 msgstr "&Bylų &tipai"
 
-#: src/layout.c:366
 msgid " Panel split "
 msgstr " Skydų dalijimas "
 
-#: src/layout.c:367
 msgid " Highlight... "
 msgstr " Paryškinimas "
 
-#: src/layout.c:368 src/option.c:124
 msgid " Other options "
 msgstr " Kiti nustatymai "
 
-#: src/layout.c:369
 msgid "output lines"
 msgstr "išvesties eilutės"
 
-#: src/layout.c:431
 msgid "Layout"
 msgstr "Išdėstymas"
 
-#: src/learn.c:74
 msgid "Learn keys"
 msgstr "Mokyti klavišų"
 
-#: src/learn.c:80
 msgid " Teach me a key "
 msgstr " Išmokyk mane klavišo "
 
-#: src/learn.c:81
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -2577,21 +1992,17 @@ msgstr ""
 "Jei norite atsisakyti, paspauskite „Escape“\n"
 "ir palaukite."
 
-#: src/learn.c:115
 msgid " Cannot accept this key "
 msgstr " Nepavyko priimti šio klavišo "
 
-#: src/learn.c:116
 #, c-format
 msgid " You have entered \"%s\""
 msgstr "Jūs įvedėte „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
-#: src/learn.c:165
 msgid "OK"
 msgstr "OK"
 
-#: src/learn.c:173
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2599,11 +2010,9 @@ msgstr ""
 "Panašu, kad visi klavišai jau veikė\n"
 "gerai. Tai puiku."
 
-#: src/learn.c:175
 msgid "&Discard"
 msgstr "A&tmesti"
 
-#: src/learn.c:180
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2611,19 +2020,15 @@ msgstr ""
 "Puiku! Turite išsamią terminalo duomenų bazę!\n"
 "Visi klavišai veikia puikiai."
 
-#: src/learn.c:288
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Paspauskite visus klavišus, parodytus aukščiau. Po to"
 
-#: src/learn.c:292
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "patikrinkite, kurie iš jų nepažymėti „OK“. Paspauskite jį tarpu"
 
-#: src/learn.c:296
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ar pele ir nurodykite jį. Naudokitės TAB perėjimui prie kitų."
 
-#: src/main.c:422
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2634,259 +2039,195 @@ msgstr ""
 " esamąjį. Galbūt jį ištrynėte arba naudojotės „su“, \n"
 " norėdami gauti platesnius leidimus? "
 
-#: src/main.c:466 src/screen.c:1980
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:467
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Ar tikrai norite palikti „Midnight Commander“? "
 
-#: src/main.c:795 src/main.c:819
 msgid "&Listing mode..."
 msgstr "Rod&ymo režimas..."
 
-#: src/main.c:796 src/main.c:820
 msgid "&Quick view     C-x q"
 msgstr "&Greitai rodyti C-x q"
 
-#: src/main.c:797 src/main.c:821
 msgid "&Info           C-x i"
 msgstr "&Informacija    C-x i"
 
-#: src/main.c:800 src/main.c:824
 msgid "&Sort order..."
 msgstr "Rūš. t&varka..."
 
-#: src/main.c:802 src/main.c:826
 msgid "&Filter..."
 msgstr "&Filtras..."
 
-#: src/main.c:806 src/main.c:830
 msgid "&Network link..."
 msgstr "Ti&nklo ryšys..."
 
-#: src/main.c:808 src/main.c:832
 msgid "FT&P link..."
 msgstr "FT&P ryšys..."
 
-#: src/main.c:809 src/main.c:833
 msgid "S&hell link..."
 msgstr "Apli&nkos ryšys..."
 
-#: src/main.c:811 src/main.c:835
 msgid "SM&B link..."
 msgstr "SM&B ryšys..."
 
-#: src/main.c:815 src/main.c:839
 msgid "&Rescan         C-r"
 msgstr "A&tnaujinti       C-r"
 
-#: src/main.c:843
 msgid "&User menu          F2"
 msgstr "Naudot. meni&u       F2"
 
-#: src/main.c:844
 msgid "&View               F3"
 msgstr "&Rodyti              F3"
 
-#: src/main.c:845
 msgid "Vie&w file...         "
 msgstr "Rodyti b&ylą...       "
 
-#: src/main.c:846
 msgid "&Filtered view     M-!"
 msgstr "&Filtruotas vaizdas M-!"
 
-#: src/main.c:847
 msgid "&Edit               F4"
 msgstr "K&eisti              F4"
 
-#: src/main.c:848
 msgid "&Copy               F5"
 msgstr "&Kopijuoti           F5"
 
-#: src/main.c:849
 msgid "c&Hmod           C-x c"
 msgstr "R&ežimai          C-x c"
 
-#: src/main.c:850
 msgid "&Link            C-x l"
 msgstr "N&uoroda          C-x l"
 
-#: src/main.c:851
 msgid "&SymLink         C-x s"
 msgstr "&Simb. nuoroda    C-x s"
 
-#: src/main.c:852
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "Keisti s&imb.n. C-x C-s"
 
-#: src/main.c:853
 msgid "ch&Own           C-x o"
 msgstr "Keis&ti savin.    C-x o"
 
-#: src/main.c:854
 msgid "&Advanced chown       "
 msgstr "Keisti s&avin. išsamiau"
 
-#: src/main.c:855
 msgid "&Rename/Move        F6"
 msgstr "Pe&rkelti            F6"
 
-#: src/main.c:856
 msgid "&Mkdir              F7"
 msgstr "&Kurti katalogą      F7"
 
-#: src/main.c:857
 msgid "&Delete             F8"
 msgstr "Ša&linti             F8"
 
-#: src/main.c:858
 msgid "&Quick cd          M-c"
 msgstr "Gr&eitas „cd“       M-c"
 
-#: src/main.c:860
 msgid "select &Group      M-+"
 msgstr "Žymėti &grupę       M-+"
 
-#: src/main.c:861
 msgid "u&Nselect group    M-\\"
 msgstr "Atžymėti &grupę     M-\\"
 
-#: src/main.c:862
 msgid "reverse selec&Tion M-*"
 msgstr "Žymėti at&virkščiai M-*"
 
-#: src/main.c:864
 msgid "e&Xit              F10"
 msgstr "&Išeiti             F10"
 
-#: src/main.c:872
 msgid "&Directory tree"
 msgstr "&Katalogų medis"
 
-#: src/main.c:873
 msgid "&Find file            M-?"
 msgstr "&Rasti bylą             M-?"
 
-#: src/main.c:874
 msgid "s&Wap panels          C-u"
 msgstr "S&ukeisti skydus        C-u"
 
-#: src/main.c:875
 msgid "switch &Panels on/off C-o"
 msgstr "Įjungti/išj. skydus    C-o"
 
-#: src/main.c:876
 msgid "&Compare directories  C-x d"
 msgstr "Paly&ginti katalogus  C-x d"
 
-#: src/main.c:877
 msgid "e&Xternal panelize    C-x !"
 msgstr "Iš&orinis skydelis    C-x !"
 
-#: src/main.c:878
 msgid "show directory s&Izes"
 msgstr "Rodyt&i katalogų dydžius"
 
-#: src/main.c:880
 msgid "command &History"
 msgstr "Komandų is&torija"
 
-#: src/main.c:881
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Katalogų są&rašas       C-\\"
 
-#: src/main.c:883
 msgid "&Active VFS list      C-x a"
 msgstr "Aktyvių VFS sąrašas  C-x a"
 
-#: src/main.c:886
 msgid "&Background jobs      C-x j"
 msgstr "Foniniai dar&bai      C-x j"
 
-#: src/main.c:890
 msgid "&Undelete files (ext2fs only)"
 msgstr "Atk&urti bylas (tik „ext2“)"
 
-#: src/main.c:893
 msgid "&Listing format edit"
 msgstr "Keisti r&odymo formatą"
 
-#: src/main.c:898
 msgid "Edit &extension file"
 msgstr "K&eisti plėtinių bylą"
 
-#: src/main.c:899
 msgid "Edit &menu file"
 msgstr "Keisti &meniu bylą"
 
-#: src/main.c:901
 msgid "Edit edi&tor menu file"
 msgstr "Keisti red. meniu b&ylą"
 
-#: src/main.c:902
 msgid "Edit &syntax file"
 msgstr "Keisti &sintaksės bylą"
 
-#: src/main.c:908
 msgid "&Configuration..."
 msgstr "Konfigūra&cija..."
 
-#: src/main.c:909
 msgid "&Layout..."
 msgstr "&Išdėstymas..."
 
-#: src/main.c:910
 msgid "c&Onfirmation..."
 msgstr "&Patvirtinimai..."
 
-#: src/main.c:911
 msgid "&Display bits..."
 msgstr "Iš&vesties bitai..."
 
-#: src/main.c:914
 msgid "&Virtual FS..."
 msgstr "&Virtuali bylų sistema..."
 
-#: src/main.c:917
 msgid "&Save setup"
 msgstr "Įrašyti nu&statymus"
 
-#: src/main.c:928
 msgid " &Above "
 msgstr " &Aukščiau "
 
-#: src/main.c:928
 msgid " &Left "
 msgstr " &Kairysis skydas "
 
-#: src/main.c:932
 msgid " &File "
 msgstr " &Byla "
 
-#: src/main.c:935
 msgid " &Command "
 msgstr " &Komanda "
 
-#: src/main.c:938
 msgid " &Options "
 msgstr " N&ustatymai "
 
-#: src/main.c:941
 msgid " &Below "
 msgstr " Ž&emiau "
 
-#: src/main.c:941
 msgid " &Right "
 msgstr " &Dešinysis skydas "
 
-#: src/main.c:984
 msgid " Information "
 msgstr " Informacija "
 
-#: src/main.c:986
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this case you'll need to do a   \n"
@@ -2897,32 +2238,25 @@ msgstr ""
 " katalogo turinį. Tuomet jį atnaujinti reikia rankiniu \n"
 " būdu - žr. naudotojo vadovą.                          "
 
-#: src/main.c:1209 src/screen.c:2260
 msgid "Menu"
 msgstr "Meniu"
 
-#: src/main.c:1343
 msgid "The TERM environment variable is unset!\n"
 msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 
-#: src/main.c:1645 src/textconf.c:117
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:1857
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[nustatymai] [katalogas] [kito skydelio katalogas]\n"
 
-#: src/main.c:1861
 msgid "+number"
 msgstr "+skaičius"
 
-#: src/main.c:1862
 msgid "Set initial line number for the internal editor"
 msgstr "Nustatykite pradinės eilutės numerį redaktoriuje"
 
-#: src/main.c:1864
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2932,7 +2266,6 @@ msgstr ""
 "Prašome siųsti klaidų pranešimus (taip pat ir „mc -V“ išvestį)\n"
 "į mc-devel@gnome.org\n"
 
-#: src/main.c:1879
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2976,91 +2309,69 @@ msgstr ""
 "   brightcyan, lightgray ir white\n"
 "\n"
 
-#: src/main.c:1956
 msgid "Displays this help message"
 msgstr "Parodo šį pagalbos pranešimą"
 
-#: src/main.c:1958
 msgid "Displays the current version"
 msgstr "Parodo dabartinę versiją"
 
-#: src/main.c:1962
 msgid "Forces xterm features"
 msgstr "Priverčia naudoti „xterm“ galimybes"
 
-#: src/main.c:1964
 msgid "Disable mouse support in text version"
 msgstr "Išjungia pelę tekstinėje versijoje"
 
-#: src/main.c:1967
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Bando naudoti „termcap“ vietoj „terminfo“"
 
-#: src/main.c:1970
 msgid "Resets soft keys on HP terminals"
 msgstr "Iš naujo nustato „soft keys“ HP terminaluose"
 
-#: src/main.c:1972
 msgid "To run on slow terminals"
 msgstr "Leidžia lėtame terminale"
 
-#: src/main.c:1974
 msgid "Use stickchars to draw"
 msgstr "Naudoja alternatyvią pseudografiką"
 
-#: src/main.c:1978
 msgid "Requests to run in black and white"
 msgstr "Paleidžia nespalvotu režimu"
 
-#: src/main.c:1980
 msgid "Request to run in color mode"
 msgstr "Paleidžia spalvotu režimu"
 
-#: src/main.c:1982
 msgid "Specifies a color configuration"
 msgstr "Nurodo spalvų konfigūraciją"
 
-#: src/main.c:1984
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Padeda pakeisti spalvų schemą"
 
-#: src/main.c:1989
 msgid "Log ftp dialog to specified file"
 msgstr "Veda FTP dialogo žurnalą į nurodytą bylą"
 
-#: src/main.c:1992
 msgid "Set debug level"
 msgstr "Nurodo „debug“ lygį"
 
-#: src/main.c:1998
 msgid "Print data directory"
 msgstr "Parodo duomenų katalogą"
 
-#: src/main.c:2000
 msgid "Print last working directory to specified file"
 msgstr "Įrašo paskutinį esamą katalogą į nurodytą bylą"
 
-#: src/main.c:2005
 msgid "Enables subshell support (default)"
 msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
 
-#: src/main.c:2007
 msgid "Disables subshell support"
 msgstr "Išjungia „subshell“ palaikymą"
 
-#: src/main.c:2012
 msgid "Launches the file viewer on a file"
 msgstr "Parodo bylos turinį"
 
-#: src/main.c:2015
 msgid "Edits one file"
 msgstr "Keičia vieną bylą"
 
-#: src/main.c:2229
 msgid " Notice "
 msgstr " Pastaba "
 
-#: src/main.c:2230
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3069,294 +2380,222 @@ msgstr ""
 " „Midnight Commander“ savo nustatymus laiko \n"
 " „~/.mc“ kataloge, bylos perkeltos į jį.\n"
 
-#: src/option.c:55
 msgid "safe de&Lete"
 msgstr "Saugus ša&linimas"
 
-#: src/option.c:56
 msgid "cd follows lin&Ks"
 msgstr "„cd“ seka n&uorodomis"
 
-#: src/option.c:57
 msgid "L&ynx-like motion"
 msgstr "„L&ynx“ elgesys"
 
-#: src/option.c:58
 msgid "rotatin&G dash"
 msgstr "&Sukti brūkšnelį"
 
-#: src/option.c:59
 msgid "co&Mplete: show all"
 msgstr "Visi baigimo variant."
 
-#: src/option.c:60
 msgid "&Use internal view"
 msgstr "Žiūrėti s&u MC"
 
-#: src/option.c:61
 msgid "use internal ed&It"
 msgstr "Ke&isti su MC"
 
-#: src/option.c:62
 msgid "auto m&Enus"
 msgstr "Autom. &meniu"
 
-#: src/option.c:63
 msgid "&Auto save setup"
 msgstr "&Autom. įraš. nustat."
 
-#: src/option.c:64
 msgid "shell &Patterns"
 msgstr "A&plinkos šablonai"
 
-#: src/option.c:65
 msgid "Compute &Totals"
 msgstr "Skaičiuo&ti sumas"
 
-#: src/option.c:66
 msgid "&Verbose operation"
 msgstr "Išsa&mios operacijos"
 
-#: src/option.c:68
 msgid "&Fast dir reload"
 msgstr "&Greitai atnaujinti"
 
-#: src/option.c:69
 msgid "mi&X all files"
 msgstr "Maišyti visas &bylas"
 
-#: src/option.c:70
 msgid "&Drop down menus"
 msgstr "Išsklei&džiami meniu"
 
-#: src/option.c:71
 msgid "ma&Rk moves down"
 msgstr "Žymin&t eiti žemyn"
 
-#: src/option.c:72
 msgid "show &Hidden files"
 msgstr "Rodyti s&lepiam. bylas"
 
-#: src/option.c:73
 msgid "show &Backup files"
 msgstr "R&odyti kopijų bylas"
 
-#: src/option.c:84
 msgid "&Never"
 msgstr "&Niekada"
 
-#: src/option.c:85
 msgid "on dumb &Terminals"
 msgstr "Kvailuose &terminaluose"
 
-#: src/option.c:86
 msgid "Alwa&ys"
 msgstr "Visa&da"
 
-#: src/option.c:122
 msgid " Panel options "
 msgstr " Skydų nustatymai "
 
-#: src/option.c:123
 msgid " Pause after run... "
 msgstr " Pauzė po paleidimo... "
 
-#: src/option.c:169
 msgid "Configure options"
 msgstr "Nustatymai"
 
-#: src/panelize.c:67
 msgid "&Add new"
 msgstr "Pridėti n&aują"
 
-#: src/panelize.c:154 src/panelize.c:420
 msgid "External panelize"
 msgstr "Išorinis skydelis"
 
-#: src/panelize.c:169
 msgid "Command"
 msgstr "Komanda"
 
-#: src/panelize.c:185 src/panelize.c:242 src/panelize.c:313 src/panelize.c:334
 msgid "Other command"
 msgstr "Kita komanda"
 
-#: src/panelize.c:226
 msgid " Add to external panelize "
 msgstr " Įdėti į iš&orinį skydelį "
 
-#: src/panelize.c:227
 msgid " Enter command label: "
 msgstr " Įveskite komandos žymę: "
 
-#: src/panelize.c:267
 msgid " Cannot run external panelize in a non-local directory "
 msgstr " Negalima sudėti į išorinį skydą nevietiniame kataloge "
 
-#: src/panelize.c:316
 msgid "Find rejects after patching"
 msgstr "Rasti atmetimus po „patch“"
 
-#: src/panelize.c:317
 msgid "Find *.orig after patching"
 msgstr "Rasti „*.orig“ po „patch“"
 
-#: src/panelize.c:318
 msgid "Find SUID and SGID programs"
 msgstr "Rasti SUID ir SGID programas"
 
-#: src/panelize.c:369
 msgid "Cannot invoke command."
 msgstr "Nepavyko iškviesti komandos."
 
-#: src/panelize.c:420
 msgid "Pipe close failed"
 msgstr "Konvejerio užvėrimas nepavyko"
 
-#: src/popt.c:551
 msgid "missing argument"
 msgstr "trūksta argumento"
 
-#: src/popt.c:553
 msgid "unknown option"
 msgstr "nežinomas nustatymas"
 
-#: src/popt.c:559
 msgid "invalid numeric value"
 msgstr "netinkama skaitmeninė reikšmė"
 
-#: src/popthelp.c:37
 msgid "Show this help message"
 msgstr "Rodyti ši pagalbos pranešimą"
 
-#: src/popthelp.c:38
 msgid "Display brief usage message"
 msgstr "rodyti trumpą naudojimo pranešimą"
 
-#: src/popthelp.c:68
 msgid "ARG"
 msgstr "ARG"
 
-#: src/popthelp.c:187
 #, c-format
 msgid "Usage:"
 msgstr "Naudojimas:"
 
-#: src/screen.c:216
 msgid "[dev]"
 msgstr "[įts]"
 
-#: src/screen.c:228
 msgid "UP--DIR"
 msgstr "AUKŠTYN"
 
-#: src/screen.c:247
 msgid "SYMLINK"
 msgstr "NUORODA"
 
-#: src/screen.c:251
 msgid "SUB-DIR"
 msgstr "PAKATAL"
 
-#: src/screen.c:433 src/screen.c:434
 msgid "Size"
 msgstr "Dydis"
 
-#: src/screen.c:436
 msgid "MTime"
 msgstr "Laikas"
 
-#: src/screen.c:437
 msgid "ATime"
 msgstr "Laikas"
 
-#: src/screen.c:438
 msgid "CTime"
 msgstr "Laikas"
 
-#: src/screen.c:439
 msgid "Permission"
 msgstr "Leidimai"
 
-#: src/screen.c:440
 msgid "Perm"
 msgstr "Leid."
 
-#: src/screen.c:441
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:442
 msgid "Inode"
 msgstr "„Inode“"
 
-#: src/screen.c:443
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:444
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:445
 msgid "Owner"
 msgstr "Savin."
 
-#: src/screen.c:446
 msgid "Group"
 msgstr "Grupė"
 
-#: src/screen.c:684
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s baitų %d byloje"
 
-#: src/screen.c:684
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s baitų %d bylose"
 
-#: src/screen.c:710
 msgid "<readlink failed>"
 msgstr "<„readlink“ nepavyko>"
 
-#: src/screen.c:1316
 msgid "Unknown tag on display format: "
 msgstr "Nežinoma žymė rodymo formate: "
 
-#: src/screen.c:1442
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Naudotojo formatas atrodo netaisyklingai, grįžtu prie pradinio."
 
-#: src/screen.c:1981
 msgid " Do you really want to execute? "
 msgstr " Ar tikrai norite paleisti? "
 
-#: src/screen.c:2261
 msgid "View"
 msgstr "Rodyti"
 
-#: src/screen.c:2262 src/view.c:2170
 msgid "Edit"
 msgstr "Taisyti"
 
-#: src/screen.c:2264 src/tree.c:984
 msgid "RenMov"
 msgstr "Perkelt"
 
-#: src/screen.c:2265 src/tree.c:988
 msgid "Mkdir"
 msgstr "N.katal"
 
-#: src/selcodepage.c:55
 msgid " Choose input codepage "
 msgstr " Parinkite įvesties koduotę "
 
-#: src/selcodepage.c:59
 msgid "-  < No translation >"
 msgstr "-  < Jokio vertimo >"
 
-#: src/selcodepage.c:107
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -3366,7 +2605,6 @@ msgstr ""
 "Nustatymai > Išvesties bitai dialoge!\n"
 "Nepamirškite įrašyti nustatymų."
 
-#: src/slint.c:201
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -3375,7 +2613,6 @@ msgstr ""
 "Ekrano dydis %dx%d nepalaikomas.\n"
 "Patikrinkite TERM aplinkos kintamąjį.\n"
 
-#: src/subshell.c:321
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
@@ -3385,82 +2622,63 @@ msgstr ""
 "šiame terminale.\n"
 "„Subshell“ palaikymas neveiks."
 
-#: src/subshell.c:422
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "Nepavyko atverti vardinio konvejerio „%s“\n"
 
-#: src/subshell.c:650
 msgid " The shell is still active. Quit anyway? "
 msgstr " Aplinka dar aktyvi. Vis tiek išeiti? "
 
-#: src/subshell.c:808
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Įspėjimas: nepavyko įeiti į „%s“.\n"
 
-#: src/textconf.c:51
 msgid "With builtin Editor\n"
 msgstr "Su vidiniu redaktoriumi\n"
 
-#: src/textconf.c:57
 msgid "Using system-installed S-Lang library"
 msgstr "Naudoti sisteminę S-Lang biblioteką"
 
-#: src/textconf.c:59
 msgid "Using included S-Lang library"
 msgstr "Naudoti pridėtą S-Lang biblioteką"
 
-#: src/textconf.c:65
 msgid "with termcap database"
 msgstr "su „termcap“ duomenų baze"
 
-#: src/textconf.c:67
 msgid "with terminfo database"
 msgstr "su „terminfo“ duomenų baze"
 
-#: src/textconf.c:71
 msgid "Using the ncurses library"
 msgstr "Su „ncurses“ biblioteka"
 
-#: src/textconf.c:80
 msgid "With optional subshell support"
 msgstr "Su pasirenkamu „subshell“ palaikymu"
 
-#: src/textconf.c:82
 msgid "With subshell support as default"
 msgstr "Su „subshell“ palaikymu, kitaip nenurodžius"
 
-#: src/textconf.c:88
 msgid "With support for background operations\n"
 msgstr "Su fono operacijų galimybe\n"
 
-#: src/textconf.c:92
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "Su pelės palaikymu „xterm“ ir „Linux“ konsolėse\n"
 
-#: src/textconf.c:94
 msgid "With mouse support on xterm\n"
 msgstr "Su pelės palaikymu „xterm“\n"
 
-#: src/textconf.c:98
 msgid "With support for X11 events\n"
 msgstr "Su X11 įvykių palaikymu\n"
 
-#: src/textconf.c:102
 msgid "With internationalization support\n"
 msgstr "Su internacionalizacijos palaimymu\n"
 
-#: src/textconf.c:106
 msgid "With multiple codepages support\n"
 msgstr "Su daugelio koduočių galimybe\n"
 
-#: src/textconf.c:122
 #, c-format
 msgid "Virtual File System:"
 msgstr "Virtualioji bylų sistema:"
 
-#: src/tree.c:150
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -3469,17 +2687,14 @@ msgstr ""
 " Nepavyko atverti bylos „%s“ rašymui:\n"
 "%s\n"
 
-#: src/tree.c:592
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "Kopijuoti katalogą „%s“ į:"
 
-#: src/tree.c:633
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "Perkelti katalogą „%s“ į:"
 
-#: src/tree.c:643
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
@@ -3488,32 +2703,25 @@ msgstr ""
 " Nepavyko patikrinti paskirties būklės („stat“) \n"
 " %s "
 
-#: src/tree.c:706
 #, c-format
 msgid "  Delete %s?  "
 msgstr " Šalinti „%s“? "
 
-#: src/tree.c:736
 msgid "Static"
 msgstr "Stat."
 
-#: src/tree.c:736
 msgid "Dynamc"
 msgstr "Dinam."
 
-#: src/tree.c:978
 msgid "Rescan"
 msgstr "Atnauj"
 
-#: src/tree.c:980
 msgid "Forget"
 msgstr "Pamiršt"
 
-#: src/tree.c:993
 msgid "Rmdir"
 msgstr "Šalint"
 
-#: src/treestore.c:346
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -3522,41 +2730,32 @@ msgstr ""
 "Nepavyko įrašyti į vylą „%s“:\n"
 "%s\n"
 
-#: src/user.c:134
 msgid " Format error on file Extensions File "
 msgstr " Formato klaida bylų plėtinių byloje"
 
-#: src/user.c:135
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " „%%var“ makrosas neturi pradmens "
 
-#: src/user.c:136
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " „%%var“ makrosas neturi kintamojo "
 
-#: src/user.c:445
 msgid " Debug "
 msgstr " „Debug“ "
 
-#: src/user.c:460
 msgid " ERROR: "
 msgstr " KLAIDA: "
 
-#: src/user.c:464
 msgid " True:  "
 msgstr " Tiesa: "
 
-#: src/user.c:466
 msgid " False: "
 msgstr " Melas: "
 
-#: src/user.c:666
 msgid " Warning -- ignoring file "
 msgstr " Įspėjimas -- byla ignoruojama "
 
-#: src/user.c:667
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3565,74 +2764,58 @@ msgstr ""
 "Byla „%s“ nepriklauso „root“ ar jums arba visi gali į ją rašyti.\n"
 "Jos naudojimas gali būti nesaugus"
 
-#: src/user.c:789
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " Tinkamų įrašų „%s“ nerasta "
 
-#: src/user.c:795
 msgid " User menu "
 msgstr " Naudotojo meniu "
 
-#: src/util.c:701 src/util.c:727
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:702 src/util.c:725
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:384
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "„%s“ nėra katalogas\n"
 
-#: src/utilunix.c:386
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr "Katalogas „%s“ nepriklauso jums\n"
 
-#: src/utilunix.c:389
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr " Nepavyko nustatyti reikiamų teisių katalogui „%s“\n"
 
-#: src/utilunix.c:394
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Nepavyko sukurti laikino katalogo „%s“: %s\n"
 
-#: src/utilunix.c:424
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr "Laikinosios bylos bus talpinamos kataloge „%s“\n"
 
-#: src/utilunix.c:428
 #, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Laikinosios bylos nebus kuriamos\n"
 
-#: src/utilunix.c:456
 msgid " Pipe failed "
 msgstr " Konvejeris nepavyko "
 
-#: src/utilunix.c:460
 msgid " Dup failed "
 msgstr " „Dup“ nepavyko "
 
-#: src/view.c:495
 msgid " Cannot spawn child program "
 msgstr " Nepavyko sukurti vaiko "
 
-#: src/view.c:506
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
-#: src/view.c:514
 msgid " Cannot open file "
 msgstr " Nepavyko atverti bylos "
 
-#: src/view.c:560
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3641,7 +2824,6 @@ msgstr ""
 " Nepavyko atverti „%s“\n"
 " %s "
 
-#: src/view.c:569
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3650,43 +2832,34 @@ msgstr ""
 " Nepavyko sužinoti „%s“ būklės („stat“) \n"
 " %s "
 
-#: src/view.c:578
 msgid " Cannot view: not a regular file "
 msgstr " Nepavyko parodyti: byla nėra įprastinė "
 
-#: src/view.c:704
 #, c-format
 msgid "File: %s"
 msgstr "Byla: %s"
 
-#: src/view.c:719
 #, c-format
 msgid "Offset 0x%08lx"
 msgstr "Poslinkis 0x%08lx"
 
-#: src/view.c:721
 #, c-format
 msgid "Col %d"
 msgstr "Stlp %d"
 
-#: src/view.c:725
 #, c-format
 msgid "%s bytes"
 msgstr "%s baitų"
 
-#: src/view.c:730
 msgid "  [grow]"
 msgstr "  [daugiau]"
 
-#: src/view.c:1771
 msgid "Invalid hex search expression"
 msgstr "Netaisyklinga šešioliktainės paieškos išraiška"
 
-#: src/view.c:1825
 msgid " Invalid regular expression "
 msgstr " Netaisyklinga reguliari išraiška "
 
-#: src/view.c:1948
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3695,7 +2868,6 @@ msgstr ""
 " Esamos eilutės numeris: %d.\n"
 " Įveskite naują numerį:"
 
-#: src/view.c:1971
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3704,271 +2876,204 @@ msgstr ""
 " Esamas adresas: 0x%lx.\n"
 " Įveskite naują adresą:"
 
-#: src/view.c:1973
 msgid " Goto Address "
 msgstr " Eiti adresu "
 
-#: src/view.c:2005
 msgid " Enter regexp:"
 msgstr " Įveskite reguliarą išraišką: "
 
-#: src/view.c:2155
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2155
 msgid "Hex"
 msgstr "Šešiol"
 
-#: src/view.c:2157
 msgid "Goto"
 msgstr "Eiti į"
 
-#: src/view.c:2157
 msgid "Line"
 msgstr "Eilutė"
 
-#: src/view.c:2159
 msgid "RxSrch"
 msgstr "RxPšk"
 
-#: src/view.c:2164
 msgid "EdHex"
 msgstr "RedŠšl"
 
-#: src/view.c:2164
 msgid "EdText"
 msgstr "RedTkst"
 
-#: src/view.c:2172
 msgid "UnWrap"
 msgstr "Nelauž."
 
-#: src/view.c:2172
 msgid "Wrap"
 msgstr "Laužyti"
 
-#: src/view.c:2175
 msgid "HxSrch"
 msgstr "ŠšlPšk"
 
-#: src/view.c:2178
 msgid "Raw"
 msgstr "Pirmin."
 
-#: src/view.c:2178
 msgid "Parse"
 msgstr "Apdorot."
 
-#: src/view.c:2183
 msgid "Unform"
 msgstr "Išform."
 
-#: src/view.c:2183
 msgid "Format"
 msgstr "Formuot"
 
-#: src/widget.c:922
 msgid " History "
 msgstr " Istorija "
 
-#: src/win.c:161
 msgid "Function key 1"
 msgstr "Funkcinis klav. 1"
 
-#: src/win.c:162
 msgid "Function key 2"
 msgstr "Funkcinis klav. 2"
 
-#: src/win.c:163
 msgid "Function key 3"
 msgstr "Funkcinis klav. 3"
 
-#: src/win.c:164
 msgid "Function key 4"
 msgstr "Funkcinis klav. 4"
 
-#: src/win.c:165
 msgid "Function key 5"
 msgstr "Funkcinis klav. 5"
 
-#: src/win.c:166
 msgid "Function key 6"
 msgstr "Funkcinis klav. 6"
 
-#: src/win.c:167
 msgid "Function key 7"
 msgstr "Funkcinis klav. 7"
 
-#: src/win.c:168
 msgid "Function key 8"
 msgstr "Funkcinis klav. 8"
 
-#: src/win.c:169
 msgid "Function key 9"
 msgstr "Funkcinis klav. 9"
 
-#: src/win.c:170
 msgid "Function key 10"
 msgstr "Funkcinis klav. 10"
 
-#: src/win.c:171
 msgid "Function key 11"
 msgstr "Funkcinis klav. 11"
 
-#: src/win.c:172
 msgid "Function key 12"
 msgstr "Funkcinis klav. 12"
 
-#: src/win.c:173
 msgid "Function key 13"
 msgstr "Funkcinis klav. 13"
 
-#: src/win.c:174
 msgid "Function key 14"
 msgstr "Funkcinis klav. 14"
 
-#: src/win.c:175
 msgid "Function key 15"
 msgstr "Funkcinis klav. 15"
 
-#: src/win.c:176
 msgid "Function key 16"
 msgstr "Funkcinis klav. 16"
 
-#: src/win.c:177
 msgid "Function key 17"
 msgstr "Funkcinis klav. 17"
 
-#: src/win.c:178
 msgid "Function key 18"
 msgstr "Funkcinis klav. 18"
 
-#: src/win.c:179
 msgid "Function key 19"
 msgstr "Funkcinis klav. 19"
 
-#: src/win.c:180
 msgid "Function key 20"
 msgstr "Funkcinis klav. 20"
 
-#: src/win.c:181
 msgid "Backspace key"
 msgstr "„Backspace“"
 
-#: src/win.c:182
 msgid "End key"
 msgstr "„End“"
 
-#: src/win.c:183
 msgid "Up arrow key"
 msgstr "„Aukštyn“"
 
-#: src/win.c:184
 msgid "Down arrow key"
 msgstr "„Žemyn“"
 
-#: src/win.c:185
 msgid "Left arrow key"
 msgstr "„Kairėn“"
 
-#: src/win.c:186
 msgid "Right arrow key"
 msgstr "„Dešinėn“"
 
-#: src/win.c:187
 msgid "Home key"
 msgstr "„Home“"
 
-#: src/win.c:188
 msgid "Page Down key"
 msgstr "„Page Down“"
 
-#: src/win.c:189
 msgid "Page Up key"
 msgstr "„Page Up“"
 
-#: src/win.c:190
 msgid "Insert key"
 msgstr "„Insert“"
 
-#: src/win.c:191
 msgid "Delete key"
 msgstr "„Delete“"
 
-#: src/win.c:192
 msgid "Completion/M-tab"
 msgstr "Užbaig./„M-Tab“"
 
-#: src/win.c:193
 msgid "+ on keypad"
 msgstr "Skaitm. +"
 
-#: src/win.c:194
 msgid "- on keypad"
 msgstr "Skaitm. -"
 
-#: src/win.c:195
 msgid "* on keypad"
 msgstr "Skaitm. *"
 
-#: src/win.c:197
 msgid "Left arrow keypad"
 msgstr "Skaitm. „kairėn“"
 
-#: src/win.c:198
 msgid "Right arrow keypad"
 msgstr "Skaitm. „dešinėn“"
 
-#: src/win.c:199
 msgid "Up arrow keypad"
 msgstr "Skaitm. „aukštyn“"
 
-#: src/win.c:200
 msgid "Down arrow keypad"
 msgstr "Skaitm. „žemyn“"
 
-#: src/win.c:201
 msgid "Home on keypad"
 msgstr "Skaitm. „Home“"
 
-#: src/win.c:202
 msgid "End on keypad"
 msgstr "Skaitm. „End“"
 
-#: src/win.c:203
 msgid "Page Down keypad"
 msgstr "Skaitm. „Page Down“"
 
-#: src/win.c:204
 msgid "Page Up keypad"
 msgstr "Skaitm. „Page Up“"
 
-#: src/win.c:205
 msgid "Insert on keypad"
 msgstr "Skaitm. „Insert“"
 
-#: src/win.c:206
 msgid "Delete on keypad"
 msgstr "Skaitm. „Delete“"
 
-#: src/win.c:207
 msgid "Enter on keypad"
 msgstr "Skaitm. „Enter“"
 
-#: src/win.c:208
 msgid "Slash on keypad"
 msgstr "Skaitm. /"
 
-#: src/win.c:209
 msgid "NumLock on keypad"
 msgstr "Skaitm. „NumLock“"
 
-#: src/wtools.c:259
 msgid "Background process:"
 msgstr "Foninis procesas:"
 
-#: vfs/cpio.c:159 vfs/cpio.c:175
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
@@ -3977,7 +3082,6 @@ msgstr ""
 "Nepvyko atverti „cpio“ archyvo\n"
 "%s"
 
-#: vfs/cpio.c:241
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -3986,7 +3090,6 @@ msgstr ""
 "Ankstyva „cpio“ archyvo pabaiga\n"
 "%s"
 
-#: vfs/cpio.c:286 vfs/cpio.c:338 vfs/cpio.c:344 vfs/cpio.c:398 vfs/cpio.c:408
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -3995,7 +3098,6 @@ msgstr ""
 "Sugadinta „cpio“ archyvo antraštė:\n"
 "%s"
 
-#: vfs/cpio.c:484
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4008,12 +3110,10 @@ msgstr ""
 "„cpio“ archyve\n"
 "%s"
 
-#: vfs/cpio.c:510
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "Byloje „%s“ yra dvigubų įrašų! Praleidžiu."
 
-#: vfs/cpio.c:581
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4022,30 +3122,24 @@ msgstr ""
 "Netikėta bylos pabaiga\n"
 "%s"
 
-#: vfs/direntry.c:349
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Katalogo „%s“ kešas nebegalioja"
 
-#: vfs/direntry.c:781
 msgid "Starting linear transfer..."
 msgstr "Pradedamas siuntimas..."
 
-#: vfs/direntry.c:918
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baitų persiųsta)"
 
-#: vfs/direntry.c:919
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu baitų persiųsta"
 
-#: vfs/direntry.c:965
 msgid "Getting file"
 msgstr "Parsiunčiama byla"
 
-#: vfs/extfs.c:313
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4054,211 +3148,163 @@ msgstr ""
 "Nepavyko atverti „%s“ archyvo\n"
 "%s"
 
-#: vfs/extfs.c:353 vfs/extfs.c:373 vfs/extfs.c:424
 msgid "Inconsistent extfs archive"
 msgstr "Prieštaringas „extfs“ archyvas"
 
-#: vfs/fish.c:161
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: atsijungiama nuo %s"
 
-#: vfs/fish.c:236
 msgid "fish: Waiting for initial line..."
 msgstr "fish: laukiama pradinės eilutės..."
 
-#: vfs/fish.c:248
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Šiuo metu slaptažodžių apsaugotų prisijungimų atlikti negalima."
 
-#: vfs/fish.c:253
 msgid " fish: Password required for "
 msgstr "fish: reikia slaptažodžio "
 
-#: vfs/fish.c:261
 msgid "fish: Sending password..."
 msgstr "fish: siunčiamas slaptažodis..."
 
-#: vfs/fish.c:267
 msgid "fish: Sending initial line..."
 msgstr "fish: siunčiama pradinė linija..."
 
-#: vfs/fish.c:278
 msgid "fish: Handshaking version..."
 msgstr "fish: derinamos versijos..."
 
-#: vfs/fish.c:292
 msgid "fish: Setting up current directory..."
 msgstr "fish: nustatomas esamas katalogas..."
 
-#: vfs/fish.c:294
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: prisijungta, namai %s. "
 
-#: vfs/fish.c:382
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: atveriamas katalogas %s..."
 
-#: vfs/fish.c:487 vfs/ftpfs.c:1288 vfs/undelfs.c:344
 #, c-format
 msgid "%s: done."
 msgstr "%s: atlikta."
 
-#: vfs/fish.c:492 vfs/ftpfs.c:1258 vfs/undelfs.c:347
 #, c-format
 msgid "%s: failure"
 msgstr "%s: nepavyko"
 
-#: vfs/fish.c:517
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
 
-#: vfs/fish.c:559
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: vietinis skaitymas nepavyko, siunčiami nuliai"
 
-#: vfs/fish.c:575
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: siunčiama %s %d (%lu)"
 
-#: vfs/fish.c:576
 msgid "zeros"
 msgstr "nuliai"
 
-#: vfs/fish.c:629
 msgid "Aborting transfer..."
 msgstr "Nutraukiamas siuntimas..."
 
-#: vfs/fish.c:640
 msgid "Error reported after abort."
 msgstr "Po nutraukties pranešta klaida."
 
-#: vfs/fish.c:642
 msgid "Aborted transfer would be successful."
 msgstr "Nutrauktas siuntimas būtų sėkmingas."
 
-#: vfs/ftpfs.c:380
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: atsijungiama nuo %s"
 
-#: vfs/ftpfs.c:435
 msgid " FTP: Password required for "
 msgstr " FTP: reikia slaptažodžio "
 
-#: vfs/ftpfs.c:471
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: siunčiamas naudotojo vardas"
 
-#: vfs/ftpfs.c:475
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: siunčiamas slaptažodis"
 
-#: vfs/ftpfs.c:481
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr "FTP: %s naudotojui reikia prisijungimo vardo"
 
-#: vfs/ftpfs.c:483
 msgid "Account:"
 msgstr "Paskyra:"
 
-#: vfs/ftpfs.c:487
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: siunčiamas naudotojo vardas"
 
-#: vfs/ftpfs.c:497
 msgid "ftpfs: logged in"
 msgstr "ftpfs: prisijungta"
 
-#: vfs/ftpfs.c:511
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Neteisingas naudotojo „%s“ jungimasis "
 
-#: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Neteisingas kompiuterio vardas."
 
-#: vfs/ftpfs.c:655
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Neteisingas adresas."
 
-#: vfs/ftpfs.c:677
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: jungiamasi į %s"
 
-#: vfs/ftpfs.c:687
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: jungiamasis nutrauktas"
 
-#: vfs/ftpfs.c:689
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: jungimasis į serverį nepavyko: %s"
 
-#: vfs/ftpfs.c:730
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Laukiama... %d (Control-C nutraukti)"
 
-#: vfs/ftpfs.c:916
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: nepavyko nustatyti pasyvaus režimo"
 
-#: vfs/ftpfs.c:996
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: nutraukiamas siuntimas."
 
-#: vfs/ftpfs.c:998
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: nutraukti nepavyko: %s"
 
-#: vfs/ftpfs.c:1006
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: nutraukti nepavyko"
 
-#: vfs/ftpfs.c:1110 vfs/ftpfs.c:1214
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD nepavyko"
 
-#: vfs/ftpfs.c:1120 vfs/ftpfs.c:1127
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nepavyko išspręsti simb. nuorodos"
 
-#: vfs/ftpfs.c:1178
 msgid "Resolving symlink..."
 msgstr "Sprendžiama simb. nuoroda..."
 
-#: vfs/ftpfs.c:1200
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: atveriamas FTP katalogas %s... %s%s"
 
-#: vfs/ftpfs.c:1203
 msgid "(strict rfc959)"
 msgstr "(griežtas rfc959)"
 
-#: vfs/ftpfs.c:1204
 msgid "(chdir first)"
 msgstr "(keičiamas katalogas)"
 
-#: vfs/ftpfs.c:1301
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: nepavyko; nėra kur grįžti"
 
-#: vfs/ftpfs.c:1369
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: siunčiama byla %lu (%lu)"
 
-#: vfs/ftpfs.c:1774
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
@@ -4266,15 +3312,12 @@ msgstr ""
 "~/.netrc yra netinkamo režimo.\n"
 "Pašalinkite slaptažodį arba pataisykite režimą."
 
-#: vfs/mcfs.c:132 vfs/mcfs.c:177
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:133
 msgid " The server does not support this version "
 msgstr " Serveris šios versijos nepalaiko "
 
-#: vfs/mcfs.c:150
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4284,34 +3327,27 @@ msgstr ""
 " Reikia slaptažodžio, bet informacija kitoje pusėje \n"
 " gali būti nesaugi. Tęsti? \n"
 
-#: vfs/mcfs.c:163
 msgid " MCFS Password required "
 msgstr " MCFS reikia slaptažodžio "
 
-#: vfs/mcfs.c:177
 msgid " Invalid password "
 msgstr " Neteisingas slaptažodis "
 
-#: vfs/mcfs.c:237
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Nepavyko rasti „%s“ adreso "
 
-#: vfs/mcfs.c:256
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Nepavyko sukurti lizdo: %s "
 
-#: vfs/mcfs.c:262
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " Nepavyko prisijungti prie serverio: %s "
 
-#: vfs/mcfs.c:332
 msgid " Too many open connections "
 msgstr " Per daug prisijungimų "
 
-#: vfs/sfs.c:362
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4320,7 +3356,6 @@ msgstr ""
 "Įspėjimas: klaidinga eilutė byloje „%s“:\n"
 "%s\n"
 
-#: vfs/sfs.c:374
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4329,7 +3364,6 @@ msgstr ""
 "Įspėjimas: klaidingas parametras „%c“ byloje „%s“:\n"
 "%s\n"
 
-#: vfs/smbfs.c:600
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4338,36 +3372,29 @@ msgstr ""
 " prisijungti iš naujo prie „%s“ nepavyko\n"
 " "
 
-#: vfs/smbfs.c:1158
 msgid " Authentication failed "
 msgstr " Autentifikacija nepavyko "
 
-#: vfs/smbfs.c:1681
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " Klaida „%s“ kuriant katalogą „%s“ "
 
-#: vfs/smbfs.c:1707
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " Klaida „%s“ šalinant katalogą „%s“ "
 
-#: vfs/smbfs.c:1809
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " „%s“ atveriant bylą „%s“ "
 
-#: vfs/smbfs.c:1888
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " „%s“ šalinant bylą „%s“ "
 
-#: vfs/smbfs.c:1923
 #, c-format
 msgid " %s renaming files\n"
 msgstr " „%s“ pervadinamos bylos\n"
 
-#: vfs/tar.c:216 vfs/tar.c:233
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4376,15 +3403,12 @@ msgstr ""
 "Nepvyko atverti „tar“ archyvo\n"
 "%s"
 
-#: vfs/tar.c:433 vfs/tar.c:463 vfs/tar.c:504 vfs/tar.c:513
 msgid "Inconsistent tar archive"
 msgstr "Prieštaringas „tar“ archyvas"
 
-#: vfs/tar.c:449
 msgid "Unexpected EOF on archive file"
 msgstr "Netikėta archyvo bylos pabaiga"
 
-#: vfs/tar.c:595
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -4395,61 +3419,48 @@ msgstr ""
 "%s\n"
 "nepanašu į „tar“ archyvą."
 
-#: vfs/undelfs.c:86
 msgid " undelfs: error "
 msgstr " undelfs: klaida "
 
-#: vfs/undelfs.c:190
 msgid " not enough memory "
 msgstr " nepakanka atminties "
 
-#: vfs/undelfs.c:195
 msgid " while allocating block buffer "
 msgstr " išskiriant blokų buferį "
 
-#: vfs/undelfs.c:199
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
-#: vfs/undelfs.c:203
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " pradedant %d „inode“ skenavimą "
 
-#: vfs/undelfs.c:212
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: įkeliama pašalintų bylų informacija (%d „inodes“)"
 
-#: vfs/undelfs.c:230
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " iškviečiant ext2_block_iterate %d "
 
-#: vfs/undelfs.c:242
 msgid " no more memory while reallocating array "
 msgstr " nepakanka atminties perkeliant masyvą "
 
-#: vfs/undelfs.c:263
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " atlienkant „inode“ skenavimą %d "
 
-#: vfs/undelfs.c:298
 msgid " Ext2lib error "
 msgstr " „Ext2lib“ klaida "
 
-#: vfs/undelfs.c:326 vfs/undelfs.c:639
 #, c-format
 msgid " Cannot open file %s "
 msgstr " Nepavyko atverti bylos %s "
 
-#: vfs/undelfs.c:329
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: skaitomas bloko bitų laukas..."
 
-#: vfs/undelfs.c:332
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
@@ -4458,11 +3469,9 @@ msgstr ""
 " Nepavyko įkelti bitų lauko iš: \n"
 " %s \n"
 
-#: vfs/undelfs.c:335
 msgid "undelfs: reading block bitmap..."
 msgstr "undel: skaitomas bloko bitų laukas..."
 
-#: vfs/undelfs.c:338
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
@@ -4471,30 +3480,23 @@ msgstr ""
 " Nepavyko įkelti bitų lauko iš: \n"
 " %s \n"
 
-#: vfs/undelfs.c:361
 msgid " vfs_info is not fs! "
 msgstr " „vfs_info“ nėra bylų sistema! "
 
-#: vfs/undelfs.c:416 vfs/undelfs.c:600
 msgid " You have to chdir to extract files first "
 msgstr " Reikia pakeisti katalogą, norint išpakuoti "
 
-#: vfs/undelfs.c:539
 msgid " while iterating over blocks "
 msgstr " einant per blokus "
 
-#: vfs/utilvfs.c:853
 msgid "Cannot parse:"
 msgstr "Nepavyko apdoroti:"
 
-#: vfs/utilvfs.c:857
 msgid "More parsing errors will be ignored."
 msgstr "Kitos apdorojimo klaidos bus ignoruojamos."
 
-#: vfs/utilvfs.c:867
 msgid "Internal error:"
 msgstr "Vidinė klaida:"
 
-#: vfs/vfs.c:898
 msgid "Changes to file lost"
 msgstr "Bylos pakeitimai prarasti"

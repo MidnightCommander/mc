@@ -1,3 +1,7 @@
+2005-07-03  Roland Illig  <roland.illig@gmx.de>
+
+	* *.po: Removed line numbers.
+
 2005-06-06  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: updated italian translation.

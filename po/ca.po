@@ -15,175 +15,116 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit.c:146 edit/edit.c:276 edit/edit.c:284 edit/edit.c:332
-#: edit/edit.c:347 edit/edit.c:358 edit/edit.c:374 edit/edit.c:2635
-#: edit/editcmd.c:284 edit/editcmd.c:292 edit/editcmd.c:1743 src/wtools.c:120
-#: src/wtools.c:275
 msgid "Error"
 msgstr "S'ha produït un error"
 
-#: edit/edit.c:149 edit/edit.c:335
 msgid " Cannot open file for reading: "
 msgstr " S'ha produït una fallada en intentar obrir un fitxer per llegir: "
 
-#: edit/edit.c:278
 msgid " Error reading from pipe: "
 msgstr " S'ha produït un error en llegir del conducte: "
 
-#: edit/edit.c:287
 msgid " Cannot open pipe for reading: "
 msgstr " No s'ha pogut obrir un conducte per llegir: "
 
-#: edit/edit.c:350
 msgid " Cannot get size/permissions info for file: "
 msgstr " No puc obtenir mida/permisos del fitxer: "
 
-#: edit/edit.c:359
 msgid " Not an ordinary file: "
 msgstr " No és un fitxer ordinari: "
 
-#: edit/edit.c:375
 msgid " File is too large: "
 msgstr " El fitxer és massa gran: "
 
-#: edit/edit.c:2635
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#: edit/edit.h:263
 msgid "&Dismiss"
 msgstr "&Ignora"
 
-#: edit/edit.h:265 edit/editcmd.c:384 edit/editcmd.c:1230 edit/editcmd.c:1312
-#: edit/editcmd.c:2591 edit/editmenu.c:37 edit/editoptions.c:71
-#: src/boxes.c:139 src/boxes.c:276 src/boxes.c:372 src/boxes.c:464
-#: src/boxes.c:591 src/boxes.c:714 src/boxes.c:835 src/boxes.c:945
-#: src/boxes.c:1013 src/filegui.c:768 src/find.c:196 src/layout.c:348
-#: src/option.c:113 src/subshell.c:324 src/view.c:2158 src/wtools.c:441
 msgid "&OK"
 msgstr "&D'acord"
 
-#: edit/editcmd.c:45 edit/editcmd.c:46
 msgid " Enter file name: "
 msgstr " Introduïu el nom del fitxer: "
 
-#: edit/editcmd.c:285
 msgid " Error writing to pipe: "
 msgstr " S'ha produït un error en escriure al conducte: "
 
-#: edit/editcmd.c:295
 msgid " Cannot open pipe for writing: "
 msgstr " No s'ha pogut obrir el conducte per a l'escriptura: "
 
-#: edit/editcmd.c:377
 msgid "Quick save "
 msgstr "Desat ràpid "
 
-#: edit/editcmd.c:378
 msgid "Safe save "
 msgstr "Desat segur "
 
-#: edit/editcmd.c:379
 msgid "Do backups -->"
 msgstr "Fer còpies de seguretat -->"
 
 # Sí que hi ha NLS, sí... I la feinada que ha costat!  iv
-#: edit/editcmd.c:382 edit/editcmd.c:485 edit/editcmd.c:769 edit/editcmd.c:805
-#: edit/editcmd.c:845 edit/editcmd.c:1004 edit/editcmd.c:1117
-#: edit/editcmd.c:1170 edit/editcmd.c:1228 edit/editcmd.c:1310
-#: edit/editcmd.c:2589 edit/editoptions.c:68 src/achown.c:68 src/boxes.c:140
-#: src/boxes.c:277 src/boxes.c:370 src/boxes.c:462 src/boxes.c:589
-#: src/boxes.c:712 src/boxes.c:833 src/boxes.c:1013 src/chmod.c:101
-#: src/chown.c:72 src/cmd.c:826 src/filegui.c:750 src/find.c:196
-#: src/hotlist.c:122 src/hotlist.c:526 src/hotlist.c:839 src/hotlist.c:939
-#: src/layout.c:349 src/learn.c:58 src/option.c:114 src/panelize.c:66
-#: src/view.c:459 src/view.c:2155 src/wtools.c:46 src/wtools.c:439
 msgid "&Cancel"
 msgstr "&Cancel·la"
 
-#: edit/editcmd.c:388
 msgid "Extension:"
 msgstr "Extensió:"
 
-#: edit/editcmd.c:394
 msgid " Edit Save Mode "
 msgstr " Edita la manera de desar "
 
-#: edit/editcmd.c:466 edit/editcmd.c:525
 msgid " Save As "
 msgstr " Desa com a"
 
-#: edit/editcmd.c:483 edit/editcmd.c:805 edit/editcmd.c:842
-#: edit/editcmd.c:1001 edit/editcmd.c:1114 src/file.c:593 src/help.c:324
-#: src/main.c:426 src/screen.c:1417 src/selcodepage.c:105 src/subshell.c:320
-#: src/subshell.c:649 src/utilunix.c:418 src/utilunix.c:422 src/utilunix.c:444
-#: vfs/mcfs.c:143
 msgid "Warning"
 msgstr "Avís"
 
-#: edit/editcmd.c:484
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
 
-#: edit/editcmd.c:485
 #, fuzzy
 msgid "&Overwrite"
 msgstr "Sobreescriu"
 
-#: edit/editcmd.c:527 edit/editcmd.c:2316 src/view.c:458
 msgid " Cannot save file. "
 msgstr " S'ha produït un error en intentar desar el fitxer. "
 
-#: edit/editcmd.c:570
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: edit/editcmd.c:627 edit/editcmd.c:635 edit/editcmd.c:660 edit/editcmd.c:707
 msgid " Delete macro "
 msgstr " Suprimeix la macro "
 
-#: edit/editcmd.c:629
 msgid " Cannot open temp file "
 msgstr " S'ha produït un error en obrir un fitxer temporal "
 
-#: edit/editcmd.c:637 edit/editcmd.c:698 edit/editcmd.c:755
 msgid " Cannot open macro file "
 msgstr " S'ha produït un error en obrir el fitxer de macros "
 
-#: edit/editcmd.c:661
 msgid " Cannot overwrite macro file "
 msgstr " S'ha produït un error en sobreescriure el fitxer de macros "
 
-#: edit/editcmd.c:677 edit/editcmd.c:698
 msgid " Save macro "
 msgstr " Desa la macro "
 
-#: edit/editcmd.c:679
 msgid " Press the macro's new hotkey: "
 msgstr " Premeu la nova tecla ràpida per a la macro: "
 
-#: edit/editcmd.c:708 edit/editkeys.c:196 edit/editkeys.c:226
 msgid " Press macro hotkey: "
 msgstr " Premeu la tecla ràpida per a la macro: "
 
-#: edit/editcmd.c:754
 msgid " Load macro "
 msgstr " Carrega la macro "
 
-#: edit/editcmd.c:767
 msgid " Confirm save file? : "
 msgstr " Voleu desar el fitxer?: "
 
-#: edit/editcmd.c:769 src/view.c:457
 msgid " Save file "
 msgstr " Desa el fitxer "
 
-#: edit/editcmd.c:769 src/layout.c:350 src/learn.c:59 src/learn.c:174
-#: src/option.c:115
 msgid "&Save"
 msgstr "&Desa"
 
-#: edit/editcmd.c:805 edit/editcmd.c:843
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -191,288 +132,212 @@ msgstr ""
 " El text actual s'ha modificat, però no s'ha desat. \n"
 " 'Continua' descartarà aquests canvis. "
 
-#: edit/editcmd.c:805 edit/editcmd.c:844 edit/editcmd.c:1004
-#: edit/editcmd.c:1117
 #, fuzzy
 msgid "C&ontinue"
 msgstr "Continua"
 
-#: edit/editcmd.c:851
 msgid " Load "
 msgstr " Carrega "
 
-#: edit/editcmd.c:1003 edit/editcmd.c:1116
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " El bloc és gran, potser no podreu desfer aquesta acció "
 
-#: edit/editcmd.c:1172
 msgid "O&ne"
 msgstr "u&N"
 
-#: edit/editcmd.c:1174 src/file.c:2142 src/filegui.c:521
 msgid "A&ll"
 msgstr "&Tots"
 
-#: edit/editcmd.c:1176 src/file.c:2079 src/filegui.c:212
 msgid "&Skip"
 msgstr "&Salta"
 
-#: edit/editcmd.c:1178
 msgid "&Replace"
 msgstr "&Reemplaça"
 
-#: edit/editcmd.c:1184
 msgid " Replace with: "
 msgstr " Reemplaça amb: "
 
-#: edit/editcmd.c:1196
 msgid " Confirm replace "
 msgstr " Confirma el reemplaçament "
 
-#: edit/editcmd.c:1232 edit/editcmd.c:1314
 msgid "scanf &Expression"
 msgstr "&Expressió de Scanf"
 
-#: edit/editcmd.c:1234
 msgid "replace &All"
 msgstr "reemplaça'ls &Tots"
 
-#: edit/editcmd.c:1236
 msgid "pr&Ompt on replace"
 msgstr "Preg&Unta en reemplaçar"
 
-#: edit/editcmd.c:1238 edit/editcmd.c:1316 src/view.c:2161
 msgid "&Backwards"
 msgstr "Cap &Enrere"
 
-#: edit/editcmd.c:1240 edit/editcmd.c:1318
 msgid "&Regular expression"
 msgstr "Expressió &Habitual"
 
-#: edit/editcmd.c:1242 edit/editcmd.c:1320
 msgid "&Whole words only"
 msgstr "Només paraules com&Pletes"
 
-#: edit/editcmd.c:1244 edit/editcmd.c:1322 src/find.c:188
 msgid "case &Sensitive"
 msgstr "Sensible a &Majúscules/Minúscules"
 
-#: edit/editcmd.c:1248
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Introduïu l'ordre dels arguments per reemplaçar, p.ex. 3,2,1,4 "
 
-#: edit/editcmd.c:1252
 msgid " Enter replacement string:"
 msgstr " Introduïu la cadena per reemplaçar:"
 
-#: edit/editcmd.c:1256 edit/editcmd.c:1326 src/view.c:2166
 msgid " Enter search string:"
 msgstr " Introduïu la cadena de cerca:"
 
-#: edit/editcmd.c:1275 edit/editcmd.c:1950 edit/editcmd.c:1975
 msgid " Replace "
 msgstr " Reemplaça "
 
-#: edit/editcmd.c:1340 edit/editcmd.c:2059 edit/editcmd.c:2061
-#: edit/editcmd.c:2089 edit/editwidget.c:293 src/view.c:1644 src/view.c:1723
-#: src/view.c:1878 src/view.c:1890 src/view.c:2112 src/view.c:2164
-#: src/view.c:2171 src/view.c:2285
 msgid "Search"
 msgstr "Cerca"
 
-#: edit/editcmd.c:1743
 msgid ""
 " Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
 " Expressió habitual no vàlida, o expressió scanf amb massa conversions "
 
-#: edit/editcmd.c:1952
 msgid " Error in replacement format string. "
 msgstr " S'ha produït un error al format de la cadena reemplaçant. "
 
-#: edit/editcmd.c:1953
 #, fuzzy
 msgid " Replacement too long. "
 msgstr " Introduïu la cadena per reemplaçar:"
 
-#: edit/editcmd.c:1983
 #, c-format
 msgid " %ld replacements made. "
 msgstr " S'han fet %ld reemplaçaments. "
 
-#: edit/editcmd.c:1986 edit/editcmd.c:2061 edit/editcmd.c:2089 src/view.c:1723
-#: src/view.c:1890
 msgid " Search string not found "
 msgstr " No s'ha trobat la cadena "
 
-#: edit/editcmd.c:2059
 #, c-format
 msgid " %d items found, %d bookmarks added "
 msgstr "S'han trobat %d resultats, s'han afegit %d marcadors"
 
-#: edit/editcmd.c:2111 edit/editwidget.c:296 src/help.c:833 src/main.c:1211
-#: src/view.c:474 src/view.c:2264 src/view.c:2295
 msgid "Quit"
 msgstr "Surt"
 
-#: edit/editcmd.c:2111 src/view.c:475
 msgid " File was modified, Save with exit? "
 msgstr " El fitxer s'ha modificat. El deso en sortir? "
 
-#: edit/editcmd.c:2112 src/view.c:476
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Cancel·la la sortida"
 
-#: edit/editcmd.c:2112 src/cmd.c:195 src/file.c:1781 src/file.c:2141
-#: src/filegui.c:526 src/hotlist.c:1064 src/main.c:473 src/screen.c:1956
-#: src/subshell.c:651 src/tree.c:705 src/view.c:476 vfs/mcfs.c:148
 msgid "&Yes"
 msgstr "&Sí"
 
-#: edit/editcmd.c:2112 src/cmd.c:195 src/file.c:1781 src/file.c:2141
-#: src/filegui.c:525 src/hotlist.c:1064 src/main.c:473 src/screen.c:1957
-#: src/subshell.c:651 src/tree.c:705 src/view.c:476 vfs/mcfs.c:148
 msgid "&No"
 msgstr "&No"
 
-#: edit/editcmd.c:2225
 msgid " Copy to clipboard "
 msgstr " Copia al portaretalls "
 
-#: edit/editcmd.c:2225 edit/editcmd.c:2238
 msgid " Unable to save to file. "
 msgstr "  No puc desar-ho a un fitxer. "
 
-#: edit/editcmd.c:2238
 msgid " Cut to clipboard "
 msgstr " Talla cap el portaretalls "
 
-#: edit/editcmd.c:2266 src/view.c:2057
 msgid " Goto line "
 msgstr " Vés a la línia "
 
-#: edit/editcmd.c:2266
 msgid " Enter line: "
 msgstr " Introduïu la línia: "
 
-#: edit/editcmd.c:2301 edit/editcmd.c:2314
 msgid " Save Block "
 msgstr " Desa el bloc "
 
-#: edit/editcmd.c:2330 edit/editcmd.c:2343
 msgid " Insert File "
 msgstr " Insereix el fitxer "
 
-#: edit/editcmd.c:2345
 msgid " Cannot insert file. "
 msgstr " S'ha produït un error en provar d'inserir el fitxer. "
 
-#: edit/editcmd.c:2362
 msgid " Sort block "
 msgstr " Ordena el bloc "
 
-#: edit/editcmd.c:2362 edit/editcmd.c:2487
 msgid " You must first highlight a block of text. "
 msgstr " Primer cal que seleccioneu un bloc de text. "
 
-#: edit/editcmd.c:2369
 msgid " Run Sort "
 msgstr " Executa \"Ordenar\" "
 
-#: edit/editcmd.c:2370
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
 
-#: edit/editcmd.c:2380 edit/editcmd.c:2385
 msgid " Sort "
 msgstr " Ordena "
 
-#: edit/editcmd.c:2381
 msgid " Cannot execute sort command "
 msgstr " S'ha produït un error en executar la comanda \"ordena\" "
 
-#: edit/editcmd.c:2386
 msgid " Sort returned non-zero: "
 msgstr " \"Ordena\" ha retornat \"non-zero\": "
 
-#: edit/editcmd.c:2410
 msgid "Paste output of external command"
 msgstr ""
 
-#: edit/editcmd.c:2411
 #, fuzzy
 msgid "Enter shell command(s):"
 msgstr " Introduïu l'etiqueta de l'ordre: "
 
-#: edit/editcmd.c:2420
 #, fuzzy
 msgid "External command"
 msgstr "Una altre ordre"
 
-#: edit/editcmd.c:2421
 #, fuzzy
 msgid "Cannot execute command"
 msgstr " S'ha produït un error en executar la comanda \"ordena\" "
 
-#: edit/editcmd.c:2455
 msgid "Error creating script:"
 msgstr "S'ha produït un error en crear la seqüència:"
 
-#: edit/editcmd.c:2463
 msgid "Error reading script:"
 msgstr "S'ha produït un error en llegir la seqüència:"
 
-#: edit/editcmd.c:2472
 msgid "Error closing script:"
 msgstr "Error en tancar la seqüència:"
 
-#: edit/editcmd.c:2478
 msgid "Script created:"
 msgstr "Seqüència creada:"
 
-#: edit/editcmd.c:2485
 msgid "Process block"
 msgstr "Processa el bloc"
 
-#: edit/editcmd.c:2584
 msgid " Mail "
 msgstr " Envia per correu "
 
-#: edit/editcmd.c:2595
 msgid " Copies to"
 msgstr " Còpies per a"
 
-#: edit/editcmd.c:2599
 msgid " Subject"
 msgstr " Tema"
 
-#: edit/editcmd.c:2603
 msgid " To"
 msgstr " Per a"
 
-#: edit/editcmd.c:2605
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <còpies> <per a>"
 
-#: edit/editkeys.c:181
 msgid " Emacs key: "
 msgstr " Tecla d'Emacs: "
 
-#: edit/editkeys.c:195 edit/editkeys.c:226
 msgid " Execute Macro "
 msgstr " Executa la macro "
 
-#: edit/editkeys.c:218
 msgid " Insert Literal "
 msgstr " Inserir literal "
 
-#: edit/editkeys.c:219
 msgid " Press any key: "
 msgstr " Premeu una tecla: "
 
-#: edit/editlock.c:149
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
@@ -480,23 +345,18 @@ msgid ""
 "Process ID: %d"
 msgstr ""
 
-#: edit/editlock.c:154
 msgid "File locked"
 msgstr ""
 
-#: edit/editlock.c:154
 msgid "&Grab lock"
 msgstr ""
 
-#: edit/editlock.c:155
 msgid "&Ignore lock"
 msgstr ""
 
-#: edit/editmenu.c:55
 msgid " About "
 msgstr " Quant a "
 
-#: edit/editmenu.c:56
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -514,306 +374,230 @@ msgstr ""
 "        Un editor de text amistós escrit\n"
 "             pel Midnight Commander.\n"
 
-#: edit/editmenu.c:283 edit/editmenu.c:301
 msgid "&Open file..."
 msgstr "&Obre el fitxer..."
 
-#: edit/editmenu.c:284
 msgid "&New              C-n"
 msgstr "&Nou                  C-n"
 
-#: edit/editmenu.c:286 edit/editmenu.c:304
 msgid "&Save              F2"
 msgstr "&Desa               F2"
 
-#: edit/editmenu.c:287 edit/editmenu.c:305
 msgid "Save &as...       F12"
 msgstr "desa com &a...     F12"
 
-#: edit/editmenu.c:289 edit/editmenu.c:307
 msgid "&Insert file...   F15"
 msgstr "&Insereix el fitxer...    F15"
 
-#: edit/editmenu.c:290
 msgid "Copy to &file...  C-f"
 msgstr "copia al &Fitxer...   C-f"
 
-#: edit/editmenu.c:292 edit/editmenu.c:310
 msgid "&User menu...     F11"
 msgstr "Menú d'&usuari...     F11"
 
-#: edit/editmenu.c:294 edit/editmenu.c:312
 msgid "A&bout...            "
 msgstr "a &Propòsit de...        "
 
-#: edit/editmenu.c:296 edit/editmenu.c:314
 msgid "&Quit             F10"
 msgstr "&Surt                F10"
 
-#: edit/editmenu.c:302
 msgid "&New            C-x k"
 msgstr "&Nou                C-x k"
 
-#: edit/editmenu.c:308
 msgid "Copy to &file...     "
 msgstr "copia al &Fitxer...      "
 
-#: edit/editmenu.c:319
 msgid "&Toggle Mark       F3"
 msgstr "&Canvia inici/fi de marcador    F3"
 
-#: edit/editmenu.c:320
 msgid "&Mark Columns    S-F3"
 msgstr "&Marca les columnes     S-F3"
 
-#: edit/editmenu.c:322
 msgid "Toggle &ins/overw Ins"
 msgstr "Canvia entre &Insereix/sobreescriu Ins"
 
-#: edit/editmenu.c:324
 msgid "&Copy              F5"
 msgstr "&Copia                F5"
 
-#: edit/editmenu.c:325
 msgid "&Move              F6"
 msgstr "&Mou                 F6"
 
-#: edit/editmenu.c:326
 msgid "&Delete            F8"
 msgstr "&Suprimeix              F8"
 
-#: edit/editmenu.c:328
 msgid "&Undo             C-u"
 msgstr "&Desfés               C-u"
 
-#: edit/editmenu.c:330
 msgid "&Beginning     C-PgUp"
 msgstr "&Principi         C-RePàg"
 
-#: edit/editmenu.c:331
 msgid "&End           C-PgDn"
 msgstr "&Final            C-AvPàg"
 
-#: edit/editmenu.c:338
 msgid "&Search...         F7"
 msgstr "&Cerca...             F7"
 
-#: edit/editmenu.c:339
 msgid "Search &again     F17"
 msgstr "cerca &de nou   F17"
 
-#: edit/editmenu.c:340
 msgid "&Replace...        F4"
 msgstr "&Reemplaça...            F4"
 
-#: edit/editmenu.c:347 edit/editmenu.c:371
 msgid "&Go to line...            M-l"
 msgstr "&Vés a la línia...          M-l"
 
-#: edit/editmenu.c:348 edit/editmenu.c:372
 msgid "Go to matching &bracket   M-b"
 msgstr "ves al &Claudàtor coincident  M-b"
 
-#: edit/editmenu.c:350 edit/editmenu.c:374
 msgid "Insert &literal...       C-q"
 msgstr "insereix &Literal...         C-q"
 
-#: edit/editmenu.c:352 edit/editmenu.c:376
 msgid "&Refresh screen          C-l"
 msgstr "Actualit&za la pantalla    C-l"
 
-#: edit/editmenu.c:354 edit/editmenu.c:378
 msgid "&Start record macro      C-r"
 msgstr "Comença a &enregistrar la macro    C-r"
 
-#: edit/editmenu.c:355 edit/editmenu.c:379
 msgid "&Finish record macro...  C-r"
 msgstr "&Finalitza l'enregistrament de la macro...  C-r"
 
-#: edit/editmenu.c:356
 msgid "&Execute macro...   C-a, KEY"
 msgstr "e&Xecuta la macro...   C-a, TECLA"
 
-#: edit/editmenu.c:357 edit/editmenu.c:381
 msgid "Delete macr&o...            "
 msgstr "&Esborra la macro...             "
 
-#: edit/editmenu.c:359 edit/editmenu.c:383
 msgid "Insert &date/time           "
 msgstr "insereix &Data/hora             "
 
-#: edit/editmenu.c:361 edit/editmenu.c:385
 msgid "Format p&aragraph        M-p"
 msgstr "&Formateja el paràgraf          M-p"
 
-#: edit/editmenu.c:362
 msgid "'ispell' s&pell check    C-p"
 msgstr "comprova l'or&Tografia: ispell  C-p"
 
-#: edit/editmenu.c:363 edit/editmenu.c:387
 msgid "Sor&t...                 M-t"
 msgstr "&Ordena...                 M-t"
 
-#: edit/editmenu.c:364 edit/editmenu.c:388
 msgid "Paste o&utput of...      M-u"
 msgstr ""
 
-#: edit/editmenu.c:365 edit/editmenu.c:389
 msgid "E&xternal Formatter      F19"
 msgstr "Formatador e&xtern       F19"
 
-#: edit/editmenu.c:366 edit/editmenu.c:390
 msgid "&Mail...                    "
 msgstr "envia per co&Rreu...          "
 
-#: edit/editmenu.c:380
 msgid "&Execute macro... C-x e, KEY"
 msgstr "e&Xecuta la macro... C-x e, TECLA"
 
-#: edit/editmenu.c:386
 msgid "'ispell' s&pell check    M-$"
 msgstr "comprova l'or&Tografia: ispell  M-$"
 
-#: edit/editmenu.c:395
 msgid "&General...  "
 msgstr "&General..."
 
-#: edit/editmenu.c:396
 msgid "&Save mode..."
 msgstr "&Mode de desar..."
 
-#: edit/editmenu.c:397 src/main.c:912
 msgid "learn &Keys..."
 msgstr "defineix &Tecles..."
 
 # Açò s'agraeix!  iv
-#: edit/editmenu.c:408 edit/editmenu.c:422 src/chmod.c:151 src/chown.c:119
 msgid " File "
 msgstr " Fitxer "
 
-#: edit/editmenu.c:410 edit/editmenu.c:424
 msgid " Edit "
 msgstr " Edició "
 
-#: edit/editmenu.c:412 edit/editmenu.c:426
 msgid " Sear/Repl "
 msgstr " Cerca/Reempl "
 
-#: edit/editmenu.c:414 edit/editmenu.c:428
 msgid " Command "
 msgstr " Ordres "
 
-#: edit/editmenu.c:416 edit/editmenu.c:430
 msgid " Options "
 msgstr " Opcions "
 
-#: edit/editoptions.c:36
 msgid "Intuitive"
 msgstr "Intuïtiu"
 
-#: edit/editoptions.c:36
 msgid "Emacs"
 msgstr "Emacs"
 
-#: edit/editoptions.c:39
 msgid "None"
 msgstr "Cap"
 
-#: edit/editoptions.c:39
 msgid "Dynamic paragraphing"
 msgstr "Paràgrafs dinàmics"
 
-#: edit/editoptions.c:39
 msgid "Type writer wrap"
 msgstr "Ajustament de màquina d'escriure"
 
-#: edit/editoptions.c:75
 msgid "Word wrap line length: "
 msgstr "Longitud de línia per a l'ajustament: "
 
-#: edit/editoptions.c:81
 msgid "Tab spacing: "
 msgstr "Mida del tabulador: "
 
-#: edit/editoptions.c:88
 msgid "Synta&x highlighting"
 msgstr "Ressaltament de la sinta&Xi"
 
-#: edit/editoptions.c:91
 #, fuzzy
 msgid "Save file &position"
 msgstr " Desa el fitxer "
 
-#: edit/editoptions.c:94
 msgid "Confir&m before saving"
 msgstr "con&Firma en desar"
 
-#: edit/editoptions.c:97
 msgid "Fill tabs with &spaces"
 msgstr "omple els tabuladors amb e&Spais"
 
-#: edit/editoptions.c:100
 msgid "&Return does autoindent"
 msgstr "Fes auto&Sagnat en prémer la tecla de retorn del carro"
 
-#: edit/editoptions.c:103
 msgid "&Backspace through tabs"
 msgstr "es&Borra els tabuladors amb la tecla de retrocés"
 
-#: edit/editoptions.c:106
 msgid "&Fake half tabs"
 msgstr "&Simula les mitges tabulacions"
 
-#: edit/editoptions.c:112
 msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
-#: edit/editoptions.c:119
 msgid "Key emulation"
 msgstr "Emulació de tecles"
 
-#: edit/editoptions.c:124
 msgid " Editor options "
 msgstr " Opcions de l'editor "
 
-#: edit/editwidget.c:287 src/help.c:800 src/help.c:821 src/main.c:1208
-#: src/screen.c:2206 src/tree.c:973 src/view.c:2262
 msgid "Help"
 msgstr "Ajuda"
 
-#: edit/editwidget.c:288 src/view.c:2269
 msgid "Save"
 msgstr "Desa"
 
-#: edit/editwidget.c:289
 msgid "Mark"
 msgstr "Marca"
 
-#: edit/editwidget.c:290
 msgid "Replac"
 msgstr "Reempl"
 
-#: edit/editwidget.c:291 src/file.c:780 src/screen.c:2210 src/tree.c:978
 msgid "Copy"
 msgstr "Copia"
 
-#: edit/editwidget.c:292
 msgid "Move"
 msgstr "Mou"
 
-#: edit/editwidget.c:294 src/screen.c:2213
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: edit/editwidget.c:295 src/main.c:1210
 msgid "PullDn"
 msgstr "Desplega"
 
-#: edit/syntax.c:1118 edit/syntax.c:1125
 msgid " Load syntax file "
 msgstr " Carrega un fitxer de sintaxi "
 
-#: edit/syntax.c:1119 src/help.c:771 src/user.c:707
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -822,58 +606,44 @@ msgstr ""
 " No puc obrir el fitxer %s \n"
 " %s "
 
-#: edit/syntax.c:1126
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " S'ha produït  un error al fitxer %s, línia %d "
 
-#: src/achown.c:69 src/chmod.c:102 src/chown.c:73
 msgid "&Set"
 msgstr "&Estableix"
 
-#: src/achown.c:70
 msgid "S&kip"
 msgstr "&Salta"
 
-#: src/achown.c:71 src/chmod.c:106 src/chown.c:76
 msgid "Set &all"
 msgstr "Estableix a &tots"
 
-#: src/achown.c:250 src/achown.c:338 src/achown.c:345
 msgid "owner"
 msgstr "propietari"
 
-#: src/achown.c:250 src/achown.c:340 src/achown.c:347
 msgid "group"
 msgstr "grup"
 
-#: src/achown.c:342
 msgid "other"
 msgstr "altres"
 
-#: src/achown.c:350
 msgid "On"
 msgstr "Sobre"
 
-#: src/achown.c:352
 msgid "Flag"
 msgstr "Marca"
 
-#: src/achown.c:354
 msgid "Mode"
 msgstr "Mode"
 
-#: src/achown.c:358
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d de %d"
 
-#: src/achown.c:570
 msgid " Chown advanced command "
 msgstr " Ordre avançada de canvi de propietari "
 
-#: src/achown.c:628 src/achown.c:644 src/achown.c:691 src/chmod.c:246
-#: src/chmod.c:316
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
@@ -882,8 +652,6 @@ msgstr ""
 " No s'han pogut canviar els permisos de \"%s\" \n"
 " %s "
 
-#: src/achown.c:633 src/achown.c:649 src/achown.c:696 src/chown.c:214
-#: src/chown.c:322
 #, c-format
 msgid ""
 " Cannot chown \"%s\" \n"
@@ -892,23 +660,18 @@ msgstr ""
 " No s'ha pogut canviar la propietat de \"%s\" \n"
 " %s "
 
-#: src/background.c:210 src/file.c:2077
 msgid " Background process error "
 msgstr " S'ha produït un error al procés de fons "
 
-#: src/background.c:216
 msgid " Unknown error in child "
 msgstr " Error desconegut al procés fill "
 
-#: src/background.c:224
 msgid " Child died unexpectedly "
 msgstr " El procés fill ha acabat inesperadament "
 
-#: src/background.c:231
 msgid " Background protocol error "
 msgstr " S'ha produït un error de protocol al procés de fons "
 
-#: src/background.c:232
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -916,465 +679,351 @@ msgstr ""
 " El procés de fons ha enviat una petició de més arguments \n"
 " dels que podem manejar. \n"
 
-#: src/boxes.c:75
 msgid "&Full file list"
 msgstr "llistat c&Omplet"
 
-#: src/boxes.c:76
 msgid "&Brief file list"
 msgstr "llistat &Breu"
 
-#: src/boxes.c:77
 msgid "&Long file list"
 msgstr "llistat &Llarg"
 
-#: src/boxes.c:78
 msgid "&User defined:"
 msgstr "definit per l'&Usuari:"
 
-#: src/boxes.c:136
 msgid "Listing mode"
 msgstr "Mode de llistat"
 
-#: src/boxes.c:138
 msgid "user &Mini status"
 msgstr "&Miniestat d'usuari"
 
-#: src/boxes.c:278
 msgid "&Reverse"
 msgstr "in&Verteix"
 
-#: src/boxes.c:279
 msgid "case sensi&tive"
 msgstr "distingeix entre majú&Scules/minúscules"
 
-#: src/boxes.c:280
 msgid "Sort order"
 msgstr "Ordre de classificació"
 
-#: src/boxes.c:375
 msgid " confirm &Exit "
 msgstr " confirma la &Sortida "
 
-#: src/boxes.c:377
 msgid " confirm e&Xecute "
 msgstr " confirma l'e&Xecució "
 
-#: src/boxes.c:379
 msgid " confirm o&Verwrite "
 msgstr " confirma la s&Obreescriptura "
 
-#: src/boxes.c:381
 msgid " confirm &Delete "
 msgstr " confirma la &Supressió "
 
-#: src/boxes.c:387 src/cmd.c:194
 msgid " Confirmation "
 msgstr " Confirmació "
 
-#: src/boxes.c:459
 msgid "Full 8 bits output"
 msgstr "Mostra una sortida de 8 bits purs"
 
-#: src/boxes.c:459
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1 (Latin1)"
 
-#: src/boxes.c:459
 msgid "7 bits"
 msgstr "7 bits"
 
-#: src/boxes.c:466 src/boxes.c:595
 msgid "F&ull 8 bits input"
 msgstr "ent&Rada de 8 bits"
 
-#: src/boxes.c:474 src/boxes.c:576
 msgid " Display bits "
 msgstr " Bits de visualització "
 
-#: src/boxes.c:557 src/boxes.c:582 src/selcodepage.c:70
 msgid "Other 8 bit"
 msgstr "Altres 8 bits"
 
-#: src/boxes.c:579
 msgid "Input / display codepage:"
 msgstr "Pàgina de codis d'entrada / visualització:"
 
-#: src/boxes.c:598
 msgid "&Select"
 msgstr "&Seleccioneu"
 
-#: src/boxes.c:717
 #, fuzzy
 msgid "Use &passive mode"
 msgstr "&Mode de desar..."
 
-#: src/boxes.c:719
 msgid "&Use ~/.netrc"
 msgstr ""
 
-#: src/boxes.c:723
 msgid "&Always use ftp proxy"
 msgstr "usa sempre un servidor in&Termediari de ftp"
 
-#: src/boxes.c:725
 msgid "sec"
 msgstr "seg"
 
-#: src/boxes.c:729
 msgid "ftpfs directory cache timeout:"
 msgstr "Temps d'espera de la memòria cau del directori ftpfs:"
 
-#: src/boxes.c:733
 msgid "ftp anonymous password:"
 msgstr "Contrasenya de l'ftp anònim:"
 
-#: src/boxes.c:740
 msgid "Timeout for freeing VFSs:"
 msgstr "Temps d'espera per alliberar VFSs:"
 
-#: src/boxes.c:746
 msgid " Virtual File System Setting "
 msgstr " Configuració dels sistemes de fitxers virtuals "
 
-#: src/boxes.c:799
 msgid "Quick cd"
 msgstr "Canvi ràpid de directori"
 
-#: src/boxes.c:802
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:837
 msgid "Symbolic link filename:"
 msgstr "Nom de fitxer de l'enllaç simbòlic:"
 
-#: src/boxes.c:841
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Nom del fitxer existent (nom de fitxer on apuntarà l'enllaç):"
 
-#: src/boxes.c:848
 msgid "Symbolic link"
 msgstr "Enllaç simbòlic"
 
-#: src/boxes.c:881
 msgid "Running "
 msgstr "S'està executant "
 
-#: src/boxes.c:882 src/find.c:786
 msgid "Stopped"
 msgstr "Aturat"
 
-#: src/boxes.c:942
 msgid "&Stop"
 msgstr "&Atura"
 
-#: src/boxes.c:943
 msgid "&Resume"
 msgstr "&Reprèn"
 
-#: src/boxes.c:944
 msgid "&Kill"
 msgstr "A&caba"
 
-#: src/boxes.c:981
 msgid "Background Jobs"
 msgstr "Tasques de fons"
 
-#: src/boxes.c:1012
 msgid "Domain:"
 msgstr "Domini:"
 
-#: src/boxes.c:1012
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
-#: src/boxes.c:1012 vfs/utilvfs.c:869
 msgid "Password:"
 msgstr "Contrasenya:"
 
-#: src/boxes.c:1063
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Contrasenya per a \\\\%s\\%s"
 
-#: src/charsets.c:51 vfs/extfs.c:1293 vfs/sfs.c:321
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Avís: no s'ha trobat el fitxer %s\n"
 
-#: src/charsets.c:198 src/charsets.c:212
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "No es pot traduir de %s a %s"
 
-#: src/chmod.c:82
 msgid "execute/search by others"
 msgstr "executa/cerca per a altres"
 
-#: src/chmod.c:83
 msgid "write by others"
 msgstr "escriu per a altres"
 
-#: src/chmod.c:84
 msgid "read by others"
 msgstr "llegeix per a altres"
 
-#: src/chmod.c:85
 msgid "execute/search by group"
 msgstr "executa/cerca per al grup"
 
-#: src/chmod.c:86
 msgid "write by group"
 msgstr "escriu per al grup"
 
-#: src/chmod.c:87
 msgid "read by group"
 msgstr "llegeix per al grup"
 
-#: src/chmod.c:88
 msgid "execute/search by owner"
 msgstr "executa/cerca per al propietari"
 
-#: src/chmod.c:89
 msgid "write by owner"
 msgstr "escriu per al propietari"
 
-#: src/chmod.c:90
 msgid "read by owner"
 msgstr "llegeix per al propietari"
 
-#: src/chmod.c:91
 msgid "sticky bit"
 msgstr "bit de permanència"
 
-#: src/chmod.c:92
 msgid "set group ID on execution"
 msgstr "executa amb l'ID del grup"
 
-#: src/chmod.c:93
 msgid "set user ID on execution"
 msgstr "executa amb l'ID del propietari"
 
-#: src/chmod.c:103
 msgid "C&lear marked"
 msgstr "&Esborra els marcats"
 
-#: src/chmod.c:104
 msgid "S&et marked"
 msgstr "&Posa els marcats"
 
-#: src/chmod.c:105
 msgid "&Marked all"
 msgstr "&Marca'ls tots"
 
-#: src/chmod.c:129 src/screen.c:407
 msgid "Name"
 msgstr "Nom"
 
-#: src/chmod.c:131
 msgid "Permissions (Octal)"
 msgstr "Permisos (octal)"
 
-#: src/chmod.c:133
 msgid "Owner name"
 msgstr "Nom del propietari"
 
-#: src/chmod.c:135
 msgid "Group name"
 msgstr "Nom del grup"
 
-#: src/chmod.c:138
 msgid "Use SPACE to change"
 msgstr "Utilitzeu ESPAI per canviar"
 
-#: src/chmod.c:140
 msgid "an option, ARROW KEYS"
 msgstr "una opció, les TECLES DEL CURSOR"
 
-#: src/chmod.c:142
 msgid "to move between options"
 msgstr "per moure's entre opcions"
 
-#: src/chmod.c:144
 msgid "and T or INS to mark"
 msgstr "i la T o INS per marcar-les"
 
-#: src/chmod.c:149 src/chown.c:111
 msgid " Permission "
 msgstr " Permisos "
 
-#: src/chmod.c:201
 msgid "Chmod command"
 msgstr "Canvi de permisos"
 
-#: src/chown.c:74
 msgid "Set &users"
 msgstr "Estableix els &usuaris"
 
-#: src/chown.c:75
 msgid "Set &groups"
 msgstr "Estableix els &grups"
 
-#: src/chown.c:103
 msgid " Name "
 msgstr " Nom "
 
-#: src/chown.c:105
 msgid " Owner name "
 msgstr " Nom del propietari "
 
-#: src/chown.c:107 src/chown.c:117
 msgid " Group name "
 msgstr " Nom del grup "
 
-#: src/chown.c:109
 msgid " Size "
 msgstr " Mida"
 
-#: src/chown.c:115
 msgid " User name "
 msgstr " Nom d'usuari "
 
-#: src/chown.c:158
 msgid " Chown command "
 msgstr " Canvi de propietari "
 
-#: src/chown.c:178
 msgid "<Unknown user>"
 msgstr "<Usuari desconegut>"
 
-#: src/chown.c:179
 msgid "<Unknown group>"
 msgstr "<Grup desconegut>"
 
-#: src/cmd.c:194
 msgid "Files tagged, want to cd?"
 msgstr "Hi ha fitxers seleccionats. Voleu canviar de directori?"
 
-#: src/cmd.c:200 src/cmd.c:640 src/cmd.c:697 src/main.c:684 src/screen.c:1937
 msgid "Cannot change directory"
 msgstr "No he pogut canviar de directori"
 
-#: src/cmd.c:233
 msgid " View file "
 msgstr " Visualització del fitxer "
 
-#: src/cmd.c:233
 msgid " Filename:"
 msgstr " Nom del fitxer:"
 
-#: src/cmd.c:255
 msgid " Filtered view "
 msgstr " Vista filtrada "
 
-#: src/cmd.c:256
 msgid " Filter command and arguments:"
 msgstr " Introduïu l'ordre de filtrat i els arguments:"
 
-#: src/cmd.c:355
 msgid "Create a new Directory"
 msgstr "Crea un directori nou"
 
-#: src/cmd.c:356
 msgid " Enter directory name:"
 msgstr " Introduïu el nom del directori:"
 
-#: src/cmd.c:427
 msgid " Filter "
 msgstr " Filtra "
 
-#: src/cmd.c:428
 msgid " Set expression for filtering filenames"
 msgstr " Introduïu una expressió per filtrar els noms de fitxer"
 
-#: src/cmd.c:515 src/find.c:159
 msgid "  Malformed regular expression  "
 msgstr "  L'expressió habitual no és correcta  "
 
-#: src/cmd.c:528
 msgid " Select "
 msgstr " Selecciona "
 
-#: src/cmd.c:533
 msgid " Unselect "
 msgstr " Deselecciona "
 
-#: src/cmd.c:566
 msgid "Extension file edit"
 msgstr "Edita el fitxer d'extensions"
 
-#: src/cmd.c:567
 msgid " Which extension file you want to edit? "
 msgstr " Quin fitxer d'extensions voleu editar? "
 
-#: src/cmd.c:568 src/cmd.c:671
 msgid "&User"
 msgstr "El d'&Usuari"
 
-#: src/cmd.c:568 src/cmd.c:597 src/cmd.c:671
 msgid "&System Wide"
 msgstr "El de tot el &Sistema"
 
-#: src/cmd.c:594
 msgid " Menu edit "
 msgstr " Edició del menú "
 
-#: src/cmd.c:595
 msgid " Which menu file do you want to edit? "
 msgstr " Quin fitxer de menú voleu editar? "
 
-#: src/cmd.c:597
 msgid "&Local"
 msgstr "&Local"
 
-#: src/cmd.c:597
 msgid "&Home"
 msgstr "Directori de l'&Usuari "
 
-#: src/cmd.c:669
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "edita el fitxer de &Menús"
 
-#: src/cmd.c:670
 #, fuzzy
 msgid " Which syntax file you want to edit? "
 msgstr " Quin fitxer d'extensions voleu editar? "
 
-#: src/cmd.c:824
 msgid " Compare directories "
 msgstr " Compara els directoris "
 
-#: src/cmd.c:825
 msgid " Select compare method: "
 msgstr " Seleccioneu un mètode de comparació: "
 
-#: src/cmd.c:825
 msgid "&Quick"
 msgstr "&Ràpid"
 
-#: src/cmd.c:826
 msgid "&Size only"
 msgstr "només &Mida"
 
-#: src/cmd.c:826
 msgid "&Thorough"
 msgstr "&Detallat"
 
-#: src/cmd.c:839
 msgid " Both panels should be in the listing mode to use this command "
 msgstr " Cal que ambdós quadres siguin en mode llistat per usar l'ordre "
 
-#: src/cmd.c:855
 msgid " The command history is empty "
 msgstr " L'historial d'ordres és buit "
 
-#: src/cmd.c:859
 msgid " Command history "
 msgstr " Historial d'ordres "
 
-#: src/cmd.c:895
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1382,80 +1031,63 @@ msgstr ""
 " No es poden commutar els quadres si no sou \n"
 " a un xterm o a una consola Linux. "
 
-#: src/cmd.c:909
 #, fuzzy, c-format
 msgid "Link %s to:"
 msgstr " enllaç: %s "
 
-#: src/cmd.c:910
 msgid " Link "
 msgstr " Enllaç "
 
-#: src/cmd.c:915
 #, c-format
 msgid " link: %s "
 msgstr " enllaç: %s "
 
-#: src/cmd.c:938
 #, c-format
 msgid " symlink: %s "
 msgstr " enllaç simbòlic: %s "
 
-#: src/cmd.c:974
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " L'enllaç simbòlic `%s' apunta a: "
 
-#: src/cmd.c:979
 msgid " Edit symlink "
 msgstr " Edita l'enllaç simbòlic "
 
-#: src/cmd.c:984
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " edita l'enllaç simbòlic, no puc suprimir %s: %s "
 
-#: src/cmd.c:988
 #, c-format
 msgid " edit symlink: %s "
 msgstr " edita l'enllaç simbòlic: %s "
 
-#: src/cmd.c:999
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' no és un enllaç simbòlic"
 
-#: src/cmd.c:1117
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " No s'ha pogut canviar a %s "
 
-#: src/cmd.c:1126
 msgid " Enter machine name (F1 for details): "
 msgstr " Introduïu el nom de la màquina (F1 per a detalls): "
 
-#: src/cmd.c:1131 src/widget.c:1052
 msgid " Link to a remote machine "
 msgstr " Enllaça amb una màquina remota "
 
-#: src/cmd.c:1138 src/widget.c:1053
 msgid " FTP to machine "
 msgstr " Fes FTP a màquina "
 
-#: src/cmd.c:1144
 #, fuzzy
 msgid " Shell link to machine "
 msgstr " Enllaç SMB a màquina "
 
-#: src/cmd.c:1151 src/widget.c:1054
 msgid " SMB link to machine "
 msgstr " Enllaç SMB a màquina "
 
-#: src/cmd.c:1160
 msgid " Undelete files on an ext2 file system "
 msgstr " Recupera fitxers d'un sistema de fitxers ext2 "
 
-#: src/cmd.c:1161
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1463,15 +1095,12 @@ msgstr ""
 " Introduïu el dispositiu (sense /dev/) d'on voleu\n"
 "   recuperar els fitxers: (F1 per detalls)"
 
-#: src/cmd.c:1210
 msgid " Setup saved to ~/"
 msgstr " S'ha desat la configuració a ~/"
 
-#: src/cmd.c:1212
 msgid " Setup "
 msgstr " Configuració "
 
-#: src/command.c:183 src/screen.c:2195 src/tree.c:820
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1480,91 +1109,70 @@ msgstr ""
 " No puc canviar a \"%s\" \n"
 " %s "
 
-#: src/command.c:217 src/user.c:690
 msgid " Cannot execute commands on non-local filesystems"
 msgstr " No podeu executar ordres a sistemes de fitxers no-locals"
 
-#: src/command.c:226 src/execute.c:190
 msgid " The shell is already running a command "
 msgstr " L'intèrpret ja esta executant una comanda "
 
-#: src/dir.c:49
 msgid "&Unsorted"
 msgstr "sense &Ordre"
 
-#: src/dir.c:50
 msgid "&Name"
 msgstr "&Nom"
 
-#: src/dir.c:51
 msgid "&Extension"
 msgstr "&Extensió"
 
-#: src/dir.c:52
 msgid "&Modify time"
 msgstr "data de &Modificació"
 
-#: src/dir.c:53
 msgid "&Access time"
 msgstr "data d'&Accés"
 
-#: src/dir.c:54
 msgid "&Change time"
 msgstr "data de &Canvi"
 
-#: src/dir.c:55
 msgid "&Size"
 msgstr "Mi&da"
 
-#: src/dir.c:56
 msgid "&Inode"
 msgstr "node-&I"
 
-#: src/dir.c:59
 msgid "&Type"
 msgstr "&Tipus"
 
-#: src/dir.c:60
 msgid "&Links"
 msgstr "en&Llaços"
 
-#: src/dir.c:61
 msgid "N&GID"
 msgstr "&GID numèric"
 
-#: src/dir.c:62
 msgid "N&UID"
 msgstr "&UID numèric"
 
-#: src/dir.c:63
 msgid "&Owner"
 msgstr "&Propietari"
 
-#: src/dir.c:64
 msgid "&Group"
 msgstr "gr&Up"
 
-#: src/dir.c:477 src/dir.c:578
 #, fuzzy
 msgid "Cannot read directory contents"
 msgstr "No he pogut canviar de directori"
 
-#: src/execute.c:133 src/utilunix.c:394
 #, c-format
 msgid "Press any key to continue..."
 msgstr "Premeu qualsevol tecla per continuar..."
 
-#: src/execute.c:244
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Teclegeu \"exit\" per retornar al Midnight Commander"
 
-#: src/execute.c:352
 #, c-format
 msgid " Cannot fetch a local copy of %s "
 msgstr " No puc trobar una còpia local de %s "
 
-#: src/ext.c:104 src/user.c:561
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1573,19 +1181,15 @@ msgstr ""
 " No puc crear fitxer temporal d'ordres \n"
 " %s "
 
-#: src/ext.c:117 src/user.c:585
 msgid " Parameter "
 msgstr " Paràmetre "
 
-#: src/ext.c:468 src/ext.c:487
 msgid " file error "
 msgstr " s'ha produït un error de fitxer "
 
-#: src/ext.c:470 src/ext.c:489
 msgid "Format of the "
 msgstr "Formatatge  del "
 
-#: src/ext.c:471
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1597,7 +1201,6 @@ msgstr ""
 "ha fallat. Si us plau, agafeu una còpia nova del\n"
 "paquet Midnight Commander."
 
-#: src/ext.c:490
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1607,7 +1210,6 @@ msgstr ""
 "la versió 3.0.  Potser vulgueu copiar-lo\n"
 "de "
 
-#: src/ext.c:493
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1615,31 +1217,24 @@ msgstr ""
 "mc.ext o usar-lo\n"
 "com a exemple de com escriure'l.\n"
 
-#: src/ext.c:496
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext s'utilitzarà de moment."
 
-#: src/file.c:123 src/tree.c:590
 msgid " Copy "
 msgstr " Copia "
 
-#: src/file.c:124 src/tree.c:631
 msgid " Move "
 msgstr " Mou "
 
-#: src/file.c:125 src/tree.c:705
 msgid " Delete "
 msgstr " Suprimeix "
 
-#: src/file.c:218
 msgid " Invalid target mask "
 msgstr " La màscara objectiu no és vàlida "
 
-#: src/file.c:318
 msgid " Cannot make the hardlink "
 msgstr " No s'ha pogut fer l'enllaç fort "
 
-#: src/file.c:362
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -1648,7 +1243,6 @@ msgstr ""
 " No puc llegir l'enllaç d'origen \"%s\" \n"
 " %s "
 
-#: src/file.c:373
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -1659,7 +1253,6 @@ msgstr ""
 "\n"
 " S'inhabilitarà l'opció \"enllaços simbòlics estables\" "
 
-#: src/file.c:423
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -1668,7 +1261,6 @@ msgstr ""
 " No puc crear l'enllaç simbòlic objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:496
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1677,7 +1269,6 @@ msgstr ""
 " No puc sobreescriure el directori \"%s\" \n"
 " %s "
 
-#: src/file.c:508
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -1686,12 +1277,10 @@ msgstr ""
 " No puc estudiar el fitxer origen \"%s\" \n"
 " %s "
 
-#: src/file.c:518 src/file.c:1059
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' i `%s' són el mateix fitxer "
 
-#: src/file.c:553
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1700,7 +1289,6 @@ msgstr ""
 " No puc crear el fitxer especial \"%s\" \n"
 " %s "
 
-#: src/file.c:563 src/file.c:790
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1709,7 +1297,6 @@ msgstr ""
 " No puc canviar el propietari del fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:571 src/file.c:801
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1718,7 +1305,6 @@ msgstr ""
 " No puc canviar els permisos del fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:584
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1727,11 +1313,9 @@ msgstr ""
 " No puc obrir el fitxer origen \"%s\" \n"
 " %s "
 
-#: src/file.c:594
 msgid " Reget failed, about to overwrite file "
 msgstr " Ha fallat la represa, es sobreescriurà el fitxer "
 
-#: src/file.c:601
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1740,7 +1324,6 @@ msgstr ""
 " No puc estudiar el fitxer origen \"%s\" \n"
 " %s "
 
-#: src/file.c:621
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1749,7 +1332,6 @@ msgstr ""
 " No puc crear el fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:635
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1758,7 +1340,6 @@ msgstr ""
 " No puc estudiar el fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:667
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1767,7 +1348,6 @@ msgstr ""
 " No puc llegir el fitxer origen \"%s\" \n"
 " %s "
 
-#: src/file.c:698
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1776,11 +1356,9 @@ msgstr ""
 " No puc escriure el fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:716
 msgid "(stalled)"
 msgstr "(encallat)"
 
-#: src/file.c:760
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1789,7 +1367,6 @@ msgstr ""
 " No puc tancar el fitxer origen \"%s\" \n"
 " %s "
 
-#: src/file.c:770
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1798,19 +1375,15 @@ msgstr ""
 " No puc tancar el fitxer objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:781
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "S'ha recuperat un fitxer incomplet. Voleu conservar-lo?"
 
-#: src/file.c:782
 msgid "&Delete"
 msgstr "&Suprimeix"
 
-#: src/file.c:782
 msgid "&Keep"
 msgstr "&Conservar-lo"
 
-#: src/file.c:842
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1819,7 +1392,6 @@ msgstr ""
 " No puc estudiar el directori origen \"%s\" \n"
 " %s "
 
-#: src/file.c:867
 #, c-format
 msgid ""
 " Source \"%s\" is not a directory \n"
@@ -1828,7 +1400,6 @@ msgstr ""
 " El directori origen \"%s\" no és un directori \n"
 " %s "
 
-#: src/file.c:876
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1837,7 +1408,6 @@ msgstr ""
 " No puc copiar l'enllaç simbòlic cíclic \n"
 " \"%s\" "
 
-#: src/file.c:910 src/file.c:1929 src/tree.c:645
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1846,7 +1416,6 @@ msgstr ""
 " Cal que el destí \"%s\" sigui un directori \n"
 " %s "
 
-#: src/file.c:926
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1855,7 +1424,6 @@ msgstr ""
 " No puc crear el directori objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:942
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1864,7 +1432,6 @@ msgstr ""
 " No puc canviar el propietari del directori objectiu \"%s\" \n"
 " %s "
 
-#: src/file.c:1040
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1873,12 +1440,10 @@ msgstr ""
 " No puc estudiar el fitxer \"%s\" \n"
 " %s "
 
-#: src/file.c:1066
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " No puc sobreescriure el directori `%s' "
 
-#: src/file.c:1101
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1887,7 +1452,6 @@ msgstr ""
 " No puc moure el fitxer \"%s\" a \"%s\" \n"
 " %s "
 
-#: src/file.c:1125
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1896,22 +1460,18 @@ msgstr ""
 " No puc suprimir el fitxer \"%s\" \n"
 " %s "
 
-#: src/file.c:1177
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' i `%s' són el mateix directori "
 
-#: src/file.c:1196
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " No puc sobreescriure el directori \"%s\" %s "
 
-#: src/file.c:1200
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " No puc sobreescriure el fitxer \"%s\" %s "
 
-#: src/file.c:1226
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -1920,7 +1480,6 @@ msgstr ""
 " No puc moure el directori \"%s\" a \"%s\" \n"
 " %s "
 
-#: src/file.c:1296
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -1929,7 +1488,6 @@ msgstr ""
 " No puc suprimir el fitxer \"%s\" \n"
 " %s "
 
-#: src/file.c:1356 src/file.c:1425 src/file.c:1453
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -1938,73 +1496,56 @@ msgstr ""
 " No puc suprimir el directori \"%s\" \n"
 " %s "
 
-#: src/file.c:1601
 msgid "1Copy"
 msgstr "1Copia"
 
-#: src/file.c:1601
 msgid "1Move"
 msgstr "1Mou"
 
-#: src/file.c:1601
 msgid "1Delete"
 msgstr "1Suprimeix"
 
-#: src/file.c:1616
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1618
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1620 vfs/fish.c:566
 msgid "file"
 msgstr "fitxer"
 
-#: src/file.c:1620
 msgid "files"
 msgstr "fitxers"
 
-#: src/file.c:1620
 msgid "directory"
 msgstr "directori"
 
-#: src/file.c:1620
 msgid "directories"
 msgstr "directoris"
 
-#: src/file.c:1621
 msgid "files/directories"
 msgstr "fitxers/directoris"
 
-#: src/file.c:1621
 msgid " with source mask:"
 msgstr " amb màscara font:"
 
-#: src/file.c:1621
 msgid " to:"
 msgstr " cap a:"
 
-#: src/file.c:1765
 msgid " Cannot operate on \"..\"! "
 msgstr " No puc treballar sobre \"..\"! "
 
-#: src/file.c:1821
 msgid " Sorry, I could not put the job in background "
 msgstr " Ho sento, no he pogut posar la tasca al rerafons "
 
-#: src/file.c:2079 src/view.c:459
 msgid "&Retry"
 msgstr "&Reintenta"
 
-#: src/file.c:2080 src/file.c:2143 src/filegui.c:209 src/filegui.c:517
 msgid "&Abort"
 msgstr "a&Vorta"
 
-#: src/file.c:2132
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2014,7 +1555,6 @@ msgstr ""
 "   El directori no és buit.   \n"
 "   Voleu suprimir-lo recursivament? "
 
-#: src/file.c:2134
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2024,144 +1564,111 @@ msgstr ""
 "   Tasca de fons: El directori no és buit \n"
 "   Voleu suprimir-lo recursivament? "
 
-#: src/file.c:2136
 msgid " Delete: "
 msgstr " Suprimeix: "
 
-#: src/file.c:2142 src/filegui.c:519
 msgid "Non&e"
 msgstr "ca&P"
 
-#: src/filegui.c:323
 #, c-format
 msgid "ETA %d:%02d.%02d"
 msgstr ""
 
-#: src/filegui.c:346
 #, c-format
 msgid "%.2f MB/s"
 msgstr ""
 
-#: src/filegui.c:349
 #, c-format
 msgid "%.2f KB/s"
 msgstr ""
 
-#: src/filegui.c:352
 #, c-format
 msgid "%ld B/s"
 msgstr ""
 
-#: src/filegui.c:375
 msgid "File"
 msgstr "Fitxer"
 
-#: src/filegui.c:398
 msgid "Count"
 msgstr "Compta"
 
-#: src/filegui.c:419
 msgid "Bytes"
 msgstr "Bytes"
 
-#: src/filegui.c:453
 msgid "Source"
 msgstr "Font/Origen"
 
-#: src/filegui.c:476
 msgid "Target"
 msgstr "Objectiu/Destí"
 
-#: src/filegui.c:498
 msgid "Deleting"
 msgstr "Suprimint"
 
-#: src/filegui.c:516
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "El fitxer de destí \"%s\" ja existeix!"
 
-#: src/filegui.c:518
 msgid "If &size differs"
 msgstr "si difereix la  &Mida"
 
-#: src/filegui.c:520
 msgid "&Update"
 msgstr "actualit&Za"
 
-#: src/filegui.c:522
 msgid "Overwrite all targets?"
 msgstr "Voleu sobreescriure'ls tots?"
 
-#: src/filegui.c:523
 msgid "&Reget"
 msgstr "reprè&N"
 
-#: src/filegui.c:524
 msgid "A&ppend"
 msgstr "afe&Geix"
 
-#: src/filegui.c:527
 msgid "Overwrite this target?"
 msgstr "Voleu sobreescriure aquest destí?"
 
-#: src/filegui.c:529
 #, fuzzy, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Data del destí: %s, mida %llu"
 
-#: src/filegui.c:530
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Data del font: %s, mida %llu"
 
-#: src/filegui.c:532
 #, fuzzy, c-format
 msgid "Target date: %s, size %u"
 msgstr "Data del destí: %s, mida %u"
 
-#: src/filegui.c:533
 #, fuzzy, c-format
 msgid "Source date: %s, size %u"
 msgstr "Data del font: %s, mida %u"
 
-#: src/filegui.c:609
 msgid " File exists "
 msgstr " El fitxer ja existeix "
 
-#: src/filegui.c:611
 msgid " Background process: File exists "
 msgstr " Tasca de fons: El fitxer ja existeix "
 
-#: src/filegui.c:733
 msgid "preserve &Attributes"
 msgstr "&Preserva els atributs"
 
-#: src/filegui.c:735
 msgid "follow &Links"
 msgstr "segueix els en&Llaços"
 
-#: src/filegui.c:737
 msgid "to:"
 msgstr "cap a:"
 
-#: src/filegui.c:738
 msgid "&Using shell patterns"
 msgstr "amb patrons d'&Intèrpret"
 
-#: src/filegui.c:759
 msgid "&Background"
 msgstr "&Segon pla"
 
-#: src/filegui.c:769
 msgid "&Stable Symlinks"
 msgstr "enllaços simbòlics &Estables"
 
-#: src/filegui.c:771
 msgid "&Dive into subdir if exists"
 msgstr "&Recórrer al subdirectori si existeix"
 
-#: src/filegui.c:949
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2170,202 +1677,154 @@ msgstr ""
 " El patró de font `%s' no és vàlid \n"
 " %s "
 
-#: src/find.c:111
 msgid "&Suspend"
 msgstr "&Suspèn"
 
-#: src/find.c:112
 msgid "Con&tinue"
 msgstr "&Continua"
 
-#: src/find.c:113
 msgid "&Chdir"
 msgstr "Canvia de &dirextori"
 
-#: src/find.c:114
 msgid "&Again"
 msgstr "Un &Altre cop"
 
-#: src/find.c:115 src/subshell.c:324
 msgid "&Quit"
 msgstr "&Surt"
 
-#: src/find.c:116 src/panelize.c:69
 msgid "Pane&lize"
 msgstr "Converteix-ho en &quadre"
 
-#: src/find.c:117
 msgid "&View - F3"
 msgstr "&Visualitza - F3"
 
-#: src/find.c:118
 msgid "&Edit - F4"
 msgstr "&Edita - F4"
 
-#: src/find.c:195
 msgid "Start at:"
 msgstr "Comença a:"
 
-#: src/find.c:195
 msgid "Filename:"
 msgstr "Nom del fitxer:"
 
-#: src/find.c:195
 msgid "Content: "
 msgstr "Contingut:"
 
-#: src/find.c:196 src/main.c:798 src/main.c:822
 msgid "&Tree"
 msgstr "Ar&bre"
 
-#: src/find.c:244 src/find.c:857
 msgid "Find File"
 msgstr "Cerca Fitxer"
 
 # Cal veure fins a qin punt l'MC anomena els programes que fa servir, eh?  iv
-#: src/find.c:505
 #, c-format
 msgid "Grepping in %s"
 msgstr "Grepping in %s"
 
-#: src/find.c:605
 msgid "Finished"
 msgstr "Finalitzat"
 
-#: src/find.c:629 src/view.c:1644
 #, c-format
 msgid "Searching %s"
 msgstr "S'està cercant a %s"
 
-#: src/find.c:786 src/find.c:883
 msgid "Searching"
 msgstr "Cercant"
 
-#: src/help.c:285
 msgid " Help file format error\n"
 msgstr " El format del fitxer d'ajuda és erroni\n"
 
-#: src/help.c:324
 msgid " Internal bug: Double start of link area "
 msgstr " S'ha produït un error intern: Començament doble de l'àrea d'enllaços "
 
-#: src/help.c:561 src/help.c:785
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " No es troba el node %s al fitxer d'ajuda"
 
-#: src/help.c:823
 msgid "Index"
 msgstr "Índex"
 
-#: src/help.c:825
 msgid "Prev"
 msgstr "Anterior"
 
-#: src/hotlist.c:116
 msgid "&Move"
 msgstr "&Mou"
 
-#: src/hotlist.c:117 src/panelize.c:68
 msgid "&Remove"
 msgstr "&Suprimeix"
 
-#: src/hotlist.c:118 src/hotlist.c:843 src/hotlist.c:943
 msgid "&Append"
 msgstr "A&fegeix"
 
-#: src/hotlist.c:119 src/hotlist.c:841 src/hotlist.c:941
 msgid "&Insert"
 msgstr "&Insereix"
 
-#: src/hotlist.c:120
 msgid "New &Entry"
 msgstr "Nou re&gistre"
 
-#: src/hotlist.c:121
 msgid "New &Group"
 msgstr "Nou &grup"
 
-#: src/hotlist.c:123
 msgid "&Up"
 msgstr "A&munt"
 
-#: src/hotlist.c:124
 msgid "&Add current"
 msgstr "Afe&geix l'actual"
 
-#: src/hotlist.c:126
 #, fuzzy
 msgid "&Refresh"
 msgstr "in&Verteix"
 
-#: src/hotlist.c:127
 msgid "Fr&ee VFSs now"
 msgstr "Allib&era els VFSs ara"
 
-#: src/hotlist.c:129
 msgid "Change &To"
 msgstr "Can&via a"
 
-#: src/hotlist.c:179
 msgid "Subgroup - press ENTER to see list"
 msgstr "Subgrup - premeu RETORN per veure la llista"
 
-#: src/hotlist.c:612
 msgid "Active VFS directories"
 msgstr "Directoris VFS actius"
 
-#: src/hotlist.c:615
 msgid "Directory hotlist"
 msgstr "Directori favorits"
 
-#: src/hotlist.c:643
 msgid " Directory path "
 msgstr " Ruta del directori "
 
-#: src/hotlist.c:646 src/hotlist.c:695
 msgid " Directory label "
 msgstr " Etiqueta del directori "
 
-#: src/hotlist.c:671
 #, c-format
 msgid "Moving %s"
 msgstr "S'està movent %s"
 
-#: src/hotlist.c:913
 msgid "New hotlist entry"
 msgstr "Nou registre als favorits"
 
-#: src/hotlist.c:913
 msgid "Directory label"
 msgstr "Etiqueta del directori"
 
-#: src/hotlist.c:914
 msgid "Directory path"
 msgstr "Ruta del directori"
 
-#: src/hotlist.c:998
 msgid " New hotlist group "
 msgstr " Nou grup de favorits "
 
-#: src/hotlist.c:998
 msgid "Name of new group"
 msgstr "Nom del nou grup"
 
-#: src/hotlist.c:1013
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etiqueta per a \"%s\":"
 
-#: src/hotlist.c:1020
 msgid " Add to hotlist "
 msgstr " Afegeix als favorits "
 
-#: src/hotlist.c:1058
 msgid " Remove: "
 msgstr " Suprimeix: "
 
-#: src/hotlist.c:1062
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -2375,198 +1834,154 @@ msgstr ""
 " El grup no és buit.\n"
 " Voleu suprimir-lo?"
 
-#: src/hotlist.c:1404
 msgid " Top level group "
 msgstr " Grup principal "
 
-#: src/hotlist.c:1427
 msgid "MC was unable to write ~/"
 msgstr "MC no ha pogut escriure al ~/"
 
-#: src/hotlist.c:1428
 msgid " file, your old hotlist entries were not deleted"
 msgstr " fitxer, i no s'ha pogut suprimir els favorits antics"
 
-#: src/hotlist.c:1430
 msgid " Hotlist Load "
 msgstr " Càrrega de favorits "
 
-#: src/info.c:74
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:91
 #, c-format
 msgid "File:       %s"
 msgstr "Fitxer:       %s"
 
-#: src/info.c:103
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
 msgstr "Nodes lliures: %d (%d%%) of %d"
 
-#: src/info.c:109
 msgid "No node information"
 msgstr "No hi ha informació de nodes"
 
-#: src/info.c:117
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Espai lliure: %s (%d%%) of %s"
 
-#: src/info.c:121
 msgid "No space information"
 msgstr "No hi ha informació d'espai"
 
-#: src/info.c:125
 #, c-format
 msgid "Type:      %s "
 msgstr "Tipus:      %s "
 
-#: src/info.c:125
 msgid "non-local vfs"
 msgstr "VFS no-local"
 
-#: src/info.c:131
 #, c-format
 msgid "Device:    %s"
 msgstr "Dispositiu: %s"
 
 # Això queda més aclaridor...  iv
-#: src/info.c:135
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Muntat a:   %s"
 
-#: src/info.c:140
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Accedit:    %s"
 
-#: src/info.c:144
 #, c-format
 msgid "Modified:  %s"
 msgstr "Modificat:  %s"
 
-#: src/info.c:148
 #, c-format
 msgid "Created:   %s"
 msgstr "Creat:      %s"
 
-#: src/info.c:163
 #, c-format
 msgid "Size:      %s"
 msgstr "Mida:      %s"
 
-#: src/info.c:166
 #, c-format
 msgid " (%ld block)"
 msgstr " (%ld bloc)"
 
-#: src/info.c:166
 #, c-format
 msgid " (%ld blocks)"
 msgstr " (%ld blocs)"
 
-#: src/info.c:172
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Propietari: %s/%s"
 
-#: src/info.c:177
 #, c-format
 msgid "Links:     %d"
 msgstr "Enllaços:   %d"
 
-#: src/info.c:181
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Mode:       %s (%04o)"
 
-#: src/info.c:186
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Ubicació:   %Xh:%Xh"
 
-#: src/info.c:196
 msgid "File:       None"
 msgstr "Fitxer:       cap"
 
-#: src/layout.c:151
 msgid "&Vertical"
 msgstr "&Vertical"
 
-#: src/layout.c:152
 msgid "&Horizontal"
 msgstr "&Horitzontal"
 
-#: src/layout.c:162
 #, fuzzy
 msgid "&Xterm window title"
 msgstr "pistes a &Xterm"
 
-#: src/layout.c:163
 msgid "h&Intbar visible"
 msgstr "p&Istes visibles"
 
-#: src/layout.c:164
 msgid "&Keybar visible"
 msgstr "Barra de &Tecles visible"
 
-#: src/layout.c:165
 msgid "command &Prompt"
 msgstr "&Línia d'ordres"
 
-#: src/layout.c:166
 msgid "show &Mini status"
 msgstr "mostra el &Miniestat"
 
-#: src/layout.c:167
 msgid "menu&Bar visible"
 msgstr "&Barra de menús visible"
 
-#: src/layout.c:168
 msgid "&Equal split"
 msgstr "divisió &Simètrica"
 
-#: src/layout.c:169
 msgid "pe&Rmissions"
 msgstr "&Permisos"
 
-#: src/layout.c:170
 msgid "&File types"
 msgstr "tipus de &Fitxer"
 
-#: src/layout.c:358
 msgid " Panel split "
 msgstr " Divisió de quadres "
 
-#: src/layout.c:359
 msgid " Highlight... "
 msgstr " Ressalta... "
 
-#: src/layout.c:360 src/option.c:125
 msgid " Other options "
 msgstr " Altres opcions "
 
-#: src/layout.c:361
 msgid "output lines"
 msgstr "línies de sortida"
 
-#: src/layout.c:423
 msgid "Layout"
 msgstr "Disposició"
 
-#: src/learn.c:73
 msgid "Learn keys"
 msgstr "Defineix tecles"
 
-#: src/learn.c:79
 msgid " Teach me a key "
 msgstr " Premeu la tecla "
 
-#: src/learn.c:80
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -2587,21 +2002,17 @@ msgstr ""
 "Si voleu sortir, premeu un cop la tecla\n"
 "d'Escapada i espereu."
 
-#: src/learn.c:114
 msgid " Cannot accept this key "
 msgstr " No puc acceptar la tecla "
 
-#: src/learn.c:115
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " Heu pres \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
-#: src/learn.c:164
 msgid "OK"
 msgstr "D'acord"
 
-#: src/learn.c:172
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2609,11 +2020,9 @@ msgstr ""
 "Sembla que les tecles ja\n"
 "funcionen bé. Això és perfecte."
 
-#: src/learn.c:174
 msgid "&Discard"
 msgstr "&Descarta"
 
-#: src/learn.c:179
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2621,20 +2030,16 @@ msgstr ""
 "Genial! Teniu una base de dades de terminals\n"
 "completa! Totes les tecles funcionen."
 
-#: src/learn.c:287
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
-#: src/learn.c:291
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr ""
 "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
-#: src/learn.c:295
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
 
-#: src/main.c:427
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2646,261 +2051,197 @@ msgstr ""
 " vostre directori de treball, o heu pres uns permisos   \n"
 " d'accés extra amb la comanda \"su\"?                  "
 
-#: src/main.c:471 src/screen.c:1955
 msgid " The Midnight Commander "
 msgstr " El Midnight Commander "
 
-#: src/main.c:472
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Realment voleu sortir del Midnight Commander? "
 
-#: src/main.c:795 src/main.c:819
 msgid "&Listing mode..."
 msgstr "mode de &Llistat..."
 
-#: src/main.c:796 src/main.c:820
 msgid "&Quick view     C-x q"
 msgstr "&Vista ràpida     C-x q"
 
-#: src/main.c:797 src/main.c:821
 msgid "&Info           C-x i"
 msgstr "&Informació       C-x i"
 
-#: src/main.c:800 src/main.c:824
 msgid "&Sort order..."
 msgstr "&Ordenació..."
 
-#: src/main.c:802 src/main.c:826
 msgid "&Filter..."
 msgstr "&Filtra..."
 
-#: src/main.c:806 src/main.c:830
 msgid "&Network link..."
 msgstr "enllaç per a la &Xarxa..."
 
-#: src/main.c:808 src/main.c:832
 msgid "FT&P link..."
 msgstr "enllaç per a F&TP..."
 
-#: src/main.c:809 src/main.c:833
 #, fuzzy
 msgid "S&hell link..."
 msgstr "Enllaç SM&B..."
 
-#: src/main.c:811 src/main.c:835
 msgid "SM&B link..."
 msgstr "Enllaç SM&B..."
 
-#: src/main.c:815 src/main.c:839
 msgid "&Rescan         C-r"
 msgstr "&Rellegeix      C-r"
 
-#: src/main.c:843
 msgid "&User menu          F2"
 msgstr "menú d'&Usuari               F2"
 
-#: src/main.c:844
 msgid "&View               F3"
 msgstr "&Visualitza                  F3"
 
-#: src/main.c:845
 msgid "Vie&w file...         "
 msgstr "Visualitza el fi&Txer...               "
 
-#: src/main.c:846
 msgid "&Filtered view     M-!"
 msgstr "vista &Filtrada              M-!"
 
-#: src/main.c:847
 msgid "&Edit               F4"
 msgstr "&Edita                      F4"
 
-#: src/main.c:848
 msgid "&Copy               F5"
 msgstr "&Copia                      F5"
 
-#: src/main.c:849
 msgid "c&Hmod           C-x c"
 msgstr "permisos (c&Hmod)        C-x c"
 
-#: src/main.c:850
 msgid "&Link            C-x l"
 msgstr "en&Llaça                 C-x l"
 
-#: src/main.c:851
 msgid "&SymLink         C-x s"
 msgstr "enllaç &Simbòlic          C-x s"
 
-#: src/main.c:852
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "e&Dita l'enllaç simbòlic C-x C-s"
 
-#: src/main.c:853
 msgid "ch&Own           C-x o"
 msgstr "canvia el propietari (ch&Own)       C-x o"
 
-#: src/main.c:854
 msgid "&Advanced chown       "
 msgstr "&Permisos i propietari        "
 
-#: src/main.c:855
 msgid "&Rename/Move        F6"
 msgstr "&Reanomena/Mou            F6"
 
-#: src/main.c:856
 msgid "&Mkdir              F7"
 msgstr "crea directori (&Mkdir)     F7"
 
-#: src/main.c:857
 msgid "&Delete             F8"
 msgstr "sup&Rimeix                  F8"
 
-#: src/main.c:858
 msgid "&Quick cd          M-c"
 msgstr "&Canvi ràpid de directori           M-c"
 
-#: src/main.c:860
 msgid "select &Group      M-+"
 msgstr "selecciona el &Grup           M-+"
 
-#: src/main.c:861
 msgid "u&Nselect group    M-\\"
 msgstr "deseleccio&Na el grup         M-\\"
 
-#: src/main.c:862
 msgid "reverse selec&Tion M-*"
 msgstr "&Inverteix la selecció        M-*"
 
-#: src/main.c:864
 msgid "e&Xit              F10"
 msgstr "&Surt                      F10"
 
-#: src/main.c:872
 msgid "&Directory tree"
 msgstr "arbre de &Directoris"
 
-#: src/main.c:873
 msgid "&Find file            M-?"
 msgstr "&Cerca el fitxer           M-?"
 
-#: src/main.c:874
 msgid "s&Wap panels          C-u"
 msgstr "I&ntercanvia els quadres    C-u"
 
-#: src/main.c:875
 msgid "switch &Panels on/off C-o"
 msgstr "activa/desactiva la commutació de &Quadres C-o"
 
-#: src/main.c:876
 msgid "&Compare directories  C-x d"
 msgstr "c&Ompara directoris     C-x d"
 
-#: src/main.c:877
 msgid "e&Xternal panelize    C-x !"
 msgstr "quadre de cerca e&Xterna   C-x !"
 
-#: src/main.c:878
 msgid "show directory s&Izes"
 msgstr "mostra la mi&Da dels directoris"
 
-#: src/main.c:880
 msgid "command &History"
 msgstr "&Historial d'ordres"
 
-#: src/main.c:881
 msgid "di&Rectory hotlist    C-\\"
 msgstr "directoris fa&Vorits     C-\\"
 
-#: src/main.c:883
 msgid "&Active VFS list      C-x a"
 msgstr "llista de VFSs &Actius   C-x a"
 
-#: src/main.c:886
 msgid "&Background jobs      C-x j"
 msgstr "tasques de &Fons         C-x j"
 
-#: src/main.c:890
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Recupera els fitxers (sols ext2fs)"
 
-#: src/main.c:893
 msgid "&Listing format edit"
 msgstr "edita el format de &Llistat"
 
-#: src/main.c:898
 msgid "Edit &extension file"
 msgstr "edita el fitxer d'&Extensions"
 
-#: src/main.c:899
 msgid "Edit &menu file"
 msgstr "edita el fitxer de &Menús"
 
-#: src/main.c:901
 msgid "Edit edi&tor menu file"
 msgstr "Edició de l'edi&Tor de menús"
 
-#: src/main.c:902
 #, fuzzy
 msgid "Edit &syntax file"
 msgstr "edita el fitxer de &Menús"
 
-#: src/main.c:908
 msgid "&Configuration..."
 msgstr "&Configuració..."
 
-#: src/main.c:909
 msgid "&Layout..."
 msgstr "&Format..."
 
-#: src/main.c:910
 msgid "c&Onfirmation..."
 msgstr "con&Firmació..."
 
-#: src/main.c:911
 msgid "&Display bits..."
 msgstr "&Bits de visualització..."
 
-#: src/main.c:914
 msgid "&Virtual FS..."
 msgstr "Sistemes de fitxers &Virtuals..."
 
-#: src/main.c:917
 msgid "&Save setup"
 msgstr "&Desa la configuració"
 
-#: src/main.c:928
 msgid " &Above "
 msgstr " a dal&T "
 
-#: src/main.c:928
 msgid " &Left "
 msgstr " &Esquerra "
 
-#: src/main.c:932
 msgid " &File "
 msgstr " &Fitxer "
 
-#: src/main.c:935
 msgid " &Command "
 msgstr " &Ordre "
 
-#: src/main.c:938
 msgid " &Options "
 msgstr " &Opcions "
 
-#: src/main.c:941
 msgid " &Below "
 msgstr " a bai&X "
 
-#: src/main.c:941
 msgid " &Right "
 msgstr " &Dreta "
 
-#: src/main.c:984
 msgid " Information "
 msgstr " Informació "
 
-#: src/main.c:986
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this case you'll need to do a   \n"
@@ -2912,33 +2253,26 @@ msgstr ""
 " que feu una recàrrega manual del directori. Vegeu la   \n"
 " pàgina del manual per als detalls.          "
 
-#: src/main.c:1209 src/screen.c:2207
 msgid "Menu"
 msgstr "Menú"
 
-#: src/main.c:1343
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'entorn TERM no esta definida!\n"
 
-#: src/main.c:1645 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:1856
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[opcions] [aquest_dir] [dir_d'altre_quadre]\n"
 
-#: src/main.c:1860
 #, fuzzy
 msgid "+number"
 msgstr "Número de l'inode"
 
-#: src/main.c:1861
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:1863
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2949,7 +2283,6 @@ msgstr ""
 "'mc -V')\n"
 "a mc-devel@gnome.org\n"
 
-#: src/main.c:1878
 #, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -2993,93 +2326,71 @@ msgstr ""
 "   blau verdós clar, gris clar i blanc\n"
 "\n"
 
-#: src/main.c:1955
 msgid "Displays this help message"
 msgstr "Mostra aquest missatge d'ajuda"
 
-#: src/main.c:1957
 msgid "Displays the current version"
 msgstr "Mostra la versió actual"
 
-#: src/main.c:1961
 msgid "Forces xterm features"
 msgstr "Força l'ús de característiques d'xterm"
 
-#: src/main.c:1963
 msgid "Disable mouse support in text version"
 msgstr "Inhabilita el suport de ratolí a la versió text"
 
-#: src/main.c:1966
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova d'utilitzar termcap en comptes de terminfo"
 
-#: src/main.c:1969
 msgid "Resets soft keys on HP terminals"
 msgstr "Reinicia les tecles programades als terminals HP"
 
-#: src/main.c:1971
 msgid "To run on slow terminals"
 msgstr "Per funcionar amb terminals lents"
 
-#: src/main.c:1973
 msgid "Use stickchars to draw"
 msgstr "Utilitza el caràcters de línies per fer marcs"
 
-#: src/main.c:1977
 msgid "Requests to run in black and white"
 msgstr "Demana que s'utilitzi el mode blanc i negre"
 
-#: src/main.c:1979
 msgid "Request to run in color mode"
 msgstr "Demana que s'utilitzi el mode en color"
 
-#: src/main.c:1981
 msgid "Specifies a color configuration"
 msgstr "Especifica una configuració de color"
 
-#: src/main.c:1983
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra una ajuda de com canviar l'esquema de colors"
 
-#: src/main.c:1988
 msgid "Log ftp dialog to specified file"
 msgstr "Enregistra el quadre ftp a un fitxer"
 
-#: src/main.c:1991
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:1997
 #, fuzzy
 msgid "Print data directory"
 msgstr "Crea un directori nou"
 
-#: src/main.c:1999
 #, fuzzy
 msgid "Print last working directory to specified file"
 msgstr "Imprimeix el directori de treball en sortir"
 
-#: src/main.c:2004
 msgid "Enables subshell support (default)"
 msgstr "Habilita el suport de subintèrprets (per defecte)"
 
-#: src/main.c:2006
 msgid "Disables subshell support"
 msgstr "Inhabilita el suport de subintèrprets"
 
-#: src/main.c:2011
 msgid "Launches the file viewer on a file"
 msgstr "Executa el visualitzador de fitxers amb un fitxer"
 
-#: src/main.c:2014
 msgid "Edits one file"
 msgstr "Edita un fitxer"
 
-#: src/main.c:2228
 msgid " Notice "
 msgstr " Avís "
 
-#: src/main.c:2229
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3089,295 +2400,224 @@ msgstr ""
 " s'emmagatzemen ara al directori ~/.mc, on \n"
 " s'han mogut els fitxers\n"
 
-#: src/option.c:56
 msgid "safe de&Lete"
 msgstr "&Supressió segura"
 
-#: src/option.c:57
 msgid "cd follows lin&Ks"
 msgstr "cd segueix els en&Llaços"
 
-#: src/option.c:58
 msgid "L&ynx-like motion"
 msgstr "moviment com a la L&ynx"
 
-#: src/option.c:59
 msgid "rotatin&G dash"
 msgstr "&Barreta rotatòria"
 
-#: src/option.c:60
 msgid "co&Mplete: show all"
 msgstr "completat: mostrar-&Ho tot"
 
-#: src/option.c:61
 msgid "&Use internal view"
 msgstr "utilitza el &Visualitzador intern"
 
-#: src/option.c:62
 msgid "use internal ed&It"
 msgstr "utilitza l'ed&Itor intern"
 
-#: src/option.c:63
 msgid "auto m&Enus"
 msgstr "auto-&Menús"
 
-#: src/option.c:64
 msgid "&Auto save setup"
 msgstr "Desa la configuració automàticament"
 
-#: src/option.c:65
 msgid "shell &Patterns"
 msgstr "&Patrons de l'intèrpret"
 
-#: src/option.c:66
 msgid "Compute &Totals"
 msgstr "calcula els &Totals"
 
-#: src/option.c:67
 msgid "&Verbose operation"
 msgstr "detalla les &Operacions"
 
-#: src/option.c:69
 msgid "&Fast dir reload"
 msgstr "recàrrega &Ràpida de directoris"
 
-#: src/option.c:70
 msgid "mi&X all files"
 msgstr "&Barreja tots els fitxers"
 
-#: src/option.c:71
 msgid "&Drop down menus"
 msgstr "menús &Desplegables"
 
-#: src/option.c:72
 msgid "ma&Rk moves down"
 msgstr "mo&U avall en marcar"
 
-#: src/option.c:73
 msgid "show &Hidden files"
 msgstr "mostra els &Fitxers ocults"
 
-#: src/option.c:74
 msgid "show &Backup files"
 msgstr "mostra els fitxers de &Còpies de seguretat"
 
-#: src/option.c:85
 msgid "&Never"
 msgstr "&Mai"
 
-#: src/option.c:86
 msgid "on dumb &Terminals"
 msgstr "a terminals &Ximples"
 
-#: src/option.c:87
 msgid "Alwa&ys"
 msgstr "&Sempre"
 
-#: src/option.c:123
 msgid " Panel options "
 msgstr " Opcions del quadre "
 
-#: src/option.c:124
 msgid " Pause after run... "
 msgstr " Fes una pausa després d'executar... "
 
-#: src/option.c:170
 msgid "Configure options"
 msgstr "Opcions de configuració"
 
-#: src/panelize.c:67
 msgid "&Add new"
 msgstr "Afegeix un &nou"
 
-#: src/panelize.c:154 src/panelize.c:420
 msgid "External panelize"
 msgstr "Quadre de recerca externa"
 
-#: src/panelize.c:169
 msgid "Command"
 msgstr "Ordre"
 
-#: src/panelize.c:185 src/panelize.c:242 src/panelize.c:313 src/panelize.c:334
 msgid "Other command"
 msgstr "Una altre ordre"
 
-#: src/panelize.c:226
 msgid " Add to external panelize "
 msgstr " Afegeix a un quadre de cerca externa "
 
-#: src/panelize.c:227
 msgid " Enter command label: "
 msgstr " Introduïu l'etiqueta de l'ordre: "
 
-#: src/panelize.c:267
 msgid " Cannot run external panelize in a non-local directory "
 msgstr ""
 " No puc executar un quadre de cerca externa mentre estigui connectat a un "
 "directori no-local "
 
-#: src/panelize.c:316
 msgid "Find rejects after patching"
 msgstr "Troba els fitxers rebutjats després d'apedaçar"
 
-#: src/panelize.c:317
 msgid "Find *.orig after patching"
 msgstr "Cerca *.orig després d'apedaçar"
 
-#: src/panelize.c:318
 msgid "Find SUID and SGID programs"
 msgstr "Cerca programes SUID i SGID"
 
-#: src/panelize.c:369
 msgid "Cannot invoke command."
 msgstr "No puc cridar l'ordre."
 
-#: src/panelize.c:420
 msgid "Pipe close failed"
 msgstr "Ha fallat el tancament del conducte"
 
-#: src/popt.c:547
 msgid "missing argument"
 msgstr ""
 
-#: src/popt.c:549
 #, fuzzy
 msgid "unknown option"
 msgstr "<Grup desconegut>"
 
-#: src/popt.c:555
 msgid "invalid numeric value"
 msgstr ""
 
-#: src/popthelp.c:31
 msgid "Show this help message"
 msgstr "Mostra aquest missatge d'ajuda"
 
-#: src/popthelp.c:32
 msgid "Display brief usage message"
 msgstr "Mostra un missatge breu d'ajuda"
 
-#: src/popthelp.c:60
 msgid "ARG"
 msgstr ""
 
-#: src/popthelp.c:179
 #, fuzzy, c-format
 msgid "Usage:"
 msgstr "Nom d'usuari:"
 
-#: src/screen.c:201
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
-#: src/screen.c:222
 msgid "SYMLINK"
 msgstr ""
 
-#: src/screen.c:226
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
-#: src/screen.c:408 src/screen.c:409
 msgid "Size"
 msgstr "Mida"
 
-#: src/screen.c:411
 msgid "MTime"
 msgstr "MTime"
 
-#: src/screen.c:412
 msgid "ATime"
 msgstr "ATime"
 
-#: src/screen.c:413
 msgid "CTime"
 msgstr "CTime"
 
-#: src/screen.c:414
 msgid "Permission"
 msgstr "Permisos"
 
-#: src/screen.c:415
 msgid "Perm"
 msgstr "Perm"
 
-#: src/screen.c:416
 msgid "Nl"
 msgstr "N1"
 
-#: src/screen.c:417
 msgid "Inode"
 msgstr "Inode"
 
-#: src/screen.c:418
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:419
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:420
 msgid "Owner"
 msgstr "Propietari"
 
-#: src/screen.c:421
 msgid "Group"
 msgstr "Grup"
 
-#: src/screen.c:659
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes en %d fitxer"
 
-#: src/screen.c:659
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes en %d fitxers"
 
-#: src/screen.c:685
 msgid "<readlink failed>"
 msgstr "<S'ha produït una fallida en llegir l'enllaç>"
 
-#: src/screen.c:1291
 msgid "Unknown tag on display format: "
 msgstr "Marcador desconegut al format de pantalla: "
 
-#: src/screen.c:1417
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 "El format facilitat per l'usuari sembla que és invàlid, s'està tornant al "
 "format per defecte."
 
-#: src/screen.c:1956
 msgid " Do you really want to execute? "
 msgstr " Realment ho voleu executar? "
 
-#: src/screen.c:2208
 msgid "View"
 msgstr "Vista"
 
-#: src/screen.c:2209 src/view.c:2280
 msgid "Edit"
 msgstr "Edita"
 
-#: src/screen.c:2211 src/tree.c:980
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2212 src/tree.c:984
 msgid "Mkdir"
 msgstr "FerDir"
 
-#: src/selcodepage.c:54
 msgid " Choose input codepage "
 msgstr " Escolliu la pàgina de codis d'entrada "
 
-#: src/selcodepage.c:58
 msgid "-  < No translation >"
 msgstr "-  < Cap traducció >"
 
-#: src/selcodepage.c:106
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -3388,7 +2628,6 @@ msgstr ""
 "Configuració / Visualitza el diàleg Bits!\n"
 "No oblideu desar les opcions."
 
-#: src/slint.c:191
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -3397,90 +2636,70 @@ msgstr ""
 "La mida de la pantalla %dx%d no es pot utilitzar.\n"
 "Reviseu la variable d'entorn TERM.\n"
 
-#: src/subshell.c:321
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
 
-#: src/subshell.c:422
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr "No puc obrir el conducte designat amb %s\n"
 
-#: src/subshell.c:650
 msgid " The shell is still active. Quit anyway? "
 msgstr " L'intèrpret encara és actiu. Voleu sortir de tota manera? "
 
-#: src/subshell.c:793
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: No s'ha pogut canviar a %s.\n"
 
-#: src/textconf.c:50
 msgid "With builtin Editor\n"
 msgstr "Amb editor incorporat\n"
 
-#: src/textconf.c:56
 msgid "Using system-installed S-Lang library"
 msgstr "S'està utilitzant la biblioteca S-Lang instal·lada al sistema"
 
-#: src/textconf.c:58
 msgid "Using included S-Lang library"
 msgstr "S'està utilitzant la biblioteca S-Lang inclosa"
 
-#: src/textconf.c:64
 msgid "with termcap database"
 msgstr "amb la base de dades termcap"
 
-#: src/textconf.c:66
 msgid "with terminfo database"
 msgstr "amb la base de dades terminfo"
 
-#: src/textconf.c:70
 msgid "Using the ncurses library"
 msgstr "S'està utilitzant la biblioteca ncurses"
 
-#: src/textconf.c:79
 msgid "With optional subshell support"
 msgstr "Amb la possibilitat opcional d'utilitzar la subshell"
 
-#: src/textconf.c:81
 msgid "With subshell support as default"
 msgstr "Amb la possibilitat per defecte d'utilitzar la subshell"
 
-#: src/textconf.c:87
 msgid "With support for background operations\n"
 msgstr "Amb suport per a operacions en segon pla\n"
 
-#: src/textconf.c:91
 msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
 "Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
 
-#: src/textconf.c:93
 msgid "With mouse support on xterm\n"
 msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm.\n"
 
-#: src/textconf.c:97
 msgid "With support for X11 events\n"
 msgstr "Amb possibilitat d'utilitzar els esdeveniments X11\n"
 
-#: src/textconf.c:101
 msgid "With internationalization support\n"
 msgstr "Amb la possibilitat d'utilitzar internacionalització\n"
 
-#: src/textconf.c:105
 msgid "With multiple codepages support\n"
 msgstr "Amb la possibilitat d'utilitzar diverses pàgines de codis\n"
 
-#: src/textconf.c:121
 #, c-format
 msgid "Virtual File System:"
 msgstr "Sistema de fitxers virtual:"
 
-#: src/tree.c:145
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -3489,17 +2708,14 @@ msgstr ""
 "No puc obrir el fitxer %s per escriure:\n"
 "%s\n"
 
-#: src/tree.c:588
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "Copia el directori \"%s\" a:"
 
-#: src/tree.c:629
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "Mou el directori \"%s\" a:"
 
-#: src/tree.c:639
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
@@ -3508,32 +2724,25 @@ msgstr ""
 " No puc estudiar el destí \n"
 " %s "
 
-#: src/tree.c:702
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Suprimir %s?  "
 
-#: src/tree.c:732
 msgid "Static"
 msgstr "Estàtic"
 
-#: src/tree.c:732
 msgid "Dynamc"
 msgstr "Dinàmic"
 
-#: src/tree.c:974
 msgid "Rescan"
 msgstr "Rellegeix"
 
-#: src/tree.c:976
 msgid "Forget"
 msgstr "Oblida-ho"
 
-#: src/tree.c:989
 msgid "Rmdir"
 msgstr "SupDir"
 
-#: src/treestore.c:344
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -3542,41 +2751,32 @@ msgstr ""
 "No puc escriure al fitxer %s:\n"
 "%s\n"
 
-#: src/user.c:133
 msgid " Format error on file Extensions File "
 msgstr " Error de format al fitxer Fitxer d'extensions "
 
-#: src/user.c:134
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " La macro %%var no té cap valor predeterminat "
 
-#: src/user.c:135
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " La macro %%var no té cap variable "
 
-#: src/user.c:444
 msgid " Debug "
 msgstr " Depura "
 
-#: src/user.c:459
 msgid " ERROR: "
 msgstr " ERROR: "
 
-#: src/user.c:463
 msgid " True:  "
 msgstr " Cert:  "
 
-#: src/user.c:465
 msgid " False: "
 msgstr " Fals:  "
 
-#: src/user.c:665
 msgid " Warning -- ignoring file "
 msgstr " Avís -- es descarta el fitxer "
 
-#: src/user.c:666
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3585,78 +2785,62 @@ msgstr ""
 "El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\n"
 "qualsevol. Usar-lo podria comprometre la seguretat"
 
-#: src/user.c:788
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " No s'han trobat entrades apropiades a %s "
 
-#: src/user.c:794
 msgid " User menu "
 msgstr " Menú d'usuari "
 
-#: src/util.c:701 src/util.c:727
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:702 src/util.c:725
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
-#: src/utilunix.c:346
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Crea un directori nou"
 
-#: src/utilunix.c:348
 #, c-format
 msgid "Directory %s is not owned by you\n"
 msgstr ""
 
-#: src/utilunix.c:351
 #, fuzzy, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr ""
 " No puc crear el directori objectiu \"%s\" \n"
 " %s "
 
-#: src/utilunix.c:356
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
 " No puc crear el directori objectiu \"%s\" \n"
 " %s "
 
-#: src/utilunix.c:386
 #, c-format
 msgid "Temporary files will be created in %s\n"
 msgstr ""
 
-#: src/utilunix.c:390
 #, c-format
 msgid "Temporary files will not be created\n"
 msgstr ""
 
-#: src/utilunix.c:418
 msgid " Pipe failed "
 msgstr " Ha fallat el conducte"
 
-#: src/utilunix.c:422
 msgid " Dup failed "
 msgstr " Ha fallat dup() "
 
-#: src/view.c:520
 msgid " Cannot spawn child program "
 msgstr " No puc llançar el procés fill "
 
-#: src/view.c:531
 msgid "Empty output from child filter"
 msgstr ""
 
-#: src/view.c:537
 msgid " Cannot open file "
 msgstr " No puc obrir el fitxer "
 
-#: src/view.c:638
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3665,7 +2849,6 @@ msgstr ""
 " No es pot obrir \"%s\"\n"
 " %s "
 
-#: src/view.c:647
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3674,43 +2857,34 @@ msgstr ""
 " No es pot fer un stat a \"%s\" \n"
 " %s "
 
-#: src/view.c:656
 msgid " Cannot view: not a regular file "
 msgstr " No puc visualitzar-lo perquè no és un fitxer habitual "
 
-#: src/view.c:795
 #, c-format
 msgid "File: %s"
 msgstr "Fitxer: %s"
 
-#: src/view.c:810
 #, c-format
 msgid "Offset 0x%08lx"
 msgstr "Desplaçament 0x%08lx"
 
-#: src/view.c:812
 #, c-format
 msgid "Col %d"
 msgstr "Columna %d"
 
-#: src/view.c:816
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#: src/view.c:821
 msgid "  [grow]"
 msgstr "  [expandit]"
 
-#: src/view.c:1878
 msgid "Invalid hex search expression"
 msgstr "L'expressió de cerca hexadecimal no es vàlida"
 
-#: src/view.c:1932
 msgid " Invalid regular expression "
 msgstr " L'expressió regular no és vàlida "
 
-#: src/view.c:2055
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3719,7 +2893,6 @@ msgstr ""
 " La línia actual és la número %d.\n"
 " Introduïu el número nou de línia:"
 
-#: src/view.c:2078
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3728,271 +2901,204 @@ msgstr ""
 " L'adreça actual es 0x%lx.\n"
 " Introduïu la nova adreça:"
 
-#: src/view.c:2080
 msgid " Goto Address "
 msgstr " Vés a l'adreça "
 
-#: src/view.c:2112
 msgid " Enter regexp:"
 msgstr " Introduïu l'expressió regular:"
 
-#: src/view.c:2265
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2265
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2267
 msgid "Goto"
 msgstr "Ves a"
 
-#: src/view.c:2267
 msgid "Line"
 msgstr "Línia"
 
-#: src/view.c:2269
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2274
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2274
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2282
 msgid "UnWrap"
 msgstr "NoAjus"
 
-#: src/view.c:2282
 msgid "Wrap"
 msgstr "Ajusta"
 
-#: src/view.c:2285
 msgid "HxSrch"
 msgstr "HxSrch"
 
-#: src/view.c:2288
 msgid "Raw"
 msgstr "Brut"
 
-#: src/view.c:2288
 msgid "Parse"
 msgstr "Interp"
 
-#: src/view.c:2293
 msgid "Unform"
 msgstr "NoFrmt"
 
-#: src/view.c:2293
 msgid "Format"
 msgstr "Formata"
 
-#: src/widget.c:912
 msgid " History "
 msgstr " Historial "
 
-#: src/win.c:159
 msgid "Function key 1"
 msgstr "Tecla de funció 1"
 
-#: src/win.c:160
 msgid "Function key 2"
 msgstr "Tecla de funció 2"
 
-#: src/win.c:161
 msgid "Function key 3"
 msgstr "Tecla de funció 3"
 
-#: src/win.c:162
 msgid "Function key 4"
 msgstr "Tecla de funció 4"
 
-#: src/win.c:163
 msgid "Function key 5"
 msgstr "Tecla de funció 5"
 
-#: src/win.c:164
 msgid "Function key 6"
 msgstr "Tecla de funció 6"
 
-#: src/win.c:165
 msgid "Function key 7"
 msgstr "Tecla de funció 7"
 
-#: src/win.c:166
 msgid "Function key 8"
 msgstr "Tecla de funció 8"
 
-#: src/win.c:167
 msgid "Function key 9"
 msgstr "Tecla de funció 9"
 
-#: src/win.c:168
 msgid "Function key 10"
 msgstr "Tecla de funció 10"
 
-#: src/win.c:169
 msgid "Function key 11"
 msgstr "Tecla de funció 11"
 
-#: src/win.c:170
 msgid "Function key 12"
 msgstr "Tecla de funció 12"
 
-#: src/win.c:171
 msgid "Function key 13"
 msgstr "Tecla de funció 13"
 
-#: src/win.c:172
 msgid "Function key 14"
 msgstr "Tecla de funció 14"
 
-#: src/win.c:173
 msgid "Function key 15"
 msgstr "Tecla de funció 15"
 
-#: src/win.c:174
 msgid "Function key 16"
 msgstr "Tecla de funció 16"
 
-#: src/win.c:175
 msgid "Function key 17"
 msgstr "Tecla de funció 17"
 
-#: src/win.c:176
 msgid "Function key 18"
 msgstr "Tecla de funció 18"
 
-#: src/win.c:177
 msgid "Function key 19"
 msgstr "Tecla de funció 19"
 
-#: src/win.c:178
 msgid "Function key 20"
 msgstr "Tecla de funció 20"
 
-#: src/win.c:179
 msgid "Backspace key"
 msgstr "Tecla de retrocés"
 
-#: src/win.c:180
 msgid "End key"
 msgstr "Posició final"
 
-#: src/win.c:181
 msgid "Up arrow key"
 msgstr "Cursor amunt"
 
-#: src/win.c:182
 msgid "Down arrow key"
 msgstr "Cursor avall"
 
-#: src/win.c:183
 msgid "Left arrow key"
 msgstr "Cursor esquerra"
 
-#: src/win.c:184
 msgid "Right arrow key"
 msgstr "Cursor dreta"
 
-#: src/win.c:185
 msgid "Home key"
 msgstr "Posició inicial"
 
-#: src/win.c:186
 msgid "Page Down key"
 msgstr "Avança pàgina"
 
-#: src/win.c:187
 msgid "Page Up key"
 msgstr "Retrocedeix pàgina"
 
-#: src/win.c:188
 msgid "Insert key"
 msgstr "Tecla d'inserció"
 
-#: src/win.c:189
 msgid "Delete key"
 msgstr "Tecla de supressió"
 
-#: src/win.c:190
 msgid "Completion/M-tab"
 msgstr "Completa/M-tab"
 
-#: src/win.c:191
 msgid "+ on keypad"
 msgstr "+ teclat numèric"
 
-#: src/win.c:192
 msgid "- on keypad"
 msgstr "- teclat numèric"
 
-#: src/win.c:193
 msgid "* on keypad"
 msgstr "* teclat numèric"
 
-#: src/win.c:195
 msgid "Left arrow keypad"
 msgstr "Cursor esquerra teclat numèric"
 
-#: src/win.c:196
 msgid "Right arrow keypad"
 msgstr "Cursor dreta teclat numèric"
 
-#: src/win.c:197
 msgid "Up arrow keypad"
 msgstr "Cursor amunt teclat numèric"
 
-#: src/win.c:198
 msgid "Down arrow keypad"
 msgstr "Cursor avall teclat numèric"
 
-#: src/win.c:199
 msgid "Home on keypad"
 msgstr "Inici teclat numèric"
 
-#: src/win.c:200
 msgid "End on keypad"
 msgstr "Final teclat numèric"
 
-#: src/win.c:201
 msgid "Page Down keypad"
 msgstr "Avança pàgina teclat numèric"
 
-#: src/win.c:202
 msgid "Page Up keypad"
 msgstr "Retrocedeix pàgina teclat numèric"
 
-#: src/win.c:203
 msgid "Insert on keypad"
 msgstr "Inserir teclat numèric"
 
-#: src/win.c:204
 msgid "Delete on keypad"
 msgstr "Suprimir teclat numèric"
 
-#: src/win.c:205
 msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
 
-#: src/win.c:206
 msgid "Slash on keypad"
 msgstr "Barra teclat numèric"
 
-#: src/win.c:207
 msgid "NumLock on keypad"
 msgstr "BloqNum teclat numèric"
 
-#: src/wtools.c:256
 msgid "Background process:"
 msgstr "Procés de fons:"
 
-#: vfs/cpio.c:149 vfs/cpio.c:165
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
@@ -4001,7 +3107,6 @@ msgstr ""
 "No s'ha pogut obrir l'arxiu cpio\n"
 "%s"
 
-#: vfs/cpio.c:231
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -4010,7 +3115,6 @@ msgstr ""
 "S'ha anticipat el final de l'arxiu de tipus cpio\n"
 "%s"
 
-#: vfs/cpio.c:276 vfs/cpio.c:328 vfs/cpio.c:334 vfs/cpio.c:388 vfs/cpio.c:398
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -4019,7 +3123,6 @@ msgstr ""
 "S'ha trobat una capçalera corrupta d'arxiu cpio a \n"
 "%s"
 
-#: vfs/cpio.c:472
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4032,12 +3135,10 @@ msgstr ""
 "a l'arxiu cpio\n"
 "%s"
 
-#: vfs/cpio.c:498
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s conté registres duplicats! S'estan ometent!"
 
-#: vfs/cpio.c:567
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4046,30 +3147,24 @@ msgstr ""
 "Fí de fitxer inesperat a\n"
 "%s"
 
-#: vfs/direntry.c:338
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "El directori de la memòria cau ha caducat per %s"
 
-#: vfs/direntry.c:770
 msgid "Starting linear transfer..."
 msgstr "S'està iniciant la transferència lineal..."
 
-#: vfs/direntry.c:907
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu bytes transferits)"
 
-#: vfs/direntry.c:908
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferits"
 
-#: vfs/direntry.c:954
 msgid "Getting file"
 msgstr "S'està recuperant el fitxer"
 
-#: vfs/extfs.c:307
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
@@ -4078,213 +3173,165 @@ msgstr ""
 "No s'ha pogut obrir l'arxiu %s\n"
 "%s"
 
-#: vfs/extfs.c:347 vfs/extfs.c:369 vfs/extfs.c:418
 msgid "Inconsistent extfs archive"
 msgstr "L'arxiu extfs no és consistent"
 
-#: vfs/fish.c:157
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: S'està desconnectant de %s"
 
-#: vfs/fish.c:232
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Està esperant a la línia inicial..."
 
-#: vfs/fish.c:244
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Ho sento, però de moment no es poden fer connexions autenticades."
 
-#: vfs/fish.c:249
 msgid " fish: Password required for "
 msgstr " fish: Cal una contrasenya per a "
 
-#: vfs/fish.c:257
 msgid "fish: Sending password..."
 msgstr "fish: S'està enviant la contrasenya..."
 
-#: vfs/fish.c:263
 msgid "fish: Sending initial line..."
 msgstr "fish: S'està enviant la línia inicial..."
 
-#: vfs/fish.c:274
 msgid "fish: Handshaking version..."
 msgstr "fish: S'està intercanviant la versió..."
 
-#: vfs/fish.c:288
 msgid "fish: Setting up current directory..."
 msgstr "fish: S'està definint el directori actual..."
 
-#: vfs/fish.c:290
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Connectat, directori inicial %s."
 
-#: vfs/fish.c:372
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: S'està llegint el directori %s..."
 
-#: vfs/fish.c:477 vfs/ftpfs.c:1277 vfs/undelfs.c:341
 #, c-format
 msgid "%s: done."
 msgstr "%s: fet."
 
-#: vfs/fish.c:482 vfs/ftpfs.c:1247 vfs/undelfs.c:344
 #, c-format
 msgid "%s: failure"
 msgstr "%s: fallada"
 
-#: vfs/fish.c:507
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: desa %s: està enviant l'ordre..."
 
-#: vfs/fish.c:549
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Ha fallat la lectura local, s'està enviant zeros"
 
-#: vfs/fish.c:565
 #, fuzzy, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: s'està emmagatzemant %s %d (%d)"
 
-#: vfs/fish.c:566
 msgid "zeros"
 msgstr "zeros"
 
-#: vfs/fish.c:619
 msgid "Aborting transfer..."
 msgstr "S'està avortant la transferència..."
 
-#: vfs/fish.c:628
 msgid "Error reported after abort."
 msgstr "S'ha informat d'un error desprès d'avortar."
 
-#: vfs/fish.c:630
 msgid "Aborted transfer would be successful."
 msgstr "La transferència avortada tindria èxit"
 
-#: vfs/ftpfs.c:377
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: S'està desconnectant de %s"
 
-#: vfs/ftpfs.c:432
 msgid " FTP: Password required for "
 msgstr " FTP: Cal una contrasenya per a"
 
-#: vfs/ftpfs.c:468
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: s'està enviant la identificació"
 
-#: vfs/ftpfs.c:472
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: s'està enviant la contrasenya"
 
-#: vfs/ftpfs.c:478
 #, fuzzy, c-format
 msgid "FTP: Account required for user %s"
 msgstr " FTP: Cal una contrasenya per a"
 
-#: vfs/ftpfs.c:480
 #, fuzzy
 msgid "Account:"
 msgstr "Compta"
 
-#: vfs/ftpfs.c:484
 #, fuzzy
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: s'està enviant la contrasenya"
 
-#: vfs/ftpfs.c:494
 msgid "ftpfs: logged in"
 msgstr "ftpfs: connectat"
 
-#: vfs/ftpfs.c:508
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: La identificació per a l'usuari %s no és correcta"
 
-#: vfs/ftpfs.c:632
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: El nom de l'ordinador central no és vàlid."
 
-#: vfs/ftpfs.c:650
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: L'adreça de l'ordinador central no és vàlida."
 
-#: vfs/ftpfs.c:672
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: s'està connectant amb %s"
 
-#: vfs/ftpfs.c:682
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: l'usuari ha interromput la connexió"
 
-#: vfs/ftpfs.c:684
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: ha fallat la connexió amb el servidor: %s"
 
-#: vfs/ftpfs.c:725
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Està esperant per reintentar... %d (Ctrl-C per cancel·lar)"
 
-#: vfs/ftpfs.c:905
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: no s'ha pogut establir el mode passiu"
 
-#: vfs/ftpfs.c:985
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: s'està avortant la transferència."
 
-#: vfs/ftpfs.c:987
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: s'ha produït un error en avortar: %s"
 
-#: vfs/ftpfs.c:995
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: ha fallat l'avortament"
 
-#: vfs/ftpfs.c:1099 vfs/ftpfs.c:1203
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: ha fallat la comanda CWD."
 
-#: vfs/ftpfs.c:1109 vfs/ftpfs.c:1116
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: no puc identificar l'enllaç simbòlic"
 
-#: vfs/ftpfs.c:1167
 msgid "Resolving symlink..."
 msgstr "Està identificant l'enllaç simbòlic..."
 
-#: vfs/ftpfs.c:1189
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: S'està llegint el directori FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1192
 msgid "(strict rfc959)"
 msgstr "(rfc959 estricte)"
 
-#: vfs/ftpfs.c:1193
 msgid "(chdir first)"
 msgstr "(primer canvia de directori)"
 
-#: vfs/ftpfs.c:1290
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ha fallat; enlloc per retornar-hi"
 
-#: vfs/ftpfs.c:1355
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: s'està emmagatzemar el fitxer %d (%d)"
 
-#: vfs/ftpfs.c:1746
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
@@ -4292,15 +3339,12 @@ msgstr ""
 "el fitxer ~/.netrc no té els permisos adequats.\n"
 "Suprimiu la contrasenya o corregiu els permisos."
 
-#: vfs/mcfs.c:127 vfs/mcfs.c:172
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:128
 msgid " The server does not support this version "
 msgstr " El servidor no suporta aquesta versió "
 
-#: vfs/mcfs.c:145
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4310,34 +3354,27 @@ msgstr ""
 " Necessiteu una contrasenya per entrar-hi, encara que la informació \n"
 " podria no ser segura a la banda remota.  Voleu continuar? \n"
 
-#: vfs/mcfs.c:158
 msgid " MCFS Password required "
 msgstr " Cal una contrasenya per a MCFS "
 
-#: vfs/mcfs.c:172
 msgid " Invalid password "
 msgstr " La contrasenya no és vàlida "
 
-#: vfs/mcfs.c:232
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " No es pot trobar el nom de l'ordinador central: %s "
 
-#: vfs/mcfs.c:251
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " No es pot crear el sòcol: %s"
 
-#: vfs/mcfs.c:257
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " No es pot connectar amb el servidor: %s"
 
-#: vfs/mcfs.c:327
 msgid " Too many open connections "
 msgstr " Hi ha massa connexions obertes "
 
-#: vfs/sfs.c:346
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4346,7 +3383,6 @@ msgstr ""
 "Avís: línia no vàlida a %s:\n"
 "%s\n"
 
-#: vfs/sfs.c:358
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4355,7 +3391,6 @@ msgstr ""
 "Avís: Senyalador %c no vàlid a %s:\n"
 "%s\n"
 
-#: vfs/smbfs.c:584
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4364,37 +3399,30 @@ msgstr ""
 " ha fallat la reconnexió a %s\n"
 " "
 
-#: vfs/smbfs.c:1131
 msgid " Authentication failed "
 msgstr " Ha fallat l'autenticació "
 
-#: vfs/smbfs.c:1644
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s està creant el directori %s"
 
-#: vfs/smbfs.c:1668
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s està suprimint el directori %s "
 
-#: vfs/smbfs.c:1763
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s està obrint el fitxer remot %s "
 
-#: vfs/smbfs.c:1838
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s està eliminant el fitxer remot %s "
 
 # No em convenç la forma de fer els plurals...  iv
-#: vfs/smbfs.c:1871
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s està reanomenant els fitxers\n"
 
-#: vfs/tar.c:210 vfs/tar.c:227
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
@@ -4403,15 +3431,12 @@ msgstr ""
 "No s'ha pogut obrir l'arxiu tar\n"
 "%s"
 
-#: vfs/tar.c:421 vfs/tar.c:451 vfs/tar.c:492 vfs/tar.c:501
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu tar no és consistent"
 
-#: vfs/tar.c:437
 msgid "Unexpected EOF on archive file"
 msgstr "Fí de fitxer inesperat a l'arxiu"
 
-#: vfs/tar.c:581
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -4422,62 +3447,49 @@ msgstr ""
 "%s\n"
 "no sembla que sigui un arxiu tar."
 
-#: vfs/undelfs.c:83
 msgid " undelfs: error "
 msgstr " undelfs: error "
 
-#: vfs/undelfs.c:187
 msgid " not enough memory "
 msgstr " no hi ha prou memòria "
 
-#: vfs/undelfs.c:192
 msgid " while allocating block buffer "
 msgstr " en col·locar el bloc de memòria intermèdia"
 
-#: vfs/undelfs.c:196
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " obre_escaneig_inode: %d"
 
-#: vfs/undelfs.c:200
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " mentre començava l'escaneig del inode %d"
 
-#: vfs/undelfs.c:209
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
 "undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
 
-#: vfs/undelfs.c:227
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " mentre es cridava a ext2_block_iterate %d"
 
-#: vfs/undelfs.c:239
 msgid " no more memory while reallocating array "
 msgstr " no hi ha hagut més memòria en recol·locar la taula "
 
-#: vfs/undelfs.c:260
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " mentre es feia l'escaneig de l'inode %d "
 
-#: vfs/undelfs.c:295
 msgid " Ext2lib error "
 msgstr " Error de l'Ext2lib "
 
-#: vfs/undelfs.c:323 vfs/undelfs.c:636
 #, c-format
 msgid " Cannot open file %s "
 msgstr " No s'ha pogut obrir el fitxer %s"
 
-#: vfs/undelfs.c:326
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: s'està llegint el mapa de bits de l'inode..."
 
-#: vfs/undelfs.c:329
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
@@ -4486,11 +3498,9 @@ msgstr ""
 " No s'ha pogut carregar el mapa de bits de l'inode de: \n"
 " %s \n"
 
-#: vfs/undelfs.c:332
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
 
-#: vfs/undelfs.c:335
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
@@ -4499,31 +3509,24 @@ msgstr ""
 " No he pogut carregar el mapa de bits del bloc de: \n"
 " %s \n"
 
-#: vfs/undelfs.c:358
 msgid " vfs_info is not fs! "
 msgstr " vfs_info no es un fs! "
 
-#: vfs/undelfs.c:413 vfs/undelfs.c:597
 msgid " You have to chdir to extract files first "
 msgstr " Heu de canviar de directori abans d'extreure els fitxers "
 
-#: vfs/undelfs.c:536
 msgid " while iterating over blocks "
 msgstr " mentre s'iterava sobre els blocs "
 
-#: vfs/utilvfs.c:848
 msgid "Cannot parse:"
 msgstr "No s'ha pogut analitzar:"
 
-#: vfs/utilvfs.c:852
 msgid "More parsing errors will be ignored."
 msgstr " Si hi han mès errors d'interpretació, s'ignoraran. "
 
-#: vfs/utilvfs.c:862
 msgid "Internal error:"
 msgstr "Error intern:"
 
-#: vfs/vfs.c:894
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
