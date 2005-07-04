@@ -1623,7 +1623,7 @@ msgstr "Paskirties data: %s, dydis %llu"
 
 #, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Šaltinio data: %s, dydis %llu"
+msgstr "Šaltinio data:   %s, dydis %llu"
 
 #, c-format
 msgid "Target date: %s, size %u"
@@ -1631,7 +1631,7 @@ msgstr "Paskirties data: %s, dydis %u"
 
 #, c-format
 msgid "Source date: %s, size %u"
-msgstr "Šaltinio data: %s, dydis %u"
+msgstr "Šaltinio data:   %s, dydis %u"
 
 msgid " File exists "
 msgstr " Byla jau yra "

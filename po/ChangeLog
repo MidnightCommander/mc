@@ -1,3 +1,7 @@
+2005-07-05  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* lt.po: Changed spacing in two messages.
+
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
 	* Makevars: Rewrote the MSGMERGE flags selection so that the
