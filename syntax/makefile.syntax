@@ -25,6 +25,17 @@ context default
 
     keyword linestart \t lightgray red
     keyword whole .PHONY white
+    keyword whole .SUFFIXES white
+    keyword whole .DEFAULT white
+    keyword whole .PRECIOUS white
+    keyword whole .INTERMEDIATE white
+    keyword whole .SECONDARY white
+    keyword whole .DELETE_ON_ERROR white
+    keyword whole .IGNORE white
+    keyword whole .LOW_RESOLUTION_TIME white
+    keyword whole .SILENT white
+    keyword whole .EXPORT_ALL_VARIABLES white
+    keyword whole .NOTPARALLEL white
     keyword whole .NOEXPORT white
     keyword = white
     keyword : yellow

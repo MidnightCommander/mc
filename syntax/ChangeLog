@@ -1,3 +1,7 @@
+2005-07-04  Pavel Roskin  <proski@gnu.org>
+
+	* makefile.syntax: Add all special targets of GNU make.
+
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
 	* perl.syntax: The inside of qw(...) gets green.
@@ -18,13 +22,13 @@
 
 	* c.syntax: Added missing punctuation characters.
 
-        * diff.syntax: Lines starting with a <tab> character are
-        displayed like lines starting with a <space>. This is for the
-        cvs diff -T option.
+	* diff.syntax: Lines starting with a <tab> character are
+	displayed like lines starting with a <space>. This is for the
+	cvs diff -T option.
 
-        * makefile.syntax: Highlight $$ (a literal $) in
-        brightcyan. This way $${var} is not highlighted as if it were a
-        Makefile variables. Also added useful comments before the contexts.
+	* makefile.syntax: Highlight $$ (a literal $) in
+	brightcyan. This way $${var} is not highlighted as if it were a
+	Makefile variables. Also added useful comments before the contexts.
 
 2005-05-24  Roland Illig  <roland.illig@gmx.de>
 
