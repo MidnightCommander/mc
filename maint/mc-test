@@ -59,6 +59,7 @@ do_clean_workdir=no
 do_configure=auto
 do_make_clean=no
 do_make_all=yes
+do_make_check=yes
 do_make_install=yes
 
 ### command line parsing ###
@@ -78,6 +79,7 @@ usage: `basename $0` [options ...] [var=value...] [<testname ...>]
 	-[dont-]configure	run configure (default: ${do_configure})
 	-[dont-]clean		make clean (default: ${do_make_clean})
 	-[dont-]build		make all (default: ${do_make_all})
+	-[dont-]check		make check (default: ${do_make_check})
 	-[dont-]install		make install (default: ${do_make_install})
 
 	-fast			only do what's necessary
@@ -117,6 +119,8 @@ while test $# -ne 0; do
 		-dont-clean)		shift; do_make_clean=no;;
 		-build)			shift; do_make_all=yes;;
 		-dont-build)		shift; do_make_all=no;;
+		-check)			shift; do_make_check=yes;;
+		-dont-check)		shift; do_make_check=no;;
 		-install)		shift; do_make_install=yes;;
 		-dont-install)		shift; do_make_install=no;;
 
@@ -339,6 +343,9 @@ confbuild() {
 	if test ${failed} = yes; then return 0; fi
 
 	confbuild_make "all"
+	if test ${failed} = yes; then return 0; fi
+
+	confbuild_make "check"
 	if test ${failed} = yes; then return 0; fi
 
 	confbuild_make "install"
