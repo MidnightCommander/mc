@@ -147,13 +147,20 @@ linux*)
     ;;
 esac
 
+dnl Extended Character Sets
+dnl
+AC_ARG_ENABLE([extcharset],
+	AS_HELP_STRING([--enable-extcharset], [Enable extended character sets]))
+if test x"$enable_extcharset" = x"yes"; then
+  AC_DEFINE([EXTCHARSET_ENABLED], 1, [Enable extended character sets?])
+fi
 
 AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
 	stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h sys/time.h \
 	sys/timeb.h sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
 	security/pam_misc.h sys/socket.h sys/sysmacros.h sys/types.h \
-	sys/mkdev.h])
+	sys/mkdev.h wchar.h wctype.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
@@ -211,7 +218,6 @@ dnl Missing typedefs and replacements
 dnl 
 
 AC_TYPE_MODE_T
-AC_CHECK_TYPE(umode_t, int)
 AC_CHECK_TYPE(off_t, long)
 AC_TYPE_PID_T
 AC_TYPE_UID_T

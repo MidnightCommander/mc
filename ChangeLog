@@ -1,3 +1,8 @@
+2005-07-05  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Removed detection of the umode_t type. All
+	references to it have been replaced with mode_t.
+
 2005-07-03  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* lib/mc.ext.in: Match files in /log/ or /logs/ directories as plain
