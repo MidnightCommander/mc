@@ -1,3 +1,5 @@
+# Syntax rules for the C and the C++ programming languages
+
 context default
     keyword whole auto yellow
     keyword whole break yellow
@@ -130,5 +132,3 @@ context " " green
     keyword \\\\ brightgreen
     keyword \\' brightgreen
     keyword \\\{abtnvfr\} brightgreen
-
-
