@@ -1336,13 +1336,6 @@ view_load (WView *view, const char *_command, const char *_file,
 	    goto finish;
 	}
 
-	/* We don't need O_NONBLOCK after opening the file, unset it */
-	cntlflags = fcntl (fd, F_GETFL, 0);
-	if (cntlflags != -1) {
-	    cntlflags &= ~O_NONBLOCK;
-	    fcntl (fd, F_SETFL, cntlflags);
-	}
-
 	if (st.st_size == 0 || mc_lseek (fd, 0, SEEK_SET) == -1) {
 	    /* Must be one of those nice files that grow (/proc) */
 	    view_set_datasource_vfs_pipe (view, fd);
