@@ -5,6 +5,8 @@
 	* file.c: Likewise.
 	* view.c (view_load): Don't try to use fcntl() with VFS file
 	handles. That cannot work.
+	* textconf.c: mc --version prints the size of commonly used data
+	types.
 
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 

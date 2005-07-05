@@ -25,6 +25,7 @@
 #include <sys/types.h>
 
 #include "global.h"
+#include "ecs.h"
 
 #ifdef USE_VFS
 static const char *const vfs_supported[] = {
@@ -137,5 +138,14 @@ show_version (int verbose)
     for (i = 0; features[i]; i++)
 	printf ("%s", _(features[i]));
 
-    (void)printf("Using %d bits for file sizes\n", CHAR_BIT * sizeof(off_t));
+    (void)printf("Data types:");
+#define TYPE_INFO(T) \
+    (void)printf(" %s %d", #T, (int) (CHAR_BIT * sizeof(T)))
+    TYPE_INFO(char);
+    TYPE_INFO(int);
+    TYPE_INFO(long);
+    TYPE_INFO(void *);
+    TYPE_INFO(off_t);
+#undef TYPE_INFO
+    (void)printf("\n");
 }
