@@ -1,3 +1,5 @@
+# Syntax rules for the HyperText Markup Language
+
 context default
 	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
 	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
@@ -14,4 +16,5 @@ context </ > brightcyan
 
 context < > brightcyan
 	keyword "*" green
+	keyword '*' green
 	keyword = yellow
