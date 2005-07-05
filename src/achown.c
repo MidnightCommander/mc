@@ -83,7 +83,7 @@ static int flag_pos;
 static int x_toggle;
 static char ch_flags[11];
 static const char ch_perm[] = "rwx";
-static umode_t ch_cmode;
+static mode_t ch_cmode;
 static struct stat *sf_stat;
 static int need_update;
 static int end_chown;
@@ -143,26 +143,26 @@ static void update_permissions (void)
     set_perm_by_flags (b_att[2]->text, 6);
 }
 
-static umode_t get_perm (char *s, int base)
+static mode_t get_perm (char *s, int base)
 {
-    umode_t m;
+    mode_t m;
 
     m = 0;
-    m |= (s [0] == '-') ? 0 :
+    m |= (s[0] == '-') ? 0 :
 	((s[0] == '+') ? (1 << (base + 2)) : (1 << (base + 2)) & ch_cmode);
 
-    m |= (s [1] == '-') ? 0 :
+    m |= (s[1] == '-') ? 0 :
 	((s[1] == '+') ? (1 << (base + 1)) : (1 << (base + 1)) & ch_cmode);
     
-    m |= (s [2] == '-') ? 0 :
+    m |= (s[2] == '-') ? 0 :
 	((s[2] == '+') ? (1 << base) : (1 << base) & ch_cmode);
 
     return m;
 }
 
-static umode_t get_mode (void)
+static mode_t get_mode (void)
 {
-    umode_t m;
+    mode_t m;
 
     m = ch_cmode ^ (ch_cmode & 0777);
     m |= get_perm (ch_flags, 6);

@@ -1,3 +1,8 @@
+2005-07-05  Roland Illig  <roland.illig@gmx.de>
+
+	* achown.c: Changed all references to umode_t into mode_t.
+	* file.c: Likewise.
+
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
 	* textconf.c: mc --version prints the number of bits of off_t.

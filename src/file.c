@@ -96,7 +96,7 @@ struct link {
     dev_t dev;
     ino_t ino;
     short linkcount;
-    umode_t st_mode;
+    mode_t st_mode;
     char name[1];
 };
 
