@@ -8,7 +8,7 @@
  * about the "const" modifier. The return value of this function
  * MUST NOT be modified. */
 #ifdef INLINE_STR_UNCONST
-static char *str_unconst_inlined (const char *s)
+static inline char *str_unconst_inlined (const char *s)
 {
     return (char *) s;
 }
