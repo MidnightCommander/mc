@@ -1311,8 +1311,6 @@ view_load (WView *view, const char *_command, const char *_file,
     if (_command && (view->magic_mode || _file[0] == '\0')) {
 	retval = view_load_command_output (view, _command);
     } else if (_file[0]) {
-	int cntlflags;
-
 	/* Open the file */
 	if ((fd = mc_open (_file, O_RDONLY | O_NONBLOCK)) == -1) {
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
