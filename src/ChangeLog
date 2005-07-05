@@ -1,6 +1,7 @@
 2005-07-05  Roland Illig  <roland.illig@gmx.de>
 
 	* achown.c: Changed all references to umode_t into mode_t.
+	* chmod.c: Likewise.
 	* file.c: Likewise.
 	* view.c (view_load): Don't try to use fcntl() with VFS file
 	handles. That cannot work.

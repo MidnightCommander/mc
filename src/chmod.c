@@ -61,7 +61,7 @@ static int single_set;
 static int mode_change, need_update;
 static int c_file, end_chmod;
 
-static umode_t and_mask, or_mask, c_stat;
+static mode_t and_mask, or_mask, c_stat;
 
 /* FIXME: these variables are superfluous, aren't they? (hint: name_trunc
  * returns a pointer to a static buffer, and label_new creates its own copy
