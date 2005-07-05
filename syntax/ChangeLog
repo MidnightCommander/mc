@@ -2,6 +2,8 @@
 
 	* html.syntax: Attribute values may also be delimited by single
 	quotes.
+	* java.syntax: Cleaned up the header comment. Sorted keywords
+	alphabetically.
 
 2005-07-04  Pavel Roskin  <proski@gnu.org>
 
