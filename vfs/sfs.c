@@ -450,9 +450,5 @@ init_sfs (void)
     vfs_sfs_ops.free = sfs_free;
     vfs_sfs_ops.getlocalcopy = sfs_getlocalcopy;
     vfs_sfs_ops.ungetlocalcopy = sfs_ungetlocalcopy;
-#ifdef HAVE_MMAP
-    vfs_sfs_ops.mmap = local_mmap;
-    vfs_sfs_ops.munmap = local_munmap;
-#endif
     vfs_register_class (&vfs_sfs_ops);
 }

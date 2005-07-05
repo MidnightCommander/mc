@@ -71,12 +71,6 @@ struct vfs_class {
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
     int (*setctl) (struct vfs_class *me, const char *path, int ctlop,
 		   void *arg);
-#ifdef HAVE_MMAP
-    caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len,
-		     int prot, int flags, void *vfs_info, off_t offset);
-    int (*munmap) (struct vfs_class *me, caddr_t addr, size_t len,
-		   void *vfs_info);
-#endif
 };
 
 /*

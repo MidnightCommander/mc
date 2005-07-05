@@ -286,27 +286,6 @@ local_ungetlocalcopy (struct vfs_class *me, const char *path,
     return 0;
 }
 
-#ifdef HAVE_MMAP
-caddr_t
-local_mmap (struct vfs_class *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
-{
-    int fd = * (int *)data;
-
-    (void) me;
-
-    return mmap (addr, len, prot, flags, fd, offset);
-}
-
-int
-local_munmap (struct vfs_class *me, caddr_t addr, size_t len, void *data)
-{
-    (void) me;
-    (void) data;
-
-    return munmap (addr, len);
-}
-#endif
-
 static int
 local_which (struct vfs_class *me, const char *path)
 {
@@ -348,9 +327,5 @@ init_localfs (void)
     vfs_local_ops.ungetlocalcopy = local_ungetlocalcopy;
     vfs_local_ops.mkdir = local_mkdir;
     vfs_local_ops.rmdir = local_rmdir;
-#ifdef HAVE_MMAP
-    vfs_local_ops.mmap = local_mmap;
-    vfs_local_ops.munmap = local_munmap;
-#endif
     vfs_register_class (&vfs_local_ops);
 }

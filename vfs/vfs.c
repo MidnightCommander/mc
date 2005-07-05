@@ -742,61 +742,6 @@ vfs_file_class_flags (const char *filename)
     return vfs->flags;
 }
 
-#ifdef HAVE_MMAP
-static struct mc_mmapping {
-    caddr_t addr;
-    void *vfs_info;
-    struct vfs_class *vfs;
-    struct mc_mmapping *next;
-} *mc_mmaparray = NULL;
-
-caddr_t
-mc_mmap (caddr_t addr, size_t len, int prot, int flags, int fd, off_t offset)
-{
-    struct vfs_class *vfs;
-    caddr_t result;
-    struct mc_mmapping *mcm;
-
-    if (fd == -1)
-	return (caddr_t) -1;
-    
-    vfs = vfs_op (fd);
-    result = vfs->mmap ? (*vfs->mmap)(vfs, addr, len, prot, flags, vfs_info (fd), offset) : (caddr_t)-1;
-    if (result == (caddr_t)-1){
-	errno = ferrno (vfs);
-	return (caddr_t)-1;
-    }
-    mcm =g_new (struct mc_mmapping, 1);
-    mcm->addr = result;
-    mcm->vfs_info = vfs_info (fd);
-    mcm->vfs = vfs;
-    mcm->next = mc_mmaparray;
-    mc_mmaparray = mcm;
-    return result;
-}
-
-int
-mc_munmap (caddr_t addr, size_t len)
-{
-    struct mc_mmapping *mcm, *mcm2 = NULL;
-    
-    for (mcm = mc_mmaparray; mcm != NULL; mcm2 = mcm, mcm = mcm->next){
-        if (mcm->addr == addr){
-            if (mcm2 == NULL)
-            	mc_mmaparray = mcm->next;
-            else
-            	mcm2->next = mcm->next;
-	    if (mcm->vfs->munmap)
-	        (*mcm->vfs->munmap)(mcm->vfs, addr, len, mcm->vfs_info);
-            g_free (mcm);
-            return 0;
-        }
-    }
-    return -1;
-}
-
-#endif
-
 static char *
 mc_def_getlocalcopy (const char *filename)
 {

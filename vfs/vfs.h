@@ -48,10 +48,6 @@ char *mc_getlocalcopy (const char *pathname);
 int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (const char *path, int ctlop, void *arg);
-#ifdef HAVE_MMAP
-caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
-int mc_munmap (caddr_t addr, size_t len);
-#endif				/* HAVE_MMAP */
 
 /* Operations for mc_ctl - on open file */
 enum {

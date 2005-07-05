@@ -1,3 +1,9 @@
+2005-07-05  Roland Illig  <roland.illig@gmx.de>
+
+	* vfs.h, vfs-impl.h, vfs.c, local.h, local.c, sfs.c: Removed
+	support for mmap() and munmap() from the VFS. It is unused and
+	cannot be applied to remote file systems.
+
 2005-07-03  Roland Illig  <roland.illig@gmx.de>
 
 	* xdirentry.h: Added missing #include directives.
