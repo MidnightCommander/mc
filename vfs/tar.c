@@ -401,10 +401,15 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
     /*
      * linkflag on BSDI tar (pax) always '\000'
      */
-    if (header->header.linkflag == '\000'
-	&& (i = strlen (header->header.arch_name))
-	&& header->header.arch_name[i - 1] == '/')
-	header->header.linkflag = LF_DIR;
+    if (header->header.linkflag == '\000') {
+	if (header->header.arch_name[NAMSIZ - 1] != '\0')
+	    i = NAMSIZ;
+	else
+	    i = strlen (header->header.arch_name);
+
+	if (i && header->header.arch_name[i - 1] == '/')
+	    header->header.linkflag = LF_DIR;
+    }
 
     /*
      * Good record.  Decode file size and return.
@@ -422,7 +427,6 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
     if (header->header.linkflag == LF_DUMPDIR)
 	return STATUS_SUCCESS;
 
-    header->header.arch_name[NAMSIZ - 1] = '\0';
     if (header->header.linkflag == LF_LONGNAME
 	|| header->header.linkflag == LF_LONGLINK) {
 	char **longp;
@@ -476,14 +480,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 
 	current_link_name =
 	    (next_long_link ? next_long_link :
-	     g_strdup (header->header.arch_linkname));
+	     g_strndup (header->header.arch_linkname, NAMSIZ));
 	len = strlen (current_link_name);
 	if (len > 1 && current_link_name[len - 1] == '/')
 	    current_link_name[len - 1] = 0;
 
 	current_file_name =
 	    (next_long_name ? next_long_name :
-	     g_strdup (header->header.arch_name));
+	     g_strndup (header->header.arch_name, NAMSIZ));
 	canonicalize_pathname (current_file_name);
 	len = strlen (current_file_name);
 

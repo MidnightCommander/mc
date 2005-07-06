@@ -1,3 +1,8 @@
+2005-07-06  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tar.c (tar_read_header): Properly handle non \0 terminated tar
+	entries with name of length NAMSIZ.
+
 2005-07-05  Roland Illig  <roland.illig@gmx.de>
 
 	* vfs.h, vfs-impl.h, vfs.c, local.h, local.c, sfs.c: Removed
