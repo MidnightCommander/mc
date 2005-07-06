@@ -1,3 +1,7 @@
+2005-07-06  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Added missing #include <stdio.h>.
+
 2005-06-14  Roland Illig  <roland.illig@gmx.de>
 
 	* editwidget.c: Don't dereference WButtonBar.

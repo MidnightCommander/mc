@@ -23,6 +23,8 @@
 #ifndef MC_EDIT_H
 #define MC_EDIT_H
 
+#include <stdio.h>
+
 #define N_menus 5
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
