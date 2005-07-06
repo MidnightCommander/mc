@@ -67,7 +67,6 @@
 
 /* Block size for reading files in parts */
 #define VIEW_PAGE_SIZE		((size_t) 8192)
-#define STATUS_LINES		1
 #define VIEW_COORD_CACHE_GRANUL	1024
 
 typedef unsigned char byte;
@@ -108,6 +107,11 @@ enum view_ds {
     DS_VFS_PIPE,		/* Data comes from a piped-in VFS file */
     DS_FILE,			/* Data comes from a VFS file */
     DS_STRING			/* Data comes from a string in memory */
+};
+
+struct area {
+    screen_dimen top, left;
+    screen_dimen height, width;
 };
 
 struct WView {
@@ -157,7 +161,7 @@ struct WView {
     GArray *coord_cache;	/* Cache for mapping offsets to cursor positions */
 
     /* Display information */
-    int         dpy_frame_size;	/* Size of the frame surrounding the real viewer */
+    screen_dimen dpy_frame_size;/* Size of the frame surrounding the real viewer */
     offset_type dpy_topleft;	/* Offset of the byte in the top left corner */
     offset_type dpy_text_column;/* Number of skipped columns in non-wrap
 				 * text mode */
@@ -167,6 +171,9 @@ struct WView {
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
     struct hexedit_change_node *change_list;   /* Linked list of changes */
+    struct area status_area;	/* Where the status line is displayed */
+    struct area ruler_area;	/* Where the ruler is displayed */
+    struct area data_area;	/* Where the data is displayed */
 
     int dirty;			/* Number of skipped updates */
 
@@ -204,7 +211,11 @@ struct WView {
 int max_dirt_limit = 10;
 
 /* If set, show a ruler */
-static int ruler = 0;
+static enum {
+    RULER_NONE,
+    RULER_TOP,
+    RULER_BOTTOM
+} ruler = RULER_NONE;
 
 /* Scrolling is done in pages or line increments */
 int mouse_move_pages_viewer = 1;
@@ -239,6 +250,19 @@ static void view_place_cursor (WView *view);
 
 /* {{{ Helper Functions }}} */
 
+/* difference or zero */
+static inline screen_dimen
+dimen_doz (screen_dimen a, screen_dimen b)
+{
+	return (a >= b) ? a - b : 0;
+}
+
+static inline offset_type
+offset_doz (offset_type a, offset_type b)
+{
+	return (a >= b) ? a - b : 0;
+}
+
 static inline offset_type
 offset_rounddown (offset_type a, offset_type b)
 {
@@ -253,56 +277,42 @@ view_is_in_panel (WView *view)
     return (view->dpy_frame_size != 0);
 }
 
-static inline int
-view_get_top (WView *view)
+static void
+view_compute_areas (WView *view)
 {
-    return view->dpy_frame_size + STATUS_LINES;
-}
+    struct area view_area;
+    screen_dimen y;
 
-static inline int
-view_get_left (WView *view)
-{
-    return view->dpy_frame_size;
-}
+    /* The viewer is surrounded by a frame of size view->dpy_frame_size.
+     * Inside that frame, there are: The status line (at the top),
+     * the data area and an optional ruler, which is shown above or
+     * below the data area. */
 
-static inline int
-view_get_bottom (WView *view)
-{
-    if (view->widget.lines >= view->dpy_frame_size)
-	return view->widget.lines - view->dpy_frame_size;
-    return 0;
-}
+    view_area.top = view->widget.y + view->dpy_frame_size;
+    view_area.left = view->widget.x + view->dpy_frame_size;
+    view_area.height = dimen_doz(view->widget.lines, 2 * view->dpy_frame_size);
+    view_area.width = dimen_doz(view->widget.cols, 2 * view->dpy_frame_size);
 
-static inline int
-view_get_right (WView *view)
-{
-    if (view->widget.cols >= view->dpy_frame_size)
-	return view->widget.cols - view->dpy_frame_size;
-    return 0;
-}
+    view->status_area = view_area;
+    view->ruler_area = view_area;
+    view->data_area = view_area;
 
-/* the number of lines that can be used for displaying data */
-static inline int
-view_get_datalines (WView *view)
-{
-    const int top    = view_get_top (view);
-    const int bottom = view_get_bottom (view);
+    view->status_area.height = 1;
+    view->ruler_area.height = (ruler == RULER_NONE || view->hex_mode) ? 0 : 2;
+    view->data_area.height = dimen_doz(view_area.height,
+	view->status_area.height + view->ruler_area.height);
 
-    if (bottom >= top)
-	return bottom - top;
-    return 0;
-}
-
-/* the number of columns that can be used for displaying data */
-static inline int
-view_get_datacolumns (WView *view)
-{
-    const int left  = view_get_left (view);
-    const int right = view_get_right (view);
-
-    if (right >= left)
-	return right - left;
-    return 0;
+    y = view->status_area.top + view->status_area.height;
+    if (ruler == RULER_TOP) {
+	view->ruler_area.top = y;
+	y += view->ruler_area.height;
+    }
+    view->data_area.top = y;
+    y += view->data_area.height;
+    if (ruler == RULER_BOTTOM) {
+	view->ruler_area.top = y;
+	y += view->ruler_area.height;
+    }
 }
 
 /* {{{ Growing buffer }}} */
@@ -955,7 +965,7 @@ view_fix_cursor_position (WView *view)
 {
     if (view->hex_mode) {
 	const offset_type bytes = view->bytes_per_line;
-	const offset_type displaysize = view_get_datalines (view) * bytes;
+	const offset_type displaysize = view->data_area.height * bytes;
 	const offset_type cursor = view->hex_cursor;
 	offset_type topleft = view->dpy_topleft;
 
@@ -968,7 +978,7 @@ view_fix_cursor_position (WView *view)
     } else if (view->text_wrap_mode) {
 	offset_type line, col, columns;
 
-	columns = view_get_datacolumns (view);
+	columns = view->data_area.width;
 	view_offset_to_coord (view, &line, &col, view->dpy_topleft + view->dpy_text_column);
 	if (columns != 0)
 	    col = offset_rounddown (col, columns);
@@ -1013,9 +1023,9 @@ view_moveto_bottom (WView *view)
 	view_growbuf_read_until (view, OFFSETTYPE_MAX);
 
     filesize = view_get_filesize (view);
-    last_offset = (filesize >= 1) ? filesize - 1 : 0;
-    datalines = view_get_datalines (view);
-    lines_up = (datalines >= 1) ? datalines - 1 : 0;
+    last_offset = offset_doz(filesize, 1);
+    datalines = view->data_area.height;
+    lines_up = offset_doz(datalines, 1);
 
     if (view->hex_mode) {
 	view->hex_cursor = filesize;
@@ -1056,7 +1066,7 @@ view_moveto_eol (WView *view)
 	    view->hex_cursor = bol + view->bytes_per_line - 1;
 	} else {
 	    filesize = view_get_filesize (view);
-	    view->hex_cursor = (filesize >= 1) ? filesize - 1 : 0;
+	    view->hex_cursor = offset_doz(filesize, 1);
 	}
     } else if (view->text_wrap_mode) {
 	/* nothing to do */
@@ -1105,7 +1115,7 @@ view_move_up (WView *view, offset_type lines)
 	    view->hex_cursor %= view->bytes_per_line;
 	}
     } else if (view->text_wrap_mode) {
-	const screen_dimen width = view_get_datacolumns (view);
+	const screen_dimen width = view->data_area.width;
 	offset_type i, col, line, linestart;
 
 	for (i = 0; i < lines; i++) {
@@ -1132,7 +1142,7 @@ view_move_up (WView *view, offset_type lines)
 	offset_type line, column;
 
 	view_offset_to_coord (view, &line, &column, view->dpy_topleft);
-	line = (line >= lines) ? line - lines : 0;
+	line = offset_doz(line, lines);
 	view_coord_to_offset (view, &(view->dpy_topleft), line, column);
     }
     view_movement_fixups (view, (lines != 1));
@@ -1162,7 +1172,7 @@ view_move_down (WView *view, offset_type lines)
 		offset_type new_offset, chk_line, chk_col;
 
 		view_offset_to_coord (view, &line, &col, view->dpy_topleft);
-		col += view_get_datacolumns (view);
+		col += view->data_area.width;
 		view_coord_to_offset (view, &new_offset, line, col);
 
 		/* skip to the next line if the only thing that would be
@@ -1358,7 +1368,7 @@ view_load (WView *view, const char *_command, const char *_file,
     view->last_search = 0;	/* Start a new search */
 
     assert (view->bytes_per_line != 0);
-    view_moveto (view, (start_line >= 1) ? start_line - 1 : 0, 0);
+    view_moveto (view, offset_doz (start_line, 1), 0);
 
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
@@ -1372,7 +1382,7 @@ view_load (WView *view, const char *_command, const char *_file,
 static void
 view_update_bytes_per_line (WView *view)
 {
-    const int cols = view_get_datacolumns (view);
+    const screen_dimen cols = view->data_area.width;
 
     if (cols < 80)
 	view->bytes_per_line = ((cols - 8) / 17) * 4;
@@ -1389,7 +1399,7 @@ view_update_bytes_per_line (WView *view)
 static void
 view_percent (WView *view, offset_type p)
 {
-    const int xpos = view->widget.cols - view->dpy_frame_size - 4;
+    const screen_dimen xpos = view->data_area.left + view->data_area.width - 4;
     int percent;
     offset_type filesize;
 
@@ -1411,31 +1421,30 @@ view_percent (WView *view, offset_type p)
 static void
 view_status (WView *view)
 {
-    static int i18n_adjust = 0;
+    const screen_dimen top = view->status_area.top;
+    const screen_dimen left = view->status_area.left;
+    const screen_dimen width = view->status_area.width;
     static const char *file_label;
-
-    const int w = view_get_datacolumns (view);
+    screen_dimen file_label_width;
     int i;
 
     attrset (SELECTED_COLOR);
-    widget_move (view, view->dpy_frame_size, view->dpy_frame_size);
-    hline (' ', w);
+    widget_move (view, top, left);
+    hline (' ', width);
 
-    if (!i18n_adjust) {
-	file_label = _("File: %s");
-	i18n_adjust = strlen (file_label) - 2;
-    }
+    file_label = _("File: %s");
+    file_label_width = strlen (file_label) - 2;
 
-    if (w < i18n_adjust + 6)
+    if (width < file_label_width + 6)
 	addstr ((char *) name_trunc (view->filename ? view->filename :
-			    view->command ? view->command : "", w));
+			    view->command ? view->command : "", width));
     else {
-	i = (w > 22 ? 22 : w) - i18n_adjust;
+	i = (width > 22 ? 22 : width) - file_label_width;
 	printw (str_unconst (file_label), name_trunc (view->filename ? view->filename :
 					view->command ? view->command : "",
 					i));
-	if (w > 46) {
-	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 24);
+	if (width > 46) {
+	    widget_move (view, top, left + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
 	    if (view->hex_mode)
 		printw (str_unconst (_("Offset 0x%08lx")), view->hex_cursor);
@@ -1447,17 +1456,17 @@ view_status (WView *view)
 		    (unsigned long) (view->text_wrap_mode ? col : view->dpy_text_column));
 	    }
 	}
-	if (w > 62) {
+	if (width > 62) {
 	    offset_type filesize;
 	    filesize = view_get_filesize (view);
-	    widget_move (view, view->dpy_frame_size, view->dpy_frame_size + 43);
+	    widget_move (view, top, left + 43);
 	    if (!view_may_still_grow (view)) {
 		printw (str_unconst (_("%s bytes")), size_trunc (filesize));
 	    } else {
 		printw (str_unconst (_(">= %s bytes")), size_trunc (filesize));
 	    }
 	}
-	if (w > 26) {
+	if (width > 26) {
 	    view_percent (view, view->hex_mode
 		? view->hex_cursor
 		: view->dpy_topleft);
@@ -1467,21 +1476,15 @@ view_status (WView *view)
 }
 
 static inline void
-view_display_clean (WView *view, int height, int width)
+view_display_clean (WView *view)
 {
-    /* FIXME: Should I use widget_erase only and repaint the box? */
+    attrset (NORMAL_COLOR);
+    widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0) {
-	int i;
-
 	draw_double_box (view->widget.parent, view->widget.y,
 			 view->widget.x, view->widget.lines,
 			 view->widget.cols);
-	for (i = 1; i < height; i++) {
-	    widget_move (view, i, 1);
-	    printw (str_unconst ("%*s"), width - 1, "");
-	}
-    } else
-	widget_erase ((Widget *) view);
+    }
 }
 
 #define view_add_character(view,c) addch (c)
@@ -1510,28 +1513,28 @@ static void
 view_display_ruler (WView *view)
 {
     const char ruler_chars[] = "|----*----";
+    const screen_dimen top = view->ruler_area.top;
+    const screen_dimen left = view->ruler_area.left;
+    const screen_dimen width = view->ruler_area.width;
+    const screen_dimen line_row = (ruler == RULER_TOP) ? 0 : 1;
+    const screen_dimen nums_row = (ruler == RULER_TOP) ? 1 : 0;
 
-    const int top    = view_get_top (view);
-    const int left   = view_get_left (view);
-    const int bottom = view_get_bottom (view);
-    const int right  = view_get_right (view);
-
-    const int line_row = (ruler == 1) ? top + 0 : (bottom - 1) - 0;
-    const int nums_row = (ruler == 1) ? top + 1 : (bottom - 1) - 1;
     char r_buff[10];
     offset_type cl;
-    int c;
+    screen_dimen c;
+
+    if (ruler == RULER_NONE)
+	return;
 
     attrset (MARKED_COLOR);
-    for (c = left; c < right; c++) {
-	/* FIXME: possible integer overflow */
-	cl = c + view->dpy_text_column;
-	view_gotoyx (view, line_row, c);
+    for (c = 0; c < width; c++) {
+	cl = view->dpy_text_column + c;
+	view_gotoyx (view, top + line_row, left + c);
 	view_add_character (view, ruler_chars[cl % 10]);
 
 	if ((cl != 0) && (cl % 10) == 0) {
 	    g_snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
-	    widget_move (view, nums_row, c - 1);
+	    widget_move (view, top + nums_row, left + c - 1);
 	    view_add_string (view, r_buff);
 	}
     }
@@ -1541,11 +1544,14 @@ view_display_ruler (WView *view)
 static void
 view_display_hex (WView *view)
 {
-    const int left = view_get_left (view);
-    const int right = view_get_right (view);
-    int col = left;
-    int row = view_get_top (view);
-    int bottom;
+    const screen_dimen top = view->data_area.top;
+    const screen_dimen left = view->data_area.left;
+    const screen_dimen height = view->data_area.height;
+    const screen_dimen width = view->data_area.width;
+    const screen_dimen text_start = width - view->bytes_per_line;
+    const screen_dimen hex_start = 9;
+
+    screen_dimen row, col;
     offset_type from;
     int c;
     mark_t boldflag = MARK_NORMAL;
@@ -1554,33 +1560,26 @@ view_display_hex (WView *view)
     char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
     int bytes;		/* Number of bytes already printed on the line */
 
-    /* Start of text column */
-    int text_start = right - view->bytes_per_line;
-
-    bottom = view_get_bottom (view);
-    from = view->dpy_topleft;
-    attrset (NORMAL_COLOR);
-
-    view_display_clean (view, bottom, right);
+    view_display_clean (view);
 
     /* Find the first displayable changed byte */
+    from = view->dpy_topleft;
     while (curr && (curr->offset < from)) {
 	curr = curr->next;
     }
 
-    for (; get_byte (view, from) != -1 && row < bottom; row++) {
+    attrset (NORMAL_COLOR);
+    for (row = 0; get_byte (view, from) != -1 && row < height; row++) {
 	/* Print the hex offset */
 	attrset (MARKED_COLOR);
 	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
-	view_gotoyx (view, row, left);
+	view_gotoyx (view, top + row, left);
 	view_add_string (view, hex_buff);
 	attrset (NORMAL_COLOR);
 
-	/* Hex dump starts from column nine */
-	col = view->dpy_frame_size + 9;
-
+	col = hex_start;
 	/* Each hex number is two digits */
-	hex_buff[2] = 0;
+	hex_buff[2] = '\0';
 	for (bytes = 0;
 	     bytes < view->bytes_per_line
 	     && (c = get_byte (view, from)) != -1;
@@ -1613,7 +1612,7 @@ view_display_hex (WView *view)
 	    /* Print a hex number (sprintf is too slow) */
 	    hex_buff[0] = hex_char[(c >> 4)];
 	    hex_buff[1] = hex_char[c & 15];
-	    view_gotoyx (view, row, col);
+	    view_gotoyx (view, top + row, left + col);
 	    view_add_string (view, hex_buff);
 	    col += 3;
 	    /* Turn off the cursor or changed byte highlighting here */
@@ -1622,17 +1621,16 @@ view_display_hex (WView *view)
 	    if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
 		/* Turn off the search highlighting */
 		if (boldflag == MARK_SELECTED
-		    && from ==
-		    view->search_start + view->found_len - 1)
+		    && from == view->search_start + view->found_len - 1)
 		    attrset (NORMAL_COLOR);
 
 		/* Hex numbers are printed in the groups of four */
 		/* Groups are separated by a vline */
 
-		view_gotoyx (view, row, col - 1);
+		view_gotoyx (view, top + row, left + col - 1);
 		view_add_character (view, ' ');
-		view_gotoyx (view, row, col);
-		if (view_get_datacolumns (view) < 80)
+		view_gotoyx (view, top + row, left + col);
+		if (view->data_area.width < 80)
 		    col += 1;
 		else {
 		    view_add_one_vline ();
@@ -1640,19 +1638,18 @@ view_display_hex (WView *view)
 		}
 
 		if (boldflag != MARK_NORMAL
-		    && from ==
-		    view->search_start + view->found_len - 1)
+		    && from == view->search_start + view->found_len - 1)
 		    attrset (MARKED_COLOR);
 	    }
 	    if (boldflag != MARK_NORMAL
 		&& from < view->search_start + view->found_len - 1
 		&& bytes != view->bytes_per_line - 1) {
-		view_gotoyx (view, row, col);
+		view_gotoyx (view, top + row, left + col);
 		view_add_character (view, ' ');
 	    }
 
 	    /* Print corresponding character on the text side */
-	    view_gotoyx (view, row, text_start + bytes);
+	    view_gotoyx (view, top + row, left + text_start + bytes);
 
 	    c = convert_to_display_c (c);
 
@@ -1694,37 +1691,27 @@ view_display_hex (WView *view)
 static void
 view_display_text (WView * view)
 {
-    const int left = view_get_left (view);
-    const int top = view_get_top (view);
-    int col = left;
-    int row = view_get_top (view);
-    int bottom, right;
+    const screen_dimen left = view->data_area.left;
+    const screen_dimen top = view->data_area.top;
+    const screen_dimen width = view->data_area.width;
+    const screen_dimen height = view->data_area.height;
+    screen_dimen row, col;
     offset_type from;
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 
-    bottom = view_get_bottom (view);
-    right = view_get_right (view);
-    from = view->dpy_topleft;
-    attrset (NORMAL_COLOR);
-
-    view_display_clean (view, bottom, right);
+    view_display_clean (view);
+    view_display_ruler (view);
 
     /* Find the first displayable changed byte */
+    from = view->dpy_topleft;
     while (curr && (curr->offset < from)) {
 	curr = curr->next;
     }
-    /* Optionally, display a ruler */
-    if (ruler) {
-	view_display_ruler (view);
-	if (ruler == 1)
-	    row += 2;
-	else
-	    bottom -= 2;
-    }
 
-    for (; row < bottom && (c = get_byte (view, from)) != -1; from++) {
+    attrset (NORMAL_COLOR);
+    for (row = 0, col = 0; row < height && (c = get_byte (view, from)) != -1; from++) {
 	if (view->text_nroff_mode && c == '\b') {
 	    int c_prev;
 	    int c_next;
@@ -1736,7 +1723,7 @@ view_display_text (WView * view)
 		&& is_printable (c_prev)
 		&& (c_prev == c_next || c_prev == '_'
 		    || (c_prev == '+' && c_next == 'o'))) {
-		if (col <= left) {
+		if (col == 0) {
 		    /* So it has to be text_wrap_mode - do not need to check for it */
 		    /* FIXME: what about the ruler? */
 		    if (row == 1 + top) {
@@ -1745,7 +1732,7 @@ view_display_text (WView * view)
 					   of the previous undisplayed line */
 		    }
 		    row--;
-		    col = right;
+		    col = width;
 		}
 		col--;
 		boldflag = MARK_SELECTED;
@@ -1756,35 +1743,31 @@ view_display_text (WView * view)
 		continue;
 	    }
 	}
-	if ((c == '\n') || (col >= right && view->text_wrap_mode)) {
-	    col = left;
+	if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
+	    col = 0;
 	    row++;
-	    if (c == '\n' || row >= bottom)
+	    if (c == '\n' || row >= height)
 		continue;
 	}
 	if (c == '\r')
 	    continue;
 	if (c == '\t') {
 	    /* FIXME: in text wrap mode, tabulators are not stable. */
-	    col = ((col - left) / 8) * 8 + 8 + left;
+	    col = col - col % 8 + 8;
 	    continue;
 	}
-	if (view->found_len && from >= view->search_start
+	if (view->found_len != 0
+	    && from >= view->search_start
 	    && from < view->search_start + view->found_len) {
 	    boldflag = MARK_SELECTED;
 	    attrset (SELECTED_COLOR);
 	}
-	/* FIXME: incompatible widths in integer types */
-	if (col >= 0
-	    && (unsigned int) col >= left + view->dpy_text_column
-	    && (unsigned int) col < right + view->dpy_text_column) {
-	    view_gotoyx (view, row, col - view->dpy_text_column);
-
+	if (col >= view->dpy_text_column
+	    && col - view->dpy_text_column < width) {
+	    view_gotoyx (view, top + row, left + (col - view->dpy_text_column));
 	    c = convert_to_display_c (c);
-
 	    if (!is_printable (c))
 		c = '.';
-
 	    view_add_character (view, c);
 	}
 	col++;
@@ -1800,6 +1783,7 @@ view_display_text (WView * view)
 static void
 display (WView *view)
 {
+    view_compute_areas (view);
     if (view->hex_mode) {
 	view_display_hex (view);
     } else {
@@ -1810,15 +1794,13 @@ display (WView *view)
 static void
 view_place_cursor (WView *view)
 {
-    int shift;
+    screen_dimen row, col;
 
+    row = view->data_area.top + view->cursor_row;
+    col = view->data_area.left + view->cursor_col;
     if (!view->hexview_in_text && view->hexedit_lownibble)
-	shift = 1;
-    else
-	shift = 0;
-
-    widget_move (&view->widget, view->cursor_row,
-		 view->cursor_col + shift);
+	col++;
+    widget_move (&view->widget, row, col);
 }
 
 static void
@@ -2892,7 +2874,7 @@ view_handle_key (WView *view, int c)
     if (check_left_right_keys (view, c))
 	return MSG_HANDLED;
 
-    if (check_movement_keys (c, view_get_datalines (view) + 1, view,
+    if (check_movement_keys (c, view->data_area.height + 1, view,
 	view_cmk_move_up, view_cmk_move_down,
 	view_cmk_moveto_top, view_cmk_moveto_bottom))
 	return MSG_HANDLED;
@@ -2949,11 +2931,11 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'd':
-	view_move_down (view, (view_get_datalines (view) + 1) / 2);
+	view_move_down (view, (view->data_area.height + 1) / 2);
 	return MSG_HANDLED;
 
     case 'u':
-	view_move_up (view, (view_get_datalines (view) + 1) / 2);
+	view_move_up (view, (view->data_area.height + 1) / 2);
 	return MSG_HANDLED;
 
     case 'k':
@@ -2967,7 +2949,7 @@ view_handle_key (WView *view, int c)
 
     case ' ':
     case 'f':
-	view_move_down (view, view_get_datalines (view));
+	view_move_down (view, view->data_area.height);
 	return MSG_HANDLED;
 
     case XCTRL ('o'):
@@ -2980,7 +2962,7 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'b':
-	view_move_up (view, view_get_datalines (view));
+	view_move_up (view, view->data_area.height);
 	return MSG_HANDLED;
 
     case KEY_IC:
@@ -3039,6 +3021,8 @@ view_handle_key (WView *view, int c)
 static int
 view_event (WView *view, Gpm_Event *event, int *result)
 {
+    screen_dimen y, x;
+
     *result = MOU_NORMAL;
 
     /* We are not interested in the release events */
@@ -3055,28 +3039,34 @@ view_event (WView *view, Gpm_Event *event, int *result)
 	return 1;
     }
 
+    x = event->x;
+    y = event->y;
+
     /* Scrolling left and right */
     if (!view->text_wrap_mode) {
-	if (event->x < 1 * view_get_datacolumns (view) / 4) {
+	if (x < view->data_area.width * 1/4) {
 	    view_move_left (view, 1);
 	    goto processed;
-	}
-	if (event->x > 3 * view_get_datacolumns (view) / 4) {
+	} else if (x < view->data_area.width * 3/4) {
+	    /* ignore the click */
+	} else {
 	    view_move_right (view, 1);
 	    goto processed;
 	}
     }
 
     /* Scrolling up and down */
-    if (event->y < view->widget.lines / 3) {
+    if (y < view->data_area.top + view->data_area.height * 1/3) {
 	if (mouse_move_pages_viewer)
-	    view_move_up (view, view_get_datalines (view) / 2);
+	    view_move_up (view, view->data_area.height / 2);
 	else
 	    view_move_up (view, 1);
 	goto processed;
-    } else if (event->y > 2 * view_get_datalines (view) / 3) {
-	if (mouse_move_pages_viewer)
-	    view_move_down (view, view_get_datalines (view) / 2);
+    } else if (y < view->data_area.top + view->data_area.height * 2/3) {
+	/* ignore the click */
+    } else {
+    	if (mouse_move_pages_viewer)
+	    view_move_down (view, view->data_area.height / 2);
 	else
 	    view_move_down (view, 1);
 	goto processed;
@@ -3113,6 +3103,7 @@ view_adjust_size (Dlg_head *h)
     widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
     widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
 
+    view_compute_areas (view);
     view_update_bytes_per_line (view);
 }
 
@@ -3200,11 +3191,11 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
     cb_ret_t i;
     Dlg_head *h = view->widget.parent;
 
+    view_compute_areas (view);
     view_update_bytes_per_line (view);
 
     switch (msg) {
     case WIDGET_INIT:
-	view_update_bytes_per_line (view);
 	if (view_is_in_panel (view))
 	    add_hook (&select_file_hook, view_hook, view);
 	else
@@ -3239,10 +3230,6 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 	if (view_is_in_panel (view))
 	    delete_hook (&select_file_hook, view_hook);
 	return MSG_HANDLED;
-
-    case WIDGET_RESIZED:
-	view_update_bytes_per_line (view);
-	/* FALLTROUGH */
 
     default:
 	return default_proc (msg, parm);

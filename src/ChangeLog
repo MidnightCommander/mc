@@ -1,3 +1,13 @@
+2005-07-06  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Changed some variables from int to screen_dimen.
+	Instead of relying on each of the view_display_* functions to
+	compute the correct coordinates they are managed using the new
+	function view_compute_areas(). In the view_display_* functions,
+	all calculations are done 0-based; before, the calculation had
+	involved the relative position of the area. Removed "static"
+	variables from view_status(). Simplified view_display_clean().
+
 2005-07-06  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* complete.c: Fix autocompletion for single possible path when
