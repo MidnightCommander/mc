@@ -922,7 +922,7 @@ complete_engine (WInput *in, int what_to_do)
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
     if (in->completions){
-    	if (what_to_do & DO_INSERTION) {
+    	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
     	    if (insert_text (in, in->completions [0], strlen (in->completions [0]))){
     	        if (in->completions [1])
     	    	    beep ();
@@ -931,11 +931,7 @@ complete_engine (WInput *in, int what_to_do)
 	    } else
 	        beep ();
         }
-	/* FIXME: evil evil evil.  We do not go into the query completion engine
-	 * because we do not have a Gtk dialog for it.  Gtk-ted does not like
-	 * this; if we enable this code, it will crash.
-	 */
-    	if ((what_to_do & DO_QUERY) && in->completions [1]) {
+    	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
     	    int x, y, w, h;
     	    int start_x, start_y;
@@ -1000,11 +996,17 @@ complete_engine (WInput *in, int what_to_do)
 
 void complete (WInput *in)
 {
+    int engine_flags;
+
     if (in->completions)
-    	while (complete_engine (in, DO_QUERY));
-    else if (show_all_if_ambiguous){
-    	complete_engine (in, DO_INSERTION);
-    	while (complete_engine (in, DO_QUERY));
-    } else
-    	complete_engine (in, DO_INSERTION);
+	engine_flags = DO_QUERY;
+    else
+    {
+	engine_flags = DO_INSERTION;
+
+	if (show_all_if_ambiguous)
+	    engine_flags |= DO_QUERY;
+    }
+
+    while (complete_engine (in, engine_flags));
 }

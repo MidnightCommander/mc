@@ -1,3 +1,8 @@
+2005-07-06  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* complete.c: Fix autocompletion for single possible path when
+	"complete show all" is set.
+
 2005-07-05  Roland Illig  <roland.illig@gmx.de>
 
 	* achown.c: Changed all references to umode_t into mode_t.
