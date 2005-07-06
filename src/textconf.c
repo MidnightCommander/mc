@@ -25,7 +25,6 @@
 #include <sys/types.h>
 
 #include "global.h"
-#include "ecs.h"
 
 #ifdef USE_VFS
 static const char *const vfs_supported[] = {
