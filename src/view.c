@@ -266,6 +266,7 @@ offset_doz (offset_type a, offset_type b)
 static inline offset_type
 offset_rounddown (offset_type a, offset_type b)
 {
+	assert (b != 0);
 	return a - a % b;
 }
 
