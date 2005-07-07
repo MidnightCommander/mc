@@ -1,3 +1,9 @@
+2005-07-07  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_compute_areas): Fixed a bug noted by Pavel
+	Tsekov. The coordinates are now relative to the Widget, as they
+	should be.
+
 2005-07-06  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Changed some variables from int to screen_dimen.

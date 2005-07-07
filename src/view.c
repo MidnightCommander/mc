@@ -289,8 +289,8 @@ view_compute_areas (WView *view)
      * the data area and an optional ruler, which is shown above or
      * below the data area. */
 
-    view_area.top = view->widget.y + view->dpy_frame_size;
-    view_area.left = view->widget.x + view->dpy_frame_size;
+    view_area.top = view->dpy_frame_size;
+    view_area.left = view->dpy_frame_size;
     view_area.height = dimen_doz(view->widget.lines, 2 * view->dpy_frame_size);
     view_area.width = dimen_doz(view->widget.cols, 2 * view->dpy_frame_size);
 
