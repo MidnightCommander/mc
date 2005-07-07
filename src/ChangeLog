@@ -4,6 +4,7 @@
 	Tsekov. The coordinates are now relative to the Widget, as they
 	should be.
 	* view.c (view_status): Renamed to view_display_status().
+	* view.c: view_display_status() is called inside display().
 
 2005-07-06  Roland Illig  <roland.illig@gmx.de>
 

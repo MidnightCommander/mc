@@ -1792,6 +1792,7 @@ display (WView *view)
     } else {
 	view_display_text (view);
     }
+    view_display_status (view);
 }
 
 static void
@@ -1814,7 +1815,6 @@ view_update (WView *view)
     if (view->dirty > dirt_limit) {
 	/* Too many updates skipped -> force a update */
 	display (view);
-	view_display_status (view);
 	view->dirty = 0;
 	/* Raise the update skipping limit */
 	dirt_limit++;
@@ -1825,7 +1825,6 @@ view_update (WView *view)
 	if (is_idle ()) {
 	    /* We have time to update the screen properly */
 	    display (view);
-	    view_display_status (view);
 	    view->dirty = 0;
 	    if (dirt_limit > 1)
 		dirt_limit--;
@@ -3184,7 +3183,6 @@ view_hook (void *v)
 
     view_load (view, 0, panel->dir.list[panel->selected].fname, 0);
     display (view);
-    view_display_status (view);
 }
 
 static cb_ret_t
@@ -3207,7 +3205,6 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_DRAW:
 	display (view);
-	view_display_status (view);
 	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
