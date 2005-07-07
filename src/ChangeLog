@@ -1,5 +1,11 @@
 2005-07-07  Roland Illig  <roland.illig@gmx.de>
 
+	* view.c (view_ccache_find): Replaced the linear search with a
+	binary search. This speeds up the viewer by a factor of 25 for
+	large files (> 100 MB).
+
+2005-07-07  Roland Illig  <roland.illig@gmx.de>
+
 	* dialog.h: Replaced object-like macros with implicit references
 	to an identifier ``h'' with function-like macros. Adjusted all
 	users.

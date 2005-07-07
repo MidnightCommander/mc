@@ -810,34 +810,7 @@ is_nroff_sequence (WView *view, offset_type offset)
 }
 
 static inline guint
-view_ccache_find_linear_down (WView *view, const struct coord_cache_entry *cache,
-	const struct coord_cache_entry *coord, enum ccache_type sort_by)
-{
-    guint i;
-
-    for (i = 0; i + 1 < view->coord_cache->len; i++) {
-	if (coord_cache_entry_less (coord, &(cache[i + 1]), sort_by, view->text_nroff_mode))
-	    break;
-    }
-    return i;
-}
-
-static inline guint
-view_ccache_find_linear_up (WView *view, const struct coord_cache_entry *cache,
-	const struct coord_cache_entry *coord, enum ccache_type sort_by)
-{
-    guint i;
-
-    i = view->coord_cache->len;
-    assert (i != 0);
-    do {
-	i--;
-    } while (coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode));
-    return i;
-}
-
-static inline guint
-view_ccache_find_binary (WView *view, const struct coord_cache_entry *cache,
+view_ccache_find (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
 {
     guint base, i, limit;
@@ -857,21 +830,6 @@ view_ccache_find_binary (WView *view, const struct coord_cache_entry *cache,
 	limit = (limit + 1) / 2;
     }
     return base;
-}
-
-static inline guint
-view_ccache_find (WView *view, const struct coord_cache_entry *cache,
-	const struct coord_cache_entry *coord, enum ccache_type sort_by)
-{
-    volatile guint linear_down, linear_up, binary;
-
-    linear_down = view_ccache_find_linear_down (view, cache, coord, sort_by);
-    linear_up = view_ccache_find_linear_up (view, cache, coord, sort_by);
-    binary = view_ccache_find_binary (view, cache, coord, sort_by);
-
-    assert (linear_down == linear_up);
-    assert (linear_down == binary);
-    return binary;
 }
 
 /* Look up the missing components of ''coord'', which are given by
