@@ -22,10 +22,10 @@
 #include "mouse.h"
 
 /* Color constants */
-#define FOCUSC           h->color[1]
-#define NORMALC          h->color[0]
-#define HOT_NORMALC      h->color[2]
-#define HOT_FOCUSC       h->color[3]
+#define DLG_NORMALC(h)		((h)->color[0])
+#define DLG_FOCUSC(h)		((h)->color[1])
+#define DLG_HOT_NORMALC(h)	((h)->color[2])
+#define DLG_HOT_FOCUSC(h)	((h)->color[3])
 
 /* Common return values */
 #define B_EXIT		0

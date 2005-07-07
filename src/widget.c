@@ -66,6 +66,20 @@ static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;
 
+static void
+widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
+{
+    Dlg_head *h = w->parent;
+
+    attrset (hotkey
+	? (focused
+	    ? DLG_HOT_FOCUSC (h)
+	    : DLG_HOT_NORMALC (h))
+	: (focused
+	    ? DLG_FOCUSC (h)
+	    : DLG_NORMALC (h)));
+}
+
 static cb_ret_t
 button_callback (Widget *w, widget_msg_t msg, int parm)
 {
@@ -159,14 +173,14 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	    break;
 	}
 
-	attrset ((b->selected) ? FOCUSC : NORMALC);
-	widget_move (&b->widget, 0, 0);
+	widget_selectcolor (w, b->selected, FALSE);
+	widget_move (w, 0, 0);
 
 	addstr (buf);
 
 	if (b->hotpos >= 0) {
-	    attrset ((b->selected) ? HOT_FOCUSC : HOT_NORMALC);
-	    widget_move (&b->widget, 0, b->hotpos + off);
+	    widget_selectcolor (w, b->selected, TRUE);
+	    widget_move (w, 0, b->hotpos + off);
 	    addch ((unsigned char) b->text[b->hotpos]);
 	}
 	return MSG_HANDLED;
@@ -342,18 +356,16 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
 	    register const char *cp;
-	    attrset ((i == r->pos
-		      && msg == WIDGET_FOCUS) ? FOCUSC : NORMALC);
+	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
+	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
 
 	    printw ("(%c) ", (r->sel == i) ? '*' : ' ');
 	    for (cp = r->texts[i]; *cp; cp++) {
 		if (*cp == '&') {
-		    attrset ((i == r->pos && msg == WIDGET_FOCUS)
-			     ? HOT_FOCUSC : HOT_NORMALC);
+		    widget_selectcolor (w, focused, TRUE);
 		    addch (*++cp);
-		    attrset ((i == r->pos
-			      && msg == WIDGET_FOCUS) ? FOCUSC : NORMALC);
+		    widget_selectcolor (w, focused, FALSE);
 		} else
 		    addch (*cp);
 	    }
@@ -449,12 +461,12 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_FOCUS:
     case WIDGET_UNFOCUS:
     case WIDGET_DRAW:
-	attrset ((msg == WIDGET_FOCUS) ? FOCUSC : NORMALC);
+	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
 	printw ("[%c] %s", (c->state & C_BOOL) ? 'x' : ' ', c->text);
 
 	if (c->hotpos >= 0) {
-	    attrset ((msg == WIDGET_FOCUS) ? HOT_FOCUSC : HOT_NORMALC);
+	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
 	    widget_move (&c->widget, 0, +c->hotpos + 4);
 	    addch ((unsigned char) c->text[c->hotpos]);
 	}
@@ -549,7 +561,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 	    if (l->transparent)
 		attrset (DEFAULT_COLOR);
 	    else
-		attrset (NORMALC);
+		attrset (DLG_NORMALC (h));
 	    for (;;) {
 		int xlen;
 
@@ -649,7 +661,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_DRAW){
 	widget_move (&g->widget, 0, 0);
-	attrset (NORMALC);
+	attrset (DLG_NORMALC (h));
 	if (!g->shown)
 	    printw ("%*s", gauge_len, "");
 	else {
@@ -671,7 +683,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    addch ('[');
 	    attrset (GAUGE_COLOR);
 	    printw ("%*s", (int) columns, "");
-	    attrset (NORMALC);
+	    attrset (DLG_NORMALC (h));
 	    printw ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
 	}
 	return MSG_HANDLED;
@@ -1738,14 +1750,14 @@ listbox_draw (WListbox *l, int focused)
     int i;
     int sel_line;
     Dlg_head *h = l->widget.parent;
-    int normalc = NORMALC; 
+    int normalc = DLG_NORMALC (h);
     int selc;
     const char *text; 
 
     if (focused){
-	selc    = FOCUSC;
+	selc    = DLG_FOCUSC (h);
     } else {
-	selc    = HOT_FOCUSC;
+	selc    = DLG_HOT_FOCUSC (h);
     }
     sel_line = -1;
 

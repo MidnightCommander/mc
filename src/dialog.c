@@ -160,12 +160,12 @@ common_dialog_repaint (struct Dlg_head *h)
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
-    attrset (NORMALC);
+    attrset (DLG_NORMALC (h));
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
 
     if (h->title) {
-	attrset (HOT_NORMALC);
+	attrset (DLG_HOT_NORMALC (h));
 	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
 	addstr (h->title);
     }

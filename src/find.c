@@ -719,7 +719,7 @@ do_search (struct Dlg_head *h)
 
 	if (verbose){
 	    pos = (pos + 1) % 4;
-	    attrset (NORMALC);
+	    attrset (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y-6, FIND2_X - 4);
 	    addch (rotating_dash [pos]);
 	    mc_refresh ();

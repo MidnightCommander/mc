@@ -1,5 +1,17 @@
 2005-07-07  Roland Illig  <roland.illig@gmx.de>
 
+	* dialog.h: Replaced object-like macros with implicit references
+	to an identifier ``h'' with function-like macros. Adjusted all
+	users.
+	* dialog.c: Likewise.
+	* find.c: Likewise.
+	* tree.c: Likewise.
+	* widget.c: Likewise.
+	* widget.c (widget_selectcolor): New function that selects a
+	color among DLG_{HOT_,}{FOCUS,NORMAL}C.
+
+2005-07-07  Roland Illig  <roland.illig@gmx.de>
+
 	* view.c (view_compute_areas): Fixed a bug noted by Pavel
 	Tsekov. The coordinates are now relative to the Widget, as they
 	should be.

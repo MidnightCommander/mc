@@ -54,7 +54,7 @@
 extern int command_prompt;
 
 /* Use the color of the parent widget for the unselected entries */
-#define TREE_NORMALC NORMALC
+#define TREE_NORMALC(h) (DLG_NORMALC (h))
 
 /* Specifies the display mode: 1d or 2d */
 static int tree_navigation_flag;
@@ -171,13 +171,13 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 
     if (tree->searching){
 	/* Show search string */
-	attrset (TREE_NORMALC);
-	attrset (FOCUSC);
+	attrset (TREE_NORMALC (h));
+	attrset (DLG_FOCUSC (h));
 	addch (PATH_SEP);
 
 	addstr ((char *) name_trunc (tree->search_buffer, tree_cols-2));
 	addch (' ');
-	attrset (FOCUSC);
+	attrset (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
 	addstr ((char *) name_trunc (tree->selected_ptr->name, tree_cols));
@@ -197,7 +197,7 @@ static void show_tree (WTree *tree)
     tree_lines = tlines (tree);
     tree_cols  = tree->widget.cols;
 
-    attrset (TREE_NORMALC);
+    attrset (TREE_NORMALC (h));
     widget_move ((Widget*)tree, y, x);
     if (tree->is_panel){
 	tree_cols  -= 2;
@@ -306,7 +306,7 @@ static void show_tree (WTree *tree)
 	addch (' ');
 
 	/* Return to normal color */
-	attrset (TREE_NORMALC);
+	attrset (TREE_NORMALC (h));
 
 	/* Calculate the next value for current */
 	current = current->next;
