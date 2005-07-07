@@ -1776,8 +1776,13 @@ view_display_text (WView * view)
 	if (c == '\r')
 	    continue;
 	if (c == '\t') {
-	    /* FIXME: in text wrap mode, tabulators are not stable. */
-	    col = col - col % 8 + 8;
+	    offset_type line, column;
+	    view_offset_to_coord (view, &line, &column, from);
+	    col += (8 - column % 8);
+	    if (view->text_wrap_mode && col >= width && width != 0) {
+		row += col / width;
+		col %= width;
+	    }
 	    continue;
 	}
 	if (view->found_len != 0

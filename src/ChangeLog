@@ -9,6 +9,7 @@
 	bug.
 	* view.c (view_compute_areas, view_percent, view_display_status,
 	view_display_ruler): Fixed screen overflow bugs.
+	* view.c (view_display_text): Fixed handling of tabulators.
 
 2005-07-06  Roland Illig  <roland.illig@gmx.de>
 
