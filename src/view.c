@@ -1749,12 +1749,11 @@ view_display_text (WView * view)
 		&& (c_prev == c_next || c_prev == '_'
 		    || (c_prev == '+' && c_next == 'o'))) {
 		if (col == 0) {
-		    /* So it has to be text_wrap_mode - do not need to check for it */
-		    /* FIXME: what about the ruler? */
-		    if (row == 1 + top) {
-			from++;
-			continue;	/* There had to be a bold character on the rightmost position
-					   of the previous undisplayed line */
+		    if (row == 0) {
+			/* We're inside an nroff character sequence at the
+			 * beginning of the screen -- just skip the
+			 * backspace and continue with the next character. */
+			continue;
 		    }
 		    row--;
 		    col = width;
