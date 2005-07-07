@@ -809,9 +809,6 @@ is_nroff_sequence (WView *view, offset_type offset)
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
 }
 
-#define MCVIEW_USE_FIND_LINEAR_DOWN
-
-#ifdef MCVIEW_USE_FIND_LINEAR_DOWN
 static inline guint
 view_ccache_find_linear_down (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
@@ -824,9 +821,7 @@ view_ccache_find_linear_down (WView *view, const struct coord_cache_entry *cache
     }
     return i;
 }
-#endif
 
-#ifdef MCVIEW_USE_FIND_LINEAR_UP
 static inline guint
 view_ccache_find_linear_up (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
@@ -834,37 +829,49 @@ view_ccache_find_linear_up (WView *view, const struct coord_cache_entry *cache,
     guint i;
 
     i = view->coord_cache->len;
-    if (i != 0) {
-	do {
-	    i--;
-	} while (coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode));
-    }
+    assert (i != 0);
+    do {
+	i--;
+    } while (coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode));
     return i;
 }
-#endif
 
-#ifdef MCVIEW_USE_FIND_BINARY
 static inline guint
 view_ccache_find_binary (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
 {
-    abort();			/* does not work yet */
+    guint base, i, limit;
+
+    limit = view->coord_cache->len;
+    assert (limit != 0);
+
+    base = 0;
+    while (limit > 1) {
+	i = base + limit / 2;
+	if (coord_cache_entry_less (coord, &cache[i], sort_by, view->text_nroff_mode)) {
+	    /* continue the search in the lower half of the cache */
+	} else {
+	    /* continue the search in the upper half of the cache */
+	    base = i;
+	}
+	limit = (limit + 1) / 2;
+    }
+    return base;
 }
-#endif
 
 static inline guint
 view_ccache_find (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
 {
-#if defined(MCVIEW_USE_FIND_LINEAR_DOWN)
-    return view_ccache_find_linear_down (view, cache, coord, sort_by);
-#elif defined(MCVIEW_USE_FIND_LINEAR_UP)
-    return view_ccache_find_linear_up (view, cache, coord, sort_by);
-#elif defined(MCVIEW_USE_FIND_BINARY)
-    return view_ccache_find_binary (view, cache, coord, sort_by);
-#else
-#  error No find function defined.
-#endif
+    volatile guint linear_down, linear_up, binary;
+
+    linear_down = view_ccache_find_linear_down (view, cache, coord, sort_by);
+    linear_up = view_ccache_find_linear_up (view, cache, coord, sort_by);
+    binary = view_ccache_find_binary (view, cache, coord, sort_by);
+
+    assert (linear_down == linear_up);
+    assert (linear_down == binary);
+    return binary;
 }
 
 /* Look up the missing components of ''coord'', which are given by
