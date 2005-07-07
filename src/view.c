@@ -1385,7 +1385,9 @@ view_update_bytes_per_line (WView *view)
 {
     const screen_dimen cols = view->data_area.width;
 
-    if (cols < 80)
+    if (cols < 8)
+	view->bytes_per_line = 0;
+    else if (cols < 80)
 	view->bytes_per_line = ((cols - 8) / 17) * 4;
     else
 	view->bytes_per_line = ((cols - 8) / 18) * 4;
