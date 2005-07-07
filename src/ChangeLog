@@ -7,6 +7,8 @@
 	* view.c: view_display_status() is called inside display().
 	* view.c (view_update_bytes_per_line): Fixed integer overflow
 	bug.
+	* view.c (view_compute_areas, view_percent, view_display_status,
+	view_display_ruler): Fixed screen overflow bugs.
 
 2005-07-06  Roland Illig  <roland.illig@gmx.de>
 

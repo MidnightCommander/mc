@@ -257,6 +257,12 @@ dimen_doz (screen_dimen a, screen_dimen b)
 	return (a >= b) ? a - b : 0;
 }
 
+static inline screen_dimen
+dimen_min (screen_dimen a, screen_dimen b)
+{
+    return (a < b) ? a : b;
+}
+
 static inline offset_type
 offset_doz (offset_type a, offset_type b)
 {
@@ -282,7 +288,7 @@ static void
 view_compute_areas (WView *view)
 {
     struct area view_area;
-    screen_dimen y;
+    screen_dimen height, rest, y;
 
     /* The viewer is surrounded by a frame of size view->dpy_frame_size.
      * Inside that frame, there are: The status line (at the top),
@@ -298,10 +304,14 @@ view_compute_areas (WView *view)
     view->ruler_area = view_area;
     view->data_area = view_area;
 
-    view->status_area.height = 1;
-    view->ruler_area.height = (ruler == RULER_NONE || view->hex_mode) ? 0 : 2;
-    view->data_area.height = dimen_doz(view_area.height,
-	view->status_area.height + view->ruler_area.height);
+    rest = view_area.height;
+    height = dimen_min(rest, 1);
+    view->status_area.height = height;
+    rest -= height;
+    height = dimen_min(rest, (ruler == RULER_NONE || view->hex_mode) ? 0 : 2);
+    view->ruler_area.height = height;
+    rest -= height;
+    view->data_area.height = rest;
 
     y = view->status_area.top + view->status_area.height;
     if (ruler == RULER_TOP) {
@@ -1403,10 +1413,11 @@ static void
 view_percent (WView *view, offset_type p)
 {
     const screen_dimen right = view->status_area.left + view->status_area.width;
+    const screen_dimen height = view->status_area.height;
     int percent;
     offset_type filesize;
 
-    if (right < 4)
+    if (height < 1 || right < 4)
 	return;
     if (view_may_still_grow (view))
 	return;
@@ -1429,9 +1440,13 @@ view_display_status (WView *view)
     const screen_dimen top = view->status_area.top;
     const screen_dimen left = view->status_area.left;
     const screen_dimen width = view->status_area.width;
-    static const char *file_label;
+    const screen_dimen height = view->status_area.height;
+    const char *file_label, *file_name;
     screen_dimen file_label_width;
     int i;
+
+    if (height < 1)
+	return;
 
     attrset (SELECTED_COLOR);
     widget_move (view, top, left);
@@ -1439,15 +1454,15 @@ view_display_status (WView *view)
 
     file_label = _("File: %s");
     file_label_width = strlen (file_label) - 2;
+    file_name = view->filename ? view->filename
+	: view->command ? view->command
+	: "";
 
     if (width < file_label_width + 6)
-	addstr ((char *) name_trunc (view->filename ? view->filename :
-			    view->command ? view->command : "", width));
+	addstr ((char *) name_trunc (file_name, width));
     else {
 	i = (width > 22 ? 22 : width) - file_label_width;
-	printw (str_unconst (file_label), name_trunc (view->filename ? view->filename :
-					view->command ? view->command : "",
-					i));
+	printw (str_unconst (file_label), name_trunc (file_name, i));
 	if (width > 46) {
 	    widget_move (view, top, left + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
@@ -1521,6 +1536,7 @@ view_display_ruler (WView *view)
     const screen_dimen top = view->ruler_area.top;
     const screen_dimen left = view->ruler_area.left;
     const screen_dimen width = view->ruler_area.width;
+    const screen_dimen height = view->ruler_area.height;
     const screen_dimen line_row = (ruler == RULER_TOP) ? 0 : 1;
     const screen_dimen nums_row = (ruler == RULER_TOP) ? 1 : 0;
 
@@ -1528,19 +1544,23 @@ view_display_ruler (WView *view)
     offset_type cl;
     screen_dimen c;
 
-    if (ruler == RULER_NONE)
+    if (ruler == RULER_NONE || height < 1)
 	return;
 
     attrset (MARKED_COLOR);
     for (c = 0; c < width; c++) {
 	cl = view->dpy_text_column + c;
-	view_gotoyx (view, top + line_row, left + c);
-	view_add_character (view, ruler_chars[cl % 10]);
+	if (line_row < height) {
+	    view_gotoyx (view, top + line_row, left + c);
+	    view_add_character (view, ruler_chars[cl % 10]);
+	}
 
 	if ((cl != 0) && (cl % 10) == 0) {
 	    g_snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
-	    widget_move (view, top + nums_row, left + c - 1);
-	    view_add_string (view, r_buff);
+	    if (nums_row < height) {
+		widget_move (view, top + nums_row, left + c - 1);
+		view_add_string (view, r_buff);
+	    }
 	}
     }
     attrset (NORMAL_COLOR);
