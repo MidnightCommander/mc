@@ -1,3 +1,7 @@
+2005-07-08  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* NEWS: Fixed commit to the wrong branch.
+
 2005-07-05  Roland Illig  <roland.illig@gmx.de>
 
 	* configure.ac: Removed detection of the umode_t type. All

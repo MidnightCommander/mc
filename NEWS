@@ -1,3 +1,24 @@
+Current
+
+- Core functionality.
+	- Device numbers are displayed correctly.
+	- Improved message formatting for i18n.
+	- Recursive option added for internal grep.
+
+- Viewer.
+	- Almost completely rewritten internal viewer.
+	- mmap(2) support removed from internal viewer.
+
+- VFS.
+	- Fixed device number handling.
+	- zipfs can handle zip files that contain pathnames starting
+	  with "./".
+	- Passive FTP over proxies is possible.
+
+- Miscellaneous.
+	- Code cleanup in various places
+
+
 Version 4.6.1-pre5.
 
 - Core functionality.
@@ -38,6 +59,7 @@ Version 4.6.1-pre5.
 	- Updated translations: German.
 	- Updated translations: Italian.
 
+
 Version 4.6.1-pre4.
 
 - Core functionality.
@@ -49,6 +71,7 @@ Version 4.6.1-pre4.
 	- Add syntax file for the CORBA IDL.
 	- Add syntax file for the LUA programming language.
 
+
 Version 4.6.1-pre3.
 
 - Core functionality.
@@ -57,15 +80,17 @@ Version 4.6.1-pre3.
 - Translations.
 	- Updated translations: Spain.
 
+
 Version 4.6.1-pre2.
 
+Release candidate for 4.6.1.
+
 - Security.
-	- Fix CAN-2004-0226 (buffer overflows).
-	- Fix CAN-2004-0231 (unsafe temporary file and directory creation).
-	- Fix CAN-2004-0232 (format string vulnerablities).
+	- Fixed CAN-2004-0226 (buffer overflows).
+	- Fixed CAN-2004-0231 (unsafe temporary file and directory creation).
+	- Fixed CAN-2004-0232 (format string vulnerablities).
 	- cons.saver does not need to be setuid-root on Linux.
 	- Hiding of FTP passwords.
-	- See also VFS.
 
 - Portability.
 	- PC port has been removed.
@@ -77,8 +102,7 @@ Version 4.6.1-pre2.
 	- Better support for '@' in FTP usernames.
 	- Better large file support (int -> off_t)
 	- Add gnome, rxvt and xterm-new terminals (keyword copy for mc.lib).
-	- Make the find dialog more responsive while scanning through large
-	  files.
+	- Make the find dialog more responsive while scanning through large files.
 	- Add implementation to cons.handler for FreeBSD 4.x and 5.x.
 	- Screen saving is now supported on FreeBSD console.
 	- Hide temporary commands from history.
@@ -87,8 +111,6 @@ Version 4.6.1-pre2.
 	- Background support now uses pipes instead of UNIX sockets.
 	- libX11 is loaded dynamically using gmodule if possible.
 	- User is warned if one mc is run from another.
-	- In red dialog boxes draw the hotkey characters with a color
-	  different than the one used to paint the dialog.
 
 - Screen libraries.
 	- Add many boundary check into internal slang library.
@@ -100,8 +122,8 @@ Version 4.6.1-pre2.
 	- Fix bugs for mcedit compiled with ncurses.
 	- New status string format in mcedit.
 	- Support for large syntax files.
-	- Temporarily disable safe save and backups on remote VFS because it
-	  doesn't work.
+	- Temporarily disable safe save and backups on remote VFS
+	  because it doesn't work.
 	- Enable user menu in mcedit.
 	- Add syntax file for the ASP.NET technology.
 	- Add syntax file for the Eiffel programming language.
@@ -119,13 +141,12 @@ Version 4.6.1-pre2.
 	- Fixed CAN-2003-1023 (stack overflow in vfs_s_resolve_symlink).
 	- Various fixes in tar.c.
 	- VFS supports iso9660 images.
-	- extfs/rpm: Don't show the package's contents directly in the root
-	  directory, but only as an archive called contents.cpio.
 
 - Translations.
 	- New translations: Mongolian, Serbian and Lithuanian.
 	- Updated translations: Ukrainian, Italian, Hungarian.
- 
+
+
 Version 4.6.0.
 
 - Core functionality.
