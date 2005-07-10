@@ -3,6 +3,7 @@
 # Dirk-Jan C. Binnema <djcb@dds.nl>
 # Gert Dewit <Gert.Dewit@sos.be>, 2001.
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2001.
+# Leonard den Ottolander <leonard den ottolander nl>, 2005.
 #
 msgid ""
 msgstr ""
@@ -24,13 +25,13 @@ msgid " Cannot open file for reading: "
 msgstr " Openen van bestand voor lezen mislukt: "
 
 msgid " Error reading from pipe: "
-msgstr " Probleem bij het lezen van pijp "
+msgstr " Probleem bij het lezen van pijp: "
 
 msgid " Cannot open pipe for reading: "
 msgstr " Openen van pijp voor lezen mislukt: "
 
 msgid " Cannot get size/permissions info for file: "
-msgstr " GMC kan geen grootte-/rechteninformatie verkrijgen over bestand: "
+msgstr " Kan geen grootte-/rechteninformatie verkrijgen over bestand: "
 
 msgid " Not an ordinary file: "
 msgstr " Geen gewoon bestand: "
@@ -42,7 +43,7 @@ msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
 
 msgid "&Dismiss"
-msgstr "&Sluiten"
+msgstr "&Verwerp"
 
 msgid "&OK"
 msgstr "&OK"
@@ -83,9 +84,8 @@ msgstr "Waarschuwing"
 msgid " A file already exists with this name. "
 msgstr " Er bestaat al een bestand met die naam. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Overschrijven"
+msgstr "&Overschrijven"
 
 msgid " Cannot save file. "
 msgstr " Fout bij opslaan bestand. "
@@ -133,45 +133,44 @@ msgstr ""
 " Deze tekst is veranderd zonder te zijn opgeslagen. \n"
 " Doorgaan gooit alle wijzigingen weg. "
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Doorgaan"
+msgstr "D&oorgaan"
 
 msgid " Load "
-msgstr "Laden"
+msgstr " Laden "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr "Groot blok, wellicht kunt u deze actie niet ongedaan maken. "
+msgstr " Groot blok, wellicht kunt u deze actie niet ongedaan maken. "
 
 msgid "O&ne"
 msgstr "Ee&n"
 
 msgid "A&ll"
-msgstr "al&le"
+msgstr "A&lle"
 
 msgid "&Skip"
 msgstr "Over&slaan"
 
 msgid "&Replace"
-msgstr "Vervangen"
+msgstr "Ve&rvangen"
 
 msgid " Replace with: "
-msgstr " Vervangen met: "
+msgstr " Vervangen door: "
 
 msgid " Confirm replace "
 msgstr " Vervanging bevestigen "
 
 msgid "scanf &Expression"
-msgstr "'scanf'-expressie"
+msgstr "'scanf'-&Expressie"
 
 msgid "replace &All"
-msgstr "Vervang &alles"
+msgstr "Vervang &Alles"
 
 msgid "pr&Ompt on replace"
-msgstr "Vraag bij vervanging"
+msgstr "&Vraag bij vervanging"
 
 msgid "&Backwards"
-msgstr "Terug"
+msgstr "&Terug"
 
 msgid "&Regular expression"
 msgstr "&Reguliere expressie"
@@ -180,7 +179,7 @@ msgid "&Whole words only"
 msgstr "Alleen hele &Woorden"
 
 msgid "case &Sensitive"
-msgstr "Hoofd/Kleine-letters"
+msgstr "&Hoofd/Kleine-letters"
 
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Geef vervanging argumentenvolgorde, bijv. 3,2,1,4 "
@@ -200,14 +199,13 @@ msgstr "Zoeken"
 msgid ""
 " Invalid regular expression, or scanf expression with too many conversions "
 msgstr ""
-" Ongeldige reguliere expressie, of 'scanf'-expressie met teveel conversies"
+" Ongeldige reguliere expressie, of 'scanf'-expressie met teveel conversies "
 
 msgid " Error in replacement format string. "
-msgstr " Fout in formaatstring voor vervanging "
+msgstr " Fout in vervangings-formatstring "
 
-#, fuzzy
 msgid " Replacement too long. "
-msgstr " Geef de vervangende string:"
+msgstr " Vervangende string te lang. "
 
 #, c-format
 msgid " %ld replacements made. "
@@ -221,14 +219,13 @@ msgid " %d items found, %d bookmarks added "
 msgstr " %d gevonden, %d bladwijzers toegevoegd "
 
 msgid "Quit"
-msgstr "Afsl"
+msgstr "Afsluiten"
 
 msgid " File was modified, Save with exit? "
-msgstr " Bestand is veranderd. Opslaan bij afsluiten? "
+msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Annuleer afsluiten"
+msgstr "&Annuleer afsluiten"
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -240,7 +237,7 @@ msgid " Copy to clipboard "
 msgstr " Kopieer naar prikbord "
 
 msgid " Unable to save to file. "
-msgstr " GMC kan niet opslaan in bestand. "
+msgstr " Kan niet opslaan naar bestand. "
 
 msgid " Cut to clipboard "
 msgstr " Knippen naar prikbord "
@@ -267,10 +264,10 @@ msgid " You must first highlight a block of text. "
 msgstr " U moet eerst een blok selecteren. "
 
 msgid " Run Sort "
-msgstr " Ga Sorteren "
+msgstr " Sorteren "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Geef sorteeropties (zie 'man'-pagina), gescheiden door spaties: "
+msgstr " Geef sorteeropties (zie 'man'-pagina) gescheiden door spaties: "
 
 msgid " Sort "
 msgstr " Sorteren "
@@ -282,19 +279,16 @@ msgid " Sort returned non-zero: "
 msgstr " Sorteren resulteerde in ongelijk-nul waarde: "
 
 msgid "Paste output of external command"
-msgstr ""
+msgstr "Plak uitvoer van externe opdracht"
 
-#, fuzzy
 msgid "Enter shell command(s):"
-msgstr " Geef opdrachtlabel: "
+msgstr " Geef shell opdracht(en): "
 
-#, fuzzy
 msgid "External command"
-msgstr "Andere opdracht"
+msgstr "Externe opdracht"
 
-#, fuzzy
 msgid "Cannot execute command"
-msgstr " Fout bij sorteren "
+msgstr "Kan opdracht niet uitvoeren"
 
 msgid "Error creating script:"
 msgstr "Fout bij maken script:"
@@ -306,10 +300,10 @@ msgid "Error closing script:"
 msgstr "Fout bij sluiten script:"
 
 msgid "Script created:"
-msgstr "Script gemaakt: "
+msgstr "Script gemaakt:"
 
 msgid "Process block"
-msgstr " Bewerk blok "
+msgstr "Bewerk blok"
 
 msgid " Mail "
 msgstr " Mail "
@@ -343,16 +337,18 @@ msgid ""
 "File \"%s\" is already being edited\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
+msgstr "Bestand \"%s\" wordt al bewerkt\n"
+"Gebruiker: %s\n"
+"Proces ID: %d"
 
 msgid "File locked"
-msgstr ""
+msgstr "Bestand vergrendeld"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "Ver&grendel"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "Negeer vergrendel&ing"
 
 msgid " About "
 msgstr " Info "
@@ -381,22 +377,22 @@ msgid "&New              C-n"
 msgstr "&Nieuw              C-n"
 
 msgid "&Save              F2"
-msgstr "&Opslaan          F2"
+msgstr "Op&slaan            F2"
 
 msgid "Save &as...       F12"
-msgstr "Opslaan &Als...  F12"
+msgstr "Opslaan &Als...     F12"
 
 msgid "&Insert file...   F15"
 msgstr "Bestand &Invoegen...F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "Kopieer naar bestand... C-f"
+msgstr "&Kopieer naar bestand... C-f"
 
 msgid "&User menu...     F11"
 msgstr "Gebr&uikersmenu       F11"
 
 msgid "A&bout...            "
-msgstr "Info...             "
+msgstr "In&fo...             "
 
 msgid "&Quit             F10"
 msgstr "&Afsluiten         F10"
@@ -408,7 +404,7 @@ msgid "Copy to &file...     "
 msgstr "Kopieer naar bestand... "
 
 msgid "&Toggle Mark       F3"
-msgstr "Markering aan/uit  F3"
+msgstr "Markering aan/ui&t  F3"
 
 msgid "&Mark Columns    S-F3"
 msgstr "&Markeer kolommen.   S-F3"
@@ -420,13 +416,13 @@ msgid "&Copy              F5"
 msgstr "Kopiëren          F5"
 
 msgid "&Move              F6"
-msgstr "Verplaatsen        F6"
+msgstr "Ver&plaatsen        F6"
 
 msgid "&Delete            F8"
-msgstr "Verwijderen           F8"
+msgstr "&Verwijderen           F8"
 
 msgid "&Undo             C-u"
-msgstr "Maak ongedaan      C-u"
+msgstr "Maak &ongedaan      C-u"
 
 msgid "&Beginning     C-PgUp"
 msgstr "&Begin         C-PgUp"
@@ -435,19 +431,19 @@ msgid "&End           C-PgDn"
 msgstr "&Eind          C-PgDn"
 
 msgid "&Search...         F7"
-msgstr "Zoeken...         F7"
+msgstr "&Zoeken...         F7"
 
 msgid "Search &again     F17"
 msgstr "Nogmaals Zoeken      F17"
 
 msgid "&Replace...        F4"
-msgstr "Vervangen...       F4"
+msgstr "Ve&rvangen...       F4"
 
 msgid "&Go to line...            M-l"
 msgstr "&Ga naar regel...        M-l"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "ga naar corresponderend &Haakje    M-b"
+msgstr "Ga naar corresponderend &Haakje    M-b"
 
 msgid "Insert &literal...       C-q"
 msgstr "&Letterlijk invoegen...     C-q"
@@ -462,7 +458,7 @@ msgid "&Finish record macro...  C-r"
 msgstr "Voltooi opnemen macro C-r"
 
 msgid "&Execute macro...   C-a, KEY"
-msgstr "Macro uitvoeren...C-a,TASTE"
+msgstr "Macro uitvoeren...C-a,TOETS"
 
 msgid "Delete macr&o...            "
 msgstr "Macr&O verwijderen...           "
@@ -471,16 +467,16 @@ msgid "Insert &date/time           "
 msgstr "&Datum/Tijd invoegen        "
 
 msgid "Format p&aragraph        M-p"
-msgstr "Paragraaf uitvullen      M-p"
+msgstr "P&aragraaf uitvullen      M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "`ispell'-spellingcheck.  C-p"
+msgstr "`ispell'-s&pellingcheck.  C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "Sorteren               M-t"
+msgstr "Sor&teren               M-t"
 
 msgid "Paste o&utput of...      M-u"
-msgstr ""
+msgstr "Plak &Uitvoer van...    M-u"
 
 msgid "E&xternal Formatter      F19"
 msgstr "E&xterne Formatteerder  F19"
@@ -489,7 +485,7 @@ msgid "&Mail...                    "
 msgstr "&Mail...                    "
 
 msgid "&Execute macro... C-x e, KEY"
-msgstr "Macro uitvoeren..C-x e,TASTE"
+msgstr "Macro uitvoeren..C-x e,TOETS"
 
 msgid "'ispell' s&pell check    M-$"
 msgstr "'ispell'-spellingcheck.  M-$"
@@ -543,13 +539,13 @@ msgid "Synta&x highlighting"
 msgstr "Synta&X kleuring"
 
 msgid "Save file &position"
-msgstr " Bestand &positie opslaan"
+msgstr "Bestand &positie opslaan"
 
 msgid "Confir&m before saving"
-msgstr "bevestigen voor opslaan"
+msgstr "Be&vestigen voor opslaan"
 
 msgid "Fill tabs with &spaces"
-msgstr "Tab&S met spaties vullen"
+msgstr "Tabs met &spaties vullen"
 
 msgid "&Return does autoindent"
 msgstr "&Return springt automatisch in"
@@ -558,7 +554,7 @@ msgid "&Backspace through tabs"
 msgstr "&Backspace door Tabs"
 
 msgid "&Fake half tabs"
-msgstr "Simuleer halve tabs"
+msgstr "Simuleer &halve tabs"
 
 msgid "Wrap mode"
 msgstr "Woordafbrekingsmodus"
@@ -573,7 +569,7 @@ msgid "Help"
 msgstr "Help"
 
 msgid "Save"
-msgstr "Opslaan"
+msgstr "Opslaa"
 
 msgid "Mark"
 msgstr "Markr"
@@ -582,13 +578,13 @@ msgid "Replac"
 msgstr "Vervng"
 
 msgid "Copy"
-msgstr "Kopiëren"
+msgstr "Kopiee"
 
 msgid "Move"
-msgstr "Verplaatsen"
+msgstr "Vrplts"
 
 msgid "Delete"
-msgstr "Verwijderen"
+msgstr "Verwij"
 
 msgid "PullDn"
 msgstr "Menu"
@@ -655,7 +651,7 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" chown voor \"%s\" kan niet doorgevoerd worden \n"
+" chown voor \"%s\" mislukt \n"
 " %s "
 
 msgid " Background process error "
@@ -674,8 +670,8 @@ msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Het achtergrondproces vraag om meer argumenten dan geleverd \n"
-" kunnen worden \n"
+" Het achtergrondproces vraagt om meer argumenten dan we \n"
+" kunnen leveren \n"
 
 msgid "&Full file list"
 msgstr "&Complete bestandenlijst"
@@ -696,25 +692,25 @@ msgid "user &Mini status"
 msgstr "Gebruiker &Mini-status"
 
 msgid "&Reverse"
-msgstr "Omdraaien"
+msgstr "Omd&raaien"
 
 msgid "case sensi&tive"
-msgstr "Gevoelig voor hoofd-/kleine letter"
+msgstr "Hoofd-/kleine le&tters"
 
 msgid "Sort order"
 msgstr "Sortering"
 
 msgid " confirm &Exit "
-msgstr " Bevestig afsluiten "
+msgstr " B&evestig afsluiten "
 
 msgid " confirm e&Xecute "
 msgstr " Bevestig uitvoeren "
 
 msgid " confirm o&Verwrite "
-msgstr " Bevestig overschrijven "
+msgstr " Bevestig o&verschrijven "
 
 msgid " confirm &Delete "
-msgstr " Bevestig verwijderen "
+msgstr " Bevestig verwij&deren "
 
 msgid " Confirmation "
 msgstr " Bevestiging "
@@ -732,7 +728,7 @@ msgid "F&ull 8 bits input"
 msgstr "Volledige 8-bit invoer"
 
 msgid " Display bits "
-msgstr " Toon bits "
+msgstr " Weergave bits "
 
 msgid "Other 8 bit"
 msgstr "Andere 8 bits"
@@ -1620,19 +1616,19 @@ msgstr "Toevoegen"
 msgid "Overwrite this target?"
 msgstr "Dit doel overschrijven?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Doeldatum: %s, grootte %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Brondatum: %s, grootte %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
 msgstr "Doeldatum: %s, grootte %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
 msgstr "Brondatum: %s, grootte %u"
 
@@ -1766,7 +1762,7 @@ msgstr "Huidige toevoegen"
 
 #, fuzzy
 msgid "&Refresh"
-msgstr "Omdraaien"
+msgstr "Ve&rversen"
 
 msgid "Fr&ee VFSs now"
 msgstr "Maak VFS'en nu vrij"
@@ -2140,10 +2136,10 @@ msgid "&Directory tree"
 msgstr "&Mappenhierarchie"
 
 msgid "&Find file            M-?"
-msgstr "Bestand zoeken         M-?"
+msgstr "Bestand &zoeken         M-?"
 
 msgid "s&Wap panels          C-u"
-msgstr "Verwissel vensters  C-u"
+msgstr "Ver&wissel vensters  C-u"
 
 msgid "switch &Panels on/off C-o"
 msgstr "Vensters aan/uit       C-o"
@@ -2235,8 +2231,8 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Bij snel-herladen kan het zijn dat de mapinhoud niet exact klopt. In dat "
-"geval moet u de map handmatig \n"
+" Bij snel-herladen kan het zijn dat de mapinhoud niet \n"
+" exact klopt. In dat geval moet u de map handmatig    \n"
 " opnieuw inlezen. Zie de 'man'-pagina voor details."
 
 msgid "Menu"
@@ -2264,10 +2260,9 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"\"Stuur bugreports (met de uitvoer van 'mc -V')\n"
+"Stuur bugreports (met de uitvoer van 'mc -V')\n"
 "naar mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2292,17 +2287,20 @@ msgid ""
 msgstr ""
 "--colors KEYWORD={VOOR},{ACHTER}\n"
 "\n"
-"{VOOR} en {ACHTER} kunnen worden weggelaten, en de defaultwaarde wordt "
+"{VOOR} en {ACHTER} kunnen worden weggelaten, en de defaultwaarde wordt\n"
 "gebruikt\n"
 "\n"
-"Keywords:\\n\n"
-"   Globaal:          errors, reverse, gauge, input\n"
+"Sleutelwoorden:\n"
+"   Globaal:          errors, reverse, gauge, input, viewunderline\n"
 "   Bestandsweergave: normal, selected, marked, markselect\n"
-"   Dialogen:         dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Dialogen:         dnormal, dfocus, dhotnormal, dhotfocus,\n"
+"                     errdhotnormal, errdhotfocus\n"
 "   Menu's:           menu, menuhot, menusel, menuhotsel\n"
-"   Help:             helpnormal, helpitalic, helplink, helpslink\n"
-"   Bestandstypen:    directory, executable, link, stalelink, device, "
-"special, core\n"
+"   Editor:           editnormal, editbold, editmarked\n"
+"   Help:             helpnormal, helpitalic, helpbold, helplink,\n"
+"                     helpslink\n"
+"   Bestandstypen:    directory, executable, link, stalelink, device,\n"
+"                     special, core\n"
 "\n"
 "Kleuren:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2619,6 +2617,9 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander draait al in\n"
+"deze terminal.\n"
+"Subshell support wordt uitgeschakeld."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -2647,7 +2648,7 @@ msgid "with terminfo database"
 msgstr "met terminfo database"
 
 msgid "Using the ncurses library"
-msgstr "de ncurses-bibliotheek"
+msgstr "De ncurses-bibliotheek"
 
 msgid "With optional subshell support"
 msgstr "Met optionele subshell-ondersteuning"
@@ -3227,17 +3228,15 @@ msgstr "ftpfs: loginnaam wordt verstuurd"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: wachtwoord wordt verstuurd"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Wachtwoord vereist voor "
+msgstr " FTP: Account nodig voor gebruiker %s"
 
-#, fuzzy
 msgid "Account:"
-msgstr "Aantal"
+msgstr "Account:"
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: wachtwoord wordt verstuurd"
+msgstr "ftpfs: account wordt verstuurd"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: ingelogd"

@@ -1,5 +1,10 @@
 2005-07-10  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* nl.po: Add missing translations, fix fuzzy translations,
+	other improvements.
+
+2005-07-10  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* lt.po: Fixed type (&).
 
 2005-07-05  Leonard den Ottolander  <leonard den ottolander nl>
