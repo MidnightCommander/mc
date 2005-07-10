@@ -1,3 +1,7 @@
+2005-07-10  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* configure.ac: Rename AS_HELP_STRING to AC_HELP_STRING.
+
 2005-07-08  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* NEWS: Fixed commit to the wrong branch.

@@ -150,7 +150,7 @@ esac
 dnl Extended Character Sets
 dnl
 AC_ARG_ENABLE([extcharset],
-	AS_HELP_STRING([--enable-extcharset], [Enable extended character sets]))
+	AC_HELP_STRING([--enable-extcharset], [Enable extended character sets]))
 if test x"$enable_extcharset" = x"yes"; then
   AC_DEFINE([EXTCHARSET_ENABLED], 1, [Enable extended character sets?])
 fi
