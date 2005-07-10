@@ -1,3 +1,8 @@
+2005-07-09  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* info.c (info_show_info): Properly calculate the length of the
+	line drawn by hline().
+
 2005-07-07  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_ccache_find): Replaced the linear search with a

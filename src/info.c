@@ -77,7 +77,7 @@ info_show_info (struct WInfo *info)
     printw (const_cast(char *, _("Midnight Commander %s")), VERSION);
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
-    hline (ACS_HLINE|NORMAL_COLOR, info->widget.x-2);
+    hline (ACS_HLINE|NORMAL_COLOR, info->widget.cols-2);
     if (get_current_type () != view_listing)
 	return;
 
