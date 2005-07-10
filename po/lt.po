@@ -1126,7 +1126,7 @@ msgid "&Extension"
 msgstr "Plė&tinys"
 
 msgid "&Modify time"
-msgstr "*Modif. laikas"
+msgstr "&Modif. laikas"
 
 msgid "&Access time"
 msgstr "P&asiek. laikas"
