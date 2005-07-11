@@ -1553,7 +1553,7 @@ view_count_backspaces (WView *view, off_t offset)
 static void
 view_display_ruler (WView *view)
 {
-    const char ruler_chars[] = "|----*----";
+    static const char ruler_chars[] = "|----*----";
     const screen_dimen top = view->ruler_area.top;
     const screen_dimen left = view->ruler_area.left;
     const screen_dimen width = view->ruler_area.width;
@@ -1589,6 +1589,7 @@ view_display_ruler (WView *view)
 
 static void
 view_display_hex (WView *view)
+    /* FIXME: prevent any screen overflows */
 {
     const screen_dimen top = view->data_area.top;
     const screen_dimen left = view->data_area.left;
