@@ -1195,31 +1195,31 @@ view_move_down (WView *view, offset_type lines)
 	    if (lines != 1)
 		view->dpy_topleft += view->bytes_per_line;
 	}
-    } else {
+    } else if (view->text_wrap_mode) {
 	offset_type line, col, i;
 
-	if (view->text_wrap_mode) {
-	    for (i = 0; i < lines; i++) {
-		offset_type new_offset, chk_line, chk_col;
+	for (i = 0; i < lines; i++) {
+	    offset_type new_offset, chk_line, chk_col;
 
-		view_offset_to_coord (view, &line, &col, view->dpy_topleft);
-		col += view->data_area.width;
-		view_coord_to_offset (view, &new_offset, line, col);
-
-		/* skip to the next line if the only thing that would be
-		 * displayed is the newline character. */
-		view_offset_to_coord (view, &chk_line, &chk_col, new_offset);
-		if (chk_line == line && chk_col == col
-		    && get_byte (view, new_offset) == '\n')
-		    new_offset++;
-
-		view->dpy_topleft = new_offset;
-	    }
-	} else {
 	    view_offset_to_coord (view, &line, &col, view->dpy_topleft);
-	    line += lines;
-	    view_coord_to_offset (view, &(view->dpy_topleft), line, col);
+	    col += view->data_area.width;
+	    view_coord_to_offset (view, &new_offset, line, col);
+
+	    /* skip to the next line if the only thing that would be
+	     * displayed is the newline character. */
+	    view_offset_to_coord (view, &chk_line, &chk_col, new_offset);
+	    if (chk_line == line && chk_col == col
+		&& get_byte (view, new_offset) == '\n')
+		new_offset++;
+
+	    view->dpy_topleft = new_offset;
 	}
+    } else {
+	offset_type line, col;
+
+	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	line += lines;
+	view_coord_to_offset (view, &(view->dpy_topleft), line, col);
     }
     view_movement_fixups (view, (lines != 1));
 }
