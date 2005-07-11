@@ -1892,9 +1892,9 @@ static void
 enqueue_change (struct hexedit_change_node **head,
 		struct hexedit_change_node *node)
 {
-    /* chnode always either points to the head of the list or */
-    /* to one of the ->next fields in the list. The value at  */
-    /* this location will be overwritten with the new node.   */
+    /* chnode always either points to the head of the list or
+     * to one of the ->next fields in the list. The value at
+     * this location will be overwritten with the new node.   */
     struct hexedit_change_node **chnode = head;
 
     while (*chnode != NULL && (*chnode)->offset < node->offset)
