@@ -1,3 +1,9 @@
+2005-07-11  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_update_bytes_per_line): Use a local variable to
+	do the computation. Update view->bytes_per_line only once, after
+	all computations have finished.
+
 2005-07-09  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* info.c (info_show_info): Properly calculate the length of the

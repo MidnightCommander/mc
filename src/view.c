@@ -1414,19 +1414,20 @@ static void
 view_update_bytes_per_line (WView *view)
 {
     const screen_dimen cols = view->data_area.width;
+    int bytes;
 
     if (cols < 8)
-	view->bytes_per_line = 0;
+	bytes = 1;
     else if (cols < 80)
-	view->bytes_per_line = ((cols - 8) / 17) * 4;
+	bytes = ((cols - 8) / 17) * 4;
     else
-	view->bytes_per_line = ((cols - 8) / 18) * 4;
+	bytes = ((cols - 8) / 18) * 4;
 
-    if (view->bytes_per_line == 0)
-	view->bytes_per_line++;	/* To avoid division by 0 */
+    if (bytes == 0)
+	bytes = 1;		/* To avoid division by 0 */
 
+    view->bytes_per_line = bytes;
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
-    assert (view->bytes_per_line != 0);
 }
 
 static void
