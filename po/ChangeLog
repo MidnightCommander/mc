@@ -1,3 +1,8 @@
+2005-07-11  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* nl.po: Translate to ISO-8859-1, we can't use UTF-8 on unpatched
+	systems. Translation, hotkey and alignment improvements.
+
 2005-07-10  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* nl.po: Add missing translations, fix fuzzy translations,
