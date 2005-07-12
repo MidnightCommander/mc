@@ -1981,16 +1981,15 @@ view_hexedit_save_changes (WView *view)
     char *text, *error;
 
   retry_save:
-    /* FIXME: why not use mc_open()? */
-    fp = open (view->filename, O_WRONLY);
+    fp = mc_open (view->filename, O_WRONLY);
     if (fp == -1)
 	goto save_error;
 
     for (curr = view->change_list; curr != NULL; curr = next) {
 	next = curr->next;
 
-	if (lseek (fp, curr->offset, SEEK_SET) == -1
-	    || write (fp, &(curr->value), 1) != 1)
+	if (mc_lseek (fp, curr->offset, SEEK_SET) == -1
+	    || mc_write (fp, &(curr->value), 1) != 1)
 	    goto save_error;
 
 	/* delete the saved item from the change list */
@@ -2000,7 +1999,7 @@ view_hexedit_save_changes (WView *view)
 	g_free (curr);
     }
 
-    if (close (fp) == -1) {
+    if (mc_close (fp) == -1) {
 	error = g_strdup (strerror (errno));
 	message (D_ERROR, _(" Save file "),
 	    _(" Error while closing the file: \n %s \n"
@@ -2014,7 +2013,7 @@ view_hexedit_save_changes (WView *view)
     error = g_strdup (strerror (errno));
     text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
     g_free (error);
-    (void) close (fp);
+    (void) mc_close (fp);
 
     answer = query_dialog (_(" Save file "), text, D_ERROR,
 	2, _("&Retry"), _("&Cancel"));

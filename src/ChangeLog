@@ -2,6 +2,9 @@
 
 	* view.c: Added some paragraph comments. Changed some literal
 	expressions (e.g. 0 => '\0', 0 => NULL). Fixed indentation.
+	* view.c (view_hexedit_save_changes): Use the VFS file functions
+	instead of the native ones. This makes it possible to edit
+	remote files using the hex editor.
 
 2005-07-11  Roland Illig  <roland.illig@gmx.de>
 
