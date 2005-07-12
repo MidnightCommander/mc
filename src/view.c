@@ -1324,9 +1324,8 @@ view_load_command_output (WView *view, const char *command)
 }
 
 gboolean
-view_load (WView *view, const char *_command, const char *_file,
+view_load (WView *view, const char *command, const char *file,
 	   int start_line)
-    /* FIXME: remove leading _ from _command and _file */
 {
     int i, type;
     int fd = -1;
@@ -1339,7 +1338,7 @@ view_load (WView *view, const char *_command, const char *_file,
 
     /* Set up the state */
     view_set_datasource_none (view);
-    view->filename = g_strdup (_file);
+    view->filename = g_strdup (file);
     view->command = 0;
 
     /* Clear the markers */
@@ -1351,13 +1350,13 @@ view_load (WView *view, const char *_command, const char *_file,
 	view->dpy_text_column = 0;
     }
 
-    if (_command && (view->magic_mode || _file[0] == '\0')) {
-	retval = view_load_command_output (view, _command);
-    } else if (_file[0]) {
+    if (command && (view->magic_mode || file[0] == '\0')) {
+	retval = view_load_command_output (view, command);
+    } else if (file[0]) {
 	/* Open the file */
-	if ((fd = mc_open (_file, O_RDONLY | O_NONBLOCK)) == -1) {
+	if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1) {
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
-			_file, unix_error_string (errno));
+			file, unix_error_string (errno));
 	    view_show_error (view, tmp);
 	    goto finish;
 	}
@@ -1366,7 +1365,7 @@ view_load (WView *view, const char *_command, const char *_file,
 	if (mc_fstat (fd, &st) == -1) {
 	    mc_close (fd);
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
-			_file, unix_error_string (errno));
+			file, unix_error_string (errno));
 	    view_show_error (view, tmp);
 	    goto finish;
 	}
@@ -1385,7 +1384,7 @@ view_load (WView *view, const char *_command, const char *_file,
 
 	    if (view->magic_mode && (type != COMPRESSION_NONE)) {
 		g_free (view->filename);
-		view->filename = g_strconcat (_file, decompress_extension (type), (char *) NULL);
+		view->filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
 	    }
 	    view_set_datasource_file (view, fd, &st);
 	}
@@ -1393,7 +1392,7 @@ view_load (WView *view, const char *_command, const char *_file,
     }
 
   finish:
-    view->command = g_strdup (_command);
+    view->command = g_strdup (command);
     view->dpy_topleft = 0;
     view->search_start = 0;
     view->found_len = 0;
@@ -3174,7 +3173,7 @@ view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
 /* Real view only */
 int
-view (const char *_command, const char *_file, int *move_dir_p, int start_line)
+view (const char *command, const char *file, int *move_dir_p, int start_line)
 {
     gboolean succeeded;
     WView *wview;
@@ -3193,7 +3192,7 @@ view (const char *_command, const char *_file, int *move_dir_p, int start_line)
     add_widget (view_dlg, bar);
     add_widget (view_dlg, wview);
 
-    succeeded = view_load (wview, _command, _file, start_line);
+    succeeded = view_load (wview, command, file, start_line);
     if (succeeded) {
 	run_dlg (view_dlg);
 	if (move_dir_p)
