@@ -1,3 +1,8 @@
+2005-07-12  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Added some paragraph comments. Changed some literal
+	expressions (e.g. 0 => '\0', 0 => NULL). Fixed indentation.
+
 2005-07-11  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_update_bytes_per_line): Use a local variable to

@@ -300,10 +300,12 @@ view_compute_areas (WView *view)
     view_area.height = dimen_doz(view->widget.lines, 2 * view->dpy_frame_size);
     view_area.width = dimen_doz(view->widget.cols, 2 * view->dpy_frame_size);
 
+    /* Most coordinates of the areas equal those of the whole viewer */
     view->status_area = view_area;
     view->ruler_area = view_area;
     view->data_area = view_area;
 
+    /* Compute the heights of the areas */
     rest = view_area.height;
     height = dimen_min(rest, 1);
     view->status_area.height = height;
@@ -313,6 +315,7 @@ view_compute_areas (WView *view)
     rest -= height;
     view->data_area.height = rest;
 
+    /* Compute the position of the areas */
     y = view->status_area.top + view->status_area.height;
     if (ruler == RULER_TOP) {
 	view->ruler_area.top = y;
@@ -381,6 +384,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 
     while (view_growbuf_filesize (view) < ofs) {
 	if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+	    /* Append a new block to the growing buffer */
 	    byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
 	    byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
 	    if (!newblock || !newblocks) {
@@ -458,7 +462,7 @@ get_byte_growing_buffer (WView *view, offset_type byte_index)
 
     The view_get_filesize() function returns the current size of the
     data source. If the growing buffer is used, this size may increase
-    later on. Use the view_get_filesize_with_exact() when you want to
+    later on. Use the view_may_still_grow() function when you want to
     know if the size can change later.
  */
 
@@ -508,7 +512,7 @@ view_file_load_data (WView *view, offset_type byte_index)
     if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
 	return;
 
-    blockoffset = byte_index - byte_index % view->ds_file_datasize;
+    blockoffset = offset_rounddown (byte_index, view->ds_file_datasize);
     if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
 	goto error;
 
@@ -531,7 +535,7 @@ view_file_load_data (WView *view, offset_type byte_index)
     return;
 
 error:
-    view->ds_file_datalen  = 0;
+    view->ds_file_datalen = 0;
 }
 
 static int
@@ -1138,10 +1142,7 @@ view_move_up (WView *view, offset_type lines)
 	offset_type bytes = lines * view->bytes_per_line;
 	if (view->hex_cursor >= bytes) {
 	    view->hex_cursor -= bytes;
-	    if (view->dpy_topleft >= bytes)
-		view->dpy_topleft -= bytes;
-	    else
-		view->dpy_topleft = 0;
+	    view->dpy_topleft = offset_doz (view->dpy_topleft, bytes);
 	} else {
 	    view->hex_cursor %= view->bytes_per_line;
 	}
@@ -1301,30 +1302,31 @@ view_load_command_output (WView *view, const char *command)
 
     view_close_datasource (view);
 
-	open_error_pipe ();
-	if ((fp = popen (command, "r")) == NULL) {
-	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
-		view_show_error (view, _(" Cannot spawn child process "));
-	    return FALSE;
-	}
+    open_error_pipe ();
+    if ((fp = popen (command, "r")) == NULL) {
+	/* Avoid two messages.  Message from stderr has priority.  */
+	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
+	    view_show_error (view, _(" Cannot spawn child process "));
+	return FALSE;
+    }
 
-	/* First, check if filter produced any output */
-	view_set_datasource_stdio_pipe (view, fp);
-	if (get_byte (view, 0) == -1) {
-	    view_close_datasource (view);
+    /* First, check if filter produced any output */
+    view_set_datasource_stdio_pipe (view, fp);
+    if (get_byte (view, 0) == -1) {
+	view_close_datasource (view);
 
-	    /* Avoid two messages.  Message from stderr has priority.  */
-	    if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
-		view_show_error (view, _("Empty output from child filter"));
-	    return FALSE;
-	}
+	/* Avoid two messages.  Message from stderr has priority.  */
+	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
+	    view_show_error (view, _("Empty output from child filter"));
+	return FALSE;
+    }
     return TRUE;
 }
 
 gboolean
 view_load (WView *view, const char *_command, const char *_file,
 	   int start_line)
+    /* FIXME: remove leading _ from _command and _file */
 {
     int i, type;
     int fd = -1;
@@ -2091,15 +2093,15 @@ icase_search_p (WView *view, char *text, char *data, int nothing)
 }
 
 static char *
-grow_string_buffer (char *text, int *size)
+grow_string_buffer (char *text, gulong *size)
 {
     char *new;
 
     /* The grow steps */
     *size += 160;
     new = g_realloc (text, *size);
-    if (!text) {
-	*new = 0;
+    if (text == NULL) {
+	*new = '\0';
     }
     return new;
 }
@@ -2108,36 +2110,35 @@ static char *
 get_line_at (WView *view, offset_type *p, offset_type *skipped)
 {
     char *buffer = NULL;
-    int buffer_size = 0;
+    gulong buffer_size = 0;
     offset_type usable_size = 0;
     int ch;
     const int direction = view->direction;
     offset_type pos = *p;
     offset_type i = 0;
-    int prev = 0;
+    int prev = '\0';
 
     *skipped = 0;
 
-    if (!pos && direction == -1)
+    if (pos == 0 && direction == -1)
 	return 0;
 
     /* skip over all the possible zeros in the file */
     while ((ch = get_byte (view, pos)) == 0) {
-	if (!pos && direction == -1)
+	if (pos == 0 && direction == -1)
 	    return 0;
 	pos += direction;
 	i++;
     }
     *skipped = i;
 
-    if (!i && (pos || direction == -1)) {
+    if (i == 0 && (pos != 0 || direction == -1)) {
 	prev = get_byte (view, pos - direction);
 	if ((prev == -1) || (prev == '\n'))
-	    prev = 0;
+	    prev = '\0';
     }
 
     for (i = 1; ch != -1; ch = get_byte (view, pos)) {
-
 	if (i >= usable_size) {
 	    buffer = grow_string_buffer (buffer, &buffer_size);
 	    usable_size = buffer_size - 2;	/* prev & null terminator */
@@ -2145,12 +2146,12 @@ get_line_at (WView *view, offset_type *p, offset_type *skipped)
 
 	buffer[i++] = ch;
 
-	if (!pos && direction == -1)
+	if (pos == 0 && direction == -1)
 	    break;
 
 	pos += direction;
 
-	if (ch == '\n' || !ch) {
+	if (ch == '\n' || ch == '\0') {
 	    i--;			/* Strip newline/zero */
 	    break;
 	}
@@ -2158,10 +2159,10 @@ get_line_at (WView *view, offset_type *p, offset_type *skipped)
 
     if (buffer) {
 	buffer[0] = prev;
-	buffer[i] = 0;
+	buffer[i] = '\0';
 
 	/* If we are searching backwards, reverse the string */
-	if (direction < 0) {
+	if (direction == -1) {
 	    g_strreverse (buffer + 1);
 	}
     }
@@ -2194,9 +2195,9 @@ search (WView *view, char *text,
     int search_status;
     Dlg_head *d = 0;
 
-    /* Used to keep track of where the line starts, when looking forward */
-    /* is the index before transfering the line; the reverse case uses   */
-    /* the position returned after the line has been read */
+    /* Used to keep track of where the line starts, when looking forward
+     * is the index before transfering the line; the reverse case uses
+     * the position returned after the line has been read */
     offset_type forward_line_start;
     offset_type reverse_line_start;
     offset_type t;
