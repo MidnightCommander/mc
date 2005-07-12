@@ -1,4 +1,3 @@
-
 context default
     keyword ;; brightred
     keyword \\@ brightred
@@ -13,8 +12,6 @@ context default
     keyword ${*} brightgreen
     keyword { brightcyan
     keyword } brightcyan
-
-    keyword whole linestart #!\[\s\]*\n brightcyan black
 
     keyword $\* brightred
     keyword $@ brightred
@@ -163,6 +160,8 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole zsh cyan
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+
+context linestart #! \n brightcyan black
 
 context # \n brown
     spellcheck
@@ -335,5 +334,3 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole ypdomainname cyan
     keyword whole zcat cyan
     keyword whole zsh cyan
-
-

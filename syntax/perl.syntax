@@ -1,10 +1,4 @@
 context default
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan black
-    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan black
-    keyword whole linestart #!\[\s\]/bin/perl brightcyan black
-
     keyword $_ red
     keyword $. red
     keyword $/ red
@@ -340,6 +334,8 @@ context default
     keyword whole getprotobynumber yellow
     keyword whole getprotoent yellow
     keyword whole setprotoent yellow
+
+context linestart #! \n brightcyan black
 
 context exclusive whole <\[\s\\\]EOF EOF green
 context # \n brown

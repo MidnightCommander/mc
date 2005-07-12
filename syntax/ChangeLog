@@ -1,3 +1,9 @@
+2005-07-12  Roland Illig  <roland.illig@gmx.de>
+
+	* perl.syntax: #! lines are marked as contexts instead of
+	keywords.
+	* sh.syntax: Likewise.
+
 2005-07-05  Roland Illig  <roland.illig@gmx.de>
 
 	* html.syntax: Attribute values may also be delimited by single
