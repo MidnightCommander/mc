@@ -247,6 +247,7 @@ static void view_labels (WView * view);
 
 static void view_init_growbuf (WView *);
 static void view_place_cursor (WView *view);
+static void display (WView *);
 
 /* {{{ Helper Functions }}} */
 
@@ -406,6 +407,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	    if (nread == 0) {
 		view->growbuf_finished = TRUE;
 		(void) pclose (view->ds_stdio_pipe);
+		display (view);
 		close_error_pipe (0, NULL);
 		view->ds_stdio_pipe = NULL;
 		return;
@@ -657,6 +659,7 @@ view_close_datasource (WView *view)
 	case DS_STDIO_PIPE:
 	    if (view->ds_stdio_pipe != NULL) {
 		(void) pclose (view->ds_stdio_pipe);
+		display (view);
 		close_error_pipe (0, NULL);
 		view->ds_stdio_pipe = NULL;
 	    }
@@ -1305,6 +1308,7 @@ view_load_command_output (WView *view, const char *command)
     open_error_pipe ();
     if ((fp = popen (command, "r")) == NULL) {
 	/* Avoid two messages.  Message from stderr has priority.  */
+	display (view);
 	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
 	    view_show_error (view, _(" Cannot spawn child process "));
 	return FALSE;
@@ -1316,6 +1320,7 @@ view_load_command_output (WView *view, const char *command)
 	view_close_datasource (view);
 
 	/* Avoid two messages.  Message from stderr has priority.  */
+	display (view);
 	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
 	    view_show_error (view, _("Empty output from child filter"));
 	return FALSE;
