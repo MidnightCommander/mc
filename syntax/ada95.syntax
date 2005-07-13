@@ -1,69 +1,68 @@
 # Scott Billings
 
 context default
-
-	keyword whole with	yellow
-	keyword whole use	yellow
-	keyword whole loop	yellow
-	keyword whole is	yellow
-	keyword whole of	yellow
-	keyword whole range	yellow
 	keyword whole abs	yellow
 	keyword whole delta	yellow
+	keyword whole is	yellow
+	keyword whole loop	yellow
+	keyword whole of	yellow
+	keyword whole range	yellow
 	keyword whole return	yellow
+	keyword whole use	yellow
+	keyword whole with	yellow
 
 # prevents - keyword from interfering with comment
 	keyword --	brown
 
-	keyword :=	brightgreen
-	keyword .	brightgreen
-	keyword ;	brightgreen
-	keyword ..	brightgreen
-	keyword :	brightgreen
+	keyword #	brightgreen
+	keyword '	brightgreen
 	keyword (	brightgreen
 	keyword )	brightgreen
-	keyword \+	brightgreen
-	keyword -	brightgreen
-	keyword /	brightgreen
-	keyword \*	brightgreen
 	keyword \*\*	brightgreen
-	keyword #	brightgreen
-	keyword =>	brightgreen
+	keyword \*	brightgreen
+	keyword \+	brightgreen
 	keyword ,	brightgreen
-	keyword '	brightgreen
-	keyword =	brightgreen
+	keyword -	brightgreen
+	keyword .	brightgreen
+	keyword ..	brightgreen
 	keyword /=	brightgreen
+	keyword /	brightgreen
+	keyword :=	brightgreen
+	keyword :	brightgreen
+	keyword ;	brightgreen
+	keyword =>	brightgreen
+	keyword =	brightgreen
 
 	keyword whole begin	brightred
+	keyword whole case	brightred
+	keyword whole else	brightred
+	keyword whole elsif	brightred
 	keyword whole end	brightred
 	keyword whole exit	brightred
 	keyword whole for	brightred
-	keyword whole while	brightred
 	keyword whole if	brightred
 	keyword whole then	brightred
-	keyword whole else	brightred
-	keyword whole case	brightred
 	keyword whole when	brightred
-	keyword whole elsif	brightred
+	keyword whole while	brightred
 
-	keyword whole integer	cyan
-	keyword whole float	cyan
-	keyword whole character	cyan
-	keyword whole string	cyan
-	keyword whole boolean	cyan
-	keyword whole fixed	cyan
 	keyword whole array	cyan
+	keyword whole boolean	cyan
+	keyword whole character	cyan
+	keyword whole fixed	cyan
+	keyword whole float	cyan
+	keyword whole integer	cyan
+	keyword whole string	cyan
 
-	keyword whole type	brightcyan
-	keyword whole subtype	brightcyan
-	keyword whole new_line	brightcyan
 	keyword whole goto	brightcyan
+	keyword whole new_line	brightcyan
+	keyword whole subtype	brightcyan
+	keyword whole type	brightcyan
 
+	keyword whole function	magenta
 	keyword whole new	magenta
 	keyword whole package	magenta
 	keyword whole procedure	magenta
-	keyword whole function	magenta
 
 context exclusive -- \n	brown
-context " "	green/green
 
+context " "	green

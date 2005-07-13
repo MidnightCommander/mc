@@ -2,6 +2,7 @@
 
 	* perl.syntax: Added a keyword to detect subroutine prototypes.
 	Sorted some keywords alphabetically. Added the "warning" pragma.
+	* ada95.syntax: Sorted keywords alphabetically.
 
 2005-07-12  Roland Illig  <roland.illig@gmx.de>
 
