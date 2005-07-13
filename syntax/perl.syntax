@@ -1,4 +1,8 @@
 context default
+
+# subroutine prototypes
+    keyword (\[$%&\*;@[\\]\]) brightcyan
+
     keyword $_ red
     keyword $. red
     keyword $/ red
@@ -44,8 +48,8 @@ context default
     keyword $^X red
     keyword $^A red
 
-    keyword @EXPORT red
     keyword @EXPORT_OK red
+    keyword @EXPORT red
     keyword @INC red
     keyword @ISA red
     keyword @_ red
@@ -105,29 +109,29 @@ context default
     keyword & brightmagenta
 
     keyword whole and magenta
-    keyword whole or magenta
-    keyword whole not magenta
+    keyword whole bless magenta
+    keyword whole break magenta
+    keyword whole caller magenta
     keyword whole do magenta
-    keyword whole if magenta
-    keyword whole until magenta
-    keyword whole elsif magenta
     keyword whole else magenta
-    keyword whole unless magenta
-    keyword whole while magenta
+    keyword whole elsif magenta
     keyword whole foreach magenta
     keyword whole for magenta
     keyword whole goto magenta
+    keyword whole if magenta
+    keyword whole import magenta
     keyword whole last magenta
     keyword whole next magenta
-    keyword whole break magenta
-    keyword whole bless magenta
-    keyword whole caller magenta
-    keyword whole import magenta
+    keyword whole not magenta
+    keyword whole or magenta
     keyword whole package magenta
     keyword whole require magenta
     keyword whole return magenta
+    keyword whole unless magenta
     keyword whole untie magenta
+    keyword whole until magenta
     keyword whole use magenta
+    keyword whole while magenta
 
     keyword whole diagnostics brightcyan
     keyword whole integer brightcyan
@@ -138,6 +142,7 @@ context default
     keyword whole sigtrap brightcyan
     keyword whole strict brightcyan
     keyword whole vars brightcyan
+    keyword whole warnings brightcyan
 
     keyword whole abs yellow
     keyword whole atan2 yellow
@@ -361,4 +366,3 @@ context linestart sub\{\s\t\} \n
     keyword { brightcyan
     keyword } brightcyan
     keyword ; brightmagenta
-
