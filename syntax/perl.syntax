@@ -146,33 +146,33 @@ context default
 
     keyword whole abs yellow
     keyword whole atan2 yellow
+    keyword whole chr yellow
     keyword whole cos yellow
     keyword whole exp yellow
+    keyword whole gmtime yellow
+    keyword whole hex yellow
     keyword whole int yellow
+    keyword whole localtime yellow
     keyword whole log yellow
+    keyword whole oct yellow
+    keyword whole ord yellow
+    keyword whole pack yellow
     keyword whole rand yellow
     keyword whole sin yellow
     keyword whole sqrt yellow
     keyword whole srand yellow
     keyword whole time yellow
-    keyword whole chr yellow
-    keyword whole gmtime yellow
-    keyword whole hex yellow
-    keyword whole localtime yellow
-    keyword whole oct yellow
-    keyword whole ord yellow
-    keyword whole vec yellow
-    keyword whole pack yellow
     keyword whole unpack yellow
+    keyword whole vec yellow
 
     keyword whole chomp yellow
     keyword whole chop yellow
     keyword whole crypt yellow
     keyword whole eval yellow
     keyword whole index yellow
-    keyword whole length yellow
     keyword whole lc yellow
     keyword whole lcfirst yellow
+    keyword whole length yellow
     keyword whole quotemeta yellow
     keyword whole rindex yellow
     keyword whole substr yellow
@@ -199,7 +199,6 @@ context default
 
     keyword whole chmod yellow
     keyword whole chown yellow
-    keyword whole truncate yellow
     keyword whole link yellow
     keyword whole lstat yellow
     keyword whole mkdir yellow
@@ -208,14 +207,14 @@ context default
     keyword whole rmdir yellow
     keyword whole stat yellow
     keyword whole symlink yellow
+    keyword whole truncate yellow
     keyword whole unlink yellow
     keyword whole utime yellow
 
-    keyword whole binmade yellow
+    keyword whole binmode yellow
     keyword whole close yellow
     keyword whole dbmclose yellow
     keyword whole dbmopen yellow
-    keyword whole binmade yellow
     keyword whole eof yellow
     keyword whole fcntl yellow
     keyword whole fileno yellow
@@ -265,8 +264,8 @@ context default
     keyword whole system yellow
     keyword whole times yellow
     keyword whole umask yellow
-    keyword whole wait yellow
     keyword whole waitpid yellow
+    keyword whole wait yellow
     keyword whole warn yellow
 
     keyword whole accept yellow
@@ -280,13 +279,13 @@ context default
     keyword whole send yellow
     keyword whole setsockopt yellow
     keyword whole shutdown yellow
-    keyword whole socket yellow
     keyword whole socketpair yellow
+    keyword whole socket yellow
 
     keyword whole msgctl yellow
     keyword whole msgget yellow
-    keyword whole msgsnd yellow
     keyword whole msgrcv yellow
+    keyword whole msgsnd yellow
     keyword whole semctl yellow
     keyword whole semget yellow
     keyword whole semop yellow
@@ -307,16 +306,16 @@ context default
     keyword whole undef yellow
     keyword whole wantarray yellow
 
+    keyword whole endgrent yellow
     keyword whole endpwent yellow
+    keyword whole getgrent yellow
+    keyword whole getgrgid yellow
+    keyword whole getgrnam yellow
     keyword whole getpwent yellow
     keyword whole getpwnam yellow
     keyword whole getpwuid yellow
-    keyword whole setpwent yellow
-    keyword whole endgrent yellow
-    keyword whole getgrgid yellow
-    keyword whole getgrnam yellow
-    keyword whole getgrent yellow
     keyword whole setgrent yellow
+    keyword whole setpwent yellow
 
     keyword whole endhostent yellow
     keyword whole gethostbyaddr yellow
@@ -325,44 +324,41 @@ context default
     keyword whole sethostent yellow
 
     keyword whole endnetent yellow
+    keyword whole endprotoent yellow
+    keyword whole endservent yellow
     keyword whole getnetbyaddr yellow
     keyword whole getnetbyname yellow
     keyword whole getnetent yellow
-    keyword whole setnetent yellow
-    keyword whole endservent yellow
+    keyword whole getprotobyname yellow
+    keyword whole getprotobynumber yellow
+    keyword whole getprotoent yellow
     keyword whole getservbyname yellow
     keyword whole getservbyport yellow
     keyword whole getservent yellow
     keyword whole serservent yellow
-    keyword whole endprotoent yellow
-    keyword whole getprotobyname yellow
-    keyword whole getprotobynumber yellow
-    keyword whole getprotoent yellow
+    keyword whole setnetent yellow
     keyword whole setprotoent yellow
 
 context linestart #! \n brightcyan black
 
 context exclusive whole <\[\s\\\]EOF EOF green
+
 context # \n brown
     spellcheck
+
 context exclusive linestart = linestart =cut brown
     spellcheck
 
 context " " green
     keyword \\" brightgreen
     keyword \\\\ brightgreen
+
 context ' ' brightgreen
     keyword \\' green
     keyword \\\\ green
+
 context exclusive qw( ) green
 
 context exclusive ` ` white black
 
 context whole __END__ guacomale_pudding brown
-
-context linestart sub\{\s\t\} \n
-    keyword whole sub yellow
-    keyword (*) cyan
-    keyword { brightcyan
-    keyword } brightcyan
-    keyword ; brightmagenta
