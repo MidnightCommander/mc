@@ -181,14 +181,16 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 
 char *mc_realpath(const char *path, char resolved_path[]);
 
-enum {
+enum compression_type {
 	COMPRESSION_NONE,
 	COMPRESSION_GZIP,
 	COMPRESSION_BZIP,
 	COMPRESSION_BZIP2
 };
 
-int get_compression_type (int fd);
+/* Looks for ``magic'' bytes at the start of the VFS file to guess the
+ * compression type. Side effect: modifies the file position. */
+enum compression_type get_compression_type (int fd);
 const char *decompress_extension (int type);
 
 /* Hook functions */

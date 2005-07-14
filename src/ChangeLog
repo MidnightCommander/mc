@@ -1,3 +1,9 @@
+2005-07-14  Roland Illig  <roland.illig@gmx.de>
+
+	* util.c (get_compression_type): Use an enumeration instead of
+	an int for the return type.
+	* util.h: Likewise.
+
 2005-07-13  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Always call display() before close_error_pipe() to make

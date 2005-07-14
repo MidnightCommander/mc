@@ -894,11 +894,8 @@ char *get_current_wd (char *buffer, int size)
 }
 #endif /* !USE_VFS */
 
-/* This function returns 0 if the file is not in not compressed by
- * one of the supported compressors (gzip, bzip, bzip2).  Otherwise,
- * the compression type is returned, as defined in util.h
- * Warning: this function moves the current file pointer */
-int get_compression_type (int fd)
+enum compression_type
+get_compression_type (int fd)
 {
     unsigned char magic[4];
 
