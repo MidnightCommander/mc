@@ -36,9 +36,6 @@
 #define mc_chdir chdir
 #define mc_unlink unlink
 
-#define mc_mmap mmap
-#define mc_munmap munmap
-
 static inline int
 return_zero (void)
 {
