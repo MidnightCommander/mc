@@ -236,6 +236,8 @@ int altered_nroff_flag = 0;
 
 static const char hex_char[] = "0123456789ABCDEF";
 
+int mcview_remember_file_position = FALSE;
+
 /* {{{ Function Prototypes }}} */
 
 /* Our widget callback */
@@ -1275,6 +1277,11 @@ view_move_right (WView *view, offset_type columns)
 static void
 view_done (WView *view)
 {
+    if (mcview_remember_file_position && view->filename != NULL) {
+	offset_type line, col;
+	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	save_file_position (view->filename, line + 1, col);
+    }
     view_close_datasource (view);
     if (view->coord_cache) {
 	g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
@@ -1405,7 +1412,14 @@ view_load (WView *view, const char *command, const char *file,
     view->last_search = 0;	/* Start a new search */
 
     assert (view->bytes_per_line != 0);
-    view_moveto (view, offset_doz (start_line, 1), 0);
+    if (mcview_remember_file_position && file != NULL && start_line == 0) {
+	long line, col;
+	load_file_position (file, &line, &col);
+	view_moveto (view, offset_doz(line, 1), col);
+	start_line = line;
+    } else if (start_line > 0) {
+	view_moveto (view, start_line - 1, 0);
+    }
 
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
