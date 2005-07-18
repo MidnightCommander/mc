@@ -1,5 +1,12 @@
 2005-07-17  Roland Illig  <roland.illig@gmx.de>
 
+	* util.c: Added ascii_alpha_to_cntrl(), which converts 'x' to
+	^X. Useful for entering control characters literally.
+	* util.h: Likewise.
+	* widget.c: Use that function after C-q.
+
+2005-07-17  Roland Illig  <roland.illig@gmx.de>
+
 	* view.c: The viewer can remember the last file position and
 	restore it, like the editor. This fixes Savannah bug #13734.
 	* view.h: Likewise.

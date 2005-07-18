@@ -1449,3 +1449,18 @@ str_unconst (const char *s)
 {
 	return (char *) s;
 }
+
+#define ASCII_A		(0x40 + 1)
+#define ASCII_Z		(0x40 + 26)
+#define ASCII_a		(0x60 + 1)
+#define ASCII_z		(0x60 + 26)
+
+extern int
+ascii_alpha_to_cntrl (int ch)
+{
+    if ((ch >= ASCII_A && ch <= ASCII_Z)
+        || (ch >= ASCII_a && ch <= ASCII_z)) {
+	ch &= 0x1f;
+    }
+    return ch;
+}

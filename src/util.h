@@ -255,4 +255,8 @@ void save_file_position (const char *filename, long line, long column);
 /* usage: str_cmp ("foo", !=, "bar") */
 #define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
 
+/* if ch is in [A-Za-z], returns the corresponding control character,
+ * else returns the argument. */
+extern int ascii_alpha_to_cntrl (int ch);
+
 #endif
