@@ -1,10 +1,6 @@
 #ifndef MC_VFS_VFS_H
 #define MC_VFS_VFS_H
 
-#ifdef HAVE_MMAP
-#include <sys/mman.h>
-#endif
-
 void vfs_init (void);
 void vfs_shut (void);
 
