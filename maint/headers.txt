@@ -24,6 +24,10 @@ the #include section.
 
 6. #include "../src/global.h"
 
+   This file contains lots of compatibility stuff that is used
+   throughout the whole mc. All mc header files rely on this file to be
+   included before them.
+
 7. #include Midnight Commander headers
 
    Currently, not all headers can be ordered arbitrarily, so try it out.
