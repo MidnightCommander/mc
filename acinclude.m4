@@ -500,7 +500,7 @@ dnl job is to detect a method to get file system information.
       if test $ac_cv_func_statvfs = yes; then
 	space=yes
 	AC_DEFINE(STAT_STATVFS, 1,
-		  [Define if function `statfs' can be used])
+		  [Define if function `statvfs' can be used])
       fi
     fi
 
