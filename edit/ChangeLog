@@ -1,3 +1,8 @@
+2005-07-18  Roland Illig  <roland.illig@gmx.de>
+
+	* editkeys.c: When typing literal characters after C-q, allow
+	the alphabetic characters to input ASCII control characters.
+
 2005-07-06  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Added missing #include <stdio.h>.

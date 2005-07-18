@@ -228,9 +228,9 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 #endif
 
     if (x_key == XCTRL ('q')) {
-	char_for_insertion =
+	char_for_insertion = ascii_alpha_to_cntrl (
 	    edit_raw_key_query (_(" Insert Literal "),
-				_(" Press any key: "), 0);
+				_(" Press any key: "), 0));
 	goto fin;
     }
     if (x_key == XCTRL ('a')
