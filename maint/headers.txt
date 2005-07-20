@@ -35,6 +35,8 @@ the #include section.
 
 ==== Headers that may be included unconditionally ====
 
+All ISO C90 headers.
+
 <sys/types.h>
 <sys/stat.h>
 <unistd.h>
