@@ -154,6 +154,11 @@ regex/\.[rR]([aA][rR]|[0-9][0-9])$
 	Open=%cd %p#urar
 	View=%view{ascii} rar v -c- %f
 
+# ALZip
+regex/\.(alz|ALZ)$
+	Open=%cd %p#ualz
+	View=%view{ascii} unalz -l %f
+
 # cpio
 shell/.cpio.Z
 	Open=%cd %p#ucpio
