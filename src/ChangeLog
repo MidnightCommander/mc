@@ -1,3 +1,12 @@
+2005-07-20  Roland Illig  <roland.illig@gmx.de>
+
+	* util.c: Added gettext_ui(), which translates a string and
+	strips everything before the first '|' character. This function
+	is used to translate special elements of the user interface,
+	like ButtonBar labels.
+	* util.h: Likewise.
+	* view.c: Using the new gettext_ui() function.
+
 2005-07-17  Roland Illig  <roland.illig@gmx.de>
 
 	* util.c: Added ascii_alpha_to_cntrl(), which converts 'x' to

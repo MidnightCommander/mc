@@ -2799,42 +2799,56 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
 
-    buttonbar_set_label (h, 1, _("Help"), view_help_cmd);
+    buttonbar_set_label (h, 1, gettext_ui("ButtonBar|Help"), view_help_cmd);
 
-    my_define (h, 10, _("Quit"), view_quit_cmd, view);
-    my_define (h, 4, view->hex_mode ? _("Ascii") : _("Hex"),
-	       toggle_hex_mode, view);
-    my_define (h, 5, view->hex_mode ? _("Goto") : _("Line"),
-	       view->hex_mode ? goto_addr : goto_line, view);
-    my_define (h, 6, view->hex_mode ? _("Save") : _("RxSrch"),
-	       regexp_search_cmd, view);
+    my_define (h, 10, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
+    my_define (h, 4, view->hex_mode
+	? gettext_ui("ButtonBar|Ascii")
+	: gettext_ui("ButtonBar|Hex"),
+	toggle_hex_mode, view);
+    my_define (h, 5, view->hex_mode
+	? gettext_ui("ButtonBar|Goto")
+	: gettext_ui("ButtonBar|Line"),
+	view->hex_mode ? goto_addr : goto_line, view);
+    my_define (h, 6, view->hex_mode
+	? gettext_ui("ButtonBar|Save")
+	: gettext_ui("ButtonBar|RxSrch"),
+	regexp_search_cmd, view);
 
     if (view->hex_mode) {
 	if (view->hexedit_mode) {
-	    my_define (h, 2, _("View"), toggle_hexedit_mode, view);
+	    my_define (h, 2, gettext_ui("ButtonBar|View"),
+		toggle_hexedit_mode, view);
 	} else if (view->datasource == DS_FILE) {
-	    my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
+	    my_define (h, 2, gettext_ui("ButtonBar|Edit"),
+		toggle_hexedit_mode, view);
 	} else {
 	    my_define (h, 2, "", NULL, view);
 	}
-    } else
-	my_define (h, 2, view->text_wrap_mode ? _("UnWrap") : _("Wrap"),
-		   toggle_wrap_mode, view);
+    } else {
+	my_define (h, 2, view->text_wrap_mode
+	    ? gettext_ui("ButtonBar|UnWrap")
+	    : gettext_ui("ButtonBar|Wrap"),
+	    toggle_wrap_mode, view);
+    }
 
-    my_define (h, 7, view->hex_mode ? _("HxSrch") : _("Search"),
-	       normal_search_cmd, view);
-
-    my_define (h, 8, view->magic_mode ? _("Raw") : _("Parse"),
-	       change_viewer, view);
+    my_define (h, 7, view->hex_mode
+	? gettext_ui("ButtonBar|HxSrch")
+	: gettext_ui("ButtonBar|Search"),
+	normal_search_cmd, view);
+    my_define (h, 8, view->magic_mode
+	? gettext_ui("ButtonBar|Raw")
+	: gettext_ui("ButtonBar|Parse"),
+	change_viewer, view);
 
     /* don't override the key to access the main menu */
     if (!view_is_in_panel (view)) {
-	my_define (h, 9,
-		   view->text_nroff_mode ? _("Unform") : _("Format"),
-		   change_nroff, view);
-	my_define (h, 3, _("Quit"), view_quit_cmd, view);
+	my_define (h, 9, view->text_nroff_mode
+	    ? gettext_ui("ButtonBar|Unform")
+	    : gettext_ui("ButtonBar|Format"),
+	    change_nroff, view);
+	my_define (h, 3, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
     }
-
     buttonbar_redraw (h);
 }
 
