@@ -1,3 +1,9 @@
+2005-07-20  Roland Illig  <roland.illig@gmx.de>
+
+	* Makevars: Added gettext_ui() to the list of translation
+	functions.
+	* de.po: Updated German translation.
+
 2005-07-11  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* nl.po: Translate to ISO-8859-1, we can't use UTF-8 on unpatched
