@@ -35,6 +35,7 @@
 
 #define EDIT_KEY_EMULATION_NORMAL 0
 #define EDIT_KEY_EMULATION_EMACS  1
+#define EDIT_KEY_EMULATION_USER   2
 
 #define REDRAW_LINE          (1 << 0)
 #define REDRAW_LINE_ABOVE    (1 << 1)
@@ -197,6 +198,11 @@ void edit_delete_macro_cmd (WEdit * edit);
 int edit_copy_to_X_buf_cmd (WEdit * edit);
 int edit_cut_to_X_buf_cmd (WEdit * edit);
 void edit_paste_from_X_buf_cmd (WEdit * edit);
+
+void edit_select_codepage_cmd (WEdit *edit);
+void edit_insert_literal_cmd (WEdit *edit);
+void edit_execute_macro_cmd (WEdit *edit);
+void edit_begin_end_macro_cmd(WEdit *edit);
 
 void edit_paste_from_history (WEdit *edit);
 

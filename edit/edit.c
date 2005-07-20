@@ -38,10 +38,12 @@
 #include "editlock.h"
 #include "edit-widget.h"
 #include "editcmddef.h"
+#include "usermap.h"
 
 #include "../src/cmd.h"		/* view_other_cmd() */
 #include "../src/user.h"	/* user_menu_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
+
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
@@ -557,6 +559,8 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	edit_move_display (edit, line - 1);
 	edit_move_to_line (edit, line - 1);
     }
+
+    edit_load_user_map(edit);
 
     return edit;
 }
@@ -2112,7 +2116,7 @@ void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
 	edit->macro[edit->macro_i++].ch = char_for_insertion;
     }
 /* record the beginning of a set of editing actions initiated by a key press */
-    if (command != CK_Undo)
+    if (command != CK_Undo && command != CK_Ext_Mode)
 	edit_push_key_press (edit);
 
     edit_execute_cmd (edit, command, char_for_insertion);
@@ -2548,6 +2552,21 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Shell:
 	view_other_cmd ();
+	break;
+    case CK_Select_Codepage:
+	edit_select_codepage_cmd (edit);
+	break;
+    case CK_Insert_Literal:
+	edit_insert_literal_cmd (edit);
+	break;
+    case CK_Execute_Macro:
+	edit_execute_macro_cmd (edit);
+	break;
+    case CK_Begin_End_Macro:
+	edit_begin_end_macro_cmd (edit);
+	break;
+    case CK_Ext_Mode:
+	edit->extmod = 1;
 	break;
     default:
 	break;

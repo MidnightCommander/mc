@@ -443,6 +443,7 @@ edit_init_menu (void)
     struct Menu **EditMenuBar = g_new(struct Menu *, N_menus);
 
     switch (edit_key_emulation) {
+    default:
     case EDIT_KEY_EMULATION_NORMAL:
 	edit_init_menu_normal (EditMenuBar);
 	break;

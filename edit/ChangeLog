@@ -1,3 +1,18 @@
+2005-07-20  Vitja Makarov  <vitja.makarov@gmail.com>
+
+	* usermap.c: Allow user-defined keyboard bindings for mcedit.
+	* usermap.h: Likewise.
+	* Makefile.am: Likewise.
+	* editcmd.c: Define new editor commands which had been coded
+	inline before.
+	This change also affects some other files.
+
+2005-07-20  Roland Illig  <roland.illig@gmx.de>
+
+	* edit-widget.h: Invented a new type edit_key_map_type instead of
+	using long for.
+	* editkeys.c: Using that type.
+
 2005-07-18  Roland Illig  <roland.illig@gmx.de>
 
 	* editkeys.c: When typing literal characters after C-q, allow

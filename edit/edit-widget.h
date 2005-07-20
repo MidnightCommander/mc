@@ -25,6 +25,11 @@ struct syntax_rule {
     unsigned char border;
 };
 
+typedef struct edit_key_map_type {
+    long key;
+    long command;
+} edit_key_map_type;
+
 struct WEdit {
     Widget widget;
 
@@ -102,6 +107,14 @@ struct WEdit {
     int macro_i;		/* index to macro[], -1 if not recording a macro */
     int macro_depth;		/* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
+
+    /* user map stuff */
+    const edit_key_map_type *user_map;
+    const edit_key_map_type *ext_map;
+
+    int extmod;
+
+    char *labels[10];
 };
 
 #endif

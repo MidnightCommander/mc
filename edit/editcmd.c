@@ -53,6 +53,7 @@
 #include "../src/dialog.h"	/* do_refresh() */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
+#include "../src/selcodepage.h"
 
 #define edit_get_load_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
@@ -2893,4 +2894,51 @@ edit_complete_word_cmd (WEdit *edit)
 
     /* restore search parameters */
     edit_set_search_parameters (old_rs, old_rb, old_rr, old_rw, old_rc);
+}
+
+void
+edit_select_codepage_cmd (WEdit *edit)
+{
+#ifdef HAVE_CHARSET
+    do_select_codepage ();
+    edit->force = REDRAW_COMPLETELY;
+    edit_refresh_cmd (edit);
+#endif
+}
+
+void
+edit_insert_literal_cmd (WEdit *edit)
+{
+    int char_for_insertion =
+	    edit_raw_key_query (_(" Insert Literal "),
+				_(" Press any key: "), 0);
+    edit_execute_key_command (edit, -1,
+	ascii_alpha_to_cntrl (char_for_insertion));
+}
+
+void
+edit_execute_macro_cmd (WEdit *edit)
+{
+    int command =
+	    CK_Macro (edit_raw_key_query
+		      (_(" Execute Macro "), _(" Press macro hotkey: "),
+		       1));
+    if (command == CK_Macro (0))
+        command = CK_Insert_Char;
+
+    edit_execute_key_command (edit, command, -1);
+}
+
+void
+edit_begin_end_macro_cmd(WEdit *edit)
+{
+    int command;
+    
+    /* edit is a pointer to the widget */
+    if (edit) {
+	    command =
+		edit->macro_i <
+		0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
+	    edit_execute_key_command (edit, command, -1);
+    }
 }

@@ -38,6 +38,7 @@
 #include "../src/global.h"
 
 #include "edit.h"
+#include "usermap.h"
 #include "../src/dialog.h"	/* B_CANCEL */
 #include "../src/wtools.h"	/* QuickDialog */
 
@@ -49,7 +50,7 @@
 #endif
 
 static const char *key_emu_str[] =
-{N_("Intuitive"), N_("Emacs"), NULL};
+{N_("Intuitive"), N_("Emacs"), N_("User-defined"), NULL};
 
 static const char *wrap_str[] =
 {N_("None"), N_("Dynamic paragraphing"), N_("Type writer wrap"), NULL};
@@ -128,7 +129,7 @@ edit_options_dialog (void)
 	 N_("Wrap mode"), 0, 0,
 	 0, 0, NULL},
 	/* 15 */
-	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 13, OPT_DLG_H, "", 2, 0, 0,
+	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 13, OPT_DLG_H, "", 3, 0, 0,
 	 const_cast(char **, key_emu_str), "keyemu"},
 	/* 16 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 14, OPT_DLG_H,
@@ -221,4 +222,6 @@ edit_options_dialog (void)
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
 	edit_load_syntax (wedit, 0, 0);
+    /* Load usermap if it's needed */
+    edit_load_user_map (wedit);
 }

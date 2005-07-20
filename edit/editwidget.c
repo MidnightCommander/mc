@@ -232,6 +232,7 @@ edit_file (const char *_file, int line)
 static void edit_my_define (Dlg_head * h, int idx, const char *text,
 			    void (*fn) (WEdit *), WEdit * edit)
 {
+    text = edit->labels[idx - 1]? edit->labels[idx - 1] : text;
     /* function-cast ok */
     buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, edit);
 }
@@ -351,15 +352,17 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
 	{
 	    int cmd, ch;
 
-	    /* first check alt-f, alt-e, alt-s, etc for drop menus */
-	    if (edit_drop_hotkey_menu (e, parm))
+	    /* The user may override the access-keys for the menu bar. */
+	    if (edit_translate_key (e, parm, &cmd, &ch)) {
+		edit_execute_key_command (e, cmd, ch);
+		edit_update_screen (e);
 		return MSG_HANDLED;
-	    if (!edit_translate_key (e, parm, &cmd, &ch))
+	    } else  if (edit_drop_hotkey_menu (e, parm)) {
+		return MSG_HANDLED;
+	    } else {
 		return MSG_NOT_HANDLED;
-	    edit_execute_key_command (e, cmd, ch);
-	    edit_update_screen (e);
+	    }
 	}
-	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET,

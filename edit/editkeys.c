@@ -22,6 +22,7 @@
 
 #include <config.h>
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -47,7 +48,7 @@
  * Ordinary translations.  Note that the keys listed first take priority
  * when the key is assigned to more than one command.
  */
-static const long cooledit_key_map[] = {
+static const edit_key_map_type cooledit_key_map[] = {
     ALT ('b'), CK_Match_Bracket,
     ALT ('m'), CK_Mail,
     XCTRL ('f'), CK_Save_Block,
@@ -59,7 +60,7 @@ static const long cooledit_key_map[] = {
     0, 0
 };
 
-static long const emacs_key_map[] = {
+static const edit_key_map_type emacs_key_map[] = {
     ALT ('$'), CK_Pipe_Block (1),	/* spell check */
     ALT ('b'), CK_Word_Left,
     ALT ('f'), CK_Word_Right,
@@ -80,7 +81,7 @@ static long const emacs_key_map[] = {
     0, 0
 };
 
-static long const common_key_map[] = {
+static const edit_key_map_type common_key_map[] = {
     '\n', CK_Enter,
     '\t', CK_Tab,
 
@@ -112,6 +113,10 @@ static long const common_key_map[] = {
     XCTRL ('l'), CK_Refresh,
     XCTRL ('o'), CK_Shell,
     XCTRL ('u'), CK_Undo,
+    XCTRL ('t'), CK_Select_Codepage,
+    XCTRL ('q'), CK_Insert_Literal,
+    XCTRL ('a'), CK_Execute_Macro,
+    XCTRL ('r'), CK_Begin_End_Macro,
 
     KEY_F (1), CK_Help,
     KEY_F (2), CK_Save,
@@ -181,7 +186,8 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int command = CK_Insert_Char;
     int char_for_insertion = -1;
     int i = 0;
-    static const long *key_map;
+    int extmod = 0;
+    const edit_key_map_type *key_map = NULL;
 
     switch (edit_key_emulation) {
     case EDIT_KEY_EMULATION_NORMAL:
@@ -215,46 +221,25 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 	    goto fin;
 	}
 	break;
-    }
 
-#ifdef HAVE_CHARSET
-    if (x_key == XCTRL ('t')) {
-	do_select_codepage ();
-
-	edit->force = REDRAW_COMPLETELY;
-	command = CK_Refresh;
-	goto fin;
-    }
-#endif
-
-    if (x_key == XCTRL ('q')) {
-	char_for_insertion = ascii_alpha_to_cntrl (
-	    edit_raw_key_query (_(" Insert Literal "),
-				_(" Press any key: "), 0));
-	goto fin;
-    }
-    if (x_key == XCTRL ('a')
-	&& edit_key_emulation != EDIT_KEY_EMULATION_EMACS) {
-	command =
-	    CK_Macro (edit_raw_key_query
-		      (_(" Execute Macro "), _(" Press macro hotkey: "),
-		       1));
-	if (command == CK_Macro (0))
-	    command = CK_Insert_Char;
-	goto fin;
-    }
-    /* edit is a pointer to the widget */
-    if (edit)
-	if (x_key == XCTRL ('r')) {
-	    command =
-		edit->macro_i <
-		0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
-	    goto fin;
+    case EDIT_KEY_EMULATION_USER:
+	if (edit->user_map != NULL) {
+	    if (edit->extmod && edit->ext_map != NULL) {
+		key_map = edit->ext_map;
+		extmod = 1;
+	    } else {
+		key_map = edit->user_map;
+	    }
+	    edit->extmod = 0;
+	} else {
+	    key_map = edit->user_map = cooledit_key_map;
 	}
-
+	break;
+    }
+    assert (key_map != NULL);
 
     /* an ordinary insertable character */
-    if (x_key < 256) {
+    if (x_key < 256 && !extmod) {
 	int c = convert_from_input_c (x_key);
 
 	if (is_printable (c)) {
@@ -264,21 +249,19 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     }
 
     /* Commands specific to the key emulation */
-    i = 0;
-    while (key_map[i] && (key_map[i] != x_key))
-	i += 2;
-    if (key_map[i]) {
-	command = key_map[i + 1];
+    for (i = 0; key_map[i].key != 0 && key_map[i].key != x_key; i++)
+	continue;
+    if (key_map[i].key != 0) {
+	command = key_map[i].command;
 	goto fin;
     }
 
     /* Commands common for the key emulations */
     key_map = common_key_map;
-    i = 0;
-    while (key_map[i] && (key_map[i] != x_key))
-	i += 2;
-    if (key_map[i]) {
-	command = key_map[i + 1];
+    for (i = 0; key_map[i].key != 0 && key_map[i].key != x_key; i++)
+	continue;
+    if (key_map[i].key != 0) {
+	command = key_map[i].command;
 	goto fin;
     }
 

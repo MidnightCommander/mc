@@ -148,6 +148,16 @@
 
 #define CK_Shell		801
 
+
+/* C-x or similar */
+#define CK_Ext_Mode		820
+
+
+#define CK_Select_Codepage	850
+#define CK_Insert_Literal	851
+#define CK_Execute_Macro	852
+#define CK_Begin_End_Macro	853
+
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
    shell_cmd[i] must process the file ~/cooledit.block and output ~/cooledit.block
