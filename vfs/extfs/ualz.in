@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# Written by Pavel Roskin <proski@gnu.org>
+# (C) 2005 The Free Software Foundation.
+#
+#
+
+UNALZ=unalz
+
+mcualz_list ()
+{
+	$UNALZ -l "$1" | @AWK@ -v uid=`id -nu` -v gid=`id -ng` '
+{
+    if ($0 ~ /^[0-9][0-9][0-9][0-9]:[0-9][0-9]:[0-9][0-9] /)
+    {
+	split($1, date, ":")
+	time=$2
+	perm=$3
+	size=$4
+	sub(/^[^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* */, "")
+	file=$0
+	gsub(/\\/, "/", file)
+	if (perm ~ /.D../)
+		perm = "drwxr-xr-x"
+	else
+		perm = "-rw-r--r--"
+	printf "%s 1 %s %s %d %02d-%02d-%02d %s %s\n", perm, uid, gid, size, date[2], date[3], date[1], time, file
+    }
+}
+'
+}
+
+mcualz_copyout ()
+{
+    TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-ualz.XXXXXX` || exit 1
+
+    # This is a workaround for a bug in unalz 0.50 - it crashes if the
+    # output directory is an absolute path.
+    dir=`dirname "$TMPDIR/$2"`
+    mkdir -p "$dir"
+
+    $UNALZ -d "$TMPDIR" "$1" "$2" >/dev/null
+    cat "$TMPDIR/$2" > "$3"
+    rm -rf "$TMPDIR"
+}
+
+# override any locale for dates
+LC_ALL=C
+export LC_ALL
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+  list)    mcualz_list    "$@" ;;
+  copyout) mcualz_copyout "$@" ;;
+  *) exit 1 ;;
+esac
+
+exit 0

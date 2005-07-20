@@ -1,3 +1,9 @@
+2005-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/ualz.in: New file - support for ALZip archives.
+	* extfs/Makefile.am: Add ualz.
+	* extfs/extfs.ini: Likewise.
+
 2005-07-06  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tar.c (tar_read_header): Properly handle non \0 terminated tar
