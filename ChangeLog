@@ -1,5 +1,7 @@
 2005-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Restore support for opening 7-zip archives.
+
 	* configure.ac: Add vfs/extfs/ualz to AC_CONFIG_FILES.
 	* lib/mc.ext.in: Add support for ALZip archives.
 
