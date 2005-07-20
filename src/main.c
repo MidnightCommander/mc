@@ -2160,11 +2160,11 @@ main (int argc, char *argv[])
     SLtt_Ignore_Beep = 1;
 #endif
 
+    handle_args (argc, argv);
+
     /* NOTE: This has to be called before slang_init or whatever routine
        calls any define_sequence */
     init_key ();
-
-    handle_args (argc, argv);
 
     /* Must be done before installing the SIGCHLD handler [[FIXME]] */
     handle_console (CONSOLE_INIT);

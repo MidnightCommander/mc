@@ -1,5 +1,12 @@
 2005-07-20  Roland Illig  <roland.illig@gmx.de>
 
+	* key.c: When the command line option -x is given, enable
+	additional key sequences that are typical for xterms.
+	* main.c: First parse command line arguments, then initialize
+	key sequences.
+
+2005-07-20  Roland Illig  <roland.illig@gmx.de>
+
 	* util.c: Added gettext_ui(), which translates a string and
 	strips everything before the first '|' character. This function
 	is used to translate special elements of the user interface,

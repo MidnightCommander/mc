@@ -432,9 +432,12 @@ init_key (void)
     define_sequences (mc_default_keys);
 
     /* Terminfo on irix does not have some keys */
-    if (term
-	&& (!strncmp (term, "iris-ansi", 9) || !strncmp (term, "xterm", 5)
-	    || !strncmp (term, "rxvt", 4)))
+    if (xterm_flag
+	|| (term != NULL
+	    && (strncmp (term, "iris-ansi", 9) == 0
+		|| strncmp (term, "xterm", 5) == 0
+		|| strncmp (term, "rxvt", 4) == 0
+		|| strcmp (term, "screen") == 0)))
 	define_sequences (xterm_key_defines);
 
     /* load some additional keys (e.g. direct Alt-? support) */
