@@ -13,7 +13,8 @@
 #
 # Certain characters must be quoted in these fields. These are space (\s),
 # tabs (\t), backslashes(\\), plus (\+) and asterisk (\*). Braces {} and
-# brackets [] must not be quoted in this file.
+# brackets [] must not be quoted in this file. However, they have a special
+# meaning when used in the actual syntax definitions.
 #
 # You can use the following colors in the syntax highlighting files:
 # black, blue, brightblue, brightcyan, brightgreen, brightmagenta,
