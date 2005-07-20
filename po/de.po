@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"POT-Creation-Date: 2005-05-19 12:27+0200\n"
+"POT-Creation-Date: 2005-07-18 12:43+0200\n"
 "PO-Revision-Date: 2005-05-19 12:57+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -48,6 +48,9 @@ msgstr " Die Datei »%s« ist zu groß "
 
 msgid "Macro recursion is too deep"
 msgstr "Makros sind zu tief verschachtelt"
+
+msgid "&Dismiss"
+msgstr "&Schließen"
 
 msgid " Enter file name: "
 msgstr " Dateiname eingeben: "
@@ -752,8 +755,11 @@ msgstr "Codepage eingeben / anzeigen:"
 msgid "&Select"
 msgstr "&Auswahl "
 
+msgid "Use passive mode over pro&xy"
+msgstr "FTP-Proxy im passiven Modus benutzen"
+
 msgid "Use &passive mode"
-msgstr "Passiver modus benutzen"
+msgstr "Passiven Modus benutzen"
 
 msgid "&Use ~/.netrc"
 msgstr "~/.netrc benutzen"
@@ -1887,6 +1893,10 @@ msgid "Created:   %s"
 msgstr "Erzeugt:   %s"
 
 #, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr "Gerätetyp: %lu/%lu"
+
+#, c-format
 msgid "Size:      %s"
 msgstr "Größe:     %s"
 
@@ -2811,24 +2821,8 @@ msgstr " Pipe fehlgeschlagen "
 msgid " Dup failed "
 msgstr " Dup fehlgeschlagen"
 
-#, c-format
-msgid ""
-" Error while closing the file: \n"
-" %s \n"
-" Data may have been written or not. "
-msgstr ""
-" Fehler beim Schließen der Datei: \n"
-" %s \n"
-" Die Daten könnten gespeichert sein oder auch nicht."
-
-#, c-format
-msgid ""
-" Cannot save file: \n"
-" %s "
-msgstr " Datei »%s« konnte nicht gespeichert werden "
-
-msgid " Cannot spawn child program "
-msgstr " Kann Tochterprozeß nicht erzeugen "
+msgid " Cannot spawn child process "
+msgstr " Kann Kindprozess nicht ausführen "
 
 msgid "Empty output from child filter"
 msgstr "Der Filter gab nichts aus"
@@ -2872,6 +2866,22 @@ msgstr "%s Bytes"
 msgid ">= %s bytes"
 msgstr ">= %s Bytes"
 
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Fehler beim Schließen der Datei: \n"
+" %s \n"
+" Die Daten könnten gespeichert sein oder auch nicht."
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Datei »%s« konnte nicht gespeichert werden "
+
 msgid "Invalid hex search expression"
 msgstr " Ungültiger hex-Suchausdruck "
 
@@ -2900,41 +2910,59 @@ msgstr " Gehe zu Adresse "
 msgid " Enter regexp:"
 msgstr " Regulärer Ausdruck:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr "Hilfe"
 
-msgid "Hex"
+msgid "ButtonBar|Quit"
+msgstr "Beend"
+
+msgid "ButtonBar|Ascii"
+msgstr "ASCII"
+
+msgid "ButtonBar|Hex"
 msgstr "Hex"
 
-msgid "Goto"
-msgstr "Gehe zu"
+msgid "ButtonBar|Goto"
+msgstr "GeheZu"
 
-msgid "Line"
+msgid "ButtonBar|Line"
 msgstr "Zeile"
 
-msgid "RxSrch"
-msgstr "RxSuche"
+msgid "ButtonBar|Save"
+msgstr "Speich"
 
-msgid "UnWrap"
-msgstr "Anti-Umbruch"
+msgid "ButtonBar|RxSrch"
+msgstr "RxSuch"
 
-msgid "Wrap"
-msgstr "Umbruch"
+msgid "ButtonBar|View"
+msgstr "Ansich"
 
-msgid "HxSrch"
-msgstr "HxSuche"
+msgid "ButtonBar|Edit"
+msgstr "Bearbe"
 
-msgid "Raw"
+msgid "ButtonBar|UnWrap"
+msgstr "KeinZU"
+
+msgid "ButtonBar|Wrap"
+msgstr "ZeilUm"
+
+msgid "ButtonBar|HxSrch"
+msgstr "HxSuch"
+
+msgid "ButtonBar|Search"
+msgstr "Suchen"
+
+msgid "ButtonBar|Raw"
 msgstr "Roh"
 
-msgid "Parse"
-msgstr "Parsen"
+msgid "ButtonBar|Parse"
+msgstr "Parse"
 
-msgid "Unform"
-msgstr "Anti-Format"
+msgid "ButtonBar|Unform"
+msgstr "Unform"
 
-msgid "Format"
-msgstr "Formatieren"
+msgid "ButtonBar|Format"
+msgstr "Format"
 
 msgid " History "
 msgstr " Chronik "
