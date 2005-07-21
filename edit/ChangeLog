@@ -1,3 +1,7 @@
+2005-05-21  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Add usermap.h to the sources.
+
 2005-07-20  Vitja Makarov  <vitja.makarov@gmail.com>
 
 	* usermap.c: Allow user-defined keyboard bindings for mcedit.
