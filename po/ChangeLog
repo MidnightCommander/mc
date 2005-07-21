@@ -1,3 +1,7 @@
+2005-07-21  Arpad Biro  <biro_arpad@yahoo.com>
+
+	* hu.po: Updated Hungary translation for -pre5.
+
 2005-07-20  Roland Illig  <roland.illig@gmx.de>
 
 	* Makevars: Added gettext_ui() to the list of translation

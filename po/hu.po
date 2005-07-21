@@ -1,4 +1,3 @@
-# translation of hu.po to Hungarian
 # Midnight Commander - hu.po
 # Copyright (C) 2000,2003, 2004, 2005 Free Software Foundation, Inc.
 # Szabolcs Szasz <sz@szasz.hu>, 2001.
@@ -9,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-15 12:37+0500\n"
-"PO-Revision-Date: 2005-01-23 23:04+0100\n"
+"POT-Creation-Date: 2005-07-01 11:59-0400\n"
+"PO-Revision-Date: 2005-07-21 00:42+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #
 msgid "Error"
@@ -43,12 +42,6 @@ msgstr " Túl nagy a fájl: "
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
 
-msgid "&Dismiss"
-msgstr "&Tovább"
-
-msgid "&OK"
-msgstr "&OK"
-
 msgid " Enter file name: "
 msgstr " Fájlnév: "
 
@@ -70,6 +63,9 @@ msgstr "Másolatok készítése -->"
 #
 msgid "&Cancel"
 msgstr "&Mégsem"
+
+msgid "&OK"
+msgstr "&OK"
 
 # ! az a szokoz direkt van ott!
 # backup-fájlok végzõdése, például ~
@@ -328,6 +324,9 @@ msgstr " Címzett:"
 
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tárgy> -c <másolatot_kap> <címzett>"
+
+msgid "&Dismiss"
+msgstr "&Tovább"
 
 msgid " Emacs key: "
 msgstr " Emacs-billentyû: "
@@ -1697,20 +1696,20 @@ msgstr "Felülírja ezt a fájlt?"
 # space-ek: hogy egymás alatt legyen a másolandó és a meglevõ
 #, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Meglevõ fájl dátuma:   %s, mérete: %llu"
+msgstr "Célfájl dátuma:    %s, mérete: %llu"
 
 #, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Másolandó fájl dátuma: %s, mérete: %llu"
+msgstr "Forrásfájl dátuma: %s, mérete: %llu"
 
 # space-ek: hogy egymás alatt legyen a másolandó és a meglevõ
 #, c-format
 msgid "Target date: %s, size %u"
-msgstr "Meglevõ fájl dátuma:   %s, mérete: %u"
+msgstr "Célfájl dátuma:    %s, mérete: %u"
 
 #, c-format
 msgid "Source date: %s, size %u"
-msgstr "Másolandó fájl dátuma: %s, mérete: %u"
+msgstr "Forrásfájl dátuma: %s, mérete: %u"
 
 msgid " File exists "
 msgstr " A fájl már létezik "
@@ -2382,18 +2381,19 @@ msgstr ""
 "\n"
 "Kulcsszavak:\n"
 "   Globális:       errors (hibák), reverse (inverz), gauge (folyamatjelzõ),\n"
-"                   input (bevitel), viewunderline (aláhúzott a megjelenítõben)\n"
+"                   input (bevitel), viewunderline (aláhúzottak a\n"
+"                   megjelenítõben)\n"
 "   Fájllista:      normal (normál), selected (jelenlegi), marked (kijelölt),\n"
 "                   markselect (kijelölt + jelenlegi)\n"
 "   Párbeszédablakok:  dnormal (normál), dfocus (fókusz), dhotnormal\n"
 "                      (gyorsbillentyû), dhotfocus (gyorsbillentyû + fókusz),\n"
-"                      errdhotnormal (gyorsbillentyû hibaablakban),\n"
-"                      errdhotfocus (gyorsbillentyû + fókusz hibaablakban)\n"
+"                      errdhotnormal (gyorsbillentyû hibaablakban), errdhotfocus\n"
+"                      (gyorsbillentyû + fókusz hibaablakban)\n"
 "   Menük:          menu (menü), menuhot (gyorsbillentyû), menusel (kijelölt),\n"
 "                   menuhotsel (gyorsbillentyû + kijelölt)\n"
 "   Szerkesztõ:     editnormal (normál), editbold (félkövér), editmarked\n"
 "                   (kijelölt)\n"
-"   Súgó:           helpnormal (normál), helpitalic (dõlt), helpbold (félkövér),\n"
+"   Segítség:       helpnormal (normál), helpitalic (dõlt), helpbold (félkövér),\n"
 "                   helplink (link), helpslink (kijelölt + link)\n"
 "   Fájltípusok:    directory (könyvtár), executable (végrehajtható), link\n"
 "                   (link), stalelink (hibás link), device (eszköz), special\n"
