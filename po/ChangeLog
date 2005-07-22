@@ -2,6 +2,8 @@
 
 	* README: Added a section about special strings (containing
 	prefixes like ButtonBar|).
+	* POTFILES.in: Added edit/usermap.c.
+	* hu.po: Updated Hungarian translation.
 
 2005-07-21  Arpad Biro  <biro_arpad@yahoo.com>
 
