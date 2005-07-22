@@ -1,8 +1,11 @@
+2005-07-22  Arpad Biro  <biro_arpad@yahoo.com>
+
+	* hu.po: Updated Hungarian translation.
+
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
 	* README: Added a section about special strings (containing
 	prefixes like ButtonBar|).
-	* hu.po: Updated Hungarian translation.
 
 2005-07-21  Arpad Biro  <biro_arpad@yahoo.com>
 
