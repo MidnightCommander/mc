@@ -476,9 +476,9 @@ static void help_show (Dlg_head *h, const char *paint_start)
 }
 
 static int
-help_event (Gpm_Event *event, void *data)
+help_event (Gpm_Event *event, void *vp)
 {
-    Widget *w = data;
+    Widget *w = vp;
     Link_Area *current_area;
 
     if (! (event->type & GPM_UP))
@@ -548,9 +548,9 @@ help_event (Gpm_Event *event, void *data)
 
 /* show help */
 static void
-help_help_cmd (void *v)
+help_help_cmd (void *vp)
 {
-    Dlg_head *h = v;
+    Dlg_head *h = vp;
     const char *p;
 
     history_ptr = (history_ptr+1) % HISTORY_SIZE;
@@ -567,9 +567,9 @@ help_help_cmd (void *v)
 }
 
 static void
-help_index_cmd (void *v)
+help_index_cmd (void *vp)
 {
-    Dlg_head *h = v;
+    Dlg_head *h = vp;
     const char *new_item;
 
     if (!(new_item = search_string (data, "[Contents]"))) {
@@ -587,14 +587,14 @@ help_index_cmd (void *v)
     help_callback (h, DLG_DRAW, 0);
 }
 
-static void help_quit_cmd (void *x)
+static void help_quit_cmd (void *vp)
 {
-    dlg_stop ((Dlg_head *)x);
+    dlg_stop ((Dlg_head *) vp);
 }
 
-static void prev_node_cmd (void *data)
+static void prev_node_cmd (void *vp)
 {
-    Dlg_head *h = data;
+    Dlg_head *h = vp;
     currentpoint = startpoint = history [history_ptr].page;
     selected_item = history [history_ptr].link;
     history_ptr--;
@@ -621,21 +621,21 @@ mousedispatch_new (int y, int x, int yl, int xl)
     return w;
 }
 
-static void help_cmk_move_backward(void *data, int lines) {
-    (void) &data;
+static void help_cmk_move_backward(void *vp, int lines) {
+    (void) &vp;
     move_backward(lines);
 }
-static void help_cmk_move_forward(void *data, int lines) {
-    (void) &data;
+static void help_cmk_move_forward(void *vp, int lines) {
+    (void) &vp;
     move_forward(lines);
 }
-static void help_cmk_moveto_top(void *data, int lines) {
-    (void) &data;
+static void help_cmk_moveto_top(void *vp, int lines) {
+    (void) &vp;
     (void) &lines;
     move_to_top();
 }
-static void help_cmk_moveto_bottom(void *data, int lines) {
-    (void) &data;
+static void help_cmk_moveto_bottom(void *vp, int lines) {
+    (void) &vp;
     (void) &lines;
     move_to_bottom();
 }

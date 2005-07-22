@@ -4,6 +4,7 @@
 	* help.c: Fixed an invalid memory access, which has been noted
 	by Vitja Makarov. And fixed a bug that had been introduced by
 	me, when replacing Dlg_head * with void *.
+	* help.c: Fixed shadowing warnings from gcc.
 
 2005-07-20  Roland Illig  <roland.illig@gmx.de>
 
