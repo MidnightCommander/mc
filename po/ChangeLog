@@ -1,3 +1,8 @@
+2005-07-22  Roland Illig  <roland.illig@gmx.de>
+
+	* statistics.pl: Added a Perl program to print the translation
+	status.
+
 2005-07-22  Arpad Biro  <biro_arpad@yahoo.com>
 
 	* hu.po: Updated Hungarian translation.
