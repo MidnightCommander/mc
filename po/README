@@ -2,3 +2,12 @@ When you commit a translation, please strip the #: lines before. This
 makes it much easier to view diffs. Example:
 
 	./strip-location *.po
+
+== Special strings ==
+
+Some of the translatable strings are special. They start with one of the
+following prefixes to distinguish them from the usual translations.
+
+ButtonBar|
+ 	These strings are used in the button bar at the bottom of the
+	screen. Only the first six characters will be shown.
