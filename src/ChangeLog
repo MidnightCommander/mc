@@ -1,5 +1,9 @@
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
+	* charsets.c: Fixed wrong comparison of the result of iconv().
+
+2005-07-22  Roland Illig  <roland.illig@gmx.de>
+
 	* utilunix.c: Replaced the use of getgrouplist() with
 	getgroups(), which is more appropriate and does not contain a
 	buffer overflow in most recent glibc versions (upto 2.3.2).
