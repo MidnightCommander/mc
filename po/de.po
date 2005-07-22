@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"POT-Creation-Date: 2005-07-18 12:43+0200\n"
+"POT-Creation-Date: 2005-07-22 16:57+0200\n"
 "PO-Revision-Date: 2005-05-19 12:57+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -335,17 +335,17 @@ msgstr " An"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <betreff> -c <cc> <an>"
 
-msgid " Emacs key: "
-msgstr " Emacs-Taste: "
-
-msgid " Execute Macro "
-msgstr " Makro ausführen "
-
 msgid " Insert Literal "
 msgstr " Literal einfügen "
 
 msgid " Press any key: "
 msgstr " Eine Taste drücken: "
+
+msgid " Execute Macro "
+msgstr " Makro ausführen "
+
+msgid " Emacs key: "
+msgstr " Emacs-Taste: "
 
 #, c-format
 msgid ""
@@ -536,6 +536,9 @@ msgstr "Intuitiv"
 msgid "Emacs"
 msgstr "Emacs"
 
+msgid "User-defined"
+msgstr "&Benutzerdefiniert:"
+
 msgid "None"
 msgstr "Keine"
 
@@ -619,6 +622,52 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Fehler in Datei %s auf Zeile %d "
+
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr "bind: Falsche Argumentanzahl; bind <Taste> <Befehl>"
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr "bind: Falsche Tastenangabe"
+
+msgid "bind: Ehh...no key?"
+msgstr "bind: Keine Taste?"
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr "bind: Unbekannte Taste: »%s«"
+
+#, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr "bind: Unbekannter Befehl: »%s«"
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr "%s: Syntax: %s <n> <Befehl> <Beschriftung>"
+
+#, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "%s: Unbekannter Befehl: »%s«"
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr "%s: fn sollte zwischen 1 und 10 liegen"
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr "%s: %s"
+
+#, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr "%s:%d: Unbekannter Befehl »%s«"
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr "%s:%d: %s"
+
+#, c-format
+msgid "%s not found!"
+msgstr "%s nicht gefunden"
 
 msgid "&Set"
 msgstr "&Setzen"
@@ -1210,7 +1259,7 @@ msgstr " Fehler in Datei »~/%s« "
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext of use that file as an example of how to write "
+"want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
 "Das Dateiformat von »~/%s« hat sich mit Version 3.0 geändert.  Eine "
