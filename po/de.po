@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"POT-Creation-Date: 2005-07-22 16:57+0200\n"
+"POT-Creation-Date: 2005-07-22 18:49+0200\n"
 "PO-Revision-Date: 2005-05-19 12:57+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -628,7 +628,7 @@ msgstr "bind: Falsche Argumentanzahl; bind <Taste> <Befehl>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr "bind: Falsche Tastenangabe"
+msgstr "bind: Falsche Tastenangabe: »%s«"
 
 msgid "bind: Ehh...no key?"
 msgstr "bind: Keine Taste?"
