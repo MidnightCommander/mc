@@ -1,3 +1,7 @@
+2005-07-22  Roland Illig  <roland.illig@gmx.de>
+
+	* ext.c: Fixed a typo which has been noted by Arpad Biro.
+
 2005-07-20  Roland Illig  <roland.illig@gmx.de>
 
 	* key.c: When the command line option -x is given, enable

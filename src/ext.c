@@ -478,7 +478,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		g_strdup_printf (_(" ~/%s file error "), MC_USER_EXT);
 	    message (1, title, _("The format of the ~/%s file has "
 		"changed with version 3.0.  You may either want to copy "
-		"it from %smc.ext of use that file as an example of how "
+		"it from %smc.ext or use that file as an example of how "
 		"to write it."), MC_USER_EXT, mc_home);
 	    g_free (title);
 	}
