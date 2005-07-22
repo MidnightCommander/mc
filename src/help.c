@@ -548,9 +548,9 @@ help_event (Gpm_Event *event, void *data)
 
 /* show help */
 static void
-help_help_cmd (void *data)
+help_help_cmd (void *v)
 {
-    Dlg_head *h = data;
+    Dlg_head *h = v;
     const char *p;
 
     history_ptr = (history_ptr+1) % HISTORY_SIZE;
@@ -567,9 +567,9 @@ help_help_cmd (void *data)
 }
 
 static void
-help_index_cmd (void *data)
+help_index_cmd (void *v)
 {
-    Dlg_head *h = data;
+    Dlg_head *h = v;
     const char *new_item;
 
     if (!(new_item = search_string (data, "[Contents]"))) {
