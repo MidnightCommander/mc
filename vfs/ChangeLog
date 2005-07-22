@@ -1,3 +1,8 @@
+2005-07-22  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/ualz.in: Anticipate eventual posixification of the date
+	format.
+
 2005-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/ualz.in: New file - support for ALZip archives.
