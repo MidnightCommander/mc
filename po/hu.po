@@ -7,40 +7,49 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-01 11:59-0400\n"
-"PO-Revision-Date: 2005-07-21 00:42+0200\n"
+"POT-Creation-Date: 2005-07-22 16:57+0200\n"
+"PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.9.1\n"
+
+#, c-format
+msgid " Cannot open %s for reading "
+msgstr " Nem sikerült megnyitni a(z) \"%s\" fájlt olvasásra "
 
 #
 msgid "Error"
 msgstr "Hiba"
 
-msgid " Cannot open file for reading: "
-msgstr " Nem sikerült megnyitni a fájlt olvasásra: "
+#, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Hiba a csõfájl olvasásakor: %s "
 
-msgid " Error reading from pipe: "
-msgstr " Hiba a csõfájl olvasásakor: "
+#, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Nem sikerült megnyitni a csõfájlt olvasásra: %s "
 
-msgid " Cannot open pipe for reading: "
-msgstr " Nem sikerült megnyitni a csõfájlt olvasásra: "
+#, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Méret-/hozzáférési adatok lekérdezése nem sikerült: %s "
 
-msgid " Cannot get size/permissions info for file: "
-msgstr " Méret-/hozzáférési adatok lekérdezése nem sikerült: "
+#, c-format
+msgid " %s is not a regular file "
+msgstr " \"%s\": speciális fájl "
 
-msgid " Not an ordinary file: "
-msgstr " Speciális fájl: "
-
-msgid " File is too large: "
-msgstr " Túl nagy a fájl: "
+#, c-format
+msgid " File %s is too large "
+msgstr " A(z) \"%s\" fájl túl nagy "
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
+
+msgid "&Dismiss"
+msgstr "&Tovább"
 
 msgid " Enter file name: "
 msgstr " Fájlnév: "
@@ -202,8 +211,10 @@ msgstr " Csere "
 msgid "Search"
 msgstr "Keresés"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
+msgstr ""
+" Hibás reguláris kifejezés, vagy túl sok konverzió a Scanf-kifejezésben "
 
 msgid " Error in replacement format string. "
 msgstr " Hibás a csere-formátumszöveg "
@@ -236,6 +247,13 @@ msgstr "&Igen"
 
 msgid "&No"
 msgstr "&Nem"
+
+#
+msgid " Error "
+msgstr " Hiba "
+
+msgid " This function is not implemented. "
+msgstr " Ez a funkció még nincs megvalósítva. "
 
 msgid " Copy to clipboard "
 msgstr " Másolás a vágólapra "
@@ -325,20 +343,17 @@ msgstr " Címzett:"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tárgy> -c <másolatot_kap> <címzett>"
 
-msgid "&Dismiss"
-msgstr "&Tovább"
-
-msgid " Emacs key: "
-msgstr " Emacs-billentyû: "
-
-msgid " Execute Macro "
-msgstr " Makró futtatása "
-
 msgid " Insert Literal "
 msgstr " Karakter beszúrása "
 
 msgid " Press any key: "
 msgstr " Nyomjon meg egy billentyût: "
+
+msgid " Execute Macro "
+msgstr " Makró futtatása "
+
+msgid " Emacs key: "
+msgstr " Emacs-billentyû: "
 
 #, c-format
 msgid ""
@@ -532,6 +547,9 @@ msgstr "Intuitív"
 msgid "Emacs"
 msgstr "Emacs"
 
+msgid "User-defined"
+msgstr "Felhasználó által megadott"
+
 msgid "None"
 msgstr "Nincs"
 
@@ -619,6 +637,52 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Hiba a(z) %s fájl %d. sorában "
+
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr "Bind: helytelen kulcsérték: \"%s\""
+
+msgid "bind: Ehh...no key?"
+msgstr "Bind: nincs kulcs?"
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr "Bind: ismeretlen kulcs: \"%s\""
+
+#, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr "Bind: ismeretlen parancs: \"%s\""
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr "%s: szintaxis: %s <n> <parancs> <címke>"
+
+#, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "%s: ismeretlen parancs: \"%s\""
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr "%s: fn értéke 1...10 lehet"
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr "%s: fopen(): %s"
+
+#, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr "%s:%d: ismeretlen parancs: \"%s\""
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr "%s:%d: %s"
+
+#, c-format
+msgid "%s not found!"
+msgstr "\"%s\" nem található"
 
 msgid "&Set"
 msgstr "&Beállít"
@@ -759,6 +823,9 @@ msgstr "Beviteli/kijelzési kódlap:"
 
 msgid "&Select"
 msgstr "&Kijelölés"
+
+msgid "Use passive mode over pro&xy"
+msgstr "Passzív mód használata pro&xy felett"
 
 msgid "Use &passive mode"
 msgstr "Passzí&v mód használata"
@@ -1188,11 +1255,9 @@ msgstr "&Csoport"
 msgid "Cannot read directory contents"
 msgstr "Nem sikerült beolvasni a könyvtár tartalmát"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyût..."
 
-#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
 
@@ -1212,42 +1277,32 @@ msgstr ""
 msgid " Parameter "
 msgstr " Paraméter "
 
-msgid " file error "
-msgstr " fájlhiba "
+#, c-format
+msgid " %s%s file error"
+msgstr " %s%s fájlhiba"
 
-msgid "Format of the "
-msgstr "A(z) "
-
+#, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
-"mc.ext fájl formátuma\n"
-"a 3.0-s verzióval módosult. Elképzelhetõ,\n"
-"hogy a Midnight Commander telepítésekor hiba\n"
-"történt. Szerezzen be egy friss verziót a\n"
-"Midnight Commander-csomagból."
+"A(z) \"%smc.ext\" fájl formátuma a 3.0-s verzióval módosult. Úgy tûnik, hogy "
+"a Midnight Commander telepítésekor hiba történt. Szerezzen be egy friss "
+"verziót a Midnight Commander-csomagból."
 
+#, c-format
+msgid " ~/%s file error "
+msgstr " ~/%s fájlhiba "
+
+#, fuzzy, c-format
 msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-" fájl formátuma\n"
-"a 3.0-s verzióval módosult. Esetleg\n"
-"lemásolhat egy "
-
-msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
-msgstr ""
-"\"mc.ext\" fájlt, vagy használhatja azt\n"
-"példaként egy saját fájl készítéséhez.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "A Midnight Commander most az \"mc.ext\" fájlt fogja használni."
+"A \"~/%s\" fájl formátuma a 3.0-s verzióval módosult. Lemásolhatja azt a(z) "
+"\"%smc.ext\" fájlból, vagy elkészítheti az alapján."
 
 msgid " Copy "
 msgstr " Másolás "
@@ -1772,6 +1827,9 @@ msgstr "&Megtekintés - F3"
 msgid "&Edit - F4"
 msgstr "&Szerkesztés - F4"
 
+msgid "find Re&cursively"
+msgstr "Rek&urzív keresés"
+
 msgid "Start at:"
 msgstr "Kezdõkönyvtár:"
 
@@ -1968,6 +2026,10 @@ msgstr "Módosítás:    %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Adatváltozás: %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr "Eszköztípus:  fõ: %lu, al: %lu"
 
 #, c-format
 msgid "Size:      %s"
@@ -2383,17 +2445,22 @@ msgstr ""
 "   Globális:       errors (hibák), reverse (inverz), gauge (folyamatjelzõ),\n"
 "                   input (bevitel), viewunderline (aláhúzottak a\n"
 "                   megjelenítõben)\n"
-"   Fájllista:      normal (normál), selected (jelenlegi), marked (kijelölt),\n"
+"   Fájllista:      normal (normál), selected (jelenlegi), marked "
+"(kijelölt),\n"
 "                   markselect (kijelölt + jelenlegi)\n"
 "   Párbeszédablakok:  dnormal (normál), dfocus (fókusz), dhotnormal\n"
-"                      (gyorsbillentyû), dhotfocus (gyorsbillentyû + fókusz),\n"
-"                      errdhotnormal (gyorsbillentyû hibaablakban), errdhotfocus\n"
+"                      (gyorsbillentyû), dhotfocus (gyorsbillentyû + "
+"fókusz),\n"
+"                      errdhotnormal (gyorsbillentyû hibaablakban), "
+"errdhotfocus\n"
 "                      (gyorsbillentyû + fókusz hibaablakban)\n"
-"   Menük:          menu (menü), menuhot (gyorsbillentyû), menusel (kijelölt),\n"
+"   Menük:          menu (menü), menuhot (gyorsbillentyû), menusel "
+"(kijelölt),\n"
 "                   menuhotsel (gyorsbillentyû + kijelölt)\n"
 "   Szerkesztõ:     editnormal (normál), editbold (félkövér), editmarked\n"
 "                   (kijelölt)\n"
-"   Segítség:       helpnormal (normál), helpitalic (dõlt), helpbold (félkövér),\n"
+"   Segítség:       helpnormal (normál), helpitalic (dõlt), helpbold "
+"(félkövér),\n"
 "                   helplink (link), helpslink (kijelölt + link)\n"
 "   Fájltípusok:    directory (könyvtár), executable (végrehajtható), link\n"
 "                   (link), stalelink (hibás link), device (eszköz), special\n"
@@ -2576,7 +2643,8 @@ msgid " Enter command label: "
 msgstr " A parancshoz tartozó leírás: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Távoli/virtuális könyvtáron nem lehet végrehajtani külsõ panel-parancsot "
+msgstr ""
+" Távoli/virtuális könyvtáron nem lehet végrehajtani külsõ panel-parancsot "
 
 msgid "Find rejects after patching"
 msgstr "\"patch\" parancs utáni problémajegyzékek (*.rej) keresése"
@@ -2612,9 +2680,11 @@ msgstr "Rövid használati útmutató megjelenítése."
 msgid "ARG"
 msgstr "PAR"
 
-#, c-format
 msgid "Usage:"
 msgstr "Használat:"
+
+msgid "[dev]"
+msgstr "[eszk]"
 
 # szülõkönyvtár
 msgid "UP--DIR"
@@ -2785,7 +2855,6 @@ msgstr "Nyelvi lokalizálás támogatása\n"
 msgid "With multiple codepages support\n"
 msgstr "Több kódlap támogatása\n"
 
-#, c-format
 msgid "Virtual File System:"
 msgstr "Virtuális fájlrendszer:"
 
@@ -2913,7 +2982,6 @@ msgstr ""
 msgid "Temporary files will be created in %s\n"
 msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban lesznek létrehozva\n"
 
-#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Ideiglenes fájlok nem lesznek létrehozva\n"
 
@@ -2923,14 +2991,11 @@ msgstr " Csõfájl-hiba "
 msgid " Dup failed "
 msgstr " Sikertelen \"dup\" "
 
-msgid " Cannot spawn child program "
+msgid " Cannot spawn child process "
 msgstr " Nem sikerült programot indítani "
 
 msgid "Empty output from child filter"
 msgstr "A szûrõ kimenete üres."
-
-msgid " Cannot open file "
-msgstr " Nem sikerült megnyitni a fájlt "
 
 #, c-format
 msgid ""
@@ -2961,16 +3026,36 @@ msgid "Offset 0x%08lx"
 msgstr "Pozíció: 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Oszlop: %d"
+msgid "Line %lu Col %lu"
+msgstr "Sor %lu Oszl %lu"
 
 # szóköz: elválasztáshoz
 #, c-format
 msgid "%s bytes"
 msgstr " %s bájt"
 
-msgid "  [grow]"
-msgstr " [növek]"
+# szóköz: elválasztáshoz
+#, c-format
+msgid ">= %s bytes"
+msgstr " >= %s bájt"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Hiba a fájl lezárásakor: \n"
+" %s \n"
+" Lehetséges, hogy az adatok nem lettek kiírva. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Nem sikerült a mentés: \n"
+" %s "
 
 msgid "Invalid hex search expression"
 msgstr "Hibás hexadecimális keresési kifejezés"
@@ -3000,46 +3085,58 @@ msgstr " Ugrás a megadott címre "
 msgid " Enter regexp:"
 msgstr " Reguláris kifejezés:"
 
-msgid "Ascii"
+msgid "ButtonBar|Help"
+msgstr "Súgó"
+
+msgid "ButtonBar|Quit"
+msgstr "Kilép"
+
+msgid "ButtonBar|Ascii"
 msgstr "ASCII"
 
-msgid "Hex"
+msgid "ButtonBar|Hex"
 msgstr "Hex"
 
-msgid "Goto"
+msgid "ButtonBar|Goto"
 msgstr "Ugrás"
 
-msgid "Line"
+msgid "ButtonBar|Line"
 msgstr "UgrSor"
 
-msgid "RxSrch"
+msgid "ButtonBar|Save"
+msgstr "Mentés"
+
+msgid "ButtonBar|RxSrch"
 msgstr "RegKer"
 
-msgid "EdHex"
-msgstr "HexSzrk"
+msgid "ButtonBar|View"
+msgstr "Megnéz"
 
-msgid "EdText"
-msgstr "ASCSzrk"
+msgid "ButtonBar|Edit"
+msgstr "Szerk"
 
-msgid "UnWrap"
+msgid "ButtonBar|UnWrap"
 msgstr "NemTör"
 
-msgid "Wrap"
+msgid "ButtonBar|Wrap"
 msgstr "SorTör"
 
-msgid "HxSrch"
+msgid "ButtonBar|HxSrch"
 msgstr "HexKer"
 
-msgid "Raw"
+msgid "ButtonBar|Search"
+msgstr "Keresés"
+
+msgid "ButtonBar|Raw"
 msgstr "Nyers"
 
-msgid "Parse"
+msgid "ButtonBar|Parse"
 msgstr "Értelm"
 
-msgid "Unform"
+msgid "ButtonBar|Unform"
 msgstr "NemForm"
 
-msgid "Format"
+msgid "ButtonBar|Format"
 msgstr "Formáz"
 
 msgid " History "
@@ -3631,4 +3728,3 @@ msgstr "Belsõ programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
-
