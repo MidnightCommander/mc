@@ -46,124 +46,6 @@
 
 struct sigaction startup_handler;
 
-/* uid of the MC user */
-static uid_t current_user_uid = -1;
-/* List of the gids of the user */
-static GTree *current_user_gid = NULL;
-
-/* Helper function to compare 2 gids */
-static gint
-mc_gid_compare (gconstpointer v, gconstpointer v2)
-{
-    return ((GPOINTER_TO_UINT(v) > GPOINTER_TO_UINT(v2)) ? 1 :
-	    (GPOINTER_TO_UINT(v) < GPOINTER_TO_UINT(v2)) ? -1 : 0);
-}
-
-/* Helper function to delete keys of the gids tree */
-static gint
-mc_gid_destroy (gpointer key, gpointer value, gpointer data)
-{
-    (void) key;
-    (void) data;
-    g_free (value);
-    
-    return FALSE;
-}
-
-/* This function initialize global GTree with the gids of groups,
-   to which user belongs. Tree also store corresponding string 
-   with the name of the group.
-   FIXME: Do we need this names at all? If not, we can simplify
-   initialization by eliminating g_strdup's.
-*/
-void init_groups (void)
-{
-    int i;
-    struct passwd *pwd;
-    struct group *grp;
-
-    current_user_uid = getuid ();
-    pwd = getpwuid (current_user_uid);
-    g_return_if_fail (pwd != NULL);
-
-    current_user_gid = g_tree_new (mc_gid_compare);
-
-    /* Put user's primary group first. */
-    if ((grp = getgrgid (pwd->pw_gid)) != NULL) {
-	g_tree_insert (current_user_gid,
-		       GUINT_TO_POINTER ((int) grp->gr_gid),
-		       g_strdup (grp->gr_name));
-    }
-
-#ifdef HAVE_GETGROUPLIST
-    {
-	gid_t *groups = g_new (gid_t, 1);
-	int ng = 1;
-	gid_t *newgroups = NULL;
-
-	if (getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng) == -1) {
-	    newgroups = g_new (gid_t, ng);
-	    if (newgroups != NULL) {
-		g_free (groups);
-		groups = newgroups;
-		getgrouplist (pwd->pw_name, pwd->pw_gid, groups, &ng);
-	    } else
-		ng = 1;
-	}
-
-	for (i = 0; i < ng; i++) {
-	    grp = getgrgid (groups[i]);
-	    if (grp != NULL
-		&& !g_tree_lookup (current_user_gid,
-				   GUINT_TO_POINTER ((int) grp->gr_gid))) {
-		g_tree_insert (current_user_gid,
-			       GUINT_TO_POINTER ((int) grp->gr_gid),
-			       g_strdup (grp->gr_name));
-	    }
-	}
-
-	g_free (groups);
-    }
-#else
-    setgrent ();
-    while ((grp = getgrent ()) != NULL) {
-	for (i = 0; grp->gr_mem[i]; i++) {
-	    if (!strcmp (pwd->pw_name, grp->gr_mem[i]) &&
-		!g_tree_lookup (current_user_gid,
-				GUINT_TO_POINTER ((int) grp->gr_gid))) {
-		g_tree_insert (current_user_gid,
-			       GUINT_TO_POINTER ((int) grp->gr_gid),
-			       g_strdup (grp->gr_name));
-		break;
-	    }
-	}
-    }
-    endgrent ();
-#endif
-}
-
-/* Return the index of the permissions triplet */
-int
-get_user_permissions (struct stat *buf) {
-
-    if (buf->st_uid == current_user_uid || current_user_uid == 0)
-       return 0;
-    
-    if (current_user_gid && g_tree_lookup (current_user_gid,
-					   GUINT_TO_POINTER((int) buf->st_gid)))
-       return 1;
-
-    return 2;
-}
-
-/* Completely destroys the gids tree */
-void
-destroy_groups (void)
-{
-    g_tree_traverse (current_user_gid, mc_gid_destroy, G_POST_ORDER, NULL);
-    g_tree_destroy (current_user_gid);
-}
-
 #define UID_CACHE_SIZE 200
 #define GID_CACHE_SIZE 30
 
@@ -828,4 +710,48 @@ mc_realpath (const char *path, char resolved_path[])
     strcpy (resolved_path, got_path);
     return resolved_path;
 #endif	/* USE_SYSTEM_REALPATH */
+}
+
+/* Return the index of the permissions triplet */
+int
+get_user_permissions (struct stat *st) {
+    static gboolean initialized = FALSE;
+    static gid_t *groups;
+    static int ngroups;
+    static uid_t uid;
+    int i;
+
+    if (!initialized) {
+	uid = geteuid ();
+
+	ngroups = getgroups (0, NULL);
+	if (ngroups == -1)
+	    ngroups = 0;	/* ignore errors */
+
+	/* allocate space for one element in addition to what
+	 * will be filled by getgroups(). */
+	groups = g_new (gid_t, ngroups + 1);
+
+	if (ngroups != 0) {
+	    ngroups = getgroups (ngroups, groups);
+	    if (ngroups == -1)
+		ngroups = 0;	/* ignore errors */
+	}
+
+	/* getgroups() may or may not return the effective group ID,
+	 * so we always include it at the end of the list. */
+	groups[ngroups++] = getegid ();
+
+	initialized = TRUE;
+    }
+
+    if (st->st_uid == uid || uid == 0)
+       return 0;
+
+    for (i = 0; i < ngroups; i++) {
+	if (st->st_gid == groups[i])
+	    return 1;
+    }
+
+    return 2;
 }

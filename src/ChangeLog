@@ -1,5 +1,15 @@
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
+	* utilunix.c: Replaced the use of getgrouplist() with
+	getgroups(), which is more appropriate and does not contain a
+	buffer overflow in most recent glibc versions (upto 2.3.2).
+	Simplified the code. Removed init_groups() and destroy_groups().
+	They are unnecessary.
+	* main.c: init_groups() and destroy_groups() have disappeared,
+	so don't call them.
+
+2005-07-22  Roland Illig  <roland.illig@gmx.de>
+
 	* ext.c: Fixed a typo which has been noted by Arpad Biro.
 	* help.c: Fixed an invalid memory access, which has been noted
 	by Vitja Makarov. And fixed a bug that had been introduced by
