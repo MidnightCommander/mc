@@ -551,10 +551,17 @@ static void
 help_help_cmd (void *data)
 {
     Dlg_head *h = data;
+    const char *p;
+
     history_ptr = (history_ptr+1) % HISTORY_SIZE;
     history [history_ptr].page = currentpoint;
     history [history_ptr].link = selected_item;
-    currentpoint = startpoint = search_string (data, "[How to use help]") + 1;
+
+    p = search_string(data, "[How to use help]");
+    if (p == NULL)
+	return;
+
+    currentpoint = startpoint = p + 1;
     selected_item = NULL;
     help_callback (h, DLG_DRAW, 0);
 }

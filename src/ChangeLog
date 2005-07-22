@@ -1,6 +1,8 @@
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
 	* ext.c: Fixed a typo which has been noted by Arpad Biro.
+	* help.c: Fixed an invalid memory access, which has been noted
+	by Vitja Makarov.
 
 2005-07-20  Roland Illig  <roland.illig@gmx.de>
 
