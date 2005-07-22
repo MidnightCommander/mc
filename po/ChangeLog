@@ -1,5 +1,10 @@
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
+	* Makevars: change ?= to =, because the Solaris make(1) does not
+	know it.
+
+2005-07-22  Roland Illig  <roland.illig@gmx.de>
+
 	* statistics.pl: Added a Perl program to print the translation
 	status.
 	* de.po: Updated German translation.

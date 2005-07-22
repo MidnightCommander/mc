@@ -41,6 +41,6 @@ MSGID_BUGS_ADDRESS = mc-devel@gnome.org
 EXTRA_LOCALE_CATEGORIES =
 
 # Suppress location information by default
-MSGMERGE_FLAGS ?=	--no-location
+MSGMERGE_FLAGS =	--no-location
 MSGMERGE =		msgmerge ${MSGMERGE_FLAGS}
 MSGMERGE_UPDATE =	msgmerge --update ${MSGMERGE_FLAGS}
