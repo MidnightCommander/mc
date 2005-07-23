@@ -1,3 +1,8 @@
+2005-07-23  Roland Illig  <roland.illig@gmx.de>
+
+	* util.c (save_file_position): Only save the position if not
+	at the beginning of the file (1;0).
+
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
 	* charsets.c: Fixed wrong comparison of the result of iconv().

@@ -1394,7 +1394,9 @@ save_file_position (const char *filename, long line, long column)
     }
 
     /* put the new record */
-    fprintf (t, "%s %ld;%ld\n", filename, line, column);
+    if (line != 1 || column != 0) {
+	fprintf (t, "%s %ld;%ld\n", filename, line, column);
+    }
 
     /* copy records from the old file */
     f = fopen (fn, "r");
