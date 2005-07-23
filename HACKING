@@ -292,9 +292,6 @@ http://bugs.debian.org/mc
 http://bugzilla.redhat.com/bugzilla/buglist.cgi?component=mc
 	Bugs reported in Redhat Linux.
 
-http://savannah.gnu.org/patch/?group=mc
-	Patches reported in the GNU Savannah project.
-
 http://www.openbsd.org/cgi-bin/cvsweb/ports/misc/mc/patches/
 	The patches that are applied for the OpenBSD version of MC.
 
