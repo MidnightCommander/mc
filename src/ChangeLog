@@ -2,6 +2,8 @@
 
 	* util.c (save_file_position): Only save the position if not
 	at the beginning of the file (1;0).
+	* view.c: When saving and loading the file position, use the
+	full pathname instead of the one passed as argument.
 
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 

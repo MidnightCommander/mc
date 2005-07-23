@@ -1278,9 +1278,13 @@ static void
 view_done (WView *view)
 {
     if (mcview_remember_file_position && view->filename != NULL) {
+	char *canon_fname;
 	offset_type line, col;
+
+	canon_fname = vfs_canon (view->filename);
 	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
-	save_file_position (view->filename, line + 1, col);
+	save_file_position (canon_fname, line + 1, col);
+	g_free (canon_fname);
     }
     view_close_datasource (view);
     if (view->coord_cache) {
@@ -1414,9 +1418,12 @@ view_load (WView *view, const char *command, const char *file,
     assert (view->bytes_per_line != 0);
     if (mcview_remember_file_position && file != NULL && start_line == 0) {
 	long line, col;
+	char *canon_fname;
+
+	canon_fname = vfs_canon (file);
 	load_file_position (file, &line, &col);
+	g_free (canon_fname);
 	view_moveto (view, offset_doz(line, 1), col);
-	start_line = line;
     } else if (start_line > 0) {
 	view_moveto (view, start_line - 1, 0);
     }
