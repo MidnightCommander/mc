@@ -98,6 +98,8 @@ struct _syntax_marker {
 };
 
 int option_syntax_highlighting = 1;
+int option_auto_syntax = 1;
+char *option_syntax_type = NULL;
 
 #define syntax_g_free(x) do {g_free(x); (x)=0;} while (0)
 
@@ -968,10 +970,13 @@ void edit_free_syntax_rules (WEdit * edit)
 
 /* returns -1 on file error, line number on error in file syntax */
 static int
-edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
+edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		       const char *editor_file, const char *first_line,
 		       const char *type)
 {
+/* Using a low value for NENTRIES for testing purposes. NENTRIES should be set 
+   to a more sensible value (30 - 100) before the release of 4.6.2. (leonardjo) */
+#define NENTRIES 3
     FILE *f, *g = NULL;
     regex_t r;
     regmatch_t pmatch[1];
@@ -982,6 +987,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
     int count = 0;
     char *lib_file;
     int found = 0;
+    char **tmpnames = NULL;
 
     f = fopen (syntax_file, "r");
     if (!f){
@@ -1020,10 +1026,18 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 	    result = line;
 	    break;
 	}
-	if (names) {
+	if (pnames && *pnames) {
 /* 1: just collecting a list of names of rule sets */
-	    names[count++] = g_strdup (args[2]);
-	    names[count] = 0;
+/* Reallocate the list if required */
+	    if (count % NENTRIES == 0) {
+		if ((tmpnames = (char**) g_realloc (*pnames, (count + NENTRIES
+		    + 1) * sizeof (char*))) != NULL)
+		    *pnames = tmpnames;
+		else
+		    abort ();
+	    }
+	    (*pnames)[count++] = g_strdup (args[2]);
+	    (*pnames)[count] = NULL;
 	} else if (type) {
 /* 2: rule set was explicitly specified by the caller */
 	    if (!strcmp (type, args[2]))
@@ -1101,22 +1115,25 @@ static char *get_first_editor_line (WEdit * edit)
 }
 
 /*
- * Load rules into edit struct.  Either edit or names must be NULL.  If
+ * Load rules into edit struct.  Either edit or *pnames must be NULL.  If
  * edit is NULL, a list of types will be stored into names.  If type is
  * NULL, then the type will be selected according to the filename.
  */
 void
-edit_load_syntax (WEdit *edit, char **names, const char *type)
+edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 {
     int r;
     char *f = NULL;
+
+    if (option_auto_syntax)
+	type = NULL;
 
     edit_free_syntax_rules (edit);
 
     if (!use_colors)
 	return;
 
-    if (!option_syntax_highlighting)
+    if (!option_syntax_highlighting && (!pnames || !*pnames))
 	return;
 
     if (edit) {
@@ -1126,7 +1143,7 @@ edit_load_syntax (WEdit *edit, char **names, const char *type)
 	    return;
     }
     f = concat_dir_and_file (home_dir, SYNTAX_FILE);
-    r = edit_read_syntax_file (edit, names, f, edit ? edit->filename : 0,
+    r = edit_read_syntax_file (edit, pnames, f, edit ? edit->filename : 0,
 			       get_first_editor_line (edit), type);
     if (r == -1) {
 	edit_free_syntax_rules (edit);

@@ -280,6 +280,13 @@ menu_options (void)
 {
     edit_options_dialog ();
 }
+
+static void
+menu_syntax (void)
+{
+    edit_syntax_dialog ();
+}
+
 static void
 menu_user_menu_cmd (void)
 {
@@ -402,7 +409,8 @@ static menu_entry OptMenu[] =
 {
     {' ', N_("&General...  "), 'G', menu_options},
     {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
-    {' ', N_("learn &Keys..."), 'K', learn_keys}
+    {' ', N_("Learn &Keys..."), 'K', learn_keys},
+    {' ', N_("Syntax &Highlighting..."), 'H', menu_syntax}
 };
 
 #define OptMenuEmacs OptMenu

@@ -493,6 +493,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	   long line)
 {
     int to_free = 0;
+    option_auto_syntax = 1; /* Resetting to auto on every invokation */
 
     if (!edit) {
 #ifdef ENABLE_NLS

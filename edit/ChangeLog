@@ -1,3 +1,20 @@
+2005-07-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* choosesyntax.c: Create file. Menu option to override syntax
+	highlighting.
+	* Makefile.am: Add choosesyntax.c..
+	* edit.c (edit_init): Set option_auto_syntax to 1 on every invokation
+	of the 	editor.
+	* edit.h: Pass char*** to edit_load_syntax(). Add parameters for
+	syntax dialog and override.
+	* editmenu.c (menu_options): Add menu option to override syntax
+	highlighting.
+	* editoptions.c (edit_options_dialog): Pass option_syntax_type to
+	edit_load_syntax().
+	* syntax.c (edit_read_syntax_file): Dynamically allocate and fill
+	syntax list pnames.
+	* syntax.c (edit_load_syntax): Use char*** for syntax list.
+
 2005-05-21  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Add usermap.h to the sources.

@@ -221,7 +221,7 @@ edit_options_dialog (void)
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
-	edit_load_syntax (wedit, 0, 0);
+ 	edit_load_syntax (wedit, NULL, option_syntax_type);
     /* Load usermap if it's needed */
     edit_load_user_map (wedit);
 }

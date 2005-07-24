@@ -208,7 +208,7 @@ void edit_paste_from_history (WEdit *edit);
 
 void edit_set_filename (WEdit *edit, const char *name);
 
-void edit_load_syntax (WEdit * edit, char **names, const char *type);
+void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
 
@@ -226,6 +226,7 @@ int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
 void edit_insert_indent (WEdit *edit, int indent);
 void edit_options_dialog (void);
+void edit_syntax_dialog (void);
 void edit_mail_dialog (WEdit *edit);
 void format_paragraph (WEdit *edit, int force);
 
@@ -281,6 +282,8 @@ extern int option_save_position;
 extern int option_backup_ext_int;
 extern int option_max_undo;
 extern int option_syntax_highlighting;
+extern int option_auto_syntax;
+extern char *option_syntax_type;
 extern int editor_option_check_nl_at_eof;
 
 extern int option_edit_right_extreme;

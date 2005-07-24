@@ -1,8 +1,7 @@
 #ifndef MC_WTOOLS_H
 #define MC_WTOOLS_H
 
-struct Dlg_head;
-struct WListbox;
+#include "widget.h"
 
 typedef struct {
     struct Dlg_head *dlg;
