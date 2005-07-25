@@ -1,5 +1,9 @@
 2005-07-25  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/urar.in: Remove month translation and year windowing -
+	they are better handled by mc.  Use more robust date format.
+	Set locale to C.
+
 	* extfs/uzip.in: Preserve seconds.  Avoid month translation - it
 	only slows down processing.
 
