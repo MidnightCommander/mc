@@ -1,3 +1,7 @@
+2005-07-25  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/ualz.in: Fix compatibility with unalz 0.51.
+
 2005-07-22  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/ualz.in: Anticipate eventual posixification of the date
