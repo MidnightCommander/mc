@@ -22,7 +22,7 @@ set -e
 
 # Version to make patches against.
 # The source tree should be available in uncompressed form
-BASE_VERSION="4.6.0"
+BASE_VERSION="4.6.1"
 
 # Version of the snapshot
 MCVERSION=`date "+%Y-%m-%d-%H" --utc`
