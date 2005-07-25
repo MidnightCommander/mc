@@ -1,5 +1,8 @@
 2005-07-25  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/uzip.in: Preserve seconds.  Avoid month translation - it
+	only slows down processing.
+
 	* extfs/ualz.in: Fix compatibility with unalz 0.51.
 
 2005-07-22  Pavel Roskin  <proski@gnu.org>

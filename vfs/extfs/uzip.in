@@ -338,12 +338,11 @@ sub checked_print_file {
 # link file encountered.
 sub print_file {
 	my ($perms,$zipver,$platform,$realsize,$format,$cmpsize,$comp,$year,$mon,$day,$hours,$mins,$secs,$filename) = @_;
-	$mon = (qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/)[$mon-1];
 	if ($platform ne 'unx') {
 		$perms = ($filename =~ /\/$/ ? 'drwxr-xr-x' : '-rw-r--r--');
 	}
-	printf "%-10s    1 %-8d %-8d %8d %s %s %s %s:%s %s", $perms, $<,
-		$(, $realsize, $mon, $day, $year, $hours, $mins, $filename;
+	printf "%-10s    1 %-8d %-8d %8d %s/%s/%s %s:%s:%s %s", $perms, $<,
+		$(, $realsize, $mon, $day, $year, $hours, $mins, $secs, $filename;
 	if ($platform eq 'unx' && $perms =~ /^l/) {
 		my $linkdest = &get_link_destination($filename);
 		print " -> $linkdest";
