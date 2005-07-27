@@ -45,7 +45,7 @@ context default
     keyword whole brightred brightred
     keyword whole brightgreen brightgreen
     keyword whole yellow yellow
-    keyword whole brightblue brightblue
+    keyword whole brightblue brightblue black
     keyword whole brightmagenta brightmagenta
     keyword whole brightcyan brightcyan
     keyword whole white white

@@ -1,3 +1,8 @@
+2005-07-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* syntax.syntax: Keyword brightblue on black background.
+	* mail.syntax: Added keywords. Removed excessive quoting matches.
+
 2005-07-13  Roland Illig  <roland.illig@gmx.de>
 
 	* perl.syntax: Added a keyword to detect subroutine prototypes.
