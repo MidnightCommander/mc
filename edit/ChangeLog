@@ -1,3 +1,7 @@
+2005-07-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* choosesyntax.c: Add option to reload current syntax.
+
 2005-07-24  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* choosesyntax.c: Create file. Menu option to override syntax

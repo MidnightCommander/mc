@@ -24,7 +24,7 @@
 
 #define MAX_ENTRY_LEN 40
 #define LIST_LINES 14
-#define N_DFLT_ENTRIES 1
+#define N_DFLT_ENTRIES 2
 
 int
 exec_edit_syntax_dialog (const char **names) {
@@ -33,6 +33,7 @@ exec_edit_syntax_dialog (const char **names) {
     Listbox *syntaxlist = create_listbox_window (MAX_ENTRY_LEN, LIST_LINES,
 	N_(" Choose syntax highlighting "), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', N_("< Auto >"), NULL);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'R', N_("< Reload Current Syntax >"), NULL);
 
     for (i = 0; names[i]; i++) {
 	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
@@ -50,6 +51,7 @@ edit_syntax_dialog (void) {
     int old_auto_syntax, syntax;
     char **names;
     int i;
+    int force_reload = 0;
 
     names = (char**) g_malloc (sizeof (char*));
     names[0] = NULL;
@@ -69,11 +71,12 @@ edit_syntax_dialog (void) {
     old_auto_syntax = option_auto_syntax;
     old_syntax_type = g_strdup (option_syntax_type);
 
-    /* Using a switch as we might want to define more specific commands, f.e.
-       "Refill syntax list" (compare N_DFLT_ENTRIES). */
     switch (syntax) {
 	case 0: /* auto syntax */
 	    option_auto_syntax = 1;
+	    break;
+	case 1: /* reload current syntax */
+	    force_reload = 1;
 	    break;
 	default:
 	    option_auto_syntax = 0;
@@ -84,7 +87,8 @@ edit_syntax_dialog (void) {
     /* Load or unload syntax rules if the option has changed */
     if (option_auto_syntax && !old_auto_syntax || old_auto_syntax ||
 	old_syntax_type && option_syntax_type &&
-	(strcmp (old_syntax_type, option_syntax_type) != 0))
+	(strcmp (old_syntax_type, option_syntax_type) != 0) ||
+	force_reload)
 	edit_load_syntax (wedit, NULL, option_syntax_type);
 
     for (i = 0; names[i]; i++) {
