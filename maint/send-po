@@ -1,0 +1,36 @@
+#!/bin/sh
+
+# Generate mc.pot, upload it and *.po files to the FTP directory.
+
+set -e
+
+if ! test -d po; then
+	echo "Run this script in the top level source directory" >&2
+	exit 1
+fi
+
+DOMAIN=mc
+COPYRIGHT_HOLDER="Free Software Foundation, Inc."
+XGETTEXT_OPTIONS="--keyword=_ --keyword=N_ --keyword=gettext_ui"
+XGETTEXT=xgettext
+
+files=`find . -name '*.[ch]' | xargs $XGETTEXT $XGETTEXT_OPTIONS --output=-  | \
+	sed -ne '/^#:/{s/#://;s/:[0-9]*/\n/g;s/ //g;p;}' | sort -u | grep -v 'regex.c'`
+
+$XGETTEXT --default-domain=$DOMAIN --directory=. \
+	  --add-comments=TRANSLATORS: $XGETTEXT_OPTIONS \
+	  --copyright-holder="$COPYRIGHT_HOLDER" --output=po/mc.pot.new $files
+
+for file in po/*.po; do
+    cp -f $file $file.new
+done
+
+# Location of the snapshot directory
+SITE="login.ibiblio.org"
+DIR="/public/ftp/pub/Linux/utils/file/managers/mc/po"
+
+scp po/*.new "$SITE:$DIR/"
+
+ssh $SITE "cd $DIR; for file in *.new; do mv -f \$file \`basename \$file .new\`; done"
+
+rm -f po/*.new
