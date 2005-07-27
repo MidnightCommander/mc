@@ -1,4 +1,8 @@
-2005-07-24  Leonard den Ottolander <leonard den ottolander nl>
+2005-07-27  Adam Byrtek  <alpha@debian.org>
+
+	* utilunix.c (mc_tmpdir): Check that tmpdir is correctly initialized.
+
+2005-07-24  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* wtools.h: #include "widget.h" and remove redundant declarations
 	of Dlg_head and WListbox;

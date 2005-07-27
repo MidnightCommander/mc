@@ -240,8 +240,9 @@ mc_tmpdir (void)
     struct stat st;
     const char *error = NULL;
 
-    /* Check if already initialized */
-    if (tmpdir)
+    /* Check if already correctly initialized */
+    if (tmpdir && lstat (tmpdir, &st) == 0 && S_ISDIR (st.st_mode) &&
+	st.st_uid == getuid () && (st.st_mode & 0777) == 0700)
 	return tmpdir;
 
     sys_tmp = getenv ("TMPDIR");
