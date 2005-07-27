@@ -75,8 +75,8 @@ else
 fi
 
 # Generate po/POTFILES.in
-$XGETTEXT --keyword=_ --keyword=N_ --output=- `find . -name '*.[ch]'` | \
-	sed -ne '/^#:/{s/#://;s/:[0-9]*/\
+$XGETTEXT --keyword=_ --keyword=N_ --keyword=gettext_ui --output=- \
+	`find . -name '*.[ch]'` | sed -ne '/^#:/{s/#://;s/:[0-9]*/\
 /g;s/ //g;p;}' | \
 	grep -v '^$' | sort | uniq | grep -v 'regex.c' >po/POTFILES.in
 
