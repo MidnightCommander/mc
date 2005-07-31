@@ -1,3 +1,12 @@
+2005-07-31  Roland Illig  <roland.illig@gmx.de>
+
+	* de.po: Updated German translation.
+
+2005-07-31  Phan Vinh Thinh <teppi@vnlinux.org>
+
+	* vi.po: Added Vietnamese translation.
+	* LINGUAS: Likewise.
+
 2005-07-22  Roland Illig  <roland.illig@gmx.de>
 
 	* Makevars: change ?= to =, because the Solaris make(1) does not
