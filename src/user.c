@@ -658,7 +658,11 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	run_view = 0;
 	view (file_name, 0, &run_view, 0);
     } else {
-	shell_execute (file_name, EXECUTE_HIDE);
+	/* execute the command indirectly to allow execution even
+	 * on no-exec filesystems. */
+	char *cmd = g_strconcat("/bin/sh ", file_name, (char *)NULL);
+	shell_execute (cmd, EXECUTE_HIDE);
+	g_free(cmd);
     }
     unlink (file_name);
     g_free (file_name);
