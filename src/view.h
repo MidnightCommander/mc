@@ -20,7 +20,6 @@ int view (const char *command, const char *file, int *ret_move_direction,
 extern int mouse_move_pages_viewer;
 extern int max_dirt_limit;
 extern int global_wrap_mode;
-extern int have_fast_cpu;
 extern int default_hex_mode;
 extern int default_magic_flag;
 extern int default_nroff_flag;

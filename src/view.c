@@ -220,9 +220,6 @@ static enum {
 /* Scrolling is done in pages or line increments */
 int mouse_move_pages_viewer = 1;
 
-/* Used to compute the bottom first variable */
-int have_fast_cpu = 0;
-
 /* wrap mode default */
 int global_wrap_mode = 1;
 

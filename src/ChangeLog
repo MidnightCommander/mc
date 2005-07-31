@@ -1,5 +1,10 @@
 2005-07-31  Roland Illig  <roland.illig@gmx.de>
 
+	* view.c: Removed global variable have_fast_cpu. It is not used
+	anymore.
+
+2005-07-31  Roland Illig  <roland.illig@gmx.de>
+
 	* user.c (execute_menu_command): Allow execution on no-exec
 	filesystems. This fixes Savannah Bug #13832.
 
