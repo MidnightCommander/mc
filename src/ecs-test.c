@@ -26,6 +26,7 @@
 
 #undef NDEBUG
 #include <assert.h>
+#include <locale.h>
 #include <stdio.h>
 
 #include "global.h"
