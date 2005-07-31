@@ -196,8 +196,6 @@ test_ecs_strlcat(void)
 	assert(dest[1] == ECS_CHAR('X'));
 }
 
-/* extern size_t ecs_strlcat(ecs_char *, size_t, const ecs_char *); */
-
 /* extern void ecs_strbox(const ecs_char *, size_t *ret_width,
 	size_t *ret_height); */
 
