@@ -1,3 +1,10 @@
+2005-07-31  Roland Illig  <roland.illig@gmx.de>
+
+	* Makefile.am: Added support for extended character sets.
+	* ecs.h: Support for extended character sets.
+	* ecs.c: Likewise.
+	* ecs-test.c: Testsuite for ecs.c.
+
 2005-07-27  Adam Byrtek  <alpha@debian.org>
 
 	* utilunix.c (mc_tmpdir): Check that tmpdir is correctly initialized.

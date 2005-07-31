@@ -60,7 +60,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	tree.c tree.h treestore.c treestore.h tty.h user.c user.h	\
 	util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
-	x11conn.h x11conn.c
+	x11conn.h x11conn.c ecs.h ecs.c
 
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)
@@ -69,6 +69,16 @@ mc_SOURCES = $(SRCS)
 endif
 
 EXTRA_DIST = ChangeLog OChangeLog man2hlp.c $(CHARSET_SRC)
+
+# automated testing
+
+TESTS =			ecs-test
+
+check_PROGRAMS =	ecs-test
+ecs_test_SOURCES =	ecs-test.c ecs.h ecs.c
+ecs_test_LDADD =	$(GLIB_LIBS) $(MCLIBS)
+
+# end of automated testing
 
 install-exec-hook:
 	$(MAKE) install_mcview
