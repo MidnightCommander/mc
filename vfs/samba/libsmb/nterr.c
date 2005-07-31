@@ -5,7 +5,7 @@
 
 typedef struct
 {
-	char *nt_errstr;
+	const char *nt_errstr;
 	uint32 nt_errcode;
 
 } nt_err_code_struct;

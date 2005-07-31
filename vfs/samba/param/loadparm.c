@@ -1005,7 +1005,7 @@ convenience routine to grab string parameters into a rotating buffer,
 and run standard_sub_basic on them. The buffers can be written to by
 callers without affecting the source string.
 ********************************************************************/
-static char *lp_string(char *s)
+static char *lp_string(const char *s)
 {
   static char *bufs[10];
   static int buflen[10];
@@ -1290,7 +1290,7 @@ FN_LOCAL_CHAR(lp_magicchar,magic_char)
 
 
 /* local prototypes */
-static int    strwicmp( char *psz1, char *psz2 );
+static int    strwicmp( const char *psz1, const char *psz2 );
 static int    map_parameter( char *pszParmName);
 static BOOL   set_boolean( BOOL *pb, char *pszParmValue );
 static int    getservicebyname(char *pszServiceName, service *pserviceDest);
@@ -1462,7 +1462,7 @@ static BOOL lp_add_ipc(void)
 /***************************************************************************
 Do a case-insensitive, whitespace-ignoring string compare.
 ***************************************************************************/
-static int strwicmp(char *psz1, char *psz2)
+static int strwicmp(const char *psz1, const char *psz2)
 {
    /* if BOTH strings are NULL, return TRUE, if ONE is NULL return */
    /* appropriate value. */
@@ -1478,11 +1478,11 @@ static int strwicmp(char *psz1, char *psz2)
    /* sync the strings on first non-whitespace */
    while (1)
    {
-      while (isspace(*psz1))
+      while (isspace((unsigned char)*psz1))
          psz1++;
-      while (isspace(*psz2))
+      while (isspace((unsigned char)*psz2))
          psz2++;
-      if (toupper(*psz1) != toupper(*psz2) || *psz1 == '\0' || *psz2 == '\0')
+      if (toupper((unsigned char)*psz1) != toupper((unsigned char)*psz2) || *psz1 == '\0' || *psz2 == '\0')
          break;
       psz1++;
       psz2++;
