@@ -235,10 +235,10 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	 * into view
 	 */
 	if (written_nonspace) {
-	    view (cmd, filename, move_dir, start_line);
+	    mc_internal_viewer (cmd, filename, move_dir, start_line);
 	    unlink (file_name);
 	} else {
-	    view (0, filename, move_dir, start_line);
+	    mc_internal_viewer (NULL, filename, move_dir, start_line);
 	}
 	if (changed_hex_mode && !altered_hex_mode)
 	    default_hex_mode = def_hex_mode;

@@ -3209,7 +3209,8 @@ view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
 /* Real view only */
 int
-view (const char *command, const char *file, int *move_dir_p, int start_line)
+mc_internal_viewer (const char *command, const char *file,
+	int *move_dir_p, int start_line)
 {
     gboolean succeeded;
     WView *wview;

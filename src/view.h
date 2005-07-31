@@ -14,8 +14,8 @@ int view_load (WView *view, const char *_command, const char *_file,
  * point to a variable that will receive the direction in which the user
  * wants to move (-1 = previous file, 1 = next file, 0 = do nothing).
  */
-int view (const char *command, const char *file, int *ret_move_direction,
-	  int start_line);
+int mc_internal_viewer (const char *command, const char *file,
+	int *ret_move_direction, int start_line);
 
 extern int mouse_move_pages_viewer;
 extern int max_dirt_limit;

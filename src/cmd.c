@@ -45,7 +45,7 @@
 #include "cons.saver.h"		/* console_flag */
 #include "tty.h"		/* LINES */
 #include "dialog.h"		/* Widget */
-#include "view.h"		/* view() */
+#include "view.h"		/* mc_internal_viewer() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
 #include "key.h"		/* application_keypad_mode() */
@@ -102,7 +102,7 @@ view_file_at_line (const char *filename, int plain_view, int internal,
 	default_hex_mode = 0;
 	default_nroff_flag = 0;
 	default_magic_flag = 0;
-	view (0, filename, &move_dir, start_line);
+	mc_internal_viewer (NULL, filename, &move_dir, start_line);
 	if (changed_hex_mode && !altered_hex_mode)
 	    default_hex_mode = 1;
 	if (changed_nroff_flag && !altered_nroff_flag)
@@ -122,7 +122,7 @@ view_file_at_line (const char *filename, int plain_view, int internal,
 	    strcpy (view_entry, "View");
 
 	if (regex_command (filename, view_entry, &move_dir) == 0) {
-	    view (0, filename, &move_dir, start_line);
+	    mc_internal_viewer (NULL, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
     } else {
@@ -254,7 +254,7 @@ filtered_view_cmd (void)
     if (!command)
 	return;
 
-    view (command, "", 0, 0);
+    mc_internal_viewer (command, "", NULL, 0);
 
     g_free (command);
 }

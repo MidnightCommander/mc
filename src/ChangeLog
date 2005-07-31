@@ -2,6 +2,8 @@
 
 	* view.c: Removed global variable have_fast_cpu. It is not used
 	anymore.
+	* view.h: Renamed view to mc_internal_viewer. This avoids
+	hundreds of shadowed names in view.c.
 
 2005-07-31  Roland Illig  <roland.illig@gmx.de>
 
