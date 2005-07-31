@@ -74,7 +74,7 @@ int  Debug1( char *, ... )
      __attribute__ ((format (printf, 1, 2)))
 #endif
 ;
-BOOL dbgtext( char *, ... )
+BOOL dbgtext( const char *, ... )
 #ifdef __GNUC__
      __attribute__ ((format (printf, 1, 2)))
 #endif
@@ -865,12 +865,12 @@ typedef enum
 
 struct enum_list {
 	int value;
-	char *name;
+	const char *name;
 };
 
 struct parm_struct
 {
-	char *label;
+	const char *label;
 	parm_type type;
 	parm_class class;
 	void *ptr;
@@ -1341,7 +1341,7 @@ struct bitmap {
 #define ERRCMD 0xFF  /* Command was not in the "SMB" format. */
 
 #ifdef HAVE_STDARG_H
-int slprintf(char *str, int n, char *format, ...)
+int slprintf(char *str, int n, const char *format, ...)
 #ifdef __GNUC__
      __attribute__ ((format (printf, 3, 4)))
 #endif

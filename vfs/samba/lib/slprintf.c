@@ -27,7 +27,7 @@ extern int DEBUGLEVEL;
 /* this is like vsnprintf but the 'n' limit does not include
    the terminating null. So if you have a 1024 byte buffer then
    pass 1023 for n */
-int vslprintf(char *str, int n, char *format, va_list ap)
+int vslprintf(char *str, int n, const char *format, va_list ap)
 {
 	int ret = vsnprintf(str, n, format, ap);
 	if (ret > n || ret < 0) {
@@ -39,7 +39,7 @@ int vslprintf(char *str, int n, char *format, va_list ap)
 }
 
 #ifdef HAVE_STDARG_H
- int slprintf(char *str, int n, char *format, ...)
+ int slprintf(char *str, int n, const char *format, ...)
 {
 #else
  int slprintf(va_alist)

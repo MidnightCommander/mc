@@ -1,3 +1,8 @@
+2005-07-31  Roland Illig  <roland.illig@gmx.de>
+
+	* samba: Added some const qualifiers to reduce the number of gcc
+	warnings.
+
 2005-07-25  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/urar.in: Remove month translation and year windowing -

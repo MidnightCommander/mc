@@ -50,7 +50,7 @@ int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
 
 /* The following definitions come from lib/slprintf.c  */
 
-int vslprintf(char *str, int n, char *format, va_list ap);
+int vslprintf(char *str, int n, const char *format, va_list ap);
 
 /* The following definitions come from lib/system.c  */
 

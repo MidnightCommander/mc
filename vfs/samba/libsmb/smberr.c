@@ -29,9 +29,9 @@ extern int DEBUGLEVEL;
 
 typedef struct
 {
-  char *name;
+  const char *name;
   int code;
-  char *message;
+  const char *message;
 } err_code_struct;
 
 /* Dos Error Messages */
@@ -129,7 +129,7 @@ static err_code_struct const hard_msgs[] = {
 struct
 {
   int code;
-  char *class;
+  const char *class;
   err_code_struct const *err_msgs;
 } const err_classes [] = { 
   {0,"SUCCESS",NULL},

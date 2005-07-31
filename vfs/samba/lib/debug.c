@@ -347,7 +347,7 @@ BOOL dbghdr( int level, const char *file, const char *func, int line )
  * ************************************************************************** **
  */
 #ifdef HAVE_STDARG_H
- BOOL dbgtext( char *format_str, ... )
+ BOOL dbgtext( const char *format_str, ... )
   {
   va_list ap;
   pstring msgbuf;
