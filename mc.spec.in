@@ -18,7 +18,7 @@ Name:      mc
 Version:   %rpmver
 Release:   %rel
 Epoch:     1
-Copyright: GPL
+License:   GPL/LGPL
 Group:     Applications/File
 Source0:   ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/mc-%{ver}.tar.gz
 URL:       http://www.ibiblio.org/mc/
@@ -100,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/syntax
 
 %changelog
+* Tue Aug 02 2005 Pavel Roskin <proski@gnu.org>
+- Replace obsolete "Copyright" with "License".
+
 * Thu Mar 31 2005 Pavel Roskin <proski@gnu.org>
 - Comment out build dependencies - they are too distribution specific.
 
