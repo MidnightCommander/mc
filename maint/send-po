@@ -13,6 +13,7 @@ DOMAIN=mc
 COPYRIGHT_HOLDER="Free Software Foundation, Inc."
 XGETTEXT_OPTIONS="--keyword=_ --keyword=N_ --keyword=gettext_ui"
 XGETTEXT=xgettext
+MSGMERGE=msgmerge
 
 files=`find . -name '*.[ch]' | xargs $XGETTEXT $XGETTEXT_OPTIONS --output=-  | \
 	sed -ne '/^#:/{s/#://;s/:[0-9]*/\n/g;s/ //g;p;}' | sort -u | grep -v 'regex.c'`
@@ -22,7 +23,7 @@ $XGETTEXT --default-domain=$DOMAIN --directory=. \
 	  --copyright-holder="$COPYRIGHT_HOLDER" --output=po/mc.pot.new $files
 
 for file in po/*.po; do
-    cp -f $file $file.new
+    $MSGMERGE --output=$file.new $file po/mc.pot.new
 done
 
 # Location of the snapshot directory
