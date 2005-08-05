@@ -160,9 +160,7 @@ static void menubar_draw (WMenu *menubar)
     attrset (SELECTED_COLOR);
     widget_move (&menubar->widget, 0, 0);
 
-    /* ncurses bug: it should work with hline but it does not */
-    for (i =  menubar->widget.cols; i; i--)
-	addch (' ');
+    hline (' ', menubar->widget.cols);
 
     attrset (SELECTED_COLOR);
     /* Now each one of the entries */

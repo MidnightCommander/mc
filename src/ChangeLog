@@ -1,3 +1,8 @@
+2005-08-05  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* menu.c (menubar_draw): Use hline() instead of addch() to clear
+	the menubar widget area.
+
 2005-07-31  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Removed global variable have_fast_cpu. It is not used
