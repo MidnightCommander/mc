@@ -25,6 +25,7 @@
 #include <sys/types.h>
 
 #include "global.h"
+#include "ecs.h"
 
 #ifdef USE_VFS
 static const char *const vfs_supported[] = {
@@ -145,6 +146,7 @@ show_version (int verbose)
     TYPE_INFO(long);
     TYPE_INFO(void *);
     TYPE_INFO(off_t);
+    TYPE_INFO(ecs_char);
 #undef TYPE_INFO
     (void)printf("\n");
 }
