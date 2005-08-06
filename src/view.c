@@ -376,13 +376,15 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     ssize_t nread;
     byte *p;
     size_t bytesfree;
+    gboolean short_read;
 
     assert (view->growbuf_in_use);
 
     if (view->growbuf_finished)
 	return;
 
-    while (view_growbuf_filesize (view) < ofs) {
+    short_read = FALSE;
+    while (view_growbuf_filesize (view) < ofs || short_read) {
 	if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
 	    /* Append a new block to the growing buffer */
 	    byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
@@ -421,6 +423,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 		return;
 	    }
 	}
+	short_read = (nread < bytesfree);
 	view->growbuf_lastindex += nread;
     }
 }

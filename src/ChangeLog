@@ -2,6 +2,9 @@
 
 	* textconf.c: Include ecs_char in the list of type
 	characteristics that are printed.
+	* view.c (view_growbuf_read_until): On short reads, try to read
+	one more byte to check whether we're already at the end of file.
+	This makes the ">=" disappear earlier.
 
 2005-08-05  Pavel Tsekov  <ptsekov@gmx.net>
 
