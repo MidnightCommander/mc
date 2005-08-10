@@ -85,9 +85,9 @@ edit_syntax_dialog (void) {
     }
 
     /* Load or unload syntax rules if the option has changed */
-    if (option_auto_syntax && !old_auto_syntax || old_auto_syntax ||
-	old_syntax_type && option_syntax_type &&
-	(strcmp (old_syntax_type, option_syntax_type) != 0) ||
+    if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+	(old_syntax_type && option_syntax_type &&
+	(strcmp (old_syntax_type, option_syntax_type) != 0)) ||
 	force_reload)
 	edit_load_syntax (wedit, NULL, option_syntax_type);
 

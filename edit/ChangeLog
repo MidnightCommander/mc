@@ -1,3 +1,9 @@
+2005-08-10  Pavel Roskin  <proski@gnu.org>
+
+	* choosesyntax.c (edit_syntax_dialog): Add parentheses as
+	suggested by gcc.
+	* editkeys.c: Use braces in the keymap initializers.
+
 2005-07-27  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* choosesyntax.c: Add option to reload current syntax.
