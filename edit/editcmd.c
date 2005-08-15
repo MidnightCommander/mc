@@ -2811,7 +2811,8 @@ edit_completion_dialog (WEdit * edit, int max_len, int word_len,
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_compl; i++)
-	listbox_add_item (compl_list, 0, 0, (char *) compl[i].text, NULL);
+	listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0,
+	    (char *) compl[i].text, NULL);
 
     /* pop up the dialog */
     run_dlg (compl_dlg);

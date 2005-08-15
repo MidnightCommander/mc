@@ -2,6 +2,7 @@
 
 	* edit-widget.h: Changed bit fields of length 1 from signed to
 	unsigned.
+	* editcmd.c (edit_completion_dialog): Code cleanup.
 
 2005-08-10  Pavel Roskin  <proski@gnu.org>
 
