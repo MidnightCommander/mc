@@ -1751,7 +1751,7 @@ static keyword_t ftpfs_netrc_next (void)
     }
     *p = 0;
     if (!*buffer)
-	return 0;
+	return NETRC_NONE;
 
     i = NETRC_DEFAULT;
     while (keywords[i - 1]) {
