@@ -3,6 +3,7 @@
 	* edit-widget.h: Changed bit fields of length 1 from signed to
 	unsigned.
 	* editcmd.c (edit_completion_dialog): Code cleanup.
+	* editdraw.c (render_edit_text): Removed unused variable.
 
 2005-08-10  Pavel Roskin  <proski@gnu.org>
 

@@ -369,7 +369,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 {
     long row = 0, curs_row;
     static int prev_curs_row = 0;
-    static int prev_start_col = 0;
     static long prev_curs = 0;
     static long prev_start = -1;
 
@@ -467,7 +466,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     prev_curs_row = edit->curs_row;
     prev_curs = edit->curs1;
-    prev_start_col = edit->start_col;
+
   exit_render:
     edit->screen_modified = 0;
     prev_start = edit->start_line;
