@@ -3,6 +3,8 @@
 
 #ifdef USE_VFS
 
+#include <stddef.h>
+
 typedef void *vfsid;
 struct vfs_stamping;
 
@@ -79,8 +81,7 @@ struct vfs_class {
  */
 union vfs_dirent {
     struct dirent dent;
-    char _extra_buffer[((int) &((struct dirent *) 0)->d_name) +
-		       MC_MAXPATHLEN + 1];
+    char _extra_buffer[offsetof(struct dirent, d_name) + MC_MAXPATHLEN + 1];
 };
 
 /* Register a file system class */

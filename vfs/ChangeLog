@@ -1,3 +1,8 @@
+2005-08-15  Roland Illig  <roland.illig@gmx.de>
+
+	* vfs-impl.h (union vfs_dirent): Using the offsetof macro
+	instead of null pointer arithmethics.
+
 2005-07-31  Roland Illig  <roland.illig@gmx.de>
 
 	* samba: Added some const qualifiers to reduce the number of gcc
