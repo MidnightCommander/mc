@@ -58,13 +58,13 @@ struct WEdit {
     long curs_row;		/* row position of cursor on the screen */
     long curs_col;		/* column position on screen */
     int force;			/* how much of the screen do we redraw? */
-    int overwrite:1;		/* Overwrite on type mode (as opposed to insert) */
-    int modified:1;		/* File has been modified and needs saving */
-    int loading_done:1;		/* File has been loaded into the editor */
-    int locked:1;		/* We hold lock on current file */
-    int screen_modified:1;	/* File has been changed since the last screen draw */
-    int delete_file:1;		/* New file, needs to be deleted unless modified */
-    int highlight:1;		/* There is a selected block */
+    unsigned int overwrite:1;	/* Overwrite on type mode (as opposed to insert) */
+    unsigned int modified:1;	/* File has been modified and needs saving */
+    unsigned int loading_done:1;/* File has been loaded into the editor */
+    unsigned int locked:1;	/* We hold lock on current file */
+    unsigned int screen_modified:1; /* File has been changed since the last screen draw */
+    unsigned int delete_file:1;	/* New file, needs to be deleted unless modified */
+    unsigned int highlight:1;	/* There is a selected block */
     long prev_col;		/* recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
     long curs_line;		/* line number of the cursor. */
@@ -91,7 +91,7 @@ struct WEdit {
     unsigned long stack_size;
     unsigned long stack_size_mask;
     unsigned long stack_bottom;
-    int stack_disable:1;	/* If not 0, don't save events in the undo stack */
+    unsigned int stack_disable:1; /* If not 0, don't save events in the undo stack */
 
     struct stat stat1;		/* Result of mc_fstat() on the file */
 
