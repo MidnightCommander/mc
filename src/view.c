@@ -415,7 +415,9 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	    }
 	} else {
 	    assert (view->datasource == DS_VFS_PIPE);
-	    nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
+	    do {
+		nread = mc_read (view->ds_vfs_pipe, p, bytesfree);
+	    } while (nread == -1 && errno == EINTR);
 	    if (nread == -1 || nread == 0) {
 		view->growbuf_finished = TRUE;
 		(void) mc_close (view->ds_vfs_pipe);

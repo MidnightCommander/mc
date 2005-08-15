@@ -1,4 +1,9 @@
-2005-08-15  Jindrich Makovicka <makovick@kmlinux.fjfi.cvut.cz>
+2005-08-15  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_growbuf_read_until): When using mc_read, recover
+	from interrupted system calls.
+
+2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* view.c: Made the search function interruptible.
 
