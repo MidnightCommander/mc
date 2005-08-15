@@ -99,8 +99,8 @@ typedef struct Dlg_head {
     int cols, lines;		/* Width and height of the window */
 
     /* Internal flags */
-    int running:1;		/* The dialog is currently active */
-    int fullscreen:1;		/* Parents dialogs don't need refresh */
+    unsigned int running:1;	/* The dialog is currently active */
+    unsigned int fullscreen:1;	/* Parents dialogs don't need refresh */
     int mouse_status;		/* For the autorepeat status of the mouse */
 
     /* Internal variables */

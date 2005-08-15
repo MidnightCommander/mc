@@ -9,6 +9,8 @@
 	current byte is '\r'.
 	* view.c (view_ccache_dump): Extended the output by the offset
 	of the next line.
+	* dialog.h (struct Dlg_head): Changed the bit fields of length one
+	from signed int to unsigned int.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
