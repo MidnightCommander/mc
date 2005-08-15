@@ -4,6 +4,7 @@
 	unsigned.
 	* editcmd.c (edit_completion_dialog): Code cleanup.
 	* editdraw.c (render_edit_text): Removed unused variables.
+	* syntax.c (edit_read_syntax_file): Likewise.
 
 2005-08-10  Pavel Roskin  <proski@gnu.org>
 

@@ -982,7 +982,6 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     regmatch_t pmatch[1];
     char *args[1024], *l = 0;
     int line = 0;
-    int argc;
     int result = 0;
     int count = 0;
     char *lib_file;
@@ -1003,7 +1002,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	syntax_g_free (l);
 	if (!read_one_line (&l, f))
 	    break;
-	argc = get_args (l, args, 1023);	/* Final NULL */
+	(void)get_args (l, args, 1023);	/* Final NULL */
 	if (!args[0])
 	    continue;
 /* Looking for `include ...` lines before first `file ...` ones */
