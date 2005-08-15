@@ -2225,8 +2225,6 @@ search (WView *view, char *text,
     offset_type forward_line_start;
     offset_type reverse_line_start;
     offset_type t;
-    /* Clear interrupt status */
-    got_interrupt ();
 
     if (verbose) {
 	d = create_message (D_NORMAL, _("Search"), _("Searching %s"), text);
@@ -2247,6 +2245,7 @@ search (WView *view, char *text,
     search_update_steps (view);
     view->update_activate = 0;
 
+    enable_interrupt_key ();
     for (;; g_free (s)) {
 	if (p >= view->update_activate) {
 	    view->update_activate += view->update_steps;
@@ -2258,10 +2257,8 @@ search (WView *view, char *text,
 		break;
 	}
 	forward_line_start = p;
-	disable_interrupt_key ();
 	s = get_line_at (view, &p, &t);
 	reverse_line_start = p;
-	enable_interrupt_key ();
 
 	if (!s)
 	    break;
@@ -2321,8 +2318,6 @@ block_search (WView *view, const char *buffer, int len)
     char b;
     offset_type e;
 
-    /* clear interrupt status */
-    got_interrupt ();
     enable_interrupt_key ();
     if (direction == 1)
 	e = view->search_start + ((view->found_len) ? 1 : 0);

@@ -1,3 +1,7 @@
+2005-08-15  Jindrich Makovicka <makovick@kmlinux.fjfi.cvut.cz>
+
+	* view.c: Made the search function interruptible.
+
 2005-08-06  Roland Illig  <roland.illig@gmx.de>
 
 	* textconf.c: Include ecs_char in the list of type
