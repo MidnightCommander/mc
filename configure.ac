@@ -175,9 +175,16 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS([atoll cfgetospeed getsid initgroups memcpy memmove memset \
-		putenv setreuid setuid statfs strerror strftime \
-		sysconf tcgetattr tcsetattr truncate getgrouplist])
+AC_CHECK_FUNCS([\
+	atoll \
+	cfgetospeed \
+	getsid \
+	initgroups \
+	memcpy memmove memset \
+	putenv \
+	setreuid setuid statfs strerror strftime sysconf \
+	tcgetattr tcsetattr truncate \
+])
 
 dnl S-Lang needs all four functions to be defined to use POSIX signal API
 AC_CHECK_FUNCS([sigaction sigemptyset sigprocmask sigaddset], , [slang_signals=no])

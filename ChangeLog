@@ -1,3 +1,8 @@
+2005-08-15  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: The function getgrouplist() is not used anymore,
+	so there is no need to check for it.
+
 2005-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Restore support for opening 7-zip archives.
