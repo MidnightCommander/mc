@@ -98,7 +98,7 @@ static void update_ownership (void)
 }
 
 
-static int inc_flag_pos (int f_pos)
+static cb_ret_t inc_flag_pos (int f_pos)
 {
     if (flag_pos == 10) {
 	flag_pos = 0;
@@ -264,8 +264,10 @@ do_enter_key (Dlg_head * h, int f_pos)
 	if (is_owner) {
 	    /* get and put user names in the listbox */
 	    setpwent ();
-	    while ((chl_pass = getpwent ()))
-		listbox_add_item (chl_list, 0, 0, chl_pass->pw_name, NULL);
+	    while ((chl_pass = getpwent ())) {
+		listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0,
+		    chl_pass->pw_name, NULL);
+	    }
 	    endpwent ();
 	    fe = listbox_search_text (chl_list,
 				      get_owner (sf_stat->st_uid));
@@ -273,7 +275,8 @@ do_enter_key (Dlg_head * h, int f_pos)
 	    /* get and put group names in the listbox */
 	    setgrent ();
 	    while ((chl_grp = getgrent ())) {
-		listbox_add_item (chl_list, 0, 0, chl_grp->gr_name, NULL);
+		listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0,
+		    chl_grp->gr_name, NULL);
 	    }
 	    endgrent ();
 	    fe = listbox_search_text (chl_list,
