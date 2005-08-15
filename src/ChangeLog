@@ -11,6 +11,7 @@
 	of the next line.
 	* dialog.h (struct Dlg_head): Changed the bit fields of length one
 	from signed int to unsigned int.
+	* wtools.h: Replaced 0 with LISTBOX_APPEND_AT_END.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
