@@ -178,8 +178,8 @@ dnl
 AC_CHECK_FUNCS([\
 	atoll \
 	cfgetospeed \
-	getsid \
-	initgroups \
+	getegid geteuid getgid getsid getuid \
+	initgroups isascii \
 	memcpy memmove memset \
 	putenv \
 	setreuid setuid statfs strerror strftime sysconf \
