@@ -258,7 +258,8 @@ do_enter_key (Dlg_head * h, int f_pos)
 	/* get new listboxes */
 	chl_list = listbox_new (1, 1, 15, 11, NULL);
 
-	listbox_add_item (chl_list, 0, 0, "<Unknown>", NULL);
+	listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0,
+	    "<Unknown>", NULL);
 
 	if (is_owner) {
 	    /* get and put user names in the listbox */
