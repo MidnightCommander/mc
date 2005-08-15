@@ -4,6 +4,11 @@
 	from interrupted system calls.
 	* view.c (toggle_hex_mode): Now the hex cursor is always visible
 	after switching to hex mode.
+	* view.c (view_ccache_lookup): Rewrote the calculation of the
+	cache entry. Also don't put entries in the cache when the
+	current byte is '\r'.
+	* view.c (view_ccache_dump): Extended the output by the offset
+	of the next line.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 

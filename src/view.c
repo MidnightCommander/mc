@@ -735,6 +735,9 @@ coord_cache_entry_less (const struct coord_cache_entry *a,
 }
 
 #ifdef MC_ENABLE_DEBUGGING_CODE
+static void view_coord_to_offset (WView *, offset_type *, offset_type, offset_type);
+static void view_offset_to_coord (WView *, offset_type *, offset_type *, offset_type);
+
 static void
 view_ccache_dump (WView *view)
 {
@@ -751,6 +754,7 @@ view_ccache_dump (WView *view)
     f = fopen("mcview-ccache.out", "w");
     if (f == NULL)
 	return;
+    (void)setvbuf(f, NULL, _IONBF, 0);
 
     /* cache entries */
     for (i = 0; i < view->coord_cache->len; i++) {
@@ -764,7 +768,6 @@ view_ccache_dump (WView *view)
 	    cache[i].cc_column, cache[i].cc_nroff_column);
     }
     (void)fprintf (f, "\n");
-    (void)fflush (f);
 
     /* offset -> line/column translation */
     for (offset = 0; offset < filesize; offset++) {
@@ -774,12 +777,14 @@ view_ccache_dump (WView *view)
 	    "line %8"OFFSETTYPE_PRId"  "
 	    "column %8"OFFSETTYPE_PRId"\n",
 	    offset, line, column);
-	(void)fflush (f);
     }
 
     /* line/column -> offset translation */
     for (line = 0; TRUE; line++) {
 	view_coord_to_offset (view, &nextline_offset, line + 1, 0);
+	(void)fprintf (f, "nextline_offset %8"OFFSETTYPE_PRId"\n",
+	    nextline_offset);
+
 	for (column = 0; TRUE; column++) {
 	    view_coord_to_offset (view, &offset, line, column);
 	    if (offset >= nextline_offset)
@@ -787,7 +792,6 @@ view_ccache_dump (WView *view)
 
 	    (void)fprintf (f, "line %8"OFFSETTYPE_PRId"  column %8"OFFSETTYPE_PRId"  offset %8"OFFSETTYPE_PRId"\n",
 		line, column, offset);
-	    (void)fflush (f);
 	}
 
 	if (nextline_offset >= filesize - 1)
@@ -852,7 +856,7 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 	enum ccache_type lookup_what)
 {
     guint i;
-    struct coord_cache_entry *cache, current, entry;
+    struct coord_cache_entry *cache, current, next, entry;
     enum ccache_type sorter;
     offset_type limit;
     enum {
@@ -886,15 +890,11 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 
     entry = current;
     nroff_state = NROFF_START;
-    for (; current.cc_offset < limit; current.cc_offset++) {
-	offset_type saved_offset = current.cc_offset;
+    for (; current.cc_offset < limit; current = next) {
 	int c;
 
 	if ((c = get_byte (view, current.cc_offset)) == -1)
 	    break;
-
-	if (!view->text_nroff_mode || nroff_state == NROFF_START)
-	    entry = current;
 
 	if (!coord_cache_entry_less (&current, coord, sorter, view->text_nroff_mode)) {
 	    if (lookup_what == CCACHE_OFFSET
@@ -906,30 +906,38 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 	    }
 	}
 
+	/* Provide useful default values for ''next'' */
+	next.cc_offset = current.cc_offset + 1;
+	next.cc_line = current.cc_line;
+	next.cc_column = current.cc_column + 1;
+	next.cc_nroff_column = current.cc_nroff_column + 1;
+
+	/* and override some of them as necessary. */
 	if (c == '\r') {
-	    /* This character is never displayed */
+	    next.cc_column = current.cc_column;
+	    next.cc_nroff_column = current.cc_nroff_column;
+
 	} else if (nroff_state == NROFF_BACKSPACE) {
-	    current.cc_column++;
-	    current.cc_nroff_column--;
+	    next.cc_nroff_column = current.cc_nroff_column - 1;
+
 	} else if (c == '\t') {
-	    current.cc_column = offset_rounddown (current.cc_column, 8) + 8;
-	    current.cc_nroff_column =
+	    next.cc_column = offset_rounddown (current.cc_column, 8) + 8;
+	    next.cc_nroff_column =
 		offset_rounddown (current.cc_nroff_column, 8) + 8;
+
 	} else if (c == '\n') {
-	    current.cc_line++;
-	    current.cc_column = 0;
-	    current.cc_nroff_column = 0;
+	    next.cc_line = current.cc_line + 1;
+	    next.cc_column = 0;
+	    next.cc_nroff_column = 0;
+
 	} else {
-	    current.cc_column++;
-	    current.cc_nroff_column++;
-	    if (nroff_state == NROFF_START)
-		entry = current;
+	    /* Use all default values from above */
 	}
 
 	switch (nroff_state) {
 	    case NROFF_START:
 	    case NROFF_CONTINUATION:
-		if (is_nroff_sequence (view, saved_offset))
+		if (is_nroff_sequence (view, current.cc_offset))
 		    nroff_state = NROFF_BACKSPACE;
 		else
 		    nroff_state = NROFF_START;
@@ -938,6 +946,9 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 		nroff_state = NROFF_CONTINUATION;
 		break;
 	}
+
+	if (nroff_state == NROFF_START && c != '\r')
+	    entry = next;
     }
 
     if (i + 1 == view->coord_cache->len && entry.cc_offset != cache[i].cc_offset) {
