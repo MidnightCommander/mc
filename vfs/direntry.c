@@ -1171,7 +1171,7 @@ int
 vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
 {
     FILE *logfile = MEDATA->logfile;
-    int i, status;
+    int i;
     char c;
 
     for (i = 0; i < buf_len - 1; i++, buf++){
@@ -1189,7 +1189,7 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
 
     /* Line is too long - terminate buffer and discard the rest of line */
     *buf = 0;
-    while ((status = read (sock, &c, sizeof (c))) > 0){
+    while (read (sock, &c, sizeof (c)) > 0) {
 	if (logfile){
 	    fwrite (&c, 1, 1, logfile);
 	    fflush (logfile);

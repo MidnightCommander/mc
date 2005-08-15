@@ -2,6 +2,8 @@
 
 	* vfs-impl.h (union vfs_dirent): Using the offsetof macro
 	instead of null pointer arithmethics.
+	* ftpfs.c: Code cleanup.
+	* direntry.c: Removed an unused variable.
 
 2005-07-31  Roland Illig  <roland.illig@gmx.de>
 
