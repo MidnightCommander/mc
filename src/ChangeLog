@@ -18,6 +18,7 @@
 	* complete.c: Don't mix enums with ints.
 	* tree.c: Likewise.
 	* screen.c (use_display_format): Removed unused variable.
+	* widget.c: Don't mix enums with ints.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 

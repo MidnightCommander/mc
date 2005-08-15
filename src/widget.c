@@ -1516,10 +1516,10 @@ port_region_marked_for_delete (WInput *in)
 cb_ret_t
 handle_char (WInput *in, int c_code)
 {
+    cb_ret_t v;
     int    i;
-    int    v;
 
-    v = 0;
+    v = MSG_NOT_HANDLED;
 
     if (quote){
     	free_completions (in);
@@ -1534,7 +1534,7 @@ handle_char (WInput *in, int c_code)
 	    if (input_map [i].fn != complete)
 	    	free_completions (in);
 	    (*input_map [i].fn)(in);
-	    v = 1;
+	    v = MSG_HANDLED;
 	    break;
 	}
     }
@@ -1580,7 +1580,7 @@ cb_ret_t
 input_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WInput *in = (WInput *) w;
-    int v;
+    cb_ret_t v;
 
     switch (msg) {
     case WIDGET_KEY:
@@ -2004,13 +2004,13 @@ listbox_key (WListbox *l, int key)
     case XCTRL('v'):
 	for (i = 0; i < l->height-1; i++)
 	    j |= listbox_fwd (l);
-	return j > 0;
+	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
 	
     case KEY_PPAGE:
     case ALT('v'):
 	for (i = 0; i < l->height-1; i++)
 	    j |= listbox_back (l);
-	return j > 0;
+	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
     return MSG_NOT_HANDLED;
 }
@@ -2033,7 +2033,7 @@ static cb_ret_t
 listbox_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WListbox *l = (WListbox *) w;
-    int ret_code;
+    cb_ret_t ret_code;
     WLEntry *e;
     Dlg_head *h = l->widget.parent;
 
