@@ -370,7 +370,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     long row = 0, curs_row;
     static int prev_curs_row = 0;
     static long prev_curs = 0;
-    static long prev_start = -1;
 
     int force = edit->force;
     long b;
@@ -469,7 +468,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
   exit_render:
     edit->screen_modified = 0;
-    prev_start = edit->start_line;
     return;
 }
 
