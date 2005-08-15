@@ -17,6 +17,7 @@
 	* complete.c (fetch_hosts): Removed unused variable.
 	* complete.c: Don't mix enums with ints.
 	* tree.c: Likewise.
+	* screen.c (use_display_format): Removed unused variable.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 

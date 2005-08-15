@@ -1329,7 +1329,6 @@ use_display_format (WPanel *panel, const char *format, char **error, int isstatu
     int  expand_top = 0;               /* Max used element in expand */
     int  usable_columns;               /* Usable columns in the panel */
     int  total_cols = 0;
-    const char *expand_list [MAX_EXPAND];    /* Expand at most 4 fields. */
     int  i;
     format_e *darr, *home;
 
@@ -1348,16 +1347,11 @@ use_display_format (WPanel *panel, const char *format, char **error, int isstatu
 					      ? 1
 					      : (panel->split+1))) - (!isstatus && panel->split);
 
-    /* Clean expand list */
-    for (i = 0; i < MAX_EXPAND; i++)
-        expand_list [i] = '\0';
-
-
     /* Look for the expandable fields and set field_len based on the requested field len */
     for (darr = home; darr && expand_top < MAX_EXPAND; darr = darr->next){
 	darr->field_len = darr->requested_field_len;
 	if (darr->expand)
-	    expand_list [expand_top++] = darr->id;
+	    expand_top++;
     }
 
     /* If we used more columns than the available columns, adjust that */
