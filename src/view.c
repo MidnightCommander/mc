@@ -824,6 +824,8 @@ is_nroff_sequence (WView *view, offset_type offset)
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
 }
 
+/* Find and return the index of the last cache entry that is
+ * smaller than ''coord'', according to the criterion ''sort_by''. */
 static inline guint
 view_ccache_find (WView *view, const struct coord_cache_entry *cache,
 	const struct coord_cache_entry *coord, enum ccache_type sort_by)
@@ -947,6 +949,10 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 		break;
 	}
 
+	/* Cache entries must guarantee that for each i < j,
+	 * line[i] <= line[j] and column[i] < column[j]. In the case of
+	 * nroff sequences and '\r' characters, this is not guaranteed,
+	 * so we cannot save them. */
 	if (nroff_state == NROFF_START && c != '\r')
 	    entry = next;
     }
@@ -3337,6 +3343,7 @@ WView *
 view_new (int y, int x, int cols, int lines, int is_panel)
 {
     WView *view = g_new0 (WView, 1);
+    size_t i;
 
     init_widget (&view->widget, y, x, lines, cols,
 		 view_callback,
@@ -3348,25 +3355,32 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view_set_datasource_none (view);
 
+    view->growbuf_in_use    = FALSE;
+    /* leave the other growbuf fields uninitialized */
+
+    view->hex_mode          = default_hex_mode;
+    view->hexedit_mode      = default_hexedit_mode;
+    view->hexview_in_text   = FALSE;
+    view->text_nroff_mode   = default_nroff_flag;
+    view->text_wrap_mode    = global_wrap_mode;
+    view->magic_mode        = default_magic_flag;
+
+    view->hexedit_lownibble = FALSE;
+    view->coord_cache       = NULL;
+
     view->dpy_frame_size    = is_panel ? 1 : 0;
     view->dpy_topleft       = 0;
     view->dpy_text_column   = 0;
+    view->dpy_complete      = FALSE;
     view->hex_cursor        = 0;
-    view->hexedit_mode      = default_hexedit_mode;
-    view->hexedit_lownibble = FALSE;
-    view->hexview_in_text   = FALSE;
     view->cursor_col        = 0;
     view->cursor_row        = 0;
     view->change_list       = NULL;
-    view->dirty             = 0;
-    view->text_wrap_mode    = global_wrap_mode;
-    view->hex_mode          = default_hex_mode;
-    view->bytes_per_line    = 1;
-    view->magic_mode        = default_magic_flag;
-    view->text_nroff_mode   = default_nroff_flag;
 
-    view->growbuf_in_use    = FALSE;
-    /* leave the other growbuf fields uninitialized */
+    /* {status,ruler,data}_area are left uninitialized */
+
+    view->dirty             = 0;
+    view->bytes_per_line    = 1;
 
     view->search_start      = 0;
     view->found_len         = 0;
@@ -3376,7 +3390,9 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view->want_to_quit      = FALSE;
     view->marker            = 0;
-    /* leave view->marks uninitialized */
+    for (i = 0; i < sizeof(view->marks) / sizeof(view->marks[0]); i++)
+	view->marks[i] = 0;
+
     view->move_dir          = 0;
     view->update_steps      = 0;
     view->update_activate   = 0;
