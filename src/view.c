@@ -2588,7 +2588,8 @@ toggle_hex_mode (WView *view)
     view->hex_mode = !view->hex_mode;
 
     if (view->hex_mode) {
-	view->hex_cursor =
+	view->hex_cursor = view->dpy_topleft;
+	view->dpy_topleft =
 	    offset_rounddown (view->dpy_topleft, view->bytes_per_line);
 	view->widget.options |= W_WANT_CURSOR;
     } else {

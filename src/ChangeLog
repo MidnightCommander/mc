@@ -2,6 +2,8 @@
 
 	* view.c (view_growbuf_read_until): When using mc_read, recover
 	from interrupted system calls.
+	* view.c (toggle_hex_mode): Now the hex cursor is always visible
+	after switching to hex mode.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
