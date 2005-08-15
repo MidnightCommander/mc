@@ -16,6 +16,7 @@
 	* view.c (view_toggle_ruler): Don't mix enums with ints.
 	* complete.c (fetch_hosts): Removed unused variable.
 	* complete.c: Don't mix enums with ints.
+	* tree.c: Likewise.
 
 2005-08-15  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 

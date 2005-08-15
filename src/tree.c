@@ -916,10 +916,10 @@ tree_key (WTree *tree, int key)
     /* We do not want to use them if we do not need to */
     /* Input line may want to take the motion key event */
     if (key == KEY_LEFT)
-	return move_left (tree);
+	return move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     if (key == KEY_RIGHT)
-	return move_right (tree);
+	return move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     if (is_abort_char (key)) {
 	if (tree->is_panel) {
@@ -945,7 +945,7 @@ tree_key (WTree *tree, int key)
 	    tree_do_search (tree, key);
 	    return MSG_HANDLED;
 	}
-	return tree->is_panel;
+	return tree->is_panel ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
 
     return MSG_NOT_HANDLED;
