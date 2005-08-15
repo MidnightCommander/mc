@@ -815,13 +815,13 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	case KEY_RIGHT:
 	    h->ret_value = 0;
 	    dlg_stop (h);
-	    return 1;
+	    return MSG_HANDLED;
 
 	case KEY_BACKSPACE:
 	    if (end == min_end) {
 		h->ret_value = 0;
 		dlg_stop (h);
-		return 1;
+		return MSG_HANDLED;
 	    } else {
 		WLEntry *e, *e1;
 
@@ -840,19 +840,19 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		    e1 = e1->next;
 		} while (e != e1);
 	    }
-	    return 1;
+	    return MSG_HANDLED;
 
 	default:
 	    if (parm > 0xff || !is_printable (parm)) {
 		if (is_in_input_map (input, parm) == 2) {
 		    if (end == min_end)
-			return 1;
+			return MSG_HANDLED;
 		    h->ret_value = B_USER;	/* This means we want to refill the
 						   list box and start again */
 		    dlg_stop (h);
-		    return 1;
+		    return MSG_HANDLED;
 		} else
-		    return 0;
+		    return MSG_NOT_HANDLED;
 	    } else {
 		WLEntry *e, *e1;
 		int need_redraw = 0;
