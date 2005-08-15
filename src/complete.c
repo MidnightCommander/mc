@@ -271,13 +271,13 @@ static int hosts_alloclen = 0;
 static void fetch_hosts (const char *filename)
 {
     FILE *file = fopen (filename, "r");
-    char *temp, buffer[256], *name;
+    char buffer[256], *name;
     register int i, start;
 
     if (!file)
         return;
 
-    while ((temp = fgets (buffer, 255, file)) != NULL){
+    while (fgets (buffer, 255, file) != NULL){
         /* Skip to first character. */
         for (i = 0; buffer[i] && cr_whitespace (buffer[i]); i++);
         /* Ignore comments... */
