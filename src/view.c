@@ -1836,14 +1836,17 @@ view_display_text (WView * view)
 		continue;
 	    }
 	}
+
 	if ((c == '\n') || (col >= width && view->text_wrap_mode)) {
 	    col = 0;
 	    row++;
 	    if (c == '\n' || row >= height)
 		continue;
 	}
+
 	if (c == '\r')
 	    continue;
+
 	if (c == '\t') {
 	    offset_type line, column;
 	    view_offset_to_coord (view, &line, &column, from);
@@ -1854,6 +1857,7 @@ view_display_text (WView * view)
 	    }
 	    continue;
 	}
+
 	if (view->found_len != 0
 	    && from >= view->search_start
 	    && from < view->search_start + view->found_len) {
