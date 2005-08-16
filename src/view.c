@@ -346,7 +346,7 @@ view_init_growbuf (WView *view)
     view->growbuf_in_use    = TRUE;
     view->growbuf_blockptr  = NULL;
     view->growbuf_blocks    = 0;
-    view->growbuf_lastindex = 0;
+    view->growbuf_lastindex = VIEW_PAGE_SIZE;
     view->growbuf_finished  = FALSE;
 }
 
@@ -394,7 +394,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 
     short_read = FALSE;
     while (view_growbuf_filesize (view) < ofs || short_read) {
-	if (view->growbuf_blocks == 0 || view->growbuf_lastindex == VIEW_PAGE_SIZE) {
+	if (view->growbuf_lastindex == VIEW_PAGE_SIZE) {
 	    /* Append a new block to the growing buffer */
 	    byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
 	    byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));

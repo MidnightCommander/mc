@@ -3,6 +3,8 @@
 	* view.c (view_percent): Fixed coordinate computation.
 	* view.c (view_place_cursor): Made the call to widget_move()
 	look like the other calls.
+	* view.c (view_init_growbuf): Mark the first page full instead
+	of empty. This saves one condition in view_growbuf_read_until().
 
 2005-08-15  Roland Illig  <roland.illig@gmx.de>
 
