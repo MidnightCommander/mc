@@ -1893,13 +1893,14 @@ display (WView *view)
 static void
 view_place_cursor (WView *view)
 {
-    screen_dimen row, col;
+    const screen_dimen top = view->data_area.top;
+    const screen_dimen left = view->data_area.left;
+    screen_dimen col;
 
-    row = view->data_area.top + view->cursor_row;
-    col = view->data_area.left + view->cursor_col;
+    col = view->cursor_col;
     if (!view->hexview_in_text && view->hexedit_lownibble)
 	col++;
-    widget_move (&view->widget, row, col);
+    widget_move (&view->widget, top + view->cursor_row, left + col);
 }
 
 static void
