@@ -307,22 +307,31 @@ view_compute_areas (WView *view)
 
     /* Compute the heights of the areas */
     rest = view_area.height;
+
     height = dimen_min(rest, 1);
     view->status_area.height = height;
     rest -= height;
+
     height = dimen_min(rest, (ruler == RULER_NONE || view->hex_mode) ? 0 : 2);
     view->ruler_area.height = height;
     rest -= height;
+
     view->data_area.height = rest;
 
     /* Compute the position of the areas */
-    y = view->status_area.top + view->status_area.height;
+    y = view_area.top;
+
+    view->status_area.top = y;
+    y += view->status_area.height;
+
     if (ruler == RULER_TOP) {
 	view->ruler_area.top = y;
 	y += view->ruler_area.height;
     }
+
     view->data_area.top = y;
     y += view->data_area.height;
+
     if (ruler == RULER_BOTTOM) {
 	view->ruler_area.top = y;
 	y += view->ruler_area.height;
