@@ -2939,7 +2939,7 @@ continue_search (WView *view)
     }
 }
 
-static cb_ret_t
+static void
 view_toggle_ruler (WView *view)
 {
     static const enum ruler_type next[3] = {
@@ -2951,7 +2951,6 @@ view_toggle_ruler (WView *view)
     assert ((size_t) ruler < 3);
     ruler = next[(size_t) ruler];
     view->dirty++;
-    return MSG_HANDLED;
 }    
 
 static void view_cmk_move_up (void *w, int n) {
@@ -3040,7 +3039,8 @@ view_handle_key (WView *view, int c)
 
 	/* toggle ruler */
     case ALT ('r'):
-	return view_toggle_ruler (view);
+	view_toggle_ruler (view);
+	return MSG_HANDLED;
 
     case 'h':
 	view_move_left (view, 1);
