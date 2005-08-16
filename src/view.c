@@ -368,7 +368,7 @@ view_growbuf_filesize (WView *view)
 }
 
 /* Copies the output from the pipe to the growing buffer, until either
- * the end-of-pipe is reached or the interval [0..ofs) or the growing
+ * the end-of-pipe is reached or the interval [0..ofs) of the growing
  * buffer is completely filled. */
 static void
 view_growbuf_read_until (WView *view, offset_type ofs)
