@@ -1,3 +1,7 @@
+2005-08-16  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_percent): Fixed coordinate computation.
+
 2005-08-15  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_growbuf_read_until): When using mc_read, recover

@@ -1479,6 +1479,7 @@ view_update_bytes_per_line (WView *view)
 static void
 view_percent (WView *view, offset_type p)
 {
+    const screen_dimen top = view->status_area.top;
     const screen_dimen right = view->status_area.left + view->status_area.width;
     const screen_dimen height = view->status_area.height;
     int percent;
@@ -1497,7 +1498,7 @@ view_percent (WView *view, offset_type p)
     else
 	percent = p * 100 / filesize;
 
-    widget_move (view, view->dpy_frame_size, right - 4);
+    widget_move (view, top, right - 4);
     printw (str_unconst ("%3d%%"), percent);
 }
 
