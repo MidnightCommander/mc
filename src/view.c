@@ -372,8 +372,8 @@ view_growbuf_filesize (WView *view)
     if (view->growbuf_blocks == 0)
 	return 0;
     else
-	return ((offset_type) view->growbuf_blocks - 1)
-	       * VIEW_PAGE_SIZE + view->growbuf_lastindex;
+	return ((offset_type) view->growbuf_blocks - 1) * VIEW_PAGE_SIZE
+	       + view->growbuf_lastindex;
 }
 
 /* Copies the output from the pipe to the growing buffer, until either
