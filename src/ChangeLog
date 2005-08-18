@@ -14,6 +14,8 @@
 	distinguishes several phases (state selection, color selection,
 	printing) and does not mix them wildly, as the previous code
 	did.
+	* view.c (view_display_text): Removed the (almost) unused
+	variable boldflag.
 
 2005-08-16  Roland Illig  <roland.illig@gmx.de>
 

@@ -1793,7 +1793,6 @@ view_display_text (WView * view)
     screen_dimen row, col;
     offset_type from;
     int c;
-    mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 
     view_display_clean (view);
@@ -1807,6 +1806,7 @@ view_display_text (WView * view)
 
     attrset (NORMAL_COLOR);
     for (row = 0, col = 0; row < height && (c = get_byte (view, from)) != -1; from++) {
+
 	if (view->text_nroff_mode && c == '\b') {
 	    int c_prev;
 	    int c_next;
@@ -1829,7 +1829,6 @@ view_display_text (WView * view)
 		    col = width;
 		}
 		col--;
-		boldflag = MARK_SELECTED;
 		if (c_prev == '_' && (c_next != '_' || view_count_backspaces (view, from) == 1))
 		    attrset (VIEW_UNDERLINED_COLOR);
 		else
@@ -1859,12 +1858,11 @@ view_display_text (WView * view)
 	    continue;
 	}
 
-	if (view->found_len != 0
-	    && from >= view->search_start
-	    && from < view->search_start + view->found_len) {
-	    boldflag = MARK_SELECTED;
+	if (view->search_start <= from
+	 && from < view->search_start + view->found_len) {
 	    attrset (SELECTED_COLOR);
 	}
+
 	if (col >= view->dpy_text_column
 	    && col - view->dpy_text_column < width) {
 	    view_gotoyx (view, top + row, left + (col - view->dpy_text_column));
@@ -1874,10 +1872,7 @@ view_display_text (WView * view)
 	    view_add_character (view, c);
 	}
 	col++;
-	if (boldflag != MARK_NORMAL) {
-	    boldflag = MARK_NORMAL;
-	    attrset (NORMAL_COLOR);
-	}
+	attrset (NORMAL_COLOR);
     }
     view->dpy_complete = (get_byte (view, from) == -1);
 }
