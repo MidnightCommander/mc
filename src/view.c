@@ -182,7 +182,7 @@ struct WView {
 
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
-    offset_type found_len;	/* Length of found string or 0 if none was found */
+    offset_type search_length;	/* Length of found string or 0 if none was found */
     char *search_exp;		/* The search expression */
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(WView *, char *);
@@ -1063,7 +1063,7 @@ view_movement_fixups (WView *view, gboolean reset_search)
     view_fix_cursor_position (view);
     if (reset_search) {
 	view->search_start = view->dpy_topleft;
-	view->found_len = 0;
+	view->search_length = 0;
     }
     view->dirty++;
 }
@@ -1445,7 +1445,7 @@ view_load (WView *view, const char *command, const char *file,
     view->command = g_strdup (command);
     view->dpy_topleft = 0;
     view->search_start = 0;
-    view->found_len = 0;
+    view->search_length = 0;
     view->dpy_text_column = 0;
     view->last_search = 0;	/* Start a new search */
 
@@ -1711,7 +1711,7 @@ view_display_hex (WView *view)
 
 	    /* Marked bytes from the search functions */
 	    } else if (view->search_start <= from
-		    && from < view->search_start + view->found_len) {
+		    && from < view->search_start + view->search_length) {
 		boldflag = MARK_SELECTED;
 
 	    } else {
@@ -1859,7 +1859,7 @@ view_display_text (WView * view)
 	}
 
 	if (view->search_start <= from
-	 && from < view->search_start + view->found_len) {
+	 && from < view->search_start + view->search_length) {
 	    attrset (SELECTED_COLOR);
 	}
 
@@ -2134,7 +2134,7 @@ icase_search_p (WView *view, char *text, char *data, int nothing)
 	    view->search_start = q - data - lng;
 	else
 	    view->search_start = strlen (data) - (q - data);
-	view->found_len = lng;
+	view->search_length = lng;
 	return 1;
     }
     return 0;
@@ -2255,7 +2255,7 @@ search (WView *view, char *text,
 	mc_refresh ();
     }
 
-    found_len = view->found_len;
+    found_len = view->search_length;
     search_start = view->search_start;
 
     if (view->direction == 1) {
@@ -2327,7 +2327,7 @@ search (WView *view, char *text,
     }
     if (!s) {
 	message (0, _("Search"), _(" Search string not found "));
-	view->found_len = 0;
+	view->search_length = 0;
     }
 }
 
@@ -2344,10 +2344,10 @@ block_search (WView *view, const char *buffer, int len)
 
     enable_interrupt_key ();
     if (direction == 1)
-	e = view->search_start + ((view->found_len) ? 1 : 0);
+	e = view->search_start + ((view->search_length) ? 1 : 0);
     else
 	e = view->search_start
-	  - ((view->found_len && view->search_start >= 1) ? 1 : 0);
+	  - ((view->search_length && view->search_start >= 1) ? 1 : 0);
 
     search_update_steps (view);
     view->update_activate = 0;
@@ -2422,7 +2422,7 @@ hex_search (WView *view, const char *text)
     int parse_error = 0;
 
     if (!*text) {
-	view->found_len = 0;
+	view->search_length = 0;
 	return;
     }
 
@@ -2479,7 +2479,7 @@ hex_search (WView *view, const char *text)
     if (block_len <= 0 || parse_error) {
 	message (0, _("Search"), _("Invalid hex search expression"));
 	g_free (buffer);
-	view->found_len = 0;
+	view->search_length = 0;
 	return;
     }
 
@@ -2490,12 +2490,12 @@ hex_search (WView *view, const char *text)
 
     if (pos == INVALID_OFFSET) {
 	message (0, _("Search"), _(" Search string not found "));
-	view->found_len = 0;
+	view->search_length = 0;
 	return;
     }
 
     view->search_start = pos;
-    view->found_len = block_len;
+    view->search_length = block_len;
     /* Set the edit cursor to the search position, left nibble */
     view->hex_cursor = view->search_start;
     view->hexedit_lownibble = FALSE;
@@ -2537,7 +2537,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
     }
     if (regexec (&r, string, 1, pmatch, 0) != 0)
 	return 0;
-    view->found_len = pmatch[0].rm_eo - pmatch[0].rm_so;
+    view->search_length = pmatch[0].rm_eo - pmatch[0].rm_so;
     view->search_start = pmatch[0].rm_so;
     return 1;
 }
@@ -3389,7 +3389,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->bytes_per_line    = 1;
 
     view->search_start      = 0;
-    view->found_len         = 0;
+    view->search_length     = 0;
     view->search_exp        = NULL;
     view->direction         = 1; /* forward */
     view->last_search       = 0; /* it's a function */

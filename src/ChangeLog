@@ -16,6 +16,7 @@
 	did.
 	* view.c (view_display_text): Removed the (almost) unused
 	variable boldflag.
+	* view.c (struct WView): Renamed found_len to search_length.
 
 2005-08-16  Roland Illig  <roland.illig@gmx.de>
 
