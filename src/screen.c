@@ -171,7 +171,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 static const char *
 string_file_name (file_entry *fe, int len)
 {
-    static char buffer [BUF_SMALL];
+    static char buffer [MC_MAXPATHLEN + 1];
     size_t i;
 
     for (i = 0; i < sizeof(buffer) - 1; i++) {
