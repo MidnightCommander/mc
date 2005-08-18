@@ -1596,10 +1596,10 @@ view_display_clean (WView *view)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 
 typedef enum {
-    MARK_NORMAL = 0,
-    MARK_SELECTED = 1,
-    MARK_CURSOR = 2,
-    MARK_CHANGED = 3
+    MARK_NORMAL,
+    MARK_SELECTED,
+    MARK_CURSOR,
+    MARK_CHANGED
 } mark_t;
 
 static inline int
@@ -1677,7 +1677,6 @@ view_display_hex (WView *view)
 	curr = curr->next;
     }
 
-    attrset (NORMAL_COLOR);
     for (row = 0; get_byte (view, from) != -1 && row < height; row++) {
 	/* Print the hex offset */
 	attrset (MARKED_COLOR);
@@ -1687,112 +1686,99 @@ view_display_hex (WView *view)
 	attrset (NORMAL_COLOR);
 
 	col = hex_start;
-	/* Each hex number is two digits */
-	hex_buff[2] = '\0';
-	for (bytes = 0;
-	     bytes < view->bytes_per_line
-	     && (c = get_byte (view, from)) != -1;
-	     bytes++, from++) {
-	    /* Display and mark changed bytes */
-	    if (curr && from == curr->offset) {
+	for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++) {
+
+	    if ((c = get_byte (view, from)) == -1)
+		break;
+
+	    /* Save the cursor position for view_place_cursor() */
+	    if (from == view->hex_cursor && !view->hexview_in_text) {
+		view->cursor_row = row;
+		view->cursor_col = col;
+	    }
+
+	    /* Determine the state of the current byte */
+
+	    /* The current cursor position */
+	    if (from == view->hex_cursor) {
+		boldflag = MARK_CURSOR;
+
+	    /* Changed bytes from the hex editor */
+	    } else if (curr && from == curr->offset) {
 		c = curr->value;
 		curr = curr->next;
 		boldflag = MARK_CHANGED;
-		attrset (VIEW_UNDERLINED_COLOR);
-	    }
 
-	    if (view->found_len && from >= view->search_start
-		&& from < view->search_start + view->found_len) {
+	    /* Marked bytes from the search functions */
+	    } else if (view->search_start <= from
+		    && from < view->search_start + view->found_len) {
 		boldflag = MARK_SELECTED;
-		attrset (MARKED_COLOR);
-	    }
-	    /* Display the navigation cursor */
-	    if (from == view->hex_cursor) {
-		if (!view->hexview_in_text) {
-		    view->cursor_row = row;
-		    view->cursor_col = col;
-		}
-		boldflag = MARK_CURSOR;
-		attrset (view->hexview_in_text
-		    ? MARKED_SELECTED_COLOR
-		    : VIEW_UNDERLINED_COLOR);
+
+	    } else {
+		boldflag = MARK_NORMAL;
 	    }
 
-	    /* Print a hex number (sprintf is too slow) */
-	    hex_buff[0] = hex_char[(c >> 4)];
-	    hex_buff[1] = hex_char[c & 15];
+	    /* Select the color for the hex number */
+	    attrset (
+		boldflag == MARK_NORMAL ? NORMAL_COLOR :
+		boldflag == MARK_SELECTED ? MARKED_COLOR :
+		boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
+		/* boldflag == MARK_CURSOR */
+		view->hexview_in_text ? MARKED_SELECTED_COLOR :
+		VIEW_UNDERLINED_COLOR);
+
+	    /* Print the hex number */
 	    view_gotoyx (view, top + row, left + col);
-	    view_add_string (view, hex_buff);
-	    col += 3;
-	    /* Turn off the cursor or changed byte highlighting here */
-	    if (boldflag == MARK_CURSOR || boldflag == MARK_CHANGED)
-		attrset (NORMAL_COLOR);
-	    if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
-		/* Turn off the search highlighting */
-		if (boldflag == MARK_SELECTED
-		    && from == view->search_start + view->found_len - 1)
-		    attrset (NORMAL_COLOR);
+	    view_add_character (view, hex_char[c / 16]);
+	    view_add_character (view, hex_char[c % 16]);
+	    col += 2;
 
-		/* Hex numbers are printed in the groups of four */
-		/* Groups are separated by a vline */
-
-		view_gotoyx (view, top + row, left + col - 1);
+	    /* Print the separator */
+	    attrset (NORMAL_COLOR);
+	    if (bytes != view->bytes_per_line - 1) {
 		view_add_character (view, ' ');
-		view_gotoyx (view, top + row, left + col);
-		if (view->data_area.width < 80)
+		col += 1;
+
+		/* After every four bytes, print a group separator */
+		if (bytes % 4 == 3) {
+		    if (view->data_area.width >= 80) {
+			view_add_one_vline ();
+			col += 1;
+		    }
+		    view_add_character (view, ' ');
 		    col += 1;
-		else {
-		    view_add_one_vline ();
-		    col += 2;
 		}
+	    }
 
-		if (boldflag != MARK_NORMAL
-		    && from == view->search_start + view->found_len - 1)
-		    attrset (MARKED_COLOR);
-	    }
-	    if (boldflag != MARK_NORMAL
-		&& from < view->search_start + view->found_len - 1
-		&& bytes != view->bytes_per_line - 1) {
-		view_gotoyx (view, top + row, left + col);
-		view_add_character (view, ' ');
-	    }
+	    /* Select the color for the character; this differs from the
+	     * hex color when boldflag == MARK_CURSOR */
+	    attrset (
+		boldflag == MARK_NORMAL ? NORMAL_COLOR :
+		boldflag == MARK_SELECTED ? MARKED_COLOR :
+		boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
+		/* boldflag == MARK_CURSOR */
+		view->hexview_in_text ? VIEW_UNDERLINED_COLOR :
+		MARKED_SELECTED_COLOR);
+
+	    c = convert_to_display_c (c);
+	    if (!is_printable (c))
+		c = '.';
 
 	    /* Print corresponding character on the text side */
 	    view_gotoyx (view, top + row, left + text_start + bytes);
-
-	    c = convert_to_display_c (c);
-
-	    if (!is_printable (c))
-		c = '.';
-	    switch (boldflag) {
-	    case MARK_NORMAL:
-		break;
-	    case MARK_SELECTED:
-		attrset (MARKED_COLOR);
-		break;
-	    case MARK_CURSOR:
-		if (view->hexview_in_text) {
-		    /* Our side is active */
-		    view->cursor_col = text_start + bytes;
-		    view->cursor_row = row;
-		    attrset (VIEW_UNDERLINED_COLOR);
-		} else {
-		    /* Other side is active */
-		    attrset (MARKED_SELECTED_COLOR);
-		}
-		break;
-	    case MARK_CHANGED:
-		attrset (VIEW_UNDERLINED_COLOR);
-		break;
-	    }
 	    view_add_character (view, c);
 
-	    if (boldflag != MARK_NORMAL) {
-		boldflag = MARK_NORMAL;
-		attrset (NORMAL_COLOR);
+	    /* Save the cursor position for view_place_cursor() */
+	    if (from == view->hex_cursor && view->hexview_in_text) {
+		view->cursor_row = row;
+		view->cursor_col = text_start + bytes;
 	    }
 	}
     }
+
+    /* Be polite to the other functions */
+    attrset (NORMAL_COLOR);
+
     view_place_cursor (view);
     view->dpy_complete = (get_byte (view, from) == -1);
 }

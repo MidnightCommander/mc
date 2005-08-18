@@ -10,6 +10,10 @@
 	of the hex editor out of this function. Whoever wrote that
 	should be blamed for it, but the code has been there since the
 	beginning.
+	* view.c (view_display_hex): Completely rewritten. Now the code
+	distinguishes several phases (state selection, color selection,
+	printing) and does not mix them wildly, as the previous code
+	did.
 
 2005-08-16  Roland Illig  <roland.illig@gmx.de>
 
