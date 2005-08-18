@@ -1,3 +1,16 @@
+2005-08-18  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_move_up): Don't scroll up if it is not necessary.
+	This fixes an inconsistency noted by Andrej Zebrowski on
+	mc-devel.
+	* view.c (view_move_down): Do nothing if we're already at the
+	end of the file. This makes the cursor movement more consistent
+	with the behavior of the <End> key.
+	* view.c (regexp_search_cmd): Moved the code to save the changes
+	of the hex editor out of this function. Whoever wrote that
+	should be blamed for it, but the code has been there since the
+	beginning.
+
 2005-08-16  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_percent): Fixed coordinate computation.

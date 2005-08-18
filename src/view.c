@@ -1175,7 +1175,8 @@ view_move_up (WView *view, offset_type lines)
 	offset_type bytes = lines * view->bytes_per_line;
 	if (view->hex_cursor >= bytes) {
 	    view->hex_cursor -= bytes;
-	    view->dpy_topleft = offset_doz (view->dpy_topleft, bytes);
+	    if (view->hex_cursor < view->dpy_topleft)
+		view->dpy_topleft = offset_doz (view->dpy_topleft, bytes);
 	} else {
 	    view->hex_cursor %= view->bytes_per_line;
 	}
@@ -1229,6 +1230,10 @@ view_move_down (WView *view, offset_type lines)
 	    if (lines != 1)
 		view->dpy_topleft += view->bytes_per_line;
 	}
+
+    } else if (view->dpy_complete) {
+	/* don't move further down. There's nothing more to see. */
+
     } else if (view->text_wrap_mode) {
 	offset_type line, col, i;
 
@@ -1248,6 +1253,7 @@ view_move_down (WView *view, offset_type lines)
 
 	    view->dpy_topleft = new_offset;
 	}
+
     } else {
 	offset_type line, col;
 
@@ -2040,6 +2046,9 @@ view_hexedit_save_changes (WView *view)
     int fp, answer;
     char *text, *error;
 
+    if (view->change_list == NULL)
+	return TRUE;
+
   retry_save:
     fp = mc_open (view->filename, O_WRONLY);
     if (fp == -1)
@@ -2683,20 +2692,18 @@ goto_addr (WView *view)
     view_update (view);
 }
 
+static void
+view_hexedit_save_changes_cmd (WView *view)
+{
+    (void) view_hexedit_save_changes (view);
+}
+
 /* Both views */
 static void
 regexp_search (WView *view, int direction)
 {
     char *regexp = str_unconst ("");
     static char *old = 0;
-
-    /* This is really an F6 key handler */
-    if (view->hex_mode) {
-	/* Save it without a confirmation prompt */
-	if (view->change_list)
-	    view_hexedit_save_changes (view);
-	return;
-    }
 
     if (old)
 	regexp = old;
@@ -2847,10 +2854,6 @@ view_labels (WView *view)
 	? gettext_ui("ButtonBar|Goto")
 	: gettext_ui("ButtonBar|Line"),
 	view->hex_mode ? goto_addr : goto_line, view);
-    my_define (h, 6, view->hex_mode
-	? gettext_ui("ButtonBar|Save")
-	: gettext_ui("ButtonBar|RxSrch"),
-	regexp_search_cmd, view);
 
     if (view->hex_mode) {
 	if (view->hexedit_mode) {
@@ -2862,11 +2865,15 @@ view_labels (WView *view)
 	} else {
 	    my_define (h, 2, "", NULL, view);
 	}
+	my_define (h, 6, gettext_ui("ButtonBar|Save"),
+	    view_hexedit_save_changes_cmd, view);
     } else {
 	my_define (h, 2, view->text_wrap_mode
 	    ? gettext_ui("ButtonBar|UnWrap")
 	    : gettext_ui("ButtonBar|Wrap"),
 	    toggle_wrap_mode, view);
+	my_define (h, 6, gettext_ui("ButtonBar|RxSrch"),
+	    regexp_search_cmd, view);
     }
 
     my_define (h, 7, view->hex_mode
