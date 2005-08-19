@@ -31,9 +31,9 @@ exec_edit_syntax_dialog (const char **names) {
     int i;
 
     Listbox *syntaxlist = create_listbox_window (MAX_ENTRY_LEN, LIST_LINES,
-	N_(" Choose syntax highlighting "), NULL);
-    LISTBOX_APPEND_TEXT (syntaxlist, 'A', N_("< Auto >"), NULL);
-    LISTBOX_APPEND_TEXT (syntaxlist, 'R', N_("< Reload Current Syntax >"), NULL);
+	_(" Choose syntax highlighting "), NULL);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL);
 
     for (i = 0; names[i]; i++) {
 	LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);

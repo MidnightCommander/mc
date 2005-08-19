@@ -1,3 +1,8 @@
+2005-08-19  David Martin  <dmartina@excite.com>
+
+	* choosesyntax.c (exec_edit_syntax_dialog): Not just mark for
+	l10n, but do translate dialog strings.
+
 2005-08-15  Roland Illig  <roland.illig@gmx.de>
 
 	* edit-widget.h: Changed bit fields of length 1 from signed to
