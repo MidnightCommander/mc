@@ -2106,6 +2106,8 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
     buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, view);
 }
 
+/* {{{ Searching }}} */
+
 /* Case insensitive search of text in data */
 static int
 icase_search_p (WView *view, char *text, char *data, int nothing)
@@ -2565,19 +2567,26 @@ do_normal_search (WView *view, char *text)
     view_update (view);
 }
 
-/* Real view only */
+/* {{{ User-definable commands }}} */
+
+/*
+    The functions in this section can be bound to hotkeys. They are all
+    of the same type (taking a pointer to WView as parameter and
+    returning void). TODO: In the not-too-distant future, these commands
+    will become fully configurable, like they already are in the
+    internal editor. By convention, all the function names end in
+    "_cmd".
+ */
+
 static void
 view_help_cmd (void)
 {
     interactive_display (NULL, "[Internal File Viewer]");
-    /*
-       view_refresh (0);
-     */
 }
 
 /* Toggle between hexview and hexedit mode */
 static void
-toggle_hexedit_mode (WView *view)
+view_toggle_hexedit_mode_cmd (WView *view)
 {
     view->hexedit_mode = !view->hexedit_mode;
     view_labels (view);
@@ -2587,7 +2596,7 @@ toggle_hexedit_mode (WView *view)
 
 /* Toggle between wrapped and unwrapped view */
 static void
-toggle_wrap_mode (WView *view)
+view_toggle_wrap_mode_cmd (WView *view)
 {
     view->text_wrap_mode = !view->text_wrap_mode;
     if (view->text_wrap_mode) {
@@ -2605,7 +2614,7 @@ toggle_wrap_mode (WView *view)
 
 /* Toggle between hex view and text view */
 static void
-toggle_hex_mode (WView *view)
+view_toggle_hex_mode_cmd (WView *view)
 {
     view->hex_mode = !view->hex_mode;
 
@@ -2625,9 +2634,8 @@ toggle_hex_mode (WView *view)
     view_update (view);
 }
 
-/* Text view */
 static void
-goto_line (WView *view)
+view_moveto_line_cmd (WView *view)
 {
     char *answer, *answer_end, prompt[BUF_SMALL];
     offset_type line, col;
@@ -2649,9 +2657,8 @@ goto_line (WView *view)
     view_update (view);
 }
 
-/* Hex view */
 static void
-goto_addr (WView *view)
+view_moveto_addr_cmd (WView *view)
 {
     char *line, *error, prompt[BUF_SMALL];
     offset_type addr;
@@ -2679,7 +2686,8 @@ view_hexedit_save_changes_cmd (WView *view)
     (void) view_hexedit_save_changes (view);
 }
 
-/* Both views */
+/* {{{ Searching }}} */
+
 static void
 regexp_search (WView *view, int direction)
 {
@@ -2704,15 +2712,17 @@ regexp_search (WView *view, int direction)
     view->last_search = do_regexp_search;
 }
 
+/* {{{ User-definable commands }}} */
+
 static void
-regexp_search_cmd (WView *view)
+view_regexp_search_cmd (WView *view)
 {
     regexp_search (view, 1);
 }
 
 /* Both views */
 static void
-normal_search_cmd (WView *view)
+view_normal_search_cmd (WView *view)
 {
     static char *old;
     char *exp = old ? old : str_unconst ("");
@@ -2778,7 +2788,7 @@ normal_search_cmd (WView *view)
 }
 
 static void
-change_viewer (WView *view)
+view_toggle_magic_mode_cmd (WView *view)
 {
     char *s;
     char *t;
@@ -2801,7 +2811,7 @@ change_viewer (WView *view)
 }
 
 static void
-change_nroff (WView *view)
+view_change_nroff_mode_cmd (WView *view)
 {
     view->text_nroff_mode = !view->text_nroff_mode;
     altered_nroff_flag = 1;
@@ -2810,13 +2820,14 @@ change_nroff (WView *view)
     view_update (view);
 }
 
-/* Real view only */
 static void
 view_quit_cmd (WView *view)
 {
     if (view_ok_to_quit (view))
 	dlg_stop (view->widget.parent);
 }
+
+/* {{{ Miscellaneous functions }}} */
 
 /* Define labels and handlers for functional keys */
 static void
@@ -2830,19 +2841,19 @@ view_labels (WView *view)
     my_define (h, 4, view->hex_mode
 	? gettext_ui("ButtonBar|Ascii")
 	: gettext_ui("ButtonBar|Hex"),
-	toggle_hex_mode, view);
+	view_toggle_hex_mode_cmd, view);
     my_define (h, 5, view->hex_mode
 	? gettext_ui("ButtonBar|Goto")
 	: gettext_ui("ButtonBar|Line"),
-	view->hex_mode ? goto_addr : goto_line, view);
+	view->hex_mode ? view_moveto_addr_cmd : view_moveto_line_cmd, view);
 
     if (view->hex_mode) {
 	if (view->hexedit_mode) {
 	    my_define (h, 2, gettext_ui("ButtonBar|View"),
-		toggle_hexedit_mode, view);
+		view_toggle_hexedit_mode_cmd, view);
 	} else if (view->datasource == DS_FILE) {
 	    my_define (h, 2, gettext_ui("ButtonBar|Edit"),
-		toggle_hexedit_mode, view);
+		view_toggle_hexedit_mode_cmd, view);
 	} else {
 	    my_define (h, 2, "", NULL, view);
 	}
@@ -2852,30 +2863,32 @@ view_labels (WView *view)
 	my_define (h, 2, view->text_wrap_mode
 	    ? gettext_ui("ButtonBar|UnWrap")
 	    : gettext_ui("ButtonBar|Wrap"),
-	    toggle_wrap_mode, view);
+	    view_toggle_wrap_mode_cmd, view);
 	my_define (h, 6, gettext_ui("ButtonBar|RxSrch"),
-	    regexp_search_cmd, view);
+	    view_regexp_search_cmd, view);
     }
 
     my_define (h, 7, view->hex_mode
 	? gettext_ui("ButtonBar|HxSrch")
 	: gettext_ui("ButtonBar|Search"),
-	normal_search_cmd, view);
+	view_normal_search_cmd, view);
     my_define (h, 8, view->magic_mode
 	? gettext_ui("ButtonBar|Raw")
 	: gettext_ui("ButtonBar|Parse"),
-	change_viewer, view);
+	view_toggle_magic_mode_cmd, view);
 
     /* don't override the key to access the main menu */
     if (!view_is_in_panel (view)) {
 	my_define (h, 9, view->text_nroff_mode
 	    ? gettext_ui("ButtonBar|Unform")
 	    : gettext_ui("ButtonBar|Format"),
-	    change_nroff, view);
+	    view_change_nroff_mode_cmd, view);
 	my_define (h, 3, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
     }
     buttonbar_redraw (h);
 }
+
+/* {{{ Event handling }}} */
 
 /* Check for left and right arrows, possibly with modifiers */
 static cb_ret_t
@@ -2916,19 +2929,21 @@ check_left_right_keys (WView *view, int c)
     return MSG_NOT_HANDLED;
 }
 
+/* {{{ User-definable commands }}} */
+
 static void
-continue_search (WView *view)
+view_continue_search_cmd (WView *view)
 {
     if (view->last_search) {
 	(*view->last_search) (view, view->search_exp);
     } else {
 	/* if not... then ask for an expression */
-	normal_search_cmd (view);
+	view_normal_search_cmd (view);
     }
 }
 
 static void
-view_toggle_ruler (WView *view)
+view_toggle_ruler_cmd (WView *view)
 {
     static const enum ruler_type next[3] = {
 	RULER_TOP,
@@ -2939,7 +2954,9 @@ view_toggle_ruler (WView *view)
     assert ((size_t) ruler < 3);
     ruler = next[(size_t) ruler];
     view->dirty++;
-}    
+}
+
+/* {{{ Event handling }}} */
 
 static void view_cmk_move_up (void *w, int n) {
     view_move_up ((WView *) w, n);
@@ -3011,23 +3028,16 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
 	/* Continue search */
+    case XCTRL ('r'):
     case XCTRL ('s'):
     case 'n':
     case KEY_F (17):
-	continue_search (view);
-	return MSG_HANDLED;
-
-    case XCTRL ('r'):
-	if (view->last_search) {
-	    (*view->last_search) (view, view->search_exp);
-	} else {
-	    normal_search_cmd (view);
-	}
+	view_continue_search_cmd (view);
 	return MSG_HANDLED;
 
 	/* toggle ruler */
     case ALT ('r'):
-	view_toggle_ruler (view);
+	view_toggle_ruler_cmd (view);
 	return MSG_HANDLED;
 
     case 'h':
@@ -3231,6 +3241,8 @@ view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
     }
 }
 
+/* {{{ External interface }}} */
+
 /* Real view only */
 int
 mc_internal_viewer (const char *command, const char *file,
@@ -3267,6 +3279,8 @@ mc_internal_viewer (const char *command, const char *file,
     return succeeded;
 }
 
+/* {{{ Miscellaneous functions }}} */
+
 static void
 view_hook (void *v)
 {
@@ -3293,6 +3307,8 @@ view_hook (void *v)
     view_load (view, 0, panel->dir.list[panel->selected].fname, 0);
     display (view);
 }
+
+/* {{{ Event handling }}} */
 
 static cb_ret_t
 view_callback (Widget *w, widget_msg_t msg, int parm)
@@ -3344,6 +3360,8 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 	return default_proc (msg, parm);
     }
 }
+
+/* {{{ External interface }}} */
 
 WView *
 view_new (int y, int x, int cols, int lines, int is_panel)
