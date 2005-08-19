@@ -12,9 +12,8 @@
 	end of the file. This makes the cursor movement more consistent
 	with the behavior of the <End> key.
 	* view.c (regexp_search_cmd): Moved the code to save the changes
-	of the hex editor out of this function. Whoever wrote that
-	should be blamed for it, but the code has been there since the
-	beginning.
+	of the hex editor out of this function, as it has nothing to do
+	with regexp searching.
 	* view.c (view_display_hex): Completely rewritten. Now the code
 	distinguishes several phases (state selection, color selection,
 	printing) and does not mix them wildly, as the previous code
