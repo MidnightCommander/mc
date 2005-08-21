@@ -1,3 +1,8 @@
+2005-08-21  Roland Illig  <roland.illig@gmx.de>
+
+	* view.h: Rewrote it. All functions are preceded by a describing
+	comment and the "extern" keyword.
+
 2005-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c: Added section headers. The functions are still
