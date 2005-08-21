@@ -1307,10 +1307,10 @@ view_move_right (WView *view, offset_type columns)
 
 /* {{{ Miscellaneous functions }}} */
 
-/* Both views */
 static void
 view_done (WView *view)
 {
+    /* Save current file position */
     if (mcview_remember_file_position && view->filename != NULL) {
 	char *canon_fname;
 	offset_type line, col;
@@ -1320,16 +1320,29 @@ view_done (WView *view)
 	save_file_position (canon_fname, line + 1, col);
 	g_free (canon_fname);
     }
-    view_close_datasource (view);
-    if (view->coord_cache) {
-	g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
-    }
-    g_free (view->filename), view->filename = NULL;
-    g_free (view->command), view->command = NULL;
+
+    /* Write back the global viewer mode */
     default_hex_mode = view->hex_mode;
     default_nroff_flag = view->text_nroff_mode;
     default_magic_flag = view->magic_mode;
     global_wrap_mode = view->text_wrap_mode;
+
+    /* Free memory used by the viewer */
+
+    /* view->widget needs no destructor */
+
+    g_free (view->filename), view->filename = NULL;
+    g_free (view->command), view->command = NULL;
+
+    view_close_datasource (view);
+    /* the growing buffer is freed with the datasource */
+
+    if (view->coord_cache) {
+	g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
+    }
+
+    /* FIXME: what about view->change_list? */
+    /* FIXME: what about view->search_exp? */
 }
 
 static void
