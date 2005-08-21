@@ -338,6 +338,19 @@ view_compute_areas (WView *view)
     }
 }
 
+static void
+view_hexedit_free_change_list (WView *view)
+{
+    struct hexedit_change_node *curr, *next;
+
+    for (curr = view->change_list; curr != NULL; curr = next) {
+	next = curr->next;
+	g_free (curr);
+    }
+    view->change_list = NULL;
+    view->dirty++;
+}
+
 /* {{{ Growing buffer }}} */
 
 static void
@@ -1341,7 +1354,7 @@ view_done (WView *view)
 	g_array_free (view->coord_cache, TRUE), view->coord_cache = NULL;
     }
 
-    /* FIXME: what about view->change_list? */
+    view_hexedit_free_change_list (view);
     /* FIXME: what about view->search_exp? */
 }
 
@@ -2020,19 +2033,6 @@ view_handle_editkey (WView *view, int key)
     return MSG_HANDLED;
 }
 
-static void
-free_change_list (WView *view)
-{
-    struct hexedit_change_node *curr, *next;
-
-    for (curr = view->change_list; curr != NULL; curr = next) {
-	next = curr->next;
-	g_free (curr);
-    }
-    view->change_list = NULL;
-    view->dirty++;
-}
-
 static gboolean
 view_hexedit_save_changes (WView *view)
 {
@@ -2094,8 +2094,8 @@ view_ok_to_quit (WView *view)
 {
     int r;
 
-    if (!view->change_list)
-	return 1;
+    if (view->change_list == NULL)
+	return TRUE;
 
     r = query_dialog (_("Quit"),
 		      _(" File was modified, Save with exit? "), D_NORMAL, 3,
@@ -2105,7 +2105,7 @@ view_ok_to_quit (WView *view)
     case 1:
 	return view_hexedit_save_changes (view);
     case 2:
-	free_change_list (view);
+	view_hexedit_free_change_list (view);
 	return TRUE;
     default:
 	return FALSE;

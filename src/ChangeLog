@@ -6,6 +6,8 @@
 	all names of user specific configuration files are listed.
 	* view.c (view_done): Reordered the statements in the
 	destructor and added paragraph comments.
+	* view.c (free_change_list): Renamed to
+	view_hexedit_free_change_list.
 
 2005-08-19  Roland Illig  <roland.illig@gmx.de>
 
