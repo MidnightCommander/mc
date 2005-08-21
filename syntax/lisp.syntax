@@ -80,3 +80,5 @@ context ; \n brown
 # Strings
 
 context " " green
+	keyword \\" green
+	keyword \\\\ green
