@@ -8,6 +8,8 @@
 	destructor and added paragraph comments.
 	* view.c (free_change_list): Renamed to
 	view_hexedit_free_change_list.
+	* view.c: The search string is managed by the WView, not as
+	static variable in some functions.
 
 2005-08-19  Roland Illig  <roland.illig@gmx.de>
 

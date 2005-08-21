@@ -185,7 +185,7 @@ struct WView {
     offset_type search_length;	/* Length of found string or 0 if none was found */
     char *search_exp;		/* The search expression */
     int  direction;		/* 1= forward; -1 backward */
-    void (*last_search)(WView *, char *);
+    void (*last_search)(WView *);
 				/* Pointer to the last search command */
     gboolean want_to_quit;	/* Prepare for cleanup ... */
 
@@ -2558,23 +2558,21 @@ regexp_view_search (WView *view, char *pattern, char *string,
 }
 
 static void
-do_regexp_search (WView *view, char *regexp)
+do_regexp_search (WView *view)
 {
-    view->search_exp = regexp;
-    search (view, regexp, regexp_view_search);
+    search (view, view->search_exp, regexp_view_search);
     /* Had a refresh here */
     view->dirty++;
     view_update (view);
 }
 
 static void
-do_normal_search (WView *view, char *text)
+do_normal_search (WView *view)
 {
-    view->search_exp = text;
     if (view->hex_mode)
-	hex_search (view, text);
+	hex_search (view, view->search_exp);
     else
-	search (view, text, icase_search_p);
+	search (view, view->search_exp, icase_search_p);
     /* Had a refresh here */
     view->dirty++;
     view_update (view);
@@ -2704,25 +2702,25 @@ view_hexedit_save_changes_cmd (WView *view)
 static void
 regexp_search (WView *view, int direction)
 {
-    char *regexp = str_unconst ("");
-    static char *old = 0;
+    const char *defval;
+    char *regexp;
 
-    if (old)
-	regexp = old;
-    regexp = input_dialog (_("Search"), _(" Enter regexp:"), regexp);
-    if ((!regexp)) {
-	return;
-    }
-    if ((!*regexp)) {
-	g_free (regexp);
-	return;
-    }
-    g_free (old);
-    old = regexp;
+    defval = (view->search_exp != NULL) ? view->search_exp : "";
+
+    regexp = input_dialog (_("Search"), _(" Enter regexp:"), defval);
+    if (regexp == NULL || regexp[0] == '\0')
+	goto cleanup;
+
+    g_free (view->search_exp);
+    view->search_exp = regexp;
+    regexp = NULL;
+
     view->direction = direction;
-    do_regexp_search (view, regexp);
-
+    do_regexp_search (view);
     view->last_search = do_regexp_search;
+
+cleanup:
+    g_free (regexp);
 }
 
 /* {{{ User-definable commands }}} */
@@ -2737,8 +2735,7 @@ view_regexp_search_cmd (WView *view)
 static void
 view_normal_search_cmd (WView *view)
 {
-    static char *old;
-    char *exp = old ? old : str_unconst ("");
+    char *defval, *exp;
 
     enum {
 	SEARCH_DLG_HEIGHT = 8,
@@ -2768,36 +2765,35 @@ view_normal_search_cmd (WView *view)
 	SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
 	"[Input Line Keys]", quick_widgets, 0
     };
-    convert_to_display (old);
+
+    defval = g_strdup ((view->search_exp != NULL) ? view->search_exp : "");
+    convert_to_display (defval);
 
     quick_widgets[2].result = &treplace_backwards;
     quick_widgets[3].str_result = &exp;
-    quick_widgets[3].text = exp;
+    quick_widgets[3].text = defval;
 
-    if (quick_dialog (&Quick_input) == B_CANCEL) {
-	convert_from_input (old);
-	return;
-    }
+    if (quick_dialog (&Quick_input) == B_CANCEL)
+	goto cleanup;
+
     replace_backwards = treplace_backwards;
 
-    convert_from_input (old);
-
-    if ((!exp)) {
-	return;
-    }
-    if ((!*exp)) {
-	g_free (exp);
-	return;
-    }
-
-    g_free (old);
-    old = exp;
+    if (exp == NULL || exp[0] == '\0')
+	goto cleanup;
 
     convert_from_input (exp);
 
+    g_free (view->search_exp);
+    view->search_exp = exp;
+    exp = NULL;
+
     view->direction = replace_backwards ? -1 : 1;
-    do_normal_search (view, exp);
+    do_normal_search (view);
     view->last_search = do_normal_search;
+
+cleanup:
+    g_free (exp);
+    g_free (defval);
 }
 
 static void
@@ -2948,7 +2944,7 @@ static void
 view_continue_search_cmd (WView *view)
 {
     if (view->last_search) {
-	(*view->last_search) (view, view->search_exp);
+	view->last_search (view);
     } else {
 	/* if not... then ask for an expression */
 	view_normal_search_cmd (view);
