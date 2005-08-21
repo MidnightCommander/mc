@@ -2,6 +2,8 @@
 
 	* view.h: Rewrote it. All functions are preceded by a describing
 	comment and the "extern" keyword.
+	* fileloc.h: Newly added this file, which provides a place where
+	all names of user specific configuration files are listed.
 
 2005-08-19  Roland Illig  <roland.illig@gmx.de>
 
