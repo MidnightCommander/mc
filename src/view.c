@@ -1598,7 +1598,7 @@ view_display_status (WView *view)
 	if (width > 26) {
 	    view_percent (view, view->hex_mode
 		? view->hex_cursor
-		: view->dpy_start);
+		: view->dpy_end);
 	}
     }
     attrset (SELECTED_COLOR);

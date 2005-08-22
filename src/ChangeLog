@@ -4,6 +4,10 @@
 	does not always represent the top-left corner of the screen.
 	Replaced dpy_complete with dpy_end, the offset of the first byte
 	after the displayed region.
+	* view.c (view_display_status): In normal display mode (that is:
+	not search progress), calculate the percentage based on dpy_end
+	instead of dpy_start. This avoids a sudden break to 100 % when
+	approaching the end of file.
 
 2005-08-21  Roland Illig  <roland.illig@gmx.de>
 
