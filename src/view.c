@@ -162,11 +162,10 @@ struct WView {
 
     /* Display information */
     screen_dimen dpy_frame_size;/* Size of the frame surrounding the real viewer */
-    offset_type dpy_topleft;	/* Offset of the byte in the top left corner */
+    offset_type dpy_start;	/* Offset of the displayed data */
+    offset_type dpy_end;	/* Offset after the displayed data */
     offset_type dpy_text_column;/* Number of skipped columns in non-wrap
 				 * text mode */
-    gboolean    dpy_complete;	/* Has the last call to display() reached the
-				 * end of file? */
     offset_type hex_cursor;	/* Hexview cursor position in file */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
@@ -1026,16 +1025,17 @@ view_offset_to_coord (WView *view, offset_type *ret_line,
    The following variables have to do with the current position and are
    updated by the cursor movement functions.
 
-   In all viewer modes, dpy_topleft marks the offset of the top-left
-   corner on the screen.  In hex mode, hex_cursor is the offset of the
-   cursor.  In non-wrapping text mode, dpy_text_column is the number of
-   columns that are hidden on the left side on the screen.
+   In hex view and wrapped text view mode, dpy_start marks the offset of
+   the top-left corner on the screen, in non-wrapping text mode it is
+   the beginning of the current line.  In hex mode, hex_cursor is the
+   offset of the cursor.  In non-wrapping text mode, dpy_text_column is
+   the number of columns that are hidden on the left side on the screen.
 
-   In hex mode, dpy_topleft is updated by the view_fix_cursor_position()
-   function in order to keep the other functions simple.  In text
-   non-wrap mode dpy_topleft and dpy_text_column are normalized such
-   that dpy_text_column < view_get_datacolumns().
-*/
+   In hex mode, dpy_start is updated by the view_fix_cursor_position()
+   function in order to keep the other functions simple.  In
+   non-wrapping text mode dpy_start and dpy_text_column are normalized
+   such that dpy_text_column < view_get_datacolumns().
+ */
 
 /* prototypes for functions used by view_moveto_bottom() */
 static void view_move_up (WView *, offset_type);
@@ -1048,22 +1048,22 @@ view_fix_cursor_position (WView *view)
 	const offset_type bytes = view->bytes_per_line;
 	const offset_type displaysize = view->data_area.height * bytes;
 	const offset_type cursor = view->hex_cursor;
-	offset_type topleft = view->dpy_topleft;
+	offset_type topleft = view->dpy_start;
 
 	if (topleft + displaysize <= cursor)
 	    topleft = offset_rounddown (cursor, bytes)
 		    - (displaysize - bytes);
 	if (cursor < topleft)
 	    topleft = offset_rounddown (cursor, bytes);
-	view->dpy_topleft = topleft;
+	view->dpy_start = topleft;
     } else if (view->text_wrap_mode) {
 	offset_type line, col, columns;
 
 	columns = view->data_area.width;
-	view_offset_to_coord (view, &line, &col, view->dpy_topleft + view->dpy_text_column);
+	view_offset_to_coord (view, &line, &col, view->dpy_start + view->dpy_text_column);
 	if (columns != 0)
 	    col = offset_rounddown (col, columns);
-	view_coord_to_offset (view, &(view->dpy_topleft), line, col);
+	view_coord_to_offset (view, &(view->dpy_start), line, col);
 	view->dpy_text_column = 0;
     } else {
 	/* nothing to do */
@@ -1075,7 +1075,7 @@ view_movement_fixups (WView *view, gboolean reset_search)
 {
     view_fix_cursor_position (view);
     if (reset_search) {
-	view->search_start = view->dpy_topleft;
+	view->search_start = view->dpy_start;
 	view->search_length = 0;
     }
     view->dirty++;
@@ -1084,7 +1084,7 @@ view_movement_fixups (WView *view, gboolean reset_search)
 static void
 view_moveto_top (WView *view)
 {
-    view->dpy_topleft = 0;
+    view->dpy_start = 0;
     if (view->hex_mode) {
 	view->hex_cursor = 0;
     } else if (view->text_wrap_mode) {
@@ -1113,7 +1113,7 @@ view_moveto_bottom (WView *view)
 	view_move_up (view, lines_up);
 	view->hex_cursor = last_offset;
     } else {
-	view->dpy_topleft = last_offset;
+	view->dpy_start = last_offset;
 	view_moveto_bol (view);
 	view_move_up (view, lines_up);
     }
@@ -1129,8 +1129,8 @@ view_moveto_bol (WView *view)
 	/* do nothing */
     } else {
 	offset_type line, column;
-	view_offset_to_coord (view, &line, &column, view->dpy_topleft);
-	view_coord_to_offset (view, &(view->dpy_topleft), line, 0);
+	view_offset_to_coord (view, &line, &column, view->dpy_start);
+	view_coord_to_offset (view, &(view->dpy_start), line, 0);
 	view->dpy_text_column = 0;
     }
     view_movement_fixups (view, TRUE);
@@ -1154,8 +1154,8 @@ view_moveto_eol (WView *view)
     } else {
 	offset_type line, col;
 
-	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
-	view_coord_to_offset (view, &(view->dpy_topleft), line, OFFSETTYPE_MAX);
+	view_offset_to_coord (view, &line, &col, view->dpy_start);
+	view_coord_to_offset (view, &(view->dpy_start), line, OFFSETTYPE_MAX);
     }
     view_movement_fixups (view, FALSE);
 }
@@ -1165,9 +1165,9 @@ view_moveto_offset (WView *view, offset_type offset)
 {
     if (view->hex_mode) {
 	view->hex_cursor = offset;
-	view->dpy_topleft = offset - offset % view->bytes_per_line;
+	view->dpy_start = offset - offset % view->bytes_per_line;
     } else {
-	view->dpy_topleft = offset;
+	view->dpy_start = offset;
     }
     view_movement_fixups (view, TRUE);
 }
@@ -1188,8 +1188,8 @@ view_move_up (WView *view, offset_type lines)
 	offset_type bytes = lines * view->bytes_per_line;
 	if (view->hex_cursor >= bytes) {
 	    view->hex_cursor -= bytes;
-	    if (view->hex_cursor < view->dpy_topleft)
-		view->dpy_topleft = offset_doz (view->dpy_topleft, bytes);
+	    if (view->hex_cursor < view->dpy_start)
+		view->dpy_start = offset_doz (view->dpy_start, bytes);
 	} else {
 	    view->hex_cursor %= view->bytes_per_line;
 	}
@@ -1198,7 +1198,7 @@ view_move_up (WView *view, offset_type lines)
 	offset_type i, col, line, linestart;
 
 	for (i = 0; i < lines; i++) {
-	    view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	    view_offset_to_coord (view, &line, &col, view->dpy_start);
 	    if (col >= width) {
 		col -= width;
 	    } else if (line >= 1) {
@@ -1215,14 +1215,14 @@ view_move_up (WView *view, offset_type lines)
 	    } else {
 		/* nothing to do */
 	    }
-	    view_coord_to_offset (view, &(view->dpy_topleft), line, col);
+	    view_coord_to_offset (view, &(view->dpy_start), line, col);
 	}
     } else {
 	offset_type line, column;
 
-	view_offset_to_coord (view, &line, &column, view->dpy_topleft);
+	view_offset_to_coord (view, &line, &column, view->dpy_start);
 	line = offset_doz(line, lines);
-	view_coord_to_offset (view, &(view->dpy_topleft), line, column);
+	view_coord_to_offset (view, &(view->dpy_start), line, column);
     }
     view_movement_fixups (view, (lines != 1));
 }
@@ -1241,10 +1241,10 @@ view_move_down (WView *view, offset_type lines)
 	for (i = 0; i < lines && view->hex_cursor < limit; i++) {
 	    view->hex_cursor += view->bytes_per_line;
 	    if (lines != 1)
-		view->dpy_topleft += view->bytes_per_line;
+		view->dpy_start += view->bytes_per_line;
 	}
 
-    } else if (view->dpy_complete) {
+    } else if (view->dpy_end == view_get_filesize (view)) {
 	/* don't move further down. There's nothing more to see. */
 
     } else if (view->text_wrap_mode) {
@@ -1253,7 +1253,7 @@ view_move_down (WView *view, offset_type lines)
 	for (i = 0; i < lines; i++) {
 	    offset_type new_offset, chk_line, chk_col;
 
-	    view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	    view_offset_to_coord (view, &line, &col, view->dpy_start);
 	    col += view->data_area.width;
 	    view_coord_to_offset (view, &new_offset, line, col);
 
@@ -1264,15 +1264,15 @@ view_move_down (WView *view, offset_type lines)
 		&& get_byte (view, new_offset) == '\n')
 		new_offset++;
 
-	    view->dpy_topleft = new_offset;
+	    view->dpy_start = new_offset;
 	}
 
     } else {
 	offset_type line, col;
 
-	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	view_offset_to_coord (view, &line, &col, view->dpy_start);
 	line += lines;
-	view_coord_to_offset (view, &(view->dpy_topleft), line, col);
+	view_coord_to_offset (view, &(view->dpy_start), line, col);
     }
     view_movement_fixups (view, (lines != 1));
 }
@@ -1329,7 +1329,7 @@ view_done (WView *view)
 	offset_type line, col;
 
 	canon_fname = vfs_canon (view->filename);
-	view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+	view_offset_to_coord (view, &line, &col, view->dpy_start);
 	save_file_position (canon_fname, line + 1, col);
 	g_free (canon_fname);
     }
@@ -1469,7 +1469,7 @@ view_load (WView *view, const char *command, const char *file,
 
   finish:
     view->command = g_strdup (command);
-    view->dpy_topleft = 0;
+    view->dpy_start = 0;
     view->search_start = 0;
     view->search_length = 0;
     view->dpy_text_column = 0;
@@ -1532,7 +1532,7 @@ view_percent (WView *view, offset_type p)
 	return;
     filesize = view_get_filesize (view);
 
-    if (filesize == 0 || view->dpy_complete)
+    if (filesize == 0 || view->dpy_end == filesize)
 	percent = 100;
     else if (p > (INT_MAX / 100))
 	percent = p / (filesize / 100);
@@ -1579,7 +1579,7 @@ view_display_status (WView *view)
 		printw (str_unconst (_("Offset 0x%08lx")), view->hex_cursor);
 	    else {
 		offset_type line, col;
-		view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+		view_offset_to_coord (view, &line, &col, view->dpy_start);
 		printw (str_unconst (_("Line %lu Col %lu")),
 		    (unsigned long) line + 1,
 		    (unsigned long) (view->text_wrap_mode ? col : view->dpy_text_column));
@@ -1598,7 +1598,7 @@ view_display_status (WView *view)
 	if (width > 26) {
 	    view_percent (view, view->hex_mode
 		? view->hex_cursor
-		: view->dpy_topleft);
+		: view->dpy_start);
 	}
     }
     attrset (SELECTED_COLOR);
@@ -1698,7 +1698,7 @@ view_display_hex (WView *view)
     view_display_clean (view);
 
     /* Find the first displayable changed byte */
-    from = view->dpy_topleft;
+    from = view->dpy_start;
     while (curr && (curr->offset < from)) {
 	curr = curr->next;
     }
@@ -1806,7 +1806,7 @@ view_display_hex (WView *view)
     attrset (NORMAL_COLOR);
 
     view_place_cursor (view);
-    view->dpy_complete = (get_byte (view, from) == -1);
+    view->dpy_end = from;
 }
 
 static void
@@ -1825,7 +1825,7 @@ view_display_text (WView * view)
     view_display_ruler (view);
 
     /* Find the first displayable changed byte */
-    from = view->dpy_topleft;
+    from = view->dpy_start;
     while (curr && (curr->offset < from)) {
 	curr = curr->next;
     }
@@ -1900,10 +1900,10 @@ view_display_text (WView * view)
 	col++;
 	attrset (NORMAL_COLOR);
     }
-    view->dpy_complete = (get_byte (view, from) == -1);
+    view->dpy_end = from;
 }
 
-/* Displays as much data from view->dpy_topleft as fits on the screen */
+/* Displays as much data from view->dpy_start as fits on the screen */
 static void
 display (WView *view)
 {
@@ -2329,7 +2329,7 @@ search (WView *view, char *text,
 	view->search_start += t;
 
 	if (t != beginning) {
-	    view->dpy_topleft = t;
+	    view->dpy_start = t;
 	}
 
 	g_free (s);
@@ -2516,7 +2516,7 @@ hex_search (WView *view, const char *text)
     view->hexedit_lownibble = FALSE;
 
     /* Adjust the file offset */
-    view->dpy_topleft = pos - pos % view->bytes_per_line;
+    view->dpy_start = pos - pos % view->bytes_per_line;
 }
 
 static int
@@ -2615,8 +2615,8 @@ view_toggle_wrap_mode_cmd (WView *view)
     } else {
 	offset_type line;
 
-	view_offset_to_coord (view, &line, &(view->dpy_text_column), view->dpy_topleft);
-	view_coord_to_offset (view, &(view->dpy_topleft), line, 0);
+	view_offset_to_coord (view, &line, &(view->dpy_text_column), view->dpy_start);
+	view_coord_to_offset (view, &(view->dpy_start), line, 0);
     }
     view_labels (view);
     view->dirty++;
@@ -2630,12 +2630,12 @@ view_toggle_hex_mode_cmd (WView *view)
     view->hex_mode = !view->hex_mode;
 
     if (view->hex_mode) {
-	view->hex_cursor = view->dpy_topleft;
-	view->dpy_topleft =
-	    offset_rounddown (view->dpy_topleft, view->bytes_per_line);
+	view->hex_cursor = view->dpy_start;
+	view->dpy_start =
+	    offset_rounddown (view->dpy_start, view->bytes_per_line);
 	view->widget.options |= W_WANT_CURSOR;
     } else {
-	view->dpy_topleft = view->hex_cursor;
+	view->dpy_start = view->hex_cursor;
 	view_moveto_bol (view);
 	view->widget.options &= ~W_WANT_CURSOR;
     }
@@ -2651,7 +2651,7 @@ view_moveto_line_cmd (WView *view)
     char *answer, *answer_end, prompt[BUF_SMALL];
     offset_type line, col;
 
-    view_offset_to_coord (view, &line, &col, view->dpy_topleft);
+    view_offset_to_coord (view, &line, &col, view->dpy_start);
 
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current line number is %d.\n"
@@ -3103,11 +3103,11 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     case 'm':
-	view->marks[view->marker] = view->dpy_topleft;
+	view->marks[view->marker] = view->dpy_start;
 	return MSG_HANDLED;
 
     case 'r':
-	view->dpy_topleft = view->marks[view->marker];
+	view->dpy_start = view->marks[view->marker];
 	view->dirty++;
 	return MSG_HANDLED;
 
@@ -3402,9 +3402,9 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->coord_cache       = NULL;
 
     view->dpy_frame_size    = is_panel ? 1 : 0;
-    view->dpy_topleft       = 0;
+    view->dpy_start = 0;
     view->dpy_text_column   = 0;
-    view->dpy_complete      = FALSE;
+    view->dpy_end= 0;
     view->hex_cursor        = 0;
     view->cursor_col        = 0;
     view->cursor_row        = 0;
