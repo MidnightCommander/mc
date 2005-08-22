@@ -1085,13 +1085,8 @@ static void
 view_moveto_top (WView *view)
 {
     view->dpy_start = 0;
-    if (view->hex_mode) {
-	view->hex_cursor = 0;
-    } else if (view->text_wrap_mode) {
-	/* nothing to do */
-    } else {
-	view->dpy_text_column = 0;
-    }
+    view->hex_cursor = 0;
+    view->dpy_text_column = 0;
     view_movement_fixups (view, TRUE);
 }
 

@@ -8,6 +8,7 @@
 	not search progress), calculate the percentage based on dpy_end
 	instead of dpy_start. This avoids a sudden break to 100 % when
 	approaching the end of file.
+	* view.c (view_moveto_top): Simplified the code.
 
 2005-08-21  Roland Illig  <roland.illig@gmx.de>
 
