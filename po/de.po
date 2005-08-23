@@ -11,7 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"POT-Creation-Date: 2005-07-31 17:58+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2005-05-19 12:57+0100\n"
 "Last-Translator: Roland Illig <roland.illig@gmx.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -57,9 +58,6 @@ msgstr " Die Datei »%s« ist zu groß "
 
 msgid "Macro recursion is too deep"
 msgstr "Makros sind zu tief verschachtelt"
-
-msgid "&Dismiss"
-msgstr "&Schließen"
 
 msgid " Enter file name: "
 msgstr " Dateiname eingeben: "
@@ -353,6 +351,9 @@ msgstr " Eine Taste drücken: "
 msgid " Execute Macro "
 msgstr " Makro ausführen "
 
+msgid "&Dismiss"
+msgstr "&Schließen"
+
 msgid " Emacs key: "
 msgstr " Emacs-Taste: "
 
@@ -635,6 +636,7 @@ msgstr ""
 msgid " Error in file %s on line %d "
 msgstr " Fehler in Datei %s auf Zeile %d "
 
+#, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
 msgstr "bind: Falsche Argumentanzahl; bind <Taste> <Befehl>"
 
@@ -642,6 +644,7 @@ msgstr "bind: Falsche Argumentanzahl; bind <Taste> <Befehl>"
 msgid "bind: Bad key value `%s'"
 msgstr "bind: Falsche Tastenangabe: »%s«"
 
+#, c-format
 msgid "bind: Ehh...no key?"
 msgstr "bind: Keine Taste?"
 
@@ -1230,9 +1233,11 @@ msgstr "&Group"
 msgid "Cannot read directory contents"
 msgstr "Konnte Verzeichnis nicht lesen"
 
+#, c-format
 msgid "Press any key to continue..."
 msgstr "Drücken Sie eine Taste zum Fortfahren..."
 
+#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Geben Sie `exit' ein, um zu Midnight Commander zurückzukehren"
 
@@ -2586,6 +2591,7 @@ msgstr "Kurze Anleitung anzeigen"
 msgid "ARG"
 msgstr "ARG"
 
+#, c-format
 msgid "Usage:"
 msgstr "Aufruf:"
 
@@ -2754,6 +2760,7 @@ msgstr "Mit Internationalisierungs-Unterstützung\n"
 msgid "With multiple codepages support\n"
 msgstr "Mit mehrfach Codepage-Unterstützung\n"
 
+#, c-format
 msgid "Virtual File System:"
 msgstr "Virtuelles Dateisystem:"
 
@@ -2876,6 +2883,7 @@ msgstr "Kann temporäres Verzeichnis »%s« nicht anlegen: %s\n"
 msgid "Temporary files will be created in %s\n"
 msgstr "Temporäre Dateien werden in »%s« gespeichert\n"
 
+#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Es werden keine temporären Dateien erzeugt\n"
 
@@ -2992,23 +3000,23 @@ msgstr "GeheZu"
 msgid "ButtonBar|Line"
 msgstr "Zeile"
 
-msgid "ButtonBar|Save"
-msgstr "Speich"
-
-msgid "ButtonBar|RxSrch"
-msgstr "RxSuch"
-
 msgid "ButtonBar|View"
 msgstr "Ansich"
 
 msgid "ButtonBar|Edit"
 msgstr "Bearbe"
 
+msgid "ButtonBar|Save"
+msgstr "Speich"
+
 msgid "ButtonBar|UnWrap"
 msgstr "KeinZU"
 
 msgid "ButtonBar|Wrap"
 msgstr "ZeilUm"
+
+msgid "ButtonBar|RxSrch"
+msgstr "RxSuch"
 
 msgid "ButtonBar|HxSrch"
 msgstr "HxSuch"

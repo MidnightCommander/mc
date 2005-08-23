@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"POT-Creation-Date: 2005-07-31 17:58+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2005-03-29 01:20+0300\n"
 "Last-Translator: Phan Vinh Thinh <teppi@vnlinux.org>\n"
 "Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.9.1\n"
 
 #, fuzzy
@@ -57,9 +57,6 @@ msgstr " Tập tin quá lớn: "
 
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
-
-msgid "&Dismiss"
-msgstr "Đó&ng"
 
 msgid " Enter file name: "
 msgstr " Hãy nhập tên tập tin: "
@@ -358,6 +355,9 @@ msgstr " Nhấn phím bất kỳ: "
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
 
+msgid "&Dismiss"
+msgstr "Đó&ng"
+
 msgid " Emacs key: "
 msgstr "Phím Emacs: "
 
@@ -643,6 +643,7 @@ msgstr ""
 msgid " Error in file %s on line %d "
 msgstr " Lỗi trong tập tin %s trên dòng %d "
 
+#, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
 msgstr ""
 
@@ -650,6 +651,7 @@ msgstr ""
 msgid "bind: Bad key value `%s'"
 msgstr ""
 
+#, c-format
 msgid "bind: Ehh...no key?"
 msgstr ""
 
@@ -1239,9 +1241,11 @@ msgstr "&Nhóm"
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
 
+#, c-format
 msgid "Press any key to continue..."
 msgstr "Để tiếp tục nhấn phím bất kỳ..."
 
+#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Hãy gõ \"exit\" để quay trở lại Midnight Commander"
 
@@ -2593,6 +2597,7 @@ msgstr "Hiển thị chỉ dẫn ngắn gọn"
 msgid "ARG"
 msgstr "ARG"
 
+#, c-format
 msgid "Usage:"
 msgstr "Sử dụng:"
 
@@ -2762,6 +2767,7 @@ msgstr "Với hỗ trợ các ngôn ngữ khác\n"
 msgid "With multiple codepages support\n"
 msgstr "Với hỗ trợ nhiều bảng mã\n"
 
+#, c-format
 msgid "Virtual File System:"
 msgstr "Hệ thống tập tin ảo:"
 
@@ -2883,6 +2889,7 @@ msgstr "Không tạo được thư mục tạm thời %s: %s\n"
 msgid "Temporary files will be created in %s\n"
 msgstr "Tập tin tạm thời sẽ được tạo trong thư mục %s\n"
 
+#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Tập tin tạm thời sẽ không được tạo ra\n"
 
@@ -2999,22 +3006,22 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
 msgid "ButtonBar|View"
 msgstr ""
 
 msgid "ButtonBar|Edit"
 msgstr ""
 
+msgid "ButtonBar|Save"
+msgstr ""
+
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
 msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|RxSrch"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"

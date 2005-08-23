@@ -7,13 +7,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-11 20:16-0400\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2005-04-06 00:49+0100\n"
 "Last-Translator: Vaidrius Petrauskas <vaidrius@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Sintak&sės ryškinimas"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Apie "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -45,12 +56,6 @@ msgstr " Byla „%s“ per didelė "
 msgid "Macro recursion is too deep"
 msgstr "Makrosų rekursija per gili"
 
-msgid "&Dismiss"
-msgstr "At&mesti"
-
-msgid "&OK"
-msgstr "&Gerai"
-
 msgid " Enter file name: "
 msgstr " Įveskite bylos pavadinimą: "
 
@@ -71,6 +76,9 @@ msgstr "Daryti kopijas -->"
 
 msgid "&Cancel"
 msgstr "&Atsisakyti"
+
+msgid "&OK"
+msgstr "&Gerai"
 
 msgid "Extension:"
 msgstr "Plėtinys:"
@@ -330,17 +338,20 @@ msgstr " Kam"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tema> -c <kopija> <kam>"
 
-msgid " Emacs key: "
-msgstr " „Emacs“ klavišas: "
-
-msgid " Execute Macro "
-msgstr " Įvykdyti makrosą "
-
 msgid " Insert Literal "
 msgstr " Įterpti simbolį "
 
 msgid " Press any key: "
 msgstr " Paspauskite bet kurį klavišą: "
+
+msgid " Execute Macro "
+msgstr " Įvykdyti makrosą "
+
+msgid "&Dismiss"
+msgstr "At&mesti"
+
+msgid " Emacs key: "
+msgstr " „Emacs“ klavišas: "
 
 #, c-format
 msgid ""
@@ -507,8 +518,13 @@ msgstr "&Bendrosios..."
 msgid "&Save mode..."
 msgstr "Įrašymo režima&s..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "Mokyti &klavišų..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "Sintak&sės ryškinimas"
 
 msgid " File "
 msgstr " Byla "
@@ -530,6 +546,10 @@ msgstr "Intuityvus"
 
 msgid "Emacs"
 msgstr "„Emacs“"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "Kit&oks:"
 
 msgid "None"
 msgstr "Joks"
@@ -614,6 +634,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Klaida bylos %s eilutėje %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " „chown“ komanda "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " „chown“ komanda "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " „chown“ komanda "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Įspėjimas: byla %s nerasta\n"
 
 msgid "&Set"
 msgstr "&Nustatyti"
@@ -749,6 +817,10 @@ msgstr "Įvesties / išvesties kodų lentelė:"
 
 msgid "&Select"
 msgstr "Ž&ymėti"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Pasyvus režimas"
 
 msgid "Use &passive mode"
 msgstr "&Pasyvus režimas"
@@ -1201,10 +1273,10 @@ msgstr ""
 msgid " ~/%s file error "
 msgstr " „ „~/%s“ bylos klaida "
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext of use that file as an example of how to write "
+"want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
 "3.0 versijoje pasikeitė „~/%s“ bylos formatas. Galite ją nukopijuoti iš „%"
@@ -1888,6 +1960,10 @@ msgid "Created:   %s"
 msgstr "Sukurta:   %s"
 
 #, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
+
+#, c-format
 msgid "Size:      %s"
 msgstr "Dydis:     %s"
 
@@ -2197,6 +2273,9 @@ msgstr "&Patvirtinimai..."
 
 msgid "&Display bits..."
 msgstr "Iš&vesties bitai..."
+
+msgid "learn &Keys..."
+msgstr "Mokyti &klavišų..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuali bylų sistema..."
@@ -2807,14 +2886,12 @@ msgstr " Konvejeris nepavyko "
 msgid " Dup failed "
 msgstr " „Dup“ nepavyko "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Nepavyko sukurti vaiko "
 
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
-
-msgid " Cannot open file "
-msgstr " Nepavyko atverti bylos "
 
 #, c-format
 msgid ""
@@ -2844,15 +2921,29 @@ msgid "Offset 0x%08lx"
 msgstr "Poslinkis 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Stlp %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s baitų"
 
-msgid "  [grow]"
-msgstr "  [daugiau]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s baitų"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Nepavyko išsaugoti bylos. "
 
 msgid "Invalid hex search expression"
 msgstr "Netaisyklinga šešioliktainės paieškos išraiška"
@@ -2882,47 +2973,59 @@ msgstr " Eiti adresu "
 msgid " Enter regexp:"
 msgstr " Įveskite reguliarą išraišką: "
 
-msgid "Ascii"
-msgstr "ASCII"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Šešiol"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Eiti į"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Eilutė"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxPšk"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "RedŠšl"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "RedTkst"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Nelauž."
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Laužyti"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "ŠšlPšk"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Pirmin."
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Apdorot."
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Išform."
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Formuot"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Istorija "
@@ -3500,3 +3603,54 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Bylos pakeitimai prarasti"
+
+#~ msgid " Cannot open file "
+#~ msgstr " Nepavyko atverti bylos "
+
+#~ msgid "Col %d"
+#~ msgstr "Stlp %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [daugiau]"
+
+#~ msgid "Ascii"
+#~ msgstr "ASCII"
+
+#~ msgid "Hex"
+#~ msgstr "Šešiol"
+
+#~ msgid "Goto"
+#~ msgstr "Eiti į"
+
+#~ msgid "Line"
+#~ msgstr "Eilutė"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxPšk"
+
+#~ msgid "EdHex"
+#~ msgstr "RedŠšl"
+
+#~ msgid "EdText"
+#~ msgstr "RedTkst"
+
+#~ msgid "UnWrap"
+#~ msgstr "Nelauž."
+
+#~ msgid "Wrap"
+#~ msgstr "Laužyti"
+
+#~ msgid "HxSrch"
+#~ msgstr "ŠšlPšk"
+
+#~ msgid "Raw"
+#~ msgstr "Pirmin."
+
+#~ msgid "Parse"
+#~ msgstr "Apdorot."
+
+#~ msgid "Unform"
+#~ msgstr "Išform."
+
+#~ msgid "Format"
+#~ msgstr "Formuot"

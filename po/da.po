@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -21,35 +21,46 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "synta&X farvning"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Om... "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Fejl ved forsøg på åbning af rør for læsning: "
+
 msgid "Error"
 msgstr "Fejl"
 
-msgid " Cannot open file for reading: "
-msgstr " Fejl under åbning af fil for læsning: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Problem under læsning fra rør: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Fejl ved forsøg på åbning af rør for læsning: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Kan ikke finde størrelse-/rettighedsinformation for filen: "
 
-msgid " Not an ordinary file: "
-msgstr " Ikke en normal fil: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Kan ikke vise: ikke en normal fil "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Filen er for stor: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "&Forkast"
-
-msgid "&OK"
-msgstr "&OK"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -72,6 +83,9 @@ msgstr "Lav sikkerhedskopier -->"
 
 msgid "&Cancel"
 msgstr "&Annullér"
+
+msgid "&OK"
+msgstr "&OK"
 
 msgid "Extension:"
 msgstr "Udvidelse"
@@ -241,6 +255,13 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nej"
 
+#, fuzzy
+msgid " Error "
+msgstr "Fejl"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Kopiér til klipbord "
 
@@ -331,17 +352,20 @@ msgstr " Til"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <emne> -c <cc> <til>"
 
-msgid " Emacs key: "
-msgstr " Emacs-tast: "
-
-msgid " Execute Macro "
-msgstr " Kør makro "
-
 msgid " Insert Literal "
 msgstr " Indsæt bogstaveligt "
 
 msgid " Press any key: "
 msgstr " Tryk på en tast: "
+
+msgid " Execute Macro "
+msgstr " Kør makro "
+
+msgid "&Dismiss"
+msgstr "&Forkast"
+
+msgid " Emacs key: "
+msgstr " Emacs-tast: "
 
 #, c-format
 msgid ""
@@ -505,8 +529,13 @@ msgstr "&Generelt... "
 msgid "&Save mode..."
 msgstr "Gemme&måde..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "lær &Taster..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "synta&X farvning"
 
 msgid " File "
 msgstr " Filer "
@@ -528,6 +557,10 @@ msgstr "Intuitiv"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "&Brugerdefineret:"
 
 msgid "None"
 msgstr "Ingen"
@@ -613,6 +646,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Syntaksfejl i filen %s ved linie %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Chown kommando "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Chown kommando "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Chown kommando "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Advarsel: fil %s ikke fundet\n"
 
 msgid "&Set"
 msgstr "&Sæt"
@@ -748,6 +829,10 @@ msgstr "Kodning for inddata /visning:"
 
 msgid "&Select"
 msgstr "&Vælg"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Gemme&måde..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1189,41 +1274,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " filfejl "
 
-msgid "Format of the "
-msgstr "Format af "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext filen er ændret\n"
 "i version 3.0. Det ser ud til at installationen\n"
 "mislykkedes. Venligst hent en ny kopi fra Midnight\n"
 "Commander pakken."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" filen er ændret\n"
-"siden version 3.0. Du kan enten \n"
-"kopiere den fra "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " filfejl "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext eller bruge denne\n"
-"fil som et eksempel på hvordan den skal laves.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext vil blive brugt indtil videre."
 
 msgid " Copy "
 msgstr " Kopiér "
@@ -1705,6 +1780,9 @@ msgstr "&Vis - F3"
 msgid "&Edit - F4"
 msgstr "R&ediger - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Start ved:"
 
@@ -1897,6 +1975,10 @@ msgstr "Ændret:    %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Oprettet:  %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2214,6 +2296,9 @@ msgstr "&Bekræftelser..."
 msgid "&Display bits..."
 msgstr "&Vis bits..."
 
+msgid "learn &Keys..."
+msgstr "lær &Taster..."
+
 msgid "&Virtual FS..."
 msgstr "&Virtuelt FS..."
 
@@ -2530,6 +2615,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "Brugernavn:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
@@ -2825,14 +2913,12 @@ msgstr " Pibe fejlede "
 msgid " Dup failed "
 msgstr " Dup fejlede "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Kan ikke starte barneprogram "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " Kunne ikke åbne filen "
 
 #, c-format
 msgid ""
@@ -2862,15 +2948,29 @@ msgid "Offset 0x%08lx"
 msgstr "Afstand 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Kol %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-msgid "  [grow]"
-msgstr "  [voks]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Fejl under gemning af fil. "
 
 msgid "Invalid hex search expression"
 msgstr "Ugyldig hex regulært søgeudtryk"
@@ -2900,47 +3000,59 @@ msgstr " Gå til adresse "
 msgid " Enter regexp:"
 msgstr " Indtast regexp:"
 
-msgid "Ascii"
-msgstr "ASCII"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Gåtil"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Linie"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxpSøg"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "RedHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "RedTekst"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Ubrudt"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Ombryd"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HexSøg"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Rå"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Parse"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "U-form"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Format"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Historie "
@@ -3519,6 +3631,85 @@ msgstr " Intern fejl:"
 
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Fejl under åbning af fil for læsning: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Ikke en normal fil: "
+
+#~ msgid "Format of the "
+#~ msgstr "Format af "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " filen er ændret\n"
+#~ "siden version 3.0. Du kan enten \n"
+#~ "kopiere den fra "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext eller bruge denne\n"
+#~ "fil som et eksempel på hvordan den skal laves.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext vil blive brugt indtil videre."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Kunne ikke åbne filen "
+
+#~ msgid "Col %d"
+#~ msgstr "Kol %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [voks]"
+
+#~ msgid "Ascii"
+#~ msgstr "ASCII"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Gåtil"
+
+#~ msgid "Line"
+#~ msgstr "Linie"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxpSøg"
+
+#~ msgid "EdHex"
+#~ msgstr "RedHex"
+
+#~ msgid "EdText"
+#~ msgstr "RedTekst"
+
+#~ msgid "UnWrap"
+#~ msgstr "Ubrudt"
+
+#~ msgid "Wrap"
+#~ msgstr "Ombryd"
+
+#~ msgid "HxSrch"
+#~ msgstr "HexSøg"
+
+#~ msgid "Raw"
+#~ msgstr "Rå"
+
+#~ msgid "Parse"
+#~ msgstr "Parse"
+
+#~ msgid "Unform"
+#~ msgstr "U-form"
+
+#~ msgid "Format"
+#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Brugermenuen er kun tilgængelig i mcedit startet fra mc"

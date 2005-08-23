@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Adam Byrtek <alpha@debian.org>\n"
 "Language-Team: Polish\n"
@@ -19,35 +19,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Pod¶wietlanie sk³adniowe"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Informacje o "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Otwarcie potoku do odczytu nie powiod³o siê: "
+
 msgid "Error"
 msgstr "B³±d"
 
-msgid " Cannot open file for reading: "
-msgstr " Otwarcie pliku do odczytu nie powiod³o siê: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " B³±d przy odczycie z potoku: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Otwarcie potoku do odczytu nie powiod³o siê: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do pliku: "
 
-msgid " Not an ordinary file: "
-msgstr " To nie jest zwyk³y plik: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Nie mo¿na wy¶wietliæ: to nie zwyk³y plik "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Plik jest zbyt du¿y: "
 
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
-
-msgid "&Dismiss"
-msgstr "&Porzuæ"
-
-msgid "&OK"
-msgstr "&OK"
 
 msgid " Enter file name: "
 msgstr " Wprowad¼ nazwê pliku: "
@@ -69,6 +80,9 @@ msgstr "Kopie zapasowe -->"
 
 msgid "&Cancel"
 msgstr "&Anuluj"
+
+msgid "&OK"
+msgstr "&OK"
 
 msgid "Extension:"
 msgstr "Rozszerzenie:"
@@ -239,6 +253,13 @@ msgstr "&Tak"
 msgid "&No"
 msgstr "&Nie"
 
+#, fuzzy
+msgid " Error "
+msgstr "B³±d"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Skopiuj do schowka "
 
@@ -329,17 +350,20 @@ msgstr " do"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <temat> -c <cc> <do>"
 
-msgid " Emacs key: "
-msgstr " Klawisz Emacsa: "
-
-msgid " Execute Macro "
-msgstr " Wykonaj makro "
-
 msgid " Insert Literal "
 msgstr " Wstaw litera³ "
 
 msgid " Press any key: "
 msgstr " Naci¶nij dowolny klawisz: "
+
+msgid " Execute Macro "
+msgstr " Wykonaj makro "
+
+msgid "&Dismiss"
+msgstr "&Porzuæ"
+
+msgid " Emacs key: "
+msgstr " Klawisz Emacsa: "
 
 #, c-format
 msgid ""
@@ -503,8 +527,13 @@ msgstr "&Ogólne...  "
 msgid "&Save mode..."
 msgstr "Tryb zapisu..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "&Definiuj klawisze..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "Pod¶wietlanie sk³adniowe"
 
 msgid " File "
 msgstr " Plik "
@@ -526,6 +555,10 @@ msgstr "Intuicyjne"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "&Zdefiniowny przez u¿ytkownika:"
 
 msgid "None"
 msgstr "Brak"
@@ -610,6 +643,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " B³±d w pliki %s w wierszu %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Polecenie chown"
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Polecenie chown"
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Polecenie chown"
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Uwaga: nie odnaleziono pliku %s\n"
 
 msgid "&Set"
 msgstr "Ustaw"
@@ -745,6 +826,10 @@ msgstr "Strona kodowa wej¶ciowa / wyj¶ciowa:"
 
 msgid "&Select"
 msgstr "&Wybierz"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "U¿yj trybu &pasywnego"
 
 msgid "Use &passive mode"
 msgstr "U¿yj trybu &pasywnego"
@@ -1182,41 +1267,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parametr "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " b³±d pliku "
 
-msgid "Format of the "
-msgstr "Format "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "Format pliku mc.ext uleg³ zmianie wraz z wersj± 3.0.\n"
 "Wygl±da na to, ¿e instalacja siê nie powiod³a.\n"
 "Pobierz pierwotn± wersjê tego pliku z pakietu\n"
 "Midnight Commandera."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" uleg³ zmianie\n"
-"wraz z wersj± 3.0. Mo¿esz skopiowaæ zawarto¶æ\n"
-"z pliku "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " b³±d pliku "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext lub u¿yæ go jako przyk³adu\n"
-"do utworzenia w³asnego.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "zostanie wykorzystany mc.ext."
 
 msgid " Copy "
 msgstr " Skopiuj "
@@ -1698,6 +1773,9 @@ msgstr "Podgl±d - F3"
 msgid "&Edit - F4"
 msgstr "Edycja - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Rozpoczêcie w:"
 
@@ -1890,6 +1968,10 @@ msgstr "Zmodyfikowany:  %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Utworzony:      %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2201,6 +2283,9 @@ msgstr "&Potwierdzanie..."
 
 msgid "&Display bits..."
 msgstr "&Wy¶wietlanie znaków..."
+
+msgid "learn &Keys..."
+msgstr "&Definiuj klawisze..."
 
 msgid "&Virtual FS..."
 msgstr "&Wirtualny System Plików..."
@@ -2516,6 +2601,9 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr "U¿ycie:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "NADRZEDN"
 
@@ -2807,14 +2895,12 @@ msgstr " Funkcja pipe nie powiod³a siê "
 msgid " Dup failed "
 msgstr " Funkcja dup nie powiod³a siê "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Nie mo¿na uruchomiæ programu potomnego "
 
 msgid "Empty output from child filter"
 msgstr "Puste wyj¶cie filtra"
-
-msgid " Cannot open file "
-msgstr " Nie mo¿na otworzyæ pliku "
 
 #, c-format
 msgid ""
@@ -2844,15 +2930,29 @@ msgid "Offset 0x%08lx"
 msgstr "Przesuniêcie 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Kol %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bajtów"
 
-msgid "  [grow]"
-msgstr "[przyrost]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bajtów"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " B³±d przy próbie zapisu pliku. "
 
 msgid "Invalid hex search expression"
 msgstr " Niepoprawne szesnastkowe wyra¿enie wyszukiwania "
@@ -2882,47 +2982,59 @@ msgstr " Przejd¼ pod adres "
 msgid " Enter regexp:"
 msgstr " Wprowad¼ wyra¿enie regularne: "
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Id¼Do"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Wiersz"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "SzkWR"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdTkst"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Odwiñ"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Zawiñ"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "SzkHx"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Surowy"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Analiz"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "BezFrm"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Format"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr "Historia "
@@ -3503,6 +3615,85 @@ msgstr "B³±d wewnêtrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Otwarcie pliku do odczytu nie powiod³o siê: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " To nie jest zwyk³y plik: "
+
+#~ msgid "Format of the "
+#~ msgstr "Format "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " uleg³ zmianie\n"
+#~ "wraz z wersj± 3.0. Mo¿esz skopiowaæ zawarto¶æ\n"
+#~ "z pliku "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext lub u¿yæ go jako przyk³adu\n"
+#~ "do utworzenia w³asnego.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "zostanie wykorzystany mc.ext."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Nie mo¿na otworzyæ pliku "
+
+#~ msgid "Col %d"
+#~ msgstr "Kol %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "[przyrost]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Id¼Do"
+
+#~ msgid "Line"
+#~ msgstr "Wiersz"
+
+#~ msgid "RxSrch"
+#~ msgstr "SzkWR"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHex"
+
+#~ msgid "EdText"
+#~ msgstr "EdTkst"
+
+#~ msgid "UnWrap"
+#~ msgstr "Odwiñ"
+
+#~ msgid "Wrap"
+#~ msgstr "Zawiñ"
+
+#~ msgid "HxSrch"
+#~ msgstr "SzkHx"
+
+#~ msgid "Raw"
+#~ msgstr "Surowy"
+
+#~ msgid "Parse"
+#~ msgstr "Analiz"
+
+#~ msgid "Unform"
+#~ msgstr "BezFrm"
+
+#~ msgid "Format"
+#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Menu u¿ytkownika dostêpne tylko po uruchomieniu mcedit z mc"

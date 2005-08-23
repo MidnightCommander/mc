@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2005-07-11\n"
 "Last-Translator: Leonard den Ottolander <leonard den ottolander nl>\n"
 "Language-Team: \n"
@@ -17,35 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Synta&X kleuring"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Info "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Openen van pijp voor lezen mislukt: "
+
 msgid "Error"
 msgstr "Fout"
 
-msgid " Cannot open file for reading: "
-msgstr " Openen van bestand voor lezen mislukt: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Probleem bij het lezen van pijp: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Openen van pijp voor lezen mislukt: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Kan geen grootte-/rechteninformatie verkrijgen over bestand: "
 
-msgid " Not an ordinary file: "
-msgstr " Geen gewoon bestand: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Bekijken niet mogelijk: geen normaal bestand "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Bestand is te groot: "
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
-
-msgid "&Dismiss"
-msgstr "&Verwerp"
-
-msgid "&OK"
-msgstr "&OK"
 
 msgid " Enter file name: "
 msgstr " Geef bestandsnaam: "
@@ -67,6 +78,9 @@ msgstr "Reservebestanden maken -->"
 
 msgid "&Cancel"
 msgstr "&Afbreken"
+
+msgid "&OK"
+msgstr "&OK"
 
 msgid "Extension:"
 msgstr "Extensie:"
@@ -232,6 +246,13 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nee"
 
+#, fuzzy
+msgid " Error "
+msgstr "Fout"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Kopiëer naar prikbord "
 
@@ -319,24 +340,28 @@ msgstr " Aan"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <onderwerp> -c <cc> <aan>"
 
-msgid " Emacs key: "
-msgstr " Emacs-toets: "
-
-msgid " Execute Macro "
-msgstr " Macro uitvoeren "
-
 msgid " Insert Literal "
 msgstr " Letterlijk invoegen "
 
 msgid " Press any key: "
 msgstr " Druk een toets: "
 
+msgid " Execute Macro "
+msgstr " Macro uitvoeren "
+
+msgid "&Dismiss"
+msgstr "&Verwerp"
+
+msgid " Emacs key: "
+msgstr " Emacs-toets: "
+
 #, c-format
 msgid ""
 "File \"%s\" is already being edited\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr "Bestand \"%s\" wordt al bewerkt\n"
+msgstr ""
+"Bestand \"%s\" wordt al bewerkt\n"
 "Gebruiker: %s\n"
 "Proces ID: %d"
 
@@ -495,8 +520,13 @@ msgstr "Algemeen..."
 msgid "&Save mode..."
 msgstr "&Opslagmodus..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "&Leer toetsen...     "
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "Synta&X kleuring"
 
 msgid " File "
 msgstr " Bestand "
@@ -518,6 +548,10 @@ msgstr "Intuïtief"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "Aange&Past:"
 
 msgid "None"
 msgstr "Geen"
@@ -602,6 +636,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Fout in bestand %s, op regel %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " 'chown'-opdracht "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " 'chown'-opdracht "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " 'chown'-opdracht "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Waarschuwing: bestand %s niet gevonden\n"
 
 msgid "&Set"
 msgstr "&Zetten"
@@ -737,6 +819,10 @@ msgstr "Invoer / weergave karakterset:"
 
 msgid "&Select"
 msgstr "&Selecteer"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Passieve modus gebruiken"
 
 msgid "Use &passive mode"
 msgstr "&Passieve modus gebruiken"
@@ -1174,40 +1260,30 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " bestandsfout "
 
-msgid "Format of the "
-msgstr "Formaat van "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext bestand is veranderd\n"
 "met versie 3.0. De installatie lijkt mislukt.\n"
 "Haal een nieuw Midnight Commander-pakket op."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" Bestand is veranderd\n"
-"met versie 3.0. U kunt het\n"
-"kopiëren van "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " bestandsfout "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"'mc.ext', of dat bestand als\n"
-"voorbeeld gebruiken.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "Vooralsnog wordt 'mc.ext' gebruikt."
 
 msgid " Copy "
 msgstr " Kopiëren "
@@ -1690,6 +1766,9 @@ msgstr "Weerga&Ve - F3"
 msgid "&Edit - F4"
 msgstr "Bew&Erken -F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Beginnen bij:"
 
@@ -1882,6 +1961,10 @@ msgstr "Veranderd:  %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Gecreëerd:   %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2193,6 +2276,9 @@ msgstr "&Bevestiging...      "
 
 msgid "&Display bits..."
 msgstr "&Weergavebits...     "
+
+msgid "learn &Keys..."
+msgstr "&Leer toetsen...     "
 
 msgid "&Virtual FS..."
 msgstr "&Virtueel FS...      "
@@ -2509,6 +2595,9 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr " Gebruik:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
@@ -2806,14 +2895,12 @@ msgstr " Pipe mislukt "
 msgid " Dup failed "
 msgstr " Dup mislukt"
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Starten kindproces mislukt "
 
 msgid "Empty output from child filter"
 msgstr "Geen uitvoer van kindfilter"
-
-msgid " Cannot open file "
-msgstr " Openen mislukt van bestand "
 
 #, c-format
 msgid ""
@@ -2843,15 +2930,29 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Kol %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-msgid "  [grow]"
-msgstr "  [groei]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bytes"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Fout bij opslaan bestand. "
 
 msgid "Invalid hex search expression"
 msgstr "Ongeldige hexadecimale zoekterm"
@@ -2881,47 +2982,59 @@ msgstr " Ga naar adres "
 msgid " Enter regexp:"
 msgstr " Geef reguliere expressie:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "GaNaar"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Regel"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxZoek"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "BewHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "BwTkst"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "NtOmlp"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Omloop"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxZoek"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Rauw"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Parsen"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "DeFrmt"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Format"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Opdrachthistorie "
@@ -3499,6 +3612,85 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Openen van bestand voor lezen mislukt: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Geen gewoon bestand: "
+
+#~ msgid "Format of the "
+#~ msgstr "Formaat van "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " Bestand is veranderd\n"
+#~ "met versie 3.0. U kunt het\n"
+#~ "kopiëren van "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "'mc.ext', of dat bestand als\n"
+#~ "voorbeeld gebruiken.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "Vooralsnog wordt 'mc.ext' gebruikt."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Openen mislukt van bestand "
+
+#~ msgid "Col %d"
+#~ msgstr "Kol %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [groei]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "GaNaar"
+
+#~ msgid "Line"
+#~ msgstr "Regel"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxZoek"
+
+#~ msgid "EdHex"
+#~ msgstr "BewHex"
+
+#~ msgid "EdText"
+#~ msgstr "BwTkst"
+
+#~ msgid "UnWrap"
+#~ msgstr "NtOmlp"
+
+#~ msgid "Wrap"
+#~ msgstr "Omloop"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxZoek"
+
+#~ msgid "Raw"
+#~ msgstr "Rauw"
+
+#~ msgid "Parse"
+#~ msgstr "Parsen"
+
+#~ msgid "Unform"
+#~ msgstr "DeFrmt"
+
+#~ msgid "Format"
+#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Gebruikersmenu alleen beschikbaar in mcedit vanuit mc"

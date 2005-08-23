@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -15,35 +15,46 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "sinta&xia nabarmentzen"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr "Honi buruz "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Huts egin da kanalizazioa irakurtzeko irekitzen saiatzean: "
+
 msgid "Error"
 msgstr "Errorea"
 
-msgid " Cannot open file for reading: "
-msgstr " Huts egin da fitxategia irakurtzeko irekitzen saiatzean: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Errorea kanalizazioan irakurtzean: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Huts egin da kanalizazioa irakurtzeko irekitzen saiatzean: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Ezin da fitxategiaren tamainari/baimenei buruzko informazioa lortu: "
 
-msgid " Not an ordinary file: "
-msgstr " Ez da fitxategi arrunta: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Fitxategia handiegia da: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "&Itxi"
-
-msgid "&OK"
-msgstr "&Ados"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -66,6 +77,9 @@ msgstr "Egin babeskopiak -->"
 
 msgid "&Cancel"
 msgstr "&Utzi"
+
+msgid "&OK"
+msgstr "&Ados"
 
 msgid "Extension:"
 msgstr "Luzapena:"
@@ -236,6 +250,13 @@ msgstr "&Bai"
 msgid "&No"
 msgstr "E&z"
 
+#, fuzzy
+msgid " Error "
+msgstr "Errorea"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr "Kopiatu arbelean "
 
@@ -327,17 +348,20 @@ msgstr "Nori"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr "posta -s <gaia> -c <cc> <nori>"
 
-msgid " Emacs key: "
-msgstr " Emacs tekla: "
-
-msgid " Execute Macro "
-msgstr " Exekutatu makroa "
-
 msgid " Insert Literal "
 msgstr " Txertatu literala "
 
 msgid " Press any key: "
 msgstr " Sakatu tekla bat: "
+
+msgid " Execute Macro "
+msgstr " Exekutatu makroa "
+
+msgid "&Dismiss"
+msgstr "&Itxi"
+
+msgid " Emacs key: "
+msgstr " Emacs tekla: "
 
 #, c-format
 msgid ""
@@ -501,8 +525,13 @@ msgstr "&Orokorra... "
 msgid "&Save mode..."
 msgstr "&Gorde modua..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "ikasteko &teklak..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "sinta&xia nabarmentzen"
 
 msgid " File "
 msgstr "Fitxategia "
@@ -524,6 +553,10 @@ msgstr "Intuitiboa"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "&Erabiltzaileak hau definitu du:"
 
 msgid "None"
 msgstr "Bat ere ez"
@@ -609,6 +642,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr "Errorea %s fitxategian, %d lerroan "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr "Chown komandoa "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "Chown komandoa "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr "Chown komandoa "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Abisua: %s fitxategia ez da aurkitu\n"
 
 msgid "&Set"
 msgstr "&Ezarri"
@@ -744,6 +825,10 @@ msgstr "Sartu / bistaratu kode-orria:"
 
 msgid "&Select"
 msgstr "&Hautatu"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Gorde modua..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1188,41 +1273,31 @@ msgstr ""
 msgid " Parameter "
 msgstr "Parametroa "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr "fitxategi-errorea "
 
-msgid "Format of the "
-msgstr "\t "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext fitxategiaren formatua \n"
 "3.0 bertsiora aldatu da. Badirudi instalazioak\n"
 "huts egin duela. Eskuratu kopia berri bat\n"
 "Midnight Commander paketetik."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-"fitxategiaren formatua \n"
-"3.0 bertsiora aldatu da. Beharbada\n"
-"kopiatu nahiko duzu"
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr "fitxategi-errorea "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext-etik edo\n"
-"nola idatzi jakiteko, adibide gisa erabili nahiko duzu.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext une honetan erabiliko da."
 
 msgid " Copy "
 msgstr "Kopiatu "
@@ -1704,6 +1779,9 @@ msgstr "&Ikusi - F3"
 msgid "&Edit - F4"
 msgstr "&Edizioa - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Hemen hasi:"
 
@@ -1896,6 +1974,10 @@ msgstr "Aldaketa:  %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Sorrera:   %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2213,6 +2295,9 @@ msgstr "B&errespena..."
 
 msgid "&Display bits..."
 msgstr "&Bistaratu bitak..."
+
+msgid "learn &Keys..."
+msgstr "ikasteko &teklak..."
 
 msgid "&Virtual FS..."
 msgstr "&FS birtuala..."
@@ -2533,6 +2618,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "Erabiltzaile-izena:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "GOI--DIR"
 
@@ -2829,14 +2917,12 @@ msgstr " Kanalizazioak huts egin du "
 msgid " Dup failed "
 msgstr " Bikoizketak huts egin du "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Ezin da programa umea abiarazi "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " Ezin izan da fitxategia ireki "
 
 #, c-format
 msgid ""
@@ -2866,15 +2952,29 @@ msgid "Offset 0x%08lx"
 msgstr "Desplazamendua 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "%d zutabe"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-msgid "  [grow]"
-msgstr "  [handitu]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Errorea fitxategia gordetzen saiatzean. "
 
 msgid "Invalid hex search expression"
 msgstr "Baliogabeko bilaketa-adierazpen hamaseitarra"
@@ -2904,47 +3004,59 @@ msgstr " Joan helbidera "
 msgid " Enter regexp:"
 msgstr " Sartu regexp:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hamaseitarra"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Joan"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Lerrora"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxSrch"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHamas"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdTest"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Desdoitu"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Doitu"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxBila"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Formaturik gabe"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Analizatu"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Formarik gabe"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Formateatu"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Historia "
@@ -3524,6 +3636,85 @@ msgstr "Barne-errorea:"
 
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Huts egin da fitxategia irakurtzeko irekitzen saiatzean: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Ez da fitxategi arrunta: "
+
+#~ msgid "Format of the "
+#~ msgstr "\t "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ "fitxategiaren formatua \n"
+#~ "3.0 bertsiora aldatu da. Beharbada\n"
+#~ "kopiatu nahiko duzu"
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext-etik edo\n"
+#~ "nola idatzi jakiteko, adibide gisa erabili nahiko duzu.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext une honetan erabiliko da."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Ezin izan da fitxategia ireki "
+
+#~ msgid "Col %d"
+#~ msgstr "%d zutabe"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [handitu]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hamaseitarra"
+
+#~ msgid "Goto"
+#~ msgstr "Joan"
+
+#~ msgid "Line"
+#~ msgstr "Lerrora"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxSrch"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHamas"
+
+#~ msgid "EdText"
+#~ msgstr "EdTest"
+
+#~ msgid "UnWrap"
+#~ msgstr "Desdoitu"
+
+#~ msgid "Wrap"
+#~ msgstr "Doitu"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxBila"
+
+#~ msgid "Raw"
+#~ msgstr "Formaturik gabe"
+
+#~ msgid "Parse"
+#~ msgstr "Analizatu"
+
+#~ msgid "Unform"
+#~ msgstr "Formarik gabe"
+
+#~ msgid "Format"
+#~ msgstr "Formateatu"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Erabiltzaile-menua mcedit-en bakarrik erabilgarri, mc-k deitua "

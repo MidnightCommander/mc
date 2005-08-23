@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -14,35 +14,46 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "sinta&Kses izgaismoðana"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Par "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Nevar atvçrt programkanâlu lasîðanai: "
+
 msgid "Error"
 msgstr "Kïûda"
 
-msgid " Cannot open file for reading: "
-msgstr " Nevar atvçrt failu lasîðanai: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Kïûda lasot no programkanâla: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Nevar atvçrt programkanâlu lasîðanai: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
 
-msgid " Not an ordinary file: "
-msgstr " Neparasts fails: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Nevar skatît: nav regulârs fails "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Fails ir par lielu: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "&Atcelt"
-
-msgid "&OK"
-msgstr "&Labi"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -65,6 +76,9 @@ msgstr "Veikt dublçjumu -->"
 
 msgid "&Cancel"
 msgstr "&Atsaukt"
+
+msgid "&OK"
+msgstr "&Labi"
 
 msgid "Extension:"
 msgstr "Paplaðinâjums:"
@@ -235,6 +249,13 @@ msgstr "&Jâ"
 msgid "&No"
 msgstr "&Nç"
 
+#, fuzzy
+msgid " Error "
+msgstr "Kïûda"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Kopçt uz starpliktuvi "
 
@@ -326,17 +347,20 @@ msgstr " Uz"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subjekts> -c <cc> <kam>"
 
-msgid " Emacs key: "
-msgstr "Emacs taustiòð: "
-
-msgid " Execute Macro "
-msgstr " Palaist Makro "
-
 msgid " Insert Literal "
 msgstr " Ievietot Burtu "
 
 msgid " Press any key: "
 msgstr " Spiest jebkuru taustiòu: "
+
+msgid " Execute Macro "
+msgstr " Palaist Makro "
+
+msgid "&Dismiss"
+msgstr "&Atcelt"
+
+msgid " Emacs key: "
+msgstr "Emacs taustiòð: "
 
 #, c-format
 msgid ""
@@ -500,8 +524,13 @@ msgstr "&Galvenais...  "
 msgid "&Save mode..."
 msgstr "&Saglabât veidu..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "mâcîbu &Taustiòi..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "sinta&Kses izgaismoðana"
 
 msgid " File "
 msgstr " Fails "
@@ -523,6 +552,10 @@ msgstr "Intuitîvi"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "Li&etotâja definçts:"
 
 msgid "None"
 msgstr "Nekas"
@@ -608,6 +641,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Kïûda faila %s %d rindiòâ "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Komanda chown "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Komanda chown "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Komanda chown "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Brîdinâjums: fails %s nav atrasts\n"
 
 msgid "&Set"
 msgstr "&Uzstâdît"
@@ -743,6 +824,10 @@ msgstr "Ievades / displeja kodu tabula:"
 
 msgid "&Select"
 msgstr "a&tlasît"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Saglabât veidu..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1184,41 +1269,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parametrs "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " faila kïûda "
 
-msgid "Format of the "
-msgstr "Formatçt "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "fails mc.ext ir mainîjies,\n"
 "sâkot ar 3.0 versiju. Izskatâs, ka instalâcija\n"
 "neizdevâs. Lûdzu sagâdâ jaunu kopiju no\n"
 "Midnight Commander pakotnes."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" ir mainîjies, sâkot\n"
-"sâkot ar versiju 3.0. Tu varçtu gribçt vai nu\n"
-"kopçt to no "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " faila kïûda "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext vai lietot to\n"
-"failu kâ piemçru tam, kâ to uzrakstît.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext tiks lietots ðim brîdim."
 
 msgid " Copy "
 msgstr " Kopçt "
@@ -1700,6 +1775,9 @@ msgstr "&Skatît - F3"
 msgid "&Edit - F4"
 msgstr "&Rediìçt - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Sâknçt iekð:"
 
@@ -1892,6 +1970,10 @@ msgstr "Modificçts:  %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Izveidots:   %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2211,6 +2293,9 @@ msgstr "a&Pstiprinâðana..."
 msgid "&Display bits..."
 msgstr "&Displeja biti..."
 
+msgid "learn &Keys..."
+msgstr "mâcîbu &Taustiòi..."
+
 msgid "&Virtual FS..."
 msgstr "&Virtuâlâ FS..."
 
@@ -2529,6 +2614,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "Lietotâjvârds:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "AUGÐ--DIR"
 
@@ -2825,14 +2913,12 @@ msgstr " Kanâls neizdevâs "
 msgid " Dup failed "
 msgstr " Dup neizdevâs "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Nevar pavairot bçrna programmu "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " Nevarçja atvçrt failu "
 
 #, c-format
 msgid ""
@@ -2862,15 +2948,29 @@ msgid "Offset 0x%08lx"
 msgstr "Nobîde 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Kol %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s baiti"
 
-msgid "  [grow]"
-msgstr "  [augt]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s baiti"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Kïûda mçìinot saglabât failu. "
 
 msgid "Invalid hex search expression"
 msgstr " Nepareiza meklçjamâ hex izteiksme "
@@ -2900,47 +3000,59 @@ msgstr " Iet uz adresi "
 msgid " Enter regexp:"
 msgstr " Ievadi regexp:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Ietuz"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Lînija"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxMekl"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "ReHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "ReTektu"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "NeIekïaut"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Iekïaut"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxMekl"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Jçls"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Analizçt"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Atform"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Formatçt"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Vçsture "
@@ -3521,6 +3633,85 @@ msgstr "Iekðçjâ kïûda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiòas failâ pazuduðas"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Nevar atvçrt failu lasîðanai: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Neparasts fails: "
+
+#~ msgid "Format of the "
+#~ msgstr "Formatçt "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " ir mainîjies, sâkot\n"
+#~ "sâkot ar versiju 3.0. Tu varçtu gribçt vai nu\n"
+#~ "kopçt to no "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext vai lietot to\n"
+#~ "failu kâ piemçru tam, kâ to uzrakstît.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext tiks lietots ðim brîdim."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Nevarçja atvçrt failu "
+
+#~ msgid "Col %d"
+#~ msgstr "Kol %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [augt]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Ietuz"
+
+#~ msgid "Line"
+#~ msgstr "Lînija"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxMekl"
+
+#~ msgid "EdHex"
+#~ msgstr "ReHex"
+
+#~ msgid "EdText"
+#~ msgstr "ReTektu"
+
+#~ msgid "UnWrap"
+#~ msgstr "NeIekïaut"
+
+#~ msgid "Wrap"
+#~ msgstr "Iekïaut"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxMekl"
+
+#~ msgid "Raw"
+#~ msgstr "Jçls"
+
+#~ msgid "Parse"
+#~ msgstr "Analizçt"
+
+#~ msgid "Unform"
+#~ msgstr "Atform"
+
+#~ msgid "Format"
+#~ msgstr "Formatçt"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Lietotâja izvçlne pieejama tikai mcedit, kurð palaists no mc"

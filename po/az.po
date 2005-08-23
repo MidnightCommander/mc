@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -15,35 +15,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "sinta&X seçilməsi"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Haqqında "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
+
 msgid "Error"
 msgstr "XƏTA"
 
-msgid " Cannot open file for reading: "
-msgstr " Faylı oxumaq üçün aöarkan xəta oldu : "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Borudan oxuyarkən xəta oldu . "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Oxumaq əqsədi ilə borunu açarkən xəta oldu : "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Faylın haqqlarını/böyüklüyünü ala bilmədim : "
 
-msgid " Not an ordinary file: "
-msgstr " Normal bir fayl deyildir : "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Göstərə bilmirəm : vnormal bir fayl deyildir"
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Fayl çox böyükdür: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "&Keç"
-
-msgid "&OK"
-msgstr "&Oldu"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -66,6 +77,9 @@ msgstr "Yedek yarat -->"
 
 msgid "&Cancel"
 msgstr "&Ləğv Et"
+
+msgid "&OK"
+msgstr "&Oldu"
 
 msgid "Extension:"
 msgstr "Uzantı:"
@@ -234,6 +248,13 @@ msgstr "&Bəli"
 msgid "&No"
 msgstr "&Xeyr"
 
+#, fuzzy
+msgid " Error "
+msgstr "XƏTA"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Ara yaddaşa köçürt "
 
@@ -324,17 +345,20 @@ msgstr " Göndərilən"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-msgid " Emacs key: "
-msgstr " Emacs düyməsi :"
-
-msgid " Execute Macro "
-msgstr " Makronu işə sal"
-
 msgid " Insert Literal "
 msgstr " Hərfi daxil et"
 
 msgid " Press any key: "
 msgstr " İstədiyin düyməyə bas :"
+
+msgid " Execute Macro "
+msgstr " Makronu işə sal"
+
+msgid "&Dismiss"
+msgstr "&Keç"
+
+msgid " Emacs key: "
+msgstr " Emacs düyməsi :"
 
 #, c-format
 msgid ""
@@ -498,8 +522,13 @@ msgstr "&Ümumi ..."
 msgid "&Save mode..."
 msgstr "Qe&yd etmə modu ..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "Düy&mələri öyrən ..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "sinta&X seçilməsi"
 
 msgid " File "
 msgstr " Fayl "
@@ -521,6 +550,10 @@ msgstr "Hissi"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "İs&tifadəçiyə xas:"
 
 msgid "None"
 msgstr "Heçbiri"
@@ -606,6 +639,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s faylında %d sətirinda xəta oldu "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Chown əmri "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Chown əmri "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Chown əmri "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Xəbərdarlıq: %s faylı tapılmadı\n"
 
 msgid "&Set"
 msgstr "&Seç"
@@ -741,6 +822,10 @@ msgstr "Giriş / ekran kod səhifəsi:"
 
 msgid "&Select"
 msgstr "&Seç"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Qe&yd etmə modu ..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1182,41 +1267,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parametr "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " fayl xətası "
 
-msgid "Format of the "
-msgstr " Şəkli "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
 "failed. Please fetch a fresh new copy from the\n"
 "Midnight Commander package."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" fayl 3.0 buraxılışı ilə\n"
-" dəyişdirilib. Bunu buradan köçürmək\n"
-" istəyə bilərsiniz "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " fayl xətası "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext və ya bu faylı\n"
-"necə yazıldığına dair nümunə olaraq istifadə edin.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext bu müddət üçün istifadə ediləcək."
 
 msgid " Copy "
 msgstr " Köçürt "
@@ -1698,6 +1773,9 @@ msgstr "&Göstər -F3"
 msgid "&Edit - F4"
 msgstr "&Düzəlt -F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Burdan başla:"
 
@@ -1890,6 +1968,10 @@ msgstr "Düzəldilib:\t%s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Yaradılıb :   %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2205,6 +2287,9 @@ msgstr "&Qəbul etmə..."
 
 msgid "&Display bits..."
 msgstr "Bitləri &göstər ..."
+
+msgid "learn &Keys..."
+msgstr "Düy&mələri öyrən ..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtual DYS (VFS) ..."
@@ -2522,6 +2607,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "İstifadəçi adı: "
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
@@ -2818,14 +2906,12 @@ msgstr " Borulama Bacarılmadı "
 msgid " Dup failed "
 msgstr " Dup Bacarılmadı "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Törəmə proqramı başlada bilmədim "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " Faylı aça bilmədim "
 
 #, c-format
 msgid ""
@@ -2855,15 +2941,29 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Sütun %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-msgid "  [grow]"
-msgstr "  [grow]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s byte"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Faylı qeyd edərkən xəta oldu . "
 
 msgid "Invalid hex search expression"
 msgstr " Hökmsüz heks axtarma qaydalı ifadəsi"
@@ -2893,47 +2993,59 @@ msgstr " Ünvana Get "
 msgid " Enter regexp:"
 msgstr " Uzantı (regexp) gir: "
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Səkkizlik"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Get"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Sətir"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxSrch"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdText"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Qırma"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Qır"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxSrch"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Dirək"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Dara"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Unform"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Şəkil"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Tarix "
@@ -3512,6 +3624,85 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Faylı oxumaq üçün aöarkan xəta oldu : "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Normal bir fayl deyildir : "
+
+#~ msgid "Format of the "
+#~ msgstr " Şəkli "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " fayl 3.0 buraxılışı ilə\n"
+#~ " dəyişdirilib. Bunu buradan köçürmək\n"
+#~ " istəyə bilərsiniz "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext və ya bu faylı\n"
+#~ "necə yazıldığına dair nümunə olaraq istifadə edin.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext bu müddət üçün istifadə ediləcək."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Faylı aça bilmədim "
+
+#~ msgid "Col %d"
+#~ msgstr "Sütun %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [grow]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Səkkizlik"
+
+#~ msgid "Goto"
+#~ msgstr "Get"
+
+#~ msgid "Line"
+#~ msgstr "Sətir"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxSrch"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHex"
+
+#~ msgid "EdText"
+#~ msgstr "EdText"
+
+#~ msgid "UnWrap"
+#~ msgstr "Qırma"
+
+#~ msgid "Wrap"
+#~ msgstr "Qır"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxSrch"
+
+#~ msgid "Raw"
+#~ msgstr "Dirək"
+
+#~ msgid "Parse"
+#~ msgstr "Dara"
+
+#~ msgid "Unform"
+#~ msgstr "Unform"
+
+#~ msgid "Format"
+#~ msgstr "Şəkil"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr ""

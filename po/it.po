@@ -10,13 +10,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-06 18:18+0200\n"
-"PO-Revision-Date: 2005-06-06 18:18+0200\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"PO-Revision-Date: 2005-08-23 12:33+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+msgid " Choose syntax highlighting "
+msgstr " Scegli la sintassi evidenziata "
+
+msgid "< Auto >"
+msgstr "< Auto >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Ricarica la sintassi corrente >"
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -253,10 +262,10 @@ msgid " Cut to clipboard "
 msgstr " Taglia negli appunti "
 
 msgid " Goto line "
-msgstr " Vai alla linea "
+msgstr " Vai alla riga "
 
 msgid " Enter line: "
-msgstr " Linea: "
+msgstr " Riga: "
 
 msgid " Save Block "
 msgstr " Salva blocco evidenziato "
@@ -330,20 +339,20 @@ msgstr " A"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <soggetto> -c <cc> <a>"
 
-msgid "&Dismiss"
-msgstr "&Chiudi"
-
-msgid " Emacs key: "
-msgstr " Tasto emacs: "
-
-msgid " Execute Macro "
-msgstr " Esegue macro "
-
 msgid " Insert Literal "
 msgstr " Ins. letteralmente "
 
 msgid " Press any key: "
 msgstr " Premere un tasto: "
+
+msgid " Execute Macro "
+msgstr " Esegue macro "
+
+msgid "&Dismiss"
+msgstr "&Chiudi"
+
+msgid " Emacs key: "
+msgstr " Tasto emacs: "
 
 #, c-format
 msgid ""
@@ -454,7 +463,7 @@ msgid "&Replace...        F4"
 msgstr "&Sostituisci...    F4"
 
 msgid "&Go to line...            M-l"
-msgstr "Vai alla &linea...              M-l"
+msgstr "Vai a&lla riga...               M-l"
 
 msgid "Go to matching &bracket   M-b"
 msgstr "&Vai alla parentesi relativa    M-b"
@@ -510,8 +519,11 @@ msgstr "&Generale...  "
 msgid "&Save mode..."
 msgstr "&Modalità di salvataggio..."
 
-msgid "learn &Keys..."
+msgid "Learn &Keys..."
 msgstr "&Impara tasti..."
+
+msgid "Syntax &Highlighting..."
+msgstr "&Sintassi evidenziata..."
 
 msgid " File "
 msgstr " File "
@@ -533,6 +545,9 @@ msgstr "Intuitivo"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+msgid "User-defined"
+msgstr "Definita dall'utente"
 
 msgid "None"
 msgstr "Niente"
@@ -556,13 +571,13 @@ msgid "Save file &position"
 msgstr "&Salva posizione file"
 
 msgid "Confir&m before saving"
-msgstr "Conferma &prima di salvare"
+msgstr "Confer&ma prima di salvare"
 
 msgid "Fill tabs with &spaces"
 msgstr "&Riempie i tabulatori di spazi"
 
 msgid "&Return does autoindent"
-msgstr "&A capo autoindenta"
+msgstr "Invio a&utoindenta"
 
 msgid "&Backspace through tabs"
 msgstr "&Backspace attraverso i tab"
@@ -616,7 +631,55 @@ msgstr ""
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Errore nel file %s alla linea %d "
+msgstr " Errore nel file %s alla riga %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr "bind: errato numero di argomenti, bind <tasto> <comando>"
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr "bind: valore tasto errato `%s'"
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr "bind: ... e il tasto?"
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr "bind: tasto sconosciuto: `%s'"
+
+#, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr "bind: comando sconosciuto: `%s'"
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr "%s: sintassi: %s <n> <comando> <etichetta>"
+
+#, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "%s: comando sconosciuto: `%s'"
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr "%s: fn deve essere tra 1-10"
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr "%s: fopen(): %s"
+
+#, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr "%s:%d: comando sconosciuto `%s'"
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr "%s:%d: %s"
+
+#, c-format
+msgid "%s not found!"
+msgstr "%s non trovato!"
 
 msgid "&Set"
 msgstr "&Imposta"
@@ -1217,11 +1280,9 @@ msgstr " errore nel file ~/%s "
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
-"want to copy it from %smc.ext of use that file as an example of how to write "
+"want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
-msgstr ""
-"Il formato del file ~/%s è cambiato dalla versione 3.0. È possibile copiarlo "
-"da %smc.ext o usare quel file come esempio su come scriverlo."
+msgstr "Il formato del file ~/%s è cambiato dalla versione 3.0. È possibile copiarlo da %smc.ext o prendere quel file come esempio."
 
 msgid " Copy "
 msgstr " Copia "
@@ -1978,7 +2039,7 @@ msgid " Other options "
 msgstr " Altre opzioni "
 
 msgid "output lines"
-msgstr "linee visibili"
+msgstr "righe visibili"
 
 msgid "Layout"
 msgstr "Aspetto"
@@ -2215,6 +2276,9 @@ msgstr "C&onferme..."
 
 msgid "&Display bits..."
 msgstr "&Mostra bit..."
+
+msgid "learn &Keys..."
+msgstr "&Impara tasti..."
 
 msgid "&Virtual FS..."
 msgstr "FS &virtuale..."
@@ -2828,8 +2892,8 @@ msgstr " Pipe fallita "
 msgid " Dup failed "
 msgstr " Dup fallita "
 
-msgid " Cannot spawn child program "
-msgstr " Non posso eseguire il processo figlio "
+msgid " Cannot spawn child process "
+msgstr " Impossibile fare lo spawn del processo figlio "
 
 msgid "Empty output from child filter"
 msgstr "Risultato vuoto da filtro figlio"
@@ -2902,8 +2966,8 @@ msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
-" La linea corrente è %d.\n"
-" Inserisci un nuovo numero di linea:"
+" La riga corrente è %d.\n"
+" Inserisci un nuovo numero di riga:"
 
 #, c-format
 msgid ""
@@ -2919,41 +2983,59 @@ msgstr " Vai all'indirizzo "
 msgid " Enter regexp:"
 msgstr " Inserire espressione regolare:"
 
-msgid "Ascii"
-msgstr "Testo"
+msgid "ButtonBar|Help"
+msgstr "ButtonBar|Aiuto"
 
-msgid "Hex"
-msgstr "Esadec"
+msgid "ButtonBar|Quit"
+msgstr "ButtonBar|Esci"
 
-msgid "Goto"
-msgstr "Vai a"
+msgid "ButtonBar|Ascii"
+msgstr "ButtonBar|Ascii"
 
-msgid "Line"
-msgstr "Linea"
+msgid "ButtonBar|Hex"
+msgstr "ButtonBar|Hex"
 
-msgid "RxSrch"
-msgstr "CercaER"
+msgid "ButtonBar|Goto"
+msgstr "ButtonBar|Vai a"
 
-msgid "UnWrap"
-msgstr "NoACapo"
+msgid "ButtonBar|Line"
+msgstr "ButtonBar|Riga"
 
-msgid "Wrap"
-msgstr "ACapo"
+msgid "ButtonBar|View"
+msgstr "ButtonBar|Mostra"
 
-msgid "HxSrch"
-msgstr "CercHex"
+msgid "ButtonBar|Edit"
+msgstr "ButtonBar|Modifi"
 
-msgid "Raw"
-msgstr "Normale"
+msgid "ButtonBar|Save"
+msgstr "BarraTasti|Salva"
 
-msgid "Parse"
-msgstr "Filtrat"
+msgid "ButtonBar|UnWrap"
+msgstr "ButtonBar|NACapo"
 
-msgid "Unform"
-msgstr "NonForm"
+msgid "ButtonBar|Wrap"
+msgstr "ButtonBar|ACapo"
 
-msgid "Format"
-msgstr "Formatt"
+msgid "ButtonBar|RxSrch"
+msgstr "ButtonBar|CercER"
+
+msgid "ButtonBar|HxSrch"
+msgstr "ButtonBar|CercHx"
+
+msgid "ButtonBar|Search"
+msgstr "ButtonBar|Cerca"
+
+msgid "ButtonBar|Raw"
+msgstr "ButtonBar|Grezzi"
+
+msgid "ButtonBar|Parse"
+msgstr "ButtonBar|Analiz"
+
+msgid "ButtonBar|Unform"
+msgstr "ButtonBar|NonFor"
+
+msgid "ButtonBar|Format"
+msgstr "ButtonBar|Format"
 
 msgid " History "
 msgstr " Cronologia "
@@ -3187,7 +3269,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: disconnessione da %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: attesa linea iniziale..."
+msgstr "fish: attesa riga iniziale..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Spiacente, non posso fare connessioni autenticate per adesso."
@@ -3199,7 +3281,7 @@ msgid "fish: Sending password..."
 msgstr "fish: spedizione password..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: spedizione linea iniziale..."
+msgstr "fish: spedizione riga iniziale..."
 
 msgid "fish: Handshaking version..."
 msgstr "fish: versione handshaking..."
@@ -3384,7 +3466,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Attenzione: linea non valida in %s:\n"
+"Attenzione: riga non valida in %s:\n"
 "%s\n"
 
 #, c-format

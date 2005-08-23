@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-25 11:29-0400\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2003-07-09 12:27+0300\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -27,6 +27,9 @@ msgstr "Выбор цветовыделения синтаксиса"
 
 msgid "< Auto >"
 msgstr "< Автоматически >"
+
+msgid "< Reload Current Syntax >"
+msgstr ""
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -57,9 +60,6 @@ msgstr " Файл %s слишком большой "
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
@@ -350,6 +350,9 @@ msgstr " Нажмите любую клавишу: "
 
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
 
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
@@ -2992,22 +2995,22 @@ msgstr ""
 msgid "ButtonBar|Line"
 msgstr ""
 
-msgid "ButtonBar|Save"
-msgstr ""
-
-msgid "ButtonBar|RxSrch"
-msgstr ""
-
 msgid "ButtonBar|View"
 msgstr ""
 
 msgid "ButtonBar|Edit"
 msgstr ""
 
+msgid "ButtonBar|Save"
+msgstr ""
+
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
 msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|RxSrch"
 msgstr ""
 
 msgid "ButtonBar|HxSrch"

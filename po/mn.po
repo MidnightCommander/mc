@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -18,35 +18,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Бидний тухай "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Урсгалыг уншихаар нээж чадсангүй: "
+
 msgid "Error"
 msgstr "Алдаа"
 
-msgid " Cannot open file for reading: "
-msgstr " Файлыг уншихаар нээж чадсахгүй: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Урсгалаас уншихад алдаа гарав: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Урсгалыг уншихаар нээж чадсангүй: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Файлын хэмжээ/зөвшөөрлийн мэдээллийг авч чадсангүй: "
 
-msgid " Not an ordinary file: "
-msgstr " Хэвийн бус-файл: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Харж чадсангүй: хэвийн бус файл "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Маш том файл: "
 
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
-
-msgid "&Dismiss"
-msgstr "&Хаах"
-
-msgid "&OK"
-msgstr "&ОК"
 
 msgid " Enter file name: "
 msgstr " Файлын нэрээ оруул: "
@@ -68,6 +79,9 @@ msgstr "Нөөц үүсгэх -->"
 
 msgid "&Cancel"
 msgstr "&Болих"
+
+msgid "&OK"
+msgstr "&ОК"
 
 msgid "Extension:"
 msgstr "өргөтгөл:"
@@ -237,6 +251,13 @@ msgstr "&Тийм"
 msgid "&No"
 msgstr "&Yгvй"
 
+#, fuzzy
+msgid " Error "
+msgstr "Алдаа"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Буфер руу хуулах "
 
@@ -329,17 +350,20 @@ msgstr " Хэнд"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Гарчиг> -c <нд Хувилах> <Хэнд>"
 
-msgid " Emacs key: "
-msgstr " Emacs-ийн товчлуурууд: "
-
-msgid " Execute Macro "
-msgstr " Макрог гүйцэтгэх "
-
 msgid " Insert Literal "
 msgstr " Литерал оруулах "
 
 msgid " Press any key: "
 msgstr " Дурын товч дарна уу: "
+
+msgid " Execute Macro "
+msgstr " Макрог гүйцэтгэх "
+
+msgid "&Dismiss"
+msgstr "&Хаах"
+
+msgid " Emacs key: "
+msgstr " Emacs-ийн товчлуурууд: "
 
 #, c-format
 msgid ""
@@ -503,8 +527,13 @@ msgstr "&Ерөнхий..."
 msgid "&Save mode..."
 msgstr "Хадгалах &горим..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "&Товчлууруудыг судлах..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "&өгүүлбэрзүйг өнгөөр тодотгох"
 
 msgid " File "
 msgstr " Файл "
@@ -526,6 +555,10 @@ msgstr "Мэдрэмж"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "&Хэрэглэгч тодорхойлсон"
 
 msgid "None"
 msgstr "Байхгүй"
@@ -610,6 +643,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s файлын %d р мөр алдаатай "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Команд chown "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Команд chown "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Команд chown "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Анхааруулга: файл %s алга байна\n"
 
 msgid "&Set"
 msgstr "&Оноох"
@@ -745,6 +826,10 @@ msgstr "Кодлогдсон оролт/гаралт: "
 
 msgid "&Select"
 msgstr "&Сонгох"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "&Пассив горим ашиглах"
 
 msgid "Use &passive mode"
 msgstr "&Пассив горим ашиглах"
@@ -1180,41 +1265,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Утга "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " файлын алдаа "
 
-msgid "Format of the "
-msgstr "Файлын бүтэц "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext засагдсан\n"
 "с хувилбар 3.0.\n"
 "Midnight Commander пакежаас шинэ хуулбарыг авч \n"
 "задлана уу."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" засагдсан\n"
-"3.0 хувилбарын хамт. Та хуулбарыг\n"
-"сэргээхдээ "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " файлын алдаа "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext, эсвэл хэрэглэж байгаа\n"
-"файл хэрхэн бичигдэх жишээ.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext нь яг энэ агшинд хэрэглэгдэж байна."
 
 msgid " Copy "
 msgstr " Хуулах "
@@ -1697,6 +1772,9 @@ msgstr "&Харах - F3"
 msgid "&Edit - F4"
 msgstr "&Засах - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Эхлэх цэг:"
 
@@ -1889,6 +1967,10 @@ msgstr "Засагдсан:   %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "үүссэн:    %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2203,6 +2285,9 @@ msgstr "&Баталгаажуулалт..."
 msgid "&Display bits..."
 msgstr "&Бит тэмдэгтүүд..."
 
+msgid "learn &Keys..."
+msgstr "&Товчлууруудыг судлах..."
+
 msgid "&Virtual FS..."
 msgstr "Виртуаль &FS..."
 
@@ -2515,6 +2600,9 @@ msgstr "УТГА"
 msgid "Usage:"
 msgstr "Хэрэглээ:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "-ДЭЭШ-"
 
@@ -2806,14 +2894,12 @@ msgstr " Урсгалд алдаа гарлаа "
 msgid " Dup failed "
 msgstr " Dup д алдаа гарлаа "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Хүү процессийг солилож чадсангүй "
 
 msgid "Empty output from child filter"
 msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
-
-msgid " Cannot open file "
-msgstr " Файлыг нээж чадсангүй "
 
 #, c-format
 msgid ""
@@ -2843,15 +2929,29 @@ msgid "Offset 0x%08lx"
 msgstr "Хаяг 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Багана. %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s байт"
 
-msgid "  [grow]"
-msgstr "  [рост]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s байт"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Файлыг хадгалж чадсангүй "
 
 msgid "Invalid hex search expression"
 msgstr "Хайхад боломжгүй илэрхийлэл байна"
@@ -2881,47 +2981,59 @@ msgstr " Хаяг руу очих "
 msgid " Enter regexp:"
 msgstr " Тогмол илэрхийлэлээ оруул:"
 
-msgid "Ascii"
-msgstr "Текст"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Очих"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Мөр"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "РегХайх"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "HxЗас"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "ТкстЗас"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "ТаслБолих"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Таслах"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxХайх"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Дутуу"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Бэлэн"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "ФормБус"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Формат"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr "Бүртгэл"
@@ -3502,6 +3614,85 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Файлыг уншихаар нээж чадсахгүй: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Хэвийн бус-файл: "
+
+#~ msgid "Format of the "
+#~ msgstr "Файлын бүтэц "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " засагдсан\n"
+#~ "3.0 хувилбарын хамт. Та хуулбарыг\n"
+#~ "сэргээхдээ "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext, эсвэл хэрэглэж байгаа\n"
+#~ "файл хэрхэн бичигдэх жишээ.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext нь яг энэ агшинд хэрэглэгдэж байна."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Файлыг нээж чадсангүй "
+
+#~ msgid "Col %d"
+#~ msgstr "Багана. %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [рост]"
+
+#~ msgid "Ascii"
+#~ msgstr "Текст"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Очих"
+
+#~ msgid "Line"
+#~ msgstr "Мөр"
+
+#~ msgid "RxSrch"
+#~ msgstr "РегХайх"
+
+#~ msgid "EdHex"
+#~ msgstr "HxЗас"
+
+#~ msgid "EdText"
+#~ msgstr "ТкстЗас"
+
+#~ msgid "UnWrap"
+#~ msgstr "ТаслБолих"
+
+#~ msgid "Wrap"
+#~ msgstr "Таслах"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxХайх"
+
+#~ msgid "Raw"
+#~ msgstr "Дутуу"
+
+#~ msgid "Parse"
+#~ msgstr "Бэлэн"
+
+#~ msgid "Unform"
+#~ msgstr "ФормБус"
+
+#~ msgid "Format"
+#~ msgstr "Формат"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Хэрэглэгчийн цэс нь зөвхөн mc гээс дуудагдсан mcedit д боломжтой"

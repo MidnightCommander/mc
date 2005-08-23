@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -13,35 +13,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Osvetlitev &sintakse"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " O "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Ne morem odpreti cevi za pisanje: "
+
 msgid "Error"
 msgstr "Napaka"
 
-msgid " Cannot open file for reading: "
-msgstr " Ne morem odpreti datoteke za branje: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Napaka ob branju iz cevi: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Ne morem odpreti cevi za pisanje: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Ne morem dobiti podatkov o velikosti in dovoljenjih datoteke: "
 
-msgid " Not an ordinary file: "
-msgstr " Ni navadna datoteka: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Pogled ni mogoč: ni običajna datoteka "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Datoteka je prevelika: "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
-
-msgid "&Dismiss"
-msgstr "&Opusti"
-
-msgid "&OK"
-msgstr "&V redu"
 
 msgid " Enter file name: "
 msgstr " Vpnesi ime datoteke: "
@@ -63,6 +74,9 @@ msgstr "Delaj varnostne kopije -->"
 
 msgid "&Cancel"
 msgstr "&Prekliči"
+
+msgid "&OK"
+msgstr "&V redu"
 
 msgid "Extension:"
 msgstr "Pripona:"
@@ -232,6 +246,13 @@ msgstr "&Da"
 msgid "&No"
 msgstr "&Ne"
 
+#, fuzzy
+msgid " Error "
+msgstr "Napaka"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Kopiraj na odložišče "
 
@@ -323,17 +344,20 @@ msgstr " Za"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <predmet> -c <cc> <za>"
 
-msgid " Emacs key: "
-msgstr " Emacs ključ: "
-
-msgid " Execute Macro "
-msgstr " Izvedi makro "
-
 msgid " Insert Literal "
 msgstr " Vstavi dobesedno "
 
 msgid " Press any key: "
 msgstr " Pritisni tipko: "
+
+msgid " Execute Macro "
+msgstr " Izvedi makro "
+
+msgid "&Dismiss"
+msgstr "&Opusti"
+
+msgid " Emacs key: "
+msgstr " Emacs ključ: "
 
 #, c-format
 msgid ""
@@ -498,8 +522,13 @@ msgstr "&Splošno...  "
 msgid "&Save mode..."
 msgstr "način &Shranjevanja..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "nauči se &Tipk..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "Osvetlitev &sintakse"
 
 msgid " File "
 msgstr "Datoteka "
@@ -521,6 +550,10 @@ msgstr "Intuitiven"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "&Prikorjeno:"
 
 msgid "None"
 msgstr "Brez"
@@ -605,6 +638,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Napaka v datoteki %s v vrstici %d"
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Chown ukaz "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Chown ukaz "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Chown ukaz "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Opozorilo: datoteka %s ni bila najdena\n"
 
 msgid "&Set"
 msgstr "&Nastavi"
@@ -740,6 +821,10 @@ msgstr "Vhodni / zaslonski nabor znakov:"
 
 msgid "&Select"
 msgstr "&Izberi"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Uporabi &pasivni način..."
 
 msgid "Use &passive mode"
 msgstr "Uporabi &pasivni način..."
@@ -1175,41 +1260,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " napaka v datoteki "
 
-msgid "Format of the "
-msgstr "Način zapisa v "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "Datoteka mc.ext je bila z različico 3.0\n"
 "spremenjena. Zdi se, da namestitev\n"
 "ni uspela. Prosim pridobite si svežo novo kopijo iz\n"
 "paketa Polnočnega poveljnika oz. v pimeru."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" datoteka je bila spremenjena\n"
-"z različico 3.0. Lahko jo skopirate \n"
-"iz"
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " napaka v datoteki "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext ali uporabite to datoteko\n"
-"za primer, kako jo napisati.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "zaenkrat bo uporalbjen mc.ext."
 
 msgid " Copy "
 msgstr " Kopiraj "
@@ -1692,6 +1767,9 @@ msgstr "&Pogled - F3"
 msgid "&Edit - F4"
 msgstr "&Uredi - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Začni pri:"
 
@@ -1884,6 +1962,10 @@ msgstr "Modificiran %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Ustvarjen  %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2199,6 +2281,9 @@ msgstr "&Potrditev..."
 msgid "&Display bits..."
 msgstr "&Kaži bite..."
 
+msgid "learn &Keys..."
+msgstr "nauči se &Tipk..."
+
 msgid "&Virtual FS..."
 msgstr "&Navidezni Datotečni Sistem..."
 
@@ -2512,6 +2597,9 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr "Uporaba:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "NAD--IMENIK"
 
@@ -2804,14 +2892,12 @@ msgstr " Cev neuspešna "
 msgid " Dup failed "
 msgstr " Podvojitev neuspešna"
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Ne morem pognati podrejenega programa "
 
 msgid "Empty output from child filter"
 msgstr "Prazen izhod iz podprograma - filtra"
-
-msgid " Cannot open file "
-msgstr " Ne morem odpreti datoteke "
 
 #, c-format
 msgid ""
@@ -2841,15 +2927,29 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Stolpec: %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bajtov"
 
-msgid "  [grow]"
-msgstr " [raste]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bajtov"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Ne morem shraniti datoteke. "
 
 msgid "Invalid hex search expression"
 msgstr "Neveljaven šestnajstiški iskalni izraz"
@@ -2879,47 +2979,59 @@ msgstr " Pojdi na naslov"
 msgid " Enter regexp:"
 msgstr " Vnesite regularen izraz:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Šestnajstiško"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Pojdi v"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Vrstica"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "Regularno iskanje"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "Uredi Heksadeicmalno"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "Uredi Besedilo"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Izklopi prevoj"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Prevoj"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "Hex iskanje"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Direktno"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Razčleni"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Neformatirano"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Oblikuj izpis"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Zgodovina "
@@ -3500,6 +3612,85 @@ msgstr "Interna napaka:"
 
 msgid "Changes to file lost"
 msgstr "Spremembe v datoteki izgubljene"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Ne morem odpreti datoteke za branje: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Ni navadna datoteka: "
+
+#~ msgid "Format of the "
+#~ msgstr "Način zapisa v "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " datoteka je bila spremenjena\n"
+#~ "z različico 3.0. Lahko jo skopirate \n"
+#~ "iz"
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext ali uporabite to datoteko\n"
+#~ "za primer, kako jo napisati.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "zaenkrat bo uporalbjen mc.ext."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Ne morem odpreti datoteke "
+
+#~ msgid "Col %d"
+#~ msgstr "Stolpec: %d"
+
+#~ msgid "  [grow]"
+#~ msgstr " [raste]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Šestnajstiško"
+
+#~ msgid "Goto"
+#~ msgstr "Pojdi v"
+
+#~ msgid "Line"
+#~ msgstr "Vrstica"
+
+#~ msgid "RxSrch"
+#~ msgstr "Regularno iskanje"
+
+#~ msgid "EdHex"
+#~ msgstr "Uredi Heksadeicmalno"
+
+#~ msgid "EdText"
+#~ msgstr "Uredi Besedilo"
+
+#~ msgid "UnWrap"
+#~ msgstr "Izklopi prevoj"
+
+#~ msgid "Wrap"
+#~ msgstr "Prevoj"
+
+#~ msgid "HxSrch"
+#~ msgstr "Hex iskanje"
+
+#~ msgid "Raw"
+#~ msgstr "Direktno"
+
+#~ msgid "Parse"
+#~ msgstr "Razčleni"
+
+#~ msgid "Unform"
+#~ msgstr "Neformatirano"
+
+#~ msgid "Format"
+#~ msgstr "Oblikuj izpis"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Uporabnikov menu je dostopen le kadar je mcedit pognan iz mc-ja"

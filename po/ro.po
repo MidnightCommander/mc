@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -16,35 +16,46 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "&Evidenþiere sintaxã"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Despre "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Nu pot deschide pentru citire filtrul: "
+
 msgid "Error"
 msgstr "Eroare"
 
-msgid " Cannot open file for reading: "
-msgstr " Nu pot deschide pentru citire fiºierul: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Eroare la citirea din filtrul: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Nu pot deschide pentru citire filtrul: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Nu pot obþine informaþiile despre mãrimea/drepturile fiºierului: "
 
-msgid " Not an ordinary file: "
-msgstr " Nu e un fiºier obiºnuit: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Nu poate fi vizualizat: nu este un fiºier obiºnuit "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Fiºierul este prea mare: "
 
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
-
-msgid "&Dismiss"
-msgstr "&Închide"
-
-msgid "&OK"
-msgstr "&OK"
 
 msgid " Enter file name: "
 msgstr " Introduceþi numele fiºierului: "
@@ -66,6 +77,9 @@ msgstr "Fã backup -->"
 
 msgid "&Cancel"
 msgstr "&Renunþã"
+
+msgid "&OK"
+msgstr "&OK"
 
 msgid "Extension:"
 msgstr "Extensie:"
@@ -235,6 +249,13 @@ msgstr "&Da"
 msgid "&No"
 msgstr "&Nu"
 
+#, fuzzy
+msgid " Error "
+msgstr "Eroare"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Copiazã în clipboard "
 
@@ -325,17 +346,20 @@ msgstr " La"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Subiect> -c <CI> <La>"
 
-msgid " Emacs key: "
-msgstr " Tasta Emacs: "
-
-msgid " Execute Macro "
-msgstr " Executã Combinaþia "
-
 msgid " Insert Literal "
 msgstr " Inserez un Literal "
 
 msgid " Press any key: "
 msgstr " Apãsaþi o tastã: "
+
+msgid " Execute Macro "
+msgstr " Executã Combinaþia "
+
+msgid "&Dismiss"
+msgstr "&Închide"
+
+msgid " Emacs key: "
+msgstr " Tasta Emacs: "
 
 #, c-format
 msgid ""
@@ -499,8 +523,13 @@ msgstr "&Generale...      "
 msgid "&Save mode..."
 msgstr "Modul de &Salvare..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "învaþã &Tastele..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "&Evidenþiere sintaxã"
 
 msgid " File "
 msgstr " Fiºier "
@@ -522,6 +551,10 @@ msgstr "Intuitivã"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "definit de &Utilizator:"
 
 msgid "None"
 msgstr "Fãrã aranjare"
@@ -606,6 +639,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Eroare în fiºierul %s la linia %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Comanda chown "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Comanda chown "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Comanda chown "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Atenþie: nu am gãsit fiºierul %s\n"
 
 msgid "&Set"
 msgstr "&Setez"
@@ -741,6 +822,10 @@ msgstr "Intrare / cod de afiºare:"
 
 msgid "&Select"
 msgstr "&Selecteazã "
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Utilizeazã modul _pasiv"
 
 msgid "Use &passive mode"
 msgstr "Utilizeazã modul _pasiv"
@@ -1176,41 +1261,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parametru "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " eroare fiºier "
 
-msgid "Format of the "
-msgstr "Format al "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "Formatul fiºierului mc.ext\n"
 "s-a schimbat începând cu versiunea 3.0. Instalarea\n"
 "a eºuat. Copiaþi versiunea nouã din sursele sau\n"
 "pachetul de instalare Midnight Commander."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" fiºierul s-a schimbat\n"
-"cu versiunea 3.0. Poate doriþi sã\n"
-"îl copiaþi din "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " eroare fiºier "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext sau utilizaþi acel\n"
-"fiºier ca un exemplu de cum sã îl scrieþi.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext va fi utilizat deocamdatã."
 
 msgid " Copy "
 msgstr " Copiazã "
@@ -1692,6 +1767,9 @@ msgstr "&Vizualizare - F3"
 msgid "&Edit - F4"
 msgstr "&Editare - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Încep la:"
 
@@ -1884,6 +1962,10 @@ msgstr "Modificat: %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Creat:     %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2196,6 +2278,9 @@ msgstr "c&Onfirmare..."
 
 msgid "&Display bits..."
 msgstr "&Biþi de afiºare..."
+
+msgid "learn &Keys..."
+msgstr "învaþã &Tastele..."
 
 msgid "&Virtual FS..."
 msgstr "Sistem &Virtual de Fiºiere..."
@@ -2513,6 +2598,9 @@ msgstr "ARG"
 msgid "Usage:"
 msgstr "Utilizare:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "SUS-DIR"
 
@@ -2804,14 +2892,12 @@ msgstr " Filtrul a eºuat "
 msgid " Dup failed "
 msgstr " Dup eºuat "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Nu pot clona programul copil "
 
 msgid "Empty output from child filter"
 msgstr "Ieºire vidã de la filtrul copil "
-
-msgid " Cannot open file "
-msgstr " Nu pot deschide fiºierul "
 
 #, c-format
 msgid ""
@@ -2841,15 +2927,29 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Col %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-msgid "  [grow]"
-msgstr "[creºte]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bytes"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Eroare la salvarea fiºierului. "
 
 msgid "Invalid hex search expression"
 msgstr "Expresie regularã invalidã la cãutare"
@@ -2879,47 +2979,59 @@ msgstr " Du-te la Adresa "
 msgid " Enter regexp:"
 msgstr " Introduceþi expresia regularã:"
 
-msgid "Ascii"
-msgstr "ASCII"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hexa"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Du-teLa"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Linie"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "CautRX"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdText"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "NeArnj"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Aranj"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "CautRX"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Brut"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Prelcr"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Neform"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Format"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " Istoric "
@@ -3498,6 +3610,85 @@ msgstr "Eroare internã:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbãrile efectuate în fiºier"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Nu pot deschide pentru citire fiºierul: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Nu e un fiºier obiºnuit: "
+
+#~ msgid "Format of the "
+#~ msgstr "Format al "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " fiºierul s-a schimbat\n"
+#~ "cu versiunea 3.0. Poate doriþi sã\n"
+#~ "îl copiaþi din "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext sau utilizaþi acel\n"
+#~ "fiºier ca un exemplu de cum sã îl scrieþi.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext va fi utilizat deocamdatã."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Nu pot deschide fiºierul "
+
+#~ msgid "Col %d"
+#~ msgstr "Col %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "[creºte]"
+
+#~ msgid "Ascii"
+#~ msgstr "ASCII"
+
+#~ msgid "Hex"
+#~ msgstr "Hexa"
+
+#~ msgid "Goto"
+#~ msgstr "Du-teLa"
+
+#~ msgid "Line"
+#~ msgstr "Linie"
+
+#~ msgid "RxSrch"
+#~ msgstr "CautRX"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHex"
+
+#~ msgid "EdText"
+#~ msgstr "EdText"
+
+#~ msgid "UnWrap"
+#~ msgstr "NeArnj"
+
+#~ msgid "Wrap"
+#~ msgstr "Aranj"
+
+#~ msgid "HxSrch"
+#~ msgstr "CautRX"
+
+#~ msgid "Raw"
+#~ msgstr "Brut"
+
+#~ msgid "Parse"
+#~ msgstr "Prelcr"
+
+#~ msgid "Unform"
+#~ msgstr "Neform"
+
+#~ msgid "Format"
+#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr ""

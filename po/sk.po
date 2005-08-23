@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2003-01-22 21:50+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -15,35 +15,46 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "zvýraznenie s&Yntaxe"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " O aplikácii "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Neúspešný pokus o otvorenie rúry pre čítanie: "
+
 msgid "Error"
 msgstr "Chyba"
 
-msgid " Cannot open file for reading: "
-msgstr " Neúspešný pokus o otvorenie súboru pre čítanie: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " Chyba pri čítaní z rúry: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Neúspešný pokus o otvorenie rúry pre čítanie: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Nemôžem získať info súbor o veľkosti/právach: "
 
-msgid " Not an ordinary file: "
-msgstr " Toto nie je súbor ordinálneho typu: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Nemôžem nahliadnuť: toto nie je normálny súbor "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Súbor je príliš veľký: "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzia makra je príliš hlboká"
-
-msgid "&Dismiss"
-msgstr "&Odmietnuť"
-
-msgid "&OK"
-msgstr "Án&o"
 
 msgid " Enter file name: "
 msgstr " Zadajte meno súbpru: "
@@ -65,6 +76,9 @@ msgstr "Zálož. kópiu do"
 
 msgid "&Cancel"
 msgstr "&Zrušiť"
+
+msgid "&OK"
+msgstr "Án&o"
 
 msgid "Extension:"
 msgstr "Prípona:"
@@ -233,6 +247,13 @@ msgstr "Án&o"
 msgid "&No"
 msgstr "&Nie"
 
+#, fuzzy
+msgid " Error "
+msgstr "Chyba"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Kopírovať do schránky "
 
@@ -324,17 +345,20 @@ msgstr " Komu"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <predmet> -c <cc> <pre>"
 
-msgid " Emacs key: "
-msgstr " Emacs kláves: "
-
-msgid " Execute Macro "
-msgstr " Spustiť makro "
-
 msgid " Insert Literal "
 msgstr " Vložiť znak "
 
 msgid " Press any key: "
 msgstr " Stlačte nejakú klávesu: "
+
+msgid " Execute Macro "
+msgstr " Spustiť makro "
+
+msgid "&Dismiss"
+msgstr "&Odmietnuť"
+
+msgid " Emacs key: "
+msgstr " Emacs kláves: "
 
 #, c-format
 msgid ""
@@ -498,8 +522,13 @@ msgstr "&Všeobecne...  "
 msgid "&Save mode..."
 msgstr "&Ukladací mód..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "uč&Enie kláves..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "zvýraznenie s&Yntaxe"
 
 msgid " File "
 msgstr " Súbor "
@@ -521,6 +550,10 @@ msgstr "Intuitívne"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "d&Efinovaný používateľom:"
 
 msgid "None"
 msgstr "Žiaden"
@@ -605,6 +638,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Chyba v súbore %s na riadku %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Príkaz zmeny vlastníka "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Príkaz zmeny vlastníka "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Príkaz zmeny vlastníka "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Upozornenie: súbor %s nenájdený\n"
 
 msgid "&Set"
 msgstr "&Nastaviť"
@@ -740,6 +821,10 @@ msgstr "Vstupná/Zobrazovacia znaková sada:"
 
 msgid "&Select"
 msgstr "&Vybrať"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Použiť &pasívny režim"
 
 msgid "Use &passive mode"
 msgstr "Použiť &pasívny režim"
@@ -1175,41 +1260,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " chyba v súbore "
 
-msgid "Format of the "
-msgstr "Formát "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "Súbor mc.ext bol zmenený vo verzii 3.0.\n"
 "Vyzerá to, že inštalácia zlyhala. Prosím, \n"
 "použite novú kópiu balíka Midnight\n"
 "Commander."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" súbor bol zmemený\n"
-"verziou 3.0. Môžno ho tiež budete chcieť\n"
-"kopírovať z "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " chyba v súbore "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext, alebo použite ten\n"
-"súbor ako príklad, ako to napísať.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext bude používaný v tejto chvíli."
 
 msgid " Copy "
 msgstr " Kopírovať "
@@ -1691,6 +1766,9 @@ msgstr "&Pohľad - F3"
 msgid "&Edit - F4"
 msgstr "&Editácia - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Začať na:"
 
@@ -1883,6 +1961,10 @@ msgstr "Zmenený:  %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Vytvorený:   %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2195,6 +2277,9 @@ msgstr "&Potvrdenie..."
 
 msgid "&Display bits..."
 msgstr "&Zobrazené bity..."
+
+msgid "learn &Keys..."
+msgstr "uč&Enie kláves..."
 
 msgid "&Virtual FS..."
 msgstr "&Virtuálny FS..."
@@ -2509,6 +2594,9 @@ msgstr "PAR"
 msgid "Usage:"
 msgstr "Použitie:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
@@ -2800,14 +2888,12 @@ msgstr " Zlyhanie pipe "
 msgid " Dup failed "
 msgstr " Zlyhanie dup "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Nemôžem spustiť program potomka procesu "
 
 msgid "Empty output from child filter"
 msgstr "Prázdny výstup z filtra potomka"
-
-msgid " Cannot open file "
-msgstr " Nemohol som otvoriť súbor "
 
 #, c-format
 msgid ""
@@ -2837,15 +2923,29 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Col %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytov"
 
-msgid "  [grow]"
-msgstr "  [rásť]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s bytov"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Chyba počas ukladania súboru. "
 
 msgid "Invalid hex search expression"
 msgstr "Neplatný hexadecimány vyhľadávací výraz"
@@ -2875,47 +2975,59 @@ msgstr " Choď na Adresu "
 msgid " Enter regexp:"
 msgstr " Zadajte regexp:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Choď"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Riadok"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxSrch"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdText"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "Rozbaľ"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Zabaľ"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxSrch"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Prvotný"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Rozober"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Obnov"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Formát"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " História "
@@ -3495,6 +3607,85 @@ msgstr "Interná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Neúspešný pokus o otvorenie súboru pre čítanie: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Toto nie je súbor ordinálneho typu: "
+
+#~ msgid "Format of the "
+#~ msgstr "Formát "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " súbor bol zmemený\n"
+#~ "verziou 3.0. Môžno ho tiež budete chcieť\n"
+#~ "kopírovať z "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext, alebo použite ten\n"
+#~ "súbor ako príklad, ako to napísať.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext bude používaný v tejto chvíli."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Nemohol som otvoriť súbor "
+
+#~ msgid "Col %d"
+#~ msgstr "Col %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [rásť]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Choď"
+
+#~ msgid "Line"
+#~ msgstr "Riadok"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxSrch"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHex"
+
+#~ msgid "EdText"
+#~ msgstr "EdText"
+
+#~ msgid "UnWrap"
+#~ msgstr "Rozbaľ"
+
+#~ msgid "Wrap"
+#~ msgstr "Zabaľ"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxSrch"
+
+#~ msgid "Raw"
+#~ msgstr "Prvotný"
+
+#~ msgid "Parse"
+#~ msgstr "Rozober"
+
+#~ msgid "Unform"
+#~ msgstr "Obnov"
+
+#~ msgid "Format"
+#~ msgstr "Formát"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Používateľské menu k dispozícii iba v mcedit spustenom z mc"

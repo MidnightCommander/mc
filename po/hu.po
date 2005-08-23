@@ -7,15 +7,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2005-07-22 16:57+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "X-Generator: KBabel 1.9.1\n"
+
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "&Szintaktikus szövegkiemelés"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Névjegy "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -47,9 +58,6 @@ msgstr " A(z) \"%s\" fájl túl nagy "
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
-
-msgid "&Dismiss"
-msgstr "&Tovább"
 
 msgid " Enter file name: "
 msgstr " Fájlnév: "
@@ -352,6 +360,9 @@ msgstr " Nyomjon meg egy billentyût: "
 msgid " Execute Macro "
 msgstr " Makró futtatása "
 
+msgid "&Dismiss"
+msgstr "&Tovább"
+
 msgid " Emacs key: "
 msgstr " Emacs-billentyû: "
 
@@ -522,8 +533,13 @@ msgstr "Á&ltalános..."
 msgid "&Save mode..."
 msgstr "&Mentési mód..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "&Billentyûk..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "&Szintaktikus szövegkiemelés"
 
 msgid " File "
 msgstr " Fájl "
@@ -638,6 +654,7 @@ msgstr ""
 msgid " Error in file %s on line %d "
 msgstr " Hiba a(z) %s fájl %d. sorában "
 
+#, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
 msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
 
@@ -645,6 +662,7 @@ msgstr "Bind: helytelen argumentumszám, bind <kulcs> <parancs>"
 msgid "bind: Bad key value `%s'"
 msgstr "Bind: helytelen kulcsérték: \"%s\""
 
+#, c-format
 msgid "bind: Ehh...no key?"
 msgstr "Bind: nincs kulcs?"
 
@@ -1255,9 +1273,11 @@ msgstr "&Csoport"
 msgid "Cannot read directory contents"
 msgstr "Nem sikerült beolvasni a könyvtár tartalmát"
 
+#, c-format
 msgid "Press any key to continue..."
 msgstr "Nyomjon meg egy billentyût..."
 
+#, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
 
@@ -2345,6 +2365,9 @@ msgstr "&Megerõsítések..."
 msgid "&Display bits..."
 msgstr "&Kivitel és bevitel..."
 
+msgid "learn &Keys..."
+msgstr "&Billentyûk..."
+
 msgid "&Virtual FS..."
 msgstr "&Virtuális fájlrendszer..."
 
@@ -2680,6 +2703,7 @@ msgstr "Rövid használati útmutató megjelenítése."
 msgid "ARG"
 msgstr "PAR"
 
+#, c-format
 msgid "Usage:"
 msgstr "Használat:"
 
@@ -2855,6 +2879,7 @@ msgstr "Nyelvi lokalizálás támogatása\n"
 msgid "With multiple codepages support\n"
 msgstr "Több kódlap támogatása\n"
 
+#, c-format
 msgid "Virtual File System:"
 msgstr "Virtuális fájlrendszer:"
 
@@ -2982,6 +3007,7 @@ msgstr ""
 msgid "Temporary files will be created in %s\n"
 msgstr "Az ideiglenes fájlok a(z) \"%s\" könyvtárban lesznek létrehozva\n"
 
+#, c-format
 msgid "Temporary files will not be created\n"
 msgstr "Ideiglenes fájlok nem lesznek létrehozva\n"
 
@@ -3103,23 +3129,23 @@ msgstr "Ugrás"
 msgid "ButtonBar|Line"
 msgstr "UgrSor"
 
-msgid "ButtonBar|Save"
-msgstr "Mentés"
-
-msgid "ButtonBar|RxSrch"
-msgstr "RegKer"
-
 msgid "ButtonBar|View"
 msgstr "Megnéz"
 
 msgid "ButtonBar|Edit"
 msgstr "Szerk"
 
+msgid "ButtonBar|Save"
+msgstr "Mentés"
+
 msgid "ButtonBar|UnWrap"
 msgstr "NemTör"
 
 msgid "ButtonBar|Wrap"
 msgstr "SorTör"
+
+msgid "ButtonBar|RxSrch"
+msgstr "RegKer"
 
 msgid "ButtonBar|HxSrch"
 msgstr "HexKer"

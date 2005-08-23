@@ -126,7 +126,7 @@ pannello.
 .SH "Panoramica"
 Lo schermo del Midnight Commander è diviso in quattro parti. Quasi tutto
 lo spazio è occupato dai due pannelli directory. Come impostazione
-predefinita la seconda linea dal fondo è la riga di comando, mentre
+predefinita la seconda riga dal fondo è la riga di comando, mentre
 quella in basso mostra le etichette dei tasti funzione. La riga più in
 alto è la
 .\"LINK2"
@@ -155,7 +155,7 @@ menu file\&.
 .\"File Menu"
 .PP
 E' possibile eseguire comandi di sistema dal Midnight Commander 
-semplicemente battendoli. Ogni cosa scritta apparirà sulla linea di 
+semplicemente battendoli. Ogni cosa scritta apparirà sulla riga di 
 comando e quando si preme l'invio il Midnight Commander eseguirà la
 riga di comando appena battuta; leggere le sezioni
 .\"LINK2"
@@ -192,7 +192,7 @@ verrà eseguito.
 E' anche possibile eseguire i comandi assegnati ai tasti funzione 
 cliccando sulle etichette dei tasti.
 .PP
-Se un tasto del mouse viene premuto sulla linea in cima al pannello directory
+Se un tasto del mouse viene premuto sulla riga in cima al pannello directory,
 il pannello sfoglia di una pagina in alto. Allo stesso modo, un clic sulla 
 riga in basso provocherà un cambio di pagina in basso. Questo metodo dei bordi
 funziona anche nel
@@ -280,8 +280,8 @@ Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
 altre categorie:
 .TP
 .B Invio
-se c'è del testo nella linea di comando (quella in fondo ai pannelli),
-allora quel comando viene eseguito. Se non c'è testo nella linea di
+se c'è del testo nella riga di comando (quella in fondo ai pannelli),
+allora quel comando viene eseguito. Se non c'è testo nella riga di
 comando allora se la barra di selezione è sopra una directory il
 Midnight Commander esegue un
 .B chdir(2)
@@ -520,10 +520,10 @@ Diverse parti del Midnight Commander usano gli stessi tasti di
 movimento, questa sezione riguarda quelle parti.
 .TP
 .B Su, C-p
-si sposta di una linea indietro.
+si sposta di una riga indietro.
 .TP
 .B Giù, C-n
-si sposta di una linea avanti.
+si sposta di una riga avanti.
 .TP
 .B Pag. Prec., Pagina Su, M-v
 si sposta di una pagina in alto.
@@ -562,10 +562,10 @@ e per i dialoghi di richiesta dati nel programma) accettano
 questi tasti:
 .TP
 .B C-a
-sposta il cursore all'inizio della linea.
+sposta il cursore all'inizio della riga.
 .TP
 .B C-e
-sposta il cursore alla fine della linea
+sposta il cursore alla fine della riga
 .TP
 .B C-b, freccia-sinistra
 sposta il cursore di una posizione a sinistra.
@@ -590,7 +590,7 @@ imposta il marcatore per tagliare.
 .TP
 .B C-w
 copia il testo tra il cursore e il marcatore in un kill buffer 
-e rimuove il testo dalla linea di ingresso.
+e rimuove il testo dalla riga di ingresso.
 .TP
 .B M-w
 copia il testo tra il cursore ed il marcatore in un kill buffer.
@@ -599,7 +599,7 @@ copia il testo tra il cursore ed il marcatore in un kill buffer.
 inserisce il contenuto del kill buffer.
 .TP
 .B C-k
-elimina il testo dal cursore alla fine della linea.
+elimina il testo dal cursore alla fine della riga.
 .TP
 .B M-p, M-n
 usa questi tasti per navigare attraverso la cronologia dei comandi. M-p 
@@ -1757,7 +1757,7 @@ a seconda del tipo (per esempio directory, file core, eseguibili, ...).
 .PP
 Se l'opzione 
 .I Mostra mini-stato
-è abilitata, una linea di informazioni di stato circa la voce correntemente
+è abilitata, una riga di informazioni di stato circa la voce correntemente
 selezionata viene mostrata sul fondo dei pannelli.
 .\"NODE "    Confirmation"
 .SH "    Conferme"
@@ -2386,8 +2386,8 @@ Abilita/disabilita la funzione di a capo automatico.
 Abilita/disabilita la modalità esadecimale.
 .PP
 .B F5
-Vai alla linea. Questo comando richiederà un numero di linea e mostrerà
-quella linea.
+Vai alla riga. Questo comando richiederà un numero di riga e mostrerà
+quella riga.
 .PP
 .B F6, /. 
 Ricerca tramite espressione regolare.

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -11,35 +11,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "Осветяване на синтаксиса"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " За "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr " Грешка при отваряне на канала за четене: "
+
 msgid "Error"
 msgstr "Грешка"
 
-msgid " Cannot open file for reading: "
-msgstr " Грешка при отваряне на файла за четене: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr "Грешка при четене от канала: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr " Грешка при отваряне на канала за четене: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr " Не мога да получа информация за размер/режим на файла: "
 
-msgid " Not an ordinary file: "
-msgstr " Не е обикновен файл: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " Не може да се разглежда: не е обикновен файл "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr " Файлът е прекалено голям: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "Затвори"
-
-msgid "&OK"
-msgstr "ОК"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -62,6 +73,9 @@ msgstr "Прави архиви -->"
 
 msgid "&Cancel"
 msgstr "Отказ"
+
+msgid "&OK"
+msgstr "ОК"
 
 msgid "Extension:"
 msgstr "Разширение:"
@@ -232,6 +246,13 @@ msgstr "Да"
 msgid "&No"
 msgstr "Не"
 
+#, fuzzy
+msgid " Error "
+msgstr "Грешка"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " Копирай в буфера "
 
@@ -323,17 +344,20 @@ msgstr " До"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <тема> -c <cc> <до>"
 
-msgid " Emacs key: "
-msgstr " Emacs клавиш: "
-
-msgid " Execute Macro "
-msgstr " Изпълни Макрос "
-
 msgid " Insert Literal "
 msgstr " Вмъкни символ "
 
 msgid " Press any key: "
 msgstr " Натиснете клавиш: "
+
+msgid " Execute Macro "
+msgstr " Изпълни Макрос "
+
+msgid "&Dismiss"
+msgstr "Затвори"
+
+msgid " Emacs key: "
+msgstr " Emacs клавиш: "
 
 #, c-format
 msgid ""
@@ -497,8 +521,13 @@ msgstr "Общи..."
 msgid "&Save mode..."
 msgstr "Начин на запазване..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "Научи клавиши..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "Осветяване на синтаксиса"
 
 msgid " File "
 msgstr " Файл "
@@ -520,6 +549,10 @@ msgstr "Интуитивно"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "Дефиниран от потребителя:"
 
 msgid "None"
 msgstr "Няма"
@@ -605,6 +638,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Грешка във файла %s на ред %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " Команда Chown "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " Команда Chown "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " Команда Chown "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "Внимание: файлът %s не е намерен\n"
 
 msgid "&Set"
 msgstr "Промени"
@@ -740,6 +821,10 @@ msgstr "Вход / дисплей кодова страница:"
 
 msgid "&Select"
 msgstr "Маркирай"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "Начин на запазване..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1179,41 +1264,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " Парамертър "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " грешка във файла "
 
-msgid "Format of the "
-msgstr "Форматът на "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "файлът mc.ext е сменен\n"
 "с версия 3.0. Изглежда, че инсталацията\n"
 "е пропаднала. Моля, вземете си ново копие\n"
 "от пакета на Midnight Commander."
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-" е променен\n"
-"с версия 3.0. Можете или да го\n"
-"копирате от "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " грешка във файла "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext или да използвате този файл\n"
-"като пример за това, как да го напишете.\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "Засега ще бъде използван mc.ext."
 
 msgid " Copy "
 msgstr " Копиране "
@@ -1695,6 +1770,9 @@ msgstr "Покажи - F3"
 msgid "&Edit - F4"
 msgstr "Редактирай - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Започни от:"
 
@@ -1887,6 +1965,10 @@ msgstr "Променян:     %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Създаден:     %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2201,6 +2283,9 @@ msgstr "Потвърждения..."
 
 msgid "&Display bits..."
 msgstr "Екран..."
+
+msgid "learn &Keys..."
+msgstr "Научи клавиши..."
 
 msgid "&Virtual FS..."
 msgstr "Виртуална ФС..."
@@ -2518,6 +2603,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "Потребителско име:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "ГОР-ДИР"
 
@@ -2813,14 +2901,12 @@ msgstr " Канала пропадна "
 msgid " Dup failed "
 msgstr " Дублирането на дескриптора пропадна "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " Не мога дa пуснa програма-дете "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " Не може да се отвори файл "
 
 #, c-format
 msgid ""
@@ -2850,15 +2936,29 @@ msgid "Offset 0x%08lx"
 msgstr "Отместване 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "Кол. %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s байта"
 
-msgid "  [grow]"
-msgstr " [расте]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%s байта"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr " Грешка при запазване на файла. "
 
 msgid "Invalid hex search expression"
 msgstr "Невалиден шестнадесетичен израз "
@@ -2888,47 +2988,59 @@ msgstr " Отиди на адрес "
 msgid " Enter regexp:"
 msgstr " Въведете регулярен израз:"
 
-msgid "Ascii"
-msgstr "Ascii"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "Hex"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "Отиди"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "Ред"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RИТрсн"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "Ред16"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "РедТкст"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "НеПрнс"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "Пренос"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "16Трсн"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Суров"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Обраб"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "НеФрмт"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Формат"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr " История "
@@ -3508,6 +3620,85 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr " Грешка при отваряне на файла за четене: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr " Не е обикновен файл: "
+
+#~ msgid "Format of the "
+#~ msgstr "Форматът на "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ " е променен\n"
+#~ "с версия 3.0. Можете или да го\n"
+#~ "копирате от "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext или да използвате този файл\n"
+#~ "като пример за това, как да го напишете.\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "Засега ще бъде използван mc.ext."
+
+#~ msgid " Cannot open file "
+#~ msgstr " Не може да се отвори файл "
+
+#~ msgid "Col %d"
+#~ msgstr "Кол. %d"
+
+#~ msgid "  [grow]"
+#~ msgstr " [расте]"
+
+#~ msgid "Ascii"
+#~ msgstr "Ascii"
+
+#~ msgid "Hex"
+#~ msgstr "Hex"
+
+#~ msgid "Goto"
+#~ msgstr "Отиди"
+
+#~ msgid "Line"
+#~ msgstr "Ред"
+
+#~ msgid "RxSrch"
+#~ msgstr "RИТрсн"
+
+#~ msgid "EdHex"
+#~ msgstr "Ред16"
+
+#~ msgid "EdText"
+#~ msgstr "РедТкст"
+
+#~ msgid "UnWrap"
+#~ msgstr "НеПрнс"
+
+#~ msgid "Wrap"
+#~ msgstr "Пренос"
+
+#~ msgid "HxSrch"
+#~ msgstr "16Трсн"
+
+#~ msgid "Raw"
+#~ msgstr "Суров"
+
+#~ msgid "Parse"
+#~ msgstr "Обраб"
+
+#~ msgid "Unform"
+#~ msgstr "НеФрмт"
+
+#~ msgid "Format"
+#~ msgstr "Формат"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Потребителско меню има само в mcedit, извикан от mc"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-02 13:04+0500\n"
+"POT-Creation-Date: 2005-08-23 10:06+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -15,35 +15,46 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#, fuzzy
+msgid " Choose syntax highlighting "
+msgstr "文法ハイライト(&S)"
+
+#, fuzzy
+msgid "< Auto >"
+msgstr " Cooledit について "
+
+msgid "< Reload Current Syntax >"
+msgstr ""
+
+#, fuzzy, c-format
+msgid " Cannot open %s for reading "
+msgstr "読みだし用のパイプのオープンに失敗しました: "
+
 msgid "Error"
 msgstr "エラー"
 
-msgid " Cannot open file for reading: "
-msgstr "ファイルの読みだしでオープンに失敗しました: "
-
-msgid " Error reading from pipe: "
+#, fuzzy, c-format
+msgid " Error reading from pipe: %s "
 msgstr " パイプからの読み込みエラー: "
 
-msgid " Cannot open pipe for reading: "
+#, fuzzy, c-format
+msgid " Cannot open pipe for reading: %s "
 msgstr "読みだし用のパイプのオープンに失敗しました: "
 
-msgid " Cannot get size/permissions info for file: "
+#, fuzzy, c-format
+msgid " Cannot get size/permissions for %s "
 msgstr "ファイルの大きさ・パーミッションの情報を取得できませんでした: "
 
-msgid " Not an ordinary file: "
-msgstr "普通のファイルではありません: "
+#, fuzzy, c-format
+msgid " %s is not a regular file "
+msgstr " 表示できません: 通常ファイルではありません "
 
-msgid " File is too large: "
+#, fuzzy, c-format
+msgid " File %s is too large "
 msgstr "ファイルが大きすぎます: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
-
-msgid "&Dismiss"
-msgstr "消去(&D)"
-
-msgid "&OK"
-msgstr "はい(&O)"
 
 #, fuzzy
 msgid " Enter file name: "
@@ -66,6 +77,9 @@ msgstr "バックアップする →"
 
 msgid "&Cancel"
 msgstr "キャンセル(&C)"
+
+msgid "&OK"
+msgstr "はい(&O)"
 
 msgid "Extension:"
 msgstr "拡張子: "
@@ -234,6 +248,13 @@ msgstr "はい(&Y)"
 msgid "&No"
 msgstr "いいえ(&N)"
 
+#, fuzzy
+msgid " Error "
+msgstr "エラー"
+
+msgid " This function is not implemented. "
+msgstr ""
+
 msgid " Copy to clipboard "
 msgstr " クリップボードへコピー "
 
@@ -325,17 +346,20 @@ msgstr " To"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-msgid " Emacs key: "
-msgstr " Emacsキー: "
-
-msgid " Execute Macro "
-msgstr " マクロを実行 "
-
 msgid " Insert Literal "
 msgstr " 文字を入力してください "
 
 msgid " Press any key: "
 msgstr " キーを押してください: "
+
+msgid " Execute Macro "
+msgstr " マクロを実行 "
+
+msgid "&Dismiss"
+msgstr "消去(&D)"
+
+msgid " Emacs key: "
+msgstr " Emacsキー: "
 
 #, c-format
 msgid ""
@@ -499,8 +523,13 @@ msgstr "一般(&G)...   "
 msgid "&Save mode..."
 msgstr "保存方法(&S)..."
 
-msgid "learn &Keys..."
+#, fuzzy
+msgid "Learn &Keys..."
 msgstr "キーの学習(&K)..."
+
+#, fuzzy
+msgid "Syntax &Highlighting..."
+msgstr "文法ハイライト(&S)"
 
 msgid " File "
 msgstr " ファイル "
@@ -522,6 +551,10 @@ msgstr "Intuitive"
 
 msgid "Emacs"
 msgstr "Emacs"
+
+#, fuzzy
+msgid "User-defined"
+msgstr "ユーザ定義(&U):"
 
 msgid "None"
 msgstr "なし"
@@ -607,6 +640,54 @@ msgstr ""
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " ファイル %s の %d 行目でエラー "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr ""
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr ""
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr ""
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr " chown コマンド "
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr " chown コマンド "
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr ""
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr " chown コマンド "
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "%s not found!"
+msgstr "警告: ファイル %s は見つかりませんでした\n"
 
 msgid "&Set"
 msgstr "設定(&S)"
@@ -742,6 +823,10 @@ msgstr "入力 / コードページを表示:"
 
 msgid "&Select"
 msgstr "選択(&S)"
+
+#, fuzzy
+msgid "Use passive mode over pro&xy"
+msgstr "保存方法(&S)..."
 
 #, fuzzy
 msgid "Use &passive mode"
@@ -1183,41 +1268,31 @@ msgstr ""
 msgid " Parameter "
 msgstr " パラメータ "
 
-msgid " file error "
+#, fuzzy, c-format
+msgid " %s%s file error"
 msgstr " ファイルエラー "
 
-msgid "Format of the "
-msgstr "Format of the "
-
+#, fuzzy, c-format
 msgid ""
-"mc.ext file has changed\n"
-"with version 3.0. It seems that installation\n"
-"failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package."
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr ""
 "mc.ext ファイルはバージョン 3.0 になって\n"
 "変更されました．インストールに失敗したようです．\n"
 "Midnight Commander パッケージから新しいコピーを\n"
 "取得してください"
 
-msgid ""
-" file has changed\n"
-"with version 3.0. You may want either to\n"
-"copy it from "
-msgstr ""
-"の形式は version 3.0 で変わりました。\n"
-"\n"
-" "
+#, fuzzy, c-format
+msgid " ~/%s file error "
+msgstr " ファイルエラー "
 
+#, c-format
 msgid ""
-"mc.ext or use that\n"
-"file as an example of how to write it.\n"
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
 msgstr ""
-"mc.ext からコピーするか、それを書き方の\n"
-"サンプルとしてください\n"
-
-msgid "mc.ext will be used for this moment."
-msgstr "mc.ext をとりあえず使います。"
 
 msgid " Copy "
 msgstr " コピー "
@@ -1699,6 +1774,9 @@ msgstr "表示(&V) - F3"
 msgid "&Edit - F4"
 msgstr "編集(&E) - F4"
 
+msgid "find Re&cursively"
+msgstr ""
+
 msgid "Start at:"
 msgstr "開始場所:"
 
@@ -1891,6 +1969,10 @@ msgstr "更新:      %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "作成:      %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr ""
 
 #, c-format
 msgid "Size:      %s"
@@ -2206,6 +2288,9 @@ msgstr "確認(&O)..."
 
 msgid "&Display bits..."
 msgstr "表示ビット数(&D)..."
+
+msgid "learn &Keys..."
+msgstr "キーの学習(&K)..."
 
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
@@ -2523,6 +2608,9 @@ msgstr ""
 msgid "Usage:"
 msgstr "ユーザ名:"
 
+msgid "[dev]"
+msgstr ""
+
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
@@ -2818,14 +2906,12 @@ msgstr "pipe 失敗 "
 msgid " Dup failed "
 msgstr " dup 失敗 "
 
-msgid " Cannot spawn child program "
+#, fuzzy
+msgid " Cannot spawn child process "
 msgstr " 子プロセスを起動できません "
 
 msgid "Empty output from child filter"
 msgstr ""
-
-msgid " Cannot open file "
-msgstr " ファイルを開けません "
 
 #, c-format
 msgid ""
@@ -2855,15 +2941,29 @@ msgid "Offset 0x%08lx"
 msgstr "オフセット 0x%08lx"
 
 #, c-format
-msgid "Col %d"
-msgstr "列 %d"
+msgid "Line %lu Col %lu"
+msgstr ""
 
 #, c-format
 msgid "%s bytes"
 msgstr "%sバイト"
 
-msgid "  [grow]"
-msgstr "  [grow]"
+#, fuzzy, c-format
+msgid ">= %s bytes"
+msgstr "%sバイト"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr "ファイルの保存時にエラーが発生しました"
 
 msgid "Invalid hex search expression"
 msgstr "無効な16進正規表現です"
@@ -2893,47 +2993,59 @@ msgstr " アドレス移動 "
 msgid " Enter regexp:"
 msgstr " 正規表現を入力してください:"
 
-msgid "Ascii"
-msgstr "ASCII"
+msgid "ButtonBar|Help"
+msgstr ""
 
-msgid "Hex"
-msgstr "HEX"
+msgid "ButtonBar|Quit"
+msgstr ""
 
-msgid "Goto"
-msgstr "移動"
+msgid "ButtonBar|Ascii"
+msgstr ""
 
-msgid "Line"
-msgstr "行"
+msgid "ButtonBar|Hex"
+msgstr ""
 
-msgid "RxSrch"
-msgstr "RxSrch"
+msgid "ButtonBar|Goto"
+msgstr ""
 
-msgid "EdHex"
-msgstr "EdHex"
+msgid "ButtonBar|Line"
+msgstr ""
 
-msgid "EdText"
-msgstr "EdText"
+msgid "ButtonBar|View"
+msgstr ""
 
-msgid "UnWrap"
-msgstr "非折返"
+msgid "ButtonBar|Edit"
+msgstr ""
 
-msgid "Wrap"
-msgstr "折返"
+msgid "ButtonBar|Save"
+msgstr ""
 
-msgid "HxSrch"
-msgstr "HxSrch"
+msgid "ButtonBar|UnWrap"
+msgstr ""
 
-msgid "Raw"
-msgstr "Raw"
+msgid "ButtonBar|Wrap"
+msgstr ""
 
-msgid "Parse"
-msgstr "Parse"
+msgid "ButtonBar|RxSrch"
+msgstr ""
 
-msgid "Unform"
-msgstr "Unform"
+msgid "ButtonBar|HxSrch"
+msgstr ""
 
-msgid "Format"
-msgstr "Format"
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
 
 msgid " History "
 msgstr "履歴"
@@ -3506,6 +3618,85 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid " Cannot open file for reading: "
+#~ msgstr "ファイルの読みだしでオープンに失敗しました: "
+
+#~ msgid " Not an ordinary file: "
+#~ msgstr "普通のファイルではありません: "
+
+#~ msgid "Format of the "
+#~ msgstr "Format of the "
+
+#~ msgid ""
+#~ " file has changed\n"
+#~ "with version 3.0. You may want either to\n"
+#~ "copy it from "
+#~ msgstr ""
+#~ "の形式は version 3.0 で変わりました。\n"
+#~ "\n"
+#~ " "
+
+#~ msgid ""
+#~ "mc.ext or use that\n"
+#~ "file as an example of how to write it.\n"
+#~ msgstr ""
+#~ "mc.ext からコピーするか、それを書き方の\n"
+#~ "サンプルとしてください\n"
+
+#~ msgid "mc.ext will be used for this moment."
+#~ msgstr "mc.ext をとりあえず使います。"
+
+#~ msgid " Cannot open file "
+#~ msgstr " ファイルを開けません "
+
+#~ msgid "Col %d"
+#~ msgstr "列 %d"
+
+#~ msgid "  [grow]"
+#~ msgstr "  [grow]"
+
+#~ msgid "Ascii"
+#~ msgstr "ASCII"
+
+#~ msgid "Hex"
+#~ msgstr "HEX"
+
+#~ msgid "Goto"
+#~ msgstr "移動"
+
+#~ msgid "Line"
+#~ msgstr "行"
+
+#~ msgid "RxSrch"
+#~ msgstr "RxSrch"
+
+#~ msgid "EdHex"
+#~ msgstr "EdHex"
+
+#~ msgid "EdText"
+#~ msgstr "EdText"
+
+#~ msgid "UnWrap"
+#~ msgstr "非折返"
+
+#~ msgid "Wrap"
+#~ msgstr "折返"
+
+#~ msgid "HxSrch"
+#~ msgstr "HxSrch"
+
+#~ msgid "Raw"
+#~ msgstr "Raw"
+
+#~ msgid "Parse"
+#~ msgstr "Parse"
+
+#~ msgid "Unform"
+#~ msgstr "Unform"
+
+#~ msgid "Format"
+#~ msgstr "Format"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "mc から呼び出される mcedit でだけ利用可能なユーザメニューです"
