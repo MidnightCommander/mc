@@ -471,8 +471,8 @@ Sono accettati i tasti generali di movimentoGeneral Movement Keys.
 
 tab           Va alla voce successiva.
 M-tab         Va alla voce precedente. 
-giù           Va alla voce successiva o una linea in basso.
-su            Va alla voce precedente o una linea in alto.
+giù           Va alla voce successiva o una riga in basso.
+su            Va alla voce precedente o una riga in alto.
 destra, invio Segue il collegamento corrente.    
 sinistra, l   Torna indietro nello storico dei nodi visitati.
 F1            Mostra la guida per il visualizzatore della 
