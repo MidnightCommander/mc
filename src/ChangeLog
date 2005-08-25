@@ -1,3 +1,8 @@
+2005-08-25  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* key.c (xmouse_get_event): Support for GPM_DRAG when using xterm
+	mouse reporting.
+
 2005-08-22  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (struct WView): Renamed dpy_topleft to dpy_start, as it

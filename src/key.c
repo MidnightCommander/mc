@@ -532,9 +532,11 @@ xmouse_get_event (Gpm_Event *ev)
             break;
 	case 64:
             ev->buttons = GPM_B_UP;
+            clicks = 0;
             break;
 	case 65:
             ev->buttons = GPM_B_DOWN;
+            clicks = 0;
             break;
 	default:
             /* Nothing */
