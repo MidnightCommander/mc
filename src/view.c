@@ -2730,7 +2730,7 @@ view_regexp_search_cmd (WView *view)
 static void
 view_normal_search_cmd (WView *view)
 {
-    char *defval, *exp;
+    char *defval, *exp = NULL;
 
     enum {
 	SEARCH_DLG_HEIGHT = 8,

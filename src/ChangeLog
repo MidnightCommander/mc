@@ -1,7 +1,12 @@
+2005-08-27  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* view.c (view_normal_search_cmd): Initialize exp to avoid
+	freeing of uninitialized pointer on cancel.
+
 2005-08-25  Pavel Tsekov  <ptsekov@gmx.net>
 
-	* key.c (xmouse_get_event): Support for GPM_DRAG when using xterm
-	mouse reporting.
+	* key.c (xmouse_get_event): Disable double-click tracking for
+	mouse wheel events.
 
 2005-08-22  Roland Illig  <roland.illig@gmx.de>
 
