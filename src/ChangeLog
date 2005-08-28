@@ -1,3 +1,14 @@
+2005-08-28  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_hexedit_save_changes): Added an assertion that
+	view->filename be not NULL.
+	* view.c (view_toggle_magic_mode): Check if filename != NULL
+	before dereferencing the pointer.
+	* view.c (view_change_nroff_mode_cmd): Renamed to
+	view_toggle_nroff_mode_cmd.
+	* view.c (view_new): Don't initialize the various view->mode
+	variables by now. This needs to be done correctly.
+
 2005-08-27  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* view.c (view_normal_search_cmd): Initialize exp to avoid

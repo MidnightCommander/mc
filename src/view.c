@@ -223,7 +223,6 @@ int mouse_move_pages_viewer = 1;
 int global_wrap_mode = 1;
 
 int default_hex_mode = 0;
-static int default_hexedit_mode = 0;
 int default_magic_flag = 1;
 int default_nroff_flag = 1;
 int altered_hex_mode = 0;
@@ -2039,6 +2038,7 @@ view_hexedit_save_changes (WView *view)
 	return TRUE;
 
   retry_save:
+    assert (view->filename != NULL);
     fp = mc_open (view->filename, O_WRONLY);
     if (fp == -1)
 	goto save_error;
@@ -2797,8 +2797,7 @@ view_toggle_magic_mode_cmd (WView *view)
     char *s;
     char *t;
 
-
-    if (*view->filename) {
+    if (view->filename != NULL && view->filename[0] != '\0') {
 	altered_magic_flag = 1;
 	view->magic_mode = !view->magic_mode;
 	s = g_strdup (view->filename);
@@ -2815,7 +2814,7 @@ view_toggle_magic_mode_cmd (WView *view)
 }
 
 static void
-view_change_nroff_mode_cmd (WView *view)
+view_toggle_nroff_mode_cmd (WView *view)
 {
     view->text_nroff_mode = !view->text_nroff_mode;
     altered_nroff_flag = 1;
@@ -2886,7 +2885,7 @@ view_labels (WView *view)
 	my_define (h, 9, view->text_nroff_mode
 	    ? gettext_ui("ButtonBar|Unform")
 	    : gettext_ui("ButtonBar|Format"),
-	    view_change_nroff_mode_cmd, view);
+	    view_toggle_nroff_mode_cmd, view);
 	my_define (h, 3, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
     }
     buttonbar_redraw (h);
@@ -3376,7 +3375,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     init_widget (&view->widget, y, x, lines, cols,
 		 view_callback,
 		 real_view_event);
-    widget_want_cursor (view->widget, 0);
 
     view->filename          = NULL;
     view->command           = NULL;
@@ -3386,12 +3384,12 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->growbuf_in_use    = FALSE;
     /* leave the other growbuf fields uninitialized */
 
-    view->hex_mode          = default_hex_mode;
-    view->hexedit_mode      = default_hexedit_mode;
-    view->hexview_in_text   = FALSE;
-    view->text_nroff_mode   = default_nroff_flag;
-    view->text_wrap_mode    = global_wrap_mode;
-    view->magic_mode        = default_magic_flag;
+    view->hex_mode = FALSE;
+    view->hexedit_mode = FALSE;
+    view->hexview_in_text = FALSE;
+    view->text_nroff_mode = FALSE;
+    view->text_wrap_mode = FALSE;
+    view->magic_mode = FALSE;
 
     view->hexedit_lownibble = FALSE;
     view->coord_cache       = NULL;
@@ -3424,6 +3422,17 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->move_dir          = 0;
     view->update_steps      = 0;
     view->update_activate   = 0;
+
+#if 0
+    if (default_hex_mode)
+	view_toggle_hex_mode_cmd (view);
+    if (default_nroff_flag)
+	view_toggle_nroff_mode_cmd (view);
+    if (global_wrap_mode)
+	view_toggle_wrap_mode_cmd (view);
+    if (default_magic_flag)
+	view_toggle_magic_mode_cmd (view);
+#endif
 
     return view;
 }
