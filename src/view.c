@@ -175,6 +175,7 @@ struct WView {
     struct area data_area;	/* Where the data is displayed */
 
     int dirty;			/* Number of skipped updates */
+    gboolean dpy_bbar_dirty;	/* Does the button bar need to be updated? */
 
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
@@ -245,6 +246,7 @@ static void view_labels (WView * view);
 static void view_init_growbuf (WView *);
 static void view_place_cursor (WView *view);
 static void display (WView *);
+static void view_done (WView *);
 
 /* {{{ Helper Functions }}} */
 
@@ -1312,6 +1314,79 @@ view_move_right (WView *view, offset_type columns)
     view_movement_fixups (view, FALSE);
 }
 
+/* {{{ Toggling of viewer modes }}} */
+
+static void
+view_toggle_hex_mode (WView *view)
+{
+    view->hex_mode = !view->hex_mode;
+
+    if (view->hex_mode) {
+	view->hex_cursor = view->dpy_start;
+	view->dpy_start =
+	    offset_rounddown (view->dpy_start, view->bytes_per_line);
+	view->widget.options |= W_WANT_CURSOR;
+    } else {
+	view->dpy_start = view->hex_cursor;
+	view_moveto_bol (view);
+	view->widget.options &= ~W_WANT_CURSOR;
+    }
+    altered_hex_mode = 1;
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
+static void
+view_toggle_hexedit_mode (WView *view)
+{
+    view->hexedit_mode = !view->hexedit_mode;
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
+static void
+view_toggle_wrap_mode (WView *view)
+{
+    view->text_wrap_mode = !view->text_wrap_mode;
+    if (view->text_wrap_mode) {
+	view_fix_cursor_position (view);
+    } else {
+	offset_type line;
+
+	view_offset_to_coord (view, &line, &(view->dpy_text_column), view->dpy_start);
+	view_coord_to_offset (view, &(view->dpy_start), line, 0);
+    }
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
+static void
+view_toggle_nroff_mode (WView *view)
+{
+    view->text_nroff_mode = !view->text_nroff_mode;
+    altered_nroff_flag = 1;
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
+static void
+view_toggle_magic_mode (WView *view)
+{
+    char *filename, *command;
+
+    altered_magic_flag = 1;
+    view->magic_mode = !view->magic_mode;
+    filename = g_strdup (view->filename);
+    command = g_strdup (view->command);
+
+    view_done (view);
+    view_load (view, command, filename, 0);
+    g_free (filename);
+    g_free (command);
+    view->dpy_bbar_dirty = TRUE;
+    view->dirty++;
+}
+
 /* {{{ Miscellaneous functions }}} */
 
 static void
@@ -1420,9 +1495,9 @@ view_load (WView *view, const char *command, const char *file,
 	view->dpy_text_column = 0;
     }
 
-    if (command && (view->magic_mode || file[0] == '\0')) {
+    if (command && (view->magic_mode || file == NULL || file[0] == '\0')) {
 	retval = view_load_command_output (view, command);
-    } else if (file[0]) {
+    } else if (file != NULL && file[0] != '\0') {
 	/* Open the file */
 	if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1) {
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
@@ -1927,6 +2002,12 @@ static void
 view_update (WView *view)
 {
     static int dirt_limit = 1;
+
+    if (view->dpy_bbar_dirty) {
+	view->dpy_bbar_dirty = FALSE;
+	view_labels (view);
+	buttonbar_redraw (view->widget.parent);
+    }
 
     if (view->dirty > dirt_limit) {
 	/* Too many updates skipped -> force a update */
@@ -2594,9 +2675,7 @@ view_help_cmd (void)
 static void
 view_toggle_hexedit_mode_cmd (WView *view)
 {
-    view->hexedit_mode = !view->hexedit_mode;
-    view_labels (view);
-    view->dirty++;
+    view_toggle_hexedit_mode (view);
     view_update (view);
 }
 
@@ -2604,17 +2683,7 @@ view_toggle_hexedit_mode_cmd (WView *view)
 static void
 view_toggle_wrap_mode_cmd (WView *view)
 {
-    view->text_wrap_mode = !view->text_wrap_mode;
-    if (view->text_wrap_mode) {
-	view_fix_cursor_position (view);
-    } else {
-	offset_type line;
-
-	view_offset_to_coord (view, &line, &(view->dpy_text_column), view->dpy_start);
-	view_coord_to_offset (view, &(view->dpy_start), line, 0);
-    }
-    view_labels (view);
-    view->dirty++;
+    view_toggle_wrap_mode (view);
     view_update (view);
 }
 
@@ -2622,21 +2691,7 @@ view_toggle_wrap_mode_cmd (WView *view)
 static void
 view_toggle_hex_mode_cmd (WView *view)
 {
-    view->hex_mode = !view->hex_mode;
-
-    if (view->hex_mode) {
-	view->hex_cursor = view->dpy_start;
-	view->dpy_start =
-	    offset_rounddown (view->dpy_start, view->bytes_per_line);
-	view->widget.options |= W_WANT_CURSOR;
-    } else {
-	view->dpy_start = view->hex_cursor;
-	view_moveto_bol (view);
-	view->widget.options &= ~W_WANT_CURSOR;
-    }
-    altered_hex_mode = 1;
-    view_labels (view);
-    view->dirty++;
+    view_toggle_hex_mode (view);
     view_update (view);
 }
 
@@ -2794,32 +2849,14 @@ cleanup:
 static void
 view_toggle_magic_mode_cmd (WView *view)
 {
-    char *s;
-    char *t;
-
-    if (view->filename != NULL && view->filename[0] != '\0') {
-	altered_magic_flag = 1;
-	view->magic_mode = !view->magic_mode;
-	s = g_strdup (view->filename);
-	t = g_strdup (view->command);
-
-	view_done (view);
-	view_load (view, t, s, 0);
-	g_free (s);
-	g_free (t);
-	view_labels (view);
-	view->dirty++;
-	view_update (view);
-    }
+    view_toggle_magic_mode (view);
+    view_update (view);
 }
 
 static void
 view_toggle_nroff_mode_cmd (WView *view)
 {
-    view->text_nroff_mode = !view->text_nroff_mode;
-    altered_nroff_flag = 1;
-    view_labels (view);
-    view->dirty++;
+    view_toggle_nroff_mode (view);
     view_update (view);
 }
 
@@ -2888,7 +2925,6 @@ view_labels (WView *view)
 	    view_toggle_nroff_mode_cmd, view);
 	my_define (h, 3, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
     }
-    buttonbar_redraw (h);
 }
 
 /* {{{ Event handling }}} */
@@ -3328,7 +3364,7 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 	if (view_is_in_panel (view))
 	    add_hook (&select_file_hook, view_hook, view);
 	else
-	    view_labels (view);
+	    view->dpy_bbar_dirty = TRUE;
 	return MSG_HANDLED;
 
     case WIDGET_DRAW:
@@ -3350,7 +3386,8 @@ view_callback (Widget *w, widget_msg_t msg, int parm)
 	return i;
 
     case WIDGET_FOCUS:
-	view_labels (view);
+	view->dpy_bbar_dirty = TRUE;
+	view_update (view);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -3406,6 +3443,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     /* {status,ruler,data}_area are left uninitialized */
 
     view->dirty             = 0;
+    view->dpy_bbar_dirty = TRUE;
     view->bytes_per_line    = 1;
 
     view->search_start      = 0;
@@ -3423,16 +3461,14 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->update_steps      = 0;
     view->update_activate   = 0;
 
-#if 0
     if (default_hex_mode)
-	view_toggle_hex_mode_cmd (view);
+	view_toggle_hex_mode (view);
     if (default_nroff_flag)
-	view_toggle_nroff_mode_cmd (view);
+	view_toggle_nroff_mode (view);
     if (global_wrap_mode)
-	view_toggle_wrap_mode_cmd (view);
+	view_toggle_wrap_mode (view);
     if (default_magic_flag)
-	view_toggle_magic_mode_cmd (view);
-#endif
+	view_toggle_magic_mode (view);
 
     return view;
 }

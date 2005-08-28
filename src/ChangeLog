@@ -6,8 +6,9 @@
 	before dereferencing the pointer.
 	* view.c (view_change_nroff_mode_cmd): Renamed to
 	view_toggle_nroff_mode_cmd.
-	* view.c (view_new): Don't initialize the various view->mode
-	variables by now. This needs to be done correctly.
+	* view.c (view_new): Separated the mode toggling functions from
+	updating the display. The non-updating functions are called on
+	initialization.
 
 2005-08-27  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
