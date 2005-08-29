@@ -1,19 +1,15 @@
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
-/* This file takes care of loading ncurses or slang */
-
-int got_interrupt (void);
+/*
+    This file is the interface to the terminal controlling library---
+    ncurses, slang or the built-in slang. It provides an additional
+    layer of abstraction above the "real" libraries to keep the number
+    of ifdefs in the other files small.
+ */
 
 #ifdef HAVE_SLANG
 #   include "myslang.h"
-#else
-#   define enable_interrupt_key()
-#   define disable_interrupt_key()
-#   define acs()
-#   define noacs()
-#   define one_vline() addch (slow_terminal ? ' ' : ACS_VLINE)
-#   define one_hline() addch (slow_terminal ? ' ' : ACS_HLINE)
 #endif
 
 #ifdef USE_NCURSES
@@ -25,6 +21,33 @@ int got_interrupt (void);
 #        include <curses.h>
 #    endif
 #endif /* USE_NCURSES */
+
+/* Input */
+extern void tty_enable_interrupt_key(void);
+extern void tty_disable_interrupt_key(void);
+extern gboolean tty_got_interrupt(void);
+
+/* Output */
+extern void tty_gotoyx(int, int);
+extern void tty_getyx(int *, int *);
+extern void tty_print_char(int);
+extern void tty_print_alt_char(int);
+extern void tty_print_string(const char *);
+extern void tty_print_one_vline(void);
+extern void tty_print_one_hline(void);
+extern void tty_print_vline(int x, int top, int bottom);
+extern void tty_print_hline(int left, int right, int y);
+
+/* legacy interface */
+
+#define enable_interrupt_key()	tty_enable_interrupt_key()
+#define disable_interrupt_key()	tty_disable_interrupt_key()
+#define got_interrupt()		tty_got_interrupt()
+
+#ifndef HAVE_SLANG
+#   define acs()
+#   define noacs()
+#endif
 
 #define KEY_KP_ADD	4001
 #define KEY_KP_SUBTRACT	4002

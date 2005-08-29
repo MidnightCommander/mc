@@ -139,51 +139,10 @@ static int SLang_input_pending2 (int tsecs)
 }
 #endif /* HAVE_SLANG_PRIVATE */
 
-static void
-slang_intr (int signo)
-{
-    slinterrupt = 1;
-}
-
-void
-enable_interrupt_key(void)
-{
-    struct sigaction act;
-    
-    act.sa_handler = slang_intr;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-    sigaction (SIGINT, &act, NULL);
-    slinterrupt = 0;
-}
-
-void
-disable_interrupt_key(void)
-{
-    struct sigaction act;
-    
-    act.sa_handler = SIG_IGN;
-    act.sa_flags = 0;
-    sigemptyset (&act.sa_mask);
-    sigaction (SIGINT, &act, NULL);
-}
-
-int
-got_interrupt (void)
-{
-    int t;
-
-    t = slinterrupt;
-    slinterrupt = 0;
-    return t;
-}
-
 /* Only done the first time */
 void
 slang_init (void)
 {
-    struct sigaction act, oact;
-    
     SLtt_get_terminfo ();
 
    /*
@@ -228,10 +187,6 @@ slang_init (void)
     }
     slang_prog_mode ();
     load_terminfo_keys ();
-    act.sa_handler = slang_intr;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = SA_RESTART;
-    sigaction (SIGINT, &act, &oact);
     SLtt_Blink_Mode = 0;
 }
 

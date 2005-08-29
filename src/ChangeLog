@@ -1,3 +1,12 @@
+2005-08-29  Roland Illig  <roland.illig@gmx.de>
+
+	* slint.c: The handling of user interrupts has been moved to ...
+	* tty.c: ... this newly created file, which contains a simple,
+	not yet complete interface to the terminal library. It should be
+	used instead of depending directly on ncurses or SLang features.
+	* tty.h: Added the new function prototypes from tty.c and some
+	legacy definitions.
+
 2005-08-28  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_hexedit_save_changes): Added an assertion that
