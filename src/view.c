@@ -447,7 +447,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 		return;
 	    }
 	}
-	short_read = (nread < bytesfree);
+	short_read = ((size_t)nread < bytesfree);
 	view->growbuf_lastindex += nread;
     }
 }
@@ -2600,14 +2600,14 @@ regexp_view_search (WView *view, char *pattern, char *string,
     regmatch_t pmatch[1];
     int i, flags = REG_ICASE;
 
-    if (!old_pattern || strcmp (old_pattern, pattern)
+    if (old_pattern == NULL || strcmp (old_pattern, pattern) != 0
 	|| old_type != match_type) {
-	if (old_pattern) {
+	if (old_pattern != NULL) {
 	    regfree (&r);
 	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
-	for (i = 0; pattern[i] != 0; i++) {
+	for (i = 0; pattern[i] != '\0'; i++) {
 	    if (isupper ((unsigned char) pattern[i])) {
 		flags = 0;
 		break;
@@ -2702,7 +2702,7 @@ view_moveto_line_cmd (WView *view)
 		_(" The current line number is %d.\n"
 		  " Enter the new line number:"), (int) (line + 1));
     answer = input_dialog (_(" Goto line "), prompt, "");
-    if (answer && answer[0] != '\0') {
+    if (answer != NULL && answer[0] != '\0') {
 	errno = 0;
 	line = strtoul (answer, &answer_end, 10);
 	if (*answer_end == '\0' && errno == 0 && line >= 1)
@@ -2723,8 +2723,8 @@ view_moveto_addr_cmd (WView *view)
 		_(" The current address is 0x%lx.\n"
 		  " Enter the new address:"), view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, "");
-    if (line) {
-	if (*line) {
+    if (line != NULL) {
+	if (*line != '\0') {
 	    addr = strtoul (line, &error, 0);
 	    if ((*error == '\0') && get_byte (view, addr) != -1) {
 		view_moveto_offset (view, addr);
