@@ -3219,7 +3219,7 @@ view_event (WView *view, Gpm_Event *event, int *result)
     } else if (y < view->data_area.top + view->data_area.height * 2/3) {
 	/* ignore the click */
     } else {
-    	if (mouse_move_pages_viewer)
+	if (mouse_move_pages_viewer)
 	    view_move_down (view, view->data_area.height / 2);
 	else
 	    view_move_down (view, 1);
