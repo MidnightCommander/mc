@@ -1685,11 +1685,6 @@ view_display_clean (WView *view)
     }
 }
 
-#define view_add_character(view,c) addch (c)
-#define view_add_one_vline()       one_vline()
-#define view_add_string(view,s)    addstr (s)
-#define view_gotoyx(v,r,c)    widget_move (v,r,c)
-
 typedef enum {
     MARK_NORMAL,
     MARK_SELECTED,
@@ -1729,15 +1724,15 @@ view_display_ruler (WView *view)
     for (c = 0; c < width; c++) {
 	cl = view->dpy_text_column + c;
 	if (line_row < height) {
-	    view_gotoyx (view, top + line_row, left + c);
-	    view_add_character (view, ruler_chars[cl % 10]);
+	    widget_move (view, top + line_row, left + c);
+	    tty_print_char (ruler_chars[cl % 10]);
 	}
 
 	if ((cl != 0) && (cl % 10) == 0) {
 	    g_snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
 	    if (nums_row < height) {
 		widget_move (view, top + nums_row, left + c - 1);
-		view_add_string (view, r_buff);
+		tty_print_string (r_buff);
 	    }
 	}
     }
@@ -1776,8 +1771,8 @@ view_display_hex (WView *view)
 	/* Print the hex offset */
 	attrset (MARKED_COLOR);
 	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
-	view_gotoyx (view, top + row, left);
-	view_add_string (view, hex_buff);
+	widget_move (view, top + row, left);
+	tty_print_string (hex_buff);
 	attrset (NORMAL_COLOR);
 
 	col = hex_start;
@@ -1823,24 +1818,24 @@ view_display_hex (WView *view)
 		VIEW_UNDERLINED_COLOR);
 
 	    /* Print the hex number */
-	    view_gotoyx (view, top + row, left + col);
-	    view_add_character (view, hex_char[c / 16]);
-	    view_add_character (view, hex_char[c % 16]);
+	    widget_move (view, top + row, left + col);
+	    tty_print_char (hex_char[c / 16]);
+	    tty_print_char (hex_char[c % 16]);
 	    col += 2;
 
 	    /* Print the separator */
 	    attrset (NORMAL_COLOR);
 	    if (bytes != view->bytes_per_line - 1) {
-		view_add_character (view, ' ');
+		tty_print_char (' ');
 		col += 1;
 
 		/* After every four bytes, print a group separator */
 		if (bytes % 4 == 3) {
 		    if (view->data_area.width >= 80) {
-			view_add_one_vline ();
+			tty_print_one_vline ();
 			col += 1;
 		    }
-		    view_add_character (view, ' ');
+		    tty_print_char (' ');
 		    col += 1;
 		}
 	    }
@@ -1860,8 +1855,8 @@ view_display_hex (WView *view)
 		c = '.';
 
 	    /* Print corresponding character on the text side */
-	    view_gotoyx (view, top + row, left + text_start + bytes);
-	    view_add_character (view, c);
+	    widget_move (view, top + row, left + text_start + bytes);
+	    tty_print_char (c);
 
 	    /* Save the cursor position for view_place_cursor() */
 	    if (from == view->hex_cursor && view->hexview_in_text) {
@@ -1960,11 +1955,11 @@ view_display_text (WView * view)
 
 	if (col >= view->dpy_text_column
 	    && col - view->dpy_text_column < width) {
-	    view_gotoyx (view, top + row, left + (col - view->dpy_text_column));
+	    widget_move (view, top + row, left + (col - view->dpy_text_column));
 	    c = convert_to_display_c (c);
 	    if (!is_printable (c))
 		c = '.';
-	    view_add_character (view, c);
+	    tty_print_char (c);
 	}
 	col++;
 	attrset (NORMAL_COLOR);
