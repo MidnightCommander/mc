@@ -159,20 +159,22 @@ extern void tty_print_one_vline(void)
 	tty_print_alt_char(ACS_VLINE);
 }
 
-extern void tty_print_hline(int left, int right, int y)
+extern void tty_print_hline(int top, int left, int length)
 {
-    int x;
+    int i;
 
-    tty_gotoyx(y, left);
-    for (x = left; x < right; x++)
+    tty_gotoyx(top, left);
+    for (i = 0; i < length; i++)
 	tty_print_one_hline();
 }
 
-extern void tty_print_vline(int x, int top, int bottom)
+extern void tty_print_vline(int top, int left, int length)
 {
-    int y;
+    int i;
 
-    tty_gotoyx(top, x);
-    for (y = top; y < bottom; y++)
+    tty_gotoyx(top, left);
+    for (i = 0; i < length; i++) {
+	tty_gotoyx(top + i, left);
 	tty_print_one_vline();
+    }
 }
