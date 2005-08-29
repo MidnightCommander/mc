@@ -127,18 +127,4 @@ mc_addch (char c)
 
 #define SLsmg_draw_double_box(r,c,dr,dc) SLsmg_draw_box ((r), (c), (dr), (dc))
 
-#ifdef HAS_ACS_AS_PCCHARS
-#   define one_vline() addch(ACS_VLINE)
-#   define one_hline() addch(ACS_HLINE)
-    /* This is fast, but only useful on PC system as it doesn't use
-       Alt_Char_Pairs [] :( */
-#else
-    /* This is slow, but works well :| */
-#   define one_vline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_VLINE)
-#   define one_hline() SLsmg_draw_object (SLsmg_get_row(), SLsmg_get_column(), slow_terminal ? ' ' : ACS_HLINE)
-#endif
-
-void enable_interrupt_key (void);
-void disable_interrupt_key (void);
-
 #endif

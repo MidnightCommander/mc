@@ -7,6 +7,7 @@
 	* tty.h: Added the new function prototypes from tty.c and some
 	legacy definitions.
 	* view.c: Converted to use the new tty functions.
+	* myslang.h: Partly switched to the new tty functions.
 
 2005-08-28  Roland Illig  <roland.illig@gmx.de>
 

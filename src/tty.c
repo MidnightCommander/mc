@@ -108,7 +108,7 @@ tty_getyx(int *py, int *px)
     *px = SLsmg_get_column();
     *py = SLsmg_get_row();
 #else
-    getyx(*py, *px);
+    getyx(stdscr, *py, *px);
 #endif
 }
 

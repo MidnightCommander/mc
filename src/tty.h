@@ -43,6 +43,8 @@ extern void tty_print_hline(int top, int left, int length);
 #define enable_interrupt_key()	tty_enable_interrupt_key()
 #define disable_interrupt_key()	tty_disable_interrupt_key()
 #define got_interrupt()		tty_got_interrupt()
+#define one_hline()		tty_print_one_hline()
+#define one_vline()		tty_print_one_vline()
 
 #ifndef HAVE_SLANG
 #   define acs()
