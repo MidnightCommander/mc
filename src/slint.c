@@ -70,9 +70,6 @@
 static struct termios boot_mode;
 static struct termios new_mode;
 
-/* Set if we get an interrupt */
-static int slinterrupt;
-
 /* Controls whether we should wait for input in getch */
 static int no_slang_delay;
 
