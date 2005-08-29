@@ -62,7 +62,7 @@ extern void
 tty_enable_interrupt_key(void)
 {
     struct sigaction act;
-    
+
     got_interrupt = 0;
     act.sa_handler = sigintr_handler;
     sigemptyset (&act.sa_mask);
@@ -74,7 +74,7 @@ extern void
 tty_disable_interrupt_key(void)
 {
     struct sigaction act;
-    
+
     act.sa_handler = SIG_IGN;
     sigemptyset (&act.sa_mask);
     act.sa_flags = 0;
