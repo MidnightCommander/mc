@@ -479,14 +479,6 @@ getch (void)
     }
     return c;
 }
-
-#else
-
-/* Non slang builds do not understand got_interrupt */
-int got_interrupt (void)
-{
-    return 0;
-}
 #endif /* HAVE_SLANG */
 
 void
