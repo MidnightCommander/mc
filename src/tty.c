@@ -134,7 +134,8 @@ tty_print_alt_char(int c)
 #endif
 }
 
-extern void tty_print_string(const char *s)
+extern void
+tty_print_string(const char *s)
 {
 #ifdef HAVE_SLANG
     SLsmg_write_string(str_unconst(s));
@@ -143,7 +144,8 @@ extern void tty_print_string(const char *s)
 #endif
 }
 
-extern void tty_print_one_hline(void)
+extern void
+tty_print_one_hline(void)
 {
     if (slow_terminal)
 	tty_print_char(' ');
@@ -151,7 +153,8 @@ extern void tty_print_one_hline(void)
 	tty_print_alt_char(ACS_HLINE);
 }
 
-extern void tty_print_one_vline(void)
+extern void
+tty_print_one_vline(void)
 {
     if (slow_terminal)
 	tty_print_char(' ');
@@ -159,7 +162,8 @@ extern void tty_print_one_vline(void)
 	tty_print_alt_char(ACS_VLINE);
 }
 
-extern void tty_print_hline(int top, int left, int length)
+extern void
+tty_print_hline(int top, int left, int length)
 {
     int i;
 
@@ -168,7 +172,8 @@ extern void tty_print_hline(int top, int left, int length)
 	tty_print_one_hline();
 }
 
-extern void tty_print_vline(int top, int left, int length)
+extern void
+tty_print_vline(int top, int left, int length)
 {
     int i;
 
