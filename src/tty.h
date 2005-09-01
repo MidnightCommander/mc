@@ -28,6 +28,13 @@ extern void tty_disable_interrupt_key(void);
 extern gboolean tty_got_interrupt(void);
 
 /* Output */
+
+/*
+    The output functions do not check themselves for screen overflows,
+    so make sure that you never write more than what fits on the screen.
+    While SLang provides such a feature, ncurses does not.
+ */
+
 extern void tty_gotoyx(int, int);
 extern void tty_getyx(int *, int *);
 extern void tty_print_char(int);
