@@ -22,12 +22,13 @@
 #    endif
 #endif /* USE_NCURSES */
 
-/* Input */
+/* {{{ Input }}} */
+
 extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
 extern gboolean tty_got_interrupt(void);
 
-/* Output */
+/* {{{ Output }}} */
 
 /*
     The output functions do not check themselves for screen overflows,
