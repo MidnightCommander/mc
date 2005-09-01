@@ -58,14 +58,13 @@ tree_store_dirty(int state)
     ts.dirty = state;
 }
 
-/* Returns number of common characters; s1[] and s2[] must differ in
- * at least one character, or the behaviour will be undefined. */
-static int
+/* Returns the number of common bytes in the strings. */
+static size_t
 str_common(const char *s1, const char *s2)
 {
-    int result = 0;
+    size_t result = 0;
 
-    while (*s1++ == *s2++)
+    while (*s1 != '\0' && *s2 != '\0' && *s1++ == *s2++)
 	result++;
     return result;
 }

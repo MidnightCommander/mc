@@ -2,6 +2,8 @@
 
 	* view.c (view_fix_cursor_position): Renamed to
 	view_scroll_to_cursor.
+	* treestore.c (str_common): Don't require the arguments to be
+	different.
 
 2005-08-29  Roland Illig  <roland.illig@gmx.de>
 
