@@ -1043,7 +1043,7 @@ static void view_move_up (WView *, offset_type);
 static void view_moveto_bol (WView *);
 
 static void
-view_fix_cursor_position (WView *view)
+view_scroll_to_cursor (WView *view)
 {
     if (view->hex_mode) {
 	const offset_type bytes = view->bytes_per_line;
@@ -1074,7 +1074,7 @@ view_fix_cursor_position (WView *view)
 static void
 view_movement_fixups (WView *view, gboolean reset_search)
 {
-    view_fix_cursor_position (view);
+    view_scroll_to_cursor (view);
     if (reset_search) {
 	view->search_start = view->dpy_start;
 	view->search_length = 0;
@@ -1349,7 +1349,7 @@ view_toggle_wrap_mode (WView *view)
 {
     view->text_wrap_mode = !view->text_wrap_mode;
     if (view->text_wrap_mode) {
-	view_fix_cursor_position (view);
+	view_scroll_to_cursor (view);
     } else {
 	offset_type line;
 

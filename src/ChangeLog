@@ -1,3 +1,8 @@
+2005-09-01  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_fix_cursor_position): Renamed to
+	view_scroll_to_cursor.
+
 2005-08-29  Roland Illig  <roland.illig@gmx.de>
 
 	* slint.c: The handling of user interrupts has been moved to ...
