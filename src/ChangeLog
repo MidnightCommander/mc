@@ -3,6 +3,8 @@
 	* main.h: Removed unused variables acs_hline and acs_vline.
 	* tty.h: Added tty_printf().
 	* tty.c: Likewise.
+	* widget.c: Reduced the number of gcc warnings by using
+	tty_printf() instead of printw().
 
 2005-09-01  Roland Illig  <roland.illig@gmx.de>
 

@@ -360,7 +360,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
 
-	    printw ("(%c) ", (r->sel == i) ? '*' : ' ');
+	    tty_printf ("(%c) ", (r->sel == i) ? '*' : ' ');
 	    for (cp = r->texts[i]; *cp; cp++) {
 		if (*cp == '&') {
 		    widget_selectcolor (w, focused, TRUE);
@@ -463,7 +463,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-	printw ("[%c] %s", (c->state & C_BOOL) ? 'x' : ' ', c->text);
+	tty_printf ("[%c] %s", (c->state & C_BOOL) ? 'x' : ' ', c->text);
 
 	if (c->hotpos >= 0) {
 	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
@@ -571,10 +571,10 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		    *q = 0;
 		}
 		widget_move (&l->widget, y, 0);
-		printw ("%s", p);
+		tty_printf ("%s", p);
 		xlen = l->widget.cols - strlen (p);
 		if (xlen > 0)
-		    printw ("%*s", xlen, " ");
+		    tty_printf ("%*s", xlen, " ");
 		if (!q)
 		    break;
 		*q = c;
@@ -663,7 +663,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	widget_move (&g->widget, 0, 0);
 	attrset (DLG_NORMALC (h));
 	if (!g->shown)
-	    printw ("%*s", gauge_len, "");
+	    tty_printf ("%*s", gauge_len, "");
 	else {
 	    int percentage, columns;
 	    long total = g->max, done = g->current;
@@ -682,9 +682,9 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
 	    addch ('[');
 	    attrset (GAUGE_COLOR);
-	    printw ("%*s", (int) columns, "");
+	    tty_printf ("%*s", (int) columns, "");
 	    attrset (DLG_NORMALC (h));
-	    printw ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
+	    tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
 	}
 	return MSG_HANDLED;
     }
@@ -1778,7 +1778,7 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-	printw (" %-*s ", l->width-2, name_trunc (text, l->width-2));
+	tty_printf (" %-*s ", l->width-2, name_trunc (text, l->width-2));
     }
     l->cursor_y = sel_line;
     if (!l->scrollbar)
@@ -2310,13 +2310,13 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	widget_move (&bb->widget, 0, 0);
 	attrset (DEFAULT_COLOR);
-	printw ("%-*s", bb->widget.cols, "");
+	tty_printf ("%-*s", bb->widget.cols, "");
 	for (i = 0; i < COLS / 8 && i < 10; i++) {
 	    widget_move (&bb->widget, 0, i * 8);
 	    attrset (DEFAULT_COLOR);
-	    printw ("%d", i + 1);
+	    tty_printf ("%d", i + 1);
 	    attrset (SELECTED_COLOR);
-	    printw ("%-*s", ((i + 1) * 8 == COLS ? 5 : 6),
+	    tty_printf ("%-*s", ((i + 1) * 8 == COLS ? 5 : 6),
 		    bb->labels[i].text ? bb->labels[i].text : "");
 	    attrset (DEFAULT_COLOR);
 	}
