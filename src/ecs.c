@@ -327,6 +327,8 @@ ecs_strbox(const ecs_char *s, size_t *ret_width, size_t *ret_height)
 			if (!ecs_isprint(s[i]))
 				return FALSE;
 
+			/* FIXME: This code assumes that each printable
+			 * character occupies one cell on the screen. */
 			colindex++;
 			if (colindex > ncolumns)
 				ncolumns = colindex;
