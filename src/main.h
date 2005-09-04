@@ -61,8 +61,6 @@ extern int confirm_exit;
 extern int confirm_overwrite;
 extern int force_colors;
 extern int boot_current_is_left;
-extern int acs_vline;
-extern int acs_hline;
 extern int use_file_to_check_type;
 extern int vfs_use_limit;
 extern int alternate_plus_minus;

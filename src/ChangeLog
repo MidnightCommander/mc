@@ -1,3 +1,7 @@
+2005-09-04  Roland Illig  <roland.illig@gmx.de>
+
+	* main.h: Removed unused variables acs_hline and acs_vline.
+
 2005-09-01  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_fix_cursor_position): Renamed to
