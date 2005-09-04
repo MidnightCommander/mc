@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include <signal.h>
+#include <stdarg.h>
 
 #include "global.h"
 #include "main.h"		/* for slow_terminal */
@@ -182,4 +183,18 @@ tty_print_vline(int top, int left, int length)
 	tty_gotoyx(top + i, left);
 	tty_print_one_vline();
     }
+}
+
+extern void
+tty_printf(const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+#ifdef HAVE_SLANG
+    SLsmg_vprintf(str_unconst(fmt), args);
+#else
+    vw_printw(stdscr, fmt, args);
+#endif
+    va_end(args);
 }

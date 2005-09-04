@@ -1,6 +1,8 @@
 2005-09-04  Roland Illig  <roland.illig@gmx.de>
 
 	* main.h: Removed unused variables acs_hline and acs_vline.
+	* tty.h: Added tty_printf().
+	* tty.c: Likewise.
 
 2005-09-01  Roland Illig  <roland.illig@gmx.de>
 

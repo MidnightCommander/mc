@@ -45,6 +45,7 @@ extern void tty_print_one_vline(void);
 extern void tty_print_one_hline(void);
 extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
+extern void tty_printf(const char *, ...);
 
 /* legacy interface */
 
