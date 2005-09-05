@@ -69,7 +69,7 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
 
     add_widget (listbox->dlg,
 		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,
-			    NORMAL_BUTTON, const_cast(char *, cancel_string), 0));
+			    NORMAL_BUTTON, cancel_string, 0));
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;

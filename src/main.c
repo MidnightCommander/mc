@@ -1347,7 +1347,7 @@ init_xterm_support (void)
 
     /* Check mouse capabilities */
 #ifdef HAVE_SLANG
-    term_entry = SLtt_tigetent (const_cast(char *, termvalue));
+    term_entry = SLtt_tigetent (str_unconst (termvalue));
     xmouse_seq = SLtt_tigetstr ("Km", &term_entry);
 #else
     xmouse_seq = tigetstr ("kmous");
