@@ -214,12 +214,12 @@ static void update_split (void)
    
     attrset (COLOR_NORMAL);
     dlg_move (layout_dlg, 6, 6);
-    printw ("%03d", _first_panel_size);
+    tty_printf ("%03d", _first_panel_size);
     dlg_move (layout_dlg, 6, 18);
     if (_horizontal_split)
-	printw ("%03d", height - _first_panel_size);
+	tty_printf ("%03d", height - _first_panel_size);
     else
-	printw ("%03d", COLS - _first_panel_size);
+	tty_printf ("%03d", COLS - _first_panel_size);
 }
 
 static int b2left_cback (int action)
@@ -294,7 +294,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		dlg_move (h, 9, 16 + first_width);
 		addstr (output_lines_label);
 		dlg_move (h, 9, 10 + first_width);
-		printw ("%02d", _output_lines);
+		tty_printf ("%02d", _output_lines);
 	    }
 	}
 	return MSG_HANDLED;
@@ -336,7 +336,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
 		dlg_move (h, 9, 10 + first_width);
-		printw ("%02d", _output_lines);
+		tty_printf ("%02d", _output_lines);
 	    }
 	}
 	return MSG_HANDLED;
@@ -840,7 +840,7 @@ void print_vfs_message (const char *msg, ...)
 
 	move (0, 0);
 	attrset (NORMAL_COLOR);
-	printw ("%-*s", COLS-1, str);
+	tty_printf ("%-*s", COLS-1, str);
 
 	/* Restore cursor position */
 	move(row, col);

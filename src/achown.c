@@ -210,7 +210,7 @@ static void update_mode (Dlg_head * h)
     print_flags ();
     attrset (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
-    printw ("%12o", get_mode ());
+    tty_printf ("%12o", get_mode ());
     send_message (h->current, WIDGET_FOCUS, 0);
 }
 
@@ -357,8 +357,9 @@ static void chown_refresh (void)
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
-	printw (const_cast(char *, _("%6d of %d")), files_on_begin - (current_panel->marked) + 1,
-		   files_on_begin);
+	tty_printf (_("%6d of %d"),
+	    files_on_begin - (current_panel->marked) + 1,
+	    files_on_begin);
     }
 
     print_flags ();
@@ -371,9 +372,9 @@ static void chown_info_update (void)
     
     /* name && mode */
     dlg_move (ch_dlg, 3, 8);
-    printw ("%s", name_trunc (fname, 45));
+    tty_printf ("%s", name_trunc (fname, 45));
     dlg_move (ch_dlg, BY + 2, 9);
-    printw ("%12o", get_mode ());
+    tty_printf ("%12o", get_mode ());
     
     /* permissions */
     update_permissions ();
