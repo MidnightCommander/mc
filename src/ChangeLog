@@ -3,6 +3,7 @@
 	* info.c: Switched from printw() to tty_printf() to avoid gcc
 	warnings. st_ctime is not the creation time, but the status
 	change time.
+	* achown.c: Likewise.
 
 2005-09-04  Roland Illig  <roland.illig@gmx.de>
 
