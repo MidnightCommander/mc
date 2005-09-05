@@ -116,7 +116,7 @@ static size_t  format_pos     = 0;
  * get ready for syslog stuff
  * ************************************************************************** **
  */
-void setup_logging( char *pname, BOOL interactive )
+void setup_logging( const char *pname, BOOL interactive )
   {
   if( interactive )
     {

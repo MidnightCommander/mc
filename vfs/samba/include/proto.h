@@ -16,7 +16,7 @@ void add_char_string(char *s);
 
 /* The following definitions come from lib/debug.c  */
 
-void setup_logging( char *pname, BOOL interactive );
+void setup_logging( const char *pname, BOOL interactive );
 void dbgflush( void );
 BOOL dbghdr( int level, const char *file, const char *func, int line );
 

@@ -103,12 +103,6 @@ typedef struct {
 
 static GSList *auth_list;
 
-static inline BOOL dbghdr_wrapper (int level, const char *file, const char *func, int line)
-{
-	return dbghdr (level, const_cast(char *, file), const_cast(char *, func), line);
-}
-#define dbghdr dbghdr_wrapper
-
 /* this function allows you to write:
  * char *s = g_strdup("hello, world");
  * s = free_after(g_strconcat(s, s, (char *)0), s);
@@ -287,7 +281,7 @@ smbfs_set_debugf (const char *filename)
     if (DEBUGLEVEL > 0) {
 	FILE *outfile = fopen (filename, "w");
 	if (outfile) {
-	    setup_logging (const_cast(char *, ""), True);	/* No needs for timestamp for each message */
+	    setup_logging ("", True);	/* No needs for timestamp for each message */
 	    dbf = outfile;
 	    setbuf (dbf, NULL);
 	    pstrcpy (debugf, filename);
@@ -311,7 +305,7 @@ smbfs_init (struct vfs_class * me)
     if (!get_myname (myhostname, NULL))
 	DEBUG (0, ("Failed to get my hostname.\n"));
 
-    if (!lp_load (const_cast(char *, servicesf), True, False, False))
+    if (!lp_load (servicesf, True, False, False))
 	DEBUG (0, ("Cannot load %s - run testparm to debug it\n", servicesf));
 
     codepage_initialise (lp_client_code_page ());
@@ -392,7 +386,7 @@ smbfs_write (void *data, const char *buf, int nbyte)
 
 	DEBUG(3, ("smbfs_write(fnum:%d, nread:%d, nbyte:%d)\n",
 		info->fnum, (int)info->nread, nbyte));
-	n = cli_write(info->cli, info->fnum, 0, const_cast(char *, buf), info->nread, nbyte);
+	n = cli_write(info->cli, info->fnum, 0, buf, info->nread, nbyte);
 	if (n > 0)
 		info->nread += n;
     return n;
@@ -995,7 +989,7 @@ smbfs_do_connect (const char *server, char *share)
 	
 	DEBUG(3, (" session setup ok\n"));
 
-	if (!cli_send_tconX(c, share, const_cast(char *, "?????"),
+	if (!cli_send_tconX(c, share, "?????",
 			    current_bucket->password, strlen(current_bucket->password)+1)) {
 		DEBUG(1,("%s: tree connect failed: %s\n", share, cli_errstr(c)));
 		break;
@@ -1025,7 +1019,7 @@ smbfs_get_master_browser(char **host)
                              interpret_addr(lp_socket_address()), True ); 
 	if (fd == -1)
 		return 0;
-	set_socket_options(fd, const_cast(char *, "SO_BROADCAST"));
+	set_socket_options(fd, "SO_BROADCAST");
 	ip_list = iface_bcast(ipzero);
 	bcast_addr = *ip_list;
 	if ((ip_list = name_query(fd, "\01\02__MSBROWSE__\02", 1, True, 

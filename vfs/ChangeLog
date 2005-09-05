@@ -7,6 +7,9 @@
 	* ftpfs.c: Likewise.
 	* sfs.c: Likewise.
 	* xdirentry.h: Likewise.
+	* samba/: Added a const qualifier to setup_logging().
+	* smbfs.c: Removed dbghdr_wrapper. Removed all const_cast
+	instances.
 
 2005-08-15  Roland Illig  <roland.illig@gmx.de>
 
