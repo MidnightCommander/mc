@@ -148,7 +148,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     return 0;			/* OK */
 }
 
-static char *
+static const char *
 sfs_redirect (struct vfs_class *me, const char *name)
 {
     struct cachedfile *cur = head;

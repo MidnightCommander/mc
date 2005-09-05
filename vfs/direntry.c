@@ -456,10 +456,11 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
  * Dissect the path and create corresponding superblock.  Note that inname
  * can be changed and the result may point inside the original string.
  */
-char *
+const char *
 vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 		       struct vfs_s_super **archive, int flags)
 {
+    const char *retval;
     char *local, *op;
     const char *archive_name;
     int result = -1;
@@ -468,8 +469,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 
     archive_name = inname;
     vfs_split (inname, &local, &op);
-    if (!local)
-	local = "";
+    retval = (local) ? local : "";
 
     if (MEDATA->archive_check)
 	if (!(cookie = MEDATA->archive_check (me, archive_name, op)))
@@ -506,7 +506,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 
   return_success:
     *archive = super;
-    return local;
+    return retval;
 }
 
 
@@ -518,12 +518,12 @@ static char *
 vfs_s_get_path (struct vfs_class *me, const char *inname,
 		struct vfs_s_super **archive, int flags)
 {
-    char * const buf = g_strdup (inname);
-    char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
-    if (res)
-	res = g_strdup (res);
+    char *buf, *retval;
+
+    buf = g_strdup (inname);
+    retval = g_strdup (vfs_s_get_path_mangle (me, buf, archive, flags));
     g_free (buf);
-    return res;
+    return retval;
 }
 
 void

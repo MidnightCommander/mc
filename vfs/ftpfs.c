@@ -1461,7 +1461,8 @@ static int ftpfs_ctl (void *fh, int ctlop, void *arg)
 static int
 ftpfs_send_command(struct vfs_class *me, const char *filename, const char *cmd, int flags)
 {
-    char *rpath, *p, *mpath = g_strdup(filename);
+    const char *rpath;
+    char *p, *mpath = g_strdup(filename);
     struct vfs_s_super *super;
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH);

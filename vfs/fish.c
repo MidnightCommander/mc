@@ -712,13 +712,14 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 
 #define PREFIX \
     char buf[BUF_LARGE]; \
+    const char *crpath; \
     char *rpath, *mpath = g_strdup (path); \
     struct vfs_s_super *super; \
-    if (!(rpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
+    if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
 	g_free (mpath); \
 	return -1; \
     } \
-    rpath = name_quote (rpath, 0); \
+    rpath = name_quote (crpath, 0); \
     g_free (mpath);
 
 #define POSTFIX(flags) \
@@ -741,20 +742,21 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 static int fish_##name (struct vfs_class *me, const char *path1, const char *path2) \
 { \
     char buf[BUF_LARGE]; \
+    const char *crpath1, *crpath2; \
     char *rpath1, *rpath2, *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(rpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
+    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
 	g_free (mpath1); \
 	return -1; \
     } \
-    if (!(rpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
+    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
 	g_free (mpath1); \
 	g_free (mpath2); \
 	return -1; \
     } \
-    rpath1 = name_quote (rpath1, 0); \
+    rpath1 = name_quote (crpath1, 0); \
     g_free (mpath1); \
-    rpath2 = name_quote (rpath2, 0); \
+    rpath2 = name_quote (crpath2, 0); \
     g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \

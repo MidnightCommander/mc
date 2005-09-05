@@ -155,7 +155,7 @@ static void extfs_make_dots (struct entry *ent)
 }
 
 static struct entry *extfs_generate_entry (struct archive *archive, 
-    char *name, struct entry *parentry, mode_t mode)
+    const char *name, struct entry *parentry, mode_t mode)
 {
     mode_t myumask;
     struct inode *inode, *parent; 
@@ -452,7 +452,7 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
     if (fstype == -1)
 	return NULL;
     if (!local)
-	local = "";
+	local = inname + strlen (inname);
 
     /*
      * All filesystems should have some local archive, at least
@@ -582,9 +582,10 @@ static struct entry *extfs_resolve_symlinks (struct entry *entry)
     return res;
 }
 
-static char *extfs_get_archive_name (struct archive *archive)
+static const char *
+extfs_get_archive_name (struct archive *archive)
 {
-    char *archive_name;
+    const char *archive_name;
 
     if (archive->local_name)
 	archive_name = archive->local_name;
