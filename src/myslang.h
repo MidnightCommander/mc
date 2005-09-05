@@ -120,9 +120,8 @@ mc_addch (char c)
 #define addch(c) SLsmg_write_char(c)
 #endif
 
-#define addstr(s) SLsmg_write_string(const_cast(char *, s))
+#define addstr(s) SLsmg_write_string(str_unconst(s))
 #define refresh() SLsmg_refresh()
-#define mvaddstr(y, x, s) SLsmg_gotorc(y, x); SLsmg_write_string(const_cast(char *, s))
 #define endwin() SLsmg_reset_smg()
 
 #define SLsmg_draw_double_box(r,c,dr,dc) SLsmg_draw_box ((r), (c), (dr), (dc))
