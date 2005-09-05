@@ -5,6 +5,8 @@
 	change time.
 	* achown.c: Likewise.
 	* layout.c: Likewise.
+	* menu.c: Likewise.
+	* screen.c: Likewise.
 	* main.h: Added const qualifier to the global prompt variable.
 	* main.c: Likewise.
 

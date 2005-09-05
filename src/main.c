@@ -175,7 +175,7 @@ int force_ugly_line_drawing = 0;
 int reset_hp_softkeys = 0;
 
 /* The prompt */
-char *prompt = NULL;
+const char *prompt = NULL;
 
 /* The widget where we draw the prompt */
 WLabel *the_prompt;
@@ -693,16 +693,18 @@ load_prompt (int fd, void *unused)
 
     /* Don't actually change the prompt if it's invisible */
     if (current_dlg == midnight_dlg && command_prompt) {
+	char *tmp_prompt;
 	int prompt_len;
 
-	prompt = strip_ctrl_codes (subshell_prompt);
-	prompt_len = strlen (prompt);
+	tmp_prompt = strip_ctrl_codes (subshell_prompt);
+	prompt_len = strlen (tmp_prompt);
 
 	/* Check for prompts too big */
 	if (COLS > 8 && prompt_len > COLS - 8) {
-	    prompt[COLS - 8] = 0;
+	    tmp_prompt[COLS - 8] = '\0';
 	    prompt_len = COLS - 8;
 	}
+	prompt = tmp_prompt;
 	label_set_text (the_prompt, prompt);
 	winput_set_origin ((WInput *) cmdline, prompt_len,
 			   COLS - prompt_len);

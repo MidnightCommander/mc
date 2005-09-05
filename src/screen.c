@@ -665,7 +665,7 @@ display_mini_info (WPanel *panel)
 
     if (panel->searching){
 	attrset (INPUT_COLOR);
-	printw ("/%-*s", panel->widget.cols-3, panel->search_buffer);
+	tty_printf ("/%-*s", panel->widget.cols-3, panel->search_buffer);
 	attrset (NORMAL_COLOR);
 	return;
     }
@@ -677,7 +677,7 @@ display_mini_info (WPanel *panel)
 	int  cols = panel->widget.cols-2;
 
 	attrset (MARKED_COLOR);
-	printw  ("%*s", cols, " ");
+	tty_printf  ("%*s", cols, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
 	/* FIXME: use ngettext() here when gettext-0.10.35 becomes history */
 	g_snprintf (buffer, sizeof (buffer), (panel->marked == 1) ?
@@ -688,7 +688,7 @@ display_mini_info (WPanel *panel)
 	    p += 2;
 	} else
 	    cols -= 2;
-	printw ((char *) p, cols, buffer);
+	tty_printf (p, cols, buffer);
 	return;
     }
 
@@ -704,10 +704,10 @@ display_mini_info (WPanel *panel)
 	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
-	    printw ("-> %-*s", panel->widget.cols - 5,
+	    tty_printf ("-> %-*s", panel->widget.cols - 5,
 		     name_trunc (link_target, panel->widget.cols - 5));
 	} else
-	    printw ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
+	    tty_printf ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
 	return;
     }
 
@@ -1123,7 +1123,7 @@ paint_frame (WPanel *panel)
                 attrset (MARKED_COLOR);
                 spaces = (format->field_len - header_len) / 2;
                 extra  = (format->field_len - header_len) % 2;
-		printw ("%*s%.*s%*s", spaces, "",
+		tty_printf ("%*s%.*s%*s", spaces, "",
 			 header_len, txt, spaces+extra, "");
 		width -= 2 * spaces + extra + header_len;
 	    } else {
@@ -1135,7 +1135,7 @@ paint_frame (WPanel *panel)
 	}
 
 	if (width > 0)
-	    printw ("%*s", width, "");
+	    tty_printf ("%*s", width, "");
     }
 }
 
