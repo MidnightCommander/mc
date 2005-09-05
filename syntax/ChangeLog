@@ -1,3 +1,7 @@
+2005-09-05  Roland Illig  <roland.illig@gmx.de>
+
+	* assembler.syntax: Assembler files may contain comments, too.
+
 2005-08-21  Roland Illig  <roland.illig@gmx.de>
 
 	* lisp.syntax: Recognize the character sequences \" and \\ in

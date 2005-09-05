@@ -304,6 +304,9 @@ context default lightgray
 
 # Common symbols
     keyword ; brown
+    keyword ! brown
+    keyword /\* brown
+    keyword \*/ brown
     keyword [ white
     keyword ] white
     keyword , white
@@ -332,4 +335,10 @@ context default lightgray
 context " " green
 context ' ' brightgreen
 context exclusive ; \n brown
+    spellcheck
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive ! \n brown
     spellcheck
