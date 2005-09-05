@@ -97,6 +97,13 @@ static void status_string (WEdit * edit, char *s, int w)
 		byte_str);
 }
 
+static inline void
+printwstr (const char *s, int len)
+{
+    if (len > 0)
+	tty_printf ("%-*.*s", len, len, s);
+}
+
 /* Draw the status line at the top of the widget. The size of the filename
  * field varies depending on the width of the screen and the length of
  * the filename. */

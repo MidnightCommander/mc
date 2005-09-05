@@ -66,7 +66,4 @@ extern void tty_printf(const char *, ...);
 
 void mc_refresh (void);
 
-/* print S left-aligned, adjusted to exactly LEN characters */
-extern void printwstr (const char *s, int len);
-
 #endif

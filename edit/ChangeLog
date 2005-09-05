@@ -1,6 +1,7 @@
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c: Fixed some of the gcc warnings.
+	* editdraw.c: Moved printwstr() from ../src/slint.c to here.
 
 2005-08-19  David Martin  <dmartina@excite.com>
 

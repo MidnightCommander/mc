@@ -9,6 +9,8 @@
 	* screen.c: Likewise.
 	* main.h: Added const qualifier to the global prompt variable.
 	* main.c: Likewise.
+	* slint.c: Moved printwstr() to ../edit/editdraw.c.
+	* tty.h: Likewise.
 
 2005-09-04  Roland Illig  <roland.illig@gmx.de>
 
