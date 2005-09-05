@@ -1,6 +1,9 @@
 Before 4.6.2
 ============
 
+Check all instances of const_cast and str_unconst, remove the
+unnecessary and comment the rest.
+
 Clean up #include's in all files.
 
 Make mc work with 64 bit data types. This includes support for 64 bit
