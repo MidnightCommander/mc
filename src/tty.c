@@ -117,7 +117,16 @@ extern void
 tty_print_char(int c)
 {
 #ifdef HAVE_SLANG
-    SLsmg_write_char(c);
+    /* We cannot use SLsmg_write_char here because the Redhat people
+     * thought changing the API of an external project was fun,
+     * especially when it depends on the preprocessor symbol UTF8 being
+     * defined or not. Congratulations! At least, they left the API call
+     * for SLsmg_write_nchars as it has always been.
+     */
+    char ch;
+
+    ch = c;
+    SLsmg_write_nchars(&ch, 1);
 #else
     addch(c);
 #endif

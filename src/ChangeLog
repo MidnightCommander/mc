@@ -11,6 +11,9 @@
 	* main.c: Likewise.
 	* slint.c: Moved printwstr() to ../edit/editdraw.c.
 	* tty.h: Likewise.
+	* tty.c: Don't use SLsmg_write_char, because Redhat provides a
+	different API to that function when the preprocessor symbol UTF8
+	is defined.
 
 2005-09-04  Roland Illig  <roland.illig@gmx.de>
 
