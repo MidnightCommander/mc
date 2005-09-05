@@ -1130,7 +1130,7 @@ pty_open_slave (const char *pty_name)
 static int pty_open_master (char *pty_name)
 {
     int pty_master;
-    char *ptr1, *ptr2;
+    const char *ptr1, *ptr2;
 
     strcpy (pty_name, "/dev/ptyXX");
     for (ptr1 = "pqrstuvwxyzPQRST"; *ptr1; ++ptr1)
