@@ -600,7 +600,7 @@ BOOL lp_snum_ok(int iService);
 void lp_add_one_printer(char *name,char *comment);
 BOOL lp_loaded(void);
 void lp_killunused(BOOL (*snumused)(int ));
-BOOL lp_load(char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc);
+BOOL lp_load(const char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc);
 void lp_resetnumservices(void);
 int lp_numservices(void);
 int lp_servicenumber(char *pszServiceName);
