@@ -2031,9 +2031,10 @@ void edit_search_cmd (WEdit * edit, int again)
 
     if (!edit) {
 	g_free (old);
-	old = 0;
+	old = NULL;
 	return;
     }
+
     exp = old ? old : exp;
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
@@ -2392,10 +2393,9 @@ int edit_sort_cmd (WEdit * edit)
     }
     edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, (char *) NULL), start_mark, end_mark);
 
-    exp = old ? old : "";
-
     exp = input_dialog (_(" Run Sort "),
-    _(" Enter sort options (see manpage) separated by whitespace: "), exp);
+	_(" Enter sort options (see manpage) separated by whitespace: "),
+	(old != NULL) ? old : "");
 
     if (!exp)
 	return 1;

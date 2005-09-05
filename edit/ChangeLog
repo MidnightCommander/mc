@@ -1,3 +1,7 @@
+2005-09-05  Roland Illig  <roland.illig@gmx.de>
+
+	* editcmd.c: Fixed some of the gcc warnings.
+
 2005-08-19  David Martin  <dmartina@excite.com>
 
 	* choosesyntax.c (exec_edit_syntax_dialog): Not just mark for
