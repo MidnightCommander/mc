@@ -1,3 +1,9 @@
+2005-09-05  Roland Illig  <roland.illig@gmx.de>
+
+	* info.c: Switched from printw() to tty_printf() to avoid gcc
+	warnings. st_ctime is not the creation time, but the status
+	change time.
+
 2005-09-04  Roland Illig  <roland.illig@gmx.de>
 
 	* main.h: Removed unused variables acs_hline and acs_vline.

@@ -74,7 +74,7 @@ info_show_info (struct WInfo *info)
     info_box (info->widget.parent, info);
     attrset (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
-    printw (const_cast(char *, _("Midnight Commander %s")), VERSION);
+    tty_printf (_("Midnight Commander %s"), VERSION);
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
     hline (ACS_HLINE|NORMAL_COLOR, info->widget.cols-2);
@@ -103,7 +103,7 @@ info_show_info (struct WInfo *info)
     case 16:
 	widget_move (&info->widget, 16, 3);
 	if (myfs_stats.nfree >0 || myfs_stats.nodes > 0)
-	    printw (const_cast(char *, _("Free nodes: %d (%d%%) of %d")),
+	    tty_printf (_("Free nodes: %d (%d%%) of %d"),
 		    myfs_stats.nfree,
 		    myfs_stats.total
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
@@ -117,7 +117,7 @@ info_show_info (struct WInfo *info)
 	    char buffer1 [6], buffer2[6];
 	    size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
 	    size_trunc_len (buffer2, 5, myfs_stats.total, 1);
-	    printw (const_cast(char *, _("Free space: %s (%d%%) of %s")), buffer1, myfs_stats.total ?
+	    tty_printf (_("Free space: %s (%d%%) of %s"), buffer1, myfs_stats.total ?
 		    (int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0,
 		    buffer2);
 	} else
@@ -125,36 +125,38 @@ info_show_info (struct WInfo *info)
 
     case 14:
 	widget_move (&info->widget, 14, 3);
-	printw (const_cast(char *, _("Type:      %s ")), myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
+	tty_printf (_("Type:      %s "),
+	    myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
 	if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
-	    printw (" (%Xh)", myfs_stats.type);
+	    tty_printf (" (%Xh)", myfs_stats.type);
 
     case 13:
 	widget_move (&info->widget, 13, 3);
-	printw (const_cast(char *, _("Device:    %s")),
+	tty_printf (_("Device:    %s"),
 		name_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
     case 12:
 	widget_move (&info->widget, 12, 3);
-	printw (const_cast(char *, _("Filesystem: %s")),
+	tty_printf (_("Filesystem: %s"),
 		name_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
 
     case 11:
 	widget_move (&info->widget, 11, 3);
-	printw (const_cast(char *, _("Accessed:  %s")), file_date (st.st_atime));
+	tty_printf (_("Accessed:  %s"), file_date (st.st_atime));
 	
     case 10:
 	widget_move (&info->widget, 10, 3);
-	printw (const_cast(char *, _("Modified:  %s")), file_date (st.st_mtime));
+	tty_printf (_("Modified:  %s"), file_date (st.st_mtime));
 	
     case 9:
 	widget_move (&info->widget, 9, 3);
-	printw (const_cast(char *, _("Created:   %s")), file_date (st.st_ctime));
+	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
+	printw (_("Status:    %s"), file_date (st.st_ctime));
 
     case 8:
 	widget_move (&info->widget, 8, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
 	if (S_ISCHR (st.st_mode) || S_ISBLK(st.st_mode))
-	    printw (_("Dev. type: major %lu, minor %lu"),
+	    tty_printf (_("Dev. type: major %lu, minor %lu"),
 		    (unsigned long) major (st.st_rdev),
 		    (unsigned long) minor (st.st_rdev));
 	else
@@ -162,36 +164,38 @@ info_show_info (struct WInfo *info)
 	{
 	    char buffer[10];
 	    size_trunc_len(buffer, 9, st.st_size, 0);
-	    printw (const_cast(char *, _("Size:      %s")), buffer);
+	    tty_printf (_("Size:      %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-	    printw (const_cast(char *, (st.st_blocks==1) ?
-		_(" (%ld block)") : _(" (%ld blocks)")), (long) st.st_blocks);
+	    tty_printf (ngettext(" (%ld block)", " (%ld blocks)",
+		(unsigned long int) st.st_blocks),
+		(long int) st.st_blocks);
 #endif
 	}
 	
     case 7:
 	widget_move (&info->widget, 7, 3);
-	printw (const_cast(char *, _("Owner:     %s/%s")), get_owner (st.st_uid),
-		get_group (st.st_gid));
+	tty_printf (_("Owner:     %s/%s"),
+	    get_owner (st.st_uid),
+	    get_group (st.st_gid));
 	
     case 6:
 	widget_move (&info->widget, 6, 3);
-	printw (const_cast(char *, _("Links:     %d")), (int) st.st_nlink);
+	tty_printf (_("Links:     %d"), (int) st.st_nlink);
 	
     case 5:
 	widget_move (&info->widget, 5, 3);
-	printw (const_cast(char *, _("Mode:      %s (%04o)")),
+	tty_printf (_("Mode:      %s (%04o)"),
 		string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
 	
     case 4:
 	widget_move (&info->widget, 4, 3);
-	printw (const_cast(char *, _("Location:  %Xh:%Xh")), (int)st.st_dev, (int)st.st_ino);
+	tty_printf (_("Location:  %Xh:%Xh"), (int)st.st_dev, (int)st.st_ino);
 	
     case 3:
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && info called from current panel */
 	if (current_panel->selected){
-		printw (const_cast(char *, file_label),
+	    tty_printf (file_label,
 			name_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
 	} else
