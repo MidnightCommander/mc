@@ -204,7 +204,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 
     new_d = g_new0 (Dlg_head, 1);
     new_d->color = color_set;
-    new_d->help_ctx = const_cast(char *, help_ctx);
+    new_d->help_ctx = help_ctx;
     new_d->callback = callback ? callback : default_dlg_callback;
     new_d->x = x1;
     new_d->y = y1;
