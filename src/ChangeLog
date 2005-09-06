@@ -1,3 +1,12 @@
+2005-09-06  Roland Illig  <roland.illig@gmx.de>
+
+	* cmd.c: Added single_dirsize_cmd(), which computes the size of
+	the currently selected panel entry and moves down. Suggested by
+	ForestCreature on mc-devel.
+	* cmd.h: Likewise.
+	* main.c (midnight_callback): When the space key is pressed and
+	the command line is empty, single_dirsize_cmd() is called.
+
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
 	* info.c: Switched from printw() to tty_printf() to avoid gcc

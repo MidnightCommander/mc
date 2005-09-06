@@ -7,6 +7,7 @@ void fishlink_cmd (void);
 void smblink_cmd (void);
 void undelete_cmd (void);
 void help_cmd (void);
+void single_dirsize_cmd (void);
 void dirsizes_cmd (void);
 int view_file_at_line (const char *filename, int plain_view, int internal,
 		       int start_line);

@@ -1543,6 +1543,11 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
+
+		if (parm == ' ') {
+		    single_dirsize_cmd ();
+		    return MSG_HANDLED;
+		}
 	    }
 	}
 	return MSG_NOT_HANDLED;

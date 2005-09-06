@@ -1173,6 +1173,29 @@ void quick_cd_cmd (void)
     g_free (p);
 }
 
+void
+single_dirsize_cmd (void)
+{
+    WPanel *panel = current_panel;
+    file_entry *entry;
+    off_t marked;
+    double total;
+
+    entry = &(panel->dir.list[panel->selected]);
+    if (S_ISDIR (entry->st.st_mode) && strcmp(entry->fname, "..") != 0) {
+	total = 0.0;
+	compute_dir_size (entry->fname, &marked, &total);
+	entry->st.st_size = (off_t) total;
+	entry->f.dir_size_computed = 1;
+    }
+
+    if (mark_moves_down)
+	send_message (&(panel->widget), WIDGET_KEY, KEY_DOWN);
+
+    recalculate_panel_summary (panel);
+    panel->dirty = 1;
+}
+
 void 
 dirsizes_cmd (void)
 {
