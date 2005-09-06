@@ -227,7 +227,7 @@ regex/\.(h|hpp)$
 	Open=%var{EDITOR:vi} %f
 
 # Object
-shell/.o
+type/^ELF
 	#Open=%var{PAGER:more} %f
 	View=%view{ascii} file %f && nm %f
 
