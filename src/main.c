@@ -1256,6 +1256,8 @@ static const key_map default_map[] = {
     {KEY_F (19), menu_last_selected_cmd},
     {KEY_F (20), quiet_quit_cmd},
 
+    {XCTRL ('@'), single_dirsize_cmd},
+
     /* Copy useful information to the command line */
     {ALT ('a'), copy_current_pathname},
     {ALT ('A'), copy_other_pathname},
@@ -1541,11 +1543,6 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 		if (parm == '*') {
 		    reverse_selection_cmd ();
-		    return MSG_HANDLED;
-		}
-
-		if (parm == ' ') {
-		    single_dirsize_cmd ();
 		    return MSG_HANDLED;
 		}
 	    }

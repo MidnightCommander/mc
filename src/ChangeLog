@@ -4,8 +4,9 @@
 	the currently selected panel entry and moves down. Suggested by
 	ForestCreature on mc-devel.
 	* cmd.h: Likewise.
-	* main.c (midnight_callback): When the space key is pressed and
-	the command line is empty, single_dirsize_cmd() is called.
+	* main.c (midnight_callback): Ctrl-space calculates the size of
+	the currently selected directory entry. This is mostly useful for
+	directories.
 
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
