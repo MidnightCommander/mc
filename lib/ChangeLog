@@ -1,0 +1,3 @@
+2005-09-06  Roland Illig  <roland.illig@gmx.de>
+
+	* mc.menu: %d is already quoted, so it must not be written "%d".

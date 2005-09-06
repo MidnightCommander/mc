@@ -28,7 +28,7 @@ shell_patterns=0
 
 = t d
 3       Compress the current subdirectory (tar.gz)
-	Pwd=`basename "%d" /`
+	Pwd=`basename %d /`
 	echo -n "Name of the compressed file (without extension) [$Pwd]: "
 	read tar
         if [ "$tar"x = x ]; then tar="$Pwd"; fi
