@@ -225,7 +225,9 @@ static const struct {
     char **opt_addr;
     const char *opt_defval;
 } str_options [] = {
+#ifdef USE_INTERNAL_EDIT
     { "editor_backup_extension", &option_backup_ext, "~" },
+#endif
     { NULL, NULL }
 };
 
