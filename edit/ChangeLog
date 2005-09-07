@@ -1,3 +1,9 @@
+2005-09-07  Roland Illig  <roland.illig@gmx.de>
+
+	* editmenu.c: Added a "Save setup..." entry. There had not been
+	the possibility of saving editor options except calling the
+	"Save setup..." function from within the file manager.
+
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c: Fixed some of the gcc warnings.

@@ -38,6 +38,7 @@
 #include "../src/global.h"
 
 #include "edit.h"
+#include "../src/cmd.h"		/* save_setup_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
 #include "../src/menu.h"	/* menu_entry */
 #include "../src/tty.h"		/* KEY_F */
@@ -410,7 +411,9 @@ static menu_entry OptMenu[] =
     {' ', N_("&General...  "), 'G', menu_options},
     {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
     {' ', N_("Learn &Keys..."), 'K', learn_keys},
-    {' ', N_("Syntax &Highlighting..."), 'H', menu_syntax}
+    {' ', N_("Syntax &Highlighting..."), 'H', menu_syntax},
+    {' ', "", ' ', 0},
+    {' ', N_("Save setu&p..."), 'p', save_setup_cmd}
 };
 
 #define OptMenuEmacs OptMenu
