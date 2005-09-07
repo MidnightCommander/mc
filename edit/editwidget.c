@@ -185,12 +185,6 @@ edit_file (const char *_file, int line)
     Dlg_head *edit_dlg;
     WButtonBar *edit_bar;
 
-    if (option_backup_ext_int != -1) {
-	option_backup_ext = g_malloc (sizeof (int) + 1);
-	option_backup_ext[sizeof (int)] = '\0';
-	memcpy (option_backup_ext, (char *) &option_backup_ext_int,
-		sizeof (int));
-    }
     if (!made_directory) {
 	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
 	made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);

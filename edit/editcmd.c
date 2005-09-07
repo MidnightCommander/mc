@@ -24,6 +24,8 @@
 /* #define PIPE_BLOCKS_SO_READ_BYTE_BY_BYTE */
 
 #include <config.h>
+
+#include <assert.h>
 #include <ctype.h>
 
 #include <stdio.h>
@@ -358,10 +360,14 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (filelen != edit->last_byte)
 	goto error_save;
-    if (this_save_mode == EDIT_DO_BACKUP)
-	if (mc_rename (filename, catstrs (filename, option_backup_ext, (char *) NULL))
-	    == -1)
+
+    if (this_save_mode == EDIT_DO_BACKUP) {
+	assert (option_backup_ext != NULL);
+	if (mc_rename (filename, catstrs (filename, option_backup_ext,
+	    (char *) NULL)) == -1)
 	    goto error_save;
+    }
+
     if (this_save_mode != EDIT_QUICK_SAVE)
 	if (mc_rename (savename, filename) == -1)
 	    goto error_save;
@@ -376,11 +382,6 @@ edit_save_file (WEdit *edit, const char *filename)
     return 0;
 }
 
-/*
-   I changed this from Oleg's original routine so
-   that option_backup_ext works with coolwidgets as well. This
-   does mean there is a memory leak - paul.
- */
 void menu_save_mode_cmd (void)
 {
 #define DLG_X 38
@@ -441,15 +442,16 @@ void menu_save_mode_cmd (void)
 		widgets[i].x_divisions = dlg_x;
     }
 
+    assert (option_backup_ext != NULL);
     widgets[2].text = option_backup_ext;
     widgets[4].value = option_save_mode;
     if (quick_dialog (&dialog) != B_ENTER)
 	return;
     option_save_mode = save_mode_new;
-    option_backup_ext = str_result;	/* this is a memory leak */
-    option_backup_ext_int = 0;
-    str_result[min (strlen (str_result), sizeof (int))] = '\0';
-    memcpy (&option_backup_ext_int, str_result, strlen (option_backup_ext));
+
+    g_free (option_backup_ext);
+    option_backup_ext = str_result;
+    str_result = NULL;
 }
 
 void

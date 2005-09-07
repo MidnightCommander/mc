@@ -279,7 +279,6 @@ typedef enum {
 
 extern int option_save_mode;
 extern int option_save_position;
-extern int option_backup_ext_int;
 extern int option_max_undo;
 extern int option_syntax_highlighting;
 extern int option_auto_syntax;

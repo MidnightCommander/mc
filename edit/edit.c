@@ -61,7 +61,6 @@ int option_backspace_through_tabs = 0;
 int option_fake_half_tabs = 1;
 int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
-int option_backup_ext_int = -1;
 int option_max_undo = 32768;
 
 int option_edit_right_extreme = 0;
@@ -70,7 +69,7 @@ int option_edit_top_extreme = 0;
 int option_edit_bottom_extreme = 0;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
-char *option_backup_ext = "~";
+char *option_backup_ext = NULL;
 
 /*-
  *
