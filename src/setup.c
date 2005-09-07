@@ -208,7 +208,6 @@ static const struct {
     { "editor_fake_half_tabs", &option_fake_half_tabs },
     { "editor_option_save_mode", &option_save_mode },
     { "editor_option_save_position", &option_save_position },
-    { "editor_option_backup_ext_int", &option_backup_ext_int },
     { "editor_option_auto_para_formatting", &option_auto_para_formatting },
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },
     { "editor_edit_confirm_save", &edit_confirm_save },
@@ -219,6 +218,15 @@ static const struct {
     { "horizontal_split",   &horizontal_split },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { 0, 0 }
+};
+
+static const struct {
+    const char *opt_name;
+    char **opt_addr;
+    const char *opt_defval;
+} str_options [] = {
+    { "editor_backup_extension", &option_backup_ext, "~" },
+    { NULL, NULL }
 };
 
 void
@@ -287,6 +295,11 @@ save_configure (void)
     /* Save integer options */
     for (i = 0; int_options[i].opt_name; i++)
 	set_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
+
+    /* Save string options */
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+	set_config_string (profile, str_options[i].opt_name,
+	    *str_options[i].opt_addr);
 
     g_free (profile);
 }
@@ -490,6 +503,11 @@ load_setup (void)
     for (i = 0; int_options[i].opt_name; i++)
 	*int_options[i].opt_addr =
 	    get_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
+
+    /* Load string options */
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+	*str_options[i].opt_addr = get_config_string (profile,
+	    str_options[i].opt_name, str_options[i].opt_defval);
 
     load_layout (profile);
 

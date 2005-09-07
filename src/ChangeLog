@@ -4,6 +4,11 @@
 	* util.h: Added get_config_string() and set_config_string(),
 	which are analogous to get_int() and set_int().
 	* util.c: Likewise.
+	* setup.c: Replaced the editor_option_backup_ext_int hack with a
+	string configuration variable, which allows the backup extension
+	to have more than just four characters. Added generic support
+	for string options.
+
 
 2005-09-06  Roland Illig  <roland.illig@gmx.de>
 
