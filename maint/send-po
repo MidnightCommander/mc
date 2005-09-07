@@ -20,18 +20,18 @@ files=`find . -name '*.[ch]' | xargs $XGETTEXT $XGETTEXT_OPTIONS --output=-  | \
 
 $XGETTEXT --default-domain=$DOMAIN --directory=. \
 	  --add-comments=TRANSLATORS: $XGETTEXT_OPTIONS \
-	  --copyright-holder="$COPYRIGHT_HOLDER" --output=po/mc.pot.new $files
+	  --copyright-holder="$COPYRIGHT_HOLDER" --output=po/new-mc.pot $files
 
 for file in po/*.po; do
-    $MSGMERGE --output=$file.new $file po/mc.pot.new
+    $MSGMERGE --output=po/new-`basename $file` $file po/new-mc.pot
 done
 
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
 DIR="/public/ftp/pub/Linux/utils/file/managers/mc/po"
 
-scp po/*.new "$SITE:$DIR/"
+scp po/new-* "$SITE:$DIR/"
 
-ssh $SITE "cd $DIR; for file in *.new; do mv -f \$file \`basename \$file .new\`; done"
+ssh $SITE "cd $DIR; for file in new-*; do mv -f \$file \${file#new-}; done"
 
-rm -f po/*.new
+rm -f po/new-*
