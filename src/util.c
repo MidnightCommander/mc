@@ -617,6 +617,20 @@ int set_int (const char *file, const char *key, int value)
     return WritePrivateProfileString (app_text, key, buffer, file);
 }
 
+extern char *
+get_config_string (const char *file, const char *key, const char *defval)
+{
+    char buffer[1024];
+    (void)GetPrivateProfileString (app_text, key, defval, buffer, sizeof(buffer), file);
+    return g_strdup (buffer);
+}
+
+extern void
+set_config_string (const char *file, const char *key, const char *val)
+{
+    (void)WritePrivateProfileString (app_text, key, val, file);
+}
+
 int exist_file (const char *name)
 {
     return access (name, R_OK) == 0;

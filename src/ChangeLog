@@ -1,6 +1,9 @@
 2005-09-07  Roland Illig  <roland.illig@gmx.de>
 
 	* setup.c: Renamed options[] to int_options[].
+	* util.h: Added get_config_string() and set_config_string(),
+	which are analogous to get_int() and set_int().
+	* util.c: Likewise.
 
 2005-09-06  Roland Illig  <roland.illig@gmx.de>
 
