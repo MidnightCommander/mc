@@ -1,3 +1,7 @@
+2005-09-07  Roland Illig  <roland.illig@gmx.de>
+
+	* setup.c: Renamed options[] to int_options[].
+
 2005-09-06  Roland Illig  <roland.illig@gmx.de>
 
 	* cmd.c: Added single_dirsize_cmd(), which computes the size of

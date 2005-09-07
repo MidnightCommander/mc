@@ -139,7 +139,7 @@ static const struct {
 static const struct {
     const char *opt_name;
     int  *opt_addr;
-} options [] = {
+} int_options [] = {
     { "show_backups", &show_backups },
     { "show_dot_files", &show_dot_files },
     { "verbose", &verbose },
@@ -285,8 +285,8 @@ save_configure (void)
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
     /* Save integer options */
-    for (i = 0; options [i].opt_name; i++)
-	set_int (profile, options [i].opt_name, *options [i].opt_addr);
+    for (i = 0; int_options[i].opt_name; i++)
+	set_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
 
     g_free (profile);
 }
@@ -487,9 +487,9 @@ load_setup (void)
     global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
 
     /* Load integer boolean options */
-    for (i = 0; options [i].opt_name; i++)
-	*options [i].opt_addr =
-	    get_int (profile, options [i].opt_name, *options [i].opt_addr);
+    for (i = 0; int_options[i].opt_name; i++)
+	*int_options[i].opt_addr =
+	    get_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
 
     load_layout (profile);
 
