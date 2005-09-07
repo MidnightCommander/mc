@@ -36,7 +36,7 @@ void set_first_token(char *ptr)
 Based on a routine by GJC@VILLAGE.COM. 
 Extensively modified by Andrew.Tridgell@anu.edu.au
 ****************************************************************************/
-BOOL next_token(char **ptr,char *buff,char *sep, size_t bufsize)
+BOOL next_token(char **ptr,char *buff, const char *sep, size_t bufsize)
 {
   char *s;
   BOOL quoted;

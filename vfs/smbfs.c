@@ -1010,6 +1010,7 @@ smbfs_do_connect (const char *server, char *share)
 static int
 smbfs_get_master_browser(char **host)
 {
+	static char so_broadcast[] = "SO_BROADCAST";
 	int count;
 	struct in_addr *ip_list, bcast_addr;
 	extern struct in_addr  ipzero;
@@ -1019,7 +1020,7 @@ smbfs_get_master_browser(char **host)
                              interpret_addr(lp_socket_address()), True ); 
 	if (fd == -1)
 		return 0;
-	set_socket_options(fd, "SO_BROADCAST");
+	set_socket_options(fd, so_broadcast);
 	ip_list = iface_bcast(ipzero);
 	bcast_addr = *ip_list;
 	if ((ip_list = name_query(fd, "\01\02__MSBROWSE__\02", 1, True, 

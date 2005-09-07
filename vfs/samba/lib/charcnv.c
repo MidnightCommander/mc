@@ -216,7 +216,7 @@ char *dos2unix_format(char *str, BOOL overwrite)
 /*
  * Interpret character set.
  */
-void interpret_character_set(char *str)
+void interpret_character_set(const char *str)
 {
     if (strequal (str, "iso8859-1")) {
         init_iso8859_1();

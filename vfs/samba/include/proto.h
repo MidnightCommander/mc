@@ -6,13 +6,13 @@
 
 char *unix2dos_format(char *str,BOOL overwrite);
 char *dos2unix_format(char *str, BOOL overwrite);
-void interpret_character_set(char *str);
+void interpret_character_set(const char *str);
 
 /* The following definitions come from lib/charset.c  */
 
 void charset_initialise(void);
 void codepage_initialise(int client_codepage);
-void add_char_string(char *s);
+void add_char_string(const char *s);
 
 /* The following definitions come from lib/debug.c  */
 
@@ -36,7 +36,7 @@ struct in_addr *iface_ip(struct in_addr ip);
 
 /* The following definitions come from lib/kanji.c  */
 
-void interpret_coding_system(char *str);
+void interpret_coding_system(const char *str);
 BOOL is_multibyte_codepage(void);
 void initialize_multibyte_vectors( int client_codepage);
 
@@ -91,14 +91,14 @@ time_t get_create_time(SMB_STRUCT_STAT *st,BOOL fake_dirs);
 
 /* The following definitions come from lib/username.c  */
 
-char *get_home_dir(char *user);
-BOOL map_username(char *user);
-struct passwd *Get_Pwnam(char *user,BOOL allow_change);
-BOOL user_in_list(char *user,char *list);
+const char *get_home_dir(char *user);
+BOOL map_username(const char *user);
+struct passwd *Get_Pwnam(const char *user);
+BOOL user_in_list(const char *user,char *list);
 
 /* The following definitions come from lib/util.c  */
 
-char *tmpdir(void);
+const char *tmpdir(void);
 BOOL in_group(gid_t group, gid_t current_gid, int ngroups, gid_t *groups);
 char *Atoic(char *p, int *n, char *c);
 char *get_numlist(char *p, uint32 **num, int *count);
@@ -139,8 +139,8 @@ void *Realloc(void *p,size_t size);
 BOOL get_myname(char *my_name,struct in_addr *ip);
 BOOL ip_equal(struct in_addr ip1,struct in_addr ip2);
 int interpret_protocol(char *str,int def);
-uint32 interpret_addr(char *str);
-struct in_addr *interpret_addr2(char *str);
+uint32 interpret_addr(const char *str);
+struct in_addr *interpret_addr2(const char *str);
 BOOL zero_ip(struct in_addr ip);
 BOOL matchname(char *remotehost,struct in_addr  addr);
 void standard_sub_basic(char *str);
@@ -150,7 +150,7 @@ struct hostent *Get_Hostbyname(const char *name);
 char *uidtoname(uid_t uid);
 char *gidtoname(gid_t gid);
 uid_t nametouid(const char *name);
-void smb_panic(char *why);
+void smb_panic(const char *why);
 char *readdirname(DIR *p);
 BOOL is_in_path(char *name, name_compare_entry *namelist);
 void set_namearray(name_compare_entry **ppname_array, char *namelist);
@@ -207,7 +207,7 @@ char *client_addr(int fd);
 /* The following definitions come from lib/util_str.c  */
 
 void set_first_token(char *ptr);
-BOOL next_token(char **ptr,char *buff,char *sep, size_t bufsize);
+BOOL next_token(char **ptr,char *buff, const char *sep, size_t bufsize);
 char **toktocliplist(int *ctok, char *sep);
 int StrCaseCmp(const char *s, const char *t);
 int StrnCaseCmp(const char *s, const char *t, size_t n);
@@ -265,7 +265,7 @@ BOOL cli_session_setup(struct cli_state *cli,
 		       char *workgroup);
 BOOL cli_ulogoff(struct cli_state *cli);
 BOOL cli_send_tconX(struct cli_state *cli, 
-		    char *share, char *dev, char *pass, int passlen);
+		    const char *share, const char *dev, const char *pass, int passlen);
 BOOL cli_tdis(struct cli_state *cli);
 BOOL cli_rename(struct cli_state *cli, char *fname_src, char *fname_dst);
 BOOL cli_unlink(struct cli_state *cli, char *fname);
@@ -279,9 +279,9 @@ BOOL cli_unlock(struct cli_state *cli, int fnum, uint32 offset, uint32 len, int 
 size_t cli_read(struct cli_state *cli, int fnum, char *buf, off_t offset, size_t size);
 ssize_t cli_write(struct cli_state *cli,
 		  int fnum, uint16 write_mode,
-		  char *buf, off_t offset, size_t size);
+		  const char *buf, off_t offset, size_t size);
 ssize_t cli_smbwrite(struct cli_state *cli,
-		     int fnum, char *buf, off_t offset, size_t size);
+		     int fnum, const char *buf, off_t offset, size_t size);
 BOOL cli_getattrE(struct cli_state *cli, int fd, 
 		  uint16 *attr, size_t *size, 
 		  time_t *c_time, time_t *a_time, time_t *m_time);
@@ -327,7 +327,7 @@ BOOL cli_dskattr(struct cli_state *cli, int *bsize, int *total, int *avail);
 
 struct in_addr *name_query(int fd,const char *name,int name_type, BOOL bcast,BOOL recurse,
          struct in_addr to_ip, int *count, void (*fn)(struct packet_struct *));
-FILE *startlmhosts(char *fname);
+FILE *startlmhosts(const char *fname);
 BOOL getlmhostsent( FILE *fp, pstring name, int *name_type, struct in_addr *ipaddr);
 void endlmhosts(FILE *fp);
 BOOL resolve_name(const char *name, struct in_addr *return_ip, int name_type);
@@ -588,12 +588,12 @@ int lp_minprintspace(int );
 int lp_printing(int );
 int lp_oplock_contention_limit(int );
 char lp_magicchar(int );
-BOOL lp_add_home(char *pszHomename, int iDefaultService, char *pszHomedir);
+BOOL lp_add_home(const char *pszHomename, int iDefaultService, const char *pszHomedir);
 int lp_add_service(char *pszService, int iDefaultService);
 BOOL lp_add_printer(char *pszPrintername, int iDefaultService);
 BOOL lp_file_list_changed(void);
 void *lp_local_ptr(int snum, void *ptr);
-BOOL lp_do_parameter(int snum, char *pszParmName, char *pszParmValue);
+BOOL lp_do_parameter(int snum, const char *pszParmName, const char *pszParmValue);
 BOOL lp_is_default(int snum, struct parm_struct *parm);
 struct parm_struct *lp_next_parameter(int snum, int *i, int allparameters);
 BOOL lp_snum_ok(int iService);
@@ -603,7 +603,7 @@ void lp_killunused(BOOL (*snumused)(int ));
 BOOL lp_load(const char *pszFname,BOOL global_only, BOOL save_defaults, BOOL add_ipc);
 void lp_resetnumservices(void);
 int lp_numservices(void);
-int lp_servicenumber(char *pszServiceName);
+int lp_servicenumber(const char *pszServiceName);
 char *volume_label(int snum);
 int lp_default_server_announce(void);
 int lp_major_announce_version(void);
@@ -614,7 +614,7 @@ BOOL lp_kernel_oplocks(void);
 
 /* The following definitions come from param/params.c  */
 
-BOOL pm_process( char *FileName,
-                 BOOL (*sfunc)(char *),
-                 BOOL (*pfunc)(char *, char *) );
+BOOL pm_process( const char *FileName,
+                 BOOL (*sfunc)(const char *),
+                 BOOL (*pfunc)(const char *, const char *) );
 #endif /* _PROTO_H_ */

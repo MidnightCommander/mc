@@ -61,7 +61,7 @@ enum SOCK_OPT_TYPES {OPT_BOOL,OPT_INT,OPT_ON};
 
 static const struct
 {
-  char *name;
+  const char *name;
   int level;
   int option;
   int value;

@@ -450,11 +450,11 @@ static int default_server_announce;
 #define NUMPARAMETERS (sizeof(parm_table) / sizeof(struct parm_struct))
 
 /* prototypes for the special type handlers */
-static BOOL handle_valid_chars(char *pszParmValue, char **ptr);
-static BOOL handle_include(char *pszParmValue, char **ptr);
-static BOOL handle_copy(char *pszParmValue, char **ptr);
-static BOOL handle_character_set(char *pszParmValue,char **ptr);
-static BOOL handle_coding_system(char *pszParmValue,char **ptr);
+static BOOL handle_valid_chars(const char *pszParmValue, char **ptr);
+static BOOL handle_include(const char *pszParmValue, char **ptr);
+static BOOL handle_copy(const char *pszParmValue, char **ptr);
+static BOOL handle_character_set(const char *pszParmValue,char **ptr);
+static BOOL handle_coding_system(const char *pszParmValue,char **ptr);
 #if 0
 static void set_default_server_announce_type(void);
 #endif /* 0 */
@@ -1291,15 +1291,15 @@ FN_LOCAL_CHAR(lp_magicchar,magic_char)
 
 /* local prototypes */
 static int    strwicmp( const char *psz1, const char *psz2 );
-static int    map_parameter( char *pszParmName);
-static BOOL   set_boolean( BOOL *pb, char *pszParmValue );
-static int    getservicebyname(char *pszServiceName, service *pserviceDest);
+static int    map_parameter( const char *pszParmName);
+static BOOL   set_boolean( BOOL *pb, const char *pszParmValue );
+static int    getservicebyname(const char *pszServiceName, service *pserviceDest);
 static void   copy_service( service *pserviceDest, 
                             service *pserviceSource,
                             BOOL *pcopymapDest );
 static BOOL   service_ok(int iService);
-static BOOL   do_parameter(char *pszParmName, char *pszParmValue);
-static BOOL   do_section(char *pszSectionName);
+static BOOL   do_parameter(const char *pszParmName, const char *pszParmValue);
+static BOOL   do_section(const char *pszSectionName);
 static void init_copymap(service *pservice);
 
 
@@ -1343,7 +1343,7 @@ static void free_service(service *pservice)
 add a new service to the services array initialising it with the given 
 service
 ***************************************************************************/
-static int add_a_service(service *pservice, char *name)
+static int add_a_service(service *pservice, const char *name)
 {
   int i;
   service tservice;
@@ -1393,7 +1393,7 @@ static int add_a_service(service *pservice, char *name)
 add a new home service, with the specified home directory, defaults coming 
 from service ifrom
 ***************************************************************************/
-BOOL lp_add_home(char *pszHomename, int iDefaultService, char *pszHomedir)
+BOOL lp_add_home(const char *pszHomename, int iDefaultService, const char *pszHomedir)
 {
   int i = add_a_service(pSERVICE(iDefaultService),pszHomename);
 
@@ -1494,7 +1494,7 @@ static int strwicmp(const char *psz1, const char *psz2)
 Map a parameter's string representation to something we can use. 
 Returns False if the parameter string is not recognised, else TRUE.
 ***************************************************************************/
-static int map_parameter(char *pszParmName)
+static int map_parameter(const char *pszParmName)
 {
    int iIndex;
 
@@ -1515,7 +1515,7 @@ Set a boolean variable from the text value stored in the passed string.
 Returns True in success, False if the passed string does not correctly 
 represent a boolean.
 ***************************************************************************/
-static BOOL set_boolean(BOOL *pb, char *pszParmValue)
+static BOOL set_boolean(BOOL *pb, const char *pszParmValue)
 {
    BOOL bRetval;
 
@@ -1541,7 +1541,7 @@ static BOOL set_boolean(BOOL *pb, char *pszParmValue)
 /***************************************************************************
 Find a service by name. Otherwise works like get_service.
 ***************************************************************************/
-static int getservicebyname(char *pszServiceName, service *pserviceDest)
+static int getservicebyname(const char *pszServiceName, service *pserviceDest)
 {
    int iService;
 
@@ -1740,7 +1740,7 @@ BOOL lp_file_list_changed(void)
 /***************************************************************************
   handle the interpretation of the coding system parameter
   *************************************************************************/
-static BOOL handle_coding_system(char *pszParmValue,char **ptr)
+static BOOL handle_coding_system(const char *pszParmValue,char **ptr)
 {
 	string_set(ptr,pszParmValue);
 	interpret_coding_system(pszParmValue);
@@ -1750,7 +1750,7 @@ static BOOL handle_coding_system(char *pszParmValue,char **ptr)
 /***************************************************************************
 handle the interpretation of the character set system parameter
 ***************************************************************************/
-static BOOL handle_character_set(char *pszParmValue,char **ptr)
+static BOOL handle_character_set(const char *pszParmValue,char **ptr)
 {
 	string_set(ptr,pszParmValue);
 	interpret_character_set(pszParmValue);
@@ -1761,7 +1761,7 @@ static BOOL handle_character_set(char *pszParmValue,char **ptr)
 /***************************************************************************
 handle the valid chars lines
 ***************************************************************************/
-static BOOL handle_valid_chars(char *pszParmValue,char **ptr)
+static BOOL handle_valid_chars(const char *pszParmValue,char **ptr)
 { 
   string_set(ptr,pszParmValue);
 
@@ -1779,7 +1779,7 @@ static BOOL handle_valid_chars(char *pszParmValue,char **ptr)
 /***************************************************************************
 handle the include operation
 ***************************************************************************/
-static BOOL handle_include(char *pszParmValue,char **ptr)
+static BOOL handle_include(const char *pszParmValue,char **ptr)
 { 
   pstring fname;
   pstrcpy(fname,pszParmValue);
@@ -1802,7 +1802,7 @@ static BOOL handle_include(char *pszParmValue,char **ptr)
 /***************************************************************************
 handle the interpretation of the copy parameter
 ***************************************************************************/
-static BOOL handle_copy(char *pszParmValue,char **ptr)
+static BOOL handle_copy(const char *pszParmValue,char **ptr)
 {
    BOOL bRetval;
    int iTemp;
@@ -1872,7 +1872,7 @@ void *lp_local_ptr(int snum, void *ptr)
 Process a parameter for a particular service number. If snum < 0
 then assume we are in the globals
 ***************************************************************************/
-BOOL lp_do_parameter(int snum, char *pszParmName, char *pszParmValue)
+BOOL lp_do_parameter(int snum, const char *pszParmName, const char *pszParmValue)
 {
    int parmnum, i;
    void *parm_ptr=NULL; /* where we are going to store the result */
@@ -1981,7 +1981,7 @@ BOOL lp_do_parameter(int snum, char *pszParmName, char *pszParmValue)
 /***************************************************************************
 Process a parameter.
 ***************************************************************************/
-static BOOL do_parameter( char *pszParmName, char *pszParmValue )
+static BOOL do_parameter( const char *pszParmName, const char *pszParmValue )
 {
   if( !bInGlobalSection && bGlobalOnly )
     return(True);
@@ -2041,7 +2041,7 @@ Process a new section (service). At this stage all sections are services.
 Later we'll have special sections that permit server parameters to be set.
 Returns True on success, False on failure.
 ***************************************************************************/
-static BOOL do_section(char *pszSectionName)
+static BOOL do_section(const char *pszSectionName)
 {
    BOOL bRetval;
    BOOL isglobal = ((strwicmp(pszSectionName, GLOBAL_NAME) == 0) || 
@@ -2177,7 +2177,7 @@ static void lp_add_auto_services(char *str)
 	homes = lp_servicenumber(HOMES_NAME);
 	
 	for (p=strtok(s,LIST_SEP);p;p=strtok(NULL,LIST_SEP)) {
-		char *home = get_home_dir(p);
+		const char *home = get_home_dir(p);
 		
 		if (lp_servicenumber(p) >= 0) continue;
 		
@@ -2340,7 +2340,7 @@ exist. Note that this is a DIFFERENT ANIMAL from the internal function
 getservicebyname()! This works ONLY if all services have been loaded, and
 does not copy the found service.
 ***************************************************************************/
-int lp_servicenumber(char *pszServiceName)
+int lp_servicenumber(const char *pszServiceName)
 {
    int iService;
 

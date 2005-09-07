@@ -23,17 +23,17 @@
 extern int DEBUGLEVEL;
 
 /* internal functions */
-static struct passwd *uname_string_combinations(char *s, struct passwd * (*fn) (char *), int N);
-static struct passwd *uname_string_combinations2(char *s, int offset, struct passwd * (*fn) (char *), int N);
+static struct passwd *uname_string_combinations(char *s, struct passwd * (*fn) (const char *), int N);
+static struct passwd *uname_string_combinations2(char *s, int offset, struct passwd * (*fn) (const char *), int N);
 
 /****************************************************************************
 get a users home directory.
 ****************************************************************************/
-char *get_home_dir(char *user)
+const char *get_home_dir(char *user)
 {
   struct passwd *pass;
 
-  pass = Get_Pwnam(user, False);
+  pass = Get_Pwnam(user);
 
   if (!pass) return(NULL);
   return(pass->pw_dir);      
@@ -51,7 +51,7 @@ function. Previously, the map_username was being called
 every time Get_Pwnam was called.
 Returns True if username was changed, false otherwise.
 ********************************************************************/
-BOOL map_username(char *user)
+BOOL map_username(const char *user)
 {
   static BOOL initialised=False;
   static fstring last_from,last_to;
@@ -148,7 +148,7 @@ BOOL map_username(char *user)
 /****************************************************************************
 Get_Pwnam wrapper
 ****************************************************************************/
-static struct passwd *_Get_Pwnam(char *s)
+static struct passwd *_Get_Pwnam(const char *s)
 {
   struct passwd *ret;
 
@@ -174,24 +174,19 @@ static struct passwd *_Get_Pwnam(char *s)
 /****************************************************************************
 a wrapper for getpwnam() that tries with all lower and all upper case 
 if the initial name fails. Also tried with first letter capitalised
-Note that this can change user!
 ****************************************************************************/
-struct passwd *Get_Pwnam(char *user,BOOL allow_change)
+struct passwd *Get_Pwnam(const char *a_user)
 {
-  fstring user2;
+  fstring user;
   int last_char;
   int usernamelevel = lp_usernamelevel();
 
   struct passwd *ret;  
 
-  if (!user || !(*user))
+  if (!a_user || !(*a_user))
     return(NULL);
 
-  StrnCpy(user2,user,sizeof(user2)-1);
-
-  if (!allow_change) {
-    user = &user2[0];
-  }
+  StrnCpy(user,a_user,sizeof(user)-1);
 
   ret = _Get_Pwnam(user);
   if (ret) return(ret);
@@ -221,9 +216,6 @@ struct passwd *Get_Pwnam(char *user,BOOL allow_change)
   strlower(user);
   ret = uname_string_combinations(user, _Get_Pwnam, usernamelevel);
   if (ret) return(ret);
-
-  if (allow_change)
-    fstrcpy(user,user2);
 
   return(NULL);
 }
@@ -379,7 +371,7 @@ try all combinations with N uppercase letters.
 offset is the first char to try and change (start with 0)
 it assumes the string starts lowercased
 ****************************************************************************/
-static struct passwd *uname_string_combinations2(char *s,int offset,struct passwd *(*fn)(char *),int N)
+static struct passwd *uname_string_combinations2(char *s,int offset,struct passwd *(*fn)(const char *),int N)
 {
   int len = strlen(s);
   int i;
@@ -413,7 +405,7 @@ try all combinations with up to N uppercase letters.
 offset is the first char to try and change (start with 0)
 it assumes the string starts lowercased
 ****************************************************************************/
-static struct passwd * uname_string_combinations(char *s,struct passwd * (*fn)(char *),int N)
+static struct passwd * uname_string_combinations(char *s,struct passwd * (*fn)(const char *),int N)
 {
   int n;
   struct passwd *ret;

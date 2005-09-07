@@ -87,7 +87,7 @@ static BOOL cli_send_smb(struct cli_state *cli)
 struct
 {
   int err;
-  char *message;
+  const char *message;
 } const rap_errmap[] =
 {
   {5,    "User has insufficient privilege" },
@@ -218,7 +218,7 @@ static char *fix_char_ptr(unsigned int datap, unsigned int converter,
   send a SMB trans or trans2 request
   ****************************************************************************/
 static BOOL cli_send_trans(struct cli_state *cli, int trans, 
-                           char *name, int pipe_name_len, 
+                           const char *name, int pipe_name_len, 
                            int fid, int flags,
                            uint16 *setup, int lsetup, int msetup,
                            char *param, int lparam, int mparam,
@@ -581,7 +581,7 @@ int cli_RNetShareEnum(struct cli_state *cli, void (*fn)(const char *, uint32, co
 		      char *sname = p;
 		      int type = SVAL(p,14);
 		      int comment_offset = IVAL(p,16) & 0xFFFF;
-		      char *cmnt = comment_offset?(rdata+comment_offset-converter):"";
+		      const char *cmnt = comment_offset?(rdata+comment_offset-converter):"";
 		      fn(sname, type, cmnt, state);
 	      }
       } else {
@@ -654,7 +654,7 @@ BOOL cli_NetServerEnum(struct cli_state *cli, char *workgroup, uint32 stype,
 			for (i = 0;i < count;i++, p += 26) {
 				char *sname = p;
 				int comment_offset = (IVAL(p,22) & 0xFFFF)-converter;
-				char *cmnt = comment_offset?(rdata+comment_offset):"";
+				const char *cmnt = comment_offset?(rdata+comment_offset):"";
 				if (comment_offset < 0 || comment_offset > rdrcnt) continue;
 
 				stype = IVAL(p,18) & ~SV_TYPE_LOCAL_LIST_ONLY;
@@ -677,7 +677,7 @@ BOOL cli_NetServerEnum(struct cli_state *cli, char *workgroup, uint32 stype,
 
 static  struct {
     int prot;
-    char *name;
+    const char *name;
   }
 const prots[] = 
     {
@@ -847,7 +847,7 @@ BOOL cli_ulogoff(struct cli_state *cli)
 send a tconX
 ****************************************************************************/
 BOOL cli_send_tconX(struct cli_state *cli, 
-		    char *share, char *dev, char *pass, int passlen)
+		    const char *share, const char *dev, const char *pass, int passlen)
 {
 	fstring fullshare, pword;
 	char *p;
@@ -1408,7 +1408,7 @@ size_t cli_read(struct cli_state *cli, int fnum, char *buf, off_t offset, size_t
 /****************************************************************************
 issue a single SMBwrite and don't wait for a reply
 ****************************************************************************/
-static void cli_issue_write(struct cli_state *cli, int fnum, off_t offset, uint16 mode, char *buf,
+static void cli_issue_write(struct cli_state *cli, int fnum, off_t offset, uint16 mode, const char *buf,
 			    size_t size, int i)
 {
 	char *p;
@@ -1452,7 +1452,7 @@ static void cli_issue_write(struct cli_state *cli, int fnum, off_t offset, uint1
 ****************************************************************************/
 ssize_t cli_write(struct cli_state *cli,
 		  int fnum, uint16 write_mode,
-		  char *buf, off_t offset, size_t size)
+		  const char *buf, off_t offset, size_t size)
 {
 	int bwritten = 0;
 	int issued = 0;
@@ -1503,7 +1503,7 @@ ssize_t cli_write(struct cli_state *cli,
   write to a file using a SMBwrite and not bypassing 0 byte writes
 ****************************************************************************/
 ssize_t cli_smbwrite(struct cli_state *cli,
-		     int fnum, char *buf, off_t offset, size_t size)
+		     int fnum, const char *buf, off_t offset, size_t size)
 {
 	char *p;
 

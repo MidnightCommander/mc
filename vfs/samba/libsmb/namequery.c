@@ -223,7 +223,7 @@ struct in_addr *name_query(int fd,const char *name,int name_type, BOOL bcast,BOO
  Start parsing the lmhosts file.
 *********************************************************/
 
-FILE *startlmhosts(char *fname)
+FILE *startlmhosts(const char *fname)
 {
   FILE *fp = sys_fopen(fname,"r");
   if (!fp) {
@@ -347,7 +347,8 @@ static BOOL resolve_bcast(const char *name, struct in_addr *return_ip, int name_
 		struct in_addr *iplist = NULL;
 		int count;
 		int num_interfaces = iface_count();
-		set_socket_options(sock,"SO_BROADCAST");
+		static char so_broadcast[] = "SO_BROADCAST";
+		set_socket_options(sock, so_broadcast);
 		/*
 		 * Lookup the name on all the interfaces, return on
 		 * the first successful match.
@@ -508,8 +509,9 @@ BOOL resolve_name(const char *name, struct in_addr *return_ip, int name_type)
   }
 
   pstrcpy(name_resolve_list, lp_name_resolve_order());
+  if (!name_resolve_list || !*name_resolve_list)
+    pstrcpy(name_resolve_list, "host");
   ptr = name_resolve_list;
-  if (!ptr || !*ptr) ptr = "host";
 
   while (next_token(&ptr, tok, LIST_SEP, sizeof(tok))) {
 	  if((strequal(tok, "host") || strequal(tok, "hosts"))) {

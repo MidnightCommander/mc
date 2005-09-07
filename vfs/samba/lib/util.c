@@ -101,7 +101,7 @@ pstring myhostname="";
 pstring user_socket_options="";   
 
 pstring sesssetup_user="";
-static char * const samlogon_user = "";
+static const char * const samlogon_user = "";
 
 const BOOL sam_logon_in_ssb = False;
 
@@ -115,7 +115,7 @@ char **my_netbios_names;
   find a suitable temporary directory. The result should be copied immediately
   as it may be overwritten by a subsequent call
   ****************************************************************************/
-char *tmpdir(void)
+const char *tmpdir(void)
 {
   char *p;
   if ((p = getenv("MC_TMPDIR")) || (p = getenv("TMPDIR"))) {
@@ -1748,7 +1748,7 @@ int interpret_protocol(char *str,int def)
 /****************************************************************************
 interpret an internet address or name into an IP address in 4 byte form
 ****************************************************************************/
-uint32 interpret_addr(char *str)
+uint32 interpret_addr(const char *str)
 {
   struct hostent *hp;
   uint32 res;
@@ -1787,7 +1787,7 @@ uint32 interpret_addr(char *str)
 /*******************************************************************
   a convenient addition to interpret_addr()
   ******************************************************************/
-struct in_addr *interpret_addr2(char *str)
+struct in_addr *interpret_addr2(const char *str)
 {
   static struct in_addr ret;
   uint32 a = interpret_addr(str);
@@ -1991,7 +1991,7 @@ static char *automount_lookup(char *user_name)
  This is Luke's original function with the NIS lookup code
  moved out to a separate function.
 *******************************************************************/
-static char *automount_server(char *user_name)
+static char *automount_server(const char *user_name)
 {
 	static pstring server_name;
 
@@ -2066,7 +2066,7 @@ void standard_sub_basic(char *str)
 	char *s, *p;
 	char pidstr[10];
 	struct passwd *pass;
-	char *username = sam_logon_in_ssb ? samlogon_user : sesssetup_user;
+	const char *username = sam_logon_in_ssb ? samlogon_user : sesssetup_user;
 
 	for (s = str ; s && *s && (p = strchr(s,'%')); s = p )
 	{
@@ -2074,7 +2074,7 @@ void standard_sub_basic(char *str)
 		{
 			case 'G' :
 			{
-				if ((pass = Get_Pwnam(username,False))!=NULL)
+				if ((pass = Get_Pwnam(username))!=NULL)
 				{
 					string_sub(p,"%G",gidtoname(pass->pw_gid));
 				}
@@ -2154,7 +2154,8 @@ do some standard substitutions in a string
 ****************************************************************************/
 void standard_sub(connection_struct *conn,char *str)
 {
-	char *p, *s, *home;
+	char *p, *s;
+	const char *home;
 
 	for (s=str; (p=strchr(s, '%'));s=p) {
 		switch (*(p+1)) {
@@ -2324,9 +2325,9 @@ uid_t nametouid(const char *name)
 /*******************************************************************
 something really nasty happened - panic!
 ********************************************************************/
-void smb_panic(char *why)
+void smb_panic(const char *why)
 {
-	char *cmd = lp_panic_action();
+	const char *cmd = lp_panic_action();
 	if (cmd && *cmd) {
 		system(cmd);
 	}

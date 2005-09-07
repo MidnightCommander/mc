@@ -69,7 +69,7 @@ typedef int BOOL;
    arguemnts to DEBUG() right. We have got them wrong too often in the 
    past */
 #ifdef HAVE_STDARG_H
-int  Debug1( char *, ... )
+int  Debug1( const char *, ... )
 #ifdef __GNUC__
      __attribute__ ((format (printf, 1, 2)))
 #endif
@@ -874,7 +874,7 @@ struct parm_struct
 	parm_type type;
 	parm_class class;
 	void *ptr;
-	BOOL (*special)(char *, char **);
+	BOOL (*special)(const char *, char **);
 	const struct enum_list *enum_list;
 	unsigned flags;
 	union {

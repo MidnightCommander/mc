@@ -124,7 +124,7 @@ static void get_broadcast(struct in_addr *if_ipaddr,
 load a list of network interfaces
 ****************************************************************************/
 static void interpret_interfaces(char *s, struct interface **interfaces,
-		char *description)
+		const char *description)
 {
   char *ptr;
   fstring token;

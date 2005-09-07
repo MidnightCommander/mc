@@ -131,13 +131,13 @@ void setup_logging( const char *pname, BOOL interactive )
  * ************************************************************************** **
  */
 #ifdef HAVE_STDARG_H
- int Debug1( char *format_str, ... )
+ int Debug1( const char *format_str, ... )
 {
 #else
  int Debug1(va_alist)
 va_dcl
 {  
-  char *format_str;
+  const char *format_str;
 #endif
   va_list ap;  
   int old_errno = errno;
@@ -148,7 +148,7 @@ va_dcl
     va_start( ap, format_str );
 #else
     va_start( ap );
-    format_str = va_arg( ap, char * );
+    format_str = va_arg( ap, const char * );
 #endif
     (void)vfprintf( dbf, format_str, ap );
     va_end( ap );
@@ -182,7 +182,7 @@ va_dcl
     va_start( ap, format_str );
 #else
     va_start( ap );
-    format_str = va_arg( ap, char * );
+    format_str = va_arg( ap, const char * );
 #endif
     (void)vfprintf( dbf, format_str, ap );
     va_end( ap );

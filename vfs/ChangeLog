@@ -1,3 +1,9 @@
+2005-09-07  Roland Illig  <roland.illig@gmx.de>
+
+	* samba/*: Added many const qualifiers to properly fix the
+	warnings emitted by gcc with -Wwrite-strings.
+	* smbfs.c: Likewise.
+
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
 	* direntry.c: Added const qualifiers to work around gcc
