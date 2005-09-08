@@ -10,55 +10,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"POT-Creation-Date: 2005-09-07 15:55-0400\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
-"Last-Translator: Adam Byrtek <alpha@debian.org>\n"
+"Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.6\n"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "Pod¶wietlanie sk³adniowe"
+msgstr " Wybierz pod¶wietlanie sk³adniowe "
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Informacje o "
+msgstr "< Automatycznie >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Prze³aduj Sk³adniê >"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " Otwarcie potoku do odczytu nie powiod³o siê: "
+msgstr " Nie mo¿na otworzyæ %s do odczytu "
 
 msgid "Error"
 msgstr "B³±d"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " B³±d przy odczycie z potoku: "
+msgstr " B³±d przy czytaniu potoku: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Otwarcie potoku do odczytu nie powiod³o siê: "
+msgstr " Otwarcie potoku do odczytu nie powiod³o siê: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do pliku: "
+msgstr " Nie mo¿na pobraæ informacji o rozmiarze/uprawnieniach do dla %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr " Nie mo¿na wy¶wietliæ: to nie zwyk³y plik "
+msgstr " %s nie jest plikiem "
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " Plik jest zbyt du¿y: "
+msgstr " Plik %s jest zbyt du¿y: "
 
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
+
+msgid "&Dismiss"
+msgstr "&Porzuæ"
 
 msgid " Enter file name: "
 msgstr " Wprowad¼ nazwê pliku: "
@@ -99,9 +101,8 @@ msgstr "Ostrze¿enie"
 msgid " A file already exists with this name. "
 msgstr " Plik o tej nazwie ju¿ istnieje. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Nadpisz"
+msgstr "&Nadpisz"
 
 msgid " Cannot save file. "
 msgstr " B³±d przy próbie zapisu pliku. "
@@ -149,9 +150,8 @@ msgstr ""
 " W bie¿±cym tek¶cie dokonano zmian bez wykonania zapisu. \n"
 " Kontynuacja spowoduje ich porzucenie. "
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Kontynuuj"
+msgstr "&Kontynuuj"
 
 msgid " Load "
 msgstr " Wczytaj "
@@ -199,7 +199,7 @@ msgid "case &Sensitive"
 msgstr "Rozró¿nianie wielko¶ci liter"
 
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Wprowad¼ kolejno¶æ zastêpowania argumentów, np.: 3,2,1,4"
+msgstr " Wprowad¼ kolejno¶æ zastêpowania argumentów, np.: 3,2,1,4 "
 
 msgid " Enter replacement string:"
 msgstr " Wprowad¼ zastêpuj±cy napis:"
@@ -222,9 +222,8 @@ msgstr ""
 msgid " Error in replacement format string. "
 msgstr " B³±d w ci±gu zastêpuj±cym. "
 
-#, fuzzy
 msgid " Replacement too long. "
-msgstr " Wprowad¼ zastêpuj±cy napis:"
+msgstr " Ci±g zbyt d³ugi. "
 
 #, c-format
 msgid " %ld replacements made. "
@@ -243,9 +242,8 @@ msgstr "Koñcz"
 msgid " File was modified, Save with exit? "
 msgstr " Plik zosta³ zmieniony. Zapisaæ przed zakoñczeniem?"
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Anuluj zakoñczenie"
+msgstr "N&ie zamykaj"
 
 msgid "&Yes"
 msgstr "&Tak"
@@ -253,12 +251,11 @@ msgstr "&Tak"
 msgid "&No"
 msgstr "&Nie"
 
-#, fuzzy
 msgid " Error "
-msgstr "B³±d"
+msgstr " B³±d "
 
 msgid " This function is not implemented. "
-msgstr ""
+msgstr " Ta opcja nie jest zaimplementowana. "
 
 msgid " Copy to clipboard "
 msgstr " Skopiuj do schowka "
@@ -306,19 +303,16 @@ msgid " Sort returned non-zero: "
 msgstr " Polecenie 'sort' zwróci³o kod b³êdu: "
 
 msgid "Paste output of external command"
-msgstr ""
+msgstr "Wklej wynik zewnêtrznego polecenia"
 
-#, fuzzy
 msgid "Enter shell command(s):"
-msgstr " Wprowad¼ etykietê polecenia: "
+msgstr "Wprowad¼ polecenie pow³oki:"
 
-#, fuzzy
 msgid "External command"
-msgstr "Inne polecenie"
+msgstr "Polecenie zewnêtrzne"
 
-#, fuzzy
 msgid "Cannot execute command"
-msgstr " B³±d przy próbie uruchomienia polecenia 'sort' "
+msgstr "B³±d przy próbie uruchomienia"
 
 msgid "Error creating script:"
 msgstr "B³±d przy tworzeniu skryptu:"
@@ -351,16 +345,13 @@ msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <temat> -c <cc> <do>"
 
 msgid " Insert Literal "
-msgstr " Wstaw litera³ "
+msgstr " Wstaw symbol "
 
 msgid " Press any key: "
 msgstr " Naci¶nij dowolny klawisz: "
 
 msgid " Execute Macro "
 msgstr " Wykonaj makro "
-
-msgid "&Dismiss"
-msgstr "&Porzuæ"
 
 msgid " Emacs key: "
 msgstr " Klawisz Emacsa: "
@@ -371,15 +362,18 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Plik \"%s\" jest teraz zmieniany przez\n"
+"U¿ytownik: %s\n"
+"Proces (PID): %d"
 
 msgid "File locked"
-msgstr ""
+msgstr "Plik zajêty"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "&Ustaw blokadê"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "&Zignoruj"
 
 msgid " About "
 msgstr " Informacje o "
@@ -471,13 +465,13 @@ msgid "&Replace...        F4"
 msgstr "&Zast±p...          F4"
 
 msgid "&Go to line...            M-l"
-msgstr "Przejd¼ &do wiersza       M-l"
+msgstr "Przejd¼ &do wiersza...     M-l"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "do przeciwnego &nawiasu  M-b"
+msgstr "Do przeciwnego &nawiasu    M-b"
 
 msgid "Insert &literal...       C-q"
-msgstr "Wstaw &litera³...         C-q"
+msgstr "Wstaw sym&bol...          C-q"
 
 msgid "&Refresh screen          C-l"
 msgstr "&Od¶wie¿ ekran            C-l"
@@ -495,7 +489,7 @@ msgid "Delete macr&o...            "
 msgstr "&Usuñ makro...               "
 
 msgid "Insert &date/time           "
-msgstr "Wstaw datê/&czas             "
+msgstr "Wstaw datê/&godzinê          "
 
 msgid "Format p&aragraph        M-p"
 msgstr "Formatuj &akapit          M-p"
@@ -507,10 +501,10 @@ msgid "Sor&t...                 M-t"
 msgstr "&Sortuj...                M-t"
 
 msgid "Paste o&utput of...      M-u"
-msgstr ""
+msgstr "Wstaw w&ynik polecenia... M-u"
 
 msgid "E&xternal Formatter      F19"
-msgstr "&Zewnêtrzny formater     F19"
+msgstr "&Zewnêtrzny formater      F19"
 
 msgid "&Mail...                    "
 msgstr "&Wy¶lij..."
@@ -519,21 +513,22 @@ msgid "&Execute macro... C-x e, KEY"
 msgstr "Wykonaj &makro... C-x e, Klaw"
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "sprawdzenie pisowni      M-$"
+msgstr "Sp&rawdzenie pisowni      M-$"
 
 msgid "&General...  "
 msgstr "&Ogólne...  "
 
 msgid "&Save mode..."
-msgstr "Tryb zapisu..."
+msgstr "&Tryb zapisu..."
 
-#, fuzzy
 msgid "Learn &Keys..."
 msgstr "&Definiuj klawisze..."
 
-#, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "Pod¶wietlanie sk³adniowe"
+msgstr "&Pod¶wietlanie sk³adniowe"
+
+msgid "Save setu&p..."
+msgstr "&Zapisz ustawienia..."
 
 msgid " File "
 msgstr " Plik "
@@ -556,9 +551,8 @@ msgstr "Intuicyjne"
 msgid "Emacs"
 msgstr "Emacs"
 
-#, fuzzy
 msgid "User-defined"
-msgstr "&Zdefiniowny przez u¿ytkownika:"
+msgstr "U¿ytkownika"
 
 msgid "None"
 msgstr "Brak"
@@ -630,7 +624,7 @@ msgid "PullDn"
 msgstr "Rozwiñ"
 
 msgid " Load syntax file "
-msgstr " Wczytaj plik ze sk³adni±"
+msgstr " Wczytaj plik sk³adni "
 
 #, c-format
 msgid ""
@@ -642,55 +636,55 @@ msgstr ""
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " B³±d w pliki %s w wierszu %d "
+msgstr " B³±d w pliku %s w wierszu %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "bind: Z³a liczba argumentów, bind <klawisz> <polecenie>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "bind: Niepoprawna warto¶æ klawisza: `%s'"
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "bind: Brakuje tu klawisza..."
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "bind: Nierozpoznany klawisz: `%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " Polecenie chown"
+msgstr "bind: Nieznane polecenie: `%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
+msgstr "%s: Sk³adnia: %s <n> <polecenie> <etykieta>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " Polecenie chown"
+msgstr "%s: Nieznane polecenie: `%s'"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: fn musi byæ miêdzy 1 i 10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " Polecenie chown"
+msgstr "%s:%d: nieznane polecenie `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found!"
-msgstr "Uwaga: nie odnaleziono pliku %s\n"
+msgstr "Nie odnaleziono %s!"
 
 msgid "&Set"
 msgstr "Ustaw"
@@ -827,9 +821,8 @@ msgstr "Strona kodowa wej¶ciowa / wyj¶ciowa:"
 msgid "&Select"
 msgstr "&Wybierz"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "U¿yj trybu &pasywnego"
+msgstr "U¿yj trybu pasywnego przez serwer pro&xy"
 
 msgid "Use &passive mode"
 msgstr "U¿yj trybu &pasywnego"
@@ -1267,24 +1260,23 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parametr "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s%s file error"
-msgstr " b³±d pliku "
+msgstr " B³±d pliku %s%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Format pliku mc.ext uleg³ zmianie wraz z wersj± 3.0.\n"
-"Wygl±da na to, ¿e instalacja siê nie powiod³a.\n"
-"Pobierz pierwotn± wersjê tego pliku z pakietu\n"
-"Midnight Commandera."
+"Format pliku %smc.ext uleg³ zmianie wraz z wersj± 3.0. "
+"Wygl±da na to, ¿e instalacja siê nie powiod³a. "
+"Pobierz now± wersjê tego pliku z pakietu Midnight Commandera."
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " b³±d pliku "
+msgstr " B³±d pliku ~/%s "
 
 #, c-format
 msgid ""
@@ -1292,6 +1284,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"Format pliku ~/%s uleg³ zmianie wraz z wersj± 3.0. Mo¿esz teraz skopiowaæ "
+"go z %smc.ext lub napisaæ samemu, opieraj±c siê na zawarto¶ci tego pliku."
 
 msgid " Copy "
 msgstr " Skopiuj "
@@ -1429,7 +1423,7 @@ msgstr ""
 " %s "
 
 msgid "(stalled)"
-msgstr "(zatrzymany)"
+msgstr "(wstrzymany)"
 
 #, c-format
 msgid ""
@@ -1681,7 +1675,7 @@ msgid "Target file \"%s\" already exists!"
 msgstr "Plik docelowy \"%s\" ju¿ istnieje!"
 
 msgid "If &size differs"
-msgstr "je¶li ró¿ny rozmiar"
+msgstr "Je¶li ró¿ni siê rozmiar"
 
 msgid "&Update"
 msgstr "Aktualizuj"
@@ -1698,19 +1692,19 @@ msgstr "Do³±cz"
 msgid "Overwrite this target?"
 msgstr "Nadpisaæ ten plik?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Data docelowego: %s, rozmiar %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Data ¼ród³owego: %s, rozmiar %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
 msgstr "Data docelowego: %s, rozmiar %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
 msgstr "Data ¼ród³owego: %s, rozmiar %u"
 
@@ -1774,7 +1768,7 @@ msgid "&Edit - F4"
 msgstr "Edycja - F4"
 
 msgid "find Re&cursively"
-msgstr ""
+msgstr "znajd¼ Re&kurencyjnie"
 
 msgid "Start at:"
 msgstr "Rozpoczêcie w:"
@@ -1822,38 +1816,37 @@ msgid "Prev"
 msgstr "Poprz"
 
 msgid "&Move"
-msgstr "Przenie¶"
+msgstr "&Przenie¶"
 
 msgid "&Remove"
-msgstr "Usuñ"
+msgstr "&Usuñ"
 
 msgid "&Append"
-msgstr "Do³±cz"
+msgstr "D&o³±cz"
 
 msgid "&Insert"
-msgstr "Wstaw"
+msgstr "&Wstaw"
 
 msgid "New &Entry"
-msgstr "Nowy element"
+msgstr "Nowy &element"
 
 msgid "New &Group"
-msgstr "Nowa grupa"
+msgstr "Nowa &grupa"
 
 msgid "&Up"
-msgstr "Góra"
+msgstr "&Góra"
 
 msgid "&Add current"
-msgstr "Dodaj bie¿±cy"
+msgstr "&Dodaj bie¿±cy"
 
-#, fuzzy
 msgid "&Refresh"
-msgstr "Od&wrócony"
+msgstr "&Od¶wierz"
 
 msgid "Fr&ee VFSs now"
 msgstr "Zwo&lnij VFS-y"
 
 msgid "Change &To"
-msgstr "Zmieñ na"
+msgstr "&Id¼ do"
 
 msgid "Subgroup - press ENTER to see list"
 msgstr "Podgrupa - ENTER wy¶wietla listê"
@@ -1906,10 +1899,10 @@ msgid ""
 msgstr ""
 "\n"
 " Grupa nie jest pusta.\n"
-" Usun±æ j±?"
+" Napewno j± usun±æ?"
 
 msgid " Top level group "
-msgstr " Grupa  g³ówna"
+msgstr " Grupa g³ówna "
 
 msgid "MC was unable to write ~/"
 msgstr "Nie mo¿na zapisaæ pliku ~/"
@@ -1965,13 +1958,14 @@ msgstr "Ostatni dostêp: %s"
 msgid "Modified:  %s"
 msgstr "Zmodyfikowany:  %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
-msgstr "Utworzony:      %s"
+msgid "Status:    %s"
+msgstr "Zmiana statusu: %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Urz±dzenie: numer %lu, podnumer %lu"
 
 #, c-format
 msgid "Size:      %s"
@@ -1979,11 +1973,10 @@ msgstr "Rozmiar:   %s"
 
 #, c-format
 msgid " (%ld block)"
-msgstr " (%ld blok)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld bloków)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blok)"
+msgstr[1] " (%ld bloki)"
+msgstr[2] " (%ld bloków)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2005,37 +1998,37 @@ msgid "File:       None"
 msgstr " Plik:       Brak"
 
 msgid "&Vertical"
-msgstr "Pionowy"
+msgstr "P&ionowy"
 
 msgid "&Horizontal"
-msgstr "Poziomy"
+msgstr "P&oziomy"
 
 msgid "&Xterm window title"
 msgstr "Tytu³ okna &Xterm"
 
 msgid "h&Intbar visible"
-msgstr "Pasek porad"
+msgstr "Pasek &porad"
 
 msgid "&Keybar visible"
-msgstr "Pasek klawiszy"
+msgstr "Pasek &klawiszy"
 
 msgid "command &Prompt"
-msgstr "Napis zachêty"
+msgstr "Napis &zachêty"
 
 msgid "show &Mini status"
-msgstr "Wiersz stanu"
+msgstr "&Wiersz stanu"
 
 msgid "menu&Bar visible"
-msgstr "Pasek menu"
+msgstr "Pasek &menu"
 
 msgid "&Equal split"
-msgstr "Równy podzia³"
+msgstr "&Równy podzia³"
 
 msgid "pe&Rmissions"
-msgstr "Uprawnienia"
+msgstr "&Uprawnienia"
 
 msgid "&File types"
-msgstr "Typy plików"
+msgstr "&Typy plików"
 
 msgid " Panel split "
 msgstr " Podzia³ na panele "
@@ -2056,7 +2049,7 @@ msgid "Learn keys"
 msgstr "Definiuj klawisze"
 
 msgid " Teach me a key "
-msgstr " Nauka klawisza "
+msgstr " Nauka klawiszy "
 
 #, c-format
 msgid ""
@@ -2356,7 +2349,6 @@ msgstr ""
 "Wszelkie komunikaty o b³êdach (wraz z wyj¶ciem \"mc -V\")\n"
 "wysy³aj na adres mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2385,18 +2377,20 @@ msgstr ""
 "domy¶lne\n"
 "\n"
 "S³owa kluczowe:\n"
-"   Globalne:            errors, reverse, gauge, input\n"
+"   Globalne:            errors, reverse, gauge, input, viewunderline\n"
 "   Wy¶wietlanie plików: normal, selected, marked, markselect\n"
-"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                        errdhotfocus"
 "   Menu:                menu, menuhot, menusel, menuhotsel\n"
-"   Pomoc:               helpnormal, helpitalic, helplink, helpslink\n"
-"   Typy plików:         directory, executable, link, stalelink, device, "
-"special, core\n"
+"   Edytor:              editnormal, editbold, editmarked\n"
+"   Pomoc:               helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Typy plików:         directory, executable, link, stalelink, device,\n"
+"                        special, core\n"
 "\n"
 "Kolory:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
+"   brightcyan, lightgray oraz white\n"
 "\n"
 
 msgid "Displays this help message"
@@ -2602,7 +2596,7 @@ msgid "Usage:"
 msgstr "U¿ycie:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[urz]"
 
 msgid "UP--DIR"
 msgstr "NADRZEDN"
@@ -2709,10 +2703,13 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"Jest ju¿ GNU Midnight Commander\n"
+"dzia³aj±cy na tym terminalu.\n"
+"Podpow³oka nie bêdzie dostêpna."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Nie mo¿na otworzyæ nazwanego ³±cza %s\n"
+msgstr "Nie mo¿na otworzyæ nazwanego potoku %s\n"
 
 msgid " The shell is still active. Quit anyway? "
 msgstr " Pow³oka jest wci±¿ aktywna. Zakoñczyæ pomimo tego? "
@@ -2728,7 +2725,7 @@ msgid "Using system-installed S-Lang library"
 msgstr "U¿ywanie biblioteki S-Lang zainstalowanej w systemie"
 
 msgid "Using included S-Lang library"
-msgstr "U¿ywanie w³±czonej biblioteki S-Lang"
+msgstr "U¿ywanie do³±czonej biblioteki S-Lang"
 
 msgid "with termcap database"
 msgstr "z baz± danych termcap"
@@ -2842,7 +2839,7 @@ msgid " False: "
 msgstr " Fa³sz: "
 
 msgid " Warning -- ignoring file "
-msgstr " Ostrze¿enie -- ignorowanie pliku "
+msgstr " Ostrze¿enie -- plik zignorowano "
 
 #, c-format
 msgid ""
@@ -2871,7 +2868,7 @@ msgstr "%s to nie katalog\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Katalog %s nie nale¿y do ciebie\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
@@ -2895,12 +2892,11 @@ msgstr " Funkcja pipe nie powiod³a siê "
 msgid " Dup failed "
 msgstr " Funkcja dup nie powiod³a siê "
 
-#, fuzzy
 msgid " Cannot spawn child process "
-msgstr " Nie mo¿na uruchomiæ programu potomnego "
+msgstr " Nie mo¿na wystartowaæ programu potomnego "
 
 msgid "Empty output from child filter"
-msgstr "Puste wyj¶cie filtra"
+msgstr "Puste wyj¶cie filtru"
 
 #, c-format
 msgid ""
@@ -2931,15 +2927,15 @@ msgstr "Przesuniêcie 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr "Wrsz %lu Kol %lu"
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bajtów"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s bajtów"
+msgstr ">= %s bajtów"
 
 #, c-format
 msgid ""
@@ -2947,15 +2943,20 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+" B³±d przy zamykaniu pliku: \n"
+" %s \n"
+" Dane mog³y nie zostaæ zapisane. "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " B³±d przy próbie zapisu pliku. "
+msgstr ""
+" B³±d przy próbie zapisu: \n"
+" %s "
 
 msgid "Invalid hex search expression"
-msgstr " Niepoprawne szesnastkowe wyra¿enie wyszukiwania "
+msgstr "Niepoprawne szesnastkowe wyra¿enie wyszukiwania"
 
 msgid " Invalid regular expression "
 msgstr " Niepoprawne wyra¿enie regularne "
@@ -2983,58 +2984,58 @@ msgid " Enter regexp:"
 msgstr " Wprowad¼ wyra¿enie regularne: "
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|Pomoc"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar|Koñcz"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "ButtonBar|ASCII"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "ButtonBar|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "ButtonBar|Id¼ do"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "ButtonBar|Wiersz"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|Podgld"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|Edycja"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|Zapisz"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "ButtonBar|Odwiñ"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "ButtonBar|Zawiñ"
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "ButtonBar|SzukWR"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|SzukHx"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|Szukaj"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "ButtonBar|Orygn³"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Analiz"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "ButtonBar|BezFrm"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ButtonBar|Format"
 
 msgid " History "
 msgstr "Historia "
@@ -3341,17 +3342,15 @@ msgstr "ftpfs: wysy³anie nazwy u¿ytkownika"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: wysy³anie has³a u¿ytkownika"
 
-#, fuzzy, c-format
+#, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Wymagane has³o dla "
+msgstr "FTP: Wymagane jest konto dla u¿ytkownika %s"
 
-#, fuzzy
 msgid "Account:"
-msgstr "Liczba"
+msgstr "Konto:"
 
-#, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: wysy³anie has³a u¿ytkownika"
+msgstr "ftpfs: wysy³anie konta u¿ytkownika"
 
 msgid "ftpfs: logged in"
 msgstr "ftpfs: zalogowany"
@@ -3553,7 +3552,7 @@ msgstr " przy rozpoczynaniu przeszukiwania i-wêz³ów %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: wczytywanie informacji o usuniêtych plikach %d"
+msgstr "undelfs: ³adowanie informacji o usuniêtych plikach %d wêz³ów"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
@@ -3615,6 +3614,9 @@ msgstr "B³±d wewnêtrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld bloków)"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Otwarcie pliku do odczytu nie powiod³o siê: "
