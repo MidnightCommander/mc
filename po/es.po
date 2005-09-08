@@ -2982,58 +2982,58 @@ msgid " Enter regexp:"
 msgstr " Teclee la expresión regular:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "Ajuda"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "Salir"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "Ir a"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "Linea"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "Ver"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Guarda"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "Desple"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "Plegar"
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "BúsqRx"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "BúsqHx"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "Buscar"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Crudo"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "Proces"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "SinFor"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "Format"
 
 msgid " History "
 msgstr " Historia "
@@ -3612,38 +3612,3 @@ msgstr "Error interno:"
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
 
-#~ msgid "Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "Hex"
-#~ msgstr "Hex"
-
-#~ msgid "Goto"
-#~ msgstr "Ir a"
-
-#~ msgid "Line"
-#~ msgstr "Línea"
-
-#~ msgid "RxSrch"
-#~ msgstr "BúsqRx"
-
-#~ msgid "UnWrap"
-#~ msgstr "Desple"
-
-#~ msgid "Wrap"
-#~ msgstr "Plegar"
-
-#~ msgid "HxSrch"
-#~ msgstr "BúsqHx"
-
-#~ msgid "Raw"
-#~ msgstr "Crudo"
-
-#~ msgid "Parse"
-#~ msgstr "Procesado"
-
-#~ msgid "Unform"
-#~ msgstr "SinForm"
-
-#~ msgid "Format"
-#~ msgstr "Formato"
