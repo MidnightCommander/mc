@@ -28,50 +28,51 @@ Contributors:
 
 Adam Byrtek <alpha@debian.org>
 
-Alexander Serkov <serkov@ukrpost.net>
-Console saving on FreeBSD.
-
-Alessandro Rubini <rubini@ipvvis.unipv.it>
-Mouse support.
-
-Alexander Dong <ado@software-ag.de>
-OS/2 port.
-
 Adam Tla/lka <atlka@sunrise.pg.gda.pl>
 
+Alexander Serkov <serkov@ukrpost.net>
+	Console saving on FreeBSD.
+
+Alessandro Rubini <rubini@ipvvis.unipv.it>
+	Mouse support.
+
+Alexander Dong <ado@software-ag.de>
+	OS/2 port.
+
 Alex I. Tkachenko <alex@bcs.zp.ua>
-SCO UNIX support.
+	SCO UNIX support.
 
 Antonio Palama, DOS port <palama@posso.dm.unipi.it>
-DOS port.
+	DOS port.
 
 Erwin van Eijk <wabbit@corner.iaf.nl>
 
 Gerd Knorr <kraxel@cs.tu-berlin.de>
+
+Ilya Rybkin <rybkin@rouge.phys.lsu.edu>
+
 Jean-Daniel Luiset <luiset@cih.hcuge.ch>
+
+John Davis <davis@space.mit.edu>
+	Wrote S-Lang library and answered questions about it.
 
 Jon Stevens <root@dolphin.csudh.edu>
 
 Juan Francisco Grigera <j-grigera@usa.net>
-Win32 port.
+	Win32 port.
 
 Juan Jose Ciarlante <jjciarla@raiz.uncu.edu.ar>
 
-Ilya Rybkin <rybkin@rouge.phys.lsu.edu>
-
-John Davis <davis@space.mit.edu>
-Wrote S-Lang library and answered questions about it.
-
 Leonard den Ottolander <leonard * den ottolander nl>
-Reworking and pushing downstream (security) patches for 4.6.0.
-Vfs/extfs quoting fixes
+	Reworking and pushing downstream (security) patches for 4.6.0.
+	Vfs/extfs quoting fixes
 
 Marcelo Roccasalva <mfroccas@raiz.uncu.edu.ar>
 
 Massimo Fontanelli <MC8737@mclink.it>
 
 Pavel Shirshov <me@pavelsh.pp.ru>
-Committing downstream (security) patches for 4.6.0.
+	Committing downstream (security) patches for 4.6.0.
 
 Sergey Ya. Korshunoff <root@seyko.msk.su>
 
@@ -86,9 +87,9 @@ Torben Fjerdingstad <torben.fjerdingstad@uni-c.dk>
 Vadim Sinolitis <vvs@nsrd.npi.msu.su>
 
 Walery Studennikov <despair@sama.ru>
-Charset conversion support.
+	Charset conversion support.
 
 Wayne Roberts <wroberts1@home.com>
-SMBfs support.
+	SMBfs support.
 
 Wim Osterholt <wim@djo.wtm.tudelft.nl>
