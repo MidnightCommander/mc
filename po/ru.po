@@ -1,35 +1,38 @@
+# translation of ru.po to Русский
 # Russian translation of Midnight Commander
-# Copyright (C) 1998-2003 Free Software Foundation, Inc.
-# 
-# Current translators: Andrew V. Samoilov <sav@bcs.zp.ua>, 2000-2003
-# 	Pavel Roskin <proski@gnu.org>, 2001-2004
+# Copyright (C) 1998-2003, 2005 Free Software Foundation, Inc.
+# Current translators: Anton S. Chumak <nightfast@yahoo.co.uk>
 # Based on work of
-# 	Valek Filippov <frob@df.ru>, 2000
-# 	Evgeny Bulgakov <bgav@netvision.net.il>, 1999,
-# 	Sergey Panov <sipan@mit.edu>, 1999,
-# 	Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 2000-2003.
+# 	Pavel Roskin <proski@gnu.org>, 2001-2004.
+# 	Valek Filippov <frob@df.ru>, 2000.
+# 	Evgeny Bulgakov <bgav@netvision.net.il>, 1999,.
+# 	Sergey Panov <sipan@mit.edu>, 1999,.
+# 	Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.0\n"
+"Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2003-07-09 12:27+0300\n"
-"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"POT-Creation-Date: 2005-09-07 15:55-0400\n"
+"PO-Revision-Date: 2005-09-09 14:37+0300\n"
+"Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
+"Language-Team: Russian ru@li.org\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=KOI8-R\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 
 msgid " Choose syntax highlighting "
-msgstr "Выбор цветовыделения синтаксиса"
+msgstr "\tВыбор цветовыделения синтаксиса"
 
 msgid "< Auto >"
 msgstr "< Автоматически >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "Перезагрузить текущее цветовыделение"
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -60,6 +63,9 @@ msgstr " Файл %s слишком большой "
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
 
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
@@ -212,10 +218,8 @@ msgstr " Заменить "
 msgid "Search"
 msgstr "Поиск"
 
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Неверное регулярное выражение или в scanf-формате много преобразований"
+msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgstr " Неверное регулярное выражение или в scanf-формате много преобразований"
 
 msgid " Error in replacement format string. "
 msgstr " Ошибка в формате строки замены. "
@@ -350,9 +354,6 @@ msgstr " Нажмите любую клавишу: "
 
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
@@ -528,6 +529,9 @@ msgstr "&Распознавание клавиш..."
 msgid "Syntax &Highlighting..."
 msgstr "&Цветовыделение синтаксиса..."
 
+msgid "Save setu&p..."
+msgstr "&Сохранить настройки"
+
 msgid " File "
 msgstr " Файл "
 
@@ -601,7 +605,7 @@ msgid "Help"
 msgstr "Помощь"
 
 msgid "Save"
-msgstr "Запись"
+msgstr "Сохранить"
 
 msgid "Mark"
 msgstr "Блок"
@@ -638,51 +642,55 @@ msgstr " Ошибка в файле %s в строке %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "bind: Не верное количество аргументов, bind <клавиша> <команда>"
 
 #, c-format
+#, fuzzy
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "Неподходящее значение клавиши `%s' "
 
 #, c-format
+#, fuzzy
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "bind: М-мм... нет клавиши?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "bind: Неизвестная клавиша: `%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " Команда chown "
+msgstr "bind: Неизвестная команда.`%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "%s: Unknown command: `%s'"
-msgstr " Команда chown "
+msgstr "%s: Синтаксис: %s <n> <command> <label>"
 
 #, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "%s: Неизвестная команда: `%s'"
+
+#, c-format
+#, fuzzy
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: fn должно быть 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " Команда chown "
+msgstr "%s:%d: неизвестная команда `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
 #, c-format
+#, fuzzy
 msgid "%s not found!"
-msgstr ""
+msgstr "%s не найдено!"
 
 msgid "&Set"
 msgstr "&Установить"
@@ -1256,31 +1264,29 @@ msgstr ""
 msgid " Parameter "
 msgstr " Параметр "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s%s file error"
-msgstr " ошибка файла "
+msgstr " %s%s ошибка файла "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"mc.ext изменен\n"
-"с версии 3.0. Возможно, произошел сбой при установке.\n"
-"Пожалуйста, возьмите свежую копию из пакета\n"
-"Midnight Commander."
+"формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
+"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " ошибка файла "
+msgstr " ошибка файла ~/%s"
 
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
-msgstr ""
+msgstr "формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с %smc.ext либо использовать этот файл как пример и написать свой."
 
 msgid " Copy "
 msgstr " Копирование "
@@ -1689,21 +1695,21 @@ msgstr "дописать в &Конец"
 msgid "Overwrite this target?"
 msgstr "Переписать этот файл?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Дата модификации приемника: %s, длина %llu"
+msgstr "Дата модификации приемника: %s, размер %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Дата модификации источника: %s, длина %llu"
+msgstr "Дата модификации источника: %s, размер %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
-msgstr "Дата модификации приемника: %s, длина %u"
+msgstr "Дата модификации приемника: %s, размер %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
-msgstr "Дата модификации источника: %s, длина %u"
+msgstr "Дата модификации источника: %s, размер %u"
 
 msgid " File exists "
 msgstr " Файл существует "
@@ -1765,7 +1771,7 @@ msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
 msgid "find Re&cursively"
-msgstr ""
+msgstr "найти Ре&крусивно"
 
 msgid "Start at:"
 msgstr "От каталога:"
@@ -1825,7 +1831,7 @@ msgid "&Insert"
 msgstr "В &начало"
 
 msgid "New &Entry"
-msgstr "Новая &запись"
+msgstr "Новый &элемент"
 
 msgid "New &Group"
 msgstr "Новая &группа"
@@ -1852,7 +1858,7 @@ msgid "Active VFS directories"
 msgstr "Активные каталоги ВФС"
 
 msgid "Directory hotlist"
-msgstr " Справочник каталогов "
+msgstr " Каталоги быстрого доступа"
 
 msgid " Directory path "
 msgstr " Путь к каталогу "
@@ -1865,7 +1871,7 @@ msgid "Moving %s"
 msgstr "Перемещаем %s"
 
 msgid "New hotlist entry"
-msgstr " Добавление записи в справочник "
+msgstr "Новый элемент быстрого доступа"
 
 msgid "Directory label"
 msgstr " Метка каталога"
@@ -1874,7 +1880,7 @@ msgid "Directory path"
 msgstr " Путь к каталогу"
 
 msgid " New hotlist group "
-msgstr " Добавление группы в справочник "
+msgstr "Новая группа быстрого доступа"
 
 msgid "Name of new group"
 msgstr " Имя новой группы"
@@ -1884,7 +1890,7 @@ msgid "Label for \"%s\":"
 msgstr " Метка для \"%s\": "
 
 msgid " Add to hotlist "
-msgstr " Добавить в справочник каталогов "
+msgstr " Добавить быстрый доступ к папке"
 
 msgid " Remove: "
 msgstr " Удалить: "
@@ -1905,10 +1911,10 @@ msgid "MC was unable to write ~/"
 msgstr "MC не может писать в файл ~/,"
 
 msgid " file, your old hotlist entries were not deleted"
-msgstr "Ваш старый справочник каталогов не удален"
+msgstr " file, Ваши старые элементы быстрого доступа небыли удалены"
 
 msgid " Hotlist Load "
-msgstr " Загрузка справочника "
+msgstr " Загрузка списка быстрого доступа "
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1955,25 +1961,24 @@ msgstr "Обращение: %s"
 msgid "Modified:  %s"
 msgstr "Изменен:   %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
-msgstr "Создан:    %s"
+msgid "Status:    %s"
+msgstr "Cтатус:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Тип устройства: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "Размер:    %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld блок)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld блоков)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блок)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2237,7 +2242,7 @@ msgid "command &History"
 msgstr "&История команд"
 
 msgid "di&Rectory hotlist    C-\\"
-msgstr "Справочник ката&логов  C-\\"
+msgstr "Быстрый доступ к ката&логам  C-\\"
 
 msgid "&Active VFS list      C-x a"
 msgstr "Список &активных ВФС   C-x a"
@@ -2347,7 +2352,6 @@ msgstr ""
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2372,15 +2376,15 @@ msgid ""
 msgstr ""
 "--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
 "\n"
-"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значение по умолчанию\n"
+"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
-"   Общие:        errors, reverse, gauge, input\n"
-"   Панели:       normal, selected, marked, markselect\n"
-"   Диалоги:      dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Меню:         menu, menuhot, menusel, menuhotsel\n"
-"   Справка:      helpnormal, helpitalic, helplink, helpslink\n"
-"   Типы файлов:  directory, executable, link, stalelink, device, special, "
+"   Обшие:              errors, reverse, gauge, input\n"
+"   Отображение файлов: normal, selected, marked, markselect\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Меню:               menu, menuhot, menusel, menuhotsel\n"
+"   Справка:            helpnormal, helpitalic, helplink, helpslink\n"
+"   Типы файлов:        directory, executable, link, stalelink, device, special, "
 "core\n"
 "\n"
 "Цвета:\n"
@@ -2592,7 +2596,7 @@ msgid "Usage:"
 msgstr "Используйте:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "-ВВЕРХ-"
@@ -2848,7 +2852,7 @@ msgstr ""
 
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " Не найдено подходящих записей в %s"
+msgstr " Не найдено подходящих элементов в %s"
 
 msgid " User menu "
 msgstr " Меню пользователя "
@@ -2924,7 +2928,7 @@ msgstr "Смещение 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr "Строка %lu Позиция %lu"
 
 #, c-format
 msgid "%s bytes"
@@ -2940,6 +2944,9 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+"Ошибка при закрытии файла: \n"
+" %s \n"
+"Данные могли быть как записаны так и нет."
 
 #, c-format
 msgid ""
@@ -2978,58 +2985,60 @@ msgid " Enter regexp:"
 msgstr " Введите регулярное выражение:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "Нижняя панель|Помощ"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "Нижняя панель|Выход"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Нижняя панель|Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Нижняя панель|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "Нижняя панель|Переход"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "Нижняя панель|Строка"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "Нижняя панель|Вид"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "Нижняя панель|Правка"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Нижняя панель|Сохранить"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "Нижняя панель|НеПеренос."
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "Нижняя панель|Перенос."
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "Нижняя панель|RxПоиск"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "Нижняя панель|HxПоиск"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "Нижняя панель|Поиск"
 
+#, fuzzy
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Нижняя панель|Как есть"
 
+#, fuzzy
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Фильтр"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "Нижняя панель|НеФормат."
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "Нижняя панель|Формат."
 
 msgid " History "
 msgstr "История команд"
@@ -3219,7 +3228,7 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s содержит сдвоенные записи! Пропущено!"
+msgstr "%s содержит сдвоенные элементы! Пропущено!"
 
 #, c-format
 msgid ""
@@ -3607,79 +3616,3 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
-
-#~ msgid " Not an ordinary file: "
-#~ msgstr " Необычный файл: "
-
-#~ msgid "Format of the "
-#~ msgstr "Формат файла "
-
-#~ msgid ""
-#~ " file has changed\n"
-#~ "with version 3.0. You may want either to\n"
-#~ "copy it from "
-#~ msgstr ""
-#~ " изменен\n"
-#~ "в версии 3.0. Вы можете или\n"
-#~ "скопировать его из "
-
-#~ msgid ""
-#~ "mc.ext or use that\n"
-#~ "file as an example of how to write it.\n"
-#~ msgstr ""
-#~ "mc.ext, или использовать этот\n"
-#~ "файл как пример написания.\n"
-
-#~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext будет использован в настоящий момент."
-
-#~ msgid " Cannot open file "
-#~ msgstr " Невозможно открыть файл "
-
-#~ msgid "Col %d"
-#~ msgstr "Ст. %d"
-
-#~ msgid "  [grow]"
-#~ msgstr "  [рост]"
-
-#~ msgid "Ascii"
-#~ msgstr "Текст"
-
-#~ msgid "Hex"
-#~ msgstr "Hex"
-
-#~ msgid "Goto"
-#~ msgstr "Переход"
-
-#~ msgid "Line"
-#~ msgstr "Строка"
-
-#~ msgid "RxSrch"
-#~ msgstr "РегВыр"
-
-#~ msgid "EdHex"
-#~ msgstr "HxРедак"
-
-#~ msgid "EdText"
-#~ msgstr "ТкстРед"
-
-#~ msgid "UnWrap"
-#~ msgstr "НеПерен"
-
-#~ msgid "Wrap"
-#~ msgstr "Перенос"
-
-#~ msgid "HxSrch"
-#~ msgstr "HxПоиск"
-
-#~ msgid "Raw"
-#~ msgstr "Сырой"
-
-#~ msgid "Parse"
-#~ msgstr "Готовый"
-
-#~ msgid "Unform"
-#~ msgstr "НеФормт"
-
-#~ msgid "Format"
-#~ msgstr "Формат"
