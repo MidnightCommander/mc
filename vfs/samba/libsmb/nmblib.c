@@ -503,7 +503,7 @@ static BOOL parse_nmb(char *inbuf,int length,struct nmb_packet *nmb)
 
   return(True);
 }
-
+#if 0
 /*******************************************************************
   'Copy constructor' for an nmb packet
   ******************************************************************/
@@ -613,7 +613,7 @@ struct packet_struct *copy_packet(struct packet_struct *packet)
     return copy_dgram_packet(packet);
   return NULL;
 }
- 
+#endif	/* 0 */
 /*******************************************************************
   free up any resources associated with an nmb packet
   ******************************************************************/
@@ -788,14 +788,14 @@ void make_nmb_name( struct nmb_name *n, const char *name, int type )
 /*******************************************************************
   Compare two nmb names
   ******************************************************************/
-
+#if 0
 BOOL nmb_name_equal(struct nmb_name *n1, struct nmb_name *n2)
 {
   return ((n1->name_type == n2->name_type) &&
          strequal(n1->name ,n2->name ) &&
          strequal(n1->scope,n2->scope));
 }
-
+#endif	/* 0 */
 /*******************************************************************
   build a nmb packet ready for sending
 

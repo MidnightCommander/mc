@@ -2809,14 +2809,6 @@ void dump_data(int level,char *buf1,int len)
   }
 }
 
-char *tab_depth(int depth)
-{
-	static pstring spaces;
-	memset(spaces, ' ', depth * 4);
-	spaces[depth * 4] = 0;
-	return spaces;
-}
-
 /*****************************************************************************
  * Provide a checksum on a string
  *

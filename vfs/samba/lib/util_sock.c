@@ -459,7 +459,7 @@ static ssize_t read_smb_length_return_keepalive(int fd,char *inbuf,unsigned int 
 
   return(len);
 }
-
+#if 0
 /****************************************************************************
 read 4 bytes of a smb packet and return the smb length of the packet
 store the result in the buffer. This version of the function will
@@ -486,7 +486,7 @@ ssize_t read_smb_length(int fd,char *inbuf,unsigned int timeout)
 
   return len;
 }
-
+#endif	/* 0 */
 /****************************************************************************
   read an smb from a fd. Note that the buffer *MUST* be of size
   BUFFER_SIZE+SAFETY_MARGIN.
@@ -564,7 +564,7 @@ BOOL client_receive_smb(int fd,char *buffer, unsigned int timeout)
 /****************************************************************************
   send an null session message to a fd
 ****************************************************************************/
-
+#if 0
 BOOL send_null_session_msg(int fd)
 {
   ssize_t ret;
@@ -656,7 +656,7 @@ BOOL send_one_packet(char *buf,int len,struct in_addr ip,int port,int type)
   close(out_fd);
   return(ret);
 }
-
+#endif	/* 0 */
 
 /****************************************************************************
 open a socket of the specified type, port and address for incoming data

@@ -1,3 +1,13 @@
+2005-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/lib/util.c (tab_depth): Remove.
+	* samba/include/byteorder.h: Remove all macroces with tab_depth().
+	* vfs/samba/lib/util_sock.c: Comment out read_smb_length(),
+	send_null_session_msg(), send_one_packet(), send_smd()
+	and read_smb_length().
+	* vfs/samba/libsmb/nmblib.c: Comment out copy_nmb_packet(),
+	copy_dgram_packet(), copy_packet() and nmb_name_equal().
+
 2005-09-07  Roland Illig  <roland.illig@gmx.de>
 
 	* samba/*: Added many const qualifiers to properly fix the
