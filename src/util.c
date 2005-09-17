@@ -99,7 +99,8 @@ is_printable (int c)
 }
 
 /* Calculates the message dimensions (lines and columns) */
-void msglen (const char *text, int *lines, int *columns)
+void
+msglen (const char *text, int *lines, int *columns)
 {
     int nlines = 1; /* even the empty string takes one line */
     int ncolumns = 0;
@@ -265,7 +266,8 @@ path_trunc (const char *path, int trunc_len) {
     return ret;
 }
 
-const char *size_trunc (double size)
+const char *
+size_trunc (double size)
 {
     static char x [BUF_TINY];
     long int divisor = 1;
@@ -283,7 +285,8 @@ const char *size_trunc (double size)
     return x;
 }
 
-const char *size_trunc_sep (double size)
+const char *
+size_trunc_sep (double size)
 {
     static char x [60];
     int  count;
@@ -357,7 +360,8 @@ size_trunc_len (char *buffer, int len, off_t size, int units)
     }
 }
 
-int is_exe (mode_t mode)
+int
+is_exe (mode_t mode)
 {
     if ((S_IXUSR & mode) || (S_IXGRP & mode) || (S_IXOTH & mode))
 	return 1;
@@ -480,7 +484,8 @@ strip_password (char *p, int has_prefix)
     return (result);
 }
 
-const char *strip_home_and_password(const char *dir)
+const char *
+strip_home_and_password(const char *dir)
 {
     size_t len;
     static char newdir [MC_MAXPATHLEN];
@@ -499,7 +504,8 @@ const char *strip_home_and_password(const char *dir)
     return newdir;
 }
 
-static char *maybe_start_group (char *d, int do_group, int *was_wildcard)
+static char *
+maybe_start_group (char *d, int do_group, int *was_wildcard)
 {
     if (!do_group)
 	return d;
@@ -511,7 +517,8 @@ static char *maybe_start_group (char *d, int do_group, int *was_wildcard)
     return d;
 }
 
-static char *maybe_end_group (char *d, int do_group, int *was_wildcard)
+static char *
+maybe_end_group (char *d, int do_group, int *was_wildcard)
 {
     if (!do_group)
 	return d;
@@ -526,7 +533,8 @@ static char *maybe_end_group (char *d, int do_group, int *was_wildcard)
 /* If shell patterns are on converts a shell pattern to a regular
    expression. Called by regexp_match and mask_rename. */
 /* Shouldn't we support [a-fw] type wildcards as well ?? */
-char *convert_pattern (const char *pattern, int match_type, int do_group)
+char *
+convert_pattern (const char *pattern, int match_type, int do_group)
 {
     char *d;
     char *new_pattern;
@@ -572,7 +580,8 @@ char *convert_pattern (const char *pattern, int match_type, int do_group)
 	return  g_strdup (pattern);
 }
 
-int regexp_match (const char *pattern, const char *string, int match_type)
+int
+regexp_match (const char *pattern, const char *string, int match_type)
 {
     static regex_t r;
     static char *old_pattern = NULL;
@@ -598,18 +607,21 @@ int regexp_match (const char *pattern, const char *string, int match_type)
     return rval;
 }
 
-const char *extension (const char *filename)
+const char *
+extension (const char *filename)
 {
     const char *d = strrchr (filename, '.');
     return (d != NULL) ? d + 1 : "";
 }
 
-int get_int (const char *file, const char *key, int def)
+int
+get_int (const char *file, const char *key, int def)
 {
     return GetPrivateProfileInt (app_text, key, def, file);
 }
 
-int set_int (const char *file, const char *key, int value)
+int
+set_int (const char *file, const char *key, int value)
 {
     char buffer [BUF_TINY];
 
@@ -631,12 +643,14 @@ set_config_string (const char *file, const char *key, const char *val)
     (void)WritePrivateProfileString (app_text, key, val, file);
 }
 
-int exist_file (const char *name)
+int
+exist_file (const char *name)
 {
     return access (name, R_OK) == 0;
 }
 
-char *load_file (const char *filename)
+char *
+load_file (const char *filename)
 {
     FILE *data_file;
     struct stat s;
@@ -706,7 +720,8 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different
 short-month-name sizes for different locales */ 
-size_t i18n_checktimelength (void)
+size_t
+i18n_checktimelength (void)
 {
     size_t length, a, b;
     char buf [MAX_I18NTIMELENGTH + 1];
@@ -724,7 +739,8 @@ size_t i18n_checktimelength (void)
     return length;
 }
 
-const char *file_date (time_t when)
+const char *
+file_date (time_t when)
 {
     static char timebuf [MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
@@ -758,7 +774,8 @@ const char *file_date (time_t when)
     return timebuf;
 }
 
-const char *extract_line (const char *s, const char *top)
+const char *
+extract_line (const char *s, const char *top)
 {
     static char tmp_line [BUF_MEDIUM];
     char *t = tmp_line;
@@ -770,7 +787,8 @@ const char *extract_line (const char *s, const char *top)
 }
 
 /* FIXME: I should write a faster version of this (Aho-Corasick stuff) */
-const char * _icase_search (const char *text, const char *data, int *lng)
+const char *
+_icase_search (const char *text, const char *data, int *lng)
 {
     const char *d = text;
     const char *e = data;
@@ -800,14 +818,16 @@ const char * _icase_search (const char *text, const char *data, int *lng)
 }
 
 /* The basename routine */
-const char *x_basename (const char *s)
+const char *
+x_basename (const char *s)
 {
     const char  *where;
     return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 
 
-const char *unix_error_string (int error_num)
+const char *
+unix_error_string (int error_num)
 {
     static char buffer [BUF_LARGE];
 #if GLIB_MAJOR_VERSION >= 2
@@ -824,7 +844,8 @@ const char *unix_error_string (int error_num)
     return buffer;
 }
 
-const char *skip_separators (const char *s)
+const char *
+skip_separators (const char *s)
 {
     for (;*s; s++)
 	if (*s != ' ' && *s != '\t' && *s != ',')
@@ -832,7 +853,8 @@ const char *skip_separators (const char *s)
     return s;
 }
 
-const char *skip_numbers (const char *s)
+const char *
+skip_numbers (const char *s)
 {
     for (;*s; s++)
 	if (!isdigit ((unsigned char) *s))
@@ -853,7 +875,8 @@ const char *skip_numbers (const char *s)
  * Non-printable characters are also removed.
  */
 
-char *strip_ctrl_codes (char *s)
+char *
+strip_ctrl_codes (char *s)
 {
     char *w; /* Current position where the stripped data is written */
     char *r; /* Current position where the original data is read */
@@ -888,7 +911,8 @@ char *strip_ctrl_codes (char *s)
 
 
 #ifndef USE_VFS
-char *get_current_wd (char *buffer, int size)
+char *
+get_current_wd (char *buffer, int size)
 {
     char *p;
     int len;
@@ -972,7 +996,8 @@ decompress_extension (int type)
 }
 
 /* Hooks */
-void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
+void
+add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
 {
     Hook *new_hook = g_new (Hook, 1);
 
@@ -983,7 +1008,8 @@ void add_hook (Hook **hook_list, void (*hook_fn)(void *), void *data)
     *hook_list = new_hook;
 }
 
-void execute_hooks (Hook *hook_list)
+void
+execute_hooks (Hook *hook_list)
 {
     Hook *new_hook = 0;
     Hook *p;
@@ -1010,7 +1036,8 @@ void execute_hooks (Hook *hook_list)
     }
 }
 
-void delete_hook (Hook **hook_list, void (*hook_fn)(void *))
+void
+delete_hook (Hook **hook_list, void (*hook_fn)(void *))
 {
     Hook *current, *new_list, *next;
 
@@ -1026,7 +1053,8 @@ void delete_hook (Hook **hook_list, void (*hook_fn)(void *))
     *hook_list = new_list;
 }
 
-int hook_present (Hook *hook_list, void (*hook_fn)(void *))
+int
+hook_present (Hook *hook_list, void (*hook_fn)(void *))
 {
     Hook *p;
     
@@ -1036,7 +1064,8 @@ int hook_present (Hook *hook_list, void (*hook_fn)(void *))
     return 0;
 }
 
-void wipe_password (char *passwd)
+void
+wipe_password (char *passwd)
 {
     char *p = passwd;
     
@@ -1049,7 +1078,8 @@ void wipe_password (char *passwd)
 
 /* Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key */
 /* Returns a newly allocated string */
-char *convert_controls (const char *p)
+char *
+convert_controls (const char *p)
 {
     char *valcopy = g_strdup (p);
     char *q;
@@ -1083,7 +1113,8 @@ char *convert_controls (const char *p)
     return valcopy;
 }
 
-static char *resolve_symlinks (const char *path)
+static char *
+resolve_symlinks (const char *path)
 {
     char *buf, *buf2, *q, *r, c;
     int len;
@@ -1117,8 +1148,8 @@ static char *resolve_symlinks (const char *path)
 	else {
 	    len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
 	    if (len < 0) {
-		 g_free (buf);
-		 g_free (buf2);
+		g_free (buf);
+		g_free (buf2);
 		*q = c;
 		return NULL;
 	    }
@@ -1149,7 +1180,8 @@ static char *resolve_symlinks (const char *path)
 
 /* Finds out a relative path from first to second, i.e. goes as many ..
  * as needed up in first and then goes down using second */
-char *diff_two_paths (const char *first, const char *second) 
+char *
+diff_two_paths (const char *first, const char *second) 
 {
     char *p, *q, *r, *s, *buf = NULL;
     int i, j, prevlen = -1, currlen;
@@ -1216,7 +1248,6 @@ concat_dir_and_file (const char *dir, const char *file)
 	return  g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
 }
 
-
 /* Append text to GList, remove all entries with the same text */
 GList *
 list_append_unique (GList *list, char *text)
@@ -1244,7 +1275,6 @@ list_append_unique (GList *list, char *text)
 
     return list;
 }
-
 
 /* Following code heavily borrows from libiberty, mkstemps.c */
 
@@ -1328,7 +1358,6 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 
     return -1;
 }
-
 
 /*
  * Read and restore position for the given filename.
@@ -1461,7 +1490,7 @@ cstrstr (const char *haystack, const char *needle)
 extern char *
 str_unconst (const char *s)
 {
-	return (char *) s;
+    return (char *) s;
 }
 
 #define ASCII_A		(0x40 + 1)
