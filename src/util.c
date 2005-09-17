@@ -1151,22 +1151,20 @@ static char *resolve_symlinks (const char *path)
  * as needed up in first and then goes down using second */
 char *diff_two_paths (const char *first, const char *second) 
 {
-    char *p, *q, *r, *s, *buf = 0;
+    char *p, *q, *r, *s, *buf = NULL;
     int i, j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
     
     my_first = resolve_symlinks (first);
     if (my_first == NULL)
         return NULL;
+    my_second = resolve_symlinks (second);
+    if (my_second == NULL) {
+	g_free (my_first);
+	return NULL;
+    }
     for (j = 0; j < 2; j++) {
 	p = my_first;
-	if (j) {
-	    my_second = resolve_symlinks (second);
-	    if (my_second == NULL) {
-		g_free (my_first);
-	        return buf;
-	    }
-	}
 	q = my_second;
 	for (;;) {
 	    r = strchr (p, PATH_SEP);
@@ -1190,15 +1188,15 @@ char *diff_two_paths (const char *first, const char *second)
 	    if (currlen < prevlen)
 	        g_free (buf);
 	    else {
-		 g_free (my_first);
-		 g_free (my_second);
+		g_free (my_first);
+		g_free (my_second);
 		return buf;
 	    }
 	}
 	p = buf = g_malloc (currlen);
 	prevlen = currlen;
 	for (; i >= 0; i--, p += 3)
-	  strcpy (p, "../");
+	    strcpy (p, "../");
 	strcpy (p, q);
     }
     g_free (my_first);

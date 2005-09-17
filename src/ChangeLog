@@ -1,3 +1,8 @@
+2005-09-17  Jindrich Novy  <jnovy@redhat.com>
+
+	* util.c (diff_two_paths): Abort when second symlink can't be
+	resolved (fixes segfault).
+
 2005-09-07  Roland Illig  <roland.illig@gmx.de>
 
 	* setup.c: Renamed options[] to int_options[].
@@ -8,7 +13,6 @@
 	string configuration variable, which allows the backup extension
 	to have more than just four characters. Added generic support
 	for string options.
-
 
 2005-09-06  Roland Illig  <roland.illig@gmx.de>
 
