@@ -381,7 +381,7 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 	const char *r = strrchr (src_path, PATH_SEP);
 
 	if (r) {
-	    p = g_strndup (src_path, r - src_path);
+	    p = g_strndup (src_path, r - src_path + 1);
 	    if (*dst_path == PATH_SEP)
 		q = g_strdup (dst_path);
 	    else

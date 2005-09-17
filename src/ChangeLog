@@ -1,5 +1,9 @@
 2005-09-17  Jindrich Novy  <jnovy@redhat.com>
 
+	* file.c (make_symlink): Fix off by one in symlink creation.
+
+2005-09-17  Jindrich Novy  <jnovy@redhat.com>
+
 	* util.c (diff_two_paths): Abort when second symlink can't be
 	resolved (fixes segfault).
 
