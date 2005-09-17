@@ -1,3 +1,8 @@
+2005-09-17  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* execute.c (do_execute): Flush stdout after printing the
+	command to be executed.
+
 2005-09-17  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* util.c: Indentation cleanup (function result types on

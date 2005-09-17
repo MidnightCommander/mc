@@ -109,6 +109,7 @@ do_execute (const char *shell, const char *command, int flags)
 
     if (!use_subshell && command && !(flags & EXECUTE_INTERNAL)) {
 	printf ("%s%s\n", prompt, command);
+	fflush (stdout);
     }
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell && !(flags & EXECUTE_INTERNAL)) {
