@@ -1,58 +1,62 @@
+# translation of uk.po to Русский
 # Originally by Yury Sirota <rasta@renome.rovno.ua>
 # 2002 Volodymyr M. Lisivka <lvm@mystery.lviv.net
 # 2003-2004 Andrew V. Samoilov <sav@bcs.zp.ua>
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.0\n"
+"Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2003-07-09 12:24+0300\n"
-"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"POT-Creation-Date: 2005-09-07 15:55-0400\n"
+"PO-Revision-Date: 2005-09-10 13:28+0300\n"
+"Last-Translator: Anton Sergeevich Chumak <nightfast@yahoo.co.uk>\n"
+"Language-Team: Русский\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-U\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
 msgstr "&П╕дсв╕тка синтаксису"
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Про програму "
+msgstr "< Авто >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Поновити нагальний синтаксис >"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " Зб╕й при спроб╕ в╕дкрити канал для читання: "
+msgstr " Не вда╓ться в╕дкрити %s для читання "
 
 msgid "Error"
 msgstr "Помилка"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Помилка читання з каналу: "
+msgstr " Помилка читання з каналу: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Зб╕й при спроб╕ в╕дкрити канал для читання: "
+msgstr " Не вда╓ться в╕дкрити канал для читання: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Не вда╓ться отримати розм╕р/права доступу для файла: "
+msgstr " Не вда╓ться отримати розм╕р/права доступу для %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr " Не вда╓ться показати: не звичайний файл "
+msgstr " %s не э звичайний файл"
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " Надто великий файл: "
+msgstr "файл %s надто великий"
 
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурс╕я макрос╕в"
+
+msgid "&Dismiss"
+msgstr "&Закрити"
 
 msgid " Enter file name: "
 msgstr " Введ╕ть назву файлу: "
@@ -93,9 +97,8 @@ msgstr "Попередження"
 msgid " A file already exists with this name. "
 msgstr " Файл з ц╕╓ю назвою вже ╕сну╓. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Зам╕стити"
+msgstr "&Зам╕стити"
 
 msgid " Cannot save file. "
 msgstr " Помилка при спроб╕ зберегти файл. "
@@ -143,9 +146,8 @@ msgstr ""
 " Поточний текст було зм╕нено ╕ не збережено. \n"
 " Продовження операц╕╖ приведе до втрати зм╕н. "
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Продовжити"
+msgstr "Пр&одовжити"
 
 msgid " Load "
 msgstr " Завантажити "
@@ -207,16 +209,14 @@ msgstr " Зам╕нити "
 msgid "Search"
 msgstr "Пошук"
 
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
+msgid " Invalid regular expression, or scanf expression with too many conversions "
 msgstr " Неправильний регулярний вираз або у scanf-формат╕ багато перетворень"
 
 msgid " Error in replacement format string. "
 msgstr " Помилка у формат╕ стр╕чки зам╕ни "
 
-#, fuzzy
 msgid " Replacement too long. "
-msgstr " Введ╕ть стр╕чку для зам╕ни:"
+msgstr " Cтр╕чкf для зам╕ни завелика."
 
 #, c-format
 msgid " %ld replacements made. "
@@ -235,9 +235,8 @@ msgstr "Вийти"
 msgid " File was modified, Save with exit? "
 msgstr " Файл було зм╕нено, зберегти при виход╕? "
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Не виходити"
+msgstr "&Не виходити"
 
 msgid "&Yes"
 msgstr "&Так"
@@ -245,12 +244,11 @@ msgstr "&Так"
 msgid "&No"
 msgstr "&Н╕"
 
-#, fuzzy
 msgid " Error "
 msgstr "Помилка"
 
 msgid " This function is not implemented. "
-msgstr ""
+msgstr "Ця функц╕я ще не реал╕зована."
 
 msgid " Copy to clipboard "
 msgstr " Скоп╕ювати у буфер "
@@ -347,9 +345,6 @@ msgstr " Натисн╕ть будь яку клав╕шу: "
 
 msgid " Execute Macro "
 msgstr " Виконати макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрити"
 
 msgid " Emacs key: "
 msgstr " Клав╕ша Emacs: "
@@ -519,13 +514,14 @@ msgstr "&Загальн╕...  "
 msgid "&Save mode..."
 msgstr "Режим &збереження..."
 
-#, fuzzy
 msgid "Learn &Keys..."
 msgstr "Вивчення к&лав╕ш..."
 
-#, fuzzy
 msgid "Syntax &Highlighting..."
 msgstr "&П╕дсв╕тка синтаксису"
+
+msgid "Save setu&p..."
+msgstr "&Зберегти налаштування"
 
 msgid " File "
 msgstr " Файл "
@@ -548,7 +544,6 @@ msgstr "╤нту╖тивна"
 msgid "Emacs"
 msgstr "Emacs"
 
-#, fuzzy
 msgid "User-defined"
 msgstr "&Визначений користувачем:"
 
@@ -638,51 +633,51 @@ msgstr " Помилка у файл╕ %s у рядку %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "bind: Помилкова к╕льк╕сть аргумент╕в bind <key> <command>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "bind: Незадов╕льне значення клав╕ши `%s'"
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "bind: Хм-м...нема клав╕ши?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "bind: Нев╕дома клав╕ша: `%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " Зм╕на власника "
+msgstr "bind: Нев╕дома команда: `%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
+msgstr "%s: Синтаксис: %s <n> <command> <label>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " Зм╕на власника "
+msgstr "%s: Нев╕дома команда: `%s'"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: fn повинна бути 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " Зм╕на власника "
+msgstr "%s: %d: нев╕дома команда: `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found!"
-msgstr "Увага: файл %s не знайдений\n"
+msgstr "%s не знайдено!"
 
 msgid "&Set"
 msgstr "Вст&aновити"
@@ -819,9 +814,8 @@ msgstr "Кодування вводу/показу:"
 msgid "&Select"
 msgstr "&Вибрати"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "Використовувати пасивний режим"
+msgstr "Використовувати пасивний режим pro&xy"
 
 msgid "Use &passive mode"
 msgstr "Використовувати пасивний режим"
@@ -1257,31 +1251,27 @@ msgstr ""
 msgid " Parameter "
 msgstr " Параметр "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s%s file error"
-msgstr " помилка файлу "
+msgstr "%s%s помилка файлу "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr ""
-"mc.ext було зм╕нено\n"
-"верс╕╓ю 3.0. Схоже що стався зб╕й при встановленн╕.\n"
-"Будь ласка в╕зьм╕ть св╕жу коп╕ю з пакета\n"
-"Midnight Commander."
+msgstr "Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Схоже що стався зб╕й при встановленн╕.Будь ласка в╕зьм╕ть св╕жу коп╕ю з пакета Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " помилка файлу "
+msgstr " помилка файлу  ~/%s"
 
 #, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
-msgstr ""
+msgstr "Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Ви можете зкоп╕ювати його з %smc.ext чи зкористуватися ним як зразком та написати св╕й."
 
 msgid " Copy "
 msgstr " Скоп╕ювати "
@@ -1689,19 +1679,19 @@ msgstr "Дописати у &к╕нець"
 msgid "Overwrite this target?"
 msgstr "Зам╕стити цей файл?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
 msgstr "Дата модиф╕кац╕╖ ц╕л╕: %s, розм╕р %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
 msgstr "Дата модиф╕кац╕╖ джерела: %s, розм╕р %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
 msgstr "Дата модиф╕кац╕╖ ц╕л╕: %s, розм╕р %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
 msgstr "Дата модиф╕кац╕╖ джерела: %s, розм╕р %u"
 
@@ -1765,7 +1755,7 @@ msgid "&Edit - F4"
 msgstr "&Редагувати - F4"
 
 msgid "find Re&cursively"
-msgstr ""
+msgstr "знайти Р&екрусивно."
 
 msgid "Start at:"
 msgstr "Почати з:"
@@ -1955,13 +1945,14 @@ msgstr "Останн╕й доступ:  %s"
 msgid "Modified:  %s"
 msgstr "Зм╕нено:   %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
-msgstr "Створено:    %s"
+msgid "Status:    %s"
+msgstr "Статус:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Тип пристрою: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
@@ -1969,11 +1960,9 @@ msgstr "Розм╕р:    %s"
 
 #, c-format
 msgid " (%ld block)"
-msgstr " (%ld блок)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld блок╕в)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блоки)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2347,7 +2336,6 @@ msgstr ""
 "Будь ласка, в╕дсилайте будь як╕ пов╕домлення про помилки\n"
 "(включаючи вив╕д \"mc -V\") на адресу mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2370,9 +2358,9 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"--colors КЛЮЧ={ПЕРЕД},{ТЛО}\n"
+"--colors КЛЮЧ={ТЕКСТ},{ТЛО}\n"
 "\n"
-"{ПЕРЕД} ╕ {ТЛО} можна опустити, тод╕ буде використано типов╕ значення\n"
+"{ТЕКСТ} ╕ {ТЛО} можна опустити, тод╕ буде використано типов╕ значення\n"
 "\n"
 "Ключ╕:\n"
 "   Глобальн╕:    errors, reverse, gauge, input\n"
@@ -2552,8 +2540,7 @@ msgid " Enter command label: "
 msgstr " Введ╕ть м╕тку команди: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr ""
-" Не можу виконати цю команду, коли знаходжуся не у локальному каталоз╕ "
+msgstr " Не можу виконати цю команду, коли знаходжуся не у локальному каталоз╕ "
 
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, в╕дкинут╕ командою patch"
@@ -2593,7 +2580,7 @@ msgid "Usage:"
 msgstr "Використання:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "НАД-КАТ"
@@ -2889,9 +2876,8 @@ msgstr " Зб╕й каналу "
 msgid " Dup failed "
 msgstr " Зб╕й дублювання дескриптора "
 
-#, fuzzy
 msgid " Cannot spawn child process "
-msgstr " Не вда╓ться породити процес-нащадок "
+msgstr " Не вда╓ться створити процес-нащадок "
 
 msgid "Empty output from child filter"
 msgstr "Ф╕льтр-нащадок не повернув даних"
@@ -2925,15 +2911,15 @@ msgstr "Зм╕щення 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr "Рядок %lu Позиц╕я %lu"
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s байт"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s байт"
+msgstr ">= %s байт"
 
 #, c-format
 msgid ""
@@ -2941,12 +2927,17 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+" Помилка при закритт╕ файла: \n"
+" %s \n"
+" Данн╕ могло бути як записано так ╕ н╕. "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Помилка при спроб╕ зберегти файл. "
+msgstr ""
+" Не вда╓ться зберегти файл: \n"
+" %s "
 
 msgid "Invalid hex search expression"
 msgstr " Неправильний ш╕стнадцятковий вираз"
@@ -2977,58 +2968,58 @@ msgid " Enter regexp:"
 msgstr " Введ╕ть регулярний вираз:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "Нижня панель|Допомога"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "Нижня панель|Вих╕д"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Нижня панель|Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Нижня панель|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "Нижня панель|Перех╕д"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "Нижня панель|Рядок"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "Нижня панель|Вид"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "Нижня панель|Редагувати"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Нижня панель|Зберегти"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "Нижня панель|НеПеренос."
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "Нижня панель|Перенос."
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "Нижня панель|RxПошук"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "Нижня панель|HxПошук"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "Нижня панель|Пошук"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Нижня панель|Як ╓"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "Нижня панель|Ф╕льтр"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "Нижня панель|НеФормат."
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "Нижня панель|Формат."
 
 msgid " History "
 msgstr "╤стор╕я команд"
@@ -3607,135 +3598,3 @@ msgstr "Внутр╕шня помилка:"
 msgid "Changes to file lost"
 msgstr "Зм╕ни у файл╕ втрачен╕"
 
-#~ msgid " Cannot open file for reading: "
-#~ msgstr " Зб╕й при спроб╕ в╕дкрити файл для читання: "
-
-#~ msgid " Not an ordinary file: "
-#~ msgstr " Незвичайний файл: "
-
-#~ msgid "Format of the "
-#~ msgstr "Формат "
-
-#~ msgid ""
-#~ " file has changed\n"
-#~ "with version 3.0. You may want either to\n"
-#~ "copy it from "
-#~ msgstr ""
-#~ " файлу зм╕нений\n"
-#~ "у верс╕╖ 3.0. Ви можете або\n"
-#~ "скоп╕ювати його з "
-
-#~ msgid ""
-#~ "mc.ext or use that\n"
-#~ "file as an example of how to write it.\n"
-#~ msgstr ""
-#~ "mc.ext або використовувати цей\n"
-#~ "файл як приклад написання.\n"
-
-#~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext буде використано у цей момент."
-
-#~ msgid " Cannot open file "
-#~ msgstr " Не вдалося в╕дкрити файл "
-
-#~ msgid "Col %d"
-#~ msgstr "Ст. %d"
-
-#~ msgid "  [grow]"
-#~ msgstr "  [р╕ст]"
-
-#~ msgid "Ascii"
-#~ msgstr "Текст"
-
-#~ msgid "Hex"
-#~ msgstr "Ш╕стнадц."
-
-#~ msgid "Goto"
-#~ msgstr "Перейти"
-
-#~ msgid "Line"
-#~ msgstr "Рядок"
-
-#~ msgid "RxSrch"
-#~ msgstr "РегВир"
-
-#~ msgid "EdHex"
-#~ msgstr "HxРедаг"
-
-#~ msgid "EdText"
-#~ msgstr "Редагув"
-
-#~ msgid "UnWrap"
-#~ msgstr "НеПерен"
-
-#~ msgid "Wrap"
-#~ msgstr "Переноси"
-
-#~ msgid "HxSrch"
-#~ msgstr "ШсПошук"
-
-#~ msgid "Raw"
-#~ msgstr "Сирий"
-
-#~ msgid "Parse"
-#~ msgstr "Роз╕брати"
-
-#~ msgid "Unform"
-#~ msgstr "НеФормт"
-
-#~ msgid "Format"
-#~ msgstr "Формат"
-
-#~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "Меню користувача доступне лише у mcedit викликаному з mc"
-
-#~ msgid " Socket source routing setup "
-#~ msgstr " Установки розпод╕лення джерела гн╕зд "
-
-#~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " Введ╕ть назву машини для використання як source routing hop: "
-
-#~ msgid " Host name "
-#~ msgstr " Назва системи "
-
-#~ msgid " Error while looking up IP address "
-#~ msgstr " Помилка пошуку IP адреси "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "refresh stack underflow!\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "вих╕д за нижню межу стеку оновлення!\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid " Listing format edit "
-#~ msgstr " Редагування формату списку"
-
-#~ msgid " New mode is \"%s\" "
-#~ msgstr " Новий режим - \"%s\""
-
-#~ msgid "&Drive...       M-d"
-#~ msgstr "&Диск...              M-d"
-
-#~ msgid "Use to debug the background code"
-#~ msgstr "Використовувати для в╕длагодження фонового коду"
-
-#~ msgid " No action taken "
-#~ msgstr " Д╕╖ не виконано "
-
-#~ msgid " Cannot set source routing (%s)"
-#~ msgstr " Не вдалося встановити маршрутизац╕ю для джерела (%s)"
-
-#~ msgid "File %s is locked by lock %s"
-#~ msgstr "Файл %s блоковано замком %s"
-
-#~ msgid "Force subshell execution"
-#~ msgstr "Примусове виконання через п╕доболонку"
