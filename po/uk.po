@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=KOI8-U\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " Choose syntax highlighting "
 msgstr "&П╕дсв╕тка синтаксису"
