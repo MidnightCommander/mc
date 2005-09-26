@@ -18,10 +18,15 @@ int vfs_mkstemps (char **pname, const char *prefix, const char *basename);
 void vfs_die (const char *msg);
 char *vfs_get_password (const char *msg);
 
+gboolean vfs_parse_filetype (const char *s, size_t *ret_skipped,
+			     mode_t *ret_type);
+gboolean vfs_parse_fileperms (const char *s, size_t *ret_skipped,
+			      mode_t *ret_perms);
+gboolean vfs_parse_filemode (const char *s, size_t *ret_skipped,
+			     mode_t *ret_mode);
+
 int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 		      char **linkname);
-int vfs_parse_filetype (char c);
-int vfs_parse_filemode (const char *p);
 int vfs_parse_filedate (int idx, time_t *t);
 
 #endif

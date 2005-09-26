@@ -440,17 +440,14 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 #endif
 	    break;
 	case 'P': {
-	              int i;
-		      if ((i = vfs_parse_filetype(buffer[1])) ==-1)
-			  break;
-		      ST.st_mode = i; 
-		      if ((i = vfs_parse_filemode(buffer+2)) ==-1)
-			  break;
-		      ST.st_mode |= i;
-		      if (S_ISLNK(ST.st_mode))
-			  ST.st_mode = 0;
-	          }
-	          break;
+	    size_t skipped;
+
+	    if (vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode)) {
+		if (S_ISLNK(ST.st_mode))
+		    ST.st_mode = 0;
+	    }
+	    break;
+	}
 	case 'd': {
 		      vfs_split_text(buffer+1);
 		      if (!vfs_parse_filedate(0, &ST.st_ctime))

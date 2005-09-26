@@ -1,3 +1,11 @@
+2005-09-26  Roland Illig  <roland.illig@gmx.de>
+
+	* utilvfs.h (vfs_parse_filetype, vfs_parse_fileperms,
+	vfs_parse_filemode): Rewrote the functions to parse Unix file
+	modes.
+	* utilvfs.c: Likewise.
+	* fish.c: Using the new parsing functions.
+
 2005-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/lib/util.c (tab_depth): Remove.

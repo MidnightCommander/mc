@@ -413,151 +413,134 @@ is_year (char *str, struct tm *tim)
  * where "2904 1234" is filename. Well, this code decodes it as year :-(.
  */
 
-int
-vfs_parse_filetype (char c)
+gboolean
+vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
 {
-    switch (c) {
-    case 'd':
-	return S_IFDIR;
-    case 'b':
-	return S_IFBLK;
-    case 'c':
-	return S_IFCHR;
-    case 'l':
-	return S_IFLNK;
-    case 's':			/* Socket */
+    mode_t type;
+
+    switch (*s) {
+	case 'd': type = S_IFDIR; break;
+	case 'b': type = S_IFBLK; break;
+	case 'c': type = S_IFCHR; break;
+	case 'l': type = S_IFLNK; break;
 #ifdef S_IFSOCK
-	return S_IFSOCK;
+	case 's': type = S_IFSOCK; break;
 #else
-	/* If not supported, we fall through to IFIFO */
-	return S_IFIFO;
+	case 's': type = S_IFIFO; break;
 #endif
-    case 'D':			/* Solaris door */
-#ifdef S_IFDOOR
-	return S_IFDOOR;
+#ifdef S_IFDOOR			/* Solaris door */
+	case 'D': type = S_IFDOOR; break;
 #else
-	return S_IFIFO;
+	case 'D': type = S_IFIFO; break;
 #endif
-    case 'p':
-	return S_IFIFO;
-    case 'n':			/* Special named files */
-#ifdef S_IFNAM
-	return S_IFNAM;
-#endif /* S_IFNAM */
-    case 'm':			/* Don't know what these are :-) */
-    case '-':
-    case '?':
-	return S_IFREG;
-    default:
-	return -1;
+	case 'p': type = S_IFIFO; break;
+#ifdef S_IFNAM			/* Special named files */
+	case 'n': type = S_IFNAM; break;
+#else
+	case 'n': type = S_IFREG; break;
+#endif
+	case 'm':		/* Don't know what these are :-) */
+	case '-':
+	case '?': type = S_IFREG; break;
+	default: return FALSE;
     }
+
+    *ret_type = type;
+    *ret_skipped = 1;
+    return TRUE;
 }
 
-int
-vfs_parse_filemode (const char *p)
-{				/* converts rw-rw-rw- into 0666 */
-    int res = 0;
-    switch (*(p++)) {
-    case 'r':
-	res |= 0400;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+gboolean
+vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
+{
+    const char *p;
+    mode_t perms;
+
+    p = s;
+    perms = 0;
+
+    switch (*p++) {
+	case '-': break;
+	case 'r': perms |= S_IRUSR; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'w':
-	res |= 0200;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'w': perms |= S_IWUSR; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'x':
-	res |= 0100;
-	break;
-    case 's':
-	res |= 0100 | S_ISUID;
-	break;
-    case 'S':
-	res |= S_ISUID;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'S': perms |= S_ISUID; break;
+	case 's': perms |= S_IXUSR | S_ISUID; break;
+	case 'x': perms |= S_IXUSR; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'r':
-	res |= 0040;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'r': perms |= S_IRGRP; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'w':
-	res |= 0020;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'w': perms |= S_IWGRP; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'x':
-	res |= 0010;
-	break;
-    case 's':
-	res |= 0010 | S_ISGID;
-	break;
-    case 'l':			/* Solaris produces these */
-    case 'S':
-	res |= S_ISGID;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'S': perms |= S_ISGID; break;
+	case 'l': perms |= S_ISGID; break; /* found on Solaris */
+	case 's': perms |= S_IXGRP | S_ISGID; break;
+	case 'x': perms |= S_IXGRP; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'r':
-	res |= 0004;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'r': perms |= S_IROTH; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'w':
-	res |= 0002;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'w': perms |= S_IWOTH; break;
+	default: return FALSE;
     }
-    switch (*(p++)) {
-    case 'x':
-	res |= 0001;
-	break;
-    case 't':
-	res |= 0001 | S_ISVTX;
-	break;
-    case 'T':
-	res |= S_ISVTX;
-	break;
-    case '-':
-	break;
-    default:
-	return -1;
+    switch (*p++) {
+	case '-': break;
+	case 'T': perms |= S_ISVTX; break;
+	case 't': perms |= S_IXOTH | S_ISVTX; break;
+	case 'x': perms |= S_IXOTH; break;
+	default: return FALSE;
     }
-    return res;
+    if (*p == '+') {		/* ACLs on Solaris, HP-UX and others */
+	p++;
+    }
+
+    *ret_skipped = p - s;
+    *ret_perms = perms;
+    return TRUE;
+}
+
+gboolean
+vfs_parse_filemode (const char *s, size_t *ret_skipped,
+		    mode_t *ret_mode)
+{
+    const char *p;
+    mode_t type, perms;
+    size_t skipped;
+
+    p = s;
+
+    if (!vfs_parse_filetype (p, &skipped, &type))
+	return FALSE;
+    p += skipped;
+
+    if (!vfs_parse_fileperms (p, &skipped, &perms))
+	return FALSE;
+    p += skipped;
+
+    *ret_skipped = p - s;
+    *ret_mode = type | perms;
+    return TRUE;
 }
 
 /* This function parses from idx in the columns[] array */
@@ -689,14 +672,15 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
     char *p_copy = NULL;
     char *t = NULL;
     const char *line = p;
+    size_t skipped;
 
     if (strncmp (p, "total", 5) == 0)
 	return 0;
 
-    if ((i = vfs_parse_filetype (*(p++))) == -1)
+    if (!vfs_parse_filetype (p, &skipped, &s->st_mode))
 	goto error;
+    p += skipped;
 
-    s->st_mode = i;
     if (*p == ' ')		/* Notwell 4 */
 	p++;
     if (*p == '[') {
@@ -711,14 +695,13 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	if ((i = vfs_parse_filemode (p)) == -1)
-	    goto error;
-	s->st_mode |= i;
-	p += 9;
+	size_t skipped;
+	mode_t perms;
 
-	/* This is for an extra ACL attribute (HP-UX) */
-	if (*p == '+')
-	    p++;
+	if (!vfs_parse_fileperms (p, &skipped, &perms))
+	    goto error;
+	p += skipped;
+	s->st_mode |= perms;
     }
 
     p_copy = g_strdup (p);
@@ -878,4 +861,3 @@ vfs_get_password (const char *msg)
 {
     return input_dialog (msg, _("Password:"), INPUT_PASSWORD);
 }
-
