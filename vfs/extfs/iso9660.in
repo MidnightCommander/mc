@@ -65,7 +65,7 @@ mcisofs_copyout () {
 	$ISOINFO -i "$1" -x "/$2" > "$3" 
 }
 
-save_ctype=`locale | grep LC_CTYPE`
+save_ctype=`locale 2>/dev/null | grep LC_CTYPE`
 LC_ALL=C
 
 cmd="$1"

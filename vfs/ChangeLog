@@ -1,5 +1,10 @@
 2005-09-26  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/iso9660.in: Ignore error messages from locale(1), as it
+	does not exist on OpenBSD. Reported by q# on mc-devel.
+
+2005-09-26  Roland Illig  <roland.illig@gmx.de>
+
 	* utilvfs.h (vfs_parse_filetype, vfs_parse_fileperms,
 	vfs_parse_filemode): Rewrote the functions to parse Unix file
 	modes.
