@@ -91,7 +91,7 @@ void enable_mouse (void)
 	printf(ESC_STR "[?1001s");
 
 	/* enable mouse tracking */
-	printf(ESC_STR "[?1000h");
+	printf(ESC_STR "[?1002h");
 
 	fflush (stdout);
 	mouse_enabled = 1; 
@@ -117,7 +117,7 @@ void disable_mouse (void)
 #endif
     case MOUSE_XTERM:
 	/* disable mouse tracking */
-	printf(ESC_STR "[?1000l");
+	printf(ESC_STR "[?1002l");
 
 	/* restore old highlight mouse tracking */
 	printf(ESC_STR "[?1001r");

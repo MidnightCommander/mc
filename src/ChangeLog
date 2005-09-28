@@ -1,3 +1,9 @@
+2005-09-28  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* key.c (xmouse_get_event): Catch GPM_DRAG event.
+	* mouse.c (enable_mouse, disable_mouse): Update printed escape
+	sequence.
+
 2005-09-17  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* execute.c (do_execute): Flush stdout after printing the

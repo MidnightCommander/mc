@@ -512,7 +512,12 @@ xmouse_get_event (Gpm_Event *ev)
 	    ev->type = 0;
 	}
     } else {
-        ev->type = GPM_DOWN;
+	if (btn >= 32 && btn <= 34) {
+	    btn -= 32;
+	    ev->type = GPM_DRAG;
+	} else
+	    ev->type = GPM_DOWN;
+
 	GET_TIME (tv2);
 	if (tv1.tv_sec && (DIF_TIME (tv1,tv2) < double_click_speed)){
 	    clicks++;
