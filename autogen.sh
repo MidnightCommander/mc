@@ -28,36 +28,7 @@ if test ! -d config; then
   mkdir config
 fi
 
-# Ensure that gettext is reasonably new.
-
-# remove all but the first line
-sed_cmd="sed -e '2,\$d'"
-# take text after the last space
-sed_cmd="${sed_cmd} -e 's/.* //'"
-# strip "-pre" or "-rc" at the end
-sed_cmd="${sed_cmd} -e 's/-.*//'"
-# prepend 0 to every token
-sed_cmd="${sed_cmd} -e 's/\\([^.][^.]*\\)/0\\1/g'"
-# strip leading 0 from long tokens
-sed_cmd="${sed_cmd} -e 's/0\\([^.][^.]\\)/\\1/g'"
-# add .00.00 for short version strings
-sed_cmd="${sed_cmd} -e 's/\$/.00.00/'"
-# remove dots
-sed_cmd="${sed_cmd} -e 's/\\.//g'"
-# leave only 6 leading digits
-sed_cmd="${sed_cmd} -e 's/\\(......\\).*/\\1/'"
-
-gettext_ver=`$AUTOPOINT --version | eval ${sed_cmd}`
-if test -z "$gettext_ver"; then
-  echo "Cannot determine version of gettext" >&2
-  exit 1
-fi
-
-if test "$gettext_ver" -lt 01105; then
-  echo "gettext 0.11.5 or newer is required" >&2
-  exit 1
-fi
-
+# Recreate intl directory.
 rm -rf intl
 $AUTOPOINT --force || exit 1
 
