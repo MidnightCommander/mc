@@ -9,7 +9,6 @@ set -e
 : ${AUTOHEADER=autoheader}
 : ${AUTOMAKE=automake}
 : ${ACLOCAL=aclocal}
-: ${GETTEXTIZE=gettextize}
 : ${AUTOPOINT=autopoint}
 : ${XGETTEXT=xgettext}
 
@@ -48,31 +47,19 @@ sed_cmd="${sed_cmd} -e 's/\\.//g'"
 # leave only 6 leading digits
 sed_cmd="${sed_cmd} -e 's/\\(......\\).*/\\1/'"
 
-gettext_ver=`$GETTEXTIZE --version | eval ${sed_cmd}`
+gettext_ver=`$AUTOPOINT --version | eval ${sed_cmd}`
 if test -z "$gettext_ver"; then
   echo "Cannot determine version of gettext" >&2
   exit 1
 fi
 
-if test "$gettext_ver" -lt 01038; then
-  echo "Don't use gettext older than 0.10.38" >&2
+if test "$gettext_ver" -lt 01105; then
+  echo "gettext 0.11.5 or newer is required" >&2
   exit 1
 fi
 
 rm -rf intl
-if test "$gettext_ver" -ge 01100; then
-  if test "$gettext_ver" -lt 01105; then
-    echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" >&2
-    exit 1
-  fi
-  $AUTOPOINT --force || exit 1
-else
-  $GETTEXTIZE --copy --force || exit 1
-  if test -e po/ChangeLog~; then
-    rm -f po/ChangeLog
-    mv po/ChangeLog~ po/ChangeLog
-  fi
-fi
+$AUTOPOINT --force || exit 1
 
 # Generate po/POTFILES.in
 $XGETTEXT --keyword=_ --keyword=N_ --keyword=gettext_ui --output=- \
