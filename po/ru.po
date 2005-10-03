@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 16:56-0400\n"
+"POT-Creation-Date: 2005-10-03 19:29-0400\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -2647,12 +2647,18 @@ msgid "Group"
 msgstr "Группа"
 
 #, c-format
-msgid "%s bytes in %d file"
-msgstr "%s байт в %d файле"
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s байт"
+msgstr[1] "%s байта"
+msgstr[2] "%s байт"
 
 #, c-format
-msgid "%s bytes in %d files"
-msgstr "%s байт в %d файлах"
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s в %d файле"
+msgstr[1] "%s в %d файлах"
+msgstr[2] "%s в %d файлах"
 
 msgid "<readlink failed>"
 msgstr "<сбой чтения ссылки>"
@@ -3619,3 +3625,6 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s байт в %d файлах"
