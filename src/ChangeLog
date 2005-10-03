@@ -1,3 +1,7 @@
+2005-10-03  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (display_mini_info): Use ngettext().
+
 2005-09-28  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* key.c (xmouse_get_event): Catch GPM_DRAG event.

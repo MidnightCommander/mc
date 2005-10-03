@@ -672,17 +672,25 @@ display_mini_info (WPanel *panel)
 
     /* Status displays total marked size */
     if (panel->marked){
-	char buffer [BUF_SMALL];
+	char buffer[BUF_SMALL], b_bytes[BUF_SMALL];
 	const char *p = "  %-*s";
 	int  cols = panel->widget.cols-2;
 
 	attrset (MARKED_COLOR);
 	tty_printf  ("%*s", cols, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
-	/* FIXME: use ngettext() here when gettext-0.10.35 becomes history */
-	g_snprintf (buffer, sizeof (buffer), (panel->marked == 1) ?
-		 _("%s bytes in %d file") : _("%s bytes in %d files"),
-		 size_trunc_sep (panel->total), panel->marked);
+
+	/*
+	 * This is a trick to use two ngettext() calls in one sentence.
+	 * First make "N bytes", then insert it into "X in M files".
+	 */
+	g_snprintf(b_bytes, sizeof (b_bytes),
+		   ngettext("%s byte", "%s bytes", panel->total),
+		   size_trunc_sep(panel->total));
+	g_snprintf(buffer, sizeof (buffer),
+		   ngettext("%s in %d file", "%s in %d files", panel->marked),
+		   b_bytes, panel->marked);
+
 	if ((int) strlen (buffer) > cols-2){
 	    buffer [cols] = 0;
 	    p += 2;
