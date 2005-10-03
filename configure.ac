@@ -102,7 +102,7 @@ dnl
 dnl Internationalization
 dnl
 MC_ASM_LABELS
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT(no-libtool, need-ngettext)
 AM_GNU_GETTEXT_VERSION(0.11.5)
 
 if test "x$USE_INCLUDED_LIBINTL" = xyes; then

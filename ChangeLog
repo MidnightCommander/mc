@@ -1,3 +1,8 @@
+2005-10-03  Pavel Roskin  <proski@gnu.org>
+
+	* configure.ac: Require gettext with ngettext support.  It's
+	already used in src/info.c.
+
 2005-09-28  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4: Remove gettext 0.10.x compatibility.
