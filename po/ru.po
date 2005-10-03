@@ -16,13 +16,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-07 15:55-0400\n"
+"POT-Creation-Date: 2005-10-03 16:56-0400\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=KOI8-R\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: KBabel 1.10.1\n"
 
 msgid " Choose syntax highlighting "
@@ -218,8 +220,10 @@ msgstr " Заменить "
 msgid "Search"
 msgstr "Поиск"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Неверное регулярное выражение или в scanf-формате много преобразований"
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
+msgstr ""
+" Неверное регулярное выражение или в scanf-формате много преобразований"
 
 msgid " Error in replacement format string. "
 msgstr " Ошибка в формате строки замены. "
@@ -644,13 +648,11 @@ msgstr " Ошибка в файле %s в строке %d "
 msgid "bind: Wrong argument number, bind <key> <command>"
 msgstr "bind: Не верное количество аргументов, bind <клавиша> <команда>"
 
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "bind: Bad key value `%s'"
 msgstr "Неподходящее значение клавиши `%s' "
 
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "bind: Ehh...no key?"
 msgstr "bind: М-мм... нет клавиши?"
 
@@ -670,8 +672,7 @@ msgstr "%s: Синтаксис: %s <n> <command> <label>"
 msgid "%s: Unknown command: `%s'"
 msgstr "%s: Неизвестная команда: `%s'"
 
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "%s: fn should be 1-10"
 msgstr "%s: fn должно быть 1-10"
 
@@ -687,8 +688,7 @@ msgstr "%s:%d: неизвестная команда `%s'"
 msgid "%s:%d: %s"
 msgstr "%s:%d: %s"
 
-#, c-format
-#, fuzzy
+#, fuzzy, c-format
 msgid "%s not found!"
 msgstr "%s не найдено!"
 
@@ -1286,7 +1286,9 @@ msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
-msgstr "формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с %smc.ext либо использовать этот файл как пример и написать свой."
+msgstr ""
+"формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с "
+"%smc.ext либо использовать этот файл как пример и написать свой."
 
 msgid " Copy "
 msgstr " Копирование "
@@ -1974,11 +1976,12 @@ msgstr "Тип устройства: major %lu, minor %lu"
 msgid "Size:      %s"
 msgstr "Размер:    %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld блок)"
-msgstr[1] " (%ld блок)"
+msgstr[0] "(%ld блок)"
+msgstr[1] "(%ld блока)"
+msgstr[2] "(%ld блоков)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2384,8 +2387,8 @@ msgstr ""
 "   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Меню:               menu, menuhot, menusel, menuhotsel\n"
 "   Справка:            helpnormal, helpitalic, helplink, helpslink\n"
-"   Типы файлов:        directory, executable, link, stalelink, device, special, "
-"core\n"
+"   Типы файлов:        directory, executable, link, stalelink, device, "
+"special, core\n"
 "\n"
 "Цвета:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
