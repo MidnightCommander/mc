@@ -177,7 +177,7 @@ msgstr "scanf &Izraz"
 msgid "replace &All"
 msgstr "zamenjaj &Vse"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "p&Otrdimo ob zamenjavi"
 
 msgid "&Backwards"

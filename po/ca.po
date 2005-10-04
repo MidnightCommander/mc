@@ -180,7 +180,7 @@ msgstr "&Expressió de Scanf"
 msgid "replace &All"
 msgstr "reemplaça'ls &Tots"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Preg&Unta en reemplaçar"
 
 msgid "&Backwards"

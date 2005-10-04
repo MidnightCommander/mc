@@ -180,7 +180,7 @@ msgstr "Изр&аз за scanf"
 msgid "replace &All"
 msgstr "замени &Све"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "п&Отврда замене"
 
 msgid "&Backwards"

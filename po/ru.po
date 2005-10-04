@@ -190,7 +190,7 @@ msgstr "Выражение &scanf"
 msgid "replace &All"
 msgstr "Заменить &все"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Подтверждать &замену"
 
 msgid "&Backwards"

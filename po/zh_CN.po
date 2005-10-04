@@ -179,7 +179,7 @@ msgstr "scanf 表达式(&E)"
 msgid "replace &All"
 msgstr "全部替换(&A)"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "替换时提示(&O)"
 
 msgid "&Backwards"

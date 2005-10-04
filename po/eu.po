@@ -180,7 +180,7 @@ msgstr "scanf &Adierazpena"
 msgid "replace &All"
 msgstr "&Ordeztu guztiak"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&galdetu ordeztean"
 
 msgid "&Backwards"

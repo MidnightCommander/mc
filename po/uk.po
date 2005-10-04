@@ -180,7 +180,7 @@ msgstr "Вираз &scanf"
 msgid "replace &All"
 msgstr "Зам╕нити &yс╕"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Питатися пр&o зам╕ну"
 
 msgid "&Backwards"

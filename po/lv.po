@@ -179,7 +179,7 @@ msgstr "scan&F izteiksme"
 msgid "replace &All"
 msgstr "aizvietot vi&Sus"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "jau&Tât pie aizvietoðanas"
 
 msgid "&Backwards"

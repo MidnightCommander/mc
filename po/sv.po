@@ -184,7 +184,7 @@ msgstr "scanf &Uttryck"
 msgid "replace &All"
 msgstr "ersätt &Alla"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "fr&Åga vid ersätt"
 
 msgid "&Backwards"

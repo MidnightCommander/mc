@@ -179,7 +179,7 @@ msgstr "&Výraz pre scanf"
 msgid "replace &All"
 msgstr "nahradiť vš&Etko"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Vyzvať pri nahradení"
 
 msgid "&Backwards"

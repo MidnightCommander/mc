@@ -179,7 +179,7 @@ msgstr "'scanf'-&Expressie"
 msgid "replace &All"
 msgstr "Vervang &Alles"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Vraag bij vervanging"
 
 msgid "&Backwards"

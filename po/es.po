@@ -175,7 +175,7 @@ msgstr "&Expresión scanf"
 msgid "replace &All"
 msgstr "reemplazar &Todos"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "c&Onfirmar cambios"
 
 msgid "&Backwards"

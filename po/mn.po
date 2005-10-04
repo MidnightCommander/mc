@@ -182,7 +182,7 @@ msgstr "Бичиглэл &scanf"
 msgid "replace &All"
 msgstr "Бүгдийг &солих"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Солилцоог &бататгах"
 
 msgid "&Backwards"

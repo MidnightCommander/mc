@@ -177,7 +177,7 @@ msgstr "scanf uttrykk"
 msgid "replace &All"
 msgstr "erstatt alle"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "spør ved erstatning"
 
 msgid "&Backwards"

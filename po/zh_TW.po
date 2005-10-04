@@ -179,7 +179,7 @@ msgstr " Scanf ボΑ "
 msgid "replace &All"
 msgstr "场蠢传"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr " 蠢传ぇ玡璶高拜 "
 
 msgid "&Backwards"

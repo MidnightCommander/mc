@@ -181,7 +181,7 @@ msgstr "biểu thức &Scanf"
 msgid "replace &All"
 msgstr "&Thay thế tất cả"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Hỏi trước khi thay"
 
 msgid "&Backwards"

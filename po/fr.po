@@ -183,7 +183,7 @@ msgstr "&Expression scanf"
 msgid "replace &All"
 msgstr "Tout rempl&acer"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "C&onfirmation avant remplacement"
 
 msgid "&Backwards"

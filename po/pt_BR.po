@@ -184,7 +184,7 @@ msgstr "&Expressão do scanf"
 msgid "replace &All"
 msgstr "Substituir &Todos"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Perguntar antes de sobrescrever"
 
 msgid "&Backwards"

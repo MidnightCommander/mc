@@ -180,7 +180,7 @@ msgstr "expresie &Scanf "
 msgid "replace &All"
 msgstr "înlocuieºte &Tot"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "con&Firmã înlocuirea "
 
 msgid "&Backwards"

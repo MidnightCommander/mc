@@ -175,7 +175,7 @@ msgstr "גûנאח &scanf"
 msgid "replace &All"
 msgstr "ַאלÿם³צü &׃סו"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "ֿאהצüגונהח³צü &חאלוםף"
 
 msgid "&Backwards"

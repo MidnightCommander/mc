@@ -181,7 +181,7 @@ msgstr "scanf &Deyimi"
 msgid "replace &All"
 msgstr "&Tümünün yerini deðiþtir"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Yerleþtirirken &Sor"
 
 msgid "&Backwards"

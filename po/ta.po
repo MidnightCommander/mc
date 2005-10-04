@@ -177,7 +177,7 @@ msgstr "scanf &§¸¡¨Å"
 msgid "replace &All"
 msgstr "«¨Éò¨¾Ôõ &Á¡üÚ"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Á¡üÚõ§À¡Ğ à&ñÎ"
 
 msgid "&Backwards"

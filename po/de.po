@@ -181,7 +181,7 @@ msgstr "scanf-Ausdruck"
 msgid "replace &All"
 msgstr "&Alle ersetzen"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Nachfragen v&Or Ersetzen"
 
 msgid "&Backwards"

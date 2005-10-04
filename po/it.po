@@ -179,7 +179,7 @@ msgstr "&Espressione scanf"
 msgid "replace &All"
 msgstr "Sostituisci &tutto"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Chiedi sempre"
 
 msgid "&Backwards"

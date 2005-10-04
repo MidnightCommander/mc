@@ -183,7 +183,7 @@ msgstr "Wyra¿enie \"scanf\""
 msgid "replace &All"
 msgstr "Zast±p wszystkie"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Potwierdzanie"
 
 msgid "&Backwards"

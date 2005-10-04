@@ -178,7 +178,7 @@ msgstr ""
 msgid "replace &All"
 msgstr "αντικατάσταση ό&λων"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr ""
 
 msgid "&Backwards"

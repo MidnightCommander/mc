@@ -188,7 +188,7 @@ msgstr "&Scanf-kifejezés"
 msgid "replace &All"
 msgstr "Mindet &cserélni"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Csere elõtt kér&dés"
 
 msgid "&Backwards"

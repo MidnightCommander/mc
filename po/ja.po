@@ -180,7 +180,7 @@ msgstr "scanf 形式(&E)"
 msgid "replace &All"
 msgstr "全て置き換える(&A)"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "置換時にプロンプト(&O)"
 
 msgid "&Backwards"

@@ -186,7 +186,7 @@ msgstr "scanf &Udtryk"
 msgid "replace &All"
 msgstr "&Erstat alle"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "s&Pørg før erstat"
 
 msgid "&Backwards"

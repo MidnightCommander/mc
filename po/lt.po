@@ -177,7 +177,7 @@ msgstr "„scanf“ iš&raiška"
 msgid "replace &All"
 msgstr "P&akeisti viską"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Praneš&ti keičiant"
 
 msgid "&Backwards"

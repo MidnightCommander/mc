@@ -184,7 +184,7 @@ msgstr "výraz pro &Scanf"
 msgid "replace &All"
 msgstr "Nahradit &V¹e"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Dotaz na nahrazení "
 
 msgid "&Backwards"

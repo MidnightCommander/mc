@@ -180,7 +180,7 @@ msgstr "scanf &Expression"
 msgid "replace &All"
 msgstr "&hamısını dəyişdir"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "Dəyişiklikdə mey&dana çıx"
 
 msgid "&Backwards"

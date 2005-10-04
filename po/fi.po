@@ -181,7 +181,7 @@ msgstr "scanf &Lauseke"
 msgid "replace &All"
 msgstr "korvaa &Kaikki"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "kysy korvatess&a"
 
 msgid "&Backwards"

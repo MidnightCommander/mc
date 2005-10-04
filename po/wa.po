@@ -187,7 +187,7 @@ msgstr "scanf sol &Ratoûrneure"
 msgid "replace &All"
 msgstr "mete el plaece tot &costé"
 
-msgid "pr&Ompt on replace"
+msgid "&Prompt on replace"
 msgstr "&Dimander cwè divant do discandjî"
 
 msgid "&Backwards"
