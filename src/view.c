@@ -2396,7 +2396,7 @@ search (WView *view, char *text,
 	if (view->direction == 1)
 	    t += forward_line_start;
 	else
-	    t = reverse_line_start ? reverse_line_start + 3 : 0;
+	    t = reverse_line_start ? reverse_line_start + 2 : 0;
 	view->search_start += t;
 
 	if (t != beginning) {

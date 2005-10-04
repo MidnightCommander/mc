@@ -1,3 +1,7 @@
+2005-10-04  Jindrich Novy  <jnovy@redhat.com>
+
+	* view.c (search): Fix backward regex search off by one.
+
 2005-10-04  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (gettext_ui): Rename to Q_() for glib compatibility,
