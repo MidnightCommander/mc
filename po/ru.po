@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 19:29-0400\n"
+"POT-Creation-Date: 2005-10-03 22:24-0400\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -648,11 +648,11 @@ msgstr " Ошибка в файле %s в строке %d "
 msgid "bind: Wrong argument number, bind <key> <command>"
 msgstr "bind: Не верное количество аргументов, bind <клавиша> <команда>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Bad key value `%s'"
 msgstr "Неподходящее значение клавиши `%s' "
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Ehh...no key?"
 msgstr "bind: М-мм... нет клавиши?"
 
@@ -672,7 +672,7 @@ msgstr "%s: Синтаксис: %s <n> <command> <label>"
 msgid "%s: Unknown command: `%s'"
 msgstr "%s: Неизвестная команда: `%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: fn should be 1-10"
 msgstr "%s: fn должно быть 1-10"
 
@@ -688,7 +688,7 @@ msgstr "%s:%d: неизвестная команда `%s'"
 msgid "%s:%d: %s"
 msgstr "%s:%d: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found!"
 msgstr "%s не найдено!"
 
@@ -3035,11 +3035,9 @@ msgstr "Нижняя панель|HxПоиск"
 msgid "ButtonBar|Search"
 msgstr "Нижняя панель|Поиск"
 
-#, fuzzy
 msgid "ButtonBar|Raw"
 msgstr "Нижняя панель|Как есть"
 
-#, fuzzy
 msgid "ButtonBar|Parse"
 msgstr "ButtonBar|Фильтр"
 
