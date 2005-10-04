@@ -10,50 +10,42 @@ msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2005-07-11\n"
+"PO-Revision-Date: 2005-10-04\n"
 "Last-Translator: Leonard den Ottolander <leonard den ottolander nl>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "Synta&X kleuring"
+msgstr "Kies syntax kleuring"
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Info "
+msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Herlaadt Huidige Syntax >"
 
-#, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " Openen van pijp voor lezen mislukt: "
+msgstr " Openen van %s voor lezen mislukt "
 
 msgid "Error"
 msgstr "Fout"
 
-#, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Probleem bij het lezen van pijp: "
+msgstr " Probleem bij het lezen van pijp: %s "
 
-#, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Openen van pijp voor lezen mislukt: "
+msgstr " Openen van pijp voor lezen mislukt: %s "
 
-#, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Kan geen grootte-/rechteninformatie verkrijgen over bestand: "
+msgstr " Kan geen grootte-/rechteninformatie verkrijgen voor %s "
 
-#, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr " Bekijken niet mogelijk: geen normaal bestand "
+msgstr " %s is geen normaal bestand "
 
-#, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " Bestand is te groot: "
+msgstr " Bestand %s is te groot "
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
@@ -246,12 +238,11 @@ msgstr "&Ja"
 msgid "&No"
 msgstr "&Nee"
 
-#, fuzzy
 msgid " Error "
-msgstr "Fout"
+msgstr " Fout "
 
 msgid " This function is not implemented. "
-msgstr ""
+msgstr " Deze functie is niet geïmplementeerd. "
 
 msgid " Copy to clipboard "
 msgstr " Kopiëer naar prikbord "
@@ -520,13 +511,11 @@ msgstr "Algemeen..."
 msgid "&Save mode..."
 msgstr "&Opslagmodus..."
 
-#, fuzzy
 msgid "Learn &Keys..."
-msgstr "&Leer toetsen...     "
+msgstr "&Leer toetsen..."
 
-#, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "Synta&X kleuring"
+msgstr "Synta&X Kleuring..."
 
 msgid " File "
 msgstr " Bestand "
@@ -549,9 +538,8 @@ msgstr "Intuïtief"
 msgid "Emacs"
 msgstr "Emacs"
 
-#, fuzzy
 msgid "User-defined"
-msgstr "Aange&Past:"
+msgstr "Aangepast"
 
 msgid "None"
 msgstr "Geen"
@@ -653,37 +641,37 @@ msgstr ""
 msgid "bind: Unknown key: `%s'"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " 'chown'-opdracht "
+msgstr "bind: Onbekende opdracht: `%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
+msgstr "%s: Syntax: %s <n> <opdracht> <label>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " 'chown'-opdracht "
+msgstr "%s: Onbekende opdracht: `%s'"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: kies functie van 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " 'chown'-opdracht "
+msgstr "%s:%d: onbekende opdracht `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found!"
-msgstr "Waarschuwing: bestand %s niet gevonden\n"
+msgstr "%s niet gevonden!"
 
 msgid "&Set"
 msgstr "&Zetten"
@@ -820,9 +808,8 @@ msgstr "Invoer / weergave karakterset:"
 msgid "&Select"
 msgstr "&Selecteer"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "&Passieve modus gebruiken"
+msgstr "Gebruik passieve modus over pro&xy"
 
 msgid "Use &passive mode"
 msgstr "&Passieve modus gebruiken"
@@ -1260,23 +1247,22 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
-#, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " bestandsfout "
+msgstr " %s%s bestandsfout "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"mc.ext bestand is veranderd\n"
-"met versie 3.0. De installatie lijkt mislukt.\n"
+"Het formaat van het %smc.ext bestand is veranderd "
+"met versie 3.0. De installatie lijkt mislukt. "
 "Haal een nieuw Midnight Commander-pakket op."
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " bestandsfout "
+msgstr " ~/%s bestandsfout "
 
 #, c-format
 msgid ""
@@ -1838,7 +1824,6 @@ msgstr "Naar boven"
 msgid "&Add current"
 msgstr "Huidige toevoegen"
 
-#, fuzzy
 msgid "&Refresh"
 msgstr "Ve&rversen"
 
@@ -2596,7 +2581,7 @@ msgid "Usage:"
 msgstr " Gebruik:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "UP--DIR"
@@ -2658,8 +2643,7 @@ msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Het door de gebruiker gedefinieerde formaat lijkt fout, gebruik de standaard."
+msgstr "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
 msgid " Do you really want to execute? "
 msgstr " Wilt u die opdracht echt uitvoeren? "
@@ -2895,7 +2879,6 @@ msgstr " Pipe mislukt "
 msgid " Dup failed "
 msgstr " Dup mislukt"
 
-#, fuzzy
 msgid " Cannot spawn child process "
 msgstr " Starten kindproces mislukt "
 
@@ -2931,15 +2914,15 @@ msgstr "Offset 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr "Regl %lu Kol %lu"
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s bytes"
+msgstr ">= %s bytes"
 
 #, c-format
 msgid ""
@@ -2947,12 +2930,17 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+" Probleem met sluiten bestand: \n"
+" %s\n "
+" Data is mogelijk niet geschreven. "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Fout bij opslaan bestand. "
+msgstr ""
+" Kan bestand niet opslaan: \n"
+" %s "
 
 msgid "Invalid hex search expression"
 msgstr "Ongeldige hexadecimale zoekterm"
@@ -2983,58 +2971,58 @@ msgid " Enter regexp:"
 msgstr " Geef reguliere expressie:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|Help"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "ButtonBar|Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "ButtonBar|Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "ButtonBar|GaNaar"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "ButtonBar|Regel"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|Bekijk"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|Bewerk"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|Opsln"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "ButtonBar|GnOmsl"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "ButtonBar|RglOms"
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "ButtonBar|RxZoek"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|HxZoek"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|Zoek"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "ButtonBar|Rauw"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Parse"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "ButtonBar|Ongfrm"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ButtonBar|Format"
 
 msgid " History "
 msgstr " Opdrachthistorie "
