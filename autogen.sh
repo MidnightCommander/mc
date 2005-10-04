@@ -33,7 +33,7 @@ rm -rf intl
 $AUTOPOINT --force || exit 1
 
 # Generate po/POTFILES.in
-$XGETTEXT --keyword=_ --keyword=N_ --keyword=gettext_ui --output=- \
+$XGETTEXT --keyword=_ --keyword=N_ --keyword=Q_ --output=- \
 	`find . -name '*.[ch]'` | sed -ne '/^#:/{s/#://;s/:[0-9]*/\
 /g;s/ //g;p;}' | \
 	grep -v '^$' | sort | uniq | grep -v 'regex.c' >po/POTFILES.in

@@ -11,7 +11,7 @@ fi
 
 DOMAIN=mc
 COPYRIGHT_HOLDER="Free Software Foundation, Inc."
-XGETTEXT_OPTIONS="--keyword=_ --keyword=N_ --keyword=gettext_ui"
+XGETTEXT_OPTIONS="--keyword=_ --keyword=N_ --keyword=Q_"
 XGETTEXT=xgettext
 MSGMERGE=msgmerge
 
