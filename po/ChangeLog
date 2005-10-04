@@ -1,10 +1,14 @@
+2005-10-04  Pavel Roskin  <proski@gnu.org>
+
+	* Makevars: Rename gettext_ui to Q_ for glib compatibility.
+
 2005-09-21  Anton Chumak  <nightfast@yahoo.co.uk>
 
 	* uk.po: Updated Ukrainian translation.
 
 2005-09-09  Marco Ciampa  <ciampix@libero.it>
 
-        * it.po: Updated italian translation.
+	* it.po: Updated italian translation.
 
 2005-09-09  Anton Chumak  <nightfast@yahoo.co.uk>
 
@@ -30,7 +34,7 @@
 
 	* de.po: Updated German translation.
 
-2005-07-31  Phan Vinh Thinh <teppi@vnlinux.org>
+2005-07-31  Phan Vinh Thinh  <teppi@vnlinux.org>
 
 	* vi.po: Added Vietnamese translation.
 	* LINGUAS: Likewise.
