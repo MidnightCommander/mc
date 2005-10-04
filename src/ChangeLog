@@ -1,3 +1,9 @@
+2005-10-04  Pavel Roskin  <proski@gnu.org>
+
+	* util.c (gettext_ui): Rename to Q_() for glib compatibility,
+	move ...
+	* glibcompat.c: ... here.  Adjust all callers.
+
 2005-10-03  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (display_mini_info): Use ngettext().

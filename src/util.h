@@ -261,8 +261,4 @@ void save_file_position (const char *filename, long line, long column);
  * else returns the argument. */
 extern int ascii_alpha_to_cntrl (int ch);
 
-/* translates the string and returns the part after the first occurence
- * of the ``|'' character. */
-extern const char *gettext_ui (const char *);
-
 #endif

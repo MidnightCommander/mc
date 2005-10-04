@@ -28,6 +28,7 @@
 
 #include <glib.h>
 
+#include "global.h"
 #include "glibcompat.h"
 
 #if GLIB_MAJOR_VERSION < 2
@@ -110,3 +111,14 @@ g_strlcpy (gchar       *dest,
 
 #endif				/* GLIB_MAJOR_VERSION < 2 */
 
+#ifndef Q_
+const char *
+Q_ (const char *s)
+{
+    const char *result, *sep;
+
+    result = _(s);
+    sep = strchr(result, '|');
+    return (sep != NULL) ? sep + 1 : result;
+}
+#endif /* ! Q_ */

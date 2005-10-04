@@ -35,4 +35,8 @@ g_slist_delete_link (GSList *list, GSList *link)
 
 #endif				/* GLIB_MAJOR_VERSION < 2 */
 
+#ifndef Q_
+const char *Q_ (const char *s);
+#endif
+
 #endif

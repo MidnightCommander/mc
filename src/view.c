@@ -2870,55 +2870,55 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
 
-    buttonbar_set_label (h, 1, gettext_ui("ButtonBar|Help"), view_help_cmd);
+    buttonbar_set_label (h, 1, Q_("ButtonBar|Help"), view_help_cmd);
 
-    my_define (h, 10, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
+    my_define (h, 10, Q_("ButtonBar|Quit"), view_quit_cmd, view);
     my_define (h, 4, view->hex_mode
-	? gettext_ui("ButtonBar|Ascii")
-	: gettext_ui("ButtonBar|Hex"),
+	? Q_("ButtonBar|Ascii")
+	: Q_("ButtonBar|Hex"),
 	view_toggle_hex_mode_cmd, view);
     my_define (h, 5, view->hex_mode
-	? gettext_ui("ButtonBar|Goto")
-	: gettext_ui("ButtonBar|Line"),
+	? Q_("ButtonBar|Goto")
+	: Q_("ButtonBar|Line"),
 	view->hex_mode ? view_moveto_addr_cmd : view_moveto_line_cmd, view);
 
     if (view->hex_mode) {
 	if (view->hexedit_mode) {
-	    my_define (h, 2, gettext_ui("ButtonBar|View"),
+	    my_define (h, 2, Q_("ButtonBar|View"),
 		view_toggle_hexedit_mode_cmd, view);
 	} else if (view->datasource == DS_FILE) {
-	    my_define (h, 2, gettext_ui("ButtonBar|Edit"),
+	    my_define (h, 2, Q_("ButtonBar|Edit"),
 		view_toggle_hexedit_mode_cmd, view);
 	} else {
 	    my_define (h, 2, "", NULL, view);
 	}
-	my_define (h, 6, gettext_ui("ButtonBar|Save"),
+	my_define (h, 6, Q_("ButtonBar|Save"),
 	    view_hexedit_save_changes_cmd, view);
     } else {
 	my_define (h, 2, view->text_wrap_mode
-	    ? gettext_ui("ButtonBar|UnWrap")
-	    : gettext_ui("ButtonBar|Wrap"),
+	    ? Q_("ButtonBar|UnWrap")
+	    : Q_("ButtonBar|Wrap"),
 	    view_toggle_wrap_mode_cmd, view);
-	my_define (h, 6, gettext_ui("ButtonBar|RxSrch"),
+	my_define (h, 6, Q_("ButtonBar|RxSrch"),
 	    view_regexp_search_cmd, view);
     }
 
     my_define (h, 7, view->hex_mode
-	? gettext_ui("ButtonBar|HxSrch")
-	: gettext_ui("ButtonBar|Search"),
+	? Q_("ButtonBar|HxSrch")
+	: Q_("ButtonBar|Search"),
 	view_normal_search_cmd, view);
     my_define (h, 8, view->magic_mode
-	? gettext_ui("ButtonBar|Raw")
-	: gettext_ui("ButtonBar|Parse"),
+	? Q_("ButtonBar|Raw")
+	: Q_("ButtonBar|Parse"),
 	view_toggle_magic_mode_cmd, view);
 
     /* don't override the key to access the main menu */
     if (!view_is_in_panel (view)) {
 	my_define (h, 9, view->text_nroff_mode
-	    ? gettext_ui("ButtonBar|Unform")
-	    : gettext_ui("ButtonBar|Format"),
+	    ? Q_("ButtonBar|Unform")
+	    : Q_("ButtonBar|Format"),
 	    view_toggle_nroff_mode_cmd, view);
-	my_define (h, 3, gettext_ui("ButtonBar|Quit"), view_quit_cmd, view);
+	my_define (h, 3, Q_("ButtonBar|Quit"), view_quit_cmd, view);
     }
 }
 
