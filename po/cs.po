@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-04 10:38-0400\n"
+"POT-Creation-Date: 2005-10-06 11:53-0400\n"
 "PO-Revision-Date: 2003-01-22 18:29+0100\n"
 "Last-Translator: Jindrich Novy <jnovy@redhat.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -527,9 +527,8 @@ msgstr "uèení &Kláves..."
 msgid "Syntax &Highlighting..."
 msgstr "zvýraznìní synta&Xe"
 
-#, fuzzy
 msgid "Save setu&p..."
-msgstr "ulo¾it na&Stavení"
+msgstr "ulo¾it na&Stavení..."
 
 msgid " File "
 msgstr " Soubor "
@@ -695,7 +694,7 @@ msgid "S&kip"
 msgstr "&Pøeskoèit"
 
 msgid "Set &all"
-msgstr "Nastavit &v¹e"
+msgstr "Nastavit &V¹e"
 
 msgid "owner"
 msgstr "vlastník"
@@ -761,7 +760,7 @@ msgid "&Full file list"
 msgstr "&Plný seznam souborù"
 
 msgid "&Brief file list"
-msgstr "&Zhu¹tìný seznam souborù"
+msgstr "z&Hu¹tìný seznam souborù"
 
 msgid "&Long file list"
 msgstr "&Dlouhý seznam souborù"
@@ -872,7 +871,7 @@ msgid "Stopped"
 msgstr "Zastaveno"
 
 msgid "&Stop"
-msgstr "Z&astavit"
+msgstr "z&Astavit"
 
 msgid "&Resume"
 msgstr "&Pokraèovat"
@@ -935,10 +934,10 @@ msgid "sticky bit"
 msgstr "bit 'sticky'"
 
 msgid "set group ID on execution"
-msgstr "pøi spu¹tìní nastavit èíslo skupiny"
+msgstr "nastavit GID pøi spu¹tìní"
 
 msgid "set user ID on execution"
-msgstr "pøi spu¹tìní nastavit èíslo u¾ivatele"
+msgstr "nastavit UID pøi spu¹tìní"
 
 msgid "C&lear marked"
 msgstr "&Smazat oznaèené"
@@ -980,10 +979,10 @@ msgid "Chmod command"
 msgstr "Chmod"
 
 msgid "Set &users"
-msgstr "Nastav &u¾ivatele"
+msgstr "Nastav &U¾ivatele"
 
 msgid "Set &groups"
-msgstr "Nastav &skupiny"
+msgstr "Nastav &Skupiny"
 
 msgid " Name "
 msgstr " Jméno "
@@ -1763,7 +1762,7 @@ msgid "&Quit"
 msgstr "&Konec"
 
 msgid "Pane&lize"
-msgstr "Pane&lizace"
+msgstr "Pane&Lizace"
 
 msgid "&View - F3"
 msgstr "&Vidìt - F3"
@@ -1963,24 +1962,24 @@ msgid "Modified:  %s"
 msgstr "Zmìnìn:    %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, fuzzy, c-format
+#, c-format
 msgid "Status:    %s"
-msgstr "Vytvoøen:  %s"
+msgstr "Stav:      %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Typ zaøízení: vìt¹í %lu, men¹í %lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "Velikost:  %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld blok)"
-msgstr[1] " (%ld blok)"
-msgstr[2] " (%ld blok)"
+msgstr[1] " (%ld bloky)"
+msgstr[2] " (%ld blokù)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2011,7 +2010,7 @@ msgid "&Xterm window title"
 msgstr "nadpis okna &Xtermu"
 
 msgid "h&Intbar visible"
-msgstr "tip&y viditelné"
+msgstr "tip&Y viditelné"
 
 msgid "&Keybar visible"
 msgstr "&Klávesy viditelné"
@@ -2490,7 +2489,7 @@ msgid "&Use internal view"
 msgstr "pou¾ít interní prohlí¾&Eè"
 
 msgid "use internal ed&It"
-msgstr "pou¾ít interní e&ditor"
+msgstr "pou¾ít interní e&Ditor"
 
 msgid "auto m&Enus"
 msgstr "automatické &Menu"
@@ -2604,7 +2603,7 @@ msgid "Usage:"
 msgstr "Pou¾ití:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[dev]"
 
 msgid "UP--DIR"
 msgstr "VY©-ADR"
@@ -2651,19 +2650,19 @@ msgstr "Vlastník"
 msgid "Group"
 msgstr "Skupina"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s bytù"
-msgstr[1] "%s bytù"
+msgstr[0] "%s byte"
+msgstr[1] "%s bytý"
 msgstr[2] "%s bytù"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s bytù v %d souborech"
-msgstr[1] "%s bytù v %d souborech"
-msgstr[2] "%s bytù v %d souborech"
+msgstr[0] "%s v %d souboru"
+msgstr[1] "%s ve %d souborech"
+msgstr[2] "%s v %d souborech"
 
 msgid "<readlink failed>"
 msgstr "<ètení odkazu selhalo>"
@@ -2717,6 +2716,9 @@ msgid ""
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
+"GNU Midnight Commander je ji¾\n"
+"spu¹tìn na tomto terminálu.\n"
+"Podpora subshellu bude zakázána."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -2998,7 +3000,7 @@ msgid "ButtonBar|Help"
 msgstr "TlaèítkováLi¹ta|Pomoc"
 
 msgid "ButtonBar|Quit"
-msgstr "TlaèítkováLi¹ta|Ukonèit"
+msgstr "TlaèítkováLi¹ta|Konec"
 
 msgid "ButtonBar|Ascii"
 msgstr "TlaèítkováLi¹ta|Ascii"
@@ -3022,10 +3024,10 @@ msgid "ButtonBar|Save"
 msgstr "TlaèítkováLi¹ta|Ulo¾"
 
 msgid "ButtonBar|UnWrap"
-msgstr "TlaèítkováLi¹ta|Nezalamuj"
+msgstr "TlaèítkováLi¹ta|Nezal."
 
 msgid "ButtonBar|Wrap"
-msgstr "TlaèítkováLi¹ta|Zalamuj"
+msgstr "TlaèítkováLi¹ta|Zalam."
 
 msgid "ButtonBar|RxSrch"
 msgstr "TlaèítkováLi¹ta|RxHled"
@@ -3040,13 +3042,13 @@ msgid "ButtonBar|Raw"
 msgstr "TlaèítkováLi¹ta|Hrubì"
 
 msgid "ButtonBar|Parse"
-msgstr "TlaèítkováLi¹ta|Analyzuj"
+msgstr "TlaèítkováLi¹ta|Rozeb."
 
 msgid "ButtonBar|Unform"
-msgstr "TlaèítkováLi¹ta|Odformátuj"
+msgstr "TlaèítkováLi¹ta|Odform."
 
 msgid "ButtonBar|Format"
-msgstr "TlaèítkováLi¹ta|Formátuj"
+msgstr "TlaèítkováLi¹ta|Format"
 
 msgid " History "
 msgstr " Historie "
