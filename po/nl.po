@@ -2971,58 +2971,58 @@ msgid " Enter regexp:"
 msgstr " Geef reguliere expressie:"
 
 msgid "ButtonBar|Help"
-msgstr "ButtonBar|Help"
+msgstr "Help"
 
 msgid "ButtonBar|Quit"
-msgstr "ButtonBar"
+msgstr "Afsltn"
 
 msgid "ButtonBar|Ascii"
-msgstr "ButtonBar|Ascii"
+msgstr "Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr "ButtonBar|Hex"
+msgstr "Hex"
 
 msgid "ButtonBar|Goto"
-msgstr "ButtonBar|GaNaar"
+msgstr "GaNaar"
 
 msgid "ButtonBar|Line"
-msgstr "ButtonBar|Regel"
+msgstr "Regel"
 
 msgid "ButtonBar|View"
-msgstr "ButtonBar|Bekijk"
+msgstr "Bekijk"
 
 msgid "ButtonBar|Edit"
-msgstr "ButtonBar|Bewerk"
+msgstr "Bewerk"
 
 msgid "ButtonBar|Save"
-msgstr "ButtonBar|Opsln"
+msgstr "Opsln"
 
 msgid "ButtonBar|UnWrap"
-msgstr "ButtonBar|GnOmsl"
+msgstr "GnOmsl"
 
 msgid "ButtonBar|Wrap"
-msgstr "ButtonBar|RglOms"
+msgstr "RglOms"
 
 msgid "ButtonBar|RxSrch"
-msgstr "ButtonBar|RxZoek"
+msgstr "RxZoek"
 
 msgid "ButtonBar|HxSrch"
-msgstr "ButtonBar|HxZoek"
+msgstr "HxZoek"
 
 msgid "ButtonBar|Search"
-msgstr "ButtonBar|Zoek"
+msgstr "Zoek"
 
 msgid "ButtonBar|Raw"
-msgstr "ButtonBar|Rauw"
+msgstr "Rauw"
 
 msgid "ButtonBar|Parse"
-msgstr "ButtonBar|Parse"
+msgstr "Parse"
 
 msgid "ButtonBar|Unform"
-msgstr "ButtonBar|Ongfrm"
+msgstr "Ongfrm"
 
 msgid "ButtonBar|Format"
-msgstr "ButtonBar|Format"
+msgstr "Format"
 
 msgid " History "
 msgstr " Opdrachthistorie "

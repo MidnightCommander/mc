@@ -1,3 +1,7 @@
+2005-10-06  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* nl.po: Do not use prefix in Q_() strings.
+
 2005-10-04  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* nl.po: Updated Dutch translation.
