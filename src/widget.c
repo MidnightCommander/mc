@@ -957,7 +957,18 @@ i18n_htitle (void)
     return history_title;	
 }
 
-static inline cb_ret_t listbox_fwd (WListbox *l);
+static WLEntry *listbox_select_pos (WListbox *l, WLEntry *base, int
+				    pos);
+
+static inline cb_ret_t
+listbox_fwd (WListbox *l)
+{
+    if (l->current != l->list->prev){
+	listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos+1));
+	return MSG_HANDLED;
+    }
+    return MSG_NOT_HANDLED;
+}
 
 char *
 show_hist (GList *history, int widget_x, int widget_y)
@@ -1948,16 +1959,6 @@ listbox_back (WListbox *l)
 {
     if (l->pos){
 	listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos-1));
-	return MSG_HANDLED;
-    }
-    return MSG_NOT_HANDLED;
-}
-
-static inline cb_ret_t
-listbox_fwd (WListbox *l)
-{
-    if (l->current != l->list->prev){
-	listbox_select_entry (l, listbox_select_pos (l, l->list, l->pos+1));
 	return MSG_HANDLED;
     }
     return MSG_NOT_HANDLED;

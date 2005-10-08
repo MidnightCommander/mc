@@ -1,3 +1,7 @@
+2005-10-08  Pavel Roskin  <proski@gnu.org>
+
+	* widget.c (listbox_fwd): Eliminate forward inline declaration.
+
 2005-10-04  Jindrich Novy  <jnovy@redhat.com>
 
 	* view.c (search): Fix backward regex search off by one.
