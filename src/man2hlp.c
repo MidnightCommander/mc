@@ -764,7 +764,7 @@ main (int argc, char **argv)
 		char *p = strchr (node, ']');
 		if (p) {
 		    if (strncmp (node + 1, "[main]", 6) == 0) {
-			node = 0;
+			node = NULL;
 		    } else {
 			if (!cnode) {
 			    cnode = &nodes;

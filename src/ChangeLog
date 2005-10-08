@@ -1,5 +1,7 @@
 2005-10-08  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (main): Fix using 0 instead of NULL.
+
 	* widget.c (listbox_fwd): Eliminate forward inline declaration.
 
 2005-10-04  Jindrich Novy  <jnovy@redhat.com>
