@@ -320,6 +320,8 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     va_list ap;
     char *cmdstr;
     int status, cmdlen;
+    static int retry = 0;
+    static int level = 0;	/* ftpfs_login_server() use ftpfs_command() */
 
     va_start (ap, fmt);
     cmdstr = g_strdup_vprintf (fmt, ap);
@@ -347,7 +349,6 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 	code = 421;
 
 	if (errno == EPIPE) {	/* Remote server has closed connection */
-	    static int level = 0;	/* ftpfs_login_server() use ftpfs_command() */
 	    if (level == 0) {
 		level = 1;
 		status = ftpfs_reconnect (me, super);
@@ -363,14 +364,30 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 	disable_interrupt_key ();
 	return TRANSIENT;
     }
+    retry = 0;
   ok:
-    g_free (cmdstr);
     disable_interrupt_key ();
 
     if (wait_reply)
-	return ftpfs_get_reply (me, SUP.sock,
+    {
+	status = ftpfs_get_reply (me, SUP.sock,
 			  (wait_reply & WANT_STRING) ? reply_str : NULL,
 			  sizeof (reply_str) - 1);
+	if ((wait_reply & WANT_STRING) && !retry && !level && code == 421)
+	{
+	    retry = 1;
+	    level = 1;
+    	    status = ftpfs_reconnect (me, super);	    
+	    level = 0;
+	    if (status && (write (SUP.sock, cmdstr, cmdlen) > 0)) {
+	        goto ok;
+	    }
+	}
+	retry = 0;
+        g_free (cmdstr);	
+	return status;
+    }
+    g_free (cmdstr);    
     return COMPLETE;
 }
 

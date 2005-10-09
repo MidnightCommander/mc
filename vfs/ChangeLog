@@ -1,3 +1,8 @@
+2005-10-09  Boris Belitsky <?>
+
+	* ftpfs.c (ftpfs_command): Fix "Nowhere to fallback to" warning
+	caused by fallback to acitve mode after inactivity.
+
 2005-09-26  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/iso9660.in: Ignore error messages from locale(1), as it
