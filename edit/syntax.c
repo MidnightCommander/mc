@@ -132,23 +132,29 @@ subst_defines (GTree *defines, char **argv, char **argv_end)
 {
     char **t, **p;
     int argc;
+
     while (*argv && argv < argv_end) {
 	if ((t = g_tree_lookup (defines, *argv))) {
 	    int count = 0;
+
 	    /* Count argv array members */
 	    argc = 0;
 	    for (p = &argv[1]; *p; p++)
 		argc++;
+
 	    /* Count members of definition array */
 	    for (p = t; *p; p++)
 		count++;
 	    p = &argv[count + argc];
+
 	    /* Buffer overflow or infinitive loop in define */
 	    if (p >= argv_end)
 		break;
+
 	    /* Move rest of argv after definition members */
 	    while (argc >= 0)
 		*p-- = argv[argc-- + 1];
+
 	    /* Copy definition members to argv */
 	    for (p = argv; *t; *p++ = *t++);
 	}
@@ -163,6 +169,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 {
     const unsigned char *p, *q;
     int c, d, j;
+
     if (!*text)
 	return -1;
     c = edit_get_byte (edit, i - 1);
@@ -172,6 +179,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
     if (whole_left)
 	if (strchr (whole_left, c))
 	    return -1;
+
     for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case SYNTAX_TOKEN_STAR:
@@ -288,9 +296,11 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
     int is_end;
     long end = 0;
     struct syntax_rule _rule = rule;
+
     if (!(c = edit_get_byte (edit, i)))
 	return rule;
     is_end = (rule.end == (unsigned char) i);
+
 /* check to turn off a keyword */
     if (_rule.keyword) {
 	if (edit_get_byte (edit, i - 1) == '\n')
@@ -300,6 +310,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 	    keyword_foundleft = 1;
 	}
     }
+
 /* check to turn off a context */
     if (_rule.context && !_rule.keyword) {
 	long e;
@@ -311,26 +322,31 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 	    if (r->between_delimiters)
 		_rule.context = 0;
 	} else if (is_end && rule.border & RULE_ON_RIGHT_BORDER) {
+
 /* always turn off a context at 4 */
 	    found_left = 1;
 	    _rule.border = 0;
 	    if (!keyword_foundleft)
 		_rule.context = 0;
 	} else if (is_end && rule.border & RULE_ON_LEFT_BORDER) {
+
 /* never turn off a context at 2 */
 	    found_left = 1;
 	    _rule.border = 0;
 	}
     }
+
 /* check to turn on a keyword */
     if (!_rule.keyword) {
 	const char *p;
+
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
 	if (p)
 	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
 	    struct key_word *k;
 	    int count;
 	    long e;
+
 	    count = p - r->keyword_first_chars;
 	    k = r->keyword[count];
 	    e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start);
@@ -351,6 +367,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 		_rule.context = 0;
 		contextchanged = 1;
 		_rule.keyword = 0;
+
 	    } else if (rule.border & RULE_ON_LEFT_BORDER) {
 		r = edit->rules[_rule._context];
 		_rule.border = 0;
@@ -368,13 +385,16 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 		}
 	    }
 	}
+
 	if (!found_right) {
 	    int count;
 	    struct context_rule **rules = edit->rules;
+
 	    for (count = 1; rules[count]; count++) {
 		r = rules[count];
 		if (r->first_left == c) {
 		    long e;
+
 		    e = compare_word_to_right (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left);
 		    if (e >= end && (!_rule.keyword || keyword_foundright)) {
 			_rule.end = e;
@@ -392,14 +412,17 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 	    }
 	}
     }
+
 /* check again to turn on a keyword if the context switched */
     if (contextchanged && !_rule.keyword) {
 	const char *p;
+
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
 	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
 	    struct key_word *k;
 	    int count;
 	    long e;
+
 	    count = p - r->keyword_first_chars;
 	    k = r->keyword[count];
 	    e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start);
@@ -416,11 +439,13 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 {
     long i;
+
     if (byte_index > edit->last_get_rule) {
 	for (i = edit->last_get_rule + 1; i <= byte_index; i++) {
 	    edit->rule = apply_rules_going_right (edit, i, edit->rule);
 	    if (i > (edit->syntax_marker ? edit->syntax_marker->offset + SYNTAX_MARKER_DENSITY : SYNTAX_MARKER_DENSITY)) {
 		struct _syntax_marker *s;
+
 		s = edit->syntax_marker;
 		edit->syntax_marker = g_malloc0 (sizeof (struct _syntax_marker));
 		edit->syntax_marker->next = s;
@@ -430,6 +455,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 	}
     } else if (byte_index < edit->last_get_rule) {
 	struct _syntax_marker *s;
+
 	for (;;) {
 	    if (!edit->syntax_marker) {
 		memset (&edit->rule, 0, sizeof (edit->rule));
@@ -455,6 +481,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
 {
     struct key_word *k;
+
     k = edit->rules[rule.context]->keyword[rule.keyword];
     *color = k->color;
 }
@@ -516,6 +543,7 @@ static int read_one_line (char **line, FILE * f)
 static char *convert (char *s)
 {
     char *r, *p;
+
     p = r = s;
     while (*s) {
 	switch (*s) {
@@ -582,6 +610,7 @@ static char *convert (char *s)
 static int get_args (char *l, char **args, int args_size)
 {
     int argc = 0;
+
     while (argc < args_size) {
 	char *p = l;
 	while (*p && whiteness (*p))
@@ -606,6 +635,7 @@ static int
 this_try_alloc_color_pair (const char *fg, const char *bg)
 {
     char f[80], b[80], *p;
+
     if (bg)
 	if (!*bg)
 	    bg = 0;
@@ -685,6 +715,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 
     for (;;) {
 	char **a;
+
 	line++;
 	l = 0;
 	if (!read_one_line (&l, f)) {
@@ -813,6 +844,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    c->spelling = 1;
 	} else if (!strcmp (args[0], "keyword")) {
 	    struct key_word *k;
+
 	    if (num_words == -1)
 		break_a;
 	    check_a;
@@ -934,15 +966,18 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 void edit_free_syntax_rules (WEdit * edit)
 {
     int i, j;
+
     if (!edit)
 	return;
     if (edit->defines)
 	destroy_defines (&edit->defines);
     if (!edit->rules)
 	return;
+
     edit_get_rule (edit, -1);
     syntax_g_free (edit->syntax_type);
     edit->syntax_type = 0;
+
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
@@ -960,11 +995,13 @@ void edit_free_syntax_rules (WEdit * edit)
 	syntax_g_free (edit->rules[i]->keyword_first_chars);
 	syntax_g_free (edit->rules[i]);
     }
+
     while (edit->syntax_marker) {
 	struct _syntax_marker *s = edit->syntax_marker->next;
 	syntax_g_free (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
+
     syntax_g_free (edit->rules);
 }
 
@@ -996,6 +1033,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	if (!f)
 	    return -1;
     }
+
     args[0] = 0;
     for (;;) {
 	line++;
@@ -1005,6 +1043,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	(void)get_args (l, args, 1023);	/* Final NULL */
 	if (!args[0])
 	    continue;
+
 /* Looking for `include ...` lines before first `file ...` ones */
 	if (!found && !strcmp (args[0], "include")) {
 	    if (g)
@@ -1015,17 +1054,20 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	    }
 	    goto found_type;
 	}
+
 /* looking for `file ...' lines only */
 	if (strcmp (args[0], "file")) {
 	    continue;
 	}
 	found = 1;
+
 /* must have two args or report error */
 	if (!args[1] || !args[2]) {
 	    result = line;
 	    break;
 	}
 	if (pnames && *pnames) {
+
 /* 1: just collecting a list of names of rule sets */
 /* Reallocate the list if required */
 	    if (count % NENTRIES == 0) {
@@ -1038,16 +1080,19 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	    (*pnames)[count++] = g_strdup (args[2]);
 	    (*pnames)[count] = NULL;
 	} else if (type) {
+
 /* 2: rule set was explicitly specified by the caller */
 	    if (!strcmp (type, args[2]))
 		goto found_type;
 	} else if (editor_file && edit) {
+
 /* 3: auto-detect rule set from regular expressions */
 	    int q;
 	    if (regcomp (&r, args[1], REG_EXTENDED)) {
 		result = line;
 		break;
 	    }
+
 /* does filename match arg 1 ? */
 	    q = !regexec (&r, editor_file, 1, pmatch, 0);
 	    regfree (&r);
@@ -1056,6 +1101,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		    result = line;
 		    break;
 		}
+
 /* does first line match arg 3 ? */
 		q = !regexec (&r, first_line, 1, pmatch, 0);
 		regfree (&r);
@@ -1074,6 +1120,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		} else {
 		    syntax_g_free (edit->syntax_type);
 		    edit->syntax_type = g_strdup (syntax_type);
+
 /* if there are no rules then turn off syntax highlighting for speed */
 		    if (!g && !edit->rules[1])
 			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
@@ -1099,6 +1146,7 @@ static char *get_first_editor_line (WEdit * edit)
 {
     int i;
     static char s[256];
+
     s[0] = '\0';
     if (!edit)
 	return s;
