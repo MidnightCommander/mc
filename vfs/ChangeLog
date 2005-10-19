@@ -1,3 +1,9 @@
+2005-10-19  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* fish.c (fish_dir_load, fish_linear_start): Get numerical gid/uids
+	from ls to avoid wrong parsing of user/group names containing white
+	space.
+
 2005-10-09  Boris Belitsky <?>
 
 	* ftpfs.c (ftpfs_command): Fix "Nowhere to fallback to" warning

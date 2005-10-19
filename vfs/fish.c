@@ -387,13 +387,13 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     quoted_path = name_quote (remote_path, 0);
     fish_command (me, super, NONE,
 	    "#LIST /%s\n"
-	    "ls -lLa /%s 2>/dev/null | grep '^[^cbt]' | (\n"
-	      "while read p x u g s m d y n; do\n"
+	    "ls -lLan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
+	      "while read p l u g s m d y n; do\n"
 	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
-	    "ls -lLa /%s 2>/dev/null | grep '^[cb]' | (\n"
-	      "while read p x u g a i m d y n; do\n"
+	    "ls -lan /%s 2>/dev/null | grep '^[cb]' | (\n"
+	      "while read p l u g a i m d y n; do\n"
 	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
@@ -599,9 +599,9 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     fh->u.fish.append = 0;
     offset = fish_command (me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
-		"ls -l /%s 2>/dev/null | (\n"
-		  "read var1 var2 var3 var4 var5 var6\n"
-		  "echo \"$var5\"\n"
+		"ls -ln /%s 2>/dev/null | (\n"
+		  "read p l u g s r\n"
+		  "echo \"$s\"\n"
 		")\n"
 		"echo '### 100'\n"
 		"cat /%s\n"
