@@ -55,6 +55,9 @@ include html.syntax
 file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD|qpg|qpg.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
 
+file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk)$ Makefile
+include makefile.syntax
+
 file ..\*\\.(pp|PP|pas|PAS|dpr|DPR|inc|INC)$ Pascal\sProgram
 include pascal.syntax
 
@@ -117,9 +120,6 @@ include spec.syntax
 
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
-
-file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk)$ Makefile
-include makefile.syntax
 
 file (..\*\\.m4$|configure\\.in|configure\\.ac) M4\sMacroprocessor\sSource
 include m4.syntax

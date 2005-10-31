@@ -1,3 +1,8 @@
+2005-10-31  Pavel Roskin  <proski@gnu.org>
+
+	* Syntax: Move makefile.syntax before pascal.syntax so that
+	Makefile.inc is highlighted as a makefile.
+
 2005-09-05  Roland Illig  <roland.illig@gmx.de>
 
 	* assembler.syntax: Assembler files may contain comments, too.
