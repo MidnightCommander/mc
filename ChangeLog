@@ -1,8 +1,3 @@
-2005-10-07  Roland Illig  <roland.illig@gmx.de>
-
-	* configure.ac: Include -lintl if it is needed for
-	libintl_gettext(). Needed for NetBSD-1.6.2.
-
 2005-10-03  Pavel Roskin  <proski@gnu.org>
 
 	* configure.ac: Require gettext with ngettext support.  It's

@@ -185,7 +185,6 @@ AC_CHECK_FUNCS([\
 	setreuid setuid statfs strerror strftime sysconf \
 	tcgetattr tcsetattr truncate \
 ])
-AC_CHECK_LIB([intl], [libintl_gettext])
 
 dnl S-Lang needs all four functions to be defined to use POSIX signal API
 AC_CHECK_FUNCS([sigaction sigemptyset sigprocmask sigaddset], , [slang_signals=no])
