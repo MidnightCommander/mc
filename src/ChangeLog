@@ -1,3 +1,8 @@
+2005-11-02  Egmont Koblinger  <egmont@uhulinux.hu>
+
+	* main.c (directory_history_add): Fix invalid directory preselection on
+	cd.
+
 2005-10-08  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (main): Fix using 0 instead of NULL.

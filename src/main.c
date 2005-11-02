@@ -534,7 +534,6 @@ directory_history_add (struct WPanel *panel, const char *dir)
 /*
  *  If we moved to the parent directory move the selection pointer to
  *  the old directory name; If we leave VFS dir, remove FS specificator.
- *  Warn: This code spoils lwd string.
  *
  *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
  */
@@ -543,7 +542,9 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 {
     const char *p;
     if (strlen (lwd) > strlen (cwd))
-	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd)) {
+	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
+	 (strlen (cwd) == p - lwd || (p == lwd && cwd[0] == PATH_SEP &&
+	  cwd[1] == '\0'))) {
 	    return (p + 1);
 	}
     return NULL;
