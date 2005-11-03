@@ -1,3 +1,12 @@
+2005-11-02  Pavel Roskin  <proski@gnu.org>
+
+	* glibcompat.c: Move Q_ back ...
+	* util.c: ... here.  Q_ is not defined by just including glib.h.
+	The glib implementation doesn't strip prefix from translations,
+	so it's not suitable for us.  Finally, it makes man2hlp depend
+	on libintl.
+	Reported by Leonard den Ottolander <leonard@den.ottolander.nl>
+
 2005-11-02  Egmont Koblinger  <egmont@uhulinux.hu>
 
 	* main.c (directory_history_add): Fix invalid directory preselection on

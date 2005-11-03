@@ -261,4 +261,7 @@ void save_file_position (const char *filename, long line, long column);
  * else returns the argument. */
 extern int ascii_alpha_to_cntrl (int ch);
 
+#undef Q_
+const char *Q_ (const char *s);
+
 #endif

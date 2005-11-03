@@ -1507,3 +1507,14 @@ ascii_alpha_to_cntrl (int ch)
     }
     return ch;
 }
+
+const char *
+Q_ (const char *s)
+{
+    const char *result, *sep;
+
+    result = _(s);
+    sep = strchr(result, '|');
+    return (sep != NULL) ? sep + 1 : result;
+}
+
