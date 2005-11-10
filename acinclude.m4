@@ -937,12 +937,13 @@ AC_DEFUN([MC_ASM_LABELS], [
 		   mc_cv_asm_labels,
 		   [mc_cv_asm_labels=no
 		   if test -n "$GCC"; then
-			AC_TRY_LINK(, [
-static int function1 (void) __asm__ ("function2");
-static int function1 (void)
+			AC_TRY_LINK([
+int function1 (void) __asm__ ("function2");
+int function1 (void)
 {
     return 0;
 }
+], [
 return function2();
 ], [mc_cv_asm_labels=yes])
 		   fi

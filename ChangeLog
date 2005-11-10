@@ -1,3 +1,9 @@
+2005-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_ASM_LABELS): Make the test function global
+	and move its definition above main().  That's closer to what
+	gettext is actually doing.
+
 2005-10-03  Pavel Roskin  <proski@gnu.org>
 
 	* configure.ac: Require gettext with ngettext support.  It's
