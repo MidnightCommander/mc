@@ -216,7 +216,7 @@ ssize_t read_udp_socket(int fd,char *buf,size_t len)
   lastport = ntohs(sock.sin_port);
 
   DEBUG(10,("read_udp_socket: lastip %s lastport %d read: %d\n",
-             inet_ntoa(lastip), lastport, ret));
+             inet_ntoa(lastip), lastport, (int)ret));
 
   return(ret);
 }
@@ -455,7 +455,7 @@ static ssize_t read_smb_length_return_keepalive(int fd,char *inbuf,unsigned int 
       DEBUG(5,("Got keepalive packet\n"));
   }
 
-  DEBUG(10,("got smb length of %d\n",len));
+  DEBUG(10,("got smb length of %d\n", (int)len));
 
   return(len);
 }
@@ -510,7 +510,7 @@ BOOL receive_smb(int fd,char *buffer, unsigned int timeout)
   }
 
   if (len > BUFFER_SIZE) {
-    DEBUG(0,("Invalid packet length! (%d bytes).\n",len));
+    DEBUG(0,("Invalid packet length! (%d bytes).\n", (int)len));
     if (len > BUFFER_SIZE + (SAFETY_MARGIN/2))
     {
 	exit(1);

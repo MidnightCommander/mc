@@ -1,5 +1,7 @@
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* samba/lib/util_sock.c: Fix warnings on 64-bit systems.
+
 	* mcserv.c (get_client): Fix gcc 4 warning.
 
 	* smbfs.c: Remove redundant ipzero declaration.
