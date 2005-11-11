@@ -1188,7 +1188,8 @@ server (int sock)
 static const char *
 get_client (int portnum)
 {
-    int sock, clilen, newsocket;
+    int sock, newsocket;
+    unsigned int clilen;
     struct sockaddr_in client_address, server_address;
     int yes = 1;
 
