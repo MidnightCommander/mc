@@ -1,3 +1,9 @@
+2005-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* global.h [!ENABLE_NLS]: Provide replacement for ngettext.
+	* screen.c (display_mini_info): Cast panel->total to unsigned
+	long before passing it to ngettext() to avoid warnings.
+
 2005-11-02  Pavel Roskin  <proski@gnu.org>
 
 	* glibcompat.c: Move Q_ back ...

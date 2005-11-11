@@ -139,6 +139,7 @@ struct timeval {
 #else /* Stubs that do something close enough.  */
 #   define textdomain(String)
 #   define gettext(String) (String)
+#   define ngettext(String1,String2,Num) (((Num) == 1) ? (String1) : (String2))
 #   define dgettext(Domain,Message) (Message)
 #   define dcgettext(Domain,Message,Type) (Message)
 #   define bindtextdomain(Domain,Directory)

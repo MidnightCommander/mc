@@ -685,7 +685,8 @@ display_mini_info (WPanel *panel)
 	 * First make "N bytes", then insert it into "X in M files".
 	 */
 	g_snprintf(b_bytes, sizeof (b_bytes),
-		   ngettext("%s byte", "%s bytes", panel->total),
+		   ngettext("%s byte", "%s bytes",
+			    (unsigned long)panel->total),
 		   size_trunc_sep(panel->total));
 	g_snprintf(buffer, sizeof (buffer),
 		   ngettext("%s in %d file", "%s in %d files", panel->marked),
