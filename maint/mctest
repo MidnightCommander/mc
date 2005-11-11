@@ -5,6 +5,8 @@
 
 set -e
 
+trap 'echo >&2 "ERROR: Test not completed, exit with code $?"; exit 1' exit
+
 distcheck() {
     id="$1"
     shift
@@ -70,4 +72,5 @@ else
 	echo "rpmbuild not found"
 fi
 
+trap - exit
 echo "All done.  No fatal errors.  Please check test*.err files."
