@@ -4,6 +4,7 @@ dnl
 
 AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
 AC_PREREQ(2.54)
+m4_pattern_forbid(MC_)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE(mc, 4.6.1a)
