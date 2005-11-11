@@ -16,8 +16,8 @@ distcheck() {
 # Add -Wstrict-prototypes after main.h is fixed (always use cpanel).
 # Maybe add -W if a better way to initialize quick dialogs is found.
 export CFLAGS="-O2 -Wall -Wno-unused-parameter -Wno-sign-compare \
- -Wmissing-declarations -Wmissing-prototypes -Wbad-function-cast \
- -Wcast-align -Wpointer-arith -Wredundant-decls -Wundef -Wfloat-equal"
+-Wmissing-declarations -Wmissing-prototypes -Wbad-function-cast \
+-Wcast-align -Wpointer-arith -Wredundant-decls -Wundef -Wfloat-equal"
 
 # Suppress progress indicator
 export MSGMERGE="msgmerge --quiet"
@@ -63,7 +63,7 @@ if test -x $RPMBUILD; then
 	mkdir "$RPM_SRC_DIR"
 	mkdir "$RPM_SRC_DIR/BUILD"
 	mkdir "$RPM_SRC_DIR/RPMS"
-	mkdir "$RPM_SRC_DIR/RPMS/`$RPMBUILD --eval='%{_host_cpu}'`"
+	mkdir "$RPM_SRC_DIR/RPMS/`$RPMBUILD --eval='%{_host_cpu}' 2>/dev/null`"
 	mkdir "$RPM_SRC_DIR/SPECS"
 	$RPMBUILD -tb --define="_topdir $RPM_SRC_DIR" mc-*.tar.gz >test-rpm.out 2>test-rpm.err
 else
