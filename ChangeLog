@@ -1,5 +1,9 @@
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.ac: Use gettext 0.14.3.
+	* acinclude.m4 (MC_ASM_LABELS): Remove, it's not needed with
+	recent versions of gettext.
+
 	* acinclude.m4 (MC_ASM_LABELS): Make the test function global
 	and move its definition above main().  That's closer to what
 	gettext is actually doing.
