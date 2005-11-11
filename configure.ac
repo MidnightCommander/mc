@@ -102,7 +102,6 @@ fi
 dnl
 dnl Internationalization
 dnl
-MC_ASM_LABELS
 AM_GNU_GETTEXT(no-libtool, need-ngettext)
 AM_GNU_GETTEXT_VERSION(0.14.3)
 
