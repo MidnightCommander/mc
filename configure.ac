@@ -3,7 +3,7 @@ dnl Configure.in file for the Midnight Commander
 dnl
 
 AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
-AC_PREREQ(2.53)
+AC_PREREQ(2.54)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
 AM_INIT_AUTOMAKE(mc, 4.6.1a)
@@ -13,6 +13,7 @@ AM_MAINTAINER_MODE
 
 AC_CANONICAL_HOST
 
+AC_GNU_SOURCE
 AC_AIX
 AC_MINIX
 AC_ISC_POSIX
@@ -141,9 +142,6 @@ aux*)
     # A/UX
     LIBS="$LIBS -lposix"
     AC_DEFINE(_POSIX_SOURCE)
-    ;;
-linux*)
-    AC_DEFINE(_GNU_SOURCE,, [Define to request GNU feature set on Linux])
     ;;
 esac
 
