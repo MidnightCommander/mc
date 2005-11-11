@@ -63,6 +63,7 @@ static uint32 err;
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
 extern pstring myhostname;
+extern struct in_addr ipzero;
 static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
@@ -923,7 +924,6 @@ smbfs_do_connect (const char *server, char *share)
 	struct cli_state *c;
 	struct nmb_name called, calling;
 	struct in_addr ip;
-	extern struct in_addr ipzero;
 
 	DEBUG(3, ("smbfs_do_connect(%s, %s)\n", server, share));
 	if (*share == '\\') {
@@ -1013,7 +1013,6 @@ smbfs_get_master_browser(char **host)
 	static char so_broadcast[] = "SO_BROADCAST";
 	int count;
 	struct in_addr *ip_list, bcast_addr;
-	extern struct in_addr  ipzero;
 
 	/* does port = 137 for win95 master browser? */
 	int fd= open_socket_in( SOCK_DGRAM, 0, 3,
