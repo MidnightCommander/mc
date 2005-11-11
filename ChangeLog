@@ -1,5 +1,8 @@
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* m4/*.m4: Update to the macros provided by gettext 0.14.3.
+	* m4/Makefile.am: Update the list of the *.m4 files.
+
 	* configure.ac: Use AC_GNU_SOURCE, which prevents redefining
 	_GNU_SOURCE.  Bump Autoconf version to 2.54, where AC_GNU_SOURCE
 	appeared.
