@@ -26,7 +26,7 @@
 #define LIST_LINES 14
 #define N_DFLT_ENTRIES 2
 
-int
+static int
 exec_edit_syntax_dialog (const char **names) {
     int i;
 

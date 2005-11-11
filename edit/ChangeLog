@@ -1,3 +1,9 @@
+2005-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* choosesyntax.c: Make undeclared functions static.
+	* editmenu.c: Likewise.
+	* usermap.c: Likewise.
+
 2005-10-04  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* editcmd.c (edit_replace_dialog): Replace duplicate hotkey.

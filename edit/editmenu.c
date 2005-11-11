@@ -420,7 +420,8 @@ static menu_entry OptMenu[] =
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
-void edit_init_menu_normal (struct Menu *EditMenuBar[])
+static void
+edit_init_menu_normal (struct Menu *EditMenuBar[])
 {
     EditMenuBar[0] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu),
 				    "[Internal File Editor]");
@@ -434,7 +435,8 @@ void edit_init_menu_normal (struct Menu *EditMenuBar[])
 				    "[Internal File Editor]");
 }
 
-void edit_init_menu_emacs (struct Menu *EditMenuBar[])
+static void
+edit_init_menu_emacs (struct Menu *EditMenuBar[])
 {
     EditMenuBar[0] = create_menu (_(" File "), FileMenuEmacs, menu_entries (FileMenuEmacs),
 				    "[Internal File Editor]");

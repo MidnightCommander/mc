@@ -565,7 +565,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
     return TRUE;
 }
 
-gboolean
+static gboolean
 load_user_keymap(config_t *cfg, const char *file)
 {
     const command_t cmd[] = {
