@@ -1,9 +1,23 @@
-/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 #include "slinclud.h"
 
@@ -39,31 +53,31 @@ static void set_ctrl_break (int state)
  * NO_FLOW_CONTROL and OPOST are only for compatiblity and are ignored.
 \*----------------------------------------------------------------------*/
 
-HANDLE _SLw32_Hstdin = INVALID_HANDLE_VALUE;
+HANDLE SLw32_Hstdin = INVALID_HANDLE_VALUE;
 
 int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 {
    (void) opost;
    (void) no_flow_control;
 
-   if (_SLw32_Hstdin != INVALID_HANDLE_VALUE)
+   if (SLw32_Hstdin != INVALID_HANDLE_VALUE)
      return 0;
 
 #if 1
    /* stdin may have been redirected.  So try this */
-   _SLw32_Hstdin = CreateFile ("CONIN$", GENERIC_READ|GENERIC_WRITE, 
+   SLw32_Hstdin = CreateFile ("CONIN$", GENERIC_READ|GENERIC_WRITE, 
 			       FILE_SHARE_READ|FILE_SHARE_WRITE, NULL, 
 			       OPEN_EXISTING, 0, NULL);
-   if (_SLw32_Hstdin == INVALID_HANDLE_VALUE)
+   if (SLw32_Hstdin == INVALID_HANDLE_VALUE)
      return -1;
 #else
-   if (INVALID_HANDLE_VALUE == (_SLw32_Hstdin = GetStdHandle(STD_INPUT_HANDLE)))
+   if (INVALID_HANDLE_VALUE == (SLw32_Hstdin = GetStdHandle(STD_INPUT_HANDLE)))
      return -1;
 #endif
 
-   if (FALSE == SetConsoleMode(_SLw32_Hstdin, ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT))
+   if (FALSE == SetConsoleMode(SLw32_Hstdin, ENABLE_WINDOW_INPUT|ENABLE_MOUSE_INPUT))
      {
-	_SLw32_Hstdin = INVALID_HANDLE_VALUE;
+	SLw32_Hstdin = INVALID_HANDLE_VALUE;
 	return -1;
      }
    
@@ -81,7 +95,7 @@ int SLang_init_tty (int abort_char, int no_flow_control, int opost)
 \*----------------------------------------------------------------------*/
 void SLang_reset_tty (void)
 {
-   _SLw32_Hstdin = INVALID_HANDLE_VALUE;
+   SLw32_Hstdin = INVALID_HANDLE_VALUE;
    set_ctrl_break (1);
 }
 
@@ -136,11 +150,11 @@ static int process_key_event (KEY_EVENT_RECORD *key)
 
    if (!key->bKeyDown) return 0;
    if (d & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED))
-     key_state |= _SLTT_KEY_ALT;
+     key_state |= _pSLTT_KEY_ALT;
    if (d & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) 
-     key_state |= _SLTT_KEY_CTRL;
+     key_state |= _pSLTT_KEY_CTRL;
    if (d & SHIFT_PRESSED)
-     key_state |= _SLTT_KEY_SHIFT;
+     key_state |= _pSLTT_KEY_SHIFT;
 
    scan = key->wVirtualScanCode;
 
@@ -150,26 +164,26 @@ static int process_key_event (KEY_EVENT_RECORD *key)
 	return SLang_buffer_keystring ((unsigned char *)"\x7F", 1);
 
       case 0x003:		       /* 2 key */
-	if (key_state & _SLTT_KEY_ALT)
+	if (key_state & _pSLTT_KEY_ALT)
 	  break;
 	/* Drop */
       case 0x039: 		       /* space */
-	if (key_state & _SLTT_KEY_CTRL)
+	if (key_state & _pSLTT_KEY_CTRL)
 	  return SLang_buffer_keystring ((unsigned char *)"\x00\x03", 2);
 	break;
 
       case 0x007:		       /* 6 key */
-	if (_SLTT_KEY_CTRL == (key_state & (_SLTT_KEY_ALT|_SLTT_KEY_CTRL)))
+	if (_pSLTT_KEY_CTRL == (key_state & (_pSLTT_KEY_ALT|_pSLTT_KEY_CTRL)))
 	  return SLang_buffer_keystring ((unsigned char *)"\x1E", 1);   /* Ctrl-^ */
 	break;
 
       case 0x00C:		       /* -/_ key */
-	if (_SLTT_KEY_CTRL == (key_state & (_SLTT_KEY_ALT|_SLTT_KEY_CTRL)))
+	if (_pSLTT_KEY_CTRL == (key_state & (_pSLTT_KEY_ALT|_pSLTT_KEY_CTRL)))
 	  return SLang_buffer_keystring ((unsigned char *)"\x1F", 1);
 	break;
 
       case 0x00F:		       /* TAB */
-	if (_SLTT_KEY_SHIFT == key_state)
+	if (_pSLTT_KEY_SHIFT == key_state)
 	  return SLang_buffer_keystring ((unsigned char *)"\x00\x09", 2);
 	break;
 
@@ -197,7 +211,7 @@ static int process_key_event (KEY_EVENT_RECORD *key)
 	     if (d & NUMLOCK_ON)
 	       break;
 	  }
-	(void) _SLpc_convert_scancode (scan, key_state, 0);
+	(void) _pSLpc_convert_scancode (scan, key_state, 0);
 	return 0;
 
       case 0x3b:		       /* F1 */
@@ -212,13 +226,13 @@ static int process_key_event (KEY_EVENT_RECORD *key)
       case 0x44:
       case 0x57:
       case 0x58:		       /* F12 */
-	(void) _SLpc_convert_scancode (scan, key_state, 0);
+	(void) _pSLpc_convert_scancode (scan, key_state, 0);
      }
    
    c1 = key->uChar.AsciiChar;
    if (c1 != 0)
      {
-	if (_SLTT_KEY_ALT == (key_state & (_SLTT_KEY_ALT|_SLTT_KEY_CTRL)))
+	if (_pSLTT_KEY_ALT == (key_state & (_pSLTT_KEY_ALT|_pSLTT_KEY_CTRL)))
 	  {
 	     buf[0] = 27;
 	     buf[1] = c1;
@@ -226,7 +240,8 @@ static int process_key_event (KEY_EVENT_RECORD *key)
 	  }
 	if (c1 == SLang_Abort_Char)
 	  {
-	     if (SLang_Ignore_User_Abort == 0) SLang_Error = USER_BREAK;
+	     if (SLang_Ignore_User_Abort == 0) 
+	       SLang_set_error (USER_BREAK);
 	     SLKeyBoard_Quit = 1;
 	  }
 	buf[0] = c1;
@@ -242,12 +257,12 @@ static void process_console_records(void)
    DWORD bytesRead;
    DWORD n = 0;
 
-   if (FALSE == GetNumberOfConsoleInputEvents(_SLw32_Hstdin, &n))
+   if (FALSE == GetNumberOfConsoleInputEvents(SLw32_Hstdin, &n))
      return;
 
    while (n > 0)
      {
-	ReadConsoleInput(_SLw32_Hstdin, &record, 1, &bytesRead);
+	ReadConsoleInput(SLw32_Hstdin, &record, 1, &bytesRead);
 	switch (record.EventType)
 	  {
 	   case KEY_EVENT:
@@ -267,15 +282,15 @@ static void process_console_records(void)
 }
 
 /*----------------------------------------------------------------------*\
- *  Function:	int _SLsys_input_pending (int tsecs);
+ *  Function:	int _pSLsys_input_pending (int tsecs);
  *
  *  sleep for *tsecs tenths of a sec waiting for input
 \*----------------------------------------------------------------------*/
-int _SLsys_input_pending (int tsecs)
+int _pSLsys_input_pending (int tsecs)
 {
    long ms;
 
-   if (_SLw32_Hstdin == INVALID_HANDLE_VALUE)
+   if (SLw32_Hstdin == INVALID_HANDLE_VALUE)
      return -1;
 
    if (tsecs < 0) ms = -tsecs;	       /* specifies 1/1000 */
@@ -289,7 +304,7 @@ int _SLsys_input_pending (int tsecs)
 
 	t = GetTickCount ();
 
-	(void) WaitForSingleObject (_SLw32_Hstdin, ms);
+	(void) WaitForSingleObject (SLw32_Hstdin, ms);
 	process_console_records ();
 	ms -= GetTickCount () - t;
      }
@@ -298,7 +313,7 @@ int _SLsys_input_pending (int tsecs)
 }
 
 /*----------------------------------------------------------------------*\
- *  Function:	unsigned int _SLsys_getkey (void);
+ *  Function:	unsigned int _pSLsys_getkey (void);
  *
  * wait for and get the next available keystroke.
  * Also re-maps some useful keystrokes.
@@ -307,15 +322,15 @@ int _SLsys_input_pending (int tsecs)
  *	Ctrl-Space	=>	^@	(^@^3 - a pc NUL char)
  *	extended keys are prefixed by a null character
 \*----------------------------------------------------------------------*/
-unsigned int _SLsys_getkey (void)
+unsigned int _pSLsys_getkey (void)
 {
-   /* Check the input buffer because _SLsys_input_pending may have been 
+   /* Check the input buffer because _pSLsys_input_pending may have been 
     * called prior to this to stuff the input buffer.
     */
    if (SLang_Input_Buffer_Len)
      return SLang_getkey ();
 
-   if (_SLw32_Hstdin == INVALID_HANDLE_VALUE)
+   if (SLw32_Hstdin == INVALID_HANDLE_VALUE)
      return SLANG_GETKEY_ERROR;
 
    while (1)
@@ -325,7 +340,7 @@ unsigned int _SLsys_getkey (void)
 	if (SLKeyBoard_Quit)
 	  return SLang_Abort_Char;
 	
-	status = _SLsys_input_pending (600);
+	status = _pSLsys_input_pending (600);
 	if (status == -1)
 	  return SLANG_GETKEY_ERROR;
 	
@@ -339,9 +354,10 @@ unsigned int _SLsys_getkey (void)
 \*----------------------------------------------------------------------*/
 int SLang_set_abort_signal (void (*handler)(int))
 {
-   if (_SLw32_Hstdin == INVALID_HANDLE_VALUE)
+   if (SLw32_Hstdin == INVALID_HANDLE_VALUE)
      return -1;
-
+   if (handler == NULL)
+     SLang_Interrupt = process_console_records;
    return 0;
 }
 

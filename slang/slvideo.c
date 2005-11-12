@@ -1,10 +1,24 @@
 /* -*- mode: C; mode: fold -*- */
-/* Copyright (c) 1992, 1997, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 /* This file is best edited with a folding editor */
 
@@ -26,7 +40,7 @@ int SLtt_Screen_Rows = 25;
 int SLtt_Screen_Cols = 80;
 int SLtt_Msdos_Cheap_Video = 0;
 
-void (*_SLtt_color_changed_hook)(void);
+void (*_pSLtt_color_changed_hook)(void);
 
 /* This definition will need changing when SLsmg_Char_Type changes. */
 #define SLSMG_CHAR_TO_USHORT(x) ((unsigned short)(x))
@@ -40,6 +54,7 @@ static int Current_Color;
 static int IsColor = 1;
 static int Blink_Killed = 1;	/* high intensity background enabled */
 
+/* FIXME: sldisply.c allows up to 512 colors */
 #define JMAX_COLORS	256
 #define JNORMAL_COLOR	0
 #define JNO_COLOR	-1
@@ -81,7 +96,7 @@ static unsigned char Color_Map [JMAX_COLORS] =
 };
 
 #define JMAX_COLOR_NAMES 16
-static const char * const Color_Names [JMAX_COLOR_NAMES] =
+static SLCONST char *Color_Names [JMAX_COLOR_NAMES] =
 {
    "black", "blue", "green", "cyan",
      "red", "magenta", "brown", "lightgray",
@@ -905,9 +920,6 @@ static VIOMODEINFO vioModeInfo;
 #define MAXCOLS 256
 static unsigned char Line_Buffer [MAXCOLS*2];
 
-/* this is how to make a space character */
-#define MK_SPACE_CHAR()	(((Attribute_Byte) << 8) | 0x20)
-
 void SLtt_write_string (char *str)
 {
    /* FIXME: Priority=medium
@@ -934,15 +946,15 @@ static void emx_video_deleol (int x)
 {
    unsigned char *p, *pmax;
    int count = SLtt_Screen_Cols - x;
-   int w = MK_SPACE_CHAR ();
+   unsigned char attr = Attribute_Byte;
 
    p = Line_Buffer;
    pmax = p + 2 * count;
 
    while (p < pmax)
      {
-	*p++ = (unsigned char) w;
-	*p++ = (unsigned char) (w >> 8);
+	*p++ = (unsigned char) ' ';
+	*p++ = attr;
      }
 
    v_putline (Line_Buffer, x, Cursor_Row, count);
@@ -1044,17 +1056,21 @@ static void
 write_attributes (SLsmg_Char_Type *src, unsigned int count)
 {
    register unsigned char *p = Line_Buffer;
-   register unsigned short pair;
    int n = count;
 
    /* write into a character/attribute pair */
-   while (n-- > 0)
+   while (n > 0)
      {
-	pair = SLSMG_CHAR_TO_USHORT(*src);/* character/color pair */
+	/* UTF8 FIXME */
+	if (src->nchars)
+	  {
+	     SLtt_reverse_video (src->color & SLSMG_COLOR_MASK);
+	     *p++ = src->wchars[0];
+	  }
+	else *p++ = ' ';
+	*p++ = Attribute_Byte;
+	n--;
 	src++;
-	SLtt_reverse_video (pair >> 8);	/* color change */
-	*(p++) = pair & 0xff;		/* character byte */
-	*(p++) = Attribute_Byte;	/* attribute byte */
      }
    v_putline (Line_Buffer, Cursor_Col, Cursor_Row, count);
 }
@@ -1365,7 +1381,6 @@ void SLtt_del_eol (void)
 static void
 write_attributes (SLsmg_Char_Type *src, unsigned int count)
 {
-   unsigned short pair;
    COORD coord, c;
    CHAR_INFO *p;
    unsigned int n;
@@ -1376,13 +1391,20 @@ write_attributes (SLsmg_Char_Type *src, unsigned int count)
    p = Line_Buffer;
    while (n)
      {
-	n--;
-	pair = SLSMG_CHAR_TO_USHORT(*src);/* character/color pair */
-	src++;
-	SLtt_reverse_video (pair >> 8);	/* color change */
-	p->Char.AsciiChar = pair & 0xff;
+	/* UTF8 FIXME */
+	if (src->nchars)
+	  {
+	     SLtt_reverse_video (src->color & SLSMG_COLOR_MASK);
+	     p->Char.AsciiChar = src->wchars[0];
+	  }
+	else
+	  {
+	     p->Char.AsciiChar = 0;
+	  }
 	p->Attributes = Attribute_Byte;
 	p++;
+	n--;
+	src++;
      }
 
    c.X = count;
@@ -2235,6 +2257,8 @@ void SLtt_smart_puts (SLsmg_Char_Type *new_string,
    (void) old_string;
    Cursor_Row = row;
    Cursor_Col = 0;
+   /* fprintf (stderr, "smart_puts called: len=%d, row=%d\n", len, row); */
+   /* return; */
    write_attributes (new_string, len);
 }
 
@@ -2265,14 +2289,14 @@ int SLtt_reset_video (void)
  * WHAT is the name corresponding to the object OBJ, but is not used in
  * this routine.
 \*----------------------------------------------------------------------*/
-void SLtt_set_color (int obj, char *what, char *fg, char *bg)
+int SLtt_set_color (int obj, char *what, char *fg, char *bg)
 {
    int i, b = 0, f = 7;
 
    (void) what;
 
    if ((obj < 0) || (obj >= JMAX_COLORS))
-     return;
+     return -1;
 
    for (i = 0; i < JMAX_COLOR_NAMES; i++ )
      {
@@ -2291,7 +2315,7 @@ void SLtt_set_color (int obj, char *what, char *fg, char *bg)
 	     break;
 	  }
      }
-   if (f == b) return;
+   if (f == b) return 0;
 
    Color_Map [obj] = (b << 4) | f;
 
@@ -2300,8 +2324,10 @@ void SLtt_set_color (int obj, char *what, char *fg, char *bg)
    if ((obj == 0) && (Attribute_Byte == 0))
      SLtt_reverse_video (0);
    
-   if (_SLtt_color_changed_hook != NULL)
-     (*_SLtt_color_changed_hook)();
+   if (_pSLtt_color_changed_hook != NULL)
+     (*_pSLtt_color_changed_hook)();
+   
+   return 0;
 }
 
 static void fixup_colors (void)
@@ -2321,11 +2347,12 @@ static void fixup_colors (void)
 /* FIXME!!! Add mono support.
  * The following functions have not been fully implemented.
  */
-void SLtt_set_mono (int obj_unused, char *unused, SLtt_Char_Type c_unused)
+int SLtt_set_mono (int obj_unused, char *unused, SLtt_Char_Type c_unused)
 {
    (void) obj_unused;
    (void) unused;
    (void) c_unused;
+   return 0;
 }
 
 #if 0
@@ -2335,3 +2362,14 @@ void SLtt_add_color_attribute (int obj, SLtt_Char_Type attr)
    (void) attr;
 }
 #endif
+
+int SLtt_utf8_enable (int mode)
+{
+   /* FIXME: UTF-8 mode is disabled until the drivers support UTF-8 */
+   mode = 0;
+   
+   if (mode == -1)
+     mode = _pSLtt_UTF8_Mode;
+
+   return _pSLtt_UTF8_Mode = mode;
+}

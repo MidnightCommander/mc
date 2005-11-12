@@ -1,3 +1,7 @@
+2005-11-10  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* *: Upgrade slang to 2.0.5.
+
 2005-07-30  Roland Illig  <roland.illig@gmx.de>
 
 	* include/slang.h: Define __unix__ if __MACH__ is defined.

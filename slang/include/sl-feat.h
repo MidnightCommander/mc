@@ -1,3 +1,8 @@
+/* Setting this to one permits strings with embedded color changing commands.
+ * This is experimental.
+ */
+#define SLSMG_HAS_EMBEDDED_ESCAPE	1
+
 /* Setting this to 1 enables automatic support for associative arrays.
  * If this is set to 0, an application must explicitly enable associative
  * array support via SLang_init_slassoc.
@@ -10,18 +15,19 @@
 /* This is the old space-speed trade off.  To reduce memory usage and code
  * size, set this to zero.
  */
-/*#define _SLANG_OPTIMIZE_FOR_SPEED	0 */
-#define _SLANG_OPTIMIZE_FOR_SPEED	2
+/* #define SLANG_OPTIMIZE_FOR_SPEED	0 */ 
+#define SLANG_OPTIMIZE_FOR_SPEED	2
 
-#define _SLANG_USE_INLINE_CODE		1
+#define SLANG_USE_INLINE_CODE		1
 
-/* This is experimental.  It adds extra information for tracking down
- * errors.
- */
-#define _SLANG_HAS_DEBUG_CODE		1
+/* Add extra information for tracking down errors. */
+#define SLANG_HAS_DEBUG_CODE		1
+
+/* Experimental: Support for examining call frames */
+#define SLANG_HAS_DEBUGGER_SUPPORT	1
 
 /* Allow optimizations based upon the __tmp operator. */
-#define _SLANG_USE_TMP_OPTIMIZATION	1
+#define SLANG_USE_TMP_OPTIMIZATION	1
 
 /* Setting this to one will map 8 bit vtxxx terminals to 7 bit.  Terminals
  * such as the vt320 can be set up to output the two-character escape sequence
@@ -31,9 +37,9 @@
  * systems.
  */
 #if defined(VMS) || defined(AMIGA)
-# define _SLANG_MAP_VTXXX_8BIT	1
+# define SLANG_MAP_VTXXX_8BIT	1
 #else
-# define _SLANG_MAP_VTXXX_8BIT	0
+# define SLANG_MAP_VTXXX_8BIT	0
 #endif
 
 /* Add support for color terminals that cannot do background color erases
@@ -59,3 +65,10 @@
 /* Set this to 1 to enable Kanji support.  See above comment. */
 #define SLANG_HAS_KANJI_SUPPORT		0
 
+#define SLANG_HAS_SIGNALS		1
+
+/* Enable this if you want beginning-of-statement and end-of-statement 
+ * callbacks.  This allows the creation of profilers, stack-checkers, etc.
+ * SLANG_HAS_DEBUG_CODE must be enabled for this to work.
+ */
+#define SLANG_HAS_BOSEOS	SLANG_HAS_DEBUG_CODE

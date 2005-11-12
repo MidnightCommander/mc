@@ -1,9 +1,23 @@
-/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 #include "slinclud.h"
 
@@ -77,22 +91,24 @@
  * not include this attribute.
  */
 
-#define GET_FG(color) ((color & FG_MASK) >> 8)
-#define GET_BG(color) ((color & BG_MASK) >> 16)
+#define GET_FG(fgbg) (((fgbg) & FG_MASK) >> 8)
+#define GET_BG(fgbg) (((fgbg) & BG_MASK) >> 16)
 #define MAKE_COLOR(fg, bg) (((fg) | ((bg) << 8)) << 8)
 
-int SLtt_Screen_Cols;
-int SLtt_Screen_Rows;
+int SLtt_Screen_Cols = 80;
+int SLtt_Screen_Rows = 24;
 int SLtt_Term_Cannot_Insert;
 int SLtt_Term_Cannot_Scroll;
 int SLtt_Use_Ansi_Colors;
-int SLtt_Blink_Mode = 1;
+int SLtt_Blink_Mode = 0;
 int SLtt_Use_Blink_For_ACS = 0;
 int SLtt_Newline_Ok = 0;
 int SLtt_Has_Alt_Charset = 0;
 int SLtt_Force_Keypad_Init = 0;
 
-void (*_SLtt_color_changed_hook)(void);
+/* static int UTF8_Mode = -1; */
+
+void (*_pSLtt_color_changed_hook)(void);
 
 #if SLTT_HAS_NON_BCE_SUPPORT
 static int Bce_Color_Offset = 0;
@@ -118,55 +134,34 @@ static char *Reset_Color_String;
 static int Is_Color_Terminal = 0;
 
 static int Linux_Console;
-static int QANSI_Console;
+static int Mouse_Mode = -1;
 
-/* It is crucial that JMAX_COLORS must be less than 128 since the high bit
+/* The following comment is nolonger valid, but is here in case there are
+ * some apps that use SLtt_Use_Blink_For_ACS and still need porting to v2.
+ * -------
+ * It is crucial that JMAX_COLORS must be less than 128 since the high bit
  * is used to indicate a character from the ACS (alt char set).  The exception
  * to this rule is if SLtt_Use_Blink_For_ACS is true.  This means that of
  * the highbit is set, we interpret that as a blink character.  This is
  * exploited by DOSemu.
  */
-#define JMAX_COLORS 256
+#define JMAX_COLORS 512
 #define JNORMAL_COLOR 0
 
 typedef struct
 {
    SLtt_Char_Type fgbg;
    SLtt_Char_Type mono;
-   char *custom_esc;
 }
-Ansi_Color_Type;
+Brush_Info_Type;
 
-#define RGB1(r, g, b)   ((r) | ((g) << 1) | ((b) << 2))
-#define RGB(r, g, b, br, bg, bb)  ((RGB1(r, g, b) << 8) | (RGB1(br, bg, bb) << 16))
-
-static Ansi_Color_Type Ansi_Color_Map[JMAX_COLORS] =
-{
-     {RGB(1, 1, 1, 0, 0, 0), 0x00000000, NULL},   /* white/black */
-     {RGB(0, 1, 0, 0, 0, 0), SLTT_REV_MASK, NULL},   /* green/black */
-     {RGB(1, 0, 1, 0, 0, 0), SLTT_REV_MASK, NULL},   /* magenta/black */
-     {RGB(0, 1, 1, 0, 0, 0), SLTT_REV_MASK, NULL},   /* cyan/black */
-     {RGB(1, 0, 0, 0, 0, 0), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 0, 0, 1), SLTT_REV_MASK, NULL},
-     {RGB(1, 0, 0, 0, 0, 1), SLTT_REV_MASK, NULL},
-     {RGB(1, 0, 0, 0, 1, 0), SLTT_REV_MASK, NULL},
-     {RGB(0, 0, 1, 1, 0, 0), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 1, 0, 0), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 1, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(1, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(1, 0, 1, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(0, 0, 0, 0, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL},
-     {RGB(0, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL}
-};
+static Brush_Info_Type Brush_Table[JMAX_COLORS];
 
 /* 0 if least significant bit is blue, not red */
 static int Is_Fg_BGR = 0;
 static int Is_Bg_BGR = 0;
 #define COLOR_ARG(color, is_bgr) ((is_bgr) ? RGB_to_BGR[(color)&0x7] : (color))
-static const int RGB_to_BGR[] =
+static SLCONST int RGB_to_BGR[] =
 {
      0, 4, 2, 6, 1, 5, 3, 7
 };
@@ -247,7 +242,7 @@ static unsigned char *Output_Bufferp = Output_Buffer;
 
 unsigned long SLtt_Num_Chars_Output;
 
-int _SLusleep (unsigned long usecs)
+int _pSLusleep (unsigned long usecs)
 {
 #if !defined(VMS) || (__VMS_VER >= 70000000)
    struct timeval tv;
@@ -277,14 +272,14 @@ int SLtt_flush_output (void)
 #ifdef EAGAIN
 	     if (errno == EAGAIN)
 	       {
-		  _SLusleep (100000);   /* 1/10 sec */
+		  _pSLusleep (100000);   /* 1/10 sec */
 		  continue;
 	       }
 #endif
 #ifdef EWOULDBLOCK
 	     if (errno == EWOULDBLOCK)
 	       {
-		  _SLusleep (100000);
+		  _pSLusleep (100000);
 		  continue;
 	       }
 #endif
@@ -503,6 +498,7 @@ static unsigned int tt_sprintf(char *buf, unsigned int buflen, char *fmt, int x,
 	     else if (zero_pad && (field_width == 3))
 	       *b++ = '0';
 
+	     if (b == bmax) break;
 	     if (z >= 10)
 	       {
 		  *b++ = z / 10 + '0';
@@ -738,23 +734,12 @@ void SLtt_goto_rc(int r, int c)
 		  if (Cursor_c == c) return;
 		  if (Cursor_c == c + 1)
 		    {
-                       /* cursor movement optimizations, like backspace
-			  doesn't work as needed on qansi-m consoles when 
-			  current table is not a G0, so we'll disable it. */
-                       if (!QANSI_Console)
-                       {
-		          s = "\b";
-                       }
-                       else
-                       {
-                          /* do the generic cursor positioning,
-			     without an optimization */
-                          s = NULL;
-                       }
+		       s = buf;
+		       *s++ = '\b'; *s = 0;
+		       s = buf;
 		    }
 	       }
-	     else if ((c == 0) && (!QANSI_Console)) /* the same things 
-				    for the qansi-m console limitation */
+	     else if (c == 0)
 	       {
 		  s = buf;
 		  if ((Cursor_Set != 1) || (Cursor_c != 0)) *s++ = '\r';
@@ -768,9 +753,8 @@ void SLtt_goto_rc(int r, int c)
 	       }
 	     /* Will fail on VMS */
 #ifndef VMS
-	     else if ((SLtt_Newline_Ok && (Cursor_Set == 1) &&
-		      (Cursor_c >= c) && (c + 3 > Cursor_c)) &&
-		      (!QANSI_Console))
+	     else if (SLtt_Newline_Ok && (Cursor_Set == 1) &&
+		      (Cursor_c >= c) && (c + 3 > Cursor_c))
 	       {
 		  s = buf;
 		  while (n--) *s++ = '\n';
@@ -810,7 +794,7 @@ void SLtt_erase_line (void)
    Cursor_Set = 1; Cursor_c = 0;
    SLtt_del_eol();
    /* Put the cursor back at the beginning of the line */
-   tt_write ("\r", 1);
+   tt_write_string("\r");
    Cursor_Set = 1; Cursor_c = 0;
 }
 
@@ -824,12 +808,14 @@ static void delete_line_in_scroll_region (void)
    SLtt_del_eol ();
 }
 
-void SLtt_delete_nlines (int n)
+void SLtt_delete_nlines (int nn)
 {
    int r1, curs;
-   char buf[132];
+   unsigned int n;
 
-   if (n <= 0) return;
+   if (nn <= 0) return;
+   n = (unsigned int) nn;
+
    SLtt_normal_video ();
 
    if (Scroll_r1 == Scroll_r2)
@@ -838,23 +824,30 @@ void SLtt_delete_nlines (int n)
 	return;
      }
 
-   if (Del_N_Lines_Str != NULL) tt_printf(Del_N_Lines_Str,n, 0);
+   if (Del_N_Lines_Str != NULL) tt_printf(Del_N_Lines_Str, n, 0);
    else
    /* get a new terminal */
      {
-	int t = n;
+	char buf[80];
+	unsigned int dn = n;
+
+	if (dn > sizeof (buf))
+	  dn = sizeof (buf);
+
+	SLMEMSET (buf, '\n', dn);
+	while (n > dn)
+	  {
+	     tt_write (buf, dn);
+	     n -= dn;
+	  }
+	tt_write (buf, n);
+
 	r1 = Scroll_r1;
 	curs = Cursor_r;
-
 	SLtt_set_scroll_region(curs, Scroll_r2);
 	SLtt_goto_rc(Scroll_r2 - Scroll_r1, 0);
-	if (n > sizeof (buf))
-	    t = sizeof (buf);
-	SLMEMSET (buf, '\n', t);
-	do {
-	    tt_write (buf, (n < t) ? n : t);
-	    n -= t;
-	} while (n > 0);
+	SLMEMSET(buf, '\n', (unsigned int) n);
+	tt_write(buf, (unsigned int) n);
 	/* while (n--) tt_putchar('\n'); */
 	SLtt_set_scroll_region(r1, Scroll_r2);
 	SLtt_goto_rc(curs, 0);
@@ -872,7 +865,7 @@ void SLtt_cls (void)
 	if (Reset_Color_String != NULL)
 	  tt_write_string (Reset_Color_String);
 	else
-	  tt_write ("\033[0m\033[m", 7);
+	  tt_write_string ("\033[0m\033[m");
      }
 
    SLtt_normal_video();
@@ -914,7 +907,7 @@ void SLtt_beep (void)
 	  {
 	     tt_write ("\033[?5h", 5);
 	     SLtt_flush_output ();
-	     _SLusleep (50000);
+	     _pSLusleep (50000);
 	     tt_write ("\033[?5l", 5);
 	  }
 #endif
@@ -969,7 +962,7 @@ void SLtt_del_eol (void)
    del_eol ();
 }
 
-typedef const struct
+typedef SLCONST struct
 {
    char *name;
    SLtt_Char_Type color;
@@ -999,14 +992,84 @@ static Color_Def_Type Color_Defs [MAX_COLOR_NAMES] =
      {"default",		SLSMG_COLOR_DEFAULT}
 };
 
-void SLtt_set_mono (int obj, char *what, SLtt_Char_Type mask)
+static int Brushes_Initialized = 0;
+
+static int initialize_brushes (void)
 {
-   (void) what;
-   if ((obj < 0) || (obj >= JMAX_COLORS))
+   int fg, bg;
+   Brush_Info_Type *b, *bmax;
+
+   b = Brush_Table;
+   bmax = b + JMAX_COLORS;
+
+   bg = 0;
+   while (b < bmax)
      {
-	return;
+	fg = 7;
+	while (b < bmax)
+	  {
+	     if (fg != bg)
+	       {
+		  b->fgbg = MAKE_COLOR(fg,bg);
+		  b->mono = SLTT_REV_MASK;
+		  b++;
+	       }
+	     if (fg == 0)
+	       break;
+	     fg--;
+	  }
+	bg++;
+	if (bg == 8)
+	  bg = 0;
      }
-   Ansi_Color_Map[obj].mono = mask & ATTR_MASK;
+
+   Brush_Table[0].mono = 0;
+   Brushes_Initialized = 1;
+   return 0;
+}
+   
+   
+static Brush_Info_Type *get_brush_info (unsigned int color)
+{
+   if (Brushes_Initialized == 0)
+     initialize_brushes ();
+
+   color &= SLSMG_COLOR_MASK;
+
+   if (color >= JMAX_COLORS)
+     color = 0;
+
+   return Brush_Table + color;
+}
+
+static SLtt_Char_Type get_brush_attr (unsigned int color)
+{
+   Brush_Info_Type *b;
+   
+   if (NULL == (b = get_brush_info (color)))
+     return (SLtt_Char_Type)-1;
+   
+   if (SLtt_Use_Ansi_Colors)
+     return b->fgbg;
+   
+   return b->mono;
+}
+
+static SLtt_Char_Type get_brush_fgbg (unsigned int color)
+{
+   return get_brush_info(color)->fgbg;
+}
+
+int SLtt_set_mono (int obj, char *what, SLtt_Char_Type mask)
+{
+   Brush_Info_Type *b;
+
+   (void) what;
+   if (NULL == (b = get_brush_info (obj)))
+     return -1;
+   
+   b->mono = mask & ATTR_MASK;
+   return 0;
 }
 
 static char *check_color_for_digit_form (char *color)
@@ -1095,45 +1158,43 @@ static int get_default_colors (char **fgp, char **bgp)
    return 0;
 }
 
-static unsigned char FgBg_Stats[JMAX_COLORS];
-
 static int Color_0_Modified = 0;
 
-void SLtt_set_color_object (int obj, SLtt_Char_Type attr)
+int SLtt_set_color_object (int obj, SLtt_Char_Type attr)
 {
-   char *cust_esc;
+   Brush_Info_Type *b;
+   
+   if (NULL == (b = get_brush_info (obj)))
+     return -1;
 
-   if ((obj < 0) || (obj >= JMAX_COLORS)) return;
-
-   cust_esc = Ansi_Color_Map[obj].custom_esc;
-   if (cust_esc != NULL)
-     {
-	SLfree (cust_esc);
-	FgBg_Stats[(Ansi_Color_Map[obj].fgbg >> 8) & 0x7F] -= 1;
-	Ansi_Color_Map[obj].custom_esc = NULL;
-     }
-
-   Ansi_Color_Map[obj].fgbg = attr;
+   b->fgbg = attr;
    if (obj == 0) Color_0_Modified = 1;
 
-   if (_SLtt_color_changed_hook != NULL)
-     (*_SLtt_color_changed_hook)();
+   if (_pSLtt_color_changed_hook != NULL)
+     (*_pSLtt_color_changed_hook)();
+   
+   return 0;
 }
 
 SLtt_Char_Type SLtt_get_color_object (int obj)
 {
-   if ((obj < 0) || (obj >= JMAX_COLORS)) return 0;
-   return Ansi_Color_Map[obj].fgbg;
+   return get_brush_fgbg (obj);
 }
 
-void SLtt_add_color_attribute (int obj, SLtt_Char_Type attr)
+int SLtt_add_color_attribute (int obj, SLtt_Char_Type attr)
 {
-   if ((obj < 0) || (obj >= JMAX_COLORS)) return;
+   Brush_Info_Type *b;
+   
+   if (NULL == (b = get_brush_info (obj)))
+     return -1;
 
-   Ansi_Color_Map[obj].fgbg |= (attr & ATTR_MASK);
+   b->fgbg |= (attr & ATTR_MASK);
+
    if (obj == 0) Color_0_Modified = 1;
-   if (_SLtt_color_changed_hook != NULL)
-     (*_SLtt_color_changed_hook)();
+   if (_pSLtt_color_changed_hook != NULL)
+     (*_pSLtt_color_changed_hook)();
+   
+   return 0;
 }
 
 static SLtt_Char_Type fb_to_fgbg (SLtt_Char_Type f, SLtt_Char_Type b)
@@ -1252,69 +1313,21 @@ static int make_color_fgbg (char *fg, char *bg, SLtt_Char_Type *fgbg)
    return 0;
 }
 
-void SLtt_set_color (int obj, char *what, char *fg, char *bg)
+int SLtt_set_color (int obj, char *what, char *fg, char *bg)
 {
    SLtt_Char_Type fgbg;
 
    (void) what;
-   if ((obj < 0) || (obj >= JMAX_COLORS))
-     return;
+   
+   if (-1 == make_color_fgbg (fg, bg, &fgbg))
+     return -1;
 
-   if (-1 != make_color_fgbg (fg, bg, &fgbg))
-     SLtt_set_color_object (obj, fgbg);
+   return SLtt_set_color_object (obj, fgbg);
 }
 
-void SLtt_set_color_fgbg (int obj, SLtt_Char_Type f, SLtt_Char_Type b)
+int SLtt_set_color_fgbg (int obj, SLtt_Char_Type f, SLtt_Char_Type b)
 {
-   SLtt_set_color_object (obj, fb_to_fgbg (f, b));
-}
-
-void SLtt_set_color_esc (int obj, char *esc)
-{
-   char *cust_esc;
-   SLtt_Char_Type fgbg = 0;
-   int i;
-
-   if ((obj < 0) || (obj >= JMAX_COLORS))
-     {
-	return;
-     }
-
-   cust_esc = Ansi_Color_Map[obj].custom_esc;
-   if (cust_esc != NULL)
-     {
-	SLfree (cust_esc);
-	FgBg_Stats[(Ansi_Color_Map[obj].fgbg >> 8) & 0x7F] -= 1;
-     }
-
-   cust_esc = (char *) SLmalloc (strlen(esc) + 1);
-   if (cust_esc != NULL) strcpy (cust_esc, esc);
-
-   Ansi_Color_Map[obj].custom_esc = cust_esc;
-   if (cust_esc == NULL) fgbg = 0;
-   else
-     {
-	/* The whole point of this is to generate a unique fgbg */
-	for (i = 0; i < JMAX_COLORS; i++)
-	  {
-	     if (FgBg_Stats[i] == 0) fgbg = i;
-
-	     if (obj == i) continue;
-	     if ((Ansi_Color_Map[i].custom_esc) == NULL) continue;
-	     if (!strcmp (Ansi_Color_Map[i].custom_esc, cust_esc))
-	       {
-		  fgbg = (Ansi_Color_Map[i].fgbg >> 8) & 0x7F;
-		  break;
-	       }
-	  }
-	FgBg_Stats[fgbg] += 1;
-     }
-
-   fgbg |= 0x80;
-   Ansi_Color_Map[obj].fgbg = (fgbg | (fgbg << 8)) << 8;
-   if (obj == 0) Color_0_Modified = 1;
-   if (_SLtt_color_changed_hook != NULL)
-     (*_SLtt_color_changed_hook)();
+   return SLtt_set_color_object (obj, fb_to_fgbg (f, b));
 }
 
 void SLtt_set_alt_char_set (int i)
@@ -1402,10 +1415,8 @@ static int Video_Initialized;
 void SLtt_reverse_video (int color)
 {
    SLtt_Char_Type fgbg;
-   char *esc;
 
    if (Worthless_Highlight) return;
-   if ((color < 0) || (color >= JMAX_COLORS)) return;
 
    if (Video_Initialized == 0)
      {
@@ -1418,20 +1429,7 @@ void SLtt_reverse_video (int color)
 	return;
      }
 
-   if (SLtt_Use_Ansi_Colors)
-     {
-	fgbg = Ansi_Color_Map[color].fgbg;
-	if ((esc = Ansi_Color_Map[color].custom_esc) != NULL)
-	  {
-	     if (fgbg != Current_Fgbg)
-	       {
-		  Current_Fgbg = fgbg;
-		  tt_write_string (esc);
-		  return;
-	       }
-	  }
-     }
-   else fgbg = Ansi_Color_Map[color].mono;
+  fgbg = get_brush_attr (color);
 
    if (fgbg == Current_Fgbg) return;
    write_attributes (fgbg);
@@ -1453,42 +1451,35 @@ void SLtt_wide_width (void)
 }
 
 /* Highest bit represents the character set. */
-#define COLOR_MASK 0x7F00
-#define COLOR_OF(x) (((x)&COLOR_MASK)>>8)
-#define CHAR_OF(x) ((x)&0x80FF)
+#define COLOR_OF(a) ((a)->color & SLSMG_COLOR_MASK)
 
-#if SLTT_HAS_NON_BCE_SUPPORT
-static int bce_color_eqs (unsigned int a, unsigned int b)
+static int bce_color_eqs (SLsmg_Char_Type *a, SLsmg_Char_Type *b)
 {
-   a = COLOR_OF(a);
-   b = COLOR_OF(b);
-   
-   if (a == b)
+   SLsmg_Color_Type ca, cb;
+   Brush_Info_Type *ba, *bb;
+
+   ca = COLOR_OF(a);
+   cb = COLOR_OF(b);
+
+   if (ca == cb)
      return 1;
 
+   ba = get_brush_info (ca);
+   bb = get_brush_info (cb);
+   
    if (SLtt_Use_Ansi_Colors == 0)
-     return Ansi_Color_Map[a].mono == Ansi_Color_Map[b].mono;
+     return ba->mono == bb->mono;
 
    if (Bce_Color_Offset == 0)
-     return Ansi_Color_Map[a].fgbg == Ansi_Color_Map[b].fgbg;
-   
+     return ba->fgbg == bb->fgbg;
+
    /* If either are color 0, then we do not know what that means since the
     * terminal does not support BCE */
-   if ((a == 0) || (b == 0))
+   if ((ca == 0) || (cb == 0))
      return 0;
-     
-   return Ansi_Color_Map[a-1].fgbg == Ansi_Color_Map[b-1].fgbg;
+   
+   return get_brush_fgbg (ca-1) == get_brush_fgbg(cb-1);
 }
-#define COLOR_EQS(a,b) bce_color_eqs (a,b)
-#else
-# define COLOR_EQS(a, b) \
-   (SLtt_Use_Ansi_Colors \
-    ? (Ansi_Color_Map[COLOR_OF(a)].fgbg == Ansi_Color_Map[COLOR_OF(b)].fgbg)\
-    :  (Ansi_Color_Map[COLOR_OF(a)].mono == Ansi_Color_Map[COLOR_OF(b)].mono))
-#endif
-
-#define CHAR_EQS(a, b) (((a) == (b))\
-			|| ((CHAR_OF(a)==CHAR_OF(b)) && COLOR_EQS(a,b)))
 
 /* The whole point of this routine is to prevent writing to the last column
  * and last row on terminals with automatic margins.
@@ -1516,18 +1507,34 @@ static void write_string_with_care (char *str)
    tt_write (str, len);
 }
 
-static void send_attr_str (SLsmg_Char_Type *s)
+static void send_attr_str (SLsmg_Char_Type *s, SLsmg_Char_Type *smax)
 {
-   unsigned char out[SLTT_MAX_SCREEN_COLS], ch, *p;
+   unsigned char out[1+SLUTF8_MAX_MBLEN*SLSMG_MAX_CHARS_PER_CELL*SLTT_MAX_SCREEN_COLS];
+   unsigned char *p, *pmax;
    register SLtt_Char_Type attr;
-   register SLsmg_Char_Type sh;
-   int color, last_color = -1;
+   SLsmg_Color_Type color, last_color = (SLsmg_Color_Type)-1;
+   int dcursor_c;
 
    p = out;
-   while (0 != (sh = *s++))
+   pmax = p + (sizeof (out)-1);
+
+   dcursor_c = 0;
+   while (s < smax)
      {
-	ch = sh & 0xFF;
-	color = ((int) sh & 0xFF00) >> 8;
+	SLwchar_Type wch;
+	unsigned int nchars;
+
+	if (0 == (nchars = s->nchars))
+	  {
+	     /* 2nd element of a char that occupies two columns */
+	     s++;
+	     if (_pSLtt_UTF8_Mode == 0)
+	       *p++ = ' ';
+	     dcursor_c++;
+	     continue;
+	  }
+
+	color = s->color;
 
 #if SLTT_HAS_NON_BCE_SUPPORT
 	if (Bce_Color_Offset
@@ -1535,12 +1542,13 @@ static void send_attr_str (SLsmg_Char_Type *s)
 	  color -= Bce_Color_Offset;
 #endif
 
+	wch = s->wchars[0];
+
 	if (color != last_color)
 	  {
-	     if (SLtt_Use_Ansi_Colors) attr = Ansi_Color_Map[color & 0x7F].fgbg;
-	     else attr = Ansi_Color_Map[color & 0x7F].mono;
+	     attr = get_brush_attr (color);
 
-	     if (sh & 0x8000) /* alternate char set */
+	     if (color & SLSMG_ACS_MASK) /* alternate char set */
 	       {
 		  if (SLtt_Use_Blink_For_ACS)
 		    {
@@ -1551,44 +1559,56 @@ static void send_attr_str (SLsmg_Char_Type *s)
 
 	     if (attr != Current_Fgbg)
 	       {
-		  if ((ch != ' ') ||
+		  if ((wch != ' ')
+		      || (nchars > 1)
 		      /* it is a space so only consider it different if it
 		       * has different attributes.
 		       */
-		      (attr != Current_Fgbg))
-		    /* The previous line was: */
-		    /* (attr & BGALL_MASK) != (Current_Fgbg & BGALL_MASK)) */
-		    /* However, it does not account for ACS */
+		      || (attr != Current_Fgbg)
+		      )
 		    {
 		       if (p != out)
 			 {
 			    *p = 0;
 			    write_string_with_care ((char *) out);
-			    Cursor_c += (int) (p - out);
 			    p = out;
+			    Cursor_c += dcursor_c;
+			    dcursor_c = 0;
 			 }
-
-		       if (SLtt_Use_Ansi_Colors && (NULL != Ansi_Color_Map[color & 0x7F].custom_esc))
-			 {
-			    tt_write_string (Ansi_Color_Map[color & 0x7F].custom_esc);
-			    /* Just in case the custom escape sequence screwed up
-			     * the alt character set state...
-			     */
-	                    if ((attr & SLTT_ALTC_MASK) != (Current_Fgbg & SLTT_ALTC_MASK))
-			      SLtt_set_alt_char_set ((int) (attr & SLTT_ALTC_MASK));
-			    Current_Fgbg = attr;
-			 }
-		       else write_attributes (attr);
-
+		       write_attributes (attr);
 		       last_color = color;
 		    }
 	       }
 	  }
-	*p++ = ch;
+	
+	if ((wch < 0x80) && (nchars == 1))
+	  *p++ = (unsigned char) wch;
+	else if (_pSLtt_UTF8_Mode == 0)
+	  {
+	     if (wch > 255)
+	       wch = '?';
+	     else if (wch < (SLwchar_Type)SLsmg_Display_Eight_Bit)
+	       wch = '?';
+	     *p++ = (unsigned char) wch;
+	  }
+	else
+	  {
+	     unsigned int i;
+	     for (i = 0; i < nchars; i++)
+	       {
+		  if (NULL == (p = SLutf8_encode (s->wchars[i], p, pmax-p)))
+		    {
+		       fprintf (stderr, "*** send_attr_str: buffer too small\n");
+		       return;
+		    }
+	       }
+	  }
+	dcursor_c++;
+	s++;
      }
    *p = 0;
    if (p != out) write_string_with_care ((char *) out);
-   Cursor_c += (int) (p - out);
+   Cursor_c += dcursor_c;
 }
 
 static void forward_cursor (unsigned int n, int row)
@@ -1612,6 +1632,10 @@ static void forward_cursor (unsigned int n, int row)
    if (n <= 4)
      {
 	SLtt_normal_video ();
+#if 0
+	if (n >= sizeof (buf))
+	  n = sizeof (buf) - 1;
+#endif
 	SLMEMSET (buf, ' ', n);
 	buf[n] = 0;
 	write_string_with_care (buf);
@@ -1633,6 +1657,17 @@ static void forward_cursor (unsigned int n, int row)
  * space character as is assumed below.
  */
 
+#define COLOR_EQS(a,b) ((COLOR_OF(a)==COLOR_OF(b)) || bce_color_eqs (a,b))
+#define CHARSET(a) ((a)->color&SLSMG_ACS_MASK)
+#define CHAR_EQS(a, b) (((a)->nchars==(b)->nchars) \
+			   && (((a)->nchars == 0) \
+				  || ((((a)->wchars[0]==(b)->wchars[0]) \
+					 && (0 == memcmp((a)->wchars, (b)->wchars, (a)->nchars*sizeof(SLwchar_Type)))) \
+					 && (COLOR_EQS(a,b)) \
+					 && (CHARSET(a)==CHARSET(b)))))
+
+#define CHAR_EQS_SPACE(a) (((a)->wchars[0]==' ') && ((a)->color==0) && ((a)->nchars==1))
+
 void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int row)
 {
    register SLsmg_Char_Type *p, *q, *qmax, *pmax, *buf;
@@ -1642,11 +1677,13 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 #ifdef HP_GLITCH_CODE
    int handle_hp_glitch = 0;
 #endif
-   SLsmg_Char_Type space_char;
+   SLsmg_Char_Type *space_char;
+   SLsmg_Char_Type space_char_buf;
+
 #define SLTT_USE_INSERT_HACK 1
 #if SLTT_USE_INSERT_HACK
-   SLsmg_Char_Type insert_hack_prev = 0;
-   SLsmg_Char_Type insert_hack_char = 0;
+   SLsmg_Char_Type *insert_hack_prev = NULL;
+   SLsmg_Char_Type *insert_hack_char = NULL;
 
    if ((row + 1 == SLtt_Screen_Rows)
        && (len == SLtt_Screen_Cols)
@@ -1654,14 +1691,24 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
        && (SLtt_Term_Cannot_Insert == 0)
        && Automatic_Margins)
      {
-	insert_hack_char = neww[len-1];
-	if (oldd[len-1] == insert_hack_char)
-	  insert_hack_char = 0;
+	SLsmg_Char_Type *a, *b;
+	insert_hack_char = &neww[len-1];
+
+	a = oldd+(len-1);
+	b = neww+(len-1);
+	
+	if (CHAR_EQS(a,b))
+	  insert_hack_char = NULL;
 	else 
-	  insert_hack_prev = neww[len-2];
+	  insert_hack_prev = &neww[len-2];
      }
 #endif
      
+   memset ((char *) &space_char_buf, 0, sizeof (SLsmg_Char_Type));
+   space_char = &space_char_buf;
+   space_char->nchars = 1;
+   space_char->wchars[0] = ' ';
+
    if (len > SLTT_MAX_SCREEN_COLS)
      len = SLTT_MAX_SCREEN_COLS;
 
@@ -1673,6 +1720,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
    while (1)
      {
 	if (q == qmax) return;
+
 #if SLANG_HAS_KANJI_SUPPORT
 	if (*p & 0x80)
 	  { /* new is kanji */
@@ -1699,7 +1747,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	     if (*q & 0x80) break; /* old is kanji */
 	  }
 #endif
-	if (!CHAR_EQS(*q, *p)) break;
+	if (!CHAR_EQS(q, p)) break;
 	q++; p++;
      }
 
@@ -1712,7 +1760,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 
 	while (qq < qmax)
 	  {
-	     if (*qq & 0xFF00)
+	     if (qq->color)
 	       {
 		  SLtt_normal_video ();
 		  SLtt_del_eol ();
@@ -1726,8 +1774,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 #endif
    /* Find where the last non-blank character on old/new screen is */
 
-   space_char = ' ';
-   if (CHAR_EQS(*(pmax-1), ' '))
+   if (CHAR_EQS_SPACE(pmax-1))
      {
 	/* If we get here, then we can erase to the end of the line to create
 	 * the final space.  However, this will only work _if_ erasing will 
@@ -1738,12 +1785,12 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	 */
 	if ((Can_Background_Color_Erase)
 	    && SLtt_Use_Ansi_Colors)
-	  space_char = *(pmax - 1);
+	  space_char = pmax - 1;
 
 	while (pmax > p)
 	  {
 	     pmax--;
-	     if (!CHAR_EQS(*pmax, space_char))
+	     if (!CHAR_EQS(pmax, space_char))
 	       {
 		  pmax++;
 		  break;
@@ -1754,7 +1801,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
    while (qmax > q)
      {
 	qmax--;
-	if (!CHAR_EQS(*qmax, space_char))
+	if (!CHAR_EQS(qmax, space_char))
 	  {
 	     qmax++;
 	     break;
@@ -1778,22 +1825,27 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
      {
 #endif
 	/* Try use use erase to bol if possible */
-	if ((Del_Bol_Str != NULL) && (CHAR_OF(*neww) == ' '))
+	if ((Del_Bol_Str != NULL) && (CHAR_EQS_SPACE(neww)))
 	  {
 	     SLsmg_Char_Type *p1;
-	     SLsmg_Char_Type blank;
+	     SLsmg_Color_Type blank_color = 0;
 
 	     p1 = neww;
 	     if ((Can_Background_Color_Erase)
 		 && SLtt_Use_Ansi_Colors)
-	       blank = *p1;
-	     /* black+white attributes do not support bce */
+	       {
+		  SLsmg_Char_Type *blank = p1;
+		  blank_color = COLOR_OF(blank);
+		  while ((p1 < pmax) && (CHAR_EQS (p1, blank)))
+		    p1++;
+	       }
 	     else
-	       blank = ' ';
-
-	     while ((p1 < pmax) && (CHAR_EQS (*p1, blank)))
-	       p1++;
-
+	       {
+		  /* black+white attributes do not support bce */
+		  while ((p1 < pmax) && (CHAR_EQS_SPACE (p1)))
+		    p1++;
+	       }
+	     
 	     /* Is this optimization worth it?  Assume Del_Bol_Str is ESC [ 1 K
 	      * It costs 4 chars + the space needed to properly position the 
 	      * cursor, e.g., ESC [ 10;10H. So, it costs at least 13 characters.
@@ -1807,7 +1859,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 		  q = oldd + ofs;
 		  p = p1;
 		  SLtt_goto_rc (row, ofs - 1);
-		  SLtt_reverse_video (COLOR_OF(blank));
+		  SLtt_reverse_video (blank_color);
 		  tt_write_string (Del_Bol_Str);
 		  tt_write (" ", 1);
 		  Cursor_c += 1;
@@ -1829,7 +1881,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	n_spaces = 0;
 	while (p < pmax)
 	  {
-	     if (CHAR_EQS(*q, ' ') && CHAR_EQS(*p, ' '))
+	     if (CHAR_EQS_SPACE(q) && CHAR_EQS_SPACE(p))
 	       {
 		  /* If *q is not a space, we would have to overwrite it.
 		   * However, if *q is a space, then while *p is also one,
@@ -1838,8 +1890,8 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 		  space_match = p;
 		  p++; q++;
 		  while ((p < pmax)
-			 && CHAR_EQS(*q, ' ')
-			 && CHAR_EQS(*p, ' '))
+			 && CHAR_EQS_SPACE(q)
+			 && CHAR_EQS_SPACE(p))
 		    {
 		       p++;
 		       q++;
@@ -1894,19 +1946,23 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	       }
 #endif
 
-	     if (CHAR_EQS(*q, *p)) break;
+	     if (CHAR_EQS(q, p)) 
+	       {
+		  /* Could be the second half of a double width character */
+		  if (p->nchars || q->nchars)
+		    break;
+	       }
 	     *buf++ = *p++;
 	     q++;
 	  }
-	*buf = 0;
 
 	/* At this point, the buffer contains characters that do not match */
-	if (buf != buffer) send_attr_str (buffer);
+	if (buf != buffer) send_attr_str (buffer, buf);
 	buf = buffer;
 
 	if (n_spaces 
 	    && ((p < pmax) 	       /* erase to eol will achieve this effect*/
-		|| (space_char != ' ')))/* unless space_char is not a simple space */
+		|| (!CHAR_EQS_SPACE(space_char))))/* unless space_char is not a simple space */
 	  {
 	     forward_cursor (n_spaces, row);
 	  }
@@ -1917,7 +1973,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	
 	/* Note that from here on, the buffer will contain matched characters */
 #if !SLANG_HAS_KANJI_SUPPORT
-	while ((p < pmax) && CHAR_EQS(*p, *q))
+	while ((p < pmax) && CHAR_EQS(p, q))
 	  {
 	     *buf++ = *p++;
 	     q++;
@@ -1996,8 +2052,7 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
 	       }
 	     else
 	       {
-		  *buf = 0;
-		  send_attr_str (buffer);
+		  send_attr_str (buffer, buf);
 	       }
 	  }
      }
@@ -2009,16 +2064,13 @@ void SLtt_smart_puts(SLsmg_Char_Type *neww, SLsmg_Char_Type *oldd, int len, int 
      }
    
 #if SLTT_USE_INSERT_HACK
-   else if (insert_hack_char)
+   else if (insert_hack_char != NULL)
      {
 	SLtt_goto_rc (SLtt_Screen_Rows-1, SLtt_Screen_Cols-2);
-	buffer[0] = insert_hack_char;
-	buffer[1] = 0;
-	send_attr_str (buffer);
+	send_attr_str (insert_hack_char, insert_hack_char+1);
 	SLtt_goto_rc (SLtt_Screen_Rows-1, SLtt_Screen_Cols-2);
-	buffer[0] = insert_hack_prev;
 	SLtt_begin_insert ();
-	send_attr_str (buffer);
+	send_attr_str (insert_hack_prev, insert_hack_prev+1);
 	SLtt_end_insert ();
      }
 #endif
@@ -2063,7 +2115,7 @@ static int Termcap_Initalized = 0;
 /* Termcap based system */
 static char Termcap_Buf[4096];
 static char Termcap_String_Buf[4096];
-static char *Termcap_String_Ptr;
+/* static char *Termcap_String_Ptr; */
 extern char *tgetstr(char *, char **);
 extern int tgetent(char *, char *);
 extern int tgetnum(char *);
@@ -2113,14 +2165,17 @@ static char *fixup_tgetstr (char *what)
 char *SLtt_tgetstr (char *cap)
 {
    char *s;
-
+#ifdef USE_TERMCAP
+   char *tmp_area;
+#endif
    if (Termcap_Initalized == 0)
      return NULL;
    
 #ifdef USE_TERMCAP
-   s = tgetstr (cap, &Termcap_String_Ptr);
+   tmp_area = &Termcap_String_Buf;
+   s = tgetstr (cap, &tmp_area);
 #else
-   s = _SLtt_tigetstr (Terminfo, cap);
+   s = _pSLtt_tigetstr (Terminfo, cap);
 #endif
 
    /* Do not strip pad info for alternate character set.  I need to make
@@ -2140,7 +2195,7 @@ int SLtt_tgetnum (char *s)
 #ifdef USE_TERMCAP
    return tgetnum (s);
 #else
-   return _SLtt_tigetnum (Terminfo, s);
+   return _pSLtt_tigetnum (Terminfo, s);
 #endif
 }
 
@@ -2151,9 +2206,35 @@ int SLtt_tgetflag (char *s)
 #ifdef USE_TERMCAP
    return tgetflag (s);
 #else
-   return _SLtt_tigetflag (Terminfo, s);
+   return _pSLtt_tigetflag (Terminfo, s);
 #endif
 }
+
+#if 0
+int SLtt_tgetent(char *term)
+{
+   return SLtt_initialize(term) == 0;
+}
+
+int SLtt_tputs(char *str, int affcnt, int (*p)(int))
+{
+   while (*str) (*p)(*str++);
+   return 0;
+}
+
+
+char *SLtt_tgoto(char *cap, int col, int row)
+{
+  static char buf[64];
+
+  /* beware of overflows. 2^64 is 20 bytes printed */
+  if (strlen(cap) > 23)
+	strcpy(buf, "capability too long");
+  else
+	tt_sprintf(buf, cap, row, col);
+  return buf;
+}
+#endif
 
 static int Vt100_Like = 0;
 
@@ -2195,6 +2276,9 @@ int SLtt_initialize (char *term)
    int is_xterm;
    int almost_vtxxx;
 
+   if (_pSLtt_UTF8_Mode == -1)
+     _pSLtt_UTF8_Mode = _pSLutf8_mode;
+
    if (SLang_TT_Write_FD == -1)
      {
 	/* Apparantly, this cannot fail according to the man pages. */
@@ -2207,18 +2291,16 @@ int SLtt_initialize (char *term)
 	if (term == NULL)
 	  return -1;
      }
-#if 0
-   if (_SLsecure_issetugid ()
+
+   if (_pSLsecure_issetugid ()
        && ((term[0] == '.') || (NULL != strchr(term, '/'))))
      return -1;
-#endif
+   
    Linux_Console = (!strncmp (term, "linux", 5)
 # ifdef linux
 		    || !strncmp(term, "con", 3)
 # endif
 		    );
-
-   QANSI_Console = !strncmp (term, "qansi-m", 7);
 
    t = term;
 
@@ -2235,7 +2317,7 @@ int SLtt_initialize (char *term)
 		   || !strcmp (term, "screen"));
 
 # ifndef USE_TERMCAP
-   if (NULL == (Terminfo = _SLtt_tigetent (term)))
+   if (NULL == (Terminfo = _pSLtt_tigetent (term)))
      {
 	if (almost_vtxxx) /* Special cases. */
 	  {
@@ -2251,7 +2333,7 @@ int SLtt_initialize (char *term)
 # else				       /* USE_TERMCAP */
    if (1 != tgetent(Termcap_Buf, term))
      return -1;
-   Termcap_String_Ptr = Termcap_String_Buf;
+   /* Termcap_String_Ptr = Termcap_String_Buf; */
 # endif				       /* NOT USE_TERMCAP */
 
    Termcap_Initalized = 1;
@@ -2353,9 +2435,15 @@ int SLtt_initialize (char *term)
     /* aixterm added by willi */
    if (is_xterm || !strncmp (term, "aixterm", 7))
      {
+#if 0
 	Start_Alt_Chars_Str = "\016";
 	End_Alt_Chars_Str = "\017";
 	Enable_Alt_Char_Set = "\033(B\033)0";
+#else
+	Start_Alt_Chars_Str = "\033(0";
+	End_Alt_Chars_Str = "\033(B";
+	Enable_Alt_Char_Set = "";
+#endif
      }
 
    if ((SLtt_Graphics_Char_Pairs == NULL) &&
@@ -2431,7 +2519,7 @@ int SLtt_initialize (char *term)
    if (Color_Bg_Str == NULL)
      {
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
-	Is_Bg_BGR = (Color_Bg_Str != NULL);
+	Is_Fg_BGR = (Color_Bg_Str != NULL);
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)
@@ -2595,6 +2683,10 @@ int SLtt_reset_video (void)
    SLtt_erase_line ();
    tt_write_string (Keypad_Reset_Str);
    tt_write_string (Term_Reset_Str);
+
+   if (Mouse_Mode == 1)
+     SLtt_set_mouse_mode (0, 1);
+
    SLtt_flush_output ();
    Video_Initialized = 0;
    return 0;
@@ -2615,6 +2707,8 @@ int SLtt_set_mouse_mode (int mode, int force)
 	if (strncmp ("xterm", term, 5))
 	  return -1;
      }
+
+   Mouse_Mode = (mode != 0);
 
    if (mode)
      tt_write_string ("\033[?9h");
@@ -2708,7 +2802,7 @@ void SLtt_get_screen_size (void)
 }
 
 #if SLTT_HAS_NON_BCE_SUPPORT
-int _SLtt_get_bce_color_offset (void)
+int _pSLtt_get_bce_color_offset (void)
 {
    if ((SLtt_Use_Ansi_Colors == 0)
        || Can_Background_Color_Erase
@@ -2716,7 +2810,8 @@ int _SLtt_get_bce_color_offset (void)
      Bce_Color_Offset = 0;
    else
      {
-	if (GET_BG(Ansi_Color_Map[0].fgbg) == SLSMG_COLOR_DEFAULT)
+	SLtt_Char_Type fgbg = get_brush_fgbg (0);
+	if (GET_BG(fgbg) == SLSMG_COLOR_DEFAULT)
 	  Bce_Color_Offset = 0;
 	else
 	  Bce_Color_Offset = 1;
@@ -2725,3 +2820,20 @@ int _SLtt_get_bce_color_offset (void)
    return Bce_Color_Offset;
 }
 #endif
+
+int SLtt_utf8_enable (int mode)
+{
+   if (mode == -1)
+     mode = _pSLutf8_mode;
+
+   return _pSLtt_UTF8_Mode = mode;
+}
+
+int SLtt_is_utf8_mode (void)
+{
+   int mode = _pSLtt_UTF8_Mode;
+   if (mode == -1)
+     mode = _pSLutf8_mode;
+
+   return mode;
+}

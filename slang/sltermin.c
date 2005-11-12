@@ -2,12 +2,26 @@
  * the slang SLtt interface.
  */
 
-/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 #include "slinclud.h"
 
@@ -63,7 +77,7 @@ static int make_integer (unsigned char *buf)
  * structure is SLTERMCAP.  In that case, only terminal_names is malloced
  * and the other fields are pointers into it.
  */
-struct _SLterminfo_Type
+struct _pSLterminfo_Type
 {
 #define SLTERMINFO 1
 #define SLTERMCAP  2
@@ -231,7 +245,7 @@ static char *Terminfo_Dirs [] =
    ""
 };
 
-SLterminfo_Type *_SLtt_tigetent (char *term)
+SLterminfo_Type *_pSLtt_tigetent (char *term)
 {
    char *tidir;
    int i;
@@ -248,11 +262,11 @@ SLterminfo_Type *_SLtt_tigetent (char *term)
 #endif
        )
      return NULL;
-#if 0
-   if (_SLsecure_issetugid ()
+
+   if (_pSLsecure_issetugid ()
        && ((term[0] == '.') || (NULL != strchr (term, '/'))))
      return NULL;
-#endif
+
    if (NULL == (ti = (SLterminfo_Type *) SLmalloc (sizeof (SLterminfo_Type))))
      {
 	return NULL;
@@ -269,18 +283,15 @@ SLterminfo_Type *_SLtt_tigetent (char *term)
    /* If we are on a termcap based system, use termcap */
    if (0 == tcap_getent (term, ti)) return ti;
 
-   if (NULL != (home = getenv ("HOME")))
+   if (NULL != (home = _pSLsecure_getenv ("HOME")))
      {
-	size_t len = strlen (home);
-
-	if (len > sizeof (home_ti) - sizeof ("/.terminfo"))
-	    len = sizeof (home_ti) - sizeof ("/.terminfo");
-	memcpy (home_ti, home, len);
-	memcpy (home_ti + len, "/.terminfo", sizeof ("/.terminfo"));
+	strncpy (home_ti, home, sizeof (home_ti) - 11);
+	home_ti [sizeof(home_ti) - 11] = 0;
+	strcat (home_ti, "/.terminfo");
 	Terminfo_Dirs [0] = home_ti;
      }
 
-   Terminfo_Dirs[1] = getenv ("TERMINFO");
+   Terminfo_Dirs[1] = _pSLsecure_getenv ("TERMINFO");
    i = 0;
    while (1)
      {
@@ -290,7 +301,7 @@ SLterminfo_Type *_SLtt_tigetent (char *term)
 	     if (*tidir == 0)
 	       break;		       /* last one */
 
-	     if (sizeof (file) >= strlen (tidir) + 4 + strlen (term))
+	     if (sizeof (file) > strlen (tidir) + 4 + strlen (term))
 	       {
 		  sprintf (file, "%s/%c/%s", tidir, *term, term);
 		  if (NULL != (fp = open_terminfo (file, ti)))
@@ -342,7 +353,7 @@ SLterminfo_Type *_SLtt_tigetent (char *term)
 # define UNTIC_COMMENT(x)
 #endif
 
-typedef const struct
+typedef SLCONST struct
 {
    char name[3];
    int offset;
@@ -789,7 +800,7 @@ static int compute_cap_offset (char *cap, SLterminfo_Type *t, Tgetstr_Map_Type *
    return -1;
 }
 
-char *_SLtt_tigetstr (SLterminfo_Type *t, char *cap)
+char *_pSLtt_tigetstr (SLterminfo_Type *t, char *cap)
 {
    int offset;
 
@@ -849,7 +860,7 @@ static Tgetstr_Map_Type Tgetnum_Map[] =
    {"", -1		UNTIC_COMMENT(NULL)}
 };
 
-int _SLtt_tigetnum (SLterminfo_Type *t, char *cap)
+int _pSLtt_tigetnum (SLterminfo_Type *t, char *cap)
 {
    int offset;
 
@@ -912,7 +923,7 @@ static Tgetstr_Map_Type Tgetflag_Map[] =
    {"", -1		UNTIC_COMMENT(NULL)}
 };
 
-int _SLtt_tigetflag (SLterminfo_Type *t, char *cap)
+int _pSLtt_tigetflag (SLterminfo_Type *t, char *cap)
 {
    int offset;
 
@@ -1037,7 +1048,8 @@ static int tcap_getent (char *term, SLterminfo_Type *ti)
 
    /* malloc some extra space just in case it is needed. */
    len = strlen ((char *) termcap) + 256;
-   if (NULL == (buf = (unsigned char *) SLmalloc ((unsigned int) len))) return -1;
+   if (NULL == (buf = (unsigned char *) SLmalloc ((unsigned int) len))) 
+     return -1;
 
    b = buf;
 
@@ -1085,7 +1097,15 @@ static int tcap_getent (char *term, SLterminfo_Type *ti)
 	     ch = *t++;
 	     if ((ch == '\\') && (t < tmax))
 	       {
-		  t = (unsigned char *) _SLexpand_escaped_char ((char *) t, (char *) &ch);
+		  SLwchar_Type wch;
+
+		  t = (unsigned char *) _pSLexpand_escaped_char ((char *) t, &wch, NULL);
+		  if (t == NULL)
+		    {
+		       SLfree ((char *)buf);
+		       return -1;
+		    }
+		  ch = (char) wch;
 	       }
 	     else if ((ch == '^') && (t < tmax))
 	       {
@@ -1161,21 +1181,21 @@ static int tcap_getent (char *term, SLterminfo_Type *ti)
  */
 char *SLtt_tigetent (char *s)
 {
-   return (char *) _SLtt_tigetent (s);
+   return (char *) _pSLtt_tigetent (s);
 }
 
 extern char *SLtt_tigetstr (char *s, char **p)
 {
    if (p == NULL)
      return NULL;
-   return _SLtt_tigetstr ((SLterminfo_Type *) *p, s);
+   return _pSLtt_tigetstr ((SLterminfo_Type *) *p, s);
 }
 
 extern int SLtt_tigetnum (char *s, char **p)
 {
    if (p == NULL)
      return -1;
-   return _SLtt_tigetnum ((SLterminfo_Type *) *p, s);
+   return _pSLtt_tigetnum ((SLterminfo_Type *) *p, s);
 }
 
 

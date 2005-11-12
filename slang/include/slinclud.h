@@ -1,6 +1,7 @@
 #ifndef _SLANG_INCLUDE_H_
 #define _SLANG_INCLUDE_H_
 
+#define SLANG_SOURCE_	1
 #include "config.h"
 #include "sl-feat.h"
 

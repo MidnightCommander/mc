@@ -1,9 +1,23 @@
-/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 #include "slinclud.h"
 
@@ -34,9 +48,9 @@ unsigned int SLang_getkey (void)
 	SLMEMCPY ((char *) SLang_Input_Buffer,
 		(char *) (SLang_Input_Buffer + 1), imax);
      }
-   else if (SLANG_GETKEY_ERROR == (ch = _SLsys_getkey ())) return ch;
+   else if (SLANG_GETKEY_ERROR == (ch = _pSLsys_getkey ())) return ch;
 
-#if _SLANG_MAP_VTXXX_8BIT
+#if SLANG_MAP_VTXXX_8BIT
 # if !defined(IBMPC_SYSTEM)
    if (ch & 0x80)
      {
@@ -92,7 +106,7 @@ int SLang_input_pending (int tsecs)
    unsigned char c;
    if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
 
-   n = _SLsys_input_pending (tsecs);
+   n = _pSLsys_input_pending (tsecs);
 
    if (n <= 0) return 0;
 
@@ -108,10 +122,10 @@ void SLang_flush_input (void)
 
    SLang_Input_Buffer_Len = 0;
    SLKeyBoard_Quit = 0;
-   while (_SLsys_input_pending (0) > 0)
+   while (_pSLsys_input_pending (0) > 0)
      {
-	(void) _SLsys_getkey ();
-	/* Set this to 0 because _SLsys_getkey may stuff keyboard buffer if
+	(void) _pSLsys_getkey ();
+	/* Set this to 0 because _pSLsys_getkey may stuff keyboard buffer if
 	 * key sends key sequence (OS/2, DOS, maybe VMS).
 	 */
 	SLang_Input_Buffer_Len = 0;
@@ -137,10 +151,10 @@ static int convert_scancode (unsigned int scan,
    unsigned char end;
    int is_arrow;
 
-   shift &= (_SLTT_KEY_ALT|_SLTT_KEY_SHIFT|_SLTT_KEY_CTRL);
+   shift &= (_pSLTT_KEY_ALT|_pSLTT_KEY_SHIFT|_pSLTT_KEY_CTRL);
 
    b = buf;
-   if (_SLTT_KEY_ALT == shift)
+   if (_pSLTT_KEY_ALT == shift)
      {
 	shift = 0;
 	*b++ = 27;
@@ -152,9 +166,9 @@ static int convert_scancode (unsigned int scan,
    end = '~';
    if (shift)
      {
-	if (shift == _SLTT_KEY_CTRL)
+	if (shift == _pSLTT_KEY_CTRL)
 	  end = '^';
-	else if (shift == _SLTT_KEY_SHIFT)
+	else if (shift == _pSLTT_KEY_SHIFT)
 	  end = '$';
 	else shift = 0;
      }
@@ -260,7 +274,7 @@ static int convert_scancode (unsigned int scan,
 
    if (is_arrow && shift)
      {
-	if (shift == _SLTT_KEY_CTRL)
+	if (shift == _pSLTT_KEY_CTRL)
 	  end &= 0x1F;
 	else
 	  end |= 0x20;
@@ -279,7 +293,7 @@ static int convert_scancode (unsigned int scan,
 }
 
    
-unsigned int _SLpc_convert_scancode (unsigned int scan,
+unsigned int _pSLpc_convert_scancode (unsigned int scan,
 				     unsigned int shift,
 				     int getkey)
 {

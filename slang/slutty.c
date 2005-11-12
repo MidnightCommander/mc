@@ -1,10 +1,24 @@
 /* slutty.c --- Unix Low level terminal (tty) functions for S-Lang */
-/* Copyright (c) 1992, 1999, 2001, 2002, 2003 John E. Davis
- * This file is part of the S-Lang library.
- *
- * You may distribute under the terms of either the GNU General Public
- * License or the Perl Artistic License.
- */
+/*
+Copyright (C) 2004, 2005 John E. Davis
+
+This file is part of the S-Lang Library.
+
+The S-Lang Library is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version.
+
+The S-Lang Library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
+USA.  
+*/
 
 #include "slinclud.h"
 
@@ -91,7 +105,7 @@ typedef struct termios TTY_Termio_Type;
 static TTY_Termio_Type Old_TTY;
 
 #ifdef HAVE_TERMIOS_H
-typedef const struct
+typedef SLCONST struct
 {
    unsigned int key;
    unsigned int value;
@@ -432,7 +446,7 @@ static void default_sigint (int sig)
    sig = errno;			       /* use parameter */
 
    SLKeyBoard_Quit = 1;
-   if (SLang_Ignore_User_Abort == 0) SLang_Error = SL_USER_BREAK;
+   if (SLang_Ignore_User_Abort == 0) SLang_set_error (SL_USER_BREAK);
    SLsignal_intr (SIGINT, default_sigint);
    errno = sig;
 }
@@ -464,7 +478,7 @@ static fd_set Read_FD_Set;
 
 /* HACK: If > 0, use 1/10 seconds.  If < 0, use 1/1000 seconds */
 
-int _SLsys_input_pending(int tsecs)
+int _pSLsys_input_pending(int tsecs)
 {
    struct timeval wait;
    long usecs, secs;
@@ -515,7 +529,7 @@ static int handle_interrupt (void)
    return 0;
 }
 
-unsigned int _SLsys_getkey (void)
+unsigned int _pSLsys_getkey (void)
 {
    unsigned char c;
 
@@ -533,7 +547,7 @@ unsigned int _SLsys_getkey (void)
 	if (SLKeyBoard_Quit)
 	  return SLang_Abort_Char;
 
-	if (0 == (ret = _SLsys_input_pending (100)))
+	if (0 == (ret = _pSLsys_input_pending (100)))
 	  continue;
 
 	if (ret != -1)
@@ -593,7 +607,7 @@ unsigned int _SLsys_getkey (void)
 #ifdef EIO
 	if (errno == EIO)
 	  {
-	     SLang_exit_error ("_SLsys_getkey: EIO error.");
+	     SLang_verror (SL_Read_Error, "_pSLsys_getkey: EIO error");
 	  }
 #endif
 	return SLANG_GETKEY_ERROR;
