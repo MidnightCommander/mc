@@ -1,3 +1,8 @@
+2005-11-13  David Martin  <dmartina@excite.com>
+
+	* update.pl: Identify Q_() strings for translation.
+	* update.sh: Likewise.
+
 2005-10-06  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* nl.po: Do not use prefix in Q_() strings.

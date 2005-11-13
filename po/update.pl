@@ -49,7 +49,7 @@ if ($LANG=~/^-(.)*/){
 
         $b="xgettext --default-domain\=$PACKAGE --directory\=\.\."
           ." --add-comments=TRANSLATORS: --keyword\=\_ --keyword\=N\_"
-          ." --files-from\=\.\/POTFILES\.in ";
+          ." --keyword\=Q\_ --files-from\=\.\/POTFILES\.in ";
         $b1="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
            ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
          
@@ -135,7 +135,7 @@ elsif(-s "$LANG.po"){
 
     $c="xgettext --default-domain\=$PACKAGE --directory\=\.\."
       ." --add-comments=TRANSLATORS: --keyword\=\_ --keyword\=N\_"
-      ." --files-from\=\.\/POTFILES\.in ";  
+      ." --keyword\=Q\_ --files-from\=\.\/POTFILES\.in ";  
     $c1="test \! -f $PACKAGE\.po \|\| \( rm -f \.\/$PACKAGE\.pot "
        ."&& mv $PACKAGE\.po \.\/$PACKAGE\.pot \)";
 

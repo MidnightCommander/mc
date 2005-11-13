@@ -41,7 +41,7 @@ echo "Building the $PACKAGE.pot ..."
 
 xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments=TRANSLATORS: --keyword=_ --keyword=N_ \
-  --files-from=./POTFILES.in \
+  --keyword=Q_ --files-from=./POTFILES.in \
 && test ! -f $PACKAGE.po \
    || ( rm -f ./$PACKAGE.pot \
 && mv $PACKAGE.po ./$PACKAGE.pot );
@@ -52,7 +52,7 @@ if [ -s $1.po ]; then
 
 xgettext --default-domain=$PACKAGE --directory=.. \
   --add-comments=TRANSLATORS: --keyword=_ --keyword=N_ \
-  --files-from=./POTFILES.in \
+  --keyword=Q_ --files-from=./POTFILES.in \
 && test ! -f $PACKAGE.po \
    || ( rm -f ./PACKAGE.pot \
 && mv $PACKAGE.po ./$PACKAGE.pot );
