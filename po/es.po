@@ -7,13 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2005-08-19 11:04+0200\n"
+"POT-Creation-Date: 2005-11-13 14:39+0100\n"
+"PO-Revision-Date: 2005-11-13 14:39+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgid " Choose syntax highlighting "
 msgstr "Coloreado de Sintaxis"
@@ -521,6 +522,9 @@ msgstr "redefinir &Teclas..."
 
 msgid "Syntax &Highlighting..."
 msgstr "sinta&Xis coloreada..."
+
+msgid "Save setu&p..."
+msgstr "guardar co&Nfiguración"
 
 msgid " File "
 msgstr " Archivo "
@@ -1951,8 +1955,9 @@ msgstr "Accedido:   %s"
 msgid "Modified:  %s"
 msgstr "Modificado: %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
+msgid "Status:    %s"
 msgstr "Cambiado:   %s"
 
 #, c-format
@@ -1965,11 +1970,9 @@ msgstr "Tamaño:     %s"
 
 #, c-format
 msgid " (%ld block)"
-msgstr " (%ld bloque)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld bloques)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld bloque)"
+msgstr[1] " (%ld bloques)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2640,12 +2643,16 @@ msgid "Group"
 msgstr "Grupo"
 
 #, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bytes en %d archivo"
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s bytes"
 
 #, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bytes en %d archivos"
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bytes en %d archivo"
+msgstr[1] "%s bytes en %d archivos"
 
 msgid "<readlink failed>"
 msgstr "<readlink falló>"
@@ -2982,7 +2989,7 @@ msgid " Enter regexp:"
 msgstr " Teclee la expresión regular:"
 
 msgid "ButtonBar|Help"
-msgstr "Ajuda"
+msgstr "Ayuda"
 
 msgid "ButtonBar|Quit"
 msgstr "Salir"
@@ -2997,7 +3004,7 @@ msgid "ButtonBar|Goto"
 msgstr "Ir a"
 
 msgid "ButtonBar|Line"
-msgstr "Linea"
+msgstr "Línea"
 
 msgid "ButtonBar|View"
 msgstr "Ver"
@@ -3611,4 +3618,3 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
-

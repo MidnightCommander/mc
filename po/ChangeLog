@@ -1,5 +1,9 @@
 2005-11-13  David Martin  <dmartina@excite.com>
 
+	* es.po: Updated Spanish translation.
+
+2005-11-13  David Martin  <dmartina@excite.com>
+
 	* update.pl: Identify Q_() strings for translation.
 	* update.sh: Likewise.
 
