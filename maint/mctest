@@ -10,7 +10,7 @@ trap 'echo >&2 "ERROR: Test not completed, exit with code $?"; exit 1' exit
 distcheck() {
     id="$1"
     shift
-    make distcheck $MAKEFLAGS "$@" >test-$id.out 2>test-$id.err
+    make distcheck "$MAKEFLAGS" "$@" >test-$id.out 2>test-$id.err
 }
 
 # Specify which warnings we want to see.
