@@ -12,6 +12,12 @@ struct vfs_stamping;
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
 
+/**
+ * This is the type of callback function passed to vfs_fill_names.
+ * It gets the name of the virtual file system as its first argument.
+ * See also:
+ *    vfs_fill_names().
+ */
 typedef void (*fill_names_f) (const char *);
 
 struct vfs_class {
@@ -24,8 +30,17 @@ struct vfs_class {
 
     int (*init) (struct vfs_class *me);
     void (*done) (struct vfs_class *me);
+    
+    /**
+     * The fill_names method shall call the callback function for every
+     * filesystem name that this vfs module supports.
+     */
     void (*fill_names) (struct vfs_class *me, fill_names_f);
 
+    /**
+     * The which() method shall return the index of the vfs subsystem
+     * or -1 if this vfs cannot handle the given pathname.
+     */
     int (*which) (struct vfs_class *me, const char *path);
 
     void *(*open) (struct vfs_class *me, const char *fname, int flags,
