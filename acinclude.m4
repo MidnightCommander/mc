@@ -803,6 +803,17 @@ AC_DEFUN([MC_WITH_MCSLANG], [
     screen_type=mcslang
     screen_msg="Included S-Lang library (mcslang)"
 
+    dnl Type checks from S-Lang sources
+    AC_CHECK_SIZEOF(short, 2)
+    AC_CHECK_SIZEOF(int, 4)
+    AC_CHECK_SIZEOF(long, 4)
+    AC_CHECK_SIZEOF(float, 4)
+    AC_CHECK_SIZEOF(double, 8)
+    AC_TYPE_OFF_T
+    AC_CHECK_SIZEOF(off_t)
+    AC_CHECK_TYPES(long long)
+    AC_CHECK_SIZEOF(long long)
+
     # Search for terminfo database.
     use_terminfo=
     if test x"$with_termcap" != xyes; then

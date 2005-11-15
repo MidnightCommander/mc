@@ -1,3 +1,8 @@
+2005-11-15  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_WITH_MCSLANG): Add type tests from S-Lang
+	configuration scripts.
+
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
 	* configure.ac: Catch unexpanded MC_* macros.
