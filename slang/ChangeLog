@@ -1,3 +1,8 @@
+2005-11-15  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* slcommon.c (_pSLsecure_issetugid): Remove dependency on glibc
+	private function __libc_enable_secure().
+
 2005-11-10  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* *: Upgrade slang to 2.0.5.

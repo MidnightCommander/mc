@@ -191,7 +191,7 @@ char *SLcalloc (unsigned int nelems, unsigned int len)
    return p;
 }
 
-#if !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2)
+#if !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2) && 0
 extern int __libc_enable_secure;
 # define HAVE___LIBC_ENABLE_SECURE 1
 #endif
@@ -201,7 +201,7 @@ int _pSLsecure_issetugid (void)
 #ifdef HAVE_ISSETUGID
    return (1 == issetugid ());
 #else
-# ifdef HAVE___LIBC_ENABLE_SECURE
+# if defined HAVE___LIBC_ENABLE_SECURE && 0
    return __libc_enable_secure;
 # else
 #  if defined(HAVE_GETUID) && defined(HAVE_GETEUID) && defined(HAVE_GETGID) && defined(HAVE_GETEUID)
