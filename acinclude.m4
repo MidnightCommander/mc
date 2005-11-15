@@ -813,6 +813,7 @@ AC_DEFUN([MC_WITH_MCSLANG], [
     AC_CHECK_SIZEOF(off_t)
     AC_CHECK_TYPES(long long)
     AC_CHECK_SIZEOF(long long)
+    AC_CHECK_FUNCS(atexit on_exit)
 
     # Search for terminfo database.
     use_terminfo=
