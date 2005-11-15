@@ -35,6 +35,9 @@
 #include "config.h"
 #endif
 
+#include <stdlib.h>
+#include <string.h>
+
 #ifdef HAVE_NETMASK_IFCONF
 
 #include <stdio.h>
