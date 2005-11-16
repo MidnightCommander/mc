@@ -191,7 +191,7 @@ char *SLcalloc (unsigned int nelems, unsigned int len)
    return p;
 }
 
-#if !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2) && 0
+#if 0 /* was: !defined(HAVE_ISSETUGID) && defined(__GLIBC__) && (__GLIBC__ >= 2) */
 extern int __libc_enable_secure;
 # define HAVE___LIBC_ENABLE_SECURE 1
 #endif

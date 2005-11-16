@@ -1,3 +1,8 @@
+2005-11-16  Roland Illig  <roland.illig@gmx.de>
+
+	* slcommon.c (_pSLsecure_issetugid): Made the #ifdef more
+	readable.
+
 2005-11-15  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* slcommon.c (_pSLsecure_issetugid): Remove dependency on glibc
