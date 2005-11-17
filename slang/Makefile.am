@@ -36,6 +36,6 @@ libmcslang_a_SOURCES = \
 	$(SLANG_INCLUDES)
 
 EXTRASRC = slvideo.c slw32tty.c
-EXTRADOCS = README
+EXTRADOCS = ChangeLog README
 
 EXTRA_DIST = $(EXTRASRC) $(EXTRADOCS)
