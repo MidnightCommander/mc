@@ -1,3 +1,8 @@
+2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* php.syntax: Updated against recent online documentation.
+	A/o many constants added.
+
 2005-10-31  Pavel Roskin  <proski@gnu.org>
 
 	* Syntax: Highlight Kbuild as a makefile.
