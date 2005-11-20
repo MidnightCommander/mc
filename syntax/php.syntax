@@ -1,5 +1,8 @@
 # PHP syntax file
 
+# 2005-11-20  Leonard den Ottolander <leonard den ottolander nl>
+#	* regenerated from the docs at http://www.php.net
+
 # 2005-04-16  Leonard den Ottolander <leonard den ottolander nl>
 #	* ' ' and " " context fixes
 
@@ -57,6 +60,7 @@ context default
     keyword whole switch brightmagenta
     keyword whole true brightmagenta
     keyword whole while brightmagenta
+
 
 # .NET Functions
     keyword whole dotnet_load yellow
@@ -464,9 +468,6 @@ context default
     keyword whole CPDF_PM_THUMBS white
 
 # COM and .Net (Windows)
-    keyword whole COM yellow
-    keyword whole DOTNET yellow
-    keyword whole VARIANT yellow
     keyword whole com_addref yellow
     keyword whole com_create_guid yellow
     keyword whole com_event_sink yellow
@@ -1481,7 +1482,6 @@ context default
     keyword whole chdir yellow
     keyword whole chroot yellow
     keyword whole closedir yellow
-    keyword whole dir yellow
     keyword whole getcwd yellow
     keyword whole opendir yellow
     keyword whole readdir yellow
@@ -2183,7 +2183,6 @@ context default
     keyword whole IBASE_TEXT white
 
 # Firebird/Interbase Functions (PDO_FIREBIRD)
-    keyword whole PDO_FIREBIRD DSN yellow
 
 # Firebird/Interbase Functions (PDO_FIREBIRD) constants
     keyword whole IBASE_BKP_CONVERT white
@@ -2734,7 +2733,6 @@ context default
 # Image Functions
     keyword whole gd_info yellow
     keyword whole getimagesize yellow
-    keyword whole http://www.iptc.org/ yellow
     keyword whole image2wbmp yellow
     keyword whole image_type_to_extension yellow
     keyword whole image_type_to_mime_type yellow
@@ -4307,7 +4305,6 @@ context default
     keyword whole SQLVARCHAR white
 
 # Microsoft SQL Server and Sybase Functions (PDO_DBLIB)
-    keyword whole PDO_DBLIB DSN yellow
 
 # Microsoft SQL Server and Sybase Functions (PDO_DBLIB) constants
     keyword whole MSSQL_ASSOC white
@@ -4508,7 +4505,6 @@ context default
     keyword whole mysql_unbuffered_query yellow
 
 # MySQL Functions (PDO_MYSQL)
-    keyword whole PDO_MYSQL DSN yellow
 
 # MySQL Functions (PDO_MYSQL) constants
     keyword whole PDO_ATTR_DRIVER_NAME white
@@ -5281,7 +5277,6 @@ context default
     keyword whole SQL_VARCHAR white
 
 # ODBC and DB2 functions (PDO_ODBC)
-    keyword whole PDO_ODBC DSN yellow
 
 # ODBC and DB2 functions (PDO_ODBC) constants
     keyword whole ODBC_BINMODE_CONVERT white
@@ -5338,7 +5333,6 @@ context default
     keyword whole SQL_VARCHAR white
 
 # oggvorbis
-    keyword whole Usage yellow
 
 # oggvorbis constants
     keyword whole OGGVORBIS_PCM_S16_BE white
@@ -5478,7 +5472,6 @@ context default
     keyword whole ORA_FETCHINTO_NULLS white
 
 # Oracle Functions (PDO_OCI)
-    keyword whole PDO_OCI DSN yellow
 
 # Oracle Functions (PDO_OCI) constants
     keyword whole ORA_BIND_IN white
@@ -5771,8 +5764,6 @@ context default
     keyword whole WUNTRACED white
 
 # Regular Expression Functions (Perl-Compatible)
-    keyword whole Pattern Modifiers yellow
-    keyword whole Pattern Syntax yellow
     keyword whole preg_grep yellow
     keyword whole preg_match yellow
     keyword whole preg_match_all yellow
@@ -6232,7 +6223,6 @@ context default
     keyword whole PG_DIAG_STATEMENT_POSITION white
 
 # PostgreSQL Functions (PDO_PGSQL)
-    keyword whole PDO_PGSQL DSN yellow
 
 # PostgreSQL Functions (PDO_PGSQL) constants
     keyword whole NULL white
@@ -6837,8 +6827,6 @@ context default
     keyword whole RPMREADER_XPM white
 
 # runkit Functions
-    keyword whole Runkit_Sandbox yellow
-    keyword whole Runkit_Sandbox_Parent yellow
     keyword whole runkit_class_adopt yellow
     keyword whole runkit_class_emancipate yellow
     keyword whole runkit_constant_add yellow
@@ -7454,7 +7442,6 @@ context default
 # SQLite Functions (PDO_SQLITE)
     keyword whole PDO::sqliteCreateAggregate yellow
     keyword whole PDO::sqliteCreateFunction yellow
-    keyword whole PDO_SQLITE DSN yellow
 
 # SQLite Functions (PDO_SQLITE) constants
     keyword whole SQLITE_ABORT white
