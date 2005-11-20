@@ -1,5 +1,9 @@
 2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* php.syntax: Missed the '::' method separator.
+
+2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* php.syntax: Removed some cruft that slipped through.
 
 2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>

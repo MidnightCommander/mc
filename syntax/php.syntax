@@ -3884,20 +3884,23 @@ context default
     keyword whole MC_ZIP white
 
 # Memcache Functions
-    keyword whole Memcache::add yellow
-    keyword whole Memcache::close yellow
-    keyword whole Memcache::connect yellow
-    keyword whole Memcache::decrement yellow
-    keyword whole Memcache::delete yellow
-    keyword whole Memcache::flush yellow
-    keyword whole Memcache::get yellow
-    keyword whole Memcache::getStats yellow
-    keyword whole Memcache::getVersion yellow
-    keyword whole Memcache::increment yellow
-    keyword whole Memcache::pconnect yellow
-    keyword whole Memcache::replace yellow
-    keyword whole Memcache::set yellow
     keyword whole memcache_debug yellow
+
+# Memcache Functions Memcache methods
+    keyword whole Memcache yellow
+    keyword whole ->add yellow
+    keyword whole ->close yellow
+    keyword whole ->connect yellow
+    keyword whole ->decrement yellow
+    keyword whole ->delete yellow
+    keyword whole ->flush yellow
+    keyword whole ->get yellow
+    keyword whole ->getStats yellow
+    keyword whole ->getVersion yellow
+    keyword whole ->increment yellow
+    keyword whole ->pconnect yellow
+    keyword whole ->replace yellow
+    keyword whole ->set yellow
 
 # Memcache Functions constants
     keyword whole MEMCACHE_COMPRESSED white
@@ -5896,37 +5899,43 @@ context default
     keyword whole PREG_SPLIT_OFFSET_CAPTURE white
 
 # PDO Functions
-    keyword whole PDO::__construct yellow
-    keyword whole PDO::beginTransaction yellow
-    keyword whole PDO::commit yellow
-    keyword whole PDO::errorCode yellow
-    keyword whole PDO::errorInfo yellow
-    keyword whole PDO::exec yellow
-    keyword whole PDO::getAttribute yellow
-    keyword whole PDO::getAvailableDrivers yellow
-    keyword whole PDO::lastInsertId yellow
-    keyword whole PDO::prepare yellow
-    keyword whole PDO::query yellow
-    keyword whole PDO::quote yellow
-    keyword whole PDO::rollBack yellow
-    keyword whole PDO::setAttribute yellow
-    keyword whole PDOStatement::bindColumn yellow
-    keyword whole PDOStatement::bindParam yellow
-    keyword whole PDOStatement::bindValue yellow
-    keyword whole PDOStatement::closeCursor yellow
-    keyword whole PDOStatement::columnCount yellow
-    keyword whole PDOStatement::errorCode yellow
-    keyword whole PDOStatement::errorInfo yellow
-    keyword whole PDOStatement::execute yellow
-    keyword whole PDOStatement::fetch yellow
-    keyword whole PDOStatement::fetchAll yellow
-    keyword whole PDOStatement::fetchColumn yellow
-    keyword whole PDOStatement::getAttribute yellow
-    keyword whole PDOStatement::getColumnMeta yellow
-    keyword whole PDOStatement::nextRowset yellow
-    keyword whole PDOStatement::rowCount yellow
-    keyword whole PDOStatement::setAttribute yellow
-    keyword whole PDOStatement::setFetchMode yellow
+
+# PDO Functions PDO methods
+    keyword whole PDO yellow
+    keyword whole ->__construct yellow
+    keyword whole ->beginTransaction yellow
+    keyword whole ->commit yellow
+    keyword whole ->errorCode yellow
+    keyword whole ->errorInfo yellow
+    keyword whole ->exec yellow
+    keyword whole ->getAttribute yellow
+    keyword whole ->getAvailableDrivers yellow
+    keyword whole ->lastInsertId yellow
+    keyword whole ->prepare yellow
+    keyword whole ->query yellow
+    keyword whole ->quote yellow
+    keyword whole ->rollBack yellow
+    keyword whole ->setAttribute yellow
+
+# PDO Functions PDOStatement methods
+    keyword whole PDOStatement yellow
+    keyword whole ->bindColumn yellow
+    keyword whole ->bindParam yellow
+    keyword whole ->bindValue yellow
+    keyword whole ->closeCursor yellow
+    keyword whole ->columnCount yellow
+    keyword whole ->errorCode yellow
+    keyword whole ->errorInfo yellow
+    keyword whole ->execute yellow
+    keyword whole ->fetch yellow
+    keyword whole ->fetchAll yellow
+    keyword whole ->fetchColumn yellow
+    keyword whole ->getAttribute yellow
+    keyword whole ->getColumnMeta yellow
+    keyword whole ->nextRowset yellow
+    keyword whole ->rowCount yellow
+    keyword whole ->setAttribute yellow
+    keyword whole ->setFetchMode yellow
 
 # PDO Functions constants
     keyword whole FALSE white
@@ -6659,20 +6668,23 @@ context default
     keyword whole RADIUS_X_75 white
 
 # Rar Functions
-    keyword whole Rar::extract yellow
-    keyword whole Rar::getAttr yellow
-    keyword whole Rar::getCrc yellow
-    keyword whole Rar::getFileTime yellow
-    keyword whole Rar::getHostOs yellow
-    keyword whole Rar::getMethod yellow
-    keyword whole Rar::getName yellow
-    keyword whole Rar::getPackedSize yellow
-    keyword whole Rar::getUnpackedSize yellow
-    keyword whole Rar::getVersion yellow
     keyword whole rar_close yellow
     keyword whole rar_entry_get yellow
     keyword whole rar_list yellow
     keyword whole rar_open yellow
+
+# Rar Functions Rar methods
+    keyword whole Rar yellow
+    keyword whole ->extract yellow
+    keyword whole ->getAttr yellow
+    keyword whole ->getCrc yellow
+    keyword whole ->getFileTime yellow
+    keyword whole ->getHostOs yellow
+    keyword whole ->getMethod yellow
+    keyword whole ->getName yellow
+    keyword whole ->getPackedSize yellow
+    keyword whole ->getUnpackedSize yellow
+    keyword whole ->getVersion yellow
 
 # Rar Functions constants
     keyword whole RAR_HOST_BEOS white
@@ -6896,34 +6908,58 @@ context default
     keyword whole RUNKIT_VERSION white
 
 # SDO Functions
-    keyword whole SDO_DAS_ChangeSummary::beginLogging yellow
-    keyword whole SDO_DAS_ChangeSummary::endLogging yellow
-    keyword whole SDO_DAS_ChangeSummary::getChangeType yellow
-    keyword whole SDO_DAS_ChangeSummary::getChangedDataObjects yellow
-    keyword whole SDO_DAS_ChangeSummary::getOldContainer yellow
-    keyword whole SDO_DAS_ChangeSummary::getOldValues yellow
-    keyword whole SDO_DAS_ChangeSummary::isLogging yellow
-    keyword whole SDO_DAS_DataFactory::addPropertyToType yellow
-    keyword whole SDO_DAS_DataFactory::addType yellow
-    keyword whole SDO_DAS_DataFactory::getDataFactory yellow
-    keyword whole SDO_DAS_DataObject::getChangeSummary yellow
-    keyword whole SDO_DAS_Setting::getListIndex yellow
-    keyword whole SDO_DAS_Setting::getPropertyIndex yellow
-    keyword whole SDO_DAS_Setting::getPropertyName yellow
-    keyword whole SDO_DAS_Setting::getValue yellow
-    keyword whole SDO_DAS_Setting::isSet yellow
-    keyword whole SDO_DataFactory::create yellow
-    keyword whole SDO_DataObject::clear yellow
-    keyword whole SDO_DataObject::createDataObject yellow
-    keyword whole SDO_DataObject::getContainer yellow
-    keyword whole SDO_DataObject::getContainmentPropertyName yellow
-    keyword whole SDO_DataObject::getSequence yellow
-    keyword whole SDO_DataObject::getType yellow
-    keyword whole SDO_List::insert yellow
-    keyword whole SDO_Sequence::getPropertyIndex yellow
-    keyword whole SDO_Sequence::getPropertyName yellow
-    keyword whole SDO_Sequence::insert yellow
-    keyword whole SDO_Sequence::move yellow
+
+# SDO Functions SDO_DAS_ChangeSummary methods
+    keyword whole SDO_DAS_ChangeSummary yellow
+    keyword whole ->beginLogging yellow
+    keyword whole ->endLogging yellow
+    keyword whole ->getChangeType yellow
+    keyword whole ->getChangedDataObjects yellow
+    keyword whole ->getOldContainer yellow
+    keyword whole ->getOldValues yellow
+    keyword whole ->isLogging yellow
+
+# SDO Functions SDO_DAS_DataFactory methods
+    keyword whole SDO_DAS_DataFactory yellow
+    keyword whole ->addPropertyToType yellow
+    keyword whole ->addType yellow
+    keyword whole ->getDataFactory yellow
+
+# SDO Functions SDO_DAS_DataObject methods
+    keyword whole SDO_DAS_DataObject yellow
+    keyword whole ->getChangeSummary yellow
+
+# SDO Functions SDO_DAS_Setting methods
+    keyword whole SDO_DAS_Setting yellow
+    keyword whole ->getListIndex yellow
+    keyword whole ->getPropertyIndex yellow
+    keyword whole ->getPropertyName yellow
+    keyword whole ->getValue yellow
+    keyword whole ->isSet yellow
+
+# SDO Functions SDO_DataFactory methods
+    keyword whole SDO_DataFactory yellow
+    keyword whole ->create yellow
+
+# SDO Functions SDO_DataObject methods
+    keyword whole SDO_DataObject yellow
+    keyword whole ->clear yellow
+    keyword whole ->createDataObject yellow
+    keyword whole ->getContainer yellow
+    keyword whole ->getContainmentPropertyName yellow
+    keyword whole ->getSequence yellow
+    keyword whole ->getType yellow
+
+# SDO Functions SDO_List methods
+    keyword whole SDO_List yellow
+    keyword whole ->insert yellow
+
+# SDO Functions SDO_Sequence methods
+    keyword whole SDO_Sequence yellow
+    keyword whole ->getPropertyIndex yellow
+    keyword whole ->getPropertyName yellow
+    keyword whole ->insert yellow
+    keyword whole ->move yellow
 
 # SDO Functions constants
     keyword whole SDO_DAS_ChangeSummary::ADDITION=2 white
@@ -6932,27 +6968,33 @@ context default
     keyword whole SDO_DAS_ChangeSummary::NONE=0 white
 
 # SDO XML Data Access Service Functions
-    keyword whole SDO_DAS_XML::create yellow
-    keyword whole SDO_DAS_XML::createDataObject yellow
-    keyword whole SDO_DAS_XML::loadFromFile yellow
-    keyword whole SDO_DAS_XML::loadFromString yellow
-    keyword whole SDO_DAS_XML::saveDataObjectToFile yellow
-    keyword whole SDO_DAS_XML::saveDataObjectToString yellow
-    keyword whole SDO_DAS_XML::saveDocumentToFile yellow
-    keyword whole SDO_DAS_XML::saveDocumentToString yellow
-    keyword whole SDO_DAS_XML_Document::getEncoding yellow
-    keyword whole SDO_DAS_XML_Document::getNoNamespaceSchemaLocation yellow
-    keyword whole SDO_DAS_XML_Document::getRootDataObject yellow
-    keyword whole SDO_DAS_XML_Document::getRootElementName yellow
-    keyword whole SDO_DAS_XML_Document::getRootElementURI yellow
-    keyword whole SDO_DAS_XML_Document::getSchemaLocation yellow
-    keyword whole SDO_DAS_XML_Document::getXMLDeclaration yellow
-    keyword whole SDO_DAS_XML_Document::getXMLVersion yellow
-    keyword whole SDO_DAS_XML_Document::setEncoding yellow
-    keyword whole SDO_DAS_XML_Document::setNoNamespaceSchemaLocation yellow
-    keyword whole SDO_DAS_XML_Document::setSchemaLocation yellow
-    keyword whole SDO_DAS_XML_Document::setXMLDeclaration yellow
-    keyword whole SDO_DAS_XML_Document::setXMLVersion yellow
+
+# SDO XML Data Access Service Functions SDO_DAS_XML methods
+    keyword whole SDO_DAS_XML yellow
+    keyword whole ->create yellow
+    keyword whole ->createDataObject yellow
+    keyword whole ->loadFromFile yellow
+    keyword whole ->loadFromString yellow
+    keyword whole ->saveDataObjectToFile yellow
+    keyword whole ->saveDataObjectToString yellow
+    keyword whole ->saveDocumentToFile yellow
+    keyword whole ->saveDocumentToString yellow
+
+# SDO XML Data Access Service Functions SDO_DAS_XML_Document methods
+    keyword whole SDO_DAS_XML_Document yellow
+    keyword whole ->getEncoding yellow
+    keyword whole ->getNoNamespaceSchemaLocation yellow
+    keyword whole ->getRootDataObject yellow
+    keyword whole ->getRootElementName yellow
+    keyword whole ->getRootElementURI yellow
+    keyword whole ->getSchemaLocation yellow
+    keyword whole ->getXMLDeclaration yellow
+    keyword whole ->getXMLVersion yellow
+    keyword whole ->setEncoding yellow
+    keyword whole ->setNoNamespaceSchemaLocation yellow
+    keyword whole ->setSchemaLocation yellow
+    keyword whole ->setXMLDeclaration yellow
+    keyword whole ->setXMLVersion yellow
 
 # SDO XML Data Access Service Functions constants
     keyword whole SDO_DAS_ChangeSummary::ADDITION=2 white
@@ -6961,11 +7003,14 @@ context default
     keyword whole SDO_DAS_ChangeSummary::NONE=0 white
 
 # SDO Relational Data Access Service Functions
-    keyword whole SDO_DAS_Relational::__construct yellow
-    keyword whole SDO_DAS_Relational::applyChanges yellow
-    keyword whole SDO_DAS_Relational::createRootDataObject yellow
-    keyword whole SDO_DAS_Relational::executePreparedQuery yellow
-    keyword whole SDO_DAS_Relational::executeQuery yellow
+
+# SDO Relational Data Access Service Functions SDO_DAS_Relational methods
+    keyword whole SDO_DAS_Relational yellow
+    keyword whole ->__construct yellow
+    keyword whole ->applyChanges yellow
+    keyword whole ->createRootDataObject yellow
+    keyword whole ->executePreparedQuery yellow
+    keyword whole ->executeQuery yellow
 
 # SDO Relational Data Access Service Functions constants
     keyword whole SDO_DAS_ChangeSummary::ADDITION=2 white
@@ -7272,92 +7317,125 @@ context default
     keyword whole SO_TYPE white
 
 # Standard PHP Library (SPL) Functions
-    keyword whole ArrayIterator::current yellow
-    keyword whole ArrayIterator::key yellow
-    keyword whole ArrayIterator::next yellow
-    keyword whole ArrayIterator::rewind yellow
-    keyword whole ArrayIterator::seek yellow
-    keyword whole ArrayIterator::valid yellow
-    keyword whole ArrayObject::__construct yellow
-    keyword whole ArrayObject::append yellow
-    keyword whole ArrayObject::count yellow
-    keyword whole ArrayObject::getIterator yellow
-    keyword whole ArrayObject::offsetExists yellow
-    keyword whole ArrayObject::offsetGet yellow
-    keyword whole ArrayObject::offsetSet yellow
-    keyword whole ArrayObject::offsetUnset yellow
-    keyword whole CachingIterator::__toString yellow
-    keyword whole CachingIterator::hasNext yellow
-    keyword whole CachingIterator::next yellow
-    keyword whole CachingIterator::rewind yellow
-    keyword whole CachingIterator::valid yellow
-    keyword whole CachingRecursiveIterator::getChildren yellow
-    keyword whole CachingRecursiveIterator::hasChildren yellow
-    keyword whole DirectoryIterator::__construct yellow
-    keyword whole DirectoryIterator::current yellow
-    keyword whole DirectoryIterator::getATime yellow
-    keyword whole DirectoryIterator::getCTime yellow
-    keyword whole DirectoryIterator::getChildren yellow
-    keyword whole DirectoryIterator::getFilename yellow
-    keyword whole DirectoryIterator::getGroup yellow
-    keyword whole DirectoryIterator::getInode yellow
-    keyword whole DirectoryIterator::getMTime yellow
-    keyword whole DirectoryIterator::getOwner yellow
-    keyword whole DirectoryIterator::getPath yellow
-    keyword whole DirectoryIterator::getPathname yellow
-    keyword whole DirectoryIterator::getPerms yellow
-    keyword whole DirectoryIterator::getSize yellow
-    keyword whole DirectoryIterator::getType yellow
-    keyword whole DirectoryIterator::isDir yellow
-    keyword whole DirectoryIterator::isDot yellow
-    keyword whole DirectoryIterator::isExecutable yellow
-    keyword whole DirectoryIterator::isFile yellow
-    keyword whole DirectoryIterator::isLink yellow
-    keyword whole DirectoryIterator::isReadable yellow
-    keyword whole DirectoryIterator::isWritable yellow
-    keyword whole DirectoryIterator::key yellow
-    keyword whole DirectoryIterator::next yellow
-    keyword whole DirectoryIterator::rewind yellow
-    keyword whole DirectoryIterator::valid yellow
-    keyword whole FilterIterator::current yellow
-    keyword whole FilterIterator::getInnerIterator yellow
-    keyword whole FilterIterator::key yellow
-    keyword whole FilterIterator::next yellow
-    keyword whole FilterIterator::rewind yellow
-    keyword whole FilterIterator::valid yellow
-    keyword whole LimitIterator::getPosition yellow
-    keyword whole LimitIterator::next yellow
-    keyword whole LimitIterator::rewind yellow
-    keyword whole LimitIterator::seek yellow
-    keyword whole LimitIterator::valid yellow
-    keyword whole ParentIterator::getChildren yellow
-    keyword whole ParentIterator::hasChildren yellow
-    keyword whole ParentIterator::next yellow
-    keyword whole ParentIterator::rewind yellow
-    keyword whole RecursiveDirectoryIterator::getChildren yellow
-    keyword whole RecursiveDirectoryIterator::hasChildren yellow
-    keyword whole RecursiveDirectoryIterator::key yellow
-    keyword whole RecursiveDirectoryIterator::next yellow
-    keyword whole RecursiveDirectoryIterator::rewind yellow
-    keyword whole RecursiveIteratorIterator::current yellow
-    keyword whole RecursiveIteratorIterator::getDepth yellow
-    keyword whole RecursiveIteratorIterator::getSubIterator yellow
-    keyword whole RecursiveIteratorIterator::key yellow
-    keyword whole RecursiveIteratorIterator::next yellow
-    keyword whole RecursiveIteratorIterator::rewind yellow
-    keyword whole RecursiveIteratorIterator::valid yellow
-    keyword whole SimpleXMLIterator::current yellow
-    keyword whole SimpleXMLIterator::getChildren yellow
-    keyword whole SimpleXMLIterator::hasChildren yellow
-    keyword whole SimpleXMLIterator::key yellow
-    keyword whole SimpleXMLIterator::next yellow
-    keyword whole SimpleXMLIterator::rewind yellow
-    keyword whole SimpleXMLIterator::valid yellow
     keyword whole class_implements yellow
     keyword whole class_parents yellow
     keyword whole iterator_count yellow
     keyword whole iterator_to_array yellow
     keyword whole spl_classes yellow
+
+# Standard PHP Library (SPL) Functions ArrayIterator methods
+    keyword whole ArrayIterator yellow
+    keyword whole ->current yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->seek yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions ArrayObject methods
+    keyword whole ArrayObject yellow
+    keyword whole ->__construct yellow
+    keyword whole ->append yellow
+    keyword whole ->count yellow
+    keyword whole ->getIterator yellow
+    keyword whole ->offsetExists yellow
+    keyword whole ->offsetGet yellow
+    keyword whole ->offsetSet yellow
+    keyword whole ->offsetUnset yellow
+
+# Standard PHP Library (SPL) Functions CachingIterator methods
+    keyword whole CachingIterator yellow
+    keyword whole ->__toString yellow
+    keyword whole ->hasNext yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions CachingRecursiveIterator methods
+    keyword whole CachingRecursiveIterator yellow
+    keyword whole ->getChildren yellow
+    keyword whole ->hasChildren yellow
+
+# Standard PHP Library (SPL) Functions DirectoryIterator methods
+    keyword whole DirectoryIterator yellow
+    keyword whole ->__construct yellow
+    keyword whole ->current yellow
+    keyword whole ->getATime yellow
+    keyword whole ->getCTime yellow
+    keyword whole ->getChildren yellow
+    keyword whole ->getFilename yellow
+    keyword whole ->getGroup yellow
+    keyword whole ->getInode yellow
+    keyword whole ->getMTime yellow
+    keyword whole ->getOwner yellow
+    keyword whole ->getPath yellow
+    keyword whole ->getPathname yellow
+    keyword whole ->getPerms yellow
+    keyword whole ->getSize yellow
+    keyword whole ->getType yellow
+    keyword whole ->isDir yellow
+    keyword whole ->isDot yellow
+    keyword whole ->isExecutable yellow
+    keyword whole ->isFile yellow
+    keyword whole ->isLink yellow
+    keyword whole ->isReadable yellow
+    keyword whole ->isWritable yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions FilterIterator methods
+    keyword whole FilterIterator yellow
+    keyword whole ->current yellow
+    keyword whole ->getInnerIterator yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions LimitIterator methods
+    keyword whole LimitIterator yellow
+    keyword whole ->getPosition yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->seek yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions ParentIterator methods
+    keyword whole ParentIterator yellow
+    keyword whole ->getChildren yellow
+    keyword whole ->hasChildren yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+
+# Standard PHP Library (SPL) Functions RecursiveDirectoryIterator methods
+    keyword whole RecursiveDirectoryIterator yellow
+    keyword whole ->getChildren yellow
+    keyword whole ->hasChildren yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+
+# Standard PHP Library (SPL) Functions RecursiveIteratorIterator methods
+    keyword whole RecursiveIteratorIterator yellow
+    keyword whole ->current yellow
+    keyword whole ->getDepth yellow
+    keyword whole ->getSubIterator yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->valid yellow
+
+# Standard PHP Library (SPL) Functions SimpleXMLIterator methods
+    keyword whole SimpleXMLIterator yellow
+    keyword whole ->current yellow
+    keyword whole ->getChildren yellow
+    keyword whole ->hasChildren yellow
+    keyword whole ->key yellow
+    keyword whole ->next yellow
+    keyword whole ->rewind yellow
+    keyword whole ->valid yellow
 
 # Standard PHP Library (SPL) Functions constants
     keyword whole CIT_CALL_TOSTRING white
@@ -7440,8 +7518,11 @@ context default
     keyword whole SQLITE_TOOBIG white
 
 # SQLite Functions (PDO_SQLITE)
-    keyword whole PDO::sqliteCreateAggregate yellow
-    keyword whole PDO::sqliteCreateFunction yellow
+
+# SQLite Functions (PDO_SQLITE) PDO methods
+    keyword whole PDO yellow
+    keyword whole ->sqliteCreateAggregate yellow
+    keyword whole ->sqliteCreateFunction yellow
 
 # SQLite Functions (PDO_SQLITE) constants
     keyword whole SQLITE_ABORT white
@@ -7838,7 +7919,6 @@ context default
 
 # Tidy Functions
     keyword whole ob_tidyhandler yellow
-    keyword whole tidy::__construct yellow
     keyword whole tidy_access_count yellow
     keyword whole tidy_clean_repair yellow
     keyword whole tidy_config_count yellow
@@ -7868,6 +7948,10 @@ context default
     keyword whole tidy_set_encoding yellow
     keyword whole tidy_setopt yellow
     keyword whole tidy_warning_count yellow
+
+# Tidy Functions tidy methods
+    keyword whole tidy yellow
+    keyword whole ->__construct yellow
 
 # Tidy Functions tidyNode methods
     keyword whole tidyNode yellow
