@@ -1,5 +1,12 @@
 2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* php.syntax: Reset the constants array in the script that
+	generates the keywords (remove duplicates). Also parse for
+	constants in tables as the type tagging is done inconsistently
+	in the online PHP docs.
+
+2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* php.syntax: Missed the '::' method separator.
 
 2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>

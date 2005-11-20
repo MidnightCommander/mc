@@ -211,26 +211,6 @@ context default
     keyword whole aspell_new yellow
     keyword whole aspell_suggest yellow
 
-# Aspell functions [deprecated] constants
-    keyword whole CASE_LOWER white
-    keyword whole CASE_UPPER white
-    keyword whole COUNT_NORMAL white
-    keyword whole COUNT_RECURSIVE white
-    keyword whole EXTR_IF_EXISTS white
-    keyword whole EXTR_OVERWRITE white
-    keyword whole EXTR_PREFIX_ALL white
-    keyword whole EXTR_PREFIX_IF_EXISTS white
-    keyword whole EXTR_PREFIX_INVALID white
-    keyword whole EXTR_PREFIX_SAME white
-    keyword whole EXTR_REFS white
-    keyword whole EXTR_SKIP white
-    keyword whole SORT_ASC white
-    keyword whole SORT_DESC white
-    keyword whole SORT_LOCALE_STRING white
-    keyword whole SORT_NUMERIC white
-    keyword whole SORT_REGULAR white
-    keyword whole SORT_STRING white
-
 # BCMath Arbitrary Precision Mathematics Functions
     keyword whole bcadd yellow
     keyword whole bccomp yellow
@@ -329,29 +309,6 @@ context default
     keyword whole ccvs_status yellow
     keyword whole ccvs_textvalue yellow
     keyword whole ccvs_void yellow
-
-# CCVS API Functions [deprecated] constants
-    keyword whole CAL_DOW_DAYNO white
-    keyword whole CAL_DOW_LONG white
-    keyword whole CAL_DOW_SHORT white
-    keyword whole CAL_EASTER_ALWAYS_GREGORIAN white
-    keyword whole CAL_EASTER_ALWAYS_JULIAN white
-    keyword whole CAL_EASTER_DEFAULT white
-    keyword whole CAL_EASTER_ROMAN white
-    keyword whole CAL_FRENCH white
-    keyword whole CAL_GREGORIAN white
-    keyword whole CAL_JEWISH white
-    keyword whole CAL_JEWISH_ADD_ALAFIM white
-    keyword whole CAL_JEWISH_ADD_ALAFIM_GERESH white
-    keyword whole CAL_JEWISH_ADD_GERESHAYIM white
-    keyword whole CAL_JULIAN white
-    keyword whole CAL_MONTH_FRENCH white
-    keyword whole CAL_MONTH_GREGORIAN_LONG white
-    keyword whole CAL_MONTH_GREGORIAN_SHORT white
-    keyword whole CAL_MONTH_JEWISH white
-    keyword whole CAL_MONTH_JULIAN_LONG white
-    keyword whole CAL_MONTH_JULIAN_SHORT white
-    keyword whole CAL_NUM_CALS white
 
 # Class/Object Functions
     keyword whole call_user_method yellow
@@ -821,440 +778,10 @@ context default
     keyword whole cybercash_decr yellow
     keyword whole cybercash_encr yellow
 
-# Cybercash Payment Functions constants
-    keyword whole CURLAUTH_ANY white
-    keyword whole CURLAUTH_ANYSAFE white
-    keyword whole CURLAUTH_BASIC white
-    keyword whole CURLAUTH_DIGEST white
-    keyword whole CURLAUTH_GSSNEGOTIATE white
-    keyword whole CURLAUTH_NTLM white
-    keyword whole CURLCLOSEPOLICY_CALLBACK white
-    keyword whole CURLCLOSEPOLICY_LEAST_RECENTLY_USED white
-    keyword whole CURLCLOSEPOLICY_LEAST_TRAFFIC white
-    keyword whole CURLCLOSEPOLICY_OLDEST white
-    keyword whole CURLCLOSEPOLICY_SLOWEST white
-    keyword whole CURLE_ABORTED_BY_CALLBACK white
-    keyword whole CURLE_BAD_CALLING_ORDER white
-    keyword whole CURLE_BAD_CONTENT_ENCODING white
-    keyword whole CURLE_BAD_FUNCTION_ARGUMENT white
-    keyword whole CURLE_BAD_PASSWORD_ENTERED white
-    keyword whole CURLE_COULDNT_CONNECT white
-    keyword whole CURLE_COULDNT_RESOLVE_HOST white
-    keyword whole CURLE_COULDNT_RESOLVE_PROXY white
-    keyword whole CURLE_FAILED_INIT white
-    keyword whole CURLE_FILESIZE_EXCEEDED white
-    keyword whole CURLE_FILE_COULDNT_READ_FILE white
-    keyword whole CURLE_FTP_ACCESS_DENIED white
-    keyword whole CURLE_FTP_BAD_DOWNLOAD_RESUME white
-    keyword whole CURLE_FTP_CANT_GET_HOST white
-    keyword whole CURLE_FTP_CANT_RECONNECT white
-    keyword whole CURLE_FTP_COULDNT_GET_SIZE white
-    keyword whole CURLE_FTP_COULDNT_RETR_FILE white
-    keyword whole CURLE_FTP_COULDNT_SET_ASCII white
-    keyword whole CURLE_FTP_COULDNT_SET_BINARY white
-    keyword whole CURLE_FTP_COULDNT_STOR_FILE white
-    keyword whole CURLE_FTP_COULDNT_USE_REST white
-    keyword whole CURLE_FTP_PORT_FAILED white
-    keyword whole CURLE_FTP_QUOTE_ERROR white
-    keyword whole CURLE_FTP_SSL_FAILED white
-    keyword whole CURLE_FTP_USER_PASSWORD_INCORRECT white
-    keyword whole CURLE_FTP_WEIRD_227_FORMAT white
-    keyword whole CURLE_FTP_WEIRD_PASS_REPLY white
-    keyword whole CURLE_FTP_WEIRD_PASV_REPLY white
-    keyword whole CURLE_FTP_WEIRD_SERVER_REPLY white
-    keyword whole CURLE_FTP_WEIRD_USER_REPLY white
-    keyword whole CURLE_FTP_WRITE_ERROR white
-    keyword whole CURLE_FUNCTION_NOT_FOUND white
-    keyword whole CURLE_GOT_NOTHING white
-    keyword whole CURLE_HTTP_NOT_FOUND white
-    keyword whole CURLE_HTTP_PORT_FAILED white
-    keyword whole CURLE_HTTP_POST_ERROR white
-    keyword whole CURLE_HTTP_RANGE_ERROR white
-    keyword whole CURLE_LDAP_CANNOT_BIND white
-    keyword whole CURLE_LDAP_INVALID_URL white
-    keyword whole CURLE_LDAP_SEARCH_FAILED white
-    keyword whole CURLE_LIBRARY_NOT_FOUND white
-    keyword whole CURLE_MALFORMAT_USER white
-    keyword whole CURLE_OBSOLETE white
-    keyword whole CURLE_OK white
-    keyword whole CURLE_OPERATION_TIMEOUTED white
-    keyword whole CURLE_OUT_OF_MEMORY white
-    keyword whole CURLE_PARTIAL_FILE white
-    keyword whole CURLE_READ_ERROR white
-    keyword whole CURLE_RECV_ERROR white
-    keyword whole CURLE_SEND_ERROR white
-    keyword whole CURLE_SHARE_IN_USE white
-    keyword whole CURLE_SSL_CACERT white
-    keyword whole CURLE_SSL_CERTPROBLEM white
-    keyword whole CURLE_SSL_CIPHER white
-    keyword whole CURLE_SSL_CONNECT_ERROR white
-    keyword whole CURLE_SSL_ENGINE_NOTFOUND white
-    keyword whole CURLE_SSL_ENGINE_SETFAILED white
-    keyword whole CURLE_SSL_PEER_CERTIFICATE white
-    keyword whole CURLE_TELNET_OPTION_SYNTAX white
-    keyword whole CURLE_TOO_MANY_REDIRECTS white
-    keyword whole CURLE_UNKNOWN_TELNET_OPTION white
-    keyword whole CURLE_UNSUPPORTED_PROTOCOL white
-    keyword whole CURLE_URL_MALFORMAT white
-    keyword whole CURLE_URL_MALFORMAT_USER white
-    keyword whole CURLE_WRITE_ERROR white
-    keyword whole CURLFTPAUTH_DEFAULT white
-    keyword whole CURLFTPAUTH_SSL white
-    keyword whole CURLFTPAUTH_TLS white
-    keyword whole CURLINFO_CONNECT_TIME white
-    keyword whole CURLINFO_CONTENT_LENGTH_DOWNLOAD white
-    keyword whole CURLINFO_CONTENT_LENGTH_UPLOAD white
-    keyword whole CURLINFO_CONTENT_TYPE white
-    keyword whole CURLINFO_EFFECTIVE_URL white
-    keyword whole CURLINFO_FILETIME white
-    keyword whole CURLINFO_HEADER_SIZE white
-    keyword whole CURLINFO_HTTP_CODE white
-    keyword whole CURLINFO_NAMELOOKUP_TIME white
-    keyword whole CURLINFO_PRETRANSFER_TIME white
-    keyword whole CURLINFO_REDIRECT_COUNT white
-    keyword whole CURLINFO_REDIRECT_TIME white
-    keyword whole CURLINFO_REQUEST_SIZE white
-    keyword whole CURLINFO_SIZE_DOWNLOAD white
-    keyword whole CURLINFO_SIZE_UPLOAD white
-    keyword whole CURLINFO_SPEED_DOWNLOAD white
-    keyword whole CURLINFO_SPEED_UPLOAD white
-    keyword whole CURLINFO_SSL_VERIFYRESULT white
-    keyword whole CURLINFO_STARTTRANSFER_TIME white
-    keyword whole CURLINFO_TOTAL_TIME white
-    keyword whole CURLMSG_DONE white
-    keyword whole CURLM_BAD_EASY_HANDLE white
-    keyword whole CURLM_BAD_HANDLE white
-    keyword whole CURLM_CALL_MULTI_PERFORM white
-    keyword whole CURLM_INTERNAL_ERROR white
-    keyword whole CURLM_OK white
-    keyword whole CURLM_OUT_OF_MEMORY white
-    keyword whole CURLOPT_AUTOREFERER white
-    keyword whole CURLOPT_BINARYTRANSFER white
-    keyword whole CURLOPT_BUFFERSIZE white
-    keyword whole CURLOPT_CAINFO white
-    keyword whole CURLOPT_CAPATH white
-    keyword whole CURLOPT_CLOSEPOLICY white
-    keyword whole CURLOPT_CONNECTTIMEOUT white
-    keyword whole CURLOPT_COOKIE white
-    keyword whole CURLOPT_COOKIEFILE white
-    keyword whole CURLOPT_COOKIEJAR white
-    keyword whole CURLOPT_COOKIESESSION white
-    keyword whole CURLOPT_CRLF white
-    keyword whole CURLOPT_CUSTOMREQUEST white
-    keyword whole CURLOPT_DNS_CACHE_TIMEOUT white
-    keyword whole CURLOPT_DNS_USE_GLOBAL_CACHE white
-    keyword whole CURLOPT_EGDSOCKET white
-    keyword whole CURLOPT_ENCODING white
-    keyword whole CURLOPT_FAILONERROR white
-    keyword whole CURLOPT_FILE white
-    keyword whole CURLOPT_FILETIME white
-    keyword whole CURLOPT_FOLLOWLOCATION white
-    keyword whole CURLOPT_FORBID_REUSE white
-    keyword whole CURLOPT_FRESH_CONNECT white
-    keyword whole CURLOPT_FTPAPPEND white
-    keyword whole CURLOPT_FTPASCII white
-    keyword whole CURLOPT_FTPLISTONLY white
-    keyword whole CURLOPT_FTPPORT white
-    keyword whole CURLOPT_FTPSSLAUTH white
-    keyword whole CURLOPT_FTP_USE_EPRT white
-    keyword whole CURLOPT_FTP_USE_EPSV white
-    keyword whole CURLOPT_HEADER white
-    keyword whole CURLOPT_HEADERFUNCTION white
-    keyword whole CURLOPT_HTTP200ALIASES white
-    keyword whole CURLOPT_HTTPAUTH white
-    keyword whole CURLOPT_HTTPGET white
-    keyword whole CURLOPT_HTTPHEADER white
-    keyword whole CURLOPT_HTTPPROXYTUNNEL white
-    keyword whole CURLOPT_HTTP_VERSION white
-    keyword whole CURLOPT_INFILE white
-    keyword whole CURLOPT_INFILESIZE white
-    keyword whole CURLOPT_INTERFACE white
-    keyword whole CURLOPT_KRB4LEVEL white
-    keyword whole CURLOPT_LOW_SPEED_LIMIT white
-    keyword whole CURLOPT_LOW_SPEED_TIME white
-    keyword whole CURLOPT_MAXCONNECTS white
-    keyword whole CURLOPT_MAXREDIRS white
-    keyword whole CURLOPT_MUTE white
-    keyword whole CURLOPT_NETRC white
-    keyword whole CURLOPT_NOBODY white
-    keyword whole CURLOPT_NOPROGRESS white
-    keyword whole CURLOPT_NOSIGNAL white
-    keyword whole CURLOPT_PASSWDFUNCTION white
-    keyword whole CURLOPT_PORT white
-    keyword whole CURLOPT_POST white
-    keyword whole CURLOPT_POSTFIELDS white
-    keyword whole CURLOPT_POSTQUOTE white
-    keyword whole CURLOPT_PROXY white
-    keyword whole CURLOPT_PROXYAUTH white
-    keyword whole CURLOPT_PROXYPORT white
-    keyword whole CURLOPT_PROXYTYPE white
-    keyword whole CURLOPT_PROXYUSERPWD white
-    keyword whole CURLOPT_PUT white
-    keyword whole CURLOPT_QUOTE white
-    keyword whole CURLOPT_RANDOM_FILE white
-    keyword whole CURLOPT_RANGE white
-    keyword whole CURLOPT_READFUNCTION white
-    keyword whole CURLOPT_REFERER white
-    keyword whole CURLOPT_RESUME_FROM white
-    keyword whole CURLOPT_RETURNTRANSFER white
-    keyword whole CURLOPT_SSLCERT white
-    keyword whole CURLOPT_SSLCERTPASSWD white
-    keyword whole CURLOPT_SSLCERTTYPE white
-    keyword whole CURLOPT_SSLENGINE white
-    keyword whole CURLOPT_SSLENGINE_DEFAULT white
-    keyword whole CURLOPT_SSLKEY white
-    keyword whole CURLOPT_SSLKEYPASSWD white
-    keyword whole CURLOPT_SSLKEYTYPE white
-    keyword whole CURLOPT_SSLVERSION white
-    keyword whole CURLOPT_SSL_CIPHER_LIST white
-    keyword whole CURLOPT_SSL_VERIFYHOST white
-    keyword whole CURLOPT_SSL_VERIFYPEER white
-    keyword whole CURLOPT_STDERR white
-    keyword whole CURLOPT_TIMECONDITION white
-    keyword whole CURLOPT_TIMEOUT white
-    keyword whole CURLOPT_TIMEVALUE white
-    keyword whole CURLOPT_TRANSFERTEXT white
-    keyword whole CURLOPT_UNRESTRICTED_AUTH white
-    keyword whole CURLOPT_UPLOAD white
-    keyword whole CURLOPT_URL white
-    keyword whole CURLOPT_USERAGENT white
-    keyword whole CURLOPT_USERPWD white
-    keyword whole CURLOPT_VERBOSE white
-    keyword whole CURLOPT_WRITEFUNCTION white
-    keyword whole CURLOPT_WRITEHEADER white
-    keyword whole CURLPROXY_HTTP white
-    keyword whole CURLPROXY_SOCKS5 white
-    keyword whole CURLVERSION_NOW white
-    keyword whole CURL_HTTP_VERSION_1_0 white
-    keyword whole CURL_HTTP_VERSION_1_1 white
-    keyword whole CURL_HTTP_VERSION_NONE white
-    keyword whole CURL_NETRC_IGNORED white
-    keyword whole CURL_NETRC_OPTIONAL white
-    keyword whole CURL_NETRC_REQUIRED white
-    keyword whole CURL_VERSION_IPV6 white
-    keyword whole CURL_VERSION_KERBEROS4 white
-    keyword whole CURL_VERSION_LIBZ white
-    keyword whole CURL_VERSION_SSL white
-
 # Credit Mutuel CyberMUT functions
     keyword whole cybermut_creerformulairecm yellow
     keyword whole cybermut_creerreponsecm yellow
     keyword whole cybermut_testmac yellow
-
-# Credit Mutuel CyberMUT functions constants
-    keyword whole CURLAUTH_ANY white
-    keyword whole CURLAUTH_ANYSAFE white
-    keyword whole CURLAUTH_BASIC white
-    keyword whole CURLAUTH_DIGEST white
-    keyword whole CURLAUTH_GSSNEGOTIATE white
-    keyword whole CURLAUTH_NTLM white
-    keyword whole CURLCLOSEPOLICY_CALLBACK white
-    keyword whole CURLCLOSEPOLICY_LEAST_RECENTLY_USED white
-    keyword whole CURLCLOSEPOLICY_LEAST_TRAFFIC white
-    keyword whole CURLCLOSEPOLICY_OLDEST white
-    keyword whole CURLCLOSEPOLICY_SLOWEST white
-    keyword whole CURLE_ABORTED_BY_CALLBACK white
-    keyword whole CURLE_BAD_CALLING_ORDER white
-    keyword whole CURLE_BAD_CONTENT_ENCODING white
-    keyword whole CURLE_BAD_FUNCTION_ARGUMENT white
-    keyword whole CURLE_BAD_PASSWORD_ENTERED white
-    keyword whole CURLE_COULDNT_CONNECT white
-    keyword whole CURLE_COULDNT_RESOLVE_HOST white
-    keyword whole CURLE_COULDNT_RESOLVE_PROXY white
-    keyword whole CURLE_FAILED_INIT white
-    keyword whole CURLE_FILESIZE_EXCEEDED white
-    keyword whole CURLE_FILE_COULDNT_READ_FILE white
-    keyword whole CURLE_FTP_ACCESS_DENIED white
-    keyword whole CURLE_FTP_BAD_DOWNLOAD_RESUME white
-    keyword whole CURLE_FTP_CANT_GET_HOST white
-    keyword whole CURLE_FTP_CANT_RECONNECT white
-    keyword whole CURLE_FTP_COULDNT_GET_SIZE white
-    keyword whole CURLE_FTP_COULDNT_RETR_FILE white
-    keyword whole CURLE_FTP_COULDNT_SET_ASCII white
-    keyword whole CURLE_FTP_COULDNT_SET_BINARY white
-    keyword whole CURLE_FTP_COULDNT_STOR_FILE white
-    keyword whole CURLE_FTP_COULDNT_USE_REST white
-    keyword whole CURLE_FTP_PORT_FAILED white
-    keyword whole CURLE_FTP_QUOTE_ERROR white
-    keyword whole CURLE_FTP_SSL_FAILED white
-    keyword whole CURLE_FTP_USER_PASSWORD_INCORRECT white
-    keyword whole CURLE_FTP_WEIRD_227_FORMAT white
-    keyword whole CURLE_FTP_WEIRD_PASS_REPLY white
-    keyword whole CURLE_FTP_WEIRD_PASV_REPLY white
-    keyword whole CURLE_FTP_WEIRD_SERVER_REPLY white
-    keyword whole CURLE_FTP_WEIRD_USER_REPLY white
-    keyword whole CURLE_FTP_WRITE_ERROR white
-    keyword whole CURLE_FUNCTION_NOT_FOUND white
-    keyword whole CURLE_GOT_NOTHING white
-    keyword whole CURLE_HTTP_NOT_FOUND white
-    keyword whole CURLE_HTTP_PORT_FAILED white
-    keyword whole CURLE_HTTP_POST_ERROR white
-    keyword whole CURLE_HTTP_RANGE_ERROR white
-    keyword whole CURLE_LDAP_CANNOT_BIND white
-    keyword whole CURLE_LDAP_INVALID_URL white
-    keyword whole CURLE_LDAP_SEARCH_FAILED white
-    keyword whole CURLE_LIBRARY_NOT_FOUND white
-    keyword whole CURLE_MALFORMAT_USER white
-    keyword whole CURLE_OBSOLETE white
-    keyword whole CURLE_OK white
-    keyword whole CURLE_OPERATION_TIMEOUTED white
-    keyword whole CURLE_OUT_OF_MEMORY white
-    keyword whole CURLE_PARTIAL_FILE white
-    keyword whole CURLE_READ_ERROR white
-    keyword whole CURLE_RECV_ERROR white
-    keyword whole CURLE_SEND_ERROR white
-    keyword whole CURLE_SHARE_IN_USE white
-    keyword whole CURLE_SSL_CACERT white
-    keyword whole CURLE_SSL_CERTPROBLEM white
-    keyword whole CURLE_SSL_CIPHER white
-    keyword whole CURLE_SSL_CONNECT_ERROR white
-    keyword whole CURLE_SSL_ENGINE_NOTFOUND white
-    keyword whole CURLE_SSL_ENGINE_SETFAILED white
-    keyword whole CURLE_SSL_PEER_CERTIFICATE white
-    keyword whole CURLE_TELNET_OPTION_SYNTAX white
-    keyword whole CURLE_TOO_MANY_REDIRECTS white
-    keyword whole CURLE_UNKNOWN_TELNET_OPTION white
-    keyword whole CURLE_UNSUPPORTED_PROTOCOL white
-    keyword whole CURLE_URL_MALFORMAT white
-    keyword whole CURLE_URL_MALFORMAT_USER white
-    keyword whole CURLE_WRITE_ERROR white
-    keyword whole CURLFTPAUTH_DEFAULT white
-    keyword whole CURLFTPAUTH_SSL white
-    keyword whole CURLFTPAUTH_TLS white
-    keyword whole CURLINFO_CONNECT_TIME white
-    keyword whole CURLINFO_CONTENT_LENGTH_DOWNLOAD white
-    keyword whole CURLINFO_CONTENT_LENGTH_UPLOAD white
-    keyword whole CURLINFO_CONTENT_TYPE white
-    keyword whole CURLINFO_EFFECTIVE_URL white
-    keyword whole CURLINFO_FILETIME white
-    keyword whole CURLINFO_HEADER_SIZE white
-    keyword whole CURLINFO_HTTP_CODE white
-    keyword whole CURLINFO_NAMELOOKUP_TIME white
-    keyword whole CURLINFO_PRETRANSFER_TIME white
-    keyword whole CURLINFO_REDIRECT_COUNT white
-    keyword whole CURLINFO_REDIRECT_TIME white
-    keyword whole CURLINFO_REQUEST_SIZE white
-    keyword whole CURLINFO_SIZE_DOWNLOAD white
-    keyword whole CURLINFO_SIZE_UPLOAD white
-    keyword whole CURLINFO_SPEED_DOWNLOAD white
-    keyword whole CURLINFO_SPEED_UPLOAD white
-    keyword whole CURLINFO_SSL_VERIFYRESULT white
-    keyword whole CURLINFO_STARTTRANSFER_TIME white
-    keyword whole CURLINFO_TOTAL_TIME white
-    keyword whole CURLMSG_DONE white
-    keyword whole CURLM_BAD_EASY_HANDLE white
-    keyword whole CURLM_BAD_HANDLE white
-    keyword whole CURLM_CALL_MULTI_PERFORM white
-    keyword whole CURLM_INTERNAL_ERROR white
-    keyword whole CURLM_OK white
-    keyword whole CURLM_OUT_OF_MEMORY white
-    keyword whole CURLOPT_AUTOREFERER white
-    keyword whole CURLOPT_BINARYTRANSFER white
-    keyword whole CURLOPT_BUFFERSIZE white
-    keyword whole CURLOPT_CAINFO white
-    keyword whole CURLOPT_CAPATH white
-    keyword whole CURLOPT_CLOSEPOLICY white
-    keyword whole CURLOPT_CONNECTTIMEOUT white
-    keyword whole CURLOPT_COOKIE white
-    keyword whole CURLOPT_COOKIEFILE white
-    keyword whole CURLOPT_COOKIEJAR white
-    keyword whole CURLOPT_COOKIESESSION white
-    keyword whole CURLOPT_CRLF white
-    keyword whole CURLOPT_CUSTOMREQUEST white
-    keyword whole CURLOPT_DNS_CACHE_TIMEOUT white
-    keyword whole CURLOPT_DNS_USE_GLOBAL_CACHE white
-    keyword whole CURLOPT_EGDSOCKET white
-    keyword whole CURLOPT_ENCODING white
-    keyword whole CURLOPT_FAILONERROR white
-    keyword whole CURLOPT_FILE white
-    keyword whole CURLOPT_FILETIME white
-    keyword whole CURLOPT_FOLLOWLOCATION white
-    keyword whole CURLOPT_FORBID_REUSE white
-    keyword whole CURLOPT_FRESH_CONNECT white
-    keyword whole CURLOPT_FTPAPPEND white
-    keyword whole CURLOPT_FTPASCII white
-    keyword whole CURLOPT_FTPLISTONLY white
-    keyword whole CURLOPT_FTPPORT white
-    keyword whole CURLOPT_FTPSSLAUTH white
-    keyword whole CURLOPT_FTP_USE_EPRT white
-    keyword whole CURLOPT_FTP_USE_EPSV white
-    keyword whole CURLOPT_HEADER white
-    keyword whole CURLOPT_HEADERFUNCTION white
-    keyword whole CURLOPT_HTTP200ALIASES white
-    keyword whole CURLOPT_HTTPAUTH white
-    keyword whole CURLOPT_HTTPGET white
-    keyword whole CURLOPT_HTTPHEADER white
-    keyword whole CURLOPT_HTTPPROXYTUNNEL white
-    keyword whole CURLOPT_HTTP_VERSION white
-    keyword whole CURLOPT_INFILE white
-    keyword whole CURLOPT_INFILESIZE white
-    keyword whole CURLOPT_INTERFACE white
-    keyword whole CURLOPT_KRB4LEVEL white
-    keyword whole CURLOPT_LOW_SPEED_LIMIT white
-    keyword whole CURLOPT_LOW_SPEED_TIME white
-    keyword whole CURLOPT_MAXCONNECTS white
-    keyword whole CURLOPT_MAXREDIRS white
-    keyword whole CURLOPT_MUTE white
-    keyword whole CURLOPT_NETRC white
-    keyword whole CURLOPT_NOBODY white
-    keyword whole CURLOPT_NOPROGRESS white
-    keyword whole CURLOPT_NOSIGNAL white
-    keyword whole CURLOPT_PASSWDFUNCTION white
-    keyword whole CURLOPT_PORT white
-    keyword whole CURLOPT_POST white
-    keyword whole CURLOPT_POSTFIELDS white
-    keyword whole CURLOPT_POSTQUOTE white
-    keyword whole CURLOPT_PROXY white
-    keyword whole CURLOPT_PROXYAUTH white
-    keyword whole CURLOPT_PROXYPORT white
-    keyword whole CURLOPT_PROXYTYPE white
-    keyword whole CURLOPT_PROXYUSERPWD white
-    keyword whole CURLOPT_PUT white
-    keyword whole CURLOPT_QUOTE white
-    keyword whole CURLOPT_RANDOM_FILE white
-    keyword whole CURLOPT_RANGE white
-    keyword whole CURLOPT_READFUNCTION white
-    keyword whole CURLOPT_REFERER white
-    keyword whole CURLOPT_RESUME_FROM white
-    keyword whole CURLOPT_RETURNTRANSFER white
-    keyword whole CURLOPT_SSLCERT white
-    keyword whole CURLOPT_SSLCERTPASSWD white
-    keyword whole CURLOPT_SSLCERTTYPE white
-    keyword whole CURLOPT_SSLENGINE white
-    keyword whole CURLOPT_SSLENGINE_DEFAULT white
-    keyword whole CURLOPT_SSLKEY white
-    keyword whole CURLOPT_SSLKEYPASSWD white
-    keyword whole CURLOPT_SSLKEYTYPE white
-    keyword whole CURLOPT_SSLVERSION white
-    keyword whole CURLOPT_SSL_CIPHER_LIST white
-    keyword whole CURLOPT_SSL_VERIFYHOST white
-    keyword whole CURLOPT_SSL_VERIFYPEER white
-    keyword whole CURLOPT_STDERR white
-    keyword whole CURLOPT_TIMECONDITION white
-    keyword whole CURLOPT_TIMEOUT white
-    keyword whole CURLOPT_TIMEVALUE white
-    keyword whole CURLOPT_TRANSFERTEXT white
-    keyword whole CURLOPT_UNRESTRICTED_AUTH white
-    keyword whole CURLOPT_UPLOAD white
-    keyword whole CURLOPT_URL white
-    keyword whole CURLOPT_USERAGENT white
-    keyword whole CURLOPT_USERPWD white
-    keyword whole CURLOPT_VERBOSE white
-    keyword whole CURLOPT_WRITEFUNCTION white
-    keyword whole CURLOPT_WRITEHEADER white
-    keyword whole CURLPROXY_HTTP white
-    keyword whole CURLPROXY_SOCKS5 white
-    keyword whole CURLVERSION_NOW white
-    keyword whole CURL_HTTP_VERSION_1_0 white
-    keyword whole CURL_HTTP_VERSION_1_1 white
-    keyword whole CURL_HTTP_VERSION_NONE white
-    keyword whole CURL_NETRC_IGNORED white
-    keyword whole CURL_NETRC_OPTIONAL white
-    keyword whole CURL_NETRC_REQUIRED white
-    keyword whole CURL_VERSION_IPV6 white
-    keyword whole CURL_VERSION_KERBEROS4 white
-    keyword whole CURL_VERSION_LIBZ white
-    keyword whole CURL_VERSION_SSL white
 
 # Cyrus IMAP administration Functions
     keyword whole cyrus_authenticate yellow
@@ -1953,35 +1480,6 @@ context default
     keyword whole filepro_retrieve yellow
     keyword whole filepro_rowcount yellow
 
-# filePro Functions constants
-    keyword whole FDFAA white
-    keyword whole FDFAP white
-    keyword whole FDFAPRef white
-    keyword whole FDFAS white
-    keyword whole FDFAction white
-    keyword whole FDFCalculate white
-    keyword whole FDFClearFf white
-    keyword whole FDFClrF white
-    keyword whole FDFDown white
-    keyword whole FDFDownAP white
-    keyword whole FDFEnter white
-    keyword whole FDFExit white
-    keyword whole FDFFf white
-    keyword whole FDFFile white
-    keyword whole FDFFlags white
-    keyword whole FDFFormat white
-    keyword whole FDFID white
-    keyword whole FDFIF white
-    keyword whole FDFKeystroke white
-    keyword whole FDFNormalAP white
-    keyword whole FDFRolloverAP white
-    keyword whole FDFSetF white
-    keyword whole FDFSetFf white
-    keyword whole FDFStatus white
-    keyword whole FDFUp white
-    keyword whole FDFValidate white
-    keyword whole FDFValue white
-
 # Filesystem Functions
     keyword whole basename yellow
     keyword whole chgrp yellow
@@ -2134,6 +1632,13 @@ context default
     keyword whole IBASE_BKP_NON_TRANSPORTABLE white
     keyword whole IBASE_BKP_NO_GARBAGE_COLLECT white
     keyword whole IBASE_BKP_OLD_DESCRIPTIONS white
+    keyword whole IBASE_COMMITTED white
+    keyword whole IBASE_CONCURRENCY white
+    keyword whole IBASE_CONSISTENCY white
+    keyword whole IBASE_DEFAULT white
+    keyword whole IBASE_FETCH_ARRAYS white
+    keyword whole IBASE_FETCH_BLOBS white
+    keyword whole IBASE_NOWAIT white
     keyword whole IBASE_PRP_ACCESS_MODE white
     keyword whole IBASE_PRP_ACTIVATE white
     keyword whole IBASE_PRP_AM_READONLY white
@@ -2151,6 +1656,7 @@ context default
     keyword whole IBASE_PRP_WM_ASYNC white
     keyword whole IBASE_PRP_WM_SYNC white
     keyword whole IBASE_PRP_WRITE_MODE white
+    keyword whole IBASE_READ white
     keyword whole IBASE_REC_NO_VERSION white
     keyword whole IBASE_REC_VERSION white
     keyword whole IBASE_RES_CREATE white
@@ -2181,64 +1687,11 @@ context default
     keyword whole IBASE_SVC_SVR_DB_INFO white
     keyword whole IBASE_SVC_USER_DBPATH white
     keyword whole IBASE_TEXT white
+    keyword whole IBASE_UNIXTIME white
+    keyword whole IBASE_WAIT white
+    keyword whole IBASE_WRITE white
 
 # Firebird/Interbase Functions (PDO_FIREBIRD)
-
-# Firebird/Interbase Functions (PDO_FIREBIRD) constants
-    keyword whole IBASE_BKP_CONVERT white
-    keyword whole IBASE_BKP_IGNORE_CHECKSUMS white
-    keyword whole IBASE_BKP_IGNORE_LIMBO white
-    keyword whole IBASE_BKP_METADATA_ONLY white
-    keyword whole IBASE_BKP_NON_TRANSPORTABLE white
-    keyword whole IBASE_BKP_NO_GARBAGE_COLLECT white
-    keyword whole IBASE_BKP_OLD_DESCRIPTIONS white
-    keyword whole IBASE_PRP_ACCESS_MODE white
-    keyword whole IBASE_PRP_ACTIVATE white
-    keyword whole IBASE_PRP_AM_READONLY white
-    keyword whole IBASE_PRP_AM_READWRITE white
-    keyword whole IBASE_PRP_DB_ONLINE white
-    keyword whole IBASE_PRP_DENY_NEW_ATTACHMENTS white
-    keyword whole IBASE_PRP_DENY_NEW_TRANSACTIONS white
-    keyword whole IBASE_PRP_PAGE_BUFFERS white
-    keyword whole IBASE_PRP_RES white
-    keyword whole IBASE_PRP_RESERVE_SPACE white
-    keyword whole IBASE_PRP_RES_USE_FULL white
-    keyword whole IBASE_PRP_SET_SQL_DIALECT white
-    keyword whole IBASE_PRP_SHUTDOWN_DB white
-    keyword whole IBASE_PRP_SWEEP_INTERVAL white
-    keyword whole IBASE_PRP_WM_ASYNC white
-    keyword whole IBASE_PRP_WM_SYNC white
-    keyword whole IBASE_PRP_WRITE_MODE white
-    keyword whole IBASE_REC_NO_VERSION white
-    keyword whole IBASE_REC_VERSION white
-    keyword whole IBASE_RES_CREATE white
-    keyword whole IBASE_RES_DEACTIVATE_IDX white
-    keyword whole IBASE_RES_NO_SHADOW white
-    keyword whole IBASE_RES_NO_VALIDITY white
-    keyword whole IBASE_RES_ONE_AT_A_TIME white
-    keyword whole IBASE_RES_REPLACE white
-    keyword whole IBASE_RES_USE_ALL_SPACE white
-    keyword whole IBASE_RPR_CHECK_DB white
-    keyword whole IBASE_RPR_FULL white
-    keyword whole IBASE_RPR_IGNORE_CHECKSUM white
-    keyword whole IBASE_RPR_KILL_SHADOWS white
-    keyword whole IBASE_RPR_MEND_DB white
-    keyword whole IBASE_RPR_SWEEP_DB white
-    keyword whole IBASE_RPR_VALIDATE_DB white
-    keyword whole IBASE_STS_DATA_PAGES white
-    keyword whole IBASE_STS_DB_LOG white
-    keyword whole IBASE_STS_HDR_PAGES white
-    keyword whole IBASE_STS_IDX_PAGES white
-    keyword whole IBASE_STS_SYS_RELATIONS white
-    keyword whole IBASE_SVC_GET_ENV white
-    keyword whole IBASE_SVC_GET_ENV_LOCK white
-    keyword whole IBASE_SVC_GET_ENV_MSG white
-    keyword whole IBASE_SVC_GET_USERS white
-    keyword whole IBASE_SVC_IMPLEMENTATION white
-    keyword whole IBASE_SVC_SERVER_VERSION white
-    keyword whole IBASE_SVC_SVR_DB_INFO white
-    keyword whole IBASE_SVC_USER_DBPATH white
-    keyword whole IBASE_TEXT white
 
 # FriBiDi Functions
     keyword whole fribidi_log2vis yellow
@@ -2692,6 +2145,12 @@ context default
     keyword whole iconv_substr yellow
     keyword whole ob_iconv_handler yellow
 
+# iconv Functions constants
+    keyword whole ICONV_IMPL white
+    keyword whole ICONV_MIME_DECODE_CONTINUE_ON_ERROR white
+    keyword whole ICONV_MIME_DECODE_STRICT white
+    keyword whole ICONV_VERSION white
+
 # ID3 Functions
     keyword whole id3_get_frame_long_name yellow
     keyword whole id3_get_frame_short_name yellow
@@ -3127,6 +2586,38 @@ context default
     keyword whole kadm5_init_with_password yellow
     keyword whole kadm5_modify_principal yellow
 
+# KADM5 constants
+    keyword whole KADM5_ATTRIBUTES white
+    keyword whole KADM5_CLEARPOLICY white
+    keyword whole KADM5_FAIL_AUTH_COUNT white
+    keyword whole KADM5_KVNO white
+    keyword whole KADM5_LAST_FAILED white
+    keyword whole KADM5_LAST_PW_CHANGE white
+    keyword whole KADM5_LAST_SUCCESS white
+    keyword whole KADM5_MAX_LIFE white
+    keyword whole KADM5_MAX_RLIFE white
+    keyword whole KADM5_MOD_NAME white
+    keyword whole KADM5_MOD_TIME white
+    keyword whole KADM5_POLICY white
+    keyword whole KADM5_PRINCIPAL white
+    keyword whole KADM5_PRINC_EXPIRE_TIME white
+    keyword whole KADM5_PW_EXPIRATION white
+    keyword whole KADM5_RANDKEY white
+    keyword whole KRB5_KDB_DISALLOW_ALL_TIX white
+    keyword whole KRB5_KDB_DISALLOW_DUP_SKEY white
+    keyword whole KRB5_KDB_DISALLOW_FORWARDABLE white
+    keyword whole KRB5_KDB_DISALLOW_POSTDATED white
+    keyword whole KRB5_KDB_DISALLOW_PROXIABLE white
+    keyword whole KRB5_KDB_DISALLOW_RENEWABLE white
+    keyword whole KRB5_KDB_DISALLOW_SVR white
+    keyword whole KRB5_KDB_DISALLOW_TGT_BASED white
+    keyword whole KRB5_KDB_NEW_PRINC white
+    keyword whole KRB5_KDB_PWCHANGE_SERVER white
+    keyword whole KRB5_KDB_REQUIRES_HW_AUTH white
+    keyword whole KRB5_KDB_REQUIRES_PRE_AUTH white
+    keyword whole KRB5_KDB_REQUIRES_PWCHANGE white
+    keyword whole KRB5_KDB_SUPPORT_DESMD5 white
+
 # LDAP Functions
     keyword whole ldap_8859_to_t61 yellow
     keyword whole ldap_add yellow
@@ -3239,54 +2730,10 @@ context default
     keyword whole notes_unread yellow
     keyword whole notes_version yellow
 
-# Lotus Notes Functions constants
-    keyword whole LIBXML_COMPACT white
-    keyword whole LIBXML_DOTTED_VERSION white
-    keyword whole LIBXML_DTDATTR white
-    keyword whole LIBXML_DTDLOAD white
-    keyword whole LIBXML_DTDVALID white
-    keyword whole LIBXML_ERR_ERROR white
-    keyword whole LIBXML_ERR_FATAL white
-    keyword whole LIBXML_ERR_NONE white
-    keyword whole LIBXML_ERR_WARNING white
-    keyword whole LIBXML_NOBLANKS white
-    keyword whole LIBXML_NOCDATA white
-    keyword whole LIBXML_NOEMPTYTAG white
-    keyword whole LIBXML_NOENT white
-    keyword whole LIBXML_NOERROR white
-    keyword whole LIBXML_NONET white
-    keyword whole LIBXML_NOWARNING white
-    keyword whole LIBXML_NOXMLDECL white
-    keyword whole LIBXML_NSCLEAN white
-    keyword whole LIBXML_VERSION white
-    keyword whole LIBXML_XINCLUDE white
-
 # LZF Functions
     keyword whole lzf_compress yellow
     keyword whole lzf_decompress yellow
     keyword whole lzf_optimized_for yellow
-
-# LZF Functions constants
-    keyword whole LIBXML_COMPACT white
-    keyword whole LIBXML_DOTTED_VERSION white
-    keyword whole LIBXML_DTDATTR white
-    keyword whole LIBXML_DTDLOAD white
-    keyword whole LIBXML_DTDVALID white
-    keyword whole LIBXML_ERR_ERROR white
-    keyword whole LIBXML_ERR_FATAL white
-    keyword whole LIBXML_ERR_NONE white
-    keyword whole LIBXML_ERR_WARNING white
-    keyword whole LIBXML_NOBLANKS white
-    keyword whole LIBXML_NOCDATA white
-    keyword whole LIBXML_NOEMPTYTAG white
-    keyword whole LIBXML_NOENT white
-    keyword whole LIBXML_NOERROR white
-    keyword whole LIBXML_NONET white
-    keyword whole LIBXML_NOWARNING white
-    keyword whole LIBXML_NOXMLDECL white
-    keyword whole LIBXML_NSCLEAN white
-    keyword whole LIBXML_VERSION white
-    keyword whole LIBXML_XINCLUDE white
 
 # Mail Functions
     keyword whole ezmlm_hash yellow
@@ -3356,6 +2803,25 @@ context default
     keyword whole srand yellow
     keyword whole tan yellow
     keyword whole tanh yellow
+
+# Mathematical Functions constants
+    keyword whole M_1_PI white
+    keyword whole M_2_PI white
+    keyword whole M_2_SQRTPI white
+    keyword whole M_E white
+    keyword whole M_EULER white
+    keyword whole M_LN10 white
+    keyword whole M_LN2 white
+    keyword whole M_LNPI white
+    keyword whole M_LOG10E white
+    keyword whole M_LOG2E white
+    keyword whole M_PI white
+    keyword whole M_PI_2 white
+    keyword whole M_PI_4 white
+    keyword whole M_SQRT1_2 white
+    keyword whole M_SQRT2 white
+    keyword whole M_SQRT3 white
+    keyword whole M_SQRTPI white
 
 # MaxDB PHP Extension
     keyword whole maxdb_affected_rows yellow
@@ -3460,6 +2926,23 @@ context default
     keyword whole maxdb_thread_safe yellow
     keyword whole maxdb_use_result yellow
     keyword whole maxdb_warning_count yellow
+
+# MaxDB PHP Extension constants
+    keyword whole MAXDB_APPLICATION white
+    keyword whole MAXDB_APPVERSION white
+    keyword whole MAXDB_ASSOC white
+    keyword whole MAXDB_ASSOC_LOWER white
+    keyword whole MAXDB_ASSOC_UPPER white
+    keyword whole MAXDB_BOTH white
+    keyword whole MAXDB_COMPNAME white
+    keyword whole MAXDB_CURSORPREFIX white
+    keyword whole MAXDB_ISOLATIONLEVEL white
+    keyword whole MAXDB_NUM white
+    keyword whole MAXDB_PACKETCOUNT white
+    keyword whole MAXDB_SQLMODE white
+    keyword whole MAXDB_STATEMENTCACHESIZE white
+    keyword whole MAXDB_TIMEOUT white
+    keyword whole MAXDB_UNICODE white
 
 # MCAL Functions
     keyword whole mcal_append_event yellow
@@ -4309,19 +3792,6 @@ context default
 
 # Microsoft SQL Server and Sybase Functions (PDO_DBLIB)
 
-# Microsoft SQL Server and Sybase Functions (PDO_DBLIB) constants
-    keyword whole MSSQL_ASSOC white
-    keyword whole MSSQL_BOTH white
-    keyword whole MSSQL_NUM white
-    keyword whole SQLBIT white
-    keyword whole SQLCHAR white
-    keyword whole SQLFLT8 white
-    keyword whole SQLINT1 white
-    keyword whole SQLINT2 white
-    keyword whole SQLINT4 white
-    keyword whole SQLTEXT white
-    keyword whole SQLVARCHAR white
-
 # Mohawk Software Session Handler Functions
     keyword whole msession_connect yellow
     keyword whole msession_count yellow
@@ -4452,11 +3922,6 @@ context default
     keyword whole muscat_setup yellow
     keyword whole muscat_setup_net yellow
 
-# muscat Functions constants
-    keyword whole MB_OVERLOAD_MAIL white
-    keyword whole MB_OVERLOAD_REGEX white
-    keyword whole MB_OVERLOAD_STRING white
-
 # MySQL Functions
     keyword whole mysql_affected_rows yellow
     keyword whole mysql_change_user yellow
@@ -4506,6 +3971,15 @@ context default
     keyword whole mysql_tablename yellow
     keyword whole mysql_thread_id yellow
     keyword whole mysql_unbuffered_query yellow
+
+# MySQL Functions constants
+    keyword whole MYSQL_ASSOC white
+    keyword whole MYSQL_BOTH white
+    keyword whole MYSQL_CLIENT_COMPRESS white
+    keyword whole MYSQL_CLIENT_IGNORE_SPACE white
+    keyword whole MYSQL_CLIENT_INTERACTIVE white
+    keyword whole MYSQL_CLIENT_SSL white
+    keyword whole MYSQL_NUM white
 
 # MySQL Functions (PDO_MYSQL)
 
@@ -4866,6 +4340,45 @@ context default
     keyword whole socket_set_timeout yellow
     keyword whole syslog yellow
 
+# Network Functions constants
+    keyword whole DNS_A white
+    keyword whole DNS_AAAA white
+    keyword whole DNS_ALL white
+    keyword whole DNS_ANY white
+    keyword whole DNS_CNAME white
+    keyword whole DNS_HINFO white
+    keyword whole DNS_MX white
+    keyword whole DNS_NS white
+    keyword whole DNS_PTR white
+    keyword whole DNS_SOA white
+    keyword whole DNS_TXT white
+    keyword whole LOG_ALERT white
+    keyword whole LOG_AUTH white
+    keyword whole LOG_AUTHPRIV white
+    keyword whole LOG_CONS white
+    keyword whole LOG_CRIT white
+    keyword whole LOG_CRON white
+    keyword whole LOG_DAEMON white
+    keyword whole LOG_DEBUG white
+    keyword whole LOG_EMERG white
+    keyword whole LOG_ERR white
+    keyword whole LOG_INFO white
+    keyword whole LOG_KERN white
+    keyword whole LOG_LOCAL0 ... LOG_LOCAL7 white
+    keyword whole LOG_LPR white
+    keyword whole LOG_MAIL white
+    keyword whole LOG_NDELAY white
+    keyword whole LOG_NEWS white
+    keyword whole LOG_NOTICE white
+    keyword whole LOG_NOWAIT white
+    keyword whole LOG_ODELAY white
+    keyword whole LOG_PERROR white
+    keyword whole LOG_PID white
+    keyword whole LOG_SYSLOG white
+    keyword whole LOG_USER white
+    keyword whole LOG_UUCP white
+    keyword whole LOG_WARNING white
+
 # Newt Functions
     keyword whole newt_bell yellow
     keyword whole newt_button yellow
@@ -4985,11 +4498,107 @@ context default
     keyword whole newt_win_ternary yellow
 
 # Newt Functions constants
+    keyword whole NEWT_ANCHOR_BOTTOM white
+    keyword whole NEWT_ANCHOR_LEFT white
+    keyword whole NEWT_ANCHOR_RIGHT white
+    keyword whole NEWT_ANCHOR_TOP white
+    keyword whole NEWT_ARG_APPEND white
+    keyword whole NEWT_ARG_LAST white
+    keyword whole NEWT_CHECKBOXTREE_COLLAPSED white
+    keyword whole NEWT_CHECKBOXTREE_EXPANDED white
+    keyword whole NEWT_CHECKBOXTREE_HIDE_BOX white
+    keyword whole NEWT_CHECKBOXTREE_SELECTED white
+    keyword whole NEWT_CHECKBOXTREE_UNSELECTABLE white
+    keyword whole NEWT_CHECKBOXTREE_UNSELECTED white
+    keyword whole NEWT_COLORSET_ACTBUTTON white
+    keyword whole NEWT_COLORSET_ACTCHECKBOX white
+    keyword whole NEWT_COLORSET_ACTLISTBOX white
+    keyword whole NEWT_COLORSET_ACTSELLISTBOX white
+    keyword whole NEWT_COLORSET_ACTTEXTBOX white
+    keyword whole NEWT_COLORSET_BORDER white
+    keyword whole NEWT_COLORSET_BUTTON white
+    keyword whole NEWT_COLORSET_CHECKBOX white
+    keyword whole NEWT_COLORSET_COMPACTBUTTON white
+    keyword whole NEWT_COLORSET_DISENTRY white
+    keyword whole NEWT_COLORSET_EMPTYSCALE white
+    keyword whole NEWT_COLORSET_ENTRY white
+    keyword whole NEWT_COLORSET_FULLSCALE white
+    keyword whole NEWT_COLORSET_HELPLINE white
+    keyword whole NEWT_COLORSET_LABEL white
+    keyword whole NEWT_COLORSET_LISTBOX white
+    keyword whole NEWT_COLORSET_ROOT white
+    keyword whole NEWT_COLORSET_ROOTTEXT white
+    keyword whole NEWT_COLORSET_SELLISTBOX white
+    keyword whole NEWT_COLORSET_SHADOW white
+    keyword whole NEWT_COLORSET_TEXTBOX white
+    keyword whole NEWT_COLORSET_TITLE white
+    keyword whole NEWT_COLORSET_WINDOW white
+    keyword whole NEWT_ENTRY_DISABLED white
+    keyword whole NEWT_ENTRY_HIDDEN white
+    keyword whole NEWT_ENTRY_RETURNEXIT white
+    keyword whole NEWT_ENTRY_SCROLL white
+    keyword whole NEWT_EXIT_COMPONENT white
+    keyword whole NEWT_EXIT_FDREADY white
+    keyword whole NEWT_EXIT_HOTKEY white
+    keyword whole NEWT_EXIT_TIMER white
+    keyword whole NEWT_FD_EXCEPT white
+    keyword whole NEWT_FD_READ white
+    keyword whole NEWT_FD_WRITE white
+    keyword whole NEWT_FLAGS_RESET white
+    keyword whole NEWT_FLAGS_SET white
+    keyword whole NEWT_FLAGS_TOGGLE white
+    keyword whole NEWT_FLAG_BORDER white
+    keyword whole NEWT_FLAG_CHECKBOX white
+    keyword whole NEWT_FLAG_DISABLED white
+    keyword whole NEWT_FLAG_HIDDEN white
+    keyword whole NEWT_FLAG_MULTIPLE white
+    keyword whole NEWT_FLAG_NOF12 white
+    keyword whole NEWT_FLAG_PASSWORD white
+    keyword whole NEWT_FLAG_RETURNEXIT white
+    keyword whole NEWT_FLAG_SCROLL white
+    keyword whole NEWT_FLAG_SELECTED white
+    keyword whole NEWT_FLAG_SHOWCURSOR white
+    keyword whole NEWT_FLAG_WRAP white
+    keyword whole NEWT_FORM_NOF12 white
     keyword whole NEWT_GRID_COMPONENT white
     keyword whole NEWT_GRID_EMPTY white
     keyword whole NEWT_GRID_FLAG_GROWX white
     keyword whole NEWT_GRID_FLAG_GROWY white
     keyword whole NEWT_GRID_SUBGRID white
+    keyword whole NEWT_KEY_BKSPC white
+    keyword whole NEWT_KEY_DELETE white
+    keyword whole NEWT_KEY_DOWN white
+    keyword whole NEWT_KEY_END white
+    keyword whole NEWT_KEY_ENTER white
+    keyword whole NEWT_KEY_ESCAPE white
+    keyword whole NEWT_KEY_EXTRA_BASE white
+    keyword whole NEWT_KEY_F1 white
+    keyword whole NEWT_KEY_F10 white
+    keyword whole NEWT_KEY_F11 white
+    keyword whole NEWT_KEY_F12 white
+    keyword whole NEWT_KEY_F2 white
+    keyword whole NEWT_KEY_F3 white
+    keyword whole NEWT_KEY_F4 white
+    keyword whole NEWT_KEY_F5 white
+    keyword whole NEWT_KEY_F6 white
+    keyword whole NEWT_KEY_F7 white
+    keyword whole NEWT_KEY_F8 white
+    keyword whole NEWT_KEY_F9 white
+    keyword whole NEWT_KEY_HOME white
+    keyword whole NEWT_KEY_INSERT white
+    keyword whole NEWT_KEY_LEFT white
+    keyword whole NEWT_KEY_PGDN white
+    keyword whole NEWT_KEY_PGUP white
+    keyword whole NEWT_KEY_RESIZE white
+    keyword whole NEWT_KEY_RETURN white
+    keyword whole NEWT_KEY_RIGHT white
+    keyword whole NEWT_KEY_SUSPEND white
+    keyword whole NEWT_KEY_TAB white
+    keyword whole NEWT_KEY_UNTAB white
+    keyword whole NEWT_KEY_UP white
+    keyword whole NEWT_LISTBOX_RETURNEXIT white
+    keyword whole NEWT_TEXTBOX_SCROLL white
+    keyword whole NEWT_TEXTBOX_WRAP white
 
 # NSAPI-specific Functions
     keyword whole nsapi_request_headers yellow
@@ -5281,60 +4890,6 @@ context default
 
 # ODBC and DB2 functions (PDO_ODBC)
 
-# ODBC and DB2 functions (PDO_ODBC) constants
-    keyword whole ODBC_BINMODE_CONVERT white
-    keyword whole ODBC_BINMODE_PASSTHRU white
-    keyword whole ODBC_BINMODE_RETURN white
-    keyword whole ODBC_TYPE white
-    keyword whole SQL_BEST_ROWID white
-    keyword whole SQL_BIGINT white
-    keyword whole SQL_BINARY white
-    keyword whole SQL_BIT white
-    keyword whole SQL_CHAR white
-    keyword whole SQL_CONCURRENCY white
-    keyword whole SQL_CONCUR_LOCK white
-    keyword whole SQL_CONCUR_READ_ONLY white
-    keyword whole SQL_CONCUR_ROWVER white
-    keyword whole SQL_CONCUR_VALUES white
-    keyword whole SQL_CURSOR_DYNAMIC white
-    keyword whole SQL_CURSOR_FORWARD_ONLY white
-    keyword whole SQL_CURSOR_KEYSET_DRIVEN white
-    keyword whole SQL_CURSOR_STATIC white
-    keyword whole SQL_CURSOR_TYPE white
-    keyword whole SQL_CUR_USE_DRIVER white
-    keyword whole SQL_CUR_USE_IF_NEEDED white
-    keyword whole SQL_CUR_USE_ODBC white
-    keyword whole SQL_DATE white
-    keyword whole SQL_DECIMAL white
-    keyword whole SQL_DOUBLE white
-    keyword whole SQL_ENSURE white
-    keyword whole SQL_FLOAT white
-    keyword whole SQL_INDEX_ALL white
-    keyword whole SQL_INDEX_UNIQUE white
-    keyword whole SQL_INTEGER white
-    keyword whole SQL_KEYSET_SIZE white
-    keyword whole SQL_LONGVARBINARY white
-    keyword whole SQL_LONGVARCHAR white
-    keyword whole SQL_NO_NULLS white
-    keyword whole SQL_NULLABLE white
-    keyword whole SQL_NUMERIC white
-    keyword whole SQL_ODBC_CURSORS white
-    keyword whole SQL_QUICK white
-    keyword whole SQL_REAL white
-    keyword whole SQL_ROWVER white
-    keyword whole SQL_SCOPE_CURROW white
-    keyword whole SQL_SCOPE_SESSION white
-    keyword whole SQL_SCOPE_TRANSACTION white
-    keyword whole SQL_SMALLINT white
-    keyword whole SQL_TIME white
-    keyword whole SQL_TIMESTAMP white
-    keyword whole SQL_TINYINT white
-    keyword whole SQL_TYPE_DATE white
-    keyword whole SQL_TYPE_TIME white
-    keyword whole SQL_TYPE_TIMESTAMP white
-    keyword whole SQL_VARBINARY white
-    keyword whole SQL_VARCHAR white
-
 # oggvorbis
 
 # oggvorbis constants
@@ -5476,13 +5031,6 @@ context default
 
 # Oracle Functions (PDO_OCI)
 
-# Oracle Functions (PDO_OCI) constants
-    keyword whole ORA_BIND_IN white
-    keyword whole ORA_BIND_INOUT white
-    keyword whole ORA_BIND_OUT white
-    keyword whole ORA_FETCHINTO_ASSOC white
-    keyword whole ORA_FETCHINTO_NULLS white
-
 # Output Control Functions
     keyword whole flush yellow
     keyword whole ob_clean yellow
@@ -5545,6 +5093,36 @@ context default
     keyword whole px_set_targetencoding yellow
     keyword whole px_set_value yellow
     keyword whole px_timestamp2string yellow
+
+# Paradox File Access constants
+    keyword whole PX_FIELD_ALPHA white
+    keyword whole PX_FIELD_AUTOINC white
+    keyword whole PX_FIELD_BCD white
+    keyword whole PX_FIELD_BLOB white
+    keyword whole PX_FIELD_BYTES white
+    keyword whole PX_FIELD_CURRENCY white
+    keyword whole PX_FIELD_DATE white
+    keyword whole PX_FIELD_FMTMEMOBLOB white
+    keyword whole PX_FIELD_GRAPHIC white
+    keyword whole PX_FIELD_LOGICAL white
+    keyword whole PX_FIELD_LONG white
+    keyword whole PX_FIELD_MEMOBLOB white
+    keyword whole PX_FIELD_NUMBER white
+    keyword whole PX_FIELD_OLE white
+    keyword whole PX_FIELD_SHORT white
+    keyword whole PX_FIELD_TIME white
+    keyword whole PX_FIELD_TIMESTAMP white
+    keyword whole PX_FILE_INC_SEC_INDEX white
+    keyword whole PX_FILE_INC_SEC_INDEX_G white
+    keyword whole PX_FILE_INDEX_DB white
+    keyword whole PX_FILE_NON_INC_SEC_INDEX white
+    keyword whole PX_FILE_NON_INC_SEC_INDEX_G white
+    keyword whole PX_FILE_NON_INDEX_DB white
+    keyword whole PX_FILE_PRIM_INDEX white
+    keyword whole PX_FILE_SEC_INDEX white
+    keyword whole PX_FILE_SEC_INDEX_G white
+    keyword whole PX_KEYTOLOWER white
+    keyword whole PX_KEYTOUPPER white
 
 # Parsekit Functions
     keyword whole parsekit_compile_file yellow
@@ -5776,6 +5354,11 @@ context default
     keyword whole preg_split yellow
 
 # Regular Expression Functions (Perl-Compatible) constants
+    keyword whole PREG_OFFSET_CAPTURE white
+    keyword whole PREG_PATTERN_ORDER white
+    keyword whole PREG_SET_ORDER white
+    keyword whole PREG_SPLIT_DELIM_CAPTURE white
+    keyword whole PREG_SPLIT_NO_EMPTY white
     keyword whole PREG_SPLIT_OFFSET_CAPTURE white
 
 # PDF functions 
@@ -5894,9 +5477,6 @@ context default
     keyword whole pdf_stringwidth yellow
     keyword whole pdf_stroke yellow
     keyword whole pdf_translate yellow
-
-# PDF functions  constants
-    keyword whole PREG_SPLIT_OFFSET_CAPTURE white
 
 # PDO Functions
 
@@ -6045,6 +5625,22 @@ context default
     keyword whole ASSERT_CALLBACK white
     keyword whole ASSERT_QUIET_EVAL white
     keyword whole ASSERT_WARNING white
+    keyword whole CREDITS_ALL white
+    keyword whole CREDITS_DOCS white
+    keyword whole CREDITS_FULLPAGE white
+    keyword whole CREDITS_GENERAL white
+    keyword whole CREDITS_GROUP white
+    keyword whole CREDITS_MODULES white
+    keyword whole CREDITS_QA white
+    keyword whole CREDITS_SAPI white
+    keyword whole INFO_ALL white
+    keyword whole INFO_CONFIGURATION white
+    keyword whole INFO_CREDITS white
+    keyword whole INFO_ENVIRONMENT white
+    keyword whole INFO_GENERAL white
+    keyword whole INFO_LICENSE white
+    keyword whole INFO_MODULES white
+    keyword whole INFO_VARIABLES white
 
 # POSIX Functions
     keyword whole posix_access yellow
@@ -6233,52 +5829,6 @@ context default
 
 # PostgreSQL Functions (PDO_PGSQL)
 
-# PostgreSQL Functions (PDO_PGSQL) constants
-    keyword whole NULL white
-    keyword whole PGSQL_ASSOC white
-    keyword whole PGSQL_BAD_RESPONSE white
-    keyword whole PGSQL_BOTH white
-    keyword whole PGSQL_COMMAND_OK white
-    keyword whole PGSQL_CONNECTION_BAD white
-    keyword whole PGSQL_CONNECTION_OK white
-    keyword whole PGSQL_CONNECT_FORCE_NEW white
-    keyword whole PGSQL_CONV_FORCE_NULL white
-    keyword whole PGSQL_CONV_IGNORE_DEFAULT white
-    keyword whole PGSQL_COPY_IN white
-    keyword whole PGSQL_COPY_OUT white
-    keyword whole PGSQL_DIAG_CONTEXT white
-    keyword whole PGSQL_DIAG_INTERNAL_POSITION white
-    keyword whole PGSQL_DIAG_INTERNAL_QUERY white
-    keyword whole PGSQL_DIAG_MESSAGE_DETAIL white
-    keyword whole PGSQL_DIAG_MESSAGE_HINT white
-    keyword whole PGSQL_DIAG_MESSAGE_PRIMARY white
-    keyword whole PGSQL_DIAG_SEVERITY white
-    keyword whole PGSQL_DIAG_SOURCE_FILE white
-    keyword whole PGSQL_DIAG_SOURCE_FUNCTION white
-    keyword whole PGSQL_DIAG_SOURCE_LINE white
-    keyword whole PGSQL_DIAG_SQLSTATE white
-    keyword whole PGSQL_DIAG_STATEMENT_POSITION white
-    keyword whole PGSQL_EMPTY_QUERY white
-    keyword whole PGSQL_ERRORS_DEFAULT white
-    keyword whole PGSQL_ERRORS_TERSE white
-    keyword whole PGSQL_ERRORS_VERBOSE white
-    keyword whole PGSQL_FATAL_ERROR white
-    keyword whole PGSQL_NONFATAL_ERROR white
-    keyword whole PGSQL_NUM white
-    keyword whole PGSQL_SEEK_CUR white
-    keyword whole PGSQL_SEEK_END white
-    keyword whole PGSQL_SEEK_SET white
-    keyword whole PGSQL_STATUS_LONG white
-    keyword whole PGSQL_STATUS_STRING white
-    keyword whole PGSQL_TRANSACTION_ACTIVE white
-    keyword whole PGSQL_TRANSACTION_IDLE white
-    keyword whole PGSQL_TRANSACTION_INERROR white
-    keyword whole PGSQL_TRANSACTION_INTRANS white
-    keyword whole PGSQL_TRANSACTION_UNKNOWN white
-    keyword whole PGSQL_TUPLES_OK white
-    keyword whole PG_DIAG_INTERNAL_QUERY white
-    keyword whole PG_DIAG_STATEMENT_POSITION white
-
 # Printer Functions
     keyword whole printer_abort yellow
     keyword whole printer_close yellow
@@ -6311,52 +5861,6 @@ context default
     keyword whole printer_start_doc yellow
     keyword whole printer_start_page yellow
     keyword whole printer_write yellow
-
-# Printer Functions constants
-    keyword whole NULL white
-    keyword whole PGSQL_ASSOC white
-    keyword whole PGSQL_BAD_RESPONSE white
-    keyword whole PGSQL_BOTH white
-    keyword whole PGSQL_COMMAND_OK white
-    keyword whole PGSQL_CONNECTION_BAD white
-    keyword whole PGSQL_CONNECTION_OK white
-    keyword whole PGSQL_CONNECT_FORCE_NEW white
-    keyword whole PGSQL_CONV_FORCE_NULL white
-    keyword whole PGSQL_CONV_IGNORE_DEFAULT white
-    keyword whole PGSQL_COPY_IN white
-    keyword whole PGSQL_COPY_OUT white
-    keyword whole PGSQL_DIAG_CONTEXT white
-    keyword whole PGSQL_DIAG_INTERNAL_POSITION white
-    keyword whole PGSQL_DIAG_INTERNAL_QUERY white
-    keyword whole PGSQL_DIAG_MESSAGE_DETAIL white
-    keyword whole PGSQL_DIAG_MESSAGE_HINT white
-    keyword whole PGSQL_DIAG_MESSAGE_PRIMARY white
-    keyword whole PGSQL_DIAG_SEVERITY white
-    keyword whole PGSQL_DIAG_SOURCE_FILE white
-    keyword whole PGSQL_DIAG_SOURCE_FUNCTION white
-    keyword whole PGSQL_DIAG_SOURCE_LINE white
-    keyword whole PGSQL_DIAG_SQLSTATE white
-    keyword whole PGSQL_DIAG_STATEMENT_POSITION white
-    keyword whole PGSQL_EMPTY_QUERY white
-    keyword whole PGSQL_ERRORS_DEFAULT white
-    keyword whole PGSQL_ERRORS_TERSE white
-    keyword whole PGSQL_ERRORS_VERBOSE white
-    keyword whole PGSQL_FATAL_ERROR white
-    keyword whole PGSQL_NONFATAL_ERROR white
-    keyword whole PGSQL_NUM white
-    keyword whole PGSQL_SEEK_CUR white
-    keyword whole PGSQL_SEEK_END white
-    keyword whole PGSQL_SEEK_SET white
-    keyword whole PGSQL_STATUS_LONG white
-    keyword whole PGSQL_STATUS_STRING white
-    keyword whole PGSQL_TRANSACTION_ACTIVE white
-    keyword whole PGSQL_TRANSACTION_IDLE white
-    keyword whole PGSQL_TRANSACTION_INERROR white
-    keyword whole PGSQL_TRANSACTION_INTRANS white
-    keyword whole PGSQL_TRANSACTION_UNKNOWN white
-    keyword whole PGSQL_TUPLES_OK white
-    keyword whole PG_DIAG_INTERNAL_QUERY white
-    keyword whole PG_DIAG_STATEMENT_POSITION white
 
 # Program Execution Functions
     keyword whole escapeshellarg yellow
@@ -6446,6 +5950,14 @@ context default
     keyword whole ps_symbol_width yellow
     keyword whole ps_translate yellow
 
+# PostScript document creation constants
+    keyword whole ps_LINECAP_BUTT white
+    keyword whole ps_LINECAP_ROUND white
+    keyword whole ps_LINECAP_SQUARED white
+    keyword whole ps_LINEJOIN_BEVEL white
+    keyword whole ps_LINEJOIN_MITER white
+    keyword whole ps_LINEJOIN_ROUND white
+
 # Pspell Functions
     keyword whole pspell_add_to_personal yellow
     keyword whole pspell_add_to_session yellow
@@ -6476,12 +5988,6 @@ context default
 # qtdom Functions
     keyword whole qdom_error yellow
     keyword whole qdom_tree yellow
-
-# qtdom Functions constants
-    keyword whole PSPELL_BAD_SPELLERS white
-    keyword whole PSPELL_FAST white
-    keyword whole PSPELL_NORMAL white
-    keyword whole PSPELL_RUN_TOGETHER white
 
 # Radius
     keyword whole radius_acct_open yellow
@@ -6889,24 +6395,6 @@ context default
     keyword whole satellite_load_idl yellow
     keyword whole satellite_object_to_string yellow
 
-# Satellite CORBA client extension [deprecated] constants
-    keyword whole CLASSKIT_ACC_PRIVATE white
-    keyword whole CLASSKIT_ACC_PROTECTED white
-    keyword whole CLASSKIT_ACC_PUBLIC white
-    keyword whole CLASSKIT_AGGREGATE_OVERRIDE white
-    keyword whole CLASSKIT_VERSION white
-    keyword whole RUNKIT_ACC_PRIVATE white
-    keyword whole RUNKIT_ACC_PROTECTED white
-    keyword whole RUNKIT_ACC_PUBLIC white
-    keyword whole RUNKIT_IMPORT_CLASSES white
-    keyword whole RUNKIT_IMPORT_CLASS_* white
-    keyword whole RUNKIT_IMPORT_CLASS_CONSTS white
-    keyword whole RUNKIT_IMPORT_CLASS_METHODS white
-    keyword whole RUNKIT_IMPORT_CLASS_PROPS white
-    keyword whole RUNKIT_IMPORT_FUNCTIONS white
-    keyword whole RUNKIT_IMPORT_OVERRIDE white
-    keyword whole RUNKIT_VERSION white
-
 # SDO Functions
 
 # SDO Functions SDO_DAS_ChangeSummary methods
@@ -6996,12 +6484,6 @@ context default
     keyword whole ->setXMLDeclaration yellow
     keyword whole ->setXMLVersion yellow
 
-# SDO XML Data Access Service Functions constants
-    keyword whole SDO_DAS_ChangeSummary::ADDITION=2 white
-    keyword whole SDO_DAS_ChangeSummary::DELETION=3 white
-    keyword whole SDO_DAS_ChangeSummary::MODIFICATION=1 white
-    keyword whole SDO_DAS_ChangeSummary::NONE=0 white
-
 # SDO Relational Data Access Service Functions
 
 # SDO Relational Data Access Service Functions SDO_DAS_Relational methods
@@ -7011,12 +6493,6 @@ context default
     keyword whole ->createRootDataObject yellow
     keyword whole ->executePreparedQuery yellow
     keyword whole ->executeQuery yellow
-
-# SDO Relational Data Access Service Functions constants
-    keyword whole SDO_DAS_ChangeSummary::ADDITION=2 white
-    keyword whole SDO_DAS_ChangeSummary::DELETION=3 white
-    keyword whole SDO_DAS_ChangeSummary::MODIFICATION=1 white
-    keyword whole SDO_DAS_ChangeSummary::NONE=0 white
 
 # Semaphore, Shared Memory and IPC Functions
     keyword whole ftok yellow
@@ -7036,6 +6512,11 @@ context default
     keyword whole shm_put_var yellow
     keyword whole shm_remove yellow
     keyword whole shm_remove_var yellow
+
+# Semaphore, Shared Memory and IPC Functions constants
+    keyword whole MSG_EXCEPT white
+    keyword whole MSG_IPC_NOWAIT white
+    keyword whole MSG_NOERROR white
 
 # SESAM Database Functions
     keyword whole sesam_affected_rows yellow
@@ -7524,37 +7005,6 @@ context default
     keyword whole ->sqliteCreateAggregate yellow
     keyword whole ->sqliteCreateFunction yellow
 
-# SQLite Functions (PDO_SQLITE) constants
-    keyword whole SQLITE_ABORT white
-    keyword whole SQLITE_ASSOC white
-    keyword whole SQLITE_AUTH white
-    keyword whole SQLITE_BOTH white
-    keyword whole SQLITE_BUSY white
-    keyword whole SQLITE_CANTOPEN white
-    keyword whole SQLITE_CONSTRAINT white
-    keyword whole SQLITE_CORRUPT white
-    keyword whole SQLITE_DONE white
-    keyword whole SQLITE_EMPTY white
-    keyword whole SQLITE_ERROR white
-    keyword whole SQLITE_FULL white
-    keyword whole SQLITE_INTERNAL white
-    keyword whole SQLITE_INTERRUPT white
-    keyword whole SQLITE_IOERR white
-    keyword whole SQLITE_LOCKED white
-    keyword whole SQLITE_MISMATCH white
-    keyword whole SQLITE_MISUSE white
-    keyword whole SQLITE_NOLFS white
-    keyword whole SQLITE_NOMEM white
-    keyword whole SQLITE_NOTFOUND white
-    keyword whole SQLITE_NUM white
-    keyword whole SQLITE_OK white
-    keyword whole SQLITE_PERM white
-    keyword whole SQLITE_PROTOCOL white
-    keyword whole SQLITE_READONLY white
-    keyword whole SQLITE_ROW white
-    keyword whole SQLITE_SCHEMA white
-    keyword whole SQLITE_TOOBIG white
-
 # Secure Shell2 Functions
     keyword whole ssh2_auth_hostbased_file yellow
     keyword whole ssh2_auth_none yellow
@@ -7972,9 +7422,290 @@ context default
     keyword whole ->prev yellow
 
 # Tidy Functions constants
+    keyword whole TIDY_ATTR_ABBR white
+    keyword whole TIDY_ATTR_ACCEPT white
+    keyword whole TIDY_ATTR_ACCEPT_CHARSET white
+    keyword whole TIDY_ATTR_ACCESSKEY white
+    keyword whole TIDY_ATTR_ACTION white
+    keyword whole TIDY_ATTR_ADD_DATE white
+    keyword whole TIDY_ATTR_ALIGN white
+    keyword whole TIDY_ATTR_ALINK white
+    keyword whole TIDY_ATTR_ALT white
+    keyword whole TIDY_ATTR_ARCHIVE white
+    keyword whole TIDY_ATTR_AXIS white
+    keyword whole TIDY_ATTR_BACKGROUND white
+    keyword whole TIDY_ATTR_BGCOLOR white
+    keyword whole TIDY_ATTR_BGPROPERTIES white
+    keyword whole TIDY_ATTR_BORDER white
+    keyword whole TIDY_ATTR_BORDERCOLOR white
+    keyword whole TIDY_ATTR_BOTTOMMARGIN white
+    keyword whole TIDY_ATTR_CELLPADDING white
+    keyword whole TIDY_ATTR_CELLSPACING white
+    keyword whole TIDY_ATTR_CHAR white
+    keyword whole TIDY_ATTR_CHAROFF white
+    keyword whole TIDY_ATTR_CHARSET white
+    keyword whole TIDY_ATTR_CHECKED white
+    keyword whole TIDY_ATTR_CITE white
+    keyword whole TIDY_ATTR_CLASS white
+    keyword whole TIDY_ATTR_CLASSID white
+    keyword whole TIDY_ATTR_CLEAR white
+    keyword whole TIDY_ATTR_CODE white
+    keyword whole TIDY_ATTR_CODEBASE white
+    keyword whole TIDY_ATTR_CODETYPE white
+    keyword whole TIDY_ATTR_COLOR white
+    keyword whole TIDY_ATTR_COLS white
+    keyword whole TIDY_ATTR_COLSPAN white
+    keyword whole TIDY_ATTR_COMPACT white
+    keyword whole TIDY_ATTR_CONTENT white
+    keyword whole TIDY_ATTR_COORDS white
+    keyword whole TIDY_ATTR_DATA white
+    keyword whole TIDY_ATTR_DATAFLD white
+    keyword whole TIDY_ATTR_DATAPAGESIZE white
+    keyword whole TIDY_ATTR_DATASRC white
+    keyword whole TIDY_ATTR_DATETIME white
+    keyword whole TIDY_ATTR_DECLARE white
+    keyword whole TIDY_ATTR_DEFER white
+    keyword whole TIDY_ATTR_DIR white
+    keyword whole TIDY_ATTR_DISABLED white
+    keyword whole TIDY_ATTR_ENCODING white
+    keyword whole TIDY_ATTR_ENCTYPE white
+    keyword whole TIDY_ATTR_FACE white
+    keyword whole TIDY_ATTR_FOR white
+    keyword whole TIDY_ATTR_FRAME white
+    keyword whole TIDY_ATTR_FRAMEBORDER white
+    keyword whole TIDY_ATTR_FRAMESPACING white
+    keyword whole TIDY_ATTR_GRIDX white
+    keyword whole TIDY_ATTR_GRIDY white
+    keyword whole TIDY_ATTR_HEADERS white
+    keyword whole TIDY_ATTR_HEIGHT white
     keyword whole TIDY_ATTR_HREF white
+    keyword whole TIDY_ATTR_HREFLANG white
+    keyword whole TIDY_ATTR_HSPACE white
+    keyword whole TIDY_ATTR_HTTP_EQUIV white
+    keyword whole TIDY_ATTR_ID white
+    keyword whole TIDY_ATTR_ISMAP white
+    keyword whole TIDY_ATTR_LABEL white
+    keyword whole TIDY_ATTR_LANG white
+    keyword whole TIDY_ATTR_LANGUAGE white
+    keyword whole TIDY_ATTR_LAST_MODIFIED white
+    keyword whole TIDY_ATTR_LAST_VISIT white
+    keyword whole TIDY_ATTR_LEFTMARGIN white
+    keyword whole TIDY_ATTR_LINK white
+    keyword whole TIDY_ATTR_LONGDESC white
+    keyword whole TIDY_ATTR_LOWSRC white
+    keyword whole TIDY_ATTR_MARGINHEIGHT white
+    keyword whole TIDY_ATTR_MARGINWIDTH white
+    keyword whole TIDY_ATTR_MAXLENGTH white
+    keyword whole TIDY_ATTR_MEDIA white
+    keyword whole TIDY_ATTR_METHOD white
+    keyword whole TIDY_ATTR_MULTIPLE white
+    keyword whole TIDY_ATTR_NAME white
+    keyword whole TIDY_ATTR_NOHREF white
+    keyword whole TIDY_ATTR_NORESIZE white
+    keyword whole TIDY_ATTR_NOSHADE white
+    keyword whole TIDY_ATTR_NOWRAP white
+    keyword whole TIDY_ATTR_OBJECT white
+    keyword whole TIDY_ATTR_OnAFTERUPDATE white
+    keyword whole TIDY_ATTR_OnBEFOREUNLOAD white
+    keyword whole TIDY_ATTR_OnBEFOREUPDATE white
+    keyword whole TIDY_ATTR_OnBLUR white
+    keyword whole TIDY_ATTR_OnCHANGE white
+    keyword whole TIDY_ATTR_OnCLICK white
+    keyword whole TIDY_ATTR_OnDATAAVAILABLE white
+    keyword whole TIDY_ATTR_OnDATASETCHANGED white
+    keyword whole TIDY_ATTR_OnDATASETCOMPLETE white
+    keyword whole TIDY_ATTR_OnDBLCLICK white
+    keyword whole TIDY_ATTR_OnERRORUPDATE white
+    keyword whole TIDY_ATTR_OnFOCUS white
+    keyword whole TIDY_ATTR_OnKEYDOWN white
+    keyword whole TIDY_ATTR_OnKEYPRESS white
+    keyword whole TIDY_ATTR_OnKEYUP white
+    keyword whole TIDY_ATTR_OnLOAD white
+    keyword whole TIDY_ATTR_OnMOUSEDOWN white
+    keyword whole TIDY_ATTR_OnMOUSEMOVE white
+    keyword whole TIDY_ATTR_OnMOUSEOUT white
+    keyword whole TIDY_ATTR_OnMOUSEOVER white
+    keyword whole TIDY_ATTR_OnMOUSEUP white
+    keyword whole TIDY_ATTR_OnRESET white
+    keyword whole TIDY_ATTR_OnROWENTER white
+    keyword whole TIDY_ATTR_OnROWEXIT white
+    keyword whole TIDY_ATTR_OnSELECT white
+    keyword whole TIDY_ATTR_OnSUBMIT white
+    keyword whole TIDY_ATTR_OnUNLOAD white
+    keyword whole TIDY_ATTR_PROFILE white
+    keyword whole TIDY_ATTR_PROMPT white
+    keyword whole TIDY_ATTR_RBSPAN white
+    keyword whole TIDY_ATTR_READONLY white
+    keyword whole TIDY_ATTR_REL white
+    keyword whole TIDY_ATTR_REV white
+    keyword whole TIDY_ATTR_RIGHTMARGIN white
+    keyword whole TIDY_ATTR_ROWS white
+    keyword whole TIDY_ATTR_ROWSPAN white
+    keyword whole TIDY_ATTR_RULES white
+    keyword whole TIDY_ATTR_SCHEME white
+    keyword whole TIDY_ATTR_SCOPE white
+    keyword whole TIDY_ATTR_SCROLLING white
+    keyword whole TIDY_ATTR_SELECTED white
+    keyword whole TIDY_ATTR_SHAPE white
+    keyword whole TIDY_ATTR_SHOWGRID white
+    keyword whole TIDY_ATTR_SHOWGRIDX white
+    keyword whole TIDY_ATTR_SHOWGRIDY white
+    keyword whole TIDY_ATTR_SIZE white
+    keyword whole TIDY_ATTR_SPAN white
+    keyword whole TIDY_ATTR_SRC white
+    keyword whole TIDY_ATTR_STANDBY white
+    keyword whole TIDY_ATTR_START white
+    keyword whole TIDY_ATTR_STYLE white
+    keyword whole TIDY_ATTR_SUMMARY white
+    keyword whole TIDY_ATTR_TABINDEX white
+    keyword whole TIDY_ATTR_TARGET white
+    keyword whole TIDY_ATTR_TEXT white
+    keyword whole TIDY_ATTR_TITLE white
+    keyword whole TIDY_ATTR_TOPMARGIN white
+    keyword whole TIDY_ATTR_TYPE white
+    keyword whole TIDY_ATTR_UNKNOWN white
+    keyword whole TIDY_ATTR_USEMAP white
+    keyword whole TIDY_ATTR_VALIGN white
+    keyword whole TIDY_ATTR_VALUE white
+    keyword whole TIDY_ATTR_VALUETYPE white
+    keyword whole TIDY_ATTR_VERSION white
+    keyword whole TIDY_ATTR_VLINK white
+    keyword whole TIDY_ATTR_VSPACE white
+    keyword whole TIDY_ATTR_WIDTH white
+    keyword whole TIDY_ATTR_WRAP white
+    keyword whole TIDY_ATTR_XMLNS white
+    keyword whole TIDY_ATTR_XML_LANG white
+    keyword whole TIDY_ATTR_XML_SPACE white
     keyword whole TIDY_ATTR_XXX white
+    keyword whole TIDY_NODETYPE_ASP white
+    keyword whole TIDY_NODETYPE_CDATA white
+    keyword whole TIDY_NODETYPE_COMMENT white
+    keyword whole TIDY_NODETYPE_DOCTYPE white
+    keyword whole TIDY_NODETYPE_END white
+    keyword whole TIDY_NODETYPE_JSTE white
+    keyword whole TIDY_NODETYPE_PHP white
+    keyword whole TIDY_NODETYPE_PROCINS white
+    keyword whole TIDY_NODETYPE_ROOT white
+    keyword whole TIDY_NODETYPE_SECTION white
+    keyword whole TIDY_NODETYPE_START white
+    keyword whole TIDY_NODETYPE_STARTEND white
+    keyword whole TIDY_NODETYPE_TEXT white
+    keyword whole TIDY_NODETYPE_XMLDECL white
     keyword whole TIDY_TAG_A white
+    keyword whole TIDY_TAG_ABBR white
+    keyword whole TIDY_TAG_ACRONYM white
+    keyword whole TIDY_TAG_ALIGN white
+    keyword whole TIDY_TAG_APPLET white
+    keyword whole TIDY_TAG_AREA white
+    keyword whole TIDY_TAG_B white
+    keyword whole TIDY_TAG_BASE white
+    keyword whole TIDY_TAG_BASEFONT white
+    keyword whole TIDY_TAG_BDO white
+    keyword whole TIDY_TAG_BGSOUND white
+    keyword whole TIDY_TAG_BIG white
+    keyword whole TIDY_TAG_BLINK white
+    keyword whole TIDY_TAG_BLOCKQUOTE white
+    keyword whole TIDY_TAG_BODY white
+    keyword whole TIDY_TAG_BR white
+    keyword whole TIDY_TAG_BUTTON white
+    keyword whole TIDY_TAG_CAPTION white
+    keyword whole TIDY_TAG_CENTER white
+    keyword whole TIDY_TAG_CITE white
+    keyword whole TIDY_TAG_CODE white
+    keyword whole TIDY_TAG_COL white
+    keyword whole TIDY_TAG_COLGROUP white
+    keyword whole TIDY_TAG_COMMENT white
+    keyword whole TIDY_TAG_DD white
+    keyword whole TIDY_TAG_DEL white
+    keyword whole TIDY_TAG_DFN white
+    keyword whole TIDY_TAG_DIR white
+    keyword whole TIDY_TAG_DIV white
+    keyword whole TIDY_TAG_DL white
+    keyword whole TIDY_TAG_DT white
+    keyword whole TIDY_TAG_EM white
+    keyword whole TIDY_TAG_EMBED white
+    keyword whole TIDY_TAG_FIELDSET white
+    keyword whole TIDY_TAG_FONT white
+    keyword whole TIDY_TAG_FORM white
+    keyword whole TIDY_TAG_FRAME white
+    keyword whole TIDY_TAG_FRAMESET white
+    keyword whole TIDY_TAG_H1 white
+    keyword whole TIDY_TAG_H2 white
+    keyword whole TIDY_TAG_H3 white
+    keyword whole TIDY_TAG_H4 white
+    keyword whole TIDY_TAG_H5 white
+    keyword whole TIDY_TAG_H6 white
+    keyword whole TIDY_TAG_HEAD white
+    keyword whole TIDY_TAG_HR white
+    keyword whole TIDY_TAG_HTML white
+    keyword whole TIDY_TAG_I white
+    keyword whole TIDY_TAG_IFRAME white
+    keyword whole TIDY_TAG_ILAYER white
+    keyword whole TIDY_TAG_IMG white
+    keyword whole TIDY_TAG_INPUT white
+    keyword whole TIDY_TAG_INS white
+    keyword whole TIDY_TAG_ISINDEX white
+    keyword whole TIDY_TAG_KBD white
+    keyword whole TIDY_TAG_KEYGEN white
+    keyword whole TIDY_TAG_LABEL white
+    keyword whole TIDY_TAG_LAYER white
+    keyword whole TIDY_TAG_LEGEND white
+    keyword whole TIDY_TAG_LI white
+    keyword whole TIDY_TAG_LINK white
+    keyword whole TIDY_TAG_LISTING white
+    keyword whole TIDY_TAG_MAP white
+    keyword whole TIDY_TAG_MARQUEE white
+    keyword whole TIDY_TAG_MENU white
+    keyword whole TIDY_TAG_META white
+    keyword whole TIDY_TAG_MULTICOL white
+    keyword whole TIDY_TAG_NOBR white
+    keyword whole TIDY_TAG_NOEMBED white
+    keyword whole TIDY_TAG_NOFRAMES white
+    keyword whole TIDY_TAG_NOLAYER white
+    keyword whole TIDY_TAG_NOSAFE white
+    keyword whole TIDY_TAG_NOSCRIPT white
+    keyword whole TIDY_TAG_OBJECT white
+    keyword whole TIDY_TAG_OL white
+    keyword whole TIDY_TAG_OPTGROUP white
+    keyword whole TIDY_TAG_OPTION white
+    keyword whole TIDY_TAG_P white
+    keyword whole TIDY_TAG_PARAM white
+    keyword whole TIDY_TAG_PLAINTEXT white
+    keyword whole TIDY_TAG_PRE white
+    keyword whole TIDY_TAG_Q white
+    keyword whole TIDY_TAG_RP white
+    keyword whole TIDY_TAG_RT white
+    keyword whole TIDY_TAG_RTC white
+    keyword whole TIDY_TAG_RUBY white
+    keyword whole TIDY_TAG_S white
+    keyword whole TIDY_TAG_SAMP white
+    keyword whole TIDY_TAG_SCRIPT white
+    keyword whole TIDY_TAG_SELECT white
+    keyword whole TIDY_TAG_SERVER white
+    keyword whole TIDY_TAG_SERVLET white
+    keyword whole TIDY_TAG_SMALL white
+    keyword whole TIDY_TAG_SPACER white
+    keyword whole TIDY_TAG_SPAN white
+    keyword whole TIDY_TAG_STRIKE white
+    keyword whole TIDY_TAG_STRONG white
+    keyword whole TIDY_TAG_STYLE white
+    keyword whole TIDY_TAG_SUB white
+    keyword whole TIDY_TAG_TABLE white
+    keyword whole TIDY_TAG_TBODY white
+    keyword whole TIDY_TAG_TD white
+    keyword whole TIDY_TAG_TEXTAREA white
+    keyword whole TIDY_TAG_TFOOT white
+    keyword whole TIDY_TAG_TH white
+    keyword whole TIDY_TAG_THEAD white
+    keyword whole TIDY_TAG_TITLE white
+    keyword whole TIDY_TAG_TR white
+    keyword whole TIDY_TAG_TT white
+    keyword whole TIDY_TAG_U white
+    keyword whole TIDY_TAG_UL white
+    keyword whole TIDY_TAG_UNKNOWN white
+    keyword whole TIDY_TAG_VAR white
+    keyword whole TIDY_TAG_WBR white
+    keyword whole TIDY_TAG_XMP white
     keyword whole TIDY_TAG_XXX white
 
 # Tokenizer Functions
@@ -8107,6 +7838,12 @@ context default
     keyword whole i18n_loc_get_default yellow
     keyword whole i18n_loc_set_default yellow
     keyword whole unicode_encode yellow
+
+# Unicode Functions constants
+    keyword whole U_INVALID_ESCAPE white
+    keyword whole U_INVALID_SKIP white
+    keyword whole U_INVALID_STOP white
+    keyword whole U_INVALID_SUBSTITUTE white
 
 # URL Functions
     keyword whole base64_decode yellow
@@ -8576,15 +8313,6 @@ context default
     keyword whole E_USER_WARNING white
     keyword whole E_USER_NOTICE white
     keyword whole E_ALL white
-
-# pcre
-# left in here as the php docs are missing some tags which cause these to be
-# missded in the parsing
-    keyword whole PREG_PATTERN_ORDER white
-    keyword whole PREG_SET_ORDER white
-    keyword whole PREG_SPLIT_NO_EMPTY white
-    keyword whole PREG_SPLIT_DELIM_CAPTURE white
-    keyword whole PREG_GREP_INVERT white
 
 
 ####################################
