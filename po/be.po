@@ -175,7 +175,7 @@ msgstr "выраз &scanf"
 msgid "replace &All"
 msgstr "Замяніць &Усе"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Падцьвердзіць &замену"
 
 msgid "&Backwards"
@@ -2015,7 +2015,7 @@ msgstr "&Радок падказкі"
 msgid "&Keybar visible"
 msgstr "М&еткі клявішаў"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Камандны радок"
 
 msgid "show &Mini status"

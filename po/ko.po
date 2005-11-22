@@ -176,7 +176,7 @@ msgstr "scanf 표현(&E)"
 msgid "replace &All"
 msgstr "모두 바꿈(&A)"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "바꿀 때마다 물어봄(&O)"
 
 msgid "&Backwards"
@@ -2008,7 +2008,7 @@ msgstr "힌트바 보이기(&I)"
 msgid "&Keybar visible"
 msgstr "글쇠바 보이기(&K)"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "명령 프롬프트&P)"
 
 msgid "show &Mini status"

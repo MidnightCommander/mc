@@ -186,7 +186,7 @@ msgstr "scanf &Udtryk"
 msgid "replace &All"
 msgstr "&Erstat alle"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "s&Pørg før erstat"
 
 msgid "&Backwards"
@@ -2027,8 +2027,8 @@ msgstr "synlig h&Intlinie"
 msgid "&Keybar visible"
 msgstr "Tastaturlinie synlig"
 
-msgid "command &Prompt"
-msgstr "kommando &Prompt"
+msgid "command pro&Mpt"
+msgstr "kommando pro&Mpt"
 
 msgid "show &Mini status"
 msgstr "vis &Ministatus"

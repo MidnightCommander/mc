@@ -177,7 +177,7 @@ msgstr "scanf &§¸¡¨Å"
 msgid "replace &All"
 msgstr "«¨Éò¨¾Ôõ &Á¡üÚ"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Á¡üÚõ§À¡Ğ à&ñÎ"
 
 msgid "&Backwards"
@@ -1920,7 +1920,7 @@ msgstr ""
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr ""
 
 msgid "show &Mini status"

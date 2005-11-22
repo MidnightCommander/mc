@@ -177,7 +177,7 @@ msgstr "scanf uttrykk"
 msgid "replace &All"
 msgstr "erstatt alle"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "spør ved erstatning"
 
 msgid "&Backwards"
@@ -2016,7 +2016,7 @@ msgstr "synlig hintlinje"
 msgid "&Keybar visible"
 msgstr "Tastaturlinje synlig"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "kommandoskall"
 
 msgid "show &Mini status"

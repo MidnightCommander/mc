@@ -180,7 +180,7 @@ msgstr "expresie &Scanf "
 msgid "replace &All"
 msgstr "înlocuieºte &Tot"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "con&Firmã înlocuirea "
 
 msgid "&Backwards"
@@ -2013,7 +2013,7 @@ msgstr "barã ajutor v&Izibilã"
 msgid "&Keybar visible"
 msgstr "barã taste &Vizibilã"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Linie de comandã"
 
 msgid "show &Mini status"

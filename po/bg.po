@@ -177,7 +177,7 @@ msgstr "scanf израз"
 msgid "replace &All"
 msgstr "Замести всички"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Питай при замяна"
 
 msgid "&Backwards"
@@ -2017,7 +2017,7 @@ msgstr "Видими подсказки"
 msgid "&Keybar visible"
 msgstr "Видими F-ове"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "Команден промпт"
 
 msgid "show &Mini status"

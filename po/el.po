@@ -178,7 +178,7 @@ msgstr ""
 msgid "replace &All"
 msgstr "αντικατάσταση ό&λων"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr ""
 
 msgid "&Backwards"
@@ -1917,7 +1917,7 @@ msgstr ""
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr ""
 
 msgid "show &Mini status"

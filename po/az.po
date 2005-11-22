@@ -180,7 +180,7 @@ msgstr "scanf &Expression"
 msgid "replace &All"
 msgstr "&hamısını dəyişdir"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Dəyişiklikdə mey&dana çıx"
 
 msgid "&Backwards"
@@ -2020,7 +2020,7 @@ msgstr "i&pucları çubuğu görünən"
 msgid "&Keybar visible"
 msgstr "&Düymələr çubuğu görünən"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "əmr &Sətiri"
 
 msgid "show &Mini status"

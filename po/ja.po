@@ -180,7 +180,7 @@ msgstr "scanf 形式(&E)"
 msgid "replace &All"
 msgstr "全て置き換える(&A)"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "置換時にプロンプト(&O)"
 
 msgid "&Backwards"
@@ -2021,7 +2021,7 @@ msgstr "ヒントバー表示(&I)"
 msgid "&Keybar visible"
 msgstr "キーバー表示(&K)"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "コマンドプロンプト(&P)"
 
 msgid "show &Mini status"

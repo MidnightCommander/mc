@@ -179,7 +179,7 @@ msgstr "&Espressione scanf"
 msgid "replace &All"
 msgstr "Sostituisci &tutto"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Chiedi sempre"
 
 msgid "&Backwards"
@@ -2016,7 +2016,7 @@ msgstr "Mostra s&uggerimenti"
 msgid "&Keybar visible"
 msgstr "Mostra tasti &funzione"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Riga di comando"
 
 msgid "show &Mini status"

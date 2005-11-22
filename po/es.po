@@ -176,7 +176,7 @@ msgstr "&Expresión scanf"
 msgid "replace &All"
 msgstr "reemplazar &Todos"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "c&Onfirmar cambios"
 
 msgid "&Backwards"
@@ -2008,7 +2008,7 @@ msgstr "&Sugerencias visibles"
 msgid "&Keybar visible"
 msgstr "&Barra de teclas visible"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Línea de comandos"
 
 msgid "show &Mini status"

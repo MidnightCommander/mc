@@ -184,7 +184,7 @@ msgstr "scanf &Uttryck"
 msgid "replace &All"
 msgstr "ersätt &Alla"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "fr&Åga vid ersätt"
 
 msgid "&Backwards"
@@ -2045,7 +2045,7 @@ msgstr "visa t&Ipsrad"
 msgid "&Keybar visible"
 msgstr "visa &Tangentrad"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Kommandorad"
 
 msgid "show &Mini status"

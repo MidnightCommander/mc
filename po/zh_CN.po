@@ -179,7 +179,7 @@ msgstr "scanf 表达式(&E)"
 msgid "replace &All"
 msgstr "全部替换(&A)"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "替换时提示(&O)"
 
 msgid "&Backwards"
@@ -2012,7 +2012,7 @@ msgstr "提示栏可见(&I)"
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "命令提示(&P)"
 
 msgid "show &Mini status"

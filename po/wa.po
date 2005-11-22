@@ -187,7 +187,7 @@ msgstr "scanf sol &Ratoûrneure"
 msgid "replace &All"
 msgstr "mete el plaece tot &costé"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Dimander cwè divant do discandjî"
 
 msgid "&Backwards"
@@ -2041,7 +2041,7 @@ msgstr "Bår ås racsegnes veyåve"
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Houkete"
 
 msgid "show &Mini status"

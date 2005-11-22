@@ -179,7 +179,7 @@ msgstr " Scanf 表示式 "
 msgid "replace &All"
 msgstr "全部替換"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr " 替換之前要先詢問 "
 
 msgid "&Backwards"
@@ -2018,7 +2018,7 @@ msgstr "顯示提示列"
 msgid "&Keybar visible"
 msgstr "顯示鍵盤列"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "指令提示符號"
 
 msgid "show &Mini status"

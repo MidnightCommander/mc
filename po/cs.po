@@ -183,7 +183,7 @@ msgstr "výraz pro &Scanf"
 msgid "replace &All"
 msgstr "Nahradit &V¹e"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Dotaz na nahrazení "
 
 msgid "&Backwards"
@@ -2014,7 +2014,7 @@ msgstr "tip&Y viditelné"
 msgid "&Keybar visible"
 msgstr "&Klávesy viditelné"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "pøíkazová øá&Dka"
 
 msgid "show &Mini status"

@@ -1,3 +1,8 @@
+2005-11-22  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* editcmd.c (edit_replace_dialog): Alt-p is in use for the
+	previous entry. Use Alt-m on pro&Mpt.
+
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
 	* choosesyntax.c: Make undeclared functions static.

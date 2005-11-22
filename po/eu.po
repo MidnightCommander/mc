@@ -180,7 +180,7 @@ msgstr "scanf &Adierazpena"
 msgid "replace &All"
 msgstr "&Ordeztu guztiak"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&galdetu ordeztean"
 
 msgid "&Backwards"
@@ -2026,7 +2026,7 @@ msgstr "&iradokizun-barra ikusgai"
 msgid "&Keybar visible"
 msgstr "&Teklatua ikusgai "
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "komandoaren &gonbitea"
 
 msgid "show &Mini status"

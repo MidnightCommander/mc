@@ -179,7 +179,7 @@ msgstr "scan&F izteiksme"
 msgid "replace &All"
 msgstr "aizvietot vi&Sus"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "jau&Tât pie aizvietoðanas"
 
 msgid "&Backwards"
@@ -2022,7 +2022,7 @@ msgstr "pa&domjosla redzama"
 msgid "&Keybar visible"
 msgstr "&Taustiòjosla redzama"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "komandu ie&vade"
 
 msgid "show &Mini status"

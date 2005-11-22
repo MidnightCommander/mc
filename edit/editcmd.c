@@ -1237,6 +1237,7 @@ edit_replace_dialog (WEdit * edit, const char *search_default,
     int treplace_whole = replace_whole;
     int treplace_case = replace_case;
 
+/* Alt-p is in use as hotkey for previous entry; don't use */
     QuickWidget quick_widgets[] =
     {
 	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
@@ -1247,7 +1248,7 @@ edit_replace_dialog (WEdit * edit, const char *search_default,
 	 0, 0, NULL},
 	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("replace &All"), 0, 0,
 	 0, 0, NULL},
-	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("&Prompt on replace"), 0, 0,
+	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("pro&Mpt on replace"), 0, 0,
 	 0, 0, NULL},
 	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
 	 0, 0, NULL},

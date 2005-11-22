@@ -181,7 +181,7 @@ msgstr "scanf-Ausdruck"
 msgid "replace &All"
 msgstr "&Alle ersetzen"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Nachfragen v&Or Ersetzen"
 
 msgid "&Backwards"
@@ -2008,8 +2008,8 @@ msgstr "Ideenle&Iste sichtbar"
 msgid "&Keybar visible"
 msgstr "Tastenleiste sichtbar"
 
-msgid "command &Prompt"
-msgstr "kommando-&Prompt"
+msgid "command pro&Mpt"
+msgstr "kommando-pro&Mpt"
 
 msgid "show &Mini status"
 msgstr "&Mini-Status zeigen"

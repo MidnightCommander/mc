@@ -181,7 +181,7 @@ msgstr "biểu thức &Scanf"
 msgid "replace &All"
 msgstr "&Thay thế tất cả"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Hỏi trước khi thay"
 
 msgid "&Backwards"
@@ -2017,7 +2017,7 @@ msgstr "dòng &Gợi ý"
 msgid "&Keybar visible"
 msgstr "&Hiển thị thanh phím tắt"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Dòng lệnh"
 
 msgid "show &Mini status"

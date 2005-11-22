@@ -180,7 +180,7 @@ msgstr "Изр&аз за scanf"
 msgid "replace &All"
 msgstr "замени &Све"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "п&Отврда замене"
 
 msgid "&Backwards"
@@ -2016,7 +2016,7 @@ msgstr "&Ред са саветима је видљив"
 msgid "&Keybar visible"
 msgstr "ред са &Тастерима је видљив"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "наредбени о&Дзивник"
 
 msgid "show &Mini status"

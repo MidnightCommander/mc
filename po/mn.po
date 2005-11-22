@@ -182,7 +182,7 @@ msgstr "Бичиглэл &scanf"
 msgid "replace &All"
 msgstr "Бүгдийг &солих"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Солилцоог &бататгах"
 
 msgid "&Backwards"
@@ -2018,7 +2018,7 @@ msgstr "&Хинтбарыг үзүүлэх"
 msgid "&Keybar visible"
 msgstr "&Гарыг үзүүлэх"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Командын мөр"
 
 msgid "show &Mini status"

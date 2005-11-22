@@ -183,7 +183,7 @@ msgstr "&Expression scanf"
 msgid "replace &All"
 msgstr "Tout rempl&acer"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "C&onfirmation avant remplacement"
 
 msgid "&Backwards"
@@ -2023,7 +2023,7 @@ msgstr "Barre de conse&il visible"
 msgid "&Keybar visible"
 msgstr "&Barre de touches visibles"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "Invite de &commande"
 
 msgid "show &Mini status"

@@ -179,7 +179,7 @@ msgstr "scanf &Expressão"
 msgid "replace &All"
 msgstr "substituir &Todas"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "perguntar a&o substituir"
 
 msgid "&Backwards"
@@ -2021,7 +2021,7 @@ msgstr "Barra dicas v&isível"
 msgid "&Keybar visible"
 msgstr "Barra de &teclas visível"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&linha comando"
 
 msgid "show &Mini status"

@@ -180,7 +180,7 @@ msgstr "Вираз &scanf"
 msgid "replace &All"
 msgstr "Зам╕нити &yс╕"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Питатися пр&o зам╕ну"
 
 msgid "&Backwards"
@@ -1999,7 +1999,7 @@ msgstr "Сму&жка порад"
 msgid "&Keybar visible"
 msgstr "Смуж&ка функц. клав╕ш"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Командний рядок"
 
 msgid "show &Mini status"

@@ -179,7 +179,7 @@ msgstr "&Výraz pre scanf"
 msgid "replace &All"
 msgstr "nahradiť vš&Etko"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Vyzvať pri nahradení"
 
 msgid "&Backwards"
@@ -2012,7 +2012,7 @@ msgstr "vi&Diteľná pomocná tabuľka"
 msgid "&Keybar visible"
 msgstr "vid&Iteľná tabuľka klávesov"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "prík&Azový riadok"
 
 msgid "show &Mini status"

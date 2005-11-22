@@ -177,7 +177,7 @@ msgstr "scanf &Izraz"
 msgid "replace &All"
 msgstr "zamenjaj &Vse"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "p&Otrdimo ob zamenjavi"
 
 msgid "&Backwards"
@@ -2013,7 +2013,7 @@ msgstr "vidna vrstica z &Nasveti"
 msgid "&Keybar visible"
 msgstr "vidna vrstica s &Tipkami"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "ukazna &Vrstica"
 
 msgid "show &Mini status"

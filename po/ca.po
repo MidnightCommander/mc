@@ -180,7 +180,7 @@ msgstr "&Expressió de Scanf"
 msgid "replace &All"
 msgstr "reemplaça'ls &Tots"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Preg&Unta en reemplaçar"
 
 msgid "&Backwards"
@@ -2025,7 +2025,7 @@ msgstr "p&Istes visibles"
 msgid "&Keybar visible"
 msgstr "Barra de &Tecles visible"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "&Línia d'ordres"
 
 msgid "show &Mini status"

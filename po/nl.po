@@ -171,7 +171,7 @@ msgstr "'scanf'-&Expressie"
 msgid "replace &All"
 msgstr "Vervang &Alles"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "&Vraag bij vervanging"
 
 msgid "&Backwards"
@@ -1997,8 +1997,8 @@ msgstr "&Infobalk zichtbaar"
 msgid "&Keybar visible"
 msgstr "&Toetsenbalk zichtbaar"
 
-msgid "command &Prompt"
-msgstr "Opdracht &Prompt"
+msgid "command pro&Mpt"
+msgstr "Opdracht pro&Mpt"
 
 msgid "show &Mini status"
 msgstr "&Mini-Status tonen"

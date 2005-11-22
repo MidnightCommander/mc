@@ -183,7 +183,7 @@ msgstr "Wyra¿enie \"scanf\""
 msgid "replace &All"
 msgstr "Zast±p wszystkie"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Potwierdzanie"
 
 msgid "&Backwards"
@@ -2012,7 +2012,7 @@ msgstr "Pasek &porad"
 msgid "&Keybar visible"
 msgstr "Pasek &klawiszy"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "Napis &zachêty"
 
 msgid "show &Mini status"

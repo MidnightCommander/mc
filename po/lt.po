@@ -177,7 +177,7 @@ msgstr "„scanf“ iš&raiška"
 msgid "replace &All"
 msgstr "P&akeisti viską"
 
-msgid "&Prompt on replace"
+msgid "pro&Mpt on replace"
 msgstr "Praneš&ti keičiant"
 
 msgid "&Backwards"
@@ -2009,7 +2009,7 @@ msgstr "Patar&imai"
 msgid "&Keybar visible"
 msgstr "&Klavišai"
 
-msgid "command &Prompt"
+msgid "command pro&Mpt"
 msgstr "Komandų eilu&tė"
 
 msgid "show &Mini status"
