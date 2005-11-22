@@ -2097,7 +2097,7 @@ msgstr "&Tippek megjelenítése"
 msgid "&Keybar visible"
 msgstr "&Billentyûsor megjelenítése"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Parancssor aktív"
 
 msgid "show &Mini status"

@@ -2020,7 +2020,7 @@ msgstr "&Yardým satýrý göster"
 msgid "&Keybar visible"
 msgstr "&Tuþ komutlarýný göster"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Komut Ý&stemi"
 
 msgid "show &Mini status"

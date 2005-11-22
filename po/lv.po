@@ -2022,7 +2022,7 @@ msgstr "pa&domjosla redzama"
 msgid "&Keybar visible"
 msgstr "&Taustiòjosla redzama"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "komandu ie&vade"
 
 msgid "show &Mini status"

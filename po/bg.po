@@ -2017,7 +2017,7 @@ msgstr "Видими подсказки"
 msgid "&Keybar visible"
 msgstr "Видими F-ове"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Команден промпт"
 
 msgid "show &Mini status"

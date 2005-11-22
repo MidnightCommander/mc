@@ -2008,7 +2008,7 @@ msgstr "Ideenle&Iste sichtbar"
 msgid "&Keybar visible"
 msgstr "Tastenleiste sichtbar"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "kommando-pro&Mpt"
 
 msgid "show &Mini status"

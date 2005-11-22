@@ -2013,7 +2013,7 @@ msgstr "vidna vrstica z &Nasveti"
 msgid "&Keybar visible"
 msgstr "vidna vrstica s &Tipkami"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "ukazna &Vrstica"
 
 msgid "show &Mini status"

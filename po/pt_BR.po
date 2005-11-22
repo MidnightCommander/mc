@@ -2040,7 +2040,7 @@ msgstr "D&Icas visíveis"
 msgid "&Keybar visible"
 msgstr "Barra de &Teclas visível"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Indicador de Comando"
 
 msgid "show &Mini status"

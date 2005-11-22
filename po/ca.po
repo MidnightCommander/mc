@@ -2025,7 +2025,7 @@ msgstr "p&Istes visibles"
 msgid "&Keybar visible"
 msgstr "Barra de &Tecles visible"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Línia d'ordres"
 
 msgid "show &Mini status"

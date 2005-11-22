@@ -2012,7 +2012,7 @@ msgstr "提示栏可见(&I)"
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "命令提示(&P)"
 
 msgid "show &Mini status"

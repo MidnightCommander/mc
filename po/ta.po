@@ -1920,7 +1920,7 @@ msgstr ""
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr ""
 
 msgid "show &Mini status"

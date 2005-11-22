@@ -2026,7 +2026,7 @@ msgstr "&iradokizun-barra ikusgai"
 msgid "&Keybar visible"
 msgstr "&Teklatua ikusgai "
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "komandoaren &gonbitea"
 
 msgid "show &Mini status"

@@ -2021,7 +2021,7 @@ msgstr "ヒントバー表示(&I)"
 msgid "&Keybar visible"
 msgstr "キーバー表示(&K)"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "コマンドプロンプト(&P)"
 
 msgid "show &Mini status"

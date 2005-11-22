@@ -2016,7 +2016,7 @@ msgstr "synlig hintlinje"
 msgid "&Keybar visible"
 msgstr "Tastaturlinje synlig"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "kommandoskall"
 
 msgid "show &Mini status"

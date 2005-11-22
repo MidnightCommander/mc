@@ -2012,7 +2012,7 @@ msgstr "Pasek &porad"
 msgid "&Keybar visible"
 msgstr "Pasek &klawiszy"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Napis &zachêty"
 
 msgid "show &Mini status"

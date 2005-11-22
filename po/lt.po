@@ -2009,7 +2009,7 @@ msgstr "Patar&imai"
 msgid "&Keybar visible"
 msgstr "&Klavišai"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Komandų eilu&tė"
 
 msgid "show &Mini status"

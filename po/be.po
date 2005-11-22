@@ -2015,7 +2015,7 @@ msgstr "&Радок падказкі"
 msgid "&Keybar visible"
 msgstr "М&еткі клявішаў"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Камандны радок"
 
 msgid "show &Mini status"

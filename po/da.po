@@ -2027,7 +2027,7 @@ msgstr "synlig h&Intlinie"
 msgid "&Keybar visible"
 msgstr "Tastaturlinie synlig"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "kommando pro&Mpt"
 
 msgid "show &Mini status"

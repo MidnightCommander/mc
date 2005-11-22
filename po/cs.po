@@ -2014,7 +2014,7 @@ msgstr "tip&Y viditelné"
 msgid "&Keybar visible"
 msgstr "&Klávesy viditelné"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "pøíkazová øá&Dka"
 
 msgid "show &Mini status"

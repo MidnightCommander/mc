@@ -2008,7 +2008,7 @@ msgstr "힌트바 보이기(&I)"
 msgid "&Keybar visible"
 msgstr "글쇠바 보이기(&K)"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "명령 프롬프트&P)"
 
 msgid "show &Mini status"

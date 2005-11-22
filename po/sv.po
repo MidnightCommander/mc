@@ -2045,7 +2045,7 @@ msgstr "visa t&Ipsrad"
 msgid "&Keybar visible"
 msgstr "visa &Tangentrad"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Kommandorad"
 
 msgid "show &Mini status"

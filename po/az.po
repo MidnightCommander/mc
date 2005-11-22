@@ -2020,7 +2020,7 @@ msgstr "i&pucları çubuğu görünən"
 msgid "&Keybar visible"
 msgstr "&Düymələr çubuğu görünən"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "əmr &Sətiri"
 
 msgid "show &Mini status"

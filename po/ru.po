@@ -2017,7 +2017,7 @@ msgstr "С&трока подсказки"
 msgid "&Keybar visible"
 msgstr "М&етки клавиш"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Командная строка"
 
 msgid "show &Mini status"

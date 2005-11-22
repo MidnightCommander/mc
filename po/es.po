@@ -2008,7 +2008,7 @@ msgstr "&Sugerencias visibles"
 msgid "&Keybar visible"
 msgstr "&Barra de teclas visible"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Línea de comandos"
 
 msgid "show &Mini status"

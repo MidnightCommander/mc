@@ -2016,7 +2016,7 @@ msgstr "Mostra s&uggerimenti"
 msgid "&Keybar visible"
 msgstr "Mostra tasti &funzione"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Riga di comando"
 
 msgid "show &Mini status"

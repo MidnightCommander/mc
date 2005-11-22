@@ -1997,7 +1997,7 @@ msgstr "&Infobalk zichtbaar"
 msgid "&Keybar visible"
 msgstr "&Toetsenbalk zichtbaar"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Opdracht pro&Mpt"
 
 msgid "show &Mini status"

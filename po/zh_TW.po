@@ -2018,7 +2018,7 @@ msgstr "顯示提示列"
 msgid "&Keybar visible"
 msgstr "顯示鍵盤列"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "指令提示符號"
 
 msgid "show &Mini status"

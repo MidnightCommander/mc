@@ -2041,7 +2041,7 @@ msgstr "Bår ås racsegnes veyåve"
 msgid "&Keybar visible"
 msgstr ""
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Houkete"
 
 msgid "show &Mini status"

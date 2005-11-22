@@ -2012,7 +2012,7 @@ msgstr "vi&Diteľná pomocná tabuľka"
 msgid "&Keybar visible"
 msgstr "vid&Iteľná tabuľka klávesov"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "prík&Azový riadok"
 
 msgid "show &Mini status"

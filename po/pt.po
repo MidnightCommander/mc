@@ -2021,7 +2021,7 @@ msgstr "Barra dicas v&isível"
 msgid "&Keybar visible"
 msgstr "Barra de &teclas visível"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&linha comando"
 
 msgid "show &Mini status"

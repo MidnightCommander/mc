@@ -2023,7 +2023,7 @@ msgstr "Barre de conse&il visible"
 msgid "&Keybar visible"
 msgstr "&Barre de touches visibles"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "Invite de &commande"
 
 msgid "show &Mini status"

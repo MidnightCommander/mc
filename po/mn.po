@@ -2018,7 +2018,7 @@ msgstr "&Хинтбарыг үзүүлэх"
 msgid "&Keybar visible"
 msgstr "&Гарыг үзүүлэх"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Командын мөр"
 
 msgid "show &Mini status"

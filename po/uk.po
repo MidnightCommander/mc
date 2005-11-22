@@ -1999,7 +1999,7 @@ msgstr "Сму&жка порад"
 msgid "&Keybar visible"
 msgstr "Смуж&ка функц. клав╕ш"
 
-msgid "command pro&Mpt"
+msgid "command &Prompt"
 msgstr "&Командний рядок"
 
 msgid "show &Mini status"

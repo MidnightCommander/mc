@@ -1,5 +1,10 @@
 2005-11-22  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* *.po: Shouldn't have touched string "command &Prompt" in
+	last update. Reverted.
+
+2005-11-22  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* *.po: Update changed string in replace dialog.
 
 2005-11-13  David Martin  <dmartina@excite.com>
