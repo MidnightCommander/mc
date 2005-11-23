@@ -1,3 +1,7 @@
+2005-11-23  Jindrich Novy  <jnovy@redhat.com>
+
+	* spec.syntax: Add %check highlighting.
+
 2005-11-20  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* php.syntax: Reset the constants array in the script that

@@ -41,17 +41,18 @@ context default
     keyword whole Url: green
 
     keyword whole linestart %build red
-    keyword whole linestart %clean red
     keyword whole linestart %changelog red
+    keyword whole linestart %check red
+    keyword whole linestart %clean red
     keyword whole linestart %description red
     keyword whole linestart %files red
     keyword whole linestart %install red
     keyword whole linestart %package red
+    keyword whole linestart %post red
+    keyword whole linestart %postun red
     keyword whole linestart %pre red
     keyword whole linestart %prep red
     keyword whole linestart %preun red
-    keyword whole linestart %post red
-    keyword whole linestart %postun red
 
     keyword whole %define brightmagenta
     keyword whole %dump brightmagenta
