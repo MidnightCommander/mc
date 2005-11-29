@@ -35,7 +35,4 @@ libmcslang_a_SOURCES = \
 	slwcwidth.c \
 	$(SLANG_INCLUDES)
 
-EXTRASRC = slvideo.c slw32tty.c
-EXTRADOCS = ChangeLog README
-
-EXTRA_DIST = $(EXTRASRC) $(EXTRADOCS)
+EXTRA_DIST = ChangeLog README

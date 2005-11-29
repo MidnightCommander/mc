@@ -1,3 +1,9 @@
+2005-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* slvideo.c: Remove, it's only used by the obsolete PC port.
+	* slw32tty.c: Likewise.
+	* Makefile.am: Adjust for the above.
+
 2005-11-17  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* Makefile.am: Reinstate ChangeLog.
