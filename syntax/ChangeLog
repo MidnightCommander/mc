@@ -1,3 +1,7 @@
+2005-12-02  Jindrich Novy  <jnovy@redhat.com>
+
+	* php.syntax: Fixed syntax errors.
+
 2005-11-23  Jindrich Novy  <jnovy@redhat.com>
 
 	* spec.syntax: Add %check highlighting.

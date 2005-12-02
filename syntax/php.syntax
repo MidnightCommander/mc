@@ -1,29 +1,11 @@
 # PHP syntax file
 
-# 2005-11-20  Leonard den Ottolander <leonard den ottolander nl>
-#	* regenerated from the docs at http://www.php.net
-
-# 2005-04-16  Leonard den Ottolander <leonard den ottolander nl>
-#	* ' ' and " " context fixes
-
-# 2004-09-04  Leonard den Ottolander <leonard * den ottolander nl>
-#	* function keywords regenerated from the docs at http://www.php.net
-#	* separated classes and methods
-#	* removed some cruft from ref.pcre.php that slipped through the script
-#	* added keyword for '->'
-
-# 2003-12-25  Leonard den Ottolander <leonardjo hetnet nl>
-#	* function keywords generated from the docs at http://www.php.net
-
-# 2002-06-01  Max Schedriviy  <max@humgat.org>
-#	* many corrections from previous version
-
-# 2001-09-17  Max Schedriviy  <max@humgat.org>
-#	* completely rewritten
-
-# Old version:
-#	kludges by Stephen Perez ;)
-#	(comment highlighting modifications (a la Emacs) by Paul Sheer) */
+# Authors:
+#	Paul Sheer
+#	Stephen Perez
+#	Max Schedriviy <max@humgat.org>, 2001--2002
+#	Leonard den Ottolander <leonard den ottolander nl>, 2003--2005
+#	Jindrich Novy <jnovy@redhat.com>, 2005
 
 context default
 
@@ -4364,7 +4346,14 @@ context default
     keyword whole LOG_ERR white
     keyword whole LOG_INFO white
     keyword whole LOG_KERN white
-    keyword whole LOG_LOCAL0 ... LOG_LOCAL7 white
+    keyword whole LOG_LOCAL0 white
+    keyword whole LOG_LOCAL1 white
+    keyword whole LOG_LOCAL2 white
+    keyword whole LOG_LOCAL3 white
+    keyword whole LOG_LOCAL4 white
+    keyword whole LOG_LOCAL5 white
+    keyword whole LOG_LOCAL6 white
+    keyword whole LOG_LOCAL7 white
     keyword whole LOG_LPR white
     keyword whole LOG_MAIL white
     keyword whole LOG_NDELAY white
