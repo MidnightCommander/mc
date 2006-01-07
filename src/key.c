@@ -3,15 +3,15 @@
    Copyright (C) 1994,1995 the Free Software Foundation.
 
    Written by: 1994, 1995 Miguel de Icaza.
-               1994, 1995 Janne Kukonlehto.
+	       1994, 1995 Janne Kukonlehto.
 	       1995  Jakub Jelinek.
 	       1997  Norbert Warmuth
-   
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -71,16 +71,15 @@
 #define GET_TIME(tv)    (gettimeofday(&tv, (struct timezone *)NULL))
 #define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \
 			 (t2.tv_usec-t1.tv_usec)/1000)
-			 
+
 /* timeout for old_esc_mode in usec */
 #define ESCMODE_TIMEOUT 1000000
 
 /* Linux console keyboard modifiers */
-#define SHIFT_PRESSED 1
-#define ALTR_PRESSED 2
-#define CONTROL_PRESSED 4
-#define ALTL_PRESSED 8
-
+#define SHIFT_PRESSED		(1 << 0)
+#define ALTR_PRESSED		(1 << 1)
+#define CONTROL_PRESSED		(1 << 2)
+#define ALTL_PRESSED		(1 << 3)
 
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
@@ -94,12 +93,12 @@ typedef struct key_def {
     struct key_def *next;
     struct key_def *child;	/* sequence continuation */
     int action;			/* optional action to be done. Now used only
-                                   to mark that we are just after the first
-                                   Escape */
+				   to mark that we are just after the first
+				   Escape */
 } key_def;
 
 /* This holds all the key definitions */
-static key_def *keys = 0;
+static key_def *keys = NULL;
 
 static int input_fd;
 static int disabled_channels = 0; /* Disable channels checking */
@@ -123,7 +122,7 @@ typedef struct SelectList {
     ph_pqc_f ph_query_cursor;
 #endif
 
-static SelectList *select_list = 0;
+static SelectList *select_list = NULL;
 
 void add_select_channel (int fd, select_fn callback, void *info)
 {
@@ -140,7 +139,7 @@ void add_select_channel (int fd, select_fn callback, void *info)
 void delete_select_channel (int fd)
 {
     SelectList *p = select_list;
-    SelectList *p_prev = 0;
+    SelectList *p_prev = NULL;
     SelectList *p_next;
 
     while (p) {
@@ -169,8 +168,8 @@ inline static int add_selects (fd_set *select_set)
 
     if (disabled_channels)
 	return 0;
-    
-    for (p = select_list; p; p = p->next){
+
+    for (p = select_list; p; p = p->next) {
 	FD_SET (p->fd, select_set);
 	if (p->fd > top_fd)
 	    top_fd = p->fd;
@@ -184,7 +183,7 @@ static void check_selects (fd_set *select_set)
 
     if (disabled_channels)
 	return;
-    
+
     for (p = select_list; p; p = p->next)
 	if (FD_ISSET (p->fd, select_set))
 	    (*p->callback)(p->fd, p->info);
@@ -192,7 +191,7 @@ static void check_selects (fd_set *select_set)
 
 void channels_down (void)
 {
-    disabled_channels ++;
+    disabled_channels++;
 }
 
 void channels_up (void)
@@ -314,7 +313,7 @@ static key_define_t xterm_key_defines [] = {
     { 0, 0, MCKEY_NOACTION },
 };
 
-/* qansi-m terminals have a much more key combinatios, 
+/* qansi-m terminals have a much more key combinatios,
    which are undefined in termcap/terminfo */
 static key_define_t qansi_key_defines[] =
 {
@@ -381,24 +380,24 @@ static key_define_t qansi_key_defines[] =
     {KEY_M_ALT  | 'x',         ESC_STR "Nx",   MCKEY_NOACTION}, /* Alt-x     */
     {KEY_M_ALT  | 'y',         ESC_STR "Ny",   MCKEY_NOACTION}, /* Alt-y     */
     {KEY_M_ALT  | 'z',         ESC_STR "Nz",   MCKEY_NOACTION}, /* Alt-z     */
-    {KEY_KP_SUBTRACT,  	       ESC_STR "[S",   MCKEY_NOACTION}, /* Gr-Minus  */
+    {KEY_KP_SUBTRACT,          ESC_STR "[S",   MCKEY_NOACTION}, /* Gr-Minus  */
     {KEY_KP_ADD,               ESC_STR "[T",   MCKEY_NOACTION}, /* Gr-Plus   */
-    {0, 0, MCKEY_NOACTION},
+    {0, NULL, MCKEY_NOACTION},
 };
 
 static key_define_t mc_default_keys [] = {
     { ESC_CHAR,	ESC_STR, MCKEY_ESCAPE },
     { ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION },
-    { 0, 0, MCKEY_NOACTION },
+    { 0, NULL, MCKEY_NOACTION },
 };
 
 static void
 define_sequences (key_define_t *kd)
 {
     int i;
-    
-    for (i = 0; kd [i].code; i++)
-	define_sequence(kd [i].code, kd [i].seq, kd [i].action);
+
+    for (i = 0; kd[i].code != 0; i++)
+	define_sequence(kd[i].code, kd[i].seq, kd[i].action);
 }
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
@@ -448,12 +447,12 @@ init_key (void)
 	/* Modify the default value of use_8th_bit_as_meta: we would
 	 * like to provide a working mc for a newbie who knows nothing
 	 * about [Options|Display bits|Full 8 bits input]...
-	 * 
-	 * Don't use 'meta'-bit, when we are dealing with a 
+	 *
+	 * Don't use 'meta'-bit, when we are dealing with a
 	 * 'qnx*'-type terminal: clear the default value!
 	 * These terminal types use 0xFF as an escape character,
 	 * so use_8th_bit_as_meta==1 must not be enabled!
-	 * 
+	 *
 	 * [mc-4.1.21+,slint.c/getch(): the DEC_8BIT_HACK stuff
 	 * is not used now (doesn't even depend on use_8th_bit_as_meta
 	 * as in mc-3.1.2)...GREAT!...no additional code is required!]
@@ -466,9 +465,9 @@ init_key (void)
     init_key_x11 ();
 #endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 
-    /* Load the qansi-m key definitions 
+    /* Load the qansi-m key definitions
        if we are running under the qansi-m terminal */
-    if ((term) && (strncmp (term, "qansi-m", 7) == 0)) {
+    if (term != NULL && (strncmp (term, "qansi-m", 7) == 0)) {
 	define_sequences (qansi_key_defines);
     }
 }
@@ -496,11 +495,11 @@ xmouse_get_event (Gpm_Event *ev)
     /* Variable btn has following meaning: */
     /* 0 = btn1 dn, 1 = btn2 dn, 2 = btn3 dn, 3 = btn up */
     btn = getch () - 32;
-    
+
     /* There seems to be no way of knowing which button was released */
     /* So we assume all the buttons were released */
 
-    if (btn == 3){
+    if (btn == 3) {
 	if (last_btn) {
 	    ev->type = GPM_UP | (GPM_SINGLE << clicks);
 	    ev->buttons = 0;
@@ -519,36 +518,36 @@ xmouse_get_event (Gpm_Event *ev)
 	    ev->type = GPM_DOWN;
 
 	GET_TIME (tv2);
-	if (tv1.tv_sec && (DIF_TIME (tv1,tv2) < double_click_speed)){
+	if (tv1.tv_sec && (DIF_TIME (tv1,tv2) < double_click_speed)) {
 	    clicks++;
 	    clicks %= 3;
 	} else
 	    clicks = 0;
-	
-        switch (btn) {
+
+	switch (btn) {
 	case 0:
-            ev->buttons = GPM_B_LEFT;
-            break;
+	    ev->buttons = GPM_B_LEFT;
+	    break;
 	case 1:
-            ev->buttons = GPM_B_MIDDLE;
-            break;
+	    ev->buttons = GPM_B_MIDDLE;
+	    break;
 	case 2:
-            ev->buttons = GPM_B_RIGHT;
-            break;
+	    ev->buttons = GPM_B_RIGHT;
+	    break;
 	case 64:
-            ev->buttons = GPM_B_UP;
-            clicks = 0;
-            break;
+	    ev->buttons = GPM_B_UP;
+	    clicks = 0;
+	    break;
 	case 65:
-            ev->buttons = GPM_B_DOWN;
-            clicks = 0;
-            break;
+	    ev->buttons = GPM_B_DOWN;
+	    clicks = 0;
+	    break;
 	default:
-            /* Nothing */
+	    /* Nothing */
 	    ev->type = 0;
 	    ev->buttons = 0;
-            break;
-        }
+	    break;
+	}
 	last_btn = ev->buttons;
     }
     /* Coordinates are 33-based */
@@ -561,11 +560,11 @@ static key_def *create_sequence (const char *seq, int code, int action)
 {
     key_def *base, *p, *attach;
 
-    for (base = attach = NULL; *seq; seq++){
+    for (base = attach = NULL; *seq; seq++) {
 	p = g_new (key_def, 1);
 	if (!base) base = p;
 	if (attach) attach->child = p;
-	
+
 	p->ch   = *seq;
 	p->code = code;
 	p->child = p->next = NULL;
@@ -587,7 +586,7 @@ static int push_char (int c)
 {
     if (!seq_append)
 	seq_append = seq_buffer;
-    
+
     if (seq_append == &(seq_buffer [SEQ_BUFFER_LEN-2]))
 	return 0;
     *(seq_append++) = c;
@@ -605,17 +604,17 @@ int define_sequence (int code, const char *seq, int action)
 
     if (strlen (seq) > SEQ_BUFFER_LEN-1)
 	return 0;
-    
-    for (base = keys; (base != 0) && *seq; ){
-	if (*seq == base->ch){
-	    if (base->child == 0){
-		if (*(seq+1)){
+
+    for (base = keys; (base != 0) && *seq; ) {
+	if (*seq == base->ch) {
+	    if (base->child == 0) {
+		if (*(seq+1)) {
 		    base->child = create_sequence (seq+1, code, action);
 		    return 1;
 		} else {
 		    /* The sequence matches an existing one.  */
-                    base->code = code;
-                    base->action = action;
+		    base->code = code;
+		    base->action = action;
 		    return 1;
 		}
 	    } else {
@@ -696,25 +695,25 @@ correct_key_code (int code)
     if ((c == 127) && (mod==0)) /* Add Ctrl/Alt/Shift-BackSpace */
     {
 	mod |= get_modifier();
-        c = KEY_BACKSPACE;
+	c = KEY_BACKSPACE;
     }
-    
+
     if ((c=='0') && (mod==0)) /* Add Shift-Insert on key pad */
     {
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-        {
+	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+	{
 	   mod = KEY_M_SHIFT;
-           c = KEY_IC;
-        }
+	   c = KEY_IC;
+	}
     }
 
     if ((c=='.') && (mod==0)) /* Add Shift-Del on key pad */
     {
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-        {
+	if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+	{
 	   mod = KEY_M_SHIFT;
-           c = KEY_DC;
-        }
+	   c = KEY_DC;
+	}
     }
 #endif /* __QNXNTO__ */
 
@@ -772,21 +771,21 @@ int get_key_code (int no_delay)
     static key_def *this = NULL, *parent;
     static struct timeval esctime = { -1, -1 };
     static int lastnodelay = -1;
-    
+
     if (no_delay != lastnodelay) {
-        this = NULL;
-        lastnodelay = no_delay;
+	this = NULL;
+	lastnodelay = no_delay;
     }
 
  pend_send:
-    if (pending_keys){
+    if (pending_keys) {
 	int d = *pending_keys++;
  check_pend:
-	if (!*pending_keys){
+	if (!*pending_keys) {
 	    pending_keys = 0;
 	    seq_append = 0;
 	}
-	if (d == ESC_CHAR && pending_keys){
+	if (d == ESC_CHAR && pending_keys) {
 	    d = ALT(*pending_keys++);
 	    goto check_pend;
 	}
@@ -798,41 +797,41 @@ int get_key_code (int no_delay)
 
  nodelay_try_again:
     if (no_delay) {
-        nodelay (stdscr, TRUE);
+	nodelay (stdscr, TRUE);
     }
     c = getch ();
 #if defined(USE_NCURSES) && defined(KEY_RESIZE)
     if (c == KEY_RESIZE)
-        goto nodelay_try_again;
+	goto nodelay_try_again;
 #endif
     if (no_delay) {
-        nodelay (stdscr, FALSE);
-        if (c == -1) {
-            if (this != NULL && parent != NULL && 
-                parent->action == MCKEY_ESCAPE && old_esc_mode) {
-                struct timeval current, timeout;
-                
-                if (esctime.tv_sec == -1)
-                    return -1;
-                GET_TIME (current);
-                timeout.tv_sec = ESCMODE_TIMEOUT / 1000000 + esctime.tv_sec;
-                timeout.tv_usec = ESCMODE_TIMEOUT % 1000000 + esctime.tv_usec;
-                if (timeout.tv_usec > 1000000) {
-                    timeout.tv_usec -= 1000000;
-                    timeout.tv_sec++;
-                }
-                if (current.tv_sec < timeout.tv_sec)
-                    return -1;
-                if (current.tv_sec == timeout.tv_sec && 
-                    current.tv_usec < timeout.tv_usec)
-                    return -1;
-                this = NULL;
+	nodelay (stdscr, FALSE);
+	if (c == -1) {
+	    if (this != NULL && parent != NULL &&
+		parent->action == MCKEY_ESCAPE && old_esc_mode) {
+		struct timeval current, timeout;
+
+		if (esctime.tv_sec == -1)
+		    return -1;
+		GET_TIME (current);
+		timeout.tv_sec = ESCMODE_TIMEOUT / 1000000 + esctime.tv_sec;
+		timeout.tv_usec = ESCMODE_TIMEOUT % 1000000 + esctime.tv_usec;
+		if (timeout.tv_usec > 1000000) {
+		    timeout.tv_usec -= 1000000;
+		    timeout.tv_sec++;
+		}
+		if (current.tv_sec < timeout.tv_sec)
+		    return -1;
+		if (current.tv_sec == timeout.tv_sec &&
+		    current.tv_usec < timeout.tv_usec)
+		    return -1;
+		this = NULL;
 		pending_keys = seq_append = NULL;
 		return ESC_CHAR;
-            }
-            return -1;
-        }
-    } else if (c == -1){
+	    }
+	    return -1;
+	}
+    } else if (c == -1) {
 	/* Maybe we got an incomplete match.
 	   This we do only in delay mode, since otherwise
 	   getch can return -1 at any time. */
@@ -843,24 +842,24 @@ int get_key_code (int no_delay)
 	this = NULL;
 	return -1;
     }
-    
+
     /* Search the key on the root */
     if (!no_delay || this == NULL) {
-        this = keys;
-        parent = NULL;
+	this = keys;
+	parent = NULL;
 
-        if ((c & 0x80) && use_8th_bit_as_meta) {
-            c &= 0x7f;
+	if ((c & 0x80) && use_8th_bit_as_meta) {
+	    c &= 0x7f;
 
 	    /* The first sequence defined starts with esc */
 	    parent = keys;
 	    this = keys->child;
-        }
+	}
     }
-    while (this){
-	if (c == this->ch){
-	    if (this->child){
-		if (!push_char (c)){
+    while (this) {
+	if (c == this->ch) {
+	    if (this->child) {
+		if (!push_char (c)) {
 		    pending_keys = seq_buffer;
 		    goto pend_send;
 		}
@@ -868,30 +867,30 @@ int get_key_code (int no_delay)
 		this = this->child;
 		if (parent->action == MCKEY_ESCAPE && old_esc_mode) {
 		    if (no_delay) {
-		        GET_TIME (esctime);
-		        if (this == NULL) {
-		            /* Shouldn't happen */
-		            fputs ("Internal error\n", stderr);
-		            exit (1);
-		        }
-		        goto nodelay_try_again;
+			GET_TIME (esctime);
+			if (this == NULL) {
+			    /* Shouldn't happen */
+			    fputs ("Internal error\n", stderr);
+			    exit (1);
+			}
+			goto nodelay_try_again;
 		    }
 		    esctime.tv_sec = -1;
 		    c = xgetch_second ();
 		    if (c == -1) {
-		        pending_keys = seq_append = NULL;
-		        this = NULL;
-		        return ESC_CHAR;
+			pending_keys = seq_append = NULL;
+			this = NULL;
+			return ESC_CHAR;
 		    }
 		} else {
 		    if (no_delay)
-		        goto nodelay_try_again;
+			goto nodelay_try_again;
 		    c = getch ();
 		}
 	    } else {
 		/* We got a complete match, return and reset search */
 		int code;
-		
+
 		pending_keys = seq_append = NULL;
 		code = this->code;
 		this = NULL;
@@ -901,14 +900,14 @@ int get_key_code (int no_delay)
 	    if (this->next)
 		this = this->next;
 	    else {
-	        if (parent != NULL && parent->action == MCKEY_ESCAPE) {
+		if (parent != NULL && parent->action == MCKEY_ESCAPE) {
 
 		    /* Convert escape-digits to F-keys */
 		    if (isdigit(c))
-	                c = KEY_F (c - '0');
+			c = KEY_F (c - '0');
 		    else if (c == ' ')
 			c = ESC_CHAR;
-	            else
+		    else
 			c = ALT(c);
 
 		    pending_keys = seq_append = NULL;
@@ -938,12 +937,12 @@ try_channels (int set_timeout)
     int v;
     int maxfdp;
 
-    while (1){
+    while (1) {
 	FD_ZERO (&select_set);
 	FD_SET  (input_fd, &select_set);	/* Add stdin */
 	maxfdp = max (add_selects (&select_set), input_fd);
-	
-	if (set_timeout){
+
+	if (set_timeout) {
 	    timeout.tv_sec = 0;
 	    timeout.tv_usec = 100000;
 	    timeptr = &timeout;
@@ -951,7 +950,7 @@ try_channels (int set_timeout)
 	    timeptr = 0;
 
 	v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
-	if (v > 0){
+	if (v > 0) {
 	    check_selects (&select_set);
 	    if (FD_ISSET (input_fd, &select_set))
 		return;
@@ -966,7 +965,7 @@ static int getch_with_delay (void)
 
     /* This routine could be used on systems without mouse support,
        so we need to do the select check :-( */
-    while (1){
+    while (1) {
 	if (!pending_keys)
 	    try_channels (0);
 
@@ -1158,18 +1157,18 @@ static void
 learn_store_key (char *buffer, char **p, int c)
 {
     if (*p - buffer > 253)
-        return;
+	return;
     if (c == ESC_CHAR) {
-        *(*p)++ = '\\';
-        *(*p)++ = 'e';
+	*(*p)++ = '\\';
+	*(*p)++ = 'e';
     } else if (c < ' ') {
-    	*(*p)++ = '^';
-    	*(*p)++ = c + 'a' - 1;
+	*(*p)++ = '^';
+	*(*p)++ = c + 'a' - 1;
     } else if (c == '^') {
-    	*(*p)++ = '^';
-    	*(*p)++ = '^';
+	*(*p)++ = '^';
+	*(*p)++ = '^';
     } else
-    	*(*p)++ = (char) c;
+	*(*p)++ = (char) c;
 }
 
 char *learn_key (void)
@@ -1183,35 +1182,35 @@ char *learn_key (void)
     int c;
     char buffer [256];
     char *p = buffer;
-    
+
     keypad(stdscr, FALSE); /* disable intepreting keys by ncurses */
     c = getch ();
     while (c == -1)
-        c = getch (); /* Sanity check, should be unnecessary */
+	c = getch (); /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
     if (endtime.tv_usec > 1000000) {
-        endtime.tv_usec -= 1000000;
-        endtime.tv_sec++;
+	endtime.tv_usec -= 1000000;
+	endtime.tv_sec++;
     }
     nodelay (stdscr, TRUE);
     for (;;) {
-        while ((c = getch ()) == -1) {
-            GET_TIME (timeout);
-            timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
-            if (timeout.tv_usec < 0)
-                timeout.tv_sec++;
-            timeout.tv_sec = endtime.tv_sec - timeout.tv_sec;
-            if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
-    		FD_ZERO (&Read_FD_Set);
-    		FD_SET (input_fd, &Read_FD_Set);
-                select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
-            } else
-            	break;
-        }
-        if (c == -1)
-            break;
+	while ((c = getch ()) == -1) {
+	    GET_TIME (timeout);
+	    timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
+	    if (timeout.tv_usec < 0)
+		timeout.tv_sec++;
+	    timeout.tv_sec = endtime.tv_sec - timeout.tv_sec;
+	    if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
+		FD_ZERO (&Read_FD_Set);
+		FD_SET (input_fd, &Read_FD_Set);
+		select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
+	    } else
+		break;
+	}
+	if (c == -1)
+	    break;
 	learn_store_key (buffer, &p, c);
     }
     keypad(stdscr, TRUE);
@@ -1228,7 +1227,7 @@ numeric_keypad_mode (void)
 {
     if (console_flag || xterm_flag) {
 	fputs ("\033>", stdout);
-        fflush (stdout);
+	fflush (stdout);
     }
 }
 
@@ -1236,8 +1235,8 @@ void
 application_keypad_mode (void)
 {
     if (console_flag || xterm_flag) {
-	fputs ("\033=", stdout); 
-        fflush (stdout);
+	fputs ("\033=", stdout);
+	fflush (stdout);
     }
 }
 
@@ -1328,7 +1327,7 @@ get_modifier (void)
 	    }
 	}
     }
-    /* We do not have Photon running. Assume we are in text 
+    /* We do not have Photon running. Assume we are in text
        console or xterm */
     if (in_photon == -1) {
 	if (devctl
