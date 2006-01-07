@@ -1609,7 +1609,7 @@ view_percent (WView *view, offset_type p)
 	percent = p * 100 / filesize;
 
     widget_move (view, top, right - 4);
-    printw (str_unconst ("%3d%%"), percent);
+    tty_printf ("%3d%%", percent);
 }
 
 static void
@@ -1640,16 +1640,16 @@ view_display_status (WView *view)
 	addstr ((char *) name_trunc (file_name, width));
     else {
 	i = (width > 22 ? 22 : width) - file_label_width;
-	printw (str_unconst (file_label), name_trunc (file_name, i));
+	tty_printf (file_label, name_trunc (file_name, i));
 	if (width > 46) {
 	    widget_move (view, top, left + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
 	    if (view->hex_mode)
-		printw (str_unconst (_("Offset 0x%08lx")), view->hex_cursor);
+		tty_printf (_("Offset 0x%08lx"), (unsigned long) view->hex_cursor);
 	    else {
 		offset_type line, col;
 		view_offset_to_coord (view, &line, &col, view->dpy_start);
-		printw (str_unconst (_("Line %lu Col %lu")),
+		tty_printf (_("Line %lu Col %lu"),
 		    (unsigned long) line + 1,
 		    (unsigned long) (view->text_wrap_mode ? col : view->dpy_text_column));
 	    }
@@ -1659,9 +1659,9 @@ view_display_status (WView *view)
 	    filesize = view_get_filesize (view);
 	    widget_move (view, top, left + 43);
 	    if (!view_may_still_grow (view)) {
-		printw (str_unconst (_("%s bytes")), size_trunc (filesize));
+		tty_printf (_("%s bytes"), size_trunc (filesize));
 	    } else {
-		printw (str_unconst (_(">= %s bytes")), size_trunc (filesize));
+		tty_printf (_(">= %s bytes"), size_trunc (filesize));
 	    }
 	}
 	if (width > 26) {

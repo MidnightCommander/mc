@@ -1,3 +1,8 @@
+2006-01-07  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Replaced calls to printw() with tty_printf() to get
+	rid of the str_unconst() function.
+
 2005-11-10  Pavel Roskin  <proski@gnu.org>
 
 	* global.h [!ENABLE_NLS]: Provide replacement for ngettext.
