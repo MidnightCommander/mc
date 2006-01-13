@@ -43,7 +43,7 @@ USA.
 # endif
 #endif /* __watcomc__ */
 
-#if defined(unix) || defined(__unix)
+#if defined(unix) || defined(__unix) || defined (_AIX) || defined(__NetBSD__) || defined(__MACH__)
 # ifndef __unix__
 #  define __unix__ 1
 # endif

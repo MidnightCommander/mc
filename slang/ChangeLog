@@ -1,3 +1,17 @@
+2006-01-14  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+	* sldisply.c (SLtt_initialize): Fix typo. Change Is_Bg_BGR
+	to Is_Fg_BGR.  (SLtt_goto_rc): Disable cursor movement optimizations
+	for qansi-m consoles. Needed on QNX Neutrino. (SLtt_initialize): Init
+	QANSI_Console variable. (SLtt_erase_line): Use tt_write() instead
+	tt_write_string(). (SLtt_cls): Use tt_write() instead tt_write_string().
+	(SLtt_tgetstr): Fix warning.
+	* slmisc.c: Trimmed down for use in GNU Midnight Commander.
+	* sltermin.c (_pSLtt_tigetent): Avoid strncpy, home_ti is 1K long and
+	obody really needs it whole cleared. Fix possible off-by-one error.
+	* include/slang.h: Define __unix__ if __MACH__, __NetBSD__,  _AIX is
+	defined.
+
 2005-11-28  Pavel Roskin  <proski@gnu.org>
 
 	* slvideo.c: Remove, it's only used by the obsolete PC port.

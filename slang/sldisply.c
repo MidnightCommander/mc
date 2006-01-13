@@ -134,6 +134,7 @@ static char *Reset_Color_String;
 static int Is_Color_Terminal = 0;
 
 static int Linux_Console;
+static int QANSI_Console;
 static int Mouse_Mode = -1;
 
 /* The following comment is nolonger valid, but is here in case there are
@@ -734,12 +735,25 @@ void SLtt_goto_rc(int r, int c)
 		  if (Cursor_c == c) return;
 		  if (Cursor_c == c + 1)
 		    {
-		       s = buf;
-		       *s++ = '\b'; *s = 0;
-		       s = buf;
+                       /* cursor movement optimizations, like backspace
+			  doesn't work as needed on qansi-m consoles when 
+			  current table is not a G0, so we'll disable it. */
+            	       if (!QANSI_Console)
+                       {
+		         s = buf;
+		         *s++ = '\b'; *s = 0;
+		         s = buf;
+		       }
+		       else
+		       {
+                          /* do the generic cursor positioning,
+		             without an optimization */
+			 s = NULL;
+		       }
 		    }
 	       }
-	     else if (c == 0)
+	     else if ((c == 0) && (!QANSI_Console)) /* the same things
+	    			    for the qansi-m console limitation */
 	       {
 		  s = buf;
 		  if ((Cursor_Set != 1) || (Cursor_c != 0)) *s++ = '\r';
@@ -753,8 +767,9 @@ void SLtt_goto_rc(int r, int c)
 	       }
 	     /* Will fail on VMS */
 #ifndef VMS
-	     else if (SLtt_Newline_Ok && (Cursor_Set == 1) &&
-		      (Cursor_c >= c) && (c + 3 > Cursor_c))
+	     else if ((SLtt_Newline_Ok && (Cursor_Set == 1) &&
+		      (Cursor_c >= c) && (c + 3 > Cursor_c)) &&
+		      (!QANSI_Console))
 	       {
 		  s = buf;
 		  while (n--) *s++ = '\n';
@@ -794,7 +809,7 @@ void SLtt_erase_line (void)
    Cursor_Set = 1; Cursor_c = 0;
    SLtt_del_eol();
    /* Put the cursor back at the beginning of the line */
-   tt_write_string("\r");
+   tt_write ("\r", 1);
    Cursor_Set = 1; Cursor_c = 0;
 }
 
@@ -865,7 +880,7 @@ void SLtt_cls (void)
 	if (Reset_Color_String != NULL)
 	  tt_write_string (Reset_Color_String);
 	else
-	  tt_write_string ("\033[0m\033[m");
+	  tt_write ("\033[0m\033[m", 7);
      }
 
    SLtt_normal_video();
@@ -2172,7 +2187,7 @@ char *SLtt_tgetstr (char *cap)
      return NULL;
    
 #ifdef USE_TERMCAP
-   tmp_area = &Termcap_String_Buf;
+   tmp_area = (char*) &Termcap_String_Buf;
    s = tgetstr (cap, &tmp_area);
 #else
    s = _pSLtt_tigetstr (Terminfo, cap);
@@ -2301,6 +2316,8 @@ int SLtt_initialize (char *term)
 		    || !strncmp(term, "con", 3)
 # endif
 		    );
+
+   QANSI_Console = !strncmp (term, "qansi-m", 7);
 
    t = term;
 
@@ -2519,7 +2536,7 @@ int SLtt_initialize (char *term)
    if (Color_Bg_Str == NULL)
      {
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
-	Is_Fg_BGR = (Color_Bg_Str != NULL);
+	Is_Bg_BGR = (Color_Bg_Str != NULL);
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)
