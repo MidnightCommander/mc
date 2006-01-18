@@ -1,3 +1,8 @@
+2006-01-18  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tar.c (tar_read_header): Skip over pax extended header and
+	global extended header records.
+
 2005-11-15  Pavel Roskin  <proski@gnu.org>
 
 	* samba/lib/netmask.c: Include <stdlib.h> for exit() and

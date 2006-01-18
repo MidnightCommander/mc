@@ -117,6 +117,8 @@ union record {
 #define	LF_DIR		'5'	/* Directory */
 #define	LF_FIFO		'6'	/* FIFO special file */
 #define	LF_CONTIG	'7'	/* Contiguous file */
+#define	LF_EXTHDR	'x'	/* pax Extended Header */
+#define	LF_GLOBAL_EXTHDR 'g'	/* pax Global Extended Header */
 /* Further link types may be defined later. */
 
 /* Note that the standards committee allows only capital A through
@@ -425,6 +427,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
      * are stored in incremental tar archives.
      */
     if (header->header.linkflag == LF_DUMPDIR)
+	return STATUS_SUCCESS;
+
+    /*
+     * Skip over pax extended header and global extended
+     * header records.
+     */
+    if (header->header.linkflag == LF_EXTHDR ||
+	header->header.linkflag == LF_GLOBAL_EXTHDR)
 	return STATUS_SUCCESS;
 
     if (header->header.linkflag == LF_LONGNAME
