@@ -24,9 +24,10 @@ USA.
 #define _GNU_SOURCE
 #include "slinclud.h"
 
+#include <ctype.h>
+
 #include "slang.h"
 #include "_slang.h"
-int SLang_Version = SLANG_VERSION;
 
 /*
  * This function assumes that the initial \ char has been removed.

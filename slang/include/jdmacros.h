@@ -1,53 +1,15 @@
+/* Fully rewritten to use glib rather than S-Lang replacements */
+
 #ifndef _JD_MACROS_H_
 #define _JD_MACROS_H_
 
-#ifndef SLMEMSET
-# ifdef HAVE_MEMSET
-#  define SLMEMSET memset
-# else
-#  define SLMEMSET SLmemset
-# endif
-#endif
+#include <glib.h>
 
-#ifndef SLMEMCHR
-# ifdef HAVE_MEMCHR
-#  define SLMEMCHR memchr
-# else
-#  define SLMEMCHR SLmemchr
-# endif
-#endif
+#define SLMEMSET(x,y,z) memset(x,y,z)
+#define SLMEMCPY(x,y,z) memcpy(x,y,z)
+#define SLfree(x) g_free(x)
+#define SLmalloc(x) g_malloc(x)
+#define SLrealloc(x,y) g_realloc(x,y)
+#define SLvsnprintf g_vsnprintf
 
-#ifndef SLMEMCPY
-# ifdef HAVE_MEMCPY
-#  define SLMEMCPY memcpy
-# else
-#  define SLMEMCPY SLmemcpy
-# endif
-#endif
-
-/* Note:  HAVE_MEMCMP requires an unsigned memory comparison!!!  */
-#ifndef SLMEMCMP
-# ifdef HAVE_MEMCMP
-#  define SLMEMCMP memcmp
-# else
-#  define SLMEMCMP SLmemcmp
-# endif
-#endif
-
-#ifndef SLFREE
-# define SLFREE free
-#endif
-
-#ifndef SLMALLOC
-# define SLMALLOC malloc
-#endif
-
-#ifndef SLCALLOC
-# define SLCALLOC calloc
-#endif
-
-#ifndef SLREALLOC
-# define SLREALLOC realloc
-#endif
-
-#endif				       /* _JD_MACROS_H_ */
+#endif				/* _JD_MACROS_H_ */

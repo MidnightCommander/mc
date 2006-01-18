@@ -1,3 +1,13 @@
+2006-01-18  Pavel Shirshov  <me@pavelsh.pp.ru>
+
+	* include/slang.h: comment out declaration of SLmemset(), SLmemchr(),
+	SLmemcpy(), SLmemcmp(), SLmalloc(), SLfree(), SLrealloc().
+	* slcommon.c: comment out definitions of SLmalloc(), SLfree(),
+	SLrealloc().
+	* include/jdmacros.h: Fully rewritten to use glib rather than S-Lang
+	replacements.
+	* slmisc.c: Remove SLang_Version variable.
+
 2006-01-14  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* sldisply.c (SLtt_initialize): Fix typo. Change Is_Bg_BGR

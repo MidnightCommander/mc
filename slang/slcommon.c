@@ -147,6 +147,8 @@ int SLutf8_enable (int mode)
    return mode;
 }
 
+#ifndef MIDNIGHT_COMMANDER_CODE
+
 char *SLmalloc (unsigned int len)
 {
    char *p;
@@ -180,6 +182,8 @@ char *SLrealloc (char *p, unsigned int len)
      }
    return p;
 }
+
+#endif                                /* !MIDNIGHT_COMMANDER_CODE */
 
 char *SLcalloc (unsigned int nelems, unsigned int len)
 {

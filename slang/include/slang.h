@@ -253,10 +253,16 @@ SL_EXTERN char *SLstrcpy(register char *, register char *);
 SL_EXTERN int SLstrcmp(register char *, register char *);
 SL_EXTERN char *SLstrncpy(char *, register char *, register  int);
 
+/* GNU Midnight Commander uses replacements from glib */
+#define MIDNIGHT_COMMANDER_CODE 1
+#ifndef MIDNIGHT_COMMANDER_CODE
+
 SL_EXTERN void SLmemset (char *, char, int);
 SL_EXTERN char *SLmemchr (register char *, register char, register int);
 SL_EXTERN char *SLmemcpy (char *, char *, int);
 SL_EXTERN int SLmemcmp (char *, char *, int);
+
+#endif                                /* !MIDNIGHT_COMMANDER_CODE */
 
 /*}}}*/
 
@@ -1274,10 +1280,22 @@ SL_EXTERN void SLbstring_free (SLang_BString_Type *);
 SL_EXTERN int SLang_pop_bstring (SLang_BString_Type **);
 SL_EXTERN int SLang_push_bstring (SLang_BString_Type *);
 
+/* GNU Midnight Commander uses replacements from glib */
+#ifndef MIDNIGHT_COMMANDER_CODE
+
 SL_EXTERN char *SLmalloc (unsigned int);
+
+#endif                                /* !MIDNIGHT_COMMANDER_CODE */
+
 SL_EXTERN char *SLcalloc (unsigned int, unsigned int);
+
+#ifndef MIDNIGHT_COMMANDER_CODE
+
 SL_EXTERN void SLfree(char *);	       /* This function handles NULL */
 SL_EXTERN char *SLrealloc (char *, unsigned int);
+
+#endif                                /* !MIDNIGHT_COMMANDER_CODE */
+
 
 SL_EXTERN char *SLcurrent_time_string (void);
 
