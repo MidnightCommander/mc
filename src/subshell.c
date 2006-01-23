@@ -150,6 +150,30 @@ static int prompt_pos;
 
 
 /*
+ *  Write all data, even if the write() call is interrupted.
+ */
+static ssize_t
+write_all (int fd, const void *buf, size_t count)
+{
+    ssize_t ret;
+    ssize_t written = 0;
+    while (count > 0) {
+	ret = write (fd, buf, count);
+	if (ret < 0) {
+	    if (errno == EINTR) {
+		continue;
+	    } else {
+		return written > 0 ? written : ret;
+	    }
+	}
+	buf += ret;
+	count -= ret;
+	written += ret;
+    }
+    return written;
+}
+
+/*
  *  Prepare child process to running the shell and run it.
  *
  *  Modifies the global variables (in the child process only):
@@ -476,7 +500,7 @@ init_subshell (void)
 		    tcsh_fifo);
 	break;
     }
-    write (subshell_pty, precmd, strlen (precmd));
+    write_all (subshell_pty, precmd, strlen (precmd));
 
     /* Wait until the subshell has started up and processed the command */
 
@@ -533,16 +557,16 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 	    subshell_state = ACTIVE;
 	    /* FIXME: possibly take out this hack; the user can
 	       re-play it by hitting C-hyphen a few times! */
-	    write (subshell_pty, " \b", 2);  /* Hack to make prompt reappear */
+	    write_all (subshell_pty, " \b", 2);  /* Hack to make prompt reappear */
 	}
     }
     else  /* MC has passed us a user command */
     {
 	if (how == QUIETLY)
-	    write (subshell_pty, " ", 1);
+	    write_all (subshell_pty, " ", 1);
 	/* FIXME: if command is long (>8KB ?) we go comma */
-	write (subshell_pty, command, strlen (command));
-	write (subshell_pty, "\n", 1);
+	write_all (subshell_pty, command, strlen (command));
+	write_all (subshell_pty, "\n", 1);
 	subshell_state = RUNNING_COMMAND;
 	subshell_ready = FALSE;
     }
@@ -767,21 +791,21 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 
     /* The initial space keeps this out of the command history (in bash
        because we set "HISTCONTROL=ignorespace") */
-    write (subshell_pty, " cd ", 4);
+    write_all (subshell_pty, " cd ", 4);
     if (*directory) {
 	char *temp = subshell_name_quote (directory);
 	if (temp) {
-	    write (subshell_pty, temp, strlen (temp));
+	    write_all (subshell_pty, temp, strlen (temp));
 	    g_free (temp);
 	} else {
 	    /* Should not happen unless the directory name is so long
 	       that we don't have memory to quote it.  */
-	    write (subshell_pty, ".", 1);
+	    write_all (subshell_pty, ".", 1);
 	}
     } else {
-	write (subshell_pty, "/", 1);
+	write_all (subshell_pty, "/", 1);
     }
-    write (subshell_pty, "\n", 1);
+    write_all (subshell_pty, "\n", 1);
 
     subshell_state = RUNNING_COMMAND;
     feed_subshell (QUIETLY, FALSE);
@@ -954,7 +978,7 @@ feed_subshell (int how, int fail_on_error)
 	    }
 
 	    if (how == VISIBLY)
-		write (STDOUT_FILENO, pty_buffer, bytes);
+		write_all (STDOUT_FILENO, pty_buffer, bytes);
 	}
 
 	else if (FD_ISSET (subshell_pipe[READ], &read_set))
@@ -996,13 +1020,13 @@ feed_subshell (int how, int fail_on_error)
 
 	    for (i = 0; i < bytes; ++i)
 		if (pty_buffer[i] == subshell_switch_key) {
-		    write (subshell_pty, pty_buffer, i);
+		    write_all (subshell_pty, pty_buffer, i);
 		    if (subshell_ready)
 			subshell_state = INACTIVE;
 		    return TRUE;
 		}
 
-	    write (subshell_pty, pty_buffer, bytes);
+	    write_all (subshell_pty, pty_buffer, bytes);
 	    subshell_ready = FALSE;
 	} else {
 	    return FALSE;
