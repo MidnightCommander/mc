@@ -118,7 +118,7 @@ int ftpfs_use_passive_connections_over_proxy = 0;
 int ftpfs_use_unix_list_options = 1;
 
 /* First "CWD <path>", then "LIST -la ." */
-int ftpfs_first_cd_then_ls;
+int ftpfs_first_cd_then_ls = 1;
 
 /* Use the ~/.netrc */
 int use_netrc = 1;
