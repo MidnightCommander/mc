@@ -1,3 +1,8 @@
+2006-01-24  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* file.c (copy_file_file): In 'Reget' mode take into account
+	the partially retrieved data when drawing the progress bar.
+
 2006-01-23  Egmont Koblinger  <egmont@uhulinux.hu>
 
         * subshell.c: restart write() calls interrupted by sigchld which lead
