@@ -1,3 +1,7 @@
+2006-01-24  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* ftpfs.c (ftpfs_dir_load): Fix a bad ERRNOR call.
+
 2006-01-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* ftpfs.c (ftpfs_first_cd_then_ls): Enable this functionality

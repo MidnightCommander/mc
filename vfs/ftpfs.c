@@ -1317,7 +1317,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	goto again;
     }
     print_vfs_message (_("ftpfs: failed; nowhere to fallback to"));
-    ERRNOR (-1, EACCES);
+    ERRNOR (EACCES, -1);
 }
 
 static int
