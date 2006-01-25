@@ -1,3 +1,15 @@
+2006-01-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* xdirentry.h (LS_LINEAR_PREOPEN): New macro definition.
+	* direntry.c (vfs_s_open): When opening a file in linear mode,
+	defer the actual open operation until the first read call.
+	(vfs_s_read): When reading in linear mode, open the file
+	on the first read operation.
+	(vfs_s_lseek): When in linear mode, make sure that seeking is
+	allowed only before the first read operation.
+	* ftpfs.c (ftpfs_ctl): Make the code aware of LS_LINEAR_PREOPEN.
+	* fish.c (fish_ctl): Likewise.
+
 2006-01-24  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* ftpfs.c (ftpfs_dir_load): Fix a bad ERRNOR call.

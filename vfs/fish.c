@@ -680,7 +680,7 @@ fish_ctl (void *fh, int ctlop, void *arg)
 
 		if (!FH->linear)
 		    vfs_die ("You may not do this");
-		if (FH->linear == LS_LINEAR_CLOSED)
+		if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
 		    return 0;
 
 		v = vfs_s_select_on_two (FH_SUPER->u.fish.sockr, 0);

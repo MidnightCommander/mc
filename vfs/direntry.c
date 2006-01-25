@@ -779,10 +779,10 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     if (IS_LINEAR (flags)) {
 	if (MEDATA->linear_start) {
 	    print_vfs_message (_("Starting linear transfer..."));
-	    if (!MEDATA->linear_start (me, fh, 0)) {
-		g_free (fh);
-		return NULL;
-	    }
+	    fh->linear = LS_LINEAR_PREOPEN;
+	} else {
+	    g_free (fh);
+	    ERRNOR (ENOSYS, NULL);
 	}
     } else if ((MEDATA->fh_open)
 	       && (MEDATA->fh_open (me, fh, flags, mode))) {
@@ -810,6 +810,11 @@ vfs_s_read (void *fh, char *buffer, int count)
 {
     int n;
     struct vfs_class *me = FH_SUPER->me;
+
+    if (FH->linear == LS_LINEAR_PREOPEN) {
+	if (!MEDATA->linear_start (me, FH, FH->pos))
+	    return -1;
+    }
 
     if (FH->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");
@@ -851,6 +856,9 @@ static int
 vfs_s_lseek (void *fh, off_t offset, int whence)
 {
     off_t size = FH->ino->st.st_size;
+
+    if (FH->linear == LS_LINEAR_OPEN)
+        vfs_die ("cannot lseek() after linear_read!");
 
     if (FH->handle != -1){	/* If we have local file opened, we want to work with it */
 	int retval = lseek (FH->handle, offset, whence);

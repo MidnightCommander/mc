@@ -207,5 +207,6 @@ int vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino);
 #define LS_NOT_LINEAR 0
 #define LS_LINEAR_CLOSED 1
 #define LS_LINEAR_OPEN 2
+#define LS_LINEAR_PREOPEN 3
 
 #endif
