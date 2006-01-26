@@ -1934,17 +1934,20 @@ void edit_insert_indent (WEdit * edit, int indent)
 }
 
 static void
-edit_auto_indent (WEdit * edit, int extra, int no_advance)
+edit_auto_indent (WEdit * edit)
 {
     long p;
-    int indent;
+    char c;
     p = edit->curs1;
-    while (isspace (edit_get_byte (edit, p - 1)) && p > 0)	/* move back/up to a line with text */
-	p--;
-    indent = edit_indent_width (edit, edit_bol (edit, p));
-    if (edit->curs_col < indent && no_advance)
-	indent = edit->curs_col;
-    edit_insert_indent (edit, indent + (option_fake_half_tabs ? HALF_TAB_SIZE : TAB_SIZE) * space_width * extra);
+    /* use the previous line as a template */
+    p = edit_move_backward (edit, p, 1);
+    /* copy the leading whitespace of the line */
+    for (;;) {	/* no range check - the line _is_ \n-terminated */
+	c = edit_get_byte (edit, p++);
+	if (c != ' ' && c != '\t')
+	    break;
+	edit_insert (edit, c);
+    }
 }
 
 static void edit_double_newline (WEdit * edit)
@@ -2255,12 +2258,12 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	if (option_auto_para_formatting) {
 	    edit_double_newline (edit);
 	    if (option_return_does_auto_indent)
-		edit_auto_indent (edit, 0, 1);
+		edit_auto_indent (edit);
 	    format_paragraph (edit, 0);
 	} else {
 	    edit_insert (edit, '\n');
 	    if (option_return_does_auto_indent) {
-		edit_auto_indent (edit, 0, 1);
+		edit_auto_indent (edit);
 	    }
 	}
 	break;
