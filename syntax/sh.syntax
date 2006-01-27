@@ -8,7 +8,9 @@ context default
     keyword \\` brightred
     keyword ` brightred
     keyword ; brightcyan
-    keyword $(*) brightgreen
+    keyword $( brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
     keyword ${*} brightgreen
     keyword { brightcyan
     keyword } brightcyan
