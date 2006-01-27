@@ -611,7 +611,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
-    if (sscanf( reply_str, "%d", &fh->u.fish.total )!=1)
+    if (sscanf( reply_str, "%Lu", &fh->u.fish.total )!=1)
 	ERRNOR (E_REMOTE, 0);
     return 1;
 }

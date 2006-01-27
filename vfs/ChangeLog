@@ -1,3 +1,7 @@
+2006-01-27  Thomas Liske  <tholi@fsr.et.tu-dresden.de>
+
+	* fish.c, xdirentry.h: Fix 2 GB file size limit for fish.
+
 2006-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* utilvfs.c (is_year): The range of valid year numbers is

@@ -106,7 +106,8 @@ struct vfs_s_fh {
     int linear;			/* Is that file open with O_LINEAR? */
     union {
 	struct {
-	    int got, total, append;
+	    off_t got, total;
+	    int append;
 	} fish;
 	struct {
 	    int sock, append;
