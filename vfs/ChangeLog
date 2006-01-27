@@ -1,3 +1,8 @@
+2006-01-27  Roland Illig  <roland.illig@gmx.de>
+
+	* mcserv.c: Made mcserv.c work on NetBSD 3.0/i386 with GNU
+	gettext 0.14 installed.
+
 2006-01-27  Leonard den Ottolander <leonard den ottolander nl>
 
 	* utilvfs.c: Do not parse more than 3 date elements to avoid file
