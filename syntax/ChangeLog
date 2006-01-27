@@ -1,3 +1,11 @@
+2006-01-27  Barend  <barend@puknet.puk.ac.za>
+
+	* pascal.syntax: Recognize keywords starting in upper case
+	as well as all caps keywords.
+	Highlight the operators `and', `or', `xor', `shl', `shr',
+	`div' and `mod' in cyan and not white.
+	Highlight operator `=' in cyan instead of lightgray.
+
 2005-12-02  Jindrich Novy  <jnovy@redhat.com>
 
 	* php.syntax: Fixed syntax errors.

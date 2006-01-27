@@ -2,101 +2,293 @@
 
 context default yellow
     keyword whole absolute white
+    keyword whole Absolute white
+    keyword whole ABSOLUTE white
     keyword whole abstract white
-    keyword whole and white
+    keyword whole Abstract white
+    keyword whole ABSTRACT white
+    keyword whole and cyan
+    keyword whole And cyan
+    keyword whole AND cyan
     keyword whole array white
+    keyword whole Array white
+    keyword whole ARRAY white
     keyword whole as white
+    keyword whole As white
+    keyword whole AS white
     keyword whole asm white
+    keyword whole Asm white
+    keyword whole ASM white
     keyword whole assembler white
+    keyword whole Assembler white
+    keyword whole ASSEMBLER white
     keyword whole begin white
+    keyword whole Begin white
+    keyword whole BEGIN white
     keyword whole break white
+    keyword whole Break white
+    keyword whole BREAK white
     keyword whole case white
+    keyword whole Case white
+    keyword whole CASE white
     keyword whole cdecl white
+    keyword whole Cdecl white
+    keyword whole CDECL white
     keyword whole class white
+    keyword whole Class white
+    keyword whole CLASS white
     keyword whole const white
+    keyword whole Const white
+    keyword whole CONST white
     keyword whole continue white
+    keyword whole Continue white
+    keyword whole CONTINUE white
     keyword whole constructor white
+    keyword whole Constructor white
+    keyword whole CONSTRUCTOR white
     keyword whole destructor white
+    keyword whole Destructor white
+    keyword whole DESTRUCTOR white
     keyword whole dispid white
+    keyword whole Dispid white
+    keyword whole DISPID white
     keyword whole dispinterface white
+    keyword whole Dispinterface white
+    keyword whole DISPINTERFACE white
     keyword whole dispose white
-    keyword whole div white
+    keyword whole Dispose white
+    keyword whole DISPOSE white
+    keyword whole div cyan
+    keyword whole Div cyan
+    keyword whole DIV cyan
     keyword whole do white
+    keyword whole Do white
+    keyword whole DO white
     keyword whole downto white
+    keyword whole Downto white
+    keyword whole DOWNTO white
     keyword whole dynamic white
+    keyword whole Dynamic white
+    keyword whole DYNAMIC white
     keyword whole else white
+    keyword whole Else white
+    keyword whole ELSE white
     keyword whole end white
+    keyword whole End white
+    keyword whole END white
     keyword whole except white
+    keyword whole Except white
+    keyword whole EXCEPT white
     keyword whole exit white
+    keyword whole Exit white
+    keyword whole EXIT white
     keyword whole export white
+    keyword whole Export white
+    keyword whole EXPORT white
     keyword whole exports white
+    keyword whole Exports white
+    keyword whole EXPORTS white
     keyword whole external white
+    keyword whole External white
+    keyword whole EXTERNAL white
     keyword whole fail white
+    keyword whole Fail white
+    keyword whole FAIL white
     keyword whole far white
+    keyword whole Far white
+    keyword whole FAR white
     keyword whole false white
+    keyword whole False white
+    keyword whole FALSE white
     keyword whole file white
+    keyword whole File white
+    keyword whole FILE white
     keyword whole finally white
+    keyword whole Finally white
+    keyword whole FINALLY white
     keyword whole for white
+    keyword whole For white
+    keyword whole FOR white
     keyword whole forward white
+    keyword whole Forward white
+    keyword whole FORWARD white
     keyword whole function white
+    keyword whole Function white
+    keyword whole FUNCTION white
     keyword whole goto white
+    keyword whole Goto white
+    keyword whole GOTO white
     keyword whole if white
+    keyword whole If white
+    keyword whole IF white
     keyword whole implementation white
+    keyword whole Implementation white
+    keyword whole IMPLEMENTATION white
     keyword whole in white
+    keyword whole In white
+    keyword whole IN white
     keyword whole inherited white
+    keyword whole Inherited white
+    keyword whole INHERITED white
     keyword whole initialization white
+    keyword whole Initialization white
+    keyword whole INITIALIZATION white
     keyword whole inline white
+    keyword whole Inline white
+    keyword whole INLINE white
     keyword whole interface white
+    keyword whole Interface white
+    keyword whole INTERFACE white
     keyword whole interrupt white
+    keyword whole Interrupt white
+    keyword whole INTERRUPT white
     keyword whole is white
+    keyword whole Is white
+    keyword whole IS white
     keyword whole label white
+    keyword whole Label white
+    keyword whole LABEL white
     keyword whole library white
-    keyword whole mod white
+    keyword whole Library white
+    keyword whole LIBRARY white
+    keyword whole mod cyan    
+    keyword whole Mod cyan   
+    keyword whole MOD cyan   
     keyword whole near white
+    keyword whole Near white
+    keyword whole NEAR white
     keyword whole new white
+    keyword whole New white
+    keyword whole NEW white
     keyword whole nil white
+    keyword whole Nil white
+    keyword whole NIL white
     keyword whole not white
+    keyword whole Not white
+    keyword whole NOT white
     keyword whole object white
+    keyword whole Object white
+    keyword whole OBJECT white
     keyword whole of white
+    keyword whole Of white
+    keyword whole OF white
     keyword whole on white
+    keyword whole On white
+    keyword whole ON white
     keyword whole operator white
-    keyword whole or white
+    keyword whole Operator white
+    keyword whole OPERATOR white
+    keyword whole or cyan
+    keyword whole Or cyan
+    keyword whole OR cyan 
     keyword whole otherwise white
+    keyword whole Otherwise white
+    keyword whole OTHERWISE white
     keyword whole override white
+    keyword whole Override white
+    keyword whole OVERRIDE white
     keyword whole packed white
+    keyword whole Packed white
+    keyword whole PACKED white
     keyword whole pascal white
+    keyword whole Pascal white
+    keyword whole PASCAL white
     keyword whole private white
+    keyword whole Private white
+    keyword whole PRIVATE white
     keyword whole procedure white
+    keyword whole Procedure white
+    keyword whole PROCEDURE white
     keyword whole program white
+    keyword whole Program white
+    keyword whole PROGRAM white
     keyword whole property white
+    keyword whole Property white
+    keyword whole PROPERTY white
     keyword whole protected white
+    keyword whole Protected white
+    keyword whole PROTECTED white
     keyword whole public white
+    keyword whole Public white
+    keyword whole PUBLIC white
     keyword whole published white
+    keyword whole Published white
+    keyword whole PUBLISHED white
     keyword whole raise white
+    keyword whole Raise white
+    keyword whole RAISE white
     keyword whole readonly white
+    keyword whole Readonly white
+    keyword whole READONLY white
     keyword whole record white
+    keyword whole Record white
+    keyword whole RECORD white
     keyword whole register white
+    keyword whole Register white
+    keyword whole REGISTER white
     keyword whole repeat white
+    keyword whole Repeat white
+    keyword whole REPEAT white
     keyword whole safecall white
+    keyword whole Safecall white
+    keyword whole SAFECALL white
     keyword whole self white
-    keyword whole set white
-    keyword whole shl white
-    keyword whole shr white
+    keyword whole Self white
+    keyword whole SELF white
+    keyword whole set cyan
+    keyword whole Set cyan
+    keyword whole SET cyan
+    keyword whole shl cyan
+    keyword whole Shl cyan
+    keyword whole SHL cyan
+    keyword whole shr 
+    keyword whole Shr 
+    keyword whole SHR 
     keyword whole stdcall white
+    keyword whole Stdcall white
+    keyword whole STDCALL white
     keyword whole string white
+    keyword whole String white
+    keyword whole STRING white
     keyword whole then white
+    keyword whole Then white
+    keyword whole THEN white
     keyword whole to white
+    keyword whole To white
+    keyword whole TO white
     keyword whole true white
+    keyword whole True white
+    keyword whole TRUE white
     keyword whole try white
+    keyword whole Try white
+    keyword whole TRY white
     keyword whole type white
+    keyword whole Type white
+    keyword whole TYPE white
     keyword whole unit white
+    keyword whole Unit white
+    keyword whole UNIT white
     keyword whole until white
+    keyword whole Until white
+    keyword whole UNTIL white
     keyword whole uses white
+    keyword whole Uses white
+    keyword whole USES white
     keyword whole var white
+    keyword whole Var white
+    keyword whole VAR white
     keyword whole virtual white
+    keyword whole Virtual white
+    keyword whole VIRTUAL white
     keyword whole while white
+    keyword whole While white
+    keyword whole WHILE white
     keyword whole with white
-    keyword whole xor white
+    keyword whole With white
+    keyword whole WITH white
+    keyword whole xor cyan
+    keyword whole Xor cyan
+    keyword whole XOR cyan
     keyword whole .. white
     
     keyword // brightgreen
@@ -107,7 +299,7 @@ context default yellow
     keyword - cyan
     keyword / cyan
     keyword % lightgray
-    keyword = lightgray
+    keyword = cyan
     keyword [ lightgray
     keyword ] lightgray
     keyword ( lightgray
