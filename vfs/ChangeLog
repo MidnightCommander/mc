@@ -1,3 +1,9 @@
+2006-01-27  Roland Illig  <roland.illig@gmx.de>
+
+	* utilvfs.c (is_year): The range of valid year numbers is
+	restricted to 1970 .. 2015 to reduce the number of parsing
+	errors.
+
 2006-01-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* xdirentry.h (LS_LINEAR_PREOPEN): New macro definition.
