@@ -944,17 +944,12 @@ void
 edit_block_copy_cmd (WEdit *edit)
 {
     long start_mark, end_mark, current = edit->curs1;
-    int size, x;
+    int size;
     unsigned char *copy_buf;
 
     edit_update_curs_col (edit);
-    x = edit->curs_col;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return;
-    if (column_highlighting)
-	if ((x >= edit->column1 && x < edit->column2)
-	    || (x > edit->column2 && x <= edit->column1))
-	    return;
 
     copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
 
