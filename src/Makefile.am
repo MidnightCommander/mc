@@ -1,11 +1,12 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
 
 localedir = $(datadir)/locale
+pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc mcmfmt
 
 if CONS_SAVER
-pkglib_PROGRAMS = cons.saver
+pkglibexec_PROGRAMS = cons.saver
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
 	-DLIBDIR=\""$(pkglibdir)"\"
 else

@@ -1,3 +1,9 @@
+2006-01-27  Roland Illig  <roland.illig@gmx.de>
+
+	* Makefile.am: cons.saver is installed in $(pkglibexecdir), not
+	in $(pkglibdir), to conform to the usual directory hierarchy
+	standards. Fixes #2796.
+
 2006-01-24  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* file.c (copy_file_file): In 'Reget' mode take into account
