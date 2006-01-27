@@ -1,0 +1,487 @@
+context default
+    keyword whole body white
+    keyword whole div white
+    keyword whole p white
+    keyword whole a white
+    keyword whole h1 white
+    keyword whole h2 white
+    keyword whole h2 white
+    keyword whole h3 white
+    keyword whole h4 white
+    keyword whole h5 white
+    keyword whole h6 white
+    keyword whole 'font' white
+    keyword whole br white
+    keyword whole table white
+    keyword whole td white
+    keyword whole th white
+    keyword whole tr white
+    keyword whole u white
+    keyword whole i white
+    keyword whole b white
+    keyword whole address white
+    keyword whole big white
+    keyword whole small white
+    keyword whole sub white
+    keyword whole sup white
+    keyword whole img white
+    keyword whole form white
+    keyword whole textarea white
+    keyword whole input white
+    keyword whole select white
+    keyword whole option white
+    keyword whole optgroup white
+
+
+    keyword  \:active		 brightmagenta
+    keyword  \:after 		 brightmagenta
+    keyword  \:visited		 brightmagenta
+    keyword  \:before		 brightmagenta
+    keyword  \:first-child	 brightmagenta
+    keyword  \:first-letter 	 brightmagenta
+    keyword  \:first-line 	 brightmagenta
+    keyword  \:focus 		 brightmagenta
+    keyword  \:lang 		 brightmagenta
+    keyword  \:link 		 brightmagenta
+    keyword  \:hover 		 brightmagenta
+
+
+    keyword whole background-attachment 		yellow
+    keyword whole background-color 			yellow
+    keyword whole background-image 			yellow
+    keyword whole background-position 			yellow
+    keyword whole background-repeat 			yellow
+    keyword whole background 				yellow
+    keyword whole bidi-override 			yellow
+    keyword whole border-bottom 			yellow
+    keyword whole border-bottom-color 			yellow
+    keyword whole border-bottom-style 			yellow
+    keyword whole border-bottom-width 			yellow
+    keyword whole border-collapse 			yellow
+    keyword whole border-color 				yellow
+    keyword whole border-left 				yellow
+    keyword whole border-left-color 			yellow
+    keyword whole border-left-style 			yellow
+    keyword whole border-left-width 			yellow
+    keyword whole border-right 				yellow
+    keyword whole border-right-color 			yellow
+    keyword whole border-right-style 			yellow
+    keyword whole border-right-width 			yellow
+    keyword whole border-spacing 			yellow
+    keyword whole border-style 				yellow
+    keyword whole border-top 				yellow
+    keyword whole border-top-color 			yellow
+    keyword whole border-top-style 			yellow
+    keyword whole border-top-width 			yellow
+    keyword whole border-width 				yellow
+    keyword whole border 				yellow
+    keyword whole bottom 				yellow
+    keyword whole caption-side 				yellow
+    keyword whole clear 				yellow
+    keyword whole clip 					yellow
+    keyword whole color 				yellow
+    keyword whole content 				yellow
+    keyword whole counter-increment 			yellow
+    keyword whole cursor 				yellow
+    keyword whole direction 				yellow
+    keyword whole display 				yellow
+    keyword whole empty-cells 				yellow
+    keyword whole fixed 				yellow
+    keyword whole float 				yellow
+    keyword whole font-size-adjust 			yellow
+    keyword whole font-stretch 				yellow
+    keyword whole font-family 				yellow
+    keyword whole font-size 				yellow
+    keyword whole font-family 				yellow
+    keyword whole font-style 				yellow
+    keyword whole font-variant 				yellow
+    keyword whole font-weight				yellow
+    keyword whole font	 				yellow
+    keyword whole generic-family 			yellow
+    keyword whole height 				yellow
+    keyword whole identifier 				yellow
+    keyword whole justify 				yellow
+    keyword whole left 					yellow
+    keyword whole length 				yellow
+    keyword whole letter-spacing 			yellow
+    keyword whole line-height 				yellow
+    keyword whole list-style-image 			yellow
+    keyword whole list-style-position 			yellow
+    keyword whole list-style-type 			yellow
+    keyword whole list-style 				yellow
+    keyword whole margin-left 				yellow
+    keyword whole margin-top 				yellow
+    keyword whole margin 				yellow
+    keyword whole marker-offset 			yellow
+    keyword whole max-height 				yellow
+    keyword whole max-width 				yellow
+    keyword whole min-height 				yellow
+    keyword whole min-width 				yellow
+    keyword whole nowrap 				yellow
+    keyword whole outline-color 			yellow
+    keyword whole outline-style 			yellow
+    keyword whole outline-width 			yellow
+    keyword whole outline 				yellow
+    keyword whole padding-left 				yellow
+    keyword whole padding-top 				yellow
+    keyword whole padding 				yellow
+    keyword whole position 				yellow
+    keyword whole quotes 				yellow
+    keyword whole right 				yellow
+    keyword whole table-caption 			yellow
+    keyword whole table-layout 				yellow
+    keyword whole text-align 				yellow
+    keyword whole text-decoration 			yellow
+    keyword whole text-indent 				yellow
+    keyword whole text-shadow 				yellow
+    keyword whole text-transform 			yellow
+    keyword whole top 					yellow
+    keyword whole unicode-bidi 				yellow
+    keyword whole vertical-align 			yellow
+    keyword whole visibility 				yellow
+    keyword whole white-space 				yellow
+    keyword whole width 				yellow
+    keyword whole word-spacing 				yellow
+    
+
+    keyword whole left				 brightgreen
+    keyword whole right				 brightgreen
+    keyword whole center 			 brightgreen
+    keyword whole top 				 brightgreen
+    keyword whole bottom 			 brightgreen
+    keyword whole bold 				 brightgreen
+    keyword whole small				 brightgreen
+    keyword whole smaller			 brightgreen
+    keyword whole italic			 brightgreen
+    keyword whole bolder			 brightgreen
+    keyword whole underline			 brightgreen
+
+    keyword whole none 				 brightgreen
+    keyword whole auto 				 brightgreen
+    keyword whole blink 			 brightgreen
+    keyword whole hide 				 brightgreen
+
+    keyword whole thin 				 brightgreen
+    keyword whole medium 			 brightgreen
+    keyword whole thick 			 brightgreen
+
+    keyword whole disc 				 brightgreen
+    keyword whole circle 			 brightgreen
+    keyword whole square 			 brightgreen
+    keyword whole decimal 			 brightgreen
+    keyword whole decimal-leading-zero 		 brightgreen
+    keyword whole lower-roman 			 brightgreen
+    keyword whole upper-roman 			 brightgreen
+    keyword whole lower-alpha 			 brightgreen
+    keyword whole upper-alpha 			 brightgreen
+    keyword whole lower-greek 			 brightgreen
+    keyword whole lower-latin 			 brightgreen
+    keyword whole upper-latin 			 brightgreen
+    keyword whole hebrew 			 brightgreen
+    keyword whole armenian 			 brightgreen
+    keyword whole georgian 			 brightgreen
+    keyword whole cjk-ideographic 		 brightgreen
+    keyword whole hiragana 			 brightgreen
+    keyword whole katakana 			 brightgreen
+    keyword whole hiragana-iroha 		 brightgreen
+    keyword whole katakana-iroha 		 brightgreen 
+
+    keyword whole invert 			 brightgreen
+    keyword whole oblique 			 brightgreen
+    keyword whole no-close-quote 		 brightgreen
+    keyword whole no-repeat 			 brightgreen
+    keyword whole small-caps 			 brightgreen
+    keyword whole transparent 			 brightgreen
+
+    keyword whole visible 			 brightgreen
+    keyword whole hidden 			 brightgreen
+    keyword whole dotted 			 brightgreen
+
+    keyword whole dashed 			 brightgreen
+    keyword whole solid 			 brightgreen
+    keyword whole double 			 brightgreen
+    keyword whole groove 			 brightgreen
+    keyword whole ridge 			 brightgreen
+    keyword whole inset 			 brightgreen
+    keyword whole outset 			 brightgreen
+
+    keyword whole auto 				 brightgreen
+    keyword whole crosshair 			 brightgreen
+    keyword whole default 			 brightgreen
+    keyword whole pointer 			 brightgreen
+    keyword whole move 				 brightgreen
+    keyword whole e-resize 			 brightgreen
+    keyword whole ne-resize 			 brightgreen
+    keyword whole nw-resize 			 brightgreen
+    keyword whole n-resize 			 brightgreen
+    keyword whole se-resize 			 brightgreen
+    keyword whole sw-resize 			 brightgreen
+    keyword whole s-resize 			 brightgreen
+    keyword whole w-resize 			 brightgreen
+    keyword whole text 				 brightgreen
+    keyword whole wait 				 brightgreen
+    keyword whole help 				 brightgreen
+
+    keyword whole inline 			 brightgreen
+    keyword whole block 			 brightgreen
+    keyword whole list-item 			 brightgreen
+    keyword whole run-in 			 brightgreen
+    keyword whole compact 			 brightgreen
+    keyword whole marker 			 brightgreen
+    keyword whole table 			 brightgreen
+    keyword whole inline-table 			 brightgreen
+    keyword whole table-row-group 		 brightgreen
+    keyword whole table-header-group 		 brightgreen
+    keyword whole table-footer-group 		 brightgreen
+    keyword whole table-row 			 brightgreen
+    keyword whole table-column-group 		 brightgreen
+    keyword whole table-column 			 brightgreen
+    keyword whole table-cell 			 brightgreen
+    keyword whole table-caption 		 brightgreen
+
+    keyword whole small 			 brightgreen
+    keyword whole medium 			 brightgreen
+    keyword whole large 			 brightgreen
+
+    keyword whole normal 			 brightgreen
+    keyword whole bold 				 brightgreen
+    keyword whole bolder 			 brightgreen
+    keyword whole lighter 			 brightgreen
+
+    keyword whole open-quote 			 brightgreen
+    keyword whole close-quote 			 brightgreen
+    keyword whole no-open-quote 		 brightgreen
+    keyword whole no-close-quote 		 brightgreen
+
+    keyword whole dotted 			 brightgreen
+    keyword whole dashed 			 brightgreen
+    keyword whole solid 			 brightgreen
+    keyword whole double 			 brightgreen
+    keyword whole groove 			 brightgreen
+    keyword whole ridge 			 brightgreen
+    keyword whole inset 			 brightgreen
+    keyword whole outset 			 brightgreen
+
+    keyword whole baseline 			 brightgreen
+    keyword whole sub 				 brightgreen
+    keyword whole super 			 brightgreen
+    keyword whole top 				 brightgreen
+    keyword whole text-top 			 brightgreen
+    keyword whole middle 			 brightgreen
+    keyword whole bottom 			 brightgreen
+    keyword whole text-bottom 			 brightgreen
+
+    keyword whole collapse 			 brightgreen
+    keyword whole separate 			 brightgreen
+
+    keyword whole capitalize 			 brightgreen
+    keyword whole uppercase 			 brightgreen
+    keyword whole lowercase 			 brightgreen
+
+
+    keyword whole pre 				 brightgreen
+    keyword whole nowrap 			 brightgreen
+
+
+
+
+
+
+    keyword whole aliceblue			 brightgreen
+    keyword whole antiquewhite			 brightgreen
+    keyword whole aqua				 brightgreen
+    keyword whole aquamarine			 brightgreen
+    keyword whole azure				 brightgreen
+    keyword whole beige				 brightgreen
+    keyword whole bisque			 brightgreen
+    keyword whole black				 brightgreen
+    keyword whole blanchedalmond		 brightgreen
+    keyword whole blue				 brightgreen
+    keyword whole blueviolet			 brightgreen
+    keyword whole brown				 brightgreen
+    keyword whole burlywood			 brightgreen
+    keyword whole cadetblue			 brightgreen
+    keyword whole chartreuse			 brightgreen
+    keyword whole chocolate			 brightgreen
+    keyword whole coral				 brightgreen
+    keyword whole cornflowerblue		 brightgreen
+    keyword whole cornsilk			 brightgreen
+    keyword whole crimson			 brightgreen
+    keyword whole cyan				 brightgreen
+    keyword whole darkblue			 brightgreen
+    keyword whole darkcyan			 brightgreen
+    keyword whole darkgoldenrod			 brightgreen
+    keyword whole darkgray			 brightgreen
+    keyword whole darkgreen			 brightgreen
+    keyword whole darkkhaki			 brightgreen
+    keyword whole darkmagenta			 brightgreen
+    keyword whole darkolivegreen		 brightgreen
+    keyword whole darkorange			 brightgreen
+    keyword whole darkorchid			 brightgreen
+    keyword whole darkred			 brightgreen
+    keyword whole darksalmon			 brightgreen
+    keyword whole darkseagreen			 brightgreen
+    keyword whole darkslateblue			 brightgreen
+    keyword whole darkslategray			 brightgreen
+    keyword whole darkturquoise			 brightgreen
+    keyword whole darkviolet			 brightgreen
+    keyword whole deeppink			 brightgreen
+    keyword whole deepskyblue			 brightgreen
+    keyword whole dimgray			 brightgreen
+    keyword whole dodgerblue			 brightgreen
+    keyword whole feldspar			 brightgreen
+    keyword whole firebrick			 brightgreen
+    keyword whole floralwhite			 brightgreen
+    keyword whole forestgreen			 brightgreen
+    keyword whole fuchsia			 brightgreen
+    keyword whole gainsboro			 brightgreen
+    keyword whole ghostwhite			 brightgreen
+    keyword whole gold				 brightgreen
+    keyword whole goldenrod			 brightgreen
+    keyword whole gray				 brightgreen
+    keyword whole green				 brightgreen
+    keyword whole greenyellow			 brightgreen
+    keyword whole honeydew			 brightgreen
+    keyword whole hotpink			 brightgreen
+    keyword whole indianred			 brightgreen
+    keyword whole indigo			 brightgreen
+    keyword whole ivory				 brightgreen
+    keyword whole khaki				 brightgreen
+    keyword whole lavender			 brightgreen
+    keyword whole lavenderblush			 brightgreen
+    keyword whole lawngreen			 brightgreen
+    keyword whole lemonchiffon			 brightgreen
+    keyword whole lightblue			 brightgreen
+    keyword whole lightcoral			 brightgreen
+    keyword whole lightcyan			 brightgreen
+    keyword whole lightgoldenrodyellow		 brightgreen
+    keyword whole lightgrey			 brightgreen
+    keyword whole lightgreen			 brightgreen
+    keyword whole lightpink			 brightgreen
+    keyword whole lightsalmon			 brightgreen
+    keyword whole lightseagreen			 brightgreen
+    keyword whole lightskyblue			 brightgreen
+    keyword whole lightslateblue		 brightgreen
+    keyword whole lightslategray		 brightgreen
+    keyword whole lightsteelblue		 brightgreen
+    keyword whole lightyellow			 brightgreen
+    keyword whole lime				 brightgreen
+    keyword whole limegreen			 brightgreen
+    keyword whole linen				 brightgreen
+    keyword whole magenta			 brightgreen
+    keyword whole maroon			 brightgreen
+    keyword whole mediumaquamarine		 brightgreen
+    keyword whole mediumblue			 brightgreen
+    keyword whole mediumorchid			 brightgreen
+    keyword whole mediumpurple			 brightgreen
+    keyword whole mediumseagreen		 brightgreen
+    keyword whole mediumslateblue		 brightgreen
+    keyword whole mediumspringgreen		 brightgreen
+    keyword whole mediumturquoise		 brightgreen
+    keyword whole mediumvioletred		 brightgreen
+    keyword whole midnightblue			 brightgreen
+    keyword whole mintcream			 brightgreen
+    keyword whole mistyrose			 brightgreen
+    keyword whole moccasin			 brightgreen
+    keyword whole navajowhite			 brightgreen
+    keyword whole navy				 brightgreen
+    keyword whole oldlace			 brightgreen
+    keyword whole olive				 brightgreen
+    keyword whole olivedrab			 brightgreen
+    keyword whole orange			 brightgreen
+    keyword whole orangered			 brightgreen
+    keyword whole orchid			 brightgreen
+    keyword whole palegoldenrod			 brightgreen
+    keyword whole palegreen			 brightgreen
+    keyword whole paleturquoise			 brightgreen
+    keyword whole palevioletred			 brightgreen
+    keyword whole papayawhip			 brightgreen
+    keyword whole peachpuff			 brightgreen
+    keyword whole peru				 brightgreen
+    keyword whole pink				 brightgreen
+    keyword whole plum				 brightgreen
+    keyword whole powderblue			 brightgreen
+    keyword whole purple			 brightgreen
+    keyword whole red				 brightgreen
+    keyword whole rosybrown			 brightgreen
+    keyword whole royalblue			 brightgreen
+    keyword whole saddlebrown			 brightgreen
+    keyword whole salmon			 brightgreen
+    keyword whole sandybrown			 brightgreen
+    keyword whole seagreen			 brightgreen
+    keyword whole seashell			 brightgreen
+    keyword whole sienna			 brightgreen
+    keyword whole silver			 brightgreen
+    keyword whole skyblue			 brightgreen
+    keyword whole slateblue			 brightgreen
+    keyword whole slategray			 brightgreen
+    keyword whole snow				 brightgreen
+    keyword whole springgreen			 brightgreen
+    keyword whole steelblue			 brightgreen
+    keyword whole tan				 brightgreen
+    keyword whole teal				 brightgreen
+    keyword whole thistle			 brightgreen
+    keyword whole tomato			 brightgreen
+    keyword whole turquoise			 brightgreen
+    keyword whole violet			 brightgreen
+    keyword whole violetred			 brightgreen
+    keyword whole wheat				 brightgreen
+    keyword whole white				 brightgreen
+    keyword whole whitesmoke			 brightgreen
+    keyword whole yellow			 brightgreen
+    keyword whole yellowgreen			 brightgreen
+
+
+
+
+    keyword counter(\{*\}*)		 magenta
+    keyword counters(\{*\}*)		 magenta
+    keyword url(\{*\}*)			 magenta
+    keyword rgb(\{*\}*)			 magenta
+
+    keyword { yellow
+    keyword } yellow
+
+    keyword whole '.' white
+
+    keyword /\* brown
+    keyword \*/ brown
+
+
+
+    keyword whole Arial brightgreen
+    keyword whole arial brightgreen
+    keyword whole Trebuchet MS brightgreen
+    keyword whole trebuchet ms brightgreen
+    keyword whole verdana brightgreen
+    keyword whole Verdana brightgreen
+    keyword whole sans-serif brightgreen
+    keyword whole serif brightgreen
+    keyword whole tahoma brightgreen
+    keyword whole Tahoma brightgreen
+    keyword whole Helvetica brightgreen
+    keyword whole helvetica brightgreen
+
+    keyword #\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+
+    keyword \{0123456789\}*px brightgreen
+    keyword \{0123456789\}*em brightgreen
+    keyword \{0123456789\}*cm brightgreen
+    keyword \{0123456789\}*mm brightgreen
+    keyword \{0123456789\}*ex brightgreen
+    keyword \{0123456789\}*pt brightgreen
+    keyword \{0123456789\}*pc brightgreen
+    keyword \{0123456789\}*% brightred
+
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+

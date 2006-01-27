@@ -4,8 +4,9 @@ SYNTAXFILES =			\
 	aspx.syntax		\
 	assembler.syntax	\
 	c.syntax		\
-	cs.syntax		\
 	changelog.syntax	\
+	cs.syntax		\
+	css.syntax		\
 	diff.syntax		\
 	dos.syntax		\
 	eiffel.syntax		\

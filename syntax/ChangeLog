@@ -1,4 +1,9 @@
-2006-01-17  Roland Illig  <roland.illig@gmx.de>
+2006-01-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* Makefile.am, Syntax, css.syntax: Added css.syntax by Horvath
+	Peter Aron.
+
+2006-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* sh.syntax: Since $(...) isn't the same as ${...}, don't handle
 	them the same way. Instead, "$(", "(" and ")" are highlighted in
