@@ -411,12 +411,6 @@ is_year (char *str, struct tm *tim)
     return 1;
 }
 
-/*
- * FIXME: this is broken. Consider following entry:
- * -rwx------   1 root     root            1 Aug 31 10:04 2904 1234
- * where "2904 1234" is filename. Well, this code decodes it as year :-(.
- */
-
 gboolean
 vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
 {
@@ -586,14 +580,13 @@ vfs_parse_filedate (int idx, time_t *t)
 	    return 0;		/* No day */
 
     } else {
-	/* We usually expect:
-	   Mon DD hh:mm
-	   Mon DD  YYYY
+	/* We expect:
+	   3 fields max or we'll see oddities with certain file names.
+	   So both year and time is not allowed.
+	   Mon DD hh:mm[:ss]
+	   Mon DD YYYY
 	   But in case of extfs we allow these date formats:
-	   Mon DD YYYY hh:mm
-	   Mon DD hh:mm YYYY
-	   Wek Mon DD hh:mm:ss YYYY
-	   MM-DD-YY hh:mm
+	   MM-DD-YY hh:mm[:ss]
 	   where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
 	   YYYY four digit year, hh, mm, ss two digit hour, minute or second. */
 
@@ -629,26 +622,12 @@ vfs_parse_filedate (int idx, time_t *t)
 	}
     }
 
-    /* Here we expect to find time and/or year */
-
-    if (is_num (idx)) {
-	if (is_time (columns[idx], &tim)
-	    || (got_year = is_year (columns[idx], &tim))) {
+    /* Here we expect to find time or year */
+    if (is_num (idx) && (is_time (columns[idx], &tim)
+	    || (got_year = is_year (columns[idx], &tim))))
 	    idx++;
-
-	    /* This is a special case for ctime() or Mon DD YYYY hh:mm */
-	    if (is_num (idx) && (columns[idx + 1][0])) {
-		if (got_year) {
-		    if (is_time (columns[idx], &tim))
-			idx++;	/* time also */
-		} else {
-		    if ((got_year = is_year (columns[idx], &tim)))
-			idx++;	/* year also */
-		}
-	    }
-	}			/* only time or date */
-    } else
-	return 0;		/* Nor time or date */
+    else
+	return 0;		/* Neither time nor date */
 
     /*
      * If the date is less than 6 months in the past, it is shown without year
