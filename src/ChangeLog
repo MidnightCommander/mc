@@ -4,6 +4,10 @@
 	in $(pkglibdir), to conform to the usual directory hierarchy
 	standards. Fixes #2796.
 
+	* Makefile.am, logging.h, logging.c: Added a new logging module
+	to allow easy tracing of function calls and other events. It is
+	only intended for debugging.
+
 2006-01-24  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* file.c (copy_file_file): In 'Reget' mode take into account
