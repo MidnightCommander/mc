@@ -780,9 +780,6 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	if (MEDATA->linear_start) {
 	    print_vfs_message (_("Starting linear transfer..."));
 	    fh->linear = LS_LINEAR_PREOPEN;
-	} else {
-	    g_free (fh);
-	    ERRNOR (ENOSYS, NULL);
 	}
     } else if ((MEDATA->fh_open)
 	       && (MEDATA->fh_open (me, fh, flags, mode))) {

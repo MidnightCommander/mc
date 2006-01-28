@@ -1,3 +1,9 @@
+2006-01-28  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* direntry.c (vfs_s_open): Be less restrictive when
+	O_LINEAR is specified and `linear_start' is not
+	implemented.
+
 2006-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* mcserv.c: Made mcserv.c work on NetBSD 3.0/i386 with GNU
