@@ -2,7 +2,7 @@
 
 	* cmd.c (toggle_listing_cmd): Included the brief listing mode in
 	the list of listing modes that can be switched through using
-	Alt-t.
+	Alt-t. Patch provided in #10557. Fixes #10557.
 
 2006-01-27  Roland Illig  <roland.illig@gmx.de>
 
