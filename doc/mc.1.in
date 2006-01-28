@@ -390,8 +390,9 @@ again, the next match is searched for.
 .TP
 .B Alt-t
 toggle the current display listing to show the next display listing
-mode.  With this it is possible to quickly switch from long listing
-to regular listing and the user defined listing mode.
+mode.
+With this it is possible to quickly switch to brief listing, long
+listing, user defined listing mode, and back to the default.
 .TP
 .B C-\\\\ (control-backslash)
 show the
