@@ -33,15 +33,20 @@
 /*** file scope functions **********************************************/
 
 static gboolean
-logging_enabled(void)
+is_logging_enabled(void)
 {
+	static gboolean logging_initialized = FALSE;
+	static gboolean logging_enabled = FALSE;
 	char *mc_ini;
-	gboolean retval;
 
-	mc_ini = g_strdup_printf("%s/%s", home_dir, PROFILE_NAME);
-	retval = get_int(mc_ini, "development.enable_logging", FALSE);
-	g_free(mc_ini);
-	return retval;
+	if (!logging_initialized) {
+		mc_ini = g_strdup_printf("%s/%s", home_dir, PROFILE_NAME);
+		logging_enabled =
+		    get_int(mc_ini, "development.enable_logging", FALSE);
+		g_free(mc_ini);
+		logging_initialized = TRUE;
+	}
+	return logging_enabled;
 }
 
 /*** public functions **************************************************/
@@ -53,7 +58,7 @@ mc_log(const char *fmt, ...)
 	FILE *f;
 	char *logfilename;
 
-	if (logging_enabled) {
+	if (is_logging_enabled()) {
 		va_start(args, fmt);
 		logfilename = g_strdup_printf("%s/.mc/log", home_dir);
 		if ((f = fopen(logfilename, "a")) != NULL) {
