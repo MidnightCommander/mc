@@ -1,3 +1,8 @@
+2006-01-28  Roland Illig  <roland.illig@gmx.de>
+
+	* sh.syntax: Only make $_ red if it appears as a whole word.
+	$_foo is a regular variable.
+
 2006-01-27  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* Makefile.am, Syntax, css.syntax: Added css.syntax by Horvath

@@ -22,7 +22,7 @@ context default
     keyword $- brightred
     keyword $$ brightred
     keyword $! brightred
-    keyword $_ brightred
+    keyword whole $_ brightred
 
     keyword wholeright $\[0123456789\] brightred
 
