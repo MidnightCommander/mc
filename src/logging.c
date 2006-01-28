@@ -1,7 +1,7 @@
 /*
    Provides a log file to ease tracing the program.
 
-   Copyright (C) 2005 Roland Illig <roland.illig@gmx.de>.
+   Copyright (C) 2006 Roland Illig <roland.illig@gmx.de>.
 
    This file is part of the Midnight Commander.
 
