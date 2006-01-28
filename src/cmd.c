@@ -1351,22 +1351,7 @@ toggle_listing_cmd (void)
 {
     int current = get_current_index ();
     WPanel *p = (WPanel *) get_panel_widget (current);
-    int list_mode = p->list_type;
-    int m;
-    
-    switch (list_mode){
-    case list_full:
-    case list_brief:
-	m = list_long;
-	break;
-    case list_long:
-	m = list_user;
-	break;
-    default:
-	m = list_full;
-    }
-    if (set_basic_panel_listing_to (current, m))
-	return;
-    set_basic_panel_listing_to (current, list_full);
+
+    set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
 }
 

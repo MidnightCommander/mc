@@ -1,3 +1,9 @@
+2006-01-28  Roland Illig  <roland.illig@gmx.de>
+
+	* cmd.c (toggle_listing_cmd): Included the brief listing mode in
+	the list of listing modes that can be switched through using
+	Alt-t.
+
 2006-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* Makefile.am: cons.saver is installed in $(pkglibexecdir), not
