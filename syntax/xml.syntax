@@ -40,9 +40,7 @@ context <\? \?> lightgray black
 context < > white
 	keyword \sxmlns\:*\="+" brightred
 	keyword \sxmlns\="+" brightred
-	keyword \s+\= yellow
+	keyword \s*= yellow
 	keyword '*' brightcyan
 	keyword "*" brightcyan
 	spellcheck
-
-

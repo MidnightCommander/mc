@@ -1,3 +1,8 @@
+2006-01-29  Roland Illig  <roland.illig@gmx.de>
+
+	* xml.syntax: Attribute names only reach upto the next "=", not
+	further.
+
 2006-01-28  Roland Illig  <roland.illig@gmx.de>
 
 	* sh.syntax: Only make $_ red if it appears as a whole word.
