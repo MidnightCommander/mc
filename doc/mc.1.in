@@ -1731,10 +1731,10 @@ through a link will move you to the current directory's real parent
 and not to the directory where the link was present.
 .PP
 .I Safe delete.
-If this option is enabled, deleting files unintentionally becomes more
-difficult.  The default selection in the confirmation dialogs for
-deletion changes from "Yes" to "No".  This option is disabled by
-default.
+If this option is enabled, deleting files and directory hotlist entries
+unintentionally becomes more difficult.  The default selection in the
+confirmation dialogs for deletion changes from "Yes" to "No".
+This option is disabled by default.
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
@@ -1783,7 +1783,8 @@ option.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this menu you configure the confirmation options for file deletion,
-overwriting, execution by pressing enter and quitting the program.
+directory hotlist entries deletion, overwriting, execution by pressing
+enter and quitting the program.
 .\"NODE "    Display bits"
 .SH "    Display bits"
 This is used to configure the range of visible characters on the

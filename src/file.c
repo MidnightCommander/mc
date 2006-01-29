@@ -86,9 +86,6 @@ int verbose = 1;
  */
 int file_op_compute_totals = 1;
 
-/* If on, default for "No" in delete operations */
-int safe_delete = 0;
-
 /* This is a hard link cache */
 struct link {
     struct link *next;

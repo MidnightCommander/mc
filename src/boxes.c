@@ -361,10 +361,11 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     return result;
 }
 
-#define CONFY 10
+#define CONFY 11
 #define CONFX 46
 
 static int my_delete;
+static int my_directory_hotlist_delete;
 static int my_overwrite;
 static int my_execute;
 static int my_exit;
@@ -375,6 +376,8 @@ static QuickWidget conf_widgets [] = {
 { quick_button,   4, 6, 3, CONFY, N_("&OK"),
       0, B_ENTER, 0, 0, "o" },
 
+{ quick_checkbox, 1, 13, 7, CONFY, N_(" confirm di&Rectory hotlist delete "),
+      11, 0, &my_directory_hotlist_delete, NULL, NULL },
 { quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
       9, 0, &my_exit, 0, "e" },
 { quick_checkbox, 1, 13, 5, CONFY, N_(" confirm e&Xecute "),
@@ -440,12 +443,14 @@ confirm_box (void)
     my_overwrite = confirm_overwrite;
     my_execute   = confirm_execute;
     my_exit      = confirm_exit;
+    my_directory_hotlist_delete = confirm_directory_hotlist_delete;
 
     if (quick_dialog (&confirmation) != B_CANCEL){
 	confirm_delete    = my_delete;
 	confirm_overwrite = my_overwrite;
 	confirm_execute   = my_execute;
 	confirm_exit      = my_exit;
+	confirm_directory_hotlist_delete = my_directory_hotlist_delete;
     }
 }
 

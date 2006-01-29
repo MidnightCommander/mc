@@ -1054,6 +1054,27 @@ static void remove_group (struct hotlist *grp)
 	
 static void remove_from_hotlist (struct hotlist *entry)
 {
+    if (confirm_directory_hotlist_delete) {
+	char *title;
+	int result;
+
+	title = g_strconcat (N_(" Remove: "),
+				   name_trunc (entry->label, 30),
+				   " ",
+				   NULL);
+
+	if (safe_delete)
+	    query_set_sel (1);
+	result = query_dialog (title,
+			_("\n Are you sure you want to remove this entry?"),
+			D_ERROR, 2, N_("&Yes"), N_("&No"));
+
+	g_free (title);
+
+	if (result == 1)
+	    return;
+    }
+
     if (entry->type == HL_TYPE_GROUP) {
 	if (entry->head) {
 	    char *header;
@@ -1065,10 +1086,10 @@ static void remove_from_hotlist (struct hotlist *entry)
 				   NULL);
 	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
 				   D_ERROR, 2,
-				   _("&No"), _("&Yes"));
+				   _("&Yes"), _("&No"));
 	    g_free (header);
 
-	    if (result != 1)
+	    if (result == 1)
 		return;
 	}
 

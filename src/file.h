@@ -3,8 +3,6 @@
 
 #include "fileopctx.h"
 
-extern int safe_delete;
-
 struct link;
 
 int copy_file_file (FileOpContext *ctx, const char *s, const char *d,

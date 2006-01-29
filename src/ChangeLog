@@ -1,5 +1,26 @@
 2006-01-29  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* file.h (safe_delete): Move declaration of `safe_delete'
+	* main.h: ... here.
+	(confirm_directory_hotlist_delete): Declare new global variable.
+	* file.c (safe_delete): Move definition of `safe_delete'
+	* main.c: ... here.
+	(confirm_directory_hotlist_delete): Define new global variable.
+	* hotlist.c (remove_from_hotlist): Based on a user configurable
+	setting, request confirmation when removing directory hotlist
+	entries. The confirmation dialog honours the `Safe delete'
+	setting.
+	Reorder the buttons in the hotlist group removal confirmation
+	dialog so that it becomes consistent with other confirmation
+	boxes.
+	* setup.c (int_options): Add support for user configurable
+	confirmation of directory hotlist entries removal.
+	* boxes.c (conf_widgets): Likewise.
+	(confirm_box): Likewise.
+	(my_directory_hotlist_delete): New module variable.
+
+2006-01-29  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* dir.c (do_sort): Do not try to reorder the entries so
 	that ".." becomes the first entry.
 	(do_load_dir): When filling the list of directory entries

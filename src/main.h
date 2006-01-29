@@ -55,7 +55,9 @@ extern int cd_symlinks;
 extern int show_all_if_ambiguous;
 extern int slow_terminal;
 extern int update_prompt;	/* To comunicate with subshell */
+extern int safe_delete;
 extern int confirm_delete;
+extern int confirm_directory_hotlist_delete;
 extern int confirm_execute;
 extern int confirm_exit;
 extern int confirm_overwrite;

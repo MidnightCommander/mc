@@ -1,3 +1,9 @@
+2006-01-29  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* doc/mc.1.in: Update the documentation to reflect the fact
+	that confirmation may be requested when deleting directory
+	hotlist entries based on a user configurable setting.
+
 2006-01-29  Julian Mehnle  <julian@mehnle.net>
 
 	* doc/mc.1.in: Document support for VIEWER environment variable.

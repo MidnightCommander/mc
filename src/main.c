@@ -195,11 +195,17 @@ Mouse_Type use_mouse_p = MOUSE_NONE;
 /* If true, assume we are running on an xterm terminal */
 static int force_xterm = 0;
 
+/* If on, default for "No" in delete operations */
+int safe_delete = 0;
+
 /* Controls screen clearing before an exec */
 int clear_before_exec = 1;
 
 /* Asks for confirmation before deleting a file */
 int confirm_delete = 1;
+
+/* Asks for confirmation before deleting a hotlist entry */
+int confirm_directory_hotlist_delete = 1;
 
 /* Asks for confirmation before overwriting a file */
 int confirm_overwrite = 1;
