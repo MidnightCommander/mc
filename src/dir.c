@@ -310,19 +310,14 @@ do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitiv
 {
     int i;
     int dot_dot_found = 0;
-    file_entry tmp_fe;
 
-    for (i = 0; i < top + 1; i++) {             /* put ".." first in list */
-	if (!strcmp (list->list [i].fname, "..")) {
-	    dot_dot_found = 1;
-            if (i > 0) {                        /* swap [i] and [0] */
-                memcpy (&tmp_fe, &(list->list [0]), sizeof (file_entry));
-                memcpy (&(list->list [0]), &(list->list [i]), sizeof (file_entry));
-                memcpy (&(list->list [i]), &tmp_fe, sizeof (file_entry));
-            }
-            break;
-        }
-    }
+    if (top == 0)
+	return;
+
+    /* If there is an ".." entry the caller must take care to
+       ensure that it occupies the first list element. */
+    if (!strcmp (list->list [0].fname, ".."))
+	dot_dot_found = 1;
 
     reverse = reverse_f ? -1 : 1;
     case_sensitive = case_sensitive_f;
@@ -476,12 +471,20 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
     int next_free = 0;
     struct stat st;
 
+    /* ".." (if any) must be the first entry in the list */
+    if (set_zero_dir (list) == 0)
+	return next_free;
+    next_free++;
+
     dirp = mc_opendir (path);
     if (!dirp) {
 	message (1, MSG_ERROR, _("Cannot read directory contents"));
-	return set_zero_dir (list);
+	return next_free;
     }
     tree_store_start_check (path);
+    /* Do not add a ".." entry to the root directory */
+    if (!strcmp (path, "/"))
+	next_free--;
     while ((dp = mc_readdir (dirp))) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
@@ -506,12 +509,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
     }
 
     if (next_free) {
-	/* Add ".." except the root directory */
-	if (strcmp (path, "/") != 0)
-	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
-    } else {
-	next_free = set_zero_dir (list);
     }
 
     mc_closedir (dirp);
@@ -602,6 +600,17 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 	}
     }
 
+    /* Add ".." except to the root directory. The ".." entry
+       (if any) must be the first in the list. */
+    if (strcmp (path, "/") != 0) {
+	if (set_zero_dir (list) == 0) {
+	    clean_dir (list, count);
+	    clean_dir (&dir_copy, count);
+	    return next_free;
+	}
+	next_free++;
+    }
+
     while ((dp = mc_readdir (dirp))) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
@@ -653,12 +662,8 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
     if (next_free) {
-	/* Add ".." except the root directory */
-	if (strcmp (path, "/") != 0)
-	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, rev, case_sensitive);
-    } else
-	next_free = set_zero_dir (list);
+    }
     clean_dir (&dir_copy, count);
     return next_free;
 }

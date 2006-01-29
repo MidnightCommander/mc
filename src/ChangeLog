@@ -1,3 +1,11 @@
+2006-01-29  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* dir.c (do_sort): Do not try to reorder the entries so
+	that ".." becomes the first entry.
+	(do_load_dir): When filling the list of directory entries
+	make sure that ".." occupies the first element.
+	(do_reload_dir): Likewise.
+
 2006-01-29  Julian Mehnle  <julian@mehnle.net>
 
 	* cmd.c: When invoking external viewer, probe VIEWER environment
