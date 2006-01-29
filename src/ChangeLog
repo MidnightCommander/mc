@@ -1,3 +1,8 @@
+2006-01-29  Julian Mehnle  <julian@mehnle.net>
+
+	* cmd.c: When invoking external viewer, probe VIEWER environment
+	variable first, then PAGER, then fall back to "view".
+
 2006-01-28  Roland Illig  <roland.illig@gmx.de>
 
 	* cmd.c (toggle_listing_cmd): Included the brief listing mode in

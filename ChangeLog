@@ -1,3 +1,7 @@
+2006-01-29  Julian Mehnle  <julian@mehnle.net>
+
+	* doc/mc.1.in: Document support for VIEWER environment variable.
+
 2005-11-15  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_WITH_MCSLANG): Add type tests from S-Lang

@@ -1,3 +1,7 @@
+2006-01-29  Julian Mehnle  <julian@mehnle.net>
+
+	* lib/mc.hint: Mention VIEWER environment variable.
+
 2005-09-06  Roland Illig  <roland.illig@gmx.de>
 
 	* mc.menu: %d is already quoted, so it must not be written "%d".

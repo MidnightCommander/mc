@@ -127,7 +127,9 @@ view_file_at_line (const char *filename, int plain_view, int internal,
 	}
     } else {
 	if (!viewer) {
-	    viewer = getenv ("PAGER");
+	    viewer = getenv ("VIEWER");
+	    if (!viewer)
+		viewer = getenv ("PAGER");
 	    if (!viewer)
 		viewer = "view";
 	}

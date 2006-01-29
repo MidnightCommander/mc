@@ -886,10 +886,14 @@ Internal File Viewer
 .\"Internal File Viewer"
 but if the option "Use internal view" is off, it invokes an external
 file viewer specified by the
-.B PAGER
+.B VIEWER
 environment variable.  If
+.B VIEWER
+is undefined, the
 .B PAGER
-is undefined, the "view" command is invoked.  If you use Shift-F3
+environment variable is tried.  If
+.B PAGER
+is also undefined, the "view" command is invoked.  If you use Shift-F3
 instead, the viewer will be invoked without doing any formatting or
 preprocessing to the file.
 .PP
