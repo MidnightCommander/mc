@@ -1,3 +1,9 @@
+2006-01-30  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Rename LIBDIR to SAVERDIR to avoid confusion.
+	Change its value to match the installation path of cons.saver.
+	* cons.handler.c: Adjust for the above.
+
 2006-01-30  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* boxes.c: Do not set the field `histname' of `QuickWidget'
@@ -68,7 +74,7 @@
 
 2006-01-23  Egmont Koblinger  <egmont@uhulinux.hu>
 
-        * subshell.c: restart write() calls interrupted by sigchld which lead
+	* subshell.c: restart write() calls interrupted by sigchld which lead
 	to some bytes being swallowed from the subshell's output.
 
 2006-01-07  Roland Illig  <roland.illig@gmx.de>

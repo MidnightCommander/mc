@@ -8,7 +8,7 @@ bin_PROGRAMS = mc mcmfmt
 if CONS_SAVER
 pkglibexec_PROGRAMS = cons.saver
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
-	-DLIBDIR=\""$(pkglibdir)"\"
+	-DSAVERDIR=\""$(pkglibexecdir)"\"
 else
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 endif
