@@ -1795,8 +1795,6 @@ view_display_hex (WView *view)
 
 	    /* Changed bytes from the hex editor */
 	    } else if (curr && from == curr->offset) {
-		c = curr->value;
-		curr = curr->next;
 		boldflag = MARK_CHANGED;
 
 	    /* Marked bytes from the search functions */
@@ -1806,6 +1804,12 @@ view_display_hex (WView *view)
 
 	    } else {
 		boldflag = MARK_NORMAL;
+	    }
+
+	    /* Determine the value of the current byte */
+	    if (curr != NULL && from == curr->offset) {
+		c = curr->value;
+		curr = curr->next;
 	    }
 
 	    /* Select the color for the hex number */
