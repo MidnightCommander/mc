@@ -396,15 +396,15 @@ void menu_save_mode_cmd (void)
     static QuickWidget widgets[] =
     {
 	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
-	 B_CANCEL, 0, 0, "c"},
+	 B_CANCEL, 0, 0, NULL},
 	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&OK"), 0,
-	 B_ENTER, 0, 0, "o"},
+	 B_ENTER, 0, 0, NULL},
 	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
 	 0, 0, &str_result, "edit-backup-ext"},
 	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
-	 0, 0, 0, "savemext"},
+	 0, 0, 0, NULL},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
-	 0, &save_mode_new, (char **) str, "t"},
+	 0, &save_mode_new, (char **) str, NULL},
 	NULL_QuickWidget};
     static QuickDialog dialog =
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",

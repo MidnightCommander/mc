@@ -372,20 +372,20 @@ static int my_exit;
 
 static QuickWidget conf_widgets [] = {
 { quick_button,   4, 6, 4, CONFY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, "c" },
+      0, B_CANCEL, 0, 0, NULL },
 { quick_button,   4, 6, 3, CONFY, N_("&OK"),
-      0, B_ENTER, 0, 0, "o" },
+      0, B_ENTER, 0, 0, NULL },
 
 { quick_checkbox, 1, 13, 7, CONFY, N_(" confirm di&Rectory hotlist delete "),
       11, 0, &my_directory_hotlist_delete, NULL, NULL },
 { quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
-      9, 0, &my_exit, 0, "e" },
+      9, 0, &my_exit, 0, NULL },
 { quick_checkbox, 1, 13, 5, CONFY, N_(" confirm e&Xecute "),
-      10, 0, &my_execute, 0, "x" },
+      10, 0, &my_execute, 0, NULL },
 { quick_checkbox, 1, 13, 4, CONFY, N_(" confirm o&Verwrite "),
-      10, 0, &my_overwrite, 0, "ov" },
+      10, 0, &my_overwrite, 0, NULL },
 { quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
-      9, 0, &my_delete, 0, "de" },
+      9, 0, &my_delete, 0, NULL },
 NULL_QuickWidget
 };
 
@@ -468,13 +468,13 @@ static const char *display_bits_str [] =
 
 static QuickWidget display_widgets [] = {
 { quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, "c" },
+      0, B_CANCEL, 0, 0, NULL },
 { quick_button,   4,  6,    3, DISPY, N_("&OK"),
-      0, B_ENTER, 0, 0, "o" },
+      0, B_ENTER, 0, 0, NULL },
 { quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
-      0, 0, &new_meta, 0, "u" },
+      0, 0, &new_meta, 0, NULL },
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
-      &new_mode, const_cast(char **, display_bits_str), "r" },
+      &new_mode, const_cast(char **, display_bits_str), NULL },
 NULL_QuickWidget
 };
 
@@ -719,37 +719,37 @@ static int ret_ftpfs_use_passive_connections_over_proxy;
 
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, "button-cancel" },
+      0, B_CANCEL, 0, 0, NULL },
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&OK"),
-      0, B_ENTER, 0, 0, "button-ok" },
+      0, B_ENTER, 0, 0, NULL },
 #if defined(USE_NETCODE)
 { quick_checkbox,  4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"), 0, 0,
-      &ret_ftpfs_use_passive_connections_over_proxy, 0, "check-use-passive-mode-proxy" },
+      &ret_ftpfs_use_passive_connections_over_proxy, 0, NULL },
 { quick_checkbox,  4, VFSX, 11, VFSY, N_("Use &passive mode"), 0, 0,
-      &ret_ftpfs_use_passive_connections, 0, "check-use-passive-mode" },
+      &ret_ftpfs_use_passive_connections, 0, NULL },
 { quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
-      &ret_use_netrc, 0, "check-use-netrc" },
+      &ret_use_netrc, 0, NULL },
 { quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
       "input-ftp-proxy" },
 { quick_checkbox,  4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), 0, 0,
-      &ftpfs_always_use_proxy, 0, "check-ftp-proxy" },
+      &ftpfs_always_use_proxy, 0, NULL },
 { quick_label,    49, VFSX, 7, VFSY, N_("sec"),
-      0, 0, 0, 0, "label-sec" },
+      0, 0, 0, 0, NULL },
 { quick_input,    38, VFSX, 7, VFSY, "", 10, 0, 0, &ret_directory_timeout,
       "input-timeout" },
 { quick_label,     4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:"),
-      0, 0, 0, 0, "label-cache"},
+      0, 0, 0, 0, NULL },
 { quick_input,     4, VFSX, 6, VFSY, "", 48, 0, 0, &ret_passwd,
       "input-passwd" },
 { quick_label,     4, VFSX, 5, VFSY, N_("ftp anonymous password:"),
-      0, 0, 0, 0, "label-pass"},
+      0, 0, 0, 0, NULL },
 #endif
 { quick_label,    49, VFSX, 3, VFSY, "sec",
-      0, 0, 0, 0, "label-sec2" },
+      0, 0, 0, 0, NULL },
 { quick_input,    38, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
       "input-timo-vfs" },
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
-      0, 0, 0, 0, "label-vfs" },
+      0, 0, 0, 0, NULL },
 NULL_QuickWidget
 };
 
@@ -802,7 +802,7 @@ cd_dialog (void)
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
 	{ quick_input,  6, 57, 2, 0, "", 50, 0, 0, 0, "input" },
-	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
+	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, NULL },
 	NULL_QuickWidget
     };
     char *my_str;
