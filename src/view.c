@@ -1788,23 +1788,13 @@ view_display_hex (WView *view)
 	    }
 
 	    /* Determine the state of the current byte */
-
-	    /* The current cursor position */
-	    if (from == view->hex_cursor) {
-		boldflag = MARK_CURSOR;
-
-	    /* Changed bytes from the hex editor */
-	    } else if (curr && from == curr->offset) {
-		boldflag = MARK_CHANGED;
-
-	    /* Marked bytes from the search functions */
-	    } else if (view->search_start <= from
-		    && from < view->search_start + view->search_length) {
-		boldflag = MARK_SELECTED;
-
-	    } else {
-		boldflag = MARK_NORMAL;
-	    }
+	    boldflag =
+		  (from == view->hex_cursor) ? MARK_CURSOR
+		: (curr != NULL && from == curr->offset) ? MARK_CHANGED
+		: (view->search_start <= from &&
+		   from < view->search_start + view->search_length
+		  ) ? MARK_SELECTED
+		: MARK_NORMAL;
 
 	    /* Determine the value of the current byte */
 	    if (curr != NULL && from == curr->offset) {
