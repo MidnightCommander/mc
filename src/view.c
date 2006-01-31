@@ -1572,15 +1572,11 @@ view_update_bytes_per_line (WView *view)
     const screen_dimen cols = view->data_area.width;
     int bytes;
 
-    if (cols < 8)
-	bytes = 1;
-    else if (cols < 80)
-	bytes = ((cols - 8) / 17) * 4;
+    if (cols < 8 + 17)
+	bytes = 4;
     else
-	bytes = ((cols - 8) / 18) * 4;
-
-    if (bytes == 0)
-	bytes = 1;		/* To avoid division by 0 */
+	bytes = 4 * ((cols - 8) / ((cols < 80) ? 17 : 18));
+    assert(bytes != 0);
 
     view->bytes_per_line = bytes;
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
@@ -1741,20 +1737,26 @@ view_display_ruler (WView *view)
 
 static void
 view_display_hex (WView *view)
-    /* FIXME: prevent any screen overflows */
 {
     const screen_dimen top = view->data_area.top;
     const screen_dimen left = view->data_area.left;
     const screen_dimen height = view->data_area.height;
     const screen_dimen width = view->data_area.width;
-    const screen_dimen text_start = width - view->bytes_per_line;
-    const screen_dimen hex_start = 9;
+    const int ngroups = view->bytes_per_line / 4;
+    const screen_dimen text_start =
+	8 + 13 * ngroups + ((width < 80) ? 0 : (ngroups - 1 + 1);
+    /* 8 characters are used for the file offset, and every hex group
+     * takes 13 characters. On ``big'' screens, the groups are separated
+     * by an extra vertical line, and there is an extra space before the
+     * text column.
+     */
 
     screen_dimen row, col;
     offset_type from;
     int c;
     mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
+    size_t i;
 
     char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
     int bytes;		/* Number of bytes already printed on the line */
@@ -1768,14 +1770,18 @@ view_display_hex (WView *view)
     }
 
     for (row = 0; get_byte (view, from) != -1 && row < height; row++) {
+	col = 0;
+
 	/* Print the hex offset */
-	attrset (MARKED_COLOR);
-	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX, from);
+	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX" ", from);
 	widget_move (view, top + row, left);
-	tty_print_string (hex_buff);
+	attrset (MARKED_COLOR);
+	for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
+		tty_print_char(hex_buff[i]);
+		col += 1;
+	}
 	attrset (NORMAL_COLOR);
 
-	col = hex_start;
 	for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++) {
 
 	    if ((c = get_byte (view, from)) == -1)
@@ -1813,24 +1819,33 @@ view_display_hex (WView *view)
 
 	    /* Print the hex number */
 	    widget_move (view, top + row, left + col);
-	    tty_print_char (hex_char[c / 16]);
-	    tty_print_char (hex_char[c % 16]);
-	    col += 2;
+	    if (col < width) {
+		tty_print_char (hex_char[c / 16]);
+		col += 1;
+	    }
+	    if (col < width) {
+		tty_print_char (hex_char[c % 16]);
+		col += 1;
+	    }
 
 	    /* Print the separator */
 	    attrset (NORMAL_COLOR);
 	    if (bytes != view->bytes_per_line - 1) {
-		tty_print_char (' ');
-		col += 1;
+	    	if (col < width) {
+		    tty_print_char (' ');
+		    col += 1;
+		}
 
 		/* After every four bytes, print a group separator */
 		if (bytes % 4 == 3) {
-		    if (view->data_area.width >= 80) {
+		    if (view->data_area.width >= 80 && col < width) {
 			tty_print_one_vline ();
 			col += 1;
 		    }
-		    tty_print_char (' ');
-		    col += 1;
+		    if (col < width) {
+			tty_print_char (' ');
+			col += 1;
+		    }
 		}
 	    }
 
@@ -1849,8 +1864,10 @@ view_display_hex (WView *view)
 		c = '.';
 
 	    /* Print corresponding character on the text side */
-	    widget_move (view, top + row, left + text_start + bytes);
-	    tty_print_char (c);
+	    if (text_start + bytes < width) {
+		widget_move (view, top + row, left + text_start + bytes);
+		tty_print_char (c);
+	    }
 
 	    /* Save the cursor position for view_place_cursor() */
 	    if (from == view->hex_cursor && view->hexview_in_text) {

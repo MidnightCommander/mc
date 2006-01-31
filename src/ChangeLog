@@ -1,3 +1,9 @@
+2006-01-31  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_display_hex): Prevented any screen overflow in
+	hex display mode. The number of bytes per line in hex mode is
+	always a multiple of four -- this makes the computation easier.
+
 2006-01-30  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Rename LIBDIR to SAVERDIR to avoid confusion.
