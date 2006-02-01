@@ -1744,7 +1744,7 @@ view_display_hex (WView *view)
     const screen_dimen width = view->data_area.width;
     const int ngroups = view->bytes_per_line / 4;
     const screen_dimen text_start =
-	8 + 13 * ngroups + ((width < 80) ? 0 : (ngroups - 1 + 1);
+	8 + 13 * ngroups + ((width < 80) ? 0 : (ngroups - 1 + 1));
     /* 8 characters are used for the file offset, and every hex group
      * takes 13 characters. On ``big'' screens, the groups are separated
      * by an extra vertical line, and there is an extra space before the
