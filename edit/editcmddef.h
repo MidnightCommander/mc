@@ -108,6 +108,8 @@
 #define CK_Check_Save_And_Quit	457
 #define CK_Maximize		458
 
+#define CK_Toggle_Syntax	480
+
 /* macro */
 #define CK_Begin_Record_Macro	501
 #define CK_End_Record_Macro	502

@@ -2479,6 +2479,11 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_insert_file_cmd (edit);
 	break;
 
+    case CK_Toggle_Syntax:
+	option_syntax_highlighting ^= 1;
+	edit->force |= REDRAW_PAGE;
+	break;
+
     case CK_Find:
 	edit_search_cmd (edit, 0);
 	break;

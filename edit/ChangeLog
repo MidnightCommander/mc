@@ -1,3 +1,8 @@
+2006-02-01  Andy Shevchenko  <andy@pylesos.interdon.net>
+
+	* edit.c, editcmddef.h, editkeys.c: Add Ctrl-S to toggle syntax
+	highlighting. Patch from unnamed MPlayer developer.
+
 2006-01-30  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* editcmd.c: Do not set the field `histname' of `QuickWidget'

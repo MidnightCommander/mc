@@ -112,6 +112,7 @@ static const edit_key_map_type common_key_map[] = {
     { XCTRL ('k'), CK_Delete_To_Line_End },
     { XCTRL ('l'), CK_Refresh },
     { XCTRL ('o'), CK_Shell },
+    { XCTRL ('s'), CK_Toggle_Syntax },
     { XCTRL ('u'), CK_Undo },
     { XCTRL ('t'), CK_Select_Codepage },
     { XCTRL ('q'), CK_Insert_Literal },
