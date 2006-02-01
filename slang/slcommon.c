@@ -104,9 +104,9 @@ static int utf8_enable (int mode)
    locale = setlocale (LC_ALL, "");
 
    if (((locale == NULL) || (*locale == 0))
-       && ((NULL == (locale = getenv ("LC_ALL"))) || (*locale = 0))
-       && ((NULL == (locale = getenv ("LC_CTYPE"))) || (*locale = 0))
-       && ((NULL == (locale = getenv ("LANG"))) || (*locale = 0)))
+       && ((NULL == (locale = getenv ("LC_ALL"))) || (*locale == 0))
+       && ((NULL == (locale = getenv ("LC_CTYPE"))) || (*locale == 0))
+       && ((NULL == (locale = getenv ("LANG"))) || (*locale == 0)))
      return 0;
 
    /* setlocale man page says the return value is something like:
