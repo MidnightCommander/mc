@@ -1,3 +1,7 @@
+2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* dir.c (do_sort): Remove unused variable.
+
 2006-01-31  Roland Illig  <roland.illig@gmx.de>
 
 	* view.c (view_display_hex): Prevented any screen overflow in

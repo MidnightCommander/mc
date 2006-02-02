@@ -308,7 +308,6 @@ sort_type (const file_entry *a, const file_entry *b)
 void
 do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitive_f)
 {
-    int i;
     int dot_dot_found = 0;
 
     if (top == 0)
