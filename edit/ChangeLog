@@ -1,3 +1,7 @@
+2006-02-02  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* edit.c (edit_execute_cmd): Reload syntax on toggle to on.
+
 2006-02-01  Andy Shevchenko  <andy@pylesos.interdon.net>
 
 	* edit.c, editcmddef.h, editkeys.c: Add Ctrl-S to toggle syntax
