@@ -83,7 +83,7 @@ static struct vfs_class vfs_fish_ops;
 static int
  fish_command (struct vfs_class *me, struct vfs_s_super *super,
 	       int wait_reply, const char *fmt, ...)
-    __attribute__ ((format (printf, 4, 5)));
+    __attribute__ ((format (__printf__, 4, 5)));
 
 static int fish_decode_reply (char *s, int was_garbage)
 {

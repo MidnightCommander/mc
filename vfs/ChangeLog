@@ -1,3 +1,9 @@
+2006-02-03  Roland Illig  <roland.illig@gmx.de>
+
+	* fish.c: Replaced the printf-like attribute with __printf__,
+	since GNU gettext defines a macro printf on some systems.
+	* ftpfs.c: Likewise.
+
 2006-01-28  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* direntry.c (vfs_s_open): Be less restrictive when

@@ -161,7 +161,7 @@ static struct vfs_class vfs_ftpfs_ops;
 static char *ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super);
 static int ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path);
 static int ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
-    __attribute__ ((format (printf, 4, 5)));
+    __attribute__ ((format (__printf__, 4, 5)));
 static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
 static int ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrcpass);
 static int ftpfs_netrc_lookup (const char *host, char **login, char **pass);
