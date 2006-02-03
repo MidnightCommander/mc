@@ -66,11 +66,11 @@ void query_set_sel (int new_sel);
 /* Create message box but don't dismiss it yet, not background safe */
 struct Dlg_head *create_message (int flags, const char *title,
 				 const char *text, ...)
-    __attribute__ ((format (printf, 3, 4)));
+    __attribute__ ((format (__printf__, 3, 4)));
 
 /* Show message box, background safe */
 void message (int flags, const char *title, const char *text, ...)
-    __attribute__ ((format (printf, 3, 4)));
+    __attribute__ ((format (__printf__, 3, 4)));
 
 
 /* Use this as header for message() - it expands to "Error" */
