@@ -30,7 +30,7 @@ mc_prefixdir=""			# default: ${mc_basedir}/installed
 mc_logdir=""			# default: ${mc_basedir}/logs
 
 mc_cvs_rsh="ssh"
-mc_cvs_repository=":ext:anoncvs@cvs.gnu.org:/cvsroot/mc"
+mc_cvs_repository=":pserver:anonymous:@cvs.savannah.gnu.org:/sources/mc"
 mc_cvs_module="mc"
 mc_cvs_tag="HEAD"
 
