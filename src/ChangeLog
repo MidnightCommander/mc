@@ -5,6 +5,8 @@
 	* view.c: s/attrset/tty_setcolor/g
 	* wtools.h: Replaced the printf-like attribute with __printf__,
 	since GNU gettext defines a macro printf on some systems.
+	* find.c: After the "panelize" command, always select the first
+	file from the panel, not.
 
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 

@@ -1108,6 +1108,7 @@ do_find (void)
 	    if (dir_and_file_set){
 	        try_to_select (current_panel, NULL);
 		panel_re_sort (current_panel);
+	        try_to_select (current_panel, NULL);
 	    }
 	    break;
 	}
