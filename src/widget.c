@@ -26,6 +26,7 @@
 
 #include <config.h>
 
+#include <assert.h>
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
@@ -2409,6 +2410,7 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cb
     if (!bb)
 	return;
 
+    assert (cback != (buttonbarfn) 0);
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_PTR;
     bb->labels[idx - 1].u.fn_ptr = cback;
@@ -2423,6 +2425,7 @@ buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void
     if (!bb)
 	return;
 
+    assert (cback != (buttonbarfn) 0);
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_VOID;
     bb->labels[idx - 1].u.fn_void = cback;

@@ -1,3 +1,8 @@
+2006-02-03  Roland Illig  <roland.illig@gmx.de>
+
+	* widget.c: Added assertions to prevent bugs like the one from
+	view.c(view_labels) from hiding that long.
+
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* view.c (view_labels): Use `buttonbar_clear_label' to make a
