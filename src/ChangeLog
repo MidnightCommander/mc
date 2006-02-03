@@ -7,6 +7,8 @@
 	since GNU gettext defines a macro printf on some systems.
 	* find.c: After the "panelize" command, always select the first
 	file from the panel, not.
+	* util.h (str_unconst): This function is never needed to be
+	inlined.
 
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 
