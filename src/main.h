@@ -106,7 +106,7 @@ void update_xterm_title_path (void);
 void load_hint      (int force);
 
 void print_vfs_message(const char *msg, ...)
-    __attribute__ ((format (printf, 1, 2)));
+    __attribute__ ((format (__printf__, 1, 2)));
 
 extern const char *prompt;
 extern const char *edit_one_file;
