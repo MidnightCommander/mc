@@ -2901,7 +2901,7 @@ view_labels (WView *view)
 	    my_define (h, 2, Q_("ButtonBar|Edit"),
 		view_toggle_hexedit_mode_cmd, view);
 	} else {
-	    my_define (h, 2, "", NULL, view);
+	    buttonbar_clear_label (h, 2);
 	}
 	my_define (h, 6, Q_("ButtonBar|Save"),
 	    view_hexedit_save_changes_cmd, view);

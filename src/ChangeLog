@@ -1,3 +1,8 @@
+2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* view.c (view_labels): Use `buttonbar_clear_label' to make a
+	buttonbar button inactive.
+
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
 	* tty.h (tty_setcolor): Added.
