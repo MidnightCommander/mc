@@ -9,6 +9,8 @@
 	file from the panel, not.
 	* util.h (str_unconst): This function is never needed to be
 	inlined.
+	* find.c (find_do_view_edit): Only strip the leading "./" from a
+	directory name if the rest is not empty.
 
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 

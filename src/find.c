@@ -760,7 +760,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     }
     if (dir [0] == '.' && dir [1] == 0)
 	 fullname = g_strdup (filename);
-    else if (dir [0] == '.' && dir [1] == PATH_SEP)
+    else if (dir [0] == '.' && dir [1] == PATH_SEP && dir[2] != '\0')
 	 fullname = concat_dir_and_file (dir+2, filename);
     else
 	 fullname = concat_dir_and_file (dir, filename);
