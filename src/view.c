@@ -1622,7 +1622,7 @@ view_display_status (WView *view)
     if (height < 1)
 	return;
 
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
     widget_move (view, top, left);
     hline (' ', width);
 
@@ -1666,13 +1666,13 @@ view_display_status (WView *view)
 		: view->dpy_end);
 	}
     }
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
 }
 
 static inline void
 view_display_clean (WView *view)
 {
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0) {
 	draw_double_box (view->widget.parent, view->widget.y,
@@ -1716,7 +1716,7 @@ view_display_ruler (WView *view)
     if (ruler == RULER_NONE || height < 1)
 	return;
 
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     for (c = 0; c < width; c++) {
 	cl = view->dpy_text_column + c;
 	if (line_row < height) {
@@ -1775,12 +1775,12 @@ view_display_hex (WView *view)
 	/* Print the hex offset */
 	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX" ", from);
 	widget_move (view, top + row, left);
-	attrset (MARKED_COLOR);
+	tty_setcolor (MARKED_COLOR);
 	for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
 		tty_print_char(hex_buff[i]);
 		col += 1;
 	}
-	attrset (NORMAL_COLOR);
+	tty_setcolor (NORMAL_COLOR);
 
 	for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++) {
 
@@ -1809,7 +1809,7 @@ view_display_hex (WView *view)
 	    }
 
 	    /* Select the color for the hex number */
-	    attrset (
+	    tty_setcolor (
 		boldflag == MARK_NORMAL ? NORMAL_COLOR :
 		boldflag == MARK_SELECTED ? MARKED_COLOR :
 		boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
@@ -1829,7 +1829,7 @@ view_display_hex (WView *view)
 	    }
 
 	    /* Print the separator */
-	    attrset (NORMAL_COLOR);
+	    tty_setcolor (NORMAL_COLOR);
 	    if (bytes != view->bytes_per_line - 1) {
 	    	if (col < width) {
 		    tty_print_char (' ');
@@ -1851,7 +1851,7 @@ view_display_hex (WView *view)
 
 	    /* Select the color for the character; this differs from the
 	     * hex color when boldflag == MARK_CURSOR */
-	    attrset (
+	    tty_setcolor (
 		boldflag == MARK_NORMAL ? NORMAL_COLOR :
 		boldflag == MARK_SELECTED ? MARKED_COLOR :
 		boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
@@ -1878,7 +1878,7 @@ view_display_hex (WView *view)
     }
 
     /* Be polite to the other functions */
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 
     view_place_cursor (view);
     view->dpy_end = from;
@@ -1905,7 +1905,7 @@ view_display_text (WView * view)
 	curr = curr->next;
     }
 
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     for (row = 0, col = 0; row < height && (c = get_byte (view, from)) != -1; from++) {
 
 	if (view->text_nroff_mode && c == '\b') {
@@ -1931,9 +1931,9 @@ view_display_text (WView * view)
 		}
 		col--;
 		if (c_prev == '_' && (c_next != '_' || view_count_backspaces (view, from) == 1))
-		    attrset (VIEW_UNDERLINED_COLOR);
+		    tty_setcolor (VIEW_UNDERLINED_COLOR);
 		else
-		    attrset (MARKED_COLOR);
+		    tty_setcolor (MARKED_COLOR);
 		continue;
 	    }
 	}
@@ -1961,7 +1961,7 @@ view_display_text (WView * view)
 
 	if (view->search_start <= from
 	 && from < view->search_start + view->search_length) {
-	    attrset (SELECTED_COLOR);
+	    tty_setcolor (SELECTED_COLOR);
 	}
 
 	if (col >= view->dpy_text_column
@@ -1973,7 +1973,7 @@ view_display_text (WView * view)
 	    tty_print_char (c);
 	}
 	col++;
-	attrset (NORMAL_COLOR);
+	tty_setcolor (NORMAL_COLOR);
     }
     view->dpy_end = from;
 }

@@ -1,7 +1,9 @@
+
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
 	* widget.c: Added assertions to prevent bugs like the one from
 	view.c(view_labels) from hiding that long.
+	* view.c: s/attrset/tty_setcolor/g
 
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 
