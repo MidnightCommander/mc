@@ -38,6 +38,9 @@ extern gboolean tty_got_interrupt(void);
 
 extern void tty_gotoyx(int, int);
 extern void tty_getyx(int *, int *);
+
+extern void tty_setcolor(int);
+
 extern void tty_print_char(int);
 extern void tty_print_alt_char(int);
 extern void tty_print_string(const char *);

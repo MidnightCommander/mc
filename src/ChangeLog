@@ -1,3 +1,8 @@
+2006-02-03  Roland Illig  <roland.illig@gmx.de>
+
+	* tty.h (tty_setcolor): Added.
+	* tty.c (tty_setcolor): Likewise.
+
 2006-02-03  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* dir.c (do_sort): Remove unused variable.

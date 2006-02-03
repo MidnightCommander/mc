@@ -30,6 +30,7 @@
 #include <stdarg.h>
 
 #include "global.h"
+#include "color.h"
 #include "main.h"		/* for slow_terminal */
 #include "tty.h"
 
@@ -111,6 +112,12 @@ tty_getyx(int *py, int *px)
 #else
     getyx(stdscr, *py, *px);
 #endif
+}
+
+extern void
+tty_setcolor(int c)
+{
+    attrset(c);
 }
 
 extern void
