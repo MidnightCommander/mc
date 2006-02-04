@@ -1,3 +1,7 @@
+2006-02-04  Roland Illig  <roland.illig@gmx.de>
+
+	* find.c: Added make_fullname() to avoid code duplication.
+
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
 	* widget.c: Added assertions to prevent bugs like the one from

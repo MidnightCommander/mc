@@ -744,6 +744,17 @@ init_find_vars (void)
 	g_free (dir);
 }
 
+static char *
+make_fullname (const char *dirname, const char *filename)
+{
+
+    if (strcmp(dirname, ".") == 0 || strcmp(dirname, "."PATH_SEP_STR) == 0)
+	return g_strdup (filename);
+    if (strncmp(dirname, "."PATH_SEP_STR, 2) == 0)
+	return concat_dir_and_file (dirname + 2, filename);
+    return concat_dir_and_file (dirname, filename);
+}
+
 static void
 find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 {
@@ -758,13 +769,8 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 	 filename = file + 4;
 	 line = 0;
     }
-    if (strcmp(dir, ".") == 0 || strcmp(dir, "."PATH_SEP_STR) == 0)
-	 fullname = g_strdup (filename);
-    else if (strncmp(dir, "."PATH_SEP_STR, 2) == 0)
-	 fullname = concat_dir_and_file (dir+2, filename);
-    else
-	 fullname = concat_dir_and_file (dir, filename);
 
+    fullname = make_fullname (dir, filename);
     if (edit)
 	do_edit_at_line (fullname, line);
     else
@@ -985,7 +991,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	struct stat st;
 	WLEntry *entry = find_list->list;
 	dir_list *list = &current_panel->dir;
-	char *dir, *name;
+	char *name;
 
 	for (i = 0; entry && i < find_list->count;
 	     entry = entry->next, i++) {
@@ -999,13 +1005,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	    else
 		filename = entry->text + 4;
 
-	    dir = entry->data;
-	    if (dir[0] == '.' && dir[1] == 0)
-		name = g_strdup (filename);
-	    else if (dir[0] == '.' && dir[1] == PATH_SEP)
-		name = concat_dir_and_file (dir + 2, filename);
-	    else
-		name = concat_dir_and_file (dir, filename);
+	    name = make_fullname (entry->data, filename);
 	    status =
 		handle_path (list, name, &st, next_free, &link_to_dir,
 			     &stale_link);
