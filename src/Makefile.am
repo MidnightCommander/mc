@@ -79,7 +79,7 @@ TESTS =			ecs-test
 
 check_PROGRAMS =	ecs-test
 ecs_test_SOURCES =	ecs-test.c ecs.h ecs.c
-ecs_test_LDADD =	$(GLIB_LIBS) $(MCLIBS)
+ecs_test_LDADD =	$(GLIB_LIBS) $(INTLLIBS) $(MCLIBS)
 
 # end of automated testing
 

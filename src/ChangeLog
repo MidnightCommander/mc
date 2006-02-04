@@ -4,6 +4,7 @@
 	* cmd.c (mkdir_cmd): Fixed a memory leak. Instead of the
 	absolute path of the created directory, the input is passed to
 	update_panels().
+	* Makefile.am: ecs-test needs $(MCLIBS).
 
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
