@@ -297,7 +297,7 @@ extern int edit_confirm_save;
 extern int column_highlighting;
 
 /* File names */
-#define EDIT_DIR           PATH_SEP_STR ".mc" PATH_SEP_STR "cedit"
+#define EDIT_DIR           ".mc" PATH_SEP_STR "cedit"
 #define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
 #define CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
 #define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"

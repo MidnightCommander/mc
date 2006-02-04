@@ -602,7 +602,7 @@ static FILE *edit_open_macro_file (const char *r)
 {
     const char *filename;
     int file;
-    filename = catstrs (home_dir, MACRO_FILE, (char *) NULL);
+    filename = catstrs (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
     if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	return 0;
     close (file);
@@ -640,7 +640,7 @@ edit_delete_macro (WEdit * edit, int k)
     if (saved_macros_loaded)
 	if ((j = macro_exists (k)) < 0)
 	    return 0;
-    g = fopen (catstrs (home_dir, TEMP_FILE, (char *) NULL), "w");
+    g = fopen (catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL), "w");
     if (!g) {
 	edit_error_dialog (_(" Delete macro "),
 		 get_sys_error (_(" Cannot open temp file ")));
@@ -670,7 +670,7 @@ edit_delete_macro (WEdit * edit, int k)
     }
     fclose (f);
     fclose (g);
-    if (rename (catstrs (home_dir, TEMP_FILE, (char *) NULL), catstrs (home_dir, MACRO_FILE, (char *) NULL)) == -1) {
+    if (rename (catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL), catstrs (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL)) == -1) {
 	edit_error_dialog (_(" Delete macro "),
 	   get_sys_error (_(" Cannot overwrite macro file ")));
 	return 1;
@@ -2233,7 +2233,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 /* copies a block to clipboard file */
 static int edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
-    return edit_save_block (edit, catstrs (home_dir, CLIP_FILE, (char *) NULL), start, finish);
+    return edit_save_block (edit, catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL), start, finish);
 }
 
 
@@ -2272,7 +2272,7 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 
 void edit_paste_from_X_buf_cmd (WEdit * edit)
 {
-    edit_insert_file (edit, catstrs (home_dir, CLIP_FILE, (char *) NULL));
+    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
 }
 
 
@@ -2324,7 +2324,7 @@ edit_save_block_cmd (WEdit *edit)
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
     exp =
-	edit_get_save_file (catstrs (home_dir, CLIP_FILE, (char *) NULL),
+	edit_get_save_file (catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL),
 			    _(" Save Block "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2353,7 +2353,7 @@ edit_save_block_cmd (WEdit *edit)
 int
 edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp = edit_get_load_file (catstrs (home_dir, CLIP_FILE, (char *) NULL),
+    char *exp = edit_get_load_file (catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL),
 				    _(" Insert File "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2389,7 +2389,7 @@ int edit_sort_cmd (WEdit * edit)
 	edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
 	return 0;
     }
-    edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, (char *) NULL), start_mark, end_mark);
+    edit_save_block (edit, catstrs (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL), start_mark, end_mark);
 
     exp = input_dialog (_(" Run Sort "),
 	_(" Enter sort options (see manpage) separated by whitespace: "),
@@ -2400,7 +2400,7 @@ int edit_sort_cmd (WEdit * edit)
     g_free (old);
     old = exp;
 
-    e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, (char *) NULL));
+    e = system (catstrs (" sort ", exp, " ", home_dir, PATH_SEP_STR BLOCK_FILE, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
     if (e) {
 	if (e == -1 || e == 127) {
 	    edit_error_dialog (_(" Sort "),
@@ -2418,7 +2418,7 @@ int edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
 	return 1;
-    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, (char *) NULL));
+    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
     return 0;
 }
 
@@ -2439,7 +2439,7 @@ edit_ext_cmd (WEdit *edit)
     if (!exp)
 	return 1;
 
-    e = system (catstrs (exp, " > ", home_dir, TEMP_FILE, (char *) NULL));
+    e = system (catstrs (exp, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
     g_free (exp);
 
     if (e) {
@@ -2450,7 +2450,7 @@ edit_ext_cmd (WEdit *edit)
 
     edit->force |= REDRAW_COMPLETELY;
 
-    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, (char *) NULL));
+    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
     return 0;
 }
 
@@ -2471,8 +2471,8 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     char *quoted_name = NULL;
 
     o = catstrs (mc_home, shell_cmd, (char *) NULL);	/* original source script */
-    h = catstrs (home_dir, EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
-    b = catstrs (home_dir, BLOCK_FILE, (char *) NULL);	/* block file */
+    h = catstrs (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
+    b = catstrs (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);	/* block file */
 
     if (!(script_home = fopen (h, "r"))) {
 	if (!(script_home = fopen (h, "w"))) {
@@ -2524,8 +2524,8 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 *   $3 - file where error messages should be put
 	 *        (for compatibility with old scripts).
 	 */
-	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ", quoted_name,
-			 " ", home_dir, BLOCK_FILE " /dev/null", (char *) NULL));
+	system (catstrs (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
+			 " ", home_dir, PATH_SEP_STR BLOCK_FILE " /dev/null", (char *) NULL));
 
     } else {
 	/*
@@ -2533,7 +2533,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 * Arguments:
 	 *   $1 - name of the edited file.
 	 */
-	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
+	system (catstrs (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
 			 quoted_name, (char *) NULL));
     }
     g_free (quoted_name);

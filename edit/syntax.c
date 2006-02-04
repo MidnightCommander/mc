@@ -671,7 +671,7 @@ static FILE *open_include_file (const char *filename)
 	return fopen (filename, "r");
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (home_dir, EDIT_DIR PATH_SEP_STR,
+    error_file_name = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR PATH_SEP_STR,
 				   filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f)

@@ -6,6 +6,8 @@
 	update_panels().
 	* Makefile.am: ecs-test needs $(INTLLIBS).
 	* main.c (init_xterm_support): Eterm can handle mouse events, too.
+	* user.c: Adjusted the use of EDIT_DIR, since it has no leading
+	PATH_SEP_STR anymore.
 
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 

@@ -1,3 +1,12 @@
+2006-02-03  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Removed the leading PATH_SEP_STR from EDIT_DIR, as the
+	latter is not an absolute directory.
+	* edit.c: Adjusted the users of EDIT_DIR.
+	* editcmd.c: Likewise.
+	* syntax.c: Likewise.
+	* src/user.c: Likewise.
+
 2006-02-02  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* edit.c (edit_execute_cmd): Reload syntax on toggle to on.
