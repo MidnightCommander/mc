@@ -346,32 +346,30 @@ void ren_cmd_local (void)
 void
 mkdir_cmd (void)
 {
-    char *tempdir;
-    char *dir;
+    char *dir, *absdir;
 
     dir =
 	input_expand_dialog (_("Create a new Directory"),
 			     _(" Enter directory name:"), "");
-
-    if (!dir || !*dir)
+    if (!dir)
 	return;
 
     if (dir[0] == '/' || dir[0] == '~')
-	tempdir = g_strdup (dir);
+	absdir = g_strdup (dir);
     else
-	tempdir = concat_dir_and_file (current_panel->cwd, dir);
-    g_free (dir);
+	absdir = concat_dir_and_file (current_panel->cwd, dir);
 
     save_cwds_stat ();
-    if (my_mkdir (tempdir, 0777) == 0) {
-	update_panels (UP_OPTIMIZE, tempdir);
+    if (my_mkdir (absdir, 0777) == 0) {
+	update_panels (UP_OPTIMIZE, dir);
 	repaint_screen ();
 	select_item (current_panel);
-	g_free (tempdir);
-	return;
+    } else {
+	message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
     }
-    g_free (tempdir);
-    message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
+
+    g_free (absdir);
+    g_free (dir);
 }
 
 void delete_cmd (void)
