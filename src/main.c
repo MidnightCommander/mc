@@ -1374,6 +1374,7 @@ init_xterm_support (void)
 
     if (force_xterm || strncmp (termvalue, "xterm", 5) == 0
 	|| strncmp (termvalue, "rxvt", 4) == 0
+	|| strcmp (termvalue, "Eterm") == 0
 	|| strcmp (termvalue, "dtterm") == 0) {
 	xterm_flag = 1;
 

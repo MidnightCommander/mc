@@ -5,6 +5,7 @@
 	absolute path of the created directory, the input is passed to
 	update_panels().
 	* Makefile.am: ecs-test needs $(INTLLIBS).
+	* main.c (init_xterm_support): Eterm can handle mouse events, too.
 
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
