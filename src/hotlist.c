@@ -74,6 +74,8 @@
 #define B_REFRESH_VFS	(B_USER + 9)
 #endif
 
+int hotlist_has_dot_dot = 1;
+
 static WListbox *l_hotlist;
 static WListbox *l_movelist;
 
@@ -85,7 +87,8 @@ static WLabel *pname, *pname_group, *movelist_group;
 enum HotListType {
     HL_TYPE_GROUP,
     HL_TYPE_ENTRY,
-    HL_TYPE_COMMENT
+    HL_TYPE_COMMENT,
+    HL_TYPE_DOTDOT
 };
 
 static struct {
@@ -146,6 +149,7 @@ static void add_new_group_cmd (void);
 static void add_new_entry_cmd (void);
 static void remove_from_hotlist (struct hotlist *entry);
 static void load_hotlist (void);
+static void add_dotdot_to_list (void);
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
@@ -173,9 +177,10 @@ update_path_name (void)
 	if (list->current->data != 0) {
 	    struct hotlist *hlp = (struct hotlist *) list->current->data;
 
-	    if (hlp->type == HL_TYPE_ENTRY)
+	    if (hlp->type == HL_TYPE_ENTRY ||
+		hlp->type == HL_TYPE_DOTDOT)
 		text = hlp->directory;
-	    else
+	    else if (hlp->type == HL_TYPE_GROUP)
 		text = _("Subgroup - press ENTER to see list");
 	} else {
 	    text = list->current->text;
@@ -232,6 +237,7 @@ static void fill_listbox (void)
 		    listbox_add_item (l_hotlist, 0, 0, buf, current);
 	    }
 	    break;
+	case HL_TYPE_DOTDOT:
 	case HL_TYPE_ENTRY:
 		if (hotlist_state.moving)
 		    listbox_add_item (l_movelist, 0, 0, current->label, current);
@@ -367,6 +373,10 @@ hotlist_button_callback (int action)
 			(struct hotlist *) list->current->data;
 		    if (hlp->type == HL_TYPE_ENTRY)
 			return MSG_HANDLED;
+		    else if (hlp->type == HL_TYPE_DOTDOT) {
+			/* Fall through - go up */
+			;
+		    }
 		    else {
 			listbox_remove_list (list);
 			current_group = hlp;
@@ -747,8 +757,13 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
     if (!current_group)
 	load_hotlist ();
 
-    if (l_hotlist && l_hotlist->current)
+    if (l_hotlist && l_hotlist->current) {
 	current = l_hotlist->current->data;
+
+	/* Make sure `..' stays at the top of the list. */
+	if (current->type == HL_TYPE_DOTDOT)
+	    pos = HL_AFTER_CURRENT;
+    }
 
     new = new_hotlist ();
 
@@ -756,6 +771,12 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
     new->label     = label;
     new->directory = directory;
     new->up	   = current_group;
+
+    if (type == HL_TYPE_GROUP) {
+	current_group = new;
+	add_dotdot_to_list ();
+	current_group = new->up;
+    }
 
     if (!current_group->head) { /* first element in group */
 	current_group->head = new;
@@ -784,7 +805,8 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 	p->next = new;
     }
 
-    if (hotlist_state.running && type != HL_TYPE_COMMENT) {
+    if (hotlist_state.running && type != HL_TYPE_COMMENT &&
+	type != HL_TYPE_DOTDOT) {
 	if (type == HL_TYPE_GROUP) {
 	    char  *lbl = g_strconcat ("->", new->label, (char *) NULL);
 
@@ -1054,6 +1076,9 @@ static void remove_group (struct hotlist *grp)
 	
 static void remove_from_hotlist (struct hotlist *entry)
 {
+    if (entry->type == HL_TYPE_DOTDOT)
+	return;
+
     if (confirm_directory_hotlist_delete) {
 	char *title;
 	int result;
@@ -1553,7 +1578,9 @@ do { \
 	case HL_TYPE_COMMENT:
 	    fprintf (hotlist_file, "#%s\n", current->label);
 	    break;
-
+	case HL_TYPE_DOTDOT:
+	    /* do nothing */
+	    break;
 	}
 }
 
@@ -1613,3 +1640,11 @@ void done_hotlist (void)
     }
 }
 
+static void
+add_dotdot_to_list (void)
+{
+    if (current_group != hotlist) {
+	if (hotlist_has_dot_dot != 0)
+	    add2hotlist (g_strdup (".."), g_strdup (".."), HL_TYPE_DOTDOT, 0);
+    }
+}

@@ -1,3 +1,21 @@
+2006-02-05  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* hotlist.c (hotlist_has_dot_dot): Define new global
+	variable.
+	(add_dotdot_to_list): Define new function.
+	(HotListType): Add HL_TYPE_DOTDOT.
+	(update_path_name): Handle HL_TYPE_DOTDOT entries the same way as
+	HL_TYPE_ENTRY entries.
+	(fill_listbox): Likewise.
+	(hotlist_button_callback): Go up one level when enter is pressed on
+	an entry of type HL_TYPE_DOTDOT.
+	(add2hotlist): Always attach a HL_TYPE_DOTDOT to each new
+	HL_TYPE_GROUP entry.
+	Make sure that the HL_TYPE_DOTDOT entry is the first one in the
+	list.
+	(remove_from_hotlist): Do not remove HL_TYPE_DOTDOT entries.
+	(hot_save_group): Do nothing for HL_TYPE_DOTDOT entries.
+
 2006-02-05  Arpad Gereoffy (A'rpi)  <arpi@mplayerhq.hu>
 
 	* key.c (xterm_key_defines): Add sequences for iTerm.
