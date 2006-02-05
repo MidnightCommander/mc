@@ -662,6 +662,8 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 	ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &port);
 	free_host = 1;
     }
+
+    enable_interrupt_key(); /* clear the interrupt flag */
     
     /* Get host address */
     memset ((char *) &server_address, 0, sizeof (server_address));
@@ -670,6 +672,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (server_address.sin_addr.s_addr == INADDR_NONE) {
 	hp = gethostbyname (host);
 	if (hp == NULL){
+	    disable_interrupt_key();
 	    print_vfs_message (_("ftpfs: Invalid host address."));
 	    ftpfs_errno = EINVAL;
 	    if (free_host)
@@ -686,6 +689,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 
     /* Connect */
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
+	disable_interrupt_key();
 	ftpfs_errno = errno;
         if (free_host)
 	    g_free (host);
@@ -695,8 +699,6 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     print_vfs_message (_("ftpfs: making connection to %s"), host);
     if (free_host)
 	g_free (host);
-
-    enable_interrupt_key (); /* clear the interrupt flag */
 
     if (connect (my_socket, (struct sockaddr *) &server_address,
 	     sizeof (server_address)) < 0){
