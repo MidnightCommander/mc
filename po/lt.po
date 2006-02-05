@@ -1,30 +1,29 @@
 # GNU Midnight Commander Lithuanian Translation
-# Copyright (C) 2005 Free Software Foundation
+# Copyright (C) 2006 Free Software Foundation
 # This file is distributed under the same license as the mc package.
-# Vaidrius Petrauskas <vaidrius@delfi.lt>, 2005.
+# Vaidrius Petrauskas <vaidrius@delfi.lt>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.0-pre1\n"
+"Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2005-04-06 00:49+0100\n"
+"POT-Creation-Date: 2006-02-05 12:55+0200\n"
+"PO-Revision-Date: 2006-02-05 00:36+0100\n"
 "Last-Translator: Vaidrius Petrauskas <vaidrius@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "Sintak&sės ryškinimas"
+msgstr " Parinkite sintaksės ryškinimą "
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Apie "
+msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Įkelti esamą sintaksę iš naujo >"
 
 #, c-format
 msgid " Cannot open %s for reading "
@@ -43,21 +42,21 @@ msgstr " Nepavyko atverti konvejerio skaitymui: %s "
 
 #, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Nepavyko sužinoti bylos „%s“ dydžio/leidimų "
+msgstr " Nepavyko sužinoti rinkmenos „%s“ dydžio/leidimų "
 
 #, c-format
 msgid " %s is not a regular file "
-msgstr " „%s“ nėra įprastinė byla "
+msgstr " „%s“ nėra įprastinė rinkmena "
 
 #, c-format
 msgid " File %s is too large "
-msgstr " Byla „%s“ per didelė "
+msgstr " Rinkmena „%s“ per didelė "
 
 msgid "Macro recursion is too deep"
 msgstr "Makrosų rekursija per gili"
 
 msgid " Enter file name: "
-msgstr " Įveskite bylos pavadinimą: "
+msgstr " Įveskite rinkmenos pavadinimą: "
 
 msgid " Error writing to pipe: "
 msgstr " Klaida rašant į konvejerį: "
@@ -74,9 +73,11 @@ msgstr "Saugus įrašymas "
 msgid "Do backups -->"
 msgstr "Daryti kopijas -->"
 
+#. 0
 msgid "&Cancel"
 msgstr "&Atsisakyti"
 
+#. 1
 msgid "&OK"
 msgstr "&Gerai"
 
@@ -93,13 +94,13 @@ msgid "Warning"
 msgstr "Įspėjimas"
 
 msgid " A file already exists with this name. "
-msgstr " Byla šiuo pavadinimu jau yra. "
+msgstr " Rinkmena šiuo pavadinimu jau yra. "
 
 msgid "&Overwrite"
 msgstr "Perraš&yti"
 
 msgid " Cannot save file. "
-msgstr " Nepavyko išsaugoti bylos. "
+msgstr " Nepavyko išsaugoti rinkmenos. "
 
 msgid "Cancel"
 msgstr "Atsisakyti"
@@ -108,13 +109,13 @@ msgid " Delete macro "
 msgstr " Pašalinti makrosą "
 
 msgid " Cannot open temp file "
-msgstr " Nepavyko atverti laikinosios bylos "
+msgstr " Nepavyko atverti laikinosios rinkmenos "
 
 msgid " Cannot open macro file "
-msgstr " Nepavyko atverti makroso bylos "
+msgstr " Nepavyko atverti makroso rinkmenos "
 
 msgid " Cannot overwrite macro file "
-msgstr " Nepavyko perrašyti makroso bylos "
+msgstr " Nepavyko perrašyti makroso rinkmenos "
 
 msgid " Save macro "
 msgstr " Įrašyti makrosą "
@@ -129,10 +130,10 @@ msgid " Load macro "
 msgstr " Įkelti makrosą "
 
 msgid " Confirm save file? : "
-msgstr " Įrašyti bylą? : "
+msgstr " Įrašyti rinkmeną? : "
 
 msgid " Save file "
-msgstr " Įrašyti bylą "
+msgstr " Įrašyti rinkmeną "
 
 msgid "&Save"
 msgstr "Į&rašyti"
@@ -141,7 +142,7 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Esama byla buvo pakeista ir neįrašyta. \n"
+" Esama rinkmena buvo pakeista ir neįrašyta. \n"
 " Tęsdami atmesite visus pakeitimus. "
 
 msgid "C&ontinue"
@@ -204,6 +205,7 @@ msgstr " Įveskite ieškomą eilutę:"
 msgid " Replace "
 msgstr " Pakeisti "
 
+#. in response to number of bookmarks added because of string being found %d times
 msgid "Search"
 msgstr "Paieška"
 
@@ -234,7 +236,7 @@ msgid "Quit"
 msgstr "Išeiti"
 
 msgid " File was modified, Save with exit? "
-msgstr " Byla pakeista, įrašyti išeinant? "
+msgstr " Rinkmena pakeista, įrašyti išeinant? "
 
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
@@ -255,7 +257,7 @@ msgid " Copy to clipboard "
 msgstr " Kopijuoti į krepšį "
 
 msgid " Unable to save to file. "
-msgstr " Nepavyko įrašyti į bylą. "
+msgstr " Nepavyko įrašyti į rinkmeną. "
 
 msgid " Cut to clipboard "
 msgstr " Iškirpti į krepšį "
@@ -270,25 +272,25 @@ msgid " Save Block "
 msgstr " Įrašyti bloką "
 
 msgid " Insert File "
-msgstr " Įterpti bylą "
+msgstr " Įterpti rinkmeną "
 
 msgid " Cannot insert file. "
-msgstr " Nepavyko įterpti bylos. "
+msgstr " Nepavyko įterpti rinkmenos. "
 
 msgid " Sort block "
-msgstr " Rūšiuoti bloką "
+msgstr " Rikiuoti bloką "
 
 msgid " You must first highlight a block of text. "
 msgstr " Pažymėkite teksto bloką. "
 
 msgid " Run Sort "
-msgstr " Rūšiuoti "
+msgstr " Rikiuoti "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Nurodykite rūšiavimo nustatymus, atskirtus tarpu: "
+msgstr " Nurodykite rikiavimo nustatymus, atskirtus tarpu: "
 
 msgid " Sort "
-msgstr " Rūšiuoti "
+msgstr " Rikiuoti "
 
 msgid " Cannot execute sort command "
 msgstr " Nepavyko įvykdyti „sort“ komandos "
@@ -359,12 +361,12 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Byla „%s“ jau taisoma\n"
+"Rinkmena „%s“ jau taisoma\n"
 "Naudotojas: %s\n"
 "Proceso ID: %d"
 
 msgid "File locked"
-msgstr "Byla užblokuota"
+msgstr "Rinkmena užblokuota"
 
 msgid "&Grab lock"
 msgstr "&Paimti bloką"
@@ -393,73 +395,73 @@ msgstr ""
 "         parašytas „Midnight Commander“.\n"
 
 msgid "&Open file..."
-msgstr "At&verti bylą..."
+msgstr "At&verti rinkmeną..."
 
 msgid "&New              C-n"
-msgstr "&Nauja            C-n"
+msgstr "&Nauja                C-n"
 
 msgid "&Save              F2"
-msgstr "Į&rašyti           F2"
+msgstr "Į&rašyti               F2"
 
 msgid "Save &as...       F12"
-msgstr "Įrašyti &kaip...  F12"
+msgstr "Įrašyti &kaip...      F12"
 
 msgid "&Insert file...   F15"
-msgstr "Įterpt&i bylą...  F15"
+msgstr "Įterpt&i rinkmeną...  F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "Kopijuoti į &bylą C-f"
+msgstr "Kopijuoti į &rinkmeną C-f"
 
 msgid "&User menu...     F11"
-msgstr "Naudotojo meni&u  F11"
+msgstr "Naudotojo meni&u      F11"
 
 msgid "A&bout...            "
-msgstr "A&pie...             "
+msgstr "A&pie...                 "
 
 msgid "&Quit             F10"
-msgstr "Iš&eiti           F10"
+msgstr "Iš&eiti               F10"
 
 msgid "&New            C-x k"
-msgstr "&Nauja          C-x k"
+msgstr "&Nauja              C-x k"
 
 msgid "Copy to &file...     "
-msgstr "Kopijuoti į &bylą... "
+msgstr "Kopijuoti į &rinkmeną... "
 
 msgid "&Toggle Mark       F3"
-msgstr "Keis&ti žymėjimą   F3"
+msgstr "Keis&ti žymėjimą       F3"
 
 msgid "&Mark Columns    S-F3"
-msgstr "Žy&mėti stulpelius   "
+msgstr "Žy&mėti stulpelius       "
 
 msgid "Toggle &ins/overw Ins"
-msgstr "Keisti įterpimo rež. "
+msgstr "Keisti įterpimo rež.     "
 
 msgid "&Copy              F5"
-msgstr "&Kopijuoti         F5"
+msgstr "&Kopijuoti             F5"
 
 msgid "&Move              F6"
-msgstr "&Perkelti          F6"
+msgstr "&Perkelti              F6"
 
 msgid "&Delete            F8"
-msgstr "Ša&linti           F9"
+msgstr "Ša&linti               F9"
 
 msgid "&Undo             C-u"
-msgstr "Atša&ukti         C-u"
+msgstr "Atša&ukti             C-u"
 
 msgid "&Beginning     C-PgUp"
-msgstr "Į pra&džią     C-PgUp"
+msgstr "Į pra&džią         C-PgUp"
 
 msgid "&End           C-PgDn"
-msgstr "Į &galą        C-PgDn"
+msgstr "Į &galą            C-PgDn"
 
 msgid "&Search...         F7"
-msgstr "&Paieška...        F7"
+msgstr "&Paieška...            F7"
 
 msgid "Search &again     F17"
-msgstr "Iešk&oti vėl      F17"
+msgstr "Iešk&oti vėl          F17"
 
 msgid "&Replace...        F4"
-msgstr "Pa&keisti...       F4"
+msgstr "Pa&keisti...           F4"
 
 msgid "&Go to line...            M-l"
 msgstr "&Eiti į eilutę...         M-l"
@@ -518,16 +520,17 @@ msgstr "&Bendrosios..."
 msgid "&Save mode..."
 msgstr "Įrašymo režima&s..."
 
-#, fuzzy
 msgid "Learn &Keys..."
 msgstr "Mokyti &klavišų..."
 
-#, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "Sintak&sės ryškinimas"
+msgstr "Sintak&sės ryškinimas..."
+
+msgid "Save setu&p..."
+msgstr "Įrašyti nu&statymus..."
 
 msgid " File "
-msgstr " Byla "
+msgstr " Rinkmena "
 
 msgid " Edit "
 msgstr " Taisa "
@@ -547,9 +550,8 @@ msgstr "Intuityvus"
 msgid "Emacs"
 msgstr "„Emacs“"
 
-#, fuzzy
 msgid "User-defined"
-msgstr "Kit&oks:"
+msgstr "Kit&oks"
 
 msgid "None"
 msgstr "Joks"
@@ -570,7 +572,7 @@ msgid "Synta&x highlighting"
 msgstr "Sintak&sės ryškinimas"
 
 msgid "Save file &position"
-msgstr "Išsaugoti vietą by&loje"
+msgstr "Išsaugoti vietą ri&nkmenoje"
 
 msgid "Confir&m before saving"
 msgstr "Patvirtinti pri&eš įrašant"
@@ -621,67 +623,67 @@ msgid "PullDn"
 msgstr "Meniu"
 
 msgid " Load syntax file "
-msgstr " Įkelti sintaksės bylą "
+msgstr " Įkelti sintaksės rinkmeną "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" Nepavyko atverti bylos „%s“ \n"
+" Nepavyko atverti rinkmeną „%s“ \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Klaida bylos %s eilutėje %d "
+msgstr " Klaida rinkmenos %s eilutėje %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "„bind“: neteisingas argumentų kiekis, „bind <klavišas> <komanda>“"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "„bind“: Netaisyklinga klavišo reikšmė „%s“"
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "„bind“: Hmm... nėra klavišo?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "„bind“: Nežinomas klavišas „%s“"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " „chown“ komanda "
+msgstr "„bind“: Nežinoma komanda „%s“"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
+msgstr "%s: Sintaksė: %s <n> <komanda> <pavadinimas>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " „chown“ komanda "
+msgstr "%s: Nežinoma komanda „%s“"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: fn turėtų būti 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " „chown“ komanda "
+msgstr "%s:%d: nežinoma komanda „%s“"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s not found!"
-msgstr "Įspėjimas: byla %s nerasta\n"
+msgstr "%s nerasta!"
 
 msgid "&Set"
 msgstr "&Nustatyti"
@@ -753,13 +755,13 @@ msgstr ""
 " nei mes galime pateikti. \n"
 
 msgid "&Full file list"
-msgstr "Pilnas &bylų sąrašas"
+msgstr "Pilnas &rinkmenų sąrašas"
 
 msgid "&Brief file list"
-msgstr "Tru&mpas bylų sąrašas"
+msgstr "Tru&mpas rinkmenų sąrašas"
 
 msgid "&Long file list"
-msgstr "I&lgas bylų sąrašas"
+msgstr "I&lgas rinkmenų sąrašas"
 
 msgid "&User defined:"
 msgstr "Kit&oks:"
@@ -778,6 +780,9 @@ msgstr "Skir&ti ABC nuo abc"
 
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
+
+msgid " confirm di&Rectory hotlist delete "
+msgstr " patvirtinti katalogų są&rašo šalinimą "
 
 msgid " confirm &Exit "
 msgstr " patvirtinti išė&jimą "
@@ -818,9 +823,8 @@ msgstr "Įvesties / išvesties kodų lentelė:"
 msgid "&Select"
 msgstr "Ž&ymėti"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "&Pasyvus režimas"
+msgstr "Pasyvus režimas per įgaliotąjį serverį"
 
 msgid "Use &passive mode"
 msgstr "&Pasyvus režimas"
@@ -829,7 +833,7 @@ msgid "&Use ~/.netrc"
 msgstr "Na&udoti „~/.netrc“"
 
 msgid "&Always use ftp proxy"
-msgstr "N&audoti FTP tarpinę stotį:"
+msgstr "N&audoti FTP įgaliotajį serverį:"
 
 msgid "sec"
 msgstr "sek."
@@ -844,11 +848,12 @@ msgid "Timeout for freeing VFSs:"
 msgstr "VFS galiojimas:"
 
 msgid " Virtual File System Setting "
-msgstr " Virtualios bylų sistemos nustatymai "
+msgstr " Virtualios rinkmenų sistemos nustatymai "
 
 msgid "Quick cd"
 msgstr "Greitas „cd“"
 
+#. want cd like completion
 msgid "cd"
 msgstr "Eiti į: "
 
@@ -856,7 +861,7 @@ msgid "Symbolic link filename:"
 msgstr "Simbolinės nuorodos pavadinimas:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Esančios bylos pavad. (į kurią nuoroda bus nukreipta):"
+msgstr "Esančios rinkmenos pavad. (į kurią nuoroda bus nukreipta):"
 
 msgid "Symbolic link"
 msgstr "Simbolinė nuoroda"
@@ -894,7 +899,7 @@ msgstr "\\\\%s\\%s slaptažodis"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "Įspėjimas: byla %s nerasta\n"
+msgstr "Įspėjimas: rinkmena %s nerasta\n"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -999,6 +1004,7 @@ msgstr " Prisijungimo vardas "
 msgid " Chown command "
 msgstr " „chown“ komanda "
 
+#. add fields for unknown names (numbers)
 msgid "<Unknown user>"
 msgstr "<Nežinomas naud.>"
 
@@ -1006,16 +1012,16 @@ msgid "<Unknown group>"
 msgstr "<Nežnoma grupė>"
 
 msgid "Files tagged, want to cd?"
-msgstr "Bylos pažymėtos, norite įvykdyti „cd“?"
+msgstr "Rinkmenos pažymėtos, norite įvykdyti „cd“?"
 
 msgid "Cannot change directory"
 msgstr " Nepavyko pakeisti katalogo "
 
 msgid " View file "
-msgstr " Rodyti bylą "
+msgstr " Rodyti rinkmeną "
 
 msgid " Filename:"
-msgstr " Bylos pavadinimas:"
+msgstr " Rinkmenos pavadinimas:"
 
 msgid " Filtered view "
 msgstr " Filtruotas vaizdas "
@@ -1033,7 +1039,7 @@ msgid " Filter "
 msgstr " Filtras  "
 
 msgid " Set expression for filtering filenames"
-msgstr " Nustatyti bylų vardų filtro išraišką"
+msgstr " Nustatyti rinkmenų vardų filtro išraišką"
 
 msgid "  Malformed regular expression  "
 msgstr "  Netaisyklinga reguliari išraiška  "
@@ -1045,10 +1051,10 @@ msgid " Unselect "
 msgstr " Atžymėti "
 
 msgid "Extension file edit"
-msgstr "Plėtinių bylos keitimas"
+msgstr "Plėtinių rinkmenos keitimas"
 
 msgid " Which extension file you want to edit? "
-msgstr " Kurią plėtinių bylą norite keisti? "
+msgstr " Kurią plėtinių rinkmeną norite keisti? "
 
 msgid "&User"
 msgstr "&Naudotojo"
@@ -1060,7 +1066,7 @@ msgid " Menu edit "
 msgstr " Meniu keitimas "
 
 msgid " Which menu file do you want to edit? "
-msgstr " Kurią meniu bylą norite keisti? "
+msgstr " Kurią meniu rinkmeną norite keisti? "
 
 msgid "&Local"
 msgstr "&Lokalią"
@@ -1069,10 +1075,10 @@ msgid "&Home"
 msgstr "&Namų"
 
 msgid "Syntax file edit"
-msgstr "Sintaksės bylos keitimas"
+msgstr "Sintaksės rinkmenos keitimas"
 
 msgid " Which syntax file you want to edit? "
-msgstr " Kurią sintaksės bylą norite keisti? "
+msgstr " Kurią sintaksės rinkmeną norite keisti? "
 
 msgid " Compare directories "
 msgstr " Palyginti katalogus "
@@ -1159,14 +1165,14 @@ msgid " SMB link to machine "
 msgstr " SMB ryšys "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Atkurti „ext2fs“ bylų sistemos bylas "
+msgstr " Atkurti „ext2fs“ rinkmenų sistemos rinkmenas "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 " Nurodykite įtaisą (be „/dev/“) iš kurio\n"
-"   atkurti bylas: (F1 - pagalba)"
+"   atkurti rinkmenas: (F1 - pagalba)"
 
 msgid " Setup saved to ~/"
 msgstr " Nustatymai įrašyti į ~/"
@@ -1183,13 +1189,13 @@ msgstr ""
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr "Negalima vykdyti komandą nevietinėje bylų sistemoje"
+msgstr "Negalima vykdyti komandą nevietinėje rinkmenų sistemoje"
 
 msgid " The shell is already running a command "
 msgstr " Aplinkoje jau vykdoma komanda "
 
 msgid "&Unsorted"
-msgstr "Nerūši&uotai"
+msgstr "Neriki&uotai"
 
 msgid "&Name"
 msgstr "Pavadi&nimas"
@@ -1212,6 +1218,7 @@ msgstr "Dydi&s"
 msgid "&Inode"
 msgstr "„&Inode“"
 
+#. New sort orders
 msgid "&Type"
 msgstr "&Tipas"
 
@@ -1250,7 +1257,7 @@ msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Nepavyko sukurti laikinos komandų bylos \n"
+" Nepavyko sukurti laikinos komandų rinkmenos \n"
 "  %s "
 
 msgid " Parameter "
@@ -1258,7 +1265,7 @@ msgstr " Parametras "
 
 #, c-format
 msgid " %s%s file error"
-msgstr " „%s%s“ bylos klaida"
+msgstr " „%s%s“ rinkmenos klaida"
 
 #, c-format
 msgid ""
@@ -1266,21 +1273,21 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"3.0 versijoje pasikeitė „%smc.ext“ bylos formatas. Panašu, kad įdiegimas "
+"3.0 versijoje pasikeitė „%smc.ext“ rinkmenos formatas. Panašu, kad įdiegimas "
 "nepavyko. Įsidiekite naują „Midnight Commander“ versiją."
 
 #, c-format
 msgid " ~/%s file error "
-msgstr " „ „~/%s“ bylos klaida "
+msgstr " „ „~/%s“ rinkmenos klaida "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"3.0 versijoje pasikeitė „~/%s“ bylos formatas. Galite ją nukopijuoti iš „%"
-"smc.ext“ arba naudoti tą bylą kaip pavyzdį naujos parašymui."
+"3.0 versijoje pasikeitė „~/%s“ rinkmenos formatas. Galite ją nukopijuoti iš "
+"„%smc.ext“ arba naudoti tą rinkmeną kaip pavyzdį naujos parašymui."
 
 msgid " Copy "
 msgstr " Kopijuoti "
@@ -1310,7 +1317,7 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Negalima sukurti stabilios simb. nuorodos tarp nevietinių bylų sistemų: \n"
+" Negalima sukurti stabilios simb. nuorodos tarp nevietinių rinkmenų sistemų: \n"
 "\n"
 " „Stabilių simb. nuorodų“ nustatymas bus išjungtas "
 
@@ -1335,19 +1342,19 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko nustatyti bylos „%s“ būklės („stat“) \n"
+" Nepavyko nustatyti rinkmenos „%s“ būklės („stat“) \n"
 " %s "
 
 #, c-format
 msgid " `%s' and `%s' are the same file "
-msgstr " „%s“ ir „%s“ yra ta pati byla "
+msgstr " „%s“ ir „%s“ yra ta pati rinkmena "
 
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko sukurti specialiosios bylos „%s“ \n"
+" Nepavyko sukurti specialiosios rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1355,7 +1362,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko pakeisti bylos „%s“ nuosavybės teisių \n"
+" Nepavyko pakeisti rinkmenos „%s“ nuosavybės teisių \n"
 " %s "
 
 #, c-format
@@ -1363,7 +1370,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko pakeisti bylos „%s“ režimo \n"
+" Nepavyko pakeisti rinkmenos „%s“ režimo \n"
 " %s "
 
 #, c-format
@@ -1371,18 +1378,18 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko atverti bylos „%s“ \n"
+" Nepavyko atverti rinkmenos „%s“ \n"
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Atsiuntimas iš naujo nepavyko, bus perrašyta byla "
+msgstr " Atsiuntimas iš naujo nepavyko, bus perrašyta rinkmena "
 
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko nustatyti bylos „%s“ būklės („fstat“) \n"
+" Nepavyko nustatyti rinkmenos „%s“ būklės („fstat“) \n"
 " %s "
 
 #, c-format
@@ -1390,7 +1397,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko atverti paskirties bylos „%s“ \n"
+" Nepavyko atverti paskirties rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1398,7 +1405,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko nustatyti paskirties bylos „%s“ būklės („fstat“) \n"
+" Nepavyko nustatyti paskirties rinkmenos „%s“ būklės („fstat“) \n"
 " %s "
 
 #, c-format
@@ -1406,7 +1413,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko perskaityti bylos „%s“ \n"
+" Nepavyko perskaityti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1414,7 +1421,7 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko įrašyti į bylą „%s“ \n"
+" Nepavyko įrašyti į rinkmeną „%s“ \n"
 " %s "
 
 msgid "(stalled)"
@@ -1425,7 +1432,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko užverti bylos „%s“ \n"
+" Nepavyko užverti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1433,11 +1440,11 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko užverti paskirties bylos „%s“ \n"
+" Nepavyko užverti paskirties rinkmenos „%s“ \n"
 " %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Gauta nepilna byla. Ar ją išlaikyti?"
+msgstr "Gauta nepilna rinkmena. Ar ją išlaikyti?"
 
 msgid "&Delete"
 msgstr "Š&alinti"
@@ -1498,7 +1505,7 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko patikrinti bylos „%s“ \n"
+" Nepavyko patikrinti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1510,7 +1517,7 @@ msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko perkelti bylos „%s“ į „%s“ \n"
+" Nepavyko perkelti rinkmenos „%s“ į „%s“ \n"
 " %s "
 
 #, c-format
@@ -1518,7 +1525,7 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko pašalinti bylos „%s“ \n"
+" Nepavyko pašalinti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1532,7 +1539,7 @@ msgstr " Nepavyko perrašyti katalogo „%s“ %s "
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
-" Nepavyko perrašyti bylos „%s“ \n"
+" Nepavyko perrašyti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1548,7 +1555,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Nepavyko pašalinti bylos „%s“ \n"
+" Nepavyko pašalinti rinkmenos „%s“ \n"
 " %s "
 
 #, c-format
@@ -1559,6 +1566,15 @@ msgstr ""
 " Nepavyko pašalinti katalogo „%s“ \n"
 " %s "
 
+#.
+#. * This array introduced to avoid translation problems. The former (op_names)
+#. * is assumed to be nouns, suitable in dialog box titles; this one should
+#. * contain whatever is used in prompt itself (i.e. in russian, it's verb).
+#. * Notice first symbol - it is to fool gettext and force these strings to
+#. * be different for it. First symbol is skipped while building a prompt.
+#. * (I don't use spaces around the words, because someday they could be
+#. * dropped, when widgets get smarter)
+#.
 msgid "1Copy"
 msgstr "1Kopijuoti"
 
@@ -1568,6 +1584,15 @@ msgstr "1Perkelti"
 msgid "1Delete"
 msgstr "1Šalinti"
 
+#.
+#. * These are formats for building a prompt. Parts encoded as follows:
+#. * %o - operation from op_names1
+#. * %f - file/files or files/directories, as appropriate
+#. * %m - "with source mask" or question mark for delete
+#. * %s - source name (truncated)
+#. * %d - number of marked files
+#. * %e - "to:" or question mark for delete
+#. *
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f „%s“%m"
@@ -1577,10 +1602,10 @@ msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "file"
-msgstr "bylą"
+msgstr "rinkmeną"
 
 msgid "files"
-msgstr "bylas"
+msgstr "rinkmenas"
 
 msgid "directory"
 msgstr "katalogą"
@@ -1589,7 +1614,7 @@ msgid "directories"
 msgstr "katalogus"
 
 msgid "files/directories"
-msgstr "bylas/katalogus"
+msgstr "rinkmenas/katalogus"
 
 msgid " with source mask:"
 msgstr ", tokiu formatu:"
@@ -1650,7 +1675,7 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "File"
-msgstr "Byla"
+msgstr "Rinkmena"
 
 msgid "Count"
 msgstr "Kiekis"
@@ -1669,7 +1694,7 @@ msgstr "Trinama"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Paskirties byla „%s“ jau yra!"
+msgstr "Paskirties rinkmena „%s“ jau yra!"
 
 msgid "If &size differs"
 msgstr "Jei &skiriasi dydis"
@@ -1706,17 +1731,20 @@ msgid "Source date: %s, size %u"
 msgstr "Šaltinio data:   %s, dydis %u"
 
 msgid " File exists "
-msgstr " Byla jau yra "
+msgstr " Rinkmena jau yra "
 
 msgid " Background process: File exists "
-msgstr " Foninis procesas: byla jau yra "
+msgstr " Foninis procesas: rinkmena jau yra "
 
+#. follow symlinks and preserve Attributes must be the first
 msgid "preserve &Attributes"
 msgstr "Išsaugoti &atributus"
 
+#. &op_preserve
 msgid "follow &Links"
 msgstr "Sekti &nuorodomis"
 
+#. &file_mask_op_follow_links
 msgid "to:"
 msgstr "į:"
 
@@ -1729,6 +1757,7 @@ msgstr "&Fonas"
 msgid "&Stable Symlinks"
 msgstr "&Stabilios simb. nuor."
 
+#. &file_mask_stable_symlinks
 msgid "&Dive into subdir if exists"
 msgstr "&Jei yra, &ir pakatalogius"
 
@@ -1771,7 +1800,7 @@ msgid "Start at:"
 msgstr "Pradėti nuo:"
 
 msgid "Filename:"
-msgstr "Bylos pavad.:"
+msgstr "Rinkmenos pavad.:"
 
 msgid "Content: "
 msgstr "Turinys: "
@@ -1780,11 +1809,11 @@ msgid "&Tree"
 msgstr "&Medis"
 
 msgid "Find File"
-msgstr "Rasti bylą"
+msgstr "Rasti rinkmeną"
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "Ieškoma byloje %s"
+msgstr "Ieškoma rinkmenoje %s"
 
 msgid "Finished"
 msgstr "Baigta"
@@ -1796,15 +1825,16 @@ msgstr "Ieškoma %s"
 msgid "Searching"
 msgstr "Ieškoma"
 
+#. Create a replacement page with the error message
 msgid " Help file format error\n"
-msgstr " Pagalbos bylos formato klaida\n"
+msgstr " Pagalbos rinkmenos formato klaida\n"
 
 msgid " Internal bug: Double start of link area "
 msgstr " Vidinė klaida: „Double start of link area“ "
 
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " Nepavyko rasti „%s“ mazgo pagalbos byloje "
+msgstr " Nepavyko rasti „%s“ mazgo pagalbos rinkmenoje "
 
 msgid "Index"
 msgstr "Rodyklė"
@@ -1857,6 +1887,10 @@ msgstr "Katalogų sąrašas"
 msgid " Directory path "
 msgstr " Katalogo kelias "
 
+#. This one holds the displayed pathname
+#. We add the labels.  We are interested in the last one,
+#. * that one will hold the path name label
+#.
 msgid " Directory label "
 msgstr " Katalogo žymė "
 
@@ -1891,6 +1925,13 @@ msgstr " Šalinti: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+"\n"
+" Ar tikrai norite pašalinti šį punktą?"
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1905,7 +1946,7 @@ msgid "MC was unable to write ~/"
 msgstr "Nepavyko įrašyti ~/"
 
 msgid " file, your old hotlist entries were not deleted"
-msgstr " bylos, seni įrašai išliko"
+msgstr " rinkmenos, seni įrašai išliko"
 
 msgid " Hotlist Load "
 msgstr " Katalogų sąrašo įkėlimas "
@@ -1914,9 +1955,10 @@ msgstr " Katalogų sąrašo įkėlimas "
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
+#. This printf pattern string is used as a reference for size
 #, c-format
 msgid "File:       %s"
-msgstr "Byla:       %s"
+msgstr "Rinkmena:   %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
@@ -1945,7 +1987,7 @@ msgstr "Įtaisas:   %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Bylų sistema: %s"
+msgstr "Rinkmenų sistema: %s"
 
 #, c-format
 msgid "Accessed:  %s"
@@ -1955,13 +1997,14 @@ msgstr "Pasiekta:  %s"
 msgid "Modified:  %s"
 msgstr "Keista:    %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
-msgstr "Sukurta:   %s"
+msgid "Status:    %s"
+msgstr "Būklė:     %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Įreng. tipas: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
@@ -1969,11 +2012,10 @@ msgstr "Dydis:     %s"
 
 #, c-format
 msgid " (%ld block)"
-msgstr " (%ld blokas)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blokų)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blokas)"
+msgstr[1] " (%ld blokai)"
+msgstr[2] " (%ld blokų)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -1992,7 +2034,7 @@ msgid "Location:  %Xh:%Xh"
 msgstr "Vieta:      %Xh:%Xh"
 
 msgid "File:       None"
-msgstr "Byla:       nėra"
+msgstr "Rikmena:    nėra"
 
 msgid "&Vertical"
 msgstr "&Vertikalus"
@@ -2025,8 +2067,9 @@ msgid "pe&Rmissions"
 msgstr "Lei&dimai"
 
 msgid "&File types"
-msgstr "&Bylų &tipai"
+msgstr "&Rinkmenų tipai"
 
+#. length of line with '<' '>' buttons
 msgid " Panel split "
 msgstr " Skydų dalijimas "
 
@@ -2065,7 +2108,7 @@ msgstr ""
 "Tuomet paspauskite jį dar kartą ir patikrinkite,\n"
 "ar prie mygtuko atsirado „OK“.\n"
 "\n"
-"Jei norite atsisakyti, paspauskite „Escape“\n"
+"Jei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \n"
 "ir palaukite."
 
 msgid " Cannot accept this key "
@@ -2083,7 +2126,7 @@ msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Panašu, kad visi klavišai jau veikė\n"
+"Panašu, kad visi klavišai jau veikia\n"
 "gerai. Tai puiku."
 
 msgid "&Discard"
@@ -2131,7 +2174,7 @@ msgid "&Info           C-x i"
 msgstr "&Informacija    C-x i"
 
 msgid "&Sort order..."
-msgstr "Rūš. t&varka..."
+msgstr "Rik. t&varka..."
 
 msgid "&Filter..."
 msgstr "&Filtras..."
@@ -2158,7 +2201,7 @@ msgid "&View               F3"
 msgstr "&Rodyti              F3"
 
 msgid "Vie&w file...         "
-msgstr "Rodyti b&ylą...       "
+msgstr "Rodyti &rinkmeną...   "
 
 msgid "&Filtered view     M-!"
 msgstr "&Filtruotas vaizdas M-!"
@@ -2211,11 +2254,15 @@ msgstr "Žymėti at&virkščiai M-*"
 msgid "e&Xit              F10"
 msgstr "&Išeiti             F10"
 
+#. I know, I'm lazy, but the tree widget when it's not running
+#. * as a panel still has some problems, I have not yet finished
+#. * the WTree widget port, sorry.
+#.
 msgid "&Directory tree"
 msgstr "&Katalogų medis"
 
 msgid "&Find file            M-?"
-msgstr "&Rasti bylą             M-?"
+msgstr "&Rasti rinkmeną         M-?"
 
 msgid "s&Wap panels          C-u"
 msgstr "S&ukeisti skydus        C-u"
@@ -2245,22 +2292,22 @@ msgid "&Background jobs      C-x j"
 msgstr "Foniniai dar&bai      C-x j"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "Atk&urti bylas (tik „ext2“)"
+msgstr "Atk&urti rinkmenas  (ext2fs)"
 
 msgid "&Listing format edit"
 msgstr "Keisti r&odymo formatą"
 
 msgid "Edit &extension file"
-msgstr "K&eisti plėtinių bylą"
+msgstr "K&eisti plėtinių rinkmeną"
 
 msgid "Edit &menu file"
-msgstr "Keisti &meniu bylą"
+msgstr "Keisti &meniu rinkmeną"
 
 msgid "Edit edi&tor menu file"
-msgstr "Keisti red. meniu b&ylą"
+msgstr "Keisti red. meniu r&inkmeną"
 
 msgid "Edit &syntax file"
-msgstr "Keisti &sintaksės bylą"
+msgstr "Keisti &sintaksės rinkmeną"
 
 msgid "&Configuration..."
 msgstr "Konfigūra&cija..."
@@ -2278,7 +2325,7 @@ msgid "learn &Keys..."
 msgstr "Mokyti &klavišų..."
 
 msgid "&Virtual FS..."
-msgstr "&Virtuali bylų sistema..."
+msgstr "&Virtuali rinkmenų sistema..."
 
 msgid "&Save setup"
 msgstr "Įrašyti nu&statymus"
@@ -2290,7 +2337,7 @@ msgid " &Left "
 msgstr " &Kairysis skydas "
 
 msgid " &File "
-msgstr " &Byla "
+msgstr " &Rinkmena "
 
 msgid " &Command "
 msgstr " &Komanda "
@@ -2372,14 +2419,14 @@ msgstr ""
 "{TEKSTAS} ir {FONAS} gali būti praleisti (bus naudojamos pradinės reikšmės)\n"
 "\n"
 "Raktažodžiai:\n"
-"   Globalūs:     errors, reverse, gauge, input, viewunderline\n"
-"   Bylos:        normal, selected, marked, markselect\n"
-"   Dialogai:     dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                 errdhotfocus\n"
-"   Meniu:        menu, menuhot, menusel, menuhotsel\n"
-"   Redaktorius:  editnormal, editbold, editmarked\n"
-"   Pagalba:      helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Bylų tipai:   directory, executable, link, stalelink, device, special, "
+"   Globalūs:       errors, reverse, gauge, input, viewunderline\n"
+"   Rinkmenos:      normal, selected, marked, markselect\n"
+"   Dialogai:       dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                   errdhotfocus\n"
+"   Meniu:          menu, menuhot, menusel, menuhotsel\n"
+"   Redaktorius:    editnormal, editbold, editmarked\n"
+"   Pagalba:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Rinkmenų tipai: directory, executable, link, stalelink, device, special, "
 "core\n"
 "\n"
 "Spalvos:\n"
@@ -2425,7 +2472,7 @@ msgid "Displays a help screen on how to change the color scheme"
 msgstr "Padeda pakeisti spalvų schemą"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Veda FTP dialogo žurnalą į nurodytą bylą"
+msgstr "Veda FTP dialogo žurnalą į nurodytą rinkmeną"
 
 msgid "Set debug level"
 msgstr "Nurodo „debug“ lygį"
@@ -2434,7 +2481,7 @@ msgid "Print data directory"
 msgstr "Parodo duomenų katalogą"
 
 msgid "Print last working directory to specified file"
-msgstr "Įrašo paskutinį esamą katalogą į nurodytą bylą"
+msgstr "Įrašo paskutinį esamą katalogą į nurodytą rinkmeną"
 
 msgid "Enables subshell support (default)"
 msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
@@ -2443,10 +2490,10 @@ msgid "Disables subshell support"
 msgstr "Išjungia „subshell“ palaikymą"
 
 msgid "Launches the file viewer on a file"
-msgstr "Parodo bylos turinį"
+msgstr "Parodo rinkmenos turinį"
 
 msgid "Edits one file"
-msgstr "Keičia vieną bylą"
+msgstr "Keičia vieną rinkmeną"
 
 msgid " Notice "
 msgstr " Pastaba "
@@ -2457,8 +2504,9 @@ msgid ""
 " files have been moved now\n"
 msgstr ""
 " „Midnight Commander“ savo nustatymus laiko \n"
-" „~/.mc“ kataloge, bylos perkeltos į jį.\n"
+" „~/.mc“ kataloge, rinkmenos perkeltos į jį.\n"
 
+#. other options
 msgid "safe de&Lete"
 msgstr "Saugus ša&linimas"
 
@@ -2495,11 +2543,12 @@ msgstr "Skaičiuo&ti sumas"
 msgid "&Verbose operation"
 msgstr "Išsa&mios operacijos"
 
+#. panel options
 msgid "&Fast dir reload"
 msgstr "&Greitai atnaujinti"
 
 msgid "mi&X all files"
-msgstr "Maišyti visas &bylas"
+msgstr "Maišyti visas &rinkmenas"
 
 msgid "&Drop down menus"
 msgstr "Išsklei&džiami meniu"
@@ -2508,10 +2557,10 @@ msgid "ma&Rk moves down"
 msgstr "Žymin&t eiti žemyn"
 
 msgid "show &Hidden files"
-msgstr "Rodyti s&lepiam. bylas"
+msgstr "Rodyti s&lepiam. rinkmenas"
 
 msgid "show &Backup files"
-msgstr "R&odyti kopijų bylas"
+msgstr "R&odyti kopijų rinkmenas"
 
 msgid "&Never"
 msgstr "&Niekada"
@@ -2522,6 +2571,7 @@ msgstr "Kvailuose &terminaluose"
 msgid "Alwa&ys"
 msgstr "Visa&da"
 
+#. Similar code is in layout.c (init_layout())
 msgid " Panel options "
 msgstr " Skydų nustatymai "
 
@@ -2638,12 +2688,18 @@ msgid "Group"
 msgstr "Grupė"
 
 #, c-format
-msgid "%s bytes in %d file"
-msgstr "%s baitų %d byloje"
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s baitas"
+msgstr[1] "%s baitai"
+msgstr[2] "%s baitų"
 
 #, c-format
-msgid "%s bytes in %d files"
-msgstr "%s baitų %d bylose"
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s baitas %d rinkmenoje"
+msgstr[1] "%s baitai %d rinkmenoje"
+msgstr[2] "%s baitų %d rinkmenoje"
 
 msgid "<readlink failed>"
 msgstr "<„readlink“ nepavyko>"
@@ -2666,6 +2722,7 @@ msgstr "Taisyti"
 msgid "RenMov"
 msgstr "Perkelt"
 
+#. FIXME: mkdir is currently defunct
 msgid "Mkdir"
 msgstr "N.katal"
 
@@ -2756,14 +2813,14 @@ msgstr "Su daugelio koduočių galimybe\n"
 
 #, c-format
 msgid "Virtual File System:"
-msgstr "Virtualioji bylų sistema:"
+msgstr "Virtualioji rinkmenų sistema:"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-" Nepavyko atverti bylos „%s“ rašymui:\n"
+" Nepavyko atverti rinkmenos „%s“ rašymui:\n"
 "%s\n"
 
 #, c-format
@@ -2806,11 +2863,11 @@ msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Nepavyko įrašyti į vylą „%s“:\n"
+"Nepavyko įrašyti į rinkmeną „%s“:\n"
 "%s\n"
 
 msgid " Format error on file Extensions File "
-msgstr " Formato klaida bylų plėtinių byloje"
+msgstr " Formato klaida rinkmenų plėtinių rinkmenoje"
 
 #, c-format
 msgid " The %%var macro has no default "
@@ -2833,26 +2890,29 @@ msgid " False: "
 msgstr " Melas: "
 
 msgid " Warning -- ignoring file "
-msgstr " Įspėjimas -- byla ignoruojama "
+msgstr " Įspėjimas -- rinkmena ignoruojama "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Byla „%s“ nepriklauso „root“ ar jums arba visi gali į ją rašyti.\n"
+"Rinkmena „%s“ nepriklauso „root“ ar jums arba visi gali į ją rašyti.\n"
 "Jos naudojimas gali būti nesaugus"
 
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " Tinkamų įrašų „%s“ nerasta "
 
+#. Create listbox
 msgid " User menu "
 msgstr " Naudotojo meniu "
 
+#. strftime() format string for recent dates
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
+#. strftime() format string for old dates
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -2874,11 +2934,11 @@ msgstr "Nepavyko sukurti laikino katalogo „%s“: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr "Laikinosios bylos bus talpinamos kataloge „%s“\n"
+msgstr "Laikinosios rinkmenos bus talpinamos kataloge „%s“\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr "Laikinosios bylos nebus kuriamos\n"
+msgstr "Laikinosios rinkmenos nebus kuriamos\n"
 
 msgid " Pipe failed "
 msgstr " Konvejeris nepavyko "
@@ -2886,7 +2946,6 @@ msgstr " Konvejeris nepavyko "
 msgid " Dup failed "
 msgstr " „Dup“ nepavyko "
 
-#, fuzzy
 msgid " Cannot spawn child process "
 msgstr " Nepavyko sukurti vaiko "
 
@@ -2910,11 +2969,11 @@ msgstr ""
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " Nepavyko parodyti: byla nėra įprastinė "
+msgstr " Nepavyko parodyti: rinkmena nėra įprastinė "
 
 #, c-format
 msgid "File: %s"
-msgstr "Byla: %s"
+msgstr "Rinkmena: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
@@ -2922,15 +2981,15 @@ msgstr "Poslinkis 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr " Eil. %lu Stulp. %lu"
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s baitų"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s baitų"
+msgstr ">= %s baitų"
 
 #, c-format
 msgid ""
@@ -2938,12 +2997,17 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+" Klaida uždarant rinkmeną: \n"
+" %s \n"
+" Duomenys galėjo būti neįrašyti. "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Nepavyko išsaugoti bylos. "
+msgstr ""
+" Nepavyko įrašyti rinkmenos: \n"
+" %s "
 
 msgid "Invalid hex search expression"
 msgstr "Netaisyklinga šešioliktainės paieškos išraiška"
@@ -2974,62 +3038,64 @@ msgid " Enter regexp:"
 msgstr " Įveskite reguliarą išraišką: "
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|Pagalb"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar|Išeit"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "ButtonBar|ASCII"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "ButtonBar|Šešiol"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "ButtonBar|Eiti į"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "ButtonBar|Eilutė"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "ButtonBar|Rodyt"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|Keist"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|Įrašy"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "ButtonBar|Nelauž"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "ButtonBar|Lauž"
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "ButtonBar|RegIeš"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "ButtonBar|ŠšlIeš"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|Ieškot"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "ButtonBar|Pradin"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "ButtonBar|Apdorot."
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "ButtonBar|Išform."
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "ButtonBar|Formuot."
 
 msgid " History "
 msgstr " Istorija "
 
+#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
+#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 msgid "Function key 1"
 msgstr "Funkcinis klav. 1"
 
@@ -3135,6 +3201,7 @@ msgstr "Skaitm. -"
 msgid "* on keypad"
 msgstr "Skaitm. *"
 
+#. From here on, these won't be shown in Learn keys (no space)
 msgid "Left arrow keypad"
 msgstr "Skaitm. „kairėn“"
 
@@ -3215,14 +3282,14 @@ msgstr ""
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "Byloje „%s“ yra dvigubų įrašų! Praleidžiu."
+msgstr "Rinkmenoje „%s“ yra dvigubų įrašų! Praleidžiu."
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Netikėta bylos pabaiga\n"
+"Netikėta rinkmenos pabaiga\n"
 "%s"
 
 #, c-format
@@ -3241,7 +3308,7 @@ msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu baitų persiųsta"
 
 msgid "Getting file"
-msgstr "Parsiunčiama byla"
+msgstr "Parsiunčiama rinkmena"
 
 #, c-format
 msgid ""
@@ -3295,6 +3362,7 @@ msgstr "%s: atlikta."
 msgid "%s: failure"
 msgstr "%s: nepavyko"
 
+#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
@@ -3406,7 +3474,7 @@ msgstr "ftpfs: nepavyko; nėra kur grįžti"
 
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: siunčiama byla %lu (%lu)"
+msgstr "ftpfs: siunčiama rinkmena %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
@@ -3456,7 +3524,7 @@ msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Įspėjimas: klaidinga eilutė byloje „%s“:\n"
+"Įspėjimas: klaidinga eilutė rinkmenoje „%s“:\n"
 "%s\n"
 
 #, c-format
@@ -3464,7 +3532,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Įspėjimas: klaidingas parametras „%c“ byloje „%s“:\n"
+"Įspėjimas: klaidingas parametras „%c“ rinkmenoje „%s“:\n"
 "%s\n"
 
 #, c-format
@@ -3488,15 +3556,15 @@ msgstr " Klaida „%s“ šalinant katalogą „%s“ "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " „%s“ atveriant bylą „%s“ "
+msgstr " „%s“ atveriant rinkmeną „%s“ "
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " „%s“ šalinant bylą „%s“ "
+msgstr " „%s“ šalinant rinkmeną „%s“ "
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " „%s“ pervadinamos bylos\n"
+msgstr " „%s“ pervadinamos rinkmenos\n"
 
 #, c-format
 msgid ""
@@ -3510,7 +3578,7 @@ msgid "Inconsistent tar archive"
 msgstr "Prieštaringas „tar“ archyvas"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Netikėta archyvo bylos pabaiga"
+msgstr "Netikėta archyvo rinkmenos pabaiga"
 
 #, c-format
 msgid ""
@@ -3541,7 +3609,7 @@ msgstr " pradedant %d „inode“ skenavimą "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: įkeliama pašalintų bylų informacija (%d „inodes“)"
+msgstr "undelfs: įkeliama pašalintų rinkmenų informacija (%d „inodes“)"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
@@ -3559,7 +3627,7 @@ msgstr " „Ext2lib“ klaida "
 
 #, c-format
 msgid " Cannot open file %s "
-msgstr " Nepavyko atverti bylos %s "
+msgstr " Nepavyko atverti rinkmenos %s "
 
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: skaitomas bloko bitų laukas..."
@@ -3584,7 +3652,7 @@ msgstr ""
 " %s \n"
 
 msgid " vfs_info is not fs! "
-msgstr " „vfs_info“ nėra bylų sistema! "
+msgstr " „vfs_info“ nėra rinkmenų sistema! "
 
 msgid " You have to chdir to extract files first "
 msgstr " Reikia pakeisti katalogą, norint išpakuoti "
@@ -3602,55 +3670,4 @@ msgid "Internal error:"
 msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
-msgstr "Bylos pakeitimai prarasti"
-
-#~ msgid " Cannot open file "
-#~ msgstr " Nepavyko atverti bylos "
-
-#~ msgid "Col %d"
-#~ msgstr "Stlp %d"
-
-#~ msgid "  [grow]"
-#~ msgstr "  [daugiau]"
-
-#~ msgid "Ascii"
-#~ msgstr "ASCII"
-
-#~ msgid "Hex"
-#~ msgstr "Šešiol"
-
-#~ msgid "Goto"
-#~ msgstr "Eiti į"
-
-#~ msgid "Line"
-#~ msgstr "Eilutė"
-
-#~ msgid "RxSrch"
-#~ msgstr "RxPšk"
-
-#~ msgid "EdHex"
-#~ msgstr "RedŠšl"
-
-#~ msgid "EdText"
-#~ msgstr "RedTkst"
-
-#~ msgid "UnWrap"
-#~ msgstr "Nelauž."
-
-#~ msgid "Wrap"
-#~ msgstr "Laužyti"
-
-#~ msgid "HxSrch"
-#~ msgstr "ŠšlPšk"
-
-#~ msgid "Raw"
-#~ msgstr "Pirmin."
-
-#~ msgid "Parse"
-#~ msgstr "Apdorot."
-
-#~ msgid "Unform"
-#~ msgstr "Išform."
-
-#~ msgid "Format"
-#~ msgstr "Formuot"
+msgstr "Rinkmenos pakeitimai prarasti"
