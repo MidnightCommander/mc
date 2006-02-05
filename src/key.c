@@ -304,6 +304,10 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "O6C", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "O6D", MCKEY_NOACTION },
 
+    /* iTerm */
+    { KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[5;2~", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[6;2~", MCKEY_NOACTION },
+
     /* keypad keys */
     { KEY_IC,                  ESC_STR "Op",  MCKEY_NOACTION },
     { KEY_DC,                  ESC_STR "On",  MCKEY_NOACTION },

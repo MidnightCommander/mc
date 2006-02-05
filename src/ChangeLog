@@ -1,3 +1,7 @@
+2006-02-05  Arpad Gereoffy (A'rpi)  <arpi@mplayerhq.hu>
+
+	* key.c (xterm_key_defines): Add sequences for iTerm.
+
 2006-02-04  Roland Illig  <roland.illig@gmx.de>
 
 	* find.c: Added make_fullname() to avoid code duplication.
