@@ -1,3 +1,8 @@
+2006-02-06  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* widget.c (buttonbar_set_label): Fix `comparison of distinct
+	pointer types lacks a cast' gcc warning.
+
 2006-02-05  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* hotlist.c (hotlist_has_dot_dot): Define new global

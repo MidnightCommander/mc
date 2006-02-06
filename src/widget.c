@@ -2418,14 +2418,14 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cb
 }
 
 void
-buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
+buttonbar_set_label (Dlg_head *h, int idx, const char *text, voidfn cback)
 {
     WButtonBar *bb = find_buttonbar (h);
 
     if (!bb)
 	return;
 
-    assert (cback != (buttonbarfn) 0);
+    assert (cback != (voidfn) 0);
     set_label_text (bb, idx, text);
     bb->labels[idx - 1].tag = BBFUNC_VOID;
     bb->labels[idx - 1].u.fn_void = cback;
