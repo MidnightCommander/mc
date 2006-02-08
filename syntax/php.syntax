@@ -8312,8 +8312,12 @@ context default
     keyword whole and white
     keyword whole or white
 
+# Magic constants
     keyword whole __FILE__ brightred
     keyword whole __LINE__ brightred
+    keyword whole __FUNCTION__ brightred
+    keyword whole __CLASS__ brightred
+    keyword whole __METHOD__ brightred
 
     keyword whole parent brightmagenta
     keyword whole $this brightmagenta

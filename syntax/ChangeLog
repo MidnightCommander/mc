@@ -1,3 +1,7 @@
+2006-02-08  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* php.syntax: Added magic constants.
+
 2006-01-29  Roland Illig  <roland.illig@gmx.de>
 
 	* xml.syntax: Attribute names only reach upto the next "=", not
