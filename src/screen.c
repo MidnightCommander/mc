@@ -2257,6 +2257,7 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	select_item (panel);
 	show_dir (panel);
 	paint_dir (panel);
+	panel->dirty = 0;
 
 	buttonbar_set_label (h, 1, _("Help"), help_cmd);
 	buttonbar_set_label (h, 2, _("Menu"), user_file_menu_cmd);
