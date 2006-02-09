@@ -326,10 +326,6 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 			 dialog_colors, NULL, qd->help, qd->title,
 			 DLG_REVERSE);
 
-    /* We pass this to the callback */
-    dd->cols = qd->xlen;
-    dd->lines = qd->ylen;
-
     /* Count widgets */
     for (qw = qd->widgets; qw->widget_type; qw++) {
 	count++;
