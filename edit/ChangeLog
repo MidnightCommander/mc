@@ -1,3 +1,8 @@
+2006-02-10  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.c (user_menu): There is no need to prefix the filename
+	with PATH_SEP when calling concat_dir_and_file().
+
 2006-02-03  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Removed the leading PATH_SEP_STR from EDIT_DIR, as the
