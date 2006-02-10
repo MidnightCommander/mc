@@ -733,7 +733,7 @@ file's last modification time.
 file's last access time.
 .TP
 .B ctime
-file's creation time.
+file's status change time.
 .TP
 .B perm
 a string representing the current permission bits of the file.
