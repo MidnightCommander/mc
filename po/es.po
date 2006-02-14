@@ -782,7 +782,7 @@ msgid " confirm di&Rectory hotlist delete "
 msgstr " confirmar eliminación de &Favoritos "
 
 msgid " confirm &Exit "
-msgstr " confirmar &Salida"
+msgstr " confirmar &Salida "
 
 msgid " confirm e&Xecute "
 msgstr " confirmar &Ejecución "
