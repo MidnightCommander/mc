@@ -1,14 +1,14 @@
 # Spanish locale - Midnight Commander
-# Copyright (C) 1998-2005 Free Software Foundation, Inc.
-# David Martín <dmartina@excite.com>, 1998-2005.
+# Copyright (C) 1998-2006 Free Software Foundation, Inc.
+# David Martín <dmartina@excite.com>, 1998-2006.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-13 14:39+0100\n"
-"PO-Revision-Date: 2005-11-13 14:39+0100\n"
+"POT-Creation-Date: 2006-02-14 10:30+0100\n"
+"PO-Revision-Date: 2006-02-14 10:31+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -777,6 +777,9 @@ msgstr "distinguir ma&Yúsculas"
 
 msgid "Sort order"
 msgstr " Ordenar "
+
+msgid " confirm di&Rectory hotlist delete "
+msgstr " confirmar eliminación de &Favoritos "
 
 msgid " confirm &Exit "
 msgstr " confirmar &Salida"
@@ -1888,6 +1891,13 @@ msgstr " Añadir actual "
 
 msgid " Remove: "
 msgstr " Eliminar: "
+
+msgid ""
+"\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+"\n"
+" ¿Desea realmente eliminar este elemento?"
 
 msgid ""
 "\n"
