@@ -1083,7 +1083,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 	char *title;
 	int result;
 
-	title = g_strconcat (N_(" Remove: "),
+	title = g_strconcat (_(" Remove: "),
 				   name_trunc (entry->label, 30),
 				   " ",
 				   NULL);
@@ -1092,7 +1092,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 	    query_set_sel (1);
 	result = query_dialog (title,
 			_("\n Are you sure you want to remove this entry?"),
-			D_ERROR, 2, N_("&Yes"), N_("&No"));
+			D_ERROR, 2, _("&Yes"), _("&No"));
 
 	g_free (title);
 

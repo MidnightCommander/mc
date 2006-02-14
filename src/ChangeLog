@@ -1,3 +1,7 @@
+2006-02-14  David Martin  <dmartina@excite.com>
+
+	* hotlist.c (remove_from_hotlist): Fix l18n macro N_() to _().
+
 2006-02-09  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* wtools.c (quick_dialog_skip): Do not set `lines' and `cols'
