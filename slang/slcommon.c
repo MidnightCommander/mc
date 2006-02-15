@@ -2,7 +2,7 @@
  * links to the library.
  */
 /*
-Copyright (C) 2004, 2005 John E. Davis
+Copyright (C) 2004, 2005, 2006 John E. Davis
 
 This file is part of the S-Lang Library.
 
@@ -87,7 +87,7 @@ static int utf8_enable (int mode)
 
    (void) setlocale (LC_ALL, "");
 
-#ifdef HAVE_NL_LANGINFO
+#ifdef HAVE_NL_LANGINFO_CODESET
    locale = nl_langinfo (CODESET);
    if ((locale != NULL) && (*locale))
      {

@@ -1,3 +1,18 @@
+2006-02-15  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* slcommon.c: Patch to slang-2.0.6 leaving local patches intact.
+	* sldisply.c: Likewise.
+	* slerr.c: Likewise.
+	* slgetkey.c: Likewise.
+	* slmisc.c: Likewise.
+	* slsignal.c: Likewise.
+	* slsmg.c: Likewise.
+	* slstring.c: Likewise.
+	* sltermin.c: Likewise.
+	* slutty.c: Likewise.
+	* include/_slang.h: Likewise.
+	* include/slang.h: Likewise.
+
 2006-02-01  Vladimir Nadvorknik  <nadvornik@suse.cz>
 
 	* slcommon.c (utf8_enable_function): Use '==' instead of '=' for

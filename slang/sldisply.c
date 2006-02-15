@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2004, 2005 John E. Davis
+Copyright (C) 2004, 2005, 2006 John E. Davis
 
 This file is part of the S-Lang Library.
 
@@ -159,7 +159,7 @@ Brush_Info_Type;
 static Brush_Info_Type Brush_Table[JMAX_COLORS];
 
 /* 0 if least significant bit is blue, not red */
-static int Is_Fg_BGR = 0;
+/* static int Is_Fg_BGR = 0; */
 static int Is_Bg_BGR = 0;
 #define COLOR_ARG(color, is_bgr) ((is_bgr) ? RGB_to_BGR[(color)&0x7] : (color))
 static SLCONST int RGB_to_BGR[] =
@@ -1508,16 +1508,35 @@ static void write_string_with_care (char *str)
    len = strlen (str);
    if (Automatic_Margins && (Cursor_r + 1 == SLtt_Screen_Rows))
      {
-	if (len + (unsigned int) Cursor_c >= (unsigned int) SLtt_Screen_Cols)
-	  {
-	     /* For now, just do not write there.  Later, something more
-	      * sophisticated will be implemented.
-	      */
-	     if (SLtt_Screen_Cols > Cursor_c)
-	       len = SLtt_Screen_Cols - Cursor_c - 1;
-	     else 
-	       len = 0;
-	  }
+	if (_pSLtt_UTF8_Mode == 0) 
+	 {
+	   if (len + (unsigned int) Cursor_c >= (unsigned int) SLtt_Screen_Cols)
+	     {
+	        /* For now, just do not write there.  Later, something more
+	        * sophisticated will be implemented.
+	        */
+	        if (SLtt_Screen_Cols > Cursor_c)
+	          len = SLtt_Screen_Cols - Cursor_c - 1;
+	        else 
+	          len = 0;
+	     }
+	 }
+       else
+	 {
+	    unsigned int nchars = SLutf8_strlen((SLuchar_Type *)str, 1);
+	    if (nchars + (unsigned int) Cursor_c >= (unsigned int) SLtt_Screen_Cols)
+	     {
+	       if (SLtt_Screen_Cols > Cursor_c)
+	         {
+		    char *p;
+		    nchars = SLtt_Screen_Cols - Cursor_c - 1;
+		    p = (char *)SLutf8_skip_chars((SLuchar_Type *) str, (SLuchar_Type *)(str + len), nchars, NULL, 1);
+		    len = p - str;
+		 }
+	       else
+		  len = 0; 
+	     }
+	 }
      }
    tt_write (str, len);
 }
@@ -2126,10 +2145,11 @@ static void get_color_info (void)
 
 static int Termcap_Initalized = 0;
 
+/* #define USE_TERMCAP 1 */
 #ifdef USE_TERMCAP
 /* Termcap based system */
 static char Termcap_Buf[4096];
-static char Termcap_String_Buf[4096];
+/* static char Termcap_String_Buf[4096]; */
 /* static char *Termcap_String_Ptr; */
 extern char *tgetstr(char *, char **);
 extern int tgetent(char *, char *);
@@ -2181,14 +2201,22 @@ char *SLtt_tgetstr (char *cap)
 {
    char *s;
 #ifdef USE_TERMCAP
-   char *tmp_area;
+   char area_buf[4096];
+   char *area;
 #endif
    if (Termcap_Initalized == 0)
      return NULL;
    
 #ifdef USE_TERMCAP
-   tmp_area = (char*) &Termcap_String_Buf;
-   s = tgetstr (cap, &tmp_area);
+   /* tmp_area = &Termcap_String_Buf; */
+   area = area_buf;
+   s = tgetstr (cap, &area);
+   if (area > area_buf + sizeof(area_buf))
+     {
+	SLang_exit_error ("\
+The termcap tgetstr appears to have overflowed a buffer.\n\
+The integrity of this program has been violated.\n");
+     }
 #else
    s = _pSLtt_tigetstr (Terminfo, cap);
 #endif
@@ -2200,7 +2228,20 @@ char *SLtt_tgetstr (char *cap)
    if (0 == strcmp (cap, "ac"))
      return s;
 
-   return fixup_tgetstr (s);
+   s = fixup_tgetstr (s);
+#ifdef USE_TERMCAP
+   if ((s >= area_buf) && (s < area_buf + sizeof(area_buf)))
+     {
+	/* It looks like tgetstr placed the object in the buffer and
+	 * returned a pointer to that buffer.  So, we have to make a
+	 * copy of it.
+	 * 
+	 * Yes, this introduces a leak...
+	 */
+	s = SLmake_string (s);
+     }
+#endif
+   return s;
 }
 
 int SLtt_tgetnum (char *s)
@@ -2530,13 +2571,13 @@ int SLtt_initialize (char *term)
    if (Color_Fg_Str == NULL)
      {
 	Color_Fg_Str = SLtt_tgetstr ("Sf");   /* setf */
-	Is_Fg_BGR = (Color_Fg_Str != NULL);
+	/* Is_Fg_BGR = (Color_Fg_Str != NULL); */
      }
    Color_Bg_Str = SLtt_tgetstr ("AB"); /* ANSI setbf */
    if (Color_Bg_Str == NULL)
      {
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
-	Is_Bg_BGR = (Color_Bg_Str != NULL);
+	/* Is_Fg_BGR = (Color_Bg_Str != NULL); */
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)

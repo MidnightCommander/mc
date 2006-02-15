@@ -21,7 +21,7 @@ Screen_Type;
 #define TRASHED 0x2
 static int Screen_Trashed;
 
-Screen_Type SL_Screen[SLTT_MAX_SCREEN_ROWS];
+static Screen_Type SL_Screen[SLTT_MAX_SCREEN_ROWS];
 static int Start_Col, Start_Row;
 static unsigned int Screen_Cols, Screen_Rows;
 static int This_Row, This_Col;
@@ -1614,7 +1614,6 @@ void SLsmg_draw_object (int r, int c, SLwchar_Type object)
 void SLsmg_draw_hline (unsigned int n)
 {
    static unsigned char hbuf[16];
-   int count;
    int cmin, cmax;
    int final_col = This_Col + (int) n;
    int save_color;
@@ -1630,7 +1629,6 @@ void SLsmg_draw_hline (unsigned int n)
      }
 
    n = (unsigned int)(cmax - cmin);
-   count = n / 16;
 
    save_color = This_Color;
    This_Color |= SLSMG_ACS_MASK;

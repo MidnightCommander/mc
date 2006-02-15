@@ -3,7 +3,7 @@
 /* header file for S-Lang internal structures that users do not (should not)
    need.  Use slang.h for that purpose. */
 /*
-Copyright (C) 2004, 2005 John E. Davis
+Copyright (C) 2004, 2005, 2006 John E. Davis
 
 This file is part of the S-Lang Library.
 

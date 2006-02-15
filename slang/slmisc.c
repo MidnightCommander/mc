@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2004, 2005 John E. Davis
+Copyright (C) 2004, 2005, 2006 John E. Davis
 
 This file is part of the S-Lang Library.
 
@@ -39,9 +39,11 @@ char *_pSLexpand_escaped_char(char *p, SLwchar_Type *ch, int *isunicodep)
    SLwchar_Type num, base = 0;
    SLwchar_Type ch1;
    int isunicode;
+   int needs_brace;
 
    ch1 = *p++;
    isunicode = 0;
+   needs_brace = 0;
 
    switch (ch1)
      {
@@ -70,6 +72,9 @@ char *_pSLexpand_escaped_char(char *p, SLwchar_Type *ch, int *isunicodep)
 	num = 0;
 	break;
 
+      case 'u':
+	isunicode = 1;
+	/* drop */
       case 'x':			       /* hex */
 	base = 16;
 	max = '9';
@@ -84,10 +89,18 @@ char *_pSLexpand_escaped_char(char *p, SLwchar_Type *ch, int *isunicodep)
 	       i++;
 	     if (p[i] != '}')
 	       {
-		  SLang_verror (SL_UNICODE_ERROR, "Escaped unicode character missing closing }.");
+		  SLang_verror (SL_SYNTAX_ERROR, "Escaped character missing closing }.");
 		  return NULL;
 	       }
-	     isunicode = 1;
+	     /* The meaning of \x{...} is mode dependent.  If in UTF-8 mode, then
+	      * \x{...} always generates a unicode character.  Otherwise, the
+	      * meaning of \x{...} depends upon the number of characters enclosed
+	      * by the brace.  If there are less than 3, then assume no unicode.
+	      * If greater than or equal to 3, then assume unicode.
+	      */
+	     if (isunicode == 0)       /* \x... */
+	       isunicode = _pSLinterp_UTF8_Mode || (i > 2);
+	     needs_brace = 1;
 	  }
 	break;
      }
@@ -112,11 +125,11 @@ char *_pSLexpand_escaped_char(char *p, SLwchar_Type *ch, int *isunicodep)
 	p++;
      }
 
-   if (isunicode)
+   if (needs_brace)
      {
 	if (*p != '}')
 	  {
-	     SLang_verror (SL_UNICODE_ERROR, "Malformed Escaped unicode character.");
+	     SLang_verror (SL_SYNTAX_ERROR, "Malformed escaped character.");
 	     return NULL;
 	  }
 	p++;
