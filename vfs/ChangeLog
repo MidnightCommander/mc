@@ -1,3 +1,9 @@
+2006-02-17  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* ftpfs.c (ftpfs_dir_load): Do not return error on empty directory
+	listings if the ftp server indicates that the LIST command completed
+	successfully.
+
 2006-02-05  Arpie  <arpi@mplayerhq.hu>
 
 	* ftpfs.c (ftpfs_open_socket): Let the user interrupt ftpfs in

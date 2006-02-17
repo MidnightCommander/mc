@@ -1209,7 +1209,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 {
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
-    int sock, num_entries = 0;
+    int sock;
     char buffer[BUF_8K];
     int cd_first;
 
@@ -1293,13 +1293,12 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	    continue;
 	}
 	ent->ino->st.st_nlink = i;	/* Ouch, we need to preserve our counts :-( */
-	num_entries++;
 	vfs_s_insert_entry (me, dir, ent);
     }
 
     close (sock);
     me->verrno = E_REMOTE;
-    if ((ftpfs_get_reply (me, SUP.sock, NULL, 0) != COMPLETE) || !num_entries)
+    if ((ftpfs_get_reply (me, SUP.sock, NULL, 0) != COMPLETE))
 	goto fallback;
 
     if (SUP.strict == RFC_AUTODETECT)
