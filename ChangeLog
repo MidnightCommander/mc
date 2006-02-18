@@ -1,3 +1,7 @@
+2006-02-18  David Martin  <<dmartina@excite.com>
+
+	* doc/es/mc.1.in: Cleanup. Fix key naming.
+
 2006-01-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* doc/mc.1.in: Update the documentation to reflect the fact

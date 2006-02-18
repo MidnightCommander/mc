@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "Enero de 2004" "MC Versión 4.6.1" "GNU Midnight Commander"
+.TH MC 1 "Febrero de 2006" "MC Versión 4.6.1a" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -139,7 +139,9 @@ Menú de Archivo\&.
 .PP
 Podemos ejecutar comandos del sistema desde el Midnight Commander simplemente
 escribiéndolos. Todo lo que escribamos aparecerá en la línea de órdenes del sistema
-y cuando pulsemos Intro, Midnight Commander ejecutará estos comandos; ver las secciones
+y cuando pulsemos 
+.IR Intro ,
+Midnight Commander ejecutará estos comandos; ver las secciones
 .\"LINK2"
 Línea de Órdenes del Sistema
 .\"Shell Command Line"
@@ -206,19 +208,19 @@ Algunos comandos en Midnight Commander implican el uso de las teclas
 (identificada como ALT o incluso Compose). En este manual usaremos las
 siguientes abreviaturas:
 .TP
-.B C-<chr>
+.B Ctrl-<car>
 significa mantener pulsada la tecla Control mientras se pulsa el carácter
-<chr>. Así, C-f sería: manteniendo pulsada la tecla Control teclear f.
+<car>. Así, Ctrl-f sería: manteniendo pulsada la tecla Control teclear f.
 .TP
-.B M-<chr>
-significa mantener pulsada la tecla Meta o Alt mientras pulsamos el
-carácter <chr>. Si no hay tecla Meta o Alt, pulsar
-.IR ESC ,
-soltar, y entonces pulsar el carácter <chr>.
+.B Alt-<car>
+significa mantener pulsada la tecla Alt o Meta mientras pulsamos el
+carácter <car>. Si no hay tecla Alt ni Meta, pulsar
+.IR Esc ,
+soltar, y entonces pulsar el carácter <car>.
 .TP
-.B S-<chr>
+.B Mayús-<car>
 significa mantener pulsada la tecla de Mayúsculas (o Shift) y teclear
-<chr>.
+<car>.
 .PP
 Todas las líneas de entrada en Midnight Commander usan una aproximación
 a las asociaciones de teclas del editor GNU Emacs.
@@ -276,101 +278,104 @@ archivo de extensiones
 .\"Extension File Edit"
 entonces se ejecuta la aplicación correspondiente.
 .TP
-.B C-l
+.B Ctrl-l
 redibuja toda la pantalla de Midnight Commander.
 .TP
-.B C-x c
+.B Ctrl-x c
 .\"LINK2"
 Cambiar Permisos
 .\"Chmod"
 de un archivo o un conjunto de archivos marcados.
 .TP
-.B C-x o
+.B Ctrl-x o
 .\"LINK2"
 Cambiar Dueño
 .\"Chown"
 del archivo actual o de los archivos marcados.
 .TP
-.B C-x l
+.B Ctrl-x l
 crea enlaces.
 .TP
-.B C-x s
+.B Ctrl-x s
 crea enlaces simbólicos.
 .TP
-.B C-x C-s
+.B Ctrl-x Ctrl-s
 edita enlaces simbólicos.
 .TP
-.B C-x i
+.B Ctrl-x i
 cambia el panel opuesto al modo de información.
 .TP
-.B C-x q
+.B Ctrl-x q
 cambia el panel opuesto al modo de vista rápida.
 .TP
-.B C-x !
+.B Ctrl-x !
 ejecuta
 .\"LINK2"
 Búsquedas Externas\&.
 .\"External panelize"
 .TP
-.B C-x h
+.B Ctrl-x h
 añade el sitio actual a la lista de
 .\"LINK2"
 Favoritos\&.
 .\"Hotlist"
 .TP
-.B M-!
+.B Alt-!
 ejecuta una orden del sistema y muestra su salida en el
 .\"LINK2"
 Visor de Archivos Interno\&.
 .\"Internal File Viewer"
 .TP
-.B M-?
+.B Alt-?
 .\"LINK2"
 Buscar Archivo\&.
 .\"Find File"
 .TP
-.B M-c
+.B Alt-c
 permite
 .\"LINK2"
 Cambiar de Directorio\&.
 .\"Quick cd"
 .TP
-.B C-o
+.B Ctrl-o
 en la consola de Linux o FreeBSD o bajo un xterm, se muestra la salida
 de la orden anterior. En la consola de Linux, Midnight Commander usa un
 programa externo (cons.saver) para controlar la copia y restauración de
 la pantalla.
 .PP
-Cuando se haya creado Midnight Commander con soporte de subshell incluido,
-podemos pulsar C-o en cualquier momento y volver a la pantalla principal;
-para volver a nuestra aplicación bastará con volver a pulsar C-o. Si
-tenemos una aplicación suspendida en esta situación, no podremos
+Cuando se haya creado Midnight Commander con soporte de subshell
+incluido, podemos pulsar
+.I Ctrl-o
+en cualquier momento y volver a la pantalla principal;
+para volver a nuestra aplicación bastará con volver a pulsar
+.IR Ctrl-o .
+Si tenemos una aplicación suspendida en esta situación, no podremos
 ejecutar otros programas desde Midnight Commander hasta que terminemos
 la aplicación suspendida.
 .\"NODE "  Directory Panels"
 .SH "  Paneles de Directorio"
-Esta sección enumera las teclas que operan en los paneles de directorio. Si
-queremos saber cómo cambiar la apariencia de los paneles, deberemos echar un vistazo
-a la sección
+Esta sección enumera las teclas que operan en los paneles de directorio.
+Si queremos saber cómo cambiar la apariencia de los paneles, deberemos
+echar un vistazo a la sección
 .\"LINK2"
 Menús Izquierdo y Derecho\&.
 .\"Left and Right Menus"
 .TP
-.B Tab, C-i
+.B Tab, Ctrl-i
 cambia el panel actual. El panel activo deja de serlo y el no activo
 pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquel y aparece en éste.
 .TP
-.B Insertar, C-t
+.B Insertar, Ctrl-t
 para marcar archivos (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
-(La secuencia kich1 de terminfo) o la combinación C-t (Control-t). Para deseleccionar
+(La secuencia kich1 de terminfo) o la combinación Ctrl-t (Control-t). Para deseleccionar
 archivos, basta con repetir la operación sobre los archivos y/o directorios antes marcados.
 .TP
-.B M-g, M-r, M-j
+.B Alt-g, Alt-r, Alt-j
 usadas para seleccionar el archivo superior en un panel, el archivo central y el inferior del
 panel, respectivamente.
 .TP
-.B C-s, M-s
+.B Ctrl-s, Alt-s
 inicia la búsqueda de un archivo en la lista de directorios (panel activo). Cuando la búsqueda
 está activa las pulsaciones de teclado son añadidas a la cadena de búsqueda y no a
 la línea de órdenes. Si la opción
@@ -381,15 +386,16 @@ o directorio cuyo nombre coincida con las letras introducidas. Las teclas
 .I borrar
 o
 .I suprimir
-pueden ser utilizadas para corregir errores de escritura. Si pulsamos C-s
+pueden ser utilizadas para corregir errores de escritura. Si pulsamos
+.I Ctrl-s
 de nuevo, se busca la siguiente coincidencia.
 .TP
-.B M-t
+.B Alt-t
 rota el listado de pantalla actual para mostrar el siguiente modo
 de listado. Con esto es posible intercambiar rápidamente de un listado
 completo al regular o breve, así como al modo de listado definido por el usuario.
 .TP
-.B C-\\\\ (control-Contrabarra)
+.B Ctrl-\\\\ (control-Contrabarra)
 muestra la lista de sitios
 .\"LINK2"
 Favoritos
@@ -410,7 +416,8 @@ regulares en el shell (poniendo * para cero o más caracteres y ?
 para uno o más caracteres). Si los
 .I Caracteres Comodín
 están deshabilitados, entonces la selección de archivos se realiza con expresiones
-regulares normales (VA. ed (1)).
+regulares normales. Véase la página de manual de
+.BR "ed (1)" .
 .IP
 Si la expresión empieza o termina con una barra (/), entonces la selección se
 realiza sobre directorios en vez de archivos.
@@ -424,32 +431,33 @@ La tecla que realiza originalmente la función descrita es el menos (-)
 ya que ésta es la utilizada en la versión originaria del programa, Comandante Norton.
 
 .TP
-.B Cursor-Arriba, C-p
+.B Arriba, Ctrl-p
 desplaza la barra de selección a la entrada anterior en el panel.
 .TP
-.B Cursor-Abajo, C-n
+.B Abajo, Ctrl-n
 desplaza la barra de selección a la entrada siguiente en el panel.
 .TP
-.B Inicio (Home), a1, M-<
+.B Inicio, Alt-<
 desplaza la barra de selección a la primera entrada en el panel.
 .TP
-.B Fin (End), c1, M->
+.B Fin, Alt->
 desplaza la barra de selección a la última entrada en el panel.
 .TP
-.B Av. Pág (next-page), C-v
+.B AvPág (Página adelante), Ctrl-v
 desplaza la barra de selección a la página siguiente.
 .TP
-.B Re. Pág (prev-page), M-v
+.B RePág (Página atrás), Alt-v
 desplaza la barra de selección a la página anterior.
 .TP
-.B M-o
+.B Alt-o
 si el otro panel es un panel con lista de archivos y estamos situados en un
 directorio en el panel activo actual, entonces otro panel se posiciona
-dentro del directorio del panel activo (como la tecla de Emacs C-o)
+dentro del directorio del panel activo (como la tecla de Emacs
+.IR Ctrl-o )
 en otro caso el otro panel es posicionado el directorio padre
 del directorio seleccionado en el panel activo.
 .TP
-.B C-RePág (C-PageUp), C-AvPág (C-PageDown)
+.B Ctrl-RePág, Ctrl-AvPág
 solamente bajo la consola Linux: realiza un chdir ".." o al
 directorio actualmente seleccionado respectivamente.
 .\"NODE "  Shell Command Line"
@@ -457,43 +465,44 @@ directorio actualmente seleccionado respectivamente.
 Esta sección enumera las teclas útiles para evitar la excesiva escritura
 cuando se introducen órdenes del sistema.
 .TP
-.B M-Intro
+.B Alt-Intro
 copia el nombre de archivo seleccionado a la línea de órdenes.
 .TP
-.B C-Intro
-igual que M-Intro.  Puede no funcionar en ciertos sistemas o con algunos
-terminales.
+.B Ctrl-Intro
+igual que
+.IR Alt-Intro .
+Puede no funcionar en ciertos sistemas o con algunos terminales.
 .TP
-.B C-S-Intro
+.B Ctrl-Mayús-Intro
 copia la ruta completa del archivo actual en la línea de órdenes. Puede
 no funcionar en ciertos sistemas o con algunos terminales.
 .TP
-.B M-Tab
+.B Alt-Tab
 realiza una
 .\"LINK2"
-Terminación automática (completion)
+terminación automática
 .\"Completion"
 del nombre de archivo, comando, variable, nombre de usuario y host.
 .TP
-.B C-x t, C-x C-t
+.B Ctrl-x t, Ctrl-x Ctrl-t
 copia los archivos marcados (o si no los hay, el archivo
-seleccionado) del panel activo (C-x t) o del otro panel (C-x C-t) a
+seleccionado) del panel activo (Ctrl-x t) o del otro panel (Ctrl-x Ctrl-t) a
 la línea de órdenes.
 .TP
-.B C-x p, C-x C-p
+.B Ctrl-x p, Ctrl-x Ctrl-p
 la primera secuencia de teclas copia el nombre de la ruta de acceso actual
 a la línea de órdenes, y la segunda copia la ruta del otro panel a la
 línea de órdenes.
 .TP
-.B C-q
+.B Ctrl-q
 el comando cita (quote) puede ser utilizado para insertar caracteres
 que de otro modo serían interpretados por Midnight Commander (como el símbolo '+')
 .TP
-.B M-p, M-n
-usaremos esas teclas para navegar a través del histórico de comandos. M-p devuelve
-la última entrada, M-n devuelve la siguiente.
+.B Alt-p, Alt-n
+usaremos esas teclas para navegar a través del histórico de comandos. Alt-p devuelve
+la última entrada, Alt-n devuelve la siguiente.
 .TP
-.B M-h
+.B Alt-h
 visualiza el historial para la línea de entrada actual.
 .\"NODE "  General Movement Keys"
 .SH "  Teclas Generales de Movimiento"
@@ -504,31 +513,31 @@ mismas teclas. Además, cada uno reconoce algunas otras teclas propias.
 Otras partes de Midnight Commander utilizan algunas de las mismas
 teclas de movimiento, por lo que esta sección podría ser aplicada a ellas también.
 .TP
-.B Arriba (Up), C-p
+.B Arriba, Ctrl-p
 mueve una línea hacia arriba.
 .TP
-.B Abajo (Down), C-n
+.B Abajo, Ctrl-n
 mueve una línea hacia abajo.
 .TP
-.B Re Pág (Retroceso de Página, Prev Page, Page Up), M-v
+.B RePág (Página atrás), Alt-v
 mueve una página completa hacia atrás.
 .TP
-.B Av Pág (Avance de Página, Next Page, Page Down), C-v
+.B AvPág (Página adelante), Ctrl-v
 mueve una página hacia delante.
 .TP
-.B Inicio (Home), A1
+.B Inicio
 mueve al principio.
 .TP
-.B Fin (End), C1
+.B Fin
 mueve al final.
 .PP
 El visor de ayuda y el de archivo reconocen las siguientes teclas
 aparte de las mencionadas anteriormente:
 .TP
-.B b, C-b, C-h, Retroespacio (Backspace), Suprimir (Delete)
+.B b, Ctrl-b, Ctrl-h, Borrar, Suprimir
 mueve una página completa hacia atrás.
 .TP
-.B Barra espaciadora (Space bar)
+.B Barra espaciadora
 mueve una página hacia delante.
 .TP
 .B u, d
@@ -544,54 +553,54 @@ línea de órdenes
 .\"Shell Command Line"
 y para los cuadros de diálogo en el programa) reconocen esas teclas:
 .TP
-.B C-a
+.B Ctrl-a
 coloca el cursor al comienzo de la línea.
 .TP
-.B C-e
+.B Ctrl-e
 coloca el cursor al final de la línea.
 .TP
-.B C-b, Izquierda (move-left)
+.B Ctrl-b, Izquierda
 desplaza el cursor una posición a la izquierda.
 .TP
-.B C-f, Derecha (move-right)
+.B Ctrl-f, Derecha
 desplaza el cursor una posición a la derecha.
 .TP
-.B M-f
+.B Alt-f
 avanza una palabra.
 .TP
-.B M-b
+.B Alt-b
 retrocede una palabra.
 .TP
-.B C-h, Retroespacio (backspace)
+.B Ctrl-h, Borrar
 borra el carácter anterior.
 .TP
-.B C-d, Suprimir (Delete)
+.B Ctrl-d, Suprimir
 elimina el carácter de la posición del cursor.
 .TP
-.B C-@
+.B Ctrl-@
 sitúa una marca para cortar.
 .TP
-.B C-w
+.B Ctrl-w
 copia el texto entre el cursor y la marca a la caché de eliminación y elimina
 el texto de la línea de entrada.
 .TP
-.B M-w
+.B Alt-w
 copia el texto entre el cursor y la marca a la caché de eliminación.
 .TP
-.B C-y
+.B Ctrl-y
 restaura el contenido de la caché de eliminación.
 .TP
-.B C-k
+.B Ctrl-k
 elimina el texto desde el cursor hasta el final de la línea.
 .TP
-.B M-p, M-n
-usaremos esas teclas para desplazarnos a través del historial de comandos. M-p nos lleva
-a la última entrada, M-n nos sitúa en la siguiente.
+.B Alt-p, Alt-n
+usaremos esas teclas para desplazarnos a través del historial de comandos. Alt-p nos lleva
+a la última entrada, Alt-n nos sitúa en la siguiente.
 .TP
-.B M-C-h, M-Retroespacio (M-Backspace)
+.B Alt-Ctrl-h, Alt-Borrar
 borra la palabra anterior.
 .TP
-.B M-Tab
+.B Alt-Tab
 realiza una
 .\"LINK2"
 terminación
@@ -819,23 +828,23 @@ muestran todos los directorios y enlaces a directorios.
 El comando releer recarga la lista de archivos en el directorio. Esto es
 útil si otros procesos han creado, borrado o modificado archivos. Si
 hemos panelizado los nombres de los archivos en un panel, esto recargará
-los contenidos del directorio y eliminará la información panelizada (véase la sección
+los contenidos del directorio y eliminará la información panelizada.
+Véase la sección
 .\"LINK2"
 Búsquedas externas
 .\"External panelize"
-para más información).
+para más información.
 .\"NODE "  File Menu"
 .SH "  Menú de Archivo"
 Midnight Commander utiliza las teclas de función
 .I F1
 -
 .I F10
-como atajos de teclado
-para los comandos que aparecen en el menú de archivo. Las secuencias de escape para las
-Fkeys son características de terminfo desde kf1 hasta kf10. En terminales sin
-soporte de teclas de función, podemos conseguir la misma funcionalidad
-pulsando la tecla
-.I ESC
+como atajos de teclado para los comandos que aparecen en el menú de
+Archivo. Las secuencias de escape para las Fkeys son características de
+terminfo desde kf1 hasta kf10. En terminales sin soporte de teclas de
+función, podemos conseguir la misma funcionalidad pulsando la tecla
+.I Esc
 seguido de un número entre 1 y 9 ó 0 (correspondiendo a las teclas
 .I F1
 a
@@ -860,7 +869,7 @@ para seleccionar el siguiente enlace y la tecla
 para seguir ese enlace. Las teclas
 .I Espacio
 y
-.I Retroespacio
+.I Borrar
 son usadas para mover adelante y atrás en una página de ayuda. Pulsando
 .I F1
 de nuevo para obtener la lista completa de teclas válidas.
@@ -874,7 +883,7 @@ Menú de usuario
 El menú de usuario otorga una manera fácil de tener usuarios con un menú
 y añadir asimismo características extra a Midnight Commander.
 .PP
-.B Ver (F3, S-F3)
+.B Ver (F3, Mayús-F3)
 .PP
 Visualiza el archivo seleccionado. Por defecto invoca el
 .\"LINK2"
@@ -882,14 +891,16 @@ Visor de Archivos Interno
 .\"Internal File Viewer"
 pero si la opción "Usar visor interno" está desactivada, invoca un visor
 de archivos externo especificado por la variable de entorno
-.B PAGER.
-Si la variable
+.B VIEWER.
+Si
+.B VIEWER
+no está definida se aplica la variable
 .B PAGER
-no está definida, se invoca al comando "view". Si en vez de esto usamos
-S-F3, el visor será invocado sin realizar ningún tipo de formateo o
-preprocesamiento del archivo.
+y si ésta tampoco, se invoca al comando "view". Con Mayús-F3, se abre
+directamente el visor interno, pero sin realizar ningún tipo de formateo
+o preprocesamiento del archivo.
 .PP
-.B Ejecutar y Ver (M-!)
+.B Ejecutar y Ver (Alt-!)
 .PP
 El comando con los argumentos indicados se ejecuta, y la salida se
 muestra usando el visor de archivos interno. Como argumento se ofrece,
@@ -898,15 +909,15 @@ por defecto, el nombre seleccionado en el panel.
 .B Editar (F4)
 .PP
 Invoca el editor
-.B vi,
+.BR vi ,
 u otro especificado en la variable de entorno
-.B EDITOR,
+.BR EDITOR ,
 o el
 .\"LINK2"
 Editor de Archivos Interno
 .\"Internal File Editor"
 si la opción
-.B use_internal_edit
+.I use_internal_edit
 está activada.
 .PP
 .B Copiar (F5)
@@ -915,7 +926,7 @@ Sobreimpresiona una ventana de entrada con destino por defecto al directorio del
 panel no seleccionado y copia el archivo actualmente seleccionado (o
 los archivos marcados, si hay al menos uno marcado) al directorio especificado
 por el usuario en la ventana. Durante este proceso, podemos pulsar
-.IR C-c " o " ESC
+.IR Ctrl-c " o " Esc
 para anular la operación. Para más detalles sobre la máscara de origen
 (que será normalmente * o ^\\(.*\\)$ dependiendo
 de la selección de Uso de los patrones del shell) y los posibles comodines en destino
@@ -926,40 +937,43 @@ Máscara copiar/renombrar\&.
 .PP
 En algunos sistemas, es posible hacer la copia en segundo plano pulsando en el botón
 de segundo plano con el ratón (o pulsando
-.I M-b
+.I Alt-b
 en el cuadro de diálogo). Los
 .\"LINK2"
 Trabajos en Segundo Plano
 .\"Background jobs"
 son utilizados para controlar los procesos en segundo plano.
 .PP
-.B Crear Enlace (C-x l)
+.B Crear Enlace (Ctrl-x l)
 .PP
 Crea un enlace al archivo actual.
 .PP
-.B Crear Enlace Simbólico (C-x s)
+.B Crear Enlace Simbólico (Ctrl-x s)
 .PP
-Crea un enlace simbólico al archivo actual. Para aquellos que no conozcan
-qué son los enlaces: crear un enlace a un archivo es algo parecido a copiar
-el archivo, salvo que el archivo original y el destino representan el
-mismo archivo físico, los mismos datos reales. Por ejemplo, si editamos uno de esos
-archivos, todos los cambios que realicemos aparecerán en ambos archivos. Hay quien
-llama a los enlaces alias o accesos directos.
+Crea un enlace simbólico al archivo actual.  Un enlace es como una copia
+del archivo, salvo que el original y el destino representan un único
+archivo físico, los mismos datos reales. En consecuencia, si editamos
+cualquiera de los archivos, los cambios que realicemos aparecerán en
+todos los archivos. Reciben también el nombre de alias o accesos
+directos.
 .PP
-Un enlace aparece como un archivo real. Después de crearlo, no hay modo de decir cuál
-es el original y cuál el enlace. Si borramos uno de ellos el otro aún seguirá intacto. Es muy difícil
-advertir que los archivos representan la misma imagen. Usaremos estos enlaces
-cuando no necesitemos saberlo.
+Un enlace aparece como un archivo real. Después de crearlo, no hay modo
+de decir cuál es el original y cuál el enlace. Si borramos uno de ellos
+el otro aún seguirá intacto. Es muy difícil advertir que los archivos
+representan la misma imagen. Usaremos estos enlaces cuando no
+necesitemos saberlo.
 .PP
-Un enlace simbólico es una referencia al nombre del archivo original. Si
-el archivo original es borrado, el enlace simbólico queda sin utilidad. Es bastante
-fácil advertir que los archivos representan la misma imagen. Midnight
-Commander muestra un símbolo "@" delante del nombre del archivo si es un
-enlace simbólico a alguna parte (excepto a un directorio, caso en que muestra una tilde (~)).
-El archivo original al cual el enlace apunta es mostrado en la línea de estado si la opción
+Un enlace simbólico es, en cambio, sólo una referencia al nombre del
+archivo original.  Si se borra el archivo original, el enlace simbólico
+queda sin utilidad. Es bastante fácil advertir que los archivos
+representan la misma imagen. Midnight Commander muestra un símbolo "@"
+delante del nombre del archivo si es un enlace simbólico a alguna parte
+(excepto a un directorio, caso en que muestra una tilde (~)). El archivo
+original al cual apunta el enlace se muestra en la línea de estado si la
+opción
 .I "Mini status"
-está habilitada. Usaremos enlaces simbólicos cuando
-queramos evitar la confusión que pueden causar los enlaces físicos.
+está habilitada. Usaremos enlaces simbólicos cuando queramos evitar la
+confusión que pueden causar los enlaces físicos.
 .PP
 .B Renombrar/Mover (F6)
 .PP
@@ -967,13 +981,13 @@ Presenta un diálogo de entrada proponiendo como directorio de destino el
 directorio del panel no activo, y mueve allí, o bien los archivos marcados
 o en su defecto el archivo seleccionado. El usuario puede introducir en
 el diálogo un destino diferente. Durante el proceso, se puede pulsar
-.IR C-c " o " ESC
+.IR Ctrl-c " o " Esc
 para abortar la operación. Para más detalles, véase más arriba la
 operación Copiar, dado que la mayoría de los aspectos son similares.
 .PP
 En algunos sistemas, es posible hacer la copia en segundo plano pulsando
 con el ratón en el susodicho botón de segundo plano (o pulsando
-.I M-o
+.I Alt-o
 en el cuadro de diálogo). Con
 .\"LINK2"
 Procesos en 2º plano
@@ -988,10 +1002,10 @@ Presenta un diálogo de entrada y crea el directorio especificado.
 .PP
 Borra, o bien los archivos marcados o en su defecto el archivo
 seleccionado en el panel activo. Durante el proceso, se puede pulsar
-.IR C-c " o " ESC
+.IR Ctrl-c " o " Esc
 para abortar la operación.
 .PP
-.B Cambiar Directorio (M-c)
+.B Cambiar Directorio (Alt-c)
 Usaremos el comando
 .\"LINK2"
 Cambiar de directorio
@@ -1007,7 +1021,8 @@ están habilitados, la expresión regular es tal y como lo es en el shell
 (* para cero o más caracteres y ? para un carácter). Si los
 .I Patrones del Shell
 están desactivados, entonces la selección de archivos se realiza con expresiones
-regulares normales (Véase ed (1)).
+regulares normales. Véase la página de manual de
+.BR "ed (1)" .
 .PP
 Para marcar directorios en vez de archivos, la expresión debe empezar o terminar
 con '/'.
@@ -1017,10 +1032,10 @@ con '/'.
 Utilizado para deseleccionar un grupo de archivos. Es la operación antagonista al comando
 .IR "Selecciona grupo" .
 .PP
-.B Salir (F10, S-F10)
+.B Salir (F10, Mayús-F10)
 .PP
-Finaliza Midnight Commander. S-F10 es usado cuando queremos
-salir y estamos utilizando la envoltura del shell. S-F10 no nos llevará
+Finaliza Midnight Commander. Mayús-F10 es usado cuando queremos
+salir y estamos utilizando la envoltura del shell. Mayús-F10 no nos llevará
 al último directorio visitado con Midnight Commander, en vez de eso
 nos llevará al directorio donde fue invocado Midnight Commander.
 .\"NODE "    Quick cd"
@@ -1056,7 +1071,7 @@ El comando "Activa/desactiva paneles" muestra la salida del último
 comando del shell. Esto funciona sólo en xterm y en una consola Linux y
 FreeBSD.
 .PP
-El comando Compara directorios (C-x d) compara los paneles de directorio
+El comando Compara directorios (Ctrl-x d) compara los paneles de directorio
 uno con el otro. Podemos usar el comando Copiar (F5) para hacer ambos
 paneles idénticos. Hay tres métodos de comparación. El método rápido
 compara sólo el tamaño de archivo y la fecha. El método completo realiza
@@ -1067,10 +1082,10 @@ contenidos o las fechas, sólo chequea los tamaños de los archivos.
 .PP
 El comando Histórico de comandos muestra una lista
 de los comandos escritos. El comando seleccionado es copiado a la línea de órdenes.
-El histórico de comandos puede ser accedido también tecleando M-p ó M-n.
+El histórico de comandos puede ser accedido también tecleando Alt-p ó Alt-n.
 .PP
 .\"LINK2"
-Favoritos (C-\\)
+Favoritos (Ctrl-\\)
 .\"Hotlist"
 permite acceder con facilidad a directorios y sitios utilizados con frecuencia.
 .PP
@@ -1105,7 +1120,7 @@ desde el menú Izquierdo o Derecho.
 Para evitar largos retardos Midnight Commander crea la figura de árbol
 escaneando solamente un pequeño subconjunto de todos los directorios. Si
 el directorio que queremos ver no está, nos moveremos hasta su directorio padre
-y pulsaremos C-r (o F2).
+y pulsaremos Ctrl-r (o F2).
 .PP
 Podemos utilizar las siguientes teclas:
 .PP
@@ -1119,7 +1134,7 @@ En el árbol de directorios, sale del árbol de directorios y cambia al
 directorio en el panel actual. En la vista de árbol, cambia a este directorio
 en el otro panel y permanece en el modo de vista Árbol en el panel actual.
 .PP
-.B C-r, F2 (Releer).
+.B Ctrl-r, F2 (Releer).
 Relee este directorio. Usaremos este comando cuando el árbol de directorios esté anticuado:
 hay directorios perdidos o muestra algunos directorios que no existen ya.
 .PP
@@ -1153,18 +1168,19 @@ será así el hijo del directorio del cual depende jerárquicamente (Padre).
 .B F8 (Eliminar).
 Elimina este directorio del sistema de archivos.
 .PP
-.B C-s, M-s.
+.B Ctrl-s, Alt-s.
 Busca el siguiente directorio coincidente con la cadena de búsqueda. Si no hay
 tal directorio esas teclas moverán una línea abajo.
 .PP
-.B C-h, Retroespacio.
+.B Ctrl-h, Borrar.
 Borra el último carácter de la cadena de búsqueda.
 .PP
 .B Cualquier otro carácter.
 Añade el carácter a la cadena de búsqueda y se desplaza al siguiente directorio
 que comienza con esos caracteres. En la vista de árbol debemos primero
-activar el modo de búsqueda pulsando C-s. La cadena de búsqueda es mostrada
-en la línea de mini-estado.
+activar el modo de búsqueda pulsando
+.IR Ctrl-s .
+La cadena de búsqueda es mostrada en la línea de mini-estado.
 .PP
 Las siguientes acciones están disponibles sólo en el árbol de directorios. No
 son funcionales en la vista de árbol.
@@ -1175,8 +1191,11 @@ Invoca el visor de ayuda y muestra ésta sección.
 .B Esc, F10.
 Sale del árbol de directorios. No cambia el directorio.
 .PP
-El ratón es soportado. Un doble Click se comporta como pulsar Intro. Véase
-también la sección sobre
+El ratón es soportado. Un
+.I doble click
+se comporta como pulsar
+.IR Intro .
+Véase también la sección sobre
 .\"LINK2"
 soporte de ratón\&.
 .\"Mouse Support"
@@ -1202,7 +1221,7 @@ cambiará al directorio del archivo actualmente seleccionado. El botón "Otra vez"
 búsqueda. El botón Terminar finaliza la operación de búsqueda. El botón Panelizar
 colocará los archivos encontrados en el panel actual y así
 podremos realizar más operaciones con ellos (ver, copiar, mover,
-borrar y demás). Después de panelizar podemos pulsar C-r para regresar al listado
+borrar y demás). Después de panelizar podemos pulsar Ctrl-r para regresar al listado
 normal de archivos.
 .PP
 Es posible tener una lista de directorios que el comando Buscar Archivo
@@ -1266,7 +1285,7 @@ ese comando de la lista y no habrá que escribirlo de nuevo.
 Muestra una lista de sitios y directorios guardados y abre en el panel
 el lugar seleccionado. Desde el cuadro de diálogo podemos también crear y
 eliminar entradas. Para añadir se puede igualmente utilizar Añadir Actual
-(C-x h), que añade el directorio actual (no el seleccionado) a la lista
+(Ctrl-x h), que añade el directorio actual (no el seleccionado) a la lista
 de favoritos. Se pide al usuario una etiqueta para identificar la entrada.
 .PP
 Esto hace más rápido el posicionamiento en los directorios usados
@@ -1318,7 +1337,9 @@ siguiente formato:
 .I PalabraClave
 debe ser:
 .I Open
-(si el usuario pulsa Intro o dos veces el ratón),
+(si el usuario pulsa 
+.I Intro
+ o dos veces el ratón),
 .I View
 (F3) o
 .I Edit
@@ -1353,17 +1374,19 @@ Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.mc/menu
 y si no, mc utiliza el menú por defecto para todo el sistema
 @prefix@/share/mc/mc.menu.
 .PP
-El formato del menú de archivo es muy simple. Las líneas que empiezan con
-todo excepto espacio o tab son consideradas entradas para el menú (para
-posibilitar su uso como atajo de teclado, el primer carácter deberá
-ser una letra). Todas las líneas que comienzan con tab o espacio
-son los comandos que serán ejecutados cuando la entrada es seleccionada.
+El formato del menú de archivo es muy simple.  Todas las líneas, salvo
+las que empiezan con espacio o tabulación, son consideradas entradas
+para el menú (para posibilitar su uso como atajo de teclado, el primer
+carácter sí deberá ser una letra).  Las líneas que comienzan con una
+tabulación o espacio son los comandos que serán ejecutados cuando la
+entrada es seleccionada.
 .PP
-Cuando se selecciona una opción todas las líneas de comandos de la opción
-se copian a un archivo temporal del directorio homónimo (normalmente
-/usr/tmp) y entonces es ejecutado el archivo. Esto permite al usuario poner
-constructores normales del shell en los menús. También tiene lugar
-una sustitución simple de macros antes de ejecutar el código del menú. Para mayor información, ver
+Cuando se selecciona una opción todas las líneas de comandos de esa
+opción se copian en un archivo temporal en el directorio temporal
+(normalmente /usr/tmp), y se ejecuta ese archivo.  Esto permite al
+usuario utilizar en los menús construcciones normales de la shell. 
+También tiene lugar una sustitución simple de macros antes de ejecutar
+el código del menú. Para mayor información, ver
 .\"LINK2"
 Sustitución de macro\&.
 .\"Macro Substitution"
@@ -1485,7 +1508,7 @@ defecto, una entrada de menú con dos líneas de condición, una
 comenzando con '+' y otra con '='.
 .PP
 Los comentarios empiezan con '#'. Las líneas adicionales de comentarios deben empezar
-con '#', espacio o tab.
+con '#', espacio o tabulación.
 .\"NODE "  Options Menu"
 .SH "  Menú de Opciones"
 Midnight Commander tiene opciones que pueden ser activadas o desactivadas
@@ -1552,7 +1575,7 @@ Commander no los muestra (como la opción -B de ls de GNU).
 Mostrar los archivos que comiencen con un punto (como ls -a).
 .PP
 .I Marcar y Avanzar.
-Hacer avanzar la barra de selección tras marcar un archivo (con C-t o
+Hacer avanzar la barra de selección tras marcar un archivo (con Ctrl-t o
 con la tecla Insertar).
 .PP
 .I Menús Desplegables.
@@ -1575,7 +1598,7 @@ recargas se producen si se crean o borrar archivos, pero si lo que cambia
 es sólo el inodo de un archivo del directorio (cambios en el tamaño,
 permisos, propietario, etc.) la pantalla no se actualiza. En esos casos,
 si tenemos la opción activada, será preciso forzar la recarga de forma
-manual (con C-r).
+manual (con Ctrl-r).
 .PP
 .B Pausa Después de Ejecutar.
 .PP
@@ -1586,7 +1609,8 @@ valores para esta variable:
 .I Nunca.
 Significa que no queremos ver la salida de nuestros comandos. Si estamos
 utilizando la consola Linux o FreeBSD o un xterm, podremos ver la salida
-del comando pulsando C-o.
+del comando pulsando
+.IR Ctrl-o .
 .PP
 .I Sólo en Terminales Tontas.
 Obtendremos el mensaje de pausa sólo en terminales que no sean capaces
@@ -1656,11 +1680,11 @@ visor de archivos interno\&.
 .I Completar: Mostrar Todos.
 Por defecto, al completar nombres en situaciones de ambigüedad, Midnight
 Commander completa todo lo posible al pulsar
-.B M-Tab
+.B Alt-Tab
 y produce un pitido; al intentarlo por segunda vez se muestra una lista
 con las posibilidades que han dado lugar a la ambigüedad. Con esta opción,
 la lista aparece directamente tras pulsar
-.B M-Tab
+.B Alt-Tab
 por primera vez.
 .PP
 .I Hélice de actividad.
@@ -1748,13 +1772,16 @@ Para probarlas basta con pulsar cada una de ellas. Tan pronto como pulsamos una 
 ésta funciona adecuadamente, OK debería aparecer junto al nombre de la susodicha tecla. Una vez
 que una tecla es marcada con OK empieza a funcionar con normalidad, p.e. F1 la primera vez
 comprobará que F1 funciona perfectamente, pero a partir de ese momento mostrará la ayuda.
-Esto mismo es aplicable a las teclas del cursor. La tecla tab debería funcionar siempre.
+Esto mismo es aplicable a las teclas del cursor. La tecla Tab debería funcionar siempre.
 .PP
 Si algunas teclas no funcionan adecuadamente, entonces no veremos el OK tras el nombre de la tecla
 después de haberla pulsado. Podemos entonces intentar solucionarlo. Haremos esto
-pulsando el botón de esa tecla (con el ratón o usando Tab e Intro).
+pulsando el botón de esa tecla (con el ratón o usando
+.IR Tab " e " Intro ).
 Entonces un mensaje rojo aparecerá y se nos pedirá que pulsemos la tecla en cuestión.
-Si deseamos abortar el proceso, bastará con pulsar Esc y esperar hasta que el mensaje
+Si deseamos abortar el proceso, bastará con pulsar
+.I Esc
+y esperar hasta que el mensaje
 desaparezca. Si no, pulsaremos la tecla que nos pide y esperaremos hasta que
 el diálogo desaparezca.
 .PP
@@ -1828,8 +1855,9 @@ demás casos se usará siempre el proxy de FTP indicado arriba.
 Se puede usar el archivo
 .IR ~/.netrc ,
 que contiene información de usuarios y contraseñas para determinados
-servidores FTP.  Para conocer el formato de los archivos .netrc véase
-netrc (5).
+servidores FTP.  Para conocer el formato de los archivos .netrc véase la
+página de manual sobre
+.BR "netrc (5)" .
 .PP
 .I Usar FTP pasivo
 habilita el modo de tranferencia FTP pasivo (la conexión para
@@ -1872,9 +1900,12 @@ Ajustes Especiales\&.
 .SH "Ejecutando Órdenes del Sistema Operativo"
 Podemos ejecutar comandos tecleando en la línea de órdenes de Midnight
 Commander, o seleccionando el programa que queremos ejecutar
-en alguno de los paneles y pulsando Intro.
+en alguno de los paneles y pulsando
+.IR Intro .
 .PP
-Si pulsamos Intro sobre un archivo que no es ejecutable, Midnight
+Si pulsamos 
+.I Intro
+ sobre un archivo que no es ejecutable, Midnight
 Commander compara la extensión del archivo seleccionado con las extensiones
 recogidas en el
 .\"LINK2"
@@ -2013,8 +2044,9 @@ El carácter %
 .IP
 Pregunta sobre la sustitución. Un cuadro de entrada es mostrado y el texto dentro
 de las llaves se usa como mensaje. La macro es sustituida por el texto
-tecleado por el usuario. El usuario puede pulsar ESC o F10 para cancelar. Esta macro
-no funciona aún sobre la línea de órdenes.
+tecleado por el usuario. El usuario puede pulsar 
+.IR Esc " o " F10
+para cancelar. Esta macro no funciona aún sobre la línea de órdenes.
 .\"NODE "  The subshell support"
 .SH "  Soporte de Subshell"
 El soporte del subshell es una opción de tiempo de compilación, que funciona con los
@@ -2040,9 +2072,11 @@ Los usuarios de
 podrán especificar los comandos de arranque en el archivo ~/.mc/tcshrc.
 .PP
 Cuando utilizamos el código del subshell, podemos suspender aplicaciones en
-cualquier momento con la secuencia C-o y volver a Midnight Commander, si
-interrumpimos una aplicación, no podremos ejecutar otros comandos externos
-hasta que quitemos la aplicación que hemos interrumpido.
+cualquier momento con la secuencia
+.I Ctrl-o
+y volver a Midnight Commander, si interrumpimos una aplicación, no
+podremos ejecutar otros comandos externos hasta que quitemos la
+aplicación que hemos interrumpido.
 .PP
 Una característica extra añadida de uso del subshell es que el prompt
 mostrado por Midnight Commander es el mismo que estamos usando en
@@ -2056,7 +2090,7 @@ tiene más información sobre cómo controlar el código del subshell.
 .\"NODE "Chmod"
 .SH "Cambiar Permisos"
 Cambiar Permisos se usa para cambiar los bits de permisos en un grupo de
-archivos y directorios. Puede ser invocado con la combinación de teclas C-x c.
+archivos y directorios. Puede ser invocado con la combinación de teclas Ctrl-x c.
 .PP
 La ventana de Cambiar Permisos tiene dos partes -
 .I Permisos
@@ -2081,7 +2115,8 @@ usaremos la
 Podemos usar los atajos de teclado (las letras destacadas) para accionar
 directamente los elementos.
 .PP
-Para aceptar y aplicar los permisos, usaremos la tecla Intro.
+Para aceptar y aplicar los permisos, usaremos la tecla
+.IR Intro .
 .PP
 Si se trata de un grupo de archivos o directorios, podemos cambiar parte
 de los permisos marcándolos (las marcas son los asteriscos a la izquierda de las
@@ -2120,7 +2155,7 @@ cancela Cambiar Permisos
 .\"NODE "Chown"
 .SH "Cambiar Dueño"
 Cambiar Dueño permite cambiar el propietario y/o grupo de un archivo. La tecla
-rápida para este comando es C-x o.
+rápida para este comando es Ctrl-x o.
 .\"NODE "Advanced Chown"
 .SH "Cambiar Dueño y Permisos"
 Cambiar Dueño y Permisos combina
@@ -2328,11 +2363,11 @@ Búsqueda de expresión regular desde la posición actual hacia atrás.
 .B F7
 Búsqueda normal/ búsqueda en modo hexadecimal.
 .PP
-.B C-s.
+.B Ctrl-s.
 Comienza una búsqueda normal si no existe una expresión de búsqueda previa si no
 busca la próxima coincidencia.
 .PP
-.B C-r.
+.B Ctrl-r.
 Comienza una búsqueda hacia atrás si no había expresión de búsqueda anterior si no
 busca la próxima coincidencia.
 .PP
@@ -2355,10 +2390,10 @@ la etiqueta del botón muestra el estado contrario al actual.
 .B F10, Esc.
 Sale del visor interno.
 .PP
-.B Av pág, espacio, C-v.
+.B AvPág, espacio, Ctrl-v.
 Avanza una página hacia abajo.
 .PP
-.B Re pág, M-v, C-b, Retroespacio.
+.B RePág, Alt-v, Ctrl-b, Borrar.
 Retrocede una página hacia arriba.
 .PP
 .B Cursor Abajo
@@ -2368,7 +2403,7 @@ la pantalla una nueva línea que antes quedaba oculta.
 .B Cursor Arriba
 Desplaza una línea hacia abajo.
 .PP
-.B C-l
+.B Ctrl-l
 Redibuja el contenido de la pantalla.
 .PP
 .B !
@@ -2380,13 +2415,13 @@ Coloca la marca n.
 .B "[n] r"
 Salta hasta la marca n.
 .PP
-.B C-f
+.B Ctrl-f
 Salta al archivo siguiente.
 .PP
-.B C-b
+.B Ctrl-b
 Ídem al archivo anterior.
 .PP
-.B M-r
+.B Alt-r
 Intercambia entre los diferentes modos de regla: desactivado, arriba, abajo.
 .PP
 Es posible adiestrar al visor de archivos sobre cómo mostrar un archivo, mírese
@@ -2425,25 +2460,26 @@ y pegar) manteniendo pulsada la tecla mayúsculas.
 copia al archivo
 .B cooledit.clip
 y
-.B Mayúsculas-Ins
+.B Mayús-Ins
 pega desde
 .BR cooledit.clip .
-.B Mayúsculas-Supr
+.B Mayús-Supr
 corta y copia en
 .BR cooledit.clip ,
 y
 .B Ctrl-Supr
-elimina el texto resaltado. La tecla Intro produce un salto de línea
-con sangrado automático opcional.
+elimina el texto resaltado. La tecla
+.B Intro
+produce un salto de línea con sangrado automático opcional.
 .PP
 Para definir una macro, pulsar
-.B Ctrl-R
+.B Ctrl-r
 y entonces teclearemos las secuencias de teclas que deseamos sean
 ejecutadas. Pulsaremos
-.B Ctrl-R
+.B Ctrl-r
 de nuevo al finalizar. Podemos asignar la macro a la tecla que queramos
 pulsando sobre ella. La macro será ejecutada cuando pulsemos
-.B Ctrl-A
+.B Ctrl-a
 seguido de la tecla asignada. También será ejecutada si
 pulsamos Meta (Alt), Ctrl, o Escape y la tecla asignada, siempre y cuando
 la tecla no sea usada por ninguna otra función. Una vez definida, los comandos de
@@ -2466,9 +2502,9 @@ en el directorio personal.
 Podemos usar la búsqueda scanf y reemplazar para buscar y cambiar una
 cierta cadena en formato C. Se pueden consultar las páginas del manual
 de
-.B sscanf
+.B sscanf(3)
 y
-.B sprintf
+.B sprintf(3)
 para saber qué es una cadena de formato y cómo funciona. Veamos un
 ejemplo: supongamos que queremos cambiar todas las apariciones de un
 paréntesis abierto, tres números separados por comas, y un paréntesis
@@ -2508,12 +2544,12 @@ Permite a Midnight Commander escribir por nosotros.
 Intenta completar el texto escrito antes de la posición actual. MC
 intenta la terminación tratando el texto como si fuera una variable
 (si el texto comienza con
-.B $
-), nombre de usuario (si el texto empieza por
-.B ~
-), nombre de máquina (si el texto comienza con
-.B @
-) o un comando (si estamos en la línea de órdenes en una posición
+.BR $ ),
+nombre de usuario (si el texto empieza por
+.BR ~ ),
+nombre de máquina (si el texto comienza con
+.BR @ )
+o un comando (si estamos en la línea de órdenes en una posición
 donde podríamos escribir un comando; las terminaciones posibles entonces
 incluyen las palabras reservadas del shell así como comandos internos
 del shell) en ese orden. Si nada de lo anterior es aplicable, se intenta
@@ -2537,18 +2573,17 @@ la entrada correcta. También podemos seguir escribiendo caracteres con lo
 que la línea se sigue completando tanto como sea posible y simultáneamente
 la primera entrada coincidente de la lista se va resaltando. Si volvemos
 a pulsar
-.BR M-Tab ,
+.BR Alt-Tab ,
 sólo las coincidencias permanecen en la lista. Tan pronto
 como no haya ambigüedad, la lista desaparece; también podemos quitarla
 con las teclas de cancelación
-.BR Esc ,
-.B F10
+.BR Esc ", " F10
 y las teclas de movimiento a izquierda y derecha. Si
 .\"LINK2"
 Completar: Mostrar Todos
 .\"Configuration"
 está desactivado, la lista aparece cuando pulsamos
-.B M-Tab
+.B Alt-Tab
 por segunda vez; con la primera MC sólo emite un pitido.
 .\"NODE "Virtual File System"
 .SH "Sistemas de Archivos Virtuales (VFS)"
@@ -3088,11 +3123,18 @@ a línea en el visor de archivos interno.
 .PP
 .I old_esc_mode
 .IP
-Por defecto Midnight Commander trata la tecla ESC como prefijo de tecla
+Por defecto Midnight Commander trata la tecla 
+.I Esc
+como prefijo de tecla
 (old_esc_mode=0), si activamos esta opción (old_esc_mode=1), entonces
-la tecla ESC actuará como prefijo de tecla durante un segundo, y si no hay
-pulsaciones, entonces ESC será interpretado como la tecla de cancelación (ESC
-ESC).
+la tecla 
+.I Esc
+actuará como prefijo de tecla durante un segundo, y si no hay
+pulsaciones, entonces 
+.I Esc
+será interpretado como la tecla de cancelación (
+.IR Esc " " Esc
+).
 .PP
 .I only_leading_plus_minus
 .IP
@@ -3109,9 +3151,11 @@ alcance el final o el principio del panel, en otro caso se desplazará un archivo
 .I show_output_starts_shell
 .IP
 Esta variable sólo funciona si no se utiliza el soporte de subshell.
-Cuando utilizamos la combinación C-o para volver a la pantalla de usuario, si
-está activada, tendremos un nuevo shell. De otro modo, pulsando cualquier tecla
-nos devolverá a Midnight Commander.
+Cuando utilizamos la combinación
+.I Ctrl-o
+para volver a la pantalla de usuario, si está activada, tendremos un
+nuevo shell. De otro modo, pulsando cualquier tecla nos devolverá a
+Midnight Commander.
 .PP
 .I torben_fj_mode
 .IP
@@ -3183,10 +3227,11 @@ insert=\\e[Op
 El identificador
 .I complete
 representa la secuencia usada para invocar el mecanismo de completar
-nombres. Esto se hace habitualmente con M-tabulador, pero podemos
-configurar otras teclas para esta función, especialmente en teclados
-que incorporan tantas teclas especiales (bonitas pero inútiles o
-infrautilizadas).
+nombres. Esto se hace habitualmente con
+.IR Alt-Tab ,
+pero podemos configurar otras teclas para esta función, especialmente en
+teclados que incorporan tantas teclas especiales (bonitas pero inútiles
+o infrautilizadas).
 .SH ""
 .\"NODE "FILES"
 .SH "ARCHIVOS AUXILIARES"
@@ -3299,7 +3344,7 @@ también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David
-Martín, 2002-2004.
+Martín, 2002-2006.
 .PP
 Midnight Commander traducido a castellano por David Martín
 <dmartina@excite.com>.
