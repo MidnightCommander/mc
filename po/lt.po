@@ -1759,7 +1759,7 @@ msgstr "&Stabilios simb. nuor."
 
 #. &file_mask_stable_symlinks
 msgid "&Dive into subdir if exists"
-msgstr "&Jei yra, &ir pakatalogius"
+msgstr "&Jei yra, ir pakatalogius"
 
 #, c-format
 msgid ""
