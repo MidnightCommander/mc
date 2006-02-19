@@ -1,3 +1,7 @@
+2006-02-19  Nerijus Baliunas  <nerijus@users.sourceforge.net>
+
+	* mc.ext.in: Open gimp in the background.
+
 2006-01-29  Julian Mehnle  <julian@mehnle.net>
 
 	* lib/mc.hint: Mention VIEWER environment variable.

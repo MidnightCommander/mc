@@ -320,7 +320,7 @@ type/^Netpbm
 	Include=image
 
 shell/.xcf
-	Open=gimp %f
+	Open=(gimp %f &)
 
 shell/.xbm
 	Open=bitmap %f
