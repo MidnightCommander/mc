@@ -1,3 +1,7 @@
+2006-02-20  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* slmisc.c: Import SLmake_string() and SLmake_nstring().
+
 2006-02-15  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* slcommon.c: Patch to slang-2.0.6 leaving local patches intact.

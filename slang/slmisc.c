@@ -29,6 +29,25 @@ USA.
 #include "slang.h"
 #include "_slang.h"
 
+
+char *SLmake_string(char *str)
+{
+   return SLmake_nstring(str, strlen (str));
+}
+
+char *SLmake_nstring (char *str, unsigned int n)
+{
+   char *ptr;
+
+   if (NULL == (ptr = SLmalloc(n + 1)))
+     {
+	return NULL;
+     }
+   SLMEMCPY (ptr, str, n);
+   ptr[n] = 0;
+   return(ptr);
+}
+
 /*
  * This function assumes that the initial \ char has been removed.
  */
