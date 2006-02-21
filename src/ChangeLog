@@ -1,3 +1,7 @@
+2006-02-21  Pavel Tsekov  <ptsekov@gmx.net>
+
+	*  cons.saver.c [HAVE_CONFIG_H]: Include config.h .
+
 2006-02-14  David Martin  <dmartina@excite.com>
 
 	* hotlist.c (remove_from_hotlist): Fix l18n macro N_() to _().
