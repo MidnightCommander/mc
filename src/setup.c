@@ -52,6 +52,7 @@
 
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
+#   include "../vfs/fish.h"
 #endif
 
 #ifdef USE_INTERNAL_EDIT
@@ -197,6 +198,7 @@ static const struct {
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
+    { "fish_directory_timeout", &fish_directory_timeout },
 #endif /* USE_NETCODE */
 #endif /* USE_VFS */
 #ifdef USE_INTERNAL_EDIT

@@ -3183,6 +3183,10 @@ mc.ext file\&.
 If this variable is on (default is off) when you browse the file system
 on a Tree panel, it will automatically reload the other panel with the
 contents of the selected directory.
+.TP
+.I fish_directory_timeout
+This variable holds the lifetime of a directory cache entry in seconds. The
+default value is 900 seconds.
 .\"NODE "Terminal databases"
 .SH "Terminal databases"
 The Midnight Commander provides a way to fix your system terminal

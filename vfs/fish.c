@@ -50,8 +50,9 @@
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
 #include "../src/unixcompat.h"
+#include "fish.h"
 
-#define FISH_DIRECTORY_TIMEOUT 30 * 60
+int fish_directory_timeout = 900;
 
 #define DO_RESOLVE_SYMLINK 1
 #define DO_OPEN            2
@@ -367,8 +368,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     print_vfs_message(_("fish: Reading directory %s..."), remote_path);
 
     gettimeofday(&dir->timestamp, NULL);
-    dir->timestamp.tv_sec += 10; /* was 360: 10 is good for
-					   stressing direntry layer a bit */
+    dir->timestamp.tv_sec += fish_directory_timeout;
     quoted_path = name_quote (remote_path, 0);
     fish_command (me, super, NONE,
 	    "#LIST /%s\n"

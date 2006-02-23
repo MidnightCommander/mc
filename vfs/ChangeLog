@@ -1,5 +1,14 @@
 2006-02-23  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* fish.h: New file.
+	* fish.c (fish_directory_timeout): Define new global variable.
+	(FISH_DIRECTORY_TIMEOUT): Eliminate - this macro is not used
+	anywhere.
+	(fish_dir_load): Use `fish_directory_timeout' to calculate the
+	expiration time of a newly created directory entries.
+
+2006-02-23  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* ftpfs.c (ftpfs_dir_uptodate): Remove.
 	(init_ftpfs): Adjust the code to reflect the removal of
 	`ftpfs_dir_uptodate'.
