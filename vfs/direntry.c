@@ -1111,6 +1111,22 @@ vfs_s_free (vfsid id)
     vfs_s_free_super (((struct vfs_s_super *)id)->me, (struct vfs_s_super *)id);
 }
 
+static int
+vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
+{
+    struct timeval tim;
+
+    if (MEDATA->flush) {
+	MEDATA->flush = 0;
+	return 0;
+    }
+
+    gettimeofday(&tim, NULL);
+    if (tim.tv_sec < ino->timestamp.tv_sec)
+	return 1;
+    return 0;
+}
+
 /* Initialize one of our subclasses - fill common functions */
 void
 vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
@@ -1144,6 +1160,7 @@ vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
 	sub->find_entry = vfs_s_find_entry_tree;
     }
     vclass->setctl = vfs_s_setctl;
+    sub->dir_uptodate = vfs_s_dir_uptodate;
 }
 
 /* ----------- Utility functions for networked filesystems  -------------- */

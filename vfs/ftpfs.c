@@ -819,21 +819,6 @@ ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
     return port;
 }
 
-static int
-ftpfs_dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
-{
-    struct timeval tim;
-
-    if (MEDATA->flush) {
-	MEDATA->flush = 0;
-	return 0;
-    }
-    gettimeofday(&tim, NULL);
-    if (tim.tv_sec < ino->timestamp.tv_sec)
-	return 1;
-    return 0;
-}
-
 /* The returned directory should always contain a trailing slash */
 static char *
 ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
@@ -2000,7 +1985,6 @@ init_ftpfs (void)
     ftpfs_subclass.fh_open = ftpfs_fh_open;
     ftpfs_subclass.fh_close = ftpfs_fh_close;
     ftpfs_subclass.dir_load = ftpfs_dir_load;
-    ftpfs_subclass.dir_uptodate = ftpfs_dir_uptodate;
     ftpfs_subclass.file_store = ftpfs_file_store;
     ftpfs_subclass.linear_start = ftpfs_linear_start;
     ftpfs_subclass.linear_read = ftpfs_linear_read;

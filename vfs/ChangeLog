@@ -1,3 +1,15 @@
+2006-02-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* ftpfs.c (ftpfs_dir_uptodate): Remove.
+	(init_ftpfs): Adjust the code to reflect the removal of
+	`ftpfs_dir_uptodate'.
+	* fish.c (fish_dir_uptodate): Remove.
+	(init_fish): Adjust the code to reflect the removal of
+	`fish_dir_uptodate'.
+	* direntry.c (vfs_s_dir_uptodate): New function.
+	(vfs_s_init_class): Initialize the `dir_uptodate' field of
+	vfs_s_subclass.
+
 2006-02-17  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* ftpfs.c (ftpfs_dir_load): Do not return error on empty directory

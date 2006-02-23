@@ -354,21 +354,6 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
 }
 
 static int
-fish_dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
-{
-    struct timeval tim;
-
-    gettimeofday(&tim, NULL);
-    if (MEDATA->flush) {
-	MEDATA->flush = 0;
-	return 0;
-    }
-    if (tim.tv_sec < ino->timestamp.tv_sec)
-	return 1;
-    return 0;
-}
-
-static int
 fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
@@ -925,7 +910,6 @@ init_fish (void)
     fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
     fish_subclass.dir_load = fish_dir_load;
-    fish_subclass.dir_uptodate = fish_dir_uptodate;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;
     fish_subclass.linear_read = fish_linear_read;
