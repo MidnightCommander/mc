@@ -24,6 +24,7 @@ BASICFILES = 			\
 	vfs.c
 
 VFSHDRS = 			\
+	fish.h			\
 	ftpfs.h 		\
 	gc.h	 		\
 	local.h			\
