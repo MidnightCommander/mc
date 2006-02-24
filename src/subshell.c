@@ -1055,8 +1055,10 @@ static void synchronize (void)
     while (subshell_alive && !subshell_stopped)
 	sigsuspend (&old_mask);
 
-    /* Discard all remaining data from stdin to the subshell */
-    tcflush (subshell_pty, TCOFLUSH);
+    if (subshell_state != ACTIVE) {
+	/* Discard all remaining data from stdin to the subshell */
+	tcflush (subshell_pty, TCOFLUSH);
+    }
 
     subshell_stopped = FALSE;
     kill (subshell_pid, SIGCONT);
