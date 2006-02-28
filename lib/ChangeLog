@@ -1,3 +1,8 @@
+2006-02-28  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* mc-wrapper.sh.in: Handle user names with spaces.
+	* mc-wrapper.csh.in: Likewise.
+
 2006-02-19  Nerijus Baliunas  <nerijus@users.sourceforge.net>
 
 	* mc.ext.in: Open gimp in the background.
