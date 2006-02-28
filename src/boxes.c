@@ -698,7 +698,7 @@ tree_box (const char *current_dir)
 
 #if defined(USE_NETCODE)
 #define VFSY 17
-#define VFS_WIDGETBASE 9
+#define VFS_WIDGETBASE 10
 #else
 #define VFSY 8
 #define VFS_WIDGETBASE 0
@@ -773,7 +773,7 @@ configure_vfs (void)
     confvfs_widgets[5].text = ftpfs_proxy_host;
 #endif
     g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
-    confvfs_widgets [4 + VFS_WIDGETBASE].text = buffer2;
+    confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
         vfs_timeout = atoi (ret_timeout);

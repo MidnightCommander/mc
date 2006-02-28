@@ -1,3 +1,7 @@
+2006-02-28  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* boxes.c (configure_vfs) [!USE_NETCODE]: Fix off-by-one error.
+
 2006-02-24  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* subshell.c (synchronize): Do not discard user input if the panels
