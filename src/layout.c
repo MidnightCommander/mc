@@ -486,7 +486,7 @@ init_layout (void)
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
     add_widget (layout_dlg, check_options[6].widget);
-    radio_widget = radio_new (3, 6, 2, s_split_direction, 1);
+    radio_widget = radio_new (3, 6, 2, s_split_direction);
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;
 }

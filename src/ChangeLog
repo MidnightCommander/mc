@@ -1,5 +1,19 @@
 2006-02-28  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* widget.h (struct WRadio): Remove unused field
+	`upper_letter_is_hotkey'.
+	(radio_new): Remove the last argument from the function
+	declaration - it is unused.
+	* widget.c (radio_new): Remove the last argument from the
+	function declaration - it is unused.
+	* boxes.c: Adjust all callers to reflect the changes above.
+	* layout.c: Likewise.
+	* listmode.c: Likewise.
+	* option.c: Likewise.
+	* wtools.c: Likewise.
+
+2006-02-28  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* boxes.c (configure_vfs) [!USE_NETCODE]: Fix off-by-one error.
 
 2006-02-24  Pavel Tsekov  <ptsekov@gmx.net>

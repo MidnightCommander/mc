@@ -31,7 +31,6 @@ typedef struct WRadio {
     int pos, sel;
     int count;			/* number of members */
     const char **texts;		/* texts of labels */
-    int upper_letter_is_hotkey; /* If true, then the capital letter is a hk */
 } WRadio;
 
 typedef struct WCheck {
@@ -126,7 +125,7 @@ typedef struct WGroupbox {
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
-WRadio  *radio_new    (int y, int x, int count, const char **text, int use_hotkey);
+WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname);
 WLabel  *label_new    (int y, int x, const char *text);

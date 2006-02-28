@@ -210,7 +210,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     add_widget (dd, user);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1);
+    my_radio = radio_new (3, 5, LIST_TYPES, displays);
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }
@@ -343,7 +343,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     c = check_new (3, check_pos, *reverse, reverse_label);
     add_widget (dd, c);
 
-    my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1);
+    my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names);
     my_radio->sel = my_radio->pos = current_mode;
 
     add_widget (dd, my_radio);

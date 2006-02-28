@@ -343,7 +343,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    break;
 
 	case quick_radio:
-	    r = radio_new (ypos, xpos, qw->hotkey_pos, const_cast(const char **, qw->str_result), 1);
+	    r = radio_new (ypos, xpos, qw->hotkey_pos, const_cast(const char **, qw->str_result));
 	    r->pos = r->sel = qw->value;
 	    widget = r;
 	    break;

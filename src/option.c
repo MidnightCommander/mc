@@ -199,7 +199,7 @@ init_configure (void)
     }
 
     pause_radio =
-	radio_new (RY + 1, RX + 2, 3, pause_options, 1);
+	radio_new (RY + 1, RX + 2, 3, pause_options);
     pause_radio->sel = pause_after_run;
     add_widget (conf_dlg, pause_radio);
 

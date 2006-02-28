@@ -400,7 +400,7 @@ radio_event (Gpm_Event *event, void *data)
 }
 
 WRadio *
-radio_new (int y, int x, int count, const char **texts, int use_hotkey)
+radio_new (int y, int x, int count, const char **texts)
 {
     WRadio *r = g_new (WRadio, 1);
     int i, max, m;
@@ -419,7 +419,6 @@ radio_new (int y, int x, int count, const char **texts, int use_hotkey)
     r->sel = 0;
     r->count = count;
     r->texts = texts;
-    r->upper_letter_is_hotkey = use_hotkey;
     widget_want_hotkey (r->widget, 1);
     
     return r;
