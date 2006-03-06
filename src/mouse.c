@@ -50,7 +50,8 @@ void init_mouse (void)
 	use_mouse_p = MOUSE_GPM;
 	break;
 #endif /* HAVE_LIBGPM */
-    case MOUSE_XTERM:
+    case MOUSE_XTERM_NORMAL_TRACKING:
+    case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
 	define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
 	break;
     default:
@@ -86,7 +87,17 @@ void enable_mouse (void)
 	}
 	break;
 #endif /* HAVE_LIBGPM */
-    case MOUSE_XTERM:
+    case MOUSE_XTERM_NORMAL_TRACKING:
+	/* save old highlight mouse tracking */
+	printf(ESC_STR "[?1001s");
+
+	/* enable mouse tracking */
+	printf(ESC_STR "[?1000h");
+
+	fflush (stdout);
+	mouse_enabled = 1; 
+	break;
+    case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
 	/* save old highlight mouse tracking */
 	printf(ESC_STR "[?1001s");
 
@@ -115,7 +126,16 @@ void disable_mouse (void)
 	Gpm_Close ();
 	break;
 #endif
-    case MOUSE_XTERM:
+    case MOUSE_XTERM_NORMAL_TRACKING:
+	/* disable mouse tracking */
+	printf(ESC_STR "[?1000l");
+
+	/* restore old highlight mouse tracking */
+	printf(ESC_STR "[?1001r");
+
+	fflush (stdout);
+	break;
+    case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
 	/* disable mouse tracking */
 	printf(ESC_STR "[?1002l");
 

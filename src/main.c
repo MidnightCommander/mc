@@ -1385,7 +1385,14 @@ init_xterm_support (void)
 
 	/* Enable mouse unless explicitly disabled by --nomouse */
 	if (use_mouse_p != MOUSE_DISABLED) {
-	    use_mouse_p = MOUSE_XTERM;
+	    const char *color_term = getenv ("COLORTERM");
+	    if (strncmp (termvalue, "rxvt", 4) == 0 ||
+		(color_term != NULL && strncmp (color_term, "rxvt", 4) == 0) ||
+		strcmp (termvalue, "Eterm") == 0) {
+		    use_mouse_p = MOUSE_XTERM_NORMAL_TRACKING;
+	    } else {
+		use_mouse_p = MOUSE_XTERM_BUTTON_EVENT_TRACKING;
+	    }
 	}
     }
 }

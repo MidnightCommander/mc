@@ -55,7 +55,9 @@ typedef enum {
     MOUSE_NONE,		/* Not detected yet */
     MOUSE_DISABLED,	/* Explicitly disabled by -d */
     MOUSE_GPM,		/* Support using GPM on Linux */
-    MOUSE_XTERM		/* Support using xterm-style mouse reporting */
+    MOUSE_XTERM,	/* Support using xterm-style mouse reporting */
+    MOUSE_XTERM_NORMAL_TRACKING = MOUSE_XTERM,
+    MOUSE_XTERM_BUTTON_EVENT_TRACKING
 } Mouse_Type;
 
 /* Type of the currently used mouse */

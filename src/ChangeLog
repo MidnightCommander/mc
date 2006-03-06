@@ -1,3 +1,14 @@
+2006-03-06  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mouse.h (Mouse_Type): Add new enumerated values to describe
+	the xterm mouse reporting modes offered by various xterm-like
+	terminals.
+	* mouse.c: Adjust the code to reflect the changes above.
+	Send the proper terminal control codes when xterm normal mouse
+	tracking is requested.
+	* main.c (init_xterm_support): Try to fine-tune the mouse tracking
+	mode based on the terminal type.
+
 2006-02-28  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* widget.h (struct WRadio): Remove unused field
