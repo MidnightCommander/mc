@@ -1209,17 +1209,11 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 		       cd_first ? _("(chdir first)") : "");
 
     if (cd_first) {
-	char *p;
-
-	p = ftpfs_translate_path (me, super, remote_path);
-
-	if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
-	    g_free (p);
+	if (ftpfs_chdir_internal (me, super, remote_path) != COMPLETE) {
 	    ftpfs_errno = ENOENT;
 	    print_vfs_message (_("ftpfs: CWD failed."));
 	    return -1;
 	}
-	g_free (p);
     }
 
     gettimeofday (&dir->timestamp, NULL);

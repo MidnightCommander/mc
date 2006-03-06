@@ -1,3 +1,8 @@
+2006-03-06  Arpad Gereoffy (A'rpi)  <arpi@mplayerhq.hu>
+
+	* ftpfs.c (ftpfs_dir_load): Remove redundant call to
+	`ftpfs_translate_path'.
+
 2006-02-23  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Add fish.h.
