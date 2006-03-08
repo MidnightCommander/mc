@@ -1194,7 +1194,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 {
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
-    int sock;
+    int sock, num_entries = 0;
     char buffer[BUF_8K];
     int cd_first;
 
@@ -1272,6 +1272,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	    continue;
 	}
 	ent->ino->st.st_nlink = i;	/* Ouch, we need to preserve our counts :-( */
+	num_entries++;
 	vfs_s_insert_entry (me, dir, ent);
     }
 
@@ -1279,6 +1280,21 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     me->verrno = E_REMOTE;
     if ((ftpfs_get_reply (me, SUP.sock, NULL, 0) != COMPLETE))
 	goto fallback;
+
+    if (num_entries == 0 && cd_first == 0) {
+	/* The LIST command may produce an empty output. In such scenario
+	   it is not clear whether this is caused by  `remote_path' being
+	   a non-existent path or for some other reason (listing emtpy
+	   directory without the -a option, non-readable directory, etc.).
+
+	   Since `dir_load' is a crucial method, when it comes to determine
+	   whether a given path is a _directory_, the code must try its best
+	   to determine the type of `remote_path'. The only reliable way to
+	   achieve this is trough issuing a CWD command. */
+
+	cd_first = 1;
+	goto again;
+    }
 
     if (SUP.strict == RFC_AUTODETECT)
 	SUP.strict = RFC_DARING;

@@ -1,3 +1,10 @@
+2006-03-08  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* ftpfs.c (ftpfs_dir_load): When retrieving the directory listing
+	by using the LIST command _only_ and the output of the command is
+	empty, retry the operation by sending a CWD command followed by a
+	LIST command.
+
 2006-03-06  Arpad Gereoffy (A'rpi)  <arpi@mplayerhq.hu>
 
 	* ftpfs.c (ftpfs_dir_load): Remove redundant call to
