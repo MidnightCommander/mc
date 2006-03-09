@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0a\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-09 20:32+0200\n"
-"PO-Revision-Date: 2005-09-09 20:30+0200\n"
+"POT-Creation-Date: 2006-03-10 00:38+0100\n"
+"PO-Revision-Date: 2006-03-10 00:53+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -780,6 +780,9 @@ msgstr "Controlla mai&uscole/minuscole"
 
 msgid "Sort order"
 msgstr "Modalità ordinamento"
+
+msgid " confirm di&Rectory hotlist delete "
+msgstr " conferma cancellazione di&r favorite "
 
 msgid " confirm &Exit "
 msgstr "&Uscita"
@@ -1899,6 +1902,11 @@ msgstr " Rimuovi: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr "\n Sicuro di voler cancellare questa voce?"
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -2649,12 +2657,16 @@ msgid "Group"
 msgstr "Gruppo"
 
 #, c-format
-msgid "%s bytes in %d file"
-msgstr " %s byte in %d file"
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
 #, c-format
-msgid "%s bytes in %d files"
-msgstr "%s byte in %d file"
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] " %s byte in %d file"
+msgstr[1] " %s byte in %d file"
 
 msgid "<readlink failed>"
 msgstr "<readlink fallito>"
@@ -2987,6 +2999,60 @@ msgstr " Vai all'indirizzo "
 
 msgid " Enter regexp:"
 msgstr " Inserire espressione regolare:"
+
+msgid "ButtonBar|Help"
+msgstr "Aiuto"
+
+msgid "ButtonBar|Quit"
+msgstr "Esci"
+
+msgid "ButtonBar|Ascii"
+msgstr "Testo"
+
+msgid "ButtonBar|Hex"
+msgstr "Esadec"
+
+msgid "ButtonBar|Goto"
+msgstr "Vai.."
+
+msgid "ButtonBar|Line"
+msgstr "Riga"
+
+msgid "ButtonBar|View"
+msgstr "Mostra"
+
+msgid "ButtonBar|Edit"
+msgstr "Modif"
+
+msgid "ButtonBar|Save"
+msgstr "Salva"
+
+msgid "ButtonBar|UnWrap"
+msgstr "NoACapo"
+
+msgid "ButtonBar|Wrap"
+msgstr "ACapo"
+
+msgid "ButtonBar|RxSrch"
+msgstr "CercR"
+
+msgid "ButtonBar|HxSrch"
+msgstr "CercE"
+
+msgid "ButtonBar|Search"
+msgstr "Cerca"
+
+msgid "ButtonBar|Raw"
+msgstr "Normale"
+
+msgid "ButtonBar|Parse"
+msgstr "Filtrat"
+
+msgid "ButtonBar|Unform"
+msgstr "NonForm"
+
+msgid "ButtonBar|Format"
+msgstr "Formatt"
 
 msgid " History "
 msgstr " Cronologia "
