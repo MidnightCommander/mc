@@ -1,3 +1,7 @@
+2006-03-15  Gergely Szasz  <szaszg@hu.inter.net>
+
+	* mc.ext.in: Add support for Perl .pod files.
+
 2006-02-28  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* mc-wrapper.sh.in: Handle user names with spaces.

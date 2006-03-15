@@ -261,6 +261,11 @@ regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
 	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac | %var{PAGER:more}
 	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac
 
+# Perl pod page
+shell/.pod
+	Open=pod2man %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} pod2man %f | nroff @MAN_FLAGS@ @MANDOC@
+
 # Troff with me macros.
 # Exception - "read.me" is not a nroff file.
 shell/read.me
