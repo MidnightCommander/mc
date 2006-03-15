@@ -1,3 +1,9 @@
+2006-03-15  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* editcmd.c (edit_new_cmd): Remove redundant call to
+	`edit_unlock_file()'.
+	(edit_ok_to_exit): Likewise.
+
 2006-02-10  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.c (user_menu): There is no need to prefix the filename

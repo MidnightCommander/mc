@@ -820,8 +820,6 @@ int edit_new_cmd (WEdit * edit)
     }
     edit->force |= REDRAW_COMPLETELY;
 
-    if (edit->locked)
-	edit->locked = edit_unlock_file (edit->filename);
     return edit_renew (edit);	/* if this gives an error, something has really screwed up */
 }
 
@@ -2142,8 +2140,6 @@ edit_ok_to_exit (WEdit *edit)
 	    return 0;
 	break;
     case 2:
-	if (edit->locked)
-	    edit->locked = edit_unlock_file (edit->filename);
 	break;
     case 0:
     case -1:
