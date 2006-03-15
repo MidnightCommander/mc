@@ -84,6 +84,24 @@ lock_build_name (void)
     return g_strdup_printf ("%s@%s.%d", user, host, (int) getpid ());
 }
 
+static char *
+lock_build_symlink_name (const char *fname)
+{
+    char *fname_copy, *symlink_name;
+    char absolute_fname[PATH_MAX];
+
+    if (mc_realpath (fname, absolute_fname) == NULL)
+	return NULL;
+
+    fname = x_basename (absolute_fname);
+    fname_copy = g_strdup (fname);
+    absolute_fname[fname - absolute_fname] = '\0';
+    symlink_name = g_strconcat (absolute_fname, ".#", fname_copy, (char *) NULL);
+    g_free (fname_copy);
+
+    return symlink_name;
+}
+
 /* Extract pid from user@host.domain.pid string */
 static struct lock_s *
 lock_extract_info (const char *str)
@@ -149,7 +167,9 @@ edit_lock_file (const char *fname)
 	return 0;
 
     /* Check if already locked */
-    lockfname = g_strconcat (".#", fname, (char *) NULL);
+    lockfname = lock_build_symlink_name (fname);
+    if (lockfname == NULL)
+	return 0;
     if (lstat (lockfname, &statbuf) == 0) {
 	lock = lock_get_info (lockfname);
 	if (!lock) {
@@ -164,7 +184,7 @@ edit_lock_file (const char *fname)
 	    msg =
 		g_strdup_printf (_
 				 ("File \"%s\" is already being edited\n"
-				  "User: %s\nProcess ID: %d"), fname,
+				  "User: %s\nProcess ID: %d"), x_basename (lockfname) + 2,
 				 lockinfo->who, (int) lockinfo->pid);
 	    /* TODO: Implement "Abort" - needs to rewind undo stack */
 	    switch (edit_query_dialog2
@@ -208,7 +228,9 @@ edit_unlock_file (const char *fname)
     if (!fname || !*fname)
 	return 0;
 
-    lockfname = g_strconcat (".#", fname, (char *) NULL);
+    lockfname = lock_build_symlink_name (fname);
+    if (lockfname == NULL)
+	return 0;
 
     /* Check if lock exists */
     if (lstat (lockfname, &statbuf) == -1) {

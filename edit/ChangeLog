@@ -1,5 +1,12 @@
 2006-03-15  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* editlock.c: Fix for savannah bug #13673.
+	(lock_build_symlink_name): New function.
+	(edit_lock_file): Use lock_build_symlink_name().
+	(edit_unlock_file): Likewise.
+
+2006-03-15  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* editcmd.c (edit_new_cmd): Remove redundant call to
 	`edit_unlock_file()'.
 	(edit_ok_to_exit): Likewise.
