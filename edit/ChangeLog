@@ -1,3 +1,8 @@
+2006-03-17  Oswald Buddenhagen <ossi@kde.org>
+
+	* editcmd.c (edit_save_as_cmd): If saving of the file fails
+	remove only the _save_ lock. 
+
 2006-03-15  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* editlock.c: Fix for savannah bug #13673.

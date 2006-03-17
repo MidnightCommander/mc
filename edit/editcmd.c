@@ -489,6 +489,7 @@ edit_save_as_cmd (WEdit *edit)
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
+	    int rv;
 	    if (strcmp (edit->filename, exp)) {
 		int file;
 		different_filename = 1;
@@ -512,9 +513,11 @@ edit_save_as_cmd (WEdit *edit)
 		    save_lock = edit_lock_file (exp);
 	    }
 
-	    if (edit_save_file (edit, exp)) {
+	    rv = edit_save_file (edit, exp);
+	    switch (rv) {
+	    case 1:
 		/* Succesful, so unlock both files */
-		if (strcmp (edit->filename, exp)) {
+		if (different_filename) {
 		    if (save_lock)
 			edit_unlock_file (exp);
 		    if (edit->locked)
@@ -532,12 +535,10 @@ edit_save_as_cmd (WEdit *edit)
 		    edit_load_syntax (edit, NULL, option_syntax_type);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
-	    } else {
+	    default:
 		/* Failed, so maintain modify (not save) lock */
-		if (strcmp (edit->filename, exp) && save_lock)
-		    edit_unlock_file (exp);
 		if (save_lock)
-		    edit->locked = edit_unlock_file (edit->filename);
+		    edit_unlock_file (exp);
 		g_free (exp);
 		edit_error_dialog (_(" Save As "),
 				   get_sys_error (_
