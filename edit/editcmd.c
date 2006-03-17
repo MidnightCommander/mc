@@ -221,14 +221,14 @@ void edit_refresh_cmd (WEdit * edit)
 			    b) rename <filename> to <filename.backup_ext>,
 			    c) rename <tempnam> to <filename>. */
 
-/* returns 0 on error */
+/* returns 0 on error, -1 on abort */
 static int
 edit_save_file (WEdit *edit, const char *filename)
 {
     char *p;
     long filelen = 0;
     char *savename = 0;
-    int this_save_mode, fd;
+    int this_save_mode, fd = -1;
 
     if (!filename)
 	return 0;
@@ -241,16 +241,41 @@ edit_save_file (WEdit *edit, const char *filename)
 	g_free (savename);
     }
 
-    if (!vfs_file_is_local (filename) ||
-	(fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
-	/*
-	 * The file does not exists yet, so no safe save or
-	 * backup are necessary.
-	 */
-	this_save_mode = EDIT_QUICK_SAVE;
-    } else {
-	mc_close (fd);
-	this_save_mode = option_save_mode;
+    this_save_mode = option_save_mode;
+    if (this_save_mode != EDIT_QUICK_SAVE) {
+	if (!vfs_file_is_local (filename) ||
+	    (fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
+	    /*
+	     * The file does not exists yet, so no safe save or
+	     * backup are necessary.
+	     */
+	    this_save_mode = EDIT_QUICK_SAVE;
+	}
+	if (fd != -1)
+	    mc_close (fd);
+    }
+
+    if (this_save_mode == EDIT_QUICK_SAVE &&
+	!edit->skip_detach_prompt) {
+	int rv;
+	struct stat sb;
+
+	rv = mc_stat (filename, &sb);
+	if (rv == 0 && sb.st_nlink > 1) {
+	    rv = edit_query_dialog3 (_("Warning"),
+				     _(" File has hard-links. Detach before saving? "),
+				     _("&Yes"), _("&No"), _("&Cancel"));
+	    switch (rv) {
+	    case 0:
+		this_save_mode = EDIT_SAFE_SAVE;
+		/* fallthrough */
+	    case 1:
+		edit->skip_detach_prompt = 1;
+		break;
+	    default:
+		return -1;
+	    }
+	}
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE) {
@@ -536,13 +561,15 @@ edit_save_as_cmd (WEdit *edit)
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    default:
+		edit_error_dialog (_(" Save As "),
+				   get_sys_error (_
+						  (" Cannot save file. ")));
+		/* fallthrough */
+	    case -1:
 		/* Failed, so maintain modify (not save) lock */
 		if (save_lock)
 		    edit_unlock_file (exp);
 		g_free (exp);
-		edit_error_dialog (_(" Save As "),
-				   get_sys_error (_
-						  (" Cannot save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
@@ -796,15 +823,17 @@ edit_save_cmd (WEdit *edit)
     res = edit_save_file (edit, edit->filename);
 
     /* Maintain modify (not save) lock on failure */
-    if ((res && edit->locked) || save_lock)
+    if ((res > 0 && edit->locked) || save_lock)
 	edit->locked = edit_unlock_file (edit->filename);
 
     /* On failure try 'save as', it does locking on its own */
     if (!res)
 	return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
-    edit->delete_file = 0;
-    edit->modified = 0;
+    if (res > 0) {
+        edit->delete_file = 0;
+        edit->modified = 0;
+    }
 
     return 1;
 }

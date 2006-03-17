@@ -1,3 +1,14 @@
+2006-03-17  Oswald Buddenhagen  <ossi@kde.org>
+
+	* edit-widget.h (struct WEdit): Add new field.
+	* editcmd.c (edit_save_file): Prompt whether to detach a hardlinked
+	file if in "Quick save" mode.
+	Return -1 to indicated that the user requested to cancel the
+	operation.
+	(edit_save_as_cmd): Adjust the code to handle the new return
+	value of edit_save_file().
+	(edit_save_cmd): Likewise.
+
 2006-03-17  Oswald Buddenhagen <ossi@kde.org>
 
 	* editcmd.c (edit_save_as_cmd): If saving of the file fails

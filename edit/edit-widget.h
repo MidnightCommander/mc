@@ -94,6 +94,7 @@ struct WEdit {
     unsigned int stack_disable:1; /* If not 0, don't save events in the undo stack */
 
     struct stat stat1;		/* Result of mc_fstat() on the file */
+    int skip_detach_prompt:1;	/* Do not prompt whether to detach a file anymore */
 
     /* syntax higlighting */
     struct _syntax_marker *syntax_marker;
