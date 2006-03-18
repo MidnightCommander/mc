@@ -1,3 +1,8 @@
+2006-03-18  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* extfs/uar.in (mcarfs_list): Parse date reported by ar back to three
+	fields as vfs_parse_filedate() only expects three date fields now.
+
 2006-03-08  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* ftpfs.c (ftpfs_dir_load): When retrieving the directory listing
