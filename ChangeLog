@@ -1,3 +1,11 @@
+2006-03-18  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* acinclude.m4 (AC_GET_FS_INFO): Replace old fileutils code to get
+	mount and file system information with m4_includes of the corresponding
+	GNU coreutils-5.94 files (ls-mntd-fs.m4 (#20) and fsusage.m4 (#16)).
+
+	* m4/fsusage.m4, m4/ls-mntd-fs.m4: Create.
+
 2006-02-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* doc/mc.1.in: Document `fish_directory_timeout'.
@@ -31,7 +39,7 @@
 	* configure.ac: Use AC_GNU_SOURCE, which prevents redefining
 	_GNU_SOURCE.  Bump Autoconf version to 2.54, where AC_GNU_SOURCE
 	appeared.
-	Reported by Leonard den Ottolander <leonard@den.ottolander.nl>
+	Reported by Leonard den Ottolander <leonard den ottolander nl>
 
 	* configure.ac: Use gettext 0.14.3.
 	* acinclude.m4 (MC_ASM_LABELS): Remove, it's not needed with
