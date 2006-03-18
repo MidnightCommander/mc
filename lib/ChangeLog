@@ -1,3 +1,8 @@
+2006-03-18  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* mc-wrapper.sh.in: Don't use "$()" construct as it is not portable
+	to f.e. SunOS. Use backticks instead.
+
 2006-03-15  Gergely Szasz  <szaszg@hu.inter.net>
 
 	* mc.ext.in: Add support for Perl .pod files.
