@@ -1,5 +1,9 @@
 2006-03-19  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* extfs/deb.in (mcdebfs_list): Output three date fields, not four.
+
+2006-03-19  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* extfs/deb.in: Patrik Rak is mentioned in the header, no need to
 	specify his code blocks in the comments.
 

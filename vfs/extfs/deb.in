@@ -33,7 +33,7 @@ sub mcdebfs_list
 #
 	local($archivename)=@_;
 	local $qarchivename = quote($archivename);
-	chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
+	chop($date=`LC_ALL=C date "+%b %d %H:%M"`);
 	chop($info_size=`dpkg -I $qarchivename | wc -c`);
 	$install_size=length($pressinstall);
 
@@ -58,7 +58,9 @@ sub mcdebfs_list
 				$pathindex=5;
 			}
 			else {
+				$mstring='GeeJanFebMarAprMayJunJulAugSepOctNovDec';
 				$month=$_[3];
+				$mon=index($mstring,$month) / 3;
 				$day=$_[4];
 				$time=$_[5];
 				$year=$_[6];
@@ -83,7 +85,16 @@ sub mcdebfs_list
 				$arrow=' ' . $arrow;
 				$link= ' ' . $link;
 			}
-			print "$perm 1 $owgr $size $month $day $year $time CONTENTS/$path$arrow$link\n";
+			$now=`date "+%Y %m"`;
+			($thisyear, $thismon) = split(/ /, $now);
+			# show time for files younger than 6 months
+			# but not for files with dates in the future
+			if ($year * 12 + $mon > $thisyear * 12 + $thismon - 6 &&
+				$year * 12 + $mon <= $thisyear * 12 + $thismon) {
+				print "$perm 1 $owgr $size $month $day $time CONTENTS/$path$arrow$link\n";
+			} else {
+				print "$perm 1 $owgr $size $month $day $year CONTENTS/$path$arrow$link\n";
+			}
 		}
 	}
         if ( open(PIPEIN, "dpkg-deb -I $qarchivename |") )
