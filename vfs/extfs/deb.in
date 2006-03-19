@@ -38,7 +38,6 @@ sub mcdebfs_list
 	$install_size=length($pressinstall);
 
 	print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";
-	# from Patrik Rak
 	print "dr-xr-xr-x   1 root     root     0 $date DEBIAN\n";
 	print "-r--r--r--   1 root     root     $info_size $date INFO\n";
 	print "-r-xr--r--   1 root     root     $install_size $date INSTALL\n";
@@ -87,7 +86,6 @@ sub mcdebfs_list
 			print "$perm 1 $owgr $size $month $day $year $time CONTENTS/$path$arrow$link\n";
 		}
 	}
-        # begin from Patrik Rak
         if ( open(PIPEIN, "dpkg-deb -I $qarchivename |") )
         {
                while(<PIPEIN>)
@@ -109,8 +107,6 @@ sub mcdebfs_list
                        print "$perm 1 root root $size $date DEBIAN/$name\n";
                }
         }
-        # end from Patrik Rak
-
 }
 
 sub mcdebfs_copyout
@@ -123,14 +119,11 @@ sub mcdebfs_copyout
 	if($filename eq "INFO")
 	{
 		system("dpkg-deb -I $qarchive > $qdestfile");
-        # begin from Patrik Rak
         }
         elsif($filename =~ /^DEBIAN/)
         {
                $qfilename=~s!^DEBIAN/!!;
                system("dpkg-deb -I $qarchive $qfilename > $qdestfile");
-        # end from Patrik Rak
-
 	}
 	elsif($filename eq "INSTALL")
 	{
