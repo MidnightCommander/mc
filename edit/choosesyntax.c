@@ -25,6 +25,11 @@
 #define LIST_LINES 14
 #define N_DFLT_ENTRIES 2
 
+int pstrcmp(p1, p2) char *p1, *p2;
+{
+    return strcmp(*(char**)p1, *(char**)p2);
+}
+
 static int
 exec_edit_syntax_dialog (const char **names) {
     int i;
@@ -51,6 +56,7 @@ edit_syntax_dialog (void) {
     char **names;
     int i;
     int force_reload = 0;
+    int count = 0;
 
     names = (char**) g_malloc (sizeof (char*));
     names[0] = NULL;
@@ -58,6 +64,8 @@ edit_syntax_dialog (void) {
        Instead we could save the list to a file and update it once the syntax
        file gets updated (either by testing or by explicit user command). */
     edit_load_syntax (NULL, &names, NULL);
+    while (names[count++] != NULL);
+    qsort(names, count - 1, sizeof(char*), pstrcmp);
 
     if ((syntax = exec_edit_syntax_dialog ((const char**) names)) < 0) {
 	for (i = 0; names[i]; i++) {

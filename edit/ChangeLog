@@ -1,5 +1,9 @@
 2006-03-21  Leonard den Ottolander  <leonard den ottolander nl>
 
+	* choosesyntax.c: Sort syntax list.
+
+2006-03-21  Leonard den Ottolander  <leonard den ottolander nl>
+
 	* choosesyntax.c: GPL v2 only.
 
 2006-03-17  Oswald Buddenhagen  <ossi@kde.org>
