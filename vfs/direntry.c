@@ -581,8 +581,7 @@ vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
 	vfs_s_find_inode (me, super, q,
 			  flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW,
 			  flags & ~FL_FOLLOW);
-    if ((!ino) && (!*q))
-	/* We are asking about / directory of ftp server: assume it exists */
+    if (!ino)
 	ino =
 	    vfs_s_find_inode (me, super, q,
 			      flags & FL_FOLLOW ? LINK_FOLLOW :

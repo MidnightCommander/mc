@@ -1,3 +1,9 @@
+2006-03-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* direntry.c (vfs_s_inode_from_path): Do not give up if a given path
+	does not exist in the directory cache. In such scenario use the
+	underlying vfs to determine whether the path exists or not.
+
 2006-03-19  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* extfs/deb.in (mcdebfs_list): Output three date fields, not four.
