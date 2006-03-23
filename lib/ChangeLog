@@ -1,3 +1,7 @@
+2006-03-23  Marek Habersack  <grendel@debian.org>
+
+	* mc.ext.in: Improve output of the View command for debian packages.
+
 2006-03-18  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* mc-wrapper.sh.in: Don't use "$()" construct as it is not portable
