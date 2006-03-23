@@ -1,5 +1,15 @@
 2006-03-23  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* extfs.c (extfs_done): Free all live archives.
+	Fixes savannah bug #13953.
+	(extfs_free_entries): Comment out - it is unused.
+	(extfs_free_archive): Use extfs_free_entry () instead of 
+	extfs_free_entries ().
+	(extfs_free): Reflect the changes above.
+	Simplify.
+
+2006-03-23  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* direntry.c (vfs_s_inode_from_path): Do not give up if a given path
 	does not exist in the directory cache. In such scenario use the
 	underlying vfs to determine whether the path exists or not.

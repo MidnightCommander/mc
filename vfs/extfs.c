@@ -97,6 +97,7 @@ static struct entry *extfs_find_entry (struct entry *dir, char *name,
 static int extfs_which (struct vfs_class *me, const char *path);
 static void extfs_remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
+static void extfs_free_entry (struct entry *e);
 
 static struct vfs_class vfs_extfs_ops;
 static struct archive *first_archive = NULL;
@@ -196,15 +197,17 @@ static struct entry *extfs_generate_entry (struct archive *archive,
     return entry;
 }
 
+#if 0
 static void extfs_free_entries (struct entry *entry)
 {
     (void) entry;
     return;
 }
+#endif
 
 static void extfs_free_archive (struct archive *archive)
 {
-    extfs_free_entries (archive->root_entry);
+    extfs_free_entry (archive->root_entry);
     if (archive->local_name != NULL) {
         struct stat my;
         
@@ -1230,15 +1233,14 @@ static void extfs_free (vfsid id)
     struct archive *parc;
     struct archive *archive = (struct archive *)id;
 
-    extfs_free_entry (archive->root_entry);
     if (archive == first_archive) {
         first_archive = archive->next;
     } else {
         for (parc = first_archive; parc != NULL; parc = parc->next)
-            if (parc->next == archive)
+            if (parc->next == archive) {
+                parc->next = archive->next;
                 break;
-        if (parc != NULL)
-            parc->next = archive->next;
+            }
     }
     extfs_free_archive (archive);
 }
@@ -1355,8 +1357,14 @@ static int extfs_which (struct vfs_class *me, const char *path)
 static void extfs_done (struct vfs_class *me)
 {
     int i;
+    struct archive *ar;
 
     (void) me;
+
+    for (ar = first_archive; ar != NULL;) {
+	extfs_free ((vfsid) ar);
+	ar = first_archive;
+    }
 
     for (i = 0; i < extfs_no; i++ )
 	g_free (extfs_prefixes [i]);
