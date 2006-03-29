@@ -529,7 +529,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	if (!ctx->follow_links && sb.st_nlink > 1 &&
 	    check_hardlinks (src_path, dst_path, &sb) == 1) {
 	    /* We have made a hardlink - no more processing is necessary */
-	    return return_status;
+	    return FILE_CONT;
 	}
 
 	if (S_ISLNK (sb.st_mode)) {
