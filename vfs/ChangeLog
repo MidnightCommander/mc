@@ -1,3 +1,7 @@
+2006-03-30  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* direntry.c (vfs_s_inode_from_path): Revert last change.
+
 2006-03-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* extfs.c (extfs_done): Free all live archives.
