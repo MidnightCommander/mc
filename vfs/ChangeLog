@@ -1,3 +1,9 @@
+2006-03-30  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
+
+	* fish.c (fish_file_store): Improve the upload speed by using the
+	`head' utility when possible. Fallback to a new improved `dd' method
+	if `head' is not availaible or just stupid.
+
 2006-03-30  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* direntry.c (vfs_s_inode_from_path): Revert last change.
