@@ -1,3 +1,10 @@
+2006-03-31  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
+
+	* fish.c (fish_file_store): Do not create the target file before
+	determining which method (`head' or `dd') to use.
+	Do not use `head' to transfer data when resuming a file transfer - it is
+	not reliable enough.
+
 2006-03-30  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
 
 	* fish.c (fish_file_store): Improve the upload speed by using the

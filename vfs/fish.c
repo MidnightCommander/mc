@@ -518,6 +518,10 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      *	`dd' was not designed for full filling of input buffers,
      *	and does not report exact number of bytes (not blocks).
      *	Therefore a more complex shell script is needed.
+     *
+     *	 On some systems non-GNU head writes "Usage:" error report to stdout
+     *	instead of stderr. It makes impossible the use of "head || dd"
+     *	algorithm for file appending case, therefore just "dd" is used for it.
      */
 
     print_vfs_message(_("fish: store %s: sending command..."), name );
@@ -527,7 +531,6 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
     if (!fh->u.fish.append)
 	n = fish_command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
-		 "> /%s\n"
 		 "echo '### 001'\n"
                  "res=`exec 3>&1\n"
 		 "(\n"
@@ -536,28 +539,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 		   "cat > /%s\n"
 		   "cat > /dev/null\n"
 		 ")`; [ \"$res\" = DD ] && {\n"
-			"rest=%lu\n"
-			"while [ $rest -gt 0 ]\n"
-			"do\n"
-			"    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-			"    n=`dd bs=256 count=$cnt | tee -a /%s | wc -c`\n"
-			"    rest=`expr $rest - $n`\n"
-			"done\n"
-		 "}; echo '### 200'\n",
-		 (unsigned long) s.st_size, name, quoted_name,
-		 (unsigned long) s.st_size, quoted_name,
-		 (unsigned long) s.st_size, quoted_name);
-    else
-	n = fish_command (me, super, WAIT_REPLY,
-		 "#STOR %lu /%s\n"
-		 "echo '### 001'\n"
-		 "res=`exec 3>&1\n"
-		 "(\n"
-		   "head -c %lu -q - || echo DD >&3\n"
-		 ") 2>/dev/null | (\n"
-		   "cat >> /%s\n"
-		   "cat > /dev/null\n"
-		 ")`; [ \"$res\" = DD ] && {\n"
+			"> /%s\n"
 			"rest=%lu\n"
 			"while [ $rest -gt 0 ]\n"
 			"do\n"
@@ -568,6 +550,21 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 		 "}; echo '### 200'\n",
 		 (unsigned long) s.st_size, name,
 		 (unsigned long) s.st_size, quoted_name,
+		 quoted_name, (unsigned long) s.st_size, quoted_name);
+    else
+	n = fish_command (me, super, WAIT_REPLY,
+		 "#STOR %lu /%s\n"
+		 "echo '### 001'\n"
+		 "{\n"
+			"rest=%lu\n"
+			"while [ $rest -gt 0 ]\n"
+			"do\n"
+			"    cnt=`expr \\( $rest + 255 \\) / 256`\n"
+			"    n=`dd bs=256 count=$cnt | tee -a /%s | wc -c`\n"
+			"    rest=`expr $rest - $n`\n"
+			"done\n"
+		 "}; echo '### 200'\n",
+		 (unsigned long) s.st_size, name,
 		 (unsigned long) s.st_size, quoted_name);
 
     g_free (quoted_name);
