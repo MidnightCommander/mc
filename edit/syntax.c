@@ -708,7 +708,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
-    r = edit->rules = g_malloc (alloc_contexts * sizeof (struct context_rule *));
+    r = edit->rules = g_malloc0 (alloc_contexts * sizeof (struct context_rule *));
 
     if (!edit->defines)
 	edit->defines = g_tree_new ((GCompareFunc) strcmp);
