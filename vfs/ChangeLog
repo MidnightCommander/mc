@@ -1,3 +1,8 @@
+2006-04-04  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* sfs.c (sfs_uptodate): Eliminate - it is a noop.
+	Remove all references to `sfs_uptodate'.
+
 2006-03-31  Dmitry Butskoj  <buc@odusz.so-cdu.ru>
 
 	* fish.c (fish_file_store): Do not create the target file before

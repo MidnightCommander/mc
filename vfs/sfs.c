@@ -49,14 +49,6 @@ static int sfs_flags[ MAXFS ];
 #define F_FULLMATCH 8
 
 static int
-sfs_uptodate (char *name, char *cache)
-{
-    (void) name;
-    (void) cache;
-    return 1;
-}
-
-static int
 sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 {
     char *inpath, *op;
@@ -156,8 +148,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
     int handle;
 
     while (cur) {
-	if ((!strcmp (name, cur->name))
-	    && (sfs_uptodate (cur->name, cur->cache))) {
+	if (!strcmp (name, cur->name)) {
 	    vfs_stamp (&vfs_sfs_ops, cur);
 	    return cur->cache;
 	}
