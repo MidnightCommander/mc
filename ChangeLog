@@ -1,3 +1,7 @@
+2006-04-13  Anton Monroe  <akm@meer.net>
+
+	* doc/mc.1.in: Function key documentation update.
+
 2006-03-18  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* acinclude.m4 (AC_GET_FS_INFO): Replace old fileutils code to get

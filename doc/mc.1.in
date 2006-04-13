@@ -904,9 +904,11 @@ and its arguments (the argument defaults to the currently selected
 file name), the output from such command is shown in the internal file
 viewer.
 .PP
-.B Edit (F4)
+.B Edit (F4, F14)
 .PP
-Currently it invokes the
+Press F4 to edit the highlighted file.  Press F14 (usually Shift-F4)
+to start the editor with a new, empty file.
+Currently they invoke the
 .B vi
 editor, or the editor specified in the
 .B EDITOR
@@ -916,12 +918,12 @@ Internal File Editor
 .\"Internal File Editor"
 if the use_internal_edit option is on.
 .PP
-.B Copy (F5)
+.B Copy (F5, F15)
 .PP
-Pop up an input dialog with destination that defaults to the directory
-in the non-selected panel and copies the currently selected file (or
+Press F5 to pop up an input dialog to copy the currently selected file (or
 the tagged files, if there is at least one file tagged) to the
-directory specified by the user in the input dialog. During this
+directory/filename you specify in the input dialog.  The destination 
+defaults to the directory in the non-selected panel. During this
 process, you can press C-c or ESC to abort the operation. For details
 about source mask (which will be usually either * or ^\\(.*\\)$ depending
 on setting of Use shell patterns) and possible wildcards in the destination
@@ -929,6 +931,10 @@ see
 .\"LINK2"
 Mask copy/rename\&.
 .\"Mask Copy/Rename"
+.PP
+F15 (usually Shift-F5) is similar, but defaults to the directory in the
+selected panel. It always operates on the selected file, regardless of
+any tagged files.
 .PP
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing Alt-b in the dialog
@@ -967,14 +973,17 @@ The original file which the link points to is shown on mini-status line if the
 option is enabled. Use symbolic links when you want to avoid the
 confusion that can be caused by hard links.
 .PP
-.B Rename/Move (F6)
+.B Rename/Move (F6, F16)
 .PP
-Pop up an input dialog that defaults to the directory in the
-non-selected panel and moves the currently selected file (or the
-tagged files if there is at least one tagged file) to the directory
-specified by the user in the input dialog. During the process, you
-can press C-c or ESC to abort the operation. For more details look at Copy
-operation above, most of the things are quite similar.
+Press F6 to pop up an input dialog to copy the currently selected file (or
+the tagged files, if there is at least one file tagged) to the
+directory/filename you specify in the input dialog.  The destination 
+defaults to the directory in the non-selected panel. For more details
+look at Copy (F5) operation above, most of the things are quite similar.
+.PP
+F16 (usually Shift-F6) is similar, but defaults to the directory in the
+selected panel. It always operates on the selected file, regardless of
+any tagged files.
 .PP
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing Alt-b in the dialog
