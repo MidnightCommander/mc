@@ -148,8 +148,6 @@ handle_console_linux (unsigned char action)
 	    /* Console is not a tty or execl() failed */
 	    console_flag = 0;
 	    write (1, &console_flag, 1);
-	    close (1);
-	    close (0);
 	    _exit (3);
 	}			/* if (cons_saver_pid ...) */
 	break;

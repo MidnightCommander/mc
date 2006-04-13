@@ -1,3 +1,8 @@
+2006-04-13  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* cons.handler.c (handle_console_linux): Remove redundant close() calls
+	before _exit().
+
 2006-03-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* file.c (copy_file_file): When a hardlink is created successfully
@@ -231,7 +236,7 @@
 	The glib implementation doesn't strip prefix from translations,
 	so it's not suitable for us.  Finally, it makes man2hlp depend
 	on libintl.
-	Reported by Leonard den Ottolander <leonard@den.ottolander.nl>
+	Reported by Leonard den Ottolander <leonard den ottolander nl>
 
 2005-11-02  Egmont Koblinger  <egmont@uhulinux.hu>
 
