@@ -1,3 +1,11 @@
+2006-04-14  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tar.c (OLDGNU_MAGIC): New macro definition.
+	(TMAGIC): Set to the ustar format magic. It was erronously set
+	to the gnu format magic value.
+	(tar_fill_stat): Try to use the `uname' and `gname' fields if
+	operating on either ustar or gnu archive.
+
 2006-04-04  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* sfs.c (sfs_uptodate): Eliminate - it is a noop.

@@ -105,7 +105,8 @@ union record {
 #define	CHKBLANKS	"        "	/* 8 blanks, no null */
 
 /* The magic field is filled with this if uname and gname are valid. */
-#define	TMAGIC		"ustar  "	/* 7 chars and a null */
+#define	TMAGIC		"ustar"		/* ustar and a null */
+#define	OLDGNU_MAGIC	"ustar  "	/* 7 chars and a null */
 
 /* The linkflag defines the type of file */
 #define	LF_OLDNORMAL	'\0'	/* Normal disk file, Unix compat */
@@ -287,7 +288,11 @@ static void
 tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header,
 	       size_t h_size)
 {
+    int is_gnu;
+
     (void) me;
+
+    is_gnu = !strcmp (header->header.magic, OLDGNU_MAGIC);
 
     st->st_mode = tar_from_oct (8, header->header.mode);
 
@@ -310,7 +315,7 @@ tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header,
 	st->st_mode |= S_IFREG;
 
     st->st_rdev = 0;
-    if (!strcmp (header->header.magic, TMAGIC)) {
+    if (!strcmp (header->header.magic, TMAGIC) || is_gnu != 0) {
 	st->st_uid =
 	    *header->header.uname ? vfs_finduid (header->header.
 						 uname) : tar_from_oct (8,
