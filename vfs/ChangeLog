@@ -1,3 +1,24 @@
+2006-04-17  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tar.c (PREFIX_SIZE): New macro definition.
+	(union unused): New union which describes better the trailing bytes
+	of the tar record header.
+	(union record): Do not assume that all tar archives follow the GNU
+	tar archive format.
+	(tar_open_archive_int): Initialize the variable holding the type fo the
+	archive format.
+	(tar_read_header): Try to determine the archive format using the
+	`magic' field of the tar record header. Use the `linkflag' field
+	as a fallback.
+	Add support for pathnames of upto 256 characters as stored in ustar
+	archives.
+	Do not access GNU specific fields of the tar record header if the
+	archive is not a GNU one.
+	(tar_fill_stat): Pass pointer to vfs_s_super instead of pointer ot
+	vfs_class as the first argument.
+	Do not access GNU specific fields of the tar record header if the
+	archive is not a GNU one.
+
 2006-04-14  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tar.c (OLDGNU_MAGIC): New macro definition.
