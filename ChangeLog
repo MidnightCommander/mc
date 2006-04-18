@@ -1,3 +1,9 @@
+2006-04-18  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* acinclude.m4 (AC_GET_FS_INFO): Make it work again - the last
+	commit broke it.
+	* m4/onceonly.m4: New file.
+
 2006-04-13  Anton Monroe  <akm@meer.net>
 
 	* doc/mc.1.in: Function key documentation update.

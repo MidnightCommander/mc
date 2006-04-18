@@ -275,25 +275,14 @@ dnl To get information about the disk, mount points, etc.
 dnl
 
 AC_DEFUN([AC_GET_FS_INFO], [
-    AC_CHECK_HEADERS(fcntl.h sys/dustat.h sys/param.h sys/statfs.h sys/fstyp.h)
-    AC_CHECK_HEADERS(mnttab.h mntent.h utime.h sys/statvfs.h sys/vfs.h)
-    AC_CHECK_HEADERS(sys/filsys.h sys/fs_types.h)
-    AC_CHECK_HEADERS(sys/mount.h, , , [
-#include <sys/param.h>
-#include <sys/stat.h>
-				      ])
-    AC_CHECK_FUNCS(getmntinfo)
+    AC_CHECK_HEADERS([fcntl.h utime.h])
 
-    dnl Include ls-mntd-fs.m4 from GNU coreutils-5.94 (serial 20).
-    dnl Its job is to detect a method to get list of mounted filesystems.
+    gl_LIST_MOUNTED_FILE_SYSTEMS([
+	AC_DEFINE(HAVE_INFOMOUNT_LIST, 1,
+	    [Define if the list of mounted filesystems can be determined])],
+	[AC_MSG_WARN([could not determine how to read list of mounted fs])])
 
-    m4_include([m4/ls-mntd-fs.m4])
-
-    dnl Include fsusage.m4 from GNU coreutils-5.94 (serial 16).
-    dnl Its job is to detect a method to get file system information.
-
-    m4_include([m4/fsusage.m4])
-
+    gl_FSUSAGE
 ])
 
 
