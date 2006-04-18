@@ -1,3 +1,7 @@
+2006-04-18  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tar.c: Minor cleanup.
+
 2006-04-17  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tar.c (PREFIX_SIZE): New macro definition.

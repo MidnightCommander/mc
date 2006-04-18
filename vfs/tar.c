@@ -172,18 +172,6 @@ union record {
 				   Tape volume doesn't match the one
 				   specified on the command line */
 
-/*
- * We default to Unix Standard format rather than 4.2BSD tar format.
- * The code can actually produce all three:
- *	f_standard	ANSI standard
- *	f_oldarch	V7
- *	neither		4.2BSD
- * but we don't bother, since 4.2BSD can read ANSI standard format anyway.
- * The only advantage to the "neither" option is that we can cmp our
- * output to the output of 4.2BSD tar, for debugging.
- */
-#define		f_standard		(!f_oldarch)
-
 #define	isodigit(c)	( ((c) >= '0') && ((c) <= '7') )
 
 /*
