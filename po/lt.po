@@ -689,7 +689,7 @@ msgid "&Set"
 msgstr "&Nustatyti"
 
 msgid "S&kip"
-msgstr "P&raleisti"
+msgstr "&Praleisti"
 
 msgid "Set &all"
 msgstr "Nustatyti &visus"
@@ -2697,9 +2697,9 @@ msgstr[2] "%s baitų"
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s baitas %d rinkmenoje"
-msgstr[1] "%s baitai %d rinkmenoje"
-msgstr[2] "%s baitų %d rinkmenoje"
+msgstr[0] "%s %d rinkmenoje"
+msgstr[1] "%s %d rinkmenose"
+msgstr[2] "%s %d rinkmenų"
 
 msgid "<readlink failed>"
 msgstr "<„readlink“ nepavyko>"
