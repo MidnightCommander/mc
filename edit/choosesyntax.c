@@ -25,7 +25,7 @@
 #define LIST_LINES 14
 #define N_DFLT_ENTRIES 2
 
-int pstrcmp(p1, p2) char *p1, *p2;
+int pstrcmp(const void *p1, const void *p2)
 {
     return strcmp(*(char**)p1, *(char**)p2);
 }
