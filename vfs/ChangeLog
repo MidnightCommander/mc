@@ -1,3 +1,8 @@
+2006-05-05  Andrew V. Samoilov  <andrew@email.zp.ua>
+
+	* extfs/uzip.in (print_file): Use %8s instead of %8d 
+	printf() pattern to print really big "realsize"
+
 2006-04-18  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tar.c: Minor cleanup.
