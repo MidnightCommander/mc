@@ -1,3 +1,8 @@
+2006-05-08  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* subshell.c (resize_subshell): Do not try to resize the subshell tty
+	if the subshell is not running.
+
 2006-04-13  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* cons.handler.c (handle_console_linux): Remove redundant close() calls

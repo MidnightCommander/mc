@@ -660,6 +660,9 @@ static int resize_tty (int fd)
 /* Resize subshell_pty */
 void resize_subshell (void)
 {
+    if (use_subshell == 0)
+	return;
+
     resize_tty (subshell_pty);
 }
 
