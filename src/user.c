@@ -28,7 +28,6 @@
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
-#include "subshell.h" 		/* for subshell_pty */
 #include "user.h"
 #include "layout.h"
 #include "execute.h"

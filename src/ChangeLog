@@ -1,3 +1,7 @@
+2006-05-10  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* user.c: Do not include subshell.h .
+
 2006-05-08  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* subshell.c (resize_subshell): Do not try to resize the subshell tty
