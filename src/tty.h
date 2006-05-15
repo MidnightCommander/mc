@@ -20,6 +20,9 @@
 #    else
 #        include <curses.h>
 #    endif
+#ifdef WANT_TERM_H
+#    include <term.h>
+#endif /* WANT_TERM_H */
 #endif /* USE_NCURSES */
 
 /* {{{ Input }}} */
@@ -49,6 +52,8 @@ extern void tty_print_one_hline(void);
 extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
 extern void tty_printf(const char *, ...);
+
+extern char *tty_tgetstr (const char *name);
 
 /* legacy interface */
 

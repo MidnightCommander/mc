@@ -1,3 +1,11 @@
+2006-05-15  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tty.h [USE_NCURSES]: Pull in term.h if WANT_TERM_H is defined.
+	(tty_tgetstr): Declare new function.
+	* tty.c [USE_NCURSES]: Request the inclusion of term.h.
+	(tty_tgetstr): Define new function
+	* main.c (init_xterm_support): Use tty_tgetstr().
+
 2006-05-10  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* user.c: Do not include subshell.h .

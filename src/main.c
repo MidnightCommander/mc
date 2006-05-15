@@ -1344,9 +1344,6 @@ static void
 init_xterm_support (void)
 {
     const char *termvalue;
-#ifdef HAVE_SLANG
-    char *term_entry;
-#endif
 
     termvalue = getenv ("TERM");
     if (!termvalue || !(*termvalue)) {
@@ -1355,17 +1352,7 @@ init_xterm_support (void)
     }
 
     /* Check mouse capabilities */
-#ifdef HAVE_SLANG
-    term_entry = SLtt_tigetent (str_unconst (termvalue));
-    xmouse_seq = SLtt_tigetstr ("Km", &term_entry);
-#else
-    xmouse_seq = tigetstr ("kmous");
-#endif
-
-    /* -1 means invalid capability, shouldn't happen, but let's make it 0 */
-    if ((long) xmouse_seq == -1) {
-	xmouse_seq = NULL;
-    }
+    xmouse_seq = tty_tgetstr ("Km");
 
     if (strcmp (termvalue, "cygwin") == 0) {
 	force_xterm = 1;

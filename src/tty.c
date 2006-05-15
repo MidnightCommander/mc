@@ -32,6 +32,10 @@
 #include "global.h"
 #include "color.h"
 #include "main.h"		/* for slow_terminal */
+
+#ifdef USE_NCURSES
+#define WANT_TERM_H
+#endif
 #include "tty.h"
 
 /*** file scope macro definitions **************************************/
@@ -213,4 +217,17 @@ tty_printf(const char *fmt, ...)
     vw_printw(stdscr, fmt, args);
 #endif
     va_end(args);
+}
+
+extern char *
+tty_tgetstr (const char *cap)
+{
+#ifdef HAVE_SLANG
+    return SLtt_tgetstr (cap);
+#else
+    {
+	char *unused;
+	return tgetstr (str_unconst (cap), &unused);
+    }
+#endif
 }
