@@ -22,7 +22,7 @@ AC_DEFUN([gl_FSUSAGE],
        #include <sys/param.h>
       #endif]])
   gl_FILE_SYSTEM_USAGE([gl_cv_fs_space=yes], [gl_cv_fs_space=no])
-  if test $gl_cv_fs_space = yes; then
+  if test "$gl_cv_fs_space" = yes; then
     AC_LIBOBJ(fsusage)
     gl_PREREQ_FSUSAGE_EXTRA
   fi
@@ -46,7 +46,7 @@ ac_fsusage_space=no
 # of a `struct statvfs' causes this test to fail (as it should) on such
 # systems.  That system is reported to work fine with STAT_STATFS4 which
 # is what it gets when this test fails.
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
   # SVR4
   AC_CACHE_CHECK([for statvfs function (SVR4)], fu_cv_sys_stat_statvfs,
 		 [AC_TRY_LINK([#include <sys/types.h>
@@ -59,14 +59,14 @@ one of the corresponding file systems is hard-mounted, but not available.
 			      [struct statvfs fsd; statvfs (0, &fsd);],
 			      fu_cv_sys_stat_statvfs=yes,
 			      fu_cv_sys_stat_statvfs=no)])
-  if test $fu_cv_sys_stat_statvfs = yes; then
+  if test "$fu_cv_sys_stat_statvfs" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATVFS, 1,
 	      [  Define if there is a function named statvfs.  (SVR4)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
   # DEC Alpha running OSF/1
   AC_MSG_CHECKING([for 3-argument statfs function (DEC OSF/1)])
   AC_CACHE_VAL(fu_cv_sys_stat_statfs3_osf1,
@@ -84,14 +84,14 @@ if test $ac_fsusage_space = no; then
   fu_cv_sys_stat_statfs3_osf1=no,
   fu_cv_sys_stat_statfs3_osf1=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs3_osf1)
-  if test $fu_cv_sys_stat_statfs3_osf1 = yes; then
+  if test "$fu_cv_sys_stat_statfs3_osf1" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS3_OSF1, 1,
 	      [   Define if  statfs takes 3 args.  (DEC Alpha running OSF/1)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
 # AIX
   AC_MSG_CHECKING([for two-argument statfs with statfs.bsize dnl
 member (AIX, 4.3BSD)])
@@ -116,7 +116,7 @@ member (AIX, 4.3BSD)])
   fu_cv_sys_stat_statfs2_bsize=no,
   fu_cv_sys_stat_statfs2_bsize=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs2_bsize)
-  if test $fu_cv_sys_stat_statfs2_bsize = yes; then
+  if test "$fu_cv_sys_stat_statfs2_bsize" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_BSIZE, 1,
 [  Define if statfs takes 2 args and struct statfs has a field named f_bsize.
@@ -124,7 +124,7 @@ member (AIX, 4.3BSD)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
 # SVR3
   AC_MSG_CHECKING([for four-argument statfs (AIX-3.2.5, SVR3)])
   AC_CACHE_VAL(fu_cv_sys_stat_statfs4,
@@ -139,14 +139,14 @@ if test $ac_fsusage_space = no; then
     fu_cv_sys_stat_statfs4=no,
     fu_cv_sys_stat_statfs4=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs4)
-  if test $fu_cv_sys_stat_statfs4 = yes; then
+  if test "$fu_cv_sys_stat_statfs4" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS4, 1,
 	      [  Define if statfs takes 4 args.  (SVR3, Dynix, Irix, Dolphin)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
 # 4.4BSD and NetBSD
   AC_MSG_CHECKING([for two-argument statfs with statfs.fsize dnl
 member (4.4BSD and NetBSD)])
@@ -168,7 +168,7 @@ member (4.4BSD and NetBSD)])
   fu_cv_sys_stat_statfs2_fsize=no,
   fu_cv_sys_stat_statfs2_fsize=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_statfs2_fsize)
-  if test $fu_cv_sys_stat_statfs2_fsize = yes; then
+  if test "$fu_cv_sys_stat_statfs2_fsize" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_FSIZE, 1,
 [  Define if statfs takes 2 args and struct statfs has a field named f_fsize.
@@ -176,7 +176,7 @@ member (4.4BSD and NetBSD)])
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
   # Ultrix
   AC_MSG_CHECKING([for two-argument statfs with struct fs_data (Ultrix)])
   AC_CACHE_VAL(fu_cv_sys_stat_fs_data,
@@ -201,7 +201,7 @@ if test $ac_fsusage_space = no; then
   fu_cv_sys_stat_fs_data=no,
   fu_cv_sys_stat_fs_data=no)])
   AC_MSG_RESULT($fu_cv_sys_stat_fs_data)
-  if test $fu_cv_sys_stat_fs_data = yes; then
+  if test "$fu_cv_sys_stat_fs_data" = yes; then
     ac_fsusage_space=yes
     AC_DEFINE(STAT_STATFS2_FS_DATA, 1,
 [  Define if statfs takes 2 args and the second argument has
@@ -209,7 +209,7 @@ if test $ac_fsusage_space = no; then
   fi
 fi
 
-if test $ac_fsusage_space = no; then
+if test "$ac_fsusage_space" = no; then
   # SVR2
   AC_TRY_CPP([#include <sys/filsys.h>
     ],
@@ -219,7 +219,7 @@ if test $ac_fsusage_space = no; then
     ac_fsusage_space=yes)
 fi
 
-AS_IF([test $ac_fsusage_space = yes], [$1], [$2])
+AS_IF([test "$ac_fsusage_space" = yes], [$1], [$2])
 
 ])
 
@@ -240,7 +240,7 @@ choke -- this is a workaround for a Sun-specific problem
     [[struct statfs t; long c = *(t.f_spare);]])],
     [fu_cv_sys_truncating_statfs=yes],
     [fu_cv_sys_truncating_statfs=no])])
-  if test $fu_cv_sys_truncating_statfs = yes; then
+  if test "$fu_cv_sys_truncating_statfs" = yes; then
     AC_DEFINE(STATFS_TRUNCATES_BLOCK_COUNTS, 1,
       [Define if the block counts reported by statfs may be truncated to 2GB
        and the correct values may be stored in the f_spare array.
