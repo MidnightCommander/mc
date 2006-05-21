@@ -1,3 +1,9 @@
+2006-05-21  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Fixed detection of <sys/statvfs.h>, statvfs()
+	and struct statvfs.f_fstypename, so that mc builds on NetBSD 3.0
+	again.
+
 2006-04-18  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* acinclude.m4 (AC_GET_FS_INFO): Make it work again - the last

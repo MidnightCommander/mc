@@ -1,3 +1,7 @@
+2006-05-21  Roland Illig  <roland.illig@gmx.de>
+
+	* mountlist.c: Fixed so that it builds on NetBSD 3.0.
+
 2006-05-15  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tty.h [USE_NCURSES]: Pull in term.h if WANT_TERM_H is defined.

@@ -158,7 +158,7 @@ AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
 	stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h sys/time.h \
 	sys/timeb.h sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
 	security/pam_misc.h sys/socket.h sys/sysmacros.h sys/types.h \
-	sys/mkdev.h wchar.h wctype.h])
+	sys/mkdev.h wchar.h wctype.h sys/statvfs.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
@@ -167,6 +167,11 @@ AC_HEADER_STDC
 
 dnl Missing structure components
 AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev])
+AC_CHECK_MEMBERS([struct statvfs.f_fstypename],,,
+[AC_INCLUDES_DEFAULT()
+#ifdef HAVE_SYS_STATVFS_H
+#  include <sys/statvfs.h>
+#endif])
 AC_STRUCT_ST_BLOCKS
 
 dnl
@@ -180,7 +185,7 @@ AC_CHECK_FUNCS([\
 	initgroups isascii \
 	memcpy memmove memset \
 	putenv \
-	setreuid setuid statfs strerror strftime sysconf \
+	setreuid setuid statfs statvfs strerror strftime sysconf \
 	tcgetattr tcsetattr truncate \
 ])
 
