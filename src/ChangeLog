@@ -1,3 +1,7 @@
+2006-05-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* file.c (move_dir_dir): Remove Win32 specific code.
+
 2006-05-21  Roland Illig  <roland.illig@gmx.de>
 
 	* mountlist.c: Fixed so that it builds on NetBSD 3.0.

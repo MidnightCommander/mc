@@ -1206,14 +1206,6 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	return_status = FILE_CONT;
 	goto ret;
     }
-/* .ado: Drive, Do we need this anymore? */
-#ifdef WIN32
-    else {
-	/* EXDEV: cross device; does not work everywhere */
-	if (toupper (s[0]) != toupper (destdir[0]))
-	    goto w32try;
-    }
-#endif				/* WIN32 */
 
     if (errno != EXDEV) {
 	return_status =
@@ -1224,9 +1216,6 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	    goto retry_rename;
 	goto ret;
     }
-#ifdef WIN32
-  w32try:
-#endif				/* WIN32 */
     /* Failed because of filesystem boundary -> copy dir instead */
     return_status =
 	copy_dir_dir (ctx, s, destdir, 0, 0, 1, 0, progress_count,
