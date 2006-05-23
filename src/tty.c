@@ -223,7 +223,7 @@ extern char *
 tty_tgetstr (const char *cap)
 {
 #ifdef HAVE_SLANG
-    return SLtt_tgetstr (cap);
+    return SLtt_tgetstr (str_unconst (cap));
 #else
     {
 	char *unused;
