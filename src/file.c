@@ -1022,6 +1022,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
+    gboolean copy_done = FALSE;
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
@@ -1080,7 +1081,9 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	}
 
 	if (mc_rename (s, d) == 0) {
-	    return FILE_CONT;
+	    return progress_update_one (ctx, progress_count,
+	    				progress_bytes,
+	    				src_stats.st_size, 1);
 	}
     }
 #if 0
@@ -1107,6 +1110,8 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
     if (return_status != FILE_CONT)
 	return return_status;
 
+    copy_done = TRUE;
+
     if ((return_status =
 	 file_progress_show_source (ctx, NULL)) != FILE_CONT
 	|| (return_status = file_progress_show (ctx, 0, 0)) != FILE_CONT)
@@ -1123,11 +1128,12 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 	return return_status;
     }
 
-    if (return_status == FILE_CONT)
+    if (!copy_done) {
 	return_status = progress_update_one (ctx,
 					     progress_count,
 					     progress_bytes,
 					     src_stats.st_size, 1);
+    }
 
     return return_status;
 }

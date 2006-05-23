@@ -1,3 +1,9 @@
+2006-05-23  Hampa Hug  <hampa@hampa.ch>
+
+	* file.c (move_file_file): Do not collect progress information
+	when moving via copy/erase - copy_file_file() does that.
+	Collect progress information when moving via rename ().
+
 2006-05-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tty.c (tty_tgetstr) [HAVE_SLANG]: str_unconst() the argument
