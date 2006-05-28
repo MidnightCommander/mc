@@ -1,3 +1,13 @@
+2006-05-28  Leonard den Ottolander <leonard den ottolander nl>
+
+	* extfs/mailfs.in (parse_date): Output 3 date fields not 4. Range to
+	output time not year is slightly larger than the range used by
+	file_date() in util.c. Prefer using Date::Parse over Date::Manip as the
+	former is faster. Fix fallback for "light version".
+	(process_header): Match header field names case insensitively.
+	(mailfs_list): Improve match for header start.
+	(mailfs_copyout): Likewise.
+
 2006-05-05  Andrew V. Samoilov  <andrew@email.zp.ua>
 
 	* extfs/uzip.in (print_file): Use %8s instead of %8d 
