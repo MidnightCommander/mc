@@ -1,3 +1,7 @@
+2006-05-28  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* mc.ext.in: Open mailboxes with mailfs.
+
 2006-03-23  Marek Habersack  <grendel@debian.org>
 
 	* mc.ext.in: Improve output of the View command for debian packages.
