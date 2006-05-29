@@ -1,3 +1,8 @@
+2006-05-29  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* widget.c (disable_update): Remove redundant static variable.
+	(handle_char): Reflect the changes above.
+
 2006-05-23  Hampa Hug  <hampa@hampa.ch>
 
 	* file.c (move_file_file): Do not collect progress information

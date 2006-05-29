@@ -1080,8 +1080,6 @@ input_destroy (WInput *in)
     g_free (in->history_name);
 }
 
-static char disable_update = 0;
-
 void
 input_disable_update (WInput *in)
 {
@@ -1558,8 +1556,7 @@ handle_char (WInput *in, int c_code)
     	free_completions (in);
 	v = insert_char (in, c_code);
     }
-    if (!disable_update)
-	update_input (in, 1);
+    update_input (in, 1);
     return v;
 }
 
