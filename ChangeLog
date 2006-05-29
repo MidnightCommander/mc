@@ -1,3 +1,8 @@
+2006-05-29  Roland Illig  <roland.illig@gmx.de>
+
+	* m4/ls-mntd-fs.m4: Updated to serial #21, which fixes the use
+	of an undefined variable.
+
 2006-05-21  Roland Illig  <roland.illig@gmx.de>
 
 	* configure.ac: Fixed detection of <sys/statvfs.h>, statvfs()
