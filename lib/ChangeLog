@@ -1,3 +1,7 @@
+2006-06-05  Nerijus Baliunas  <nerijus@users.sourceforge.net>
+
+	* mc.ext.in: Loosen match for mailbox.
+
 2006-05-28  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* mc.ext.in: Open mailboxes with mailfs.

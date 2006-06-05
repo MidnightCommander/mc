@@ -212,7 +212,7 @@ shell/.7z
 	View=%view{ascii} 7za l %f 2>/dev/null
 
 # Mailboxes
-type/^ASCII\ mail\ text$
+type/^ASCII\ mail\ text
 	Open=%cd %p#mailfs
 
 
