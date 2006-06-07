@@ -1,3 +1,7 @@
+2006-06-07  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mountlist.c: Revert last commit.
+
 2006-05-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* widget.c (disable_update): Remove redundant static variable.
