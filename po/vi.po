@@ -1211,7 +1211,7 @@ msgstr "&Thời gian sửa đổi"
 msgid "&Access time"
 msgstr "thời &Gian truy cập"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "thời gi&An thay đổi"
 
 msgid "&Size"

@@ -1213,7 +1213,7 @@ msgstr "&Modificar hora"
 msgid "&Access time"
 msgstr "Hora de &acesso"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Alte&rar hora"
 
 msgid "&Size"

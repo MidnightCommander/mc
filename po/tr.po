@@ -1214,7 +1214,7 @@ msgstr "Dü&zenleme tarihine göre"
 msgid "&Access time"
 msgstr "&Eriþim zamanýna göre"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "D&üðüm Deðiþim zamanýna göre"
 
 msgid "&Size"

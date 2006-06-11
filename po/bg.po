@@ -1210,7 +1210,7 @@ msgstr "Време на промяна на файла"
 msgid "&Access time"
 msgstr "Време на достъп"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Време на промяна на i-възела"
 
 msgid "&Size"

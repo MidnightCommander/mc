@@ -1212,7 +1212,7 @@ msgstr "За&сварлагдсан огноо"
 msgid "&Access time"
 msgstr "Х&андсан огноо"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "өө&рчлөгдсөн огноо"
 
 msgid "&Size"

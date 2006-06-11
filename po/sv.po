@@ -1230,7 +1230,7 @@ msgstr "&Modifierad senast"
 msgid "&Access time"
 msgstr "&Accessad senast"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Ändrad senast"
 
 msgid "&Size"

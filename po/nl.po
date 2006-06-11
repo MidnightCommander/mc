@@ -1194,7 +1194,7 @@ msgstr "&Wijzigingstijd"
 msgid "&Access time"
 msgstr "Toegang&Stijd"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Veranderingstijd"
 
 msgid "&Size"

@@ -1207,7 +1207,7 @@ msgstr "Czas &modyfikacji"
 msgid "&Access time"
 msgstr "Czas &dostêpu"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Czas &zmiany"
 
 msgid "&Size"

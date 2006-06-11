@@ -1207,7 +1207,7 @@ msgstr "čas úp&Ravy"
 msgid "&Access time"
 msgstr "ča&S prístupu "
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "čas zmen&Y "
 
 msgid "&Size"

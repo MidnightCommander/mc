@@ -1203,7 +1203,7 @@ msgstr "수정 시간(&M)"
 msgid "&Access time"
 msgstr "접근 시간(&A)"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "바꾼 시간(&C)"
 
 msgid "&Size"

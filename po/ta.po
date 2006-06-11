@@ -1190,7 +1190,7 @@ msgstr ""
 msgid "&Access time"
 msgstr ""
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr ""
 
 msgid "&Size"

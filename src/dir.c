@@ -53,7 +53,7 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Extension"),   sort_ext },
     { N_("&Modify time"), sort_time },
     { N_("&Access time"), sort_atime },
-    { N_("&Change time"), sort_ctime },
+    { N_("C&Hange time"), sort_ctime },
     { N_("&Size"),        sort_size },
     { N_("&Inode"),       sort_inode },
 

@@ -1231,7 +1231,7 @@ msgstr "&Hora de modificação"
 msgid "&Access time"
 msgstr "&Hora de acesso"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Hora de mudança"
 
 msgid "&Size"

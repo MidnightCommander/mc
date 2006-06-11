@@ -1219,7 +1219,7 @@ msgstr "&Aldatu ordua"
 msgid "&Access time"
 msgstr "&Atzipen-ordua"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Aldatu denbora"
 
 msgid "&Size"

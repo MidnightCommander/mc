@@ -1207,7 +1207,7 @@ msgstr "Čas &Modifikacije"
 msgid "&Access time"
 msgstr "čas &Dostopa"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Čas &Spremembe"
 
 msgid "&Size"

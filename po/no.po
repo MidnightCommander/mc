@@ -1209,7 +1209,7 @@ msgstr "&Modifisert"
 msgid "&Access time"
 msgstr "&Aksessert"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Endret"
 
 msgid "&Size"

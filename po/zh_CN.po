@@ -1209,7 +1209,7 @@ msgstr "修改时间(&M)"
 msgid "&Access time"
 msgstr "访问时间(&A)"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "修改时间(&C)"
 
 msgid "&Size"

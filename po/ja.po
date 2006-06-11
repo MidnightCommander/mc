@@ -1214,7 +1214,7 @@ msgstr "更新時刻(&M)"
 msgid "&Access time"
 msgstr "アクセス時刻(&A)"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "変更時刻(&C)"
 
 msgid "&Size"

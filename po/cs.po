@@ -1206,7 +1206,7 @@ msgstr "èas &Modifikace"
 msgid "&Access time"
 msgstr "èas &Pøístupu"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "èas zmìn&Y"
 
 msgid "&Size"

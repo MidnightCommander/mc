@@ -1208,7 +1208,7 @@ msgstr "data modi&Ficãrii"
 msgid "&Access time"
 msgstr "data &Accesului"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "data &Creãrii"
 
 msgid "&Size"

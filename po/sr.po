@@ -1208,7 +1208,7 @@ msgstr "Датум &измене"
 msgid "&Access time"
 msgstr "Датум &приступа"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Датум &промене"
 
 msgid "&Size"

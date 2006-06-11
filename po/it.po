@@ -1213,7 +1213,7 @@ msgstr "Data di &modifica"
 msgid "&Access time"
 msgstr "Data di a&ccesso"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Data di cambiament&o"
 
 msgid "&Size"

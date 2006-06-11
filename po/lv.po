@@ -1215,7 +1215,7 @@ msgstr "&Modificçðanas laiks"
 msgid "&Access time"
 msgstr "&Pieejas laiks"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Izmainîðanas laiks"
 
 msgid "&Size"

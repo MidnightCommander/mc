@@ -1204,7 +1204,7 @@ msgstr "fecha de &Modificación"
 msgid "&Access time"
 msgstr "fecha de acce&So"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "fecha de cam&Bio"
 
 msgid "&Size"

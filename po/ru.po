@@ -1211,7 +1211,7 @@ msgstr "Время &правки"
 msgid "&Access time"
 msgstr "Время &доступа"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Время изменения &атрибутов"
 
 msgid "&Size"

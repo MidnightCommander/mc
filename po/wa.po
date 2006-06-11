@@ -1232,7 +1232,7 @@ msgstr "C&andjî tins"
 msgid "&Access time"
 msgstr "E&ployî"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "As&pougnî"
 
 msgid "&Size"

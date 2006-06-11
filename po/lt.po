@@ -1209,7 +1209,7 @@ msgstr "&Modif. laikas"
 msgid "&Access time"
 msgstr "P&asiek. laikas"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "Pakei&t. laikas"
 
 msgid "&Size"

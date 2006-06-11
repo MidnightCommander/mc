@@ -1213,7 +1213,7 @@ msgstr "&Vaxtı düzəlt"
 msgid "&Access time"
 msgstr "&Çatma vaxtı"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Dəyişdirilmə vaxtı"
 
 msgid "&Size"

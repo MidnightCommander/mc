@@ -1199,7 +1199,7 @@ msgstr "За часом &зм╕ни"
 msgid "&Access time"
 msgstr "За часом &доступу"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "За часом &зм╕ни вузла"
 
 msgid "&Size"

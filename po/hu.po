@@ -1243,7 +1243,7 @@ msgid "&Access time"
 msgstr "&Elérés ideje"
 
 # metaadat-módosulás, például chmod dátuma
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Adatváltozás ideje"
 
 msgid "&Size"

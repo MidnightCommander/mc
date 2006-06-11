@@ -1220,7 +1220,7 @@ msgstr "&Muutosaika"
 msgid "&Access time"
 msgstr "&Lukuaika"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "&Luontiaika"
 
 msgid "&Size"

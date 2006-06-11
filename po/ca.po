@@ -1215,7 +1215,7 @@ msgstr "data de &Modificació"
 msgid "&Access time"
 msgstr "data d'&Accés"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "data de &Canvi"
 
 msgid "&Size"

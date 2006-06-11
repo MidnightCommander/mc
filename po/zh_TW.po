@@ -1211,7 +1211,7 @@ msgstr "更動時間"
 msgid "&Access time"
 msgstr "存取時間"
 
-msgid "&Change time"
+msgid "C&Hange time"
 msgstr "改變時間"
 
 msgid "&Size"
