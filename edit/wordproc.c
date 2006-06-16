@@ -198,33 +198,30 @@ static int line_pixel_length (unsigned char *t, long b, int l)
 }
 
 static int
-next_word_start (unsigned char *t, int q)
+next_word_start (unsigned char *t, int q, int size)
 {
     int i;
-    for (i = q;; i++) {
+    for (i = q; i < size; i++) {
 	switch (t[i]) {
 	case '\n':
 	    return -1;
 	case '\t':
 	case ' ':
-	    for (;; i++) {
-		if (t[i] == '\n')
-		    return -1;
-		if (t[i] != ' ' && t[i] != '\t')
-		    return i;
-	    }
-	    break;
+	    continue;
+	default:
+	    return i;
 	}
     }
+    return -1;
 }
 
 /* find the start of a word */
 static int
-word_start (unsigned char *t, int q)
+word_start (unsigned char *t, int q, int size)
 {
     int i = q;
     if (t[q] == ' ' || t[q] == '\t')
-	return next_word_start (t, q);
+	return next_word_start (t, q, size);
     for (;;) {
 	int c;
 	if (!i)
@@ -253,9 +250,9 @@ static void format_this (unsigned char *t, int size, int indent)
 	    break;
 	if (t[q] == '\n')
 	    break;
-	p = word_start (t, q);
+	p = word_start (t, q, size);
 	if (p == -1)
-	    q = next_word_start (t, q);		/* Return the end of the word if the beginning
+	    q = next_word_start (t, q, size);	/* Return the end of the word if the beginning
 						   of the word is at the beginning of a line
 						   (i.e. a very long word) */
 	else

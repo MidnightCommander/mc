@@ -1,3 +1,11 @@
+2006-06-16  Jindrich Novy  <jnovy@redhat.com>
+
+	* wordproc.c (word_start): Add new argument. Pass extra argument
+	to next_word_start().
+	(next_word_start):  Add new argument to denote the maximum number
+	of characters to process.
+	(format_this): Reflect the changes above.
+
 2006-05-04  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* choosesyntax.c (pstrcmp): Fix the function declaration.
