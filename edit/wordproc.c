@@ -201,15 +201,20 @@ static int
 next_word_start (unsigned char *t, int q, int size)
 {
     int i;
+    int saw_ws = 0;
+
     for (i = q; i < size; i++) {
 	switch (t[i]) {
 	case '\n':
 	    return -1;
 	case '\t':
 	case ' ':
-	    continue;
+	    saw_ws = 1;
+	    break;
 	default:
-	    return i;
+	    if (saw_ws != 0)
+		return i;
+	    break;
 	}
     }
     return -1;

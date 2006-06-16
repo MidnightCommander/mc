@@ -1,3 +1,8 @@
+2006-06-16  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* wordproc.c (next_word_start): A word is preceded by a whitespace -
+	the latest changes missed that fact. Restore the original behaviour.
+
 2006-06-16  Jindrich Novy  <jnovy@redhat.com>
 
 	* wordproc.c (word_start): Add new argument. Pass extra argument
