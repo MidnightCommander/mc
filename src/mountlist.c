@@ -119,6 +119,16 @@
 #    define HAVE_INFOMOUNT
 #endif
 
+#ifdef MOUNTED_GETMNTINFO_STATVFS
+#  if defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
+#    define HAVE_F_FSTYPENAME
+#  endif
+#elif MOUNTED_GETMNTINFO
+#  if defined(HAVE_F_FSTYPENAME_IN_STATFS)
+#    define HAVE_F_FSTYPENAME
+#  endif
+#endif
+
 /* A mount table entry. */
 struct mount_entry
 {
@@ -282,7 +292,11 @@ read_filesystem_list (int need_fs_type, int all_fs)
 
 #ifdef MOUNTED_GETMNTINFO	/* 4.4BSD.  */
     {
+#ifdef MOUNTED_GETMNTINFO_STATVFS
+	struct statvfs *fsp;
+#else
 	struct statfs *fsp;
+#endif
 	int entries;
 
 	entries = getmntinfo (&fsp, MNT_NOWAIT);

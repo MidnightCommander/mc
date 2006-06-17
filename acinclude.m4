@@ -283,6 +283,51 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	[AC_MSG_WARN([could not determine how to read list of mounted fs])])
 
     gl_FSUSAGE
+
+    if test $ac_cv_func_getmntinfo = yes; then
+	if test $ac_cv_header_sys_statvfs_h = yes; then
+	    AC_MSG_CHECKING([for getmntinfo taking struct statvfs as dnl
+first argument (NetBSD 3.0)])
+	    AC_CACHE_VAL(mc_cv_sys_mounted_getmntinfo_statvfs,
+		[AC_TRY_RUN([
+#if HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+#if HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#if HAVE_SYS_UCRED_H
+#include <sys/ucred.h> /* needed by FreeBSD */
+#endif
+#if HAVE_SYS_MOUNT_H
+#include <sys/mount.h>
+#endif
+#include <sys/statvfs.h>
+main ()
+{
+struct statvfs *mntbufp;
+exit (getmntinfo (&mntbufp, MNT_NOWAIT));
+}],
+		    mc_cv_sys_mounted_getmntinfo_statvfs=yes,
+		    mc_cv_sys_mounted_getmntinfo_statvfs=no,
+		    mc_cv_sys_mounted_getmntinfo_statvfs=no)])
+	    AC_MSG_RESULT($mc_cv_sys_mounted_getmntinfo_statvfs)
+	    if test $mc_cv_sys_mounted_getmntinfo_statvfs = yes; then
+		AC_DEFINE(MOUNTED_GETMNTINFO_STATVFS, 1,
+		    [Define if there is a function named getmntinfo for 
+		    reading the list of mounted file systems.  (NetBSD 3.0)])
+	    fi
+	fi
+    fi
+
+    gl_FSTYPENAME
+
+    AC_CHECK_MEMBERS([struct statvfs.f_fstypename],,,[
+	AC_INCLUDES_DEFAULT()
+	#ifdef HAVE_SYS_STATVFS_H
+	#  include <sys/statvfs.h>
+	#endif])
+
 ])
 
 

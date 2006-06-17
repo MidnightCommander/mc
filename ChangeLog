@@ -1,3 +1,14 @@
+2006-06-17  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* m4/fstypename.m4: New file.
+	* acinclude.m4 (AC_GET_FS_INFO): Add a check to determine whether
+	getmntinfo() takes struct statvfs instead of struct statfs as its
+	first argument. Define MOUNTED_GETMNTINFO_STATVFS if it does.
+	Add a check to determine whether struct statvfs has a field named
+	f_fstypename.
+	Use gl_FSTYPENAME tp determine whether struct statfs has a field
+	named f_fstypename.
+
 2006-06-07  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* configure.ac: Revert last commit.

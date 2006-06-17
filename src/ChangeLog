@@ -1,3 +1,11 @@
+2006-06-17  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mountlist.c (HAVE_F_FSTYPENAME): Define when getmntinfo() is
+	used and the struct which it fills has a field named f_fstypename.
+	(read_filesystem_list) [MOUNTED_GETMNTINFO]: Use
+	MOUNTED_GETMNTINFO_STATVFS to determine the type of the first
+	argument to getmntinfo().
+
 2006-06-11  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* dir.c (sort_orders): Substitute duplicate hotkey 'C' in sort order
