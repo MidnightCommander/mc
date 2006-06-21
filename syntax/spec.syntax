@@ -82,14 +82,14 @@ context default
     keyword ftp://+ brightgreen
     keyword http://+ brightgreen
 
-    keyword whole missingok brightblue
-    keyword whole noreplace brightblue
+    keyword whole missingok brightcyan
+    keyword whole noreplace brightcyan
 
     keyword whole PATCH\[0123456789\] cyan
     keyword whole SOURCE\[0123456789\] cyan
 
 context linestart # \n brown
-context %( ) brightblue
+context %( ) brightcyan
 
 # Changelog
 context exclusive whole linestart %changelog EOF lightgray
