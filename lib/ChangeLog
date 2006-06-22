@@ -1,3 +1,7 @@
+2006-06-22  Gabor Kiss  <kissg@cdata.hu>
+
+	* mc.ext.in: ipkg package manager uses gzipped tars (.ipk).
+
 2006-06-05  Nerijus Baliunas  <nerijus@users.sourceforge.net>
 
 	* mc.ext.in: Loosen match for mailbox.

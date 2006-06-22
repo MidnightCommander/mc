@@ -106,8 +106,8 @@
 
 ### Archives ###
 
-# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
-regex/\.t([gp]?z|ar\.g?[zZ])$
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk
+regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk$
 	Open=%cd %p#utar
 	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
 
