@@ -7,7 +7,6 @@ context default
     keyword whole char yellow
     keyword whole const yellow
     keyword whole continue yellow
-    keyword whole default yellow
     keyword whole do yellow
     keyword whole double yellow
     keyword whole else yellow
@@ -65,6 +64,8 @@ context default
     keyword whole wchar_t yellow
     keyword whole ... yellow
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+    keyword whole \[\s\t\]default yellow
+    keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
 
     keyword /\* brown
     keyword \*/ brown
