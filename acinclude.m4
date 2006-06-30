@@ -306,7 +306,7 @@ first argument (NetBSD 3.0)])
 main ()
 {
 struct statvfs *mntbufp;
-exit (getmntinfo (&mntbufp, MNT_NOWAIT));
+exit (getmntinfo (&mntbufp, MNT_NOWAIT) == 0);
 }],
 		    mc_cv_sys_mounted_getmntinfo_statvfs=yes,
 		    mc_cv_sys_mounted_getmntinfo_statvfs=no,
