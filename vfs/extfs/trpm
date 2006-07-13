@@ -85,17 +85,14 @@ mcrpmfs_list ()
 	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
      test "`$RPM -q --qf \"%{URL}\" -- "$1"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/URL"
-     test "`$RPM -q --qf \"%{SERIAL}\" -- "$1"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
-     test "`$RPM -q --qf \"%{COPYRIGHT}\" -- "$1"`" = "(none)" ||
-	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+     test "`$RPM -q --qf \"%{EPOCH}\" -- "$1"`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/EPOCH"
      test "`$RPM -q --qf \"%{LICENSE}\" -- "$1"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
     else
 	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
 	 echo "$FILEPREF 0 $DATE INFO/URL"
-	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
-	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+	 echo "$FILEPREF 0 $DATE INFO/EPOCH"
 	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
     fi
     echo "$FILEPREF 0 $DATE INFO/BUILDTIME"
@@ -137,8 +134,7 @@ mcrpmfs_copyout ()
 	INFO/PACKAGER)		$RPM -q --qf "%{PACKAGER}\n" -- "$1" > "$3"; exit 0;;
 	INFO/URL)		$RPM -q --qf "%{URL}\n" -- "$1" > "$3"; exit 0;;
 	INFO/BUILDTIME)		$RPM -q --qf "%{BUILDTIME:date}\n" -- "$1" > "$3"; exit 0;;
-	INFO/SERIAL)		$RPM -q --qf "%{SERIAL}\n" -- "$1" > "$3"; exit 0;;
-	INFO/COPYRIGHT)		$RPM -q --qf "%{COPYRIGHT}\n" -- "$1" > "$3"; exit 0;;
+	INFO/EPOCH)		$RPM -q --qf "%{EPOCH}\n" -- "$1" > "$3"; exit 0;;
 	INFO/LICENSE)		$RPM -q --qf "%{LICENSE}\n" -- "$1" > "$3"; exit 0;;
 	INFO/RPMVERSION)	$RPM -q --qf "%{RPMVERSION}\n" -- "$1" > "$3"; exit 0;;
 	INFO/REQUIRENAME)	$RPM -q --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" -- "$1" > "$3"; exit 0;;
