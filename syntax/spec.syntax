@@ -7,7 +7,7 @@ context default
     keyword whole Build\{Rr\}oot: green
     keyword whole BuildRequires: green
     keyword whole Conflicts: green
-    keyword whole Copyright: green
+    keyword whole Copyright: white
     keyword whole Description: green    
     keyword whole Distribution: green    
     keyword whole Doc\{Dd\}ir: green    
@@ -30,6 +30,7 @@ context default
     keyword whole Release: green    
     keyword whole Requires: green    
     keyword whole Root: green    
+    keyword whole Serial: white
     keyword whole Source\[0123456789\]: green
     keyword whole Summary: green
     keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]): green
