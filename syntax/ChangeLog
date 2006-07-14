@@ -1,3 +1,7 @@
+2006-07-14  Jindrich Novy  <jnovy@redhat.com>
+
+	* spec.syntax: Properly recognize case-insensitive tags.
+
 2006-07-13  Jindrich Novy  <jnovy@redhat.com>
 
 	* spec.syntax: Display obsoleted rpm tags in white.

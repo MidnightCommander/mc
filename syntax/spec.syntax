@@ -2,19 +2,19 @@ context default
     keyword whole Auto\{Pp\}rov: green
     keyword whole Auto\{Rr\}eq\{Pp\}rov: green
     keyword whole Auto\{Rr\}eq: green
-    keyword whole BuildArch: green
-    keyword whole BuildPre\{Rr\}eq: green
+    keyword whole Build\{Aa\}rch: green
+    keyword whole Build\{Pp\}re\{Rr\}eq: green
     keyword whole Build\{Rr\}oot: green
-    keyword whole BuildRequires: green
+    keyword whole Build\{Rr\}equires: green
     keyword whole Conflicts: green
     keyword whole Copyright: white
     keyword whole Description: green    
     keyword whole Distribution: green    
     keyword whole Doc\{Dd\}ir: green    
     keyword whole Epoch: green
-    keyword whole ExcludeArch: green
-    keyword whole ExclusiveArch: green
-    keyword whole ExclusiveOS: green
+    keyword whole Exclude\{Aa\}rch: green
+    keyword whole Exclusive\{Aa\}rch: green
+    keyword whole Exclusive\{Oo\}\{Ss\}: green
     keyword whole Group: green
     keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]): green
     keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green
@@ -38,8 +38,7 @@ context default
     keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\].\[ABCDEFGHIJKLMNOPQRSTUVWXYZ-1234567890\]): green
     keyword whole Vendor: green
     keyword whole Version: green
-    keyword whole URL: green
-    keyword whole Url: green
+    keyword whole U\{Rr\}\{Ll\}: green
 
     keyword whole linestart %build red
     keyword whole linestart %changelog red
