@@ -1,3 +1,12 @@
+2006-07-19  Egmont Koblinger  <egmont@uhulinux.hu>
+
+	* extfs/iso9660.in (test_iso): Use `locale charmap' to retrieve
+	the current character set. If that fails fallback to using
+	the LC_CTYPE field of `locale' output.
+	When invoking `isoinfo' to test whether it supports a given character
+	set tell it to use /dev/null as the cdrom device so that it will bail
+	out immediatly instead of accessing a real drive.
+
 2006-07-18  Egmont Koblinger  <egmont@uhulinux.hu>
 
 	* extfs/deb.in (mcdebfs_list): Do not skip over directory entries.

@@ -9,9 +9,13 @@
 # tested to comply with isoinfo 2.0's output
 
 test_iso () {
-    CHARSET=`echo "$save_ctype" | sed -n -e 's/.*\.\(.*\)"$/\1/p' | tr '[A-Z]' '[a-z]'`
+    CHARSET=`locale charmap 2>/dev/null`
+    if test -z "$CHARSET"; then
+	CHARSET=`locale 2>/dev/null | grep LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p'`
+    fi
     if test -n "$CHARSET"; then
-	isoinfo -j $CHARSET 2>&1 | grep "Unknown charset" >/dev/null && CHARSET=
+	CHARSET=`echo "$CHARSET" | tr '[A-Z]' '[a-z]' | sed -e 's/^iso-/iso/'`
+	isoinfo -j $CHARSET -i /dev/null 2>&1 | grep "Unknown charset" >/dev/null && CHARSET=
     fi
     if test -n "$CHARSET"; then
 	JOLIET_OPT="-j $CHARSET -J"
@@ -65,7 +69,6 @@ mcisofs_copyout () {
 	$ISOINFO -i "$1" -x "/$2" > "$3" 
 }
 
-save_ctype=`locale 2>/dev/null | grep LC_CTYPE`
 LC_ALL=C
 
 cmd="$1"
