@@ -65,7 +65,7 @@ mcrarfs_copyin ()
 
 mcrarfs_copyout ()
 {
-    $UNRAR p -c- -inul "$1" "$2" > "$3"
+    $UNRAR p -p- -c- -inul "$1" "$2" > "$3"
 }
 
 mcrarfs_mkdir ()

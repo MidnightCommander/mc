@@ -1,5 +1,10 @@
 2006-07-25  Denis Vlasenko  <vda.linux@googlemail.com> 
 
+	* extfs/urar.in (mcrarfs_copyout): Do not query password
+	when extracting password protected entries.
+
+2006-07-25  Denis Vlasenko  <vda.linux@googlemail.com> 
+
 	* extfs/audio.in (audiofs_copyout): Quote the track name.
 	* extfs/bpp (mcbppfs_list): Quote the package file name.
 	* extfs/uzoo.in (mklink): Quote MC_TMPDIR.
