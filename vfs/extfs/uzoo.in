@@ -14,10 +14,10 @@ ZOO=zoo
 mklink ()
 {
     TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-uzoo.XXXXXX` || exit 1
-    trap 'cd /; rm -rf $TMPDIR' 0 1 2 3 5 13 15
-    ARCHIVE=$TMPDIR/tmp.zoo
+    trap 'cd /; rm -rf "$TMPDIR"' 0 1 2 3 5 13 15
+    ARCHIVE="$TMPDIR/tmp.zoo"
     ln -sf "$1" "$ARCHIVE"
-    cd $TMPDIR || exit 1
+    cd "$TMPDIR" || exit 1
 }
 
 mczoofs_list ()

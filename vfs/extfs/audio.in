@@ -35,7 +35,7 @@ audiofs_copyout()
 	wget -q -T $CDDB_TIMEOUT -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" >> "$3"
     else
         TRACK=`echo "$2" | sed 's/track-0*//' | sed 's/\.wav//'`
-        cdparanoia -q -d "$1" $TRACK "$3" >/dev/null
+        cdparanoia -q -d "$1" "$TRACK" "$3" >/dev/null
     fi
 }
 

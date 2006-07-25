@@ -1,3 +1,9 @@
+2006-07-25  Denis Vlasenko  <vda.linux@googlemail.com> 
+
+	* extfs/audio.in (audiofs_copyout): Quote the track name.
+	* extfs/bpp (mcbppfs_list): Quote the package file name.
+	* extfs/uzoo.in (mklink): Quote MC_TMPDIR.
+
 2006-07-19  Egmont Koblinger  <egmont@uhulinux.hu>
 
 	* extfs/iso9660.in (test_iso): Use `locale charmap' to retrieve
