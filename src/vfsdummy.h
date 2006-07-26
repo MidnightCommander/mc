@@ -46,7 +46,7 @@ return_zero (void)
 #define mc_setctl(a,b,c) return_zero()
 
 #define mc_get_current_wd(x,size) get_current_wd (x, size)
-#define mc_getlocalcopy(x) NULL
+#define mc_getlocalcopy(x) vfs_canon(x)
 #define mc_ungetlocalcopy(x,y,z) do { } while (0)
 
 #define vfs_init() do { } while (0)

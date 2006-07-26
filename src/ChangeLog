@@ -1,3 +1,7 @@
+2006-06-26  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* vfsdummy.h [!USE_VFS] (mc_getlocalcopy): Implement.
+
 2006-06-17  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* mountlist.c (fstype_to_string): Update the code to match its
