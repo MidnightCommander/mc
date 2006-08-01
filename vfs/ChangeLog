@@ -1,3 +1,9 @@
+2006-08-01  Leonard den Ottolander <leonard den ottolander nl>
+
+	* extfs/rpm: Restore legacy RPM tags. There's no harm in keeping them
+	around for backward compatibility.
+	* extfs/trpm: Likewise.
+
 2006-07-25  Denis Vlasenko  <vda.linux@googlemail.com> 
 
 	* extfs/urar.in (mcrarfs_copyout): Do not query password
