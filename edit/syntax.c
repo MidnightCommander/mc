@@ -1011,9 +1011,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		       const char *editor_file, const char *first_line,
 		       const char *type)
 {
-/* Using a low value for NENTRIES for testing purposes. NENTRIES should be set 
-   to a more sensible value (30 - 100) before the release of 4.6.2. (leonardjo) */
-#define NENTRIES 3
+#define NENTRIES 30
     FILE *f, *g = NULL;
     regex_t r;
     regmatch_t pmatch[1];
