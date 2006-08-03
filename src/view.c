@@ -915,7 +915,7 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
     entry = current;
     nroff_state = NROFF_START;
     for (; current.cc_offset < limit; current = next) {
-	int c;
+	int c, nextc;
 
 	if ((c = get_byte (view, current.cc_offset)) == -1)
 	    break;
@@ -938,8 +938,20 @@ view_ccache_lookup (WView *view, struct coord_cache_entry *coord,
 
 	/* and override some of them as necessary. */
 	if (c == '\r') {
-	    next.cc_column = current.cc_column;
-	    next.cc_nroff_column = current.cc_nroff_column;
+	    nextc = get_byte_indexed(view, current.cc_offset, 1);
+
+	    /* Ignore '\r' if it is followed by '\r' or '\n'. If it is
+	     * followed by anything else, it is a Mac line ending and
+	     * produces a line break.
+	     */
+	    if (nextc == '\r' || nextc == '\n') {
+		next.cc_column = current.cc_column;
+		next.cc_nroff_column = current.cc_nroff_column;
+	    } else {
+		next.cc_line = current.cc_line + 1;
+		next.cc_column = 0;
+		next.cc_nroff_column = 0;
+	    }
 
 	} else if (nroff_state == NROFF_BACKSPACE) {
 	    next.cc_nroff_column = current.cc_nroff_column - 1;
@@ -1945,8 +1957,14 @@ view_display_text (WView * view)
 		continue;
 	}
 
-	if (c == '\r')
+	if (c == '\r') {
+	    c = get_byte_indexed(view, from, 1);
+	    if (c == '\r' || c == '\n')
+		continue;
+	    col = 0;
+	    row++;
 	    continue;
+	}
 
 	if (c == '\t') {
 	    offset_type line, column;

@@ -1,3 +1,7 @@
+2006-08-03  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c: Added correct handling of Mac line endings.
+
 2006-06-26  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* vfsdummy.h [!USE_VFS] (mc_getlocalcopy): Implement.
