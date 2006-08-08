@@ -168,7 +168,7 @@ hotlist_refresh (Dlg_head * dlg)
 static inline void
 update_path_name (void)
 {
-    const char *text;
+    const char *text = "";
     char *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
     Dlg_head *dlg = list->widget.parent;
@@ -185,8 +185,6 @@ update_path_name (void)
 	} else {
 	    text = list->current->text;
 	}
-    } else {
-	text = "";
     }
     if (!hotlist_state.moving)
 	label_set_text (pname,

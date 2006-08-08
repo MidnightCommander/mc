@@ -1,3 +1,7 @@
+2006-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* hotlist.c (update_path_name): Fix gcc4 warning.
+
 2006-06-26  Oswald Buddenhagen  <ossi@kde.org>
 
 	* hotlist.c (remove_from_hotlist): Fix erronous check of the return
