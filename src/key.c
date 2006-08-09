@@ -72,9 +72,6 @@
 #define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \
 			 (t2.tv_usec-t1.tv_usec)/1000)
 
-/* timeout for old_esc_mode in usec */
-#define ESCMODE_TIMEOUT 1000000
-
 /* Linux console keyboard modifiers */
 #define SHIFT_PRESSED		(1 << 0)
 #define ALTR_PRESSED		(1 << 1)
@@ -84,6 +81,8 @@
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
 int old_esc_mode = 0;
+/* timeout for old_esc_mode in usec */
+int keyboard_key_timeout = 1000000;	/* settable via env */
 
 int use_8th_bit_as_meta = 0;
 
@@ -429,6 +428,9 @@ void
 init_key (void)
 {
     const char *term = getenv ("TERM");
+    char *kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
+    if (kt != NULL)
+	keyboard_key_timeout = atoi (kt);
 
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
@@ -818,8 +820,8 @@ int get_key_code (int no_delay)
 		if (esctime.tv_sec == -1)
 		    return -1;
 		GET_TIME (current);
-		timeout.tv_sec = ESCMODE_TIMEOUT / 1000000 + esctime.tv_sec;
-		timeout.tv_usec = ESCMODE_TIMEOUT % 1000000 + esctime.tv_usec;
+		timeout.tv_sec = keyboard_key_timeout / 1000000 + esctime.tv_sec;
+		timeout.tv_usec = keyboard_key_timeout % 1000000 + esctime.tv_usec;
 		if (timeout.tv_usec > 1000000) {
 		    timeout.tv_usec -= 1000000;
 		    timeout.tv_sec++;
@@ -1146,8 +1148,8 @@ static int xgetch_second (void)
     int c;
     struct timeval timeout;
 
-    timeout.tv_sec = ESCMODE_TIMEOUT / 1000000;
-    timeout.tv_usec = ESCMODE_TIMEOUT % 1000000;
+    timeout.tv_sec = keyboard_key_timeout / 1000000;
+    timeout.tv_usec = keyboard_key_timeout % 1000000;
     nodelay (stdscr, TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);

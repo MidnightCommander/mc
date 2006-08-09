@@ -1,3 +1,8 @@
+2006-08-09  Denis Vlasenko  <vda.linux@googlemail.com>
+
+	* key.c: Make escape key timeout user configurable via the
+	environment variable KEYBOARD_KEY_TIMEOUT_US (in microseconds).
+
 2006-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (update_path_name): Fix gcc4 warning.
