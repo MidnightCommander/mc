@@ -1,6 +1,10 @@
 Before 4.6.2
 ============
 
+mc manual: describe new Find File feature options (find Recursively,
+case Sensitive and Regular expression) 
+mc manual: Add Environment Variables section
+
 Check all instances of const_cast and str_unconst, remove the
 unnecessary and comment the rest.
 
