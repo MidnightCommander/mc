@@ -1723,7 +1723,7 @@ msgid "&Using shell patterns"
 msgstr "shell pattern ben&Utzen"
 
 msgid "&Background"
-msgstr "&Hintergrund"
+msgstr "Hinter&grund"
 
 msgid "&Stable Symlinks"
 msgstr "&Stabile symbolische Links"
