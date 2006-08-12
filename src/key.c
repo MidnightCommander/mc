@@ -192,8 +192,7 @@ static void check_selects (fd_set *select_set)
 		(*p->callback)(p->fd, p->info);
 		retry = TRUE;
 		break;
-	    } else
-		retry = FALSE;
+	    }
     } while (retry);
 }
 
