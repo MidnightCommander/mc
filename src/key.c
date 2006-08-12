@@ -179,12 +179,13 @@ inline static int add_selects (fd_set *select_set)
 static void check_selects (fd_set *select_set)
 {
     SelectList *p;
-    gboolean retry = FALSE;
+    gboolean retry;
 
     if (disabled_channels)
 	return;
 
-    do
+    do {
+	retry = FALSE;
 	for (p = select_list; p; p = p->next)
 	    if (FD_ISSET (p->fd, select_set)) {
 		FD_CLR (p->fd, select_set);
@@ -193,7 +194,7 @@ static void check_selects (fd_set *select_set)
 		break;
 	    } else
 		retry = FALSE;
-    while (retry);
+    } while (retry);
 }
 
 void channels_down (void)

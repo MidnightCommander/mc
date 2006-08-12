@@ -1,3 +1,9 @@
+2006-08-12  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* key.c (check_selects): Initialize retry to FALSE every time we enter
+	the do/while loop (bug introduced when incorrectly rewriting the
+	backward goto used by the original submitter).
+
 2006-08-11  Mikulas Patocka  <mikulas@artax.karlin.mff.cuni.cz>
 
 	* key.c (check_selects): Fix possible crash on reference to select list
