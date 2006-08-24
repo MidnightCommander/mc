@@ -248,6 +248,58 @@ context default lightgray
     keyword whole TR0 magenta
     keyword whole TR1 magenta
 
+# Generic AMD64 registers set
+    keyword whole rax brightmagenta
+    keyword whole rbx brightmagenta
+    keyword whole rcx brightmagenta
+    keyword whole rdx brightmagenta
+    keyword whole rsi brightmagenta
+    keyword whole rdi brightmagenta
+    keyword whole rbp brightmagenta
+    keyword whole rsp brightmagenta
+    keyword whole r8 brightmagenta
+    keyword whole r9 brightmagenta
+    keyword whole r10 brightmagenta
+    keyword whole r11 brightmagenta
+    keyword whole r12 brightmagenta
+    keyword whole r13 brightmagenta
+    keyword whole r14 brightmagenta
+    keyword whole r15 brightmagenta
+
+    keyword whole %rax brightmagenta
+    keyword whole %rbx brightmagenta
+    keyword whole %rcx brightmagenta
+    keyword whole %rdx brightmagenta
+    keyword whole %rsi brightmagenta
+    keyword whole %rdi brightmagenta
+    keyword whole %rbp brightmagenta
+    keyword whole %rsp brightmagenta
+    keyword whole %r8 brightmagenta
+    keyword whole %r9 brightmagenta
+    keyword whole %r10 brightmagenta
+    keyword whole %r11 brightmagenta
+    keyword whole %r12 brightmagenta
+    keyword whole %r13 brightmagenta
+    keyword whole %r14 brightmagenta
+    keyword whole %r15 brightmagenta
+
+    keyword whole RAX brightmagenta
+    keyword whole RBX brightmagenta
+    keyword whole RCX brightmagenta
+    keyword whole RDX brightmagenta
+    keyword whole RSI brightmagenta
+    keyword whole RDI brightmagenta
+    keyword whole RBP brightmagenta
+    keyword whole RSP brightmagenta
+    keyword whole R8 brightmagenta
+    keyword whole R9 brightmagenta
+    keyword whole R10 brightmagenta
+    keyword whole R11 brightmagenta
+    keyword whole R12 brightmagenta
+    keyword whole R13 brightmagenta
+    keyword whole R14 brightmagenta
+    keyword whole R15 brightmagenta
+
 # FPU registers set
     keyword whole st0 brightcyan
     keyword whole st1 brightcyan

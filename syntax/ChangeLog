@@ -1,3 +1,7 @@
+2006-08-24  Jindrich Novy  <jnovy@redhat.com>
+
+	* assembler.syntax: Add generic AMD64 registers set.
+
 2006-07-14  Jindrich Novy  <jnovy@redhat.com>
 
 	* spec.syntax: Properly recognize case-insensitive tags.
