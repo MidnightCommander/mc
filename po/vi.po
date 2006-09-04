@@ -1,62 +1,62 @@
 # Vietnamese translation of Midnight Commander
-# Copyright (C) 1998-2003, 2005 Free Software Foundation, Inc.
-# Phan Vinh Thinh <teppi@vnlinux.org>, 2005.
+# Copyright (C) 1998-2003, 2005, 2006 Free Software Foundation, Inc.
+# Phan Vĩnh Thịnh <teppi82@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
-"PO-Revision-Date: 2005-03-29 01:20+0300\n"
-"Last-Translator: Phan Vinh Thinh <teppi@vnlinux.org>\n"
-"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2005-10-06 16:03-0400\n"
+"PO-Revision-Date: 2006-08-16 16:20+0400\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms: nplurals=1; nplural=0\n"
 
-#, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "&Chiếu sáng cú pháp"
+msgstr "Chọn chiếu sáng cú pháp "
 
-#, fuzzy
 msgid "< Auto >"
-msgstr " Về chương trình "
+msgstr "< Tự động >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Nạp lại cú pháp hiện thời >"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open %s for reading "
-msgstr " Không thể mở tập tin để đọc: "
+msgstr " Không thể mở %s để đọc "
 
 msgid "Error"
 msgstr "Lỗi"
 
-#, fuzzy, c-format
+#, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Lỗi đọc từ đường ống (pipe): "
+msgstr " Lỗi đọc từ đường ống (pipe): %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Không thể mở đường ống để đọc: "
+msgstr " Không thể mở đường ống để đọc: %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Không lấy được thông tin kích thước/quyền hạn của tập tin: "
+msgstr " Không lấy được kích thước/quyền hạn cho %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s is not a regular file "
-msgstr ""
-" Không xem được vì lý do: không\n"
-" phải tập tin thông thường "
+msgstr " %s phải tập tin thông thường "
 
-#, fuzzy, c-format
+#, c-format
 msgid " File %s is too large "
-msgstr " Tập tin quá lớn: "
+msgstr " Tập tin %s quá lớn "
 
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
+
+msgid "&Dismiss"
+msgstr "Đó&ng"
 
 msgid " Enter file name: "
 msgstr " Hãy nhập tên tập tin: "
@@ -77,7 +77,7 @@ msgid "Do backups -->"
 msgstr "&Sao lưu -->"
 
 msgid "&Cancel"
-msgstr "Đóng hộp thoại &-"
+msgstr "Đóng hộp thoại &]"
 
 msgid "&OK"
 msgstr "Đồng ý &="
@@ -97,9 +97,8 @@ msgstr "Cảnh báo"
 msgid " A file already exists with this name. "
 msgstr " Tập tin có tên như vậy đã tồn tại. "
 
-#, fuzzy
 msgid "&Overwrite"
-msgstr "Ghi chèn"
+msgstr "&Ghi chèn"
 
 msgid " Cannot save file. "
 msgstr " Không thể ghi nhớ tập tin. "
@@ -147,9 +146,8 @@ msgstr ""
 " Văn bản hiện thời đã thay đổi và chưa được ghi nhớ. \n"
 " Tiếp tục thao tác sẽ làm mất những thay đổi này. "
 
-#, fuzzy
 msgid "C&ontinue"
-msgstr "Tiếp tục"
+msgstr "&Tiếp tục"
 
 msgid " Load "
 msgstr " Nạp "
@@ -181,7 +179,7 @@ msgstr "biểu thức &Scanf"
 msgid "replace &All"
 msgstr "&Thay thế tất cả"
 
-msgid "pro&Mpt on replace"
+msgid "&Prompt on replace"
 msgstr "&Hỏi trước khi thay"
 
 msgid "&Backwards"
@@ -211,18 +209,14 @@ msgstr " Thay thế "
 msgid "Search"
 msgstr "Tìm"
 
-#, fuzzy
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến đổi "
+msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgstr " Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến đổi "
 
 msgid " Error in replacement format string. "
 msgstr " Lỗi trong định dạng chuỗi thay thế. "
 
-#, fuzzy
 msgid " Replacement too long. "
-msgstr " Nhập chuỗi thay thế:"
+msgstr " Chuỗi thay thế quá dài. "
 
 #, c-format
 msgid " %ld replacements made. "
@@ -231,9 +225,9 @@ msgstr " %ld thay thế được thực hiện. "
 msgid " Search string not found "
 msgstr " Không tìm thấy chuỗi tìm kiếm "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %d items found, %d bookmarks added "
-msgstr " tìm thấy %d , thêm %d thẻ đánh dấu (bookmark) "
+msgstr " tìm thấy %d mục, đã thêm %d đánh dấu (bookmark) "
 
 msgid "Quit"
 msgstr "Thoát"
@@ -241,9 +235,8 @@ msgstr "Thoát"
 msgid " File was modified, Save with exit? "
 msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
 
-#, fuzzy
 msgid "&Cancel quit"
-msgstr "Không thoát"
+msgstr "&Dừng thoát"
 
 msgid "&Yes"
 msgstr "&Có"
@@ -251,12 +244,11 @@ msgstr "&Có"
 msgid "&No"
 msgstr "&Không"
 
-#, fuzzy
 msgid " Error "
-msgstr "Lỗi"
+msgstr " Lỗi "
 
 msgid " This function is not implemented. "
-msgstr ""
+msgstr " Tính năng này chưa được phát triển. "
 
 msgid " Copy to clipboard "
 msgstr "Sao chép vào bộ đệm "
@@ -292,8 +284,7 @@ msgid " Run Sort "
 msgstr "Thực hiện sắp xếp "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr ""
-"Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
+msgstr "Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
 
 msgid " Sort "
 msgstr "Sắp xếp "
@@ -354,9 +345,6 @@ msgstr " Nhấn phím bất kỳ: "
 
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
-
-msgid "&Dismiss"
-msgstr "Đó&ng"
 
 msgid " Emacs key: "
 msgstr "Phím Emacs: "
@@ -526,13 +514,14 @@ msgstr "Ch&ung...         "
 msgid "&Save mode..."
 msgstr "&Chế độ ghi nhớ..."
 
-#, fuzzy
 msgid "Learn &Keys..."
-msgstr "&Tạo phím tắt...  "
+msgstr "&Tạo phím tắt..."
 
-#, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "&Chiếu sáng cú pháp"
+msgstr "&Chiếu sáng cú pháp..."
+
+msgid "Save setu&p..."
+msgstr "&Ghi nhớ cấu hình..."
 
 msgid " File "
 msgstr " Tập tin "
@@ -555,9 +544,8 @@ msgstr "T&rực giác"
 msgid "Emacs"
 msgstr "&Emacs"
 
-#, fuzzy
 msgid "User-defined"
-msgstr "&Người dùng tự xác định:"
+msgstr "Người dùng xác định"
 
 msgid "None"
 msgstr "&Không"
@@ -645,51 +633,51 @@ msgstr " Lỗi trong tập tin %s trên dòng %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "bind: Sai số của tham số, bind <key> <command>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "bind: Giá trị chìa khóa xấu `%s'"
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "bind: E hèm... không có chìa khóa?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "bind: Chìa khóa không biết: `%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " Câu lệnh chown "
+msgstr "bind: Câu lệnh không rõ: `%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr ""
+msgstr "%s: Cú pháp: %s <n> <command> <label>"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " Câu lệnh chown "
+msgstr "%s: Câu lệnh không biết: `%s'"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr ""
+msgstr "%s: fn phải là 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
-msgstr ""
+msgstr "%s: fopen(): %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " Câu lệnh chown "
+msgstr "%s:%d: câu lệnh không rõ `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
-msgstr ""
+msgstr "%s:%d: %s"
 
 #, c-format
 msgid "%s not found!"
-msgstr ""
+msgstr "Không tìm thấy %s!"
 
 msgid "&Set"
 msgstr "Đồ&ng ý"
@@ -761,7 +749,7 @@ msgstr ""
 " số chúng ta có thể điều khiển. \n"
 
 msgid "&Full file list"
-msgstr "&Danh sách đầy đủ"
+msgstr "&Đầy đủ"
 
 msgid "&Brief file list"
 msgstr "&Thu gọn"
@@ -776,7 +764,7 @@ msgid "Listing mode"
 msgstr "Dạng danh sách"
 
 msgid "user &Mini status"
-msgstr "t&Rạng thái mini"
+msgstr "dòng t&Rạng thái nhỏ"
 
 msgid "&Reverse"
 msgstr "&Ngược lại"
@@ -826,9 +814,8 @@ msgstr "Bảng mã đầu vào / hiển thị:"
 msgid "&Select"
 msgstr "&Lựa chọn"
 
-#, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "Sử &dụng chế độ thụ động"
+msgstr "Sử &dụng chế độ thụ động qua proxy"
 
 msgid "Use &passive mode"
 msgstr "Sử &dụng chế độ thụ động"
@@ -1211,7 +1198,7 @@ msgstr "&Thời gian sửa đổi"
 msgid "&Access time"
 msgstr "thời &Gian truy cập"
 
-msgid "C&Hange time"
+msgid "&Change time"
 msgstr "thời gi&An thay đổi"
 
 msgid "&Size"
@@ -1264,24 +1251,22 @@ msgstr ""
 msgid " Parameter "
 msgstr " Tham số "
 
-#, fuzzy, c-format
+#, c-format
 msgid " %s%s file error"
-msgstr " lỗi tập tin "
+msgstr " %s%s lỗi tập tin "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Tập tin mc.ext đã thay đổi\n"
-"từ phiên bản 3.0. Rất có thể có sự cố khi cài đặt.\n"
-"Xin hãy lấy bản sao mới nhất từ gói  \n"
-"Midnight Commander."
+"Định dạng của tập tin %smc.ext đã thay đổi từ phiên bản 3.0. Rất có thể có "
+"sự cố khi cài đặt. Xin hãy lấy bản sao mới nhất từ gói Midnight Commander."
 
-#, fuzzy, c-format
+#, c-format
 msgid " ~/%s file error "
-msgstr " lỗi tập tin "
+msgstr " ~/%s lỗi tập tin "
 
 #, c-format
 msgid ""
@@ -1289,6 +1274,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"Định dạng của tập tin ~/%s đã thay đổi từ phiên bản 3.0. Có thể bạn cần "
+"sao chép nó từ %smc.ext hoặc sử dụng tập tin đó làm ví dụ để viết tập tin của mình."
 
 msgid " Copy "
 msgstr " Sao chép "
@@ -1462,12 +1449,12 @@ msgstr ""
 " Không lấy được thông tin (stat) thư mục nguồn \"%s\" \n"
 " %s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
-" Thư mục nguồn \"%s\" không phải là một thư mục \n"
+" Nguồn \"%s\" không phải là một thư mục \n"
 " %s "
 
 #, c-format
@@ -1697,21 +1684,21 @@ msgstr "&Thêm vào cuối"
 msgid "Overwrite this target?"
 msgstr "Khi đè lên tập tin này?"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Thời gian sửa đổi của tập tin đích: %s, kích thước %d"
+msgstr "Ngày đích: %s, kích thước %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Thời gian sửa đổi của tập tin nguồn: %s, kích thước %d"
+msgstr "Ngày nguồn: %s, kích thước %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Target date: %s, size %u"
-msgstr "Thời gian sửa đổi của tập tin đích: %s, kích thước %d"
+msgstr "Ngày đích: %s, kích thước %u"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Source date: %s, size %u"
-msgstr "Thời gian sửa đổi của tập tin nguồn: %s, kích thước %d"
+msgstr "Ngày nguồn: %s, kích thước %u"
 
 msgid " File exists "
 msgstr " Tập tin tồn tại "
@@ -1732,7 +1719,7 @@ msgid "&Using shell patterns"
 msgstr "&Sử dụng mẫu (pattern) của shell"
 
 msgid "&Background"
-msgstr "&Trong nền sau"
+msgstr "Trong nền sa&u"
 
 msgid "&Stable Symlinks"
 msgstr "liên kết &Bền vững"
@@ -1773,7 +1760,7 @@ msgid "&Edit - F4"
 msgstr "&Soạn thảo - F4"
 
 msgid "find Re&cursively"
-msgstr ""
+msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
 
 msgid "Start at:"
 msgstr "Bắt đầu từ:"
@@ -1963,25 +1950,24 @@ msgstr "Truy cập:     %s"
 msgid "Modified:  %s"
 msgstr "Sửa đổi:      %s"
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
-msgstr "Tạo ra:       %s"
+msgid "Status:    %s"
+msgstr "Trạng thái:  %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Dạng thiết bị: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "Kích thước:   %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
-msgstr " (%d khối)"
-
-#, fuzzy, c-format
-msgid " (%ld blocks)"
-msgstr " (%d khối)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld khối)"
+msgstr[1] " (%ld khối)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2105,12 +2091,10 @@ msgstr ""
 "Tất cả các phím đều làm việc tốt."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr ""
-"Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
+msgstr "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr ""
-"xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
+msgstr "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
@@ -2172,7 +2156,7 @@ msgid "Vie&w file...         "
 msgstr "x&Em tập tin...       "
 
 msgid "&Filtered view     M-!"
-msgstr "xe&M đã lọc            M-!"
+msgstr "xe&M kết quả lệnh      M-!"
 
 msgid "&Edit               F4"
 msgstr "&Soạn thảo              F4"
@@ -2208,7 +2192,7 @@ msgid "&Delete             F8"
 msgstr "xó&A                    F8"
 
 msgid "&Quick cd          M-c"
-msgstr "cd nhanh &>           M-c"
+msgstr "cd nhanh &>             M-c"
 
 msgid "select &Group      M-+"
 msgstr "Chọn Nhóm &+           M-+"
@@ -2354,10 +2338,9 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Xin hãy gửi bất kỳ báo cáo lỗi (bug) nào (gồm cả kết quả của lệnh `mc -V')\n"
-"tới mc-devel@gnome.org\n"
+"Xin hãy gửi bất kỳ báo cáo lỗi bug nào (gồm cả kết quả của lệnh\n"
+"`mc -V') tới mc-devel@gnome.org\n"
 
-#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2385,10 +2368,12 @@ msgstr ""
 "có thể bỏ qua {VĂN BẢN} và {NỀN}, và sử dụng giá trị theo mặc định\n"
 "\n"
 "Từ khóa:\n"
-"   Toàn cầu:         errors, reverse, gauge, input\n"
+"   Toàn cầu:         errors, reverse, gauge, input, viewunderline\n"
 "   Hiển thị tập tin: normal, selected, marked, markselect\n"
-"   Hộp thoại:        dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Hộp thoại:        dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
 "   Trình đơn:        menu, menuhot, menusel, menuhotsel\n"
+"   Soạn thảo:       editnormal, editbold, editmarked\n"
 "   Trợ giúp:         helpnormal, helpitalic, helplink, helpslink\n"
 "   Dạng tập tin:     directory, executable, link, stalelink, device, "
 "special, core\n"
@@ -2396,7 +2381,7 @@ msgstr ""
 "Màu sắc:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray, white\n"
+"   brightcyan, lightgray, và white\n"
 "\n"
 
 msgid "Displays this help message"
@@ -2602,7 +2587,7 @@ msgid "Usage:"
 msgstr "Sử dụng:"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[thiết bị]"
 
 msgid "UP--DIR"
 msgstr "LÊNTRÊN"
@@ -2650,12 +2635,16 @@ msgid "Group"
 msgstr "Nhóm"
 
 #, c-format
-msgid "%s bytes in %d file"
-msgstr "%s byte trong %d tập tin"
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
 #, c-format
-msgid "%s bytes in %d files"
-msgstr "%s byte trong %d tập tin"
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s trong %d tập tin"
+msgstr[1] "%s byte trong %d tập tin"
 
 msgid "<readlink failed>"
 msgstr "<đọc liên kết không thành công>"
@@ -2664,8 +2653,7 @@ msgid "Unknown tag on display format: "
 msgstr "Thẻ ghi không rõ trong định dạng hiển thị: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
+msgstr "Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
 msgid " Do you really want to execute? "
 msgstr " Thực sự muốn thực hiện? "
@@ -2899,7 +2887,6 @@ msgstr " Lỗi đường ống "
 msgid " Dup failed "
 msgstr " Lỗi lặp lại "
 
-#, fuzzy
 msgid " Cannot spawn child process "
 msgstr " Không sinh ra được tiến trình con "
 
@@ -2937,15 +2924,15 @@ msgstr "Bộ offset 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr ""
+msgstr "Dòng %lu Cột %lu"
 
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-#, fuzzy, c-format
+#, c-format
 msgid ">= %s bytes"
-msgstr "%s byte"
+msgstr ">= %s byte"
 
 #, c-format
 msgid ""
@@ -2953,12 +2940,17 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
+" Lỗi khi đóng tập tin: \n"
+" %s \n"
+" Dữ liệu chưa chắc đã được khi. "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Không thể ghi nhớ tập tin. "
+msgstr ""
+" Không thể lưu tập tin. \n"
+" %s "
 
 msgid "Invalid hex search expression"
 msgstr "Biểu thức tìm kiếm hex không đúng"
@@ -2989,58 +2981,58 @@ msgid " Enter regexp:"
 msgstr " Nhập biểu thức chính quy:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "Trợ giúp"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "Thoát"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Ascii"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Hex"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "Đi tới"
 
 msgid "ButtonBar|Line"
-msgstr ""
+msgstr "Dòng"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "Xem"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "Sửa"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Lưu"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "Bỏ chuyển dòng"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "Chuyển dòng"
 
 msgid "ButtonBar|RxSrch"
-msgstr ""
+msgstr "Tìm rx"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "Tìm hx"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Thô"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "Phân tích"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "Bỏ định dạng"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "Định dạng"
 
 msgid " History "
 msgstr " Lịch sử"
@@ -3482,12 +3474,12 @@ msgstr ""
 "Cảnh báo: Cờ không đúng %c trong %s:\n"
 "%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" smbfs_reconnect (kết nối lại) tới %s không thành công\n"
+" kết nối lại tới %s không thành công\n"
 " "
 
 msgid " Authentication failed "
@@ -3602,20 +3594,20 @@ msgid " vfs_info is not fs! "
 msgstr " vfs_info không phải là hệ thống tập tin! "
 
 msgid " You have to chdir to extract files first "
-msgstr ""
-" Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
+msgstr " Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
 
 msgid " while iterating over blocks "
 msgstr " khi lặp lại khối "
 
 msgid "Cannot parse:"
-msgstr ""
+msgstr "Không thể phân tích:"
 
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "Sẽ lờ đi các lỗi phân tích tiếp theo."
 
 msgid "Internal error:"
-msgstr ""
+msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
