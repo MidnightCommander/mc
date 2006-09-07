@@ -283,6 +283,7 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	[AC_MSG_WARN([could not determine how to read list of mounted fs])])
 
     gl_FSUSAGE
+    gl_FSTYPENAME
 ])
 
 

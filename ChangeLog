@@ -1,5 +1,12 @@
 2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* acinclude.m4 (AC_GET_FS_INFO): Add erronously removed call to
+	gl_FSTYPENAME.
+	* m4/ls-mntd-fs.m4 (gl_LIST_MOUNTED_FILE_SYSTEMS): Add missing 
+	include directive for sys/param.h.
+
+2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* m4/ls-mntd-fs.m4: Update to serial#22, which adds support
 	for getmntinfo() returning its result in struct statvfs.
 	* m4/fstypename.m4: Update to serial#6, which replaces
