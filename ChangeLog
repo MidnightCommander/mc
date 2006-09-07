@@ -1,5 +1,12 @@
 2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* m4/ls-mntd-fs.m4: Update to serial#22, which adds support
+	for getmntinfo() returning its result in struct statvfs.
+	* m4/fstypename.m4: Update to serial#6, which replaces
+	HAVE_F_FSTYPENAME_IN_STATFS with HAVE_STRUCT_STATFS_F_FSTYPENAME.
+
+2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* acinclude.m4 (AC_GET_FS_INFO): Revert a failed attempt to
 	properly detect getmntinfo() returning its result in struct statvfs.
 

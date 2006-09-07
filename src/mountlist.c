@@ -48,6 +48,10 @@
 #include <sys/mount.h>
 #endif
 
+#ifdef MOUNTED_GETMNTINFO2	/* NetBSD 3.0.  */
+#include <sys/statvfs.h>
+#endif
+
 #ifdef MOUNTED_GETMNT		/* Ultrix.  */
 #include <sys/mount.h>
 #include <sys/fs_types.h>
@@ -169,7 +173,7 @@ static int xatoi (const char *cp)
 }
 #endif /* MOUNTED_GETMNTENT1 */
 
-#if defined (MOUNTED_GETMNTINFO) && !defined (HAVE_F_FSTYPENAME)
+#if ! HAVE_STRUCT_STATFS_F_FSTYPENAME
 static char *fstype_to_string (short t)
 {
     switch (t) {
@@ -261,7 +265,7 @@ static char *fstype_to_string (short t)
 	return "?";
     }
 }
-#endif /* MOUNTED_GETMNTINFO && !HAVE_F_FSTYPENAME */
+#endif /* ! HAVE_STRUCT_STATFS_F_FSTYPENAME */
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
 static char *
@@ -352,7 +356,7 @@ read_filesystem_list (int need_fs_type, int all_fs)
 	    me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
 	    me->me_devname = strdup (fsp->f_mntfromname);
 	    me->me_mountdir = strdup (fsp->f_mntonname);
-#ifdef HAVE_F_FSTYPENAME
+#ifdef HAVE_STRUCT_STATFS_F_FSTYPENAME
 	    me->me_type = strdup (fsp->f_fstypename);
 #else
 	    me->me_type = fstype_to_string (fsp->f_type);
@@ -367,6 +371,28 @@ read_filesystem_list (int need_fs_type, int all_fs)
 	}
     }
 #endif /* MOUNTED_GETMNTINFO */
+
+#ifdef MOUNTED_GETMNTINFO2	/* NetBSD 3.0.  */
+    {
+	struct statvfs *fsp;
+	int entries;
+
+	entries = getmntinfo (&fsp, MNT_NOWAIT);
+	if (entries < 0)
+	    return NULL;
+	for (; entries-- > 0; fsp++) {
+	    me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
+	    me->me_devname = strdup (fsp->f_mntfromname);
+	    me->me_mountdir = strdup (fsp->f_mntonname);
+	    me->me_type = strdup (fsp->f_fstypename);
+	    me->me_dev = (dev_t) -1;	/* Magic; means not known yet. */
+
+	    /* Add to the linked list. */
+	    mtail->me_next = me;
+	    mtail = me;
+	}
+    }
+#endif /* MOUNTED_GETMNTINFO2 */
 
 #ifdef MOUNTED_GETMNT		/* Ultrix.  */
     {

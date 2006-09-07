@@ -1,5 +1,13 @@
 2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* mountlist.c: Sync with gnulib.
+	All uses of HAVE_F_FSTYPENAME replaced by
+	HAVE_STRUCT_STATFS_F_FSTYPENAME.
+	[MOUNTED_GETMNTINFO2] Include sys/statvfs.h.
+	(read_file_system_list) [MOUNTED_GETMNTINFO2]: Implement.
+
+2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* mountlist.c: Revert a failed attempt to properly detect and use
 	getmntinfo() returning its result in struct statvfs.
 
