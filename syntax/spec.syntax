@@ -29,6 +29,7 @@ context default
     keyword whole Provides: green    
     keyword whole Release: green    
     keyword whole Requires: green    
+    keyword whole Requires(\[abcdefghijklmnopqrstuvwxyz\]): green
     keyword whole Root: green    
     keyword whole Serial: white
     keyword whole Source\[0123456789\]: green
