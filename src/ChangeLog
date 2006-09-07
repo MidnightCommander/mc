@@ -1,3 +1,8 @@
+2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mountlist.c: Revert a failed attempt to properly detect and use
+	getmntinfo() returning its result in struct statvfs.
+
 2006-08-12  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* key.c (check_selects): Get rid of the now redundant else.

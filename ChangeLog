@@ -1,3 +1,8 @@
+2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* acinclude.m4 (AC_GET_FS_INFO): Revert a failed attempt to
+	properly detect getmntinfo() returning its result in struct statvfs.
+
 2006-06-30  Hampa Hug  <hampa@hampa.ch>
 
 	* acinclude.m4 (AC_GET_FS_INFO): Check the return value of
