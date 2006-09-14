@@ -428,7 +428,13 @@ int quick_dialog (QuickDialog *qd)
 
 #define INPUT_INDEX 2
 
-/* Show dialog, not background safe */
+/*
+ * Show dialog, not background safe.
+ *
+ * If the arguments "header" and "text" should be translated,
+ * that MUST be done by the caller of fg_input_dialog_help().
+ * 
+ */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
 			const char *def_text)
@@ -475,9 +481,11 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
      * An attempt to place buttons symmetrically, based on actual i18n
      * length of the string. It looks nicer with i18n (IMO) - alex
      */
+    quick_widgets[0].text = _(quick_widgets[0].text);
+    quick_widgets[1].text = _(quick_widgets[1].text);
     quick_widgets[0].relative_x = len / 2 + 4;
     quick_widgets[1].relative_x =
-	len / 2 - (strlen (_(quick_widgets[1].text)) + 9);
+	len / 2 - (strlen (quick_widgets[1].text) + 9);
     quick_widgets[0].x_divisions = quick_widgets[1].x_divisions = len;
 #endif				/* ENABLE_NLS */
 
@@ -485,7 +493,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     Quick_input.xpos = -1;
     Quick_input.title = header;
     Quick_input.help = help;
-    Quick_input.i18n = 0;
+    Quick_input.i18n = 1; /* The dialog is already translated. */
     p_text = g_strstrip (g_strdup (text));
     quick_widgets[INPUT_INDEX + 1].text = p_text;
     quick_widgets[INPUT_INDEX].text = def_text;
@@ -509,7 +517,12 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 	return 0;
 }
 
-/* Show input dialog, background safe */
+/*
+ * Show input dialog, background safe.
+ *
+ * If the arguments "header" and "text" should be translated,
+ * that MUST be done by the caller of these wrappers.
+ */
 char *
 input_dialog_help (const char *header, const char *text, const char *help, const char *def_text)
 {

@@ -1,3 +1,10 @@
+2006-09-14  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* wtools.c (fg_input_dialog_help) [ENABLE_NLS]: Translate the
+	"Ok" and "Cancel" buttons here.
+	Mark the QuickDialog as translated so that quick_dialog() won't
+	try translate it again.
+
 2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* mountlist.c: Sync with gnulib.
