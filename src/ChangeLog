@@ -1,3 +1,10 @@
+2006-09-18  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* key.c (get_key_code): Do not blindly strip the eight bit of the
+	key code when the 'use_8th_bit_as_meta' flag is set. Only key codes
+	in the range 128 - 255 should be stripped, the rest must be left
+	intact.
+
 2006-09-14  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* wtools.c (fg_input_dialog_help) [ENABLE_NLS]: Translate the

@@ -803,7 +803,7 @@ int get_key_code (int no_delay)
 	    d = ALT(*pending_keys++);
 	    goto check_pend;
 	}
-	if ((d & 0x80) && use_8th_bit_as_meta)
+	if ((d > 127 && d < 256) && use_8th_bit_as_meta)
 	    d = ALT(d & 0x7f);
 	this = NULL;
 	return correct_key_code (d);
@@ -862,7 +862,7 @@ int get_key_code (int no_delay)
 	this = keys;
 	parent = NULL;
 
-	if ((c & 0x80) && use_8th_bit_as_meta) {
+	if ((c > 127 && c < 256) && use_8th_bit_as_meta) {
 	    c &= 0x7f;
 
 	    /* The first sequence defined starts with esc */
