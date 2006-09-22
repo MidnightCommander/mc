@@ -1601,8 +1601,6 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
     }
 }
 
-#define xtoolkit_panel_setup()
-
 /* Show current directory in the xterm title */
 void
 update_xterm_title_path (void)
@@ -1654,8 +1652,6 @@ load_hint (int force)
 static void
 setup_panels_and_run_mc (void)
 {
-    xtoolkit_panel_setup ();
-
     add_widget (midnight_dlg, the_menubar);
     add_widget (midnight_dlg, get_panel_widget (0));
     add_widget (midnight_dlg, get_panel_widget (1));
