@@ -1,3 +1,9 @@
+2006-09-25  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* layout.c (layout_do_change): Remove global variable.
+	(layout_cmd): Reflect the changes above.
+	(layout_change): Ditto.
+
 2006-09-18  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* main.c (xtoolkit_panel_setup): Remove - it is a noop.

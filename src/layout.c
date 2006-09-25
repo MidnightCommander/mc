@@ -69,9 +69,6 @@
 /* Controls the display of the rotating dash on the verbose mode */
 int nice_rotating_dash = 1;
 
-/* If set, then we have to call the layout_change routine from main */
-static int layout_do_change = 0;
-
 /* Set if the panels are split horizontally */
 int horizontal_split = 0;
 
@@ -495,7 +492,6 @@ static void
 layout_change (void)
 {
     setup_panels ();
-    layout_do_change = 0;
     /* re-init the menu, because perhaps there was a change in the way 
        how the panel are split (horizontal/vertical). */
     done_menu ();
@@ -507,6 +503,7 @@ void layout_cmd (void)
 {
     int result;
     int i;
+    int layout_do_change = 0;
 
     init_layout ();
     run_dlg (layout_dlg);
