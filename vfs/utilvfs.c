@@ -399,11 +399,7 @@ is_year (char *str, struct tm *tim)
     if (sscanf (str, "%ld", &year) != 1)
 	return 0;
 
-    /* The range of valid year numbers is quite restricted in order to
-     * reduce the number of parsing errors due to filenames starting
-     * with a four-digit string and a space.
-     */
-    if (!(1970 <= year && year <= 2015))
+    if (year < 1900 || year > 3000)
 	return 0;
 
     tim->tm_year = (int) (year - 1900);
