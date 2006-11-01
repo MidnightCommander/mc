@@ -122,12 +122,15 @@ mcrpmfs_list ()
 	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
     $RPM -qp --qf "[%{PROVIDES}\n]" "$f" | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+    $RPM -qp --qf "[%{CONFLICTS}\n]" "$f" | grep "(none)" > /dev/null ||
+	echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
     test "`$RPM -qp --qf \"%{CHANGELOGTEXT}\" \"$f\"`" = "(none)" ||
        echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     else 
 	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
 	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
 	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+	echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
 
@@ -171,6 +174,7 @@ mcrpmfs_copyout ()
 	INFO/CHANGELOG)		$RPM -qp --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" "$f" > "$3"; exit 0;;
 	INFO/SIZE)		$RPM -qp --qf "%{SIZE} bytes\n" "$f" > "$3"; exit 0;;
 	INFO/OBSOLETES)		$RPM -qp --qf "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" "$f" > "$3"; exit 0;;
+	INFO/CONFLICTS)		$RPM -qp --qf "[%{CONFLICTNAME} %{CONFLICTFLAGS:depflags} %{CONFLICTVERSION}\n]" "$f" >"$3"; exit 0;;
 	CONTENTS.cpio)		$RPM2CPIO "$1" > "$3"; exit 0;;
 	*)
 	    ;;
