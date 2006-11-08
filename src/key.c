@@ -36,6 +36,7 @@
 #include "tty.h"
 #include "mouse.h"
 #include "key.h"
+#include "layout.h"	/* winch_flag */
 #include "main.h"
 #include "win.h"
 #include "cons.saver.h"
@@ -1073,7 +1074,7 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 		time_addr = NULL;
 	}
 
-	if (!block) {
+	if (!block || winch_flag) {
 	    time_addr = &timeout;
 	    timeout.tv_sec = 0;
 	    timeout.tv_usec = 0;
@@ -1090,7 +1091,7 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 	if (flag == 0) {
 	    if (redo_event)
 		return EV_MOUSE;
-	    if (!block)
+	    if (!block || winch_flag)
 		return EV_NONE;
 	    vfs_timeout_handler ();
 	}

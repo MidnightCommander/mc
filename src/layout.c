@@ -761,6 +761,7 @@ low_level_change_screen_size (void)
 void
 change_screen_size (void)
 {
+    winch_flag = 0;
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
 #if defined TIOCGWINSZ
 
@@ -793,7 +794,6 @@ change_screen_size (void)
     touchwin (stdscr);
 #endif				/* TIOCGWINSZ */
 #endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-    winch_flag = 0;
 }
 
 static int ok_to_refresh = 1;

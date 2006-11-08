@@ -1,3 +1,9 @@
+2006-11-08  Egmont Koblinger  <egmont@uhulinux.hu>
+
+	* key.c (get_event): Eliminate timeouts on window resize event.
+	* layout.c (change_screen_size): Set winch_flag to 0 on entrance not
+	exit of function.
+
 2006-09-25  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* layout.c (layout_do_change): Remove global variable.
