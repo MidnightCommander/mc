@@ -532,40 +532,42 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 	n = fish_command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "echo '### 001'\n"
+		 "file=/%s\n"
                  "res=`exec 3>&1\n"
 		 "(\n"
 		   "head -c %lu -q - || echo DD >&3\n"
 		 ") 2>/dev/null | (\n"
-		   "cat > /%s\n"
+		   "cat > \"$file\"\n"
 		   "cat > /dev/null\n"
 		 ")`; [ \"$res\" = DD ] && {\n"
-			"> /%s\n"
+			"> \"$file\"\n"
 			"rest=%lu\n"
 			"while [ $rest -gt 0 ]\n"
 			"do\n"
 			"    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-			"    n=`dd bs=256 count=$cnt | tee -a /%s | wc -c`\n"
+			"    n=`dd bs=256 count=$cnt | tee -a \"$file\" | wc -c`\n"
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
 		 (unsigned long) s.st_size, name,
-		 (unsigned long) s.st_size, quoted_name,
-		 quoted_name, (unsigned long) s.st_size, quoted_name);
+		 quoted_name, (unsigned long) s.st_size,
+		 (unsigned long) s.st_size);
     else
 	n = fish_command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "echo '### 001'\n"
 		 "{\n"
+			"file=/%s\n"
 			"rest=%lu\n"
 			"while [ $rest -gt 0 ]\n"
 			"do\n"
 			"    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-			"    n=`dd bs=256 count=$cnt | tee -a /%s | wc -c`\n"
+			"    n=`dd bs=256 count=$cnt | tee -a \"$file\" | wc -c`\n"
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
 		 (unsigned long) s.st_size, name,
-		 (unsigned long) s.st_size, quoted_name);
+		 quoted_name, (unsigned long) s.st_size);
 
     g_free (quoted_name);
     if (n != PRELIM) {
