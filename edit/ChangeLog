@@ -1,3 +1,11 @@
+2006-11-17  Roland Illig  <roland.illig@gmx.de>
+
+	* edit_cmd.c (edit_save_file): The file's modification time is
+	recorded and compared to the one of the file on disk. If it
+	differs, the user is asked whether the file should really be
+	overwritten.
+	* edit.c (edit_init): Likewise.
+
 2006-08-02  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* syntax.c (edit_read_syntax_file): Set NENTRIES to 30.

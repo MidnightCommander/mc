@@ -276,6 +276,21 @@ edit_save_file (WEdit *edit, const char *filename)
 		return -1;
 	    }
 	}
+
+	/* Prevent overwriting changes from other editor sessions. */
+	if (rv == 0 && edit->stat1.st_mtime != 0 && edit->stat1.st_mtime != sb.st_mtime) {
+
+	    /* The default action is "Cancel". */
+	    query_set_sel(1);
+
+	    rv = edit_query_dialog2 (
+		_("Warning"),
+		_("The file has been modified in the meantime. Save anyway?"),
+		_("&Yes"),
+		_("&Cancel"));
+	    if (rv != 0)
+		return -1;
+	}
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE) {
@@ -380,6 +395,10 @@ edit_save_file (WEdit *edit, const char *filename)
 	    edit->curs2++;
 	}
 	if (mc_close (fd))
+	    goto error_save;
+
+	/* Update the file information, especially the mtime. */
+	if (mc_stat (savename, &edit->stat1) == -1)
 	    goto error_save;
     }
 

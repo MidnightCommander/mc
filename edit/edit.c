@@ -529,6 +529,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();
     edit->stat1.st_gid = getgid ();
+    edit->stat1.st_mtime = 0;
     edit->bracket = -1;
     edit->force |= REDRAW_PAGE;
     edit_set_filename (edit, filename);
@@ -690,6 +691,7 @@ void edit_push_action (WEdit * edit, long c,...)
     unsigned long sp = edit->stack_pointer;
     unsigned long spm1;
     long *t;
+
 /* first enlarge the stack if necessary */
     if (sp > edit->stack_size - 10) {	/* say */
 	if (option_max_undo < 256)
