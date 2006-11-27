@@ -1,3 +1,8 @@
+2006-11-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* subshell.c (subshell_name_quote): Bash < 2.05b (3-digit octals in
+	echo_e_cmd) no longer supported.
+
 2006-11-08  Egmont Koblinger  <egmont@uhulinux.hu>
 
 	* key.c (get_event): Eliminate timeouts on window resize event.

@@ -1,3 +1,8 @@
+2006-11-27  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* NEWS: Bash < 2.05b (3-digit octals in echo_e_cmd) no longer
+	supported.
+
 2006-09-07  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* acinclude.m4 (AC_GET_FS_INFO): Add erronously removed call to

@@ -1,6 +1,12 @@
 Current
 
 - Core functionality.
+	- Bash < 2.05b no longer supported. For usage with bash < 2.05b fix
+	subshell_name_quote() to use 3-digit octals.
+
+Version 4.6.1.
+
+- Core functionality.
 	- Device numbers are displayed correctly.
 	- Improved message formatting for i18n.
 	- Recursive option added for internal grep.

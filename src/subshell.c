@@ -747,16 +747,19 @@ subshell_name_quote (const char *s)
 
     /*
      * Print every character in octal format with the leading backslash.
-     * tcsh and zsh may require 4-digit octals, bash < 2.05b doesn't like them.
+     * bash >= 3.2, tcsh and zsh require 4-digit octals, 2.05b <= bash < 3.2
+     * support 3-digit octals as well as 4-digit octals.
+     * For bash < 2.05b fix below to use 3-digit octals.
      */
     if (subshell_type == BASH) {
 	for (; *s; s++) {
-	    /* Must quote numbers, so that they are not glued to octals */
+	    /* Must quote numbers, so that they are not glued to octals
+	       for bash < 3.2 */
 	    if (isalpha ((unsigned char) *s)) {
 		*d++ = (unsigned char) *s;
 	    } else {
-		sprintf (d, "\\%03o", (unsigned char) *s);
-		d += 4;
+		sprintf (d, "\\0%03o", (unsigned char) *s);
+		d += 5;
 	    }
 	}
     } else {
