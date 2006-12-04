@@ -267,12 +267,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int col, start_col_real;
     unsigned int c;
     int color;
-    int i, book_mark = -1;
-
-#if 0
-    if (!book_mark_query (edit, edit->start_line + row, &book_mark))
-	book_mark = -1;
-#endif
+    int i;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -306,12 +301,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    *p |= MOD_BOLD;
 		c = edit_get_byte (edit, q);
 /* we don't use bg for mc - fg contains both */
-		if (book_mark == -1) {
-		    edit_get_syntax_color (edit, q, &color);
-		    *p |= color << 16;
-		} else {
-		    *p |= book_mark << 16;
-		}
+		edit_get_syntax_color (edit, q, &color);
+		*p |= color << 16;
 		q++;
 		switch (c) {
 		case '\n':

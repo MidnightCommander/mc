@@ -1,3 +1,7 @@
+2006-12-04  Leonard den Ottolander  <leonard den ottolander nl>
+
+	* editdraw.c (edit_draw_this_line): Remove unused variable book_mark.
+
 2006-11-17  Roland Illig  <roland.illig@gmx.de>
 
 	* edit_cmd.c (edit_save_file): The file's modification time is
