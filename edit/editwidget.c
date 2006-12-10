@@ -86,28 +86,14 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
     if (event->type & (GPM_DOWN | GPM_UP))
 	edit_push_key_press (edit);
 
-    edit_cursor_move (edit, edit_bol (edit, edit->curs1) - edit->curs1);
+    edit->prev_col = event->x - edit->start_col - 1;
 
     if (--event->y > (edit->curs_row + 1))
-	edit_cursor_move (edit,
-			  edit_move_forward (edit, edit->curs1,
-					     event->y - (edit->curs_row +
-							 1), 0)
-			  - edit->curs1);
-
-    if (event->y < (edit->curs_row + 1))
-	edit_cursor_move (edit,
-			  edit_move_backward (edit, edit->curs1,
-					      (edit->curs_row + 1) -
-					      event->y) - edit->curs1);
-
-    edit_cursor_move (edit,
-		      (int) edit_move_forward3 (edit, edit->curs1,
-						event->x -
-						edit->start_col - 1,
-						0) - edit->curs1);
-
-    edit->prev_col = edit_get_col (edit);
+	edit_move_down (edit, event->y - (edit->curs_row + 1), 0);
+    else if (event->y < (edit->curs_row + 1))
+	edit_move_up (edit, (edit->curs_row + 1) - event->y, 0);
+    else
+	edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
 
     if (event->type & GPM_DOWN) {
 	edit_mark_cmd (edit, 1);	/* reset */
@@ -118,6 +104,7 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
 	edit_mark_cmd (edit, 0);
 
   update:
+    edit_find_bracket (edit);
     edit->force |= REDRAW_COMPLETELY;
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);

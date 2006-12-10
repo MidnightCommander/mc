@@ -1,3 +1,17 @@
+2006-12-10  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* edit.h (edit_move_to_prev_col): Declare the function to have
+	external linkage.
+	(edit_find_bracket): Likewise.
+	* edit.c (edit_move_to_prev_col): Reflect the changes above.
+	(edit_find_bracket): Likewise.
+	* editwidget.c (edit_event): When moving around with the mouse
+	use edit_move_down(), edit_move_up() and edit_move_to_prev_col()
+	instead of move_cursor() to update the cursor position since 
+	the latter doesn't update some internal variables.
+	Use edit_find_bracket() to update the bracket pair highlighter
+	state.
+
 2006-12-04  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* editdraw.c (edit_draw_this_line): Remove unused variable book_mark.

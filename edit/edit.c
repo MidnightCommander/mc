@@ -100,7 +100,6 @@ char *option_backup_ext = NULL;
  */
 
 
-static void edit_move_to_prev_col (WEdit *edit, long p);
 static void user_menu (WEdit *edit);
 
 int edit_get_byte (WEdit * edit, long byte_index)
@@ -1354,7 +1353,7 @@ static int is_in_indent (WEdit *edit)
 
 static int left_of_four_spaces (WEdit *edit);
 
-static void
+void
 edit_move_to_prev_col (WEdit * edit, long p)
 {
     edit_cursor_move (edit, edit_move_forward3 (edit, p, edit->prev_col, 0) - edit->curs1);
@@ -2075,7 +2074,7 @@ static long edit_get_bracket (WEdit * edit, int in_screen, unsigned long furthes
 
 static long last_bracket = -1;
 
-static void edit_find_bracket (WEdit * edit)
+void edit_find_bracket (WEdit * edit)
 {
     edit->bracket = edit_get_bracket (edit, 1, 10000);
     if (last_bracket != edit->bracket)
