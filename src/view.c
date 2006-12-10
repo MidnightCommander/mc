@@ -2778,23 +2778,22 @@ regexp_search (WView *view, int direction)
 {
     const char *defval;
     char *regexp;
+    static char *last_regexp;
 
-    defval = (view->search_exp != NULL) ? view->search_exp : "";
+    defval = (last_regexp != NULL ? last_regexp : "");
 
     regexp = input_dialog (_("Search"), _(" Enter regexp:"), defval);
-    if (regexp == NULL || regexp[0] == '\0')
-	goto cleanup;
+    if (regexp == NULL || regexp[0] == '\0') {
+	g_free (regexp);
+	return;
+    }
 
-    g_free (view->search_exp);
-    view->search_exp = regexp;
-    regexp = NULL;
+    g_free (last_regexp);
+    view->search_exp = last_regexp = regexp;
 
     view->direction = direction;
     do_regexp_search (view);
     view->last_search = do_regexp_search;
-
-cleanup:
-    g_free (regexp);
 }
 
 /* {{{ User-definable commands }}} */
@@ -2810,6 +2809,7 @@ static void
 view_normal_search_cmd (WView *view)
 {
     char *defval, *exp = NULL;
+    static char *last_search_string;
 
     enum {
 	SEARCH_DLG_HEIGHT = 8,
@@ -2840,7 +2840,7 @@ view_normal_search_cmd (WView *view)
 	"[Input Line Keys]", quick_widgets, 0
     };
 
-    defval = g_strdup ((view->search_exp != NULL) ? view->search_exp : "");
+    defval = g_strdup (last_search_string != NULL ? last_search_string : "");
     convert_to_display (defval);
 
     quick_widgets[2].result = &treplace_backwards;
@@ -2857,8 +2857,8 @@ view_normal_search_cmd (WView *view)
 
     convert_from_input (exp);
 
-    g_free (view->search_exp);
-    view->search_exp = exp;
+    g_free (last_search_string);
+    view->search_exp = last_search_string = exp;
     exp = NULL;
 
     view->direction = replace_backwards ? -1 : 1;

@@ -1,3 +1,11 @@
+2006-12-10  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* view.c (regexp_search): Keep the search string in a global
+	variable so that it can be reused when viewing another file.
+	Do not use the same variable to hold the search string for 
+	both the "Search" and "Regexp Search" functions.
+	(view_normal_search_cmd): Likewise.
+
 2006-11-27  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* subshell.c (subshell_name_quote): Bash < 2.05b (3-digit octals in
