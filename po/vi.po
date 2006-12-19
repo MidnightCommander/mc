@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10\n"
-"Plural-Forms: nplurals=1; nplural=0\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 
 msgid " Choose syntax highlighting "
 msgstr "Chọn chiếu sáng cú pháp "
@@ -1967,7 +1967,6 @@ msgstr "Kích thước:   %s"
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld khối)"
-msgstr[1] " (%ld khối)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2638,13 +2637,11 @@ msgstr "Nhóm"
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s byte"
-msgstr[1] "%s byte"
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s trong %d tập tin"
-msgstr[1] "%s byte trong %d tập tin"
 
 msgid "<readlink failed>"
 msgstr "<đọc liên kết không thành công>"
