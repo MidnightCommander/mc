@@ -1,5 +1,9 @@
 2006-12-21  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* fsusage.c: Remove references to HAVE_INFOMOUNT.
+
+2006-12-21  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* fsusage.h: Update from gnulib.
 	* fsusage.c: Likewise.
 

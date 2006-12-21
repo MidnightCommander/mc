@@ -21,8 +21,6 @@
 #include <config.h>
 #endif
 
-#ifdef HAVE_INFOMOUNT
-
 #include "fsusage.h"
 
 #include <limits.h>
@@ -257,5 +255,3 @@ static int statfs (char *file, struct statfs *fsb)
     return 0;
 }
 #endif /* _AIX && _I386 */
-
-#endif /* HAVE_INFOMOUNT */
