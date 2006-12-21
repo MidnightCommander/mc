@@ -1,5 +1,10 @@
 2006-12-21  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* fsusage.h: Update from gnulib.
+	* fsusage.c: Likewise.
+
+2006-12-21  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* fsusage.h: Resurrect.
 	* fsusage.c: Likewise.
 
