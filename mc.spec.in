@@ -59,7 +59,7 @@ echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
-cp -f $RPM_BUILD_ROOT/%{_datadir}/mc/bin/mc.{csh,sh} \
+cp -f $RPM_BUILD_ROOT/%{_datadir}/mc/bin/mc.*sh \
 	$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
 
@@ -100,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/mc/syntax
 
 %changelog
+* Thu Dec 21 2006 Pavel Roskin <proski@gnu.org>
+- Don't rely on brace expansion, it may be disabled
+
 * Mon Jan 30 2006 Pavel Roskin <proski@gnu.org>
 - Avoid using %{_prefix} where more specialized macros are available.
 
