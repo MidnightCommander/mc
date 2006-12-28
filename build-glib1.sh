@@ -55,14 +55,17 @@ if test -f glist.c; then : ; else
   exit 1
 fi
 
+cp ../config/config.guess .
+cp ../config/config.sub .
+
 rm -rf "$GLIB_INSTDIR"
-./configure --disable-shared --with-glib12 --prefix="$GLIB_INSTDIR" || exit 1
+./configure --disable-shared --prefix="$GLIB_INSTDIR" || exit 1
 make all || exit 1
 make install || exit 1
 
 cd "$MC_TOPDIR"
 ./configure GLIB_CONFIG="$GLIB_INSTDIR/bin/glib-config" \
-	    PKG_CONFIG=/bin/false "$@" || exit 1
+	    PKG_CONFIG=/bin/false --with-glib12 "$@" || exit 1
 make clean || exit 1
 make || exit 1
 

@@ -26,19 +26,19 @@
 
 : ${MC_TOPDIR=`pwd`}
 : ${TMP_INSTDIR=$MC_TOPDIR/tmp-inst}
-: ${GLIB_VERSION=2.2.3}
-: ${PKGC_VERSION=0.15.0}
-: ${GETTEXT_VERSION=0.11.5}
+: ${GLIB_VERSION=2.12.6}
+: ${PKGC_VERSION=0.21}
+: ${GETTEXT_VERSION=0.16.1}
 
 GLIB_DIR="glib-$GLIB_VERSION"
 GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
-GLIB_URL="ftp://ftp.gtk.org/pub/gtk/v2.2/$GLIB_TARBALL"
+GLIB_URL="ftp://ftp.gtk.org/pub/glib/2.12/$GLIB_TARBALL"
 
-PKGC_DIR="pkgconfig-$PKGC_VERSION"
-PKGC_TARBALL="pkgconfig-$PKGC_VERSION.tar.gz"
-PKGC_URL="http://www.freedesktop.org/software/pkgconfig/releases/$PKGC_TARBALL"
+PKGC_DIR="pkg-config-$PKGC_VERSION"
+PKGC_TARBALL="pkg-config-$PKGC_VERSION.tar.gz"
+PKGC_URL="http://pkgconfig.freedesktop.org/releases/$PKGC_TARBALL"
 
-GETTEXT_DIR="gettext-$GETTEXT_VERSION"
+GETTEXT_DIR="gettext-$GETTEXT_VERSION/gettext-runtime"
 GETTEXT_TARBALL="gettext-$GETTEXT_VERSION.tar.gz"
 GETTEXT_URL="ftp://ftp.gnu.org/gnu/gettext/$GETTEXT_TARBALL"
 

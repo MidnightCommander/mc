@@ -1,3 +1,11 @@
+2006-12-28  Pavel Roskin  <proski@gnu.org>
+
+	* build-glib1.sh: Fix misplaced --with-glib12.  Copy
+	config.guess and config.sub from mc to glib sources - they are
+	too old in glib.
+	* build-glib2.sh: Update to the latest versions of glib, gettext
+	and pkg-config.
+
 2006-11-27  Leonard den Ottolander  <leonard den ottolander nl>
 
 	* NEWS: Bash < 2.05b (3-digit octals in echo_e_cmd) no longer
