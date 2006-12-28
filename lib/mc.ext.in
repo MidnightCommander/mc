@@ -347,7 +347,7 @@ include/image
 ### Sound files ###
 
 regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU]|[sS][mM][pP]|[aA][iI][fF][fF]|[sS][nN][dD])$
-       Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms -e %f 1>/dev/null 2>&1 &); fi
+       Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms %f >/dev/null 2>&1 &); fi
 
 regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|[uU][lL][tT]|[fF][aA][rR])$
        Open=mikmod %f
@@ -357,11 +357,11 @@ regex/\.([wW][aA][wW]22)$
        Open=vplay -s 22 %f
 
 regex/\.([mM][pP]3)$
-	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f &); fi
+	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
 regex/\.([oO][gG][gG])$
-	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f &); fi
+	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} ogginfo %s
 
 regex/\.([mM][iI][dD][iI]?|[rR][mM][iI][dD]?)$
@@ -375,7 +375,7 @@ regex/\.([wW][mM][aA])$
 ### Play lists ###
 
 regex/\.([mM]3[uU]|[pP][lL][sS])$
-	Open=if [ -z "$DISPLAY" ]; then mplayer -vo null -playlist %f; else (xmms -p %f &); fi
+	Open=if [ -z "$DISPLAY" ]; then mplayer -vo null -playlist %f; else (xmms -p %f >/dev/null 2>&1 &); fi
 
 
 ### Video ###

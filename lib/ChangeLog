@@ -1,3 +1,11 @@
+2006-12-27  Pavel Roskin  <proski@gnu.org>
+
+	* mc.ext.in: Call xmms consistently.  Never preserve the
+	existing queue (it was done for wav, but not for mp3 files).
+	Preserving the queue is not a good idea if mc is used to move
+	the files around.  Always redirect stdout and stderr to
+	/dev/null.
+
 2006-06-22  Gabor Kiss  <kissg@cdata.hu>
 
 	* mc.ext.in: ipkg package manager uses gzipped tars (.ipk).
