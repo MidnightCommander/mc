@@ -1,7 +1,7 @@
-#serial 16
+#serial 18
 # Obtaining file system usage information.
 
-# Copyright (C) 1997, 1998, 2000, 2001, 2003, 2004, 2005 Free Software
+# Copyright (C) 1997, 1998, 2000, 2001, 2003, 2004, 2005, 2006 Free Software
 # Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
@@ -74,11 +74,12 @@ if test $ac_fsusage_space = no; then
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/mount.h>
+  int
   main ()
   {
     struct statfs fsd;
     fsd.f_fsize = 0;
-    exit (statfs (".", &fsd, sizeof (struct statfs)));
+    return statfs (".", &fsd, sizeof (struct statfs)) != 0;
   }],
   fu_cv_sys_stat_statfs3_osf1=yes,
   fu_cv_sys_stat_statfs3_osf1=no,
@@ -106,11 +107,12 @@ member (AIX, 4.3BSD)])
 #ifdef HAVE_SYS_VFS_H
 #include <sys/vfs.h>
 #endif
+  int
   main ()
   {
   struct statfs fsd;
   fsd.f_bsize = 0;
-  exit (statfs (".", &fsd));
+  return statfs (".", &fsd) != 0;
   }],
   fu_cv_sys_stat_statfs2_bsize=yes,
   fu_cv_sys_stat_statfs2_bsize=no,
@@ -130,10 +132,11 @@ if test $ac_fsusage_space = no; then
   AC_CACHE_VAL(fu_cv_sys_stat_statfs4,
   [AC_TRY_RUN([#include <sys/types.h>
 #include <sys/statfs.h>
+  int
   main ()
   {
   struct statfs fsd;
-  exit (statfs (".", &fsd, sizeof fsd, 0));
+  return statfs (".", &fsd, sizeof fsd, 0) != 0;
   }],
     fu_cv_sys_stat_statfs4=yes,
     fu_cv_sys_stat_statfs4=no,
@@ -158,11 +161,12 @@ member (4.4BSD and NetBSD)])
 #ifdef HAVE_SYS_MOUNT_H
 #include <sys/mount.h>
 #endif
+  int
   main ()
   {
   struct statfs fsd;
   fsd.f_fsize = 0;
-  exit (statfs (".", &fsd));
+  return statfs (".", &fsd) != 0;
   }],
   fu_cv_sys_stat_statfs2_fsize=yes,
   fu_cv_sys_stat_statfs2_fsize=no,
@@ -190,12 +194,13 @@ if test $ac_fsusage_space = no; then
 #ifdef HAVE_SYS_FS_TYPES_H
 #include <sys/fs_types.h>
 #endif
+  int
   main ()
   {
   struct fs_data fsd;
   /* Ultrix's statfs returns 1 for success,
      0 for not mounted, -1 for failure.  */
-  exit (statfs (".", &fsd) != 1);
+  return statfs (".", &fsd) != 1;
   }],
   fu_cv_sys_stat_fs_data=yes,
   fu_cv_sys_stat_fs_data=no,
