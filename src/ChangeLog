@@ -1,3 +1,13 @@
+2006-12-30  Grigory Trenin  <gtrenin@gmail.com>
+
+	* help.c (startpoint): Remove global variable and all references
+	to it.
+	(select_prev_link): Remove the first argument.
+	Keep searching until a link is found or end of node delimiter is
+	reached.
+	(help_handle_key): Reflect the changes above.
+	Remove an unneeded check.
+
 2006-12-30  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* view.c (view_file_load_data): Do not to attempt to  seek

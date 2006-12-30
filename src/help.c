@@ -72,7 +72,7 @@ static int  history_ptr;	/* For the history queue */
 static const char *main_node;	/* The main node */
 static const char *last_shown = NULL;	/* Last byte shown in a screen */
 static int end_of_node = 0;	/* Flag: the last character of the node shown? */
-static const char *currentpoint, *startpoint;
+static const char *currentpoint;
 static const char *selected_item;
 
 /* The widget variables */
@@ -305,19 +305,12 @@ static const char *select_next_link (const char *current_link)
     return p - 1;
 }
 
-static const char *select_prev_link (const char *start, const char *current_link)
+static const char *select_prev_link (const char *current_link)
 {
-    const char *p;
-
     if (!current_link)
 	return 0;
-    
-    p = current_link - 1;
-    if (p <= start)
-	return 0;
-    
-    p = search_char_node (p, CHAR_LINK_START, -1);
-    return p;
+
+    return search_char_node (current_link - 1, CHAR_LINK_START, -1);
 }
 
 static void start_link_area (int x, int y, const char *link_name)
@@ -489,7 +482,7 @@ help_event (Gpm_Event *event, void *vp)
     event->y -= 2;
 
     if (event->buttons & GPM_B_RIGHT){
-	currentpoint = startpoint = history [history_ptr].page;
+	currentpoint = history [history_ptr].page;
 	selected_item = history [history_ptr].link;
 	history_ptr--;
 	if (history_ptr < 0)
@@ -527,7 +520,7 @@ help_event (Gpm_Event *event, void *vp)
 	history_ptr = (history_ptr+1) % HISTORY_SIZE;
 	history [history_ptr].page = currentpoint;
 	history [history_ptr].link = current_area->link_name;
-	currentpoint = startpoint = help_follow_link (currentpoint, current_area->link_name);
+	currentpoint = help_follow_link (currentpoint, current_area->link_name);
 	selected_item = NULL;
     } else{
 	if (event->y < 0)
@@ -561,7 +554,7 @@ help_help_cmd (void *vp)
     if (p == NULL)
 	return;
 
-    currentpoint = startpoint = p + 1;
+    currentpoint = p + 1;
     selected_item = NULL;
     help_callback (h, DLG_DRAW, 0);
 }
@@ -582,7 +575,7 @@ help_index_cmd (void *vp)
     history[history_ptr].page = currentpoint;
     history[history_ptr].link = selected_item;
 
-    currentpoint = startpoint = new_item + 1;
+    currentpoint = new_item + 1;
     selected_item = NULL;
     help_callback (h, DLG_DRAW, 0);
 }
@@ -595,7 +588,7 @@ static void help_quit_cmd (void *vp)
 static void prev_node_cmd (void *vp)
 {
     Dlg_head *h = vp;
-    currentpoint = startpoint = history [history_ptr].page;
+    currentpoint = history [history_ptr].page;
     selected_item = history [history_ptr].link;
     history_ptr--;
     if (history_ptr < 0)
@@ -672,14 +665,14 @@ help_handle_key (struct Dlg_head *h, int c)
 	    if (history_ptr < 0)
 		history_ptr = HISTORY_SIZE-1;
 	    
-	    currentpoint = startpoint = history [history_ptr].page;
+	    currentpoint = history [history_ptr].page;
 	    selected_item   = history [history_ptr].link;
 #endif
 	} else {
 	    history_ptr = (history_ptr+1) % HISTORY_SIZE;
 	    history [history_ptr].page = currentpoint;
 	    history [history_ptr].link = selected_item;
-	    currentpoint = startpoint = help_follow_link (currentpoint, selected_item) + 1;
+	    currentpoint = help_follow_link (currentpoint, selected_item) + 1;
 	}
 	selected_item = NULL;
 	break;
@@ -704,9 +697,9 @@ help_handle_key (struct Dlg_head *h, int c)
     case KEY_UP:
     case ALT ('\t'):
 	/* select previous link */
-	new_item = select_prev_link (startpoint, selected_item);
+	new_item = select_prev_link (selected_item);
 	selected_item = new_item;
-	if (selected_item < currentpoint || selected_item >= last_shown){
+	if (selected_item == NULL || selected_item < currentpoint) {
 	    if (c == KEY_UP)
 		move_backward (1);
 	    else{
@@ -835,7 +828,7 @@ interactive_display (const char *filename, const char *node)
 		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
-    currentpoint = startpoint = main_node + 1;
+    currentpoint = main_node + 1;
 
     for (history_ptr = HISTORY_SIZE; history_ptr;) {
 	history_ptr--;
