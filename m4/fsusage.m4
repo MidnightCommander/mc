@@ -1,4 +1,4 @@
-#serial 18
+#serial 22
 # Obtaining file system usage information.
 
 # Copyright (C) 1997, 1998, 2000, 2001, 2003, 2004, 2005, 2006 Free Software
@@ -37,7 +37,7 @@ AC_DEFUN([gl_FSUSAGE],
 AC_DEFUN([gl_FILE_SYSTEM_USAGE],
 [
 
-echo "checking how to get file system space usage..."
+AC_MSG_NOTICE([checking how to get file system space usage])
 ac_fsusage_space=no
 
 # Perform only the link test since it seems there are no variants of the
@@ -50,10 +50,12 @@ if test $ac_fsusage_space = no; then
   # SVR4
   AC_CACHE_CHECK([for statvfs function (SVR4)], fu_cv_sys_stat_statvfs,
 		 [AC_TRY_LINK([#include <sys/types.h>
-#ifdef __GLIBC__
+#if defined __GLIBC__ && !defined __BEOS__
 Do not use statvfs on systems with GNU libc, because that function stats
 all preceding entries in /proc/mounts, and that makes df hang if even
 one of the corresponding file systems is hard-mounted, but not available.
+statvfs in GNU libc on BeOS operates differently: it only makes a system
+call.
 #endif
 #include <sys/statvfs.h>],
 			      [struct statvfs fsd; statvfs (0, &fsd);],
@@ -242,7 +244,8 @@ choke -- this is a workaround for a Sun-specific problem
 #endif
 #include <sys/types.h>
 #include <sys/vfs.h>]],
-    [[struct statfs t; long c = *(t.f_spare);]])],
+    [[struct statfs t; long c = *(t.f_spare);
+      if (c) return 0;]])],
     [fu_cv_sys_truncating_statfs=yes],
     [fu_cv_sys_truncating_statfs=no])])
   if test $fu_cv_sys_truncating_statfs = yes; then
@@ -260,6 +263,6 @@ choke -- this is a workaround for a Sun-specific problem
 AC_DEFUN([gl_PREREQ_FSUSAGE_EXTRA],
 [
   AC_REQUIRE([gl_AC_TYPE_UINTMAX_T])
-  AC_CHECK_HEADERS(dustat.h sys/fs/s5param.h sys/filsys.h sys/statfs.h sys/statvfs.h)
+  AC_CHECK_HEADERS(dustat.h sys/fs/s5param.h sys/filsys.h sys/statfs.h)
   gl_STATFS_TRUNCATES
 ])
