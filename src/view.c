@@ -540,6 +540,9 @@ view_file_load_data (WView *view, offset_type byte_index)
     if (already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
 	return;
 
+    if (byte_index >= view->ds_file_filesize)
+	return;
+
     blockoffset = offset_rounddown (byte_index, view->ds_file_datasize);
     if (mc_lseek (view->ds_file_fd, blockoffset, SEEK_SET) == -1)
 	goto error;
@@ -2757,6 +2760,8 @@ view_moveto_addr_cmd (WView *view)
 	    addr = strtoul (line, &error, 0);
 	    if ((*error == '\0') && get_byte (view, addr) != -1) {
 		view_moveto_offset (view, addr);
+	    } else {
+		message (D_ERROR, _("Warning"), _(" Invalid address "));
 	    }
 	}
 	g_free (line);
