@@ -1,3 +1,8 @@
+2007-01-02  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* utilunix.c (mc_tmpdir): Call mc_mkstemps() with an absolute
+	path to prevent stack overflows due to circular dependecy.
+
 2006-12-30  Grigory Trenin  <gtrenin@gmail.com>
 
 	* help.c (startpoint): Remove global variable and all references

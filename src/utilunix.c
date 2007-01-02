@@ -280,19 +280,18 @@ mc_tmpdir (void)
 	}
     }
 
-    if (!error) {
-	tmpdir = buffer;
-    } else {
+    if (error != NULL) {
 	int test_fd;
-	char *test_fn;
+	char *test_fn, *fallback_prefix;
 	int fallback_ok = 0;
 
 	if (*error)
 	    fprintf (stderr, error, buffer);
 
 	/* Test if sys_tmp is suitable for temporary files */
-	tmpdir = sys_tmp;
-	test_fd = mc_mkstemps (&test_fn, "mctest", NULL);
+	fallback_prefix = g_strdup_printf ("%s/mctest", sys_tmp);
+	test_fd = mc_mkstemps (&test_fn, fallback_prefix, NULL);
+	g_free (fallback_prefix);
 	if (test_fd != -1) {
 	    close (test_fd);
 	    test_fd = open (test_fn, O_RDONLY);
@@ -306,15 +305,18 @@ mc_tmpdir (void)
 	if (fallback_ok) {
 	    fprintf (stderr, _("Temporary files will be created in %s\n"),
 		     sys_tmp);
+	    g_snprintf (buffer, sizeof (buffer), "%s", sys_tmp);
 	    error = NULL;
 	} else {
 	    fprintf (stderr, _("Temporary files will not be created\n"));
-	    tmpdir = "/dev/null/";
+	    g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
 	}
 
 	fprintf (stderr, "%s\n", _("Press any key to continue..."));
 	getc (stdin);
     }
+
+    tmpdir = buffer;
 
     if (!error)
 	mc_setenv ("MC_TMPDIR", tmpdir, 1);
