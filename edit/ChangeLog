@@ -1,3 +1,9 @@
+2007-01-04  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* edit.c (edit_execute_cmd): Update the bracket pair highlighter
+	state after processing CK_Find, CK_Find_Again, CK_Replace,
+	CK_Replace_Again, CK_Complete_Word.
+
 2006-12-10  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* edit.h (edit_move_to_prev_col): Declare the function to have

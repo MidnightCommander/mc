@@ -2600,7 +2600,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Replace_Again:
     case CK_Complete_Word:
 	edit->prev_col = edit_get_col (edit);
-	return;
+	break;
     case CK_Up:
     case CK_Up_Highlight:
     case CK_Down:
@@ -2623,8 +2623,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Scroll_Down_Highlight:
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
-	edit_find_bracket (edit);
-	return;
+	break;
     default:
 	edit->found_len = 0;
 	edit->prev_col = edit_get_col (edit);
