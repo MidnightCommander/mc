@@ -145,8 +145,14 @@ sort_time (const file_entry *a, const file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
-	return (a->st.st_mtime - b->st.st_mtime) * reverse;
+    if (ad == bd || mix_all_files) {
+	int result = a->st.st_mtime < b->st.st_mtime ? -1 :
+		     a->st.st_mtime > b->st.st_mtime;
+	if (result != 0)
+	    return result * reverse;
+	else
+	    return sort_name (a, b);
+    }
     else
 	return bd-ad;
 }
@@ -157,8 +163,14 @@ sort_ctime (const file_entry *a, const file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
-	return (a->st.st_ctime - b->st.st_ctime) * reverse;
+    if (ad == bd || mix_all_files) {
+	int result = a->st.st_ctime < b->st.st_ctime ? -1 :
+		     a->st.st_ctime > b->st.st_ctime;
+	if (result != 0)
+	    return result * reverse;
+	else
+	    return sort_name (a, b);
+    }
     else
 	return bd-ad;
 }
@@ -169,8 +181,14 @@ sort_atime (const file_entry *a, const file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
-	return (a->st.st_atime - b->st.st_atime) * reverse;
+    if (ad == bd || mix_all_files) {
+	int result = a->st.st_atime < b->st.st_atime ? -1 :
+		     a->st.st_atime > b->st.st_atime;
+	if (result != 0)
+	    return result * reverse;
+	else
+	    return sort_name (a, b);
+    }
     else
 	return bd-ad;
 }
@@ -192,11 +210,17 @@ sort_size (const file_entry *a, const file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
+    int result = 0;
 
     if (ad != bd && !mix_all_files)
 	return bd - ad;
 
-    return (2 * (b->st.st_size > a->st.st_size) - 1) * reverse;
+    result = a->st.st_size < b->st.st_size ? -1 :
+	     a->st.st_size > b->st.st_size;
+    if (result != 0)
+	return result * reverse;
+    else
+	return sort_name (a, b);
 }
 
 

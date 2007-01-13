@@ -1,5 +1,13 @@
 2007-01-14  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* dir.c (sort_time): Default to sort_name() if the
+	arguments are equal.
+	(sort_ctime): Likewise.
+	(sort_atime): Likewise.
+	(sort_size): Likewise.
+
+2007-01-14  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* dir.h (sort_type): Remove function declaration.
 	(sort_links): Likewise.
 	(sort_nuid): Likewise.
