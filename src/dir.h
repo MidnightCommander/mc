@@ -50,18 +50,12 @@ int sort_atime (const file_entry *a, const file_entry *b);
 int sort_ctime (const file_entry *a, const file_entry *b);
 int sort_size  (const file_entry *a, const file_entry *b);
 int sort_inode (const file_entry *a, const file_entry *b);
-int sort_type  (const file_entry *a, const file_entry *b);
-int sort_links (const file_entry *a, const file_entry *b);
-int sort_nuid  (const file_entry *a, const file_entry *b);
-int sort_ngid  (const file_entry *a, const file_entry *b);
-int sort_owner (const file_entry *a, const file_entry *b);
-int sort_group (const file_entry *a, const file_entry *b);
 
 /* SORT_TYPES is used to build the nice dialog box entries */
 #define SORT_TYPES 8
 
 /* This is the number of sort types not available in that dialog box */
-#define SORT_TYPES_EXTRA 6
+#define SORT_TYPES_EXTRA 0
 
 /* The total nnumber of sort types */
 #define SORT_TYPES_TOTAL (SORT_TYPES + SORT_TYPES_EXTRA)

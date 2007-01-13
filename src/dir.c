@@ -56,14 +56,6 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("C&Hange time"), sort_ctime },
     { N_("&Size"),        sort_size },
     { N_("&Inode"),       sort_inode },
-
-    /* New sort orders */
-    { N_("&Type"),        sort_type },
-    { N_("&Links"),       sort_links },
-    { N_("N&GID"),        sort_ngid },
-    { N_("N&UID"),        sort_nuid },
-    { N_("&Owner"),       sort_owner },
-    { N_("&Group"),       sort_group }
 };
 
 #ifdef HAVE_STRCOLL
@@ -148,28 +140,6 @@ sort_ext (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_owner (const file_entry *a, const file_entry *b)
-{
-    int ad = MY_ISDIR (a);
-    int bd = MY_ISDIR (b);
-
-    if (ad == bd || mix_all_files)
-	return string_sortcomp (get_owner (a->st.st_uid), get_owner (a->st.st_uid)) * reverse;
-    return bd-ad;
-}
-
-int
-sort_group (const file_entry *a, const file_entry *b)
-{
-    int ad = MY_ISDIR (a);
-    int bd = MY_ISDIR (b);
-
-    if (ad == bd || mix_all_files)
-	return string_sortcomp (get_group (a->st.st_gid), get_group (a->st.st_gid)) * reverse;
-    return bd-ad;
-}
-
-int
 sort_time (const file_entry *a, const file_entry *b)
 {
     int ad = MY_ISDIR (a);
@@ -227,81 +197,6 @@ sort_size (const file_entry *a, const file_entry *b)
 	return bd - ad;
 
     return (2 * (b->st.st_size > a->st.st_size) - 1) * reverse;
-}
-
-int
-sort_links (const file_entry *a, const file_entry *b)
-{
-    int ad = MY_ISDIR (a);
-    int bd = MY_ISDIR (b);
-
-    if (ad == bd || mix_all_files)
-	return (b->st.st_nlink - a->st.st_nlink) * reverse;
-    else
-	return bd-ad;
-}
-
-int
-sort_ngid (const file_entry *a, const file_entry *b)
-{
-    int ad = MY_ISDIR (a);
-    int bd = MY_ISDIR (b);
-
-    if (ad == bd || mix_all_files)
-	return (b->st.st_gid - a->st.st_gid) * reverse;
-    else
-	return bd-ad;
-}
-
-int
-sort_nuid (const file_entry *a, const file_entry *b)
-{
-    int ad = MY_ISDIR (a);
-    int bd = MY_ISDIR (b);
-
-    if (ad == bd || mix_all_files)
-	return (b->st.st_uid - a->st.st_uid) * reverse;
-    else
-	return bd-ad;
-}
-
-inline static int
-file_type_to_num (const file_entry *fe)
-{
-    const struct stat *s = &fe->st;
-
-    if (S_ISDIR (s->st_mode))
-	return 0;
-    if (S_ISLNK (s->st_mode)){
-	if (fe->f.link_to_dir)
-	    return 1;
-	if (fe->f.stale_link)
-	    return 2;
-	else
-	    return 3;
-    }
-    if (S_ISSOCK (s->st_mode))
-	return 4;
-    if (S_ISCHR (s->st_mode))
-	return 5;
-    if (S_ISBLK (s->st_mode))
-	return 6;
-    if (S_ISFIFO (s->st_mode))
-	return 7;
-    if (S_ISNAM (s->st_mode)) /* Special named files will be shown as block devices */
-	return 6;
-    if (is_exe (s->st_mode))
-	return 8;
-    return 9;
-}
-
-int
-sort_type (const file_entry *a, const file_entry *b)
-{
-    int aa  = file_type_to_num (a);
-    int bb  = file_type_to_num (b);
-
-    return bb-aa;
 }
 
 

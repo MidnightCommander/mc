@@ -427,23 +427,23 @@ static struct {
     const char *title;
     int  use_in_gui;
     const char *(*string_fn)(file_entry *, int);
-    sortfn *sort_routine;
+    sortfn *sort_routine; /* This field is currently unused. */
 } formats [] = {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
 { "size",  7,  0, J_RIGHT,	N_("Size"),	1, string_file_size,	   (sortfn *) sort_size },
 { "bsize", 7,  0, J_RIGHT,	N_("Size"),	1, string_file_size_brief, (sortfn *) sort_size },
-{ "type",  GT, 0, J_LEFT,	"",		2, string_file_type,	   (sortfn *) sort_type },
+{ "type",  GT, 0, J_LEFT,	"",		2, string_file_type,	   NULL },
 { "mtime", 12, 0, J_RIGHT,	N_("MTime"),	1, string_file_mtime,	   (sortfn *) sort_time },
 { "atime", 12, 0, J_RIGHT,	N_("ATime"),	1, string_file_atime,	   (sortfn *) sort_atime },
 { "ctime", 12, 0, J_RIGHT,	N_("CTime"),	1, string_file_ctime,	   (sortfn *) sort_ctime },
 { "perm",  10, 0, J_LEFT,	N_("Permission"),1,string_file_permission, NULL },
 { "mode",  6,  0, J_RIGHT,	N_("Perm"),	1, string_file_perm_octal, NULL },
-{ "nlink", 2,  0, J_RIGHT,	N_("Nl"),	1, string_file_nlinks,	   (sortfn *) sort_links },
+{ "nlink", 2,  0, J_RIGHT,	N_("Nl"),	1, string_file_nlinks,	   NULL },
 { "inode", 5,  0, J_RIGHT,	N_("Inode"),	1, string_inode,	   (sortfn *) sort_inode },
-{ "nuid",  5,  0, J_RIGHT,	N_("UID"),	1, string_file_nuid,	   (sortfn *) sort_nuid },
-{ "ngid",  5,  0, J_RIGHT,	N_("GID"),	1, string_file_ngid,	   (sortfn *) sort_ngid },
-{ "owner", 8,  0, J_LEFT_FIT,	N_("Owner"),	1, string_file_owner,	   (sortfn *) sort_owner },
-{ "group", 8,  0, J_LEFT_FIT,	N_("Group"),	1, string_file_group,	   (sortfn *) sort_group },
+{ "nuid",  5,  0, J_RIGHT,	N_("UID"),	1, string_file_nuid,	   NULL },
+{ "ngid",  5,  0, J_RIGHT,	N_("GID"),	1, string_file_ngid,	   NULL },
+{ "owner", 8,  0, J_LEFT_FIT,	N_("Owner"),	1, string_file_owner,	   NULL },
+{ "group", 8,  0, J_LEFT_FIT,	N_("Group"),	1, string_file_group,	   NULL },
 { "mark",  1,  0, J_RIGHT,	" ",		1, string_marked,	   NULL },
 { "|",     1,  0, J_RIGHT,	" ",		0, NULL,		   NULL },
 { "space", 1,  0, J_RIGHT,	" ",		0, string_space,	   NULL },

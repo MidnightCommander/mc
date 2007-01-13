@@ -1,3 +1,21 @@
+2007-01-14  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* dir.h (sort_type): Remove function declaration.
+	(sort_links): Likewise.
+	(sort_nuid): Likewise.
+	(sort_ngid): Likewise.
+	(sort_owner): Likewise.
+	(sort_group): Likewise.
+	* dir.c (sort_type): Remove function definition.
+	(sort_links): Likewise.
+	(sort_nuid): Likewise.
+	(sort_ngid): Likewise.
+	(sort_owner): Likewise.
+	(sort_group): Likewise.
+	(sort_orders): Reflect the changes above.
+	* screen.c (formats): Remove references to sort_type(), sort_links(),
+	sort_nuid(), sort_ngid(), sort_owner() and sort_group().
+
 2007-01-02  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* utilunix.c (mc_tmpdir): Call mc_mkstemps() with an absolute
