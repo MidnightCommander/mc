@@ -1063,8 +1063,9 @@ The
 .\"LINK2"
 Find file
 .\"Find File"
-command allows you to search for a specific file. The "Swap panels"
-command swaps the contents of the two directory panels.
+command allows you to search for a specific file.
+.PP
+The "Swap panels" command swaps the contents of the two directory panels.
 .PP
 The "Panels on/off" command shows the output of the last shell command.
 This works only on xterm and on Linux and FreeBSD console.

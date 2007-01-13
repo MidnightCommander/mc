@@ -1,3 +1,8 @@
+2007-01-13  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* doc/mc.1.in: Place the description of the "Swap panels" on
+	a paragraph of its own.
+
 2006-12-30  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* m4/ls-mntd-fs.m4: Update to serial #26.
