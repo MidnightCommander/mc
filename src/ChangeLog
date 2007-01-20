@@ -1,3 +1,10 @@
+2007-01-20  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* help.c: Document the newline following the node header.
+	Teach all code dealing with nodes that the actual node data
+	starts right after the first newline following the node
+	header. Thanks to Grigory Trenin <gtrenin@gmail.com> .
+
 2007-01-14  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* dir.c (sort_time): Default to sort_name() if the

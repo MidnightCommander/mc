@@ -21,7 +21,10 @@
    Implements the hypertext file viewer.
    The hypertext file is a file that may have one or more nodes.  Each
    node ends with a ^D character and starts with a bracket, then the
-   name of the node and then a closing bracket.
+   name of the node and then a closing bracket. Right after the closing
+   bracket a newline is placed. This newline is not to be displayed by
+   the help viewer and must be skipped - its sole purpose is to faciliate
+   the work of the people managing the help file template (xnc.hlp) .
 
    Links in the hypertext file are specified like this: the text that
    will be highlighted should have a leading ^A, then it comes the
@@ -223,7 +226,7 @@ static const char *move_backward2 (const char *c, int lines)
 	    /* We reached the beginning of the node */
 	    /* Skip the node headers */
 	    while (*p != ']') p++;
-	    return currentpoint = p + 2;
+	    return currentpoint = p + 2; /* Skip the newline following the start of the node */
 	}
 	if (*(p - 1) == '\n')
 	    line++;
@@ -251,7 +254,7 @@ static void move_to_top (void)
 	currentpoint--;
     while (*currentpoint != ']')
 	currentpoint++;
-    currentpoint = currentpoint + 1;
+    currentpoint = currentpoint + 2; /* Skip the newline following the start of the node */
     selected_item = NULL;
 }
 
@@ -281,8 +284,10 @@ static const char *help_follow_link (const char *start, const char *selected_ite
 	link_name [i-1] = ']';
 	link_name [i] = 0;
 	p = search_string (data, link_name);
-	if (p)
+	if (p) {
+	    p += 1; /* Skip the newline following the start of the node */
 	    return p;
+	}
     }
 
     /* Create a replacement page with the error message */
@@ -554,7 +559,7 @@ help_help_cmd (void *vp)
     if (p == NULL)
 	return;
 
-    currentpoint = p + 1;
+    currentpoint = p + 1; /* Skip the newline following the start of the node */
     selected_item = NULL;
     help_callback (h, DLG_DRAW, 0);
 }
@@ -575,7 +580,7 @@ help_index_cmd (void *vp)
     history[history_ptr].page = currentpoint;
     history[history_ptr].link = selected_item;
 
-    currentpoint = new_item + 1;
+    currentpoint = new_item + 1; /* Skip the newline following the start of the node */
     selected_item = NULL;
     help_callback (h, DLG_DRAW, 0);
 }
@@ -672,7 +677,7 @@ help_handle_key (struct Dlg_head *h, int c)
 	    history_ptr = (history_ptr+1) % HISTORY_SIZE;
 	    history [history_ptr].page = currentpoint;
 	    history [history_ptr].link = selected_item;
-	    currentpoint = help_follow_link (currentpoint, selected_item) + 1;
+	    currentpoint = help_follow_link (currentpoint, selected_item);
 	}
 	selected_item = NULL;
 	break;
@@ -828,7 +833,7 @@ interactive_display (const char *filename, const char *node)
 		    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
-    currentpoint = main_node + 1;
+    currentpoint = main_node + 1; /* Skip the newline following the start of the node */
 
     for (history_ptr = HISTORY_SIZE; history_ptr;) {
 	history_ptr--;
