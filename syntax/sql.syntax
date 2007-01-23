@@ -43,6 +43,7 @@ context default
     keyword whole COLLATION yellow
     keyword whole COLUMN yellow
     keyword whole COMMIT yellow
+    keyword whole COMPILE yellow
     keyword whole CONNECT yellow
     keyword whole CONNECTION yellow
     keyword whole CONSTRAINT yellow
@@ -136,6 +137,8 @@ context default
     keyword whole LANGUAGE yellow
     keyword whole LAST yellow
     keyword whole LEADING yellow
+    keyword whole MERGE yellow
+    keyword whole MINUS yellow
     keyword whole LEFT yellow
     keyword whole LEVEL yellow
     keyword whole LIKE yellow
@@ -164,7 +167,9 @@ context default
     keyword whole NUMERIC yellow
     keyword whole OCTET_LENGTH yellow
     keyword whole OF yellow
+    keyword whole OFFLINE yellow
     keyword whole ON yellow
+    keyword whole ONLINE yellow
     keyword whole ONLY yellow
     keyword whole OPEN yellow
     keyword whole OPTION yellow
@@ -188,8 +193,10 @@ context default
     keyword whole Primary yellow
     keyword whole READ yellow
     keyword whole REAL yellow
+    keyword whole REBUILD yellow
     keyword whole REFERENCES yellow
     keyword whole RELATIVE yellow
+    keyword whole REPLACE yellow
     keyword whole RESTRICT yellow
     keyword whole REVOKE yellow
     keyword whole RIGHT yellow
@@ -214,6 +221,7 @@ context default
     keyword whole SQLWARNING yellow
     keyword whole SUBSTRING yellow
     keyword whole SYSTEM_USER yellow
+    keyword whole TRUNCATE yellow
     keyword whole TABLE yellow
     keyword whole TABLESPACE yellow
     keyword whole TEMPLATE yellow
@@ -252,6 +260,7 @@ context default
     keyword whole WHEN yellow
     keyword whole WHENEVER yellow
     keyword whole WHERE yellow
+    keyword whole WHILE yellow
     keyword whole WITH yellow
     keyword whole WORK yellow
     keyword whole WRITE yellow
@@ -299,6 +308,7 @@ context default
     keyword whole collation yellow
     keyword whole column yellow
     keyword whole commit yellow
+    keyword whole compile yellow
     keyword whole connect yellow
     keyword whole connection yellow
     keyword whole constraint yellow
@@ -404,7 +414,9 @@ context default
     keyword whole mediumblob yellow
     keyword whole mediumint yellow
     keyword whole mediumtext yellow
+    keyword whole merge yellow
     keyword whole minute yellow
+    keyword whole minus yellow
     keyword whole module yellow
     keyword whole month yellow
     keyword whole names yellow
@@ -420,7 +432,9 @@ context default
     keyword whole numeric yellow
     keyword whole octet_length yellow
     keyword whole of yellow
+    keyword whole offline yellow
     keyword whole on yellow
+    keyword whole online yellow
     keyword whole only yellow
     keyword whole open yellow
     keyword whole option yellow
@@ -444,8 +458,10 @@ context default
     keyword whole public yellow
     keyword whole read yellow
     keyword whole real yellow
+    keyword whole rebuild yellow
     keyword whole references yellow
     keyword whole relative yellow
+    keyword whole replace yellow
     keyword whole restrict yellow
     keyword whole revoke yellow
     keyword whole right yellow
@@ -477,6 +493,7 @@ context default
     keyword whole text yellow
     keyword whole then yellow
     keyword whole time yellow
+    keyword whole truncate yellow
     keyword whole timestamp yellow
     keyword whole timezone_hour yellow
     keyword whole timezone_minute yellow
@@ -508,6 +525,7 @@ context default
     keyword whole when yellow
     keyword whole whenever yellow
     keyword whole where yellow
+    keyword whole while yellow
     keyword whole with yellow
     keyword whole work yellow
     keyword whole write yellow

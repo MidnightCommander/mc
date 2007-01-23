@@ -1,3 +1,8 @@
+2007-01-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax/sql.syntax: Add compile, merge, minus, offline, online,
+	rebuild, replace, truncate and while keywords.
+
 2006-09-07  Jindrich Novy  <jnovy@redhat.com>
 
 	* spec.syntax: Highlight "Requires(phase):" correctly.
