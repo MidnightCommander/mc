@@ -1,3 +1,8 @@
+2007-02-02  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Make skip_detach_prompt unsigned.  Otherwise, it
+	cannot get value of 1.
+
 2007-01-04  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* edit.c (edit_execute_cmd): Update the bracket pair highlighter
@@ -13,7 +18,7 @@
 	(edit_find_bracket): Likewise.
 	* editwidget.c (edit_event): When moving around with the mouse
 	use edit_move_down(), edit_move_up() and edit_move_to_prev_col()
-	instead of move_cursor() to update the cursor position since 
+	instead of move_cursor() to update the cursor position since
 	the latter doesn't update some internal variables.
 	Use edit_find_bracket() to update the bracket pair highlighter
 	state.
@@ -75,10 +80,10 @@
 	value of edit_save_file().
 	(edit_save_cmd): Likewise.
 
-2006-03-17  Oswald Buddenhagen <ossi@kde.org>
+2006-03-17  Oswald Buddenhagen  <ossi@kde.org>
 
 	* editcmd.c (edit_save_as_cmd): If saving of the file fails
-	remove only the _save_ lock. 
+	remove only the _save_ lock.
 
 2006-03-15  Pavel Tsekov  <ptsekov@gmx.net>
 
@@ -127,7 +132,7 @@
 	columns	as created by Shift + F3 to be copied anywhere in
 	the editor area.
 
-2006-01-26  Oswald Buddenhagen <ossi@kde.org>
+2006-01-26  Oswald Buddenhagen  <ossi@kde.org>
 
 	* edit.c (edit_auto_indent): Remove redundant parameters.
 	Change the indentation strategy to copy whitespace
