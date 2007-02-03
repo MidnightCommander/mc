@@ -1,3 +1,7 @@
+2007-02-02  Pavel Roskin  <proski@gnu.org>
+
+	* mountlist.c: Fix misuse of HAVE_STRUCT_STATFS_F_FSTYPENAME.
+
 2007-01-20  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* help.c: Document the newline following the node header.
@@ -71,7 +75,7 @@
 
 	* view.c (regexp_search): Keep the search string in a global
 	variable so that it can be reused when viewing another file.
-	Do not use the same variable to hold the search string for 
+	Do not use the same variable to hold the search string for
 	both the "Search" and "Regexp Search" functions.
 	(view_normal_search_cmd): Likewise.
 
@@ -95,7 +99,7 @@
 2006-09-18  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* main.c (xtoolkit_panel_setup): Remove - it is a noop.
-	(setup_panels_and_run_mc): Eliminate references to 
+	(setup_panels_and_run_mc): Eliminate references to
 	`xtoolkit_panel_setup'.
 
 2006-09-18  Pavel Tsekov  <ptsekov@gmx.net>

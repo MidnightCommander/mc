@@ -173,7 +173,7 @@ static int xatoi (const char *cp)
 }
 #endif /* MOUNTED_GETMNTENT1 */
 
-#if ! HAVE_STRUCT_STATFS_F_FSTYPENAME
+#ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
 static char *fstype_to_string (short t)
 {
     switch (t) {
