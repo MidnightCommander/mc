@@ -246,7 +246,7 @@ mc_tmpdir (void)
 	return tmpdir;
 
     sys_tmp = getenv ("TMPDIR");
-    if (!sys_tmp) {
+    if (!sys_tmp || sys_tmp[0] != '/') {
 	sys_tmp = TMPDIR_DEFAULT;
     }
 
