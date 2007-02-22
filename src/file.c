@@ -790,7 +790,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 	}
 
-	if (!appending && ctx->preserve) {
+	if (!appending) {
 	    while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
 		temp_status = file_error (
 			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);

@@ -1,5 +1,11 @@
 2007-02-22  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* file.c (copy_file_file): chmod() the target file no matter whether
+	"preserve attributes" is checked or not, since the destination is
+	initially created with mode 0600.
+
+2007-02-22  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* utilunix.c (mc_tmpdir): Do not accept relative path in TMPDIR. Use
 	a hardcoded value instead.
 
