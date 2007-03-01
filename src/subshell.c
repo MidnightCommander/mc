@@ -91,8 +91,9 @@ FALSE;
 TRUE;
 #endif
 
-/* File descriptor of the pseudoterminal used by the subshell */
+/* File descriptors of the pseudoterminal used by the subshell */
 int subshell_pty = 0;
+static int subshell_pty_slave = -1;
 
 /* The key for switching back to MC from the subshell */
 static const char subshell_switch_key = XCTRL('o') & 255;
@@ -184,7 +185,6 @@ write_all (int fd, const void *buf, size_t count)
 static void
 init_subshell_child (const char *pty_name)
 {
-    int pty_slave;
     const char *init_file = NULL;
 #ifdef HAVE_GETSID
     pid_t mc_sid;
@@ -192,26 +192,12 @@ init_subshell_child (const char *pty_name)
 
     setsid ();			/* Get a fresh terminal session */
 
-    /* Open the slave side of the pty: again */
-    pty_slave = pty_open_slave (pty_name);
-
-    /* This must be done before closing the master side of the pty, */
-    /* or it will fail on certain idiotic systems, such as Solaris.     */
-
-    /* Close master side of pty.  This is important; apart from */
-    /* freeing up the descriptor for use in the subshell, it also       */
-    /* means that when MC exits, the subshell will get a SIGHUP and     */
-    /* exit too, because there will be no more descriptors pointing     */
-    /* at the master side of the pty and so it will disappear.  */
-
-    close (subshell_pty);
-
     /* Make sure that it has become our controlling terminal */
 
     /* Redundant on Linux and probably most systems, but just in case: */
 
 #ifdef TIOCSCTTY
-    ioctl (pty_slave, TIOCSCTTY, 0);
+    ioctl (subshell_pty_slave, TIOCSCTTY, 0);
 #endif
 
     /* Configure its terminal modes and window size */
@@ -220,7 +206,7 @@ init_subshell_child (const char *pty_name)
     /* TOSTOP, which keeps background processes from writing to the pty */
 
     shell_mode.c_lflag |= TOSTOP;	/* So background writers get SIGTTOU */
-    if (tcsetattr (pty_slave, TCSANOW, &shell_mode)) {
+    if (tcsetattr (subshell_pty_slave, TCSANOW, &shell_mode)) {
 	fprintf (stderr, "Cannot set pty terminal modes: %s\r\n",
 		 unix_error_string (errno));
 	_exit (FORK_FAILURE);
@@ -228,7 +214,7 @@ init_subshell_child (const char *pty_name)
 
     /* Set the pty's size (80x25 by default on Linux) according to the */
     /* size of the real terminal as calculated by ncurses, if possible */
-    resize_tty (pty_slave);
+    resize_tty (subshell_pty_slave);
 
     /* Set up the subshell's environment and init file name */
 
@@ -279,14 +265,20 @@ init_subshell_child (const char *pty_name)
     /* be connected to the real tty during the above error messages; */
     /* otherwise the user will never see them.                   */
 
-    dup2 (pty_slave, STDIN_FILENO);
-    dup2 (pty_slave, STDOUT_FILENO);
-    dup2 (pty_slave, STDERR_FILENO);
-
-    /* Execute the subshell at last */
+    dup2 (subshell_pty_slave, STDIN_FILENO);
+    dup2 (subshell_pty_slave, STDOUT_FILENO);
+    dup2 (subshell_pty_slave, STDERR_FILENO);
 
     close (subshell_pipe[READ]);
-    close (pty_slave);		/* These may be FD_CLOEXEC, but just in case... */
+    close (subshell_pty_slave);		/* These may be FD_CLOEXEC, but just in case... */
+    /* Close master side of pty.  This is important; apart from */
+    /* freeing up the descriptor for use in the subshell, it also       */
+    /* means that when MC exits, the subshell will get a SIGHUP and     */
+    /* exit too, because there will be no more descriptors pointing     */
+    /* at the master side of the pty and so it will disappear.  */
+    close (subshell_pty);
+
+    /* Execute the subshell at last */
 
     switch (subshell_type) {
     case BASH:
@@ -370,7 +362,6 @@ init_subshell (void)
     /* This must be remembered across calls to init_subshell() */
     static char pty_name[BUF_SMALL];
     char precmd[BUF_SMALL];
-    int pty_slave = -1;
 
 #ifdef HAVE_GETSID
     switch (check_sid ()) {
@@ -413,8 +404,8 @@ init_subshell (void)
 	    use_subshell = FALSE;
 	    return;
 	}
-	pty_slave = pty_open_slave (pty_name);
-	if (pty_slave == -1) {
+	subshell_pty_slave = pty_open_slave (pty_name);
+	if (subshell_pty_slave == -1) {
 	    fprintf (stderr, "Cannot open slave side of pty %s: %s\r\n",
 		     pty_name, unix_error_string (errno));
 	    use_subshell = FALSE;
@@ -471,11 +462,6 @@ init_subshell (void)
 
     if (subshell_pid == 0) {	/* We are in the child process */
 	init_subshell_child (pty_name);
-    }
-
-    /* pty_slave is only opened when called the first time */
-    if (pty_slave != -1) {
-	close (pty_slave);
     }
 
     /* Set up `precmd' or equivalent for reading the subshell's CWD */
@@ -1063,7 +1049,7 @@ static void synchronize (void)
 
     if (subshell_state != ACTIVE) {
 	/* Discard all remaining data from stdin to the subshell */
-	tcflush (subshell_pty, TCOFLUSH);
+	tcflush (subshell_pty_slave, TCIFLUSH);
     }
 
     subshell_stopped = FALSE;
