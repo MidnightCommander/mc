@@ -899,9 +899,6 @@ sigchld_handler (int sig)
 #endif				/* __linux__ */
 
     /* If we got here, some other child exited; ignore it */
-#ifdef __EMX__			/* Need to report */
-    pid = wait (&status);
-#endif
 }
 
 

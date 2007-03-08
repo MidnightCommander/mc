@@ -1,3 +1,7 @@
+2007-03-08  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* subshell.c (sigchld_handler) [__EMX__]: Remove unneeded code.
+
 2007-03-01  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* subshell.c (subshell_pty_slave): New global variable.
