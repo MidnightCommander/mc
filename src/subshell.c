@@ -687,30 +687,25 @@ exit_subshell (void)
  * executing any commands in the shell.  Escape all control characters.
  * Use following technique:
  *
- * for bash - echo with `-e', 3-digit octal numbers:
- *   cd "`echo -e '\ooo...\ooo'`"
+ * printf(1) with format string containing a single conversion specifier,
+ * "b", and an argument which contains a copy of the string passed to 
+ * subshell_name_quote() with all characters, except digits and letters,
+ * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
+ * numeric value of the character converted to octal number.
+ * 
+ *   cd "`printf "%b" 'ABC\0nnnDEF\0nnnXYZ'`"
  *
- * for zsh - echo with `-e', 4-digit octal numbers:
- *   cd "`echo '\oooo...\oooo'`"
- *
- * for tcsh - echo without `-e', 4-digit octal numbers:
- *   cd "`echo '\oooo...\oooo'`"
  */
 static char *
 subshell_name_quote (const char *s)
 {
     char *ret, *d;
-    const char echo_cmd[] = "\"`echo '";
-    const char echo_e_cmd[] = "\"`echo -e '";
-    const char common_end[] = "'`\"";
-    const char *cmd_start;
-    int len;
+    const char quote_cmd_start[] = "\"`printf \"%b\" '";
+    const char quote_cmd_end[] = "'`\"";
 
-    /*
-     * Factor 5 because we need \, 0 and 3 other digits per character
-     * in the worst case (tcsh and zsh).
-     */
-    d = ret = g_malloc (5 * strlen (s) + 16);
+    /* Factor 5 because we need \, 0 and 3 other digits per character. */
+    d = ret = g_malloc (1 + (5 * strlen (s)) + (sizeof(quote_cmd_start) - 1)
+				+ (sizeof(quote_cmd_end) - 1));
     if (!d)
 	return NULL;
 
@@ -720,46 +715,25 @@ subshell_name_quote (const char *s)
 	*d++ = '/';
     }
 
-    /* echo in tcsh doesn't understand the "-e" option */
-    if (subshell_type == TCSH)
-	cmd_start = echo_cmd;
-    else
-	cmd_start = echo_e_cmd;
-
     /* Copy the beginning of the command to the buffer */
-    len = strlen (cmd_start);
-    memcpy (d, cmd_start, len);
-    d += len;
+    strcpy (d, quote_cmd_start);
+    d += sizeof(quote_cmd_start) - 1;
 
     /*
-     * Print every character in octal format with the leading backslash.
-     * bash >= 3.2, tcsh and zsh require 4-digit octals, 2.05b <= bash < 3.2
-     * support 3-digit octals as well as 4-digit octals.
-     * For bash < 2.05b fix below to use 3-digit octals.
+     * Print every character except digits and letters as a backslash-escape
+     * sequence of the form \0nnn, where "nnn" is the numeric value of the
+     * character converted to octal number.
      */
-    if (subshell_type == BASH) {
-	for (; *s; s++) {
-	    /* Must quote numbers, so that they are not glued to octals
-	       for bash < 3.2 */
-	    if (isalpha ((unsigned char) *s)) {
-		*d++ = (unsigned char) *s;
-	    } else {
-		sprintf (d, "\\0%03o", (unsigned char) *s);
-		d += 5;
-	    }
-	}
-    } else {
-	for (; *s; s++) {
-	    if (isalnum ((unsigned char) *s)) {
-		*d++ = (unsigned char) *s;
-	    } else {
-		sprintf (d, "\\0%03o", (unsigned char) *s);
-		d += 5;
-	    }
+    for (; *s; s++) {
+	if (isalnum ((unsigned char) *s)) {
+	    *d++ = (unsigned char) *s;
+	} else {
+	    sprintf (d, "\\0%03o", (unsigned char) *s);
+	    d += 5;
 	}
     }
 
-    memcpy (d, common_end, sizeof (common_end));
+    strcpy (d, quote_cmd_end);
 
     return ret;
 }
