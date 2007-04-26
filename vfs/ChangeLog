@@ -1,3 +1,9 @@
+2007-04-26  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (fish_linear_start): Use _FILE_OFFSET_BITS to determine which
+	length modifier to pass to sscanf(). Use 'll' length modifier instead
+	of 'L' since 'L' is meant for doubles.
+
 2006-11-09  Jindrich Novy  <jnovy@redhat.com>
 
 	* fish.c (fish_file_store): Fix copy of file names with backticks to
