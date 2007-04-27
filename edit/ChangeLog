@@ -1,3 +1,8 @@
+2007-04-27  Pavel Tsekov <ptsekov@gmx.net>
+
+	* editcmd.c (edit_replace_cmd): Disable scanf-printf replacement
+	if "Regular expression" is selected. Fix for savannah bug #19333.
+
 2007-02-02  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Make skip_detach_prompt unsigned.  Otherwise, it

@@ -1967,7 +1967,7 @@ edit_replace_cmd (WEdit *edit, int again)
 		}
 	    }
 	    if (replace_yes) {	/* delete then insert new */
-		if (replace_scanf || replace_regexp) {
+		if (replace_scanf) {
 		    char repl_str[MAX_REPL_LEN + 2];
 		    int ret = 0;
 
