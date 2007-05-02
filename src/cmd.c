@@ -1216,6 +1216,7 @@ dirsizes_cmd (void)
 	}
 	
     recalculate_panel_summary (panel);
+    panel_re_sort (panel);
     panel->dirty = 1;
 }
 

@@ -1,3 +1,7 @@
+2007-05-02  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* cmd.c (dirsizes_cmd): Re-sort the panel when done.
+
 2007-03-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* subshell.c (subshell_name_quote): Use the `printf' utility
