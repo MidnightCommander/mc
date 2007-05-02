@@ -1559,10 +1559,11 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		}
 		for (; p < last_byte && q < MAX_REPL_LEN; p++, q++) {
 		    mbuf[q] = (*get_byte) (data, p);
-		    if (mbuf[q] == '\n')
+		    if (mbuf[q] == '\n') {
+			q++;
 			break;
+		    }
 		}
-		q++;
 		offset += q;
 		mbuf[q] = 0;
 

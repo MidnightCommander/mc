@@ -1,3 +1,8 @@
+2007-05-02  Pavel Tsekov <ptsekov@gmx.net>
+
+	* editcmd.c (edit_find_string): Fix an off-by-one error when matching
+	against a RE.
+
 2007-04-27  Pavel Tsekov <ptsekov@gmx.net>
 
 	* editcmd.c (edit_replace_cmd): Disable scanf-printf replacement
