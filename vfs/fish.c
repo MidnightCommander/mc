@@ -37,8 +37,6 @@
 #include <config.h>
 #include <errno.h>
 
-#undef HAVE_HACKED_SSH
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -219,9 +217,6 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	int i = 0;
 
 	argv[i++] = xsh;
-#ifdef HAVE_HACKED_SSH
-	argv[i++] = "-I";
-#endif
 	if (SUP.flags == FISH_FLAG_COMPRESSED)
 	    argv[i++] = "-C";
 	argv[i++] = "-l";
@@ -243,12 +238,10 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	    /* Currently, this does not work. ssh reads passwords from
 	       /dev/tty, not from stdin :-(. */
 
-#ifndef HAVE_HACKED_SSH
 	    message (1, MSG_ERROR,
 		     _
 		     ("Sorry, we cannot do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);
-#endif
 	    if (!SUP.password) {
 		char *p, *op;
 		p = g_strconcat (_(" fish: Password required for "),
