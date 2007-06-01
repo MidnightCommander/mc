@@ -216,6 +216,7 @@ context " " brightgreen
     keyword %w brightgreen
     keyword %x brightgreen
     keyword %z brightgreen
+    keyword \\" brightgreen
     spellcheck
 
 context ' ' brightgreen

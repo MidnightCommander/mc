@@ -1,3 +1,7 @@
+2007-06-01  Roland Illig  <roland.illig@gmx.de>
+
+	* lua.syntax: Strings can have embedded \" sequences.
+
 2007-01-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax/sql.syntax: Add compile, merge, minus, offline, online,
