@@ -1,3 +1,10 @@
+2007-06-08  Roland Illig  <roland.illig@gmx.de>
+
+	* Syntax: Files that contain "/lua" in the first line are
+	probably Lua source code.
+	* lua.syntax: Comments may also start with "#", at least in the
+	first line.
+
 2007-06-04  Pavel Roskin  <proski@gnu.org>
 
 	* diff.syntax: Don't use blue background for lines starting with

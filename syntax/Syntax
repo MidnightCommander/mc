@@ -136,7 +136,7 @@ include assembler.syntax
 file ..\*\\.([Pp][Oo][Vv])$ POV\sScript
 include povray.syntax
 
-file ..\*\\.([lL][uU][aA])$ LUA\sProgram
+file ..\*\\.([lL][uU][aA])$ LUA\sProgram ^#!.*/lua
 include lua.syntax
 
 file ..\*\\.([iI][dD][lL])$ CORBA\sIDL
