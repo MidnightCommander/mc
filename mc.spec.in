@@ -74,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/mcedit
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
-%{_libexecdir}/mc/cons.saver
+%attr(4755, vcsa, tty) %{_libexecdir}/mc/cons.saver
 %{_mandir}/man1/*
 %{_mandir}/*/man1/*
 
@@ -100,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/mc/syntax
 
 %changelog
+* Fri Jun 22 2007 Pavel Roskin <proski@gnu.org>
+- Make cons.saver suid vcsa, it's needed for Fedora 7
+
 * Thu Dec 21 2006 Pavel Roskin <proski@gnu.org>
 - Don't rely on brace expansion, it may be disabled
 
