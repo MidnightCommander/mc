@@ -2857,10 +2857,10 @@ msgid " User menu "
 msgstr " Menu u¿ytkownika"
 
 msgid "%b %e %H:%M"
-msgstr "%e %b %H:%M"
+msgstr "%e.%m %H:%M"
 
 msgid "%b %e  %Y"
-msgstr "%e %b  %Y"
+msgstr "%e.%m.%Y "
 
 #, c-format
 msgid "%s is not a directory\n"
