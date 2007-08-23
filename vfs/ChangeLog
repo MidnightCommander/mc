@@ -1,3 +1,8 @@
+2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (fish_linear_start) [_LARGE_FILES]: Use format string
+	capable of supporting 64 bit file sizes.
+
 2007-05-07  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* fish.c: Remove all references to HAVE_HACKED_SSH.

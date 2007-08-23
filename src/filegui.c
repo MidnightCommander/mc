@@ -524,7 +524,7 @@ static struct {
     N_("&No"), BY - 2, 37, REPLACE_NO}, {
     N_("&Yes"), BY - 2, 28, REPLACE_YES}, {
     N_("Overwrite this target?"), BY - 2, 4, 0}, {
-#if defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64
+#if (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64) || (defined _LARGE_FILES && _LARGE_FILES)
     N_("Target date: %s, size %llu"), 6, 4, 0}, {
     N_("Source date: %s, size %llu"), 5, 4, 0}
 #else

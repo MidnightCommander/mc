@@ -632,7 +632,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
-#if defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64
+#if defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64 || (defined _LARGE_FILES && _LARGE_FILES)
     if (sscanf( reply_str, "%llu", &fh->u.fish.total )!=1)
 #else
     if (sscanf( reply_str, "%u", &fh->u.fish.total )!=1)

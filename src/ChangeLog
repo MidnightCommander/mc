@@ -1,5 +1,10 @@
 2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* filegui.c (rd_widgets) [_LARGE_FILES]: Use format string
+	capable of supporting 64 bit file sizes.
+
+2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* mountlist.c (fstype_to_string): Define only when
 	`MOUNTED_GETMNTINFO' or `MOUNTED_VMOUNT' is defined.
 
