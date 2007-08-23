@@ -173,6 +173,8 @@ static int xatoi (const char *cp)
 }
 #endif /* MOUNTED_GETMNTENT1 */
 
+#if MOUNTED_GETMNTINFO
+
 #ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
 static char *fstype_to_string (short t)
 {
@@ -266,6 +268,8 @@ static char *fstype_to_string (short t)
     }
 }
 #endif /* ! HAVE_STRUCT_STATFS_F_FSTYPENAME */
+
+#endif /* MOUNTED_GETMNTINFO */
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
 static char *

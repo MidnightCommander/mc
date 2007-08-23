@@ -1,3 +1,8 @@
+2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mountlist.c (fstype_to_string): Define only when
+	`MOUNTED_GETMNTINFO' or `MOUNTED_VMOUNT' is defined.
+
 2007-05-02  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* cmd.c (dirsizes_cmd): Re-sort the panel when done.
