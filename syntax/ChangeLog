@@ -1,3 +1,7 @@
+2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* tcl.syntax: Fix a typo. Noted by Curtis Doty.
+
 2007-06-08  Roland Illig  <roland.illig@gmx.de>
 
 	* Syntax: Files that contain "/lua" in the first line are

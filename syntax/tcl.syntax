@@ -22,7 +22,7 @@ context default
 	keyword whole delete yellow
 	keyword whole destructor yellow
 	keyword whole else yellow
-	keyword whole elsif yellow
+	keyword whole elseif yellow
 	keyword whole encoding yellow
 	keyword whole end yellow
 	keyword whole eof yellow
