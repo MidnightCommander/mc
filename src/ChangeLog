@@ -1,3 +1,7 @@
+2007-08-24  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* screen.c (show_dir): Remove unneeded code.
+
 2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* filegui.c (rd_widgets) [_LARGE_FILES]: Use format string

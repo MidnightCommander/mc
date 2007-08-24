@@ -792,7 +792,7 @@ show_dir (WPanel *panel)
     tmp[panel->widget.cols] = '\0';
 
     trim (strip_home_and_password (panel->cwd), tmp,
-	 min (max (panel->widget.cols - 7, 0), panel->widget.cols) );
+	 max (panel->widget.cols - 7, 0));
     addstr (tmp);
     g_free (tmp);
     widget_move (&panel->widget, 0, 1);
