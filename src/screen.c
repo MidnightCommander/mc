@@ -787,14 +787,17 @@ show_dir (WPanel *panel)
 	attrset (REVERSE_COLOR);
 
     widget_move (&panel->widget, 0, 3);
+    addch (' ');
 
     tmp = g_malloc (panel->widget.cols + 1);
     tmp[panel->widget.cols] = '\0';
 
     trim (strip_home_and_password (panel->cwd), tmp,
-	 max (panel->widget.cols - 7, 0));
+	 max (panel->widget.cols - 9, 0));
     addstr (tmp);
     g_free (tmp);
+
+    addch (' ');
     widget_move (&panel->widget, 0, 1);
     addstr ("<");
     widget_move (&panel->widget, 0, panel->widget.cols - 2);
