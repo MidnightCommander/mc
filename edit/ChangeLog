@@ -1,3 +1,9 @@
+2007-08-27  Oswald Buddenhagen  <ossi@kde.org>
+
+	* editdraw.c (print_to_widget): Make tabs and trailing whitespace
+	characters visible.
+	(edit_draw_this_line): Likewise.
+
 2007-05-02  Pavel Tsekov <ptsekov@gmx.net>
 
 	* editcmd.c (edit_find_string): Fix an off-by-one error when matching

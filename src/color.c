@@ -99,9 +99,10 @@ static struct colorpair color_map [] = {
     { "editnormal=",     0, 0 },	/* normal */       /* 34 */
     { "editbold=",       0, 0 },	/* search->found */
     { "editmarked=",     0, 0 },	/* marked/selected */
+    { "editwhitespace=", 0, 0 },	/* whitespace */
 
-/* error dialog colors start at 37 */
-    { "errdhotnormal=",  0, 0 }, /* Error dialog normal/hot */ /* 37 */
+/* error dialog colors start at 38 */
+    { "errdhotnormal=",  0, 0 }, /* Error dialog normal/hot */ /* 38 */
     { "errdhotfocus=",   0, 0 }, /* Error dialog focused/hot */
 };
 
@@ -164,6 +165,7 @@ static const char *default_colors =
 "editnormal=lightgray,blue:"
 "editbold=yellow,blue:"
 "editmarked=black,cyan:"
+"editwhitespace=brightblue,blue:"
 "errdhotnormal=yellow,red:"
 "errdhotfocus=yellow,lightgray";
 

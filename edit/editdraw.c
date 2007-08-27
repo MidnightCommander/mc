@@ -51,6 +51,7 @@
 #define MOD_BOLD		(1 << 9)
 #define MOD_MARKED		(1 << 10)
 #define MOD_CURSOR		(1 << 11)
+#define MOD_WHITESPACE		(1 << 12)
 
 #define FONT_OFFSET_X 0
 #define FONT_OFFSET_Y 0
@@ -243,18 +244,35 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	    color = 0;
 	}
 
-	if (style & MOD_BOLD) {
-	    set_color (EDITOR_BOLD_COLOR);
-	} else if (style & MOD_MARKED) {
-	    set_color (EDITOR_MARKED_COLOR);
+	if (style & MOD_WHITESPACE) {
+	    if (style & MOD_MARKED) {
+		textchar = ' ';
+		set_color (EDITOR_MARKED_COLOR);
+	    } else {
+#if 0
+		if (color != EDITOR_NORMAL_COLOR) {
+		    textchar = ' ';
+		    lowlevel_set_color (color);
+		} else
+#endif
+		    set_color (EDITOR_WHITESPACE_COLOR);
+	    }
 	} else {
-	    lowlevel_set_color (color);
+	    if (style & MOD_BOLD) {
+		set_color (EDITOR_BOLD_COLOR);
+	    } else if (style & MOD_MARKED) {
+		set_color (EDITOR_MARKED_COLOR);
+	    } else {
+		lowlevel_set_color (color);
+	    }
 	}
 
 	addch (textchar);
 	p++;
     }
 }
+
+int visible_tabs = 1, visible_tws = 1;
 
 /* b is a pointer to the beginning of the line */
 static void
@@ -263,7 +281,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 {
     static unsigned int line[MAX_LINE_LEN];
     unsigned int *p = line;
-    long m1 = 0, m2 = 0, q, c1, c2;
+    long m1 = 0, m2 = 0, q, c1, c2, tws;
     int col, start_col_real;
     unsigned int c;
     int color;
@@ -281,6 +299,13 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	eval_marks (edit, &m1, &m2);
 
 	if (row <= edit->total_lines - edit->start_line) {
+	    if (use_colors && visible_tws) {
+		tws = edit_eol (edit, b);
+		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
+				   || c == '\t'))
+		    tws--;
+	    }
+
 	    while (col <= end_col - edit->start_col) {
 		*p = 0;
 		if (q == edit->curs1)
@@ -303,7 +328,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 /* we don't use bg for mc - fg contains both */
 		edit_get_syntax_color (edit, q, &color);
 		*p |= color << 16;
-		q++;
 		switch (c) {
 		case '\n':
 		    col = end_col - edit->start_col + 1;	/* quit */
@@ -311,12 +335,38 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    break;
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
-		    *p |= ' ';
-		    c = *(p++) & ~MOD_CURSOR;
 		    col += i;
-		    while (--i)
-			*(p++) = c;
+		    if (use_colors && visible_tabs) {
+			c = (*p & ~MOD_CURSOR) | MOD_WHITESPACE;
+			if (i > 2) {
+			    *(p++) |= '<' | MOD_WHITESPACE;
+			    while (--i > 1)
+				*(p++) = c | '-';
+			    *(p++) = c | '>';
+			} else if (i > 1) {
+			    *(p++) |= '<' | MOD_WHITESPACE;
+			    *(p++) = c | '>';
+			} else
+			    *(p++) |= '>' | MOD_WHITESPACE;
+		    } else if (use_colors && visible_tws && q >= tws) {
+			*p |= '.' | MOD_WHITESPACE;
+			c = *(p++) & ~MOD_CURSOR;
+			while (--i)
+			    *(p++) = c;
+		    } else {
+			*p |= ' ';
+			c = *(p++) & ~MOD_CURSOR;
+			while (--i)
+			    *(p++) = c;
+		    }
 		    break;
+		case ' ':
+		    if (use_colors && visible_tws && q >= tws) {
+			*(p++) |= '.' | MOD_WHITESPACE;
+			col++;
+			break;
+		    }
+		    /* fallthrough */
 		default:
 		    c = convert_to_display_c (c);
 
@@ -342,6 +392,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    col++;
 		    break;
 		}
+		q++;
 	    }
 	}
     } else {

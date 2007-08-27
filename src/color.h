@@ -71,17 +71,19 @@ extern int alarm_colors[4];
 #define DEFAULT_COLOR      IF_COLOR (DEFAULT_COLOR_INDEX, 0)
 
 /*
- * editor colors - only 3 for normal, search->found, and select, respectively
+ * editor colors - only 4 for normal, search->found, select, and whitespace
+ * respectively
  * Last is defined to view color.
  */
 #define EDITOR_NORMAL_COLOR_INDEX    34
 #define EDITOR_NORMAL_COLOR          IF_COLOR (EDITOR_NORMAL_COLOR_INDEX, 0)
 #define EDITOR_BOLD_COLOR            IF_COLOR (35, A_BOLD)
 #define EDITOR_MARKED_COLOR          IF_COLOR (36, A_REVERSE)
+#define EDITOR_WHITESPACE_COLOR      IF_COLOR (37, 0 /* irrelevant */)
 
 /* Error dialog colors */
-#define ERROR_HOT_NORMAL   IF_COLOR (37, 0)
-#define ERROR_HOT_FOCUS    IF_COLOR (38, 0)
+#define ERROR_HOT_NORMAL   IF_COLOR (38, 0)
+#define ERROR_HOT_FOCUS    IF_COLOR (39, 0)
 
 #ifdef HAVE_SLANG
 #   define CTYPE const char *
