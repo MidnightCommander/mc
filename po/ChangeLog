@@ -1,3 +1,8 @@
+2007-08-27  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* nl.po: Fix conflicting shortcut in the dutch translation.
+	From Daniel Hahler.
+
 2007-08-22  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* pl.po: Updated date format for the polish translation.

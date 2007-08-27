@@ -1709,7 +1709,7 @@ msgid "to:"
 msgstr "naar:"
 
 msgid "&Using shell patterns"
-msgstr "Shell &Patroon gebruiken"
+msgstr "Shell Patroon gebr&Uiken"
 
 msgid "&Background"
 msgstr "Achter&Grond"
