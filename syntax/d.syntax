@@ -1,0 +1,562 @@
+# -------------------------------
+#
+# D programming language syntax highlighting
+# for CoolEdit
+#
+# Homepage of D: http://www.digitalmars.com/d/
+#
+# Author: Witold Baryluk < baryluk at smp if uj edu pl >
+# Date: 23-08-2007
+#
+# -------------------------------
+
+context default
+
+# sh bang
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/bin/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/gdmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/gdmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/gdmd brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/dmd brightcyan black
+    keyword whole linestart #!\[\s\]/gdmd brightcyan black
+
+# keywords
+	keyword whole abstract yellow
+	keyword whole alias yellow
+	keyword whole align yellow
+	keyword whole assert yellow
+	keyword whole body yellow
+	keyword whole bool yellow
+	keyword whole byte yellow
+	keyword whole cast yellow
+	keyword whole catch yellow
+	keyword whole cdouble yellow
+	keyword whole cent yellow
+	keyword whole cfloat yellow
+	keyword whole class yellow
+	keyword whole creal yellow
+	keyword whole dchar yellow
+	keyword whole debug yellow
+	keyword whole delegate yellow
+	keyword whole delete yellow
+	keyword whole deprecated yellow
+	keyword whole dstring yellow
+	keyword whole false brightred
+	keyword whole finally yellow
+	keyword whole final yellow
+	keyword whole foreach_reverse yellow
+	keyword whole function yellow
+	keyword whole idouble yellow
+	keyword whole ifloat yellow
+	keyword whole inout yellow
+	keyword whole interface yellow
+	keyword whole invariant yellow
+	keyword whole in yellow
+	keyword whole is yellow
+	keyword whole ireal yellow
+	keyword whole lazy yellow
+	keyword whole long yellow
+	keyword whole macro yellow
+	keyword whole mixin yellow
+	keyword whole module yellow
+	keyword whole new yellow
+	keyword whole null brightred
+	keyword whole out yellow
+	keyword whole override yellow
+	keyword whole package yellow
+	keyword whole pragma yellow
+	keyword whole private yellow
+	keyword whole protected yellow
+	keyword whole public yellow
+	keyword whole real yellow
+	keyword whole ref yellow
+	keyword whole scope yellow
+	keyword whole string yellow
+	keyword whole super brightred
+	keyword whole synchronized yellow
+	keyword whole template yellow
+	keyword whole this brightred
+	keyword whole throw yellow
+	keyword whole true brightred
+	keyword whole try yellow
+	keyword whole typedef yellow
+	keyword whole typeid yellow
+	keyword whole typeof yellow
+	keyword whole ubyte yellow
+	keyword whole ucent yellow
+	keyword whole ulong yellow
+	keyword whole unittest yellow
+	keyword whole ushort yellow
+	keyword whole version yellow
+	keyword whole volatile yellow
+	keyword whole wchar yellow
+	keyword whole with yellow
+	keyword whole wstring yellow
+	keyword whole asm yellow
+	keyword whole auto yellow
+	keyword whole break yellow
+	keyword whole case yellow
+	keyword whole char yellow
+	keyword whole const yellow
+	keyword whole continue yellow
+	keyword whole default yellow
+	keyword whole double yellow
+	keyword whole do yellow
+	keyword whole else yellow
+	keyword whole enum yellow
+	keyword whole export yellow
+	keyword whole extern yellow
+	keyword whole float yellow
+	keyword whole foreach yellow
+	keyword whole for yellow
+	keyword whole goto yellow
+	keyword whole if yellow
+	keyword whole import magenta
+	keyword whole inline yellow
+	keyword whole int yellow
+	keyword whole return yellow
+	keyword whole short yellow
+	keyword whole signed yellow
+	keyword whole sizeof yellow
+	keyword whole static yellow
+	keyword whole struct yellow
+	keyword whole switch yellow
+	keyword whole typedef yellow
+	keyword whole uint yellow
+	keyword whole union yellow
+	keyword whole unsigned yellow
+	keyword whole void yellow
+	keyword whole while yellow
+
+# predefined aliases (deprecated)
+	keyword whole bit yellow
+# predefined aliases (2.0)
+	keyword whole string yellow
+	keyword whole dstring yellow
+	keyword whole wstring yellow
+
+# D array atributes
+	keyword wholeright .sizeof yellow
+	keyword wholeright .length yellow
+	keyword wholeright .ptr yellow
+	keyword wholeright .dup yellow
+	keyword wholeright .reverse yellow
+	keyword wholeright .sort yellow
+	keyword wholeright .keys yellow
+	keyword wholeright .values yellow
+	keyword wholeright .rehash yellow
+# D types atributes
+	keyword wholeright .init yellow
+	keyword wholeright .alignof yellow
+	keyword wholeright .mangleof yellow
+	keyword wholeright .stringof yellow
+# +integer
+	keyword wholeright .min yellow
+	keyword wholeright .max yellow
+# +floating point
+	keyword wholeright .infinity yellow
+	keyword wholeright .nan yellow
+	keyword wholeright .dig yellow
+	keyword wholeright .epsilon yellow
+	keyword wholeright .mant_dig yellow
+	keyword wholeright .max_10_exp yellow
+	keyword wholeright .max_exp yellow
+	keyword wholeright .min_10_exp yellow
+	keyword wholeright .min_exp yellow
+	keyword wholeright .re yellow
+	keyword wholeright .im yellow
+	keyword wholeright .im yellow
+# union
+	keyword wholeright .offsetof yellow
+
+# D 2.0 atributes
+	keyword wholeright .idup yellow
+
+# unary operators
+	keyword whole opNeg gray
+	keyword whole opPos gray
+	keyword whole opCom gray
+	keyword whole opPostInc gray
+	keyword whole opPostDec gray
+	keyword whole opCast gray
+
+# binary operators
+	keyword whole opAdd gray
+	keyword whole opAdd_r gray
+	keyword whole opSub gray
+	keyword whole opSub_r gray
+	keyword whole opMul gray
+	keyword whole opMul_r gray
+	keyword whole opDiv gray
+	keyword whole opDiv_r gray
+	keyword whole opMod gray
+	keyword whole opMod_r gray
+	keyword whole opAnd gray
+	keyword whole opAnd_r gray
+	keyword whole opOr gray
+	keyword whole opOr_r gray
+	keyword whole opXor gray
+	keyword whole opXor_r gray
+	keyword whole opShl gray
+	keyword whole opShl_r gray
+	keyword whole opShr gray
+	keyword whole opShr_r gray
+	keyword whole opUShr gray
+	keyword whole opUShr_r gray
+	keyword whole opCat gray
+	keyword whole opCat_r gray
+	keyword whole opEquals gray
+	keyword whole opCmp gray
+	keyword whole opAssign gray
+	keyword whole opAddAssign gray
+	keyword whole opSubAssign gray
+	keyword whole opMulAssign gray
+	keyword whole opDivAssign gray
+	keyword whole opModAssign gray
+	keyword whole opAndAssign gray
+	keyword whole opOrAssign gray
+	keyword whole opXorAssign gray
+	keyword whole opShlAssign gray
+	keyword whole opShrAssign gray
+	keyword whole opUShrAssign gray
+	keyword whole opCatAssign gray
+	keyword whole opIn gray
+	keyword whole opIn_r gray
+
+# special operators
+	keyword whole opCall gray
+	keyword whole opIndex gray
+	keyword whole opIndexAssign gray
+	keyword whole opSlice gray
+	keyword whole opSliceAssign gray
+	keyword whole opAssign gray
+	keyword whole opApply gray
+
+	keyword whole ... yellow
+	keyword whole .. yellow
+#	keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta # C preprocesor
+
+# special objects
+
+# hidden argument of variadic functions
+	keyword whole _argptr brightred
+	keyword whole _arguments brightred
+
+# object
+	keyword whole Object brightmagenta
+	keyword whole Interface brightmagenta
+	keyword whole ClassInfo brightmagenta
+	keyword whole OffsetTypeInfo brightmagenta
+	keyword whole TypeInfo brightmagenta
+	keyword whole Exception brightmagenta
+	keyword whole Error brightmagenta
+
+# common functions
+
+# object methods
+	keyword whole toString cyan
+	keyword whole toHash cyan
+# std.stdio
+	keyword whole writefln cyan
+	keyword whole writef cyan
+# std.gc
+	keyword whole addRoot cyan
+	keyword whole removeRoot cyan
+	keyword whole addRange cyan
+	keyword whole hasPointers cyan
+	keyword whole hasNoPointers cyan
+	keyword whole setTypeInfo cyan
+	keyword whole malloc cyan
+	keyword whole realoc cyan
+	keyword whole extend cyan
+	keyword whole capacity cyan
+	keyword whole setV1_0 cyan
+	keyword whole fullCollect cyan
+	keyword whole genCollect cyan
+# std.string
+	keyword whole iswhite cyan
+	keyword whole atoi cyan
+	keyword whole atof cyan
+	keyword whole toStringz cyan
+	keyword whole tolower cyan
+	keyword whole toupper cyan
+	keyword whole repeat cyan
+	keyword whole join cyan
+	keyword whole split cyan
+	keyword whole stripl cyan
+	keyword whole stripr cyan
+	keyword whole strip cyan
+	keyword whole chomp cyan
+	keyword whole chop cyan
+	keyword whole isNumeric cyan
+	keyword whole isEmail cyan
+	keyword whole isURL cyan
+# std.math
+	keyword whole abs cyan
+	keyword whole conj cyan
+	keyword whole cos cyan
+	keyword whole sin cyan
+	keyword whole tan cyan
+	keyword whole acos cyan
+	keyword whole asin cyan
+	keyword whole atan cyan
+	keyword whole atan2 cyan
+	keyword whole cosh cyan
+	keyword whole sinh cyan
+	keyword whole tanh cyan
+	keyword whole acosh cyan
+	keyword whole asinh cyan
+	keyword whole atanh cyan
+	keyword whole rndtol cyan
+	keyword whole rndtonl cyan
+	keyword whole sqrt cyan
+	keyword whole exp cyan
+	keyword whole exp2 cyan
+	keyword whole expm1 cyan
+	keyword whole frexp cyan
+	keyword whole ilogb cyan
+	keyword whole ldexp cyan
+	keyword whole log cyan
+	keyword whole log10 cyan
+	keyword whole log1p cyan
+	keyword whole log2 cyan
+	keyword whole logb cyan
+	keyword whole modf cyan
+	keyword whole scalbn cyan
+	keyword whole cbrt cyan
+	keyword whole fabs cyan
+	keyword whole hypot cyan
+	keyword whole erf cyan
+	keyword whole erfc cyan
+	keyword whole lgamma cyan
+	keyword whole tgamma cyan
+	keyword whole ceil cyan
+	keyword whole floor cyan
+	keyword whole nearbyint cyan
+	keyword whole rint cyan
+	keyword whole lrint cyan
+	keyword whole round cyan
+	keyword whole lround cyan
+	keyword whole trunc cyan
+	keyword whole remainder cyan
+	keyword whole remquo cyan
+	keyword whole isnan cyan
+	keyword whole isfinite cyan
+	keyword whole isnormal cyan
+	keyword whole issubnormal cyan
+	keyword whole isinf cyan
+	keyword whole signbit cyan
+	keyword whole copysign cyan
+	keyword whole nan cyan
+	keyword whole nextafter cyan
+	keyword whole fdim cyan
+	keyword whole fmax cyan
+	keyword whole fmin cyan
+	keyword whole fma cyan
+	keyword whole pow cyan
+	keyword whole feqrel cyan
+	keyword whole poly cyan
+
+# comments
+	keyword /\*\* brown
+	keyword /\* brown
+	keyword \*/ brown
+	keyword // brown
+
+	keyword /\+\+\+\+\+\+\+\+\+\+ brown
+	keyword /\+\+\+\+\+\+\+\+\+ brown
+	keyword /\+\+\+\+\+\+\+\+ brown
+	keyword /\+\+\+\+\+\+\+ brown
+	keyword /\+\+\+\+\+\+ brown
+	keyword /\+\+\+\+\+ brown
+	keyword /\+\+\+\+ brown
+	keyword /\+\+\+ brown
+	keyword /\+\+ brown
+	keyword /\+ brown
+	keyword \+\+\+\+\+\+\+\+\+\+/ brown
+	keyword \+\+\+\+\+\+\+\+\+/ brown
+	keyword \+\+\+\+\+\+\+\+/ brown
+	keyword \+\+\+\+\+\+\+/ brown
+	keyword \+\+\+\+\+\+/ brown
+	keyword \+\+\+\+\+/ brown
+	keyword \+\+\+\+/ brown
+	keyword \+\+\+/ brown
+	keyword \+\+/ brown
+	keyword \+/ brown
+
+# chars, 'x' and entities
+	keyword '\\\{"abtnvfr\}' brightgreen
+	keyword \\\{"abtnvfr\} brightmagenta
+	keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightmagenta
+	keyword '\\\{01234567\}\{01234567\}' brightgreen
+	keyword \\\{01234567\}\{01234567\} brightmagenta
+	keyword '\\\{01234567\}' brightgreen
+	keyword \\\{01234567\} brightmagenta
+	keyword '\\'' brightgreen
+	keyword '\\\\' brightgreen
+	keyword '\\0' brightgreen
+	keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+	keyword '\\&*;' brightgreen
+	keyword \\&*; brightmagenta
+	keyword '\\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}' brightgreen
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightmagenta
+	keyword '\\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}' brightgreen
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightmagenta
+	keyword '\\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}' brightgreen
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightmagenta
+	keyword '\\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}' brightgreen
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightmagenta
+
+# hexstring
+	keyword x"\[0123456789abcdefABCDEF\t\s\]"\{cwd\} brightgreen
+	keyword x"\[0123456789abcdefABCDEF\t\s\]" brightgreen
+
+# start of wyswig string
+#	keyword "\{cwd\} green  # imposible in cooledit
+	keyword " green
+	keyword r" green
+#	keyword `\{cwd\} green  # imposible in cooledit
+	keyword ` green
+
+# operators
+	keyword !<>= yellow
+	keyword !<> yellow
+	keyword !>= yellow
+	keyword !> yellow
+	keyword !<= yellow
+	keyword !< yellow
+	keyword != yellow
+	keyword ! yellow
+	keyword %= yellow
+	keyword % yellow
+	keyword && yellow
+	keyword &= yellow
+	keyword & yellow
+	keyword ( brightcyan
+	keyword ) brightcyan
+	keyword \+\+ yellow
+	keyword -- yellow
+	keyword \*= yellow
+	keyword \* yellow
+	keyword \+= yellow
+	keyword \+ yellow
+	keyword , brightcyan
+	keyword -= yellow
+	keyword - yellow
+	keyword /= yellow
+	keyword / yellow
+	keyword : brightcyan
+	keyword ; brightmagenta
+	keyword <>= yellow
+	keyword <> yellow
+	keyword <<= yellow
+	keyword << yellow
+	keyword <= yellow
+	keyword < yellow
+	keyword = yellow
+	keyword >>>= yellow
+	keyword >>> yellow
+	keyword >>= yellow
+	keyword >> yellow
+	keyword >= yellow
+	keyword > yellow
+	keyword ? brightcyan
+	keyword [ brightcyan
+	keyword ] brightcyan
+	keyword ^= yellow
+	keyword ^ yellow
+	keyword || yellow
+	keyword |= yellow
+	keyword | yellow
+	keyword { brightcyan
+	keyword } brightcyan
+	keyword $ brightcyan
+	keyword ~= yellow
+	keyword ~ yellow
+
+# predefined lexer entities
+	keyword whole __FILE__ red
+	keyword whole __LINE__ red
+	keyword whole __DATE__ red
+	keyword whole __TIME__ red
+	keyword whole __TIMESTAMP__ red
+# 1.017 ?
+	keyword whole __VENDOR__ red
+	keyword whole __VERSION__ red
+
+	keyword #line*"*" red
+
+context exclusive /\*\* \*/ brown
+	keyword \*/ brown
+	spellcheck
+# ddoc
+	keyword Authors: red
+	keyword Author: red
+	keyword BUGS: red
+	keyword Bugs: red
+	keyword Date: red
+	keyword Deprecated: red
+	keyword Examples: red
+	keyword History: red
+	keyword License: red
+	keyword Returns: red
+	keyword See_Also: red
+	keyword Standards: red
+	keyword Throws: red
+	keyword Version: red
+# sections
+	keyword Copyright: red
+	keyword Params: red
+	keyword Macros: red
+# non standard
+	keyword TODO: red
+	keyword FIXME: red
+	keyword Note: red
+
+context exclusive /\+\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+\+/ brown
+context exclusive /\+\+\+\+\+\+\+\+ \+\+\+\+\+\+\+\+/ brown
+context exclusive /\+\+\+\+\+\+\+ \+\+\+\+\+\+\+/ brown
+context exclusive /\+\+\+\+\+\+ \+\+\+\+\+\+/ brown
+context exclusive /\+\+\+\+\+ \+\+\+\+\+/ brown
+context exclusive /\+\+\+\+ \+\+\+\+/ brown
+context exclusive /\+\+\+ \+\+\+/ brown
+context exclusive /\+\+ \+\+/ brown
+context exclusive /\+ \+/ brown
+
+context exclusive /\* \*/ brown
+	spellcheck
+
+context exclusive // \n brown
+	spellcheck
+
+context exclusive ` ` green
+
+context exclusive r" " green
+
+context exclusive " " green
+	spellcheck
+	keyword \\" brightgreen
+	keyword %% brightgreen
+	keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+	keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+	keyword %\[hl\]n brightgreen
+	keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+	keyword %[*] brightgreen
+	keyword %c brightgreen
+	keyword %p brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+	keyword \\\\ brightgreen
+	keyword \\' brightgreen
+	keyword \\\{abtnvfr\} brightgreen
+	keyword \\&*; brightgreen
+

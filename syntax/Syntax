@@ -79,6 +79,9 @@ include texinfo.syntax
 file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX|hxx|h\.in)$ C/C\+\+\sProgram
 include c.syntax
 
+file ..\*\\.d$ D\sProgram
+include d.syntax
+
 file ..\*\\.[fF]$ Fortran\sProgram
 include fortran.syntax
 

@@ -7,6 +7,7 @@ SYNTAXFILES =			\
 	changelog.syntax	\
 	cs.syntax		\
 	css.syntax		\
+	d.syntax		\
 	diff.syntax		\
 	dos.syntax		\
 	eiffel.syntax		\
