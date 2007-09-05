@@ -109,7 +109,7 @@ msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
 
 msgid "&Overwrite"
-msgstr "Переписать"
+msgstr "Пе&реписать"
 
 msgid " Cannot save file. "
 msgstr " Невозможно сохранить файл "
@@ -158,7 +158,7 @@ msgstr ""
 " Продолжение операции приведет к потере изменений. "
 
 msgid "C&ontinue"
-msgstr "Продолжить"
+msgstr "П&родолжить"
 
 msgid " Load "
 msgstr " Загрузить "
@@ -249,7 +249,7 @@ msgid " File was modified, Save with exit? "
 msgstr " Файл был изменен, сохранить при выходе? "
 
 msgid "&Cancel quit"
-msgstr "Прервать выход"
+msgstr "&Прервать выход"
 
 msgid "&Yes"
 msgstr "&Да"
@@ -1773,7 +1773,7 @@ msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
 msgid "find Re&cursively"
-msgstr "найти Ре&крусивно"
+msgstr "Найти ре&курсивно"
 
 msgid "Start at:"
 msgstr "От каталога:"
