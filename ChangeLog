@@ -1,3 +1,8 @@
+2007-09-10  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* configure.ac: Update the version number to 4.6.2-pre1.
+	* doc/mc.1.in: Likewise.
+
 2007-01-13  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* doc/mc.1.in: Place the description of the "Swap panels" on
