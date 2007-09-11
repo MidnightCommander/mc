@@ -1,5 +1,9 @@
 2007-09-11  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* subshell.c (write_all): Do not use void pointer arithmetic.
+
+2007-09-11  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* mountlist.c: Fix a warning issued by gcc.
 
 2007-08-27  Oswald Buddenhagen  <ossi@kde.org>

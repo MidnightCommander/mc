@@ -159,7 +159,7 @@ write_all (int fd, const void *buf, size_t count)
     ssize_t ret;
     ssize_t written = 0;
     while (count > 0) {
-	ret = write (fd, buf, count);
+	ret = write (fd, (const unsigned char *) buf + written, count);
 	if (ret < 0) {
 	    if (errno == EINTR) {
 		continue;
@@ -167,7 +167,6 @@ write_all (int fd, const void *buf, size_t count)
 		return written > 0 ? written : ret;
 	    }
 	}
-	buf += ret;
 	count -= ret;
 	written += ret;
     }
