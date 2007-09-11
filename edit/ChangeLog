@@ -1,3 +1,7 @@
+2007-09-11  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* choosesyntax.c (pstrcmp): Make static.
+
 2007-08-27  Oswald Buddenhagen  <ossi@kde.org>
 
 	* editdraw.c (print_to_widget): Make tabs and trailing whitespace
