@@ -1,3 +1,7 @@
+2007-09-14  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* find.c (find_parameters): Fix hotkey duplication.
+
 2007-09-11  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* subshell.c (write_all): Do not use void pointer arithmetic.
