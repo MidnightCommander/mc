@@ -731,6 +731,7 @@ i18n_checktimelength (void)
     b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), localtime(&testtime));
     
     length = max (a, b);
+    length = max (strlen (_("(invalid)")), length);
     
     /* Don't handle big differences. Use standard value (email bug, please) */
     if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
@@ -747,6 +748,7 @@ file_date (time_t when)
     static size_t i18n_timelength = 0;
     static const char *fmtyear, *fmttime;
     const char *fmt;
+    struct tm *whentm;
 
     if (i18n_timelength == 0){
 	i18n_timelength = i18n_checktimelength() + 1;
@@ -770,7 +772,11 @@ file_date (time_t when)
     else
 	fmt = fmttime;
     
-    strftime (timebuf, i18n_timelength, fmt, localtime(&when));
+    whentm = localtime(&when);
+    if (whentm == NULL)
+	g_snprintf (timebuf, i18n_timelength, "%s", _("(invalid)"));
+    else
+	strftime (timebuf, i18n_timelength, fmt, whentm);
     return timebuf;
 }
 
