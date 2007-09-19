@@ -2161,8 +2161,6 @@ listbox_new (int y, int x, int width, int height, lcback callback)
     else
 	l->height = height;
     l->count = 0;
-    l->top = 0;
-    l->current = 0;
     l->cback = callback;
     l->allow_duplicates = 1;
     l->scrollbar = slow_terminal ? 0 : 1;
