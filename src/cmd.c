@@ -590,7 +590,7 @@ menu_edit_cmd (int where)
 	_(" Menu edit "),
 	_(" Which menu file do you want to edit? "), 
 	0, geteuid() ? 2 : 3,
-	_("&Local"), _("&Home"), _("&System Wide")
+	_("&Local"), _("&User"), _("&System Wide")
     );
 
     menufile = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);

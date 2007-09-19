@@ -1,4 +1,9 @@
-2007-09-14  Pavel Tsekov  <ptsekov@gmx.net>
+2007-09-19  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* cmd.c (menu_edit_cmd): Rename a button label from "Home"
+	to "User".
+
+2007-09-19  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* widget.c (listbox_new): Remove redundant initialization of
 	WListbox fields.
