@@ -1,5 +1,5 @@
 /* Find file command for the Midnight Commander
-   Copyright (C) The Free Software Foundation
+   Copyright (C) Free Software Foundation, Inc.
    Written 1995 by Miguel de Icaza
 
    Complete rewrote.

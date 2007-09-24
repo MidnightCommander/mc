@@ -1,5 +1,5 @@
 /* File management.
-   Copyright (C) 1994, 1995, 1996 The Free Software Foundation
+   Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
    
    Written by: 1994, 1995       Janne Kukonlehto
                1994, 1995       Fred Leeflang

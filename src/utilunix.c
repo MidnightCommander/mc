@@ -1,5 +1,5 @@
 /* Various utilities - Unix variants
-   Copyright (C) 1994, 1995, 1996 the Free Software Foundation.
+   Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
    Written 1994, 1995, 1996 by:
    Miguel de Icaza, Janne Kukonlehto, Dugan Porter,
    Jakub Jelinek, Mauricio Plaza.

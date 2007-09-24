@@ -1,5 +1,5 @@
 /* Main program for the Midnight Commander
-   Copyright (C) 1994, 1995, 1996, 1997 The Free Software Foundation
+   Copyright (C) 1994, 1995, 1996, 1997 Free Software Foundation, Inc.
    
    Written by: 1994, 1995, 1996, 1997 Miguel de Icaza
                1994, 1995 Janne Kukonlehto

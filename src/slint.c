@@ -1,7 +1,7 @@
 /* Slang interface to the Midnight Commander
    This emulates some features of ncurses on top of slang
    
-   Copyright (C) 1995, 1996 The Free Software Foundation.
+   Copyright (C) 1995, 1996 Free Software Foundation, Inc.
 
    Author Miguel de Icaza
           Norbert Warmuth

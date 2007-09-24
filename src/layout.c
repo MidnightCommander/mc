@@ -1,5 +1,5 @@
 /* Panel layout module for the Midnight Commander
-   Copyright (C) 1995 the Free Software Foundation
+   Copyright (C) 1995 Free Software Foundation, Inc.
    
    Written: 1995 Janne Kukonlehto
             1995 Miguel de Icaza

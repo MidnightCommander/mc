@@ -2,7 +2,7 @@
 
 /* Additional keyboard support routines.
 
-   Copyright (C) 1998 the Free Software Foundation.
+   Copyright (C) 1998 Free Software Foundation, Inc.
 
    Written by: 1998, Gyorgy Tamasi
    

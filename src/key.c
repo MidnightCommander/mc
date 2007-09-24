@@ -1,6 +1,6 @@
 /* Keyboard support routines.
 
-   Copyright (C) 1994,1995 the Free Software Foundation.
+   Copyright (C) 1994,1995 Free Software Foundation, Inc.
 
    Written by: 1994, 1995 Miguel de Icaza.
 	       1994, 1995 Janne Kukonlehto.

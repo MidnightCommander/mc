@@ -1,5 +1,5 @@
 /* Widget based utility functions.
-   Copyright (C) 1994, 1995 the Free Software Foundation
+   Copyright (C) 1994, 1995 Free Software Foundation, Inc.
    
    Authors: 1994, 1995, 1996 Miguel de Icaza
             1994, 1995 Radek Doulik

@@ -1,6 +1,6 @@
 /* editor initialisation and callback handler.
 
-   Copyright (C) 1996, 1997 the Free Software Foundation
+   Copyright (C) 1996, 1997 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
 

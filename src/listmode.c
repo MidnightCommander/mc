@@ -1,5 +1,5 @@
 /* Directory panel listing format editor -- for the Midnight Commander
-   Copyright (C) 1994, 1995 The Free Software Foundation
+   Copyright (C) 1994, 1995 Free Software Foundation, Inc.
 
    Written by: 1994 Radek Doulik
    	       1995 Janne Kukonlehto

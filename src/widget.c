@@ -1,6 +1,6 @@
 /* Widgets for the Midnight Commander
 
-   Copyright (C) 1994, 1995, 1996 the Free Software Foundation
+   Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
    
    Authors: 1994, 1995 Radek Doulik
             1994, 1995 Miguel de Icaza

@@ -1,5 +1,5 @@
 /* Virtual File System: External file system.
-   Copyright (C) 1995 The Free Software Foundation
+   Copyright (C) 1995 Free Software Foundation, Inc.
    
    Written by: 1995 Jakub Jelinek
    Rewritten by: 1998 Pavel Machek

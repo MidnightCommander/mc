@@ -1,6 +1,6 @@
 /* Virtual File System: Midnight Commander file system.
    
-   Copyright (C) 1995, 1996, 1997 The Free Software Foundation
+   Copyright (C) 1995, 1996, 1997 Free Software Foundation, Inc.
 
    Written by Miguel de Icaza
               Andrej Borsenkow

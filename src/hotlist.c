@@ -1,5 +1,5 @@
 /* Directory hotlist -- for the Midnight Commander
-   Copyright (C) 1994, 1995, 1996, 1997 the Free Software Foundation.
+   Copyright (C) 1994, 1995, 1996, 1997 Free Software Foundation, Inc.
 
    Written by:
     1994 Radek Doulik

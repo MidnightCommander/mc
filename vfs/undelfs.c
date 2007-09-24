@@ -6,7 +6,7 @@
    Parts of this program were taken from the lsdel.c and dump.c files
    written by Ted Ts'o (tytso@mit.edu) for the ext2fs package.
    
-   Copyright (C) 1995, 1997 the Free Software Foundation
+   Copyright (C) 1995, 1997 Free Software Foundation, Inc.
    Written by: 1995 Miguel de Icaza.
                1997 Norbert Warmuth.
 	       2000 Pavel Machek

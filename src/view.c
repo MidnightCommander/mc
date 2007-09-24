@@ -1,7 +1,7 @@
 /*
    Internal file viewer for the Midnight Commander
 
-   Copyright (C) 1994, 1995, 1996 The Free Software Foundation
+   Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
 
    Written by: 1994, 1995, 1998 Miguel de Icaza
 	       1994, 1995 Janne Kukonlehto

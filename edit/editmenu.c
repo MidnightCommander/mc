@@ -1,6 +1,6 @@
 /* editor menu definitions and initialisation
 
-   Copyright (C) 1996 the Free Software Foundation
+   Copyright (C) 1996 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
 
