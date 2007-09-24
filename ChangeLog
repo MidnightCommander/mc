@@ -1,5 +1,11 @@
 2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* doc/mcedit.1.in: Update the version number to 4.6.2-pre1.
+	* doc/mcview.1.in: Ditto.
+	* doc/mcserv.8.in: Ditto.
+
+2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* FAQ: Update MC's homepage url.
 	* README: Ditto.
 	* doc/mc.1.in: Ditto.

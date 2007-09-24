@@ -1,4 +1,4 @@
-.TH MCVIEW 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
+.TH MCVIEW 1 "September 2007" "MC Version 4.6.2-pre1" "GNU Midnight Commander"
 .SH NAME
 mcview \- Internal file viewer of GNU Midnight Commander.
 .SH USAGE
