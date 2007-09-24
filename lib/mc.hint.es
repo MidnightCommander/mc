@@ -7,8 +7,8 @@ Ayudita: Para introducir un carácter especial: C-q y el caracter.
 Ayudita: ¿Harto de mensajitos? Se quitan en el menú Opciones/Presentación.
 Ayudita: Para seleccionar directorios añadir "/" tras el patrón a buscar.
 Ayudita: Si no funcionan las teclas de función, ESC+número sirve.
-Ayudita: El web del Midnight Commander está en http://www.ibiblio.org/mc/
-Ayudita: El sitio oficial del Midnight Commander es http://www.ibiblio.org/mc/
+Ayudita: El web del Midnight Commander está en http://www.gnu.org/software/mc/
+Ayudita: El sitio oficial del Midnight Commander es http://www.gnu.org/software/mc/
 Ayudita: Comunique cualquier defecto a mc-devel@gnome.org
 Ayudita: El tabulador cambia de panel.
 Ayudita: ¡El mejor VFS! Al <entrar> en un archivo comprimido se ve su contenido.

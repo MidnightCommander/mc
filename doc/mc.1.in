@@ -3308,7 +3308,7 @@ help for details on the License and the lack of warranty.
 .\"NODE "AVAILABILITY"
 .SH "AVAILABILITY"
 The latest version of this program can be found at
-ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
+ftp://ftp.gnu.org/gnu/mc/.
 .\"NODE "SEE ALSO"
 .SH "SEE ALSO"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
@@ -3316,7 +3316,7 @@ tcsh(1), zsh(1).
 .PP
 .nf
 The Midnight Commander page on the World Wide Web:
-	http://www.ibiblio.org/mc/
+	http://www.gnu.org/software/mc/
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTHORS"

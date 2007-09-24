@@ -87,7 +87,7 @@ help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
+ftp://ftp.gnu.org/gnu/mc/.
 .SH SEE ALSO
 mc(1), mcedit(1)
 .PP

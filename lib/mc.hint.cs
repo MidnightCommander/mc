@@ -6,7 +6,7 @@ Tip: Chcete zadat speciální znak(napø. tabelátor)? Pou¾ijte Ctrl-Q a daný znak.
 Tip: Nechcete ji¾ vidìt tipy? Vypnìte je v Nastavení/Zobrazení/Dal¹í nastavení.
 Tip: Adresáøe vyberete pøidáním lomítka na konec vzorku.
 Tip: Pokud Vá¹ terminál nezná nebo nemá funkèní klávesy, pou¾ijte Esc+èíslo.
-Tip: Domácí stránka programu Midnight Commander je http://www.ibiblio.org/mc/
+Tip: Domácí stránka programu Midnight Commander je http://www.gnu.org/software/mc/
 Tip: Zprávy o chybách posílejte na mc-devel@gnome.org (anglicky).
 Tip: Pomocí klávesy Tab zmìníte aktuální panel.
 Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.

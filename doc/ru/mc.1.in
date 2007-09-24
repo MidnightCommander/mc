@@ -3715,7 +3715,7 @@ Commander; используется только в тех случаях, когда пользователь не
 .\"NODE "AVAILABILITY"
 .SH "Обновление версий"
 Последние версии программы Midnight Commander можно найти на сайте
-ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/.
+ftp://ftp.gnu.org/gnu/mc/.
 .\"NODE "SEE ALSO"
 .SH "Другие источники"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1), tcsh(1),
@@ -3723,7 +3723,7 @@ zsh(1), mcedit(1).
 .PP
 .nf
 Страница, посвященная Midnight Commander, в World Wide Web:
-	http://www.ibiblio.org/mc/
+	http://www.gnu.org/software/mc/
 .fi
 .PP
 Данная страница оперативного руководства содержит информацию, актуальную

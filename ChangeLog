@@ -1,3 +1,19 @@
+2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* FAQ: Update MC's homepage url.
+	* README: Ditto.
+	* doc/mc.1.in: Ditto.
+	* doc/mcedit.1.in: Ditto.
+	* doc/mcserv.8.in: Ditto.
+	* doc/mcview.1.in: Ditto.
+	* doc/es/mc.1.in: Ditto.
+	* doc/hu/mc.1.in: Ditto.
+	* doc/it/mc.1.in: Ditto.
+	* doc/pl/mc.1.in: Ditto.
+	* doc/ru/mc.1.in: Ditto.
+	* doc/sr/mc.1.in: Ditto.
+	* doc/sr/mcserv.8.in: Ditto.
+
 2007-09-10  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* configure.ac: Update the version number to 4.6.2-pre1.

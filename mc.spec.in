@@ -20,8 +20,8 @@ Release:   %rel
 Epoch:     1
 License:   GPL/LGPL
 Group:     Applications/File
-Source0:   ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/mc-%{ver}.tar.gz
-URL:       http://www.ibiblio.org/mc/
+Source0:   ftp://ftp.gnu.org/gnu/mc/mc-%{ver}.tar.gz
+URL:       http://www.gnu.org/software/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 
 # Names of those packages are distribution specific

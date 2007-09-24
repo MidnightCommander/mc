@@ -6,8 +6,8 @@ Porada: Cytowanie znaku mo¿na uzyskaæ naciskaj±c Contrl-q i odpowiedni znak.
 Porada: Zmêczony poradami? Wy³±cz je w menu Opcje|Uk³ad...
 Porada: Wybieranie katalogów: dodaj uko¶nik na koñcu wzorca dopasowania.
 Porada: Je¶li w twoim terminalu brak klawiszy funkcyjnych, u¿yj Esc+numer.
-Porada: Witryna Midnight Commandera jest pod adresem http://www.ibiblio.org/mc/
-Porada: Strona domowa Midnight Commandera pod adresem http://www.ibiblio.org/mc/
+Porada: Witryna Midnight Commandera jest pod adresem http://www.gnu.org/software/mc/
+Porada: Strona domowa Midnight Commandera pod adresem http://www.gnu.org/software/mc/
 Porada: Opis b³êdów (w jêzyku angielskim) wysy³aj na mc-devel@gnome.org
 Porada: Za pomoc± klawisza Tab zmienia siê bie¿±cy panel.
 Porada: VFS: naci¶nij Enter na archiwum tar, aby obejrzeæ jego zawarto¶æ.

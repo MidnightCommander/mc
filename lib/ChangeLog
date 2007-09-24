@@ -1,3 +1,17 @@
+2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* mc.hint: Update MC's homepage url.
+	* mc.hint.cs: Ditto.
+	* mc.hint.es: Ditto.
+	* mc.hint.hu: Ditto.
+	* mc.hint.it: Ditto.
+	* mc.hint.nl: Ditto.
+	* mc.hint.pl: Ditto.
+	* mc.hint.ru: Ditto.
+	* mc.hint.sr: Ditto.
+	* mc.hint.uk: Ditto.
+	* mc.hint.zh: Ditto.
+
 2006-12-27  Pavel Roskin  <proski@gnu.org>
 
 	* mc.ext.in: Call xmms consistently.  Never preserve the
