@@ -1,5 +1,24 @@
 2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
 
+	* m4/codeset.m4: Update to serial #2.
+	* m4/fsusage.m4: Update to serial #23.
+	* m4/iconv.m4: Update to serial #AM6.
+	* m4/intdiv0.m4: Update from gnulib.
+	* m4/intmax.m4: Update to serial #3.
+	* m4/inttypes-pri.m4: Update to serial #4.
+	* m4/inttypes_h.m4: Update to serial #7.
+	* m4/lib-link.m4: Update to serial #13.
+	* m4/lib-prefix.m4: Update to serial #5.
+	* m4/longlong.m4: Update to serial #10.
+	* m4/onceonly.m4: Update to serial #4.
+	* m4/printf-posix.m4: Update to serial #3.
+	* m4/size_max.m4: Update to serial #6.
+	* m4/stdint_h.m4: Update to serial #6.
+	* m4/ulonglong.m4: Update to serial #6.
+	* m4/wint_t.m4: Update to serial #2.
+
+2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
+
 	* doc/mcedit.1.in: Update the version number to 4.6.2-pre1.
 	* doc/mcview.1.in: Ditto.
 	* doc/mcserv.8.in: Ditto.

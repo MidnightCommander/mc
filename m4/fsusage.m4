@@ -1,8 +1,7 @@
-#serial 22
+#serial 23
 # Obtaining file system usage information.
 
-# Copyright (C) 1997, 1998, 2000, 2001, 2003, 2004, 2005, 2006 Free Software
-# Foundation, Inc.
+# Copyright (C) 1997, 1998, 2000, 2001, 2003-2007 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -57,6 +56,11 @@ one of the corresponding file systems is hard-mounted, but not available.
 statvfs in GNU libc on BeOS operates differently: it only makes a system
 call.
 #endif
+
+#ifdef __osf__
+"Do not use Tru64's statvfs implementation"
+#endif
+
 #include <sys/statvfs.h>],
 			      [struct statvfs fsd; statvfs (0, &fsd);],
 			      fu_cv_sys_stat_statvfs=yes,
