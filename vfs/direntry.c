@@ -447,7 +447,6 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 
     CALL (free_archive) (me, super);
     g_free (super->name);
-    super->name = NULL;
     g_free(super);
 }
 

@@ -1,3 +1,7 @@
+2007-09-24  Andrew Borodin  <aborodin@vmail.ru>
+
+	* direntry.c (vfs_s_free_super): Remove redundant code.
+
 2007-08-23  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* fish.c (fish_linear_start) [_LARGE_FILES]: Use format string
