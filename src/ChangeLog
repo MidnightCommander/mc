@@ -1,3 +1,12 @@
+2007-09-24  David Sterba  <dave@jikos.cz>
+
+	* src/widget.h: Define new mode for listbox insertion.
+	* src/widget.c (listbox_append_item): Implement LISTBOX_APPEND_SORTED
+	by insertsort.
+	* src/chown.c (init_chown): Use LISTBOX_APPEND_SORTED for user and
+	group list.
+	* src/achown.c (do_enter_key): Likewise.
+
 2007-09-19  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* cmd.c (menu_edit_cmd): Rename a button label from "Home"

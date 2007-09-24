@@ -2200,6 +2200,22 @@ listbox_append_item (WListbox *l, WLEntry *e, enum append_pos pos)
 	e->next = l->current->next;
 	l->current->next->prev = e;
 	l->current->next = e;
+    } else if (pos == LISTBOX_APPEND_SORTED) {
+	WLEntry *w = l->list;
+
+	while (w->next != l->list && strcmp (e->text, w->text) > 0)
+	    w = w->next;
+	if (w->next == l->list) {
+	    e->prev = w;
+	    e->next = l->list;
+	    w->next = e;
+	    l->list->prev = e;
+	} else {
+	    e->next = w;
+	    e->prev = w->prev;
+	    w->prev->next = e;
+	    w->prev = e;
+	}
     }
     l->count++;
 }

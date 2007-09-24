@@ -175,7 +175,8 @@ void listbox_get_current (WListbox *l, char **string, char **extra);
 enum append_pos {
     LISTBOX_APPEND_AT_END,	/* append at the end */
     LISTBOX_APPEND_BEFORE,	/* insert before current */
-    LISTBOX_APPEND_AFTER	/* insert after current */
+    LISTBOX_APPEND_AFTER,	/* insert after current */
+    LISTBOX_APPEND_SORTED	/* insert alphabetically */
 };
 
 char *listbox_add_item (WListbox *l, enum append_pos pos, int

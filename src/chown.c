@@ -180,14 +180,14 @@ init_chown (void)
     /* get and put user names in the listbox */
     setpwent ();
     while ((l_pass = getpwent ())) {
-	listbox_add_item (l_user, 0, 0, l_pass->pw_name, NULL);
+	listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL);
     }
     endpwent ();
 
     /* get and put group names in the listbox */
     setgrent ();
     while ((l_grp = getgrent ())) {
-	listbox_add_item (l_group, 0, 0, l_grp->gr_name, NULL);
+	listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL);
     }
     endgrent ();
 

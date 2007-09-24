@@ -265,7 +265,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 	    /* get and put user names in the listbox */
 	    setpwent ();
 	    while ((chl_pass = getpwent ())) {
-		listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0,
+		listbox_add_item (chl_list, LISTBOX_APPEND_SORTED, 0,
 		    chl_pass->pw_name, NULL);
 	    }
 	    endpwent ();
@@ -275,7 +275,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 	    /* get and put group names in the listbox */
 	    setgrent ();
 	    while ((chl_grp = getgrent ())) {
-		listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0,
+		listbox_add_item (chl_list, LISTBOX_APPEND_SORTED, 0,
 		    chl_grp->gr_name, NULL);
 	    }
 	    endgrent ();
