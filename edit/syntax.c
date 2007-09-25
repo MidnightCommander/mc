@@ -1,6 +1,7 @@
 /* editor syntax highlighting.
 
-   Copyright (C) 1996, 1997, 1998 Free Software Foundation, Inc.
+   Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
+   2007 Free Software Foundation, Inc.
 
    Authors: 1998 Paul Sheer
 

@@ -1,7 +1,8 @@
 /* {{{ Copyright */
 
 /* Background support.
-   Copyright (C) 1996 Free Software Foundation, Inc.
+   Copyright (C) 1996, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007
+   Free Software Foundation, Inc.
    
    Written by: 1996 Miguel de Icaza
 

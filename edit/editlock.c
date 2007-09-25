@@ -1,6 +1,6 @@
 /* editor file locking.
 
-   Copyright (C) 2003 Free Software Foundation, Inc.
+   Copyright (C) 2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
 
    Authors: 2003 Adam Byrtek
 

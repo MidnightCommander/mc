@@ -1,5 +1,6 @@
 /* Extension dependent execution.
-   Copyright (C) 1994, 1995 Free Software Foundation, Inc.
+   Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
+   2005, 2007 Free Software Foundation, Inc.
 
    Written by: 1995 Jakub Jelinek
                1994 Miguel de Icaza

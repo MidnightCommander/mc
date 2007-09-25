@@ -1,5 +1,5 @@
 /* Virtual File System garbage collection code
-   Copyright (C) 1995-2003 Free Software Foundation, Inc.
+   Copyright (C) 2003, 2004, 2005, 2007 Free Software Foundation, Inc.
 
    Written by: 1995 Miguel de Icaza
                1995 Jakub Jelinek

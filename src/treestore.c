@@ -3,7 +3,8 @@
  *
  * Contains a storage of the file system tree representation
  *
-   Copyright (C) 1994, 1995, 1996, 1997 Free Software Foundation, Inc.
+   Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007
+   Free Software Foundation, Inc.
 
    Written: 1994, 1996 Janne Kukonlehto
             1997 Norbert Warmuth

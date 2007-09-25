@@ -1,5 +1,6 @@
 /* Various utilities
-   Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+   Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
+   2004, 2005, 2007 Free Software Foundation, Inc.
    Written 1994, 1995, 1996 by:
    Miguel de Icaza, Janne Kukonlehto, Dugan Porter,
    Jakub Jelinek, Mauricio Plaza.

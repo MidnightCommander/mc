@@ -1,6 +1,6 @@
 /* editor book mark handling
 
-   Copyright (C) 1996, 1997 Free Software Foundation, Inc.
+   Copyright (C) 2001, 2002, 2003, 2005, 2007 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
 
