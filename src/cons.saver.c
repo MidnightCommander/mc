@@ -3,7 +3,8 @@
    Partly rewritten by Jakub Jelinek <jakub@redhat.com>.  */
 
 /* General purpose Linux console screen save/restore server
-   Copyright (C) 1994 Janne Kukonlehto <jtklehto@stekt.oulu.fi>
+   Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
+   2006, 2007 Free Software Foundation, Inc.
    Original idea from Unix Interactive Tools version 3.2b (tty.c)
    This code requires root privileges.
    You may want to make the cons.saver setuid root.
