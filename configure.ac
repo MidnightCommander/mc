@@ -222,8 +222,11 @@ dnl
 dnl Missing typedefs and replacements
 dnl 
 
+AC_CHECK_SIZEOF(long)
+AC_CHECK_SIZEOF(long long)
 AC_TYPE_MODE_T
-AC_CHECK_TYPE(off_t, long)
+AC_TYPE_OFF_T
+AC_CHECK_SIZEOF(off_t)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)

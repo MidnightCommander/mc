@@ -1,3 +1,8 @@
+2007-10-11  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* configure.ac: Determine the size of `long', `long long' and
+	off_t.
+
 2007-09-26  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* NEWS: Revert last change - it is invalid.

@@ -1,3 +1,8 @@
+2007-10-11  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (fish_linear_start): Use strtol() or strtoll() to retrieve
+	the size of the file being retrieved.
+
 2007-09-24  Andrew Borodin  <aborodin@vmail.ru>
 
 	* direntry.c (vfs_s_free_super): Remove redundant code.
