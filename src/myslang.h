@@ -27,17 +27,10 @@ enum {
 #define ACS_URCORNER SLSMG_URCORN_CHAR
 #define ACS_LRCORNER SLSMG_LRCORN_CHAR
 
-#ifdef HAS_ACS_AS_PCCHARS
-#    define ACS_LTEE 0xC3
-#    define acs()   ;
-#    define noacs() ;
-#    define baudrate() 19200
-#else
-#    define ACS_LTEE 't'
-#    define acs()   SLsmg_set_char_set(1)
-#    define noacs() SLsmg_set_char_set (0)
-#    define baudrate() SLang_TT_Baud_Rate
-#endif
+#define ACS_LTEE 't'
+#define acs()   SLsmg_set_char_set(1)
+#define noacs() SLsmg_set_char_set (0)
+#define baudrate() SLang_TT_Baud_Rate
 
 enum {
     COLOR_BLACK, COLOR_RED, COLOR_GREEN, COLOR_YELLOW, COLOR_BLUE,

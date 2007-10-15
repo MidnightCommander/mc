@@ -552,10 +552,6 @@ static void check_split (void)
 void
 init_curses ()
 {
-#ifndef HAS_ACS_AS_PCCHARS
-    if (force_ugly_line_drawing)
-	SLtt_Has_Alt_Charset = 0;
-#endif
     SLsmg_init_smg ();
     do_enter_ca_mode ();
     init_colors ();

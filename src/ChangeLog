@@ -1,3 +1,10 @@
+2007-10-15  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* myslang.h [HAS_ACS_AS_PCCHARS]: Remove all code ifdef-ed
+	HAS_ACS_AS_PCCHARS - it's unused.
+	* help.c [HAS_ACS_AS_PCCHARS]: Likewise.
+	* layout.c (init_curses) [HAS_ACS_AS_PCCHARS]: Remove redundant code.
+
 2007-09-24  David Sterba  <dave@jikos.cz>
 
 	* widget.h: Define new mode for listbox insertion.

@@ -98,37 +98,6 @@ static int inside_link_area = 0;
 
 static cb_ret_t help_callback (struct Dlg_head *h, dlg_msg_t, int parm);
 
-#ifdef HAS_ACS_AS_PCCHARS
-static const struct {
-    int acscode;
-    int pccode;
-} acs2pc_table [] = {
-    { 'q',  0xC4 },
-    { 'x',  0xB3 },
-    { 'l',  0xDA },
-    { 'k',  0xBF },
-    { 'm',  0xC0 },
-    { 'j',  0xD9 },
-    { 'a',  0xB0 },
-    { 'u',  0xB4 },
-    { 't',  0xC3 },
-    { 'w',  0xC2 },
-    { 'v',  0xC1 },
-    { 'n',  0xC5 },
-    { 0, 0 } };
-
-static int acs2pc (int acscode)
-{
-    int i;
-
-    for (i = 0; acs2pc_table[i].acscode != 0; i++)
-	if (acscode == acs2pc_table[i].acscode) {
-	    return acs2pc_table[i].pccode;
-	}
-    return 0;
-}
-#endif
-
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
 static const char *
