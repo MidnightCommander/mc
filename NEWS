@@ -1,4 +1,47 @@
-Current
+Version 4.6.2-pre1.
+
+- Editor.
+	- Prompt the user whether to detach a hardlinked file
+	  in "Quick save" mode.
+	- Fix a bug which prevented the editor from creating a
+	  lock file in certain scenarios (bug #13673).
+	- New shortcut - Ctrl+S. Allows the user to toggle
+	  syntax highlighting.
+	- Allow the user to override the automatic syntax 
+	  highlighting.
+	- Duplicate hotkey fixes.
+
+- VFS.
+	- extfs: Do not hang waiting for user input on password
+	  protected .rar archives.
+	- extfs: Do not leave stale temporary files.
+	- extfs: Add support for ALZip archives.
+	- extfs: Properly retrieve the filesize of very large
+	  files stored inside a .zip archive.
+	- extfs: Various quoting fixes.
+	- extfs: Various improvements in deb, iso9660, mailfs, rpm, trpm.
+
+	- fish: Fix uploading of files with backtick characters in
+	  their names.
+	- fish: Improve upload speed.
+	- fish: Allow for retrieving files larger than 2 GB.
+	- fish: Enable reget functionality.
+	- fish: Use numerical uid/gid when retrieving the directory
+	  listing.
+
+	- ftpfs: Allow for entering non-readable directories.
+	- ftpfs: Allow the user to interrupt the connection establishment.
+	- ftpfs: Enable reget functionality.
+	- ftpfs: `first_cd_then_ls' is the default mode for retrieving
+	  directory contents now.
+
+	- tarfs: Add support for long filenames as stored in
+	  ustar format archives.
+	- tarfs: Allow for working with archives conforming to
+	  POSIX.1-2001 standard
+
+
+Version 4.6.1.
 
 - Core functionality.
 	- Bash < 2.05b no longer supported. For usage with bash < 2.05b fix

@@ -1,3 +1,7 @@
+2007-10-19  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* NEWS: Update for 4.6.2.
+
 2007-10-11  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* configure.ac: Determine the size of `long', `long long' and
