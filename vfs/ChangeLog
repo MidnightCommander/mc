@@ -1,3 +1,8 @@
+2007-10-26  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (fish_linear_start): Fix a hang when retrieving unreadable
+	file. Fixes savannah bug #21331.
+
 2007-10-11  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* fish.c (fish_linear_start): Use strtol() or strtoll() to retrieve

@@ -619,16 +619,28 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     g_free (name);
     name = quoted_name;
     fh->u.fish.append = 0;
+
+    /*
+     * Check whether the remote file is readable by using `dd' to copy 
+     * a single byte from the remote file to /dev/null. If `dd' completes
+     * with exit status of 0 use `cat' to send the file contents to the
+     * standard output (i.e. over the network).
+     */
     offset = fish_command (me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
+		"if dd if=/%s of=/dev/null bs=1 count=1 2>/dev/null ;\n"
+		"then\n"
 		"ls -ln /%s 2>/dev/null | (\n"
 		  "read p l u g s r\n"
 		  "echo \"$s\"\n"
 		")\n"
 		"echo '### 100'\n"
 		"cat /%s\n"
-		"echo '### 200'\n", 
-		name, name, name );
+		"echo '### 200'\n"
+		"else\n"
+		"echo '### 500'\n" 
+		"fi\n",
+		name, name, name, name );
     g_free (name);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
