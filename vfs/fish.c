@@ -775,7 +775,7 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
     POSTFIX(OPT_FLUSH);
 }
 
-#define FISH_OP(name, chk, string) \
+#define FISH_OP(name, string) \
 static int fish_##name (struct vfs_class *me, const char *path1, const char *path2) \
 { \
     char buf[BUF_LARGE]; \
@@ -801,13 +801,12 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
-#define XTEST if (bucket1 != bucket2) { ERRNOR (EXDEV, -1); }
-FISH_OP(rename, XTEST, "#RENAME /%s /%s\n"
-		       "mv /%s /%s 2>/dev/null\n"
-		       "echo '### 000'" )
-FISH_OP(link,   XTEST, "#LINK /%s /%s\n"
-		       "ln /%s /%s 2>/dev/null\n"
-		       "echo '### 000'" )
+FISH_OP(rename, "#RENAME /%s /%s\n"
+		"mv /%s /%s 2>/dev/null\n"
+		"echo '### 000'" )
+FISH_OP(link,   "#LINK /%s /%s\n"
+		"ln /%s /%s 2>/dev/null\n"
+		"echo '### 000'" )
 
 static int fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 {

@@ -1,3 +1,9 @@
+2007-10-29  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (FISH_OP): Remove the second argument since it is unused.
+	Fix the macro usage troughout.
+	(XTEST): Remove unused macro.
+
 2007-10-26  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* fish.c (fish_linear_start): Fix a hang when retrieving unreadable
