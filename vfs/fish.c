@@ -356,6 +356,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     struct vfs_s_entry *ent = NULL;
     FILE *logfile;
     char *quoted_path;
+    int reply_code;
 
     logfile = MEDATA->logfile;
 
@@ -366,6 +367,8 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     quoted_path = name_quote (remote_path, 0);
     fish_command (me, super, NONE,
 	    "#LIST /%s\n"
+	    "if ls -1 /%s >/dev/null 2>&1 ;\n"
+	    "then\n"
 	    "ls -lLan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
 	      "while read p l u g s m d y n; do\n"
 	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
@@ -376,8 +379,11 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
-	    "echo '### 200'\n",
-	    remote_path, quoted_path, quoted_path);
+	    "echo '### 200'\n"
+	    "else\n"
+	    "echo '### 500'\n"
+	    "fi\n",
+	    remote_path, quoted_path, quoted_path, quoted_path);
     g_free (quoted_path);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
@@ -456,17 +462,21 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     }
     
     vfs_s_free_entry (me, ent);
-    me->verrno = E_REMOTE;
-    if (fish_decode_reply(buffer+4, 0) == COMPLETE) {
+    reply_code = fish_decode_reply(buffer + 4, 0);
+    if (reply_code == COMPLETE) {
 	g_free (SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
+    } else if (reply_code == ERROR) {
+	me->verrno = EACCES;
+    } else {
+	me->verrno = E_REMOTE;
     }
 
 error:
     print_vfs_message (_("%s: failure"), me->name);
-    return 1;
+    return -1;
 }
 
 static int

@@ -1,3 +1,9 @@
+2007-11-02  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* fish.c (fish_dir_load): Check the exit status of the remote command
+	and fail with EACCES if it was unsuccessful.
+	Fix the value returned on error - must be -1 instead of 1.
+
 2007-11-02  Vladimir Nadvornik  <nadvornik@suse.cz>
 
 	* smbfs.c (smbfs_convert_path): Replaced NULL with (char *) NULL.
