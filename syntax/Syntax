@@ -76,7 +76,7 @@ include latex.syntax
 file ..\*\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
 include texinfo.syntax
 
-file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX|hxx|h\.in)$ C/C\+\+\sProgram
+file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hpp|HPP|h\.in)$ C/C\+\+\sProgram
 include c.syntax
 
 file ..\*\\.d$ D\sProgram

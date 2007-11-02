@@ -1,3 +1,7 @@
+2007-11-02  Vladimir Nadvornik  <nadvornik@suse.cz>
+
+	* Syntax: Enable syntax highlighting for .hpp files.
+
 2007-08-27  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* d.syntax: Add support for highlighting D language source files.
