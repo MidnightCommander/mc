@@ -1,3 +1,7 @@
+2007-11-02  Nerijus Baliunas  <nerijus@users.sourceforge.net>
+
+	* mc.ext.in: Play .flv files.
+
 2007-09-24  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* mc.hint: Update MC's homepage url.
