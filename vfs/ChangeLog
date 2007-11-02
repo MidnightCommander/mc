@@ -1,3 +1,7 @@
+2007-11-02  Vladimir Nadvornik  <nadvornik@suse.cz>
+
+	* smbfs.c (smbfs_convert_path): Replaced NULL with (char *) NULL.
+
 2007-10-29  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* fish.c (FISH_OP): Remove the second argument since it is unused.

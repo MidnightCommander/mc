@@ -1,3 +1,7 @@
+2007-11-02  Vladimir Nadvornik  <nadvornik@suse.cz>
+
+	* editlock.c (lock_build_name): Check the return value of getpwuid().
+
 2007-09-11  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* choosesyntax.c (pstrcmp): Make static.

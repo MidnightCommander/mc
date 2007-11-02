@@ -1,3 +1,8 @@
+2007-11-02  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* cmd.c (save_setup_cmd): Remove redundant g_strconcat() call.
+	* hotlist.c (load_hotlist): Likewise.
+
 2007-10-15  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* myslang.h [HAS_ACS_AS_PCCHARS]: Remove all code ifdef-ed

@@ -567,7 +567,7 @@ smbfs_convert_path (const char *remote_file, gboolean trailing_asterik)
     if (p)
         my_remote = p;   /* strip off share/service name */
     /* create remote filename as understood by smb clientgen */
-    result = g_strconcat (my_remote, trailing_asterik ? "/*" : "", 0);
+    result = g_strconcat (my_remote, trailing_asterik ? "/*" : "", (char *) NULL);
     unix_to_dos (result, /* inplace = */ 1); /* code page conversion */
     str_replace(result, '/', '\\');
     return result;
