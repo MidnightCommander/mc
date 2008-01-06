@@ -1,6 +1,7 @@
 2008-01-06  Roland Illig  <roland.illig@gmx.de>
 
 	* FAQ: Answered the slow startup related to old Samba code.
+	(Closes: #21959)
 
 2007-10-19  Pavel Tsekov  <ptsekov@gmx.net>
 
