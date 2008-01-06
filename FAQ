@@ -735,6 +735,15 @@ indenting increases with each line!
 
 9.2 When I start Midnight Commander, nothing happens!
 
+   When MC is compiled with Samba support, have a look at the
+   "interfaces = ..." line in your smb.conf file. MC uses pretty old
+   Samba code that only expects IP addresses and host names there,
+   but not network interface names (like eth0). MC interprets these
+   names as host names and tries to resolve them using a DNS server.
+   To fix this, ask your system administrator to change the interface
+   names to their assigned IP addresses, or (untried) add the interface
+   names and their IP addresses to the /etc/hosts file.
+
    First, invoke MC without subshell support: "mc -u".  If this helps
    check the shell you are using.  Subshell support works best with
    bash, although tcsh and zsh are also supported.  You might want to
