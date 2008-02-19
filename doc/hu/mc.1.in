@@ -459,8 +459,11 @@ látható '<' jelre egérrel történõ kattintással.
 .PP
 .B M-u
 A következõ látogatott könyvtárba lép át, azonos a '>'
-egérrel történõ lenyomásával. Megjeleníti a könyvtár
-elõzményeket, azonos a 'v' egérrel történõ lenyomásával.
+egérrel történõ lenyomásával.
+.PP
+.B M-S-h, M-H
+Megjeleníti a könyvtár elõzményeket, azonos a 'v' egérrel történõ
+lenyomásával.
 .\"NODE "  Shell Command Line"
 .SH "  Shell parancssor"
 Ez a rész tartalamazza azokat a billentyû-kombinációkat,
