@@ -2,16 +2,16 @@
 # Italian translation for Midnight Commander
 # Copyright (C) 1998 Free Software Foundation, Inc.
 # Giuliano Natali <diaolin@diaolin.com>, 1998.
-# Marco Ciampa <ciampix@libero.it>, 1999-2005.
+# Marco Ciampa <ciampix@libero.it>, 1999-2008.
 # Contributors:
 # Yuri <yuri@sociol.unimi.it>
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 4.6.0a\n"
+"Project-Id-Version: 4.6.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-13 02:44+0200\n"
-"PO-Revision-Date: 2007-10-13 02:42+0200\n"
+"POT-Creation-Date: 2008-04-07 13:25+0200\n"
+"PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +177,7 @@ msgid "&Skip"
 msgstr "&Salta"
 
 msgid "&Replace"
-msgstr "&Sostituisci"
+msgstr "&Rimpiazza"
 
 msgid " Replace with: "
 msgstr " Sostituisci con: "
@@ -189,7 +189,7 @@ msgid "scanf &Expression"
 msgstr "&Espressione scanf"
 
 msgid "replace &All"
-msgstr "Sostituisci &tutto"
+msgstr "Rimpiazza &tutto"
 
 msgid "pro&Mpt on replace"
 msgstr "&Chiedi sempre"
@@ -216,7 +216,7 @@ msgid " Enter search string:"
 msgstr " Inserire la stringa di ricerca:"
 
 msgid " Replace "
-msgstr " Sostituisci "
+msgstr " Rimpiazza "
 
 msgid "Search"
 msgstr "Cerca"
@@ -464,7 +464,7 @@ msgid "&Search...         F7"
 msgstr "&Cerca...          F7"
 
 msgid "Search &again     F17"
-msgstr "&Ripete Cerca     F17"
+msgstr "&Ripeti cerca     F17"
 
 msgid "&Replace...        F4"
 msgstr "&Sostituisci...    F4"
@@ -1181,11 +1181,12 @@ msgstr ""
 " Inserire il nome del dispositivo (senza /dev/) dal quale\n"
 "   volete ripristinare i file: (F1 per i dettagli)"
 
-msgid " Setup saved to ~/"
-msgstr " Configurazione salvata su ~/"
-
 msgid " Setup "
 msgstr " Configurazione "
+
+#, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Impostazioni salvate su ~/%s"
 
 #, c-format
 msgid ""
@@ -1904,14 +1905,15 @@ msgstr ""
 msgid " Top level group "
 msgstr " Gruppo principale "
 
-msgid "MC was unable to write ~/"
-msgstr " MC non può scrivere su ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " file, la vostra vecchia lista favorite non è stata eliminata"
-
 msgid " Hotlist Load "
 msgstr " Carica favorite "
+
+#, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC non è stato in grado di scrivere sul file ~/%s, il vecchio elenco di "
+"favorite non è stato eliminato"
 
 #, c-format
 msgid "Midnight Commander %s"
