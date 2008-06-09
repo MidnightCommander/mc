@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2008-06-05 13:07-0400\n"
-"PO-Revision-Date: 2008-05-31 23:06+0100\n"
+"POT-Creation-Date: 2008-06-08 23:39-0400\n"
+"PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -830,8 +830,9 @@ msgstr " Zobrazení bitù "
 msgid "Other 8 bit"
 msgstr "Ostatní 8 bitù"
 
+# Výraz "codepage" nebyl pøelo¾en zámìrnì, proto¾e kdy¾ je pøelo¾en jako "kódová stránka", nevejde se do boxu "Zobrazení bitù" s volbami nastavení. Z tého¾ dùvodu byly v pøekladu vynechány mezery u lomítka / .
 msgid "Input / display codepage:"
-msgstr "Vstupní / zobrazovací kódová stránka:"
+msgstr "Vstupní/zobrazovací codepage:"
 
 msgid "&Select"
 msgstr "&Výbìr"
@@ -1596,7 +1597,7 @@ msgid "files/directories"
 msgstr "souborù/adresáøù"
 
 msgid " with source mask:"
-msgstr " vyhovujících masce:"
+msgstr " vyhovující masce:"
 
 msgid " to:"
 msgstr " na:"
@@ -3641,169 +3642,3 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmìny souboru byly ztraceny"
-
-#~ msgid "&Prompt on replace"
-#~ msgstr "&Dotaz na nahrazení"
-
-#~ msgid "&Home"
-#~ msgstr "&Osobní"
-
-#~ msgid "&Change time"
-#~ msgstr "èas zmìn&Y"
-
-#~ msgid "&Type"
-#~ msgstr "&Typ"
-
-#~ msgid "&Links"
-#~ msgstr "&Odkazy"
-
-#~ msgid "N&GID"
-#~ msgstr "N&GID"
-
-#~ msgid "N&UID"
-#~ msgstr "N&UID"
-
-#~ msgid "&Owner"
-#~ msgstr "&Vlastník"
-
-#~ msgid "&Group"
-#~ msgstr "&Skupina"
-
-#~ msgid "MC was unable to write ~/"
-#~ msgstr "MC nemù¾e zapsat ~/"
-
-#~ msgid " (%ld blocks)"
-#~ msgstr " (%ld blokù)"
-
-#~ msgid "%s bytes in %d files"
-#~ msgstr "%s bytù v %d souborech"
-
-#~ msgid " Cannot open file for reading: "
-#~ msgstr " Nelze otevøít soubor pro ètení: "
-
-#~ msgid " Not an ordinary file: "
-#~ msgstr " Toto není obyèejný soubor: "
-
-#~ msgid "Format of the "
-#~ msgstr "Formát "
-
-#~ msgid ""
-#~ " file has changed\n"
-#~ "with version 3.0. You may want either to\n"
-#~ "copy it from "
-#~ msgstr ""
-#~ " soubor byl zmìnìn\n"
-#~ " verzí 3.0. Mù¾ete ji buï\n"
-#~ " zkopírovat z "
-
-#~ msgid ""
-#~ "mc.ext or use that\n"
-#~ "file as an example of how to write it.\n"
-#~ msgstr ""
-#~ "mc.ext nebo pou¾ít tento\n"
-#~ " soubor jako pøíklad, jak ho napsat.\n"
-
-#~ msgid "mc.ext will be used for this moment."
-#~ msgstr "nyní bude pou¾it mc.ext."
-
-#~ msgid " Cannot open file "
-#~ msgstr " Nelze otevøít soubor "
-
-#~ msgid "Col %d"
-#~ msgstr "Sloupec %d"
-
-#~ msgid "  [grow]"
-#~ msgstr " [roste]"
-
-#~ msgid "Ascii"
-#~ msgstr "Ascii"
-
-#~ msgid "Hex"
-#~ msgstr "Hex"
-
-#~ msgid "Goto"
-#~ msgstr "Jít na"
-
-#~ msgid "Line"
-#~ msgstr "Øádek"
-
-#~ msgid "RxSrch"
-#~ msgstr "RxHled"
-
-#~ msgid "EdHex"
-#~ msgstr "EdHex"
-
-#~ msgid "EdText"
-#~ msgstr "EdText"
-
-#~ msgid "UnWrap"
-#~ msgstr "Nezalamovat"
-
-#~ msgid "Wrap"
-#~ msgstr "Zalamovat"
-
-#~ msgid "HxSrch"
-#~ msgstr "HxHled"
-
-#~ msgid "Raw"
-#~ msgstr "Pøímo"
-
-#~ msgid "Parse"
-#~ msgstr "Zpracovat"
-
-#~ msgid "Unform"
-#~ msgstr "Neformátovat"
-
-#~ msgid "Format"
-#~ msgstr "Formátovat"
-
-#~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "U¾ivatelské menu je k dispozici pouze v mcedit volaném z mc"
-
-#~ msgid " Socket source routing setup "
-#~ msgstr " Nastavení zdrojového smìrování pro soket "
-
-#~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " Zadejte poèítaè pro 'source routing': "
-
-#~ msgid " Host name "
-#~ msgstr " Jméno poèítaèe "
-
-#~ msgid " Error while looking up IP address "
-#~ msgstr " Chyba pøi zji¹»ování IP adresy "
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "refresh stack underflow!\n"
-#~ "\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "\n"
-#~ "podteèení zásobníku!\n"
-#~ "\n"
-#~ "\n"
-
-#~ msgid " Listing format edit "
-#~ msgstr "Úpravy formátu výpisu"
-
-#~ msgid " New mode is \"%s\" "
-#~ msgstr " Nový re¾im je \"%s\" "
-
-#~ msgid "&Drive...       M-d"
-#~ msgstr "&Disk...\tM-d"
-
-#~ msgid "Use to debug the background code"
-#~ msgstr "Pou¾ije ladìní kódu v pozadí"
-
-#~ msgid "Force subshell execution"
-#~ msgstr "Vnutí spu¹tìní podshellu"
-
-#~ msgid " No action taken "
-#~ msgstr " ®ádná akce nebyla provedena "
-
-#~ msgid " Cannot set source routing (%s)"
-#~ msgstr " Nelze nastavit zdrojové smìrování (%s)"
