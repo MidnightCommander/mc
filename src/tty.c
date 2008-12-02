@@ -226,7 +226,7 @@ tty_tgetstr (const char *cap)
     return SLtt_tgetstr (str_unconst (cap));
 #else
     {
-	char *unused;
+	char *unused = NULL;
 	return tgetstr (str_unconst (cap), &unused);
     }
 #endif

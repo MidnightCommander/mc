@@ -1,3 +1,8 @@
+2008-12-02  Roland Illig  <roland.illig@gmx.de>
+
+	* tty.c (tty_tgetstr): Fixed a crash because of an uninitialized
+	variable.
+
 2007-11-02  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* cmd.c (save_setup_cmd): Remove redundant g_strconcat() call.
