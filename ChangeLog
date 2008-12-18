@@ -1,3 +1,8 @@
+2008-12-18  Roland Illig  <roland.illig@gmx.de>
+
+	* doc/mcedit.1: Documented the newly added filename:lineno
+	invocation method.
+
 2008-02-19  Pavel Roskin  <proski@gnu.org>
 
 	* doc/hu/mc.1.in: Fix description for M-u and M-H.  Reported by

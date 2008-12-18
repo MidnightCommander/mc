@@ -1,3 +1,9 @@
+2008-12-18  Roland Illig  <roland.illig@gmx.de>
+
+	* main.c (main): It is now possible to invoke mcedit with
+	filename:lineno[:], so that copy and paste of file locations
+	can be done quickly.
+
 2008-12-02  Roland Illig  <roland.illig@gmx.de>
 
 	* tty.c (tty_tgetstr): Fixed a crash because of an uninitialized

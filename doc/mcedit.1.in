@@ -3,7 +3,10 @@
 mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
 .B mcedit
-[\-bcCdfhstVx?] [+number] file
+[\-bcCdfhstVx?] [+lineno] file
+.PP
+.B mcedit
+[\-bcCdfhstVx?] file:lineno[:]
 .SH DESCRIPTION
 .LP
 mcedit is a link to
@@ -18,8 +21,8 @@ version of
 \- standalone editor for X Window System.
 .SH OPTIONS
 .TP
-.I "+number"
-Go  to the line specified by number (do not put a space between the
+.I "+lineno"
+Go to the line specified by number (do not put a space between the
 .I "+"
 sign and the number).
 .TP

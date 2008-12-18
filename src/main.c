@@ -2055,17 +2055,45 @@ handle_args (int argc, char *argv[])
     if (!STRNCOMP (base, "mce", 3) || !STRCOMP (base, "vi")) {
 	edit_one_file = "";
 	if (tmp) {
-	    if (*tmp == '+' && isdigit ((unsigned char) tmp[1])) {
-		int start_line = atoi (tmp);
-		if (start_line > 0) {
-		    char *file = poptGetArg (ctx);
-		    if (file) {
-			tmp = file;
-			edit_one_file_start_line = start_line;
+	    /*
+	     * Check for filename:lineno, followed by an optional colon.
+	     * This format is used by many programs (especially compilers)
+	     * in error messages and warnings. It is supported so that
+	     * users can quickly copy and paste file locations.
+	     */
+	    char *end = tmp + strlen (tmp), *p = end;
+	    if (p > tmp && p[-1] == ':')
+		p--;
+	    while (p > tmp && isdigit ((unsigned char) p[-1]))
+		p--;
+	    if (tmp < p && p < end && p[-1] == ':') {
+	        struct stat st;
+		gchar *fname = g_strndup (tmp, p - 1 - tmp);
+		/*
+		 * Check that the file before the colon actually exists.
+		 * If it doesn't exist, revert to the old behavior.
+		 */
+		if (mc_stat (tmp, &st) == -1 && mc_stat (fname, &st) != -1) {
+		    edit_one_file = fname;
+		    edit_one_file_start_line = atoi (p);
+		} else {
+		    g_free (fname);
+		    goto try_plus_filename;
+		}
+	    } else {
+	    try_plus_filename:
+		if (*tmp == '+' && isdigit ((unsigned char) tmp[1])) {
+		    int start_line = atoi (tmp);
+		    if (start_line > 0) {
+			char *file = poptGetArg (ctx);
+			if (file) {
+			    tmp = file;
+			    edit_one_file_start_line = start_line;
+			}
 		    }
 		}
+		edit_one_file = g_strdup (tmp);
 	    }
-	    edit_one_file = g_strdup (tmp);
 	}
     } else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view")) {
 	if (tmp)
