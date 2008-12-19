@@ -1,3 +1,9 @@
+2008-12-19  Roland Illig  <roland.illig@gmx.de>
+
+	* x11conn.c (x11_available): If the X11 shared library cannot be
+	found (maybe because there is neither an .la file nor a .so
+	symlink), try libX11.so.6 explicitly. Fixes Bug #24505.
+
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
 	* main.c (main): It is now possible to invoke mcedit with

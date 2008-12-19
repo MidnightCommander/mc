@@ -128,11 +128,10 @@ static gboolean x11_available(void)
 	return TRUE;
 
     x11_module_fname = g_module_build_path (NULL, "X11");
-
-    if (x11_module_fname == NULL)
-	return FALSE;
-
     x11_module = g_module_open (x11_module_fname, G_MODULE_BIND_LAZY);
+    if (x11_module == NULL)
+	x11_module = g_module_open ("libX11.so.6", G_MODULE_BIND_LAZY);
+
     g_free (x11_module_fname);
 
     if (x11_module == NULL)
