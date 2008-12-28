@@ -47,6 +47,7 @@
 #include "profile.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
 #include "main.h"	/* for `slow_terminal' */
+#include "strutil.h"
 
 #define HISTORY_FILE_NAME ".mc/history"
 
@@ -63,6 +64,51 @@ struct WButtonBar {
 	void   *data;
     } labels [10];
 };
+
+struct hotkey_t
+parse_hotkey (const char *text)
+{
+    struct hotkey_t result;
+    const char *cp, *p;
+    
+    /* search for '&', that is not on the of text */
+    cp = strchr (text, '&');
+    if (cp != NULL && cp[1] != '\0') {
+        result.start = g_strndup (text, cp - text);
+        
+        /* skip '&' */
+        cp++;
+        p = str_cget_next_char (cp);
+        result.hotkey = g_strndup (cp, p - cp);
+        
+        cp = p;
+        result.end = g_strdup (cp);
+    } else {
+        result.start = g_strdup (text);
+        result.hotkey = NULL;
+        result.end = NULL;
+    }
+    
+    return result;
+}
+void
+release_hotkey (const struct hotkey_t hotkey)
+{
+    g_free (hotkey.start);
+    g_free (hotkey.hotkey);
+    g_free (hotkey.end);
+}        
+
+int
+hotkey_width (const struct hotkey_t hotkey)
+{
+    int result;
+    
+    result = str_term_width1 (hotkey.start);
+    result+= (hotkey.hotkey != NULL) ? str_term_width1 (hotkey.hotkey) : 0;
+    result+= (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
+    return result;
+}
 
 static int button_event (Gpm_Event *event, void *);
 

@@ -9,6 +9,26 @@
 /* button callback */
 typedef int (*bcback) (int);
 
+/* structure for label (caption) with hotkey, if original text does not contain
+ * hotkey, only start is valid and is equal to original text
+ * hotkey is defined as char*, but mc support only singlebyte hotkey
+ */
+struct hotkey_t {
+    char *start;
+    char *hotkey;
+    char *end;
+};
+
+/* used in static definition of menu entries */
+#define NULL_HOTKEY {NULL, NULL, NULL}
+
+/* create hotkey from text */
+struct hotkey_t parse_hotkey (const char *text);
+/* release hotkey, free all mebers of hotkey_t */
+void release_hotkey (const struct hotkey_t hotkey);
+/* return width on terminal of hotkey */
+int hotkey_width (const struct hotkey_t hotkey);
+
 typedef struct WButton {
     Widget widget;
     int action;			/* what to do when pressed */
