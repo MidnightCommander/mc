@@ -6,23 +6,23 @@ Dritta: devi inserire un carattere speciale? Usa C-q e il carattere.
 Dritta: stanco di questi messaggi? Disattivali dal menu Opzioni/Aspetto.
 Dritta: selezione directory: inserisci uno slash alla fine della selezione.
 Dritta: se al tuo terminale mancano i tasti funzione usa ESC+numero tasto.
-Dritta: l'URL del Midnight Commander è: http://www.midnight-commander.org/
+Dritta: l'URL del Midnight Commander Ã¨: http://www.midnight-commander.org/
 Dritta: la home page del Midnight Commander: http://www.midnight-commander.org/
 Dritta: prego spedire i bug report a mc-devel@gnome.org
 Dritta: tab cambia il pannello corrente.
 Dritta: magico VFS; premi invio su un file tar per esaminarne il contenuto.
-Dritta: c'è anche un bel manuale.
+Dritta: c'Ã¨ anche un bel manuale.
 Dritta: navigazione stile lynx? Impostala in finestra di configurazione.
 Dritta: le macro % funzionano anche sulla linea di comando!
 Dritta: M-! permette di eseguire programmi e vedere il risultato nel viewer.
-Dritta: il formato della lista file è impostabile; "man mc" per i dettagli.
+Dritta: il formato della lista file Ã¨ impostabile; "man mc" per i dettagli.
 Dritta: %D/%T espande i file selezionati nella directory opposta.
 Dritta: vuoi la tua shell? Premi C-o e torna nuovamente a MC con C-o.
-Dritta: impostare la variabile CDPATH può far risparmiare tasti nei comandi cd.
+Dritta: impostare la variabile CDPATH puÃ² far risparmiare tasti nei comandi cd.
 Dritta: se vuoi vedere i tuoi file .* impostalo nella Configurazione.
 Dritta: vuoi vedere i tuoi *~ file di backup? Impostalo nella Configurazione.
 Dritta: il completamento funziona su tutti gli input. Basta premere M-Tab.
-Dritta: con terminali lenti può aiutare la flag -s.
+Dritta: con terminali lenti puÃ² aiutare la flag -s.
 Dritta: trova file: puoi elaborare i file trovati usando il bottone Pannellizza.
 Dritta: vuoi fare ricerche complesse? Usa il comando Pannellizza.
 Dritta: per cambiare directory mentre batti un comando, usa M-c (cd rapido).
@@ -36,7 +36,7 @@ Dritta: puoi specificare il visualizzatore esterno con la variabile shell PAGER.
 Dritta: puoi disabilitare tutte le richieste di conferma in Opzioni/Conferme.
 Dritta: salta nelle directory usate frequentemente in un colpo con C-\.
 Dritta: puoi fare FTP anonimo con mc battendo 'cd /#ftp:macchina.edu'
-Dritta: l'FTP è integrato nel Midnight Commander, controlla il menu FTP.
+Dritta: l'FTP Ã¨ integrato nel Midnight Commander, controlla il menu FTP.
 Dritta: M-t cambia velocemente il modo listato.
 Dritta: puoi dare il nome utente facendo ftp: 'cd /#ftp:utente@macchina.edu'
 Dritta: puoi navigare attraverso i file RPM battendo invio su di essi.

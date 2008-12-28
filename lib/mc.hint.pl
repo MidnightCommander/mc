@@ -1,45 +1,45 @@
-Porada: Za pomoc± C-x t kopiuje siê nazwy zaznaczoych plików do wiersza poleceñ.
-Porada: Za pomoc± C-x p kopiuje siê nazwê bie¿±cej ¶cie¿ki do wiersza poleceñ.
-Porada: Uzupe³nianie: M-Tab (lub Esc+Tab). Podwójne wci¶niêcie wywo³uje listê.
-Porada: M-p i M-n udostêpnia historiê poleceñ.
-Porada: Cytowanie znaku mo¿na uzyskaæ naciskaj±c Contrl-q i odpowiedni znak.
-Porada: Zmêczony poradami? Wy³±cz je w menu Opcje|Uk³ad...
-Porada: Wybieranie katalogów: dodaj uko¶nik na koñcu wzorca dopasowania.
-Porada: Je¶li w twoim terminalu brak klawiszy funkcyjnych, u¿yj Esc+numer.
+Porada: Za pomocÄ… C-x t kopiuje siÄ™ nazwy zaznaczoych plikÃ³w do wiersza poleceÅ„.
+Porada: Za pomocÄ… C-x p kopiuje siÄ™ nazwÄ™ bieÅ¼Ä…cej Å›cieÅ¼ki do wiersza poleceÅ„.
+Porada: UzupeÅ‚nianie: M-Tab (lub Esc+Tab). PodwÃ³jne wciÅ›niÄ™cie wywoÅ‚uje listÄ™.
+Porada: M-p i M-n udostÄ™pnia historiÄ™ poleceÅ„.
+Porada: Cytowanie znaku moÅ¼na uzyskaÄ‡ naciskajÄ…c Contrl-q i odpowiedni znak.
+Porada: ZmÄ™czony poradami? WyÅ‚Ä…cz je w menu Opcje|UkÅ‚ad...
+Porada: Wybieranie katalogÃ³w: dodaj ukoÅ›nik na koÅ„cu wzorca dopasowania.
+Porada: JeÅ›li w twoim terminalu brak klawiszy funkcyjnych, uÅ¼yj Esc+numer.
 Porada: Witryna Midnight Commandera jest pod adresem http://www.midnight-commander.org/
 Porada: Strona domowa Midnight Commandera pod adresem http://www.midnight-commander.org/
-Porada: Opis b³êdów (w jêzyku angielskim) wysy³aj na mc-devel@gnome.org
-Porada: Za pomoc± klawisza Tab zmienia siê bie¿±cy panel.
-Porada: VFS: naci¶nij Enter na archiwum tar, aby obejrzeæ jego zawarto¶æ.
-Porada: Na stronê podrêcznikow± te¿ warto zajrzeæ.
-Porada: Chcesz siê poruszaæ tak jak w lynksie? Ustaw to w menu Konfiguracja...
-Porada: Makra % dzia³aj± nawet w wierszu poleceñ.
-Porada: M-! pozwala na podgl±d wyj¶cia uruchamianych programów w przegl±darce.
-Porada: Tryb wy¶wietlania listy plików mo¿na dostosowywaæ: zobacz "man mc".
+Porada: Opis bÅ‚Ä™dÃ³w (w jÄ™zyku angielskim) wysyÅ‚aj na mc-devel@gnome.org
+Porada: Za pomocÄ… klawisza Tab zmienia siÄ™ bieÅ¼Ä…cy panel.
+Porada: VFS: naciÅ›nij Enter na archiwum tar, aby obejrzeÄ‡ jego zawartoÅ›Ä‡.
+Porada: Na stronÄ™ podrÄ™cznikowÄ… teÅ¼ warto zajrzeÄ‡.
+Porada: Chcesz siÄ™ poruszaÄ‡ tak jak w lynksie? Ustaw to w menu Konfiguracja...
+Porada: Makra % dziaÅ‚ajÄ… nawet w wierszu poleceÅ„.
+Porada: M-! pozwala na podglÄ…d wyjÅ›cia uruchamianych programÃ³w w przeglÄ…darce.
+Porada: Tryb wyÅ›wietlania listy plikÃ³w moÅ¼na dostosowywaÄ‡: zobacz "man mc".
 Porada: %D/%T oznacza zazanaczone pliki w drugim panelu.
-Porada: Dostêp do zwyk³ej pow³oki przez C-o. Powrót do MC przez ponowne C-o.
-Porada: Ustawienie zmiennej CDPATH mo¿e ci zaoszczêdziæ pisania.
-Porada: Je¶li chcesz zobaczyæ pliki .*, zmieñ ustawienie w menu Konfiguracja...
-Porada: Je¶li chcesz zobaczyæ pliki .*~, zmieñ ustawienie w menu Konfiguracja...
-Porada: Uzupe³nianie dzia³a wszêdzie. Po prostu naci¶nij M-Tab.
-Porada: Je¶li masz powolny terminal, spróbuj u¿yæ opcji -s.
-Porada: Znajd¼ plik: na znalezionych plikach wykonujemy operacje poprzez Filtruj.
-Porada: Chcesz u¿yæ z³o¿onego wyszukiwania? U¿yj polecenia Filtr zewnêtrzny.
-Porada: Je¶li chcesz szybciej zmieniaæ ¶cie¿kê, u¿yj M-c (szybka zmiana katalogu).
-Porada: Polecenia pow³oki dzia³aj± tylko w lokalnym systemie plików.
-Porada: Przywróæ skasowany tekst za pomoc± C-y.
-Porada: Niektóre klawisze nie dzia³aj±? Patrz menu Opcje|Definiuj klawisze...
-Porada: Aby obejrzeæ wyj¶cie polecenia w przegl±darce u¿yj M-!
-Porada: F13 (lub Shift-F3) wywo³uje przegl±darkê w trybie surowym.
-Porada: Mo¿esz okre¶liæ edytor pod F4 przez zmienn± pow³oki EDITOR.
-Porada: Mo¿esz okre¶liæ zewnêtrzn± przegl±darkê przez zmienn± pow³oki PAGER.
-Porada: Mo¿esz wy³±czyæ ¿±dania potwierdzenia przez menu Opcje|Potwierdzanie...
-Porada: Przejd¼ do listy najczê¶ciej u¿ywanych katalogów przez C-\.
-Porada: Z anonimowego FTP korzystamy pisz±c 'cd /#ftp:machine.edu'
-Porada: MC ma wbudowan± obs³ugê FTP; patrz menu Plik, Po³±czenie FTP...
-Porada: M-t prze³±cza tryby wy¶wietlania listy plików.
-Porada: U¿ytkownika FTP okre¶lamy przez: 'cd /#ftp:user@machine.edu'
-Porada: Pakiety RPM przegl±damy naciskaj±c na nich Enter.
-Porada: Aby zazanaczyæ katalogi w oknie dialogowym zaznaczania dodaj uko¶nik.
-Porada: U¿ywanie kopiowania i wklejania za pomoc± myszy mo¿e wymagaæ Shifta.
-Porada: Klawiszem C-\ dopisz do podrêcznej listy czêsto odwiedzane zasoby FTP.
+Porada: DostÄ™p do zwykÅ‚ej powÅ‚oki przez C-o. PowrÃ³t do MC przez ponowne C-o.
+Porada: Ustawienie zmiennej CDPATH moÅ¼e ci zaoszczÄ™dziÄ‡ pisania.
+Porada: JeÅ›li chcesz zobaczyÄ‡ pliki .*, zmieÅ„ ustawienie w menu Konfiguracja...
+Porada: JeÅ›li chcesz zobaczyÄ‡ pliki .*~, zmieÅ„ ustawienie w menu Konfiguracja...
+Porada: UzupeÅ‚nianie dziaÅ‚a wszÄ™dzie. Po prostu naciÅ›nij M-Tab.
+Porada: JeÅ›li masz powolny terminal, sprÃ³buj uÅ¼yÄ‡ opcji -s.
+Porada: ZnajdÅº plik: na znalezionych plikach wykonujemy operacje poprzez Filtruj.
+Porada: Chcesz uÅ¼yÄ‡ zÅ‚oÅ¼onego wyszukiwania? UÅ¼yj polecenia Filtr zewnÄ™trzny.
+Porada: JeÅ›li chcesz szybciej zmieniaÄ‡ Å›cieÅ¼kÄ™, uÅ¼yj M-c (szybka zmiana katalogu).
+Porada: Polecenia powÅ‚oki dziaÅ‚ajÄ… tylko w lokalnym systemie plikÃ³w.
+Porada: PrzywrÃ³Ä‡ skasowany tekst za pomocÄ… C-y.
+Porada: NiektÃ³re klawisze nie dziaÅ‚ajÄ…? Patrz menu Opcje|Definiuj klawisze...
+Porada: Aby obejrzeÄ‡ wyjÅ›cie polecenia w przeglÄ…darce uÅ¼yj M-!
+Porada: F13 (lub Shift-F3) wywoÅ‚uje przeglÄ…darkÄ™ w trybie surowym.
+Porada: MoÅ¼esz okreÅ›liÄ‡ edytor pod F4 przez zmiennÄ… powÅ‚oki EDITOR.
+Porada: MoÅ¼esz okreÅ›liÄ‡ zewnÄ™trznÄ… przeglÄ…darkÄ™ przez zmiennÄ… powÅ‚oki PAGER.
+Porada: MoÅ¼esz wyÅ‚Ä…czyÄ‡ Å¼Ä…dania potwierdzenia przez menu Opcje|Potwierdzanie...
+Porada: PrzejdÅº do listy najczÄ™Å›ciej uÅ¼ywanych katalogÃ³w przez C-\.
+Porada: Z anonimowego FTP korzystamy piszÄ…c 'cd /#ftp:machine.edu'
+Porada: MC ma wbudowanÄ… obsÅ‚ugÄ™ FTP; patrz menu Plik, PoÅ‚Ä…czenie FTP...
+Porada: M-t przeÅ‚Ä…cza tryby wyÅ›wietlania listy plikÃ³w.
+Porada: UÅ¼ytkownika FTP okreÅ›lamy przez: 'cd /#ftp:user@machine.edu'
+Porada: Pakiety RPM przeglÄ…damy naciskajÄ…c na nich Enter.
+Porada: Aby zazanaczyÄ‡ katalogi w oknie dialogowym zaznaczania dodaj ukoÅ›nik.
+Porada: UÅ¼ywanie kopiowania i wklejania za pomocÄ… myszy moÅ¼e wymagaÄ‡ Shifta.
+Porada: Klawiszem C-\ dopisz do podrÄ™cznej listy czÄ™sto odwiedzane zasoby FTP.
