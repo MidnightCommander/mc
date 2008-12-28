@@ -609,22 +609,20 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		attrset (DEFAULT_COLOR);
 	    else
 		attrset (DLG_NORMALC (h));
-	    for (;;) {
-		int xlen;
 
+            for (;;) {
 		q = strchr (p, '\n');
-		if (q) {
-		    c = *q;
-		    *q = 0;
+                if (q != NULL) {
+                    c = q[0];
+                    q[0] = '\0';
 		}
+		
 		widget_move (&l->widget, y, 0);
-		tty_printf ("%s", p);
-		xlen = l->widget.cols - strlen (p);
-		if (xlen > 0)
-		    tty_printf ("%*s", xlen, " ");
-		if (!q)
+                addstr (str_fit_to_term (p, l->widget.cols, J_LEFT));
+                
+                if (q == NULL)
 		    break;
-		*q = c;
+                q[0] = c;
 		p = q + 1;
 		y++;
 	    }
@@ -644,21 +642,23 @@ void
 label_set_text (WLabel *label, const char *text)
 {
     int newcols = label->widget.cols;
+    int newlines;
     
     if (label->text && text && !strcmp (label->text, text))
         return; /* Flickering is not nice */
 
     g_free (label->text);
 
-    if (text){
+    if (text != NULL) {
 	label->text = g_strdup (text);
 	if (label->auto_adjust_cols) {
-	    newcols = strlen (text);
+            str_msg_term_size (text, &newlines, &newcols);
 	    if (newcols > label->widget.cols)
 	    label->widget.cols = newcols;
+            if (newlines > label->widget.lines)
+                label->widget.lines = newlines;
 	}
-    } else
-	label->text = 0;
+    } else label->text = NULL;
     
     if (label->widget.parent)
 	label_callback ((Widget *) label, WIDGET_DRAW, 0);
@@ -671,17 +671,15 @@ WLabel *
 label_new (int y, int x, const char *text)
 {
     WLabel *l;
-    int width;
+    int cols = 1;
+    int lines = 1;
 
-    /* Multiline labels are immutable - no need to compute their sizes */
-    if (!text || strchr(text, '\n'))
-	width = 1;
-    else
-	width = strlen (text);
+    if (text != NULL)
+        str_msg_term_size (text, &lines, &cols);
 
     l = g_new (WLabel, 1);
-    init_widget (&l->widget, y, x, 1, width, label_callback, NULL);
-    l->text = text ? g_strdup (text) : 0;
+    init_widget (&l->widget, y, x, lines, cols, label_callback, NULL);
+    l->text = (text != NULL) ? g_strdup (text) : NULL;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
     widget_want_cursor (l->widget, 0);
