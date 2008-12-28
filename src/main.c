@@ -61,6 +61,7 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
+#include "strutil.h"
 
 /* Listbox for the command history feature */
 #include "widget.h"
@@ -2134,6 +2135,8 @@ main (int argc, char *argv[])
 	home_dir = mc_home;
     }
 
+    str_init_strings (NULL);
+
     vfs_init ();
 
 #ifdef HAVE_SLANG
@@ -2253,6 +2256,8 @@ main (int argc, char *argv[])
 #ifdef HAVE_CHARSET
     free_codepages_list ();
 #endif
+    str_uninit_strings ();
+
     g_free (this_dir);
     g_free (other_dir);
 
