@@ -36,6 +36,7 @@
 #include "panel.h"	/* do_file_mark() */
 #include "main.h"	/* update_panels() */
 #include "chmod.h"
+#include "strutil.h"
 
 static int single_set;
 
@@ -296,11 +297,11 @@ void chmod_cmd (void)
 	}
 
 	/* Set the labels */
-	c_fname = name_trunc (fname, 21);
+	c_fname = str_trunc (fname, 21);
 	add_widget (ch_dlg, label_new (FY+2, FX+2, c_fname));
-	c_fown = name_trunc (get_owner (sf_stat.st_uid), 21);
+	c_fown = str_trunc (get_owner (sf_stat.st_uid), 21);
 	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown));
-	c_fgrp = name_trunc (get_group (sf_stat.st_gid), 21);
+	c_fgrp = str_trunc (get_group (sf_stat.st_gid), 21);
 	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp));
 	g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	statl = label_new (FY+4, FX+2, buffer);
