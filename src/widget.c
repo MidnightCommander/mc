@@ -2600,7 +2600,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x + 1);
-	addstr (g->title);
+	addstr (str_term_form (g->title));
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
