@@ -706,7 +706,7 @@ load_prompt (int fd, void *unused)
 	int prompt_len;
 
 	tmp_prompt = strip_ctrl_codes (subshell_prompt);
-	prompt_len = strlen (tmp_prompt);
+	prompt_len = str_term_width1 (tmp_prompt);
 
 	/* Check for prompts too big */
 	if (COLS > 8 && prompt_len > COLS - 8) {
@@ -1607,17 +1607,12 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 void
 update_xterm_title_path (void)
 {
-    char *p, *s;
+    const char *p;
 
     if (xterm_flag && xterm_title) {
-	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
-	do {
-	    if (!is_printable ((unsigned char) *s))
-		*s = '?';
-	} while (*++s);
-	fprintf (stdout, "\33]0;mc - %s\7", p);
+	p = strip_home_and_password (current_panel->cwd);
+	fprintf (stdout, "\33]0;mc - %s\7", str_term_form (p));
 	fflush (stdout);
-	g_free (p);
     }
 }
 
@@ -2065,7 +2060,7 @@ handle_args (int argc, char *argv[])
 	    char *end = tmp + strlen (tmp), *p = end;
 	    if (p > tmp && p[-1] == ':')
 		p--;
-	    while (p > tmp && isdigit ((unsigned char) p[-1]))
+	    while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
 		p--;
 	    if (tmp < p && p < end && p[-1] == ':') {
 	        struct stat st;
@@ -2083,7 +2078,7 @@ handle_args (int argc, char *argv[])
 		}
 	    } else {
 	    try_plus_filename:
-		if (*tmp == '+' && isdigit ((unsigned char) tmp[1])) {
+		if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1])) {
 		    int start_line = atoi (tmp);
 		    if (start_line > 0) {
 			char *file = poptGetArg (ctx);

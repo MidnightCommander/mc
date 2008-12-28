@@ -973,7 +973,7 @@ void edit_symlink_cmd (void)
 
 	p = selection (current_panel)->fname;
 
-	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
+	q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
 
 	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {

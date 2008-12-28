@@ -32,6 +32,7 @@
 #include "global.h"
 #include "color.h"
 #include "main.h"		/* for slow_terminal */
+#include "strutil.h"
 
 #ifdef USE_NCURSES
 #define WANT_TERM_H
@@ -159,9 +160,9 @@ extern void
 tty_print_string(const char *s)
 {
 #ifdef HAVE_SLANG
-    SLsmg_write_string(str_unconst(s));
+    SLsmg_write_string (str_unconst (str_term_form (s)));
 #else
-    addstr(s);
+    addstr (str_term_form (s));
 #endif
 }
 

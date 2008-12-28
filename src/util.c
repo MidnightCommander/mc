@@ -230,27 +230,7 @@ fake_name_quote (const char *s, int quote_percent)
 const char *
 name_trunc (const char *txt, int trunc_len)
 {
-    static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
-    int txt_len;
-    char *p;
-
-    if ((size_t) trunc_len > sizeof (x) - 1) {
-	trunc_len = sizeof (x) - 1;
-    }
-    txt_len = strlen (txt);
-    if (txt_len <= trunc_len) {
-	strcpy (x, txt);
-    } else {
-	int y = (trunc_len / 2) + (trunc_len % 2);
-	strncpy (x, txt, y);
-	strncpy (x + y, txt + txt_len - (trunc_len / 2), trunc_len / 2);
-	x[y] = '~';
-    }
-    x[trunc_len] = 0;
-    for (p = x; *p; p++)
-	if (!is_printable (*p))
-	    *p = '?';
-    return x;
+    return str_trunc (txt, trunc_len);
 }
 
 /*
@@ -260,10 +240,9 @@ name_trunc (const char *txt, int trunc_len)
  */
 const char *
 path_trunc (const char *path, int trunc_len) {
-    const char *ret;
     char *secure_path = strip_password (g_strdup (path), 1);
     
-    ret = name_trunc (secure_path, trunc_len);
+    const char *ret = str_trunc (secure_path, trunc_len);
     g_free (secure_path);
     
     return ret;
@@ -810,7 +789,7 @@ _icase_search (const char *text, const char *data, int *lng)
 	    e += 2;
 	    dlng += 2;
 	}
-	if (toupper((unsigned char) *d) == toupper((unsigned char) *e))
+	if (g_ascii_toupper((gchar) *d) == g_ascii_toupper((gchar) *e))
 	    d++;
 	else {
 	    e -= d - text;
@@ -856,19 +835,23 @@ unix_error_string (int error_num)
 const char *
 skip_separators (const char *s)
 {
-    for (;*s; s++)
-	if (*s != ' ' && *s != '\t' && *s != ',')
-	    break;
-    return s;
+    const char *su = s;
+
+    for (;*su; str_cnext_char (&su))
+	if (*su != ' ' && *su != '\t' && *su != ',') break;
+
+    return su;
 }
 
 const char *
 skip_numbers (const char *s)
 {
-    for (;*s; s++)
-	if (!isdigit ((unsigned char) *s))
-	    break;
-    return s;
+    const char *su = s;
+
+    for (;*su; str_cnext_char (&su))
+	if (!str_isdigit (su)) break;
+
+    return su;
 }
 
 /* Remove all control sequences from the argument string.  We define
@@ -889,6 +872,7 @@ strip_ctrl_codes (char *s)
 {
     char *w; /* Current position where the stripped data is written */
     char *r; /* Current position where the original data is read */
+    char *n;
 
     if (!s)
 	return 0;
@@ -910,9 +894,12 @@ strip_ctrl_codes (char *s)
 	    continue;
 	}
 
-	if (is_printable(*r))
-	    *w++ = *r;
-	++r;
+	n = str_get_next_char (r);
+	if (str_isprint (r)) {
+	    memmove (w, r, n - r);
+	    w+= n - r;
+	}
+	r = n;
     }
     *w = 0;
     return s;
@@ -1473,21 +1460,10 @@ save_file_position (const char *filename, long line, long column)
 extern const char *
 cstrcasestr (const char *haystack, const char *needle)
 {
-    const char *hptr;
-    size_t i, needle_len;
-
-    needle_len = strlen (needle);
-    for (hptr = haystack; *hptr != '\0'; hptr++) {
-	for (i = 0; i < needle_len; i++) {
-	    if (toupper ((unsigned char) hptr[i]) !=
-		toupper ((unsigned char) needle[i]))
-		goto next_try;
-	}
-	return hptr;
-      next_try:
-	(void) 0;
-    }
-    return NULL;
+    char *nee = str_create_search_needle (needle, 0);
+    const char *result = str_search_first (haystack, nee, 0);
+    str_release_search_needle (nee, 0);
+    return result;
 }
 
 const char *

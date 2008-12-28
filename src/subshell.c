@@ -52,6 +52,7 @@
 #include "cons.saver.h"	/* handle_console() */
 #include "key.h"	/* XCTRL */
 #include "subshell.h"
+#include "strutil.h"
 
 #ifndef WEXITSTATUS
 #   define WEXITSTATUS(stat_val) ((unsigned)(stat_val) >> 8)
@@ -700,8 +701,10 @@ static char *
 subshell_name_quote (const char *s)
 {
     char *ret, *d;
+    const char *su, *n;
     const char quote_cmd_start[] = "\"`printf \"%b\" '";
     const char quote_cmd_end[] = "'`\"";
+    int c;
 
     /* Factor 5 because we need \, 0 and 3 other digits per character. */
     d = ret = g_malloc (1 + (5 * strlen (s)) + (sizeof(quote_cmd_start) - 1)
@@ -724,13 +727,19 @@ subshell_name_quote (const char *s)
      * sequence of the form \0nnn, where "nnn" is the numeric value of the
      * character converted to octal number.
      */
-    for (; *s; s++) {
-	if (isalnum ((unsigned char) *s)) {
-	    *d++ = (unsigned char) *s;
+    su = s;
+    for (; su[0] != '\0'; ) {
+	n = str_cget_next_char_safe (su);
+	if (str_isalnum (su)) {
+	    memcpy (d, su, n - su);
+	    d+= n - su;
 	} else {
-	    sprintf (d, "\\0%03o", (unsigned char) *s);
-	    d += 5;
+	    for (c = 0; c < n - su; c++) {
+		sprintf (d, "\\0%03o", (unsigned char) su[c]);
+		d += 5;
+	    }
 	}
+	su = n;
     }
 
     strcpy (d, quote_cmd_end);
