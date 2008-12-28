@@ -50,20 +50,9 @@
 #include "main-widgets.h"
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
+#include "strutil.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
-
-#define J_LEFT 		1
-#define J_RIGHT		2
-#define J_CENTER	3
-
-#define IS_FIT(x)	((x) & 0x0004)
-#define MAKE_FIT(x)	((x) | 0x0004)
-#define HIDE_FIT(x)	((x) & 0x0003)
-
-#define J_LEFT_FIT	5
-#define J_RIGHT_FIT	6
-#define J_CENTER_FIT	7
 
 #define NORMAL		0
 #define SELECTED	1
@@ -172,24 +161,8 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 static const char *
 string_file_name (file_entry *fe, int len)
 {
-    static char buffer [MC_MAXPATHLEN + 1];
-    size_t i;
-
-    for (i = 0; i < sizeof(buffer) - 1; i++) {
-	char c;
-
-	c = fe->fname[i];
-
-	if (!c)
-	    break;
-
-	if (!is_printable(c))
-	    c = '?';
-
-	buffer[i] = c;
-    }
-
-    buffer[i] = 0;
+    static char buffer [MC_MAXPATHLEN * MB_LEN_MAX + 1];
+    g_strlcpy (buffer, fe->fname, sizeof(buffer));
     return buffer;
 }
 
@@ -451,42 +424,6 @@ static struct {
 { "dot",   1,  0, J_RIGHT,	" ",		0, string_dot,		   NULL },
 };
 
-static char *
-to_buffer (char *dest, int just_mode, int len, const char *txt)
-{
-    int txtlen = strlen (txt);
-    int still, over;
-
-    /* Fill buffer with spaces */
-    memset (dest, ' ', len);
-
-    still = (over=(txtlen > len)) ? (txtlen - len) : (len - txtlen);
-
-    switch (HIDE_FIT(just_mode)){
-        case J_LEFT:
-	    still = 0;
-	    break;
-	case J_CENTER:
-	    still /= 2;
-	    break;
-	case J_RIGHT:
-	default:
-	    break;
-    }
-
-    if (over){
-	if (IS_FIT(just_mode))
-	    strcpy (dest, name_trunc(txt, len));
-	else
-	    strncpy (dest, txt+still, len);
-    } else
-	strncpy (dest+still, txt, txtlen);
-
-    dest[len] = '\0';
-
-    return (dest + len);
-}
-
 static int
 file_compute_color (int attr, file_entry *fe)
 {
@@ -544,8 +481,6 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 {
     int      color, length, empty_line;
     const char *txt;
-    char     *old_pos;
-    char     *cdest = dest;
     format_e *format, *home;
     file_entry *fe;
 
@@ -565,34 +500,38 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	    break;
 
 	if (format->string_fn){
-	    int len;
+            int len, perm;
+            char *preperad_text;
 
 	    if (empty_line)
 		txt = " ";
 	    else
 		txt = (*format->string_fn)(fe, format->field_len);
 
-	    old_pos = cdest;
-
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
-	    if (len + (cdest - dest) > limit)
-		len = limit - (cdest - dest);
 	    if (len <= 0)
 		break;
-	    cdest = to_buffer (cdest, format->just_mode, len, txt);
-	    length += len;
+
+            perm = 0;
+            if (permission_mode) {
+                if (!strcmp(format->id, "perm"))
+                    perm = 1;
+                else if (!strcmp(format->id, "mode"))
+                    perm = 2;
+            }
 
             attrset (color);
 
-            if (permission_mode && !strcmp(format->id, "perm"))
-                add_permission_string (old_pos, format->field_len, fe, attr, color, 0);
-            else if (permission_mode && !strcmp(format->id, "mode"))
-                add_permission_string (old_pos, format->field_len, fe, attr, color, 1);
+            preperad_text = (char*) str_fit_to_term(txt, len, format->just_mode);
+            if (perm)
+                add_permission_string (preperad_text, format->field_len, fe,
+                                       attr, color, perm - 1);
             else
-		addstr (old_pos);
+                addstr (preperad_text);
 
+            length+= len;
 	} else {
             if (attr == SELECTED || attr == MARKED_SELECTED)
                 attrset (SELECTED_COLOR);
@@ -666,7 +605,9 @@ display_mini_info (WPanel *panel)
 
     if (panel->searching){
 	attrset (INPUT_COLOR);
-	tty_printf ("/%-*s", panel->widget.cols-3, panel->search_buffer);
+        addstr ("/");
+        addstr (str_fit_to_term (panel->search_buffer, 
+                panel->widget.cols - 3, J_LEFT));
 	attrset (NORMAL_COLOR);
 	return;
     }
@@ -674,12 +615,10 @@ display_mini_info (WPanel *panel)
     /* Status displays total marked size */
     if (panel->marked){
 	char buffer[BUF_SMALL], b_bytes[BUF_SMALL];
-	const char *p = "  %-*s";
-	int  cols = panel->widget.cols-2;
+	int  cols = panel->widget.cols - 2;
 
 	attrset (MARKED_COLOR);
-	tty_printf  ("%*s", cols, " ");
-	widget_move (&panel->widget, llines (panel)+3, 1);
+	widget_move (&panel->widget, llines (panel) + 3, 1);
 
 	/*
 	 * This is a trick to use two ngettext() calls in one sentence.
@@ -693,12 +632,11 @@ display_mini_info (WPanel *panel)
 		   ngettext("%s in %d file", "%s in %d files", panel->marked),
 		   b_bytes, panel->marked);
 
-	if ((int) strlen (buffer) > cols-2){
-	    buffer [cols] = 0;
-	    p += 2;
-	} else
-	    cols -= 2;
-	tty_printf (p, cols, buffer);
+	if (str_term_width1 (buffer) <= cols - 2){
+            addstr ("  ");
+            cols-= 2;
+        }
+	addstr (str_fit_to_term (buffer, cols, J_LEFT));
 	return;
     }
 
@@ -714,10 +652,12 @@ display_mini_info (WPanel *panel)
 	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
-	    tty_printf ("-> %-*s", panel->widget.cols - 5,
-		     name_trunc (link_target, panel->widget.cols - 5));
+            addstr ("-> ");
+            addstr (str_fit_to_term (link_target, panel->widget.cols - 5, 
+                    J_LEFT_FIT));
 	} else
-	    tty_printf ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
+            addstr (str_fit_to_term (_("<readlink failed>"), 
+                    panel->widget.cols - 2, J_LEFT));
 	return;
     }
 
@@ -767,7 +707,7 @@ mini_info_separator (WPanel *panel)
 static void
 show_dir (WPanel *panel)
 {
-    char *tmp;
+    int len;
 
     set_colors (panel);
     draw_double_box (panel->widget.parent,
@@ -788,17 +728,12 @@ show_dir (WPanel *panel)
 	attrset (REVERSE_COLOR);
 
     widget_move (&panel->widget, 0, 3);
-    addch (' ');
-
-    tmp = g_malloc (panel->widget.cols + 1);
-    tmp[panel->widget.cols] = '\0';
-
-    trim (strip_home_and_password (panel->cwd), tmp,
-	 max (panel->widget.cols - 9, 0));
-    addstr (tmp);
-    g_free (tmp);
 
     addch (' ');
+    len = min (max (panel->widget.cols - 9, 0), panel->widget.cols); 
+    addstr (str_term_trim (strip_home_and_password (panel->cwd), len));
+    addch (' ');
+
     widget_move (&panel->widget, 0, 1);
     addstr ("<");
     widget_move (&panel->widget, 0, panel->widget.cols - 2);
@@ -1101,7 +1036,6 @@ static void
 paint_frame (WPanel *panel)
 {
     int  header_len;
-    int  spaces, extra;
     int  side, width;
 
     const char *txt;
@@ -1134,11 +1068,8 @@ paint_frame (WPanel *panel)
 		    header_len = format->field_len;
 
                 attrset (MARKED_COLOR);
-                spaces = (format->field_len - header_len) / 2;
-                extra  = (format->field_len - header_len) % 2;
-		tty_printf ("%*s%.*s%*s", spaces, "",
-			 header_len, txt, spaces+extra, "");
-		width -= 2 * spaces + extra + header_len;
+                addstr (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
+                width -= format->field_len;
 	    } else {
 		attrset (NORMAL_COLOR);
 		one_vline ();
@@ -1891,24 +1822,49 @@ mark_file (WPanel *panel)
 static void
 do_search (WPanel *panel, int c_code)
 {
-    size_t l;
-    int i;
+    size_t l, max, buf_max;
+    int i, sel;
     int wrapped = 0;
-    int found;
+    char *act;
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
-	if (l)
-	    panel->search_buffer[--l] = '\0';
+	if (l != 0) {
+            act = panel->search_buffer + l;
+            str_prev_noncomb_char (&act, panel->search_buffer);
+            act[0] = '\0';
+        }
+        panel->search_chpoint = 0;
     } else {
-	if (c_code && l < sizeof (panel->search_buffer)) {
-	    panel->search_buffer[l] = c_code;
-	    panel->search_buffer[l + 1] = 0;
-	    l++;
+        if (c_code && panel->search_chpoint < sizeof (panel->search_char)) {
+            panel->search_char[panel->search_chpoint] = c_code;
+            panel->search_chpoint++;
+	}
+        
+        if (panel->search_chpoint > 0) {
+            switch (str_is_valid_char (panel->search_char, panel->search_chpoint)) {
+                case -2:
+                    return;
+                case -1:
+                    panel->search_chpoint = 0;
+                    return;
+                default:
+                    if (l + panel->search_chpoint < sizeof (panel->search_buffer)) { 
+                        memcpy (panel->search_buffer + l, panel->search_char, 
+                                panel->search_chpoint);
+                        l+= panel->search_chpoint;
+                        (panel->search_buffer + l)[0] = '\0';
+                        panel->search_chpoint = 0;
+                }
+	   }
 	}
     }
 
-    found = 0;
+    buf_max = panel->case_sensitive ? 
+            str_prefix (panel->search_buffer, panel->search_buffer) :
+            str_caseprefix (panel->search_buffer, panel->search_buffer);
+    max = 0;
+    sel = panel->selected;
     for (i = panel->selected; !wrapped || i != panel->selected; i++) {
 	if (i >= panel->count) {
 	    i = 0;
@@ -1916,20 +1872,28 @@ do_search (WPanel *panel, int c_code)
 		break;
 	    wrapped = 1;
 	}
-	if (panel->
-	    case_sensitive
-	    ? (strncmp (panel->dir.list[i].fname, panel->search_buffer, l)
-	       == 0) : (g_strncasecmp (panel->dir.list[i].fname,
-				       panel->search_buffer, l) == 0)) {
-	    unselect_item (panel);
-	    panel->selected = i;
-	    select_item (panel);
-	    found = 1;
-	    break;
+        l = panel->case_sensitive ? 
+            str_prefix (panel->dir.list[i].fname, panel->search_buffer) :
+            str_caseprefix (panel->dir.list[i].fname, panel->search_buffer);
+        if (l > max) {
+            max = l;
+            sel = i;
+            if (max == buf_max) break;
 	}
     }
-    if (!found)
-	panel->search_buffer[--l] = 0;
+    
+	    unselect_item (panel);
+    panel->selected = sel;
+	    select_item (panel);
+    
+    act = panel->search_buffer + strlen (panel->search_buffer);
+    while (max < buf_max) {
+        str_prev_char_safe (&act);
+        act[0] = '\0';
+        buf_max = panel->case_sensitive ? 
+            str_prefix (panel->search_buffer, panel->search_buffer) :
+            str_caseprefix (panel->search_buffer, panel->search_buffer);
+    }
 
     paint_panel (panel);
 }
@@ -1945,7 +1909,9 @@ start_search (WPanel *panel)
 	do_search (panel, 0);
     } else {
 	panel->searching = 1;
-	panel->search_buffer [0] = 0;
+	panel->search_buffer[0] = '\0';
+        panel->search_char[0] = '\0';
+        panel->search_chpoint = 0;
 	display_mini_info (panel);
 	mc_refresh ();
     }

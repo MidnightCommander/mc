@@ -42,6 +42,7 @@
 #include "mountlist.h"
 #include "win.h"		/* xterm_flag */
 #include "timefmt.h"
+#include "strutil.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -750,19 +751,18 @@ i18n_checktimelength (void)
 const char *
 file_date (time_t when)
 {
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
+    static char timebuf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
-    static size_t i18n_timelength = 0;
+    static int i18n = 0;
     static const char *fmtyear, *fmttime;
     const char *fmt;
 
-    if (i18n_timelength == 0){
-	i18n_timelength = i18n_checktimelength() + 1;
-	
+    if (!i18n){
 	/* strftime() format string for old dates */
 	fmtyear = _("%b %e  %Y");
 	/* strftime() format string for recent dates */
 	fmttime = _("%b %e %H:%M");
+        i18n = 1;
     }
 
     if (current_time > when + 6L * 30L * 24L * 60L * 60L /* Old. */
