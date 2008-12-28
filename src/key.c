@@ -919,7 +919,7 @@ int get_key_code (int no_delay)
 		if (parent != NULL && parent->action == MCKEY_ESCAPE) {
 
 		    /* Convert escape-digits to F-keys */
-		    if (isdigit(c))
+		    if (g_ascii_isdigit(c))
 			c = KEY_F (c - '0');
 		    else if (c == ' ')
 			c = ESC_CHAR;

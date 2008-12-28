@@ -42,6 +42,7 @@
 #include "main.h"
 #include "learn.h"
 #include "wtools.h"
+#include "strutil.h"
 
 #define UX		4
 #define UY		3
@@ -202,7 +203,7 @@ learn_check_key (int c)
 
     /* Prevent from disappearing if a non-defined sequence is pressed
        and contains a button hotkey.  Only recognize hotkeys with ALT.  */
-    if (c < 255 && isalnum (c))
+    if (c < 255 && g_ascii_isalnum (c))
 		return 1;
 
     return 0;
@@ -238,7 +239,7 @@ init_learn (void)
 	learn_but[0].x = 78 / 2 + 4;
 
 	learn_but[1].text = _(learn_but[1].text);
-	learn_but[1].x = 78 / 2 - (strlen (learn_but[1].text) + 9);
+	learn_but[1].x = 78 / 2 - (str_term_width1 (learn_but[1].text) + 9);
 
 	learn_title = _(learn_title);
 	i18n_flag = 1;
