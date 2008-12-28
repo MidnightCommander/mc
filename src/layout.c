@@ -56,6 +56,7 @@
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
 #include "tree.h"
 #include "menu.h"
+#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -290,7 +291,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
 		dlg_move (h, 9, 16 + first_width);
-		addstr (output_lines_label);
+		addstr (str_term_form (output_lines_label));
 		dlg_move (h, 9, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
@@ -367,36 +368,36 @@ init_layout (void)
 
 	while (i--) {
 	    s_split_direction[i] = _(s_split_direction[i]);
-	    l1 = strlen (s_split_direction[i]) + 7;
+            l1 = str_term_width1 (s_split_direction[i]) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
 	for (i = 0; i <= 8; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+            l1 = str_term_width1 (check_options[i].text) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
-	l1 = strlen (title1) + 1;
+        l1 = str_term_width1 (title1) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-	l1 = strlen (title2) + 1;
+        l1 = str_term_width1 (title2) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
 
-	second_width = strlen (title3) + 1;
+        second_width = str_term_width1 (title3) + 1;
 	for (i = 0; i < 6; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+            l1 = str_term_width1 (check_options[i].text) + 7;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
 	if (console_flag) {
-	    l1 = strlen (output_lines_label) + 13;
+            l1 = str_term_width1 (output_lines_label) + 13;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
@@ -410,14 +411,14 @@ init_layout (void)
 	 *
 	 * Now the last thing to do - properly space buttons...
 	 */
-	l1 = 11 + strlen (ok_button)	/* 14 - all brackets and inner space */
-	    +strlen (save_button)	/* notice: it is 3 char less because */
-	    +strlen (cancel_button);	/* of '&' char in button text */
+        l1 = 11 + str_term_width1 (ok_button)	/* 14 - all brackets and inner space */
+                + str_term_width1 (save_button)	/* notice: it is 3 char less because */
+                + str_term_width1 (cancel_button);	/* of '&' char in button text */
 
 	i = (first_width + second_width - l1) / 4;
 	b1 = 5 + i;
-	b2 = b1 + strlen (ok_button) + i + 6;
-	b3 = b2 + strlen (save_button) + i + 4;
+        b2 = b1 + str_term_width1 (ok_button) + i + 6;
+        b3 = b2 + str_term_width1 (save_button) + i + 4;
 
 	i18n_layt_flag = 1;
     }
@@ -681,7 +682,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    promptl = strlen (prompt);
+    promptl = str_term_width1 (prompt);
 
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 
@@ -834,7 +835,7 @@ void print_vfs_message (const char *msg, ...)
 
 	move (0, 0);
 	attrset (NORMAL_COLOR);
-	tty_printf ("%-*s", COLS-1, str);
+	addstr (str_fit_to_term (str, COLS - 1, J_LEFT));
 
 	/* Restore cursor position */
 	move(row, col);
