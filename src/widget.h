@@ -58,9 +58,7 @@ typedef struct WCheck {
 #define C_BOOL			0x0001
 #define C_CHANGE		0x0002
     unsigned int state;		/* check button state */
-    char *text;			/* text of check button */
-    int hotkey;                 /* hot KEY */
-    int hotpos;			/* offset hot KEY char in text */
+    struct hotkey_t text;		/* text of check button */
 } WCheck;
 
 typedef struct WGauge {

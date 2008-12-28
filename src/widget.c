@@ -493,11 +493,13 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 
     switch (msg) {
     case WIDGET_HOTKEY:
-	if (c->hotkey == parm
-	    || (c->hotkey >= 'a' && c->hotkey <= 'z'
-		&& c->hotkey - 32 == parm)) {
+        if (c->text.hotkey != NULL) {
+            if (g_ascii_tolower ((gchar)c->text.hotkey[0]) == 
+                g_ascii_tolower ((gchar)parm)) {
+                
 	    check_callback (w, WIDGET_KEY, ' ');	/* make action */
 	    return MSG_HANDLED;
+	}
 	}
 	return MSG_NOT_HANDLED;
 
@@ -519,17 +521,23 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-	tty_printf ("[%c] %s", (c->state & C_BOOL) ? 'x' : ' ', c->text);
+        addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
 
-	if (c->hotpos >= 0) {
+        addstr (str_term_form (c->text.start));
+
+        if (c->text.hotkey != NULL) {
 	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
-	    widget_move (&c->widget, 0, +c->hotpos + 4);
-	    addch ((unsigned char) c->text[c->hotpos]);
+            addstr (str_term_form (c->text.hotkey));
+            widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
+        }
+        
+        if (c->text.end != NULL) {
+            addstr (str_term_form (c->text.end));
 	}
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (c->text);
+        release_hotkey (c->text);
 	return MSG_HANDLED;
 
     default:
@@ -561,31 +569,14 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
-    const char *s;
-    char *t;
     
-    init_widget (&c->widget, y, x, 1, strlen (text),
+    c->text = parse_hotkey (text);
+    
+    init_widget (&c->widget, y, x, 1, hotkey_width (c->text), 
 	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
-    c->text = g_strdup (text);
-    c->hotkey = 0;
-    c->hotpos = -1;
     widget_want_hotkey (c->widget, 1);
 
-    /* Scan for the hotkey */
-    for (s = text, t = c->text; *s; s++, t++){
-	if (*s != '&'){
-	    *t = *s;
-	    continue;
-	}
-	s++;
-	if (*s){
-	    c->hotkey = tolower ((unsigned char) *s);
-	    c->hotpos = t - c->text;
-	}
-	*t = *s;
-    }
-    *t = 0;
     return c;
 }
 
