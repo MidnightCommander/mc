@@ -705,7 +705,13 @@ short-month-name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
+<<<<<<< HEAD:src/util.c
+=======
+    size_t length, a, b;
+    char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
+>>>>>>> patches by Rostislav Beneš: mc-11-panels:src/util.c
     time_t testtime = time (NULL);
+<<<<<<< HEAD:src/util.c
     struct tm* lt = localtime(&testtime);
     size_t length;
 
@@ -720,6 +726,17 @@ i18n_checktimelength (void)
 	    length = max (a, b);
     }
 
+=======
+    
+    strftime (buf, sizeof(buf) - 1, _("%b %e %H:%M"), localtime(&testtime));
+    a = str_term_width1 (buf);
+    strftime (buf, sizeof(buf) - 1, _("%b %e  %Y"), localtime(&testtime));
+    b = str_term_width1 (buf);
+    
+    length = max (a, b);
+    length = max (str_term_width1 (_("(invalid)")), length);
+    
+>>>>>>> patches by Rostislav Beneš: mc-11-panels:src/util.c
     /* Don't handle big differences. Use standard value (email bug, please) */
     if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
 	    length = STD_I18NTIMELENGTH;
