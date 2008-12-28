@@ -15,6 +15,8 @@
 #ifdef USE_NCURSES
 #    ifdef HAVE_NCURSES_CURSES_H
 #        include <ncurses/curses.h>
+#    elif HAVE_NCURSESW_CURSES_H
+#        include <ncursesw/curses.h>
 #    elif HAVE_NCURSES_H
 #        include <ncurses.h>
 #    else

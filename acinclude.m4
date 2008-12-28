@@ -483,13 +483,20 @@ dnl
 AC_DEFUN([MC_WITH_NCURSES], [
     dnl has_colors() is specific to ncurses, it's not in the old curses
     save_LIBS="$LIBS"
+    ncursesw_found=
+    LIBS=
+    AC_SEARCH_LIBS([addwstr], [ncursesw ncurses curses], [MCLIBS="$MCLIBS $LIBS";ncursesw_found=yes],
+		   [AC_MSG_WARN([Cannot find ncurses library, that support wide characters])])
+
+    if test -z "$ncursesw_found"; then
     LIBS=
     AC_SEARCH_LIBS([has_colors], [ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
 		   [AC_MSG_ERROR([Cannot find ncurses library])])
+    fi
 
     dnl Check the header
     ncurses_h_found=
-    AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h],
+    AC_CHECK_HEADERS([ncursesw/curses.h ncurses/curses.h ncurses.h curses.h],
 		     [ncurses_h_found=yes; break])
 
     if test -z "$ncurses_h_found"; then
