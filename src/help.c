@@ -823,7 +823,7 @@ interactive_display (const char *filename, const char *node)
 	return;
 
     translate_file (filedata);
-    
+
     g_free (filedata);
     
     if (!data)
