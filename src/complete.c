@@ -41,6 +41,7 @@
 #include "complete.h"
 #include "main.h"
 #include "key.h"		/* XCTRL and ALT macros */
+#include "strutil.h"
 
 typedef char *CompletionFunction (char *, int);
 
@@ -97,6 +98,8 @@ filename_completion_function (char *text, int state)
     /* Now that we have some state, we can read the directory. */
 
     while (directory && (entry = mc_readdir (directory))){
+        if (!str_is_valid_string (entry->d_name)) continue;
+        
         /* Special case for no filename.
 	   All entries except "." and ".." match. */
         if (!filename_len){
@@ -273,20 +276,24 @@ static void fetch_hosts (const char *filename)
 {
     FILE *file = fopen (filename, "r");
     char buffer[256], *name;
-    register int i, start;
+    char *start;
+    char *bi;
 
     if (!file)
         return;
 
     while (fgets (buffer, 255, file) != NULL){
         /* Skip to first character. */
-        for (i = 0; buffer[i] && cr_whitespace (buffer[i]); i++);
+        for (bi = buffer; 
+             bi[0] != '\0' && str_isspace (bi); 
+             str_next_char (&bi));
+        
         /* Ignore comments... */
-        if (buffer[i] == '#')
+        if (bi[0] == '#')
             continue;
         /* Handle $include. */
-        if (!strncmp (buffer + i, "$include ", 9)){
-	    char *includefile = buffer + i + 9;
+        if (!strncmp (bi, "$include ", 9)){
+	    char *includefile = bi + 9;
 	    char *t;
 
 	    /* Find start of filename. */
@@ -295,8 +302,8 @@ static void fetch_hosts (const char *filename)
 	    t = includefile;
 
 	    /* Find end of filename. */
-	    while (*t && !cr_whitespace (*t))
-	        t++;
+	    while (t[0] != '\0' && !str_isspace (t))
+	        str_next_char (&t);
 	    *t = '\0';
 
 	    fetch_hosts (includefile);
@@ -304,19 +311,22 @@ static void fetch_hosts (const char *filename)
 	}
 
         /* Skip IP #s. */
-	while (buffer[i] && !cr_whitespace (buffer[i]))
-	    i++;
+	while (bi[0] != '\0' && !str_isspace (bi))
+	    str_next_char (&bi);
 
         /* Get the host names separated by white space. */
-        while (buffer[i] && buffer[i] != '#'){
-	    while (buffer[i] && cr_whitespace (buffer[i]))
-		i++;
-	    if (buffer[i] ==  '#')
+        while (bi[0] != '\0' && bi[0] != '#'){
+	    while (bi[0] != '\0' && str_isspace (bi))
+		str_next_char (&bi);
+	    if (bi[0] ==  '#')
 		continue;
-	    for (start = i; buffer[i] && !cr_whitespace (buffer[i]); i++);
-	        if (i - start == 0)
-	            continue;
-	    name = g_strndup (buffer + start, i - start);
+	    for (start = bi; 
+                 bi[0] != '\0' && !str_isspace (bi); 
+                 str_next_char (&bi));
+            
+	    if (bi - start == 0) continue;
+            
+	    name = g_strndup (start, bi - start);
 	    {
 	    	char **host_p;
 	    	
@@ -566,19 +576,30 @@ completion_matches (char *text, CompletionFunction entry_function)
 	    j = i + 1;
 	    while (j < matches + 1)
 	    {
-		register int c1, c2, si;
+                char *si, *sj;
+                char *ni, *nj;
 
-		for (si = 0;(c1 = match_list [i][si]) && (c2 = match_list [j][si]); si++)
-		    if (c1 != c2) break;
+		for (si = match_list[i], sj  = match_list[j];
+                    si[0] && sj[0];) {
+
+                    ni = str_get_next_char (si);
+                    nj = str_get_next_char (sj);
 		
-		if (!c1 && !match_list [j][si]){ /* Two equal strings */
+                    if (ni - si != nj - sj) break;
+                    if (strncmp (si, sj, ni - si) != 0) break;
+
+                    si = ni;
+                    sj = nj;
+                }
+		
+                if (si[0] == '\0' && sj[0] == '\0'){ /* Two equal strings */
 		    g_free (match_list [j]);
 		    j++;
 		    if (j > matches)
 		        break;
 		    continue; /* Look for a run of equal strings */
 		} else
-	            if (low > si) low = si;
+	            if (low > si - match_list[i]) low = si - match_list[i];
 		if (i + 1 != j) /* So there's some gap */
 		    match_list [i + 1] = match_list [j];
 	        i++; j++;
@@ -598,7 +619,8 @@ completion_matches (char *text, CompletionFunction entry_function)
 static int
 check_is_cd (const char *text, int start, int flags)
 {
-    const char *p, *q;
+    char *p, *q;
+    int test = 0;
 
     if (flags & INPUT_COMPLETE_CD)
 	return 1;
@@ -607,14 +629,18 @@ check_is_cd (const char *text, int start, int flags)
 	return 0;
 
     /* Skip initial spaces */
-    p = text;
-    q = text + start;
-    while (p < q && *p && isspace ((unsigned char) *p))
-	p++;
+    p = (char*)text;
+    q = (char*)text + start;
+    while (p < q && p[0] != '\0' && str_isspace (p))
+	str_next_char (&p);
 
     /* Check if the command is "cd" and the cursor is after it */
-    if (p[0] == 'c' && p[1] == 'd' && isspace ((unsigned char) p[2])
-	&& (p + 2 < q))
+    text+= p[0] == 'c';
+    str_next_char (&p);
+    text+= p[0] == 'd';
+    str_next_char (&p);
+    text+= str_isspace (p);
+    if (test == 3 && (p < q))
 	return 1;
 
     return 0;
@@ -624,44 +650,44 @@ check_is_cd (const char *text, int start, int flags)
 static char **
 try_complete (char *text, int *start, int *end, int flags)
 {
-    int in_command_position = 0, i;
-    char *word, c;
+    int in_command_position = 0;
+    char *word;
     char **matches = NULL;
     const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
     int is_cd = check_is_cd (text, *start, flags);
+    char *ti;
 
     ignore_filenames = 0;
-    c = text [*end];
-    text [*end] = 0;
-    word = g_strdup (text + *start);
-    text [*end] = c;
+    word = g_strndup (text + *start, *end - *start);
 
     /* Determine if this could be a command word. It is if it appears at
        the start of the line (ignoring preceding whitespace), or if it
        appears after a character that separates commands. And we have to
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS)){
-        i = *start - 1;
-        while (i > -1 && (text[i] == ' ' || text[i] == '\t'))
-            i--;
-        if (i < 0)
+        ti = str_get_prev_char (&text[*start]);
+        while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
+            str_prev_char (&ti);
+            
+        if (ti <= text&& (ti[0] == ' ' || ti[0] == '\t'))
 	    in_command_position++;
-        else if (strchr (command_separator_chars, text[i])){
+        else if (strchr (command_separator_chars, ti[0])){
             register int this_char, prev_char;
 
             in_command_position++;
             
-            if (i){
+            if (ti > text){
                 /* Handle the two character tokens `>&', `<&', and `>|'.
                    We are not in a command position after one of these. */
-                this_char = text[i];
-                prev_char = text[i - 1];
+                this_char = ti[0];
+                prev_char = str_get_prev_char (ti)[0];
 
                 if ((this_char == '&' && (prev_char == '<' || prev_char == '>')) ||
 	            (this_char == '|' && prev_char == '>'))
 	            in_command_position = 0;
-                else if (i > 0 && text [i-1] == '\\') /* Quoted */
+                
+            else if (ti > text && str_get_prev_char (ti)[0] == '\\') /* Quoted */
 	            in_command_position = 0;
 	    }
 	}
@@ -675,15 +701,15 @@ try_complete (char *text, int *start, int *end, int flags)
         r = strrchr (word, '@');
     if (q && q [1] == '(' && INPUT_COMPLETE_COMMANDS){
     	if (q > p)
-    	    p = q + 1;
+    	    p = str_get_next_char (q);
     	q = NULL;
     }
     
     /* Command substitution? */
     if (p > q && p > r){
-        matches = completion_matches (p + 1, command_completion_function);
+        matches = completion_matches (str_get_next_char (p), command_completion_function);
         if (matches)
-            *start += p + 1 - word;
+            *start += str_get_next_char (p) - word;
     }
 
     /* Variable name? */
@@ -721,9 +747,9 @@ try_complete (char *text, int *start, int *end, int flags)
     	if (!matches && is_cd && *word != PATH_SEP && *word != '~'){
     	    char *p, *q = text + *start;
     	    
-    	    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+    	    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
     	    if (!strncmp (p, "cd", 2))
-    	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+    	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
     	    if (p == q){
 		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
 		char *cdpath = cdpath_ref;
@@ -747,7 +773,7 @@ try_complete (char *text, int *start, int *end, int flags)
     	    		g_free (r);
 		    }
 		    *s = c;
-		    cdpath = s + 1;
+		    cdpath = str_get_next_char (s);
 		}
 		g_free (cdpath_ref);
     	    }
@@ -776,49 +802,57 @@ static WInput *input;
 static int min_end;
 static int start, end;
 
-static int insert_text (WInput *in, char *text, ssize_t len)
+static int insert_text (WInput *in, char *text, ssize_t size)
 {
-    len = min (len, (ssize_t) strlen (text)) + start - end;
-    if (strlen (in->buffer) + len >= (size_t) in->current_max_len){
+    int buff_len = str_length (in->buffer);
+    
+    size = min (size, (ssize_t) strlen (text)) + start - end;
+    if (strlen (in->buffer) + size >= (size_t) in->current_max_size){
     /* Expand the buffer */
-    	char *narea = g_realloc (in->buffer, in->current_max_len + len + in->field_len);
+    	char *narea = g_realloc (in->buffer, in->current_max_size 
+                + size + in->field_width);
 	if (narea){
 	    in->buffer = narea;
-	    in->current_max_len += len + in->field_len;
+	    in->current_max_size += size + in->field_width;
 	}
     }
-    if (strlen (in->buffer)+1 < (size_t) in->current_max_len){
-    	if (len > 0){
+    if (strlen (in->buffer)+1 < (size_t) in->current_max_size){
+    	if (size > 0){
 	    int i = strlen (&in->buffer [end]);
 	    for (; i >= 0; i--)
-	        in->buffer [end + len + i] = in->buffer [end + i];
-	} else if (len < 0){
-	    char *p = in->buffer + end + len, *q = in->buffer + end;
+	        in->buffer [end + size + i] = in->buffer [end + i];
+	} else if (size < 0){
+	    char *p = in->buffer + end + size, *q = in->buffer + end;
 	    while (*q)
 	    	*(p++) = *(q++);
 	    *p = 0;
 	}
-	memcpy (in->buffer + start, text, len - start + end);
-	in->point += len;
+	memcpy (in->buffer + start, text, size - start + end);
+	in->point+= str_length (in->buffer) - buff_len;
 	update_input (in, 1);
-	end += len;
+	end+= size;
     }
-    return len != 0;
+    return size != 0;
 }
 
 static cb_ret_t
 query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
+    static char buff[MB_LEN_MAX] = "";
+    static int bl = 0;
+    
     switch (msg) {
     case DLG_KEY:
 	switch (parm) {
 	case KEY_LEFT:
 	case KEY_RIGHT:
+            bl = 0;
 	    h->ret_value = 0;
 	    dlg_stop (h);
 	    return MSG_HANDLED;
 
 	case KEY_BACKSPACE:
+            bl = 0;
 	    if (end == min_end) {
 		h->ret_value = 0;
 		dlg_stop (h);
@@ -828,13 +862,13 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
 		e1 = e = ((WListbox *) (h->current))->list;
 		do {
-		    if (!strncmp
-			(input->buffer + start, e1->text,
-			 end - start - 1)) {
-			listbox_select_entry ((WListbox *) (h->current),
-					      e1);
+		    if (!strncmp (input->buffer + start, 
+                         e1->text, end - start - 1)) {
+                                 
+			listbox_select_entry ((WListbox *) (h->current), e1);
+			end = str_get_prev_char (&(input->buffer[end])) 
+                                - input->buffer;
 			handle_char (input, parm);
-			end--;
 			send_message (h->current, WIDGET_DRAW, 0);
 			break;
 		    }
@@ -844,7 +878,8 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    return MSG_HANDLED;
 
 	default:
-	    if (parm > 0xff || !is_printable (parm)) {
+	    if (parm < 32 || parm > 256) {
+                bl = 0;
 		if (is_in_input_map (input, parm) == 2) {
 		    if (end == min_end)
 			return MSG_HANDLED;
@@ -860,21 +895,43 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		int low = 4096;
 		char *last_text = NULL;
 
+                buff[bl] = (char) parm;
+                bl++;
+                buff[bl] = '\0';
+                switch (str_is_valid_char (buff, bl)) {
+                    case -1: 
+                        bl = 0;
+                    case -2:
+                        return MSG_HANDLED;
+                }
+                
 		e1 = e = ((WListbox *) (h->current))->list;
 		do {
-		    if (!strncmp
-			(input->buffer + start, e1->text, end - start)) {
-			if (e1->text[end - start] == parm) {
+		    if (!strncmp (input->buffer + start, 
+                         e1->text, end - start)) {
+			
+                        if (strncmp (&e1->text[end - start], buff, bl) == 0) {
 			    if (need_redraw) {
-				register int c1, c2, si;
+				char *si, *sl;
+				char *ni, *nl;
+                                si = &(e1->text[end - start]);
+                                sl = &(last_text[end - start]);
+                                
+				for (; si[0] != '\0' && sl[0] != '\0';) {
+                                    
+                                    ni = str_get_next_char (si);
+                                    nl = str_get_next_char (sl);
+                                    
+                                    if (ni - si != nl - sl) break;
+                                    if (strncmp (si, sl, ni - si) != 0) break;
+                                    
+                                    si = ni;
+                                    sl = nl;
+                                }
+                                
+				if (low > si - &e1->text[start])
+				    low = si - &e1->text[start];
 
-				for (si = end - start + 1;
-				     (c1 = last_text[si])
-				     && (c2 = e1->text[si]); si++)
-				    if (c1 != c2)
-					break;
-				if (low > si)
-				    low = si;
 				last_text = e1->text;
 				need_redraw = 2;
 			    } else {
@@ -895,6 +952,7 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 		    h->ret_value = B_ENTER;
 		    dlg_stop (h);
 		}
+                bl = 0;
 	    }
 	    return MSG_HANDLED;
 	}
@@ -911,15 +969,19 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 static int
 complete_engine (WInput *in, int what_to_do)
 {
-    if (in->completions && in->point != end)
+    int s;
+    
+    if (in->completions && (str_offset_to_pos (in->buffer, in->point)) != end)
     	free_completions (in);
     if (!in->completions){
-    	end = in->point;
-        for (start = end ? end - 1 : 0; start > -1; start--)
-    	    if (strchr (" \t;|<>", in->buffer [start]))
+        end = str_offset_to_pos (in->buffer, in->point);
+        for (s = in->point ? in->point - 1 : 0; s >= 0; s--) {
+            start = str_offset_to_pos (in->buffer, s);
+    	    if (strchr (" \t;|<>", in->buffer [start])) {
+                if (start < end) start = str_offset_to_pos (in->buffer, s + 1);
     	        break;
-    	if (start < end)
-    	    start++;
+            }
+        }
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
     if (in->completions){
@@ -941,7 +1003,7 @@ complete_engine (WInput *in, int what_to_do)
     	    WListbox *query_list;
     	    
     	    for (p=in->completions + 1; *p; count++, p++)
-    	    	if ((i = strlen (*p)) > maxlen)
+    	    	if ((i = str_term_width1 (*p)) > maxlen)
     	    	    maxlen = i;
     	    start_x = in->widget.x;
     	    start_y = in->widget.y;
@@ -957,7 +1019,7 @@ complete_engine (WInput *in, int what_to_do)
     	    	    h = LINES - start_y - 1;
     	    	}
     	    }
-    	    x = start - in->first_shown - 2 + start_x;
+     	    x = start - in->term_first_shown - 2 + start_x;
     	    w = maxlen + 4;
     	    if (x + w > COLS)
     	    	x = COLS - w;
@@ -999,6 +1061,8 @@ void complete (WInput *in)
 {
     int engine_flags;
 
+    if (!str_is_valid_string (in->buffer)) return;
+    
     if (in->completions)
 	engine_flags = DO_QUERY;
     else

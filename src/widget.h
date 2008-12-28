@@ -74,11 +74,11 @@ char *show_hist (GList *history, int widget_y, int widget_x);
 
 typedef struct {
     Widget widget;
-    int  point;			/* cursor position in the input line */
-    int  mark;			/* The mark position */
-    int  first_shown;		/* Index of the first shown character */
-    int  current_max_len;	/* Maximum length of input line */
-    int  field_len;		/* Length of the editing field */
+    int  point;		   /* cursor position in the input line in characters */
+    int  mark;			/* The mark position in characters */
+    int  term_first_shown;	/* column of the first shown character */
+    size_t current_max_size;	/* Maximum length of input line (bytes) */
+    int  field_width;		/* width of the editing field */
     int  color;			/* color used */
     int  first;			/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
@@ -89,6 +89,8 @@ typedef struct {
     char **completions;		/* Possible completions array */
     int  completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */
     char *history_name;		/* name of history for loading and saving */
+    char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
+    size_t charpoint;         /* point to end of mulibyte sequence in charbuf */
 } WInput;
 
 /* For history load-save functions */
@@ -144,14 +146,14 @@ WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
 WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname);
+WInput  *input_new    (int y, int x, int color, int width, const char *text, const char *histname);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
 WGroupbox *groupbox_new (int x, int y, int width, int height, const char *title);
 
 /* Input lines */
-void winput_set_origin (WInput *i, int x, int field_len);
+void winput_set_origin (WInput *i, int x, int field_width);
 cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
 void update_input (WInput *in, int clear_first);
