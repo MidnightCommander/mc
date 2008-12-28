@@ -423,7 +423,7 @@ set_panel_filter (WPanel *p)
 {
     char *reg_exp;
     const char *x;
-    
+
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
     reg_exp = input_dialog_help (_(" Filter "),
