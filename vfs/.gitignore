@@ -1,0 +1,11 @@
+Makefile
+Makefile.in
+mcserv
+mcservx
+rar
+cpio
+zoo
+zip
+lha
+.deps
+*.sor
