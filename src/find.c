@@ -1045,6 +1045,8 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	    list->list[next_free].f.stale_link = stale_link;
 	    list->list[next_free].f.dir_size_computed = 0;
 	    list->list[next_free].st = st;
+            list->list[next_free].sort_key = NULL;
+            list->list[next_free].second_sort_key = NULL;
 	    next_free++;
 	    if (!(next_free & 15))
 		rotate_dash ();
