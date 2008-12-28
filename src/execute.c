@@ -30,6 +30,7 @@
 #include "dialog.h"
 #include "wtools.h"
 #include "execute.h"
+#include "../vfs/vfs.h"
 
 
 static void
@@ -342,7 +343,9 @@ execute_with_vfs_arg (const char *command, const char *filename)
 
     /* Simplest case, this file is local */
     if (!filename || vfs_file_is_local (filename)) {
-	do_execute (command, filename, EXECUTE_INTERNAL);
+        fn = vfs_canon_and_translate (filename);
+	do_execute (command, fn, EXECUTE_INTERNAL);
+        g_free (fn);
 	return;
     }
 

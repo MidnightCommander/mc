@@ -530,6 +530,8 @@ static void init_raw_mode ()
 
 int invoke_subshell (const char *command, int how, char **new_dir)
 {
+    char *pcwd;
+    
     /* Make the MC terminal transparent */
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
     
@@ -560,8 +562,10 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 
     feed_subshell (how, FALSE);
 
-    if (new_dir && subshell_alive && strcmp (subshell_cwd, current_panel->cwd))
+    pcwd = vfs_translate_path_n (current_panel->cwd);
+    if (new_dir && subshell_alive && strcmp (subshell_cwd, pcwd))
 	*new_dir = subshell_cwd;  /* Make MC change to the subshell's CWD */
+    g_free (pcwd);
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
     while (!subshell_alive && !quit && use_subshell)
@@ -752,15 +756,22 @@ subshell_name_quote (const char *s)
 void
 do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
+    char *pcwd;
+    char *temp;
+    char *translate;
+    
+    pcwd = vfs_translate_path_n (current_panel->cwd);
+    
     if (!
 	(subshell_state == INACTIVE
-	 && strcmp (subshell_cwd, current_panel->cwd))) {
+	 && strcmp (subshell_cwd, pcwd))) {
 	/* We have to repaint the subshell prompt if we read it from
 	 * the main program.  Please note that in the code after this
 	 * if, the cd command that is sent will make the subshell
 	 * repaint the prompt, so we don't have to paint it. */
 	if (do_update)
 	    do_update_prompt ();
+        g_free (pcwd);
 	return;
     }
 
@@ -768,7 +779,9 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
        because we set "HISTCONTROL=ignorespace") */
     write_all (subshell_pty, " cd ", 4);
     if (*directory) {
-	char *temp = subshell_name_quote (directory);
+        translate = vfs_translate_path_n (directory);
+        if (translate) {
+            temp = subshell_name_quote (translate);
 	if (temp) {
 	    write_all (subshell_pty, temp, strlen (temp));
 	    g_free (temp);
@@ -777,6 +790,10 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 	       that we don't have memory to quote it.  */
 	    write_all (subshell_pty, ".", 1);
 	}
+            g_free (translate);
+        } else {
+            write_all (subshell_pty, ".", 1);
+        }
     } else {
 	write_all (subshell_pty, "/", 1);
     }
@@ -786,7 +803,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     feed_subshell (QUIETLY, FALSE);
 
     if (subshell_alive) {
-	int bPathNotEq = strcmp (subshell_cwd, current_panel->cwd);
+        int bPathNotEq = strcmp (subshell_cwd, pcwd);
 
 	if (bPathNotEq && subshell_type == TCSH) {
 	    char rp_subshell_cwd[PATH_MAX];
@@ -795,17 +812,17 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 	    char *p_subshell_cwd =
 		mc_realpath (subshell_cwd, rp_subshell_cwd);
 	    char *p_current_panel_cwd =
-		mc_realpath (current_panel->cwd, rp_current_panel_cwd);
+                    mc_realpath (pcwd, rp_current_panel_cwd);
 
 	    if (p_subshell_cwd == NULL)
 		p_subshell_cwd = subshell_cwd;
 	    if (p_current_panel_cwd == NULL)
-		p_current_panel_cwd = current_panel->cwd;
+                p_current_panel_cwd = pcwd;
 	    bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
 	}
 
-	if (bPathNotEq && strcmp (current_panel->cwd, ".")) {
-	    char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
+        if (bPathNotEq && strcmp (pcwd, ".")) {
+            char *cwd = strip_password (g_strdup (pcwd), 1);
 	    fprintf (stderr, _("Warning: Cannot change to %s.\n"), cwd);
 	    g_free (cwd);
 	}
@@ -814,6 +831,8 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     if (reset_prompt)
 	prompt_pos = 0;
     update_prompt = FALSE;
+    
+    g_free (pcwd);
     /* Make sure that MC never stores the CWD in a silly format */
     /* like /usr////lib/../bin, or the strcmp() above will fail */
 }

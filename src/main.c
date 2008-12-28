@@ -810,6 +810,8 @@ static menu_entry LeftMenu[] = {
     {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+    {' ', "",NULL_HOTKEY, 0},
+    {' ', N_("&Encoding..."), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
 #ifdef WITH_MCFS
@@ -834,6 +836,8 @@ static menu_entry RightMenu[] = {
     {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+    {' ', "",NULL_HOTKEY, 0},
+    {' ', N_("&Encoding..."), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
 #ifdef WITH_MCFS
