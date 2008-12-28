@@ -1578,7 +1578,7 @@ void done_hotlist (void)
     hotlist_file_name = 0;
     l_hotlist = 0;
     current_group = 0;
-    
+
     if (tkn_buf){
         str_release_buffer (tkn_buf);
 	tkn_buf = NULL;
