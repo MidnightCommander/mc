@@ -31,6 +31,7 @@
 
 #include "global.h"
 #include "profile.h"
+#include "strutil.h"
 
 #define STRSIZE 4096
 #define overflow (next == &CharBuffer [STRSIZE-1])
@@ -63,7 +64,7 @@ find_loaded (const char *FileName, TSecHeader ** section)
     TProfile *p = Base;
 
     while (p) {
-	if (!g_strcasecmp (FileName, p->FileName)) {
+	if (!str_casecmp (FileName, p->FileName)) {
 	    *section = p->Section;
 	    return p;
 	}
@@ -292,10 +293,10 @@ GetSetProfileChar (int set, const char *AppName, const char *KeyName,
     
     /* Start search */
     for (; section; section = section->link){
-	if (section->AppName == 0 || g_strcasecmp (section->AppName, AppName))
+	if (section->AppName == 0 || str_casecmp (section->AppName, AppName))
 	    continue;
 	for (key = section->Keys; key; key = key->link){
-	    if ( g_strcasecmp (key->KeyName, KeyName))
+	    if (str_casecmp (key->KeyName, KeyName))
 		continue;
 	    if (set){
 		g_free (key->Value);
@@ -361,9 +362,9 @@ int GetPrivateProfileInt (const char * AppName, const char * KeyName, int Defaul
     
     /* Check the exact semantic with the SDK */
     GetPrivateProfileString (AppName, KeyName, buf, IntBuf, BUF_TINY, File);
-    if (! g_strcasecmp (IntBuf, "true"))
+    if (!str_casecmp (IntBuf, "true"))
 	return 1;
-    if (! g_strcasecmp (IntBuf, "yes"))
+    if (!str_casecmp (IntBuf, "yes"))
 	return 1;
     return (int) atol (IntBuf);
 }
@@ -489,7 +490,7 @@ void *profile_init_iterator (const char *appname, const char *file)
 	section = Current->Section;
     }
     for (; section; section = section->link){
-	if ( g_strcasecmp (section->AppName, appname))
+	if (str_casecmp (section->AppName, appname))
 	    continue;
 	return section->Keys;
     }
@@ -521,7 +522,7 @@ void profile_clean_section (const char *appname, const char *file)
     /* won't be find by further walks of the structure */
 
     for (; section; section = section->link){
-	if ( g_strcasecmp (section->AppName, appname))
+	if (str_casecmp (section->AppName, appname))
 	    continue;
 	section->AppName [0] = 0;
     }
@@ -536,7 +537,7 @@ int profile_has_section (const char *section_name, const char *profile)
 	return 0;
     }
     for (; section; section = section->link){
-	if ( g_strcasecmp (section->AppName, section_name))
+	if (str_casecmp (section->AppName, section_name))
 	    continue;
 	return 1;
     }
@@ -548,7 +549,7 @@ void profile_forget_profile (const char *file)
     TProfile *p;
 
     for (p = Base; p; p = p->link){
-	if ( g_strcasecmp (file, p->FileName))
+	if (str_casecmp (file, p->FileName))
 	    continue;
 	p->FileName [0] = 0;
     }
