@@ -54,6 +54,7 @@
 struct WButtonBar {
     Widget widget;
     int    visible;		/* Is it visible? */
+    int btn_width;              /* width of one button */
     struct {
 	char   *text;
 	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
@@ -2420,12 +2421,21 @@ buttonbar_call (WButtonBar *bb, int i)
     return FALSE;
 }
 
+/* calculate width of one button, width is never lesser than 7 */
+static int
+buttonbat_get_button_width ()
+{
+    int result = COLS / 10;
+    return (result >= 7) ? result : 7;
+}        
+
 
 static cb_ret_t
 buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WButtonBar *bb = (WButtonBar *) w;
     int i;
+    char *text;
 
     switch (msg) {
     case WIDGET_FOCUS:
@@ -2443,14 +2453,15 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	widget_move (&bb->widget, 0, 0);
 	attrset (DEFAULT_COLOR);
+        bb->btn_width = buttonbat_get_button_width ();
 	tty_printf ("%-*s", bb->widget.cols, "");
-	for (i = 0; i < COLS / 8 && i < 10; i++) {
-	    widget_move (&bb->widget, 0, i * 8);
+        for (i = 0; i < COLS / bb->btn_width && i < 10; i++) {
+            widget_move (&bb->widget, 0, i * bb->btn_width);
 	    attrset (DEFAULT_COLOR);
-	    tty_printf ("%d", i + 1);
+            tty_printf ("%2d", i + 1);
 	    attrset (SELECTED_COLOR);
-	    tty_printf ("%-*s", ((i + 1) * 8 == COLS ? 5 : 6),
-		    bb->labels[i].text ? bb->labels[i].text : "");
+            text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
+            addstr (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
 	    attrset (DEFAULT_COLOR);
 	}
 	attrset (SELECTED_COLOR);
@@ -2476,7 +2487,7 @@ buttonbar_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
     if (event->y == 2)
 	return MOU_NORMAL;
-    button = event->x / 8;
+    button = (event->x - 1) / bb->btn_width;
     if (button < 10)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
@@ -2498,6 +2509,7 @@ buttonbar_new (int visible)
     }
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
+    bb->btn_width = buttonbat_get_button_width ();
 
     return bb;
 }
@@ -2533,8 +2545,8 @@ buttonbar_clear_label (Dlg_head *h, int idx)
 }
 
 void
-buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
-		   void *data)
+buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, 
+                          buttonbarfn cback, void *data)
 {
     WButtonBar *bb = find_buttonbar (h);
 
