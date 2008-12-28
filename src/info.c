@@ -37,6 +37,7 @@
 #include "key.h"		/* is_idle() */
 #include "mountlist.h"
 #include "unixcompat.h"
+#include "strutil.h"
 
 #ifndef VERSION
 #   define VERSION "undefined"
@@ -65,6 +66,7 @@ info_show_info (struct WInfo *info)
 {
     static int i18n_adjust=0;
     static const char *file_label;
+    struct str_buffer *buff;
     
     struct stat st;
 
@@ -92,8 +94,10 @@ info_show_info (struct WInfo *info)
     if(!i18n_adjust) {
 	/* This printf pattern string is used as a reference for size */
 	file_label=_("File:       %s");
-	i18n_adjust=strlen(file_label)+2;
+	i18n_adjust = str_term_width1(file_label) + 2;
     }
+    
+    buff = str_get_buffer ();
     
     switch (info->widget.lines-2){
 	/* Note: all cases are fall-throughs */
@@ -132,21 +136,26 @@ info_show_info (struct WInfo *info)
 
     case 13:
 	widget_move (&info->widget, 13, 3);
-	tty_printf (_("Device:    %s"),
-		name_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
+        str_printf (buff, _("Device:    %s"), 
+                str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
+        addstr (str_term_form (buff->data));
+        str_reset_buffer (buff);
     case 12:
 	widget_move (&info->widget, 12, 3);
-	tty_printf (_("Filesystem: %s"),
-		name_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
-
+        str_printf (buff, _("Filesystem: %s"),
+		str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
+        addstr (str_term_form (buff->data));
+        str_reset_buffer (buff);
     case 11:
 	widget_move (&info->widget, 11, 3);
-	tty_printf (_("Accessed:  %s"), file_date (st.st_atime));
-	
+        str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
+        addstr (str_term_form (buff->data));
+        str_reset_buffer (buff);
     case 10:
 	widget_move (&info->widget, 10, 3);
-	tty_printf (_("Modified:  %s"), file_date (st.st_mtime));
-	
+        str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
+        addstr (str_term_form (buff->data));
+        str_reset_buffer (buff);
     case 9:
 	widget_move (&info->widget, 9, 3);
 	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
@@ -195,9 +204,11 @@ info_show_info (struct WInfo *info)
 	widget_move (&info->widget, 3, 2);
 	/* .ado: fname is invalid if selected == 0 && info called from current panel */
 	if (current_panel->selected){
-	    tty_printf (file_label,
-			name_trunc (current_panel->dir.list [current_panel->selected].fname,
+            str_printf (buff, file_label, 
+            str_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
+            addstr (str_term_form (buff->data));
+            str_reset_buffer (buff);
 	} else
 		addstr (_("File:       None"));
      
@@ -206,6 +217,8 @@ info_show_info (struct WInfo *info)
     case 0:
 	;
     } /* switch */
+    
+    str_release_buffer (buff);
 }
 
 static void info_hook (void *data)
