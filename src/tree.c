@@ -601,7 +601,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
     if (!tree->selected_ptr)
 	return;
     g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
-	     name_trunc (tree->selected_ptr->name, 50));
+	     str_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Copy "), cmd_buf, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (!dest)
@@ -644,8 +644,13 @@ static void tree_move (WTree *tree, const char *default_dest)
     if (!tree->selected_ptr)
 	return;
     g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
+<<<<<<< HEAD:src/tree.c
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Move "), cmd_buf, MC_HISTORY_FM_TREE_MOVE, default_dest);
+=======
+	     str_trunc (tree->selected_ptr->name, 50));
+    dest = input_expand_dialog (_(" Move "), cmd_buf, default_dest);
+>>>>>>> patches by Rostislav Beneš: mc-28-fix:src/tree.c
     if (!dest)
 	return;
     if (!*dest){

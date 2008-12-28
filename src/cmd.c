@@ -908,7 +908,7 @@ do_link (int symbolic_link, const char *fname)
     char *dest = NULL, *src = NULL;
 
     if (!symbolic_link) {
-	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
+	src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
 	dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
 	if (!dest || !*dest)
 	    goto cleanup;
