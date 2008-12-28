@@ -38,6 +38,7 @@
 #include "key.h"		/* mi_getch() */
 #include "complete.h"		/* INPUT_COMPLETE_CD */
 #include "background.h"		/* parent_call */
+#include "strutil.h"
 
 
 Listbox *
@@ -50,11 +51,11 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
     /* Adjust sizes */
     lines = (lines > LINES - 6) ? LINES - 6 : lines;
 
-    if (title && (cols < (len = strlen (title) + 2)))
+    if (title && (cols < (len = str_term_width1 (title) + 2)))
 	cols = len;
 
     /* no &, but 4 spaces around button for brackets and such */
-    if (cols < (len = strlen (cancel_string) + 3))
+    if (cols < (len = str_term_width1 (cancel_string) + 3))
 	cols = len;
 
     cols = cols > COLS - 6 ? COLS - 6 : cols;
@@ -125,7 +126,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
 	    char *cp = va_arg (ap, char *);
-	    win_len += strlen (cp) + 6;
+	    win_len += str_term_width1 (cp) + 6;
 	    if (strchr (cp, '&') != NULL)
 		win_len--;
 	}
@@ -133,8 +134,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
 
     /* count coordinates */
-    msglen (text, &lines, &cols);
-    cols = 6 + max (win_len, max ((int) strlen (header), cols));
+    str_msg_term_size (text, &lines, &cols);
+    cols = 6 + max (win_len, max (str_term_width1 (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
     xpos = COLS / 2 - cols / 2;
     ypos = LINES / 3 - (lines - 3) / 2;
@@ -149,7 +150,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
 	    cur_name = va_arg (ap, char *);
-	    xpos = strlen (cur_name) + 6;
+	    xpos = str_term_width1 (cur_name) + 6;
 	    if (strchr (cur_name, '&') != NULL)
 		xpos--;
 
@@ -468,7 +469,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     }
 
     msglen (text, &lines, &cols);
-    len = max ((int) strlen (header), cols) + 4;
+    len = max (str_term_width1 (header), cols) + 4;
     len = max (len, 64);
 
     /* The special value of def_text is used to identify password boxes
@@ -490,7 +491,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     quick_widgets[1].text = _(quick_widgets[1].text);
     quick_widgets[0].relative_x = len / 2 + 4;
     quick_widgets[1].relative_x =
-	len / 2 - (strlen (quick_widgets[1].text) + 9);
+	len / 2 - (str_term_width1 (quick_widgets[1].text) + 9);
     quick_widgets[0].x_divisions = quick_widgets[1].x_divisions = len;
 #endif				/* ENABLE_NLS */
 
