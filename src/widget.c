@@ -1907,7 +1907,7 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-	tty_printf (" %-*s ", l->width-2, name_trunc (text, l->width-2));
+            addstr (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
     if (!l->scrollbar)
