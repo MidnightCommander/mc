@@ -66,6 +66,7 @@
 #include "filegui.h"
 #include "key.h"		/* get_event */
 #include "util.h"               /* strip_password() */
+#include "strutil.h"
 
 /* }}} */
 
@@ -424,7 +425,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
 /* }}} */
 
-#define truncFileString(ui, s)       name_trunc (s, ui->eta_extra + 47)
+#define truncFileString(ui, s)       str_trunc (s, ui->eta_extra + 47)
 #define truncFileStringSecure(ui, s) path_trunc (s, ui->eta_extra + 47)
 
 FileProgressStatus
@@ -564,8 +565,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 	 * longest of "Overwrite..." labels 
 	 * (assume "Target date..." are short enough)
 	 */
-	l1 = max (strlen (rd_widgets[6].text),
-		  strlen (rd_widgets[11].text));
+        l1 = max (str_term_width1 (rd_widgets[6].text),
+                  str_term_width1 (rd_widgets[11].text));
 
 	/* longest of button rows */
 	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
@@ -576,7 +577,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 		    l2 = max (l2, l);
 		    l = 0;
 		}
-		l += strlen (rd_widgets[i].text) + 4;
+                l+= str_term_width1 (rd_widgets[i].text) + 4;
 	    }
 	}
 	l2 = max (l2, l);	/* last row */
@@ -594,12 +595,12 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 		    l = l1;
 		}
 		rd_widgets[i].xpos = l;
-		l += strlen (rd_widgets[i].text) + 4;
+                l+= str_term_width1 (rd_widgets[i].text) + 4;
 	    }
 	}
 	/* Abort button is centered */
 	rd_widgets[1].xpos =
-	    (rd_xlen - strlen (rd_widgets[1].text) - 3) / 2;
+            (rd_xlen - str_term_width1 (rd_widgets[1].text) - 3) / 2;
     }
 #endif				/* ENABLE_NLS */
 
@@ -617,8 +618,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 
 
     ADD_RD_LABEL (ui, 0,
-		  name_trunc (ui->replace_filename,
-			      rd_trunc - strlen (rd_widgets[0].text)), 0);
+		  str_trunc (ui->replace_filename,
+                             rd_trunc - str_term_width1 (rd_widgets[0].text)), 0);
     ADD_RD_BUTTON (1);
 
     ADD_RD_BUTTON (2);
@@ -805,36 +806,36 @@ fmd_init_i18n (int force)
 	if (fmd_widgets[i].text[0] != '\0')
 	    fmd_widgets[i].text = _(fmd_widgets[i].text);
 
-    len = strlen (fmd_widgets[FMCB11].text)
-	+ strlen (fmd_widgets[FMCB21].text) + 15;
+    len = str_term_width1 (fmd_widgets[FMCB11].text)
+            + str_term_width1 (fmd_widgets[FMCB21].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = strlen (fmd_widgets[FMCB12].text)
-	+ strlen (fmd_widgets[FMCB22].text) + 15;
+    len = str_term_width1 (fmd_widgets[FMCB12].text)
+            + str_term_width1 (fmd_widgets[FMCB22].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = strlen (fmd_widgets[FMBRGT].text)
-	+ strlen (fmd_widgets[FMBLFT].text) + 11;
+    len = str_term_width1 (fmd_widgets[FMBRGT].text)
+            + str_term_width1 (fmd_widgets[FMBLFT].text) + 11;
 
 #ifdef FMBMID
-    len += strlen (fmd_widgets[FMBMID].text) + 6;
+    len+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
 #endif
 
     fmd_xlen = max (fmd_xlen, len + 4);
 
     len = (fmd_xlen - (len + 6)) / 2;
     i = fmd_widgets[FMBLFT].relative_x = len + 3;
-    i += strlen (fmd_widgets[FMBLFT].text) + 8;
+    i+= str_term_width1 (fmd_widgets[FMBLFT].text) + 8;
 
 #ifdef FMBMID
     fmd_widgets[FMBMID].relative_x = i;
-    i += strlen (fmd_widgets[FMBMID].text) + 6;
+    i+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
 #endif
 
     fmd_widgets[FMBRGT].relative_x = i;
 
 #define	chkbox_xpos(i) \
-	fmd_widgets [i].relative_x = fmd_xlen - strlen (fmd_widgets [i].text) - 6
+    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].text) - 6
 
     chkbox_xpos (FMCB0);
     chkbox_xpos (FMCB21);
