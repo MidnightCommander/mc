@@ -62,6 +62,7 @@
 #include "profile.h"		/* PROFILE_NAME */
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
+#include "strutil.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -1053,11 +1054,13 @@ char *guess_message_value (void)
 char *
 get_random_hint (int force)
 {
-    char *data, *result, *eol;
+    char *data, *result = NULL, *eol;
     int len;
     int start;
     static int last_sec;
     static struct timeval tv;
+    str_conv_t conv;
+    struct str_buffer *buffer;
 
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
@@ -1083,7 +1086,20 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = g_strdup (&data[start]);
+    
+    /* hint files are stored in utf-8 */
+    /* try convert hint file from utf-8 to terminal encoding */
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv != INVALID_CONV) {
+        buffer = str_get_buffer ();
+        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE) {
+            result = g_strdup (buffer->data);
+        }
+        
+        str_release_buffer (buffer);
+        str_close_conv (conv);
+    }
+    
     g_free (data);
     return result;
 }
