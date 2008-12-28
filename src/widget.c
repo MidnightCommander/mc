@@ -524,7 +524,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	widget_move (&c->widget, 0, 0);
         addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
 
-        addstr (str_term_form (c->text.start));
+	addstr (str_term_form (c->text.start));
 
         if (c->text.hotkey != NULL) {
 	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
