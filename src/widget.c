@@ -348,13 +348,11 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
 	{
-	    int i, lp = tolower (parm);
-	    const char *cp;
+	    int i, lp = g_ascii_tolower ((gchar)parm);
 
 	    for (i = 0; i < r->count; i++) {
-		cp = strchr (r->texts[i], '&');
-		if (cp != NULL && cp[1] != '\0') {
-		    int c = tolower ((unsigned char) cp[1]);
+                if (r->texts[i].hotkey != NULL) {
+                    int c = g_ascii_tolower ((gchar)r->texts[i].hotkey[0]);
 
 		    if (c != lp)
 			continue;
@@ -403,23 +401,32 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
-	    register const char *cp;
 	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
 
-	    tty_printf ("(%c) ", (r->sel == i) ? '*' : ' ');
-	    for (cp = r->texts[i]; *cp; cp++) {
-		if (*cp == '&') {
+            addstr ((r->sel == i) ? "(*) " : "( ) ");
+            
+            addstr (str_term_form (r->texts[i].start));
+
+            if (r->texts[i].hotkey != NULL) {
 		    widget_selectcolor (w, focused, TRUE);
-		    addch (*++cp);
+                addstr (str_term_form (r->texts[i].hotkey));
 		    widget_selectcolor (w, focused, FALSE);
-		} else
-		    addch (*cp);
+            }
+            if (r->texts[i].end != NULL) {
+                addstr (str_term_form (r->texts[i].end));
 	    }
 	}
 	return MSG_HANDLED;
 
+    case WIDGET_DESTROY:
+        for (i = 0; i < r->count; i++) {
+            release_hotkey (r->texts[i]);
+        }
+        g_free (r->texts);
+        return MSG_HANDLED;
+        
     default:
 	return default_proc (msg, parm);
     }
@@ -449,26 +456,28 @@ radio_event (Gpm_Event *event, void *data)
 WRadio *
 radio_new (int y, int x, int count, const char **texts)
 {
-    WRadio *r = g_new (WRadio, 1);
+    WRadio *result = g_new (WRadio, 1);
     int i, max, m;
 
     /* Compute the longest string */
+    result->texts = g_new (struct hotkey_t, count);
+    
     max = 0;
     for (i = 0; i < count; i++){
-	m = strlen (texts [i]);
+        result->texts[i] = parse_hotkey (texts[i]);
+        m = hotkey_width (result->texts[i]);
 	if (m > max)
 	    max = m;
     }
 
-    init_widget (&r->widget, y, x, count, max, radio_callback, radio_event);
-    r->state = 1;
-    r->pos = 0;
-    r->sel = 0;
-    r->count = count;
-    r->texts = texts;
-    widget_want_hotkey (r->widget, 1);
+    init_widget (&result->widget, y, x, count, max, radio_callback, radio_event);
+    result->state = 1;
+    result->pos = 0;
+    result->sel = 0;
+    result->count = count;
+    widget_want_hotkey (result->widget, 1);
     
-    return r;
+    return result;
 }
 
 

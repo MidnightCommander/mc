@@ -49,7 +49,7 @@ typedef struct WRadio {
     unsigned int state;		/* radio button state */
     int pos, sel;
     int count;			/* number of members */
-    const char **texts;		/* texts of labels */
+    struct hotkey_t *texts;	/* texts of labels */
 } WRadio;
 
 typedef struct WCheck {
