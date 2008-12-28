@@ -39,8 +39,7 @@ typedef struct WButton {
 #define NORMAL_BUTTON		2
 #define DEFPUSH_BUTTON		3
     unsigned int flags;		/* button flags */
-    char *text;			/* text of button */
-    int hotkey;			/* hot KEY */
+    struct hotkey_t text;	/* text of button, contain hotkey too */
     int hotpos;			/* offset hot KEY char in text */
     bcback callback;		/* Callback function */
 } WButton;
@@ -177,6 +176,7 @@ void gauge_set_value (WGauge *g, int max, int current);
 void gauge_show (WGauge *g, int shown);
 
 /* Buttons */
+/* return copy of button text */
 const char *button_get_text (WButton *b);
 void button_set_text (WButton *b, const char *text);
 

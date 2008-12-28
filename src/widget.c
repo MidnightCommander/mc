@@ -132,7 +132,6 @@ static cb_ret_t
 button_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WButton *b = (WButton *) w;
-    char buf[BUF_SMALL];
     int stop = 0;
     int off = 0;
     Dlg_head *h = b->widget.parent;
@@ -155,11 +154,14 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 
-	if (b->hotkey == tolower (parm)) {
+        if (b->text.hotkey != NULL) {
+            if (g_ascii_tolower ((gchar)b->text.hotkey[0]) ==
+                g_ascii_tolower ((gchar)parm)) {
+                
 	    button_callback (w, WIDGET_KEY, ' ');
 	    return MSG_HANDLED;
 	}
-
+        }
 	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
@@ -201,40 +203,52 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	else if (msg == WIDGET_FOCUS)
 	    b->selected = 1;
 
+        widget_selectcolor (w, b->selected, FALSE);
+        widget_move (w, 0, 0);
+        
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[< %s >]", b->text);
-	    off = 3;
+                addstr ("[< ");
 	    break;
 	case NORMAL_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[ %s ]", b->text);
-	    off = 2;
+                addstr ("[ ");
 	    break;
 	case NARROW_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[%s]", b->text);
-	    off = 1;
+                addstr ("[");
 	    break;
 	case HIDDEN_BUTTON:
 	default:
-	    buf[0] = '\0';
-	    off = 0;
-	    break;
+                return MSG_HANDLED;
 	}
 
+        addstr (str_term_form (b->text.start));
+            
+        if (b->text.hotkey != NULL) {
+            widget_selectcolor (w, b->selected, TRUE);
+            addstr (str_term_form (b->text.hotkey));
 	widget_selectcolor (w, b->selected, FALSE);
-	widget_move (w, 0, 0);
+        }
 
-	addstr (buf);
+        if (b->text.end != NULL) {
+            addstr (str_term_form (b->text.end));
+        }
 
-	if (b->hotpos >= 0) {
-	    widget_selectcolor (w, b->selected, TRUE);
-	    widget_move (w, 0, b->hotpos + off);
-	    addch ((unsigned char) b->text[b->hotpos]);
+        switch (b->flags) {
+            case DEFPUSH_BUTTON:
+                addstr (" >]");
+                break;
+            case NORMAL_BUTTON:
+                addstr (" ]");
+                break;
+            case NARROW_BUTTON:
+                addstr ("]");
+                break;
 	}
+      
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (b->text);
+        release_hotkey (b->text);
 	return MSG_HANDLED;
 
     default:
@@ -260,10 +274,10 @@ button_event (Gpm_Event *event, void *data)
 }
 
 static int
-button_len (const char *text, unsigned int flags)
+button_len (const struct hotkey_t text, unsigned int flags)
 {
-    int ret = strlen (text);
-    switch (flags){
+    int ret = hotkey_width (text);
+    switch (flags) {
 	case DEFPUSH_BUTTON:
 	    ret += 6;
 	    break;
@@ -280,57 +294,43 @@ button_len (const char *text, unsigned int flags)
     return ret;
 }
 
-/*
- * Locate the hotkey and remove it from the button text.  Assuming that
- * the button text is g_malloc()ed, we can safely change and shorten it.
- */
-static void
-button_scan_hotkey (WButton *b)
-{
-    char *cp = strchr (b->text, '&');
-
-    if (cp != NULL && cp[1] != '\0') {
-	g_strlcpy (cp, cp + 1, strlen (cp));
-	b->hotkey = tolower ((unsigned char) *cp);
-	b->hotpos = cp - b->text;
-    }
-}
-
 WButton *
 button_new (int y, int x, int action, int flags, const char *text,
 	    bcback callback)
 {
     WButton *b = g_new (WButton, 1);
 
-    init_widget (&b->widget, y, x, 1, button_len (text, flags),
+    b->text = parse_hotkey (text);
+    
+    init_widget (&b->widget, y, x, 1, button_len (b->text, flags),
 		 button_callback, button_event);
     
     b->action = action;
     b->flags  = flags;
     b->selected = 0;
-    b->text   = g_strdup (text);
     b->callback = callback;
     widget_want_hotkey (b->widget, 1);
-    b->hotkey = 0;
-    b->hotpos = -1;
+    b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
 
-    button_scan_hotkey(b);
     return b;
 }
 
 const char *
 button_get_text (WButton *b)
 {
-    return b->text;
+    if (b->text.hotkey != NULL) 
+        return g_strconcat (b->text.start, "&", b->text.hotkey, 
+                            b->text.end, NULL);
+    else
+        return g_strdup (b->text.start); 
 }
 
 void
 button_set_text (WButton *b, const char *text)
 {
-   g_free (b->text);
-    b->text = g_strdup (text);
-    b->widget.cols = button_len (text, b->flags);
-    button_scan_hotkey(b);
+    release_hotkey (b->text);
+    b->text = parse_hotkey (text);
+    b->widget.cols = button_len (b->text, b->flags);
     dlg_redraw (b->widget.parent);
 }
 

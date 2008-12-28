@@ -139,9 +139,9 @@ static void set_perm_by_flags (char *s, int f_p)
 
 static void update_permissions (void)
 {
-    set_perm_by_flags (b_att[0]->text, 0);
-    set_perm_by_flags (b_att[1]->text, 3);
-    set_perm_by_flags (b_att[2]->text, 6);
+    set_perm_by_flags (b_att[0]->text.start, 0);
+    set_perm_by_flags (b_att[1]->text.start, 3);
+    set_perm_by_flags (b_att[2]->text.start, 6);
 }
 
 static mode_t get_perm (char *s, int base)
@@ -484,7 +484,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (f_pos > 2)
 		break;
 	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,parm)-ch_perm); */
-	    if (((WButton *) h->current)->text[(flag_pos % 3)] ==
+	    if (((WButton *) h->current)->text.start[(flag_pos % 3)] ==
 		'-')
 		ch_flags[flag_pos] = '+';
 	    else
