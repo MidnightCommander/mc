@@ -3220,13 +3220,8 @@ hex_search (WView *view, const char *text)
     g_free (buffer);
 
     if (pos == INVALID_OFFSET) {
-<<<<<<< HEAD:src/view.c
 	message (D_NORMAL, _("Search"), _(" Search string not found "));
 	view->search_length = 0;
-=======
-	message (0, _("Search"), _(" Search string not found "));
-	view->search_end = view->search_start;
->>>>>>> patches by Rostislav Beneš: mc-30-view:src/view.c
 	return;
     }
 
@@ -3357,13 +3352,8 @@ view_moveto_line_cmd (WView *view)
 
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current line number is %d.\n"
-<<<<<<< HEAD:src/view.c
 		  " Enter the new line number:"), (int) (line + 1));
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
-=======
-		  " Enter the new line number:"), (int) row);
-    answer = input_dialog (_(" Goto line "), prompt, "");
->>>>>>> patches by Rostislav Beneš: mc-30-view:src/view.c
     if (answer != NULL && answer[0] != '\0') {
 	errno = 0;
 	row = strtoul (answer, &answer_end, 10);
