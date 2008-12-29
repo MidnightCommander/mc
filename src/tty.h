@@ -27,6 +27,13 @@
 #endif /* WANT_TERM_H */
 #endif /* USE_NCURSES */
 
+#ifdef USE_NCURSESW
+#   include <ncursesw/curses.h>
+#ifdef WANT_TERM_H
+#   include <term.h>
+#endif
+#endif
+
 /* {{{ Input }}} */
 
 extern void tty_enable_interrupt_key(void);

@@ -455,8 +455,8 @@ dnl
 dnl Select the screen library.  mcslang is the included S-Lang library.
 dnl
 AC_ARG_WITH(screen,
-	[  --with-screen=LIB        Compile with screen library: slang, mcslang or
-                           ncurses [[slang if found, else mcslang]]])
+	[  --with-screen=LIB        Compile with screen library: slang, mcslang,
+                           ncurses or ncursesw [[slang if found, else mcslang]]])
 
 case x$with_screen in
 xslang)
@@ -467,6 +467,9 @@ xmcslang)
 	;;
 xncurses)
 	MC_WITH_NCURSES
+	;;
+xncursesw)
+	MC_WITH_NCURSESW
 	;;
 x)
 	MC_WITH_SLANG

@@ -724,7 +724,7 @@ setup_panels (void)
 void flag_winch (int dummy)
 {
     (void) dummy;
-#ifndef USE_NCURSES	/* don't do malloc in a signal handler */
+#if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
     low_level_change_screen_size ();
 #endif
     winch_flag = 1;

@@ -34,7 +34,7 @@
 #include "main.h"		/* for slow_terminal */
 #include "strutil.h"
 
-#ifdef USE_NCURSES
+#if defined(USE_NCURSES) || defined(USE_NCURSESW)
 #define WANT_TERM_H
 #endif
 #include "tty.h"

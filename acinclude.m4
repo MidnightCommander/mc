@@ -526,6 +526,52 @@ AC_DEFUN([MC_WITH_NCURSES], [
     LIBS="$save_LIBS"
 ])
 
+dnl
+dnl Use the ncurses library.  It can only be requested explicitly,
+dnl so just fail if anything goes wrong.
+dnl
+dnl If ncurses exports the ESCDELAY variable it should be set to 0
+dnl or you'll have to press Esc three times to dismiss a dialog box.
+dnl
+AC_DEFUN([MC_WITH_NCURSESW], [
+    dnl has_colors() is specific to ncurses, it's not in the old curses
+    save_LIBS="$LIBS"
+    LIBS=
+    AC_SEARCH_LIBS([has_colors], [ncursesw], [MCLIBS="$MCLIBS $LIBS"],
+		   [AC_MSG_ERROR([Cannot find ncursesw library])])
+
+    dnl Check the header
+    ncurses_h_found=
+    AC_CHECK_HEADERS([ncursesw/curses.h],
+		     [ncursesw_h_found=yes; break])
+
+    if test -z "$ncursesw_h_found"; then
+	AC_MSG_ERROR([Cannot find ncursesw header file])
+    fi
+
+    screen_type=ncursesw
+    screen_msg="ncursesw library"
+    AC_DEFINE(USE_NCURSESW, 1,
+	      [Define to use ncursesw for screen management])
+
+    AC_CACHE_CHECK([for ESCDELAY variable],
+		   [mc_cv_ncursesw_escdelay],
+		   [AC_TRY_LINK([], [
+			extern int ESCDELAY;
+			ESCDELAY = 0;
+			],
+			[mc_cv_ncursesw_escdelay=yes],
+			[mc_cv_ncursesw_escdelay=no])
+    ])
+    if test "$mc_cv_ncursesw_escdelay" = yes; then
+	AC_DEFINE(HAVE_ESCDELAY, 1,
+		  [Define if ncursesw has ESCDELAY variable])
+    fi
+
+    AC_CHECK_FUNCS(resizeterm)
+    LIBS="$save_LIBS"
+])
+
 
 dnl
 dnl Check for ext2fs recovery code
