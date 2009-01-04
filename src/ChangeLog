@@ -1,3 +1,6 @@
+2009-01-05  Slava Zanko   
+	* main.c (main): remove compatibility_move_mc_files stuff.
+
 2008-12-19  Roland Illig  <roland.illig@gmx.de>
 
 	* x11conn.c (x11_available): If the X11 shared library cannot be

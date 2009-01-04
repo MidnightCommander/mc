@@ -2114,15 +2114,6 @@ handle_args (int argc, char *argv[])
     poptFreeContext (ctx);
 }
 
-/*
- * The compatibility_move_mc_files routine is intended to
- * move all of the hidden .mc files into a private ~/.mc
- * directory in the home directory, to avoid cluttering the users.
- *
- * Previous versions of the program had all of their files in
- * the $HOME, we are now putting them in $HOME/.mc
- */
-
 static int
 do_mc_filename_rename (const char *o_name, const char *n_name)
 {
@@ -2136,35 +2127,9 @@ do_mc_filename_rename (const char *o_name, const char *n_name)
     return move;
 }
 
-static int
-compatibility_move_mc_files (void)
-{
-    struct stat s;
-    int move = 0;
-    char *mc_dir = concat_dir_and_file (home_dir, ".mc");
-
-    if (stat (mc_dir, &s) && (errno == ENOENT)
-	&& (mkdir (mc_dir, 0777) != -1)) {
-
-	move = do_mc_filename_rename (".mc.ini", "ini");
-	move += do_mc_filename_rename (".mc.hot", "hotlist");
-	move += do_mc_filename_rename (".mc.ext", "bindings");
-	move += do_mc_filename_rename (".mc.menu", "menu");
-	move += do_mc_filename_rename (".mc.bashrc", "bashrc");
-	move += do_mc_filename_rename (".mc.inputrc", "inputrc");
-	move += do_mc_filename_rename (".mc.tcshrc", "tcshrc");
-	move += do_mc_filename_rename (".mc.tree", "Tree");
-    }
-    g_free (mc_dir);
-    return move;
-}
-
 int
 main (int argc, char *argv[])
 {
-    /* if on, it displays the information that files have been moved to ~/.mc */
-    int show_change_notice = 0;
-
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
@@ -2209,8 +2174,6 @@ main (int argc, char *argv[])
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
 
-    show_change_notice = compatibility_move_mc_files ();
-
     /* We need this, since ncurses endwin () doesn't restore the signals */
     save_stop_handler ();
 
@@ -2248,12 +2211,6 @@ main (int argc, char *argv[])
     if (alternate_plus_minus)
 	application_keypad_mode ();
 
-    if (show_change_notice) {
-	message (1, _(" Notice "),
-		 _(" The Midnight Commander configuration files \n"
-		   " are now stored in the ~/.mc directory, the \n"
-		   " files have been moved now\n"));
-    }
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell) {
 	prompt = strip_ctrl_codes (subshell_prompt);
