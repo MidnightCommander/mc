@@ -103,6 +103,9 @@ context default yellow
     keyword whole file white
     keyword whole File white
     keyword whole FILE white
+    keyword whole finalisation white
+    keyword whole Finalisation white
+    keyword whole FINALISATION white
     keyword whole finally white
     keyword whole Finally white
     keyword whole FINALLY white
@@ -184,6 +187,9 @@ context default yellow
     keyword whole otherwise white
     keyword whole Otherwise white
     keyword whole OTHERWISE white
+    keyword whole overload white
+    keyword whole Overload white
+    keyword whole OVERLOAD white
     keyword whole override white
     keyword whole Override white
     keyword whole OVERRIDE white
@@ -217,6 +223,9 @@ context default yellow
     keyword whole raise white
     keyword whole Raise white
     keyword whole RAISE white
+    keyword whole read white
+    keyword whole Read white
+    keyword whole READ white
     keyword whole readonly white
     keyword whole Readonly white
     keyword whole READONLY white
@@ -286,6 +295,12 @@ context default yellow
     keyword whole with white
     keyword whole With white
     keyword whole WITH white
+    keyword whole write white
+    keyword whole Write white
+    keyword whole WRITE white
+    keyword whole writeln white
+    keyword whole Writeln white
+    keyword whole WRITELN white
     keyword whole xor cyan
     keyword whole Xor cyan
     keyword whole XOR cyan
