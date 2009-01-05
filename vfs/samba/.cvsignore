@@ -1,7 +1,0 @@
-*.cache
-Makefile
-config.log
-config.status
-configure
-nmfns.txt
-nmused.txt
