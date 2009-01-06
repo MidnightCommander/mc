@@ -9,16 +9,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-07 15:55-0400\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 
 msgid " Choose syntax highlighting "
 msgstr " Wybierz pod¶wietlanie sk³adniowe "
@@ -59,11 +59,26 @@ msgstr " Plik %s jest zbyt du¿y: "
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
 
-msgid "&Dismiss"
-msgstr "&Porzuæ"
-
 msgid " Enter file name: "
 msgstr " Wprowad¼ nazwê pliku: "
+
+msgid "Warning"
+msgstr "Ostrze¿enie"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Tak"
+
+msgid "&No"
+msgstr "&Nie"
+
+msgid "&Cancel"
+msgstr "&Anuluj"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
 
 msgid " Error writing to pipe: "
 msgstr " B³±d przy zapisie do potoku: "
@@ -80,9 +95,6 @@ msgstr "Bezpieczny"
 msgid "Do backups -->"
 msgstr "Kopie zapasowe -->"
 
-msgid "&Cancel"
-msgstr "&Anuluj"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -94,9 +106,6 @@ msgstr " Modyfikacja trybu zapisu "
 
 msgid " Save As "
 msgstr " Zapisz jako "
-
-msgid "Warning"
-msgstr "Ostrze¿enie"
 
 msgid " A file already exists with this name. "
 msgstr " Plik o tej nazwie ju¿ istnieje. "
@@ -245,12 +254,6 @@ msgstr " Plik zosta³ zmieniony. Zapisaæ przed zakoñczeniem?"
 msgid "&Cancel quit"
 msgstr "N&ie zamykaj"
 
-msgid "&Yes"
-msgstr "&Tak"
-
-msgid "&No"
-msgstr "&Nie"
-
 msgid " Error "
 msgstr " B³±d "
 
@@ -352,6 +355,9 @@ msgstr " Naci¶nij dowolny klawisz: "
 
 msgid " Execute Macro "
 msgstr " Wykonaj makro "
+
+msgid "&Dismiss"
+msgstr "&Porzuæ"
 
 msgid " Emacs key: "
 msgstr " Klawisz Emacsa: "
@@ -782,6 +788,10 @@ msgstr "Rozró¿nianie wie&lko¶ci"
 msgid "Sort order"
 msgstr "Porz±dek sortowania"
 
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Podrêczne &katalogi      C-\\"
+
 msgid " confirm &Exit "
 msgstr " Potwierdzanie zakoñczenia "
 
@@ -1067,9 +1077,6 @@ msgstr " Który plik menu chcesz zmodyfikowaæ? "
 msgid "&Local"
 msgstr "Lokalne"
 
-msgid "&Home"
-msgstr "Prywatne"
-
 msgid "Syntax file edit"
 msgstr "Modyfikacja pliku ze sk³adni±"
 
@@ -1172,11 +1179,12 @@ msgstr ""
 " Wprowad¼ nazwê urz±dzenia (bez /dev/), na którym\n"
 " s± pliki do odzyskania (F1 - szczegó³y):"
 
-msgid " Setup saved to ~/"
-msgstr " Zapisano ustawienia do ~/"
-
 msgid " Setup "
 msgstr " Ustawienia "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Zapisano ustawienia do ~/"
 
 #, c-format
 msgid ""
@@ -1216,24 +1224,6 @@ msgstr "Rozmi&ar"
 msgid "&Inode"
 msgstr "&I-wêze³"
 
-msgid "&Type"
-msgstr "&Typ"
-
-msgid "&Links"
-msgstr "&Liczba dowi±zañ"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "W³a¶ciciel"
-
-msgid "&Group"
-msgstr "Grupa"
-
 msgid "Cannot read directory contents"
 msgstr "Nie mo¿na odczytaæ zawarto¶ci katalogu"
 
@@ -1270,9 +1260,9 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Format pliku %smc.ext uleg³ zmianie wraz z wersj± 3.0. "
-"Wygl±da na to, ¿e instalacja siê nie powiod³a. "
-"Pobierz now± wersjê tego pliku z pakietu Midnight Commandera."
+"Format pliku %smc.ext uleg³ zmianie wraz z wersj± 3.0. Wygl±da na to, ¿e "
+"instalacja siê nie powiod³a. Pobierz now± wersjê tego pliku z pakietu "
+"Midnight Commandera."
 
 #, c-format
 msgid " ~/%s file error "
@@ -1284,8 +1274,8 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"Format pliku ~/%s uleg³ zmianie wraz z wersj± 3.0. Mo¿esz teraz skopiowaæ "
-"go z %smc.ext lub napisaæ samemu, opieraj±c siê na zawarto¶ci tego pliku."
+"Format pliku ~/%s uleg³ zmianie wraz z wersj± 3.0. Mo¿esz teraz skopiowaæ go "
+"z %smc.ext lub napisaæ samemu, opieraj±c siê na zawarto¶ci tego pliku."
 
 msgid " Copy "
 msgstr " Skopiuj "
@@ -1767,7 +1757,8 @@ msgstr "Podgl±d - F3"
 msgid "&Edit - F4"
 msgstr "Edycja - F4"
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "znajd¼ Re&kurencyjnie"
 
 msgid "Start at:"
@@ -1894,6 +1885,11 @@ msgstr " Usuñ: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1904,14 +1900,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Grupa g³ówna "
 
-msgid "MC was unable to write ~/"
-msgstr "Nie mo¿na zapisaæ pliku ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ". Poprzednia lista podrêcznych katalogów nie zosta³a usuniêta"
-
 msgid " Hotlist Load "
 msgstr " Odczyt listy podrêcznych katalogów"
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ". Poprzednia lista podrêcznych katalogów nie zosta³a usuniêta"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2379,11 +2374,13 @@ msgstr ""
 "S³owa kluczowe:\n"
 "   Globalne:            errors, reverse, gauge, input, viewunderline\n"
 "   Wy¶wietlanie plików: normal, selected, marked, markselect\n"
-"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
-"                        errdhotfocus"
-"   Menu:                menu, menuhot, menusel, menuhotsel\n"
+"   Okna dialogowe:      dnormal, dfocus, dhotnormal, dhotfocus, "
+"errdhotnormal,\n"
+"                        errdhotfocus   Menu:                menu, menuhot, "
+"menusel, menuhotsel\n"
 "   Edytor:              editnormal, editbold, editmarked\n"
-"   Pomoc:               helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Pomoc:               helpnormal, helpitalic, helpbold, helplink, "
+"helpslink\n"
 "   Typy plików:         directory, executable, link, stalelink, device,\n"
 "                        special, core\n"
 "\n"
@@ -2452,18 +2449,6 @@ msgstr "Wywo³uje podgl±d pliku"
 
 msgid "Edits one file"
 msgstr "Modyfikuje plik"
-
-msgid " Notice "
-msgstr " Uwaga "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Pliki konfiguracyjne Midnight Commandera bêd± \n"
-" przechowywane w katalogu ~/.mc. Pliki zosta³y \n"
-" w³a¶nie do niego przeniesione.\n"
 
 msgid "safe de&Lete"
 msgstr "Bezpieczne usuwanie"
@@ -2643,13 +2628,19 @@ msgstr "W³a¶ciciel"
 msgid "Group"
 msgstr "Grupa"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bajtów w %d pliku"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s bajtów"
+msgstr[1] "%s bajtów"
+msgstr[2] "%s bajtów"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bajtów w %d plikach"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bajtów w %d pliku"
+msgstr[1] "%s bajtów w %d pliku"
+msgstr[2] "%s bajtów w %d pliku"
 
 msgid "<readlink failed>"
 msgstr "<readlink() nie powiod³a siê>"
@@ -2862,6 +2853,9 @@ msgstr "%e.%m %H:%M"
 msgid "%b %e  %Y"
 msgstr "%e.%m.%Y "
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s to nie katalog\n"
@@ -2979,6 +2973,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Przejd¼ pod adres "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Niew³a¶ciwe has³o "
 
 msgid " Enter regexp:"
 msgstr " Wprowad¼ wyra¿enie regularne: "
@@ -3614,6 +3612,45 @@ msgstr "B³±d wewnêtrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid "&Home"
+#~ msgstr "Prywatne"
+
+#~ msgid "&Type"
+#~ msgstr "&Typ"
+
+#~ msgid "&Links"
+#~ msgstr "&Liczba dowi±zañ"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "W³a¶ciciel"
+
+#~ msgid "&Group"
+#~ msgstr "Grupa"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "Nie mo¿na zapisaæ pliku ~/"
+
+#~ msgid " Notice "
+#~ msgstr " Uwaga "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Pliki konfiguracyjne Midnight Commandera bêd± \n"
+#~ " przechowywane w katalogu ~/.mc. Pliki zosta³y \n"
+#~ " w³a¶nie do niego przeniesione.\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bajtów w %d plikach"
 
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld bloków)"

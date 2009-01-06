@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -60,6 +60,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Sətiri tap: "
 
+msgid "Warning"
+msgstr "Xəbərdarlıq"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Bəli"
+
+msgid "&No"
+msgstr "&Xeyr"
+
+msgid "&Cancel"
+msgstr "&Ləğv Et"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Faylı borularkən xəta oldu . "
 
@@ -75,9 +93,6 @@ msgstr "Etibarlı qeyd et "
 msgid "Do backups -->"
 msgstr "Yedek yarat -->"
 
-msgid "&Cancel"
-msgstr "&Ləğv Et"
-
 msgid "&OK"
 msgstr "&Oldu"
 
@@ -89,9 +104,6 @@ msgstr " Qeyd Etmə şəklini dəyişdir "
 
 msgid " Save As "
 msgstr " Fərqli qeyd et "
-
-msgid "Warning"
-msgstr "Xəbərdarlıq"
 
 msgid " A file already exists with this name. "
 msgstr " Bu adla onsuz da bir fayl vardır "
@@ -241,12 +253,6 @@ msgstr " Fayl dəyişdirilmişdir, Çıxarkən qeyd edim mi? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Çıxışı dayandır"
-
-msgid "&Yes"
-msgstr "&Bəli"
-
-msgid "&No"
-msgstr "&Xeyr"
 
 #, fuzzy
 msgid " Error "
@@ -530,6 +536,10 @@ msgstr "Düy&mələri öyrən ..."
 msgid "Syntax &Highlighting..."
 msgstr "sinta&X seçilməsi"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "Qurğuları &Qeyd et"
+
 msgid " File "
 msgstr " Fayl "
 
@@ -783,6 +793,10 @@ msgstr "böyük/kiçik hərf həssas"
 
 msgid "Sort order"
 msgstr "Süzmə əmri"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "qov&luqlar keçmişi      C-\\"
 
 msgid " confirm &Exit "
 msgstr " &Çıxış üçün icazə istə "
@@ -1071,9 +1085,6 @@ msgstr " Hansı menyu faylını düzəltmək istəyirsan?"
 msgid "&Local"
 msgstr "Yer&li"
 
-msgid "&Home"
-msgstr "&Ev"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "&Menyunu dəyişdir"
@@ -1178,11 +1189,12 @@ msgstr ""
 " Qurtarılacaq mə'lumatların olduğu avandalığı (/dev/ siz) girin\n"
 "   üstündəki fayllar: (ətraflı mə'lumat üçün F1i basın)"
 
-msgid " Setup saved to ~/"
-msgstr " Quruluş qeyd edildi ~/"
-
 msgid " Setup "
 msgstr " Quruluş "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Quruluş qeyd edildi ~/"
 
 #, c-format
 msgid ""
@@ -1221,24 +1233,6 @@ msgstr "&Böyüklük"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Növ"
-
-msgid "&Links"
-msgstr "&Bağlar"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Yiyəsi"
-
-msgid "&Group"
-msgstr "&Qrupu"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1773,7 +1767,7 @@ msgstr "&Göstər -F3"
 msgid "&Edit - F4"
 msgstr "&Düzəlt -F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1901,6 +1895,11 @@ msgstr " Sil: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1911,14 +1910,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Ən üstdəki qrup "
 
-msgid "MC was unable to write ~/"
-msgstr "MC yaza bilmədi ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " fayl, sizin köhnə nişanlarım girişləri silinmədi"
-
 msgid " Hotlist Load "
 msgstr " Nişanlarım yüklənir"
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " fayl, sizin köhnə nişanlarım girişləri silinmədi"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1965,8 +1963,9 @@ msgstr "Çatılıb:\t%s"
 msgid "Modified:  %s"
 msgstr "Düzəldilib:\t%s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Yaradılıb :   %s"
 
 #, c-format
@@ -1977,13 +1976,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Böyüklük:    %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " ( %ld blok )"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " ( %ld blok )"
+msgid_plural " (%ld blocks)"
+msgstr[0] " ( %ld blok )"
+msgstr[1] " ( %ld blok )"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2464,18 +2461,6 @@ msgstr "Faylda göstərici proqramı başladar"
 msgid "Edits one file"
 msgstr "Faylı düzəldər"
 
-msgid " Notice "
-msgstr " Bildir "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" The Midnight Commander quraşdırma  faylları\n"
-" indi ~/.mc qovluğunda saxlanılır, fayllar\n"
-" indi daşındılar\n"
-
 msgid "safe de&Lete"
 msgstr "e'tibarlı si&Lmə"
 
@@ -2655,13 +2640,17 @@ msgstr "Yiyəsi"
 msgid "Group"
 msgstr "Qrup"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bayt : %d fayl"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bayt : %d fayl"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bayt : %d fayl"
+msgstr[1] "%s bayt : %d fayl"
 
 msgid "<readlink failed>"
 msgstr "<bağ oxuması iflas etdi>"
@@ -2872,6 +2861,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "qovluq"
@@ -2989,6 +2981,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Ünvana Get "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Səhv verilmiş parol "
 
 msgid " Enter regexp:"
 msgstr " Uzantı (regexp) gir: "
@@ -3624,6 +3620,48 @@ msgstr "Daxili xəta :"
 
 msgid "Changes to file lost"
 msgstr "Dəyişiklikləri itirdim"
+
+#~ msgid "&Home"
+#~ msgstr "&Ev"
+
+#~ msgid "&Type"
+#~ msgstr "&Növ"
+
+#~ msgid "&Links"
+#~ msgstr "&Bağlar"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Yiyəsi"
+
+#~ msgid "&Group"
+#~ msgstr "&Qrupu"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC yaza bilmədi ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " ( %ld blok )"
+
+#~ msgid " Notice "
+#~ msgstr " Bildir "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " The Midnight Commander quraşdırma  faylları\n"
+#~ " indi ~/.mc qovluğunda saxlanılır, fayllar\n"
+#~ " indi daşındılar\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bayt : %d fayl"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Faylı oxumaq üçün aöarkan xəta oldu : "

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2005-10-04\n"
 "Last-Translator: Leonard den Ottolander <leonard den ottolander nl>\n"
 "Language-Team: \n"
@@ -26,24 +26,30 @@ msgstr "< Auto >"
 msgid "< Reload Current Syntax >"
 msgstr "< Herlaadt Huidige Syntax >"
 
+#, c-format
 msgid " Cannot open %s for reading "
 msgstr " Openen van %s voor lezen mislukt "
 
 msgid "Error"
 msgstr "Fout"
 
+#, c-format
 msgid " Error reading from pipe: %s "
 msgstr " Probleem bij het lezen van pijp: %s "
 
+#, c-format
 msgid " Cannot open pipe for reading: %s "
 msgstr " Openen van pijp voor lezen mislukt: %s "
 
+#, c-format
 msgid " Cannot get size/permissions for %s "
 msgstr " Kan geen grootte-/rechteninformatie verkrijgen voor %s "
 
+#, c-format
 msgid " %s is not a regular file "
 msgstr " %s is geen normaal bestand "
 
+#, c-format
 msgid " File %s is too large "
 msgstr " Bestand %s is te groot "
 
@@ -52,6 +58,24 @@ msgstr "Macro-recursie gaat te diep"
 
 msgid " Enter file name: "
 msgstr " Geef bestandsnaam: "
+
+msgid "Warning"
+msgstr "Waarschuwing"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nee"
+
+msgid "&Cancel"
+msgstr "&Afbreken"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
 
 msgid " Error writing to pipe: "
 msgstr " Fout bij het schrijven naar pijp: "
@@ -68,9 +92,6 @@ msgstr "Veilig opslaan "
 msgid "Do backups -->"
 msgstr "Reservebestanden maken -->"
 
-msgid "&Cancel"
-msgstr "&Afbreken"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -82,9 +103,6 @@ msgstr " Editor Bewaarmodus "
 
 msgid " Save As "
 msgstr " Opslaan als "
-
-msgid "Warning"
-msgstr "Waarschuwing"
 
 msgid " A file already exists with this name. "
 msgstr " Er bestaat al een bestand met die naam. "
@@ -231,12 +249,6 @@ msgstr " Bestand is gewijzigd. Opslaan bij afsluiten? "
 
 msgid "&Cancel quit"
 msgstr "&Annuleer afsluiten"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nee"
 
 msgid " Error "
 msgstr " Fout "
@@ -517,6 +529,10 @@ msgstr "&Leer toetsen..."
 msgid "Syntax &Highlighting..."
 msgstr "Synta&X Kleuring..."
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "Instellingen &Opslaan"
+
 msgid " File "
 msgstr " Bestand "
 
@@ -768,6 +784,10 @@ msgstr "Hoofd-/kleine le&tters"
 
 msgid "Sort order"
 msgstr "Sortering"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Mappen &Snellijst              C-\\"
 
 msgid " confirm &Exit "
 msgstr " B&Evestig afsluiten "
@@ -1054,9 +1074,6 @@ msgstr " Welk menubestand wilt u bewerken? "
 msgid "&Local"
 msgstr "&Lokaal"
 
-msgid "&Home"
-msgstr "&Home"
-
 msgid "Syntax file edit"
 msgstr "Uitbreidingsbestand bewerken"
 
@@ -1159,11 +1176,12 @@ msgstr ""
 " Geef heet apparaatnaam (zonder /dev/) om gewiste bestanden te herstellen\n"
 "   op: (F1 voor details)"
 
-msgid " Setup saved to ~/"
-msgstr " Instellingen opgeslagen in ~/"
-
 msgid " Setup "
 msgstr " Instellingen "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Instellingen opgeslagen in ~/"
 
 #, c-format
 msgid ""
@@ -1203,24 +1221,6 @@ msgstr "&Grootte"
 msgid "&Inode"
 msgstr "&Inode"
 
-msgid "&Type"
-msgstr "&Type"
-
-msgid "&Links"
-msgstr "&Links"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Eigenaar"
-
-msgid "&Group"
-msgstr "&Groep"
-
 msgid "Cannot read directory contents"
 msgstr "Kan mapinhoud niet lezen"
 
@@ -1247,6 +1247,7 @@ msgstr ""
 msgid " Parameter "
 msgstr " Parameter "
 
+#, c-format
 msgid " %s%s file error"
 msgstr " %s%s bestandsfout "
 
@@ -1256,9 +1257,8 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"Het formaat van het %smc.ext bestand is veranderd "
-"met versie 3.0. De installatie lijkt mislukt. "
-"Haal een nieuw Midnight Commander-pakket op."
+"Het formaat van het %smc.ext bestand is veranderd met versie 3.0. De "
+"installatie lijkt mislukt. Haal een nieuw Midnight Commander-pakket op."
 
 #, c-format
 msgid " ~/%s file error "
@@ -1752,7 +1752,7 @@ msgstr "Weerga&Ve - F3"
 msgid "&Edit - F4"
 msgstr "Bew&Erken -F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1879,6 +1879,11 @@ msgstr " Verwijderen "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1889,14 +1894,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Startgroep "
 
-msgid "MC was unable to write ~/"
-msgstr "Schrijven mislukt in  ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " bestand, uw oude hotlist is niet verwijderd"
-
 msgid " Hotlist Load "
 msgstr " Hotlist laden "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " bestand, uw oude hotlist is niet verwijderd"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1943,8 +1947,9 @@ msgstr "Benaderd: %s"
 msgid "Modified:  %s"
 msgstr "Veranderd:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Gecreëerd:   %s"
 
 #, c-format
@@ -1955,13 +1960,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Grootte:     %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blokken)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr "(%ld blokken)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blokken)"
+msgstr[1] " (%ld blokken)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2438,18 +2441,6 @@ msgstr "Start de bestandviewer voor een bestand"
 msgid "Edits one file"
 msgstr "Bewerkt een bestand"
 
-msgid " Notice "
-msgstr " Opmerking "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" De Midnight Commander configuratiebestanden \n"
-" worden nu opgeslagen de ~/.mc map, de \n"
-" bestanden zijn nu verplaatst\n"
-
 msgid "safe de&Lete"
 msgstr "&Veilig verwijderen"
 
@@ -2628,13 +2619,17 @@ msgstr "Eigenaar"
 msgid "Group"
 msgstr "Groep"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bytes in %d bestand(en)"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s bytes"
+msgstr[1] "%s bytes"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bytes in %d bestand(en)"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bytes in %d bestand(en)"
+msgstr[1] "%s bytes in %d bestand(en)"
 
 msgid "<readlink failed>"
 msgstr "<readlink mislukt>"
@@ -2643,7 +2638,8 @@ msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
+msgstr ""
+"Door gebruiker gedefinieerde formaat lijkt onjuist, gebruik de standaard."
 
 msgid " Do you really want to execute? "
 msgstr " Wilt u die opdracht echt uitvoeren? "
@@ -2849,6 +2845,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s is geen map\n"
@@ -2931,8 +2930,8 @@ msgid ""
 " Data may have been written or not. "
 msgstr ""
 " Probleem met sluiten bestand: \n"
-" %s\n "
-" Data is mogelijk niet geschreven. "
+" %s\n"
+"  Data is mogelijk niet geschreven. "
 
 #, c-format
 msgid ""
@@ -2966,6 +2965,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Ga naar adres "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Ongeldig wachtwoord "
 
 msgid " Enter regexp:"
 msgstr " Geef reguliere expressie:"
@@ -3600,6 +3603,48 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid "&Home"
+#~ msgstr "&Home"
+
+#~ msgid "&Type"
+#~ msgstr "&Type"
+
+#~ msgid "&Links"
+#~ msgstr "&Links"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Eigenaar"
+
+#~ msgid "&Group"
+#~ msgstr "&Groep"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "Schrijven mislukt in  ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr "(%ld blokken)"
+
+#~ msgid " Notice "
+#~ msgstr " Opmerking "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " De Midnight Commander configuratiebestanden \n"
+#~ " worden nu opgeslagen de ~/.mc map, de \n"
+#~ " bestanden zijn nu verplaatst\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bytes in %d bestand(en)"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Openen van bestand voor lezen mislukt: "

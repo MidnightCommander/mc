@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-01-22 21:50+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -59,6 +59,24 @@ msgstr "Rekurzia makra je príliš hlboká"
 msgid " Enter file name: "
 msgstr " Zadajte meno súbpru: "
 
+msgid "Warning"
+msgstr "Varovanie"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "Án&o"
+
+msgid "&No"
+msgstr "&Nie"
+
+msgid "&Cancel"
+msgstr "&Zrušiť"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Chyba počas zápisu do rúry: "
 
@@ -74,9 +92,6 @@ msgstr "Bezpečne uložiť "
 msgid "Do backups -->"
 msgstr "Zálož. kópiu do"
 
-msgid "&Cancel"
-msgstr "&Zrušiť"
-
 msgid "&OK"
 msgstr "Án&o"
 
@@ -88,9 +103,6 @@ msgstr " Upraviť mód ukladania "
 
 msgid " Save As "
 msgstr " Uložiť ako "
-
-msgid "Warning"
-msgstr "Varovanie"
 
 msgid " A file already exists with this name. "
 msgstr " Súbor s daným meno už existuje. "
@@ -240,12 +252,6 @@ msgstr " Súbor bol zmenený, uložiť a skončiť? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Zrušiť ukončenie"
-
-msgid "&Yes"
-msgstr "Án&o"
-
-msgid "&No"
-msgstr "&Nie"
 
 #, fuzzy
 msgid " Error "
@@ -530,6 +536,10 @@ msgstr "uč&Enie kláves..."
 msgid "Syntax &Highlighting..."
 msgstr "zvýraznenie s&Yntaxe"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Uložiť nastavenie"
+
 msgid " File "
 msgstr " Súbor "
 
@@ -782,6 +792,10 @@ msgstr "&Citlivý na veľkosť"
 
 msgid "Sort order"
 msgstr "Poradie triedenia"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "&Adresárový hotlist      C-\\"
 
 msgid " confirm &Exit "
 msgstr " potvrdiť &Koniec "
@@ -1069,9 +1083,6 @@ msgstr " Ktorý súbor menu chcete upraviť? "
 msgid "&Local"
 msgstr "&Miestny"
 
-msgid "&Home"
-msgstr "&Domáci"
-
 msgid "Syntax file edit"
 msgstr "Upraviť súbor so syntaxou"
 
@@ -1172,11 +1183,12 @@ msgstr ""
 " Zadajte zariadenie (bez /dev/) pre obnovenie\n"
 "   súborov na: (F1 pre detaily)"
 
-msgid " Setup saved to ~/"
-msgstr " Nastavenie bolo uložené do ~/"
-
 msgid " Setup "
 msgstr " Nastavenie "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Nastavenie bolo uložené do ~/"
 
 #, c-format
 msgid ""
@@ -1215,24 +1227,6 @@ msgstr "&Veľkosť"
 
 msgid "&Inode"
 msgstr "&I-uzol"
-
-msgid "&Type"
-msgstr "&Typ"
-
-msgid "&Links"
-msgstr "&Odkazy"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Vlastník"
-
-msgid "&Group"
-msgstr "s&Kupina"
 
 msgid "Cannot read directory contents"
 msgstr "Nepodarilo sa načítať obsah adresára"
@@ -1766,7 +1760,7 @@ msgstr "&Pohľad - F3"
 msgid "&Edit - F4"
 msgstr "&Editácia - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1894,6 +1888,11 @@ msgstr " Odstrániť: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1904,14 +1903,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Skupina vrchného stupňa "
 
-msgid "MC was unable to write ~/"
-msgstr "MC nebol schopný zapísať ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " súbor, váš starý hotlist vstupov nebol zmazaný"
-
 msgid " Hotlist Load "
 msgstr " Nahrať Hotlistu "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " súbor, váš starý hotlist vstupov nebol zmazaný"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1958,8 +1956,9 @@ msgstr "Prístupný:  %s"
 msgid "Modified:  %s"
 msgstr "Zmenený:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Vytvorený:   %s"
 
 #, c-format
@@ -1970,13 +1969,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Veľkosť:     %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blok)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blokov)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blok)"
+msgstr[1] " (%ld blok)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2452,18 +2449,6 @@ msgstr "Spúšťam prehliadač súborov pre súbor"
 msgid "Edits one file"
 msgstr "Upravujte jeden súbor"
 
-msgid " Notice "
-msgstr " Správa "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Konfiguračné súbory pre Midnight Commander \n"
-" sú teraz uložené v adresári ~/.mc, súbory  \n"
-" boli teraz presunuté\n"
-
 msgid "safe de&Lete"
 msgstr "bezpečn&É mazanie"
 
@@ -2642,13 +2627,17 @@ msgstr "Vlastník"
 msgid "Group"
 msgstr "Skupina"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bytov v %d súbore"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s bytov"
+msgstr[1] "%s bytov"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bytov v %d súboroch"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bytov v %d súbore"
+msgstr[1] "%s bytov v %d súbore"
 
 msgid "<readlink failed>"
 msgstr "<čítanie odkazu zlyhalo>"
@@ -2858,6 +2847,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s nie je adresár\n"
@@ -2971,6 +2963,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Choď na Adresu "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Neplatné heslo "
 
 msgid " Enter regexp:"
 msgstr " Zadajte regexp:"
@@ -3607,6 +3603,48 @@ msgstr "Interná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid "&Home"
+#~ msgstr "&Domáci"
+
+#~ msgid "&Type"
+#~ msgstr "&Typ"
+
+#~ msgid "&Links"
+#~ msgstr "&Odkazy"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Vlastník"
+
+#~ msgid "&Group"
+#~ msgstr "s&Kupina"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC nebol schopný zapísať ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blokov)"
+
+#~ msgid " Notice "
+#~ msgstr " Správa "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Konfiguračné súbory pre Midnight Commander \n"
+#~ " sú teraz uložené v adresári ~/.mc, súbory  \n"
+#~ " boli teraz presunuté\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bytov v %d súboroch"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Neúspešný pokus o otvorenie súboru pre čítanie: "

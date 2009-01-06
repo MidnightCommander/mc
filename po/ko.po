@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -56,6 +56,24 @@ msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
 msgid " Enter file name: "
 msgstr " 파일명 입력: "
 
+msgid "Warning"
+msgstr "경고"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "예(&Y)"
+
+msgid "&No"
+msgstr "아니오(&N)"
+
+msgid "&Cancel"
+msgstr "취소(&C)"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " 파이프 쓰기 에러: "
 
@@ -71,9 +89,6 @@ msgstr "안전한 저장 "
 msgid "Do backups -->"
 msgstr "백업 -->"
 
-msgid "&Cancel"
-msgstr "취소(&C)"
-
 msgid "&OK"
 msgstr "확인(&O)"
 
@@ -85,9 +100,6 @@ msgstr " 편집 저장 모드 "
 
 msgid " Save As "
 msgstr " 새이름으로 저장 "
-
-msgid "Warning"
-msgstr "경고"
 
 msgid " A file already exists with this name. "
 msgstr " 같은 이름의 파일이 이미 있습니다. "
@@ -237,12 +249,6 @@ msgstr " 파일이 바뀌었는 데, 저장하고 끝낼까요? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "끝내기 취소"
-
-msgid "&Yes"
-msgstr "예(&Y)"
-
-msgid "&No"
-msgstr "아니오(&N)"
 
 #, fuzzy
 msgid " Error "
@@ -526,6 +532,10 @@ msgstr "글쇠 배우기(&K)..."
 msgid "Syntax &Highlighting..."
 msgstr " 하이라이트... "
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "환경 저장(&S)"
+
 msgid " File "
 msgstr " 파일 "
 
@@ -778,6 +788,10 @@ msgstr "대소문자 구분(&t)"
 
 msgid "Sort order"
 msgstr "정렬 순서"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "디렉토리 단축목록(&R)        C-\\"
 
 msgid " confirm &Exit "
 msgstr " 끝내기 확인(&E) "
@@ -1065,9 +1079,6 @@ msgstr " 어떤 메뉴 파일을 편집하고 싶으세요? "
 msgid "&Local"
 msgstr "로컬(&L)"
 
-msgid "&Home"
-msgstr "홈(&H)"
-
 msgid "Syntax file edit"
 msgstr "문법 파일 수정(&M)"
 
@@ -1168,11 +1179,12 @@ msgstr ""
 " 파일을 복구하기 위해 '/dev/'를 생략한 디바이스명\n"
 "   입력: (자세히 알기 원하면 F1)"
 
-msgid " Setup saved to ~/"
-msgstr " Setup saved to ~/"
-
 msgid " Setup "
 msgstr " 환경설정 "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Setup saved to ~/"
 
 #, c-format
 msgid ""
@@ -1211,24 +1223,6 @@ msgstr "크기(&S)"
 
 msgid "&Inode"
 msgstr "Inode(&I)"
-
-msgid "&Type"
-msgstr "&Type"
-
-msgid "&Links"
-msgstr "&Links"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "소유자(&O)"
-
-msgid "&Group"
-msgstr "집단(&G)"
 
 msgid "Cannot read directory contents"
 msgstr "디렉토리 내용을 읽을 수 없습니다"
@@ -1762,7 +1756,7 @@ msgstr "보기(&V) - F3"
 msgid "&Edit - F4"
 msgstr "편집(&E) - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1890,6 +1884,11 @@ msgstr " 지우기: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1900,14 +1899,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " 최상위 집단 "
 
-msgid "MC was unable to write ~/"
-msgstr "MC was unable to write ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " file, your old hotlist entries were not deleted"
-
 msgid " Hotlist Load "
 msgstr " 단축목록 불러오기 "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " file, your old hotlist entries were not deleted"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1954,8 +1952,9 @@ msgstr "액세스일:  %s"
 msgid "Modified:  %s"
 msgstr "수정일:    %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "만든날:    %s"
 
 #, c-format
@@ -1966,13 +1965,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "크기:      %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld 구역)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld 구역)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld 구역)"
+msgstr[1] " (%ld 구역)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2448,18 +2445,6 @@ msgstr "파일에 대해 파일 보기 실행"
 msgid "Edits one file"
 msgstr "한 파일 편집"
 
-msgid " Notice "
-msgstr " Notice "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" The Midnight Commander 환경설정 파일은 이제 ~/mc \n"
-" 디렉토리에 저장됩니다. 모든 파일이 그쪽 \n"
-" 으로 옮겨졌습니다.\n"
-
 msgid "safe de&Lete"
 msgstr "안전한 지우기(&L)"
 
@@ -2638,13 +2623,17 @@ msgstr "소유자"
 msgid "Group"
 msgstr "집단"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bytes in %d file"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s 바이트"
+msgstr[1] "%s 바이트"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bytes in %d files"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bytes in %d file"
+msgstr[1] "%s bytes in %d file"
 
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
@@ -2854,6 +2843,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s은(는) 디렉토리가 아닙니다\n"
@@ -2967,6 +2959,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " 주소 찾기 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 틀린 비밀번호 "
 
 msgid " Enter regexp:"
 msgstr " 정규표현식 입력:"
@@ -3599,6 +3595,48 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#~ msgid "&Home"
+#~ msgstr "홈(&H)"
+
+#~ msgid "&Type"
+#~ msgstr "&Type"
+
+#~ msgid "&Links"
+#~ msgstr "&Links"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "소유자(&O)"
+
+#~ msgid "&Group"
+#~ msgstr "집단(&G)"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC was unable to write ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld 구역)"
+
+#~ msgid " Notice "
+#~ msgstr " Notice "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " The Midnight Commander 환경설정 파일은 이제 ~/mc \n"
+#~ " 디렉토리에 저장됩니다. 모든 파일이 그쪽 \n"
+#~ " 으로 옮겨졌습니다.\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bytes in %d files"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " 읽을 파일 열기 실패: "

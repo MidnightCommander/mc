@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
@@ -55,6 +55,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Увядзіце ймя файлу: "
 
+msgid "Warning"
+msgstr "Папярэджаньне"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Так"
+
+msgid "&No"
+msgstr "&Не"
+
+msgid "&Cancel"
+msgstr "&Адмена"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Памылка запісу ў канал: "
 
@@ -70,9 +88,6 @@ msgstr "Бясьпечнае захаваньне "
 msgid "Do backups -->"
 msgstr "Рэзэрвовыя копіі -->"
 
-msgid "&Cancel"
-msgstr "&Адмена"
-
 msgid "&OK"
 msgstr "&Так"
 
@@ -84,9 +99,6 @@ msgstr " Рэжым захаваньня "
 
 msgid " Save As "
 msgstr " Захаваць як "
-
-msgid "Warning"
-msgstr "Папярэджаньне"
 
 msgid " A file already exists with this name. "
 msgstr " Файл с такім імем ужо йснуе. "
@@ -236,12 +248,6 @@ msgstr " Файл быў зьменены, захаваць пры выхадзе? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Перарваць выхад"
-
-msgid "&Yes"
-msgstr "&Так"
-
-msgid "&No"
-msgstr "&Не"
 
 #, fuzzy
 msgid " Error "
@@ -525,6 +531,10 @@ msgstr "В&ызначэньне клявішаў..."
 msgid "Syntax &Highlighting..."
 msgstr "Вылучэньне &колерам сынтаксысу"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Захаваць наладку"
+
 msgid " File "
 msgstr " Файл "
 
@@ -778,6 +788,10 @@ msgstr "Улік рэ&гістру"
 
 msgid "Sort order"
 msgstr "Парадак сартаваньня"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Сьпіс ката&лёгаў      C-\\"
 
 msgid " confirm &Exit "
 msgstr " падцьверджаньне &выхаду"
@@ -1066,9 +1080,6 @@ msgstr " Які файл мэню Вы жадаеце рэдагаваць? "
 msgid "&Local"
 msgstr "&Лякальны"
 
-msgid "&Home"
-msgstr "&Пэрсанальны"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "Рэдагаваньне файлу пашырэньняў"
@@ -1172,11 +1183,12 @@ msgstr ""
 " Увядзіце ймя прылады (бяз /dev/) на якой\n"
 " аднаўляць файлы пасьля выдаленьня: (дэталі па F1)"
 
-msgid " Setup saved to ~/"
-msgstr " Парамэтры захаваныя ў ~/"
-
 msgid " Setup "
 msgstr " Наладка "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Парамэтры захаваныя ў ~/"
 
 #, c-format
 msgid ""
@@ -1215,24 +1227,6 @@ msgstr "&Памер"
 
 msgid "&Inode"
 msgstr "&Вузел"
-
-msgid "&Type"
-msgstr "&Тып"
-
-msgid "&Links"
-msgstr "&Спасылкі"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Уладальнік"
-
-msgid "&Group"
-msgstr "&Група"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1768,7 +1762,7 @@ msgstr "Пра&гляд - F3"
 msgid "&Edit - F4"
 msgstr "&Праўка - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1896,6 +1890,11 @@ msgstr " Выдаліць: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1906,14 +1905,13 @@ msgstr ""
 msgid " Top level group "
 msgstr "Група верхняга узроўню"
 
-msgid "MC was unable to write ~/"
-msgstr "MC ня можа пісаць у файл ~/,"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr "Ваш стары сьпіс каталёгаў ня выдалены"
-
 msgid " Hotlist Load "
 msgstr " Загрузка сьпісу "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "Ваш стары сьпіс каталёгаў ня выдалены"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1960,8 +1958,9 @@ msgstr "Зварот:    %s"
 msgid "Modified:  %s"
 msgstr "Зьменены:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Створаны:  %s"
 
 #, c-format
@@ -1972,13 +1971,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Памер:     %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld блёкаў)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld блёкаў)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блёкаў)"
+msgstr[1] " (%ld блёкаў)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2439,18 +2436,6 @@ msgstr "Запускае праграму прагляду для файлу"
 msgid "Edits one file"
 msgstr "Рэдагуе адзін файл"
 
-msgid " Notice "
-msgstr " Папярэджаньне "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Файлы канфігурацыі Midnight Commander \n"
-" захоўваюцца ў каталёгу ~/.mc, старыя  \n"
-" файлы зараз туды перамешчаныя\n"
-
 msgid "safe de&Lete"
 msgstr "Бясьпечнае вы&даленьне"
 
@@ -2630,13 +2615,17 @@ msgstr "Уладальнік"
 msgid "Group"
 msgstr "Група"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s байтаў у %d файле"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s байтаў"
+msgstr[1] "%s байтаў"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s байтаў у %d файлах"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s байтаў у %d файле"
+msgstr[1] "%s байтаў у %d файле"
 
 msgid "<readlink failed>"
 msgstr "<памылка чытаньня спасылкі>"
@@ -2848,6 +2837,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "каталёг"
@@ -2965,6 +2957,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Перайсьці на адрэсу "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Памылковы пароль "
 
 msgid " Enter regexp:"
 msgstr " Увядзіце сталы выраз:"
@@ -3601,6 +3597,48 @@ msgstr " Нутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
+
+#~ msgid "&Home"
+#~ msgstr "&Пэрсанальны"
+
+#~ msgid "&Type"
+#~ msgstr "&Тып"
+
+#~ msgid "&Links"
+#~ msgstr "&Спасылкі"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Уладальнік"
+
+#~ msgid "&Group"
+#~ msgstr "&Група"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC ня можа пісаць у файл ~/,"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld блёкаў)"
+
+#~ msgid " Notice "
+#~ msgstr " Папярэджаньне "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Файлы канфігурацыі Midnight Commander \n"
+#~ " захоўваюцца ў каталёгу ~/.mc, старыя  \n"
+#~ " файлы зараз туды перамешчаныя\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s байтаў у %d файлах"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Памылка адкрыцьця файлу для чытаньня: "

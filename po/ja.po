@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -60,6 +60,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " 行番号を入力してください: "
 
+msgid "Warning"
+msgstr "警告"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "はい(&Y)"
+
+msgid "&No"
+msgstr "いいえ(&N)"
+
+msgid "&Cancel"
+msgstr "キャンセル(&C)"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " パイプへの書き出しエラー: "
 
@@ -75,9 +93,6 @@ msgstr "セーフセーブ "
 msgid "Do backups -->"
 msgstr "バックアップする →"
 
-msgid "&Cancel"
-msgstr "キャンセル(&C)"
-
 msgid "&OK"
 msgstr "はい(&O)"
 
@@ -89,9 +104,6 @@ msgstr "保存方法を変更 "
 
 msgid " Save As "
 msgstr " 別名で保存 "
-
-msgid "Warning"
-msgstr "警告"
 
 msgid " A file already exists with this name. "
 msgstr "同名のファイルが存在します"
@@ -241,12 +253,6 @@ msgstr "ファイルに変更が加えられています。保存して終了しますか?"
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "終了を中止"
-
-msgid "&Yes"
-msgstr "はい(&Y)"
-
-msgid "&No"
-msgstr "いいえ(&N)"
 
 #, fuzzy
 msgid " Error "
@@ -531,6 +537,10 @@ msgstr "キーの学習(&K)..."
 msgid "Syntax &Highlighting..."
 msgstr "文法ハイライト(&S)"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "設定保存(&S)"
+
 msgid " File "
 msgstr " ファイル "
 
@@ -784,6 +794,10 @@ msgstr "大文字・小文字を区別(&t)"
 
 msgid "Sort order"
 msgstr "並び変える"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "ディレクトリホットリスト(&R) C-\\"
 
 msgid " confirm &Exit "
 msgstr " 終了を確認(&E) "
@@ -1072,9 +1086,6 @@ msgstr " どのメニューファイルを編集しますか? "
 msgid "&Local"
 msgstr "ローカル(&L)"
 
-msgid "&Home"
-msgstr "ホーム(&H)"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "メニューファイル編集(&M)"
@@ -1179,11 +1190,12 @@ msgstr ""
 " ファイルを復活させるデバイスのデバイス名 (/dev/ は省く) を\n"
 " 入力してください: (F1 で詳細)"
 
-msgid " Setup saved to ~/"
-msgstr " 設定は ~/ へ保存されました"
-
 msgid " Setup "
 msgstr " 設定 "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " 設定は ~/ へ保存されました"
 
 #, c-format
 msgid ""
@@ -1222,24 +1234,6 @@ msgstr "サイズ(&S)"
 
 msgid "&Inode"
 msgstr "Iノード(&I)"
-
-msgid "&Type"
-msgstr "形式(&T)"
-
-msgid "&Links"
-msgstr "リンク(&L)"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "所有者(&O)"
-
-msgid "&Group"
-msgstr "グループ(&G)"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1774,7 +1768,7 @@ msgstr "表示(&V) - F3"
 msgid "&Edit - F4"
 msgstr "編集(&E) - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1902,6 +1896,11 @@ msgstr " 削除: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1912,14 +1911,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " トップレベルグループ "
 
-msgid "MC was unable to write ~/"
-msgstr "MC はファイル ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr "に書き込めませんでした。古いホットリストのエントリは削除されません"
-
 msgid " Hotlist Load "
 msgstr " ホットリスト読み込み "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "に書き込めませんでした。古いホットリストのエントリは削除されません"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1966,8 +1964,9 @@ msgstr "アクセス:  %s"
 msgid "Modified:  %s"
 msgstr "更新:      %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "作成:      %s"
 
 #, c-format
@@ -1978,13 +1977,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "サイズ:    %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ldブロック)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ldブロック)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ldブロック)"
+msgstr[1] " (%ldブロック)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2465,18 +2462,6 @@ msgstr "ファイルビューアを起動"
 msgid "Edits one file"
 msgstr "ファイルを編集"
 
-msgid " Notice "
-msgstr " 注意 "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Midnight Commander の設定ファイルは ~/.mc\n"
-" に保存されます。古い設定ファイルは移動しお\n"
-" きました\n"
-
 msgid "safe de&Lete"
 msgstr "安全な削除処理(&L)"
 
@@ -2656,13 +2641,17 @@ msgstr "所有者"
 msgid "Group"
 msgstr "グループ"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s バイト %d ファイル"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%sバイト"
+msgstr[1] "%sバイト"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s バイト %d ファイル"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s バイト %d ファイル"
+msgstr[1] "%s バイト %d ファイル"
 
 msgid "<readlink failed>"
 msgstr "<リンク読みだしに失敗>"
@@ -2872,6 +2861,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "directory"
@@ -2989,6 +2981,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " アドレス移動 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 間違ったパスワード "
 
 msgid " Enter regexp:"
 msgstr " 正規表現を入力してください:"
@@ -3618,6 +3614,48 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid "&Home"
+#~ msgstr "ホーム(&H)"
+
+#~ msgid "&Type"
+#~ msgstr "形式(&T)"
+
+#~ msgid "&Links"
+#~ msgstr "リンク(&L)"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "所有者(&O)"
+
+#~ msgid "&Group"
+#~ msgstr "グループ(&G)"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC はファイル ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ldブロック)"
+
+#~ msgid " Notice "
+#~ msgstr " 注意 "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Midnight Commander の設定ファイルは ~/.mc\n"
+#~ " に保存されます。古い設定ファイルは移動しお\n"
+#~ " きました\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s バイト %d ファイル"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr "ファイルの読みだしでオープンに失敗しました: "

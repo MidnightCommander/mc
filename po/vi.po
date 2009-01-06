@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-06 16:03-0400\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -55,11 +55,26 @@ msgstr " Tập tin %s quá lớn "
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-msgid "&Dismiss"
-msgstr "Đó&ng"
-
 msgid " Enter file name: "
 msgstr " Hãy nhập tên tập tin: "
+
+msgid "Warning"
+msgstr "Cảnh báo"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Có"
+
+msgid "&No"
+msgstr "&Không"
+
+msgid "&Cancel"
+msgstr "Đóng hộp thoại &]"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
 
 msgid " Error writing to pipe: "
 msgstr " Lỗi ghi vào đường ống: "
@@ -76,9 +91,6 @@ msgstr "Lưu &an toàn"
 msgid "Do backups -->"
 msgstr "&Sao lưu -->"
 
-msgid "&Cancel"
-msgstr "Đóng hộp thoại &]"
-
 msgid "&OK"
 msgstr "Đồng ý &="
 
@@ -90,9 +102,6 @@ msgstr " Chế độ ghi nhớ "
 
 msgid " Save As "
 msgstr " Ghi như "
-
-msgid "Warning"
-msgstr "Cảnh báo"
 
 msgid " A file already exists with this name. "
 msgstr " Tập tin có tên như vậy đã tồn tại. "
@@ -179,7 +188,8 @@ msgstr "biểu thức &Scanf"
 msgid "replace &All"
 msgstr "&Thay thế tất cả"
 
-msgid "&Prompt on replace"
+#, fuzzy
+msgid "pro&Mpt on replace"
 msgstr "&Hỏi trước khi thay"
 
 msgid "&Backwards"
@@ -209,8 +219,10 @@ msgstr " Thay thế "
 msgid "Search"
 msgstr "Tìm"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến đổi "
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
+msgstr ""
+" Biểu thức chính quy không đúng, hoặc biểu thức scanf có quá nhiều biến đổi "
 
 msgid " Error in replacement format string. "
 msgstr " Lỗi trong định dạng chuỗi thay thế. "
@@ -237,12 +249,6 @@ msgstr "Tập tin đã thay đổi, ghi nhớ khi thoát? "
 
 msgid "&Cancel quit"
 msgstr "&Dừng thoát"
-
-msgid "&Yes"
-msgstr "&Có"
-
-msgid "&No"
-msgstr "&Không"
 
 msgid " Error "
 msgstr " Lỗi "
@@ -284,7 +290,8 @@ msgid " Run Sort "
 msgstr "Thực hiện sắp xếp "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr "Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
+msgstr ""
+"Nhập tùy chọn sắp xếp (xem trang man), phân cách nhau bởi khoảng trắng: "
 
 msgid " Sort "
 msgstr "Sắp xếp "
@@ -345,6 +352,9 @@ msgstr " Nhấn phím bất kỳ: "
 
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
+
+msgid "&Dismiss"
+msgstr "Đó&ng"
 
 msgid " Emacs key: "
 msgstr "Phím Emacs: "
@@ -775,6 +785,10 @@ msgstr "tính đến kiể&U chữ"
 msgid "Sort order"
 msgstr "Thứ tự sắp xếp"
 
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Thư mục thường dùng &*         C-\\"
+
 msgid " confirm &Exit "
 msgstr " trước khi th&Oát "
 
@@ -1060,9 +1074,6 @@ msgstr " Soạn thảo tập tin trình đơn nào? "
 msgid "&Local"
 msgstr "&Nội bộ máy"
 
-msgid "&Home"
-msgstr "&Cá nhân"
-
 msgid "Syntax file edit"
 msgstr "Soạn thảo tập tin cú pháp"
 
@@ -1163,11 +1174,12 @@ msgstr ""
 " Nhập tên thiết bị (không có /dev/), để\n"
 " phục hồi tập tin của nó: (nhấn F1 để biết chi tiết)"
 
-msgid " Setup saved to ~/"
-msgstr " Tham số ghi nhớ trong ~/"
-
 msgid " Setup "
 msgstr " Cấu hình "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Tham số ghi nhớ trong ~/"
 
 #, c-format
 msgid ""
@@ -1198,7 +1210,8 @@ msgstr "&Thời gian sửa đổi"
 msgid "&Access time"
 msgstr "thời &Gian truy cập"
 
-msgid "&Change time"
+#, fuzzy
+msgid "C&Hange time"
 msgstr "thời gi&An thay đổi"
 
 msgid "&Size"
@@ -1206,24 +1219,6 @@ msgstr "&Kích thước"
 
 msgid "&Inode"
 msgstr "&Chỉ mục inode"
-
-msgid "&Type"
-msgstr "&Loại"
-
-msgid "&Links"
-msgstr "&Liên kết"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Chủ sở hữu"
-
-msgid "&Group"
-msgstr "&Nhóm"
 
 msgid "Cannot read directory contents"
 msgstr "Không đọc được nội dung thư mục"
@@ -1274,8 +1269,9 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"Định dạng của tập tin ~/%s đã thay đổi từ phiên bản 3.0. Có thể bạn cần "
-"sao chép nó từ %smc.ext hoặc sử dụng tập tin đó làm ví dụ để viết tập tin của mình."
+"Định dạng của tập tin ~/%s đã thay đổi từ phiên bản 3.0. Có thể bạn cần sao "
+"chép nó từ %smc.ext hoặc sử dụng tập tin đó làm ví dụ để viết tập tin của "
+"mình."
 
 msgid " Copy "
 msgstr " Sao chép "
@@ -1759,7 +1755,8 @@ msgstr "X&em - F3"
 msgid "&Edit - F4"
 msgstr "&Soạn thảo - F4"
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
 
 msgid "Start at:"
@@ -1886,6 +1883,11 @@ msgstr " Xóa: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1896,14 +1898,13 @@ msgstr ""
 msgid " Top level group "
 msgstr "Nhóm cấp độ cao nhất "
 
-msgid "MC was unable to write ~/"
-msgstr "MC không thể ghi nhớ ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " tập tin, tra cứu thư mục cũ chưa bị xóa"
-
 msgid " Hotlist Load "
 msgstr " Nạp tra cứu "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " tập tin, tra cứu thư mục cũ chưa bị xóa"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2090,10 +2091,12 @@ msgstr ""
 "Tất cả các phím đều làm việc tốt."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
+msgstr ""
+"Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
+msgstr ""
+"xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."
@@ -2443,18 +2446,6 @@ msgstr "Xem tập tin"
 msgid "Edits one file"
 msgstr "Soạn thảo tập tin"
 
-msgid " Notice "
-msgstr " Cảnh báo "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Các tập tin cấu hình Midnight Commander \n"
-" bây giờ đặt trong thư mục ~/.mc, các \n"
-" tập tin cũ bây giờ được chuyển tới đó\n"
-
 msgid "safe de&Lete"
 msgstr "Xóa một cách &An toàn"
 
@@ -2650,7 +2641,8 @@ msgid "Unknown tag on display format: "
 msgstr "Thẻ ghi không rõ trong định dạng hiển thị: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
+msgstr ""
+"Định dạng người dùng đưa ra có vẻ không thích hợp, chuyển lại thành mặc định."
 
 msgid " Do you really want to execute? "
 msgstr " Thực sự muốn thực hiện? "
@@ -2854,6 +2846,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s không phải là một thư mục\n"
@@ -2973,6 +2968,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Đi tới địa chỉ "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Mật khẩu không đúng "
 
 msgid " Enter regexp:"
 msgstr " Nhập biểu thức chính quy:"
@@ -3591,7 +3590,8 @@ msgid " vfs_info is not fs! "
 msgstr " vfs_info không phải là hệ thống tập tin! "
 
 msgid " You have to chdir to extract files first "
-msgstr " Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
+msgstr ""
+" Đầu tiên bạn phải chdir để chuyển tới thư mục chứa tập tin cần giản nén "
 
 msgid " while iterating over blocks "
 msgstr " khi lặp lại khối "
@@ -3608,3 +3608,38 @@ msgstr "Lỗi nội bộ:"
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
 
+#~ msgid "&Home"
+#~ msgstr "&Cá nhân"
+
+#~ msgid "&Type"
+#~ msgstr "&Loại"
+
+#~ msgid "&Links"
+#~ msgstr "&Liên kết"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Chủ sở hữu"
+
+#~ msgid "&Group"
+#~ msgstr "&Nhóm"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC không thể ghi nhớ ~/"
+
+#~ msgid " Notice "
+#~ msgstr " Cảnh báo "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Các tập tin cấu hình Midnight Commander \n"
+#~ " bây giờ đặt trong thư mục ~/.mc, các \n"
+#~ " tập tin cũ bây giờ được chuyển tới đó\n"

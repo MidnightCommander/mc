@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -59,6 +59,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " 輸入檔名： "
 
+msgid "Warning"
+msgstr "警告"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "是(&Y)"
+
+msgid "&No"
+msgstr "否(&N)"
+
+msgid "&Cancel"
+msgstr "取消"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " 寫入管線時發生錯誤 "
 
@@ -74,9 +92,6 @@ msgstr "安全存檔"
 msgid "Do backups -->"
 msgstr "進行備份 -->"
 
-msgid "&Cancel"
-msgstr "取消"
-
 msgid "&OK"
 msgstr "確定 (&O)"
 
@@ -88,9 +103,6 @@ msgstr " 改變存檔模式 "
 
 msgid " Save As "
 msgstr " 另存新檔 "
-
-msgid "Warning"
-msgstr "警告"
 
 msgid " A file already exists with this name. "
 msgstr " 同名的檔案已經存在。 "
@@ -240,12 +252,6 @@ msgstr " 檔案已經有更動過，在離開前先存檔？ "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "取消結束"
-
-msgid "&Yes"
-msgstr "是(&Y)"
-
-msgid "&No"
-msgstr "否(&N)"
 
 #, fuzzy
 msgid " Error "
@@ -529,6 +535,10 @@ msgstr "認識按鍵..."
 msgid "Syntax &Highlighting..."
 msgstr "依語法改變顏色"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "儲存設定"
+
 msgid " File "
 msgstr " 檔案 "
 
@@ -782,6 +792,10 @@ msgstr "大小寫不同"
 
 msgid "Sort order"
 msgstr "排序的順序"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "目錄熱門列表            C-\\"
 
 msgid " confirm &Exit "
 msgstr " 確定離開 "
@@ -1070,9 +1084,6 @@ msgstr " 您準備編輯哪個選單檔？ "
 msgid "&Local"
 msgstr "本地"
 
-msgid "&Home"
-msgstr "家目錄"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "編輯選單檔"
@@ -1176,11 +1187,12 @@ msgstr ""
 " 輸入要復原已刪除檔案的裝置名稱：\n"
 "   (不包括 /dev/，按 F1 以獲知詳情)"
 
-msgid " Setup saved to ~/"
-msgstr " 將設定儲存至 ~/"
-
 msgid " Setup "
 msgstr " 設定 "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " 將設定儲存至 ~/"
 
 #, c-format
 msgid ""
@@ -1219,24 +1231,6 @@ msgstr "大小"
 
 msgid "&Inode"
 msgstr "節點"
-
-msgid "&Type"
-msgstr "類型"
-
-msgid "&Links"
-msgstr "連結"
-
-msgid "N&GID"
-msgstr "NGID"
-
-msgid "N&UID"
-msgstr "NUID"
-
-msgid "&Owner"
-msgstr "擁有者"
-
-msgid "&Group"
-msgstr "群組"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1771,7 +1765,7 @@ msgstr "檢視  - F3"
 msgid "&Edit - F4"
 msgstr "編輯  - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1899,6 +1893,11 @@ msgstr " 移除： "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1909,14 +1908,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " 最上層群組 "
 
-msgid "MC was unable to write ~/"
-msgstr "MC 無法寫入 ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr "檔案，您舊有的熱門列表沒有刪除"
-
 msgid " Hotlist Load "
 msgstr " 載入熱門列表 "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "檔案，您舊有的熱門列表沒有刪除"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1963,8 +1961,9 @@ msgstr "存取：      %s"
 msgid "Modified:  %s"
 msgstr "更動：      %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "建立：      %s"
 
 #, c-format
@@ -1977,11 +1976,9 @@ msgstr "大小：      "
 
 #, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld 個區塊)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld 個區塊)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld 個區塊)"
+msgstr[1] " (%ld 個區塊)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2463,18 +2460,6 @@ msgstr "對某個檔案執行檔案檢視程式"
 msgid "Edits one file"
 msgstr "編輯一個檔案"
 
-msgid " Notice "
-msgstr " 注意 "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Midnight Commander 的\n"
-" 設定檔已經改放到\n"
-" ~/.mc 目錄底下了。\n"
-
 msgid "safe de&Lete"
 msgstr "安全的刪除 (&L)"
 
@@ -2654,13 +2639,17 @@ msgstr "擁有者"
 msgid "Group"
 msgstr "群組"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s 位元組，%d 個檔案"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s 位元組"
+msgstr[1] "%s 位元組"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s 位元組，共 %d 個檔案"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s 位元組，%d 個檔案"
+msgstr[1] "%s 位元組，%d 個檔案"
 
 msgid "<readlink failed>"
 msgstr "<連結讀取錯誤>"
@@ -2873,6 +2862,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "建立新目錄"
@@ -2990,6 +2982,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " 跳至某行 "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " 密碼無效 "
 
 msgid " Enter regexp:"
 msgstr "輸入正規式："
@@ -3626,6 +3622,48 @@ msgstr "內部錯誤:"
 
 msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
+
+#~ msgid "&Home"
+#~ msgstr "家目錄"
+
+#~ msgid "&Type"
+#~ msgstr "類型"
+
+#~ msgid "&Links"
+#~ msgstr "連結"
+
+#~ msgid "N&GID"
+#~ msgstr "NGID"
+
+#~ msgid "N&UID"
+#~ msgstr "NUID"
+
+#~ msgid "&Owner"
+#~ msgstr "擁有者"
+
+#~ msgid "&Group"
+#~ msgstr "群組"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC 無法寫入 ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld 個區塊)"
+
+#~ msgid " Notice "
+#~ msgstr " 注意 "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Midnight Commander 的\n"
+#~ " 設定檔已經改放到\n"
+#~ " ~/.mc 目錄底下了。\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s 位元組，共 %d 個檔案"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " 在開啟檔案用來讀取時失敗： "

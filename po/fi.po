@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -58,6 +58,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Anna tiedostonimi: "
 
+msgid "Warning"
+msgstr "Varoitus"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Kyllä"
+
+msgid "&No"
+msgstr "&Ei"
+
+msgid "&Cancel"
+msgstr "&Peruuta"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 #, fuzzy
 msgid " Error writing to pipe: "
 msgstr " Virhe hakiessa tietoja tiedostosta "
@@ -75,9 +93,6 @@ msgstr "Turvallinen tallennus"
 msgid "Do backups -->"
 msgstr "Tee varmuuskopioita -->"
 
-msgid "&Cancel"
-msgstr "&Peruuta"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -89,9 +104,6 @@ msgstr " Muokkaa tallennusmoodia "
 
 msgid " Save As "
 msgstr " Tallenna nimellä "
-
-msgid "Warning"
-msgstr "Varoitus"
 
 msgid " A file already exists with this name. "
 msgstr " Tämänniminen tiedosto on jo olemassa. "
@@ -243,12 +255,6 @@ msgstr " Tiedostoa on muutettu, tallennetaanko lopetettaessa? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Peruuta lopetus"
-
-msgid "&Yes"
-msgstr "&Kyllä"
-
-msgid "&No"
-msgstr "&Ei"
 
 #, fuzzy
 msgid " Error "
@@ -534,6 +540,10 @@ msgstr ""
 msgid "Syntax &Highlighting..."
 msgstr "syntaks&Ikorostus"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Tallennusmoodi..."
+
 msgid " File "
 msgstr " Tiedosto "
 
@@ -783,6 +793,10 @@ msgstr "&Isot/pienet eroavat"
 
 msgid "Sort order"
 msgstr "Järjestys"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr " varmista &Poisto "
 
 msgid " confirm &Exit "
 msgstr " varmista &Lopetus "
@@ -1079,9 +1093,6 @@ msgstr " Mitä valikkotiedostoa haluat muokata? "
 msgid "&Local"
 msgstr "&Paikallinen"
 
-msgid "&Home"
-msgstr "&Koti"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr " Lataa syntaksitiedosto "
@@ -1187,11 +1198,12 @@ msgstr ""
 " Anna laitetiedosto (ilman /dev/:iä) palauttaaksesi\n"
 "   tiedostoja: (F1 antaa ohjeen)"
 
-msgid " Setup saved to ~/"
-msgstr " Asetukset tallennettu ~/"
-
 msgid " Setup "
 msgstr " Asetukset "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Asetukset tallennettu ~/"
 
 #, c-format
 msgid ""
@@ -1228,24 +1240,6 @@ msgstr "&Koko"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Tyyppi"
-
-msgid "&Links"
-msgstr "&Linkkejä"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Omistaja"
-
-msgid "&Group"
-msgstr "&Ryhmä"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1726,7 +1720,7 @@ msgstr ""
 msgid "&Edit - F4"
 msgstr ""
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1854,6 +1848,11 @@ msgstr ""
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1861,13 +1860,12 @@ msgstr ""
 msgid " Top level group "
 msgstr ""
 
-msgid "MC was unable to write ~/"
-msgstr ""
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ""
-
 msgid " Hotlist Load "
+msgstr ""
+
+#, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -1915,8 +1913,9 @@ msgstr ""
 msgid "Modified:  %s"
 msgstr ""
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
+msgid "Status:    %s"
 msgstr ""
 
 #, c-format
@@ -1929,11 +1928,9 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " Järjestä valinta "
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr ""
+msgid_plural " (%ld blocks)"
+msgstr[0] " Järjestä valinta "
+msgstr[1] " Järjestä valinta "
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2373,15 +2370,6 @@ msgstr ""
 msgid "Edits one file"
 msgstr ""
 
-msgid " Notice "
-msgstr ""
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-
 msgid "safe de&Lete"
 msgstr ""
 
@@ -2561,13 +2549,17 @@ msgstr "Omistaja"
 msgid "Group"
 msgstr "Ryhmä"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s tavua %d tiedostossa"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s tavua"
+msgstr[1] "%s tavua"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s tavua %d tiedostossa"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s tavua %d tiedostossa"
+msgstr[1] "%s tavua %d tiedostossa"
 
 msgid "<readlink failed>"
 msgstr "<linkin luku epäonnistui>"
@@ -2768,6 +2760,9 @@ msgstr ""
 msgid "%b %e  %Y"
 msgstr ""
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Luo uusi hakemisto"
@@ -2881,6 +2876,10 @@ msgstr ""
 #, fuzzy
 msgid " Goto Address "
 msgstr " Siirry riville "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Virheellinen kohdemaski "
 
 msgid " Enter regexp:"
 msgstr ""
@@ -3496,6 +3495,30 @@ msgstr ""
 #, fuzzy
 msgid "Changes to file lost"
 msgstr "&Pitkä tiedostolista"
+
+#~ msgid "&Home"
+#~ msgstr "&Koti"
+
+#~ msgid "&Type"
+#~ msgstr "&Tyyppi"
+
+#~ msgid "&Links"
+#~ msgstr "&Linkkejä"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Omistaja"
+
+#~ msgid "&Group"
+#~ msgstr "&Ryhmä"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s tavua %d tiedostossa"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Tiedoston avaaminen lukua varten epäonnistui: "

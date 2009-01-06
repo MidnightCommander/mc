@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -59,6 +59,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Ievadîet lîniju: "
 
+msgid "Warning"
+msgstr "Brîdinâjums"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Jâ"
+
+msgid "&No"
+msgstr "&Nç"
+
+msgid "&Cancel"
+msgstr "&Atsaukt"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Kïûda rakstot programkanâlâ: "
 
@@ -74,9 +92,6 @@ msgstr "Droða saglabâðana "
 msgid "Do backups -->"
 msgstr "Veikt dublçjumu -->"
 
-msgid "&Cancel"
-msgstr "&Atsaukt"
-
 msgid "&OK"
 msgstr "&Labi"
 
@@ -88,9 +103,6 @@ msgstr " Rediìçt Glabâðanas Reþîmu "
 
 msgid " Save As "
 msgstr " Glabât Kâ "
-
-msgid "Warning"
-msgstr "Brîdinâjums"
 
 msgid " A file already exists with this name. "
 msgstr " Fails ar tâdu nosaukumu jau eksistç. "
@@ -242,12 +254,6 @@ msgstr " Fails tika mainîts, saglabât izejot?"
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Atcelt izieðanu"
-
-msgid "&Yes"
-msgstr "&Jâ"
-
-msgid "&No"
-msgstr "&Nç"
 
 #, fuzzy
 msgid " Error "
@@ -532,6 +538,10 @@ msgstr "mâcîbu &Taustiòi..."
 msgid "Syntax &Highlighting..."
 msgstr "sinta&Kses izgaismoðana"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Saglabât uzstâdîjumus"
+
 msgid " File "
 msgstr " Fails "
 
@@ -785,6 +795,10 @@ msgstr "lielo/ma&zo burtu jûtîgs"
 
 msgid "Sort order"
 msgstr "Kârtoðanas secîba"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "di&Rektoriju karstais saraksts    C-\\"
 
 msgid " confirm &Exit "
 msgstr " apstiprinât I&Zieðanu "
@@ -1074,9 +1088,6 @@ msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
 msgid "&Local"
 msgstr "&Vietçji"
 
-msgid "&Home"
-msgstr "&Mâjas"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "&Izvçlnes faila rediìçðana"
@@ -1180,11 +1191,12 @@ msgstr ""
 " Ievadi iekârtu (bez /dev/), no kuras\n"
 "   atjaunot failus: (F1 detalizçtâk)"
 
-msgid " Setup saved to ~/"
-msgstr " Uzstâdîjumi saglabâti iekð ~/"
-
 msgid " Setup "
 msgstr " Uzstâdîðana "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Uzstâdîjumi saglabâti iekð ~/"
 
 #, c-format
 msgid ""
@@ -1223,24 +1235,6 @@ msgstr "&Lielums"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Tips"
-
-msgid "&Links"
-msgstr "&Saites"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "Î&Paðnieks"
-
-msgid "&Group"
-msgstr "&Grupa"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1775,7 +1769,7 @@ msgstr "&Skatît - F3"
 msgid "&Edit - F4"
 msgstr "&Rediìçt - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1903,6 +1897,11 @@ msgstr " Izòemt: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1913,14 +1912,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Augðlîmeòa grupa "
 
-msgid "MC was unable to write ~/"
-msgstr "MC nevarçja ierakstît ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " fails, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
-
 msgid " Hotlist Load "
 msgstr " Karstâ Saraksta Ielâde "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " fails, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1967,8 +1965,9 @@ msgstr "Apmeklçts:  %s"
 msgid "Modified:  %s"
 msgstr "Modificçts:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Izveidots:   %s"
 
 #, c-format
@@ -1979,13 +1978,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Lielums:      %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld bloks)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld bloki)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld bloks)"
+msgstr[1] " (%ld bloks)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2470,18 +2467,6 @@ msgstr "Palaiþ failam failu skatîtâju"
 msgid "Edits one file"
 msgstr "Rediìç vienu failu"
 
-msgid " Notice "
-msgstr " Paziòojums "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Pusnakts Komandiera konfigurâcijas fails \n"
-" tagad tiek glabâtas ~/.mc direktorijâ,\n"
-" faili tagad ir pârvietoti\n"
-
 msgid "safe de&Lete"
 msgstr "droða i&Zdzçðana"
 
@@ -2662,13 +2647,17 @@ msgstr "Îpaðnieks"
 msgid "Group"
 msgstr "Grupa"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s baiti %d failâ"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s baiti"
+msgstr[1] "%s baiti"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s baiti %d failos"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s baiti %d failâ"
+msgstr[1] "%s baiti %d failâ"
 
 msgid "<readlink failed>"
 msgstr "<lasîtsaiti neveiksme>"
@@ -2879,6 +2868,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "direktoriju"
@@ -2996,6 +2988,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Iet uz adresi "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Nepareiza parole "
 
 msgid " Enter regexp:"
 msgstr " Ievadi regexp:"
@@ -3633,6 +3629,48 @@ msgstr "Iekðçjâ kïûda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiòas failâ pazuduðas"
+
+#~ msgid "&Home"
+#~ msgstr "&Mâjas"
+
+#~ msgid "&Type"
+#~ msgstr "&Tips"
+
+#~ msgid "&Links"
+#~ msgstr "&Saites"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "Î&Paðnieks"
+
+#~ msgid "&Group"
+#~ msgstr "&Grupa"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC nevarçja ierakstît ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld bloki)"
+
+#~ msgid " Notice "
+#~ msgstr " Paziòojums "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Pusnakts Komandiera konfigurâcijas fails \n"
+#~ " tagad tiek glabâtas ~/.mc direktorijâ,\n"
+#~ " faili tagad ir pârvietoti\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s baiti %d failos"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Nevar atvçrt failu lasîðanai: "

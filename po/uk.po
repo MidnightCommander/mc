@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-07 15:55-0400\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2005-09-10 13:28+0300\n"
 "Last-Translator: Anton Sergeevich Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Русский\n"
@@ -56,11 +56,26 @@ msgstr "файл %s надто великий"
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурс╕я макрос╕в"
 
-msgid "&Dismiss"
-msgstr "&Закрити"
-
 msgid " Enter file name: "
 msgstr " Введ╕ть назву файлу: "
+
+msgid "Warning"
+msgstr "Попередження"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Так"
+
+msgid "&No"
+msgstr "&Н╕"
+
+msgid "&Cancel"
+msgstr "&Cкасувати"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
 
 msgid " Error writing to pipe: "
 msgstr " Помилка запису у канал: "
@@ -77,9 +92,6 @@ msgstr "Безпечне "
 msgid "Do backups -->"
 msgstr "Резервн╕ коп╕╖ -->"
 
-msgid "&Cancel"
-msgstr "&Cкасувати"
-
 msgid "&OK"
 msgstr "Г&aразд"
 
@@ -91,9 +103,6 @@ msgstr " Режим збереження "
 
 msgid " Save As "
 msgstr " Зберегти як "
-
-msgid "Warning"
-msgstr "Попередження"
 
 msgid " A file already exists with this name. "
 msgstr " Файл з ц╕╓ю назвою вже ╕сну╓. "
@@ -210,7 +219,8 @@ msgstr " Зам╕нити "
 msgid "Search"
 msgstr "Пошук"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr " Неправильний регулярний вираз або у scanf-формат╕ багато перетворень"
 
 msgid " Error in replacement format string. "
@@ -238,12 +248,6 @@ msgstr " Файл було зм╕нено, зберегти при виход╕? "
 
 msgid "&Cancel quit"
 msgstr "&Не виходити"
-
-msgid "&Yes"
-msgstr "&Так"
-
-msgid "&No"
-msgstr "&Н╕"
 
 msgid " Error "
 msgstr "Помилка"
@@ -346,6 +350,9 @@ msgstr " Натисн╕ть будь яку клав╕шу: "
 
 msgid " Execute Macro "
 msgstr " Виконати макрос "
+
+msgid "&Dismiss"
+msgstr "&Закрити"
 
 msgid " Emacs key: "
 msgstr " Клав╕ша Emacs: "
@@ -776,6 +783,10 @@ msgstr "Врахування ре&г╕стру"
 msgid "Sort order"
 msgstr "Порядок сортування"
 
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Список ката&лог╕в           C-\\"
+
 msgid " confirm &Exit "
 msgstr " перед ви&ходом"
 
@@ -1061,9 +1072,6 @@ msgstr " Який файл меню ви хочете редагувати? "
 msgid "&Local"
 msgstr "&М╕сцевий"
 
-msgid "&Home"
-msgstr "&Домашн╕й"
-
 msgid "Syntax file edit"
 msgstr "Редагувати файл синтаксису"
 
@@ -1164,11 +1172,12 @@ msgstr ""
 " Введ╕ть ╕м'я пристрою (без /dev/) на якому\n"
 " в╕дновлювати файли п╕сля видалення: (F1 - подробиц╕)"
 
-msgid " Setup saved to ~/"
-msgstr " Установки збережено у ~/"
-
 msgid " Setup "
 msgstr " Установки "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Установки збережено у ~/"
 
 #, c-format
 msgid ""
@@ -1208,24 +1217,6 @@ msgstr "За &розм╕ром"
 msgid "&Inode"
 msgstr "За &i-вузлами"
 
-msgid "&Type"
-msgstr "За &типом"
-
-msgid "&Links"
-msgstr "&Посилання"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "За &власником"
-
-msgid "&Group"
-msgstr "За &групою"
-
 msgid "Cannot read directory contents"
 msgstr "Не вдалося отримати зм╕ст каталога"
 
@@ -1261,7 +1252,9 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0.  It seems that "
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr "Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Схоже що стався зб╕й при встановленн╕.Будь ласка в╕зьм╕ть св╕жу коп╕ю з пакета Midnight Commander."
+msgstr ""
+"Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Схоже що стався зб╕й при "
+"встановленн╕.Будь ласка в╕зьм╕ть св╕жу коп╕ю з пакета Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
@@ -1272,7 +1265,9 @@ msgid ""
 "The format of the ~/%s file has changed with version 3.0.  You may either "
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
-msgstr "Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Ви можете зкоп╕ювати його з %smc.ext чи зкористуватися ним як зразком та написати св╕й."
+msgstr ""
+"Формат файлу %smc.ext було зм╕нено у верс╕╕ 3.0. Ви можете зкоп╕ювати його з "
+"%smc.ext чи зкористуватися ним як зразком та написати св╕й."
 
 msgid " Copy "
 msgstr " Скоп╕ювати "
@@ -1755,7 +1750,8 @@ msgstr "&Переглянути - F3"
 msgid "&Edit - F4"
 msgstr "&Редагувати - F4"
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "знайти Р&екрусивно."
 
 msgid "Start at:"
@@ -1882,6 +1878,11 @@ msgstr " Видалити: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1892,14 +1893,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Група верхнього р╕вня "
 
-msgid "MC was unable to write ~/"
-msgstr "MC нема╓ прав на запис в ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " ваш╕ стар╕ елементи списку не було видалено"
-
 msgid " Hotlist Load "
 msgstr " Завантаження дов╕дника "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " ваш╕ стар╕ елементи списку не було видалено"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2438,18 +2438,6 @@ msgstr "Запуска╓ програму перегляду для файлу"
 msgid "Edits one file"
 msgstr "Редагу╓ один файл"
 
-msgid " Notice "
-msgstr " Попередження "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Файли конф╕гурац╕╖ Midnight Commander \n"
-" тепер збер╕гаються у каталоз╕ ~/.mc, стар╕ \n"
-" файли зараз туди перенесено\n"
-
 msgid "safe de&Lete"
 msgstr "Безпечне &видалення"
 
@@ -2541,7 +2529,8 @@ msgid " Enter command label: "
 msgstr " Введ╕ть м╕тку команди: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Не можу виконати цю команду, коли знаходжуся не у локальному каталоз╕ "
+msgstr ""
+" Не можу виконати цю команду, коли знаходжуся не у локальному каталоз╕ "
 
 msgid "Find rejects after patching"
 msgstr "Знайти коректури, в╕дкинут╕ командою patch"
@@ -2628,13 +2617,17 @@ msgstr "Власник"
 msgid "Group"
 msgstr "Група"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s байт у %d файл╕"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s байт"
+msgstr[1] "%s байт"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s байт у %d файлах"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s байт у %d файл╕"
+msgstr[1] "%s байт у %d файл╕"
 
 msgid "<readlink failed>"
 msgstr "<зб╕й зчитування посилання>"
@@ -2847,6 +2840,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s не ╓ каталогом\n"
@@ -2964,6 +2960,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Перейти на адресу "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Неправильний пароль "
 
 msgid " Enter regexp:"
 msgstr " Введ╕ть регулярний вираз:"
@@ -3599,3 +3599,41 @@ msgstr "Внутр╕шня помилка:"
 msgid "Changes to file lost"
 msgstr "Зм╕ни у файл╕ втрачен╕"
 
+#~ msgid "&Home"
+#~ msgstr "&Домашн╕й"
+
+#~ msgid "&Type"
+#~ msgstr "За &типом"
+
+#~ msgid "&Links"
+#~ msgstr "&Посилання"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "За &власником"
+
+#~ msgid "&Group"
+#~ msgstr "За &групою"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC нема╓ прав на запис в ~/"
+
+#~ msgid " Notice "
+#~ msgstr " Попередження "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Файли конф╕гурац╕╖ Midnight Commander \n"
+#~ " тепер збер╕гаються у каталоз╕ ~/.mc, стар╕ \n"
+#~ " файли зараз туди перенесено\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s байт у %d файлах"

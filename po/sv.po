@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -64,6 +64,24 @@ msgstr "Makrorekursion är för djup"
 msgid " Enter file name: "
 msgstr " Ange filnamn: "
 
+msgid "Warning"
+msgstr "Varning"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nej"
+
+msgid "&Cancel"
+msgstr "&Avbryt"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Fel vid skrivning till rör: "
 
@@ -79,9 +97,6 @@ msgstr "Säkert sparande "
 msgid "Do backups -->"
 msgstr "Gör säkerhetskopia -->"
 
-msgid "&Cancel"
-msgstr "&Avbryt"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -93,9 +108,6 @@ msgstr " Redigera sparläge "
 
 msgid " Save As "
 msgstr " Spara som "
-
-msgid "Warning"
-msgstr "Varning"
 
 msgid " A file already exists with this name. "
 msgstr " Det finns redan en fil med det namnet. "
@@ -250,12 +262,6 @@ msgstr " Filen har modifierats, spara och avsluta? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Avbryt avsluta"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nej"
 
 #, fuzzy
 msgid " Error "
@@ -542,6 +548,10 @@ msgstr "lär MC dina &Tangenter..."
 msgid "Syntax &Highlighting..."
 msgstr "Markera synta&x"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Spara inställningar"
+
 msgid " File "
 msgstr " Fil "
 
@@ -800,6 +810,10 @@ msgstr "ski&Lj på versaler/gemener"
 
 msgid "Sort order"
 msgstr "Sorteringsordning"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "&Katalogfavoriter      C-\\"
 
 msgid " confirm &Exit "
 msgstr " bekräfta &Avsluta "
@@ -1089,9 +1103,6 @@ msgstr " Vilken menyfil vill du redigera? "
 msgid "&Local"
 msgstr "&Lokal"
 
-msgid "&Home"
-msgstr "&Hem"
-
 msgid "Syntax file edit"
 msgstr "Redigera filsyntax"
 
@@ -1194,11 +1205,12 @@ msgstr ""
 " Ange namnet på enheten (utan /dev/) som du \n"
 " vill återskapa filer på: (F1 för detaljer)"
 
-msgid " Setup saved to ~/"
-msgstr " Inställningarna sparade till ~/"
-
 msgid " Setup "
 msgstr " Inställningar "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Inställningarna sparade till ~/"
 
 #, c-format
 msgid ""
@@ -1238,24 +1250,6 @@ msgstr "&Storlek"
 
 msgid "&Inode"
 msgstr "&Inod"
-
-msgid "&Type"
-msgstr "&Typ"
-
-msgid "&Links"
-msgstr "&Länkar"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "äga&Re"
-
-msgid "&Group"
-msgstr "gru&Pp"
 
 msgid "Cannot read directory contents"
 msgstr "Kan inte läsa kataloginnehåll"
@@ -1797,7 +1791,7 @@ msgstr "&Visa - F3"
 msgid "&Edit - F4"
 msgstr "&Redigera - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1926,6 +1920,11 @@ msgstr " Ta bort: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1936,15 +1935,14 @@ msgstr ""
 msgid " Top level group "
 msgstr " Toppnivåfolder "
 
-msgid "MC was unable to write ~/"
-msgstr "MC kan inte skriva till ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " filen, dina gamla favoritposter har inte raderats"
-
 # kommer sektionen att hete [Favoriter] eller kommer den att heta [Hotlist] ??
 msgid " Hotlist Load "
 msgstr " Ladda favoriter "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " filen, dina gamla favoritposter har inte raderats"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1991,8 +1989,9 @@ msgstr "Accessad:  %s"
 msgid "Modified:  %s"
 msgstr "Modifierad: %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Skapad:    %s"
 
 #, c-format
@@ -2003,13 +2002,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Storlek:   %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld block)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld block)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld block)"
+msgstr[1] " (%ld block)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2494,18 +2491,6 @@ msgstr "Startar filläsaren"
 msgid "Edits one file"
 msgstr "Redigera en fil"
 
-msgid " Notice "
-msgstr " Notera "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Konfigurationsfilerna till Midnight Commander \n"
-" sparas numera i ~/.mc-katalogen. Filerna har  \n"
-" flyttats nu\n"
-
 msgid "safe de&Lete"
 msgstr "s&Äker radering"
 
@@ -2687,13 +2672,17 @@ msgstr "Ägare"
 msgid "Group"
 msgstr "Grupp"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s byte i %d fil"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s byte i %d filer"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s byte i %d fil"
+msgstr[1] "%s byte i %d fil"
 
 msgid "<readlink failed>"
 msgstr "<kunde inte läsa länken>"
@@ -2903,6 +2892,9 @@ msgstr "%e %b %H.%M"
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s är inte en katalog\n"
@@ -3016,6 +3008,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Gå till adress "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Ogiltigt lösenord "
 
 msgid " Enter regexp:"
 msgstr " Ange regexp:"
@@ -3657,6 +3653,48 @@ msgstr " Internt fel:"
 
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
+
+#~ msgid "&Home"
+#~ msgstr "&Hem"
+
+#~ msgid "&Type"
+#~ msgstr "&Typ"
+
+#~ msgid "&Links"
+#~ msgstr "&Länkar"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "äga&Re"
+
+#~ msgid "&Group"
+#~ msgstr "gru&Pp"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC kan inte skriva till ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld block)"
+
+#~ msgid " Notice "
+#~ msgstr " Notera "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Konfigurationsfilerna till Midnight Commander \n"
+#~ " sparas numera i ~/.mc-katalogen. Filerna har  \n"
+#~ " flyttats nu\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s byte i %d filer"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Kan inte öppna fil för läsning: "

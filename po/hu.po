@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -62,6 +62,26 @@ msgstr "A makrórekurzió túl mély"
 msgid " Enter file name: "
 msgstr " Fájlnév: "
 
+#
+msgid "Warning"
+msgstr "Figyelem"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Igen"
+
+msgid "&No"
+msgstr "&Nem"
+
+#
+msgid "&Cancel"
+msgstr "&Mégsem"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Hiba a csõfájl írásakor: "
 
@@ -77,10 +97,6 @@ msgstr "Biztonságos mentés "
 msgid "Do backups -->"
 msgstr "Másolatok készítése -->"
 
-#
-msgid "&Cancel"
-msgstr "&Mégsem"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -94,10 +110,6 @@ msgstr " Mentési mód "
 
 msgid " Save As "
 msgstr " Mentés más névvel "
-
-#
-msgid "Warning"
-msgstr "Figyelem"
 
 msgid " A file already exists with this name. "
 msgstr " Már létezik ilyen nevû fájl. "
@@ -249,12 +261,6 @@ msgstr " A dokumentum módosult. Kívánja menteni kilépéskor? "
 
 msgid "&Cancel quit"
 msgstr "&Mégse legyen kilépés"
-
-msgid "&Yes"
-msgstr "&Igen"
-
-msgid "&No"
-msgstr "&Nem"
 
 #
 msgid " Error "
@@ -541,6 +547,10 @@ msgstr "&Billentyûk..."
 msgid "Syntax &Highlighting..."
 msgstr "&Szintaktikus szövegkiemelés"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "Beállítások m&entése"
+
 msgid " File "
 msgstr " Fájl "
 
@@ -801,6 +811,10 @@ msgstr "&Kis-/nagybetû számít"
 
 msgid "Sort order"
 msgstr " Rendezési mód "
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Könyvtár-&gyorslista       C-\\"
 
 msgid " confirm &Exit "
 msgstr " &Kilépés elõtt "
@@ -1099,9 +1113,6 @@ msgstr " Melyik menüfájlt kívánja szerkeszteni? "
 msgid "&Local"
 msgstr "&Könyvtárét (helyi)"
 
-msgid "&Home"
-msgstr "&Sajátomat (\"home\")"
-
 msgid "Syntax file edit"
 msgstr "Szintaxisfájl szerkesztése"
 
@@ -1204,11 +1215,12 @@ msgstr ""
 " A visszaállítandó fájlokat tároló eszköz neve\n"
 "   (/dev/ nélkül) (részletek: F1 billentyû):"
 
-msgid " Setup saved to ~/"
-msgstr " Beállítások elmentve ide: ~/"
-
 msgid " Setup "
 msgstr " Beállítások "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Beállítások elmentve ide: ~/"
 
 # 2. %s: unixos hibaüzenet
 #, c-format
@@ -1251,24 +1263,6 @@ msgstr "Mé&ret"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Típus"
-
-msgid "&Links"
-msgstr "&Linkek"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "Tula&jdonos"
-
-msgid "&Group"
-msgstr "&Csoport"
 
 msgid "Cannot read directory contents"
 msgstr "Nem sikerült beolvasni a könyvtár tartalmát"
@@ -1847,7 +1841,8 @@ msgstr "&Megtekintés - F3"
 msgid "&Edit - F4"
 msgstr "&Szerkesztés - F4"
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
 msgid "Start at:"
@@ -1975,6 +1970,11 @@ msgstr " Törlés: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1985,14 +1985,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Legfelsõ szintû csoport "
 
-msgid "MC was unable to write ~/"
-msgstr "Az MC nem tudta írni a ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " fájlt - a régi gyorslista-bejegyzések megtartva"
-
 msgid " Hotlist Load "
 msgstr " Gyorslista betöltése "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " fájlt - a régi gyorslista-bejegyzések megtartva"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2043,8 +2042,9 @@ msgstr "Módosítás:    %s"
 
 # !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
 # Ext3 és ReiserFS esetén is: például chmod (csak) ezt a fájldátumot módosítja
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Adatváltozás: %s"
 
 #, c-format
@@ -2055,13 +2055,11 @@ msgstr "Eszköztípus:  fõ: %lu, al: %lu"
 msgid "Size:      %s"
 msgstr "Méret:        %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blokk)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blokk)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blokk)"
+msgstr[1] " (%ld blokk)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2560,18 +2558,6 @@ msgstr "Fájlmegjelenítés indítása a megadott fájlon."
 msgid "Edits one file"
 msgstr "Fájl szerkesztése."
 
-msgid " Notice "
-msgstr " Megjegyzés "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" A Midnight Commander beállítási fájljainak \n"
-" a ~/.mc könyvtárban van a helyük. A fájlok \n"
-" bemásolása megtörtént.\n"
-
 # gyakorlatilag egyaltalan nem "biztonsagosabb" az eredetinel...
 msgid "safe de&Lete"
 msgstr "\"Ó&vatos\" törlés"
@@ -2762,13 +2748,18 @@ msgstr "Tulajd."
 msgid "Group"
 msgstr "Csoport"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bájt %d fájlban"
+# szóköz: elválasztáshoz
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] " %s bájt"
+msgstr[1] " %s bájt"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bájt %d fájlban"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bájt %d fájlban"
+msgstr[1] "%s bájt %d fájlban"
 
 msgid "<readlink failed>"
 msgstr "<hibás szim. link>"
@@ -2985,6 +2976,9 @@ msgstr "%b %e %H.%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "\"%s\" nem könyvtár\n"
@@ -3107,6 +3101,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Ugrás a megadott címre "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Hibás jelszó "
 
 msgid " Enter regexp:"
 msgstr " Reguláris kifejezés:"
@@ -3754,3 +3752,45 @@ msgstr "Belsõ programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid "&Home"
+#~ msgstr "&Sajátomat (\"home\")"
+
+#~ msgid "&Type"
+#~ msgstr "&Típus"
+
+#~ msgid "&Links"
+#~ msgstr "&Linkek"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "Tula&jdonos"
+
+#~ msgid "&Group"
+#~ msgstr "&Csoport"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "Az MC nem tudta írni a ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blokk)"
+
+#~ msgid " Notice "
+#~ msgstr " Megjegyzés "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " A Midnight Commander beállítási fájljainak \n"
+#~ " a ~/.mc könyvtárban van a helyük. A fájlok \n"
+#~ " bemásolása megtörtént.\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bájt %d fájlban"

@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-03 22:24-0400\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -66,11 +66,26 @@ msgstr " Файл %s слишком большой "
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
 
-msgid "&Dismiss"
-msgstr "&Закрыть"
-
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Да"
+
+msgid "&No"
+msgstr "&Нет"
+
+msgid "&Cancel"
+msgstr "&Прервать"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
 
 msgid " Error writing to pipe: "
 msgstr " Ошибка записи в канал: "
@@ -87,9 +102,6 @@ msgstr "Безопасное сохранение"
 msgid "Do backups -->"
 msgstr "Резервные копии -->"
 
-msgid "&Cancel"
-msgstr "&Прервать"
-
 msgid "&OK"
 msgstr "&Дальше"
 
@@ -101,9 +113,6 @@ msgstr " Режим сохранения "
 
 msgid " Save As "
 msgstr " Сохранить как "
-
-msgid "Warning"
-msgstr "Предупреждение"
 
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
@@ -251,12 +260,6 @@ msgstr " Файл был изменен, сохранить при выходе? "
 msgid "&Cancel quit"
 msgstr "&Прервать выход"
 
-msgid "&Yes"
-msgstr "&Да"
-
-msgid "&No"
-msgstr "&Нет"
-
 msgid " Error "
 msgstr " Ошибка "
 
@@ -358,6 +361,9 @@ msgstr " Нажмите любую клавишу: "
 
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
 
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
@@ -788,6 +794,10 @@ msgstr "Учет ре&гистра"
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Быстрый доступ к ката&логам  C-\\"
+
 msgid " confirm &Exit "
 msgstr "перед &выходом"
 
@@ -1073,9 +1083,6 @@ msgstr " Какой файл меню Вы хотите редактировать? "
 msgid "&Local"
 msgstr "&Местный"
 
-msgid "&Home"
-msgstr "&Персональный"
-
 msgid "Syntax file edit"
 msgstr "Редактирование файла синтаксиса"
 
@@ -1176,11 +1183,12 @@ msgstr ""
 " Введите имя устройства (без /dev/), на котором\n"
 " восстанавливать файлы после удаления: (детали по F1)"
 
-msgid " Setup saved to ~/"
-msgstr " Параметры сохранены в ~/"
-
 msgid " Setup "
 msgstr " Настройка "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Параметры сохранены в ~/"
 
 #, c-format
 msgid ""
@@ -1219,24 +1227,6 @@ msgstr "&Размер"
 
 msgid "&Inode"
 msgstr "&Узел"
-
-msgid "&Type"
-msgstr "&Тип"
-
-msgid "&Links"
-msgstr "&Ссылки"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Владелец"
-
-msgid "&Group"
-msgstr "&Группа"
 
 msgid "Cannot read directory contents"
 msgstr "Невозможно прочесть содержимое каталога"
@@ -1772,7 +1762,8 @@ msgstr "Прос&мотр - F3"
 msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
 msgid "Start at:"
@@ -1899,6 +1890,11 @@ msgstr " Удалить: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1909,14 +1905,13 @@ msgstr ""
 msgid " Top level group "
 msgstr "Группа верхнего уровня"
 
-msgid "MC was unable to write ~/"
-msgstr "MC не может писать в файл ~/,"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " file, Ваши старые элементы быстрого доступа небыли удалены"
-
 msgid " Hotlist Load "
 msgstr " Загрузка списка быстрого доступа "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " file, Ваши старые элементы быстрого доступа небыли удалены"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2456,18 +2451,6 @@ msgstr "Просматривать файл"
 msgid "Edits one file"
 msgstr "Редактировать файл"
 
-msgid " Notice "
-msgstr " Предупреждение "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Файлы конфигурации Midnight Commander \n"
-" теперь хранятся в каталоге ~/.mc, старые \n"
-" файлы сейчас туда перемещены\n"
-
 msgid "safe de&Lete"
 msgstr "Безопасное &удаление"
 
@@ -2872,6 +2855,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s не является каталогом\n"
@@ -2989,6 +2975,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Перейти на адрес "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Неверный пароль "
 
 msgid " Enter regexp:"
 msgstr " Введите регулярное выражение:"
@@ -3623,6 +3613,42 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
+
+#~ msgid "&Home"
+#~ msgstr "&Персональный"
+
+#~ msgid "&Type"
+#~ msgstr "&Тип"
+
+#~ msgid "&Links"
+#~ msgstr "&Ссылки"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Владелец"
+
+#~ msgid "&Group"
+#~ msgstr "&Группа"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC не может писать в файл ~/,"
+
+#~ msgid " Notice "
+#~ msgstr " Предупреждение "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Файлы конфигурации Midnight Commander \n"
+#~ " теперь хранятся в каталоге ~/.mc, старые \n"
+#~ " файлы сейчас туда перемещены\n"
 
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s байт в %d файлах"

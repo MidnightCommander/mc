@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -60,6 +60,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr "Sartu lerroa: "
 
+msgid "Warning"
+msgstr "Abisua"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Bai"
+
+msgid "&No"
+msgstr "E&z"
+
+msgid "&Cancel"
+msgstr "&Utzi"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Errorea kanalizazioan idaztean: "
 
@@ -75,9 +93,6 @@ msgstr "Gordetze segurua "
 msgid "Do backups -->"
 msgstr "Egin babeskopiak -->"
 
-msgid "&Cancel"
-msgstr "&Utzi"
-
 msgid "&OK"
 msgstr "&Ados"
 
@@ -89,9 +104,6 @@ msgstr " Editatu Gorde modua "
 
 msgid " Save As "
 msgstr " Gorde honela "
-
-msgid "Warning"
-msgstr "Abisua"
 
 msgid " A file already exists with this name. "
 msgstr " Izen hau duen fitxategia badago lehendik. "
@@ -243,12 +255,6 @@ msgstr "Fitxategia aldatu egin da, irtetean gorde? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Bertan behera utzi Irten"
-
-msgid "&Yes"
-msgstr "&Bai"
-
-msgid "&No"
-msgstr "E&z"
 
 #, fuzzy
 msgid " Error "
@@ -533,6 +539,10 @@ msgstr "ikasteko &teklak..."
 msgid "Syntax &Highlighting..."
 msgstr "sinta&xia nabarmentzen"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Gorde konfigurazioa"
+
 msgid " File "
 msgstr "Fitxategia "
 
@@ -786,6 +796,10 @@ msgstr "maiuskulak eta minuskulak bereizten ditu"
 
 msgid "Sort order"
 msgstr "Ordenazioa"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "&gogokoen direktorioa                C-\\"
 
 msgid " confirm &Exit "
 msgstr "berretsi &Irten "
@@ -1076,9 +1090,6 @@ msgstr "Menuko zer fitxategi editatuko duzu ? "
 msgid "&Local"
 msgstr "&Lokala"
 
-msgid "&Home"
-msgstr "&Etxea"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "Editatu &menu-fitxategia"
@@ -1184,11 +1195,12 @@ msgstr ""
 "Sartu gailua (/dev/ gabe) fitxategiak\n"
 " desezabatzeko: (F1 xehetasunetarako)"
 
-msgid " Setup saved to ~/"
-msgstr "Konfigurazioa hemen gorde da: ~/"
-
 msgid " Setup "
 msgstr "Konfigurazioa "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr "Konfigurazioa hemen gorde da: ~/"
 
 #, c-format
 msgid ""
@@ -1227,24 +1239,6 @@ msgstr "&Tamaina"
 
 msgid "&Inode"
 msgstr "&Inodoa"
-
-msgid "&Type"
-msgstr "&Mota"
-
-msgid "&Links"
-msgstr "&Estekak"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Jabea"
-
-msgid "&Group"
-msgstr "&Taldea"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1779,7 +1773,7 @@ msgstr "&Ikusi - F3"
 msgid "&Edit - F4"
 msgstr "&Edizioa - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1907,6 +1901,11 @@ msgstr "Kendu: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1917,14 +1916,13 @@ msgstr ""
 msgid " Top level group "
 msgstr "Goi-mailako taldea "
 
-msgid "MC was unable to write ~/"
-msgstr "MCk ezin izan du ~/ "
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr "fitxategia idatzi; gogokoen sarrera zaharrak ezabatu gabe dituzu"
-
 msgid " Hotlist Load "
 msgstr "Kargatu gogokoen zerrenda "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "fitxategia idatzi; gogokoen sarrera zaharrak ezabatu gabe dituzu"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1971,8 +1969,9 @@ msgstr "Atzipena:  %s"
 msgid "Modified:  %s"
 msgstr "Aldaketa:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Sorrera:   %s"
 
 #, c-format
@@ -1983,13 +1982,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Tamaina:  %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld bloke)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr "(%ld bloke)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld bloke)"
+msgstr[1] " (%ld bloke)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2473,18 +2470,6 @@ msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 msgid "Edits one file"
 msgstr "Fitxategi bat editatzen du"
 
-msgid " Notice "
-msgstr "Oharra "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-"Midnight Commander-en konfigurazio-fitxategiak\n"
-" ~/.mc direktorioan daude, \n"
-" fitxategiak oraintxe aldatu dira lekuz\n"
-
 msgid "safe de&Lete"
 msgstr "&ezabatze segurua"
 
@@ -2666,13 +2651,17 @@ msgstr "Jabea"
 msgid "Group"
 msgstr "Taldea"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s byte %d fitxategietan"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s byte %d fitxategian"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s byte %d fitxategietan"
+msgstr[1] "%s byte %d fitxategietan"
 
 msgid "<readlink failed>"
 msgstr "<readlink-ek huts egin du>"
@@ -2883,6 +2872,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%Y %b %e"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "direktorioa"
@@ -3000,6 +2992,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Joan helbidera "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Baliogabeko pasahitza "
 
 msgid " Enter regexp:"
 msgstr " Sartu regexp:"
@@ -3636,6 +3632,48 @@ msgstr "Barne-errorea:"
 
 msgid "Changes to file lost"
 msgstr "Fitxategiko aldaketak galdu egin dira"
+
+#~ msgid "&Home"
+#~ msgstr "&Etxea"
+
+#~ msgid "&Type"
+#~ msgstr "&Mota"
+
+#~ msgid "&Links"
+#~ msgstr "&Estekak"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Jabea"
+
+#~ msgid "&Group"
+#~ msgstr "&Taldea"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MCk ezin izan du ~/ "
+
+#~ msgid " (%ld blocks)"
+#~ msgstr "(%ld bloke)"
+
+#~ msgid " Notice "
+#~ msgstr "Oharra "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ "Midnight Commander-en konfigurazio-fitxategiak\n"
+#~ " ~/.mc direktorioan daude, \n"
+#~ " fitxategiak oraintxe aldatu dira lekuz\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s byte %d fitxategian"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Huts egin da fitxategia irakurtzeko irekitzen saiatzean: "

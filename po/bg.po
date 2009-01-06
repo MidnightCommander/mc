@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -56,6 +56,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Въведете ред: "
 
+msgid "Warning"
+msgstr "Внимание"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "Да"
+
+msgid "&No"
+msgstr "Не"
+
+msgid "&Cancel"
+msgstr "Отказ"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Грешка при писане в канала: "
 
@@ -71,9 +89,6 @@ msgstr "Сигурно"
 msgid "Do backups -->"
 msgstr "Прави архиви -->"
 
-msgid "&Cancel"
-msgstr "Отказ"
-
 msgid "&OK"
 msgstr "ОК"
 
@@ -85,9 +100,6 @@ msgstr " Промени начина на запазване "
 
 msgid " Save As "
 msgstr " Запази като "
-
-msgid "Warning"
-msgstr "Внимание"
 
 msgid " A file already exists with this name. "
 msgstr " Файл с това има вече съществува. "
@@ -239,12 +251,6 @@ msgstr " Файлът е модифициран, да го запазя ли? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Отмени изхода"
-
-msgid "&Yes"
-msgstr "Да"
-
-msgid "&No"
-msgstr "Не"
 
 #, fuzzy
 msgid " Error "
@@ -529,6 +535,10 @@ msgstr "Научи клавиши..."
 msgid "Syntax &Highlighting..."
 msgstr "Осветяване на синтаксиса"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "Запази настройките"
+
 msgid " File "
 msgstr " Файл "
 
@@ -782,6 +792,10 @@ msgstr "Различавай главни/малки"
 
 msgid "Sort order"
 msgstr "Ред на сортиране"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "Горещи директории       C-\\"
 
 msgid " confirm &Exit "
 msgstr " Потвърждавай изход "
@@ -1070,9 +1084,6 @@ msgstr " Кой меню-файл ще редактирате? "
 msgid "&Local"
 msgstr "Локален"
 
-msgid "&Home"
-msgstr "Домашен"
-
 msgid "Syntax file edit"
 msgstr "Редактирай файл със синтаксис"
 
@@ -1175,11 +1186,12 @@ msgstr ""
 " Въведете устройство (без /dev/), върху което\n"
 " ще възстановявате файлове: (F1 за подробности)"
 
-msgid " Setup saved to ~/"
-msgstr " Настройките запазени в ~/"
-
 msgid " Setup "
 msgstr " Настройки "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Настройките запазени в ~/"
 
 #, c-format
 msgid ""
@@ -1218,24 +1230,6 @@ msgstr "Размер"
 
 msgid "&Inode"
 msgstr "I-възел"
-
-msgid "&Type"
-msgstr "Тип"
-
-msgid "&Links"
-msgstr "Връзки"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "Собственик"
-
-msgid "&Group"
-msgstr "Група"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1770,7 +1764,7 @@ msgstr "Покажи - F3"
 msgid "&Edit - F4"
 msgstr "Редактирай - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1898,6 +1892,11 @@ msgstr " Изтрий: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1908,14 +1907,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Основна група "
 
-msgid "MC was unable to write ~/"
-msgstr "MC не можа да запише файла ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr "Старият ви горещ списък не е изтрит"
-
 msgid " Hotlist Load "
 msgstr " Зареждане на горещия списък "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "Старият ви горещ списък не е изтрит"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1962,8 +1960,9 @@ msgstr "Отварян:      %s"
 msgid "Modified:  %s"
 msgstr "Променян:     %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Създаден:     %s"
 
 #, c-format
@@ -1974,13 +1973,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Размер:       %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld блок)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld блока)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блок)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2460,18 +2457,6 @@ msgstr "Показва файл"
 msgid "Edits one file"
 msgstr "Редактира файл"
 
-msgid " Notice "
-msgstr " Забележка "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Конфигурационните файлове на Midnight Commander \n"
-" сега се съхраняват в директорията ~/.mc. \n"
-" Току що бяха преместени. \n"
-
 msgid "safe de&Lete"
 msgstr "Безопасно триене"
 
@@ -2651,13 +2636,17 @@ msgstr "Собственик"
 msgid "Group"
 msgstr "Група"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s байта в %d файл"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s байта"
+msgstr[1] "%s байта"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s байта в %d файла"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s байта в %d файл"
+msgstr[1] "%s байта в %d файл"
 
 msgid "<readlink failed>"
 msgstr "<непрочетена връзка>"
@@ -2867,6 +2856,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "директорията"
@@ -2984,6 +2976,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Отиди на адрес "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Невалидна парола "
 
 msgid " Enter regexp:"
 msgstr " Въведете регулярен израз:"
@@ -3620,6 +3616,48 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#~ msgid "&Home"
+#~ msgstr "Домашен"
+
+#~ msgid "&Type"
+#~ msgstr "Тип"
+
+#~ msgid "&Links"
+#~ msgstr "Връзки"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "Собственик"
+
+#~ msgid "&Group"
+#~ msgstr "Група"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC не можа да запише файла ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld блока)"
+
+#~ msgid " Notice "
+#~ msgstr " Забележка "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Конфигурационните файлове на Midnight Commander \n"
+#~ " сега се съхраняват в директорията ~/.mc. \n"
+#~ " Току що бяха преместени. \n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s байта в %d файла"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Грешка при отваряне на файла за четене: "

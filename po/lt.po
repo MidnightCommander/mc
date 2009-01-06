@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-05 12:55+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2006-02-05 00:36+0100\n"
 "Last-Translator: Vaidrius Petrauskas <vaidrius@delfi.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2;\n"
 
 msgid " Choose syntax highlighting "
 msgstr " Parinkite sintaksės ryškinimą "
@@ -58,6 +59,24 @@ msgstr "Makrosų rekursija per gili"
 msgid " Enter file name: "
 msgstr " Įveskite rinkmenos pavadinimą: "
 
+msgid "Warning"
+msgstr "Įspėjimas"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Taip"
+
+msgid "&No"
+msgstr "&Ne"
+
+msgid "&Cancel"
+msgstr "&Atsisakyti"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Klaida rašant į konvejerį: "
 
@@ -73,11 +92,6 @@ msgstr "Saugus įrašymas "
 msgid "Do backups -->"
 msgstr "Daryti kopijas -->"
 
-#. 0
-msgid "&Cancel"
-msgstr "&Atsisakyti"
-
-#. 1
 msgid "&OK"
 msgstr "&Gerai"
 
@@ -89,9 +103,6 @@ msgstr " Keisti įrašymo režimą "
 
 msgid " Save As "
 msgstr " Įrašyti kaip "
-
-msgid "Warning"
-msgstr "Įspėjimas"
 
 msgid " A file already exists with this name. "
 msgstr " Rinkmena šiuo pavadinimu jau yra. "
@@ -205,7 +216,6 @@ msgstr " Įveskite ieškomą eilutę:"
 msgid " Replace "
 msgstr " Pakeisti "
 
-#. in response to number of bookmarks added because of string being found %d times
 msgid "Search"
 msgstr "Paieška"
 
@@ -240,12 +250,6 @@ msgstr " Rinkmena pakeista, įrašyti išeinant? "
 
 msgid "&Cancel quit"
 msgstr "&Neišeiti"
-
-msgid "&Yes"
-msgstr "&Taip"
-
-msgid "&No"
-msgstr "&Ne"
 
 msgid " Error "
 msgstr " Klaida "
@@ -853,7 +857,6 @@ msgstr " Virtualios rinkmenų sistemos nustatymai "
 msgid "Quick cd"
 msgstr "Greitas „cd“"
 
-#. want cd like completion
 msgid "cd"
 msgstr "Eiti į: "
 
@@ -1004,7 +1007,6 @@ msgstr " Prisijungimo vardas "
 msgid " Chown command "
 msgstr " „chown“ komanda "
 
-#. add fields for unknown names (numbers)
 msgid "<Unknown user>"
 msgstr "<Nežinomas naud.>"
 
@@ -1070,9 +1072,6 @@ msgstr " Kurią meniu rinkmeną norite keisti? "
 
 msgid "&Local"
 msgstr "&Lokalią"
-
-msgid "&Home"
-msgstr "&Namų"
 
 msgid "Syntax file edit"
 msgstr "Sintaksės rinkmenos keitimas"
@@ -1174,11 +1173,12 @@ msgstr ""
 " Nurodykite įtaisą (be „/dev/“) iš kurio\n"
 "   atkurti rinkmenas: (F1 - pagalba)"
 
-msgid " Setup saved to ~/"
-msgstr " Nustatymai įrašyti į ~/"
-
 msgid " Setup "
 msgstr " Nustatymai "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Nustatymai įrašyti į ~/"
 
 #, c-format
 msgid ""
@@ -1217,25 +1217,6 @@ msgstr "Dydi&s"
 
 msgid "&Inode"
 msgstr "„&Inode“"
-
-#. New sort orders
-msgid "&Type"
-msgstr "&Tipas"
-
-msgid "&Links"
-msgstr "&Nuorodos"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Savin."
-
-msgid "&Group"
-msgstr "&Grupė"
 
 msgid "Cannot read directory contents"
 msgstr "Nepavyko perskaityti katalogo turinio"
@@ -1317,7 +1298,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Negalima sukurti stabilios simb. nuorodos tarp nevietinių rinkmenų sistemų: \n"
+" Negalima sukurti stabilios simb. nuorodos tarp nevietinių rinkmenų "
+"sistemų: \n"
 "\n"
 " „Stabilių simb. nuorodų“ nustatymas bus išjungtas "
 
@@ -1566,15 +1548,6 @@ msgstr ""
 " Nepavyko pašalinti katalogo „%s“ \n"
 " %s "
 
-#.
-#. * This array introduced to avoid translation problems. The former (op_names)
-#. * is assumed to be nouns, suitable in dialog box titles; this one should
-#. * contain whatever is used in prompt itself (i.e. in russian, it's verb).
-#. * Notice first symbol - it is to fool gettext and force these strings to
-#. * be different for it. First symbol is skipped while building a prompt.
-#. * (I don't use spaces around the words, because someday they could be
-#. * dropped, when widgets get smarter)
-#.
 msgid "1Copy"
 msgstr "1Kopijuoti"
 
@@ -1584,15 +1557,6 @@ msgstr "1Perkelti"
 msgid "1Delete"
 msgstr "1Šalinti"
 
-#.
-#. * These are formats for building a prompt. Parts encoded as follows:
-#. * %o - operation from op_names1
-#. * %f - file/files or files/directories, as appropriate
-#. * %m - "with source mask" or question mark for delete
-#. * %s - source name (truncated)
-#. * %d - number of marked files
-#. * %e - "to:" or question mark for delete
-#. *
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f „%s“%m"
@@ -1736,15 +1700,12 @@ msgstr " Rinkmena jau yra "
 msgid " Background process: File exists "
 msgstr " Foninis procesas: rinkmena jau yra "
 
-#. follow symlinks and preserve Attributes must be the first
 msgid "preserve &Attributes"
 msgstr "Išsaugoti &atributus"
 
-#. &op_preserve
 msgid "follow &Links"
 msgstr "Sekti &nuorodomis"
 
-#. &file_mask_op_follow_links
 msgid "to:"
 msgstr "į:"
 
@@ -1757,7 +1718,6 @@ msgstr "&Fonas"
 msgid "&Stable Symlinks"
 msgstr "&Stabilios simb. nuor."
 
-#. &file_mask_stable_symlinks
 msgid "&Dive into subdir if exists"
 msgstr "&Jei yra, ir pakatalogius"
 
@@ -1793,7 +1753,8 @@ msgstr "&Rodyti - F3"
 msgid "&Edit - F4"
 msgstr "K&eisti - F4 "
 
-msgid "find Re&cursively"
+#, fuzzy
+msgid "&Find recursively"
 msgstr "Rasti re&kursyviai"
 
 msgid "Start at:"
@@ -1825,7 +1786,6 @@ msgstr "Ieškoma %s"
 msgid "Searching"
 msgstr "Ieškoma"
 
-#. Create a replacement page with the error message
 msgid " Help file format error\n"
 msgstr " Pagalbos rinkmenos formato klaida\n"
 
@@ -1887,10 +1847,6 @@ msgstr "Katalogų sąrašas"
 msgid " Directory path "
 msgstr " Katalogo kelias "
 
-#. This one holds the displayed pathname
-#. We add the labels.  We are interested in the last one,
-#. * that one will hold the path name label
-#.
 msgid " Directory label "
 msgstr " Katalogo žymė "
 
@@ -1942,20 +1898,18 @@ msgstr ""
 msgid " Top level group "
 msgstr " Aukščiausio lygio grupė "
 
-msgid "MC was unable to write ~/"
-msgstr "Nepavyko įrašyti ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " rinkmenos, seni įrašai išliko"
-
 msgid " Hotlist Load "
 msgstr " Katalogų sąrašo įkėlimas "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " rinkmenos, seni įrašai išliko"
 
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#. This printf pattern string is used as a reference for size
 #, c-format
 msgid "File:       %s"
 msgstr "Rinkmena:   %s"
@@ -2069,7 +2023,6 @@ msgstr "Lei&dimai"
 msgid "&File types"
 msgstr "&Rinkmenų tipai"
 
-#. length of line with '<' '>' buttons
 msgid " Panel split "
 msgstr " Skydų dalijimas "
 
@@ -2254,10 +2207,6 @@ msgstr "Žymėti at&virkščiai M-*"
 msgid "e&Xit              F10"
 msgstr "&Išeiti             F10"
 
-#. I know, I'm lazy, but the tree widget when it's not running
-#. * as a panel still has some problems, I have not yet finished
-#. * the WTree widget port, sorry.
-#.
 msgid "&Directory tree"
 msgstr "&Katalogų medis"
 
@@ -2495,18 +2444,6 @@ msgstr "Parodo rinkmenos turinį"
 msgid "Edits one file"
 msgstr "Keičia vieną rinkmeną"
 
-msgid " Notice "
-msgstr " Pastaba "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" „Midnight Commander“ savo nustatymus laiko \n"
-" „~/.mc“ kataloge, rinkmenos perkeltos į jį.\n"
-
-#. other options
 msgid "safe de&Lete"
 msgstr "Saugus ša&linimas"
 
@@ -2543,7 +2480,6 @@ msgstr "Skaičiuo&ti sumas"
 msgid "&Verbose operation"
 msgstr "Išsa&mios operacijos"
 
-#. panel options
 msgid "&Fast dir reload"
 msgstr "&Greitai atnaujinti"
 
@@ -2571,7 +2507,6 @@ msgstr "Kvailuose &terminaluose"
 msgid "Alwa&ys"
 msgstr "Visa&da"
 
-#. Similar code is in layout.c (init_layout())
 msgid " Panel options "
 msgstr " Skydų nustatymai "
 
@@ -2722,7 +2657,6 @@ msgstr "Taisyti"
 msgid "RenMov"
 msgstr "Perkelt"
 
-#. FIXME: mkdir is currently defunct
 msgid "Mkdir"
 msgstr "N.katal"
 
@@ -2904,17 +2838,17 @@ msgstr ""
 msgid " No suitable entries found in %s "
 msgstr " Tinkamų įrašų „%s“ nerasta "
 
-#. Create listbox
 msgid " User menu "
 msgstr " Naudotojo meniu "
 
-#. strftime() format string for recent dates
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#. strftime() format string for old dates
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
+
+msgid "(invalid)"
+msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3034,6 +2968,10 @@ msgstr ""
 msgid " Goto Address "
 msgstr " Eiti adresu "
 
+#, fuzzy
+msgid " Invalid address "
+msgstr " Neteisingas slaptažodis "
+
 msgid " Enter regexp:"
 msgstr " Įveskite reguliarą išraišką: "
 
@@ -3094,8 +3032,6 @@ msgstr "ButtonBar|Formuot."
 msgid " History "
 msgstr " Istorija "
 
-#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
-#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 msgid "Function key 1"
 msgstr "Funkcinis klav. 1"
 
@@ -3201,7 +3137,6 @@ msgstr "Skaitm. -"
 msgid "* on keypad"
 msgstr "Skaitm. *"
 
-#. From here on, these won't be shown in Learn keys (no space)
 msgid "Left arrow keypad"
 msgstr "Skaitm. „kairėn“"
 
@@ -3362,7 +3297,6 @@ msgstr "%s: atlikta."
 msgid "%s: failure"
 msgstr "%s: nepavyko"
 
-#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: „%s“ siuntimas: siunčiamas slaptažodis..."
@@ -3671,3 +3605,38 @@ msgstr "Vidinė klaida:"
 
 msgid "Changes to file lost"
 msgstr "Rinkmenos pakeitimai prarasti"
+
+#~ msgid "&Home"
+#~ msgstr "&Namų"
+
+#~ msgid "&Type"
+#~ msgstr "&Tipas"
+
+#~ msgid "&Links"
+#~ msgstr "&Nuorodos"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Savin."
+
+#~ msgid "&Group"
+#~ msgstr "&Grupė"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "Nepavyko įrašyti ~/"
+
+#~ msgid " Notice "
+#~ msgstr " Pastaba "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " „Midnight Commander“ savo nustatymus laiko \n"
+#~ " „~/.mc“ kataloge, rinkmenos perkeltos į jį.\n"

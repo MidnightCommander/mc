@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2008-06-08 23:39-0400\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -58,9 +58,6 @@ msgstr " Soubor %s je pøíli¹ velký "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je pøíli¹ hluboká"
-
-msgid "&Dismiss"
-msgstr "&Odmítnout"
 
 msgid " Enter file name: "
 msgstr " Zadejte jméno souboru: "
@@ -356,6 +353,9 @@ msgstr " Stisknìte libovolnou klávesu: "
 
 msgid " Execute Macro "
 msgstr " Spustit makro "
+
+msgid "&Dismiss"
+msgstr "&Odmítnout"
 
 msgid " Emacs key: "
 msgstr " Emacsová klávesa: "
@@ -2463,18 +2463,6 @@ msgstr "Odstartuje jako prohlí¾eè souboru"
 msgid "Edits one file"
 msgstr "Zaène editovat jeden soubor"
 
-msgid " Notice "
-msgstr " Poznámka "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Konfiguraèní soubory programu Midnight Commander \n"
-" jsou nyní ulo¾eny v adresáøi ~/.mc. Soubory byly \n"
-" právì pøesunuty\n"
-
 msgid "safe de&Lete"
 msgstr "&Bezpeèné mazání"
 
@@ -3642,3 +3630,15 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmìny souboru byly ztraceny"
+
+#~ msgid " Notice "
+#~ msgstr " Poznámka "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Konfiguraèní soubory programu Midnight Commander \n"
+#~ " jsou nyní ulo¾eny v adresáøi ~/.mc. Soubory byly \n"
+#~ " právì pøesunuty\n"

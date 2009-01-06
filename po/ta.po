@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -57,6 +57,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr ""
 
+msgid "Warning"
+msgstr "±îº¡¢ì¨¸"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&¬õ"
+
+msgid "&No"
+msgstr "&­ø¨Ä"
+
+msgid "&Cancel"
+msgstr "&ÃòÐ"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr ""
 
@@ -72,9 +90,6 @@ msgstr "Àò¾¢ÃÁ¡É §ºÁ¢ôÒ "
 msgid "Do backups -->"
 msgstr "¸¡ôÒ ¦ºö -->"
 
-msgid "&Cancel"
-msgstr "&ÃòÐ"
-
 msgid "&OK"
 msgstr "&ºÃ¢"
 
@@ -86,9 +101,6 @@ msgstr " §ºÁ¢ôÒ Ó¨È¨Á¨Â À¾¢ "
 
 msgid " Save As "
 msgstr " §ÅÚ ¦ÀÂÃ¢ø §ºÁ¢ "
-
-msgid "Warning"
-msgstr "±îº¡¢ì¨¸"
 
 msgid " A file already exists with this name. "
 msgstr " ­ó¾ ¦ÀÂÃ¢ø §¸¡ôÒ ´ýÚ ­Õì¸¢ýÈÐ. "
@@ -238,12 +250,6 @@ msgstr " §¸¡ôÒ Á¡üÈôÀð¼Ð, §ºÁ¢òÐ ¦ÅÇ¢§ÂÚ? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "¦ÅÇ¢§ÂüÈ¨Ç ÃòÐ ¦ºö"
-
-msgid "&Yes"
-msgstr "&¬õ"
-
-msgid "&No"
-msgstr "&­ø¨Ä"
 
 #, fuzzy
 msgid " Error "
@@ -524,6 +530,10 @@ msgstr ""
 msgid "Syntax &Highlighting..."
 msgstr ""
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "§ºÁ¢ôÒ Ó¨È¨Á..."
+
 msgid " File "
 msgstr " §¸¡ôÒ "
 
@@ -767,6 +777,9 @@ msgid "case sensi&tive"
 msgstr ""
 
 msgid "Sort order"
+msgstr ""
+
+msgid " confirm di&Rectory hotlist delete "
 msgstr ""
 
 msgid " confirm &Exit "
@@ -1058,9 +1071,6 @@ msgstr ""
 msgid "&Local"
 msgstr ""
 
-msgid "&Home"
-msgstr ""
-
 msgid "Syntax file edit"
 msgstr ""
 
@@ -1157,10 +1167,11 @@ msgid ""
 "   files on: (F1 for details)"
 msgstr ""
 
-msgid " Setup saved to ~/"
+msgid " Setup "
 msgstr ""
 
-msgid " Setup "
+#, c-format
+msgid " Setup saved to ~/%s"
 msgstr ""
 
 #, c-format
@@ -1197,24 +1208,6 @@ msgid "&Size"
 msgstr ""
 
 msgid "&Inode"
-msgstr ""
-
-msgid "&Type"
-msgstr ""
-
-msgid "&Links"
-msgstr ""
-
-msgid "N&GID"
-msgstr ""
-
-msgid "N&UID"
-msgstr ""
-
-msgid "&Owner"
-msgstr ""
-
-msgid "&Group"
 msgstr ""
 
 msgid "Cannot read directory contents"
@@ -1678,7 +1671,7 @@ msgstr ""
 msgid "&Edit - F4"
 msgstr ""
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1805,6 +1798,11 @@ msgstr ""
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1812,13 +1810,12 @@ msgstr ""
 msgid " Top level group "
 msgstr ""
 
-msgid "MC was unable to write ~/"
-msgstr ""
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ""
-
 msgid " Hotlist Load "
+msgstr ""
+
+#, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
 
 #, c-format
@@ -1866,8 +1863,9 @@ msgstr ""
 msgid "Modified:  %s"
 msgstr ""
 
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
-msgid "Created:   %s"
+msgid "Status:    %s"
 msgstr ""
 
 #, c-format
@@ -1880,11 +1878,9 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " ¦¾¡Ì¾¢¨Â Å¡¢¨ºÂ¡ìÌ "
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr ""
+msgid_plural " (%ld blocks)"
+msgstr[0] " ¦¾¡Ì¾¢¨Â Å¡¢¨ºÂ¡ìÌ "
+msgstr[1] " ¦¾¡Ì¾¢¨Â Å¡¢¨ºÂ¡ìÌ "
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2321,15 +2317,6 @@ msgstr ""
 msgid "Edits one file"
 msgstr ""
 
-msgid " Notice "
-msgstr ""
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-
 msgid "safe de&Lete"
 msgstr ""
 
@@ -2508,13 +2495,17 @@ msgstr "¦º¡ó¾ì¸¡Ã÷"
 msgid "Group"
 msgstr "¦¾¡Ì¾¢"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s ÐñÎ¸û %d §¸¡ôÀ¢ø"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s ÐñÎ¸û"
+msgstr[1] "%s ÐñÎ¸û"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s ÐñÎ¸û %d §¸¡ôÒ¸Ç¢û"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s ÐñÎ¸û %d §¸¡ôÀ¢ø"
+msgstr[1] "%s ÐñÎ¸û %d §¸¡ôÀ¢ø"
 
 msgid "<readlink failed>"
 msgstr "<­¨½ Å¡º¢ò¾ø ¦¿¡ÊôÒ>"
@@ -2713,6 +2704,9 @@ msgstr ""
 msgid "%b %e  %Y"
 msgstr ""
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Ò¾¢Â Ó¨ÉÂõ ´É¨Èô À¨¼ìÌõ"
@@ -2818,6 +2812,9 @@ msgid ""
 msgstr ""
 
 msgid " Goto Address "
+msgstr ""
+
+msgid " Invalid address "
 msgstr ""
 
 msgid " Enter regexp:"
@@ -3419,6 +3416,9 @@ msgstr ""
 
 msgid "Changes to file lost"
 msgstr ""
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s ÐñÎ¸û %d §¸¡ôÒ¸Ç¢û"
 
 #~ msgid " Not an ordinary file: "
 #~ msgstr " º¡¾¡Ã½ §¸¡ôÒ «øÄ: "

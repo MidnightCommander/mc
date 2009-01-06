@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -60,6 +60,24 @@ msgstr "Ниво рекурзије макроа је превисок"
 msgid " Enter file name: "
 msgstr " Унесите назив датотеке: "
 
+msgid "Warning"
+msgstr "Упозорење"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Да"
+
+msgid "&No"
+msgstr "&Не"
+
+msgid "&Cancel"
+msgstr "&Поништи"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Грешка при упису у цев: "
 
@@ -75,9 +93,6 @@ msgstr "Безбедно чување "
 msgid "Do backups -->"
 msgstr "Прави резерву -->"
 
-msgid "&Cancel"
-msgstr "&Поништи"
-
 msgid "&OK"
 msgstr "&У реду"
 
@@ -89,9 +104,6 @@ msgstr " Режим чувања "
 
 msgid " Save As "
 msgstr " Сачувај као "
-
-msgid "Warning"
-msgstr "Упозорење"
 
 msgid " A file already exists with this name. "
 msgstr " Датотека под тим називом већ постоји. "
@@ -242,12 +254,6 @@ msgstr " Датотека је измењена, да сачувам при излазу? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Поништи завршетак"
-
-msgid "&Yes"
-msgstr "&Да"
-
-msgid "&No"
-msgstr "&Не"
 
 #, fuzzy
 msgid " Error "
@@ -531,6 +537,10 @@ msgstr "Научи &тастере..."
 msgid "Syntax &Highlighting..."
 msgstr "Исти&цање синтаксе"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Сачувај подешавања"
+
 msgid " File "
 msgstr " Датотека "
 
@@ -783,6 +793,10 @@ msgstr "разлику&ј велика и мала слова"
 
 msgid "Sort order"
 msgstr "Поредак ређања"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "брзи с&Писак директоријума  C-\\"
 
 msgid " confirm &Exit "
 msgstr " потврда &Излаза "
@@ -1070,9 +1084,6 @@ msgstr " Коју датотеку менија желите да уредите? "
 msgid "&Local"
 msgstr "&Локалну"
 
-msgid "&Home"
-msgstr "&Домаћу"
-
 msgid "Syntax file edit"
 msgstr "Уређивање синтаксне датотеке"
 
@@ -1173,11 +1184,12 @@ msgstr ""
 " Унесите уређај (без /dev/) за одобрисање\n"
 "   датотека на: (F1 за детаље)"
 
-msgid " Setup saved to ~/"
-msgstr " Подешавања су сачувана у ~/"
-
 msgid " Setup "
 msgstr " Подешавања "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Подешавања су сачувана у ~/"
 
 #, c-format
 msgid ""
@@ -1216,24 +1228,6 @@ msgstr "&Величина"
 
 msgid "&Inode"
 msgstr "&Ичвор"
-
-msgid "&Type"
-msgstr "В&рста"
-
-msgid "&Links"
-msgstr "Ве&зе"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "В&ласник"
-
-msgid "&Group"
-msgstr "&Група"
 
 msgid "Cannot read directory contents"
 msgstr "Не могу да учитам садржај директоријума"
@@ -1769,7 +1763,7 @@ msgstr "&Прегледај - F3"
 msgid "&Edit - F4"
 msgstr "&Уреди - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1898,6 +1892,11 @@ msgstr "Уклони: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1908,14 +1907,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Врховна група "
 
-msgid "MC was unable to write ~/"
-msgstr "ПН не може да пише у датотеку ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ", ваше старе ставке брзог списка нису обрисане"
-
 msgid " Hotlist Load "
 msgstr " Учитај брзи списак "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ", ваше старе ставке брзог списка нису обрисане"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1962,8 +1960,9 @@ msgstr "Посл. приступ:   %s"
 msgid "Modified:  %s"
 msgstr "Датум измене:    %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Створено:        %s"
 
 #, c-format
@@ -1974,13 +1973,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Величина:        %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld блок)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld блокова)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блок)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2456,18 +2453,6 @@ msgstr "Покреће прегледач датотека над датотеком"
 msgid "Edits one file"
 msgstr "Уређује једну датотеку"
 
-msgid " Notice "
-msgstr " Објава "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Датотеке са подешавањима Поноћног наредника \n"
-" се сада смештају у директоријум `~/.mc';\n"
-" датотеке су сада премештене\n"
-
 msgid "safe de&Lete"
 msgstr "безбедно б&Рисање"
 
@@ -2647,13 +2632,17 @@ msgstr "Власник"
 msgid "Group"
 msgstr "Група"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s бајтова у %d датотеци"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s бајтова"
+msgstr[1] "%s бајтова"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s бајтова у %d датотека"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s бајтова у %d датотеци"
+msgstr[1] "%s бајтова у %d датотеци"
 
 msgid "<readlink failed>"
 msgstr "<неуспешно читање везе>"
@@ -2866,6 +2855,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s није директоријум\n"
@@ -2979,6 +2971,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Иди на адресу "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Неисправна лозинка "
 
 msgid " Enter regexp:"
 msgstr " Унесите регизраз:"
@@ -3614,6 +3610,48 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid "&Home"
+#~ msgstr "&Домаћу"
+
+#~ msgid "&Type"
+#~ msgstr "В&рста"
+
+#~ msgid "&Links"
+#~ msgstr "Ве&зе"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "В&ласник"
+
+#~ msgid "&Group"
+#~ msgstr "&Група"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "ПН не може да пише у датотеку ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld блокова)"
+
+#~ msgid " Notice "
+#~ msgstr " Објава "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Датотеке са подешавањима Поноћног наредника \n"
+#~ " се сада смештају у директоријум `~/.mc';\n"
+#~ " датотеке су сада премештене\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s бајтова у %d датотека"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Не могу да отворим датотеку за читање: "

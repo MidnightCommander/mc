@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -61,6 +61,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Saisissez le nom de fichier : "
 
+msgid "Warning"
+msgstr "Attention"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Oui"
+
+msgid "&No"
+msgstr "&Non"
+
+msgid "&Cancel"
+msgstr "&Annuler"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Erreur lors de l'écriture sur le tube : "
 
@@ -76,9 +94,6 @@ msgstr "Enregistrement sécurisé "
 msgid "Do backups -->"
 msgstr "Faire des sauvegardes -->"
 
-msgid "&Cancel"
-msgstr "&Annuler"
-
 msgid "&OK"
 msgstr "&Valider"
 
@@ -90,9 +105,6 @@ msgstr " Éditer le mode de sauvegarde"
 
 msgid " Save As "
 msgstr " Enregistrer sous "
-
-msgid "Warning"
-msgstr "Attention"
 
 msgid " A file already exists with this name. "
 msgstr " Un fichier portant le même nom existe déjà. "
@@ -245,12 +257,6 @@ msgstr " Le fichier a été modifié. Enregistrer et quitter ? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Annuler quitter"
-
-msgid "&Yes"
-msgstr "&Oui"
-
-msgid "&No"
-msgstr "&Non"
 
 #, fuzzy
 msgid " Error "
@@ -536,6 +542,10 @@ msgstr "Apprendre les &touches..."
 msgid "Syntax &Highlighting..."
 msgstr "Coloration synta&Xique"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "Enregi&strer la configuration"
+
 msgid " File "
 msgstr " Fichier "
 
@@ -788,6 +798,10 @@ msgstr "Respec&t de la casse "
 
 msgid "Sort order"
 msgstr "Ordre de tri"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "&Répertoire hotlist              C-\\"
 
 msgid " confirm &Exit "
 msgstr " confirmer &Quitter "
@@ -1076,9 +1090,6 @@ msgstr " Quel fichier de menu voulez-vous éditer ? "
 msgid "&Local"
 msgstr "&Local"
 
-msgid "&Home"
-msgstr "Répertoire &personnel"
-
 msgid "Syntax file edit"
 msgstr "Édition du fichier de syntaxe"
 
@@ -1182,11 +1193,12 @@ msgstr ""
 "   lequel la récupération doit être faite : (F1 pour\n"
 "   les détails)"
 
-msgid " Setup saved to ~/"
-msgstr " Configuration enregistrée dans ~/"
-
 msgid " Setup "
 msgstr " Configuration "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Configuration enregistrée dans ~/"
 
 #, c-format
 msgid ""
@@ -1225,24 +1237,6 @@ msgstr "&Taille"
 
 msgid "&Inode"
 msgstr "&I-noeud"
-
-msgid "&Type"
-msgstr "&Type"
-
-msgid "&Links"
-msgstr "&Liens"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "Pr&Opriétaire"
-
-msgid "&Group"
-msgstr "&Groupe"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1776,7 +1770,7 @@ msgstr "&Voir - F3"
 msgid "&Edit - F4"
 msgstr "É&diter - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1904,6 +1898,11 @@ msgstr " Enlever : "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1914,14 +1913,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Groupe de premier niveau "
 
-msgid "MC was unable to write ~/"
-msgstr "MC n'a pas pu écrire le fichier ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ", les entrées de votre ancienne hotlist ont été conservées"
-
 msgid " Hotlist Load "
 msgstr " Charger la hotlist "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ", les entrées de votre ancienne hotlist ont été conservées"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1968,8 +1966,9 @@ msgstr "Accédé :   %s"
 msgid "Modified:  %s"
 msgstr "Modifié :  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Créé :     %s"
 
 #, c-format
@@ -1980,13 +1979,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Taille :   %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld bloc)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blocs)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld bloc)"
+msgstr[1] " (%ld bloc)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2469,18 +2466,6 @@ msgstr "Lance le visionneur de fichiers sur un fichier"
 msgid "Edits one file"
 msgstr "Édite un fichier"
 
-msgid " Notice "
-msgstr " Note "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Les fichers de configuration de Midnight Commander \n"
-" sont désormais stockés dans le répertoire ~/.mc,   \n"
-" les fichiers ont été déplacés\n"
-
 msgid "safe de&Lete"
 msgstr "E&Ffacement sécurisé"
 
@@ -2662,13 +2647,17 @@ msgstr "Propriétaire"
 msgid "Group"
 msgstr "Groupe"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr " %s octets dans %d fichiers"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s octets"
+msgstr[1] "%s octets"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr " %s octets dans %d fichiers"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] " %s octets dans %d fichiers"
+msgstr[1] " %s octets dans %d fichiers"
 
 msgid "<readlink failed>"
 msgstr "<échec de readlink>"
@@ -2882,6 +2871,9 @@ msgstr "%e %b %H:%M"
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Crée un nouveau répertoire"
@@ -2999,6 +2991,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Aller à l'adresse "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Mot de passe incorrect "
 
 msgid " Enter regexp:"
 msgstr " Saisissez l'expression régulière :"
@@ -3639,6 +3635,48 @@ msgstr "Erreur interne :"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#~ msgid "&Home"
+#~ msgstr "Répertoire &personnel"
+
+#~ msgid "&Type"
+#~ msgstr "&Type"
+
+#~ msgid "&Links"
+#~ msgstr "&Liens"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "Pr&Opriétaire"
+
+#~ msgid "&Group"
+#~ msgstr "&Groupe"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC n'a pas pu écrire le fichier ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blocs)"
+
+#~ msgid " Notice "
+#~ msgstr " Note "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Les fichers de configuration de Midnight Commander \n"
+#~ " sont désormais stockés dans le répertoire ~/.mc,   \n"
+#~ " les fichiers ont été déplacés\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr " %s octets dans %d fichiers"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Échec lors de l'ouverture du fichier en lecture : "

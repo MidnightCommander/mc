@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -59,6 +59,25 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Introduïu el nom del fitxer: "
 
+msgid "Warning"
+msgstr "Avís"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Sí"
+
+msgid "&No"
+msgstr "&No"
+
+# Sí que hi ha NLS, sí... I la feinada que ha costat!  iv
+msgid "&Cancel"
+msgstr "&Cancel·la"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " S'ha produït un error en escriure al conducte: "
 
@@ -74,10 +93,6 @@ msgstr "Desat segur "
 msgid "Do backups -->"
 msgstr "Fer còpies de seguretat -->"
 
-# Sí que hi ha NLS, sí... I la feinada que ha costat!  iv
-msgid "&Cancel"
-msgstr "&Cancel·la"
-
 msgid "&OK"
 msgstr "&D'acord"
 
@@ -89,9 +104,6 @@ msgstr " Edita la manera de desar "
 
 msgid " Save As "
 msgstr " Desa com a"
-
-msgid "Warning"
-msgstr "Avís"
 
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
@@ -242,12 +254,6 @@ msgstr " El fitxer s'ha modificat. El deso en sortir? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Cancel·la la sortida"
-
-msgid "&Yes"
-msgstr "&Sí"
-
-msgid "&No"
-msgstr "&No"
 
 #, fuzzy
 msgid " Error "
@@ -532,6 +538,10 @@ msgstr "defineix &Tecles..."
 msgid "Syntax &Highlighting..."
 msgstr "Ressaltament de la sinta&Xi"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Desa la configuració"
+
 # Açò s'agraeix!  iv
 msgid " File "
 msgstr " Fitxer "
@@ -786,6 +796,10 @@ msgstr "distingeix entre majú&Scules/minúscules"
 
 msgid "Sort order"
 msgstr "Ordre de classificació"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "directoris fa&Vorits     C-\\"
 
 msgid " confirm &Exit "
 msgstr " confirma la &Sortida "
@@ -1074,9 +1088,6 @@ msgstr " Quin fitxer de menú voleu editar? "
 msgid "&Local"
 msgstr "&Local"
 
-msgid "&Home"
-msgstr "Directori de l'&Usuari "
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "edita el fitxer de &Menús"
@@ -1180,11 +1191,12 @@ msgstr ""
 " Introduïu el dispositiu (sense /dev/) d'on voleu\n"
 "   recuperar els fitxers: (F1 per detalls)"
 
-msgid " Setup saved to ~/"
-msgstr " S'ha desat la configuració a ~/"
-
 msgid " Setup "
 msgstr " Configuració "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " S'ha desat la configuració a ~/"
 
 #, c-format
 msgid ""
@@ -1223,24 +1235,6 @@ msgstr "Mi&da"
 
 msgid "&Inode"
 msgstr "node-&I"
-
-msgid "&Type"
-msgstr "&Tipus"
-
-msgid "&Links"
-msgstr "en&Llaços"
-
-msgid "N&GID"
-msgstr "&GID numèric"
-
-msgid "N&UID"
-msgstr "&UID numèric"
-
-msgid "&Owner"
-msgstr "&Propietari"
-
-msgid "&Group"
-msgstr "gr&Up"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1776,7 +1770,7 @@ msgstr "&Visualitza - F3"
 msgid "&Edit - F4"
 msgstr "&Edita - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1905,6 +1899,11 @@ msgstr " Suprimeix: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1915,14 +1914,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Grup principal "
 
-msgid "MC was unable to write ~/"
-msgstr "MC no ha pogut escriure al ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " fitxer, i no s'ha pogut suprimir els favorits antics"
-
 msgid " Hotlist Load "
 msgstr " Càrrega de favorits "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " fitxer, i no s'ha pogut suprimir els favorits antics"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1970,8 +1968,9 @@ msgstr "Accedit:    %s"
 msgid "Modified:  %s"
 msgstr "Modificat:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Creat:      %s"
 
 #, c-format
@@ -1982,13 +1981,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Mida:      %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld bloc)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blocs)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld bloc)"
+msgstr[1] " (%ld bloc)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2473,18 +2470,6 @@ msgstr "Executa el visualitzador de fitxers amb un fitxer"
 msgid "Edits one file"
 msgstr "Edita un fitxer"
 
-msgid " Notice "
-msgstr " Avís "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Els fitxers de configuració de Midnight Commander \n"
-" s'emmagatzemen ara al directori ~/.mc, on \n"
-" s'han mogut els fitxers\n"
-
 msgid "safe de&Lete"
 msgstr "&Supressió segura"
 
@@ -2666,13 +2651,17 @@ msgstr "Propietari"
 msgid "Group"
 msgstr "Grup"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s bytes en %d fitxer"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s bytes"
+msgstr[1] "%s bytes"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s bytes en %d fitxers"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s bytes en %d fitxer"
+msgstr[1] "%s bytes en %d fitxer"
 
 msgid "<readlink failed>"
 msgstr "<S'ha produït una fallida en llegir l'enllaç>"
@@ -2886,6 +2875,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "Crea un directori nou"
@@ -3003,6 +2995,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Vés a l'adreça "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " La contrasenya no és vàlida "
 
 msgid " Enter regexp:"
 msgstr " Introduïu l'expressió regular:"
@@ -3641,6 +3637,48 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid "&Home"
+#~ msgstr "Directori de l'&Usuari "
+
+#~ msgid "&Type"
+#~ msgstr "&Tipus"
+
+#~ msgid "&Links"
+#~ msgstr "en&Llaços"
+
+#~ msgid "N&GID"
+#~ msgstr "&GID numèric"
+
+#~ msgid "N&UID"
+#~ msgstr "&UID numèric"
+
+#~ msgid "&Owner"
+#~ msgstr "&Propietari"
+
+#~ msgid "&Group"
+#~ msgstr "gr&Up"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC no ha pogut escriure al ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blocs)"
+
+#~ msgid " Notice "
+#~ msgstr " Avís "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Els fitxers de configuració de Midnight Commander \n"
+#~ " s'emmagatzemen ara al directori ~/.mc, on \n"
+#~ " s'han mogut els fitxers\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s bytes en %d fitxers"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " S'ha produït una fallada en intentar obrir un fitxer per llegir: "

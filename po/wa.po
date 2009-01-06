@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -66,6 +66,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Diner roye: "
 
+msgid "Warning"
+msgstr "Advertixhmint"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Oyi"
+
+msgid "&No"
+msgstr "&Neni"
+
+msgid "&Cancel"
+msgstr "&Rinoncî"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Åk n' a nén stî come dji sayîve di scrire el bûze: "
 
@@ -81,9 +99,6 @@ msgstr "Schaper a såvrité "
 msgid "Do backups -->"
 msgstr "Fé des copeyes di såvrité -->"
 
-msgid "&Cancel"
-msgstr "&Rinoncî"
-
 msgid "&OK"
 msgstr "I &Va"
 
@@ -96,9 +111,6 @@ msgstr " Môde Aspougnî Schaper "
 
 msgid " Save As "
 msgstr " Schaper et rlomer "
-
-msgid "Warning"
-msgstr "Advertixhmint"
 
 msgid " A file already exists with this name. "
 msgstr " I gn a ddja on fitchî lomé insi. "
@@ -250,12 +262,6 @@ msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Rinoncî a moussî foû"
-
-msgid "&Yes"
-msgstr "&Oyi"
-
-msgid "&No"
-msgstr "&Neni"
 
 #, fuzzy
 msgid " Error "
@@ -542,6 +548,10 @@ msgstr "a&Prinde des tapes..."
 msgid "Syntax &Highlighting..."
 msgstr "mete e &valeur l' emantchaedje"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Schaper l' apontiaedje"
+
 msgid " File "
 msgstr " Fitchî "
 
@@ -796,6 +806,10 @@ msgstr "grandès <> ptitès letes"
 
 msgid "Sort order"
 msgstr "Ôrde po relire"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "djîvêye rascoûrti des &Ridants    C-\\"
 
 msgid " confirm &Exit "
 msgstr " racertiner ki vos voloz bén &moussî foû "
@@ -1088,9 +1102,6 @@ msgstr " Ké fitchî menu voloz-ve aspougnî? "
 msgid "&Local"
 msgstr "&Locå"
 
-msgid "&Home"
-msgstr "&Måjhon"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr " Tcherdjî fitchî emantchaedje "
@@ -1196,11 +1207,12 @@ msgstr ""
 " Intrer l' éndjin (sins li /dev/) ki vos voloz disrafacer\n"
 "   des fitchîs dsu: (F1 po ndè savu did pus)"
 
-msgid " Setup saved to ~/"
-msgstr " Apontiaedje schapé dins ~/"
-
 msgid " Setup "
 msgstr " Apontiaedje "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Apontiaedje schapé dins ~/"
 
 #, c-format
 msgid ""
@@ -1240,24 +1252,6 @@ msgstr "&Grandeu"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Sôrt"
-
-msgid "&Links"
-msgstr "&Loyéns"
-
-msgid "N&GID"
-msgstr "L° &GID"
-
-msgid "N&UID"
-msgstr "L° &UID"
-
-msgid "&Owner"
-msgstr "&Da"
-
-msgid "&Group"
-msgstr "&Groupe"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1792,7 +1786,7 @@ msgstr "&Loukî - F3"
 msgid "&Edit - F4"
 msgstr "&Aspougnî - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1920,6 +1914,11 @@ msgstr " Waester: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1930,15 +1929,14 @@ msgstr ""
 msgid " Top level group "
 msgstr " Hopê do pus hôt livea "
 
-msgid "MC was unable to write ~/"
-msgstr "MC n' a savu scrire li fitchî ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr ""
-"Do côp, vos vîyès intrêyes el djîvêye rascoûrti n' ont nén stî disfacêyes"
-
 msgid " Hotlist Load "
 msgstr " Dji tchedje li djîvêye rascoûrti "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"Do côp, vos vîyès intrêyes el djîvêye rascoûrti n' ont nén stî disfacêyes"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1985,8 +1983,9 @@ msgstr "Eployî:  %s"
 msgid "Modified:  %s"
 msgstr "Candjî:  %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Fwait:   %s"
 
 #, c-format
@@ -1997,13 +1996,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Grandeu: %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blok)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld bloks)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blok)"
+msgstr[1] " (%ld blok)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2464,18 +2461,6 @@ msgstr "Enonder li håyneu di fitchî so on fitchî"
 msgid "Edits one file"
 msgstr "Aspougne on fitchî"
 
-msgid " Notice "
-msgstr " Advertixhmint "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Les fitchîs d' apontiaedje di Midnight Commander \n"
-" sont-st asteure e ridant ~/.mc; les fitchîs \n"
-" ont stî bodjîs\n"
-
 msgid "safe de&Lete"
 msgstr "disf&Acer a såvrité"
 
@@ -2655,13 +2640,17 @@ msgstr "Da"
 msgid "Group"
 msgstr "Groupe"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s octets e fitchî %d"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s octets"
+msgstr[1] "%s octets"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s octets e fitchî %d"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s octets e fitchî %d"
+msgstr[1] "%s octets e fitchî %d"
 
 msgid "<readlink failed>"
 msgstr "<readlink a fwait berwete>"
@@ -2871,6 +2860,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "ridant"
@@ -2989,6 +2981,11 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Potchî al Adresse "
+
+# Mask = umask (modele di cogne di fitchî?)??
+#, fuzzy
+msgid " Invalid address "
+msgstr " Li masse såme n' est nén valåbe "
 
 msgid " Enter regexp:"
 msgstr " Intrez l' erûleye ratoûrneure:"
@@ -3596,6 +3593,48 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#~ msgid "&Home"
+#~ msgstr "&Måjhon"
+
+#~ msgid "&Type"
+#~ msgstr "&Sôrt"
+
+#~ msgid "&Links"
+#~ msgstr "&Loyéns"
+
+#~ msgid "N&GID"
+#~ msgstr "L° &GID"
+
+#~ msgid "N&UID"
+#~ msgstr "L° &UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Da"
+
+#~ msgid "&Group"
+#~ msgstr "&Groupe"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC n' a savu scrire li fitchî ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld bloks)"
+
+#~ msgid " Notice "
+#~ msgstr " Advertixhmint "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Les fitchîs d' apontiaedje di Midnight Commander \n"
+#~ " sont-st asteure e ridant ~/.mc; les fitchîs \n"
+#~ " ont stî bodjîs\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s octets e fitchî %d"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Dj' a fwait berwete come dji sayîve di drovî li fitchî po lére: "

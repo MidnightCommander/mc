@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -60,6 +60,24 @@ msgstr "Recursivitatea macro este prea mare"
 msgid " Enter file name: "
 msgstr " Introduceþi numele fiºierului: "
 
+msgid "Warning"
+msgstr "Atenþie"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Da"
+
+msgid "&No"
+msgstr "&Nu"
+
+msgid "&Cancel"
+msgstr "&Renunþã"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Eroare la scrierea în filtrul: "
 
@@ -75,9 +93,6 @@ msgstr "Sigurã"
 msgid "Do backups -->"
 msgstr "Fã backup -->"
 
-msgid "&Cancel"
-msgstr "&Renunþã"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -89,9 +104,6 @@ msgstr " Editeazã Modul de Salvare "
 
 msgid " Save As "
 msgstr " Salveazã Ca "
-
-msgid "Warning"
-msgstr "Atenþie"
 
 msgid " A file already exists with this name. "
 msgstr " Existã deja un fiºier cu acest nume. "
@@ -242,12 +254,6 @@ msgstr " Fiºierul a fost modificat. Salvez la ieºire? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Anulez ieºirea"
-
-msgid "&Yes"
-msgstr "&Da"
-
-msgid "&No"
-msgstr "&Nu"
 
 #, fuzzy
 msgid " Error "
@@ -531,6 +537,10 @@ msgstr "învaþã &Tastele..."
 msgid "Syntax &Highlighting..."
 msgstr "&Evidenþiere sintaxã"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Salveazã setãrile"
+
 msgid " File "
 msgstr " Fiºier "
 
@@ -783,6 +793,10 @@ msgstr "nu ignora &Majusculele "
 
 msgid "Sort order"
 msgstr "Ordinea de sortare"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "lista rapidã de di&Rectoare       C-\\"
 
 msgid " confirm &Exit "
 msgstr " confirmã i&Eºirea "
@@ -1070,9 +1084,6 @@ msgstr " Care fiºier de meniuri doriþi sã îl editaþi? "
 msgid "&Local"
 msgstr "&Local"
 
-msgid "&Home"
-msgstr "&Personal"
-
 msgid "Syntax file edit"
 msgstr "editare fiºier sintaxã"
 
@@ -1173,11 +1184,12 @@ msgstr ""
 " Introduceþi perifericul (fãra /dev/) pentru\n"
 "   recuperare: (F1 pentru detalii)"
 
-msgid " Setup saved to ~/"
-msgstr " Configuraþia salvatã în ~/"
-
 msgid " Setup "
 msgstr " Configurare "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Configuraþia salvatã în ~/"
 
 #, c-format
 msgid ""
@@ -1216,24 +1228,6 @@ msgstr "&Mãrime"
 
 msgid "&Inode"
 msgstr "&Inod"
-
-msgid "&Type"
-msgstr "&Tipul"
-
-msgid "&Links"
-msgstr "&Legãturi"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "pr&Oprietar"
-
-msgid "&Group"
-msgstr "&Grup"
 
 msgid "Cannot read directory contents"
 msgstr "Nu pot citi conþinutul directorului"
@@ -1767,7 +1761,7 @@ msgstr "&Vizualizare - F3"
 msgid "&Edit - F4"
 msgstr "&Editare - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1895,6 +1889,11 @@ msgstr " ªterg: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1905,14 +1904,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Grupul pãrinte "
 
-msgid "MC was unable to write ~/"
-msgstr "MC nu a putut sã scrie fiºierul ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " fiºier, intrãrile din vechea listã rapidã nu au fost ºterse"
-
 msgid " Hotlist Load "
 msgstr " Încarc lista rapidã "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " fiºier, intrãrile din vechea listã rapidã nu au fost ºterse"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1959,8 +1957,9 @@ msgstr "Accesat:   %s"
 msgid "Modified:  %s"
 msgstr "Modificat: %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Creat:     %s"
 
 #, c-format
@@ -1971,13 +1970,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Mãrime:    %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blocuri)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blocuri)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blocuri)"
+msgstr[1] " (%ld blocuri)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2455,18 +2452,6 @@ msgstr "Lanseazã vizualizatorul de fiºiere pe un fiºier"
 msgid "Edits one file"
 msgstr "Editeazã un fiºier"
 
-msgid " Notice "
-msgstr " Notã "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Fiºierele de configurare Midnight Commander \n"
-" sunt acum pãstrate în directorul ~/.mc, \n"
-" fiºierele au fost mutate acum\n"
-
 msgid "safe de&Lete"
 msgstr "ºter&Ge în siguranþã"
 
@@ -2646,13 +2631,17 @@ msgstr "Proprietar"
 msgid "Group"
 msgstr "Grup"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr " %s bytes în %d fiºier"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s bytes"
+msgstr[1] "%s bytes"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr " %s bytes în %d fiºiere"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] " %s bytes în %d fiºier"
+msgstr[1] " %s bytes în %d fiºier"
 
 msgid "<readlink failed>"
 msgstr "<readlink eºuat>"
@@ -2862,6 +2851,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s nu este un director\n"
@@ -2975,6 +2967,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Du-te la Adresa "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Parolã invalidã "
 
 msgid " Enter regexp:"
 msgstr " Introduceþi expresia regularã:"
@@ -3610,6 +3606,48 @@ msgstr "Eroare internã:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbãrile efectuate în fiºier"
+
+#~ msgid "&Home"
+#~ msgstr "&Personal"
+
+#~ msgid "&Type"
+#~ msgstr "&Tipul"
+
+#~ msgid "&Links"
+#~ msgstr "&Legãturi"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "pr&Oprietar"
+
+#~ msgid "&Group"
+#~ msgstr "&Grup"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC nu a putut sã scrie fiºierul ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blocuri)"
+
+#~ msgid " Notice "
+#~ msgstr " Notã "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Fiºierele de configurare Midnight Commander \n"
+#~ " sunt acum pãstrate în directorul ~/.mc, \n"
+#~ " fiºierele au fost mutate acum\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr " %s bytes în %d fiºiere"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Nu pot deschide pentru citire fiºierul: "

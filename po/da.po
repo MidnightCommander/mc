@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-23 10:06+0200\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-06 13:46+0200\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -66,6 +66,24 @@ msgstr ""
 msgid " Enter file name: "
 msgstr " Indtast linje: "
 
+msgid "Warning"
+msgstr "Advarsel"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr ""
+
+msgid "&Yes"
+msgstr "&Ja"
+
+msgid "&No"
+msgstr "&Nej"
+
+msgid "&Cancel"
+msgstr "&Annullér"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr ""
+
 msgid " Error writing to pipe: "
 msgstr " Fejl ved skrivning af fil "
 
@@ -81,9 +99,6 @@ msgstr "Gem sikkert "
 msgid "Do backups -->"
 msgstr "Lav sikkerhedskopier -->"
 
-msgid "&Cancel"
-msgstr "&Annullér"
-
 msgid "&OK"
 msgstr "&OK"
 
@@ -95,9 +110,6 @@ msgstr " Redigér gemmemåde "
 
 msgid " Save As "
 msgstr " Gem som "
-
-msgid "Warning"
-msgstr "Advarsel"
 
 msgid " A file already exists with this name. "
 msgstr " En fil med dette navn eksisterer allerede. "
@@ -248,12 +260,6 @@ msgstr " Filen blev ændret, Gem ved afslutning? "
 #, fuzzy
 msgid "&Cancel quit"
 msgstr "Annullér afslut"
-
-msgid "&Yes"
-msgstr "&Ja"
-
-msgid "&No"
-msgstr "&Nej"
 
 #, fuzzy
 msgid " Error "
@@ -537,6 +543,10 @@ msgstr "lær &Taster..."
 msgid "Syntax &Highlighting..."
 msgstr "synta&X farvning"
 
+#, fuzzy
+msgid "Save setu&p..."
+msgstr "&Gem opsætning"
+
 msgid " File "
 msgstr " Filer "
 
@@ -790,6 +800,10 @@ msgstr "Forskel på store og små bogstaver"
 
 msgid "Sort order"
 msgstr "Sorteringsrækkefølge"
+
+#, fuzzy
+msgid " confirm di&Rectory hotlist delete "
+msgstr "ma&Ppe hurtigliste    C-\\"
 
 msgid " confirm &Exit "
 msgstr " bekræft &Afslut "
@@ -1078,9 +1092,6 @@ msgstr " Hvilken menufil vil du redigere? "
 msgid "&Local"
 msgstr "&Lokal"
 
-msgid "&Home"
-msgstr "&Hjem"
-
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "&Menufilsredigering"
@@ -1185,11 +1196,12 @@ msgstr ""
 " Indtast enhed (uden /dev/) som der skal gendannes\n"
 "   filer på: (F1 for detaljer)"
 
-msgid " Setup saved to ~/"
-msgstr " Opsætning gemt i ~/"
-
 msgid " Setup "
 msgstr " Opsætning "
+
+#, fuzzy, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Opsætning gemt i ~/"
 
 #, c-format
 msgid ""
@@ -1228,24 +1240,6 @@ msgstr "&Størrelse"
 
 msgid "&Inode"
 msgstr "&Inode"
-
-msgid "&Type"
-msgstr "&Type"
-
-msgid "&Links"
-msgstr "&Lænker"
-
-msgid "N&GID"
-msgstr "N&GID"
-
-msgid "N&UID"
-msgstr "N&UID"
-
-msgid "&Owner"
-msgstr "&Ejer"
-
-msgid "&Group"
-msgstr "&Gruppe"
 
 #, fuzzy
 msgid "Cannot read directory contents"
@@ -1780,7 +1774,7 @@ msgstr "&Vis - F3"
 msgid "&Edit - F4"
 msgstr "R&ediger - F4"
 
-msgid "find Re&cursively"
+msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
@@ -1908,6 +1902,11 @@ msgstr " Fjern: "
 
 msgid ""
 "\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+
+msgid ""
+"\n"
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
@@ -1918,14 +1917,13 @@ msgstr ""
 msgid " Top level group "
 msgstr " Gruppe på topniveau "
 
-msgid "MC was unable to write ~/"
-msgstr "MC kunne ikke skrive ~/"
-
-msgid " file, your old hotlist entries were not deleted"
-msgstr " filen, dine gamle favoritlisteelementer blev ikke slettet"
-
 msgid " Hotlist Load "
 msgstr " Indlæs favoritliste "
+
+#, fuzzy, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr " filen, dine gamle favoritlisteelementer blev ikke slettet"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1972,8 +1970,9 @@ msgstr "Læst:      %s"
 msgid "Modified:  %s"
 msgstr "Ændret:    %s"
 
-#, c-format
-msgid "Created:   %s"
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, fuzzy, c-format
+msgid "Status:    %s"
 msgstr "Oprettet:  %s"
 
 #, c-format
@@ -1984,13 +1983,11 @@ msgstr ""
 msgid "Size:      %s"
 msgstr "Størrelse: %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid " (%ld block)"
-msgstr " (%ld blok)"
-
-#, c-format
-msgid " (%ld blocks)"
-msgstr " (%ld blokke)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld blok)"
+msgstr[1] " (%ld blok)"
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2472,18 +2469,6 @@ msgstr "Bruger filfremviseren på en fil"
 msgid "Edits one file"
 msgstr "Redigerer en fil"
 
-msgid " Notice "
-msgstr " Notér "
-
-msgid ""
-" The Midnight Commander configuration files \n"
-" are now stored in the ~/.mc directory, the \n"
-" files have been moved now\n"
-msgstr ""
-" Midnight Commanders konfigurationsfiler \n"
-" er nu gemt i ~/.mc mappen, filerne er\n"
-" blevet flyttet nu\n"
-
 msgid "safe de&Lete"
 msgstr "sikker s&Letning"
 
@@ -2663,13 +2648,17 @@ msgstr "Ejer"
 msgid "Group"
 msgstr "Gruppe"
 
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s byte i %d fil"
+#, fuzzy, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s byte"
+msgstr[1] "%s byte"
 
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s byte i %d filer"
+#, fuzzy, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s byte i %d fil"
+msgstr[1] "%s byte i %d fil"
 
 msgid "<readlink failed>"
 msgstr "<læslink mislykkedes>"
@@ -2879,6 +2868,9 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "(invalid)"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
 msgstr "mappe"
@@ -2996,6 +2988,10 @@ msgstr ""
 
 msgid " Goto Address "
 msgstr " Gå til adresse "
+
+#, fuzzy
+msgid " Invalid address "
+msgstr " Ugyldig adgangskode "
 
 msgid " Enter regexp:"
 msgstr " Indtast regexp:"
@@ -3631,6 +3627,48 @@ msgstr " Intern fejl:"
 
 msgid "Changes to file lost"
 msgstr "Ændringer til fil tabt"
+
+#~ msgid "&Home"
+#~ msgstr "&Hjem"
+
+#~ msgid "&Type"
+#~ msgstr "&Type"
+
+#~ msgid "&Links"
+#~ msgstr "&Lænker"
+
+#~ msgid "N&GID"
+#~ msgstr "N&GID"
+
+#~ msgid "N&UID"
+#~ msgstr "N&UID"
+
+#~ msgid "&Owner"
+#~ msgstr "&Ejer"
+
+#~ msgid "&Group"
+#~ msgstr "&Gruppe"
+
+#~ msgid "MC was unable to write ~/"
+#~ msgstr "MC kunne ikke skrive ~/"
+
+#~ msgid " (%ld blocks)"
+#~ msgstr " (%ld blokke)"
+
+#~ msgid " Notice "
+#~ msgstr " Notér "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Midnight Commanders konfigurationsfiler \n"
+#~ " er nu gemt i ~/.mc mappen, filerne er\n"
+#~ " blevet flyttet nu\n"
+
+#~ msgid "%s bytes in %d files"
+#~ msgstr "%s byte i %d filer"
 
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Fejl under åbning af fil for læsning: "
