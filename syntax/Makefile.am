@@ -31,6 +31,7 @@ SYNTAXFILES =			\
 	php.syntax		\
 	po.syntax		\
 	povray.syntax		\
+	procmail.syntax \
 	python.syntax		\
 	ruby.syntax		\
 	sh.syntax		\
