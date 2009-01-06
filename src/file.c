@@ -63,6 +63,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
+#include "util.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
@@ -791,7 +792,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 	}
 
-	if (!appending) {
+	if (!appending && ctx->preserve) {
 	    while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
 		temp_status = file_error (
 			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
@@ -1872,6 +1873,8 @@ panel_operate (void *source_panel, FileOperation operation,
 		dest = temp2;
 		temp = NULL;
 
+		source_with_path = unescape_string(source_with_path);
+		dest = unescape_string(dest);
 		switch (operation) {
 		case OP_COPY:
 		    /*
@@ -1963,6 +1966,9 @@ panel_operate (void *source_panel, FileOperation operation,
 		else {
 		    char *temp2 = concat_dir_and_file (dest, temp);
 
+			source_with_path = unescape_string(source_with_path);
+			temp2 = unescape_string(temp2);
+			
 		    switch (operation) {
 		    case OP_COPY:
 			/*
