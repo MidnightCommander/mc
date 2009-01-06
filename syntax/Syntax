@@ -148,5 +148,23 @@ include idl.syntax
 file Don_t_match_me Mail\sfolder ^From\s
 include mail.syntax
 
+file sources.list$ sources\slist
+include debian-sources-list.syntax
+
+file control$ Debian\scontrol\sfile
+include debian-control.syntax
+
+file (rules|rocks)$ Debian\srules
+include makefile.syntax
+
+file .\*changelog$ Debian\schangelog\sfile
+include debian-changelog.syntax
+
+file changelog.Debian$ Debian\schangelog\sfile
+include debian-changelog.syntax
+
+file .\*\\.dsc$ Debian\sdescriptiom\sfile
+include debian-description.syntax
+
 file .\* unknown
 include unknown.syntax

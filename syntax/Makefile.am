@@ -5,6 +5,10 @@ SYNTAXFILES =			\
 	assembler.syntax	\
 	c.syntax		\
 	changelog.syntax	\
+ 	debian-changelog.syntax \
+ 	debian-control.syntax   \
+	debian-description.syntax \
+ 	debian-sources-list.syntax \
 	cs.syntax		\
 	css.syntax		\
 	d.syntax		\
