@@ -413,8 +413,6 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	switch(buffer[0]) {
 	case ':': {
 	    char *copy_buffer = buffer+1;
-		char *foobar;
-		int seen = 0;
 	    char *filename = buffer+1;
 	    char *linkname = buffer+1;
 	    if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
@@ -431,10 +429,10 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			strncpy(ent->name,linkname,f_size);
 			ent->name[f_size] = '\0';
 			ent->ino->linkname = strdup(filename + 4);
-	    } else {
-		ent->name = g_strdup(buffer+1);
-	    }
-	    break;
+		} else {
+			ent->name = g_strdup(buffer+1);
+		}
+		break;
 	}
 	case 'S':
 #ifdef HAVE_ATOLL
