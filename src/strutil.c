@@ -43,8 +43,19 @@ static const char *str_utf8_encodings[] = {
 
 // standard 8bit encodings, no wide or multibytes characters
 static const char *str_8bit_encodings[] = {
+        "cp-1251",
+        "cp1251",
+        "cp-1250",
+        "cp1250",
+        "cp-866",
+        "cp866",
+        "cp-850",
+        "cp850",
+        "cp-852",
+        "cp852",
         "iso-8859",
         "iso8859",
+        "koi8",
         NULL
 };        
 
