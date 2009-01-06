@@ -64,6 +64,7 @@ examine_cd (char *path)
     const char *t;
 
     /* Tilde expansion */
+    path = unescape_string(path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
