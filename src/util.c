@@ -1542,7 +1542,7 @@ unescape_string ( const char * in ) {
 			j = j + 20;
 			local = g_realloc(local,j);
 		}
-		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && ( strchr("\\",in[i-1])) ) {
+		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && ((i == 0) || ( strchr("\\",in[i-1]))) ) {
 			k++;
 			local[i-k] = in[i];
 		} else {
@@ -1570,7 +1570,7 @@ escape_string ( const char * in ) {
 			j = j + 20;
 			local = g_realloc(local,j);
 		}
-		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && (! strchr("\\",in[i-1])) ) {
+		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && ((i == 0) || (! strchr("\\",in[i-1]))) ) {
 			local[i+k] = 92; // Ascii for "\"
 			k = k+1;
 			local[i+k] = in[i];
