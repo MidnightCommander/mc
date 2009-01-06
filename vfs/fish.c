@@ -369,7 +369,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	    "#LIST /%s\n"
 	    "if ls -1 /%s >/dev/null 2>&1 ;\n"
 	    "then\n"
-	    "ls -lLan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
+	    "ls -lan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
 	      "while read p l u g s m d y n; do\n"
 	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
@@ -412,11 +412,30 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
-		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
-			  break;  /* We'll do . and .. ourself */
-		      ent->name = g_strdup(buffer+1); 
-		      break;
-	          }
+	    char *copy_buffer = buffer+1;
+		char *foobar;
+		int seen = 0;
+	    char *filename = buffer+1;
+	    char *linkname = buffer+1;
+	    if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
+			break;  /* We'll do . and .. ourself */
+
+		if (S_ISLNK(ST.st_mode)) {
+			while (*copy_buffer){
+				if (strncmp(copy_buffer," -> ",4)==0)
+					filename = copy_buffer;
+				copy_buffer++;
+			}
+			int f_size = filename - linkname;
+			ent->name = malloc(f_size+1);
+			strncpy(ent->name,linkname,f_size);
+			ent->name[f_size] = '\0';
+			ent->ino->linkname = strdup(filename + 4);
+	    } else {
+		ent->name = g_strdup(buffer+1);
+	    }
+	    break;
+	}
 	case 'S':
 #ifdef HAVE_ATOLL
 	    ST.st_size = (off_t) atoll (buffer+1);
@@ -426,11 +445,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	    break;
 	case 'P': {
 	    size_t skipped;
-
-	    if (vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode)) {
-		if (S_ISLNK(ST.st_mode))
-		    ST.st_mode = 0;
-	    }
+	    vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode);
 	    break;
 	}
 	case 'd': {
