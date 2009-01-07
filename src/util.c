@@ -1529,56 +1529,46 @@ Q_ (const char *s)
 
 /* Unescape paths or other strings for e.g the internal cd  */
 char *
-unescape_string ( const char * in ) {
-	char * local = NULL;
-	int i = 0;
-	int j = 20;
-	int k = 0;
+unescape_string(const char *in) {
+    GString *str;
+    const char * src;
+    char *result;
 
-	local = g_malloc(j);
-	
-	for (i=0;i<=strlen(in);i++) {
-		if (i-k+1 >= j ) {
-			j = j + 20;
-			local = g_realloc(local,j);
-		}
-		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && ((i == 0) || ( strchr("\\",in[i-1]))) ) {
-			k++;
-			local[i-k] = in[i];
-		} else {
-			local[i-k] = in[i];
-		}
-	}
-	local[i-k] = '\0';
-	
-	return local;
+    str = g_string_new("");
+
+    for (src = in; *src != '\0'; src++) {
+        if (src[0] == '\\' && strchr(" \t*|;<>~#()?[]{}&", src[1])) {
+            g_string_append_c(str, src[1]);
+            src++;
+        } else {
+            g_string_append_c(str, src[0]);
+        }
+    }
+
+    result = str->str;
+    g_string_free(str, FALSE);
+    return result;
 }
-
 /* To be compatible with the general posix command lines we have to escape *
  * strings for the command line											   */
 char *
 escape_string ( const char * in ) {
-	char * local = NULL;
-	int i = 0;
-	int j = 20;
-	int k = 0;
+	GString *str;
+	const char * src;
+	char *result;
 
-	local = g_malloc(j);
+	str = g_string_new("");
 
-	for (i=0;i<strlen(in);i++) {
-		if (i+k+1 >= j ) { //If 20 chars is too low for the path
-			j = j + 20;
-			local = g_realloc(local,j);
-		}
-		if ( (strchr(" \t*|;<>~#()?[]{}&",in[i])) && ((i == 0) || (! strchr("\\",in[i-1]))) ) {
-			local[i+k] = 92; // Ascii for "\"
-			k = k+1;
-			local[i+k] = in[i];
+	for (src = in;src[0] != '\0';src++) {
+		if ( (src[-1] != '\\') && strchr(" \t*|;<>~#()?[]{}&",src[0])) {
+			g_string_append_c(str,'\\');
+			g_string_append_c(str,src[0]);
 		} else {
-			local[i+k] = in[i];
+			g_string_append_c(str,src[0]);
 		}
 	}
-	local[i+k] = '\0';
 
-	return local;
+	result = str->str;
+	g_string_free(str, FALSE);
+	return result;
 }
