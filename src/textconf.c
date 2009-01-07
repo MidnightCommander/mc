@@ -58,19 +58,11 @@ static const char *const features[] = {
 
 #ifdef HAVE_SLANG
 
-#   ifdef HAVE_SYSTEM_SLANG
     N_("Using system-installed S-Lang library"),
-#   else
-    N_("Using included S-Lang library"),
-#   endif
 
     " ",
 
-#ifdef USE_TERMCAP
-    N_("with termcap database"),
-#else
     N_("with terminfo database"),
-#endif
 
 #elif defined(USE_NCURSES)
     N_("Using the ncurses library"),

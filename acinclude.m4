@@ -362,7 +362,7 @@ AC_DEFUN([MC_SLANG_TERMCAP], [
 ])
 
 dnl
-dnl Common code for MC_WITH_SLANG and MC_WITH_MCSLANG
+dnl Common code for MC_WITH_SLANG
 dnl
 AC_DEFUN([_MC_WITH_XSLANG], [
     screen_type=slang
@@ -373,7 +373,7 @@ AC_DEFUN([_MC_WITH_XSLANG], [
 
 dnl
 dnl Check if the system S-Lang library can be used.
-dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
+dnl If not, and $1 is "strict", exit.
 dnl
 AC_DEFUN([MC_WITH_SLANG], [
     with_screen=slang
@@ -383,7 +383,7 @@ AC_DEFUN([MC_WITH_SLANG], [
     AC_CHECK_HEADERS([slang.h slang/slang.h],
 		     [slang_h_found=yes; break])
     if test -z "$slang_h_found"; then
-	with_screen=mcslang
+	AC_MSG_ERROR([Slang header not found])
     fi
 
     dnl Check if termcap is needed.
@@ -395,78 +395,23 @@ AC_DEFUN([MC_WITH_SLANG], [
     dnl Check the library
     if test x$with_screen = xslang; then
 	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
-		     [with_screen=mcslang], ["$MCLIBS"])
+		     AC_MSG_ERROR([Slang library not found]), ["$MCLIBS"])
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
     if test x$with_screen = xslang; then
-	:
-	m4_if([$1], strict, ,
-	      [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
-	    		    [AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
-it's not fully supported yet])
-	      with_screen=mcslang])])
+	AC_CHECK_LIB(
+	    [slang],
+	    [SLsmg_write_nwchars],
+	    [AC_MSG_ERROR([Rejecting S-Lang with UTF-8 support, it's not fully supported yet])])
     fi
 
     if test x$with_screen = xslang; then
-	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
-		  [Define to use S-Lang library installed on the system])
 	MC_SLANG_PRIVATE
 	screen_type=slang
 	screen_msg="S-Lang library (installed on the system)"
     else
-	m4_if([$1], strict,
-	    [if test $with_screen != slang; then
-		AC_MSG_ERROR([S-Lang library not found])
-	    fi],
-	    [MC_WITH_MCSLANG]
-	)
-    fi
-
-    _MC_WITH_XSLANG
-])
-
-
-dnl
-dnl Use the included S-Lang library.
-dnl
-AC_DEFUN([MC_WITH_MCSLANG], [
-    screen_type=mcslang
-    screen_msg="Included S-Lang library (mcslang)"
-
-    dnl Type checks from S-Lang sources
-    AC_CHECK_SIZEOF(short, 2)
-    AC_CHECK_SIZEOF(int, 4)
-    AC_CHECK_SIZEOF(long, 4)
-    AC_CHECK_SIZEOF(float, 4)
-    AC_CHECK_SIZEOF(double, 8)
-    AC_TYPE_OFF_T
-    AC_CHECK_SIZEOF(off_t)
-    AC_CHECK_TYPES(long long)
-    AC_CHECK_SIZEOF(long long)
-    AC_CHECK_FUNCS(atexit on_exit)
-
-    # Search for terminfo database.
-    use_terminfo=
-    if test x"$with_termcap" != xyes; then
-	if test x"$with_termcap" = xno; then
-	    use_terminfo=yes
-	fi
-	if test -n "$TERMINFO" && test -r "$TERMINFO/v/vt100"; then
-	    use_terminfo=yes
-	fi
-	for dir in "/usr/share/terminfo" "/usr/lib/terminfo" \
-		   "/usr/share/lib/terminfo" "/etc/terminfo" \
-		   "/usr/local/lib/terminfo" "$HOME/.terminfo"; do
-	    if test -r "$dir/v/vt100"; then
-		use_terminfo=yes
-	    fi
-	done
-    fi
-
-    # If there is no terminfo, use termcap
-    if test -z "$use_terminfo"; then
-	MC_USE_TERMCAP
+	AC_MSG_ERROR([S-Lang library not found])
     fi
 
     _MC_WITH_XSLANG

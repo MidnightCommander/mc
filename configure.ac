@@ -184,12 +184,6 @@ AC_CHECK_FUNCS([\
 	tcgetattr tcsetattr truncate \
 ])
 
-dnl S-Lang needs all four functions to be defined to use POSIX signal API
-AC_CHECK_FUNCS([sigaction sigemptyset sigprocmask sigaddset], , [slang_signals=no])
-if test x$slang_signals != xno; then
-    AC_DEFINE(SLANG_POSIX_SIGNALS, 1, [Define to use POSIX signal API in S-Lang])
-fi
-
 dnl
 dnl getpt is a GNU Extension (glibc 2.1.x)
 dnl
@@ -454,18 +448,15 @@ subshell="$result"
 
 
 dnl
-dnl Select the screen library.  mcslang is the included S-Lang library.
+dnl Select the screen library.
 dnl
 AC_ARG_WITH(screen,
-	[  --with-screen=LIB        Compile with screen library: slang, mcslang or
-                           ncurses [[slang if found, else mcslang]]])
+	[  --with-screen=LIB        Compile with screen library: slang or
+                           ncurses [[slang if found]]])
 
 case x$with_screen in
 xslang)
 	MC_WITH_SLANG(strict)
-	;;
-xmcslang)
-	MC_WITH_MCSLANG
 	;;
 xncurses)
 	MC_WITH_NCURSES
@@ -477,18 +468,6 @@ x)
 	AC_MSG_ERROR([Value of the screen library is incorrect])
 	;;
 esac
-
-
-dnl
-dnl Force using termcap.  This option is processed in MC_WITH_MCSLANG.
-dnl Report an error if this option is not applicable.
-dnl
-AC_ARG_WITH(termcap,
-	[  --with-termcap           Try using termcap database [[only if no terminfo]]],
-	[if test x$with_screen != xmcslang; then
-		AC_MSG_ERROR([Option `--with-termcap' only works with `--with-screen=mcslang'])
-	fi
-])
 
 
 dnl
@@ -574,7 +553,6 @@ AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
-AM_CONDITIONAL(INCLUDED_SLANG, [test "x$with_screen" = xmcslang])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
@@ -589,7 +567,6 @@ vfs/Makefile
 vfs/extfs/Makefile
 lib/Makefile
 src/Makefile
-slang/Makefile 
 edit/Makefile 
 syntax/Makefile
 m4/Makefile
