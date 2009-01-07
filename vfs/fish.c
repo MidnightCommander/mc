@@ -347,10 +347,6 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
 
     return flags;
 }
-static char *
-fish_get_unquoted_filename(char *_filename){
-    return g_strdup(_filename);
-}
 
 static int
 fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
@@ -361,7 +357,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     FILE *logfile;
     char *quoted_path;
     int reply_code;
-    int ls_use_Qopt=FALSE;
+
     logfile = MEDATA->logfile;
 
     print_vfs_message(_("fish: Reading directory %s..."), remote_path);
@@ -370,54 +366,24 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     dir->timestamp.tv_sec += fish_directory_timeout;
     quoted_path = name_quote (remote_path, 0);
     fish_command (me, super, NONE,
-"#LIST /%s \n\
-dr=%s \n\
-if ls -1 /$dr >/dev/null 2>&1 ; then \n\
-    Qopt=\"\"\n\
-    if ls -1 -Q >/dev/null 2>&1; then\n\
-	Qopt=\"Q\"\n\
-	echo \"##! qopt\"\n\
-    fi\n\
-    if test -z \"\"; then \n\
-	ls -lLan$Qopt \"/$dr\" 2>/dev/null | grep '^[^cbt]' | ( \n\
-	    while read p l u g s m d y n; do \n\
-		echo \"P$p $u.$g\" \n\
-		echo \"S$s\" \n\
-		echo \"d$m $d $y\" \n\
-		if test -L \"/$dr/$n\"; then \n\
-		    echo \"L\"$n \n\
-		fi \n\
-		echo \":$n\" \n\
-		echo \"\" \n\
-	    done \n\
-	) \n\
-    else \n\
-	ls -lan$Qopt \"/$dr\" 2>/dev/null | grep '^[^cbt]' | ( \n\
-	    while read p l u g s m d y n; do \n\
-	    echo \"P$p $u.$g\" \n\
-	    echo \"S$s\" \n\
-	    echo \"d$m $d $y\" \n\
-	    echo \":$n\" \n\
-	    echo \"\" \n\
-	    done \n\
-	) \n\
-    fi \n\
-    ls -lLan$Qopt \"/$dr\" 2>/dev/null | grep '^[cb]' | ( \n\
-        while read p l u g a i m d y n; do \n\
-	    echo \"P$p $u.$g\" \n\
-	    echo \"E$a$i\" \n\
-	    echo \"d$m $d $y\" \n\
-	    echo \":$n\" \n\
-	    echo \"\" \n\
-	done \n\
-    ) \n\
-    echo '### 200' \n\
-else \n\
-    echo '### 500' \n\
-fi \n\
-",
-remote_path, quoted_path);
-
+	    "#LIST /%s\n"
+	    "if ls -1 /%s >/dev/null 2>&1 ;\n"
+	    "then\n"
+	    "ls -lan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
+	      "while read p l u g s m d y n; do\n"
+	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
+	      "done\n"
+	    ")\n"
+	    "ls -lan /%s 2>/dev/null | grep '^[cb]' | (\n"
+	      "while read p l u g a i m d y n; do\n"
+	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
+	      "done\n"
+	    ")\n"
+	    "echo '### 200'\n"
+	    "else\n"
+	    "echo '### 500'\n"
+	    "fi\n",
+	    remote_path, quoted_path, quoted_path, quoted_path);
     g_free (quoted_path);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
@@ -431,10 +397,6 @@ remote_path, quoted_path);
 	    fputs (buffer, logfile);
             fputs ("\n", logfile);
 	    fflush (logfile);
-	}
-	if (!strncmp(buffer, "##! qopt", 8)){
-	    ls_use_Qopt=TRUE;
-	    continue;
 	}
 	if (!strncmp(buffer, "### ", 4))
 	    break;
@@ -456,25 +418,19 @@ remote_path, quoted_path);
 	    if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
 			break;  /* We'll do . and .. ourself */
 
-		if (S_ISLNK(ST.st_mode) && ! ent->ino->linkname) {
-			
+		if (S_ISLNK(ST.st_mode)) {
 			while (*copy_buffer){
 				if (strncmp(copy_buffer," -> ",4)==0)
 					filename = copy_buffer;
 				copy_buffer++;
 			}
 			int f_size = filename - linkname;
-			ent->name = g_malloc(f_size+1);
+			ent->name = malloc(f_size+1);
 			strncpy(ent->name,linkname,f_size);
 			ent->name[f_size] = '\0';
-			ent->ino->linkname = g_strdup(filename + 4);
+			ent->ino->linkname = strdup(filename + 4);
 		} else {
 			ent->name = g_strdup(buffer+1);
-		}
-		if (ls_use_Qopt){
-		    char *quoted_str = ent->name;
-		    ent->name = fish_get_unquoted_filename (quoted_str);
-		    g_free(quoted_str);
 		}
 		break;
 	}
@@ -513,14 +469,6 @@ remote_path, quoted_path);
 		      ST.st_rdev = makedev (maj, min);
 #endif
 	          }
-	case 'L':
-		ent->ino->linkname = g_strdup(buffer+1); 
-		if (ls_use_Qopt){
-		    char *quoted_str = ent->ino->linkname;
-		    ent->ino->linkname = fish_get_unquoted_filename (quoted_str);
-		    g_free(quoted_str);
-		}
-		break;
 	}
     }
     
