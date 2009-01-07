@@ -1537,7 +1537,7 @@ unescape_string(const char *in) {
     str = g_string_new("");
 
     for (src = in; *src != '\0'; src++) {
-        if (src[0] == '\\' && strchr(" \t*|;<>~#()?[]{}&", src[1])) {
+        if (src[0] == '\\' && strchr(" !#$%&'()*;<>?[]`{|}~", src[1])) {
             g_string_append_c(str, src[1]);
             src++;
         } else {
@@ -1560,7 +1560,7 @@ escape_string ( const char * in ) {
 	str = g_string_new("");
 
 	for (src = in;src[0] != '\0';src++) {
-		if ( (src[-1] != '\\') && strchr(" \t*|;<>~#()?[]{}&",src[0])) {
+		if ( (src[-1] != '\\') && strchr(" !#$%&'()*;<>?[]`{|}~",src[0])) {
 			g_string_append_c(str,'\\');
 			g_string_append_c(str,src[0]);
 		} else {
