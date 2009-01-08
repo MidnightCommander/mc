@@ -1096,22 +1096,23 @@ edit_move_backward_lots (WEdit *edit, long increment)
 #endif		/* ! FAST_MOVE_CURSOR */
 
 /* moves the cursor right or left: increment positive or negative respectively */
-int edit_cursor_move (WEdit * edit, long increment)
+void edit_cursor_move (WEdit * edit, long increment)
 {
 /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
-    int c = -3;
+    int c;
 
 #ifdef FAST_MOVE_CURSOR
     if (increment < -256) {
 	edit->force |= REDRAW_PAGE;
-	return edit_move_backward_lots (edit, -increment);
+	edit_move_backward_lots (edit, -increment);
+	return;
     }
 #endif		/* ! FAST_MOVE_CURSOR */
 
     if (increment < 0) {
 	for (; increment < 0; increment++) {
 	    if (!edit->curs1)
-		return -1;
+		return;
 
 	    edit_push_action (edit, CURS_RIGHT);
 
@@ -1135,7 +1136,7 @@ int edit_cursor_move (WEdit * edit, long increment)
     } else if (increment > 0) {
 	for (; increment > 0; increment--) {
 	    if (!edit->curs2)
-		return -2;
+		return;
 
 	    edit_push_action (edit, CURS_LEFT);
 
@@ -1155,8 +1156,7 @@ int edit_cursor_move (WEdit * edit, long increment)
 		edit->force |= REDRAW_LINE_ABOVE;
 	    }
 	}
-	}
-	return c;
+    }
 }
 
 /* These functions return positions relative to lines */
