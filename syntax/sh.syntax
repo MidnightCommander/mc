@@ -1,3 +1,8 @@
+#   Since I regulary update ths file, please send any comments
+#   to:           Michelle Konzack <linux4michelle@freenet.de>
+#   Last Update:  Thu, 01 Jun 2006 22:10:07 +0200
+
+
 context default
     keyword ;; brightred
     keyword \\@ brightred
@@ -8,12 +13,12 @@ context default
     keyword \\` brightred
     keyword ` brightred
     keyword ; brightcyan
-    keyword $( brightcyan
-    keyword ( brightcyan
-    keyword ) brightcyan
+    keyword $(*) brightgreen
     keyword ${*} brightgreen
     keyword { brightcyan
     keyword } brightcyan
+
+    keyword whole linestart #!\[\s\]*\n brightcyan black
 
     keyword $\* brightred
     keyword $@ brightred
@@ -22,7 +27,12 @@ context default
     keyword $- brightred
     keyword $$ brightred
     keyword $! brightred
-    keyword whole $_ brightred
+    keyword $_ brightred
+
+    keyword whole 2>&1 brightred
+    keyword whole 1>&2 brightred
+    keyword whole 2>   brightred
+    keyword whole 1>   brightred
 
     keyword wholeright $\[0123456789\] brightred
 
@@ -36,134 +46,1042 @@ context default
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole alias yellow
-    keyword whole bg yellow
     keyword whole break yellow
     keyword whole case yellow
+    keyword whole clear         yellow
     keyword whole continue yellow
+    keyword whole declare       yellow
     keyword whole done yellow
     keyword whole do yellow
     keyword whole elif yellow
     keyword whole else yellow
     keyword whole esac yellow
-    keyword whole eval yellow
-    keyword whole exec yellow
     keyword whole exit yellow
-    keyword whole export yellow
-    keyword whole fg yellow
     keyword whole fi yellow
     keyword whole for yellow
+    keyword whole getopts       yellow
     keyword whole if yellow
     keyword whole in yellow
-    keyword whole read yellow
     keyword whole return yellow
     keyword whole select yellow
-    keyword whole set yellow
     keyword whole shift yellow
+    keyword whole source        yellow
     keyword whole then yellow
     keyword whole trap yellow
-    keyword whole umask yellow
-    keyword whole unset yellow
     keyword whole until yellow
     keyword whole wait yellow
     keyword whole while yellow
 
+    keyword whole accept        cyan
+    keyword whole accessdb      cyan
+    keyword whole activate      cyan
+    keyword whole addgroup      cyan
+    keyword whole add-shell     cyan
+    keyword whole adduser       cyan
+    keyword whole anytopnm      cyan
+    keyword whole apropos       cyan
+    keyword whole apt-cache     cyan
+    keyword whole apt-cdrom     cyan
+    keyword whole apt-config    cyan
+    keyword whole apt-file      cyan
+    keyword whole apt-ftparchive cyan
+    keyword whole apt-get       cyan
+    keyword whole aptitude      cyan
+    keyword whole apt-sortpkgs  cyan
+    keyword whole apt-source    cyan
+    keyword whole ar            cyan
     keyword whole arch cyan
+    keyword whole arp           cyan
+    keyword whole as            cyan
     keyword whole ash cyan
+    keyword whole at            cyan
+    keyword whole atd           cyan
+    keyword whole atrun         cyan
+    keyword whole atq           cyan
+    keyword whole autoconf      cyan
+    keyword whole autoheader    cyan
+    keyword whole automake      cyan
+    keyword whole autopoint     cyan
+    keyword whole autoscan      cyan
     keyword whole awk cyan
+    keyword whole badblocks     cyan
+    keyword whole base64-decode cyan
+    keyword whole base64-encode cyan
     keyword whole basename cyan
     keyword whole bash cyan
+    keyword whole batch         cyan
+    keyword whole bc            cyan
     keyword whole bg_backup cyan
     keyword whole bg_restore cyan
+    keyword whole blockdev      cyan
+    keyword whole bootlogd      cyan
+    keyword whole bsd-write     cyan
     keyword whole bsh cyan
+    keyword whole bunzip2       cyan
+    keyword whole bzcat         cyan
+    keyword whole bzcmp         cyan
+    keyword whole bzdiff        cyan
+    keyword whole bzegrep       cyan
+    keyword whole bzexe         cyan
+    keyword whole bzfgrep       cyan
+    keyword whole bzgrep        cyan
+    keyword whole bzip          cyan
+    keyword whole bzip2         cyan
+    keyword whole bzip2recover  cyan
+    keyword whole bzless        cyan
+    keyword whole bzmore        cyan
+    keyword whole cabextract    cyan
+    keyword whole cal           cyan
+    keyword whole calendar      cyan
+    keyword whole cam           cyan
+    keyword whole cancel        cyan
+    keyword whole captoinfo     cyan
     keyword whole cat cyan
+    keyword whole catchsegv     cyan
+    keyword whole catman        cyan
     keyword whole cd cyan
+    keyword whole cdda2ogg      cyan
+    keyword whole cdda2mp3      cyan
+    keyword whole cdda2wav      cyan
+    keyword whole cdrecord      cyan
+    keyword whole cfdisk        cyan
+    keyword whole chage         cyan
+    keyword whole charset       cyan
+    keyword whole chattr        cyan
+    keyword whole checkbashisms cyan
+    keyword whole chfn          cyan
     keyword whole chgrp cyan
+    keyword whole chkdupexe     cyan
     keyword whole chmod cyan
     keyword whole chown cyan
+    keyword whole chpasswd      cyan
+    keyword whole chroot        cyan
+    keyword whole chsh          cyan
+    keyword whole chvt          cyan
+    keyword whole cksum         cyan
+    keyword whole clear         cyan
+    keyword whole cmp           cyan
+    keyword whole codepage      cyan
+    keyword whole col           cyan
+    keyword whole colcrt        cyan
+    keyword whole colrm         cyan
+    keyword whole column        cyan
+    keyword whole comm          cyan
+    keyword whole compose       cyan
+    keyword whole compress      cyan
+    keyword whole consolechars  cyan
     keyword whole cp cyan
+    keyword whole cpan          cyan
+    keyword whole cpgr          cyan
     keyword whole cpio cyan
+    keyword whole cpp           cyan
+    keyword whole cramfsck      cyan
+    keyword whole createdb      cyan
+    keyword whole createlang    cyan
+    keyword whole createuser    cyan
+    keyword whole c_rehash      cyan
+    keyword whole crontab       cyan
     keyword whole csh cyan
+    keyword whole csplit        cyan
+    keyword whole cupsaccept    cyan
+    keyword whole cupsaddsmb    cyan
+    keyword whole cupsd         cyan
+    keyword whole cupsreject    cyan
+    keyword whole curl          cyan
+    keyword whole cut           cyan
     keyword whole date cyan
+    keyword whole dash          cyan
+    keyword whole dch           cyan
     keyword whole dd cyan
+    keyword whole deallocvt     cyan
+    keyword whole debugfs       cyan
+    keyword whole delgroup      cyan
+    keyword whole deluser       cyan
+    keyword whole depmod        cyan
+    keyword whole devdump       cyan
     keyword whole df cyan
+    keyword whole dialog        cyan
+    keyword whole diff          cyan
+    keyword whole diff3         cyan
+    keyword whole dir           cyan
+    keyword whole dircolors     cyan
+    keyword whole directomatic  cyan
+    keyword whole dirname       cyan
+    keyword whole dirsplit      cyan
+    keyword whole disable       cyan
+    keyword whole diskd         cyan
+    keyword whole diskseekd     cyan
+    keyword whole disown        cyan
     keyword whole dmesg cyan
     keyword whole dnsdomainname cyan
     keyword whole doexec cyan
     keyword whole domainname cyan
+    keyword whole dosfsck       cyan
+    keyword whole dotextwrap    cyan
+    keyword whole dotlockfile   cyan
+    keyword whole dpasswd       cyan
+    keyword whole dpkg          cyan
+    keyword whole dpkg-architekture cyan
+    keyword whole dpkg-buildpackage cyan
+    keyword whole dpkg-deb      cyan
+    keyword whole dpkg-name     cyan
+    keyword whole dpkg-query    cyan
+    keyword whole dpkg-reconfigure cyan
+    keyword whole dpkg-scanpackages cyan
+    keyword whole dpkg-scansources cyan
+    keyword whole dpkg-split    cyan
+    keyword whole dpkg-source   cyan
+    keyword whole dropdb        cyan
+    keyword whole droplang      cyan
+    keyword whole dropuser      cyan
+    keyword whole dscverify     cyan
+    keyword whole du            cyan
+    keyword whole dumpe2fs      cyan
+    keyword whole dumpkeys      cyan
+    keyword whole dvipdf        cyan
+    keyword whole e2fsck        cyan
+    keyword whole e2image       cyan
+    keyword whole e2label       cyan
     keyword whole echo cyan
     keyword whole ed cyan
+    keyword whole edit          cyan
+    keyword whole editor        cyan
     keyword whole egrep cyan
+    keyword whole eject         cyan
+    keyword whole enable        cyan
+    keyword whole env           cyan
+    keyword whole envsubst      cyan
+    keyword whole eqn           cyan
+    keyword whole eval_gettext  cyan
     keyword whole ex cyan
+    keyword whole expand        cyan
+    keyword whole expiry        cyan
+    keyword whole expr          cyan
+    keyword whole factor        cyan
+    keyword whole fakeroot      cyan
+    keyword whole faillog       cyan
     keyword whole false cyan
+    keyword whole fbset         cyan
+    keyword whole fc-cache      cyan
+    keyword whole fc-list       cyan
+    keyword whole fc-match      cyan
+    keyword whole fdformat      cyan
+    keyword whole fdisk         cyan
+    keyword whole fdlist        cyan
+    keyword whole fdmount       cyan
+    keyword whole fdmountd      cyan
+    keyword whole fdrawcmd      cyan
+    keyword whole fdumount      cyan
+    keyword whole fetchmail     cyan
+    keyword whole fgconsole     cyan
     keyword whole fgrep cyan
+    keyword whole file          cyan
+    keyword whole filefrag      cyan
     keyword whole find cyan
+    keyword whole find2perl     cyan
+    keyword whole findfs        cyan
+    keyword whole fitstopnm     cyan
+    keyword whole floppycontrol cyan
+    keyword whole floppymeter   cyan
+    keyword whole fmt           cyan
+    keyword whole fold          cyan
+    keyword whole font2psf      cyan
+    keyword whole formail       cyan
+    keyword whole fping         cyan
+    keyword whole fping6        cyan
+    keyword whole free          cyan
+    keyword whole freeze        cyan
+    keyword whole fribidi       cyan
+    keyword whole from          cyan
+    keyword whole fsck          cyan
+    keyword whole fsck.cramfs   cyan
+    keyword whole fsck.ext2     cyan
+    keyword whole fsck.ext3     cyan
+    keyword whole fsck.minix    cyan
+    keyword whole fsck.msdos    cyan
+    keyword whole fsck.nfs      cyan
+    keyword whole fsck.vfat     cyan
     keyword whole fsconf cyan
+    keyword whole funzip        cyan
+    keyword whole fuser         cyan
+    keyword whole fvwm          cyan
     keyword whole gawk cyan
+    keyword whole gdb           cyan
+    keyword whole gdbtui        cyan
+    keyword whole gcc           cyan
+    keyword whole gcov          cyan
+    keyword whole genksyms      cyan
+    keyword whole getconf       cyan
+    keyword whole getent        cyan
+    keyword whole getfdprm      cyan
+    keyword whole getkeycodes   cyan
+    keyword whole getopt        cyan
+    keyword whole gettext       cyan
+    keyword whole gettextize    cyan
+    keyword whole getty         cyan
+    keyword whole gpasswd       cyan
+    keyword whole gpgsplit      cyan
+    keyword whole gpgv          cyan
+    keyword whole gprof         cyan
     keyword whole grep cyan
+    keyword whole groff         cyan
+    keyword whole groupadd      cyan
+    keyword whole groupdel      cyan
+    keyword whole groupmod      cyan
+    keyword whole groups        cyan
+    keyword whole grpck         cyan
+    keyword whole grpconv       cyan
+    keyword whole grpunconv     cyan
+    keyword whole gs            cyan
+    keyword whole gsbj          cyan
+    keyword whole gsdj          cyan
+    keyword whole gsdj500       cyan
+    keyword whole gs-gpl        cyan
+    keyword whole gslj          cyan
+    keyword whole gslp          cyan
+    keyword whole gsmctl        cyan
+    keyword whole gsmpb         cyan
+    keyword whole gsmsendsms    cyan
+    keyword whole gsmsiectl     cyan
+    keyword whole gsmsiexfer    cyan
+    keyword whole gsmsmsd       cyan
+    keyword whole gsmsmsstore   cyan
+    keyword whole gsnd          cyan
     keyword whole gunzip cyan
+    keyword whole gzexe         cyan
     keyword whole gzip cyan
+    keyword whole ha            cyan
+    keyword whole halt          cyan
+    keyword whole hd            cyan
+    keyword whole hdparm        cyan
+    keyword whole hddtemp       cyan
+    keyword whole head          cyan
+    keyword whole hexdump       cyan
+    keyword whole hman          cyan
+    keyword whole host          cyan
+    keyword whole hostid        cyan
     keyword whole hostname cyan
+    keyword whole hotkeys       cyan
+    keyword whole html2text     cyan
+    keyword whole hwclock       cyan
+    keyword whole iconv         cyan
+    keyword whole iconvconfig   cyan
+    keyword whole id            cyan
+    keyword whole ifconfig      cyan
+    keyword whole ifdown        cyan
+    keyword whole ifnames       cyan
+    keyword whole ifup          cyan
     keyword whole igawk cyan
+    keyword whole info          cyan
+    keyword whole infobrowser   cyan
+    keyword whole infocmp       cyan
+    keyword whole infokey       cyan
+    keyword whole infotocap     cyan
+    keyword whole init          cyan
+    keyword whole insmod        cyan
+    keyword whole install       cyan
+    keyword whole installkernel cyan
+    keyword whole install-menu  cyan
     keyword whole ipcalc cyan
+    keyword whole ipcs          cyan
+    keyword whole ipmaddr       cyan
+    keyword whole ippool        cyan
+    keyword whole iptables      cyan
+    keyword whole iptunnel      cyan
+    keyword whole isoinfo       cyan
+    keyword whole join          cyan
+    keyword whole kallsyms      cyan
+    keyword whole kbdconfig     cyan
+    keyword whole kbd_mode      cyan
+    keyword whole kbdrate       cyan
+    keyword whole klogd         cyan
+    keyword whole kernelversion cyan
     keyword whole kill cyan
+    keyword whole killall       cyan
     keyword whole ksh cyan
+    keyword whole ksyms         cyan
+    keyword whole lame          cyan
+    keyword whole last          cyan
+    keyword whole lastb         cyan
+    keyword whole lastlog       cyan
+    keyword whole ld            cyan
+    keyword whole ldconfig      cyan
+    keyword whole ldd           cyan
+    keyword whole less          cyan
+    keyword whole lessecho      cyan
+    keyword whole lessfile      cyan
+    keyword whole lesskey       cyan
+    keyword whole lesspipe      cyan
+    keyword whole lharc         cyan
+    keyword whole libtool       cyan
+    keyword whole lilo          cyan
+    keyword whole line          cyan
+    keyword whole link          cyan
+    keyword whole links2        cyan
+    keyword whole linux_logo    cyan
     keyword whole linuxconf cyan
+    keyword whole list_audio_tracks cyan
     keyword whole ln cyan
+    keyword whole loadkeys      cyan
+    keyword whole locale        cyan
+    keyword whole localedef     cyan
+    keyword whole locale-gen    cyan
+    keyword whole locate        cyan
+    keyword whole lockfile      cyan
+    keyword whole logger        cyan
     keyword whole login cyan
+    keyword whole logname       cyan
+    keyword whole logrotate     cyan
+    keyword whole logsave       cyan
+    keyword whole look          cyan
+    keyword whole lorder        cyan
+    keyword whole losetup       cyan
+    keyword whole lp            cyan
+    keyword whole lpadmin       cyan
+    keyword whole lpc           cyan
     keyword whole lpdconf cyan
+    keyword whole lpdomatic     cyan
+    keyword whole lpinfo        cyan
+    keyword whole lpmove        cyan
+    keyword whole lpoptions     cyan
+    keyword whole lppasswd      cyan
+    keyword whole lpq           cyan
+    keyword whole lpr           cyan
+    keyword whole lprm          cyan
+    keyword whole lprsetup      cyan
+    keyword whole lpstat        cyan
     keyword whole ls cyan
+    keyword whole lsattr        cyan
+    keyword whole lsmod         cyan
+    keyword whole lspci         cyan
+    keyword whole lsusb         cyan
+    keyword whole lynx          cyan
+    keyword whole MAKEDEV       cyan
+    keyword whole MAKEFLOPPIES  cyan
     keyword whole mail cyan
+    keyword whole mailq         cyan
+    keyword whole mailstat      cyan
+    keyword whole mailx         cyan
+    keyword whole make          cyan
+    keyword whole make-kpkg     cyan
+    keyword whole man           cyan
+    keyword whole man2html      cyan
+    keyword whole manpath       cyan
+    keyword whole mawk          cyan
+    keyword whole mc            cyan
+    keyword whole mcedit        cyan
+    keyword whole mcookie       cyan
+    keyword whole mcview        cyan
+    keyword whole mcmfmt        cyan
+    keyword whole memstat       cyan
+    keyword whole mergechanges cyan
+    keyword whole mesg          cyan
+    keyword whole mev           cyan
+    keyword whole mkboot        cyan
+    keyword whole mkfifo        cyan
+    keyword whole mkhybrid      cyan
+    keyword whole mkisofs       cyan
+    keyword whole mk_modmap     cyan
+    keyword whole mkpasswd      cyan
+    keyword whole mii-tool      cyan
+    keyword whole mimedecode    cyan
+    keyword whole mkcramfs      cyan
     keyword whole mkdir cyan
+    keyword whole mkdirhier     cyan
+    keyword whole mkfs          cyan
+    keyword whole mkfs.cramfs   cyan
+    keyword whole mkfs.ext2     cyan
+    keyword whole mkfs.ext3     cyan
+    keyword whole mkfs.minix    cyan
+    keyword whole mkfs.msdos    cyan
+    keyword whole mkfs.vfat     cyan
+    keyword whole mke2fs        cyan
+    keyword whole mkdosfs       cyan
+    keyword whole mkinitrd      cyan
     keyword whole mknod cyan
+    keyword whole mkrescue      cyan
+    keyword whole mkswap        cyan
     keyword whole mktemp cyan
+    keyword whole modconf       cyan
+    keyword whole modinfo       cyan
+    keyword whole modprobe      cyan
     keyword whole more cyan
     keyword whole mount cyan
+    keyword whole mountpoint    cyan
+    keyword whole mozilla       cyan
+    keyword whole mp3info       cyan
+    keyword whole mpexpand      cyan
+    keyword whole munpack       cyan
+    keyword whole msgattrib     cyan
+    keyword whole msgcat        cyan
+    keyword whole msgcmp        cyan
+    keyword whole msgcomm       cyan
+    keyword whole msgconv       cyan
+    keyword whole msgen         cyan
+    keyword whole msgexec       cyan
+    keyword whole msgfilter     cyan
+    keyword whole msgfmt        cyan
+    keyword whole msggrep       cyan
+    keyword whole msginit       cyan
+    keyword whole msgmerge      cyan
+    keyword whole msgunfmt      cyan
+    keyword whole msguniq       cyan
+    keyword whole msmtp         cyan
     keyword whole mt cyan
+    keyword whole mt-gnu        cyan
+    keyword whole mtrace        cyan
+    keyword whole mute          cyan
+    keyword whole mutt          cyan
     keyword whole mv cyan
+    keyword whole nameif        cyan
+    keyword whole namei         cyan
+    keyword whole nano          cyan
+    keyword whole nawk          cyan
+    keyword whole ncal          cyan
+    keyword whole neqn          cyan
     keyword whole netconf cyan
     keyword whole netstat cyan
+    keyword whole newaliases    cyan
+    keyword whole newgrp        cyan
+    keyword whole newusers      cyan
+    keyword whole nex           cyan
+    keyword whole nfsstat       cyan
+    keyword whole ngettext      cyan
     keyword whole nice cyan
     keyword whole nisdomainname cyan
+    keyword whole nl            cyan
+    keyword whole nm            cyan
+    keyword whole nohup         cyan
+    keyword whole nroff         cyan
+    keyword whole nsmod         cyan
+    keyword whole nvi           cyan
+    keyword whole nview         cyan
+    keyword whole objcopy       cyan
+    keyword whole objdump       cyan
+    keyword whole od            cyan
+    keyword whole ogg123        cyan
+    keyword whole oggdec        cyan
+    keyword whole oggenc        cyan
+    keyword whole ogginfo       cyan
+    keyword whole open          cyan
+    keyword whole openvt        cyan
+    keyword whole pager         cyan
+    keyword whole pam_getenv    cyan
+    keyword whole paperconf     cyan
+    keyword whole par           cyan
+    keyword whole passwd        cyan
+    keyword whole paste         cyan
+    keyword whole patch         cyan
+    keyword whole pathchk       cyan
+    keyword whole pcimodules    cyan
+    keyword whole pcretest      cyan
+    keyword whole pdfinfo       cyan
+    keyword whole perl          cyan
+    keyword whole perldoc       cyan
+    keyword whole pg            cyan
+    keyword whole pgrep         cyan
+    keyword whole pic           cyan
+    keyword whole pico          cyan
+    keyword whole piconv        cyan
+    keyword whole pidof         cyan
+    keyword whole pinfo         cyan
     keyword whole ping cyan
+    keyword whole pkill         cyan
+    keyword whole pmap          cyan
+    keyword whole portmap       cyan
+    keyword whole poweroff      cyan
+    keyword whole pr            cyan
+    keyword whole print         cyan
+    keyword whole printenv      cyan
+    keyword whole printf        cyan
+    keyword whole procmail      cyan
+    keyword whole prove         cyan
     keyword whole ps cyan
+    keyword whole psed          cyan
+    keyword whole psql          cyan
+    keyword whole pstree        cyan
+    keyword whole pstruct       cyan
+    keyword whole ptx           cyan
+    keyword whole pwconv        cyan
+    keyword whole pwck          cyan
     keyword whole pwd cyan
+    keyword whole pwunconv      cyan
+    keyword whole ramsize       cyan
+    keyword whole ranlib        cyan
+    keyword whole rar           cyan
+    keyword whole rarp          cyan
+    keyword whole raw           cyan
+    keyword whole rbash         cyan
+    keyword whole rcp           cyan
+    keyword whole rdev          cyan
+    keyword whole readcd        cyan
+    keyword whole readelf       cyan
+    keyword whole readlink      cyan
+    keyword whole readprofile   cyan
+    keyword whole reboot        cyan
     keyword whole red cyan
+    keyword whole regcomp       cyan
+    keyword whole reject        cyan
     keyword whole remadmin cyan
+    keyword whole remove-shell  cyan
+    keyword whole rename        cyan
+    keyword whole renice        cyan
+    keyword whole reset         cyan
+    keyword whole resize2fs     cyan
+    keyword whole rev           cyan
+    keyword whole revpath       cyan
+    keyword whole rgrep         cyan
+    keyword whole rlogin        cyan
     keyword whole rm cyan
     keyword whole rmdir cyan
+    keyword whole rmmod         cyan
+    keyword whole rmt           cyan
+    keyword whole route         cyan
+    keyword whole rpcgen        cyan
+    keyword whole rpcinfo       cyan
+    keyword whole rplay         cyan
+    keyword whole rplayd        cyan
+    keyword whole rplaydsp      cyan
     keyword whole rpm cyan
+    keyword whole rpm2cpio      cyan
+    keyword whole rptp          cyan
+    keyword whole rsh           cyan
+    keyword whole rstartd       cyan
+    keyword whole runlevel      cyan
+    keyword whole run-mailcap   cyan
+    keyword whole run-parts     cyan
+    keyword whole savelog       cyan
+    keyword whole scanimage     cyan
+    keyword whole scanpci       cyan
+    keyword whole screendump    cyan
+    keyword whole script        cyan
+    keyword whole scriptreplay  cyan
+    keyword whole sdiff         cyan
     keyword whole sed cyan
+    keyword whole see           cyan
+    keyword whole sendmail      cyan
+    keyword whole seq           cyan
     keyword whole set cyan
+    keyword whole setfdprm      cyan
+    keyword whole setkeycodes   cyan
+    keyword whole setleds       cyan
+    keyword whole setlogcons    cyan
+    keyword whole setmetamode   cyan
+    keyword whole setpci        cyan
     keyword whole setserial cyan
+    keyword whole setsid        cyan
+    keyword whole setterm       cyan
+    keyword whole setvesablank  cyan
+    keyword whole setxkbmap     cyan
+    keyword whole sfdisk        cyan
+    keyword whole sftp          cyan
+    keyword whole sg            cyan
     keyword whole sh cyan
+    keyword whole sha1sum       cyan
+    keyword whole shadowconfig  cyan
+    keyword whole showcfont     cyan
+    keyword whole showkey       cyan
+    keyword whole showmount     cyan
+    keyword whole shred         cyan
+    keyword whole shutdown      cyan
+    keyword whole size          cyan
+    keyword whole skill         cyan
+    keyword whole slabtop       cyan
+    keyword whole slattach      cyan
     keyword whole sleep cyan
+    keyword whole slogin        cyan
+    keyword whole smime_keys    cyan
+    keyword whole snice         cyan
+    keyword whole soelim        cyan
     keyword whole sort cyan
+    keyword whole sa-learn      cyan
+    keyword whole spamassassin  cyan
+    keyword whole spamc         cyan
+    keyword whole spamd         cyan
+    keyword whole splain        cyan
+    keyword whole split         cyan
+    keyword whole ssh-add       cyan
+    keyword whole ssh-copy-id   cyan
+    keyword whole ssh-keygen    cyan
+    keyword whole ssh-keyscan   cyan
+    keyword whole ssmtp         cyan
+    keyword whole start-stop-daemon cyan
+    keyword whole stat          cyan
+    keyword whole strace        cyan
+    keyword whole strings       cyan
+    keyword whole strip         cyan
     keyword whole stty cyan
     keyword whole su cyan
+    keyword whole sulogin       cyan
+    keyword whole sum           cyan
+    keyword whole superformat   cyan
+    keyword whole su-to-root    cyan
+    keyword whole svlc          cyan
+    keyword whole swapoff       cyan
+    keyword whole swapon        cyan
     keyword whole sync cyan
+    keyword whole sysctl        cyan
+    keyword whole syslogd       cyan
+    keyword whole syslogd-listfiles cyan
+    keyword whole syslog-facility cyan
+    keyword whole tac           cyan
+    keyword whole tack          cyan
+    keyword whole tail          cyan
     keyword whole taper cyan
     keyword whole tar cyan
+    keyword whole tbl           cyan
+    keyword whole tcpdchk       cyan
+    keyword whole tcpdump       cyan
+    keyword whole tclsh         cyan
     keyword whole tcsh cyan
+    keyword whole tdbox         cyan
+    keyword whole tdcheckserver cyan
+    keyword whole tddebidate    cyan
+    keyword whole tdfileview    cyan
+    keyword whole tdfmlogstrip  cyan
+    keyword whole tdformail     cyan
+    keyword whole tdlinuxcounter cyan
+    keyword whole tdlinuxlogo   cyan
+    keyword whole tdmailblacklist cyan
+    keyword whole tdmailbody    cyan
+    keyword whole tdmailcopy    cyan
+    keyword whole tdmaildirmake cyan
+    keyword whole tdmailsubject cyan
+    keyword whole tdmailwhitelist cyan
+    keyword whole tdnewmsg      cyan
+    keyword whole tdsysbackup   cyan
+    keyword whole tee           cyan
+    keyword whole telinit       cyan
+    keyword whole telnet        cyan
     keyword whole test cyan
+    keyword whole tempfile      cyan
+    keyword whole tic           cyan
     keyword whole time cyan
+    keyword whole tload         cyan
+    keyword whole tnef          cyan
+    keyword whole toe           cyan
+    keyword whole toolame       cyan
+    keyword whole top           cyan
     keyword whole touch cyan
+    keyword whole tput          cyan
+    keyword whole tr            cyan
+    keyword whole troff         cyan
     keyword whole true cyan
+    keyword whole tset          cyan
+    keyword whole tsort         cyan
+    keyword whole tty           cyan
+    keyword whole tunctl        cyan
+    keyword whole tune2fs       cyan
+    keyword whole tunelp        cyan
+    keyword whole tzconfig      cyan
+    keyword whole tzselect      cyan
+    keyword whole tzsetup       cyan
+    keyword whole ucf           cyan
+    keyword whole ul            cyan
     keyword whole umount cyan
     keyword whole uname cyan
+    keyword whole unarj         cyan
+    keyword whole uncompress    cyan
+    keyword whole unexpand      cyan
+    keyword whole unicode_start cyan
+    keyword whole unicode_stop  cyan
+    keyword whole unix_chkpwd   cyan
+    keyword whole uniq          cyan
+    keyword whole unlink        cyan
+    keyword whole unzip         cyan
+    keyword whole unzipsfx      cyan
+    keyword whole updatedb      cyan
+    keyword whole update-menus  cyan
+    keyword whole update-modules cyan
+    keyword whole update-pciids cyan
+    keyword whole uprecords     cyan
+    keyword whole uptime        cyan
+    keyword whole urlview       cyan
+    keyword whole usbmodules    cyan
+    keyword whole uscan         cyan
+    keyword whole useradd       cyan
     keyword whole userconf cyan
+    keyword whole userdel       cyan
+    keyword whole usermod       cyan
+    keyword whole users         cyan
     keyword whole usleep cyan
+    keyword whole uufilter      cyan
+    keyword whole uuidgen       cyan
+    keyword whole vacuumdb      cyan
+    keyword whole validlocale   cyan
+    keyword whole vcstime       cyan
+    keyword whole vcut          cyan
+    keyword whole vdir          cyan
     keyword whole vi cyan
+    keyword whole vidmode       cyan
     keyword whole view cyan
+    keyword whole vigr          cyan
     keyword whole vim cyan
+    keyword whole vipw          cyan
+    keyword whole vlc           cyan
+    keyword whole vmstat        cyan
+    keyword whole volname       cyan
+    keyword whole vorbiscomment cyan
+    keyword whole vt-is-UTF8    cyan
+    keyword whole w             cyan
+    keyword whole wall          cyan
+    keyword whole watch         cyan
+    keyword whole wc            cyan
+    keyword whole wget          cyan
+    keyword whole whatis        cyan
+    keyword whole whereis       cyan
+    keyword whole which         cyan
+    keyword whole whiptail      cyan
+    keyword whole who           cyan
+    keyword whole whoami        cyan
+    keyword whole whois         cyan
+    keyword whole wish          cyan
+    keyword whole write         cyan
+    keyword whole writevt       cyan
+    keyword whole wvWare        cyan
+    keyword whole wxvlc         cyan
+    keyword whole xargs         cyan
+    keyword whole xbmbrowser    cyan
+    keyword whole xbindkeys     cyan
     keyword whole xconf cyan
+    keyword whole xdfcopy       cyan
+    keyword whole xdfformat     cyan
+    keyword whole Xdialog       cyan
+    keyword whole xgettext      cyan
+    keyword whole xloadimage    cyan
+    keyword whole xmessage      cyan
+    keyword whole xmodmap       cyan
+    keyword whole xmms          cyan
+    keyword whole xpmroot       cyan
+    keyword whole xrdb          cyan
+    keyword whole xset          cyan
+    keyword whole xsetbg        cyan
+    keyword whole xsetmode      cyan
+    keyword whole xsetpointer   cyan
+    keyword whole xsetroot      cyan
+    keyword whole xterm         cyan
+    keyword whole xview         cyan
+    keyword whole xwd           cyan
+    keyword whole xwud          cyan
+    keyword whole xzgv          cyan
+    keyword whole yes           cyan
     keyword whole ypdomainname cyan
+    keyword whole yydecode      cyan
     keyword whole zcat cyan
+    keyword whole zcmp          cyan
+    keyword whole zdiff         cyan
+    keyword whole zdump         cyan
+    keyword whole zegrep        cyan
+    keyword whole zfgrep        cyan
+    keyword whole zforce        cyan
+    keyword whole zgrep         cyan
+    keyword whole zgv           cyan
+    keyword whole zic           cyan
+    keyword whole zip           cyan
+    keyword whole zipcloak      cyan
+    keyword whole zipgrep       cyan
+    keyword whole zipinfo       cyan
+    keyword whole zipnote       cyan
+    keyword whole zipsplit      cyan
+    keyword whole zless         cyan
+    keyword whole zmore         cyan
+    keyword whole znew          cyan
+    keyword whole zoo           cyan
     keyword whole zsh cyan
+    keyword whole zsoelim       cyan
+    keyword whole zxpdf         cyan
+
+    keyword whole pamcut        cyan
+    keyword whole pamdeinterlace cyan
+    keyword whole pamdice       cyan
+    keyword whole pamfile       cyan
+    keyword whole pamoil        cyan
+    keyword whole pamstack      cyan
+    keyword whole pamstretch    cyan
+    keyword whole pamstretch-gen cyan
+
+    keyword whole pbmclean      cyan
+    keyword whole pbmlife       cyan
+    keyword whole pbmmake       cyan
+    keyword whole pbmmask       cyan
+    keyword whole pbmpage       cyan
+    keyword whole pbmpscale     cyan
+    keyword whole pbmreduce     cyan
+    keyword whole pbmtext       cyan
+    keyword whole pbmtextps     cyan
+    keyword whole pbmupc        cyan
+
+    keyword whole pbmtoascii    cyan
+    keyword whole pbmtoepsi     cyan
+    keyword whole pbmtog3       cyan
+    keyword whole pbmtoicon     cyan
+    keyword whole pbmtolj       cyan
+    keyword whole pbmtomacp     cyan
+    keyword whole pbmtonokia    cyan
+    keyword whole pbmtopgm      cyan
+    keyword whole pbmtoplot     cyan
+    keyword whole pbmtoppa      cyan
+    keyword whole pbmtopsg3     cyan
+    keyword whole pbmtowbmp     cyan
+    keyword whole pbmtoxbm      cyan
+
+    keyword whole g3topbm       cyan
+    keyword whole thinkjettopbm cyan
+    keyword whole wbmptopbm     cyan
+    keyword whole xbmtopbm      cyan
+
+    keyword whole pgmbentley    cyan
+    keyword whole pgmcrater     cyan
+    keyword whole pgmedge       cyan
+    keyword whole pgmenhance    cyan
+    keyword whole pgmhist       cyan
+    keyword whole pgmkernel     cyan
+    keyword whole pgmnoise      cyan
+    keyword whole pgmnorm       cyan
+    keyword whole pgmoil        cyan
+    keyword whole pgmramp       cyan
+    keyword whole pgmslice      cyan
+    keyword whole pgmtexture    cyan
+
+    keyword whole pgmtopbm      cyan
+    keyword whole pgmtoppm      cyan
+
+    keyword whole asciitopgm    cyan
+    keyword whole bioradtopgm   cyan
+    keyword whole icontopgm     cyan
+    keyword whole jpegtopgm     cyan
+    keyword whole macptopgm     cyan
+    keyword whole rawtopgm      cyan
+
+    keyword whole pnmalias      cyan
+    keyword whole pnmarith      cyan
+    keyword whole pnmcat        cyan
+    keyword whole pnmcolormap   cyan
+    keyword whole pnmcomp       cyan
+    keyword whole pnmconvol     cyan
+    keyword whole pnmcrop       cyan
+    keyword whole pnmcut        cyan
+    keyword whole pnmdepth      cyan
+    keyword whole pnmenlarge    cyan
+    keyword whole pnmfile       cyan
+    keyword whole pnmflip       cyan
+    keyword whole pnmgamma      cyan
+    keyword whole pnmhisteq     cyan
+    keyword whole pnmhistmap    cyan
+    keyword whole pnmindex      cyan
+    keyword whole pnminterp     cyan
+    keyword whole pnminterp-gen cyan
+    keyword whole pnminvert     cyan
+    keyword whole pnmmargin     cyan
+    keyword whole pnmmontage    cyan
+    keyword whole pnmnlfilt     cyan
+    keyword whole pnmnoraw      cyan
+    keyword whole pnmnorm       cyan
+    keyword whole pnmpad        cyan
+    keyword whole pnmpaste      cyan
+    keyword whole pnmpsnr       cyan
+    keyword whole pnmquant      cyan
+    keyword whole pnmremap      cyan
+    keyword whole pnmrotate     cyan
+    keyword whole pnmscale      cyan
+    keyword whole pnmscalefixed cyan
+    keyword whole pnmshear      cyan
+    keyword whole pnmsmooth     cyan
+    keyword whole pnmsplit      cyan
+    keyword whole pnmtile       cyan
+
+    keyword whole pnmtofits     cyan
+    keyword whole pnmtojpeg     cyan
+    keyword whole pnmtopalm     cyan
+    keyword whole pnmtoplainpnm cyan
+    keyword whole pnmtopng      cyan
+    keyword whole pnmtops       cyan
+    keyword whole pnmtorle      cyan
+    keyword whole pnmtotiff     cyan
+    keyword whole pnmtoxwd      cyan
+
+    keyword whole bpmtopnm      cyan
+    keyword whole giftopnm      cyan
+    keyword whole palmtopnm     cyan
+    keyword whole pngtopnm      cyan
+    keyword whole pstopnm       cyan
+    keyword whole rletopnm      cyan
+    keyword whole tifftopnm     cyan
+    keyword whole xwdtopnm      cyan
+
+    keyword whole ppm3d         cyan
+    keyword whole ppmbrighten   cyan
+    keyword whole ppmchange     cyan
+    keyword whole ppmcie        cyan
+    keyword whole ppmcolormask  cyan
+    keyword whole ppmcolors     cyan
+    keyword whole ppmdim        cyan
+    keyword whole ppmdist       cyan
+    keyword whole ppmdither     cyan
+    keyword whole ppmfade       cyan
+    keyword whole ppmflash      cyan
+    keyword whole ppmforge      cyan
+    keyword whole ppmhist       cyan
+    keyword whole ppmlabel      cyan
+    keyword whole ppmmake       cyan
+    keyword whole ppmmix        cyan
+    keyword whole ppmnorm       cyan
+    keyword whole ppmntsc       cyan
+    keyword whole ppmpat        cyan
+    keyword whole ppmquant      cyan
+    keyword whole ppmquantall   cyan
+    keyword whole ppmqvgq       cyan
+    keyword whole ppmrainbow    cyan
+    keyword whole ppmrelief     cyan
+    keyword whole ppmshadow     cyan
+    keyword whole ppmshift      cyan
+    keyword whole ppmspread     cyan
+    keyword whole ppmtv         cyan
+
+    keyword whole ppmtoacad     cyan
+    keyword whole ppmtobmp      cyan
+    keyword whole ppmtogif      cyan
+    keyword whole ppmtojpeg     cyan
+    keyword whole ppmtolj       cyan
+    keyword whole ppmtomap      cyan
+    keyword whole ppmtompeg     cyan
+    keyword whole ppmtopcx      cyan
+    keyword whole ppmtopgm      cyan
+    keyword whole ppmtorgb3     cyan
+    keyword whole ppmtowinicon  cyan
+    keyword whole ppmtoxpm      cyan
+
+    keyword whole bpmtoppm      cyan
+    keyword whole pcxtoppm      cyan
+    keyword whole pdftoppm      cyan
+    keyword whole pjtoppm       cyan
+    keyword whole rawtoppm      cyan
+    keyword whole rgb3toppm     cyan
+    keyword whole winicontoppm  cyan
+    keyword whole xpmtoppm      cyan
+    keyword whole xvminitoppm   cyan
+
+    keyword whole gpg     red
+    keyword whole md5sum  red
+    keyword whole openssl red
+    keyword whole ssh     red
+    keyword whole scp     red
+
+    keyword whole gettext.sh    magenta
+    keyword whole TEXTDOMAINDIR magenta
+    keyword whole TEXTDOMAIN    magenta
+    keyword whole VERSION       magenta
+
+    keyword whole /dev/audio  brightblue
+    keyword whole /dev/dsp    brightblue
+    keyword whole /dev/null   brightblue
+    keyword whole /dev/mixed  brightblue
+    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/stdout brightblue
+    keyword whole /dev/stderr brightblue
+    keyword whole /dev/zero   brightblue
 
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
-
-context linestart #! \n brightcyan black
 
 context # \n brown
     spellcheck
@@ -215,6 +1133,10 @@ context exclusive ` ` lightgray black
     keyword $! brightred
     keyword $_ brightred
 
+    keyword whole 2>&1 brightred
+    keyword whole 2>   brightred
+    keyword whole 1>   brightred
+
     keyword wholeright $\[0123456789\] brightred
 
     keyword wholeright $+ brightgreen
@@ -225,7 +1147,9 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole break yellow
     keyword whole case yellow
+    keyword whole clear         yellow
     keyword whole continue yellow
+    keyword whole declare       yellow
     keyword whole done yellow
     keyword whole do yellow
     keyword whole elif yellow
@@ -234,105 +1158,1024 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole exit yellow
     keyword whole fi yellow
     keyword whole for yellow
+    keyword whole getopts       yellow
     keyword whole if yellow
     keyword whole in yellow
     keyword whole return yellow
     keyword whole select yellow
     keyword whole shift yellow
+    keyword whole source        yellow
     keyword whole then yellow
     keyword whole trap yellow
     keyword whole until yellow
+    keyword whole wait          yellow
     keyword whole while yellow
 
+    keyword whole accept        cyan
+    keyword whole accessdb      cyan
+    keyword whole activate      cyan
+    keyword whole addgroup      cyan
+    keyword whole add-shell     cyan
+    keyword whole adduser       cyan
+    keyword whole anytopnm      cyan
+    keyword whole apropos       cyan
+    keyword whole apt-cache     cyan
+    keyword whole apt-cdrom     cyan
+    keyword whole apt-config    cyan
+    keyword whole apt-file      cyan
+    keyword whole apt-ftparchive cyan
+    keyword whole apt-get       cyan
+    keyword whole aptitude      cyan
+    keyword whole apt-sortpkgs  cyan
+    keyword whole apt-source    cyan
+    keyword whole ar            cyan
     keyword whole arch cyan
+    keyword whole arp           cyan
+    keyword whole as            cyan
     keyword whole ash cyan
+    keyword whole at            cyan
+    keyword whole atd           cyan
+    keyword whole atrun         cyan
+    keyword whole atq           cyan
+    keyword whole autoconf      cyan
+    keyword whole autoheader    cyan
+    keyword whole automake      cyan
+    keyword whole autopoint     cyan
+    keyword whole autoscan      cyan
     keyword whole awk cyan
+    keyword whole badblocks     cyan
+    keyword whole base64-decode cyan
+    keyword whole base64-encode cyan
     keyword whole basename cyan
     keyword whole bash cyan
+    keyword whole batch         cyan
+    keyword whole bc            cyan
     keyword whole bg_backup cyan
     keyword whole bg_restore cyan
+    keyword whole blockdev      cyan
+    keyword whole bootlogd      cyan
+    keyword whole bsd-write     cyan
     keyword whole bsh cyan
+    keyword whole bunzip2       cyan
+    keyword whole bzcat         cyan
+    keyword whole bzcmp         cyan
+    keyword whole bzdiff        cyan
+    keyword whole bzegrep       cyan
+    keyword whole bzexe         cyan
+    keyword whole bzfgrep       cyan
+    keyword whole bzgrep        cyan
+    keyword whole bzip          cyan
+    keyword whole bzip2         cyan
+    keyword whole bzip2recover  cyan
+    keyword whole bzless        cyan
+    keyword whole bzmore        cyan
+    keyword whole cabextract    cyan
+    keyword whole cal           cyan
+    keyword whole calendar      cyan
+    keyword whole cam           cyan
+    keyword whole cancel        cyan
+    keyword whole captoinfo     cyan
     keyword whole cat cyan
+    keyword whole catchsegv     cyan
+    keyword whole catman        cyan
     keyword whole cd cyan
+    keyword whole cdda2ogg      cyan
+    keyword whole cdda2mp3      cyan
+    keyword whole cdda2wav      cyan
+    keyword whole cdrecord      cyan
+    keyword whole cfdisk        cyan
+    keyword whole chage         cyan
+    keyword whole charset       cyan
+    keyword whole chattr        cyan
+    keyword whole checkbashisms cyan
+    keyword whole chfn          cyan
     keyword whole chgrp cyan
+    keyword whole chkdupexe     cyan
     keyword whole chmod cyan
     keyword whole chown cyan
+    keyword whole chpasswd      cyan
+    keyword whole chroot        cyan
+    keyword whole chsh          cyan
+    keyword whole chvt          cyan
+    keyword whole cksum         cyan
+    keyword whole clear         cyan
+    keyword whole cmp           cyan
+    keyword whole codepage      cyan
+    keyword whole col           cyan
+    keyword whole colcrt        cyan
+    keyword whole colrm         cyan
+    keyword whole column        cyan
+    keyword whole comm          cyan
+    keyword whole compose       cyan
+    keyword whole compress      cyan
+    keyword whole consolechars  cyan
     keyword whole cp cyan
+    keyword whole cpan          cyan
+    keyword whole cpgr          cyan
     keyword whole cpio cyan
+    keyword whole cpp           cyan
+    keyword whole cramfsck      cyan
+    keyword whole createdb      cyan
+    keyword whole createlang    cyan
+    keyword whole createuser    cyan
+    keyword whole c_rehash      cyan
+    keyword whole crontab       cyan
     keyword whole csh cyan
+    keyword whole csplit        cyan
+    keyword whole cupsaccept    cyan
+    keyword whole cupsaddsmb    cyan
+    keyword whole cupsd         cyan
+    keyword whole cupsreject    cyan
+    keyword whole curl          cyan
+    keyword whole cut           cyan
     keyword whole date cyan
+    keyword whole dash          cyan
+    keyword whole dch           cyan
     keyword whole dd cyan
+    keyword whole deallocvt     cyan
+    keyword whole debugfs       cyan
+    keyword whole delgroup      cyan
+    keyword whole deluser       cyan
+    keyword whole depmod        cyan
+    keyword whole devdump       cyan
     keyword whole df cyan
+    keyword whole dialog        cyan
+    keyword whole diff          cyan
+    keyword whole diff3         cyan
+    keyword whole dir           cyan
+    keyword whole dircolors     cyan
+    keyword whole directomatic  cyan
+    keyword whole dirname       cyan
+    keyword whole dirsplit      cyan
+    keyword whole disable       cyan
+    keyword whole diskd         cyan
+    keyword whole diskseekd     cyan
+    keyword whole disown        cyan
     keyword whole dmesg cyan
     keyword whole dnsdomainname cyan
     keyword whole doexec cyan
     keyword whole domainname cyan
+    keyword whole dosfsck       cyan
+    keyword whole dotextwrap    cyan
+    keyword whole dotlockfile   cyan
+    keyword whole dpasswd       cyan
+    keyword whole dpkg          cyan
+    keyword whole dpkg-architekture cyan
+    keyword whole dpkg-buildpackage cyan
+    keyword whole dpkg-deb      cyan
+    keyword whole dpkg-name     cyan
+    keyword whole dpkg-query    cyan
+    keyword whole dpkg-reconfigure cyan
+    keyword whole dpkg-scanpackages cyan
+    keyword whole dpkg-scansources cyan
+    keyword whole dpkg-split    cyan
+    keyword whole dpkg-source   cyan
+    keyword whole dropdb        cyan
+    keyword whole droplang      cyan
+    keyword whole dropuser      cyan
+    keyword whole dscverify     cyan
+    keyword whole du            cyan
+    keyword whole dumpe2fs      cyan
+    keyword whole dumpkeys      cyan
+    keyword whole dvipdf        cyan
+    keyword whole e2fsck        cyan
+    keyword whole e2image       cyan
+    keyword whole e2label       cyan
     keyword whole echo cyan
     keyword whole ed cyan
+    keyword whole edit          cyan
+    keyword whole editor        cyan
     keyword whole egrep cyan
+    keyword whole eject         cyan
+    keyword whole enable        cyan
+    keyword whole env           cyan
+    keyword whole envsubst      cyan
+    keyword whole eqn           cyan
+    keyword whole eval_gettext  cyan
     keyword whole ex cyan
+    keyword whole expand        cyan
+    keyword whole expiry        cyan
+    keyword whole expr          cyan
+    keyword whole factor        cyan
+    keyword whole fakeroot      cyan
+    keyword whole faillog       cyan
     keyword whole false cyan
+    keyword whole fbset         cyan
+    keyword whole fc-cache      cyan
+    keyword whole fc-list       cyan
+    keyword whole fc-match      cyan
+    keyword whole fdformat      cyan
+    keyword whole fdisk         cyan
+    keyword whole fdlist        cyan
+    keyword whole fdmount       cyan
+    keyword whole fdmountd      cyan
+    keyword whole fdrawcmd      cyan
+    keyword whole fdumount      cyan
+    keyword whole fetchmail     cyan
+    keyword whole fgconsole     cyan
     keyword whole fgrep cyan
+    keyword whole file          cyan
+    keyword whole filefrag      cyan
     keyword whole find cyan
+    keyword whole find2perl     cyan
+    keyword whole findfs        cyan
+    keyword whole fitstopnm     cyan
+    keyword whole floppycontrol cyan
+    keyword whole floppymeter   cyan
+    keyword whole fmt           cyan
+    keyword whole fold          cyan
+    keyword whole font2psf      cyan
+    keyword whole formail       cyan
+    keyword whole fping         cyan
+    keyword whole fping6        cyan
+    keyword whole free          cyan
+    keyword whole freeze        cyan
+    keyword whole fribidi       cyan
+    keyword whole from          cyan
+    keyword whole fsck          cyan
+    keyword whole fsck.cramfs   cyan
+    keyword whole fsck.ext2     cyan
+    keyword whole fsck.ext3     cyan
+    keyword whole fsck.minix    cyan
+    keyword whole fsck.msdos    cyan
+    keyword whole fsck.nfs      cyan
+    keyword whole fsck.vfat     cyan
     keyword whole fsconf cyan
+    keyword whole funzip        cyan
+    keyword whole fuser         cyan
+    keyword whole fvwm          cyan
     keyword whole gawk cyan
+    keyword whole gdb           cyan
+    keyword whole gdbtui        cyan
+    keyword whole gcc           cyan
+    keyword whole gcov          cyan
+    keyword whole genksyms      cyan
+    keyword whole getconf       cyan
+    keyword whole getent        cyan
+    keyword whole getfdprm      cyan
+    keyword whole getkeycodes   cyan
+    keyword whole getopt        cyan
+    keyword whole gettext       cyan
+    keyword whole gettextize    cyan
+    keyword whole getty         cyan
+    keyword whole gpasswd       cyan
+    keyword whole gpgsplit      cyan
+    keyword whole gpgv          cyan
+    keyword whole gprof         cyan
     keyword whole grep cyan
+    keyword whole groff         cyan
+    keyword whole groupadd      cyan
+    keyword whole groupdel      cyan
+    keyword whole groupmod      cyan
+    keyword whole groups        cyan
+    keyword whole grpck         cyan
+    keyword whole grpconv       cyan
+    keyword whole grpunconv     cyan
+    keyword whole gs            cyan
+    keyword whole gsbj          cyan
+    keyword whole gsdj          cyan
+    keyword whole gsdj500       cyan
+    keyword whole gs-gpl        cyan
+    keyword whole gslj          cyan
+    keyword whole gslp          cyan
+    keyword whole gsmctl        cyan
+    keyword whole gsmpb         cyan
+    keyword whole gsmsendsms    cyan
+    keyword whole gsmsiectl     cyan
+    keyword whole gsmsiexfer    cyan
+    keyword whole gsmsmsd       cyan
+    keyword whole gsmsmsstore   cyan
+    keyword whole gsnd          cyan
     keyword whole gunzip cyan
+    keyword whole gzexe         cyan
     keyword whole gzip cyan
+    keyword whole ha            cyan
+    keyword whole halt          cyan
+    keyword whole hd            cyan
+    keyword whole hdparm        cyan
+    keyword whole hddtemp       cyan
+    keyword whole head          cyan
+    keyword whole hexdump       cyan
+    keyword whole hman          cyan
+    keyword whole host          cyan
+    keyword whole hostid        cyan
     keyword whole hostname cyan
+    keyword whole hotkeys       cyan
+    keyword whole html2text     cyan
+    keyword whole hwclock       cyan
+    keyword whole iconv         cyan
+    keyword whole iconvconfig   cyan
+    keyword whole id            cyan
+    keyword whole ifconfig      cyan
+    keyword whole ifdown        cyan
+    keyword whole ifnames       cyan
+    keyword whole ifup          cyan
     keyword whole igawk cyan
+    keyword whole info          cyan
+    keyword whole infobrowser   cyan
+    keyword whole infocmp       cyan
+    keyword whole infokey       cyan
+    keyword whole infotocap     cyan
+    keyword whole init          cyan
+    keyword whole insmod        cyan
+    keyword whole install       cyan
+    keyword whole installkernel cyan
+    keyword whole install-menu  cyan
     keyword whole ipcalc cyan
+    keyword whole ipcs          cyan
+    keyword whole ipmaddr       cyan
+    keyword whole ippool        cyan
+    keyword whole iptables      cyan
+    keyword whole iptunnel      cyan
+    keyword whole isoinfo       cyan
+    keyword whole join          cyan
+    keyword whole kallsyms      cyan
+    keyword whole kbdconfig     cyan
+    keyword whole kbd_mode      cyan
+    keyword whole kbdrate       cyan
+    keyword whole klogd         cyan
+    keyword whole kernelversion cyan
     keyword whole kill cyan
+    keyword whole killall       cyan
     keyword whole ksh cyan
+    keyword whole ksyms         cyan
+    keyword whole lame          cyan
+    keyword whole last          cyan
+    keyword whole lastb         cyan
+    keyword whole lastlog       cyan
+    keyword whole ld            cyan
+    keyword whole ldconfig      cyan
+    keyword whole ldd           cyan
+    keyword whole less          cyan
+    keyword whole lessecho      cyan
+    keyword whole lessfile      cyan
+    keyword whole lesskey       cyan
+    keyword whole lesspipe      cyan
+    keyword whole lharc         cyan
+    keyword whole libtool       cyan
+    keyword whole lilo          cyan
+    keyword whole line          cyan
+    keyword whole link          cyan
+    keyword whole links2        cyan
+    keyword whole linux_logo    cyan
     keyword whole linuxconf cyan
+    keyword whole list_audio_tracks cyan
     keyword whole ln cyan
+    keyword whole loadkeys      cyan
+    keyword whole locale        cyan
+    keyword whole localedef     cyan
+    keyword whole locale-gen    cyan
+    keyword whole locate        cyan
+    keyword whole lockfile      cyan
+    keyword whole logger        cyan
     keyword whole login cyan
+    keyword whole logname       cyan
+    keyword whole logrotate     cyan
+    keyword whole logsave       cyan
+    keyword whole look          cyan
+    keyword whole lorder        cyan
+    keyword whole losetup       cyan
+    keyword whole lp            cyan
+    keyword whole lpadmin       cyan
+    keyword whole lpc           cyan
     keyword whole lpdconf cyan
+    keyword whole lpdomatic     cyan
+    keyword whole lpinfo        cyan
+    keyword whole lpmove        cyan
+    keyword whole lpoptions     cyan
+    keyword whole lppasswd      cyan
+    keyword whole lpq           cyan
+    keyword whole lpr           cyan
+    keyword whole lprm          cyan
+    keyword whole lprsetup      cyan
+    keyword whole lpstat        cyan
     keyword whole ls cyan
+    keyword whole lsattr        cyan
+    keyword whole lsmod         cyan
+    keyword whole lspci         cyan
+    keyword whole lsusb         cyan
+    keyword whole lynx          cyan
+    keyword whole MAKEDEV       cyan
+    keyword whole MAKEFLOPPIES  cyan
     keyword whole mail cyan
+    keyword whole mailq         cyan
+    keyword whole mailstat      cyan
+    keyword whole mailx         cyan
+    keyword whole make          cyan
+    keyword whole make-kpkg     cyan
+    keyword whole man           cyan
+    keyword whole man2html      cyan
+    keyword whole manpath       cyan
+    keyword whole mawk          cyan
+    keyword whole mc            cyan
+    keyword whole mcedit        cyan
+    keyword whole mcookie       cyan
+    keyword whole mcview        cyan
+    keyword whole mcmfmt        cyan
+    keyword whole memstat       cyan
+    keyword whole mergechanges cyan
+    keyword whole mesg          cyan
+    keyword whole mev           cyan
+    keyword whole mkboot        cyan
+    keyword whole mkfifo        cyan
+    keyword whole mkhybrid      cyan
+    keyword whole mkisofs       cyan
+    keyword whole mk_modmap     cyan
+    keyword whole mkpasswd      cyan
+    keyword whole mii-tool      cyan
+    keyword whole mimedecode    cyan
+    keyword whole mkcramfs      cyan
     keyword whole mkdir cyan
+    keyword whole mkdirhier     cyan
+    keyword whole mkfs          cyan
+    keyword whole mkfs.cramfs   cyan
+    keyword whole mkfs.ext2     cyan
+    keyword whole mkfs.ext3     cyan
+    keyword whole mkfs.minix    cyan
+    keyword whole mkfs.msdos    cyan
+    keyword whole mkfs.vfat     cyan
+    keyword whole mke2fs        cyan
+    keyword whole mkdosfs       cyan
+    keyword whole mkinitrd      cyan
     keyword whole mknod cyan
+    keyword whole mkrescue      cyan
+    keyword whole mkswap        cyan
     keyword whole mktemp cyan
+    keyword whole modconf       cyan
+    keyword whole modinfo       cyan
+    keyword whole modprobe      cyan
     keyword whole more cyan
     keyword whole mount cyan
+    keyword whole mountpoint    cyan
+    keyword whole mozilla       cyan
+    keyword whole mp3info       cyan
+    keyword whole mpexpand      cyan
+    keyword whole munpack       cyan
+    keyword whole msgattrib     cyan
+    keyword whole msgcat        cyan
+    keyword whole msgcmp        cyan
+    keyword whole msgcomm       cyan
+    keyword whole msgconv       cyan
+    keyword whole msgen         cyan
+    keyword whole msgexec       cyan
+    keyword whole msgfilter     cyan
+    keyword whole msgfmt        cyan
+    keyword whole msggrep       cyan
+    keyword whole msginit       cyan
+    keyword whole msgmerge      cyan
+    keyword whole msgunfmt      cyan
+    keyword whole msguniq       cyan
+    keyword whole msmtp         cyan
     keyword whole mt cyan
+    keyword whole mt-gnu        cyan
+    keyword whole mtrace        cyan
+    keyword whole mute          cyan
+    keyword whole mutt          cyan
     keyword whole mv cyan
+    keyword whole nameif        cyan
+    keyword whole namei         cyan
+    keyword whole nano          cyan
+    keyword whole nawk          cyan
+    keyword whole ncal          cyan
+    keyword whole neqn          cyan
     keyword whole netconf cyan
     keyword whole netstat cyan
+    keyword whole newaliases    cyan
+    keyword whole newgrp        cyan
+    keyword whole newusers      cyan
+    keyword whole nex           cyan
+    keyword whole nfsstat       cyan
+    keyword whole ngettext      cyan
     keyword whole nice cyan
     keyword whole nisdomainname cyan
+    keyword whole nl            cyan
+    keyword whole nm            cyan
+    keyword whole nohup         cyan
+    keyword whole nroff         cyan
+    keyword whole nsmod         cyan
+    keyword whole nvi           cyan
+    keyword whole nview         cyan
+    keyword whole objcopy       cyan
+    keyword whole objdump       cyan
+    keyword whole od            cyan
+    keyword whole ogg123        cyan
+    keyword whole oggdec        cyan
+    keyword whole oggenc        cyan
+    keyword whole ogginfo       cyan
+    keyword whole open          cyan
+    keyword whole openvt        cyan
+    keyword whole pager         cyan
+    keyword whole pam_getenv    cyan
+    keyword whole paperconf     cyan
+    keyword whole par           cyan
+    keyword whole passwd        cyan
+    keyword whole paste         cyan
+    keyword whole patch         cyan
+    keyword whole pathchk       cyan
+    keyword whole pcimodules    cyan
+    keyword whole pcretest      cyan
+    keyword whole pdfinfo       cyan
+    keyword whole perl          cyan
+    keyword whole perldoc       cyan
+    keyword whole pg            cyan
+    keyword whole pgrep         cyan
+    keyword whole pic           cyan
+    keyword whole pico          cyan
+    keyword whole piconv        cyan
+    keyword whole pidof         cyan
+    keyword whole pinfo         cyan
     keyword whole ping cyan
+    keyword whole pkill         cyan
+    keyword whole pmap          cyan
+    keyword whole portmap       cyan
+    keyword whole poweroff      cyan
+    keyword whole pr            cyan
+    keyword whole print         cyan
+    keyword whole printenv      cyan
+    keyword whole printf        cyan
+    keyword whole procmail      cyan
+    keyword whole prove         cyan
     keyword whole ps cyan
+    keyword whole psed          cyan
+    keyword whole psql          cyan
+    keyword whole pstree        cyan
+    keyword whole pstruct       cyan
+    keyword whole ptx           cyan
+    keyword whole pwconv        cyan
+    keyword whole pwck          cyan
     keyword whole pwd cyan
+    keyword whole pwunconv      cyan
+    keyword whole ramsize       cyan
+    keyword whole ranlib        cyan
+    keyword whole rar           cyan
+    keyword whole rarp          cyan
+    keyword whole raw           cyan
+    keyword whole rbash         cyan
+    keyword whole rcp           cyan
+    keyword whole rdev          cyan
+    keyword whole readcd        cyan
+    keyword whole readelf       cyan
+    keyword whole readlink      cyan
+    keyword whole readprofile   cyan
+    keyword whole reboot        cyan
     keyword whole red cyan
+    keyword whole regcomp       cyan
+    keyword whole reject        cyan
     keyword whole remadmin cyan
+    keyword whole remove-shell  cyan
+    keyword whole rename        cyan
+    keyword whole renice        cyan
+    keyword whole reset         cyan
+    keyword whole resize2fs     cyan
+    keyword whole rev           cyan
+    keyword whole revpath       cyan
+    keyword whole rgrep         cyan
+    keyword whole rlogin        cyan
     keyword whole rm cyan
     keyword whole rmdir cyan
+    keyword whole rmmod         cyan
+    keyword whole rmt           cyan
+    keyword whole route         cyan
+    keyword whole rpcgen        cyan
+    keyword whole rpcinfo       cyan
+    keyword whole rplay         cyan
+    keyword whole rplayd        cyan
+    keyword whole rplaydsp      cyan
     keyword whole rpm cyan
+    keyword whole rpm2cpio      cyan
+    keyword whole rptp          cyan
+    keyword whole rsh           cyan
+    keyword whole rstartd       cyan
+    keyword whole runlevel      cyan
+    keyword whole run-mailcap   cyan
+    keyword whole run-parts     cyan
+    keyword whole savelog       cyan
+    keyword whole scanimage     cyan
+    keyword whole scanpci       cyan
+    keyword whole screendump    cyan
+    keyword whole script        cyan
+    keyword whole scriptreplay  cyan
+    keyword whole sdiff         cyan
     keyword whole sed cyan
+    keyword whole see           cyan
+    keyword whole sendmail      cyan
+    keyword whole seq           cyan
     keyword whole set cyan
+    keyword whole setfdprm      cyan
+    keyword whole setkeycodes   cyan
+    keyword whole setleds       cyan
+    keyword whole setlogcons    cyan
+    keyword whole setmetamode   cyan
+    keyword whole setpci        cyan
     keyword whole setserial cyan
+    keyword whole setsid        cyan
+    keyword whole setterm       cyan
+    keyword whole setvesablank  cyan
+    keyword whole setxkbmap     cyan
+    keyword whole sfdisk        cyan
+    keyword whole sftp          cyan
+    keyword whole sg            cyan
     keyword whole sh cyan
+    keyword whole sha1sum       cyan
+    keyword whole shadowconfig  cyan
+    keyword whole showcfont     cyan
+    keyword whole showkey       cyan
+    keyword whole showmount     cyan
+    keyword whole shred         cyan
+    keyword whole shutdown      cyan
+    keyword whole size          cyan
+    keyword whole skill         cyan
+    keyword whole slabtop       cyan
+    keyword whole slattach      cyan
     keyword whole sleep cyan
+    keyword whole slogin        cyan
+    keyword whole smime_keys    cyan
+    keyword whole snice         cyan
+    keyword whole soelim        cyan
     keyword whole sort cyan
+    keyword whole sa-learn      cyan
+    keyword whole spamassassin  cyan
+    keyword whole spamc         cyan
+    keyword whole spamd         cyan
+    keyword whole splain        cyan
+    keyword whole split         cyan
+    keyword whole ssh-add       cyan
+    keyword whole ssh-copy-id   cyan
+    keyword whole ssh-keygen    cyan
+    keyword whole ssh-keyscan   cyan
+    keyword whole ssmtp         cyan
+    keyword whole start-stop-daemon cyan
+    keyword whole stat          cyan
+    keyword whole strace        cyan
+    keyword whole strings       cyan
+    keyword whole strip         cyan
     keyword whole stty cyan
     keyword whole su cyan
+    keyword whole sulogin       cyan
+    keyword whole sum           cyan
+    keyword whole superformat   cyan
+    keyword whole su-to-root    cyan
+    keyword whole svlc          cyan
+    keyword whole swapoff       cyan
+    keyword whole swapon        cyan
     keyword whole sync cyan
+    keyword whole sysctl        cyan
+    keyword whole syslogd       cyan
+    keyword whole syslogd-listfiles cyan
+    keyword whole syslog-facility cyan
+    keyword whole tac           cyan
+    keyword whole tack          cyan
+    keyword whole tail          cyan
     keyword whole taper cyan
     keyword whole tar cyan
+    keyword whole tbl           cyan
+    keyword whole tcpdchk       cyan
+    keyword whole tcpdump       cyan
+    keyword whole tclsh         cyan
     keyword whole tcsh cyan
+    keyword whole tdbox         cyan
+    keyword whole tdcheckserver cyan
+    keyword whole tddebidate    cyan
+    keyword whole tdfileview    cyan
+    keyword whole tdfmlogstrip  cyan
+    keyword whole tdformail     cyan
+    keyword whole tdlinuxcounter cyan
+    keyword whole tdlinuxlogo   cyan
+    keyword whole tdmailblacklist cyan
+    keyword whole tdmailbody    cyan
+    keyword whole tdmailcopy    cyan
+    keyword whole tdmaildirmake cyan
+    keyword whole tdmailsubject cyan
+    keyword whole tdmailwhitelist cyan
+    keyword whole tdnewmsg      cyan
+    keyword whole tdsysbackup   cyan
+    keyword whole tee           cyan
+    keyword whole telinit       cyan
+    keyword whole telnet        cyan
     keyword whole test cyan
+    keyword whole tempfile      cyan
+    keyword whole tic           cyan
     keyword whole time cyan
+    keyword whole tload         cyan
+    keyword whole tnef          cyan
+    keyword whole toe           cyan
+    keyword whole toolame       cyan
+    keyword whole top           cyan
     keyword whole touch cyan
+    keyword whole tput          cyan
+    keyword whole tr            cyan
+    keyword whole troff         cyan
     keyword whole true cyan
+    keyword whole tset          cyan
+    keyword whole tsort         cyan
+    keyword whole tty           cyan
+    keyword whole tunctl        cyan
+    keyword whole tune2fs       cyan
+    keyword whole tunelp        cyan
+    keyword whole tzconfig      cyan
+    keyword whole tzselect      cyan
+    keyword whole tzsetup       cyan
+    keyword whole ucf           cyan
+    keyword whole ul            cyan
     keyword whole umount cyan
     keyword whole uname cyan
+    keyword whole unarj         cyan
+    keyword whole uncompress    cyan
+    keyword whole unexpand      cyan
+    keyword whole unicode_start cyan
+    keyword whole unicode_stop  cyan
+    keyword whole unix_chkpwd   cyan
+    keyword whole uniq          cyan
+    keyword whole unlink        cyan
+    keyword whole unzip         cyan
+    keyword whole unzipsfx      cyan
+    keyword whole updatedb      cyan
+    keyword whole update-menus  cyan
+    keyword whole update-modules cyan
+    keyword whole update-pciids cyan
+    keyword whole uprecords     cyan
+    keyword whole uptime        cyan
+    keyword whole urlview       cyan
+    keyword whole usbmodules    cyan
+    keyword whole uscan         cyan
+    keyword whole useradd       cyan
     keyword whole userconf cyan
+    keyword whole userdel       cyan
+    keyword whole usermod       cyan
+    keyword whole users         cyan
     keyword whole usleep cyan
+    keyword whole uufilter      cyan
+    keyword whole uuidgen       cyan
+    keyword whole vacuumdb      cyan
+    keyword whole validlocale   cyan
+    keyword whole vcstime       cyan
+    keyword whole vcut          cyan
+    keyword whole vdir          cyan
     keyword whole vi cyan
+    keyword whole vidmode       cyan
     keyword whole view cyan
+    keyword whole vigr          cyan
     keyword whole vim cyan
+    keyword whole vipw          cyan
+    keyword whole vlc           cyan
+    keyword whole vmstat        cyan
+    keyword whole volname       cyan
+    keyword whole vorbiscomment cyan
+    keyword whole vt-is-UTF8    cyan
+    keyword whole w             cyan
+    keyword whole wall          cyan
+    keyword whole watch         cyan
+    keyword whole wc            cyan
+    keyword whole wget          cyan
+    keyword whole whatis        cyan
+    keyword whole whereis       cyan
+    keyword whole which         cyan
+    keyword whole whiptail      cyan
+    keyword whole who           cyan
+    keyword whole whoami        cyan
+    keyword whole whois         cyan
+    keyword whole wish          cyan
+    keyword whole write         cyan
+    keyword whole writevt       cyan
+    keyword whole wvWare        cyan
+    keyword whole wxvlc         cyan
+    keyword whole xargs         cyan
+    keyword whole xbmbrowser    cyan
+    keyword whole xbindkeys     cyan
     keyword whole xconf cyan
+    keyword whole xdfcopy       cyan
+    keyword whole xdfformat     cyan
+    keyword whole Xdialog       cyan
+    keyword whole xgettext      cyan
+    keyword whole xloadimage    cyan
+    keyword whole xmessage      cyan
+    keyword whole xmodmap       cyan
+    keyword whole xmms          cyan
+    keyword whole xpmroot       cyan
+    keyword whole xrdb          cyan
+    keyword whole xset          cyan
+    keyword whole xsetbg        cyan
+    keyword whole xsetmode      cyan
+    keyword whole xsetpointer   cyan
+    keyword whole xsetroot      cyan
+    keyword whole xterm         cyan
+    keyword whole xview         cyan
+    keyword whole xwd           cyan
+    keyword whole xwud          cyan
+    keyword whole xzgv          cyan
+    keyword whole yes           cyan
     keyword whole ypdomainname cyan
+    keyword whole yydecode      cyan
     keyword whole zcat cyan
+    keyword whole zcmp          cyan
+    keyword whole zdiff         cyan
+    keyword whole zdump         cyan
+    keyword whole zegrep        cyan
+    keyword whole zfgrep        cyan
+    keyword whole zforce        cyan
+    keyword whole zgrep         cyan
+    keyword whole zgv           cyan
+    keyword whole zic           cyan
+    keyword whole zip           cyan
+    keyword whole zipcloak      cyan
+    keyword whole zipgrep       cyan
+    keyword whole zipinfo       cyan
+    keyword whole zipnote       cyan
+    keyword whole zipsplit      cyan
+    keyword whole zless         cyan
+    keyword whole zmore         cyan
+    keyword whole znew          cyan
+    keyword whole zoo           cyan
     keyword whole zsh cyan
+    keyword whole zsoelim       cyan
+    keyword whole zxpdf         cyan
+
+    keyword whole pamcut        cyan
+    keyword whole pamdeinterlace cyan
+    keyword whole pamdice       cyan
+    keyword whole pamfile       cyan
+    keyword whole pamoil        cyan
+    keyword whole pamstack      cyan
+    keyword whole pamstretch    cyan
+    keyword whole pamstretch-gen cyan
+
+    keyword whole pbmclean      cyan
+    keyword whole pbmlife       cyan
+    keyword whole pbmmake       cyan
+    keyword whole pbmmask       cyan
+    keyword whole pbmpage       cyan
+    keyword whole pbmpscale     cyan
+    keyword whole pbmreduce     cyan
+    keyword whole pbmtext       cyan
+    keyword whole pbmtextps     cyan
+    keyword whole pbmupc        cyan
+
+    keyword whole pbmtoascii    cyan
+    keyword whole pbmtoepsi     cyan
+    keyword whole pbmtog3       cyan
+    keyword whole pbmtoicon     cyan
+    keyword whole pbmtolj       cyan
+    keyword whole pbmtomacp     cyan
+    keyword whole pbmtonokia    cyan
+    keyword whole pbmtopgm      cyan
+    keyword whole pbmtoplot     cyan
+    keyword whole pbmtoppa      cyan
+    keyword whole pbmtopsg3     cyan
+    keyword whole pbmtowbmp     cyan
+    keyword whole pbmtoxbm      cyan
+
+    keyword whole g3topbm       cyan
+    keyword whole thinkjettopbm cyan
+    keyword whole wbmptopbm     cyan
+    keyword whole xbmtopbm      cyan
+
+    keyword whole pgmbentley    cyan
+    keyword whole pgmcrater     cyan
+    keyword whole pgmedge       cyan
+    keyword whole pgmenhance    cyan
+    keyword whole pgmhist       cyan
+    keyword whole pgmkernel     cyan
+    keyword whole pgmnoise      cyan
+    keyword whole pgmnorm       cyan
+    keyword whole pgmoil        cyan
+    keyword whole pgmramp       cyan
+    keyword whole pgmslice      cyan
+    keyword whole pgmtexture    cyan
+
+    keyword whole pgmtopbm      cyan
+    keyword whole pgmtoppm      cyan
+
+    keyword whole asciitopgm    cyan
+    keyword whole bioradtopgm   cyan
+    keyword whole icontopgm     cyan
+    keyword whole jpegtopgm     cyan
+    keyword whole macptopgm     cyan
+    keyword whole rawtopgm      cyan
+
+    keyword whole pnmalias      cyan
+    keyword whole pnmarith      cyan
+    keyword whole pnmcat        cyan
+    keyword whole pnmcolormap   cyan
+    keyword whole pnmcomp       cyan
+    keyword whole pnmconvol     cyan
+    keyword whole pnmcrop       cyan
+    keyword whole pnmcut        cyan
+    keyword whole pnmdepth      cyan
+    keyword whole pnmenlarge    cyan
+    keyword whole pnmfile       cyan
+    keyword whole pnmflip       cyan
+    keyword whole pnmgamma      cyan
+    keyword whole pnmhisteq     cyan
+    keyword whole pnmhistmap    cyan
+    keyword whole pnmindex      cyan
+    keyword whole pnminterp     cyan
+    keyword whole pnminterp-gen cyan
+    keyword whole pnminvert     cyan
+    keyword whole pnmmargin     cyan
+    keyword whole pnmmontage    cyan
+    keyword whole pnmnlfilt     cyan
+    keyword whole pnmnoraw      cyan
+    keyword whole pnmnorm       cyan
+    keyword whole pnmpad        cyan
+    keyword whole pnmpaste      cyan
+    keyword whole pnmpsnr       cyan
+    keyword whole pnmquant      cyan
+    keyword whole pnmremap      cyan
+    keyword whole pnmrotate     cyan
+    keyword whole pnmscale      cyan
+    keyword whole pnmscalefixed cyan
+    keyword whole pnmshear      cyan
+    keyword whole pnmsmooth     cyan
+    keyword whole pnmsplit      cyan
+    keyword whole pnmtile       cyan
+
+    keyword whole pnmtofits     cyan
+    keyword whole pnmtojpeg     cyan
+    keyword whole pnmtopalm     cyan
+    keyword whole pnmtoplainpnm cyan
+    keyword whole pnmtopng      cyan
+    keyword whole pnmtops       cyan
+    keyword whole pnmtorle      cyan
+    keyword whole pnmtotiff     cyan
+    keyword whole pnmtoxwd      cyan
+
+    keyword whole bpmtopnm      cyan
+    keyword whole giftopnm      cyan
+    keyword whole palmtopnm     cyan
+    keyword whole pngtopnm      cyan
+    keyword whole pstopnm       cyan
+    keyword whole rletopnm      cyan
+    keyword whole tifftopnm     cyan
+    keyword whole xwdtopnm      cyan
+
+    keyword whole ppm3d         cyan
+    keyword whole ppmbrighten   cyan
+    keyword whole ppmchange     cyan
+    keyword whole ppmcie        cyan
+    keyword whole ppmcolormask  cyan
+    keyword whole ppmcolors     cyan
+    keyword whole ppmdim        cyan
+    keyword whole ppmdist       cyan
+    keyword whole ppmdither     cyan
+    keyword whole ppmfade       cyan
+    keyword whole ppmflash      cyan
+    keyword whole ppmforge      cyan
+    keyword whole ppmhist       cyan
+    keyword whole ppmlabel      cyan
+    keyword whole ppmmake       cyan
+    keyword whole ppmmix        cyan
+    keyword whole ppmnorm       cyan
+    keyword whole ppmntsc       cyan
+    keyword whole ppmpat        cyan
+    keyword whole ppmquant      cyan
+    keyword whole ppmquantall   cyan
+    keyword whole ppmqvgq       cyan
+    keyword whole ppmrainbow    cyan
+    keyword whole ppmrelief     cyan
+    keyword whole ppmshadow     cyan
+    keyword whole ppmshift      cyan
+    keyword whole ppmspread     cyan
+    keyword whole ppmtv         cyan
+
+    keyword whole ppmtoacad     cyan
+    keyword whole ppmtobmp      cyan
+    keyword whole ppmtogif      cyan
+    keyword whole ppmtojpeg     cyan
+    keyword whole ppmtolj       cyan
+    keyword whole ppmtomap      cyan
+    keyword whole ppmtompeg     cyan
+    keyword whole ppmtopcx      cyan
+    keyword whole ppmtopgm      cyan
+    keyword whole ppmtorgb3     cyan
+    keyword whole ppmtowinicon  cyan
+    keyword whole ppmtoxpm      cyan
+
+    keyword whole bpmtoppm      cyan
+    keyword whole pcxtoppm      cyan
+    keyword whole pdftoppm      cyan
+    keyword whole pjtoppm       cyan
+    keyword whole rawtoppm      cyan
+    keyword whole rgb3toppm     cyan
+    keyword whole winicontoppm  cyan
+    keyword whole xpmtoppm      cyan
+    keyword whole xvminitoppm   cyan
+
+    keyword whole gpg     red
+    keyword whole md5sum  red
+    keyword whole openssl red
+    keyword whole ssh     red
+    keyword whole scp     red
+
+    keyword whole gettext.sh    magenta
+    keyword whole TEXTDOMAINDIR magenta
+    keyword whole TEXTDOMAIN    magenta
+    keyword whole VERSION       magenta
+
+    keyword whole /dev/audio  brightblue
+    keyword whole /dev/dsp    brightblue
+    keyword whole /dev/null   brightblue
+    keyword whole /dev/mixed  brightblue
+    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/stdout brightblue
+    keyword whole /dev/stderr brightblue
+    keyword whole /dev/zero   brightblue
