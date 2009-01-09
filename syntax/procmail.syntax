@@ -1,0 +1,271 @@
+#  procmail definition
+#  created by Michelle Konzack <linux4michelle@tamay-dogan.net>
+#  This definition is under the GNU GPL version 3.0.
+
+
+context default
+    keyword whole linestart #*procmail\n brightcyan black
+    keyword whole #*\n			brown
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+##############################################################
+#  Vars from procmail
+    keyword whole MAILDIR		brightgreen
+    keyword whole DEFAULT		brightgreen
+    keyword whole LOGFILE		brightgreen
+    keyword whole VERBOSE		brightgreen
+    keyword whole LOGABSTRACT		brightgreen
+    keyword whole LOG			brightgreen
+    keyword whole ORGMAIL		brightgreen
+    keyword whole LOCKFILE		brightgreen
+    keyword whole LOCKEXT		brightgreen
+    keyword whole LOCKSLEEP		brightgreen
+    keyword whole LOCKTIMEOUT		brightgreen
+    keyword whole TIMEOUT		brightgreen
+    keyword whole MSGPREFIX		brightgreen
+    keyword whole HOST			brightgreen
+    keyword whole UMASK			brightgreen
+    keyword whole SHELLMETAS		brightgreen
+    keyword whole SHELLFLAGS		brightgreen
+    keyword whole SENDMAIL		brightgreen
+    keyword whole SENDMAILFLAGS		brightgreen
+    keyword whole NORESRETRY		brightgreen
+    keyword whole SUSPEND		brightgreen
+    keyword whole LINEBUF		brightgreen
+    keyword whole DELIVERED		brightgreen
+    keyword whole TRAP			brightgreen
+    keyword whole EXITCODE		brightgreen
+    keyword whole LASTFOLDER		brightgreen
+    keyword whole MATCH			brightgreen
+    keyword whole SHIFT			brightgreen
+    keyword whole INCLUDERC		brightmagenta
+    keyword whole SWITCHRC		brightgreen
+    keyword whole PROCMAIL_VERSION	brightgreen
+    keyword whole PROCMAIL_OVERFLOW	brightgreen
+    keyword whole COMSAT		brightgreen
+    keyword whole DROPPRIVS		brightgreen
+    keyword whole LOGNAME		brightgreen
+    keyword whole HOME			brightgreen
+    keyword whole PATH			brightgreen
+    keyword whole SHELL			brightgreen
+
+    keyword whole ST			brightgreen
+    keyword whole STN			brightgreen
+    keyword whole NL			brightgreen
+
+##############################################################
+# Vars used by tdtools-procmail
+    keyword TDTP_DIRPREFIX		brightgreen
+    keyword TDTP_INC			brightgreen
+    keyword TDTP_DIR			brightgreen
+    keyword TDTP_USE_SEPARATOR		brightgreen
+    keyword TDTP_SHOW_MSGINFO		brightgreen
+    keyword TDTP_USE_SERNO		brightgreen
+    keyword TDTP_SERNO_MAX		brightgreen
+    keyword TDTP_LEFT_MAX		brightgreen
+    keyword TDTP_SHOW_FILTERS		brightgreen
+    keyword TDTP_USE_TAG_N_DROP		brightgreen
+    keyword TDTP_HITS_MIN		brightgreen
+    keyword TDTP_USE_L10N		brightgreen
+    keyword TDTP_USE_MAILHEADERS	brightgreen
+    keyword TDTP_DATE_PREFIX		brightgreen
+    keyword TDTP_USE_LISTDIR		brightgreen
+    keyword TDTP_LISTDIR_SEPARATOR	brightgreen
+    keyword TDTP_USE_EXPURGATE_BULK	brightgreen
+    keyword TDTP_SPAM_AT_END		brightgreen
+    keyword TDTP_MAXSIZE		brightgreen
+
+    keyword DATE_NOW_RFC		brightgreen
+    keyword DATE_NOW_SER		brightgreen
+    keyword FROM			brightgreen
+    keyword TO				brightgreen
+    keyword CC				brightgreen
+    keyword ENVTO			brightgreen
+    keyword SIZE			brightgreen
+    keyword DATE_DATE			brightgreen
+    keyword DATE_RFC			brightgreen
+    keyword DATE_SER			brightgreen
+    keyword DATE_RECV_RFC		brightgreen
+    keyword DATE_RECV_SER		brightgreen
+    keyword MSG_HOUR			brightgreen
+    keyword MSG_DAY			brightgreen
+    keyword MSG_WEEK			brightgreen
+    keyword MSG_MONTH			brightgreen
+    keyword MSG_YEAR			brightgreen
+    keyword TDTP_LISTDIR		brightgreen
+    keyword TDTP_NAME			brightgreen
+    keyword SPAMTAG			brightgreen
+    keyword FILTER			brightgreen
+    keyword TDTP_HITS_TOT		brightgreen
+
+    keyword whole linestart TDTP_L10N_*	brightgreen
+    keyword TDTP_L10N_LL_CC		brightgreen
+    keyword TDTP_L10N_LL		brightgreen
+    keyword TDTP_L10N_FILE		brightgreen
+
+    keyword TDTP_EMAIL_NET		brightgreen
+    keyword TDTP_EMAIL_TDAUTOBUILDER	brightgreen
+    keyword TDTP_EMAIL_TDCONTROL	brightgreen
+    keyword TDTP_EMAIL_TDAUTODOWNLOADER	brightgreen
+    keyword TDTP_EMAIL_BUSINESS		brightgreen
+    keyword TDTP_EMAIL_BTS_DEBIAN	brightgreen
+    keyword TDTP_EMAIL_ML		brightgreen
+    keyword TDTP_EMAIL_PRI		brightgreen
+
+    keyword tdmcRDATE			brightgreen
+    keyword tdmcSDATE			brightgreen
+    keyword tdmcNL			brightgreen
+
+    keyword USEWNAME			brightgreen
+    keyword USEWLIST			brightgreen
+    keyword WLIST			brightgreen
+    keyword USEBNAME			brightgreen
+    keyword USEBLIST			brightgreen
+    keyword BLIST			brightgreen
+    keyword USETNAME			brightgreen
+    keyword USETLIST			brightgreen
+    keyword TLIST			brightgreen
+    keyword USEHNAME			brightgreen
+    keyword USEHLIST			brightgreen
+    keyword HLIST			brightgreen
+
+    keyword RESULT			brightgreen
+    keyword PACKAGE			brightgreen
+    keyword SUB				brightgreen
+    keyword COUNT			brightgreen
+    keyword NEWMSG			brightgreen
+    keyword OLDMSG			brightgreen
+    keyword TMPMSG			brightgreen
+    keyword ADDR_ME			brightgreen
+    keyword ADDR_LISTS			brightgreen
+    keyword HIT				brightgreen
+    keyword STRING			brightgreen
+    keyword STRG			brightgreen
+    keyword SHOW_FILTER			brightgreen
+    keyword TMPSPAM			brightgreen
+
+##############################################################
+# Vars used by other recipes from the procmail mailinglist
+    keyword PROCMAIL_DIR	brightgreen
+    keyword PROCMAILDIR		brightgreen
+    keyword PROCDIR		brightgreen
+    keyword OCTET		brightgreen
+    keyword DOTQUAD		brightgreen
+    keyword RCVD		brightgreen
+    keyword RCVD_COUNT		brightgreen
+    keyword FROMX		brightgreen
+    keyword RETX		brightgreen
+    keyword GPGFROM		brightgreen
+    keyword GPGGET		brightgreen
+    keyword GPGEXP		brightgreen
+    keyword EMAIL		brightgreen
+    keyword DUMMY_EXEC		brightgreen
+    keyword DUMMY		brightgreen
+    keyword TMPVAL		brightgreen
+    keyword TMPVAR		brightgreen
+    keyword HOMEDIR		brightgreen
+    keyword NULL		brightgreen
+    keyword whole H_From*	brightgreen
+
+    keyword whole on		red
+    keyword whole true		red
+    keyword whole yes		red
+    keyword whole off		red
+    keyword whole false		red
+    keyword whole no		red
+    keyword whole all		red
+
+    keyword whole :0*\n		black magenta
+    keyword whole \**\n		cyan
+
+    keyword whole |*\n		yellow
+    keyword whole !*\n		brightblue
+
+    keyword ${*}		brightgreen
+
+    keyword `			brightred
+    keyword {			brightcyan
+    keyword }			brightcyan
+
+context  " "			green
+    keyword ${*}		brightgreen
+
+context exclusive ` `		lightgrey black
+    keyword '*'			green
+    keyword "			green
+    keyword \\`			brightred
+    keyword ;			brightcyan
+    keyword $(*)		brightgreen
+    keyword ${*}		brightgreen
+    keyword {			brightcyan
+    keyword }			brightcyan
+    keyword [			brightcyan
+    keyword ]			brightcyan
+    keyword (			brightcyan
+    keyword )			brightcyan
+    keyword -eq			brightcyan
+    keyword -ne			brightcyan
+
+    keyword wholeright $+	brightgreen
+    keyword $			brightgreen
+
+    keyword >/dev/null		brightblue
+    keyword 2>&1		brightblue
+    keyword 1>&2		brightblue
+
+    keyword &&			brightblue
+    keyword ||			brightblue
+    keyword >>			brightblue
+
+    keyword ES=$?		brightgreen
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+    keyword |			cyan
+    keyword whole --*		cyan
+    keyword whole -*\s		cyan
+    keyword whole \+*		cyan
+    keyword whole \**		cyan
+    keyword whole /*		cyan
+    keyword whole *:		cyan
+
+    keyword whole bash		cyan
+    keyword whole bc		cyan
+    keyword whole cp		cyan
+    keyword whole cut		cyan
+    keyword whole date		cyan
+    keyword whole echo		cyan
+    keyword whole egrep		cyan
+    keyword whole env		cyan
+    keyword whole expand	cyan
+    keyword whole formail	cyan
+    keyword whole gpg		cyan
+    keyword whole grep		cyan
+    keyword whole head		cyan
+    keyword whole killall	cyan
+    keyword whole md5sum	cyan
+    keyword whole mimedecode	cyan
+    keyword whole mkdir		cyan
+    keyword whole mv		cyan
+    keyword whole rm		cyan
+    keyword whole sed		cyan
+    keyword whole sendmail	cyan
+    keyword whole sort		cyan
+    keyword whole tail		cyan
+    keyword whole tddebbtsd	cyan
+    keyword whole tdnetsound	cyan
+    keyword whole test		cyan
+    keyword whole touch		cyan
+    keyword whole tr		cyan
+    keyword whole wc		cyan
+    keyword whole which		cyan
+
+    keyword whole if		yellow
+    keyword whole then		yellow
+    keyword whole else		yellow
+    keyword whole fi		yellow
+    keyword whole for		yellow
+    keyword whole in		yellow
+    keyword whole do		yellow
+    keyword whole done		yellow

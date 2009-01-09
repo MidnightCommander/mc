@@ -148,5 +148,8 @@ include idl.syntax
 file Don_t_match_me Mail\sfolder ^From\s
 include mail.syntax
 
+file \.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
+include procmail.syntax
+
 file .\* unknown
 include unknown.syntax
