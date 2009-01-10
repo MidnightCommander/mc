@@ -1,0 +1,377 @@
+This file contains:
+
+- Installation instructions for GNU Midnight Commander
+- Where to get more information on GNU Midnight Commander
+- Notes about GNU Midnight Commander installation
+- Obtaining related software
+
+
+Installation instructions for GNU Midnight Commander
+----------------------------------------------------
+
+The `configure' shell script attempts to guess correct values for
+various system-dependent variables used during compilation, and creates
+the makefiles.  It also creates a file `config.status' that you can run
+in the future to recreate the current configuration.
+
+To compile this package:
+
+1.  Configure the package for your system.
+
+Normally, you just `cd' to the directory containing the package's source
+code and type `./configure'.  If you're using `csh' on an old version of
+SystemV, you might need to type `sh configure' instead to prevent `csh'
+from trying to execute `configure' itself.  Under AIX, you may need to
+use ksh instead of sh.
+
+Running `configure' takes a while.  While it is running, it prints some
+messages that tell what it is doing.  If you don't want to see any
+messages, run `configure' with the `--quiet' option.
+
+To compile the package in a different directory than the one containing
+the source code, you must use a version of `make' supporting the `VPATH'
+variable, such as GNU `make'.  Change to the directory where you want
+the object files and executables to go and run the `configure' script
+with the full path.  If for some reason `configure' cannot find the
+source code directory, run `configure' with the option `--srcdir=DIR',
+where DIR is the directory that contains the source code.
+
+By default, `make install' will install the package's files in
+`/usr/local/bin', `/usr/local/man', etc.  You can specify an
+installation prefix other than `/usr/local' by giving `configure' the
+option `--prefix=PATH'.
+
+You can specify separate installation prefixes for architecture specific
+files and architecture-independent files.  If you give `configure' the
+option `--exec-prefix=PATH', the package will use PATH as the prefix for
+installing binary programs and libraries.  Data files and documentation
+will still use the regular prefix.  Normally, all files are installed
+using the same prefix.
+
+If compiled on GNU/Linux, Midnight Commander detects if you have the gpm
+library installed.  If you installed the gpm mouse library in a
+non-standard place, you will need to use the --with-gpm-mouse flag with
+the directory base where you installed the gpm package.
+
+`configure' recognizes the following options (the list may be
+incomplete, use `configure --help' to get the full list):
+
+`--help'
+     Print a summary of the options to `configure' and exit.
+
+`--quiet'
+`--silent'
+     Do not print messages saying which checks are being made.
+
+`--verbose'
+     Print the results of the checks.
+
+`--version'
+     Print the version of Autoconf used to generate the `configure'
+     script, and exit.
+
+`--without-edit'
+     Configure GNU Midnight Commander to be compiled without the
+     built-in file editor.  The built-in editor is compiled in by
+     default.
+
+`--with-ext2undel'
+     On systems that use the ext2 or ext3 file system and have the
+     libext2fs library available, this option adds support for
+     recovering deleted files (the undel virtual file system). 
+
+`--without-gpm-mouse'
+     Use this flag to disable gpm mouse support (e.g. if you want to
+     use mouse only on X terminals).
+
+`--with-glib12'
+     Force using glib 1.2.x even if glib 2.0.x is present.  Use this
+     flag for testing or if you want to use the binary on systems that
+     don't have glib 2.0.x installed.
+
+`--with-glib-static'
+     Force linking against glib statically.  This option is intended for
+     building binaries for distribution purposes and may not work on
+     some operating systems.
+
+`--with-mmap', `--without-mmap'
+     Force using or not using the mmap function.  It is currently used
+     in the internal viewer.  `--with-mmap' may be useful on some
+     versions of AIX where the `configure' script decides that mmap is
+     broken, but it's actually suitable for the internal viewer.
+
+`--with-subshell[=optional]', `--without-subshell' 
+     The subshell support is by default turned on, you can disable
+     this by using the --without-subshell option.  If you pass the
+     =optional parameter, then the subshell support is turned off by
+     default.  To turn it on, specify the `-U' option to the program.
+
+`--without-x'
+     By default, the Midnight Commander tries to connect to the X Window
+     System events to query the status of the keyboard modifiers, such
+     as Control, Shift and Alt, when invoked in a terminal emulator
+     under X11.  This is necessary (but not always sufficient) to
+     recognize some optional but handy key combinations like Ctrl-Home
+     and Shift-Cursor keys.  Use `--without-x' if the dependency on
+     X11 libraries is not desired.
+
+`--without-vfs'
+     This option disables the Virtual File System switch code in the
+     Midnight Commander and uses the standard file system calls for
+     file access.  If you specify this option, you won't get the
+     transparent access to archives and remote directories.
+
+`--with-mcfs'
+     This option enables mcfs - a non-standard remote filesystem
+     designed specifically for the Midnight Commander.  It also enables
+     a server for that filesystem, mcserv.  Please note that the
+     implementation of mcfs is not optimized for speed.  There may be
+     security issues with mcserv - don't run it if you don't need it.
+
+`--with-samba'
+     This option enables remote VFS over the SMB protocol.  A stripped
+     down version of samba distributed with the sources is compiled and
+     linked with the mc executable.  It is recommended that you install
+     Samba client, since mc uses some files from Samba under certain
+     conditions.  Please visit http://www.samba.org/ to learn more.
+
+`--disable-largefile'
+     This option disables support for large files (2 gigabytes and more)
+     on the systems where file operations use 32-bit offsets by default,
+     but support for 64-bit offsets is available.  May be useful for
+     slow processors and embedded systems.
+
+`--enable-charset'
+     This option adds support for selecting character set of the text in
+     the internal viewer and editor and converting it on the fly.  The
+     implementation of this option is currently incomplete.
+
+`--disable-background'
+     This option disables support for background operations.  Background
+     operations allow to perform some tasks such as copying files in a
+     separate background process.  Any messages from the background
+     process are forwarded to the foreground process.  More advanced
+     dialogs cannot be forwarded yet, so the background process uses the
+     default.  Background code is known to be less stable than the rest
+     of the code, so you may want to disable it at the compile time.
+
+`--disable-netcode'
+     This option disables support for networked virtual filesystems.
+     It's primarily used by developers to make sure that the code would
+     compile and run on operating systems that lack POSIX compatible
+     network support.  But you can use it is you know that you won't be
+     accessing remote filesystems from GNU Midnight Commander.
+
+You may also tell configure which screen library you want to use with
+the Midnight Commander.  The configure script will use S-Lang as
+default, and prefers an already installed S-Lang library over the
+included one, but you can override this by using the following flag
+(please note that since S-Lang is default, it is tested better than
+ncurses):
+
+`--with-screen={slang|mcslang|ncurses}'
+     Choose the library used to manage interaction with the terminal.
+     `slang' means S-Lang library already installed on the system,
+     `mcslang' means S-Lang library included with the sources of
+     GNU Midnight Commander, `ncurses' means ncurses library already
+     installed on the system.  The installed S-Lang library is used
+     by default if found, otherwise the included S-Lang library is
+     used.
+
+`--with-termcap'
+     If the included S-Lang library is used, this option forces it to
+     use the termcap database, as opposed to the default terminfo
+     database.
+
+On systems that require unusual options for compilation or linking that
+the package's `configure' script does not know about, you can give
+`configure' initial values for variables by placing them in the command
+line:
+
+./configure CC='gcc -traditional' LIBS=-lposix
+
+Here are the variables that you might want to override when running
+`configure'.
+
+ - Variable: CC
+     C compiler program.  The default is `gcc' if found, otherwise `cc'.
+
+ - Variable: CFLAGS
+     The default flags used to build the program.
+
+ - Variable: INSTALL
+     Program to use to install files.  The default is `install' if you
+     have it, `cp' otherwise.
+
+For these variables, any value given in the command line is added to the
+value that `configure' decides to use:
+
+ - Variable: LIBS
+     Libraries to link with, in the form `-lfoo -lbar...'.
+
+ - Variable: LDFLAGS
+     Linker flags, e.g. -L<lib dir> if you have libraries in a
+     nonstandard directory <lib dir>
+
+ - Variable: CPPFLAGS
+     C/C++ preprocessor flags, e.g. -I<include dir> if you have
+     headers in a nonstandard directory <include dir>
+
+If you need to do unusual things to compile the package, we encourage
+you to figure out how `configure' could check whether to do them, and
+mail diffs or instructions to the address given in the README so we can
+include them in the next release.
+
+2.  Type `make' to compile the package.
+
+3.  Type `make install' to install programs, data files, and the
+documentation.  On GNU/Linux the console screen saver is installed as
+well.
+
+4.  You can remove the program binaries and object files from the source
+directory by typing `make clean'.  If you want to clean the source tree
+completely, so that it contains only those files that should be packaged
+in the archive, issue `make distclean'.  If you've run configure in a
+different directory than the source tree, distclean won't remove your
+*.o and linked programs in that directory.
+
+5.  GNU Midnight Commander allows you to stay in the last current
+directory after exiting MC.  This is done with a shell function, the man
+page has more information about this.
+
+The file `configure.in' is used to create `configure' by a program
+called `autoconf'.  You only need it if you want to regenerate
+`configure' using a newer version of `autoconf'.
+
+
+Where to get more information on GNU Midnight Commander
+-------------------------------------------------------
+
+There are two mailing lists for the program:
+
+mc@gnome.org:        Discussion on GNU Midnight Commander file manager.
+mc-devel@gnome.org:  Discussion between the developers of the program.
+
+To subscribe to the mailing lists, visit their respective pages:
+
+http://mail.gnome.org/mailman/listinfo/mc/
+http://mail.gnome.org/mailman/listinfo/mc-devel/
+
+
+Notes about GNU Midnight Commander installation
+-----------------------------------------------
+
+GNU Midnight Commander has been run in the following configurations:
+
+i386-*-linux
+sparc-*-linux
+alpha-*-linux
+powerpc-*-linux
+mips-dec-ultrix4.3
+mips-dec-{open,net}bsd1.0
+mips-sgi-irix5.2
+mips-sgi-irix5.3
+rs6000-ibm-aix3.2.5
+sparc-sun-sunos4.1
+sparc-sun-netbsd1.0
+sparc-sun-solaris2.3
+hppa-hp-hpux9
+hppa-hp-hpux7
+m68k-apple-aux
+mc88110-aviion-dgux5.4
+i386-*-bsdi2
+i386-*-freebsd4.3
+i386-*-openbsd2.9
+
+Midnight Commander is written in a portable manner and uses GNU Autoconf
+for configuration, so it is expected to compile without changes on many
+other operating systems.
+
+You will need an ANSI C Compiler (such as GCC) and glib library to
+compile the source.  GNU Midnight Commander now comes with the S-Lang
+screen manager, a fast screen manager, but you may want to use the
+already installed S-Lang or ncurses library.
+
+If you insist on using ncurses, it's recommended to use ncurses 4.1 and
+above, since the older versions don't support resizing in the xterm
+window.
+
+GNU Midnight Commander comes with the mouse support on xterms and in the
+Linux console.  In order to take advantage of the mouse support on the
+Linux console you will need the gpm mouse server (see the section
+"Obtaining related software" in this file).
+
+Once you get gpm, compile it and install it, then you will have to
+specify the `--with-gpm-mouse' flag to the configure program if you
+installed it in a non-standard directory.  If you installed the gpm
+package under /usr or /usr/local, you don't need to specify this flag;
+configure will find gpm for you.  The support for mice on xterms is
+always compiled in.
+
+We are working on further enhancements to the program, but we're not
+sure which ones must go first.  If you would like to point us in the
+Right Direction we will be glad to hear from you (you could check the
+file TODO included with this distribution for the current projects).
+
+If you happen to find a feature that doesn't do what you expect, please
+write to mc@gnome.org telling as much as you can about the problem
+you're experiencing.  Please don't send personal messages to the
+maintainers.
+
+
+Obtaining related software
+--------------------------
+
+glib
+----
+
+The only "hard" dependency of GNU Midnight Commander is glib.  You can
+get glib from
+
+ftp://ftp.gtk.org/pub/gtk/
+
+Note that only versions 1.2.x and 2.0.x are supported.  Newer versions
+may work, but haven't been tested.
+
+Terminal database
+-----------------
+
+There are many incomplete terminal databases out there, however, a
+complete terminfo is bundled with ncurses.  (It is simple to generate
+the termcap database using the infocmp utility in ncurses).
+
+Some terminfo data are included with the mc distribution (lib/*.ti).
+Particularly linux, xterm and vt100. Use e.g. ''tic linux.ti'' to use
+them.
+
+If you want to run mc on xterm/color_xterm/ansi_xterm (not rxvt), then
+you might read lib/README.xterm for further information.
+
+Screen libraries
+----------------
+
+GNU Midnight Commander can use the included version of S-Lang, but you
+can get the latest version here:
+
+http://www.s-lang.org/
+
+Alternatively, you can use ncurses:
+
+http://www.gnu.org/software/ncurses/ncurses.html
+
+Mouse support
+-------------
+
+The general purpose mouse (gpm) daemon is available from
+
+ftp://arcana.linux.it/pub/gpm/
+
+Compiler
+--------
+
+If your C compiler is not powerful enough to compile GNU Midnight
+Commander, you should report is as a bug to the GNU Midnight Commander
+team.  Sometimes there is no solution than upgrading to a modern and
+free compiler - GCC (Compiler Collection):
+
+http://gcc.gnu.org/
