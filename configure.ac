@@ -550,14 +550,15 @@ AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
 AC_CONFIG_FILES([
-Makefile 
-mc.spec
-mc.qpg
-pkginfo
-prototype
-doc/Makefile 
-vfs/Makefile
-vfs/extfs/Makefile
+Makefile
+
+contrib/Makefile
+contrib/dist/Makefile 
+contrib/dist/mc.spec
+contrib/dist/mc.qpg
+contrib/dist/pkginfo
+contrib/dist/prototype
+
 lib/Makefile
 
 src/Makefile
@@ -566,6 +567,9 @@ src/search/Makefile
 edit/Makefile 
 syntax/Makefile
 lib/mc.ext
+
+vfs/Makefile
+vfs/extfs/Makefile
 vfs/extfs/a
 vfs/extfs/apt
 vfs/extfs/audio
@@ -591,6 +595,7 @@ vfs/extfs/urar
 vfs/extfs/uzip
 vfs/extfs/uzoo
 
+doc/Makefile 
 doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/mcserv.8 doc/man/Makefile
 doc/man/es/mc.1 doc/man/es/Makefile
 doc/man/hu/mc.1 doc/man/hu/Makefile
