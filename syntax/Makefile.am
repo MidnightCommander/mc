@@ -16,6 +16,7 @@ SYNTAXFILES =			\
 	dos.syntax		\
 	eiffel.syntax		\
 	fortran.syntax		\
+	haskell.syntax		\
 	html.syntax		\
 	idl.syntax		\
 	java.syntax		\

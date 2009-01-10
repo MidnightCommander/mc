@@ -1,3 +1,8 @@
+2009-01-10  Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* syntax/Makefile.am syntax/Syntax syntax/haskell.syntax:
+	added syntax definition for Haskell (taken from rhclub-tree)
+
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
 	* doc/mcedit.1: Documented the newly added filename:lineno

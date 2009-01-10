@@ -169,5 +169,8 @@ include debian-changelog.syntax
 file .\*\\.dsc$ Debian\sdescriptiom\sfile
 include debian-description.syntax
 
+file ..\*\\.([hH][sS][cC]?)$ Haskell\sprogram
+include haskell.syntax
+
 file .\* unknown
 include unknown.syntax
