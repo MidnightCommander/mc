@@ -52,7 +52,7 @@ context default
     keyword whole eerror yellow
     keyword whole einfo yellow
     keyword whole einstall yellow
-    keyword whole elibtoolize yellow    
+    keyword whole elibtoolize yellow
     keyword whole elog yellow
     keyword whole emake yellow
     keyword whole epatch yellow
