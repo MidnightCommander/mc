@@ -148,6 +148,9 @@ include assembler.syntax
 file ..\*\\.([Pp][Oo][Vv])$ POV\sScript
 include povray.syntax
 
+file .\*\\.(ebuild|eclass)$ Gentoo\sEbuild
+include ebuild.syntax
+
 file ..\*\\.([lL][uU][aA])$ LUA\sProgram ^#!.*/lua
 include lua.syntax
 

@@ -1,0 +1,107 @@
+context default
+    keyword linestart DEPEND brightcyan
+    keyword linestart DESCRIPTION brightcyan
+    keyword linestart EAPI brightcyan
+    keyword linestart HOMEPAGE brightcyan
+    keyword linestart IUSE brightcyan
+    keyword linestart KEYWORDS brightcyan
+    keyword linestart LICENSE brightcyan
+    keyword linestart PDEPEND brightcyan
+    keyword linestart PROVIDE brightcyan
+    keyword linestart RDEPEND brightcyan
+    keyword linestart RESTRICT brightcyan
+    keyword linestart S brightcyan
+    keyword linestart SLOT brightcyan
+    keyword linestart SRC_URI brightcyan
+    keyword linestart WANT_AUTOCONF brightcyan
+    keyword linestart WANT_AUTOMAKE brightcyan
+
+    keyword whole _elibtoolize yellow
+    keyword whole check_KV yellow
+    keyword whole best_version yellow
+    keyword whole built_with_use yellow
+    keyword whole die yellow
+    keyword whole diropts yellow
+    keyword whole dobin yellow
+    keyword whole docinto yellow
+    keyword whole doconfd yellow
+    keyword whole dodir yellow
+    keyword whole dodoc yellow
+    keyword whole doenvd yellow
+    keyword whole doexe yellow
+    keyword whole dohard yellow
+    keyword whole dohtml yellow
+    keyword whole doicon yellow
+    keyword whole doinfo yellow
+    keyword whole doinitd yellow
+    keyword whole doins yellow
+    keyword whole dolib yellow
+    keyword whole dolib.a yellow
+    keyword whole dolib.so yellow
+    keyword whole doman yellow
+    keyword whole domenu yellow
+    keyword whole dosbin yellow
+    keyword whole dosed yellow
+    keyword whole dosym yellow
+    keyword whole eautoconf yellow
+    keyword whole eautoreconf yellow
+    keyword whole eautomake yellow
+    keyword whole ebegin yellow
+    keyword whole econf yellow
+    keyword whole eend yellow
+    keyword whole eerror yellow
+    keyword whole einfo yellow
+    keyword whole einstall yellow
+    keyword whole elibtoolize yellow    
+    keyword whole elog yellow
+    keyword whole emake yellow
+    keyword whole epatch yellow
+    keyword whole ewarn yellow
+    keyword whole exeinto yellow
+    keyword whole exeopts yellow
+    keyword whole fowners yellow
+    keyword whole fperms yellow
+    keyword whole has yellow
+    keyword whole hasq yellow
+    keyword whole has_version yellow
+    keyword whole insinto yellow
+    keyword whole insopts yellow
+    keyword whole into yellow
+    keyword whole keepdir yellow
+    keyword whole libopts yellow
+    keyword whole local yellow
+    keyword whole newbin yellow
+    keyword whole newconfd yellow
+    keyword whole newdoc yellow
+    keyword whole newexe yellow
+    keyword whole newins yellow
+    keyword whole newman yellow
+    keyword whole newsbin yellow
+    keyword whole newinitd yellow
+    keyword whole prepall yellow
+    keyword whole prepalldocs yellow
+    keyword whole prepallinfo yellow
+    keyword whole prepallman yellow
+    keyword whole unpack yellow
+    keyword whole use yellow
+    keyword whole use_enable yellow
+    keyword whole use_with yellow
+
+    keyword = yellow
+    keyword : yellow
+    keyword ${+} brightgreen
+
+    keyword linestart abcdefghijklmnopqrstuvwxyz_\(\) brightmagenta
+
+    keyword *() brightcyan
+
+    keyword { magenta
+    keyword } magenta
+
+context linestart inherit \n magenta
+    keyword whole inherit yellow
+
+context # \n red
+
+context " " green
+    keyword wholeright ${+} brightgreen

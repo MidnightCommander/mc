@@ -1,3 +1,4 @@
+
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
 	* edit/edit.h: Add two more ints
@@ -41,6 +42,7 @@
 
 	* syntax/Makefile.am syntax/Syntax syntax/haskell.syntax:
 	added syntax definition for Haskell (taken from rhclub-tree)
+	* syntax: added ebuild Syntax defition (taken from rhclub-tree)
 
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 

@@ -16,6 +16,7 @@ SYNTAXFILES =			\
 	d.syntax		\
 	diff.syntax		\
 	dos.syntax		\
+	ebuild.syntax		\
 	eiffel.syntax		\
 	fortran.syntax		\
 	haskell.syntax		\
