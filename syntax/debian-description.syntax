@@ -1,0 +1,15 @@
+context default
+    keyword linestart Format		green
+    keyword linestart Source		brightmagenta
+    keyword linestart Version		yellow
+    keyword linestart Binary		brightgreen
+    keyword linestart Maintainer	brightmagenta
+    keyword <*@*>			brightred
+    keyword linestart Architecture	cyan
+    keyword linestart Standards-Version	brightmagenta
+    keyword linestart Build-Depends	green
+    keyword linestart Files		green
+
+context --- \n				brightred
+    spellcheck
+
