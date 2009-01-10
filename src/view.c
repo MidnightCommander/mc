@@ -432,7 +432,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 		view->growbuf_finished = TRUE;
 		(void) pclose (view->ds_stdio_pipe);
 		display (view);
-		close_error_pipe (0, NULL);
+		close_error_pipe (D_NORMAL, NULL);
 		view->ds_stdio_pipe = NULL;
 		return;
 	    }
@@ -690,7 +690,7 @@ view_close_datasource (WView *view)
 	    if (view->ds_stdio_pipe != NULL) {
 		(void) pclose (view->ds_stdio_pipe);
 		display (view);
-		close_error_pipe (0, NULL);
+		close_error_pipe (D_NORMAL, NULL);
 		view->ds_stdio_pipe = NULL;
 	    }
 	    view_growbuf_free (view);
@@ -1450,7 +1450,7 @@ view_show_error (WView *view, const char *msg)
     if (view_is_in_panel (view)) {
 	view_set_datasource_string (view, msg);
     } else {
-	message (1, MSG_ERROR, "%s", msg);
+	message (D_ERROR, MSG_ERROR, "%s", msg);
     }
 }
 
@@ -1465,7 +1465,7 @@ view_load_command_output (WView *view, const char *command)
     if ((fp = popen (command, "r")) == NULL) {
 	/* Avoid two messages.  Message from stderr has priority.  */
 	display (view);
-	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
+	if (!close_error_pipe (view_is_in_panel (view) ? -1 : D_ERROR, NULL))
 	    view_show_error (view, _(" Cannot spawn child process "));
 	return FALSE;
     }
@@ -1477,7 +1477,7 @@ view_load_command_output (WView *view, const char *command)
 
 	/* Avoid two messages.  Message from stderr has priority.  */
 	display (view);
-	if (!close_error_pipe (view_is_in_panel (view) ? -1 : 1, NULL))
+	if (!close_error_pipe (view_is_in_panel (view) ? -1 : D_ERROR, NULL))
 	    view_show_error (view, _("Empty output from child filter"));
 	return FALSE;
     }
@@ -2445,7 +2445,7 @@ search (WView *view, char *text,
 	destroy_dlg (d);
     }
     if (!s) {
-	message (0, _("Search"), _(" Search string not found "));
+	message (D_NORMAL, _("Search"), _(" Search string not found "));
 	view->search_length = 0;
     }
 }
@@ -2596,7 +2596,7 @@ hex_search (WView *view, const char *text)
 
     /* No valid bytes in the user input */
     if (block_len <= 0 || parse_error) {
-	message (0, _("Search"), _("Invalid hex search expression"));
+	message (D_NORMAL, _("Search"), _("Invalid hex search expression"));
 	g_free (buffer);
 	view->search_length = 0;
 	return;
@@ -2608,7 +2608,7 @@ hex_search (WView *view, const char *text)
     g_free (buffer);
 
     if (pos == INVALID_OFFSET) {
-	message (0, _("Search"), _(" Search string not found "));
+	message (D_NORMAL, _("Search"), _(" Search string not found "));
 	view->search_length = 0;
 	return;
     }
@@ -2648,7 +2648,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
 	}
 	flags |= REG_EXTENDED;
 	if (regcomp (&r, pattern, flags)) {
-	    message (1, MSG_ERROR, _(" Invalid regular expression "));
+	    message (D_ERROR, MSG_ERROR, _(" Invalid regular expression "));
 	    return -1;
 	}
 	old_pattern = g_strdup (pattern);

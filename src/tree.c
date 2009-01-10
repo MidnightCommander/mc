@@ -649,7 +649,7 @@ static void tree_move (WTree *tree, const char *default_dest)
 	return;
     }
     if (stat (dest, &buf)){
-	message (1, MSG_ERROR, _(" Cannot stat the destination \n %s "),
+	message (D_ERROR, MSG_ERROR, _(" Cannot stat the destination \n %s "),
 		 unix_error_string (errno));
 	g_free (dest);
 	return;
@@ -714,7 +714,7 @@ tree_rmdir_cmd (WTree *tree)
 	    g_strdup_printf (_("  Delete %s?  "),
 			     tree->selected_ptr->name);
 	result =
-	    query_dialog (_(" Delete "), buf, 3, 2, _("&Yes"), _("&No"));
+	    query_dialog (_(" Delete "), buf, D_ERROR, 2, _("&Yes"), _("&No"));
 	g_free (buf);
 	if (result != 0)
 	    return;
@@ -831,7 +831,7 @@ chdir_sel (WTree *tree)
     if (do_cd (tree->selected_ptr->name, cd_exact)) {
 	select_item (current_panel);
     } else {
-	message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+	message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		 tree->selected_ptr->name, unix_error_string (errno));
     }
     change_panel ();

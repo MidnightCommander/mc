@@ -166,7 +166,7 @@ find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    flags |= REG_ICASE;
 
 	if (regcomp (r, in_with->buffer, flags)) {
-	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
+	    message (D_ERROR, MSG_ERROR, _("  Malformed regular expression  "));
 	    dlg_select_widget (in_with);
 	    h->running = 1;	/* Don't stop the dialog */
 	}

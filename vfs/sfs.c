@@ -147,11 +147,11 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     g_free (pqname);
     open_error_pipe ();
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
-	close_error_pipe (1, NULL);
+	close_error_pipe (D_ERROR, NULL);
 	return -1;
     }
 
-    close_error_pipe (0, NULL);
+    close_error_pipe (D_NORMAL, NULL);
     return 0;			/* OK */
 }
 

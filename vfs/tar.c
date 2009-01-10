@@ -223,7 +223,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
 
     result = mc_open (name, O_RDONLY);
     if (result == -1) {
-	message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
+	message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
 	ERRNOR (ENOENT, -1);
     }
 
@@ -241,7 +241,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
 	s = g_strconcat (archive->name, decompress_extension (type), (char *) NULL);
 	result = mc_open (s, O_RDONLY);
 	if (result == -1)
-	    message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
+	    message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
 	g_free (s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);
@@ -483,7 +483,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	    archive->u.arch.type = TAR_GNU;
 
 	if (*h_size > MC_MAXPATHLEN) {
-	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}
 
@@ -498,7 +498,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	    if (data == NULL) {
 		g_free (*longp);
 		*longp = NULL;
-		message (1, MSG_ERROR,
+		message (D_ERROR, MSG_ERROR,
 			 _("Unexpected EOF on archive file"));
 		return STATUS_BADCHECKSUM;
 	    }
@@ -513,7 +513,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0') {
 	    g_free (*longp);
 	    *longp = NULL;
-	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}
 	*bp = 0;
@@ -588,7 +588,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	parent =
 	    vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
 	if (parent == NULL) {
-	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}
 
@@ -597,7 +597,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 		vfs_s_find_inode (me, archive, current_link_name,
 				  LINK_NO_FOLLOW, 0);
 	    if (inode == NULL) {
-		message (1, MSG_ERROR, _("Inconsistent tar archive"));
+		message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
 		entry = vfs_s_new_entry (me, p, inode);
 		vfs_s_insert_entry (me, parent, entry);
@@ -678,7 +678,7 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
 
 		/* Error on first record */
 	    case STATUS_EOFMARK:
-		message (1, MSG_ERROR,
+		message (D_ERROR, MSG_ERROR,
 			 _
 			 ("Hmm,...\n%s\ndoesn't look like a tar archive."),
 			 name);

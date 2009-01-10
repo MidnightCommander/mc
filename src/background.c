@@ -213,7 +213,7 @@ background_attention (int fd, void *closure)
 	if (!waitpid (ctx->pid, &status, WNOHANG)) {
 	    /* the process is still running, but it misbehaves - kill it */
 	    kill (ctx->pid, SIGTERM);
-	    message (1, background_process_error, _(" Unknown error in child "));
+	    message (D_ERROR, background_process_error, _(" Unknown error in child "));
 	    return 0;
 	}
 
@@ -221,14 +221,14 @@ background_attention (int fd, void *closure)
 	if (WIFEXITED (status) && (WEXITSTATUS (status) == 0))
 	    return 0;
 
-	message (1, background_process_error, _(" Child died unexpectedly "));
+	message (D_ERROR, background_process_error, _(" Child died unexpectedly "));
 
 	return 0;
     }
 
     read (fd, &argc, sizeof (argc));
     if (argc > MAXCALLARGS){
-	message (1, _(" Background protocol error "),
+	message (D_ERROR, _(" Background protocol error "),
 		 _(" Background process sent us a request for more arguments \n"
 		 " than we can handle. \n"));
     }

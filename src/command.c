@@ -183,7 +183,7 @@ void do_cd_command (char *cmd)
     } else
 	if (!examine_cd (&cmd [3])) {
 	    char *d = strip_password (g_strdup (&cmd [3]), 1);
-	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     d, unix_error_string (errno));
 	    g_free (d);
 	    return;
@@ -215,7 +215,7 @@ enter (WInput *cmdline)
 	size_t i, j, cmd_len;
 
 	if (!vfs_current_is_local ()) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _
 		     (" Cannot execute commands on non-local filesystems"));
 
@@ -225,7 +225,7 @@ enter (WInput *cmdline)
 	/* Check this early before we clean command line
 	 * (will be checked again by shell_execute) */
 	if (use_subshell && subshell_state != INACTIVE) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _(" The shell is already running a command "));
 	    return MSG_NOT_HANDLED;
 	}

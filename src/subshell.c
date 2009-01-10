@@ -655,15 +655,15 @@ void resize_subshell (void)
 int
 exit_subshell (void)
 {
-    int quit = TRUE;
+    int subshell_quit = TRUE;
 
     if (subshell_state != INACTIVE && subshell_alive)
-	quit =
+	subshell_quit =
 	    !query_dialog (_("Warning"),
 			   _(" The shell is still active. Quit anyway? "),
-			   0, 2, _("&Yes"), _("&No"));
+			   D_NORMAL, 2, _("&Yes"), _("&No"));
 
-    if (quit) {
+    if (subshell_quit) {
 	if (subshell_type == TCSH) {
 	    if (unlink (tcsh_fifo) == -1)
 		fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
@@ -676,7 +676,7 @@ exit_subshell (void)
 	pty_buffer = NULL;
     }
 
-    return quit;
+    return subshell_quit;
 }
 
 

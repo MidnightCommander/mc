@@ -189,7 +189,7 @@ shell_execute (const char *command, int flags)
 	if (subshell_state == INACTIVE)
 	    do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 	else
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _(" The shell is already running a command "));
     else
 #endif				/* HAVE_SUBSHELL_SUPPORT */
@@ -352,7 +352,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
 
     localcopy = mc_getlocalcopy (filename);
     if (localcopy == NULL) {
-	message (1, MSG_ERROR, _(" Cannot fetch a local copy of %s "),
+	message (D_ERROR, MSG_ERROR, _(" Cannot fetch a local copy of %s "),
 		 filename);
 	return;
     }

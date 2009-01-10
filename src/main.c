@@ -425,7 +425,7 @@ void
 do_possible_cd (const char *new_dir)
 {
     if (!do_cd (new_dir, cd_exact))
-	message (1, _("Warning"),
+	message (D_ERROR, _("Warning"),
 		 _(" The Commander can't change to the directory that \n"
 		   " the subshell claims you are in.  Perhaps you have \n"
 		   " deleted your working directory, or given yourself \n"
@@ -471,7 +471,7 @@ quit_cmd_internal (int quiet)
     } else {
 	if (query_dialog
 	    (_(" The Midnight Commander "),
-	     _(" Do you really want to quit the Midnight Commander? "), 0,
+	     _(" Do you really want to quit the Midnight Commander? "), D_NORMAL,
 	     2, _("&Yes"), _("&No")) == 0)
 	    q = 1;
     }
@@ -685,7 +685,7 @@ directory_history_list (WPanel *panel)
     if (_do_panel_cd (panel, s, cd_exact))
 	directory_history_add (panel, panel->cwd);
     else
-	message (1, MSG_ERROR, _("Cannot change directory"));
+	message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
     g_free (s);
 }
 
@@ -990,7 +990,7 @@ toggle_fast_reload (void)
 {
     fast_reload = !fast_reload;
     if (fast_reload_w == 0 && fast_reload) {
-	message (0, _(" Information "),
+	message (D_NORMAL, _(" Information "),
 		 _
 		 (" Using the fast reload option may not reflect the exact \n"
 		  " directory contents. In this case you'll need to do a   \n"

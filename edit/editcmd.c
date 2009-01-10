@@ -2051,7 +2051,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	    edit->force |= REDRAW_PAGE;
 	    edit_render_keypress (edit);
 	    if (times_replaced) {
-		message (0, msg, _(" %ld replacements made. "),
+		message (D_NORMAL, msg, _(" %ld replacements made. "),
 			 times_replaced);
 	    } else
 		query_dialog (msg, _(" Search string not found "),
@@ -2130,7 +2130,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		}
 		if (found) {
 /* in response to number of bookmarks added because of string being found %d times */
-		    message (0, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
+		    message (D_NORMAL, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
 		} else {
 		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
 		}
@@ -2584,7 +2584,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 			 quoted_name, (char *) NULL));
     }
     g_free (quoted_name);
-    close_error_pipe (0, 0);
+    close_error_pipe (D_NORMAL, NULL);
 
     edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
