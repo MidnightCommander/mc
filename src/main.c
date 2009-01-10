@@ -2028,6 +2028,10 @@ handle_args (int argc, char *argv[])
 	poptGetContext ("mc", argc, argv, argument_table,
 			POPT_CONTEXT_NO_EXEC);
 
+#ifdef USE_TERMCAP
+    SLtt_Try_Termcap = 1;
+#endif
+
     while ((c = poptGetNextOpt (ctx)) > 0) {
 	process_args (ctx, c, poptGetOptArg (ctx));
     }

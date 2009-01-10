@@ -56,6 +56,13 @@
 # endif
 #endif
 
+/* Taken from S-Lang's sldisply.c file */
+#ifndef USE_TERMCAP
+#   define tgetstr(a,b) SLtt_tgetstr (a)
+#else
+    extern char *tgetstr(char *, char **);
+#endif
+
 #ifndef SA_RESTART
 #    define SA_RESTART 0
 #endif

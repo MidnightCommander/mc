@@ -169,11 +169,19 @@ included one, but you can override this by using the following flag
 (please note that since S-Lang is default, it is tested better than
 ncurses):
 
-`--with-screen={slang|ncurses}'
+`--with-screen={slang|mcslang|ncurses}'
      Choose the library used to manage interaction with the terminal.
      `slang' means S-Lang library already installed on the system,
-     `ncurses' means ncurses library already installed on the system.  
-     The installed S-Lang library is used by default if found.
+     `mcslang' means S-Lang library included with the sources of
+     GNU Midnight Commander, `ncurses' means ncurses library already
+     installed on the system.  The installed S-Lang library is used
+     by default if found, otherwise the included S-Lang library is
+     used.
+
+`--with-termcap'
+     If the included S-Lang library is used, this option forces it to
+     use the termcap database, as opposed to the default terminfo
+     database.
 
 On systems that require unusual options for compilation or linking that
 the package's `configure' script does not know about, you can give

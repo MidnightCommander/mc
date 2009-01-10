@@ -49,7 +49,7 @@ mc_cflags=""
 mc_ldflags=""
 
 mc_tests="plain glib12 charset no_charset vfs no_vfs mcfs no_mcfs samba "\
-"no_samba ext2undel no_ext2undel slang ncurses maintainer "\
+"no_samba ext2undel no_ext2undel slang mcslang ncurses maintainer "\
 "no_maintainer i18n no_i18n no_features all_features"
 
 do_clean_basedir=no
@@ -440,6 +440,12 @@ test_no_ext2undel() {
 test_slang() {
 	testname="slang"
 	configure_args="--with-screen=slang"
+	confbuild
+}
+
+test_mcslang() {
+	testname="mcslang"
+	configure_args="--with-screen=mcslang"
 	confbuild
 }
 

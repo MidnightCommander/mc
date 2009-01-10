@@ -2,7 +2,7 @@
 
 AUTOMAKE_OPTIONS = 1.5
 
-SUBDIRS = intl po m4 vfs edit src lib doc syntax
+SUBDIRS = intl po m4 vfs slang edit src lib doc syntax
 
 EXTRA_DIST = FAQ HACKING INSTALL.FAST MAINTAINERS README.QNX TODO pkginfo.in prototype.in mc.qpg mc.spec
 

@@ -24,11 +24,14 @@ The most often needed options to configure are following:
 	You can specify an installation prefix other than default by
 	giving `configure' the option `--prefix=PATH'.
 
-`--with-screen={slang|ncurses}'
+`--with-screen={slang|mcslang|ncurses}'
 	Choose the library used to manage interaction with the terminal.
 	`slang' means S-Lang library already installed on the system,
-	`ncurses' means ncurses library already installed on the system.  
-	The installed S-Lang library is used by default if found.
+	`mcslang' means S-Lang library included with the sources of
+	GNU Midnight Commander, `ncurses' means ncurses library already
+	installed on the system.  The installed S-Lang library is used
+	by default if found, otherwise the included S-Lang library is
+	used.
 
 You may also want to specify CFLAGS for the compiler, even if it finds
 itself some defaults by typing e.g.
