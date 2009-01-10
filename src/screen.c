@@ -47,7 +47,7 @@
 #include "execute.h"
 #include "widget.h"
 #include "menu.h"		/* menubar_visible */
-#define WANT_WIDGETS
+#include "main-widgets.h"
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
 

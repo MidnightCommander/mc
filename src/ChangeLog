@@ -1,3 +1,10 @@
+
+2009-01-09 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* main.c, main.h, main-widgets.h, filegui.c, layout.c, screen.c:
+          moved main widget declarations into main-widgets.h and
+	  removed the WANT_WIDGETS symbol
+
 2009-01-05  Slava Zanko   
 	* main.c (main): remove compatibility_move_mc_files stuff.
 

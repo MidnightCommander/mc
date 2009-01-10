@@ -58,7 +58,7 @@
 #include "dialog.h"		/* do_refresh() */
 #include "color.h"		/* dialog_colors */
 #include "widget.h"		/* WLabel */
-#define WANT_WIDGETS
+#include "main-widgets.h"
 #include "main.h"		/* the_hint */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */

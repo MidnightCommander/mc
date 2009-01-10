@@ -51,7 +51,7 @@
 #include "command.h"
 #include "profile.h"		/* For sync_profiles() */
 #include "mouse.h"
-#define WANT_WIDGETS
+#include "main-widgets.h"
 #include "main.h"
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
 #include "tree.h"
