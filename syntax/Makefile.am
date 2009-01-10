@@ -1,6 +1,7 @@
 SYNTAXFILES =			\
 	Syntax			\
 	ada95.syntax		\
+	awk.syntax		\
 	aspx.syntax		\
 	assembler.syntax	\
 	c.syntax		\
