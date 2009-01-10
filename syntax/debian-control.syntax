@@ -1,0 +1,23 @@
+context default
+    keyword linestart Source		brightmagenta/20
+    keyword linestart Section		brightmagenta/20
+    keyword linestart Priority		brightmagenta/20
+    keyword linestart Maintainer	brightmagenta/20
+    keyword linestart Standards-Version	brightmagenta/20
+    keyword linestart Package		green/6
+    keyword linestart Architecture	green/6
+    keyword linestart Depends		green/6
+    keyword linestart Recommends	green/6
+    keyword linestart Suggests		green/6
+    keyword linestart Conflicts		green/6
+    keyword linestart Replaces		green/6
+    keyword linestart Provides		green/6
+    keyword linestart Pre-Depends	green/6
+    keyword linestart Build-Depends	green/6
+    keyword linestart Build-Depends-Indep	green/6
+    keyword linestart Build-Conflicts	green/6
+    keyword linestart Build-Conflicts-Indep	green/6
+    keyword linestart Description	green/6
+    keyword <*@*>			brightred/19
+
+context linestart \s \n brown/22
