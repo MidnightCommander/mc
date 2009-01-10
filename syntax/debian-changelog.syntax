@@ -1,0 +1,20 @@
+context default
+
+    keyword linestart \s\s\*		brightcyan/17
+    keyword linestart \s--		brightred/19
+    keyword linestart \s\s\s\s\+     	cyan/17
+
+    keyword <*@*>			brightred/19
+    keyword whole experimental;		brightmagenta/magenta
+    keyword whole unstable;		brightmagenta/magenta
+    keyword whole stable;		brightmagenta/magenta
+    keyword whole urgency=low		yellow/24
+    keyword whole urgency=medium	brightgreen/6
+    keyword whole urgency=high		white/25
+    keyword whole urgency=LOW		yellow/24
+    keyword whole urgency=MEDIUM	brightgreen/6
+    keyword whole urgency=HIGH		white/25
+
+    keyword whole bug			white/25
+    keyword whole Bug			white/25
+    keyword whole BUG			white/25

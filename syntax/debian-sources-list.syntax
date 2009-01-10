@@ -1,0 +1,12 @@
+context default
+    keyword linestart deb-src	brightmagenta/20
+    keyword linestart deb	brightmagenta/20
+    keyword \$\(ARCH\) brightred/18
+
+context # \n brown/22
+context ftp\:\/\/ \s green/6
+context http\:\/\/ \s green/6
+context cdrom\:\/ \s yellow/24
+context file\:\/ \s brightcyan/14
+
+###############################################################################
