@@ -44,6 +44,7 @@
 #include "../src/cmd.h"		/* view_other_cmd() */
 #include "../src/user.h"	/* user_menu_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
+#include "../src/timefmt.h"	/* time formatting */
 
 
 /*
@@ -2519,20 +2520,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
 
     case CK_Date:{
-	    time_t t;
-#ifdef HAVE_STRFTIME
 	    char s[1024];
 	    /* fool gcc to prevent a Y2K warning */
 	    char time_format[] = "_c";
 	    time_format[0] = '%';
-#endif
-	    time (&t);
-#ifdef HAVE_STRFTIME
-	    strftime (s, sizeof (s), time_format, localtime (&t));
+
+	    FMT_LOCALTIME_CURRENT(s, sizeof(s), time_format);
 	    edit_print_string (edit, s);
-#else
-	    edit_print_string (edit, ctime (&t));
-#endif
 	    edit->force |= REDRAW_PAGE;
 	    break;
 	}

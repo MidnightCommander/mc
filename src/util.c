@@ -41,6 +41,7 @@
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
 #include "win.h"		/* xterm_flag */
+#include "timefmt.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -724,19 +725,24 @@ short-month-name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
-    size_t length, a, b;
-    char buf [MAX_I18NTIMELENGTH + 1];
     time_t testtime = time (NULL);
-    
-    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), localtime(&testtime));
-    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), localtime(&testtime));
-    
-    length = max (a, b);
-    length = max (strlen (_("(invalid)")), length);
-    
+    struct tm* lt = localtime(&testtime);
+    size_t length;
+
+    if (lt == NULL) {
+	    // huh, localtime() doesnt seem to work ... falling back to "(invalid)"
+	    length = strlen(INVALID_TIME_TEXT);
+    } else {
+	    char buf [MAX_I18NTIMELENGTH + 1];
+	    size_t a, b;
+	    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), lt);
+	    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), lt);
+	    length = max (a, b);
+    }
+
     /* Don't handle big differences. Use standard value (email bug, please) */
     if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
-	length = STD_I18NTIMELENGTH;
+	    length = STD_I18NTIMELENGTH;
     
     return length;
 }
@@ -773,11 +779,8 @@ file_date (time_t when)
     else
 	fmt = fmttime;
     
-    whentm = localtime(&when);
-    if (whentm == NULL)
-	g_snprintf (timebuf, i18n_timelength, "%s", _("(invalid)"));
-    else
-	strftime (timebuf, i18n_timelength, fmt, whentm);
+    FMT_LOCALTIME(timebuf, i18n_timelength, fmt, when);
+
     return timebuf;
 }
 
