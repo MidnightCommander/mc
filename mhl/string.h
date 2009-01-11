@@ -46,25 +46,59 @@ static inline void mhl_str_toupper(char* str)
 	    *str = toupper(*str);
 }
 
-static inline char* mhl_str_concat(int n, ...)
+#define __STR_CONCAT_MAX	32
+/* _NEVER_ call this function directly ! */
+static inline char* __mhl_str_concat_hlp(const char* base, ...)
 {
-  va_list ap;
-  char* buf = NULL;
-  char* ptr = buf;
+    static const char* arg_ptr[__STR_CONCAT_MAX];
+    static int         arg_sz[__STR_CONCAT_MAX];
+    int         count = 0;
+    int         totalsize = 0;
 
-  va_start(ap,n);
-  for (;n;n--) {
-    char *foo = va_arg(ap, char*);
-    int bar = strlen(foo);
-    int length += bar;
-    mhl_mem_realloc(buf, length);
-    memcpy(buf,foo,bar);
-    buf+bar;
-  }
-  va_end(ap);
-  *buf = 0;
-  return ptr;
+    // first pass: scan through the params and count string sizes
+    va_list par;
+
+    if (base)
+    {
+	arg_ptr[0] = base;
+	arg_sz[0]  = totalsize = strlen(base);
+	count = 1;
+    }
+
+    va_list args;
+    va_start(args,base);
+    char* a;
+    // note: we use ((char*)(1)) as terminator - NULL is a valid argument !
+    while ((a = va_arg(args, char*))!=(char*)1)
+    {
+//	printf("a=%u\n", a);
+	if (a)
+	{
+	    arg_ptr[count] = a;
+	    arg_sz[count]  = strlen(a);
+	    totalsize += arg_sz[count];
+	    count++;
+	}
+    }
+
+    if (!count)
+	return mhl_str_dup("");
+
+    // now as we know how much to copy, allocate the buffer
+    char* buffer = (char*)mhl_mem_alloc_u(totalsize+2);
+    char* current = buffer;
+    int x=0;
+    for (x=0; x<count; x++)
+    {
+	memcpy(current, arg_ptr[x], arg_sz[x]);
+	current += arg_sz[x];
+    }
+
+    *current = 0;
+    return buffer;
 }
+
+#define mhl_str_concat(...)	(__mhl_str_concat_hlp(__VA_ARGS__, (char*)(1)))
 
 /* concat 1 string to another and return as mhl_mem_alloc()'ed string */
 static inline char* mhl_str_concat_1(const char* base, const char* one)
