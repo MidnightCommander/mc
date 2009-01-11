@@ -149,7 +149,7 @@ void edit_delete_line (WEdit * edit);
 
 int edit_delete (WEdit * edit);
 void edit_insert (WEdit * edit, int c);
-int edit_cursor_move (WEdit * edit, long increment);
+void edit_cursor_move (WEdit * edit, long increment);
 void edit_push_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
