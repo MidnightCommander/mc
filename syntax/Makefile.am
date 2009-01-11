@@ -11,6 +11,7 @@ SYNTAXFILES =			\
  	debian-sources-list.syntax \
 	cs.syntax		\
 	css.syntax		\
+  cxx.syntax      \
 	d.syntax		\
 	diff.syntax		\
 	dos.syntax		\
