@@ -1,3 +1,8 @@
+2009-01-11 Patrick Winnertz <winnie@debian.org>
+
+  * syntax/pascal.syntax: Added syntax highlighting for 
+  some delphi keywords
+
 2009-01-10  Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* syntax/Makefile.am syntax/Syntax syntax/haskell.syntax:
