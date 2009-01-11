@@ -6,8 +6,8 @@ Hint: Een character quoten?  Gebruik Control-q en dan het character.
 Hint: Moe van deze hints?  Zet ze uit in het Opties/Vormgeving menu.
 Hint: Directories selecteren: zet een slash aan het eind van het zoekpatroon.
 Hint: Als je terminal geen functietoetsen ondersteunt, gebruik dan ESC+nummer.
-Hint: Er is een Midnight Commander URL: http://www.gnu.org/software/mc/
-Hint: Midnight Commander home page: http://www.gnu.org/software/mc/
+Hint: Er is een Midnight Commander URL: http://www.midnight-commander.org/
+Hint: Midnight Commander home page: http://www.midnight-commander.org/
 Hint: Stuur bug rapporten naar mc-devel@gnome.org
 Hint: Tab verandert huidig paneel.
 Hint: VFS coolheid: druk op enter op een tar file om zijn inhoud te onderzoeken.

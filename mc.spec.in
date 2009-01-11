@@ -21,7 +21,7 @@ Epoch:     1
 License:   GPL/LGPL
 Group:     Applications/File
 Source0:   ftp://ftp.gnu.org/gnu/mc/mc-%{ver}.tar.gz
-URL:       http://www.gnu.org/software/mc/
+URL:       http://www.midnight-commander.org/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 
 # Names of those packages are distribution specific
