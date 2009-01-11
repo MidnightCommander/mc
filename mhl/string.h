@@ -2,6 +2,7 @@
 #define __MHL_STRING_H
 
 #include <ctype.h>
+#include <stdarg.h>
 #include "../mhl/memory.h"
 
 #define	mhl_str_dup(str)	((str ? strdup(str) : strdup("")))
@@ -43,6 +44,26 @@ static inline void mhl_str_toupper(char* str)
     if (str)
 	for (;*str;str++)
 	    *str = toupper(*str);
+}
+
+static inline char* mhl_str_concat(int n, ...)
+{
+  va_list ap;
+  char* buf = NULL;
+  char* ptr = buf;
+
+  va_start(ap,n);
+  for (;n;n--) {
+    char *foo = va_arg(ap, char*);
+    int bar = strlen(foo);
+    int length += bar;
+    mhl_mem_realloc(buf, length);
+    memcpy(buf,foo,bar);
+    buf+bar;
+  }
+  va_end(ap);
+  *buf = 0;
+  return ptr;
 }
 
 /* concat 1 string to another and return as mhl_mem_alloc()'ed string */
