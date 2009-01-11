@@ -124,6 +124,9 @@ include sql.syntax
 file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
+file ..\*\\.(awk)$ AWK\sFile
+include awk.syntax
+
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
 

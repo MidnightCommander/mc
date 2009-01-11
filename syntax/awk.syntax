@@ -1,0 +1,129 @@
+# AWK syntax by Olegarch  <olegarch@mail.ru>
+# Possible *.AWK
+# GPL v2
+#
+# (c) 2003
+#
+
+context default
+
+    keyword whole linestart #!\[\s\]/bin/\[msg\]awk yellow magenta
+    keyword whole linestart #!\[\s\]/usr/bin/\[msg\]awk yellow magenta
+# Keywords
+    keyword whole return white/26
+    keyword whole print white/26
+    keyword whole printf white/26
+    keyword whole if white/26
+    keyword whole else white/26
+    keyword whole while white/26
+    keyword whole for white/26
+    keyword whole in white/26
+    keyword whole do white/26
+    keyword whole break white/26
+    keyword whole continue white/26
+    keyword whole next white/26
+    keyword whole exit white/26
+    keyword whole close white/26
+    keyword whole system white/26
+    keyword whole getline white/26
+# Builtin functions:
+    keyword whole atan2 white black
+    keyword whole cos white black
+    keyword whole exp white black
+    keyword whole int white black
+    keyword whole log white black
+    keyword whole rand white black
+    keyword whole sin white black
+    keyword whole sqrt white black
+    keyword whole srand white black
+    keyword whole gsub white black
+    keyword whole index white black
+    keyword whole length white black
+    keyword whole match white black
+    keyword whole split white black
+    keyword whole sprintf white black
+    keyword whole sub white black
+    keyword whole substr white black
+# Gawk builtin functions:
+    keyword whole fflush white black
+    keyword whole gensub white black
+    keyword whole tolower white black
+    keyword whole toupper white black
+    keyword whole systime white black
+    keyword whole strftime white black
+# Builtin variables:
+    keyword whole ARGC brightblue
+    keyword whole ARGV brightblue
+    keyword whole FILENAME brightblue
+    keyword whole FNR brightblue
+    keyword whole FS brightblue
+    keyword whole NF brightblue
+    keyword whole NR brightblue
+    keyword whole OFMT brightblue
+    keyword whole OFS brightblue
+    keyword whole ORS brightblue
+    keyword whole RLENGTH brightblue
+    keyword whole RS brightblue
+    keyword whole RSTART brightblue
+    keyword whole SUBSEP brightblue
+# Gawk builtin variables:
+    keyword whole ARGIND brightblue
+    keyword whole ERRNO brightblue
+    keyword whole RT brightblue
+    keyword whole IGNORECASE brightblue
+    keyword whole FIELDWIDTHS brightblue
+
+    keyword '\s' brightgreen/16
+    keyword '+' brightgreen/16
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword != yellow/24
+    keyword == yellow/24
+    keyword { white/25
+    keyword } white/25
+    keyword ( white/25
+    keyword ) white/25
+    keyword [*] magenta
+    keyword , white/25
+    keyword : white/25
+    keyword ; lightgray/19
+    keyword $\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] brightred/18
+# Begin/End:
+    keyword whole BEGIN red
+    keyword whole END red
+# Function keyword:
+    keyword whole function brightmagenta
+# Hex constant:
+    keyword 0\{xX\}\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\] magenta/6
+# Tab:	\t
+#    keyword linestart \t lightgray/13 blue/6
+
+# Sed:
+keyword linestart /^ red
+keyword linestart /^# red
+context /^#*/ red
+
+# Comments:
+context linestart # \n brown
+context linestart $ \n brown
+
+# String:
+context " " green/6
+    keyword \\" brightgreen/16
+    keyword \\\n brightgreen/16
+    keyword %% brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen/16
+    keyword %\[hl\]n brightgreen/16
+    keyword %\[.\]\[0123456789\]s brightgreen/16
+    keyword %[*] brightgreen/16
+    keyword %c brightgreen/16
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
+    keyword \\\\ brightgreen/16
+    keyword \\' brightgreen/16
+    keyword \\\{abtnvfr\} brightgreen/16
