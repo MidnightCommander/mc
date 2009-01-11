@@ -116,15 +116,6 @@ char *get_mc_lib_dir (void);
 int maybe_cd (int move_up_dir);
 void do_possible_cd (const char *dir);
 
-#ifdef WANT_WIDGETS
-extern WButtonBar *the_bar;
-extern WLabel     *the_prompt;
-extern WLabel     *the_hint;
-extern Dlg_head   *midnight_dlg;
-
-extern struct WMenu *the_menubar;
-#endif /* WANT_WIDGETS */
-
 void done_menu (void);
 void init_menu (void);
 
