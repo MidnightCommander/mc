@@ -107,7 +107,7 @@ context default
 
     keyword %&& brightcyan
     keyword || brightcyan
-    keyword && brightcyan    
+    keyword && brightcyan
     keyword %| brightcyan
     keyword %& brightcyan
     keyword %^ brightcyan
