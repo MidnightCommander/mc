@@ -280,10 +280,14 @@ user callback in some widgets.
 Where to Find Bug Reports and Patches
 =====================================
 
-There are various sources where bug reports and patches can be found.
+The official place for bug reports is:
 
-http://savannah.gnu.org/bugs/?group=mc
-	The primary bug tracking system for MC.
+    http://www.midnight-commander.org/
+
+
+There are various unofficial sources where bug reports and patches can 
+be found (NOT maintained by the MC team).
+
 
 http://bugs.debian.org/mc
 	The bug tracking system for Debian, a package collection mainly

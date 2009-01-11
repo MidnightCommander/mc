@@ -162,7 +162,7 @@
                <QPM:ProductIconLarge></QPM:ProductIconLarge>
                <QPM:ProductDescriptionShort>GNU Midnight Commander (also referred to as mc) - is a user shell with text-mode full-screen interface.</QPM:ProductDescriptionShort>
                <QPM:ProductDescriptionLong>GNU Midnight Commander (also referred to as mc) - is a user shell with text-mode full-screen interface. It can be run on the OS console, in xterm and other terminal emulators.</QPM:ProductDescriptionLong>
-               <QPM:ProductDescriptionURL>http://www.gnu.org/software/mc/</QPM:ProductDescriptionURL>
+               <QPM:ProductDescriptionURL>http://www.midnight-commander.org/</QPM:ProductDescriptionURL>
                <QPM:ProductDescriptionEmbedURL></QPM:ProductDescriptionEmbedURL>
             </QPM:ProductDescription>
 
