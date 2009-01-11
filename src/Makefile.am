@@ -60,8 +60,8 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	popt.c poptconfig.c popt.h popthelp.c poptint.h poptparse.c	\
 	profile.c profile.h regex.c rxvt.c screen.c setup.c setup.h	\
 	slint.c	subshell.c subshell.h textconf.c textconf.h		\
-	tree.c tree.h treestore.c treestore.h tty.c tty.h user.c user.h	\
-	util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
+	tree.c tree.h treestore.c treestore.h timefmt.h tty.c tty.h user.c	\
+	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
 	x11conn.h x11conn.c ecs.h ecs.c
 
