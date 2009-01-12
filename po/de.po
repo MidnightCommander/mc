@@ -945,10 +945,10 @@ msgid "sticky bit"
 msgstr "Sticky Bit"
 
 msgid "set group ID on execution"
-msgstr "Set Group ID bei Ausführung"
+msgstr "Setze Gruppen-ID bei Ausführung"
 
 msgid "set user ID on execution"
-msgstr "Set User ID bei Ausführung"
+msgstr "Setze Nutzer-ID bei Ausführung"
 
 msgid "C&lear marked"
 msgstr "Markierte &aufheben"
@@ -966,10 +966,10 @@ msgid "Permissions (Octal)"
 msgstr "Zugriffsrechte (oktal)"
 
 msgid "Owner name"
-msgstr "Name des owners"
+msgstr "Owner-Name"
 
 msgid "Group name"
-msgstr "Name der group"
+msgstr "Gruppen-Name"
 
 msgid "Use SPACE to change"
 msgstr "Zum Ändern Leertaste drücken"
@@ -999,25 +999,25 @@ msgid " Name "
 msgstr " Name "
 
 msgid " Owner name "
-msgstr " Name des Owners "
+msgstr " Owner-Name "
 
 msgid " Group name "
-msgstr " Name der Group "
+msgstr " Gruppen-Name "
 
 msgid " Size "
 msgstr " Größe "
 
 msgid " User name "
-msgstr " Name des Users"
+msgstr " Nutzername "
 
 msgid " Chown command "
 msgstr " Chown Befehl "
 
 msgid "<Unknown user>"
-msgstr "<unbekannter user>"
+msgstr "<unbekannter Nutzer>"
 
 msgid "<Unknown group>"
-msgstr "<unbekannte group>"
+msgstr "<unbekannte Gruppe>"
 
 msgid "Files tagged, want to cd?"
 msgstr "Dateien markiert, Verzeichnis wechseln?"
@@ -1065,7 +1065,7 @@ msgid " Which extension file you want to edit? "
 msgstr " Welcher Erweiterungsdatei möchten Sie bearbeiten? "
 
 msgid "&User"
-msgstr "ben&Utzer"
+msgstr "Ben&Utzer"
 
 msgid "&System Wide"
 msgstr "&Systemweit"
@@ -1161,13 +1161,13 @@ msgid " Link to a remote machine "
 msgstr " Link auf eine entfernte Maschine"
 
 msgid " FTP to machine "
-msgstr " FTP zu Maschine "
+msgstr " FTP zu Server "
 
 msgid " Shell link to machine "
-msgstr " Shell-Verbindung zu Maschine "
+msgstr " Shell-Verbindung zu Server "
 
 msgid " SMB link to machine "
-msgstr "SMB-Verbindung zu Maschine "
+msgstr "SMB-Verbindung zu Server "
 
 msgid " Undelete files on an ext2 file system "
 msgstr " Löschen von Dateien auf einem ext2 Dateisystem rückgängig machen "
