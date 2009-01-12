@@ -993,7 +993,7 @@ msgid "Set &users"
 msgstr "&User setzen"
 
 msgid "Set &groups"
-msgstr "&Group setzen"
+msgstr "&Gruppe setzen"
 
 msgid " Name "
 msgstr " Name "
