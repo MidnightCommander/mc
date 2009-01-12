@@ -1491,36 +1491,6 @@ load_hotlist (void)
     current_group = hotlist;
 }
 
-static void
-save_group (struct hotlist *grp)
-{
-    struct hotlist *current = grp->head;
-    char           *group_section;
-
-    group_section = find_group_section (grp);
-    
-    profile_clean_section (group_section, profile_name);
-    for (;current && current->type == HL_TYPE_GROUP; current = current->next){
-	WritePrivateProfileString (group_section,
-				   current->directory,
-				   current->label,
-				   profile_name);
-    }
-    g_free (group_section);
-
-    for (current = grp->head;
-	 current && current->type == HL_TYPE_GROUP;
-	 current = current->next)
-	 save_group (current);
-    
-    profile_clean_section (grp->directory, profile_name);
-    for (;current; current = current->next){
-	WritePrivateProfileString (grp->directory,
-				   current->directory,
-				   current->label,
-				   profile_name);
-    }
-}
 
 static int  list_level = 0;
 

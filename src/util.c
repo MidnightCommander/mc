@@ -755,7 +755,6 @@ file_date (time_t when)
     static size_t i18n_timelength = 0;
     static const char *fmtyear, *fmttime;
     const char *fmt;
-    struct tm *whentm;
 
     if (i18n_timelength == 0){
 	i18n_timelength = i18n_checktimelength() + 1;
