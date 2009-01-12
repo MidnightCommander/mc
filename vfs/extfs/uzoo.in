@@ -23,7 +23,7 @@ mklink ()
 mczoofs_list ()
 {
     mklink "$1"
-    $ZOO lq "$ARCHIVE" | @AWK@ -v uid=${UID-0} '
+    $ZOO lq "$ARCHIVE" | @AWK@ -v uid=$(id -ru)  '
 /^[^\ ]/ { next }
 {
 if (NF < 8)

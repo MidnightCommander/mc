@@ -10,7 +10,7 @@ HA=ha
 
 mchafs_list ()
 {
-    $HA lf "$1" 2>/dev/null | @AWK@ -v uid=${UID-0} '
+    $HA lf "$1" 2>/dev/null | @AWK@ -v uid=$(id -ru)  '
 /^===========/ {next}
 {
  if ($5="%" && $8~/DIR|ASC|HSC|CPY/) {
