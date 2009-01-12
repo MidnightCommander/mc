@@ -1,3 +1,8 @@
+2009-01-12 Patrick Winnertz <winnie@debian.org>
+  
+	* AUTHORS: Added Enrico Weigelt, Slava Zanko and 
+	Patrick Winnertz as authors 
+
 2009-01-11 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* FAQ HACKING README man/*: new HQ url
