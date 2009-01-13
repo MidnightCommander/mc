@@ -36,6 +36,8 @@ memory.h:	Memory management functions
 
 string.h:	String helpers
 
+TODO: need to support multibyte codepages.
+
     * mhl_str_dup(const char*s) -> char*
 
 	[MACRO-FUNC] Safe version of strdup(), when NULL passed, returns strdup("")

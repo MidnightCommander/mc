@@ -606,6 +606,7 @@ slang/Makefile
 edit/Makefile 
 syntax/Makefile
 m4/Makefile
+mhl/Makefile
 lib/mc.ext
 vfs/extfs/a
 vfs/extfs/apt

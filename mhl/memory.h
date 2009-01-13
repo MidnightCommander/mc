@@ -97,4 +97,4 @@ static inline void mhl_mem_free(void* ptr)
 /* free an ptr and NULL it */
 #define 	MHL_PTR_FREE(ptr)	do { mhl_mem_free(ptr); (ptr) = NULL; } while (0); 
 
-#endif
+#endif // __MHL_MEM
