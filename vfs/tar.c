@@ -745,7 +745,7 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
     return 1;
 }
 
-static int tar_read (void *fh, char *buffer, int count)
+static ssize_t tar_read (void *fh, char *buffer, int count)
 {
     off_t begin = FH->ino->data_offset;
     int fd = FH_SUPER->u.arch.fd;

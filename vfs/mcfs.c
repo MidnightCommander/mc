@@ -551,7 +551,7 @@ mcfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     return remote_handle;
 }
 
-static int
+static ssize_t
 mcfs_read (void *data, char *buffer, int count)
 {
     mcfs_handle *info = (mcfs_handle *) data;
@@ -578,7 +578,7 @@ mcfs_read (void *data, char *buffer, int count)
     return result;
 }
 
-static int
+static ssize_t
 mcfs_write (void *data, const char *buf, int nbyte)
 {
     mcfs_handle *info = (mcfs_handle *) data;
@@ -1069,7 +1069,7 @@ mcfs_chdir (struct vfs_class *me, const char *path)
     return 0;
 }
 
-static int
+static off_t
 mcfs_lseek (void *data, off_t offset, int whence)
 {
     mcfs_handle *info = (mcfs_handle *) data;

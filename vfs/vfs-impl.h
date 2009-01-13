@@ -46,8 +46,8 @@ struct vfs_class {
     void *(*open) (struct vfs_class *me, const char *fname, int flags,
 		   int mode);
     int (*close) (void *vfs_info);
-    int (*read) (void *vfs_info, char *buffer, int count);
-    int (*write) (void *vfs_info, const char *buf, int count);
+    ssize_t (*read) (void *vfs_info, char *buffer, int count);
+    ssize_t (*write) (void *vfs_info, const char *buf, int count);
 
     void *(*opendir) (struct vfs_class *me, const char *dirname);
     void *(*readdir) (void *vfs_info);
@@ -70,7 +70,7 @@ struct vfs_class {
     int (*rename) (struct vfs_class *me, const char *p1, const char *p2);
     int (*chdir) (struct vfs_class *me, const char *path);
     int (*ferrno) (struct vfs_class *me);
-    int (*lseek) (void *vfs_info, off_t offset, int whence);
+    off_t (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (struct vfs_class *me, const char *path, int mode, int dev);
 
     vfsid (*getid) (struct vfs_class *me, const char *path);

@@ -15,8 +15,8 @@ int vfs_file_is_local (const char *filename);
 
 int mc_open (const char *filename, int flags, ...);
 int mc_close (int handle);
-int mc_read (int handle, void *buffer, int count);
-int mc_write (int handle, const void *buffer, int count);
+ssize_t mc_read (int handle, void *buffer, int count);
+ssize_t mc_write (int handle, const void *buffer, int count);
 off_t mc_lseek (int fd, off_t offset, int whence);
 int mc_chdir (const char *path);
 

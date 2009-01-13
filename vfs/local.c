@@ -39,7 +39,7 @@ local_open (struct vfs_class *me, const char *file, int flags, int mode)
     return local_info;
 }
 
-int
+ssize_t
 local_read (void *data, char *buffer, int count)
 {
     int n;
@@ -188,7 +188,7 @@ local_symlink (struct vfs_class *me, const char *n1, const char *n2)
     return symlink (n1, n2);
 }
 
-static int
+static ssize_t
 local_write (void *data, const char *buf, int nbyte)
 {
     int fd;
@@ -226,7 +226,7 @@ local_chdir (struct vfs_class *me, const char *path)
     return chdir (path);
 }
 
-int
+off_t
 local_lseek (void *data, off_t offset, int whence)
 {
     int fd = * (int *) data;
