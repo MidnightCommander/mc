@@ -1,5 +1,5 @@
-DIST_SUBDIRS = man es hu it pl ru sr
-SUBDIRS = man $(DOC_LINGUAS)
+DIST_SUBDIRS = hints man es hu it pl ru sr
+SUBDIRS = hints man $(DOC_LINGUAS)
 
 pkgdata_DATA = mc.hlp
 

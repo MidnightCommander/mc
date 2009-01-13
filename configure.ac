@@ -596,6 +596,7 @@ vfs/extfs/uzip
 vfs/extfs/uzoo
 
 doc/Makefile 
+doc/hints/Makefile
 doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/mcserv.8 doc/man/Makefile
 doc/man/es/mc.1 doc/man/es/Makefile
 doc/man/hu/mc.1 doc/man/hu/Makefile

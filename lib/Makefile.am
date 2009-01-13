@@ -7,9 +7,8 @@ LIBFILES_ADD =
 endif
 
 LIBFILES_OUT = mc.ext
-LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.hu mc.hint.it	\
-	mc.hint.nl mc.hint.pl mc.hint.ru mc.hint.sr mc.hint.uk		\
-	mc.hint.zh mc.lib mc.menu mc.menu.sr cedit.menu edit.indent.rc	\
+
+LIBFILES_CONST =  mc.lib mc.menu mc.menu.sr cedit.menu edit.indent.rc	\
 	edit.spell.rc
 
 noinst_DATA = README.xterm mcserv.init mcserv.pamd xterm.ad
