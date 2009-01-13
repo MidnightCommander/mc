@@ -25,6 +25,21 @@ dnl Keep this check close to the beginning, so that the users
 dnl without any glib won't have their time wasted by other checks.
 dnl
 
+AC_DEFINE(WITH_GLIB, 1, [Use Glib functions])
+
+dnl TODO: make option --with-glib like this:
+dnl
+dnl AC_ARG_WITH(glib,
+dnl 	[AS_HELP_STRING([--with-glib], [Use glib (default is yes)])],
+dnl 	[with_glib=$enableval],
+dnl 	[with_glib=yes])
+dnl
+dnl if test x${with_glib} = xyes; then
+dnl dnl	some checking stuff
+dnl	AC_DEFINE(WITH_GLIB, 1, [Use Glib functions])
+dnl fi
+
+
 AC_ARG_WITH(glib12, 
 	[  --with-glib12            Force using glib 1.2.x [[no]]])
 
