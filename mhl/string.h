@@ -20,7 +20,7 @@ static inline char* mhl_str_trim(char* str)
     if (!(*str)) { *str = 0; return str; }
 
     // get the size (cannot be empty - catched above)
-    int _sz = strlen(str);
+    size_t _sz = strlen(str);
 
     // find the proper end
     char* end;
@@ -51,9 +51,9 @@ static inline void mhl_str_toupper(char* str)
 static inline char* __mhl_str_concat_hlp(const char* base, ...)
 {
     static const char* arg_ptr[__STR_CONCAT_MAX];
-    static int         arg_sz[__STR_CONCAT_MAX];
+    static size_t      arg_sz[__STR_CONCAT_MAX];
     int         count = 0;
-    int         totalsize = 0;
+    size_t      totalsize = 0;
 
     // first pass: scan through the params and count string sizes
     va_list par;
@@ -105,7 +105,7 @@ static inline char* mhl_str_reverse(char* ptr)
     if (!ptr) 	 		return NULL;	// missing string
     if (!(ptr[0] && ptr[1]))	return ptr;	// empty or 1-ch string
 
-    int _sz = strlen(ptr);
+    size_t _sz = strlen(ptr);
     char* start = ptr;
     char* end   = ptr+_sz-1;
 
