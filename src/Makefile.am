@@ -38,7 +38,7 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 endif
 
-mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
+mc_LDADD = ../mhl/libmhl.a $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
 	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
