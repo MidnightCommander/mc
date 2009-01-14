@@ -23,10 +23,11 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
-#include "string.h"
+#include <string.h>
+#include "../mhl/mhl_string.h"
 
 /* ---------------------------------------------------------------------------- */
-char *
+inline char *
 mhl_str_reverse (char *ptr)
 {
     if (!ptr)
@@ -51,7 +52,7 @@ mhl_str_reverse (char *ptr)
 }
 
 /* ---------------------------------------------------------------------------- */
-char *
+inline char *
 __mhl_str_concat_hlp (const char *base, ...)
 {
     static const char *arg_ptr[__STR_CONCAT_MAX];
@@ -103,7 +104,7 @@ __mhl_str_concat_hlp (const char *base, ...)
 }
 
 /* ---------------------------------------------------------------------------- */
-void
+inline void
 mhl_str_toupper (char *str)
 {
     /*
@@ -117,7 +118,7 @@ mhl_str_toupper (char *str)
 }
 
 /* ---------------------------------------------------------------------------- */
-char *
+inline char *
 mhl_str_trim (char *str)
 {
     if (!str)

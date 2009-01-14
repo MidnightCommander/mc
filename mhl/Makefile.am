@@ -7,6 +7,6 @@ libmhl_a_SOURCES = \
 	memory.h \
 	shell_escape.h \
 	strhash.h \
-	string.c string.h
+	mhl_string.c mhl_string.h
 
 EXTRA_DIST = README

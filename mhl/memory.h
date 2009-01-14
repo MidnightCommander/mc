@@ -1,7 +1,7 @@
 #ifndef __MHL_MEM
 #define __MHL_MEM
 
-#if defined _AIX && !defined REGEX_MALLOC
+#if defined _AIX
   #pragma alloca
 #endif
 
@@ -10,7 +10,9 @@
 #include <stdlib.h>
 
 #ifdef __GNUC__
-#    define alloca __builtin_alloca
+#    ifndef alloca
+#        define alloca __builtin_alloca
+#    endif
 #else
 #    ifdef _MSC_VER
 #        include <malloc.h>

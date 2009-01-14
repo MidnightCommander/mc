@@ -9,17 +9,17 @@
 #define mhl_str_ndup(str,len)	((str ? strndup(str,len) : strdup("")))
 #define mhl_str_len(str)	((str ? strlen(str) : 0))
 
-char* mhl_str_trim(char*);
+inline char* mhl_str_trim(char*);
 
-void mhl_str_toupper(char*);
+inline void mhl_str_toupper(char*);
 
 #define __STR_CONCAT_MAX	32
 
 /* _NEVER_ call this function directly ! */
-char* __mhl_str_concat_hlp(const char*, ...);
+inline char* __mhl_str_concat_hlp(const char*, ...);
 
 #define mhl_str_concat(...)	(__mhl_str_concat_hlp(__VA_ARGS__, (char*)(1)))
 
-char* mhl_str_reverse(char*);
+inline char* mhl_str_reverse(char*);
 
 #endif // __MHL_STRING_H
