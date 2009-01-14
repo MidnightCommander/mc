@@ -2734,7 +2734,7 @@ view_moveto_line_cmd (WView *view)
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current line number is %d.\n"
 		  " Enter the new line number:"), (int) (line + 1));
-    answer = input_dialog (_(" Goto line "), prompt, "");
+    answer = input_dialog (_(" Goto line "), prompt, " Goto line ", "");
     if (answer != NULL && answer[0] != '\0') {
 	errno = 0;
 	line = strtoul (answer, &answer_end, 10);
@@ -2755,7 +2755,7 @@ view_moveto_addr_cmd (WView *view)
     g_snprintf (prompt, sizeof (prompt),
 		_(" The current address is 0x%lx.\n"
 		  " Enter the new address:"), view->hex_cursor);
-    line = input_dialog (_(" Goto Address "), prompt, "");
+    line = input_dialog (_(" Goto Address "), prompt, " Goto Address ", "");
     if (line != NULL) {
 	if (*line != '\0') {
 	    addr = strtoul (line, &error, 0);
@@ -2788,7 +2788,7 @@ regexp_search (WView *view, int direction)
 
     defval = (last_regexp != NULL ? last_regexp : "");
 
-    regexp = input_dialog (_("Search"), _(" Enter regexp:"), defval);
+    regexp = input_dialog (_("Search"), _(" Enter regexp:"), "Search", defval);
     if (regexp == NULL || regexp[0] == '\0') {
 	g_free (regexp);
 	return;

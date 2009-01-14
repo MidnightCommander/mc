@@ -1042,7 +1042,7 @@ void add2hotlist_cmd (void)
     strip_password (label_string, 1);
 
     prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
-    label = input_dialog (_(" Add to hotlist "), prompt, label_string);
+    label = input_dialog (_(" Add to hotlist "), prompt, " Add to hotlist ", label_string);
     g_free (prompt);
 
     if (!label || !*label) {

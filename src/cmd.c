@@ -229,7 +229,7 @@ view_file_cmd (void)
 
     filename =
 	input_expand_dialog (_(" View file "), _(" Filename:"),
-			     selection (current_panel)->fname);
+			     " View file ", selection (current_panel)->fname);
     if (!filename)
 	return;
 
@@ -252,6 +252,7 @@ filtered_view_cmd (void)
     command =
 	input_dialog (_(" Filtered view "),
 		      _(" Filter command and arguments:"),
+		      " Filtered view ",
 		      selection (current_panel)->fname);
     if (!command)
 	return;
@@ -350,7 +351,8 @@ mkdir_cmd (void)
 
     dir =
 	input_expand_dialog (_("Create a new Directory"),
-			     _(" Enter directory name:"), "");
+			     _(" Enter directory name:"), 
+			     "Create a new Directory", "");
     if (!dir)
 	return;
 
@@ -422,7 +424,7 @@ set_panel_filter (WPanel *p)
 	
     reg_exp = input_dialog_help (_(" Filter "),
 				 _(" Set expression for filtering filenames"),
-				 "[Filter...]", x);
+				 "[Filter...]", " Filter ", x);
     if (!reg_exp)
 	return;
     set_panel_filter_to (p, reg_exp);
@@ -468,14 +470,14 @@ void reverse_selection_cmd (void)
 }
 
 static void
-select_unselect_cmd (const char *title, int cmd)
+select_unselect_cmd (const char *title, const char *history_name, int cmd)
 {
     char *reg_exp, *reg_exp_t;
     int i;
     int c;
     int dirflag = 0;
 
-    reg_exp = input_dialog (title, "", easy_patterns ? "*" : ".");
+    reg_exp = input_dialog (title, "", history_name, easy_patterns ? "*" : ".");
     if (!reg_exp)
 	return;
     if (!*reg_exp) {
@@ -521,12 +523,12 @@ select_unselect_cmd (const char *title, int cmd)
 
 void select_cmd (void)
 {
-    select_unselect_cmd (_(" Select "), 1);
+    select_unselect_cmd (_(" Select "), " Select ", 1);
 }
 
 void unselect_cmd (void)
 {
-    select_unselect_cmd (_(" Unselect "), 0);
+    select_unselect_cmd (_(" Unselect "), " Unselect ", 0);
 }
 
 /* Check if the file exists */
@@ -903,7 +905,7 @@ do_link (int symbolic_link, const char *fname)
 
     if (!symbolic_link) {
 	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
-	dest = input_expand_dialog (_(" Link "), src, "");
+	dest = input_expand_dialog (_(" Link "), src, " Link ", "");
 	if (!dest || !*dest)
 	    goto cleanup;
 	save_cwds_stat ();
@@ -972,7 +974,7 @@ void edit_symlink_cmd (void)
 	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {
 	    buffer [i] = 0;
-	    dest = input_expand_dialog (_(" Edit symlink "), q, buffer);
+	    dest = input_expand_dialog (_(" Edit symlink "), q, " Edit symlink ", buffer);
 	    if (dest) {
 		if (*dest && strcmp (buffer, dest)) {
 		    save_cwds_stat ();
@@ -1085,7 +1087,8 @@ get_random_hint (int force)
 
 #if defined(USE_NETCODE) || defined(USE_EXT2FSLIB)
 static void
-nice_cd (const char *text, const char *xtext, const char *help, const char *prefix, int to_home)
+nice_cd (const char *text, const char *xtext, const char *help,
+	 const char *history_name, const char *prefix, int to_home)
 {
     char *machine;
     char *cd_path;
@@ -1093,9 +1096,7 @@ nice_cd (const char *text, const char *xtext, const char *help, const char *pref
     if (!SELECTED_IS_PANEL)
 	return;
 
-    machine = input_dialog_help (text,
-				 xtext,
-				 help, "");
+    machine = input_dialog_help (text, xtext, help, history_name, "");
     if (!machine)
 	return;
 
@@ -1125,27 +1126,30 @@ static const char *machine_str = N_(" Enter machine name (F1 for details): ");
 void netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
-	     "[Network File System]", "/#mc:", 1);
+	     "[Network File System]", " Link to a remote machine ",
+	     "/#mc:", 1);
 }
 #endif /* WITH_MCFS */
 
 void ftplink_cmd (void)
 {
     nice_cd (_(" FTP to machine "), _(machine_str),
-	     "[FTP File System]", "/#ftp:", 1);
+	     "[FTP File System]", " FTP to machine ", "/#ftp:", 1);
 }
 
 void fishlink_cmd (void)
 {
     nice_cd (_(" Shell link to machine "), _(machine_str),
-	     "[FIle transfer over SHell filesystem]", "/#sh:", 1);
+	     "[FIle transfer over SHell filesystem]", " Shell link to machine ",
+	     "/#sh:", 1);
 }
 
 #ifdef WITH_SMBFS
 void smblink_cmd (void)
 {
     nice_cd (_(" SMB link to machine "), _(machine_str),
-	     "[SMB File System]", "/#smb:", 0);
+	     "[SMB File System]", " SMB link to machine ",
+	     "/#smb:", 0);
 }
 #endif /* WITH_SMBFS */
 #endif /* USE_NETCODE */
@@ -1156,7 +1160,8 @@ void undelete_cmd (void)
     nice_cd (_(" Undelete files on an ext2 file system "),
 	     _(" Enter device (without /dev/) to undelete\n "
 	       "  files on: (F1 for details)"),
-	     "[Undelete File System]", "/#undel:", 0);
+	     "[Undelete File System]", " Undelete files on an ext2 file system ",
+	     "/#undel:", 0);
 }
 #endif /* USE_EXT2FSLIB */
 

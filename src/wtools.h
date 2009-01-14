@@ -57,9 +57,12 @@ int quick_dialog_skip (QuickDialog *qd, int nskip);
 /* Pass this as def_text to request a password */
 #define INPUT_PASSWORD ((char *) -1)
 
-char *input_dialog (const char *header, const char *text, const char *def_text);
-char *input_dialog_help (const char *header, const char *text, const char *help, const char *def_text);
-char *input_expand_dialog (const char *header, const char *text, const char *def_text);
+char *input_dialog (const char *header, const char *text,
+		    const char *history_name, const char *def_text);
+char *input_dialog_help (const char *header, const char *text, const char *help,
+			 const char *history_name, const char *def_text);
+char *input_expand_dialog (const char *header, const char *text,
+			   const char *history_name, const char *def_text);
 
 void query_set_sel (int new_sel);
 
