@@ -47,8 +47,8 @@ mcu7zip_rmdir ()
 }
 
 # override any locale for dates
-LC_ALL=C
-export LC_ALL
+LC_DATE=C
+export LC_DATE
 
 umask 077
 
@@ -56,7 +56,7 @@ cmd="$1"
 shift
 
 case "$cmd" in
-  list)    mcu7zip_list    "$@" ;;
+  list)    mcu7zip_list    "$@" | sort -k 8 ;;
   copyout) mcu7zip_copyout "$@" ;;
   copyin)  mcu7zip_copyin  "$@" ;;
   mkdir)   mcu7zip_mkdir   "$@" ;;

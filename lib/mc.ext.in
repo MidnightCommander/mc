@@ -207,7 +207,7 @@ regex/\.iso$
 	View=%view{ascii} isoinfo -l -i %f
 
 # 7zip archives (they are not man pages)
-shell/.7z
+regex/\.(7z|7Z)$
 	Open=%cd %p#u7z
 	View=%view{ascii} 7za l %f 2>/dev/null
 

@@ -1,12 +1,19 @@
+2009-01-14 Slava Zanko <slavazanko@gmail.com>
+
+	* lib/mc.ext.in: change filemask for recognize 7z-files
+	* vfs/extfs/u7z: 
+	  - change only LC_DATE global variable for correct work with arhive;
+	  - add sorting by filename in output of list files
+
 2009-01-12 Patrick Winnertz <winnie@debian.org>
-  
-  * AUTHORS: Added Enrico Weigelt, Slava Zanko and 
-  Patrick Winnertz as authors 
+
+	* AUTHORS: Added Enrico Weigelt, Slava Zanko and 
+	Patrick Winnertz as authors 
 
 2009-01-11 Patrick Winnertz <winnie@debian.org>
 
-  * syntax/pascal.syntax: Added syntax highlighting for 
-  some delphi keywords
+	* syntax/pascal.syntax: Added syntax highlighting for 
+	some delphi keywords
 
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
