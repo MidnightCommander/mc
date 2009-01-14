@@ -200,4 +200,9 @@ void refresh_screen (void *);
 #include <assert.h>
 #endif
 
+#ifndef WITH_GLIB
+#	define TRUE (int)1
+#	define FALSE (int)0
+#endif
+
 #endif
