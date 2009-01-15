@@ -7,359 +7,359 @@ msgstr ""
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CP1251\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
 #, fuzzy
 msgid " Choose syntax highlighting "
-msgstr "Вылучэньне &колерам сынтаксысу"
+msgstr "Р’С‹Р»СѓС‡СЌРЅСЊРЅРµ &РєРѕР»РµСЂР°Рј СЃС‹РЅС‚Р°РєСЃС‹СЃСѓ"
 
 #, fuzzy
 msgid "< Auto >"
-msgstr " Пра праграму "
+msgstr " РџСЂР° РїСЂР°РіСЂР°РјСѓ "
 
 msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, fuzzy, c-format
 msgid " Cannot open %s for reading "
-msgstr " Памылка адкрыцьця каналу для чытаньня: "
+msgstr " РџР°РјС‹Р»РєР° Р°РґРєСЂС‹С†СЊС†СЏ РєР°РЅР°Р»Сѓ РґР»СЏ С‡С‹С‚Р°РЅСЊРЅСЏ: "
 
 msgid "Error"
-msgstr "Памылка"
+msgstr "РџР°РјС‹Р»РєР°"
 
 #, fuzzy, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Памылка чытаньня з каналу: "
+msgstr " РџР°РјС‹Р»РєР° С‡С‹С‚Р°РЅСЊРЅСЏ Р· РєР°РЅР°Р»Сѓ: "
 
 #, fuzzy, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Памылка адкрыцьця каналу для чытаньня: "
+msgstr " РџР°РјС‹Р»РєР° Р°РґРєСЂС‹С†СЊС†СЏ РєР°РЅР°Р»Сѓ РґР»СЏ С‡С‹С‚Р°РЅСЊРЅСЏ: "
 
 #, fuzzy, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Немагчыма атрымаць памер/правы доступу для файлу: "
+msgstr " РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ РїР°РјРµСЂ/РїСЂР°РІС‹ РґРѕСЃС‚СѓРїСѓ РґР»СЏ С„Р°Р№Р»Сѓ: "
 
 #, fuzzy, c-format
 msgid " %s is not a regular file "
-msgstr " Прагляд немагчымы: нязвычайны файл "
+msgstr " РџСЂР°РіР»СЏРґ РЅРµРјР°РіС‡С‹РјС‹: РЅСЏР·РІС‹С‡Р°Р№РЅС‹ С„Р°Р№Р» "
 
 #, fuzzy, c-format
 msgid " File %s is too large "
-msgstr " Вельмі вялікі файл: "
+msgstr " Р’РµР»СЊРјС– РІСЏР»С–РєС– С„Р°Р№Р»: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
 
 msgid " Enter file name: "
-msgstr " Увядзіце ймя файлу: "
+msgstr " РЈРІСЏРґР·С–С†Рµ Р№РјСЏ С„Р°Р№Р»Сѓ: "
 
 msgid "Warning"
-msgstr "Папярэджаньне"
+msgstr "РџР°РїСЏСЂСЌРґР¶Р°РЅСЊРЅРµ"
 
 msgid " File has hard-links. Detach before saving? "
 msgstr ""
 
 msgid "&Yes"
-msgstr "&Так"
+msgstr "&РўР°Рє"
 
 msgid "&No"
-msgstr "&Не"
+msgstr "&РќРµ"
 
 msgid "&Cancel"
-msgstr "&Адмена"
+msgstr "&РђРґРјРµРЅР°"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
 msgid " Error writing to pipe: "
-msgstr " Памылка запісу ў канал: "
+msgstr " РџР°РјС‹Р»РєР° Р·Р°РїС–СЃСѓ Сћ РєР°РЅР°Р»: "
 
 msgid " Cannot open pipe for writing: "
-msgstr " Памылка адкрыцьця каналу для запісу: "
+msgstr " РџР°РјС‹Р»РєР° Р°РґРєСЂС‹С†СЊС†СЏ РєР°РЅР°Р»Сѓ РґР»СЏ Р·Р°РїС–СЃСѓ: "
 
 msgid "Quick save "
-msgstr "Хуткае захаваньне "
+msgstr "РҐСѓС‚РєР°Рµ Р·Р°С…Р°РІР°РЅСЊРЅРµ "
 
 msgid "Safe save "
-msgstr "Бясьпечнае захаваньне "
+msgstr "Р‘СЏСЃСЊРїРµС‡РЅР°Рµ Р·Р°С…Р°РІР°РЅСЊРЅРµ "
 
 msgid "Do backups -->"
-msgstr "Рэзэрвовыя копіі -->"
+msgstr "Р СЌР·СЌСЂРІРѕРІС‹СЏ РєРѕРїС–С– -->"
 
 msgid "&OK"
-msgstr "&Так"
+msgstr "&РўР°Рє"
 
 msgid "Extension:"
-msgstr "Пашырэньне:"
+msgstr "РџР°С€С‹СЂСЌРЅСЊРЅРµ:"
 
 msgid " Edit Save Mode "
-msgstr " Рэжым захаваньня "
+msgstr " Р СЌР¶С‹Рј Р·Р°С…Р°РІР°РЅСЊРЅСЏ "
 
 msgid " Save As "
-msgstr " Захаваць як "
+msgstr " Р—Р°С…Р°РІР°С†СЊ СЏРє "
 
 msgid " A file already exists with this name. "
-msgstr " Файл с такім імем ужо йснуе. "
+msgstr " Р¤Р°Р№Р» СЃ С‚Р°РєС–Рј С–РјРµРј СѓР¶Рѕ Р№СЃРЅСѓРµ. "
 
 #, fuzzy
 msgid "&Overwrite"
-msgstr "Перапісаць"
+msgstr "РџРµСЂР°РїС–СЃР°С†СЊ"
 
 msgid " Cannot save file. "
-msgstr " Памылка пры захаваньні файлу "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ Р·Р°С…Р°РІР°РЅСЊРЅС– С„Р°Р№Р»Сѓ "
 
 msgid "Cancel"
-msgstr "Адмена"
+msgstr "РђРґРјРµРЅР°"
 
 msgid " Delete macro "
-msgstr " Выдаліць макрас "
+msgstr " Р’С‹РґР°Р»С–С†СЊ РјР°РєСЂР°СЃ "
 
 msgid " Cannot open temp file "
-msgstr " Памылка пры адкрыцьці часовага файлу "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ Р°РґРєСЂС‹С†СЊС†С– С‡Р°СЃРѕРІР°РіР° С„Р°Р№Р»Сѓ "
 
 msgid " Cannot open macro file "
-msgstr " Памылка пры адкрыцьці файлу макрасаў "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ Р°РґРєСЂС‹С†СЊС†С– С„Р°Р№Р»Сѓ РјР°РєСЂР°СЃР°Сћ "
 
 msgid " Cannot overwrite macro file "
-msgstr " Памылка пры перазапісу файлу макрасаў "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ РїРµСЂР°Р·Р°РїС–СЃСѓ С„Р°Р№Р»Сѓ РјР°РєСЂР°СЃР°Сћ "
 
 msgid " Save macro "
-msgstr " Захаваць макрас "
+msgstr " Р—Р°С…Р°РІР°С†СЊ РјР°РєСЂР°СЃ "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Націсьніце новую клявішу макрасу "
+msgstr " РќР°С†С–СЃСЊРЅС–С†Рµ РЅРѕРІСѓСЋ РєР»СЏРІС–С€Сѓ РјР°РєСЂР°СЃСѓ "
 
 msgid " Press macro hotkey: "
-msgstr " Націсьніце гарачую клавішу для макраса: "
+msgstr " РќР°С†С–СЃСЊРЅС–С†Рµ РіР°СЂР°С‡СѓСЋ РєР»Р°РІС–С€Сѓ РґР»СЏ РјР°РєСЂР°СЃР°: "
 
 msgid " Load macro "
-msgstr " Загрузіць макрас "
+msgstr " Р—Р°РіСЂСѓР·С–С†СЊ РјР°РєСЂР°СЃ "
 
 msgid " Confirm save file? : "
-msgstr " Падцьвярджаеця запіс файлу?: "
+msgstr " РџР°РґС†СЊРІСЏСЂРґР¶Р°РµС†СЏ Р·Р°РїС–СЃ С„Р°Р№Р»Сѓ?: "
 
 msgid " Save file "
-msgstr " Захаваць файл "
+msgstr " Р—Р°С…Р°РІР°С†СЊ С„Р°Р№Р» "
 
 msgid "&Save"
-msgstr "&Захаваць"
+msgstr "&Р—Р°С…Р°РІР°С†СЊ"
 
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Бягучы тэкст быў мадыфікаваны й не захаваны. \n"
-" Працяг апэрацыі прывядзе да страты зьменаў. "
+" Р‘СЏРіСѓС‡С‹ С‚СЌРєСЃС‚ Р±С‹Сћ РјР°РґС‹С„С–РєР°РІР°РЅС‹ Р№ РЅРµ Р·Р°С…Р°РІР°РЅС‹. \n"
+" РџСЂР°С†СЏРі Р°РїСЌСЂР°С†С‹С– РїСЂС‹РІСЏРґР·Рµ РґР° СЃС‚СЂР°С‚С‹ Р·СЊРјРµРЅР°Сћ. "
 
 #, fuzzy
 msgid "C&ontinue"
-msgstr "Працягнуць"
+msgstr "РџСЂР°С†СЏРіРЅСѓС†СЊ"
 
 msgid " Load "
-msgstr " Загрузіць "
+msgstr " Р—Р°РіСЂСѓР·С–С†СЊ "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блёк завялікі, у вас мажліва не атрымаецца адкаціць гэтую апэрацыю "
+msgstr " Р‘Р»С‘Рє Р·Р°РІСЏР»С–РєС–, Сѓ РІР°СЃ РјР°Р¶Р»С–РІР° РЅРµ Р°С‚СЂС‹РјР°РµС†С†Р° Р°РґРєР°С†С–С†СЊ РіСЌС‚СѓСЋ Р°РїСЌСЂР°С†С‹СЋ "
 
 msgid "O&ne"
-msgstr "&Адзін"
+msgstr "&РђРґР·С–РЅ"
 
 msgid "A&ll"
-msgstr "&Усе"
+msgstr "&РЈСЃРµ"
 
 msgid "&Skip"
-msgstr "П&рапусьціць"
+msgstr "Рџ&СЂР°РїСѓСЃСЊС†С–С†СЊ"
 
 msgid "&Replace"
-msgstr "&Замяніць"
+msgstr "&Р—Р°РјСЏРЅС–С†СЊ"
 
 msgid " Replace with: "
-msgstr " Замяніць на: "
+msgstr " Р—Р°РјСЏРЅС–С†СЊ РЅР°: "
 
 msgid " Confirm replace "
-msgstr " Падцьвердзіць замену "
+msgstr " РџР°РґС†СЊРІРµСЂРґР·С–С†СЊ Р·Р°РјРµРЅСѓ "
 
 msgid "scanf &Expression"
-msgstr "выраз &scanf"
+msgstr "РІС‹СЂР°Р· &scanf"
 
 msgid "replace &All"
-msgstr "Замяніць &Усе"
+msgstr "Р—Р°РјСЏРЅС–С†СЊ &РЈСЃРµ"
 
 msgid "pro&Mpt on replace"
-msgstr "Падцьвердзіць &замену"
+msgstr "РџР°РґС†СЊРІРµСЂРґР·С–С†СЊ &Р·Р°РјРµРЅСѓ"
 
 msgid "&Backwards"
-msgstr "&Назад"
+msgstr "&РќР°Р·Р°Рґ"
 
 msgid "&Regular expression"
-msgstr "&Сталы выраз"
+msgstr "&РЎС‚Р°Р»С‹ РІС‹СЂР°Р·"
 
 msgid "&Whole words only"
-msgstr "Толькі поўныя &словы"
+msgstr "РўРѕР»СЊРєС– РїРѕСћРЅС‹СЏ &СЃР»РѕРІС‹"
 
 msgid "case &Sensitive"
-msgstr "Улік рэ&гістру"
+msgstr "РЈР»С–Рє СЂСЌ&РіС–СЃС‚СЂСѓ"
 
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Увядзіце парадак аргумэнтаў замены, напр. 3,2,1,4 "
+msgstr " РЈРІСЏРґР·С–С†Рµ РїР°СЂР°РґР°Рє Р°СЂРіСѓРјСЌРЅС‚Р°Сћ Р·Р°РјРµРЅС‹, РЅР°РїСЂ. 3,2,1,4 "
 
 msgid " Enter replacement string:"
-msgstr " Увядзіце тэкст для замены: "
+msgstr " РЈРІСЏРґР·С–С†Рµ С‚СЌРєСЃС‚ РґР»СЏ Р·Р°РјРµРЅС‹: "
 
 msgid " Enter search string:"
-msgstr " Увядзіце радок для пошуку"
+msgstr " РЈРІСЏРґР·С–С†Рµ СЂР°РґРѕРє РґР»СЏ РїРѕС€СѓРєСѓ"
 
 msgid " Replace "
-msgstr " Замяніць "
+msgstr " Р—Р°РјСЏРЅС–С†СЊ "
 
 msgid "Search"
-msgstr "Пошук"
+msgstr "РџРѕС€СѓРє"
 
 msgid ""
 " Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэньняў"
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ СЃС‚Р°Р»С‹ РІС‹СЂР°Р· С†С– Сћ scanf-С„Р°СЂРјР°С†Рµ С€РјР°С‚ РїРµСЂР°СћС‚РІР°СЂСЌРЅСЊРЅСЏСћ"
 
 msgid " Error in replacement format string. "
-msgstr " Памылка ў фармаце радку замены "
+msgstr " РџР°РјС‹Р»РєР° Сћ С„Р°СЂРјР°С†Рµ СЂР°РґРєСѓ Р·Р°РјРµРЅС‹ "
 
 #, fuzzy
 msgid " Replacement too long. "
-msgstr " Увядзіце тэкст для замены: "
+msgstr " РЈРІСЏРґР·С–С†Рµ С‚СЌРєСЃС‚ РґР»СЏ Р·Р°РјРµРЅС‹: "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " Зьдейсьнена падстановак: %ld "
+msgstr " Р—СЊРґРµР№СЃСЊРЅРµРЅР° РїР°РґСЃС‚Р°РЅРѕРІР°Рє: %ld "
 
 msgid " Search string not found "
-msgstr "Радок пошуку не адшуканы "
+msgstr "Р Р°РґРѕРє РїРѕС€СѓРєСѓ РЅРµ Р°РґС€СѓРєР°РЅС‹ "
 
 #, c-format
 msgid " %d items found, %d bookmarks added "
-msgstr " %d адшукана, %d закладак дадана "
+msgstr " %d Р°РґС€СѓРєР°РЅР°, %d Р·Р°РєР»Р°РґР°Рє РґР°РґР°РЅР° "
 
 msgid "Quit"
-msgstr "Выхад"
+msgstr "Р’С‹С…Р°Рґ"
 
 msgid " File was modified, Save with exit? "
-msgstr " Файл быў зьменены, захаваць пры выхадзе? "
+msgstr " Р¤Р°Р№Р» Р±С‹Сћ Р·СЊРјРµРЅРµРЅС‹, Р·Р°С…Р°РІР°С†СЊ РїСЂС‹ РІС‹С…Р°РґР·Рµ? "
 
 #, fuzzy
 msgid "&Cancel quit"
-msgstr "Перарваць выхад"
+msgstr "РџРµСЂР°СЂРІР°С†СЊ РІС‹С…Р°Рґ"
 
 #, fuzzy
 msgid " Error "
-msgstr "Памылка"
+msgstr "РџР°РјС‹Р»РєР°"
 
 msgid " This function is not implemented. "
 msgstr ""
 
 msgid " Copy to clipboard "
-msgstr " Капіяваць у буфер "
+msgstr " РљР°РїС–СЏРІР°С†СЊ Сѓ Р±СѓС„РµСЂ "
 
 msgid " Unable to save to file. "
-msgstr " Немагчыма захаваць у файл. "
+msgstr " РќРµРјР°РіС‡С‹РјР° Р·Р°С…Р°РІР°С†СЊ Сѓ С„Р°Р№Р». "
 
 msgid " Cut to clipboard "
-msgstr " Выразаць у буфер "
+msgstr " Р’С‹СЂР°Р·Р°С†СЊ Сѓ Р±СѓС„РµСЂ "
 
 msgid " Goto line "
-msgstr " Перайсьці да радку "
+msgstr " РџРµСЂР°Р№СЃСЊС†С– РґР° СЂР°РґРєСѓ "
 
 msgid " Enter line: "
-msgstr " Увядзіце нумар радку: "
+msgstr " РЈРІСЏРґР·С–С†Рµ РЅСѓРјР°СЂ СЂР°РґРєСѓ: "
 
 msgid " Save Block "
-msgstr " Захаваць блёк "
+msgstr " Р—Р°С…Р°РІР°С†СЊ Р±Р»С‘Рє "
 
 msgid " Insert File "
-msgstr " Уставіць файл "
+msgstr " РЈСЃС‚Р°РІС–С†СЊ С„Р°Р№Р» "
 
 msgid " Cannot insert file. "
-msgstr " Памылка пры ўстаўцы файлу. "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ СћСЃС‚Р°СћС†С‹ С„Р°Р№Р»Сѓ. "
 
 msgid " Sort block "
-msgstr " Сартаваць блёк "
+msgstr " РЎР°СЂС‚Р°РІР°С†СЊ Р±Р»С‘Рє "
 
 msgid " You must first highlight a block of text. "
-msgstr " Вы павінны спачатку вылучыць блёк тэксту. "
+msgstr " Р’С‹ РїР°РІС–РЅРЅС‹ СЃРїР°С‡Р°С‚РєСѓ РІС‹Р»СѓС‡С‹С†СЊ Р±Р»С‘Рє С‚СЌРєСЃС‚Сѓ. "
 
 msgid " Run Sort "
-msgstr " Выканаць сартаваньне "
+msgstr " Р’С‹РєР°РЅР°С†СЊ СЃР°СЂС‚Р°РІР°РЅСЊРЅРµ "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Увядзіце парамэтры сартаваньня (man sort(1)), разлучаныя прагаламі "
+msgstr " РЈРІСЏРґР·С–С†Рµ РїР°СЂР°РјСЌС‚СЂС‹ СЃР°СЂС‚Р°РІР°РЅСЊРЅСЏ (man sort(1)), СЂР°Р·Р»СѓС‡Р°РЅС‹СЏ РїСЂР°РіР°Р»Р°РјС– "
 
 msgid " Sort "
-msgstr " Сартаваньне "
+msgstr " РЎР°СЂС‚Р°РІР°РЅСЊРЅРµ "
 
 msgid " Cannot execute sort command "
-msgstr " Памылка пры выкананьні каманды sort "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ РІС‹РєР°РЅР°РЅСЊРЅС– РєР°РјР°РЅРґС‹ sort "
 
 msgid " Sort returned non-zero: "
-msgstr " Сартаваньне вярнула нянулявы код: "
+msgstr " РЎР°СЂС‚Р°РІР°РЅСЊРЅРµ РІСЏСЂРЅСѓР»Р° РЅСЏРЅСѓР»СЏРІС‹ РєРѕРґ: "
 
 msgid "Paste output of external command"
 msgstr ""
 
 #, fuzzy
 msgid "Enter shell command(s):"
-msgstr " Увядзіце назву каманды: "
+msgstr " РЈРІСЏРґР·С–С†Рµ РЅР°Р·РІСѓ РєР°РјР°РЅРґС‹: "
 
 #, fuzzy
 msgid "External command"
-msgstr "Новая каманда"
+msgstr "РќРѕРІР°СЏ РєР°РјР°РЅРґР°"
 
 #, fuzzy
 msgid "Cannot execute command"
-msgstr " Памылка пры выкананьні каманды sort "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ РІС‹РєР°РЅР°РЅСЊРЅС– РєР°РјР°РЅРґС‹ sort "
 
 msgid "Error creating script:"
-msgstr "Памылка стварэньня сцэнару:"
+msgstr "РџР°РјС‹Р»РєР° СЃС‚РІР°СЂСЌРЅСЊРЅСЏ СЃС†СЌРЅР°СЂСѓ:"
 
 msgid "Error reading script:"
-msgstr "Памылка чытаньня сцэнару:"
+msgstr "РџР°РјС‹Р»РєР° С‡С‹С‚Р°РЅСЊРЅСЏ СЃС†СЌРЅР°СЂСѓ:"
 
 msgid "Error closing script:"
-msgstr "Памылка закрыцьця сцэнару:"
+msgstr "РџР°РјС‹Р»РєР° Р·Р°РєСЂС‹С†СЊС†СЏ СЃС†СЌРЅР°СЂСѓ:"
 
 msgid "Script created:"
-msgstr "Сцэнар створаны:"
+msgstr "РЎС†СЌРЅР°СЂ СЃС‚РІРѕСЂР°РЅС‹:"
 
 msgid "Process block"
-msgstr "Апрацаваць блёк"
+msgstr "РђРїСЂР°С†Р°РІР°С†СЊ Р±Р»С‘Рє"
 
 msgid " Mail "
-msgstr " Пошта "
+msgstr " РџРѕС€С‚Р° "
 
 msgid " Copies to"
-msgstr " Копіі на адрэсы"
+msgstr " РљРѕРїС–С– РЅР° Р°РґСЂСЌСЃС‹"
 
 msgid " Subject"
-msgstr " Тэма"
+msgstr " РўСЌРјР°"
 
 msgid " To"
-msgstr " Каму"
+msgstr " РљР°РјСѓ"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <Тэма> -c <Копіі> <Каму>"
+msgstr " mail -s <РўСЌРјР°> -c <РљРѕРїС–С–> <РљР°РјСѓ>"
 
 msgid " Insert Literal "
-msgstr "  Уставіць літэрал "
+msgstr "  РЈСЃС‚Р°РІС–С†СЊ Р»С–С‚СЌСЂР°Р» "
 
 msgid " Press any key: "
-msgstr " Націсьніце любую клявішу: "
+msgstr " РќР°С†С–СЃСЊРЅС–С†Рµ Р»СЋР±СѓСЋ РєР»СЏРІС–С€Сѓ: "
 
 msgid " Execute Macro "
-msgstr " Выканаць макрас "
+msgstr " Р’С‹РєР°РЅР°С†СЊ РјР°РєСЂР°СЃ "
 
 msgid "&Dismiss"
-msgstr "&Зачыніць"
+msgstr "&Р—Р°С‡С‹РЅС–С†СЊ"
 
 msgid " Emacs key: "
-msgstr " Клявіша Emacs: "
+msgstr " РљР»СЏРІС–С€Р° Emacs: "
 
 #, c-format
 msgid ""
@@ -378,7 +378,7 @@ msgid "&Ignore lock"
 msgstr ""
 
 msgid " About "
-msgstr " Пра праграму "
+msgstr " РџСЂР° РїСЂР°РіСЂР°РјСѓ "
 
 msgid ""
 "\n"
@@ -394,256 +394,256 @@ msgstr ""
 "\n"
 "       Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
-" Тэкставы рэдактар з сяброўскім інтэрфэйсам карыстальніку.\n"
-"               Створаны для Midnight Commander.\n"
+" РўСЌРєСЃС‚Р°РІС‹ СЂСЌРґР°РєС‚Р°СЂ Р· СЃСЏР±СЂРѕСћСЃРєС–Рј С–РЅС‚СЌСЂС„СЌР№СЃР°Рј РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ.\n"
+"               РЎС‚РІРѕСЂР°РЅС‹ РґР»СЏ Midnight Commander.\n"
 
 msgid "&Open file..."
-msgstr "&Адчыніць файл..."
+msgstr "&РђРґС‡С‹РЅС–С†СЊ С„Р°Р№Р»..."
 
 msgid "&New              C-n"
-msgstr "&Новы файл           C-n"
+msgstr "&РќРѕРІС‹ С„Р°Р№Р»           C-n"
 
 msgid "&Save              F2"
-msgstr "&Захаваць             F2"
+msgstr "&Р—Р°С…Р°РІР°С†СЊ             F2"
 
 msgid "Save &as...       F12"
-msgstr "Захаваць &як...     F12"
+msgstr "Р—Р°С…Р°РІР°С†СЊ &СЏРє...     F12"
 
 msgid "&Insert file...   F15"
-msgstr "&Уставіць файл...     F15"
+msgstr "&РЈСЃС‚Р°РІС–С†СЊ С„Р°Р№Р»...     F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "&Капіяваць у файл... C-f"
+msgstr "&РљР°РїС–СЏРІР°С†СЊ Сѓ С„Р°Р№Р»... C-f"
 
 msgid "&User menu...     F11"
-msgstr "&Мэню карыстальніку...     F11"
+msgstr "&РњСЌРЅСЋ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ...     F11"
 
 msgid "A&bout...            "
-msgstr "Пра &аўтараў..."
+msgstr "РџСЂР° &Р°СћС‚Р°СЂР°Сћ..."
 
 msgid "&Quit             F10"
-msgstr "Вы&хад                F10"
+msgstr "Р’С‹&С…Р°Рґ                F10"
 
 msgid "&New            C-x k"
-msgstr "&Новы файл         C-x k"
+msgstr "&РќРѕРІС‹ С„Р°Р№Р»         C-x k"
 
 msgid "Copy to &file...     "
-msgstr "&Капіяваць у файл..."
+msgstr "&РљР°РїС–СЏРІР°С†СЊ Сѓ С„Р°Р№Р»..."
 
 msgid "&Toggle Mark       F3"
-msgstr "&Выдаленьне блёку        F3"
+msgstr "&Р’С‹РґР°Р»РµРЅСЊРЅРµ Р±Р»С‘РєСѓ        F3"
 
 msgid "&Mark Columns    S-F3"
-msgstr "Вылучыць &слупкі     S-F3"
+msgstr "Р’С‹Р»СѓС‡С‹С†СЊ &СЃР»СѓРїРєС–     S-F3"
 
 msgid "Toggle &ins/overw Ins"
-msgstr "&Рэжым устаўкі/замены  Ins"
+msgstr "&Р СЌР¶С‹Рј СѓСЃС‚Р°СћРєС–/Р·Р°РјРµРЅС‹  Ins"
 
 msgid "&Copy              F5"
-msgstr "&Капіяваць блёк        F5"
+msgstr "&РљР°РїС–СЏРІР°С†СЊ Р±Р»С‘Рє        F5"
 
 msgid "&Move              F6"
-msgstr "&Перамясьціць блёк       F6"
+msgstr "&РџРµСЂР°РјСЏСЃСЊС†С–С†СЊ Р±Р»С‘Рє       F6"
 
 msgid "&Delete            F8"
-msgstr "&Выдаліць блёк           F8"
+msgstr "&Р’С‹РґР°Р»С–С†СЊ Р±Р»С‘Рє           F8"
 
 msgid "&Undo             C-u"
-msgstr "&Адкат апэрацыі        C-u"
+msgstr "&РђРґРєР°С‚ Р°РїСЌСЂР°С†С‹С–        C-u"
 
 msgid "&Beginning     C-PgUp"
-msgstr "&Пачатак файлу       C-PgUp"
+msgstr "&РџР°С‡Р°С‚Р°Рє С„Р°Р№Р»Сѓ       C-PgUp"
 
 msgid "&End           C-PgDn"
-msgstr "Канец &файлу        C-PgDn"
+msgstr "РљР°РЅРµС† &С„Р°Р№Р»Сѓ        C-PgDn"
 
 msgid "&Search...         F7"
-msgstr "&Пошук...          F7"
+msgstr "&РџРѕС€СѓРє...          F7"
 
 msgid "Search &again     F17"
-msgstr "пра&цяг пошуку  F17"
+msgstr "РїСЂР°&С†СЏРі РїРѕС€СѓРєСѓ  F17"
 
 msgid "&Replace...        F4"
-msgstr "&Замена...         F4"
+msgstr "&Р—Р°РјРµРЅР°...         F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&Перайсьці да радку           M-l"
+msgstr "&РџРµСЂР°Р№СЃСЊС†С– РґР° СЂР°РґРєСѓ           M-l"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "перайсьці да парнай &дужкі    M-b"
+msgstr "РїРµСЂР°Р№СЃСЊС†С– РґР° РїР°СЂРЅР°Р№ &РґСѓР¶РєС–    M-b"
 
 msgid "Insert &literal...       C-q"
-msgstr "Уставіць &літэрал...        C-q"
+msgstr "РЈСЃС‚Р°РІС–С†СЊ &Р»С–С‚СЌСЂР°Р»...        C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "Пера&маляваць экран         C-l"
+msgstr "РџРµСЂР°&РјР°Р»СЏРІР°С†СЊ СЌРєСЂР°РЅ         C-l"
 
 msgid "&Start record macro      C-r"
-msgstr "Па&чаць запіс макрасу      C-r"
+msgstr "РџР°&С‡Р°С†СЊ Р·Р°РїС–СЃ РјР°РєСЂР°СЃСѓ      C-r"
 
 msgid "&Finish record macro...  C-r"
-msgstr "С&кончыць запіс макрасу... C-r"
+msgstr "РЎ&РєРѕРЅС‡С‹С†СЊ Р·Р°РїС–СЃ РјР°РєСЂР°СЃСѓ... C-r"
 
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Выканаць макрас...   C-a, KEY"
+msgstr "&Р’С‹РєР°РЅР°С†СЊ РјР°РєСЂР°СЃ...   C-a, KEY"
 
 msgid "Delete macr&o...            "
-msgstr "В&ыдаліць макрас"
+msgstr "Р’&С‹РґР°Р»С–С†СЊ РјР°РєСЂР°СЃ"
 
 msgid "Insert &date/time           "
-msgstr "Уставіць &Дату/час"
+msgstr "РЈСЃС‚Р°РІС–С†СЊ &Р”Р°С‚Сѓ/С‡Р°СЃ"
 
 msgid "Format p&aragraph        M-p"
-msgstr "Фарматаваць &параграф        M-p"
+msgstr "Р¤Р°СЂРјР°С‚Р°РІР°С†СЊ &РїР°СЂР°РіСЂР°С„        M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "&Кантроль правапісу        C-p"
+msgstr "&РљР°РЅС‚СЂРѕР»СЊ РїСЂР°РІР°РїС–СЃСѓ        C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "&Сартаваньне                 M-t"
+msgstr "&РЎР°СЂС‚Р°РІР°РЅСЊРЅРµ                 M-t"
 
 msgid "Paste o&utput of...      M-u"
 msgstr ""
 
 msgid "E&xternal Formatter      F19"
-msgstr "&Вонкавая праграма фарматаваньня  F19"
+msgstr "&Р’РѕРЅРєР°РІР°СЏ РїСЂР°РіСЂР°РјР° С„Р°СЂРјР°С‚Р°РІР°РЅСЊРЅСЏ  F19"
 
 msgid "&Mail...                    "
-msgstr "&Электроная пошта..."
+msgstr "&Р­Р»РµРєС‚СЂРѕРЅР°СЏ РїРѕС€С‚Р°..."
 
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Выканаць макрас... C-x e, KEY"
+msgstr "&Р’С‹РєР°РЅР°С†СЊ РјР°РєСЂР°СЃ... C-x e, KEY"
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "&Кантроль правапісу        M-$"
+msgstr "&РљР°РЅС‚СЂРѕР»СЊ РїСЂР°РІР°РїС–СЃСѓ        M-$"
 
 msgid "&General...  "
-msgstr "&Асноўнае..."
+msgstr "&РђСЃРЅРѕСћРЅР°Рµ..."
 
 msgid "&Save mode..."
-msgstr "Рэжым &захаваньня..."
+msgstr "Р СЌР¶С‹Рј &Р·Р°С…Р°РІР°РЅСЊРЅСЏ..."
 
 #, fuzzy
 msgid "Learn &Keys..."
-msgstr "В&ызначэньне клявішаў..."
+msgstr "Р’&С‹Р·РЅР°С‡СЌРЅСЊРЅРµ РєР»СЏРІС–С€Р°Сћ..."
 
 #, fuzzy
 msgid "Syntax &Highlighting..."
-msgstr "Вылучэньне &колерам сынтаксысу"
+msgstr "Р’С‹Р»СѓС‡СЌРЅСЊРЅРµ &РєРѕР»РµСЂР°Рј СЃС‹РЅС‚Р°РєСЃС‹СЃСѓ"
 
 #, fuzzy
 msgid "Save setu&p..."
-msgstr "&Захаваць наладку"
+msgstr "&Р—Р°С…Р°РІР°С†СЊ РЅР°Р»Р°РґРєСѓ"
 
 msgid " File "
-msgstr " Файл "
+msgstr " Р¤Р°Р№Р» "
 
 msgid " Edit "
-msgstr " Рэдагаваньне "
+msgstr " Р СЌРґР°РіР°РІР°РЅСЊРЅРµ "
 
 msgid " Sear/Repl "
-msgstr " Пошук/Замена "
+msgstr " РџРѕС€СѓРє/Р—Р°РјРµРЅР° "
 
 msgid " Command "
-msgstr " Каманда "
+msgstr " РљР°РјР°РЅРґР° "
 
 msgid " Options "
-msgstr " Наладка "
+msgstr " РќР°Р»Р°РґРєР° "
 
 msgid "Intuitive"
-msgstr "Інтуіцыйная"
+msgstr "Р†РЅС‚СѓС–С†С‹Р№РЅР°СЏ"
 
 msgid "Emacs"
 msgstr "Emacs"
 
 #, fuzzy
 msgid "User-defined"
-msgstr "&Карыстальніку:"
+msgstr "&РљР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ:"
 
 msgid "None"
-msgstr "Адключаны"
+msgstr "РђРґРєР»СЋС‡Р°РЅС‹"
 
 msgid "Dynamic paragraphing"
-msgstr "Дынаміч. разьбіўка параграфу"
+msgstr "Р”С‹РЅР°РјС–С‡. СЂР°Р·СЊР±С–СћРєР° РїР°СЂР°РіСЂР°С„Сѓ"
 
 msgid "Type writer wrap"
-msgstr "Аўтаперанос"
+msgstr "РђСћС‚Р°РїРµСЂР°РЅРѕСЃ"
 
 msgid "Word wrap line length: "
-msgstr "Пазыцыя пераносу радкоў :"
+msgstr "РџР°Р·С‹С†С‹СЏ РїРµСЂР°РЅРѕСЃСѓ СЂР°РґРєРѕСћ :"
 
 msgid "Tab spacing: "
-msgstr "Крок табуляцыі : "
+msgstr "РљСЂРѕРє С‚Р°Р±СѓР»СЏС†С‹С– : "
 
 msgid "Synta&x highlighting"
-msgstr "Вылучэньне &колерам сынтаксысу"
+msgstr "Р’С‹Р»СѓС‡СЌРЅСЊРЅРµ &РєРѕР»РµСЂР°Рј СЃС‹РЅС‚Р°РєСЃС‹СЃСѓ"
 
 #, fuzzy
 msgid "Save file &position"
-msgstr " Захаваць файл "
+msgstr " Р—Р°С…Р°РІР°С†СЊ С„Р°Р№Р» "
 
 msgid "Confir&m before saving"
-msgstr "П&адцьверджаньне запісу файлу"
+msgstr "Рџ&Р°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅРµ Р·Р°РїС–СЃСѓ С„Р°Р№Р»Сѓ"
 
 msgid "Fill tabs with &spaces"
-msgstr "&Запаўняць табуляцыю прагаламі"
+msgstr "&Р—Р°РїР°СћРЅСЏС†СЊ С‚Р°Р±СѓР»СЏС†С‹СЋ РїСЂР°РіР°Р»Р°РјС–"
 
 msgid "&Return does autoindent"
-msgstr "&Аўтараўнаньне. зваротам карэткі"
+msgstr "&РђСћС‚Р°СЂР°СћРЅР°РЅСЊРЅРµ. Р·РІР°СЂРѕС‚Р°Рј РєР°СЂСЌС‚РєС–"
 
 msgid "&Backspace through tabs"
-msgstr "&Забой, абыходзячы табуляцыю"
+msgstr "&Р—Р°Р±РѕР№, Р°Р±С‹С…РѕРґР·СЏС‡С‹ С‚Р°Р±СѓР»СЏС†С‹СЋ"
 
 msgid "&Fake half tabs"
-msgstr "&Сымуляваць няпоўн.табуляцыю"
+msgstr "&РЎС‹РјСѓР»СЏРІР°С†СЊ РЅСЏРїРѕСћРЅ.С‚Р°Р±СѓР»СЏС†С‹СЋ"
 
 msgid "Wrap mode"
-msgstr "Рэжым пераносу радкоў"
+msgstr "Р СЌР¶С‹Рј РїРµСЂР°РЅРѕСЃСѓ СЂР°РґРєРѕСћ"
 
 msgid "Key emulation"
-msgstr "Эмуляцыя раскладкі клавішаў"
+msgstr "Р­РјСѓР»СЏС†С‹СЏ СЂР°СЃРєР»Р°РґРєС– РєР»Р°РІС–С€Р°Сћ"
 
 msgid " Editor options "
-msgstr " Наладка рэдактару "
+msgstr " РќР°Р»Р°РґРєР° СЂСЌРґР°РєС‚Р°СЂСѓ "
 
 msgid "Help"
-msgstr "Дапамога"
+msgstr "Р”Р°РїР°РјРѕРіР°"
 
 msgid "Save"
-msgstr "Запіс"
+msgstr "Р—Р°РїС–СЃ"
 
 msgid "Mark"
-msgstr "Блёк"
+msgstr "Р‘Р»С‘Рє"
 
 msgid "Replac"
-msgstr "Замена"
+msgstr "Р—Р°РјРµРЅР°"
 
 msgid "Copy"
-msgstr "Копія"
+msgstr "РљРѕРїС–СЏ"
 
 msgid "Move"
-msgstr "Перамясьціць"
+msgstr "РџРµСЂР°РјСЏСЃСЊС†С–С†СЊ"
 
 msgid "Delete"
-msgstr "Выдаліць"
+msgstr "Р’С‹РґР°Р»С–С†СЊ"
 
 msgid "PullDn"
-msgstr "МэнюMC"
+msgstr "РњСЌРЅСЋMC"
 
 msgid " Load syntax file "
-msgstr " Загрузіць сынтаксычны файл "
+msgstr " Р—Р°РіСЂСѓР·С–С†СЊ СЃС‹РЅС‚Р°РєСЃС‹С‡РЅС‹ С„Р°Р№Р» "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" Немагчыма адчыніць файл %s \n"
+" РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ С„Р°Р№Р» %s \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Памылка ў файле %s у радку %d "
+msgstr " РџР°РјС‹Р»РєР° Сћ С„Р°Р№Р»Рµ %s Сѓ СЂР°РґРєСѓ %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
@@ -663,7 +663,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr " Каманда chown "
+msgstr " РљР°РјР°РЅРґР° chown "
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
@@ -671,7 +671,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr " Каманда chown "
+msgstr " РљР°РјР°РЅРґР° chown "
 
 #, c-format
 msgid "%s: fn should be 1-10"
@@ -683,7 +683,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr " Каманда chown "
+msgstr " РљР°РјР°РЅРґР° chown "
 
 #, c-format
 msgid "%s:%d: %s"
@@ -691,48 +691,48 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s not found!"
-msgstr "Увага: файл %s адсутнічае\n"
+msgstr "РЈРІР°РіР°: С„Р°Р№Р» %s Р°РґСЃСѓС‚РЅС–С‡Р°Рµ\n"
 
 msgid "&Set"
-msgstr "&Усталяваць"
+msgstr "&РЈСЃС‚Р°Р»СЏРІР°С†СЊ"
 
 msgid "S&kip"
-msgstr "П&рапусьціць"
+msgstr "Рџ&СЂР°РїСѓСЃСЊС†С–С†СЊ"
 
 msgid "Set &all"
-msgstr "Усталяваць &усе"
+msgstr "РЈСЃС‚Р°Р»СЏРІР°С†СЊ &СѓСЃРµ"
 
 msgid "owner"
-msgstr "гаспадар"
+msgstr "РіР°СЃРїР°РґР°СЂ"
 
 msgid "group"
-msgstr " група"
+msgstr " РіСЂСѓРїР°"
 
 msgid "other"
-msgstr "іншыя"
+msgstr "С–РЅС€С‹СЏ"
 
 msgid "On"
-msgstr "На"
+msgstr "РќР°"
 
 msgid "Flag"
-msgstr "Сьцяг"
+msgstr "РЎСЊС†СЏРі"
 
 msgid "Mode"
-msgstr "Рэжым"
+msgstr "Р СЌР¶С‹Рј"
 
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d з %d"
+msgstr "%6d Р· %d"
 
 msgid " Chown advanced command "
-msgstr " Пашыраная каманда chown "
+msgstr " РџР°С€С‹СЂР°РЅР°СЏ РєР°РјР°РЅРґР° chown "
 
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зьмяніць доступ \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ РґРѕСЃС‚СѓРї \"%s\" \n"
 " %s "
 
 #, c-format
@@ -740,524 +740,524 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зьмяніць уладальніка \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ СѓР»Р°РґР°Р»СЊРЅС–РєР° \"%s\" \n"
 " %s "
 
 msgid " Background process error "
-msgstr " Памылка працэса ў тле "
+msgstr " РџР°РјС‹Р»РєР° РїСЂР°С†СЌСЃР° Сћ С‚Р»Рµ "
 
 msgid " Unknown error in child "
-msgstr " Невядомая памылка ў дачэрнім працэсе "
+msgstr " РќРµРІСЏРґРѕРјР°СЏ РїР°РјС‹Р»РєР° Сћ РґР°С‡СЌСЂРЅС–Рј РїСЂР°С†СЌСЃРµ "
 
 msgid " Child died unexpectedly "
-msgstr " Дачэрні працэс нечакана памёр "
+msgstr " Р”Р°С‡СЌСЂРЅС– РїСЂР°С†СЌСЃ РЅРµС‡Р°РєР°РЅР° РїР°РјС‘СЂ "
 
 msgid " Background protocol error "
-msgstr " Памылка пратаколу тла"
+msgstr " РџР°РјС‹Р»РєР° РїСЂР°С‚Р°РєРѕР»Сѓ С‚Р»Р°"
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Працэс у тле запытвае болей аргумэнтаў \n"
-" чым мажліва кантраляваць. \n"
+" РџСЂР°С†СЌСЃ Сѓ С‚Р»Рµ Р·Р°РїС‹С‚РІР°Рµ Р±РѕР»РµР№ Р°СЂРіСѓРјСЌРЅС‚Р°Сћ \n"
+" С‡С‹Рј РјР°Р¶Р»С–РІР° РєР°РЅС‚СЂР°Р»СЏРІР°С†СЊ. \n"
 
 msgid "&Full file list"
-msgstr "&Поўны сьпіс"
+msgstr "&РџРѕСћРЅС‹ СЃСЊРїС–СЃ"
 
 msgid "&Brief file list"
-msgstr "&Скарочаны сьпіс"
+msgstr "&РЎРєР°СЂРѕС‡Р°РЅС‹ СЃСЊРїС–СЃ"
 
 msgid "&Long file list"
-msgstr "&Пашыраны"
+msgstr "&РџР°С€С‹СЂР°РЅС‹"
 
 msgid "&User defined:"
-msgstr "&Карыстальніку:"
+msgstr "&РљР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ:"
 
 msgid "Listing mode"
-msgstr "Фармат сьпісу файлаў"
+msgstr "Р¤Р°СЂРјР°С‚ СЃСЊРїС–СЃСѓ С„Р°Р№Р»Р°Сћ"
 
 msgid "user &Mini status"
-msgstr "Радок &міні-стану ў фармаце карыстальніку"
+msgstr "Р Р°РґРѕРє &РјС–РЅС–-СЃС‚Р°РЅСѓ Сћ С„Р°СЂРјР°С†Рµ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ"
 
 msgid "&Reverse"
-msgstr "&Адваротны"
+msgstr "&РђРґРІР°СЂРѕС‚РЅС‹"
 
 msgid "case sensi&tive"
-msgstr "Улік рэ&гістру"
+msgstr "РЈР»С–Рє СЂСЌ&РіС–СЃС‚СЂСѓ"
 
 msgid "Sort order"
-msgstr "Парадак сартаваньня"
+msgstr "РџР°СЂР°РґР°Рє СЃР°СЂС‚Р°РІР°РЅСЊРЅСЏ"
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "Сьпіс ката&лёгаў      C-\\"
+msgstr "РЎСЊРїС–СЃ РєР°С‚Р°&Р»С‘РіР°Сћ      C-\\"
 
 msgid " confirm &Exit "
-msgstr " падцьверджаньне &выхаду"
+msgstr " РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅРµ &РІС‹С…Р°РґСѓ"
 
 msgid " confirm e&Xecute "
-msgstr " падцьверджаньне &выкананьня"
+msgstr " РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅРµ &РІС‹РєР°РЅР°РЅСЊРЅСЏ"
 
 msgid " confirm o&Verwrite "
-msgstr " падцьверджаньне &Перазапісу"
+msgstr " РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅРµ &РџРµСЂР°Р·Р°РїС–СЃСѓ"
 
 msgid " confirm &Delete "
-msgstr " падцьверджаньне &Выдаленьня"
+msgstr " РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅРµ &Р’С‹РґР°Р»РµРЅСЊРЅСЏ"
 
 msgid " Confirmation "
-msgstr " Запыт падцьверджаньня "
+msgstr " Р—Р°РїС‹С‚ РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅСЏ "
 
 msgid "Full 8 bits output"
-msgstr "Поўны 8-бітны вывад"
+msgstr "РџРѕСћРЅС‹ 8-Р±С–С‚РЅС‹ РІС‹РІР°Рґ"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
 msgid "7 bits"
-msgstr "7 бітаў"
+msgstr "7 Р±С–С‚Р°Сћ"
 
 msgid "F&ull 8 bits input"
-msgstr "По&ўны 8-бітны увод"
+msgstr "РџРѕ&СћРЅС‹ 8-Р±С–С‚РЅС‹ СѓРІРѕРґ"
 
 msgid " Display bits "
-msgstr " Адлюстраваньне сымбаляў "
+msgstr " РђРґР»СЋСЃС‚СЂР°РІР°РЅСЊРЅРµ СЃС‹РјР±Р°Р»СЏСћ "
 
 msgid "Other 8 bit"
-msgstr "Іншыя 8 bit"
+msgstr "Р†РЅС€С‹СЏ 8 bit"
 
 msgid "Input / display codepage:"
-msgstr "Увесьці / адлюстраваць кодавую старонку:"
+msgstr "РЈРІРµСЃСЊС†С– / Р°РґР»СЋСЃС‚СЂР°РІР°С†СЊ РєРѕРґР°РІСѓСЋ СЃС‚Р°СЂРѕРЅРєСѓ:"
 
 msgid "&Select"
-msgstr "&Выбраць"
+msgstr "&Р’С‹Р±СЂР°С†СЊ"
 
 #, fuzzy
 msgid "Use passive mode over pro&xy"
-msgstr "Рэжым &захаваньня..."
+msgstr "Р СЌР¶С‹Рј &Р·Р°С…Р°РІР°РЅСЊРЅСЏ..."
 
 #, fuzzy
 msgid "Use &passive mode"
-msgstr "Рэжым &захаваньня..."
+msgstr "Р СЌР¶С‹Рј &Р·Р°С…Р°РІР°РЅСЊРЅСЏ..."
 
 msgid "&Use ~/.netrc"
-msgstr "&Выкарыстоўваць ~/.netrc"
+msgstr "&Р’С‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ ~/.netrc"
 
 msgid "&Always use ftp proxy"
-msgstr "&Заўжды выкарыстоўваць FTP проксі"
+msgstr "&Р—Р°СћР¶РґС‹ РІС‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ FTP РїСЂРѕРєСЃС–"
 
 msgid "sec"
 msgstr "sec"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "Тайм-аўт кэшу каталёгу FTP:"
+msgstr "РўР°Р№Рј-Р°СћС‚ РєСЌС€Сѓ РєР°С‚Р°Р»С‘РіСѓ FTP:"
 
 msgid "ftp anonymous password:"
-msgstr "Пароль ананімнага FTP:"
+msgstr "РџР°СЂРѕР»СЊ Р°РЅР°РЅС–РјРЅР°РіР° FTP:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "Тайм-аўт вызваленьня ВФС:"
+msgstr "РўР°Р№Рј-Р°СћС‚ РІС‹Р·РІР°Р»РµРЅСЊРЅСЏ Р’Р¤РЎ:"
 
 msgid " Virtual File System Setting "
-msgstr " Наладка Віртуальнае Файлавае Сыстэмы "
+msgstr " РќР°Р»Р°РґРєР° Р’С–СЂС‚СѓР°Р»СЊРЅР°Рµ Р¤Р°Р№Р»Р°РІР°Рµ РЎС‹СЃС‚СЌРјС‹ "
 
 msgid "Quick cd"
-msgstr " Зьмена працоўнага каталёгу "
+msgstr " Р—СЊРјРµРЅР° РїСЂР°С†РѕСћРЅР°РіР° РєР°С‚Р°Р»С‘РіСѓ "
 
 msgid "cd"
-msgstr "Перайсьці ў"
+msgstr "РџРµСЂР°Р№СЃСЊС†С– Сћ"
 
 msgid "Symbolic link filename:"
-msgstr "Імя сымбалічнае спасылкі:"
+msgstr "Р†РјСЏ СЃС‹РјР±Р°Р»С–С‡РЅР°Рµ СЃРїР°СЃС‹Р»РєС–:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Імя йснуючага файлу (для спасылкі):"
+msgstr "Р†РјСЏ Р№СЃРЅСѓСЋС‡Р°РіР° С„Р°Р№Р»Сѓ (РґР»СЏ СЃРїР°СЃС‹Р»РєС–):"
 
 msgid "Symbolic link"
-msgstr " Сымбалічная спасылка "
+msgstr " РЎС‹РјР±Р°Р»С–С‡РЅР°СЏ СЃРїР°СЃС‹Р»РєР° "
 
 msgid "Running "
-msgstr "Выконваецца "
+msgstr "Р’С‹РєРѕРЅРІР°РµС†С†Р° "
 
 msgid "Stopped"
-msgstr "Спынены"
+msgstr "РЎРїС‹РЅРµРЅС‹"
 
 msgid "&Stop"
-msgstr "&Спыніць"
+msgstr "&РЎРїС‹РЅС–С†СЊ"
 
 msgid "&Resume"
-msgstr "&Аднавіць"
+msgstr "&РђРґРЅР°РІС–С†СЊ"
 
 msgid "&Kill"
-msgstr "&Забіць"
+msgstr "&Р—Р°Р±С–С†СЊ"
 
 msgid "Background Jobs"
-msgstr " Заданьні ў тле "
+msgstr " Р—Р°РґР°РЅСЊРЅС– Сћ С‚Р»Рµ "
 
 msgid "Domain:"
-msgstr "Дамэн:"
+msgstr "Р”Р°РјСЌРЅ:"
 
 msgid "Username:"
-msgstr "Імя карыстальніку:"
+msgstr "Р†РјСЏ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ:"
 
 msgid "Password:"
-msgstr "Пароль:"
+msgstr "РџР°СЂРѕР»СЊ:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "Пароль для \\\\%s\\%s"
+msgstr "РџР°СЂРѕР»СЊ РґР»СЏ \\\\%s\\%s"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "Увага: файл %s адсутнічае\n"
+msgstr "РЈРІР°РіР°: С„Р°Р№Р» %s Р°РґСЃСѓС‚РЅС–С‡Р°Рµ\n"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr " Немагчыма перавесьці з %s у %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РІРµСЃСЊС†С– Р· %s Сѓ %s "
 
 msgid "execute/search by others"
-msgstr "запуск/пошук для йншых"
+msgstr "Р·Р°РїСѓСЃРє/РїРѕС€СѓРє РґР»СЏ Р№РЅС€С‹С…"
 
 msgid "write by others"
-msgstr "запіс для йншых"
+msgstr "Р·Р°РїС–СЃ РґР»СЏ Р№РЅС€С‹С…"
 
 msgid "read by others"
-msgstr "чытаньне для йншых"
+msgstr "С‡С‹С‚Р°РЅСЊРЅРµ РґР»СЏ Р№РЅС€С‹С…"
 
 msgid "execute/search by group"
-msgstr "запуск/пошук для групы"
+msgstr "Р·Р°РїСѓСЃРє/РїРѕС€СѓРє РґР»СЏ РіСЂСѓРїС‹"
 
 msgid "write by group"
-msgstr "запіс для групы"
+msgstr "Р·Р°РїС–СЃ РґР»СЏ РіСЂСѓРїС‹"
 
 msgid "read by group"
-msgstr "чытаньне для групы"
+msgstr "С‡С‹С‚Р°РЅСЊРЅРµ РґР»СЏ РіСЂСѓРїС‹"
 
 msgid "execute/search by owner"
-msgstr "запуск/пошук для ўладальн."
+msgstr "Р·Р°РїСѓСЃРє/РїРѕС€СѓРє РґР»СЏ СћР»Р°РґР°Р»СЊРЅ."
 
 msgid "write by owner"
-msgstr "запіс для ўладальніку"
+msgstr "Р·Р°РїС–СЃ РґР»СЏ СћР»Р°РґР°Р»СЊРЅС–РєСѓ"
 
 msgid "read by owner"
-msgstr "чытаньне для ўладальніку"
+msgstr "С‡С‹С‚Р°РЅСЊРЅРµ РґР»СЏ СћР»Р°РґР°Р»СЊРЅС–РєСѓ"
 
 msgid "sticky bit"
-msgstr "замацавальны біт"
+msgstr "Р·Р°РјР°С†Р°РІР°Р»СЊРЅС‹ Р±С–С‚"
 
 msgid "set group ID on execution"
-msgstr "устал. GID пры выкананьні"
+msgstr "СѓСЃС‚Р°Р». GID РїСЂС‹ РІС‹РєР°РЅР°РЅСЊРЅС–"
 
 msgid "set user ID on execution"
-msgstr "устал. UID пры выкананьні"
+msgstr "СѓСЃС‚Р°Р». UID РїСЂС‹ РІС‹РєР°РЅР°РЅСЊРЅС–"
 
 msgid "C&lear marked"
-msgstr "&Ачысьціць пазначанае"
+msgstr "&РђС‡С‹СЃСЊС†С–С†СЊ РїР°Р·РЅР°С‡Р°РЅР°Рµ"
 
 msgid "S&et marked"
-msgstr "&Усталяваць пазначанае"
+msgstr "&РЈСЃС‚Р°Р»СЏРІР°С†СЊ РїР°Р·РЅР°С‡Р°РЅР°Рµ"
 
 msgid "&Marked all"
-msgstr "Пазначыць &усе"
+msgstr "РџР°Р·РЅР°С‡С‹С†СЊ &СѓСЃРµ"
 
 msgid "Name"
-msgstr "Імя"
+msgstr "Р†РјСЏ"
 
 msgid "Permissions (Octal)"
-msgstr "Доступ (васьмірычны)"
+msgstr "Р”РѕСЃС‚СѓРї (РІР°СЃСЊРјС–СЂС‹С‡РЅС‹)"
 
 msgid "Owner name"
-msgstr "Імя ўладальніку"
+msgstr "Р†РјСЏ СћР»Р°РґР°Р»СЊРЅС–РєСѓ"
 
 msgid "Group name"
-msgstr "Імя групы"
+msgstr "Р†РјСЏ РіСЂСѓРїС‹"
 
 msgid "Use SPACE to change"
-msgstr "ПРАГАЛ - для зьменаў"
+msgstr "РџР РђР“РђР› - РґР»СЏ Р·СЊРјРµРЅР°Сћ"
 
 msgid "an option, ARROW KEYS"
-msgstr "опцыяў, КЛЯВІШЫ-СТРЭЛКІ - "
+msgstr "РѕРїС†С‹СЏСћ, РљР›РЇР’Р†РЁР«-РЎРўР Р­Р›РљР† - "
 
 msgid "to move between options"
-msgstr "перамяшчэньне між опцыямі"
+msgstr "РїРµСЂР°РјСЏС€С‡СЌРЅСЊРЅРµ РјС–Р¶ РѕРїС†С‹СЏРјС–"
 
 msgid "and T or INS to mark"
-msgstr "й T ці INS для пазначэньня"
+msgstr "Р№ T С†С– INS РґР»СЏ РїР°Р·РЅР°С‡СЌРЅСЊРЅСЏ"
 
 msgid " Permission "
-msgstr " Правы доступу "
+msgstr " РџСЂР°РІС‹ РґРѕСЃС‚СѓРїСѓ "
 
 msgid "Chmod command"
-msgstr " Каманда chmod "
+msgstr " РљР°РјР°РЅРґР° chmod "
 
 msgid "Set &users"
-msgstr "Усталяваць &карыстальнікаў"
+msgstr "РЈСЃС‚Р°Р»СЏРІР°С†СЊ &РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєР°Сћ"
 
 msgid "Set &groups"
-msgstr "Усталяваць &групы"
+msgstr "РЈСЃС‚Р°Р»СЏРІР°С†СЊ &РіСЂСѓРїС‹"
 
 msgid " Name "
-msgstr " Імя "
+msgstr " Р†РјСЏ "
 
 msgid " Owner name "
-msgstr " Імя ўладальніку "
+msgstr " Р†РјСЏ СћР»Р°РґР°Р»СЊРЅС–РєСѓ "
 
 msgid " Group name "
-msgstr " Імя групы "
+msgstr " Р†РјСЏ РіСЂСѓРїС‹ "
 
 msgid " Size "
-msgstr " Памер "
+msgstr " РџР°РјРµСЂ "
 
 msgid " User name "
-msgstr " Імя карыстальніку "
+msgstr " Р†РјСЏ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ "
 
 msgid " Chown command "
-msgstr " Каманда chown "
+msgstr " РљР°РјР°РЅРґР° chown "
 
 msgid "<Unknown user>"
-msgstr "<Невядомы>"
+msgstr "<РќРµРІСЏРґРѕРјС‹>"
 
 msgid "<Unknown group>"
-msgstr "<Невядомы>"
+msgstr "<РќРµРІСЏРґРѕРјС‹>"
 
 msgid "Files tagged, want to cd?"
-msgstr "Файлы пазначаныя, зьмяніць каталёг?"
+msgstr "Р¤Р°Р№Р»С‹ РїР°Р·РЅР°С‡Р°РЅС‹СЏ, Р·СЊРјСЏРЅС–С†СЊ РєР°С‚Р°Р»С‘Рі?"
 
 msgid "Cannot change directory"
-msgstr "Немагчыма зьмяніць каталёг"
+msgstr "РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ РєР°С‚Р°Р»С‘Рі"
 
 msgid " View file "
-msgstr " Прагляд файлу "
+msgstr " РџСЂР°РіР»СЏРґ С„Р°Р№Р»Сѓ "
 
 msgid " Filename:"
-msgstr " Імя файлу:"
+msgstr " Р†РјСЏ С„Р°Р№Р»Сѓ:"
 
 msgid " Filtered view "
-msgstr " Прагляд вываду каманды "
+msgstr " РџСЂР°РіР»СЏРґ РІС‹РІР°РґСѓ РєР°РјР°РЅРґС‹ "
 
 msgid " Filter command and arguments:"
-msgstr " Увядзіце каманду й яе аргумэнты: "
+msgstr " РЈРІСЏРґР·С–С†Рµ РєР°РјР°РЅРґСѓ Р№ СЏРµ Р°СЂРіСѓРјСЌРЅС‚С‹: "
 
 msgid "Create a new Directory"
-msgstr " Стварыць новы каталёг "
+msgstr " РЎС‚РІР°СЂС‹С†СЊ РЅРѕРІС‹ РєР°С‚Р°Р»С‘Рі "
 
 msgid " Enter directory name:"
-msgstr " Увядзіце ймя каталёгу:"
+msgstr " РЈРІСЏРґР·С–С†Рµ Р№РјСЏ РєР°С‚Р°Р»С‘РіСѓ:"
 
 msgid " Filter "
-msgstr " Фільтар "
+msgstr " Р¤С–Р»СЊС‚Р°СЂ "
 
 msgid " Set expression for filtering filenames"
-msgstr " Задайце выраз для адбору ймёнаў файлаў"
+msgstr " Р—Р°РґР°Р№С†Рµ РІС‹СЂР°Р· РґР»СЏ Р°РґР±РѕСЂСѓ Р№РјС‘РЅР°Сћ С„Р°Р№Р»Р°Сћ"
 
 msgid "  Malformed regular expression  "
-msgstr "  Сталы выраз сфармаваны памылкова"
+msgstr "  РЎС‚Р°Р»С‹ РІС‹СЂР°Р· СЃС„Р°СЂРјР°РІР°РЅС‹ РїР°РјС‹Р»РєРѕРІР°"
 
 msgid " Select "
-msgstr " Выбраць "
+msgstr " Р’С‹Р±СЂР°С†СЊ "
 
 msgid " Unselect "
-msgstr " Зьняць вылучэньне "
+msgstr " Р—СЊРЅСЏС†СЊ РІС‹Р»СѓС‡СЌРЅСЊРЅРµ "
 
 msgid "Extension file edit"
-msgstr " Рэдагаваньне файлу пашырэньняў "
+msgstr " Р СЌРґР°РіР°РІР°РЅСЊРЅРµ С„Р°Р№Р»Сѓ РїР°С€С‹СЂСЌРЅСЊРЅСЏСћ "
 
 msgid " Which extension file you want to edit? "
-msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
+msgstr " РЇРєС– С„Р°Р№Р» РїР°С€С‹СЂСЌРЅСЊРЅСЏСћ Р’С‹ Р¶Р°РґР°РµС†Рµ СЂСЌРґР°РіР°РІР°С†СЊ? "
 
 msgid "&User"
-msgstr "&Карыстальніку"
+msgstr "&РљР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ"
 
 msgid "&System Wide"
-msgstr "&Агульнасыстэмны"
+msgstr "&РђРіСѓР»СЊРЅР°СЃС‹СЃС‚СЌРјРЅС‹"
 
 msgid " Menu edit "
-msgstr " Праўка файлу мэню "
+msgstr " РџСЂР°СћРєР° С„Р°Р№Р»Сѓ РјСЌРЅСЋ "
 
 msgid " Which menu file do you want to edit? "
-msgstr " Які файл мэню Вы жадаеце рэдагаваць? "
+msgstr " РЇРєС– С„Р°Р№Р» РјСЌРЅСЋ Р’С‹ Р¶Р°РґР°РµС†Рµ СЂСЌРґР°РіР°РІР°С†СЊ? "
 
 msgid "&Local"
-msgstr "&Лякальны"
+msgstr "&Р›СЏРєР°Р»СЊРЅС‹"
 
 #, fuzzy
 msgid "Syntax file edit"
-msgstr "Рэдагаваньне файлу пашырэньняў"
+msgstr "Р СЌРґР°РіР°РІР°РЅСЊРЅРµ С„Р°Р№Р»Сѓ РїР°С€С‹СЂСЌРЅСЊРЅСЏСћ"
 
 #, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Які файл пашырэньняў Вы жадаеце рэдагаваць? "
+msgstr " РЇРєС– С„Р°Р№Р» РїР°С€С‹СЂСЌРЅСЊРЅСЏСћ Р’С‹ Р¶Р°РґР°РµС†Рµ СЂСЌРґР°РіР°РІР°С†СЊ? "
 
 msgid " Compare directories "
-msgstr " Параўнаць каталёгі "
+msgstr " РџР°СЂР°СћРЅР°С†СЊ РєР°С‚Р°Р»С‘РіС– "
 
 msgid " Select compare method: "
-msgstr " Абярыце мэтад параўнаньня: "
+msgstr " РђР±СЏСЂС‹С†Рµ РјСЌС‚Р°Рґ РїР°СЂР°СћРЅР°РЅСЊРЅСЏ: "
 
 msgid "&Quick"
-msgstr "&Хуткі"
+msgstr "&РҐСѓС‚РєС–"
 
 msgid "&Size only"
-msgstr "Па &памеру"
+msgstr "РџР° &РїР°РјРµСЂСѓ"
 
 msgid "&Thorough"
-msgstr "Па&байтны"
+msgstr "РџР°&Р±Р°Р№С‚РЅС‹"
 
 msgid " Both panels should be in the listing mode to use this command "
 msgstr ""
-" Для выкананьня гэтае каманды абедзьве панэлі павінны быць у рэжыме сьпісу"
+" Р”Р»СЏ РІС‹РєР°РЅР°РЅСЊРЅСЏ РіСЌС‚Р°Рµ РєР°РјР°РЅРґС‹ Р°Р±РµРґР·СЊРІРµ РїР°РЅСЌР»С– РїР°РІС–РЅРЅС‹ Р±С‹С†СЊ Сѓ СЂСЌР¶С‹РјРµ СЃСЊРїС–СЃСѓ"
 
 msgid " The command history is empty "
-msgstr " Гісторыя каманднага радку пустая "
+msgstr " Р“С–СЃС‚РѕСЂС‹СЏ РєР°РјР°РЅРґРЅР°РіР° СЂР°РґРєСѓ РїСѓСЃС‚Р°СЏ "
 
 msgid " Command history "
-msgstr " Гісторыя каманднага радку "
+msgstr " Р“С–СЃС‚РѕСЂС‹СЏ РєР°РјР°РЅРґРЅР°РіР° СЂР°РґРєСѓ "
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" Гэта ня xterm і не кансоль Linux; \n"
-"    Панэлі ня могуць быць адключаны. "
+" Р“СЌС‚Р° РЅСЏ xterm С– РЅРµ РєР°РЅСЃРѕР»СЊ Linux; \n"
+"    РџР°РЅСЌР»С– РЅСЏ РјРѕРіСѓС†СЊ Р±С‹С†СЊ Р°РґРєР»СЋС‡Р°РЅС‹. "
 
 #, fuzzy, c-format
 msgid "Link %s to:"
-msgstr " спасылка: %s "
+msgstr " СЃРїР°СЃС‹Р»РєР°: %s "
 
 msgid " Link "
-msgstr " Спасылка "
+msgstr " РЎРїР°СЃС‹Р»РєР° "
 
 #, c-format
 msgid " link: %s "
-msgstr " спасылка: %s "
+msgstr " СЃРїР°СЃС‹Р»РєР°: %s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " сымбалічная спасылка: %s "
+msgstr " СЃС‹РјР±Р°Р»С–С‡РЅР°СЏ СЃРїР°СЃС‹Р»РєР°: %s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Сымбалічная спасылка `%s' указвае на: "
+msgstr " РЎС‹РјР±Р°Р»С–С‡РЅР°СЏ СЃРїР°СЃС‹Р»РєР° `%s' СѓРєР°Р·РІР°Рµ РЅР°: "
 
 msgid " Edit symlink "
-msgstr " Рэдагаваньне сымбалічнае спасылкі "
+msgstr " Р СЌРґР°РіР°РІР°РЅСЊРЅРµ СЃС‹РјР±Р°Р»С–С‡РЅР°Рµ СЃРїР°СЃС‹Р»РєС– "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " рэдагаваньне сымбалічнае спасылкі, немагчыма выдаліць %s: %s "
+msgstr " СЂСЌРґР°РіР°РІР°РЅСЊРЅРµ СЃС‹РјР±Р°Р»С–С‡РЅР°Рµ СЃРїР°СЃС‹Р»РєС–, РЅРµРјР°РіС‡С‹РјР° РІС‹РґР°Р»С–С†СЊ %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " рэдагаваньне сымбалічнае спасылкі: %s "
+msgstr " СЂСЌРґР°РіР°РІР°РЅСЊРЅРµ СЃС‹РјР±Р°Р»С–С‡РЅР°Рµ СЃРїР°СЃС‹Р»РєС–: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "`%s' ня сымбалічная спасылка"
+msgstr "`%s' РЅСЏ СЃС‹РјР±Р°Р»С–С‡РЅР°СЏ СЃРїР°СЃС‹Р»РєР°"
 
 #, c-format
 msgid " Cannot chdir to %s "
-msgstr " Немагчыма перайсьці ў %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїРµСЂР°Р№СЃСЊС†С– Сћ %s "
 
 msgid " Enter machine name (F1 for details): "
-msgstr " Увядзіце ймя машыны (дэталі па F1): "
+msgstr " РЈРІСЏРґР·С–С†Рµ Р№РјСЏ РјР°С€С‹РЅС‹ (РґСЌС‚Р°Р»С– РїР° F1): "
 
 msgid " Link to a remote machine "
-msgstr " Злучэньне з аддаленай машынай "
+msgstr " Р—Р»СѓС‡СЌРЅСЊРЅРµ Р· Р°РґРґР°Р»РµРЅР°Р№ РјР°С€С‹РЅР°Р№ "
 
 msgid " FTP to machine "
-msgstr " FTP-злучэньне з адлеглай машынай "
+msgstr " FTP-Р·Р»СѓС‡СЌРЅСЊРЅРµ Р· Р°РґР»РµРіР»Р°Р№ РјР°С€С‹РЅР°Р№ "
 
 msgid " Shell link to machine "
-msgstr "Лучыва абалонкі да машыны"
+msgstr "Р›СѓС‡С‹РІР° Р°Р±Р°Р»РѕРЅРєС– РґР° РјР°С€С‹РЅС‹"
 
 msgid " SMB link to machine "
-msgstr " SMB сувязь з машынай "
+msgstr " SMB СЃСѓРІСЏР·СЊ Р· РјР°С€С‹РЅР°Р№ "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Аднаўленьне файлаў на файлавай сыстэме ext2 "
+msgstr " РђРґРЅР°СћР»РµРЅСЊРЅРµ С„Р°Р№Р»Р°Сћ РЅР° С„Р°Р№Р»Р°РІР°Р№ СЃС‹СЃС‚СЌРјРµ ext2 "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Увядзіце ймя прылады (бяз /dev/) на якой\n"
-" аднаўляць файлы пасьля выдаленьня: (дэталі па F1)"
+" РЈРІСЏРґР·С–С†Рµ Р№РјСЏ РїСЂС‹Р»Р°РґС‹ (Р±СЏР· /dev/) РЅР° СЏРєРѕР№\n"
+" Р°РґРЅР°СћР»СЏС†СЊ С„Р°Р№Р»С‹ РїР°СЃСЊР»СЏ РІС‹РґР°Р»РµРЅСЊРЅСЏ: (РґСЌС‚Р°Р»С– РїР° F1)"
 
 msgid " Setup "
-msgstr " Наладка "
+msgstr " РќР°Р»Р°РґРєР° "
 
 #, fuzzy, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Парамэтры захаваныя ў ~/"
+msgstr " РџР°СЂР°РјСЌС‚СЂС‹ Р·Р°С…Р°РІР°РЅС‹СЏ Сћ ~/"
 
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма перайсьці ў \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїРµСЂР°Р№СЃСЊС†С– Сћ \"%s\" \n"
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " Немагчыма выконваць каманды на не лякальных файлавых сыстэмах"
+msgstr " РќРµРјР°РіС‡С‹РјР° РІС‹РєРѕРЅРІР°С†СЊ РєР°РјР°РЅРґС‹ РЅР° РЅРµ Р»СЏРєР°Р»СЊРЅС‹С… С„Р°Р№Р»Р°РІС‹С… СЃС‹СЃС‚СЌРјР°С…"
 
 msgid " The shell is already running a command "
-msgstr " Інтэрпрэтатар ужо апрацоўвае каманду "
+msgstr " Р†РЅС‚СЌСЂРїСЂСЌС‚Р°С‚Р°СЂ СѓР¶Рѕ Р°РїСЂР°С†РѕСћРІР°Рµ РєР°РјР°РЅРґСѓ "
 
 msgid "&Unsorted"
-msgstr "&Бяз сартаваньня"
+msgstr "&Р‘СЏР· СЃР°СЂС‚Р°РІР°РЅСЊРЅСЏ"
 
 msgid "&Name"
-msgstr "&Імя"
+msgstr "&Р†РјСЏ"
 
 msgid "&Extension"
-msgstr "Па&шырэньне"
+msgstr "РџР°&С€С‹СЂСЌРЅСЊРЅРµ"
 
 msgid "&Modify time"
-msgstr "Час &мадыфікацыі"
+msgstr "Р§Р°СЃ &РјР°РґС‹С„С–РєР°С†С‹С–"
 
 msgid "&Access time"
-msgstr "Час &доступу"
+msgstr "Р§Р°СЃ &РґРѕСЃС‚СѓРїСѓ"
 
 msgid "C&Hange time"
-msgstr "Час &зьмяненьня"
+msgstr "Р§Р°СЃ &Р·СЊРјСЏРЅРµРЅСЊРЅСЏ"
 
 msgid "&Size"
-msgstr "&Памер"
+msgstr "&РџР°РјРµСЂ"
 
 msgid "&Inode"
-msgstr "&Вузел"
+msgstr "&Р’СѓР·РµР»"
 
 #, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Немагчыма зьмяніць каталёг"
+msgstr "РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ РєР°С‚Р°Р»С‘Рі"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Для працягу націсьніце любую клявішу..."
+msgstr "Р”Р»СЏ РїСЂР°С†СЏРіСѓ РЅР°С†С–СЃСЊРЅС–С†Рµ Р»СЋР±СѓСЋ РєР»СЏРІС–С€Сѓ..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Увядзіце `exit' для вяртаньня ў Midnight Commander"
+msgstr "РЈРІСЏРґР·С–С†Рµ `exit' РґР»СЏ РІСЏСЂС‚Р°РЅСЊРЅСЏ Сћ Midnight Commander"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
-msgstr " Немагчыма атрымаць лякальную копію %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ Р»СЏРєР°Р»СЊРЅСѓСЋ РєРѕРїС–СЋ %s "
 
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Немагчыма стварыць часовы камандны файл \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ С‡Р°СЃРѕРІС‹ РєР°РјР°РЅРґРЅС‹ С„Р°Р№Р» \n"
 " %s "
 
 msgid " Parameter "
-msgstr " Парамэтар "
+msgstr " РџР°СЂР°РјСЌС‚Р°СЂ "
 
 #, fuzzy, c-format
 msgid " %s%s file error"
-msgstr " памылка файлу "
+msgstr " РїР°РјС‹Р»РєР° С„Р°Р№Р»Сѓ "
 
 #, fuzzy, c-format
 msgid ""
@@ -1265,14 +1265,14 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"mc.ext файл зьменены\n"
-"з вэрсыі 3.0. Мажліва адбыўся збой пры ўсталёўцы.\n"
-"Калі ласка, вазьміце сьвежаю копію з пакету\n"
+"mc.ext С„Р°Р№Р» Р·СЊРјРµРЅРµРЅС‹\n"
+"Р· РІСЌСЂСЃС‹С– 3.0. РњР°Р¶Р»С–РІР° Р°РґР±С‹СћСЃСЏ Р·Р±РѕР№ РїСЂС‹ СћСЃС‚Р°Р»С‘СћС†С‹.\n"
+"РљР°Р»С– Р»Р°СЃРєР°, РІР°Р·СЊРјС–С†Рµ СЃСЊРІРµР¶Р°СЋ РєРѕРїС–СЋ Р· РїР°РєРµС‚Сѓ\n"
 "Midnight Commander."
 
 #, fuzzy, c-format
 msgid " ~/%s file error "
-msgstr " памылка файлу "
+msgstr " РїР°РјС‹Р»РєР° С„Р°Р№Р»Сѓ "
 
 #, c-format
 msgid ""
@@ -1282,26 +1282,26 @@ msgid ""
 msgstr ""
 
 msgid " Copy "
-msgstr " Капіяваньне "
+msgstr " РљР°РїС–СЏРІР°РЅСЊРЅРµ "
 
 msgid " Move "
-msgstr " Перамяшчэньне "
+msgstr " РџРµСЂР°РјСЏС€С‡СЌРЅСЊРЅРµ "
 
 msgid " Delete "
-msgstr " Выдаленьне "
+msgstr " Р’С‹РґР°Р»РµРЅСЊРЅРµ "
 
 msgid " Invalid target mask "
-msgstr " Памылковы шаблён мэты "
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ С€Р°Р±Р»С‘РЅ РјСЌС‚С‹ "
 
 msgid " Cannot make the hardlink "
-msgstr " Немагчыма стварыць жорскую спасылку "
+msgstr " РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ Р¶РѕСЂСЃРєСѓСЋ СЃРїР°СЃС‹Р»РєСѓ "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма прачытаць зыходную спасылку \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїСЂР°С‡С‹С‚Р°С†СЊ Р·С‹С…РѕРґРЅСѓСЋ СЃРїР°СЃС‹Р»РєСѓ \"%s\" \n"
 " %s "
 
 msgid ""
@@ -1309,17 +1309,17 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Немагчыма стварыць устойлівыя сымб. спасылкі праз не лякальныя файлавыя "
-"сыстэмы:\n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ СѓСЃС‚РѕР№Р»С–РІС‹СЏ СЃС‹РјР±. СЃРїР°СЃС‹Р»РєС– РїСЂР°Р· РЅРµ Р»СЏРєР°Р»СЊРЅС‹СЏ С„Р°Р№Р»Р°РІС‹СЏ "
+"СЃС‹СЃС‚СЌРјС‹:\n"
 "\n"
-" Опцыя Устойлівыя сымбалічныя спасылкі будзе адмененая "
+" РћРїС†С‹СЏ РЈСЃС‚РѕР№Р»С–РІС‹СЏ СЃС‹РјР±Р°Р»С–С‡РЅС‹СЏ СЃРїР°СЃС‹Р»РєС– Р±СѓРґР·Рµ Р°РґРјРµРЅРµРЅР°СЏ "
 
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма стварыць сымб. спасылку мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ СЃС‹РјР±. СЃРїР°СЃС‹Р»РєСѓ РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1327,7 +1327,7 @@ msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма перапісаць каталёг \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РїС–СЃР°С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1335,19 +1335,19 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць уласьцівасьці зыходнага файлу \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СѓР»Р°СЃСЊС†С–РІР°СЃСЊС†С– Р·С‹С…РѕРґРЅР°РіР° С„Р°Р№Р»Сѓ \"%s\" \n"
 " %s "
 
 #, c-format
 msgid " `%s' and `%s' are the same file "
-msgstr " `%s' і `%s' адзін і той жа файл "
+msgstr " `%s' С– `%s' Р°РґР·С–РЅ С– С‚РѕР№ Р¶Р° С„Р°Р№Р» "
 
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма стварыць спэцыяльны файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ СЃРїСЌС†С‹СЏР»СЊРЅС‹ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1355,7 +1355,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зьмяніць уладальніка файлу-мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ СѓР»Р°РґР°Р»СЊРЅС–РєР° С„Р°Р№Р»Сѓ-РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1363,7 +1363,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зьмяніць рэжым доступу файлу-мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ СЂСЌР¶С‹Рј РґРѕСЃС‚СѓРїСѓ С„Р°Р№Р»Сѓ-РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1371,18 +1371,18 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма адчыніць зыходны файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ Р·С‹С…РѕРґРЅС‹ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Збой дапампаваньня файлу, файл будзе перапісаны "
+msgstr " Р—Р±РѕР№ РґР°РїР°РјРїР°РІР°РЅСЊРЅСЏ С„Р°Р№Р»Сѓ, С„Р°Р№Р» Р±СѓРґР·Рµ РїРµСЂР°РїС–СЃР°РЅС‹ "
 
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць уласьцівасьці зыходнага файлу \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СѓР»Р°СЃСЊС†С–РІР°СЃСЊС†С– Р·С‹С…РѕРґРЅР°РіР° С„Р°Р№Р»Сѓ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1390,7 +1390,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма стварыць файл мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ С„Р°Р№Р» РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1398,7 +1398,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць уласьцівасьці файла мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СѓР»Р°СЃСЊС†С–РІР°СЃСЊС†С– С„Р°Р№Р»Р° РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1406,7 +1406,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма прачытаць зыходны файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїСЂР°С‡С‹С‚Р°С†СЊ Р·С‹С…РѕРґРЅС‹ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1414,18 +1414,18 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма запісаць файл мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·Р°РїС–СЃР°С†СЊ С„Р°Р№Р» РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 msgid "(stalled)"
-msgstr "(завяз)"
+msgstr "(Р·Р°РІСЏР·)"
 
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зачыніць зыходны файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·Р°С‡С‹РЅС–С†СЊ Р·С‹С…РѕРґРЅС‹ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1433,24 +1433,24 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зачыніць файл мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·Р°С‡С‹РЅС–С†СЊ С„Р°Р№Р» РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Быў атрыманы няпоўны файл. Захаваць?"
+msgstr "Р‘С‹Сћ Р°С‚СЂС‹РјР°РЅС‹ РЅСЏРїРѕСћРЅС‹ С„Р°Р№Р». Р—Р°С…Р°РІР°С†СЊ?"
 
 msgid "&Delete"
-msgstr "&Выдаліць"
+msgstr "&Р’С‹РґР°Р»С–С†СЊ"
 
 msgid "&Keep"
-msgstr "&Захаваць"
+msgstr "&Р—Р°С…Р°РІР°С†СЊ"
 
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць уласьцівасьці зыходнага каталёгу \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СѓР»Р°СЃСЊС†С–РІР°СЃСЊС†С– Р·С‹С…РѕРґРЅР°РіР° РєР°С‚Р°Р»С‘РіСѓ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1458,7 +1458,7 @@ msgid ""
 " Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
-" Зыходны каталёг \"%s\" каталёгам не зьяўляецца \n"
+" Р—С‹С…РѕРґРЅС‹ РєР°С‚Р°Р»С‘Рі \"%s\" РєР°С‚Р°Р»С‘РіР°Рј РЅРµ Р·СЊСЏСћР»СЏРµС†С†Р° \n"
 " %s "
 
 #, c-format
@@ -1466,7 +1466,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Немагчыма скапіяваць цыклічную сымбалічную спасылку \n"
+" РќРµРјР°РіС‡С‹РјР° СЃРєР°РїС–СЏРІР°С†СЊ С†С‹РєР»С–С‡РЅСѓСЋ СЃС‹РјР±Р°Р»С–С‡РЅСѓСЋ СЃРїР°СЃС‹Р»РєСѓ \n"
 " `%s' "
 
 #, c-format
@@ -1474,7 +1474,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Прызначэньне \"%s\" павінна быць каталёгам \n"
+" РџСЂС‹Р·РЅР°С‡СЌРЅСЊРЅРµ \"%s\" РїР°РІС–РЅРЅР° Р±С‹С†СЊ РєР°С‚Р°Р»С‘РіР°Рј \n"
 " %s "
 
 #, c-format
@@ -1482,7 +1482,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма стварыць каталёг мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ РєР°С‚Р°Р»С‘Рі РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1490,7 +1490,7 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма зьмяніць уладальніка каталёгу мэты\"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ СѓР»Р°РґР°Р»СЊРЅС–РєР° РєР°С‚Р°Р»С‘РіСѓ РјСЌС‚С‹\"%s\" \n"
 " %s "
 
 #, c-format
@@ -1498,19 +1498,19 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць уласьцівасьці файлу \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СѓР»Р°СЃСЊС†С–РІР°СЃСЊС†С– С„Р°Р№Р»Сѓ \"%s\" \n"
 " %s "
 
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " Немагчыма перапісаць каталёг `%s' "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РїС–СЃР°С†СЊ РєР°С‚Р°Р»С‘Рі `%s' "
 
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма перамясьціць файл \"%s\" в \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РјСЏСЃСЊС†С–С†СЊ С„Р°Р№Р» \"%s\" РІ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1518,27 +1518,27 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма выдаліць файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РІС‹РґР°Р»С–С†СЊ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 #, c-format
 msgid " `%s' and `%s' are the same directory "
-msgstr " `%s' і `%s' адзін і той жа каталёг "
+msgstr " `%s' С– `%s' Р°РґР·С–РЅ С– С‚РѕР№ Р¶Р° РєР°С‚Р°Р»С‘Рі "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Немагчыма перапісаць каталёг \"%s\" %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РїС–СЃР°С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" %s "
 
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr " Немагчыма перапісаць файл \"%s\" %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РїС–СЃР°С†СЊ С„Р°Р№Р» \"%s\" %s "
 
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма перамясьціць каталёг \"%s\" у \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РїРµСЂР°РјСЏСЃСЊС†С–С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" Сѓ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1546,7 +1546,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма выдаліць файл \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РІС‹РґР°Р»С–С†СЊ С„Р°Р№Р» \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1554,17 +1554,17 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Немагчыма выдаліць каталёг \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° РІС‹РґР°Р»С–С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" \n"
 " %s "
 
 msgid "1Copy"
-msgstr "1Капіяваць"
+msgstr "1РљР°РїС–СЏРІР°С†СЊ"
 
 msgid "1Move"
-msgstr "1Перанесьці"
+msgstr "1РџРµСЂР°РЅРµСЃСЊС†С–"
 
 msgid "1Delete"
-msgstr "1Выдаліць"
+msgstr "1Р’С‹РґР°Р»С–С†СЊ"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1575,37 +1575,37 @@ msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "file"
-msgstr "файл"
+msgstr "С„Р°Р№Р»"
 
 msgid "files"
-msgstr "файлы"
+msgstr "С„Р°Р№Р»С‹"
 
 msgid "directory"
-msgstr "каталёг"
+msgstr "РєР°С‚Р°Р»С‘Рі"
 
 msgid "directories"
-msgstr "каталёгі"
+msgstr "РєР°С‚Р°Р»С‘РіС–"
 
 msgid "files/directories"
-msgstr "файлы/каталёгі"
+msgstr "С„Р°Р№Р»С‹/РєР°С‚Р°Р»С‘РіС–"
 
 msgid " with source mask:"
-msgstr " з зыходным шаблёнам:"
+msgstr " Р· Р·С‹С…РѕРґРЅС‹Рј С€Р°Р±Р»С‘РЅР°Рј:"
 
 msgid " to:"
-msgstr " у:"
+msgstr " Сѓ:"
 
 msgid " Cannot operate on \"..\"! "
-msgstr " Немагчыма выканаць апэрацыю на \"..\"! "
+msgstr " РќРµРјР°РіС‡С‹РјР° РІС‹РєР°РЅР°С†СЊ Р°РїСЌСЂР°С†С‹СЋ РЅР° \"..\"! "
 
 msgid " Sorry, I could not put the job in background "
-msgstr " Выбачайце, зрабіць гэта ў тле немагчыма "
+msgstr " Р’С‹Р±Р°С‡Р°Р№С†Рµ, Р·СЂР°Р±С–С†СЊ РіСЌС‚Р° Сћ С‚Р»Рµ РЅРµРјР°РіС‡С‹РјР° "
 
 msgid "&Retry"
-msgstr "Па&ўтарыць"
+msgstr "РџР°&СћС‚Р°СЂС‹С†СЊ"
 
 msgid "&Abort"
-msgstr "&Перарваць"
+msgstr "&РџРµСЂР°СЂРІР°С†СЊ"
 
 msgid ""
 "\n"
@@ -1613,8 +1613,8 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Каталёг ня пусты.    \n"
-"   Выдаліць рэкурсыўна? "
+"   РљР°С‚Р°Р»С‘Рі РЅСЏ РїСѓСЃС‚С‹.    \n"
+"   Р’С‹РґР°Р»С–С†СЊ СЂСЌРєСѓСЂСЃС‹СћРЅР°? "
 
 msgid ""
 "\n"
@@ -1622,14 +1622,14 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Працэс у тле: каталёг ня пусты \n"
-"   Выдаліць рэкурсыўна? "
+"   РџСЂР°С†СЌСЃ Сѓ С‚Р»Рµ: РєР°С‚Р°Р»С‘Рі РЅСЏ РїСѓСЃС‚С‹ \n"
+"   Р’С‹РґР°Р»С–С†СЊ СЂСЌРєСѓСЂСЃС‹СћРЅР°? "
 
 msgid " Delete: "
-msgstr " Выдаліць: "
+msgstr " Р’С‹РґР°Р»С–С†СЊ: "
 
 msgid "Non&e"
-msgstr "ні&Воднага"
+msgstr "РЅС–&Р’РѕРґРЅР°РіР°"
 
 #, c-format
 msgid "ETA %d:%02d.%02d"
@@ -1648,245 +1648,245 @@ msgid "%ld B/s"
 msgstr "%ld B/s"
 
 msgid "File"
-msgstr "Файл"
+msgstr "Р¤Р°Р№Р»"
 
 msgid "Count"
-msgstr "Лік"
+msgstr "Р›С–Рє"
 
 msgid "Bytes"
-msgstr "Байт"
+msgstr "Р‘Р°Р№С‚"
 
 msgid "Source"
-msgstr "Крыніца"
+msgstr "РљСЂС‹РЅС–С†Р°"
 
 msgid "Target"
-msgstr "Мэта"
+msgstr "РњСЌС‚Р°"
 
 msgid "Deleting"
-msgstr "Выдаляем"
+msgstr "Р’С‹РґР°Р»СЏРµРј"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Файл мэты \"%s\" ужо йснуе!"
+msgstr "Р¤Р°Р№Р» РјСЌС‚С‹ \"%s\" СѓР¶Рѕ Р№СЃРЅСѓРµ!"
 
 msgid "If &size differs"
-msgstr "якія адрозьніваюцца па &Даўжыні"
+msgstr "СЏРєС–СЏ Р°РґСЂРѕР·СЊРЅС–РІР°СЋС†С†Р° РїР° &Р”Р°СћР¶С‹РЅС–"
 
 msgid "&Update"
-msgstr "&Састарэлыя"
+msgstr "&РЎР°СЃС‚Р°СЂСЌР»С‹СЏ"
 
 msgid "Overwrite all targets?"
-msgstr "Перапісаць усе файлы?"
+msgstr "РџРµСЂР°РїС–СЃР°С†СЊ СѓСЃРµ С„Р°Р№Р»С‹?"
 
 msgid "&Reget"
-msgstr "пера&Чытаць"
+msgstr "РїРµСЂР°&Р§С‹С‚Р°С†СЊ"
 
 msgid "A&ppend"
-msgstr "дапісаць у &Канец"
+msgstr "РґР°РїС–СЃР°С†СЊ Сѓ &РљР°РЅРµС†"
 
 msgid "Overwrite this target?"
-msgstr "Перапісаць гэты файл?"
+msgstr "РџРµСЂР°РїС–СЃР°С†СЊ РіСЌС‚С‹ С„Р°Р№Р»?"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Дата мэты: %s, даўжыня %llu"
+msgstr "Р”Р°С‚Р° РјСЌС‚С‹: %s, РґР°СћР¶С‹РЅСЏ %llu"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Дата крыніцы: %s, даўжыня %llu"
+msgstr "Р”Р°С‚Р° РєСЂС‹РЅС–С†С‹: %s, РґР°СћР¶С‹РЅСЏ %llu"
 
 #, fuzzy, c-format
 msgid "Target date: %s, size %u"
-msgstr "Дата мэты: %s, даўжыня %u"
+msgstr "Р”Р°С‚Р° РјСЌС‚С‹: %s, РґР°СћР¶С‹РЅСЏ %u"
 
 #, fuzzy, c-format
 msgid "Source date: %s, size %u"
-msgstr "Дата крыніцы: %s, даўжыня %u"
+msgstr "Р”Р°С‚Р° РєСЂС‹РЅС–С†С‹: %s, РґР°СћР¶С‹РЅСЏ %u"
 
 msgid " File exists "
-msgstr " Файл існуе "
+msgstr " Р¤Р°Р№Р» С–СЃРЅСѓРµ "
 
 msgid " Background process: File exists "
-msgstr " Працэс у тле: файл існуе "
+msgstr " РџСЂР°С†СЌСЃ Сѓ С‚Р»Рµ: С„Р°Р№Р» С–СЃРЅСѓРµ "
 
 msgid "preserve &Attributes"
-msgstr "Захоўваць &Атрыбуты"
+msgstr "Р—Р°С…РѕСћРІР°С†СЊ &РђС‚СЂС‹Р±СѓС‚С‹"
 
 msgid "follow &Links"
-msgstr "Сачыць за &Спасылкамі."
+msgstr "РЎР°С‡С‹С†СЊ Р·Р° &РЎРїР°СЃС‹Р»РєР°РјС–."
 
 msgid "to:"
-msgstr "у:"
+msgstr "Сѓ:"
 
 msgid "&Using shell patterns"
-msgstr "&Мэтасымбалі shell"
+msgstr "&РњСЌС‚Р°СЃС‹РјР±Р°Р»С– shell"
 
 msgid "&Background"
-msgstr "У т&ле"
+msgstr "РЈ С‚&Р»Рµ"
 
 msgid "&Stable Symlinks"
-msgstr "&Захоўваць сымбалічныя спасылкі"
+msgstr "&Р—Р°С…РѕСћРІР°С†СЊ СЃС‹РјР±Р°Р»С–С‡РЅС‹СЏ СЃРїР°СЃС‹Р»РєС–"
 
 msgid "&Dive into subdir if exists"
-msgstr "У &нутро каталёгу, калі ёсьць"
+msgstr "РЈ &РЅСѓС‚СЂРѕ РєР°С‚Р°Р»С‘РіСѓ, РєР°Р»С– С‘СЃСЊС†СЊ"
 
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
 " %s "
 msgstr ""
-"Памылковы узор `%s' \n"
+"РџР°РјС‹Р»РєРѕРІС‹ СѓР·РѕСЂ `%s' \n"
 " %s "
 
 msgid "&Suspend"
-msgstr "Пры&пыніць"
+msgstr "РџСЂС‹&РїС‹РЅС–С†СЊ"
 
 msgid "Con&tinue"
-msgstr "&Працягваць"
+msgstr "&РџСЂР°С†СЏРіРІР°С†СЊ"
 
 msgid "&Chdir"
-msgstr "Пера&ход"
+msgstr "РџРµСЂР°&С…РѕРґ"
 
 msgid "&Again"
-msgstr "Паў&тор"
+msgstr "РџР°Сћ&С‚РѕСЂ"
 
 msgid "&Quit"
-msgstr "&Выхад"
+msgstr "&Р’С‹С…Р°Рґ"
 
 msgid "Pane&lize"
-msgstr "Па&нэлізацыя"
+msgstr "РџР°&РЅСЌР»С–Р·Р°С†С‹СЏ"
 
 msgid "&View - F3"
-msgstr "Пра&гляд - F3"
+msgstr "РџСЂР°&РіР»СЏРґ - F3"
 
 msgid "&Edit - F4"
-msgstr "&Праўка - F4"
+msgstr "&РџСЂР°СћРєР° - F4"
 
 msgid "&Find recursively"
 msgstr ""
 
 msgid "Start at:"
-msgstr "  Стартаваць ад:"
+msgstr "  РЎС‚Р°СЂС‚Р°РІР°С†СЊ Р°Рґ:"
 
 msgid "Filename:"
-msgstr "  Шаблён імя"
+msgstr "  РЁР°Р±Р»С‘РЅ С–РјСЏ"
 
 msgid "Content: "
-msgstr "Утрымлівае тэкст"
+msgstr "РЈС‚СЂС‹РјР»С–РІР°Рµ С‚СЌРєСЃС‚"
 
 msgid "&Tree"
-msgstr "Д&рэва"
+msgstr "Р”&СЂСЌРІР°"
 
 msgid "Find File"
-msgstr " Пошук файлу "
+msgstr " РџРѕС€СѓРє С„Р°Р№Р»Сѓ "
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "Шукаем у %s"
+msgstr "РЁСѓРєР°РµРј Сѓ %s"
 
 msgid "Finished"
-msgstr "Скончана"
+msgstr "РЎРєРѕРЅС‡Р°РЅР°"
 
 #, c-format
 msgid "Searching %s"
-msgstr "Шукаем %s"
+msgstr "РЁСѓРєР°РµРј %s"
 
 msgid "Searching"
-msgstr "Скануем"
+msgstr "РЎРєР°РЅСѓРµРј"
 
 msgid " Help file format error\n"
-msgstr " Памылка фармату файлу дапамогі\n"
+msgstr " РџР°РјС‹Р»РєР° С„Р°СЂРјР°С‚Сѓ С„Р°Р№Р»Сѓ РґР°РїР°РјРѕРіС–\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " Нутраная памылка: Падвойны пачатак вобласьці спасылкі "
+msgstr " РќСѓС‚СЂР°РЅР°СЏ РїР°РјС‹Р»РєР°: РџР°РґРІРѕР№РЅС‹ РїР°С‡Р°С‚Р°Рє РІРѕР±Р»Р°СЃСЊС†С– СЃРїР°СЃС‹Р»РєС– "
 
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " Немагчыма знайсьці вузел %s у файле дапамогі "
+msgstr " РќРµРјР°РіС‡С‹РјР° Р·РЅР°Р№СЃСЊС†С– РІСѓР·РµР» %s Сѓ С„Р°Р№Р»Рµ РґР°РїР°РјРѕРіС– "
 
 msgid "Index"
-msgstr "Зьмест"
+msgstr "Р—СЊРјРµСЃС‚"
 
 msgid "Prev"
-msgstr "Назад"
+msgstr "РќР°Р·Р°Рґ"
 
 msgid "&Move"
-msgstr "Пера&мясьціць"
+msgstr "РџРµСЂР°&РјСЏСЃСЊС†С–С†СЊ"
 
 msgid "&Remove"
-msgstr "&Выдаліць"
+msgstr "&Р’С‹РґР°Р»С–С†СЊ"
 
 msgid "&Append"
-msgstr "У &Канец"
+msgstr "РЈ &РљР°РЅРµС†"
 
 msgid "&Insert"
-msgstr "У &Пачатак"
+msgstr "РЈ &РџР°С‡Р°С‚Р°Рє"
 
 msgid "New &Entry"
-msgstr "Новы &Запіс"
+msgstr "РќРѕРІС‹ &Р—Р°РїС–СЃ"
 
 msgid "New &Group"
-msgstr "Новая &Група"
+msgstr "РќРѕРІР°СЏ &Р“СЂСѓРїР°"
 
 msgid "&Up"
-msgstr "&Угору"
+msgstr "&РЈРіРѕСЂСѓ"
 
 msgid "&Add current"
-msgstr "Дадаць &Бягучы"
+msgstr "Р”Р°РґР°С†СЊ &Р‘СЏРіСѓС‡С‹"
 
 #, fuzzy
 msgid "&Refresh"
-msgstr "&Адваротны"
+msgstr "&РђРґРІР°СЂРѕС‚РЅС‹"
 
 msgid "Fr&ee VFSs now"
-msgstr "В&ызваліць ВФС зараз"
+msgstr "Р’&С‹Р·РІР°Р»С–С†СЊ Р’Р¤РЎ Р·Р°СЂР°Р·"
 
 msgid "Change &To"
-msgstr "Зьмяніць &У"
+msgstr "Р—СЊРјСЏРЅС–С†СЊ &РЈ"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "Падгрупа - націсьніце ENTER каб прагледзіць"
+msgstr "РџР°РґРіСЂСѓРїР° - РЅР°С†С–СЃСЊРЅС–С†Рµ ENTER РєР°Р± РїСЂР°РіР»РµРґР·С–С†СЊ"
 
 msgid "Active VFS directories"
-msgstr "Актыўныя каталёгі ВФС"
+msgstr "РђРєС‚С‹СћРЅС‹СЏ РєР°С‚Р°Р»С‘РіС– Р’Р¤РЎ"
 
 msgid "Directory hotlist"
-msgstr " Сьпіс каталёгаў "
+msgstr " РЎСЊРїС–СЃ РєР°С‚Р°Р»С‘РіР°Сћ "
 
 msgid " Directory path "
-msgstr " Шлях да каталёгу "
+msgstr " РЁР»СЏС… РґР° РєР°С‚Р°Р»С‘РіСѓ "
 
 msgid " Directory label "
-msgstr " Метка каталёгу "
+msgstr " РњРµС‚РєР° РєР°С‚Р°Р»С‘РіСѓ "
 
 #, c-format
 msgid "Moving %s"
-msgstr "Пераносім %s"
+msgstr "РџРµСЂР°РЅРѕСЃС–Рј %s"
 
 msgid "New hotlist entry"
-msgstr " Даданьне запісу ў сьпіс "
+msgstr " Р”Р°РґР°РЅСЊРЅРµ Р·Р°РїС–СЃСѓ Сћ СЃСЊРїС–СЃ "
 
 msgid "Directory label"
-msgstr " Метка каталёгу"
+msgstr " РњРµС‚РєР° РєР°С‚Р°Р»С‘РіСѓ"
 
 msgid "Directory path"
-msgstr " Шлях да каталёгу"
+msgstr " РЁР»СЏС… РґР° РєР°С‚Р°Р»С‘РіСѓ"
 
 msgid " New hotlist group "
-msgstr " Даданьне групы ў сьпіс "
+msgstr " Р”Р°РґР°РЅСЊРЅРµ РіСЂСѓРїС‹ Сћ СЃСЊРїС–СЃ "
 
 msgid "Name of new group"
-msgstr " Імя новай групы"
+msgstr " Р†РјСЏ РЅРѕРІР°Р№ РіСЂСѓРїС‹"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr " Метка для \"%s\": "
+msgstr " РњРµС‚РєР° РґР»СЏ \"%s\": "
 
 msgid " Add to hotlist "
-msgstr " Дадаць у сьпіс "
+msgstr " Р”Р°РґР°С†СЊ Сѓ СЃСЊРїС–СЃ "
 
 msgid " Remove: "
-msgstr " Выдаліць: "
+msgstr " Р’С‹РґР°Р»С–С†СЊ: "
 
 msgid ""
 "\n"
@@ -1899,19 +1899,19 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-" Група ня пустая.\n"
-" Выдаліць яе?"
+" Р“СЂСѓРїР° РЅСЏ РїСѓСЃС‚Р°СЏ.\n"
+" Р’С‹РґР°Р»С–С†СЊ СЏРµ?"
 
 msgid " Top level group "
-msgstr "Група верхняга узроўню"
+msgstr "Р“СЂСѓРїР° РІРµСЂС…РЅСЏРіР° СѓР·СЂРѕСћРЅСЋ"
 
 msgid " Hotlist Load "
-msgstr " Загрузка сьпісу "
+msgstr " Р—Р°РіСЂСѓР·РєР° СЃСЊРїС–СЃСѓ "
 
 #, fuzzy, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "Ваш стары сьпіс каталёгаў ня выдалены"
+msgstr "Р’Р°С€ СЃС‚Р°СЂС‹ СЃСЊРїС–СЃ РєР°С‚Р°Р»С‘РіР°Сћ РЅСЏ РІС‹РґР°Р»РµРЅС‹"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1919,49 +1919,49 @@ msgstr "Midnight Commander %s"
 
 #, c-format
 msgid "File:       %s"
-msgstr " Файл:      %s"
+msgstr " Р¤Р°Р№Р»:      %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Вол. вузлоў %d (%d%%) з %d"
+msgstr "Р’РѕР». РІСѓР·Р»РѕСћ %d (%d%%) Р· %d"
 
 msgid "No node information"
-msgstr "Няма інфармацыі пра вузел"
+msgstr "РќСЏРјР° С–РЅС„Р°СЂРјР°С†С‹С– РїСЂР° РІСѓР·РµР»"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Вол. прастора %s (%d%%) з %s"
+msgstr "Р’РѕР». РїСЂР°СЃС‚РѕСЂР° %s (%d%%) Р· %s"
 
 msgid "No space information"
-msgstr "Няма інфармацыі пра прастору"
+msgstr "РќСЏРјР° С–РЅС„Р°СЂРјР°С†С‹С– РїСЂР° РїСЂР°СЃС‚РѕСЂСѓ"
 
 #, c-format
 msgid "Type:      %s "
-msgstr "Тып:       %s "
+msgstr "РўС‹Рї:       %s "
 
 msgid "non-local vfs"
-msgstr "не лякальная ВФС"
+msgstr "РЅРµ Р»СЏРєР°Р»СЊРЅР°СЏ Р’Р¤РЎ"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "Прылада:   %s"
+msgstr "РџСЂС‹Р»Р°РґР°:   %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Ф.сыстэма: %s"
+msgstr "Р¤.СЃС‹СЃС‚СЌРјР°: %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Зварот:    %s"
+msgstr "Р—РІР°СЂРѕС‚:    %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Зьменены:  %s"
+msgstr "Р—СЊРјРµРЅРµРЅС‹:  %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, fuzzy, c-format
 msgid "Status:    %s"
-msgstr "Створаны:  %s"
+msgstr "РЎС‚РІРѕСЂР°РЅС‹:  %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -1969,87 +1969,87 @@ msgstr ""
 
 #, c-format
 msgid "Size:      %s"
-msgstr "Памер:     %s"
+msgstr "РџР°РјРµСЂ:     %s"
 
 #, fuzzy, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld блёкаў)"
-msgstr[1] " (%ld блёкаў)"
+msgstr[0] " (%ld Р±Р»С‘РєР°Сћ)"
+msgstr[1] " (%ld Р±Р»С‘РєР°Сћ)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Гаспадар:  %s/%s"
+msgstr "Р“Р°СЃРїР°РґР°СЂ:  %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "Спасылак:  %d"
+msgstr "РЎРїР°СЃС‹Р»Р°Рє:  %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Правы:     %s (%04o)"
+msgstr "РџСЂР°РІС‹:     %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Мейсца:    %Xh:%Xh"
+msgstr "РњРµР№СЃС†Р°:    %Xh:%Xh"
 
 msgid "File:       None"
-msgstr " Файл:      Адсутнічае"
+msgstr " Р¤Р°Р№Р»:      РђРґСЃСѓС‚РЅС–С‡Р°Рµ"
 
 msgid "&Vertical"
-msgstr "&Вертыкальнае"
+msgstr "&Р’РµСЂС‚С‹РєР°Р»СЊРЅР°Рµ"
 
 msgid "&Horizontal"
-msgstr "&Гарызантальнае"
+msgstr "&Р“Р°СЂС‹Р·Р°РЅС‚Р°Р»СЊРЅР°Рµ"
 
 #, fuzzy
 msgid "&Xterm window title"
-msgstr "Падказка ў &xterm"
+msgstr "РџР°РґРєР°Р·РєР° Сћ &xterm"
 
 msgid "h&Intbar visible"
-msgstr "&Радок падказкі"
+msgstr "&Р Р°РґРѕРє РїР°РґРєР°Р·РєС–"
 
 msgid "&Keybar visible"
-msgstr "М&еткі клявішаў"
+msgstr "Рњ&РµС‚РєС– РєР»СЏРІС–С€Р°Сћ"
 
 msgid "command &Prompt"
-msgstr "&Камандны радок"
+msgstr "&РљР°РјР°РЅРґРЅС‹ СЂР°РґРѕРє"
 
 msgid "show &Mini status"
-msgstr "&Міні-стан"
+msgstr "&РњС–РЅС–-СЃС‚Р°РЅ"
 
 msgid "menu&Bar visible"
-msgstr "&Лінарка мэню"
+msgstr "&Р›С–РЅР°СЂРєР° РјСЌРЅСЋ"
 
 msgid "&Equal split"
-msgstr "&Роўныя памеры"
+msgstr "&Р РѕСћРЅС‹СЏ РїР°РјРµСЂС‹"
 
 msgid "pe&Rmissions"
-msgstr "Правы д&оступу"
+msgstr "РџСЂР°РІС‹ Рґ&РѕСЃС‚СѓРїСѓ"
 
 msgid "&File types"
-msgstr "Тыпы &файлаў"
+msgstr "РўС‹РїС‹ &С„Р°Р№Р»Р°Сћ"
 
 msgid " Panel split "
-msgstr " Расшчапленьне панеляў "
+msgstr " Р Р°СЃС€С‡Р°РїР»РµРЅСЊРЅРµ РїР°РЅРµР»СЏСћ "
 
 msgid " Highlight... "
 msgstr "  "
 
 msgid " Other options "
-msgstr " Іншыя наладкі "
+msgstr " Р†РЅС€С‹СЏ РЅР°Р»Р°РґРєС– "
 
 msgid "output lines"
-msgstr "радкі вываду"
+msgstr "СЂР°РґРєС– РІС‹РІР°РґСѓ"
 
 msgid "Layout"
-msgstr "Вонкавы выгляд"
+msgstr "Р’РѕРЅРєР°РІС‹ РІС‹РіР»СЏРґ"
 
 msgid "Learn keys"
-msgstr "Вывучэньне клявішаў"
+msgstr "Р’С‹РІСѓС‡СЌРЅСЊРЅРµ РєР»СЏРІС–С€Р°Сћ"
 
 msgid " Teach me a key "
-msgstr " Навучыце мяне клявішы "
+msgstr " РќР°РІСѓС‡С‹С†Рµ РјСЏРЅРµ РєР»СЏРІС–С€С‹ "
 
 #, c-format
 msgid ""
@@ -2062,51 +2062,51 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Калі ласка, націсьніце клявішу %s\n"
-"і пачакайце, пакуль гэтае паведамленьне зьнікне.\n"
+"РљР°Р»С– Р»Р°СЃРєР°, РЅР°С†С–СЃСЊРЅС–С†Рµ РєР»СЏРІС–С€Сѓ %s\n"
+"С– РїР°С‡Р°РєР°Р№С†Рµ, РїР°РєСѓР»СЊ РіСЌС‚Р°Рµ РїР°РІРµРґР°РјР»РµРЅСЊРЅРµ Р·СЊРЅС–РєРЅРµ.\n"
 "\n"
-"Затым націсьніце яе яшчэ раз, каб упэўніцца,\n"
-"што зправа ад яе назвы зьявілася 'Так'.\n"
+"Р—Р°С‚С‹Рј РЅР°С†С–СЃСЊРЅС–С†Рµ СЏРµ СЏС€С‡СЌ СЂР°Р·, РєР°Р± СѓРїСЌСћРЅС–С†С†Р°,\n"
+"С€С‚Рѕ Р·РїСЂР°РІР° Р°Рґ СЏРµ РЅР°Р·РІС‹ Р·СЊСЏРІС–Р»Р°СЃСЏ 'РўР°Рє'.\n"
 "\n"
-"Калі вы жадаеце перарваць навучаньне, націсьніце\n"
-"клявішу Esc і крыху пачакайце."
+"РљР°Р»С– РІС‹ Р¶Р°РґР°РµС†Рµ РїРµСЂР°СЂРІР°С†СЊ РЅР°РІСѓС‡Р°РЅСЊРЅРµ, РЅР°С†С–СЃСЊРЅС–С†Рµ\n"
+"РєР»СЏРІС–С€Сѓ Esc С– РєСЂС‹С…Сѓ РїР°С‡Р°РєР°Р№С†Рµ."
 
 msgid " Cannot accept this key "
-msgstr " Немагчыма прыняць гэтую клявішу "
+msgstr " РќРµРјР°РіС‡С‹РјР° РїСЂС‹РЅСЏС†СЊ РіСЌС‚СѓСЋ РєР»СЏРІС–С€Сѓ "
 
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Вы ўвялі \"%s\""
+msgstr " Р’С‹ СћРІСЏР»С– \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
-msgstr "Так"
+msgstr "РўР°Рє"
 
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Здаецца, што ўсе Вашыя клявішы зараз\n"
-"працуюць нармальна. Выдатна."
+"Р—РґР°РµС†С†Р°, С€С‚Рѕ СћСЃРµ Р’Р°С€С‹СЏ РєР»СЏРІС–С€С‹ Р·Р°СЂР°Р·\n"
+"РїСЂР°С†СѓСЋС†СЊ РЅР°СЂРјР°Р»СЊРЅР°. Р’С‹РґР°С‚РЅР°."
 
 msgid "&Discard"
-msgstr "&Адмяніцьь"
+msgstr "&РђРґРјСЏРЅС–С†СЊСЊ"
 
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Выдатна! У вас ёсьць поўная база апісаньняў тэрміналаў!\n"
-"Усе вашыя клявішы працуюць добра."
+"Р’С‹РґР°С‚РЅР°! РЈ РІР°СЃ С‘СЃСЊС†СЊ РїРѕСћРЅР°СЏ Р±Р°Р·Р° Р°РїС–СЃР°РЅСЊРЅСЏСћ С‚СЌСЂРјС–РЅР°Р»Р°Сћ!\n"
+"РЈСЃРµ РІР°С€С‹СЏ РєР»СЏРІС–С€С‹ РїСЂР°С†СѓСЋС†СЊ РґРѕР±СЂР°."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Націсьніце ўсе пералічаныя клявішы. Пасьля націсканьня адшукайце,"
+msgstr "РќР°С†С–СЃСЊРЅС–С†Рµ СћСЃРµ РїРµСЂР°Р»С–С‡Р°РЅС‹СЏ РєР»СЏРІС–С€С‹. РџР°СЃСЊР»СЏ РЅР°С†С–СЃРєР°РЅСЊРЅСЏ Р°РґС€СѓРєР°Р№С†Рµ,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "якія клявішы ня маюць адзнакі Так. Для навучаньня клявішы абярыце"
+msgstr "СЏРєС–СЏ РєР»СЏРІС–С€С‹ РЅСЏ РјР°СЋС†СЊ Р°РґР·РЅР°РєС– РўР°Рє. Р”Р»СЏ РЅР°РІСѓС‡Р°РЅСЊРЅСЏ РєР»СЏРІС–С€С‹ Р°Р±СЏСЂС‹С†Рµ"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "яе пры дапамозе Tab ці мышшу й націсьніце прагал."
+msgstr "СЏРµ РїСЂС‹ РґР°РїР°РјРѕР·Рµ Tab С†С– РјС‹С€С€Сѓ Р№ РЅР°С†С–СЃСЊРЅС–С†Рµ РїСЂР°РіР°Р»."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2114,202 +2114,202 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" The Commander ня можа перайсьці ў каталёг, які яму \n"
-" паведаміў дачэрні працэс інтэрпрэтатару. Можа, вы \n"
-" выдалілі працоўны каталёг ці далі сабе дадатковыя \n"
-" прывілеі доступу пры дапамозе каманды \"su\"? "
+" The Commander РЅСЏ РјРѕР¶Р° РїРµСЂР°Р№СЃСЊС†С– Сћ РєР°С‚Р°Р»С‘Рі, СЏРєС– СЏРјСѓ \n"
+" РїР°РІРµРґР°РјС–Сћ РґР°С‡СЌСЂРЅС– РїСЂР°С†СЌСЃ С–РЅС‚СЌСЂРїСЂСЌС‚Р°С‚Р°СЂСѓ. РњРѕР¶Р°, РІС‹ \n"
+" РІС‹РґР°Р»С–Р»С– РїСЂР°С†РѕСћРЅС‹ РєР°С‚Р°Р»С‘Рі С†С– РґР°Р»С– СЃР°Р±Рµ РґР°РґР°С‚РєРѕРІС‹СЏ \n"
+" РїСЂС‹РІС–Р»РµС– РґРѕСЃС‚СѓРїСѓ РїСЂС‹ РґР°РїР°РјРѕР·Рµ РєР°РјР°РЅРґС‹ \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Вы сапраўды жадаеце выйсьці з Midnight Commander? "
+msgstr " Р’С‹ СЃР°РїСЂР°СћРґС‹ Р¶Р°РґР°РµС†Рµ РІС‹Р№СЃСЊС†С– Р· Midnight Commander? "
 
 msgid "&Listing mode..."
-msgstr "Фар&мат сьпісу..."
+msgstr "Р¤Р°СЂ&РјР°С‚ СЃСЊРїС–СЃСѓ..."
 
 msgid "&Quick view     C-x q"
-msgstr "&Хуткі прагляд       C-x q"
+msgstr "&РҐСѓС‚РєС– РїСЂР°РіР»СЏРґ       C-x q"
 
 msgid "&Info           C-x i"
-msgstr "&Інфармацыя          C-x i"
+msgstr "&Р†РЅС„Р°СЂРјР°С†С‹СЏ          C-x i"
 
 msgid "&Sort order..."
-msgstr "Парадак &сартаваньня"
+msgstr "РџР°СЂР°РґР°Рє &СЃР°СЂС‚Р°РІР°РЅСЊРЅСЏ"
 
 msgid "&Filter..."
-msgstr "&Фільтар"
+msgstr "&Р¤С–Р»СЊС‚Р°СЂ"
 
 msgid "&Network link..."
-msgstr "Се&ткавае злучэньне..."
+msgstr "РЎРµ&С‚РєР°РІР°Рµ Р·Р»СѓС‡СЌРЅСЊРЅРµ..."
 
 msgid "FT&P link..."
-msgstr "&FTP-злучэньне"
+msgstr "&FTP-Р·Р»СѓС‡СЌРЅСЊРЅРµ"
 
 msgid "S&hell link..."
-msgstr "&Лучыва абалонкі"
+msgstr "&Р›СѓС‡С‹РІР° Р°Р±Р°Р»РѕРЅРєС–"
 
 msgid "SM&B link..."
-msgstr "SM&B сувязь..."
+msgstr "SM&B СЃСѓРІСЏР·СЊ..."
 
 msgid "&Rescan         C-r"
-msgstr "&Перасканаваць       C-r"
+msgstr "&РџРµСЂР°СЃРєР°РЅР°РІР°С†СЊ       C-r"
 
 msgid "&User menu          F2"
-msgstr "&Мэню карыстальніку  F2"
+msgstr "&РњСЌРЅСЋ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ  F2"
 
 msgid "&View               F3"
-msgstr "Прагляд фа&йлу       F3"
+msgstr "РџСЂР°РіР»СЏРґ С„Р°&Р№Р»Сѓ       F3"
 
 msgid "Vie&w file...         "
-msgstr "&Прагляд файлу..."
+msgstr "&РџСЂР°РіР»СЏРґ С„Р°Р№Р»Сѓ..."
 
 msgid "&Filtered view     M-!"
-msgstr "Праг&ляд каманды     M-!"
+msgstr "РџСЂР°Рі&Р»СЏРґ РєР°РјР°РЅРґС‹     M-!"
 
 msgid "&Edit               F4"
-msgstr "&Рэдагаваньне        F4"
+msgstr "&Р СЌРґР°РіР°РІР°РЅСЊРЅРµ        F4"
 
 msgid "&Copy               F5"
-msgstr "&Капіяваньне         F5"
+msgstr "&РљР°РїС–СЏРІР°РЅСЊРЅРµ         F5"
 
 msgid "c&Hmod           C-x c"
-msgstr "Правы &доступу       C-x c"
+msgstr "РџСЂР°РІС‹ &РґРѕСЃС‚СѓРїСѓ       C-x c"
 
 msgid "&Link            C-x l"
-msgstr "&Жорская спасылка    C-x l"
+msgstr "&Р–РѕСЂСЃРєР°СЏ СЃРїР°СЃС‹Р»РєР°    C-x l"
 
 msgid "&SymLink         C-x s"
-msgstr "&Сымбаліч.спасылка   C-x s"
+msgstr "&РЎС‹РјР±Р°Р»С–С‡.СЃРїР°СЃС‹Р»РєР°   C-x s"
 
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "Праўка спасы&лкі     C-x C-s"
+msgstr "РџСЂР°СћРєР° СЃРїР°СЃС‹&Р»РєС–     C-x C-s"
 
 msgid "ch&Own           C-x o"
-msgstr "&Уладальнік/група    C-x o"
+msgstr "&РЈР»Р°РґР°Р»СЊРЅС–Рє/РіСЂСѓРїР°    C-x o"
 
 msgid "&Advanced chown       "
-msgstr "Пр&авы (пашыраныя)    "
+msgstr "РџСЂ&Р°РІС‹ (РїР°С€С‹СЂР°РЅС‹СЏ)    "
 
 msgid "&Rename/Move        F6"
-msgstr "Зьмена &імя          F6"
+msgstr "Р—СЊРјРµРЅР° &С–РјСЏ          F6"
 
 msgid "&Mkdir              F7"
-msgstr "Стварэ&ньне каталёгу F7"
+msgstr "РЎС‚РІР°СЂСЌ&РЅСЊРЅРµ РєР°С‚Р°Р»С‘РіСѓ F7"
 
 msgid "&Delete             F8"
-msgstr "&Выдаленьне          F8"
+msgstr "&Р’С‹РґР°Р»РµРЅСЊРЅРµ          F8"
 
 msgid "&Quick cd          M-c"
-msgstr "З&ьмена каталёгу     M-c"
+msgstr "Р—&СЊРјРµРЅР° РєР°С‚Р°Р»С‘РіСѓ     M-c"
 
 msgid "select &Group      M-+"
-msgstr "Вылучыць &групу      M-+"
+msgstr "Р’С‹Р»СѓС‡С‹С†СЊ &РіСЂСѓРїСѓ      M-+"
 
 msgid "u&Nselect group    M-\\"
-msgstr "&Зьняць адзнаку      M-\\"
+msgstr "&Р—СЊРЅСЏС†СЊ Р°РґР·РЅР°РєСѓ      M-\\"
 
 msgid "reverse selec&Tion M-*"
-msgstr "Інвэр&таваць адзнаку *"
+msgstr "Р†РЅРІСЌСЂ&С‚Р°РІР°С†СЊ Р°РґР·РЅР°РєСѓ *"
 
 msgid "e&Xit              F10"
-msgstr "Вы&хад               F10"
+msgstr "Р’С‹&С…Р°Рґ               F10"
 
 msgid "&Directory tree"
-msgstr "&Дрэва каталёгаў"
+msgstr "&Р”СЂСЌРІР° РєР°С‚Р°Р»С‘РіР°Сћ"
 
 msgid "&Find file            M-?"
-msgstr "Пошук &файлу          M-?"
+msgstr "РџРѕС€СѓРє &С„Р°Р№Р»Сѓ          M-?"
 
 msgid "s&Wap panels          C-u"
-msgstr "&Пераставіць панэлі   C-u"
+msgstr "&РџРµСЂР°СЃС‚Р°РІС–С†СЊ РїР°РЅСЌР»С–   C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "&Адключыць панэлі     C-o"
+msgstr "&РђРґРєР»СЋС‡С‹С†СЊ РїР°РЅСЌР»С–     C-o"
 
 msgid "&Compare directories  C-x d"
-msgstr "Пара&ўнаць каталёгі   C-x d"
+msgstr "РџР°СЂР°&СћРЅР°С†СЊ РєР°С‚Р°Р»С‘РіС–   C-x d"
 
 msgid "e&Xternal panelize    C-x !"
-msgstr "&Крытэр панэлізацыі   C-x !"
+msgstr "&РљСЂС‹С‚СЌСЂ РїР°РЅСЌР»С–Р·Р°С†С‹С–   C-x !"
 
 msgid "show directory s&Izes"
-msgstr "Па&меры каталёгаў"
+msgstr "РџР°&РјРµСЂС‹ РєР°С‚Р°Р»С‘РіР°Сћ"
 
 msgid "command &History"
-msgstr "&Гісторыя камандаў"
+msgstr "&Р“С–СЃС‚РѕСЂС‹СЏ РєР°РјР°РЅРґР°Сћ"
 
 msgid "di&Rectory hotlist    C-\\"
-msgstr "Сьпіс ката&лёгаў      C-\\"
+msgstr "РЎСЊРїС–СЃ РєР°С‚Р°&Р»С‘РіР°Сћ      C-\\"
 
 msgid "&Active VFS list      C-x a"
-msgstr "&Сьпіс актыўных ВФС   C-x a"
+msgstr "&РЎСЊРїС–СЃ Р°РєС‚С‹СћРЅС‹С… Р’Р¤РЎ   C-x a"
 
 msgid "&Background jobs      C-x j"
-msgstr "Заданьні ў &тле       C-x j"
+msgstr "Р—Р°РґР°РЅСЊРЅС– Сћ &С‚Р»Рµ       C-x j"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "Ад&наўленьне файлаў"
+msgstr "РђРґ&РЅР°СћР»РµРЅСЊРЅРµ С„Р°Р№Р»Р°Сћ"
 
 msgid "&Listing format edit"
-msgstr "&Рэдагаваньне фармату"
+msgstr "&Р СЌРґР°РіР°РІР°РЅСЊРЅРµ С„Р°СЂРјР°С‚Сѓ"
 
 msgid "Edit &extension file"
-msgstr "Файл па&шырэньняў"
+msgstr "Р¤Р°Р№Р» РїР°&С€С‹СЂСЌРЅСЊРЅСЏСћ"
 
 msgid "Edit &menu file"
-msgstr "Файл мэн&ю"
+msgstr "Р¤Р°Р№Р» РјСЌРЅ&СЋ"
 
 msgid "Edit edi&tor menu file"
-msgstr "П&раўка  файлу мэню"
+msgstr "Рџ&СЂР°СћРєР°  С„Р°Р№Р»Сѓ РјСЌРЅСЋ"
 
 msgid "Edit &syntax file"
-msgstr "Рэдагаваньне файлу &пашырэньняў"
+msgstr "Р СЌРґР°РіР°РІР°РЅСЊРЅРµ С„Р°Р№Р»Сѓ &РїР°С€С‹СЂСЌРЅСЊРЅСЏСћ"
 
 msgid "&Configuration..."
-msgstr "&Канфігурацыя"
+msgstr "&РљР°РЅС„С–РіСѓСЂР°С†С‹СЏ"
 
 msgid "&Layout..."
-msgstr "&Вонкавы выгляд"
+msgstr "&Р’РѕРЅРєР°РІС‹ РІС‹РіР»СЏРґ"
 
 msgid "c&Onfirmation..."
-msgstr "&Падцьвержаньне"
+msgstr "&РџР°РґС†СЊРІРµСЂР¶Р°РЅСЊРЅРµ"
 
 msgid "&Display bits..."
-msgstr "&Біты сымбаляў..."
+msgstr "&Р‘С–С‚С‹ СЃС‹РјР±Р°Р»СЏСћ..."
 
 msgid "learn &Keys..."
-msgstr "В&ызначэньне клявішаў..."
+msgstr "Р’&С‹Р·РЅР°С‡СЌРЅСЊРЅРµ РєР»СЏРІС–С€Р°Сћ..."
 
 msgid "&Virtual FS..."
-msgstr "Віртуальныя &ФС..."
+msgstr "Р’С–СЂС‚СѓР°Р»СЊРЅС‹СЏ &Р¤РЎ..."
 
 msgid "&Save setup"
-msgstr "&Захаваць наладку"
+msgstr "&Р—Р°С…Р°РІР°С†СЊ РЅР°Р»Р°РґРєСѓ"
 
 msgid " &Above "
-msgstr " Верхн&яя "
+msgstr " Р’РµСЂС…РЅ&СЏСЏ "
 
 msgid " &Left "
-msgstr " &Левая панэль "
+msgstr " &Р›РµРІР°СЏ РїР°РЅСЌР»СЊ "
 
 msgid " &File "
-msgstr " &Файл "
+msgstr " &Р¤Р°Р№Р» "
 
 msgid " &Command "
-msgstr " &Каманда "
+msgstr " &РљР°РјР°РЅРґР° "
 
 msgid " &Options "
-msgstr " &Наладка "
+msgstr " &РќР°Р»Р°РґРєР° "
 
 msgid " &Below "
-msgstr " Ні&жняя "
+msgstr " РќС–&Р¶РЅСЏСЏ "
 
 msgid " &Right "
-msgstr " &Правая панэль "
+msgstr " &РџСЂР°РІР°СЏ РїР°РЅСЌР»СЊ "
 
 msgid " Information "
-msgstr " Інфармацыя "
+msgstr " Р†РЅС„Р°СЂРјР°С†С‹СЏ "
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -2317,23 +2317,23 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Выкарыстаньне опцыі хуткае перазагрузкі можа не адлюстраваць  \n"
-" бягучага зьместу каталёгу. У гэтым выпадку трэба ўласна                  \n"
-" перазагрузіць каталёг. Для дадатковае йнфармацыі глядзіце               \n"
-" кіраўніцтва (man)."
+" Р’С‹РєР°СЂС‹СЃС‚Р°РЅСЊРЅРµ РѕРїС†С‹С– С…СѓС‚РєР°Рµ РїРµСЂР°Р·Р°РіСЂСѓР·РєС– РјРѕР¶Р° РЅРµ Р°РґР»СЋСЃС‚СЂР°РІР°С†СЊ  \n"
+" Р±СЏРіСѓС‡Р°РіР° Р·СЊРјРµСЃС‚Сѓ РєР°С‚Р°Р»С‘РіСѓ. РЈ РіСЌС‚С‹Рј РІС‹РїР°РґРєСѓ С‚СЂСЌР±Р° СћР»Р°СЃРЅР°                  \n"
+" РїРµСЂР°Р·Р°РіСЂСѓР·С–С†СЊ РєР°С‚Р°Р»С‘Рі. Р”Р»СЏ РґР°РґР°С‚РєРѕРІР°Рµ Р№РЅС„Р°СЂРјР°С†С‹С– РіР»СЏРґР·С–С†Рµ               \n"
+" РєС–СЂР°СћРЅС–С†С‚РІР° (man)."
 
 msgid "Menu"
-msgstr "Мэню"
+msgstr "РњСЌРЅСЋ"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "Пераменная асяродку TERM ня вызначана!\n"
+msgstr "РџРµСЂР°РјРµРЅРЅР°СЏ Р°СЃСЏСЂРѕРґРєСѓ TERM РЅСЏ РІС‹Р·РЅР°С‡Р°РЅР°!\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[сьцягі] [гэты_каталёг] [каталёг_другой_панэлі]\n"
+msgstr "[СЃСЊС†СЏРіС–] [РіСЌС‚С‹_РєР°С‚Р°Р»С‘Рі] [РєР°С‚Р°Р»С‘Рі_РґСЂСѓРіРѕР№_РїР°РЅСЌР»С–]\n"
 
 msgid "+number"
 msgstr ""
@@ -2347,9 +2347,9 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Калі ласка, дасылайце любыя паведамленьні аб памылках (уключаючы вывад 'mc -"
+"РљР°Р»С– Р»Р°СЃРєР°, РґР°СЃС‹Р»Р°Р№С†Рµ Р»СЋР±С‹СЏ РїР°РІРµРґР°РјР»РµРЅСЊРЅС– Р°Р± РїР°РјС‹Р»РєР°С… (СѓРєР»СЋС‡Р°СЋС‡С‹ РІС‹РІР°Рґ 'mc -"
 "V')\n"
-"на адрэсу mc-devel@gnome.org\n"
+"РЅР° Р°РґСЂСЌСЃСѓ mc-devel@gnome.org\n"
 
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -2375,197 +2375,197 @@ msgid ""
 msgstr ""
 
 msgid "Displays this help message"
-msgstr "Адлюстраваць гэтае даведачнае паведамленьне"
+msgstr "РђРґР»СЋСЃС‚СЂР°РІР°С†СЊ РіСЌС‚Р°Рµ РґР°РІРµРґР°С‡РЅР°Рµ РїР°РІРµРґР°РјР»РµРЅСЊРЅРµ"
 
 msgid "Displays the current version"
-msgstr "Адлюстраваць бягучую вэрсыі"
+msgstr "РђРґР»СЋСЃС‚СЂР°РІР°С†СЊ Р±СЏРіСѓС‡СѓСЋ РІСЌСЂСЃС‹С–"
 
 msgid "Forces xterm features"
-msgstr "Навязвае ўласьцівасьці xterm"
+msgstr "РќР°РІСЏР·РІР°Рµ СћР»Р°СЃСЊС†С–РІР°СЃСЊС†С– xterm"
 
 msgid "Disable mouse support in text version"
-msgstr "Адключыць падтрымку мышы ў тэкставай вэрсыі"
+msgstr "РђРґРєР»СЋС‡С‹С†СЊ РїР°РґС‚СЂС‹РјРєСѓ РјС‹С€С‹ Сћ С‚СЌРєСЃС‚Р°РІР°Р№ РІСЌСЂСЃС‹С–"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Паспрабаваць выкарыстоўваць termcap замест terminfo"
+msgstr "РџР°СЃРїСЂР°Р±Р°РІР°С†СЊ РІС‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ termcap Р·Р°РјРµСЃС‚ terminfo"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "Скідае праграмныя клявішы на терміналах HP"
+msgstr "РЎРєС–РґР°Рµ РїСЂР°РіСЂР°РјРЅС‹СЏ РєР»СЏРІС–С€С‹ РЅР° С‚РµСЂРјС–РЅР°Р»Р°С… HP"
 
 msgid "To run on slow terminals"
-msgstr "Запуск на павольных тэрміналах"
+msgstr "Р—Р°РїСѓСЃРє РЅР° РїР°РІРѕР»СЊРЅС‹С… С‚СЌСЂРјС–РЅР°Р»Р°С…"
 
 msgid "Use stickchars to draw"
-msgstr "Псэўдаграфіка для маляваньня"
+msgstr "РџСЃСЌСћРґР°РіСЂР°С„С–РєР° РґР»СЏ РјР°Р»СЏРІР°РЅСЊРЅСЏ"
 
 msgid "Requests to run in black and white"
-msgstr "Запыт на запуск у монахромным рэжыме"
+msgstr "Р—Р°РїС‹С‚ РЅР° Р·Р°РїСѓСЃРє Сѓ РјРѕРЅР°С…СЂРѕРјРЅС‹Рј СЂСЌР¶С‹РјРµ"
 
 msgid "Request to run in color mode"
-msgstr "Запыт на запуск у каляровым рэжыме"
+msgstr "Р—Р°РїС‹С‚ РЅР° Р·Р°РїСѓСЃРє Сѓ РєР°Р»СЏСЂРѕРІС‹Рј СЂСЌР¶С‹РјРµ"
 
 msgid "Specifies a color configuration"
-msgstr "Вызначае наладкі колераў"
+msgstr "Р’С‹Р·РЅР°С‡Р°Рµ РЅР°Р»Р°РґРєС– РєРѕР»РµСЂР°Сћ"
 
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "Адлюстроўвае экран дапамог - як зьмяніць схему колераў"
+msgstr "РђРґР»СЋСЃС‚СЂРѕСћРІР°Рµ СЌРєСЂР°РЅ РґР°РїР°РјРѕРі - СЏРє Р·СЊРјСЏРЅС–С†СЊ СЃС…РµРјСѓ РєРѕР»РµСЂР°Сћ"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Весьці пратакол дыялёгу з FTP у файл"
+msgstr "Р’РµСЃСЊС†С– РїСЂР°С‚Р°РєРѕР» РґС‹СЏР»С‘РіСѓ Р· FTP Сѓ С„Р°Р№Р»"
 
 msgid "Set debug level"
 msgstr ""
 
 #, fuzzy
 msgid "Print data directory"
-msgstr "каталёг"
+msgstr "РєР°С‚Р°Р»С‘Рі"
 
 #, fuzzy
 msgid "Print last working directory to specified file"
-msgstr "Друк працоўнага каталёгу пры выхадзе з праграмы"
+msgstr "Р”СЂСѓРє РїСЂР°С†РѕСћРЅР°РіР° РєР°С‚Р°Р»С‘РіСѓ РїСЂС‹ РІС‹С…Р°РґР·Рµ Р· РїСЂР°РіСЂР°РјС‹"
 
 msgid "Enables subshell support (default)"
-msgstr "Уключыць падтрымку ўбудаванае каманднае абалонкі (тыпова)"
+msgstr "РЈРєР»СЋС‡С‹С†СЊ РїР°РґС‚СЂС‹РјРєСѓ СћР±СѓРґР°РІР°РЅР°Рµ РєР°РјР°РЅРґРЅР°Рµ Р°Р±Р°Р»РѕРЅРєС– (С‚С‹РїРѕРІР°)"
 
 msgid "Disables subshell support"
-msgstr "Адключыць падтрымку ўбудаванае каманднае абалонкі"
+msgstr "РђРґРєР»СЋС‡С‹С†СЊ РїР°РґС‚СЂС‹РјРєСѓ СћР±СѓРґР°РІР°РЅР°Рµ РєР°РјР°РЅРґРЅР°Рµ Р°Р±Р°Р»РѕРЅРєС–"
 
 msgid "Launches the file viewer on a file"
-msgstr "Запускае праграму прагляду для файлу"
+msgstr "Р—Р°РїСѓСЃРєР°Рµ РїСЂР°РіСЂР°РјСѓ РїСЂР°РіР»СЏРґСѓ РґР»СЏ С„Р°Р№Р»Сѓ"
 
 msgid "Edits one file"
-msgstr "Рэдагуе адзін файл"
+msgstr "Р СЌРґР°РіСѓРµ Р°РґР·С–РЅ С„Р°Р№Р»"
 
 msgid "safe de&Lete"
-msgstr "Бясьпечнае вы&даленьне"
+msgstr "Р‘СЏСЃСЊРїРµС‡РЅР°Рµ РІС‹&РґР°Р»РµРЅСЊРЅРµ"
 
 msgid "cd follows lin&Ks"
-msgstr "Зьмена &каталёгу па спасылках"
+msgstr "Р—СЊРјРµРЅР° &РєР°С‚Р°Р»С‘РіСѓ РїР° СЃРїР°СЃС‹Р»РєР°С…"
 
 msgid "L&ynx-like motion"
-msgstr "Навігацыя ў стылі L&ynx"
+msgstr "РќР°РІС–РіР°С†С‹СЏ Сћ СЃС‚С‹Р»С– L&ynx"
 
 msgid "rotatin&G dash"
-msgstr "&Індыкатар што варочаецца"
+msgstr "&Р†РЅРґС‹РєР°С‚Р°СЂ С€С‚Рѕ РІР°СЂРѕС‡Р°РµС†С†Р°"
 
 msgid "co&Mplete: show all"
-msgstr "Дадатко&ва: паказываць усё"
+msgstr "Р”Р°РґР°С‚РєРѕ&РІР°: РїР°РєР°Р·С‹РІР°С†СЊ СѓСЃС‘"
 
 msgid "&Use internal view"
-msgstr "Убудаваны пра&гляд"
+msgstr "РЈР±СѓРґР°РІР°РЅС‹ РїСЂР°&РіР»СЏРґ"
 
 msgid "use internal ed&It"
-msgstr "Убудаваны &рэдактар"
+msgstr "РЈР±СѓРґР°РІР°РЅС‹ &СЂСЌРґР°РєС‚Р°СЂ"
 
 msgid "auto m&Enus"
-msgstr "Аўтаматычныя &мэню"
+msgstr "РђСћС‚Р°РјР°С‚С‹С‡РЅС‹СЏ &РјСЌРЅСЋ"
 
 msgid "&Auto save setup"
-msgstr "&Аўтазахаваньне наладак"
+msgstr "&РђСћС‚Р°Р·Р°С…Р°РІР°РЅСЊРЅРµ РЅР°Р»Р°РґР°Рє"
 
 msgid "shell &Patterns"
-msgstr "Прыклады ў стылі &shell"
+msgstr "РџСЂС‹РєР»Р°РґС‹ Сћ СЃС‚С‹Р»С– &shell"
 
 msgid "Compute &Totals"
-msgstr "Падлічыць агульны &памер"
+msgstr "РџР°РґР»С–С‡С‹С†СЊ Р°РіСѓР»СЊРЅС‹ &РїР°РјРµСЂ"
 
 msgid "&Verbose operation"
-msgstr "Дэталі апэрацы&яў"
+msgstr "Р”СЌС‚Р°Р»С– Р°РїСЌСЂР°С†С‹&СЏСћ"
 
 msgid "&Fast dir reload"
-msgstr "&Хуткая загрузка каталёгу"
+msgstr "&РҐСѓС‚РєР°СЏ Р·Р°РіСЂСѓР·РєР° РєР°С‚Р°Р»С‘РіСѓ"
 
 msgid "mi&X all files"
-msgstr "Мяшаць &файлы/каталёгі"
+msgstr "РњСЏС€Р°С†СЊ &С„Р°Р№Р»С‹/РєР°С‚Р°Р»С‘РіС–"
 
 msgid "&Drop down menus"
-msgstr "Выпадзеньне мэн&ю падчас выкліку"
+msgstr "Р’С‹РїР°РґР·РµРЅСЊРЅРµ РјСЌРЅ&СЋ РїР°РґС‡Р°СЃ РІС‹РєР»С–РєСѓ"
 
 msgid "ma&Rk moves down"
-msgstr "&Адзнака пераводзіць курсор"
+msgstr "&РђРґР·РЅР°РєР° РїРµСЂР°РІРѕРґР·С–С†СЊ РєСѓСЂСЃРѕСЂ"
 
 msgid "show &Hidden files"
-msgstr "Адлюстроўваць с&хаваныя файлы"
+msgstr "РђРґР»СЋСЃС‚СЂРѕСћРІР°С†СЊ СЃ&С…Р°РІР°РЅС‹СЏ С„Р°Р№Р»С‹"
 
 msgid "show &Backup files"
-msgstr "Паказываць рэ&зэрвовыя файлы"
+msgstr "РџР°РєР°Р·С‹РІР°С†СЊ СЂСЌ&Р·СЌСЂРІРѕРІС‹СЏ С„Р°Р№Р»С‹"
 
 msgid "&Never"
-msgstr "&Ніколі"
+msgstr "&РќС–РєРѕР»С–"
 
 msgid "on dumb &Terminals"
-msgstr "На &дурных тэрміналах"
+msgstr "РќР° &РґСѓСЂРЅС‹С… С‚СЌСЂРјС–РЅР°Р»Р°С…"
 
 msgid "Alwa&ys"
-msgstr "&Заўсёды"
+msgstr "&Р—Р°СћСЃС‘РґС‹"
 
 msgid " Panel options "
-msgstr " Наладка панэляў "
+msgstr " РќР°Р»Р°РґРєР° РїР°РЅСЌР»СЏСћ "
 
 msgid " Pause after run... "
-msgstr " Паўза пасьля выкананьня... "
+msgstr " РџР°СћР·Р° РїР°СЃСЊР»СЏ РІС‹РєР°РЅР°РЅСЊРЅСЏ... "
 
 msgid "Configure options"
-msgstr "Парамэтры канфігурацыі"
+msgstr "РџР°СЂР°РјСЌС‚СЂС‹ РєР°РЅС„С–РіСѓСЂР°С†С‹С–"
 
 msgid "&Add new"
-msgstr "&Дадаць"
+msgstr "&Р”Р°РґР°С†СЊ"
 
 msgid "External panelize"
-msgstr "Вонкавая панэлізацыя"
+msgstr "Р’РѕРЅРєР°РІР°СЏ РїР°РЅСЌР»С–Р·Р°С†С‹СЏ"
 
 msgid "Command"
-msgstr "Каманда"
+msgstr "РљР°РјР°РЅРґР°"
 
 msgid "Other command"
-msgstr "Новая каманда"
+msgstr "РќРѕРІР°СЏ РєР°РјР°РЅРґР°"
 
 msgid " Add to external panelize "
-msgstr " Дадаць у сьпіс камандаў "
+msgstr " Р”Р°РґР°С†СЊ Сѓ СЃСЊРїС–СЃ РєР°РјР°РЅРґР°Сћ "
 
 msgid " Enter command label: "
-msgstr " Увядзіце назву каманды: "
+msgstr " РЈРІСЏРґР·С–С†Рµ РЅР°Р·РІСѓ РєР°РјР°РЅРґС‹: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Немагчыма выканаць гэтую каманду, знаходзячыся ў лякальным каталёгу "
+msgstr " РќРµРјР°РіС‡С‹РјР° РІС‹РєР°РЅР°С†СЊ РіСЌС‚СѓСЋ РєР°РјР°РЅРґСѓ, Р·РЅР°С…РѕРґР·СЏС‡С‹СЃСЏ Сћ Р»СЏРєР°Р»СЊРЅС‹Рј РєР°С‚Р°Р»С‘РіСѓ "
 
 msgid "Find rejects after patching"
-msgstr "Знайсьці карэктуры, адкінутыя камандай patch"
+msgstr "Р—РЅР°Р№СЃСЊС†С– РєР°СЂСЌРєС‚СѓСЂС‹, Р°РґРєС–РЅСѓС‚С‹СЏ РєР°РјР°РЅРґР°Р№ patch"
 
 msgid "Find *.orig after patching"
-msgstr "Адшукаць арыгіналы (*.orig) пасьля каманды patch"
+msgstr "РђРґС€СѓРєР°С†СЊ Р°СЂС‹РіС–РЅР°Р»С‹ (*.orig) РїР°СЃСЊР»СЏ РєР°РјР°РЅРґС‹ patch"
 
 msgid "Find SUID and SGID programs"
-msgstr "Адшукаць праграмы з усталяванымі SUID/SGID бітамі"
+msgstr "РђРґС€СѓРєР°С†СЊ РїСЂР°РіСЂР°РјС‹ Р· СѓСЃС‚Р°Р»СЏРІР°РЅС‹РјС– SUID/SGID Р±С–С‚Р°РјС–"
 
 msgid "Cannot invoke command."
-msgstr "Немагчыма выканаць каманду."
+msgstr "РќРµРјР°РіС‡С‹РјР° РІС‹РєР°РЅР°С†СЊ РєР°РјР°РЅРґСѓ."
 
 msgid "Pipe close failed"
-msgstr "Збой закрыцьця каналу"
+msgstr "Р—Р±РѕР№ Р·Р°РєСЂС‹С†СЊС†СЏ РєР°РЅР°Р»Сѓ"
 
 msgid "missing argument"
 msgstr ""
 
 #, fuzzy
 msgid "unknown option"
-msgstr "<Невядомы>"
+msgstr "<РќРµРІСЏРґРѕРјС‹>"
 
 msgid "invalid numeric value"
 msgstr ""
 
 msgid "Show this help message"
-msgstr "Паказаць гэтае паведамленьне "
+msgstr "РџР°РєР°Р·Р°С†СЊ РіСЌС‚Р°Рµ РїР°РІРµРґР°РјР»РµРЅСЊРЅРµ "
 
 msgid "Display brief usage message"
-msgstr "Паказаць кароткую інструкцыю"
+msgstr "РџР°РєР°Р·Р°С†СЊ РєР°СЂРѕС‚РєСѓСЋ С–РЅСЃС‚СЂСѓРєС†С‹СЋ"
 
 msgid "ARG"
 msgstr ""
 
 #, c-format
 msgid "Usage:"
-msgstr "Выкарыстайце:"
+msgstr "Р’С‹РєР°СЂС‹СЃС‚Р°Р№С†Рµ:"
 
 msgid "[dev]"
 msgstr ""
@@ -2574,34 +2574,34 @@ msgid "UP--DIR"
 msgstr ""
 
 msgid "SYMLINK"
-msgstr "СЫМСПАСЫЛКА"
+msgstr "РЎР«РњРЎРџРђРЎР«Р›РљРђ"
 
 msgid "SUB-DIR"
-msgstr "ПАД-КАТАЛЁГ"
+msgstr "РџРђР”-РљРђРўРђР›РЃР“"
 
 msgid "Size"
-msgstr "Памер"
+msgstr "РџР°РјРµСЂ"
 
 msgid "MTime"
-msgstr "Ап.мадыфікацыя"
+msgstr "РђРї.РјР°РґС‹С„С–РєР°С†С‹СЏ"
 
 msgid "ATime"
-msgstr "Ап. доступ"
+msgstr "РђРї. РґРѕСЃС‚СѓРї"
 
 msgid "CTime"
-msgstr "Час стварэньня"
+msgstr "Р§Р°СЃ СЃС‚РІР°СЂСЌРЅСЊРЅСЏ"
 
 msgid "Permission"
-msgstr "Атрыбуты"
+msgstr "РђС‚СЂС‹Р±СѓС‚С‹"
 
 msgid "Perm"
-msgstr "Правы"
+msgstr "РџСЂР°РІС‹"
 
 msgid "Nl"
 msgstr ""
 
 msgid "Inode"
-msgstr "Вузел"
+msgstr "Р’СѓР·РµР»"
 
 msgid "UID"
 msgstr "UID"
@@ -2610,70 +2610,70 @@ msgid "GID"
 msgstr "GID"
 
 msgid "Owner"
-msgstr "Уладальнік"
+msgstr "РЈР»Р°РґР°Р»СЊРЅС–Рє"
 
 msgid "Group"
-msgstr "Група"
+msgstr "Р“СЂСѓРїР°"
 
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s байтаў"
-msgstr[1] "%s байтаў"
+msgstr[0] "%s Р±Р°Р№С‚Р°Сћ"
+msgstr[1] "%s Р±Р°Р№С‚Р°Сћ"
 
 #, fuzzy, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s байтаў у %d файле"
-msgstr[1] "%s байтаў у %d файле"
+msgstr[0] "%s Р±Р°Р№С‚Р°Сћ Сѓ %d С„Р°Р№Р»Рµ"
+msgstr[1] "%s Р±Р°Р№С‚Р°Сћ Сѓ %d С„Р°Р№Р»Рµ"
 
 msgid "<readlink failed>"
-msgstr "<памылка чытаньня спасылкі>"
+msgstr "<РїР°РјС‹Р»РєР° С‡С‹С‚Р°РЅСЊРЅСЏ СЃРїР°СЃС‹Р»РєС–>"
 
 msgid "Unknown tag on display format: "
-msgstr "Невядомы тэг у фармаце адлюстраваньня: "
+msgstr "РќРµРІСЏРґРѕРјС‹ С‚СЌРі Сѓ С„Р°СЂРјР°С†Рµ Р°РґР»СЋСЃС‚СЂР°РІР°РЅСЊРЅСЏ: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Фармат карыстальніку выглядае памылковым, вяртаюся да стандартнага."
+msgstr "Р¤Р°СЂРјР°С‚ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ РІС‹РіР»СЏРґР°Рµ РїР°РјС‹Р»РєРѕРІС‹Рј, РІСЏСЂС‚Р°СЋСЃСЏ РґР° СЃС‚Р°РЅРґР°СЂС‚РЅР°РіР°."
 
 msgid " Do you really want to execute? "
-msgstr " Вы сапраўды жадаеце выканаць гэта? "
+msgstr " Р’С‹ СЃР°РїСЂР°СћРґС‹ Р¶Р°РґР°РµС†Рµ РІС‹РєР°РЅР°С†СЊ РіСЌС‚Р°? "
 
 msgid "View"
-msgstr "Прагляд"
+msgstr "РџСЂР°РіР»СЏРґ"
 
 msgid "Edit"
-msgstr "Праўка"
+msgstr "РџСЂР°СћРєР°"
 
 msgid "RenMov"
-msgstr "Перанс"
+msgstr "РџРµСЂР°РЅСЃ"
 
 msgid "Mkdir"
-msgstr "НвКтляг"
+msgstr "РќРІРљС‚Р»СЏРі"
 
 msgid " Choose input codepage "
-msgstr " Выбраць табліцу сымбаляў вываду"
+msgstr " Р’С‹Р±СЂР°С†СЊ С‚Р°Р±Р»С–С†Сѓ СЃС‹РјР±Р°Р»СЏСћ РІС‹РІР°РґСѓ"
 
 msgid "-  < No translation >"
-msgstr "-  < Не перакладзена >"
+msgstr "-  < РќРµ РїРµСЂР°РєР»Р°РґР·РµРЅР° >"
 
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
 "Do not forget to save options."
 msgstr ""
-"Каб выкарыстаць гэтую магчымасьць,\n"
-"выбярыце вашую табліцу сымбаляў у\n"
-"Наладка / Біты сымбаляў!\n"
-"Ня забудзьцеся захаваць зьмены."
+"РљР°Р± РІС‹РєР°СЂС‹СЃС‚Р°С†СЊ РіСЌС‚СѓСЋ РјР°РіС‡С‹РјР°СЃСЊС†СЊ,\n"
+"РІС‹Р±СЏСЂС‹С†Рµ РІР°С€СѓСЋ С‚Р°Р±Р»С–С†Сѓ СЃС‹РјР±Р°Р»СЏСћ Сѓ\n"
+"РќР°Р»Р°РґРєР° / Р‘С–С‚С‹ СЃС‹РјР±Р°Р»СЏСћ!\n"
+"РќСЏ Р·Р°Р±СѓРґР·СЊС†РµСЃСЏ Р·Р°С…Р°РІР°С†СЊ Р·СЊРјРµРЅС‹."
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Памер экрану %dx%d ня падтрымліваецца.\n"
-"Праверце пераменную асяродзьдзя TERM.\n"
+"РџР°РјРµСЂ СЌРєСЂР°РЅСѓ %dx%d РЅСЏ РїР°РґС‚СЂС‹РјР»С–РІР°РµС†С†Р°.\n"
+"РџСЂР°РІРµСЂС†Рµ РїРµСЂР°РјРµРЅРЅСѓСЋ Р°СЃСЏСЂРѕРґР·СЊРґР·СЏ TERM.\n"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -2683,153 +2683,153 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Немагчыма адчыніць іменаваны канал %s\n"
+msgstr "РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ С–РјРµРЅР°РІР°РЅС‹ РєР°РЅР°Р» %s\n"
 
 msgid " The shell is still active. Quit anyway? "
-msgstr " Абалонка яшчэ актыўная. Усёж такі выйсьці? "
+msgstr " РђР±Р°Р»РѕРЅРєР° СЏС€С‡СЌ Р°РєС‚С‹СћРЅР°СЏ. РЈСЃС‘Р¶ С‚Р°РєС– РІС‹Р№СЃСЊС†С–? "
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Увага: Немагчыма зьмяніць у %s. \n"
+msgstr "РЈРІР°РіР°: РќРµРјР°РіС‡С‹РјР° Р·СЊРјСЏРЅС–С†СЊ Сѓ %s. \n"
 
 msgid "With builtin Editor\n"
-msgstr "З убудаваным рэдактарам\n"
+msgstr "Р— СѓР±СѓРґР°РІР°РЅС‹Рј СЂСЌРґР°РєС‚Р°СЂР°Рј\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "Выкарыстаньне усталяванае сыстэмнае бібліятэкі S-Lang"
+msgstr "Р’С‹РєР°СЂС‹СЃС‚Р°РЅСЊРЅРµ СѓСЃС‚Р°Р»СЏРІР°РЅР°Рµ СЃС‹СЃС‚СЌРјРЅР°Рµ Р±С–Р±Р»С–СЏС‚СЌРєС– S-Lang"
 
 msgid "Using included S-Lang library"
-msgstr "Выкарыстаньне бібліятэкі S-Lang"
+msgstr "Р’С‹РєР°СЂС‹СЃС‚Р°РЅСЊРЅРµ Р±С–Р±Р»С–СЏС‚СЌРєС– S-Lang"
 
 msgid "with termcap database"
-msgstr "з базай дадзеных termcap"
+msgstr "Р· Р±Р°Р·Р°Р№ РґР°РґР·РµРЅС‹С… termcap"
 
 msgid "with terminfo database"
-msgstr "з базай дадзеных terminfo"
+msgstr "Р· Р±Р°Р·Р°Р№ РґР°РґР·РµРЅС‹С… terminfo"
 
 msgid "Using the ncurses library"
-msgstr "Выкарыстоўваць бібліятэку ncurses"
+msgstr "Р’С‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ Р±С–Р±Р»С–СЏС‚СЌРєСѓ ncurses"
 
 msgid "With optional subshell support"
-msgstr "З апцыянальнай падтрымкай нутранай каманднай абалонкі "
+msgstr "Р— Р°РїС†С‹СЏРЅР°Р»СЊРЅР°Р№ РїР°РґС‚СЂС‹РјРєР°Р№ РЅСѓС‚СЂР°РЅР°Р№ РєР°РјР°РЅРґРЅР°Р№ Р°Р±Р°Р»РѕРЅРєС– "
 
 msgid "With subshell support as default"
-msgstr "З падтрымкай нутранай каманднай абалонкі па-змоўчаньню"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ РЅСѓС‚СЂР°РЅР°Р№ РєР°РјР°РЅРґРЅР°Р№ Р°Р±Р°Р»РѕРЅРєС– РїР°-Р·РјРѕСћС‡Р°РЅСЊРЅСЋ"
 
 msgid "With support for background operations\n"
-msgstr "З падтрымкай апэрацыяў у тле\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ Р°РїСЌСЂР°С†С‹СЏСћ Сѓ С‚Р»Рµ\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "З падтрымкай мышы ў xterm і кансолі Linux.\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ РјС‹С€С‹ Сћ xterm С– РєР°РЅСЃРѕР»С– Linux.\n"
 
 msgid "With mouse support on xterm\n"
-msgstr "З падтрымкай мышы ў xterm.\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ РјС‹С€С‹ Сћ xterm.\n"
 
 msgid "With support for X11 events\n"
-msgstr "З падтрымкай для падзеяў X11\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ РґР»СЏ РїР°РґР·РµСЏСћ X11\n"
 
 msgid "With internationalization support\n"
-msgstr "З падтрымкай інтэрнацыяналізацыі\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ С–РЅС‚СЌСЂРЅР°С†С‹СЏРЅР°Р»С–Р·Р°С†С‹С–\n"
 
 msgid "With multiple codepages support\n"
-msgstr "З падтрымкай шматлікіх кодавых старонак\n"
+msgstr "Р— РїР°РґС‚СЂС‹РјРєР°Р№ С€РјР°С‚Р»С–РєС–С… РєРѕРґР°РІС‹С… СЃС‚Р°СЂРѕРЅР°Рє\n"
 
 #, c-format
 msgid "Virtual File System:"
-msgstr "Віртуальная Файлавая Сыстэма:"
+msgstr "Р’С–СЂС‚СѓР°Р»СЊРЅР°СЏ Р¤Р°Р№Р»Р°РІР°СЏ РЎС‹СЃС‚СЌРјР°:"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Немагчыма адчыніць файл %s на запіс:\n"
+"РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ С„Р°Р№Р» %s РЅР° Р·Р°РїС–СЃ:\n"
 "%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr " Капіяваць каталёг \"%s\" у:"
+msgstr " РљР°РїС–СЏРІР°С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" Сѓ:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr " Перамесьціць каталёг \"%s\" у:"
+msgstr " РџРµСЂР°РјРµСЃСЊС†С–С†СЊ РєР°С‚Р°Р»С‘Рі \"%s\" Сѓ:"
 
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць стан мейсца прызначэньня \n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СЃС‚Р°РЅ РјРµР№СЃС†Р° РїСЂС‹Р·РЅР°С‡СЌРЅСЊРЅСЏ \n"
 " %s "
 
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  Выдаліць %s?  "
+msgstr "  Р’С‹РґР°Р»С–С†СЊ %s?  "
 
 msgid "Static"
-msgstr "Статыч"
+msgstr "РЎС‚Р°С‚С‹С‡"
 
 msgid "Dynamc"
-msgstr "Дынамч"
+msgstr "Р”С‹РЅР°РјС‡"
 
 msgid "Rescan"
-msgstr "Пераск."
+msgstr "РџРµСЂР°СЃРє."
 
 msgid "Forget"
-msgstr "Забыцца"
+msgstr "Р—Р°Р±С‹С†С†Р°"
 
 msgid "Rmdir"
-msgstr "ВдКтляг"
+msgstr "Р’РґРљС‚Р»СЏРі"
 
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Немагчыма пісаць у файл %s:\n"
+"РќРµРјР°РіС‡С‹РјР° РїС–СЃР°С†СЊ Сѓ С„Р°Р№Р» %s:\n"
 "%s\n"
 
 msgid " Format error on file Extensions File "
-msgstr " Памылка фармату ў файле Пашырэньняў файлаў"
+msgstr " РџР°РјС‹Р»РєР° С„Р°СЂРјР°С‚Сѓ Сћ С„Р°Р№Р»Рµ РџР°С€С‹СЂСЌРЅСЊРЅСЏСћ С„Р°Р№Р»Р°Сћ"
 
 #, c-format
 msgid " The %%var macro has no default "
-msgstr " Макрас %%var ня мае тыповых значэньняў"
+msgstr " РњР°РєСЂР°СЃ %%var РЅСЏ РјР°Рµ С‚С‹РїРѕРІС‹С… Р·РЅР°С‡СЌРЅСЊРЅСЏСћ"
 
 #, c-format
 msgid " The %%var macro has no variable "
-msgstr " Макрас %%var ня мае пераменных"
+msgstr " РњР°РєСЂР°СЃ %%var РЅСЏ РјР°Рµ РїРµСЂР°РјРµРЅРЅС‹С…"
 
 msgid " Debug "
-msgstr " Адладка "
+msgstr " РђРґР»Р°РґРєР° "
 
 msgid " ERROR: "
-msgstr " ПАМЫЛКА: "
+msgstr " РџРђРњР«Р›РљРђ: "
 
 msgid " True:  "
-msgstr " Праўда: "
+msgstr " РџСЂР°СћРґР°: "
 
 msgid " False: "
-msgstr " Хлусьня: "
+msgstr " РҐР»СѓСЃСЊРЅСЏ: "
 
 msgid " Warning -- ignoring file "
-msgstr " Папярэджаньне - файл ігнаруецца "
+msgstr " РџР°РїСЏСЂСЌРґР¶Р°РЅСЊРЅРµ - С„Р°Р№Р» С–РіРЅР°СЂСѓРµС†С†Р° "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Файл %s у бягучым каталёгу ня належыць ані root'у, ані Вам,\n"
-"і даступны іншым на запіс. Выкарыстаньне такога файлу непрыймальна\n"
-"з пункту гледжаньня бясьпекі."
+"Р¤Р°Р№Р» %s Сѓ Р±СЏРіСѓС‡С‹Рј РєР°С‚Р°Р»С‘РіСѓ РЅСЏ РЅР°Р»РµР¶С‹С†СЊ Р°РЅС– root'Сѓ, Р°РЅС– Р’Р°Рј,\n"
+"С– РґР°СЃС‚СѓРїРЅС‹ С–РЅС€С‹Рј РЅР° Р·Р°РїС–СЃ. Р’С‹РєР°СЂС‹СЃС‚Р°РЅСЊРЅРµ С‚Р°РєРѕРіР° С„Р°Р№Р»Сѓ РЅРµРїСЂС‹Р№РјР°Р»СЊРЅР°\n"
+"Р· РїСѓРЅРєС‚Сѓ РіР»РµРґР¶Р°РЅСЊРЅСЏ Р±СЏСЃСЊРїРµРєС–."
 
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " Ня адшукана запісаў, што адпавядаюць, у %s"
+msgstr " РќСЏ Р°РґС€СѓРєР°РЅР° Р·Р°РїС–СЃР°Сћ, С€С‚Рѕ Р°РґРїР°РІСЏРґР°СЋС†СЊ, Сѓ %s"
 
 msgid " User menu "
-msgstr " Мэню карыстальніку "
+msgstr " РњСЌРЅСЋ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ "
 
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
@@ -2842,7 +2842,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
-msgstr "каталёг"
+msgstr "РєР°С‚Р°Р»С‘Рі"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
@@ -2851,13 +2851,13 @@ msgstr ""
 #, fuzzy, c-format
 msgid "Cannot set correct permissions for directory %s\n"
 msgstr ""
-" Немагчыма стварыць каталёг мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ РєР°С‚Р°Р»С‘Рі РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
-" Немагчыма стварыць каталёг мэты \"%s\" \n"
+" РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ РєР°С‚Р°Р»С‘Рі РјСЌС‚С‹ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -2869,14 +2869,14 @@ msgid "Temporary files will not be created\n"
 msgstr ""
 
 msgid " Pipe failed "
-msgstr " Збой каналу "
+msgstr " Р—Р±РѕР№ РєР°РЅР°Р»Сѓ "
 
 msgid " Dup failed "
-msgstr " Збой дубляваньня дэскрыптару "
+msgstr " Р—Р±РѕР№ РґСѓР±Р»СЏРІР°РЅСЊРЅСЏ РґСЌСЃРєСЂС‹РїС‚Р°СЂСѓ "
 
 #, fuzzy
 msgid " Cannot spawn child process "
-msgstr " Немагчыма стварыць дачэрні працэс "
+msgstr " РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ РґР°С‡СЌСЂРЅС– РїСЂР°С†СЌСЃ "
 
 msgid "Empty output from child filter"
 msgstr ""
@@ -2886,7 +2886,7 @@ msgid ""
 " Cannot open \"%s\"\n"
 " %s "
 msgstr ""
-" Немагчыма адчыніць \"%s\"\n"
+" РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ \"%s\"\n"
 " %s "
 
 #, c-format
@@ -2894,19 +2894,19 @@ msgid ""
 " Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
-" Немагчыма атрымаць стан \"%s\"\n"
+" РќРµРјР°РіС‡С‹РјР° Р°С‚СЂС‹РјР°С†СЊ СЃС‚Р°РЅ \"%s\"\n"
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " Прагляд немагчымы: нязвычайны файл "
+msgstr " РџСЂР°РіР»СЏРґ РЅРµРјР°РіС‡С‹РјС‹: РЅСЏР·РІС‹С‡Р°Р№РЅС‹ С„Р°Р№Р» "
 
 #, c-format
 msgid "File: %s"
-msgstr "Файл: %s"
+msgstr "Р¤Р°Р№Р»: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Зрух 0x%08lx"
+msgstr "Р—СЂСѓС… 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
@@ -2914,11 +2914,11 @@ msgstr ""
 
 #, c-format
 msgid "%s bytes"
-msgstr "%s байтаў"
+msgstr "%s Р±Р°Р№С‚Р°Сћ"
 
 #, fuzzy, c-format
 msgid ">= %s bytes"
-msgstr "%s байтаў"
+msgstr "%s Р±Р°Р№С‚Р°Сћ"
 
 #, c-format
 msgid ""
@@ -2931,39 +2931,39 @@ msgstr ""
 msgid ""
 " Cannot save file: \n"
 " %s "
-msgstr " Памылка пры захаваньні файлу "
+msgstr " РџР°РјС‹Р»РєР° РїСЂС‹ Р·Р°С…Р°РІР°РЅСЊРЅС– С„Р°Р№Р»Сѓ "
 
 msgid "Invalid hex search expression"
-msgstr " Памылковы выраз пошуку"
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ РІС‹СЂР°Р· РїРѕС€СѓРєСѓ"
 
 msgid " Invalid regular expression "
-msgstr " Памылковы сталы выраз "
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ СЃС‚Р°Р»С‹ РІС‹СЂР°Р· "
 
 #, c-format
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
-" Нумар бягучага радку %d.\n"
-" Увядзіце нумар новага радку:"
+" РќСѓРјР°СЂ Р±СЏРіСѓС‡Р°РіР° СЂР°РґРєСѓ %d.\n"
+" РЈРІСЏРґР·С–С†Рµ РЅСѓРјР°СЂ РЅРѕРІР°РіР° СЂР°РґРєСѓ:"
 
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
-" Бягучая адрэса - 0x%lx.\n"
-" Увядзіце новую адрэсу:"
+" Р‘СЏРіСѓС‡Р°СЏ Р°РґСЂСЌСЃР° - 0x%lx.\n"
+" РЈРІСЏРґР·С–С†Рµ РЅРѕРІСѓСЋ Р°РґСЂСЌСЃСѓ:"
 
 msgid " Goto Address "
-msgstr " Перайсьці на адрэсу "
+msgstr " РџРµСЂР°Р№СЃСЊС†С– РЅР° Р°РґСЂСЌСЃСѓ "
 
 #, fuzzy
 msgid " Invalid address "
-msgstr " Памылковы пароль "
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ РїР°СЂРѕР»СЊ "
 
 msgid " Enter regexp:"
-msgstr " Увядзіце сталы выраз:"
+msgstr " РЈРІСЏРґР·С–С†Рµ СЃС‚Р°Р»С‹ РІС‹СЂР°Р·:"
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -3020,112 +3020,112 @@ msgid "ButtonBar|Format"
 msgstr ""
 
 msgid " History "
-msgstr "Гісторыя камандаў"
+msgstr "Р“С–СЃС‚РѕСЂС‹СЏ РєР°РјР°РЅРґР°Сћ"
 
 msgid "Function key 1"
-msgstr "Функцыянальная 1 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 1 "
 
 msgid "Function key 2"
-msgstr "Функцыянальная 2 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 2 "
 
 msgid "Function key 3"
-msgstr "Функцыянальная 3 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 3 "
 
 msgid "Function key 4"
-msgstr "Функцыянальная 4 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 4 "
 
 msgid "Function key 5"
-msgstr "Функцыянальная 5 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 5 "
 
 msgid "Function key 6"
-msgstr "Функцыянальная 6 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 6 "
 
 msgid "Function key 7"
-msgstr "Функцыянальная 7 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 7 "
 
 msgid "Function key 8"
-msgstr "Функцыянальная 8 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 8 "
 
 msgid "Function key 9"
-msgstr "Функцыянальная 9 "
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 9 "
 
 msgid "Function key 10"
-msgstr "Функцыянальная 10"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 10"
 
 msgid "Function key 11"
-msgstr "Функцыянальная 11"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 11"
 
 msgid "Function key 12"
-msgstr "Функцыянальная 12"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 12"
 
 msgid "Function key 13"
-msgstr "Функцыянальная 13"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 13"
 
 msgid "Function key 14"
-msgstr "Функцыянальная 14"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 14"
 
 msgid "Function key 15"
-msgstr "Функцыянальная 15"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 15"
 
 msgid "Function key 16"
-msgstr "Функцыянальная 16"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 16"
 
 msgid "Function key 17"
-msgstr "Функцыянальная 17"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 17"
 
 msgid "Function key 18"
-msgstr "Функцыянальная 18"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 18"
 
 msgid "Function key 19"
-msgstr "Функцыянальная 19"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 19"
 
 msgid "Function key 20"
-msgstr "Функцыянальная 20"
+msgstr "Р¤СѓРЅРєС†С‹СЏРЅР°Р»СЊРЅР°СЏ 20"
 
 msgid "Backspace key"
-msgstr "Клявіша Backspace"
+msgstr "РљР»СЏРІС–С€Р° Backspace"
 
 msgid "End key"
-msgstr "Клявіша End      "
+msgstr "РљР»СЏРІС–С€Р° End      "
 
 msgid "Up arrow key"
-msgstr "Стрэлка угору    "
+msgstr "РЎС‚СЂСЌР»РєР° СѓРіРѕСЂСѓ    "
 
 msgid "Down arrow key"
-msgstr "Стрэлка ўніз     "
+msgstr "РЎС‚СЂСЌР»РєР° СћРЅС–Р·     "
 
 msgid "Left arrow key"
-msgstr "Стрэлка ўлева    "
+msgstr "РЎС‚СЂСЌР»РєР° СћР»РµРІР°    "
 
 msgid "Right arrow key"
-msgstr "Стрэлка ўправа   "
+msgstr "РЎС‚СЂСЌР»РєР° СћРїСЂР°РІР°   "
 
 msgid "Home key"
-msgstr "Клявіша Home     "
+msgstr "РљР»СЏРІС–С€Р° Home     "
 
 msgid "Page Down key"
-msgstr "Клявіша Page Down"
+msgstr "РљР»СЏРІС–С€Р° Page Down"
 
 msgid "Page Up key"
-msgstr "Клявіша Page Up  "
+msgstr "РљР»СЏРІС–С€Р° Page Up  "
 
 msgid "Insert key"
-msgstr "Клявіша Insert   "
+msgstr "РљР»СЏРІС–С€Р° Insert   "
 
 msgid "Delete key"
-msgstr "Клявіша Delete   "
+msgstr "РљР»СЏРІС–С€Р° Delete   "
 
 msgid "Completion/M-tab"
-msgstr "Заканчэньне/M-Tab "
+msgstr "Р—Р°РєР°РЅС‡СЌРЅСЊРЅРµ/M-Tab "
 
 msgid "+ on keypad"
-msgstr "+ на keypad'е"
+msgstr "+ РЅР° keypad'Рµ"
 
 msgid "- on keypad"
-msgstr "- на keypad'е"
+msgstr "- РЅР° keypad'Рµ"
 
 msgid "* on keypad"
-msgstr "* на лічбавых клявішах"
+msgstr "* РЅР° Р»С–С‡Р±Р°РІС‹С… РєР»СЏРІС–С€Р°С…"
 
 msgid "Left arrow keypad"
 msgstr "Left arrow keypad"
@@ -3140,10 +3140,10 @@ msgid "Down arrow keypad"
 msgstr "Down arrow keypad"
 
 msgid "Home on keypad"
-msgstr "Home на keypad'е"
+msgstr "Home РЅР° keypad'Рµ"
 
 msgid "End on keypad"
-msgstr "End на keypad'е"
+msgstr "End РЅР° keypad'Рµ"
 
 msgid "Page Down keypad"
 msgstr "Page Down keypad"
@@ -3152,29 +3152,29 @@ msgid "Page Up keypad"
 msgstr "Page Up keypad"
 
 msgid "Insert on keypad"
-msgstr "Insert на keypad'е"
+msgstr "Insert РЅР° keypad'Рµ"
 
 msgid "Delete on keypad"
-msgstr "Delete на keypad'е"
+msgstr "Delete РЅР° keypad'Рµ"
 
 msgid "Enter on keypad"
-msgstr "Enter на keypad'е"
+msgstr "Enter РЅР° keypad'Рµ"
 
 msgid "Slash on keypad"
-msgstr "Slash на keypad'е"
+msgstr "Slash РЅР° keypad'Рµ"
 
 msgid "NumLock on keypad"
-msgstr "NumLock на keypad'е"
+msgstr "NumLock РЅР° keypad'Рµ"
 
 msgid "Background process:"
-msgstr "Працэс у тле:"
+msgstr "РџСЂР°С†СЌСЃ Сѓ С‚Р»Рµ:"
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Немагчыма адчыніць cpio-архіў\n"
+"РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ cpio-Р°СЂС…С–Сћ\n"
 "%s"
 
 #, c-format
@@ -3182,7 +3182,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Заўчасны канец архіву cpio\n"
+"Р—Р°СћС‡Р°СЃРЅС‹ РєР°РЅРµС† Р°СЂС…С–РІСѓ cpio\n"
 "%s"
 
 #, c-format
@@ -3190,7 +3190,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Пашкоджаны загаловак cpio знойдзены ў\n"
+"РџР°С€РєРѕРґР¶Р°РЅС‹ Р·Р°РіР°Р»РѕРІР°Рє cpio Р·РЅРѕР№РґР·РµРЅС‹ Сћ\n"
 "%s"
 
 #, c-format
@@ -3200,257 +3200,257 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Няўзгодненая жорская спасылка\n"
+"РќСЏСћР·РіРѕРґРЅРµРЅР°СЏ Р¶РѕСЂСЃРєР°СЏ СЃРїР°СЃС‹Р»РєР°\n"
 "%s\n"
-"у архіве cpio\n"
+"Сѓ Р°СЂС…С–РІРµ cpio\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s утрымлівае падвойныя запісы! Прапушчана!"
+msgstr "%s СѓС‚СЂС‹РјР»С–РІР°Рµ РїР°РґРІРѕР№РЅС‹СЏ Р·Р°РїС–СЃС‹! РџСЂР°РїСѓС€С‡Р°РЅР°!"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Нечаканы канец файлу\n"
+"РќРµС‡Р°РєР°РЅС‹ РєР°РЅРµС† С„Р°Р№Р»Сѓ\n"
 "%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "Кэш каталёгу састарэў для %s"
+msgstr "РљСЌС€ РєР°С‚Р°Р»С‘РіСѓ СЃР°СЃС‚Р°СЂСЌСћ РґР»СЏ %s"
 
 msgid "Starting linear transfer..."
-msgstr "Запуск лінейнай перадачы..."
+msgstr "Р—Р°РїСѓСЃРє Р»С–РЅРµР№РЅР°Р№ РїРµСЂР°РґР°С‡С‹..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu байтаў перанесена)"
+msgstr "%s: %s: %s %3d%% (%lu Р±Р°Р№С‚Р°Сћ РїРµСЂР°РЅРµСЃРµРЅР°)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu байтаў перанесена"
+msgstr "%s: %s: %s %lu Р±Р°Р№С‚Р°Сћ РїРµСЂР°РЅРµСЃРµРЅР°"
 
 msgid "Getting file"
-msgstr "Атрыманьне файлу"
+msgstr "РђС‚СЂС‹РјР°РЅСЊРЅРµ С„Р°Р№Р»Сѓ"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Немагчыма адчыніць %s-архіў\n"
+"РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ %s-Р°СЂС…С–Сћ\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Няўзгоднены архіў extfs"
+msgstr "РќСЏСћР·РіРѕРґРЅРµРЅС‹ Р°СЂС…С–Сћ extfs"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: Адлучэньне ад %s"
+msgstr "fish: РђРґР»СѓС‡СЌРЅСЊРЅРµ Р°Рґ %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Чакаецца радок ініцыялізацыі..."
+msgstr "fish: Р§Р°РєР°РµС†С†Р° СЂР°РґРѕРє С–РЅС–С†С‹СЏР»С–Р·Р°С†С‹С–..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Выбачайце, немагчыма стварыць аўтарызаваныя паролем злучэньні зараз."
+msgstr "Р’С‹Р±Р°С‡Р°Р№С†Рµ, РЅРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ Р°СћС‚Р°СЂС‹Р·Р°РІР°РЅС‹СЏ РїР°СЂРѕР»РµРј Р·Р»СѓС‡СЌРЅСЊРЅС– Р·Р°СЂР°Р·."
 
 msgid " fish: Password required for "
-msgstr "fish: Патрабуецца пароль для "
+msgstr "fish: РџР°С‚СЂР°Р±СѓРµС†С†Р° РїР°СЂРѕР»СЊ РґР»СЏ "
 
 msgid "fish: Sending password..."
-msgstr "fish: Дасылаецца пароль..."
+msgstr "fish: Р”Р°СЃС‹Р»Р°РµС†С†Р° РїР°СЂРѕР»СЊ..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: Дасылаецца радок ініцыялізацыі..."
+msgstr "fish: Р”Р°СЃС‹Р»Р°РµС†С†Р° СЂР°РґРѕРє С–РЅС–С†С‹СЏР»С–Р·Р°С†С‹С–..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: Вэрсія падцьверджаньня сувязі..."
+msgstr "fish: Р’СЌСЂСЃС–СЏ РїР°РґС†СЊРІРµСЂРґР¶Р°РЅСЊРЅСЏ СЃСѓРІСЏР·С–..."
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: Усталёўваецца бягучы каталёг..."
+msgstr "fish: РЈСЃС‚Р°Р»С‘СћРІР°РµС†С†Р° Р±СЏРіСѓС‡С‹ РєР°С‚Р°Р»С‘Рі..."
 
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: Злучэньне адбылося, хатні каталёг %s."
+msgstr "fish: Р—Р»СѓС‡СЌРЅСЊРЅРµ Р°РґР±С‹Р»РѕСЃСЏ, С…Р°С‚РЅС– РєР°С‚Р°Р»С‘Рі %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Чытаньне каталёгу %s..."
+msgstr "fish: Р§С‹С‚Р°РЅСЊРЅРµ РєР°С‚Р°Р»С‘РіСѓ %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr "%s: зроблена."
+msgstr "%s: Р·СЂРѕР±Р»РµРЅР°."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: збой "
+msgstr "%s: Р·Р±РѕР№ "
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: запіс %s: дасылаецца каманда..."
+msgstr "fish: Р·Р°РїС–СЃ %s: РґР°СЃС‹Р»Р°РµС†С†Р° РєР°РјР°РЅРґР°..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Збой лякальнага чытаньня, дасылаюцца нулі"
+msgstr "fish: Р—Р±РѕР№ Р»СЏРєР°Р»СЊРЅР°РіР° С‡С‹С‚Р°РЅСЊРЅСЏ, РґР°СЃС‹Р»Р°СЋС†С†Р° РЅСѓР»С–"
 
 #, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: запіс %s %d (%lu)"
+msgstr "fish: Р·Р°РїС–СЃ %s %d (%lu)"
 
 msgid "zeros"
-msgstr "нулі"
+msgstr "РЅСѓР»С–"
 
 msgid "Aborting transfer..."
-msgstr "Перарываньне перадачы..."
+msgstr "РџРµСЂР°СЂС‹РІР°РЅСЊРЅРµ РїРµСЂР°РґР°С‡С‹..."
 
 msgid "Error reported after abort."
-msgstr "Адзначана памылка пасьля перарываньня."
+msgstr "РђРґР·РЅР°С‡Р°РЅР° РїР°РјС‹Р»РєР° РїР°СЃСЊР»СЏ РїРµСЂР°СЂС‹РІР°РЅСЊРЅСЏ."
 
 msgid "Aborted transfer would be successful."
-msgstr "Перадача пасьпяхова перарваная."
+msgstr "РџРµСЂР°РґР°С‡Р° РїР°СЃСЊРїСЏС…РѕРІР° РїРµСЂР°СЂРІР°РЅР°СЏ."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Адлучэньне ад %s"
+msgstr "ftpfs: РђРґР»СѓС‡СЌРЅСЊРЅРµ Р°Рґ %s"
 
 msgid " FTP: Password required for "
-msgstr " FTP: Патрабуецца пароль для "
+msgstr " FTP: РџР°С‚СЂР°Р±СѓРµС†С†Р° РїР°СЂРѕР»СЊ РґР»СЏ "
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: Дасылаецца ймя карыстальніку"
+msgstr "ftpfs: Р”Р°СЃС‹Р»Р°РµС†С†Р° Р№РјСЏ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: Дасылаецца пароль карыстальніку"
+msgstr "ftpfs: Р”Р°СЃС‹Р»Р°РµС†С†Р° РїР°СЂРѕР»СЊ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ"
 
 #, fuzzy, c-format
 msgid "FTP: Account required for user %s"
-msgstr " FTP: Патрабуецца пароль для "
+msgstr " FTP: РџР°С‚СЂР°Р±СѓРµС†С†Р° РїР°СЂРѕР»СЊ РґР»СЏ "
 
 #, fuzzy
 msgid "Account:"
-msgstr "Лік"
+msgstr "Р›С–Рє"
 
 #, fuzzy
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: Дасылаецца пароль карыстальніку"
+msgstr "ftpfs: Р”Р°СЃС‹Р»Р°РµС†С†Р° РїР°СЂРѕР»СЊ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: зарэгістраваны"
+msgstr "ftpfs: Р·Р°СЂСЌРіС–СЃС‚СЂР°РІР°РЅС‹"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Памылка рэгістрацыі карыстальніку %s "
+msgstr "ftpfs: РџР°РјС‹Р»РєР° СЂСЌРіС–СЃС‚СЂР°С†С‹С– РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ %s "
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Памылковае ймя сыстэмы."
+msgstr "ftpfs: РџР°РјС‹Р»РєРѕРІР°Рµ Р№РјСЏ СЃС‹СЃС‚СЌРјС‹."
 
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Памылковая адрэса сыстэмы."
+msgstr "ftpfs: РџР°РјС‹Р»РєРѕРІР°СЏ Р°РґСЂСЌСЃР° СЃС‹СЃС‚СЌРјС‹."
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: зьдзяйсьняецца далучэньне да %s"
+msgstr "ftpfs: Р·СЊРґР·СЏР№СЃСЊРЅСЏРµС†С†Р° РґР°Р»СѓС‡СЌРЅСЊРЅРµ РґР° %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: злучэньне перарванае карыстальнікам"
+msgstr "ftpfs: Р·Р»СѓС‡СЌРЅСЊРЅРµ РїРµСЂР°СЂРІР°РЅР°Рµ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєР°Рј"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: збой далучэньня да паслужніку: %s"
+msgstr "ftpfs: Р·Р±РѕР№ РґР°Р»СѓС‡СЌРЅСЊРЅСЏ РґР° РїР°СЃР»СѓР¶РЅС–РєСѓ: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Чаканьне паўтору спробы... %d (Control-C для адмены)"
+msgstr "Р§Р°РєР°РЅСЊРЅРµ РїР°СћС‚РѕСЂСѓ СЃРїСЂРѕР±С‹... %d (Control-C РґР»СЏ Р°РґРјРµРЅС‹)"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: немагчыма ўсталяваць пасыўны рэжым"
+msgstr "ftpfs: РЅРµРјР°РіС‡С‹РјР° СћСЃС‚Р°Р»СЏРІР°С†СЊ РїР°СЃС‹СћРЅС‹ СЂСЌР¶С‹Рј"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: перарываньне перадачы."
+msgstr "ftpfs: РїРµСЂР°СЂС‹РІР°РЅСЊРЅРµ РїРµСЂР°РґР°С‡С‹."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: Памылка перарываньня: %s"
+msgstr "ftpfs: РџР°РјС‹Р»РєР° РїРµСЂР°СЂС‹РІР°РЅСЊРЅСЏ: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: збой перарываньня"
+msgstr "ftpfs: Р·Р±РѕР№ РїРµСЂР°СЂС‹РІР°РЅСЊРЅСЏ"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: збой пошуку бягучага працоўнага каталёгу."
+msgstr "ftpfs: Р·Р±РѕР№ РїРѕС€СѓРєСѓ Р±СЏРіСѓС‡Р°РіР° РїСЂР°С†РѕСћРЅР°РіР° РєР°С‚Р°Р»С‘РіСѓ."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: немагчыма вызначыць сымбалічную спасылку"
+msgstr "ftpfs: РЅРµРјР°РіС‡С‹РјР° РІС‹Р·РЅР°С‡С‹С†СЊ СЃС‹РјР±Р°Р»С–С‡РЅСѓСЋ СЃРїР°СЃС‹Р»РєСѓ"
 
 msgid "Resolving symlink..."
-msgstr "Вызначаецца сымбалічная спасылка..."
+msgstr "Р’С‹Р·РЅР°С‡Р°РµС†С†Р° СЃС‹РјР±Р°Р»С–С‡РЅР°СЏ СЃРїР°СЃС‹Р»РєР°..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Чытаньне каталёгу FTP %s... %s%s"
+msgstr "ftpfs: Р§С‹С‚Р°РЅСЊРЅРµ РєР°С‚Р°Р»С‘РіСѓ FTP %s... %s%s"
 
 msgid "(strict rfc959)"
-msgstr "(абмежаваньне rfc959)"
+msgstr "(Р°Р±РјРµР¶Р°РІР°РЅСЊРЅРµ rfc959)"
 
 msgid "(chdir first)"
-msgstr "(спачатку chdir)"
+msgstr "(СЃРїР°С‡Р°С‚РєСѓ chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: памылка; няма куды перайсьці на аварыйны рэжым"
+msgstr "ftpfs: РїР°РјС‹Р»РєР°; РЅСЏРјР° РєСѓРґС‹ РїРµСЂР°Р№СЃСЊС†С– РЅР° Р°РІР°СЂС‹Р№РЅС‹ СЂСЌР¶С‹Рј"
 
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: запіс файлу %lu (%lu)"
+msgstr "ftpfs: Р·Р°РїС–СЃ С„Р°Р№Р»Сѓ %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"Файл ~/.netrc мае памылковы рэжым доступу/уладаньня.\n"
-"Выдаліце пароль ці спраўце рэжым доступу/уладаньня."
+"Р¤Р°Р№Р» ~/.netrc РјР°Рµ РїР°РјС‹Р»РєРѕРІС‹ СЂСЌР¶С‹Рј РґРѕСЃС‚СѓРїСѓ/СѓР»Р°РґР°РЅСЊРЅСЏ.\n"
+"Р’С‹РґР°Р»С–С†Рµ РїР°СЂРѕР»СЊ С†С– СЃРїСЂР°СћС†Рµ СЂСЌР¶С‹Рј РґРѕСЃС‚СѓРїСѓ/СѓР»Р°РґР°РЅСЊРЅСЏ."
 
 msgid " MCFS "
 msgstr " MCFS "
 
 msgid " The server does not support this version "
-msgstr " Паслужнік не падтрымлівае дадзеную вэрсыі "
+msgstr " РџР°СЃР»СѓР¶РЅС–Рє РЅРµ РїР°РґС‚СЂС‹РјР»С–РІР°Рµ РґР°РґР·РµРЅСѓСЋ РІСЌСЂСЃС‹С– "
 
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" Адлеглы паслужнік запушчаны не на сыстэмным порце. \n"
-" Патрабуецца пароль для ўваходу ў сыстэму, але гэта можа быць \n"
-" небясьпечна для йнфармацыі на адлеглым баку. Працягваць?\n"
+" РђРґР»РµРіР»С‹ РїР°СЃР»СѓР¶РЅС–Рє Р·Р°РїСѓС€С‡Р°РЅС‹ РЅРµ РЅР° СЃС‹СЃС‚СЌРјРЅС‹Рј РїРѕСЂС†Рµ. \n"
+" РџР°С‚СЂР°Р±СѓРµС†С†Р° РїР°СЂРѕР»СЊ РґР»СЏ СћРІР°С…РѕРґСѓ Сћ СЃС‹СЃС‚СЌРјСѓ, Р°Р»Рµ РіСЌС‚Р° РјРѕР¶Р° Р±С‹С†СЊ \n"
+" РЅРµР±СЏСЃСЊРїРµС‡РЅР° РґР»СЏ Р№РЅС„Р°СЂРјР°С†С‹С– РЅР° Р°РґР»РµРіР»С‹Рј Р±Р°РєСѓ. РџСЂР°С†СЏРіРІР°С†СЊ?\n"
 
 msgid " MCFS Password required "
-msgstr " Патрабуецца пароль MCFS "
+msgstr " РџР°С‚СЂР°Р±СѓРµС†С†Р° РїР°СЂРѕР»СЊ MCFS "
 
 msgid " Invalid password "
-msgstr " Памылковы пароль "
+msgstr " РџР°РјС‹Р»РєРѕРІС‹ РїР°СЂРѕР»СЊ "
 
 #, c-format
 msgid " Cannot locate hostname: %s "
-msgstr " Немагчыма вызначыць хост: %s"
+msgstr " РќРµРјР°РіС‡С‹РјР° РІС‹Р·РЅР°С‡С‹С†СЊ С…РѕСЃС‚: %s"
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Немагчыма стварыць сокет: %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° СЃС‚РІР°СЂС‹С†СЊ СЃРѕРєРµС‚: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
-msgstr "Немагчыма далучыцца да паслужніку: %s "
+msgstr "РќРµРјР°РіС‡С‹РјР° РґР°Р»СѓС‡С‹С†С†Р° РґР° РїР°СЃР»СѓР¶РЅС–РєСѓ: %s "
 
 msgid " Too many open connections "
-msgstr " Вельмі шмат адчыненых злучэньняў "
+msgstr " Р’РµР»СЊРјС– С€РјР°С‚ Р°РґС‡С‹РЅРµРЅС‹С… Р·Р»СѓС‡СЌРЅСЊРЅСЏСћ "
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Увага: Памылковы радок у %s:\n"
+"РЈРІР°РіР°: РџР°РјС‹Р»РєРѕРІС‹ СЂР°РґРѕРє Сѓ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3458,7 +3458,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Увага: Памылковы сьцяг %c у %s:\n"
+"РЈРІР°РіР°: РџР°РјС‹Р»РєРѕРІС‹ СЃСЊС†СЏРі %c Сѓ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3466,45 +3466,45 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" Збой паўторнага далучэньня да %s\n"
+" Р—Р±РѕР№ РїР°СћС‚РѕСЂРЅР°РіР° РґР°Р»СѓС‡СЌРЅСЊРЅСЏ РґР° %s\n"
 " "
 
 msgid " Authentication failed "
-msgstr " Збой ідэнтыфікацыі "
+msgstr " Р—Р±РѕР№ С–РґСЌРЅС‚С‹С„С–РєР°С†С‹С– "
 
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " %s стварае каталёг %s "
+msgstr " %s СЃС‚РІР°СЂР°Рµ РєР°С‚Р°Р»С‘Рі %s "
 
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " %s выдаляе каталёг %s "
+msgstr " %s РІС‹РґР°Р»СЏРµ РєР°С‚Р°Р»С‘Рі %s "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s адчыняе файл %s з адлеглай машыны"
+msgstr " %s Р°РґС‡С‹РЅСЏРµ С„Р°Р№Р» %s Р· Р°РґР»РµРіР»Р°Р№ РјР°С€С‹РЅС‹"
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s выдаленьне аддаленага файлу %s"
+msgstr " %s РІС‹РґР°Р»РµРЅСЊРЅРµ Р°РґРґР°Р»РµРЅР°РіР° С„Р°Р№Р»Сѓ %s"
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s зьмяняе ймёны файлаў\n"
+msgstr " %s Р·СЊРјСЏРЅСЏРµ Р№РјС‘РЅС‹ С„Р°Р№Р»Р°Сћ\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Немагчыма адчыніць tar-архіў\n"
+"РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ tar-Р°СЂС…С–Сћ\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Няўзгоднены tar-архіў"
+msgstr "РќСЏСћР·РіРѕРґРЅРµРЅС‹ tar-Р°СЂС…С–Сћ"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Нечаканы канец архіўнага файлу"
+msgstr "РќРµС‡Р°РєР°РЅС‹ РєР°РЅРµС† Р°СЂС…С–СћРЅР°РіР° С„Р°Р№Р»Сѓ"
 
 #, c-format
 msgid ""
@@ -3512,18 +3512,18 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Хмм,...\n"
+"РҐРјРј,...\n"
 "%s\n"
-"не падобны да tar-архіву."
+"РЅРµ РїР°РґРѕР±РЅС‹ РґР° tar-Р°СЂС…С–РІСѓ."
 
 msgid " undelfs: error "
-msgstr " undelfs: памылка "
+msgstr " undelfs: РїР°РјС‹Р»РєР° "
 
 msgid " not enough memory "
-msgstr " недастаткова памяці "
+msgstr " РЅРµРґР°СЃС‚Р°С‚РєРѕРІР° РїР°РјСЏС†С– "
 
 msgid " while allocating block buffer "
-msgstr " пры атрыманьні блёку буфераў "
+msgstr " РїСЂС‹ Р°С‚СЂС‹РјР°РЅСЊРЅС– Р±Р»С‘РєСѓ Р±СѓС„РµСЂР°Сћ "
 
 #, c-format
 msgid " open_inode_scan: %d "
@@ -3531,81 +3531,81 @@ msgstr " open_inode_scan: %d "
 
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " пры пачатку сканаваньня inode %d "
+msgstr " РїСЂС‹ РїР°С‡Р°С‚РєСѓ СЃРєР°РЅР°РІР°РЅСЊРЅСЏ inode %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка йнфармацыі аб выдаленых файлах %d inodes"
+msgstr "undelfs: Р·Р°РіСЂСѓР·РєР° Р№РЅС„Р°СЂРјР°С†С‹С– Р°Р± РІС‹РґР°Р»РµРЅС‹С… С„Р°Р№Р»Р°С… %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr " пры выкліке ext2_block_iterate %d "
+msgstr " РїСЂС‹ РІС‹РєР»С–РєРµ ext2_block_iterate %d "
 
 msgid " no more memory while reallocating array "
-msgstr " не хапіла памяці пры пераадкрыцьці масыву "
+msgstr " РЅРµ С…Р°РїС–Р»Р° РїР°РјСЏС†С– РїСЂС‹ РїРµСЂР°Р°РґРєСЂС‹С†СЊС†С– РјР°СЃС‹РІСѓ "
 
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " пры сканаваньні inode %d "
+msgstr " РїСЂС‹ СЃРєР°РЅР°РІР°РЅСЊРЅС– inode %d "
 
 msgid " Ext2lib error "
-msgstr " Збой Ext2lib "
+msgstr " Р—Р±РѕР№ Ext2lib "
 
 #, c-format
 msgid " Cannot open file %s "
-msgstr " Немагчыма адчыніць файл %s "
+msgstr " РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ С„Р°Р№Р» %s "
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чытаньне бітавай мапы inode..."
+msgstr "undelfs: С‡С‹С‚Р°РЅСЊРЅРµ Р±С–С‚Р°РІР°Р№ РјР°РїС‹ inode..."
 
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Немагчыма загрузіць бітавую мапу inode з:\n"
+" РќРµРјР°РіС‡С‹РјР° Р·Р°РіСЂСѓР·С–С†СЊ Р±С–С‚Р°РІСѓСЋ РјР°РїСѓ inode Р·:\n"
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: чытаньне блёку бітавай мапы..."
+msgstr "undelfs: С‡С‹С‚Р°РЅСЊРЅРµ Р±Р»С‘РєСѓ Р±С–С‚Р°РІР°Р№ РјР°РїС‹..."
 
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
-"  Немагчыма загрузіць блёк бітавай мапы з:\n"
+"  РќРµРјР°РіС‡С‹РјР° Р·Р°РіСЂСѓР·С–С†СЊ Р±Р»С‘Рє Р±С–С‚Р°РІР°Р№ РјР°РїС‹ Р·:\n"
 " %s \n"
 
 msgid " vfs_info is not fs! "
-msgstr " vfs_info ня файлавая сыстэма! "
+msgstr " vfs_info РЅСЏ С„Р°Р№Р»Р°РІР°СЏ СЃС‹СЃС‚СЌРјР°! "
 
 msgid " You have to chdir to extract files first "
-msgstr " Вы павінны спачатку зьмяніць каталёг каб выбраць файлы "
+msgstr " Р’С‹ РїР°РІС–РЅРЅС‹ СЃРїР°С‡Р°С‚РєСѓ Р·СЊРјСЏРЅС–С†СЊ РєР°С‚Р°Р»С‘Рі РєР°Р± РІС‹Р±СЂР°С†СЊ С„Р°Р№Р»С‹ "
 
 msgid " while iterating over blocks "
-msgstr "на час ітэрацыяў паверх блёкаў"
+msgstr "РЅР° С‡Р°СЃ С–С‚СЌСЂР°С†С‹СЏСћ РїР°РІРµСЂС… Р±Р»С‘РєР°Сћ"
 
 msgid "Cannot parse:"
-msgstr "Немагчыма прааналізаваць:"
+msgstr "РќРµРјР°РіС‡С‹РјР° РїСЂР°Р°РЅР°Р»С–Р·Р°РІР°С†СЊ:"
 
 msgid "More parsing errors will be ignored."
-msgstr "Астатнія памылкі аналізу будуць праігнараваныя."
+msgstr "РђСЃС‚Р°С‚РЅС–СЏ РїР°РјС‹Р»РєС– Р°РЅР°Р»С–Р·Сѓ Р±СѓРґСѓС†СЊ РїСЂР°С–РіРЅР°СЂР°РІР°РЅС‹СЏ."
 
 msgid "Internal error:"
-msgstr " Нутраная памылка:"
+msgstr " РќСѓС‚СЂР°РЅР°СЏ РїР°РјС‹Р»РєР°:"
 
 msgid "Changes to file lost"
-msgstr "Зьмены для файлу страчаны"
+msgstr "Р—СЊРјРµРЅС‹ РґР»СЏ С„Р°Р№Р»Сѓ СЃС‚СЂР°С‡Р°РЅС‹"
 
 #~ msgid "&Home"
-#~ msgstr "&Пэрсанальны"
+#~ msgstr "&РџСЌСЂСЃР°РЅР°Р»СЊРЅС‹"
 
 #~ msgid "&Type"
-#~ msgstr "&Тып"
+#~ msgstr "&РўС‹Рї"
 
 #~ msgid "&Links"
-#~ msgstr "&Спасылкі"
+#~ msgstr "&РЎРїР°СЃС‹Р»РєС–"
 
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
@@ -3614,125 +3614,125 @@ msgstr "Зьмены для файлу страчаны"
 #~ msgstr "N&UID"
 
 #~ msgid "&Owner"
-#~ msgstr "&Уладальнік"
+#~ msgstr "&РЈР»Р°РґР°Р»СЊРЅС–Рє"
 
 #~ msgid "&Group"
-#~ msgstr "&Група"
+#~ msgstr "&Р“СЂСѓРїР°"
 
 #~ msgid "MC was unable to write ~/"
-#~ msgstr "MC ня можа пісаць у файл ~/,"
+#~ msgstr "MC РЅСЏ РјРѕР¶Р° РїС–СЃР°С†СЊ Сѓ С„Р°Р№Р» ~/,"
 
 #~ msgid " (%ld blocks)"
-#~ msgstr " (%ld блёкаў)"
+#~ msgstr " (%ld Р±Р»С‘РєР°Сћ)"
 
 #~ msgid " Notice "
-#~ msgstr " Папярэджаньне "
+#~ msgstr " РџР°РїСЏСЂСЌРґР¶Р°РЅСЊРЅРµ "
 
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
 #~ " files have been moved now\n"
 #~ msgstr ""
-#~ " Файлы канфігурацыі Midnight Commander \n"
-#~ " захоўваюцца ў каталёгу ~/.mc, старыя  \n"
-#~ " файлы зараз туды перамешчаныя\n"
+#~ " Р¤Р°Р№Р»С‹ РєР°РЅС„С–РіСѓСЂР°С†С‹С– Midnight Commander \n"
+#~ " Р·Р°С…РѕСћРІР°СЋС†С†Р° Сћ РєР°С‚Р°Р»С‘РіСѓ ~/.mc, СЃС‚Р°СЂС‹СЏ  \n"
+#~ " С„Р°Р№Р»С‹ Р·Р°СЂР°Р· С‚СѓРґС‹ РїРµСЂР°РјРµС€С‡Р°РЅС‹СЏ\n"
 
 #~ msgid "%s bytes in %d files"
-#~ msgstr "%s байтаў у %d файлах"
+#~ msgstr "%s Р±Р°Р№С‚Р°Сћ Сѓ %d С„Р°Р№Р»Р°С…"
 
 #~ msgid " Cannot open file for reading: "
-#~ msgstr " Памылка адкрыцьця файлу для чытаньня: "
+#~ msgstr " РџР°РјС‹Р»РєР° Р°РґРєСЂС‹С†СЊС†СЏ С„Р°Р№Р»Сѓ РґР»СЏ С‡С‹С‚Р°РЅСЊРЅСЏ: "
 
 #~ msgid " Not an ordinary file: "
-#~ msgstr " Незвычайны файл: "
+#~ msgstr " РќРµР·РІС‹С‡Р°Р№РЅС‹ С„Р°Р№Р»: "
 
 #~ msgid "Format of the "
-#~ msgstr "Фармат "
+#~ msgstr "Р¤Р°СЂРјР°С‚ "
 
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
 #~ "copy it from "
 #~ msgstr ""
-#~ " файлу зьменены\n"
-#~ "у вэрсыі 3.0. Вы можаце ці\n"
-#~ "скапіяваць яго з "
+#~ " С„Р°Р№Р»Сѓ Р·СЊРјРµРЅРµРЅС‹\n"
+#~ "Сѓ РІСЌСЂСЃС‹С– 3.0. Р’С‹ РјРѕР¶Р°С†Рµ С†С–\n"
+#~ "СЃРєР°РїС–СЏРІР°С†СЊ СЏРіРѕ Р· "
 
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
-#~ "mc.ext ці выкарыстоўваць гэты\n"
-#~ "файл як прыклад напісаньня.\n"
+#~ "mc.ext С†С– РІС‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ РіСЌС‚С‹\n"
+#~ "С„Р°Р№Р» СЏРє РїСЂС‹РєР»Р°Рґ РЅР°РїС–СЃР°РЅСЊРЅСЏ.\n"
 
 #~ msgid "mc.ext will be used for this moment."
-#~ msgstr "mc.ext будзе скарыстаны ў бягучы мамэнт."
+#~ msgstr "mc.ext Р±СѓРґР·Рµ СЃРєР°СЂС‹СЃС‚Р°РЅС‹ Сћ Р±СЏРіСѓС‡С‹ РјР°РјСЌРЅС‚."
 
 #~ msgid " Cannot open file "
-#~ msgstr " Немагчыма адчыніць файл "
+#~ msgstr " РќРµРјР°РіС‡С‹РјР° Р°РґС‡С‹РЅС–С†СЊ С„Р°Р№Р» "
 
 #~ msgid "Col %d"
-#~ msgstr "Сл. %d"
+#~ msgstr "РЎР». %d"
 
 #~ msgid "  [grow]"
-#~ msgstr "  [рост]"
+#~ msgstr "  [СЂРѕСЃС‚]"
 
 #~ msgid "Ascii"
-#~ msgstr "Тэкст"
+#~ msgstr "РўСЌРєСЃС‚"
 
 #~ msgid "Hex"
 #~ msgstr "Hex"
 
 #~ msgid "Goto"
-#~ msgstr "Пераход"
+#~ msgstr "РџРµСЂР°С…РѕРґ"
 
 #~ msgid "Line"
-#~ msgstr "Радок"
+#~ msgstr "Р Р°РґРѕРє"
 
 #~ msgid "RxSrch"
-#~ msgstr "РэгВыр"
+#~ msgstr "Р СЌРіР’С‹СЂ"
 
 #~ msgid "EdHex"
-#~ msgstr "HxРэдаг"
+#~ msgstr "HxР СЌРґР°Рі"
 
 #~ msgid "EdText"
-#~ msgstr "ТкстРэд"
+#~ msgstr "РўРєСЃС‚Р СЌРґ"
 
 #~ msgid "UnWrap"
-#~ msgstr "НеПеран"
+#~ msgstr "РќРµРџРµСЂР°РЅ"
 
 #~ msgid "Wrap"
-#~ msgstr "Перанос"
+#~ msgstr "РџРµСЂР°РЅРѕСЃ"
 
 #~ msgid "HxSrch"
-#~ msgstr "HxПошук"
+#~ msgstr "HxРџРѕС€СѓРє"
 
 #~ msgid "Raw"
-#~ msgstr "Сыры"
+#~ msgstr "РЎС‹СЂС‹"
 
 #~ msgid "Parse"
-#~ msgstr "Гатовы"
+#~ msgstr "Р“Р°С‚РѕРІС‹"
 
 #~ msgid "Unform"
-#~ msgstr "НеФармт"
+#~ msgstr "РќРµР¤Р°СЂРјС‚"
 
 #~ msgid "Format"
-#~ msgstr "Фармат"
+#~ msgstr "Р¤Р°СЂРјР°С‚"
 
 #~ msgid "User menu available only in mcedit invoked from mc"
-#~ msgstr "Мэню карыстальніку даступнае толькі ў mcedit, які запушчаны з mc"
+#~ msgstr "РњСЌРЅСЋ РєР°СЂС‹СЃС‚Р°Р»СЊРЅС–РєСѓ РґР°СЃС‚СѓРїРЅР°Рµ С‚РѕР»СЊРєС– Сћ mcedit, СЏРєС– Р·Р°РїСѓС€С‡Р°РЅС‹ Р· mc"
 
 #~ msgid " Socket source routing setup "
-#~ msgstr " Наладка разьмеркаваньня крыніцы сокетаў"
+#~ msgstr " РќР°Р»Р°РґРєР° СЂР°Р·СЊРјРµСЂРєР°РІР°РЅСЊРЅСЏ РєСЂС‹РЅС–С†С‹ СЃРѕРєРµС‚Р°Сћ"
 
 #~ msgid " Enter host name to use as a source routing hop: "
-#~ msgstr " Увядзіце ймя разьмеркавальнага роўтэра-крыніцы: "
+#~ msgstr " РЈРІСЏРґР·С–С†Рµ Р№РјСЏ СЂР°Р·СЊРјРµСЂРєР°РІР°Р»СЊРЅР°РіР° СЂРѕСћС‚СЌСЂР°-РєСЂС‹РЅС–С†С‹: "
 
 #~ msgid " Host name "
-#~ msgstr " Імя сыстэмы "
+#~ msgstr " Р†РјСЏ СЃС‹СЃС‚СЌРјС‹ "
 
 #~ msgid " Error while looking up IP address "
-#~ msgstr " Памылка пошуку IP адрэсы "
+#~ msgstr " РџР°РјС‹Р»РєР° РїРѕС€СѓРєСѓ IP Р°РґСЂСЌСЃС‹ "
 
 #~ msgid ""
 #~ "\n"
@@ -3745,28 +3745,28 @@ msgstr "Зьмены для файлу страчаны"
 #~ "\n"
 #~ "\n"
 #~ "\n"
-#~ "выхад за ніжняю мяжу стэку!\n"
+#~ "РІС‹С…Р°Рґ Р·Р° РЅС–Р¶РЅСЏСЋ РјСЏР¶Сѓ СЃС‚СЌРєСѓ!\n"
 #~ "\n"
 #~ "\n"
 
 #~ msgid " Listing format edit "
-#~ msgstr " Рэдагаваньне фармату вываду"
+#~ msgstr " Р СЌРґР°РіР°РІР°РЅСЊРЅРµ С„Р°СЂРјР°С‚Сѓ РІС‹РІР°РґСѓ"
 
 #~ msgid " New mode is \"%s\" "
-#~ msgstr "Новы рэжым \"%s\" "
+#~ msgstr "РќРѕРІС‹ СЂСЌР¶С‹Рј \"%s\" "
 
 #~ msgid "&Drive...       M-d"
-#~ msgstr "&Дыск...                      M-d"
+#~ msgstr "&Р”С‹СЃРє...                      M-d"
 
 #~ msgid "Use to debug the background code"
-#~ msgstr "Выкарыстоўваць для наладкі коду тла"
+#~ msgstr "Р’С‹РєР°СЂС‹СЃС‚РѕСћРІР°С†СЊ РґР»СЏ РЅР°Р»Р°РґРєС– РєРѕРґСѓ С‚Р»Р°"
 
 #, fuzzy
 #~ msgid "Force subshell execution"
-#~ msgstr "устал. UID пры выкананьні"
+#~ msgstr "СѓСЃС‚Р°Р». UID РїСЂС‹ РІС‹РєР°РЅР°РЅСЊРЅС–"
 
 #~ msgid " No action taken "
-#~ msgstr " Дзеяньне не выканана "
+#~ msgstr " Р”Р·РµСЏРЅСЊРЅРµ РЅРµ РІС‹РєР°РЅР°РЅР° "
 
 #~ msgid " Cannot set source routing (%s)"
-#~ msgstr "Немагчыма ўсталяваць разьмеркаваньне крыніцы (%s)"
+#~ msgstr "РќРµРјР°РіС‡С‹РјР° СћСЃС‚Р°Р»СЏРІР°С†СЊ СЂР°Р·СЊРјРµСЂРєР°РІР°РЅСЊРЅРµ РєСЂС‹РЅС–С†С‹ (%s)"
