@@ -109,4 +109,4 @@ static inline char* mhl_shell_unescape_buf(char* text)
     return text;
 }
 
-#endif // __MHL_SHELL_ESCAPE_H
+#endif

@@ -46,4 +46,4 @@ static inline void* mhl_strhash_lookup(MHL_STRHASH* ht, const char* key)
 	return NULL;
 }
 
-#endif // __MHL_STRHASH_H
+#endif
