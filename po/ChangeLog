@@ -1,3 +1,10 @@
+2009-01-13 Slava Zanko  <slavazanko@gmail.com>
+
+	* be.po: Renamed to be-tarask.po
+	* be.po: Added traditional Belarussian translate from mc-ru-fork.
+	Thanks to Pavel Piatruk <piatruk.p@gmail.com> (AKA berserker)
+	* be-tarask.po: Converted to UTF-8.
+
 2008-06-30  David Martin  <dmartina@excite.com>
 
 	* es.po: Updated Spanish translation. Converted to UTF-8.
