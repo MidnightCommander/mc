@@ -1,0 +1,3777 @@
+# translation of be.po to Belarusian (Official spelling)
+# Pavel Piatruk <piatruk.p@gmail.com>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: be\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-01-13 12:49+0200\n"
+"PO-Revision-Date: 2008-12-21 23:28+0200\n"
+"Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
+"Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid " Choose syntax highlighting "
+msgstr " Выберыце падсветку сінтаксісу "
+
+msgid "< Auto >"
+msgstr "< Аўтаматычна >"
+
+msgid "< Reload Current Syntax >"
+msgstr "< Перагрузіць бягучы сінтаксіс >"
+
+#, c-format
+msgid " Cannot open %s for reading "
+msgstr " Памылка адкрыцця %s чытання"
+
+msgid "Error"
+msgstr "Памылка"
+
+#, c-format
+msgid " Error reading from pipe: %s "
+msgstr " Памылка чытання з каналу: %s "
+
+#, c-format
+msgid " Cannot open pipe for reading: %s "
+msgstr " Памылка адкрыцця каналу для чытання: %s"
+
+#, c-format
+msgid " Cannot get size/permissions for %s "
+msgstr " Немагчыма атрымаць памер/правы доступу для %s "
+
+#, c-format
+msgid " %s is not a regular file "
+msgstr " %s не звычайны файл "
+
+#, c-format
+msgid " File %s is too large "
+msgstr " Файл %s надта вялікі "
+
+msgid "Macro recursion is too deep"
+msgstr "Рэкурсія макрасу надта глыбокая"
+
+msgid " Enter file name: "
+msgstr " Увядзіце назву файла: "
+
+msgid "Warning"
+msgstr "Папярэджанне"
+
+msgid " File has hard-links. Detach before saving? "
+msgstr " Файл мае жорсткія спасылкі. Адлучыць перад захаваннем? "
+
+msgid "&Yes"
+msgstr "&Так"
+
+msgid "&No"
+msgstr "&Не"
+
+msgid "&Cancel"
+msgstr "&Скасаваць"
+
+msgid "The file has been modified in the meantime. Save anyway?"
+msgstr "Файл быў зменены іншым працэсам. Захаваць прымусова?"
+
+msgid " Error writing to pipe: "
+msgstr " Памылка запісу ў канал: "
+
+msgid " Cannot open pipe for writing: "
+msgstr " Памылка адкрыцця каналу для запісу: "
+
+msgid "Quick save "
+msgstr "Хуткае захаванне "
+
+msgid "Safe save "
+msgstr "Бяспечнае захаванне "
+
+msgid "Do backups -->"
+msgstr "Зрабіць рэзервовыя копіі -->"
+
+msgid "&OK"
+msgstr "&Так"
+
+msgid "Extension:"
+msgstr "Пашырэнне:"
+
+msgid " Edit Save Mode "
+msgstr " Рэжым захавання"
+
+msgid " Save As "
+msgstr " Захаваць як "
+
+msgid " A file already exists with this name. "
+msgstr " Файл з такой назвай ужо існуе. "
+
+msgid "&Overwrite"
+msgstr "&Перапісаць"
+
+msgid " Cannot save file. "
+msgstr " Памылка пры захаванні файла. "
+
+msgid "Cancel"
+msgstr "Скасаваць"
+
+msgid " Delete macro "
+msgstr " Выдаліць макрас "
+
+msgid " Cannot open temp file "
+msgstr " Памылка пры адкрыцці часовага файла "
+
+msgid " Cannot open macro file "
+msgstr " Памылка пры адкрыцці файла макрасаў "
+
+msgid " Cannot overwrite macro file "
+msgstr " Памылка пры перазапісе файла макрасаў "
+
+msgid " Save macro "
+msgstr " Захаваць макрас "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Націсніце новую клавішу макрасу "
+
+msgid " Press macro hotkey: "
+msgstr " Націсніце гарачую клавішу для макраса: "
+
+msgid " Load macro "
+msgstr " Загрузіць макрас "
+
+msgid " Confirm save file? : "
+msgstr " Cцвярджаеце запіс файла? : "
+
+msgid " Save file "
+msgstr " Захаваць файл "
+
+msgid "&Save"
+msgstr "&Захаваць"
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Бягучы тэкст быў мадыфікаваны і не захаваны. \n"
+" Працяг аперацыі прывядзе да страты зменаў. "
+
+msgid "C&ontinue"
+msgstr "Пра&цягнуць"
+
+msgid " Load "
+msgstr " Загрузіць "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Блок завялікі: мажліва, не атрымаецца вярнуць гэтую аперацыю "
+
+msgid "O&ne"
+msgstr "&Адзін"
+
+msgid "A&ll"
+msgstr "&Усе"
+
+msgid "&Skip"
+msgstr "П&рапусціць"
+
+msgid "&Replace"
+msgstr "&Замяніць"
+
+msgid " Replace with: "
+msgstr " Замяніць на: "
+
+msgid " Confirm replace "
+msgstr " Пацвердзіць замену "
+
+msgid "scanf &Expression"
+msgstr "выраз &scanf"
+
+msgid "replace &All"
+msgstr "Замяніць &Усе"
+
+msgid "pro&Mpt on replace"
+msgstr "Пацвердзіць &замену"
+
+msgid "&Backwards"
+msgstr "&Назад"
+
+msgid "&Regular expression"
+msgstr "&Сталы выраз"
+
+msgid "&Whole words only"
+msgstr "Толькі поўныя &словы"
+
+msgid "case &Sensitive"
+msgstr "Улік рэ&гістру"
+
+msgid " Enter replacement argument order eg. 3,2,1,4 "
+msgstr " Увядзіце парадак аргументаў замены, напр. 3,2,1,4 "
+
+msgid " Enter replacement string:"
+msgstr " Увядзіце тэкст для замены: "
+
+msgid " Enter search string:"
+msgstr " Увядзіце радок для пошуку:"
+
+msgid " Replace "
+msgstr " Замяніць "
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
+msgstr " Памылковы сталы выраз ці ў scanf-фармаце шмат пераўтварэнняў"
+
+msgid " Error in replacement format string. "
+msgstr " Памылка ў фармаце радку замены "
+
+msgid " Replacement too long. "
+msgstr " Замена завялікая. "
+
+#, c-format
+msgid " %ld replacements made. "
+msgstr " Здзейснена падстановак: %ld "
+
+msgid " Search string not found "
+msgstr "Радок пошуку не знойдзены "
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d адшукана, %d закладак дадана "
+
+msgid "Quit"
+msgstr "Выхад"
+
+msgid " File was modified, Save with exit? "
+msgstr " Файл быў зменены, захаваць пры выхадзе? "
+
+msgid "&Cancel quit"
+msgstr "Пера&рваць выхад"
+
+msgid " Error "
+msgstr " Памылка "
+
+msgid " This function is not implemented. "
+msgstr "Гэта функцыя не ажыццяўлена"
+
+msgid " Copy to clipboard "
+msgstr " Капіяваць у буфер "
+
+msgid " Unable to save to file. "
+msgstr " Немагчыма захаваць у файл. "
+
+msgid " Cut to clipboard "
+msgstr " Выразаць у буфер "
+
+msgid " Goto line "
+msgstr " Перайсці да радка "
+
+msgid " Enter line: "
+msgstr " Увядзіце нумар радка: "
+
+msgid " Save Block "
+msgstr " Захаваць блок "
+
+msgid " Insert File "
+msgstr " Уставіць файл "
+
+msgid " Cannot insert file. "
+msgstr " Памылка пры ўстаўцы файла. "
+
+msgid " Sort block "
+msgstr " Сартаваць блок "
+
+msgid " You must first highlight a block of text. "
+msgstr " Вы павінны спачатку вылучыць блок тэксту. "
+
+msgid " Run Sort "
+msgstr " Выканаць санне "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Увядзіце парамэтры сартавання(man sort(1)), разлучаныя прагаламі "
+
+msgid " Sort "
+msgstr " Сартаванне "
+
+msgid " Cannot execute sort command "
+msgstr " Памылка пры выкананні каманды sort "
+
+msgid " Sort returned non-zero: "
+msgstr " Сартаванне вярнула нянулявы код: "
+
+msgid "Paste output of external command"
+msgstr "Уставіць вывад знешней каманды"
+
+msgid "Enter shell command(s):"
+msgstr " Увядзіце каманду(ы) абалонкі: "
+
+msgid "External command"
+msgstr "Знешняя каманда"
+
+msgid "Cannot execute command"
+msgstr " Памылка пры выкананні каманды "
+
+msgid "Error creating script:"
+msgstr "Памылка стварэння скрыпта:"
+
+msgid "Error reading script:"
+msgstr "Памылка чытання скрыпта:"
+
+msgid "Error closing script:"
+msgstr "Памылка закрыцця скрыпта:"
+
+msgid "Script created:"
+msgstr "Скрыпт створаны:"
+
+msgid "Process block"
+msgstr "Апрацаваць блок"
+
+msgid " Mail "
+msgstr " Пошта "
+
+msgid " Copies to"
+msgstr " Копіі на "
+
+msgid " Subject"
+msgstr " Тэма"
+
+msgid " To"
+msgstr " Каму"
+
+msgid " mail -s <subject> -c <cc> <to>"
+msgstr " mail -s <Тэма> -c <Копіі> <Каму>"
+
+msgid " Insert Literal "
+msgstr " Уставіць літэрал "
+
+msgid " Press any key: "
+msgstr " Націсніце любую клавішу: "
+
+msgid " Execute Macro "
+msgstr " Выканаць макрас "
+
+msgid "&Dismiss"
+msgstr "&Закрыць"
+
+msgid " Emacs key: "
+msgstr " Клавіша Emacs: "
+
+#, c-format
+msgid ""
+"File \"%s\" is already being edited\n"
+"User: %s\n"
+"Process ID: %d"
+msgstr ""
+"Файл \"%s\" быў адрэдагаваны\n"
+"Карыстальнік: %s\n"
+"PID: %d"
+
+msgid "File locked"
+msgstr "Файл заблакаваны"
+
+msgid "&Grab lock"
+msgstr "Захапіць блакоўку"
+
+#, fuzzy
+msgid "&Ignore lock"
+msgstr "Захапіць блакоўку"
+
+msgid " About "
+msgstr " Аб праграме "
+
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                     Cooledit  v3.11.5\n"
+"\n"
+"       Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+" Тэкставы рэдактар з сяброўскім інтэрфейсам карыстальніку.\n"
+"               Створаны для Midnight Commander.\n"
+
+msgid "&Open file..."
+msgstr "&Адкрыць файл..."
+
+msgid "&New              C-n"
+msgstr "&Новы файл             C-n"
+
+msgid "&Save              F2"
+msgstr "&Захаваць              F2"
+
+msgid "Save &as...       F12"
+msgstr "Захаваць &як...        F12"
+
+msgid "&Insert file...   F15"
+msgstr "&Уставіць файл...      F15"
+
+msgid "Copy to &file...  C-f"
+msgstr "&Капіяваць у файл...   C-f"
+
+msgid "&User menu...     F11"
+msgstr "&Меню карыстальніка... F11"
+
+msgid "A&bout...            "
+msgstr "Пра &аўтараў..."
+
+msgid "&Quit             F10"
+msgstr "Вы&хад                 F10"
+
+msgid "&New            C-x k"
+msgstr "&Новы файл         C-x k"
+
+msgid "Copy to &file...     "
+msgstr "&Капіяваць у файл..."
+
+msgid "&Toggle Mark       F3"
+msgstr "&Выдаленне блоку      F3"
+
+msgid "&Mark Columns    S-F3"
+msgstr "Вылучыць &слупкі      S-F3"
+
+msgid "Toggle &ins/overw Ins"
+msgstr "&Рэжым устаўкі/замены Ins"
+
+msgid "&Copy              F5"
+msgstr "&Капіяваць блок       F5"
+
+msgid "&Move              F6"
+msgstr "&Перамясціць блок     F6"
+
+msgid "&Delete            F8"
+msgstr "&Выдаліць блок        F8"
+
+msgid "&Undo             C-u"
+msgstr "&Адкат аперацыі       C-u"
+
+msgid "&Beginning     C-PgUp"
+msgstr "&Пачатак файла        C-PgUp"
+
+msgid "&End           C-PgDn"
+msgstr "Канец &файла          C-PgDn"
+
+msgid "&Search...         F7"
+msgstr "&Пошук...       F7"
+
+msgid "Search &again     F17"
+msgstr "Пра&цяг пошуку  F17"
+
+msgid "&Replace...        F4"
+msgstr "&Замена...      F4"
+
+msgid "&Go to line...            M-l"
+msgstr "&Перайсці да радка         M-l"
+
+msgid "Go to matching &bracket   M-b"
+msgstr "Ісці да парнай &дужкі      M-b"
+
+msgid "Insert &literal...       C-q"
+msgstr "Уставіць &літэрал...       C-q"
+
+msgid "&Refresh screen          C-l"
+msgstr "Пера&маляваць экран        C-l"
+
+msgid "&Start record macro      C-r"
+msgstr "Па&чаць запіс макрасу      C-r"
+
+msgid "&Finish record macro...  C-r"
+msgstr "С&кончыць запіс макрасу... C-r"
+
+msgid "&Execute macro...   C-a, KEY"
+msgstr "&Выканаць макрас...        C-a, KEY"
+
+msgid "Delete macr&o...            "
+msgstr "В&ыдаліць макрас"
+
+msgid "Insert &date/time           "
+msgstr "Уставіць &Дату/час"
+
+msgid "Format p&aragraph        M-p"
+msgstr "Фарматаваць &параграф      M-p"
+
+msgid "'ispell' s&pell check    C-p"
+msgstr "&Кантроль правапісу        C-p"
+
+msgid "Sor&t...                 M-t"
+msgstr "&Сартаванне                M-t"
+
+msgid "Paste o&utput of...      M-u"
+msgstr "Уставіць в&ывад ад ...     M-u"
+
+msgid "E&xternal Formatter      F19"
+msgstr "&Знешняе фарматаванне      F19"
+
+msgid "&Mail...                    "
+msgstr "&Электроная пошта..."
+
+msgid "&Execute macro... C-x e, KEY"
+msgstr "&Выканаць макрас... C-x e, KEY"
+
+msgid "'ispell' s&pell check    M-$"
+msgstr "&Кантроль правапісу        M-$"
+
+msgid "&General...  "
+msgstr "&Асноўнае..."
+
+msgid "&Save mode..."
+msgstr "Рэжым &захавання..."
+
+msgid "Learn &Keys..."
+msgstr "В&ызначэнне клавіш..."
+
+msgid "Syntax &Highlighting..."
+msgstr "Вылучэнне &колерам сінтаксісу..."
+
+msgid "Save setu&p..."
+msgstr "&Захаваць наладку..."
+
+msgid " File "
+msgstr " Файл "
+
+msgid " Edit "
+msgstr " Рэдагаванне "
+
+msgid " Sear/Repl "
+msgstr " Пошук/Замена "
+
+msgid " Command "
+msgstr " Каманда "
+
+msgid " Options "
+msgstr " Наладкі "
+
+msgid "Intuitive"
+msgstr "Інтуіцыйная"
+
+msgid "Emacs"
+msgstr "Emacs"
+
+msgid "User-defined"
+msgstr "Вызначаны карыстальнікам"
+
+msgid "None"
+msgstr "Адключаны"
+
+msgid "Dynamic paragraphing"
+msgstr "Дынаміч. разбіўка параграфу"
+
+msgid "Type writer wrap"
+msgstr "Аўтаперанос"
+
+msgid "Word wrap line length: "
+msgstr "Пазіцыя пераносу радкоў :"
+
+msgid "Tab spacing: "
+msgstr "Крок табуляцыі : "
+
+#, fuzzy
+msgid "Synta&x highlighting"
+msgstr "Падсветка сінтаксісу"
+
+msgid "Save file &position"
+msgstr "Захаваць пазіцыю файла"
+
+msgid "Confir&m before saving"
+msgstr "П&ацверджанне запісу файла"
+
+msgid "Fill tabs with &spaces"
+msgstr "&Запаўняць табуляцыю прагаламі"
+
+msgid "&Return does autoindent"
+msgstr "&Аўтараўнанне зваротам карэткі"
+
+msgid "&Backspace through tabs"
+msgstr "&Забой, абыходзячы табуляцыю"
+
+msgid "&Fake half tabs"
+msgstr "&Сімуляваць няпоўн.табуляцыю"
+
+msgid "Wrap mode"
+msgstr "Рэжым пераносу радкоў"
+
+msgid "Key emulation"
+msgstr "Эмуляцыя раскладкі клавішаў"
+
+msgid " Editor options "
+msgstr " Наладкі рэдактару "
+
+msgid "Help"
+msgstr "Дапамога"
+
+msgid "Save"
+msgstr "Запіс"
+
+msgid "Mark"
+msgstr "Пазначыць"
+
+msgid "Replac"
+msgstr "Замена"
+
+msgid "Copy"
+msgstr "Копія"
+
+msgid "Move"
+msgstr "Перамясціць"
+
+msgid "Delete"
+msgstr "Выдаліць"
+
+msgid "PullDn"
+msgstr "МенюMC"
+
+msgid " Load syntax file "
+msgstr " Загрузіць сінтаксічны файл "
+
+#, c-format
+msgid ""
+" Cannot open file %s \n"
+" %s "
+msgstr ""
+" Немагчыма адкрыць файл %s \n"
+" %s "
+
+#, c-format
+msgid " Error in file %s on line %d "
+msgstr " Памылка ў файле %s у радку %d "
+
+#, c-format
+msgid "bind: Wrong argument number, bind <key> <command>"
+msgstr "bind: Памылковая кольскасць параметраў, bind <клавіша> <каманда>"
+
+#, c-format
+msgid "bind: Bad key value `%s'"
+msgstr "bind: Дрэннае значэнне клавішы `%s'"
+
+#, c-format
+msgid "bind: Ehh...no key?"
+msgstr "bind: Гм, няма клавішы?"
+
+#, c-format
+msgid "bind: Unknown key: `%s'"
+msgstr "bind: Невядомая клавіша: `%s'"
+
+#, c-format
+msgid "bind: Unknown command: `%s'"
+msgstr "bind: Невядомая каманда:`%s'"
+
+#, c-format
+msgid "%s: Syntax: %s <n> <command> <label>"
+msgstr "%s: Сінатаксіс: %s <n> <каманда> <пазнака>"
+
+#, c-format
+msgid "%s: Unknown command: `%s'"
+msgstr "%s: Невядомая каманда: `%s'"
+
+#, c-format
+msgid "%s: fn should be 1-10"
+msgstr "%s: fn мусіць быць 1-10"
+
+#, c-format
+msgid "%s: fopen(): %s"
+msgstr "%s: fopen(): %s"
+
+#, c-format
+msgid "%s:%d: unknown command `%s'"
+msgstr "%s:%d: невядомая каманда `%s'"
+
+#, c-format
+msgid "%s:%d: %s"
+msgstr "%s:%d: %s"
+
+#, c-format
+msgid "%s not found!"
+msgstr "%s адсутнічае!"
+
+msgid "&Set"
+msgstr "&Усталяваць"
+
+msgid "S&kip"
+msgstr "П&рапусціць"
+
+msgid "Set &all"
+msgstr "Усталяваць &усе"
+
+msgid "owner"
+msgstr "уладальнік"
+
+msgid "group"
+msgstr "група"
+
+msgid "other"
+msgstr "іншыя"
+
+msgid "On"
+msgstr "На"
+
+msgid "Flag"
+msgstr "сцяг"
+
+msgid "Mode"
+msgstr "Рэжым"
+
+#, c-format
+msgid "%6d of %d"
+msgstr "%6d з %d"
+
+msgid " Chown advanced command "
+msgstr " Пашыраная каманда chown "
+
+#, c-format
+msgid ""
+" Cannot chmod \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма змяніць доступ \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot chown \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма змяніць уладальніка \"%s\" \n"
+" %s "
+
+msgid " Background process error "
+msgstr " Памылка працэса ў фоне "
+
+msgid " Unknown error in child "
+msgstr " Невядомая памылка ў дачэрнім працэсе "
+
+msgid " Child died unexpectedly "
+msgstr " Дачэрні працэс нечакана памёр "
+
+msgid " Background protocol error "
+msgstr " Памылка пратаколу тла"
+
+msgid ""
+" Background process sent us a request for more arguments \n"
+" than we can handle. \n"
+msgstr ""
+" Працэс у тле запытвае болей аргументаў, \n"
+" чым мажліва кантраляваць. \n"
+
+msgid "&Full file list"
+msgstr "&Поўны спіс файлаў"
+
+msgid "&Brief file list"
+msgstr "&Скарочаны спіс файлаў"
+
+msgid "&Long file list"
+msgstr "&Пашыраны спіс файлаў"
+
+msgid "&User defined:"
+msgstr "Паводле &карыстальніка:"
+
+msgid "Listing mode"
+msgstr "Фармат спісу файлаў"
+
+msgid "user &Mini status"
+msgstr "&міні-стан паводле карыстальніка"
+
+msgid "&Reverse"
+msgstr "&Адваротны"
+
+msgid "case sensi&tive"
+msgstr "Улік рэ&гістру"
+
+msgid "Sort order"
+msgstr "Парадак сартавання"
+
+msgid " confirm di&Rectory hotlist delete "
+msgstr " пацверджанне выдалення &спісу каталогаў "
+
+msgid " confirm &Exit "
+msgstr " пацверджанне &выхаду"
+
+msgid " confirm e&Xecute "
+msgstr " пацверджанне вы&канання"
+
+msgid " confirm o&Verwrite "
+msgstr " пацверджанне &Перазапісу"
+
+msgid " confirm &Delete "
+msgstr " пацверджанне &Выдалення"
+
+msgid " Confirmation "
+msgstr " Запыт пацверджання"
+
+msgid "Full 8 bits output"
+msgstr "Поўны 8-бітны вывад"
+
+msgid "ISO 8859-1"
+msgstr "ISO 8859-1"
+
+msgid "7 bits"
+msgstr "7 бітаў"
+
+msgid "F&ull 8 bits input"
+msgstr "По&ўны 8-бітны ўвод"
+
+msgid " Display bits "
+msgstr " Адлюстраванне сімвалаў "
+
+msgid "Other 8 bit"
+msgstr "Іншыя 8 bit"
+
+msgid "Input / display codepage:"
+msgstr "Кодавая старонка:"
+
+#, fuzzy
+msgid "&Select"
+msgstr " Вылучыць "
+
+msgid "Use passive mode over pro&xy"
+msgstr "Ужыць &пасіўны рэжым праз проксі"
+
+msgid "Use &passive mode"
+msgstr "Ужыць &пасіўны рэжым"
+
+msgid "&Use ~/.netrc"
+msgstr "&Выкарыстоўваць ~/.netrc"
+
+msgid "&Always use ftp proxy"
+msgstr "&Заўжды выкарыстоўваць FTP проксі"
+
+msgid "sec"
+msgstr "сек"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "Тайм-аўт кэшу каталога FTP:"
+
+msgid "ftp anonymous password:"
+msgstr "Пароль ананімнага FTP:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Тайм-аўт вызвалення VFS:"
+
+msgid " Virtual File System Setting "
+msgstr " Наладка Віртуальнае Файлавае Сістэмы "
+
+msgid "Quick cd"
+msgstr " Хуткая змена каталога "
+
+msgid "cd"
+msgstr "Перайсці ў"
+
+msgid "Symbolic link filename:"
+msgstr "Назва сімвалічнай спасылкі:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Назва існуючага файла (для спасылкі):"
+
+msgid "Symbolic link"
+msgstr "Сімвалічная спасылка"
+
+msgid "Running "
+msgstr "Выконваецца "
+
+msgid "Stopped"
+msgstr "Спынены"
+
+msgid "&Stop"
+msgstr "&Спыніць"
+
+msgid "&Resume"
+msgstr "&Узнавіць"
+
+msgid "&Kill"
+msgstr "&Забіць"
+
+msgid "Background Jobs"
+msgstr "Заданні ў тле"
+
+msgid "Domain:"
+msgstr "Дамен:"
+
+msgid "Username:"
+msgstr "Імя карыстальніка:"
+
+msgid "Password:"
+msgstr "Пароль:"
+
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Пароль для \\\\%s\\%s"
+
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Увага: файл %s адсутнічае\n"
+
+#, fuzzy, c-format
+msgid "Cannot translate from %s to %s"
+msgstr ""
+" Немагчыма атрымаць уласцівасці файла \"%s\" \n"
+" %s "
+
+msgid "execute/search by others"
+msgstr "запуск/пошук для іншых"
+
+msgid "write by others"
+msgstr "запіс для іншых"
+
+msgid "read by others"
+msgstr "чытанне для іншых"
+
+msgid "execute/search by group"
+msgstr "запуск/пошук для групы"
+
+msgid "write by group"
+msgstr "запіс для групы"
+
+msgid "read by group"
+msgstr "чытанне для групы"
+
+msgid "execute/search by owner"
+msgstr "запуск/пошук для ўладальн."
+
+msgid "write by owner"
+msgstr "запіс для ўладальн."
+
+msgid "read by owner"
+msgstr "чытанне для ўладальн."
+
+msgid "sticky bit"
+msgstr "ліпкі (sticky) біт"
+
+msgid "set group ID on execution"
+msgstr "устал. GID пры выкананні"
+
+msgid "set user ID on execution"
+msgstr "устал. UID пры выкананні"
+
+msgid "C&lear marked"
+msgstr "&Ачысціць пазначанае"
+
+msgid "S&et marked"
+msgstr "&Усталяваць пазначанае"
+
+msgid "&Marked all"
+msgstr "Пазначыць &усе"
+
+msgid "Name"
+msgstr "Імя"
+
+msgid "Permissions (Octal)"
+msgstr "Доступ (васьмірычны)"
+
+msgid "Owner name"
+msgstr "Імя ўладальніка"
+
+msgid "Group name"
+msgstr "Імя групы"
+
+msgid "Use SPACE to change"
+msgstr "ПРАГАЛ - для змен"
+
+msgid "an option, ARROW KEYS"
+msgstr "опцыяў, КЛАВІШЫ-СТРЭЛКІ - "
+
+msgid "to move between options"
+msgstr "перамяшчэнне між опцыямі"
+
+msgid "and T or INS to mark"
+msgstr "і T ці INS для пазначэння"
+
+msgid " Permission "
+msgstr " Правы доступу "
+
+msgid "Chmod command"
+msgstr " Каманда chmod "
+
+msgid "Set &users"
+msgstr "Усталяваць &карыстальнікаў"
+
+msgid "Set &groups"
+msgstr "Усталяваць &групы"
+
+msgid " Name "
+msgstr " Імя "
+
+msgid " Owner name "
+msgstr " Імя ўладальніка "
+
+msgid " Group name "
+msgstr " Імя групы "
+
+msgid " Size "
+msgstr " Памер "
+
+msgid " User name "
+msgstr " Імя карыстальніка "
+
+msgid " Chown command "
+msgstr " Каманда chown "
+
+msgid "<Unknown user>"
+msgstr "<Невядомы карыстальнік>"
+
+msgid "<Unknown group>"
+msgstr "<Невядомая група>"
+
+msgid "Files tagged, want to cd?"
+msgstr "Файлы пазначаныя, замяніць каталог?"
+
+msgid "Cannot change directory"
+msgstr "Немагчыма змяніць каталог"
+
+msgid " View file "
+msgstr " Прагляд файла "
+
+msgid " Filename:"
+msgstr " Назва файла:"
+
+msgid " Filtered view "
+msgstr " Прагляд праз вывад каманды "
+
+msgid " Filter command and arguments:"
+msgstr " Увядзіце каманду фільтру і яе аргумэнты: "
+
+msgid "Create a new Directory"
+msgstr " Стварыць новы каталог "
+
+msgid " Enter directory name:"
+msgstr " Увядзіце імя каталога:"
+
+msgid " Filter "
+msgstr " Фільтр "
+
+msgid " Set expression for filtering filenames"
+msgstr " Задайце выраз для адбору назваў файлаў"
+
+msgid "  Malformed regular expression  "
+msgstr "  Сталы выраз сфармаваны памылкова"
+
+msgid " Select "
+msgstr " Вылучыць "
+
+msgid " Unselect "
+msgstr " Зняць вылучэнне "
+
+msgid "Extension file edit"
+msgstr " Рэдагаваць файла пашырэнняў "
+
+msgid " Which extension file you want to edit? "
+msgstr " Які файл пашырэнняў Вы жадаеце рэдагаваць? "
+
+msgid "&User"
+msgstr "&Карыстальніцкі"
+
+msgid "&System Wide"
+msgstr "&Агульнасістэмны"
+
+msgid " Menu edit "
+msgstr " Праўка файла меню "
+
+msgid " Which menu file do you want to edit? "
+msgstr " Які файл меню Вы жадаеце рэдагаваць? "
+
+msgid "&Local"
+msgstr "&Лакальны"
+
+msgid "Syntax file edit"
+msgstr "Рэдагаванне файла сінтанксісу"
+
+msgid " Which syntax file you want to edit? "
+msgstr " Які файл сінтаксісу Вы жадаеце рэдагаваць? "
+
+msgid " Compare directories "
+msgstr " Параўнаць каталогі "
+
+msgid " Select compare method: "
+msgstr " Абярыце метад параўнання: "
+
+msgid "&Quick"
+msgstr "&Хуткі"
+
+msgid "&Size only"
+msgstr "Па &памеры"
+
+msgid "&Thorough"
+msgstr "Па&байтны"
+
+msgid " Both panels should be in the listing mode to use this command "
+msgstr " Для выканання гэтай каманды абедзве панэлі мусяць быць у рэжыме спісу"
+
+msgid " The command history is empty "
+msgstr " Гісторыя каманд пустая "
+
+msgid " Command history "
+msgstr " Гісторыя каманд "
+
+msgid ""
+" Not an xterm or Linux console; \n"
+" the panels cannot be toggled. "
+msgstr ""
+" Гэта не xterm і не кансоль Linux; \n"
+" Панэлі не могуць быць адключаны. "
+
+#, c-format
+msgid "Link %s to:"
+msgstr "Спасылка %s на :"
+
+msgid " Link "
+msgstr " Спасылка "
+
+#, c-format
+msgid " link: %s "
+msgstr " спасылка: %s "
+
+#, c-format
+msgid " symlink: %s "
+msgstr " сімвалічная спасылка: %s "
+
+#, c-format
+msgid " Symlink `%s' points to: "
+msgstr " Сімвалічная спасылка `%s' указвае на: "
+
+msgid " Edit symlink "
+msgstr " Рэдагаванне сімвалічнай спасылкі "
+
+#, c-format
+msgid " edit symlink, unable to remove %s: %s "
+msgstr " рэдагаванне сімвалічнай спасылкі, немагчыма выдаліць %s: %s "
+
+#, c-format
+msgid " edit symlink: %s "
+msgstr " рэдагаванне сімвалічнай спасылкі: %s "
+
+#, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "`%s' не сімвалічная спасылка"
+
+#, c-format
+msgid " Cannot chdir to %s "
+msgstr " Немагчыма перайсці ў %s "
+
+msgid " Enter machine name (F1 for details): "
+msgstr " Увядзіце назву машыны (дэталі па F1): "
+
+msgid " Link to a remote machine "
+msgstr " Злучэнне з аддаленай машынай "
+
+msgid " FTP to machine "
+msgstr " FTP-злучэнне з адлеглай машынай "
+
+msgid " Shell link to machine "
+msgstr " Спасылка абалонкі на машыну"
+
+msgid " SMB link to machine "
+msgstr " SMB сувязь з машынай "
+
+msgid " Undelete files on an ext2 file system "
+msgstr " Аднаўленне файлаў на файлавай сістэме ext2 "
+
+msgid ""
+" Enter device (without /dev/) to undelete\n"
+"   files on: (F1 for details)"
+msgstr ""
+" Увядзіце назву прылады (без /dev/), на якой\n"
+" аднаўляць файлы пасля выдалення: (дэталі па F1)"
+
+msgid " Setup "
+msgstr " Наладка "
+
+#, c-format
+msgid " Setup saved to ~/%s"
+msgstr " Налады захаваны ў ~/%s"
+
+#, c-format
+msgid ""
+" Cannot chdir to \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма перайсці ў \"%s\" \n"
+" %s "
+
+msgid " Cannot execute commands on non-local filesystems"
+msgstr " Немагчыма выконваць каманды на нелакальных файлавых сістэмах"
+
+msgid " The shell is already running a command "
+msgstr " Абалонка ўжо апрацоўвае каманду "
+
+msgid "&Unsorted"
+msgstr "&Без сартавання"
+
+msgid "&Name"
+msgstr "&Назва"
+
+msgid "&Extension"
+msgstr "Па&шырэнне"
+
+msgid "&Modify time"
+msgstr "Час &мадыфікацыі"
+
+msgid "&Access time"
+msgstr "Час &доступу"
+
+msgid "C&Hange time"
+msgstr "Час &змянення"
+
+msgid "&Size"
+msgstr "&Памер"
+
+msgid "&Inode"
+msgstr "&Інода"
+
+msgid "Cannot read directory contents"
+msgstr "Немагчыма прычтаць змест каталога"
+
+#, c-format
+msgid "Press any key to continue..."
+msgstr "Для працягу націсніце любую клавішу..."
+
+#, c-format
+msgid "Type `exit' to return to the Midnight Commander"
+msgstr "Увядзіце `exit' для вяртанкаталоў Midnight Commander"
+
+#, c-format
+msgid " Cannot fetch a local copy of %s "
+msgstr " Немагчыма атрымаць лакальную копію %s "
+
+#, c-format
+msgid ""
+" Cannot create temporary command file \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць часовы камандны файл \n"
+" %s "
+
+msgid " Parameter "
+msgstr " Параметр "
+
+#, c-format
+msgid " %s%s file error"
+msgstr " памылка файла %s%s "
+
+#, c-format
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Фармат файла %smc.ext зменены з версіі 3.0. Мажліва адбыўся збой пры "
+"ўсталёўцы. Калі ласка, вазміце свежую копію з пакету Midnight Commander."
+
+#, c-format
+msgid " ~/%s file error "
+msgstr " памылка файла ~/%s "
+
+#, c-format
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Фармат файла ~/%s зменены з версіі 3.0. Вы мусіце або скапіяваць яго з %smc."
+"ext або выкарыстаць гэты файл як узор для напісання свайго."
+
+msgid " Copy "
+msgstr " Капіяванне "
+
+msgid " Move "
+msgstr " Перамяшчэнне "
+
+msgid " Delete "
+msgstr " Выдаленне "
+
+msgid " Invalid target mask "
+msgstr " Памылковы шаблон мэты "
+
+msgid " Cannot make the hardlink "
+msgstr " Немагчыма стварыць жорсткую спасылку "
+
+#, c-format
+msgid ""
+" Cannot read source link \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма прачытаць зыходную спасылку \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot make stable symlinks across non-local filesystems: \n"
+"\n"
+" Option Stable Symlinks will be disabled "
+msgstr ""
+" Немагчыма стварыць устойлівыя сімв. спасылкі праз нелакальныя файлавыя "
+"сістэмы:\n"
+"\n"
+" Опцыя Устойлівыя сімвалічныя спасылкі будзе адключана"
+
+#, c-format
+msgid ""
+" Cannot create target symlink \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць сімв. спасылку мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot overwrite directory \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма перапісаць каталёг \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць уласцівасці зыходнага файла \"%s\" \n"
+" %s "
+
+#, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' і `%s' адзін і той жа файл "
+
+#, c-format
+msgid ""
+" Cannot create special file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць спэцыяльны файл \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot chown target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма змяніць уладальніка файла-мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot chmod target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма змяніць рэжым доступу файла-мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot open source file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма адкрыць зыходны файл \"%s\" \n"
+" %s "
+
+msgid " Reget failed, about to overwrite file "
+msgstr " Збой дапампавання файла, файл будзе перапісаны "
+
+#, c-format
+msgid ""
+" Cannot fstat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць уласцівасці зыходнага файла \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot create target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць файл мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot fstat target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць уласцівасці файла мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot read source file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма прачытаць зыходны файл \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot write target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма запісаць файл мэты \"%s\" \n"
+" %s "
+
+msgid "(stalled)"
+msgstr "(завяз)"
+
+#, c-format
+msgid ""
+" Cannot close source file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма закрыць зыходны файл \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot close target file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма закрыць файл мэты \"%s\" \n"
+" %s "
+
+msgid "Incomplete file was retrieved. Keep it?"
+msgstr "Быў атрыманы няпоўны файл. Захаваць?"
+
+msgid "&Delete"
+msgstr "&Выдаліць"
+
+msgid "&Keep"
+msgstr "&Захаваць"
+
+#, c-format
+msgid ""
+" Cannot stat source directory \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць уласцівасці зыходнага каталога \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Source \"%s\" is not a directory \n"
+" %s "
+msgstr ""
+" Зыходны каталог \"%s\" каталогам не зьяўляецца \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot copy cyclic symbolic link \n"
+" `%s' "
+msgstr ""
+" Немагчыма скапіяваць цыклічную сімвалічную спасылку \n"
+" `%s' "
+
+#, c-format
+msgid ""
+" Destination \"%s\" must be a directory \n"
+" %s "
+msgstr ""
+" Прызначэнне \"%s\" павінна быць каталогам \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot create target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма стварыць каталог мэты \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot chown target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма змяніць уладальніка каталога мэты\"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць уласцівасці файла \"%s\" \n"
+" %s "
+
+#, c-format
+msgid " Cannot overwrite directory `%s' "
+msgstr " Немагчыма перапісаць каталог `%s' "
+
+#, c-format
+msgid ""
+" Cannot move file \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма перамясціць файл \"%s\" в \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot remove file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма выдаліць файл \"%s\" \n"
+" %s "
+
+#, c-format
+msgid " `%s' and `%s' are the same directory "
+msgstr " `%s' і `%s' адзін і той жа каталог "
+
+#, c-format
+msgid " Cannot overwrite directory \"%s\" %s "
+msgstr " Немагчыма перапісаць каталог \"%s\" %s "
+
+#, c-format
+msgid " Cannot overwrite file \"%s\" %s "
+msgstr " Немагчыма перапісаць файл \"%s\" %s "
+
+#, c-format
+msgid ""
+" Cannot move directory \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма перамясціць каталог \"%s\" у \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot delete file \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма выдаліць файл \"%s\" \n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot remove directory \"%s\" \n"
+" %s "
+msgstr ""
+" Немагчыма выдаліць каталог \"%s\" \n"
+" %s "
+
+msgid "1Copy"
+msgstr "1Капіяваць"
+
+msgid "1Move"
+msgstr "1Перанесці"
+
+msgid "1Delete"
+msgstr "1Выдаліць"
+
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
+
+#, no-c-format
+msgid "%o %d %f%m"
+msgstr "%o %d %f%m"
+
+msgid "file"
+msgstr "файл"
+
+msgid "files"
+msgstr "файлы"
+
+msgid "directory"
+msgstr "каталог"
+
+msgid "directories"
+msgstr "каталогі"
+
+msgid "files/directories"
+msgstr "файлы/каталогі"
+
+msgid " with source mask:"
+msgstr " з зыходным шаблонам:"
+
+msgid " to:"
+msgstr " у:"
+
+msgid " Cannot operate on \"..\"! "
+msgstr " Немагчыма выканаць аперацыю на \"..\"! "
+
+msgid " Sorry, I could not put the job in background "
+msgstr " Выбачайце, зрабіць гэта ў тле немагчыма "
+
+msgid "&Retry"
+msgstr "Па&ўтарыць"
+
+msgid "&Abort"
+msgstr "&Перарваць"
+
+msgid ""
+"\n"
+"   Directory not empty.   \n"
+"   Delete it recursively? "
+msgstr ""
+"\n"
+"   Каталог не пусты.    \n"
+"   Выдаліць рэкурсіўна? "
+
+msgid ""
+"\n"
+"   Background process: Directory not empty \n"
+"   Delete it recursively? "
+msgstr ""
+"\n"
+"   Працэс у тле: каталог не пусты \n"
+"   Выдаліць рэкурсіўна? "
+
+msgid " Delete: "
+msgstr " Выдаліць: "
+
+msgid "Non&e"
+msgstr "ні&Воднага"
+
+#, c-format
+msgid "ETA %d:%02d.%02d"
+msgstr "ETA %d:%02d.%02d"
+
+#, c-format
+msgid "%.2f MB/s"
+msgstr "%.2f MB/s"
+
+#, c-format
+msgid "%.2f KB/s"
+msgstr "%.2f KB/s"
+
+#, c-format
+msgid "%ld B/s"
+msgstr "%ld B/s"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Count"
+msgstr "Лік"
+
+msgid "Bytes"
+msgstr "Байтаў"
+
+msgid "Source"
+msgstr "Крыніца"
+
+msgid "Target"
+msgstr "Мэта"
+
+msgid "Deleting"
+msgstr "Выдаляем"
+
+#, c-format
+msgid "Target file \"%s\" already exists!"
+msgstr "Файл мэты \"%s\" ужо існуе!"
+
+msgid "If &size differs"
+msgstr "якія адрозніваюцца па &Даўжыні"
+
+msgid "&Update"
+msgstr "&Састарэлыя"
+
+msgid "Overwrite all targets?"
+msgstr "Перапісаць усе файлы?"
+
+msgid "&Reget"
+msgstr "пера&Чытаць"
+
+msgid "A&ppend"
+msgstr "&Дапісаць"
+
+msgid "Overwrite this target?"
+msgstr "Перапісаць гэты файл?"
+
+#, c-format
+msgid "Target date: %s, size %llu"
+msgstr "Дата мэты: %s, памер %llu"
+
+#, c-format
+msgid "Source date: %s, size %llu"
+msgstr "Дата крыніцы: %s, памер %llu"
+
+#, c-format
+msgid "Target date: %s, size %u"
+msgstr "Дата мэты: %s, памер %u"
+
+#, c-format
+msgid "Source date: %s, size %u"
+msgstr "Дата крыніцы: %s, памер %u"
+
+msgid " File exists "
+msgstr " Файл існуе "
+
+msgid " Background process: File exists "
+msgstr " Працэс у тле: файл існуе "
+
+msgid "preserve &Attributes"
+msgstr "Захоўваць &Атрыбуты"
+
+msgid "follow &Links"
+msgstr "Сачыць за &Спасылкамі."
+
+msgid "to:"
+msgstr "у:"
+
+msgid "&Using shell patterns"
+msgstr "&Ужыць выразы shell"
+
+msgid "&Background"
+msgstr "У т&ле"
+
+msgid "&Stable Symlinks"
+msgstr "&Захоўваць сімвалічныя спасылкі"
+
+msgid "&Dive into subdir if exists"
+msgstr "У&нутр каталога, калі ёсць"
+
+#, c-format
+msgid ""
+"Invalid source pattern `%s' \n"
+" %s "
+msgstr ""
+"Памылковы ўзор `%s' \n"
+" %s "
+
+msgid "&Suspend"
+msgstr "Пры&пыніць"
+
+msgid "Con&tinue"
+msgstr "&Працягваць"
+
+msgid "&Chdir"
+msgstr "Пера&ход"
+
+msgid "&Again"
+msgstr "Паў&тор"
+
+msgid "&Quit"
+msgstr "&Выхад"
+
+msgid "Pane&lize"
+msgstr "Па&нэлізацыя"
+
+msgid "&View - F3"
+msgstr "Пра&гляд - F3"
+
+msgid "&Edit - F4"
+msgstr "&Праўка - F4"
+
+msgid "&Find recursively"
+msgstr "Знайсці &Рэкурсіўна"
+
+msgid "Start at:"
+msgstr "Стартаваць ад:"
+
+msgid "Filename:"
+msgstr "Шаблон імя"
+
+msgid "Content: "
+msgstr "Змест: "
+
+msgid "&Tree"
+msgstr "Д&рэва"
+
+msgid "Find File"
+msgstr "Пошук файла"
+
+#, c-format
+msgid "Grepping in %s"
+msgstr "Шукаем у %s"
+
+msgid "Finished"
+msgstr "Скончана"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Шукаем %s"
+
+msgid "Searching"
+msgstr "Скануем"
+
+msgid " Help file format error\n"
+msgstr " Памылка фармату файла дапамогі\n"
+
+msgid " Internal bug: Double start of link area "
+msgstr " Унутраная памылка: Падвойны пачатак вобласці спасылкі "
+
+#, c-format
+msgid " Cannot find node %s in help file "
+msgstr " Немагчыма знайсці вузел %s у файле дапамогі "
+
+msgid "Index"
+msgstr "Змест"
+
+msgid "Prev"
+msgstr "Назад"
+
+msgid "&Move"
+msgstr "Пера&мясціць"
+
+msgid "&Remove"
+msgstr "&Выдаліць"
+
+msgid "&Append"
+msgstr "У &Канец"
+
+msgid "&Insert"
+msgstr "У &Пачатак"
+
+msgid "New &Entry"
+msgstr "Новы &Запіс"
+
+msgid "New &Group"
+msgstr "Новая &Група"
+
+msgid "&Up"
+msgstr "&Угору"
+
+msgid "&Add current"
+msgstr "Дадаць &Бягучы"
+
+msgid "&Refresh"
+msgstr "Абна&віць"
+
+msgid "Fr&ee VFSs now"
+msgstr "В&ызваліць ВФС зараз"
+
+msgid "Change &To"
+msgstr "Пера&йсці"
+
+msgid "Subgroup - press ENTER to see list"
+msgstr "Падгрупа - націсніце ENTER каб прагледзець"
+
+msgid "Active VFS directories"
+msgstr "Актыўныя каталогі ВФС"
+
+msgid "Directory hotlist"
+msgstr "Спіс каталогаў"
+
+msgid " Directory path "
+msgstr " Шлях да каталога "
+
+msgid " Directory label "
+msgstr " Пазнака каталога "
+
+#, c-format
+msgid "Moving %s"
+msgstr "Пераносім %s"
+
+msgid "New hotlist entry"
+msgstr "Новы пункт у спісе"
+
+msgid "Directory label"
+msgstr "Пазнака каталога"
+
+msgid "Directory path"
+msgstr "Шлях да каталога"
+
+msgid " New hotlist group "
+msgstr "Даданне групы ў спіс "
+
+msgid "Name of new group"
+msgstr "Імя новай групы"
+
+#, c-format
+msgid "Label for \"%s\":"
+msgstr "Пазнака для \"%s\": "
+
+msgid " Add to hotlist "
+msgstr " Дадаць у спіс "
+
+msgid " Remove: "
+msgstr " Выдаліць: "
+
+msgid ""
+"\n"
+" Are you sure you want to remove this entry?"
+msgstr ""
+"\n"
+" Ці ўпэўнены, што хочаце выдаліць гэты пункт?"
+
+msgid ""
+"\n"
+" Group not empty.\n"
+" Remove it?"
+msgstr ""
+"\n"
+" Група не пустая.\n"
+" Выдаліць яе?"
+
+msgid " Top level group "
+msgstr " Група верхняга узроўню"
+
+msgid " Hotlist Load "
+msgstr " Загрузка спісу "
+
+#, c-format
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr "MC не здолеў запісаць файл ~/%s, ваш стары спіс каталогаў не выдалены"
+
+#, c-format
+msgid "Midnight Commander %s"
+msgstr "Midnight Commander %s"
+
+#, c-format
+msgid "File:       %s"
+msgstr "Файл:          %s"
+
+#, c-format
+msgid "Free nodes: %d (%d%%) of %d"
+msgstr "Вол. інод:     %d (%d%%) з %d"
+
+msgid "No node information"
+msgstr "Няма інфармацыі пра іноды"
+
+#, c-format
+msgid "Free space: %s (%d%%) of %s"
+msgstr "Вол. прастора: %s (%d%%) з %s"
+
+msgid "No space information"
+msgstr "Няма інфармацыі пра прастору"
+
+#, c-format
+msgid "Type:      %s "
+msgstr "Тып:           %s "
+
+msgid "non-local vfs"
+msgstr "нелакальная ВФС"
+
+#, c-format
+msgid "Device:    %s"
+msgstr "Прылада:       %s"
+
+#, c-format
+msgid "Filesystem: %s"
+msgstr "Ф.сістэма:     %s"
+
+#, c-format
+msgid "Accessed:  %s"
+msgstr "Зварот:        %s"
+
+#, c-format
+msgid "Modified:  %s"
+msgstr "Зменены:       %s"
+
+#. TRANSLATORS: "Status changed", like in the stat(2) man page
+#, c-format
+msgid "Status:    %s"
+msgstr "Статус:        %s"
+
+#, c-format
+msgid "Dev. type: major %lu, minor %lu"
+msgstr "Прылада:       major %lu, minor %lu"
+
+#, c-format
+msgid "Size:      %s"
+msgstr "Памер:         %s"
+
+#, c-format
+msgid " (%ld block)"
+msgid_plural " (%ld blocks)"
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блокі)"
+msgstr[2] " (%ld блокаў)"
+
+#, c-format
+msgid "Owner:     %s/%s"
+msgstr "Уладальнік:    %s/%s"
+
+#, c-format
+msgid "Links:     %d"
+msgstr "Спасылак:      %d"
+
+#, c-format
+msgid "Mode:      %s (%04o)"
+msgstr "Правы:         %s (%04o)"
+
+#, c-format
+msgid "Location:  %Xh:%Xh"
+msgstr "Месца:         %Xh:%Xh"
+
+msgid "File:       None"
+msgstr "Файл:          Адсутнічае"
+
+msgid "&Vertical"
+msgstr "&Вертыкальнае"
+
+msgid "&Horizontal"
+msgstr "&Гарызантальнае"
+
+msgid "&Xterm window title"
+msgstr "Загаловак акна &xterm"
+
+msgid "h&Intbar visible"
+msgstr "&Радок падказкі"
+
+msgid "&Keybar visible"
+msgstr "М&еткі клавіш"
+
+msgid "command &Prompt"
+msgstr "&Камандны радок"
+
+msgid "show &Mini status"
+msgstr "&Міні-стан"
+
+msgid "menu&Bar visible"
+msgstr "&Лінарка меню"
+
+msgid "&Equal split"
+msgstr "&Роўныя памеры"
+
+msgid "pe&Rmissions"
+msgstr "Правы д&оступу"
+
+msgid "&File types"
+msgstr "Тыпы &файлаў"
+
+msgid " Panel split "
+msgstr " Раздзяленне панэляў "
+
+msgid " Highlight... "
+msgstr " Падсветка... "
+
+msgid " Other options "
+msgstr " Іншыя наладкі "
+
+msgid "output lines"
+msgstr "радкі вываду"
+
+msgid "Layout"
+msgstr "Вонкавы выгляд"
+
+msgid "Learn keys"
+msgstr "Вывучэнне клавіш"
+
+msgid " Teach me a key "
+msgstr " Навучыце мяне клавішы "
+
+#, c-format
+msgid ""
+"Please press the %s\n"
+"and then wait until this message disappears.\n"
+"\n"
+"Then, press it again to see if OK appears\n"
+"next to its button.\n"
+"\n"
+"If you want to escape, press a single Escape key\n"
+"and wait as well."
+msgstr ""
+"Калі ласка, націсніце клавішу %s\n"
+"і пачакайце, пакуль гэтае паведамленне знікне.\n"
+"\n"
+"Затым націсніце яе яшчэ раз, каб упэўніцца,\n"
+"што справа ад яе назвы з'явілася 'Так'.\n"
+"\n"
+"Калі вы жадаеце перарваць навучанне, націсніце\n"
+"клавішу Esc і крыху пачакайце."
+
+msgid " Cannot accept this key "
+msgstr " Немагчыма прыняць гэтую клавішу "
+
+#, c-format
+msgid " You have entered \"%s\""
+msgstr " Вы ўвялі \"%s\""
+
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+msgid "OK"
+msgstr "Так"
+
+msgid ""
+"It seems that all your keys already\n"
+"work fine. That's great."
+msgstr ""
+"Здаецца, што ўсе Вашыя клавішы зараз\n"
+"працуюць нармальна. Выдатна."
+
+msgid "&Discard"
+msgstr "&Скасаваць"
+
+msgid ""
+"Great! You have a complete terminal database!\n"
+"All your keys work well."
+msgstr ""
+"Выдатна! У вас ёсць поўная база апісанняў тэрміналаў!\n"
+"Усе вашыя клавішы працуюць добра."
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Націсніце ўсе пералічаныя клавішы. Пасля націска адшукайце,"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "якія клавішы не маюць адзнакі Так. Для навучання клавішы абярыце"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "яе пры дапамозе Tab ці мышшу і націсніце прагал."
+
+msgid ""
+" The Commander can't change to the directory that \n"
+" the subshell claims you are in.  Perhaps you have \n"
+" deleted your working directory, or given yourself \n"
+" extra access permissions with the \"su\" command? "
+msgstr ""
+" The Commander не можа перайсці ў каталог, які яму \n"
+" паведаміў дачэрні працэс інтэрпрэтатару. Можа, вы \n"
+" выдалілі працоўны каталог ці далі сабе дадатковыя \n"
+" прывілеі доступу пры дапамозе каманды \"su\"? "
+
+msgid " The Midnight Commander "
+msgstr " Midnight Commander "
+
+msgid " Do you really want to quit the Midnight Commander? "
+msgstr " Вы сапраўды жадаеце выйсці з Midnight Commander? "
+
+msgid "&Listing mode..."
+msgstr "Фар&мат спісу..."
+
+msgid "&Quick view     C-x q"
+msgstr "&Хуткі прагляд       C-x q"
+
+msgid "&Info           C-x i"
+msgstr "&Інфармацыя          C-x i"
+
+msgid "&Sort order..."
+msgstr "Парадак &сартавання"
+
+msgid "&Filter..."
+msgstr "&Фільтр"
+
+msgid "&Network link..."
+msgstr "Се&ткавае злучэнне..."
+
+msgid "FT&P link..."
+msgstr "&FTP-злучэнне"
+
+msgid "S&hell link..."
+msgstr "&Лучыва абалонкі"
+
+msgid "SM&B link..."
+msgstr "SM&B сувязь..."
+
+msgid "&Rescan         C-r"
+msgstr "Абна&віць            C-r"
+
+msgid "&User menu          F2"
+msgstr "&Меню карыстальніка  F2"
+
+msgid "&View               F3"
+msgstr "Прагляд фа&йла       F3"
+
+msgid "Vie&w file...         "
+msgstr "&Прагляд файла..."
+
+msgid "&Filtered view     M-!"
+msgstr "Праг&ляд каманды     M-!"
+
+msgid "&Edit               F4"
+msgstr "&Рэдагаванне         F4"
+
+msgid "&Copy               F5"
+msgstr "&Капіяванне          F5"
+
+msgid "c&Hmod           C-x c"
+msgstr "Правы &доступу       C-x c"
+
+msgid "&Link            C-x l"
+msgstr "&Жорская спасылка    C-x l"
+
+msgid "&SymLink         C-x s"
+msgstr "&Сімвал.спасылка     C-x s"
+
+msgid "edit s&Ymlink  C-x C-s"
+msgstr "Праўка спасы&лкі     C-x C-s"
+
+msgid "ch&Own           C-x o"
+msgstr "&Уладальнік/група    C-x o"
+
+msgid "&Advanced chown       "
+msgstr "Пр&авы (пашыраныя)    "
+
+msgid "&Rename/Move        F6"
+msgstr "Перай&мен/перамяшч   F6"
+
+msgid "&Mkdir              F7"
+msgstr "Стварэ&нне каталога  F7"
+
+msgid "&Delete             F8"
+msgstr "&Выдаленне           F8"
+
+msgid "&Quick cd          M-c"
+msgstr "З&мена каталога      M-c"
+
+msgid "select &Group      M-+"
+msgstr "Вылучыць &групу      M-+"
+
+msgid "u&Nselect group    M-\\"
+msgstr "&Зняць вылучэнне     M-\\"
+
+msgid "reverse selec&Tion M-*"
+msgstr "Інвер&сія вылучэння  M-*"
+
+msgid "e&Xit              F10"
+msgstr "Вы&хад               F10"
+
+msgid "&Directory tree"
+msgstr "&Дрэва каталогаў"
+
+msgid "&Find file            M-?"
+msgstr "Пошук &файла          M-?"
+
+msgid "s&Wap panels          C-u"
+msgstr "&Пераставіць панэлі   C-u"
+
+msgid "switch &Panels on/off C-o"
+msgstr "&Адключыць панэлі     C-o"
+
+msgid "&Compare directories  C-x d"
+msgstr "Пара&ўнаць каталогі   C-x d"
+
+msgid "e&Xternal panelize    C-x !"
+msgstr "&Крытэр панэлізацыі   C-x !"
+
+msgid "show directory s&Izes"
+msgstr "Па&меры каталогаў"
+
+msgid "command &History"
+msgstr "&Гісторыя камандаў"
+
+msgid "di&Rectory hotlist    C-\\"
+msgstr "Cпіс ката&логаў       C-\\"
+
+msgid "&Active VFS list      C-x a"
+msgstr "&Спіс актыўных ВФС    C-x a"
+
+msgid "&Background jobs      C-x j"
+msgstr "Заданні ў &тле        C-x j"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Ад&наўленне файлаў (толькі ext2)"
+
+msgid "&Listing format edit"
+msgstr "&Рэдагаванне фармату"
+
+msgid "Edit &extension file"
+msgstr "Файл па&шырэнняў"
+
+msgid "Edit &menu file"
+msgstr "Файл мен&ю"
+
+msgid "Edit edi&tor menu file"
+msgstr "П&раўка файла меню"
+
+msgid "Edit &syntax file"
+msgstr "Рэдагаванне файла &пашырэнняў"
+
+msgid "&Configuration..."
+msgstr "&Канфігурацыя"
+
+msgid "&Layout..."
+msgstr "&Вонкавы выгляд"
+
+msgid "c&Onfirmation..."
+msgstr "&Пацверджанне"
+
+msgid "&Display bits..."
+msgstr "&Біты сімвалаў..."
+
+msgid "learn &Keys..."
+msgstr "В&ызначэнне клавішаў..."
+
+msgid "&Virtual FS..."
+msgstr "Віртуальныя &ФС..."
+
+msgid "&Save setup"
+msgstr "&Захаваць наладку"
+
+msgid " &Above "
+msgstr " Верхн&яя "
+
+msgid " &Left "
+msgstr " &Левая панэль "
+
+msgid " &File "
+msgstr " &Файл "
+
+msgid " &Command "
+msgstr " &Каманда "
+
+msgid " &Options "
+msgstr " &Наладка "
+
+msgid " &Below "
+msgstr " Ні&жняя "
+
+msgid " &Right "
+msgstr " &Правая панэль "
+
+msgid " Information "
+msgstr " Інфармацыя "
+
+msgid ""
+" Using the fast reload option may not reflect the exact \n"
+" directory contents. In this case you'll need to do a   \n"
+" manual reload of the directory. See the man page for   \n"
+" the details.                                           "
+msgstr ""
+" Выкарыстанне опцыі хуткай перазагрузкі можа не адлюстраваць  \n"
+" бягучага зместу каталога. У гэтым выпадку трэба ўласна                  \n"
+" перазагрузіць каталог. Для дадатковай інфармацыі глядзіце               \n"
+" кіраўніцтва (man)."
+
+msgid "Menu"
+msgstr "Меню"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Пераменная асяродку TERM не вызначана!\n"
+
+#, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander %s\n"
+
+msgid "[flags] [this_dir] [other_panel_dir]\n"
+msgstr "[сцягі] [гэты_каталог] [каталог_другой_панэлі]\n"
+
+msgid "+number"
+msgstr "+лічба"
+
+msgid "Set initial line number for the internal editor"
+msgstr "Усталяваць пачатковы нумар радка ва ўнутраным рэдактары"
+
+msgid ""
+"\n"
+"Please send any bug reports (including the output of `mc -V')\n"
+"to mc-devel@gnome.org\n"
+msgstr ""
+"\n"
+"Калі ласка, дасылайце любыя паведамленні аб памылках (уключаючы вывад 'mc -"
+"V')\n"
+"на адрас mc-devel@gnome.org\n"
+
+#, fuzzy
+msgid ""
+"--colors KEYWORD={FORE},{BACK}\n"
+"\n"
+"{FORE} and {BACK} can be omitted, and the default will be used\n"
+"\n"
+"Keywords:\n"
+"   Global:       errors, reverse, gauge, input, viewunderline\n"
+"   File display: normal, selected, marked, markselect\n"
+"   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Editor:       editnormal, editbold, editmarked\n"
+"   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
+"\n"
+"Colors:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+msgstr ""
+"--colors КЛЮЧ={ТЭКСТ},{ФОН}\n"
+"\n"
+"{ТЭКСТ} і {ФОН} можна не ўказваць, каб ужыць прадвызначэнні\n"
+"\n"
+"КЛЮЧЫ:\n"
+"   Агульныя:     errors, reverse, gauge, input, viewunderline\n"
+"   Паказ файлаў: normal, selected, marked, markselect\n"
+"   Дыялогі:      dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                 errdhotfocus\n"
+"   Меню:         menu, menuhot, menusel, menuhotsel\n"
+"   Рэдактар:     editnormal, editbold, editmarked\n"
+"   Дапамога:     helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   Тыпы файлаў:  directory, executable, link, stalelink, device, special, "
+"core\n"
+"hidden, temp, doc, archive, source, media, graph, database\n"
+"\n"
+"Колеры:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, white\n"
+"\n"
+
+msgid "Displays this help message"
+msgstr "Адлюстраваць гэтае даведачнае паведамленне"
+
+msgid "Displays the current version"
+msgstr "Адлюстраваць бягучую вэрсіі"
+
+msgid "Forces xterm features"
+msgstr "Навязвае ўласцівасці xterm"
+
+msgid "Disable mouse support in text version"
+msgstr "Адключыць падтрымку мышы ў тэкставай вэрсіі"
+
+msgid "Tries to use termcap instead of terminfo"
+msgstr "Паспрабаваць выкарыстоўваць termcap замест terminfo"
+
+msgid "Resets soft keys on HP terminals"
+msgstr "Скідае праграмныя клавішы на тэрміналах HP"
+
+msgid "To run on slow terminals"
+msgstr "Запуск на павольных тэрміналах"
+
+msgid "Use stickchars to draw"
+msgstr "Псеўдаграфіка для малявання"
+
+msgid "Requests to run in black and white"
+msgstr "Запыт на запуск у монахромным рэжыме"
+
+msgid "Request to run in color mode"
+msgstr "Запыт на запуск у каляровым рэжыме"
+
+msgid "Specifies a color configuration"
+msgstr "Вызначае наладкі колераў"
+
+msgid "Displays a help screen on how to change the color scheme"
+msgstr "Адлюстроўвае экран дапамог - як змяніць схему колераў"
+
+msgid "Log ftp dialog to specified file"
+msgstr "Весці пратакол дыялёгу з FTP у файл"
+
+msgid "Set debug level"
+msgstr "Усталяваць узровень адладкі"
+
+msgid "Print data directory"
+msgstr "Надрукаваць каталог дадзеных"
+
+msgid "Print last working directory to specified file"
+msgstr "Вывесці апошні працоўны каталог у вызначаны файл"
+
+msgid "Enables subshell support (default)"
+msgstr "Уключыць падтрымку ўбудаванай каманднай абалонкі (прадвызначана)"
+
+msgid "Disables subshell support"
+msgstr "Адключыць падтрымку ўбудаванай каманднай абалонкі"
+
+msgid "Launches the file viewer on a file"
+msgstr "Запускае праграму прагляду для файла"
+
+msgid "Edits one file"
+msgstr "Рэдагуе адзін файл"
+
+msgid "safe de&Lete"
+msgstr "Бяспечнае вы&даленне"
+
+msgid "cd follows lin&Ks"
+msgstr "Змена &каталога па спасылках"
+
+msgid "L&ynx-like motion"
+msgstr "Навігацыя ў стылі L&ynx"
+
+msgid "rotatin&G dash"
+msgstr "&Злучок што варочаецца"
+
+msgid "co&Mplete: show all"
+msgstr "Дадатко&ва: паказваць усё"
+
+msgid "&Use internal view"
+msgstr "Унутраны пра&гляд"
+
+msgid "use internal ed&It"
+msgstr "Унутраны &рэдактар"
+
+msgid "auto m&Enus"
+msgstr "Аўтаматычныя &меню"
+
+msgid "&Auto save setup"
+msgstr "&Аўтазахаванне наладак"
+
+msgid "shell &Patterns"
+msgstr "Прыклады ў стылі &shell"
+
+msgid "Compute &Totals"
+msgstr "Падлічыць агульны &памер"
+
+msgid "&Verbose operation"
+msgstr "Дэталі аперацы&яў"
+
+msgid "&Fast dir reload"
+msgstr "&Хуткая загрузка каталога"
+
+msgid "mi&X all files"
+msgstr "Мяшаць &файлы/каталогі"
+
+msgid "&Drop down menus"
+msgstr "Выпадзенне мэн&ю падчас выкліку"
+
+msgid "ma&Rk moves down"
+msgstr "&Адзнака пераводзіць курсор"
+
+msgid "show &Hidden files"
+msgstr "Адлюстроўваць с&хаваныя файлы"
+
+msgid "show &Backup files"
+msgstr "Паказываць рэ&зервовыя файлы"
+
+msgid "&Never"
+msgstr "&Ніколі"
+
+msgid "on dumb &Terminals"
+msgstr "На &дурных тэрміналах"
+
+msgid "Alwa&ys"
+msgstr "&Заўсёды"
+
+msgid " Panel options "
+msgstr " Наладка панэляў "
+
+msgid " Pause after run... "
+msgstr " Пауза пасля выканання... "
+
+msgid "Configure options"
+msgstr "Параметры канфігурацыі"
+
+msgid "&Add new"
+msgstr "&Дадаць"
+
+msgid "External panelize"
+msgstr "Вонкавая панэлізацыя"
+
+msgid "Command"
+msgstr "Каманда"
+
+msgid "Other command"
+msgstr "Новая каманда"
+
+msgid " Add to external panelize "
+msgstr " Дадаць у спіс камандаў "
+
+msgid " Enter command label: "
+msgstr " Увядзіце пазнаку каманды: "
+
+msgid " Cannot run external panelize in a non-local directory "
+msgstr " Немагчыма выканаць знешнюю панэлізацыю ў нелакальным каталогу "
+
+msgid "Find rejects after patching"
+msgstr "Знайсці карэктуры, адкінутыя камандай patch"
+
+msgid "Find *.orig after patching"
+msgstr "Адшукаць арыгіналы (*.orig) пасля каманды patch"
+
+msgid "Find SUID and SGID programs"
+msgstr "Адшукаць праграмы з усталяванымі SUID/SGID бітамі"
+
+msgid "Cannot invoke command."
+msgstr "Немагчыма выканаць каманду."
+
+msgid "Pipe close failed"
+msgstr "Збой закрыцця каналу"
+
+msgid "missing argument"
+msgstr "адсутны аргумент"
+
+msgid "unknown option"
+msgstr "невядомая опцыя"
+
+msgid "invalid numeric value"
+msgstr "памылковая лічба"
+
+msgid "Show this help message"
+msgstr "Паказаць гэтае паведамленне "
+
+msgid "Display brief usage message"
+msgstr "Паказаць кароткую інструкцыю"
+
+msgid "ARG"
+msgstr "АРГ"
+
+#, c-format
+msgid "Usage:"
+msgstr "Выкарыстанне:"
+
+msgid "[dev]"
+msgstr "[прыл]"
+
+msgid "UP--DIR"
+msgstr "НАД-КАТАЛОГ"
+
+msgid "SYMLINK"
+msgstr "СІМСПАСЫЛКА"
+
+msgid "SUB-DIR"
+msgstr "ПАД-КАТАЛОГ"
+
+msgid "Size"
+msgstr "Памер"
+
+msgid "MTime"
+msgstr "Ап.мадыфікацыя"
+
+msgid "ATime"
+msgstr "Ап. доступ"
+
+msgid "CTime"
+msgstr "Час стварэння"
+
+msgid "Permission"
+msgstr "Атрыбуты"
+
+msgid "Perm"
+msgstr "Правы"
+
+msgid "Nl"
+msgstr "Кс"
+
+msgid "Inode"
+msgstr "Інода"
+
+msgid "UID"
+msgstr "UID"
+
+msgid "GID"
+msgstr "GID"
+
+msgid "Owner"
+msgstr "Уладальнік"
+
+msgid "Group"
+msgstr "Група"
+
+#, c-format
+msgid "%s byte"
+msgid_plural "%s bytes"
+msgstr[0] "%s байт"
+msgstr[1] "%s байты"
+msgstr[2] "%s байтаў"
+
+#, c-format
+msgid "%s in %d file"
+msgid_plural "%s in %d files"
+msgstr[0] "%s байт у %d файлах"
+msgstr[1] "%s байты у %d файлах"
+msgstr[2] "%s байт у %d файлах"
+
+msgid "<readlink failed>"
+msgstr "<памылка чытання спасылкі>"
+
+msgid "Unknown tag on display format: "
+msgstr "Невядомы тэг у фармаце адлюстравання: "
+
+msgid "User supplied format looks invalid, reverting to default."
+msgstr "Фармат карыстальніка выглядае памылковым, вяртаюся да стандартнага."
+
+msgid " Do you really want to execute? "
+msgstr " Вы сапраўды жадаеце выканаць гэта? "
+
+msgid "View"
+msgstr "Прагляд"
+
+msgid "Edit"
+msgstr "Праўка"
+
+msgid "RenMov"
+msgstr "Перанс"
+
+msgid "Mkdir"
+msgstr "НвКтлог"
+
+msgid " Choose input codepage "
+msgstr " Выбраць табліцу сімвалаў вываду"
+
+msgid "-  < No translation >"
+msgstr "-  < Без перакадавання >"
+
+msgid ""
+"To use this feature select your codepage in\n"
+"Setup / Display Bits dialog!\n"
+"Do not forget to save options."
+msgstr ""
+"Каб выкарыстаць гэтую магчымасць,\n"
+"выберыце вашую табліцу сімвалаў у\n"
+"Наладка / Біты сімвалаў!\n"
+"не забудзьцеся захаваць змены."
+
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+"Памер экрану %dx%d не падтрымліваецца.\n"
+"Праверце пераменную асяродздзя TERM.\n"
+
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"GNU Midnight Commander ужо выконваецца\n"
+"на гэтым тэрмінале.\n"
+"Унутраная абалонка будзе адключана."
+
+#, c-format
+msgid "Cannot open named pipe %s\n"
+msgstr "Немагчыма адкрыць менаваны канал %s\n"
+
+msgid " The shell is still active. Quit anyway? "
+msgstr " Абалонка яшчэ актыўная. Усёж-такі выйсці? "
+
+#, fuzzy, c-format
+msgid "Warning: Cannot change to %s.\n"
+msgstr " Немагчыма перайсці ў %s "
+
+msgid "With builtin Editor\n"
+msgstr "З убудаваным рэдактарам\n"
+
+msgid "Using system-installed S-Lang library"
+msgstr "Выкарыстанне усталяванай сістэмнае бібліятэкі S-Lang"
+
+msgid "Using included S-Lang library"
+msgstr "Выкарыстанне бібліятэкі S-Lang"
+
+msgid "with termcap database"
+msgstr "з базай дадзеных termcap"
+
+msgid "with terminfo database"
+msgstr "з базай дадзеных terminfo"
+
+msgid "Using the ncurses library"
+msgstr "Выкарыстоўваць бібліятэку ncurses"
+
+msgid "With optional subshell support"
+msgstr "З апцыянальнай падтрымкай унутранай каманднай абалонкі "
+
+msgid "With subshell support as default"
+msgstr "З падтрымкай унутранай каманднай абалонкі прадвызначана"
+
+msgid "With support for background operations\n"
+msgstr "З падтрымкай аперацый у тле\n"
+
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "З падтрымкай мышы ў xterm і кансолі Linux.\n"
+
+msgid "With mouse support on xterm\n"
+msgstr "З падтрымкай мышы ў xterm.\n"
+
+msgid "With support for X11 events\n"
+msgstr "З падтрымкай падзеяў X11\n"
+
+msgid "With internationalization support\n"
+msgstr "З падтрымкай інтэрнацыяналізацыі\n"
+
+msgid "With multiple codepages support\n"
+msgstr "З падтрымкай шматлікіх кодавых старонак\n"
+
+#, c-format
+msgid "Virtual File System:"
+msgstr "Віртуальная Файлавая Сістэма:"
+
+#, c-format
+msgid ""
+"Cannot open the %s file for writing:\n"
+"%s\n"
+msgstr ""
+"Немагчыма адкрыць файл %s для запісу:\n"
+"%s\n"
+
+#, c-format
+msgid "Copy \"%s\" directory to:"
+msgstr " Капіяваць каталог \"%s\" у:"
+
+#, c-format
+msgid "Move \"%s\" directory to:"
+msgstr " Перамясціць каталог \"%s\" у:"
+
+#, c-format
+msgid ""
+" Cannot stat the destination \n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць стан месца прызначэння\n"
+" %s "
+
+#, c-format
+msgid "  Delete %s?  "
+msgstr "  Выдаліць %s?  "
+
+msgid "Static"
+msgstr "Статыч"
+
+msgid "Dynamc"
+msgstr "Дынамч"
+
+msgid "Rescan"
+msgstr "Пераск."
+
+msgid "Forget"
+msgstr "Забыцца"
+
+msgid "Rmdir"
+msgstr "ВдКтлог"
+
+#, c-format
+msgid ""
+"Cannot write to the %s file:\n"
+"%s\n"
+msgstr ""
+"Немагчыма запісаць у файл %s:\n"
+"%s\n"
+
+msgid " Format error on file Extensions File "
+msgstr " Памылка фармату ў файле Пашырэнняў файлаў"
+
+#, c-format
+msgid " The %%var macro has no default "
+msgstr " Макрас %%var не мае тыповых значэнняў"
+
+#, c-format
+msgid " The %%var macro has no variable "
+msgstr " Макрас %%var не мае пераменных"
+
+msgid " Debug "
+msgstr " Адладка "
+
+msgid " ERROR: "
+msgstr " ПАМЫЛКА: "
+
+msgid " True:  "
+msgstr " Праўда: "
+
+msgid " False: "
+msgstr " Хлусьня: "
+
+msgid " Warning -- ignoring file "
+msgstr " Папярэджанне - файл ігнаруецца "
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s у бягучым каталогу не належыць ані root'у, ані Вам,\n"
+"і даступны іншым на запіс. Выкарыстанне такога файла непрыймальна\n"
+"з пункту гледжання бяспекі."
+
+#, c-format
+msgid " No suitable entries found in %s "
+msgstr " Не адшукана запісаў, што адпавядаюць, у %s"
+
+msgid " User menu "
+msgstr " Меню карыстальніка "
+
+msgid "%b %e %H:%M"
+msgstr ""
+
+msgid "%b %e  %Y"
+msgstr ""
+
+#, c-format
+msgid "%s is not a directory\n"
+msgstr "%s не каталог\n"
+
+#, c-format
+msgid "Directory %s is not owned by you\n"
+msgstr "Вы не ўладальнік каталога %s\n"
+
+#, c-format
+msgid "Cannot set correct permissions for directory %s\n"
+msgstr "Немагчыма выставіць правы на каталог %s\n"
+
+#, c-format
+msgid "Cannot create temporary directory %s: %s\n"
+msgstr "Немагчыма стварыць часовы каталог мэты %s: %s\n"
+
+#, c-format
+msgid "Temporary files will be created in %s\n"
+msgstr "Часовыя файлы будуць створаны ў %s\n"
+
+#, c-format
+msgid "Temporary files will not be created\n"
+msgstr "Часовыя файлы не будуць створаны\n"
+
+msgid " Pipe failed "
+msgstr " Збой каналу "
+
+msgid " Dup failed "
+msgstr " Збой дублявання дэскрыптару "
+
+msgid " Cannot spawn child process "
+msgstr " Немагчыма стварыць дачэрні працэс "
+
+msgid "Empty output from child filter"
+msgstr "Пусты вывад ад працэса-нашчадка фільтра"
+
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Немагчыма адкрыць \"%s\"\n"
+" %s "
+
+#, c-format
+msgid ""
+" Cannot stat \"%s\"\n"
+" %s "
+msgstr ""
+" Немагчыма атрымаць стан \"%s\"\n"
+" %s "
+
+msgid " Cannot view: not a regular file "
+msgstr " Прагляд немагчымы: не звычайны файл "
+
+#, c-format
+msgid "File: %s"
+msgstr "Файл: %s"
+
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "Зрух 0x%08lx"
+
+#, c-format
+msgid "Line %lu Col %lu"
+msgstr "Радок %lu Пазіц %lu"
+
+#, c-format
+msgid "%s bytes"
+msgstr "%s байтаў"
+
+#, c-format
+msgid ">= %s bytes"
+msgstr ">= %s байтаў"
+
+#, c-format
+msgid ""
+" Error while closing the file: \n"
+" %s \n"
+" Data may have been written or not. "
+msgstr ""
+" Памылка закрыцця файла: \n"
+" %s \n"
+" Дадзеныя могуць быць запісаныя або не. "
+
+#, c-format
+msgid ""
+" Cannot save file: \n"
+" %s "
+msgstr ""
+" Немагчыма захаваць файл: \n"
+" %s "
+
+msgid "Invalid hex search expression"
+msgstr " Памылковы выраз пошуку"
+
+msgid " Invalid regular expression "
+msgstr " Памылковы сталы выраз "
+
+#, c-format
+msgid ""
+" The current line number is %d.\n"
+" Enter the new line number:"
+msgstr ""
+" Нумар бягучага радка %d.\n"
+" Увядзіце нумар новага радка:"
+
+#, c-format
+msgid ""
+" The current address is 0x%lx.\n"
+" Enter the new address:"
+msgstr ""
+" Бягучы адрас - 0x%lx.\n"
+" Увядзіце новы адрас:"
+
+msgid " Goto Address "
+msgstr " Перайсці на адрас "
+
+msgid " Invalid address "
+msgstr " Памылковы адрас "
+
+msgid " Enter regexp:"
+msgstr " Увядзіце сталы выраз:"
+
+msgid "ButtonBar|Help"
+msgstr ""
+
+msgid "ButtonBar|Quit"
+msgstr ""
+
+msgid "ButtonBar|Ascii"
+msgstr ""
+
+msgid "ButtonBar|Hex"
+msgstr ""
+
+msgid "ButtonBar|Goto"
+msgstr ""
+
+msgid "ButtonBar|Line"
+msgstr ""
+
+msgid "ButtonBar|View"
+msgstr ""
+
+msgid "ButtonBar|Edit"
+msgstr ""
+
+msgid "ButtonBar|Save"
+msgstr ""
+
+msgid "ButtonBar|UnWrap"
+msgstr ""
+
+msgid "ButtonBar|Wrap"
+msgstr ""
+
+msgid "ButtonBar|RxSrch"
+msgstr ""
+
+msgid "ButtonBar|HxSrch"
+msgstr ""
+
+msgid "ButtonBar|Search"
+msgstr ""
+
+msgid "ButtonBar|Raw"
+msgstr ""
+
+msgid "ButtonBar|Parse"
+msgstr ""
+
+msgid "ButtonBar|Unform"
+msgstr ""
+
+msgid "ButtonBar|Format"
+msgstr ""
+
+msgid " History "
+msgstr " Гісторыя "
+
+msgid "Function key 1"
+msgstr "Функцыянальная 1 "
+
+msgid "Function key 2"
+msgstr "Функцыянальная 2 "
+
+msgid "Function key 3"
+msgstr "Функцыянальная 3 "
+
+msgid "Function key 4"
+msgstr "Функцыянальная 4 "
+
+msgid "Function key 5"
+msgstr "Функцыянальная 5 "
+
+msgid "Function key 6"
+msgstr "Функцыянальная 6 "
+
+msgid "Function key 7"
+msgstr "Функцыянальная 7 "
+
+msgid "Function key 8"
+msgstr "Функцыянальная 8 "
+
+msgid "Function key 9"
+msgstr "Функцыянальная 9 "
+
+msgid "Function key 10"
+msgstr "Функцыянальная 10"
+
+msgid "Function key 11"
+msgstr "Функцыянальная 11"
+
+msgid "Function key 12"
+msgstr "Функцыянальная 12"
+
+msgid "Function key 13"
+msgstr "Функцыянальная 13"
+
+msgid "Function key 14"
+msgstr "Функцыянальная 14"
+
+msgid "Function key 15"
+msgstr "Функцыянальная 15"
+
+msgid "Function key 16"
+msgstr "Функцыянальная 16"
+
+msgid "Function key 17"
+msgstr "Функцыянальная 17"
+
+msgid "Function key 18"
+msgstr "Функцыянальная 18"
+
+msgid "Function key 19"
+msgstr "Функцыянальная 19"
+
+msgid "Function key 20"
+msgstr "Функцыянальная 20"
+
+msgid "Backspace key"
+msgstr "Клявіша Backspace"
+
+msgid "End key"
+msgstr "Клявіша End      "
+
+msgid "Up arrow key"
+msgstr "Стрэлка угору    "
+
+msgid "Down arrow key"
+msgstr "Стрэлка ўніз     "
+
+msgid "Left arrow key"
+msgstr "Стрэлка ўлева    "
+
+msgid "Right arrow key"
+msgstr "Стрэлка ўправа   "
+
+msgid "Home key"
+msgstr "Клавіша Home     "
+
+msgid "Page Down key"
+msgstr "Клавіша Page Down"
+
+msgid "Page Up key"
+msgstr "Клавіша Page Up  "
+
+msgid "Insert key"
+msgstr "Клавіша Insert   "
+
+msgid "Delete key"
+msgstr "Клавіша Delete   "
+
+msgid "Completion/M-tab"
+msgstr "Заканчэнне/M-Tab "
+
+msgid "+ on keypad"
+msgstr "+ на keypad'е"
+
+msgid "- on keypad"
+msgstr "- на keypad'е"
+
+msgid "* on keypad"
+msgstr "* на лічбавых клавішах"
+
+msgid "Left arrow keypad"
+msgstr "Стрэлка ўлева на keypad'e"
+
+msgid "Right arrow keypad"
+msgstr "Стрэлка ўправа на keypad'e"
+
+msgid "Up arrow keypad"
+msgstr "Стрэлка ўверх на keypad'e"
+
+msgid "Down arrow keypad"
+msgstr "Стрэлка ўніз на keypad'e"
+
+msgid "Home on keypad"
+msgstr "Home на keypad'е"
+
+msgid "End on keypad"
+msgstr "End на keypad'е"
+
+msgid "Page Down keypad"
+msgstr "Page Down keypad"
+
+msgid "Page Up keypad"
+msgstr "Page Up keypad"
+
+msgid "Insert on keypad"
+msgstr "Insert на keypad'е"
+
+msgid "Delete on keypad"
+msgstr "Delete на keypad'е"
+
+msgid "Enter on keypad"
+msgstr "Enter на keypad'е"
+
+msgid "Slash on keypad"
+msgstr "Slash на keypad'е"
+
+msgid "NumLock on keypad"
+msgstr "NumLock на keypad'е"
+
+msgid "Background process:"
+msgstr "Працэс у тле:"
+
+#, c-format
+msgid ""
+"Cannot open cpio archive\n"
+"%s"
+msgstr ""
+"Немагчыма адкрыць cpio-архіў\n"
+"%s"
+
+#, c-format
+msgid ""
+"Premature end of cpio archive\n"
+"%s"
+msgstr ""
+"Заўчасны канец архіву cpio\n"
+"%s"
+
+#, c-format
+msgid ""
+"Corrupted cpio header encountered in\n"
+"%s"
+msgstr ""
+"Пашкоджаны загаловак cpio знойдзены ў\n"
+"%s"
+
+#, c-format
+msgid ""
+"Inconsistent hardlinks of\n"
+"%s\n"
+"in cpio archive\n"
+"%s"
+msgstr ""
+"Няўзгодненая жорсткая спасылка\n"
+"%s\n"
+"у архіве cpio\n"
+"%s"
+
+#, c-format
+msgid "%s contains duplicate entries! Skipping!"
+msgstr "%s утрымлівае падвойныя запісы! Пропуск!"
+
+#, c-format
+msgid ""
+"Unexpected end of file\n"
+"%s"
+msgstr ""
+"Нечаканы канец файла\n"
+"%s"
+
+#, c-format
+msgid "Directory cache expired for %s"
+msgstr "Кэш каталога састарэў для %s"
+
+msgid "Starting linear transfer..."
+msgstr "Запуск лінейнай перадачы..."
+
+#, c-format
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
+msgstr "%s: %s: %s %3d%% (%lu байтаў перанесена)"
+
+#, c-format
+msgid "%s: %s: %s %lu bytes transferred"
+msgstr "%s: %s: %s %lu байтаў перанесена"
+
+msgid "Getting file"
+msgstr "Атрыманне файла"
+
+#, c-format
+msgid ""
+"Cannot open %s archive\n"
+"%s"
+msgstr ""
+"Немагчыма адкрыць %s-архіў\n"
+"%s"
+
+msgid "Inconsistent extfs archive"
+msgstr "Няўзгоднены архіў extfs"
+
+#, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "fish: Адлучэнне ад %s"
+
+msgid "fish: Waiting for initial line..."
+msgstr "fish: Чакаецца радок ініцыялізацыі..."
+
+msgid "Sorry, we cannot do password authenticated connections for now."
+msgstr "Выбачайце, немагчыма стварыць аўтарызаваныя паролем злучэнні зараз."
+
+msgid " fish: Password required for "
+msgstr "fish: Патрабуецца пароль для "
+
+msgid "fish: Sending password..."
+msgstr "fish: Дасылаецца пароль..."
+
+msgid "fish: Sending initial line..."
+msgstr "fish: Дасылаецца радок ініцыялізацыі..."
+
+msgid "fish: Handshaking version..."
+msgstr "fish: Версія пацверджання сувязі..."
+
+msgid "fish: Setting up current directory..."
+msgstr "fish: Усталёўваецца бягучы каталог..."
+
+#, c-format
+msgid "fish: Connected, home %s."
+msgstr "fish: Злучэнне адбылося, хатні каталог %s."
+
+#, c-format
+msgid "fish: Reading directory %s..."
+msgstr "fish: Чытанне каталога %s..."
+
+#, c-format
+msgid "%s: done."
+msgstr "%s: зроблена."
+
+#, c-format
+msgid "%s: failure"
+msgstr "%s: збой "
+
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr "fish: запіс %s: дасылаецца каманда..."
+
+msgid "fish: Local read failed, sending zeros"
+msgstr "fish: Збой лакальнага чытання, дасылаюцца нулі"
+
+#, c-format
+msgid "fish: storing %s %d (%lu)"
+msgstr "fish: запіс %s %d (%lu)"
+
+msgid "zeros"
+msgstr "нулі"
+
+msgid "Aborting transfer..."
+msgstr "Перарыванне перадачы..."
+
+msgid "Error reported after abort."
+msgstr "Адзначана памылка пасля перарывання."
+
+msgid "Aborted transfer would be successful."
+msgstr "Перадача паспяхова перарваная."
+
+#, c-format
+msgid "ftpfs: Disconnecting from %s"
+msgstr "ftpfs: Адлучэнне ад %s"
+
+msgid " FTP: Password required for "
+msgstr " FTP: Патрабуецца пароль для "
+
+msgid "ftpfs: sending login name"
+msgstr "ftpfs: Дасылаецца імя карыстальніка"
+
+msgid "ftpfs: sending user password"
+msgstr "ftpfs: Дасылаецца пароль карыстальніка"
+
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: Рахунак патрабуецца для %s"
+
+msgid "Account:"
+msgstr "Рахунак:"
+
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: дасылаецца звесткі рахунка"
+
+msgid "ftpfs: logged in"
+msgstr "ftpfs: зарэгістраваны"
+
+#, c-format
+msgid "ftpfs: Login incorrect for user %s "
+msgstr "ftpfs: Памылка рэгістрацыі карыстальніка %s "
+
+msgid "ftpfs: Invalid host name."
+msgstr "ftpfs: Памылковае імя сістэмы."
+
+#, fuzzy
+msgid "ftpfs: Invalid host address."
+msgstr "ftpfs: Памылковае імя сістэмы."
+
+#, c-format
+msgid "ftpfs: making connection to %s"
+msgstr "ftpfs: здзяйсняецца далучэнне да %s"
+
+msgid "ftpfs: connection interrupted by user"
+msgstr "ftpfs: злучэнне перарванае карыстальнікам"
+
+#, c-format
+msgid "ftpfs: connection to server failed: %s"
+msgstr "ftpfs: збой далучэння да сервера: %s"
+
+#, c-format
+msgid "Waiting to retry... %d (Control-C to cancel)"
+msgstr "Чаканне паўтору спробы... %d (Control-C для адмены)"
+
+msgid "ftpfs: could not setup passive mode"
+msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым"
+
+msgid "ftpfs: aborting transfer."
+msgstr "ftpfs: перарыванне перадачы."
+
+#, c-format
+msgid "ftpfs: abort error: %s"
+msgstr "ftpfs: Памылка перарывання: %s"
+
+msgid "ftpfs: abort failed"
+msgstr "ftpfs: збой перарывання"
+
+msgid "ftpfs: CWD failed."
+msgstr "ftpfs: збой пошуку бягучага працоўнага каталога."
+
+msgid "ftpfs: couldn't resolve symlink"
+msgstr "ftpfs: немагчыма вызначыць сімвалічную спасылку"
+
+msgid "Resolving symlink..."
+msgstr "Вызначаецца сімвалічная спасылка..."
+
+#, c-format
+msgid "ftpfs: Reading FTP directory %s... %s%s"
+msgstr "ftpfs: Чытанне каталога FTP %s... %s%s"
+
+msgid "(strict rfc959)"
+msgstr "(абмежаванне rfc959)"
+
+msgid "(chdir first)"
+msgstr "(спачатку chdir)"
+
+msgid "ftpfs: failed; nowhere to fallback to"
+msgstr "ftpfs: памылка; няма куды перайсці на аварыйны рэжым"
+
+#, c-format
+msgid "ftpfs: storing file %lu (%lu)"
+msgstr "ftpfs: запіс файла %lu (%lu)"
+
+msgid ""
+"~/.netrc file has incorrect mode.\n"
+"Remove password or correct mode."
+msgstr ""
+"Файл ~/.netrc мае памылковы рэжым доступу/уладання.\n"
+"Выдаліце пароль ці выпраўце рэжым доступу/уладання."
+
+msgid " MCFS "
+msgstr " MCFS "
+
+msgid " The server does not support this version "
+msgstr " Сервер не падтрымлівае бягучую версію "
+
+msgid ""
+" The remote server is not running on a system port \n"
+" you need a password to log in, but the information may \n"
+" not be safe on the remote side.  Continue? \n"
+msgstr ""
+" Адлеглы паслужнік запушчаны не на сістэмным порце. \n"
+" Патрабуецца пароль для ўваходу ў сістэму, але гэта можа быць \n"
+" небяспечна для інфармацыі на адлеглым баку. Працягваць?\n"
+
+msgid " MCFS Password required "
+msgstr " Патрабуецца пароль MCFS "
+
+msgid " Invalid password "
+msgstr " Памылковы пароль "
+
+#, c-format
+msgid " Cannot locate hostname: %s "
+msgstr " Немагчыма вызначыць хост: %s"
+
+#, c-format
+msgid " Cannot create socket: %s "
+msgstr " Немагчыма стварыць сокет: %s "
+
+#, c-format
+msgid " Cannot connect to server: %s "
+msgstr " Немагчыма далучыцца да сервера: %s "
+
+msgid " Too many open connections "
+msgstr " Вельмі шмат адкрытых злучэнняў "
+
+#, c-format
+msgid ""
+"Warning: Invalid line in %s:\n"
+"%s\n"
+msgstr ""
+"Увага: Памылковы радок у %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in %s:\n"
+"%s\n"
+msgstr ""
+"Увага: Памылковы сцяг %c у %s:\n"
+"%s\n"
+
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+" Збой паўторнага далучэння да %s\n"
+" "
+
+msgid " Authentication failed "
+msgstr " Збой ідэнтыфікацыі "
+
+#, c-format
+msgid " Error %s creating directory %s "
+msgstr " %s стварае каталог %s "
+
+#, c-format
+msgid " Error %s removing directory %s "
+msgstr " %s выдаляе каталог %s "
+
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s адкрывае файл %s з адлеглай машыны"
+
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s выдаленне аддаленага файла %s"
+
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s змяняе назвы файлаў\n"
+
+#, c-format
+msgid ""
+"Cannot open tar archive\n"
+"%s"
+msgstr ""
+"Немагчыма адкрыць tar-архіў\n"
+"%s"
+
+msgid "Inconsistent tar archive"
+msgstr "Супярэчлівы tar-архіў"
+
+msgid "Unexpected EOF on archive file"
+msgstr "Нечаканы канец архіўнага файла"
+
+#, c-format
+msgid ""
+"Hmm,...\n"
+"%s\n"
+"doesn't look like a tar archive."
+msgstr ""
+"Хмм,...\n"
+"%s\n"
+"не падобны да tar-архіву."
+
+msgid " undelfs: error "
+msgstr " undelfs: памылка "
+
+msgid " not enough memory "
+msgstr " недастаткова памяці "
+
+msgid " while allocating block buffer "
+msgstr " пры атрыманні блоку буфераў "
+
+#, c-format
+msgid " open_inode_scan: %d "
+msgstr " open_inode_scan: %d "
+
+#, c-format
+msgid " while starting inode scan %d "
+msgstr " пры пачатку сканавання inode %d "
+
+#, c-format
+msgid "undelfs: loading deleted files information %d inodes"
+msgstr "undelfs: загрузка інфармацыі аб выдаленых файлах %d inodes"
+
+#, c-format
+msgid " while calling ext2_block_iterate %d "
+msgstr " пры выкліку ext2_block_iterate %d "
+
+msgid " no more memory while reallocating array "
+msgstr " не хапіла памяці пры пераадкрыцці масіву "
+
+#, c-format
+msgid " while doing inode scan %d "
+msgstr " пры сканаванні inode %d "
+
+msgid " Ext2lib error "
+msgstr " Збой Ext2lib "
+
+#, c-format
+msgid " Cannot open file %s "
+msgstr " Немагчыма адкрыць файл %s "
+
+msgid "undelfs: reading inode bitmap..."
+msgstr "undelfs: чытанне бітавай мапы inode..."
+
+#, c-format
+msgid ""
+" Cannot load inode bitmap from: \n"
+" %s \n"
+msgstr ""
+" Немагчыма загрузіць бітавую мапу inode з:\n"
+" %s \n"
+
+msgid "undelfs: reading block bitmap..."
+msgstr "undelfs: чытанне блоку бітавай мапы..."
+
+#, c-format
+msgid ""
+" Cannot load block bitmap from: \n"
+" %s \n"
+msgstr ""
+"  Немагчыма загрузіць блок бітавай мапы з:\n"
+" %s \n"
+
+msgid " vfs_info is not fs! "
+msgstr " vfs_info не файлавая сістэма! "
+
+msgid " You have to chdir to extract files first "
+msgstr " Вы павінны спачатку змяніць каталог, каб выбраць файлы "
+
+msgid " while iterating over blocks "
+msgstr "на час ітэрацыяў паверх блокаў"
+
+msgid "Cannot parse:"
+msgstr "Немагчыма прааналізаваць:"
+
+msgid "More parsing errors will be ignored."
+msgstr "Астатнія памылкі аналізу будуць праігнараваныя."
+
+msgid "Internal error:"
+msgstr "Унутраная памылка:"
+
+msgid "Changes to file lost"
+msgstr "Змены для файла страчаны"
+
+#~ msgid "Replace"
+#~ msgstr "Замяніць"
+
+#~ msgid "Insert"
+#~ msgstr "Уставіць"
+
+#~ msgid "Discard"
+#~ msgstr "Скасаваць"
+
+#~ msgid " External scripting "
+#~ msgstr " Знешні скрыпт "
+
+#~ msgid "Output:"
+#~ msgstr "Вывад:"
+
+#, fuzzy
+#~ msgid "Pad if column highliting"
+#~ msgstr " Падсветка файлаў "
+
+#~ msgid "Script:"
+#~ msgstr "Скрыпт:"
+
+#~ msgid "Name/command line"
+#~ msgstr "Назва/камандны радок"
+
+#~ msgid " Choose codepage "
+#~ msgstr " Выбраць знаказбор "
+
+#~ msgid "&Proceed"
+#~ msgstr "Пра&цяг"
+
+#~ msgid ""
+#~ "File \"%s\" changed on disk.\n"
+#~ "Do you really want to edit?"
+#~ msgstr ""
+#~ "Файл \"%s\" зменены на дыску.\n"
+#~ "Ці хочаце вы яго рэдагаваць?"
+
+#~ msgid "File changed"
+#~ msgstr "Файл зменены"
+
+#~ msgid "Exte&rnal Scripting      M-x"
+#~ msgstr "&Знешнія скрыпты            M-x"
+
+#~ msgid "Highlight options... "
+#~ msgstr " Налады падсветкі... "
+
+#~ msgid "Whitespace highlighting"
+#~ msgstr " Падсветка прагалаў "
+
+#~ msgid "Tab highlighting"
+#~ msgstr "Падсветка табуляцый"
+
+#~ msgid " Syntax options "
+#~ msgstr " Наладкі сінатаксісу "
+
+#~ msgid " Choose default FTP codepage "
+#~ msgstr " Выбраць звычайны знаказбор FTP "
+
+#~ msgid "FTP default codepage:"
+#~ msgstr "Звычайны знаказбор FTP:"
+
+#~ msgid "&Ok"
+#~ msgstr "&Так"
+
+#~ msgid "Databases"
+#~ msgstr "Базы Дадзеных"
+
+#~ msgid "Graphics"
+#~ msgstr "Графіка"
+
+#~ msgid "Multimedia"
+#~ msgstr "Мультымедыя"
+
+#~ msgid "Sources"
+#~ msgstr "Крыніцы"
+
+#~ msgid "Archives"
+#~ msgstr "Архівы"
+
+#~ msgid "Text/Doc Files"
+#~ msgstr "Тэкст/Дакументы"
+
+#~ msgid "Temp Files"
+#~ msgstr "Часовыя файлы"
+
+#~ msgid " File highlighting "
+#~ msgstr " Падсветка файлаў "
+
+#~ msgid "External viewer not found"
+#~ msgstr "Знешні праглядчык не знойдзены"
+
+#~ msgid " Both files must be regular files "
+#~ msgstr " Абодва файлы павінны быць звычайнымі "
+
+#~ msgid " Error building diff "
+#~ msgstr " Памылка стварэння diff "
+
+#~ msgid "Recode file names:"
+#~ msgstr "Перакадаваць файлы:"
+
+#~ msgid "  Malformed C literal  "
+#~ msgstr "  C-літэрал сфармаваны памылкова  "
+
+#~ msgid "con&Vert C literals"
+#~ msgstr " канвертаваць C-літэралы"
+
+#~ msgid "show free sp&Ace"
+#~ msgstr "Паказ &вольнага месца"
+
+#~ msgid "&Dynamic split"
+#~ msgstr "&Дынамічны падзел"
+
+#~ msgid "&Hidden files"
+#~ msgstr "С&хаваныя файлы"
+
+#~ msgid "Hidden &dirs"
+#~ msgstr "С&хаваныя каталогі"
+
+#~ msgid "%s (%d%%) of %s"
+#~ msgstr "%s (%d%%) з %s"
+
+#~ msgid "Panel &codepage C-t"
+#~ msgstr "&Знаказбор панэлі    C-t"
+
+#~ msgid "&View diff files      C-x C-y"
+#~ msgstr "diff &файлаў          C-x C-y"
+
+#~ msgid "file &Highlighting..."
+#~ msgstr "пад&светка файлаў..."
+
+#~ msgid " Notice "
+#~ msgstr " Папярэджанне "
+
+#~ msgid ""
+#~ " The Midnight Commander configuration files \n"
+#~ " are now stored in the ~/.mc directory, the \n"
+#~ " files have been moved now\n"
+#~ msgstr ""
+#~ " Файлы канфігурацыі Midnight Commander \n"
+#~ " захоўваюцца ў каталогу ~/.mc, старыя  \n"
+#~ " файлы зараз туды перамешчаныя\n"
+
+#~ msgid "select symlinked dir as dir"
+#~ msgstr "сімв.спасылка на кат-г як кат-г"
+
+#, fuzzy
+#~ msgid " Choose panel codepage "
+#~ msgstr " Выбраць знаказбор "
+
+#~ msgid "(invalid)"
+#~ msgstr "(памылковы)"
+
+#~ msgid "Direntry warning"
+#~ msgstr "Папярэджанне каталога"
+
+#~ msgid "ftpfs: %s"
+#~ msgstr "ftpfs: %s"
+
+#~ msgid "ftpfs: invalid address family"
+#~ msgstr "ftpfs: Памылковы тып адрасу"
+
+#~ msgid "ftpfs: could not setup passive mode: %s"
+#~ msgstr "ftpfs: немагчыма ўсталяваць пасіўны рэжым: %s"
+
+#~ msgid "ftpfs: could not create socket: %s"
+#~ msgstr "ftpfs: Немагчыма стварыць сокет: %s "
