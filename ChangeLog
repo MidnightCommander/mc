@@ -1,3 +1,8 @@
+2009-01-16 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* src/subshell: setting subshell pty to close-on-exec 
+	  (taken from mandriva patches)
+
 2009-01-14 Slava Zanko <slavazanko@gmail.com>
 
 	* lib/mc.ext.in: change filemask for recognize 7z-files
