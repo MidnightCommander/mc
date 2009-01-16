@@ -1144,7 +1144,7 @@ msgstr " symbolischen Link bearbeiten, kann %s nicht entfernen: %s"
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " symbolschen Link barbeiten: %s"
+msgstr " symbolschen Link bearbeiten: %s"
 
 #, c-format
 msgid "`%s' is not a symbolic link"
@@ -1244,7 +1244,7 @@ msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Kann temporäre Befehlsdaei nicht anlegen \n"
+" Kann temporäre Befehlsdatei nicht anlegen \n"
 " %s "
 
 msgid " Parameter "
@@ -1330,7 +1330,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Kann Quelldaei \"%s\" nicht untersuchen \n"
+" Kann Quelldatei \"%s\" nicht untersuchen \n"
 " %s "
 
 #, c-format
@@ -1925,7 +1925,7 @@ msgstr "Keine Knoten-Information"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Freie Knoten: %s (%d%%) von %s"
+msgstr "Freier Platz: %s (%d%%) von %s"
 
 msgid "No space information"
 msgstr "Keine Information über Speicherplatz"
@@ -2069,7 +2069,7 @@ msgstr " Kann diese Taste nicht akzeptieren "
 
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Sie haben \"%s\" einggeben"
+msgstr " Sie haben \"%s\" eingegeben"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -2143,7 +2143,7 @@ msgid "FT&P link..."
 msgstr "FT&P-Verbindung..."
 
 msgid "S&hell link..."
-msgstr "Shell-Verbindung..."
+msgstr "S&hell-Verbindung..."
 
 msgid "SM&B link..."
 msgstr "SM&B-Verbindung..."
@@ -3372,7 +3372,7 @@ msgstr "ftpfs: Verbindung durch Benutzer unterbrochen"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: Verbindung zum Server fehlgeschlgen: %s"
+msgstr "ftpfs: Verbindung zum Server fehlgeschlagen: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
