@@ -10,7 +10,7 @@ This is a tiny library of helper functions/macros.
 
 --
 
-memory.h:	Memory management functions
+mhlmemory.h:	Memory management functions
 
     * mhl_mem_alloc_u(sz)				[MACRO-FUNC]
     
@@ -34,7 +34,7 @@ memory.h:	Memory management functions
 	like mhl_mem_free(), but with ptr as a variable that gets cleared
 	(use this as shortcut to "mhl_mem_free(foo); foo = NULL")
 
-string.h:	String helpers
+mhlstring.h:	String helpers
 
     * mhl_str_dup(const char*s) -> char*
 
@@ -75,7 +75,7 @@ string.h:	String helpers
 	[INLINE-FUNC] Reverses the string in passed buffer and returns the buffer ptr itself.
 	If NULL is passed, returns NULL.
 
-shell_escape.h:	Shell-style string escaping
+mhlescape.h:	Shell-style string escaping
 
     * mhl_shell_escape_toesc(char c) 	-> bool
 
@@ -95,7 +95,7 @@ shell_escape.h:	Shell-style string escaping
 	[INLINE-FUNC] unescapes the string into given buffer (changes buffer!) and 
 	returns ptr to the buffer itself. When NULL passed returns NULL.
 
-env.h:	Environment variable helpers
+mhlenv.h:	Environment variable helpers
 
     * mhl_getenv_dup(const char* n)	-> char*
     
