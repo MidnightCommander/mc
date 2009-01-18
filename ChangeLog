@@ -1,12 +1,22 @@
+2009-01-18 Patrick Winnertz <winnie@debian.org
+
+	* edit/editdraw.c: Moved var into if clause as it's only used
+	there
+	* edit/editlock.c: Removed unnecessary arguement to if condition
+	* src/cmd.c: Removed unused pointer
+	* src/hotlist.c: Removed unused function save_group
+	* src/main.c: Removed unused function do_mc_filename_rename
+	* src/util.c: Removed unused struct whentm
+
 2009-01-12 Patrick Winnertz <winnie@debian.org>
-  
-  * AUTHORS: Added Enrico Weigelt, Slava Zanko and 
-  Patrick Winnertz as authors 
+
+	* AUTHORS: Added Enrico Weigelt, Slava Zanko and 
+	Patrick Winnertz as authors 
 
 2009-01-11 Patrick Winnertz <winnie@debian.org>
 
-  * syntax/pascal.syntax: Added syntax highlighting for 
-  some delphi keywords
+	* syntax/pascal.syntax: Added syntax highlighting for 
+	some delphi keywords
 
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
