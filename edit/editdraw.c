@@ -282,7 +282,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 {
     static unsigned int line[MAX_LINE_LEN];
     unsigned int *p = line;
-    long m1 = 0, m2 = 0, q, c1, c2, tws;
+    long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
     unsigned int c;
     int color;
@@ -300,6 +300,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	eval_marks (edit, &m1, &m2);
 
 	if (row <= edit->total_lines - edit->start_line) {
+		long tws;
 	    if (use_colors && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
