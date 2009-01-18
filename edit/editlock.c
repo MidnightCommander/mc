@@ -142,8 +142,7 @@ lock_get_info (const char *lockfname)
     int cnt;
     static char buf[BUF_SIZE];
 
-    if ((cnt = readlink (lockfname, buf, BUF_SIZE - 1)) == -1 || !buf
-	|| !*buf)
+    if ((cnt = readlink (lockfname, buf, BUF_SIZE - 1)) == -1 || !*buf)
 	return NULL;
     buf[cnt] = '\0';
     return buf;

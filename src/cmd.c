@@ -1223,8 +1223,6 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
-    char *str;
-    
     save_setup ();
     sync_profiles ();
     
