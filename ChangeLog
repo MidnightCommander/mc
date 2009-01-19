@@ -1,4 +1,9 @@
-2009-01-18 Patrick Winnertz <winnie@debian.org
+2009-01-19 Patrick Winnertz <winnie@debian.org>
+
+	* edit/edit.h: Add two more ints
+	* src/setup.c: Add keybinding to disable tab highlighting
+
+2009-01-18 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editdraw.c: Moved var into if clause as it's only used
 	there
