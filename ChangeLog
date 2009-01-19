@@ -1,3 +1,9 @@
+2009-01-19 Enric Weigelt <weigelt@metux.de>
+
+	* acinclude.m4: removed MC_SLANG_PRIVATE macro
+	* src/slint.c: removed HAVE_SLANG_PRIVATE conditional and
+	  replaced SLang_getkey2(), SLang_input_pending2()
+
 2009-01-18 Patrick Winnertz <winnie@debian.org
 
 	* edit/editdraw.c: Moved var into if clause as it's only used
