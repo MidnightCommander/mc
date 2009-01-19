@@ -46,7 +46,7 @@ include python.syntax
 file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
-file ..\*\\.(man|[0-9n]|[0-9]x)$ NROFF\sSource
+file ..\*\\.(man|[0-9n]|[0-9](x|ncurses|ssl|p|pm|menu|form|vga|t|td))$ NROFF\sSource
 include nroff.syntax
 
 file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
@@ -109,7 +109,7 @@ include aspx.syntax
 file ..\*\\.st$ SmallTalk\sProgram
 include smalltalk.syntax
 
-file ..\*\\.(lisp|lsp|el)$ Lisp\sProgram
+file ..\*\\.(lisp|lsp|el|cl)$ Lisp\sProgram
 include lisp.syntax
 
 file ..\*\\.(ml|mli|mly|mll|mlp)$ ML\sProgram
