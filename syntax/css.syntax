@@ -33,6 +33,42 @@ context default
     keyword whole optgroup white
 
 
+    keyword \:\:add-line white
+    keyword \:\:add-page white
+    keyword \:\:branch white
+    keyword \:\:chunk white
+    keyword \:\:close-button white
+    keyword \:\:down-arrow white
+    keyword \:\:down-button white
+    keyword \:\:drop-down white
+    keyword \:\:float-button white
+    keyword \:\:groove white
+    keyword \:\:indicator white
+    keyword \:\:handle white
+    keyword \:\:icon white
+    keyword \:\:item white
+    keyword \:\:left-arrow white
+    keyword \:\:left-corner white
+    keyword \:\:menu-arrow white
+    keyword \:\:menu-button white
+    keyword \:\:menu-indicator white
+    keyword \:\:right-arrow white
+    keyword \:\:pane white
+    keyword \:\:right-corner white
+    keyword \:\:scroller white
+    keyword \:\:section white
+    keyword \:\:separator white
+    keyword \:\:sub-line white
+    keyword \:\:sub-page white
+    keyword \:\:tab white
+    keyword \:\:tab-bar white
+    keyword \:\:tear white
+    keyword \:\:tear-off white
+    keyword \:\:text white
+    keyword \:\:title white
+    keyword \:\:up-arrow white
+    keyword \:\:up-button white
+
     keyword  \:active		 brightmagenta
     keyword  \:after 		 brightmagenta
     keyword  \:visited		 brightmagenta
@@ -43,106 +79,154 @@ context default
     keyword  \:focus 		 brightmagenta
     keyword  \:lang 		 brightmagenta
     keyword  \:link 		 brightmagenta
-    keyword  \:hover 		 brightmagenta
+    keyword  \:active 		brightmagenta
+    keyword  \:adjoins-item 	brightmagenta
+    keyword  \:alternate 	brightmagenta
+    keyword  \:bottom 		brightmagenta
+    keyword  \:checked 		brightmagenta 
+    keyword  \:closable 	brightmagenta
+    keyword  \:closed 		brightmagenta
+    keyword  \:default 		brightmagenta
+    keyword  \:disabled 	brightmagenta
+    keyword  \:editable 	brightmagenta
+    keyword  \:edit-focus 	brightmagenta
+    keyword  \:enabled 		brightmagenta
+    keyword  \:exclusive 	brightmagenta
+    keyword  \:first 		brightmagenta
+    keyword  \:flat 		brightmagenta
+    keyword  \:floatable 	brightmagenta
+    keyword  \:focus 		brightmagenta
+    keyword  \:has-children 	brightmagenta
+    keyword  \:has-siblings 	brightmagenta
+    keyword  \:horizontal 	brightmagenta
+    keyword  \:hover 		brightmagenta
+    keyword  \:indeterminate 	brightmagenta
+    keyword  \:last 		brightmagenta
+    keyword  \:left 		brightmagenta
+    keyword  \:maximized 	brightmagenta
+    keyword  \:middle 		brightmagenta
+    keyword  \:minimized 	brightmagenta
+    keyword  \:movable 		brightmagenta
+    keyword  \:no-frame 	brightmagenta
+    keyword  \:non-exclusive 	brightmagenta
+    keyword  \:off 		brightmagenta
+    keyword  \:on 		brightmagenta
+    keyword  \:only-one 	brightmagenta
+    keyword  \:open 		brightmagenta
+    keyword  \:next-selected 	brightmagenta
+    keyword  \:pressed 		brightmagenta
+    keyword  \:previous-selected brightmagenta
+    keyword  \:read-only 	brightmagenta
+    keyword  \:right 		brightmagenta
+    keyword  \:selected 	brightmagenta
+    keyword  \:top 		brightmagenta
+    keyword  \:unchecked 	brightmagenta
+    keyword  \:vertical 	brightmagenta
+    keyword  \:window 		brightmagenta
 
+    keyword whole background-attachment 		lightgray
+    keyword whole background-color 			lightgray
+    keyword whole background-image 			lightgray
+    keyword whole background-position 			lightgray
+    keyword whole background-repeat 			lightgray
+    keyword whole background 				lightgray
+    keyword whole bidi-override 			lightgray
+    keyword whole border-bottom 			lightgray
+    keyword whole border-bottom-color 			lightgray
+    keyword whole border-bottom-style 			lightgray
+    keyword whole border-bottom-width 			lightgray
+    keyword whole border-collapse 			lightgray
+    keyword whole border-color 				lightgray
+    keyword whole border-left 				lightgray
+    keyword whole border-left-color 			lightgray
+    keyword whole border-left-style 			lightgray
+    keyword whole border-left-width 			lightgray
+    keyword whole border-right 				lightgray
+    keyword whole border-right-color 			lightgray
+    keyword whole border-right-style 			lightgray
+    keyword whole border-right-width 			lightgray
+    keyword whole border-spacing 			lightgray
+    keyword whole border-style 				lightgray
+    keyword whole border-top 				lightgray
+    keyword whole border-top-color 			lightgray
+    keyword whole border-top-style 			lightgray
+    keyword whole border-top-width 			lightgray
+    keyword whole border-width 				lightgray
+    keyword whole border 				lightgray
+    keyword whole bottom 				lightgray
+    keyword whole caption-side 				lightgray
+    keyword whole clear 				lightgray
+    keyword whole clip 					lightgray
+    keyword whole color 				lightgray
+    keyword whole content 				lightgray
+    keyword whole counter-increment 			lightgray
+    keyword whole cursor 				lightgray
+    keyword whole direction 				lightgray
+    keyword whole display 				lightgray
+    keyword whole empty-cells 				lightgray
+    keyword whole fixed 				lightgray
+    keyword whole float 				lightgray
+    keyword whole font-size-adjust 			lightgray
+    keyword whole font-stretch 				lightgray
+    keyword whole font-family 				lightgray
+    keyword whole font-size 				lightgray
+    keyword whole font-family 				lightgray
+    keyword whole font-style 				lightgray
+    keyword whole font-variant 				lightgray
+    keyword whole font-weight				lightgray
+    keyword whole font	 				lightgray
+    keyword whole generic-family 			lightgray
+    keyword whole height 				lightgray
+    keyword whole identifier 				lightgray
+    keyword whole image 				lightgray
+    keyword whole justify 				lightgray
+    keyword whole left 					lightgray
+    keyword whole length 				lightgray
+    keyword whole letter-spacing 			lightgray
+    keyword whole line-height 				lightgray
+    keyword whole list-style-image 			lightgray
+    keyword whole list-style-position 			lightgray
+    keyword whole list-style-type 			lightgray
+    keyword whole list-style 				lightgray
+    keyword whole margin-left 				lightgray
+    keyword whole margin-top 				lightgray
+    keyword whole margin 				lightgray
+    keyword whole marker-offset 			lightgray
+    keyword whole max-height 				lightgray
+    keyword whole max-width 				lightgray
+    keyword whole min-height 				lightgray
+    keyword whole min-width 				lightgray
+    keyword whole nowrap 				lightgray
+    keyword whole outline-color 			lightgray
+    keyword whole outline-style 			lightgray
+    keyword whole outline-width 			lightgray
+    keyword whole outline 				lightgray
+    keyword whole padding-left 				lightgray
+    keyword whole padding-top 				lightgray
+    keyword whole padding 				lightgray
+    keyword whole position 				lightgray
+    keyword whole quotes 				lightgray
+    keyword whole right 				lightgray
+    keyword whole subcontrol-origin 			lightgray
+    keyword whole subcontrol-position 			lightgray
+    keyword whole table-caption 			lightgray
+    keyword whole table-layout 				lightgray
+    keyword whole text-align 				lightgray
+    keyword whole text-decoration 			lightgray
+    keyword whole text-indent 				lightgray
+    keyword whole text-shadow 				lightgray
+    keyword whole text-transform 			lightgray
+    keyword whole top 					lightgray
+    keyword whole unicode-bidi 				lightgray
+    keyword whole vertical-align 			lightgray
+    keyword whole visibility 				lightgray
+    keyword whole white-space 				lightgray
+    keyword whole width 				lightgray
+    keyword whole word-spacing 				lightgray
 
-    keyword whole background-attachment 		yellow
-    keyword whole background-color 			yellow
-    keyword whole background-image 			yellow
-    keyword whole background-position 			yellow
-    keyword whole background-repeat 			yellow
-    keyword whole background 				yellow
-    keyword whole bidi-override 			yellow
-    keyword whole border-bottom 			yellow
-    keyword whole border-bottom-color 			yellow
-    keyword whole border-bottom-style 			yellow
-    keyword whole border-bottom-width 			yellow
-    keyword whole border-collapse 			yellow
-    keyword whole border-color 				yellow
-    keyword whole border-left 				yellow
-    keyword whole border-left-color 			yellow
-    keyword whole border-left-style 			yellow
-    keyword whole border-left-width 			yellow
-    keyword whole border-right 				yellow
-    keyword whole border-right-color 			yellow
-    keyword whole border-right-style 			yellow
-    keyword whole border-right-width 			yellow
-    keyword whole border-spacing 			yellow
-    keyword whole border-style 				yellow
-    keyword whole border-top 				yellow
-    keyword whole border-top-color 			yellow
-    keyword whole border-top-style 			yellow
-    keyword whole border-top-width 			yellow
-    keyword whole border-width 				yellow
-    keyword whole border 				yellow
-    keyword whole bottom 				yellow
-    keyword whole caption-side 				yellow
-    keyword whole clear 				yellow
-    keyword whole clip 					yellow
-    keyword whole color 				yellow
-    keyword whole content 				yellow
-    keyword whole counter-increment 			yellow
-    keyword whole cursor 				yellow
-    keyword whole direction 				yellow
-    keyword whole display 				yellow
-    keyword whole empty-cells 				yellow
-    keyword whole fixed 				yellow
-    keyword whole float 				yellow
-    keyword whole font-size-adjust 			yellow
-    keyword whole font-stretch 				yellow
-    keyword whole font-family 				yellow
-    keyword whole font-size 				yellow
-    keyword whole font-family 				yellow
-    keyword whole font-style 				yellow
-    keyword whole font-variant 				yellow
-    keyword whole font-weight				yellow
-    keyword whole font	 				yellow
-    keyword whole generic-family 			yellow
-    keyword whole height 				yellow
-    keyword whole identifier 				yellow
-    keyword whole justify 				yellow
-    keyword whole left 					yellow
-    keyword whole length 				yellow
-    keyword whole letter-spacing 			yellow
-    keyword whole line-height 				yellow
-    keyword whole list-style-image 			yellow
-    keyword whole list-style-position 			yellow
-    keyword whole list-style-type 			yellow
-    keyword whole list-style 				yellow
-    keyword whole margin-left 				yellow
-    keyword whole margin-top 				yellow
-    keyword whole margin 				yellow
-    keyword whole marker-offset 			yellow
-    keyword whole max-height 				yellow
-    keyword whole max-width 				yellow
-    keyword whole min-height 				yellow
-    keyword whole min-width 				yellow
-    keyword whole nowrap 				yellow
-    keyword whole outline-color 			yellow
-    keyword whole outline-style 			yellow
-    keyword whole outline-width 			yellow
-    keyword whole outline 				yellow
-    keyword whole padding-left 				yellow
-    keyword whole padding-top 				yellow
-    keyword whole padding 				yellow
-    keyword whole position 				yellow
-    keyword whole quotes 				yellow
-    keyword whole right 				yellow
-    keyword whole table-caption 			yellow
-    keyword whole table-layout 				yellow
-    keyword whole text-align 				yellow
-    keyword whole text-decoration 			yellow
-    keyword whole text-indent 				yellow
-    keyword whole text-shadow 				yellow
-    keyword whole text-transform 			yellow
-    keyword whole top 					yellow
-    keyword whole unicode-bidi 				yellow
-    keyword whole vertical-align 			yellow
-    keyword whole visibility 				yellow
-    keyword whole white-space 				yellow
-    keyword whole width 				yellow
-    keyword whole word-spacing 				yellow
-    
+    keyword whole qconicalgradient		 brightgreen
+    keyword whole qlineargradient		 brightgreen
+    keyword whole qradialgradient		 brightgreen
 
     keyword whole left				 brightgreen
     keyword whole right				 brightgreen
@@ -155,6 +239,7 @@ context default
     keyword whole italic			 brightgreen
     keyword whole bolder			 brightgreen
     keyword whole underline			 brightgreen
+    keyword whole absolute			 brightgreen
 
     keyword whole none 				 brightgreen
     keyword whole auto 				 brightgreen
@@ -189,6 +274,9 @@ context default
     keyword whole invert 			 brightgreen
     keyword whole oblique 			 brightgreen
     keyword whole no-close-quote 		 brightgreen
+    keyword whole repeat-x 			 brightgreen
+    keyword whole repeat-y 			 brightgreen
+    keyword whole repeat 			 brightgreen
     keyword whole no-repeat 			 brightgreen
     keyword whole small-caps 			 brightgreen
     keyword whole transparent 			 brightgreen
@@ -451,6 +539,8 @@ context default
 
     keyword whole Arial brightgreen
     keyword whole arial brightgreen
+    keyword whole Narrow brightgreen
+    keyword whole narrow brightgreen
     keyword whole Trebuchet MS brightgreen
     keyword whole trebuchet ms brightgreen
     keyword whole verdana brightgreen
@@ -471,7 +561,8 @@ context default
     keyword \{0123456789\}*ex brightgreen
     keyword \{0123456789\}*pt brightgreen
     keyword \{0123456789\}*pc brightgreen
-    keyword \{0123456789\}*% brightred
+    keyword \{0123456789\}*%  brightred
+    keyword \{0123456789\}    brightgreen
 
     keyword { brightcyan
     keyword } brightcyan

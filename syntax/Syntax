@@ -127,6 +127,9 @@ include spec.syntax
 file ..\*\\.(awk)$ AWK\sFile
 include awk.syntax
 
+file ..\*\\.(css|qss|CSS|QSS)$ CSS\sFile
+include css.syntax
+
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
 
