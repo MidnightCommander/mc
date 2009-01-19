@@ -216,6 +216,8 @@ static const struct {
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },
     { "editor_edit_confirm_save", &edit_confirm_save },
     { "editor_syntax_highlighting", &option_syntax_highlighting },
+    { "editor_visible_tabs", &visible_tabs },
+    { "editor_visible_spaces", &visible_tws },
 #endif /* USE_INTERNAL_EDIT */
 
     { "nice_rotating_dash", &nice_rotating_dash },

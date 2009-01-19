@@ -298,6 +298,9 @@ extern char *option_backup_ext;
 extern int edit_confirm_save;
 extern int column_highlighting;
 
+extern int visible_tabs;
+extern int visible_tws;
+
 /* File names */
 #define EDIT_DIR           ".mc" PATH_SEP_STR "cedit"
 #define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
