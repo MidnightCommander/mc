@@ -226,7 +226,7 @@ add2panelize_cmd (void)
     if (pname->buffer && (*pname->buffer)) {
 	label = input_dialog (_(" Add to external panelize "), 
 		_(" Enter command label: "), 
-		" Add to external panelize ",
+		":add2panelize_cmd: Add to external panelize ",
 			      "");
 	if (!label)
 	    return;

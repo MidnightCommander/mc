@@ -523,7 +523,7 @@ edit_save_as_cmd (WEdit *edit)
     int different_filename = 0;
 
     exp = input_expand_dialog (_(" Save As "), _(" Enter file name: "),
-			       " Save As ", edit->filename);
+			       ":edit_save_as_cmd: Save As ", edit->filename);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -906,7 +906,7 @@ edit_load_cmd (WEdit *edit)
     }
 
     exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
-		    	       " Load ", edit->filename);
+				":edit_load_cmd: Load ", edit->filename);
 
     if (exp) {
 	if (*exp)
@@ -2336,7 +2336,7 @@ edit_goto_cmd (WEdit *edit)
     char s[32];
 
     g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), " Goto line ",
+    f = input_dialog (_(" Goto line "), _(" Enter line: "), ":edit_goto_cmd: Goto line ",
 		      line ? s : "");
     if (!f)
 	return;
@@ -2372,7 +2372,7 @@ edit_save_block_cmd (WEdit *edit)
 	return 1;
     exp =
 	input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
-			     " Save Block ", 
+			     ":edit_save_block_cmd: Save Block ", 
 			    catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2402,7 +2402,7 @@ int
 edit_insert_file_cmd (WEdit *edit)
 {
     char *exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
-				     " Insert File ",
+				     ":edit_insert_file_cmd: Insert File ",
 				     catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2442,7 +2442,7 @@ int edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_(" Run Sort "),
 	_(" Enter sort options (see manpage) separated by whitespace: "),
-	" Run Sort ", (old != NULL) ? old : "");
+	":edit_sort_cmd: Run Sort ", (old != NULL) ? old : "");
 
     if (!exp)
 	return 1;
@@ -2484,7 +2484,7 @@ edit_ext_cmd (WEdit *edit)
     exp =
 	input_dialog (_("Paste output of external command"),
 		      _("Enter shell command(s):"),
-		      "Paste output of external command", NULL);
+		      ":edit_ext_cmd: Paste output of ext.cmd ", NULL);
 
     if (!exp)
 	return 1;
