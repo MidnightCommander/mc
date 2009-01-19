@@ -98,7 +98,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, struct stat *, char *name);
-static int cpio_read(void *fh, char *buffer, int count);
+static ssize_t cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
 /* If some time reentrancy should be needed change it to */

@@ -366,7 +366,7 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 #define GNAL_VNC(s) unix_to_dos(s,False)
 /* does same as do_get() in client.c */
 /* called from vfs.c:1080, count = buffer size */
-static int
+static ssize_t
 smbfs_read (void *data, char *buffer, int count)
 {
     smbfs_handle *info = (smbfs_handle *) data;
@@ -380,7 +380,7 @@ smbfs_read (void *data, char *buffer, int count)
 	return n;
 }
 
-static int
+static ssize_t
 smbfs_write (void *data, const char *buf, int nbyte)
 {
     smbfs_handle *info = (smbfs_handle *) data;
@@ -1625,7 +1625,7 @@ smbfs_stat (struct vfs_class * me, const char *path, struct stat *buf)
 
 #define smbfs_lstat smbfs_stat	/* no symlinks on smb filesystem? */
 
-static int
+static off_t
 smbfs_lseek (void *data, off_t offset, int whence)
 {
     smbfs_handle *info = (smbfs_handle *) data;

@@ -84,7 +84,7 @@ static struct lsdel_struct     lsd;
 static struct deleted_info     *delarray;
 static int num_delarray, max_delarray;
 static char *block_buf;
-static char *undelfserr = N_(" undelfs: error ");
+static const char *undelfserr = N_(" undelfs: error ");
 static int readdir_ptr;
 static int undelfs_usage;
 static struct vfs_class vfs_undelfs_ops;
@@ -520,7 +520,7 @@ undelfs_dump_read(ext2_filsys fs, blk_t *blocknr, int blockcnt, void *private)
     return 0;
 }
 
-static int
+static ssize_t
 undelfs_read (void *vfs_info, char *buffer, int count)
 {
     undelfs_file *p = vfs_info;
@@ -649,7 +649,7 @@ undelfs_chdir(struct vfs_class *me, const char *path)
 }
 
 /* this has to stay here for now: vfs layer does not know how to emulate it */
-static int
+static off_t
 undelfs_lseek(void *vfs_info, off_t offset, int whence)
 {
     return -1;

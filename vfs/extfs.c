@@ -724,7 +724,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     return extfs_info;
 }
 
-static int extfs_read (void *data, char *buffer, int count)
+static ssize_t extfs_read (void *data, char *buffer, int count)
 {
     struct pseudofile *file = (struct pseudofile *)data;
 
@@ -1016,7 +1016,7 @@ static int extfs_chmod (struct vfs_class *me, const char *path, int mode)
     return 0;
 }
 
-static int extfs_write (void *data, const char *buf, int nbyte)
+static ssize_t extfs_write (void *data, const char *buf, int nbyte)
 {
     struct pseudofile *file = (struct pseudofile *)data;
 
@@ -1141,7 +1141,7 @@ extfs_chdir (struct vfs_class *me, const char *path)
     return 0;
 }
 
-static int extfs_lseek (void *data, off_t offset, int whence)
+static off_t extfs_lseek (void *data, off_t offset, int whence)
 {
     struct pseudofile *file = (struct pseudofile *) data;
 

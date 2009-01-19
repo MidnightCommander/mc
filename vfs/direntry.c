@@ -801,7 +801,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     return fh;
 }
 
-static int
+static ssize_t
 vfs_s_read (void *fh, char *buffer, int count)
 {
     int n;
@@ -848,7 +848,7 @@ vfs_s_write (void *fh, const char *buffer, int count)
     return 0;
 }
 
-static int
+static off_t
 vfs_s_lseek (void *fh, off_t offset, int whence)
 {
     off_t size = FH->ino->st.st_size;
