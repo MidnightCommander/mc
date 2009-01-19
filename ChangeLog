@@ -7,10 +7,10 @@
 	* src/ext.c src/file.c src/filegui.c src/find.c src/help.c:
 	* src/learn.c src/main.c src/panelize.c src/screen.c:
 	* src/selcodepage.c src/subshell.c src/tree.c src/user.c:
-	* src/utilunix.c src/view.c: 
+	* src/utilunix.c src/view.c:
 	* vfs/cpio.c vfs/direntry.c vfs/extfs.c vfs/fish.c vfs/ftpfs.c:
 	* vfs/mcfs.c vfs/sfs.c vfs/smbfs.c vfs/tar.c vfs/undelfs.c:
-	* vfs/utilvfs.c vfs/vfs.c: 
+	* vfs/utilvfs.c vfs/vfs.c:
 	
 	Changed message type codes on calls to message(), query_dialog(),
 	close_error_pipe() from numeric IDs to symbols D_ERROR, D_NORMAL
