@@ -423,7 +423,7 @@ msgid "&Insert file...   F15"
 msgstr "&Вставить файл...     F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "&Копировать в файл... C-f"
+msgstr "Ко&пировать в файл... C-f"
 
 msgid "&User menu...     F11"
 msgstr "&Меню пользователя... F11"
@@ -513,7 +513,7 @@ msgid "Sor&t...                 M-t"
 msgstr "&Сортировка...              M-t"
 
 msgid "Paste o&utput of...      M-u"
-msgstr "Вставить вывод &команды...  M-u"
+msgstr "Вставить в&ывод команды...  M-u"
 
 msgid "E&xternal Formatter      F19"
 msgstr "&Форматирование             F19"
@@ -540,7 +540,7 @@ msgid "Syntax &Highlighting..."
 msgstr "&Цветовыделение синтаксиса..."
 
 msgid "Save setu&p..."
-msgstr "&Сохранить настройки"
+msgstr "Со&хранить настройки"
 
 msgid " File "
 msgstr " Файл "
@@ -2165,7 +2165,7 @@ msgid "Vie&w file...         "
 msgstr "&Просмотр файла..."
 
 msgid "&Filtered view     M-!"
-msgstr "&Просмотр команды     M-!"
+msgstr "Просмотр команд&ы     M-!"
 
 msgid "&Edit               F4"
 msgstr "&Редактирование        F4"
@@ -2264,7 +2264,7 @@ msgid "Edit edi&tor menu file"
 msgstr "Правка меню р&едактора"
 
 msgid "Edit &syntax file"
-msgstr "Файл синтаксиса"
+msgstr "Фа&йл синтаксиса"
 
 msgid "&Configuration..."
 msgstr "&Конфигурация..."
