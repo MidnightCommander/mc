@@ -31,6 +31,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "mhl/memory.h"
+
 #include "global.h"
 #include "tty.h"
 #include "win.h"
@@ -934,6 +936,7 @@ complete_engine (WInput *in, int what_to_do)
 		    free_completions (in);
 	    } else
 	        beep ();
+	    //mhl_mem_free(complete);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
@@ -944,10 +947,9 @@ complete_engine (WInput *in, int what_to_do)
     	    WListbox *query_list;
     	    
     	    for (p=in->completions + 1; *p; count++, p++) {
-    	    *p = escape_string(*p);
     	    	if ((i = strlen (*p)) > maxlen)
     	    	    maxlen = i;
-			}
+	    }
     	    start_x = in->widget.x;
     	    start_y = in->widget.y;
     	    if (start_y - 2 >= count) {
