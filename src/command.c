@@ -27,6 +27,8 @@
 #include <errno.h>
 #include <string.h>
 
+#include "mhl/memory.h"
+
 #include "global.h"		/* home_dir */
 #include "tty.h"
 #include "widget.h"		/* WInput */
@@ -136,6 +138,7 @@ examine_cd (char *path)
     }
     g_free (q);
     g_free (path_tilde);
+    mhl_mem_free(path);
     return result;
 }
 

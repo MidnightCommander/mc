@@ -50,6 +50,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "mhl/memory.h"
+
 #include "global.h"
 #include "tty.h"
 #include "eregex.h"
@@ -1872,9 +1874,13 @@ panel_operate (void *source_panel, FileOperation operation,
 		g_free (dest);
 		dest = temp2;
 		temp = NULL;
-
+		
+		temp2 = source_with_path;
 		source_with_path = unescape_string(source_with_path);
+		mhl_mem_free(temp2);
+		temp2 = dest;
 		dest = unescape_string(dest);
+		mhl_mem_free(temp2);
 		switch (operation) {
 		case OP_COPY:
 		    /*
@@ -1965,10 +1971,15 @@ panel_operate (void *source_panel, FileOperation operation,
 		    value = transform_error;
 		else {
 		    char *temp2 = concat_dir_and_file (dest, temp);
+		    char *temp3;
 
-			source_with_path = unescape_string(source_with_path);
-			temp2 = unescape_string(temp2);
-			
+		    temp3 = source_with_path;
+		    source_with_path = unescape_string(source_with_path);
+		    mhl_mem_free(temp3);
+		    temp3 = temp2;
+		    temp2 = unescape_string(temp2);
+		    mhl_mem_free(temp3);
+
 		    switch (operation) {
 		    case OP_COPY:
 			/*
