@@ -1,20 +1,41 @@
+# Author   : Sergei Trofimovich <slyfox@inbox.ru>
+# Language : shell
+# Mode     : ebuild
+#
+# sh.syntax is taken as base.
+#
+# Note     : keep in sync default and " " contexts
+#
+# 'sh.syntax' header:
+#  #   Since I regulary update ths file, please send any comments
+#  #   to:           Michelle Konzack <linux4michelle@freenet.de>
+#  #   Last Update:  Thu, 01 Jun 2006 22:10:07 +0200
+
 context default
-    keyword linestart DEPEND brightcyan
-    keyword linestart DESCRIPTION brightcyan
-    keyword linestart EAPI brightcyan
-    keyword linestart HOMEPAGE brightcyan
-    keyword linestart IUSE brightcyan
-    keyword linestart KEYWORDS brightcyan
-    keyword linestart LICENSE brightcyan
-    keyword linestart PDEPEND brightcyan
-    keyword linestart PROVIDE brightcyan
-    keyword linestart RDEPEND brightcyan
-    keyword linestart RESTRICT brightcyan
-    keyword linestart S brightcyan
-    keyword linestart SLOT brightcyan
-    keyword linestart SRC_URI brightcyan
-    keyword linestart WANT_AUTOCONF brightcyan
-    keyword linestart WANT_AUTOMAKE brightcyan
+    #.ebuild specific commands/glo vars
+    # TODO: 1. split keywords by .eclass'es
+    #       2. grep all exports and place here
+    keyword whole DEPEND brightcyan
+    keyword whole DESCRIPTION brightcyan
+    keyword whole EAPI brightcyan
+    keyword whole EGIT_REPO_URI brightcyan
+    keyword whole ESVN_REPO_URI brightcyan
+    keyword whole EXPORT_FUNCTIONS brightcyan
+    keyword whole HOMEPAGE brightcyan
+    keyword whole IUSE brightcyan
+    keyword whole KEYWORDS brightcyan
+    keyword whole LICENSE brightcyan
+    keyword whole PDEPEND brightcyan
+    keyword whole PROVIDE brightcyan
+    keyword whole RDEPEND brightcyan
+    keyword whole RESTRICT brightcyan
+    keyword whole S brightcyan
+    keyword whole SLOT brightcyan
+    keyword whole SRC_URI brightcyan
+    keyword whole WANT_AUTOCONF brightcyan
+    keyword whole WANT_AUTOMAKE brightcyan
+    keyword DOCS brightcyan
+    keyword LINGUAS brightcyan
 
     keyword whole _elibtoolize yellow
     keyword whole check_KV yellow
@@ -59,6 +80,8 @@ context default
     keyword whole ewarn yellow
     keyword whole exeinto yellow
     keyword whole exeopts yellow
+    keyword whole enewgroup yellow
+    keyword whole enewuser yellow
     keyword whole fowners yellow
     keyword whole fperms yellow
     keyword whole has yellow
@@ -66,6 +89,7 @@ context default
     keyword whole has_version yellow
     keyword whole insinto yellow
     keyword whole insopts yellow
+    keyword whole intltoolize yellow
     keyword whole into yellow
     keyword whole keepdir yellow
     keyword whole libopts yellow
@@ -86,22 +110,244 @@ context default
     keyword whole use yellow
     keyword whole use_enable yellow
     keyword whole use_with yellow
+    #flag-o-matic
+    keyword whole append-flags yellow
+    keyword whole replace-flags yellow
+    keyword whole strip-flags yellow
+    #git
+    keyword whole git_src_unpack yellow
+    #java-ant-2
+    keyword whole EANT_BUILD_TARGET yellow
+    #svn
+    keyword whole subversion_src_unpack yellow
 
-    keyword = yellow
-    keyword : yellow
-    keyword ${+} brightgreen
+####################
+# here starts original sh.syntax (with core commands only)
+####################
 
-    keyword linestart abcdefghijklmnopqrstuvwxyz_\(\) brightmagenta
+    keyword ! brightred
+    keyword ;; brightred
+    keyword \\@ brightred
+    keyword \\$ brightred
+    keyword \\\\ brightred
+    keyword \\" brightred
+    keyword \\' brightred
+    keyword \\` brightred
+    keyword ` brightred
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
 
-    keyword *() brightcyan
+    keyword whole linestart #!\[\s\]*\n brightcyan black
 
-    keyword { magenta
-    keyword } magenta
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
 
-context linestart inherit \n magenta
-    keyword whole inherit yellow
+    keyword whole 2>&1 brightred
+    keyword whole 1>&2 brightred
+    keyword whole 2>   brightred
+    keyword whole 1>   brightred
 
-context # \n red
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+    keyword wholeleft linestart function*() brightmagenta
+    keyword wholeleft linestart function\[\s\]+ brightmagenta
+    keyword wholeright +() brightmagenta
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole clear         yellow
+    keyword whole continue yellow
+    keyword whole declare       yellow
+    keyword whole done yellow
+    keyword whole do yellow
+    keyword whole elif yellow
+    keyword whole else yellow
+    keyword whole esac yellow
+    keyword whole exit yellow
+    keyword whole export yellow
+    keyword whole fi yellow
+    keyword whole for yellow
+    keyword whole getopts       yellow
+    keyword whole if yellow
+    keyword whole in yellow
+    keyword whole return yellow
+    keyword whole select yellow
+    keyword whole shift yellow
+    keyword whole source        yellow
+    keyword whole then yellow
+    keyword whole trap yellow
+    keyword whole until yellow
+    keyword whole unset yellow
+    keyword whole wait yellow
+    keyword whole while yellow
+
+# here goes usable subset for .ebuild commands
+    keyword whole awk        cyan
+    keyword whole cd         cyan
+    keyword whole chown      cyan
+    keyword whole chmod      cyan
+    keyword whole cmake      cyan
+    keyword whole cp         cyan
+    keyword whole echo       cyan
+    keyword whole egrep      cyan
+    keyword whole fgrep      cyan
+    keyword whole find       cyan
+    keyword whole grep       cyan
+    keyword whole ln         cyan
+    keyword whole make       cyan
+    keyword whole mkdir      cyan
+    keyword whole mknod      cyan
+    keyword whole mv         cyan
+    keyword whole perl       cyan
+    keyword whole pod2man    cyan
+    keyword whole rm         cyan
+    keyword whole sed        cyan
+    keyword whole touch      cyan
+    keyword whole xmkmf      cyan
+
+# some interesting files to copy
+    keyword whole ANNOUNCEMENT  white
+    keyword whole AUTHORS       white
+    keyword whole CHANGES       white
+    keyword whole COPYING       white
+    keyword whole COPYRIGHT     white
+    keyword whole CREDITS       white
+    keyword whole ChangeLog     white
+    keyword whole FAQ           white
+    keyword whole HACKING       white
+    keyword whole INSTALL       white
+    keyword whole LICENSE       white
+    keyword whole NEWS          white
+    keyword whole README        white
+    keyword whole THANKS        white
+    keyword whole TODO          white
+
+    keyword whole /dev/audio  brightblue
+    keyword whole /dev/dsp    brightblue
+    keyword whole /dev/null   brightblue
+    keyword whole /dev/mixed  brightblue
+    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/stdout brightblue
+    keyword whole /dev/stderr brightblue
+    keyword whole /dev/zero   brightblue
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+
+context # \n brown
+    spellcheck
+
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
+
+context ' ' green
 
 context " " green
-    keyword wholeright ${+} brightgreen
+    keyword \\* brightgreen
+    keyword \\@ brightgreen
+    keyword \\$ brightgreen
+    keyword \\\\ brightgreen
+    keyword \\` brightgreen
+    keyword \\" brightgreen
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+context exclusive ` ` lightgray black
+    keyword '*' green
+    keyword " green
+    keyword \\` green
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
+
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+
+    keyword whole 2>&1 brightred
+    keyword whole 2>   brightred
+    keyword whole 1>   brightred
+
+    keyword wholeright $\[0123456789\] brightred
+
+    keyword wholeright $+ brightgreen
+
+    keyword $ brightgreen
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
+
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole clear         yellow
+    keyword whole continue yellow
+    keyword whole declare       yellow
+    keyword whole done yellow
+    keyword whole do yellow
+    keyword whole elif yellow
+    keyword whole else yellow
+    keyword whole esac yellow
+    keyword whole exit yellow
+    keyword whole fi yellow
+    keyword whole for yellow
+    keyword whole getopts       yellow
+    keyword whole if yellow
+    keyword whole in yellow
+    keyword whole return yellow
+    keyword whole select yellow
+    keyword whole shift yellow
+    keyword whole source        yellow
+    keyword whole then yellow
+    keyword whole trap yellow
+    keyword whole until yellow
+    keyword whole wait          yellow
+    keyword whole while yellow
+
+# here goes usable subset for .ebuild commands
+    keyword whole awk        cyan
+    keyword whole sed        cyan
+
+    keyword whole /dev/audio  brightblue
+    keyword whole /dev/dsp    brightblue
+    keyword whole /dev/null   brightblue
+    keyword whole /dev/mixed  brightblue
+    keyword whole /dev/stdin  brightblue
+    keyword whole /dev/stdout brightblue
+    keyword whole /dev/stderr brightblue
+    keyword whole /dev/zero   brightblue
+
+context inherit \n magenta
+    keyword whole inherit yellow
