@@ -124,9 +124,6 @@ filename_completion_function (char *text, int state)
 	    strcat (tmp, PATH_SEP_STR);
 	    strcat (tmp, entry->d_name);
 	    canonicalize_pathname (tmp);
-if (! strncmp(dirname,"/home", 5)){
-mc_log2("'%s' -> '%s'\n",entry->d_name, tmp);
-}
 	    /* Unix version */
 	    if (!mc_stat (tmp, &tempstat)){
 	    	uid_t my_uid = getuid ();

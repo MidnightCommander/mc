@@ -68,19 +68,3 @@ mc_log(const char *fmt, ...)
 		g_free(logfilename);
 	}
 }
-
-void
-mc_log2(const char *fmt, ...)
-{
-	va_list args;
-	FILE *f;
-	char *logfilename;
-
-	va_start(args, fmt);
-	logfilename = g_strdup_printf("%s/.mc/log2", home_dir);
-	if ((f = fopen(logfilename, "a")) != NULL) {
-		(void)vfprintf(f, fmt, args);
-		(void)fclose(f);
-	}
-	g_free(logfilename);
-}
