@@ -74,6 +74,7 @@ filename_completion_function (char *text, int state)
         g_free (filename);
         g_free (users_dirname);
 
+	text = unescape_string(text);
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = g_strdup (++temp);
 	    dirname = g_strndup (text, temp - text);
@@ -81,6 +82,7 @@ filename_completion_function (char *text, int state)
 	    dirname = g_strdup (".");
 	    filename = g_strdup (text);
 	}
+	mhl_mem_free(text);
 
         /* We aren't done yet.  We also support the "~user" syntax. */
 
@@ -122,6 +124,9 @@ filename_completion_function (char *text, int state)
 	    strcat (tmp, PATH_SEP_STR);
 	    strcat (tmp, entry->d_name);
 	    canonicalize_pathname (tmp);
+if (! strncmp(dirname,"/home", 5)){
+mc_log2("'%s' -> '%s'\n",entry->d_name, tmp);
+}
 	    /* Unix version */
 	    if (!mc_stat (tmp, &tempstat)){
 	    	uid_t my_uid = getuid ();
@@ -195,6 +200,7 @@ username_completion_function (char *text, int state)
     static struct passwd *entry;
     static int userlen;
 
+    if (text[0] == '\\' && text[1] == '~') text++;
     if (!state){ /* Initialization stuff */
         setpwent ();
         userlen = strlen (text + 1);
@@ -646,8 +652,15 @@ try_complete (char *text, int *start, int *end, int flags)
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS)){
         i = *start - 1;
-        while (i > -1 && (text[i] == ' ' || text[i] == '\t'))
-            i--;
+	for (i = *start - 1; i > -1; i--) {
+	    if (text[i] == ' ' || text[i] == '\t'){
+		if (i == 0 ) continue;
+		if (text[i-1] == '\\') {
+		    i--;
+		    break;
+		}
+	    }
+	}
         if (i < 0)
 	    in_command_position++;
         else if (strchr (command_separator_chars, text[i])){
@@ -723,10 +736,24 @@ try_complete (char *text, int *start, int *end, int flags)
     	ignore_filenames = 0;
     	if (!matches && is_cd && *word != PATH_SEP && *word != '~'){
     	    char *p, *q = text + *start;
-    	    
-    	    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+
+	    for (p = text; *p && p < q; p++){
+		if (*p == ' ' || *p == '\t') {
+		    if (p == text) continue;
+		    if (*(p-1) == '\\') {
+			p--;
+			break;
+		    }
+		}
+	    }
     	    if (!strncmp (p, "cd", 2))
-    	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+		for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++){
+		    if (p == text) continue;
+		    if (*(p-1) == '\\') {
+			p--;
+			break;
+		    }
+		}
     	    if (p == q){
 		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
 		char *cdpath = cdpath_ref;
@@ -920,8 +947,12 @@ complete_engine (WInput *in, int what_to_do)
     if (!in->completions){
     	end = in->point;
         for (start = end ? end - 1 : 0; start > -1; start--)
-    	    if (strchr (" \t;|<>", in->buffer [start]))
-    	        break;
+    	    if (strchr (" \t;|<>", in->buffer [start])){
+    		if (start > 0 && in->buffer [start-1] == '\\')
+    		    continue;
+    		else
+    		    break;
+    	    }
     	if (start < end)
     	    start++;
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
@@ -936,7 +967,7 @@ complete_engine (WInput *in, int what_to_do)
 		    free_completions (in);
 	    } else
 	        beep ();
-	    //mhl_mem_free(complete);
+	    mhl_mem_free(complete);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
@@ -945,10 +976,13 @@ complete_engine (WInput *in, int what_to_do)
     	    char **p, *q;
     	    Dlg_head *query_dlg;
     	    WListbox *query_list;
-    	    
+
     	    for (p=in->completions + 1; *p; count++, p++) {
-    	    	if ((i = strlen (*p)) > maxlen)
-    	    	    maxlen = i;
+		q = *p;
+		*p = escape_string(*p);
+		mhl_mem_free(q);
+		if ((i = strlen (*p)) > maxlen)
+		    maxlen = i;
 	    }
     	    start_x = in->widget.x;
     	    start_y = in->widget.y;
