@@ -179,37 +179,43 @@ do_transform_source (FileOpContext *ctx, const char *source)
     for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
 	switch (ctx->dest_mask[j]) {
 	case '\\':
-	    j++;
-	    if (!isdigit ((unsigned char) ctx->dest_mask[j])) {
-		/* Backslash followed by non-digit */
-		switch (ctx->dest_mask[j]) {
-		case 'U':
-		    case_conv |= UP_SECT;
-		    case_conv &= ~LOW_SECT;
-		    break;
-		case 'u':
-		    case_conv |= UP_CHAR;
-		    break;
-		case 'L':
-		    case_conv |= LOW_SECT;
-		    case_conv &= ~UP_SECT;
-		    break;
-		case 'l':
-		    case_conv |= LOW_CHAR;
-		    break;
-		case 'E':
-		    case_conv = NO_CONV;
-		    break;
-		default:
-		    /* Backslash as quote mark */
-		    fntarget[k++] =
-			convert_case (ctx->dest_mask[j], &case_conv);
-		}
+	    if (is_escaped_string (&ctx->dest_mask[j])){
+		fntarget[k++] = ctx->dest_mask[j++];
+		fntarget[k++] = ctx->dest_mask[j];
 		break;
 	    } else {
-		/* Backslash followed by digit */
-		next_reg = ctx->dest_mask[j] - '0';
-		/* Fall through */
+		j++;
+		if (!isdigit ((unsigned char) ctx->dest_mask[j])) {
+		    /* Backslash followed by non-digit */
+		    switch (ctx->dest_mask[j]) {
+		    case 'U':
+			case_conv |= UP_SECT;
+			case_conv &= ~LOW_SECT;
+			break;
+		    case 'u':
+			case_conv |= UP_CHAR;
+			break;
+		    case 'L':
+			case_conv |= LOW_SECT;
+			case_conv &= ~UP_SECT;
+			break;
+		    case 'l':
+			case_conv |= LOW_CHAR;
+			break;
+		    case 'E':
+			case_conv = NO_CONV;
+			break;
+		    default:
+			/* Backslash as quote mark */
+			fntarget[k++] =
+			    convert_case (ctx->dest_mask[j], &case_conv);
+		    }
+		    break;
+		} else {
+		    /* Backslash followed by digit */
+		    next_reg = ctx->dest_mask[j] - '0';
+		    /* Fall through */
+		}
 	    }
 
 	case '*':
@@ -1875,12 +1881,6 @@ panel_operate (void *source_panel, FileOperation operation,
 		dest = temp2;
 		temp = NULL;
 		
-		temp2 = source_with_path;
-		source_with_path = unescape_string(source_with_path);
-		mhl_mem_free(temp2);
-		temp2 = dest;
-		dest = unescape_string(dest);
-		mhl_mem_free(temp2);
 		switch (operation) {
 		case OP_COPY:
 		    /*
