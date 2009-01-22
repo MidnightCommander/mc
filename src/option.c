@@ -65,6 +65,7 @@ static struct {
    {N_("shell &Patterns"),    &easy_patterns,     TOGGLE_VARIABLE,       0 },
    {N_("Compute &Totals"),    &file_op_compute_totals, TOGGLE_VARIABLE,  0 },
    {N_("&Verbose operation"), &verbose,           TOGGLE_VARIABLE,       0 },
+   {N_("Mkdir autoname"),     &auto_fill_mkdir_name, TOGGLE_VARIABLE,    0 },
    /* panel options */
    {N_("&Fast dir reload"),   &fast_reload,       toggle_fast_reload,    0 },
    {N_("mi&X all files"),     &mix_all_files,     toggle_mix_all_files,  0 },
@@ -76,7 +77,7 @@ static struct {
 };
 
 /* Make sure this corresponds to the check_options structure */
-#define OTHER_OPTIONS 12
+#define OTHER_OPTIONS 13
 #define PANEL_OPTIONS 6
 
 static WRadio *pause_radio;

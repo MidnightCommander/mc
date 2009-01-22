@@ -77,6 +77,8 @@ int output_starts_shell = 0;
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
 
+/* Automatically fills name with current selected item name on mkdir */
+int auto_fill_mkdir_name = 1;
 
 int
 view_file_at_line (const char *filename, int plain_view, int internal,
@@ -351,11 +353,18 @@ void
 mkdir_cmd (void)
 {
     char *dir, *absdir;
+    char *name = "";
+
+    /* If 'on' then automatically fills name with current selected item name */
+    if (auto_fill_mkdir_name)
+        name = selection (current_panel)->fname;
 
     dir =
 	input_expand_dialog (_("Create a new Directory"),
-			     _(" Enter directory name:"), 
-			     MC_HISTORY_FM_MKDIR, "");
+			     _(" Enter directory name:"),
+			     MC_HISTORY_FM_MKDIR,
+			     name);
+
     if (!dir)
 	return;
 

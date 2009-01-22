@@ -223,6 +223,7 @@ static const struct {
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split",   &horizontal_split },
     { "mcview_remember_file_position", &mcview_remember_file_position },
+    { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { 0, 0 }
 };
 
