@@ -245,7 +245,7 @@ edit_save_file (WEdit *edit, const char *filename)
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE) {
 	if (!vfs_file_is_local (filename) ||
-	    (fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
+	    (fd = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 	    /*
 	     * The file does not exists yet, so no safe save or
 	     * backup are necessary.
