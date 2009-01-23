@@ -3,7 +3,7 @@
 
 #include <ctype.h>
 #include <stdarg.h>
-#include <mhl/mhlmemory.h>
+#include <mhl/memory.h>
 
 #define	mhl_str_dup(str)	((str ? strdup(str) : strdup("")))
 #define mhl_str_ndup(str,len)	((str ? strndup(str,len) : strdup("")))

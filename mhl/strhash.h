@@ -2,7 +2,7 @@
 #define __MHL_STRHASH_H
 
 #include <hash.h>
-#include <mhl/mhlmemory.h>
+#include <mhl/memory.h>
 
 static void __mhl_strhash_free_key(void* ptr)
 {
