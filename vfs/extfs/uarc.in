@@ -1,0 +1,82 @@
+#! /bin/sh
+
+#
+# ARC Virtual filesystem executive
+# Copyright (C) 2008 Jacques Pelletier
+# May be distributed under the terms of the GNU Public License
+# <jpelletier@ieee.org>
+#
+
+# Define your awk
+AWK=gawk
+# Define which archiver you are using with appropriate options
+ARC_LIST="arc v"
+ARC_GET="arc x"
+ARC_PUT="arc a"
+ARC_DEL="arc d"
+
+# The 'list' command executive
+
+mc_arc_fs_list()
+{
+    $ARC_LIST "$1" | gawk -v uid=${UID-0} '
+BEGIN { }
+/^Name/ { next }
+/===/ { next }
+/^Total/ { next }
+{
+        if ($8 > 50)
+        $8=$8 + 1900
+        else
+        $8=$8 + 2000
+
+        split($9, a, ":")
+
+        # convert AM/PM to 00-23
+        if (a[2] ~ /a$|p$/)
+        {
+                if (a[2] ~ /p$/)
+                        a[1] = a[1]+12
+
+                a[2]=substr(a[2],1,2)
+        }
+
+        printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %02d:%02d %s\n", uid, 0, $2, $7, $6, $8, a[1], a[2], $1
+}' 2>/dev/null
+    exit 0
+}
+
+# Command: copyout archivename storedfilename extractto
+mc_arc_fs_copyout()
+{
+   $ARC_GET "$1" "$2" 2> /dev/null
+        mv "$2" "$3"
+}
+
+# Command: copyin archivename storedfilename sourcefile
+mc_arc_fs_copyin()
+{
+	mv "$3" "$2"
+	$ARC_PUT "$1" "$2" 2> /dev/null
+}
+
+# Command: rm archivename storedfilename
+mc_arc_fs_rm()
+{
+	$ARC_DEL "$1" "$2" 2> /dev/null
+}
+
+# The main routine
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+   list)	mc_arc_fs_list 	  "$@" ;;
+   copyout) mc_arc_fs_copyout "$@" ;;
+   copyin)	mc_arc_fs_copyin  "$@" ;;
+   rm)		mc_arc_fs_rm      "$@" ;;
+   *)       exit 1 ;;
+esac
+exit 0

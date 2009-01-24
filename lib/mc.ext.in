@@ -512,8 +512,27 @@ regex/\.([dD][bB][fF])$
 regex/\.(rexx?|cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
 
+# Disk images for Commodore computers (VIC20, C64, C128)
+regex/\.(d64|D64)$
+	Open=%cd %p#uc1541
+	View=%view{ascii} c1541 %f -list
+	Extract=c1541 %f -extract
+
 
 ### Plain compressed files ###
+
+# ace
+regex/\.(ace|ACE)$
+	Open=%cd %p#uace
+	View=%view{ascii} unace l %f
+	Extract=unace x %f
+
+# arc
+regex/\.(arc|ARC)$
+	Open=%cd %p#uarc
+	View=%view{ascii} arc l %f
+	Extract=arc x %f '*'
+	Extract (with flags)=I=%{Enter any Arc flags:}; if test -n "$I"; then arc x $I %f; fi
 
 # zip
 type/^([Zz][Ii][Pp])\ archive
