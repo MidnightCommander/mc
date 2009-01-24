@@ -212,7 +212,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
 	case '*':
 	    if (next_reg < 0 || next_reg >= RE_NREGS
 		|| ctx->regs.start[next_reg] < 0) {
-		message (1, MSG_ERROR, _(" Invalid target mask "));
+		message (D_ERROR, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
@@ -312,7 +312,7 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
 		    }
 		}
 	    }
-	    message (1, MSG_ERROR, _(" Cannot make the hardlink "));
+	    message (D_ERROR, MSG_ERROR, _(" Cannot make the hardlink "));
 	    return 0;
 	}
     lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)
@@ -366,7 +366,7 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 
     if (ctx->stable_symlinks)
 	if (!vfs_file_is_local (src_path) || !vfs_file_is_local (dst_path)) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 			_(" Cannot make stable symlinks across "
 			  "non-local filesystems: \n\n"
 			  " Option Stable Symlinks will be disabled "));
@@ -510,7 +510,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_exists) {
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		    _(" `%s' and `%s' are the same file "), src_path, dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
@@ -586,7 +586,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     if (ctx->do_reget) {
 	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
-	    message (1, _("Warning"),
+	    message (D_ERROR, _("Warning"),
 			_(" Reget failed, about to overwrite file "));
 	    ctx->do_reget = ctx->do_append = 0;
 	}
@@ -868,7 +868,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
     if (is_in_linklist (parent_dirs, s, &cbuf)) {
 	/* we found a cyclic symbolic link */
-	message (1, MSG_ERROR,
+	message (D_ERROR, MSG_ERROR,
 		    _(" Cannot copy cyclic symbolic link \n `%s' "), s);
 	return FILE_SKIP;
     }
@@ -1052,14 +1052,14 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 
 	    strcpy (st, path_trunc (s, msize));
 	    strcpy (dt, path_trunc (d, msize));
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 			_(" `%s' and `%s' are the same file "), st, dt);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
 
 	if (S_ISDIR (dst_stats.st_mode)) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 			_(" Cannot overwrite directory `%s' "), d);
 	    do_refresh ();
 	    return FILE_SKIP;
@@ -1175,7 +1175,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 
 	strcpy (st, path_trunc (s, msize));
 	strcpy (dt, path_trunc (d, msize));
-	message (1, MSG_ERROR,
+	message (D_ERROR, MSG_ERROR,
 		    _(" `%s' and `%s' are the same directory "), st, dt);
 	do_refresh ();
 	return FILE_SKIP;
@@ -1753,7 +1753,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
 
 	if (!strcmp (source, "..")) {
-	    message (1, MSG_ERROR, _(" Cannot operate on \"..\"! "));
+	    message (D_ERROR, MSG_ERROR, _(" Cannot operate on \"..\"! "));
 	    return 0;
 	}
     }
@@ -1808,7 +1808,7 @@ panel_operate (void *source_panel, FileOperation operation,
 			   g_strconcat (op_names[operation], ": ",
 					panel->cwd, NULL));
 	if (v == -1) {
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _(" Sorry, I could not put the job in background "));
 	}
 

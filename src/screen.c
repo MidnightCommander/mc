@@ -1964,7 +1964,7 @@ do_enter_on_file_entry (file_entry *fe)
     if (S_ISDIR (fe->st.st_mode) || link_isdir (fe)
 	|| (fe->st.st_mode == 0)) {
 	if (!do_cd (fe->fname, cd_exact))
-	    message (1, MSG_ERROR, _("Cannot change directory"));
+	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
 	return 1;
     }
 
@@ -1983,7 +1983,7 @@ do_enter_on_file_entry (file_entry *fe)
     if (confirm_execute) {
 	if (query_dialog
 	    (_(" The Midnight Commander "),
-	     _(" Do you really want to execute? "), 0, 2, _("&Yes"),
+	     _(" Do you really want to execute? "), D_NORMAL, 2, _("&Yes"),
 	     _("&No")) != 0)
 	    return 1;
     }
@@ -2251,7 +2251,7 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0) {
 	    char *cwd = strip_password (g_strdup (panel->cwd), 1);
-	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
+	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     cwd, unix_error_string (errno));
 	    g_free(cwd);
 	} else

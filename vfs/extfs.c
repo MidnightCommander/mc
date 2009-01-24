@@ -256,7 +256,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     result = popen (cmd, "r");
     g_free (cmd);
     if (result == NULL) {
-	close_error_pipe (1, NULL);
+	close_error_pipe (D_ERROR, NULL);
 	if (local_name) {
 	    mc_ungetlocalcopy (name, local_name, 0);
 	    g_free(local_name);
@@ -314,7 +314,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 
     if ((extfsd =
 	 extfs_open_archive (fstype, name, &current_archive)) == NULL) {
-	message (1, MSG_ERROR, _("Cannot open %s archive\n%s"),
+	message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s"),
 		 extfs_prefixes[fstype], name);
 	return -1;
     }
@@ -354,7 +354,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		    /* FIXME: Should clean everything one day */
 		    g_free (buffer);
 		    pclose (extfsd);
-		    close_error_pipe (1, _("Inconsistent extfs archive"));
+		    close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
 		    return -1;
 		}
 		entry = g_new (struct entry, 1);
@@ -373,7 +373,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 			/* FIXME: Should clean everything one day */
 			g_free (buffer);
 			pclose (extfsd);
-			close_error_pipe (1,
+			close_error_pipe (D_ERROR,
 					  _("Inconsistent extfs archive"));
 			return -1;
 		    } else {
@@ -425,11 +425,11 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
     /* Check if extfs 'list' returned 0 */
     if (pclose (extfsd) != 0) {
 	extfs_free (current_archive);
-	close_error_pipe (1, _("Inconsistent extfs archive"));
+	close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
 	return -1;
     }
 
-    close_error_pipe (1, NULL);
+    close_error_pipe (D_ERROR, NULL);
     *pparc = current_archive;
     return 0;
 }
@@ -633,7 +633,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     open_error_pipe ();
     retval = my_system (EXECUTE_AS_SHELL, shell, cmd);
     g_free (cmd);
-    close_error_pipe (1, NULL);
+    close_error_pipe (D_ERROR, NULL);
     return retval;
 }
 

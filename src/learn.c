@@ -113,7 +113,7 @@ _("Please press the %s\n"
 	}
 
 	if (!seq_ok) {
-	    message (0, _(" Cannot accept this key "),
+	    message (D_NORMAL, _(" Cannot accept this key "),
 		_(" You have entered \"%s\""), seq);
 	}
 	
@@ -172,11 +172,11 @@ learn_check_key (int c)
 		if (query_dialog (learn_title,
 				  _
 				  ("It seems that all your keys already\n"
-				   "work fine. That's great."), 1, 2,
+				   "work fine. That's great."), D_ERROR, 2,
 				  _("&Save"), _("&Discard")) == 0)
 		    learn_dlg->ret_value = B_ENTER;
 	    } else {
-		message (1, learn_title,
+		message (D_ERROR, learn_title,
 			 _
 			 ("Great! You have a complete terminal database!\n"
 			  "All your keys work well."));

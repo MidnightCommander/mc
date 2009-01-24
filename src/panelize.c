@@ -264,7 +264,7 @@ external_panelize (void)
     char *target = NULL;
 
     if (!vfs_current_is_local ()){
-	message (1, MSG_ERROR,
+	message (D_ERROR, MSG_ERROR,
 		 _(" Cannot run external panelize in a non-local directory "));
 	return;
     }
@@ -367,7 +367,7 @@ static void do_external_panelize (char *command)
     open_error_pipe ();
     external = popen (command, "r");
     if (!external){
-	close_error_pipe (1, _("Cannot invoke command."));
+	close_error_pipe (D_ERROR, _("Cannot invoke command."));
 	return;
     }
     /* Clear the counters and the directory list */
@@ -418,8 +418,8 @@ static void do_external_panelize (char *command)
 	current_panel->count = set_zero_dir (list);
     }
     if (pclose (external) < 0)
-	message (0, _("External panelize"), _("Pipe close failed"));
-    close_error_pipe (0, 0);
+	message (D_NORMAL, _("External panelize"), _("Pipe close failed"));
+    close_error_pipe (D_NORMAL, NULL);
     try_to_select (current_panel, NULL);
     panel_re_sort (current_panel);
 }

@@ -841,7 +841,7 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
     return 0;
 
   failed:
-    message (1, _("Changes to file lost"), "%s", filename);
+    message (D_ERROR, _("Changes to file lost"), "%s", filename);
     if (fdout != -1)
 	mc_close (fdout);
     if (fdin != -1)

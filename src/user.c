@@ -130,7 +130,7 @@ int check_format_var (const char *p, char **v)
 	    return 0;
 
 	if (!dots || dots == q+5){
-	    message (1,
+	    message (D_ERROR,
 		     _(" Format error on file Extensions File "),
 		     !dots ? _(" The %%var macro has no default ")
 		     :       _(" The %%var macro has no variable "));
@@ -463,7 +463,7 @@ debug_out (char *start, char *end, int cond)
 	    len = strlen (msg);
 	    if (len)
 		msg [len - 1] = 0;
-	    message (0, _(" Debug "), "%s", msg);
+	    message (D_NORMAL, _(" Debug "), "%s", msg);
 
 	}
 	debug_flag = 0;
@@ -580,7 +580,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
     cmd_file_fd = mc_mkstemps (&file_name, "mcusr", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1){
-	message (1, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
+	message (D_ERROR, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
@@ -688,7 +688,7 @@ menu_file_own(char* path)
     }
     if (verbose)
     {
-	message (0, _(" Warning -- ignoring file "),
+	message (D_NORMAL, _(" Warning -- ignoring file "),
 		    _("File %s is not owned by root or you or is world writable.\n"
 		    "Using it may compromise your security"),
 		path
@@ -712,7 +712,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     Listbox *listbox;
     
     if (!vfs_current_is_local ()){
-	message (1, MSG_ERROR,
+	message (D_ERROR, MSG_ERROR,
 		 _(" Cannot execute commands on non-local filesystems"));
 	return;
     }
@@ -730,7 +730,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
 
     if ((data = load_file (menu)) == NULL){
-	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "),
+	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "),
 		 menu, unix_error_string (errno));
 	g_free (menu);
 	menu = NULL;
@@ -811,7 +811,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
 
     if (menu_lines == 0) {
-	message (1, MSG_ERROR, _(" No suitable entries found in %s "), menu);
+	message (D_ERROR, MSG_ERROR, _(" No suitable entries found in %s "), menu);
     } else {
 
     max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);

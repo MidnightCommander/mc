@@ -868,7 +868,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     g_return_val_if_fail (ctx != NULL, NULL);
 #if 0
-    message (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
+    message (D_ERROR, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
 		def_text);
 #endif
     fmd_init_i18n (FALSE);
@@ -946,7 +946,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 				&ctx->rx);
 
     if (error) {
-	message (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
+	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		    orig_mask, error);
 	g_free (orig_mask);
 	goto ask_file_mask;

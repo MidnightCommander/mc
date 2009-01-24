@@ -397,7 +397,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
 
     dirp = mc_opendir (path);
     if (!dirp) {
-	message (1, MSG_ERROR, _("Cannot read directory contents"));
+	message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 	return next_free;
     }
     tree_store_start_check (path);
@@ -496,7 +496,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 
     dirp = mc_opendir (path);
     if (!dirp) {
-	message (1, MSG_ERROR, _("Cannot read directory contents"));
+	message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 	clean_dir (list, count);
 	return set_zero_dir (list);
     }

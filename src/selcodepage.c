@@ -99,11 +99,11 @@ do_select_codepage (void)
 	errmsg =
 	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg) {
-	    message (1, MSG_ERROR, "%s", errmsg);
+	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
 	    return -1;
 	}
     } else {
-	message (1, _("Warning"),
+	message (D_ERROR, _("Warning"),
 		 _("To use this feature select your codepage in\n"
 		   "Setup / Display Bits dialog!\n"
 		   "Do not forget to save options."));

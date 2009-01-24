@@ -239,7 +239,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	    /* Currently, this does not work. ssh reads passwords from
 	       /dev/tty, not from stdin :-(. */
 
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _
 		     ("Sorry, we cannot do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);

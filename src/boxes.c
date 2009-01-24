@@ -629,7 +629,7 @@ display_bits_box (void)
 	errmsg =
 	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg)
-	    message (1, MSG_ERROR, "%s", errmsg);
+	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
 #ifndef HAVE_SLANG
 	meta (stdscr, display_codepage != 0);
 #else

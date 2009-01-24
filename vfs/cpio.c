@@ -157,7 +157,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
     struct vfs_s_inode *root;
 
     if ((fd = mc_open (name, O_RDONLY)) == -1) {
-	message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
+	message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
 	return -1;
     }
 
@@ -173,7 +173,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
 	mc_close (fd);
 	s = g_strconcat (name, decompress_extension (type), (char *) NULL);
 	if ((fd = mc_open (s, O_RDONLY)) == -1) {
-	    message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
+	    message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
 	    g_free (s);
 	    return -1;
 	}
@@ -239,7 +239,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 		top = 128;
 	    }
 	    if((tmp = mc_read(super->u.arch.fd, buf, top)) == 0 || tmp == -1) {
-		message (1, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
+		message (D_ERROR, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
 		cpio_free_archive(me, super);
 		return CPIO_UNKNOWN;
 	    }
@@ -284,7 +284,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
     g_assert(u.buf.c_magic == 070707);
 
     if (u.buf.c_namesize == 0 || u.buf.c_namesize > MC_MAXPATHLEN) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), 
+	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), 
 		super->name);
 	return STATUS_FAIL;
     }
@@ -336,13 +336,13 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		    super->name);
 	return STATUS_FAIL;
     }
 
     if (hd.c_namesize == 0 || hd.c_namesize > MC_MAXPATHLEN) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		    super->name);
 	return STATUS_FAIL;
     }
@@ -396,7 +396,7 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	      &hd.c_nlink,  &hd.c_mtime, &hd.c_filesize,
 	      &hd.c_dev, &hd.c_devmin, &hd.c_rdev, &hd.c_rdevmin,
 	      &hd.c_namesize, &hd.c_chksum) < 14) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		   super->name);
 	return STATUS_FAIL;
     }
@@ -406,7 +406,7 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_FAIL;
 
     if (hd.c_namesize == 0 || hd.c_namesize > MC_MAXPATHLEN) {
-	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		    super->name);
 	return STATUS_FAIL;
     }
@@ -480,7 +480,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 	    inode = l->inode;
 	    if (inode->st.st_size && st->st_size
 		&& (inode->st.st_size != st->st_size)) {
-		message (1, MSG_ERROR,
+		message (D_ERROR, MSG_ERROR,
 			 _
 			 ("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
 			 name, super->name);
@@ -507,7 +507,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 				   'No such file or directory' is such case) */
 
 	if (!S_ISDIR (entry->ino->st.st_mode)) {	/* This can be considered archive inconsistency */
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _("%s contains duplicate entries! Skipping!"),
 		     super->name);
 	} else {
@@ -579,7 +579,7 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super,
 
 	switch (status) {
 	case STATUS_EOF:
-	    message (1, MSG_ERROR, _("Unexpected end of file\n%s"), name);
+	    message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), name);
 	    return 0;
 	case STATUS_OK:
 	    continue;

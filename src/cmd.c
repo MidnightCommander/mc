@@ -189,13 +189,13 @@ do_view_cmd (int normal)
 	|| link_isdir (selection (current_panel))) {
 	if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked)) {
 	    if (query_dialog
-		(_(" Confirmation "), _("Files tagged, want to cd?"), 0, 2,
+		(_(" Confirmation "), _("Files tagged, want to cd?"), D_NORMAL, 2,
 		 _("&Yes"), _("&No")) != 0) {
 		return;
 	    }
 	}
 	if (!do_cd (selection (current_panel)->fname, cd_exact))
-	    message (1, MSG_ERROR, _("Cannot change directory"));
+	    message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
 
 	return;
 
@@ -365,7 +365,7 @@ mkdir_cmd (void)
 	repaint_screen ();
 	select_item (current_panel);
     } else {
-	message (1, MSG_ERROR, "  %s  ", unix_error_string (errno));
+	message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
     }
 
     g_free (absdir);
@@ -508,7 +508,7 @@ select_unselect_cmd (const char *title, int cmd)
 	c = regexp_match (reg_exp_t, current_panel->dir.list[i].fname,
 			  match_file);
 	if (c == -1) {
-	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
+	    message (D_ERROR, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
@@ -560,7 +560,7 @@ void ext_cmd (void)
     dir = 0;
     if (geteuid () == 0){
 	dir = query_dialog (_("Extension file edit"),
-			    _(" Which extension file you want to edit? "), 0, 2,
+			    _(" Which extension file you want to edit? "), D_NORMAL, 2,
 			    _("&User"), _("&System Wide"));
     }
     extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
@@ -589,7 +589,7 @@ menu_edit_cmd (int where)
     dir = query_dialog (
 	_(" Menu edit "),
 	_(" Which menu file do you want to edit? "), 
-	0, geteuid() ? 2 : 3,
+	D_NORMAL, geteuid() ? 2 : 3,
 	_("&Local"), _("&User"), _("&System Wide")
     );
 
@@ -633,7 +633,7 @@ void quick_chdir_cmd (void)
 	tree_chdir (the_tree, target);
     else
         if (!do_cd (target, cd_exact))
-	    message (1, MSG_ERROR, _("Cannot change directory") );
+	    message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
     g_free (target);
 }
 
@@ -663,7 +663,7 @@ edit_syntax_cmd (void)
     if (geteuid () == 0) {
 	dir =
 	    query_dialog (_("Syntax file edit"),
-			  _(" Which syntax file you want to edit? "), 0, 2,
+			  _(" Which syntax file you want to edit? "), D_NORMAL, 2,
 			  _("&User"), _("&System Wide"));
     }
     extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
@@ -690,7 +690,7 @@ void reselect_vfs (void)
 	return;
 
     if (!do_cd (target, cd_exact))
-        message (1, MSG_ERROR, _("Cannot change directory") );
+        message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
     g_free (target);
 }
 #endif /* USE_VFS */
@@ -818,8 +818,8 @@ compare_dirs_cmd (void)
 
     choice =
 	query_dialog (_(" Compare directories "),
-		      _(" Select compare method: "), 0, 3, _("&Quick"),
-		      _("&Size only"), _("&Thorough"), _("&Cancel"));
+		      _(" Select compare method: "), 0, D_NORMAL, 
+		      _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
 
     if (choice < 0 || choice > 2)
 	return;
@@ -831,7 +831,7 @@ compare_dirs_cmd (void)
 	compare_dir (current_panel, other_panel, thorough_flag);
 	compare_dir (other_panel, current_panel, thorough_flag);
     } else {
-	message (1, MSG_ERROR,
+	message (D_ERROR, MSG_ERROR,
 		 _(" Both panels should be in the "
 		   "listing mode to use this command "));
     }
@@ -848,7 +848,7 @@ history_cmd (void)
 	    cmdline->need_push = 0;
     }
     if (!cmdline->history) {
-	message (1, MSG_ERROR, _(" The command history is empty "));
+	message (D_ERROR, MSG_ERROR, _(" The command history is empty "));
 	return;
     }
     current = g_list_first (cmdline->history);
@@ -887,7 +887,7 @@ view_other_cmd (void)
 
     if (!xterm_flag && !console_flag && !use_subshell && !output_starts_shell) {
 	if (message_flag)
-	    message (1, MSG_ERROR,
+	    message (D_ERROR, MSG_ERROR,
 		     _(" Not an xterm or Linux console; \n"
 		       " the panels cannot be toggled. "));
 	message_flag = FALSE;
@@ -908,7 +908,7 @@ do_link (int symbolic_link, const char *fname)
 	    goto cleanup;
 	save_cwds_stat ();
 	if (-1 == mc_link (fname, dest))
-	    message (1, MSG_ERROR, _(" link: %s "),
+	    message (D_ERROR, MSG_ERROR, _(" link: %s "),
 		     unix_error_string (errno));
     } else {
 	char *s;
@@ -931,7 +931,7 @@ do_link (int symbolic_link, const char *fname)
 	    goto cleanup;
 	save_cwds_stat ();
 	if (-1 == mc_symlink (dest, src))
-	    message (1, MSG_ERROR, _(" symlink: %s "),
+	    message (D_ERROR, MSG_ERROR, _(" symlink: %s "),
 		     unix_error_string (errno));
     }
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -977,11 +977,11 @@ void edit_symlink_cmd (void)
 		if (*dest && strcmp (buffer, dest)) {
 		    save_cwds_stat ();
 		    if (-1 == mc_unlink (p)){
-		        message (1, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
+		        message (D_ERROR, MSG_ERROR, _(" edit symlink, unable to remove %s: %s "),
 				 p, unix_error_string (errno));
 		    } else {
 			    if (-1 == mc_symlink (dest, p))
-				    message (1, MSG_ERROR, _(" edit symlink: %s "),
+				    message (D_ERROR, MSG_ERROR, _(" edit symlink: %s "),
 					     unix_error_string (errno));
 		    }
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -992,7 +992,7 @@ void edit_symlink_cmd (void)
 	}
 	g_free (q);
     } else {
-	message (1, MSG_ERROR, _("`%s' is not a symbolic link"),
+	message (D_ERROR, MSG_ERROR, _("`%s' is not a symbolic link"),
 		 selection (current_panel)->fname);
     }
 }
@@ -1110,7 +1110,7 @@ nice_cd (const char *text, const char *xtext, const char *help, const char *pref
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-	message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+	message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
     g_free (cd_path);
     g_free (machine);
 }
@@ -1223,10 +1223,15 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
+<<<<<<< HEAD:src/cmd.c
+=======
+    char *str;
+
+>>>>>>> origin/158_message_codes:src/cmd.c
     save_setup ();
     sync_profiles ();
     
-    message (0, _(" Setup "), _(" Setup saved to ~/%s"), PROFILE_NAME);
+    message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"), PROFILE_NAME);
 }
 
 static void

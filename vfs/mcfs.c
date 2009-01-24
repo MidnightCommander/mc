@@ -130,7 +130,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 	return 0;
 
     if (result != MC_VERSION_OK) {
-	message (1, _(" MCFS "),
+	message (D_ERROR, _(" MCFS "),
 		    _(" The server does not support this version "));
 	close (my_socket);
 	return 0;
@@ -151,7 +151,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 			      (" The remote server is not running on a system port \n"
 			       " you need a password to log in, but the information may \n"
 			       " not be safe on the remote side.  Continue? \n"),
-			      3, 2, _("&Yes"), _("&No"));
+			      D_ERROR, 2, _("&Yes"), _("&No"));
 
 	    if (v == 1) {
 		close (my_socket);
@@ -175,7 +175,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 	    return 0;
 
 	if (result != MC_LOGINOK) {
-	    message (1, _(" MCFS "), _(" Invalid password "));
+	    message (D_ERROR, _(" MCFS "), _(" Invalid password "));
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);
 	    return 0;
@@ -235,7 +235,7 @@ mcfs_create_tcp_link (const char *host, int *port, int *version, const char *cal
 		sizeof (inaddr));
     else {
 	if ((hp = gethostbyname (host)) == NULL) {
-	    message (1, caller, _(" Cannot locate hostname: %s "),
+	    message (D_ERROR, caller, _(" Cannot locate hostname: %s "),
 			host);
 	    return 0;
 	}
@@ -254,13 +254,13 @@ mcfs_create_tcp_link (const char *host, int *port, int *version, const char *cal
     server_address.sin_port = htons (*port);
 
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
-	message (1, caller, _(" Cannot create socket: %s "),
+	message (D_ERROR, caller, _(" Cannot create socket: %s "),
 		    unix_error_string (errno));
 	return 0;
     }
     if (connect (my_socket, (struct sockaddr *) &server_address,
 		 sizeof (server_address)) < 0) {
-	message (1, caller, _(" Cannot connect to server: %s "),
+	message (D_ERROR, caller, _(" Cannot connect to server: %s "),
 		    unix_error_string (errno));
 	close (my_socket);
 	return 0;
@@ -330,7 +330,7 @@ mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 		return &mcfs_connections[i];
 	}
     if (mcfs_open_connections == MCFS_MAX_CONNECTIONS) {
-	message (1, MSG_ERROR, _(" Too many open connections "));
+	message (D_ERROR, MSG_ERROR, _(" Too many open connections "));
 	return 0;
     }
 
