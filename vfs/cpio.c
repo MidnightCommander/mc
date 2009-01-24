@@ -94,10 +94,10 @@ struct defer_inode {
 static int cpio_position;
 
 static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super);
-static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super);
-static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super);
-static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, struct stat *, char *name);
+static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
@@ -198,7 +198,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
     return fd;
 }
 
-static int cpio_read_head(struct vfs_class *me, struct vfs_s_super *super)
+static ssize_t cpio_read_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     switch(cpio_find_head(me, super)) {
     case CPIO_UNKNOWN:
@@ -263,7 +263,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 #undef SEEKBACK
 
 #define HEAD_LENGTH (26)
-static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
+static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     union {
 	struct old_cpio_header buf;
@@ -317,7 +317,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 #undef HEAD_LENGTH
 
 #define HEAD_LENGTH (76)
-static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
+static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
     union {
@@ -376,7 +376,7 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 #undef HEAD_LENGTH
 
 #define HEAD_LENGTH (110)
-static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
+static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
     union {
@@ -630,7 +630,7 @@ cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
     return 1;
 }
 
-static int cpio_read(void *fh, char *buffer, int count)
+static ssize_t cpio_read(void *fh, char *buffer, int count)
 {
     off_t begin = FH->ino->data_offset;
     int fd = FH_SUPER->u.arch.fd;
