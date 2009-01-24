@@ -1453,7 +1453,8 @@ string_regexp_search (char *pattern, char *string, int match_type,
 	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
-	if (regcomp (&r, pattern, REG_EXTENDED | (icase ? REG_ICASE : 0))) {
+	if (regcomp (&r, pattern, REG_EXTENDED | (icase ? REG_ICASE : 0) |
+	    REG_NEWLINE)) {
 	    *found_len = 0;
 	    return -3;
 	}
@@ -1553,7 +1554,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    int found_start, match_bol, move_win = 0;
 
 	    while (start + offset < last_byte) {
-		match_bol = (offset == 0 || (*get_byte) (data, start + offset - 1) == '\n');
+		match_bol = (start == 0 || (*get_byte) (data, start + offset - 1) == '\n');
 		if (!move_win) {
 		    p = start + offset;
 		    q = 0;
