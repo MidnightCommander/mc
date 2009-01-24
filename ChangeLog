@@ -1,4 +1,10 @@
-2009-01-18 Patrick Winnertz <winnie@debian.org
+2009-01-24 Patrick Winnertz <winnie@debian.org>
+
+	* edit/editcmd.c: Fix some issues about regex:
+	  - prevent . to match a newline (\n)
+	  - match from start of line and not from cursor position
+
+2009-01-18 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editdraw.c: Moved var into if clause as it's only used
 	there
