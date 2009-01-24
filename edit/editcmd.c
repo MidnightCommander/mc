@@ -40,6 +40,7 @@
 #include <stdlib.h>
 
 #include "../src/global.h"
+#include "../src/history.h"
 
 #include "edit.h"
 #include "editlock.h"
@@ -522,8 +523,8 @@ edit_save_as_cmd (WEdit *edit)
     int save_lock = 0;
     int different_filename = 0;
 
-    exp = input_expand_dialog (_(" Save As "), _(" Enter file name: "),
-			       ":edit_save_as_cmd: Save As ", edit->filename);
+    exp = input_expand_dialog (
+	_(" Save As "), _(" Enter file name: "),MC_HISTORY_EDIT_SAVE_AS, edit->filename);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -906,7 +907,7 @@ edit_load_cmd (WEdit *edit)
     }
 
     exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
-				":edit_load_cmd: Load ", edit->filename);
+				MC_HISTORY_EDIT_LOAD, edit->filename);
 
     if (exp) {
 	if (*exp)
@@ -2337,7 +2338,7 @@ edit_goto_cmd (WEdit *edit)
     char s[32];
 
     g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), ":edit_goto_cmd: Goto line ",
+    f = input_dialog (_(" Goto line "), _(" Enter line: "), MC_HISTORY_EDIT_GOTO_LINE,
 		      line ? s : "");
     if (!f)
 	return;
@@ -2373,7 +2374,7 @@ edit_save_block_cmd (WEdit *edit)
 	return 1;
     exp =
 	input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
-			     ":edit_save_block_cmd: Save Block ", 
+			     MC_HISTORY_EDIT_SAVE_BLOCK, 
 			    catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2403,7 +2404,7 @@ int
 edit_insert_file_cmd (WEdit *edit)
 {
     char *exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
-				     ":edit_insert_file_cmd: Insert File ",
+				     MC_HISTORY_EDIT_INSERT_FILE,
 				     catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2443,7 +2444,7 @@ int edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_(" Run Sort "),
 	_(" Enter sort options (see manpage) separated by whitespace: "),
-	":edit_sort_cmd: Run Sort ", (old != NULL) ? old : "");
+	MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "");
 
     if (!exp)
 	return 1;
@@ -2485,7 +2486,7 @@ edit_ext_cmd (WEdit *edit)
     exp =
 	input_dialog (_("Paste output of external command"),
 		      _("Enter shell command(s):"),
-		      ":edit_ext_cmd: Paste output of ext.cmd ", NULL);
+		      MC_HISTORY_EDIT_PASTE_EXTCMD, NULL);
 
     if (!exp)
 	return 1;

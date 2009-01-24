@@ -114,7 +114,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	    if (*data == '}') {
 		char *parameter;
 		parameter_found = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, ":exec_extension: Parameter ", "");
+		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_EXT_PARAMETER, "");
 		if (!parameter) {
 		    /* User canceled */
 		    fclose (cmd_file);

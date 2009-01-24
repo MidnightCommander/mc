@@ -229,7 +229,7 @@ view_file_cmd (void)
 
     filename =
 	input_expand_dialog (_(" View file "), _(" Filename:"),
-			     ":view_file_cmd: View file ", selection (current_panel)->fname);
+			     MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname);
     if (!filename)
 	return;
 
@@ -252,7 +252,7 @@ filtered_view_cmd (void)
     command =
 	input_dialog (_(" Filtered view "),
 		      _(" Filter command and arguments:"),
-		      ":filtered_view_cmd: Filtered view ",
+		      MC_HISTORY_FM_FILTERED_VIEW,
 		      selection (current_panel)->fname);
     if (!command)
 	return;
@@ -352,7 +352,7 @@ mkdir_cmd (void)
     dir =
 	input_expand_dialog (_("Create a new Directory"),
 			     _(" Enter directory name:"), 
-			     ":mkdir_cmd: Create a new Directory", "");
+			     MC_HISTORY_FM_MKDIR, "");
     if (!dir)
 	return;
 
@@ -424,7 +424,7 @@ set_panel_filter (WPanel *p)
 	
     reg_exp = input_dialog_help (_(" Filter "),
 				 _(" Set expression for filtering filenames"),
-				 "[Filter...]", ":set_panel_filter: Filter ", x);
+				 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x);
     if (!reg_exp)
 	return;
     set_panel_filter_to (p, reg_exp);
@@ -905,7 +905,7 @@ do_link (int symbolic_link, const char *fname)
 
     if (!symbolic_link) {
 	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
-	dest = input_expand_dialog (_(" Link "), src, ":do_link: Link ", "");
+	dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
 	if (!dest || !*dest)
 	    goto cleanup;
 	save_cwds_stat ();
@@ -974,7 +974,7 @@ void edit_symlink_cmd (void)
 	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {
 	    buffer [i] = 0;
-	    dest = input_expand_dialog (_(" Edit symlink "), q, ":edit_symlink_cmd: Edit symlink ", buffer);
+	    dest = input_expand_dialog (_(" Edit symlink "), q, MC_HISTORY_FM_EDIT_LINK, buffer);
 	    if (dest) {
 		if (*dest && strcmp (buffer, dest)) {
 		    save_cwds_stat ();

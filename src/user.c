@@ -604,7 +604,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    if (*commands == '}'){
 		char *tmp;
 		*parameter = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, ":execute_menu_command: Parameter ", "");
+		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_FM_EXEC_PARAM, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
 		    fclose (cmd_file);
