@@ -1,4 +1,3 @@
-
 2009-01-24 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editcmd.c: Fix some issues about regex:
@@ -9,8 +8,6 @@
 
 	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
 	  for Nemerle source files
-	* src/subshell.c: merged 174_4.6_mandriva_pty_closeonexec
-	  (patch from mandriva)
 
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
@@ -253,7 +250,7 @@
 
 	* doc/mc.1.in: Document `fish_directory_timeout'.
 
-2006-02-18  David Martin  <<dmartina@excite.com>
+2006-02-18  David Martin  <dmartina@excite.com>
 
 	* doc/es/mc.1.in: Cleanup. Fix key naming.
 
