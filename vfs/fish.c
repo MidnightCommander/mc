@@ -50,6 +50,8 @@
 #include "tcputil.h"
 #include "../src/unixcompat.h"
 #include "fish.h"
+#include "../mhl/memory.h"
+#include "../mhl/escape.h"
 
 int fish_directory_timeout = 900;
 
@@ -376,12 +378,14 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "import Fcntl ':mode' unless defined &S_ISLNK; #and is now here\n"
 		   "my $dirname = \"/%s\";\n"
 		   "opendir ( DIR, $dirname ) || printf \"###500\n\";\n"
-		   "while( (my $filename = readdir(DIR))){\""
+		   "while( (my $filename = readdir(DIR))){\n"
 		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
+       "my mloctime= scalar localtime $mtime;\n"
 		   "if (S_ISLNK($mode) ) {\n"
-			  "printf(\"P%s %i.%i\nS%s\nd%s\n:\\\"%s\\\" -> \\\"%s\\\"\n\n\",$mode,$uid,$gid,$size,scalar localtime $mtime,$filename,readlink(\"$dirname/$filename\"));\n"
+        "my $linkname = readlink (\"$dirname/$filename\");\n"
+			  "printf(\"P$mode $uid.$gid\nS$size\nd$mloctime\n:\\\"$filename\\\" -> \\\"$linkname\\\"\n\n\");\n"
 		   "} else {\n"
-			  "printf(\"P%s %i.%i\nS%s\nd%s\n:\\\"%s\\\"\n\n\",$mode,$uid,$gid,$size,scalar localtime $mtime,$filename);\n"
+			  "printf(\"P\%$mode $uid.$gid\nS$size\nd$mloctime\n:\\\"$filename\\\"\n\n\");\n"
 		   "}}\n"
 		   "printf(\"###200\n\");\n"
 		   "closedir(DIR);\"\n"
@@ -398,7 +402,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				  "if [ $ADD  = 0 ]; then\n"
 					  "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 				  "elif `sed --version >/dev/null 2>&1` ; then\n"
-					  "file=`echo $n | sed -e 's#\(.*\) -> \([^->]*\)#\1\" -> \"\2#'`\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\1\" -> \"\2#'`\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
 				  "else\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
@@ -409,7 +413,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				  "if [ $ADD = 0 ]; then\n"
 					  "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 				  "elif `sed --version >/dev/null 2>&1` ; then\n"
-					  "file=`echo $n | sed -e 's#\(.*\) -> \([^->]*\)#\1\" -> \"\2#'`\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\1\" -> \"\2#'`\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
 				  "else\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
@@ -677,7 +681,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 	return 0;
     quoted_name = name_quote (name, 0);
     g_free (name);
-    name = mhl_shell_escap_dup(quoted_name);
+    name = mhl_shell_escape_dup(quoted_name);
     fh->u.fish.append = 0;
 
     /*
