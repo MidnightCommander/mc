@@ -499,7 +499,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 		p = g_strdup_printf (_
 				     ("FTP: Account required for user %s"),
 				     SUP.user);
-		op = input_dialog (p, _("Account:"), "");
+		op = input_dialog (p, _("Account:"), (char *) NULL, "");
 		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, 0);

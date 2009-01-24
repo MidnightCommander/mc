@@ -58,9 +58,6 @@
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
 
-#define edit_get_load_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
-#define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
-
 struct selection {
    unsigned char * text;
    int len;
@@ -525,7 +522,8 @@ edit_save_as_cmd (WEdit *edit)
     int save_lock = 0;
     int different_filename = 0;
 
-    exp = edit_get_save_file (edit->filename, _(" Save As "));
+    exp = input_expand_dialog (_(" Save As "), _(" Enter file name: "),
+			       ":edit_save_as_cmd: Save As ", edit->filename);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -907,7 +905,8 @@ edit_load_cmd (WEdit *edit)
 	}
     }
 
-    exp = edit_get_load_file (edit->filename, _(" Load "));
+    exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
+				":edit_load_cmd: Load ", edit->filename);
 
     if (exp) {
 	if (*exp)
@@ -2338,7 +2337,8 @@ edit_goto_cmd (WEdit *edit)
     char s[32];
 
     g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), line ? s : "");
+    f = input_dialog (_(" Goto line "), _(" Enter line: "), ":edit_goto_cmd: Goto line ",
+		      line ? s : "");
     if (!f)
 	return;
 
@@ -2372,8 +2372,9 @@ edit_save_block_cmd (WEdit *edit)
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
     exp =
-	edit_get_save_file (catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL),
-			    _(" Save Block "));
+	input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
+			     ":edit_save_block_cmd: Save Block ", 
+			    catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2401,8 +2402,9 @@ edit_save_block_cmd (WEdit *edit)
 int
 edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp = edit_get_load_file (catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL),
-				    _(" Insert File "));
+    char *exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
+				     ":edit_insert_file_cmd: Insert File ",
+				     catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2441,7 +2443,7 @@ int edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_(" Run Sort "),
 	_(" Enter sort options (see manpage) separated by whitespace: "),
-	(old != NULL) ? old : "");
+	":edit_sort_cmd: Run Sort ", (old != NULL) ? old : "");
 
     if (!exp)
 	return 1;
@@ -2482,7 +2484,8 @@ edit_ext_cmd (WEdit *edit)
 
     exp =
 	input_dialog (_("Paste output of external command"),
-		      _("Enter shell command(s):"), NULL);
+		      _("Enter shell command(s):"),
+		      ":edit_ext_cmd: Paste output of ext.cmd ", NULL);
 
     if (!exp)
 	return 1;
