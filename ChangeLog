@@ -1,3 +1,4 @@
+
 2009-01-24 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editcmd.c: Fix some issues about regex:
@@ -8,6 +9,8 @@
 
 	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
 	  for Nemerle source files
+	* src/subshell.c: merged 174_4.6_mandriva_pty_closeonexec
+	  (patch from mandriva)
 
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
@@ -22,6 +25,11 @@
 	* src/hotlist.c: Removed unused function save_group
 	* src/main.c: Removed unused function do_mc_filename_rename
 	* src/util.c: Removed unused struct whentm
+
+2009-01-16 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* src/subshell: setting subshell pty to close-on-exec 
+	  (taken from mandriva patches)
 
 2009-01-14 Slava Zanko <slavazanko@gmail.com>
 
