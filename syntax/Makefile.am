@@ -28,6 +28,7 @@ SYNTAXFILES =			\
 	lisp.syntax		\
 	lsm.syntax		\
 	lua.syntax		\
+	nemerle.syntax		\
 	m4.syntax		\
 	mail.syntax		\
 	makefile.syntax		\

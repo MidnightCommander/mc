@@ -4,6 +4,11 @@
 	  - prevent . to match a newline (\n)
 	  - match from start of line and not from cursor position
 
+2009-01-24  Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
+	  for Nemerle source files
+
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
 	* edit/edit.h: Add two more ints
