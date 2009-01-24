@@ -1110,6 +1110,7 @@ pty_open_slave (const char *pty_name)
 #endif				/* I_FIND && I_PUSH */
 #endif				/* __osf__ || __linux__ */
 
+    fcntl(pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
 
@@ -1163,6 +1164,7 @@ pty_open_slave (const char *pty_name)
     }
     if ((pty_slave = open (pty_name, O_RDWR)) == -1)
 	fprintf (stderr, "open (pty_name, O_RDWR): %s\r\n", pty_name);
+    fcntl(pty_slave, F_SETFD, FD_CLOEXEC);
     return pty_slave;
 }
 
