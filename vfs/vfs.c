@@ -377,7 +377,7 @@ MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode,
 
 
 #define MC_HANDLEOP(name, inarg, callarg) \
-int mc_##name inarg \
+ssize_t mc_##name inarg \
 { \
     struct vfs_class *vfs; \
     int result; \
@@ -390,8 +390,8 @@ int mc_##name inarg \
     return result; \
 }
 
-MC_HANDLEOP(read, (int handle, void *buffer, int count), (vfs_info (handle), buffer, count) )
-MC_HANDLEOP (write, (int handle, const void *buf, int nbyte), (vfs_info (handle), buf, nbyte))
+MC_HANDLEOP(read,  (int handle, void *buffer,    int count), (vfs_info (handle), buffer, count))
+MC_HANDLEOP(write, (int handle, const void *buf, int nbyte), (vfs_info (handle), buf,    nbyte))
 
 
 #define MC_RENAMEOP(name) \
