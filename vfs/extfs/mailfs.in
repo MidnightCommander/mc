@@ -7,6 +7,7 @@ use bytes;
 
 $zcat="zcat";                 # gunzip to stdout
 $bzcat="bzip2 -dc";           # bunzip2 to stdout
+$lzcat="lzma -dc";            # unlzma to stdout
 $file="file";                 # "file" command
 $TZ='GMT';                    # default timezone (for Date module)
 
@@ -182,6 +183,8 @@ if (/gzip/) {
     exit 1 unless (open IN, "$zcat $mbox_qname|");
 } elsif (/bzip/) {
     exit 1 unless (open IN, "$bzcat $mbox_qname|");
+} elsif (/lzma/) {
+    exit 1 unless (open IN, "$lzcat $mbox_qname|");
 } else {
     exit 1 unless (open IN, "<$mbox_name");
 }
