@@ -1223,11 +1223,6 @@ dirsizes_cmd (void)
 void
 save_setup_cmd (void)
 {
-<<<<<<< HEAD:src/cmd.c
-=======
-    char *str;
-
->>>>>>> origin/158_message_codes:src/cmd.c
     save_setup ();
     sync_profiles ();
     
