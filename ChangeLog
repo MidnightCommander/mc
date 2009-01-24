@@ -1,3 +1,8 @@
+2009-01-24  Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
+	  for Nemerle source files
+
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
 	* doc/mcedit.1: Documented the newly added filename:lineno
