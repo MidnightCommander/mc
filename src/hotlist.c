@@ -51,6 +51,7 @@
 #include "key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
+#include "history.h"
 
 #define UX		5
 #define UY		2

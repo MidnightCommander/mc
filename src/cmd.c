@@ -61,6 +61,7 @@
 #include "setup.h"		/* save_setup() */
 #include "profile.h"		/* PROFILE_NAME */
 #include "execute.h"		/* toggle_panels() */
+#include "history.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0

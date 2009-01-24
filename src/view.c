@@ -62,7 +62,7 @@
 #include "execute.h"
 #include "main.h"		/* slow_terminal */
 #include "view.h"
-
+#include "history.h"
 #include "charsets.h"
 #include "selcodepage.h"
 

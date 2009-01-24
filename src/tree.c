@@ -49,6 +49,7 @@
 #include "tree.h"
 #include "treestore.h"
 #include "cmd.h"
+#include "history.h"
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
