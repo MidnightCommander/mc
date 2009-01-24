@@ -1,3 +1,7 @@
+2009-01-24 Enrico Weigelt <weigelt@metux.de>
+
+	* src/cmd.c: fixed bug #35 (do_view_cmd is now calling repaint_screen())
+
 2009-01-24 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editcmd.c: Fix some issues about regex:
