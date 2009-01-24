@@ -385,7 +385,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         "my $linkname = readlink (\"$dirname/$filename\");\n"
 			  "printf(\"P$mode $uid.$gid\nS$size\nd$mloctime\n:\\\"$filename\\\" -> \\\"$linkname\\\"\n\n\");\n"
 		   "} else {\n"
-			  "printf(\"P\%$mode $uid.$gid\nS$size\nd$mloctime\n:\\\"$filename\\\"\n\n\");\n"
+			  "printf(\"P$mode $uid.$gid\nS$size\nd$mloctime\n:\\\"$filename\\\"\n\n\");\n"
 		   "}}\n"
 		   "printf(\"###200\n\");\n"
 		   "closedir(DIR);\"\n"
