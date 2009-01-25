@@ -360,6 +360,16 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     char *quoted_path;
     int reply_code;
 
+#if 0
+    /*
+     * Simple FISH debug interface :]
+     */
+    if (!(MEDATA->logfile))
+    {
+        MEDATA->logfile = fopen("/tmp/mc-FISH.sh", "w");
+    }
+#endif // 0
+
     logfile = MEDATA->logfile;
 
     print_vfs_message(_("fish: Reading directory %s..."), remote_path);
@@ -370,28 +380,39 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     fish_command (me, super, NONE,
 		"#LIST \"/%s\"\n"
 		"if `perl -v > /dev/null 2>&1` ; then\n"
-		  "perl -e \"\n"
+		  "perl -e '\n"
 		   "use strict;\n"
 		   "use POSIX;\n"
 		   "use Fcntl;\n"
-		   "use POSIX ':fcntl_h'; #S_ISLNK was here until 5.6\n"
-		   "import Fcntl ':mode' unless defined &S_ISLNK; #and is now here\n"
-		   "my \\\$dirname = \\\"/%s\\\";\n"
-		   "if (opendir ( DIR, \\\$dirname )) {\n"
-		   "while( (my \\\$filename = readdir(DIR))){\n"
-		   "my (\\\$dev,\\\$ino,\\\$mode,\\\$nlink,\\\$uid,\\\$gid,\\\$rdev,\\\$size,\\\$atime,\\\$mtime,\\\$ctime,\\\$blksize,\\\$blocks) = lstat(\\\"\\\$dirname/\\\$filename\\\");\n"
-		   "my \\\$mloctime= scalar localtime \\\$mtime;\n"
-		   "if (S_ISLNK(\\\$mode) ) {\n"
-		   "my \\\$linkname = readlink (\\\"\\\$dirname/\\\$filename\\\");\n"
-			  "printf(\\\"P\\\$mode \\\$uid.\\\$gid\nS\\\$size\nd\\\$mloctime\n:\\\\\"\\\$filename\\\\\" -> \\\\\"\\\$linkname\\\\\"\n\n\\\");\n"
+		   "use POSIX \":fcntl_h\"; #S_ISLNK was here until 5.6\n"
+		   "import Fcntl \":mode\" unless defined &S_ISLNK; #and is now here\n"
+		   "my $dirname = $ARGV[0];\n"
+		   "if (opendir ( DIR, $dirname )) {\n"
+		   "while( (my $filename = readdir(DIR))){\n"
+		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
+		   "my $mloctime= scalar localtime $mtime;\n"
+		   "if (S_ISLNK($mode) ) {\n"
+		   "my $linkname = readlink (\"$dirname/$filename\");\n"
+			  "printf(\"P$mode $uid.$gid\\n"
+				    "S$size\\n"
+				    "d$mloctime\\n"
+				    ":\\\"$filename\\\" -> \\\"$linkname\\\"\\n"
+				    "\\n\");\n"
 		   "} else {\n"
-			  "printf(\\\"P\\\$mode \\\$uid.\\\$gid\nS\\\$size\nd\\\$mloctime\n:\\\\\"\\\$filename\\\\\"\n\n\\\");\n"
+			  "printf(\"P$mode $uid.$gid\\n"
+				    "S$size\\n"
+				    "d$mloctime\\n"
+				    ":\\\"$filename\\\"\\n"
+				    "\\n\");\n"
 		   "}}\n"
-		   "printf(\\\"###200\n\\\");\n"
+		   "printf(\"### 200\\n\");\n"
 		   "closedir(DIR);\n"
 		   "} else {\n"
-		    "printf(\\\"###500\n\\\");\n"
-		   "}\"\n"
+		    "printf(\"### 500\\n\");\n"
+		   "}\n"
+		   "exit 0\n"
+		   "' \"/%s\" ||\n" /* ARGV[0] - path to browse */
+		   "    echo '### 500'\n" /* do not hang if perl is to eval it */
 		"elif `ls -1 \"/%s\" >/dev/null 2>&1` ; then\n"
 		  "if `ls -Q \"/%s\" >/dev/null 2>&1`; then\n"
 			  "LSOPT=\"-Qlan\";\n"
@@ -405,7 +426,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				  "if [ $ADD  = 0 ]; then\n"
 					  "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 				  "elif `sed --version >/dev/null 2>&1` ; then\n"
-					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\1\" -> \"\2#'`\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
 				  "else\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
@@ -416,7 +437,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				  "if [ $ADD = 0 ]; then\n"
 					  "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 				  "elif `sed --version >/dev/null 2>&1` ; then\n"
-					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\1\" -> \"\2#'`\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
 				  "else\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
