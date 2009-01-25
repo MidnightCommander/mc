@@ -1,4 +1,4 @@
-2009-01-25 Patrick Winnertz <winnie@debian.org> 6 Sergei Trofimovich  <slyfox@inbox.ru>
+2009-01-25 Patrick Winnertz <winnie@debian.org> & Sergei Trofimovich  <slyfox@inbox.ru>
 
 	* mhl/string.h, vfs/fish.c, vfs/utilvfs.c, vfs/utilvfs.h: Reworked fish code
 	  so that symlinks and files which special characters works now
