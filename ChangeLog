@@ -1,3 +1,12 @@
+2009-01-25 Enrico Weigelt <weigelt@metux.de>
+
+	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:
+	* src/hotlist.c, src/panelize.c, src/tree.c, src/user.c: 
+	* src/view.c, vfs/ftpfs.c, vfs/utilvfs.c:
+	  - Made history section names statically instead of dynamic
+	  translated strings. This breaks now once every history file
+	  but afterwards this will be stable
+
 2009-01-24 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editcmd.c: Fix some issues about regex:
