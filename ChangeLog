@@ -1,3 +1,9 @@
+2009-01-25 Ilia Maslakov <il.smind@gmail.com>
+
+	* src/boxes.c, src/boxes.h, src/dir.c, src/dir.h:
+	* src/main.c, src/panel.h, src/screen.c, src/setup.c:
+	  - Add support for showing executables at first in the panel view
+
 2009-01-25 Enrico Weigelt <weigelt@metux.de>
 
 	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:

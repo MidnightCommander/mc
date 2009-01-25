@@ -1054,7 +1054,8 @@ panel_new (const char *panel_name)
     /* Load the default format */
     panel->count =
 	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
-		     panel->reverse, panel->case_sensitive, panel->filter);
+		     panel->reverse, panel->case_sensitive,
+		     panel->exec_first, panel->filter);
     return panel;
 }
 
@@ -1088,7 +1089,7 @@ panel_reload (WPanel *panel)
     panel->count =
 	do_reload_dir (panel->cwd, &panel->dir, panel->sort_type,
 		       panel->count, panel->reverse, panel->case_sensitive,
-		       panel->filter);
+		       panel->exec_first, panel->filter);
 
     panel->dirty = 1;
     if (panel->selected >= panel->count)
@@ -2464,7 +2465,8 @@ panel_re_sort (WPanel *panel)
 
     filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse, panel->case_sensitive);
+    do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse,
+             panel->case_sensitive, panel->exec_first);
     panel->selected = -1;
     for (i = panel->count; i; i--){
 	if (!strcmp (panel->dir.list [i-1].fname, filename)){

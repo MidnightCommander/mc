@@ -31,11 +31,11 @@ typedef struct {
 typedef int sortfn (const void *, const void *);
 
 int do_load_dir (const char *path, dir_list * list, sortfn * sort, int reverse,
-		 int case_sensitive, const char *filter);
+		 int case_sensitive, int exec_ff, const char *filter);
 void do_sort (dir_list * list, sortfn * sort, int top, int reverse,
-	      int case_sensitive);
+	      int case_sensitive, int exec_ff);
 int do_reload_dir (const char *path, dir_list * list, sortfn * sort, int count,
-		   int reverse, int case_sensitive, const char *filter);
+		   int reverse, int case_sensitive, int exec_ff, const char *filter);
 void clean_dir (dir_list * list, int count);
 int set_zero_dir (dir_list * list);
 int handle_path (dir_list *list, const char *path, struct stat *buf1,

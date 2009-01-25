@@ -245,6 +245,8 @@ panel_save_setup (struct WPanel *panel, const char *section)
     save_string (section, "reverse", buffer, profile_name);
     g_snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
     save_string (section, "case_sensitive", buffer, profile_name);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->exec_first);
+    save_string (section, "exec_first", buffer, profile_name);
     for (i = 0; sort_names [i].key; i++)
 	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
 	    save_string (section, "sort_order",
@@ -386,6 +388,7 @@ panel_load_setup (WPanel *panel, const char *section)
 
     panel->reverse = load_int (section, "reverse", 0);
     panel->case_sensitive = load_int (section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
+    panel->exec_first = load_int (section, "exec_first", 0);
 
     /* Load sort order */
     load_string (section, "sort_order", "name", buffer, sizeof (buffer));
