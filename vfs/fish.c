@@ -392,19 +392,30 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "while( (my $filename = readdir(DIR))){\n"
 		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
 		   "my $mloctime= scalar localtime $mtime;\n"
+		   "\n"
+		   "# shell escs are taken from here: http://www.slac.stanford.edu/slac/www/resource/how-to-use/cgi-rexx/cgi-esc.html\n"
+		   "  sub esc_shell_chars {\n"
+		   "     my $s = $_[0];\n"
+		   "     $s =~ s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ ])/\\\\$1/g;\n"
+		   "     return $s;\n"
+		   "  }\n"
+		   "\n"
+		   "my $e_filename = esc_shell_chars($filename);\n"
 		   "if (S_ISLNK($mode) ) {\n"
 		   "my $linkname = readlink (\"$dirname/$filename\");\n"
-			  "printf(\"P$mode $uid.$gid\\n"
+		   "my $e_linkname = esc_shell_chars($linkname);\n"
+		   "\n"
+			  "printf(\"R%%o %%o $uid.$gid\\n"
 				    "S$size\\n"
 				    "d$mloctime\\n"
-				    ":\\\"$filename\\\" -> \\\"$linkname\\\"\\n"
-				    "\\n\");\n"
+				    ":\\\"$e_filename\\\" -> \\\"$e_linkname\\\"\\n"
+				    "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
 		   "} else {\n"
-			  "printf(\"P$mode $uid.$gid\\n"
+			  "printf(\"R%%o %%o $uid.$gid\\n"
 				    "S$size\\n"
 				    "d$mloctime\\n"
-				    ":\\\"$filename\\\"\\n"
-				    "\\n\");\n"
+				    ":\\\"$e_filename\\\"\\n"
+				    "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
 		   "}}\n"
 		   "printf(\"### 200\\n\");\n"
 		   "closedir(DIR);\n"
@@ -542,6 +553,13 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	case 'P': {
 	    size_t skipped;
 	    vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode);
+	    break;
+	}
+	case 'R': {
+	    // raw filemode:
+	    // we expect: Roctal-filemode octal-filetype uid.gid
+	    size_t skipped;
+	    vfs_parse_raw_filemode (buffer + 1, &skipped, &ST.st_mode);
 	    break;
 	}
 	case 'd': {
