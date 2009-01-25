@@ -51,6 +51,7 @@
 #include "../src/unixcompat.h"
 #include "fish.h"
 #include "../mhl/memory.h"
+#include "../mhl/string.h"
 #include "../mhl/escape.h"
 
 int fish_directory_timeout = 900;
@@ -476,25 +477,58 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
-	    char *copy_buffer = buffer+1;
-	    char *filename = buffer+1;
-	    char *linkname = buffer+1;
-	    if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
-			break;  /* We'll do . and .. ourself */
+	    char *data_start = buffer+1;
+	    char *filename = data_start;
+	    char *linkname = data_start;
+	    char *filename_bound = filename + strlen(filename);
+	    char *linkname_bound = filename_bound;
+	    if (!strcmp(data_start, "\".\"") || !strcmp(data_start, "\"..\""))
+			break;  /* We'll do "." and ".." ourselves */
 
 		if (S_ISLNK(ST.st_mode)) {
-			while (*copy_buffer){
-				if (strncmp(copy_buffer," -> ",4)==0)
-					filename = copy_buffer;
-				copy_buffer++;
+			// we expect: "escaped-name" -> "escaped-name"
+			//     -> cannot occur in filenames,
+			//     because it will be escaped to -\>
+
+			if (*filename == '"')
+				++filename;
+
+			linkname = strstr(filename, "\" -> \"");
+			if (!linkname)
+			{
+				/* broken client, or smth goes wrong */
+				linkname = filename_bound;
+				if (filename_bound > filename
+				    && *(filename_bound - 1) == '"')
+					--filename_bound; // skip trailing "
 			}
-			int f_size = filename - linkname;
-			ent->name = malloc(f_size+1);
-			strncpy(ent->name,linkname,f_size);
-			ent->name[f_size] = '\0';
-			ent->ino->linkname = strdup(filename + 4);
+			else
+			{
+				filename_bound = linkname;
+				linkname += 6; // strlen ("\" -> \"")
+				if (*(linkname_bound - 1) == '"')
+					--linkname_bound; // skip trailing "
+			}
+
+			ent->name = mhl_str_dup_range(filename, filename_bound);
+			mhl_shell_unescape_buf(ent->name);
+
+			ent->ino->linkname = mhl_str_dup_range(linkname, linkname_bound);
+			mhl_shell_unescape_buf(ent->ino->linkname);
 		} else {
-			ent->name = g_strdup(buffer+1);
+			// we expect: "escaped-name"
+			if (filename_bound - filename > 2)
+			{
+				// there is at least 2 "
+				// and we skip them
+				if (*filename == '"')
+					++filename;
+				if (*(filename_bound - 1) == '"')
+					--filename_bound;
+			}
+
+			ent->name = mhl_str_dup_range(filename, filename_bound);
+			mhl_shell_unescape_buf(ent->name);
 		}
 		break;
 	}
