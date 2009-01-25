@@ -43,6 +43,7 @@
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
 #include "panelize.h"
+#include "history.h"
 
 #define UX		5
 #define UY		2
@@ -226,6 +227,7 @@ add2panelize_cmd (void)
     if (pname->buffer && (*pname->buffer)) {
 	label = input_dialog (_(" Add to external panelize "), 
 		_(" Enter command label: "), 
+		MC_HISTORY_FM_PANELIZE_ADD,
 			      "");
 	if (!label)
 	    return;

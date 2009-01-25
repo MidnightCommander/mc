@@ -73,6 +73,7 @@ What to do with this?
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+#include "../src/history.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"
@@ -499,7 +500,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 		p = g_strdup_printf (_
 				     ("FTP: Account required for user %s"),
 				     SUP.user);
-		op = input_dialog (p, _("Account:"), "");
+		op = input_dialog (p, _("Account:"), MC_HISTORY_FTPFS_ACCOUNT, "");
 		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, 0);

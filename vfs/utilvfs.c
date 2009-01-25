@@ -28,6 +28,7 @@
 #include "utilvfs.h"
 #include "vfs.h"
 #include "../src/unixcompat.h"
+#include "../src/history.h"
 
 /* Extract the hostname and username from the path */
 /* path is in the form: [user@]hostname:port/remote-dir, e.g.:
@@ -839,5 +840,5 @@ vfs_die (const char *m)
 char *
 vfs_get_password (const char *msg)
 {
-    return input_dialog (msg, _("Password:"), INPUT_PASSWORD);
+    return input_dialog (msg, _("Password:"), MC_HISTORY_VFS_PASSWORD, INPUT_PASSWORD);
 }

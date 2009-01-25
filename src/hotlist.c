@@ -51,6 +51,7 @@
 #include "key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
+#include "history.h"
 
 #define UX		5
 #define UY		2
@@ -1042,7 +1043,7 @@ void add2hotlist_cmd (void)
     strip_password (label_string, 1);
 
     prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
-    label = input_dialog (_(" Add to hotlist "), prompt, label_string);
+    label = input_dialog (_(" Add to hotlist "), prompt, MC_HISTORY_HOTLIST_ADD, label_string);
     g_free (prompt);
 
     if (!label || !*label) {

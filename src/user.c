@@ -33,6 +33,7 @@
 #include "layout.h"
 #include "execute.h"
 #include "setup.h"
+#include "history.h"
 
 #include "../edit/edit.h"		/* BLOCK_FILE */
 #include "../edit/edit-widget.h"	/* WEdit */
@@ -604,7 +605,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    if (*commands == '}'){
 		char *tmp;
 		*parameter = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, "");
+		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
 		if (!parameter || !*parameter){
 		    /* User canceled */
 		    fclose (cmd_file);

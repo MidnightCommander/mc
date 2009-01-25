@@ -36,7 +36,7 @@
 #include "ext.h"
 #include "view.h"
 #include "execute.h"
-
+#include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
 
@@ -114,7 +114,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	    if (*data == '}') {
 		char *parameter;
 		parameter_found = 0;
-		parameter = input_dialog (_(" Parameter "), prompt, "");
+		parameter = input_dialog (_(" Parameter "), prompt, MC_HISTORY_EXT_PARAMETER, "");
 		if (!parameter) {
 		    /* User canceled */
 		    fclose (cmd_file);

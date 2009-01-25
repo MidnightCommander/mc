@@ -49,6 +49,7 @@
 #include "tree.h"
 #include "treestore.h"
 #include "cmd.h"
+#include "history.h"
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
@@ -598,7 +599,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
 	return;
     g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Copy "), cmd_buf, default_dest);
+    dest = input_expand_dialog (_(" Copy "), cmd_buf, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (!dest)
 	return;
@@ -641,7 +642,7 @@ static void tree_move (WTree *tree, const char *default_dest)
 	return;
     g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
-    dest = input_expand_dialog (_(" Move "), cmd_buf, default_dest);
+    dest = input_expand_dialog (_(" Move "), cmd_buf, MC_HISTORY_FM_TREE_MOVE, default_dest);
     if (!dest)
 	return;
     if (!*dest){

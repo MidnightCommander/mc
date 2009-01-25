@@ -434,11 +434,15 @@ int quick_dialog (QuickDialog *qd)
  *
  * If the arguments "header" and "text" should be translated,
  * that MUST be done by the caller of fg_input_dialog_help().
+ *
+ * The argument "history_name" holds the name of a section
+ * in the history file. Data entered in the input field of
+ * the dialog box will be stored there.
  * 
  */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
-			const char *def_text)
+		      const char *history_name, const char *def_text)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
@@ -458,10 +462,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     char histname[64] = "inp|";
     char *p_text;
 
-    /* we need a unique name for histname because widget.c:history_tool()
-       needs a unique name for each dialog - using the header is ideal */
-    g_strlcpy (histname + 3, header, 61);
-    quick_widgets[2].histname = histname;
+    if (history_name != NULL && *history_name != '\0') {
+	g_strlcpy (histname + 3, history_name, 61);
+	quick_widgets[2].histname = histname;
+    }
 
     msglen (text, &lines, &cols);
     len = max ((int) strlen (header), cols) + 4;
@@ -525,32 +529,36 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
  * that MUST be done by the caller of these wrappers.
  */
 char *
-input_dialog_help (const char *header, const char *text, const char *help, const char *def_text)
+input_dialog_help (const char *header, const char *text, const char *help,
+		   const char *history_name, const char *def_text)
 {
 #ifdef WITH_BACKGROUND
     if (we_are_background)
-	return parent_call_string ((void *) fg_input_dialog_help, 4,
+	return parent_call_string ((void *) fg_input_dialog_help, 5,
 				   strlen (header), header, strlen (text),
 				   text, strlen (help), help,
+				   strlen (history_name), history_name,
 				   strlen (def_text), def_text);
     else
 #endif				/* WITH_BACKGROUND */
-	return fg_input_dialog_help (header, text, help, def_text);
+	return fg_input_dialog_help (header, text, help, history_name, def_text);
 }
 
 /* Show input dialog with default help, background safe */
-char *input_dialog (const char *header, const char *text, const char *def_text)
+char *input_dialog (const char *header, const char *text,
+		    const char *history_name, const char *def_text)
 {
-    return input_dialog_help (header, text, "[Input Line Keys]", def_text);
+    return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text);
 }
 
 char *
-input_expand_dialog (const char *header, const char *text, const char *def_text)
+input_expand_dialog (const char *header, const char *text, 
+		     const char *history_name, const char *def_text)
 {
     char *result;
     char *expanded;
 
-    result = input_dialog (header, text, def_text);
+    result = input_dialog (header, text, history_name, def_text);
     if (result) {
 	expanded = tilde_expand (result);
 	g_free (result);
