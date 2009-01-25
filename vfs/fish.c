@@ -396,7 +396,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "# shell escs are taken from here: http://www.slac.stanford.edu/slac/www/resource/how-to-use/cgi-rexx/cgi-esc.html\n"
 		   "  sub esc_shell_chars {\n"
 		   "     my $s = $_[0];\n"
-		   "     $s =~ s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ ])/\\\\$1/g;\n"
+		   "     $s =~ s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
 		   "     return $s;\n"
 		   "  }\n"
 		   "\n"
