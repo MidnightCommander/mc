@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-01-06 13:46+0200\n"
-"PO-Revision-Date: 2009-01-16 17:28-0000\n"
+"PO-Revision-Date: 2009-01-25 16:08-0000\n"
 "Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -65,8 +65,9 @@ msgstr " Dateiname eingeben: "
 msgid "Warning"
 msgstr "Warnung"
 
+#, fuzzy
 msgid " File has hard-links. Detach before saving? "
-msgstr ""
+msgstr "Die Datei ist statisch verlinkt, sollen diese Links entfernt werden?"
 
 msgid "&Yes"
 msgstr "&Ja"
@@ -1744,9 +1745,8 @@ msgstr "ansicht - F3"
 msgid "&Edit - F4"
 msgstr "b&Earbeiten -F4"
 
-#, fuzzy
 msgid "&Find recursively"
-msgstr "&Unterverzeichnisse durchsuchen"
+msgstr "Rec&ursiv durchsuchen"
 
 msgid "Start at:"
 msgstr "Anfangen bei:"
@@ -2609,13 +2609,13 @@ msgstr "Eigentümer"
 msgid "Group"
 msgstr "Gruppe"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] "%s Bytes"
 msgstr[1] "%s Bytes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s Bytes in %d Datei"
@@ -2951,9 +2951,8 @@ msgstr ""
 msgid " Goto Address "
 msgstr " Gehe zu Adresse "
 
-#, fuzzy
 msgid " Invalid address "
-msgstr " Ungültiges Paßwort "
+msgstr " Ungültige Adresse"
 
 msgid " Enter regexp:"
 msgstr " Regulärer Ausdruck:"
@@ -3591,3 +3590,4 @@ msgstr "Interner Fehler:"
 
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
+
