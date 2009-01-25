@@ -198,8 +198,8 @@ do_view_cmd (int normal)
 	if (!do_cd (selection (current_panel)->fname, cd_exact))
 	    message (1, MSG_ERROR, _("Cannot change directory"));
 
+	repaint_screen();
 	return;
-
     }
 
     file_idx = current_panel->selected;
@@ -213,6 +213,8 @@ do_view_cmd (int normal)
 	    break;
 	file_idx = scan_for_file (current_panel, file_idx, dir);
     }
+
+    repaint_screen();
 }
 
 /* Run user's preferred viewer on the currently selected file */
