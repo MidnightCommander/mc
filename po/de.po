@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
 "POT-Creation-Date: 2009-01-06 13:46+0200\n"
-"PO-Revision-Date: 2009-01-25 16:08-0000\n"
+"PO-Revision-Date: 2009-01-25 17:50-0000\n"
 "Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -1890,9 +1890,9 @@ msgstr " Startgruppe "
 msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
-#, fuzzy, c-format
+#, c-format
 msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " Datei, die alten Hotlist-Einträge wurden nicht gelöscht"
+msgstr "MC konnte ~/%s nicht schreiben, die alten Hotlist-Einträge wurden nicht gelöscht"
 
 #, c-format
 msgid "Midnight Commander %s"
