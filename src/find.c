@@ -219,7 +219,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	int l1, maxlen = 0;
 
 	while (i--) {
-	    l1 = strlen (labs[i] = _(labs[i]));
+	    l1 = mbstrlen (labs[i] = _(labs[i]));
 	    if (l1 > maxlen)
 		maxlen = l1;
 	}
@@ -228,7 +228,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	    FIND_X = i;
 
 	for (i = sizeof (buts) / sizeof (buts[0]), l1 = 0; i--;) {
-	    l1 += strlen (buts[i] = _(buts[i]));
+	    l1 += mbstrlen (buts[i] = _(buts[i]));
 	}
 	l1 += 21;
 	if (l1 > FIND_X)
@@ -237,8 +237,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	ilen = FIND_X - 7 - maxlen;	/* for the case of very long buttons :) */
 	istart = FIND_X - 3 - ilen;
 
-	b1 = b0 + strlen (buts[0]) + 7;
-	b2 = FIND_X - (strlen (buts[2]) + 6);
+	b1 = b0 + mbstrlen (buts[0]) + 7;
+	b2 = FIND_X - (mbstrlen (buts[2]) + 6);
 
 	i18n_flag = 1;
 	case_label = _(case_label);
@@ -865,7 +865,7 @@ setup_gui (void)
     if (!i18n_flag) {
 	register int i = sizeof (fbuts) / sizeof (fbuts[0]);
 	while (i--)
-	    fbuts[i].len = strlen (fbuts[i].text = _(fbuts[i].text)) + 3;
+	    fbuts[i].len = mbstrlen (fbuts[i].text = _(fbuts[i].text)) + 3;
 	fbuts[2].len += 2;	/* DEFPUSH_BUTTON */
 	i18n_flag = 1;
     }
@@ -1030,7 +1030,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
 	    if (!next_free)	/* first turn i.e clean old list */
 		panel_clean_dir (current_panel);
-	    list->list[next_free].fnamelen = strlen (name);
+	    list->list[next_free].fnamelen = mbstrlen (name);
 	    list->list[next_free].fname = name;
 	    list->list[next_free].f.marked = 0;
 	    list->list[next_free].f.link_to_dir = link_to_dir;

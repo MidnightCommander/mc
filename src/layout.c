@@ -367,36 +367,36 @@ init_layout (void)
 
 	while (i--) {
 	    s_split_direction[i] = _(s_split_direction[i]);
-	    l1 = strlen (s_split_direction[i]) + 7;
+	    l1 = mbstrlen (s_split_direction[i]) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
 	for (i = 0; i <= 8; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+	    l1 = mbstrlen (check_options[i].text) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
-	l1 = strlen (title1) + 1;
+	l1 = mbstrlen (title1) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-	l1 = strlen (title2) + 1;
+	l1 = mbstrlen (title2) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
 
-	second_width = strlen (title3) + 1;
+	second_width = mbstrlen (title3) + 1;
 	for (i = 0; i < 6; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+	    l1 = mbstrlen (check_options[i].text) + 7;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
 	if (console_flag) {
-	    l1 = strlen (output_lines_label) + 13;
+	    l1 = mbstrlen (output_lines_label) + 13;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
@@ -410,14 +410,14 @@ init_layout (void)
 	 *
 	 * Now the last thing to do - properly space buttons...
 	 */
-	l1 = 11 + strlen (ok_button)	/* 14 - all brackets and inner space */
-	    +strlen (save_button)	/* notice: it is 3 char less because */
-	    +strlen (cancel_button);	/* of '&' char in button text */
+	l1 = 11 + mbstrlen (ok_button)	/* 14 - all brackets and inner space */
+	    +mbstrlen (save_button)	/* notice: it is 3 char less because */
+	    +mbstrlen (cancel_button);	/* of '&' char in button text */
 
 	i = (first_width + second_width - l1) / 4;
 	b1 = 5 + i;
-	b2 = b1 + strlen (ok_button) + i + 6;
-	b3 = b2 + strlen (save_button) + i + 4;
+	b2 = b1 + mbstrlen (ok_button) + i + 6;
+	b3 = b2 + mbstrlen (save_button) + i + 4;
 
 	i18n_layt_flag = 1;
     }
@@ -681,7 +681,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    promptl = strlen (prompt);
+    promptl = mbstrlen (prompt);
 
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 

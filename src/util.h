@@ -102,6 +102,13 @@ void init_uid_gid_cache (void);
 char *get_group (int);
 char *get_owner (int);
 
+void fix_utf8(char *str);
+size_t mbstrlen (const char *);
+wchar_t *mbstr_to_wchar (const char *);
+char *wchar_to_mbstr (const wchar_t *);
+char *utf8_to_local(char *str);
+
+
 #define MAX_I18NTIMELENGTH 14
 #define MIN_I18NTIMELENGTH 10
 #define STD_I18NTIMELENGTH 12

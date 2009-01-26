@@ -238,7 +238,7 @@ init_learn (void)
 	learn_but[0].x = 78 / 2 + 4;
 
 	learn_but[1].text = _(learn_but[1].text);
-	learn_but[1].x = 78 / 2 - (strlen (learn_but[1].text) + 9);
+	learn_but[1].x = 78 / 2 - (mbstrlen (learn_but[1].text) + 9);
 
 	learn_title = _(learn_title);
 	i18n_flag = 1;

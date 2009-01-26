@@ -167,15 +167,20 @@ static const char *
 do_transform_source (FileOpContext *ctx, const char *source)
 {
     size_t j, k, l, len;
-    const char *fnsource = x_basename (source);
+    char *fnsource = g_strdup (x_basename (source));
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
     static char fntarget[MC_MAXPATHLEN];
+
+#ifdef UTF8
+    fix_utf8(fnsource);
+#endif
 
     len = strlen (fnsource);
     j = re_match (&ctx->rx, fnsource, len, 0, &ctx->regs);
     if (j != len) {
 	transform_error = FILE_SKIP;
+	g_free (fnsource);
 	return NULL;
     }
     for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
@@ -225,6 +230,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
 		|| ctx->regs.start[next_reg] < 0) {
 		message (1, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
+		g_free(fnsource);
 		return NULL;
 	    }
 	    for (l = (size_t) ctx->regs.start[next_reg];
@@ -239,6 +245,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
 	}
     }
     fntarget[k] = 0;
+    g_free(fnsource);
     return fntarget;
 }
 
@@ -1700,13 +1707,13 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     *dp = '\0';
 
     if (single_source) {
-	i = fmd_xlen - strlen (format_string) - 4;
+	i = fmd_xlen - mbstrlen (format_string) - 4;
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    name_trunc (single_source, i));
     } else {
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    panel->marked);
-	i = strlen (cmd_buf) + 6 - fmd_xlen;
+	i = mbstrlen (cmd_buf) + 6 - fmd_xlen;
 	if (i > 0) {
 	    fmd_xlen += i;
 	    fmd_init_i18n (TRUE);	/* to recalculate positions of child widgets */

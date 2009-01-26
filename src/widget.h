@@ -39,6 +39,7 @@ typedef struct WButton {
     char *text;			/* text of button */
     int hotkey;			/* hot KEY */
     int hotpos;			/* offset hot KEY char in text */
+    wchar_t hotwc;
     bcback callback;		/* Callback function */
 } WButton;
 
@@ -59,6 +60,7 @@ typedef struct WCheck {
     char *text;			/* text of check button */
     int hotkey;                 /* hot KEY */
     int hotpos;			/* offset hot KEY char in text */
+    wchar_t hotwc;
 } WCheck;
 
 typedef struct WGauge {
@@ -74,16 +76,20 @@ char *show_hist (GList *history, int widget_y, int widget_x);
 
 typedef struct {
     Widget widget;
-    int  point;			/* cursor position in the input line */
-    int  mark;			/* The mark position */
-    int  first_shown;		/* Index of the first shown character */
-    int  current_max_len;	/* Maximum length of input line */
-    int  field_len;		/* Length of the editing field */
+    int  point;			/* cursor position in the input line (mb chars) */
+    int  mark;			/* The mark position (mb chars) */
+    int  first_shown;		/* Index of the first shown character (mb chars) */
+    int  current_max_len;	/* Maximum length of input line (bytes) */
+    int  field_len;		/* Length of the editing field (mb chars) */
     int  color;			/* color used */
     int  first;			/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */
     char *buffer;		/* pointer to editing buffer */
+#ifdef UTF8
+    char charbuf[MB_LEN_MAX];
+#endif /* UTF8 */
+    int charpoint;
     GList *history;		/* The history */
     int  need_push;		/* need to push the current Input on hist? */
     char **completions;		/* Possible completions array */

@@ -38,6 +38,9 @@
 
 #include "global.h"
 #include "tty.h"
+#ifdef UTF8
+#include <wctype.h>
+#endif /* UTF8 */
 #include "color.h"
 #include "mouse.h"
 #include "dialog.h"
@@ -183,6 +186,11 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	if (b->hotpos >= 0) {
 	    widget_selectcolor (w, b->selected, TRUE);
 	    widget_move (w, 0, b->hotpos + off);
+#ifdef UTF8
+	    if (SLsmg_Is_Unicode)
+		SLsmg_write_nwchars (&b->hotwc, 1);
+	    else
+#endif
 	    addch ((unsigned char) b->text[b->hotpos]);
 	}
 	return MSG_HANDLED;
@@ -216,7 +224,7 @@ button_event (Gpm_Event *event, void *data)
 static int
 button_len (const char *text, unsigned int flags)
 {
-    int ret = strlen (text);
+    int ret = mbstrlen (text);
     switch (flags){
 	case DEFPUSH_BUTTON:
 	    ret += 6;
@@ -239,14 +247,36 @@ button_len (const char *text, unsigned int flags)
  * the button text is g_malloc()ed, we can safely change and shorten it.
  */
 static void
-button_scan_hotkey (WButton *b)
+scan_hotkey (char *text, int *hotposp, int *hotkeyp, wchar_t *hotwcp)
 {
-    char *cp = strchr (b->text, '&');
+    char *cp = strchr (text, '&');
 
     if (cp != NULL && cp[1] != '\0') {
-	g_strlcpy (cp, cp + 1, strlen (cp));
-	b->hotkey = tolower ((unsigned char) *cp);
-	b->hotpos = cp - b->text;
+#ifdef UTF8
+        if (SLsmg_Is_Unicode) {
+	    mbstate_t s;
+	    int len;
+
+	    *cp = '\0';
+	    memset (&s, 0, sizeof (s));
+	    len = mbrtowc (hotwcp, cp + 1, MB_CUR_MAX, &s);
+	    if (len > 0) {
+		*hotposp = mbstrlen (text);
+		if (*hotposp < 0) {
+		    *hotposp = -1;
+		} else {
+		    /* FIXME */
+		    *hotkeyp = tolower (*hotwcp);
+		}
+	    }
+	} else
+#endif
+	{
+	    *hotkeyp = tolower (cp[1]);
+	    *hotposp = cp - text;
+	}
+
+	memmove (cp, cp + 1, strlen (cp + 1) + 1);
     }
 }
 
@@ -267,8 +297,9 @@ button_new (int y, int x, int action, int flags, const char *text,
     widget_want_hotkey (b->widget, 1);
     b->hotkey = 0;
     b->hotpos = -1;
+    b->hotwc = L'\0';
 
-    button_scan_hotkey(b);
+    scan_hotkey(b->text, &b->hotpos, &b->hotkey, &b->hotwc);
     return b;
 }
 
@@ -281,14 +312,13 @@ button_get_text (WButton *b)
 void
 button_set_text (WButton *b, const char *text)
 {
-   g_free (b->text);
+    g_free (b->text);
     b->text = g_strdup (text);
     b->widget.cols = button_len (text, b->flags);
-    button_scan_hotkey(b);
+    scan_hotkey(b->text, &b->hotpos, &b->hotkey, &b->hotwc);
     dlg_redraw (b->widget.parent);
 }
 
-
 /* Radio button widget */
 static int radio_event (Gpm_Event *event, void *);
 
@@ -363,14 +393,35 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    widget_move (&r->widget, i, 0);
 
 	    tty_printf ("(%c) ", (r->sel == i) ? '*' : ' ');
-	    for (cp = r->texts[i]; *cp; cp++) {
-		if (*cp == '&') {
-		    widget_selectcolor (w, focused, TRUE);
+	    cp = strchr (r->texts[i], '&');
+	    if (cp != NULL) {
+#ifdef UTF8
+		mbstate_t s;
+		wchar_t wc;
+		int len;
+#endif
+		tty_printf ("%.*s", (int) ((char *) cp - r->texts[i]),
+			r->texts[i]);
+		widget_selectcolor (w, focused, TRUE);
+#ifdef UTF8
+		if (SLsmg_Is_Unicode) {
+		    memset (&s, 0, sizeof (s));
+		    len = mbrtowc (&wc, cp + 1, MB_CUR_MAX, &s);
+		    ++cp;
+		    if (len > 0) {
+			tty_printf ("%.*s", len, cp);
+			cp += len;
+		    }
+                } else
+#endif
+		{
 		    addch (*++cp);
-		    widget_selectcolor (w, focused, FALSE);
-		} else
-		    addch (*cp);
-	    }
+		    ++cp;
+		}
+		widget_selectcolor (w, focused, FALSE);
+	    } else
+		cp = r->texts[i];
+		addstr ((char *) cp);
 	}
 	return MSG_HANDLED;
 
@@ -409,7 +460,7 @@ radio_new (int y, int x, int count, const char **texts)
     /* Compute the longest string */
     max = 0;
     for (i = 0; i < count; i++){
-	m = strlen (texts [i]);
+	m = mbstrlen (texts [i]);
 	if (m > max)
 	    max = m;
     }
@@ -469,6 +520,11 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	if (c->hotpos >= 0) {
 	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
 	    widget_move (&c->widget, 0, +c->hotpos + 4);
+#ifdef UTF8
+	    if (SLsmg_Is_Unicode)
+		SLsmg_write_nwchars (&c->hotwc, 1);
+	    else
+#endif
 	    addch ((unsigned char) c->text[c->hotpos]);
 	}
 	return MSG_HANDLED;
@@ -506,35 +562,20 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
-    const char *s;
-    char *t;
-    
-    init_widget (&c->widget, y, x, 1, strlen (text),
+
+    init_widget (&c->widget, y, x, 1, mbstrlen (text),
 	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
     c->text = g_strdup (text);
     c->hotkey = 0;
     c->hotpos = -1;
+    c->hotwc = L'\0';
     widget_want_hotkey (c->widget, 1);
 
-    /* Scan for the hotkey */
-    for (s = text, t = c->text; *s; s++, t++){
-	if (*s != '&'){
-	    *t = *s;
-	    continue;
-	}
-	s++;
-	if (*s){
-	    c->hotkey = tolower ((unsigned char) *s);
-	    c->hotpos = t - c->text;
-	}
-	*t = *s;
-    }
-    *t = 0;
+    scan_hotkey (c->text, &c->hotpos, &c->hotkey, &c->hotwc);
     return c;
 }
 
-
 /* Label widget */
 
 static cb_ret_t
@@ -573,7 +614,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		}
 		widget_move (&l->widget, y, 0);
 		tty_printf ("%s", p);
-		xlen = l->widget.cols - strlen (p);
+		xlen = l->widget.cols - mbstrlen (p);
 		if (xlen > 0)
 		    tty_printf ("%*s", xlen, " ");
 		if (!q)
@@ -607,7 +648,7 @@ label_set_text (WLabel *label, const char *text)
     if (text){
 	label->text = g_strdup (text);
 	if (label->auto_adjust_cols) {
-	    newcols = strlen (text);
+	    newcols = mbstrlen (text);
 	    if (newcols > label->widget.cols)
 	    label->widget.cols = newcols;
 	}
@@ -631,7 +672,7 @@ label_new (int y, int x, const char *text)
     if (!text || strchr(text, '\n'))
 	width = 1;
     else
-	width = strlen (text);
+	width = mbstrlen (text);
 
     l = g_new (WLabel, 1);
     init_widget (&l->widget, y, x, 1, width, label_callback, NULL);
@@ -779,13 +820,69 @@ static void draw_history_button (WInput * in)
 /* Pointer to killed data */
 static char *kill_buffer = 0;
 
+#ifdef UTF8
+static int
+charpos(WInput *in, int idx)
+{
+    int i, pos, l, len;
+    mbstate_t mbs;
+    memset (&mbs, 0, sizeof (mbs));
+    i = 0;
+    pos = 0;
+    len = strlen(in->buffer);
+
+    while (in->buffer[pos]) {
+	if (i == idx)
+	    return pos;
+	l = mbrlen(in->buffer + pos, len - pos, &mbs);
+	if (l <= 0)
+	    return pos;
+	pos+=l;
+	i++;
+    };
+    return pos;
+}
+
+static int
+charcolumn(WInput *in, int idx)
+{
+    int i, pos, l, width, len;
+    mbstate_t mbs;
+    memset (&mbs, 0, sizeof (mbs));
+    i = 0;
+    pos = 0; width = 0;
+    len = strlen(in->buffer);
+
+    while (in->buffer[pos]) {
+	wchar_t wc;
+	if (i == idx)
+	    return width;
+	l = mbrtowc(&wc, in->buffer + pos, len - pos, &mbs);
+	if (l <= 0)
+	    return width;
+	pos += l; width += wcwidth(wc);
+	i++;
+    };
+    return width;
+}
+#else
+#define charpos(in, idx) (idx)
+#define charcolumn(in, idx) (idx)
+#endif /* UTF8 */
+
 void
 update_input (WInput *in, int clear_first)
 {
     int has_history = 0;
     int    i, j;
-    unsigned char   c;
-    int    buf_len = strlen (in->buffer);
+    int    buf_len = mbstrlen (in->buffer);
+#ifndef UTF8
+    unsigned char c;
+#else /* UTF8 */
+    wchar_t c;
+    mbstate_t mbs;
+    memset (&mbs, 0, sizeof (mbs));
+#endif /* UTF8 */
 
     if (should_show_history_button (in))
 	has_history = HISTORY_BUTTON_WIDTH;
@@ -795,7 +892,7 @@ update_input (WInput *in, int clear_first)
 
     /* Make the point visible */
     if ((in->point < in->first_shown) ||
-	(in->point >= in->first_shown+in->field_len - has_history)){
+	(charcolumn(in, in->point) >= charcolumn(in, in->first_shown) + in->field_len - has_history)){
 	in->first_shown = in->point - (in->field_len / 3);
 	if (in->first_shown < 0)
 	    in->first_shown = 0;
@@ -815,14 +912,29 @@ update_input (WInput *in, int clear_first)
 	addch (' ');
     widget_move (&in->widget, 0, 0);
     
+#ifndef UTF8
     for (i = 0, j = in->first_shown; i < in->field_len - has_history && in->buffer [j]; i++){
 	c = in->buffer [j++];
 	c = is_printable (c) ? c : '.';
+#else /* UTF8 */
+    for (i = 0, j = in->first_shown; (i < in->field_len - has_history) && (j < buf_len); i++,j++){
+	char * chp = in->buffer + charpos(in,j);
+	size_t res = mbrtowc(&c, chp, strlen(chp), &mbs);
+	c = (res && iswprint (c)) ? 0 : '.';
+#endif /* UTF8 */
 	if (in->is_password)
 	    c = '*';
+#ifndef UTF8
 	addch (c);
+#else /* UTF8 */
+	if (c) {
+	    addch (c);
+	}
+	else
+	    SLsmg_write_nchars (chp, res);
+#endif /* UTF8 */
     }
-    widget_move (&in->widget, 0, in->point - in->first_shown);
+    widget_move (&in->widget, 0, charcolumn(in, in->point) - charcolumn(in, in->first_shown));
 
     if (clear_first)
 	    in->first = 0;
@@ -975,7 +1087,7 @@ char *
 show_hist (GList *history, int widget_x, int widget_y)
 {
     GList *hi, *z;
-    size_t maxlen = strlen (i18n_htitle ()), i, count = 0;
+    size_t maxlen = mbstrlen (i18n_htitle ()), i, count = 0;
     int x, y, w, h;
     char *q, *r = 0;
     Dlg_head *query_dlg;
@@ -988,7 +1100,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     z = g_list_first (history);
     hi = z;
     while (hi) {
-	if ((i = strlen ((char *) hi->data)) > maxlen)
+	if ((i = mbstrlen ((char *) hi->data)) > maxlen)
 	    maxlen = i;
 	count++;
 	hi = g_list_next (hi);
@@ -1158,35 +1270,83 @@ new_input (WInput *in)
     in->need_push = 1;
     in->buffer [0] = 0;
     in->point = 0;
+    in->charpoint = 0;
     in->mark = 0;
     free_completions (in);
     update_input (in, 0);
+}
+
+static void
+move_buffer_backward (WInput *in, int point)
+{
+    int i, pos, len;
+    int str_len = mbstrlen (in->buffer);
+    if (point >= str_len) return;
+
+    pos = charpos(in,point);
+    len = charpos(in,point + 1) - pos;
+
+    for (i = pos; in->buffer [i + len - 1]; i++)
+	in->buffer [i] = in->buffer [i + len];
 }
 
 static cb_ret_t
 insert_char (WInput *in, int c_code)
 {
     size_t i;
+#ifdef UTF8
+    mbstate_t mbs;
+    int res;
+
+    memset (&mbs, 0, sizeof (mbs));
+#else
+    in->charpoint = 0;
+#endif /* UTF8 */
 
     if (c_code == -1)
 	return MSG_NOT_HANDLED;
     
+#ifdef UTF8
+    if (in->charpoint >= MB_CUR_MAX) return 1;
+
+    in->charbuf[in->charpoint++] = c_code;
+
+    res = mbrlen((char *)in->charbuf, in->charpoint, &mbs);
+    if (res < 0) {
+	if (res != -2) in->charpoint = 0; /* broken multibyte char, skip */
+        return 1;
+    }
+
+#endif /* UTF8 */
     in->need_push = 1;
-    if (strlen (in->buffer)+1 == (size_t) in->current_max_len){
+    if (strlen (in->buffer) + 1 + in->charpoint >= (size_t) in->current_max_len){
 	/* Expand the buffer */
-	char *narea = g_realloc (in->buffer, in->current_max_len + in->field_len);
+	char *narea = g_realloc (in->buffer, in->current_max_len + in->field_len + in->charpoint);
 	if (narea){
 	    in->buffer = narea;
-	    in->current_max_len += in->field_len;
+	    in->current_max_len += in->field_len + in->charpoint;
 	}
     }
+#ifndef UTF8
     if (strlen (in->buffer)+1 < (size_t) in->current_max_len){
 	size_t l = strlen (&in->buffer [in->point]);
 	for (i = l+1; i > 0; i--)
 	    in->buffer [in->point+i] = in->buffer [in->point+i-1];
 	in->buffer [in->point] = c_code;
+#else /* UTF8 */
+    if (strlen (in->buffer) + in->charpoint < in->current_max_len){
+        size_t ins_point = charpos(in,in->point); /* bytes from begin */
+	/* move chars */
+	size_t rest_bytes = strlen (in->buffer + ins_point);
+
+	for (i = rest_bytes + 1; i > 0; i--)
+	    in->buffer [ins_point + i + in->charpoint - 1] = in->buffer [ins_point + i - 1];
+
+	memcpy(in->buffer + ins_point, in->charbuf, in->charpoint);
+#endif /* UTF8 */
 	in->point++;
     }
+    in->charpoint = 0;
     return MSG_HANDLED;
 }
 
@@ -1194,12 +1354,14 @@ static void
 beginning_of_line (WInput *in)
 {
     in->point = 0;
+    in->charpoint = 0;
 }
 
 static void
 end_of_line (WInput *in)
 {
-    in->point = strlen (in->buffer);
+    in->point = mbstrlen (in->buffer);
+    in->charpoint = 0;
 }
 
 static void
@@ -1207,18 +1369,21 @@ backward_char (WInput *in)
 {
     if (in->point)
 	in->point--;
+    in->charpoint = 0;
 }
 
 static void
 forward_char (WInput *in)
 {
-    if (in->buffer [in->point])
+    if (in->buffer [charpos(in,in->point)])
 	in->point++;
+    in->charpoint = 0;
 }
 
 static void
 forward_word (WInput * in)
 {
+#ifndef UTF8
     char *p = in->buffer + in->point;
 
     while (*p
@@ -1228,11 +1393,39 @@ forward_word (WInput * in)
     while (*p && isalnum ((unsigned char) *p))
 	p++;
     in->point = p - in->buffer;
+#else /* UTF8 */
+    mbstate_t mbs;
+    int len = mbstrlen (in->buffer);
+    memset (&mbs, 0, sizeof (mbs));
+
+    while (in->point < len) {
+	wchar_t c;
+	char *p = in->buffer + charpos(in,in->point);
+	size_t res = mbrtowc(&c, p, strlen(p), &mbs);
+	if (res <= 0 || !(iswspace (c) || iswpunct (c)))
+	    break;
+	in->point++;
+    }
+
+    memset (&mbs, 0, sizeof (mbs));
+
+    while (in->point < len) {
+	wchar_t c;
+	char *p = in->buffer + charpos(in,in->point);
+	size_t res = mbrtowc(&c, p, strlen(p), &mbs);
+	if (res <= 0 || !iswalnum (c))
+	    break;
+	    in->point++;
+	}
+
+	in->charpoint = 0;
+#endif /* UTF8 */
 }
 
 static void
 backward_word (WInput *in)
 {
+#ifndef UTF8
     char *p = in->buffer + in->point;
 
     while (p - 1 > in->buffer - 1 && (isspace ((unsigned char) *(p - 1))
@@ -1242,6 +1435,32 @@ backward_word (WInput *in)
     while (p - 1 > in->buffer - 1 && isalnum ((unsigned char) *(p - 1)))
 	p--;
     in->point = p - in->buffer;
+#else /* UTF8 */
+    mbstate_t mbs;
+
+    memset (&mbs, 0, sizeof (mbs));
+    while (in->point > 0) {
+      wchar_t c;
+      char *p = in->buffer + charpos(in,in->point);
+      size_t res = mbrtowc(&c, p, strlen(p), &mbs);
+      if (*p && (res <= 0 || !(iswspace (c) || iswpunct (c))))
+          break;
+      in->point--;
+    }
+
+    memset (&mbs, 0, sizeof (mbs));
+
+    while (in->point > 0) {
+      wchar_t c;
+      char *p = in->buffer + charpos(in,in->point);
+      size_t res = mbrtowc(&c, p, strlen(p), &mbs);
+      if (*p && (res <= 0 || !iswalnum (c)))
+          break;
+      in->point--;
+    }
+
+    in->charpoint = 0;
+#endif /* UTF8 */
 }
 
 static void
@@ -1274,8 +1493,9 @@ backward_delete (WInput *in)
     
     if (!in->point)
 	return;
-    for (i = in->point; in->buffer [i-1]; i++)
-	in->buffer [i-1] = in->buffer [i];
+
+    move_buffer_backward(in, in->point - 1);
+    in->charpoint = 0;
     in->need_push = 1;
     in->point--;
 }
@@ -1283,10 +1503,8 @@ backward_delete (WInput *in)
 static void
 delete_char (WInput *in)
 {
-    int i;
-
-    for (i = in->point; in->buffer [i]; i++)
-	in->buffer [i] = in->buffer [i+1];
+    move_buffer_backward(in, in->point);
+    in->charpoint = 0;
     in->need_push = 1;
 }
 
@@ -1301,6 +1519,9 @@ copy_region (WInput *in, int x_first, int x_last)
     
     g_free (kill_buffer);
 
+    first=charpos(in,first);
+    last=charpos(in,last);
+
     kill_buffer = g_strndup(in->buffer+first,last-first);
 }
 
@@ -1309,11 +1530,13 @@ delete_region (WInput *in, int x_first, int x_last)
 {
    int first = min (x_first, x_last);
    int last  = max (x_first, x_last);
-   size_t len = strlen (&in->buffer [last]) + 1;
+   size_t len;
 
    in->point = first;
    in->mark  = first;
-   memmove (&in->buffer [first], &in->buffer [last], len);
+   len = strlen (&in->buffer [charpos(in,last)]) + 1;
+   memmove (&in->buffer [charpos(in,first)], &in->buffer [charpos(in,last)], len);
+   in->charpoint = 0;
    in->need_push = 1;
 }
 
@@ -1330,6 +1553,8 @@ kill_word (WInput *in)
     copy_region (in, old_point, new_point);
     delete_region (in, old_point, new_point);
     in->need_push = 1;
+    in->charpoint = 0;
+    in->charpoint = 0;
 }
 
 static void
@@ -1373,16 +1598,20 @@ yank (WInput *in)
     
     if (!kill_buffer)
         return;
+    in->charpoint = 0;
     for (p = kill_buffer; *p; p++)
 	insert_char (in, *p);
+    in->charpoint = 0;
 }
 
 static void
 kill_line (WInput *in)
 {
+    int chp = charpos(in,in->point);
     g_free (kill_buffer);
-    kill_buffer = g_strdup (&in->buffer [in->point]);
-    in->buffer [in->point] = 0;
+    kill_buffer = g_strdup (&in->buffer [chp]);
+    in->buffer [chp] = 0;
+    in->charpoint = 0;
 }
 
 void
@@ -1392,9 +1621,10 @@ assign_text (WInput *in, const char *text)
     g_free (in->buffer);
     in->buffer = g_strdup (text);	/* was in->buffer->text */
     in->current_max_len = strlen (in->buffer) + 1;
-    in->point = strlen (in->buffer);
+    in->point = mbstrlen (in->buffer);
     in->mark = 0;
     in->need_push = 1;
+    in->charpoint = 0;
 }
 
 static void
@@ -1521,6 +1751,7 @@ port_region_marked_for_delete (WInput *in)
     *in->buffer = 0;
     in->point = 0;
     in->first = 0;
+    in->charpoint = 0;
 }
 
 cb_ret_t
@@ -1549,7 +1780,11 @@ handle_char (WInput *in, int c_code)
 	}
     }
     if (!input_map [i].fn){
+#ifndef UTF8
 	if (c_code > 255 || !is_printable (c_code))
+#else /* UTF8 */
+	if (c_code > 255)
+#endif /* UTF8 */
 	    return MSG_NOT_HANDLED;
 	if (in->first){
 	    port_region_marked_for_delete (in);
@@ -1582,6 +1817,9 @@ input_set_point (WInput *in, int pos)
     if (pos != in->point)
     	free_completions (in);
     in->point = pos;
+#ifdef UTF8
+    in->charpoint = 0;
+#endif /* UTF8 */
     update_input (in, 1);
 }
 
@@ -1622,7 +1860,7 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
-	widget_move (&in->widget, 0, in->point - in->first_shown);
+        widget_move (&in->widget, 0, charcolumn(in, in->point) - charcolumn(in, in->first_shown));
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -1646,7 +1884,7 @@ input_event (Gpm_Event * event, void *data)
 	    && should_show_history_button (in)) {
 	    do_show_hist (in);
 	} else {
-	    in->point = strlen (in->buffer);
+	    in->point = mbstrlen (in->buffer);
 	    if (event->x - in->first_shown - 1 < in->point)
 		in->point = event->x - in->first_shown - 1;
 	    if (in->point < 0)
@@ -1701,7 +1939,8 @@ input_new (int y, int x, int color, int len, const char *def_text,
     in->is_password = 0;
 
     strcpy (in->buffer, def_text);
-    in->point = strlen (in->buffer);
+    in->point = mbstrlen (in->buffer);
+    in->charpoint = 0;
     return in;
 }
 

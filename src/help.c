@@ -416,10 +416,28 @@ static void help_show (Dlg_head *h, const char *paint_start)
 #ifndef HAVE_SLANG
 			addch (acs_map [c]);
 #else
+#if defined(UTF8) && SLANG_VERSION < 20000
+			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, acs_map [c]);
+#else
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
+#endif /* UTF8 */
 #endif
+		} else {
+#ifdef UTF8
+		if (SLsmg_Is_Unicode) {
+		    int len;
+		    mbstate_t mbs;
+                   wchar_t wc;
+		    memset (&mbs, 0, sizeof (mbs));
+		    len = mbrtowc(&wc, p, MB_CUR_MAX, &mbs);
+		    if (len <= 0) len = 1; /* skip broken multibyte chars */
+
+		    SLsmg_write_nwchars(&wc, 1);
+		    p += len - 1;
 		} else
+#endif
 		    addch (c);
+		}
 		col++;
 		break;
 	    }
@@ -771,6 +789,12 @@ interactive_display (const char *filename, const char *node)
     if (data == NULL) {
 	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
 		 unix_error_string (errno));
+    }
+    else
+    {
+	char *conv = utf8_to_local(data);
+	g_free(data);
+	data = conv;
     }
 
     if (!filename)

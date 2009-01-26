@@ -129,7 +129,7 @@ init_panelize (void)
 	i = sizeof (panelize_but) / sizeof (panelize_but[0]);
 	while (i--) {
 	    panelize_but[i].text = _(panelize_but[i].text);
-	    maxlen += strlen (panelize_but[i].text) + 5;
+	    maxlen += mbstrlen (panelize_but[i].text) + 5;
 	}
 	maxlen += 10;
 
@@ -138,11 +138,11 @@ init_panelize (void)
     panelize_cols = max (panelize_cols, maxlen);
 
     panelize_but[2].x =
-	panelize_but[3].x + strlen (panelize_but[3].text) + 7;
+	panelize_but[3].x + mbstrlen (panelize_but[3].text) + 7;
     panelize_but[1].x =
-	panelize_but[2].x + strlen (panelize_but[2].text) + 5;
+	panelize_but[2].x + mbstrlen (panelize_but[2].text) + 5;
     panelize_but[0].x =
-	panelize_cols - strlen (panelize_but[0].text) - 8 - BX;
+	panelize_cols - mbstrlen (panelize_but[0].text) - 8 - BX;
 
 #endif				/* ENABLE_NLS */
 

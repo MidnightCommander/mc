@@ -566,7 +566,7 @@ init_i18n_stuff(int list_type, int cols)
 
 			row = hotlist_but [i].y;
 			++count [row];
-			len [row] += strlen (hotlist_but [i].text) + 5;
+			len [row] += mbstrlen (hotlist_but [i].text) + 5;
 			if (hotlist_but [i].flags == DEFPUSH_BUTTON)
 				len [row] += 2;
 		}
@@ -591,12 +591,12 @@ init_i18n_stuff(int list_type, int cols)
 				/* not first int the row */
 				if (!strcmp (hotlist_but [i].text, cancel_but))
 					hotlist_but [i].x = 
-						cols - strlen (hotlist_but [i].text) - 13;
+						cols - mbstrlen (hotlist_but [i].text) - 13;
 				else
 					hotlist_but [i].x = cur_x [row];
 			}
 
-			cur_x [row] += strlen (hotlist_but [i].text) + 2
+			cur_x [row] += mbstrlen (hotlist_but [i].text) + 2
 				+ (hotlist_but [i].flags == DEFPUSH_BUTTON ? 5 : 3);
 		}
 	}
@@ -837,7 +837,7 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 	for (i = 0; i < 3; i++)
 	{
 		qw [i].text = _(qw [i].text);
-		l[i] = strlen (qw [i].text) + 3;
+		l[i] = mbstrlen (qw [i].text) + 3;
 	}
 	space = (len - 4 - l[0] - l[1] - l[2]) / 4;
 
@@ -886,7 +886,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 
     msglen(text1, &lines1, &cols1);
     msglen(text2, &lines2, &cols2);
-    len = max ((int) strlen (header), cols1);
+    len = max ((int) mbstrlen (header), cols1);
     len = max (len, cols2) + 4;
     len = max (len, 64);
 
@@ -982,7 +982,7 @@ add_new_group_input (const char *header, const char *label, char **result)
 #endif /* ENABLE_NLS */
 
     msglen (label, &lines, &cols);
-    len = max ((int) strlen (header), cols) + 4;
+    len = max ((int) mbstrlen (header), cols) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS
@@ -1038,7 +1038,7 @@ void add2hotlist_cmd (void)
 {
     char *prompt, *label;
     const char *cp = _("Label for \"%s\":");
-    int l = strlen (cp);
+    int l = mbstrlen (cp);
     char *label_string = g_strdup (current_panel->cwd);
 
     strip_password (label_string, 1);

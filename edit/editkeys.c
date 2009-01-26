@@ -183,10 +183,10 @@ static const edit_key_map_type common_key_map[] = {
  * 'command' is one of the editor commands from editcmddef.h.
  */
 int
-edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
+edit_translate_key (WEdit *edit, long x_key, int *cmd, mc_wint_t *ch)
 {
     int command = CK_Insert_Char;
-    int char_for_insertion = -1;
+    mc_wint_t char_for_insertion = -1;
     int i = 0;
     int extmod = 0;
     const edit_key_map_type *key_map = NULL;
@@ -243,9 +243,30 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
 	int c = convert_from_input_c (x_key);
+#ifdef UTF8
+	mbstate_t mbs;
+	int res;
+	mc_wchar_t wc;
 
+	memset (&mbs, 0, sizeof (mbs));
+
+	if (edit->charpoint >= MB_CUR_MAX) edit->charpoint = 0;
+
+	edit->charbuf[edit->charpoint++] = c;
+
+	res = mbrtowc(&wc, (char *)edit->charbuf, edit->charpoint, &mbs);
+	if (res < 0) {
+	    if (res != -2) edit->charpoint = 0; /* broken multibyte char, skip */
+	    return 0;
+        }
+	edit->charpoint = 0;
+
+	if (iswprint (wc)) {
+	    char_for_insertion = wc;
+#else
 	if (is_printable (c)) {
 	    char_for_insertion = c;
+#endif /* UTF8 */
 	    goto fin;
 	}
     }
@@ -284,7 +305,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     *cmd = command;
     *ch = char_for_insertion;
 
-    if (command == CK_Insert_Char && char_for_insertion == -1) {
+    if (command == CK_Insert_Char && char_for_insertion == (mc_wint_t)-1) {
 	/* unchanged, key has no function here */
 	return 0;
     }

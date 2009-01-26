@@ -40,7 +40,12 @@
 
 #define tab_width option_tab_spacing
 
+#ifndef UTF8
 #define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
+#else /* UTF8 */
+#define NO_FORMAT_CHARS_START L"-+*\\,.;:&>"
+#endif /* UTF8 */
+
 #define FONT_MEAN_WIDTH 1
 
 static long
@@ -57,14 +62,21 @@ line_start (WEdit *edit, long line)
 	p = edit_move_forward (edit, p, line - l, 0);
 
     p = edit_bol (edit, p);
+
+#ifndef UTF8
     while (strchr ("\t ", edit_get_byte (edit, p)))
+#else /* UTF8 */
+    while (wcschr (L"\t ", edit_get_byte (edit, p)))
+#endif /* UTF8 */
+
 	p++;
     return p;
 }
 
 static int bad_line_start (WEdit * edit, long p)
 {
-    int c;
+    mc_wint_t c;
+
     c = edit_get_byte (edit, p);
     if (c == '.') {		/* `...' is acceptable */
 	if (edit_get_byte (edit, p + 1) == '.')
@@ -78,7 +90,13 @@ static int bad_line_start (WEdit * edit, long p)
 		return 0;	/* `---' is acceptable */
 	return 1;
     }
+
+#ifndef UTF8
     if (strchr (NO_FORMAT_CHARS_START, c))
+#else /* UTF8 */
+    if (wcschr (NO_FORMAT_CHARS_START, c))
+#endif /* UTF8 */
+
 	return 1;
     return 0;
 }
@@ -131,33 +149,37 @@ end_paragraph (WEdit *edit, int force)
 					i - edit->curs_line, 0));
 }
 
-static unsigned char *
+static mc_wchar_t *
 get_paragraph (WEdit *edit, long p, long q, int indent, int *size)
 {
-    unsigned char *s, *t;
+    mc_wchar_t *s, *t;
 #if 0
-    t = g_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length +
-		  10);
+    t = g_malloc (((q - p) + 2 * (q - p) / option_word_wrap_line_length +
+		  10) * sizeof(mc_wchar_t));
 #else
-    t = g_malloc (2 * (q - p) + 100);
+    t = g_malloc ((2 * (q - p) + 100) * sizeof(mc_wchar_t));
 #endif
     if (!t)
 	return 0;
     for (s = t; p < q; p++, s++) {
 	if (indent)
 	    if (edit_get_byte (edit, p - 1) == '\n')
+#ifndef UTF8
 		while (strchr ("\t ", edit_get_byte (edit, p)))
+#else /* UTF8 */
+		while (wcschr (L"\t ", edit_get_byte (edit, p)))
+#endif /* UTF8 */
 		    p++;
 	*s = edit_get_byte (edit, p);
     }
-    *size = (unsigned long) s - (unsigned long) t;
+    *size = s - t;
     t[*size] = '\n';
     return t;
 }
 
-static void strip_newlines (unsigned char *t, int size)
+static void strip_newlines (mc_wchar_t *t, int size)
 {
-    unsigned char *p = t;
+    mc_wchar_t *p = t;
     while (size--) {
 	*p = *p == '\n' ? ' ' : *p;
 	p++;
@@ -174,7 +196,7 @@ static inline int next_tab_pos (int x)
 {
     return x += tab_width - x % tab_width;
 }
-static int line_pixel_length (unsigned char *t, long b, int l)
+static int line_pixel_length (mc_wchar_t *t, long b, int l)
 {
     int x = 0, c, xn = 0;
     for (;;) {
@@ -198,7 +220,7 @@ static int line_pixel_length (unsigned char *t, long b, int l)
 }
 
 static int
-next_word_start (unsigned char *t, int q, int size)
+next_word_start (mc_wchar_t *t, int q, int size)
 {
     int i;
     int saw_ws = 0;
@@ -222,7 +244,7 @@ next_word_start (unsigned char *t, int q, int size)
 
 /* find the start of a word */
 static int
-word_start (unsigned char *t, int q, int size)
+word_start (mc_wchar_t *t, int q, int size)
 {
     int i = q;
     if (t[q] == ' ' || t[q] == '\t')
@@ -241,7 +263,7 @@ word_start (unsigned char *t, int q, int size)
 }
 
 /* replaces ' ' with '\n' to properly format a paragraph */
-static void format_this (unsigned char *t, int size, int indent)
+static void format_this (mc_wchar_t *t, int size, int indent)
 {
     int q = 0, ww;
     strip_newlines (t, size);
@@ -269,7 +291,7 @@ static void format_this (unsigned char *t, int size, int indent)
     }
 }
 
-static void replace_at (WEdit * edit, long q, int c)
+static void replace_at (WEdit * edit, long q, mc_wint_t c)
 {
     edit_cursor_move (edit, q - edit->curs1);
     edit_delete (edit);
@@ -278,18 +300,27 @@ static void replace_at (WEdit * edit, long q, int c)
 
 /* replaces a block of text */
 static void
-put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
+put_paragraph (WEdit * edit, mc_wchar_t *t, long p, int indent, int size)
 {
     long cursor;
-    int i, c = 0;
+    int i;
+    mc_wchar_t c = 0;
     cursor = edit->curs1;
     if (indent)
+#ifndef UTF8
 	while (strchr ("\t ", edit_get_byte (edit, p)))
+#else /* UTF8 */
+	while (wcschr (L"\t ", edit_get_byte (edit, p)))
+#endif /* UTF8 */
 	    p++;
     for (i = 0; i < size; i++, p++) {
 	if (i && indent) {
 	    if (t[i - 1] == '\n' && c == '\n') {
+#ifndef UTF8
 		while (strchr ("\t ", edit_get_byte (edit, p)))
+#else /* UTF8 */
+		while (wcschr (L"\t ", edit_get_byte (edit, p)))
+#endif /* UTF8 */
 		    p++;
 	    } else if (t[i - 1] == '\n') {
 		long curs;
@@ -301,7 +332,11 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
 		p = edit->curs1;
 	    } else if (c == '\n') {
 		edit_cursor_move (edit, p - edit->curs1);
+#ifndef UTF8
 		while (strchr ("\t ", edit_get_byte (edit, p))) {
+#else /* UTF8 */
+		while (wcschr (L"\t ", edit_get_byte (edit, p))) {
+#endif /* UTF8 */
 		    edit_delete (edit);
 		    if (cursor > edit->curs1)
 			cursor--;
@@ -334,7 +369,7 @@ format_paragraph (WEdit *edit, int force)
 {
     long p, q;
     int size;
-    unsigned char *t;
+    mc_wchar_t *t;
     int indent = 0;
     if (option_word_wrap_line_length < 2)
 	return;
@@ -348,13 +383,21 @@ format_paragraph (WEdit *edit, int force)
 	return;
     if (!force) {
 	int i;
+#ifndef UTF8
 	if (strchr (NO_FORMAT_CHARS_START, *t)) {
+#else /* UTF8 */
+	if (wcschr (NO_FORMAT_CHARS_START, *t)) {
+#endif /* UTF8 */
 	    g_free (t);
 	    return;
 	}
 	for (i = 0; i < size - 1; i++) {
 	    if (t[i] == '\n') {
+#ifndef UTF8
 		if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1])) {
+#else /* UTF8 */
+		if (wcschr (NO_FORMAT_CHARS_START "\t", t[i + 1])) {
+#endif /* UTF8 */
 		    g_free (t);
 		    return;
 		}

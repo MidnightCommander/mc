@@ -21,6 +21,8 @@ typedef struct Menu {
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
     char   *help_node;
+    wchar_t **wentries;
+    wchar_t *wname;
 } Menu;
 
 extern int menubar_visible;

@@ -71,11 +71,16 @@ static void status_string (WEdit * edit, char *s, int w)
      * as decimal and as hex.
      */
     if (edit->curs1 < edit->last_byte) {
-	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
+        mc_wchar_t cur_byte = edit_get_byte (edit, edit->curs1);
+#ifndef UTF8
 	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
 		    is_printable (cur_byte) ? cur_byte : '.',
-		    (int) cur_byte,
-		    (unsigned) cur_byte);
+#else /* UTF8 */
+        g_snprintf (byte_str, sizeof(byte_str), "%lc %3d 0x%02X",
+                    iswprint(cur_byte) ? cur_byte : '.',
+#endif /* UTF8 */
+                    (int) cur_byte,
+                    (unsigned) cur_byte);
     } else {
 	strcpy (byte_str, "<EOF>");
     }
@@ -207,11 +212,16 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 #define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
 #endif
 
+struct line_s {
+    mc_wchar_t ch;
+    unsigned int style;
+};
+
 static void
 print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
-		 long end_col, unsigned int line[])
+		 long end_col, struct line_s line[])
 {
-    unsigned int *p;
+    struct line_s *p;
 
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
@@ -225,9 +235,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
 
-    while (*p) {
+    while (p->ch) {
 	int style;
-	int textchar;
+	mc_wchar_t textchar;
 	int color;
 
 	if (cols_to_skip) {
@@ -236,9 +246,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	    continue;
 	}
 
-	style = *p & 0xFF00;
-	textchar = *p & 0xFF;
-	color = *p >> 16;
+	style = p->style & 0xFF00;
+	textchar = p->ch;
+	color = p->style >> 16;
 
 	if (style & MOD_ABNORMAL) {
 	    /* Non-printable - use black background */
@@ -267,8 +277,11 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
-
+#ifdef UTF8
+	SLsmg_write_nwchars(&textchar, 1);
+#else
 	addch (textchar);
+#endif
 	p++;
     }
 }
@@ -280,11 +293,11 @@ static void
 edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		     long end_col)
 {
-    static unsigned int line[MAX_LINE_LEN];
-    unsigned int *p = line;
+    struct line_s line[MAX_LINE_LEN];
+    struct line_s *p = line;
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
-    unsigned int c;
+    mc_wint_c c;
     int color;
     int i;
 
@@ -309,87 +322,92 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	    }
 
 	    while (col <= end_col - edit->start_col) {
-		*p = 0;
+		p->ch = 0;
+		p->style = 0;
 		if (q == edit->curs1)
-		    *p |= MOD_CURSOR;
+		    p->style |= MOD_CURSOR;
 		if (q >= m1 && q < m2) {
 		    if (column_highlighting) {
 			int x;
 			x = edit_move_forward3 (edit, b, 0, q);
 			if (x >= c1 && x < c2)
-			    *p |= MOD_MARKED;
+			    p->style |= MOD_MARKED;
 		    } else
-			*p |= MOD_MARKED;
+			p->style |= MOD_MARKED;
 		}
 		if (q == edit->bracket)
-		    *p |= MOD_BOLD;
+		    p->style |= MOD_BOLD;
 		if (q >= edit->found_start
 		    && q < edit->found_start + edit->found_len)
-		    *p |= MOD_BOLD;
+		    p->style |= MOD_BOLD;
 		c = edit_get_byte (edit, q);
 /* we don't use bg for mc - fg contains both */
 		edit_get_syntax_color (edit, q, &color);
-		*p |= color << 16;
+		p->style |= color << 16;
 		switch (c) {
 		case '\n':
 		    col = end_col - edit->start_col + 1;	/* quit */
-		    *(p++) |= ' ';
+		    p->ch = ' ';
+		    p++;
 		    break;
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
+		    p->ch = ' ';
+		    c = p->style & ~MOD_CURSOR;
+		    p++;
 		    col += i;
-		    if (use_colors && visible_tabs) {
-			c = (*p & ~MOD_CURSOR) | MOD_WHITESPACE;
-			if (i > 2) {
-			    *(p++) |= '<' | MOD_WHITESPACE;
-			    while (--i > 1)
-				*(p++) = c | '-';
-			    *(p++) = c | '>';
-			} else if (i > 1) {
-			    *(p++) |= '<' | MOD_WHITESPACE;
-			    *(p++) = c | '>';
-			} else
-			    *(p++) |= '>' | MOD_WHITESPACE;
-		    } else if (use_colors && visible_tws && q >= tws) {
-			*p |= '.' | MOD_WHITESPACE;
-			c = *(p++) & ~MOD_CURSOR;
-			while (--i)
-			    *(p++) = c;
-		    } else {
-			*p |= ' ';
-			c = *(p++) & ~MOD_CURSOR;
-			while (--i)
-			    *(p++) = c;
+		    while (--i) {
+			p->ch = ' '; p->style = c;
+			p++;
 		    }
 		    break;
-		case ' ':
-		    if (use_colors && visible_tws && q >= tws) {
-			*(p++) |= '.' | MOD_WHITESPACE;
-			col++;
-			break;
-		    }
 		    /* fallthrough */
 		default:
 		    c = convert_to_display_c (c);
 
 		    /* Caret notation for control characters */
 		    if (c < 32) {
-			*(p++) = '^' | MOD_ABNORMAL;
-			*(p++) = (c + 0x40) | MOD_ABNORMAL;
+			p->ch = '^';
+			p->style = MOD_ABNORMAL;
+			p++;
+			p->ch = c + 0x40;
+			p->style = MOD_ABNORMAL;
 			col += 2;
 			break;
 		    }
 		    if (c == 127) {
-			*(p++) = '^' | MOD_ABNORMAL;
-			*(p++) = '?' | MOD_ABNORMAL;
+		        p->ch = '^';
+			p->style = MOD_ABNORMAL;
+			p++;
+		        p->ch = '?';
+			p->style = MOD_ABNORMAL;
+			p++;
 			col += 2;
 			break;
 		    }
 
-		    if (is_printable (c)) {
-			*(p++) |= c;
+#ifndef UTF8
+		    if (is_printable (c)
+#else /* UTF8 */
+		    if (iswprint (c)
+#ifdef __STDC_ISO_10646__
+			&& (c < BINARY_CHAR_OFFSET || c >= (BINARY_CHAR_OFFSET + 256))
+#endif
+#endif /* UTF8 */
+			) {
+			p->ch = c;
+			p++;
+
+#ifdef UTF8
+			i = wcwidth(c);
+			if (i > 1) {
+			    col += i - 1;
+			}
+#endif /* UTF8 */
 		    } else {
-			*(p++) = '.' | MOD_ABNORMAL;
+		        p->ch = '.';
+			p->style = MOD_ABNORMAL;
+			p++;
 		    }
 		    col++;
 		    break;
@@ -400,7 +418,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     } else {
 	start_col_real = start_col = 0;
     }
-    *p = 0;
+    p->ch = 0;
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line);
 }

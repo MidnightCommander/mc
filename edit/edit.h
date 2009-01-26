@@ -25,6 +25,27 @@
 
 #include <stdio.h>
 
+#include "src/tty.h"
+
+#ifdef UTF8
+#include <wchar.h>
+#include <wctype.h>
+
+#define mc_wchar_t wchar_t
+#define mc_wint_t wint_t
+
+#else
+
+#define mc_wchar_t unsigned char
+#define mc_wint_t int
+
+#endif
+
+
+/* unicode private use area */
+#define BINARY_CHAR_OFFSET 0xFFE00
+
+
 #define N_menus 5
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
@@ -86,6 +107,8 @@
 #define START_STACK_SIZE 32
 
 /* Some codes that may be pushed onto or returned from the undo stack */
+#define CHAR_INSERT       65
+#define CHAR_INSERT_AHEAD 66
 #define CURS_LEFT	601
 #define CURS_RIGHT	602
 #define DELCHAR		603
@@ -105,7 +128,7 @@
 
 struct macro {
     short command;
-    short ch;
+    mc_wchar_t ch;
 };
 
 struct WEdit;
@@ -120,8 +143,12 @@ void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
 int edit_raw_key_query (const char *heading, const char *query, int cancel);
 int edit_file (const char *_file, int line);
-int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
+int edit_translate_key (WEdit *edit, long x_key, int *cmd, mc_wint_t *ch);
+#ifndef UTF8
 int edit_get_byte (WEdit * edit, long byte_index);
+#else /* UTF8 */
+mc_wchar_t edit_get_byte (WEdit * edit, long byte_index);
+#endif /* UTF8 */
 int edit_count_lines (WEdit * edit, long current, int upto);
 long edit_move_forward (WEdit * edit, long current, int lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);
@@ -148,11 +175,11 @@ int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 
 int edit_delete (WEdit * edit);
-void edit_insert (WEdit * edit, int c);
+void edit_insert (WEdit * edit, mc_wchar_t c);
 void edit_cursor_move (WEdit * edit, long increment);
 void edit_push_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
-void edit_insert_ahead (WEdit * edit, int c);
+void edit_insert_ahead (WEdit * edit, mc_wchar_t c);
 long edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const char *writename, const char *filename);
 int edit_save_confirm_cmd (WEdit * edit);
@@ -183,7 +210,7 @@ void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
 void edit_execute_key_command (WEdit *edit, int command,
-			       int char_for_insertion);
+			       mc_wint_t char_for_insertion);
 void edit_update_screen (WEdit * edit);
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
@@ -233,7 +260,7 @@ void edit_mail_dialog (WEdit *edit);
 void format_paragraph (WEdit *edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
-void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
+void edit_execute_cmd (WEdit *edit, int command, mc_wint_t char_for_insertion);
 
 #define get_sys_error(s) (s)
 

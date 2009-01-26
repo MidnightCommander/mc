@@ -167,7 +167,7 @@ common_dialog_repaint (struct Dlg_head *h)
 
     if (h->title) {
 	attrset (DLG_HOT_NORMALC (h));
-	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
+	dlg_move (h, space, (h->cols - mbstrlen (h->title)) / 2);
 	addstr (h->title);
     }
 }

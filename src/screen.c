@@ -173,21 +173,56 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 static const char *
 string_file_name (file_entry *fe, int len)
 {
-    static char buffer [MC_MAXPATHLEN + 1];
     size_t i;
 
-    for (i = 0; i < sizeof(buffer) - 1; i++) {
-	char c;
+#ifdef UTF8
+    static char buffer [BUF_SMALL * 4];
+    mbstate_t s;
+    int mbmax = MB_CUR_MAX;
+    const char *str = fe->fname;
 
-	c = fe->fname[i];
+    memset (&s, 0, sizeof (s));
+#else
+    static char buffer [BUF_SMALL];
+#endif
 
-	if (!c)
-	    break;
+#ifdef UTF8
+    if (SLsmg_Is_Unicode)
+	for (i = 0; i < sizeof (buffer) - 1; i++) {
+	    wchar_t wc;
+	    int len;
 
-	if (!is_printable(c))
-	    c = '?';
+	    len = mbrtowc (&wc, str, mbmax, &s);
+	    if (!len)
+		break;
+	    if (len < 0) {
+		memset (&s, 0, sizeof (s));
+		buffer[i] = '?';
+		str++;
+		continue;
+	    }
+	    if (!is_printable (wc)) {
+		buffer[i] = '?';
+		str++;
+		continue;
+	    }
+	    if (i >= sizeof (buffer) - len)
+		break;
+	    memcpy (buffer + i, str, len);
+	    i += len - 1;
+	    str += len;
+	} else
+#endif
+	for (i = 0; i < sizeof(buffer) - 1; i++) {
+	    char c;
 
-	buffer[i] = c;
+	    c = fe->fname[i];
+
+	    if (!c) break;
+
+	    if (!is_printable(c)) c = '?';
+
+	    buffer[i] = c;
     }
 
     buffer[i] = 0;
@@ -452,42 +487,6 @@ static struct {
 { "dot",   1,  0, J_RIGHT,	" ",		0, string_dot,		   NULL },
 };
 
-static char *
-to_buffer (char *dest, int just_mode, int len, const char *txt)
-{
-    int txtlen = strlen (txt);
-    int still, over;
-
-    /* Fill buffer with spaces */
-    memset (dest, ' ', len);
-
-    still = (over=(txtlen > len)) ? (txtlen - len) : (len - txtlen);
-
-    switch (HIDE_FIT(just_mode)){
-        case J_LEFT:
-	    still = 0;
-	    break;
-	case J_CENTER:
-	    still /= 2;
-	    break;
-	case J_RIGHT:
-	default:
-	    break;
-    }
-
-    if (over){
-	if (IS_FIT(just_mode))
-	    strcpy (dest, name_trunc(txt, len));
-	else
-	    strncpy (dest, txt+still, len);
-    } else
-	strncpy (dest+still, txt, txtlen);
-
-    dest[len] = '\0';
-
-    return (dest + len);
-}
-
 static int
 file_compute_color (int attr, file_entry *fe)
 {
@@ -541,14 +540,18 @@ file_compute_color (int attr, file_entry *fe)
 
 /* Formats the file number file_index of panel in the buffer dest */
 static void
-format_file (char *dest, int limit, WPanel *panel, int file_index, int width, int attr, int isstatus)
+format_file (WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
     int      color, length, empty_line;
     const char *txt;
-    char     *old_pos;
-    char     *cdest = dest;
     format_e *format, *home;
     file_entry *fe;
+#ifdef UTF8
+    char     buffer[BUF_MEDIUM * sizeof (wchar_t)];
+#else
+    char     buffer[BUF_MEDIUM];
+#endif
+    int txtwidth = 0;
 
     length     = 0;
     empty_line = (file_index >= panel->count);
@@ -566,34 +569,137 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	    break;
 
 	if (format->string_fn){
-	    int len;
+	    int len, still, over, perm, txtlen, wide;
 
 	    if (empty_line)
 		txt = " ";
 	    else
 		txt = (*format->string_fn)(fe, format->field_len);
 
-	    old_pos = cdest;
-
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
-	    if (len + (cdest - dest) > limit)
-		len = limit - (cdest - dest);
+	    if (len >= BUF_MEDIUM)
+		len = BUF_MEDIUM - 1;
 	    if (len <= 0)
 		break;
-	    cdest = to_buffer (cdest, format->just_mode, len, txt);
+
+	    perm = 0;
+            if (permission_mode) {
+		if (!strcmp(format->id, "perm"))
+		    perm = 1;
+		else if (!strcmp(format->id, "mode"))
+		    perm = 2;
+	    }
+
+	    wide = 0;
+#ifdef UTF8
+	    if (SLsmg_Is_Unicode && !empty_line && !perm) {
+		mbstate_t s;
+		const char *str = txt;
+
+		memset (&s, 0, sizeof (s));
+		txtlen = mbsrtowcs ((wchar_t *) buffer, &str,
+				    sizeof (buffer) / sizeof (wchar_t), &s);
+		if (txtlen < 0) {
+		    txt = " ";
+		    txtlen = 1;
+		} else {
+		    wide = 1;
+		    txtwidth = wcswidth((wchar_t*)buffer, txtlen);
+		}
+	    } else
+#endif
+	    {
+		txtlen = mbstrlen (txt);
+		txtwidth = txtlen;
+	    }
+
+	    over = txtwidth > len;
+	    still = over ? txtlen - len : len - txtlen;
+
+	    switch (HIDE_FIT(format->just_mode)) {
+	    case J_LEFT:
+		still = 0;
+		break;
+	    case J_CENTER:
+		still /= 2;
+		break;
+	    case J_RIGHT:
+	    default:
+		break;
+	    }
+
+	    attrset (color);
+
+	    if (wide) {
+#ifdef UTF8
+		if (over) {
+		    if (IS_FIT (format->just_mode)) {
+			int n1 = 0;
+			int width1 = 0;
+			int n2 = 0;
+			int width2 = 0;
+			int len1 = len / 2;
+			int len2;
+
+			while (1) {
+			    int w = wcwidth(((wchar_t *) buffer)[n1]);
+			    if (width1 + w <= len1) {
+				width1 += w;
+				n1++;
+			    }
+			    else
+				break;
+			}
+			len2 = len - width1 - 1;
+
+			while (1) {
+			    int w = wcwidth(((wchar_t *) buffer)[txtlen - n2 - 1]);
+			    if (width2 + w <= len2) {
+				width2 += w;
+				n2++;
+			    }
+			    else
+				break;
+			}
+
+
+			SLsmg_write_nwchars ((wchar_t *) buffer, n1);
+			SLsmg_write_nwchars (L"~", 1);
+			printw ("%*s", len - width1 - width2 - 1, "");
+			SLsmg_write_nwchars (((wchar_t *) buffer)
+					     + txtlen - n2, n2);
+		    } else
+			SLsmg_write_nwchars ((wchar_t *) buffer, len);
+		} else {
+		    printw ("%*s", still, "");
+		    SLsmg_write_nwchars ((wchar_t *) buffer, txtlen);
+		    printw ("%*s", len - txtwidth - still, "");
+		}
+#endif
+	    } else {
+		if (over) {
+		    if (IS_FIT (format->just_mode))
+			strcpy (buffer, name_trunc(txt, len));
+		    else
+			memcpy (buffer, txt + still, len);
+		} else {
+		    memset (buffer, ' ', still);
+		    memcpy (buffer + still, txt, txtlen);
+		    memset (buffer + still + txtlen, ' ',
+			    len - txtlen - still);
+		}
+		buffer[len] = '\0';
+
+		if (perm)
+		    add_permission_string (buffer, format->field_len, fe,
+					   attr, color, perm - 1);
+		else
+		    addstr (buffer);
+	    }
+
 	    length += len;
-
-            attrset (color);
-
-            if (permission_mode && !strcmp(format->id, "perm"))
-                add_permission_string (old_pos, format->field_len, fe, attr, color, 0);
-            else if (permission_mode && !strcmp(format->id, "mode"))
-                add_permission_string (old_pos, format->field_len, fe, attr, color, 1);
-            else
-		addstr (old_pos);
-
 	} else {
             if (attr == SELECTED || attr == MARKED_SELECTED)
                 attrset (SELECTED_COLOR);
@@ -616,7 +722,6 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
     int    second_column = 0;
     int	   width, offset;
-    char   buffer [BUF_MEDIUM];
 
     offset = 0;
     if (!isstatus && panel->split){
@@ -645,7 +750,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	    widget_move (&panel->widget, file_index - panel->top_file + 2, 1);
     }
 
-    format_file (buffer, sizeof(buffer), panel, file_index, width, attr, isstatus);
+    format_file (panel, file_index, width, attr, isstatus);
 
     if (!isstatus && panel->split){
 	if (second_column)
@@ -694,7 +799,7 @@ display_mini_info (WPanel *panel)
 		   ngettext("%s in %d file", "%s in %d files", panel->marked),
 		   b_bytes, panel->marked);
 
-	if ((int) strlen (buffer) > cols-2){
+	if ((int) mbstrlen (buffer) > cols-2){
 	    buffer [cols] = 0;
 	    p += 2;
 	} else
@@ -1107,6 +1212,12 @@ paint_frame (WPanel *panel)
     int  side, width;
 
     const char *txt;
+#ifdef UTF8
+    char buffer[30 * sizeof (wchar_t)];
+    mbstate_t s;
+
+    memset (&s, 0, sizeof (s));
+#endif
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1131,16 +1242,38 @@ paint_frame (WPanel *panel)
             if (format->string_fn){
                 txt = format->title;
 
-		header_len = strlen (txt);
+		attrset (MARKED_COLOR);
+		width -= format->field_len;
+#ifdef UTF8
+		if (SLsmg_Is_Unicode) {
+		    const char *str = txt;
+		    header_len = mbsrtowcs ((wchar_t *) buffer, &str,
+					    sizeof (buffer) / sizeof (wchar_t),
+					    &s);
+		    if (header_len < 0) {
+			memset (&s, 0, sizeof (s));
+			printw ("%*s", format->field_len, "");
+			continue;
+		    }
+		    if (header_len > format->field_len)
+			header_len = format->field_len;
+		    spaces = (format->field_len - header_len) / 2;
+		    extra  = (format->field_len - header_len) % 2;
+		    printw ("%*s", spaces, "");
+		    SLsmg_write_nwchars ((wchar_t *) buffer, header_len);
+		    printw ("%*s", spaces + extra, "");
+		    continue;
+		}
+#endif
+
+		header_len = mbstrlen (txt);
 		if (header_len > format->field_len)
 		    header_len = format->field_len;
 
-                attrset (MARKED_COLOR);
                 spaces = (format->field_len - header_len) / 2;
                 extra  = (format->field_len - header_len) % 2;
 		tty_printf ("%*s%.*s%*s", spaces, "",
 			 header_len, txt, spaces+extra, "");
-		width -= 2 * spaces + extra + header_len;
 	    } else {
 		attrset (NORMAL_COLOR);
 		one_vline ();
@@ -1897,11 +2030,24 @@ do_search (WPanel *panel, int c_code)
     int i;
     int wrapped = 0;
     int found;
+    int prevpos, pos;
+    int j;
+    mbstate_t mbs;
 
     l = strlen (panel->search_buffer);
     if (c_code == KEY_BACKSPACE) {
-	if (l)
-	    panel->search_buffer[--l] = '\0';
+	if (l) {
+	    prevpos = pos = 0;
+	    memset (&mbs, 0, sizeof (mbs));
+	    while (pos < l) {
+		prevpos = pos;
+		j = mbrlen (panel->search_buffer + pos, l - pos, &mbs);
+		if (j <= 0) break;
+		pos += j;
+	    }
+	    --l;
+	    panel->search_buffer[prevpos] = 0;
+	}
     } else {
 	if (c_code && l < sizeof (panel->search_buffer)) {
 	    panel->search_buffer[l] = c_code;
@@ -1910,6 +2056,14 @@ do_search (WPanel *panel, int c_code)
 	}
     }
 
+    prevpos = pos = 0;
+    memset (&mbs, 0, sizeof (mbs));
+    while (pos < l) {
+	prevpos = pos;
+	j = mbrlen (panel->search_buffer + pos, l - pos, &mbs);
+	if (j <= 0) break;
+	pos += j;
+    }
     found = 0;
     for (i = panel->selected; !wrapped || i != panel->selected; i++) {
 	if (i >= panel->count) {
@@ -1920,9 +2074,9 @@ do_search (WPanel *panel, int c_code)
 	}
 	if (panel->
 	    case_sensitive
-	    ? (strncmp (panel->dir.list[i].fname, panel->search_buffer, l)
+	    ? (strncmp (panel->dir.list[i].fname, panel->search_buffer, pos)
 	       == 0) : (g_strncasecmp (panel->dir.list[i].fname,
-				       panel->search_buffer, l) == 0)) {
+				       panel->search_buffer, pos) == 0)) {
 	    unselect_item (panel);
 	    panel->selected = i;
 	    select_item (panel);
@@ -1931,7 +2085,7 @@ do_search (WPanel *panel, int c_code)
 	}
     }
     if (!found)
-	panel->search_buffer[--l] = 0;
+	panel->search_buffer[prevpos] = 0;
 
     paint_panel (panel);
 }

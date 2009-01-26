@@ -60,7 +60,7 @@
 #include "../src/selcodepage.h"
 
 struct selection {
-   unsigned char * text;
+   mc_wchar_t *text;
    int len;
 };
 
@@ -83,12 +83,16 @@ int edit_confirm_save = 1;
 #define MAX_REPL_LEN 1024
 
 static int edit_save_cmd (WEdit *edit);
-static unsigned char *edit_get_block (WEdit *edit, long start,
+static mc_wchar_t *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
 
-static inline int my_lower_case (int c)
+static inline mc_wchar_t my_lower_case (mc_wchar_t c)
 {
+#ifndef UTF8
     return tolower(c & 0xFF);
+#else
+    return towlower(c);
+#endif
 }
 
 static const char *
@@ -123,11 +127,11 @@ static void *memmove (void *dest, const void *src, size_t n)
 #endif /* !HAVE_MEMMOVE */
 
 /* #define itoa MY_itoa  <---- this line is now in edit.h */
-static char *
+static mc_wchar_t *
 MY_itoa (int i)
 {
-    static char t[14];
-    char *s = t + 13;
+    static mc_wchar_t t[14];
+    mc_wchar_t *s = t + 13;
     int j = i;
     *s-- = 0;
     do {
@@ -211,6 +215,48 @@ void edit_refresh_cmd (WEdit * edit)
     mc_refresh();
     doupdate();
 }
+
+#ifdef UTF8
+
+static size_t
+wchar_write(int fd, mc_wchar_t *buf, size_t len)
+{
+    char *tmpbuf = g_malloc(len + MB_LEN_MAX);
+    mbstate_t mbs;
+    size_t i;
+    size_t outlen = 0;
+    size_t res;
+
+    for (i = 0; i < len; i++) {
+	if (outlen >= len) {
+	    if ((res = mc_write(fd, tmpbuf, outlen)) != outlen) {
+		g_free(tmpbuf);
+		return -1;
+	    }
+	    outlen = 0;
+	}
+	memset (&mbs, 0, sizeof (mbs));
+#ifdef __STDC_ISO_10646__
+	if (buf[i] >= BINARY_CHAR_OFFSET && buf[i] < (BINARY_CHAR_OFFSET + 256)) {
+	    res = 1;
+	    tmpbuf[outlen] = (char) (buf[i] - BINARY_CHAR_OFFSET);
+
+	} else
+#endif
+	res = wcrtomb(tmpbuf + outlen, buf[i], &mbs);
+	if (res > 0) {
+	    outlen += res;
+	}
+    }
+    if ((res = mc_write(fd, tmpbuf, outlen)) != outlen) {
+	g_free(tmpbuf);
+	return -1;
+    }
+    g_free(tmpbuf);
+    return len;
+}
+
+#endif /* UTF8 */
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
 			    b) save to <filename>;
@@ -359,32 +405,48 @@ edit_save_file (WEdit *edit, const char *filename)
 	buf = 0;
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
+#ifndef UTF8
 	    if (mc_write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE)
+#else /* UTF8 */
+	    if (wchar_write (fd, edit->buffers1[buf], EDIT_BUF_SIZE)
+#endif /* UTF8 */
 		!= EDIT_BUF_SIZE) {
 		mc_close (fd);
 		goto error_save;
 	    }
 	    buf++;
 	}
+#ifndef UTF8
 	if (mc_write
 	    (fd, (char *) edit->buffers1[buf],
+#else /* UTF8 */
+	if (wchar_write
+	    (fd, edit->buffers1[buf],
+#endif /* UTF8 */
 	     edit->curs1 & M_EDIT_BUF_SIZE) !=
 	    (edit->curs1 & M_EDIT_BUF_SIZE)) {
 	    filelen = -1;
 	} else if (edit->curs2) {
 	    edit->curs2--;
 	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	    if (mc_write
-		(fd,
-		 (char *) edit->buffers2[buf] + EDIT_BUF_SIZE -
+#ifndef UTF8
+	    if (mc_write(fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE -
+#else /* UTF8 */
+	    if (wchar_write(fd, edit->buffers2[buf] + EDIT_BUF_SIZE -
+#endif /* UTF8 */
 		 (edit->curs2 & M_EDIT_BUF_SIZE) - 1,
 		 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=
 		1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
 		filelen = -1;
 	    } else {
 		while (--buf >= 0) {
+#ifndef UTF8
 		    if (mc_write
 			(fd, (char *) edit->buffers2[buf],
+#else /* UTF8 */
+		    if (wchar_write
+			(fd, edit->buffers2[buf],
+#endif /* UTF8 */
 			 EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
 			filelen = -1;
 			break;
@@ -705,13 +767,21 @@ edit_delete_macro (WEdit * edit, int k)
 	if (!n || n == EOF)
 	    break;
 	n = 0;
+#ifndef UTF8
 	while (fscanf (f, "%hd %hd, ", &macro[n].command, &macro[n].ch))
+#else /* UTF8 */
+	while (fscanf (f, "%hd %lu, ", &macro[n].command, &macro[n].ch))
+#endif /* UTF8 */
 	    n++;
 	fscanf (f, ";\n");
 	if (s != k) {
 	    fprintf (g, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
+#ifndef UTF8
 		fprintf (g, "%hd %hd, ", macro[i].command, macro[i].ch);
+#else /* UTF8 */
+		fprintf (g, "%hd %lu, ", macro[i].command, macro[i].ch);
+#endif /* UTF8 */
 	    fprintf (g, ";\n");
 	}
     }
@@ -744,7 +814,11 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	if (f) {
 	    fprintf (f, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
+#ifndef UTF8
 		fprintf (f, "%hd %hd, ", macro[i].command, macro[i].ch);
+#else /* UTF8 */
+		fprintf (f, "%hd %lu, ", macro[i].command, macro[i].ch);
+#endif /* UTF8 */
 	    fprintf (f, ";\n");
 	    fclose (f);
 	    if (saved_macros_loaded) {
@@ -794,10 +868,18 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 		saved_macro[i++] = s;
 	    if (!found) {
 		*n = 0;
+#ifndef UTF8
 		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%hd %hd, ", &macro[*n].command, &macro[*n].ch))
+#else /* UTF8 */
+		while (*n < MAX_MACRO_LENGTH && 2 == fscanf (f, "%hd %lu, ", &macro[*n].command, &macro[*n].ch))
+#endif /* UTF8 */
 		    (*n)++;
 	    } else {
+#ifndef UTF8
 		while (2 == fscanf (f, "%hd %hd, ", &dummy.command, &dummy.ch));
+#else /* UTF8 */
+		while (2 == fscanf (f, "%hd %lu, ", &dummy.command, &dummy.ch));
+#endif /* UTF8 */
 	    }
 	    fscanf (f, ";\n");
 	    if (s == k)
@@ -945,7 +1027,7 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 #define space_width 1
 
 static void
-edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
+edit_insert_column_of_text (WEdit * edit, mc_wchar_t *data, int size, int width)
 {
     long cursor;
     int i, col;
@@ -993,7 +1075,7 @@ edit_block_copy_cmd (WEdit *edit)
 {
     long start_mark, end_mark, current = edit->curs1;
     int size;
-    unsigned char *copy_buf;
+    mc_wchar_t *copy_buf;
 
     edit_update_curs_col (edit);
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -1033,7 +1115,7 @@ edit_block_move_cmd (WEdit *edit)
 {
     long count;
     long current;
-    unsigned char *copy_buf;
+    mc_wchar_t *copy_buf;
     long start_mark, end_mark;
     int deleted = 0;
     int x = 0;
@@ -1094,7 +1176,7 @@ edit_block_move_cmd (WEdit *edit)
 	edit_push_action (edit, COLUMN_ON);
 	column_highlighting = 0;
     } else {
-	copy_buf = g_malloc (end_mark - start_mark);
+	copy_buf = g_malloc ((end_mark - start_mark) * sizeof(mc_wchar_t));
 	edit_cursor_move (edit, start_mark - edit->curs1);
 	edit_scroll_screen_over_cursor (edit);
 	count = start_mark;
@@ -1433,7 +1515,11 @@ static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
 static int
+#ifndef UTF8
 string_regexp_search (char *pattern, char *string, int match_type,
+#else /* UTF8 */
+string_regexp_search (char *pattern, mc_wchar_t *wstring, int match_type,
+#endif /* UTF8 */
 		      int match_bol, int icase, int *found_len, void *d)
 {
     static regex_t r;
@@ -1441,6 +1527,11 @@ string_regexp_search (char *pattern, char *string, int match_type,
     static int old_type, old_icase;
     regmatch_t *pmatch;
     static regmatch_t s[1];
+
+#ifdef UTF8
+    char *string;
+    int i;
+#endif /* UTF8 */
 
     pmatch = (regmatch_t *) d;
     if (!pmatch)
@@ -1462,13 +1553,51 @@ string_regexp_search (char *pattern, char *string, int match_type,
 	old_type = match_type;
 	old_icase = icase;
     }
+
+#ifdef UTF8
+    string = wchar_to_mbstr(wstring);
+    if (string == NULL)
+	return -1;
+#endif /* UTF8 */
+
     if (regexec
 	(&r, string, d ? NUM_REPL_ARGS : 1, pmatch,
 	 ((match_bol
 	   || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
 	*found_len = 0;
+
+#ifdef UTF8
+	g_free(string);
+#endif /* UTF8 */
+
 	return -1;
     }
+
+#ifdef UTF8
+    for (i = 0; i < (d ? NUM_REPL_ARGS : 1); i++) {
+	char tmp;
+	int new_o;
+
+	if (pmatch[i].rm_so < 0)
+	    continue;
+	tmp = string[pmatch[i].rm_so];
+	string[pmatch[i].rm_so] = 0;
+	new_o = mbstrlen(string);
+	string[pmatch[i].rm_so] = tmp;
+	pmatch[i].rm_so = new_o;
+
+	if (pmatch[i].rm_eo < 0)
+	    continue;
+	tmp = string[pmatch[i].rm_eo];
+	string[pmatch[i].rm_eo] = 0;
+	new_o = mbstrlen(string);
+	string[pmatch[i].rm_eo] = tmp;
+	pmatch[i].rm_eo = new_o;
+    }
+
+    g_free(string);
+#endif /* UTF8 */
+
     *found_len = pmatch[0].rm_eo - pmatch[0].rm_so;
     return (pmatch[0].rm_so);
 }
@@ -1476,13 +1605,29 @@ string_regexp_search (char *pattern, char *string, int match_type,
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
+#ifndef UTF8
 typedef int (*edit_getbyte_fn) (WEdit *, long);
+#else /* UTF8 */
+typedef mc_wchar_t (*edit_getbyte_fn) (WEdit *, long);
+#endif /* UTF8 */
 
 static long
+#ifndef UTF8
 edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
+#else /* UTF8 */
+edit_find_string (long start, unsigned char *exp_mb, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
+#endif /* UTF8 */
 {
     long p, q = 0;
-    long l = strlen ((char *) exp), f = 0;
+    long f = 0;
+
+#ifndef UTF8
+    long l = strlen ((char *) exp);
+#else /* UTF8 */
+    mc_wchar_t *exp = mbstr_to_wchar((char *)exp_mb);
+    mc_wchar_t *exp_backup = exp;
+    long l = wcslen(exp);
+#endif /* UTF8 */
     int n = 0;
 
     for (p = 0; p < l; p++)	/* count conversions... */
@@ -1491,19 +1636,22 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		n++;
 
     if (replace_scanf || replace_regexp) {
-	int c;
-	unsigned char *buf;
-	unsigned char mbuf[MAX_REPL_LEN * 2 + 3];
+	mc_wint_t c;
+	mc_wchar_t *buf;
+	mc_wchar_t mbuf[MAX_REPL_LEN * 2 + 3];
 
 	replace_scanf = (!replace_regexp);	/* can't have both */
 
 	buf = mbuf;
 
 	if (replace_scanf) {
-	    unsigned char e[MAX_REPL_LEN];
-	    if (n >= NUM_REPL_ARGS)
-		return -3;
-
+	    mc_wchar_t e[MAX_REPL_LEN];
+	    if (n >= NUM_REPL_ARGS) {
+#ifdef UTF8
+                g_free(exp_backup);
+#endif /* UTF8 */
+                return -3;
+	    }
 	    if (replace_case) {
 		for (p = start; p < last_byte && p < start + MAX_REPL_LEN; p++)
 		    buf[p - start] = (*get_byte) (data, p);
@@ -1517,20 +1665,36 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    }
 
 	    buf[(q = p - start)] = 0;
+#ifndef UTF8
 	    strcpy ((char *) e, (char *) exp);
 	    strcat ((char *) e, "%n");
+#else /* UTF8 */
+	    wcscpy (e, exp);
+	    wcscat (e, L"%n");
+#endif /* UTF8 */
 	    exp = e;
 
 	    while (q) {
 		*((int *) sargs[n]) = 0;	/* --> here was the problem - now fixed: good */
+#ifndef UTF8
 		if (n == sscanf ((char *) buf, (char *) exp, SCANF_ARGS)) {
+#else /* UTF8 */
+		if (n == swscanf (buf, exp, SCANF_ARGS)) {
+#endif /* UTF8 */
 		    if (*((int *) sargs[n])) {
 			*len = *((int *) sargs[n]);
+#ifdef UTF8
+			g_free(exp_backup);
+#endif /* UTF8 */
 			return start;
 		    }
 		}
-		if (once_only)
+		if (once_only) {
+#ifdef UTF8
+		    g_free(exp_backup);
+#endif /* UTF8 */
 		    return -2;
+		}
 		if (q + start < last_byte) {
 		    if (replace_case) {
 			buf[q] = (*get_byte) (data, q + start);
@@ -1544,7 +1708,11 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		start++;
 		buf++;		/* move the window along */
 		if (buf == mbuf + MAX_REPL_LEN) {	/* the window is about to go past the end of array, so... */
+#ifndef UTF8
 		    memmove (mbuf, buf, strlen ((char *) buf) + 1);	/* reset it */
+#else /* UTF8 */
+		    wmemmove (mbuf, buf, (wcslen (buf) + 1));	/* reset it */
+#endif /* UTF8 */
 		    buf = mbuf;
 		}
 		q--;
@@ -1571,10 +1739,16 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 
 		buf = mbuf;
 		while (q) {
+#ifndef UTF8
 		    found_start = string_regexp_search ((char *) exp, (char *) buf, match_normal, match_bol, !replace_case, len, d);
-
+#else /* UTF8 */
+		    found_start = string_regexp_search ((char *) exp_mb, buf, match_normal, match_bol, !replace_case, len, d);
+#endif /* UTF8 */
 		    if (found_start <= -2) {	/* regcomp/regexec error */
 			*len = 0;
+#ifdef UTF8
+			g_free (exp_backup);
+#endif /* UTF8 */
 			return -3;
 		    }
 		    else if (found_start == -1)	/* not found: try next line */
@@ -1585,15 +1759,27 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 			match_bol = 0;
 			continue;
 		    }
-		    else	/* found */
+		    else {	/* found */
+#ifdef UTF8
+			g_free(exp_backup);
+#endif /* UTF8 */
 			return (start + offset - q + found_start);
+		    }
 		}
-		if (once_only)
+		if (once_only) {
+#ifdef UTF8
+		    g_free(exp_backup);
+#endif /* UTF8 */
 		    return -2;
+		}
 
 		if (buf[q - 1] != '\n') { /* incomplete line: try to recover */
 		    buf = mbuf + MAX_REPL_LEN / 2;
+#ifndef UTF8
 		    q = strlen ((const char *) buf);
+#else /* UTF8 */
+		    q = wcslen (buf);
+#endif /* UTF8 */
 		    memmove (mbuf, buf, q);
 		    p = start + q;
 		    move_win = 1;
@@ -1603,36 +1789,59 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    }
 	}
     } else {
+#ifndef UTF8
 	*len = strlen ((const char *) exp);
+#else /* UTF8 */
+	*len = wcslen (exp);
+#endif /* UTF8 */
 	if (replace_case) {
 	    for (p = start; p <= last_byte - l; p++) {
-		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
+		if ((*get_byte) (data, p) == exp[0]) {	/* check if first char matches */
 		    for (f = 0, q = 0; q < l && f < 1; q++)
-			if ((*get_byte) (data, q + p) != (unsigned char)exp[q])
+			if ((*get_byte) (data, q + p) != exp[q])
 			    f = 1;
-		    if (f == 0)
+		    if (f == 0) {
+#ifdef UTF8
+			g_free (exp_backup);
+#endif /* UTF8 */
 			return p;
+		    }
 		}
-		if (once_only)
+		if (once_only) {
+#ifdef UTF8
+		    g_free(exp_backup);
+#endif /* UTF8 */
 		    return -2;
+		}
 	    }
 	} else {
 	    for (p = 0; exp[p] != 0; p++)
 		exp[p] = my_lower_case (exp[p]);
 
 	    for (p = start; p <= last_byte - l; p++) {
-		if (my_lower_case ((*get_byte) (data, p)) == (unsigned char)exp[0]) {
+		if (my_lower_case ((*get_byte) (data, p)) == exp[0]) {
 		    for (f = 0, q = 0; q < l && f < 1; q++)
-			if (my_lower_case ((*get_byte) (data, q + p)) != (unsigned char)exp[q])
+			if (my_lower_case ((*get_byte) (data, q + p)) != exp[q])
 			    f = 1;
-		    if (f == 0)
+		    if (f == 0) {
+#ifdef UTF8
+			g_free (exp_backup);
+#endif /* UTF8 */
 			return p;
+		    }
 		}
-		if (once_only)
+		if (once_only) {
+#ifdef UTF8
+		    g_free (exp_backup);
+#endif /* UTF8 */
 		    return -2;
+		}
 	    }
 	}
     }
+#ifdef UTF8
+    g_free (exp_backup);
+#endif /* UTF8 */
     return -2;
 }
 
@@ -1646,9 +1855,14 @@ edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_b
 
     while ((p = edit_find_string (p, exp, len, last_byte, get_byte, data, once_only, d)) >= 0) {
 	if (replace_whole) {
+#ifndef UTF8
 /*If the bordering chars are not in option_whole_chars_search then word is whole */
 	    if (!strcasechr (option_whole_chars_search, (*get_byte) (data, p - 1))
 		&& !strcasechr (option_whole_chars_search, (*get_byte) (data, p + *len)))
+#else /* UTF8 */
+	    if (!iswalnum((*get_byte) (data, p - 1))
+		&& !iswalnum((*get_byte) (data, p + *len)))
+#endif /* UTF8 */
 		return p;
 	    if (once_only)
 		return -2;
@@ -1680,6 +1894,7 @@ edit_find (long search_start, unsigned char *exp, int *len, long last_byte, edit
 
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
+#ifndef UTF8
 #define snprint(v) { \
 		*p1++ = *p++; \
 		*p1 = '\0'; \
@@ -1687,33 +1902,48 @@ edit_find (long search_start, unsigned char *exp, int *len, long last_byte, edit
 		if (n >= (size_t) (e - s)) goto nospc; \
 		s += n; \
 	    }
+#else /* UTF8 */
+#define snprint(v) { \
+		*p1++ = *p++; \
+		*p1 = '\0'; \
+		n = swprintf(s, e-s, q1,v); \
+		if (n >= (size_t) (e - s)) goto nospc; \
+		s += n; \
+	    }
+#endif /* UTF8 */
 
 /* this function uses the sprintf command to do a vprintf */
 /* it takes pointers to arguments instead of the arguments themselves */
 /* The return value is the number of bytes written excluding '\0'
    if successfull, -1 if the resulting string would be too long and
    -2 if the format string is errorneous.  */
-static int snprintf_p (char *str, size_t size, const char *fmt,...)
-    __attribute__ ((format (printf, 3, 4)));
-
-static int snprintf_p (char *str, size_t size, const char *fmt,...)
+static int snprintf_p (mc_wchar_t *str, size_t size, const mc_wchar_t *fmt,...)
 {
     va_list ap;
     size_t n;
-    const char *q, *p;
-    char *s = str, *e = str + size;
-    char q1[40];
-    char *p1;
+    const mc_wchar_t *q, *p;
+    mc_wchar_t *s = str, *e = str + size;
+    mc_wchar_t q1[40];
+
+    mc_wchar_t *p1;
     int nargs = 0;
 
     va_start (ap, fmt);
     p = q = fmt;
 
+#ifndef UTF8
     while ((p = strchr (p, '%'))) {
+#else /* UTF8 */
+    while ((p = wcschr (p, L'%'))) {
+#endif /* UTF8 */
 	n = p - q;
 	if (n >= (size_t) (e - s))
 	  goto nospc;
+#ifndef UTF8
 	memcpy (s, q, n);	/* copy stuff between format specifiers */
+#else /* UTF8 */
+	wmemcpy (s, q, n);	/* copy stuff between format specifiers */
+#endif /* UTF8 */
 	s += n;
 	q = p;
 	p1 = q1;
@@ -1741,45 +1971,78 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	    *p1++ = *p++;
 	if (*p == '*') {
 	    p++;
+#ifndef UTF8
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
 	    p1 += strlen (p1);
+#else /* UTF8 */
+	    wcscpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
+	    p1 += wcslen (p1);
+#endif /* UTF8 */
 	} else {
-	    while (is_digit (*p) && p1 < q1 + 20)
+#ifndef UTF8
+	    while (is_digit (*p)
+#else /* UTF8 */
+	    while (iswdigit (*p)
+#endif /* UTF8 */
+		    && p1 < q1 + 20)
 		*p1++ = *p++;
+#ifndef UTF8
 	    if (is_digit (*p))
+#else /* UTF8 */
+	    if (iswdigit (*p))
+#endif /* UTF8 */
 		goto err;
 	}
 	if (*p == '.')
 	    *p1++ = *p++;
 	if (*p == '*') {
 	    p++;
+#ifndef UTF8
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
 	    p1 += strlen (p1);
+#else /* UTF8 */
+	    wcscpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
+	    p1 += wcslen (p1);
+#endif /* UTF8 */
 	} else {
-	    while (is_digit (*p) && p1 < q1 + 32)
+#ifndef UTF8
+	    while (is_digit (*p)
+#else /* UTF8 */
+	    while (iswdigit (*p)
+#endif /* UTF8 */
+		&& p1 < q1 + 32)
 		*p1++ = *p++;
+#ifndef UTF8
 	    if (is_digit (*p))
+#else /* UTF8 */
+	    if (iswdigit (*p))
+#endif /* UTF8 */
 		goto err;
 	}
 /* flags done, now get argument */
 	if (*p == 's') {
+#ifndef UTF8
 	    snprint (va_arg (ap, char *));
+#else /* UTF8 */
+	    *p1++ = 'l';
+	    snprint (va_arg (ap, mc_wchar_t *));
+#endif /* UTF8 */
 	} else if (*p == 'h') {
-	    if (strchr ("diouxX", *p))
+	    if (*p < 128 && strchr ("diouxX", *p))
 		snprint (*va_arg (ap, short *));
 	} else if (*p == 'l') {
 	    *p1++ = *p++;
-	    if (strchr ("diouxX", *p))
+	    if (*p < 128 && strchr ("diouxX", *p))
 		snprint (*va_arg (ap, long *));
-	} else if (strchr ("cdiouxX", *p)) {
+	} else if (*p < 128 && strchr ("cdiouxX", *p)) {
 	    snprint (*va_arg (ap, int *));
 	} else if (*p == 'L') {
 	    *p1++ = *p++;
-	    if (strchr ("EefgG", *p))
+	    if (*p < 128 && strchr ("EefgG", *p))
 		snprint (*va_arg (ap, double *));	/* should be long double */
-	} else if (strchr ("EefgG", *p)) {
+	} else if (*p < 128 && strchr ("EefgG", *p)) {
 	    snprint (*va_arg (ap, double *));
-	} else if (strchr ("DOU", *p)) {
+	} else if (*p < 128 && strchr ("DOU", *p)) {
 	    snprint (*va_arg (ap, long *));
 	} else if (*p == 'p') {
 	    snprint (*va_arg (ap, void **));
@@ -1788,10 +2051,17 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	q = p;
     }
     va_end (ap);
+#ifndef UTF8
     n = strlen (q);
     if (n >= (size_t) (e - s))
 	return -1;
     memcpy (s, q, n + 1);
+#else /* UTF8 */
+    n = wcslen (q);
+    if (n >= (size_t) (e - s))
+	return -1;
+    wmemcpy (s, q, n + 1);
+#endif /* UTF8 */
     return s + n - str;
 nospc:
     va_end (ap);
@@ -1970,8 +2240,11 @@ edit_replace_cmd (WEdit *edit, int again)
 		}
 	    }
 	    if (replace_yes) {	/* delete then insert new */
+#ifdef UTF8
+		mc_wchar_t *winput2 = mbstr_to_wchar(input2);
+#endif /* UTF8 */
 		if (replace_scanf) {
-		    char repl_str[MAX_REPL_LEN + 2];
+		    mc_wchar_t repl_str[MAX_REPL_LEN + 2];
 		    int ret = 0;
 
 		    /* we need to fill in sargs just like with scanf */
@@ -1980,17 +2253,25 @@ edit_replace_cmd (WEdit *edit, int again)
 			for (k = 1;
 			     k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0;
 			     k++) {
+#ifndef UTF8
 			    unsigned char *t;
+#else /* UTF8 */
+			    mc_wchar_t *t;
+#endif
 
 			    if (pmatch[k].rm_eo - pmatch[k].rm_so > 255) {
 				ret = -1;
 				break;
 			    }
+#ifndef UTF8
 			    t = (unsigned char *) &sargs[k - 1][0];
+#else /* UTF8 */
+			    t = (mc_wchar_t *) &sargs[k - 1][0];
+#endif /* UTF8 */
 			    for (j = 0;
 				 j < pmatch[k].rm_eo - pmatch[k].rm_so
 				 && j < 255; j++, t++)
-				*t = (unsigned char) edit_get_byte (edit,
+				*t = edit_get_byte (edit,
 								    edit->
 								    search_start
 								    -
@@ -2008,14 +2289,23 @@ edit_replace_cmd (WEdit *edit, int again)
 		    }
 		    if (!ret)
 			ret =
+#ifndef UTF8
 			    snprintf_p (repl_str, MAX_REPL_LEN + 2, input2,
+#else /* UTF8 */
+			    snprintf_p (repl_str, MAX_REPL_LEN + 2, winput2,
+#endif /* UTF8 */
 					PRINTF_ARGS);
 		    if (ret >= 0) {
 			times_replaced++;
 			while (i--)
 			    edit_delete (edit);
+#ifndef UTF8
 			while (repl_str[++i])
 			    edit_insert (edit, repl_str[i]);
+#else /* UTF8 */
+			while (winput2[++i])
+			    edit_insert (edit, winput2[i]);
+#endif /* UTF8 */
 		    } else {
 			edit_error_dialog (_(" Replace "),
 					   ret ==
@@ -2029,10 +2319,18 @@ edit_replace_cmd (WEdit *edit, int again)
 		    times_replaced++;
 		    while (i--)
 			edit_delete (edit);
+#ifndef UTF8
 		    while (input2[++i])
 			edit_insert (edit, input2[i]);
+#else /* UTF8 */
+		    while (winput2[++i])
+			edit_insert (edit, winput2[i]);
+#endif /* UTF8 */
 		}
 		edit->found_len = i;
+#ifdef UTF8
+		g_free (winput2);
+#endif /* UTF8 */
 	    }
 	    /* so that we don't find the same string again */
 	    if (replace_backwards) {
@@ -2205,16 +2503,17 @@ edit_ok_to_exit (WEdit *edit)
 #define TEMP_BUF_LEN 1024
 
 /* Return a null terminated length of text. Result must be g_free'd */
-static unsigned char *
+static mc_wchar_t *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
-    unsigned char *s, *r;
-    r = s = g_malloc (finish - start + 1);
+    mc_wchar_t *s, *r;
+    r = s = g_malloc ((finish - start + 1) * sizeof(mc_wchar_t));
     if (column_highlighting) {
 	*l = 0;
 	/* copy from buffer, excluding chars that are out of the column 'margins' */
 	while (start < finish) {
-	    int c, x;
+	    mc_wchar_t c;
+	    int x;
 	    x = edit_move_forward3 (edit, edit_bol (edit, start), 0,
 				    start);
 	    c = edit_get_byte (edit, start);
@@ -2247,11 +2546,15 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	return 0;
 
     if (column_highlighting) {
-	unsigned char *block, *p;
+	mc_wchar_t *block, *p;
 	int r;
 	p = block = edit_get_block (edit, start, finish, &len);
 	while (len) {
+#ifndef UTF8
 	    r = mc_write (file, p, len);
+#else /* UTF8 */
+	    r = wchar_write (file, p, len);
+#endif /* UTF8 */
 	    if (r < 0)
 		break;
 	    p += r;
@@ -2259,15 +2562,19 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	}
 	g_free (block);
     } else {
-	unsigned char *buf;
+	mc_wchar_t *buf;
 	int i = start, end;
 	len = finish - start;
-	buf = g_malloc (TEMP_BUF_LEN);
+	buf = g_malloc (TEMP_BUF_LEN * sizeof(mc_wchar_t));
 	while (start != finish) {
 	    end = min (finish, start + TEMP_BUF_LEN);
 	    for (; i < end; i++)
 		buf[i - start] = edit_get_byte (edit, i);
+#ifndef UTF8
 	    len -= mc_write (file, (char *) buf, end - start);
+#else /* UTF8 */
+	    len -= wchar_write (file, buf, end - start);
+#endif /* UTF8 */
 	    start = end;
 	}
 	g_free (buf);
@@ -2609,16 +2916,19 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 
 /* prints at the cursor */
 /* returns the number of chars printed */
+#ifndef UTF8
 int edit_print_string (WEdit * e, const char *s)
+#else /* UTF8 */
+int edit_print_wstring (WEdit * e, mc_wchar_t *s)
+#endif /* UTF8 */
 {
     int i = 0;
     while (s[i])
-	edit_execute_cmd (e, -1, (unsigned char) s[i++]);
+	edit_execute_cmd (e, -1, s[i++]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;
 }
-
 
 static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
 {
@@ -2713,15 +3023,20 @@ void edit_mail_dialog (WEdit * edit)
 /* find first character of current word */
 static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 {
-    int i, c, last;
+    int i;
+    mc_wint_t c, last;
 
 /* return if at begin of file */
     if (edit->curs1 <= 0)
 	return 0;
 
-    c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
+    c = edit_get_byte (edit, edit->curs1 - 1);
 /* return if not at end or in word */
+#ifndef UTF8
     if (isspace (c) || !(isalnum (c) || c == '_'))
+#else /* UTF8 */
+    if (iswspace (c) || !(iswalnum (c) || c == '_'))
+#endif /* UTF8 */
 	return 0;
 
 /* search start of word to be completed */
@@ -2731,11 +3046,19 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 	    return 0;
 
 	last = c;
-	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
+	c = edit_get_byte (edit, edit->curs1 - i);
 
+#ifndef UTF8
 	if (!(isalnum (c) || c == '_')) {
+#else /* UTF8 */
+	if (!(iswalnum (c) || c == '_')) {
+#endif /* UTF8 */
 /* return if word starts with digit */
+#ifndef UTF8
 	    if (isdigit (last))
+#else /* UTF8 */
+	    if (iswdigit (last))
+#endif /* UTF8 */
 		return 0;
 
 	    *word_start = edit->curs1 - (i - 1); /* start found */
@@ -2768,7 +3091,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			  int *num)
 {
     int len, max_len = 0, i, skip;
-    unsigned char *bufpos;
+    mc_wchar_t *bufpos;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
     while (*num < MAX_WORD_COMPLETIONS) {
@@ -2787,11 +3110,16 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	    buffers1[start >> S_EDIT_BUF_SIZE][start & M_EDIT_BUF_SIZE];
 	skip = 0;
 	for (i = 0; i < *num; i++) {
+#ifndef UTF8
 	    if (strncmp
 		((char *) &compl[i].text[word_len],
-		 (char *) &bufpos[word_len], max (len,
-						  compl[i].len) -
-		 word_len) == 0) {
+		 (char *) &bufpos[word_len],
+#else /* UTF8 */
+	    if (wcsncmp
+		((wchar_t *) &compl[i].text[word_len],
+		 (wchar_t *) &bufpos[word_len],
+#endif /* UTF8 */
+		 max (len, compl[i].len) - word_len) == 0) {
 		skip = 1;
 		break;		/* skip it, already added */
 	    }
@@ -2799,7 +3127,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	if (skip)
 	    continue;
 
-	compl[*num].text = g_malloc (len + 1);
+	compl[*num].text = g_malloc ((len + 1) * sizeof(mc_wchar_t));
 	compl[*num].len = len;
 	for (i = 0; i < len; i++)
 	    compl[*num].text[i] = *(bufpos + i);
@@ -2813,6 +3141,18 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     return max_len;
 }
 
+#ifdef UTF8
+int edit_print_string (WEdit * e, const char *s)
+{
+    int i;
+    mc_wchar_t *ws = mbstr_to_wchar(s);
+    i = edit_print_wstring (e, ws);
+    g_free(ws);
+    return i;
+}
+
+#endif /* UTF8 */
+
 
 /* let the user select its preferred completion */
 static void
@@ -2825,6 +3165,9 @@ edit_completion_dialog (WEdit * edit, int max_len, int word_len,
     WListbox *compl_list;
     int compl_dlg_h;		/* completion dialog height */
     int compl_dlg_w;		/* completion dialog width */
+#ifdef UTF8
+    char *mbtext;
+#endif /* UTF8 */
 
     /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;
@@ -2860,9 +3203,18 @@ edit_completion_dialog (WEdit * edit, int max_len, int word_len,
     add_widget (compl_dlg, compl_list);
 
     /* fill the listbox with the completions */
+#ifndef UTF8
     for (i = 0; i < num_compl; i++)
 	listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0,
 	    (char *) compl[i].text, NULL);
+#else /* UTF8 */
+    for (i = 0; i < num_compl; i++) {
+	mbtext = wchar_to_mbstr(compl[i].text);
+	listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0,
+	    mbtext, NULL);
+	g_free(mbtext);
+    }
+#endif /* UTF8 */
 
     /* pop up the dialog */
     run_dlg (compl_dlg);
@@ -2870,9 +3222,17 @@ edit_completion_dialog (WEdit * edit, int max_len, int word_len,
     /* apply the choosen completion */
     if (compl_dlg->ret_value == B_ENTER) {
 	listbox_get_current (compl_list, &curr, NULL);
-	if (curr)
+	if (curr){
+#ifndef UTF8
 	    for (curr += word_len; *curr; curr++)
 		edit_insert (edit, *curr);
+#else /* UTF8 */
+	    mc_wchar_t *wc, *wccurr = mbstr_to_wchar(curr);
+	    for (wc = wccurr + word_len; *wc; wc++)
+		edit_insert (edit, *wc);
+	    g_free(wccurr);
+#endif /* UTF8 */
+	}
     }
 
     /* destroy dialog before return */
@@ -2889,8 +3249,9 @@ edit_complete_word_cmd (WEdit *edit)
 {
     int word_len = 0, i, num_compl = 0, max_len;
     long word_start = 0;
-    unsigned char *bufpos;
-    char *match_expr;
+    mc_wchar_t *bufpos;
+    mc_wchar_t *match_expr;
+    char *mbmatch_expr;
     struct selection compl[MAX_WORD_COMPLETIONS];	/* completions */
 
     /* don't want to disturb another search */
@@ -2907,16 +3268,32 @@ edit_complete_word_cmd (WEdit *edit)
     /* prepare match expression */
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
+
+    match_expr = g_malloc((word_len + 14) * sizeof(mc_wchar_t));
+#ifndef UTF8
     match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
+#else /* UTF8 */
+    wcsncpy (match_expr, bufpos, word_len);
+    match_expr[word_len] = '\0';
+    wcscat (match_expr, L"[a-zA-Z_0-9]+");
+#endif /* UTF8 */
 
     /* init search: backward, regexp, whole word, case sensitive */
     edit_set_search_parameters (0, 1, 1, 1, 1);
 
     /* collect the possible completions              */
     /* start search from curs1 down to begin of file */
+#ifndef UTF8
     max_len =
 	edit_collect_completions (edit, word_start, word_len, match_expr,
 				  (struct selection *) &compl, &num_compl);
+#else /* UTF8 */
+    mbmatch_expr = wchar_to_mbstr(match_expr);
+    max_len =
+	edit_collect_completions (edit, word_start, word_len, mbmatch_expr,
+				  (struct selection *) &compl, &num_compl);
+    g_free(mbmatch_expr);
+#endif /* UTF8 */
 
     if (num_compl > 0) {
 	/* insert completed word if there is only one match */
