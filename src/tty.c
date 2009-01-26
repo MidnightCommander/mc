@@ -139,7 +139,7 @@ tty_print_char(int c)
      * good for me. So please don't mess with Red Hat people.
      * 					Jindrich Novy (jnovy@redhat.com)
      */
-    SLsmg_write_char(c);
+    SLsmg_write_nwchars(&c, 1);
 #else
     addch(c);
 #endif
