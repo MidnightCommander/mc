@@ -670,7 +670,7 @@ format_file (WPanel *panel, int file_index, int width, int attr, int isstatus)
 			SLsmg_write_nwchars (((wchar_t *) buffer)
 					     + txtlen - n2, n2);
 		    } else
-			SLsmg_write_nwchars ((wchar_t *) buffer, len);
+			SLsmg_write_nwchars ((wchar_t *) buffer + still, len);
 		} else {
 		    printw ("%*s", still, "");
 		    SLsmg_write_nwchars ((wchar_t *) buffer, txtlen);
