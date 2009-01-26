@@ -539,6 +539,64 @@ vfs_parse_filemode (const char *s, size_t *ret_skipped,
     return TRUE;
 }
 
+gboolean
+vfs_parse_raw_filemode (const char *s, size_t *ret_skipped,
+		    mode_t *ret_mode)
+{
+    const char *p;
+    mode_t remote_type = 0, local_type, perms = 0;
+
+    p = s;
+
+    // isoctal
+    while(*p >= '0' && *p <= '7')
+    {
+	perms *= 010;
+	perms += (*p - '0');
+	++p;
+    }
+
+    if (*p++ != ' ')
+	return FALSE;
+
+    while(*p >= '0' && *p <= '7')
+    {
+	remote_type *= 010;
+	remote_type += (*p - '0');
+	++p;
+    }
+
+    if (*p++ != ' ')
+	return FALSE;
+
+    /* generated with:
+        $ perl -e 'use Fcntl ":mode";
+                   my @modes = (S_IFDIR, S_IFBLK, S_IFCHR, S_IFLNK, S_IFREG);
+                   foreach $t (@modes) { printf ("%o\n", $t); };'
+        TODO: S_IFDOOR, S_IFIFO, S_IFSOCK (if supported by os)
+              (see vfs_parse_filetype)
+     */
+
+    switch (remote_type)
+    {
+	case 020000:
+	    local_type = S_IFCHR; break;
+	case 040000:
+	    local_type = S_IFDIR; break;
+	case 060000:
+	    local_type = S_IFBLK; break;
+	case 0120000:
+	    local_type = S_IFLNK; break;
+	case 0100000:
+	default:// don't know what is it
+	    local_type = S_IFREG; break;
+    }
+
+    *ret_skipped = p - s;
+    *ret_mode = local_type | perms;
+    return TRUE;
+}
+
 /* This function parses from idx in the columns[] array */
 int
 vfs_parse_filedate (int idx, time_t *t)

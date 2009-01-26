@@ -4,6 +4,11 @@
 	* src/main.c, src/panel.h, src/screen.c, src/setup.c:
 	  - Add support for showing executables at first in the panel view
 
+2009-01-25 Patrick Winnertz <winnie@debian.org> & Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* mhl/string.h, vfs/fish.c, vfs/utilvfs.c, vfs/utilvfs.h: Reworked fish code
+	  so that symlinks and files which special characters works now
+
 2009-01-25 Enrico Weigelt <weigelt@metux.de>
 
 	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:

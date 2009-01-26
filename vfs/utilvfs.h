@@ -24,6 +24,8 @@ gboolean vfs_parse_fileperms (const char *s, size_t *ret_skipped,
 			      mode_t *ret_perms);
 gboolean vfs_parse_filemode (const char *s, size_t *ret_skipped,
 			     mode_t *ret_mode);
+gboolean vfs_parse_raw_filemode (const char *s, size_t *ret_skipped,
+			     mode_t *ret_mode);
 
 int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 		      char **linkname);
