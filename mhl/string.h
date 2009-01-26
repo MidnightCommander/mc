@@ -9,6 +9,11 @@
 #define mhl_str_ndup(str,len)	((str ? strndup(str,len) : strdup("")))
 #define mhl_str_len(str)	((str ? strlen(str) : 0))
 
+static inline char * mhl_str_dup_range(const char * s_start, const char * s_bound)
+{
+    return mhl_str_ndup(s_start, s_bound - s_start);
+}
+
 static inline char* mhl_str_trim(char* str)
 {
     if (!str) return NULL;	// NULL string ?! bail out.
@@ -121,4 +126,4 @@ static inline char* mhl_str_reverse(char* ptr)
     return ptr;
 }
 
-#endif
+#endif /* __MHL_STRING_H */
