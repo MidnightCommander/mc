@@ -72,12 +72,22 @@ static void status_string (WEdit * edit, char *s, int w)
      */
     if (edit->curs1 < edit->last_byte) {
         mc_wchar_t cur_byte = edit_get_byte (edit, edit->curs1);
+        mc_wchar_t cur_byte2 = cur_byte;
 #ifndef UTF8
 	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
 		    is_printable (cur_byte) ? cur_byte : '.',
 #else /* UTF8 */
+        /* In 8-bit locales show the byte itself instead of its Unicode value */
+        if (MB_CUR_MAX == 1) {
+            unsigned char cur_8bit_byte;
+            mbstate_t mbs;
+            memset (&mbs, 0, sizeof (mbs));
+            if (wcrtomb(&cur_8bit_byte, cur_byte, &mbs) == 1) {
+                cur_byte = cur_8bit_byte;
+            }
+        }
         g_snprintf (byte_str, sizeof(byte_str), "%lc %3d 0x%02X",
-                    iswprint(cur_byte) ? cur_byte : '.',
+                    iswprint(cur_byte2) ? cur_byte2 : '.',
 #endif /* UTF8 */
                     (int) cur_byte,
                     (unsigned) cur_byte);
