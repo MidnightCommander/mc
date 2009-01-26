@@ -3,7 +3,7 @@
 
 #include <ctype.h>
 #include <stdarg.h>
-#include <mhl/memory.h>
+#include <../mhl/memory.h>
 
 #define	mhl_str_dup(str)	((str ? strdup(str) : strdup("")))
 #define mhl_str_ndup(str,len)	((str ? strndup(str,len) : strdup("")))
@@ -61,7 +61,7 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
     size_t      totalsize = 0;
 
     // first pass: scan through the params and count string sizes
-    va_list par;
+    //va_list par;
 
     if (base)
     {
