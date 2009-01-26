@@ -68,6 +68,10 @@
 #include "util.h"               /* strip_password() */
 #include "tty.h"
 
+#ifdef HAVE_CHARSET
+#include "recode.h"
+#endif
+
 /* }}} */
 
 /* Hack: the vfs code should not rely on this */
@@ -722,57 +726,79 @@ file_progress_real_query_replace (FileOpContext *ctx,
     }
 }
 
+#ifdef HAVE_CHARSET
+#define FMDY 15
+#else
 #define FMDY 13
+#endif
+
 #define	FMD_XLEN 64
 extern int fmd_xlen;
 static QuickWidget fmd_widgets[] = {
 
-#define	FMCB0  FMDC
-#define	FMCB12 0
-#define	FMCB11 1
-    /* follow symlinks and preserve Attributes must be the first */
-    {quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-     0 /* &op_preserve */ , 0, NULL},
-    {quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0,
-     0 /* &file_mask_op_follow_links */ , 0, NULL},
-    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL},
-    {quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0,
-     0 /* &source_easy_patterns */ , 0, NULL},
-    {quick_input, 3, 64, 3, FMDY, "", 58,
-     0, 0, 0, "input-def"},
-#define FMDI1 4
-#define FMDI2 5
-#define FMDC 3
-    {quick_input, 3, 64, 6, FMDY, "", 58, 0,
-     0, 0, "input2"},
-#define FMDI0 6
-    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL},
-#define	FMBRGT 7
-    {quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-     NULL},
-#undef SKIP
-#ifdef WITH_BACKGROUND
-# define SKIP 5
-# define FMCB21 11
-# define FMCB22 10
-# define FMBLFT 9
-# define FMBMID 8
-    {quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0,
-     NULL},
-#else				/* WITH_BACKGROUND */
-# define SKIP 4
-# define FMCB21 10
-# define FMCB22 9
-# define FMBLFT 8
-# undef  FMBMID
+#ifdef HAVE_CHARSET
+ #define Y_OK 12
+#else
+ #define Y_OK 9
 #endif
-    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
-    {quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-     0 /* &file_mask_stable_symlinks */ , 0, NULL},
-    {quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0,
-     0,
-     0 /* &dive_into_subdirs */ , 0, NULL},
-    NULL_QuickWidget
+
+#ifdef WITH_BACKGROUND
+ #define ADD 0
+#else
+ #define ADD -1
+#endif
+
+   #define FM_STAB_SYM         0
+  #define FM_DIVE_INTO_SUBDIR 1
+  #define FM_PRES_ATTR        2
+  #define FM_FOLLOW_LINKS     3
+  #define FM_DST_INPUT        4
+  #define FM_DST_TITLE        5
+  #define FM_USING_SHELL_PATT 6
+  #define FM_SRC_INPUT        7
+  #define FM_SRC_TITLE        8
+  #define FM_CANCEL           9
+#ifdef WITH_BACKGROUND
+  #define FM_BKGND            10
+#endif
+  #define FM_OK               11+ADD
+#ifdef HAVE_CHARSET
+  #define FM_TO_CODEPAGE      12+ADD
+  #define FM_FROM_CODEPAGE    13+ADD
+  #define FM_RECODE_TITLE     14+ADD
+  #define FM_RECODE_ARROW     15+ADD
+#endif // HAVE_CHARSET
+
+
+#ifdef HAVE_CHARSET
+ #define SKIP             10
+ #define B_FROM B_USER+1
+ #define B_TO   B_USER+2
+#else
+ #define SKIP             10
+#endif
+
+    {quick_checkbox, 42,64, 8, FMDY, N_("&Stable Symlinks"),0,0,0,0,"stab-sym"},
+    {quick_checkbox, 31,64, 7, FMDY, N_("&Dive into subdir if exists"),0,0,0,0,"dive"},
+    {quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"),9,0,0,0,"preserve"},
+    {quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"),7,0,0,0,"follow"},
+    {quick_input,    3, 64, 6, FMDY, "", 58, 0, 0, 0, "input2"},
+    {quick_label,    3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, "to"},
+    {quick_checkbox, 37,64, 4, FMDY, N_("&Using shell patterns"),0,0, 0,0,"us-sh"},
+    {quick_input,    3, 64, 3, FMDY, "", 58, 0, 0, 0, "input-def"},
+    {quick_label,    3, 64, 2, FMDY, "", 0, 0, 0, 0, "ql"},
+    {quick_button,   42,64, Y_OK, FMDY, N_("&Cancel"), 0, B_CANCEL, 0,0, "cancel"},
+#ifdef WITH_BACKGROUND
+    {quick_button,   25,64, Y_OK, FMDY, N_("&Background"), 0, B_USER, 0,0, "back"},
+#endif
+    {quick_button,   14,64, Y_OK, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, "ok"},
+#ifdef HAVE_CHARSET
+    {quick_button,   46,64, 10, FMDY,"to codepage", 0, B_TO, 0, 0, "ql"},
+    {quick_button,   25,64, 10, FMDY, "from codepage", 0, B_FROM, 0, 0, "ql"},
+    {quick_label,    3, 64, 10, FMDY, N_("Recode file names:"), 0, 0, 0, 0, "ql"},
+    {quick_label,    42,64, 10, FMDY, "->", 0, 0, 0, 0, "ql"},
+#endif
+    {0}
 };
 
 static int
@@ -806,48 +832,48 @@ fmd_init_i18n (int force)
 	if (fmd_widgets[i].text[0] != '\0')
 	    fmd_widgets[i].text = _(fmd_widgets[i].text);
 
-    len = mbstrlen (fmd_widgets[FMCB11].text)
-	+ mbstrlen (fmd_widgets[FMCB21].text) + 15;
+    len = mbstrlen (fmd_widgets[FM_FOLLOW_LINKS].text)
+	+ mbstrlen (fmd_widgets[FM_DIVE_INTO_SUBDIR].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = mbstrlen (fmd_widgets[FMCB12].text)
-	+ mbstrlen (fmd_widgets[FMCB22].text) + 15;
+    len = mbstrlen (fmd_widgets[FM_PRES_ATTR].text)
+	+ mbstrlen (fmd_widgets[FM_STAB_SYM].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = mbstrlen (fmd_widgets[FMBRGT].text)
-	+ mbstrlen (fmd_widgets[FMBLFT].text) + 11;
+    len = mbstrlen (fmd_widgets[FM_CANCEL].text)
+	+ mbstrlen (fmd_widgets[FM_OK].text) + 11;
 
-#ifdef FMBMID
-    len += mbstrlen (fmd_widgets[FMBMID].text) + 6;
+#ifdef FM_BKGND
+    len += mbstrlen (fmd_widgets[FM_BKGND].text) + 6;
 #endif
 
     fmd_xlen = max (fmd_xlen, len + 4);
 
     len = (fmd_xlen - (len + 6)) / 2;
-    i = fmd_widgets[FMBLFT].relative_x = len + 3;
-    i += mbstrlen (fmd_widgets[FMBLFT].text) + 8;
+    i = fmd_widgets[FM_OK].relative_x = len + 3;
+    i += mbstrlen (fmd_widgets[FM_OK].text) + 8;
 
-#ifdef FMBMID
-    fmd_widgets[FMBMID].relative_x = i;
-    i += mbstrlen (fmd_widgets[FMBMID].text) + 6;
+#ifdef FM_BKGND
+    fmd_widgets[FM_BKGND].relative_x = i;
+     i += mbstrlen (fmd_widgets[FM_BKGND].text) + 6;
 #endif
 
-    fmd_widgets[FMBRGT].relative_x = i;
+    fmd_widgets[FM_CANCEL].relative_x = i;
 
 #define	chkbox_xpos(i) \
 	fmd_widgets [i].relative_x = fmd_xlen - mbstrlen (fmd_widgets [i].text) - 6
 
-    chkbox_xpos (FMCB0);
-    chkbox_xpos (FMCB21);
-    chkbox_xpos (FMCB22);
+    chkbox_xpos (FM_USING_SHELL_PATT);
+    chkbox_xpos (FM_DIVE_INTO_SUBDIR);
+    chkbox_xpos (FM_STAB_SYM);
 
     if (fmd_xlen != FMD_XLEN) {
 	i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]) - 1;
 	while (i--)
 	    fmd_widgets[i].x_divisions = fmd_xlen;
 
-	fmd_widgets[FMDI1].hotkey_pos =
-	    fmd_widgets[FMDI2].hotkey_pos = fmd_xlen - 6;
+	fmd_widgets[FM_SRC_INPUT].hotkey_pos =
+	    fmd_widgets[FM_DST_INPUT].hotkey_pos = fmd_xlen - 6;
     }
 #undef chkbox_xpos
 
@@ -867,6 +893,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     int val;
     QuickDialog Quick_input;
     char *def_text;
+#ifdef HAVE_CHARSET
+    char *errmsg;
+#endif
     g_return_val_if_fail (ctx != NULL, NULL);
 
     def_text = g_strdup(def_text_orig);
@@ -884,10 +913,11 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     /* Set up the result pointers */
 
-    fmd_widgets[FMCB12].result = &ctx->op_preserve;
-    fmd_widgets[FMCB11].result = &ctx->follow_links;
-    fmd_widgets[FMCB22].result = &ctx->stable_symlinks;
-    fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
+    fmd_widgets[FM_PRES_ATTR].result = &ctx->op_preserve;
+    fmd_widgets[FM_FOLLOW_LINKS].result = &ctx->follow_links;
+    fmd_widgets[FM_STAB_SYM].result = &ctx->stable_symlinks;
+    fmd_widgets[FM_DIVE_INTO_SUBDIR].result = &ctx->dive_into_subdirs;
+
 
     /* filter out a possible password from def_text */
     def_text_secure = strip_password (g_strdup (def_text), 1);
@@ -895,8 +925,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     /* Create the dialog */
 
     ctx->stable_symlinks = 0;
-    fmd_widgets[FMDC].result = &source_easy_patterns;
-    fmd_widgets[FMDI1].text = easy_patterns ? "*" : "^\\(.*\\)$";
+    fmd_widgets[FM_USING_SHELL_PATT].result = &source_easy_patterns;
+    fmd_widgets[FM_SRC_INPUT].text = easy_patterns ? "*" : "^\\(.*\\)$";
+
     Quick_input.xlen = fmd_xlen;
     Quick_input.xpos = -1;
     Quick_input.title = op_names[operation];
@@ -904,19 +935,37 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     Quick_input.ylen = FMDY;
     Quick_input.i18n = 1;
     Quick_input.widgets = fmd_widgets;
-    fmd_widgets[FMDI0].text = text;
-    fmd_widgets[FMDI2].text = def_text_secure;
-    fmd_widgets[FMDI2].str_result = &dest_dir;
-    fmd_widgets[FMDI1].str_result = &source_mask;
+    fmd_widgets[FM_SRC_TITLE].text = text;
+    fmd_widgets[FM_DST_INPUT].text = def_text_secure;
+    fmd_widgets[FM_DST_INPUT].str_result = &dest_dir;
+    fmd_widgets[FM_SRC_INPUT].str_result = &source_mask;
 
     *do_background = 0;
+
+#ifdef HAVE_CHARSET
+    ctx->from_codepage=current_panel->src_codepage;
+    ctx->to_codepage=left_panel->src_codepage;
+    if (left_panel) {
+        ctx->to_codepage=left_panel->src_codepage;
+        if( (current_panel==left_panel) && right_panel ) ctx->to_codepage=right_panel->src_codepage;
+    }
+#endif
+
   ask_file_mask:
+
+#ifdef HAVE_CHARSET
+    if(operation!=OP_COPY && operation!=OP_MOVE) {
+      ctx->from_codepage=-1;
+      ctx->to_codepage=-1;
+    }
+    fmd_widgets[FM_FROM_CODEPAGE].text=get_codepage_id(ctx->from_codepage);
+    fmd_widgets[FM_TO_CODEPAGE].text=get_codepage_id(ctx->to_codepage);
+#endif
 
     if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL) {
 	g_free (def_text_secure);
 	return 0;
     }
-    g_free (def_text_secure);
 
     if (ctx->follow_links)
 	ctx->stat_func = mc_stat;
@@ -938,6 +987,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     orig_mask = source_mask;
     if (!dest_dir || !*dest_dir) {
 	g_free (source_mask);
+    g_free (def_text_secure);
         g_free(def_text);
 	return dest_dir;
     }
@@ -992,6 +1042,48 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
     if (val == B_USER)
 	*do_background = 1;
+#ifdef HAVE_CHARSET
+    if(val == B_FROM) {
+      if(operation==OP_COPY || operation==OP_MOVE) {
+        if(display_codepage<=0) {
+          message( 1, _(" Warning "),
+                      _("To use this feature select your codepage in\n"
+                        "Setup / Display Bits dialog!\n"
+                        "Do not forget to save options." ));
+          goto ask_file_mask;
+        }
+        ctx->from_codepage=select_charset(ctx->from_codepage,0,
+                            _(" Choose \"FROM\" codepage for COPY/MOVE operaion "));
+      }
+      else
+        message(1,"Warning",_("Recoding works only with COPY or MOVE operation"));
+      goto ask_file_mask;
+    }
+    if(val == B_TO) {
+      if(operation==OP_COPY || operation==OP_MOVE) {
+        if(display_codepage<=0) {
+          message( 1, _(" Warning "),
+                      _("To use this feature select your codepage in\n"
+                        "Setup / Display Bits dialog!\n"
+                        "Do not forget to save options." ));
+          goto ask_file_mask;
+        }
+        ctx->to_codepage=select_charset(ctx->to_codepage,0,
+                            _(" Choose \"TO\" codepage for COPY/MOVE operaion "));
+      }
+      else
+        message(1,"Warning",_("Recoding works only with COPY or MOVE operation"));
+      goto ask_file_mask;
+    }
+
+    errmsg=my_init_tt(ctx->to_codepage,ctx->from_codepage,ctx->tr_table);
+    if(errmsg) {
+      my_reset_tt(ctx->tr_table,256);
+      message( 1, MSG_ERROR, "%s", errmsg);
+    }
+#endif
+
+    g_free(def_text_secure);
     g_free(def_text);
     return dest_dir;
 }

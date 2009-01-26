@@ -49,6 +49,8 @@
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
+#include"recode.h"
+#include "wtools.h"
 #endif
 
 #ifdef USE_NETCODE
@@ -272,6 +274,11 @@ panel_save_setup (struct WPanel *panel, const char *section)
     g_snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
     save_string (section, "user_mini_status", buffer,
 			       profile_name);
+
+#ifdef HAVE_CHARSET
+    // save panel codepage
+    save_string(section, "panel_display_codepage", get_codepage_id(panel->src_codepage), profile_name);
+#endif
 }
 
 void
@@ -374,6 +381,7 @@ save_setup (void)
 #ifdef HAVE_CHARSET
     save_string( "Misc", "display_codepage",
     		 get_codepage_id( display_codepage ), profile_name );
+    save_string( "Misc", "ftp_codepage", get_codepage_id(ftp_codepage), profile_name);
 #endif /* HAVE_CHARSET */
 
     g_free (profile);
@@ -424,6 +432,31 @@ panel_load_setup (WPanel *panel, const char *section)
     panel->user_mini_status =
 	load_int (section, "user_mini_status", 0);
 
+#ifdef HAVE_CHARSET
+//--- Loading panel codepage
+    panel_reset_codepage(panel);
+    if(load_codepages_list()>0) {
+      char cpname[128];
+      char *errmsg;
+
+
+      if(display_codepage>=0) {
+        load_string(section, "panel_display_codepage", "", cpname, sizeof(cpname));
+        if(cpname[0]!='\0') panel->src_codepage = get_codepage_index(cpname);
+      }
+
+      errmsg=my_init_tt(display_codepage,panel->src_codepage,panel->tr_table);
+      if(errmsg) {
+        panel_reset_codepage(panel);
+        message( 1, MSG_ERROR, "%s", errmsg );
+       }
+      errmsg=my_init_tt(panel->src_codepage,display_codepage,panel->tr_table_input);
+      if(errmsg) {
+        panel_reset_codepage(panel);
+        message( 1, MSG_ERROR, "%s", errmsg );
+      }
+    }
+#endif
 }
 
 static void
@@ -573,10 +606,16 @@ load_setup (void)
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() > 0 ) {
 	char cpname[128];
-	load_string( "Misc", "display_codepage", "",
-		     cpname, sizeof(cpname) );
-	if ( cpname[0] != '\0' )
-	    display_codepage = get_codepage_index( cpname );
+      get_locale_codepage();
+      load_string("Misc", "display_codepage", "", cpname, sizeof(cpname));
+      if(cpname[0] != '\0')  display_codepage=get_codepage_index(cpname);
+      else display_codepage=lang_codepage;
+
+      ftp_codepage=-1;
+      if(display_codepage >= 0) {
+        load_string( "Misc", "ftp_codepage", "", cpname, sizeof(cpname));
+        if(cpname[0] != '\0')  ftp_codepage=get_codepage_index(cpname);
+      }
     }
 
     init_translation_table( source_codepage, display_codepage );

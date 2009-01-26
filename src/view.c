@@ -3233,7 +3233,7 @@ view_handle_key (WView *view, int c)
 
 #ifdef HAVE_CHARSET
     case XCTRL ('t'):
-	do_select_codepage ();
+	do_select_codepage (_(" Choose codepage "));
 	view->dirty++;
 	view_update (view);
 	return MSG_HANDLED;

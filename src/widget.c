@@ -1943,6 +1943,77 @@ input_new (int y, int x, int color, int len, const char *def_text,
     return in;
 }
 
+/* Vertical scrollbar widget */
+
+void
+vscrollbar (Widget widget, int height, int width, int tpad, int bpad,
+            int selected, int count, gboolean color)
+{
+    int line;
+    int i;
+
+    /* Are we at the top? */
+    widget_move (&widget, tpad, width);
+#ifndef UTF8
+    if (!selected)
+        one_vline ();
+    else
+        addch ('^');
+#else
+    if (color) attrset (MARKED_COLOR);
+    if (is_utf8)
+	SLsmg_write_string("▴");
+    else
+        addch ('^');
+    if (color) attrset (NORMAL_COLOR);
+#endif
+
+    /* Are we at the bottom? */
+    widget_move (&widget, height-1-bpad, width);
+#ifndef UTF8
+    if (selected == count-1)
+        one_vline ();
+    else
+        addch ('v');
+#else
+    if (color) attrset (MARKED_COLOR);
+    if (is_utf8)
+	SLsmg_write_string("▾");
+    else
+	addch('v');
+    if (color) attrset (NORMAL_COLOR);
+#endif
+
+    /* Now draw the nice relative pointer */
+    if (count > 1)
+        line = tpad + 1 + ((selected * (height-3-tpad-bpad)) / (count-1));
+    else
+        line = 0;
+
+    for (i = tpad + 1; i < height-1-bpad; i++){
+        widget_move (&widget, i, width);
+        if (i != line)
+#ifndef UTF8
+            one_vline ();
+        else
+            addch ('*');
+#else
+            if (is_utf8)
+		SLsmg_write_string("▒");
+	    else
+		one_vline();
+        else {
+            if (color) attrset (MARKED_COLOR);
+            if (is_utf8)
+		SLsmg_write_string("◈");
+	    else
+		addch('*');
+            if (color) attrset (NORMAL_COLOR);
+        }
+#endif
+    }
+}
+
 
 /* Listbox widget */
 
@@ -1951,44 +2022,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
  */
 static int listbox_cdiff (WLEntry *s, WLEntry *e);
 
-static void
-listbox_drawscroll (WListbox *l)
-{
-    int line;
-    int i, top;
-    int max_line = l->height-1;
-    
-    /* Are we at the top? */
-    widget_move (&l->widget, 0, l->width);
-    if (l->list == l->top)
-	one_vline ();
-    else
-	addch ('^');
-
-    /* Are we at the bottom? */
-    widget_move (&l->widget, max_line, l->width);
-    top = listbox_cdiff (l->list, l->top);
-    if ((top + l->height == l->count) || l->height >= l->count)
-	one_vline ();
-    else
-	addch ('v');
-
-    /* Now draw the nice relative pointer */
-    if (l->count)
-	line = 1+ ((l->pos * (l->height-2)) / l->count);
-    else
-	line = 0;
-    
-    for (i = 1; i < max_line; i++){
-	widget_move (&l->widget, i, l->width);
-	if (i != line)
-	    one_vline ();
-	else
-	    addch ('*');
-    }
-}
-    
-static void
+void
 listbox_draw (WListbox *l, int focused)
 {
     WLEntry *e;
@@ -2029,7 +2063,7 @@ listbox_draw (WListbox *l, int focused)
     if (!l->scrollbar)
 	return;
     attrset (normalc);
-    listbox_drawscroll (l);
+    vscrollbar (l->widget, l->height, l->width, 0, 0, l->pos, l->count, FALSE);
 }
 
 /* Returns the number of items between s and e,

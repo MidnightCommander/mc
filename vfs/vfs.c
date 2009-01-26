@@ -54,6 +54,11 @@
 #include "smbfs.h"
 #include "local.h"
 
+#include "../src/panel.h"
+#ifdef HAVE_CHARSET
+#include "../src/recode.h"
+#endif
+
 /* They keep track of the current directory */
 static struct vfs_class *current_vfs;
 static char *current_dir;
@@ -686,8 +691,66 @@ mc_chdir (const char *path)
     vfsid old_vfsid;
     int result;
 
+#ifdef HAVE_CHARSET
+    char* errmsg;
+#endif
+    WPanel* p=ret_panel;
+
     new_dir = vfs_canon (path);
     new_vfs = vfs_get_class (new_dir);
+    old_vfsid = vfs_getid (current_vfs, current_dir);
+    old_vfs = current_vfs;
+
+    if(p) {
+
+      // Change from localfs to ftpfs
+      ret_panel=NULL;
+      if(    (strcmp(old_vfs->name,"localfs")==0) &&
+            (strcmp(new_vfs->name,"ftpfs")==0)){
+        p->is_return=1;
+        strncpy(p->retdir,current_dir, MC_MAXPATHLEN);
+#ifdef HAVE_CHARSET
+       p->ret_codepage=p->src_codepage;
+        p->src_codepage=ftp_codepage;
+        errmsg=my_init_tt(display_codepage,p->src_codepage,p->tr_table);
+        if(errmsg) {
+          panel_reset_codepage(p);
+          message( 1, MSG_ERROR, "%s", errmsg );
+        }
+        errmsg=my_init_tt(p->src_codepage,display_codepage,p->tr_table_input);
+       if(errmsg) {
+          panel_reset_codepage(p);
+          message( 1, MSG_ERROR, "%s", errmsg );
+        }
+#endif
+      }
+
+      // Change from ftpfs to localfs
+      if(    (strcmp(old_vfs->name,"ftpfs")==0) &&
+            (strcmp(new_vfs->name,"localfs")==0) &&
+             p->is_return){
+        p->is_return=0;
+       g_free(new_dir);
+       new_dir = vfs_canon (p->retdir);
+        new_vfs = vfs_get_class (new_dir);
+#ifdef HAVE_CHARSET
+        p->src_codepage=p->ret_codepage;
+        errmsg=my_init_tt(display_codepage,p->src_codepage,p->tr_table);
+        if(errmsg) {
+          panel_reset_codepage(p);
+          message( 1, MSG_ERROR, "%s", errmsg );
+        }
+        errmsg=my_init_tt(p->src_codepage,display_codepage,p->tr_table_input);
+        if(errmsg) {
+          panel_reset_codepage(p);
+          message( 1, MSG_ERROR, "%s", errmsg );
+        }
+#endif
+      }
+    }
+
+
+
     if (!new_vfs->chdir) {
     	g_free (new_dir);
 	return -1;
@@ -700,9 +763,6 @@ mc_chdir (const char *path)
 	g_free (new_dir);
 	return -1;
     }
-
-    old_vfsid = vfs_getid (current_vfs, current_dir);
-    old_vfs = current_vfs;
 
     /* Actually change directory */
     g_free (current_dir);

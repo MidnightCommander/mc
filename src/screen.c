@@ -51,6 +51,10 @@
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
 
+#ifdef HAVE_CHARSET
+#include "recode.h"
+#endif
+
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
 #define J_LEFT 		1
@@ -173,6 +177,7 @@ static const char *
 string_file_name (file_entry *fe, int len)
 {
     size_t i;
+    char* filename;
 
 #ifdef UTF8
     static char buffer [BUF_SMALL * 4];
@@ -183,6 +188,13 @@ string_file_name (file_entry *fe, int len)
     memset (&s, 0, sizeof (s));
 #else
     static char buffer [BUF_SMALL];
+#endif
+
+#ifdef HAVE_CHARSET
+    my_translate_string(fe->fname,fe->fnamelen, recode_buf, recode_panel->tr_table);
+    filename= recode_buf;
+#else
+    filename=fe->fname;
 #endif
 
 #ifdef UTF8
@@ -215,7 +227,7 @@ string_file_name (file_entry *fe, int len)
 	for (i = 0; i < sizeof(buffer) - 1; i++) {
 	    char c;
 
-	    c = fe->fname[i];
+	    c = filename[i];
 
 	    if (!c) break;
 
@@ -722,6 +734,10 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
     int    second_column = 0;
     int	   width, offset;
 
+#ifdef HAVE_CHARSET
+    recode_panel=panel;
+#endif
+
     offset = 0;
     if (!isstatus && panel->split){
 
@@ -761,7 +777,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
     }
 }
 
-static void
+void
 display_mini_info (WPanel *panel)
 {
     if (!show_mini_info)
@@ -831,7 +847,7 @@ display_mini_info (WPanel *panel)
     return;
 }
 
-static void
+void
 paint_dir (WPanel *panel)
 {
     int i;
@@ -869,7 +885,7 @@ mini_info_separator (WPanel *panel)
 #endif				/* !HAVE_SLANG */
 }
 
-static void
+void
 show_dir (WPanel *panel)
 {
     char *tmp;
@@ -889,6 +905,9 @@ show_dir (WPanel *panel)
     }
 #endif				/* HAVE_SLANG */
 
+    vscrollbar (panel->widget, panel->widget.lines, panel->widget.cols-1, 2, 2,
+		panel->selected, panel->count, TRUE);
+
     if (panel->active)
 	attrset (REVERSE_COLOR);
 
@@ -898,8 +917,15 @@ show_dir (WPanel *panel)
     tmp = g_malloc (panel->widget.cols + 1);
     tmp[panel->widget.cols] = '\0';
 
+#ifdef HAVE_CHARSET
+     my_translate_string(panel->cwd,strlen(panel->cwd),recode_buf, panel->tr_table);
+     trim (strip_home_and_password (recode_buf), tmp,
+     min (max (panel->widget.cols - 7, 0), panel->widget.cols) );
+ #else
     trim (strip_home_and_password (panel->cwd), tmp,
 	 max (panel->widget.cols - 9, 0));
+#endif
+
     addstr (tmp);
     g_free (tmp);
 
@@ -1111,6 +1137,17 @@ panel_new (const char *panel_name)
 
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
     strcpy (panel->lwd, ".");
+
+#ifdef HAVE_CHARSET
+    panel_reset_codepage(panel);
+#endif
+
+#ifdef USE_VFS
+    panel->is_return=0;
+ #ifdef HAVE_CHARSET
+    panel->ret_codepage=-1;
+ #endif
+#endif
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
     panel->dir_history = history_get (panel->hist_name);
@@ -1490,7 +1527,7 @@ use_display_format (WPanel *panel, const char *format, char **error, int isstatu
     panel->dirty = 1;
 
     /* Status needn't to be split */
-    usable_columns = ((panel->widget.cols-2)/((isstatus)
+    usable_columns = ((panel->widget.cols-3)/((isstatus)
 					      ? 1
 					      : (panel->split+1))) - (!isstatus && panel->split);
 
@@ -2313,7 +2350,12 @@ static const panel_key_map panel_keymap [] = {
     { XCTRL('n'), move_down },		/* C-n like emacs */
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
+#ifndef HAVE_CHARSET
     { XCTRL('t'), mark_file },
+#endif
+#ifdef HAVE_CHARSET
+    { XCTRL('t'), mark_file },		/* was 'fnc_c_cmd' */
+#endif
     { ALT('o'),   chdir_other_panel },
     { ALT('i'),   sync_other_panel },
     { ALT('l'),   chdir_to_readlink },

@@ -81,6 +81,7 @@
 
 #ifdef	HAVE_CHARSET
 #include "charsets.h"
+#include "recode.h"
 #endif				/* HAVE_CHARSET */
 
 #ifdef USE_VFS
@@ -97,6 +98,7 @@
 /* The structures for the panels */
 WPanel *left_panel = NULL;
 WPanel *right_panel = NULL;
+WPanel* ret_panel=NULL;
 
 /* The pointer to the tree */
 WTree *the_tree = NULL;
@@ -589,6 +591,7 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     }
     directory = *new_dir ? new_dir : home_dir;
 
+    ret_panel=panel;
     if (mc_chdir (directory) == -1) {
 	strcpy (panel->cwd, olddir);
 	g_free (olddir);
@@ -810,6 +813,10 @@ static menu_entry LeftMenu[] = {
     {' ', N_("&Quick view     C-x q"), 'Q', quick_view_cmd},
     {' ', N_("&Info           C-x i"), 'I', info_cmd},
     {' ', N_("&Tree"), 'T', tree_cmd},
+#ifdef HAVE_CHARSET
+    {' ', "", ' ', 0},
+    {' ', N_("Panel &codepage"), 'C', fnc_l_cmd},
+#endif
     {' ', "", ' ', 0},
     {' ', N_("&Sort order..."), 'S', sort_cmd},
     {' ', "", ' ', 0},
@@ -834,6 +841,10 @@ static menu_entry RightMenu[] = {
     {' ', N_("&Quick view     C-x q"), 'Q', quick_view_cmd},
     {' ', N_("&Info           C-x i"), 'I', info_cmd},
     {' ', N_("&Tree"), 'T', tree_cmd},
+#ifdef HAVE_CHARSET
+    {' ', "", ' ', 0},
+    {' ', N_("Panel &codepage"), 'C', fnc_r_cmd},
+#endif
     {' ', "", ' ', 0},
     {' ', N_("&Sort order..."), 'S', sort_cmd},
     {' ', "", ' ', 0},

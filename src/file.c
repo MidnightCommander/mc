@@ -75,6 +75,9 @@
 #include "../vfs/vfs-impl.h"
 
 /* }}} */
+#ifdef HAVE_CHARSET
+#include "recode.h"
+#endif
 
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
@@ -932,7 +935,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	}
 	/* Dive into subdir if exists */
 	if (toplevel && ctx->dive_into_subdirs) {
-	    dest_dir = concat_dir_and_file (d, x_basename (s));
+#ifdef HAVE_CHARSET
+            dest_dir = concat_dir_and_recoded_fname(d, x_basename (s), ctx);
+#else
+	    dest_dir = mhl_str_dir_plus_file (d, x_basename (s));
+#endif
 	} else {
 	    dest_dir = g_strdup (d);
 	    goto dont_mkdir;
@@ -982,7 +989,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
 	(*ctx->stat_func) (path, &buf);
 	if (S_ISDIR (buf.st_mode)) {
+#ifdef HAVE_CHARSET
+            mdpath = concat_dir_and_recoded_fname(dest_dir, next->d_name, ctx);
+#else
 	    mdpath = concat_dir_and_file (dest_dir, next->d_name);
+#endif
 	    /*
 	     * From here, we just intend to recursively copy subdirs, not
 	     * the double functionality of copying different when the target
@@ -993,7 +1004,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
+#ifdef HAVE_CHARSET
+            dest_file=concat_dir_and_recoded_fname(dest_dir, x_basename(path),ctx);
+#else
 	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+#endif
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
 	    g_free (dest_file);
@@ -1174,7 +1189,28 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	destdir = g_strdup (d);
 	move_over = TRUE;
     } else
+#ifdef HAVE_CHARSET
+        destdir = concat_dir_and_recoded_fname(d, x_basename (s), ctx);
+#else
 	destdir = concat_dir_and_file (d, x_basename (s));
+#endif
+    if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino) {
+	int msize = COLS - 36;
+	char st[MC_MAXPATHLEN];
+	char dt[MC_MAXPATHLEN];
+
+	if (msize < 0)
+	    msize = 40;
+	msize /= 2;
+
+	strcpy (st, path_trunc (s, msize));
+	strcpy (dt, path_trunc (d, msize));
+	message (1, MSG_ERROR,
+		    _(" `%s' and `%s' are the same directory "), st, dt);
+	do_refresh ();
+	return FILE_SKIP;
+    }
+
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
     if (!mc_stat (destdir, &destbuf)) {
@@ -1885,7 +1921,11 @@ panel_operate (void *source_panel, FileOperation operation,
 	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
+#ifdef HAVE_CHARSET
+                char *temp2 = concat_dir_and_recoded_fname (dest, temp, ctx);
+#else
 		char *temp2 = concat_dir_and_file (dest, temp);
+#endif
 		g_free (dest);
 		dest = temp2;
 		temp = NULL;
@@ -1979,8 +2019,11 @@ panel_operate (void *source_panel, FileOperation operation,
 		if (temp == NULL)
 		    value = transform_error;
 		else {
+#ifdef HAVE_CHARSET
+                    char *temp2 = concat_dir_and_recoded_fname(dest, temp, ctx);
+#else
 		    char *temp2 = concat_dir_and_file (dest, temp);
-
+#endif
 		    source_with_path = shell_unescape(source_with_path);
 		    temp2 = shell_unescape(temp2);
 

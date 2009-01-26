@@ -41,7 +41,8 @@ endif
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
 	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV)
 
-CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
+CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h	\
+	 recode.c recode.h
 
 SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
@@ -58,7 +59,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	menu.c menu.h mountlist.c mountlist.h mouse.c mouse.h myslang.h	\
 	option.c option.h panel.h panelize.c panelize.h poptalloca.h	\
 	popt.c poptconfig.c popt.h popthelp.c poptint.h poptparse.c	\
-	profile.c profile.h regex.c rxvt.c screen.c setup.c setup.h	\
+	profile.c profile.h regex.c rxvt.c screen.c screen.h setup.c setup.h	\
 	slint.c	subshell.c subshell.h textconf.c textconf.h		\
 	tree.c tree.h treestore.c treestore.h timefmt.h tty.c tty.h user.c	\
 	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\

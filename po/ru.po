@@ -3657,5 +3657,30 @@ msgstr "Изменения для файла потеряны"
 #~ " теперь хранятся в каталоге ~/.mc, старые \n"
 #~ " файлы сейчас туда перемещены\n"
 
-#~ msgid "%s bytes in %d files"
-#~ msgstr "%s байт в %d файлах"
+#: messages for recode patch
+msgid "Panel &codepage"
+msgstr "Кодировка панели"
+
+msgid " Choose codepage "
+msgstr " Выберите кодировку"
+
+msgid " Choose panel codepage "
+msgstr " Выберите кодировку панели "
+
+msgid " Choose default FTP codepage "
+msgstr " Выберите кодировку FTP по умолчанию "
+
+msgid "FTP default codepage:"
+msgstr "Кодировка FTP по умолчанию:"
+
+msgid "Recode file names:"
+msgstr "Перекодировать имена:"
+
+msgid "Recoding works only with COPY/MOVE operation"
+msgstr "Перекодировка работает только для операций копирования/перемещения"
+
+msgid " Choose \"FROM\" codepage for COPY/MOVE operaion "
+msgstr" Выберите начальную кодировку для операции копирования/перемещения "
+
+msgid " Choose \"TO\" codepage for COPY/MOVE operaion "
+msgstr" Выберите конечную кодировку для операции копирования/перемещения "

@@ -45,14 +45,16 @@ get_hotkey (int n)
 }
 
 int
-select_charset (int current_charset, int seldisplay)
+select_charset (int current_charset, int seldisplay, const char *title)
 {
+    int new_charset;
+
     int i, menu_lines = n_codepages + 1;
     char buffer[255];
 
     /* Create listbox */
     Listbox *listbox = create_listbox_window (ENTRY_LEN + 2, menu_lines,
-					      _(" Choose input codepage "),
+                                              title,
 					      "[Codepages Translation]");
 
     if (!seldisplay)
@@ -82,20 +84,26 @@ select_charset (int current_charset, int seldisplay)
 
     i = run_listbox (listbox);
 
-    return (seldisplay) ? ((i >= n_codepages) ? -1 : i)
-	: (i - 1);
+    if(i==-1)
+      i = (seldisplay)
+          ? ((current_charset < 0) ? n_codepages : current_charset)
+          : (current_charset + 1);
+
+    new_charset =(seldisplay) ? ( (i >= n_codepages) ? -1 : i ) : ( i-1 );
+    new_charset = (new_charset==-2) ? current_charset:new_charset;
+    return new_charset;
 }
 
 /* Helper functions for codepages support */
 
 
 int
-do_select_codepage (void)
+do_select_codepage (const char *title)
 {
     const char *errmsg;
 
     if (display_codepage > 0) {
-	source_codepage = select_charset (source_codepage, 0);
+	source_codepage = select_charset (source_codepage, 0, title);
 	errmsg =
 	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg) {
