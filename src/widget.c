@@ -1489,7 +1489,6 @@ key_ctrl_right (WInput *in)
 static void
 backward_delete (WInput *in)
 {
-    int i;
     
     if (!in->point)
 	return;

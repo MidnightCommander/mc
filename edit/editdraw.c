@@ -307,7 +307,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     struct line_s *p = line;
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
-    mc_wint_c c;
+    mc_wint_t c;
     int color;
     int i;
 

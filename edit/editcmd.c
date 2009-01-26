@@ -95,15 +95,6 @@ static inline mc_wchar_t my_lower_case (mc_wchar_t c)
 #endif
 }
 
-static const char *
-strcasechr (const char *s, int c)
-{
-    for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
-	if (*s == '\0')
-	    return 0;
-    return s;
-}
-
 #ifndef HAVE_MEMMOVE
 /* for Christophe */
 static void *memmove (void *dest, const void *src, size_t n)
