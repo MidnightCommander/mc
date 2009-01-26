@@ -276,6 +276,9 @@ int midnight_shutdown = 0;
 /* The user's shell */
 const char *shell = NULL;
 
+/* Is the LANG UTF-8 ? */
+gboolean is_utf8 = FALSE;
+
 /* mc_home: The home of MC */
 char *mc_home = NULL;
 
@@ -2126,6 +2129,16 @@ handle_args (int argc, char *argv[])
 int
 main (int argc, char *argv[])
 {
+    /* Check whether we have UTF-8 locale */
+    char *lang = getenv("LANG");
+    size_t len = 0;
+
+    if ( lang )
+	len = strlen(lang);
+
+    if ( len >= 5 && !strcasecmp(&lang[len-5],"UTF-8") )
+    is_utf8 = TRUE;
+
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
