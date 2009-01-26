@@ -123,8 +123,6 @@ free_codepages_list (void)
     }
 }
 
-#define OTHER_8BIT "Other_8_bit"
-
 const char *
 get_codepage_id (int n)
 {
@@ -143,7 +141,7 @@ get_codepage_index (const char *id)
     return -1;
 }
 
-static char
+char
 translate_character (iconv_t cd, char c)
 {
     char outbuf[4], *obuf;

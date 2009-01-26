@@ -26,8 +26,12 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "fileopctx.h"
 
+#ifdef HAVE_CHARSET
+#include "recode.h"
+#endif
+
+#include "fileopctx.h"
 
 /**
  * file_op_context_new:
@@ -53,6 +57,12 @@ file_op_context_new (FileOperation op)
     ctx->preserve_uidgid = (geteuid () == 0) ? TRUE : FALSE;
     ctx->umask_kill = 0777777;
     ctx->erase_at_end = TRUE;
+
+#ifdef HAVE_CHARSET
+    ctx->from_codepage=-1;
+    ctx->to_codepage=-1;
+    my_reset_tt(ctx->tr_table,256);
+#endif
 
     return ctx;
 }

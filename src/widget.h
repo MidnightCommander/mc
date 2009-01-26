@@ -187,6 +187,10 @@ void button_set_text (WButton *b, const char *text);
 /* Listbox manager */
 WLEntry *listbox_get_data (WListbox *l, int pos);
 
+/* Vertical scrollbar */
+void vscrollbar (Widget widget, int height, int width, int tpad, int bpad,
+		int selected, int count, gboolean color);
+
 /* search text int listbox entries */
 WLEntry *listbox_search_text (WListbox *l, const char *text);
 void listbox_select_entry (WListbox *l, WLEntry *dest);

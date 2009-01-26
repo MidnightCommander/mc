@@ -69,6 +69,7 @@ extern int alternate_plus_minus;
 extern int only_leading_plus_minus;
 extern int output_starts_shell;
 extern int midnight_shutdown;
+extern gboolean is_utf8;
 extern char cmd_buf [512];
 extern const char *shell;
 

@@ -6,6 +6,7 @@
 #define UNKNCHAR '\001'
 
 #define CHARSETS_INDEX "mc.charsets"
+#define OTHER_8BIT "Other_8_bit"
 
 extern int n_codepages;
 
@@ -18,6 +19,10 @@ struct codepage_desc {
 };
 
 extern struct codepage_desc *codepages;
+
+#include <iconv.h>
+extern char translate_character(iconv_t cd, char c);
+extern char errbuf[255];
 
 const char *get_codepage_id (int n);
 int get_codepage_index (const char *id);

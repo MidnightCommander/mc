@@ -72,6 +72,19 @@ typedef struct WPanel {
 
     int      searching;
     char     search_buffer [256];
+
+#ifdef HAVE_CHARSET
+    int src_codepage;
+    unsigned char tr_table[256], tr_table_input[256];
+#endif
+
+#ifdef USE_VFS
+ #ifdef HAVE_CHARSET
+    int ret_codepage;
+ #endif
+    int  is_return;
+    char retdir[MC_MAXPATHLEN];
+#endif
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);
@@ -97,6 +110,7 @@ int set_panel_formats (WPanel *p);
 extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;
+extern WPanel* ret_panel;
 
 void try_to_select (WPanel *panel, const char *name);
 

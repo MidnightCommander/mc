@@ -108,6 +108,14 @@ typedef struct FileOpContext {
 	/* User interface data goes here */
 
 	void *ui;
+
+#ifdef HAVE_CHARSET
+       /* Recode data */
+       int from_codepage, to_codepage;
+       unsigned char tr_table[256];
+       unsigned char recode_buf[MC_MAXPATHLEN];
+#endif
+
 } FileOpContext;
 
 

@@ -73,6 +73,10 @@
 #   include "../edit/edit.h"
 #endif
 
+#ifdef HAVE_CHARSET
+#include "recode.h"
+#endif
+
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
 
@@ -353,6 +357,9 @@ void
 mkdir_cmd (void)
 {
     char *dir, *absdir;
+#ifdef HAVE_CHARSET
+    char *recoded_dir;
+#endif
 
     dir =
 	input_expand_dialog (_("Create a new Directory"),
@@ -363,8 +370,16 @@ mkdir_cmd (void)
 
     if (dir[0] == '/' || dir[0] == '~')
 	absdir = g_strdup (dir);
-    else
-	absdir = mhl_str_dir_plus_file (current_panel->cwd, dir);
+    else {
+#ifdef HAVE_CHARSET
+        recoded_dir=g_strdup(dir);
+        my_translate_string(dir,strlen(dir), recoded_dir,current_panel->tr_table_input);
+        absdir = mhl_str_dir_plus_file (current_panel->cwd, recoded_dir);
+        g_free(recoded_dir);
+#else
+	absdir = concat_dir_and_file (current_panel->cwd, dir);
+#endif
+    }
 
     save_cwds_stat ();
     if (my_mkdir (absdir, 0777) == 0) {

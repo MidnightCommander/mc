@@ -53,6 +53,7 @@
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #include "selcodepage.h"
+#include "recode.h"
 #endif
 
 #ifdef USE_NETCODE
@@ -459,8 +460,8 @@ confirm_box (void)
     }
 }
 
-#define DISPY 11
-#define DISPX 46
+#define DISPY 13
+#define DISPX 35
 
 
 #ifndef HAVE_CHARSET
@@ -556,23 +557,58 @@ display_bits_box (void)
 
 
 static int new_display_codepage;
+static int new_ftp_codepage;
 
-static WLabel *cplabel;
 static WCheck *inpcheck;
+
+static WButton *cpbutton;
+static WButton *cpbutton_ftp;
 
 static int
 sel_charset_button (int action)
 {
     const char *cpname;
     char buf[64];
-    new_display_codepage = select_charset (new_display_codepage, 1);
+    new_display_codepage = select_charset (new_display_codepage, 1, _(" Choose input codepage "));
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
 	: codepages[new_display_codepage].name;
 
     /* avoid strange bug with label repainting */
-    g_snprintf (buf, sizeof (buf), "%-27s", cpname);
-    label_set_text (cplabel, buf);
+    sprintf( buf, "%s", cpname );
+    button_set_text (cpbutton, buf);
+
+    if(new_display_codepage<0)  new_ftp_codepage=-1;
+    cpname = (new_ftp_codepage < 0)
+             ? _("Other 8 bit")
+             : codepages[ new_ftp_codepage ].name;
+    sprintf( buf, "%s", cpname );
+    button_set_text (cpbutton_ftp, buf);
+
+    return 0;
+}
+
+static int sel_charset_button_ftp(int action) {
+  char *cpname, buf[64];
+  if(new_display_codepage>0) {
+    new_ftp_codepage = select_charset(new_ftp_codepage, 0, _(" Choose default FTP codepage "));
+    cpname = (new_display_codepage < 0)
+             ? _("Other 8 bit")
+             : codepages[ new_display_codepage ].name;
+    sprintf( buf, "%s", cpname );
+    button_set_text( cpbutton, buf );
+    cpname = (new_ftp_codepage < 0)
+             ? _("Other 8 bit")
+             : codepages[ new_ftp_codepage ].name;
+    sprintf( buf, "%s", cpname );
+    button_set_text( cpbutton_ftp, buf );
+  }
+  else {
+    message( 1, _(" Warning "),
+                _("To use this feature select your codepage in\n"
+                  "Setup / Display Bits dialog!\n"
+                 "Do not forget to save options." ));
+  }
     return 0;
 }
 
@@ -594,9 +630,6 @@ init_disp_bits_box (void)
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
 	: codepages[new_display_codepage].name;
-    cplabel = label_new (4, 4, cpname);
-    add_widget (dbits_dlg, cplabel);
-
     add_widget (dbits_dlg,
 		button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL,
 			    NORMAL_BUTTON, _("&Cancel"), 0));
@@ -605,13 +638,30 @@ init_disp_bits_box (void)
 			    0));
 
     inpcheck =
-	check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
+	check_new (8, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
     add_widget (dbits_dlg, inpcheck);
 
-    cpname = _("&Select");
-    add_widget (dbits_dlg,
-		button_new (4, DISPX - 8 - mbstrlen (cpname), B_USER,
-			    NORMAL_BUTTON, cpname, sel_charset_button));
+
+    add_widget( dbits_dlg, label_new( 5, 4, _("FTP default codepage:")));
+    if(n_codepages>0) {
+      cpname = (new_display_codepage < 0)
+               ? _("Other 8 bit")
+               : codepages[ new_display_codepage ].name;
+    }
+    else cpname= _("Other 8 bit");
+    cpbutton=button_new(4, 5, B_USER,
+                       NORMAL_BUTTON, cpname, sel_charset_button);
+
+    if(n_codepages>0) {
+      cpname = (new_ftp_codepage < 0)
+               ? _("Other 8 bit")
+               : codepages[ new_ftp_codepage ].name;
+    }
+    else cpname= _("Other 8 bit");
+    cpbutton_ftp=button_new(6, 5, B_USER,
+                            NORMAL_BUTTON, cpname, sel_charset_button_ftp);
+    add_widget( dbits_dlg, cpbutton_ftp);
+    add_widget (dbits_dlg, cpbutton);
 
     return dbits_dlg;
 }
@@ -621,6 +671,7 @@ display_bits_box (void)
 {
     Dlg_head *dbits_dlg;
     new_display_codepage = display_codepage;
+    new_ftp_codepage = ftp_codepage;
 
     application_keypad_mode ();
     dbits_dlg = init_disp_bits_box ();
@@ -641,6 +692,17 @@ display_bits_box (void)
 				   && display_codepage != 1) ? 128 : 160;
 #endif
 	use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
+
+        ftp_codepage=new_ftp_codepage;
+        if(display_codepage<=0) {
+          panel_reset_codepage(left_panel);
+          paint_dir(left_panel);
+          display_mini_info(left_panel);
+          panel_reset_codepage(right_panel);
+          paint_dir(right_panel);
+          display_mini_info(right_panel);
+        }
+
     }
     destroy_dlg (dbits_dlg);
     repaint_screen ();
