@@ -1617,6 +1617,8 @@ update_xterm_title_path (void)
 	    if (!is_printable ((unsigned char) *s))
 		*s = '?';
 	} while (*++s);
+	if (!alternate_plus_minus)
+	    numeric_keypad_mode ();
 	fprintf (stdout, "\33]0;mc - %s\7", p);
 	fflush (stdout);
 	g_free (p);
