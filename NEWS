@@ -1,3 +1,43 @@
+Version 4.6.2
+
+- MC Core
+	- Changed HQ url to point to new website
+	  www.midnight-commander.org
+	- Added a micro helper library in order to go slowly
+	  avay from glib
+	- Use static strings as section entries in ~/.mc/history
+	  WARNING!: This will break old files
+	- Fixed a repaint issue when clicking on the "View" Button instead
+	  of using F3
+	- Removed obsolete autoconf macros
+	- Fix escaping for command line completion
+	- prevend mc from segfaulting when getting invalid timestamps on files
+	- Fixed a keybord issue when running mc via a putty console
+	- setted pty fd to closeonexec (on subshell)
+
+- Editor
+	- Syntax highlighting for:
+	  + debian files (debian/changelog, debian/control, debian/copyright, ..)
+	  + updated sh syntax highlighting
+	  + updated pascal syntax highlighting
+	  + differentiate between c and cpp files for highlighting
+	- Removed some unneeded variables
+	- Do use a ro test if a file exists
+	- Fixes some missbehaviour in regex matching
+	  + start at front of line and not on cursor position
+	  + . shouldn't match a newline
+
+- VFS
+	- Fix some bashisms in some extfs scripts
+	- Fixed various problems with symlinks and files with chars which needs
+	  escaping over fish
+	- Added 7zip extfs descriptor
+
+- Locale
+	- Updated german translation
+	- New Belarussian translation
+	- Updated russian translation
+
 Version 4.6.2-pre1.
 
 - Editor.

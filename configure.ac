@@ -7,7 +7,7 @@ AC_PREREQ(2.54)
 m4_pattern_forbid(MC_)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
-AM_INIT_AUTOMAKE(mc, 4.6.2-pre1)
+AM_INIT_AUTOMAKE(mc, 4.6.2)
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE

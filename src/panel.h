@@ -49,6 +49,7 @@ typedef struct WPanel {
     int      selected;		/* Index to the selected file */
     int      reverse;		/* Show listing in reverse? */
     int      case_sensitive;    /* Listing is case sensitive? */
+    int      exec_first;	/* Show executable top in list? */
     int      split;		/* Split panel to allow two columns */
     int      is_panelized;	/* Flag: special filelisting, can't reload */
     int      frame_size;	/* half or full frame */

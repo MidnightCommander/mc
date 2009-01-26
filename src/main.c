@@ -609,7 +609,8 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     panel_clean_dir (panel);
     panel->count =
 	do_load_dir (panel->cwd, &panel->dir, panel->sort_type,
-		     panel->reverse, panel->case_sensitive, panel->filter);
+		     panel->reverse, panel->case_sensitive,
+		     panel->exec_first, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
     load_hint (0);
     panel->dirty = 1;
@@ -759,7 +760,9 @@ sort_cmd (void)
 	return;
 
     p = MENU_PANEL;
-    sort_order = sort_box (p->sort_type, &p->reverse, &p->case_sensitive);
+    sort_order = sort_box (p->sort_type, &p->reverse,
+			   &p->case_sensitive,
+			   &p->exec_first);
 
     panel_set_sort_order (p, sort_order);
 

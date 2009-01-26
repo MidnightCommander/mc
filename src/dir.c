@@ -46,7 +46,10 @@ static int reverse = 1;
 /* Are the files sorted case sensitively? */
 static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 
-#define MY_ISDIR(x) ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 1 : 0)
+/* Are the exec_bit files top in list*/
+static int exec_first = 1;
+
+#define MY_ISDIR(x) ( (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || x->f.link_to_dir) && (exec_first == 1)) ? 1 : ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 2 : 0) )
 
 sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Unsorted"),    unsorted },
@@ -226,7 +229,7 @@ sort_size (const file_entry *a, const file_entry *b)
 
 
 void
-do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitive_f)
+do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitive_f, int exec_first_f)
 {
     int dot_dot_found = 0;
 
@@ -240,6 +243,7 @@ do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitiv
 
     reverse = reverse_f ? -1 : 1;
     case_sensitive = case_sensitive_f;
+    exec_first = exec_first_f;
     qsort (&(list->list) [dot_dot_found],
 	   top + 1 - dot_dot_found, sizeof (file_entry), sort);
 }
@@ -382,7 +386,7 @@ handle_path (dir_list *list, const char *path,
 
 int
 do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
-	     int case_sensitive, const char *filter)
+	     int case_sensitive, int exec_ff, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -428,7 +432,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
     }
 
     if (next_free) {
-	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
+	do_sort (list, sort, next_free - 1, reverse, case_sensitive, exec_ff);
     }
 
     mc_closedir (dirp);
@@ -484,7 +488,7 @@ alloc_dir_copy (int size)
 /* If filter is null, then it is a match */
 int
 do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
-	       int rev, int case_sensitive, const char *filter)
+	       int rev, int case_sensitive, int exec_ff, const char *filter)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -581,7 +585,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
     if (next_free) {
-	do_sort (list, sort, next_free - 1, rev, case_sensitive);
+	do_sort (list, sort, next_free - 1, rev, case_sensitive, exec_ff);
     }
     clean_dir (&dir_copy, count);
     return next_free;

@@ -266,22 +266,23 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     return result;
 }
 
-static int SORT_X = 40, SORT_Y = 14;
+static int SORT_X = 60, SORT_Y = 14;
 
 static const char *sort_orders_names [SORT_TYPES];
 
 sortfn *
-sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
+sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 {
     int i, r, l;
     sortfn *result;
-    WCheck *c, *case_sense;
+    WCheck *c, *case_sense, *exec_ff;
 
     const char *ok_button = _("&OK");
     const char *cancel_button = _("&Cancel");
     const char *reverse_label = _("&Reverse");
     const char *case_label = _("case sensi&tive");
     const char *sort_title = _("Sort order");
+    const char *exec_label = _("Executable first");
 
     static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
 
@@ -339,6 +340,8 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON,
 			    ok_button, 0));
 
+    exec_ff = check_new (5, check_pos, *exec_first, exec_label);
+    add_widget (dd, exec_ff);
     case_sense = check_new (4, check_pos, *case_sensitive, case_label);
     add_widget (dd, case_sense);
     c = check_new (3, check_pos, *reverse, reverse_label);
@@ -355,6 +358,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 	result = (sortfn *) sort_orders[my_radio->sel].sort_fn;
 	*reverse = c->state & C_BOOL;
 	*case_sensitive = case_sense->state & C_BOOL;
+	*exec_first = exec_ff->state & C_BOOL;
     } else
 	result = sort_fn;
     destroy_dlg (dd);
