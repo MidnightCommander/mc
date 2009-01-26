@@ -216,13 +216,22 @@ static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     {
-	const char *argv[10];
+	char gbuf[10];
+	const char *argv[10];	/* All of 10 is used now */
 	const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
 	int i = 0;
 
 	argv[i++] = xsh;
 	if (SUP.flags == FISH_FLAG_COMPRESSED)
 	    argv[i++] = "-C";
+
+	if (SUP.flags > FISH_FLAG_RSH)
+	{
+	    argv[i++] = "-p";
+	    g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
+	    argv[i++] = gbuf;
+	}
+
 	argv[i++] = "-l";
 	argv[i++] = SUP.user;
 	argv[i++] = SUP.host;
@@ -320,7 +329,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP.user = user;
     SUP.flags = flags;
     if (!strncmp (op, "rsh:", 4))
-	SUP.flags |= FISH_FLAG_RSH;
+	SUP.flags = FISH_FLAG_RSH;
     SUP.cwdir = NULL;
     if (password)
 	SUP.password = password;
@@ -1056,22 +1065,28 @@ static void
 fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct vfs_s_super *super = MEDATA->supers;
-    const char *flags;
     char *name;
-    
-    while (super){
-	switch (SUP.flags & (FISH_FLAG_RSH | FISH_FLAG_COMPRESSED)) {
-	case FISH_FLAG_RSH:
+
+    char gbuf[10];
+
+    while (super)
+    {
+	const char *flags = "";
+	switch (SUP.flags)
+	{
+	    case FISH_FLAG_RSH:
 		flags = ":r";
 		break;
-	case FISH_FLAG_COMPRESSED:
+	    case FISH_FLAG_COMPRESSED:
 		flags = ":C";
 		break;
-	case FISH_FLAG_RSH | FISH_FLAG_COMPRESSED:
-		flags = "";
-		break;
-	default:
-		flags = "";
+	    default:
+		if (SUP.flags > FISH_FLAG_RSH)
+		{
+		    break;
+		    g_snprintf (gbuf, sizeof (gbuf), ":%d", SUP.flags);
+		    flags = gbuf;
+		}
 		break;
 	}
 
