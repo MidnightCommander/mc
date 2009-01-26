@@ -64,13 +64,6 @@
 	* AUTHORS: Added Enrico Weigelt, Slava Zanko and 
 	Patrick Winnertz as authors 
 
-2009-01-11 Enrico Weigelt, metux ITS <weigelt@metux.de>
-
-	* FAQ HACKING README man/*: new HQ url
-	* syntax/awk.syntax: added awk syntax file
-	* configure.ac: replaced obsolete autoconf macros AC_GNU_SOURCE 
-	  AC_AIX AC_MINIX by AC_USE_SYSTEM_EXTENSIONS
-
 2009-01-11 Patrick Winnertz <winnie@debian.org>
 
 	* po/de.po: Fix some spelling errors
