@@ -1065,7 +1065,7 @@ file_date (time_t when)
     else
 	fmt = fmttime;
     
-    FMT_LOCALTIME(timebuf, i18n_timelength, fmt, when);
+    FMT_LOCALTIME(timebuf, sizeof(timebuf), fmt, when);
 
     return timebuf;
 }
