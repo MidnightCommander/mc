@@ -44,6 +44,10 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#ifdef UTF8
+#include <wctype.h>
+#endif /* UTF8 */
+
 #include "global.h"
 #include "tty.h"
 #include "cmd.h"		/* For view_other_cmd */
@@ -1643,7 +1647,7 @@ view_display_status (WView *view)
     hline (' ', width);
 
     file_label = _("File: %s");
-    file_label_width = strlen (file_label) - 2;
+    file_label_width = mbstrlen (file_label) - 2;
     file_name = view->filename ? view->filename
 	: view->command ? view->command
 	: "";
@@ -1911,6 +1915,12 @@ view_display_text (WView * view)
     offset_type from;
     int c;
     struct hexedit_change_node *curr = view->change_list;
+#ifdef UTF8
+    mbstate_t mbs;
+    char mbbuf[MB_LEN_MAX];
+    int mblen;
+    wchar_t wc;
+#endif /* UTF8 */
 
     view_display_clean (view);
     view_display_ruler (view);
@@ -1923,8 +1933,37 @@ view_display_text (WView * view)
 
     tty_setcolor (NORMAL_COLOR);
     for (row = 0, col = 0; row < height && (c = get_byte (view, from)) != -1; from++) {
-
+#ifndef UTF8
 	if (view->text_nroff_mode && c == '\b') {
+#else /* UTF8 */
+	    mblen = 1;
+	    mbbuf[0] = convert_to_display_c (c);
+
+	    while (mblen < MB_LEN_MAX) {
+		int res;
+		memset (&mbs, 0, sizeof (mbs));
+		res = mbrtowc (&wc, mbbuf, mblen, &mbs);
+		if (res <= 0 && res != -2) {
+		    wc = '.';
+		    mblen = 1;
+		    break;
+		}
+		if (res == mblen)
+		    break;
+
+		mbbuf[mblen] = convert_to_display_c (get_byte (view, from + mblen));
+		mblen++;
+	    }
+
+	    if (mblen == MB_LEN_MAX) {
+		wc = '.';
+		mblen = 1;
+	    }
+
+	    from += mblen - 1;
+
+	    if (view->text_nroff_mode && wc == '\b') {
+#endif /* UTF8 */
 	    int c_prev;
 	    int c_next;
 
@@ -1989,10 +2028,17 @@ view_display_text (WView * view)
 	if (col >= view->dpy_text_column
 	    && col - view->dpy_text_column < width) {
 	    widget_move (view, top + row, left + (col - view->dpy_text_column));
+#ifndef UTF8
 	    c = convert_to_display_c (c);
 	    if (!is_printable (c))
 		c = '.';
 	    tty_print_char (c);
+#else
+	    wc = convert_to_display_c (wc);
+	    if (!iswprint (wc))
+		wc = '.';
+	    tty_print_char (wc);
+#endif
 	}
 	col++;
 	tty_setcolor (NORMAL_COLOR);

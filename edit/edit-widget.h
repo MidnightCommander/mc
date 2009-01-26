@@ -30,6 +30,11 @@ typedef struct edit_key_map_type {
     long command;
 } edit_key_map_type;
 
+struct action {
+    mc_wchar_t ch;
+    long flags;
+};
+
 struct WEdit {
     Widget widget;
 
@@ -42,8 +47,17 @@ struct WEdit {
     /* dynamic buffers and cursor position for editor: */
     long curs1;			/* position of the cursor from the beginning of the file. */
     long curs2;			/* position from the end of the file */
+#ifndef UTF8
     unsigned char *buffers1[MAXBUFF + 1];	/* all data up to curs1 */
     unsigned char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
+#else /* UTF8 */
+    mc_wchar_t *buffers1[MAXBUFF + 1];        /* all data up to curs1 */
+    mc_wchar_t *buffers2[MAXBUFF + 1];        /* all data from end of file down to curs2 */
+
+    unsigned char charbuf[MB_LEN_MAX];
+    int charpoint;
+#endif /* UTF8 */
+
 
     /* search variables */
     long search_start;		/* First character to start searching from */
@@ -87,7 +101,7 @@ struct WEdit {
 
     /* undo stack and pointers */
     unsigned long stack_pointer;
-    long *undo_stack;
+    struct action *undo_stack;
     unsigned long stack_size;
     unsigned long stack_size_mask;
     unsigned long stack_bottom;

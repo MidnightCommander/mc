@@ -19,7 +19,7 @@
 	}								\
 	else								\
 	{								\
-	    strftime(buffer, bufsize, fmt, whentm);			\
+	    strftime(buffer, sizeof(buffer) -1, fmt, whentm);			\
 	}								\
     }									\
 

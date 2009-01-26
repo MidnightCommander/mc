@@ -399,14 +399,14 @@ AC_DEFUN([MC_WITH_SLANG], [
     fi
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
-    if test x$with_screen = xslang; then
-	:
-	m4_if([$1], strict, ,
-	      [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
-	    		    [AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
-it's not fully supported yet])
-	      with_screen=mcslang])])
-    fi
+dnl    if test x$with_screen = xslang; then
+dnl	:
+dnl	m4_if([$1], strict, ,
+dnl	      [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
+dnl	    		    [AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
+dnl it's not fully supported yet])
+dnl	      with_screen=mcslang])])
+dnl    fi
 
     if test x$with_screen = xslang; then
 	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,

@@ -34,7 +34,12 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <iconv.h>
+#include <langinfo.h>
+#include <errno.h>
 
+
+#include "tty.h"
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */
@@ -47,8 +52,38 @@
 #include "charsets.h"
 #endif
 
+#ifdef UTF8
+#include <wctype.h>
+#endif
+
 static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
+
+#if SLANG_VERSION >= 20000
+void SLsmg_write_nwchars(wchar_t *s, size_t n)
+{
+    if (SLsmg_is_utf8_mode()) { /* slang can handle it directly */
+	while(n-- && *s)
+	    SLsmg_write_char(*s++);
+    }
+    else { /* convert wchars back to 8bit encoding */
+       mbstate_t mbs;
+	memset (&mbs, 0, sizeof (mbs));
+	while (n-- && *s) {
+	    char buf[MB_LEN_MAX + 1]; /* should use 1 char, but to be sure */
+	    if (*s < 0x80) {
+		SLsmg_write_char(*s++); /* ASCII */
+	    }
+	    else {
+		if (wcrtomb(buf, *s++, &mbs) == 1)
+		    SLsmg_write_char((wchar_t)(buf[0]));
+		else
+		    SLsmg_write_char('?'); /* should not happen */
+	    }
+	}
+    }
+}
+#endif
 
 extern void str_replace(char *s, char from, char to)
 {
@@ -80,9 +115,106 @@ is_8bit_printable (unsigned char c)
     return (c > 31 && c != 127 && c != 155);
 }
 
+size_t
+mbstrlen (const char *str)
+{
+#ifdef UTF8
+    if (SLsmg_Is_Unicode) {
+        size_t width = 0;
+
+        for (; *str; str++) {
+            wchar_t c;
+            size_t len;
+
+            len = mbrtowc (&c, str, MB_CUR_MAX, NULL);
+
+            if (len == (size_t)(-1) || len == (size_t)(-2)) break;
+
+            if (len > 0) {
+                int wcsize = wcwidth(c);
+                width += wcsize > 0 ? wcsize : 0;
+                str += len-1;
+            }
+        }
+
+        return width;
+    } else
+#endif
+	return strlen (str);
+}
+
+#ifdef UTF8
+
+void
+fix_utf8(char *str)
+{
+    mbstate_t mbs;
+
+    char *p = str;
+
+    while (*p) {
+	int len;
+        memset (&mbs, 0, sizeof (mbs));
+	len = mbrlen(p, MB_CUR_MAX, &mbs);
+	if (len == -1) {
+	    *p = '?';
+	    p++;
+	} else if (len > 0) {
+	    p += len;
+	} else {
+	    p++;
+	}
+    }
+}
+#endif
+
+
+
+#ifdef UTF8
+wchar_t *
+mbstr_to_wchar (const char *str)
+{
+    int len = mbstrlen(str);
+    wchar_t *buf = g_malloc((len+1) * sizeof(wchar_t));
+    mbstate_t mbs;
+    memset (&mbs, 0, sizeof (mbs));
+    mbsrtowcs (buf, &str, len, &mbs);
+    buf[len] = 0;
+    return buf;
+}
+
+char *
+wchar_to_mbstr (const wchar_t *wstr)
+{
+    mbstate_t mbs;
+    const wchar_t *wstr2;
+    char * string;
+    int len;
+
+    memset (&mbs, 0, sizeof (mbs));
+    wstr2 = wstr;
+    len = wcsrtombs(NULL, &wstr2, 0, &mbs);
+    if (len <= 0)
+	return NULL;
+
+    string = g_malloc(len + 1);
+
+    wstr2 = wstr;
+    wcsrtombs(string, &wstr2, len, &mbs);
+    string[len] = 0;
+    return string;
+}
+#endif
+
+
+
 int
 is_printable (int c)
 {
+#ifdef UTF8
+    if (SLsmg_Is_Unicode)
+	return iswprint (c);
+#endif
     c &= 0xff;
 
 #ifdef HAVE_CHARSET
@@ -100,7 +232,7 @@ is_printable (int c)
 #endif				/* !HAVE_CHARSET */
 }
 
-/* Calculates the message dimensions (lines and columns) */
+/* Calculates the message dimension in columns and lines. */
 void
 msglen (const char *text, int *lines, int *columns)
 {
@@ -113,8 +245,21 @@ msglen (const char *text, int *lines, int *columns)
 	    nlines++;
 	    colindex = 0;
 	} else {
+#ifndef UTF8
 	    colindex++;
 	    if (colindex > ncolumns)
+#else /* UTF8 */
+	    size_t len;
+	    wchar_t c;
+
+	    len = mbrtowc (&c, text, MB_CUR_MAX, NULL);
+	    if (len > 0 && len != (size_t)(-1) && len != (size_t)(-2)) {
+		int wcsize = wcwidth(c);
+		colindex += wcsize > 0 ? wcsize-1 : -1;
+		text += len-1;
+	    }
+	    if (++colindex > ncolumns)
+#endif /* UTF8 */
 		ncolumns = colindex;
 	}
     }
@@ -208,7 +353,24 @@ name_quote (const char *s, int quote_percent)
 		*d++ = '\\';
 	    break;
 	}
+#ifndef UTF8
 	*d = *s;
+#else /* UTF8 */
+	{
+	    mbstate_t mbs;
+           int len;
+           memset (&mbs, 0, sizeof (mbs));
+           len = mbrlen(s, MB_CUR_MAX, &mbs);
+	    if (len > 0) {
+		while (len-- > 1)
+		    *d++ = *s++;
+		*d = *s;
+	    } else {
+                *d = '?';
+	    }
+
+	}
+#endif /* UTF8 */
     }
     *d = '\0';
     return ret;
@@ -231,7 +393,9 @@ name_trunc (const char *txt, size_t trunc_len)
 {
     static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
     size_t txt_len;
+    int first, skip;
     char *p;
+    const char *str;
 
     if (!txt)
 	return NULL;
@@ -241,7 +405,7 @@ name_trunc (const char *txt, size_t trunc_len)
     if (trunc_len > sizeof (x) - 1) {
 	trunc_len = sizeof (x) - 1;
     }
-    txt_len = strlen (txt);
+    txt_len = mbstrlen (txt);
     if (txt_len <= trunc_len) {
 	strcpy (x, txt);
     } else {
@@ -250,10 +414,76 @@ name_trunc (const char *txt, size_t trunc_len)
 	strncpy (x + y, txt + (txt_len - (trunc_len / 2)), trunc_len / 2);
 	x[y] = '~';
     }
-    x[trunc_len] = 0;
-    for (p = x; *p; p++)
-	if (!is_printable (*p))
-	    *p = '?';
+
+#ifdef UTF8
+    if (SLsmg_Is_Unicode) {
+      mbstate_t s;
+      int mbmax;
+
+      str = txt;
+      memset (&s, 0, sizeof (s));
+      mbmax = MB_CUR_MAX;
+      p = x;
+      while (p < x + sizeof (x) - 1 && trunc_len) {
+	  wchar_t wc;
+	  int len;
+
+	  len = mbrtowc (&wc, str, mbmax, &s);
+	  if (!len)
+	      break;
+	  if (len < 0) {
+	      memset (&s, 0, sizeof (s));
+	      *p = '?';
+	      len = 1;
+	      str++;
+	  } else if (!is_printable (wc)) {
+	      *p = '?';
+	      str += len;
+	      len = 1;
+	  } else if (p >= x + sizeof (x) - len)
+	      break;
+	  else {
+	      memcpy (p, str, len);
+	      str += len;
+	  }
+	  if (first) {
+	      --trunc_len;
+	      --first;
+	      p += len;
+	      if (!first && p < x + sizeof (x) - 1 && trunc_len) {
+		  *p++ = '~';
+		  --trunc_len;
+	      }
+	  } else if (skip)
+	      --skip;
+	  else {
+	      --trunc_len;
+	      p += len;
+	  }
+      }
+    } else
+#endif
+    {
+      str = txt;
+      p = x;
+      while (p < x + sizeof (x) - 1) {
+	  if (*str == '\0')
+	      break;
+	  else if (!is_printable (*str))
+	      *p++ = '?';
+	  else
+	      *p++ = *str;
+	  ++str;
+	  if (first) {
+	      --first;
+	      if (!first) {
+		  *p++ = '~';
+		  str += skip;
+	      }
+	  }
+      }
+    }
+    *p = '\0';
     return x;
 }
 
@@ -685,11 +915,61 @@ load_file (const char *filename)
 }
 
 char *
+utf8_to_local(char *str)
+{
+   iconv_t cd;
+   size_t buflen = strlen(str);
+   char *output;
+   int retry = 1;
+
+   cd = iconv_open (nl_langinfo(CODESET), "UTF-8");
+   if (cd == (iconv_t) -1) {
+	return g_strdup(str);
+   }
+
+   output = g_malloc(buflen + 1);
+
+   while (retry)
+   {
+	char *wrptr = output;
+	char *inptr = str;
+	size_t insize = buflen;
+	size_t avail = buflen;
+        size_t nconv;
+
+        nconv = iconv (cd, &inptr, &insize, &wrptr, &avail);
+        if (nconv == (size_t) -1)
+        {
+	    if (errno == E2BIG)
+	    {
+		buflen *= 2;
+		g_free(output);
+		output = g_malloc(buflen + 1);
+	    }
+	    else
+	    {
+		g_free(output);
+		return g_strdup(str);
+	    }
+	}
+	else {
+	    retry = 0;
+	    *wrptr = 0;
+	}
+    }
+
+    iconv_close (cd);
+
+    return output;
+}
+
+char *
 load_mc_home_file (const char *filename, char **allocated_filename)
 {
     char *hintfile_base, *hintfile;
     char *lang;
     char *data;
+    char *conv_data;
 
     hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
@@ -722,7 +1002,10 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     else
 	g_free (hintfile);
 
-    return data;
+    conv_data = utf8_to_local(data);
+    g_free(data);
+
+    return conv_data;
 }
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different
@@ -738,10 +1021,12 @@ i18n_checktimelength (void)
 	    // huh, localtime() doesnt seem to work ... falling back to "(invalid)"
 	    length = strlen(INVALID_TIME_TEXT);
     } else {
-	    char buf [MAX_I18NTIMELENGTH + 1];
+	    char buf [4* MAX_I18NTIMELENGTH + 1];
 	    size_t a, b;
-	    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), lt);
-	    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), lt);
+	    strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), lt);
+      a = mbstrlen(buf);
+	    strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), lt);
+      b = mbstrlen(buf);
 	    length = max (a, b);
     }
 
@@ -755,15 +1040,12 @@ i18n_checktimelength (void)
 const char *
 file_date (time_t when)
 {
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
+    static char timebuf [4 * MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
-    static size_t i18n_timelength = 0;
     static const char *fmtyear, *fmttime;
     const char *fmt;
 
-    if (i18n_timelength == 0){
-	i18n_timelength = i18n_checktimelength() + 1;
-	
+  if ( fmtyear == NULL ) {
 	/* strftime() format string for old dates */
 	fmtyear = _("%b %e  %Y");
 	/* strftime() format string for recent dates */
@@ -914,10 +1196,27 @@ strip_ctrl_codes (char *s)
 		r++;
 	    continue;
 	}
-
+#ifndef UTF8
 	if (is_printable(*r))
 	    *w++ = *r;
 	++r;
+#else /* UTF8 */
+	{
+	    mbstate_t mbs;
+           int len;
+	    memset (&mbs, 0, sizeof (mbs));
+	    len = mbrlen(r, MB_CUR_MAX, &mbs);
+
+	    if (len > 0 && (unsigned char)*r >= ' ')
+		while (len--)
+		    *w++ = *r++;
+	    else {
+		if (len == -1)
+		    *w++ = '?';
+		r++;
+	    }
+	}
+#endif /* UTF8 */
     }
     *w = 0;
     return s;

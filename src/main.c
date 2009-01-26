@@ -705,7 +705,7 @@ load_prompt (int fd, void *unused)
 	int prompt_len;
 
 	tmp_prompt = strip_ctrl_codes (subshell_prompt);
-	prompt_len = strlen (tmp_prompt);
+	prompt_len = mbstrlen (tmp_prompt);
 
 	/* Check for prompts too big */
 	if (COLS > 8 && prompt_len > COLS - 8) {
@@ -1613,7 +1613,11 @@ update_xterm_title_path (void)
     if (xterm_flag && xterm_title) {
 	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
 	do {
+#ifndef UTF8
 	    if (!is_printable ((unsigned char) *s))
+#else /* UTF8 */
+	    if (*(unsigned char *)s < ' ')
+#endif /* UTF8 */
 		*s = '?';
 	} while (*++s);
 	if (!alternate_plus_minus)

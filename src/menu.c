@@ -23,6 +23,7 @@
 #include <string.h>
 
 #include <sys/types.h>
+#include <wchar.h>
 
 #include "global.h"
 #include "tty.h"
@@ -54,35 +55,95 @@ create_menu (const char *name, menu_entry *entries, int count, const char *help_
 {
     Menu *menu;
     const char *cp;
+    int wlen = 0;
+    mbstate_t s;
 
     menu = (Menu *) g_malloc (sizeof (*menu));
     menu->count = count;
     menu->max_entry_len = 20;
     menu->entries = entries;
+    menu->name = g_strdup (name);
+    menu_scan_hotkey (menu);
+#ifdef UTF8
+    menu->wentries = NULL;
+    menu->wname = NULL;
+    if (SLsmg_Is_Unicode) {
+	const char *str = menu->name;
+	memset (&s, 0, sizeof (s));
+	wlen = mbsrtowcs (NULL, &str, -1, &s);
+	if (wlen > 0)
+	    ++wlen;
+	else {
+	    wlen = 0;
+	    memset (&s, 0, sizeof (s));
+	}
+    }
+#endif
 
     if (entries != (menu_entry*) NULL) {
 	register menu_entry* mp;
 	for (mp = entries; count--; mp++) {
 	    if (mp->text[0] != '\0') {
+		int len;
 #ifdef ENABLE_NLS
 	        mp->text = _(mp->text);
 #endif /* ENABLE_NLS */
 	        cp = strchr (mp->text,'&');
+#ifdef UTF8
+		if (SLsmg_Is_Unicode) {
+		    len = mbstrlen(mp->text) + 1;
+		    wlen += len;
+		    menu->max_entry_len = max (len - 1, menu->max_entry_len);
+		} else
+#endif
+		len = strlen (mp->text);
 
 		if (cp != NULL && *(cp+1) != '\0') {
 		    mp->hot_key = tolower ((unsigned char) *(cp+1));
-		    menu->max_entry_len = max ((int) (strlen (mp->text) - 1),
-			menu->max_entry_len);
+		    menu->max_entry_len = max (len - 1, menu->max_entry_len);
 		} else {
-		    menu->max_entry_len = max ((int) strlen (mp->text),
-			menu->max_entry_len);
+		    menu->max_entry_len = max (len, menu->max_entry_len);
 		}
 	    }
 	}
     }
 
-    menu->name = g_strdup (name);
-    menu_scan_hotkey(menu);
+#ifdef UTF8
+    if (wlen) {
+	wchar_t *wp;
+	const char *str;
+	int len;
+
+	menu->wentries = (wchar_t **)
+			 g_malloc (sizeof (wchar_t *) * menu->count
+				   + wlen * sizeof (wchar_t));
+	wp = (wchar_t *) (menu->wentries + menu->count);
+	str = menu->name;
+	len = mbsrtowcs (wp, &str, wlen, &s);
+	if (len > 0) {
+	    menu->wname = wp;
+	    wlen -= len + 1;
+	    wp += len + 1;
+	} else
+	    memset (&s, 0, sizeof (s));
+	if (menu->entries != NULL)
+	    for (count = 0; count < menu->count; ++count)
+		if (menu->entries[count].text[0] != '\0') {
+		    str = menu->entries[count].text;
+		    menu->wentries[count] = wp;
+		    len = mbsrtowcs (wp, &str, wlen, &s);
+		    if (len > 0) {
+			wlen -= len + 1;
+			wp += len + 1;
+		    } else {
+			memset (&s, 0, sizeof (s));
+			*wp++ = L'\0';
+			--wlen;
+		    }
+		}
+    }
+#endif
+
     menu->start_x = 0;
     menu->help_node = g_strdup (help_node);
     return menu;
@@ -113,8 +174,26 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 	const unsigned char *text;
 
 	addch((unsigned char)menu->entries [idx].first_letter);
-	for (text = menu->entries [idx].text; *text; text++)
-	{
+#ifdef UTF8
+	if (menu->wentries) {
+	    wchar_t *wtext, *wp;
+
+	    for (wtext = wp = menu->wentries [idx]; *wtext; wtext++) {
+		if (*wtext == L'&') {
+		    if (wtext > wp)
+			SLsmg_write_nwchars (wp, wtext - wp);
+		    attrset (color == MENU_SELECTED_COLOR ?
+			MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
+		    SLsmg_write_nwchars (++wtext, 1);
+		    attrset (color);
+		    wp = wtext + 1;
+		}
+	    }
+	    if (wtext > wp)
+		SLsmg_write_nwchars (wp, wtext - wp);
+	} else
+#endif
+	    for (text = menu->entries [idx].text; *text; text++) {
 		if (*text != '&')
 		    addch(*text);
 		else {
@@ -123,7 +202,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 		    addch(*(++text));
 		    attrset(color);
 		}
-	}
+	    }
     }
     widget_move (&menubar->widget, y, x + 1);
 }
@@ -169,6 +248,12 @@ static void menubar_draw (WMenu *menubar)
 	if (menubar->active)
 	    attrset(i == menubar->selected?MENU_SELECTED_COLOR:SELECTED_COLOR);
 	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
+#ifdef UTF8
+	if (menubar->menu [i]->wname)
+	    SLsmg_write_nwchars (menubar->menu [i]->wname,
+				 wcslen (menubar->menu [i]->wname));
+	else
+#endif
 	tty_printf ("%s", menubar->menu [i]->name);
     }
 
@@ -494,7 +579,13 @@ menubar_arrange(WMenu* menubar)
 
 	for (i = 0; i < items; i++)
 	{
-		int len = strlen(menubar->menu[i]->name);
+		int len;
+#ifdef UTF8
+		if (menubar->menu[i]->wname)
+		    len = wcslen (menubar->menu[i]->wname);
+		else
+#endif
+		    len = strlen(menubar->menu[i]->name);
 		menubar->menu[i]->start_x = start_x;
 		start_x += len + gap;
 	}
@@ -507,7 +598,13 @@ menubar_arrange(WMenu* menubar)
 	for (i = 0; i < items; i++)
 	{
 		/* preserve length here, to be used below */
-		gap -= (menubar->menu[i]->start_x = strlen(menubar->menu[i]->name));
+#ifdef UTF8
+		if (menubar->menu[i]->wname)
+		    menubar->menu[i]->start_x = wcslen (menubar->menu[i]->wname);
+		else
+#endif
+		    menubar->menu[i]->start_x = strlen (menubar->menu[i]->name);
+		gap -= menubar->menu[i]->start_x;
 	}
 
 	gap /= (items - 1);
@@ -531,6 +628,9 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu *menu)
 {
+#ifdef UTF8
+    g_free (menu->wentries);
+#endif
     g_free (menu->name);
     g_free (menu->help_node);
     g_free (menu);

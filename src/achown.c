@@ -585,6 +585,12 @@ init_chown_advanced (void)
     b_att[2] = button_new (XTRACT (6));
     b_user = button_new (XTRACT (5));
     b_group = button_new (XTRACT (4));
+#ifdef UTF8
+    if (SLsmg_Is_Unicode) {
+	b_user->text = g_realloc (b_user->text, MB_CUR_MAX * 15 + 1);
+	b_group->text = g_realloc (b_group->text, MB_CUR_MAX * 15 + 1);
+    }
+#endif
 
     add_widget (ch_dlg, b_group);
     add_widget (ch_dlg, b_user);

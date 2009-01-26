@@ -332,7 +332,8 @@ edit_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
 	{
-	    int cmd, ch;
+	    int cmd;
+	    mc_wint_t ch;
 
 	    /* The user may override the access-keys for the menu bar. */
 	    if (edit_translate_key (e, parm, &cmd, &ch)) {

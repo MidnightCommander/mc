@@ -11,6 +11,16 @@
 #endif	/* HAVE_SLANG_SLANG_H */
 #endif
 
+#if SLANG_VERSION >= 20000
+#define UTF8 1
+#define SLsmg_Is_Unicode SLsmg_is_utf8_mode()
+void SLsmg_write_nwchars(wchar_t *s, size_t n);
+#endif
+
+#ifdef UTF8
+#    include <wchar.h>
+#endif
+
 enum {
     KEY_BACKSPACE = 400,
     KEY_END, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT,

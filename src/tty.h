@@ -8,6 +8,8 @@
     of ifdefs in the other files small.
  */
 
+#include <glib.h>	/* gboolean is used here */
+
 #ifdef HAVE_SLANG
 #   include "myslang.h"
 #endif

@@ -134,10 +134,12 @@ tty_print_char(int c)
      * defined or not. Congratulations! At least, they left the API call
      * for SLsmg_write_nchars as it has always been.
      */
-    char ch;
 
-    ch = c;
-    SLsmg_write_nchars(&ch, 1);
+    /* The above comment is a nonsense, SLsmg_write_char(c) works pretty
+     * good for me. So please don't mess with Red Hat people.
+     * 					Jindrich Novy (jnovy@redhat.com)
+     */
+    SLsmg_write_char(c);
 #else
     addch(c);
 #endif
