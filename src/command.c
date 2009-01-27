@@ -28,6 +28,7 @@
 #include <string.h>
 
 #include "mhl/memory.h"
+#include "mhl/escape.h"
 
 #include "global.h"		/* home_dir */
 #include "tty.h"
@@ -66,7 +67,7 @@ examine_cd (char *path)
     const char *t;
 
     /* Tilde expansion */
-    path = unescape_string(path);
+    path = mhl_shell_unescape_buf(path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
@@ -138,7 +139,7 @@ examine_cd (char *path)
     }
     g_free (q);
     g_free (path_tilde);
-    mhl_mem_free(path);
+//    mhl_mem_free(path);
     return result;
 }
 

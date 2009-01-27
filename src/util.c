@@ -35,6 +35,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include "mhl/escape.h"
+
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */

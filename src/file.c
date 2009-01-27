@@ -51,6 +51,7 @@
 #include <unistd.h>
 
 #include "mhl/memory.h"
+#include "mhl/escape.h"
 
 #include "global.h"
 #include "tty.h"
@@ -179,7 +180,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
     for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
 	switch (ctx->dest_mask[j]) {
 	case '\\':
-	    if (is_escaped_string (&ctx->dest_mask[j])){
+	    if (mhl_shell_is_char_escaped (&ctx->dest_mask[j])){
 		fntarget[k++] = ctx->dest_mask[j++];
 		fntarget[k++] = ctx->dest_mask[j];
 		break;
@@ -1973,12 +1974,8 @@ panel_operate (void *source_panel, FileOperation operation,
 		    char *temp2 = concat_dir_and_file (dest, temp);
 		    char *temp3;
 
-		    temp3 = source_with_path;
-		    source_with_path = unescape_string(source_with_path);
-		    mhl_mem_free(temp3);
-		    temp3 = temp2;
-		    temp2 = unescape_string(temp2);
-		    mhl_mem_free(temp3);
+		    source_with_path = mhl_shell_unescape_buf(source_with_path);
+		    temp2 = mhl_shell_unescape_buf(temp2);
 
 		    switch (operation) {
 		    case OP_COPY:

@@ -6,6 +6,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifndef FALSE
+#	define FALSE 0
+#endif
+
+#ifndef TRUE
+#	define TRUE 1
+#endif
+
 #define mhl_shell_escape_toesc(x)	\
     (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
      ((x)=='(')||((x)==')')||((x)=='\'')||((x)=='&')||((x)=='~')||	\
@@ -16,6 +24,14 @@
 #define mhl_shell_escape_nottoesc(x)	\
     (((x)!=0) && (!mhl_shell_escape_toesc((x))))
 
+/** To be compatible with the general posix command lines we have to escape
+ strings for the command line
+
+ /params const char * in
+ string for escaping
+ /returns
+ return escaped string (later need to free)
+ */
 static inline char* mhl_shell_escape_dup(const char* src)
 {
     if ((src==NULL)||(!(*src)))
@@ -48,7 +64,14 @@ static inline char* mhl_shell_escape_dup(const char* src)
     }
 }
 
-/* shell-unescape within a given buffer (writing to it!) */
+/** Unescape paths or other strings for e.g the internal cd
+    shell-unescape within a given buffer (writing to it!)
+
+ /params const char * in
+ string for unescaping
+ /returns
+ return unescaped string
+*/
 static inline char* mhl_shell_unescape_buf(char* text)
 {
     if (!text)
@@ -107,6 +130,23 @@ static inline char* mhl_shell_unescape_buf(char* text)
     *writeptr = 0;
 
     return text;
+}
+
+/** Check if char in pointer contain escape'd chars
+
+ /params const char * in
+ string for checking
+ /returns
+ return TRUE if string contain escaped chars
+ otherwise return FALSE
+ */
+static inline int
+mhl_shell_is_char_escaped ( const char *in ) {
+    if (in == NULL || !*in || in[0] != '\\') return FALSE;
+    if (mhl_shell_escape_toesc(in[1])){
+	return TRUE;
+    }
+    return FALSE;
 }
 
 #endif

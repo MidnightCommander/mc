@@ -32,6 +32,7 @@
 #include <unistd.h>
 
 #include "mhl/memory.h"
+#include "mhl/escape.h"
 
 #include "global.h"
 #include "tty.h"
@@ -74,7 +75,7 @@ filename_completion_function (char *text, int state)
         g_free (filename);
         g_free (users_dirname);
 
-	text = unescape_string(text);
+	text = mhl_shell_unescape_buf(text);
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = g_strdup (++temp);
 	    dirname = g_strndup (text, temp - text);
@@ -82,7 +83,6 @@ filename_completion_function (char *text, int state)
 	    dirname = g_strdup (".");
 	    filename = g_strdup (text);
 	}
-	mhl_mem_free(text);
 
         /* We aren't done yet.  We also support the "~user" syntax. */
 
@@ -956,7 +956,7 @@ complete_engine (WInput *in, int what_to_do)
     }
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-    	    complete = escape_string(in->completions [0]);
+	    complete = mhl_shell_escape_dup(in->completions [0]);
     	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
@@ -976,7 +976,7 @@ complete_engine (WInput *in, int what_to_do)
 
     	    for (p=in->completions + 1; *p; count++, p++) {
 		q = *p;
-		*p = escape_string(*p);
+		*p = mhl_shell_escape_dup(*p);
 		mhl_mem_free(q);
 		if ((i = strlen (*p)) > maxlen)
 		    maxlen = i;

@@ -14,10 +14,6 @@ extern char *str_unconst (const char *);
 extern const char *cstrcasestr (const char *haystack, const char *needle);
 extern const char *cstrstr (const char *haystack, const char *needle);
 
-char *unescape_string ( const char * );
-char *escape_string ( const char * );
-int is_escaped_string ( const char * );
-
 void str_replace(char *s, char from, char to);
 int  is_printable (int c);
 void msglen (const char *text, /*@out@*/ int *lines, /*@out@*/ int *columns);
