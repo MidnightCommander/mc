@@ -20,8 +20,9 @@ context default
     keyword , brightcyan
     keyword ; brightmagenta
     keyword whole self brightred
-    keyword whole access yellow
     keyword whole and yellow
+    keyword whole as yellow
+    keyword whole assert yellow
     keyword whole break yellow
     keyword whole class yellow
     keyword whole continue yellow
@@ -48,52 +49,81 @@ context default
     keyword whole return yellow
     keyword whole try yellow
     keyword whole while yellow
+    keyword whole with yellow
+    keyword whole yield yellow
 
     keyword whole abs brightcyan
-    keyword whole apply brightcyan
+    keyword whole all brightcyan
+    keyword whole any brightcyan
+    keyword whole basestring brightcyan
+    keyword whole bin brightcyan
+    keyword whole bool brightcyan
     keyword whole callable brightcyan
     keyword whole chr brightcyan
+    keyword whole classmethod brightcyan
     keyword whole cmp brightcyan
     keyword whole coerce brightcyan
     keyword whole compile brightcyan
+    keyword whole complex brightcyan
     keyword whole delattr brightcyan
+    keyword whole dict brightcyan
     keyword whole dir brightcyan
     keyword whole divmod brightcyan
+    keyword whole enumerate brightcyan
     keyword whole eval brightcyan
-    keyword whole exec brightcyan
     keyword whole execfile brightcyan
+    keyword whole file brightcyan
     keyword whole filter brightcyan
     keyword whole float brightcyan
+    keyword whole frozenset brightcyan
     keyword whole getattr brightcyan
     keyword whole globals brightcyan
     keyword whole hasattr brightcyan
     keyword whole hash brightcyan
+    keyword whole help brightcyan
     keyword whole hex brightcyan
     keyword whole id brightcyan
     keyword whole input brightcyan
     keyword whole int brightcyan
+    keyword whole isinstance brightcyan
+    keyword whole issubclass brightcyan
+    keyword whole iter brightcyan
     keyword whole len brightcyan
+    keyword whole list brightcyan
     keyword whole locals brightcyan
     keyword whole long brightcyan
     keyword whole map brightcyan
     keyword whole max brightcyan
     keyword whole min brightcyan
+    keyword whole next brightcyan
+    keyword whole object brightcyan
     keyword whole oct brightcyan
     keyword whole open brightcyan
     keyword whole ord brightcyan
     keyword whole pow brightcyan
+    keyword whole print brightcyan
+    keyword whole property brightcyan
     keyword whole range brightcyan
     keyword whole raw_input brightcyan
     keyword whole reduce brightcyan
     keyword whole reload brightcyan
     keyword whole repr brightcyan
+    keyword whole reversed brightcyan
     keyword whole round brightcyan
     keyword whole setattr brightcyan
+    keyword whole slice brightcyan
+    keyword whole sorted brightcyan
+    keyword whole staticmethod brightcyan
     keyword whole str brightcyan
+    keyword whole sum brightcyan
+    keyword whole super brightcyan
     keyword whole tuple brightcyan
     keyword whole type brightcyan
+    keyword whole unichr brightcyan
+    keyword whole unicode brightcyan
     keyword whole vars brightcyan
     keyword whole xrange brightcyan
+    keyword whole zip brightcyan
 
     keyword whole atof magenta
     keyword whole atoi magenta
@@ -118,47 +148,6 @@ context default
     keyword whole rjust magenta
     keyword whole center magenta
     keyword whole zfill magenta
-
-    keyword whole __init__ lightgray
-    keyword whole __del__ lightgray
-    keyword whole __repr__ lightgray
-    keyword whole __str__ lightgray
-    keyword whole __cmp__ lightgray
-    keyword whole __hash__ lightgray
-    keyword whole __call__ lightgray
-    keyword whole __getattr__ lightgray
-    keyword whole __setattr__ lightgray
-    keyword whole __delattr__ lightgray
-    keyword whole __len__ lightgray
-    keyword whole __getitem__ lightgray
-    keyword whole __setitem__ lightgray
-    keyword whole __delitem__ lightgray
-    keyword whole __getslice__ lightgray
-    keyword whole __setslice__ lightgray
-    keyword whole __delslice__ lightgray
-    keyword whole __add__ lightgray
-    keyword whole __sub__ lightgray
-    keyword whole __mul__ lightgray
-    keyword whole __div__ lightgray
-    keyword whole __mod__ lightgray
-    keyword whole __divmod__ lightgray
-    keyword whole __pow__ lightgray
-    keyword whole __lshift__ lightgray
-    keyword whole __rshift__ lightgray
-    keyword whole __and__ lightgray
-    keyword whole __xor__ lightgray
-    keyword whole __or__ lightgray
-    keyword whole __neg__ lightgray
-    keyword whole __pos__ lightgray
-    keyword whole __abs__ lightgray
-    keyword whole __invert__ lightgray
-    keyword whole __nonzero__ lightgray
-    keyword whole __coerce__ lightgray
-    keyword whole __int__ lightgray
-    keyword whole __long__ lightgray
-    keyword whole __float__ lightgray
-    keyword whole __oct__ lightgray
-    keyword whole __hex__ lightgray
 
     keyword whole __init__ lightgray
     keyword whole __del__ lightgray
@@ -232,7 +221,7 @@ context """ """ green
 	keyword \\\\ brightgreen
 	keyword \\' brightgreen
 	keyword \\\{abtnvfr\} brightgreen
-   
+
 context # \n brown
     spellcheck
 context " " green
