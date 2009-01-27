@@ -50,6 +50,9 @@
 #include "tcputil.h"
 #include "../src/unixcompat.h"
 #include "fish.h"
+#include "../mhl/memory.h"
+#include "../mhl/string.h"
+#include "../mhl/escape.h"
 
 int fish_directory_timeout = 900;
 
@@ -358,33 +361,100 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     char *quoted_path;
     int reply_code;
 
+#if 0
+    /*
+     * Simple FISH debug interface :]
+     */
+    if (!(MEDATA->logfile))
+    {
+        MEDATA->logfile = fopen("/tmp/mc-FISH.sh", "w");
+    }
+#endif // 0
+
     logfile = MEDATA->logfile;
 
     print_vfs_message(_("fish: Reading directory %s..."), remote_path);
 
     gettimeofday(&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
-    quoted_path = name_quote (remote_path, 0);
+    quoted_path = mhl_shell_escape_dup (remote_path);
     fish_command (me, super, NONE,
-	    "#LIST /%s\n"
-	    "if ls -1 /%s >/dev/null 2>&1 ;\n"
-	    "then\n"
-	    "ls -lLan /%s 2>/dev/null | grep '^[^cbt]' | (\n"
-	      "while read p l u g s m d y n; do\n"
-	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
-	      "done\n"
-	    ")\n"
-	    "ls -lan /%s 2>/dev/null | grep '^[cb]' | (\n"
-	      "while read p l u g a i m d y n; do\n"
-	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
-	      "done\n"
-	    ")\n"
-	    "echo '### 200'\n"
-	    "else\n"
-	    "echo '### 500'\n"
-	    "fi\n",
-	    remote_path, quoted_path, quoted_path, quoted_path);
-    g_free (quoted_path);
+		"#LIST /%s\n"
+		"if `perl -v > /dev/null 2>&1` ; then\n"
+		  "perl -e '\n"
+		   "use strict;\n"
+		   "use POSIX;\n"
+		   "use Fcntl;\n"
+		   "use POSIX \":fcntl_h\"; #S_ISLNK was here until 5.6\n"
+		   "import Fcntl \":mode\" unless defined &S_ISLNK; #and is now here\n"
+		   "my $dirname = $ARGV[0];\n"
+		   "if (opendir ( DIR, $dirname )) {\n"
+		   "while( (my $filename = readdir(DIR))){\n"
+		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
+		   "my $mloctime= scalar localtime $mtime;\n"
+		   "my $shell_escape_regex= s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
+		   "my $e_filename = $filename;\n"
+		   "$e_filename =~ $shell_escape_regex;\n"
+		   "if (S_ISLNK($mode) ) {\n"
+		   "my $linkname = readlink (\"$dirname/$filename\");\n"
+		   "$linkname =~ $shell_escape_regex;\n"
+		   "\n"
+			  "printf(\"R%%o %%o $uid.$gid\\n"
+				    "S$size\\n"
+				    "d$mloctime\\n"
+				    ":\\\"$e_filename\\\" -> \\\"$linkname\\\"\\n"
+				    "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
+		   "} else {\n"
+			  "printf(\"R%%o %%o $uid.$gid\\n"
+				    "S$size\\n"
+				    "d$mloctime\\n"
+				    ":\\\"$e_filename\\\"\\n"
+				    "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
+		   "}}\n"
+		   "printf(\"### 200\\n\");\n"
+		   "closedir(DIR);\n"
+		   "} else {\n"
+		    "printf(\"### 500\\n\");\n"
+		   "}\n"
+		   "exit 0\n"
+		   "' /%s ||\n" /* ARGV[0] - path to browse */
+		   "    echo '### 500'\n" /* do not hang if perl is to eval it */
+		"elif `ls -1 /%s >/dev/null 2>&1` ; then\n"
+		  "if `ls -Q /%s >/dev/null 2>&1`; then\n"
+			  "LSOPT=\"-Qlan\";\n"
+			  "ADD=0;\n"
+		  "else\n"
+			  "LSOPT=\"-lan\";\n"
+			  "ADD=1;\n"
+		  "fi\n"
+		  "ls $LSOPT \"/%s\" 2>/dev/null | grep '^[^cbt]' | (\n"
+			  "while read p l u g s m d y n; do\n"
+				  "if [ $ADD  = 0 ]; then\n"
+					  "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
+				  "elif `sed --version >/dev/null 2>&1` ; then\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
+					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
+				  "else\n"
+					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
+				  "fi\n"
+			  "done )\n"
+		  "ls $LSOPT /%s 2>/dev/null | grep '^[cb]' | (\n"
+			  "while read p l u g a i m d y n; do\n"
+				  "if [ $ADD = 0 ]; then\n"
+					  "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
+				  "elif `sed --version >/dev/null 2>&1` ; then\n"
+					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
+					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
+				  "else\n"
+					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
+				  "fi\n"
+			  "done)\n"
+		  "echo '### 200'\n"
+	"else\n"
+		  "echo '### 500'\n"
+	"fi\n",
+	    quoted_path, quoted_path, quoted_path, quoted_path, quoted_path, quoted_path);
+    mhl_mem_free (quoted_path);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr); 
@@ -412,11 +482,61 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
-		      if (!strcmp(buffer+1, ".") || !strcmp(buffer+1, ".."))
-			  break;  /* We'll do . and .. ourself */
-		      ent->name = g_strdup(buffer+1); 
-		      break;
-	          }
+	    char *data_start = buffer+1;
+	    char *filename = data_start;
+	    char *linkname = data_start;
+	    char *filename_bound = filename + strlen(filename);
+	    char *linkname_bound = filename_bound;
+	    if (!strcmp(data_start, "\".\"") || !strcmp(data_start, "\"..\""))
+			break;  /* We'll do "." and ".." ourselves */
+
+		if (S_ISLNK(ST.st_mode)) {
+			// we expect: "escaped-name" -> "escaped-name"
+			//     -> cannot occur in filenames,
+			//     because it will be escaped to -\>
+
+			if (*filename == '"')
+				++filename;
+
+			linkname = strstr(filename, "\" -> \"");
+			if (!linkname)
+			{
+				/* broken client, or smth goes wrong */
+				linkname = filename_bound;
+				if (filename_bound > filename
+				    && *(filename_bound - 1) == '"')
+					--filename_bound; // skip trailing "
+			}
+			else
+			{
+				filename_bound = linkname;
+				linkname += 6; // strlen ("\" -> \"")
+				if (*(linkname_bound - 1) == '"')
+					--linkname_bound; // skip trailing "
+			}
+
+			ent->name = mhl_str_dup_range(filename, filename_bound);
+			mhl_shell_unescape_buf(ent->name);
+
+			ent->ino->linkname = mhl_str_dup_range(linkname, linkname_bound);
+			mhl_shell_unescape_buf(ent->ino->linkname);
+		} else {
+			// we expect: "escaped-name"
+			if (filename_bound - filename > 2)
+			{
+				// there is at least 2 "
+				// and we skip them
+				if (*filename == '"')
+					++filename;
+				if (*(filename_bound - 1) == '"')
+					--filename_bound;
+			}
+
+			ent->name = mhl_str_dup_range(filename, filename_bound);
+			mhl_shell_unescape_buf(ent->name);
+		}
+		break;
+	}
 	case 'S':
 #ifdef HAVE_ATOLL
 	    ST.st_size = (off_t) atoll (buffer+1);
@@ -426,11 +546,14 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	    break;
 	case 'P': {
 	    size_t skipped;
-
-	    if (vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode)) {
-		if (S_ISLNK(ST.st_mode))
-		    ST.st_mode = 0;
-	    }
+	    vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode);
+	    break;
+	}
+	case 'R': {
+	    // raw filemode:
+	    // we expect: Roctal-filemode octal-filetype uid.gid
+	    size_t skipped;
+	    vfs_parse_raw_filemode (buffer + 1, &skipped, &ST.st_mode);
 	    break;
 	}
 	case 'd': {
@@ -456,8 +579,6 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		      ST.st_rdev = makedev (maj, min);
 #endif
 	          }
-	case 'L': ent->ino->linkname = g_strdup(buffer+1);
-	          break;
 	}
     }
     
@@ -528,8 +649,8 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      *	algorithm for file appending case, therefore just "dd" is used for it.
      */
 
-    print_vfs_message(_("fish: store %s: sending command..."), name );
-    quoted_name = name_quote (name, 0);
+    quoted_name = mhl_shell_escape_dup(name);
+    print_vfs_message(_("fish: store %s: sending command..."), quoted_name );
 
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
@@ -541,7 +662,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 		 "(\n"
 		   "head -c %lu -q - || echo DD >&3\n"
 		 ") 2>/dev/null | (\n"
-		   "cat > \"$file\"\n"
+		   "cat > $file\n"
 		   "cat > /dev/null\n"
 		 ")`; [ \"$res\" = DD ] && {\n"
 			"> \"$file\"\n"
@@ -553,7 +674,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
-		 (unsigned long) s.st_size, name,
+		 (unsigned long) s.st_size, quoted_name,
 		 quoted_name, (unsigned long) s.st_size,
 		 (unsigned long) s.st_size);
     else
@@ -566,14 +687,13 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			"while [ $rest -gt 0 ]\n"
 			"do\n"
 			"    cnt=`expr \\( $rest + 255 \\) / 256`\n"
-			"    n=`dd bs=256 count=$cnt | tee -a \"$file\" | wc -c`\n"
+			"    n=`dd bs=256 count=$cnt | tee -a $file | wc -c`\n"
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
-		 (unsigned long) s.st_size, name,
+		 (unsigned long) s.st_size, quoted_name,
 		 quoted_name, (unsigned long) s.st_size);
 
-    g_free (quoted_name);
     if (n != PRELIM) {
 	close (h);
         ERRNOR(E_REMOTE, -1);
@@ -606,12 +726,14 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			  (unsigned long) s.st_size);
     }
     close(h);
+    mhl_mem_free(quoted_name);
     if ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
     return 0;
 error_return:
     close(h);
     fish_get_reply(me, SUP.sockr, NULL, 0);
+    mhl_mem_free(quoted_name);
     return -1;
 }
 
@@ -625,9 +747,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
-    quoted_name = name_quote (name, 0);
-    g_free (name);
-    name = quoted_name;
+    quoted_name = mhl_shell_escape_dup(name);
     fh->u.fish.append = 0;
 
     /*
@@ -642,16 +762,16 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 		"then\n"
 		"ls -ln /%s 2>/dev/null | (\n"
 		  "read p l u g s r\n"
-		  "echo \"$s\"\n"
+		  "echo $s\n"
 		")\n"
 		"echo '### 100'\n"
 		"cat /%s\n"
 		"echo '### 200'\n"
 		"else\n"
-		"echo '### 500'\n" 
+		"echo '### 500'\n"
 		"fi\n",
-		name, name, name, name );
-    g_free (name);
+		quoted_name, quoted_name, quoted_name, quoted_name );
+    g_free (quoted_name);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
@@ -766,7 +886,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 	g_free (mpath); \
 	return -1; \
     } \
-    rpath = name_quote (crpath, 0); \
+    rpath = mhl_shell_escape_dup(crpath); \
     g_free (mpath);
 
 #define POSTFIX(flags) \
@@ -778,7 +898,7 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     PREFIX
     g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
-				 "chmod %4.4o \"/%s\" 2>/dev/null\n"
+				 "chmod %4.4o /%s 2>/dev/null\n"
 				 "echo '### 000'\n", 
 	    mode & 07777, rpath,
 	    mode & 07777, rpath);
@@ -801,13 +921,13 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
 	g_free (mpath2); \
 	return -1; \
     } \
-    rpath1 = name_quote (crpath1, 0); \
+    rpath1 = mhl_shell_escape_dup (crpath1); \
     g_free (mpath1); \
-    rpath2 = name_quote (crpath2, 0); \
+    rpath2 = mhl_shell_escape_dup (crpath2); \
     g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
-    g_free (rpath1); \
-    g_free (rpath2); \
+    mhl_mem_free (rpath1); \
+    mhl_mem_free (rpath2); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
@@ -822,13 +942,13 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
 {
     char *qsetto;
     PREFIX
-    qsetto = name_quote (setto, 0);
+    qsetto = mhl_shell_escape_dup (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    qsetto, rpath, qsetto, rpath);
-    g_free (qsetto);
+    mhl_mem_free (qsetto);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -850,7 +970,7 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     {
 	PREFIX
 	g_snprintf (buf, sizeof(buf),
-    	    "#CHOWN /%s /%s\n"
+    	    "#CHOWN %s /%s\n"
 	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sowner, rpath,
@@ -858,8 +978,8 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 	fish_send_command (me, super, buf, OPT_FLUSH); 
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
 	g_snprintf (buf, sizeof(buf),
-            "#CHGRP /%s /%s\n"
-	    "chgrp %s /%s 2>/dev/null\n"
+            "#CHGRP /%s \"/%s\"\n"
+	    "chgrp %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
