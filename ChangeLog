@@ -1,3 +1,7 @@
+2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
+
 2009-01-25 Ilia Maslakov <il.smind@gmail.com>
 
 	* src/boxes.c, src/boxes.h, src/dir.c, src/dir.h:

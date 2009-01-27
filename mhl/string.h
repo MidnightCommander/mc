@@ -16,30 +16,29 @@ static inline char * mhl_str_dup_range(const char * s_start, const char * s_boun
 
 static inline char* mhl_str_trim(char* str)
 {
-    if (!str) return NULL;	// NULL string ?! bail out.
+    if (!str) return NULL;	/* NULL string ?! bail out. */
 
-    // find the first non-space
+    /* find the first non-space */
     char* start; for (start=str; ((*str) && (!isspace(*str))); str++);
 
-    // only spaces ?
+    /* only spaces ? */
     if (!(*str)) { *str = 0; return str; }
 
-    // get the size (cannot be empty - catched above)
+    /* get the size (cannot be empty - catched above) */
     size_t _sz = strlen(str);
 
-    // find the proper end
+    /* find the proper end */
     char* end;
     for (end=(str+_sz-1); ((end>str) && (isspace(*end))); end--);
-    end[1] = 0;		// terminate, just to be sure
+    end[1] = 0;		/* terminate, just to be sure */
 
-    // if we have no leading spaces, just trucate
+    /* if we have no leading spaces, just trucate */
     if (start==str) { end++; *end = 0; return str; }
 
-
-    // if it' only one char, dont need memmove for that    
+    /* if it' only one char, dont need memmove for that */
     if (start==end) { str[0]=*start; str[1]=0; return str; }
 
-    // by here we have a (non-empty) region between start end end 
+    /* by here we have a (non-empty) region between start end end */
     memmove(str,start,(end-start+1));
     return str;
 }
@@ -70,10 +69,9 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
     va_list args;
     va_start(args,base);
     char* a;
-    // note: we use ((char*)(1)) as terminator - NULL is a valid argument !
+    /* note: we use ((char*)(1)) as terminator - NULL is a valid argument ! */
     while ((a = va_arg(args, char*))!=(char*)1)
     {
-//	printf("a=%u\n", a);
 	if (a)
 	{
 	    arg_ptr[count] = a;
@@ -86,7 +84,7 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
     if (!count)
 	return mhl_str_dup("");
 
-    // now as we know how much to copy, allocate the buffer
+    /* now as we know how much to copy, allocate the buffer */
     char* buffer = (char*)mhl_mem_alloc_u(totalsize+2);
     char* current = buffer;
     int x=0;
@@ -104,8 +102,8 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
 
 static inline char* mhl_str_reverse(char* ptr)
 {
-    if (!ptr) 	 		return NULL;	// missing string
-    if (!(ptr[0] && ptr[1]))	return ptr;	// empty or 1-ch string
+    if (!ptr) 	 		return NULL;	/* missing string */
+    if (!(ptr[0] && ptr[1]))	return ptr;	/* empty or 1-ch string */
 
     size_t _sz = strlen(ptr);
     char* start = ptr;
