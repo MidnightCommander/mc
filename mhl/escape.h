@@ -6,13 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#ifndef FALSE
-#	define FALSE 0
-#endif
-
-#ifndef TRUE
-#	define TRUE 1
-#endif
+#include <mhl/types.h>
 
 #define mhl_shell_escape_toesc(x)	\
     (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
@@ -140,13 +134,14 @@ static inline char* mhl_shell_unescape_buf(char* text)
  return TRUE if string contain escaped chars
  otherwise return FALSE
  */
-static inline int
-mhl_shell_is_char_escaped ( const char *in ) {
-    if (in == NULL || !*in || in[0] != '\\') return FALSE;
-    if (mhl_shell_escape_toesc(in[1])){
-	return TRUE;
-    }
-    return FALSE;
+static inline bool
+mhl_shell_is_char_escaped ( const char *in ) 
+{
+    if (in == NULL || !*in || in[0] != '\\') 
+	return false;
+    if (mhl_shell_escape_toesc(in[1]))
+	return true;
+    return false;
 }
 
 #endif
