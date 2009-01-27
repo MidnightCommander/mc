@@ -54,12 +54,12 @@ static inline char* mhl_shell_unescape_buf(char* text)
     if (!text)
 	return NULL;
 
-    // look for the first \ - that's quick skipover if there's nothing to escape
+    /* look for the first \ - that's quick skipover if there's nothing to escape */
     char* readptr = text;
     while ((*readptr) && ((*readptr)!='\\'))	readptr++;
     if (!(*readptr)) return text;
 
-    // if we're here, we're standing on the first '\'
+    /* if we're here, we're standing on the first '\' */
     char* writeptr = readptr;
     char c;
     while ((c = *readptr))
@@ -97,7 +97,7 @@ static inline char* mhl_shell_unescape_buf(char* text)
 		    (*writeptr) = c; writeptr++; break;
 	    }
 	}
-	else	// got a normal character
+	else	/* got a normal character */
 	{
 	    (*writeptr) = *readptr;
 	    writeptr++;
