@@ -954,17 +954,18 @@ complete_engine (WInput *in, int what_to_do)
     	    start++;
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
+    
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	    complete = mhl_shell_escape_dup(in->completions [0]);
-    	    if (insert_text (in, complete, strlen (complete))){
+	        SHELL_ESCAPED_STR complete = mhl_shell_escape_dup(in->completions [0]);
+    	    if (insert_text (in, complete.s, strlen (complete.s))){
     	        if (in->completions [1])
     	    	    beep ();
 		else
 		    free_completions (in);
 	    } else
 	        beep ();
-	    mhl_mem_free(complete);
+	    mhl_mem_free(complete.s);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
@@ -976,7 +977,8 @@ complete_engine (WInput *in, int what_to_do)
 
     	    for (p=in->completions + 1; *p; count++, p++) {
 		q = *p;
-		*p = mhl_shell_escape_dup(*p);
+		SHELL_ESCAPED_STR esc = mhl_shell_escape_dup(*p);
+		*p = esc.s;
 		mhl_mem_free(q);
 		if ((i = strlen (*p)) > maxlen)
 		    maxlen = i;

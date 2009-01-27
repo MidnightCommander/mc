@@ -1,3 +1,8 @@
+2009-0-27 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* mhl/escape.h, src/complete.c, vfs/fish.c: introduced new type 
+	  SHELL_ESCAPED_STR for more type safety
+
 2009-01-25 Ilia Maslakov <il.smind@gmail.com>
 
 	* src/boxes.c, src/boxes.h, src/dir.c, src/dir.h:

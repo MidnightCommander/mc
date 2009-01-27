@@ -18,6 +18,9 @@
 #define mhl_shell_escape_nottoesc(x)	\
     (((x)!=0) && (!mhl_shell_escape_toesc((x))))
 
+/* type for escaped string - just for a bit more type safety ;-p */
+typedef struct { char* s; } SHELL_ESCAPED_STR;
+
 /** To be compatible with the general posix command lines we have to escape
  strings for the command line
 
@@ -26,10 +29,10 @@
  /returns
  return escaped string (later need to free)
  */
-static inline char* mhl_shell_escape_dup(const char* src)
+static inline SHELL_ESCAPED_STR mhl_shell_escape_dup(const char* src)
 {
     if ((src==NULL)||(!(*src)))
-	return strdup("");
+	return (SHELL_ESCAPED_STR){ .s = strdup("") };
 
     char* buffer = calloc(1, strlen(src)*2+2);
     char* ptr = buffer;
@@ -48,7 +51,7 @@ static inline char* mhl_shell_escape_dup(const char* src)
 
 	/* at this point we either have an \0 or an char to escape */
 	if (!c)
-	    return buffer;
+	    return (SHELL_ESCAPED_STR){ .s = buffer };
 
 	*ptr = '\\';
 	ptr++;
