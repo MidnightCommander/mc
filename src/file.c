@@ -1972,7 +1972,6 @@ panel_operate (void *source_panel, FileOperation operation,
 		    value = transform_error;
 		else {
 		    char *temp2 = concat_dir_and_file (dest, temp);
-		    char *temp3;
 
 		    source_with_path = mhl_shell_unescape_buf(source_with_path);
 		    temp2 = mhl_shell_unescape_buf(temp2);
