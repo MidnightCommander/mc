@@ -1795,11 +1795,15 @@ panel_operate (void *source_panel, FileOperation operation,
 	 * dir is deleted)
 	 */
 	if (force_single)
-	    // just copy
+	    /* just copy */
 	    dest_dir_ = mhl_str_dup (dest_dir);
 	else
-	    // add trailing separator
-	    dest_dir_ = mhl_str_concat (dest_dir, PATH_SEP_STR);
+	    /* add trailing separator */
+	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
+		dest_dir_ = mhl_str_concat (dest_dir, PATH_SEP_STR);
+	} else {
+		dest_dir_ = mhl_str_dup (dest_dir);
+	}
 	if (!dest_dir_) {
 	    file_op_context_destroy (ctx);
 	    return 0;
