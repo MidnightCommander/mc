@@ -1,3 +1,9 @@
+2009-01-29 Patrick Winnertz <winnie@debian.org> & Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* src/file.c: Added trailing dir separator for default path in copy/move dialogs.
+	  This solves "strange" rename cases, when copying/moving is performed into
+	  deleted directory.
+
 2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
 
 	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
