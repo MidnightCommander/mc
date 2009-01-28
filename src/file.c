@@ -50,6 +50,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "tty.h"
 #include "eregex.h"
@@ -1777,6 +1779,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
     } else if (operation != OP_DELETE) {
 	char *dest_dir;
+	char *dest_dir_;
 
 	/* Forced single operations default to the original name */
 	if (force_single)
@@ -1786,9 +1789,27 @@ panel_operate (void *source_panel, FileOperation operation,
 	else
 	    dest_dir = panel->cwd;
 
+	/*
+	 * Add trailing backslash only when do non-locally ops.
+	 * It saves user from occasional file renames (when destination
+	 * dir is deleted)
+	 */
+	if (force_single)
+	    // just copy
+	    dest_dir_ = mhl_str_dup (dest_dir);
+	else
+	    // add trailing separator
+	    dest_dir_ = mhl_str_concat (dest_dir, PATH_SEP_STR);
+	if (!dest_dir_) {
+	    file_op_context_destroy (ctx);
+	    return 0;
+	}
+
 	dest =
-	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
+	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
 			      single_entry, &do_bg);
+	mhl_mem_free(dest_dir_);
+
 	if (!dest) {
 	    file_op_context_destroy (ctx);
 	    return 0;
