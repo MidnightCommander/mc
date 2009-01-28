@@ -901,8 +901,8 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
     g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
 				 "chmod %4.4o /%s 2>/dev/null\n"
 				 "echo '### 000'\n", 
-	    mode & 07777, rpath,
-	    mode & 07777, rpath);
+	    mode & 07777, rpath.s,
+	    mode & 07777, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -948,7 +948,7 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    qsetto, rpath, qsetto, rpath);
+	    qsetto.s, rpath.s, qsetto.s, rpath.s);
     mhl_mem_free (qsetto.s);
     POSTFIX(OPT_FLUSH);
 }
@@ -974,16 +974,16 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     	    "#CHOWN %s /%s\n"
 	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
-	    sowner, rpath,
-	    sowner, rpath);
+	    sowner, rpath.s,
+	    sowner, rpath.s);
 	fish_send_command (me, super, buf, OPT_FLUSH); 
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
 	g_snprintf (buf, sizeof(buf),
             "#CHGRP /%s \"/%s\"\n"
 	    "chgrp %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
-	    sgroup, rpath,
-	    sgroup, rpath);
+	    sgroup, rpath.s,
+	    sgroup, rpath.s);
 	/* fish_send_command(me, super, buf, OPT_FLUSH); */
 	POSTFIX (OPT_FLUSH)
     }
@@ -996,7 +996,7 @@ static int fish_unlink (struct vfs_class *me, const char *path)
             "#DELE /%s\n"
 	    "rm -f /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1010,7 +1010,7 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
             "#MKD /%s\n"
 	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1021,7 +1021,7 @@ static int fish_rmdir (struct vfs_class *me, const char *path)
             "#RMD /%s\n"
 	    "rmdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 

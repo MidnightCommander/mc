@@ -60,9 +60,6 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
     int         count = 0;
     size_t      totalsize = 0;
 
-    // first pass: scan through the params and count string sizes
-    va_list par;
-
     if (base)
     {
 	arg_ptr[0] = base;
