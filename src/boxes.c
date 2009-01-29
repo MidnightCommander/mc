@@ -197,7 +197,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
     status =
 	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
-		   "mini-input");
+		   "mini-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, status);
     input_set_point (status, 0);
 
@@ -207,7 +207,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
     user =
 	input_new (7, 9, INPUT_COLOR, DISPLAY_X - 14, init_text,
-		   "user-fmt-input");
+		   "user-fmt-input", INPUT_COMPLETE_DEFAULT);
     add_widget (dd, user);
     input_set_point (user, 0);
 
@@ -1085,17 +1085,17 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 
     g_free (title);
 
-    in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name");
+    in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_user);
 
-    in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain");
+    in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_domain);
     add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
                  buts[1], 0));
     add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
                  buts[0], 0));
 
-    in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password");
+    in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password", INPUT_COMPLETE_DEFAULT);
     in_password->completion_flags = 0;
     in_password->is_password = 1;
     add_widget (auth_dlg, in_password);

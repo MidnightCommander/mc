@@ -122,12 +122,14 @@ typedef struct WGroupbox {
     char *title;
 } WGroupbox;
 
+/* default completion flags for input widgets */
+
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
 WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname);
+WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, int completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
@@ -199,5 +201,21 @@ void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
 			       buttonbarfn cback, void *data);
 void buttonbar_set_visible (WButtonBar *, gboolean);
 void buttonbar_redraw (Dlg_head *h);
+
+/* Completion stuff */
+
+#define INPUT_COMPLETE_FILENAMES	 1
+#define INPUT_COMPLETE_HOSTNAMES	 2
+#define INPUT_COMPLETE_COMMANDS		 4
+#define INPUT_COMPLETE_VARIABLES	 8
+#define INPUT_COMPLETE_USERNAMES	16
+#define INPUT_COMPLETE_CD		32
+
+#define INPUT_COMPLETE_DEFAULT  \
+    ( INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES |     \
+      INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES )
+
+void free_completions (WInput *);
+void complete (WInput *);
 
 #endif

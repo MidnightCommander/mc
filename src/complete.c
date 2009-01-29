@@ -41,7 +41,6 @@
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "complete.h"
 #include "main.h"
 #include "util.h"
 #include "key.h"		/* XCTRL and ALT macros */
@@ -58,6 +57,7 @@ static int look_for_executables = 0;
 static char *
 filename_completion_function (char *text, int state)
 {
+    fprintf(stderr, "filename_completion_function: text=\"%s\" state=%d\n", text, state);
     static DIR *directory;
     static char *filename = NULL;
     static char *dirname = NULL;
@@ -89,6 +89,7 @@ filename_completion_function (char *text, int state)
         /* Save the version of the directory that the user typed. */
         users_dirname = dirname;
         {
+	    // FIXME: memleak ?
 	    dirname = tilde_expand (dirname);
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
@@ -630,12 +631,14 @@ check_is_cd (const char *text, int start, int flags)
 static char **
 try_complete (char *text, int *start, int *end, int flags)
 {
-    int in_command_position = 0, i;
+    int in_command_position = 0;
     char *word, c;
     char **matches = NULL;
     const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
     int is_cd = check_is_cd (text, *start, flags);
+
+    fprintf(stderr, "try_complete() text=\"%s\" start=%d end=%d flags=%d\n", text, *start, *end, flags);
 
     ignore_filenames = 0;
     c = text [*end];
@@ -648,7 +651,7 @@ try_complete (char *text, int *start, int *end, int flags)
        appears after a character that separates commands. And we have to
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS)){
-        i = *start - 1;
+        int i = *start - 1;
 	for (i = *start - 1; i > -1; i--) {
 	    if (text[i] == ' ' || text[i] == '\t'){
 		if (i == 0 ) continue;
@@ -691,7 +694,7 @@ try_complete (char *text, int *start, int *end, int flags)
     	    p = q + 1;
     	q = NULL;
     }
-    
+
     /* Command substitution? */
     if (p > q && p > r){
         matches = completion_matches (p + 1, command_completion_function);
@@ -1035,6 +1038,7 @@ complete_engine (WInput *in, int what_to_do)
     return 0;
 }
 
+//void complete (WInput *in, COMPLETION_STYLE style)
 void complete (WInput *in)
 {
     int engine_flags;

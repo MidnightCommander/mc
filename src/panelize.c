@@ -165,7 +165,7 @@ init_panelize (void)
 
     pname =
 	input_new (UY + 14, UX, INPUT_COLOR, panelize_dlg->cols - 10, "",
-		   "in");
+		   "in", INPUT_COMPLETE_DEFAULT);
     add_widget (panelize_dlg, pname);
 
     add_widget (panelize_dlg, label_new (UY + 13, UX, _("Command")));

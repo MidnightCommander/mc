@@ -34,7 +34,6 @@
 #include "tty.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
-#include "complete.h"		/* completion constants */
 #include "wtools.h"		/* message () */
 #include "panel.h"		/* view_tree enum. Also, needed by main.h */
 #include "main.h"		/* do_cd */
@@ -295,7 +294,7 @@ command_new (int y, int x, int cols)
 {
     WInput *cmd;
 
-    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
+    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline", INPUT_COMPLETE_DEFAULT);
 
     /* Add our hooks */
     cmd->widget.callback = command_callback;

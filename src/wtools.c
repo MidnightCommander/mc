@@ -36,7 +36,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "key.h"		/* mi_getch() */
-#include "complete.h"		/* INPUT_COMPLETE_CD */
 #include "background.h"		/* parent_call */
 
 
@@ -361,7 +360,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	case quick_input:
 	    input =
 		input_new (ypos, xpos, INPUT_COLOR, qw->hotkey_pos,
-			   qw->text, qw->histname);
+			   qw->text, qw->histname, INPUT_COMPLETE_DEFAULT);
 	    input->is_password = qw->value == 1;
 	    input->point = 0;
 	    if (qw->value & 2)

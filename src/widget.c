@@ -42,7 +42,6 @@
 #include "dialog.h"
 #include "widget.h"
 #include "win.h"
-#include "complete.h"
 #include "key.h"	/* XCTRL and ALT macros  */
 #include "profile.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
@@ -1659,7 +1658,7 @@ input_event (Gpm_Event * event, void *data)
 
 WInput *
 input_new (int y, int x, int color, int len, const char *def_text,
-	   const char *histname)
+	   const char *histname, int completion_flags)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
@@ -1688,9 +1687,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
     initial_buffer_len = 1 + max ((size_t) len, strlen (def_text));
     in->widget.options |= W_IS_INPUT;
     in->completions = NULL;
-    in->completion_flags =
-	INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES |
-	INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES;
+    in->completion_flags = completion_flags;
     in->current_max_len = initial_buffer_len;
     in->buffer = g_malloc (initial_buffer_len);
     in->color = color;
