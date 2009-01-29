@@ -3,6 +3,22 @@
 
 #include "dialog.h"		/* Widget */
 
+/* Completion stuff */
+
+typedef enum {
+    INPUT_COMPLETE_FILENAMES = 1<<0,
+    INPUT_COMPLETE_HOSTNAMES = 1<<1,
+    INPUT_COMPLETE_COMMANDS  = 1<<2,
+    INPUT_COMPLETE_VARIABLES = 1<<3,
+    INPUT_COMPLETE_USERNAMES = 1<<4,
+    INPUT_COMPLETE_CD        = 1<<5,
+
+    INPUT_COMPLETE_DEFAULT   = INPUT_COMPLETE_FILENAMES
+                             | INPUT_COMPLETE_HOSTNAMES
+                             | INPUT_COMPLETE_VARIABLES
+                             | INPUT_COMPLETE_USERNAMES
+} INPUT_COMPLETE_FLAGS;
+
 /* Please note that the first element in all the widgets is a     */
 /* widget variable of type Widget.  We abuse this fact everywhere */
 
@@ -70,7 +86,7 @@ typedef struct {
     GList *history;		/* The history */
     int  need_push;		/* need to push the current Input on hist? */
     char **completions;		/* Possible completions array */
-    int  completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */
+    INPUT_COMPLETE_FLAGS completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */
     char *history_name;		/* name of history for loading and saving */
 } WInput;
 
@@ -122,14 +138,13 @@ typedef struct WGroupbox {
     char *title;
 } WGroupbox;
 
-/* default completion flags for input widgets */
 
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
 WRadio  *radio_new    (int y, int x, int count, const char **text);
 WCheck  *check_new    (int y, int x, int state,  const char *text);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, int completion_flags);
+WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, INPUT_COMPLETE_FLAGS completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
@@ -201,19 +216,6 @@ void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
 			       buttonbarfn cback, void *data);
 void buttonbar_set_visible (WButtonBar *, gboolean);
 void buttonbar_redraw (Dlg_head *h);
-
-/* Completion stuff */
-
-#define INPUT_COMPLETE_FILENAMES	 1
-#define INPUT_COMPLETE_HOSTNAMES	 2
-#define INPUT_COMPLETE_COMMANDS		 4
-#define INPUT_COMPLETE_VARIABLES	 8
-#define INPUT_COMPLETE_USERNAMES	16
-#define INPUT_COMPLETE_CD		32
-
-#define INPUT_COMPLETE_DEFAULT  \
-    ( INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES |     \
-      INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES )
 
 void free_completions (WInput *);
 void complete (WInput *);

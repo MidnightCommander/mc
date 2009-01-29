@@ -1658,7 +1658,7 @@ input_event (Gpm_Event * event, void *data)
 
 WInput *
 input_new (int y, int x, int color, int len, const char *def_text,
-	   const char *histname, int completion_flags)
+	   const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;

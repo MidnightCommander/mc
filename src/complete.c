@@ -603,7 +603,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 
 /* Check if directory completion is needed */
 static int
-check_is_cd (const char *text, int start, int flags)
+check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
 {
     const char *p, *q;
 
