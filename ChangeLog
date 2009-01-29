@@ -19,6 +19,10 @@
 	* mhl/string.h, vfs/fish.c, vfs/utilvfs.c, vfs/utilvfs.h: Reworked fish code
 	  so that symlinks and files which special characters works now
 
+2009-01-25 Mikhail S. Pobolovets <styx.mp@gmail.com>
+	* src/cmd.c src/option.c src/setup.c src/main.h: Automatic new directory(Mkdir, F7)
+	  name filling. Can be configured (on|off) in 'Configure options'
+
 2009-01-25 Enrico Weigelt <weigelt@metux.de>
 
 	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:
