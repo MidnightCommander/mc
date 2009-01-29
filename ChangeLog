@@ -1,3 +1,8 @@
+
+2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
+	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.
+	  odt2txt is now used
+
 2009-01-29 Patrick Winnertz <winnie@debian.org> & Sergei Trofimovich  <slyfox@inbox.ru>
 
 	* src/file.c: Added trailing dir separator for default path in copy/move dialogs.
