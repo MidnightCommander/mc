@@ -3,7 +3,7 @@ dnl Configure.in file for the Midnight Commander
 dnl
 
 AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
-AC_PREREQ(2.54)
+AC_PREREQ(2.60)
 m4_pattern_forbid(MC_)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
