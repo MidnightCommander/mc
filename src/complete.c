@@ -57,7 +57,6 @@ static int look_for_executables = 0;
 static char *
 filename_completion_function (char *text, int state)
 {
-    fprintf(stderr, "filename_completion_function: text=\"%s\" state=%d\n", text, state);
     static DIR *directory;
     static char *filename = NULL;
     static char *dirname = NULL;
@@ -75,7 +74,6 @@ filename_completion_function (char *text, int state)
         g_free (filename);
         g_free (users_dirname);
 
-	text = mhl_shell_unescape_buf(text);
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = g_strdup (++temp);
 	    dirname = g_strndup (text, temp - text);
@@ -404,6 +402,7 @@ hostname_completion_function (char *text, int state)
 static char *
 command_completion_function (char *text, int state)
 {
+    text = mhl_shell_unescape_buf(text);
     static const char *path_end;
     static int isabsolute;
     static int phase;
@@ -448,8 +447,14 @@ command_completion_function (char *text, int state)
     if (isabsolute) {
 	p = filename_completion_function (text, state);
 	if (!p)
+	{
 	    look_for_executables = 0;
-	return p;
+	    return 0;
+	}
+
+	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
+	mhl_mem_free(p);
+	return e_p.s;
     }
 
     found = NULL;
@@ -507,6 +512,7 @@ command_completion_function (char *text, int state)
 	p++;
 	p = g_strdup (p);
 	g_free (found);
+	/* TODO: shell escape? */
 	return p;
     }
     return found;
@@ -638,7 +644,6 @@ try_complete (char *text, int *start, int *end, int flags)
     char *p = NULL, *q = NULL, *r = NULL;
     int is_cd = check_is_cd (text, *start, flags);
 
-    fprintf(stderr, "try_complete() text=\"%s\" start=%d end=%d flags=%d\n", text, *start, *end, flags);
 
     ignore_filenames = 0;
     c = text [*end];
@@ -960,15 +965,14 @@ complete_engine (WInput *in, int what_to_do)
     
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	        SHELL_ESCAPED_STR complete = mhl_shell_escape_dup(in->completions [0]);
-    	    if (insert_text (in, complete.s, strlen (complete.s))){
+	        char * complete = in->completions [0];
+	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
 		else
 		    free_completions (in);
 	    } else
 	        beep ();
-	    mhl_mem_free(complete.s);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
@@ -979,10 +983,6 @@ complete_engine (WInput *in, int what_to_do)
     	    WListbox *query_list;
 
     	    for (p=in->completions + 1; *p; count++, p++) {
-		q = *p;
-		SHELL_ESCAPED_STR esc = mhl_shell_escape_dup(*p);
-		*p = esc.s;
-		mhl_mem_free(q);
 		if ((i = strlen (*p)) > maxlen)
 		    maxlen = i;
 	    }
