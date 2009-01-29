@@ -8,6 +8,11 @@
 
 	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
 
+2009-01-27 Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* syntax/python.syntax: Added syntax highlighting for
+	pytnoh-2.6+ keywords (patch sent by NNemec)
+
 2009-01-25 Ilia Maslakov <il.smind@gmail.com>
 
 	* src/boxes.c, src/boxes.h, src/dir.c, src/dir.h:
