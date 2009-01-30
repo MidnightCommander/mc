@@ -27,9 +27,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -227,14 +228,14 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
         p = get_nth_panel_name (num);
         panel = g_new (WPanel, 1);
         panel->list_type = list_full;
-        panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
+        panel->user_format = mhl_str_dup (DEFAULT_USER_FORMAT);
         panel->user_mini_status = 0;
 	for (i = 0; i < LIST_TYPES; i++)
-    	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
+    	    panel->user_status_format[i] = mhl_str_dup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (!profile_has_section (section, profile_name)) {
             g_free (section);
-            section = g_strdup (p);
+            section = mhl_str_dup (p);
         }
         panel_load_setup (panel, section);
         g_free (section);
@@ -257,8 +258,8 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     
     if (dd->ret_value != B_CANCEL){
 	result = my_radio->sel;
-	*userp = g_strdup (user->buffer);
-	*minip = g_strdup (status->buffer);
+	*userp = mhl_str_dup (user->buffer);
+	*minip = mhl_str_dup (status->buffer);
 	*use_msformat = check_status->state & C_BOOL;
     }
     destroy_dlg (dd);
@@ -691,7 +692,7 @@ tree_box (const char *current_dir)
     
     run_dlg (dlg);
     if (dlg->ret_value == B_ENTER)
-	val = g_strdup (tree_selected_name (mytree));
+	val = mhl_str_dup (tree_selected_name (mytree));
     else
 	val = 0;
     
@@ -1113,11 +1114,11 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     default:
         return_value = g_new (struct smb_authinfo, 1);
         if (return_value) {
-            return_value->host = g_strdup (host);
-            return_value->share = g_strdup (share);
-            return_value->domain = g_strdup (in_domain->buffer);
-            return_value->user = g_strdup (in_user->buffer);
-            return_value->password = g_strdup (in_password->buffer);
+            return_value->host = mhl_str_dup (host);
+            return_value->share = mhl_str_dup (share);
+            return_value->domain = mhl_str_dup (in_domain->buffer);
+            return_value->user = mhl_str_dup (in_user->buffer);
+            return_value->password = mhl_str_dup (in_password->buffer);
         }
     }
 

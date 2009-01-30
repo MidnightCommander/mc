@@ -26,10 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 
@@ -502,7 +503,7 @@ cmd_label(config_t *cfg, int argc, char *argv[])
     }
 
     keymap_add(cfg->keymap, KEY_F(fn), cmd->val);
-    cfg->labels[fn - 1] = g_strdup(label);
+    cfg->labels[fn - 1] = mhl_str_dup(label);
 
     return TRUE;
 }
@@ -550,7 +551,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
 	}
 
 	if (!(c->handler(cfg, args->len, argv))) {
-	    char *ss = g_strdup(error_msg);
+	    char *ss = mhl_str_dup(error_msg);
 	    snprintf(error_msg, sizeof(error_msg),
 			 _("%s:%d: %s"), file, line, ss);
 	    g_free(ss);

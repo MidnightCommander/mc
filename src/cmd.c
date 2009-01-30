@@ -23,7 +23,6 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_MMAP
@@ -33,6 +32,8 @@
 #include <netdb.h>
 #endif
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "cmd.h"		/* Our definitions */
@@ -369,7 +370,7 @@ mkdir_cmd (void)
 	return;
 
     if (dir[0] == '/' || dir[0] == '~')
-	absdir = g_strdup (dir);
+	absdir = mhl_str_dup (dir);
     else
 	absdir = concat_dir_and_file (current_panel->cwd, dir);
 
@@ -611,7 +612,7 @@ menu_edit_cmd (int where)
 
     switch (dir) {
 	case 0:
-	    buffer = g_strdup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
+	    buffer = mhl_str_dup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 
@@ -934,7 +935,7 @@ do_link (int symbolic_link, const char *fname)
 	if (get_other_type () == view_listing) {
 	    d = concat_dir_and_file (other_panel->cwd, fname);
 	} else {
-	    d = g_strdup (fname);
+	    d = mhl_str_dup (fname);
 	}
 
 	symlink_dialog (s, d, &dest, &src);
@@ -1053,7 +1054,7 @@ char *guess_message_value (void)
     if (locale == NULL)
 	locale = "";
 
-    return g_strdup (locale);
+    return mhl_str_dup (locale);
 }
 
 /*
@@ -1071,7 +1072,7 @@ get_random_hint (int force)
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
     if (!force && !(tv.tv_sec > last_sec + 60))
-	return g_strdup ("");
+	return mhl_str_dup ("");
     last_sec = tv.tv_sec;
 
     data = load_mc_home_file (MC_HINT, NULL);
@@ -1092,7 +1093,7 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = g_strdup (&data[start]);
+    result = mhl_str_dup (&data[start]);
     g_free (data);
     return result;
 }

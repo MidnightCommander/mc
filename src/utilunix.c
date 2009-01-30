@@ -41,6 +41,8 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "execute.h"
 #include "wtools.h"		/* message() */
@@ -72,7 +74,7 @@ static void i_cache_add (int id, int_cache *cache, int size, char *text,
 			 int *last)
 {
     g_free (cache [*last].string);
-    cache [*last].string = g_strdup (text);
+    cache [*last].string = mhl_str_dup (text);
     cache [*last].index = id;
     *last = ((*last)+1) % size;
 }
@@ -186,7 +188,7 @@ tilde_expand (const char *directory)
     char *name;
 
     if (*directory != '~')
-	return g_strdup (directory);
+	return mhl_str_dup (directory);
 
     p = directory + 1;
 
@@ -208,7 +210,7 @@ tilde_expand (const char *directory)
 
     /* If we can't figure the user name, leave tilde unexpanded */
     if (!passwd)
-	return g_strdup (directory);
+	return mhl_str_dup (directory);
 
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
 }

@@ -26,10 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -72,11 +73,11 @@ filename_completion_function (char *text, int state)
         g_free (users_dirname);
 
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
-	    filename = g_strdup (++temp);
+	    filename = mhl_str_dup (++temp);
 	    dirname = g_strndup (text, temp - text);
 	} else {
-	    dirname = g_strdup (".");
-	    filename = g_strdup (text);
+	    dirname = mhl_str_dup (".");
+	    filename = mhl_str_dup (text);
 	}
 
         /* We aren't done yet.  We also support the "~user" syntax. */
@@ -428,7 +429,7 @@ command_completion_function (char *text, int state)
 	    words = bash_reserved;
 	    phase = 0;
 	    text_len = strlen (text);
-	    if (!path && (path = g_strdup (getenv ("PATH"))) != NULL) {
+	    if (!path && (path = mhl_str_dup (getenv ("PATH"))) != NULL) {
 		p = path;
 		path_end = strchr (p, 0);
 		while ((p = strchr (p, PATH_ENV_SEP))) {
@@ -450,7 +451,7 @@ command_completion_function (char *text, int state)
     case 0:			/* Reserved words */
 	while (*words) {
 	    if (!strncmp (*words, text, text_len))
-		return g_strdup (*(words++));
+		return mhl_str_dup (*(words++));
 	    words++;
 	}
 	phase++;
@@ -458,7 +459,7 @@ command_completion_function (char *text, int state)
     case 1:			/* Builtin commands */
 	while (*words) {
 	    if (!strncmp (*words, text, text_len))
-		return g_strdup (*(words++));
+		return mhl_str_dup (*(words++));
 	    words++;
 	}
 	phase++;
@@ -498,7 +499,7 @@ command_completion_function (char *text, int state)
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
-	p = g_strdup (p);
+	p = mhl_str_dup (p);
 	g_free (found);
 	return p;
     }
@@ -634,7 +635,7 @@ try_complete (char *text, int *start, int *end, int flags)
     ignore_filenames = 0;
     c = text [*end];
     text [*end] = 0;
-    word = g_strdup (text + *start);
+    word = mhl_str_dup (text + *start);
     text [*end] = c;
 
     /* Determine if this could be a command word. It is if it appears at
@@ -725,7 +726,7 @@ try_complete (char *text, int *start, int *end, int flags)
     	    if (!strncmp (p, "cd", 2))
     	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++);
     	    if (p == q){
-		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
+		char * const cdpath_ref = mhl_str_dup (getenv ("CDPATH"));
 		char *cdpath = cdpath_ref;
 		char c, *s, *r;
 

@@ -48,10 +48,11 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "setup.h"		/* verbose */
@@ -881,7 +882,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
 
     /* filter out a possible password from def_text */
-    def_text_secure = strip_password (g_strdup (def_text), 1);
+    def_text_secure = strip_password (mhl_str_dup (def_text), 1);
 
     /* Create the dialog */
 
@@ -971,14 +972,14 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	    && ((!only_one && !is_wildcarded (ctx->dest_mask))
 		|| (only_one && !mc_stat (dest_dir, &buf)
 		    && S_ISDIR (buf.st_mode)))))
-	ctx->dest_mask = g_strdup ("*");
+	ctx->dest_mask = mhl_str_dup ("*");
     else {
-	ctx->dest_mask = g_strdup (ctx->dest_mask);
+	ctx->dest_mask = mhl_str_dup (ctx->dest_mask);
 	*orig_mask = 0;
     }
     if (!*dest_dir) {
 	g_free (dest_dir);
-	dest_dir = g_strdup ("./");
+	dest_dir = mhl_str_dup ("./");
     }
     if (val == B_USER)
 	*do_background = 1;

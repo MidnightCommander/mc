@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -271,7 +272,7 @@ local_getlocalcopy (struct vfs_class *me, const char *path)
 {
     (void) me;
 
-    return g_strdup (path);
+    return mhl_str_dup (path);
 }
 
 static int

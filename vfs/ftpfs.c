@@ -69,6 +69,8 @@ What to do with this?
 #include <errno.h>
 #include <ctype.h>
 
+#include <mhl/string.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -172,7 +174,7 @@ static char *
 ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {
     if (!SUP.remote_is_amiga)
-	return g_strdup (remote_path);
+	return mhl_str_dup (remote_path);
     else {
 	char *ret, *p;
 
@@ -190,9 +192,9 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
 	 * invalid.
 	 */
         if (*remote_path == '\0')
-	    return g_strdup ("."); 
+	    return mhl_str_dup ("."); 
 
-	ret = g_strdup (remote_path);
+	ret = mhl_str_dup (remote_path);
 
 	/* replace first occurance of ":/" with ":" */
 	if ((p = strchr (ret, ':')) && *(p + 1) == '/')
@@ -233,7 +235,7 @@ ftpfs_split_url(char *path, char **host, char **user, int *port, char **pass)
 	if (use_netrc)
 	    ftpfs_netrc_lookup (*host, user, pass);
 	if (!*user)
-	    *user = g_strdup ("anonymous");
+	    *user = mhl_str_dup ("anonymous");
     }
 
     /* Look up password in netrc for known user */
@@ -441,13 +443,13 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
     SUP.isbinary = TYPE_UNKNOWN;
 
     if (SUP.password)		/* explicit password */
-	op = g_strdup (SUP.password);
+	op = mhl_str_dup (SUP.password);
     else if (netrcpass)		/* password from netrc */
-	op = g_strdup (netrcpass);
+	op = mhl_str_dup (netrcpass);
     else if (!strcmp (SUP.user, "anonymous") || !strcmp (SUP.user, "ftp")) {
 	if (!ftpfs_anonymous_passwd)	/* default anonymous password */
 	    ftpfs_init_passwd ();
-	op = g_strdup (ftpfs_anonymous_passwd);
+	op = mhl_str_dup (ftpfs_anonymous_passwd);
 	anon = 1;
     } else {			/* ask user */
 	char *p;
@@ -458,7 +460,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 	g_free (p);
 	if (op == NULL)
 	    ERRNOR (EPERM, 0);
-	SUP.password = g_strdup (op);
+	SUP.password = mhl_str_dup (op);
     }
 
     if (!anon || MEDATA->logfile)
@@ -475,7 +477,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
 			 SUP.host[0] == '!' ? SUP.host + 1 : SUP.host,
 			 NULL);
     } else
-	name = g_strdup (SUP.user);
+	name = mhl_str_dup (SUP.user);
 
     if (ftpfs_get_reply
 	(me, SUP.sock, reply_string,
@@ -571,7 +573,7 @@ ftpfs_load_no_proxy_list (void)
 	    *p = '\0';
 	    
 	    np = g_new (struct no_proxy_entry, 1);
-	    np->domain = g_strdup (s);
+	    np->domain = mhl_str_dup (s);
 	    np->next   = NULL;
 	    if (no_proxy)
 		current->next = np;
@@ -764,7 +766,7 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     
     SUP.cwdir = ftpfs_get_current_directory (me, super);
     if (!SUP.cwdir)
-        SUP.cwdir = g_strdup (PATH_SEP_STR);
+        SUP.cwdir = mhl_str_dup (PATH_SEP_STR);
     return 0;
 }
 
@@ -791,7 +793,7 @@ ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     SUP.strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP.isbinary = TYPE_UNKNOWN;
     SUP.remote_is_amiga = 0;
-    super->name = g_strdup ("/");
+    super->name = mhl_str_dup ("/");
     super->root =
 	vfs_s_new_inode (me, super,
 			 vfs_s_default_stat (me, S_IFDIR | 0755));
@@ -842,7 +844,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 		            *bufq = 0;
 		        }
 			if (*bufp == '/')
-			    return g_strdup (bufp);
+			    return mhl_str_dup (bufp);
 			else {
 			    /* If the remote server is an Amiga a leading slash
 			       might be missing. MC needs it because it is used
@@ -1477,7 +1479,7 @@ static int
 ftpfs_send_command(struct vfs_class *me, const char *filename, const char *cmd, int flags)
 {
     const char *rpath;
-    char *p, *mpath = g_strdup(filename);
+    char *p, *mpath = mhl_str_dup(filename);
     struct vfs_s_super *super;
     int r;
     int flush_directory_cache = (flags & OPT_FLUSH);
@@ -1519,7 +1521,7 @@ ftpfs_init_passwd(void)
      * - We don't want to let ftp sites to discriminate by the user,
      *   host or country.
      */
-    ftpfs_anonymous_passwd = g_strdup ("anonymous@");
+    ftpfs_anonymous_passwd = mhl_str_dup ("anonymous@");
 }
 
 static int ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
@@ -1581,7 +1583,7 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
 	ftpfs_errno = EIO;
     } else {
 	g_free(SUP.cwdir);
-	SUP.cwdir = g_strdup (remote_path);
+	SUP.cwdir = mhl_str_dup (remote_path);
 	SUP.cwd_deferred = 0;
     }
     return r;
@@ -1878,9 +1880,9 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next) {
 	if (!strcmp (host, rupp->host)) {
 	    if (rupp->login)
-		*login = g_strdup (rupp->login);
+		*login = mhl_str_dup (rupp->login);
 	    if (pass && rupp->pass)
-		*pass = g_strdup (rupp->pass);
+		*pass = mhl_str_dup (rupp->pass);
 	    return 0;
 	}
     }
@@ -1921,7 +1923,7 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 	    }
 
 	    /* We have login name now */
-	    *login = g_strdup (buffer);
+	    *login = mhl_str_dup (buffer);
 	    break;
 
 	case NETRC_PASSWORD:
@@ -1940,7 +1942,7 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 
 	    /* Remember password.  pass may be NULL, so use tmp_pass */
 	    if (tmp_pass == NULL)
-		tmp_pass = g_strdup (buffer);
+		tmp_pass = mhl_str_dup (buffer);
 	    break;
 
 	case NETRC_ACCOUNT:
@@ -1968,14 +1970,14 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     g_free (netrcname);
 
     rupp = g_new (struct rupcache, 1);
-    rupp->host = g_strdup (host);
+    rupp->host = mhl_str_dup (host);
     rupp->login = rupp->pass = 0;
 
     if (*login != NULL) {
-	rupp->login = g_strdup (*login);
+	rupp->login = mhl_str_dup (*login);
     }
     if (tmp_pass != NULL)
-	rupp->pass = g_strdup (tmp_pass);
+	rupp->pass = mhl_str_dup (tmp_pass);
     rupp->next = rup_cache;
     rup_cache = rupp;
 

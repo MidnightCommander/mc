@@ -45,9 +45,10 @@
 
 #include <errno.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -104,7 +105,7 @@ static const char *
 search_string (const char *start, const char *text)
 {
     const char *result = NULL;
-    char *local_text = g_strdup (text);
+    char *local_text = mhl_str_dup (text);
     char *d = local_text;
     const char *e = start;
 

@@ -29,6 +29,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "tty.h"
 #include "color.h"		/* dialog_colors */
@@ -406,7 +408,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		    *qw->str_result =
 			tilde_expand (((WInput *) w)->buffer);
 		else
-		    *qw->str_result = g_strdup (((WInput *) w)->buffer);
+		    *qw->str_result = mhl_str_dup (((WInput *) w)->buffer);
 		break;
 	    }
 	}
@@ -499,7 +501,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     Quick_input.title = header;
     Quick_input.help = help;
     Quick_input.i18n = 1; /* The dialog is already translated. */
-    p_text = g_strstrip (g_strdup (text));
+    p_text = g_strstrip (mhl_str_dup (text));
     quick_widgets[INPUT_INDEX + 1].text = p_text;
     quick_widgets[INPUT_INDEX].text = def_text;
 

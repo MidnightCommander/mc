@@ -34,6 +34,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/string.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -74,7 +76,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     char *pname;	/* name of parent archive */
     char *pqname;	/* name of parent archive, quoted */
 
-    pname = g_strdup (name);
+    pname = mhl_str_dup (name);
     vfs_split (pname, &inpath, &op);
     if ((w = (*me->which) (me, op)) == -1)
 	vfs_die ("This cannot happen... Hopefully.\n");
@@ -180,7 +182,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
 
     if (!sfs_vfmake (me, name, cache)) {
 	cur = g_new (struct cachedfile, 1);
-	cur->name = g_strdup (name);
+	cur->name = mhl_str_dup (name);
 	cur->cache = cache;
 	cur->next = head;
 	head = cur;
@@ -314,7 +316,7 @@ static char *
 sfs_getlocalcopy (struct vfs_class *me, const char *path)
 {
     path = sfs_redirect (me, path);
-    return g_strdup (path);
+    return mhl_str_dup (path);
 }
 
 static int
@@ -389,8 +391,8 @@ static int sfs_init (struct vfs_class *me)
 	if ((semi = strchr (c, '\n')))
 	    *semi = 0;
 
-	sfs_prefix [sfs_no] = g_strdup (key);
-	sfs_command [sfs_no] = g_strdup (c);
+	sfs_prefix [sfs_no] = mhl_str_dup (key);
+	sfs_command [sfs_no] = mhl_str_dup (c);
 	sfs_flags [sfs_no] = flags;
 	sfs_no++;
     }

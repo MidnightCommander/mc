@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "tty.h"
 #include "mouse.h"
@@ -216,7 +218,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     /* Strip existing spaces, add one space before and after the title */
     if (title) {
 	char *t;
-	t = g_strstrip (g_strdup (title));
+	t = g_strstrip (mhl_str_dup (title));
 	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
 	g_free (t);
     }

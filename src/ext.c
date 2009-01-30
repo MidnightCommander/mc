@@ -25,8 +25,9 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -590,7 +591,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 			 * we get filename as a pointer from current_panel->dir).
 			 */
 			if (p < q) {
-			    char *filename_copy = g_strdup (filename);
+			    char *filename_copy = mhl_str_dup (filename);
 
 			    exec_extension (filename_copy, r + 1, move_dir,
 					    view_at_line_number);

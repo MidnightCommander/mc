@@ -39,10 +39,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -664,7 +665,7 @@ static void
 view_set_datasource_string (WView *view, const char *s)
 {
     view->datasource = DS_STRING;
-    view->ds_string_data = (byte *) g_strdup (s);
+    view->ds_string_data = (byte *) mhl_str_dup (s);
     view->ds_string_len  = strlen (s);
 }
 
@@ -1392,8 +1393,8 @@ view_toggle_magic_mode (WView *view)
 
     altered_magic_flag = 1;
     view->magic_mode = !view->magic_mode;
-    filename = g_strdup (view->filename);
-    command = g_strdup (view->command);
+    filename = mhl_str_dup (view->filename);
+    command = mhl_str_dup (view->command);
 
     view_done (view);
     view_load (view, command, filename, 0);
@@ -1499,7 +1500,7 @@ view_load (WView *view, const char *command, const char *file,
 
     /* Set up the state */
     view_set_datasource_none (view);
-    view->filename = g_strdup (file);
+    view->filename = mhl_str_dup (file);
     view->command = 0;
 
     /* Clear the markers */
@@ -1553,7 +1554,7 @@ view_load (WView *view, const char *command, const char *file,
     }
 
   finish:
-    view->command = g_strdup (command);
+    view->command = mhl_str_dup (command);
     view->dpy_start = 0;
     view->search_start = 0;
     view->search_length = 0;
@@ -2167,7 +2168,7 @@ view_hexedit_save_changes (WView *view)
     }
 
     if (mc_close (fp) == -1) {
-	error = g_strdup (strerror (errno));
+	error = mhl_str_dup (strerror (errno));
 	message (D_ERROR, _(" Save file "),
 	    _(" Error while closing the file: \n %s \n"
 	      " Data may have been written or not. "), error);
@@ -2177,7 +2178,7 @@ view_hexedit_save_changes (WView *view)
     return TRUE;
 
   save_error:
-    error = g_strdup (strerror (errno));
+    error = mhl_str_dup (strerror (errno));
     text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
     g_free (error);
     (void) mc_close (fp);
@@ -2651,7 +2652,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
 	    message (D_ERROR, MSG_ERROR, _(" Invalid regular expression "));
 	    return -1;
 	}
-	old_pattern = g_strdup (pattern);
+	old_pattern = mhl_str_dup (pattern);
 	old_type = match_type;
     }
     if (regexec (&r, string, 1, pmatch, 0) != 0)
@@ -2846,7 +2847,7 @@ view_normal_search_cmd (WView *view)
 	"[Input Line Keys]", quick_widgets, 0
     };
 
-    defval = g_strdup (last_search_string != NULL ? last_search_string : "");
+    defval = mhl_str_dup (last_search_string != NULL ? last_search_string : "");
     convert_to_display (defval);
 
     quick_widgets[2].result = &treplace_backwards;

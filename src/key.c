@@ -29,9 +29,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -1232,7 +1233,7 @@ char *learn_key (void)
     keypad(stdscr, TRUE);
     nodelay (stdscr, FALSE);
     *p = 0;
-    return g_strdup (buffer);
+    return mhl_str_dup (buffer);
 }
 
 /* xterm and linux console only: set keypad to numeric or application
