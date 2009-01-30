@@ -1,0 +1,150 @@
+# Adam Pribyl, based on ADA
+# missing
+# generate, disconnect, group, guarded, impure, inertial, linkage, literal, new, on, others, postponed, pure, register, reject, select, shared, sli, transport, unaffected, units
+
+
+#wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.\\[]{}
+
+#ignore case?!
+
+context default
+
+	keyword whole with	yellow
+	keyword whole use	yellow
+	keyword whole is	yellow
+	keyword whole of	yellow
+	keyword whole range	yellow
+	keyword whole abs	yellow
+	keyword whole delta	yellow
+	keyword whole return	yellow
+	keyword whole next	yellow
+	keyword whole null	yellow
+	keyword whole after	yellow
+	keyword whole array	yellow
+	keyword whole downto	yellow
+	keyword whole to	yellow
+
+# prevents - keyword from interfering with comment
+	keyword --	brown
+
+# expressions
+	keyword :=	brightgreen
+	keyword .	brightgreen
+	keyword ;	brightgreen
+	keyword ..	brightgreen
+	keyword :	brightgreen
+	keyword (	brightgreen
+	keyword )	brightgreen
+	keyword \+	brightgreen
+	keyword -	brightgreen
+	keyword /	brightgreen
+	keyword \*	brightgreen
+	keyword \*\*	brightgreen
+	keyword #	brightgreen
+	keyword =>	brightgreen
+	keyword <=	brightgreen
+	keyword >=	brightgreen
+	keyword ,	brightgreen
+	keyword '	brightgreen
+	keyword =	brightgreen
+	keyword /=	brightgreen
+
+# operators
+	keyword whole sll	green
+	keyword whole srl	green
+	keyword whole sla	green
+	keyword whole sra	green
+	keyword whole rol	green
+	keyword whole ror	green
+	keyword whole rem	green
+	keyword whole mod	green
+	keyword whole not	green
+	keyword whole and	green
+	keyword whole nand	green
+	keyword whole or	green
+	keyword whole xor	green
+	keyword whole nor	green
+	keyword whole xnor	green
+	
+# sequential statements
+	keyword whole begin	brightred
+	keyword whole end	brightred
+	keyword whole exit	brightred
+	keyword whole for	brightred
+	keyword whole while	brightred
+	keyword whole if	brightred
+	keyword whole then	brightred
+	keyword whole else	brightred
+	keyword whole case	brightred
+	keyword whole when	brightred
+	keyword whole elsif	brightred
+	keyword whole assert	brightred
+	keyword	whole wait	brightred
+	keyword	whole open	brightred
+	keyword whole loop	brightred
+	keyword whole until	brightred
+
+# parallel statements
+	keyword whole block	brightred
+
+# predefined types
+	keyword whole integer	cyan
+	keyword whole natural	cyan
+	keyword whole positive	cyan
+	keyword whole string	cyan
+	keyword whole character	cyan
+	keyword whole boolean	cyan
+	keyword whole real	cyan
+	keyword whole bit	cyan
+	keyword whole bit_vector	cyan
+	keyword whole time	cyan
+
+# declarations
+	keyword whole type	brightcyan
+	keyword whole subtype	brightcyan
+
+	keyword whole variable	brightcyan
+	keyword whole signal	brightcyan
+	keyword whole constant	brightcyan
+	keyword whole file	brightcyan
+
+	keyword whole port	brightcyan
+	keyword whole map	brightcyan
+	keyword whole label	brightcyan
+	keyword whole record	brightcyan
+	keyword whole generic	brightcyan
+	keyword whole alias	brightcyan
+	keyword whole attribute	brightcyan
+	
+
+	keyword whole in	white
+	keyword whole out	white
+	keyword whole inout	white
+	keyword whole buffer	white
+	keyword whole bus	white
+	
+# library units
+	keyword whole library	magenta
+	keyword whole entity	magenta
+	keyword whole architecture	magenta
+	keyword whole package	magenta
+	keyword whole body	magenta
+	keyword whole procedure	magenta
+	keyword whole function	magenta
+	keyword whole configuration	magenta
+	keyword whole component	magenta
+	keyword whole generic	magenta
+	keyword whole process	magenta
+
+# reports
+	keyword whole report	red
+	keyword whole severity	red
+	keyword whole note	red
+	keyword whole warning	red
+	keyword whole error	red
+	keyword whole failure	red
+	
+
+context exclusive -- \n	brown
+context " "	green/green
+
