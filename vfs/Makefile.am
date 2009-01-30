@@ -1,16 +1,12 @@
 if USE_SAMBA_FS
-SUBDIRS = samba extfs
-else
-SUBDIRS = extfs
+SAMBA_CFLAGS  = -DCONFIGDIR=\""@configdir@"\"
+SAMBA_SUBDIRS = samba
 endif
 
 DIST_SUBDIRS = extfs
 
-if USE_SAMBA_FS
-AM_CFLAGS = $(GLIB_CFLAGS) -DCONFIGDIR=\""@configdir@"\"
-else
-AM_CFLAGS = $(GLIB_CFLAGS)
-endif
+SUBDIRS   = extfs $(SAMBA_SUBDIRS)
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(SAMBA_CFLAGS)
 
 BASICFILES = 			\
 	cpio.c			\
