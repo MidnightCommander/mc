@@ -946,7 +946,6 @@ query_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 static int
 complete_engine (WInput *in, int what_to_do)
 {
-    char *complete = NULL;
     if (in->completions && in->point != end)
     	free_completions (in);
     if (!in->completions){
