@@ -41,6 +41,8 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "execute.h"
 #include "wtools.h"		/* message() */
@@ -426,7 +428,7 @@ canonicalize_pathname (char *path)
 	if (p[0] == PATH_SEP && p[1] == PATH_SEP) {
 	    s = p + 1;
 	    while (*(++s) == PATH_SEP);
-	    strcpy (p + 1, s);
+	    mhl_strmove (p + 1, s);
 	}
 	p++;
     }
@@ -435,7 +437,7 @@ canonicalize_pathname (char *path)
     p = lpath;
     while (*p) {
 	if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
-	    strcpy (p, p + 2);
+	    mhl_strmove (p, p + 2);
 	else
 	    p++;
     }
@@ -451,7 +453,7 @@ canonicalize_pathname (char *path)
 	    lpath[1] = 0;
 	    return;
 	} else {
-	    strcpy (lpath, lpath + 2);
+	    mhl_strmove (lpath, lpath + 2);
 	}
     }
 
@@ -497,10 +499,10 @@ canonicalize_pathname (char *path)
 	if (p[3] != 0) {
 	    if (s == lpath && *s == PATH_SEP) {
 		/* "/../foo" -> "/foo" */
-		strcpy (s + 1, p + 4);
+		mhl_strmove (s + 1, p + 4);
 	    } else {
 		/* "token/../foo" -> "foo" */
-		strcpy (s, p + 4);
+		mhl_strmove (s, p + 4);
 	    }
 	    p = (s > lpath) ? s - 1 : s;
 	    continue;

@@ -3,6 +3,7 @@
 
 #include <ctype.h>
 #include <stdarg.h>
+#include <assert.h>
 #include <mhl/memory.h>
 
 #define	mhl_str_dup(str)	((str ? strdup(str) : strdup("")))
@@ -123,4 +124,16 @@ static inline char* mhl_str_reverse(char* ptr)
     return ptr;
 }
 
+/*
+ * strcpy is unsafe on overlapping memory areas, so define memmove-alike
+ * string function. Has sense only when dest <= src.
+ */
+static inline char * mhl_strmove(char * dest, const char * src)
+{
+    size_t n = strlen (src) + 1; /* + '\0' */
+
+    assert (dest<=src);
+
+    return memmove(dest, src, n);
+}
 #endif /* __MHL_STRING_H */
