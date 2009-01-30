@@ -25,10 +25,11 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"		/* attrset() */
@@ -232,7 +233,7 @@ add2panelize_cmd (void)
 	if (!label)
 	    return;
 	if (!*label) {
-	    g_free (label);
+	    mhl_mem_free (label);
 	    return;
 	}
 	
@@ -254,9 +255,9 @@ static void remove_from_panelize (struct panelize *entry)
 	    }
 	}
 
-	g_free (entry->label);
-	g_free (entry->command);
-	g_free (entry);
+	mhl_mem_free (entry->label);
+	mhl_mem_free (entry->command);
+	mhl_mem_free (entry);
     }
 }
 
@@ -296,7 +297,7 @@ external_panelize (void)
 	    char *cmd = g_strdup (target);
 	    destroy_dlg (panelize_dlg);
 	    do_external_panelize (cmd);
-	    g_free (cmd);
+	    mhl_mem_free (cmd);
 	    repaint_screen ();
 	    return;
 	}
@@ -350,9 +351,9 @@ void done_panelize (void)
 
     for (; current; current = next){
 	next = current->next;
-	g_free (current->label);
-	g_free (current->command);
-	g_free (current);
+	mhl_mem_free (current->label);
+	mhl_mem_free (current->command);
+	mhl_mem_free (current);
     }
 }
 

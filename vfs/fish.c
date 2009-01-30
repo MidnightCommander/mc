@@ -144,7 +144,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super,
     enable_interrupt_key ();
 
     status = write (SUP.sockw, str, strlen (str));
-    g_free (str);
+    mhl_mem_free (str);
 
     disable_interrupt_key ();
     if (status < 0)
@@ -168,10 +168,10 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 	close (SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
     }
-    g_free (SUP.host);
-    g_free (SUP.user);
-    g_free (SUP.cwdir);
-    g_free (SUP.password);
+    mhl_mem_free (SUP.host);
+    mhl_mem_free (SUP.user);
+    mhl_mem_free (SUP.cwdir);
+    mhl_mem_free (SUP.password);
 }
 
 static void
@@ -251,7 +251,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 		p = g_strconcat (_(" fish: Password required for "),
 				 SUP.user, " ", (char *) NULL);
 		op = vfs_get_password (p);
-		g_free (p);
+		mhl_mem_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
 		SUP.password = op;
@@ -314,7 +314,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
 		       &password, 0, URL_NOSLASH);
 
-    g_free (p);
+    mhl_mem_free (p);
 
     SUP.host = host;
     SUP.user = user;
@@ -341,12 +341,12 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
 			URL_NOSLASH);
 
-    g_free (op);
+    mhl_mem_free (op);
 
     flags = ((strcmp (host, SUP.host) == 0)
 	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
 
     return flags;
 }
@@ -585,7 +585,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     vfs_s_free_entry (me, ent);
     reply_code = fish_decode_reply(buffer + 4, 0);
     if (reply_code == COMPLETE) {
-	g_free (SUP.cwdir);
+	mhl_mem_free (SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
@@ -771,7 +771,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 		"echo '### 500'\n"
 		"fi\n",
 		quoted_name, quoted_name, quoted_name, quoted_name );
-    g_free (quoted_name);
+    mhl_mem_free (quoted_name);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
@@ -883,14 +883,14 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
     char *rpath, *mpath = g_strdup (path); \
     struct vfs_s_super *super; \
     if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
-	g_free (mpath); \
+	mhl_mem_free (mpath); \
 	return -1; \
     } \
     rpath = mhl_shell_escape_dup(crpath); \
-    g_free (mpath);
+    mhl_mem_free (mpath);
 
 #define POSTFIX(flags) \
-    g_free (rpath); \
+    mhl_mem_free (rpath); \
     return fish_send_command(me, super, buf, flags);
 
 static int
@@ -913,18 +913,18 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     char *rpath1, *rpath2, *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
     if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
-	g_free (mpath1); \
+	mhl_mem_free (mpath1); \
 	return -1; \
     } \
     if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
-	g_free (mpath1); \
-	g_free (mpath2); \
+	mhl_mem_free (mpath1); \
+	mhl_mem_free (mpath2); \
 	return -1; \
     } \
     rpath1 = mhl_shell_escape_dup (crpath1); \
-    g_free (mpath1); \
+    mhl_mem_free (mpath1); \
     rpath2 = mhl_shell_escape_dup (crpath2); \
-    g_free (mpath2); \
+    mhl_mem_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     mhl_mem_free (rpath1); \
     mhl_mem_free (rpath2); \
@@ -1078,7 +1078,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 	name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags,
 			    "/", SUP.cwdir, (char *) NULL);
 	(*func)(name);
-	g_free (name);
+	mhl_mem_free (name);
 	super = super->next;
     }
 }

@@ -22,8 +22,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/stat.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"
@@ -254,7 +255,7 @@ clean_dir (dir_list *list, int count)
     int i;
 
     for (i = 0; i < count; i++){
-	g_free (list->list [i].fname);
+	mhl_mem_free (list->list [i].fname);
 	list->list [i].fname = 0;
     }
 }
@@ -471,9 +472,9 @@ alloc_dir_copy (int size)
 	if (dir_copy.list){
 
 	    for (i = 0; i < dir_copy.size; i++) {
-		g_free (dir_copy.list [i].fname);
+		mhl_mem_free (dir_copy.list [i].fname);
 	    }
-	    g_free (dir_copy.list);
+	    mhl_mem_free (dir_copy.list);
 	    dir_copy.list = 0;
 	}
 

@@ -75,12 +75,12 @@ test_locale_en_US_UTF_8(void)
 	valid = ecs_mbstr_to_str(&ecs, teststr_mb);
 	assert(valid);
 	assert(ecs_strlen(ecs) == 10);
-	g_free(ecs);
+	mhl_mem_free(ecs);
 
 	valid = ecs_str_to_mbstr(&mbs, teststr_ecs);
 	assert(valid);
 	assert(strlen(mbs) == 11);
-	g_free(mbs);
+	mhl_mem_free(mbs);
 }
 #endif
 

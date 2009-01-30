@@ -47,7 +47,7 @@ typedef char ecs_char;
 /*
  * String conversion functions between the wide character encoding and
  * the multibyte encoding. The returned strings should be freed using
- * g_free after use. The return value is TRUE if the string is valid
+ * mhl_mem_free after use. The return value is TRUE if the string is valid
  * and has been converted, FALSE otherwise.
  */
 

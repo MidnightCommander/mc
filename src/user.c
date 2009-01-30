@@ -23,6 +23,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/memory.h>
+
 #include "global.h"
 #include "tty.h"
 #include "color.h"
@@ -142,7 +144,7 @@ int check_format_var (const char *p, char **v)
 	var_name = g_strndup (p + 4, dots-2 - (p+3));
 
 	value = getenv (var_name);
-	g_free (var_name);
+	mhl_mem_free (var_name);
 	if (value){
 	    *v = g_strdup (value);
 	    return q-p;
@@ -221,7 +223,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 
 	    qstr = (*quote_func) (cwd, 0);
 
-	    g_free (cwd);
+	    mhl_mem_free (cwd);
 
 	    return qstr;
 	}
@@ -238,7 +240,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    if (edit_widget) {
 		char *file = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);
 		fname = (*quote_func) (file, 0);
-		g_free (file);
+		mhl_mem_free (file);
 		return fname;
 	    } else if (c_lc == 'b') {
 		return strip_ext ((*quote_func) (fname, 0));
@@ -278,7 +280,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 		if (panel->dir.list[i].f.marked) {
 		    strcat (block, tmp =
 			    (*quote_func) (panel->dir.list[i].fname, 0));
-		    g_free (tmp);
+		    mhl_mem_free (tmp);
 		    strcat (block, " ");
 		    if (c_lc == 'u')
 			do_file_mark (panel, i, 0);
@@ -468,7 +470,7 @@ debug_out (char *start, char *end, int cond)
 
 	}
 	debug_flag = 0;
-	g_free (msg);
+	mhl_mem_free (msg);
 	msg = NULL;
     } else {
 	const char *type;
@@ -492,7 +494,7 @@ debug_out (char *start, char *end, int cond)
 	else
 	    p = g_strdup_printf ("%s%s%.*s \n", msg ? msg : "", type,
 			(int) (end - start), start);
-	g_free (msg);
+	mhl_mem_free (msg);
 	msg = p;
     }
 }
@@ -610,15 +612,15 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		    /* User canceled */
 		    fclose (cmd_file);
 		    unlink (file_name);
-                    g_free (file_name);
+                    mhl_mem_free (file_name);
 		    return;
 		}
 		if (do_quote) {
     		    fputs (tmp = name_quote (parameter, 0), cmd_file);
-		    g_free (tmp);
+		    mhl_mem_free (tmp);
 		} else
 		    fputs (parameter, cmd_file);
-		g_free (parameter);
+		mhl_mem_free (parameter);
 		parameter = 0;
 	    } else {
 		if (parameter < &prompt [sizeof (prompt) - 1]) {
@@ -637,7 +639,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    else{
 		char *text = expand_format (edit_widget, *commands, do_quote);
 		fputs (text, cmd_file);
-		g_free (text);
+		mhl_mem_free (text);
 	    }
 	} else {
 	    if (*commands == '%') {
@@ -663,10 +665,10 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	 * on no-exec filesystems. */
 	char *cmd = g_strconcat("/bin/sh ", file_name, (char *)NULL);
 	shell_execute (cmd, EXECUTE_HIDE);
-	g_free(cmd);
+	mhl_mem_free(cmd);
     }
     unlink (file_name);
-    g_free (file_name);
+    mhl_mem_free (file_name);
 }
 
 /* 
@@ -720,11 +722,11 @@ user_menu_cmd (struct WEdit *edit_widget)
     
     menu = g_strdup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
-	g_free (menu);
+	mhl_mem_free (menu);
         menu = concat_dir_and_file \
                             (home_dir, edit_widget ? CEDIT_HOME_MENU : MC_HOME_MENU);
 	if (!exist_file (menu)){
-	    g_free (menu);
+	    mhl_mem_free (menu);
 	    menu = concat_dir_and_file \
                         (mc_home, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	}
@@ -733,7 +735,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     if ((data = load_file (menu)) == NULL){
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "),
 		 menu, unix_error_string (errno));
-	g_free (menu);
+	mhl_mem_free (menu);
 	menu = NULL;
 	return;
     }
@@ -838,9 +840,9 @@ user_menu_cmd (struct WEdit *edit_widget)
     }
 
     easy_patterns = old_patterns;
-    g_free (menu);
+    mhl_mem_free (menu);
     menu = NULL;
-    g_free (entries);
-    g_free (data);
+    mhl_mem_free (entries);
+    mhl_mem_free (data);
 }
 

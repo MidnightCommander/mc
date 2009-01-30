@@ -32,10 +32,11 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"		/* COLS */
@@ -199,7 +200,7 @@ update_path_name (void)
     else
 	label_set_text (movelist_group,
 			name_trunc (p, dlg->cols - (UX * 2 + 4)));
-    g_free (p);
+    mhl_mem_free (p);
 
     dlg_redraw (dlg);
 }
@@ -209,7 +210,7 @@ do { \
     int               i; \
 \
     if ((i = strlen (current->label) + 3) > buflen) { \
-      g_free (buf); \
+      mhl_mem_free (buf); \
       buf = g_malloc (buflen = 1024 * (i/1024 + 1)); \
     } \
     buf[0] = '\0'; \
@@ -463,7 +464,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 			    char *tmp =
 				g_strconcat ("cd ", hlp->directory, (char *) NULL);
 			    stuff (cmdline, tmp, 0);
-			    g_free (tmp);
+			    mhl_mem_free (tmp);
 			    dlg_stop (h);
 			    h->ret_value = B_CANCEL;
 			    return MSG_HANDLED;
@@ -686,7 +687,7 @@ init_movelist (int list_type, struct hotlist *item)
     movelist_dlg =
 	create_dlg (0, 0, LINES - 6, movelist_cols, dialog_colors,
 		    hotlist_callback, "[Hotlist]", hdr, DLG_CENTER | DLG_REVERSE);
-    g_free (hdr);
+    mhl_mem_free (hdr);
 
     for (i = 0; i < BUTTONS; i++) {
 	if (hotlist_but[i].type & list_type)
@@ -811,7 +812,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 	    char  *lbl = g_strconcat ("->", new->label, (char *) NULL);
 
 	    listbox_add_item (l_hotlist, pos, 0, lbl, new);
-	    g_free (lbl);
+	    mhl_mem_free (lbl);
 	} else
 	    listbox_add_item (l_hotlist, pos, 0, new->label, new);
 	listbox_select_entry (l_hotlist, l_hotlist->current);
@@ -937,13 +938,13 @@ static void add_new_entry_cmd (void)
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
 			       _("Directory path"), "[Hotlist]", &title, &url);
-    g_free (to_free);
+    mhl_mem_free (to_free);
 
     if (!ret)
 	return;
     if (!title || !*title || !url || !*url) {
-	g_free (title);
-	g_free (url);
+	mhl_mem_free (title);
+	mhl_mem_free (url);
 	return;
     }
 
@@ -1044,11 +1045,11 @@ void add2hotlist_cmd (void)
 
     prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
     label = input_dialog (_(" Add to hotlist "), prompt, MC_HISTORY_HOTLIST_ADD, label_string);
-    g_free (prompt);
+    mhl_mem_free (prompt);
 
     if (!label || !*label) {
-	g_free (label_string);
-	g_free (label);
+	mhl_mem_free (label_string);
+	mhl_mem_free (label);
 	return;
     }
     add2hotlist (label, label_string, HL_TYPE_ENTRY, 0);
@@ -1065,9 +1066,9 @@ static void remove_group (struct hotlist *grp)
 	if (current->type == HL_TYPE_GROUP)
 	    remove_group (current);
 
-	g_free (current->label);
-	g_free (current->directory);
-	g_free (current);
+	mhl_mem_free (current->label);
+	mhl_mem_free (current->directory);
+	mhl_mem_free (current);
 
 	current = next;
     }
@@ -1094,7 +1095,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 			_("\n Are you sure you want to remove this entry?"),
 			D_ERROR, 2, _("&Yes"), _("&No"));
 
-	g_free (title);
+	mhl_mem_free (title);
 
 	if (result != 0)
 	    return;
@@ -1112,7 +1113,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
 				   D_ERROR, 2,
 				   _("&Yes"), _("&No"));
-	    g_free (header);
+	    mhl_mem_free (header);
 
 	    if (result != 0)
 		return;
@@ -1123,9 +1124,9 @@ static void remove_from_hotlist (struct hotlist *entry)
 
     unlink_entry (entry);
 
-    g_free (entry->label);
-    g_free (entry->directory);
-    g_free (entry);
+    mhl_mem_free (entry->label);
+    mhl_mem_free (entry->directory);
+    mhl_mem_free (entry);
     /* now remove list entry from screen */
     listbox_remove_current (l_hotlist, 1);
     hotlist_state.modified = 1;
@@ -1183,7 +1184,7 @@ load_group (struct hotlist *grp)
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
 	add2hotlist (g_strdup (value), g_strdup (key), HL_TYPE_GROUP, 0);
     }
-    g_free (group_section);
+    mhl_mem_free (group_section);
 
     profile_keys = profile_init_iterator (grp->directory, profile_name);
 
@@ -1427,7 +1428,7 @@ clean_up_hotlist_groups (const char *section)
 	}
 	profile_clean_section (grp_section, profile_name);
     }
-    g_free (grp_section);
+    mhl_mem_free (grp_section);
 }
 
 
@@ -1572,7 +1573,7 @@ int save_hotlist (void)
 	    hotlist_state.modified = 0;
 	} else
 	    rename (fbak, hotlist_file_name);
-	g_free (fbak);
+	mhl_mem_free (fbak);
     }
 
     return saved;
@@ -1586,20 +1587,20 @@ void done_hotlist (void)
 {
     if (hotlist){
 	remove_group (hotlist);
-	g_free (hotlist->label);
-	g_free (hotlist->directory);
-	g_free (hotlist);
+	mhl_mem_free (hotlist->label);
+	mhl_mem_free (hotlist->directory);
+	mhl_mem_free (hotlist);
 	hotlist = 0;
     }
     
     hotlist_state.loaded = 0;
 
-    g_free (hotlist_file_name);
+    mhl_mem_free (hotlist_file_name);
     hotlist_file_name = 0;
     l_hotlist = 0;
     current_group = 0;
     if (tkn_buf){
-        g_free (tkn_buf);
+        mhl_mem_free (tkn_buf);
 	tkn_buf_length = 0;
 	tkn_length = 0;
 	tkn_buf = NULL;

@@ -25,6 +25,8 @@
 
 #include <unistd.h>
 
+#include <mhl/memory.h>
+
 #include "global.h"
 #include "fileopctx.h"
 
@@ -77,5 +79,5 @@ file_op_context_destroy (FileOpContext *ctx)
 
     /* FIXME: do we need to free ctx->dest_mask? */
 
-    g_free (ctx);
+    mhl_mem_free (ctx);
 }

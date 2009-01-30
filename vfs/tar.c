@@ -31,6 +31,8 @@
 #include <sys/mknod.h>
 #endif
 
+#include <mhl/memory.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -242,7 +244,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
 	result = mc_open (s, O_RDONLY);
 	if (result == -1)
 	    message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
-	g_free (s);
+	mhl_mem_free (s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);
     }
@@ -490,13 +492,13 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	longp = ((header->header.linkflag == LF_LONGNAME)
 		 ? &next_long_name : &next_long_link);
 
-	g_free (*longp);
+	mhl_mem_free (*longp);
 	bp = *longp = g_malloc (*h_size + 1);
 
 	for (size = *h_size; size > 0; size -= written) {
 	    data = tar_get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
-		g_free (*longp);
+		mhl_mem_free (*longp);
 		*longp = NULL;
 		message (D_ERROR, MSG_ERROR,
 			 _("Unexpected EOF on archive file"));
@@ -511,7 +513,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	}
 
 	if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0') {
-	    g_free (*longp);
+	    mhl_mem_free (*longp);
 	    *longp = NULL;
 	    message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
@@ -556,8 +558,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 					  PREFIX_SIZE);
 		current_file_name = g_strconcat (temp_prefix, PATH_SEP_STR,
 						 temp_name, (char *) NULL);
-		g_free (temp_name);
-		g_free (temp_prefix);
+		mhl_mem_free (temp_name);
+		mhl_mem_free (temp_prefix);
 	    }
 	    break;
 	case TAR_GNU:
@@ -601,7 +603,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	    } else {
 		entry = vfs_s_new_entry (me, p, inode);
 		vfs_s_insert_entry (me, parent, entry);
-		g_free (current_link_name);
+		mhl_mem_free (current_link_name);
 		goto done;
 	    }
 	}
@@ -613,12 +615,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
 	if (*current_link_name) {
 	    inode->linkname = current_link_name;
 	} else if (current_link_name != next_long_link) {
-	    g_free (current_link_name);
+	    mhl_mem_free (current_link_name);
 	}
 	entry = vfs_s_new_entry (me, p, inode);
 
 	vfs_s_insert_entry (me, parent, entry);
-	g_free (current_file_name);
+	mhl_mem_free (current_file_name);
 
       done:
 	next_long_link = next_long_name = NULL;

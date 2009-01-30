@@ -30,8 +30,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -349,13 +350,13 @@ format_paragraph (WEdit *edit, int force)
     if (!force) {
 	int i;
 	if (strchr (NO_FORMAT_CHARS_START, *t)) {
-	    g_free (t);
+	    mhl_mem_free (t);
 	    return;
 	}
 	for (i = 0; i < size - 1; i++) {
 	    if (t[i] == '\n') {
 		if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1])) {
-		    g_free (t);
+		    mhl_mem_free (t);
 		    return;
 		}
 	    }
@@ -363,7 +364,7 @@ format_paragraph (WEdit *edit, int force)
     }
     format_this (t, q - p, indent);
     put_paragraph (edit, t, p, indent, size);
-    g_free (t);
+    mhl_mem_free (t);
 
     /* Scroll left as much as possible to show the formatted paragraph */
     edit_scroll_left (edit, -edit->start_col);

@@ -31,6 +31,8 @@
 #include <signal.h>
 #include <ctype.h>		/* is_digit() */
 
+#include <mhl/memory.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -107,7 +109,7 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 	    } else {
 		st1->next = stamp->next;
 	    }
-	    g_free (stamp);
+	    mhl_mem_free (stamp);
 
 	    return;
 	}
@@ -126,7 +128,7 @@ vfs_getid (struct vfs_class *vclass, const char *dir)
     if (vclass->getid)
 	id = (*vclass->getid) (vclass, dir1);
 
-    g_free (dir1);
+    mhl_mem_free (dir1);
     return id;
 }
 
@@ -295,7 +297,7 @@ vfs_gc_done (void)
 	if (stamp->v->free)
 	    (*stamp->v->free) (stamp->id);
 	st = stamp->next;
-	g_free (stamp);
+	mhl_mem_free (stamp);
 	stamp = st;
     }
 

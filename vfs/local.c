@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -68,7 +69,7 @@ local_close (void *data)
 	return -1;
     
     fd =  *(int *) data;
-    g_free (data);
+    mhl_mem_free (data);
     return close (fd);
 }
 
@@ -109,7 +110,7 @@ local_closedir (void *data)
     int i;
 
     i = closedir (* (DIR **) data);
-    g_free (data);
+    mhl_mem_free (data);
     return i;
 }
 

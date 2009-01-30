@@ -29,10 +29,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"
@@ -301,7 +302,7 @@ reload_panelized (WPanel *panel)
 	    do_file_mark (panel, i, 0);
 	}
 	if (mc_lstat (list->list[i].fname, &list->list[i].st)) {
-	    g_free (list->list[i].fname);
+	    mhl_mem_free (list->list[i].fname);
 	    continue;
 	}
 	if (list->list[i].f.marked)
@@ -349,7 +350,7 @@ update_one_panel_widget (WPanel *panel, int force_update,
     panel->dirty = 1;
 
     if (free_pointer)
-	g_free (my_current_file);
+	mhl_mem_free (my_current_file);
 }
 
 void
@@ -589,11 +590,11 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 
     if (mc_chdir (directory) == -1) {
 	strcpy (panel->cwd, olddir);
-	g_free (olddir);
-	g_free (translated_url);
+	mhl_mem_free (olddir);
+	mhl_mem_free (translated_url);
 	return 0;
     }
-    g_free (translated_url);
+    mhl_mem_free (translated_url);
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
@@ -616,7 +617,7 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     panel->dirty = 1;
     update_xterm_title_path ();
 
-    g_free (olddir);
+    mhl_mem_free (olddir);
 
     return 1;
 }
@@ -687,7 +688,7 @@ directory_history_list (WPanel *panel)
 	directory_history_add (panel, panel->cwd);
     else
 	message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
-    g_free (s);
+    mhl_mem_free (s);
 }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -776,7 +777,7 @@ treebox_cmd (void)
     sel_dir = tree_box (selection (current_panel)->fname);
     if (sel_dir) {
 	do_cd (sel_dir, cd_exact);
-	g_free (sel_dir);
+	mhl_mem_free (sel_dir);
     }
 }
 
@@ -793,7 +794,7 @@ listmode_cmd (void)
     if (!newmode)
 	return;
 
-    g_free (current_panel->user_format);
+    mhl_mem_free (current_panel->user_format);
     current_panel->list_type = list_user;
     current_panel->user_format = newmode;
     set_panel_formats (current_panel);
@@ -1035,7 +1036,7 @@ translated_mc_chdir (char *dir)
 
     newdir = vfs_translate_url (dir);
     mc_chdir (newdir);
-    g_free (newdir);
+    mhl_mem_free (newdir);
 }
 
 static void
@@ -1141,7 +1142,7 @@ copy_readlink (WPanel *panel)
 	int i;
 
 	i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);
-	g_free (p);
+	mhl_mem_free (p);
 	if (i > 0) {
 	    buffer[i] = 0;
 	    command_insert (cmdline, buffer, 1);
@@ -1621,7 +1622,7 @@ update_xterm_title_path (void)
 	    numeric_keypad_mode ();
 	fprintf (stdout, "\33]0;mc - %s\7", p);
 	fflush (stdout);
-	g_free (p);
+	mhl_mem_free (p);
     }
 }
 
@@ -1645,7 +1646,7 @@ load_hint (int force)
     if ((hint = get_random_hint (force))) {
 	if (*hint)
 	    set_hintbar (hint);
-	g_free (hint);
+	mhl_mem_free (hint);
     } else {
 	char text[BUF_SMALL];
 
@@ -1713,7 +1714,7 @@ mc_maybe_editor_or_viewer (void)
 	char *path = NULL;
 	path = prepend_cwd_on_local (view_one_file);
 	view_file (path, 0, 1);
-	g_free (path);
+	mhl_mem_free (path);
     }
 #ifdef USE_INTERNAL_EDIT
     else {
@@ -2082,7 +2083,7 @@ handle_args (int argc, char *argv[])
 		    edit_one_file = fname;
 		    edit_one_file_start_line = atoi (p);
 		} else {
-		    g_free (fname);
+		    mhl_mem_free (fname);
 		    goto try_plus_filename;
 		}
 	    } else {
@@ -2251,15 +2252,15 @@ main (int argc, char *argv[])
 	    close (last_wd_fd);
 	}
     }
-    g_free (last_wd_string);
+    mhl_mem_free (last_wd_string);
 
-    g_free (mc_home);
+    mhl_mem_free (mc_home);
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();
 #endif
-    g_free (this_dir);
-    g_free (other_dir);
+    mhl_mem_free (this_dir);
+    mhl_mem_free (other_dir);
 
     return 0;
 }

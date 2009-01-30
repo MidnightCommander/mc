@@ -289,7 +289,7 @@ listmode_edit (char *oldlistformat)
 
     s = g_strdup (oldlistformat);
     listmode_dlg = init_listmode (s);
-    g_free (s);
+    mhl_mem_free (s);
 
     if (run_dlg (listmode_dlg) == B_ENTER) {
 	newformat = collect_new_format ();

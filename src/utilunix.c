@@ -41,6 +41,8 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/memory.h>
+
 #include "global.h"
 #include "execute.h"
 #include "wtools.h"		/* message() */
@@ -71,7 +73,7 @@ static char *i_cache_match (int id, int_cache *cache, int size)
 static void i_cache_add (int id, int_cache *cache, int size, char *text,
 			 int *last)
 {
-    g_free (cache [*last].string);
+    mhl_mem_free (cache [*last].string);
     cache [*last].string = g_strdup (text);
     cache [*last].index = id;
     *last = ((*last)+1) % size;
@@ -202,7 +204,7 @@ tilde_expand (const char *directory)
 	    name = g_strndup (p, q - p);
 	    passwd = getpwnam (name);
 	    q++;
-	    g_free (name);
+	    mhl_mem_free (name);
 	}
     }
 
@@ -292,7 +294,7 @@ mc_tmpdir (void)
 	/* Test if sys_tmp is suitable for temporary files */
 	fallback_prefix = g_strdup_printf ("%s/mctest", sys_tmp);
 	test_fd = mc_mkstemps (&test_fn, fallback_prefix, NULL);
-	g_free (fallback_prefix);
+	mhl_mem_free (fallback_prefix);
 	if (test_fd != -1) {
 	    close (test_fd);
 	    test_fd = open (test_fn, O_RDONLY);

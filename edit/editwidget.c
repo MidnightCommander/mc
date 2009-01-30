@@ -33,8 +33,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -176,7 +177,7 @@ edit_file (const char *_file, int line)
     if (!made_directory) {
 	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
 	made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
-	g_free (dir);
+	mhl_mem_free (dir);
     }
 
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {

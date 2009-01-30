@@ -25,10 +25,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"
@@ -88,7 +89,7 @@ _("Please press the %s\n"
         _(key_name_conv_tab [action - B_USER].longname));
     mc_refresh ();
     if (learnkeys [action - B_USER].sequence != NULL) {
-	g_free (learnkeys [action - B_USER].sequence);
+	mhl_mem_free (learnkeys [action - B_USER].sequence);
 	learnkeys [action - B_USER].sequence = NULL;
     }
     seq = learn_key ();
@@ -117,7 +118,7 @@ _("Please press the %s\n"
 		_(" You have entered \"%s\""), seq);
 	}
 	
-    	g_free (seq);
+    	mhl_mem_free (seq);
     }
     
     dlg_run_done (d);
@@ -327,7 +328,7 @@ learn_save (void)
     if (profile_changed)
 	sync_profiles ();
 
-    g_free (section);
+    mhl_mem_free (section);
 }
 
 void learn_keys (void)

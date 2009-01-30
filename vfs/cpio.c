@@ -19,7 +19,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include <config.h>
+
 #include <errno.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -143,7 +146,7 @@ static void cpio_free_archive(struct vfs_class *me, struct vfs_s_super *super)
 	super->u.arch.fd = -1;
     for (l = super->u.arch.deferred; l; l = lnext) {
 	lnext = l->next;
-	g_free (l);
+	mhl_mem_free (l);
     }
     super->u.arch.deferred = NULL;
 }
@@ -174,10 +177,10 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
 	s = g_strconcat (name, decompress_extension (type), (char *) NULL);
 	if ((fd = mc_open (s, O_RDONLY)) == -1) {
 	    message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
-	    g_free (s);
+	    mhl_mem_free (s);
 	    return -1;
 	}
-	g_free (s);
+	mhl_mem_free (s);
     }
 
     super->u.arch.fd = fd;
@@ -290,7 +293,7 @@ static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *supe
     }
     name = g_malloc(u.buf.c_namesize);
     if((len = mc_read(super->u.arch.fd, name, u.buf.c_namesize)) < u.buf.c_namesize) {
-	g_free(name);
+	mhl_mem_free(name);
 	return STATUS_EOF;
     }
     name[u.buf.c_namesize - 1] = '\0';
@@ -298,7 +301,7 @@ static ssize_t cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *supe
     cpio_skip_padding(super);
 
     if(!strcmp("TRAILER!!!", name)) { /* We got to the last record */
-	g_free(name);
+	mhl_mem_free(name);
 	return STATUS_TRAIL;
     }
 
@@ -349,7 +352,7 @@ static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *sup
     name = g_malloc(hd.c_namesize);
     if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) == -1 ||
        (unsigned long) len < hd.c_namesize) {
-	g_free (name);
+	mhl_mem_free (name);
 	return STATUS_EOF;
     }
     name[hd.c_namesize - 1] = '\0';
@@ -357,7 +360,7 @@ static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *sup
     cpio_skip_padding(super);
 
     if(!strcmp("TRAILER!!!", name)) { /* We got to the last record */
-	g_free(name);
+	mhl_mem_free(name);
 	return STATUS_TRAIL;
     }
 
@@ -414,7 +417,7 @@ static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *supe
     name = g_malloc(hd.c_namesize);
     if((len = mc_read (super->u.arch.fd, name, hd.c_namesize)) == -1 ||
        (unsigned long) len < hd.c_namesize) {
-	g_free (name);
+	mhl_mem_free (name);
 	return STATUS_EOF;
     }
     name[hd.c_namesize - 1] = '\0';
@@ -422,7 +425,7 @@ static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *supe
     cpio_skip_padding(super);
 
     if(!strcmp("TRAILER!!!", name)) { /* We got to the last record */
-	g_free(name);
+	mhl_mem_free(name);
 	return STATUS_TRAIL;
     }
 
@@ -545,7 +548,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 	    if (mc_read (super->u.arch.fd, inode->linkname, st->st_size)
 		< st->st_size) {
 		inode->linkname[0] = 0;
-		g_free (name);
+		mhl_mem_free (name);
 		return STATUS_EOF;
 	    }
 	    inode->linkname[st->st_size] = 0;	/* Linkname stored without terminating \0 !!! */
@@ -557,7 +560,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 
     }				/* !entry */
 
-    g_free (name);
+    mhl_mem_free (name);
     return STATUS_OK;
 }
 

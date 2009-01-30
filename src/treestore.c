@@ -37,10 +37,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "treestore.h"
@@ -236,7 +237,7 @@ tree_store_load_from(char *name)
 		}
 		strcpy(oldname, name);
 	    }
-	    g_free(name);
+	    mhl_mem_free(name);
 	}
 	fclose(file);
     }
@@ -267,7 +268,7 @@ tree_store_load(void)
 
     name = concat_dir_and_file(home_dir, MC_TREE);
     retval = tree_store_load_from(name);
-    g_free(name);
+    mhl_mem_free(name);
 
     return retval;
 }
@@ -334,12 +335,12 @@ tree_store_save_to(char *name)
 
 		i = fprintf(file, "%d:%d %s\n", current->scanned, common,
 			    encoded);
-		g_free(encoded);
+		mhl_mem_free(encoded);
 	    } else {
 		char *encoded = encode(current->name);
 
 		i = fprintf(file, "%d:%s\n", current->scanned, encoded);
-		g_free(encoded);
+		mhl_mem_free(encoded);
 	    }
 
 	    if (i == EOF) {
@@ -375,15 +376,15 @@ tree_store_save(void)
     retval = tree_store_save_to(tmp);
 
     if (retval) {
-	g_free(tmp);
+	mhl_mem_free(tmp);
 	return retval;
     }
 
     name = concat_dir_and_file(home_dir, MC_TREE);
     retval = rename(tmp, name);
 
-    g_free(tmp);
-    g_free(name);
+    mhl_mem_free(tmp);
+    mhl_mem_free(name);
 
     if (retval)
 	return errno;
@@ -481,7 +482,7 @@ tree_store_add_entry(const char *name)
 		break;
 	    }
 	}
-	g_free(parent);
+	mhl_mem_free(parent);
     }
 
     tree_store_dirty(TRUE);
@@ -546,8 +547,8 @@ remove_entry(tree_entry * entry)
 	ts.tree_last = entry->prev;
 
     /* Free the memory used by the entry */
-    g_free(entry->name);
-    g_free(entry);
+    mhl_mem_free(entry->name);
+    mhl_mem_free(entry);
 
     return ret;
 }
@@ -617,7 +618,7 @@ tree_store_mark_checked(const char *subname)
 	current = tree_store_add_entry(name);
 	ts.add_queue = g_list_prepend(ts.add_queue, g_strdup(name));
     }
-    g_free(name);
+    mhl_mem_free(name);
 
     /* Clear the deletion mark from the subdirectory and its children */
     base = current;
@@ -716,11 +717,11 @@ tree_store_end_check(void)
     ts.add_queue = g_list_reverse(ts.add_queue);
     the_queue = ts.add_queue;
     ts.add_queue = NULL;
-    g_free(ts.check_name);
+    mhl_mem_free(ts.check_name);
     ts.check_name = NULL;
 
     for (l = the_queue; l; l = l->next) {
-	g_free(l->data);
+	mhl_mem_free(l->data);
     }
 
     g_list_free(the_queue);
@@ -740,7 +741,7 @@ process_special_dirs(GList ** special_dirs, char *file)
 	*special_dirs = g_list_prepend(*special_dirs, g_strdup(token));
 	s = NULL;
     }
-    g_free(buffer);
+    mhl_mem_free(buffer);
 }
 
 static gboolean
@@ -800,7 +801,7 @@ tree_store_rescan(const char *dir)
 		if (S_ISDIR(buf.st_mode))
 		    tree_store_mark_checked(dp->d_name);
 	    }
-	    g_free(full_name);
+	    mhl_mem_free(full_name);
 	}
 	mc_closedir(dirp);
     }

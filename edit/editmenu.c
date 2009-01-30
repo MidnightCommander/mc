@@ -33,8 +33,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -475,7 +476,7 @@ edit_done_menu (struct WMenu *wmenu)
     for (i = 0; i < N_menus; i++)
 	destroy_menu (wmenu->menu[i]);
 
-    g_free(wmenu->menu);
+    mhl_mem_free(wmenu->menu);
 }
 
 

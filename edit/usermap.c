@@ -26,10 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -241,7 +242,7 @@ cfg_free_maps(config_t *cfg)
     cfg->ext_keymap = NULL;
 
     for (i = 0; i < 10; i++)
-	g_free(cfg->labels[i]);
+	mhl_mem_free(cfg->labels[i]);
 }
 
 /* Returns an array containing the words in str.  WARNING: As long as
@@ -553,7 +554,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
 	    char *ss = g_strdup(error_msg);
 	    snprintf(error_msg, sizeof(error_msg),
 			 _("%s:%d: %s"), file, line, ss);
-	    g_free(ss);
+	    mhl_mem_free(ss);
 	    g_ptr_array_free(args, TRUE);
 	    fclose(fp);
 	    return FALSE;
@@ -601,8 +602,8 @@ edit_load_user_map(WEdit *edit)
     if (stat(file, &s) < 0) {
 	char *msg = g_strdup_printf(_("%s not found!"), file);
 	edit_error_dialog(_("Error"), msg);
-	g_free(msg);
-	g_free(file);
+	mhl_mem_free(msg);
+	mhl_mem_free(file);
 	return FALSE;
     }
 
@@ -613,7 +614,7 @@ edit_load_user_map(WEdit *edit)
 	if (!load_user_keymap(&new_cfg, file)) {
 	    edit_error_dialog(_("Error"), error_msg);
 	    cfg_free_maps(&new_cfg);
-	    g_free(file);
+	    mhl_mem_free(file);
 	    return FALSE;
 	} else {
 	    cfg_free_maps(&cfg);
@@ -625,7 +626,7 @@ edit_load_user_map(WEdit *edit)
     edit->ext_map = (edit_key_map_type *) cfg.ext_keymap->data;
     memcpy(edit->labels, cfg.labels, sizeof(edit->labels));
 
-    g_free(file);
+    mhl_mem_free(file);
 
     return TRUE;
 }

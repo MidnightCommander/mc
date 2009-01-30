@@ -21,9 +21,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"	/* move, addch */
@@ -113,6 +114,6 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
 	    move (starty + (i / cols), 0);
 	addch (is_printable (k[i]) ? k[i] : ' ');
     }
-    g_free (k);
+    mhl_mem_free (k);
 }
 

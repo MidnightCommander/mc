@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/memory.h>
+
 #include "global.h"
 #include "tty.h"
 #include "mouse.h"
@@ -218,7 +220,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	char *t;
 	t = g_strstrip (g_strdup (title));
 	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
-	g_free (t);
+	mhl_mem_free (t);
     }
 
     return (new_d);
@@ -813,11 +815,11 @@ destroy_dlg (Dlg_head *h)
     c = h->current;
     for (i = 0; i < h->count; i++) {
 	c = c->next;
-	g_free (h->current);
+	mhl_mem_free (h->current);
 	h->current = c;
     }
-    g_free (h->title);
-    g_free (h);
+    mhl_mem_free (h->title);
+    mhl_mem_free (h);
 
     do_refresh ();
 }

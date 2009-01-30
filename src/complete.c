@@ -26,10 +26,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"
@@ -67,9 +68,9 @@ filename_completion_function (char *text, int state)
     if (!state){
         const char *temp;
 
-        g_free (dirname);
-        g_free (filename);
-        g_free (users_dirname);
+        mhl_mem_free (dirname);
+        mhl_mem_free (filename);
+        mhl_mem_free (users_dirname);
 
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = g_strdup (++temp);
@@ -133,7 +134,7 @@ filename_completion_function (char *text, int state)
 	                isexec = 1;
 	        }
 	    }
-	   g_free (tmp);
+	   mhl_mem_free (tmp);
 	}
 	switch (look_for_executables)
 	{
@@ -154,11 +155,11 @@ filename_completion_function (char *text, int state)
 	    mc_closedir (directory);
 	    directory = NULL;
 	}
-	g_free (dirname);
+	mhl_mem_free (dirname);
 	dirname = NULL;
-	g_free (filename);
+	mhl_mem_free (filename);
 	filename = NULL;
-	g_free (users_dirname);
+	mhl_mem_free (users_dirname);
 	users_dirname = NULL;
         return NULL;
     } else {
@@ -333,7 +334,7 @@ static void fetch_hosts (const char *filename)
 	            *(hosts_p++) = name;
 	            *hosts_p = NULL;
 	        } else
-	            g_free (name);
+	            mhl_mem_free (name);
 	    }
 	}
     }
@@ -351,8 +352,8 @@ hostname_completion_function (char *text, int state)
         
     	if (hosts != NULL){
     	    for (host_p = hosts; *host_p; host_p++)
-    	    	g_free (*host_p);
-    	   g_free (hosts);
+    	    	mhl_mem_free (*host_p);
+    	   mhl_mem_free (hosts);
     	}
     	hosts = g_new (char *, (hosts_alloclen = 30) + 1);
     	*hosts = NULL;
@@ -373,8 +374,8 @@ hostname_completion_function (char *text, int state)
     
     if (!*host_p){
     	for (host_p = hosts; *host_p; host_p++)
-    	    g_free (*host_p);
-    	g_free (hosts);
+    	    mhl_mem_free (*host_p);
+    	mhl_mem_free (hosts);
     	hosts = NULL;
     	return NULL;
     } else {
@@ -475,7 +476,7 @@ command_completion_function (char *text, int state)
 		    break;
 		expanded = tilde_expand (*cur_path ? cur_path : ".");
 		cur_word = concat_dir_and_file (expanded, text);
-		g_free (expanded);
+		mhl_mem_free (expanded);
 		canonicalize_pathname (cur_word);
 		cur_path = strchr (cur_path, 0) + 1;
 		init_state = state;
@@ -484,7 +485,7 @@ command_completion_function (char *text, int state)
 		filename_completion_function (cur_word,
 					      state - init_state);
 	    if (!found) {
-		g_free (cur_word);
+		mhl_mem_free (cur_word);
 		cur_word = NULL;
 	    }
 	}
@@ -492,14 +493,14 @@ command_completion_function (char *text, int state)
 
     if (!found) {
 	look_for_executables = 0;
-	g_free (path);
+	mhl_mem_free (path);
 	path = NULL;
 	return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 	p = g_strdup (p);
-	g_free (found);
+	mhl_mem_free (found);
 	return p;
     }
     return found;
@@ -572,7 +573,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 		    if (c1 != c2) break;
 		
 		if (!c1 && !match_list [j][si]){ /* Two equal strings */
-		    g_free (match_list [j]);
+		    mhl_mem_free (match_list [j]);
 		    j++;
 		    if (j > matches)
 		        break;
@@ -588,7 +589,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 	    match_list[0] = g_strndup(match_list[1], low);
 	}
     } else {				/* There were no matches. */
-        g_free (match_list);
+        mhl_mem_free (match_list);
         match_list = NULL;
     }
     return match_list;
@@ -744,17 +745,17 @@ try_complete (char *text, int *start, int *end, int flags)
 		        ignore_filenames = 1;
     	    		matches = completion_matches (r, filename_completion_function);
     	    		ignore_filenames = 0;
-    	    		g_free (r);
+    	    		mhl_mem_free (r);
 		    }
 		    *s = c;
 		    cdpath = s + 1;
 		}
-		g_free (cdpath_ref);
+		mhl_mem_free (cdpath_ref);
     	    }
     	}
     }
 
-    g_free (word);
+    mhl_mem_free (word);
 
     return matches;
 }
@@ -766,8 +767,8 @@ void free_completions (WInput *in)
     if (!in->completions)
     	return;
     for (p=in->completions; *p; p++)
-    	g_free (*p);
-    g_free (in->completions);
+    	mhl_mem_free (*p);
+    mhl_mem_free (in->completions);
     in->completions = NULL;
 }
 

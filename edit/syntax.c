@@ -30,8 +30,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -102,7 +103,7 @@ int option_syntax_highlighting = 1;
 int option_auto_syntax = 1;
 char *option_syntax_type = NULL;
 
-#define syntax_g_free(x) do {g_free(x); (x)=0;} while (0)
+#define _FREEPTR(x) do {mhl_mem_free(x); (x)=0;} while (0)
 
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
@@ -111,10 +112,10 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 
     (void) data;
 
-    g_free (key);
+    mhl_mem_free (key);
     while (*values)
-	g_free (*values++);
-    g_free (value);
+	mhl_mem_free (*values++);
+    mhl_mem_free (value);
 
     return FALSE;
 }
@@ -471,7 +472,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 		break;
 	    }
 	    s = edit->syntax_marker->next;
-	    syntax_g_free (edit->syntax_marker);
+	    _FREEPTR (edit->syntax_marker);
 	    edit->syntax_marker = s;
 	}
     }
@@ -666,19 +667,19 @@ static FILE *open_include_file (const char *filename)
 {
     FILE *f;
 
-    syntax_g_free (error_file_name);
+    _FREEPTR (error_file_name);
     error_file_name = g_strdup (filename);
     if (*filename == PATH_SEP)
 	return fopen (filename, "r");
 
-    g_free (error_file_name);
+    mhl_mem_free (error_file_name);
     error_file_name = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR PATH_SEP_STR,
 				   filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f)
 	return f;
 
-    g_free (error_file_name);
+    mhl_mem_free (error_file_name);
     error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
 				   filename, (char *) NULL);
     return fopen (error_file_name, "r");
@@ -725,8 +726,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		f = g;
 		g = 0;
 		line = save_line + 1;
-		syntax_g_free (error_file_name);
-		syntax_g_free (l);
+		_FREEPTR (error_file_name);
+		_FREEPTR (l);
 		if (!read_one_line (&l, f))
 		    break;
 	    } else {
@@ -745,7 +746,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    g = f;
 	    f = open_include_file (args[1]);
 	    if (!f) {
-		syntax_g_free (error_file_name);
+		_FREEPTR (error_file_name);
 		result = line;
 		break;
 	    }
@@ -922,10 +923,10 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    break_a;
 	}
 	free_args (args);
-	syntax_g_free (l);
+	_FREEPTR (l);
     }
     free_args (args);
-    syntax_g_free (l);
+    _FREEPTR (l);
 
     /* Terminate context array.  */
     if (num_contexts > 0) {
@@ -934,7 +935,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     }
 
     if (!edit->rules[0])
-	syntax_g_free (edit->rules);
+	_FREEPTR (edit->rules);
 
     if (result)
 	return result;
@@ -958,7 +959,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    c->keyword_first_chars = g_strdup (first_chars);
 	}
 
-	g_free (first_chars);
+	mhl_mem_free (first_chars);
     }
 
     return result;
@@ -976,34 +977,34 @@ void edit_free_syntax_rules (WEdit * edit)
 	return;
 
     edit_get_rule (edit, -1);
-    syntax_g_free (edit->syntax_type);
+    _FREEPTR (edit->syntax_type);
     edit->syntax_type = 0;
 
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
-		syntax_g_free (edit->rules[i]->keyword[j]->keyword);
-		syntax_g_free (edit->rules[i]->keyword[j]->whole_word_chars_left);
-		syntax_g_free (edit->rules[i]->keyword[j]->whole_word_chars_right);
-		syntax_g_free (edit->rules[i]->keyword[j]);
+		_FREEPTR (edit->rules[i]->keyword[j]->keyword);
+		_FREEPTR (edit->rules[i]->keyword[j]->whole_word_chars_left);
+		_FREEPTR (edit->rules[i]->keyword[j]->whole_word_chars_right);
+		_FREEPTR (edit->rules[i]->keyword[j]);
 	    }
 	}
-	syntax_g_free (edit->rules[i]->left);
-	syntax_g_free (edit->rules[i]->right);
-	syntax_g_free (edit->rules[i]->whole_word_chars_left);
-	syntax_g_free (edit->rules[i]->whole_word_chars_right);
-	syntax_g_free (edit->rules[i]->keyword);
-	syntax_g_free (edit->rules[i]->keyword_first_chars);
-	syntax_g_free (edit->rules[i]);
+	_FREEPTR (edit->rules[i]->left);
+	_FREEPTR (edit->rules[i]->right);
+	_FREEPTR (edit->rules[i]->whole_word_chars_left);
+	_FREEPTR (edit->rules[i]->whole_word_chars_right);
+	_FREEPTR (edit->rules[i]->keyword);
+	_FREEPTR (edit->rules[i]->keyword_first_chars);
+	_FREEPTR (edit->rules[i]);
     }
 
     while (edit->syntax_marker) {
 	struct _syntax_marker *s = edit->syntax_marker->next;
-	syntax_g_free (edit->syntax_marker);
+	_FREEPTR (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
 
-    syntax_g_free (edit->rules);
+    _FREEPTR (edit->rules);
 }
 
 /* returns -1 on file error, line number on error in file syntax */
@@ -1028,7 +1029,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     if (!f){
 	lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
 	f = fopen (lib_file, "r");
-	g_free (lib_file);
+	mhl_mem_free (lib_file);
 	if (!f)
 	    return -1;
     }
@@ -1036,7 +1037,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     args[0] = 0;
     for (;;) {
 	line++;
-	syntax_g_free (l);
+	_FREEPTR (l);
 	if (!read_one_line (&l, f))
 	    break;
 	(void)get_args (l, args, 1023);	/* Final NULL */
@@ -1117,7 +1118,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		    else
 			result = line_error;
 		} else {
-		    syntax_g_free (edit->syntax_type);
+		    _FREEPTR (edit->syntax_type);
 		    edit->syntax_type = g_strdup (syntax_type);
 
 /* if there are no rules then turn off syntax highlighting for speed */
@@ -1136,7 +1137,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	    }
 	}
     }
-    syntax_g_free (l);
+    _FREEPTR (l);
     fclose (f);
     return result;
 }
@@ -1201,9 +1202,9 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 	message (D_ERROR, _(" Load syntax file "),
 		 _(" Error in file %s on line %d "),
 		 error_file_name ? error_file_name : f, r);
-	syntax_g_free (error_file_name);
+	_FREEPTR (error_file_name);
     } else {
 	/* succeeded */
     }
-    g_free (f);
+    mhl_mem_free (f);
 }

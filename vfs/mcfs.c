@@ -112,7 +112,7 @@ mcfs_fill_names (struct vfs_class *me, fill_names_f func)
 	name = g_strconcat ("/#mc:", mcfs_connections[i].user,
 			    "@", mcfs_connections[i].host, (char *) NULL);
 	(*func) (name);
-	g_free (name);
+	mhl_mem_free (name);
     }
 }
 
@@ -390,11 +390,11 @@ mcfs_get_path (mcfs_connection **mc, const char *path)
     if ((remote_path =
 	 mcfs_get_host_and_username (path, &host, &user, &port, &pass)))
 	if (!(*mc = mcfs_open_link (host, user, &port, pass))) {
-	    g_free (remote_path);
+	    mhl_mem_free (remote_path);
 	    remote_path = NULL;
 	}
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
     if (pass)
 	wipe_password (pass);
 
@@ -408,7 +408,7 @@ mcfs_get_path (mcfs_connection **mc, const char *path)
 	    char *s;
 	    s = concat_dir_and_file (mcfs_gethome (*mc),
 				     remote_path + 3 - f);
-	    g_free (remote_path);
+	    mhl_mem_free (remote_path);
 	    remote_path = s;
 	}
     }
@@ -442,14 +442,14 @@ mcfs_rpc_two_paths (int command, const char *s1, const char *s2)
 	return -1;
 
     if ((r2 = mcfs_get_path (&mc, s2)) == 0) {
-	g_free (r1);
+	mhl_mem_free (r1);
 	return -1;
     }
 
     rpc_send (mc->sock,
 	      RPC_INT, command, RPC_STRING, r1, RPC_STRING, r2, RPC_END);
-    g_free (r1);
-    g_free (r2);
+    mhl_mem_free (r1);
+    mhl_mem_free (r2);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -465,7 +465,7 @@ mcfs_rpc_path (int command, const char *path)
     rpc_send (mc->sock,
 	      RPC_INT, command, RPC_STRING, remote_file, RPC_END);
 
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -482,7 +482,7 @@ mcfs_rpc_path_int (int command, const char *path, int data)
 	      RPC_INT, command,
 	      RPC_STRING, remote_file, RPC_INT, data, RPC_END);
 
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -499,7 +499,7 @@ mcfs_rpc_path_int_int (int command, const char *path, int n1, int n2)
 	      RPC_INT, command,
 	      RPC_STRING, remote_file, RPC_INT, n1, RPC_INT, n2, RPC_END);
 
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     return mcfs_handle_simple_error (mc->sock, 0);
 }
 
@@ -535,7 +535,7 @@ mcfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 
     rpc_send (mc->sock, RPC_INT, MC_OPEN, RPC_STRING, remote_file, RPC_INT,
 	      flags, RPC_INT, mode, RPC_END);
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
 
     if (0 ==
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
@@ -617,7 +617,7 @@ mcfs_close (void *data)
 
     mcfs_is_error (result, error);
 
-    g_free (data);
+    mhl_mem_free (data);
     return result;
 }
 
@@ -659,7 +659,7 @@ mcfs_opendir (struct vfs_class *me, const char *dirname)
 
     rpc_send (mc->sock, RPC_INT, MC_OPENDIR, RPC_STRING, remote_dir,
 	      RPC_END);
-    g_free (remote_dir);
+    mhl_mem_free (remote_dir);
 
     if (0 ==
 	rpc_get (mc->sock, RPC_INT, &result, RPC_INT, &error_num, RPC_END))
@@ -742,8 +742,8 @@ mcfs_free_dir (dir_entry *de)
     if (!de)
 	return;
     mcfs_free_dir (de->next);
-    g_free (de->text);
-    g_free (de);
+    mhl_mem_free (de->text);
+    mhl_mem_free (de);
 }
 
 static union vfs_dirent mcfs_readdir_data;
@@ -793,10 +793,10 @@ mcfs_closedir (void *info)
     for (p = mcfs_info->entries; p;) {
 	q = p;
 	p = p->next;
-	g_free (q->text);
-	g_free (q);
+	mhl_mem_free (q->text);
+	mhl_mem_free (q);
     }
-    g_free (info);
+    mhl_mem_free (info);
     return 0;
 }
 
@@ -824,7 +824,7 @@ mcfs_get_time (mcfs_connection *mc)
 
 	rpc_get (sock, RPC_STRING, &buf, RPC_END);
 	sscanf (buf, "%lx", &tm);
-	g_free (buf);
+	mhl_mem_free (buf);
 
 	return (time_t) tm;
     }
@@ -877,7 +877,7 @@ mcfs_stat_cmd (int cmd, const char *path, struct stat *buf)
 	return -1;
 
     rpc_send (mc->sock, RPC_INT, cmd, RPC_STRING, remote_file, RPC_END);
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return mcfs_set_error (-1, errno);
 
@@ -984,7 +984,7 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 	status = mcfs_handle_simple_error (mc->sock, 0);
 
     }
-    g_free (file);
+    mhl_mem_free (file);
     return (status);
 }
 
@@ -1003,7 +1003,7 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 
     rpc_send (mc->sock, RPC_INT, MC_READLINK, RPC_STRING, remote_file,
 	      RPC_END);
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return mcfs_set_error (-1, EIO);
 
@@ -1018,7 +1018,7 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
        size = len;
     /* readlink() does not append a NUL character to buf */
     memcpy (buf, stat_str, size);
-    g_free (stat_str);
+    mhl_mem_free (stat_str);
     return size;
 }
 
@@ -1060,7 +1060,7 @@ mcfs_chdir (struct vfs_class *me, const char *path)
 
     rpc_send (mc->sock, RPC_INT, MC_CHDIR, RPC_STRING, remote_dir,
 	      RPC_END);
-    g_free (remote_dir);
+    mhl_mem_free (remote_dir);
     if (!rpc_get (mc->sock, RPC_INT, &status, RPC_INT, &error, RPC_END))
 	return mcfs_set_error (-1, EIO);
 
@@ -1136,8 +1136,8 @@ mcfs_forget (const char *path)
     if ((p =
 	 mcfs_get_host_and_username (path, &host, &user, &port,
 				     &pass)) == 0) {
-	g_free (host);
-	g_free (user);
+	mhl_mem_free (host);
+	mhl_mem_free (user);
 	if (pass)
 	    wipe_password (pass);
 	return;
@@ -1155,9 +1155,9 @@ mcfs_forget (const char *path)
 		mcfs_open_tcp_link (host, user, &port, pass, &vers);
 	}
     }
-    g_free (p);
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (p);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
     if (pass)
 	wipe_password (pass);
 }
@@ -1213,9 +1213,9 @@ init_mcfs (void)
 static void
 mcfs_free_bucket (int bucket)
 {
-    g_free (mcfs_connections[bucket].host);
-    g_free (mcfs_connections[bucket].user);
-    g_free (mcfs_connections[bucket].home);
+    mhl_mem_free (mcfs_connections[bucket].host);
+    mhl_mem_free (mcfs_connections[bucket].user);
+    mhl_mem_free (mcfs_connections[bucket].home);
 
     /* Set all the fields to zero */
     mcfs_connections[bucket].host =
