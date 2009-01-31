@@ -1,4 +1,9 @@
 
+2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* src/Makefile.am, edit/Makefile.am vfs/Makefile.am: fixed #208
+	  (out-of-tree builds)
+
 2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
 	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.
 	  odt2txt is now used

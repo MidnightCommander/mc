@@ -1,4 +1,4 @@
-AM_CFLAGS = $(GLIB_CFLAGS)
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 localedir = $(datadir)/locale
 pkglibexecdir =		$(libexecdir)/@PACKAGE@
