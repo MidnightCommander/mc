@@ -26,13 +26,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "mhl/memory.h"
-#include "mhl/escape.h"
+#include <mhl/memory.h>
+#include <mhl/escape.h>
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -512,7 +512,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 		if (cur_path >= path_end)
 		    break;
 		expanded = tilde_expand (*cur_path ? cur_path : ".");
-		cur_word = concat_dir_and_file (expanded, text);
+		cur_word = mhl_str_dir_plus_file (expanded, text);
 		g_free (expanded);
 		canonicalize_pathname (cur_word);
 		cur_path = strchr (cur_path, 0) + 1;
@@ -807,7 +807,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 		    c = *s; 
 		    *s = 0;
 		    if (*cdpath){
-			r = concat_dir_and_file (cdpath, word);
+			r = mhl_str_dir_plus_file (cdpath, word);
 			SHOW_C_CTX("try_complete:filename_subst_2");
 			matches = completion_matches (r, filename_completion_function, flags);
 			g_free (r);

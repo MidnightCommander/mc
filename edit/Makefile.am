@@ -1,4 +1,4 @@
-AM_CFLAGS = $(GLIB_CFLAGS)
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 if USE_EDIT
 noinst_LIBRARIES = libedit.a

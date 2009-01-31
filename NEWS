@@ -2,41 +2,46 @@ Version 4.6.2
 
 - MC Core
 	- Changed HQ url to point to new website
-	  www.midnight-commander.org
+	  www.midnight-commander.org (Closes: #137, #138)
 	- Added a micro helper library in order to go slowly
-	  avay from glib
+	  avay from glib (Closes: #157)
 	- Use static strings as section entries in ~/.mc/history
-	  WARNING!: This will break old files
+	  WARNING!: This will break old files (Closes: #50)
 	- Fixed a repaint issue when clicking on the "View" Button instead
-	  of using F3
-	- Removed obsolete autoconf macros
-	- Fix escaping for command line completion
-	- prevend mc from segfaulting when getting invalid timestamps on files
-	- Fixed a keybord issue when running mc via a putty console
-	- setted pty fd to closeonexec (on subshell)
+	  of using F3 (Closes: #35)
+	- Removed obsolete autoconf macros (Closes: #133)
+	- Fix escaping for command line completion (Closes: #147)
+	- prevent mc from segfaulting when getting invalid timestamps on files (Closes: #96)
+	- Fixed a keybord issue when running mc via a putty console (Closes: #203)
+	- setted pty fd to closeonexec (on subshell) (Closes: #174)
+	- Fixed file renames, when copying/moving is performed
+	  into deleted directories. (Closes: #181)
+	- Add an option to show executables first in the panels (Closes: #173)
 
 - Editor
 	- Syntax highlighting for:
-	  + debian files (debian/changelog, debian/control, debian/copyright, ..)
-	  + updated sh syntax highlighting
-	  + updated pascal syntax highlighting
-	  + differentiate between c and cpp files for highlighting
-	- Removed some unneeded variables
-	- Do use a ro test if a file exists
-	- Fixes some missbehaviour in regex matching
+	  + debian files (debian/changelog, debian/control, debian/copyright, ..) (Closes: #142)
+	  + updated sh syntax highlighting (Closes: #143)
+	  + updated pascal syntax highlighting (Closes: #65)
+	  + differentiate between c and cpp files for highlighting (Closes: #16)
+	  + updated python highlighting to support python 2.6 (Closes: #216)
+	- Removed some unneeded variables (Closes: #168, #151)
+	- Do use a ro test if a file exists (Closes: #206)
+	- Fixes some missbehaviour in regex matching (Closes: #207, #211 )
 	  + start at front of line and not on cursor position
 	  + . shouldn't match a newline
 
 - VFS
-	- Fix some bashisms in some extfs scripts
+	- Fix some bashisms in some extfs scripts (Closes: #146)
 	- Fixed various problems with symlinks and files with chars which needs
-	  escaping over fish
-	- Added 7zip extfs descriptor
+	  escaping over fish (Closes: #10, #87, #149)
+	- Added 7zip extfs descriptor (Closes: #92)
+	- Switched from o3totxt to odf2txt as o3totxt is outdated (Closes: #218)
 
 - Locale
-	- Updated german translation
-	- New Belarussian translation
-	- Updated russian translation
+	- Updated german translation (Closes: #167)
+	- New Belarussian translation (Closes: #170)
+	- Updated russian translation (Closes: #159)
 
 Version 4.6.2-pre1.
 

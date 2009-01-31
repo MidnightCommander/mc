@@ -53,6 +53,8 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/string.h>
+
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
 

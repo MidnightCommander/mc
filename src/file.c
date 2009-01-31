@@ -50,8 +50,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "mhl/memory.h"
-#include "mhl/escape.h"
+#include <mhl/memory.h>
+#include <mhl/escape.h>
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -921,7 +922,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	}
 	/* Dive into subdir if exists */
 	if (toplevel && ctx->dive_into_subdirs) {
-	    dest_dir = concat_dir_and_file (d, x_basename (s));
+	    dest_dir = mhl_str_dir_plus_file (d, x_basename (s));
 	} else {
 	    dest_dir = g_strdup (d);
 	    goto dont_mkdir;
@@ -967,11 +968,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	    continue;
 
 	/* get the filename and add it to the src directory */
-	path = concat_dir_and_file (s, next->d_name);
+	path = mhl_str_dir_plus_file (s, next->d_name);
 
 	(*ctx->stat_func) (path, &buf);
 	if (S_ISDIR (buf.st_mode)) {
-	    mdpath = concat_dir_and_file (dest_dir, next->d_name);
+	    mdpath = mhl_str_dir_plus_file (dest_dir, next->d_name);
 	    /*
 	     * From here, we just intend to recursively copy subdirs, not
 	     * the double functionality of copying different when the target
@@ -982,7 +983,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
-	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+	    dest_file = mhl_str_dir_plus_file (dest_dir, x_basename (path));
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
 	    g_free (dest_file);
@@ -1172,7 +1173,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	destdir = g_strdup (d);
 	move_over = 1;
     } else
-	destdir = concat_dir_and_file (d, x_basename (s));
+	destdir = mhl_str_dir_plus_file (d, x_basename (s));
 
     if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino) {
 	int msize = COLS - 36;
@@ -1329,7 +1330,7 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	    continue;
 	if (!strcmp (next->d_name, ".."))
 	    continue;
-	path = concat_dir_and_file (s, next->d_name);
+	path = mhl_str_dir_plus_file (s, next->d_name);
 	if (mc_lstat (path, &buf)) {
 	    g_free (path);
 	    mc_closedir (reading);
@@ -1520,7 +1521,7 @@ compute_dir_size (const char *dirname, off_t *ret_marked, double *ret_total)
 	if (strcmp (dirent->d_name, "..") == 0)
 	    continue;
 
-	fullname = concat_dir_and_file (dirname, dirent->d_name);
+	fullname = mhl_str_dir_plus_file (dirname, dirent->d_name);
 
 	res = mc_lstat (fullname, &s);
 
@@ -1577,7 +1578,7 @@ panel_compute_totals (WPanel *panel, off_t *ret_marked, double *ret_total)
 	    double subdir_bytes = 0;
 
 	    dir_name =
-		concat_dir_and_file (panel->cwd, panel->dir.list[i].fname);
+		mhl_str_dir_plus_file (panel->cwd, panel->dir.list[i].fname);
 	    compute_dir_size (dir_name, &subdir_count, &subdir_bytes);
 
 	    *ret_marked += subdir_count;
@@ -1787,6 +1788,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
     } else if (operation != OP_DELETE) {
 	char *dest_dir;
+	char *dest_dir_;
 
 	/* Forced single operations default to the original name */
 	if (force_single)
@@ -1796,9 +1798,31 @@ panel_operate (void *source_panel, FileOperation operation,
 	else
 	    dest_dir = panel->cwd;
 
+	/*
+	 * Add trailing backslash only when do non-locally ops.
+	 * It saves user from occasional file renames (when destination
+	 * dir is deleted)
+	 */
+	if (force_single)
+	    /* just copy */
+	    dest_dir_ = mhl_str_dup (dest_dir);
+	else
+	    /* add trailing separator */
+	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
+		dest_dir_ = mhl_str_concat (dest_dir, PATH_SEP_STR);
+	} else {
+		dest_dir_ = mhl_str_dup (dest_dir);
+	}
+	if (!dest_dir_) {
+	    file_op_context_destroy (ctx);
+	    return 0;
+	}
+
 	dest =
-	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir,
+	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
 			      single_entry, &do_bg);
+	mhl_mem_free(dest_dir_);
+
 	if (!dest) {
 	    file_op_context_destroy (ctx);
 	    return 0;
@@ -1862,7 +1886,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 	/* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
-	source_with_path = concat_dir_and_file (panel->cwd, source);
+	source_with_path = mhl_str_dir_plus_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
 	if (operation == OP_DELETE) {
@@ -1877,7 +1901,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
-		char *temp2 = concat_dir_and_file (dest, temp);
+		char *temp2 = mhl_str_dir_plus_file (dest, temp);
 		g_free (dest);
 		dest = temp2;
 		temp = NULL;
@@ -1955,7 +1979,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 #ifdef WITH_FULL_PATHS
 	    g_free (source_with_path);
-	    source_with_path = concat_dir_and_file (panel->cwd, source);
+	    source_with_path = mhl_str_dir_plus_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
 	    if (operation == OP_DELETE) {
@@ -1971,7 +1995,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-		    char *temp2 = concat_dir_and_file (dest, temp);
+		    char *temp2 = mhl_str_dir_plus_file (dest, temp);
 
 		    source_with_path = mhl_shell_unescape_buf(source_with_path);
 		    temp2 = mhl_shell_unescape_buf(temp2);

@@ -27,8 +27,9 @@
 #include <errno.h>
 #include <string.h>
 
-#include "mhl/memory.h"
-#include "mhl/escape.h"
+#include <mhl/memory.h>
+#include <mhl/escape.h>
+#include <mhl/string.h>
 
 #include "global.h"		/* home_dir */
 #include "tty.h"
@@ -127,7 +128,7 @@ examine_cd (char *path)
 	    c = *s;
 	    *s = 0;
 	    if (*p) {
-		r = concat_dir_and_file (p, q);
+		r = mhl_str_dir_plus_file (p, q);
 		result = do_cd (r, cd_parse_command);
 		g_free (r);
 	    }
@@ -180,7 +181,7 @@ void do_cd_command (char *cmd)
 	} else {
 	    char *old = current_panel->cwd;
 	    char *new;
-	    new = concat_dir_and_file (old, cmd+3);
+	    new = mhl_str_dir_plus_file (old, cmd+3);
 	    sync_tree (new);
 	    g_free (new);
 	}

@@ -1,3 +1,7 @@
+2009-01-10  Andrew Borodin  <aborodin@vmail.ru>
+
+	* ru.po: Fix conflicting shortcuts in the russian translation.
+
 2008-06-30  David Martin  <dmartina@excite.com>
 
 	* es.po: Updated Spanish translation. Converted to UTF-8.

@@ -445,7 +445,7 @@ shell/.sdw
 # StarOffice 6 and OpenOffice.org formats
 regex/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf|sxm|odm|sxg)$
 	Open=(ooffice %f &)
-	View=%view{ascii} unzip -p %f content.xml | o3totxt
+	View=%view{ascii} odt2txt %f
 
 # AbiWord
 shell/.abw

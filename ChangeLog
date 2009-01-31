@@ -6,10 +6,38 @@
 	* src/widget.c, src/widget.h, src/wtools.c, vfs/fish.c:
 	  fixed shell escaping issues in commandline completion engine
 
+2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
+
+2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* src/Makefile.am, edit/Makefile.am vfs/Makefile.am: fixed #208
+	  (out-of-tree builds)
+
+2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
+	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.
+	  odt2txt is now used
+
+2009-01-29 Patrick Winnertz <winnie@debian.org> & Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* src/file.c: Added trailing dir separator for default path in copy/move dialogs.
+	  This solves "strange" rename cases, when copying/moving is performed into
+	  deleted directory.
+
 2009-01-27 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* mhl/escape.h, src/complete.c, vfs/fish.c: introduced new type 
 	  SHELL_ESCAPED_STR for more type safety
+
+2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
+
+2009-01-27 Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* syntax/python.syntax: Added syntax highlighting for
+	pytnoh-2.6+ keywords (patch sent by NNemec)
 
 2009-01-25 Ilia Maslakov <il.smind@gmail.com>
 
