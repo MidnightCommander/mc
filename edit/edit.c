@@ -30,8 +30,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 
@@ -2665,7 +2666,7 @@ user_menu (WEdit * edit)
     int nomark;
     struct stat status;
     long start_mark, end_mark;
-    char *block_file = concat_dir_and_file (home_dir, BLOCK_FILE);
+    char *block_file = mhl_str_dir_plus_file (home_dir, BLOCK_FILE);
     int rc = 0;
 
     nomark = eval_marks (edit, &start_mark, &end_mark);

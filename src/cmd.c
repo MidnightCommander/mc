@@ -34,6 +34,8 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"		/* file_op_context_new() */
@@ -362,7 +364,7 @@ mkdir_cmd (void)
     if (dir[0] == '/' || dir[0] == '~')
 	absdir = g_strdup (dir);
     else
-	absdir = concat_dir_and_file (current_panel->cwd, dir);
+	absdir = mhl_str_dir_plus_file (current_panel->cwd, dir);
 
     save_cwds_stat ();
     if (my_mkdir (absdir, 0777) == 0) {
@@ -568,10 +570,10 @@ void ext_cmd (void)
 			    _(" Which extension file you want to edit? "), 0, 2,
 			    _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, MC_LIB_EXT);
+    extdir = mhl_str_dir_plus_file (mc_home, MC_LIB_EXT);
 
     if (dir == 0){
-	buffer = concat_dir_and_file (home_dir, MC_USER_EXT);
+	buffer = mhl_str_dir_plus_file (home_dir, MC_USER_EXT);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
 	g_free (buffer);
@@ -598,7 +600,7 @@ menu_edit_cmd (int where)
 	_("&Local"), _("&User"), _("&System Wide")
     );
 
-    menufile = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+    menufile = mhl_str_dir_plus_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 
     switch (dir) {
 	case 0:
@@ -607,12 +609,12 @@ menu_edit_cmd (int where)
 	    break;
 
 	case 1:
-	    buffer = concat_dir_and_file (home_dir, where ? CEDIT_HOME_MENU : MC_HOME_MENU);
+	    buffer = mhl_str_dir_plus_file (home_dir, where ? CEDIT_HOME_MENU : MC_HOME_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 	
 	case 2:
-	    buffer = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    buffer = mhl_str_dir_plus_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	    break;
 
 	default:
@@ -671,10 +673,10 @@ edit_syntax_cmd (void)
 			  _(" Which syntax file you want to edit? "), 0, 2,
 			  _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+    extdir = mhl_str_dir_plus_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
 
     if (dir == 0) {
-	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
+	buffer = mhl_str_dir_plus_file (home_dir, SYNTAX_FILE);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
 	g_free (buffer);
@@ -805,8 +807,8 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	    }
 
 	    /* Thorough compare on, do byte-by-byte comparison */
-	    src_name = concat_dir_and_file (panel->cwd, source->fname);
-	    dst_name = concat_dir_and_file (other->cwd, target->fname);
+	    src_name = mhl_str_dir_plus_file (panel->cwd, source->fname);
+	    dst_name = mhl_str_dir_plus_file (other->cwd, target->fname);
 	    if (compare_files (src_name, dst_name, source->st.st_size))
 		do_file_mark (panel, i, 1);
 	    g_free (src_name);
@@ -920,10 +922,10 @@ do_link (int symbolic_link, const char *fname)
 	char *d;
 
 	/* suggest the full path for symlink */
-	s = concat_dir_and_file (current_panel->cwd, fname);
+	s = mhl_str_dir_plus_file (current_panel->cwd, fname);
 
 	if (get_other_type () == view_listing) {
-	    d = concat_dir_and_file (other_panel->cwd, fname);
+	    d = mhl_str_dir_plus_file (other_panel->cwd, fname);
 	} else {
 	    d = g_strdup (fname);
 	}

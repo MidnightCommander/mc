@@ -44,7 +44,7 @@ What to do with this?
         int f = !strcmp( remote_path, "/~" );
 	if (f || !strncmp( remote_path, "/~/", 3 )) {
 	    char *s;
-	    s = concat_dir_and_file( qhome (*bucket), remote_path +3-f );
+	    s = mhl_str_dir_plus_file( qhome (*bucket), remote_path +3-f );
 	    g_free (remote_path);
 	    remote_path = s;
 	}
@@ -68,6 +68,8 @@ What to do with this?
 #include <sys/param.h>
 #include <errno.h>
 #include <ctype.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -555,7 +557,7 @@ ftpfs_load_no_proxy_list (void)
     if (mc_file)
 	return;
 
-    mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
+    mc_file = mhl_str_dir_plus_file (mc_home, "mc.no_proxy");
     if (exist_file (mc_file) &&
 	(npf = fopen (mc_file, "r"))) {
 	while (fgets (s, sizeof (s), npf)) {
@@ -1230,7 +1232,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	    ftpfs_open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
     else {
 	/* Trailing "/." is necessary if remote_path is a symlink */
-	char *path = concat_dir_and_file (remote_path, ".");
+	char *path = mhl_str_dir_plus_file (remote_path, ".");
 	sock =
 	    ftpfs_open_data_connection (me, super, "LIST -la", path, TYPE_ASCII,
 				  0);
@@ -1886,7 +1888,7 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     }
 
     /* Load current .netrc */
-    netrcname = concat_dir_and_file (home_dir, ".netrc");
+    netrcname = mhl_str_dir_plus_file (home_dir, ".netrc");
     netrcp = netrc = load_file (netrcname);
     if (netrc == NULL) {
 	g_free (netrcname);

@@ -66,7 +66,6 @@ char *strip_password (char *path, int has_prefix);
 const char *strip_home_and_password (const char *dir);
 
 const char *extension (const char *);
-char *concat_dir_and_file (const char *dir, const char *file);
 const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);
 const char *skip_numbers (const char *s);

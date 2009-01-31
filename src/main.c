@@ -29,10 +29,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -1137,7 +1138,7 @@ copy_readlink (WPanel *panel)
     if (S_ISLNK (selection (panel)->st.st_mode)) {
 	char buffer[MC_MAXPATHLEN];
 	char *p =
-	    concat_dir_and_file (panel->cwd, selection (panel)->fname);
+	    mhl_str_dir_plus_file (panel->cwd, selection (panel)->fname);
 	int i;
 
 	i = mc_readlink (p, buffer, MC_MAXPATHLEN - 1);

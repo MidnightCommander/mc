@@ -28,7 +28,6 @@
 
 #include <assert.h>
 #include <ctype.h>
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -36,8 +35,9 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/history.h"
@@ -235,7 +235,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	return 0;
 
     if (*filename != PATH_SEP && edit->dir) {
-	savename = concat_dir_and_file (edit->dir, filename);
+	savename = mhl_str_dir_plus_file (edit->dir, filename);
 	filename = catstrs (savename, (char *) NULL);
 	g_free (savename);
     }
@@ -301,7 +301,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	    savedir[slashpos - filename + 1] = '\0';
 	} else
 	    savedir = g_strdup (".");
-	saveprefix = concat_dir_and_file (savedir, "cooledit");
+	saveprefix = mhl_str_dir_plus_file (savedir, "cooledit");
 	g_free (savedir);
 	fd = mc_mkstemps (&savename, saveprefix, NULL);
 	g_free (saveprefix);

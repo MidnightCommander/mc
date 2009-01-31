@@ -30,8 +30,9 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-
 #include <stdlib.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 
@@ -1026,7 +1027,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
     f = fopen (syntax_file, "r");
     if (!f){
-	lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+	lib_file = mhl_str_dir_plus_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
 	f = fopen (lib_file, "r");
 	g_free (lib_file);
 	if (!f)
@@ -1188,7 +1189,7 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 	if (!*edit->filename && !type)
 	    return;
     }
-    f = concat_dir_and_file (home_dir, SYNTAX_FILE);
+    f = mhl_str_dir_plus_file (home_dir, SYNTAX_FILE);
     r = edit_read_syntax_file (edit, pnames, f, edit ? edit->filename : 0,
 			       get_first_editor_line (edit), type);
     if (r == -1) {
