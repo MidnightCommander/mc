@@ -294,7 +294,8 @@ command_new (int y, int x, int cols)
 {
     WInput *cmd;
 
-    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline", INPUT_COMPLETE_DEFAULT);
+    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline",
+	INPUT_COMPLETE_DEFAULT | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_SHELL_ESC);
 
     /* Add our hooks */
     cmd->widget.callback = command_callback;
