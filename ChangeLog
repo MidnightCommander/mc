@@ -1,3 +1,9 @@
+
+2009-01-26 Mikhail S. Pobolovets <styx.mp@gmail.com>
+
+	* vfs/fish.c: Iterpret SUP.flags as port number if SUP.flags is not in
+	  0, FISH_FLAG_COMPRESSED and FISH_FLAG_RSH. Weakness: port number
+
 2009-01-25 Ilia Maslakov <il.smind@gmail.com>
 
 	* src/boxes.c, src/boxes.h, src/dir.c, src/dir.h:
