@@ -121,4 +121,37 @@ static inline char* mhl_str_reverse(char* ptr)
     return ptr;
 }
 
+static inline char* mhl_str_dir_plus_file(const char* dirname, const char* filename)
+{
+    /* make sure we have valid strings */
+    if (!dirname)
+	dirname="";
+
+    if (!filename)
+	filename="";
+
+    /* skip leading slashes on filename */
+    while (*filename == '/')
+	filename++;
+
+    /* skip trailing slashes on dirname */
+    int dnlen = strlen(dirname);
+    while (dnlen && (dirname[dnlen-1]=='/'))
+	dnlen--;
+
+    int fnlen = strlen(filename);
+    char* buffer = mhl_mem_alloc_z(dnlen+fnlen+2);	/* enough space for dirname, /, filename, zero */
+    char* ptr = buffer;
+
+    memcpy(ptr, dirname, dnlen);
+    ptr+=dnlen;
+    *ptr = '/';
+    ptr++;
+    memcpy(ptr, filename, fnlen);
+    ptr+=fnlen;
+    *ptr = 0;
+
+    return buffer;
+}
+
 #endif /* __MHL_STRING_H */

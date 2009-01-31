@@ -48,7 +48,7 @@ load_codepages_list (void)
     extern int display_codepage;
     char *default_codepage = NULL;
 
-    fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
+    fname = mhl_str_dir_plus_file (mc_home, CHARSETS_INDEX);
     if (!(f = fopen (fname, "r"))) {
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
 	g_free (fname);

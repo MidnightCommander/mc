@@ -406,7 +406,7 @@ mcfs_get_path (mcfs_connection **mc, const char *path)
 	int f = !strcmp (remote_path, "/~");
 	if (f || !strncmp (remote_path, "/~/", 3)) {
 	    char *s;
-	    s = concat_dir_and_file (mcfs_gethome (*mc),
+	    s = mhl_str_dir_plus_file (mcfs_gethome (*mc),
 				     remote_path + 3 - f);
 	    g_free (remote_path);
 	    remote_path = s;

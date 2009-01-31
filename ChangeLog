@@ -1,3 +1,6 @@
+2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
 
 2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
 

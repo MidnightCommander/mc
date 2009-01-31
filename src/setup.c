@@ -20,9 +20,10 @@
 
 #include <string.h>
 #include <stdio.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -284,7 +285,7 @@ save_layout (void)
     int  i;
     char buffer [BUF_TINY];
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = mhl_str_dir_plus_file (home_dir, PROFILE_NAME);
 
     /* Save integer options */
     for (i = 0; layout [i].opt_name; i++){
@@ -301,7 +302,7 @@ save_configure (void)
     char *profile;
     int  i;
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = mhl_str_dir_plus_file (home_dir, PROFILE_NAME);
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name; i++)
@@ -349,7 +350,7 @@ save_setup (void)
     char *profile;
 
     saving_setup = 1;
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = mhl_str_dir_plus_file (home_dir, PROFILE_NAME);
 
     save_configure ();
 
@@ -484,9 +485,9 @@ setup_init (void)
     if (profile_name)
 	    return profile_name;
 
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    profile = mhl_str_dir_plus_file (home_dir, PROFILE_NAME);
     if (!exist_file (profile)){
-	inifile = concat_dir_and_file (mc_home, "mc.ini");
+	inifile = mhl_str_dir_plus_file (mc_home, "mc.ini");
 	if (exist_file (inifile)){
 	    g_free (profile);
 	    profile = inifile;
@@ -509,7 +510,7 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
+    global_profile_name = mhl_str_dir_plus_file (mc_home, "mc.lib");
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name; i++)
