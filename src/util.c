@@ -236,16 +236,21 @@ name_trunc (const char *txt, int trunc_len)
     int txt_len;
     char *p;
 
+    if (!txt)
+	return NULL;
+    if (!*txt)
+	return txt;
+
     if ((size_t) trunc_len > sizeof (x) - 1) {
 	trunc_len = sizeof (x) - 1;
     }
-    txt_len = strlen (txt);
+    txt_len = (int) strlen (txt);
     if (txt_len <= trunc_len) {
 	strcpy (x, txt);
     } else {
 	int y = (trunc_len / 2) + (trunc_len % 2);
-	strncpy (x, txt, y);
-	strncpy (x + y, txt + txt_len - (trunc_len / 2), trunc_len / 2);
+	strncpy (x, txt, (size_t) y);
+	strncpy (x + y, txt + (size_t) (txt_len - (trunc_len / 2)), (size_t) trunc_len / 2);
 	x[y] = '~';
     }
     x[trunc_len] = 0;
