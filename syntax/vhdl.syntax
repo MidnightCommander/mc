@@ -65,7 +65,7 @@ context default
 	keyword whole xor	green
 	keyword whole nor	green
 	keyword whole xnor	green
-	
+
 # sequential statements
 	keyword whole begin	brightred
 	keyword whole end	brightred
@@ -115,14 +115,13 @@ context default
 	keyword whole generic	brightcyan
 	keyword whole alias	brightcyan
 	keyword whole attribute	brightcyan
-	
 
 	keyword whole in	white
 	keyword whole out	white
 	keyword whole inout	white
 	keyword whole buffer	white
 	keyword whole bus	white
-	
+
 # library units
 	keyword whole library	magenta
 	keyword whole entity	magenta
@@ -143,8 +142,6 @@ context default
 	keyword whole warning	red
 	keyword whole error	red
 	keyword whole failure	red
-	
 
 context exclusive -- \n	brown
 context " "	green/green
-
