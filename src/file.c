@@ -992,7 +992,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 #ifdef HAVE_CHARSET
             mdpath = concat_dir_and_recoded_fname(dest_dir, next->d_name, ctx);
 #else
-	    mdpath = concat_dir_and_file (dest_dir, next->d_name);
+	    mdpath = mhl_str_dir_plus_file (dest_dir, next->d_name);
 #endif
 	    /*
 	     * From here, we just intend to recursively copy subdirs, not
@@ -1007,7 +1007,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 #ifdef HAVE_CHARSET
             dest_file=concat_dir_and_recoded_fname(dest_dir, x_basename(path),ctx);
 #else
-	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+	    dest_file = mhl_str_dir_plus_file (dest_dir, x_basename (path));
 #endif
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
@@ -1192,7 +1192,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 #ifdef HAVE_CHARSET
         destdir = concat_dir_and_recoded_fname(d, x_basename (s), ctx);
 #else
-	destdir = concat_dir_and_file (d, x_basename (s));
+	destdir = mhl_str_dir_plus_file (d, x_basename (s));
 #endif
     if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino) {
 	int msize = COLS - 36;
@@ -1924,7 +1924,7 @@ panel_operate (void *source_panel, FileOperation operation,
 #ifdef HAVE_CHARSET
                 char *temp2 = concat_dir_and_recoded_fname (dest, temp, ctx);
 #else
-		char *temp2 = concat_dir_and_file (dest, temp);
+		char *temp2 = mhl_str_dir_plus_file (dest, temp);
 #endif
 		g_free (dest);
 		dest = temp2;
@@ -2022,7 +2022,7 @@ panel_operate (void *source_panel, FileOperation operation,
 #ifdef HAVE_CHARSET
                     char *temp2 = concat_dir_and_recoded_fname(dest, temp, ctx);
 #else
-		    char *temp2 = concat_dir_and_file (dest, temp);
+		    char *temp2 = mhl_str_dir_plus_file (dest, temp);
 #endif
 		    source_with_path = shell_unescape(source_with_path);
 		    temp2 = shell_unescape(temp2);
