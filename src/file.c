@@ -987,15 +987,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
 	(*ctx->stat_func) (path, &buf);
 	if (S_ISDIR (buf.st_mode)) {
-<<<<<<< HEAD:src/file.c
-	    mdpath = mhl_str_dir_plus_file (dest_dir, next->d_name);
-=======
 #ifdef HAVE_CHARSET
             mdpath = concat_dir_and_recoded_fname(dest_dir, next->d_name, ctx);
 #else
-	    mdpath = concat_dir_and_file (dest_dir, next->d_name);
+	    mdpath = mhl_str_dir_plus_file (dest_dir, next->d_name);
 #endif
->>>>>>> Added recode patch from debian to enable utf8:src/file.c
 	    /*
 	     * From here, we just intend to recursively copy subdirs, not
 	     * the double functionality of copying different when the target
@@ -1006,15 +1002,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 				parent_dirs, progress_count, progress_bytes);
 	    g_free (mdpath);
 	} else {
-<<<<<<< HEAD:src/file.c
-	    dest_file = mhl_str_dir_plus_file (dest_dir, x_basename (path));
-=======
 #ifdef HAVE_CHARSET
             dest_file=concat_dir_and_recoded_fname(dest_dir, x_basename(path),ctx);
 #else
-	    dest_file = concat_dir_and_file (dest_dir, x_basename (path));
+	    dest_file = mhl_str_dir_plus_file (dest_dir, x_basename (path));
 #endif
->>>>>>> Added recode patch from debian to enable utf8:src/file.c
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
 	    g_free (dest_file);
@@ -1204,16 +1196,12 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	destdir = g_strdup (d);
 	move_over = 1;
     } else
-<<<<<<< HEAD:src/file.c
-	destdir = mhl_str_dir_plus_file (d, x_basename (s));
-=======
 #ifdef HAVE_CHARSET
         destdir = concat_dir_and_recoded_fname(d, x_basename (s), ctx);
 #else
-	destdir = concat_dir_and_file (d, x_basename (s));
+	destdir = mhl_str_dir_plus_file (d, x_basename (s));
 #endif
 
->>>>>>> Added recode patch from debian to enable utf8:src/file.c
 
     if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino) {
 	int msize = COLS - 36;
@@ -1941,16 +1929,12 @@ panel_operate (void *source_panel, FileOperation operation,
 	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
-<<<<<<< HEAD:src/file.c
-		char *temp2 = mhl_str_dir_plus_file (dest, temp);
-=======
 #ifdef HAVE_CHARSET
                 char *temp2 = concat_dir_and_recoded_fname (dest, temp, ctx);
 #else
-		char *temp2 = concat_dir_and_file (dest, temp);
+		char *temp2 = mhl_str_dir_plus_file (dest, temp);
 #endif
 
->>>>>>> Added recode patch from debian to enable utf8:src/file.c
 		g_free (dest);
 		dest = temp2;
 		temp = NULL;
@@ -2044,16 +2028,12 @@ panel_operate (void *source_panel, FileOperation operation,
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-<<<<<<< HEAD:src/file.c
-		    char *temp2 = mhl_str_dir_plus_file (dest, temp);
-=======
 #ifdef HAVE_CHARSET
                     char *temp2 = concat_dir_and_recoded_fname(dest, temp, ctx);
 #else
-		    char *temp2 = concat_dir_and_file (dest, temp);
+		    char *temp2 = mhl_str_dir_plus_file (dest, temp);
 #endif
 
->>>>>>> Added recode patch from debian to enable utf8:src/file.c
 
 		    source_with_path = mhl_shell_unescape_buf(source_with_path);
 		    temp2 = mhl_shell_unescape_buf(temp2);
