@@ -1,3 +1,8 @@
+2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* src/achown.c: fixed unitialized var in init_chown_advanced()
+	  (patch from andrew_b)
+
 2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>, Patrick Winnertz <winnie@debian.org>, Slava Zanko <slavazanko@gmail.com>, Sergei Trofimovich  <slyfox@inbox.ru>
 
 	* edit/editcmd.c, mhl/escape.h, mhl/string.h, mhl/types.h, src/Makefile.am,

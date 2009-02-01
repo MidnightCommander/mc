@@ -539,9 +539,9 @@ init_chown_advanced (void)
     int i;
     enum { dlg_h = 13, dlg_w = 74, n_elem = 4 };
 #ifdef ENABLE_NLS
-    static int i18n_len;
-    
-    if (!i18n_len) {
+    static int i18n_len = 0;
+
+    if (i18n_len == 0) {
 	int dx, cx;
 	for (i = 0 ; i < n_elem ; i++) {
 	    chown_advanced_but[i].text = _(chown_advanced_but[i].text);
