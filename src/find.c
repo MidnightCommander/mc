@@ -276,16 +276,16 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg, case_sense);
 
     in_with =
-	input_new (8, istart, INPUT_COLOR, ilen, in_contents, "content");
+	input_new (8, istart, INPUT_COLOR, ilen, in_contents, "content", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
 
     add_widget (find_dlg, recursively_cbox);
     in_name =
-	input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name");
+	input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
 
     in_start =
-	input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start");
+	input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
 
     add_widget (find_dlg, label_new (8, 3, labs[2]));

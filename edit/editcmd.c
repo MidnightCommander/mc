@@ -626,7 +626,7 @@ edit_raw_key_query (const char *heading, const char *query, int cancel)
 		    NULL, heading,
 		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     add_widget (raw_dlg,
-		input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0));
+		input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0, INPUT_COMPLETE_DEFAULT));
     add_widget (raw_dlg, label_new (3 - cancel, 2, query));
     if (cancel)
 	add_widget (raw_dlg,

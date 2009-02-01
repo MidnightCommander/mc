@@ -45,7 +45,7 @@ CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
 SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
-	command.c command.h complete.c complete.h cons.handler.c	\
+	command.c command.h complete.c cons.handler.c	\
 	cons.saver.h dialog.c dialog.h dir.c dir.h			\
 	eregex.h execute.c execute.h ext.c ext.h file.c filegui.c	\
 	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\

@@ -30,6 +30,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/memory.h>
+#include <mhl/escape.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -39,21 +41,38 @@
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "complete.h"
 #include "main.h"
+#include "util.h"
 #include "key.h"		/* XCTRL and ALT macros */
 
-typedef char *CompletionFunction (char *, int);
+typedef char *CompletionFunction (char * text, int state, INPUT_COMPLETE_FLAGS flags);
 
-/* This flag is used in filename_completion_function */
-static int ignore_filenames = 0;
+//#define DO_COMPLETION_DEBUG
+#ifdef DO_COMPLETION_DEBUG
+/*
+ * Useful to print/debug completion flags
+ */
+static const char * show_c_flags(INPUT_COMPLETE_FLAGS flags)
+{
+    static char s_cf[] = "FHCVUDS";
 
-/* This flag is used by command_completion_function */
-/* to hint the filename_completion_function */
-static int look_for_executables = 0;
+    s_cf[0] = (flags & INPUT_COMPLETE_FILENAMES) ? 'F' : ' ';
+    s_cf[1] = (flags & INPUT_COMPLETE_HOSTNAMES) ? 'H' : ' ';
+    s_cf[2] = (flags & INPUT_COMPLETE_COMMANDS)  ? 'C' : ' ';
+    s_cf[3] = (flags & INPUT_COMPLETE_VARIABLES) ? 'V' : ' ';
+    s_cf[4] = (flags & INPUT_COMPLETE_USERNAMES) ? 'U' : ' ';
+    s_cf[5] = (flags & INPUT_COMPLETE_CD)        ? 'D' : ' ';
+    s_cf[6] = (flags & INPUT_COMPLETE_SHELL_ESC) ? 'S' : ' ';
+
+    return s_cf;
+}
+#define SHOW_C_CTX(func) fprintf(stderr, "%s: text='%s' flags=%s\n", func, text, show_c_flags(flags))
+#else
+#define SHOW_C_CTX(func)
+#endif /* DO_CMPLETION_DEBUG */
 
 static char *
-filename_completion_function (char *text, int state)
+filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static DIR *directory;
     static char *filename = NULL;
@@ -63,6 +82,11 @@ filename_completion_function (char *text, int state)
     int isdir = 1, isexec = 0;
 
     struct dirent *entry = NULL;
+
+    SHOW_C_CTX("filename_completion_function");
+
+    if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
+        text = mhl_shell_unescape_buf (text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -85,6 +109,7 @@ filename_completion_function (char *text, int state)
         /* Save the version of the directory that the user typed. */
         users_dirname = dirname;
         {
+	    // FIXME: memleak ?
 	    dirname = tilde_expand (dirname);
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
@@ -136,18 +161,15 @@ filename_completion_function (char *text, int state)
 	    }
 	   g_free (tmp);
 	}
-	switch (look_for_executables)
-	{
-	    case 2: if (!isexec)
-	    	        continue;
-	    	    break;
-	    case 1: if (!isexec && !isdir)
-	    	        continue;
-	    	    break;
-	}
-	if (ignore_filenames && !isdir)
-	    continue;
-	break;
+	if ((flags & INPUT_COMPLETE_COMMANDS)
+	    && (isexec || isdir))
+	    break;
+	if ((flags & INPUT_COMPLETE_CD)
+	    && isdir)
+	    break;
+	if (flags & (INPUT_COMPLETE_FILENAMES))
+	    break;
+	continue;
     }
 
     if (!entry){
@@ -181,18 +203,28 @@ filename_completion_function (char *text, int state)
 	}
 	if (isdir)
 	    strcat (temp, PATH_SEP_STR);
-        return temp;
+
+	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
+	{
+	    SHELL_ESCAPED_STR e_temp = mhl_shell_escape_dup(temp);
+	    mhl_mem_free (temp);
+	    temp = e_temp.s;
+	}
+	return temp;
     }
 }
 
 /* We assume here that text[0] == '~' , if you want to call it in another way,
    you have to change the code */
 static char *
-username_completion_function (char *text, int state)
+username_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static struct passwd *entry;
     static int userlen;
 
+    SHOW_C_CTX("username_completion_function");
+
+    if (text[0] == '\\' && text[1] == '~') text++;
     if (!state){ /* Initialization stuff */
         setpwent ();
         userlen = strlen (text + 1);
@@ -227,11 +259,13 @@ extern char **environ;
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */
 static char *
-variable_completion_function (char *text, int state)
+variable_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static char **env_p;
     static int varlen, isbrace;
     const char *p = NULL;
+
+    SHOW_C_CTX("variable_completion_function");
 
     if (!state){ /* Initialization stuff */
 	isbrace = (text [1] == '{');
@@ -342,10 +376,12 @@ static void fetch_hosts (const char *filename)
 }
 
 static char *
-hostname_completion_function (char *text, int state)
+hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static char **host_p;
     static int textstart, textlen;
+
+    SHOW_C_CTX("hostname_completion_function");
 
     if (!state){ /* Initialization stuff */
         const char *p;
@@ -396,7 +432,7 @@ hostname_completion_function (char *text, int state)
  * table of shell built-ins.
  */
 static char *
-command_completion_function (char *text, int state)
+command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static const char *path_end;
     static int isabsolute;
@@ -422,9 +458,16 @@ command_completion_function (char *text, int state)
     };
     char *p, *found;
 
+    SHOW_C_CTX("command_completion_function");
+
+    if (!(flags & INPUT_COMPLETE_COMMANDS))
+        return 0;
+
+    text = mhl_shell_unescape_buf(text);
+    flags &= ~INPUT_COMPLETE_SHELL_ESC;
+
     if (!state) {		/* Initialize us a little bit */
 	isabsolute = strchr (text, PATH_SEP) != 0;
-	look_for_executables = isabsolute ? 1 : 2;
 	if (!isabsolute) {
 	    words = bash_reserved;
 	    phase = 0;
@@ -440,10 +483,12 @@ command_completion_function (char *text, int state)
     }
 
     if (isabsolute) {
-	p = filename_completion_function (text, state);
+	p = filename_completion_function (text, state, flags);
 	if (!p)
-	    look_for_executables = 0;
-	return p;
+	    return 0;
+	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
+	mhl_mem_free(p);
+	return e_p.s;
     }
 
     found = NULL;
@@ -483,7 +528,7 @@ command_completion_function (char *text, int state)
 	    }
 	    found =
 		filename_completion_function (cur_word,
-					      state - init_state);
+					      state - init_state, flags);
 	    if (!found) {
 		g_free (cur_word);
 		cur_word = NULL;
@@ -492,16 +537,16 @@ command_completion_function (char *text, int state)
     }
 
     if (!found) {
-	look_for_executables = 0;
 	g_free (path);
 	path = NULL;
 	return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
-	p = g_strdup (p);
-	g_free (found);
-	return p;
+
+	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
+	mhl_mem_free(found);
+	return e_p.s;
     }
     return found;
 
@@ -521,7 +566,7 @@ match_compare (const void *a, const void *b)
    as the second. 
    In case no matches were found we return NULL. */
 static char **
-completion_matches (char *text, CompletionFunction entry_function)
+completion_matches (char *text, CompletionFunction entry_function, INPUT_COMPLETE_FLAGS flags)
 {
     /* Number of slots in match_list. */
     int match_list_size;
@@ -537,7 +582,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 
     match_list[1] = NULL;
 
-    while ((string = (*entry_function) (text, matches)) != NULL){
+    while ((string = (*entry_function) (text, matches, flags)) != NULL){
         if (matches + 1 == match_list_size)
 	    match_list = (char **) g_realloc (match_list, ((match_list_size += 30) + 1) * sizeof (char *));
         match_list[++matches] = string;
@@ -597,14 +642,12 @@ completion_matches (char *text, CompletionFunction entry_function)
 
 /* Check if directory completion is needed */
 static int
-check_is_cd (const char *text, int start, int flags)
+check_is_cd (const char *text, int start, INPUT_COMPLETE_FLAGS flags)
 {
     const char *p, *q;
 
-    if (flags & INPUT_COMPLETE_CD)
-	return 1;
-
-    if (!(flags & INPUT_COMPLETE_COMMANDS))
+    SHOW_C_CTX("check_is_cd");
+    if (!(flags & INPUT_COMPLETE_CD))
 	return 0;
 
     /* Skip initial spaces */
@@ -623,16 +666,17 @@ check_is_cd (const char *text, int start, int flags)
 
 /* Returns an array of matches, or NULL if none. */
 static char **
-try_complete (char *text, int *start, int *end, int flags)
+try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 {
-    int in_command_position = 0, i;
+    int in_command_position = 0;
     char *word, c;
     char **matches = NULL;
     const char *command_separator_chars = ";|&{(`";
     char *p = NULL, *q = NULL, *r = NULL;
     int is_cd = check_is_cd (text, *start, flags);
 
-    ignore_filenames = 0;
+    SHOW_C_CTX("try_complete");
+
     c = text [*end];
     text [*end] = 0;
     word = g_strdup (text + *start);
@@ -643,9 +687,16 @@ try_complete (char *text, int *start, int *end, int flags)
        appears after a character that separates commands. And we have to
        be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
     if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS)){
-        i = *start - 1;
-        while (i > -1 && (text[i] == ' ' || text[i] == '\t'))
-            i--;
+        int i = *start - 1;
+	for (i = *start - 1; i > -1; i--) {
+	    if (text[i] == ' ' || text[i] == '\t'){
+		if (i == 0 ) continue;
+		if (text[i-1] != '\\') {
+		    i--;
+		    break;
+		}
+	    }
+	}
         if (i < 0)
 	    in_command_position++;
         else if (strchr (command_separator_chars, text[i])){
@@ -679,17 +730,19 @@ try_complete (char *text, int *start, int *end, int flags)
     	    p = q + 1;
     	q = NULL;
     }
-    
+
     /* Command substitution? */
     if (p > q && p > r){
-        matches = completion_matches (p + 1, command_completion_function);
+        SHOW_C_CTX("try_complete:cmd_backq_subst");
+        matches = completion_matches (p + 1, command_completion_function, flags & (~INPUT_COMPLETE_FILENAMES));
         if (matches)
             *start += p + 1 - word;
     }
 
     /* Variable name? */
     else if  (q > p && q > r){
-        matches = completion_matches (q, variable_completion_function);
+        SHOW_C_CTX("try_complete:var_subst");
+        matches = completion_matches (q, variable_completion_function, flags);
         if (matches)
             *start += q - word;
     }
@@ -697,7 +750,8 @@ try_complete (char *text, int *start, int *end, int flags)
     /* Starts with '@', then look through the known hostnames for 
        completion first. */
     else if (r > p && r > q){
-        matches = completion_matches (r, hostname_completion_function);
+        SHOW_C_CTX("try_complete:host_subst");
+        matches = completion_matches (r, hostname_completion_function, flags);
         if (matches)
             *start += r - word;
     }
@@ -705,26 +759,46 @@ try_complete (char *text, int *start, int *end, int flags)
     /* Starts with `~' and there is no slash in the word, then
        try completing this word as a username. */
     if (!matches && *word == '~' && (flags & INPUT_COMPLETE_USERNAMES) && !strchr (word, PATH_SEP))
-        matches = completion_matches (word, username_completion_function);
+    {
+        SHOW_C_CTX("try_complete:user_subst");
+        matches = completion_matches (word, username_completion_function, flags);
+    }
 
 
     /* And finally if this word is in a command position, then
        complete over possible command names, including aliases, functions,
        and command names. */
     if (!matches && in_command_position)
-        matches = completion_matches (word, command_completion_function);
+    {
+        SHOW_C_CTX("try_complete:cmd_subst");
+        matches = completion_matches (word, command_completion_function, flags & (~INPUT_COMPLETE_FILENAMES));
+    }
         
     else if (!matches && (flags & INPUT_COMPLETE_FILENAMES)){
-    	if (is_cd)
-    	    ignore_filenames = 1;
-    	matches = completion_matches (word, filename_completion_function);
-    	ignore_filenames = 0;
+	if (is_cd)
+	    flags &= ~(INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_COMMANDS);
+	SHOW_C_CTX("try_complete:filename_subst_1");
+	matches = completion_matches (word, filename_completion_function, flags);
     	if (!matches && is_cd && *word != PATH_SEP && *word != '~'){
     	    char *p, *q = text + *start;
-    	    
-    	    for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+
+	    for (p = text; *p && p < q; p++){
+		if (*p == ' ' || *p == '\t') {
+		    if (p == text) continue;
+		    if (*(p-1) == '\\') {
+			p--;
+			break;
+		    }
+		}
+	    }
     	    if (!strncmp (p, "cd", 2))
-    	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++);
+		for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++){
+		    if (p == text) continue;
+		    if (*(p-1) == '\\') {
+			p--;
+			break;
+		    }
+		}
     	    if (p == q){
 		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
 		char *cdpath = cdpath_ref;
@@ -742,10 +816,9 @@ try_complete (char *text, int *start, int *end, int flags)
 		    *s = 0;
 		    if (*cdpath){
 			r = mhl_str_dir_plus_file (cdpath, word);
-		        ignore_filenames = 1;
-    	    		matches = completion_matches (r, filename_completion_function);
-    	    		ignore_filenames = 0;
-    	    		g_free (r);
+			SHOW_C_CTX("try_complete:filename_subst_2");
+			matches = completion_matches (r, filename_completion_function, flags);
+			g_free (r);
 		    }
 		    *s = c;
 		    cdpath = s + 1;
@@ -917,15 +990,21 @@ complete_engine (WInput *in, int what_to_do)
     if (!in->completions){
     	end = in->point;
         for (start = end ? end - 1 : 0; start > -1; start--)
-    	    if (strchr (" \t;|<>", in->buffer [start]))
-    	        break;
+    	    if (strchr (" \t;|<>", in->buffer [start])){
+    		if (start > 0 && in->buffer [start-1] == '\\')
+    		    continue;
+    		else
+    		    break;
+    	    }
     	if (start < end)
     	    start++;
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
+    
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-    	    if (insert_text (in, in->completions [0], strlen (in->completions [0]))){
+	        char * complete = in->completions [0];
+	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
 		else
@@ -940,10 +1019,11 @@ complete_engine (WInput *in, int what_to_do)
     	    char **p, *q;
     	    Dlg_head *query_dlg;
     	    WListbox *query_list;
-    	    
-    	    for (p=in->completions + 1; *p; count++, p++)
-    	    	if ((i = strlen (*p)) > maxlen)
-    	    	    maxlen = i;
+
+    	    for (p=in->completions + 1; *p; count++, p++) {
+		if ((i = strlen (*p)) > maxlen)
+		    maxlen = i;
+	    }
     	    start_x = in->widget.x;
     	    start_y = in->widget.y;
     	    if (start_y - 2 >= count) {

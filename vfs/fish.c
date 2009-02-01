@@ -144,7 +144,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super,
     enable_interrupt_key ();
 
     status = write (SUP.sockw, str, strlen (str));
-    g_free (str);
+    mhl_mem_free (str);
 
     disable_interrupt_key ();
     if (status < 0)
@@ -168,10 +168,10 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 	close (SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
     }
-    g_free (SUP.host);
-    g_free (SUP.user);
-    g_free (SUP.cwdir);
-    g_free (SUP.password);
+    mhl_mem_free (SUP.host);
+    mhl_mem_free (SUP.user);
+    mhl_mem_free (SUP.cwdir);
+    mhl_mem_free (SUP.password);
 }
 
 static void
@@ -260,7 +260,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 		p = g_strconcat (_(" fish: Password required for "),
 				 SUP.user, " ", (char *) NULL);
 		op = vfs_get_password (p);
-		g_free (p);
+		mhl_mem_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
 		SUP.password = op;
@@ -323,7 +323,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
 		       &password, 0, URL_NOSLASH);
 
-    g_free (p);
+    mhl_mem_free (p);
 
     SUP.host = host;
     SUP.user = user;
@@ -350,12 +350,12 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
 			URL_NOSLASH);
 
-    g_free (op);
+    mhl_mem_free (op);
 
     flags = ((strcmp (host, SUP.host) == 0)
 	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
 
     return flags;
 }
@@ -367,7 +367,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     char buffer[8192];
     struct vfs_s_entry *ent = NULL;
     FILE *logfile;
-    char *quoted_path;
+    SHELL_ESCAPED_STR quoted_path;
     int reply_code;
 
 #if 0
@@ -462,8 +462,8 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	"else\n"
 		  "echo '### 500'\n"
 	"fi\n",
-	    quoted_path, quoted_path, quoted_path, quoted_path, quoted_path, quoted_path);
-    mhl_mem_free (quoted_path);
+	    quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s);
+    mhl_mem_free (quoted_path.s);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr); 
@@ -594,7 +594,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     vfs_s_free_entry (me, ent);
     reply_code = fish_decode_reply(buffer + 4, 0);
     if (reply_code == COMPLETE) {
-	g_free (SUP.cwdir);
+	mhl_mem_free (SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
@@ -618,7 +618,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
     struct stat s;
     int was_error = 0;
     int h;
-    char *quoted_name;
+    SHELL_ESCAPED_STR quoted_name;
 
     h = open (localname, O_RDONLY);
 
@@ -659,7 +659,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      */
 
     quoted_name = mhl_shell_escape_dup(name);
-    print_vfs_message(_("fish: store %s: sending command..."), quoted_name );
+    print_vfs_message(_("fish: store %s: sending command..."), quoted_name.s );
 
     /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
@@ -683,8 +683,8 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
-		 (unsigned long) s.st_size, quoted_name,
-		 quoted_name, (unsigned long) s.st_size,
+		 (unsigned long) s.st_size, quoted_name.s,
+		 quoted_name.s, (unsigned long) s.st_size,
 		 (unsigned long) s.st_size);
     else
 	n = fish_command (me, super, WAIT_REPLY,
@@ -700,8 +700,8 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			"    rest=`expr $rest - $n`\n"
 			"done\n"
 		 "}; echo '### 200'\n",
-		 (unsigned long) s.st_size, quoted_name,
-		 quoted_name, (unsigned long) s.st_size);
+		 (unsigned long) s.st_size, quoted_name.s,
+		 quoted_name.s, (unsigned long) s.st_size);
 
     if (n != PRELIM) {
 	close (h);
@@ -735,14 +735,14 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			  (unsigned long) s.st_size);
     }
     close(h);
-    mhl_mem_free(quoted_name);
+    mhl_mem_free(quoted_name.s);
     if ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
     return 0;
 error_return:
     close(h);
     fish_get_reply(me, SUP.sockr, NULL, 0);
-    mhl_mem_free(quoted_name);
+    mhl_mem_free(quoted_name.s);
     return -1;
 }
 
@@ -750,7 +750,7 @@ static int
 fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 {
     char *name;
-    char *quoted_name;
+    SHELL_ESCAPED_STR quoted_name;
     if (offset)
         ERRNOR (E_NOTSUPP, 0);
     name = vfs_s_fullpath (me, fh->ino);
@@ -779,8 +779,8 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 		"else\n"
 		"echo '### 500'\n"
 		"fi\n",
-		quoted_name, quoted_name, quoted_name, quoted_name );
-    g_free (quoted_name);
+		quoted_name.s, quoted_name.s, quoted_name.s, quoted_name.s );
+    mhl_mem_free (quoted_name.s);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
@@ -889,17 +889,18 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 #define PREFIX \
     char buf[BUF_LARGE]; \
     const char *crpath; \
-    char *rpath, *mpath = g_strdup (path); \
+    char *mpath = mhl_str_dup (path); \
+    SHELL_ESCAPED_STR rpath; \
     struct vfs_s_super *super; \
     if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
-	g_free (mpath); \
+	mhl_mem_free (mpath); \
 	return -1; \
     } \
     rpath = mhl_shell_escape_dup(crpath); \
-    g_free (mpath);
+    mhl_mem_free (mpath);
 
 #define POSTFIX(flags) \
-    g_free (rpath); \
+    mhl_mem_free (rpath.s); \
     return fish_send_command(me, super, buf, flags);
 
 static int
@@ -909,8 +910,8 @@ fish_chmod (struct vfs_class *me, const char *path, int mode)
     g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
 				 "chmod %4.4o /%s 2>/dev/null\n"
 				 "echo '### 000'\n", 
-	    mode & 07777, rpath,
-	    mode & 07777, rpath);
+	    mode & 07777, rpath.s,
+	    mode & 07777, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -919,24 +920,24 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
 { \
     char buf[BUF_LARGE]; \
     const char *crpath1, *crpath2; \
-    char *rpath1, *rpath2, *mpath1, *mpath2; \
+    char *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
     if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
-	g_free (mpath1); \
+	mhl_mem_free (mpath1); \
 	return -1; \
     } \
     if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
-	g_free (mpath1); \
-	g_free (mpath2); \
+	mhl_mem_free (mpath1); \
+	mhl_mem_free (mpath2); \
 	return -1; \
     } \
-    rpath1 = mhl_shell_escape_dup (crpath1); \
-    g_free (mpath1); \
-    rpath2 = mhl_shell_escape_dup (crpath2); \
-    g_free (mpath2); \
-    g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
-    mhl_mem_free (rpath1); \
-    mhl_mem_free (rpath2); \
+    SHELL_ESCAPED_STR rpath1 = mhl_shell_escape_dup (crpath1); \
+    mhl_mem_free (mpath1); \
+    SHELL_ESCAPED_STR rpath2 = mhl_shell_escape_dup (crpath2); \
+    mhl_mem_free (mpath2); \
+    g_snprintf(buf, sizeof(buf), string "\n", rpath1.s, rpath2.s, rpath1.s, rpath2.s); \
+    mhl_mem_free (rpath1.s); \
+    mhl_mem_free (rpath2.s); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
@@ -949,15 +950,15 @@ FISH_OP(link,   "#LINK /%s /%s\n"
 
 static int fish_symlink (struct vfs_class *me, const char *setto, const char *path)
 {
-    char *qsetto;
+    SHELL_ESCAPED_STR qsetto;
     PREFIX
     qsetto = mhl_shell_escape_dup (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    qsetto, rpath, qsetto, rpath);
-    mhl_mem_free (qsetto);
+	    qsetto.s, rpath.s, qsetto.s, rpath.s);
+    mhl_mem_free (qsetto.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -982,16 +983,16 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     	    "#CHOWN %s /%s\n"
 	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
-	    sowner, rpath,
-	    sowner, rpath);
+	    sowner, rpath.s,
+	    sowner, rpath.s);
 	fish_send_command (me, super, buf, OPT_FLUSH); 
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
 	g_snprintf (buf, sizeof(buf),
             "#CHGRP /%s \"/%s\"\n"
 	    "chgrp %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
-	    sgroup, rpath,
-	    sgroup, rpath);
+	    sgroup, rpath.s,
+	    sgroup, rpath.s);
 	/* fish_send_command(me, super, buf, OPT_FLUSH); */
 	POSTFIX (OPT_FLUSH)
     }
@@ -1004,7 +1005,7 @@ static int fish_unlink (struct vfs_class *me, const char *path)
             "#DELE /%s\n"
 	    "rm -f /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1018,7 +1019,7 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
             "#MKD /%s\n"
 	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1029,7 +1030,7 @@ static int fish_rmdir (struct vfs_class *me, const char *path)
             "#RMD /%s\n"
 	    "rmdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
-	    rpath, rpath);
+	    rpath.s, rpath.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1093,7 +1094,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 	name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags,
 			    "/", SUP.cwdir, (char *) NULL);
 	(*func)(name);
-	g_free (name);
+	mhl_mem_free (name);
 	super = super->next;
     }
 }

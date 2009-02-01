@@ -35,6 +35,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/escape.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -1516,4 +1517,3 @@ Q_ (const char *s)
     sep = strchr(result, '|');
     return (sep != NULL) ? sep + 1 : result;
 }
-

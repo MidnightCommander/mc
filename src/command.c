@@ -27,13 +27,14 @@
 #include <errno.h>
 #include <string.h>
 
+#include <mhl/memory.h>
+#include <mhl/escape.h>
 #include <mhl/string.h>
 
 #include "global.h"		/* home_dir */
 #include "tty.h"
 #include "widget.h"		/* WInput */
 #include "command.h"
-#include "complete.h"		/* completion constants */
 #include "wtools.h"		/* message () */
 #include "panel.h"		/* view_tree enum. Also, needed by main.h */
 #include "main.h"		/* do_cd */
@@ -66,6 +67,7 @@ examine_cd (char *path)
     const char *t;
 
     /* Tilde expansion */
+    path = mhl_shell_unescape_buf(path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
@@ -137,6 +139,7 @@ examine_cd (char *path)
     }
     g_free (q);
     g_free (path_tilde);
+//    mhl_mem_free(path);
     return result;
 }
 
@@ -292,7 +295,8 @@ command_new (int y, int x, int cols)
 {
     WInput *cmd;
 
-    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
+    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline",
+	INPUT_COMPLETE_DEFAULT | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_SHELL_ESC);
 
     /* Add our hooks */
     cmd->widget.callback = command_callback;

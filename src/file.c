@@ -50,6 +50,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/memory.h>
+#include <mhl/escape.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -65,6 +67,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
+#include "util.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
@@ -178,37 +181,43 @@ do_transform_source (FileOpContext *ctx, const char *source)
     for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
 	switch (ctx->dest_mask[j]) {
 	case '\\':
-	    j++;
-	    if (!isdigit ((unsigned char) ctx->dest_mask[j])) {
-		/* Backslash followed by non-digit */
-		switch (ctx->dest_mask[j]) {
-		case 'U':
-		    case_conv |= UP_SECT;
-		    case_conv &= ~LOW_SECT;
-		    break;
-		case 'u':
-		    case_conv |= UP_CHAR;
-		    break;
-		case 'L':
-		    case_conv |= LOW_SECT;
-		    case_conv &= ~UP_SECT;
-		    break;
-		case 'l':
-		    case_conv |= LOW_CHAR;
-		    break;
-		case 'E':
-		    case_conv = NO_CONV;
-		    break;
-		default:
-		    /* Backslash as quote mark */
-		    fntarget[k++] =
-			convert_case (ctx->dest_mask[j], &case_conv);
-		}
+	    if (mhl_shell_is_char_escaped (&ctx->dest_mask[j])){
+		fntarget[k++] = ctx->dest_mask[j++];
+		fntarget[k++] = ctx->dest_mask[j];
 		break;
 	    } else {
-		/* Backslash followed by digit */
-		next_reg = ctx->dest_mask[j] - '0';
-		/* Fall through */
+		j++;
+		if (!isdigit ((unsigned char) ctx->dest_mask[j])) {
+		    /* Backslash followed by non-digit */
+		    switch (ctx->dest_mask[j]) {
+		    case 'U':
+			case_conv |= UP_SECT;
+			case_conv &= ~LOW_SECT;
+			break;
+		    case 'u':
+			case_conv |= UP_CHAR;
+			break;
+		    case 'L':
+			case_conv |= LOW_SECT;
+			case_conv &= ~UP_SECT;
+			break;
+		    case 'l':
+			case_conv |= LOW_CHAR;
+			break;
+		    case 'E':
+			case_conv = NO_CONV;
+			break;
+		    default:
+			/* Backslash as quote mark */
+			fntarget[k++] =
+			    convert_case (ctx->dest_mask[j], &case_conv);
+		    }
+		    break;
+		} else {
+		    /* Backslash followed by digit */
+		    next_reg = ctx->dest_mask[j] - '0';
+		    /* Fall through */
+		}
 	    }
 
 	case '*':
@@ -793,7 +802,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 	}
 
-	if (!appending) {
+	if (!appending && ctx->preserve) {
 	    while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
 		temp_status = file_error (
 			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
@@ -1896,7 +1905,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		g_free (dest);
 		dest = temp2;
 		temp = NULL;
-
+		
 		switch (operation) {
 		case OP_COPY:
 		    /*
@@ -1987,6 +1996,9 @@ panel_operate (void *source_panel, FileOperation operation,
 		    value = transform_error;
 		else {
 		    char *temp2 = mhl_str_dir_plus_file (dest, temp);
+
+		    source_with_path = mhl_shell_unescape_buf(source_with_path);
+		    temp2 = mhl_shell_unescape_buf(temp2);
 
 		    switch (operation) {
 		    case OP_COPY:

@@ -1,3 +1,11 @@
+2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>, Patrick Winnertz <winnie@debian.org>, Slava Zanko <slavazanko@gmail.com>, Sergei Trofimovich  <slyfox@inbox.ru>
+
+	* edit/editcmd.c, mhl/escape.h, mhl/string.h, mhl/types.h, src/Makefile.am,
+	* src/boxes.c, src/command.c, src/complete.c, src/complete.h, src/file.c,
+	* src/find.c, src/main.c, src/panelize.c, src/util.c, src/utilunix.c,
+	* src/widget.c, src/widget.h, src/wtools.c, vfs/fish.c:
+	  fixed shell escaping issues in commandline completion engine
+
 2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
@@ -16,6 +24,11 @@
 	* src/file.c: Added trailing dir separator for default path in copy/move dialogs.
 	  This solves "strange" rename cases, when copying/moving is performed into
 	  deleted directory.
+
+2009-01-27 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* mhl/escape.h, src/complete.c, vfs/fish.c: introduced new type 
+	  SHELL_ESCAPED_STR for more type safety
 
 2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
 

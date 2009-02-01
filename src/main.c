@@ -67,7 +67,6 @@
 #include "widget.h"
 #include "command.h"
 #include "wtools.h"
-#include "complete.h"		/* For the free_completion */
 
 #include "chmod.h"
 #include "chown.h"
