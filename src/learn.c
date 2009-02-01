@@ -270,7 +270,7 @@ init_learn (void)
     for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--) {
 	learnkeys[i].ok = 0;
 	learnkeys[i].sequence = NULL;
-	g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
+	snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
 	add_widget (learn_dlg, learnkeys[i].button = (Widget *)
 		    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer,
 				learn_button));

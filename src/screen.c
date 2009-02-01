@@ -212,7 +212,7 @@ static void format_device_number (char *buf, size_t bufsize, dev_t dev)
 
     g_assert(bufsize >= 1);
     if (major_digits + 1 + minor_digits + 1 <= bufsize) {
-        g_snprintf(buf, bufsize, "%lu,%lu", (unsigned long) major_dev,
+        snprintf(buf, bufsize, "%lu,%lu", (unsigned long) major_dev,
                    (unsigned long) minor_dev);
     } else {
         g_strlcpy(buf, _("[dev]"), bufsize);
@@ -337,7 +337,7 @@ string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
+    snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
     return buffer;
 }
 
@@ -347,7 +347,7 @@ string_file_nlinks (file_entry *fe, int len)
 {
     static char buffer[BUF_TINY];
 
-    g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
+    snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
     return buffer;
 }
 
@@ -357,7 +357,7 @@ string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%lu",
+    snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_ino);
     return buffer;
 }
@@ -368,7 +368,7 @@ string_file_nuid (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%lu",
+    snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_uid);
     return buffer;
 }
@@ -379,7 +379,7 @@ string_file_ngid (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "%lu",
+    snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_gid);
     return buffer;
 }
@@ -686,11 +686,11 @@ display_mini_info (WPanel *panel)
 	 * This is a trick to use two ngettext() calls in one sentence.
 	 * First make "N bytes", then insert it into "X in M files".
 	 */
-	g_snprintf(b_bytes, sizeof (b_bytes),
+	snprintf(b_bytes, sizeof (b_bytes),
 		   ngettext("%s byte", "%s bytes",
 			    (unsigned long)panel->total),
 		   size_trunc_sep(panel->total));
-	g_snprintf(buffer, sizeof (buffer),
+	snprintf(buffer, sizeof (buffer),
 		   ngettext("%s in %d file", "%s in %d files", panel->marked),
 		   b_bytes, panel->marked);
 

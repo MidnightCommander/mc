@@ -158,15 +158,15 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[< %s >]", b->text);
+	    snprintf (buf, sizeof (buf), "[< %s >]", b->text);
 	    off = 3;
 	    break;
 	case NORMAL_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[ %s ]", b->text);
+	    snprintf (buf, sizeof (buf), "[ %s ]", b->text);
 	    off = 2;
 	    break;
 	case NARROW_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[%s]", b->text);
+	    snprintf (buf, sizeof (buf), "[%s]", b->text);
 	    off = 1;
 	    break;
 	case HIDDEN_BUTTON:
@@ -871,7 +871,7 @@ history_get (const char *input_name)
     for (i = 0;; i++) {
 	char key_name[BUF_TINY];
 	char this_entry[BUF_LARGE];
-	g_snprintf (key_name, sizeof (key_name), "%d", i);
+	snprintf (key_name, sizeof (key_name), "%d", i);
 	GetPrivateProfileString (input_name, key_name, "", this_entry,
 				 sizeof (this_entry), profile);
 	if (!*this_entry)
@@ -935,7 +935,7 @@ history_put (const char *input_name, GList *h)
 	/* We shouldn't have null entries, but let's be sure */
 	if (text && *text) {
 	    char key_name[BUF_TINY];
-	    g_snprintf (key_name, sizeof (key_name), "%d", i++);
+	    snprintf (key_name, sizeof (key_name), "%d", i++);
 	    WritePrivateProfileString (input_name, key_name, text,
 				       profile);
 	}

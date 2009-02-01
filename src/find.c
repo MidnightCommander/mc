@@ -530,7 +530,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     if (file_fd == -1)
 	return 0;
 
-    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
+    snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
     mc_refresh ();
@@ -666,7 +666,7 @@ do_search (struct Dlg_head *h)
 	    if (verbose){
 		char buffer [BUF_SMALL];
 
-		g_snprintf (buffer, sizeof (buffer), _("Searching %s"), 
+		snprintf (buffer, sizeof (buffer), _("Searching %s"), 
 			    name_trunc (directory, FIND2_X_USE));
 		status_update (buffer);
 	    }

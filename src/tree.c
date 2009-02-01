@@ -597,7 +597,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
 
     if (!tree->selected_ptr)
 	return;
-    g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
+    snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Copy "), cmd_buf, MC_HISTORY_FM_TREE_COPY, default_dest);
 
@@ -640,7 +640,7 @@ static void tree_move (WTree *tree, const char *default_dest)
 
     if (!tree->selected_ptr)
 	return;
-    g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
+    snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
 	     name_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Move "), cmd_buf, MC_HISTORY_FM_TREE_MOVE, default_dest);
     if (!dest)

@@ -975,8 +975,8 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 	atime = (long) times->actime;
 	mtime = (long) times->modtime;
 
-	g_snprintf (abuf, sizeof (abuf), "%lx", atime);
-	g_snprintf (mbuf, sizeof (mbuf), "%lx", mtime);
+	snprintf (abuf, sizeof (abuf), "%lx", atime);
+	snprintf (mbuf, sizeof (mbuf), "%lx", mtime);
 
 	rpc_send (mc->sock, RPC_INT, MC_UTIME,
 		  RPC_STRING, file,

@@ -357,7 +357,7 @@ int GetPrivateProfileInt (const char * AppName, const char * KeyName, int Defaul
     char IntBuf [BUF_TINY];
     char buf [BUF_TINY];
 
-    g_snprintf (buf, sizeof (buf), "%d", Default);
+    snprintf (buf, sizeof (buf), "%d", Default);
     
     /* Check the exact semantic with the SDK */
     GetPrivateProfileString (AppName, KeyName, buf, IntBuf, BUF_TINY, File);
