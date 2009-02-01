@@ -230,10 +230,10 @@ fake_name_quote (const char *s, int quote_percent)
  * Return static buffer, no need to free() it.
  */
 const char *
-name_trunc (const char *txt, int trunc_len)
+name_trunc (const char *txt, size_t trunc_len)
 {
     static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
-    int txt_len;
+    size_t txt_len;
     char *p;
 
     if (!txt)
@@ -241,16 +241,16 @@ name_trunc (const char *txt, int trunc_len)
     if (!*txt)
 	return txt;
 
-    if ((size_t) trunc_len > sizeof (x) - 1) {
+    if (trunc_len > sizeof (x) - 1) {
 	trunc_len = sizeof (x) - 1;
     }
-    txt_len = (int) strlen (txt);
+    txt_len = strlen (txt);
     if (txt_len <= trunc_len) {
 	strcpy (x, txt);
     } else {
-	int y = (trunc_len / 2) + (trunc_len % 2);
+	size_t y = (trunc_len / 2) + (trunc_len % 2);
 	strncpy (x, txt, (size_t) y);
-	strncpy (x + y, txt + (size_t) (txt_len - (trunc_len / 2)), (size_t) trunc_len / 2);
+	strncpy (x + y, txt + (txt_len - (trunc_len / 2)), trunc_len / 2);
 	x[y] = '~';
     }
     x[trunc_len] = 0;
@@ -266,7 +266,7 @@ name_trunc (const char *txt, int trunc_len)
  * reasons.
  */
 const char *
-path_trunc (const char *path, int trunc_len) {
+path_trunc (const char *path, size_t trunc_len) {
     const char *ret;
     char *secure_path = strip_password (g_strdup (path), 1);
     
