@@ -85,6 +85,9 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
     SHOW_C_CTX("filename_completion_function");
 
+    if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
+        text = mhl_shell_unescape_buf (text);
+
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
         const char *temp;
@@ -461,6 +464,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
         return 0;
 
     text = mhl_shell_unescape_buf(text);
+    flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
 	isabsolute = strchr (text, PATH_SEP) != 0;
@@ -480,7 +484,11 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
     if (isabsolute) {
 	p = filename_completion_function (text, state, flags);
-	return p;
+	if (!p)
+	    return 0;
+	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
+	mhl_mem_free(p);
+	return e_p.s;
     }
 
     found = NULL;
