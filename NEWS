@@ -17,7 +17,7 @@ Version 4.6.2
 	- Fixed file renames, when copying/moving is performed
 	  into deleted directories. (Closes: #181)
 	- Add an option to show executables first in the panels (Closes: #173)
-	- Fixed concat_dir_and_file if there is a paramter = NULL (Closes: #180)
+	- Fixed concat_dir_and_file if there is a parameter = NULL (Closes: #180)
 	- Allow out-of-tree builds (Closes: #224, #208)
 
 - Editor

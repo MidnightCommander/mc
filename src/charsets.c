@@ -27,6 +27,8 @@
 
 #include <iconv.h>
 
+#include <mhl/string.h>
+
 #include "global.h"
 #include "charsets.h"
 
