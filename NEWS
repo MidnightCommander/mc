@@ -17,6 +17,8 @@ Version 4.6.2
 	- Fixed file renames, when copying/moving is performed
 	  into deleted directories. (Closes: #181)
 	- Add an option to show executables first in the panels (Closes: #173)
+	- Fixed concat_dir_and_file if there is a paramter = NULL (Closes: #180)
+	- Allow out-of-tree builds (Closes: #224, #208)
 
 - Editor
 	- Syntax highlighting for:
@@ -34,7 +36,7 @@ Version 4.6.2
 - VFS
 	- Fix some bashisms in some extfs scripts (Closes: #146)
 	- Fixed various problems with symlinks and files with chars which needs
-	  escaping over fish (Closes: #10, #87, #149)
+	  escaping over fish (Closes: #10, #87, #149, #53)
 	- Added 7zip extfs descriptor (Closes: #92)
 	- Switched from o3totxt to odf2txt as o3totxt is outdated (Closes: #218)
 
