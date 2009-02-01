@@ -113,6 +113,8 @@ static inline char* mhl_shell_unescape_buf(char* text)
 		case '`':
 		case '"':
 		case ';':
+		case '\0': /* end of line! malformed escape string */
+		    goto out;
 		default:
 		    (*writeptr) = c; writeptr++; break;
 	    }
@@ -124,6 +126,7 @@ static inline char* mhl_shell_unescape_buf(char* text)
 	}
 	readptr++;
     }
+out:
     *writeptr = 0;
 
     return text;
