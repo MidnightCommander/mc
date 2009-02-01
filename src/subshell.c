@@ -132,7 +132,12 @@ static pid_t subshell_pid = 1;	/* The subshell's process ID */
 static char subshell_cwd[MC_MAXPATHLEN+1];  /* One extra char for final '\n' */
 
 /* Subshell type (gleaned from the SHELL environment variable, if available) */
-static enum {BASH, TCSH, ZSH} subshell_type;
+static enum {
+    BASH,
+    TCSH,
+    ZSH,
+    FISH,
+} subshell_type;
 
 /* Flag to indicate whether the subshell is ready for next command */
 static int subshell_ready;
@@ -257,6 +262,7 @@ init_subshell_child (const char *pty_name)
 	/* TODO: Find a way to pass initfile to TCSH and ZSH */
     case TCSH:
     case ZSH:
+    case FISH:
 	break;
 
     default:
@@ -301,6 +307,10 @@ init_subshell_child (const char *pty_name)
 	execl (shell, "zsh", "-Z", "-g", (char *) NULL);
 
 	break;
+
+    case FISH:
+	execl (shell, "fish", (char *) NULL);
+        break;
     }
 
     /* If we get this far, everything failed miserably */
@@ -394,6 +404,8 @@ init_subshell (void)
 	    subshell_type = TCSH;
 	else if (strstr (shell, "/bash") || getenv ("BASH"))
 	    subshell_type = BASH;
+	else if (strstr (shell, "/fish"))
+	    subshell_type = FISH;
 	else {
 	    use_subshell = FALSE;
 	    return;
@@ -491,6 +503,12 @@ init_subshell (void)
 		    "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n",
 		    tcsh_fifo);
 	break;
+    case FISH:
+	g_snprintf (precmd, sizeof (precmd),
+		    "function fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
+		    subshell_pipe[WRITE], subshell_pipe[WRITE]);
+	break;
+
     }
     write_all (subshell_pty, precmd, strlen (precmd));
 
@@ -711,13 +729,20 @@ subshell_name_quote (const char *s)
 {
     char *ret, *d;
     const char *su, *n;
-    const char quote_cmd_start[] = "\"`printf \"%b\" '";
-    const char quote_cmd_end[] = "'`\"";
+    const char *quote_cmd_start, *quote_cmd_end;
     int c;
 
+    if (subshell_type == FISH) {
+         quote_cmd_start = "(printf \"%b\" '";
+         quote_cmd_end = "')";
+    } else {
+         quote_cmd_start = "\"`printf \"%b\" '";
+         quote_cmd_end = "'`\"";
+    }
+
     /* Factor 5 because we need \, 0 and 3 other digits per character. */
-    d = ret = g_malloc (1 + (5 * strlen (s)) + (sizeof(quote_cmd_start) - 1)
-				+ (sizeof(quote_cmd_end) - 1));
+    d = ret = g_malloc (1 + (5 * strlen (s)) + (strlen(quote_cmd_start))
+				+ (strlen(quote_cmd_end)));
     if (!d)
 	return NULL;
 
@@ -729,7 +754,7 @@ subshell_name_quote (const char *s)
 
     /* Copy the beginning of the command to the buffer */
     strcpy (d, quote_cmd_start);
-    d += sizeof(quote_cmd_start) - 1;
+    d += strlen(quote_cmd_start);
 
     /*
      * Print every character except digits and letters as a backslash-escape
