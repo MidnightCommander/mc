@@ -912,9 +912,14 @@ char *
 utf8_to_local(char *str)
 {
    iconv_t cd;
-   size_t buflen = strlen(str);
+   size_t buflen;
    char *output;
    int retry = 1;
+
+   if (!str)
+	return 0;
+
+   buflen = strlen(str);
 
    cd = iconv_open (nl_langinfo(CODESET), "UTF-8");
    if (cd == (iconv_t) -1) {
