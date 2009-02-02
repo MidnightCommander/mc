@@ -254,7 +254,7 @@ cfg_free_maps(config_t *cfg)
 static GPtrArray *
 split_line(char *str)
 {
-    bool inside_quote = FALSE;
+    bool inside_quote = false;
     int move = 0;
     GPtrArray *args;    
 
@@ -355,7 +355,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
     if (argc != 3) {
 	snprintf(error_msg, sizeof(error_msg),
 		 _("bind: Wrong argument number, bind <key> <command>"));
-	return FALSE;
+	return false;
     }
 
     keyname = argv[1];
@@ -377,7 +377,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
 	    if (!m) {		/* incorrect key */
 		snprintf(error_msg, sizeof(error_msg),
 			 _("bind: Bad key value `%s'"), keyname);
-		return FALSE;
+		return false;
 	    }
 	    mod |= m;
 	    m = 0;
@@ -390,7 +390,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
     /* no key */
     if (keyname[0] == '\0') {
 	snprintf(error_msg, sizeof(error_msg), _("bind: Ehh...no key?"));
-	return FALSE;
+	return false;
     }
 
     /* ordinary key */
@@ -404,7 +404,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
     if (k < 0 && !key->name) {
 	snprintf(error_msg, sizeof(error_msg),
 		 _("bind: Unknown key: `%s'"), keyname);
-	return FALSE;
+	return false;
     }
 
     while (cmd->name && strcasecmp(cmd->name, command) != 0)
@@ -413,7 +413,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
     if (!cmd->name) {
 	snprintf(error_msg, sizeof(error_msg),
 		 _("bind: Unknown command: `%s'"), command);
-	return FALSE;
+	return false;
     }
 
     if (mod & KEY_M_CTRL) {
@@ -434,7 +434,7 @@ cmd_bind(config_t *cfg, int argc, char *argv[])
     else
 	keymap_add(cfg->keymap, k, cmd->val);
 
-    return TRUE;
+    return true;
 }
 
 #if 0
@@ -481,7 +481,7 @@ cmd_label(config_t *cfg, int argc, char *argv[])
 	snprintf(error_msg, sizeof(error_msg),
 		 _("%s: Syntax: %s <n> <command> <label>"), 
 		argv[0], argv[0]);
-	return FALSE;
+	return false;
     }
     
     fn	= strtol(argv[1], NULL, 0);
@@ -494,19 +494,19 @@ cmd_label(config_t *cfg, int argc, char *argv[])
     if (!cmd->name) {
 	snprintf(error_msg, sizeof(error_msg),
 		 _("%s: Unknown command: `%s'"), argv[0], command);
-	return FALSE;
+	return false;
     }
     
     if (fn < 1 || fn > 10) {
 	snprintf(error_msg, sizeof(error_msg),
 		 _("%s: fn should be 1-10"), argv[0]);
-	return FALSE;
+	return false;
     }
 
     keymap_add(cfg->keymap, KEY_F(fn), cmd->val);
     cfg->labels[fn - 1] = g_strdup(label);
 
-    return TRUE;
+    return true;
 }
 
 
@@ -521,7 +521,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
     if (!fp) {
 	snprintf(error_msg, sizeof(error_msg), _("%s: fopen(): %s"),
 		 file, strerror(errno));
-	return FALSE;
+	return false;
     }
 
     while (fgets(buf, sizeof(buf), fp)) {
@@ -548,7 +548,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
 		     argv[0]);
 	    g_ptr_array_free(args, TRUE);
 	    fclose(fp);
-	    return FALSE;
+	    return false;
 	}
 
 	if (!(c->handler(cfg, args->len, argv))) {
@@ -558,13 +558,13 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
 	    g_free(ss);
 	    g_ptr_array_free(args, TRUE);
 	    fclose(fp);
-	    return FALSE;
+	    return false;
 	}
 	g_ptr_array_free(args, TRUE);
     }
 
     fclose(fp);
-    return TRUE;
+    return true;
 }
 
 static bool
@@ -581,10 +581,10 @@ load_user_keymap(config_t *cfg, const char *file)
     cfg->ext_keymap = g_array_new(TRUE, FALSE, sizeof(edit_key_map_type));
 
     if (!parse_file(cfg, file, cmd)) {
-	return FALSE;
+	return false;
     }
 
-    return TRUE;
+    return true;
 }
 
 bool
@@ -596,7 +596,7 @@ edit_load_user_map(WEdit *edit)
     struct stat s;
 
     if (edit_key_emulation != EDIT_KEY_EMULATION_USER)
-	return TRUE;
+	return true;
 
     file = mhl_str_dir_plus_file(home_dir, MC_USERMAP);
 
@@ -605,7 +605,7 @@ edit_load_user_map(WEdit *edit)
 	edit_error_dialog(_("Error"), msg);
 	g_free(msg);
 	g_free(file);
-	return FALSE;
+	return false;
     }
 
     if (s.st_mtime != cfg.mtime) {
@@ -616,7 +616,7 @@ edit_load_user_map(WEdit *edit)
 	    edit_error_dialog(_("Error"), error_msg);
 	    cfg_free_maps(&new_cfg);
 	    g_free(file);
-	    return FALSE;
+	    return false;
 	} else {
 	    cfg_free_maps(&cfg);
 	    cfg = new_cfg;
@@ -629,5 +629,5 @@ edit_load_user_map(WEdit *edit)
 
     g_free(file);
 
-    return TRUE;
+    return true;
 }
