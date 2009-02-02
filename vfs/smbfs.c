@@ -25,6 +25,8 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include <mhl/types.h>
+
 #undef	USE_NCURSES	/* Don't include *curses.h */
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -70,8 +72,8 @@ extern struct in_addr ipzero;
 static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
-static gboolean got_user = FALSE;
-static gboolean got_pass = FALSE;
+static bool got_user = FALSE;
+static bool got_pass = FALSE;
 static pstring password;
 static pstring username;
 static struct vfs_class vfs_smbfs_ops;
@@ -435,7 +437,7 @@ typedef struct dir_entry {
 } dir_entry;
 
 typedef struct {
-    gboolean server_list;
+    bool server_list;
     char *dirname;
     char *path;			/* the dir originally passed to smbfs_opendir */
     smbfs_connection *conn;
@@ -449,7 +451,7 @@ static opendir_info
 	*current_share_info,
 	*current_server_info;
 
-static gboolean first_direntry;
+static bool first_direntry;
 
 static dir_entry *
 smbfs_new_dir_entry (const char *name)
@@ -548,7 +550,7 @@ smbfs_loaddir_helper (file_info * finfo, const char *mask, void *entry)
 
 /* takes "/foo/bar/file" and gives malloced "\\foo\\bar\\file" */
 static char *
-smbfs_convert_path (const char *remote_file, gboolean trailing_asterik)
+smbfs_convert_path (const char *remote_file, bool trailing_asterik)
 {
     const char *p, *my_remote;
     char *result;

@@ -26,17 +26,19 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include <mhl/types.h>
+
 #include "global.h"
 #include "logging.h"
 #include "setup.h"
 
 /*** file scope functions **********************************************/
 
-static gboolean
+static bool
 is_logging_enabled(void)
 {
-	static gboolean logging_initialized = FALSE;
-	static gboolean logging_enabled = FALSE;
+	static bool logging_initialized = FALSE;
+	static bool logging_enabled = FALSE;
 	char *mc_ini;
 
 	if (!logging_initialized) {

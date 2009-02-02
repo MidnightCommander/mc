@@ -27,6 +27,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
+#include <mhl/types.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -143,7 +144,7 @@ static void get_list_info (char **file, char **dir) {
 static regex_t *r; /* Pointer to compiled content_pattern */
  
 static int case_sensitive = 1;
-static gboolean find_regex_flag = TRUE;
+static bool find_regex_flag = TRUE;
 static int find_recursively = 1;
 
 /*

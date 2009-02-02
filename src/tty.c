@@ -29,6 +29,8 @@
 #include <signal.h>
 #include <stdarg.h>
 
+#include <mhl/types.h>
+
 #include "global.h"
 #include "color.h"
 #include "main.h"		/* for slow_terminal */
@@ -87,10 +89,10 @@ tty_disable_interrupt_key(void)
     sigaction (SIGINT, &act, NULL);
 }
 
-extern gboolean
+extern bool
 tty_got_interrupt(void)
 {
-    gboolean rv;
+    bool rv;
 
     rv = (got_interrupt != 0);
     got_interrupt = 0;

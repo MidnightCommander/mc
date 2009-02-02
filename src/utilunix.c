@@ -41,6 +41,7 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/types.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -721,7 +722,7 @@ mc_realpath (const char *path, char resolved_path[])
 /* Return the index of the permissions triplet */
 int
 get_user_permissions (struct stat *st) {
-    static gboolean initialized = FALSE;
+    static bool initialized = FALSE;
     static gid_t *groups;
     static int ngroups;
     static uid_t uid;

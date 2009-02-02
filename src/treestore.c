@@ -41,6 +41,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/types.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -744,7 +745,7 @@ process_special_dirs(GList ** special_dirs, char *file)
     g_free(buffer);
 }
 
-static gboolean
+static bool
 should_skip_directory(const char *dir)
 {
     static GList *special_dirs;

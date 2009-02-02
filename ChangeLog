@@ -3,6 +3,7 @@
 	* src/util.c: fixed name_trunc() on NULL or empty parameters
 	* src/achown.c: fixed unitialized var in init_chown_advanced()
 	  (patch from andrew_b)
+	* replaced gboolean by bool (from mhl/types.h)
 
 2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>, Patrick Winnertz <winnie@debian.org>, Slava Zanko <slavazanko@gmail.com>, Sergei Trofimovich  <slyfox@inbox.ru>
 

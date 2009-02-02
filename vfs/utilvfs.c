@@ -21,6 +21,8 @@
 #include <config.h>
 #include <ctype.h>
 
+#include <mhl/types.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -409,7 +411,7 @@ is_year (char *str, struct tm *tim)
     return 1;
 }
 
-gboolean
+bool
 vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
 {
     mode_t type;
@@ -446,7 +448,7 @@ vfs_parse_filetype (const char *s, size_t *ret_skipped, mode_t *ret_type)
     return TRUE;
 }
 
-gboolean
+bool
 vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
 {
     const char *p;
@@ -516,7 +518,7 @@ vfs_parse_fileperms (const char *s, size_t *ret_skipped, mode_t *ret_perms)
     return TRUE;
 }
 
-gboolean
+bool
 vfs_parse_filemode (const char *s, size_t *ret_skipped,
 		    mode_t *ret_mode)
 {
@@ -539,7 +541,7 @@ vfs_parse_filemode (const char *s, size_t *ret_skipped,
     return TRUE;
 }
 
-gboolean
+bool
 vfs_parse_raw_filemode (const char *s, size_t *ret_skipped,
 		    mode_t *ret_mode)
 {

@@ -11,7 +11,7 @@ extern WView *view_new (int y, int x, int cols, int lines, int is_panel);
  * {command} and ignores {file}. If {command} is NULL, loads the
  * {file}. If the {file} is also NULL, loads nothing. If {start_line}
  * is positive, the output is shown starting in that line. */
-extern int view_load (WView *view, const char *command, const char *file,
+extern bool view_load (WView *view, const char *command, const char *file,
 	int start_line);
 
 /* Shows {file} or the output of {command} in the internal viewer,
