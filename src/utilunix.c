@@ -590,7 +590,7 @@ putenv (char *string)
 		       size * sizeof (char *));
 	new_environ[size] = (char *) string;
 	new_environ[size + 1] = NULL;
-	g_free ((void *) last_environ);
+	mhl_mem_free ((void *) last_environ);
 	last_environ = new_environ;
 	__environ = new_environ;
     }

@@ -505,10 +505,14 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
  */
 static int read_one_line (char **line, FILE * f)
 {
-    GString *p = g_string_new ("");
-    int c, r = 0;
+    char buffer[8192];
+    int index = 0, c, r = 0;
+    buffer[0] = 0;
 
     for (;;) {
+	if (index >= (sizeof(buffer)-1))
+	    break;
+
 	c = fgetc (f);
 	if (c == EOF) {
 	    if (ferror (f)) {
@@ -530,13 +534,11 @@ static int read_one_line (char **line, FILE * f)
 	if (c == '\n')
 	    break;
 
-	g_string_append_c (p, c);
+	buffer[index] = c;
+	index++;
     }
     if (r != 0) {
-	*line = p->str;
-	g_string_free (p, FALSE);
-    } else {
-	g_string_free (p, TRUE);
+	*line = mhl_str_dup(buffer);
     }
     return r;
 }

@@ -14,6 +14,7 @@
 	  fixed shell escaping issues in commandline completion engine
 	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
 	* replaced g_snprintf() by snprintf()
+	* replaced GString stuff by static buffers
 
 2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
