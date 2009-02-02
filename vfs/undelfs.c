@@ -367,7 +367,7 @@ undelfs_readdir(void *vfs_info)
     if (readdir_ptr < 0)
 	strcpy (dirent_dest, readdir_ptr == -2 ? "." : "..");
     else
-	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%ld:%d",
+	snprintf(dirent_dest, MC_MAXPATHLEN, "%ld:%d",
 		   (long) delarray[readdir_ptr].ino,
 		   delarray[readdir_ptr].num_blocks);
     readdir_ptr++;

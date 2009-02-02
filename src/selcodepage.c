@@ -62,12 +62,12 @@ select_charset (int current_charset, int seldisplay)
     /* insert all the items found */
     for (i = 0; i < n_codepages; i++) {
 	char *name = codepages[i].name;
-	g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i),
+	snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i),
 		    name);
 	LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL);
     }
     if (seldisplay) {
-	g_snprintf (buffer, sizeof (buffer), "%c  %s",
+	snprintf (buffer, sizeof (buffer), "%c  %s",
 		    get_hotkey (n_codepages), _("Other 8 bit"));
 	LISTBOX_APPEND_TEXT (listbox, get_hotkey (n_codepages), buffer,
 			     NULL);

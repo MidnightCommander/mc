@@ -95,7 +95,7 @@ char *get_owner (int uid)
 	return pwd->pw_name;
     }
     else {
-	g_snprintf (ibuf, sizeof (ibuf), "%d", uid);
+	snprintf (ibuf, sizeof (ibuf), "%d", uid);
 	return ibuf;
     }
 }
@@ -115,7 +115,7 @@ char *get_group (int gid)
 	i_cache_add (gid, gid_cache, GID_CACHE_SIZE, grp->gr_name, &gid_last);
 	return grp->gr_name;
     } else {
-	g_snprintf (gbuf, sizeof (gbuf), "%d", gid);
+	snprintf (gbuf, sizeof (gbuf), "%d", gid);
 	return gbuf;
     }
 }
@@ -256,10 +256,10 @@ mc_tmpdir (void)
     pwd = getpwuid (getuid ());
 
     if (pwd)
-	g_snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
+	snprintf (buffer, sizeof (buffer), "%s/mc-%s", sys_tmp,
 		pwd->pw_name);
     else
-	g_snprintf (buffer, sizeof (buffer), "%s/mc-%lu", sys_tmp,
+	snprintf (buffer, sizeof (buffer), "%s/mc-%lu", sys_tmp,
 		(unsigned long) getuid ());
 
     canonicalize_pathname (buffer);
@@ -308,11 +308,11 @@ mc_tmpdir (void)
 	if (fallback_ok) {
 	    fprintf (stderr, _("Temporary files will be created in %s\n"),
 		     sys_tmp);
-	    g_snprintf (buffer, sizeof (buffer), "%s", sys_tmp);
+	    snprintf (buffer, sizeof (buffer), "%s", sys_tmp);
 	    error = NULL;
 	} else {
 	    fprintf (stderr, _("Temporary files will not be created\n"));
-	    g_snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
+	    snprintf (buffer, sizeof (buffer), "%s", "/dev/null/");
 	}
 
 	fprintf (stderr, "%s\n", _("Press any key to continue..."));

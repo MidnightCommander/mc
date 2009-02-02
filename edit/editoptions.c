@@ -147,9 +147,9 @@ edit_options_dialog (void)
 	i18n_flag = 1;
     }
 
-    g_snprintf (wrap_length, sizeof (wrap_length), "%d",
+    snprintf (wrap_length, sizeof (wrap_length), "%d",
 		option_word_wrap_line_length);
-    g_snprintf (tab_spacing, sizeof (tab_spacing), "%d",
+    snprintf (tab_spacing, sizeof (tab_spacing), "%d",
 		option_tab_spacing);
 
     quick_widgets[3].text = wrap_length;

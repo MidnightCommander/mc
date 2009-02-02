@@ -72,7 +72,7 @@ static void status_string (WEdit * edit, char *s, int w)
      */
     if (edit->curs1 < edit->last_byte) {
 	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
+	snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
 		    is_printable (cur_byte) ? cur_byte : '.',
 		    (int) cur_byte,
 		    (unsigned) cur_byte);
@@ -81,7 +81,7 @@ static void status_string (WEdit * edit, char *s, int w)
     }
 
     /* The field lengths just prevent the status line from shortening too much */
-    g_snprintf (s, w,
+    snprintf (s, w,
 		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
 		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 		edit->modified ? 'M' : '-',

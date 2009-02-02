@@ -320,7 +320,7 @@ file_eta_show (FileOpContext *ctx)
 	eta_hours = ctx->eta_secs / (60 * 60);
 	eta_mins = (ctx->eta_secs - (eta_hours * 60 * 60)) / 60;
 	eta_s = ctx->eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
-	g_snprintf (eta_buffer, sizeof (eta_buffer), _("ETA %d:%02d.%02d"),
+	snprintf (eta_buffer, sizeof (eta_buffer), _("ETA %d:%02d.%02d"),
 		    eta_hours, eta_mins, eta_s);
     } else
 	*eta_buffer = 0;
@@ -343,13 +343,13 @@ file_bps_show (FileOpContext *ctx)
 	return;
 
     if (ctx->bps > 1024 * 1024) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f MB/s"),
+	snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f MB/s"),
 		    ctx->bps / (1024 * 1024.0));
     } else if (ctx->bps > 1024) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f KB/s"),
+	snprintf (bps_buffer, sizeof (bps_buffer), _("%.2f KB/s"),
 		    ctx->bps / 1024.0);
     } else if (ctx->bps > 1) {
-	g_snprintf (bps_buffer, sizeof (bps_buffer), _("%ld B/s"),
+	snprintf (bps_buffer, sizeof (bps_buffer), _("%ld B/s"),
 		    ctx->bps);
     } else
 	*bps_buffer = 0;
@@ -540,7 +540,7 @@ static struct {
 		NORMAL_BUTTON, rd_widgets [i].text, 0))
 
 #define ADD_RD_LABEL(ui,i,p1,p2)\
-	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
+	snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\
 	add_widget (ui->replace_dlg,\
 		label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
 

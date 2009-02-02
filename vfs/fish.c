@@ -228,7 +228,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	if (SUP.flags > FISH_FLAG_RSH)
 	{
 	    argv[i++] = "-p";
-	    g_snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
+	    snprintf (gbuf, sizeof (gbuf), "%d", SUP.flags);
 	    argv[i++] = gbuf;
 	}
 
@@ -907,7 +907,7 @@ static int
 fish_chmod (struct vfs_class *me, const char *path, int mode)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
+    snprintf(buf, sizeof(buf), "#CHMOD %4.4o /%s\n"
 				 "chmod %4.4o /%s 2>/dev/null\n"
 				 "echo '### 000'\n", 
 	    mode & 07777, rpath.s,
@@ -953,7 +953,7 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
     SHELL_ESCAPED_STR qsetto;
     PREFIX
     qsetto = mhl_shell_escape_dup (setto);
-    g_snprintf(buf, sizeof(buf),
+    snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
@@ -979,7 +979,7 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     sgroup = gr->gr_name;
     {
 	PREFIX
-	g_snprintf (buf, sizeof(buf),
+	snprintf (buf, sizeof(buf),
     	    "#CHOWN %s /%s\n"
 	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
@@ -987,7 +987,7 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 	    sowner, rpath.s);
 	fish_send_command (me, super, buf, OPT_FLUSH); 
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
-	g_snprintf (buf, sizeof(buf),
+	snprintf (buf, sizeof(buf),
             "#CHGRP /%s \"/%s\"\n"
 	    "chgrp %s \"/%s\" 2>/dev/null\n"
 	    "echo '### 000'\n", 
@@ -1001,7 +1001,7 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 static int fish_unlink (struct vfs_class *me, const char *path)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf),
+    snprintf(buf, sizeof(buf),
             "#DELE /%s\n"
 	    "rm -f /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
@@ -1015,7 +1015,7 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 
     (void) mode;
 
-    g_snprintf(buf, sizeof(buf),
+    snprintf(buf, sizeof(buf),
             "#MKD /%s\n"
 	    "mkdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
@@ -1026,7 +1026,7 @@ static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 static int fish_rmdir (struct vfs_class *me, const char *path)
 {
     PREFIX
-    g_snprintf(buf, sizeof(buf),
+    snprintf(buf, sizeof(buf),
             "#RMD /%s\n"
 	    "rmdir /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
@@ -1085,7 +1085,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 		if (SUP.flags > FISH_FLAG_RSH)
 		{
 		    break;
-		    g_snprintf (gbuf, sizeof (gbuf), ":%d", SUP.flags);
+		    snprintf (gbuf, sizeof (gbuf), ":%d", SUP.flags);
 		    flags = gbuf;
 		}
 		break;
