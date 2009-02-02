@@ -52,6 +52,7 @@ SYNTAXFILES =			\
 	syntax.syntax		\
 	tcl.syntax		\
 	texinfo.syntax		\
+	vhdl.syntax		\
 	unknown.syntax		\
 	xml.syntax
 

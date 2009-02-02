@@ -187,5 +187,8 @@ include haskell.syntax
 file ..\*\\.(n|N)$ Nemerle\sProgram
 include nemerle.syntax
 
+file ..\*\\.(hdl|vhdl|HDL|VHDL)$ VHDL\sProgram
+include vhdl.syntax
+
 file .\* unknown
 include unknown.syntax

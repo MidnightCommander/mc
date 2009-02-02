@@ -11,9 +11,6 @@
 	* src/find.c, src/main.c, src/panelize.c, src/util.c, src/utilunix.c,
 	* src/widget.c, src/widget.h, src/wtools.c, vfs/fish.c:
 	  fixed shell escaping issues in commandline completion engine
-
-2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>
-
 	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
 	* replaced g_snprintf() by snprintf()
 
@@ -21,6 +18,7 @@
 
 	* src/Makefile.am, edit/Makefile.am vfs/Makefile.am: fixed #208
 	  (out-of-tree builds)
+	* syntax/Syntax, syntax/Makefile.am, syntax/vhdl.syntax: added VHDL syntax (#193)
 
 2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
 	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.
@@ -36,9 +34,6 @@
 
 	* mhl/escape.h, src/complete.c, vfs/fish.c: introduced new type 
 	  SHELL_ESCAPED_STR for more type safety
-
-2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
-
 	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
 
 2009-01-27 Sergei Trofimovich  <slyfox@inbox.ru>
@@ -66,7 +61,7 @@
 	* src/cmd.c src/option.c src/setup.c src/main.h: Automatic new directory(Mkdir, F7)
 	  name filling. Can be configured (on|off) in 'Configure options'
 
-2009-01-25 Enrico Weigelt <weigelt@metux.de>
+2009-01-25 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:
 	* src/hotlist.c, src/panelize.c, src/tree.c, src/user.c: 
@@ -75,20 +70,17 @@
 	  translated strings. This breaks now once every history file
 	  but afterwards this will be stable
 
-2009-01-24 Enrico Weigelt <weigelt@metux.de>
+2009-01-24 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* src/cmd.c: fixed bug #35 (do_view_cmd is now calling repaint_screen())
+	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
+	  for Nemerle source files
 
 2009-01-24 Patrick Winnertz <winnie@debian.org>
 
 	* edit/editcmd.c: Fix some issues about regex:
 	  - prevent . to match a newline (\n)
 	  - match from start of line and not from cursor position
-
-2009-01-24  Enrico Weigelt, metux IT service <weigelt@metux.de>
-
-	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
-	  for Nemerle source files
 
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
@@ -104,7 +96,7 @@
 	* src/main.c: Removed unused function do_mc_filename_rename
 	* src/util.c: Removed unused struct whentm
 
-2009-01-16 Enrico Weigelt, metux IT service <weigelt@metux.de>
+2009-01-16 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* src/subshell: setting subshell pty to close-on-exec 
 	  (taken from mandriva patches)
@@ -142,9 +134,6 @@
 	* syntax/Makefile.am syntax/Syntax syntax/haskell.syntax:
 	added syntax definition for Haskell (taken from rhclub-tree)
 	* syntax: added ebuild Syntax defition (taken from rhclub-tree)
-
-2009-01-10  Enrico Weigelt, metux ITS <weigelt@metux.de>
-
 	* edit/editcmd.c:
 	* src/achown.c src/background.c src/boxes.c src/chmod.c:
 	* src/chown.c src/cmd.c src/command.c src/dir.c src/execute.c:
