@@ -36,7 +36,10 @@
 /* Define this if your ssh can take -I option */
 
 #include <config.h>
+
 #include <errno.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -303,7 +306,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     super->name =
 	g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", (char *) NULL);
 #endif
-    super->name = g_strdup (PATH_SEP_STR);
+    super->name = mhl_str_dup (PATH_SEP_STR);
 
     super->root =
 	vfs_s_new_inode (me, super,
@@ -595,7 +598,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     reply_code = fish_decode_reply(buffer + 4, 0);
     if (reply_code == COMPLETE) {
 	mhl_mem_free (SUP.cwdir);
-	SUP.cwdir = g_strdup (remote_path);
+	SUP.cwdir = mhl_str_dup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
     } else if (reply_code == ERROR) {
@@ -922,20 +925,19 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     const char *crpath1, *crpath2; \
     char *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
+    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = mhl_str_dup(path1), &super1, 0))) { \
 	mhl_mem_free (mpath1); \
 	return -1; \
     } \
-    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
+    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = mhl_str_dup(path2), &super2, 0))) { \
 	mhl_mem_free (mpath1); \
 	mhl_mem_free (mpath2); \
-	return -1; \
     } \
     SHELL_ESCAPED_STR rpath1 = mhl_shell_escape_dup (crpath1); \
     mhl_mem_free (mpath1); \
     SHELL_ESCAPED_STR rpath2 = mhl_shell_escape_dup (crpath2); \
     mhl_mem_free (mpath2); \
-    g_snprintf(buf, sizeof(buf), string "\n", rpath1.s, rpath2.s, rpath1.s, rpath2.s); \
+    snprintf(buf, sizeof(buf), string "\n", rpath1.s, rpath2.s, rpath1.s, rpath2.s); \
     mhl_mem_free (rpath1.s); \
     mhl_mem_free (rpath2.s); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \

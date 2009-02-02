@@ -668,7 +668,7 @@ static FILE *open_include_file (const char *filename)
     FILE *f;
 
     syntax_g_free (error_file_name);
-    error_file_name = g_strdup (filename);
+    error_file_name = mhl_str_dup (filename);
     if (*filename == PATH_SEP)
 	return fopen (filename, "r");
 
@@ -774,8 +774,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		}
 		a++;
 		c = r[0] = g_malloc0 (sizeof (struct context_rule));
-		c->left = g_strdup (" ");
-		c->right = g_strdup (" ");
+		c->left = mhl_str_dup (" ");
+		c->right = mhl_str_dup (" ");
 		num_contexts = 0;
 	    } else {
 		/* Terminate previous context.  */
@@ -788,14 +788,14 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		check_a;
 		if (!strcmp (*a, "whole")) {
 		    a++;
-		    c->whole_word_chars_left = g_strdup (whole_left);
-		    c->whole_word_chars_right = g_strdup (whole_right);
+		    c->whole_word_chars_left = mhl_str_dup (whole_left);
+		    c->whole_word_chars_right = mhl_str_dup (whole_right);
 		} else if (!strcmp (*a, "wholeleft")) {
 		    a++;
-		    c->whole_word_chars_left = g_strdup (whole_left);
+		    c->whole_word_chars_left = mhl_str_dup (whole_left);
 		} else if (!strcmp (*a, "wholeright")) {
 		    a++;
-		    c->whole_word_chars_right = g_strdup (whole_right);
+		    c->whole_word_chars_right = mhl_str_dup (whole_right);
 		}
 		check_a;
 		if (!strcmp (*a, "linestart")) {
@@ -803,14 +803,14 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		    c->line_start_left = 1;
 		}
 		check_a;
-		c->left = g_strdup (*a++);
+		c->left = mhl_str_dup (*a++);
 		check_a;
 		if (!strcmp (*a, "linestart")) {
 		    a++;
 		    c->line_start_right = 1;
 		}
 		check_a;
-		c->right = g_strdup (*a++);
+		c->right = mhl_str_dup (*a++);
 		c->first_left = *c->left;
 		c->first_right = *c->right;
 	    }
@@ -827,7 +827,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    g_strlcpy (last_fg, fg ? fg : "", sizeof (last_fg));
 	    g_strlcpy (last_bg, bg ? bg : "", sizeof (last_bg));
 	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
-	    c->keyword[0]->keyword = g_strdup (" ");
+	    c->keyword[0]->keyword = mhl_str_dup (" ");
 	    check_not_a;
 
 	    alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
@@ -853,14 +853,14 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    k = r[num_contexts - 1]->keyword[num_words] = g_malloc0 (sizeof (struct key_word));
 	    if (!strcmp (*a, "whole")) {
 		a++;
-		k->whole_word_chars_left = g_strdup (whole_left);
-		k->whole_word_chars_right = g_strdup (whole_right);
+		k->whole_word_chars_left = mhl_str_dup (whole_left);
+		k->whole_word_chars_right = mhl_str_dup (whole_right);
 	    } else if (!strcmp (*a, "wholeleft")) {
 		a++;
-		k->whole_word_chars_left = g_strdup (whole_left);
+		k->whole_word_chars_left = mhl_str_dup (whole_left);
 	    } else if (!strcmp (*a, "wholeright")) {
 		a++;
-		k->whole_word_chars_right = g_strdup (whole_right);
+		k->whole_word_chars_right = mhl_str_dup (whole_right);
 	    }
 	    check_a;
 	    if (!strcmp (*a, "linestart")) {
@@ -871,7 +871,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    if (!strcmp (*a, "whole")) {
 		break_a;
 	    }
-	    k->keyword = g_strdup (*a++);
+	    k->keyword = mhl_str_dup (*a++);
 	    k->first = *k->keyword;
 	    subst_defines (edit->defines, a, &args[1024]);
 	    fg = *a;
@@ -911,12 +911,12 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    if ((argv = g_tree_lookup (edit->defines, key))) {
 		mc_defines_destroy (NULL, argv, NULL);
 	    } else {
-		key = g_strdup (key);
+		key = mhl_str_dup (key);
 	    }
 	    argv = g_new (char *, argc - 1);
 	    g_tree_insert (edit->defines, key, argv);
 	    while (*a) {
-		*argv++ = g_strdup (*a++);
+		*argv++ = mhl_str_dup (*a++);
 	    };
 	    *argv = NULL;
 	} else {		/* anything else is an error */
@@ -956,7 +956,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    for (j = 1; c->keyword[j]; j++)
 		*p++ = c->keyword[j]->first;
 	    *p = '\0';
-	    c->keyword_first_chars = g_strdup (first_chars);
+	    c->keyword_first_chars = mhl_str_dup (first_chars);
 	}
 
 	g_free (first_chars);
@@ -1077,7 +1077,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		else
 		    abort ();
 	    }
-	    (*pnames)[count++] = g_strdup (args[2]);
+	    (*pnames)[count++] = mhl_str_dup (args[2]);
 	    (*pnames)[count] = NULL;
 	} else if (type) {
 
@@ -1119,7 +1119,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 			result = line_error;
 		} else {
 		    syntax_g_free (edit->syntax_type);
-		    edit->syntax_type = g_strdup (syntax_type);
+		    edit->syntax_type = mhl_str_dup (syntax_type);
 
 /* if there are no rules then turn off syntax highlighting for speed */
 		    if (!g && !edit->rules[1])

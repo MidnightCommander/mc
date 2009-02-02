@@ -30,7 +30,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -221,7 +220,7 @@ char *
 fake_name_quote (const char *s, int quote_percent)
 {
     (void) quote_percent;
-    return g_strdup (s);
+    return mhl_str_dup (s);
 }
 
 /*
@@ -268,7 +267,7 @@ name_trunc (const char *txt, size_t trunc_len)
 const char *
 path_trunc (const char *path, size_t trunc_len) {
     const char *ret;
-    char *secure_path = strip_password (g_strdup (path), 1);
+    char *secure_path = strip_password (mhl_str_dup (path), 1);
     
     ret = name_trunc (secure_path, trunc_len);
     g_free (secure_path);
@@ -587,7 +586,7 @@ convert_pattern (const char *pattern, int match_type, int do_group)
 	*d = 0;
 	return new_pattern;
     } else
-	return  g_strdup (pattern);
+	return  mhl_str_dup (pattern);
 }
 
 int
@@ -644,7 +643,7 @@ get_config_string (const char *file, const char *key, const char *defval)
 {
     char buffer[1024];
     (void)GetPrivateProfileString (app_text, key, defval, buffer, sizeof(buffer), file);
-    return g_strdup (buffer);
+    return mhl_str_dup (buffer);
 }
 
 extern void
@@ -1098,7 +1097,7 @@ wipe_password (char *passwd)
 char *
 convert_controls (const char *p)
 {
-    char *valcopy = g_strdup (p);
+    char *valcopy = mhl_str_dup (p);
     char *q;
 
     /* Parse the escape special character */
@@ -1315,7 +1314,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 	/* Add prefix first to find the position of XXXXXX */
 	tmpbase = mhl_str_dir_plus_file (mc_tmpdir (), prefix);
     } else {
-	tmpbase = g_strdup (prefix);
+	tmpbase = mhl_str_dup (prefix);
     }
 
     tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, (char *) NULL);

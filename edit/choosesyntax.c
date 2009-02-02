@@ -17,6 +17,9 @@
  */
 
 #include <config.h>
+
+#include <mhl/string.h>
+
 #include "edit.h"
 #include "../src/global.h"
 #include "../src/wtools.h"
@@ -77,7 +80,7 @@ edit_syntax_dialog (void) {
     }
 
     old_auto_syntax = option_auto_syntax;
-    old_syntax_type = g_strdup (option_syntax_type);
+    old_syntax_type = mhl_str_dup (option_syntax_type);
 
     switch (syntax) {
 	case 0: /* auto syntax */
@@ -89,7 +92,7 @@ edit_syntax_dialog (void) {
 	default:
 	    option_auto_syntax = 0;
 	    g_free (option_syntax_type);
-	    option_syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
+	    option_syntax_type = mhl_str_dup (names[syntax - N_DFLT_ENTRIES]);
     }
 
     /* Load or unload syntax rules if the option has changed */

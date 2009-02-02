@@ -35,8 +35,8 @@
  */
  
 #include <config.h>
-#include <errno.h>
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -50,6 +50,8 @@
 
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -140,7 +142,7 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 	if (*p == '/'){
 	    char *tmp;
 
-	    *file = g_strdup (p+1);
+	    *file = mhl_str_dup (p+1);
 	    tmp = g_strndup (dirname, p - dirname);
 	    *fsname = g_strconcat ("/dev/", tmp, (char *) NULL);
 	    g_free (tmp);
@@ -148,7 +150,7 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 	}
 	p--;
     }
-    *file = g_strdup ("");
+    *file = mhl_str_dup ("");
     *fsname = g_strconcat ("/dev/", dirname, (char *) NULL);
     return;
 }

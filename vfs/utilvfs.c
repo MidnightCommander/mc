@@ -19,9 +19,11 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include <config.h>
+
 #include <ctype.h>
 
 #include <mhl/types.h>
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -57,7 +59,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
-    char * const pcopy = g_strdup (path);
+    char * const pcopy = mhl_str_dup (path);
     const char *pend = pcopy + strlen (pcopy);
 
     if (pass)
@@ -72,10 +74,10 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 	while (*dir != PATH_SEP && *dir)
 	    dir++;
 	if (*dir) {
-	    retval = g_strdup (dir);
+	    retval = mhl_str_dup (dir);
 	    *dir = 0;
 	} else
-	    retval = g_strdup (PATH_SEP_STR);
+	    retval = mhl_str_dup (PATH_SEP_STR);
     }
 
     /* search for any possible user */
@@ -89,10 +91,10 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 	    *inner_colon = 0;
 	    inner_colon++;
 	    if (pass)
-		*pass = g_strdup (inner_colon);
+		*pass = mhl_str_dup (inner_colon);
 	}
 	if (*pcopy != 0)
-	    *user = g_strdup (pcopy);
+	    *user = mhl_str_dup (pcopy);
 
 	if (pend == at + 1)
 	    rest = at;
@@ -104,10 +106,10 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     if (!*user && !(flags & URL_ALLOW_ANON)) {
 	passwd_info = getpwuid (geteuid ());
 	if (passwd_info && passwd_info->pw_name)
-	    *user = g_strdup (passwd_info->pw_name);
+	    *user = mhl_str_dup (passwd_info->pw_name);
 	else {
 	    /* This is very unlikely to happen */
-	    *user = g_strdup ("anonymous");
+	    *user = mhl_str_dup ("anonymous");
 	}
 	endpwent ();
     }
@@ -133,7 +135,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
 	}
     }
     if (host)
-	*host = g_strdup (rest);
+	*host = mhl_str_dup (rest);
 
     g_free (pcopy);
     return retval;
@@ -745,7 +747,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	s->st_mode |= perms;
     }
 
-    p_copy = g_strdup (p);
+    p_copy = mhl_str_dup (p);
     num_cols = vfs_split_text (p_copy);
 
     s->st_nlink = atol (columns[0]);
@@ -844,7 +846,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 			   column_ptr[idx2] - column_ptr[idx] - 1);
 	}
 	if (linkname) {
-	    t = g_strdup (p + column_ptr[idx2 + 1]);
+	    t = mhl_str_dup (p + column_ptr[idx2 + 1]);
 	    *linkname = t;
 	}
     } else {
@@ -853,10 +855,10 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	 */
 	if (filename) {
 	    /*
-	     * filename = g_strdup (columns [idx++]);
+	     * filename = mhl_str_dup (columns [idx++]);
 	     */
 
-	    t = g_strdup (p + column_ptr[idx]);
+	    t = mhl_str_dup (p + column_ptr[idx]);
 	    *filename = t;
 	}
 	if (linkname)

@@ -945,7 +945,7 @@ panel_save_name (WPanel *panel)
 
     /* If the program is shuting down */
     if ((midnight_shutdown && auto_save_setup) || saving_setup)
-	return  g_strdup (panel->panel_name);
+	return  mhl_str_dup (panel->panel_name);
     else
 	return  g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
 }
@@ -1030,18 +1030,18 @@ panel_new (const char *panel_name)
     panel->status_format = 0;
     panel->format_modified = 1;
 
-    panel->panel_name = g_strdup (panel_name);
-    panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
+    panel->panel_name = mhl_str_dup (panel_name);
+    panel->user_format = mhl_str_dup (DEFAULT_USER_FORMAT);
 
     for (i = 0; i < LIST_TYPES; i++)
-	panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
+	panel->user_status_format[i] = mhl_str_dup (DEFAULT_USER_FORMAT);
 
     panel->search_buffer[0] = 0;
     panel->frame_size = frame_half;
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!profile_has_section (section, profile_name)) {
 	g_free (section);
-	section = g_strdup (panel->panel_name);
+	section = mhl_str_dup (panel->panel_name);
     }
     panel_load_setup (panel, section);
     g_free (section);
@@ -1321,7 +1321,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	    break;
 	}
 	if (!found){
-	    char *tmp_format = g_strdup (format);
+	    char *tmp_format = mhl_str_dup (format);
 
 	    int pos = min (8, strlen (format));
 	    delete_format (home);
@@ -1449,11 +1449,11 @@ set_panel_formats (WPanel *p)
       message( 1, _("Warning" ), _( "User supplied format looks invalid, reverting to default." ) );
     if (retcode & 0x01){
       g_free (p->user_format);
-      p->user_format = g_strdup (DEFAULT_USER_FORMAT);
+      p->user_format = mhl_str_dup (DEFAULT_USER_FORMAT);
     }
     if (retcode & 0x02){
       g_free (p->user_status_format [p->list_type]);
-      p->user_status_format [p->list_type] = g_strdup (DEFAULT_USER_FORMAT);
+      p->user_status_format [p->list_type] = mhl_str_dup (DEFAULT_USER_FORMAT);
     }
 
     return retcode;
@@ -2098,7 +2098,7 @@ chdir_to_readlink (WPanel *panel)
 	    p[1] = 0;
 	}
 	if (*buffer == PATH_SEP)
-	    new_dir = g_strdup (buffer);
+	    new_dir = mhl_str_dup (buffer);
 	else
 	    new_dir = mhl_str_dir_plus_file (panel->cwd, buffer);
 
@@ -2252,7 +2252,7 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	current_panel = panel;
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0) {
-	    char *cwd = strip_password (g_strdup (panel->cwd), 1);
+	    char *cwd = strip_password (mhl_str_dup (panel->cwd), 1);
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     cwd, unix_error_string (errno));
 	    g_free(cwd);
@@ -2464,7 +2464,7 @@ panel_re_sort (WPanel *panel)
     if (panel == NULL)
 	    return;
 
-    filename = g_strdup (selection (panel)->fname);
+    filename = mhl_str_dup (selection (panel)->fname);
     unselect_item (panel);
     do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse,
              panel->case_sensitive, panel->exec_first);
@@ -2495,7 +2495,7 @@ panel_set_sort_order (WPanel *panel, sortfn *sort_order)
     if (sort_order == (sortfn *) unsorted){
 	char *current_file;
 
-	current_file = g_strdup (panel->dir.list [panel->selected].fname);
+	current_file = mhl_str_dup (panel->dir.list [panel->selected].fname);
 	panel_reload (panel);
 	try_to_select (panel, current_file);
 	g_free (current_file);

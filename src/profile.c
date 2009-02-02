@@ -26,8 +26,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sys/types.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "profile.h"
@@ -168,7 +169,7 @@ static TSecHeader *load (const char *file)
 	    if (c == ']' || overflow){
 		*next = '\0';
 		next = CharBuffer;
-		SecHeader->AppName = g_strdup (CharBuffer);
+		SecHeader->AppName = mhl_str_dup (CharBuffer);
 		state = IgnoreToEOL;
 	    } else
 		*next++ = c;
@@ -214,7 +215,7 @@ static TSecHeader *load (const char *file)
 		*next = '\0';
 		SecHeader->Keys =g_new (TKeys, 1);
 		SecHeader->Keys->link = temp;
-		SecHeader->Keys->KeyName = g_strdup (CharBuffer);
+		SecHeader->Keys->KeyName = mhl_str_dup (CharBuffer);
 		state = KeyValue;
 		next = CharBuffer;
 	    } else {
@@ -265,8 +266,8 @@ static void new_key (TSecHeader *section, const char *KeyName, const char *Value
     TKeys *key;
     
     key = g_new (TKeys, 1);
-    key->KeyName = g_strdup (KeyName);
-    key->Value   = g_strdup (Value);
+    key->KeyName = mhl_str_dup (KeyName);
+    key->Value   = mhl_str_dup (Value);
     key->link = section->Keys;
     section->Keys = key;
 }
@@ -284,7 +285,7 @@ GetSetProfileChar (int set, const char *AppName, const char *KeyName,
     if (!Current) {
 	Current = g_new (TProfile, 1);
 	Current->link = Base;
-	Current->FileName = g_strdup (FileName);
+	Current->FileName = mhl_str_dup (FileName);
 	Current->Section = load (FileName);
 	Base = Current;
 	section = Current->Section;
@@ -299,7 +300,7 @@ GetSetProfileChar (int set, const char *AppName, const char *KeyName,
 		continue;
 	    if (set){
 		g_free (key->Value);
-		key->Value = g_strdup (Default);
+		key->Value = mhl_str_dup (Default);
 	    }
 	    return key->Value;
 	}
@@ -315,7 +316,7 @@ GetSetProfileChar (int set, const char *AppName, const char *KeyName,
     /* Non existent section */
     if (set && Default){
 	section = g_new (TSecHeader, 1);
-	section->AppName = g_strdup (AppName);
+	section->AppName = mhl_str_dup (AppName);
 	section->Keys = 0;
 	new_key (section, KeyName, Default);
 	section->link = Current->Section;
@@ -483,7 +484,7 @@ void *profile_init_iterator (const char *appname, const char *file)
     if (!Current) {
 	Current = g_new (TProfile, 1);
 	Current->link = Base;
-	Current->FileName = g_strdup (file);
+	Current->FileName = mhl_str_dup (file);
 	Current->Section = load (file);
 	Base = Current;
 	section = Current->Section;

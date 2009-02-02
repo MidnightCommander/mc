@@ -49,6 +49,8 @@
 #endif
 #endif
 
+#include <mhl/string.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -159,7 +161,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 	    }
 	}
 	if (netrcpass != NULL)
-	    pass = g_strdup (netrcpass);
+	    pass = mhl_str_dup (netrcpass);
 	else
 	    pass = vfs_get_password (_(" MCFS Password required "));
 	if (!pass) {
@@ -341,8 +343,8 @@ mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 
     bucket = mcfs_get_free_bucket ();
     mcfs_open_connections++;
-    bucket->host = g_strdup (host);
-    bucket->user = g_strdup (user);
+    bucket->host = mhl_str_dup (host);
+    bucket->user = mhl_str_dup (user);
     bucket->home = 0;
     bucket->port = *port;
     bucket->sock = sock;
@@ -509,13 +511,13 @@ mcfs_gethome (mcfs_connection *mc)
     char *buffer;
 
     if (mc->home)
-	return g_strdup (mc->home);
+	return mhl_str_dup (mc->home);
     else {
 	rpc_send (mc->sock, RPC_INT, MC_GETHOME, RPC_END);
 	if (0 == rpc_get (mc->sock, RPC_STRING, &buffer, RPC_END))
-	    return g_strdup (PATH_SEP_STR);
+	    return mhl_str_dup (PATH_SEP_STR);
 	mc->home = buffer;
-	return g_strdup (buffer);
+	return mhl_str_dup (buffer);
     }
 }
 

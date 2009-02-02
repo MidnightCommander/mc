@@ -21,8 +21,9 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include <string.h>
-
 #include <sys/types.h>
+
+#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -81,10 +82,10 @@ create_menu (const char *name, menu_entry *entries, int count, const char *help_
 	}
     }
 
-    menu->name = g_strdup (name);
+    menu->name = mhl_str_dup (name);
     menu_scan_hotkey(menu);
     menu->start_x = 0;
-    menu->help_node = g_strdup (help_node);
+    menu->help_node = mhl_str_dup (help_node);
     return menu;
 }
 

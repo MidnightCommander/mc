@@ -20,6 +20,7 @@
 	* src/Makefile.am, edit/Makefile.am vfs/Makefile.am: fixed #208
 	  (out-of-tree builds)
 	* syntax/Syntax, syntax/Makefile.am, syntax/vhdl.syntax: added VHDL syntax (#193)
+	* replaced calls to g_strdup() by mhl_str_dup()
 
 2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
 	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.

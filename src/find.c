@@ -249,11 +249,11 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
   find_par_start:
     if (!in_start_dir)
-	in_start_dir = g_strdup (".");
+	in_start_dir = mhl_str_dup (".");
     if (!in_start_name)
-	in_start_name = g_strdup (easy_patterns ? "*" : ".");
+	in_start_name = mhl_str_dup (easy_patterns ? "*" : ".");
     if (!in_contents)
-	in_contents = g_strdup ("");
+	in_contents = mhl_str_dup ("");
 
     find_dlg =
 	create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
@@ -303,7 +303,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	break;
 
     case B_TREE:
-	temp_dir = g_strdup (in_start->buffer);
+	temp_dir = mhl_str_dup (in_start->buffer);
 	case_sensitive = case_sense->state & C_BOOL;
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
  	find_recursively = recursively_cbox->state & C_BOOL;
@@ -311,7 +311,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
 	    g_free (temp_dir);
-	    temp_dir = g_strdup (current_panel->cwd);
+	    temp_dir = mhl_str_dup (current_panel->cwd);
 	}
 	in_start_dir = tree_box (temp_dir);
 	if (in_start_dir)
@@ -325,8 +325,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
     default:
 	g_free (in_contents);
 	if (in_with->buffer[0]) {
-	    *content = g_strdup (in_with->buffer);
-	    in_contents = g_strdup (*content);
+	    *content = mhl_str_dup (in_with->buffer);
+	    in_contents = mhl_str_dup (*content);
 	} else {
 	    *content = in_contents = NULL;
 	    r = 0;
@@ -336,13 +336,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
  	find_recursively = recursively_cbox->state & C_BOOL;
 	return_value = 1;
-	*start_dir = g_strdup (in_start->buffer);
-	*pattern = g_strdup (in_name->buffer);
+	*start_dir = mhl_str_dup (in_start->buffer);
+	*pattern = mhl_str_dup (in_name->buffer);
 
 	g_free (in_start_dir);
-	in_start_dir = g_strdup (*start_dir);
+	in_start_dir = mhl_str_dup (*start_dir);
 	g_free (in_start_name);
-	in_start_name = g_strdup (*pattern);
+	in_start_name = mhl_str_dup (*pattern);
     }
 
     destroy_dlg (find_dlg);
@@ -389,11 +389,11 @@ insert_file (const char *dir, const char *file)
     if (old_dir){
 	if (strcmp (old_dir, dir)){
 	    g_free (old_dir);
-	    old_dir = g_strdup (dir);
+	    old_dir = mhl_str_dup (dir);
 	    dirname = add_to_list (dir, NULL);
 	}
     } else {
-	old_dir = g_strdup (dir);
+	old_dir = mhl_str_dup (dir);
 	dirname = add_to_list (dir, NULL);
     }
     
@@ -752,7 +752,7 @@ make_fullname (const char *dirname, const char *filename)
 {
 
     if (strcmp(dirname, ".") == 0 || strcmp(dirname, "."PATH_SEP_STR) == 0)
-	return g_strdup (filename);
+	return mhl_str_dup (filename);
     if (strncmp(dirname, "."PATH_SEP_STR, 2) == 0)
 	return mhl_str_dir_plus_file (dirname + 2, filename);
     return mhl_str_dir_plus_file (dirname, filename);
@@ -983,9 +983,9 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
     get_list_info (&file_tmp, &dir_tmp);
 
     if (dir_tmp)
-	*dirname = g_strdup (dir_tmp);
+	*dirname = mhl_str_dup (dir_tmp);
     if (file_tmp)
-	*filename = g_strdup (file_tmp);
+	*filename = mhl_str_dup (file_tmp);
 
     if (return_value == B_PANELIZE && *filename) {
 	int status, link_to_dir, stale_link;

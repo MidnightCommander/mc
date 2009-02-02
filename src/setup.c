@@ -414,14 +414,14 @@ panel_load_setup (WPanel *panel, const char *section)
 
     /* User formats */
     g_free (panel->user_format);
-    panel->user_format = g_strdup (get_profile_string (section, "user_format",
+    panel->user_format = mhl_str_dup (get_profile_string (section, "user_format",
 						     DEFAULT_USER_FORMAT,
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
 	snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
-	    g_strdup (get_profile_string (section, buffer,
+	    mhl_str_dup (get_profile_string (section, buffer,
 			DEFAULT_USER_FORMAT, profile_name));
     }
 
@@ -470,7 +470,7 @@ do_load_string (const char *s, const char *ss, const char *def)
 
     load_string (s, ss, def, buffer, BUF_SMALL);
 
-    p = g_strdup (buffer);
+    p = mhl_str_dup (buffer);
     g_free (buffer);
     return p;
 }
@@ -595,7 +595,7 @@ load_anon_passwd ()
 
     load_string ("Misc", "ftpfs_password", "", buffer, sizeof (buffer));
     if (buffer [0])
-	return g_strdup (buffer);
+	return mhl_str_dup (buffer);
     else
 	return 0;
 }

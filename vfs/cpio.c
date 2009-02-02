@@ -19,7 +19,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 #include <config.h>
+
 #include <errno.h>
+
+#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -161,7 +164,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super,
 	return -1;
     }
 
-    super->name = g_strdup (name);
+    super->name = mhl_str_dup (name);
     super->u.arch.fd = -1;	/* for now */
     mc_stat (name, &(super->u.arch.st));
     super->u.arch.type = CPIO_UNKNOWN;
