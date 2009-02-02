@@ -26,6 +26,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include <mhl/memory.h>
 #include <mhl/types.h>
 
 #include "global.h"
@@ -45,7 +46,7 @@ is_logging_enabled(void)
 		mc_ini = g_strdup_printf("%s/%s", home_dir, PROFILE_NAME);
 		logging_enabled =
 		    get_int(mc_ini, "development.enable_logging", FALSE);
-		g_free(mc_ini);
+		mhl_mem_free(mc_ini);
 		logging_initialized = TRUE;
 	}
 	return logging_enabled;
@@ -67,6 +68,6 @@ mc_log(const char *fmt, ...)
 			(void)vfprintf(f, fmt, args);
 			(void)fclose(f);
 		}
-		g_free(logfilename);
+		mhl_mem_free(logfilename);
 	}
 }

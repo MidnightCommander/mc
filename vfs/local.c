@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -69,7 +70,7 @@ local_close (void *data)
 	return -1;
     
     fd =  *(int *) data;
-    g_free (data);
+    mhl_mem_free (data);
     return close (fd);
 }
 
@@ -110,7 +111,7 @@ local_closedir (void *data)
     int i;
 
     i = closedir (* (DIR **) data);
-    g_free (data);
+    mhl_mem_free (data);
     return i;
 }
 

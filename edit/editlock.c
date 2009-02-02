@@ -36,6 +36,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -100,7 +101,7 @@ lock_build_symlink_name (const char *fname)
     fname_copy = mhl_str_dup (fname);
     absolute_fname[fname - absolute_fname] = '\0';
     symlink_name = g_strconcat (absolute_fname, ".#", fname_copy, (char *) NULL);
-    g_free (fname_copy);
+    mhl_mem_free (fname_copy);
 
     return symlink_name;
 }
@@ -175,7 +176,7 @@ edit_lock_file (const char *fname)
     if (lstat (lockfname, &statbuf) == 0) {
 	lock = lock_get_info (lockfname);
 	if (!lock) {
-	    g_free (lockfname);
+	    mhl_mem_free (lockfname);
 	    return 0;
 	}
 	lockinfo = lock_extract_info (lock);
@@ -196,11 +197,11 @@ edit_lock_file (const char *fname)
 		break;
 	    case 1:
 	    case -1:
-		g_free (lockfname);
-		g_free (msg);
+		mhl_mem_free (lockfname);
+		mhl_mem_free (msg);
 		return 0;
 	    }
-	    g_free (msg);
+	    mhl_mem_free (msg);
 	}
 	unlink (lockfname);
     }
@@ -208,13 +209,13 @@ edit_lock_file (const char *fname)
     /* Create lock symlink */
     newlock = lock_build_name ();
     if (symlink (newlock, lockfname) == -1) {
-	g_free (lockfname);
-	g_free (newlock);
+	mhl_mem_free (lockfname);
+	mhl_mem_free (newlock);
 	return 0;
     }
 
-    g_free (lockfname);
-    g_free (newlock);
+    mhl_mem_free (lockfname);
+    mhl_mem_free (newlock);
     return 1;
 }
 
@@ -236,7 +237,7 @@ edit_unlock_file (const char *fname)
 
     /* Check if lock exists */
     if (lstat (lockfname, &statbuf) == -1) {
-	g_free (lockfname);
+	mhl_mem_free (lockfname);
 	return 0;
     }
 
@@ -244,13 +245,13 @@ edit_unlock_file (const char *fname)
     if (lock) {
 	/* Don't touch if lock is not ours */
 	if (lock_extract_info (lock)->pid != getpid ()) {
-	    g_free (lockfname);
+	    mhl_mem_free (lockfname);
 	    return 0;
 	}
     }
 
     /* Remove lock */
     unlink (lockfname);
-    g_free (lockfname);
+    mhl_mem_free (lockfname);
     return 0;
 }

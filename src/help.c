@@ -48,6 +48,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -128,7 +129,7 @@ search_string (const char *start, const char *text)
 	}
     }
 cleanup:
-    g_free (local_text);
+    mhl_mem_free (local_text);
     return result;
 }
 
@@ -328,7 +329,7 @@ static void clear_link_areas (void)
     while (link_area){
 	current = link_area;
 	link_area = current -> next;
-	g_free (current);
+	mhl_mem_free (current);
     }
     inside_link_area = 0;
 }
@@ -754,7 +755,7 @@ static void
 interactive_display_finish (void)
 {
     clear_link_areas ();
-    g_free (data);
+    mhl_mem_free (data);
 }
 
 void
@@ -775,7 +776,7 @@ interactive_display (const char *filename, const char *node)
     }
 
     if (!filename)
-	g_free (hlpfile);
+	mhl_mem_free (hlpfile);
 
     if (!data)
 	return;

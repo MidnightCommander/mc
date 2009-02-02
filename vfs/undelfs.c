@@ -51,6 +51,7 @@
 #include <ext2fs/ext2fs.h>
 #include <ctype.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -100,11 +101,11 @@ undelfs_shutdown (void)
     if (fs)
 	ext2fs_close (fs);
     fs = NULL;
-    g_free (ext2_fname);
+    mhl_mem_free (ext2_fname);
     ext2_fname = NULL;
-    g_free (delarray);
+    mhl_mem_free (delarray);
     delarray = NULL;
-    g_free (block_buf);
+    mhl_mem_free (block_buf);
     block_buf = NULL;
 }
 
@@ -145,7 +146,7 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 	    *file = mhl_str_dup (p+1);
 	    tmp = g_strndup (dirname, p - dirname);
 	    *fsname = g_strconcat ("/dev/", tmp, (char *) NULL);
-	    g_free (tmp);
+	    mhl_mem_free (tmp);
 	    return;
 	}
 	p--;
@@ -275,10 +276,10 @@ undelfs_loaddel (void)
   error_out:
     ext2fs_close_inode_scan (scan);
   free_block_buf:
-    g_free (block_buf);
+    mhl_mem_free (block_buf);
     block_buf = NULL;
   free_delarray:
-    g_free (delarray);
+    mhl_mem_free (delarray);
     delarray = NULL;
     return 0;
 }
@@ -300,7 +301,7 @@ com_err (const char *whoami, long err_code, const char *fmt, ...)
 
     message (D_ERROR, _(" Ext2lib error "), " %s (%s: %ld) ", str, whoami,
 	     err_code);
-    g_free (str);
+    mhl_mem_free (str);
 }
 
 static void *
@@ -313,7 +314,7 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
 	return 0;
 
     /* We don't use the file name */
-    g_free (f);
+    mhl_mem_free (f);
     
     if (!ext2_fname || strcmp (ext2_fname, file)){
 	undelfs_shutdown ();
@@ -321,7 +322,7 @@ undelfs_opendir (struct vfs_class *me, const char *dirname)
     } else {
 	/* To avoid expensive re-scannings */
 	readdir_ptr = READDIR_PTR_INIT;
-	g_free (file);
+	mhl_mem_free (file);
 	return fs;
     }
 
@@ -417,8 +418,8 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
     if (!ext2_fname || strcmp (ext2_fname, file)) {
 	message (D_ERROR, undelfserr,
 		 _(" You have to chdir to extract files first "));
-	g_free (file);
-	g_free (f);
+	mhl_mem_free (file);
+	mhl_mem_free (f);
 	return 0;
     }
     inode = atol (f);
@@ -431,15 +432,15 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
 	/* Found: setup all the structures needed by read */
 	p = (undelfs_file *) g_try_malloc (((gsize) sizeof (undelfs_file)));
 	if (!p) {
-	    g_free (file);
-	    g_free (f);
+	    mhl_mem_free (file);
+	    mhl_mem_free (f);
 	    return 0;
 	}
 	p->buf = g_try_malloc (fs->blocksize);
 	if (!p->buf) {
-	    g_free (p);
-	    g_free (file);
-	    g_free (f);
+	    mhl_mem_free (p);
+	    mhl_mem_free (file);
+	    mhl_mem_free (f);
 	    return 0;
 	}
 	p->inode = inode;
@@ -449,8 +450,8 @@ undelfs_open (struct vfs_class *me, const char *fname, int flags, int mode)
 	p->pos = 0;
 	p->size = delarray[i].size;
     }
-    g_free (file);
-    g_free (f);
+    mhl_mem_free (file);
+    mhl_mem_free (f);
     undelfs_usage++;
     return p;
 }
@@ -459,8 +460,8 @@ static 	int
 undelfs_close (void *vfs_info)
 {
     undelfs_file *p = vfs_info;
-    g_free (p->buf);
-    g_free (p);
+    mhl_mem_free (p->buf);
+    mhl_mem_free (p);
     undelfs_usage--;
     return 0;
 }
@@ -594,20 +595,20 @@ undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 	    f    = "sda1"                     f   ="401:1"
        If the first char in f is no digit -> return error */
     if (!isdigit (*f)) {
-	g_free (file);
-	g_free (f);
+	mhl_mem_free (file);
+	mhl_mem_free (f);
 	return -1;
     }
 	
     if (!ext2_fname || strcmp (ext2_fname, file)){
 	message (D_ERROR, undelfserr, _(" You have to chdir to extract files first "));
-	g_free (file);
-	g_free (f);
+	mhl_mem_free (file);
+	mhl_mem_free (f);
 	return 0;
     }
     inode_index = undelfs_getindex (f);
-    g_free (file);
-    g_free (f);
+    mhl_mem_free (file);
+    mhl_mem_free (f);
 
     if (inode_index == -1)
 	return -1;
@@ -640,13 +641,13 @@ undelfs_chdir(struct vfs_class *me, const char *path)
     /* our vfs, but that is left as an excercise for the reader */
     if ((fd = open (file, O_RDONLY)) == -1){
 	message (D_ERROR, undelfserr, _(" Cannot open file %s "), file);
-	g_free (f);
-	g_free (file);
+	mhl_mem_free (f);
+	mhl_mem_free (file);
 	return -1;
     }
     close (fd);
-    g_free (f);
-    g_free (file);
+    mhl_mem_free (f);
+    mhl_mem_free (file);
     return 0;
 }
 
@@ -666,8 +667,8 @@ undelfs_getid (struct vfs_class *me, const char *path)
 
     if (!fsname)
 	return NULL;
-    g_free (fname);
-    g_free (fsname);
+    mhl_mem_free (fname);
+    mhl_mem_free (fsname);
     return (vfsid) fs;
 }
 

@@ -28,6 +28,7 @@
 
 #include <errno.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -98,14 +99,14 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
 	}
 
 	CALL (free_inode) (me, ino);
-	g_free (ino->linkname);
+	mhl_mem_free (ino->linkname);
 	if (ino->localname){
 	    unlink (ino->localname);
-	    g_free(ino->localname);
+	    mhl_mem_free(ino->localname);
 	}
 	total_inodes--;
 	ino->super->ino_usage--;
-	g_free(ino);
+	mhl_mem_free(ino);
     } else ino->st.st_nlink--;
 }
 
@@ -118,7 +119,7 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
 	    ent->next->prevp = ent->prevp;
     }
 
-    g_free (ent->name);
+    mhl_mem_free (ent->name);
     ent->name = NULL;
 	
     if (ent->ino){
@@ -128,7 +129,7 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
     }
 
     total_entries--;
-    g_free(ent);
+    mhl_mem_free(ent);
 }
 
 void
@@ -230,14 +231,14 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
 	if (fullpath) {
 	    fullname = g_strconcat (fullpath, "/", linkname, NULL);
 	    linkname = fullname;
-	    g_free (fullpath);
+	    mhl_mem_free (fullpath);
 	}
     }
 
     target =
 	(MEDATA->find_entry) (me, entry->dir->super->root, linkname,
 			      follow - 1, 0);
-    g_free (fullname);
+    mhl_mem_free (fullname);
     return target;
 }
 
@@ -261,7 +262,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 	    path++;
 
 	if (!path[0]) {
-	    g_free (pathref);
+	    mhl_mem_free (pathref);
 	    return ent;
 	}
 
@@ -292,7 +293,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 	root = ent->ino;
     }
 cleanup:
-    g_free (pathref);
+    mhl_mem_free (pathref);
     return NULL;
 }
 
@@ -339,7 +340,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 	if (save)
 	    *save = PATH_SEP;
 	retval = vfs_s_find_entry_tree (me, ino, name, follow, flags);
-	g_free (path);
+	mhl_mem_free (path);
 	return retval;
     }
 
@@ -364,7 +365,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 	ent = vfs_s_new_entry (me, path, ino);
 	if ((MEDATA->dir_load) (me, ino, path) == -1) {
 	    vfs_s_free_entry (me, ent);
-	    g_free (path);
+	    mhl_mem_free (path);
 	    return NULL;
 	}
 	vfs_s_insert_entry (me, root, ent);
@@ -378,11 +379,11 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 
 #if 0
     if (!vfs_s_resolve_symlink (me, ent, follow)) {
-    	g_free (path);
+    	mhl_mem_free (path);
 	return NULL;
     }
 #endif
-    g_free (path);
+    mhl_mem_free (path);
     return ent;
 }
 
@@ -449,8 +450,8 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     }
 
     CALL (free_archive) (me, super);
-    g_free (super->name);
-    g_free(super);
+    mhl_mem_free (super->name);
+    mhl_mem_free(super);
 }
 
 
@@ -524,7 +525,7 @@ vfs_s_get_path (struct vfs_class *me, const char *inname,
 
     buf = mhl_str_dup (inname);
     retval = mhl_str_dup (vfs_s_get_path_mangle (me, buf, archive, flags));
-    g_free (buf);
+    mhl_mem_free (buf);
     return retval;
 }
 
@@ -552,7 +553,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 	    if (ino == ino->super->root)
 		break;
 	    newpath = g_strconcat (ino->ent->name, "/", path, (char *) NULL);
-	    g_free (path);
+	    mhl_mem_free (path);
 	    path = newpath;
 	}
 	return path;
@@ -590,7 +591,7 @@ vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
 			      flags & FL_FOLLOW ? LINK_FOLLOW :
 			      LINK_NO_FOLLOW,
 			      FL_DIR | (flags & ~FL_FOLLOW));
-    g_free (q);
+    mhl_mem_free (q);
     return ino;
 }
 
@@ -651,7 +652,7 @@ vfs_s_closedir (void *data)
     struct vfs_s_inode *dir = info->dir;
 
     vfs_s_free_inode (dir->super->me, dir);
-    g_free (data);
+    mhl_mem_free (data);
     return 0;
 }
 
@@ -734,7 +735,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	return NULL;
     ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))) {
-	g_free (q);
+	mhl_mem_free (q);
 	ERRNOR (EEXIST, NULL);
     }
     if (!ino) {
@@ -745,7 +746,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 
 	/* If the filesystem is read-only, disable file creation */
 	if (!(flags & O_CREAT) || !(me->write)) {
-	    g_free (q);
+	    mhl_mem_free (q);
 	    return NULL;
 	}
 
@@ -759,14 +760,14 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	vfs_s_insert_entry (me, dir, ent);
 	tmp_handle = vfs_mkstemps (&ino->localname, me->name, name);
 	if (tmp_handle == -1) {
-	    g_free (q);
+	    mhl_mem_free (q);
 	    return NULL;
 	}
 	close (tmp_handle);
 	was_changed = 1;
     }
 
-    g_free (q);
+    mhl_mem_free (q);
 
     if (S_ISDIR (ino->st.st_mode))
 	ERRNOR (EISDIR, NULL);
@@ -785,14 +786,14 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	}
     } else if ((MEDATA->fh_open)
 	       && (MEDATA->fh_open (me, fh, flags, mode))) {
-	g_free (fh);
+	mhl_mem_free (fh);
 	return NULL;
     }
 
     if (fh->ino->localname) {
 	fh->handle = open (fh->ino->localname, NO_LINEAR (flags), mode);
 	if (fh->handle == -1) {
-	    g_free (fh);
+	    mhl_mem_free (fh);
 	    ERRNOR (errno, NULL);
 	}
     }
@@ -901,7 +902,7 @@ vfs_s_close (void *fh)
 	    res = -1;
  	else {
 	    res = MEDATA->file_store (me, fh, s, FH->ino->localname);
-	    g_free (s);
+	    mhl_mem_free (s);
 	}
 	vfs_s_invalidate (me, FH_SUPER);
     }
@@ -909,7 +910,7 @@ vfs_s_close (void *fh)
 	close (FH->handle);
 	
     vfs_s_free_inode (me, FH->ino);
-    g_free (fh);
+    mhl_mem_free (fh);
     return res;
 }
 
@@ -995,7 +996,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     close (handle);
     unlink (ino->localname);
   error_4:
-    g_free (ino->localname);
+    mhl_mem_free (ino->localname);
     ino->localname = NULL;
     return -1;
 }
@@ -1011,7 +1012,7 @@ vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
     while (a){
 	name = g_strconcat ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
 	(*func)(name);
-	g_free (name);
+	mhl_mem_free (name);
 	a = a->next;
     }
 }
@@ -1095,7 +1096,7 @@ vfs_s_getid (struct vfs_class *me, const char *path)
 
     if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
 	return NULL;
-    g_free(p);
+    mhl_mem_free(p);
     return (vfsid) archive;    
 }
 

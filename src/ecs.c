@@ -48,7 +48,7 @@ extern bool ecs_mbstr_to_str(ecs_char **ret_str, const char *s)
 	str = g_new(ecs_char, maxlen + 1);
 	len = mbstowcs(str, s, maxlen + 1);
 	if (len == (size_t) -1) {
-		g_free(str);
+		mhl_mem_free(str);
 		return FALSE;
 	}
 
@@ -72,7 +72,7 @@ extern bool ecs_str_to_mbstr(char **ret_str, const ecs_char *s)
 	str = g_new(char, maxlen + 1);
 	len = wcstombs(str, s, maxlen + 1);
 	if (len == (size_t) -1) {
-		g_free(str);
+		mhl_mem_free(str);
 		return FALSE;
 	}
 

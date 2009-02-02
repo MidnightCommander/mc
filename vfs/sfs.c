@@ -34,6 +34,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -82,7 +83,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 	vfs_die ("This cannot happen... Hopefully.\n");
 
     if (!(sfs_flags[w] & F_1) && strcmp (pname, "/")) {
-	g_free (pname);
+	mhl_mem_free (pname);
 	return -1;
     }
 
@@ -90,19 +91,19 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     if (!(sfs_flags[w] & F_NOLOCALCOPY)) {
 	s = mc_getlocalcopy (pname);
 	if (!s) {
-	    g_free (pname);
+	    mhl_mem_free (pname);
 	    return -1;
 	}
 	pqname = name_quote (s, 0);
-	g_free (s);
+	mhl_mem_free (s);
     } else {
 	pqname = name_quote (pname, 0);
     }
-    g_free (pname);
+    mhl_mem_free (pname);
 
 #define COPY_CHAR \
     if ((size_t) (t-pad) > sizeof(pad)) { \
-	g_free (pqname); \
+	mhl_mem_free (pqname); \
 	return -1; \
     } \
     else \
@@ -110,7 +111,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 
 #define COPY_STRING(a) \
     if ((t-pad)+strlen(a)>sizeof(pad)) { \
-	g_free (pqname); \
+	mhl_mem_free (pqname); \
 	return -1; \
     } else { \
 	strcpy (t, a); \
@@ -146,7 +147,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 	}
     }
 
-    g_free (pqname);
+    mhl_mem_free (pqname);
     open_error_pipe ();
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
 	close_error_pipe (D_ERROR, NULL);
@@ -193,7 +194,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
     }
 
     unlink (cache);
-    g_free (cache);
+    mhl_mem_free (cache);
     return "/I_MUST_NOT_EXIST";
 }
 
@@ -287,9 +288,9 @@ static void sfs_free (vfsid id)
     else
 	head = cur->next;
 
-    g_free (cur->cache);
-    g_free (cur->name);
-    g_free (cur);
+    mhl_mem_free (cur->cache);
+    mhl_mem_free (cur->name);
+    mhl_mem_free (cur);
 }
 
 static void sfs_fill_names (struct vfs_class *me, fill_names_f func)
@@ -343,10 +344,10 @@ static int sfs_init (struct vfs_class *me)
 
     if (!cfg){
 	fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
-	g_free (mc_sfsini);
+	mhl_mem_free (mc_sfsini);
 	return 0;
     }
-    g_free (mc_sfsini);
+    mhl_mem_free (mc_sfsini);
 
     sfs_no = 0;
     while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg)) {
@@ -408,8 +409,8 @@ sfs_done (struct vfs_class *me)
     (void) me;
 
     for (i = 0; i < sfs_no; i++){
-        g_free (sfs_prefix [i]);
-	g_free (sfs_command [i]);
+        mhl_mem_free (sfs_prefix [i]);
+	mhl_mem_free (sfs_command [i]);
 	sfs_prefix [i] = sfs_command [i] = NULL;
     }
     sfs_no = 0;

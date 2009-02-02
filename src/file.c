@@ -256,7 +256,7 @@ transform_source (FileOpContext *ctx, const char *source)
 	    *q = ' ';
     }
     p = do_transform_source (ctx, s);
-    g_free (s);
+    mhl_mem_free (s);
     return p;
 }
 
@@ -267,7 +267,7 @@ free_linklist (struct link **linklist)
 
     for (lp = *linklist; lp != NULL; lp = lp2) {
 	lp2 = lp->next;
-	g_free (lp);
+	mhl_mem_free (lp);
     }
     *linklist = NULL;
 }
@@ -399,17 +399,17 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 	    if (s) {
 		s[1] = 0;
 		s = g_strconcat (p, link_target, (char *) NULL);
-		g_free (p);
+		mhl_mem_free (p);
 		g_strlcpy (link_target, s, sizeof (link_target));
-		g_free (s);
+		mhl_mem_free (s);
 		s = diff_two_paths (q, link_target);
 		if (s) {
 		    g_strlcpy (link_target, s, sizeof (link_target));
-		    g_free (s);
+		    mhl_mem_free (s);
 		}
 	    } else
-		g_free (p);
-	    g_free (q);
+		mhl_mem_free (p);
+	    mhl_mem_free (q);
 	}
     }
   retry_dst_symlink:
@@ -760,7 +760,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     dst_status = DEST_FULL;	/* copy successful, don't remove target file */
 
   ret:
-    g_free (buf);
+    mhl_mem_free (buf);
 
     while (src_desc != -1 && mc_close (src_desc) < 0) {
 	temp_status = file_error (
@@ -898,7 +898,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
 	if (move_over) {
 	    if (mc_rename (s, d) == 0) {
-		g_free (parent_dirs);
+		mhl_mem_free (parent_dirs);
 		return FILE_CONT;
 	    }
 	}
@@ -917,7 +917,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 		_(" Destination \"%s\" must be a directory \n %s "), d);
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
-	    g_free (parent_dirs);
+	    mhl_mem_free (parent_dirs);
 	    return return_status;
 	}
 	/* Dive into subdir if exists */
@@ -981,12 +981,12 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	     */
 	    return_status = copy_dir_dir (ctx, path, mdpath, 0, 0, delete,
 				parent_dirs, progress_count, progress_bytes);
-	    g_free (mdpath);
+	    mhl_mem_free (mdpath);
 	} else {
 	    dest_file = mhl_str_dir_plus_file (dest_dir, x_basename (path));
 	    return_status = copy_file_file (ctx, path, dest_file, 1,
 					    progress_count, progress_bytes, 0);
-	    g_free (dest_file);
+	    mhl_mem_free (dest_file);
 	}
 	if (delete && return_status == FILE_CONT) {
 	    if (ctx->erase_at_end) {
@@ -1007,7 +1007,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 		    return_status = erase_file (ctx, path, 0, 0, 0);
 	    }
 	}
-	g_free (path);
+	mhl_mem_free (path);
     }
     mc_closedir (reading);
 
@@ -1019,8 +1019,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
     }
 
   ret:
-    g_free (dest_dir);
-    g_free (parent_dirs);
+    mhl_mem_free (dest_dir);
+    mhl_mem_free (parent_dirs);
     return return_status;
 }
 
@@ -1215,7 +1215,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
 	}
-	g_free (destdir);
+	mhl_mem_free (destdir);
 	return return_status;
     }
 
@@ -1258,17 +1258,17 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 		    erase_file (ctx, erase_list->name, 0, 0, 0);
 	    lp = erase_list;
 	    erase_list = erase_list->next;
-	    g_free (lp);
+	    mhl_mem_free (lp);
 	}
     }
     erase_dir_iff_empty (ctx, s);
 
   ret:
-    g_free (destdir);
+    mhl_mem_free (destdir);
     while (erase_list) {
 	lp = erase_list;
 	erase_list = erase_list->next;
-	g_free (lp);
+	mhl_mem_free (lp);
     }
     return return_status;
 }
@@ -1332,7 +1332,7 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	    continue;
 	path = mhl_str_dir_plus_file (s, next->d_name);
 	if (mc_lstat (path, &buf)) {
-	    g_free (path);
+	    mhl_mem_free (path);
 	    mc_closedir (reading);
 	    return 1;
 	}
@@ -1344,7 +1344,7 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	else
 	    return_status =
 		erase_file (ctx, path, progress_count, progress_bytes, 0);
-	g_free (path);
+	mhl_mem_free (path);
     }
     mc_closedir (reading);
     if (return_status != FILE_CONT)
@@ -1526,7 +1526,7 @@ compute_dir_size (const char *dirname, off_t *ret_marked, double *ret_total)
 	res = mc_lstat (fullname, &s);
 
 	if (res != 0) {
-	    g_free (fullname);
+	    mhl_mem_free (fullname);
 	    continue;
 	}
 
@@ -1542,7 +1542,7 @@ compute_dir_size (const char *dirname, off_t *ret_marked, double *ret_total)
 	    (*ret_marked)++;
 	    *ret_total += s.st_size;
 	}
-	g_free (fullname);
+	mhl_mem_free (fullname);
     }
 
     mc_closedir (dir);
@@ -1583,7 +1583,7 @@ panel_compute_totals (WPanel *panel, off_t *ret_marked, double *ret_total)
 
 	    *ret_marked += subdir_count;
 	    *ret_total += subdir_bytes;
-	    g_free (dir_name);
+	    mhl_mem_free (dir_name);
 	} else {
 	    (*ret_marked)++;
 	    *ret_total += s->st_size;
@@ -1829,7 +1829,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	}
 	if (!*dest) {
 	    file_op_context_destroy (ctx);
-	    g_free (dest);
+	    mhl_mem_free (dest);
 	    return 0;
 	}
     }
@@ -1902,7 +1902,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		value = transform_error;
 	    } else {
 		char *temp2 = mhl_str_dir_plus_file (dest, temp);
-		g_free (dest);
+		mhl_mem_free (dest);
 		dest = temp2;
 		temp = NULL;
 		
@@ -1978,7 +1978,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	    src_stat = panel->dir.list[i].st;
 
 #ifdef WITH_FULL_PATHS
-	    g_free (source_with_path);
+	    mhl_mem_free (source_with_path);
 	    source_with_path = mhl_str_dir_plus_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
@@ -2033,7 +2033,7 @@ panel_operate (void *source_panel, FileOperation operation,
 			/* Unknown file operation */
 			abort ();
 		    }
-		    g_free (temp2);
+		    mhl_mem_free (temp2);
 		}
 	    }			/* Copy or move operation */
 
@@ -2065,20 +2065,20 @@ panel_operate (void *source_panel, FileOperation operation,
 
     if (save_cwd) {
 	mc_setctl (save_cwd, VFS_SETCTL_STALE_DATA, NULL);
-	g_free (save_cwd);
+	mhl_mem_free (save_cwd);
     }
     if (save_dest) {
 	mc_setctl (save_dest, VFS_SETCTL_STALE_DATA, NULL);
-	g_free (save_dest);
+	mhl_mem_free (save_dest);
     }
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 #ifdef WITH_FULL_PATHS
-    g_free (source_with_path);
+    mhl_mem_free (source_with_path);
 #endif				/* WITH_FULL_PATHS */
-    g_free (dest);
-    g_free (ctx->dest_mask);
+    mhl_mem_free (dest);
+    mhl_mem_free (ctx->dest_mask);
     ctx->dest_mask = NULL;
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
@@ -2172,7 +2172,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 
 	if (ctx->recursive_result != RECURSIVE_ABORT)
 	    do_refresh ();
-	g_free (text);
+	mhl_mem_free (text);
     }
 
     switch (ctx->recursive_result) {

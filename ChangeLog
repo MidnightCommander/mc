@@ -22,7 +22,12 @@
 	* syntax/Syntax, syntax/Makefile.am, syntax/vhdl.syntax: added VHDL syntax (#193)
 	* replaced calls to g_strdup() by mhl_str_dup()
 
+2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* replaced calls to g_free() by mhl_mem_free()
+
 2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
+
 	* lib/mc.ext.in: update for OpenOffice and StarOffice viewer.
 	  odt2txt is now used
 

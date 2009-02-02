@@ -28,8 +28,8 @@
 #include <string.h>
 
 #include <mhl/memory.h>
-#include <mhl/escape.h>
 #include <mhl/string.h>
+#include <mhl/escape.h>
 
 #include "global.h"		/* home_dir */
 #include "tty.h"
@@ -130,16 +130,15 @@ examine_cd (char *path)
 	    if (*p) {
 		r = mhl_str_dir_plus_file (p, q);
 		result = do_cd (r, cd_parse_command);
-		g_free (r);
+		mhl_mem_free (r);
 	    }
 	    *s = c;
 	    p = s + 1;
 	}
-	g_free (cdpath);
+	mhl_mem_free (cdpath);
     }
-    g_free (q);
-    g_free (path_tilde);
-//    mhl_mem_free(path);
+    mhl_mem_free (q);
+    mhl_mem_free (path_tilde);
     return result;
 }
 
@@ -183,14 +182,14 @@ void do_cd_command (char *cmd)
 	    char *new;
 	    new = mhl_str_dir_plus_file (old, cmd+3);
 	    sync_tree (new);
-	    g_free (new);
+	    mhl_mem_free (new);
 	}
     } else
 	if (!examine_cd (&cmd [3])) {
 	    char *d = strip_password (mhl_str_dup (&cmd [3]), 1);
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     d, unix_error_string (errno));
-	    g_free (d);
+	    mhl_mem_free (d);
 	    return;
 	}
 }
@@ -244,7 +243,7 @@ enter (WInput *cmdline)
 		s = expand_format (NULL, cmd[i], 1);
 		command = g_realloc (command, j + strlen (s) + cmd_len - i + 1);
 		strcpy (command + j, s);
-		g_free (s);
+		mhl_mem_free (s);
 		j = strlen (command);
 	    } else {
 		command[j] = cmd[i];
@@ -254,7 +253,7 @@ enter (WInput *cmdline)
 	}
 	new_input (cmdline);
 	shell_execute (command, 0);
-	g_free (command);
+	mhl_mem_free (command);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 	if (quit & SUBSHELL_EXIT) {
@@ -316,6 +315,6 @@ command_insert (WInput * in, const char *text, int insert_extra_space)
 
     quoted_text = name_quote (text, 1);
     stuff (in, quoted_text, insert_extra_space);
-    g_free (quoted_text);
+    mhl_mem_free (quoted_text);
 }
 

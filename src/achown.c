@@ -22,10 +22,11 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include <mhl/memory.h>
 
 #include "global.h"
 #include "tty.h"
@@ -596,7 +597,7 @@ init_chown_advanced (void)
 static void
 chown_advanced_done (void)
 {
-    g_free (sf_stat);
+    mhl_mem_free (sf_stat);
     if (need_update)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();

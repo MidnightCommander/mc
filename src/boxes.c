@@ -30,6 +30,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -234,11 +235,11 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     	    panel->user_status_format[i] = mhl_str_dup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (!profile_has_section (section, profile_name)) {
-            g_free (section);
+            mhl_mem_free (section);
             section = mhl_str_dup (p);
         }
         panel_load_setup (panel, section);
-        g_free (section);
+        mhl_mem_free (section);
     }
 
     current_mode = panel->list_type;
@@ -250,10 +251,10 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
     result = -1;
     
     if (section) {
-        g_free (panel->user_format);
+        mhl_mem_free (panel->user_format);
 	for (i = 0; i < LIST_TYPES; i++)
-	   g_free (panel->user_status_format [i]);
-        g_free (panel);
+	   mhl_mem_free (panel->user_status_format [i]);
+        mhl_mem_free (panel);
     }
     
     if (dd->ret_value != B_CANCEL){
@@ -783,19 +784,19 @@ configure_vfs (void)
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
         vfs_timeout = atoi (ret_timeout);
-        g_free (ret_timeout);
+        mhl_mem_free (ret_timeout);
         if (vfs_timeout < 0 || vfs_timeout > 10000)
             vfs_timeout = 10;
 #if defined(USE_NETCODE)
-	g_free (ftpfs_anonymous_passwd);
+	mhl_mem_free (ftpfs_anonymous_passwd);
 	ftpfs_anonymous_passwd = ret_passwd;
-	g_free (ftpfs_proxy_host);
+	mhl_mem_free (ftpfs_proxy_host);
 	ftpfs_proxy_host = ret_ftp_proxy;
 	ftpfs_directory_timeout = atoi(ret_directory_timeout);
 	use_netrc = ret_use_netrc;
 	ftpfs_use_passive_connections = ret_ftpfs_use_passive_connections;
 	ftpfs_use_passive_connections_over_proxy = ret_ftpfs_use_passive_connections_over_proxy;
-	g_free (ret_directory_timeout);
+	mhl_mem_free (ret_directory_timeout);
 #endif
     }
 }
@@ -906,7 +907,7 @@ jobs_fill_listbox (void)
 
 	s = g_strconcat (state_str [tl->state], " ", tl->info, (char *) NULL);
 	listbox_add_item (bg_list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
-	g_free (s);
+	mhl_mem_free (s);
 	tl = tl->next;
     }
 }
@@ -1084,7 +1085,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors, NULL,
 			   "[Smb Authinfo]", title, DLG_CENTER | DLG_REVERSE);
 
-    g_free (title);
+    mhl_mem_free (title);
 
     in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name", INPUT_COMPLETE_DEFAULT);
     add_widget (auth_dlg, in_user);

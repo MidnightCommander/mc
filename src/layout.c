@@ -41,6 +41,7 @@
 #endif
 #include <unistd.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -1052,13 +1053,13 @@ void swap_panels ()
 	
 	if (panels [0].type == view_listing) {
             if (!strcmp (panel1->panel_name, get_nth_panel_name (0))) {
-                g_free (panel1->panel_name);
+                mhl_mem_free (panel1->panel_name);
                 panel1->panel_name = mhl_str_dup (get_nth_panel_name (1));
             }
         }
         if (panels [1].type == view_listing) {
             if (!strcmp (panel2->panel_name, get_nth_panel_name (1))) {
-                g_free (panel2->panel_name);
+                mhl_mem_free (panel2->panel_name);
                 panel2->panel_name = mhl_str_dup (get_nth_panel_name (0));
             }
         }

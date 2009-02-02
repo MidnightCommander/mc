@@ -35,6 +35,7 @@
 #include <sys/types.h>
 
 #include <mhl/types.h>
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -189,7 +190,7 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (b->text);
+	mhl_mem_free (b->text);
 	return MSG_HANDLED;
 
     default:
@@ -282,7 +283,7 @@ button_get_text (WButton *b)
 void
 button_set_text (WButton *b, const char *text)
 {
-   g_free (b->text);
+    mhl_mem_free (b->text);
     b->text = mhl_str_dup (text);
     b->widget.cols = button_len (text, b->flags);
     button_scan_hotkey(b);
@@ -475,7 +476,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (c->text);
+	mhl_mem_free (c->text);
 	return MSG_HANDLED;
 
     default:
@@ -587,7 +588,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 
     case WIDGET_DESTROY:
-	g_free (l->text);
+	mhl_mem_free (l->text);
 	return MSG_HANDLED;
 
     default:
@@ -603,7 +604,7 @@ label_set_text (WLabel *label, const char *text)
     if (label->text && text && !strcmp (label->text, text))
         return; /* Flickering is not nice */
 
-    g_free (label->text);
+    mhl_mem_free (label->text);
 
     if (text){
 	label->text = mhl_str_dup (text);
@@ -879,7 +880,7 @@ history_get (const char *input_name)
 
 	hist = list_append_unique (hist, mhl_str_dup (this_entry));
     }
-    g_free (profile);
+    mhl_mem_free (profile);
 
     /* return pointer to the last entry in the list */
     hist = g_list_last (hist);
@@ -912,7 +913,7 @@ history_put (const char *input_name, GList *h)
 
     /* Make sure the history is only readable by the user */
     if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT) {
-	g_free (profile);
+	mhl_mem_free (profile);
 	return;
     }
 
@@ -941,7 +942,7 @@ history_put (const char *input_name, GList *h)
 	}
     }
 
-    g_free (profile);
+    mhl_mem_free (profile);
 }
 
 /* }}} history saving and loading */
@@ -1052,7 +1053,7 @@ static void do_show_hist (WInput * in)
     r = show_hist (in->history, in->widget.x, in->widget.y);
     if (r) {
 	assign_text (in, r);
-	g_free (r);
+	mhl_mem_free (r);
     }
 }
 
@@ -1073,13 +1074,13 @@ input_destroy (WInput *in)
 	    history_put (in->history_name, in->history);
 
 	in->history = g_list_first (in->history);
-	g_list_foreach (in->history, (GFunc) g_free, NULL);
+	g_list_foreach (in->history, (GFunc) mhl_mem_free, NULL);
 	g_list_free (in->history);
     }
 
-    g_free (in->buffer);
+    mhl_mem_free (in->buffer);
     free_completions (in);
-    g_free (in->history_name);
+    mhl_mem_free (in->history_name);
 }
 
 void
@@ -1300,7 +1301,7 @@ copy_region (WInput *in, int x_first, int x_last)
     if (last == first)
 	return;
     
-    g_free (kill_buffer);
+    mhl_mem_free (kill_buffer);
 
     kill_buffer = g_strndup(in->buffer+first,last-first);
 }
@@ -1381,7 +1382,7 @@ yank (WInput *in)
 static void
 kill_line (WInput *in)
 {
-    g_free (kill_buffer);
+    mhl_mem_free (kill_buffer);
     kill_buffer = mhl_str_dup (&in->buffer [in->point]);
     in->buffer [in->point] = 0;
 }
@@ -1390,7 +1391,7 @@ void
 assign_text (WInput *in, const char *text)
 {
     free_completions (in);
-    g_free (in->buffer);
+    mhl_mem_free (in->buffer);
     in->buffer = mhl_str_dup (text);	/* was in->buffer->text */
     in->current_max_len = strlen (in->buffer) + 1;
     in->point = strlen (in->buffer);
@@ -1856,8 +1857,8 @@ listbox_remove_list (WListbox *l)
     
     while (l->count--) {
 	q = p->next;
-	g_free (p->text);
-	g_free (p);
+	mhl_mem_free (p->text);
+	mhl_mem_free (p);
 	p = q;
     }
     l->pos = l->count = 0;
@@ -1898,8 +1899,8 @@ listbox_remove_current (WListbox *l, int force)
 	l->list = l->top = l->current = 0;
     }
 
-    g_free (p->text);
-    g_free (p);
+    mhl_mem_free (p->text);
+    mhl_mem_free (p);
 }
 
 /* Makes *e the selected entry (sets current and pos) */
@@ -2021,8 +2022,8 @@ listbox_destroy (WListbox *l)
 
     for (i = 0; i < l->count; i++){
 	n = p->next;
-	g_free (p->text);
-	g_free (p);
+	mhl_mem_free (p->text);
+	mhl_mem_free (p);
 	p = n;
     }
 }
@@ -2337,7 +2338,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 
     case WIDGET_DESTROY:
 	for (i = 0; i < 10; i++)
-	    g_free (bb->labels[i].text);
+	    mhl_mem_free (bb->labels[i].text);
 	return MSG_HANDLED;
 
     default:
@@ -2384,7 +2385,7 @@ buttonbar_new (int visible)
 static void
 set_label_text (WButtonBar * bb, int index, const char *text)
 {
-    g_free (bb->labels[index - 1].text);
+    mhl_mem_free (bb->labels[index - 1].text);
 
     bb->labels[index - 1].text = mhl_str_dup (text);
 }
@@ -2483,7 +2484,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (g->title);
+	mhl_mem_free (g->title);
 	return MSG_HANDLED;
 
     default:
@@ -2506,7 +2507,7 @@ groupbox_new (int x, int y, int width, int height, const char *title)
 	char *t;
 	t = g_strstrip (mhl_str_dup (title));
 	g->title = g_strconcat (" ", t, " ", (char *) NULL);
-	g_free (t);
+	mhl_mem_free (t);
     }
 
     return g;

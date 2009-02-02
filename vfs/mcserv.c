@@ -124,10 +124,6 @@
 #  define INADDR_NONE (0xffffffffU)
 #endif
 
-/* replacement for g_free() from glib */
-#undef g_free
-#define g_free(x) do {if (x) free (x);} while (0)
-
 /* We don't care about SIGPIPE */
 int got_sigpipe = 0;
 
@@ -214,7 +210,7 @@ do_open (void)
 
     handle = open (arg, flags, mode);
     send_status (handle, errno);
-    g_free (arg);
+    mhl_mem_free (arg);
 }
 
 static void
@@ -241,7 +237,7 @@ do_read (void)
     send_status (n, 0);
     rpc_send (msock, RPC_BLOCK, n, data, RPC_END);
 
-    g_free (data);
+    mhl_mem_free (data);
 }
 
 static void
@@ -381,7 +377,7 @@ do_lstat (void)
     send_status (n, errno);
     if (n >= 0)
 	send_stat_info (&st);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -413,7 +409,7 @@ do_stat (void)
     send_status (n, errno);
     if (n >= 0)
 	send_stat_info (&st);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 /* }}} */
@@ -433,7 +429,7 @@ close_handle (int handle)
 	mcfs_DIR.used--;
     if (mcfs_DIR.dirs[handle])
 	closedir (mcfs_DIR.dirs[handle]);
-    g_free (mcfs_DIR.names[handle]);
+    mhl_mem_free (mcfs_DIR.names[handle]);
     mcfs_DIR.dirs[handle] = 0;
     mcfs_DIR.names[handle] = 0;
 }
@@ -449,7 +445,7 @@ do_opendir (void)
 
     if (mcfs_DIR.used == OPENDIR_HANDLES) {
 	send_status (-1, ENFILE);	/* Error */
-	g_free (arg);
+	mhl_mem_free (arg);
 	return;
     }
 
@@ -463,7 +459,7 @@ do_opendir (void)
 
     if (handle == -1) {
 	send_status (-1, EMFILE);
-	g_free (arg);
+	mhl_mem_free (arg);
 	if (!inetd_started)
 	    fprintf (stderr,
 		     "OOPS! you have found a bug in mc - do_opendir()!\n");
@@ -483,7 +479,7 @@ do_opendir (void)
 
     } else {
 	send_status (-1, errno);
-	g_free (arg);
+	mhl_mem_free (arg);
     }
 }
 
@@ -518,7 +514,7 @@ do_readdir (void)
 	snprintf (fname, fname_len, "%s/%s", mcfs_DIR.names[handle],
 		  dirent->d_name);
 	n = lstat (fname, &st);
-	g_free (fname);
+	mhl_mem_free (fname);
 	send_status (n, errno);
 	if (n >= 0)
 	    send_stat_info (&st);
@@ -549,7 +545,7 @@ do_chdir (void)
 
     status = chdir (file);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -562,7 +558,7 @@ do_rmdir (void)
 
     status = rmdir (file);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -575,7 +571,7 @@ do_mkdir (void)
 
     status = mkdir (file, mode);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -589,7 +585,7 @@ do_mknod (void)
 
     status = mknod (file, mode, dev);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -606,7 +602,7 @@ do_readlink (void)
 	buffer[n] = 0;
 	rpc_send (msock, RPC_STRING, buffer, RPC_END);
     }
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -618,7 +614,7 @@ do_unlink (void)
     rpc_get (msock, RPC_STRING, &file, RPC_END);
     status = unlink (file);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -630,8 +626,8 @@ do_rename (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = rename (f1, f2);
     send_status (status, errno);
-    g_free (f1);
-    g_free (f2);
+    mhl_mem_free (f1);
+    mhl_mem_free (f2);
 }
 
 static void
@@ -643,8 +639,8 @@ do_symlink (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = symlink (f1, f2);
     send_status (status, errno);
-    g_free (f1);
-    g_free (f2);
+    mhl_mem_free (f1);
+    mhl_mem_free (f2);
 }
 
 static void
@@ -656,8 +652,8 @@ do_link (void)
     rpc_get (msock, RPC_STRING, &f1, RPC_STRING, &f2, RPC_END);
     status = link (f1, f2);
     send_status (status, errno);
-    g_free (f1);
-    g_free (f2);
+    mhl_mem_free (f1);
+    mhl_mem_free (f2);
 }
 
 
@@ -686,7 +682,7 @@ do_chmod (void)
     rpc_get (msock, RPC_STRING, &file, RPC_INT, &mode, RPC_END);
     status = chmod (file, mode);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -699,7 +695,7 @@ do_chown (void)
 	     RPC_END);
     status = chown (file, owner, group);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void
@@ -720,13 +716,13 @@ do_utime (void)
     if (verbose)
 	printf ("Got a = %s, m = %s, comp a = %ld, m = %ld\n", as, ms,
 		atime, mtime);
-    g_free (as);
-    g_free (ms);
+    mhl_mem_free (as);
+    mhl_mem_free (ms);
     times.actime = (time_t) atime;
     times.modtime = (time_t) mtime;
     status = utime (file, &times);
     send_status (status, errno);
-    g_free (file);
+    mhl_mem_free (file);
 }
 
 static void

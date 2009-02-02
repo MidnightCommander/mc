@@ -44,6 +44,7 @@
 #  include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -672,8 +673,8 @@ exit_subshell (void)
 			 tcsh_fifo, unix_error_string (errno));
 	}
 
-	g_free (subshell_prompt);
-	g_free (pty_buffer);
+	mhl_mem_free (subshell_prompt);
+	mhl_mem_free (pty_buffer);
 	subshell_prompt = NULL;
 	pty_buffer = NULL;
     }
@@ -764,7 +765,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 	char *temp = subshell_name_quote (directory);
 	if (temp) {
 	    write_all (subshell_pty, temp, strlen (temp));
-	    g_free (temp);
+	    mhl_mem_free (temp);
 	} else {
 	    /* Should not happen unless the directory name is so long
 	       that we don't have memory to quote it.  */
@@ -800,7 +801,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 	if (bPathNotEq && strcmp (current_panel->cwd, ".")) {
 	    char *cwd = strip_password (mhl_str_dup (current_panel->cwd), 1);
 	    fprintf (stderr, _("Warning: Cannot change to %s.\n"), cwd);
-	    g_free (cwd);
+	    mhl_mem_free (cwd);
 	}
     }
 

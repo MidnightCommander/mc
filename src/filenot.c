@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <string.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -64,12 +65,12 @@ my_mkdir_rec (char *s, mode_t mode)
 
     p = mhl_str_dir_plus_file (s, "..");
     q = vfs_canon (p);
-    g_free (p);
+    mhl_mem_free (p);
 
     if (!(result = my_mkdir_rec (q, mode)))
 	result = mc_mkdir (s, mode);
 
-    g_free (q);
+    mhl_mem_free (q);
     return result;
 }
 
@@ -84,7 +85,7 @@ my_mkdir (const char *s, mode_t mode)
 	char *p = vfs_canon (s);
 
 	result = my_mkdir_rec (p, mode);
-	g_free (p);
+	mhl_mem_free (p);
     }
     if (result == 0) {
 	my_s = get_absolute_name (s);
@@ -93,7 +94,7 @@ my_mkdir (const char *s, mode_t mode)
 	tree_add_entry (tree, my_s);
 #endif
 
-	g_free (my_s);
+	mhl_mem_free (my_s);
     }
     return result;
 }
@@ -116,7 +117,7 @@ my_rmdir (const char *s)
 	tree_remove_entry (tree, my_s);
 #endif
 
-	g_free (my_s);
+	mhl_mem_free (my_s);
     }
     return result;
 }

@@ -22,6 +22,7 @@
 */
 
 #include <config.h>
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -32,6 +33,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -217,7 +219,7 @@ edit_get_filter (const char *filename)
     l = strlen (quoted_name);
     p = g_malloc (strlen (all_filters[i].read) + l + 2);
     sprintf (p, all_filters[i].read, quoted_name);
-    g_free (quoted_name);
+    mhl_mem_free (quoted_name);
     return p;
 }
 
@@ -233,7 +235,7 @@ edit_get_write_filter (const char *write_name, const char *filename)
     l = strlen (writename);
     p = g_malloc (strlen (all_filters[i].write) + l + 2);
     sprintf (p, all_filters[i].write, writename);
-    g_free (writename);
+    mhl_mem_free (writename);
     return p;
 }
 
@@ -277,7 +279,7 @@ edit_insert_file (WEdit *edit, const char *filename)
 		g_string_sprintf (errmsg, _(" Error reading from pipe: %s "), p);
 		edit_error_dialog (_("Error"), errmsg->str);
 		g_string_free (errmsg, TRUE);
-		g_free (p);
+		mhl_mem_free (p);
 		return 0;
 	    }
 	} else {
@@ -285,10 +287,10 @@ edit_insert_file (WEdit *edit, const char *filename)
 	    g_string_sprintf (errmsg, _(" Cannot open pipe for reading: %s "), p);
 	    edit_error_dialog (_("Error"), errmsg->str);
 	    g_string_free (errmsg, TRUE);
-	    g_free (p);
+	    mhl_mem_free (p);
 	    return 0;
 	}
-	g_free (p);
+	mhl_mem_free (p);
     } else {
 	int i, file, blocklen;
 	long current = edit->curs1;
@@ -301,7 +303,7 @@ edit_insert_file (WEdit *edit, const char *filename)
 		edit_insert (edit, buf[i]);
 	}
 	edit_cursor_move (edit, current - edit->curs1);
-	g_free (buf);
+	mhl_mem_free (buf);
 	mc_close (file);
 	if (blocklen)
 	    return 0;
@@ -448,7 +450,7 @@ edit_load_position (WEdit *edit)
 
     filename = vfs_canon (edit->filename);
     load_file_position (filename, &line, &column);
-    g_free (filename);
+    mhl_mem_free (filename);
 
     edit_move_to_line (edit, line - 1);
     edit->prev_col = column;
@@ -467,7 +469,7 @@ edit_save_position (WEdit *edit)
 
     filename = vfs_canon (edit->filename);
     save_file_position (filename, edit->curs_line + 1, edit->curs_col);
-    g_free (filename);
+    mhl_mem_free (filename);
 }
 
 /* Clean the WEdit stricture except the widget part */
@@ -541,7 +543,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
     if (edit_load_file (edit)) {
 	/* edit_load_file already gives an error message */
 	if (to_free)
-	    g_free (edit);
+	    mhl_mem_free (edit);
 	return 0;
     }
     edit->loading_done = 1;
@@ -592,13 +594,13 @@ edit_clean (WEdit *edit)
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
     for (; j <= MAXBUFF; j++) {
-	g_free (edit->buffers1[j]);
-	g_free (edit->buffers2[j]);
+	mhl_mem_free (edit->buffers1[j]);
+	mhl_mem_free (edit->buffers2[j]);
     }
 
-    g_free (edit->undo_stack);
-    g_free (edit->filename);
-    g_free (edit->dir);
+    mhl_mem_free (edit->undo_stack);
+    mhl_mem_free (edit->filename);
+    mhl_mem_free (edit->dir);
 
     edit_purge_widget (edit);
 
@@ -638,12 +640,12 @@ edit_reload (WEdit *edit, const char *filename)
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
     if (!edit_init (e, lines, columns, filename, 0)) {
-	g_free (e);
+	mhl_mem_free (e);
 	return 0;
     }
     edit_clean (edit);
     memcpy (edit, e, sizeof (WEdit));
-    g_free (e);
+    mhl_mem_free (e);
     return 1;
 }
 
@@ -929,7 +931,7 @@ int edit_delete (WEdit * edit)
     p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 
     if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-	g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
+	mhl_mem_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
 	edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = NULL;
     }
     edit->last_byte--;
@@ -966,7 +968,7 @@ edit_backspace (WEdit * edit)
 
     p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
     if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-	g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+	mhl_mem_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
 	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
     }
     edit->last_byte--;
@@ -1051,7 +1053,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
 		g_malloc (EDIT_BUF_SIZE);
     } else {
-	g_free (p);
+	mhl_mem_free (p);
     }
 
     s = edit->curs1 & M_EDIT_BUF_SIZE;
@@ -1089,7 +1091,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
 		    g_malloc (EDIT_BUF_SIZE);
 	} else {
-	    g_free (p);
+	    mhl_mem_free (p);
 	}
     }
     return edit_get_byte (edit, edit->curs1);
@@ -1125,7 +1127,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 	    edit->curs2++;
 	    c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
 	    if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-		g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+		mhl_mem_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
 		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
 	    }
 	    edit->curs1--;
@@ -1149,7 +1151,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 	    edit->curs1++;
 	    c = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 	    if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-		g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
+		mhl_mem_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
 		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = 0;
 	    }
 	    edit->curs2--;
@@ -2699,5 +2701,5 @@ user_menu (WEdit * edit)
     edit->force |= REDRAW_COMPLETELY;
 
 cleanup:
-    g_free (block_file);
+    mhl_mem_free (block_file);
 }

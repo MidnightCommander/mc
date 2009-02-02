@@ -118,7 +118,7 @@ static GSList *auth_list;
 static inline char *
 free_after (char *result, char *string_to_free)
 {
-	g_free(string_to_free);
+	mhl_mem_free(string_to_free);
 	return result;
 }
 
@@ -126,10 +126,10 @@ free_after (char *result, char *string_to_free)
 static void 
 smbfs_auth_free (struct smb_authinfo const *a)
 {
-    g_free (a->host);
-    g_free (a->share);
-    g_free (a->domain);
-    g_free (a->user);
+    mhl_mem_free (a->host);
+    mhl_mem_free (a->share);
+    mhl_mem_free (a->domain);
+    mhl_mem_free (a->user);
     wipe_password (a->password);
 }
 
@@ -203,8 +203,8 @@ smbfs_auth_remove (const char *host, const char *share)
     list = g_slist_find_custom (auth_list, 
                                 &data, 
                                 smbfs_auth_cmp_host_and_share);
-    g_free (data.host);
-    g_free (data.share);
+    mhl_mem_free (data.host);
+    mhl_mem_free (data.share);
     if (!list)
         return;
     auth = list->data;
@@ -225,9 +225,9 @@ smbfs_bucket_set_authinfo (smbfs_connection *bucket,
     GSList *list;
 
     if (domain && user && pass) {
-        g_free (bucket->domain);
-        g_free (bucket->user);
-        g_free (bucket->password);
+        mhl_mem_free (bucket->domain);
+        mhl_mem_free (bucket->user);
+        mhl_mem_free (bucket->password);
         bucket->domain = mhl_str_dup (domain);
         bucket->user = mhl_str_dup (user);
         bucket->password = mhl_str_dup (pass);
@@ -262,9 +262,9 @@ smbfs_bucket_set_authinfo (smbfs_connection *bucket,
 				 (domain ? domain : lp_workgroup ()),
 				 user);
     if (auth) {
-        g_free (bucket->domain);
-        g_free (bucket->user);
-        g_free (bucket->password);
+        mhl_mem_free (bucket->domain);
+        mhl_mem_free (bucket->user);
+        mhl_mem_free (bucket->password);
         bucket->domain = mhl_str_dup (auth->domain);
         bucket->user = mhl_str_dup (auth->user);
         bucket->password = mhl_str_dup (auth->password);
@@ -363,7 +363,7 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 		"/", smbfs_connections[i].service,
 		NULL);
 	    (*func)(path);
-	    g_free (path);
+	    mhl_mem_free (path);
 	}
     }
 }
@@ -612,10 +612,10 @@ smbfs_reconnect(smbfs_connection *conn, int *retries)
    	if (!(conn->cli = smbfs_do_connect(host, conn->service))) {
 		message (D_ERROR, MSG_ERROR,
 			_(" reconnect to %s failed\n "), conn->host);
-		g_free(host);
+		mhl_mem_free(host);
 		return False;
 	}
-	g_free(host);
+	mhl_mem_free(host);
 	if (++(*retries) == 2)
 		return False;
 	return True;
@@ -783,12 +783,12 @@ smbfs_loaddir (opendir_info *smbfs_info)
 	 smbfs_loaddir_helper, NULL) < 0) {
 	/* cli_list returns -1 if directory empty or cannot read socket */
 	my_errno = cli_error (smbfs_info->conn->cli, NULL, &err, NULL);
-	g_free (my_dirname);
+	mhl_mem_free (my_dirname);
 	return 0;
     }
     if (*(my_dirname) == 0)
 	smbfs_info->dirname = smbfs_info->conn->service;
-    g_free (my_dirname);
+    mhl_mem_free (my_dirname);
 /*	do_dskattr();	*/
 
   done:
@@ -805,8 +805,8 @@ smbfs_free_dir (dir_entry *de)
     if (!de) return;
 
     smbfs_free_dir (de->next);
-    g_free (de->text);
-    g_free (de);
+    mhl_mem_free (de->text);
+    mhl_mem_free (de);
 }
 #endif
 
@@ -855,10 +855,10 @@ smbfs_closedir (void *info)
 /*    for (p = smbfs_info->entries; p;){
 		q = p;
 		p = p->next;
-		g_free (q->text);
-		g_free (q);
+		mhl_mem_free (q->text);
+		mhl_mem_free (q);
     }
-    g_free (info);	*/
+    mhl_mem_free (info);	*/
     return 0;
 }
 
@@ -1043,12 +1043,12 @@ smbfs_get_master_browser(char **host)
 static void 
 smbfs_free_bucket (smbfs_connection *bucket)
 {
-	g_free (bucket->host);
-	g_free (bucket->service);
-	g_free (bucket->domain);
-	g_free (bucket->user);
+	mhl_mem_free (bucket->host);
+	mhl_mem_free (bucket->service);
+	mhl_mem_free (bucket->domain);
+	mhl_mem_free (bucket->user);
 	wipe_password (bucket->password);
-	g_free (bucket->home);
+	mhl_mem_free (bucket->home);
 	memset (bucket, 0, sizeof (smbfs_connection));
 }
 
@@ -1154,7 +1154,7 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
     if (!(*host)) {		/* if blank host name, browse for servers */
 	if (!smbfs_get_master_browser (&host))	/* set host to ip of master browser */
 	    return 0;		/* could not find master browser? */
-	g_free (host);
+	mhl_mem_free (host);
 	bucket->host = mhl_str_dup ("");	/* blank host means master browser */
     } else
 	bucket->host = mhl_str_dup (host);
@@ -1201,11 +1201,11 @@ smbfs_get_path (smbfs_connection ** sc, const char *path)
 	 smbfs_get_host_and_username (&path, &host, &user, &port, &pass)))
 	if ((*sc =
 	     smbfs_open_link (host, remote_path, user, &port, pass)) == NULL) {
-	    g_free (remote_path);
+	    mhl_mem_free (remote_path);
 	    remote_path = NULL;
 	}
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
     if (pass)
 	wipe_password (pass);
 
@@ -1218,7 +1218,7 @@ smbfs_get_path (smbfs_connection ** sc, const char *path)
 	if (f || !strncmp (remote_path, "/~/", 3)) {
 	    char *s;
 	    s = mhl_str_dir_plus_file ((*sc)->home, remote_path + 3 - f);
-	    g_free (remote_path);
+	    mhl_mem_free (remote_path);
 	    return s;
 	}
     }
@@ -1308,7 +1308,7 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
 	smbfs_connection *sc;
 	char *p;
 	p = smbfs_get_path (&sc, path);
-	g_free (p);
+	mhl_mem_free (p);
 	if (p) {
 	    memset (buf, 0, sizeof (*buf));
 	    /*      show this as dir        */
@@ -1372,16 +1372,16 @@ smbfs_get_remote_stat (smbfs_connection * sc, const char *path, struct stat *buf
     if (cli_list
 	(sc->cli, mypath, attribute, smbfs_loaddir_helper, single_entry) < 1) {
 	my_errno = ENOENT;
-	g_free (mypath);
+	mhl_mem_free (mypath);
 	return -1;		/* cli_list returns number of files */
     }
 
     memcpy (buf, &single_entry->my_stat, sizeof (struct stat));
 
 /* don't free here, use for smbfs_fstat() */
-/*	g_free(single_entry->text);
-	g_free(single_entry);	*/
-    g_free (mypath);
+/*	mhl_mem_free(single_entry->text);
+	mhl_mem_free(single_entry);	*/
+    mhl_mem_free (mypath);
     return 0;
 }
 
@@ -1439,11 +1439,11 @@ smbfs_get_stat_info (smbfs_connection * sc, const char *path, struct stat *buf)
 	    memset (buf, 0, sizeof (struct stat));
 	    buf->st_mode = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH) & myumask;
 	    memcpy (&single_entry->my_stat, buf, sizeof (struct stat));
-	    g_free (mdp);
+	    mhl_mem_free (mdp);
 	    DEBUG (1, ("	PARENT:found in %s\n", current_info->dirname));
 	    return 0;
 	}
-	g_free (mdp);
+	mhl_mem_free (mdp);
     }
     /* now try to identify as CURRENT dir? */
     {
@@ -1501,7 +1501,7 @@ smbfs_chdir (struct vfs_class *me, const char *path)
     DEBUG (3, ("smbfs_chdir(path:%s)\n", path));
     if (!(remote_dir = smbfs_get_path (&sc, path)))
 	return -1;
-    g_free (remote_dir);
+    mhl_mem_free (remote_dir);
 
     return 0;
 }
@@ -1520,7 +1520,7 @@ smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 	DEBUG(6, ("smbfs_loaddir_by_name(%s)\n", mypath));
 	smbfs_chdir(me, mypath);
 	info = smbfs_opendir (me, mypath);
-	g_free(mypath);
+	mhl_mem_free(mypath);
 	if (!info)
 		return -1;
 	smbfs_readdir(info);
@@ -1598,7 +1598,7 @@ smbfs_stat (struct vfs_class * me, const char *path, struct stat *buf)
 	    DEBUG (1, ("smbfs_stat: showing server as directory\n"));
 	    memset (buf, 0, sizeof (struct stat));
 	    buf->st_mode = (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH) & myumask;
-	    g_free (service);
+	    mhl_mem_free (service);
 	    return 0;
 	}
     }
@@ -1619,12 +1619,12 @@ smbfs_stat (struct vfs_class * me, const char *path, struct stat *buf)
     if (strncmp (p, pp, strlen (p)) != 0) {
 	DEBUG (6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
 	if (smbfs_loaddir_by_name (me, path) < 0) {
-	    g_free (service);
+	    mhl_mem_free (service);
 	    return -1;
 	}
 	DEBUG (6, ("loaded dir: '%s'\n", current_info->dirname));
     }
-    g_free (service);
+    mhl_mem_free (service);
     /* stat dirs & files under shares now */
     return smbfs_get_stat_info (sc, path, buf);
 }
@@ -1686,17 +1686,17 @@ smbfs_mkdir (struct vfs_class * me, const char *path, mode_t mode)
     DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     cpath = smbfs_convert_path (path, FALSE);
 
     if (!cli_mkdir (sc->cli, cpath)) {
 	my_errno = cli_error (sc->cli, NULL, &err, NULL);
 	message (D_ERROR, MSG_ERROR, _(" Error %s creating directory %s "),
 		    cli_errstr (sc->cli), CNV_LANG (cpath));
-	g_free (cpath);
+	mhl_mem_free (cpath);
 	return -1;
     }
-    g_free (cpath);
+    mhl_mem_free (cpath);
     return 0;
 }
 
@@ -1712,18 +1712,18 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 	DEBUG(3, ("smbfs_rmdir(path:%s)\n", path));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
-	g_free (remote_file);
+	mhl_mem_free (remote_file);
 	cpath = smbfs_convert_path (path, FALSE);
 
 	if (!cli_rmdir(sc->cli, cpath)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
 		message (D_ERROR, MSG_ERROR, _(" Error %s removing directory %s "), 
 			cli_errstr(sc->cli), CNV_LANG(cpath));
-		g_free (cpath);
+		mhl_mem_free (cpath);
 		return -1;
 	} 
 
-	g_free (cpath);
+	mhl_mem_free (cpath);
 	return 0;
 }
 
@@ -1763,7 +1763,7 @@ smbfs_forget (const char *path)
 	path += 2;
 
     if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))) {
-	g_free (p);
+	mhl_mem_free (p);
 	for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 	    if (smbfs_connections[i].cli
 		&& (strcmp (host, smbfs_connections[i].host) == 0)
@@ -1779,8 +1779,8 @@ smbfs_forget (const char *path)
 	    }
 	}
     }
-    g_free (host);
-    g_free (user);
+    mhl_mem_free (host);
+    mhl_mem_free (user);
 }
 
 static int
@@ -1877,9 +1877,9 @@ smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 
     ret = smbfs_open_readwrite (remote_handle, remote_file, flags, mode);
 
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     if (!ret)
-	g_free (remote_handle);
+	mhl_mem_free (remote_handle);
 
     return ret;
 }
@@ -1900,10 +1900,10 @@ smbfs_unlink (struct vfs_class *me, const char *path)
     if (!cli_unlink(sc->cli, remote_file)) {
 	message (D_ERROR, MSG_ERROR, _(" %s removing remote file %s "), 
 			cli_errstr(sc->cli), CNV_LANG(remote_file));
-	g_free (remote_file);
+	mhl_mem_free (remote_file);
 	return -1;
     }   
-    g_free (remote_file);
+    mhl_mem_free (remote_file);
     return 0;
 }
 
@@ -1920,7 +1920,7 @@ smbfs_rename (struct vfs_class *me, const char *a, const char *b)
 	return -1;
  
     if ((rb = smbfs_get_path (&sc, b)) == 0) {
-	g_free (ra);
+	mhl_mem_free (ra);
 	return -1;
     }
 
@@ -1929,8 +1929,8 @@ smbfs_rename (struct vfs_class *me, const char *a, const char *b)
 
     retval = cli_rename(sc->cli, ra, rb);
 
-    g_free (ra);
-    g_free (rb);
+    mhl_mem_free (ra);
+    mhl_mem_free (rb);
 
     if (!retval) {
 	message (D_ERROR, MSG_ERROR, _(" %s renaming files\n"), 

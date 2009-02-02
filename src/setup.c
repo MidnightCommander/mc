@@ -23,6 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -293,7 +294,7 @@ save_layout (void)
 	save_string ("Layout", layout [i].opt_name, buffer, profile);
     }
 
-    g_free (profile);
+    mhl_mem_free (profile);
 }
 
 void
@@ -313,7 +314,7 @@ save_configure (void)
 	set_config_string (profile, str_options[i].opt_name,
 	    *str_options[i].opt_addr);
 
-    g_free (profile);
+    mhl_mem_free (profile);
 }
 
 static void
@@ -380,7 +381,7 @@ save_setup (void)
     		 get_codepage_id( display_codepage ), profile_name );
 #endif /* HAVE_CHARSET */
 
-    g_free (profile);
+    mhl_mem_free (profile);
     saving_setup = 0;
 }
 
@@ -413,12 +414,12 @@ panel_load_setup (WPanel *panel, const char *section)
 	}
 
     /* User formats */
-    g_free (panel->user_format);
+    mhl_mem_free (panel->user_format);
     panel->user_format = mhl_str_dup (get_profile_string (section, "user_format",
 						     DEFAULT_USER_FORMAT,
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
-	g_free (panel->user_status_format [i]);
+	mhl_mem_free (panel->user_status_format [i]);
 	snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
 	    mhl_str_dup (get_profile_string (section, buffer,
@@ -471,7 +472,7 @@ do_load_string (const char *s, const char *ss, const char *def)
     load_string (s, ss, def, buffer, BUF_SMALL);
 
     p = mhl_str_dup (buffer);
-    g_free (buffer);
+    mhl_mem_free (buffer);
     return p;
 }
 #endif /* !USE_NETCODE */
@@ -489,10 +490,10 @@ setup_init (void)
     if (!exist_file (profile)){
 	inifile = mhl_str_dir_plus_file (mc_home, "mc.ini");
 	if (exist_file (inifile)){
-	    g_free (profile);
+	    mhl_mem_free (profile);
 	    profile = inifile;
 	} else
-	    g_free (inifile);
+	    mhl_mem_free (inifile);
     }
 
     profile_name = profile;
@@ -542,7 +543,7 @@ load_setup (void)
 	if (vfs_file_is_local (buffer))
 	    other_dir = buffer;
 	else
-	    g_free (buffer);
+	    mhl_mem_free (buffer);
     }
 
     boot_current_is_left =
@@ -603,8 +604,8 @@ load_anon_passwd ()
 
 void done_setup (void)
 {
-    g_free (profile_name);
-    g_free (global_profile_name);
+    mhl_mem_free (profile_name);
+    mhl_mem_free (global_profile_name);
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
@@ -623,7 +624,7 @@ load_keys_from_section (const char *terminal, const char *profile_name)
 
     section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
     profile_keys = profile_init_iterator (section_name, profile_name);
-    g_free (section_name);
+    mhl_mem_free (section_name);
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
 
@@ -637,7 +638,7 @@ load_keys_from_section (const char *terminal, const char *profile_name)
 	if (key_code){
 	    valcopy = convert_controls (value);
 	    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-	    g_free (valcopy);
+	    mhl_mem_free (valcopy);
 	}
     }
 }

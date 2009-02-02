@@ -28,6 +28,7 @@
 #include <sys/stat.h>
 
 #include <mhl/types.h>
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -308,14 +309,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
  	find_recursively = recursively_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
-	g_free (in_start_dir);
+	mhl_mem_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
-	    g_free (temp_dir);
+	    mhl_mem_free (temp_dir);
 	    temp_dir = mhl_str_dup (current_panel->cwd);
 	}
 	in_start_dir = tree_box (temp_dir);
 	if (in_start_dir)
-	    g_free (temp_dir);
+	    mhl_mem_free (temp_dir);
 	else
 	    in_start_dir = temp_dir;
 	/* Warning: Dreadful goto */
@@ -323,7 +324,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	break;
 
     default:
-	g_free (in_contents);
+	mhl_mem_free (in_contents);
 	if (in_with->buffer[0]) {
 	    *content = mhl_str_dup (in_with->buffer);
 	    in_contents = mhl_str_dup (*content);
@@ -339,9 +340,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	*start_dir = mhl_str_dup (in_start->buffer);
 	*pattern = mhl_str_dup (in_name->buffer);
 
-	g_free (in_start_dir);
+	mhl_mem_free (in_start_dir);
 	in_start_dir = mhl_str_dup (*start_dir);
-	g_free (in_start_name);
+	mhl_mem_free (in_start_name);
 	in_start_name = mhl_str_dup (*pattern);
     }
 
@@ -370,7 +371,7 @@ pop_directory (void)
     if (dir_stack_base){
 	name = dir_stack_base->name;
 	next = dir_stack_base->prev;
-	g_free (dir_stack_base);
+	mhl_mem_free (dir_stack_base);
 	dir_stack_base = next;
 	return name;
     } else
@@ -388,7 +389,7 @@ insert_file (const char *dir, const char *file)
 
     if (old_dir){
 	if (strcmp (old_dir, dir)){
-	    g_free (old_dir);
+	    mhl_mem_free (old_dir);
 	    old_dir = mhl_str_dup (dir);
 	    dirname = add_to_list (dir, NULL);
 	}
@@ -399,7 +400,7 @@ insert_file (const char *dir, const char *file)
     
     tmp_name = g_strconcat ("    ", file, (char *) NULL);
     add_to_list (tmp_name, dirname);
-    g_free (tmp_name);
+    mhl_mem_free (tmp_name);
 }
 
 static void
@@ -521,12 +522,12 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     fname = mhl_str_dir_plus_file (directory, filename);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode)){
-	g_free (fname);
+	mhl_mem_free (fname);
 	return 0;
     }
 
     file_fd = mc_open (fname, O_RDONLY);
-    g_free (fname);
+    mhl_mem_free (fname);
 
     if (file_fd == -1)
 	return 0;
@@ -562,7 +563,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    if (found == 0){	/* Search in binary line once */
 	    	if (find_regex_flag) {
 		if (regexec (r, p, 1, 0, 0) == 0){
-		    g_free (p);
+		    mhl_mem_free (p);
 		    p = g_strdup_printf ("%d:%s", line, filename);
 		    find_add_match (h, directory, p);
 		    found = 1;
@@ -579,7 +580,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 		line++;
 		found = 0;
 	    }
-	    g_free (p);
+	    mhl_mem_free (p);
  
  	    if ((line & 0xff) == 0) {
 		FindProgressStatus res;
@@ -622,7 +623,7 @@ do_search (struct Dlg_head *h)
 	    mc_closedir (dirp);
 	    dirp = 0;
 	}
-	g_free (directory);
+	mhl_mem_free (directory);
 	directory = NULL;
         dp = 0;
 	return 1;
@@ -652,16 +653,16 @@ do_search (struct Dlg_head *h)
 		    char *temp_dir = g_strconcat (":", tmp, ":", (char *) NULL);
 
                     found = strstr (find_ignore_dirs, temp_dir) != 0;
-                    g_free (temp_dir);
+                    mhl_mem_free (temp_dir);
 		    if (found)
-			g_free (tmp);
+			mhl_mem_free (tmp);
 		    else
 			break;
 		} else
 		    break;
 	    } 
 
-	    g_free (directory);
+	    mhl_mem_free (directory);
 	    directory = tmp;
 
 	    if (verbose){
@@ -700,7 +701,7 @@ do_search (struct Dlg_head *h)
 	    push_directory (tmp_name);
 	    subdirs_left--;
 	}
-	g_free (tmp_name);
+	mhl_mem_free (tmp_name);
     }
 
     if (regexp_match (find_pattern, dp->d_name, match_file)){
@@ -737,14 +738,14 @@ init_find_vars (void)
 {
     char *dir;
     
-    g_free (old_dir);
+    mhl_mem_free (old_dir);
     old_dir = 0;
     count = 0;
     matches = 0;
 
     /* Remove all the items in the stack */
     while ((dir = pop_directory ()) != NULL)
-	g_free (dir);
+	mhl_mem_free (dir);
 }
 
 static char *
@@ -778,7 +779,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 	do_edit_at_line (fullname, line);
     else
         view_file_at_line (fullname, unparsed_view, use_internal_view, line);
-    g_free (fullname);
+    mhl_mem_free (fullname);
 }
 
 static int
@@ -978,7 +979,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
     /* Remove all the items in the stack */
     while ((dir = pop_directory ()) != NULL)
-	g_free (dir);
+	mhl_mem_free (dir);
 
     get_list_info (&file_tmp, &dir_tmp);
 
@@ -1013,18 +1014,18 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 		handle_path (list, name, &st, next_free, &link_to_dir,
 			     &stale_link);
 	    if (status == 0) {
-		g_free (name);
+		mhl_mem_free (name);
 		continue;
 	    }
 	    if (status == -1) {
-		g_free (name);
+		mhl_mem_free (name);
 		break;
 	    }
 
 	    /* don't add files more than once to the panel */
 	    if (content_pattern && next_free > 0) {
 		if (strcmp (list->list[next_free - 1].fname, name) == 0) {
-		    g_free (name);
+		    mhl_mem_free (name);
 		    continue;
 		}
 	    }
@@ -1061,7 +1062,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
     kill_gui ();
     do_search (0);		/* force do_search to release resources */
-    g_free (old_dir);
+    mhl_mem_free (old_dir);
     old_dir = 0;
 
     return return_value;
@@ -1080,8 +1081,8 @@ do_find (void)
 	dirname = filename = NULL;
 	is_start = 0;
 	v = find_file (start_dir, pattern, content, &dirname, &filename);
-	g_free (start_dir);
-	g_free (pattern);
+	mhl_mem_free (start_dir);
+	mhl_mem_free (pattern);
 	if (find_regex_flag && r)
 	    regfree (r);
 	
@@ -1096,14 +1097,14 @@ do_find (void)
 		    do_cd (filename, cd_exact);
 		select_item (current_panel);
 	    }
-	    g_free (dirname);
-	    g_free (filename);
+	    mhl_mem_free (dirname);
+	    mhl_mem_free (filename);
 	    break;
 	}
-	g_free (content);
+	mhl_mem_free (content);
 	dir_and_file_set = dirname && filename;
-	g_free (dirname);
-	g_free (filename);
+	mhl_mem_free (dirname);
+	mhl_mem_free (filename);
 	if (v == B_CANCEL)
 	    break;
 	

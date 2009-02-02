@@ -28,6 +28,7 @@
 #include <string.h>
 #include <sys/types.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -249,7 +250,7 @@ static TSecHeader *load (const char *file)
 	break;
     case OnSecHeader: {		/* Broken initialization file */
 	    TSecHeader *link = SecHeader->link;
-	    g_free (SecHeader);
+	    mhl_mem_free (SecHeader);
 	    SecHeader = link;
 	    fprintf (stderr, "Warning: Corrupted initialization file `%s'\n",
 		     file);
@@ -299,7 +300,7 @@ GetSetProfileChar (int set, const char *AppName, const char *KeyName,
 	    if ( g_strcasecmp (key->KeyName, KeyName))
 		continue;
 	    if (set){
-		g_free (key->Value);
+		mhl_mem_free (key->Value);
 		key->Value = mhl_str_dup (Default);
 	    }
 	    return key->Value;
@@ -383,7 +384,7 @@ static void dump_keys (FILE * profile, TKeys * p)
     dump_keys (profile, p->link);
     t = str_untranslate_newline_dup (p->Value);
     fprintf (profile, "%s=%s\n", p->KeyName, t);
-    g_free (t);
+    mhl_mem_free (t);
 }
 
 static void dump_sections (FILE *profile, TSecHeader *p)
@@ -426,9 +427,9 @@ static void free_keys (TKeys *p)
     if (!p)
 	return;
     free_keys (p->link);
-    g_free (p->KeyName);
-    g_free (p->Value);
-    g_free (p);
+    mhl_mem_free (p->KeyName);
+    mhl_mem_free (p->Value);
+    mhl_mem_free (p);
 }
 
 static void free_sections (TSecHeader *p)
@@ -437,10 +438,10 @@ static void free_sections (TSecHeader *p)
 	return;
     free_sections (p->link);
     free_keys (p->Keys);
-    g_free (p->AppName);
+    mhl_mem_free (p->AppName);
     p->link = 0;
     p->Keys = 0;
-    g_free (p);
+    mhl_mem_free (p);
 }
 
 static void free_profile (TProfile *p)
@@ -449,8 +450,8 @@ static void free_profile (TProfile *p)
 	return;
     free_profile (p->link);
     free_sections (p->Section);
-    g_free (p->FileName);
-    g_free (p);
+    mhl_mem_free (p->FileName);
+    mhl_mem_free (p);
 }
 
 void free_profile_name (const char *s)

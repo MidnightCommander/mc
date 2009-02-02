@@ -23,6 +23,7 @@
 #include <string.h>
 #include <sys/types.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -532,9 +533,9 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu *menu)
 {
-    g_free (menu->name);
-    g_free (menu->help_node);
-    g_free (menu);
+    mhl_mem_free (menu->name);
+    mhl_mem_free (menu->help_node);
+    mhl_mem_free (menu);
 }
 
 WMenu *

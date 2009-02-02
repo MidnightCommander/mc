@@ -33,6 +33,7 @@
 #include <unistd.h>
 
 #include <mhl/types.h>
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -154,7 +155,7 @@ void delete_select_channel (int fd)
 	    else
 		select_list = p_next;
 
-	    g_free (p);
+	    mhl_mem_free (p);
 	    p = p_next;
 	    continue;
 	}
@@ -1397,7 +1398,7 @@ static void k_dispose (key_def *k)
 	return;
     k_dispose (k->child);
     k_dispose (k->next);
-    g_free (k);
+    mhl_mem_free (k);
 }
 
 static void s_dispose (SelectList *sel)
@@ -1406,7 +1407,7 @@ static void s_dispose (SelectList *sel)
 	return;
 
     s_dispose (sel->next);
-    g_free (sel);
+    mhl_mem_free (sel);
 }
 
 void done_key ()

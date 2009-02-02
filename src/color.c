@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -254,7 +255,7 @@ static void configure_colors_string (const char *the_color_string)
 			color_string++;
 	}
     }
-   g_free (p);
+   mhl_mem_free (p);
 }
 
 static void configure_colors (void)
@@ -466,9 +467,9 @@ done_colors (void)
 
     for (p = c.next; p; p = next) {
 	next = p->next;
-	g_free (p->fg);
-	g_free (p->bg);
-	g_free (p);
+	mhl_mem_free (p->fg);
+	mhl_mem_free (p->bg);
+	mhl_mem_free (p);
     }
     c.next = NULL;
 }

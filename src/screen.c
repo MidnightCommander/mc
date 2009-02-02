@@ -27,6 +27,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "global.h"
@@ -132,7 +133,7 @@ delete_format (format_e *format)
 
     while (format){
         next = format->next;
-        g_free (format);
+        mhl_mem_free (format);
         format = next;
      }
 }
@@ -712,7 +713,7 @@ display_mini_info (WPanel *panel)
 
 	link = mhl_str_dir_plus_file (panel->cwd, panel->dir.list [panel->selected].fname);
 	len = mc_readlink (link, link_target, MC_MAXPATHLEN - 1);
-	g_free (link);
+	mhl_mem_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
 	    tty_printf ("-> %-*s", panel->widget.cols - 5,
@@ -797,7 +798,7 @@ show_dir (WPanel *panel)
     trim (strip_home_and_password (panel->cwd), tmp,
 	 max (panel->widget.cols - 9, 0));
     addstr (tmp);
-    g_free (tmp);
+    mhl_mem_free (tmp);
 
     addch (' ');
     widget_move (&panel->widget, 0, 1);
@@ -893,7 +894,7 @@ do_try_to_select (WPanel *panel, const char *name)
     for (i = 0; i < panel->count; i++){
 	if (strcmp (subdir, panel->dir.list [i].fname) == 0) {
 	    do_select (panel, i);
-            g_free (subdir);
+            mhl_mem_free (subdir);
 	    return;
         }
     }
@@ -901,7 +902,7 @@ do_try_to_select (WPanel *panel, const char *name)
     /* Try to select a file near the file that is missing */
     if (panel->selected >= panel->count)
         do_select (panel, panel->count-1);
-    g_free (subdir);
+    mhl_mem_free (subdir);
 }
 
 void
@@ -965,21 +966,21 @@ panel_destroy (WPanel *p)
 	history_put (p->hist_name, p->dir_history);
 
 	p->dir_history = g_list_first (p->dir_history);
-	g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
+	g_list_foreach (p->dir_history, (GFunc) mhl_mem_free, NULL);
 	g_list_free (p->dir_history);
     }
 
-    g_free (p->hist_name);
+    mhl_mem_free (p->hist_name);
 
     delete_format (p->format);
     delete_format (p->status_format);
 
-    g_free (p->user_format);
+    mhl_mem_free (p->user_format);
     for (i = 0; i < LIST_TYPES; i++)
-	g_free (p->user_status_format[i]);
-    g_free (p->dir.list);
-    g_free (p->panel_name);
-    g_free (name);
+	mhl_mem_free (p->user_status_format[i]);
+    mhl_mem_free (p->dir.list);
+    mhl_mem_free (p->panel_name);
+    mhl_mem_free (name);
 }
 
 static void
@@ -1040,11 +1041,11 @@ panel_new (const char *panel_name)
     panel->frame_size = frame_half;
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!profile_has_section (section, profile_name)) {
-	g_free (section);
+	mhl_mem_free (section);
 	section = mhl_str_dup (panel->panel_name);
     }
     panel_load_setup (panel, section);
-    g_free (section);
+    mhl_mem_free (section);
 
     /* Load format strings */
     err = set_panel_formats (panel);
@@ -1327,7 +1328,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
 	    delete_format (home);
 	    tmp_format [pos] = 0;
 	    *error = g_strconcat (_("Unknown tag on display format: "), tmp_format, (char *) NULL);
-	    g_free (tmp_format);
+	    mhl_mem_free (tmp_format);
 	    return 0;
 	}
 	total_cols += darr->requested_field_len;
@@ -1416,7 +1417,7 @@ set_panel_formats (WPanel *p)
     form = use_display_format (p, panel_format (p), &err, 0);
 
     if (err){
-        g_free (err);
+        mhl_mem_free (err);
         retcode = 1;
     }
     else {
@@ -1431,7 +1432,7 @@ set_panel_formats (WPanel *p)
 	form = use_display_format (p, mini_status_format (p), &err, 1);
 
 	if (err){
-	    g_free (err);
+	    mhl_mem_free (err);
 	    retcode += 2;
 	}
 	else {
@@ -1448,11 +1449,11 @@ set_panel_formats (WPanel *p)
     if (retcode)
       message( 1, _("Warning" ), _( "User supplied format looks invalid, reverting to default." ) );
     if (retcode & 0x01){
-      g_free (p->user_format);
+      mhl_mem_free (p->user_format);
       p->user_format = mhl_str_dup (DEFAULT_USER_FORMAT);
     }
     if (retcode & 0x02){
-      g_free (p->user_status_format [p->list_type]);
+      mhl_mem_free (p->user_status_format [p->list_type]);
       p->user_status_format [p->list_type] = mhl_str_dup (DEFAULT_USER_FORMAT);
     }
 
@@ -1977,10 +1978,10 @@ do_enter_on_file_entry (file_entry *fe)
     /* Check if the file is executable */
     full_name = mhl_str_dir_plus_file (current_panel->cwd, fe->fname);
     if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe)) {
-	g_free (full_name);
+	mhl_mem_free (full_name);
 	return 0;
     }
-    g_free (full_name);
+    mhl_mem_free (full_name);
 
     if (confirm_execute) {
 	if (query_dialog
@@ -1996,7 +1997,7 @@ do_enter_on_file_entry (file_entry *fe)
 
 	tmp = mhl_str_dir_plus_file (vfs_get_current_dir (), fe->fname);
 	ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
-	g_free (tmp);
+	mhl_mem_free (tmp);
 	/* We took action only if the dialog was shown or the execution
 	 * was successful */
 	return confirm_execute || (ret == 0);
@@ -2006,9 +2007,9 @@ do_enter_on_file_entry (file_entry *fe)
     {
 	char *tmp = name_quote (fe->fname, 0);
 	char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, (char *) NULL);
-	g_free (tmp);
+	mhl_mem_free (tmp);
 	shell_execute (cmd, 0);
-	g_free (cmd);
+	mhl_mem_free (cmd);
     }
 
     return 1;
@@ -2044,7 +2045,7 @@ chdir_other_panel (WPanel *panel)
  
     move_down (panel);
 
-    g_free (new_dir);
+    mhl_mem_free (new_dir);
 }
 
 /*
@@ -2108,7 +2109,7 @@ chdir_to_readlink (WPanel *panel)
 
 	move_down (panel);
 
-	g_free (new_dir);
+	mhl_mem_free (new_dir);
     }
 }
 
@@ -2255,7 +2256,7 @@ panel_callback (Widget *w, widget_msg_t msg, int parm)
 	    char *cwd = strip_password (mhl_str_dup (panel->cwd), 1);
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     cwd, unix_error_string (errno));
-	    g_free(cwd);
+	    mhl_mem_free(cwd);
 	} else
 	    subshell_chdir (panel->cwd);
 
@@ -2475,7 +2476,7 @@ panel_re_sort (WPanel *panel)
 	    break;
 	}
     }
-    g_free (filename);
+    mhl_mem_free (filename);
     panel->top_file = panel->selected - ITEMS (panel)/2;
     if (panel->top_file < 0)
 	panel->top_file = 0;
@@ -2498,7 +2499,7 @@ panel_set_sort_order (WPanel *panel, sortfn *sort_order)
 	current_file = mhl_str_dup (panel->dir.list [panel->selected].fname);
 	panel_reload (panel);
 	try_to_select (panel, current_file);
-	g_free (current_file);
+	mhl_mem_free (current_file);
     }
     panel_re_sort (panel);
 }
