@@ -50,6 +50,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+#include <mhl/types.h>
 #include <mhl/memory.h>
 #include <mhl/escape.h>
 #include <mhl/string.h>
@@ -1034,7 +1035,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
-    gboolean copy_done = FALSE;
+    bool copy_done = FALSE;
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)

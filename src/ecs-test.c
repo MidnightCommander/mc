@@ -29,11 +29,13 @@
 #include <locale.h>
 #include <stdio.h>
 
+#include <mhl/types.h>
+
 #include "global.h"
 #include "ecs.h"
 
 #ifdef EXTCHARSET_ENABLED
-static gboolean
+static bool
 change_locale(const char *loc)
 {
 	const char *ident;
@@ -65,7 +67,7 @@ test_locale_en_US_UTF_8(void)
 	const char     *teststr_c   = "Zuckert\374te";
 	ecs_char       *ecs;
 	char           *mbs;
-	gboolean        valid;
+	bool        valid;
 
 	if (!change_locale("en_US.UTF-8")) return;
 

@@ -33,6 +33,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <mhl/types.h>
+
 #include "global.h"
 #include "tty.h"
 #include "mouse.h"
@@ -181,7 +183,7 @@ inline static int add_selects (fd_set *select_set)
 static void check_selects (fd_set *select_set)
 {
     SelectList *p;
-    gboolean retry;
+    bool retry;
 
     if (disabled_channels)
 	return;
