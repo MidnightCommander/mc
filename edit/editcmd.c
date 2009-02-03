@@ -101,28 +101,6 @@ strcasechr (const char *s, int c)
     return s;
 }
 
-#ifndef HAVE_MEMMOVE
-/* for Christophe */
-static void *memmove (void *dest, const void *src, size_t n)
-{
-    char *t;
-    const char *s;
-
-    if (dest <= src) {
-	t = (char *) dest;
-	s = (const char *) src;
-	while (n--)
-	    *t++ = *s++;
-    } else {
-	t = (char *) dest + n;
-	s = (const char *) src + n;
-	while (n--)
-	    *--t = *--s;
-    }
-    return dest;
-}
-#endif /* !HAVE_MEMMOVE */
-
 /* #define itoa MY_itoa  <---- this line is now in edit.h */
 static char *
 MY_itoa (int i)

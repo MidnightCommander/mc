@@ -647,10 +647,6 @@ extern int errno;
 char *strdup(const char *s);
 #endif
 
-#ifndef HAVE_MEMMOVE
-void *memmove(void *dest,const void *src,int size);
-#endif
-
 #ifndef HAVE_INITGROUPS
 int initgroups(char *name,gid_t id);
 #endif
