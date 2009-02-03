@@ -28,6 +28,7 @@
 
 #include <signal.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 #include <mhl/types.h>
 

@@ -8,6 +8,7 @@
 	* edit/editcmd.c, configure.ac: removed obsolete own implementation of memove (#242)
 	* mhl/escape.h: including stdbool.h for the bool type (fixing #239)
 	* mhl/types.h: removed redundant bool type (fixing #239)
+	* replaced bool type in mhl/types.h by stdbool.h (fixing #240)
 
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 

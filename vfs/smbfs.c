@@ -25,8 +25,8 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#include <stdbool.h>
 
-#include <mhl/types.h>
 #include <mhl/string.h>
 
 #undef	USE_NCURSES	/* Don't include *curses.h */

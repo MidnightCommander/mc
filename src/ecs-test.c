@@ -28,8 +28,7 @@
 #include <assert.h>
 #include <locale.h>
 #include <stdio.h>
-
-#include <mhl/types.h>
+#include <stdbool.h>
 
 #include "global.h"
 #include "ecs.h"

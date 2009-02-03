@@ -26,8 +26,8 @@
 
 #include <assert.h>
 #include <ctype.h>
+#include <stdbool.h>
 
-#include <mhl/types.h>
 #include <mhl/string.h>
 
 #include "global.h"

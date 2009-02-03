@@ -44,7 +44,7 @@ typedef char ecs_char;
 #  define ECS_STR(s)		(s)
 #endif
 
-#include <mhl/types.h>
+#include <stdbool.h>
 
 /*
  * String conversion functions between the wide character encoding and
