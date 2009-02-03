@@ -299,44 +299,6 @@ AC_DEFUN([MC_USE_TERMCAP], [
 
 
 dnl
-dnl Check if private functions are available for linking
-dnl
-AC_DEFUN([MC_SLANG_PRIVATE], [
-    AC_CACHE_CHECK([if S-Lang exports private functions],
-		   [mc_cv_slang_private], [
-	ac_save_LIBS="$LIBS"
-	LIBS="$LIBS -lslang"
-	AC_TRY_LINK([
-		     #ifdef HAVE_SLANG_SLANG_H
-		     #include <slang/slang.h>
-		     #else
-		     #include <slang.h>
-		     #endif
-		     #if SLANG_VERSION >= 10000
-		     extern unsigned int SLsys_getkey (void);
-		     #else
-		     extern unsigned int _SLsys_getkey (void);
-		     #endif
-		    ], [
-		     #if SLANG_VERSION >= 10000
-		     _SLsys_getkey ();
-		     #else
-		     SLsys_getkey ();
-		     #endif
-		    ],
-		    [mc_cv_slang_private=yes],
-		    [mc_cv_slang_private=no])
-	LIBS="$ac_save_LIBS"
-    ])
-
-    if test x$mc_cv_slang_private = xyes; then
-	AC_DEFINE(HAVE_SLANG_PRIVATE, 1,
-		  [Define if private S-Lang functions are available])
-    fi
-])
-
-
-dnl
 dnl Check if the installed S-Lang library uses termcap
 dnl
 AC_DEFUN([MC_SLANG_TERMCAP], [
@@ -411,7 +373,6 @@ it's not fully supported yet])
     if test x$with_screen = xslang; then
 	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
 		  [Define to use S-Lang library installed on the system])
-	MC_SLANG_PRIVATE
 	screen_type=slang
 	screen_msg="S-Lang library (installed on the system)"
     else

@@ -1,5 +1,8 @@
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
+	* acinclude.m4: removed MC_SLANG_PRIVATE macro
+	* src/slint.c: removed HAVE_SLANG_PRIVATE conditional and
+	  replaced SLang_getkey2(), SLang_input_pending2()
 	* src/util.c: fixed name_trunc() on NULL or empty parameters
 	* src/achown.c: fixed unitialized var in init_chown_advanced()
 	  (patch from andrew_b)
