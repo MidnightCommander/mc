@@ -176,7 +176,7 @@ AC_CHECK_FUNCS([\
 	cfgetospeed \
 	getegid geteuid getgid getsid getuid \
 	initgroups isascii \
-	memcpy memmove memset \
+	memcpy memset \
 	putenv \
 	setreuid setuid statfs strerror strftime sysconf \
 	tcgetattr tcsetattr truncate \

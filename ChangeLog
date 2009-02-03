@@ -1,3 +1,7 @@
+2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* edit/editcmd.c, configure.ac: removed obsolete own implementation of memove (#242)
+
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* src/util.c: fixed name_trunc() on NULL or empty parameters
