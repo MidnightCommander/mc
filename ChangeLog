@@ -85,6 +85,7 @@
 2009-02-02 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* vfs/extfs/iso9660.in: added iso9660 fix by cppgx (#86)
+	* src/color.c: added fix for transparent terminals by Robert (#229)
 
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 

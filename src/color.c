@@ -309,6 +309,7 @@ void init_colors (void)
 
     if (use_colors){
 	start_color ();
+	use_default_colors ();
 	configure_colors ();
 
 #ifndef HAVE_SLANG
@@ -418,7 +419,7 @@ try_alloc_color_pair (const char *fg, const char *bg)
 void
 mc_init_pair (int index, CTYPE foreground, CTYPE background)
 {
-    init_pair (index, foreground, background);
+    init_pair (index, foreground, (background==0?-1:background));
     if (index > max_index)
 	max_index = index;
 }
