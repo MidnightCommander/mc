@@ -1,3 +1,7 @@
+2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* lib/mc.lib: added patch on #219 by angel_il
+
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* src/util.c: fixed name_trunc() on NULL or empty parameters

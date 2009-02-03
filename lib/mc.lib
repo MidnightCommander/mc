@@ -107,6 +107,10 @@ f18=\e[19;2~
 f19=\e[20;2~
 f20=\e[21;2~
 
+# Sequences below are for gnome-terminal, which also sets TERM=xterm
+f11=\eO1;2P
+f12=\eO1;2Q
+
 # Arrows for both keypad modes (application and normal).
 up=\e[A
 up=\eOA
