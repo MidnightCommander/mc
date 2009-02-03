@@ -1,0 +1,70 @@
+#! /bin/sh
+
+#
+# UC1541 Virtual filesystem executive v0.1
+
+# This is for accessing disk image files for the Commodore VIC20/C64/C128
+# It requires the utility c1541 that comes bundled with Vice, the emulator
+# for the VIC20, C64, C128 and other computers made by Commodore.
+
+# Copyright (C) 2008 Jacques Pelletier
+# May be distributed under the terms of the GNU Public License
+# <jpelletier@ieee.org>
+#
+
+# Define your awk
+AWK=gawk
+# Define which archiver you are using with appropriate options
+C1541="c1541"
+
+# There are no time stamps in the disk image, so a bogus timestamp is displayed
+mc_c1541_fs_list()
+{
+    $C1541 "$1" -list | gawk -v uid=${UID-0} '
+BEGIN { FS = "\"" }
+/No LINES!/ { next }
+/BLOCKS FREE/ { next }
+$1 == 0 { next }
+{ 
+  printf "-rw-r--r--   1 %-8d %-8d %8d Jan 01 1980 00:00 %s\n", uid, 0, $1 * 256, $2
+}' 2>/dev/null
+}
+
+# Command: copyout archivename storedfilename extractto
+# -read image 1541name [fsname]
+mc_c1541_fs_copyout()
+{
+	$C1541 "$1" -read "$2" 2> /dev/null
+	mv "$2" "$3"
+}
+
+# FIXME mc can't do chown of the file inside the archive
+# Command: copyin archivename storedfilename sourcefile
+# -write image fsname [1541name]
+mc_c1541_fs_copyin()
+{
+	mv "$3" "$2"
+	$C1541 "$1" -write "$2" 2> /dev/null
+}
+
+# Command: rm archivename storedfilename
+# -delete image files
+mc_c1541_fs_rm()
+{
+	$C1541 "$1" -delete "$2" 2> /dev/null
+}
+
+# The main routine
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+   list) 	mc_c1541_fs_list    "$@" ;;
+   copyout) mc_c1541_fs_copyout "$@" ;;
+#   copyin) 	mc_c1541_fs_copyin  "$@" ;;
+   rm) 		mc_c1541_fs_rm      "$@" ;;
+   *)       exit 1 ;;
+esac
+exit 0

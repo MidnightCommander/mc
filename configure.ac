@@ -605,9 +605,12 @@ vfs/extfs/lslR
 vfs/extfs/mailfs
 vfs/extfs/patchfs
 vfs/extfs/rpms
+vfs/extfs/uace
 vfs/extfs/ualz
 vfs/extfs/uar
+vfs/extfs/uarc
 vfs/extfs/uarj
+vfs/extfs/uc1541
 vfs/extfs/uha
 vfs/extfs/ulha 
 vfs/extfs/urar

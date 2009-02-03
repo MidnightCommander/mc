@@ -93,6 +93,17 @@
 	  - prevent . to match a newline (\n)
 	  - match from start of line and not from cursor position
 
+2009-01-24 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
+	* configure.ac:
+	* lib/mc.ext.in:
+	* vfs/extfs/Makefile.am:
+	* vfs/extfs/extfs.ini: 
+	* vfs/extfs/uace.in:
+	* vfs/extfs/uarc.in:
+	* vfs/extfs/uc1541.in: added support for historic archive formats
+	  (patch provided by jpelletier)
+
 2009-01-19 Patrick Winnertz <winnie@debian.org>
 
 	* edit/edit.h: Add two more ints

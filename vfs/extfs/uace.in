@@ -1,0 +1,58 @@
+#! /bin/sh
+
+#
+# ACE Virtual filesystem executive v0.1
+# Works with unace v2.5
+
+# Copyright (C) 2008 Jacques Pelletier
+# May be distributed under the terms of the GNU Public License
+# <jpelletier@ieee.org>
+#
+
+# Define your awk
+AWK=gawk
+# Define which archiver you are using with appropriate options
+ACE_LIST="unace l"
+ACE_GET="unace x"
+# ACE_PUT="unace ?"  not available
+
+# The 'list' command executive
+
+# Unace:	DD.MM.YY HH.MM packed size ratio file 
+# ls:
+mc_ace_fs_list()
+{
+    $ACE_LIST "$1" | gawk -v uid=${UID-0} '
+BEGIN { Month="JanFebMarAprMayJunJulAugSepOctNovDec" }
+/%/ { 
+  split($1,date,".")
+
+  if (date[3] > 50)
+    date[3]=date[3] + 1900
+  else
+    date[3]=date[3] + 2000
+
+  printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %s %s\n", uid, 0, $3, substr(Month,3*(date[2]-1)+1,3),date[1],date[3], $2, $6
+}' 2>/dev/null
+    exit 0
+}
+
+# Command: copyout archivename storedfilename extractto
+mc_ace_fs_copyout()
+{
+   $ACE_GET "$1" "$2" > /dev/null 2>&1
+        mv "$2" "$3"
+}
+
+# The main routine
+umask 077
+
+cmd="$1"
+shift
+
+case "$cmd" in
+   list) 	mc_ace_fs_list 	  "$@" ;;
+   copyout) mc_ace_fs_copyout "$@" ;;
+   *)       exit 1 ;;
+esac
+exit 0
