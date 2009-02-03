@@ -77,66 +77,6 @@ static int no_slang_delay;
 /* Forward declarations */
 static void load_terminfo_keys (void);
 
-#ifndef HAVE_SLANG_PRIVATE
-/* Private interfaces have been stripped, so we cannot use them */
-#define SLang_getkey2() SLang_getkey()
-#define SLang_input_pending2(s) SLang_input_pending(s)
-#else
-/* Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK. */
-extern unsigned char SLang_Input_Buffer [];
-#if SLANG_VERSION >= 10000
-extern unsigned int _SLsys_getkey (void);
-extern int _SLsys_input_pending (int);
-#else
-extern unsigned int SLsys_getkey (void);
-extern int SLsys_input_pending (int);
-#endif
-
-static unsigned int SLang_getkey2 (void)
-{
-   unsigned int imax;
-   unsigned int ch;
-   
-   if (SLang_Input_Buffer_Len)
-     {
-	ch = (unsigned int) *SLang_Input_Buffer;
-	SLang_Input_Buffer_Len--;
-	imax = SLang_Input_Buffer_Len;
-   
-	memmove ((char *) SLang_Input_Buffer, 
-		(char *) (SLang_Input_Buffer + 1), imax);
-	return(ch);
-     }
-#if SLANG_VERSION >= 10000
-   else return(_SLsys_getkey ());
-#else
-   else return(SLsys_getkey());
-#endif
-}
-
-static int SLang_input_pending2 (int tsecs)
-{
-   int n, i;
-   unsigned char c;
-
-   if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
-#if SLANG_VERSION >= 10000  
-   n = _SLsys_input_pending (tsecs);
-#else
-   n = SLsys_input_pending (tsecs);
-#endif
-   if (n <= 0) return 0;
-   
-   i = SLang_getkey2 ();
-   if (i == SLANG_GETKEY_ERROR)
-	return 0;  /* don't put crippled error codes into the input buffer */
-   c = (unsigned char)i;
-   SLang_ungetkey_string (&c, 1);
-   
-   return n;
-}
-#endif /* HAVE_SLANG_PRIVATE */
-
 /* Only done the first time */
 void
 slang_init (void)
@@ -465,10 +405,10 @@ getch (void)
 {
     int c;
     if (no_slang_delay)
-	if (SLang_input_pending2 (0) == 0)
+	if (SLang_input_pending (0) == 0)
 	    return -1;
 
-    c = SLang_getkey2 ();
+    c = SLang_getkey ();
     if (c == SLANG_GETKEY_ERROR) {
 	fprintf (stderr,
 		 "SLang_getkey returned SLANG_GETKEY_ERROR\n"
