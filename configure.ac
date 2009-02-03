@@ -19,6 +19,20 @@ AC_ISC_POSIX
 
 AC_PROG_CC_STDC
 
+dnl Doxygen
+
+DX_HTML_FEATURE(ON)
+DX_CHM_FEATURE(OFF)
+DX_CHI_FEATURE(OFF)
+DX_MAN_FEATURE(OFF)
+DX_RTF_FEATURE(OFF)
+DX_XML_FEATURE(OFF)
+DX_PDF_FEATURE(OFF)
+DX_PS_FEATURE(OFF)
+DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
+
+PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+
 dnl
 dnl First try glib 2.x.  If it's not found, use glib 1.2.x.
 dnl Keep this check close to the beginning, so that the users

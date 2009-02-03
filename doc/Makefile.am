@@ -9,8 +9,10 @@ endif
 
 pkgdata_DATA = mc.hlp
 
-EXTRA_DIST = xnc.hlp
+EXTRA_DIST = xnc.hlp $(DX_CONFIG) doc/devel
 CLEANFILES = $(pkgdata_DATA)
 
 mc.hlp: mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp
 	- $(top_builddir)/src/man2hlp mc.1 $(srcdir)/xnc.hlp mc.hlp
+
+include ../doxygen-include.am

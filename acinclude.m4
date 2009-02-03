@@ -513,3 +513,4 @@ if test "$mc_cv_g_module_supported" = yes; then
 	      [Define if gmodule functionality is supported])
 fi
 ])
+m4_include([m4.include/dx_doxygen.m4])
