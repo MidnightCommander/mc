@@ -185,7 +185,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 static const struct edit_filters {
     const char *read, *write, *extension;
 } all_filters[] = {
-    { "lzma -cd %s 2>&1",   "lzma > %s",   ".bz2" },
+    { "lzma -cd %s 2>&1",   "lzma > %s",   ".lzma" },
     { "bzip2 -cd %s 2>&1",  "bzip2 > %s",  ".bz2" },
     { "gzip -cd %s 2>&1",   "gzip > %s",   ".gz"  },
     { "gzip -cd %s 2>&1",   "gzip > %s",   ".Z"   }
