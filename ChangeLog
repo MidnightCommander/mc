@@ -62,7 +62,7 @@
 	* mhl/string.h, vfs/fish.c, vfs/utilvfs.c, vfs/utilvfs.h: Reworked fish code
 	  so that symlinks and files which special characters works now
 
-2009-01-25 Enrico Weigelt <weigelt@metux.de>
+2009-01-25 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* edit/editcmd.c, src/cmd.c, src/ext.c, src/history.h:
 	* src/hotlist.c, src/panelize.c, src/tree.c, src/user.c: 
@@ -71,8 +71,9 @@
 	  translated strings. This breaks now once every history file
 	  but afterwards this will be stable
 
-2009-01-24 Enrico Weigelt <weigelt@metux.de>
+2009-01-24 Enrico Weigelt, metux IT service <weigelt@metux.de>
 
+	* vfs/extfs/rpm, vfs/extfs/trpm: removed obsolete rpm tags
 	* src/cmd.c: fixed bug #35 (do_view_cmd is now calling repaint_screen())
 
 2009-01-24 Patrick Winnertz <winnie@debian.org>
