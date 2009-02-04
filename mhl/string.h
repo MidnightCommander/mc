@@ -51,56 +51,52 @@ static inline void mhl_str_toupper(char* str)
 	    *str = toupper(*str);
 }
 
-#define __STR_CONCAT_MAX	32
+/* note: we use ((char*)(1)) as terminator - NULL is a valid argument ! */
+static const char * mhl_s_c_sep__ = (const char *)1;
 /* _NEVER_ call this function directly ! */
-static inline char* __mhl_str_concat_hlp(const char* base, ...)
+static inline char* mhl_str_concat_hlp__(const char* va_start_dummy, ...)
 {
-    static const char* arg_ptr[__STR_CONCAT_MAX];
-    static size_t      arg_sz[__STR_CONCAT_MAX];
-    int         count = 0;
-    size_t      totalsize = 0;
-
-    if (base)
-    {
-	arg_ptr[0] = base;
-	arg_sz[0]  = totalsize = strlen(base);
-	count = 1;
-    }
+    char * result;
+    size_t result_len = 0;
+    char * p;
+    const char * chunk;
 
     va_list args;
-    va_start(args,base);
-    char* a;
-    /* note: we use ((char*)(1)) as terminator - NULL is a valid argument ! */
-    while ((a = va_arg(args, char*))!=(char*)1 && count < __STR_CONCAT_MAX )
+    va_start(args,va_start_dummy);
+    while ((chunk = va_arg(args, const char*)) != mhl_s_c_sep__)
     {
-	if (a)
+	if (chunk)
 	{
-	    arg_ptr[count] = a;
-	    arg_sz[count]  = strlen(a);
-	    totalsize += arg_sz[count];
-	    count++;
+	    result_len += strlen (chunk);
 	}
     }
     va_end(args);
 
-    if (!count)
+    if (result_len == 0)
 	return mhl_str_dup("");
 
-    /* now as we know how much to copy, allocate the buffer */
-    char* buffer = (char*)mhl_mem_alloc_u(totalsize+2);
-    char* current = buffer;
-    int x=0;
-    for (x=0; x<count; x++)
-    {
-	memcpy(current, arg_ptr[x], arg_sz[x]);
-	current += arg_sz[x];
-    }
+    /* now as we know how much to copy, allocate the buffer + '\0'*/
+    result = (char*)mhl_mem_alloc_u (result_len + 1);
 
-    *current = 0;
-    return buffer;
+    p = result;
+
+    va_start(args,va_start_dummy);
+    while ((chunk = va_arg(args, const char*)) != mhl_s_c_sep__)
+    {
+	if (chunk)
+	{
+	    size_t chunk_len = strlen (chunk);
+	    memcpy (p, chunk, chunk_len);
+	    p += chunk_len;
+	}
+    }
+    va_end(args);
+
+    *p = '\0';
+    return result;
 }
 
-#define mhl_str_concat(...)	(__mhl_str_concat_hlp(__VA_ARGS__, (char*)(1)))
+#define mhl_str_concat(...)	(mhl_str_concat_hlp__(mhl_s_c_sep__, __VA_ARGS__, mhl_s_c_sep__))
 
 static inline char* mhl_str_reverse(char* ptr)
 {
