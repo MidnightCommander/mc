@@ -1,5 +1,9 @@
 2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
+	* lib/mc.sh.in: fixes for non-bash shells (fixing #196)
+
+2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
 	* mhl/types.h, mhl/escape.h: replaced bool type by stdbool.h (fixing #240)
 
 2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
