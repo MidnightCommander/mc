@@ -1,3 +1,7 @@
+2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* mhl/types.h, mhl/escape.h: replaced bool type by stdbool.h (fixing #240)
+
 2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* lib/mc.lib: added patch on #219 by angel_il
