@@ -93,6 +93,7 @@
 
 2009-01-24 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
+	* vfs/extfs/rpm, vfs/extfs/trpm: removed obsolete rpm tags
 	* src/cmd.c: fixed bug #35 (do_view_cmd is now calling repaint_screen())
 	* syntax/Syntax, syntax/nemerle.syntax: Added syntax rules 
 	  for Nemerle source files
