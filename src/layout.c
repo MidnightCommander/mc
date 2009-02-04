@@ -174,6 +174,11 @@ static struct {
     { 0, 0, 0 }
 };
 
+#define LAYOUT_OPTIONS_COUNT           10
+#define HIGHLIGHT_OPTIONS_COUNT        2
+#define SPLIT_OPTIONS_COUNT            1
+#define OTHER_OPTIONS_COUNT            7
+
 static int first_width, second_width;
 static const char *output_lines_label;
 
@@ -295,9 +300,9 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 10, 16 + first_width);
+		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
 		addstr (output_lines_label);
-		dlg_move (h, 10, 10 + first_width);
+		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
@@ -340,7 +345,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 10, 10 + first_width);
+		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
@@ -363,7 +368,7 @@ init_layout (void)
     static const char *title1, *title2, *title3;
 
     if (!i18n_layt_flag) {
-	register size_t l1;
+	size_t l1;
 
 	first_width = 19;	/* length of line with '<' '>' buttons */
 
@@ -379,7 +384,7 @@ init_layout (void)
 		first_width = l1;
 	}
 
-	for (i = 0; i <= 9; i++) {
+	for (i = 0; i < LAYOUT_OPTIONS_COUNT; i++) {
 	    check_options[i].text = _(check_options[i].text);
 	    l1 = strlen (check_options[i].text) + 7;
 	    if (l1 > first_width)
@@ -396,7 +401,7 @@ init_layout (void)
 
 
 	second_width = strlen (title3) + 1;
-	for (i = 0; i < 7; i++) {
+	for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
 	    check_options[i].text = _(check_options[i].text);
 	    l1 = strlen (check_options[i].text) + 7;
 	    if (l1 > second_width)
@@ -451,17 +456,17 @@ init_layout (void)
 			    0));
     if (console_flag) {
 	add_widget (layout_dlg,
-		    button_new (10, 12 + first_width, B_MINUS,
+		    button_new (LAYOUT_OPTIONS_COUNT, 12 + first_width, B_MINUS,
 				NARROW_BUTTON, "&-", bminus_cback));
 	add_widget (layout_dlg,
-		    button_new (10, 7 + first_width, B_PLUS, NARROW_BUTTON,
+		    button_new (LAYOUT_OPTIONS_COUNT, 7 + first_width, B_PLUS, NARROW_BUTTON,
 				"&+", bplus_cback));
     }
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
 	check_options[i].widget =
-	    check_new (9 - i, 7 + first_width, XTRACT (i));
+	    check_new (LAYOUT_OPTIONS_COUNT - i - 1, 7 + first_width, XTRACT (i));
 	add_widget (layout_dlg, check_options[i].widget);
     }
     check_options[9].widget = check_new (10, 6, XTRACT (9));
