@@ -49,6 +49,7 @@
 #include "main-widgets.h"
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
+#include "mountlist.h"		/* my_statfs */
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
@@ -764,6 +765,44 @@ mini_info_separator (WPanel *panel)
 }
 
 static void
+show_free_space (WPanel *panel)
+{
+    /* Used to figure out how many free space we have */
+    static struct my_statfs myfs_stats;
+    /* Old current working directory for displaying free space */
+    static char *old_cwd = NULL;
+
+    /* Don't try to stat non-local fs */
+    if (!vfs_file_is_local (panel->cwd) || !free_space)
+	return;
+
+    if (old_cwd == NULL || strcmp (old_cwd, panel->cwd) != 0) {
+	char rpath[PATH_MAX];
+
+	init_my_statfs ();
+	mhl_mem_free (old_cwd);
+	old_cwd = mhl_str_dup (panel->cwd);
+
+	if (mc_realpath (panel->cwd, rpath) == NULL)
+	    return;
+
+	my_statfs (&myfs_stats, rpath);
+    }
+
+    if (myfs_stats.avail > 0 || myfs_stats.total > 0) {
+	char buffer1 [6], buffer2[6], tmp[256];
+	size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
+	size_trunc_len (buffer2, 5, myfs_stats.total, 1);
+	snprintf (tmp, sizeof(tmp), " %s/%s (%d%%) ", buffer1, buffer2,
+				myfs_stats.total > 0 ?
+				(int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0);
+	widget_move (&panel->widget, panel->widget.lines - 1,
+				     panel->widget.cols - 2 - strlen(tmp));
+	addstr (tmp);
+    }
+}
+
+static void
 show_dir (WPanel *panel)
 {
     char *tmp;
@@ -804,6 +843,10 @@ show_dir (WPanel *panel)
     addstr (">");
     widget_move (&panel->widget, 0, panel->widget.cols - 3);
     addstr ("v");
+
+    attrset (NORMAL_COLOR);
+
+    show_free_space (panel);
 
     if (panel->active)
 	standend ();

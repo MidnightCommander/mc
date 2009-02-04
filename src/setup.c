@@ -134,6 +134,7 @@ static const struct {
     { "show_mini_info", &show_mini_info },
     { "permission_mode", &permission_mode },
     { "filetype_mode", &filetype_mode },
+    { "free_space", &free_space },
     { 0, 0 }
 };
 

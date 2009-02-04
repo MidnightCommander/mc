@@ -39,6 +39,7 @@ extern int keybar_visible;
 extern int output_start_y;
 extern int message_visible;
 extern int xterm_title;
+extern int free_space;
 
 extern int horizontal_split;
 extern int nice_rotating_dash;

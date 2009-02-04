@@ -98,6 +98,9 @@ int message_visible = 1;
 /* Set to show current working dir in xterm window title */
 int xterm_title = 1;
 
+/* Set to show free space on device assigned to current directory */
+int free_space = 1;
+
 /* The starting line for the output of the subprogram */
 int output_start_y = 0;
 
@@ -127,6 +130,7 @@ static int _command_prompt;
 static int _keybar_visible;
 static int _message_visible;
 static int _xterm_title;
+static int _free_space;
 static int _permission_mode;
 static int _filetype_mode;
 
@@ -157,6 +161,7 @@ static struct {
     int    *variable;
     WCheck *widget;
 } check_options [] = {
+    { N_("show free sp&Ace"),  &free_space,      0 },
     { N_("&Xterm window title"), &xterm_title,   0 },
     { N_("h&Intbar visible"),  &message_visible, 0 },
     { N_("&Keybar visible"),   &keybar_visible,  0 },
@@ -228,8 +233,8 @@ static int b2left_cback (int action)
     if (_equal_split){
 	/* Turn equal split off */
 	_equal_split = 0;
-	check_options [6].widget->state = check_options [6].widget->state & ~C_BOOL;
-	dlg_select_widget (check_options [6].widget);
+	check_options [7].widget->state = check_options [7].widget->state & ~C_BOOL;
+	dlg_select_widget (check_options [7].widget);
 	dlg_select_widget (bleft_widget);
     }
     _first_panel_size++;
@@ -243,8 +248,8 @@ static int b2right_cback (int action)
     if (_equal_split){
 	/* Turn equal split off */
 	_equal_split = 0;
-	check_options [6].widget->state = check_options [6].widget->state & ~C_BOOL;
-	dlg_select_widget (check_options [6].widget);
+	check_options [7].widget->state = check_options [7].widget->state & ~C_BOOL;
+	dlg_select_widget (check_options [7].widget);
 	dlg_select_widget (bright_widget);
     }
     _first_panel_size--;
@@ -290,23 +295,24 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 9, 16 + first_width);
+		dlg_move (h, 10, 16 + first_width);
 		addstr (output_lines_label);
-		dlg_move (h, 9, 10 + first_width);
+		dlg_move (h, 10, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
 	return MSG_HANDLED;
 
     case DLG_POST_KEY:
-	_filetype_mode = check_options [8].widget->state & C_BOOL;
-	_permission_mode = check_options [7].widget->state & C_BOOL;
-	_equal_split = check_options [6].widget->state & C_BOOL;
-	_menubar_visible = check_options [5].widget->state & C_BOOL;
-	_command_prompt = check_options [4].widget->state & C_BOOL;
-	_keybar_visible = check_options [2].widget->state & C_BOOL;
-	_message_visible = check_options [1].widget->state & C_BOOL;
-	_xterm_title = check_options [0].widget->state & C_BOOL;
+	_filetype_mode = check_options [9].widget->state & C_BOOL;
+	_permission_mode = check_options [8].widget->state & C_BOOL;
+	_equal_split = check_options [7].widget->state & C_BOOL;
+	_menubar_visible = check_options [6].widget->state & C_BOOL;
+	_command_prompt = check_options [5].widget->state & C_BOOL;
+	_keybar_visible = check_options [3].widget->state & C_BOOL;
+	_message_visible = check_options [2].widget->state & C_BOOL;
+	_xterm_title = check_options [1].widget->state & C_BOOL;
+	_free_space = check_options [0].widget->state & C_BOOL;
 	if (console_flag){
 	    int minimum;
 	    if (_output_lines < 0)
@@ -334,7 +340,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
-		dlg_move (h, 9, 10 + first_width);
+		dlg_move (h, 10, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
 	}
@@ -357,7 +363,7 @@ init_layout (void)
     static const char *title1, *title2, *title3;
 
     if (!i18n_layt_flag) {
-	register int l1;
+	register size_t l1;
 
 	first_width = 19;	/* length of line with '<' '>' buttons */
 
@@ -373,7 +379,7 @@ init_layout (void)
 		first_width = l1;
 	}
 
-	for (i = 0; i <= 8; i++) {
+	for (i = 0; i <= 9; i++) {
 	    check_options[i].text = _(check_options[i].text);
 	    l1 = strlen (check_options[i].text) + 7;
 	    if (l1 > first_width)
@@ -390,7 +396,7 @@ init_layout (void)
 
 
 	second_width = strlen (title3) + 1;
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 7; i++) {
 	    check_options[i].text = _(check_options[i].text);
 	    l1 = strlen (check_options[i].text) + 7;
 	    if (l1 > second_width)
@@ -445,23 +451,23 @@ init_layout (void)
 			    0));
     if (console_flag) {
 	add_widget (layout_dlg,
-		    button_new (9, 12 + first_width, B_MINUS,
+		    button_new (10, 12 + first_width, B_MINUS,
 				NARROW_BUTTON, "&-", bminus_cback));
 	add_widget (layout_dlg,
-		    button_new (9, 7 + first_width, B_PLUS, NARROW_BUTTON,
+		    button_new (10, 7 + first_width, B_PLUS, NARROW_BUTTON,
 				"&+", bplus_cback));
     }
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
-    for (i = 0; i < 6; i++) {
+    for (i = 0; i < 7; i++) {
 	check_options[i].widget =
-	    check_new (8 - i, 7 + first_width, XTRACT (i));
+	    check_new (9 - i, 7 + first_width, XTRACT (i));
 	add_widget (layout_dlg, check_options[i].widget);
     }
-    check_options[8].widget = check_new (10, 6, XTRACT (8));
+    check_options[9].widget = check_new (10, 6, XTRACT (9));
+    add_widget (layout_dlg, check_options[9].widget);
+    check_options[8].widget = check_new (9, 6, XTRACT (8));
     add_widget (layout_dlg, check_options[8].widget);
-    check_options[7].widget = check_new (9, 6, XTRACT (7));
-    add_widget (layout_dlg, check_options[7].widget);
 
     _filetype_mode = filetype_mode;
     _permission_mode = permission_mode;
@@ -471,20 +477,21 @@ init_layout (void)
     _keybar_visible = keybar_visible;
     _message_visible = message_visible;
     _xterm_title = xterm_title;
+    _free_space = free_space;
     bright_widget =
 	button_new (6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback);
     add_widget (layout_dlg, bright_widget);
     bleft_widget =
 	button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback);
     add_widget (layout_dlg, bleft_widget);
-    check_options[6].widget = check_new (5, 6, XTRACT (6));
+    check_options[7].widget = check_new (5, 6, XTRACT (7));
     old_first_panel_size = -1;
     old_horizontal_split = -1;
     old_output_lines = -1;
 
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
-    add_widget (layout_dlg, check_options[6].widget);
+    add_widget (layout_dlg, check_options[7].widget);
     radio_widget = radio_new (3, 6, 2, s_split_direction);
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;
