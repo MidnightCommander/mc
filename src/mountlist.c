@@ -148,6 +148,19 @@ static int get_fs_usage (char *path, struct fs_usage *fsp);
 
 static struct mount_entry *mount_list = NULL;
 
+static void free_mount_entry (struct mount_entry *me)
+{
+    if (!me)
+	return;
+    if (me->me_devname)
+	free (me->me_devname);
+    if (me->me_mountdir)
+	free (me->me_mountdir);
+    if (me->me_type)
+	free (me->me_type);
+    free (me);
+}
+
 #ifdef MOUNTED_GETMNTENT1	/* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
 /* Return the value of the hexadecimal number represented by CP.
    No prefix (like '0x') or suffix (like 'h') is expected to be
@@ -675,6 +688,12 @@ void
 init_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
+    while (mount_list) {
+	struct mount_entry *next = mount_list->me_next;
+	free_mount_entry (mount_list);
+	mount_list = next;
+    }
+
     mount_list = read_filesystem_list (1, 1);
 #endif /* HAVE_INFOMOUNT_LIST */
 }
