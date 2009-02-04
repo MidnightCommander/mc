@@ -1,5 +1,5 @@
-#ifndef __MHL_SHELL_ESCAPE_H
-#define __MHL_SHELL_ESCAPE_H
+#ifndef MHL_ESCAPE_H
+#define MHL_ESCAPE_H
 
 /* Micro helper library: shell escaping functions */
 
@@ -63,7 +63,7 @@ static inline SHELL_ESCAPED_STR mhl_shell_escape_dup(const char* src)
 /** Unescape paths or other strings for e.g the internal cd
     shell-unescape within a given buffer (writing to it!)
 
- /params const char * in
+ /params const char * src
  string for unescaping
  /returns
  return unescaped string
@@ -112,7 +112,7 @@ static inline char* mhl_shell_unescape_buf(char* text)
 		case '`':
 		case '"':
 		case ';':
-		case '\0': /* end of line! malformed escape string */
+		case '\0': /* end of string! malformed escape string */
 		    goto out;
 		default:
 		    (*writeptr) = c; writeptr++; break;

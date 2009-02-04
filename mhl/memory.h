@@ -1,5 +1,5 @@
-#ifndef __MHL_MEM
-#define __MHL_MEM
+#ifndef MHL_MEMORY_H
+#define MHL_MEMORY_H
 
 #include <memory.h>
 #include <stdlib.h>
@@ -17,7 +17,7 @@ static inline void mhl_mem_free(void* ptr)
 }
 
 /* free an ptr and NULL it */
-#define 	MHL_PTR_FREE(ptr)	do { mhl_mem_free(ptr); (ptr) = NULL; } while (0); 
+#define 	MHL_PTR_FREE(ptr)	do { mhl_mem_free(ptr); (ptr) = NULL; } while (0)
 
 /* allocate a chunk on stack - automatically free'd on function exit */
 #define		mhl_stack_alloc(sz)	(alloca(sz))

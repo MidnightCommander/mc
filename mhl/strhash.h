@@ -1,5 +1,5 @@
-#ifndef __MHL_STRHASH_H
-#define __MHL_STRHASH_H
+#ifndef MHL_STRHASH_H
+#define MHL_STRHASH_H
 
 #include <hash.h>
 #include <mhl/memory.h>

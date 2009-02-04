@@ -1,5 +1,5 @@
-#ifndef __MHL_ENV_H
-#define __MHL_ENV_H
+#ifndef MHL_ENV_H
+#define MHL_ENV_H
 
 #include <mhl/string.h>
 
