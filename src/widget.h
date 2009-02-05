@@ -1,7 +1,7 @@
 #ifndef MC_WIDGET_H
 #define MC_WIDGET_H
 
-#include <stdbool.h>
+#include <mhl/types.h>
 
 #include "dialog.h"		/* Widget */
 

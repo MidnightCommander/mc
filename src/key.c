@@ -31,8 +31,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <stdbool.h>
 
+#include <mhl/types.h>
 #include <mhl/memory.h>
 #include <mhl/string.h>
 

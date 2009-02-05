@@ -25,7 +25,7 @@
 #endif /* WANT_TERM_H */
 #endif /* USE_NCURSES */
 
-#include <stdbool.h>
+#include <mhl/types.h>
 
 /* {{{ Input }}} */
 

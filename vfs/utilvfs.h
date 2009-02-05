@@ -2,7 +2,8 @@
 #define MC_VFS_UTILVFS_H
 
 #include <sys/stat.h>
-#include <stdbool.h>
+
+#include <mhl/types.h>
 
 /* Flags for vfs_split_url() */
 #define URL_ALLOW_ANON 1

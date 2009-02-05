@@ -1,7 +1,7 @@
 #ifndef MC_USERMAP_H
 #define MC_USERMAP_H
 
-#include <stdbool.h>
+#include <mhl/types.h>
 
 #define MC_USERMAP ".mc/cedit/cooledit.bindings"
 

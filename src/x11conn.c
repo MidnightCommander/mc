@@ -36,7 +36,6 @@ typedef int dummy;		/* C99 forbids empty compilation unit */
 
 #include <setjmp.h>
 #include <X11/Xlib.h>
-#include <stdbool.h>
 
 #include <mhl/memory.h>
 
@@ -45,6 +44,8 @@ typedef int dummy;		/* C99 forbids empty compilation unit */
 #ifdef HAVE_GMODULE
 #  include <gmodule.h>
 #endif
+
+#include <mhl/types.h>
 
 #include "x11conn.h"
 

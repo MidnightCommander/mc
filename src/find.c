@@ -26,8 +26,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
-#include <stdbool.h>
 
+#include <mhl/types.h>
 #include <mhl/memory.h>
 #include <mhl/string.h>
 

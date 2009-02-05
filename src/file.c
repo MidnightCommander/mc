@@ -48,8 +48,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <stdbool.h>
 
+#include <mhl/types.h>
 #include <mhl/memory.h>
 #include <mhl/escape.h>
 #include <mhl/string.h>
