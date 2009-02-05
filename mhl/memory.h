@@ -11,13 +11,13 @@
 #define		mhl_mem_alloc_z(sz)	(calloc(1,sz))
 
 /* free a chunk of memory from stack, passing NULL does no harm */
-static inline void mhl_mem_free(void* ptr)
+static inline void g_free(void* ptr)
 {
     if (ptr) free(ptr);
 }
 
 /* free an ptr and NULL it */
-#define 	MHL_PTR_FREE(ptr)	do { mhl_mem_free(ptr); (ptr) = NULL; } while (0)
+#define 	MHL_PTR_FREE(ptr)	do { g_free(ptr); (ptr) = NULL; } while (0)
 
 /* allocate a chunk on stack - automatically free'd on function exit */
 #define		mhl_stack_alloc(sz)	(alloca(sz))

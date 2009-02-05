@@ -267,7 +267,7 @@ console_shutdown (void)
     if (!console_flag)
 	return;
 
-    mhl_mem_free (screen_shot.buf);
+    g_free (screen_shot.buf);
 
     console_flag = 0;
 }

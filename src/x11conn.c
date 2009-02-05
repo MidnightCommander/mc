@@ -35,9 +35,8 @@ typedef int dummy;		/* C99 forbids empty compilation unit */
 #else
 
 #include <setjmp.h>
-#include <X11/Xlib.h>
 
-#include <mhl/memory.h>
+#include <X11/Xlib.h>
 
 #include "../src/global.h"
 
@@ -135,7 +134,7 @@ static bool x11_available(void)
     if (x11_module == NULL)
 	x11_module = g_module_open ("libX11.so.6", G_MODULE_BIND_LAZY);
 
-    mhl_mem_free (x11_module_fname);
+    g_free (x11_module_fname);
 
     if (x11_module == NULL)
 	return FALSE;

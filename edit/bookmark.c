@@ -28,11 +28,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <mhl/memory.h>
 
 #include "../src/global.h"
 
@@ -159,13 +158,13 @@ int book_mark_clear (WEdit * edit, int line, int c)
 	    p->prev->next = p->next;
 	    if (p->next)
 		p->next->prev = p->prev;
-	    mhl_mem_free (p);
+	    g_free (p);
 	    break;
 	}
     }
 /* if there is only our dummy book mark left, clear it for speed */
     if (edit->book_mark->line == -1 && !edit->book_mark->next) {
-	mhl_mem_free (edit->book_mark);
+	g_free (edit->book_mark);
 	edit->book_mark = 0;
     }
     return r;
@@ -186,11 +185,11 @@ void book_mark_flush (WEdit * edit, int c)
 	    q->prev->next = q->next;
 	    if (p)
 		p->prev = q->prev;
-	    mhl_mem_free (q);
+	    g_free (q);
 	}
     }
     if (!edit->book_mark->next) {
-	mhl_mem_free (edit->book_mark);
+	g_free (edit->book_mark);
 	edit->book_mark = 0;
     }
 }

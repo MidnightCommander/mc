@@ -54,7 +54,7 @@ static char *data = NULL;
 void
 flush_extension_file (void)
 {
-    mhl_mem_free (data);
+    g_free (data);
     data = NULL;
 }
 
@@ -123,14 +123,14 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		    unlink (file_name);
 		    if (localcopy) {
 			mc_ungetlocalcopy (filename, localcopy, 0);
-			mhl_mem_free (localcopy);
+			g_free (localcopy);
 		    }
-		    mhl_mem_free (file_name);
+		    g_free (file_name);
 		    return;
 		}
 		fputs (parameter, cmd_file);
 		written_nonspace = 1;
-		mhl_mem_free (parameter);
+		g_free (parameter);
 	    } else {
 		size_t len = strlen (prompt);
 
@@ -158,7 +158,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 		    data += i - 1;
 		} else if ((i = check_format_var (data, &v)) > 0 && v) {
 		    fputs (v, cmd_file);
-		    mhl_mem_free (v);
+		    g_free (v);
 		    data += i;
 		} else {
 		    char *text;
@@ -169,7 +169,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 			    if (localcopy == NULL) {
 				fclose (cmd_file);
 				unlink (file_name);
-				mhl_mem_free (file_name);
+				g_free (file_name);
 				return;
 			    }
 			    mc_stat (localcopy, &mystat);
@@ -186,7 +186,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 			strcpy (p, text);
 			p = strchr (p, 0);
 		    }
-		    mhl_mem_free (text);
+		    g_free (text);
 		    written_nonspace = 1;
 		}
 	    }
@@ -217,7 +217,7 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 
     if ((run_view && !written_nonspace) || is_cd) {
 	unlink (file_name);
-	mhl_mem_free (file_name);
+	g_free (file_name);
 	file_name = NULL;
     } else {
 	/* Set executable flag on the command file ... */
@@ -276,14 +276,14 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	}
     }
 
-    mhl_mem_free (file_name);
-    mhl_mem_free (cmd);
+    g_free (file_name);
+    g_free (cmd);
 
     if (localcopy) {
 	mc_stat (localcopy, &mystat);
 	mc_ungetlocalcopy (filename, localcopy,
 			   localmtime != mystat.st_mtime);
-	mhl_mem_free (localcopy);
+	g_free (localcopy);
     }
 }
 
@@ -306,8 +306,8 @@ get_file_type_local (const char *filename, char *buf, int buflen)
     char *command = g_strconcat (FILE_CMD, tmp, " 2>/dev/null", (char *) 0);
     FILE *f = popen (command, "r");
 
-    mhl_mem_free (tmp);
-    mhl_mem_free (command);
+    g_free (tmp);
+    g_free (command);
     if (f != NULL) {
 #ifdef __QNXNTO__
 	if (setvbuf (f, NULL, _IOFBF, 0) != 0) {
@@ -388,7 +388,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
 	    /* No data */
 	    content_string[0] = 0;
 	}
-	mhl_mem_free (realname);
+	g_free (realname);
     }
 
     if (got_data == -1) {
@@ -444,20 +444,20 @@ regex_command (const char *filename, const char *action, int *move_dir)
 
 	extension_file = mhl_str_dir_plus_file (home_dir, MC_USER_EXT);
 	if (!exist_file (extension_file)) {
-	    mhl_mem_free (extension_file);
+	    g_free (extension_file);
 	  check_stock_mc_ext:
 	    extension_file = mhl_str_dir_plus_file (mc_home, MC_LIB_EXT);
 	    mc_user_ext = 0;
 	}
 	data = load_file (extension_file);
-	mhl_mem_free (extension_file);
+	g_free (extension_file);
 	if (data == NULL)
 	    return 0;
 
 	if (!strstr (data, "default/")) {
 	    if (!strstr (data, "regex/") && !strstr (data, "shell/")
 		&& !strstr (data, "type/")) {
-		mhl_mem_free (data);
+		g_free (data);
 		data = NULL;
 		if (mc_user_ext) {
 		    home_error = 1;
@@ -471,7 +471,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 			"the installation failed.  Please fetch a fresh "
 			"copy from the Midnight Commander package."),
 			mc_home);
-		    mhl_mem_free (title);
+		    g_free (title);
 		    return 0;
 		}
 	    }
@@ -483,7 +483,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		"changed with version 3.0.  You may either want to copy "
 		"it from %smc.ext or use that file as an example of how "
 		"to write it."), MC_USER_EXT, mc_home);
-	    mhl_mem_free (title);
+	    g_free (title);
 	}
     }
     mc_stat (filename, &mystat);
@@ -596,7 +596,7 @@ regex_command (const char *filename, const char *action, int *move_dir)
 
 			    exec_extension (filename_copy, r + 1, move_dir,
 					    view_at_line_number);
-			    mhl_mem_free (filename_copy);
+			    g_free (filename_copy);
 
 			    ret = 1;
 			}

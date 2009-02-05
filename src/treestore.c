@@ -239,7 +239,7 @@ tree_store_load_from(char *name)
 		}
 		strcpy(oldname, name);
 	    }
-	    mhl_mem_free(name);
+	    g_free(name);
 	}
 	fclose(file);
     }
@@ -270,7 +270,7 @@ tree_store_load(void)
 
     name = mhl_str_dir_plus_file(home_dir, MC_TREE);
     retval = tree_store_load_from(name);
-    mhl_mem_free(name);
+    g_free(name);
 
     return retval;
 }
@@ -337,12 +337,12 @@ tree_store_save_to(char *name)
 
 		i = fprintf(file, "%d:%d %s\n", current->scanned, common,
 			    encoded);
-		mhl_mem_free(encoded);
+		g_free(encoded);
 	    } else {
 		char *encoded = encode(current->name);
 
 		i = fprintf(file, "%d:%s\n", current->scanned, encoded);
-		mhl_mem_free(encoded);
+		g_free(encoded);
 	    }
 
 	    if (i == EOF) {
@@ -378,15 +378,15 @@ tree_store_save(void)
     retval = tree_store_save_to(tmp);
 
     if (retval) {
-	mhl_mem_free(tmp);
+	g_free(tmp);
 	return retval;
     }
 
     name = mhl_str_dir_plus_file(home_dir, MC_TREE);
     retval = rename(tmp, name);
 
-    mhl_mem_free(tmp);
-    mhl_mem_free(name);
+    g_free(tmp);
+    g_free(name);
 
     if (retval)
 	return errno;
@@ -484,7 +484,7 @@ tree_store_add_entry(const char *name)
 		break;
 	    }
 	}
-	mhl_mem_free(parent);
+	g_free(parent);
     }
 
     tree_store_dirty(TRUE);
@@ -549,8 +549,8 @@ remove_entry(tree_entry * entry)
 	ts.tree_last = entry->prev;
 
     /* Free the memory used by the entry */
-    mhl_mem_free(entry->name);
-    mhl_mem_free(entry);
+    g_free(entry->name);
+    g_free(entry);
 
     return ret;
 }
@@ -620,7 +620,7 @@ tree_store_mark_checked(const char *subname)
 	current = tree_store_add_entry(name);
 	ts.add_queue = g_list_prepend(ts.add_queue, mhl_str_dup(name));
     }
-    mhl_mem_free(name);
+    g_free(name);
 
     /* Clear the deletion mark from the subdirectory and its children */
     base = current;
@@ -719,11 +719,11 @@ tree_store_end_check(void)
     ts.add_queue = g_list_reverse(ts.add_queue);
     the_queue = ts.add_queue;
     ts.add_queue = NULL;
-    mhl_mem_free(ts.check_name);
+    g_free(ts.check_name);
     ts.check_name = NULL;
 
     for (l = the_queue; l; l = l->next) {
-	mhl_mem_free(l->data);
+	g_free(l->data);
     }
 
     g_list_free(the_queue);
@@ -743,7 +743,7 @@ process_special_dirs(GList ** special_dirs, char *file)
 	*special_dirs = g_list_prepend(*special_dirs, mhl_str_dup(token));
 	s = NULL;
     }
-    mhl_mem_free(buffer);
+    g_free(buffer);
 }
 
 static bool
@@ -803,7 +803,7 @@ tree_store_rescan(const char *dir)
 		if (S_ISDIR(buf.st_mode))
 		    tree_store_mark_checked(dp->d_name);
 	    }
-	    mhl_mem_free(full_name);
+	    g_free(full_name);
 	}
 	mc_closedir(dirp);
     }

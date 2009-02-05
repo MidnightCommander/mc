@@ -33,9 +33,8 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
-#include <stdlib.h>
 
-#include <mhl/memory.h>
+#include <stdlib.h>
 
 #include "../src/global.h"
 
@@ -187,13 +186,13 @@ edit_options_dialog (void)
 
     if (p) {
 	option_word_wrap_line_length = atoi (p);
-	mhl_mem_free (p);
+	g_free (p);
     }
     if (q) {
 	option_tab_spacing = atoi (q);
 	if (option_tab_spacing <= 0)
 	    option_tab_spacing = 8;
-	mhl_mem_free (q);
+	g_free (q);
     }
 
     option_syntax_highlighting = tedit_syntax_highlighting;

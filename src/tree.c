@@ -33,8 +33,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mhl/memory.h>
-
 #include "global.h"
 #include "tty.h"
 #include "color.h"
@@ -128,7 +126,7 @@ static void tree_destroy (WTree *tree)
     tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
 
-    mhl_mem_free (tree->tree_shown);
+    g_free (tree->tree_shown);
     tree->tree_shown = 0;
     tree->selected_ptr = NULL;
 }
@@ -208,7 +206,7 @@ static void show_tree (WTree *tree)
 	x = y = 1;
     }
 
-    mhl_mem_free (tree->tree_shown);
+    g_free (tree->tree_shown);
     tree->tree_shown = g_new (tree_entry*, tree_lines);
 
     for (i = 0; i < tree_lines; i++)
@@ -607,7 +605,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
 	return;
 
     if (!*dest){
-	mhl_mem_free (dest);
+	g_free (dest);
 	return;
     }
 
@@ -616,7 +614,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
     copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
     file_op_context_destroy (ctx);
 
-    mhl_mem_free (dest);
+    g_free (dest);
 }
 
 static void
@@ -648,19 +646,19 @@ static void tree_move (WTree *tree, const char *default_dest)
     if (!dest)
 	return;
     if (!*dest){
-	mhl_mem_free (dest);
+	g_free (dest);
 	return;
     }
     if (stat (dest, &buf)){
 	message (D_ERROR, MSG_ERROR, _(" Cannot stat the destination \n %s "),
 		 unix_error_string (errno));
-	mhl_mem_free (dest);
+	g_free (dest);
 	return;
     }
     if (!S_ISDIR (buf.st_mode)){
 	file_error (_(" Destination \"%s\" must be a directory \n %s "),
 		    dest);
-	mhl_mem_free (dest);
+	g_free (dest);
 	return;
     }
 
@@ -669,7 +667,7 @@ static void tree_move (WTree *tree, const char *default_dest)
     move_dir_dir (ctx, tree->selected_ptr->name, dest, &count, &bytes);
     file_op_context_destroy (ctx);
 
-    mhl_mem_free (dest);
+    g_free (dest);
 }
 
 static void
@@ -718,7 +716,7 @@ tree_rmdir_cmd (WTree *tree)
 			     tree->selected_ptr->name);
 	result =
 	    query_dialog (_(" Delete "), buf, D_ERROR, 2, _("&Yes"), _("&No"));
-	mhl_mem_free (buf);
+	g_free (buf);
 	if (result != 0)
 	    return;
     }

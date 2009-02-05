@@ -221,7 +221,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
 	char *t;
 	t = g_strstrip (mhl_str_dup (title));
 	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
-	mhl_mem_free (t);
+	g_free (t);
     }
 
     return (new_d);
@@ -816,11 +816,11 @@ destroy_dlg (Dlg_head *h)
     c = h->current;
     for (i = 0; i < h->count; i++) {
 	c = c->next;
-	mhl_mem_free (h->current);
+	g_free (h->current);
 	h->current = c;
     }
-    mhl_mem_free (h->title);
-    mhl_mem_free (h);
+    g_free (h->title);
+    g_free (h);
 
     do_refresh ();
 }

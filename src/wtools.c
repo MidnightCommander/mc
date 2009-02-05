@@ -89,7 +89,7 @@ int run_listbox (Listbox *l)
     else
 	val = l->list->pos;
     destroy_dlg (l->dlg);
-    mhl_mem_free (l);
+    g_free (l);
     return val;
 }
 
@@ -209,7 +209,7 @@ do_create_message (int flags, const char *title, const char *text)
     query_dialog (title, p, flags, 0);
     d = last_query_dlg;
     init_dlg (d);
-    mhl_mem_free (p);
+    g_free (p);
 
     return d;
 }
@@ -231,7 +231,7 @@ create_message (int flags, const char *title, const char *text, ...)
     va_end (args);
 
     d = do_create_message (flags, title, p);
-    mhl_mem_free (p);
+    g_free (p);
 
     return d;
 }
@@ -261,7 +261,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
     (void) dummy;
     title = g_strconcat (_("Background process:"), " ", title, (char *) NULL);
     fg_message (*flags, title, text);
-    mhl_mem_free (title);
+    g_free (title);
 }
 #endif				/* WITH_BACKGROUND */
 
@@ -288,7 +288,7 @@ message (int flags, const char *title, const char *text, ...)
 #endif				/* WITH_BACKGROUND */
 	fg_message (flags, title, p);
 
-    mhl_mem_free (p);
+    g_free (p);
 }
 
 
@@ -415,7 +415,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     }
     return_val = dd->ret_value;
     destroy_dlg (dd);
-    mhl_mem_free (widgets);
+    g_free (widgets);
 
     return return_val;
 }
@@ -516,7 +516,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     Quick_input.widgets = quick_widgets;
     ret = quick_dialog (&Quick_input);
-    mhl_mem_free (p_text);
+    g_free (p_text);
 
     if (ret != B_CANCEL) {
 	return my_str;
@@ -563,7 +563,7 @@ input_expand_dialog (const char *header, const char *text,
     result = input_dialog (header, text, history_name, def_text);
     if (result) {
 	expanded = tilde_expand (result);
-	mhl_mem_free (result);
+	g_free (result);
 	return expanded;
     }
     return result;

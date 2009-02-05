@@ -20,7 +20,7 @@ mhl/memory.h:	Memory management functions
 
 	Allocate sz bytes on stack, zero'ed
 
-    * mhl_mem_free(ptr)					[INLINE-FUNC]
+    * g_free(ptr)					[INLINE-FUNC]
 
 	Free chunk @ptr (MUST be allocated w/ mhl_mem_alloc_*()),
 	passing NULL is graciously allowed
@@ -31,8 +31,8 @@ mhl/memory.h:	Memory management functions
 
     * MHL_PTR_FREE(ptr)					[MACRO-ONLY]
     
-	like mhl_mem_free(), but with ptr as a variable that gets cleared
-	(use this as shortcut to "mhl_mem_free(foo); foo = NULL")
+	like g_free(), but with ptr as a variable that gets cleared
+	(use this as shortcut to "g_free(foo); foo = NULL")
 
 mhl/string.h:	String helpers
 
@@ -58,7 +58,7 @@ mhl/string.h:	String helpers
     * mhl_str_concat_1(const char* base, const char* one) -> char*
 
 	[INLINE-FUNC] Concatenates the string one onto the string base and returns the
-	result in a newly allocated buffer (free it w/ mhl_mem_free()).
+	result in a newly allocated buffer (free it w/ g_free()).
 	For NULL strings, "" is assumed.
 
     * mhl_str_concat_2(const char* base,const char* one,const char* two) -> char*

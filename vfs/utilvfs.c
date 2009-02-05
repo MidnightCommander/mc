@@ -138,7 +138,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     if (host)
 	*host = mhl_str_dup (rest);
 
-    mhl_mem_free (pcopy);
+    g_free (pcopy);
     return retval;
 }
 #endif				/* USE_NETCODE */
@@ -243,7 +243,7 @@ vfs_mkstemps (char **pname, const char *prefix, const char *basename)
     *q = 0;
 
     fd = mc_mkstemps (pname, prefix, suffix);
-    mhl_mem_free (suffix);
+    g_free (suffix);
     return fd;
 }
 
@@ -874,7 +874,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 	    t[p] = 0;
     }
 
-    mhl_mem_free (p_copy);
+    g_free (p_copy);
     return 1;
 
   error:
@@ -889,7 +889,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
 		     _("More parsing errors will be ignored."));
     }
 
-    mhl_mem_free (p_copy);
+    g_free (p_copy);
     return 0;
 }
 

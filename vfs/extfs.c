@@ -126,7 +126,7 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
 	    g_strconcat (a->name ? a->name : "", "#",
 			 extfs_prefixes[a->fstype], (char *) NULL);
 	(*func) (name);
-	mhl_mem_free (name);
+	g_free (name);
 	a = a->next;
     }
 }
@@ -219,10 +219,10 @@ static void extfs_free_archive (struct archive *archive)
         mc_stat (archive->local_name, &my);
         mc_ungetlocalcopy (archive->name, archive->local_name, 
             archive->local_stat.st_mtime != my.st_mtime);
-        mhl_mem_free(archive->local_name);
+        g_free(archive->local_name);
     }
-    mhl_mem_free (archive->name);
-    mhl_mem_free (archive);
+    g_free (archive->name);
+    g_free (archive);
 }
 
 static FILE *
@@ -254,16 +254,16 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     cmd =
 	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
 		     local_name ? local_name : tmp, (char *) NULL);
-    mhl_mem_free (tmp);
-    mhl_mem_free (mc_extfsdir);
+    g_free (tmp);
+    g_free (mc_extfsdir);
     open_error_pipe ();
     result = popen (cmd, "r");
-    mhl_mem_free (cmd);
+    g_free (cmd);
     if (result == NULL) {
 	close_error_pipe (D_ERROR, NULL);
 	if (local_name) {
 	    mc_ungetlocalcopy (name, local_name, 0);
-	    mhl_mem_free(local_name);
+	    g_free(local_name);
 	}
 	return NULL;
     } 
@@ -356,7 +356,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 				      0);
 		if (pent == NULL) {
 		    /* FIXME: Should clean everything one day */
-		    mhl_mem_free (buffer);
+		    g_free (buffer);
 		    pclose (extfsd);
 		    close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
 		    return -1;
@@ -375,7 +375,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 					  current_link_name, 0, 0);
 		    if (pent == NULL) {
 			/* FIXME: Should clean everything one day */
-			mhl_mem_free (buffer);
+			g_free (buffer);
 			pclose (extfsd);
 			close_error_pipe (D_ERROR,
 					  _("Inconsistent extfs archive"));
@@ -420,11 +420,11 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		}
 	    }
 	  read_extfs_continue:
-	    mhl_mem_free (current_file_name);
-	    mhl_mem_free (current_link_name);
+	    g_free (current_file_name);
+	    g_free (current_link_name);
 	}
     }
-    mhl_mem_free (buffer);
+    g_free (buffer);
 
     /* Check if extfs 'list' returned 0 */
     if (pclose (extfsd) != 0) {
@@ -499,7 +499,7 @@ extfs_get_path (struct vfs_class *me, const char *inname, struct archive **archi
     char *res2 = NULL;
     if (res)
 	res2 = mhl_str_dup (res);
-    mhl_mem_free (buf);
+    g_free (buf);
     return res2;
 }
 
@@ -533,7 +533,7 @@ static char *extfs_get_path_from_entry (struct entry *entry)
 	    strcat (localpath, "/");
 	p = head;
 	head = head->next;
-	mhl_mem_free (p);
+	g_free (p);
     }
     return (localpath);
 }
@@ -568,7 +568,7 @@ extfs_resolve_symlinks_int (struct entry *entry,
     looping->entry = entry;
     looping->next = list;
     pent = extfs_find_entry_int (entry->dir, entry->inode->linkname, looping, 0, 0);
-    mhl_mem_free (looping);
+    g_free (looping);
     if (pent == NULL)
     	my_errno = ENOENT;
     return pent;
@@ -621,7 +621,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
 
     file = extfs_get_path_from_entry (entry);
     quoted_file = name_quote (file, 0);
-    mhl_mem_free (file);
+    g_free (file);
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     quoted_localname = name_quote (localname, 0);
 
@@ -629,14 +629,14 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       extfs_cmd, archive_name, " ", quoted_file, " ",
 		       quoted_localname, (char *) NULL);
-    mhl_mem_free (quoted_file);
-    mhl_mem_free (quoted_localname);
-    mhl_mem_free (mc_extfsdir);
-    mhl_mem_free (archive_name);
+    g_free (quoted_file);
+    g_free (quoted_localname);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
 
     open_error_pipe ();
     retval = my_system (EXECUTE_AS_SHELL, shell, cmd);
-    mhl_mem_free (cmd);
+    g_free (cmd);
     close_error_pipe (D_ERROR, NULL);
     return retval;
 }
@@ -651,17 +651,17 @@ extfs_run (struct vfs_class *me, const char *file)
     if ((p = extfs_get_path (me, file, &archive, 0)) == NULL)
 	return;
     q = name_quote (p, 0);
-    mhl_mem_free (p);
+    g_free (p);
 
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     mc_extfsdir = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       " run ", archive_name, " ", q, (char *) NULL);
-    mhl_mem_free (mc_extfsdir);
-    mhl_mem_free (archive_name);
-    mhl_mem_free (q);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
+    g_free (q);
     shell_execute (cmd, 0);
-    mhl_mem_free (cmd);
+    g_free (cmd);
 }
 
 static void *
@@ -683,7 +683,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 	created = (entry != NULL);
     }
 
-    mhl_mem_free (q);
+    g_free (q);
     if (entry == NULL)
 	return NULL;
     if ((entry = extfs_resolve_symlinks (entry)) == NULL)
@@ -766,7 +766,7 @@ extfs_close (void *data)
     if (!file->archive->fd_usage)
 	vfs_stamp_create (&vfs_extfs_ops, file->archive);
 
-    mhl_mem_free (data);
+    g_free (data);
     if (errno_code)
 	ERRNOR (EIO, -1);
     return 0;
@@ -882,7 +882,7 @@ static void * extfs_opendir (struct vfs_class *me, const char *dirname)
     if ((q = extfs_get_path (me, dirname, &archive, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    mhl_mem_free (q);
+    g_free (q);
     if (entry == NULL)
     	return NULL;
     if ((entry = extfs_resolve_symlinks (entry)) == NULL)
@@ -914,7 +914,7 @@ static void * extfs_readdir(void *data)
 
 static int extfs_closedir (void *data)
 {
-    mhl_mem_free (data);
+    g_free (data);
     return 0;
 }
 
@@ -961,7 +961,7 @@ extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf,
     extfs_stat_move (buf, entry->inode);
     result = 0;
 cleanup:
-    mhl_mem_free (path2);
+    g_free (path2);
     return result;
 }
 
@@ -1008,7 +1008,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     /* readlink() does not append a NUL character to buf */
     memcpy (buf, entry->inode->linkname, result = len);
 cleanup:
-    mhl_mem_free (mpath);
+    g_free (mpath);
     return result;
 }
 
@@ -1053,7 +1053,7 @@ static int extfs_unlink (struct vfs_class *me, const char *file)
     extfs_remove_entry (entry);
     result = 0;
 cleanup:
-    mhl_mem_free (mpath);
+    g_free (mpath);
     return result;
 }
 
@@ -1090,7 +1090,7 @@ static int extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     }
     result = 0;
 cleanup:
-    mhl_mem_free (mpath);
+    g_free (mpath);
     return result;
 }
 
@@ -1120,7 +1120,7 @@ static int extfs_rmdir (struct vfs_class *me, const char *path)
     extfs_remove_entry (entry);
     result = 0;
 cleanup:
-    mhl_mem_free (mpath);
+    g_free (mpath);
     return result;
 }
 
@@ -1135,7 +1135,7 @@ extfs_chdir (struct vfs_class *me, const char *path)
     if ((q = extfs_get_path (me, path, &archive, 0)) == NULL)
 	return -1;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
-    mhl_mem_free (q);
+    g_free (q);
     if (!entry)
 	return -1;
     entry = extfs_resolve_symlinks (entry);
@@ -1160,7 +1160,7 @@ extfs_getid (struct vfs_class *me, const char *path)
 
     if (!(p = extfs_get_path (me, path, &archive, 1)))
 	return NULL;
-    mhl_mem_free (p);
+    g_free (p);
     return (vfsid) archive;
 }
 
@@ -1202,12 +1202,12 @@ static void extfs_remove_entry (struct entry *e)
             unlink (e->inode->local_filename);
             free (e->inode->local_filename);
         }
-        mhl_mem_free (e->inode->linkname);
-        mhl_mem_free (e->inode);
+        g_free (e->inode->linkname);
+        g_free (e->inode);
     }
 
-    mhl_mem_free (e->name);
-    mhl_mem_free (e);
+    g_free (e->name);
+    g_free (e);
 }
 
 static void extfs_free_entry (struct entry *e)
@@ -1224,13 +1224,13 @@ static void extfs_free_entry (struct entry *e)
             unlink (e->inode->local_filename);
             free (e->inode->local_filename);
         }
-        mhl_mem_free (e->inode->linkname);
-        mhl_mem_free (e->inode);
+        g_free (e->inode->linkname);
+        g_free (e->inode);
     }
     if (e->next_in_dir != NULL)
         extfs_free_entry (e->next_in_dir);
-    mhl_mem_free (e->name);
-    mhl_mem_free (e);
+    g_free (e->name);
+    g_free (e);
 }
 
 static void extfs_free (vfsid id)
@@ -1307,7 +1307,7 @@ static int extfs_init (struct vfs_class *me)
      * appear on screen. */
     if (!cfg) {
 	fprintf (stderr, _("Warning: file %s not found\n"), mc_extfsini);
-	mhl_mem_free (mc_extfsini);
+	g_free (mc_extfsini);
 	return 0;
     }
 
@@ -1323,7 +1323,7 @@ static int extfs_init (struct vfs_class *me)
 	    fprintf(stderr, "Warning: You need to update your %s file.\n",
 		    mc_extfsini);
 	    fclose(cfg);
-	    mhl_mem_free (mc_extfsini);
+	    g_free (mc_extfsini);
 	    return 0;
 	}
 	if (*key == '#' || *key == '\n')
@@ -1343,7 +1343,7 @@ static int extfs_init (struct vfs_class *me)
 	extfs_prefixes [extfs_no++] = mhl_str_dup (key);
     }
     fclose(cfg);
-    mhl_mem_free (mc_extfsini);
+    g_free (mc_extfsini);
     return 1;
 }
 
@@ -1372,7 +1372,7 @@ static void extfs_done (struct vfs_class *me)
     }
 
     for (i = 0; i < extfs_no; i++ )
-	mhl_mem_free (extfs_prefixes [i]);
+	g_free (extfs_prefixes [i]);
     extfs_no = 0;
 }
 

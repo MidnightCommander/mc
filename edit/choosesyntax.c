@@ -74,9 +74,9 @@ edit_syntax_dialog (void) {
 
     if ((syntax = exec_edit_syntax_dialog ((const char**) names)) < 0) {
 	for (i = 0; names[i]; i++) {
-	    mhl_mem_free (names[i]);
+	    g_free (names[i]);
 	}
-	mhl_mem_free (names);
+	g_free (names);
 	return;
     }
 
@@ -92,7 +92,7 @@ edit_syntax_dialog (void) {
 	    break;
 	default:
 	    option_auto_syntax = 0;
-	    mhl_mem_free (option_syntax_type);
+	    g_free (option_syntax_type);
 	    option_syntax_type = mhl_str_dup (names[syntax - N_DFLT_ENTRIES]);
     }
 
@@ -104,8 +104,8 @@ edit_syntax_dialog (void) {
 	edit_load_syntax (wedit, NULL, option_syntax_type);
 
     for (i = 0; names[i]; i++) {
-	mhl_mem_free (names[i]);
+	g_free (names[i]);
     }
-    mhl_mem_free (names);
-    mhl_mem_free (old_syntax_type);
+    g_free (names);
+    g_free (old_syntax_type);
 }

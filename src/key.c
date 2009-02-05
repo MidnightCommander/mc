@@ -155,7 +155,7 @@ void delete_select_channel (int fd)
 	    else
 		select_list = p_next;
 
-	    mhl_mem_free (p);
+	    g_free (p);
 	    p = p_next;
 	    continue;
 	}
@@ -1398,7 +1398,7 @@ static void k_dispose (key_def *k)
 	return;
     k_dispose (k->child);
     k_dispose (k->next);
-    mhl_mem_free (k);
+    g_free (k);
 }
 
 static void s_dispose (SelectList *sel)
@@ -1407,7 +1407,7 @@ static void s_dispose (SelectList *sel)
 	return;
 
     s_dispose (sel->next);
-    mhl_mem_free (sel);
+    g_free (sel);
 }
 
 void done_key ()

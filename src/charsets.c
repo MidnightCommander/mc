@@ -53,10 +53,10 @@ load_codepages_list (void)
     fname = mhl_str_dir_plus_file (mc_home, CHARSETS_INDEX);
     if (!(f = fopen (fname, "r"))) {
 	fprintf (stderr, _("Warning: file %s not found\n"), fname);
-	mhl_mem_free (fname);
+	g_free (fname);
 	return -1;
     }
-    mhl_mem_free (fname);
+    g_free (fname);
 
     for (n_codepages = 0; fgets (buf, sizeof (buf), f);)
 	if (buf[0] != '\n' && buf[0] != '\0' && buf[0] != '#')
@@ -99,7 +99,7 @@ load_codepages_list (void)
 
     if (default_codepage) {
 	display_codepage = get_codepage_index (default_codepage);
-	mhl_mem_free (default_codepage);
+	g_free (default_codepage);
     }
 
     result = n_codepages;
@@ -114,11 +114,11 @@ free_codepages_list (void)
     if (n_codepages > 0) {
 	int i;
 	for (i = 0; i < n_codepages; i++) {
-	    mhl_mem_free (codepages[i].id);
-	    mhl_mem_free (codepages[i].name);
+	    g_free (codepages[i].id);
+	    g_free (codepages[i].name);
 	}
 	n_codepages = 0;
-	mhl_mem_free (codepages);
+	g_free (codepages);
 	codepages = 0;
     }
 }

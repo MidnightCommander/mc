@@ -255,7 +255,7 @@ static void configure_colors_string (const char *the_color_string)
 			color_string++;
 	}
     }
-   mhl_mem_free (p);
+   g_free (p);
 }
 
 static void configure_colors (void)
@@ -467,9 +467,9 @@ done_colors (void)
 
     for (p = c.next; p; p = next) {
 	next = p->next;
-	mhl_mem_free (p->fg);
-	mhl_mem_free (p->bg);
-	mhl_mem_free (p);
+	g_free (p->fg);
+	g_free (p->bg);
+	g_free (p);
     }
     c.next = NULL;
 }

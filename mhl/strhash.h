@@ -6,7 +6,7 @@
 
 static void __mhl_strhash_free_key(void* ptr)
 {
-    mhl_mem_free(ptr);
+    g_free(ptr);
 }
 
 static void __mhl_strhash_free_dummy(void* ptr)

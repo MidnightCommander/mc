@@ -164,7 +164,7 @@ do_execute (const char *shell, const char *command, int flags)
 #ifdef USE_VFS
     if (old_vfs_dir) {
 	mc_chdir (old_vfs_dir);
-	mhl_mem_free (old_vfs_dir);
+	g_free (old_vfs_dir);
     }
 #endif				/* USE_VFS */
 
@@ -198,7 +198,7 @@ shell_execute (const char *command, int flags)
 #endif				/* HAVE_SUBSHELL_SUPPORT */
 	do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 
-    mhl_mem_free (cmd);
+    g_free (cmd);
 }
 
 
@@ -371,6 +371,6 @@ execute_with_vfs_arg (const char *command, const char *filename)
     do_execute (command, localcopy, EXECUTE_INTERNAL);
     mc_stat (localcopy, &st);
     mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
-    mhl_mem_free (localcopy);
-    mhl_mem_free (fn);
+    g_free (localcopy);
+    g_free (fn);
 }

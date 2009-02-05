@@ -46,7 +46,7 @@ is_logging_enabled(void)
 		mc_ini = g_strdup_printf("%s/%s", home_dir, PROFILE_NAME);
 		logging_enabled =
 		    get_int(mc_ini, "development.enable_logging", FALSE);
-		mhl_mem_free(mc_ini);
+		g_free(mc_ini);
 		logging_initialized = TRUE;
 	}
 	return logging_enabled;
@@ -68,6 +68,6 @@ mc_log(const char *fmt, ...)
 			(void)vfprintf(f, fmt, args);
 			(void)fclose(f);
 		}
-		mhl_mem_free(logfilename);
+		g_free(logfilename);
 	}
 }

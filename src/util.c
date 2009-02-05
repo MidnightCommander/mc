@@ -271,7 +271,7 @@ path_trunc (const char *path, size_t trunc_len) {
     char *secure_path = strip_password (mhl_str_dup (path), 1);
     
     ret = name_trunc (secure_path, trunc_len);
-    mhl_mem_free (secure_path);
+    g_free (secure_path);
     
     return ret;
 }
@@ -602,12 +602,12 @@ regexp_match (const char *pattern, const char *string, int match_type)
     if (!old_pattern || STRCOMP (old_pattern, pattern) || old_type != match_type){
 	if (old_pattern){
 	    regfree (&r);
-	    mhl_mem_free (old_pattern);
+	    g_free (old_pattern);
 	    old_pattern = NULL;
 	}
 	my_pattern = convert_pattern (pattern, match_type, 0);
 	if (regcomp (&r, my_pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
-	    mhl_mem_free (my_pattern);
+	    g_free (my_pattern);
 	    return -1;
 	}
 	old_pattern = my_pattern;
@@ -682,7 +682,7 @@ load_file (const char *filename)
     if (read_size > 0)
 	return data;
     else {
-	 mhl_mem_free (data);
+	 g_free (data);
 	return 0;
     }
 }
@@ -701,7 +701,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     data = load_file (hintfile);
 
     if (!data) {
-	mhl_mem_free (hintfile);
+	g_free (hintfile);
 	/* Fall back to the two-letter language code */
 	if (lang[0] && lang[1])
 	    lang[2] = 0;
@@ -709,21 +709,21 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 	data = load_file (hintfile);
 
 	if (!data) {
-	    mhl_mem_free (hintfile);
+	    g_free (hintfile);
 	    hintfile = hintfile_base;
 	    data = load_file (hintfile_base);
 	}
     }
 
-    mhl_mem_free (lang);
+    g_free (lang);
 
     if (hintfile != hintfile_base)
-	mhl_mem_free (hintfile_base);
+	g_free (hintfile_base);
 
     if (allocated_filename)
 	*allocated_filename = hintfile;
     else
-	mhl_mem_free (hintfile);
+	g_free (hintfile);
 
     return data;
 }
@@ -853,7 +853,7 @@ unix_error_string (int error_num)
     strerror_currentlocale = g_locale_from_utf8(g_strerror (error_num), -1, NULL, NULL, NULL);
     snprintf (buffer, sizeof (buffer), "%s (%d)",
 		strerror_currentlocale, error_num);
-    mhl_mem_free(strerror_currentlocale);
+    g_free(strerror_currentlocale);
 #else
     snprintf (buffer, sizeof (buffer), "%s (%d)",
 		g_strerror (error_num), error_num);
@@ -938,12 +938,12 @@ get_current_wd (char *buffer, int size)
     len = strlen(p) + 1;
 
     if (len > size) {
-	mhl_mem_free (p);
+	g_free (p);
 	return NULL;
     }
 
     memcpy (buffer, p, len);
-    mhl_mem_free (p);
+    g_free (p);
 
     return buffer;
 }
@@ -1049,7 +1049,7 @@ execute_hooks (Hook *hook_list)
     for (hook_list = p; hook_list;){
 	p = hook_list;
 	hook_list = hook_list->next;
-	 mhl_mem_free (p);
+	 g_free (p);
     }
 }
 
@@ -1063,7 +1063,7 @@ delete_hook (Hook **hook_list, void (*hook_fn)(void *))
     for (current = *hook_list; current; current = next){
 	next = current->next;
 	if (current->hook_fn == hook_fn)
-	    mhl_mem_free (current);
+	    g_free (current);
 	else
 	    add_hook (&new_list, current->hook_fn, current->hook_data);
     }
@@ -1090,7 +1090,7 @@ wipe_password (char *passwd)
 	return;
     for (;*p ; p++)
         *p = 0;
-    mhl_mem_free (passwd);
+    g_free (passwd);
 }
 
 /* Convert "\E" -> esc character and ^x to control-x key and ^^ to ^ key */
@@ -1155,8 +1155,8 @@ resolve_symlinks (const char *path)
 	c = *q;
 	*q = 0;
 	if (mc_lstat (path, &mybuf) < 0) {
-	    mhl_mem_free (buf);
-	    mhl_mem_free (buf2);
+	    g_free (buf);
+	    g_free (buf2);
 	    *q = c;
 	    return NULL;
 	}
@@ -1165,8 +1165,8 @@ resolve_symlinks (const char *path)
 	else {
 	    len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
 	    if (len < 0) {
-		mhl_mem_free (buf);
-		mhl_mem_free (buf2);
+		g_free (buf);
+		g_free (buf2);
 		*q = c;
 		return NULL;
 	    }
@@ -1191,7 +1191,7 @@ resolve_symlinks (const char *path)
 	strcpy (buf, PATH_SEP_STR);
     else if (*(r - 1) == PATH_SEP && r != buf + 1)
 	*(r - 1) = 0;
-    mhl_mem_free (buf2);
+    g_free (buf2);
     return buf;
 }
 
@@ -1209,7 +1209,7 @@ diff_two_paths (const char *first, const char *second)
         return NULL;
     my_second = resolve_symlinks (second);
     if (my_second == NULL) {
-	mhl_mem_free (my_first);
+	g_free (my_first);
 	return NULL;
     }
     for (j = 0; j < 2; j++) {
@@ -1235,10 +1235,10 @@ diff_two_paths (const char *first, const char *second)
 	currlen = (i + 1) * 3 + strlen (q) + 1;
 	if (j) {
 	    if (currlen < prevlen)
-	        mhl_mem_free (buf);
+	        g_free (buf);
 	    else {
-		mhl_mem_free (my_first);
-		mhl_mem_free (my_second);
+		g_free (my_first);
+		g_free (my_second);
 		return buf;
 	    }
 	}
@@ -1248,8 +1248,8 @@ diff_two_paths (const char *first, const char *second)
 	    strcpy (p, "../");
 	strcpy (p, q);
     }
-    mhl_mem_free (my_first);
-    mhl_mem_free (my_second);
+    g_free (my_first);
+    g_free (my_second);
     return buf;
 }
 
@@ -1271,7 +1271,7 @@ list_append_unique (GList *list, char *text)
     while (link) {
 	newlink = g_list_previous (link);
 	if (!strcmp ((char *) link->data, text)) {
-	    mhl_mem_free (link->data);
+	    g_free (link->data);
 	    g_list_remove_link (list, link);
 	    g_list_free_1 (link);
 	}
@@ -1290,7 +1290,7 @@ list_append_unique (GList *list, char *text)
 
 /*
  * Arguments:
- * pname (output) - pointer to the name of the temp file (needs mhl_mem_free).
+ * pname (output) - pointer to the name of the temp file (needs g_free).
  *                  NULL if the function fails.
  * prefix - part of the filename before the random part.
  *          Prepend $TMPDIR or /tmp if there are no path separators.
@@ -1321,7 +1321,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     tmpname = g_strconcat (tmpbase, "XXXXXX", suffix, (char *) NULL);
     *pname = tmpname;
     XXXXXX = &tmpname[strlen (tmpbase)];
-    mhl_mem_free (tmpbase);
+    g_free (tmpbase);
 
     /* Get some more or less random data.  */
     gettimeofday (&tv, NULL);
@@ -1358,7 +1358,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
     }
 
     /* Unsuccessful. Free the filename. */
-    mhl_mem_free (tmpname);
+    g_free (tmpname);
     *pname = NULL;
 
     return -1;
@@ -1383,7 +1383,7 @@ load_file_position (const char *filename, long *line, long *column)
     /* open file with positions */
     fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
     f = fopen (fn, "r");
-    mhl_mem_free (fn);
+    g_free (fn);
     if (!f)
 	return;
 
@@ -1434,8 +1434,8 @@ save_file_position (const char *filename, long line, long column)
     /* open temporary file */
     t = fopen (tmp, "w");
     if (!t) {
-	mhl_mem_free (tmp);
-	mhl_mem_free (fn);
+	g_free (tmp);
+	g_free (fn);
 	return;
     }
 
@@ -1462,8 +1462,8 @@ save_file_position (const char *filename, long line, long column)
 
     fclose (t);
     rename (tmp, fn);
-    mhl_mem_free (tmp);
-    mhl_mem_free (fn);
+    g_free (tmp);
+    g_free (fn);
 }
 
 extern const char *

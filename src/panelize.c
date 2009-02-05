@@ -234,7 +234,7 @@ add2panelize_cmd (void)
 	if (!label)
 	    return;
 	if (!*label) {
-	    mhl_mem_free (label);
+	    g_free (label);
 	    return;
 	}
 	
@@ -256,9 +256,9 @@ static void remove_from_panelize (struct panelize *entry)
 	    }
 	}
 
-	mhl_mem_free (entry->label);
-	mhl_mem_free (entry->command);
-	mhl_mem_free (entry);
+	g_free (entry->label);
+	g_free (entry->command);
+	g_free (entry);
     }
 }
 
@@ -298,7 +298,7 @@ external_panelize (void)
 	    char *cmd = mhl_str_dup (target);
 	    destroy_dlg (panelize_dlg);
 	    do_external_panelize (cmd);
-	    mhl_mem_free (cmd);
+	    g_free (cmd);
 	    repaint_screen ();
 	    return;
 	}
@@ -352,9 +352,9 @@ void done_panelize (void)
 
     for (; current; current = next){
 	next = current->next;
-	mhl_mem_free (current->label);
-	mhl_mem_free (current->command);
-	mhl_mem_free (current);
+	g_free (current->label);
+	g_free (current->command);
+	g_free (current);
     }
 }
 

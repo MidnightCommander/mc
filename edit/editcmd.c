@@ -28,6 +28,7 @@
 
 #include <assert.h>
 #include <ctype.h>
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -145,7 +146,7 @@ catstrs (const char *first,...)
     len++;
 
     i = (i + 1) % 16;
-    mhl_mem_free (stacked[i]);
+    g_free (stacked[i]);
 
     stacked[i] = g_malloc (len);
     va_end (ap);
@@ -164,7 +165,7 @@ void freestrs(void)
     size_t i;
 
     for (i = 0; i < sizeof(stacked) / sizeof(stacked[0]); i++) {
-	mhl_mem_free (stacked[i]);
+	g_free (stacked[i]);
 	stacked[i] = NULL;
     }
 }
@@ -216,7 +217,7 @@ edit_save_file (WEdit *edit, const char *filename)
     if (*filename != PATH_SEP && edit->dir) {
 	savename = mhl_str_dir_plus_file (edit->dir, filename);
 	filename = catstrs (savename, (char *) NULL);
-	mhl_mem_free (savename);
+	g_free (savename);
     }
 
     this_save_mode = option_save_mode;
@@ -281,9 +282,9 @@ edit_save_file (WEdit *edit, const char *filename)
 	} else
 	    savedir = mhl_str_dup (".");
 	saveprefix = mhl_str_dir_plus_file (savedir, "cooledit");
-	mhl_mem_free (savedir);
+	g_free (savedir);
 	fd = mc_mkstemps (&savename, saveprefix, NULL);
-	mhl_mem_free (saveprefix);
+	g_free (saveprefix);
 	if (!savename)
 	    return 0;
 	/* FIXME:
@@ -319,7 +320,7 @@ edit_save_file (WEdit *edit, const char *filename)
 		edit_error_dialog (_("Error"),
 				   catstrs (_(" Error writing to pipe: "),
 					    p, " ", (char *) NULL));
-		mhl_mem_free (p);
+		g_free (p);
 		goto error_save;
 	    }
 #endif
@@ -329,10 +330,10 @@ edit_save_file (WEdit *edit, const char *filename)
 					      (_
 					       (" Cannot open pipe for writing: "),
 					       p, " ", (char *) NULL)));
-	    mhl_mem_free (p);
+	    g_free (p);
 	    goto error_save;
 	}
-	mhl_mem_free (p);
+	g_free (p);
     } else {
 	long buf;
 	buf = 0;
@@ -393,14 +394,14 @@ edit_save_file (WEdit *edit, const char *filename)
     if (this_save_mode != EDIT_QUICK_SAVE)
 	if (mc_rename (savename, filename) == -1)
 	    goto error_save;
-    mhl_mem_free (savename);
+    g_free (savename);
     return 1;
   error_save:
 /*  FIXME: Is this safe ?
  *  if (this_save_mode != EDIT_QUICK_SAVE)
  *	mc_unlink (savename);
  */
-    mhl_mem_free (savename);
+    g_free (savename);
     return 0;
 }
 
@@ -471,7 +472,7 @@ void menu_save_mode_cmd (void)
 	return;
     option_save_mode = save_mode_new;
 
-    mhl_mem_free (option_backup_ext);
+    g_free (option_backup_ext);
     option_backup_ext = str_result;
     str_result = NULL;
 }
@@ -479,7 +480,7 @@ void menu_save_mode_cmd (void)
 void
 edit_set_filename (WEdit *edit, const char *f)
 {
-    mhl_mem_free (edit->filename);
+    g_free (edit->filename);
     if (!f)
 	f = "";
     edit->filename = mhl_str_dup (f);
@@ -508,7 +509,7 @@ edit_save_as_cmd (WEdit *edit)
 
     if (exp) {
 	if (!*exp) {
-	    mhl_mem_free (exp);
+	    g_free (exp);
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
@@ -525,7 +526,7 @@ edit_save_as_cmd (WEdit *edit)
 			 _(" A file already exists with this name. "),
 			 _("&Overwrite"), _("&Cancel"))) {
 			edit->force |= REDRAW_COMPLETELY;
-			mhl_mem_free (exp);
+			g_free (exp);
 			return 0;
 		    }
 		}
@@ -551,7 +552,7 @@ edit_save_as_cmd (WEdit *edit)
 		}
 
 		edit_set_filename (edit, exp);
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
 		if (different_filename)
@@ -567,7 +568,7 @@ edit_save_as_cmd (WEdit *edit)
 		/* Failed, so maintain modify (not save) lock */
 		if (save_lock)
 		    edit_unlock_file (exp);
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
@@ -859,13 +860,13 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     char *prev_filename = mhl_str_dup (edit->filename);
 
     if (!edit_reload (edit, exp)) {
-	mhl_mem_free (prev_filename);
+	g_free (prev_filename);
 	return 1;
     }
 
     if (prev_locked)
 	edit_unlock_file (prev_filename);
-    mhl_mem_free (prev_filename);
+    g_free (prev_filename);
     return 0;
 }
 
@@ -891,7 +892,7 @@ edit_load_cmd (WEdit *edit)
     if (exp) {
 	if (*exp)
 	    edit_load_file_from_filename (edit, exp);
-	mhl_mem_free (exp);
+	g_free (exp);
     }
     edit->force |= REDRAW_COMPLETELY;
     return 0;
@@ -992,7 +993,7 @@ edit_block_copy_cmd (WEdit *edit)
 	    edit_insert_ahead (edit, copy_buf[size]);
     }
 
-    mhl_mem_free (copy_buf);
+    g_free (copy_buf);
     edit_scroll_screen_over_cursor (edit);
 
     if (column_highlighting) {
@@ -1093,7 +1094,7 @@ edit_block_move_cmd (WEdit *edit)
 			  edit->curs1 + end_mark - start_mark, 0, 0);
     }
     edit_scroll_screen_over_cursor (edit);
-    mhl_mem_free (copy_buf);
+    g_free (copy_buf);
     edit->force |= REDRAW_PAGE;
 }
 
@@ -1429,7 +1430,7 @@ string_regexp_search (char *pattern, char *string, int match_type,
 	|| old_type != match_type || old_icase != icase) {
 	if (old_pattern) {
 	    regfree (&r);
-	    mhl_mem_free (old_pattern);
+	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
 	if (regcomp (&r, pattern, REG_EXTENDED | (icase ? REG_ICASE : 0) |
@@ -1805,9 +1806,9 @@ edit_replace_cmd (WEdit *edit, int again)
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
-	mhl_mem_free (saved1), saved1 = NULL;
-	mhl_mem_free (saved2), saved2 = NULL;
-	mhl_mem_free (saved3), saved3 = NULL;
+	g_free (saved1), saved1 = NULL;
+	g_free (saved2), saved2 = NULL;
+	g_free (saved3), saved3 = NULL;
 	return;
     }
 
@@ -1835,9 +1836,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2,
 			     &input3);
 
-	mhl_mem_free (disp1);
-	mhl_mem_free (disp2);
-	mhl_mem_free (disp3);
+	g_free (disp1);
+	g_free (disp2);
+	g_free (disp3);
 
 	convert_from_input (input1);
 	convert_from_input (input2);
@@ -1849,9 +1850,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	    goto cleanup;
 	}
 
-	mhl_mem_free (saved1), saved1 = mhl_str_dup (input1);
-	mhl_mem_free (saved2), saved2 = mhl_str_dup (input2);
-	mhl_mem_free (saved3), saved3 = mhl_str_dup (input3);
+	g_free (saved1), saved1 = mhl_str_dup (input1);
+	g_free (saved2), saved2 = mhl_str_dup (input2);
+	g_free (saved3), saved3 = mhl_str_dup (input3);
     }
 
     {
@@ -2042,9 +2043,9 @@ edit_replace_cmd (WEdit *edit, int again)
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
   cleanup:
-    mhl_mem_free (input1);
-    mhl_mem_free (input2);
-    mhl_mem_free (input3);
+    g_free (input1);
+    g_free (input2);
+    g_free (input3);
 }
 
 
@@ -2056,7 +2057,7 @@ void edit_search_cmd (WEdit * edit, int again)
     char *exp = "";
 
     if (!edit) {
-	mhl_mem_free (old);
+	g_free (old);
 	old = NULL;
 	return;
     }
@@ -2086,7 +2087,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (exp) {
 	if (*exp) {
 	    int len = 0;
-	    mhl_mem_free (old);
+	    g_free (old);
 	    old = mhl_str_dup (exp);
 
 	    if (search_create_bookmark) {
@@ -2143,7 +2144,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		}
 	    }
 	}
-	mhl_mem_free (exp);
+	g_free (exp);
     }
     edit->force |= REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
@@ -2182,7 +2183,7 @@ edit_ok_to_exit (WEdit *edit)
 
 #define TEMP_BUF_LEN 1024
 
-/* Return a null terminated length of text. Result must be mhl_mem_free'd */
+/* Return a null terminated length of text. Result must be g_free'd */
 static unsigned char *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
@@ -2235,7 +2236,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	    p += r;
 	    len -= r;
 	}
-	mhl_mem_free (block);
+	g_free (block);
     } else {
 	unsigned char *buf;
 	int i = start, end;
@@ -2248,7 +2249,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	    len -= mc_write (file, (char *) buf, end - start);
 	    start = end;
 	}
-	mhl_mem_free (buf);
+	g_free (buf);
     }
     mc_close (file);
     if (len)
@@ -2322,13 +2323,13 @@ edit_goto_cmd (WEdit *edit)
 	return;
 
     if (!*f) {
-	mhl_mem_free (f);
+	g_free (f);
 	return;
     }
 
     l = strtol (f, &error, 0);
     if (*error) {
-	mhl_mem_free (f);
+	g_free (f);
 	return;
     }
 
@@ -2338,7 +2339,7 @@ edit_goto_cmd (WEdit *edit)
     edit_move_display (edit, l - edit->num_widget_lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
-    mhl_mem_free (f);
+    g_free (f);
 }
 
 
@@ -2357,15 +2358,15 @@ edit_save_block_cmd (WEdit *edit)
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
-	    mhl_mem_free (exp);
+	    g_free (exp);
 	    return 0;
 	} else {
 	    if (edit_save_block (edit, exp, start_mark, end_mark)) {
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit_error_dialog (_(" Save Block "),
 				   get_sys_error (_
 						  (" Cannot save file. ")));
@@ -2387,15 +2388,15 @@ edit_insert_file_cmd (WEdit *edit)
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
-	    mhl_mem_free (exp);
+	    g_free (exp);
 	    return 0;
 	} else {
 	    if (edit_insert_file (edit, exp)) {
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
-		mhl_mem_free (exp);
+		g_free (exp);
 		edit_error_dialog (_(" Insert File "),
 				   get_sys_error (_
 						  (" Cannot insert file. ")));
@@ -2426,7 +2427,7 @@ int edit_sort_cmd (WEdit * edit)
 
     if (!exp)
 	return 1;
-    mhl_mem_free (old);
+    g_free (old);
     old = exp;
 
     e = system (catstrs (" sort ", exp, " ", home_dir, PATH_SEP_STR BLOCK_FILE, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
@@ -2470,7 +2471,7 @@ edit_ext_cmd (WEdit *edit)
 	return 1;
 
     e = system (catstrs (exp, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
-    mhl_mem_free (exp);
+    g_free (exp);
 
     if (e) {
 	edit_error_dialog (_("External command"),
@@ -2566,7 +2567,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	system (catstrs (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
 			 quoted_name, (char *) NULL));
     }
-    mhl_mem_free (quoted_name);
+    g_free (quoted_name);
     close_error_pipe (D_NORMAL, NULL);
 
     edit_refresh_cmd (edit);
@@ -2607,13 +2608,13 @@ static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
     subject = name_quote (subject, 0);
     cc = name_quote (cc, 0);
     s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "" , cc, " ",  to, (char *) NULL);
-    mhl_mem_free (to);
-    mhl_mem_free (subject);
-    mhl_mem_free (cc);
+    g_free (to);
+    g_free (subject);
+    g_free (cc);
 
     if (s) {
 	p = popen (s, "w");
-	mhl_mem_free (s);
+	g_free (s);
     }
 
     if (p) {
@@ -2672,9 +2673,9 @@ void edit_mail_dialog (WEdit * edit)
     Quick_input.widgets = quick_widgets;
 
     if (quick_dialog (&Quick_input) != B_CANCEL) {
-	mhl_mem_free (mail_cc_last);
-	mhl_mem_free (mail_subject_last);
-	mhl_mem_free (mail_to_last);
+	g_free (mail_cc_last);
+	g_free (mail_subject_last);
+	g_free (mail_to_last);
 	mail_cc_last = tmail_cc;
 	mail_subject_last = tmail_subject;
 	mail_to_last = tmail_to;
@@ -2916,10 +2917,10 @@ edit_complete_word_cmd (WEdit *edit)
 	}
     }
 
-    mhl_mem_free (match_expr);
+    g_free (match_expr);
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
-	mhl_mem_free (compl[i].text);
+	g_free (compl[i].text);
 
     /* restore search parameters */
     edit_set_search_parameters (old_rs, old_rb, old_rr, old_rw, old_rc);

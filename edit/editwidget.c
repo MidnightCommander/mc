@@ -178,7 +178,7 @@ edit_file (const char *_file, int line)
     if (!made_directory) {
 	char *dir = mhl_str_dir_plus_file (home_dir, EDIT_DIR);
 	made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
-	mhl_mem_free (dir);
+	g_free (dir);
     }
 
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {

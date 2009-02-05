@@ -34,8 +34,6 @@
 #include <errno.h>
 #include <sys/stat.h>
 
-#include <mhl/memory.h>
-
 #include "../src/global.h"
 
 #include "edit.h"
@@ -147,7 +145,7 @@ edit_status (WEdit *edit)
     printwstr (status, w - (fname_len + gap));
     attrset (EDITOR_NORMAL_COLOR);
 
-    mhl_mem_free (status);
+    g_free (status);
 }
 
 /* this scrolls the text so that cursor is on the screen */

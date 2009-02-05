@@ -258,7 +258,7 @@ file_op_context_destroy_ui (FileOpContext *ctx)
 
 	dlg_run_done (ui->op_dlg);
 	destroy_dlg (ui->op_dlg);
-	mhl_mem_free (ui);
+	g_free (ui);
     }
 
     the_hint->widget.y = last_hint_line;
@@ -906,10 +906,10 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
   ask_file_mask:
 
     if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL) {
-	mhl_mem_free (def_text_secure);
+	g_free (def_text_secure);
 	return 0;
     }
-    mhl_mem_free (def_text_secure);
+    g_free (def_text_secure);
 
     if (ctx->follow_links)
 	ctx->stat_func = mc_stat;
@@ -930,7 +930,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     orig_mask = source_mask;
     if (!dest_dir || !*dest_dir) {
-	mhl_mem_free (source_mask);
+	g_free (source_mask);
 	return dest_dir;
     }
     if (source_easy_patterns) {
@@ -941,7 +941,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	error =
 	    re_compile_pattern (source_mask, strlen (source_mask),
 				&ctx->rx);
-	mhl_mem_free (source_mask);
+	g_free (source_mask);
     } else
 	error =
 	    re_compile_pattern (source_mask, strlen (source_mask),
@@ -950,14 +950,14 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     if (error) {
 	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		    orig_mask, error);
-	mhl_mem_free (orig_mask);
+	g_free (orig_mask);
 	goto ask_file_mask;
     }
-    mhl_mem_free (orig_mask);
+    g_free (orig_mask);
 
     tmpdest = dest_dir;
     dest_dir = tilde_expand(tmpdest);
-    mhl_mem_free(tmpdest);
+    g_free(tmpdest);
 
     ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
     if (ctx->dest_mask == NULL)
@@ -979,7 +979,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	*orig_mask = 0;
     }
     if (!*dest_dir) {
-	mhl_mem_free (dest_dir);
+	g_free (dest_dir);
 	dest_dir = mhl_str_dup ("./");
     }
     if (val == B_USER)

@@ -38,7 +38,6 @@
 #include <signal.h>
 #include <ctype.h>	/* is_digit() */
 
-#include <mhl/memory.h>
 #include <mhl/string.h>
 
 #include "../src/global.h"
@@ -223,7 +222,7 @@ path_magic (const char *path)
 
 /*
  * Splits path '/p1#op/inpath' into inpath,op; returns which vfs it is.
- * What is left in path is p1. You still want to mhl_mem_free(path), you DON'T
+ * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
  */
 struct vfs_class *
@@ -304,7 +303,7 @@ vfs_get_class (const char *pathname)
     char *path = mhl_str_dup (pathname);
 
     vfs = _vfs_get_class (path);
-    mhl_mem_free (path);
+    g_free (path);
 
     if (!vfs)
 	vfs = localfs_class;
@@ -338,13 +337,13 @@ mc_open (const char *filename, int flags, ...)
         mode = 0;
     
     if (!vfs->open) {
-	mhl_mem_free (file);
+	g_free (file);
 	errno = -EOPNOTSUPP;
 	return -1;
     }
 
     info = (*vfs->open) (vfs, file, flags, mode);	/* open must be supported */
-    mhl_mem_free (file);
+    g_free (file);
     if (!info){
 	errno = ferrno (vfs);
 	return -1;
@@ -362,7 +361,7 @@ int mc_##name inarg \
     char *mpath = vfs_canon (path); \
     vfs = vfs_get_class (mpath); \
     result = vfs->name ? (*vfs->name)callarg : -1; \
-    mhl_mem_free (mpath); \
+    g_free (mpath); \
     if (result == -1) \
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
     return result; \
@@ -407,13 +406,13 @@ int mc_##name (const char *fname1, const char *fname2) \
     name2 = vfs_canon (fname2); \
     if (vfs != vfs_get_class (name2)){ \
     	errno = EXDEV; \
-    	mhl_mem_free (name1); \
-    	mhl_mem_free (name2); \
+    	g_free (name1); \
+    	g_free (name2); \
 	return -1; \
     } \
     result = vfs->name ? (*vfs->name)(vfs, name1, name2) : -1; \
-    mhl_mem_free (name1); \
-    mhl_mem_free (name2); \
+    g_free (name1); \
+    g_free (name2); \
     if (result == -1) \
         errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
     return result; \
@@ -444,7 +443,7 @@ mc_setctl (const char *path, int ctlop, void *arg)
     mpath = vfs_canon (path);
     vfs = vfs_get_class (mpath);
     result = vfs->setctl ? (*vfs->setctl)(vfs, mpath, ctlop, arg) : 0;
-    mhl_mem_free (mpath);
+    g_free (mpath);
     return result;
 }
 
@@ -483,7 +482,7 @@ mc_opendir (const char *dirname)
     vfs = vfs_get_class (dname);
 
     info = vfs->opendir ? (*vfs->opendir)(vfs, dname) : NULL;
-    mhl_mem_free (dname);
+    g_free (dname);
     if (!info){
         errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
@@ -524,7 +523,7 @@ mc_closedir (DIR *dirp)
 
     result = vfs->closedir ? (*vfs->closedir)(vfs_info (handle)) : -1;
     vfs_free_handle (handle);
-    mhl_mem_free (dirp);
+    g_free (dirp);
     return result; 
 }
 
@@ -534,7 +533,7 @@ int mc_stat (const char *filename, struct stat *buf) {
     char *path;
     path = vfs_canon (filename); vfs = vfs_get_class (path);
     result = vfs->stat ? (*vfs->stat) (vfs, path, buf) : -1;
-    mhl_mem_free (path);
+    g_free (path);
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
     return result;
@@ -546,7 +545,7 @@ int mc_lstat (const char *filename, struct stat *buf) {
     char *path;
     path = vfs_canon (filename); vfs = vfs_get_class (path);
     result = vfs->lstat ? (*vfs->lstat) (vfs, path, buf) : -1;
-    mhl_mem_free (path);
+    g_free (path);
     if (result == -1)
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
     return result;
@@ -585,11 +584,11 @@ _vfs_get_cwd (void)
 	    || mc_stat (current_dir, &my_stat2)
 	    || my_stat.st_ino != my_stat2.st_ino
 	    || my_stat.st_dev != my_stat2.st_dev) {
-	    mhl_mem_free (current_dir);
+	    g_free (current_dir);
 	    current_dir = p;
 	    return p;
 	}			/* Otherwise we return current_dir below */
-	mhl_mem_free (p);
+	g_free (p);
     }
     return current_dir;
 }
@@ -662,7 +661,7 @@ vfs_canon (const char *path)
 	local = mhl_str_dir_plus_file (current_dir, path);
 
 	result = vfs_canon (local);
-	mhl_mem_free (local);
+	g_free (local);
 	return result;
     }
 
@@ -692,7 +691,7 @@ mc_chdir (const char *path)
     new_dir = vfs_canon (path);
     new_vfs = vfs_get_class (new_dir);
     if (!new_vfs->chdir) {
-    	mhl_mem_free (new_dir);
+    	g_free (new_dir);
 	return -1;
     }
 
@@ -700,7 +699,7 @@ mc_chdir (const char *path)
 
     if (result == -1) {
 	errno = ferrno (new_vfs);
-	mhl_mem_free (new_dir);
+	g_free (new_dir);
 	return -1;
     }
 
@@ -708,7 +707,7 @@ mc_chdir (const char *path)
     old_vfs = current_vfs;
 
     /* Actually change directory */
-    mhl_mem_free (current_dir);
+    g_free (current_dir);
     current_dir = new_dir;
     current_vfs = new_vfs;
 
@@ -742,7 +741,7 @@ vfs_file_class_flags (const char *filename)
 
     fname = vfs_canon (filename);
     vfs = vfs_get_class (fname);
-    mhl_mem_free (fname);
+    g_free (fname);
     return vfs->flags;
 }
 
@@ -787,7 +786,7 @@ mc_def_getlocalcopy (const char *filename)
 	close (fdout);
     if (fdin != -1)
 	mc_close (fdin);
-    mhl_mem_free (tmp);
+    g_free (tmp);
     return NULL;
 }
 
@@ -800,7 +799,7 @@ mc_getlocalcopy (const char *pathname)
 
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, path) :
                                  mc_def_getlocalcopy (path);
-    mhl_mem_free (path);
+    g_free (path);
     if (!result)
 	errno = ferrno (vfs);
     return result;
@@ -863,7 +862,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
     return_value = vfs->ungetlocalcopy ? 
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
             mc_def_ungetlocalcopy (vfs, path, local, has_changed);
-    mhl_mem_free (path);
+    g_free (path);
     return return_value;
 }
 
@@ -907,7 +906,7 @@ vfs_shut (void)
 
     vfs_gc_done ();
 
-    mhl_mem_free (current_dir);
+    g_free (current_dir);
 
     for (vfs = vfs_list; vfs; vfs = vfs->next)
 	if (vfs->done)

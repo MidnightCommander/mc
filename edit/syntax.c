@@ -111,10 +111,10 @@ mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 
     (void) data;
 
-    mhl_mem_free (key);
+    g_free (key);
     while (*values)
-	mhl_mem_free (*values++);
-    mhl_mem_free (value);
+	g_free (*values++);
+    g_free (value);
 
     return FALSE;
 }
@@ -671,14 +671,14 @@ static FILE *open_include_file (const char *filename)
     if (*filename == PATH_SEP)
 	return fopen (filename, "r");
 
-    mhl_mem_free (error_file_name);
+    g_free (error_file_name);
     error_file_name = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR PATH_SEP_STR,
 				   filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f)
 	return f;
 
-    mhl_mem_free (error_file_name);
+    g_free (error_file_name);
     error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
 				   filename, (char *) NULL);
     return fopen (error_file_name, "r");
@@ -958,7 +958,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    c->keyword_first_chars = mhl_str_dup (first_chars);
 	}
 
-	mhl_mem_free (first_chars);
+	g_free (first_chars);
     }
 
     return result;
@@ -1028,7 +1028,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     if (!f){
 	lib_file = mhl_str_dir_plus_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
 	f = fopen (lib_file, "r");
-	mhl_mem_free (lib_file);
+	g_free (lib_file);
 	if (!f)
 	    return -1;
     }
@@ -1204,5 +1204,5 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
     } else {
 	/* succeeded */
     }
-    mhl_mem_free (f);
+    g_free (f);
 }

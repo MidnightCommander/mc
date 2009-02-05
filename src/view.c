@@ -349,7 +349,7 @@ view_hexedit_free_change_list (WView *view)
 
     for (curr = view->change_list; curr != NULL; curr = next) {
 	next = curr->next;
-	mhl_mem_free (curr);
+	g_free (curr);
     }
     view->change_list = NULL;
     view->dirty++;
@@ -375,8 +375,8 @@ view_growbuf_free (WView *view)
     assert (view->growbuf_in_use);
 
     for (i = 0; i < view->growbuf_blocks; i++)
-	mhl_mem_free (view->growbuf_blockptr[i]);
-    mhl_mem_free (view->growbuf_blockptr);
+	g_free (view->growbuf_blockptr[i]);
+    g_free (view->growbuf_blockptr);
     view->growbuf_blockptr = NULL;
     view->growbuf_in_use = FALSE;
 }
@@ -416,12 +416,12 @@ view_growbuf_read_until (WView *view, offset_type ofs)
 	    byte *newblock = g_try_malloc (VIEW_PAGE_SIZE);
 	    byte **newblocks = g_try_malloc (sizeof (*newblocks) * (view->growbuf_blocks + 1));
 	    if (!newblock || !newblocks) {
-		mhl_mem_free (newblock);
-		mhl_mem_free (newblocks);
+		g_free (newblock);
+		g_free (newblocks);
 		return;
 	    }
 	    memcpy (newblocks, view->growbuf_blockptr, sizeof (*newblocks) * view->growbuf_blocks);
-	    mhl_mem_free (view->growbuf_blockptr);
+	    g_free (view->growbuf_blockptr);
 	    view->growbuf_blockptr = newblocks;
 	    view->growbuf_blockptr[view->growbuf_blocks++] = newblock;
 	    view->growbuf_lastindex = 0;
@@ -708,11 +708,11 @@ view_close_datasource (WView *view)
 	case DS_FILE:
 	    (void) mc_close (view->ds_file_fd);
 	    view->ds_file_fd = -1;
-	    mhl_mem_free (view->ds_file_data);
+	    g_free (view->ds_file_data);
 	    view->ds_file_data = NULL;
 	    break;
 	case DS_STRING:
-	    mhl_mem_free (view->ds_string_data);
+	    g_free (view->ds_string_data);
 	    view->ds_string_data = NULL;
 	    break;
 	default:
@@ -1400,8 +1400,8 @@ view_toggle_magic_mode (WView *view)
 
     view_done (view);
     view_load (view, command, filename, 0);
-    mhl_mem_free (filename);
-    mhl_mem_free (command);
+    g_free (filename);
+    g_free (command);
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
 }
@@ -1419,7 +1419,7 @@ view_done (WView *view)
 	canon_fname = vfs_canon (view->filename);
 	view_offset_to_coord (view, &line, &col, view->dpy_start);
 	save_file_position (canon_fname, line + 1, col);
-	mhl_mem_free (canon_fname);
+	g_free (canon_fname);
     }
 
     /* Write back the global viewer mode */
@@ -1432,8 +1432,8 @@ view_done (WView *view)
 
     /* view->widget needs no destructor */
 
-    mhl_mem_free (view->filename), view->filename = NULL;
-    mhl_mem_free (view->command), view->command = NULL;
+    g_free (view->filename), view->filename = NULL;
+    g_free (view->command), view->command = NULL;
 
     view_close_datasource (view);
     /* the growing buffer is freed with the datasource */
@@ -1547,7 +1547,7 @@ view_load (WView *view, const char *command, const char *file,
 	    type = get_compression_type (fd);
 
 	    if (view->magic_mode && (type != COMPRESSION_NONE)) {
-		mhl_mem_free (view->filename);
+		g_free (view->filename);
 		view->filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
 	    }
 	    view_set_datasource_file (view, fd, &st);
@@ -1570,7 +1570,7 @@ view_load (WView *view, const char *command, const char *file,
 
 	canon_fname = vfs_canon (file);
 	load_file_position (file, &line, &col);
-	mhl_mem_free (canon_fname);
+	g_free (canon_fname);
 	view_moveto (view, offset_doz(line, 1), col);
     } else if (start_line > 0) {
 	view_moveto (view, start_line - 1, 0);
@@ -2166,7 +2166,7 @@ view_hexedit_save_changes (WView *view)
 	view->change_list = next;
 	view->dirty++;
 	view_set_byte (view, curr->offset, curr->value);
-	mhl_mem_free (curr);
+	g_free (curr);
     }
 
     if (mc_close (fp) == -1) {
@@ -2174,7 +2174,7 @@ view_hexedit_save_changes (WView *view)
 	message (D_ERROR, _(" Save file "),
 	    _(" Error while closing the file: \n %s \n"
 	      " Data may have been written or not. "), error);
-	mhl_mem_free (error);
+	g_free (error);
     }
     view_update (view);
     return TRUE;
@@ -2182,12 +2182,12 @@ view_hexedit_save_changes (WView *view)
   save_error:
     error = mhl_str_dup (strerror (errno));
     text = g_strdup_printf (_(" Cannot save file: \n %s "), error);
-    mhl_mem_free (error);
+    g_free (error);
     (void) mc_close (fp);
 
     answer = query_dialog (_(" Save file "), text, D_ERROR,
 	2, _("&Retry"), _("&Cancel"));
-    mhl_mem_free (text);
+    g_free (text);
 
     if (answer == 0)
 	goto retry_save;
@@ -2392,7 +2392,7 @@ search (WView *view, char *text,
     view->update_activate = 0;
 
     enable_interrupt_key ();
-    for (;; mhl_mem_free (s)) {
+    for (;; g_free (s)) {
 	if (p >= view->update_activate) {
 	    view->update_activate += view->update_steps;
 	    if (verbose) {
@@ -2411,7 +2411,7 @@ search (WView *view, char *text,
 
 	search_status = (*search) (view, text, s + 1, match_normal);
 	if (search_status < 0) {
-	    mhl_mem_free (s);
+	    g_free (s);
 	    break;
 	}
 
@@ -2439,7 +2439,7 @@ search (WView *view, char *text,
 	    view->dpy_start = t;
 	}
 
-	mhl_mem_free (s);
+	g_free (s);
 	break;
     }
     disable_interrupt_key ();
@@ -2600,7 +2600,7 @@ hex_search (WView *view, const char *text)
     /* No valid bytes in the user input */
     if (block_len <= 0 || parse_error) {
 	message (D_NORMAL, _("Search"), _("Invalid hex search expression"));
-	mhl_mem_free (buffer);
+	g_free (buffer);
 	view->search_length = 0;
 	return;
     }
@@ -2608,7 +2608,7 @@ hex_search (WView *view, const char *text)
     /* Then start the search */
     pos = block_search (view, buffer, block_len);
 
-    mhl_mem_free (buffer);
+    g_free (buffer);
 
     if (pos == INVALID_OFFSET) {
 	message (D_NORMAL, _("Search"), _(" Search string not found "));
@@ -2640,7 +2640,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
 	|| old_type != match_type) {
 	if (old_pattern != NULL) {
 	    regfree (&r);
-	    mhl_mem_free (old_pattern);
+	    g_free (old_pattern);
 	    old_pattern = 0;
 	}
 	for (i = 0; pattern[i] != '\0'; i++) {
@@ -2744,7 +2744,7 @@ view_moveto_line_cmd (WView *view)
 	if (*answer_end == '\0' && errno == 0 && line >= 1)
 	    view_moveto (view, line - 1, 0);
     }
-    mhl_mem_free (answer);
+    g_free (answer);
     view->dirty++;
     view_update (view);
 }
@@ -2768,7 +2768,7 @@ view_moveto_addr_cmd (WView *view)
 		message (D_ERROR, _("Warning"), _(" Invalid address "));
 	    }
 	}
-	mhl_mem_free (line);
+	g_free (line);
     }
     view->dirty++;
     view_update (view);
@@ -2793,11 +2793,11 @@ regexp_search (WView *view, int direction)
 
     regexp = input_dialog (_("Search"), _(" Enter regexp:"), MC_HISTORY_VIEW_SEARCH_REGEX, defval);
     if (regexp == NULL || regexp[0] == '\0') {
-	mhl_mem_free (regexp);
+	g_free (regexp);
 	return;
     }
 
-    mhl_mem_free (last_regexp);
+    g_free (last_regexp);
     view->search_exp = last_regexp = regexp;
 
     view->direction = direction;
@@ -2866,7 +2866,7 @@ view_normal_search_cmd (WView *view)
 
     convert_from_input (exp);
 
-    mhl_mem_free (last_search_string);
+    g_free (last_search_string);
     view->search_exp = last_search_string = exp;
     exp = NULL;
 
@@ -2875,8 +2875,8 @@ view_normal_search_cmd (WView *view)
     view->last_search = do_normal_search;
 
 cleanup:
-    mhl_mem_free (exp);
-    mhl_mem_free (defval);
+    g_free (exp);
+    g_free (defval);
 }
 
 static void

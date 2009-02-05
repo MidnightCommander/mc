@@ -23,6 +23,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifdef HAVE_MMAP
@@ -241,7 +242,7 @@ view_file_cmd (void)
 	return;
 
     view_file (filename, 0, use_internal_view);
-    mhl_mem_free (filename);
+    g_free (filename);
 }
 
 /* Run plain internal viewer on the currently selected file */
@@ -266,7 +267,7 @@ filtered_view_cmd (void)
 
     mc_internal_viewer (command, "", NULL, 0);
 
-    mhl_mem_free (command);
+    g_free (command);
 }
 
 void do_edit_at_line (const char *what, int start_line)
@@ -384,8 +385,8 @@ mkdir_cmd (void)
 	message (D_ERROR, MSG_ERROR, "  %s  ", unix_error_string (errno));
     }
 
-    mhl_mem_free (absdir);
-    mhl_mem_free (dir);
+    g_free (absdir);
+    g_free (dir);
 }
 
 void delete_cmd (void)
@@ -417,13 +418,13 @@ void find_cmd (void)
 static void
 set_panel_filter_to (WPanel *p, char *allocated_filter_string)
 {
-    mhl_mem_free (p->filter);
+    g_free (p->filter);
     p->filter = 0;
 
     if (!(allocated_filter_string [0] == '*' && allocated_filter_string [1] == 0))
 	p->filter = allocated_filter_string;
     else
-	mhl_mem_free (allocated_filter_string);
+	g_free (allocated_filter_string);
     reread_cmd ();
 }
 
@@ -495,7 +496,7 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
     if (!reg_exp)
 	return;
     if (!*reg_exp) {
-	mhl_mem_free (reg_exp);
+	g_free (reg_exp);
 	return;
     }
 
@@ -525,14 +526,14 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 			  match_file);
 	if (c == -1) {
 	    message (D_ERROR, MSG_ERROR, _("  Malformed regular expression  "));
-	    mhl_mem_free (reg_exp);
+	    g_free (reg_exp);
 	    return;
 	}
 	if (c) {
 	    do_file_mark (current_panel, i, cmd);
 	}
     }
-    mhl_mem_free (reg_exp);
+    g_free (reg_exp);
 }
 
 void select_cmd (void)
@@ -585,11 +586,11 @@ void ext_cmd (void)
 	buffer = mhl_str_dir_plus_file (home_dir, MC_USER_EXT);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
-	mhl_mem_free (buffer);
+	g_free (buffer);
     } else if (dir == 1)
 	do_edit (extdir);
 
-   mhl_mem_free (extdir);
+   g_free (extdir);
    flush_extension_file ();
 }
 
@@ -627,14 +628,14 @@ menu_edit_cmd (int where)
 	    break;
 
 	default:
-	   mhl_mem_free (menufile);
+	   g_free (menufile);
 	    return;
     }
     do_edit (buffer);
 	if (dir == 0)
 		chmod(buffer, 0600);
-    mhl_mem_free (buffer);
-    mhl_mem_free (menufile);
+    g_free (buffer);
+    g_free (menufile);
 }
 
 void quick_chdir_cmd (void)
@@ -650,7 +651,7 @@ void quick_chdir_cmd (void)
     else
         if (!do_cd (target, cd_exact))
 	    message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
-    mhl_mem_free (target);
+    g_free (target);
 }
 
 /* edit file menu for mc */
@@ -688,11 +689,11 @@ edit_syntax_cmd (void)
 	buffer = mhl_str_dir_plus_file (home_dir, SYNTAX_FILE);
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
-	mhl_mem_free (buffer);
+	g_free (buffer);
     } else if (dir == 1)
 	do_edit (extdir);
 
-    mhl_mem_free (extdir);
+    g_free (extdir);
 }
 #endif
 
@@ -707,7 +708,7 @@ void reselect_vfs (void)
 
     if (!do_cd (target, cd_exact))
         message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
-    mhl_mem_free (target);
+    g_free (target);
 }
 #endif /* USE_VFS */
 
@@ -820,8 +821,8 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
 	    dst_name = mhl_str_dir_plus_file (other->cwd, target->fname);
 	    if (compare_files (src_name, dst_name, source->st.st_size))
 		do_file_mark (panel, i, 1);
-	    mhl_mem_free (src_name);
-	    mhl_mem_free (dst_name);
+	    g_free (src_name);
+	    g_free (dst_name);
 	}
     } /* for (i ...) */
 }
@@ -880,7 +881,7 @@ history_cmd (void)
     else
 	current = listbox->list->current->data;
     destroy_dlg (listbox->dlg);
-    mhl_mem_free (listbox);
+    g_free (listbox);
 
     if (!current)
 	return;
@@ -940,8 +941,8 @@ do_link (int symbolic_link, const char *fname)
 	}
 
 	symlink_dialog (s, d, &dest, &src);
-	mhl_mem_free (d);
-	mhl_mem_free (s);
+	g_free (d);
+	g_free (s);
 
 	if (!dest || !*dest || !src || !*src)
 	    goto cleanup;
@@ -954,8 +955,8 @@ do_link (int symbolic_link, const char *fname)
     repaint_screen ();
 
 cleanup:
-    mhl_mem_free (src);
-    mhl_mem_free (dest);
+    g_free (src);
+    g_free (dest);
 }
 
 void link_cmd (void)
@@ -1003,10 +1004,10 @@ void edit_symlink_cmd (void)
 		    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 		    repaint_screen ();
 		}
-		mhl_mem_free (dest);
+		g_free (dest);
 	    }
 	}
-	mhl_mem_free (q);
+	g_free (q);
     } else {
 	message (D_ERROR, MSG_ERROR, _("`%s' is not a symbolic link"),
 		 selection (current_panel)->fname);
@@ -1025,7 +1026,7 @@ user_file_menu_cmd (void)
 }
 
 /* partly taken from dcigettext.c, returns "" for default locale */
-/* value should be freed by calling function mhl_mem_free() */
+/* value should be freed by calling function g_free() */
 char *guess_message_value (void)
 {
     static const char * const var[] = {
@@ -1095,7 +1096,7 @@ get_random_hint (int force)
     if (eol)
 	*eol = 0;
     result = mhl_str_dup (&data[start]);
-    mhl_mem_free (data);
+    g_free (data);
     return result;
 }
 
@@ -1126,8 +1127,8 @@ nice_cd (const char *text, const char *xtext, const char *help,
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
 	message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
-    mhl_mem_free (cd_path);
-    mhl_mem_free (machine);
+    g_free (cd_path);
+    g_free (machine);
 }
 #endif /* USE_NETCODE || USE_EXT2FSLIB */
 
@@ -1187,9 +1188,9 @@ void quick_cd_cmd (void)
         char *q = g_strconcat ("cd ", p, (char *) NULL);
         
         do_cd_command (q);
-        mhl_mem_free (q);
+        g_free (q);
     }
-    mhl_mem_free (p);
+    g_free (p);
 }
 
 void
@@ -1255,17 +1256,17 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
     p->list_type = view_type;
     
     if (view_type == list_user || use_msformat){
-	mhl_mem_free (p->user_format);
+	g_free (p->user_format);
 	p->user_format = user;
     
-	mhl_mem_free (p->user_status_format [view_type]);
+	g_free (p->user_status_format [view_type]);
 	p->user_status_format [view_type] = status;
     
 	set_panel_formats (p);
     }
     else {
-        mhl_mem_free (user);
-        mhl_mem_free (status);
+        g_free (user);
+        g_free (status);
     }
 
     set_panel_formats (p);

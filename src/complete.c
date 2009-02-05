@@ -92,9 +92,9 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if (!state){
         const char *temp;
 
-        mhl_mem_free (dirname);
-        mhl_mem_free (filename);
-        mhl_mem_free (users_dirname);
+        g_free (dirname);
+        g_free (filename);
+        g_free (users_dirname);
 
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = mhl_str_dup (++temp);
@@ -159,7 +159,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	                isexec = 1;
 	        }
 	    }
-	   mhl_mem_free (tmp);
+	   g_free (tmp);
 	}
 	if ((flags & INPUT_COMPLETE_COMMANDS)
 	    && (isexec || isdir))
@@ -177,11 +177,11 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	    mc_closedir (directory);
 	    directory = NULL;
 	}
-	mhl_mem_free (dirname);
+	g_free (dirname);
 	dirname = NULL;
-	mhl_mem_free (filename);
+	g_free (filename);
 	filename = NULL;
-	mhl_mem_free (users_dirname);
+	g_free (users_dirname);
 	users_dirname = NULL;
         return NULL;
     } else {
@@ -207,7 +207,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
 	    SHELL_ESCAPED_STR e_temp = mhl_shell_escape_dup(temp);
-	    mhl_mem_free (temp);
+	    g_free (temp);
 	    temp = e_temp.s;
 	}
 	return temp;
@@ -368,7 +368,7 @@ static void fetch_hosts (const char *filename)
 	            *(hosts_p++) = name;
 	            *hosts_p = NULL;
 	        } else
-	            mhl_mem_free (name);
+	            g_free (name);
 	    }
 	}
     }
@@ -388,8 +388,8 @@ hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
         
     	if (hosts != NULL){
     	    for (host_p = hosts; *host_p; host_p++)
-    	    	mhl_mem_free (*host_p);
-    	   mhl_mem_free (hosts);
+    	    	g_free (*host_p);
+    	   g_free (hosts);
     	}
     	hosts = g_new (char *, (hosts_alloclen = 30) + 1);
     	*hosts = NULL;
@@ -410,8 +410,8 @@ hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     
     if (!*host_p){
     	for (host_p = hosts; *host_p; host_p++)
-    	    mhl_mem_free (*host_p);
-    	mhl_mem_free (hosts);
+    	    g_free (*host_p);
+    	g_free (hosts);
     	hosts = NULL;
     	return NULL;
     } else {
@@ -487,7 +487,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	if (!p)
 	    return 0;
 	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(p);
+	g_free(p);
 	return e_p.s;
     }
 
@@ -521,7 +521,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 		    break;
 		expanded = tilde_expand (*cur_path ? cur_path : ".");
 		cur_word = mhl_str_dir_plus_file (expanded, text);
-		mhl_mem_free (expanded);
+		g_free (expanded);
 		canonicalize_pathname (cur_word);
 		cur_path = strchr (cur_path, 0) + 1;
 		init_state = state;
@@ -530,21 +530,21 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 		filename_completion_function (cur_word,
 					      state - init_state, flags);
 	    if (!found) {
-		mhl_mem_free (cur_word);
+		g_free (cur_word);
 		cur_word = NULL;
 	    }
 	}
     }
 
     if (!found) {
-	mhl_mem_free (path);
+	g_free (path);
 	path = NULL;
 	return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(found);
+	g_free(found);
 	return e_p.s;
     }
     return found;
@@ -617,7 +617,7 @@ completion_matches (char *text, CompletionFunction entry_function, INPUT_COMPLET
 		    if (c1 != c2) break;
 		
 		if (!c1 && !match_list [j][si]){ /* Two equal strings */
-		    mhl_mem_free (match_list [j]);
+		    g_free (match_list [j]);
 		    j++;
 		    if (j > matches)
 		        break;
@@ -633,7 +633,7 @@ completion_matches (char *text, CompletionFunction entry_function, INPUT_COMPLET
 	    match_list[0] = g_strndup(match_list[1], low);
 	}
     } else {				/* There were no matches. */
-        mhl_mem_free (match_list);
+        g_free (match_list);
         match_list = NULL;
     }
     return match_list;
@@ -817,17 +817,17 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 			r = mhl_str_dir_plus_file (cdpath, word);
 			SHOW_C_CTX("try_complete:filename_subst_2");
 			matches = completion_matches (r, filename_completion_function, flags);
-			mhl_mem_free (r);
+			g_free (r);
 		    }
 		    *s = c;
 		    cdpath = s + 1;
 		}
-		mhl_mem_free (cdpath_ref);
+		g_free (cdpath_ref);
     	    }
     	}
     }
 
-    mhl_mem_free (word);
+    g_free (word);
 
     return matches;
 }
@@ -839,8 +839,8 @@ void free_completions (WInput *in)
     if (!in->completions)
     	return;
     for (p=in->completions; *p; p++)
-    	mhl_mem_free (*p);
-    mhl_mem_free (in->completions);
+    	g_free (*p);
+    g_free (in->completions);
     in->completions = NULL;
 }
 

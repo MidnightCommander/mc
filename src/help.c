@@ -129,7 +129,7 @@ search_string (const char *start, const char *text)
 	}
     }
 cleanup:
-    mhl_mem_free (local_text);
+    g_free (local_text);
     return result;
 }
 
@@ -329,7 +329,7 @@ static void clear_link_areas (void)
     while (link_area){
 	current = link_area;
 	link_area = current -> next;
-	mhl_mem_free (current);
+	g_free (current);
     }
     inside_link_area = 0;
 }
@@ -755,7 +755,7 @@ static void
 interactive_display_finish (void)
 {
     clear_link_areas ();
-    mhl_mem_free (data);
+    g_free (data);
 }
 
 void
@@ -776,7 +776,7 @@ interactive_display (const char *filename, const char *node)
     }
 
     if (!filename)
-	mhl_mem_free (hlpfile);
+	g_free (hlpfile);
 
     if (!data)
 	return;

@@ -31,11 +31,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <mhl/memory.h>
 
 #include "global.h"
 #include "background.h"
@@ -90,8 +89,8 @@ unregister_task_running (pid_t pid, int fd)
 		prev->next = p->next;
 	    else
 		task_list = p->next;
-	    mhl_mem_free (p->info);
-	    mhl_mem_free (p);
+	    g_free (p->info);
+	    g_free (p);
 	    break;
 	}
 	prev = p;
@@ -322,7 +321,7 @@ background_attention (int fd, void *closure)
 	    write (fd, &len, sizeof (len));
 	    if (len){
 		write (fd, resstr, len);
-		mhl_mem_free (resstr);
+		g_free (resstr);
 	    }
 	} else {
 	    len = 0;
@@ -330,7 +329,7 @@ background_attention (int fd, void *closure)
 	}
     }
     for (i = 0; i < argc; i++)
-	mhl_mem_free (data [i]);
+	g_free (data [i]);
 
     do_refresh ();
     mc_refresh ();
