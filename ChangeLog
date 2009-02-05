@@ -40,7 +40,7 @@
 
 2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
-	* replaced calls to g_free() by g_free()
+	* replaced calls to g_free() by mhl_mem_free()
 
 2009-01-29 Mikhail S. Pobolovets <styx.mp@gmail.com>
 
