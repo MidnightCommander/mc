@@ -71,7 +71,7 @@ static int button_event (Gpm_Event *event, void *);
 int quote = 0;
 
 static void
-widget_selectcolor (Widget *w, bool focused, bool hotkey)
+widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
 {
     Dlg_head *h = w->parent;
 
@@ -360,7 +360,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
 	    register const char *cp;
-	    const bool focused = (i == r->pos && msg == WIDGET_FOCUS);
+	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
 
@@ -2284,7 +2284,7 @@ listbox_get_current (WListbox *l, char **string, char **extra)
 }
 
 /* returns TRUE if a function has been called, FALSE otherwise. */
-static bool
+static gboolean
 buttonbar_call (WButtonBar *bb, int i)
 {
     switch (bb->labels[i].tag) {
@@ -2443,7 +2443,7 @@ buttonbar_set_label (Dlg_head *h, int idx, const char *text, voidfn cback)
 }
 
 void
-buttonbar_set_visible (WButtonBar *bb, bool visible)
+buttonbar_set_visible (WButtonBar *bb, gboolean visible)
 {
     bb->visible = visible;
 }

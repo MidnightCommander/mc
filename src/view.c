@@ -145,23 +145,23 @@ struct WView {
     size_t ds_string_len;	/* The length of the string */
 
     /* Growing buffers information */
-    bool growbuf_in_use;	/* Use the growing buffers? */
+    gboolean growbuf_in_use;	/* Use the growing buffers? */
     byte   **growbuf_blockptr;	/* Pointer to the block pointers */
     size_t   growbuf_blocks;	/* The number of blocks in *block_ptr */
     size_t   growbuf_lastindex;	/* Number of bytes in the last page of the
 				   growing buffer */
-    bool growbuf_finished;	/* TRUE when all data has been read. */
+    gboolean growbuf_finished;	/* TRUE when all data has been read. */
 
     /* Editor modes */
-    bool hex_mode;		/* Hexview or Hexedit */
-    bool hexedit_mode;	/* Hexedit */
-    bool hexview_in_text;	/* Is the hexview cursor in the text area? */
-    bool text_nroff_mode;	/* Nroff-style highlighting */
-    bool text_wrap_mode;	/* Wrap text lines to fit them on the screen */
-    bool magic_mode;	/* Preprocess the file using external programs */
+    gboolean hex_mode;		/* Hexview or Hexedit */
+    gboolean hexedit_mode;	/* Hexedit */
+    gboolean hexview_in_text;	/* Is the hexview cursor in the text area? */
+    gboolean text_nroff_mode;	/* Nroff-style highlighting */
+    gboolean text_wrap_mode;	/* Wrap text lines to fit them on the screen */
+    gboolean magic_mode;	/* Preprocess the file using external programs */
 
     /* Additional editor state */
-    bool hexedit_lownibble;	/* Are we editing the last significant nibble? */
+    gboolean hexedit_lownibble;	/* Are we editing the last significant nibble? */
     GArray *coord_cache;	/* Cache for mapping offsets to cursor positions */
 
     /* Display information */
@@ -179,7 +179,7 @@ struct WView {
     struct area data_area;	/* Where the data is displayed */
 
     int dirty;			/* Number of skipped updates */
-    bool dpy_bbar_dirty;	/* Does the button bar need to be updated? */
+    gboolean dpy_bbar_dirty;	/* Does the button bar need to be updated? */
 
     /* Mode variables */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
@@ -191,7 +191,7 @@ struct WView {
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(WView *);
 				/* Pointer to the last search command */
-    bool want_to_quit;	/* Prepare for cleanup ... */
+    gboolean want_to_quit;	/* Prepare for cleanup ... */
 
     /* Markers */
     int marker;			/* mark to use */
@@ -282,7 +282,7 @@ offset_rounddown (offset_type a, offset_type b)
 
 /* {{{ Simple Primitive Functions for WView }}} */
 
-static inline bool
+static inline gboolean
 view_is_in_panel (WView *view)
 {
     return (view->dpy_frame_size != 0);
@@ -402,7 +402,7 @@ view_growbuf_read_until (WView *view, offset_type ofs)
     ssize_t nread;
     byte *p;
     size_t bytesfree;
-    bool short_read;
+    gboolean short_read;
 
     assert (view->growbuf_in_use);
 
@@ -517,7 +517,7 @@ view_get_filesize (WView *view)
     }
 }
 
-static inline bool
+static inline gboolean
 view_may_still_grow (WView *view)
 {
     return (view->growbuf_in_use && !view->growbuf_finished);
@@ -526,7 +526,7 @@ view_may_still_grow (WView *view)
 /* returns TRUE if the idx lies in the half-open interval
  * [offset; offset + size), FALSE otherwise.
  */
-static inline bool
+static inline gboolean
 already_loaded (offset_type offset, offset_type idx, size_t size)
 {
     return (offset <= idx && idx - offset < size);
@@ -742,10 +742,10 @@ enum ccache_type {
     CCACHE_LINECOL
 };
 
-static inline bool
+static inline gboolean
 coord_cache_entry_less (const struct coord_cache_entry *a,
 	const struct coord_cache_entry *b, enum ccache_type crit,
-	bool nroff_mode)
+	gboolean nroff_mode)
 {
     if (crit == CCACHE_OFFSET)
 	return (a->cc_offset < b->cc_offset);
@@ -831,7 +831,7 @@ view_ccache_dump (WView *view)
 }
 #endif
 
-static inline bool
+static inline gboolean
 is_nroff_sequence (WView *view, offset_type offset)
 {
     int c0, c1, c2;
@@ -1091,7 +1091,7 @@ view_scroll_to_cursor (WView *view)
 }
 
 static void
-view_movement_fixups (WView *view, bool reset_search)
+view_movement_fixups (WView *view, gboolean reset_search)
 {
     view_scroll_to_cursor (view);
     if (reset_search) {
@@ -1457,7 +1457,7 @@ view_show_error (WView *view, const char *msg)
     }
 }
 
-static bool
+static gboolean
 view_load_command_output (WView *view, const char *command)
 {
     FILE *fp;
@@ -1487,7 +1487,7 @@ view_load_command_output (WView *view, const char *command)
     return TRUE;
 }
 
-bool
+gboolean
 view_load (WView *view, const char *command, const char *file,
 	   int start_line)
 {
@@ -1495,7 +1495,7 @@ view_load (WView *view, const char *command, const char *file,
     int fd = -1;
     char tmp[BUF_MEDIUM];
     struct stat st;
-    bool retval = FALSE;
+    gboolean retval = FALSE;
 
     assert (view->bytes_per_line != 0);
     view_done (view);
@@ -2139,7 +2139,7 @@ view_handle_editkey (WView *view, int key)
     return MSG_HANDLED;
 }
 
-static bool
+static gboolean
 view_hexedit_save_changes (WView *view)
 {
     struct hexedit_change_node *curr, *next;
@@ -2196,7 +2196,7 @@ view_hexedit_save_changes (WView *view)
 
 /* {{{ Miscellaneous functions }}} */
 
-static bool
+static gboolean
 view_ok_to_quit (WView *view)
 {
     int r;
@@ -3320,7 +3320,7 @@ int
 mc_internal_viewer (const char *command, const char *file,
 	int *move_dir_p, int start_line)
 {
-    bool succeeded;
+    gboolean succeeded;
     WView *wview;
     WButtonBar *bar;
     Dlg_head *view_dlg;

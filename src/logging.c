@@ -35,11 +35,11 @@
 
 /*** file scope functions **********************************************/
 
-static bool
+static gboolean
 is_logging_enabled(void)
 {
-	static bool logging_initialized = FALSE;
-	static bool logging_enabled = FALSE;
+	static gboolean logging_initialized = FALSE;
+	static gboolean logging_enabled = FALSE;
 	char *mc_ini;
 
 	if (!logging_initialized) {

@@ -44,8 +44,6 @@ typedef char ecs_char;
 #  define ECS_STR(s)		(s)
 #endif
 
-#include <mhl/types.h>
-
 /*
  * String conversion functions between the wide character encoding and
  * the multibyte encoding. The returned strings should be freed using
@@ -53,24 +51,24 @@ typedef char ecs_char;
  * and has been converted, FALSE otherwise.
  */
 
-extern bool ecs_mbstr_to_str(ecs_char **ret_str, const char *);
-extern bool ecs_str_to_mbstr(char **ret_str, const ecs_char *);
+extern gboolean ecs_mbstr_to_str(ecs_char **ret_str, const char *);
+extern gboolean ecs_str_to_mbstr(char **ret_str, const ecs_char *);
 
 /*
  * Replacements for the ISO C90 <ctype.h> functions.
  */
 
-extern bool ecs_isalnum(ecs_char);
-extern bool ecs_isalpha(ecs_char);
-extern bool ecs_iscntrl(ecs_char);
-extern bool ecs_isdigit(ecs_char);
-extern bool ecs_isgraph(ecs_char);
-extern bool ecs_islower(ecs_char);
-extern bool ecs_isprint(ecs_char);
-extern bool ecs_ispunct(ecs_char);
-extern bool ecs_isspace(ecs_char);
-extern bool ecs_isupper(ecs_char);
-extern bool ecs_isxdigit(ecs_char);
+extern gboolean ecs_isalnum(ecs_char);
+extern gboolean ecs_isalpha(ecs_char);
+extern gboolean ecs_iscntrl(ecs_char);
+extern gboolean ecs_isdigit(ecs_char);
+extern gboolean ecs_isgraph(ecs_char);
+extern gboolean ecs_islower(ecs_char);
+extern gboolean ecs_isprint(ecs_char);
+extern gboolean ecs_ispunct(ecs_char);
+extern gboolean ecs_isspace(ecs_char);
+extern gboolean ecs_isupper(ecs_char);
+extern gboolean ecs_isxdigit(ecs_char);
 
 /*
  * Replacements for the ISO C90 <string.h> functions.
@@ -107,7 +105,7 @@ extern size_t ecs_strlcat(ecs_char *, const ecs_char *, size_t);
  * displayed on screen. Returns TRUE if all characters in the string are
  * either '\n' or printable, according to the current locale. If the
  * return value is FALSE, ''width'' and ''height'' are not modified. */
-extern bool ecs_strbox(const ecs_char *, size_t *ret_width,
+extern gboolean ecs_strbox(const ecs_char *, size_t *ret_width,
 	size_t *ret_height);
 
 #endif

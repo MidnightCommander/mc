@@ -184,7 +184,7 @@ inline static int add_selects (fd_set *select_set)
 static void check_selects (fd_set *select_set)
 {
     SelectList *p;
-    bool retry;
+    gboolean retry;
 
     if (disabled_channels)
 	return;

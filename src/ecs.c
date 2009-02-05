@@ -37,7 +37,7 @@
  * String type conversion
  */
 
-extern bool ecs_mbstr_to_str(ecs_char **ret_str, const char *s)
+extern gboolean ecs_mbstr_to_str(ecs_char **ret_str, const char *s)
 {
 #ifdef EXTCHARSET_ENABLED
 	size_t maxlen, len;
@@ -61,7 +61,7 @@ extern bool ecs_mbstr_to_str(ecs_char **ret_str, const char *s)
 #endif
 }
 
-extern bool ecs_str_to_mbstr(char **ret_str, const ecs_char *s)
+extern gboolean ecs_str_to_mbstr(char **ret_str, const ecs_char *s)
 {
 #ifdef EXTCHARSET_ENABLED
 	size_t maxlen, len;
@@ -103,57 +103,57 @@ extern bool ecs_str_to_mbstr(char **ret_str, const ecs_char *s)
 	(cf(c))
 #endif
 
-extern bool ecs_isalnum(ecs_char c)
+extern gboolean ecs_isalnum(ecs_char c)
 {
 	return ECS_CTYPE(iswalnum, isalnum, c);
 }
 
-extern bool ecs_isalpha(ecs_char c)
+extern gboolean ecs_isalpha(ecs_char c)
 {
 	return ECS_CTYPE(iswalpha, isalpha, c);
 }
 
-extern bool ecs_iscntrl(ecs_char c)
+extern gboolean ecs_iscntrl(ecs_char c)
 {
 	return ECS_CTYPE(iswcntrl, iscntrl, c);
 }
 
-extern bool ecs_isdigit(ecs_char c)
+extern gboolean ecs_isdigit(ecs_char c)
 {
 	return ECS_CTYPE(iswdigit, isdigit, c);
 }
 
-extern bool ecs_isgraph(ecs_char c)
+extern gboolean ecs_isgraph(ecs_char c)
 {
 	return ECS_CTYPE(iswgraph, isgraph, c);
 }
 
-extern bool ecs_islower(ecs_char c)
+extern gboolean ecs_islower(ecs_char c)
 {
 	return ECS_CTYPE(iswlower, islower, c);
 }
 
-extern bool ecs_isprint(ecs_char c)
+extern gboolean ecs_isprint(ecs_char c)
 {
 	return ECS_CTYPE(iswprint, isprint, c);
 }
 
-extern bool ecs_ispunct(ecs_char c)
+extern gboolean ecs_ispunct(ecs_char c)
 {
 	return ECS_CTYPE(iswpunct, ispunct, c);
 }
 
-extern bool ecs_isspace(ecs_char c)
+extern gboolean ecs_isspace(ecs_char c)
 {
 	return ECS_CTYPE(iswspace, isspace, c);
 }
 
-extern bool ecs_isupper(ecs_char c)
+extern gboolean ecs_isupper(ecs_char c)
 {
 	return ECS_CTYPE(iswupper, isupper, c);
 }
 
-extern bool ecs_isxdigit(ecs_char c)
+extern gboolean ecs_isxdigit(ecs_char c)
 {
 	return ECS_CTYPE(iswxdigit, isxdigit, c);
 }
@@ -317,7 +317,7 @@ ecs_strlcat(ecs_char *dst, const ecs_char *src, size_t dstsize)
 	return di + ecs_strlcpy(dst + di, src, dstsize - di);
 }
 
-bool
+gboolean
 ecs_strbox(const ecs_char *s, size_t *ret_width, size_t *ret_height)
 {
 	size_t nlines = 0, ncolumns = 0, colindex = 0, i;

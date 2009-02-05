@@ -25,13 +25,11 @@
 #endif /* WANT_TERM_H */
 #endif /* USE_NCURSES */
 
-#include <mhl/types.h>
-
 /* {{{ Input }}} */
 
 extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
-extern bool tty_got_interrupt(void);
+extern gboolean tty_got_interrupt(void);
 
 /* {{{ Output }}} */
 

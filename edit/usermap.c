@@ -59,7 +59,7 @@ typedef struct Config {
 
 typedef struct Command {
     const char *name;
-    bool (*handler) (config_t *cfg, int argc, char *argv[]);
+    int (*handler) (config_t *cfg, int argc, char *argv[]);
 } command_t;
 
 static char error_msg[200] = "Nobody see this";
@@ -255,7 +255,7 @@ cfg_free_maps(config_t *cfg)
 static GPtrArray *
 split_line(char *str)
 {
-    bool inside_quote = FALSE;
+    gboolean inside_quote = FALSE;
     int move = 0;
     GPtrArray *args;    
 
@@ -345,7 +345,7 @@ keymap_add(GArray *keymap, int key, int cmd)
 }
 
 /* bind <key> <command> */
-static bool
+static gboolean
 cmd_bind(config_t *cfg, int argc, char *argv[])
 {
     char *keyname, *command;
@@ -471,7 +471,7 @@ static void edit_my_define (Dlg_head * h, int idx, const char *text,
 #endif
 
 /* label <number> <command> <label> */
-static bool
+static gboolean
 cmd_label(config_t *cfg, int argc, char *argv[])
 {
     const name_map_t *cmd = command_names;
@@ -511,7 +511,7 @@ cmd_label(config_t *cfg, int argc, char *argv[])
 }
 
 
-static bool
+static gboolean
 parse_file(config_t *cfg, const char *file, const command_t *cmd)
 {
     char buf[200];
@@ -568,7 +568,7 @@ parse_file(config_t *cfg, const char *file, const command_t *cmd)
     return TRUE;
 }
 
-static bool
+static gboolean
 load_user_keymap(config_t *cfg, const char *file)
 {
     const command_t cmd[] = {
@@ -588,7 +588,7 @@ load_user_keymap(config_t *cfg, const char *file)
     return TRUE;
 }
 
-bool
+gboolean
 edit_load_user_map(WEdit *edit)
 {
     static config_t cfg;

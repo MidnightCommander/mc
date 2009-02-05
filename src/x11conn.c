@@ -44,8 +44,6 @@ typedef int dummy;		/* C99 forbids empty compilation unit */
 #  include <gmodule.h>
 #endif
 
-#include <mhl/types.h>
-
 #include "x11conn.h"
 
 /*** file scope type declarations **************************************/
@@ -78,15 +76,15 @@ static GModule *x11_module;
 
 #endif
 
-static bool handlers_installed = FALSE;
+static gboolean handlers_installed = FALSE;
 
 /* This flag is set as soon as an X11 error is reported. Usually that
  * means that the DISPLAY is not available anymore. We do not try to
  * reconnect, as that would violate the X11 protocol. */
-static bool lost_connection = FALSE;
+static gboolean lost_connection = FALSE;
 
 static jmp_buf x11_exception; /* FIXME: get a better name */
-static bool longjmp_allowed = FALSE;
+static gboolean longjmp_allowed = FALSE;
 
 /*** file private functions ********************************************/
 
@@ -118,7 +116,7 @@ static void install_error_handlers(void)
     handlers_installed = TRUE;
 }
 
-static bool x11_available(void)
+static gboolean x11_available(void)
 {
 #ifdef HAVE_GMODULE
     gchar *x11_module_fname;

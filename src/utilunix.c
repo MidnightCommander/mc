@@ -723,7 +723,7 @@ mc_realpath (const char *path, char resolved_path[])
 /* Return the index of the permissions triplet */
 int
 get_user_permissions (struct stat *st) {
-    static bool initialized = FALSE;
+    static gboolean initialized = FALSE;
     static gid_t *groups;
     static int ngroups;
     static uid_t uid;

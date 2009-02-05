@@ -1,8 +1,6 @@
 #ifndef MC_WIDGET_H
 #define MC_WIDGET_H
 
-#include <mhl/types.h>
-
 #include "dialog.h"		/* Widget */
 
 /* Completion stuff */
@@ -217,7 +215,7 @@ void buttonbar_clear_label (Dlg_head *, int idx);
 void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
 void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
 			       buttonbarfn cback, void *data);
-void buttonbar_set_visible (WButtonBar *, bool);
+void buttonbar_set_visible (WButtonBar *, gboolean);
 void buttonbar_redraw (Dlg_head *h);
 
 void free_completions (WInput *);

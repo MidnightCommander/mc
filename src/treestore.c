@@ -746,7 +746,7 @@ process_special_dirs(GList ** special_dirs, char *file)
     g_free(buffer);
 }
 
-static bool
+static gboolean
 should_skip_directory(const char *dir)
 {
     static GList *special_dirs;
