@@ -1,6 +1,7 @@
 2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* mhl/types.h, mhl/escape.h: replaced bool type by stdbool.h (fixing #239, #240)
+	* lib/mc.sh.in: fixes for non-bash shells (fixing #196)
 
 2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
@@ -10,9 +11,6 @@
 
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
-	* acinclude.m4: removed MC_SLANG_PRIVATE macro
-	* src/slint.c: removed HAVE_SLANG_PRIVATE conditional and
-	  replaced SLang_getkey2(), SLang_input_pending2()
 	* src/util.c: fixed name_trunc() on NULL or empty parameters
 	* src/achown.c: fixed unitialized var in init_chown_advanced()
 	  (patch from andrew_b)
