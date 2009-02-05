@@ -40,7 +40,7 @@ echo "Checking the default configuration"
 distcheck 1
 
 echo "Checking the configuration with maximal code coverage"
-distcheck 2 with_screen=mcslang enable_charset=yes with_samba=yes \
+distcheck 2 enable_charset=yes with_samba=yes \
      with_mcfs=yes with_included_gettext=yes with_glib12=yes
 
 echo "Checking the configuration with minimal code coverage"
@@ -54,7 +54,7 @@ distcheck 4 enable_largefile=no enable_nls=no with_vfs=no \
      with_screen=ncurses
 
 echo "Checking the configuration with experimental and rarely used options"
-distcheck 5 with_screen=mcslang with_termcap=yes \
+distcheck 5 with_termcap=yes \
      with_mmap=no with_subshell=optional enable_netcode=no
 
 RPMBUILD=/usr/bin/rpmbuild

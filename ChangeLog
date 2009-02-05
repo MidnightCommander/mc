@@ -179,6 +179,10 @@
 	Changed message type codes on calls to message(), query_dialog(),
 	close_error_pipe() from numeric IDs to symbols D_ERROR, D_NORMAL
 
+2009-01-07  Enrico Weigelt, metux ITS <weigelt@metux.de>
+
+	* removed bundled slang
+
 2008-12-18  Roland Illig  <roland.illig@gmx.de>
 
 	* doc/mcedit.1: Documented the newly added filename:lineno

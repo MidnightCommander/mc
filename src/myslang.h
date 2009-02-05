@@ -1,15 +1,11 @@
 #ifndef MC_MYSLANG_H
 #define MC_MYSLANG_H
 
-#ifndef HAVE_SYSTEM_SLANG
-#    include "../slang/include/slang.h"
-#else
 #ifdef HAVE_SLANG_SLANG_H
 #    include <slang/slang.h>
 #else
 #    include <slang.h>
 #endif	/* HAVE_SLANG_SLANG_H */
-#endif
 
 enum {
     KEY_BACKSPACE = 400,
