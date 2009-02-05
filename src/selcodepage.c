@@ -17,6 +17,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file selcodepage.c
+ *  \brief Source: user interface for charset selection
+ */
+
 #include <config.h>
 
 #ifdef HAVE_CHARSET

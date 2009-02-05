@@ -1,3 +1,8 @@
+
+/** \file key.h
+ *  \brief Header: keyboard support routines
+ */
+
 #ifndef MC_KEY_H
 #define MC_KEY_H
 

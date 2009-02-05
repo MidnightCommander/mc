@@ -21,12 +21,11 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
-/*
-   !!! WARNING !!!
-
-   This code uses setjmp() and longjmp(). Before you modify _anything_
-   here, please read the relevant sections of the C standard.
-*/
+/** \file x11conn.c
+ *  \brief Source: X11 support
+ *  \warning This code uses setjmp() and longjmp(). Before you modify _anything_ here,
+ *  please read the relevant sections of the C standard.
+ */
 
 #include <config.h>
 

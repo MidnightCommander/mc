@@ -1,15 +1,18 @@
+
+/** \file  fileloc.h
+ *  \brief Header: config files list
+ *
+ *  This file defines the locations of the various user specific
+ *  configuration files of the Midnight Commander. Historically the
+ *  system wide and the user specific file names have not always been
+ *  the same, so don't use these names for finding system wide
+ *  configuration files.
+ *
+ *  \todo This inconsistency should disappear in the one of the next versions (5.0?)
+ */
+
 #ifndef MC_FILELOC_H
 #define MC_FILELOC_H
-
-/*
-    This file defines the locations of the various user specific
-    configuration files of the Midnight Commander. Historically the
-    system wide and the user specific file names have not always been
-    the same, so don't use these names for finding system wide
-    configuration files.
-
-    TODO: This inconsistency should disappear in version 5.0.
-*/
 
 #define MC_USERCONF_DIR		".mc"
 

@@ -1,3 +1,8 @@
+
+/** \file main.h
+ *  \brief Header: this is a main module header
+ */
+
 #ifndef MC_MAIN_H
 #define MC_MAIN_H
 

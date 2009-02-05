@@ -16,6 +16,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file dialog.h
+ *  \brief Header: dialog box features module
+ */
+
 #ifndef MC_DLG_H
 #define MC_DLG_H
 

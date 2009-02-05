@@ -1,3 +1,8 @@
+
+/** \file menu.h
+ *  \brief Header: pulldown menu code
+ */
+
 #ifndef MC_MENU_H
 #define MC_MENU_H
 

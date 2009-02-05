@@ -39,6 +39,9 @@
  * operations.
  */
 
+/** \file  filegui.c
+ *  \brief Source: file management GUI for the text mode edition
+ */
 
 /* {{{ Include files */
 

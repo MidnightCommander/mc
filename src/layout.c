@@ -20,6 +20,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
+/** \file layout.c
+ *  \brief Source: panel layout module
+ */
+
 #include <config.h>
 
 #include <signal.h>

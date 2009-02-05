@@ -2,6 +2,10 @@
    file accompanying popt source distributions, available from 
    ftp://ftp.redhat.com/pub/code/popt */
 
+/** \file popt.c
+ *  \brief Source: a module for parsing command line options
+ */
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

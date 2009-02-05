@@ -22,6 +22,10 @@
 
 */
 
+/** \file command.c
+ *  \brief Source: command line widget
+ */
+
 #include <config.h>
 
 #include <errno.h>

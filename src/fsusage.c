@@ -17,6 +17,12 @@
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file fsusage.c
+ *  \brief Source: return space usage of mounted file systems
+ *
+ *  Space usage statistics for a file system.  Blocks are 512-byte
+ */
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

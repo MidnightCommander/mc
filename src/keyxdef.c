@@ -22,21 +22,23 @@
 
 /* }}} */
 
-/*
+/** \file keyxdef.c
+ *  \brief Source: additional keyboard support routines
+ *
  * PURPOSE:
- * 
  *   We would like to support the direct ALT-?/META-? and some other 'extra'
  *   keyboard functionality provided by some terminals under some OSes (and
  *   not supported by the 'learn keys...' facility of 'mc'.
  *   (First target platform: QNX.)
- * 
+ *
  * REMARK:
- * 
+ *
  *   Implementation strategy: we don't want to rely on a specific terminal
  *   information database management API (termcap,terminfo,SLang,...), so we
  *   try to define a superset of the possible key identifiers here.
  *
  */
+
 #include <config.h>
 
 #include "global.h"

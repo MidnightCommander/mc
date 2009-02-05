@@ -1,14 +1,16 @@
+
+/** \file unixcompat.h
+ *  \brief Header: collects differences between the various Unix
+ *
+ *  This header file collects differences between the various Unix
+ *  variants that are supported by the Midnight Commander and provides
+ *  replacement routines if they are not natively available.
+ *  The major/minor macros are not specified in SUSv3, so we can only hope
+ *  they are provided by the operating system or emulate it.
+ */
+
 #ifndef MC_UNIXCOMPAT_H
 #define MC_UNIXCOMPAT_H
-
-/* This header file collects differences between the various Unix
- * variants that are supported by the Midnight Commander and provides
- * replacement routines if they are not natively available.
- */
-
-/* The major/minor macros are not specified in SUSv3, so we can only hope
- * they are provided by the operating system or emulate it.
- */
 
 #include <sys/types.h>		/* BSD */
 #ifdef HAVE_SYS_MKDEV_H

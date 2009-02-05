@@ -15,6 +15,10 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file mountlist.h
+ *  \brief Header: list of mounted filesystems
+ */
+
 #ifndef MC_MOUNTLIST_H
 #define MC_MOUNTLIST_H
 

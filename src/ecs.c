@@ -22,6 +22,10 @@
    MA 02110-1301, USA.
  */
 
+/** \file  ecs.c
+ *  \brief Source: basic support for extended character sets
+ */
+
 #include <config.h>
 
 #include <assert.h>

@@ -22,6 +22,10 @@
    MA 02110-1301, USA.
  */
 
+/** \file  ecs-test.c
+ *  \brief Source: testsuite for basic support for extended character sets
+ */
+
 #include <config.h>
 
 #undef NDEBUG

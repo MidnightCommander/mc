@@ -19,6 +19,13 @@
 
 /* Space usage statistics for a file system.  Blocks are 512-byte. */
 
+/** \file fsusage.h
+ *  \brief Header: return space usage of mounted file systems
+ *
+ *  Space usage statistics for a file system.  Blocks are 512-byte
+ */
+
+
 #if !defined MC_FSUSAGE_H
 # define MC_FSUSAGE_H
 

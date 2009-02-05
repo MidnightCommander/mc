@@ -21,6 +21,13 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file fileopctx.c
+ *  \brief Source: file operation contexts
+ *  \date 1998-2007
+ *  \author Federico Mena <federico@nuclecu.unam.mx>
+ *  \author Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
 #include <config.h>
 
 #include <unistd.h>
@@ -31,12 +38,12 @@
 
 /**
  * file_op_context_new:
- * 
+ *
  * Creates a new file operation context with the default values.  If you later want
  * to have a user interface for this, call #file_op_context_create_ui().
- * 
+ *
  * Return value: The newly-created context, filled with the default file mask values.
- **/
+ */
 FileOpContext *
 file_op_context_new (FileOperation op)
 {
@@ -61,10 +68,10 @@ file_op_context_new (FileOperation op)
 /**
  * file_op_context_destroy:
  * @ctx: The file operation context to destroy.
- * 
+ *
  * Destroys the specified file operation context and its associated UI data, if
  * it exists.
- **/
+ */
 void
 file_op_context_destroy (FileOpContext *ctx)
 {

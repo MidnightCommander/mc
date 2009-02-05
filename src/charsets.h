@@ -1,3 +1,8 @@
+
+/** \file charsets.h
+ *  \brief Header: Text conversion from one charset to another
+ */
+
 #ifndef MC_CHARSETS_H
 #define MC_CHARSETS_H
 

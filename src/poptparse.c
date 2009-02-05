@@ -2,6 +2,11 @@
    file accompanying popt source distributions, available from 
    ftp://ftp.redhat.com/pub/code/popt */
 
+
+/** \file poptparse.c
+ *  \brief Source: popt parser
+ */
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

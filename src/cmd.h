@@ -1,3 +1,10 @@
+
+/** \file cmd.h
+ *  \brief Header: routines invoked by a function key
+ *
+ *  They normally operate on the current panel.
+ */
+
 #ifndef MC_CMD_H
 #define MC_CMD_H
 

@@ -4,6 +4,10 @@
    file accompanying popt source distributions, available from 
    ftp://ftp.redhat.com/pub/code/popt */
 
+/** \file popthelp.c
+ *  \brief Source: popt helper module
+ */
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif

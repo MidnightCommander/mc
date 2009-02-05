@@ -1,3 +1,8 @@
+
+/** \file  file.h
+ *  \brief Header: file management
+ */
+
 #ifndef MC_FILE_H
 #define MC_FILE_H
 

@@ -31,6 +31,12 @@
    it will be possible to have tree views over virtual file systems.
 */
 
+/** \file treestore.c
+ *  \brief Source: tree store
+ *
+ *  Contains a storage of the file system tree representation.
+ */
+
 #include <config.h>
 
 #include <errno.h>

@@ -20,6 +20,11 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA.  */
 
+/** \file regex.c
+ *  \brief Source: extended regular expression matching and search library
+ *  \version 0.12
+ */
+
 /* AIX requires this to be the first thing in the file. */
 #if defined _AIX && !defined REGEX_MALLOC
   #pragma alloca

@@ -1,3 +1,8 @@
+
+/** \file myslang.h
+ *  \brief Header: slang wrapper module
+ */
+
 #ifndef MC_MYSLANG_H
 #define MC_MYSLANG_H
 

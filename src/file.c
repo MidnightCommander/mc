@@ -37,6 +37,10 @@
  * operations.
  */
 
+/** \file  file.c
+ *  \brief Source: file management
+ */
+
 /* {{{ Include files */
 
 #include <config.h>

@@ -1,3 +1,8 @@
+
+/** \file timefmt.h
+ *  \brief Header: time formating macroses
+ */
+
 #ifndef __UTIL_TIMEFMT_H
 #define __UTIL_TIMEFMT_H
 

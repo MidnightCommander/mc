@@ -1,3 +1,8 @@
+
+/** \file hotlist.h
+ *  \brief Header: directory hotlist
+ */
+
 #ifndef MC_HOTLIST_H
 #define MC_HOTLIST_H
 

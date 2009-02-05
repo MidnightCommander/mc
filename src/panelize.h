@@ -1,3 +1,8 @@
+
+/** \file panelize.h
+ *  \brief Header: External panelization module
+ */
+
 #ifndef MC_PANELIZE_H
 #define MC_PANELIZE_H
 

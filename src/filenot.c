@@ -22,6 +22,13 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+
+/** \file  filenot.c
+ *  \brief Source: wrapper for routines to notify the
+ *  tree about the changes made to the directory
+ *  structure.
+ */
+
 #include <config.h>
 
 #include <errno.h>

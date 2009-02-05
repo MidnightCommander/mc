@@ -1,3 +1,8 @@
+
+/** \file logging.h
+ *  \brief Header: provides a log file to ease tracing the program
+ */
+
 #ifndef MC_LOGGING_H
 #define MC_LOGGING_H
 

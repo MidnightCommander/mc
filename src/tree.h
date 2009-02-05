@@ -1,3 +1,8 @@
+
+/** \file tree.h
+ *  \brief Header: directory tree browser
+ */
+
 #ifndef MC_TREE_H
 #define MC_TREE_H
 

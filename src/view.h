@@ -1,3 +1,8 @@
+
+/** \file view.h
+ *  \brief Header: internal file viewer
+ */
+
 #ifndef MC_VIEW_H
 #define MC_VIEW_H
 

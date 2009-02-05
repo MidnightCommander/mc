@@ -1,3 +1,10 @@
+
+/** \file mouse.h
+ *  \brief Header: mouse managing
+ *
+ *  Events received by clients of this library have their coordinates 0 based
+ */
+
 #ifndef MC_MOUSE_H
 #define MC_MOUSE_H
 

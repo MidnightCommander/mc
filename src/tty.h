@@ -1,3 +1,8 @@
+
+/** \file tty.h
+ *  \brief Header: interface to the terminal controlling library
+ */
+
 #ifndef MC_TTY_H
 #define MC_TTY_H
 

@@ -1,3 +1,8 @@
+
+/** \file command.h
+ *  \brief Header: command line widget
+ */
+
 #ifndef MC_COMMAND_H
 #define MC_COMMAND_H
 

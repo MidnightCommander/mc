@@ -1,3 +1,8 @@
+
+/** \file profile.h
+ *  \brief Header: Initialization-files(ini) functions.
+ */
+
 #ifndef MC_PROFILE_H
 #define MC_PROFILE_H
 

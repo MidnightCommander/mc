@@ -2,6 +2,10 @@
    file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
+/** \file poptint.h
+ *  \brief Header: a module (internal?) for popt
+ */
+
 #ifndef MC_POPTINT_H
 #define MC_POPTINT_H
 

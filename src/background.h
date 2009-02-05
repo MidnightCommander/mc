@@ -1,3 +1,8 @@
+
+/** \file background.h
+ *  \brief Header: Background support
+ */
+
 #ifndef MC_BACKGROUND_H
 #define MC_BACKGROUND_H
 

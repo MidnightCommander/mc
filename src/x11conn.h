@@ -1,3 +1,10 @@
+
+/** \file x11conn.h
+ *  \brief Header: X11 support
+ *  \warning This code uses setjmp() and longjmp(). Before you modify _anything_ here,
+ *  please read the relevant sections of the C standard.
+ */
+
 #ifndef MC_X11CONN_H
 #define MC_X11CONN_H
 

@@ -24,6 +24,10 @@
    MA 02110-1301, USA.
  */
 
+/** \file tty.c
+ *  \brief Source: interface to the terminal controlling library
+ */
+
 #include <config.h>
 
 #include <signal.h>

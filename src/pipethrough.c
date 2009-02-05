@@ -16,6 +16,14 @@
     Roland Illig <roland.illig@gmx.de>, 2004.
 */
 
+
+/** \file pipethrough.c
+ *  \brief Source: a module for piping
+ *
+ *  Pipe a buffer through a child command and receive two containing
+ *  the stdout and stderr output of the child process.
+ */
+
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif

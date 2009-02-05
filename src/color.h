@@ -1,3 +1,8 @@
+
+/** \file color.h
+ *  \brief Header: color setup
+ */
+
 #ifndef MC_COLOR_H
 #define MC_COLOR_H
 

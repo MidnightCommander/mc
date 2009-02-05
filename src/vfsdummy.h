@@ -1,4 +1,7 @@
-/* Replacement for vfs.h if VFS support is disabled */
+
+/** \file vfsdummy.h
+ *  \brief Header: replacement for vfs.h if VFS support is disabled
+ */
 
 #ifndef MC_VFSDUMMY_H
 #define MC_VFSDYMMY_H

@@ -1,3 +1,8 @@
+
+/** \file  ext.h
+ *  \brief Header: extension dependent execution
+ */
+
 #ifndef MC_EXT_H
 #define MC_EXT_H
 

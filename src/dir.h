@@ -1,3 +1,8 @@
+
+/** \file dir.h
+ *  \brief Header: directory routines
+ */
+
 #ifndef MC_DIR_H
 #define MC_DIR_H
 

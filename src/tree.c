@@ -27,6 +27,11 @@
    it will be possible to have tree views over virtual file systems.
 
    */
+
+/** \file tree.c
+ *  \brief Source: directory tree browser
+ */
+
 #include <config.h>
 
 #include <errno.h>
