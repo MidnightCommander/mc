@@ -35,6 +35,8 @@
 #include <string.h>
 
 #include "global.h"
+#include "fs.h"
+#include "util.h"
 
 static char *
 get_absolute_name (const char *file)

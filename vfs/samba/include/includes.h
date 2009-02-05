@@ -137,9 +137,7 @@
 #ifdef HAVE_CTYPE_H
 #include <ctype.h>
 #endif
-#ifdef HAVE_GRP_H
 #include <grp.h>
-#endif
 #ifdef HAVE_SYS_ID_H
 #include <sys/id.h>
 #endif

@@ -45,6 +45,11 @@
 
 #include <config.h>
 #include <errno.h>
+#include <fcntl.h>
+#include <pwd.h>
+#include <grp.h>
+#include <sys/time.h>		/* gettimeofday() */
+#include <string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -52,13 +57,14 @@
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/util.h"
 #include "../src/strescape.h"
+#include "../src/unixcompat.h"
+#include "../src/fs.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
-#include "../src/unixcompat.h"
 #include "fish.h"
 
 int fish_directory_timeout = 900;

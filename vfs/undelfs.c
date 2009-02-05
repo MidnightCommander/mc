@@ -39,10 +39,11 @@
  */
  
 #include <config.h>
-#include <errno.h>
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #ifdef HAVE_EXT2FS_EXT2_FS_H
 #include <ext2fs/ext2_fs.h>

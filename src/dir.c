@@ -34,6 +34,7 @@
 #include "wtools.h"
 #include "treestore.h"
 #include "strutil.h"
+#include "fs.h"
 #include "../src/search/search.h"
 
 /* If true show files starting with a dot */

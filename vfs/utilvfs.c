@@ -29,6 +29,10 @@
 
 #include <ctype.h>
 
+#include <pwd.h>
+#include <grp.h>
+#include <stdlib.h>
+
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */

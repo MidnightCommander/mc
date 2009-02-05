@@ -41,6 +41,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <ctype.h>		/* is_digit() */
+#include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

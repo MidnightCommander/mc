@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <fcntl.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

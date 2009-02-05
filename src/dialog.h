@@ -24,6 +24,7 @@
 #define MC_DLG_H
 
 #include "mouse.h"
+#include "util.h"
 
 /* Color constants */
 #define DLG_NORMALC(h)		((h)->color[0])

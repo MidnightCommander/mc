@@ -39,18 +39,17 @@
  */
 
 #include <config.h>
-#include <signal.h>		/* kill() */
 
+#include <signal.h>		/* kill() */
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
+#include <unistd.h>
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <pwd.h>
 #include <stdlib.h>
 
 #include "../src/global.h"
