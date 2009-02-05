@@ -153,9 +153,10 @@ edit_load_file_fast (WEdit *edit, const char *filename)
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
-	char errmsg[8192];
-	snprintf(errmsg, sizeof(errmsg), _(" Cannot open %s for reading "), filename);
-	edit_error_dialog (_("Error"), get_sys_error (errmsg));
+	GString *errmsg = g_string_new(NULL);
+	g_string_sprintf(errmsg, _(" Cannot open %s for reading "), filename);
+	edit_error_dialog (_("Error"), get_sys_error (errmsg->str));
+	g_string_free (errmsg, TRUE);
 	return 1;
     }
 
@@ -315,8 +316,7 @@ static int
 check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
-    char errmsg[8192];
-    errmsg[0] = 0;
+    GString *errmsg = (GString *) 0;
 
     /* Try opening an existing file */
     file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
@@ -331,7 +331,8 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 		     O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL,
 		     0666);
 	if (file < 0) {
-	    snprintf (errmsg, sizeof(errmsg), _(" Cannot open %s for reading "), filename);
+	    g_string_sprintf (errmsg = g_string_new (NULL),
+		_(" Cannot open %s for reading "), filename);
 	    goto cleanup;
 	} else {
 	    /* New file, delete it if it's not modified or saved */
@@ -341,13 +342,15 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 
     /* Check what we have opened */
     if (mc_fstat (file, st) < 0) {
-	snprintf (errmsg, sizeof(errmsg), _(" Cannot get size/permissions for %s "), filename);
+	g_string_sprintf (errmsg = g_string_new (NULL),
+	    _(" Cannot get size/permissions for %s "), filename);
 	goto cleanup;
     }
 
     /* We want to open regular files only */
     if (!S_ISREG (st->st_mode)) {
-	snprintf (errmsg, sizeof(errmsg), _(" %s is not a regular file "), filename);
+	g_string_sprintf (errmsg = g_string_new (NULL),
+	    _(" %s is not a regular file "), filename);
 	goto cleanup;
     }
 
@@ -360,14 +363,16 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
     }
 
     if (st->st_size >= SIZE_LIMIT) {
-	snprintf (errmsg, sizeof(errmsg), _(" File %s is too large "), filename);
+        g_string_sprintf (errmsg = g_string_new (NULL),
+	    _(" File %s is too large "), filename);
 	goto cleanup;
     }
 
 cleanup:
     (void) mc_close (file);
-    if (errmsg[0]) {
-	edit_error_dialog (_("Error"), errmsg);
+    if (errmsg) {
+	edit_error_dialog (_("Error"), errmsg->str);
+	g_string_free (errmsg, TRUE);
 	return 1;
     }
     return 0;
