@@ -336,7 +336,7 @@ update_one_panel_widget (WPanel *panel, int force_update,
     /* If current_file == -1 (an invalid pointer) then preserve selection */
     if (current_file == UP_KEEPSEL) {
 	free_pointer = 1;
-	my_current_file = mhl_str_dup (panel->dir.list[panel->selected].fname);
+	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
 	current_file = my_current_file;
     } else
 	free_pointer = 0;
@@ -533,7 +533,7 @@ directory_history_add (struct WPanel *panel, const char *dir)
 {
     char *tmp;
 
-    tmp = mhl_str_dup (dir);
+    tmp = g_strdup (dir);
     strip_password (tmp, 1);
 
     panel->dir_history = list_append_unique (panel->dir_history, tmp);
@@ -575,7 +575,7 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 	    new_dir++;
     }
 
-    olddir = mhl_str_dup (panel->cwd);
+    olddir = g_strdup (panel->cwd);
     new_dir = translated_url = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
@@ -1613,7 +1613,7 @@ update_xterm_title_path (void)
     char *p, *s;
 
     if (xterm_flag && xterm_title) {
-	p = s = mhl_str_dup (strip_home_and_password (current_panel->cwd));
+	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
 	do {
 	    if (!is_printable ((unsigned char) *s))
 		*s = '?';
@@ -1687,7 +1687,7 @@ prepend_cwd_on_local (const char *filename)
 
     if (vfs_file_is_local (filename)) {
 	if (*filename == PATH_SEP)	/* an absolute pathname */
-	    return mhl_str_dup (filename);
+	    return g_strdup (filename);
 	d = g_malloc (MC_MAXPATHLEN + strlen (filename) + 2);
 	mc_get_current_wd (d, MC_MAXPATHLEN);
 	l = strlen (d);
@@ -1696,7 +1696,7 @@ prepend_cwd_on_local (const char *filename)
 	canonicalize_pathname (d);
 	return d;
     } else
-	return mhl_str_dup (filename);
+	return g_strdup (filename);
 }
 
 static int
@@ -1754,7 +1754,7 @@ do_nc (void)
 
     /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
     if (last_wd_file && vfs_current_is_local ()) {
-	last_wd_string = mhl_str_dup (current_panel->cwd);
+	last_wd_string = g_strdup (current_panel->cwd);
     }
     done_mc ();
 
@@ -1773,7 +1773,7 @@ OS_Setup (void)
         struct passwd *pwd;
         pwd = getpwuid (geteuid ());
         if (pwd != NULL)
-           shell = mhl_str_dup (pwd->pw_shell);
+           shell = g_strdup (pwd->pw_shell);
     }
     if (!shell || !*shell)
 	shell = "/bin/sh";
@@ -1781,9 +1781,9 @@ OS_Setup (void)
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
     if ((mc_libdir = getenv ("MC_DATADIR")) != NULL) {
-	mc_home = mhl_str_dup (mc_libdir);
+	mc_home = g_strdup (mc_libdir);
     } else {
-	mc_home = mhl_str_dup (DATADIR);
+	mc_home = g_strdup (DATADIR);
     }
 }
 
@@ -2094,12 +2094,12 @@ handle_args (int argc, char *argv[])
 			}
 		    }
 		}
-		edit_one_file = mhl_str_dup (tmp);
+		edit_one_file = g_strdup (tmp);
 	    }
 	}
     } else if (!STRNCOMP (base, "mcv", 3) || !STRCOMP (base, "view")) {
 	if (tmp)
-	    view_one_file = mhl_str_dup (tmp);
+	    view_one_file = g_strdup (tmp);
 	else {
 	    fputs ("No arguments given to the viewer\n", stderr);
 	    exit (1);
@@ -2107,9 +2107,9 @@ handle_args (int argc, char *argv[])
     } else {
 	/* sets the current dir and the other dir */
 	if (tmp) {
-	    this_dir = mhl_str_dup (tmp);
+	    this_dir = g_strdup (tmp);
 	    if ((tmp = poptGetArg (ctx)))
-		other_dir = mhl_str_dup (tmp);
+		other_dir = g_strdup (tmp);
 	}
     }
 

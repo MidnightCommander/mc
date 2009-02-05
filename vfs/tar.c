@@ -22,13 +22,9 @@
 /* Namespace: init_tarfs */
 
 #include <config.h>
-
 #include <sys/types.h>
 #include <errno.h>
 #include <ctype.h>
-
-#include <mhl/memory.h>
-#include <mhl/string.h>
 
 #ifdef hpux
 /* major() and minor() macros (among other things) defined here for hpux */
@@ -231,7 +227,7 @@ tar_open_archive_int (struct vfs_class *me, const char *name,
 	ERRNOR (ENOENT, -1);
     }
 
-    archive->name = mhl_str_dup (name);
+    archive->name = g_strdup (name);
     mc_stat (name, &(archive->u.arch.st));
     archive->u.arch.fd = -1;
     archive->u.arch.type = TAR_UNKNOWN;

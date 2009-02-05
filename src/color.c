@@ -229,7 +229,7 @@ static void configure_colors_string (const char *the_color_string)
     if (!the_color_string)
 	return;
 
-    p = color_string = mhl_str_dup (the_color_string);
+    p = color_string = g_strdup (the_color_string);
     while (color_string && *color_string){
 	while (*color_string == ' ' || *color_string == '\t')
 	    color_string++;
@@ -398,8 +398,8 @@ try_alloc_color_pair (const char *fg, const char *bg)
     p->next = g_new (struct colors_avail, 1);
     p = p->next;
     p->next = 0;
-    p->fg = fg ? mhl_str_dup (fg) : 0;
-    p->bg = bg ? mhl_str_dup (bg) : 0;
+    p->fg = fg ? g_strdup (fg) : 0;
+    p->bg = bg ? g_strdup (bg) : 0;
     if (!fg)
         /* Index in color_map array = COLOR_INDEX - 1 */
 	fg = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;
@@ -437,8 +437,8 @@ try_alloc_color_pair (const char *fg, const char *bg)
     p->next = g_new (struct colors_avail, 1);
     p = p->next;
     p->next = 0;
-    p->fg = fg ? mhl_str_dup (fg) : 0;
-    p->bg = bg ? mhl_str_dup (bg) : 0;
+    p->fg = fg ? g_strdup (fg) : 0;
+    p->bg = bg ? g_strdup (bg) : 0;
     if (!fg)
         /* Index in color_map array = COLOR_INDEX - 1 */
 	fg_index = color_map[EDITOR_NORMAL_COLOR_INDEX - 1].fg;

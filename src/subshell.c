@@ -232,7 +232,7 @@ init_subshell_child (const char *pty_name)
 	char sid_str[BUF_SMALL];
 	snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld",
 		    (long) mc_sid);
-	putenv (mhl_str_dup (sid_str));
+	putenv (g_strdup (sid_str));
     }
 #endif				/* HAVE_GETSID */
 
@@ -799,7 +799,7 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 	}
 
 	if (bPathNotEq && strcmp (current_panel->cwd, ".")) {
-	    char *cwd = strip_password (mhl_str_dup (current_panel->cwd), 1);
+	    char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
 	    fprintf (stderr, _("Warning: Cannot change to %s.\n"), cwd);
 	    g_free (cwd);
 	}

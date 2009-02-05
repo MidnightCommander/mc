@@ -102,7 +102,7 @@ do_execute (const char *shell, const char *command, int flags)
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
-	old_vfs_dir = mhl_str_dup (vfs_get_current_dir ());
+	old_vfs_dir = g_strdup (vfs_get_current_dir ());
 #endif				/* USE_VFS */
 
     save_cwds_stat ();
@@ -365,7 +365,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
      * the command, so make a copy.  Smarter VFS code would make the code
      * below unnecessary.
      */
-    fn = mhl_str_dup (filename);
+    fn = g_strdup (filename);
     mc_stat (localcopy, &st);
     mtime = st.st_mtime;
     do_execute (command, localcopy, EXECUTE_INTERNAL);

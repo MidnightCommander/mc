@@ -471,7 +471,7 @@ do_load_string (const char *s, const char *ss, const char *def)
 
     load_string (s, ss, def, buffer, BUF_SMALL);
 
-    p = mhl_str_dup (buffer);
+    p = g_strdup (buffer);
     g_free (buffer);
     return p;
 }
@@ -596,7 +596,7 @@ load_anon_passwd ()
 
     load_string ("Misc", "ftpfs_password", "", buffer, sizeof (buffer));
     if (buffer [0])
-	return mhl_str_dup (buffer);
+	return g_strdup (buffer);
     else
 	return 0;
 }

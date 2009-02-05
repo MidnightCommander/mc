@@ -264,7 +264,7 @@ button_new (int y, int x, int action, int flags, const char *text,
     b->action = action;
     b->flags  = flags;
     b->selected = 0;
-    b->text   = mhl_str_dup (text);
+    b->text   = g_strdup (text);
     b->callback = callback;
     widget_want_hotkey (b->widget, 1);
     b->hotkey = 0;
@@ -284,7 +284,7 @@ void
 button_set_text (WButton *b, const char *text)
 {
     g_free (b->text);
-    b->text = mhl_str_dup (text);
+    b->text = g_strdup (text);
     b->widget.cols = button_len (text, b->flags);
     button_scan_hotkey(b);
     dlg_redraw (b->widget.parent);
@@ -514,7 +514,7 @@ check_new (int y, int x, int state, const char *text)
     init_widget (&c->widget, y, x, 1, strlen (text),
 	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
-    c->text = mhl_str_dup (text);
+    c->text = g_strdup (text);
     c->hotkey = 0;
     c->hotpos = -1;
     widget_want_hotkey (c->widget, 1);
@@ -607,7 +607,7 @@ label_set_text (WLabel *label, const char *text)
     g_free (label->text);
 
     if (text){
-	label->text = mhl_str_dup (text);
+	label->text = g_strdup (text);
 	if (label->auto_adjust_cols) {
 	    newcols = strlen (text);
 	    if (newcols > label->widget.cols)
@@ -637,7 +637,7 @@ label_new (int y, int x, const char *text)
 
     l = g_new (WLabel, 1);
     init_widget (&l->widget, y, x, 1, width, label_callback, NULL);
-    l->text = text ? mhl_str_dup (text) : 0;
+    l->text = text ? g_strdup (text) : 0;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
     widget_want_cursor (l->widget, 0);
@@ -878,7 +878,7 @@ history_get (const char *input_name)
 	if (!*this_entry)
 	    break;
 
-	hist = list_append_unique (hist, mhl_str_dup (this_entry));
+	hist = list_append_unique (hist, g_strdup (this_entry));
     }
     g_free (profile);
 
@@ -1041,7 +1041,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     if (query_dlg->ret_value != B_CANCEL) {
 	listbox_get_current (query_list, &q, NULL);
 	if (q)
-	    r = mhl_str_dup (q);
+	    r = g_strdup (q);
     }
     destroy_dlg (query_dlg);
     return r;
@@ -1130,7 +1130,7 @@ push_history (WInput *in, const char *text)
 	    return 1;
     }
 
-    t = mhl_str_dup (text);
+    t = g_strdup (text);
 
     if (in->history_name) {
 	p = in->history_name + 3;
@@ -1383,7 +1383,7 @@ static void
 kill_line (WInput *in)
 {
     g_free (kill_buffer);
-    kill_buffer = mhl_str_dup (&in->buffer [in->point]);
+    kill_buffer = g_strdup (&in->buffer [in->point]);
     in->buffer [in->point] = 0;
 }
 
@@ -1392,7 +1392,7 @@ assign_text (WInput *in, const char *text)
 {
     free_completions (in);
     g_free (in->buffer);
-    in->buffer = mhl_str_dup (text);	/* was in->buffer->text */
+    in->buffer = g_strdup (text);	/* was in->buffer->text */
     in->current_max_len = strlen (in->buffer) + 1;
     in->point = strlen (in->buffer);
     in->mark = 0;
@@ -1673,7 +1673,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
     in->history_name = 0;
     if (histname) {
 	if (*histname) {
-	    in->history_name = mhl_str_dup (histname);
+	    in->history_name = g_strdup (histname);
 	    in->history = history_get (histname);
 	}
     }
@@ -2235,7 +2235,7 @@ listbox_add_item (WListbox *l, enum append_pos pos, int hotkey,
 	    return NULL;
 	    
     entry = g_new (WLEntry, 1);
-    entry->text = mhl_str_dup (text);
+    entry->text = g_strdup (text);
     entry->data = data;
     entry->hotkey = hotkey;
 
@@ -2387,7 +2387,7 @@ set_label_text (WButtonBar * bb, int index, const char *text)
 {
     g_free (bb->labels[index - 1].text);
 
-    bb->labels[index - 1].text = mhl_str_dup (text);
+    bb->labels[index - 1].text = g_strdup (text);
 }
 
 /* Find ButtonBar widget in the dialog */
@@ -2505,7 +2505,7 @@ groupbox_new (int x, int y, int width, int height, const char *title)
     /* Strip existing spaces, add one space before and after the title */
     if (title) {
 	char *t;
-	t = g_strstrip (mhl_str_dup (title));
+	t = g_strstrip (g_strdup (title));
 	g->title = g_strconcat (" ", t, " ", (char *) NULL);
 	g_free (t);
     }

@@ -36,10 +36,7 @@
 /* Define this if your ssh can take -I option */
 
 #include <config.h>
-
 #include <errno.h>
-
-#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -306,7 +303,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     super->name =
 	g_strconcat ("/#sh:", SUP.user, "@", SUP.host, "/", (char *) NULL);
 #endif
-    super->name = mhl_str_dup (PATH_SEP_STR);
+    super->name = g_strdup (PATH_SEP_STR);
 
     super->root =
 	vfs_s_new_inode (me, super,
@@ -598,7 +595,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     reply_code = fish_decode_reply(buffer + 4, 0);
     if (reply_code == COMPLETE) {
 	g_free (SUP.cwdir);
-	SUP.cwdir = mhl_str_dup (remote_path);
+	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
     } else if (reply_code == ERROR) {
@@ -925,11 +922,11 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     const char *crpath1, *crpath2; \
     char *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = mhl_str_dup(path1), &super1, 0))) { \
+    if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
 	g_free (mpath1); \
 	return -1; \
     } \
-    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = mhl_str_dup(path2), &super2, 0))) { \
+    if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
 	g_free (mpath1); \
 	g_free (mpath2); \
     } \

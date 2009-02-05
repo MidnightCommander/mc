@@ -98,7 +98,7 @@ lock_build_symlink_name (const char *fname)
 	return NULL;
 
     fname = x_basename (absolute_fname);
-    fname_copy = mhl_str_dup (fname);
+    fname_copy = g_strdup (fname);
     absolute_fname[fname - absolute_fname] = '\0';
     symlink_name = g_strconcat (absolute_fname, ".#", fname_copy, (char *) NULL);
     g_free (fname_copy);

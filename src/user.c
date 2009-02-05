@@ -147,7 +147,7 @@ int check_format_var (const char *p, char **v)
 	value = getenv (var_name);
 	g_free (var_name);
 	if (value){
-	    *v = mhl_str_dup (value);
+	    *v = g_strdup (value);
 	    return q-p;
 	}	
 	var_name = g_strndup (dots, q - dots);
@@ -182,7 +182,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     char c_lc;
 
     if (c == '%')
-	return mhl_str_dup ("%");
+	return g_strdup ("%");
 
     if (edit_one_file != NULL)
 	fname = edit_widget->filename;
@@ -191,7 +191,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    panel = current_panel;
 	else {
 	    if (get_other_type () != view_listing)
-		return mhl_str_dup ("");
+		return g_strdup ("");
 	    panel = other_panel;
 	}
 	fname = panel->dir.list[panel->selected].fname;
@@ -234,7 +234,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	break;
     case 'y':			/* syntax type */
 	if (edit_widget && edit_widget->syntax_type)
-	    return mhl_str_dup (edit_widget->syntax_type);
+	    return g_strdup (edit_widget->syntax_type);
 	break;
     case 'k':			/* block file name */
     case 'b':			/* block file name / strip extension */  {
@@ -269,7 +269,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    char *block, *tmp;
 
 	    if (!panel)
-		return mhl_str_dup ("");
+		return g_strdup ("");
 
 	    for (i = 0; i < panel->count; i++)
 		if (panel->dir.list[i].f.marked)
@@ -289,7 +289,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    return block;
 	}			/* sub case block */
     }				/* switch */
-    result = mhl_str_dup ("% ");
+    result = g_strdup ("% ");
     result[1] = c;
     return result;
 }
@@ -721,7 +721,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 	return;
     }
     
-    menu = mhl_str_dup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
+    menu = g_strdup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
         menu = mhl_str_dir_plus_file \

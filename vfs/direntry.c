@@ -77,7 +77,7 @@ vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *ino
     total_entries++;
 
     if (name)
-	entry->name = mhl_str_dup (name);
+	entry->name = g_strdup (name);
 
     entry->ino = inode;
     entry->ino->ent = entry;
@@ -252,7 +252,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 {
     size_t pseg;
     struct vfs_s_entry *ent = NULL;
-    char * const pathref = mhl_str_dup (a_path);
+    char * const pathref = g_strdup (a_path);
     char *path = pathref;
 
     canonicalize_pathname (path);
@@ -322,7 +322,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 			 const char *a_path, int follow, int flags)
 {
     struct vfs_s_entry *ent = NULL;
-    char * const path = mhl_str_dup (a_path);
+    char * const path = g_strdup (a_path);
     struct vfs_s_entry *retval = NULL;
 
     if (root->super->root != root)
@@ -523,8 +523,8 @@ vfs_s_get_path (struct vfs_class *me, const char *inname,
 {
     char *buf, *retval;
 
-    buf = mhl_str_dup (inname);
-    retval = mhl_str_dup (vfs_s_get_path_mangle (me, buf, archive, flags));
+    buf = g_strdup (inname);
+    retval = g_strdup (vfs_s_get_path_mangle (me, buf, archive, flags));
     g_free (buf);
     return retval;
 }
@@ -547,7 +547,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     if (!(MEDATA->flags & VFS_S_REMOTE)) {
 	/* archives */
 	char *newpath;
-	char *path = mhl_str_dup (ino->ent->name);
+	char *path = g_strdup (ino->ent->name);
 	while (1) {
 	    ino = ino->ent->dir;
 	    if (ino == ino->super->root)
@@ -561,7 +561,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 
     /* remote systems */
     if ((!ino->ent->dir) || (!ino->ent->dir->ent))
-	return mhl_str_dup (ino->ent->name);
+	return g_strdup (ino->ent->name);
 
     return g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR,
 			ino->ent->name, (char *) NULL);
@@ -1037,7 +1037,7 @@ vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
     if (!fh || !fh->ino || !fh->ino->localname)
 	return NULL;
 
-    local = mhl_str_dup (fh->ino->localname);
+    local = g_strdup (fh->ino->localname);
     vfs_s_close (fh);
     return local;
 }

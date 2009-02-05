@@ -935,7 +935,7 @@ static void add_new_entry_cmd (void)
     int ret;
 
     /* Take current directory as default value for input fields */
-    to_free = title = url = strip_password (mhl_str_dup (current_panel->cwd), 1);
+    to_free = title = url = strip_password (g_strdup (current_panel->cwd), 1);
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
 			       _("Directory path"), "[Hotlist]", &title, &url);
@@ -1040,7 +1040,7 @@ void add2hotlist_cmd (void)
     char *prompt, *label;
     const char *cp = _("Label for \"%s\":");
     int l = strlen (cp);
-    char *label_string = mhl_str_dup (current_panel->cwd);
+    char *label_string = g_strdup (current_panel->cwd);
 
     strip_password (label_string, 1);
 
@@ -1157,9 +1157,9 @@ char *hotlist_cmd (int vfs_or_hotlist)
     case B_ENTER:
 	if (l_hotlist->current->data) {
 	    struct hotlist *hlp = (struct hotlist*) l_hotlist->current->data;
-	    target = mhl_str_dup (hlp->directory);
+	    target = g_strdup (hlp->directory);
 	} else
-	    target = mhl_str_dup (l_hotlist->current->text);
+	    target = g_strdup (l_hotlist->current->text);
 	break;
     }
 
@@ -1183,7 +1183,7 @@ load_group (struct hotlist *grp)
 
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (mhl_str_dup (value), mhl_str_dup (key), HL_TYPE_GROUP, 0);
+	add2hotlist (g_strdup (value), g_strdup (key), HL_TYPE_GROUP, 0);
     }
     g_free (group_section);
 
@@ -1191,7 +1191,7 @@ load_group (struct hotlist *grp)
 
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (mhl_str_dup (value),mhl_str_dup (key), HL_TYPE_ENTRY, 0);
+	add2hotlist (g_strdup (value),g_strdup (key), HL_TYPE_ENTRY, 0);
     }
 
     for (current = grp->head; current; current = current->next)
@@ -1333,22 +1333,22 @@ hot_load_group (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (mhl_str_dup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = mhl_str_dup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = mhl_str_dup (tkn_buf);
+	    url = g_strdup (tkn_buf);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = mhl_str_dup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOF:
@@ -1381,22 +1381,22 @@ hot_load_file (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (mhl_str_dup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = mhl_str_dup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = mhl_str_dup (tkn_buf);
+	    url = g_strdup (tkn_buf);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = mhl_str_dup (tkn_buf);
+	    label = g_strdup (tkn_buf);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOL:
@@ -1453,12 +1453,12 @@ load_hotlist (void)
     
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;
-    hotlist->label     = mhl_str_dup (_(" Top level group "));
+    hotlist->label     = g_strdup (_(" Top level group "));
     hotlist->up        = hotlist;
     /*
      * compatibility :-(
      */
-    hotlist->directory = mhl_str_dup ("Hotlist");
+    hotlist->directory = g_strdup ("Hotlist");
 
     if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0) {
 	int	result;
@@ -1613,6 +1613,6 @@ add_dotdot_to_list (void)
 {
     if (current_group != hotlist) {
 	if (hotlist_has_dot_dot != 0)
-	    add2hotlist (mhl_str_dup (".."), mhl_str_dup (".."), HL_TYPE_DOTDOT, 0);
+	    add2hotlist (g_strdup (".."), g_strdup (".."), HL_TYPE_DOTDOT, 0);
     }
 }

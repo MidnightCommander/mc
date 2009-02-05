@@ -1235,7 +1235,7 @@ char *learn_key (void)
     keypad(stdscr, TRUE);
     nodelay (stdscr, FALSE);
     *p = 0;
-    return mhl_str_dup (buffer);
+    return g_strdup (buffer);
 }
 
 /* xterm and linux console only: set keypad to numeric or application

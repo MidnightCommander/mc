@@ -275,7 +275,7 @@ add_dotdot_to_list (dir_list *list, int index)
 
     memset (&(list->list) [index], 0, sizeof(file_entry));
     (list->list) [index].fnamelen = 2;
-    (list->list) [index].fname = mhl_str_dup ("..");
+    (list->list) [index].fname = g_strdup ("..");
     (list->list) [index].f.link_to_dir = 0;
     (list->list) [index].f.stale_link = 0;
     (list->list) [index].f.dir_size_computed = 0;
@@ -422,7 +422,7 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
 	    return next_free;
 	}
 	list->list[next_free].fnamelen = NLENGTH (dp);
-	list->list[next_free].fname = mhl_str_dup (dp->d_name);
+	list->list[next_free].fname = g_strdup (dp->d_name);
 	list->list[next_free].f.marked = 0;
 	list->list[next_free].f.link_to_dir = link_to_dir;
 	list->list[next_free].f.stale_link = stale_link;
@@ -574,7 +574,7 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 	}
 
 	list->list[next_free].fnamelen = NLENGTH (dp);
-	list->list[next_free].fname = mhl_str_dup (dp->d_name);
+	list->list[next_free].fname = g_strdup (dp->d_name);
 	list->list[next_free].f.link_to_dir = link_to_dir;
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;

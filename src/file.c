@@ -45,6 +45,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -245,7 +246,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
 static const char *
 transform_source (FileOpContext *ctx, const char *source)
 {
-    char *s = mhl_str_dup (source);
+    char *s = g_strdup (source);
     char *q;
     const char *p;
 
@@ -392,7 +393,7 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 	if (r) {
 	    p = g_strndup (src_path, r - src_path + 1);
 	    if (*dst_path == PATH_SEP)
-		q = mhl_str_dup (dst_path);
+		q = g_strdup (dst_path);
 	    else
 		q = g_strconcat (p, dst_path, (char *) NULL);
 	    s = strrchr (q, PATH_SEP);
@@ -902,7 +903,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 		return FILE_CONT;
 	    }
 	}
-	dest_dir = mhl_str_dup (d);
+	dest_dir = g_strdup (d);
     } else {
 	/*
 	 * If the destination directory exists, we want to copy the whole
@@ -924,7 +925,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	if (toplevel && ctx->dive_into_subdirs) {
 	    dest_dir = mhl_str_dir_plus_file (d, x_basename (s));
 	} else {
-	    dest_dir = mhl_str_dup (d);
+	    dest_dir = g_strdup (d);
 	    goto dont_mkdir;
 	}
     }
@@ -1168,9 +1169,9 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 
     mc_stat (s, &sbuf);
     if (mc_stat (d, &dbuf))
-	destdir = mhl_str_dup (d);	/* destination doesn't exist */
+	destdir = g_strdup (d);	/* destination doesn't exist */
     else if (!ctx->dive_into_subdirs) {
-	destdir = mhl_str_dup (d);
+	destdir = g_strdup (d);
 	move_over = 1;
     } else
 	destdir = mhl_str_dir_plus_file (d, x_basename (s));
@@ -1862,11 +1863,11 @@ panel_operate (void *source_panel, FileOperation operation,
        invalid data. */
     if (dest) {
 	if (mc_setctl (dest, VFS_SETCTL_STALE_DATA, (void *) 1))
-	    save_dest = mhl_str_dup (dest);
+	    save_dest = g_strdup (dest);
     }
     if (panel->cwd) {
 	if (mc_setctl (panel->cwd, VFS_SETCTL_STALE_DATA, (void *) 1))
-	    save_cwd = mhl_str_dup (panel->cwd);
+	    save_cwd = g_strdup (panel->cwd);
     }
 
     /* Now, let's do the job */

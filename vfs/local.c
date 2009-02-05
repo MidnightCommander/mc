@@ -273,7 +273,7 @@ local_getlocalcopy (struct vfs_class *me, const char *path)
 {
     (void) me;
 
-    return mhl_str_dup (path);
+    return g_strdup (path);
 }
 
 static int

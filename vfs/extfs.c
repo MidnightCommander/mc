@@ -138,7 +138,7 @@ static void extfs_make_dots (struct entry *ent)
     struct inode *inode = ent->inode, *parent;
     
     parent = (parentry != NULL) ? parentry->inode : NULL;
-    entry->name = mhl_str_dup (".");
+    entry->name = g_strdup (".");
     entry->inode = inode;
     entry->dir = ent;
     inode->local_filename = NULL;
@@ -146,7 +146,7 @@ static void extfs_make_dots (struct entry *ent)
     inode->nlink++;
     entry->next_in_dir = g_new (struct entry, 1);
     entry = entry->next_in_dir;
-    entry->name = mhl_str_dup ("..");
+    entry->name = g_strdup ("..");
     inode->last_in_subdir = entry;
     entry->next_in_dir = NULL;
     if (parent != NULL) {
@@ -170,7 +170,7 @@ static struct entry *extfs_generate_entry (struct archive *archive,
     parent = (parentry != NULL) ? parentry->inode : NULL;
     entry = g_new (struct entry, 1);
     
-    entry->name = mhl_str_dup (name);
+    entry->name = g_strdup (name);
     entry->next_in_dir = NULL;
     entry->dir = parentry;
     if (parent != NULL) {
@@ -273,7 +273,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
-    current_archive->name = name ? mhl_str_dup (name) : NULL;
+    current_archive->name = name ? g_strdup (name) : NULL;
     current_archive->local_name = local_name;
 
     if (local_name != NULL)
@@ -362,7 +362,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		    return -1;
 		}
 		entry = g_new (struct entry, 1);
-		entry->name = mhl_str_dup (p);
+		entry->name = g_strdup (p);
 		entry->next_in_dir = NULL;
 		entry->dir = pent;
 		if (pent->inode->last_in_subdir) {
@@ -494,11 +494,11 @@ static char *
 extfs_get_path (struct vfs_class *me, const char *inname, struct archive **archive,
 		int do_not_open)
 {
-    char *buf = mhl_str_dup (inname);
+    char *buf = g_strdup (inname);
     char *res = extfs_get_path_mangle (me, buf, archive, do_not_open);
     char *res2 = NULL;
     if (res)
-	res2 = mhl_str_dup (res);
+	res2 = g_strdup (res);
     g_free (buf);
     return res2;
 }
@@ -523,7 +523,7 @@ static char *extfs_get_path_from_entry (struct entry *entry)
     }
 
     if (len == 0)
-	return mhl_str_dup ("");
+	return g_strdup ("");
     
     localpath = g_malloc (len);
     *localpath = '\0';
@@ -948,7 +948,7 @@ extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf,
     struct archive *archive;
     char *q;
     struct entry *entry;
-    char *path2 = mhl_str_dup (path);
+    char *path2 = g_strdup (path);
     int result = -1;
 
     if ((q = extfs_get_path_mangle (me, path2, &archive, 0)) == NULL)
@@ -990,7 +990,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     char *q;
     size_t len;
     struct entry *entry;
-    char *mpath = mhl_str_dup (path);
+    char *mpath = g_strdup (path);
     int result = -1;
 
     if ((q = extfs_get_path_mangle (me, mpath, &archive, 0)) == NULL)
@@ -1031,7 +1031,7 @@ static ssize_t extfs_write (void *data, const char *buf, int nbyte)
 static int extfs_unlink (struct vfs_class *me, const char *file)
 {
     struct archive *archive;
-    char *q, *mpath = mhl_str_dup (file);
+    char *q, *mpath = g_strdup (file);
     struct entry *entry;
     int result = -1;
 
@@ -1060,7 +1060,7 @@ cleanup:
 static int extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     struct archive *archive;
-    char *q, *mpath = mhl_str_dup(path);
+    char *q, *mpath = g_strdup(path);
     struct entry *entry;
     int result = -1;
 
@@ -1097,7 +1097,7 @@ cleanup:
 static int extfs_rmdir (struct vfs_class *me, const char *path)
 {
     struct archive *archive;
-    char *q, *mpath = mhl_str_dup(path);
+    char *q, *mpath = g_strdup(path);
     struct entry *entry;
     int result = -1;
 
@@ -1263,7 +1263,7 @@ extfs_getlocalcopy (struct vfs_class *me, const char *path)
 	extfs_close ((void *) fp);
 	return NULL;
     }
-    p = mhl_str_dup (fp->entry->inode->local_filename);
+    p = g_strdup (fp->entry->inode->local_filename);
     fp->archive->fd_usage++;
     extfs_close ((void *) fp);
     return p;
@@ -1340,7 +1340,7 @@ static int extfs_init (struct vfs_class *me)
 	if (!(*key))
 	    continue;
 
-	extfs_prefixes [extfs_no++] = mhl_str_dup (key);
+	extfs_prefixes [extfs_no++] = g_strdup (key);
     }
     fclose(cfg);
     g_free (mc_extfsini);

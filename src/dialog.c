@@ -219,7 +219,7 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     /* Strip existing spaces, add one space before and after the title */
     if (title) {
 	char *t;
-	t = g_strstrip (mhl_str_dup (title));
+	t = g_strstrip (g_strdup (title));
 	new_d->title = g_strconcat (" ", t, " ", (char *) NULL);
 	g_free (t);
     }

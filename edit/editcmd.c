@@ -294,7 +294,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	 */
 	close (fd);
     } else
-	savename = mhl_str_dup (filename);
+	savename = g_strdup (filename);
 
     mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
     mc_chmod (savename, edit->stat1.st_mode);
@@ -483,10 +483,10 @@ edit_set_filename (WEdit *edit, const char *f)
     g_free (edit->filename);
     if (!f)
 	f = "";
-    edit->filename = mhl_str_dup (f);
+    edit->filename = g_strdup (f);
     if (edit->dir == NULL && *f != PATH_SEP)
 #ifdef USE_VFS
-	edit->dir = mhl_str_dup (vfs_get_current_dir ());
+	edit->dir = g_strdup (vfs_get_current_dir ());
 #else
 	edit->dir = g_get_current_dir ();
 #endif
@@ -857,7 +857,7 @@ static int
 edit_load_file_from_filename (WEdit * edit, char *exp)
 {
     int prev_locked = edit->locked;
-    char *prev_filename = mhl_str_dup (edit->filename);
+    char *prev_filename = g_strdup (edit->filename);
 
     if (!edit_reload (edit, exp)) {
 	g_free (prev_filename);
@@ -1438,7 +1438,7 @@ string_regexp_search (char *pattern, char *string, int match_type,
 	    *found_len = 0;
 	    return -3;
 	}
-	old_pattern = mhl_str_dup (pattern);
+	old_pattern = g_strdup (pattern);
 	old_type = match_type;
 	old_icase = icase;
     }
@@ -1820,13 +1820,13 @@ edit_replace_cmd (WEdit *edit, int again)
 	again = 0;
 
     if (again) {
-	input1 = mhl_str_dup (saved1 ? saved1 : "");
-	input2 = mhl_str_dup (saved2 ? saved2 : "");
-	input3 = mhl_str_dup (saved3 ? saved3 : "");
+	input1 = g_strdup (saved1 ? saved1 : "");
+	input2 = g_strdup (saved2 ? saved2 : "");
+	input3 = g_strdup (saved3 ? saved3 : "");
     } else {
-	char *disp1 = mhl_str_dup (saved1 ? saved1 : "");
-	char *disp2 = mhl_str_dup (saved2 ? saved2 : "");
-	char *disp3 = mhl_str_dup (saved3 ? saved3 : "");
+	char *disp1 = g_strdup (saved1 ? saved1 : "");
+	char *disp2 = g_strdup (saved2 ? saved2 : "");
+	char *disp3 = g_strdup (saved3 ? saved3 : "");
 
 	convert_to_display (disp1);
 	convert_to_display (disp2);
@@ -2066,7 +2066,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
 	    return;
-	exp = mhl_str_dup (old);
+	exp = g_strdup (old);
     } else {
 
 #ifdef HAVE_CHARSET
@@ -2088,7 +2088,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (*exp) {
 	    int len = 0;
 	    g_free (old);
-	    old = mhl_str_dup (exp);
+	    old = g_strdup (exp);
 
 	    if (search_create_bookmark) {
 		int found = 0, books = 0;

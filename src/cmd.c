@@ -372,7 +372,7 @@ mkdir_cmd (void)
 	return;
 
     if (dir[0] == '/' || dir[0] == '~')
-	absdir = mhl_str_dup (dir);
+	absdir = g_strdup (dir);
     else
 	absdir = mhl_str_dir_plus_file (current_panel->cwd, dir);
 
@@ -614,7 +614,7 @@ menu_edit_cmd (int where)
 
     switch (dir) {
 	case 0:
-	    buffer = mhl_str_dup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
+	    buffer = g_strdup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 
@@ -937,7 +937,7 @@ do_link (int symbolic_link, const char *fname)
 	if (get_other_type () == view_listing) {
 	    d = mhl_str_dir_plus_file (other_panel->cwd, fname);
 	} else {
-	    d = mhl_str_dup (fname);
+	    d = g_strdup (fname);
 	}
 
 	symlink_dialog (s, d, &dest, &src);
@@ -1056,7 +1056,7 @@ char *guess_message_value (void)
     if (locale == NULL)
 	locale = "";
 
-    return mhl_str_dup (locale);
+    return g_strdup (locale);
 }
 
 /*
@@ -1074,7 +1074,7 @@ get_random_hint (int force)
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
     if (!force && !(tv.tv_sec > last_sec + 60))
-	return mhl_str_dup ("");
+	return g_strdup ("");
     last_sec = tv.tv_sec;
 
     data = load_mc_home_file (MC_HINT, NULL);
@@ -1095,7 +1095,7 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = mhl_str_dup (&data[start]);
+    result = g_strdup (&data[start]);
     g_free (data);
     return result;
 }

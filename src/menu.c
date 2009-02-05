@@ -83,10 +83,10 @@ create_menu (const char *name, menu_entry *entries, int count, const char *help_
 	}
     }
 
-    menu->name = mhl_str_dup (name);
+    menu->name = g_strdup (name);
     menu_scan_hotkey(menu);
     menu->start_x = 0;
-    menu->help_node = mhl_str_dup (help_node);
+    menu->help_node = g_strdup (help_node);
     return menu;
 }
 

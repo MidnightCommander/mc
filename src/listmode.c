@@ -26,11 +26,10 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -288,7 +287,7 @@ listmode_edit (char *oldlistformat)
     char *s;
     Dlg_head *listmode_dlg;
 
-    s = mhl_str_dup (oldlistformat);
+    s = g_strdup (oldlistformat);
     listmode_dlg = init_listmode (s);
     g_free (s);
 

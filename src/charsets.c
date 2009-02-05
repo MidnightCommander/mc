@@ -88,12 +88,12 @@ load_codepages_list (void)
 	    goto fail;
 
 	if (strcmp (buf, "default") == 0) {
-	    default_codepage = mhl_str_dup (p);
+	    default_codepage = g_strdup (p);
 	    continue;
 	}
 
-	codepages[n_codepages].id = mhl_str_dup (buf);
-	codepages[n_codepages].name = mhl_str_dup (p);
+	codepages[n_codepages].id = g_strdup (buf);
+	codepages[n_codepages].name = g_strdup (p);
 	++n_codepages;
     }
 

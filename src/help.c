@@ -106,7 +106,7 @@ static const char *
 search_string (const char *start, const char *text)
 {
     const char *result = NULL;
-    char *local_text = mhl_str_dup (text);
+    char *local_text = g_strdup (text);
     char *d = local_text;
     const char *e = start;
 

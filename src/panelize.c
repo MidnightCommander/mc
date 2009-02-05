@@ -238,7 +238,7 @@ add2panelize_cmd (void)
 	    return;
 	}
 	
-	add2panelize (label, mhl_str_dup (pname->buffer));
+	add2panelize (label, g_strdup (pname->buffer));
     }
 }
 
@@ -295,7 +295,7 @@ external_panelize (void)
     case B_ENTER:
 	target = pname->buffer;
 	if (target != NULL && *target) {
-	    char *cmd = mhl_str_dup (target);
+	    char *cmd = g_strdup (target);
 	    destroy_dlg (panelize_dlg);
 	    do_external_panelize (cmd);
 	    g_free (cmd);
@@ -315,18 +315,18 @@ void load_panelize (void)
     
     profile_keys = profile_init_iterator (panelize_section, profile_name);
     
-    add2panelize (mhl_str_dup (_("Other command")), mhl_str_dup (""));
+    add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
     if (!profile_keys){
-	add2panelize (mhl_str_dup (_("Find rejects after patching")), mhl_str_dup ("find . -name \\*.rej -print"));
-	add2panelize (mhl_str_dup (_("Find *.orig after patching")), mhl_str_dup ("find . -name \\*.orig -print"));
-	add2panelize (mhl_str_dup (_("Find SUID and SGID programs")), mhl_str_dup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
+	add2panelize (g_strdup (_("Find rejects after patching")), g_strdup ("find . -name \\*.rej -print"));
+	add2panelize (g_strdup (_("Find *.orig after patching")), g_strdup ("find . -name \\*.orig -print"));
+	add2panelize (g_strdup (_("Find SUID and SGID programs")), g_strdup ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
 	return;
     }
     
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2panelize (mhl_str_dup (key), mhl_str_dup (value));
+	add2panelize (g_strdup (key), g_strdup (value));
     }
 }
 
@@ -400,7 +400,7 @@ static void do_external_panelize (char *command)
 	if (status == -1)
 	    break;
 	list->list [next_free].fnamelen = strlen (name);
-	list->list [next_free].fname = mhl_str_dup (name);
+	list->list [next_free].fname = g_strdup (name);
 	file_mark (current_panel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stale_link = stale_link;

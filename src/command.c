@@ -115,7 +115,7 @@ examine_cd (char *path)
 
     /* CDPATH handling */
     if (*q != PATH_SEP && !result) {
-	char * const cdpath = mhl_str_dup (getenv ("CDPATH"));
+	char * const cdpath = g_strdup (getenv ("CDPATH"));
 	char *p = cdpath;
 	if (p == NULL)
 	    c = 0;
@@ -186,7 +186,7 @@ void do_cd_command (char *cmd)
 	}
     } else
 	if (!examine_cd (&cmd [3])) {
-	    char *d = strip_password (mhl_str_dup (&cmd [3]), 1);
+	    char *d = strip_password (g_strdup (&cmd [3]), 1);
 	    message (D_ERROR, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
 		     d, unix_error_string (errno));
 	    g_free (d);

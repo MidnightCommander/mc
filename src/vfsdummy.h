@@ -3,8 +3,6 @@
 #ifndef MC_VFSDUMMY_H
 #define MC_VFSDYMMY_H
 
-#include <mhl/string.h>
-
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
@@ -56,12 +54,12 @@ return_zero (void)
 
 #define vfs_current_is_local() 1
 #define vfs_file_is_local(x) 1
-#define vfs_strip_suffix_from_filename(x) mhl_str_dup(x)
+#define vfs_strip_suffix_from_filename(x) g_strdup(x)
 
 #define vfs_file_class_flags(x) (VFSF_LOCAL)
 #define vfs_get_class(x) (struct vfs_class *)(NULL)
 
-#define vfs_translate_url(s) mhl_str_dup(s)
+#define vfs_translate_url(s) g_strdup(s)
 #define vfs_release_path(x)
 #define vfs_add_current_stamps() do { } while (0)
 #define vfs_timeout_handler() do { } while (0)
@@ -70,7 +68,7 @@ return_zero (void)
 static inline char *
 vfs_canon (const char *path)
 {
-    char *p = mhl_str_dup (path);
+    char *p = g_strdup (path);
     canonicalize_pathname(p);
     return p;
 }

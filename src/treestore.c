@@ -137,7 +137,7 @@ tree_store_get(void)
 static char *
 decode(char *buffer)
 {
-    char *res = mhl_str_dup(buffer);
+    char *res = g_strdup(buffer);
     char *p, *q;
 
     for (p = q = res; *p; p++, q++) {
@@ -446,7 +446,7 @@ tree_store_add_entry(const char *name)
     }
 
     /* Calculate attributes */
-    new->name = mhl_str_dup(name);
+    new->name = g_strdup(name);
     len = strlen(new->name);
     new->sublevel = 0;
     for (i = 0; i < len; i++)
@@ -474,7 +474,7 @@ tree_store_add_entry(const char *name)
 
     if (new->sublevel > 1) {
 	/* Let's check if the parent directory is in the tree */
-	char *parent = mhl_str_dup(new->name);
+	char *parent = g_strdup(new->name);
 	int i;
 
 	for (i = strlen(parent) - 1; i > 1; i--) {
@@ -618,7 +618,7 @@ tree_store_mark_checked(const char *subname)
     if (flag != 0) {
 	/* Doesn't exist -> add it */
 	current = tree_store_add_entry(name);
-	ts.add_queue = g_list_prepend(ts.add_queue, mhl_str_dup(name));
+	ts.add_queue = g_list_prepend(ts.add_queue, g_strdup(name));
     }
     g_free(name);
 
@@ -663,12 +663,12 @@ tree_store_start_check(const char *path)
 	    return NULL;
 
 	current = tree_store_add_entry(path);
-	ts.check_name = mhl_str_dup(path);
+	ts.check_name = g_strdup(path);
 
 	return current;
     }
 
-    ts.check_name = mhl_str_dup(path);
+    ts.check_name = g_strdup(path);
 
     retval = current;
 
@@ -740,7 +740,7 @@ process_special_dirs(GList ** special_dirs, char *file)
 			    "", buffer, 4096, file);
     s = buffer;
     while ((token = strtok(s, ",")) != NULL) {
-	*special_dirs = g_list_prepend(*special_dirs, mhl_str_dup(token));
+	*special_dirs = g_list_prepend(*special_dirs, g_strdup(token));
 	s = NULL;
     }
     g_free(buffer);

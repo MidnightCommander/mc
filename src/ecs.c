@@ -56,7 +56,7 @@ extern bool ecs_mbstr_to_str(ecs_char **ret_str, const char *s)
 	*ret_str = g_renew(ecs_char, str, len + 1);
 	return TRUE;
 #else
-	*ret_str = mhl_str_dup(s);
+	*ret_str = g_strdup(s);
 	return TRUE;
 #endif
 }
@@ -80,7 +80,7 @@ extern bool ecs_str_to_mbstr(char **ret_str, const ecs_char *s)
 	*ret_str = g_renew(char, str, len + 1);
 	return TRUE;
 #else
-	*ret_str = mhl_str_dup(s);
+	*ret_str = g_strdup(s);
 	return TRUE;
 #endif
 }

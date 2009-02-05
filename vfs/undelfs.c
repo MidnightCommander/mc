@@ -143,7 +143,7 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 	if (*p == '/'){
 	    char *tmp;
 
-	    *file = mhl_str_dup (p+1);
+	    *file = g_strdup (p+1);
 	    tmp = g_strndup (dirname, p - dirname);
 	    *fsname = g_strconcat ("/dev/", tmp, (char *) NULL);
 	    g_free (tmp);
@@ -151,7 +151,7 @@ undelfs_get_path (const char *dirname, char **fsname, char **file)
 	}
 	p--;
     }
-    *file = mhl_str_dup ("");
+    *file = g_strdup ("");
     *fsname = g_strconcat ("/dev/", dirname, (char *) NULL);
     return;
 }

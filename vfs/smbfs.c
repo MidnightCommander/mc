@@ -112,7 +112,7 @@ typedef struct {
 static GSList *auth_list;
 
 /* this function allows you to write:
- * char *s = mhl_str_dup("hello, world");
+ * char *s = g_strdup("hello, world");
  * s = free_after(g_strconcat(s, s, (char *)0), s);
  */
 static inline char *
@@ -182,12 +182,12 @@ smbfs_auth_add (const char *host, const char *share, const char *domain,
     if (!auth)
         return;
 
-    /* Don't check for NULL, mhl_str_dup already does. */
-    auth->host = mhl_str_dup (host);
-    auth->share = mhl_str_dup (share);
-    auth->domain = mhl_str_dup (domain);
-    auth->user = mhl_str_dup (user);
-    auth->password = mhl_str_dup (password);
+    /* Don't check for NULL, g_strdup already does. */
+    auth->host = g_strdup (host);
+    auth->share = g_strdup (share);
+    auth->domain = g_strdup (domain);
+    auth->user = g_strdup (user);
+    auth->password = g_strdup (password);
     auth_list = g_slist_prepend (auth_list, auth);
 }
 
@@ -198,8 +198,8 @@ smbfs_auth_remove (const char *host, const char *share)
     struct smb_authinfo *auth;
     GSList *list;
 
-    data.host = mhl_str_dup (host);
-    data.share = mhl_str_dup (share);
+    data.host = g_strdup (host);
+    data.share = g_strdup (share);
     list = g_slist_find_custom (auth_list, 
                                 &data, 
                                 smbfs_auth_cmp_host_and_share);
@@ -228,9 +228,9 @@ smbfs_bucket_set_authinfo (smbfs_connection *bucket,
         g_free (bucket->domain);
         g_free (bucket->user);
         g_free (bucket->password);
-        bucket->domain = mhl_str_dup (domain);
-        bucket->user = mhl_str_dup (user);
-        bucket->password = mhl_str_dup (pass);
+        bucket->domain = g_strdup (domain);
+        bucket->user = g_strdup (user);
+        bucket->password = g_strdup (pass);
         smbfs_auth_remove (bucket->host, bucket->service);
         smbfs_auth_add (bucket->host, bucket->service,
                   domain, user, pass);
@@ -244,16 +244,16 @@ smbfs_bucket_set_authinfo (smbfs_connection *bucket,
         list = g_slist_find_custom (auth_list, &data, smbfs_auth_cmp_host);
     if (list) {
         auth = list->data;
-        bucket->domain = mhl_str_dup (auth->domain);
-        bucket->user = mhl_str_dup (auth->user);
-        bucket->password = mhl_str_dup (auth->password);
+        bucket->domain = g_strdup (auth->domain);
+        bucket->user = g_strdup (auth->user);
+        bucket->password = g_strdup (auth->password);
         return 1;
     }
 
     if (got_pass) {
-        bucket->domain = mhl_str_dup (lp_workgroup ());
-        bucket->user = mhl_str_dup (got_user ? username : user);
-        bucket->password = mhl_str_dup (password);
+        bucket->domain = g_strdup (lp_workgroup ());
+        bucket->user = g_strdup (got_user ? username : user);
+        bucket->password = g_strdup (password);
         return 1;
     }
 
@@ -265,9 +265,9 @@ smbfs_bucket_set_authinfo (smbfs_connection *bucket,
         g_free (bucket->domain);
         g_free (bucket->user);
         g_free (bucket->password);
-        bucket->domain = mhl_str_dup (auth->domain);
-        bucket->user = mhl_str_dup (auth->user);
-        bucket->password = mhl_str_dup (auth->password);
+        bucket->domain = g_strdup (auth->domain);
+        bucket->user = g_strdup (auth->user);
+        bucket->password = g_strdup (auth->password);
         smbfs_auth_remove (bucket->host, bucket->service);
         auth_list = g_slist_prepend (auth_list, auth);
         return 1;
@@ -461,7 +461,7 @@ smbfs_new_dir_entry (const char *name)
     static int inode_counter;
     dir_entry *new_entry;
     new_entry = g_new0 (dir_entry, 1);
-    new_entry->text = dos_to_unix (mhl_str_dup (name), 1);
+    new_entry->text = dos_to_unix (g_strdup (name), 1);
 
     if (first_direntry) {
 	current_info->entries = new_entry;
@@ -603,9 +603,9 @@ smbfs_reconnect(smbfs_connection *conn, int *retries)
 	DEBUG(3, ("RECONNECT\n"));
 
 	if (*(conn->host) == 0)
-		host = mhl_str_dup(conn->cli->desthost);		/* server browsing */
+		host = g_strdup(conn->cli->desthost);		/* server browsing */
 	else
-		host = mhl_str_dup(conn->host);
+		host = g_strdup(conn->host);
 
 	cli_shutdown(conn->cli);
 
@@ -765,7 +765,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
     /* do regular directory listing */
     if (strncmp (smbfs_info->conn->service, info_dirname + 1, servlen) == 0) {
 	/* strip share name from dir */
-	my_dirname = mhl_str_dup (info_dirname + servlen);
+	my_dirname = g_strdup (info_dirname + servlen);
 	*my_dirname = '/';
 	my_dirname = free_after(smbfs_convert_path (my_dirname, TRUE), my_dirname);
     } else
@@ -1034,7 +1034,7 @@ smbfs_get_master_browser(char **host)
 		if (!count)
 			return 0;
 		/* just return first master browser */
-		*host = mhl_str_dup(inet_ntoa(ip_list[0]));
+		*host = g_strdup(inet_ntoa(ip_list[0]));
 		return 1;
 	}
 	return 0;
@@ -1148,16 +1148,16 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
     }
     current_bucket = bucket;
 
-    bucket->user = mhl_str_dup (user);
-    bucket->service = mhl_str_dup (service);
+    bucket->user = g_strdup (user);
+    bucket->service = g_strdup (service);
 
     if (!(*host)) {		/* if blank host name, browse for servers */
 	if (!smbfs_get_master_browser (&host))	/* set host to ip of master browser */
 	    return 0;		/* could not find master browser? */
 	g_free (host);
-	bucket->host = mhl_str_dup ("");	/* blank host means master browser */
+	bucket->host = g_strdup ("");	/* blank host means master browser */
     } else
-	bucket->host = mhl_str_dup (host);
+	bucket->host = g_strdup (host);
 
     if (!smbfs_bucket_set_authinfo (bucket, 0,	/* domain currently not used */
 			      user, this_pass, 1))
@@ -1254,7 +1254,7 @@ smbfs_opendir (struct vfs_class *me, const char *dirname)
     /* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
 	smbfs_info->server_list = FALSE;
-    smbfs_info->path = mhl_str_dup(dirname);		/* keep original */
+    smbfs_info->path = g_strdup(dirname);		/* keep original */
 	smbfs_info->dirname = remote_dir;
     smbfs_info->conn = sc;
     smbfs_info->entries = 0;
@@ -1362,7 +1362,7 @@ smbfs_get_remote_stat (smbfs_connection * sc, const char *path, struct stat *buf
 #if 0	/* single_entry is never free()d now.  And only my_stat is used */
     single_entry = g_new (dir_entry, 1);
 
-    single_entry->text = dos_to_unix (mhl_str_dup (finfo->name), 1);
+    single_entry->text = dos_to_unix (g_strdup (finfo->name), 1);
 
     single_entry->next = 0;
 #endif
@@ -1430,7 +1430,7 @@ smbfs_get_stat_info (smbfs_connection * sc, const char *path, struct stat *buf)
     {
 	char *mdp;
 	char *mydir;
-	mdp = mydir = mhl_str_dup (current_info->dirname);
+	mdp = mydir = g_strdup (current_info->dirname);
 	if ((p = strrchr (mydir, '/')))
 	    *p = 0;		/* advance util last '/' */
 	if ((p = strrchr (mydir, '/')))
@@ -1512,7 +1512,7 @@ smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 	void *info;
 	char *mypath, *p;
 
-	mypath = mhl_str_dup(path);
+	mypath = g_strdup(path);
 	p = strrchr(mypath, '/');
 
 	if (p > mypath)

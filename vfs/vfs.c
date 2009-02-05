@@ -21,7 +21,7 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
 /* Warning: funtions like extfs_lstat() have right to destroy any
- * strings you pass to them. This is acutally ok as you mhl_str_dup what
+ * strings you pass to them. This is acutally ok as you g_strdup what
  * you are passing to them, anyway; still, beware.  */
 
 /* Namespace: exports *many* functions with vfs_ prefix; exports
@@ -37,8 +37,6 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <ctype.h>	/* is_digit() */
-
-#include <mhl/string.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -188,7 +186,7 @@ vfs_strip_suffix_from_filename (const char *filename)
     if (!filename)
 	vfs_die ("vfs_strip_suffix_from_path got NULL: impossible");
 
-    p = mhl_str_dup (filename);
+    p = g_strdup (filename);
     if (!(semi = strrchr (p, '#')))
 	return p;
 
@@ -300,7 +298,7 @@ struct vfs_class *
 vfs_get_class (const char *pathname)
 {
     struct vfs_class *vfs;
-    char *path = mhl_str_dup (pathname);
+    char *path = g_strdup (pathname);
 
     vfs = _vfs_get_class (path);
     g_free (path);
@@ -566,7 +564,7 @@ int mc_fstat (int handle, struct stat *buf) {
 
 /*
  * Return current directory.  If it's local, reread the current directory
- * from the OS.  You must mhl_str_dup() whatever this function returns.
+ * from the OS.  You must g_strdup() whatever this function returns.
  */
 static const char *
 _vfs_get_cwd (void)
@@ -596,7 +594,7 @@ _vfs_get_cwd (void)
 static void
 vfs_setup_wd (void)
 {
-    current_dir = mhl_str_dup (PATH_SEP_STR);
+    current_dir = g_strdup (PATH_SEP_STR);
     _vfs_get_cwd ();
 
     if (strlen (current_dir) > MC_MAXPATHLEN - 2)
@@ -670,7 +668,7 @@ vfs_canon (const char *path)
      * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
     {
-	char *result = mhl_str_dup (path);
+	char *result = g_strdup (path);
 	canonicalize_pathname (result);
         return result;
     }
@@ -931,7 +929,7 @@ vfs_fill_names (fill_names_f func)
 
 /*
  * Returns vfs path corresponding to given url. If passed string is
- * not recognized as url, mhl_str_dup(url) is returned.
+ * not recognized as url, g_strdup(url) is returned.
  */
 
 static const struct {
@@ -955,7 +953,7 @@ vfs_translate_url (const char *url)
        if (strncmp (url, url_table[i].name, url_table[i].name_len) == 0)
            return g_strconcat (url_table[i].substitute, url + url_table[i].name_len, (char*) NULL);
 
-    return mhl_str_dup (url);
+    return g_strdup (url);
 }
 
 int vfs_file_is_local (const char *filename)
