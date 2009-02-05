@@ -463,7 +463,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		  "echo '### 500'\n"
 	"fi\n",
 	    quoted_path, quoted_path, quoted_path, quoted_path, quoted_path, quoted_path);
-    g_free (quoted_path.s);
+    g_free (quoted_path);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr); 
@@ -735,14 +735,14 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			  (unsigned long) s.st_size);
     }
     close(h);
-    g_free(quoted_name.s);
+    g_free(quoted_name);
     if ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
     return 0;
 error_return:
     close(h);
     fish_get_reply(me, SUP.sockr, NULL, 0);
-    g_free(quoted_name.s);
+    g_free(quoted_name);
     return -1;
 }
 
@@ -780,7 +780,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 		"echo '### 500'\n"
 		"fi\n",
 		quoted_name, quoted_name, quoted_name, quoted_name );
-    g_free (quoted_name.s);
+    g_free (quoted_name);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
@@ -934,8 +934,8 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     rpath2 = mhl_shell_escape_dup (crpath2); \
     g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
-    g_free (rpath1.s); \
-    g_free (rpath2.s); \
+    g_free (rpath1); \
+    g_free (rpath2); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
