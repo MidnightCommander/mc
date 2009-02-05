@@ -274,20 +274,22 @@ edit_insert_file (WEdit *edit, const char *filename)
 	    edit_insert_stream (edit, f);
 	    edit_cursor_move (edit, current - edit->curs1);
 	    if (pclose (f) > 0) {
-		char errmsg[8192];
-		snprintf(errmsg, sizeof(errmsg), _(" Error reading from pipe: %s "), p);
-		edit_error_dialog (_("Error"), errmsg);
-		mhl_mem_free (p);
+	        GString *errmsg = g_string_new (NULL);
+		g_string_sprintf (errmsg, _(" Error reading from pipe: %s "), p);
+		edit_error_dialog (_("Error"), errmsg->str);
+		g_string_free (errmsg, TRUE);
+		g_free (p);
 		return 0;
 	    }
 	} else {
-	    char errmsg[8192];
-	    snprintf(errmsg, sizeof(errmsg), _(" Cannot open pipe for reading: %s "), p);
-	    edit_error_dialog (_("Error"), errmsg);
-	    mhl_mem_free (p);
+	    GString *errmsg = g_string_new (NULL);
+	    g_string_sprintf (errmsg, _(" Cannot open pipe for reading: %s "), p);
+	    edit_error_dialog (_("Error"), errmsg->str);
+	    g_string_free (errmsg, TRUE);
+	    g_free (p);
 	    return 0;
 	}
-	mhl_mem_free (p);
+	g_free (p);
     } else {
 	int i, file, blocklen;
 	long current = edit->curs1;
