@@ -1701,10 +1701,10 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
 
     if (single_source) {
 	i = fmd_xlen - strlen (format_string) - 4;
-	snprintf (cmd_buf, sizeof (cmd_buf), format_string,
+	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    name_trunc (single_source, i));
     } else {
-	snprintf (cmd_buf, sizeof (cmd_buf), format_string,
+	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    panel->marked);
 	i = strlen (cmd_buf) + 6 - fmd_xlen;
 	if (i > 0) {
@@ -2126,7 +2126,7 @@ real_do_file_error (enum OperationMode mode, const char *error)
 int
 file_error (const char *format, const char *file)
 {
-    snprintf (cmd_buf, sizeof (cmd_buf), format,
+    g_snprintf (cmd_buf, sizeof (cmd_buf), format,
 		path_trunc (file, 30), unix_error_string (errno));
 
     return do_file_error (cmd_buf);
@@ -2142,7 +2142,7 @@ files_error (const char *format, const char *file1, const char *file2)
     strcpy (nfile1, path_trunc (file1, 15));
     strcpy (nfile2, path_trunc (file2, 15));
 
-    snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
+    g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
 		unix_error_string (errno));
 
     return do_file_error (cmd_buf);

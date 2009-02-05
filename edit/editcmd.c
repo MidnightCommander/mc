@@ -2316,7 +2316,7 @@ edit_goto_cmd (WEdit *edit)
     char *error;
     char s[32];
 
-    snprintf (s, sizeof (s), "%ld", line);
+    g_snprintf (s, sizeof (s), "%ld", line);
     f = input_dialog (_(" Goto line "), _(" Enter line: "), MC_HISTORY_EDIT_GOTO_LINE,
 		      line ? s : "");
     if (!f)

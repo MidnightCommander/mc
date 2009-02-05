@@ -230,7 +230,7 @@ init_subshell_child (const char *pty_name)
     mc_sid = getsid (0);
     if (mc_sid != -1) {
 	char sid_str[BUF_SMALL];
-	snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld",
+	g_snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld",
 		    (long) mc_sid);
 	putenv (g_strdup (sid_str));
     }
@@ -423,7 +423,7 @@ init_subshell (void)
 	/* Create a pipe for receiving the subshell's CWD */
 
 	if (subshell_type == TCSH) {
-	    snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
+	    g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
 			mc_tmpdir (), (int) getpid ());
 	    if (mkfifo (tcsh_fifo, 0600) == -1) {
 		fprintf (stderr, "mkfifo(%s) failed: %s\r\n", tcsh_fifo,
@@ -471,19 +471,19 @@ init_subshell (void)
 
     switch (subshell_type) {
     case BASH:
-	snprintf (precmd, sizeof (precmd),
+	g_snprintf (precmd, sizeof (precmd),
 		    " PROMPT_COMMAND='pwd>&%d;kill -STOP $$'\n",
 		    subshell_pipe[WRITE]);
 	break;
 
     case ZSH:
-	snprintf (precmd, sizeof (precmd),
+	g_snprintf (precmd, sizeof (precmd),
 		    " precmd(){ pwd>&%d;kill -STOP $$ }\n",
 		    subshell_pipe[WRITE]);
 	break;
 
     case TCSH:
-	snprintf (precmd, sizeof (precmd),
+	g_snprintf (precmd, sizeof (precmd),
 		    "set echo_style=both;"
 		    "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n",
 		    tcsh_fifo);

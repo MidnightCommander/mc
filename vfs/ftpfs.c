@@ -1529,7 +1529,7 @@ static int ftpfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
     char buf[BUF_SMALL];
 
-    snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
+    g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
     return ftpfs_send_command(me, path, buf, OPT_FLUSH);
 }
 

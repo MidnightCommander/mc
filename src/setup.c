@@ -246,11 +246,11 @@ panel_save_setup (struct WPanel *panel, const char *section)
     char buffer [BUF_TINY];
     int  i;
 
-    snprintf (buffer, sizeof (buffer), "%d", panel->reverse);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->reverse);
     save_string (section, "reverse", buffer, profile_name);
-    snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
     save_string (section, "case_sensitive", buffer, profile_name);
-    snprintf (buffer, sizeof (buffer), "%d", panel->exec_first);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->exec_first);
     save_string (section, "exec_first", buffer, profile_name);
     for (i = 0; sort_names [i].key; i++)
 	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
@@ -269,12 +269,12 @@ panel_save_setup (struct WPanel *panel, const char *section)
 			       panel->user_format, profile_name);
 
     for (i = 0; i < LIST_TYPES; i++){
-	snprintf (buffer, sizeof (buffer), "user_status%d", i);
+	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	save_string (section, buffer,
 	    panel->user_status_format [i], profile_name);
     }
 
-    snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
+    g_snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
     save_string (section, "user_mini_status", buffer,
 			       profile_name);
 }
@@ -290,7 +290,7 @@ save_layout (void)
 
     /* Save integer options */
     for (i = 0; layout [i].opt_name; i++){
-	snprintf (buffer, sizeof (buffer), "%d", *layout [i].opt_addr);
+	g_snprintf (buffer, sizeof (buffer), "%d", *layout [i].opt_addr);
 	save_string ("Layout", layout [i].opt_name, buffer, profile);
     }
 
@@ -420,7 +420,7 @@ panel_load_setup (WPanel *panel, const char *section)
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
-	snprintf (buffer, sizeof (buffer), "user_status%d", i);
+	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
 	    mhl_str_dup (get_profile_string (section, buffer,
 			DEFAULT_USER_FORMAT, profile_name));

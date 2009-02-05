@@ -122,7 +122,7 @@ view_file_at_line (const char *filename, int plain_view, int internal,
 	char view_entry[BUF_TINY];
 
 	if (start_line != 0)
-	    snprintf (view_entry, sizeof (view_entry), "View:%d",
+	    g_snprintf (view_entry, sizeof (view_entry), "View:%d",
 			start_line);
 	else
 	    strcpy (view_entry, "View");

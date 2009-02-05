@@ -146,7 +146,7 @@ fopen_check (const char *filename, const char *flags)
 
     f = fopen (filename, flags);
     if (f == NULL) {
-	snprintf (tmp, sizeof (tmp), "man2hlp: Cannot open file \"%s\"",
+	g_snprintf (tmp, sizeof (tmp), "man2hlp: Cannot open file \"%s\"",
 		    filename);
 	perror (tmp);
 	exit (3);
@@ -584,7 +584,7 @@ handle_command (char *buffer)
     } else {
 	/* Other commands are ignored */
 	char warn_str[BUFFER_SIZE];
-	snprintf (warn_str, sizeof (warn_str),
+	g_snprintf (warn_str, sizeof (warn_str),
 		    "Warning: unsupported command %s", buffer);
 	print_error (warn_str);
 	return;
@@ -813,7 +813,7 @@ main (int argc, char **argv)
 	    }
 	}
 	if (!found) {
-	    snprintf (buffer, sizeof (buffer), "Stale link \"%s\"",
+	    g_snprintf (buffer, sizeof (buffer), "Stale link \"%s\"",
 			current_link->linkname);
 	    c_in = current_link->filename;
 	    in_row = current_link->line;

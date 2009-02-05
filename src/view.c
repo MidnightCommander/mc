@@ -1519,7 +1519,7 @@ view_load (WView *view, const char *command, const char *file,
     } else if (file != NULL && file[0] != '\0') {
 	/* Open the file */
 	if ((fd = mc_open (file, O_RDONLY | O_NONBLOCK)) == -1) {
-	    snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
+	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
 			file, unix_error_string (errno));
 	    view_show_error (view, tmp);
 	    goto finish;
@@ -1528,7 +1528,7 @@ view_load (WView *view, const char *command, const char *file,
 	/* Make sure we are working with a regular file */
 	if (mc_fstat (fd, &st) == -1) {
 	    mc_close (fd);
-	    snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
+	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
 			file, unix_error_string (errno));
 	    view_show_error (view, tmp);
 	    goto finish;
@@ -1744,7 +1744,7 @@ view_display_ruler (WView *view)
 	}
 
 	if ((cl != 0) && (cl % 10) == 0) {
-	    snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
+	    g_snprintf (r_buff, sizeof (r_buff), "%"OFFSETTYPE_PRId, cl);
 	    if (nums_row < height) {
 		widget_move (view, top + nums_row, left + c - 1);
 		tty_print_string (r_buff);
@@ -1792,7 +1792,7 @@ view_display_hex (WView *view)
 	col = 0;
 
 	/* Print the hex offset */
-	snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX" ", from);
+	g_snprintf (hex_buff, sizeof (hex_buff), "%08"OFFSETTYPE_PRIX" ", from);
 	widget_move (view, top + row, left);
 	tty_setcolor (MARKED_COLOR);
 	for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
@@ -2734,7 +2734,7 @@ view_moveto_line_cmd (WView *view)
 
     view_offset_to_coord (view, &line, &col, view->dpy_start);
 
-    snprintf (prompt, sizeof (prompt),
+    g_snprintf (prompt, sizeof (prompt),
 		_(" The current line number is %d.\n"
 		  " Enter the new line number:"), (int) (line + 1));
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
@@ -2755,7 +2755,7 @@ view_moveto_addr_cmd (WView *view)
     char *line, *error, prompt[BUF_SMALL];
     offset_type addr;
 
-    snprintf (prompt, sizeof (prompt),
+    g_snprintf (prompt, sizeof (prompt),
 		_(" The current address is 0x%lx.\n"
 		  " Enter the new address:"), view->hex_cursor);
     line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");

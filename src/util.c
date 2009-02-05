@@ -291,7 +291,7 @@ size_trunc (double size)
 	    xtra = "M";
 	}
     }
-    snprintf (x, sizeof (x), "%.0f%s", (size/divisor), xtra);
+    g_snprintf (x, sizeof (x), "%.0f%s", (size/divisor), xtra);
     return x;
 }
 
@@ -350,18 +350,18 @@ size_trunc_len (char *buffer, int len, off_t size, int units)
 	if (size == 0) {
 	    if (j == units) {
 		/* Empty files will print "0" even with minimal width.  */
-		snprintf (buffer, len + 1, "0");
+		g_snprintf (buffer, len + 1, "0");
 		break;
 	    }
 
 	    /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
-	    snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
+	    g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
 			(j > 1) ? suffix[j - 1] : "B");
 	    break;
 	}
 
 	if (size < power10 [len - (j > 0)]) {
-	    snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, suffix[j]);
+	    g_snprintf (buffer, len + 1, "%lu%s", (unsigned long) size, suffix[j]);
 	    break;
 	}
 
@@ -635,7 +635,7 @@ set_int (const char *file, const char *key, int value)
 {
     char buffer [BUF_TINY];
 
-    snprintf (buffer, sizeof (buffer), "%d", value);
+    g_snprintf (buffer, sizeof (buffer), "%d", value);
     return WritePrivateProfileString (app_text, key, buffer, file);
 }
 
@@ -851,11 +851,11 @@ unix_error_string (int error_num)
     gchar *strerror_currentlocale;
 	
     strerror_currentlocale = g_locale_from_utf8(g_strerror (error_num), -1, NULL, NULL, NULL);
-    snprintf (buffer, sizeof (buffer), "%s (%d)",
+    g_snprintf (buffer, sizeof (buffer), "%s (%d)",
 		strerror_currentlocale, error_num);
     g_free(strerror_currentlocale);
 #else
-    snprintf (buffer, sizeof (buffer), "%s (%d)",
+    g_snprintf (buffer, sizeof (buffer), "%s (%d)",
 		g_strerror (error_num), error_num);
 #endif
     return buffer;

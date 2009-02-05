@@ -573,7 +573,7 @@ sel_charset_button (int action)
 	: codepages[new_display_codepage].name;
 
     /* avoid strange bug with label repainting */
-    snprintf (buf, sizeof (buf), "%-27s", cpname);
+    g_snprintf (buf, sizeof (buf), "%-27s", cpname);
     label_set_text (cplabel, buf);
     return 0;
 }
@@ -774,12 +774,12 @@ configure_vfs (void)
     ret_use_netrc = use_netrc;
     ret_ftpfs_use_passive_connections = ftpfs_use_passive_connections;
     ret_ftpfs_use_passive_connections_over_proxy = ftpfs_use_passive_connections_over_proxy;
-    snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
+    g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
     confvfs_widgets[8].text = buffer3;
     confvfs_widgets[10].text = ftpfs_anonymous_passwd;
     confvfs_widgets[5].text = ftpfs_proxy_host;
 #endif
-    snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
+    g_snprintf (buffer2, sizeof (buffer2), "%i", vfs_timeout);
     confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {

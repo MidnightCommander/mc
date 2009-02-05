@@ -1650,7 +1650,7 @@ load_hint (int force)
     } else {
 	char text[BUF_SMALL];
 
-	snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"),
+	g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"),
 		    VERSION);
 	set_hintbar (text);
     }

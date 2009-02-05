@@ -877,7 +877,7 @@ const char *get_nth_panel_name (int num)
     else if (num == 1)
         return "New Right Panel";
     else {
-        snprintf (buffer, sizeof (buffer), "%ith Panel", num);
+        g_snprintf (buffer, sizeof (buffer), "%ith Panel", num);
         return buffer;
     }
 }

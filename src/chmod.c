@@ -161,7 +161,7 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
     case DLG_ACTION:
 	if (id >= 0) {
 	    c_stat ^= check_perm[id].mode;
-	    snprintf (buffer, sizeof (buffer), "%o", c_stat);
+	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	    label_set_text (statl, buffer);
 	    chmod_toggle_select (h, id);
 	    mode_change = 1;
@@ -302,7 +302,7 @@ void chmod_cmd (void)
 	add_widget (ch_dlg, label_new (FY+6, FX+2, c_fown));
 	c_fgrp = name_trunc (get_group (sf_stat.st_gid), 21);
 	add_widget (ch_dlg, label_new (FY+8, FX+2, c_fgrp));
-	snprintf (buffer, sizeof (buffer), "%o", c_stat);
+	g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
 	statl = label_new (FY+4, FX+2, buffer);
 	add_widget (ch_dlg, statl);
 	
