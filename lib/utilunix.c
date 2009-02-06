@@ -239,17 +239,6 @@ tilde_expand (const char *directory)
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
 }
 
-static void
-mc_setenv (const char *name, const char *value, int overwrite_flag)
-{
-#if defined(HAVE_SETENV)
-    setenv (name, value, overwrite_flag);
-#else
-    if (overwrite_flag || getenv (name) == NULL)
-        putenv (g_strconcat (name, "=", value, (char *) NULL));
-#endif
-}
-
 /*
  * Return the directory where mc should keep its temporary files.
  * This directory is (in Bourne shell terms) "${TMPDIR=/tmp}/mc-$USER"
@@ -346,7 +335,7 @@ mc_tmpdir (void)
     tmpdir = buffer;
 
     if (!error)
-	mc_setenv ("MC_TMPDIR", tmpdir, 1);
+	g_setenv ("MC_TMPDIR", tmpdir, TRUE);
 
     return tmpdir;
 }
@@ -603,68 +592,6 @@ int gettimeofday (struct timeval *tp, void *tzp)
   return get_process_stats(tp, PS_SELF, 0, 0);
 }
 #endif /* HAVE_GET_PROCESS_STATS */
-
-#ifndef HAVE_PUTENV
-
-/* The following piece of code was copied from the GNU C Library */
-/* And is provided here for nextstep who lacks putenv */
-
-extern char **environ;
-
-#ifndef	HAVE_GNU_LD
-#define	__environ	environ
-#endif
-
-
-/* Put STRING, which is of the form "NAME=VALUE", in the environment.  */
-int
-putenv (char *string)
-{
-    const char *const name_end = strchr (string, '=');
-    register size_t size;
-    register char **ep;
-    
-    if (name_end == NULL){
-	/* Remove the variable from the environment.  */
-	size = strlen (string);
-	for (ep = __environ; *ep != NULL; ++ep)
-	    if (!strncmp (*ep, string, size) && (*ep)[size] == '='){
-		while (ep[1] != NULL){
-		    ep[0] = ep[1];
-		    ++ep;
-		}
-		*ep = NULL;
-		return 0;
-	    }
-    }
-    
-    size = 0;
-    for (ep = __environ; *ep != NULL; ++ep)
-	if (!strncmp (*ep, string, name_end - string) &&
-	    (*ep)[name_end - string] == '=')
-	    break;
-	else
-	    ++size;
-    
-    if (*ep == NULL){
-	static char **last_environ = NULL;
-	char **new_environ = g_try_new (char *, size + 2);
-	if (new_environ == NULL)
-	    return -1;
-	(void) memcpy ((void *) new_environ, (void *) __environ,
-		       size * sizeof (char *));
-	new_environ[size] = (char *) string;
-	new_environ[size + 1] = NULL;
-	g_free ((void *) last_environ);
-	last_environ = new_environ;
-	__environ = new_environ;
-    }
-    else
-	*ep = (char *) string;
-    
-    return 0;
-}
-#endif /* !HAVE_PUTENV */
 
 char *
 mc_realpath (const char *path, char resolved_path[])
