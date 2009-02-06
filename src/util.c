@@ -1531,8 +1531,6 @@ Q_ (const char *s)
     return (sep != NULL) ? sep + 1 : result;
 }
 
-/*TODO: These three functions should use glib and should be fixed soon */
-
 #define shell_escape_toesc(x)	\
     (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
      ((x)=='(')||((x)==')')||((x)=='\'')||((x)=='&')||((x)=='~')||	\
