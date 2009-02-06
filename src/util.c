@@ -1562,7 +1562,7 @@ shell_escape(const char* src)
 		return strdup("");
 
 	str = g_string_new("");
-
+	
 	/* look for the first char to escape */
 	while (1)
 	{
@@ -1594,21 +1594,28 @@ shell_escape(const char* src)
  string for unescaping
 
  \returns
- return unescaped string
+ return unescaped string (which needs to be freed)
  */
 char*
-shell_unescape(char* text)
+shell_unescape(const char* text)
 {
+	GString *str;
+	char *result = NULL;
+	
 	if (!text)
 		return NULL;
 
+
 	/* look for the first \ - that's quick skipover if there's nothing to escape */
-	char* readptr = text;
+	const char* readptr = text;
 	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
-	if (!(*readptr)) return text;
+	if (!(*readptr)) {
+		result = g_strdup(text);
+		return result;
+	}
+	str = g_string_new("");
 
 	/* if we're here, we're standing on the first '\' */
-	char* writeptr = readptr;
 	char c;
 	while ((c = *readptr))
 	{
@@ -1617,9 +1624,9 @@ shell_unescape(char* text)
 			readptr++;
 			switch ((c = *readptr))
 			{
-				case 'n':	(*writeptr) = '\n'; writeptr++;	break;
-				case 'r':	(*writeptr) = '\r'; writeptr++;	break;
-				case 't':	(*writeptr) = '\t'; writeptr++;	break;
+				case 'n':	g_string_append_c(str,'\n');	break;
+				case 'r':	g_string_append_c(str,'\r');	break;
+				case 't':	g_string_append_c(str,'\t');	break;
 
 				case ' ':
 				case '\\':
@@ -1644,20 +1651,21 @@ shell_unescape(char* text)
 					case '\0': /* end of string! malformed escape string */
 						goto out;
 				default:
-					(*writeptr) = c; writeptr++; break;
+					g_string_append_c(str,c); break;
 			}
 		}
 		else	/* got a normal character */
 		{
-			(*writeptr) = *readptr;
-			writeptr++;
+			g_string_append_c(str,c);
 		}
 		readptr++;
 	}
 out:
-		*writeptr = 0;
+	g_string_append_c(str,'\0');
 
-    return text;
+	result = str->str;
+	g_string_free(str,FALSE);
+    return result;
 }
 
 /** Check if char in pointer contain escape'd chars

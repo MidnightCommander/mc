@@ -259,7 +259,7 @@ const char *Q_ (const char *s);
 
 
 gboolean shell_is_char_escaped ( const char * );
-char *shell_unescape( char * );
+char *shell_unescape( const char * );
 char *shell_escape( const char * );
 
 #define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
