@@ -257,13 +257,10 @@ tree_store_load_from(char *name)
 }
 
 /**
- * tree_store_load:
- * @void: 
- * 
- * Loads the tree from the default location.
- * 
- * Return value: TRUE if success, FALSE otherwise.
- **/
+ * \fn int tree_store_load(void)
+ * \brief Loads the tree from the default location
+ * \return 1 if success (true), 0 otherwise (false)
+ */
 int
 tree_store_load(void)
 {
@@ -362,13 +359,10 @@ tree_store_save_to(char *name)
 }
 
 /**
- * tree_store_save:
- * @void: 
- * 
- * Saves the tree to the default file in an atomic fashion.
- * 
- * Return value: 0 if success, errno on error.
- **/
+ * \fn int tree_store_save(void)
+ * \brief Saves the tree to the default file in an atomic fashion
+ * \return 0 if success, errno on error
+ */
 int
 tree_store_save(void)
 {

@@ -21,6 +21,12 @@
    02110-1301, USA.
 */
 
+/** \file
+ *  \brief Source: editor low level data handling and cursor fundamentals
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ */
+
 #include <config.h>
 #include <stdio.h>
 #include <stdarg.h>

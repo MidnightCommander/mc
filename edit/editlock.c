@@ -21,6 +21,23 @@
 
 */
 
+/** \file
+ *  \brief Source: editor file locking
+ *  \author Adam Byrtek
+ *  \date 2003
+ *
+ *  Locking scheme used in mcedit is based on a documentation found
+ *  in JED editor sources. Abstract from lock.c file (by John E. Davis):
+ *
+ *  The basic idea here is quite simple.  Whenever a buffer is attached to
+ *  a file, and that buffer is modified, then attempt to lock the
+ *  file. Moreover, before writing to a file for any reason, lock the
+ *  file. The lock is really a protocol respected and not a real lock.
+ *  The protocol is this: If in the directory of the file is a
+ *  symbolic link with name ".#FILE", the FILE is considered to be locked
+ *  by the process specified by the link.
+ */
+
 #include <config.h>
 #include <signal.h>		/* kill() */
 
@@ -51,19 +68,10 @@ struct lock_s {
     pid_t pid;
 };
 
-/* Locking scheme used in mcedit is based on a documentation found
-   in JED editor sources. Abstract from lock.c file (by John E. Davis):
-
-   The basic idea here is quite simple.  Whenever a buffer is attached to
-   a file, and that buffer is modified, then attempt to lock the
-   file. Moreover, before writing to a file for any reason, lock the
-   file. The lock is really a protocol respected and not a real lock.
-   The protocol is this: If in the directory of the file is a
-   symbolic link with name ".#FILE", the FILE is considered to be locked
-   by the process specified by the link.
-*/
-
-/* Build user@host.domain.pid string (need to be freed) */
+/** \fn static char * lock_build_name (void)
+ *  \brief builds user@host.domain.pid string (need to be freed)
+ *  \return a pointer to lock filename
+ */
 static char *
 lock_build_name (void)
 {
@@ -78,7 +86,7 @@ lock_build_name (void)
     if (!user) user = getenv ("LOGNAME");
     if (!user) user = "";
 
-    /* TODO: Use FQDN, no clean interface, so requires lot of code */
+    /** \todo Use FQDN, no clean interface, so requires lot of code */
     if (gethostname (host, BUF_SIZE - 1) == -1)
 	*host = '\0';
 

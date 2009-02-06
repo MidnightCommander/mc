@@ -18,6 +18,12 @@
    02110-1301, USA.
  */
 
+/** \file
+ *  \brief Source: word-processor mode for the editor: does dynamic paragraph formatting
+ *  \author Paul Sheer
+ *  \date 1996
+ */
+
 #include <config.h>
 
 #include <stdio.h>

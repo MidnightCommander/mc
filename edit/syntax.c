@@ -21,6 +21,19 @@
    02110-1301, USA.
 */
 
+/** \file
+ *  \brief Source: editor syntax highlighting
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ *
+ *  Mispelled words are flushed from the syntax highlighting rules
+ *  when they have been around longer than
+ *  TRANSIENT_WORD_TIME_OUT seconds. At a cursor rate of 30
+ *  chars per second and say 3 chars + a space per word, we can
+ *  accumulate 450 words absolute max with a value of 60. This is
+ *  below this limit of 1024 words in a context.
+ */
+
 #include <config.h>
 #include <stdio.h>
 #include <stdarg.h>
@@ -43,14 +56,6 @@
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
 
-/*
-   Mispelled words are flushed from the syntax highlighting rules
-   when they have been around longer than
-   TRANSIENT_WORD_TIME_OUT seconds. At a cursor rate of 30
-   chars per second and say 3 chars + a space per word, we can
-   accumulate 450 words absolute max with a value of 60. This is
-   below this limit of 1024 words in a context.
- */
 #define TRANSIENT_WORD_TIME_OUT 60
 
 #define UNKNOWN_FORMAT "unknown"

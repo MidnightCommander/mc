@@ -16,6 +16,12 @@
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file
+ *  \brief Source: user %interface for syntax %selection
+ *  \author Leonard den Ottolander
+ *  \date 2005, 2006
+ */
+
 #include <config.h>
 
 #include "edit.h"

@@ -1,8 +1,14 @@
+
+/** \file
+ *  \brief Header: editor constants
+ */
+
 #ifndef MC_EDIT_CMD_DEF_H
 #define MC_EDIT_CMD_DEF_H
 
-/*  in the distant future, keyboards will be invented with a
-    separate key for each one of these commands   *sigh*      */
+/** \todo In the distant future, keyboards will be invented with a
+ *  separate key for each one of these commands *sigh*
+ */
 
 /* special commands */
 #define CK_Insert_Char		-1

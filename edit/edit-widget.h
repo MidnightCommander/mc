@@ -1,3 +1,8 @@
+
+/** \file
+ *  \brief Header: editor widget WEdit
+ */
+
 #ifndef MC_EDIT_WIDGET_H
 #define MC_EDIT_WIDGET_H
 

@@ -21,6 +21,10 @@
    02110-1301, USA.
 */
 
+/** \file
+ *  \brief Source: editor key translation
+ */
+
 #include <config.h>
 
 #include <assert.h>
