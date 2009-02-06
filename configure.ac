@@ -164,7 +164,6 @@ AC_CHECK_FUNCS([\
 	cfgetospeed \
 	initgroups isascii \
 	memcpy memset \
-	putenv \
 	setreuid statfs sysconf \
 	tcgetattr tcsetattr truncate \
 ])
