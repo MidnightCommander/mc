@@ -36,9 +36,6 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "../src/global.h"
 
 #include "edit.h"

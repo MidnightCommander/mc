@@ -32,9 +32,6 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "../src/global.h"
 
 #include "edit.h"
@@ -471,7 +468,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 		break;
 	    }
 	    s = edit->syntax_marker->next;
-	    MHL_PTR_FREE (edit->syntax_marker);
+	    MC_PTR_FREE (edit->syntax_marker);
 	    edit->syntax_marker = s;
 	}
     }
@@ -666,8 +663,8 @@ static FILE *open_include_file (const char *filename)
 {
     FILE *f;
 
-    MHL_PTR_FREE (error_file_name);
-    error_file_name = mhl_str_dup (filename);
+    MC_PTR_FREE (error_file_name);
+    error_file_name = g_strdup (filename);
     if (*filename == PATH_SEP)
 	return fopen (filename, "r");
 
@@ -725,8 +722,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 		f = g;
 		g = 0;
 		line = save_line + 1;
-		MHL_PTR_FREE (error_file_name);
-		MHL_PTR_FREE (l);
+		MC_PTR_FREE (error_file_name);
+		MC_PTR_FREE (l);
 		if (!read_one_line (&l, f))
 		    break;
 	    } else {
@@ -745,7 +742,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    g = f;
 	    f = open_include_file (args[1]);
 	    if (!f) {
-		MHL_PTR_FREE (error_file_name);
+		MC_PTR_FREE (error_file_name);
 		result = line;
 		break;
 	    }
@@ -922,10 +919,10 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    break_a;
 	}
 	free_args (args);
-	MHL_PTR_FREE (l);
+	MC_PTR_FREE (l);
     }
     free_args (args);
-    MHL_PTR_FREE (l);
+    MC_PTR_FREE (l);
 
     /* Terminate context array.  */
     if (num_contexts > 0) {
@@ -934,7 +931,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     }
 
     if (!edit->rules[0])
-	MHL_PTR_FREE (edit->rules);
+	MC_PTR_FREE (edit->rules);
 
     if (result)
 	return result;
@@ -976,34 +973,34 @@ void edit_free_syntax_rules (WEdit * edit)
 	return;
 
     edit_get_rule (edit, -1);
-    MHL_PTR_FREE (edit->syntax_type);
+    MC_PTR_FREE (edit->syntax_type);
     edit->syntax_type = 0;
 
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
-		MHL_PTR_FREE (edit->rules[i]->keyword[j]->keyword);
-		MHL_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_left);
-		MHL_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_right);
-		MHL_PTR_FREE (edit->rules[i]->keyword[j]);
+		MC_PTR_FREE (edit->rules[i]->keyword[j]->keyword);
+		MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_left);
+		MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_right);
+		MC_PTR_FREE (edit->rules[i]->keyword[j]);
 	    }
 	}
-	MHL_PTR_FREE (edit->rules[i]->left);
-	MHL_PTR_FREE (edit->rules[i]->right);
-	MHL_PTR_FREE (edit->rules[i]->whole_word_chars_left);
-	MHL_PTR_FREE (edit->rules[i]->whole_word_chars_right);
-	MHL_PTR_FREE (edit->rules[i]->keyword);
-	MHL_PTR_FREE (edit->rules[i]->keyword_first_chars);
-	MHL_PTR_FREE (edit->rules[i]);
+	MC_PTR_FREE (edit->rules[i]->left);
+	MC_PTR_FREE (edit->rules[i]->right);
+	MC_PTR_FREE (edit->rules[i]->whole_word_chars_left);
+	MC_PTR_FREE (edit->rules[i]->whole_word_chars_right);
+	MC_PTR_FREE (edit->rules[i]->keyword);
+	MC_PTR_FREE (edit->rules[i]->keyword_first_chars);
+	MC_PTR_FREE (edit->rules[i]);
     }
 
     while (edit->syntax_marker) {
 	struct _syntax_marker *s = edit->syntax_marker->next;
-	MHL_PTR_FREE (edit->syntax_marker);
+	MC_PTR_FREE (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
 
-    MHL_PTR_FREE (edit->rules);
+    MC_PTR_FREE (edit->rules);
 }
 
 /* returns -1 on file error, line number on error in file syntax */
@@ -1036,7 +1033,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
     args[0] = 0;
     for (;;) {
 	line++;
-	MHL_PTR_FREE (l);
+	MC_PTR_FREE (l);
 	if (!read_one_line (&l, f))
 	    break;
 	(void)get_args (l, args, 1023);	/* Final NULL */
@@ -1117,8 +1114,8 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 		    else
 			result = line_error;
 		} else {
-		    MHL_PTR_FREE (edit->syntax_type);
-		    edit->syntax_type = mhl_str_dup (syntax_type);
+		    MC_PTR_FREE (edit->syntax_type);
+		    edit->syntax_type = g_strdup (syntax_type);
 /* if there are no rules then turn off syntax highlighting for speed */
 		    if (!g && !edit->rules[1])
 			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
@@ -1135,7 +1132,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 	    }
 	}
     }
-    MHL_PTR_FREE (l);
+    MC_PTR_FREE (l);
     fclose (f);
     return result;
 }
@@ -1200,7 +1197,7 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 	message (D_ERROR, _(" Load syntax file "),
 		 _(" Error in file %s on line %d "),
 		 error_file_name ? error_file_name : f, r);
-	MHL_PTR_FREE (error_file_name);
+	MC_PTR_FREE (error_file_name);
     } else {
 	/* succeeded */
     }

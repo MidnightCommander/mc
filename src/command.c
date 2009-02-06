@@ -27,10 +27,6 @@
 #include <errno.h>
 #include <string.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-#include <mhl/escape.h>
-
 #include "global.h"		/* home_dir */
 #include "tty.h"
 #include "widget.h"		/* WInput */

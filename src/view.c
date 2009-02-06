@@ -43,10 +43,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/types.h>
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "cmd.h"		/* For view_other_cmd */

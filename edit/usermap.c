@@ -30,10 +30,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/types.h>
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "../src/global.h"
 
 #include "edit.h"

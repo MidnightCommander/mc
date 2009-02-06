@@ -29,9 +29,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "color.h"		/* dialog_colors */

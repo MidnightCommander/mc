@@ -23,9 +23,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "dir.h"
@@ -415,14 +412,14 @@ panel_load_setup (WPanel *panel, const char *section)
 
     /* User formats */
     g_free (panel->user_format);
-    panel->user_format = mhl_str_dup (get_profile_string (section, "user_format",
+    panel->user_format = g_strdup (get_profile_string (section, "user_format",
 						     DEFAULT_USER_FORMAT,
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
 	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
-	    mhl_str_dup (get_profile_string (section, buffer,
+	    g_strdup (get_profile_string (section, buffer,
 			DEFAULT_USER_FORMAT, profile_name));
     }
 

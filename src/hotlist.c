@@ -36,9 +36,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"		/* COLS */
 #include "color.h"		/* dialog_colors */

@@ -26,9 +26,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include <mhl/memory.h>
-#include <mhl/types.h>
-
 #include "global.h"
 #include "logging.h"
 #include "setup.h"

@@ -38,9 +38,6 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/history.h"
 
@@ -277,10 +274,10 @@ edit_save_file (WEdit *edit, const char *filename)
 	const char *slashpos;
 	slashpos = strrchr (filename, PATH_SEP);
 	if (slashpos) {
-	    savedir = mhl_str_dup (filename);
+	    savedir = g_strdup (filename);
 	    savedir[slashpos - filename + 1] = '\0';
 	} else
-	    savedir = mhl_str_dup (".");
+	    savedir = g_strdup (".");
 	saveprefix = concat_dir_and_file (savedir, "cooledit");
 	g_free (savedir);
 	fd = mc_mkstemps (&savename, saveprefix, NULL);
@@ -1850,9 +1847,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	    goto cleanup;
 	}
 
-	g_free (saved1), saved1 = mhl_str_dup (input1);
-	g_free (saved2), saved2 = mhl_str_dup (input2);
-	g_free (saved3), saved3 = mhl_str_dup (input3);
+	g_free (saved1), saved1 = g_strdup (input1);
+	g_free (saved2), saved2 = g_strdup (input2);
+	g_free (saved3), saved3 = g_strdup (input3);
     }
 
     {

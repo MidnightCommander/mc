@@ -44,9 +44,6 @@
 #  include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"	/* LINES */
 #include "panel.h"	/* current_panel */

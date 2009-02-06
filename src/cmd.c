@@ -34,9 +34,6 @@
 #endif
 #include <unistd.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"		/* file_op_context_new() */

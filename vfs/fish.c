@@ -42,6 +42,7 @@
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+#include "../src/util.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"
@@ -50,9 +51,6 @@
 #include "tcputil.h"
 #include "../src/unixcompat.h"
 #include "fish.h"
-#include "../mhl/memory.h"
-#include "../mhl/string.h"
-#include "../mhl/escape.h"
 
 int fish_directory_timeout = 900;
 
@@ -524,10 +522,10 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 					--linkname_bound; // skip trailing "
 			}
 
-			ent->name = mhl_str_dup_range(filename, filename_bound);
+			ent->name = str_dup_range(filename, filename_bound);
 			shell_unescape(ent->name);
 
-			ent->ino->linkname = mhl_str_dup_range(linkname, linkname_bound);
+			ent->ino->linkname = str_dup_range(linkname, linkname_bound);
 			shell_unescape(ent->ino->linkname);
 		} else {
 			// we expect: "escaped-name"
@@ -541,7 +539,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 					--filename_bound;
 			}
 
-			ent->name = mhl_str_dup_range(filename, filename_bound);
+			ent->name = str_dup_range(filename, filename_bound);
 			shell_unescape(ent->name);
 		}
 		break;

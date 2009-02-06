@@ -18,9 +18,6 @@
 
 #include <config.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "edit.h"
 #include "../src/global.h"
 #include "../src/wtools.h"

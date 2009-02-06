@@ -34,10 +34,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/escape.h>
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */
@@ -1550,12 +1546,14 @@ Q_ (const char *s)
 /** To be compatible with the general posix command lines we have to escape
  strings for the command line
 
- /params const char * in
+ \params in
  string for escaping
- /returns
+
+ \returns
  return escaped string (later need to free)
  */
-static char* shell_escape(const char* src)
+char*
+shell_escape(const char* src)
 {
 	if ((src==NULL)||(!(*src)))
 		return strdup("");
@@ -1590,12 +1588,14 @@ static char* shell_escape(const char* src)
 /** Unescape paths or other strings for e.g the internal cd
     shell-unescape within a given buffer (writing to it!)
 
- /params const char * src
+ \params src
  string for unescaping
- /returns
+
+ \returns
  return unescaped string
  */
-static char* shell_unescape(char* text)
+char*
+shell_unescape(char* text)
 {
 	if (!text)
 		return NULL;
@@ -1660,53 +1660,20 @@ out:
 
 /** Check if char in pointer contain escape'd chars
 
- /params const char * in
+ \params in
  string for checking
- /returns
+
+ \returns
  return TRUE if string contain escaped chars
  otherwise return FALSE
  */
-static gboolean
-		shell_is_char_escaped ( const char *in )
+gboolean
+shell_is_char_escaped ( const char *in )
 {
 	if (in == NULL || !*in || in[0] != '\\')
-		return false;
+		return FALSE;
 	if (shell_escape_toesc(in[1]))
 		return TRUE;
 	return FALSE;
 }
 
-/*FIXME: move back to concat_dir_and_file */
-static char* str_dir_plus_file(const char* dirname, const char* filename)
-{
-	/* make sure we have valid strings */
-	if (!dirname)
-		dirname="";
-
-	if (!filename)
-		filename="";
-
-	/* skip leading slashes on filename */
-	while (*filename == '/')
-		filename++;
-
-	/* skip trailing slashes on dirname */
-	size_t dnlen = strlen(dirname);
-	while ((dnlen != 0) && (dirname[dnlen-1]=='/'))
-		dnlen--;
-
-	size_t fnlen = strlen(filename);
-	/*TODO: was previously calloc(1,dnlen+fnlen+2) - please review*/
-	char* buffer = g_malloc(dnlen+fnlen+2);	/* enough space for dirname, /, filename, zero */
-	char* ptr = buffer;
-
-	memcpy(ptr, dirname, dnlen);
-	ptr+=dnlen;
-	*ptr = '/';
-	ptr++;
-	memcpy(ptr, filename, fnlen);
-	ptr+=fnlen;
-	*ptr = 0;
-
-	return buffer;
-}

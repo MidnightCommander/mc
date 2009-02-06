@@ -52,9 +52,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */

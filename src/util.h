@@ -3,6 +3,7 @@
 
 #include <sys/types.h>
 
+
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet
  * about the "const" modifier. The return value of this function
@@ -255,5 +256,15 @@ extern int ascii_alpha_to_cntrl (int ch);
 
 #undef Q_
 const char *Q_ (const char *s);
+
+
+gboolean shell_is_char_escaped ( const char * );
+char *shell_unescape( char * );
+char *shell_escape( const char * );
+
+#define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
+#define str_move(dest, src) (g_strlcpy(dest,src,strlen(src)))
+
+#define MC_PTR_FREE(ptr) do { g_free(ptr); (ptr) = NULL; } while (0)
 
 #endif

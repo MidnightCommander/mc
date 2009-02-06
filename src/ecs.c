@@ -27,9 +27,6 @@
 #include <assert.h>
 #include <ctype.h>
 
-#include <mhl/types.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "ecs.h"
 

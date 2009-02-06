@@ -20,9 +20,6 @@
 
 #include <stdio.h>
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
 #include "global.h"
 #include "tty.h"
 #include "mouse.h"		/* Gpm_Event */

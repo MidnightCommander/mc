@@ -5,9 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mhl/memory.h>
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
