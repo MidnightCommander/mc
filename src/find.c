@@ -357,7 +357,7 @@ push_directory (const char *dir)
     dir_stack *new;
 
     new = g_new (dir_stack, 1);
-    new->name = mhl_str_dir_plus_file (dir, NULL);
+    new->name = concat_dir_and_file (dir, "");
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
@@ -519,7 +519,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     int file_fd;
     int ret_val = 0;
 
-    fname = mhl_str_dir_plus_file (directory, filename);
+    fname = concat_dir_and_file (directory, filename);
 
     if (mc_stat (fname, &s) != 0 || !S_ISREG (s.st_mode)){
 	g_free (fname);
@@ -695,7 +695,7 @@ do_search (struct Dlg_head *h)
     }
 
     if (subdirs_left && find_recursively && directory) { /* Can directory be NULL ? */
-	char *tmp_name = mhl_str_dir_plus_file (directory, dp->d_name);
+	char *tmp_name = concat_dir_and_file (directory, dp->d_name);
 	if (!mc_lstat (tmp_name, &tmp_stat)
 	    && S_ISDIR (tmp_stat.st_mode)) {
 	    push_directory (tmp_name);
@@ -755,8 +755,8 @@ make_fullname (const char *dirname, const char *filename)
     if (strcmp(dirname, ".") == 0 || strcmp(dirname, "."PATH_SEP_STR) == 0)
 	return g_strdup (filename);
     if (strncmp(dirname, "."PATH_SEP_STR, 2) == 0)
-	return mhl_str_dir_plus_file (dirname + 2, filename);
-    return mhl_str_dir_plus_file (dirname, filename);
+	return concat_dir_and_file (dirname + 2, filename);
+    return concat_dir_and_file (dirname, filename);
 }
 
 static void

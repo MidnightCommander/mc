@@ -268,7 +268,7 @@ tree_store_load(void)
     char *name;
     int retval;
 
-    name = mhl_str_dir_plus_file(home_dir, MC_TREE);
+    name = concat_dir_and_file(home_dir, MC_TREE);
     retval = tree_store_load_from(name);
     g_free(name);
 
@@ -374,7 +374,7 @@ tree_store_save(void)
     char *name;
     int retval;
 
-    tmp = mhl_str_dir_plus_file(home_dir, MC_TREE_TMP);
+    tmp = concat_dir_and_file(home_dir, MC_TREE_TMP);
     retval = tree_store_save_to(tmp);
 
     if (retval) {
@@ -382,7 +382,7 @@ tree_store_save(void)
 	return retval;
     }
 
-    name = mhl_str_dir_plus_file(home_dir, MC_TREE);
+    name = concat_dir_and_file(home_dir, MC_TREE);
     retval = rename(tmp, name);
 
     g_free(tmp);
@@ -608,7 +608,7 @@ tree_store_mark_checked(const char *subname)
     if (ts.check_name[0] == PATH_SEP && ts.check_name[1] == 0)
 	name = g_strconcat(PATH_SEP_STR, subname, (char *) NULL);
     else
-	name = mhl_str_dir_plus_file(ts.check_name, subname);
+	name = concat_dir_and_file(ts.check_name, subname);
 
     /* Search for the subdirectory */
     current = ts.check_start;
@@ -798,7 +798,7 @@ tree_store_rescan(const char *dir)
 		    continue;
 	    }
 
-	    full_name = mhl_str_dir_plus_file(dir, dp->d_name);
+	    full_name = concat_dir_and_file(dir, dp->d_name);
 	    if (mc_lstat(full_name, &buf) != -1) {
 		if (S_ISDIR(buf.st_mode))
 		    tree_store_mark_checked(dp->d_name);

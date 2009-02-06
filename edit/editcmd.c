@@ -215,7 +215,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	return 0;
 
     if (*filename != PATH_SEP && edit->dir) {
-	savename = mhl_str_dir_plus_file (edit->dir, filename);
+	savename = concat_dir_and_file (edit->dir, filename);
 	filename = catstrs (savename, (char *) NULL);
 	g_free (savename);
     }
@@ -281,7 +281,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	    savedir[slashpos - filename + 1] = '\0';
 	} else
 	    savedir = mhl_str_dup (".");
-	saveprefix = mhl_str_dir_plus_file (savedir, "cooledit");
+	saveprefix = concat_dir_and_file (savedir, "cooledit");
 	g_free (savedir);
 	fd = mc_mkstemps (&savename, saveprefix, NULL);
 	g_free (saveprefix);

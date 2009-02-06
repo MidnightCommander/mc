@@ -868,7 +868,7 @@ history_get (const char *input_name)
 	return NULL;
     if (!*input_name)
 	return NULL;
-    profile = mhl_str_dir_plus_file (home_dir, HISTORY_FILE_NAME);
+    profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
     for (i = 0;; i++) {
 	char key_name[BUF_TINY];
 	char this_entry[BUF_LARGE];
@@ -906,7 +906,7 @@ history_put (const char *input_name, GList *h)
     if (!num_history_items_recorded)	/* this is how to disable */
 	return;
 
-    profile = mhl_str_dir_plus_file (home_dir, HISTORY_FILE_NAME);
+    profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
 
     if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
 	close (i);

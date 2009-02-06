@@ -386,7 +386,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     gettimeofday(&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
-    quoted_path = mhl_shell_escape_dup (remote_path);
+    quoted_path = shell_escape (remote_path);
     fish_command (me, super, NONE,
 		"#LIST /%s\n"
 		"if `perl -v > /dev/null 2>&1` ; then\n"
@@ -525,10 +525,10 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			}
 
 			ent->name = mhl_str_dup_range(filename, filename_bound);
-			mhl_shell_unescape_buf(ent->name);
+			shell_unescape(ent->name);
 
 			ent->ino->linkname = mhl_str_dup_range(linkname, linkname_bound);
-			mhl_shell_unescape_buf(ent->ino->linkname);
+			shell_unescape(ent->ino->linkname);
 		} else {
 			// we expect: "escaped-name"
 			if (filename_bound - filename > 2)
@@ -542,7 +542,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			}
 
 			ent->name = mhl_str_dup_range(filename, filename_bound);
-			mhl_shell_unescape_buf(ent->name);
+			shell_unescape(ent->name);
 		}
 		break;
 	}
@@ -658,7 +658,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      *	algorithm for file appending case, therefore just "dd" is used for it.
      */
 
-    quoted_name = mhl_shell_escape_dup(name);
+    quoted_name = shell_escape(name);
     print_vfs_message(_("fish: store %s: sending command..."), quoted_name );
 
     /* FIXME: File size is limited to ULONG_MAX */
@@ -756,7 +756,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
-    quoted_name = mhl_shell_escape_dup(name);
+    quoted_name = shell_escape(name);
     fh->u.fish.append = 0;
 
     /*
@@ -895,7 +895,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 	g_free (mpath); \
 	return -1; \
     } \
-    rpath = mhl_shell_escape_dup(crpath); \
+    rpath = shell_escape(crpath); \
     g_free (mpath);
 
 #define POSTFIX(flags) \
@@ -929,9 +929,9 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
 	g_free (mpath1); \
 	g_free (mpath2); \
     } \
-    rpath1 = mhl_shell_escape_dup (crpath1); \
+    rpath1 = shell_escape (crpath1); \
     g_free (mpath1); \
-    rpath2 = mhl_shell_escape_dup (crpath2); \
+    rpath2 = shell_escape (crpath2); \
     g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \
@@ -950,7 +950,7 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
 {
     char *qsetto;
     PREFIX
-    qsetto = mhl_shell_escape_dup (setto);
+    qsetto = shell_escape (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"

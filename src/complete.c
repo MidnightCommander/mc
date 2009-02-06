@@ -86,7 +86,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     SHOW_C_CTX("filename_completion_function");
 
     if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
-        text = mhl_shell_unescape_buf (text);
+        text = shell_unescape (text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -206,7 +206,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
-	    temp = mhl_shell_escape_dup(temp);
+	    temp = shell_escape(temp);
 	}
 	return temp;
     }
@@ -461,7 +461,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
 
-    text = mhl_shell_unescape_buf(text);
+    text = shell_unescape(text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
@@ -484,7 +484,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	p = filename_completion_function (text, state, flags);
 	if (!p)
 	    return 0;
-	p = mhl_shell_escape_dup(p);
+	p = shell_escape(p);
 	return p;
     }
 
@@ -517,7 +517,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 		if (cur_path >= path_end)
 		    break;
 		expanded = tilde_expand (*cur_path ? cur_path : ".");
-		cur_word = mhl_str_dir_plus_file (expanded, text);
+		cur_word = concat_dir_and_file (expanded, text);
 		g_free (expanded);
 		canonicalize_pathname (cur_word);
 		cur_path = strchr (cur_path, 0) + 1;
@@ -540,7 +540,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
-	p = mhl_shell_escape_dup(p);
+	p = shell_escape(p);
 	g_free(found);
 	return p;
     }
@@ -811,7 +811,7 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 		    c = *s; 
 		    *s = 0;
 		    if (*cdpath){
-			r = mhl_str_dir_plus_file (cdpath, word);
+			r = concat_dir_and_file (cdpath, word);
 			SHOW_C_CTX("try_complete:filename_subst_2");
 			matches = completion_matches (r, filename_completion_function, flags);
 			g_free (r);

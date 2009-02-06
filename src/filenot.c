@@ -40,7 +40,7 @@ get_absolute_name (const char *file)
     if (file[0] == PATH_SEP)
 	return g_strdup (file);
     mc_get_current_wd (dir, MC_MAXPATHLEN);
-    return mhl_str_dir_plus_file (dir, file);
+    return concat_dir_and_file (dir, file);
 }
 
 static int
@@ -63,7 +63,7 @@ my_mkdir_rec (char *s, mode_t mode)
 	return -1;
     }
 
-    p = mhl_str_dir_plus_file (s, "..");
+    p = concat_dir_and_file (s, "..");
     q = vfs_canon (p);
     g_free (p);
 

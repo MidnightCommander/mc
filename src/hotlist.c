@@ -1449,7 +1449,7 @@ load_hotlist (void)
     }
 
     if (!hotlist_file_name)
-	hotlist_file_name = mhl_str_dir_plus_file (home_dir, HOTLIST_FILENAME);
+	hotlist_file_name = concat_dir_and_file (home_dir, HOTLIST_FILENAME);
     
     hotlist	       = new_hotlist ();
     hotlist->type      = HL_TYPE_GROUP;

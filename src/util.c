@@ -694,7 +694,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     char *lang;
     char *data;
 
-    hintfile_base = mhl_str_dir_plus_file (mc_home, filename);
+    hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
@@ -1253,6 +1253,18 @@ diff_two_paths (const char *first, const char *second)
     return buf;
 }
 
+/* If filename is NULL, then we just append PATH_SEP to the dir */
+char *
+concat_dir_and_file (const char *dir, const char *file)
+{
+    int i = strlen (dir);
+    
+    if (dir [i-1] == PATH_SEP)
+	return  g_strconcat (dir, file, (char *) NULL);
+    else
+	return  g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
+}
+
 /* Append text to GList, remove all entries with the same text */
 GList *
 list_append_unique (GList *list, char *text)
@@ -1313,7 +1325,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 
     if (strchr (prefix, PATH_SEP) == NULL) {
 	/* Add prefix first to find the position of XXXXXX */
-	tmpbase = mhl_str_dir_plus_file (mc_tmpdir (), prefix);
+	tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
     } else {
 	tmpbase = g_strdup (prefix);
     }
@@ -1381,7 +1393,7 @@ load_file_position (const char *filename, long *line, long *column)
     *column = 0;
 
     /* open file with positions */
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
     f = fopen (fn, "r");
     g_free (fn);
     if (!f)
@@ -1428,8 +1440,8 @@ save_file_position (const char *filename, long line, long column)
 
     len = strlen (filename);
 
-    tmp = mhl_str_dir_plus_file (home_dir, MC_FILEPOS_TMP);
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    tmp = concat_dir_and_file (home_dir, MC_FILEPOS_TMP);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
 
     /* open temporary file */
     t = fopen (tmp, "w");
@@ -1521,4 +1533,180 @@ Q_ (const char *s)
     result = _(s);
     sep = strchr(result, '|');
     return (sep != NULL) ? sep + 1 : result;
+}
+
+/*TODO: These three functions should use glib and should be fixed soon */
+
+#define shell_escape_toesc(x)	\
+    (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
+     ((x)=='(')||((x)==')')||((x)=='\'')||((x)=='&')||((x)=='~')||	\
+     ((x)=='{')||((x)=='}')||((x)=='[')||((x)==']')||((x)=='`')||	\
+     ((x)=='?')||((x)=='|')||((x)=='<')||((x)=='>')||((x)==';')||	\
+     ((x)=='*')||((x)=='\\')||((x)=='"'))
+
+#define shell_escape_nottoesc(x)	\
+    (((x)!=0) && (!shell_escape_toesc((x))))
+
+/** To be compatible with the general posix command lines we have to escape
+ strings for the command line
+
+ /params const char * in
+ string for escaping
+ /returns
+ return escaped string (later need to free)
+ */
+static char* shell_escape(const char* src)
+{
+	if ((src==NULL)||(!(*src)))
+		return strdup("");
+
+	char* buffer = calloc(1, strlen(src)*2+2);
+	char* ptr = buffer;
+
+	/* look for the first char to escape */
+	while (1)
+	{
+		char c;
+		/* copy over all chars not to escape */
+		while ((c=(*src)) && shell_escape_nottoesc(c))
+		{
+			*ptr = c;
+			ptr++;
+			src++;
+		}
+
+		/* at this point we either have an \0 or an char to escape */
+		if (!c)
+			return buffer;
+
+		*ptr = '\\';
+		ptr++;
+		*ptr = c;
+		ptr++;
+		src++;
+	}
+}
+
+/** Unescape paths or other strings for e.g the internal cd
+    shell-unescape within a given buffer (writing to it!)
+
+ /params const char * src
+ string for unescaping
+ /returns
+ return unescaped string
+ */
+static char* shell_unescape(char* text)
+{
+	if (!text)
+		return NULL;
+
+	/* look for the first \ - that's quick skipover if there's nothing to escape */
+	char* readptr = text;
+	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
+	if (!(*readptr)) return text;
+
+	/* if we're here, we're standing on the first '\' */
+	char* writeptr = readptr;
+	char c;
+	while ((c = *readptr))
+	{
+		if (c=='\\')
+		{
+			readptr++;
+			switch ((c = *readptr))
+			{
+				case 'n':	(*writeptr) = '\n'; writeptr++;	break;
+				case 'r':	(*writeptr) = '\r'; writeptr++;	break;
+				case 't':	(*writeptr) = '\t'; writeptr++;	break;
+
+				case ' ':
+				case '\\':
+				case '#':
+				case '$':
+				case '%':
+				case '(':
+				case ')':
+				case '[':
+				case ']':
+				case '{':
+				case '}':
+				case '<':
+				case '>':
+				case '!':
+				case '*':
+				case '?':
+				case '~':
+				case '`':
+				case '"':
+				case ';':
+					case '\0': /* end of string! malformed escape string */
+						goto out;
+				default:
+					(*writeptr) = c; writeptr++; break;
+			}
+		}
+		else	/* got a normal character */
+		{
+			(*writeptr) = *readptr;
+			writeptr++;
+		}
+		readptr++;
+	}
+out:
+		*writeptr = 0;
+
+    return text;
+}
+
+/** Check if char in pointer contain escape'd chars
+
+ /params const char * in
+ string for checking
+ /returns
+ return TRUE if string contain escaped chars
+ otherwise return FALSE
+ */
+static gboolean
+		shell_is_char_escaped ( const char *in )
+{
+	if (in == NULL || !*in || in[0] != '\\')
+		return false;
+	if (shell_escape_toesc(in[1]))
+		return TRUE;
+	return FALSE;
+}
+
+/*FIXME: move back to concat_dir_and_file */
+static char* str_dir_plus_file(const char* dirname, const char* filename)
+{
+	/* make sure we have valid strings */
+	if (!dirname)
+		dirname="";
+
+	if (!filename)
+		filename="";
+
+	/* skip leading slashes on filename */
+	while (*filename == '/')
+		filename++;
+
+	/* skip trailing slashes on dirname */
+	size_t dnlen = strlen(dirname);
+	while ((dnlen != 0) && (dirname[dnlen-1]=='/'))
+		dnlen--;
+
+	size_t fnlen = strlen(filename);
+	/*TODO: was previously calloc(1,dnlen+fnlen+2) - please review*/
+	char* buffer = g_malloc(dnlen+fnlen+2);	/* enough space for dirname, /, filename, zero */
+	char* ptr = buffer;
+
+	memcpy(ptr, dirname, dnlen);
+	ptr+=dnlen;
+	*ptr = '/';
+	ptr++;
+	memcpy(ptr, filename, fnlen);
+	ptr+=fnlen;
+	*ptr = 0;
+
+	return buffer;
 }

@@ -176,7 +176,7 @@ edit_file (const char *_file, int line)
     WButtonBar *edit_bar;
 
     if (!made_directory) {
-	char *dir = mhl_str_dir_plus_file (home_dir, EDIT_DIR);
+	char *dir = concat_dir_and_file (home_dir, EDIT_DIR);
 	made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
 	g_free (dir);
     }
