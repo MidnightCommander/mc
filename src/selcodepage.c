@@ -18,7 +18,7 @@
  */
 
 /** \file selcodepage.c
- *  \brief Source: user interface for charset selection
+ *  \brief Source: user %interface for charset %selection
  */
 
 #include <config.h>

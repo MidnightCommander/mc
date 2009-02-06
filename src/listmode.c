@@ -20,7 +20,7 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
-/** \file listmod.c
+/** \file listmode.c
  *  \brief Source: directory panel listing format editor
  */
 

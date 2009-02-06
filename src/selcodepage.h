@@ -1,6 +1,6 @@
 
 /** \file selcodepage.h
- *  \brief Header: user interface for charset selection
+ *  \brief Header: user %interface for charset %selection
  */
 
 #ifndef MC_SELCODEPAGE_H

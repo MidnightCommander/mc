@@ -1,6 +1,6 @@
 
 /** \file global.h
- *  \brief Header: global definitions for compatibility
+ *  \brief Header: %global definitions for compatibility
  *
  *  This file should be included after all system includes and before all local includes.
  */

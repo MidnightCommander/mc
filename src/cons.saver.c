@@ -32,7 +32,7 @@
    Seeing other peoples consoles is bad thing, but believe me, full
    root is even worse. */
 
-/** \file cons.handler.c
+/** \file cons.saver.c
  *  \brief Source: general purpose Linux console screen save/restore server
  *
  *  This code does _not_ need to be setuid root. However, it needs

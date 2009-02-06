@@ -25,7 +25,7 @@
  */
 
 /** \file tty.c
- *  \brief Source: interface to the terminal controlling library
+ *  \brief Source: %interface to the terminal controlling library
  */
 
 #include <config.h>

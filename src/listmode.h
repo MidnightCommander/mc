@@ -1,5 +1,5 @@
 
-/** \file listmod.h
+/** \file listmode.h
  *  \brief Header: directory panel listing format editor
  */
 
