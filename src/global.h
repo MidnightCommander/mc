@@ -9,8 +9,6 @@
 #ifndef MC_GLOBAL_H
 #define MC_GLOBAL_H
 
-#include <stdlib.h>	/* for free() and other useful routins */
-
 #if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
 #  include <string.h>
    /* An ANSI string.h and pre-ANSI memory.h might conflict */
@@ -27,10 +25,6 @@
 #  include <sys/param.h>
 #endif
 
-#ifdef HAVE_FCNTL_H
-#  include <fcntl.h>
-#endif
-
 /* The O_BINARY definition was taken from gettext */
 #if !defined O_BINARY && defined _O_BINARY
   /* For MSC-compatible compilers.  */
@@ -45,7 +39,6 @@
 #  define O_BINARY 0
 #endif
 
-
 /* Replacement for O_NONBLOCK */
 #ifndef O_NONBLOCK
 #ifdef O_NDELAY /* SYSV */
@@ -55,49 +48,8 @@
 #endif /* !O_NDELAY */
 #endif /* !O_NONBLOCK */
 
-
-#ifdef HAVE_SYS_TIMEB_H
-#  include <sys/timeb.h>
-#endif
-
-#ifdef TIME_WITH_SYS_TIME
-#  include <sys/time.h>
-#  include <time.h>
-#else
-#  ifdef HAVE_SYS_TIME_H
-#    include <sys/time.h>
-#  else
-#    include <time.h>
-#  endif
-#endif
-
-#if !defined(HAVE_SYS_TIME_H)
-struct timeval {
-    long int tv_sec;  /* seconds */
-    long int tv_usec; /* microseconds */
-};
-#endif /* !HAVE_SYS_TIME_H */
-
-#ifdef HAVE_UTIME_H
-#  include <utime.h>
-#elif defined(HAVE_SYS_UTIME_H)
-#  include <sys/utime.h>
-#endif
-
-#ifdef HAVE_SYS_WAIT_H
-#  include <sys/wait.h>
-#endif
-
 #ifdef HAVE_SYS_SELECT_H
 #  include <sys/select.h>
-#endif
-
-#ifdef HAVE_GRP_H
-#  include <grp.h>
-#endif
-
-#ifdef HAVE_PWD_H
-#  include <pwd.h>
 #endif
 
 #if defined(__QNX__) && !defined(__QNXNTO__)
