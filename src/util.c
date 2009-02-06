@@ -1550,16 +1550,18 @@ Q_ (const char *s)
  string for escaping
 
  \returns
- return escaped string (later need to free)
+ return escaped string (which needs to be freed later)
  */
 char*
 shell_escape(const char* src)
 {
+	GString *str;
+	char *result = NULL;
+
 	if ((src==NULL)||(!(*src)))
 		return strdup("");
 
-	char* buffer = calloc(1, strlen(src)*2+2);
-	char* ptr = buffer;
+	str = g_string_new("");
 
 	/* look for the first char to escape */
 	while (1)
@@ -1568,19 +1570,19 @@ shell_escape(const char* src)
 		/* copy over all chars not to escape */
 		while ((c=(*src)) && shell_escape_nottoesc(c))
 		{
-			*ptr = c;
-			ptr++;
+			g_string_append_c(str,c);
 			src++;
 		}
 
 		/* at this point we either have an \0 or an char to escape */
-		if (!c)
-			return buffer;
+		if (!c) {
+			result = str->str;
+			g_string_free(str,FALSE);
+			return result;
+		}
 
-		*ptr = '\\';
-		ptr++;
-		*ptr = c;
-		ptr++;
+		g_string_append_c(str,'\\');
+		g_string_append_c(str,c);
 		src++;
 	}
 }
