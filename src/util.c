@@ -1611,7 +1611,7 @@ shell_unescape(const char* text)
 		result = g_strdup(text);
 		return result;
 	}
-	str = g_string_new("");
+	str = g_string_new_len(text, readptr - text);
 
 	/* if we're here, we're standing on the first '\' */
 	char c;
@@ -1622,6 +1622,9 @@ shell_unescape(const char* text)
 			readptr++;
 			switch ((c = *readptr))
 			{
+				case '\0': /* end of string! malformed escape string */
+					goto out;
+
 				case 'n':	g_string_append_c(str,'\n');	break;
 				case 'r':	g_string_append_c(str,'\r');	break;
 				case 't':	g_string_append_c(str,'\t');	break;
@@ -1646,8 +1649,6 @@ shell_unescape(const char* text)
 				case '`':
 				case '"':
 				case ';':
-					case '\0': /* end of string! malformed escape string */
-						goto out;
 				default:
 					g_string_append_c(str,c); break;
 			}
@@ -1659,7 +1660,6 @@ shell_unescape(const char* text)
 		readptr++;
 	}
 out:
-	g_string_append_c(str,'\0');
 
 	result = str->str;
 	g_string_free(str,FALSE);
