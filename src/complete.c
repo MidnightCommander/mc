@@ -155,6 +155,11 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	                isexec = 1;
 	        }
 	    }
+	    else
+	    {
+	        // stat failed, strange. not a dir in any case
+	        isdir = 0;
+	    }
 	   g_free (tmp);
 	}
 	if ((flags & INPUT_COMPLETE_COMMANDS)
