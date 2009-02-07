@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System switch code
+ */
+
 #ifndef MC_VFS_VFS_H
 #define MC_VFS_VFS_H
 

@@ -20,7 +20,16 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/* Namespace: exports init_smbfs, smbfs_set_debug(), smbfs_set_debugf() */
+/**
+ * \file
+ * \brief Source: Virtual File System: smb file system
+ * \author Wayne Roberts <wroberts1@home.com>
+ * \author Andrew V. Samoilov <sav@bcs.zp.ua>
+ * \date 1997, 2002, 2003
+ *
+ * Namespace: exports init_smbfs, smbfs_set_debug(), smbfs_set_debugf()
+ */
+
 #include <config.h>
 
 #include <stdio.h>

@@ -1,28 +1,33 @@
-/* Directory cache support -- so that you do not have copy of this in
- * each and every filesystem.
+
+/** \file
+ *  \brief Source: directory cache support
  *
- * Written at 1998 by Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
+ *  So that you do not have copy of this in each and every filesystem.
  *
- * Very loosely based on tar.c from midnight and archives.[ch] from
- * avfs by Miklos Szeredi (mszeredi@inf.bme.hu)
+ *  Very loosely based on tar.c from midnight and archives.[ch] from
+ *  avfs by Miklos Szeredi (mszeredi@inf.bme.hu)
  *
- * Unfortunately, I was unable to keep all filesystems
- * uniform. tar-like filesystems use tree structure where each
- * directory has pointers to its subdirectories. We can do this
- * because we have full information about our archive.
+ *  Unfortunately, I was unable to keep all filesystems
+ *  uniform. tar-like filesystems use tree structure where each
+ *  directory has pointers to its subdirectories. We can do this
+ *  because we have full information about our archive.
  *
- * At ftp-like filesystems, situation is a little bit different. When
- * you cd /usr/src/linux/drivers/char, you do _not_ want /usr,
- * /usr/src, /usr/src/linux and /usr/src/linux/drivers to be
- * listed. That means that we do not have complete information, and if
- * /usr is symlink to /4, we will not know. Also we have to time out
- * entries and things would get messy with tree-like approach. So we
- * do different trick: root directory is completely special and
- * completely fake, it contains entries such as 'usr', 'usr/src', ...,
- * and we'll try to use custom find_entry function. 
+ *  At ftp-like filesystems, situation is a little bit different. When
+ *  you cd /usr/src/linux/drivers/char, you do _not_ want /usr,
+ *  /usr/src, /usr/src/linux and /usr/src/linux/drivers to be
+ *  listed. That means that we do not have complete information, and if
+ *  /usr is symlink to /4, we will not know. Also we have to time out
+ *  entries and things would get messy with tree-like approach. So we
+ *  do different trick: root directory is completely special and
+ *  completely fake, it contains entries such as 'usr', 'usr/src', ...,
+ *  and we'll try to use custom find_entry function.
  *
- * Paths here do _not_ begin with '/', so root directory of
- * archive/site is simply "". Beware. */
+ *  \author Pavel Machek <pavel@ucw.cz>, distribute under LGPL.
+ *  \date 1998
+ *
+ *  \warning Paths here do _not_ begin with '/', so root directory of
+ *  archive/site is simply "".
+ */
 
 #include <config.h>
 

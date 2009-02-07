@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Midnight Commander file system
+ */
+
 #ifndef MC_VFS_MCFS_H
 #define MC_VFS_MCFS_H
 

@@ -21,14 +21,23 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
-   
-/* FTPfs TODO:
 
+/**
+ * \file
+ * \brief Source: Virtual File System: FTP file system
+ * \author Ching Hui
+ * \author Jakub Jelinek
+ * \author Miguel de Icaza
+ * \author Norbert Warmuth
+ * \author Pavel Machek
+ * \date 1995, 1997, 1998
+ *
+ * \todo
 - make it more robust - all the connects etc. should handle EADDRINUSE and
   ERETRY (have I spelled these names correctly?)
 - make the user able to flush a connection - all the caches will get empty
   etc., (tarfs as well), we should give there a user selectable timeout
-  and assign a key sequence.  
+  and assign a key sequence.
 - use hash table instead of linklist to cache ftpfs directory.
 
 What to do with this?
@@ -53,7 +62,7 @@ What to do with this?
 
  */
 
-/* Namespace pollution: horrible */
+/* \todo Fix: Namespace pollution: horrible */
 
 #include <config.h>
 #include <sys/types.h>          /* POSIX-required by sys/socket.h and netdb.h */

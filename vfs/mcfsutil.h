@@ -1,12 +1,17 @@
+
+/**
+ * \file
+ * \brief Header: Low-level protocol for MCFS
+ *
+ * \todo FIXME: This protocol uses 32-bit integers for the communication.
+ * It is a problem on systems with large file support, which is now
+ * default. This means that lseek is broken unless --disable-largefile
+ * is used. 64-bit systems are probably broken even more.
+ */
+
 #ifndef MC_VFS_MCFSUTIL_H
 #define MC_VFS_MCFSUTIL_H
 
-/*
- * FIXME: This protocol uses 32-bit integers for the communication.
- * It is a problem on systems with large file support, which is now
- * default.  This means that lseek is broken unless --disable-largefile
- * is used.  64-bit systems are probably broken even more.
- */
 
 enum {
     RPC_END,			/* End of RPC commands */

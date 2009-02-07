@@ -17,15 +17,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ */
+
+/**
+ * \file
+ * \brief Source: Single File fileSystem
  *
  * This defines whole class of filesystems which contain single file
  * inside. It is somehow similar to extfs, except that extfs makes
- * whole virtual trees and we do only single virtual files. 
+ * whole virtual trees and we do only single virtual files.
  *
  * If you want to gunzip something, you should open it with #ugz
  * suffix, DON'T try to gunzip it yourself.
  *
- * Namespace: exports vfs_sfs_ops */
+ * Namespace: exports vfs_sfs_ops
+ */
 
 #include <config.h>
 #include <errno.h>

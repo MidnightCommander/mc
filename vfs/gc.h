@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System: garbage collection code
+ */
+
 #ifndef MC_VFS_GC_H
 #define MC_VFS_GC_H
 

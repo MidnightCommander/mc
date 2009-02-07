@@ -19,7 +19,15 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/* Namespace: init_tarfs */
+/**
+ * \file
+ * \brief Source: Virtual File System: GNU Tar file system
+ * \author Jakub Jelinek
+ * \author Pavel Machek
+ * \date 1995, 1998
+ *
+ * Namespace: init_tarfs
+ */
 
 #include <config.h>
 #include <sys/types.h>

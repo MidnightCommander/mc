@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System: FTP file system
+ */
+
 #ifndef MC_VFS_FTPFS_H
 #define MC_VFS_FTPFS_H
 

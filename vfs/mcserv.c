@@ -20,15 +20,19 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
 
-   TODO:
-   opendir instead of keeping its table of file handles could return
-   the pointer and expect the client to send a proper value back each
-   time :-)
-
-   We should use syslog to register login/logout.
-   
-    */
+/**
+ * \file
+ * \brief Source: server for the Midnight Commander Virtual File System
+ * \author Miguel de Icaza
+ * \author Andrej Borsenkow
+ * \date 1995, 1996, 1997
+ *
+ * \todo opendir instead of keeping its table of file handles could return
+ * the pointer and expect the client to send a proper value back each
+ * time :-) We should use syslog to register login/logout.
+ */
 
 /* {{{ Includes and global variables */
 
