@@ -26,9 +26,6 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include <mhl/types.h>
-#include <mhl/string.h>
-
 #undef	USE_NCURSES	/* Don't include *curses.h */
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -52,8 +49,6 @@
 #include "samba/include/includes.h"
 
 #include <string.h>
-
-#include <mhl/string.h>
 
 #include "vfs.h"
 #include "vfs-impl.h"
