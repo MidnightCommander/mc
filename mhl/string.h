@@ -1,5 +1,5 @@
-#ifndef MHL_STRING_H
-#define MHL_STRING_H
+#ifndef __MHL_STRING_H
+#define __MHL_STRING_H
 
 #include <ctype.h>
 #include <stdarg.h>
@@ -9,9 +9,6 @@
 #define	mhl_str_dup(str)	((str ? strdup(str) : strdup("")))
 #define mhl_str_ndup(str,len)	((str ? strndup(str,len) : strdup("")))
 #define mhl_str_len(str)	((str ? strlen(str) : 0))
-
-#define ISSPACE(c)		isspace((unsigned char)(c))
-#define TOUPPER(c)		toupper((unsigned char)(c))
 
 static inline char * mhl_str_dup_range(const char * s_start, const char * s_bound)
 {
@@ -23,26 +20,26 @@ static inline char* mhl_str_trim(char* str)
     if (!str) return NULL;	/* NULL string ?! bail out. */
 
     /* find the first non-space */
-    char* start; for (start=str; ((*str) && (!ISSPACE(*str))); str++);
+    char* start; for (start=str; ((*str) && (!isspace(*str))); str++);
 
     /* only spaces ? */
     if (!(*str)) { *str = 0; return str; }
 
-    /* get the size (cannot be empty - caught above) */
+    /* get the size (cannot be empty - catched above) */
     size_t _sz = strlen(str);
 
     /* find the proper end */
     char* end;
-    for (end=(str+_sz-1); ((end>str) && (ISSPACE(*end))); end--);
+    for (end=(str+_sz-1); ((end>str) && (isspace(*end))); end--);
     end[1] = 0;		/* terminate, just to be sure */
 
     /* if we have no leading spaces, just trucate */
     if (start==str) { end++; *end = 0; return str; }
 
-    /* if it's only one char, dont need memmove for that */
+    /* if it' only one char, dont need memmove for that */
     if (start==end) { str[0]=*start; str[1]=0; return str; }
 
-    /* by here we have a (non-empty) region between start and end */
+    /* by here we have a (non-empty) region between start end end */
     memmove(str,start,(end-start+1));
     return str;
 }
@@ -51,7 +48,7 @@ static inline void mhl_str_toupper(char* str)
 {
     if (str)
 	for (;*str;str++)
-	    *str = TOUPPER(*str);
+	    *str = toupper(*str);
 }
 
 /* note: we use ((char*)(1)) as terminator - NULL is a valid argument ! */
@@ -130,7 +127,6 @@ static inline char * mhl_strmove(char * dest, const char * src)
 {
     size_t n = strlen (src) + 1; /* + '\0' */
 
-    /* strictly speaking, this invokes undefined behavior as soon as dest and src are pointers into different objects. */
     assert (dest<=src);
 
     return memmove(dest, src, n);
@@ -169,4 +165,4 @@ static inline char* mhl_str_dir_plus_file(const char* dirname, const char* filen
     return buffer;
 }
 
-#endif /* MHL_STRING_H */
+#endif /* __MHL_STRING_H */

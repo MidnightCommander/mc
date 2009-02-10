@@ -4,15 +4,13 @@
 
 */
 
-#ifndef MHL_TYPES_H
-#define MHL_TYPES_H
+#ifndef __MHL_TYPES_H
+#define __MHL_TYPES_H
 
-#if !defined(__bool_true_false_are_defined) && !defined(false) && !defined(true) && !defined(bool)
-typedef enum
+typedef enum 
 {
     false	= 0,
     true	= 1
 } bool;
-#endif
 
 #endif
