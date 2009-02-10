@@ -50,9 +50,6 @@
 #include "tcputil.h"
 #include "../src/unixcompat.h"
 #include "fish.h"
-#include "../mhl/memory.h"
-#include "../mhl/string.h"
-#include "../mhl/escape.h"
 
 int fish_directory_timeout = 900;
 
@@ -880,7 +877,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 #define PREFIX \
     char buf[BUF_LARGE]; \
     const char *crpath; \
-    char *mpath = mhl_str_dup (path); \
+    char *mpath = g_strdup (path); \
     SHELL_ESCAPED_STR rpath; \
     struct vfs_s_super *super; \
     if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \

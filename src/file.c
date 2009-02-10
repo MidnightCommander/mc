@@ -50,10 +50,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/memory.h>
-#include <mhl/escape.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "eregex.h"
@@ -181,7 +177,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
     for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
 	switch (ctx->dest_mask[j]) {
 	case '\\':
-	    if (mhl_shell_is_char_escaped (&ctx->dest_mask[j])){
+	    if (shell_is_char_escaped (&ctx->dest_mask[j])){
 		fntarget[k++] = ctx->dest_mask[j++];
 		fntarget[k++] = ctx->dest_mask[j];
 		break;
@@ -1805,13 +1801,13 @@ panel_operate (void *source_panel, FileOperation operation,
 	 */
 	if (force_single)
 	    /* just copy */
-	    dest_dir_ = mhl_str_dup (dest_dir);
+	    dest_dir_ = g_strdup (dest_dir);
 	else
 	    /* add trailing separator */
 	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
 		dest_dir_ = g_concat (dest_dir, PATH_SEP_STR);
 	} else {
-		dest_dir_ = mhl_str_dup (dest_dir);
+		dest_dir_ = g_strdup (dest_dir);
 	}
 	if (!dest_dir_) {
 	    file_op_context_destroy (ctx);
