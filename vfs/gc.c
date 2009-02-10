@@ -31,8 +31,6 @@
 #include <signal.h>
 #include <ctype.h>		/* is_digit() */
 
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -124,7 +122,7 @@ vfs_getid (struct vfs_class *vclass, const char *dir)
     vfsid id = NULL;
 
     /* append slash if needed */
-    dir1 = mhl_str_dir_plus_file (dir, "");
+    dir1 = concat_dir_and_file (dir, "");
     if (vclass->getid)
 	id = (*vclass->getid) (vclass, dir1);
 

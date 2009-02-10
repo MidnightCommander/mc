@@ -35,9 +35,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/escape.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */
@@ -694,7 +691,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     char *lang;
     char *data;
 
-    hintfile_base = mhl_str_dir_plus_file (mc_home, filename);
+    hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
@@ -1253,6 +1250,18 @@ diff_two_paths (const char *first, const char *second)
     return buf;
 }
 
+/* If filename is NULL, then we just append PATH_SEP to the dir */
+char *
+concat_dir_and_file (const char *dir, const char *file)
+{
+    int i = strlen (dir);
+    
+    if (dir [i-1] == PATH_SEP)
+	return  g_strconcat (dir, file, (char *) NULL);
+    else
+	return  g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
+}
+
 /* Append text to GList, remove all entries with the same text */
 GList *
 list_append_unique (GList *list, char *text)
@@ -1313,7 +1322,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 
     if (strchr (prefix, PATH_SEP) == NULL) {
 	/* Add prefix first to find the position of XXXXXX */
-	tmpbase = mhl_str_dir_plus_file (mc_tmpdir (), prefix);
+	tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
     } else {
 	tmpbase = g_strdup (prefix);
     }
@@ -1381,7 +1390,7 @@ load_file_position (const char *filename, long *line, long *column)
     *column = 0;
 
     /* open file with positions */
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
     f = fopen (fn, "r");
     g_free (fn);
     if (!f)
@@ -1428,8 +1437,8 @@ save_file_position (const char *filename, long line, long column)
 
     len = strlen (filename);
 
-    tmp = mhl_str_dir_plus_file (home_dir, MC_FILEPOS_TMP);
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    tmp = concat_dir_and_file (home_dir, MC_FILEPOS_TMP);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
 
     /* open temporary file */
     t = fopen (tmp, "w");
