@@ -144,7 +144,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super,
     enable_interrupt_key ();
 
     status = write (SUP.sockw, str, strlen (str));
-    mhl_mem_free (str);
+    g_free (str);
 
     disable_interrupt_key ();
     if (status < 0)
@@ -168,10 +168,10 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 	close (SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
     }
-    mhl_mem_free (SUP.host);
-    mhl_mem_free (SUP.user);
-    mhl_mem_free (SUP.cwdir);
-    mhl_mem_free (SUP.password);
+    g_free (SUP.host);
+    g_free (SUP.user);
+    g_free (SUP.cwdir);
+    g_free (SUP.password);
 }
 
 static void
@@ -251,7 +251,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 		p = g_strconcat (_(" fish: Password required for "),
 				 SUP.user, " ", (char *) NULL);
 		op = vfs_get_password (p);
-		mhl_mem_free (p);
+		g_free (p);
 		if (op == NULL)
 		    ERRNOR (EPERM, -1);
 		SUP.password = op;
@@ -314,7 +314,7 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
 		       &password, 0, URL_NOSLASH);
 
-    mhl_mem_free (p);
+    g_free (p);
 
     SUP.host = host;
     SUP.user = user;
@@ -341,12 +341,12 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
 			URL_NOSLASH);
 
-    mhl_mem_free (op);
+    g_free (op);
 
     flags = ((strcmp (host, SUP.host) == 0)
 	     && (strcmp (user, SUP.user) == 0) && (flags == SUP.flags));
-    mhl_mem_free (host);
-    mhl_mem_free (user);
+    g_free (host);
+    g_free (user);
 
     return flags;
 }
@@ -377,7 +377,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     gettimeofday(&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
-    quoted_path = mhl_shell_escape_dup (remote_path);
+    quoted_path = shell_escape (remote_path);
     fish_command (me, super, NONE,
 		"#LIST /%s\n"
 		"if `perl -v > /dev/null 2>&1` ; then\n"
@@ -454,7 +454,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		  "echo '### 500'\n"
 	"fi\n",
 	    quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s, quoted_path.s);
-    mhl_mem_free (quoted_path.s);
+    g_free (quoted_path.s);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP.sockr); 
@@ -515,11 +515,11 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 					--linkname_bound; // skip trailing "
 			}
 
-			ent->name = mhl_str_dup_range(filename, filename_bound);
-			mhl_shell_unescape_buf(ent->name);
+			ent->name = str_dup_range(filename, filename_bound);
+			shell_unescape(ent->name);
 
-			ent->ino->linkname = mhl_str_dup_range(linkname, linkname_bound);
-			mhl_shell_unescape_buf(ent->ino->linkname);
+			ent->ino->linkname = str_dup_range(linkname, linkname_bound);
+			shell_unescape(ent->ino->linkname);
 		} else {
 			// we expect: "escaped-name"
 			if (filename_bound - filename > 2)
@@ -532,8 +532,8 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 					--filename_bound;
 			}
 
-			ent->name = mhl_str_dup_range(filename, filename_bound);
-			mhl_shell_unescape_buf(ent->name);
+			ent->name = str_dup_range(filename, filename_bound);
+			shell_unescape(ent->name);
 		}
 		break;
 	}
@@ -585,7 +585,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     vfs_s_free_entry (me, ent);
     reply_code = fish_decode_reply(buffer + 4, 0);
     if (reply_code == COMPLETE) {
-	mhl_mem_free (SUP.cwdir);
+	g_free (SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
@@ -649,7 +649,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      *	algorithm for file appending case, therefore just "dd" is used for it.
      */
 
-    quoted_name = mhl_shell_escape_dup(name);
+    quoted_name = shell_escape(name);
     print_vfs_message(_("fish: store %s: sending command..."), quoted_name.s );
 
     /* FIXME: File size is limited to ULONG_MAX */
@@ -726,14 +726,14 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 			  (unsigned long) s.st_size);
     }
     close(h);
-    mhl_mem_free(quoted_name.s);
+    g_free(quoted_name.s);
     if ((fish_get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);
     return 0;
 error_return:
     close(h);
     fish_get_reply(me, SUP.sockr, NULL, 0);
-    mhl_mem_free(quoted_name.s);
+    g_free(quoted_name.s);
     return -1;
 }
 
@@ -747,7 +747,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
-    quoted_name = mhl_shell_escape_dup(name);
+    quoted_name = shell_escape(name);
     fh->u.fish.append = 0;
 
     /*
@@ -771,7 +771,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 		"echo '### 500'\n"
 		"fi\n",
 		quoted_name.s, quoted_name.s, quoted_name.s, quoted_name.s );
-    mhl_mem_free (quoted_name.s);
+    g_free (quoted_name.s);
     if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
@@ -884,14 +884,14 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
     SHELL_ESCAPED_STR rpath; \
     struct vfs_s_super *super; \
     if (!(crpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
-	mhl_mem_free (mpath); \
+	g_free (mpath); \
 	return -1; \
     } \
-    rpath = mhl_shell_escape_dup(crpath); \
-    mhl_mem_free (mpath);
+    rpath = shell_escape(crpath); \
+    g_free (mpath);
 
 #define POSTFIX(flags) \
-    mhl_mem_free (rpath.s); \
+    g_free (rpath.s); \
     return fish_send_command(me, super, buf, flags);
 
 static int
@@ -914,21 +914,21 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     char *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
     if (!(crpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
-	mhl_mem_free (mpath1); \
+	g_free (mpath1); \
 	return -1; \
     } \
     if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
-	mhl_mem_free (mpath1); \
-	mhl_mem_free (mpath2); \
+	g_free (mpath1); \
+	g_free (mpath2); \
 	return -1; \
     } \
-    SHELL_ESCAPED_STR rpath1 = mhl_shell_escape_dup (crpath1); \
-    mhl_mem_free (mpath1); \
-    SHELL_ESCAPED_STR rpath2 = mhl_shell_escape_dup (crpath2); \
-    mhl_mem_free (mpath2); \
+    SHELL_ESCAPED_STR rpath1 = shell_escape (crpath1); \
+    g_free (mpath1); \
+    SHELL_ESCAPED_STR rpath2 = shell_escape (crpath2); \
+    g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1.s, rpath2.s, rpath1.s, rpath2.s); \
-    mhl_mem_free (rpath1.s); \
-    mhl_mem_free (rpath2.s); \
+    g_free (rpath1.s); \
+    g_free (rpath2.s); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
@@ -943,13 +943,13 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
 {
     SHELL_ESCAPED_STR qsetto;
     PREFIX
-    qsetto = mhl_shell_escape_dup (setto);
+    qsetto = shell_escape (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n",
 	    qsetto.s, rpath.s, qsetto.s, rpath.s);
-    mhl_mem_free (qsetto.s);
+    g_free (qsetto.s);
     POSTFIX(OPT_FLUSH);
 }
 
@@ -1079,7 +1079,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 	name = g_strconcat ("/#sh:", SUP.user, "@", SUP.host, flags,
 			    "/", SUP.cwdir, (char *) NULL);
 	(*func)(name);
-	mhl_mem_free (name);
+	g_free (name);
 	super = super->next;
     }
 }

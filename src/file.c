@@ -1809,7 +1809,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	else
 	    /* add trailing separator */
 	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
-		dest_dir_ = mhl_str_concat (dest_dir, PATH_SEP_STR);
+		dest_dir_ = g_concat (dest_dir, PATH_SEP_STR);
 	} else {
 		dest_dir_ = mhl_str_dup (dest_dir);
 	}
@@ -1821,7 +1821,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	dest =
 	    file_mask_dialog (ctx, operation, cmd_buf, dest_dir_,
 			      single_entry, &do_bg);
-	mhl_mem_free(dest_dir_);
+	g_free(dest_dir_);
 
 	if (!dest) {
 	    file_op_context_destroy (ctx);
@@ -1997,8 +1997,8 @@ panel_operate (void *source_panel, FileOperation operation,
 		else {
 		    char *temp2 = concat_dir_and_file (dest, temp);
 
-		    source_with_path = mhl_shell_unescape_buf(source_with_path);
-		    temp2 = mhl_shell_unescape_buf(temp2);
+		    source_with_path = shell_unescape(source_with_path);
+		    temp2 = shell_unescape(temp2);
 
 		    switch (operation) {
 		    case OP_COPY:

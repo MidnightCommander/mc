@@ -83,7 +83,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     SHOW_C_CTX("filename_completion_function");
 
     if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
-        text = mhl_shell_unescape_buf (text);
+        text = shell_unescape (text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -203,8 +203,8 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
-	    SHELL_ESCAPED_STR e_temp = mhl_shell_escape_dup(temp);
-	    mhl_mem_free (temp);
+	    SHELL_ESCAPED_STR e_temp = shell_escape(temp);
+	    g_free (temp);
 	    temp = e_temp.s;
 	}
 	return temp;
@@ -460,7 +460,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
 
-    text = mhl_shell_unescape_buf(text);
+    text = shell_unescape(text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
@@ -483,8 +483,8 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	p = filename_completion_function (text, state, flags);
 	if (!p)
 	    return 0;
-	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(p);
+	SHELL_ESCAPED_STR e_p = shell_escape(p);
+	g_free(p);
 	return e_p.s;
     }
 
@@ -541,8 +541,8 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 
-	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(found);
+	SHELL_ESCAPED_STR e_p = shell_escape(p);
+	g_free(found);
 	return e_p.s;
     }
     return found;
