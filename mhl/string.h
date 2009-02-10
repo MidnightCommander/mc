@@ -71,7 +71,7 @@ static inline char* __mhl_str_concat_hlp(const char* base, ...)
     va_start(args,base);
     char* a;
     /* note: we use ((char*)(1)) as terminator - NULL is a valid argument ! */
-    while ((a = va_arg(args, char*))!=(char*)1 && count <= 31 )
+    while ((a = va_arg(args, char*))!=(char*)1)
     {
 	if (a)
 	{
