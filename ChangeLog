@@ -1,11 +1,3 @@
-2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
-
-	* lib/mc.sh.in: fixes for non-bash shells (fixing #196)
-
-2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
-
-	* mhl/types.h, mhl/escape.h: replaced bool type by stdbool.h (fixing #240)
-
 2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* lib/mc.lib: added patch on #219 by angel_il
@@ -24,6 +16,9 @@
 	* src/find.c, src/main.c, src/panelize.c, src/util.c, src/utilunix.c,
 	* src/widget.c, src/widget.h, src/wtools.c, vfs/fish.c:
 	  fixed shell escaping issues in commandline completion engine
+
+2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
 	* replaced buggy concat_dir_and_file() by mhl_str_dir_plus_file() (in mhl/string.h)
 
 2009-01-30 Enrico Weigelt, metux ITS <weigelt@metux.de>
@@ -45,6 +40,9 @@
 
 	* mhl/escape.h, src/complete.c, vfs/fish.c: introduced new type 
 	  SHELL_ESCAPED_STR for more type safety
+
+2009-01-27 Enrico Weigelt, metux IT service <weigelt@metux.de>
+
 	* mhl/escape.h, mhl/string.h: fixed comments to use /* ... */
 
 2009-01-27 Sergei Trofimovich  <slyfox@inbox.ru>

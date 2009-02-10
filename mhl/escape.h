@@ -5,7 +5,8 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+
+#include <mhl/types.h>
 
 #define mhl_shell_escape_toesc(x)	\
     (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
