@@ -149,11 +149,11 @@ static inline char* mhl_str_dir_plus_file(const char* dirname, const char* filen
 	filename++;
 
     /* skip trailing slashes on dirname */
-    size_t dnlen = strlen(dirname);
-    while ((dnlen != 0) && (dirname[dnlen-1]=='/'))
+    int dnlen = strlen(dirname);
+    while (dnlen && (dirname[dnlen-1]=='/'))
 	dnlen--;
 
-    size_t fnlen = strlen(filename);
+    int fnlen = strlen(filename);
     char* buffer = mhl_mem_alloc_z(dnlen+fnlen+2);	/* enough space for dirname, /, filename, zero */
     char* ptr = buffer;
 
