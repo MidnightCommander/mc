@@ -49,8 +49,6 @@
 
 #include <string.h>
 
-#include <mhl/string.h>
-
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "smbfs.h"
