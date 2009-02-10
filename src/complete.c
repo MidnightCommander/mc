@@ -998,17 +998,17 @@ complete_engine (WInput *in, int what_to_do)
     	    start++;
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
-    
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	        char * complete = in->completions [0];
-	    if (insert_text (in, complete, strlen (complete))){
+	    complete = shell_escape(in->completions [0]);
+    	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
 		else
 		    free_completions (in);
 	    } else
 	        beep ();
+	    g_free(complete);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
@@ -1019,6 +1019,9 @@ complete_engine (WInput *in, int what_to_do)
     	    WListbox *query_list;
 
     	    for (p=in->completions + 1; *p; count++, p++) {
+		q = *p;
+		*p = shell_escape(*p);
+		g_free(q);
 		if ((i = strlen (*p)) > maxlen)
 		    maxlen = i;
 	    }
