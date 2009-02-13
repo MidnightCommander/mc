@@ -10,23 +10,19 @@
 %define ver     @VERSION@
 %define rpmver   @RPM_VERSION@
 %define  RELEASE 1
-%define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
+%define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}%{?dist}
 
-Summary:   Midnight Commander visual shell
+Summary:   User-friendly text console file manager and visual shell
 Name:      mc
 Version:   %rpmver
-Release:   %rel
+Release:   %rel%{?dist}
 Epoch:     1
-License:   GPL/LGPL
-Group:     Applications/File
-Source0:   ftp://ftp.gnu.org/gnu/mc/mc-%{ver}.tar.gz
+License:   GPLv2
+Group:     System Environment/Shells
+Source0:   mc-%{ver}.tar.gz
 URL:       http://www.midnight-commander.org/
-BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
-
-# Names of those packages are distribution specific
-#BuildRequires: glib-devel
-#%{!?_with_ncurses:BuildRequires: slang-devel}
-#%{?_with_ncurses:BuildRequires: ncurses-devel}
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires: glib2-devel e2fsprogs-devel slang-devel
 
 %description
 GNU Midnight Commander is a visual file manager.  It's a feature rich
@@ -35,69 +31,63 @@ delete files and whole directory trees, search for files and run
 commands in the subshell.  Internal viewer and editor are included.
 Mouse is supported under X Window System and on Linux console.  VFS
 (Virtual Filesystem) allows you to view archives and files on remote
-servers.
+servers (via SAMBA, FTP or SSH).
 
 %prep
 %setup -q -n mc-%{ver}
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
-	--prefix=%{_prefix} \
-	--mandir=%{_mandir} \
-%{?_with_ncurses: --with-screen=ncurses} \
-%{?_with_charset: --enable-charset} \
-%{?_with_samba: --with-samba} \
-%{?_with_ext2undel: --with-ext2undel} \
-%{?_without_x: --without-x}
-
-make
+%configure \
+	--with-screen=slang \
+	 --enable-charset \
+	 --with-samba \
+	 --with-x \
+	 --with-gpm-mouse
+make %{?_smp_mflags}
 
 %install
-echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
-cp -f $RPM_BUILD_ROOT/%{_datadir}/mc/bin/mc.*sh \
-	$RPM_BUILD_ROOT/%{_sysconfdir}/profile.d
 
+make install DESTDIR=$RPM_BUILD_ROOT
+
+install -d -m 755 $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+install contrib/{mc.sh,mc.csh} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+
+%find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(-, root, root)
 
-%doc FAQ COPYING NEWS README
+%doc doc/FAQ COPYING doc/NEWS doc/README
 %{_bindir}/mc
 %{_bindir}/mcedit
 %{_bindir}/mcview
 %{_bindir}/mcmfmt
 %attr(4755, vcsa, tty) %{_libexecdir}/mc/cons.saver
 %{_mandir}/man1/*
-%{_mandir}/*/man1/*
+%lang(es) %{_mandir}/es/man1/mc.1*
+%lang(hu) %{_mandir}/hu/man1/mc.1*
+%lang(it) %{_mandir}/it/man1/mc.1*
+%lang(pl) %{_mandir}/pl/man1/mc.1*
+%lang(ru) %{_mandir}/ru/man1/mc.1*
+%lang(sr) %{_mandir}/sr/man1/mc.1*
 
-%config %{_sysconfdir}/profile.d/*
-%{_datadir}/mc/cedit.menu
-%{_datadir}/mc/edit.indent.rc
-%{_datadir}/mc/edit.spell.rc
-%{_datadir}/mc/bin/*
-%{_datadir}/mc/extfs/*
-%{_datadir}/mc/mc.ext
-%{_datadir}/mc/mc.lib
-%{_datadir}/mc/mc.menu*
-%{?_with_charset:%config %{_datadir}/mc/mc.charsets}
+%{_sysconfdir}/profile.d/*
 
-%{_datadir}/mc/mc.hint*
-%{_datadir}/mc/mc.hlp*
-%{_datadir}/mc/syntax/*
-%{_datadir}/locale/*/LC_MESSAGES/*
+%dir %{_datadir}/mc
+%{_datadir}/mc/*
 
 %dir %{_libexecdir}/mc
-%dir %{_datadir}/mc
-%dir %{_datadir}/mc/extfs
-%dir %{_datadir}/mc/syntax
 
 %changelog
+* Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
+- Review spec-file to build on the current distributions
+- Change build rules
+- Fix install pathes
+
 * Fri Jun 22 2007 Pavel Roskin <proski@gnu.org>
 - Make cons.saver suid vcsa, it's needed for Fedora 7
 

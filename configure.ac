@@ -553,20 +553,21 @@ AC_CONFIG_FILES([
 Makefile
 
 contrib/Makefile
-contrib/dist/Makefile 
-contrib/dist/mc.spec
+contrib/dist/Makefile
+contrib/dist/debian/Makefile
+contrib/dist/gentoo/Makefile
+contrib/dist/redhat/Makefile
+contrib/dist/redhat/mc.spec
 contrib/dist/mc.qpg
 contrib/dist/pkginfo
 contrib/dist/prototype
-
-lib/Makefile
+contrib/mc.ext
 
 src/Makefile
 src/search/Makefile
 
 edit/Makefile 
 syntax/Makefile
-lib/mc.ext
 
 vfs/Makefile
 vfs/extfs/Makefile
