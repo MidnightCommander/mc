@@ -39,7 +39,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"
-#include "util.h"
 #include "key.h"		/* XCTRL and ALT macros */
 
 typedef char *CompletionFunction (char * text, int state, INPUT_COMPLETE_FLAGS flags);
@@ -203,9 +202,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
-	    SHELL_ESCAPED_STR e_temp = shell_escape(temp);
-	    g_free (temp);
-	    temp = e_temp.s;
+	    temp = shell_escape(temp);
 	}
 	return temp;
     }
@@ -483,9 +480,8 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	p = filename_completion_function (text, state, flags);
 	if (!p)
 	    return 0;
-	SHELL_ESCAPED_STR e_p = shell_escape(p);
-	g_free(p);
-	return e_p.s;
+	p = shell_escape(p);
+	return p;
     }
 
     found = NULL;
@@ -541,9 +537,9 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 
-	SHELL_ESCAPED_STR e_p = shell_escape(p);
+	p = shell_escape(p);
 	g_free(found);
-	return e_p.s;
+	return p;
     }
     return found;
 
