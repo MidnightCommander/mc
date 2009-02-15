@@ -809,9 +809,8 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 		    *s = 0;
 		    if (*cdpath){
 			r = concat_dir_and_file (cdpath, word);
-		        ignore_filenames = 1;
-    	    		matches = completion_matches (r, filename_completion_function);
-    	    		ignore_filenames = 0;
+			SHOW_C_CTX("try_complete:filename_subst_2");
+    	    		matches = completion_matches (r, filename_completion_function, flags);
     	    		g_free (r);
 		    }
 		    *s = c;
@@ -996,7 +995,7 @@ complete_engine (WInput *in, int what_to_do)
     }
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	    complete = shell_escape(in->completions [0]);
+	    char * complete = g_strdup (in->completions [0]);
     	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
@@ -1015,9 +1014,6 @@ complete_engine (WInput *in, int what_to_do)
     	    WListbox *query_list;
 
     	    for (p=in->completions + 1; *p; count++, p++) {
-		q = *p;
-		*p = shell_escape(*p);
-		g_free(q);
 		if ((i = strlen (*p)) > maxlen)
 		    maxlen = i;
 	    }
