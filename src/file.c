@@ -1805,7 +1805,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	else
 	    /* add trailing separator */
 	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
-		dest_dir_ = g_concat (dest_dir, PATH_SEP_STR);
+		dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char*)0);
 	} else {
 		dest_dir_ = g_strdup (dest_dir);
 	}
