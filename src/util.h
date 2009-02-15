@@ -1,5 +1,5 @@
 #ifndef MC_UTIL_H
-#define MC_UTIL_H96fc77bc3ee1f2ae2ae7c0a14d3bf08975b4cb66
+#define MC_UTIL_H
 
 #include <sys/types.h>
 #include <assert.h>
