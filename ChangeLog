@@ -1,3 +1,8 @@
+
+2009-02-05 Mikhail Pobolovets  <styx.mp@gmail.com>
+
+	* nl.po: update by mpol (#271)
+
 2009-02-05 Patrick Winnertz <winnie@debian.org>
 
 	* reverted all mhl usage in files except escaping stuff
