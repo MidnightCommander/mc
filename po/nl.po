@@ -9,16 +9,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
 "Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
-"PO-Revision-Date: 2005-10-04\n"
-"Last-Translator: Leonard den Ottolander <leonard den ottolander nl>\n"
+"POT-Creation-Date: 2009-02-13 12:30+0100\n"
+"PO-Revision-Date: 2009-02-13\n"
+"Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 msgid " Choose syntax highlighting "
-msgstr "Kies syntax kleuring"
+msgstr " Kies syntax kleuring "
 
 msgid "< Auto >"
 msgstr "< Auto >"
@@ -56,9 +57,6 @@ msgstr " Bestand %s is te groot "
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
 
-msgid " Enter file name: "
-msgstr " Geef bestandsnaam: "
-
 msgid "Warning"
 msgstr "Waarschuwing"
 
@@ -75,7 +73,7 @@ msgid "&Cancel"
 msgstr "&Afbreken"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "Bestand is in de tussentijd veranderd. Toch opslaan?"
 
 msgid " Error writing to pipe: "
 msgstr " Fout bij het schrijven naar pijp: "
@@ -103,6 +101,9 @@ msgstr " Editor Bewaarmodus "
 
 msgid " Save As "
 msgstr " Opslaan als "
+
+msgid " Enter file name: "
+msgstr " Geef bestandsnaam: "
 
 msgid " A file already exists with this name. "
 msgstr " Er bestaat al een bestand met die naam. "
@@ -529,9 +530,8 @@ msgstr "&Leer toetsen..."
 msgid "Syntax &Highlighting..."
 msgstr "Synta&X Kleuring..."
 
-#, fuzzy
 msgid "Save setu&p..."
-msgstr "Instellingen &Opslaan"
+msgstr "Instellingen &Opslaan..."
 
 msgid " File "
 msgstr " Bestand "
@@ -643,19 +643,19 @@ msgstr " Fout in bestand %s, op regel %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr ""
+msgstr "bind: Verkeerd argument nummer, bind <toets> <opdracht>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr ""
+msgstr "bind: Verkeerde waarde toets `%s'"
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr ""
+msgstr "bind: Ehh...geen toets?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr ""
+msgstr "bind: Onbekende toets: `%s'"
 
 #, c-format
 msgid "bind: Unknown command: `%s'"
@@ -785,9 +785,11 @@ msgstr "Hoofd-/kleine le&tters"
 msgid "Sort order"
 msgstr "Sortering"
 
-#, fuzzy
+msgid "Executable first"
+msgstr "Uitvoerbare bestanden eerst"
+
 msgid " confirm di&Rectory hotlist delete "
-msgstr "Mappen &Snellijst              C-\\"
+msgstr " bevestig verwijderen mappen &Snellijst "
 
 msgid " confirm &Exit "
 msgstr " B&Evestig afsluiten "
@@ -1179,9 +1181,9 @@ msgstr ""
 msgid " Setup "
 msgstr " Instellingen "
 
-#, fuzzy, c-format
+#,c-format
 msgid " Setup saved to ~/%s"
-msgstr " Instellingen opgeslagen in ~/"
+msgstr " Instellingen opgeslagen in ~/%s"
 
 #, c-format
 msgid ""
@@ -1270,6 +1272,9 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
+"De opmaak van het ~/%s bestand is veranderd met versie 3.0. Je kunt het of "
+"kopiëren van %smc.ext of dat bestand gebruiken als een voorbeeld hoe het te "
+"schrijven."
 
 msgid " Copy "
 msgstr " Kopiëren "
@@ -1753,7 +1758,7 @@ msgid "&Edit - F4"
 msgstr "Bew&Erken -F4"
 
 msgid "&Find recursively"
-msgstr ""
+msgstr "&Vind recursief"
 
 msgid "Start at:"
 msgstr "Beginnen bij:"
@@ -1881,6 +1886,8 @@ msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
 msgstr ""
+"\n"
+" Weet je zeker dat je deze ingang wilt verwijderen?"
 
 msgid ""
 "\n"
@@ -1897,10 +1904,11 @@ msgstr " Startgroep "
 msgid " Hotlist Load "
 msgstr " Hotlist laden "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " bestand, uw oude hotlist is niet verwijderd"
+msgstr ""
+"MC kon niet schrijven naar ~/%s bestand, uw oude hotlist is niet verwijderd"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1948,22 +1956,22 @@ msgid "Modified:  %s"
 msgstr "Veranderd:  %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
-#, fuzzy, c-format
+#, c-format
 msgid "Status:    %s"
-msgstr "Gecreëerd:   %s"
+msgstr "Status:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Dev. type: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
 msgstr "Grootte:     %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] " (%ld blokken)"
+msgstr[0] " (%ld blok)"
 msgstr[1] " (%ld blokken)"
 
 #, c-format
@@ -2477,6 +2485,9 @@ msgstr "Bereken tota&Len"
 msgid "&Verbose operation"
 msgstr "Uitvoering met &Weergave"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "Snel herle&Zen"
 
@@ -2619,16 +2630,16 @@ msgstr "Eigenaar"
 msgid "Group"
 msgstr "Groep"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s bytes"
+msgstr[0] "%s byte"
 msgstr[1] "%s bytes"
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s bytes in %d bestand(en)"
+msgstr[0] "%s bytes in %d bestand"
 msgstr[1] "%s bytes in %d bestand(en)"
 
 msgid "<readlink failed>"
@@ -2705,12 +2716,6 @@ msgstr "Met ingebouwde editor\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Door het systeem geïnstalleerd S-Lang bibliotheek zal gebruikt worden."
-
-msgid "Using included S-Lang library"
-msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."
-
-msgid "with termcap database"
-msgstr "met termcap database"
 
 msgid "with terminfo database"
 msgstr "met terminfo database"
@@ -2845,9 +2850,6 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-msgid "(invalid)"
-msgstr ""
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s is geen map\n"
@@ -2966,9 +2968,8 @@ msgstr ""
 msgid " Goto Address "
 msgstr " Ga naar adres "
 
-#, fuzzy
 msgid " Invalid address "
-msgstr " Ongeldig wachtwoord "
+msgstr " Ongeldig adres "
 
 msgid " Enter regexp:"
 msgstr " Geef reguliere expressie:"
@@ -3603,6 +3604,12 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."
+
+#~ msgid "with termcap database"
+#~ msgstr "met termcap database"
 
 #~ msgid "&Home"
 #~ msgstr "&Home"

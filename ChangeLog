@@ -1,3 +1,7 @@
+2009-02-05 Mikhail Pobolovets  <styx.mp@gmail.com>
+
+	* nl.po: update by mpol (#271)
+
 2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* lib/mc.sh.in: fixes for non-bash shells (fixing #196)
