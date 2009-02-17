@@ -780,8 +780,8 @@ show_free_space (WPanel *panel)
 	char rpath[PATH_MAX];
 
 	init_my_statfs ();
-	mhl_mem_free (old_cwd);
-	old_cwd = mhl_str_dup (panel->cwd);
+	g_free (old_cwd);
+	old_cwd = g_strdup (panel->cwd);
 
 	if (mc_realpath (panel->cwd, rpath) == NULL)
 	    return;
