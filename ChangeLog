@@ -1,20 +1,30 @@
+2009-02-19 Andrew Borodin  <aborodin@vmail.ru>
+	* src/screen.c: reimplemented displaying size of total marked files.
+	  If mini-status is on, total size is displayed on mini_info_separator.
+	  If mini-status is off, total marked size or current size is displayed
+	  at the bottom of panel.
+	  show_free_space(): more glib usage. Use macro for array size.
+	  Set attribute here instead of show_dir().
+	  display_mini_info(): check the show_mini_info value before call this.
+	  Move display size of total marked files from here...
+	  dispaly_total_marked_size(): ...to this new function.
+	  display_mini_info(): removed unused return.
+	  mini_info_separator(): check the show_mini_info value before call this.
+	  Set attribute independently of HAVE_SLANG. Show total size of marked files.
+	  show_dir(): show size of current selected file or total size of marked
+	  files if mini-status is off.
+	  panel_update_contents(): removed. Since total size of marked files
+	  is displayed on mini-info-separator, paint_panel() is used instead.
+	  paint_panel(): used in update_dirty_panels() and panel_event()
+	  instead of panel_update_contents(). Fixed double call of show_dir().
+
 2009-02-17 Mikhail Pobolovets  <styx.mp@gmail.com>
 
-	* lt.po: update by stikonas (#274)
+	* po/lt.po: update by stikonas (#274)
 
 2009-02-05 Mikhail Pobolovets  <styx.mp@gmail.com>
 
-	* nl.po: update by mpol (#271)
-
-2009-02-04 Enrico Weigelt, metux ITS <weigelt@metux.de>
-
-2009-02-17 Mikhail Pobolovets  <styx.mp@gmail.com>
-
-	* lt.po: update by stikonas (#274)
-
-2009-02-05 Mikhail Pobolovets  <styx.mp@gmail.com>
-
-	* nl.po: update by mpol (#271)
+	* po/nl.po: update by mpol (#271)
 
 2009-02-05 Patrick Winnertz <winnie@debian.org>
 
@@ -30,13 +40,13 @@
 	* lib/mc.lib: added patch on #219 by angel_il
 	* edit/editcmd.c, configure.ac: removed obsolete own implementation of memove (#242)
 	* vfs/extfs/u7z: patch from mandriva (#194)
-	* added andrew_b's patch for showing free space (#188)
+	* added Andrew Borodin's patch for showing free space (#188)
 
 2009-02-01 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
 	* src/util.c: fixed name_trunc() on NULL or empty parameters
 	* src/achown.c: fixed unitialized var in init_chown_advanced()
-	  (patch from andrew_b)
+	  (patch from Andrew Borodin)
 	* replaced gboolean by bool (from mhl/types.h)
 
 2009-01-31 Enrico Weigelt, metux ITS <weigelt@metux.de>, Patrick Winnertz <winnie@debian.org>, Slava Zanko <slavazanko@gmail.com>, Sergei Trofimovich  <slyfox@inbox.ru>

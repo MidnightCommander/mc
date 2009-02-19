@@ -659,46 +659,12 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 static void
 display_mini_info (WPanel *panel)
 {
-    if (!show_mini_info)
-	return;
-
     widget_move (&panel->widget, llines (panel)+3, 1);
 
     if (panel->searching){
 	attrset (INPUT_COLOR);
 	tty_printf ("/%-*s", panel->widget.cols-3, panel->search_buffer);
 	attrset (NORMAL_COLOR);
-	return;
-    }
-
-    /* Status displays total marked size */
-    if (panel->marked){
-	char buffer[BUF_SMALL], b_bytes[BUF_SMALL];
-	const char *p = "  %-*s";
-	int  cols = panel->widget.cols-2;
-
-	attrset (MARKED_COLOR);
-	tty_printf  ("%*s", cols, " ");
-	widget_move (&panel->widget, llines (panel)+3, 1);
-
-	/*
-	 * This is a trick to use two ngettext() calls in one sentence.
-	 * First make "N bytes", then insert it into "X in M files".
-	 */
-	g_snprintf(b_bytes, sizeof (b_bytes),
-		   ngettext("%s byte", "%s bytes",
-			    (unsigned long)panel->total),
-		   size_trunc_sep(panel->total));
-	g_snprintf(buffer, sizeof (buffer),
-		   ngettext("%s in %d file", "%s in %d files", panel->marked),
-		   b_bytes, panel->marked);
-
-	if ((int) strlen (buffer) > cols-2){
-	    buffer [cols] = 0;
-	    p += 2;
-	} else
-	    cols -= 2;
-	tty_printf (p, cols, buffer);
 	return;
     }
 
@@ -718,12 +684,9 @@ display_mini_info (WPanel *panel)
 		     name_trunc (link_target, panel->widget.cols - 5));
 	} else
 	    tty_printf ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
-	return;
-    }
-
-    /* Default behavior */
-    repaint_file (panel, panel->selected, 0, STATUS, 1);
-    return;
+    } else
+	/* Default behavior */
+	repaint_file (panel, panel->selected, 0, STATUS, 1);
 }
 
 static void
@@ -748,20 +711,69 @@ paint_dir (WPanel *panel)
 }
 
 static void
-mini_info_separator (WPanel *panel)
+dispaly_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
 {
-    if (!show_mini_info)
+    char buffer[BUF_SMALL], b_bytes[BUF_SMALL], *buf;
+    int cols;
+    size_t blen;
+
+    if (panel->marked <= 0)
 	return;
 
+    buf = size_only ? b_bytes : buffer;
+    cols = panel->widget.cols - 2;
+
+    /*
+     * This is a trick to use two ngettext() calls in one sentence.
+     * First make "N bytes", then insert it into "X in M files".
+     */
+    g_snprintf (b_bytes, sizeof (b_bytes),
+		ngettext("%s byte", "%s bytes", (unsigned long) panel->total),
+		size_trunc_sep (panel->total));
+    if (!size_only)
+        g_snprintf (buffer, sizeof (buffer),
+		    ngettext("%s in %d file", "%s in %d files", panel->marked),
+		    b_bytes, panel->marked);
+
+    blen = strlen (buf);
+
+    /* don't forget spaces around buffer content */
+    if ((int) blen > cols - 2) {
+	buf[cols - 2] = '\0';
+	blen = (size_t) (cols - 2);
+    }
+
+    if (x < 0)
+	/* center in panel */
+	x = (panel->widget.cols - (int) blen) / 2 - 1;
+
+    /*
+     * y == llines (panel) + 2      for mini_info_separator
+     * y == panel->widget.lines - 1 for panel bottom frame
+     */
+    widget_move (&panel->widget, y, x);
+    attrset (MARKED_COLOR);
+    tty_printf (" %s ", buf);
+}
+
+static void
+mini_info_separator (WPanel *panel)
+{
+    const int y = llines (panel) + 2;
+
     standend ();
-    widget_move (&panel->widget, llines (panel) + 2, 1);
-#ifdef HAVE_SLANG
+    widget_move (&panel->widget, y, 1);
     attrset (NORMAL_COLOR);
+#ifdef HAVE_SLANG
     hline (ACS_HLINE, panel->widget.cols - 2);
 #else
     hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
 	   panel->widget.cols - 2);
 #endif				/* !HAVE_SLANG */
+
+    /* Status displays total marked size.
+     * Centered in panel, full format. */
+    dispaly_total_marked_size (panel, y, -1, FALSE);
 }
 
 static void
@@ -790,14 +802,15 @@ show_free_space (WPanel *panel)
     }
 
     if (myfs_stats.avail > 0 || myfs_stats.total > 0) {
-	char buffer1 [6], buffer2[6], tmp[256];
-	size_trunc_len (buffer1, 5, myfs_stats.avail, 1);
-	size_trunc_len (buffer2, 5, myfs_stats.total, 1);
-	snprintf (tmp, sizeof(tmp), " %s/%s (%d%%) ", buffer1, buffer2,
+	char buffer1[6], buffer2[6], tmp[BUF_SMALL];
+	size_trunc_len (buffer1, sizeof(buffer1) - 1, myfs_stats.avail, 1);
+	size_trunc_len (buffer2, sizeof(buffer2) - 1, myfs_stats.total, 1);
+	g_snprintf (tmp, sizeof(tmp), " %s/%s (%d%%) ", buffer1, buffer2,
 				myfs_stats.total > 0 ?
 				(int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0);
 	widget_move (&panel->widget, panel->widget.lines - 1,
-				     panel->widget.cols - 2 - strlen(tmp));
+				     panel->widget.cols - 2 - (int) strlen (tmp));
+	attrset (NORMAL_COLOR);
 	addstr (tmp);
     }
 }
@@ -844,7 +857,24 @@ show_dir (WPanel *panel)
     widget_move (&panel->widget, 0, panel->widget.cols - 3);
     addstr ("v");
 
-    attrset (NORMAL_COLOR);
+    if (!show_mini_info) {
+	if (panel->marked == 0) {
+	    /* Show size of curret file in the bottom of panel */
+	    if (S_ISREG (panel->dir.list [panel->selected].st.st_mode)) {
+		char buffer[BUF_SMALL];
+
+		g_snprintf (buffer, sizeof (buffer), " %s ",
+			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
+		attrset (NORMAL_COLOR);
+		widget_move (&panel->widget, panel->widget.lines - 1, 2);
+		addstr (buffer);
+	    }
+	} else {
+	    /* Show total size of marked files
+	     * In the bottom of panel, display size only. */
+	    dispaly_total_marked_size (panel, panel->widget.lines - 1, 2, TRUE);
+	}
+    }
 
     show_free_space (panel);
 
@@ -864,27 +894,19 @@ adjust_top_file (WPanel *panel)
 	panel->top_file = panel->count - llines (panel);
 }
 
-/*
- * Repaint everything that can change on the panel - title, entries and
- * mini status.  The rest of the frame and the mini status separator are
- * not repainted.
- */
-static void
-panel_update_contents (WPanel *panel)
-{
-    show_dir (panel);
-    paint_dir (panel);
-    display_mini_info (panel);
-    panel->dirty = 0;
-}
-
 /* Repaint everything, including frame and separator */
 static void
 paint_panel (WPanel *panel)
 {
-    paint_frame (panel);
-    panel_update_contents (panel);
-    mini_info_separator (panel);
+    paint_frame (panel); /* including show_dir */
+    paint_dir (panel);
+
+    if (show_mini_info) {
+	mini_info_separator (panel);
+	display_mini_info (panel);
+    }
+
+    panel->dirty = 0;
 }
 
 /*
@@ -897,10 +919,10 @@ void
 update_dirty_panels (void)
 {
     if (current_panel->dirty)
-	panel_update_contents (current_panel);
+	paint_panel (current_panel);
 
     if ((get_other_type () == view_listing) && other_panel->dirty)
-	panel_update_contents (other_panel);
+	paint_panel (other_panel);
 }
 
 static void
@@ -2491,7 +2513,7 @@ panel_event (Gpm_Event *event, void *data)
 
     ret = do_panel_event (event, panel, &redir);
     if (!redir)
-	panel_update_contents (panel);
+	paint_panel (panel);
 
     return ret;
 }
