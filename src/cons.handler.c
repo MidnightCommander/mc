@@ -28,8 +28,6 @@
 #endif
 #include <unistd.h>
 
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "cons.saver.h"
@@ -145,7 +143,7 @@ handle_console_linux (unsigned char action)
 	    open ("/dev/null", O_WRONLY);
 	    if (tty_name) {
 		/* Exec the console save/restore handler */
-		mc_conssaver = mhl_str_dir_plus_file (SAVERDIR, "cons.saver");
+		mc_conssaver = concat_dir_and_file (SAVERDIR, "cons.saver");
 		execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
 	    }
 	    /* Console is not a tty or execl() failed */

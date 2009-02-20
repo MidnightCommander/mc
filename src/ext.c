@@ -25,9 +25,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
 
-#include <mhl/string.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"
@@ -441,11 +440,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	int mc_user_ext = 1;
 	int home_error = 0;
 
-	extension_file = mhl_str_dir_plus_file (home_dir, MC_USER_EXT);
+	extension_file = concat_dir_and_file (home_dir, MC_USER_EXT);
 	if (!exist_file (extension_file)) {
 	    g_free (extension_file);
 	  check_stock_mc_ext:
-	    extension_file = mhl_str_dir_plus_file (mc_home, MC_LIB_EXT);
+	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
 	    mc_user_ext = 0;
 	}
 	data = load_file (extension_file);

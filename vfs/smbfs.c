@@ -49,8 +49,6 @@
 
 #include <string.h>
 
-#include <mhl/string.h>
-
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "smbfs.h"
@@ -1213,7 +1211,7 @@ smbfs_get_path (smbfs_connection ** sc, const char *path)
 	int f = !strcmp (remote_path, "/~");
 	if (f || !strncmp (remote_path, "/~/", 3)) {
 	    char *s;
-	    s = mhl_str_dir_plus_file ((*sc)->home, remote_path + 3 - f);
+	    s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
 	    g_free (remote_path);
 	    return s;
 	}

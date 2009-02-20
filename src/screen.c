@@ -25,9 +25,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
-#include <mhl/string.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"
@@ -710,7 +709,7 @@ display_mini_info (WPanel *panel)
 	char *link, link_target [MC_MAXPATHLEN];
 	int  len;
 
-	link = mhl_str_dir_plus_file (panel->cwd, panel->dir.list [panel->selected].fname);
+	link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 	len = mc_readlink (link, link_target, MC_MAXPATHLEN - 1);
 	g_free (link);
 	if (len > 0){
@@ -1975,7 +1974,7 @@ do_enter_on_file_entry (file_entry *fe)
 	return 1;
 
     /* Check if the file is executable */
-    full_name = mhl_str_dir_plus_file (current_panel->cwd, fe->fname);
+    full_name = concat_dir_and_file (current_panel->cwd, fe->fname);
     if (!is_exe (fe->st.st_mode) || !if_link_is_exe (full_name, fe)) {
 	g_free (full_name);
 	return 0;
@@ -1994,7 +1993,7 @@ do_enter_on_file_entry (file_entry *fe)
 	char *tmp;
 	int ret;
 
-	tmp = mhl_str_dir_plus_file (vfs_get_current_dir (), fe->fname);
+	tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
 	ret = mc_setctl (tmp, VFS_SETCTL_RUN, NULL);
 	g_free (tmp);
 	/* We took action only if the dialog was shown or the execution
@@ -2031,10 +2030,10 @@ chdir_other_panel (WPanel *panel)
     }
 
     if (!S_ISDIR (panel->dir.list [panel->selected].st.st_mode)) {
-        new_dir = mhl_str_dir_plus_file (panel->cwd, "..");
+        new_dir = concat_dir_and_file (panel->cwd, "..");
 	sel_entry = strrchr(panel->cwd, PATH_SEP);
     } else
-        new_dir = mhl_str_dir_plus_file (panel->cwd, panel->dir.list [panel->selected].fname);
+        new_dir = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
     change_panel ();
     do_cd (new_dir, cd_exact);
@@ -2100,7 +2099,7 @@ chdir_to_readlink (WPanel *panel)
 	if (*buffer == PATH_SEP)
 	    new_dir = g_strdup (buffer);
 	else
-	    new_dir = mhl_str_dir_plus_file (panel->cwd, buffer);
+	    new_dir = concat_dir_and_file (panel->cwd, buffer);
 
 	change_panel ();
 	do_cd (new_dir, cd_exact);

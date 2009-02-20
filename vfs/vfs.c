@@ -38,8 +38,6 @@
 #include <signal.h>
 #include <ctype.h>	/* is_digit() */
 
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -658,7 +656,7 @@ vfs_canon (const char *path)
     if (*path != PATH_SEP){ 
     	char *local, *result;
 
-	local = mhl_str_dir_plus_file (current_dir, path);
+	local = concat_dir_and_file (current_dir, path);
 
 	result = vfs_canon (local);
 	g_free (local);

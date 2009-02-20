@@ -27,10 +27,6 @@
 #include <errno.h>
 #include <string.h>
 
-#include <mhl/memory.h>
-#include <mhl/escape.h>
-#include <mhl/string.h>
-
 #include "global.h"		/* home_dir */
 #include "tty.h"
 #include "widget.h"		/* WInput */
@@ -67,7 +63,7 @@ examine_cd (char *path)
     const char *t;
 
     /* Tilde expansion */
-    path = mhl_shell_unescape_buf(path);
+    path = shell_unescape(path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
@@ -128,7 +124,7 @@ examine_cd (char *path)
 	    c = *s;
 	    *s = 0;
 	    if (*p) {
-		r = mhl_str_dir_plus_file (p, q);
+		r = concat_dir_and_file (p, q);
 		result = do_cd (r, cd_parse_command);
 		g_free (r);
 	    }
@@ -139,7 +135,7 @@ examine_cd (char *path)
     }
     g_free (q);
     g_free (path_tilde);
-//    mhl_mem_free(path);
+//    g_free(path);
     return result;
 }
 
@@ -181,7 +177,7 @@ void do_cd_command (char *cmd)
 	} else {
 	    char *old = current_panel->cwd;
 	    char *new;
-	    new = mhl_str_dir_plus_file (old, cmd+3);
+	    new = concat_dir_and_file (old, cmd+3);
 	    sync_tree (new);
 	    g_free (new);
 	}

@@ -26,11 +26,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <mhl/string.h>
 
 #include "../src/global.h"
 
@@ -597,7 +596,7 @@ edit_load_user_map(WEdit *edit)
     if (edit_key_emulation != EDIT_KEY_EMULATION_USER)
 	return TRUE;
 
-    file = mhl_str_dir_plus_file(home_dir, MC_USERMAP);
+    file = concat_dir_and_file(home_dir, MC_USERMAP);
 
     if (stat(file, &s) < 0) {
 	char *msg = g_strdup_printf(_("%s not found!"), file);

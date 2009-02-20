@@ -23,8 +23,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mhl/string.h>
-
 #include "global.h"
 #include "tty.h"
 #include "color.h"
@@ -723,11 +721,11 @@ user_menu_cmd (struct WEdit *edit_widget)
     menu = g_strdup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
-        menu = mhl_str_dir_plus_file \
+        menu = concat_dir_and_file \
                             (home_dir, edit_widget ? CEDIT_HOME_MENU : MC_HOME_MENU);
 	if (!exist_file (menu)){
 	    g_free (menu);
-	    menu = mhl_str_dir_plus_file \
+	    menu = concat_dir_and_file \
                         (mc_home, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	}
     }

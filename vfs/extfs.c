@@ -35,9 +35,6 @@
 #include <sys/wait.h>
 #endif
 #include <errno.h>
-
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -249,7 +246,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 	tmp = name_quote (name, 0);
     }
 
-    mc_extfsdir = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR);
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd =
 	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
 		     local_name ? local_name : tmp, (char *) NULL);
@@ -624,7 +621,7 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
     quoted_localname = name_quote (localname, 0);
 
-    mc_extfsdir = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR);
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       extfs_cmd, archive_name, " ", quoted_file, " ",
 		       quoted_localname, (char *) NULL);
@@ -653,7 +650,7 @@ extfs_run (struct vfs_class *me, const char *file)
     g_free (p);
 
     archive_name = name_quote (extfs_get_archive_name (archive), 0);
-    mc_extfsdir = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR);
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
 		       " run ", archive_name, " ", q, (char *) NULL);
     g_free (mc_extfsdir);
@@ -1298,7 +1295,7 @@ static int extfs_init (struct vfs_class *me)
 
     (void) me;
 
-    mc_extfsini = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
+    mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
 
     /* We may not use vfs_die() message or message or similar,

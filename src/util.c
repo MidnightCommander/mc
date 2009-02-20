@@ -35,9 +35,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include <mhl/escape.h>
-#include <mhl/string.h>
-
 #include "global.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */
@@ -694,7 +691,7 @@ load_mc_home_file (const char *filename, char **allocated_filename)
     char *lang;
     char *data;
 
-    hintfile_base = mhl_str_dir_plus_file (mc_home, filename);
+    hintfile_base = concat_dir_and_file (mc_home, filename);
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
@@ -1253,6 +1250,18 @@ diff_two_paths (const char *first, const char *second)
     return buf;
 }
 
+/* If filename is NULL, then we just append PATH_SEP to the dir */
+char *
+concat_dir_and_file (const char *dir, const char *file)
+{
+    int i = strlen (dir);
+    
+    if (dir [i-1] == PATH_SEP)
+	return  g_strconcat (dir, file, (char *) NULL);
+    else
+	return  g_strconcat (dir, PATH_SEP_STR, file, (char *) NULL);
+}
+
 /* Append text to GList, remove all entries with the same text */
 GList *
 list_append_unique (GList *list, char *text)
@@ -1313,7 +1322,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
 
     if (strchr (prefix, PATH_SEP) == NULL) {
 	/* Add prefix first to find the position of XXXXXX */
-	tmpbase = mhl_str_dir_plus_file (mc_tmpdir (), prefix);
+	tmpbase = concat_dir_and_file (mc_tmpdir (), prefix);
     } else {
 	tmpbase = g_strdup (prefix);
     }
@@ -1381,7 +1390,7 @@ load_file_position (const char *filename, long *line, long *column)
     *column = 0;
 
     /* open file with positions */
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
     f = fopen (fn, "r");
     g_free (fn);
     if (!f)
@@ -1428,8 +1437,8 @@ save_file_position (const char *filename, long line, long column)
 
     len = strlen (filename);
 
-    tmp = mhl_str_dir_plus_file (home_dir, MC_FILEPOS_TMP);
-    fn = mhl_str_dir_plus_file (home_dir, MC_FILEPOS);
+    tmp = concat_dir_and_file (home_dir, MC_FILEPOS_TMP);
+    fn = concat_dir_and_file (home_dir, MC_FILEPOS);
 
     /* open temporary file */
     t = fopen (tmp, "w");
@@ -1522,3 +1531,157 @@ Q_ (const char *s)
     sep = strchr(result, '|');
     return (sep != NULL) ? sep + 1 : result;
 }
+
+#define shell_escape_toesc(x)	\
+    (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
+     ((x)=='(')||((x)==')')||((x)=='\'')||((x)=='&')||((x)=='~')||	\
+     ((x)=='{')||((x)=='}')||((x)=='[')||((x)==']')||((x)=='`')||	\
+     ((x)=='?')||((x)=='|')||((x)=='<')||((x)=='>')||((x)==';')||	\
+     ((x)=='*')||((x)=='\\')||((x)=='"'))
+
+#define shell_escape_nottoesc(x)	\
+    (((x)!=0) && (!shell_escape_toesc((x))))
+/** To be compatible with the general posix command lines we have to escape
+ strings for the command line
+
+ \params in
+ string for escaping
+
+ \returns
+ return escaped string (which needs to be freed later)
+ */
+char*
+shell_escape(const char* src)
+{
+	GString *str;
+	char *result = NULL;
+
+	if ((src==NULL)||(!(*src)))
+		return strdup("");
+
+	str = g_string_new("");
+	
+	/* look for the first char to escape */
+	while (1)
+	{
+		char c;
+		/* copy over all chars not to escape */
+		while ((c=(*src)) && shell_escape_nottoesc(c))
+		{
+			g_string_append_c(str,c);
+			src++;
+		}
+
+		/* at this point we either have an \0 or an char to escape */
+		if (!c) {
+			result = str->str;
+			g_string_free(str,FALSE);
+			return result;
+		}
+
+		g_string_append_c(str,'\\');
+		g_string_append_c(str,c);
+		src++;
+	}
+}
+
+/** Unescape paths or other strings for e.g the internal cd
+    shell-unescape within a given buffer (writing to it!)
+
+ \params src
+ string for unescaping
+
+ \returns
+ return unescaped string (which needs to be freed)
+ */
+char*
+shell_unescape(const char* text)
+{
+	GString *str;
+	char *result = NULL;
+	
+	if (!text)
+		return NULL;
+
+
+	/* look for the first \ - that's quick skipover if there's nothing to escape */
+	const char* readptr = text;
+	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
+	if (!(*readptr)) {
+		result = g_strdup(text);
+		return result;
+	}
+	str = g_string_new_len(text, readptr - text);
+
+	/* if we're here, we're standing on the first '\' */
+	char c;
+	while ((c = *readptr))
+	{
+		if (c=='\\')
+		{
+			readptr++;
+			switch ((c = *readptr))
+			{
+				case '\0': /* end of string! malformed escape string */
+					goto out;
+
+				case 'n':	g_string_append_c(str,'\n');	break;
+				case 'r':	g_string_append_c(str,'\r');	break;
+				case 't':	g_string_append_c(str,'\t');	break;
+
+				case ' ':
+				case '\\':
+				case '#':
+				case '$':
+				case '%':
+				case '(':
+				case ')':
+				case '[':
+				case ']':
+				case '{':
+				case '}':
+				case '<':
+				case '>':
+				case '!':
+				case '*':
+				case '?':
+				case '~':
+				case '`':
+				case '"':
+				case ';':
+				default:
+					g_string_append_c(str,c); break;
+			}
+		}
+		else	/* got a normal character */
+		{
+			g_string_append_c(str,c);
+		}
+		readptr++;
+	}
+out:
+
+	result = str->str;
+	g_string_free(str,FALSE);
+    return result;
+}
+
+/** Check if char in pointer contain escape'd chars
+
+ \params in
+ string for checking
+
+ \returns
+ return TRUE if string contain escaped chars
+ otherwise return FALSE
+ */
+gboolean
+shell_is_char_escaped ( const char *in )
+{
+	if (in == NULL || !*in || in[0] != '\\')
+		return FALSE;
+	if (shell_escape_toesc(in[1]))
+		return TRUE;
+	return FALSE;
+}
+

@@ -26,13 +26,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-#include <mhl/memory.h>
-#include <mhl/escape.h>
-#include <mhl/string.h>
 
 #include "global.h"
 #include "tty.h"
@@ -42,7 +39,6 @@
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"
-#include "util.h"
 #include "key.h"		/* XCTRL and ALT macros */
 
 typedef char *CompletionFunction (char * text, int state, INPUT_COMPLETE_FLAGS flags);
@@ -86,7 +82,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     SHOW_C_CTX("filename_completion_function");
 
     if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
-        text = mhl_shell_unescape_buf (text);
+        text = shell_unescape (text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -206,9 +202,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
-	    SHELL_ESCAPED_STR e_temp = mhl_shell_escape_dup(temp);
-	    mhl_mem_free (temp);
-	    temp = e_temp.s;
+	    temp = shell_escape(temp);
 	}
 	return temp;
     }
@@ -463,7 +457,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
 
-    text = mhl_shell_unescape_buf(text);
+    text = shell_unescape(text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
@@ -486,9 +480,8 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	p = filename_completion_function (text, state, flags);
 	if (!p)
 	    return 0;
-	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(p);
-	return e_p.s;
+	p = shell_escape(p);
+	return p;
     }
 
     found = NULL;
@@ -520,7 +513,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 		if (cur_path >= path_end)
 		    break;
 		expanded = tilde_expand (*cur_path ? cur_path : ".");
-		cur_word = mhl_str_dir_plus_file (expanded, text);
+		cur_word = concat_dir_and_file (expanded, text);
 		g_free (expanded);
 		canonicalize_pathname (cur_word);
 		cur_path = strchr (cur_path, 0) + 1;
@@ -544,9 +537,9 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 
-	SHELL_ESCAPED_STR e_p = mhl_shell_escape_dup(p);
-	mhl_mem_free(found);
-	return e_p.s;
+	p = shell_escape(p);
+	g_free(found);
+	return p;
     }
     return found;
 
@@ -815,10 +808,10 @@ try_complete (char *text, int *start, int *end, INPUT_COMPLETE_FLAGS flags)
 		    c = *s; 
 		    *s = 0;
 		    if (*cdpath){
-			r = mhl_str_dir_plus_file (cdpath, word);
+			r = concat_dir_and_file (cdpath, word);
 			SHOW_C_CTX("try_complete:filename_subst_2");
-			matches = completion_matches (r, filename_completion_function, flags);
-			g_free (r);
+    	    		matches = completion_matches (r, filename_completion_function, flags);
+    	    		g_free (r);
 		    }
 		    *s = c;
 		    cdpath = s + 1;
@@ -1000,17 +993,17 @@ complete_engine (WInput *in, int what_to_do)
     	    start++;
     	in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
     }
-    
     if (in->completions){
     	if (what_to_do & DO_INSERTION || ((what_to_do & DO_QUERY) && !in->completions[1])) {
-	        char * complete = in->completions [0];
-	    if (insert_text (in, complete, strlen (complete))){
+	    char * complete = g_strdup (in->completions [0]);
+    	    if (insert_text (in, complete, strlen (complete))){
     	        if (in->completions [1])
     	    	    beep ();
 		else
 		    free_completions (in);
 	    } else
 	        beep ();
+	    g_free(complete);
         }
     	if ((what_to_do & DO_QUERY) && in->completions && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;

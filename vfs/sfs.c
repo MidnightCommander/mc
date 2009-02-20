@@ -34,8 +34,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <mhl/string.h>
-
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
 #include "../src/wtools.h"	/* message() */
@@ -338,7 +336,7 @@ static int sfs_init (struct vfs_class *me)
 
     (void) me;
 
-    mc_sfsini = mhl_str_dir_plus_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
+    mc_sfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
     cfg = fopen (mc_sfsini, "r");
 
     if (!cfg){

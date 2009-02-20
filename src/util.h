@@ -2,6 +2,8 @@
 #define MC_UTIL_H
 
 #include <sys/types.h>
+#include <assert.h>
+#include <string.h>
 
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet
@@ -66,6 +68,7 @@ char *strip_password (char *path, int has_prefix);
 const char *strip_home_and_password (const char *dir);
 
 const char *extension (const char *);
+char *concat_dir_and_file (const char *dir, const char *file);
 const char *unix_error_string (int error_num);
 const char *skip_separators (const char *s);
 const char *skip_numbers (const char *s);
@@ -254,5 +257,36 @@ extern int ascii_alpha_to_cntrl (int ch);
 
 #undef Q_
 const char *Q_ (const char *s);
+
+
+gboolean shell_is_char_escaped ( const char * );
+char *shell_unescape( const char * );
+char *shell_escape( const char * );
+
+#define str_dup_range(s_start, s_bound) (g_strndup(s_start, s_bound - s_start))
+
+/*
+ * strcpy is unsafe on overlapping memory areas, so define memmove-alike
+ * string function.
+ * Have sense only when:
+ *  * dest <= src
+ *   AND
+ *  * dest and str are pointers to one object (as Roland Illig pointed).
+ *
+ * We can't use str*cpy funs here:
+ * http://kerneltrap.org/mailarchive/openbsd-misc/2008/5/27/1951294
+ */
+static inline char * str_move(char * dest, const char * src)
+{
+    size_t n;
+
+    assert (dest<=src);
+
+    n = strlen (src) + 1; /* + '\0' */
+
+    return memmove (dest, src, n);
+}
+
+#define MC_PTR_FREE(ptr) do { g_free(ptr); (ptr) = NULL; } while (0)
 
 #endif
