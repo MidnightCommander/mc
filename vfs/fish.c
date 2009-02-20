@@ -926,6 +926,7 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     if (!(crpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
 	g_free (mpath1); \
 	g_free (mpath2); \
+	return -1; \
     } \
     rpath1 = shell_escape (crpath1); \
     g_free (mpath1); \
