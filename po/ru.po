@@ -1770,7 +1770,7 @@ msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
 msgid "Ski&p hidden"
-msgstr "Пропускать ск&рытые"
+msgstr "Пропускать скр&ытые"
 
 msgid "Start at:"
 msgstr "От каталога:"
