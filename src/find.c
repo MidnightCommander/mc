@@ -47,7 +47,7 @@
 #include "key.h"
 
 /* Size of the find parameters window */
-#define FIND_Y 15
+#define FIND_Y 16
 static int FIND_X = 50;
 
 /* Size of the find window */
@@ -142,6 +142,7 @@ static regex_t *r; /* Pointer to compiled content_pattern */
  
 static int case_sensitive = 1;
 static gboolean find_regex_flag = TRUE;
+static gboolean skip_hidden_flag = FALSE;
 static int find_recursively = 1;
 
 /*
@@ -196,8 +197,11 @@ find_parameters (char **start_dir, char **pattern, char **content)
     char *temp_dir;
     static const char *case_label = N_("case &Sensitive");
     static const char *recurs_label = N_("&Find recursively");
+    static const char *skip_hidden_label = N_("Ski&p hidden");
+    static const char *regexp_label = N_("&Regular expression");
 
     WCheck *recursively_cbox;
+    WCheck *skip_hidden_cbox;
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
@@ -258,32 +262,27 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		    DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,
-		button_new (12, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
+		button_new (FIND_Y - 3, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
     add_widget (find_dlg,
-		button_new (12, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
+		button_new (FIND_Y - 3, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
     add_widget (find_dlg,
-		button_new (12, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+		button_new (FIND_Y - 3, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
-    recursively_cbox =
-	check_new (6, istart, find_recursively, recurs_label);
- 
-    find_regex_cbox = check_new (10, istart, find_regex_flag, _("&Regular expression"));
+    recursively_cbox = check_new (6, istart, find_recursively, recurs_label);
+    skip_hidden_cbox = check_new (7, istart, skip_hidden_flag, skip_hidden_label);
+    find_regex_cbox = check_new (11, istart, find_regex_flag, regexp_label);
+    case_sense = check_new (10, istart, case_sensitive, case_label);
+
+    in_with = input_new (9, istart, INPUT_COLOR, ilen, in_contents, "content", INPUT_COMPLETE_DEFAULT);
+    in_name = input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name", INPUT_COMPLETE_DEFAULT);
+    in_start = input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
+
     add_widget (find_dlg, find_regex_cbox);
-
-    case_sense = check_new (9, istart, case_sensitive, case_label);
     add_widget (find_dlg, case_sense);
-
-    in_with =
-	input_new (8, istart, INPUT_COLOR, ilen, in_contents, "content", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_with);
-
+    add_widget (find_dlg, skip_hidden_cbox);
     add_widget (find_dlg, recursively_cbox);
-    in_name =
-	input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_name);
-
-    in_start =
-	input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
     add_widget (find_dlg, in_start);
 
     add_widget (find_dlg, label_new (8, 3, labs[2]));
@@ -303,7 +302,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	temp_dir = g_strdup (in_start->buffer);
 	case_sensitive = case_sense->state & C_BOOL;
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
- 	find_recursively = recursively_cbox->state & C_BOOL;
+	find_recursively = recursively_cbox->state & C_BOOL;
+	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
@@ -331,7 +331,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
 	case_sensitive = case_sense->state & C_BOOL;
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
- 	find_recursively = recursively_cbox->state & C_BOOL;
+	find_recursively = recursively_cbox->state & C_BOOL;
+	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern = g_strdup (in_name->buffer);
@@ -690,25 +691,27 @@ do_search (struct Dlg_head *h)
 	return 1;
     }
 
-    if (subdirs_left && find_recursively && directory) { /* Can directory be NULL ? */
-	char *tmp_name = concat_dir_and_file (directory, dp->d_name);
-	if (!mc_lstat (tmp_name, &tmp_stat)
-	    && S_ISDIR (tmp_stat.st_mode)) {
-	    push_directory (tmp_name);
-	    subdirs_left--;
-	}
-	g_free (tmp_name);
+    if (!(skip_hidden_flag && dp->d_name[0] == '.')) {
+        if (subdirs_left && find_recursively && directory) { /* Can directory be NULL ? */
+            char *tmp_name = concat_dir_and_file (directory, dp->d_name);
+            if (!mc_lstat (tmp_name, &tmp_stat)
+                && S_ISDIR (tmp_stat.st_mode)) {
+                push_directory (tmp_name);
+                subdirs_left--;
+            }
+            g_free (tmp_name);
+        }
+
+        if (regexp_match (find_pattern, dp->d_name, match_file)){
+            if (content_pattern) {
+                if (search_content (h, directory, dp->d_name)) {
+                    return 1;
+                }
+            } else
+            find_add_match (h, directory, dp->d_name);
+        }
     }
 
-    if (regexp_match (find_pattern, dp->d_name, match_file)){
-	if (content_pattern) {
-	    if (search_content (h, directory, dp->d_name)) {
-		return 1;
-	    }
-	} else 
-	    find_add_match (h, directory, dp->d_name);
-    }
-    
     dp = mc_readdir (dirp);
 
     /* Displays the nice dot */

@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-21 16:44+0200\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -66,9 +66,6 @@ msgstr " Файл %s слишком большой "
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
 
-msgid " Enter file name: "
-msgstr " Введите имя файла: "
-
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -113,6 +110,9 @@ msgstr " Режим сохранения "
 
 msgid " Save As "
 msgstr " Сохранить как "
+
+msgid " Enter file name: "
+msgstr " Введите имя файла: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
@@ -793,6 +793,9 @@ msgstr "Учет ре&гистра"
 
 msgid "Sort order"
 msgstr "Порядок сортировки"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1766,6 +1769,9 @@ msgstr "&Правка - F4"
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
+msgid "Ski&p hidden"
+msgstr "Пропускать скр&ытые"
+
 msgid "Start at:"
 msgstr "От каталога:"
 
@@ -2002,6 +2008,9 @@ msgstr "&Вертикальное"
 
 msgid "&Horizontal"
 msgstr "&Горизонтальное"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "&Заголовок xterm"
@@ -2487,6 +2496,9 @@ msgstr "Подсчитывать об&щий размер"
 msgid "&Verbose operation"
 msgstr "Детали операци&й"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Быстрая загрузка каталога"
 
@@ -2629,6 +2641,9 @@ msgstr "Владелец"
 msgid "Group"
 msgstr "Группа"
 
+msgid "<readlink failed>"
+msgstr "<сбой чтения ссылки>"
+
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2642,9 +2657,6 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s в %d файле"
 msgstr[1] "%s в %d файлах"
 msgstr[2] "%s в %d файлах"
-
-msgid "<readlink failed>"
-msgstr "<сбой чтения ссылки>"
 
 msgid "Unknown tag on display format: "
 msgstr "Неизвестный тег в формате отображения: "
@@ -2715,12 +2727,6 @@ msgstr "Со встроенным редактором\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "С установленной в системе библиотекой S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "С включенной библиотекой S-Lang"
-
-msgid "with termcap database"
-msgstr "с базой данных termcap"
 
 msgid "with terminfo database"
 msgstr "с базой данных terminfo"
@@ -2854,9 +2860,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3613,6 +3616,12 @@ msgstr "Внутренняя ошибка:"
 
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "С включенной библиотекой S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "с базой данных termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Персональный"
