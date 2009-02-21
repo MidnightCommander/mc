@@ -12,6 +12,7 @@ use POSIX;
 use File::Temp 'tempfile';
 
 # standard binaries
+my $lzma = 'lzma';
 my $bzip = 'bzip2';
 my $gzip = 'gzip';
 my $fileutil = 'file';
@@ -70,7 +71,9 @@ sub myin
     my ($qfname)=(quotemeta $_[0]);
 
     $_=`$fileutil $qfname`;
-    if (/bzip/) {
+    if (/lzma/) {
+	return "$lzma -dc $qfname";
+    } elsif (/bzip/) {
 	return "$bzip -dc $qfname";
     } elsif (/gzip/) {
 	return "$gzip -dc $qfname";
@@ -86,7 +89,9 @@ sub myout
     my ($sep) = $append ? '>>' : '>';
 
     $_=`$fileutil $qfname`;
-    if (/bzip/) {
+    if (/lzma/) {
+	return "$lzma -c $sep $qfname";
+    } elsif (/bzip/) {
 	return "$bzip -c $sep $qfname";
     } elsif (/gzip/) {
 	return "$gzip -c $sep $qfname";
