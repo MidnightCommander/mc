@@ -1,4 +1,9 @@
 
+2009-02-21 Mikhail Pobolovets  <styx.mp@gmail.com>
+	* src/find.c: 'Skip .hidden files and dirs' renamed to 'Skip hidden'
+	  Check box position has been changed. (#132)
+	* po/ru.po: translation update for 'Skip hidden'.
+
 2009-02-20 Mikhail Pobolovets  <styx.mp@gmail.com>
 	* src/find.c: 'Skip .hidden files and dirs' has been introduced.
 	  An option to toggle on|off searching for|in hidden directories
