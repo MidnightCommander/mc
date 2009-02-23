@@ -1953,6 +1953,9 @@ static int ftpfs_find_machine (const char *host, const char *domain)
 {
     keyword_t keyword;
 
+    if (!host) host = "";
+    if (!domain) domain = "";
+
     while ((keyword = ftpfs_netrc_next ()) != NETRC_NONE) {
 	if (keyword == NETRC_DEFAULT)
 	    return 0;
