@@ -1,4 +1,8 @@
 
+2009-02-24 Mikhail Pobolovets <styx.mp@gmail.com>
+
+	* syntax/spec.syntax: .spec syntax update by adamw (#189)
+
 2009-02-21 Mikhail Pobolovets  <styx.mp@gmail.com>
 	* src/find.c: 'Skip .hidden files and dirs' renamed to 'Skip hidden'
 	  Check box position has been changed. (#132)
