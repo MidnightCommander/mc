@@ -162,23 +162,32 @@ regex/\.(alz|ALZ)$
 # cpio
 shell/.cpio.Z
 	Open=%cd %p#ucpio
-	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
+	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
 
 shell/.cpio.gz
 	Open=%cd %p#ucpio
-	View=%view{ascii} gzip -dc '%f' | cpio -itv 2>/dev/null
+	View=%view{ascii} gzip -dc %f | cpio -itv 2>/dev/null
 
 shell/.cpio
 	Open=%cd %p#ucpio
-	View=%view{ascii} cpio -itv <'%f' 2>/dev/null
+	View=%view{ascii} cpio -itv < %f 2>/dev/null
 
 # ls-lR
-regex/(^|\.)ls-?lR(\.g?z|Z|bz2)?$
+regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
 	Open=%cd %p#lslR
 
 # patch
-regex/\.(diff|patch)(\.(bz2|gz|Z))?$
-        Open=%cd %p#patchfs
+regex/\.(diff|patch)(\.bz2)$
+	Open=%cd %p#patchfs
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+
+regex/\.(diff|patch)(\.(gz|Z))$
+	Open=%cd %p#patchfs
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+
+regex/\.(diff|patch)$
+	Open=%cd %p#patchfs
+	View=%view{ascii} /bin/cat %f 2>/dev/null
 
 # ar library
 regex/\.s?a$
@@ -530,9 +539,15 @@ type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
 	View=%view{ascii} gzip -dc %f 2>/dev/null
 
+regex/\.(gz|Z)?$
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+
 # bzip2
 type/^bzip2
 	Open=bzip2 -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+
+regex/\.bz2?$
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null
 
 # bzip
