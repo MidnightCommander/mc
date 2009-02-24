@@ -48,6 +48,10 @@
 
 2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
 
+	* lib/mc.ext.in: command line options fix by adamw (#183)
+
+2009-02-03 Enrico Weigelt, metux ITS <weigelt@metux.de>
+
 	* lib/mc.lib: added patch on #219 by angel_il
 	* edit/editcmd.c, configure.ac: removed obsolete own implementation of memove (#242)
 	* vfs/extfs/u7z: patch from mandriva (#194)
