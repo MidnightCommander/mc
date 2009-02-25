@@ -1,0 +1,414 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+#
+#  Midnight Commander compatible EXTFS for accessing Amazon Web Services S3.
+#  Written by Jakob Kemi <jakob.kemi@gmail.com> 2009
+#
+#  Copyright (c) 2009 Free Software Foundation, Inc.
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
+#
+#
+# Notes:
+#  This EXTFS exposes buckets as directories and keys as files
+#  Due to EXTFS limitations all buckets & keys have to be read initially which might
+#  take quite some time.
+#  Tested on Debian with Python 2.4-2.6 and boto 1.4c and 1.6b
+#    (Python 2.6 might need -W ignore::DeprecationWarning due to boto using
+#    deprecated module Popen2)
+#
+#
+# Installation:
+#  Make sure that boto <http://code.google.com/p/boto> (python-boto in Debian) is installed.
+#  Preferably pytz (package python-tz in Debian) should be installed as well.
+#
+#  Save as executable file /share/mc/extfs/s3 (or wherever your mc expects to find extfs modules)
+#  Add the the following to your extfs.ini (might exists as /usr/share/mc/extfs/extfs.ini):
+# ----- begin extfs.ini -----
+#  # Amazon S3
+#  s3:
+# ----- end extfs.ini   -----
+#
+#
+# Settings: (should be set via environment)
+#  Required:
+#    AWS_ACCESS_KEY_ID         : Amazon AWS acces key (required)
+#    AWS_SECRET_ACCESS_KEY     : Amazon AWS secret access key (required)
+#  Optional:
+#    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets, "EU"(default) or "US"
+#    MCVFS_EXTFS_S3_DEBUGFILE  : write debug info to this file (no info default)
+#
+#
+# Usage:
+#  Open dialog "Quick cd" (<alt-c>) and type: #s3 <enter> (or simply type ''cd #s3'' in shell line)
+#
+#
+# History:
+#  2009-02-07 Jakob Kemi <jakob.kemi@gmail.com>
+#   - Updated instructions.
+#   - Improved error reporting.
+#
+#  2009-02-06 Jakob Kemi <jakob.kemi@gmail.com>
+#   - Threaded list command.
+#   - Handle rm of empty "subdirectories" (as seen in mc).
+#   - List most recent datetime and total size of keys as directory properties.
+#   - List modification time in local time.
+#
+#  2009-02-05 Jakob Kemi <jakob.kemi@gmail.com>
+#   - Initial version.
+#
+
+import sys
+import os
+import time
+import re
+import datetime
+
+
+import boto
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+from boto.exception import BotoServerError
+
+
+# Get settings from environment
+USER=os.getenv('USER','0')
+AWS_ACCESS_KEY_ID=os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY=os.getenv('AWS_SECRET_ACCESS_KEY')
+LOCATION = os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU').lower()
+DEBUGFILE = os.getenv('MCVFS_EXTFS_S3_DEBUGFILE')
+
+if not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY:
+	sys.stderr.write('Missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY environment variables.\n')
+	sys.exit(1)
+
+# Setup logging
+if DEBUGFILE:
+	import logging
+	logging.basicConfig(
+		filename=DEBUGFILE,
+		level=logging.DEBUG,
+		format='%(asctime)s %(levelname)s %(message)s')
+	logging.getLogger('boto').setLevel(logging.WARNING)
+else:
+	class Void(object):
+		def __getattr__(self, attr):
+			return self
+		def __call__(self, *args, **kw):
+			return self
+	logging = Void()
+
+logger=logging.getLogger('s3extfs')
+
+
+def threadmap(fun, iterable, maxthreads=16):
+	"""
+	Quick and dirty threaded version of builtin method map.
+	Propagates exception safely.
+	"""
+	from threading import Thread
+	import Queue
+
+	items = list(iterable)
+	nitems = len(items)
+	if nitems < 2:
+		return map(fun, items)
+
+	# Create and fill input queue
+	input = Queue.Queue()
+	output = Queue.Queue()
+
+	for i,item in enumerate(items):
+		input.put( (i,item) )
+
+	class WorkThread(Thread):
+		"""
+		Takes one item from input queue (thread terminates when input queue is empty),
+		performs fun, puts result in output queue
+		"""
+		def run(self):
+			while True:
+				try:
+					(i,item) = input.get_nowait()
+					try:
+						result = fun(item)
+						output.put( (i,result) )
+					except:
+						output.put( (None,sys.exc_info()) )
+				except Queue.Empty:
+					return
+
+	# Start threads
+	for i in range( min(len(items), maxthreads) ):
+		t = WorkThread()
+		t.setDaemon(True)
+		t.start()
+
+	# Wait for all threads to finish & collate results
+	ret = []
+	for i in range(nitems):
+		try:
+			i,res = output.get()
+			if i == None:
+				raise res[0],res[1],res[2]
+		except Queue.Empty:
+			break
+		ret.append(res)
+
+	return ret
+
+logger.debug('started')
+
+# Global S3 connection
+s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+if LOCATION == 'eu':
+	logger.debug('Using location EU for new buckets')
+	S3LOCATION = boto.s3.connection.Location.EU
+else:
+	logger.debug('Using location US for new buckets')
+	S3LOCATION = boto.s3.connection.Location.US
+
+logger.debug('argv: ' + str(sys.argv))
+
+try:
+	cmd = sys.argv[1]
+	args = sys.argv[2:]
+except:
+	sys.stderr.write('This program should be called from within MC\n')
+	sys.exit(1)
+
+def handleServerError(msg):
+	e = sys.exc_info()
+	msg += ', reason: ' + e[1].reason
+	logger.error(msg, exc_info=e)
+	sys.stderr.write(msg+'\n')
+	sys.exit(1)
+
+#
+# Lists all S3 contents
+#
+if cmd == 'list':
+	if len(args) > 0:
+		path = args[0]
+	else:
+		path = ''
+
+	logger.info('list')
+
+	rs = s3.get_all_buckets()
+
+	# Import python timezones (pytz)
+	try:
+		import pytz
+	except:
+		logger.warning('Missing pytz module, timestamps will be off')
+		# A fallback UTC tz stub
+		class pytzutc(datetime.tzinfo):
+			def __init__(self):
+				datetime.tzinfo.__init__(self)
+				self.utc = self
+				self.zone = 'UTC'
+			def utcoffset(self, dt):
+				return datetime.timedelta(0)
+			def tzname(self, dt):
+				return "UTC"
+			def dst(self, dt):
+				return datetime.timedelta(0)
+		pytz = pytzutc()
+
+
+	# Find timezone
+	# (yes, timeZONE as in _geographic zone_ not EST/CEST or whatever crap we get from time.tzname)
+	# http://regebro.wordpress.com/2008/05/10/python-and-time-zones-part-2-the-beast-returns/
+	def getGuessedTimezone():
+		# 1. check TZ env. var
+		try:
+			tz = os.getenv('TZ', '')
+			return pytz.timezone(tz)
+		except:
+			pass
+		# 2. check if /etc/timezone exists (Debian at least)
+		try:
+			if os.path.isfile('/etc/timezone'):
+				tz = open('/etc/timezone', 'r').readline().strip()
+				return pytz.timezone(tz)
+		except:
+			pass
+		# 3. check if /etc/localtime is a _link_ to something useful
+		try:
+			if os.path.islink('/etc/localtime'):
+				link = os.readlink('/etc/localtime')
+				tz = '/'.join(p.split(os.path.sep)[-2:])
+				return pytz.timezone(tz)
+		except:
+			pass
+		# 4. use time.tzname which will probably be wrong by an hour 50% of the time.
+		try:
+			return pytz.timezone(time.tzname[0])
+		except:
+			pass
+		# 5. use plain UTC ...
+		return pytz.utc
+
+	tz=getGuessedTimezone()
+	logger.debug('Using timezone: ' + tz.zone)
+
+	# AWS time is on format: 2009-01-07T16:43:39.000Z
+	# we "want" MM-DD-YYYY hh:mm (in localtime)
+	expr = re.compile(r'^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})\.\d{3}Z$')
+	def convDate(awsdatetime):
+		m = expr.match(awsdatetime)
+		ye,mo,da,ho,mi,se = map(int,m.groups())
+
+		dt = datetime.datetime(ye,mo,da,ho,mi,se, tzinfo=pytz.utc)
+		return dt.astimezone(tz).strftime('%m-%d-%Y %H:%M')
+
+
+	def bucketList(b):
+		totsz = 0
+		mostrecent = '1970-01-01T00:00:00.000Z'
+		ret = []
+		for k in b.list():
+			mostrecent = max(mostrecent, k.last_modified)
+			datetime = convDate(k.last_modified)
+			ret.append('%10s %3d %-8s %-8s %d %s %s\n' % (
+				'-rw-r--r--', 1, USER, USER, k.size, datetime, b.name+'/'+k.name)
+			)
+			totsz += k.size
+
+		datetime=convDate(mostrecent)
+		sys.stdout.write('%10s %3d %-8s %-8s %d %s %s\n' % (
+			'drwxr-xr-x', 1, USER, USER, totsz, datetime, b.name)
+		)
+		for line in ret:
+			sys.stdout.write(line)
+
+	threadmap(bucketList, rs)
+
+#
+# Fetch file from S3
+#
+elif cmd == 'copyout':
+	archivename = args[0]
+	storedfilename = args[1]
+	extractto = args[2]
+
+	bucket,key = storedfilename.split('/', 1)
+	logger.info('copyout bucket: %s, key: %s'%(bucket, key))
+
+	try:
+		b = s3.get_bucket(bucket)
+		k = b.get_key(key)
+
+		out = open(extractto, 'w')
+
+		k.open(mode='r')
+		for buf in k:
+			out.write(buf)
+		k.close()
+		out.close()
+	except BotoServerError:
+		handleServerError('Unable to fetch key "%s"'%(key))
+
+#
+# Upload file to S3
+#
+elif cmd == 'copyin':
+	archivename = args[0]
+	storedfilename = args[1]
+	sourcefile = args[2]
+
+	bucket,key = storedfilename.split('/', 1)
+	logger.info('copyin bucket: %s, key: %s'%(bucket, key))
+
+	try:
+		b = s3.get_bucket(bucket)
+		k = b.new_key(key)
+		k.set_contents_from_file(fp=open(sourcefile,'r'))
+	except BotoServerError:
+		handleServerError('Unable to upload key "%s"' % (key))
+
+#
+# Remove file from S3
+#
+elif cmd == 'rm':
+	archivename = args[0]
+	storedfilename = args[1]
+
+	bucket,key = storedfilename.split('/', 1)
+	logger.info('rm bucket: %s, key: %s'%(bucket, key))
+
+	try:
+		b = s3.get_bucket(bucket)
+		b.delete_key(key)
+	except BotoServerError:
+		handleServerError('Unable to remove key "%s"' % (key))
+
+#
+# Create directory
+#
+elif cmd == 'mkdir':
+	archivename = args[0]
+	dirname = args[1]
+
+	logger.info('mkdir dir: %s' %(dirname))
+	if '/' in dirname:
+		logger.warning('skipping mkdir')
+		pass
+	else:
+		bucket = dirname
+		try:
+			s3.create_bucket(bucket, location=boto.s3.connection.Location.EU)
+		except BotoServerError:
+			handleServerError('Unable to create bucket "%s"' % (bucket))
+
+#
+# Remove directory
+#
+elif cmd == 'rmdir':
+	archivename = args[0]
+	dirname = args[1]
+
+	logger.info('rmdir dir: %s' %(dirname))
+	if '/' in dirname:
+		logger.warning('skipping rmdir')
+		pass
+	else:
+		bucket = dirname
+		try:
+			b = s3.get_bucket(bucket)
+			s3.delete_bucket(b)
+		except BotoServerError:
+			handleServerError('Unable to delete bucket "%s"' % (bucket))
+
+#
+# Run from S3
+#
+elif cmd == 'run':
+	archivename = args[0]
+	storedfilename = args[1]
+	arguments = args[2:]
+
+	bucket,key = storedfilename.split('/', 1)
+	logger.info('run bucket: %s, key: %s'%(bucket, key))
+
+	os.execv(storedfilename, arguments)
+else:
+	logger.error('unhandled, bye')
+	sys.exit(1)
+
+logger.debug('command handled')
+sys.exit(0)
+
