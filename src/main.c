@@ -279,6 +279,11 @@ char *mc_home = NULL;
 
 char cmd_buf[512];
 
+#ifdef USE_INTERNAL_EDIT
+int edit_stack_iterator = 0;
+struct edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
+#endif
+
 static void
 reload_panelized (WPanel *panel)
 {
@@ -2135,6 +2140,13 @@ main (int argc, char *argv[])
 
     vfs_init ();
 
+#ifdef USE_INTERNAL_EDIT
+    for ( int i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
+        edit_history_moveto[i].filename = NULL;
+        edit_history_moveto[i].line = -1;
+    }
+#endif
+
 #ifdef HAVE_SLANG
     SLtt_Ignore_Beep = 1;
 #endif
@@ -2254,6 +2266,12 @@ main (int argc, char *argv[])
 #endif
     g_free (this_dir);
     g_free (other_dir);
+
+#ifdef USE_INTERNAL_EDIT
+    for ( int i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
+        g_free(edit_history_moveto[i].filename);
+    }
+#endif
 
     return 0;
 }

@@ -99,7 +99,7 @@ static const edit_key_map_type common_key_map[] = {
     { KEY_RIGHT, CK_Right },
     { KEY_UP, CK_Up },
 
-    { ALT ('\n'), CK_Return },
+    { ALT ('\n'), CK_Find_Definition },
     { ALT ('\t'), CK_Complete_Word },
     { ALT ('l'), CK_Goto },
     { ALT ('L'), CK_Goto },
@@ -108,6 +108,8 @@ static const edit_key_map_type common_key_map[] = {
     { ALT ('u'), CK_ExtCmd },
     { ALT ('<'), CK_Beginning_Of_Text },
     { ALT ('>'), CK_End_Of_Text },
+    { ALT ('-'), CK_Load_Prev_File },
+    { ALT ('='), CK_Load_Next_File },
     { ALT (KEY_BACKSPACE), CK_Delete_Word_Left },
 
     { XCTRL ('k'), CK_Delete_To_Line_End },

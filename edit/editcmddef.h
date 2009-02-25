@@ -42,6 +42,8 @@
 #define CK_Load			102
 #define CK_New			103
 #define CK_Save_As		104
+#define CK_Load_Prev_File	111
+#define CK_Load_Next_File	112
 
 /* block commands */
 #define CK_Mark			201
@@ -96,8 +98,9 @@
 #define CK_Terminal		422
 #define CK_Terminal_App		423
 #define CK_ExtCmd		424
-
 #define CK_User_Menu		425
+#define CK_Find_Definition	426
+
 /* application control */
 #define CK_Save_Desktop		451
 #define CK_New_Window		452

@@ -1,4 +1,4 @@
-/* editor high level editing commands.
+/* editor high level editing commands
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
    2007 Free Software Foundation, Inc.
@@ -45,6 +45,7 @@
 #include "editlock.h"
 #include "editcmddef.h"
 #include "edit-widget.h"
+#include "etags.h"
 
 #include "../src/color.h"	/* dialog_colors */
 #include "../src/tty.h"		/* LINES */
@@ -2795,6 +2796,7 @@ static void
 edit_completion_dialog (WEdit * edit, int max_len, int word_len,
 			struct selection *compl, int num_compl)
 {
+
     int start_x, start_y, offset, i;
     char *curr = NULL;
     Dlg_head *compl_dlg;
@@ -2883,8 +2885,8 @@ edit_complete_word_cmd (WEdit *edit)
     /* prepare match expression */
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
-    match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
 
+    match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
     /* init search: backward, regexp, whole word, case sensitive */
     edit_set_search_parameters (0, 1, 1, 1, 1);
 
@@ -2968,4 +2970,183 @@ edit_begin_end_macro_cmd(WEdit *edit)
 		0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
 	    edit_execute_key_command (edit, command, -1);
     }
+}
+
+int
+edit_load_forward_cmd (WEdit *edit)
+{
+    if (edit->modified) {
+        if (edit_query_dialog2
+            (_("Warning"),
+             _(" Current text was modified without a file save. \n"
+               " Continue discards these changes. "), _("C&ontinue"),
+             _("&Cancel"))) {
+            edit->force |= REDRAW_COMPLETELY;
+            return 0;
+        }
+    }
+    if ( edit_stack_iterator + 1 < MAX_HISTORY_MOVETO ) {
+        if ( edit_history_moveto[edit_stack_iterator + 1].line < 1 ) {
+            return 1;
+        }
+        edit_stack_iterator++;
+        if ( edit_history_moveto[edit_stack_iterator].filename ) {
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                              edit_history_moveto[edit_stack_iterator].line);
+            return 0;
+        } else {
+            return 1;
+        }
+    } else {
+        return 1;
+    }
+}
+
+int
+edit_load_back_cmd (WEdit *edit)
+{
+    if (edit->modified) {
+        if (edit_query_dialog2
+            (_("Warning"),
+             _(" Current text was modified without a file save. \n"
+               " Continue discards these changes. "), _("C&ontinue"),
+             _("&Cancel"))) {
+            edit->force |= REDRAW_COMPLETELY;
+            return 0;
+        }
+    }
+    if ( edit_stack_iterator > 0 ) {
+        edit_stack_iterator--;
+        if ( edit_history_moveto[edit_stack_iterator].filename ) {
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                              edit_history_moveto[edit_stack_iterator].line);
+            return 0;
+        } else {
+            return 1;
+        }
+    } else {
+        return 1;
+    }
+}
+
+
+/* let the user select where function definition */
+static void
+edit_select_definition_dialog (WEdit * edit, int max_len, int word_len,
+                               struct def_hash_type *def_hash, int num_lines)
+{
+
+    int start_x, start_y, offset, i;
+    char *curr = NULL;
+    struct def_hash_type *curr_def;
+    Dlg_head *def_dlg;
+    WListbox *def_list;
+    int def_dlg_h;      /* dialog height */
+    int def_dlg_w;      /* dialog width */
+
+    /* calculate the dialog metrics */
+    def_dlg_h = num_lines + 2;
+    def_dlg_w = max_len + 4;
+    start_x = edit->curs_col + edit->start_col - (def_dlg_w / 2);
+    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + 1;
+
+    if (start_x < 0)
+        start_x = 0;
+    if (def_dlg_w > COLS)
+        def_dlg_w = COLS;
+    if (def_dlg_h > LINES - 2)
+        def_dlg_h = LINES - 2;
+
+    offset = start_x + def_dlg_w - COLS;
+    if (offset > 0)
+        start_x -= offset;
+    offset = start_y + def_dlg_h - LINES;
+    if (offset > 0)
+        start_y -= (offset + 1);
+
+    /* create the dialog */
+    def_dlg = create_dlg (start_y, start_x, def_dlg_h, def_dlg_w,
+                          dialog_colors, NULL, "[Definitions]", NULL,
+                          DLG_COMPACT);
+
+    /* create the listbox */
+    def_list = listbox_new (1, 1, def_dlg_w - 2, def_dlg_h - 2, NULL);
+
+    /* add the dialog */
+    add_widget (def_dlg, def_list);
+
+    char *label_def = NULL;
+
+    /* fill the listbox with the completions */
+    for (i = 0; i < num_lines; i++) {
+        label_def = g_strdup_printf ("%s:%i", def_hash[i].filename, def_hash[i].line);
+        listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i]);
+        g_free(label_def);
+    }
+    /* pop up the dialog */
+    run_dlg (def_dlg);
+
+    /* apply the choosen completion */
+    if (def_dlg->ret_value == B_ENTER) {
+        listbox_get_current (def_list, &curr, &curr_def);
+        if ( curr ) {
+            if ( edit_stack_iterator+1 < MAX_HISTORY_MOVETO ) {
+                g_free( edit_history_moveto[edit_stack_iterator].filename );
+                edit_history_moveto[edit_stack_iterator].filename = g_strdup(edit->filename);
+                edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
+                edit_stack_iterator++;
+                mc_log("%s:%i iterator=%i\n", curr_def->filename, curr_def->line, edit_stack_iterator);
+                g_free( edit_history_moveto[edit_stack_iterator].filename );
+                edit_history_moveto[edit_stack_iterator].filename = g_strdup(curr_def->filename);
+                edit_history_moveto[edit_stack_iterator].line = curr_def->line;
+                edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
+                                              edit_history_moveto[edit_stack_iterator].line);
+            }
+        }
+    }
+
+    /* clear definition hash */
+    for ( int i = 0; i < MAX_DEFINITIONS; i++) {
+        g_free(def_hash[i].filename);
+    }
+
+    /* destroy dialog before return */
+    destroy_dlg (def_dlg);
+}
+
+
+void
+edit_get_match_keyword_cmd (WEdit *edit)
+{
+    int word_len = 0, num_def = 0, max_len;
+    long word_start = 0;
+    unsigned char *bufpos;
+    char *match_expr;
+    struct def_hash_type def_hash[MAX_DEFINITIONS];
+
+    for ( int i = 0; i < MAX_DEFINITIONS; i++) {
+        def_hash[i].filename = NULL;
+    }
+
+    /* search start of word to be completed */
+    if (!edit_find_word_start (edit, &word_start, &word_len))
+        return;
+
+    /* prepare match expression */
+    mc_log("edit_get_match_keyword_cmd\n");
+    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
+                            [word_start & M_EDIT_BUF_SIZE];
+    match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
+
+    mc_log("%s \n", match_expr);
+
+    set_def_hash("TAGS", match_expr, (struct def_hash_type *) &def_hash, &num_def);
+    max_len = 50;
+    word_len = 0;
+    if ( num_def > 0 ) {
+        edit_select_definition_dialog (edit, max_len, word_len,
+                                       (struct def_hash_type *) &def_hash,
+                                       num_def);
+    }
+    g_free (match_expr);
 }
