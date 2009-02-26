@@ -600,10 +600,6 @@ extern int errno;
 #define ULTRIX_AUTH 1
 #endif
 
-#ifndef HAVE_STRDUP
-char *strdup(const char *s);
-#endif
-
 #ifndef HAVE_INITGROUPS
 int initgroups(char *name,gid_t id);
 #endif
