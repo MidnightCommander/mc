@@ -46,6 +46,7 @@
 #include "editcmddef.h"
 #include "edit-widget.h"
 #include "etags.h"
+#include "../src/panel.h"
 
 #include "../src/color.h"	/* dialog_colors */
 #include "../src/tty.h"		/* LINES */
@@ -3095,7 +3096,7 @@ edit_select_definition_dialog (WEdit * edit, int max_len, int word_len,
                 edit_history_moveto[edit_stack_iterator].filename = g_strdup(edit->filename);
                 edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
                 edit_stack_iterator++;
-                mc_log("%s:%i iterator=%i\n", curr_def->filename, curr_def->line, edit_stack_iterator);
+//                mc_log("%s:%i iterator=%i\n", curr_def->filename, curr_def->line, edit_stack_iterator);
                 g_free( edit_history_moveto[edit_stack_iterator].filename );
                 edit_history_moveto[edit_stack_iterator].filename = g_strdup(curr_def->filename);
                 edit_history_moveto[edit_stack_iterator].line = curr_def->line;
@@ -3120,8 +3121,14 @@ edit_get_match_keyword_cmd (WEdit *edit)
 {
     int word_len = 0, num_def = 0, max_len;
     long word_start = 0;
+    int len = 0;
     unsigned char *bufpos;
     char *match_expr;
+    char *path = NULL;
+    char *ptr = NULL;
+    char *tagfile = NULL;
+    FILE *f;
+
     struct def_hash_type def_hash[MAX_DEFINITIONS];
 
     for ( int i = 0; i < MAX_DEFINITIONS; i++) {
@@ -3138,9 +3145,29 @@ edit_get_match_keyword_cmd (WEdit *edit)
                             [word_start & M_EDIT_BUF_SIZE];
     match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
 
-    mc_log("%s \n", match_expr);
+    path = g_strdup_printf ("%s/", current_panel->cwd);
+    mc_log("%s\n", path);
+    len = strlen(path);
+    ptr = path + len;
 
-    set_def_hash("TAGS", match_expr, (struct def_hash_type *) &def_hash, &num_def);
+    while ( ptr != path ) {
+        if ( *ptr == '/' ) {
+            path[len] = '\0';
+            g_free (tagfile);
+            tagfile = g_strdup_printf ("%s/TAGS", path);
+            mc_log("%s\n",tagfile);
+            f = fopen (tagfile, "r");
+            if ( f ) {
+                break;
+            }
+        }
+        ptr--;
+        len--;
+    }
+
+    set_def_hash(tagfile, path, match_expr, (struct def_hash_type *) &def_hash, &num_def);
+    g_free (path);
+    g_free (tagfile);
     max_len = 50;
     word_len = 0;
     if ( num_def > 0 ) {

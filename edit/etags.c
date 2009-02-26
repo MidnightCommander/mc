@@ -25,7 +25,7 @@ long get_pos_from(char *str)
     return 0;
 }
 
-int set_def_hash(char *tagfile, char *match_func, struct def_hash_type *def_hash, int *num)
+int set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_hash_type *def_hash, int *num)
 {
     FILE *f;
     static char buf[4048];
@@ -35,12 +35,13 @@ int set_def_hash(char *tagfile, char *match_func, struct def_hash_type *def_hash
     int i;
     if (!f)
         return 1;
-
     len = strlen( match_func );
     int pos;
+
+    char *fullpath = NULL;
     char *filename = NULL;
     long line;
-    enum {start, in_filename, in_define} state=start;
+    enum {start, in_filename, in_define} state = start;
 
     while (fgets (buf, sizeof (buf), f)) {
 
@@ -52,9 +53,7 @@ int set_def_hash(char *tagfile, char *match_func, struct def_hash_type *def_hash
             break;
         case in_filename:
             pos = strcspn(buf, ",");
-            if ( filename ) {
-                g_free(filename);
-            }
+            g_free(filename);
             filename = malloc(pos + 2);
             g_strlcpy ( filename, (char *)buf, pos + 1 );
             state = in_define;
@@ -73,7 +72,9 @@ int set_def_hash(char *tagfile, char *match_func, struct def_hash_type *def_hash
                         state = start;
                         if ( *num < MAX_DEFINITIONS ) {
                             def_hash[*num].filename_len = strlen(filename);
-                            def_hash[*num].filename = g_strdup(filename);
+                            fullpath = g_strdup_printf("%s/%s",start_path, filename);
+                            def_hash[*num].filename = g_strdup(fullpath);
+                            g_free(fullpath);
                             def_hash[*num].line = line;
                             (*num)++;
                         }
