@@ -24,6 +24,7 @@
 
 #include <ctype.h>
 #include <errno.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -47,7 +48,6 @@
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-
 #include "view.h" /* for default_* externs */
 
 #define MAX_ENTRIES 16

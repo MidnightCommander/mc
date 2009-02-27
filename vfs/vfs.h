@@ -7,6 +7,10 @@
 #ifndef MC_VFS_VFS_H
 #define MC_VFS_VFS_H
 
+#include <sys/types.h>
+#include <dirent.h>
+#include <utime.h>
+
 void vfs_init (void);
 void vfs_shut (void);
 
