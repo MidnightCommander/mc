@@ -3033,7 +3033,7 @@ edit_load_back_cmd (WEdit *edit)
 
 /* let the user select where function definition */
 static void
-edit_select_definition_dialog (WEdit * edit, match_expr, int max_len, int word_len,
+edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int word_len,
                                struct def_hash_type *def_hash, int num_lines)
 {
 
