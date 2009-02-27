@@ -73,6 +73,7 @@ int set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_h
                         if ( *num < MAX_DEFINITIONS ) {
                             def_hash[*num].filename_len = strlen(filename);
                             fullpath = g_strdup_printf("%s/%s",start_path, filename);
+                            canonicalize_pathname (fullpath);
                             def_hash[*num].filename = g_strdup(fullpath);
                             g_free(fullpath);
                             def_hash[*num].line = line;
