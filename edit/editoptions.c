@@ -29,16 +29,7 @@
 
 #include <config.h>
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <string.h>
-#include <ctype.h>
-#include <errno.h>
-#include <sys/stat.h>
-
-#include <stdlib.h>
+#include <stdlib.h> /* atoi(), NULL */
 
 #include "../src/global.h"
 
@@ -49,10 +40,6 @@
 
 #define OPT_DLG_H 19
 #define OPT_DLG_W 72
-
-#ifndef USE_INTERNAL_EDIT
-#define USE_INTERNAL_EDIT 1
-#endif
 
 static const char *key_emu_str[] =
 {N_("Intuitive"), N_("Emacs"), N_("User-defined"), NULL};
