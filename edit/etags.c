@@ -1,13 +1,58 @@
-/*find . -type f -name "*.[ch]" | etags -l c --declarations - */
+/* editor C-code navigation via tags.
+   make TAGS file via command:
+   $ find . -type f -name "*.[ch]" | etags -l c --declarations - 
+
+   or, if etags utility not installed:
+   $ ctags --languages=c -e -R -h '[ch]'
+
+   Copyright (C) 2009 Free Software Foundation, Inc.
+
+   Authors:
+    Ilia Maslakov <il.smind@gmail.com>, 2009
+    Slava Zanko <slavazanko@gmail.com>, 2009
+
+
+   This file is part of the Midnight Commander.
+
+   The Midnight Commander is free software; you can redistribute it
+   and/or modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The Midnight Commander is distributed in the hope that it will be
+   useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+   of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+*/
+
+#include <config.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <inttypes.h>
 #include <string.h>
 #include <glib.h>
 #include <ctype.h>
-#include "etags.h"
 
-long get_pos_from(char *str)
+#include "../src/global.h"
+#include "../edit/etags.h"
+
+/*** global variables **************************************************/
+
+/*** file scope macro definitions **************************************/
+
+/*** file scope type declarations **************************************/
+
+/*** file scope variables **********************************************/
+
+/*** file scope functions **********************************************/
+
+static long etags_get_pos_from(char *str)
 {
     static char buf[16];
     int i, j;
@@ -25,7 +70,10 @@ long get_pos_from(char *str)
     return 0;
 }
 
-int set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_hash_type *def_hash, int *num)
+/*** public functions **************************************************/
+
+
+int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_hash_type *def_hash, int *num)
 {
     FILE *f;
     static char buf[4048];
@@ -68,7 +116,7 @@ int set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_h
                 int l = (int)strlen( buf );
                 for ( i = 0; i < l; i++) {
                     if ( ( buf[i] == 0x7F || buf[i] == 0x01 ) && isdigit(buf[i+1]) ) {
-                        line = get_pos_from(&buf[i+1]);
+                        line = etags_get_pos_from(&buf[i+1]);
                         state = start;
                         if ( *num < MAX_DEFINITIONS ) {
                             def_hash[*num].filename_len = strlen(filename);

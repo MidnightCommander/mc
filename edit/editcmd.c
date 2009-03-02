@@ -45,7 +45,7 @@
 #include "editlock.h"
 #include "editcmddef.h"
 #include "edit-widget.h"
-#include "etags.h"
+#include "../edit/etags.h"
 #include "../src/panel.h"
 
 #include "../src/color.h"	/* dialog_colors */
@@ -3133,13 +3133,11 @@ edit_get_match_keyword_cmd (WEdit *edit)
 {
     int word_len = 0, num_def = 0, max_len;
     long word_start = 0;
-    int len = 0;
     unsigned char *bufpos;
     char *match_expr;
     char *path = NULL;
     char *ptr = NULL;
     char *tagfile = NULL;
-    FILE *f;
 
     struct def_hash_type def_hash[MAX_DEFINITIONS];
 
@@ -3157,25 +3155,25 @@ edit_get_match_keyword_cmd (WEdit *edit)
     match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
 
     path = g_strdup_printf ("%s/", g_get_current_dir());
-    len = strlen (path);
-    ptr = path + len;
 
-    while ( ptr != path ) {
-        if ( *ptr == '/' ) {
-            path[len] = '\0';
-            g_free (tagfile);
-            tagfile = g_strdup_printf ("%s/TAGS", path);
-            f = fopen (tagfile, "r");
-            if ( f )
-                break;
-        }
-        ptr--;
-        len--;
+    ptr = path;
+
+    /* Reursive search file 'TAGS' in parent dirs */
+    do {
+	ptr = g_path_get_dirname (path);
+	g_free(path); path = ptr;
+
+	tagfile = g_build_filename (path, "TAGS", NULL);
+	if ( exist_file (tagfile) )
+	    break;
+    } while (strcmp( path, G_DIR_SEPARATOR_S) != 0);
+
+    if (tagfile){
+	etags_set_def_hash(tagfile, path, match_expr, (struct def_hash_type *) &def_hash, &num_def);
+	g_free (tagfile);
     }
-
-    set_def_hash(tagfile, path, match_expr, (struct def_hash_type *) &def_hash, &num_def);
     g_free (path);
-    g_free (tagfile);
+
     max_len = 50;
     word_len = 0;
     if ( num_def > 0 ) {
