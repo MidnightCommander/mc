@@ -1,3 +1,8 @@
+
+2009-02-21 Mikhail Pobolovets  <styx.mp@gmail.com>
+	* src/find.c: Micro fix for 'Skip hidden' shortcut
+	  It's now Alt+k instead of Alt+p
+
 2009-02-24 Andrew Borodin <aborodin@vmail.ru>
 
 	* src/menu.c: menubar_paint_idx(): fixed menu painting for NCurses screen library.

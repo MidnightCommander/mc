@@ -197,7 +197,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     char *temp_dir;
     static const char *case_label = N_("case &Sensitive");
     static const char *recurs_label = N_("&Find recursively");
-    static const char *skip_hidden_label = N_("Ski&p hidden");
+    static const char *skip_hidden_label = N_("S&kip hidden");
     static const char *regexp_label = N_("&Regular expression");
 
     WCheck *recursively_cbox;
