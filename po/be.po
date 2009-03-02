@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-13 12:49+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -54,9 +54,6 @@ msgstr " Файл %s надта вялікі "
 msgid "Macro recursion is too deep"
 msgstr "Рэкурсія макрасу надта глыбокая"
 
-msgid " Enter file name: "
-msgstr " Увядзіце назву файла: "
-
 msgid "Warning"
 msgstr "Папярэджанне"
 
@@ -101,6 +98,9 @@ msgstr " Рэжым захавання"
 
 msgid " Save As "
 msgstr " Захаваць як "
+
+msgid " Enter file name: "
+msgstr " Увядзіце назву файла: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл з такой назвай ужо існуе. "
@@ -782,6 +782,9 @@ msgstr "Улік рэ&гістру"
 
 msgid "Sort order"
 msgstr "Парадак сартавання"
+
+msgid "Executable first"
+msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " пацверджанне выдалення &спісу каталогаў "
@@ -1755,6 +1758,9 @@ msgstr "&Праўка - F4"
 msgid "&Find recursively"
 msgstr "Знайсці &Рэкурсіўна"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Стартаваць ад:"
 
@@ -1993,6 +1999,9 @@ msgstr "&Вертыкальнае"
 
 msgid "&Horizontal"
 msgstr "&Гарызантальнае"
+
+msgid "show free sp&Ace"
+msgstr "Паказ &вольнага месца"
 
 msgid "&Xterm window title"
 msgstr "Загаловак акна &xterm"
@@ -2483,6 +2492,9 @@ msgstr "Падлічыць агульны &памер"
 msgid "&Verbose operation"
 msgstr "Дэталі аперацы&яў"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Хуткая загрузка каталога"
 
@@ -2625,6 +2637,9 @@ msgstr "Уладальнік"
 msgid "Group"
 msgstr "Група"
 
+msgid "<readlink failed>"
+msgstr "<памылка чытання спасылкі>"
+
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2638,9 +2653,6 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s байт у %d файлах"
 msgstr[1] "%s байты у %d файлах"
 msgstr[2] "%s байт у %d файлах"
-
-msgid "<readlink failed>"
-msgstr "<памылка чытання спасылкі>"
 
 msgid "Unknown tag on display format: "
 msgstr "Невядомы тэг у фармаце адлюстравання: "
@@ -2712,12 +2724,6 @@ msgstr "З убудаваным рэдактарам\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Выкарыстанне усталяванай сістэмнае бібліятэкі S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Выкарыстанне бібліятэкі S-Lang"
-
-msgid "with termcap database"
-msgstr "з базай дадзеных termcap"
 
 msgid "with terminfo database"
 msgstr "з базай дадзеных terminfo"
@@ -3608,6 +3614,12 @@ msgstr "Унутраная памылка:"
 msgid "Changes to file lost"
 msgstr "Змены для файла страчаны"
 
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Выкарыстанне бібліятэкі S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "з базай дадзеных termcap"
+
 #~ msgid "Replace"
 #~ msgstr "Замяніць"
 
@@ -3714,9 +3726,6 @@ msgstr "Змены для файла страчаны"
 
 #~ msgid "con&Vert C literals"
 #~ msgstr " канвертаваць C-літэралы"
-
-#~ msgid "show free sp&Ace"
-#~ msgstr "Паказ &вольнага месца"
 
 #~ msgid "&Dynamic split"
 #~ msgstr "&Дынамічны падзел"

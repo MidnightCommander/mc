@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
@@ -59,9 +59,6 @@ msgstr " Plik %s jest zbyt du¿y: "
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
 
-msgid " Enter file name: "
-msgstr " Wprowad¼ nazwê pliku: "
-
 msgid "Warning"
 msgstr "Ostrze¿enie"
 
@@ -106,6 +103,9 @@ msgstr " Modyfikacja trybu zapisu "
 
 msgid " Save As "
 msgstr " Zapisz jako "
+
+msgid " Enter file name: "
+msgstr " Wprowad¼ nazwê pliku: "
 
 msgid " A file already exists with this name. "
 msgstr " Plik o tej nazwie ju¿ istnieje. "
@@ -787,6 +787,9 @@ msgstr "Rozró¿nianie wie&lko¶ci"
 
 msgid "Sort order"
 msgstr "Porz±dek sortowania"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1761,6 +1764,9 @@ msgstr "Edycja - F4"
 msgid "&Find recursively"
 msgstr "znajd¼ Re&kurencyjnie"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Rozpoczêcie w:"
 
@@ -1997,6 +2003,9 @@ msgstr "P&ionowy"
 
 msgid "&Horizontal"
 msgstr "P&oziomy"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "Tytu³ okna &Xterm"
@@ -2486,6 +2495,9 @@ msgstr "Obliczanie objêto¶ci"
 msgid "&Verbose operation"
 msgstr "Informacje o przebiegu operacji"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "Szybkie od¶wie¿anie katalogu"
 
@@ -2628,6 +2640,9 @@ msgstr "W³a¶ciciel"
 msgid "Group"
 msgstr "Grupa"
 
+msgid "<readlink failed>"
+msgstr "<readlink() nie powiod³a siê>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2641,9 +2656,6 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s bajtów w %d pliku"
 msgstr[1] "%s bajtów w %d pliku"
 msgstr[2] "%s bajtów w %d pliku"
-
-msgid "<readlink failed>"
-msgstr "<readlink() nie powiod³a siê>"
 
 msgid "Unknown tag on display format: "
 msgstr "Nieznany znacznik w formacie wy¶wietlania: "
@@ -2714,12 +2726,6 @@ msgstr "Z wbudowanym edytorem\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "U¿ywanie biblioteki S-Lang zainstalowanej w systemie"
-
-msgid "Using included S-Lang library"
-msgstr "U¿ywanie do³±czonej biblioteki S-Lang"
-
-msgid "with termcap database"
-msgstr "z baz± danych termcap"
 
 msgid "with terminfo database"
 msgstr "z baz± danych terminfo"
@@ -2852,9 +2858,6 @@ msgstr "%e.%m %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e.%m.%Y "
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3612,6 +3615,12 @@ msgstr "B³±d wewnêtrzny:"
 
 msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "U¿ywanie do³±czonej biblioteki S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "z baz± danych termcap"
 
 #~ msgid "&Home"
 #~ msgstr "Prywatne"

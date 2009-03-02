@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -55,9 +55,6 @@ msgstr " Αρχείο πολύ μεγάλο: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr ""
-
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
@@ -104,6 +101,9 @@ msgstr ""
 
 msgid " Save As "
 msgstr " Αποθήκευση ως "
+
+msgid " Enter file name: "
+msgstr ""
 
 msgid " A file already exists with this name. "
 msgstr ""
@@ -773,6 +773,9 @@ msgid "case sensi&tive"
 msgstr ""
 
 msgid "Sort order"
+msgstr ""
+
+msgid "Executable first"
 msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
@@ -1670,6 +1673,9 @@ msgstr ""
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr ""
 
@@ -1901,6 +1907,9 @@ msgid "&Vertical"
 msgstr ""
 
 msgid "&Horizontal"
+msgstr ""
+
+msgid "show free sp&Ace"
 msgstr ""
 
 msgid "&Xterm window title"
@@ -2348,6 +2357,9 @@ msgstr ""
 msgid "&Verbose operation"
 msgstr ""
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr ""
 
@@ -2490,6 +2502,9 @@ msgstr "Ιδιοκτήτης"
 msgid "Group"
 msgstr "Ομάδα"
 
+msgid "<readlink failed>"
+msgstr ""
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2501,9 +2516,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s byte se %d αρχείο"
 msgstr[1] "%s byte se %d αρχείο"
-
-msgid "<readlink failed>"
-msgstr ""
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -2565,12 +2577,6 @@ msgid "With builtin Editor\n"
 msgstr ""
 
 msgid "Using system-installed S-Lang library"
-msgstr ""
-
-msgid "Using included S-Lang library"
-msgstr ""
-
-msgid "with termcap database"
 msgstr ""
 
 msgid "with terminfo database"
@@ -2697,9 +2703,6 @@ msgid "%b %e %H:%M"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
-
-msgid "(invalid)"
 msgstr ""
 
 #, fuzzy, c-format

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -58,9 +58,6 @@ msgstr " Fichier trop gros : "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Saisissez le nom de fichier : "
-
 msgid "Warning"
 msgstr "Attention"
 
@@ -105,6 +102,9 @@ msgstr " Éditer le mode de sauvegarde"
 
 msgid " Save As "
 msgstr " Enregistrer sous "
+
+msgid " Enter file name: "
+msgstr " Saisissez le nom de fichier : "
 
 msgid " A file already exists with this name. "
 msgstr " Un fichier portant le même nom existe déjà. "
@@ -798,6 +798,9 @@ msgstr "Respec&t de la casse "
 
 msgid "Sort order"
 msgstr "Ordre de tri"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1773,6 +1776,9 @@ msgstr "É&diter - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Commencer à :"
 
@@ -2009,6 +2015,9 @@ msgstr "&Vertical"
 
 msgid "&Horizontal"
 msgstr "&Horizontal"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2502,6 +2511,9 @@ msgstr "Calculer les totaux"
 msgid "&Verbose operation"
 msgstr "&Opérations bavardes"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Rechargement rapide des répertoires"
 
@@ -2647,6 +2659,9 @@ msgstr "Propriétaire"
 msgid "Group"
 msgstr "Groupe"
 
+msgid "<readlink failed>"
+msgstr "<échec de readlink>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2658,9 +2673,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s octets dans %d fichiers"
 msgstr[1] " %s octets dans %d fichiers"
-
-msgid "<readlink failed>"
-msgstr "<échec de readlink>"
 
 msgid "Unknown tag on display format: "
 msgstr "Balise inconnue dans le format d'affichage :"
@@ -2731,12 +2743,6 @@ msgstr "Avec l'éditeur intégré\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Utilise la bibliothèque S-Lang installée dans le système"
-
-msgid "Using included S-Lang library"
-msgstr "Utilise la bibliothèque S-Lang incluse"
-
-msgid "with termcap database"
-msgstr "avec la base de données termcap"
 
 msgid "with terminfo database"
 msgstr "avec la base de données terminfo"
@@ -2870,9 +2876,6 @@ msgstr "%e %b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3635,6 +3638,12 @@ msgstr "Erreur interne :"
 
 msgid "Changes to file lost"
 msgstr "Les changements au fichier sont perdus"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Utilise la bibliothèque S-Lang incluse"
+
+#~ msgid "with termcap database"
+#~ msgstr "avec la base de données termcap"
 
 #~ msgid "&Home"
 #~ msgstr "Répertoire &personnel"

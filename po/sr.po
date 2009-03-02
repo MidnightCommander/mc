@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -57,9 +57,6 @@ msgstr " Датотека је превелика: "
 msgid "Macro recursion is too deep"
 msgstr "Ниво рекурзије макроа је превисок"
 
-msgid " Enter file name: "
-msgstr " Унесите назив датотеке: "
-
 msgid "Warning"
 msgstr "Упозорење"
 
@@ -104,6 +101,9 @@ msgstr " Режим чувања "
 
 msgid " Save As "
 msgstr " Сачувај као "
+
+msgid " Enter file name: "
+msgstr " Унесите назив датотеке: "
 
 msgid " A file already exists with this name. "
 msgstr " Датотека под тим називом већ постоји. "
@@ -793,6 +793,9 @@ msgstr "разлику&ј велика и мала слова"
 
 msgid "Sort order"
 msgstr "Поредак ређања"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1766,6 +1769,9 @@ msgstr "&Уреди - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Почни од:"
 
@@ -2003,6 +2009,9 @@ msgstr "&Усправно"
 
 msgid "&Horizontal"
 msgstr "&Положено"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "наслов прозора и&Кс терминала"
@@ -2489,6 +2498,9 @@ msgstr "Рачунај &Укупне збирове"
 msgid "&Verbose operation"
 msgstr "&Брбљиви рад"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Брзо учитавање директоријума"
 
@@ -2632,6 +2644,9 @@ msgstr "Власник"
 msgid "Group"
 msgstr "Група"
 
+msgid "<readlink failed>"
+msgstr "<неуспешно читање везе>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2643,9 +2658,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s бајтова у %d датотеци"
 msgstr[1] "%s бајтова у %d датотеци"
-
-msgid "<readlink failed>"
-msgstr "<неуспешно читање везе>"
 
 msgid "Unknown tag on display format: "
 msgstr "Непозната ознака у формату приказа: "
@@ -2716,12 +2728,6 @@ msgstr "Са уграђеним уређивачем\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Користим системску библиотеку S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Користим укључену библиотеку S-Lang"
-
-msgid "with termcap database"
-msgstr "са базом termcap"
 
 msgid "with terminfo database"
 msgstr "са базом terminfo"
@@ -2854,9 +2860,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3610,6 +3613,12 @@ msgstr "Унутрашња грешка:"
 
 msgid "Changes to file lost"
 msgstr "Измене у датотеци су изгубљене"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Користим укључену библиотеку S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "са базом termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Домаћу"

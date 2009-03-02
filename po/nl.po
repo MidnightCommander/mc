@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-02-13 12:30+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -1181,7 +1181,7 @@ msgstr ""
 msgid " Setup "
 msgstr " Instellingen "
 
-#,c-format
+#, c-format
 msgid " Setup saved to ~/%s"
 msgstr " Instellingen opgeslagen in ~/%s"
 
@@ -1760,6 +1760,9 @@ msgstr "Bew&Erken -F4"
 msgid "&Find recursively"
 msgstr "&Vind recursief"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Beginnen bij:"
 
@@ -1998,6 +2001,9 @@ msgstr "&Verticaal"
 
 msgid "&Horizontal"
 msgstr "&Horizontaal"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "&Xterm titelbalk"
@@ -2630,6 +2636,9 @@ msgstr "Eigenaar"
 msgid "Group"
 msgstr "Groep"
 
+msgid "<readlink failed>"
+msgstr "<readlink mislukt>"
+
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2641,9 +2650,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytes in %d bestand"
 msgstr[1] "%s bytes in %d bestand(en)"
-
-msgid "<readlink failed>"
-msgstr "<readlink mislukt>"
 
 msgid "Unknown tag on display format: "
 msgstr "Onbekend label in weergaveformaat: "

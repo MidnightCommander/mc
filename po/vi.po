@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -55,9 +55,6 @@ msgstr " Tập tin %s quá lớn "
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-msgid " Enter file name: "
-msgstr " Hãy nhập tên tập tin: "
-
 msgid "Warning"
 msgstr "Cảnh báo"
 
@@ -102,6 +99,9 @@ msgstr " Chế độ ghi nhớ "
 
 msgid " Save As "
 msgstr " Ghi như "
+
+msgid " Enter file name: "
+msgstr " Hãy nhập tên tập tin: "
 
 msgid " A file already exists with this name. "
 msgstr " Tập tin có tên như vậy đã tồn tại. "
@@ -784,6 +784,9 @@ msgstr "tính đến kiể&U chữ"
 
 msgid "Sort order"
 msgstr "Thứ tự sắp xếp"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1759,6 +1762,9 @@ msgstr "&Soạn thảo - F4"
 msgid "&Find recursively"
 msgstr "Tìm kiếm toàn bộ (đệ qu&y)"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Bắt đầu từ:"
 
@@ -1993,6 +1999,9 @@ msgstr "&Thẳng đứng"
 
 msgid "&Horizontal"
 msgstr "&Nằm ngang"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "tiê&U đề cửa sổ xterm"
@@ -2482,6 +2491,9 @@ msgstr "tính tổn&G kích thước"
 msgid "&Verbose operation"
 msgstr "thao tác với thông báo &Dài dòng"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "nạ&P nhanh thư mục"
 
@@ -2624,6 +2636,9 @@ msgstr "Chủ sở hữu"
 msgid "Group"
 msgstr "Nhóm"
 
+msgid "<readlink failed>"
+msgstr "<đọc liên kết không thành công>"
+
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2633,9 +2648,6 @@ msgstr[0] "%s byte"
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s trong %d tập tin"
-
-msgid "<readlink failed>"
-msgstr "<đọc liên kết không thành công>"
 
 msgid "Unknown tag on display format: "
 msgstr "Thẻ ghi không rõ trong định dạng hiển thị: "
@@ -2707,12 +2719,6 @@ msgstr "Với Trình soạn thảo nội trú\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Sử dụng thư việc của S-Lang hệ thống"
-
-msgid "Using included S-Lang library"
-msgstr "Sử dụng thư việc S-Lang bao gồm"
-
-msgid "with termcap database"
-msgstr "với cơ sở dữ liệu termcap"
 
 msgid "with terminfo database"
 msgstr "với cơ sở dữ liệu terminfo"
@@ -2845,9 +2851,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3607,6 +3610,12 @@ msgstr "Lỗi nội bộ:"
 
 msgid "Changes to file lost"
 msgstr "Thay đổi tới tập tin bị mất"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Sử dụng thư việc S-Lang bao gồm"
+
+#~ msgid "with termcap database"
+#~ msgstr "với cơ sở dữ liệu termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Cá nhân"

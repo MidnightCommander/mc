@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-01-22 21:50+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -56,9 +56,6 @@ msgstr " Súbor je príliš veľký: "
 msgid "Macro recursion is too deep"
 msgstr "Rekurzia makra je príliš hlboká"
 
-msgid " Enter file name: "
-msgstr " Zadajte meno súbpru: "
-
 msgid "Warning"
 msgstr "Varovanie"
 
@@ -103,6 +100,9 @@ msgstr " Upraviť mód ukladania "
 
 msgid " Save As "
 msgstr " Uložiť ako "
+
+msgid " Enter file name: "
+msgstr " Zadajte meno súbpru: "
 
 msgid " A file already exists with this name. "
 msgstr " Súbor s daným meno už existuje. "
@@ -792,6 +792,9 @@ msgstr "&Citlivý na veľkosť"
 
 msgid "Sort order"
 msgstr "Poradie triedenia"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1763,6 +1766,9 @@ msgstr "&Editácia - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Začať na:"
 
@@ -1999,6 +2005,9 @@ msgstr "&Vertikálne"
 
 msgid "&Horizontal"
 msgstr "&Horizontálne"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "Titulok okna &Xterm"
@@ -2485,6 +2494,9 @@ msgstr "v&Ypočítať súčty"
 msgid "&Verbose operation"
 msgstr "&Mnohoslovná operácia"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "rýc&Hle načítanie adresára"
 
@@ -2627,6 +2639,9 @@ msgstr "Vlastník"
 msgid "Group"
 msgstr "Skupina"
 
+msgid "<readlink failed>"
+msgstr "<čítanie odkazu zlyhalo>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2638,9 +2653,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytov v %d súbore"
 msgstr[1] "%s bytov v %d súbore"
-
-msgid "<readlink failed>"
-msgstr "<čítanie odkazu zlyhalo>"
 
 msgid "Unknown tag on display format: "
 msgstr "Neznámy tag v zobrazenom formáte: "
@@ -2708,12 +2720,6 @@ msgstr "So zabudovaným editorom\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Použiť nainštalovaná knižnicu S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Použiť vloženú S-lang knižnicu"
-
-msgid "with termcap database"
-msgstr "s databázou termcap"
 
 msgid "with terminfo database"
 msgstr "s databázou terminfo"
@@ -2846,9 +2852,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3603,6 +3606,12 @@ msgstr "Interná chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Použiť vloženú S-lang knižnicu"
+
+#~ msgid "with termcap database"
+#~ msgstr "s databázou termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Domáci"

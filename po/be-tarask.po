@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
@@ -52,9 +52,6 @@ msgstr " Вельмі вялікі файл: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Увядзіце ймя файлу: "
-
 msgid "Warning"
 msgstr "Папярэджаньне"
 
@@ -99,6 +96,9 @@ msgstr " Рэжым захаваньня "
 
 msgid " Save As "
 msgstr " Захаваць як "
+
+msgid " Enter file name: "
+msgstr " Увядзіце ймя файлу: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с такім імем ужо йснуе. "
@@ -788,6 +788,9 @@ msgstr "Улік рэ&гістру"
 
 msgid "Sort order"
 msgstr "Парадак сартаваньня"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1765,6 +1768,9 @@ msgstr "&Праўка - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "  Стартаваць ад:"
 
@@ -2001,6 +2007,9 @@ msgstr "&Вертыкальнае"
 
 msgid "&Horizontal"
 msgstr "&Гарызантальнае"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2472,6 +2481,9 @@ msgstr "Падлічыць агульны &памер"
 msgid "&Verbose operation"
 msgstr "Дэталі апэрацы&яў"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Хуткая загрузка каталёгу"
 
@@ -2615,6 +2627,9 @@ msgstr "Уладальнік"
 msgid "Group"
 msgstr "Група"
 
+msgid "<readlink failed>"
+msgstr "<памылка чытаньня спасылкі>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2626,9 +2641,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s байтаў у %d файле"
 msgstr[1] "%s байтаў у %d файле"
-
-msgid "<readlink failed>"
-msgstr "<памылка чытаньня спасылкі>"
 
 msgid "Unknown tag on display format: "
 msgstr "Невядомы тэг у фармаце адлюстраваньня: "
@@ -2697,12 +2709,6 @@ msgstr "З убудаваным рэдактарам\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Выкарыстаньне усталяванае сыстэмнае бібліятэкі S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Выкарыстаньне бібліятэкі S-Lang"
-
-msgid "with termcap database"
-msgstr "з базай дадзеных termcap"
 
 msgid "with terminfo database"
 msgstr "з базай дадзеных terminfo"
@@ -2836,9 +2842,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3597,6 +3600,12 @@ msgstr " Нутраная памылка:"
 
 msgid "Changes to file lost"
 msgstr "Зьмены для файлу страчаны"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Выкарыстаньне бібліятэкі S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "з базай дадзеных termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Пэрсанальны"

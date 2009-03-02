@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -59,9 +59,6 @@ msgstr " Arquivo grande demais: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Informe nome do arquivo: "
-
 msgid "Warning"
 msgstr "Aviso"
 
@@ -108,6 +105,9 @@ msgstr " Editar modo de salvamento "
 
 msgid " Save As "
 msgstr " Salvar Como "
+
+msgid " Enter file name: "
+msgstr " Informe nome do arquivo: "
 
 msgid " A file already exists with this name. "
 msgstr " Um arquivo com esse nome já existe. "
@@ -803,6 +803,9 @@ msgstr "sensível à &caixa (minúsc/maiusc)"
 
 msgid "Sort order"
 msgstr "Parâmetros de ordenamento"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1790,6 +1793,9 @@ msgstr "&Editar - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Iniciar em:"
 
@@ -2026,6 +2032,9 @@ msgstr "&Vertical"
 
 msgid "&Horizontal"
 msgstr "&Horizontal"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2520,6 +2529,9 @@ msgstr "Calcular Totais"
 msgid "&Verbose operation"
 msgstr "Mostrar P&rogresso"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "Atualização &Rápida de Diretório"
 
@@ -2663,6 +2675,9 @@ msgstr "Dono"
 msgid "Group"
 msgstr "Grupo"
 
+msgid "<readlink failed>"
+msgstr "<erro ao ler ligação>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2674,9 +2689,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytes em %d arquivo"
 msgstr[1] "%s bytes em %d arquivo"
-
-msgid "<readlink failed>"
-msgstr "<erro ao ler ligação>"
 
 #, fuzzy
 msgid "Unknown tag on display format: "
@@ -2742,14 +2754,6 @@ msgstr "Com Editor embutido\n"
 #, fuzzy
 msgid "Using system-installed S-Lang library"
 msgstr "instalado no sistema"
-
-#, fuzzy
-msgid "Using included S-Lang library"
-msgstr "Biblioteca S-lang com "
-
-#, fuzzy
-msgid "with termcap database"
-msgstr " banco de dados"
 
 msgid "with terminfo database"
 msgstr ""
@@ -2896,9 +2900,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3663,6 +3664,14 @@ msgstr "Erro interno:"
 #
 msgid "Changes to file lost"
 msgstr "Alterações no arquivo perdidas"
+
+#, fuzzy
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Biblioteca S-lang com "
+
+#, fuzzy
+#~ msgid "with termcap database"
+#~ msgstr " banco de dados"
 
 #~ msgid "&Home"
 #~ msgstr "Diretório &Pessoal "

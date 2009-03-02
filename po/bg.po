@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -52,10 +52,6 @@ msgstr " Файлът е прекалено голям: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Въведете ред: "
-
 msgid "Warning"
 msgstr "Внимание"
 
@@ -100,6 +96,10 @@ msgstr " Промени начина на запазване "
 
 msgid " Save As "
 msgstr " Запази като "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Въведете ред: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с това има вече съществува. "
@@ -792,6 +792,9 @@ msgstr "Различавай главни/малки"
 
 msgid "Sort order"
 msgstr "Ред на сортиране"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1767,6 +1770,9 @@ msgstr "Редактирай - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Започни от:"
 
@@ -2003,6 +2009,9 @@ msgstr "Вертикално"
 
 msgid "&Horizontal"
 msgstr "Хоризонтално"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2493,6 +2502,9 @@ msgstr "Пресмятай общите размери"
 msgid "&Verbose operation"
 msgstr "Детайли при операции"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "Бързо опресняване"
 
@@ -2636,6 +2648,9 @@ msgstr "Собственик"
 msgid "Group"
 msgstr "Група"
 
+msgid "<readlink failed>"
+msgstr "<непрочетена връзка>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2647,9 +2662,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s байта в %d файл"
 msgstr[1] "%s байта в %d файл"
-
-msgid "<readlink failed>"
-msgstr "<непрочетена връзка>"
 
 msgid "Unknown tag on display format: "
 msgstr "Непознат елемент във формата на дисплея: "
@@ -2717,12 +2729,6 @@ msgstr "С вграден редактор\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Със системно-инсталирана S-Lang библиотека"
-
-msgid "Using included S-Lang library"
-msgstr "С вградена S-Lang библиотека"
-
-msgid "with termcap database"
-msgstr "с termcap база данни"
 
 msgid "with terminfo database"
 msgstr "с terminfo база данни"
@@ -2855,9 +2861,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3616,6 +3619,12 @@ msgstr "Вътрешна грешка:"
 
 msgid "Changes to file lost"
 msgstr "Промените във файла изгубени"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "С вградена S-Lang библиотека"
+
+#~ msgid "with termcap database"
+#~ msgstr "с termcap база данни"
 
 #~ msgid "&Home"
 #~ msgstr "Домашен"

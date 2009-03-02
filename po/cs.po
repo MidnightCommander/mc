@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -59,9 +59,6 @@ msgstr " Soubor %s je pøíli¹ velký "
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je pøíli¹ hluboká"
 
-msgid " Enter file name: "
-msgstr " Zadejte jméno souboru: "
-
 msgid "Warning"
 msgstr "Varování"
 
@@ -106,6 +103,9 @@ msgstr " Upravit ukládací re¾im "
 
 msgid " Save As "
 msgstr " Ulo¾it jako "
+
+msgid " Enter file name: "
+msgstr " Zadejte jméno souboru: "
 
 msgid " A file already exists with this name. "
 msgstr " Soubor tohoto jména ji¾ existuje. "
@@ -792,6 +792,9 @@ msgstr "v¹ímat si velikos&Ti písmen"
 
 msgid "Sort order"
 msgstr "Poøadí"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1774,6 +1777,9 @@ msgstr "&Uprav - F4"
 msgid "&Find recursively"
 msgstr "najít re&Kurzivnì"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Zaèít v:"
 
@@ -2010,6 +2016,9 @@ msgstr "&Vertikální"
 
 msgid "&Horizontal"
 msgstr "&Horizontální"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "nadpis okna &Xtermu"
@@ -2499,6 +2508,9 @@ msgstr "poèíta&T souèty"
 msgid "&Verbose operation"
 msgstr "\"upovídanì&J¹í\" operace"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Rychlé naèítání adresáøù"
 
@@ -2643,6 +2655,9 @@ msgstr "Vlastník"
 msgid "Group"
 msgstr "Skupina"
 
+msgid "<readlink failed>"
+msgstr "<ètení odkazu selhalo>"
+
 # Pøeklad by mìl být "bajtù", chceme-li jednotku pøekládat.
 #, c-format
 msgid "%s byte"
@@ -2657,9 +2672,6 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s v %d souboru"
 msgstr[1] "%s ve %d souborech"
 msgstr[2] "%s v %d souborech"
-
-msgid "<readlink failed>"
-msgstr "<ètení odkazu selhalo>"
 
 msgid "Unknown tag on display format: "
 msgstr "Neznámá popiska ve formátu zobrazení: "
@@ -2730,12 +2742,6 @@ msgstr "S vestavìným editorem\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Pou¾ívá se systémová knihovna S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Pou¾ívá se pøilo¾ená knihovna S-Lang"
-
-msgid "with termcap database"
-msgstr "s databází termcap"
 
 msgid "with terminfo database"
 msgstr "s databází terminfo"
@@ -2870,9 +2876,6 @@ msgstr "%e.%b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e.%b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3630,6 +3633,12 @@ msgstr "Interní chyba:"
 
 msgid "Changes to file lost"
 msgstr "Zmìny souboru byly ztraceny"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Pou¾ívá se pøilo¾ená knihovna S-Lang"
+
+#~ msgid "with termcap database"
+#~ msgstr "s databází termcap"
 
 #~ msgid " Notice "
 #~ msgstr " Poznámka "

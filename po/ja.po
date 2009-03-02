@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -56,10 +56,6 @@ msgstr "ファイルが大きすぎます: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " 行番号を入力してください: "
-
 msgid "Warning"
 msgstr "警告"
 
@@ -104,6 +100,10 @@ msgstr "保存方法を変更 "
 
 msgid " Save As "
 msgstr " 別名で保存 "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " 行番号を入力してください: "
 
 msgid " A file already exists with this name. "
 msgstr "同名のファイルが存在します"
@@ -794,6 +794,9 @@ msgstr "大文字・小文字を区別(&t)"
 
 msgid "Sort order"
 msgstr "並び変える"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1771,6 +1774,9 @@ msgstr "編集(&E) - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "開始場所:"
 
@@ -2007,6 +2013,9 @@ msgstr "垂直(&V)"
 
 msgid "&Horizontal"
 msgstr "水平(&H)"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2498,6 +2507,9 @@ msgstr "合計を計算(&T)"
 msgid "&Verbose operation"
 msgstr "やかましく動作"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "高速なディレクトリの再読込"
 
@@ -2641,6 +2653,9 @@ msgstr "所有者"
 msgid "Group"
 msgstr "グループ"
 
+msgid "<readlink failed>"
+msgstr "<リンク読みだしに失敗>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2652,9 +2667,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s バイト %d ファイル"
 msgstr[1] "%s バイト %d ファイル"
-
-msgid "<readlink failed>"
-msgstr "<リンク読みだしに失敗>"
 
 msgid "Unknown tag on display format: "
 msgstr "表示形式に不明なタグがあります: "
@@ -2722,12 +2734,6 @@ msgstr "内蔵エディタ使用\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "システムにインストールされた S-Langライブラリを使用"
-
-msgid "Using included S-Lang library"
-msgstr "内蔵の S-Langライブラリを使用"
-
-msgid "with termcap database"
-msgstr "termcapデータベースを使用"
 
 msgid "with terminfo database"
 msgstr "terminfoデータベースを使用"
@@ -2860,9 +2866,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3614,6 +3617,12 @@ msgstr "内部エラー:"
 
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "内蔵の S-Langライブラリを使用"
+
+#~ msgid "with termcap database"
+#~ msgstr "termcapデータベースを使用"
 
 #~ msgid "&Home"
 #~ msgstr "ホーム(&H)"

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
@@ -58,9 +58,6 @@ msgstr " Il file %s è troppo grande "
 msgid "Macro recursion is too deep"
 msgstr "La ricorsione macro è troppo profonda"
 
-msgid " Enter file name: "
-msgstr " Inserire nome file: "
-
 msgid "Warning"
 msgstr "Attenzione"
 
@@ -105,6 +102,9 @@ msgstr " Modifica modo salvataggio"
 
 msgid " Save As "
 msgstr " Salva come "
+
+msgid " Enter file name: "
+msgstr " Inserire nome file: "
 
 msgid " A file already exists with this name. "
 msgstr " Un file con lo stesso nome esiste già. "
@@ -786,6 +786,9 @@ msgstr "Controlla mai&uscole/minuscole"
 
 msgid "Sort order"
 msgstr "Modalità ordinamento"
+
+msgid "Executable first"
+msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " conferma cancellazione di&r favorite "
@@ -1764,6 +1767,9 @@ msgstr "&Modifica - F4"
 msgid "&Find recursively"
 msgstr "&Trova ricorsivamente"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Inizia da:"
 
@@ -2003,6 +2009,9 @@ msgstr "&Verticale"
 
 msgid "&Horizontal"
 msgstr "Orizzontal&e"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "Titolo finestra &xerm"
@@ -2490,6 +2499,9 @@ msgstr "Calcola &totali"
 msgid "&Verbose operation"
 msgstr "Operazioni &prolisse"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "Aggiornamento rapido &directory"
 
@@ -2633,6 +2645,9 @@ msgstr "Proprietario"
 msgid "Group"
 msgstr "Gruppo"
 
+msgid "<readlink failed>"
+msgstr "<readlink fallito>"
+
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2644,9 +2659,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s byte in %d file"
 msgstr[1] " %s byte in %d file"
-
-msgid "<readlink failed>"
-msgstr "<readlink fallito>"
 
 msgid "Unknown tag on display format: "
 msgstr "Campo sconosciuto per la visualizzazione: "
@@ -2717,12 +2729,6 @@ msgstr "Con editor integrato\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Uso la libreria S-Lang installata di sistema"
-
-msgid "Using included S-Lang library"
-msgstr "Uso della libreria S-Lang inclusa"
-
-msgid "with termcap database"
-msgstr "con database termcap"
 
 msgid "with terminfo database"
 msgstr "con database terminfo"
@@ -2855,9 +2861,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr "(non valido)"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3613,6 +3616,15 @@ msgstr " Errore interno:"
 
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Uso della libreria S-Lang inclusa"
+
+#~ msgid "with termcap database"
+#~ msgstr "con database termcap"
+
+#~ msgid "(invalid)"
+#~ msgstr "(non valido)"
 
 #~ msgid " Notice "
 #~ msgstr " Avviso "

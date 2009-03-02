@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -59,9 +59,6 @@ msgstr " A(z) \"%s\" fájl túl nagy "
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
 
-msgid " Enter file name: "
-msgstr " Fájlnév: "
-
 #
 msgid "Warning"
 msgstr "Figyelem"
@@ -110,6 +107,9 @@ msgstr " Mentési mód "
 
 msgid " Save As "
 msgstr " Mentés más névvel "
+
+msgid " Enter file name: "
+msgstr " Fájlnév: "
 
 msgid " A file already exists with this name. "
 msgstr " Már létezik ilyen nevû fájl. "
@@ -811,6 +811,9 @@ msgstr "&Kis-/nagybetû számít"
 
 msgid "Sort order"
 msgstr " Rendezési mód "
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1845,6 +1848,9 @@ msgstr "&Szerkesztés - F4"
 msgid "&Find recursively"
 msgstr "Rek&urzív keresés"
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Kezdõkönyvtár:"
 
@@ -2085,6 +2091,9 @@ msgstr "&Függõleges"
 
 msgid "&Horizontal"
 msgstr "&Vízszintes"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "&Xterm-ablakcím"
@@ -2596,6 +2605,9 @@ msgstr "Ö&sszesítõ értékek meghatározása"
 msgid "&Verbose operation"
 msgstr "Részletes ü&zenetek"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "G&yors könyvtár-újraolvasás"
 
@@ -2748,6 +2760,9 @@ msgstr "Tulajd."
 msgid "Group"
 msgstr "Csoport"
 
+msgid "<readlink failed>"
+msgstr "<hibás szim. link>"
+
 # szóköz: elválasztáshoz
 #, fuzzy, c-format
 msgid "%s byte"
@@ -2760,9 +2775,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bájt %d fájlban"
 msgstr[1] "%s bájt %d fájlban"
-
-msgid "<readlink failed>"
-msgstr "<hibás szim. link>"
 
 msgid "Unknown tag on display format: "
 msgstr "Ismeretlen címke a megjelenítési formátumban: "
@@ -2833,12 +2845,6 @@ msgstr "Beépített szövegszerkesztõvel\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "A korábban telepített S-Lang könyvtár használata"
-
-msgid "Using included S-Lang library"
-msgstr "A szoftverrel szállított S-Lang könyvtár használata"
-
-msgid "with termcap database"
-msgstr "Termcap adatbázissal"
 
 msgid "with terminfo database"
 msgstr "Terminfo adatbázissal"
@@ -2975,9 +2981,6 @@ msgstr "%b %e %H.%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3752,6 +3755,12 @@ msgstr "Belsõ programhiba:"
 
 msgid "Changes to file lost"
 msgstr "A fájl módosításai nem lettek rögzítve."
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "A szoftverrel szállított S-Lang könyvtár használata"
+
+#~ msgid "with termcap database"
+#~ msgstr "Termcap adatbázissal"
 
 #~ msgid "&Home"
 #~ msgstr "&Sajátomat (\"home\")"

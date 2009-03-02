@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -55,10 +55,6 @@ msgstr " Fails ir par lielu: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Ievadîet lîniju: "
-
 msgid "Warning"
 msgstr "Brîdinâjums"
 
@@ -103,6 +99,10 @@ msgstr " Rediìçt Glabâðanas Reþîmu "
 
 msgid " Save As "
 msgstr " Glabât Kâ "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Ievadîet lîniju: "
 
 msgid " A file already exists with this name. "
 msgstr " Fails ar tâdu nosaukumu jau eksistç. "
@@ -795,6 +795,9 @@ msgstr "lielo/ma&zo burtu jûtîgs"
 
 msgid "Sort order"
 msgstr "Kârtoðanas secîba"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1772,6 +1775,9 @@ msgstr "&Rediìçt - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Sâknçt iekð:"
 
@@ -2008,6 +2014,9 @@ msgstr "&Vertikâli"
 
 msgid "&Horizontal"
 msgstr "&Horizontâli"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2503,6 +2512,9 @@ msgstr "Sarçíinât &Kopsummas"
 msgid "&Verbose operation"
 msgstr "&Vârdiskas oprerâcijâs"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "â&Tra direktoriju pârlâde"
 
@@ -2647,6 +2659,9 @@ msgstr "Îpaðnieks"
 msgid "Group"
 msgstr "Grupa"
 
+msgid "<readlink failed>"
+msgstr "<lasîtsaiti neveiksme>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2658,9 +2673,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s baiti %d failâ"
 msgstr[1] "%s baiti %d failâ"
-
-msgid "<readlink failed>"
-msgstr "<lasîtsaiti neveiksme>"
 
 msgid "Unknown tag on display format: "
 msgstr "Nezinâma zime displeja formâtâ: "
@@ -2729,12 +2741,6 @@ msgstr "Ar iebûvçto Redaktoru\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Lietoju sistçmâ uzinstalçto S-Land bibliotçku"
-
-msgid "Using included S-Lang library"
-msgstr "Lietoju iekïauto S-Lang bibliotçku"
-
-msgid "with termcap database"
-msgstr "ar termcap datubâzi"
 
 msgid "with terminfo database"
 msgstr "ar terminfo datubâzi"
@@ -2867,9 +2873,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3629,6 +3632,12 @@ msgstr "Iekðçjâ kïûda:"
 
 msgid "Changes to file lost"
 msgstr "Izmaiòas failâ pazuduðas"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Lietoju iekïauto S-Lang bibliotçku"
+
+#~ msgid "with termcap database"
+#~ msgstr "ar termcap datubâzi"
 
 #~ msgid "&Home"
 #~ msgstr "&Mâjas"

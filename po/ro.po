@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -57,9 +57,6 @@ msgstr " Fiºierul este prea mare: "
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
 
-msgid " Enter file name: "
-msgstr " Introduceþi numele fiºierului: "
-
 msgid "Warning"
 msgstr "Atenþie"
 
@@ -104,6 +101,9 @@ msgstr " Editeazã Modul de Salvare "
 
 msgid " Save As "
 msgstr " Salveazã Ca "
+
+msgid " Enter file name: "
+msgstr " Introduceþi numele fiºierului: "
 
 msgid " A file already exists with this name. "
 msgstr " Existã deja un fiºier cu acest nume. "
@@ -793,6 +793,9 @@ msgstr "nu ignora &Majusculele "
 
 msgid "Sort order"
 msgstr "Ordinea de sortare"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1764,6 +1767,9 @@ msgstr "&Editare - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Încep la:"
 
@@ -2000,6 +2006,9 @@ msgstr "&Verticalã"
 
 msgid "&Horizontal"
 msgstr "ori&Zontalã"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "barã titlu &Xterm"
@@ -2488,6 +2497,9 @@ msgstr "calculeazã &Totalurile"
 msgid "&Verbose operation"
 msgstr "operaþii des&Criptive"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "reîncarc&Ã dir. rapid"
 
@@ -2631,6 +2643,9 @@ msgstr "Proprietar"
 msgid "Group"
 msgstr "Grup"
 
+msgid "<readlink failed>"
+msgstr "<readlink eºuat>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2642,9 +2657,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s bytes în %d fiºier"
 msgstr[1] " %s bytes în %d fiºier"
-
-msgid "<readlink failed>"
-msgstr "<readlink eºuat>"
 
 msgid "Unknown tag on display format: "
 msgstr "Etichetã necunoscutã pe formatul de afiºare: "
@@ -2712,12 +2724,6 @@ msgstr "Cu Editor integrat\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Utilizând versiunea instalatã de bibliotecã S-Lang"
-
-msgid "Using included S-Lang library"
-msgstr "Utilizând biblioteca S-lang inclusã"
-
-msgid "with termcap database"
-msgstr "cu baza de date termcap"
 
 msgid "with terminfo database"
 msgstr "cu baza de date terminfo"
@@ -2850,9 +2856,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3606,6 +3609,12 @@ msgstr "Eroare internã:"
 
 msgid "Changes to file lost"
 msgstr "S-au pierdut schimbãrile efectuate în fiºier"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Utilizând biblioteca S-lang inclusã"
+
+#~ msgid "with termcap database"
+#~ msgstr "cu baza de date termcap"
 
 #~ msgid "&Home"
 #~ msgstr "&Personal"

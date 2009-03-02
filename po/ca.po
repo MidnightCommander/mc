@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -56,9 +56,6 @@ msgstr " El fitxer és massa gran: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Introduïu el nom del fitxer: "
-
 msgid "Warning"
 msgstr "Avís"
 
@@ -104,6 +101,9 @@ msgstr " Edita la manera de desar "
 
 msgid " Save As "
 msgstr " Desa com a"
+
+msgid " Enter file name: "
+msgstr " Introduïu el nom del fitxer: "
 
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
@@ -796,6 +796,9 @@ msgstr "distingeix entre majú&Scules/minúscules"
 
 msgid "Sort order"
 msgstr "Ordre de classificació"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1773,6 +1776,9 @@ msgstr "&Edita - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Comença a:"
 
@@ -2011,6 +2017,9 @@ msgstr "&Vertical"
 
 msgid "&Horizontal"
 msgstr "&Horitzontal"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2506,6 +2515,9 @@ msgstr "calcula els &Totals"
 msgid "&Verbose operation"
 msgstr "detalla les &Operacions"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "recàrrega &Ràpida de directoris"
 
@@ -2651,6 +2663,9 @@ msgstr "Propietari"
 msgid "Group"
 msgstr "Grup"
 
+msgid "<readlink failed>"
+msgstr "<S'ha produït una fallida en llegir l'enllaç>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2662,9 +2677,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytes en %d fitxer"
 msgstr[1] "%s bytes en %d fitxer"
-
-msgid "<readlink failed>"
-msgstr "<S'ha produït una fallida en llegir l'enllaç>"
 
 msgid "Unknown tag on display format: "
 msgstr "Marcador desconegut al format de pantalla: "
@@ -2735,12 +2747,6 @@ msgstr "Amb editor incorporat\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "S'està utilitzant la biblioteca S-Lang instal·lada al sistema"
-
-msgid "Using included S-Lang library"
-msgstr "S'està utilitzant la biblioteca S-Lang inclosa"
-
-msgid "with termcap database"
-msgstr "amb la base de dades termcap"
 
 msgid "with terminfo database"
 msgstr "amb la base de dades terminfo"
@@ -2874,9 +2880,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3637,6 +3640,12 @@ msgstr "Error intern:"
 
 msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "S'està utilitzant la biblioteca S-Lang inclosa"
+
+#~ msgid "with termcap database"
+#~ msgstr "amb la base de dades termcap"
 
 #~ msgid "&Home"
 #~ msgstr "Directori de l'&Usuari "

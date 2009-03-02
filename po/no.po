@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -54,9 +54,6 @@ msgstr " Filen er for stor: "
 msgid "Macro recursion is too deep"
 msgstr "For dyp rekursjon i makro"
 
-msgid " Enter file name: "
-msgstr " Skriv inn filnavn: "
-
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -101,6 +98,9 @@ msgstr " Rediger lagringsmodus "
 
 msgid " Save As "
 msgstr " Lagre som "
+
+msgid " Enter file name: "
+msgstr " Skriv inn filnavn: "
 
 msgid " A file already exists with this name. "
 msgstr " En fil med dette navnet eksisterer allerede. "
@@ -791,6 +791,9 @@ msgstr "skill mellom s&tore/små tegn"
 
 msgid "Sort order"
 msgstr "Sorteringsrekkefølge"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1766,6 +1769,9 @@ msgstr "Rediger - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Start ved:"
 
@@ -2002,6 +2008,9 @@ msgstr "Vertikal"
 
 msgid "&Horizontal"
 msgstr "Horisontal"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2490,6 +2499,9 @@ msgstr "Beregn totaler"
 msgid "&Verbose operation"
 msgstr "utvidet operasjon"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "rask katalogoppfrisking"
 
@@ -2633,6 +2645,9 @@ msgstr "Eier"
 msgid "Group"
 msgstr "Gruppe"
 
+msgid "<readlink failed>"
+msgstr "<readlink feilet>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2644,9 +2659,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytes i %d fil"
 msgstr[1] "%s bytes i %d fil"
-
-msgid "<readlink failed>"
-msgstr "<readlink feilet>"
 
 msgid "Unknown tag on display format: "
 msgstr "Ukjent tag på skjermformat: "
@@ -2714,12 +2726,6 @@ msgstr "Med innebygget editor\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Bruker system-installert S-Lang bibliotek"
-
-msgid "Using included S-Lang library"
-msgstr "Bruker eget S-lang bibliotek"
-
-msgid "with termcap database"
-msgstr "med termcap-database"
 
 msgid "with terminfo database"
 msgstr "med terminfo-database"
@@ -2852,9 +2858,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3609,6 +3612,12 @@ msgstr "Intern feil:"
 
 msgid "Changes to file lost"
 msgstr "Endringer i filen tapt"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Bruker eget S-lang bibliotek"
+
+#~ msgid "with termcap database"
+#~ msgstr "med termcap-database"
 
 #~ msgid "&Home"
 #~ msgstr "&Hjemme"

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -55,9 +55,6 @@ msgstr " Tiedosto on liian suuri: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Anna tiedostonimi: "
-
 msgid "Warning"
 msgstr "Varoitus"
 
@@ -104,6 +101,9 @@ msgstr " Muokkaa tallennusmoodia "
 
 msgid " Save As "
 msgstr " Tallenna nimellä "
+
+msgid " Enter file name: "
+msgstr " Anna tiedostonimi: "
 
 msgid " A file already exists with this name. "
 msgstr " Tämänniminen tiedosto on jo olemassa. "
@@ -793,6 +793,9 @@ msgstr "&Isot/pienet eroavat"
 
 msgid "Sort order"
 msgstr "Järjestys"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1723,6 +1726,9 @@ msgstr ""
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr ""
 
@@ -1955,6 +1961,9 @@ msgid "&Vertical"
 msgstr ""
 
 msgid "&Horizontal"
+msgstr ""
+
+msgid "show free sp&Ace"
 msgstr ""
 
 msgid "&Xterm window title"
@@ -2406,6 +2415,9 @@ msgstr ""
 msgid "&Verbose operation"
 msgstr ""
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr ""
 
@@ -2549,6 +2561,9 @@ msgstr "Omistaja"
 msgid "Group"
 msgstr "Ryhmä"
 
+msgid "<readlink failed>"
+msgstr "<linkin luku epäonnistui>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2560,9 +2575,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s tavua %d tiedostossa"
 msgstr[1] "%s tavua %d tiedostossa"
-
-msgid "<readlink failed>"
-msgstr "<linkin luku epäonnistui>"
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -2624,13 +2636,6 @@ msgid "With builtin Editor\n"
 msgstr ""
 
 msgid "Using system-installed S-Lang library"
-msgstr ""
-
-#, fuzzy
-msgid "Using included S-Lang library"
-msgstr "Virkistä hakemistonäkymä"
-
-msgid "with termcap database"
 msgstr ""
 
 msgid "with terminfo database"
@@ -2758,9 +2763,6 @@ msgid "%b %e %H:%M"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
-
-msgid "(invalid)"
 msgstr ""
 
 #, fuzzy, c-format
@@ -3495,6 +3497,10 @@ msgstr ""
 #, fuzzy
 msgid "Changes to file lost"
 msgstr "&Pitkä tiedostolista"
+
+#, fuzzy
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Virkistä hakemistonäkymä"
 
 #~ msgid "&Home"
 #~ msgstr "&Koti"

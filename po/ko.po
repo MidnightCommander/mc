@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -53,9 +53,6 @@ msgstr " 파일 크기가 너무 큼: "
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
 
-msgid " Enter file name: "
-msgstr " 파일명 입력: "
-
 msgid "Warning"
 msgstr "경고"
 
@@ -100,6 +97,9 @@ msgstr " 편집 저장 모드 "
 
 msgid " Save As "
 msgstr " 새이름으로 저장 "
+
+msgid " Enter file name: "
+msgstr " 파일명 입력: "
 
 msgid " A file already exists with this name. "
 msgstr " 같은 이름의 파일이 이미 있습니다. "
@@ -788,6 +788,9 @@ msgstr "대소문자 구분(&t)"
 
 msgid "Sort order"
 msgstr "정렬 순서"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1759,6 +1762,9 @@ msgstr "편집(&E) - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "시작위치:"
 
@@ -1995,6 +2001,9 @@ msgstr "수직(&V)"
 
 msgid "&Horizontal"
 msgstr "수평(&H)"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "X 터미널 창 제목(&X)"
@@ -2481,6 +2490,9 @@ msgstr "Compute &Totals"
 msgid "&Verbose operation"
 msgstr "동작할 때 말을 많이(&V)"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "디렉토리 빨리 다시읽기(&F)"
 
@@ -2623,6 +2635,9 @@ msgstr "소유자"
 msgid "Group"
 msgstr "집단"
 
+msgid "<readlink failed>"
+msgstr "<readlink 실패>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2634,9 +2649,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bytes in %d file"
 msgstr[1] "%s bytes in %d file"
-
-msgid "<readlink failed>"
-msgstr "<readlink 실패>"
 
 msgid "Unknown tag on display format: "
 msgstr "출력 형식에 모르는 태그: "
@@ -2704,12 +2716,6 @@ msgstr "With builtin Editor\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "시스템에 인스톨된 S-Lang 라이브러리 사용"
-
-msgid "Using included S-Lang library"
-msgstr "내장된 S-Lang 라이브러리 사용"
-
-msgid "with termcap database"
-msgstr "termcap 데이타베이스 사용"
 
 msgid "with terminfo database"
 msgstr "terminfo 데이타베이스 사용"
@@ -2842,9 +2848,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3595,6 +3598,12 @@ msgstr "내부 오류:"
 
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "내장된 S-Lang 라이브러리 사용"
+
+#~ msgid "with termcap database"
+#~ msgstr "termcap 데이타베이스 사용"
 
 #~ msgid "&Home"
 #~ msgstr "홈(&H)"

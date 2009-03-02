@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-21 16:44+0200\n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -795,7 +795,7 @@ msgid "Sort order"
 msgstr "Порядок сортировки"
 
 msgid "Executable first"
-msgstr ""
+msgstr "Сначала исполняемые"
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1189,9 +1189,9 @@ msgstr ""
 msgid " Setup "
 msgstr " Настройка "
 
-#, fuzzy, c-format
+#, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Параметры сохранены в ~/"
+msgstr " Параметры сохранены в ~/%s"
 
 #, c-format
 msgid ""
@@ -1765,11 +1765,10 @@ msgstr "Прос&мотр - F3"
 msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
-#, fuzzy
 msgid "&Find recursively"
 msgstr "Найти ре&курсивно"
 
-msgid "Ski&p hidden"
+msgid "S&kip hidden"
 msgstr "Пропускать скр&ытые"
 
 msgid "Start at:"
@@ -2979,9 +2978,8 @@ msgstr ""
 msgid " Goto Address "
 msgstr " Перейти на адрес "
 
-#, fuzzy
 msgid " Invalid address "
-msgstr " Неверный пароль "
+msgstr " Неверный адрес "
 
 msgid " Enter regexp:"
 msgstr " Введите регулярное выражение:"

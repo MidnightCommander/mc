@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -62,10 +62,6 @@ msgstr " Li fitchî est trop grand: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Diner roye: "
-
 msgid "Warning"
 msgstr "Advertixhmint"
 
@@ -111,6 +107,10 @@ msgstr " Môde Aspougnî Schaper "
 
 msgid " Save As "
 msgstr " Schaper et rlomer "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Diner roye: "
 
 msgid " A file already exists with this name. "
 msgstr " I gn a ddja on fitchî lomé insi. "
@@ -806,6 +806,9 @@ msgstr "grandès <> ptitès letes"
 
 msgid "Sort order"
 msgstr "Ôrde po relire"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1789,6 +1792,9 @@ msgstr "&Aspougnî - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Ataker a:"
 
@@ -2026,6 +2032,9 @@ msgstr "D' &Astampé"
 
 msgid "&Horizontal"
 msgstr "Di &Coûtchî"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2497,6 +2506,9 @@ msgstr ""
 msgid "&Verbose operation"
 msgstr ""
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr ""
 
@@ -2640,6 +2652,9 @@ msgstr "Da"
 msgid "Group"
 msgstr "Groupe"
 
+msgid "<readlink failed>"
+msgstr "<readlink a fwait berwete>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2651,9 +2666,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s octets e fitchî %d"
 msgstr[1] "%s octets e fitchî %d"
-
-msgid "<readlink failed>"
-msgstr "<readlink a fwait berwete>"
 
 msgid "Unknown tag on display format: "
 msgstr ""
@@ -2716,14 +2728,6 @@ msgstr ""
 
 msgid "Using system-installed S-Lang library"
 msgstr ""
-
-#, fuzzy
-msgid "Using included S-Lang library"
-msgstr "lîvreye S-lang avou "
-
-#, fuzzy
-msgid "with termcap database"
-msgstr " båze di dnêyes"
 
 msgid "with terminfo database"
 msgstr ""
@@ -2859,9 +2863,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3593,6 +3594,14 @@ msgstr "Divintrinne aroke:"
 
 msgid "Changes to file lost"
 msgstr "Les candjmints do fitchî ont stî pierdous"
+
+#, fuzzy
+#~ msgid "Using included S-Lang library"
+#~ msgstr "lîvreye S-lang avou "
+
+#, fuzzy
+#~ msgid "with termcap database"
+#~ msgstr " båze di dnêyes"
 
 #~ msgid "&Home"
 #~ msgstr "&Måjhon"

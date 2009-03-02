@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -55,10 +55,6 @@ msgstr " 文件太大："
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " 输入行号："
-
 msgid "Warning"
 msgstr "警告"
 
@@ -103,6 +99,10 @@ msgstr " 编辑保存模式 "
 
 msgid " Save As "
 msgstr " 保存为"
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " 输入行号："
 
 msgid " A file already exists with this name. "
 msgstr " 同名文件已存在。"
@@ -790,6 +790,9 @@ msgstr "大小写敏感(&T)"
 
 msgid "Sort order"
 msgstr "排序"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1762,6 +1765,9 @@ msgstr "编辑(&E) - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "开始于："
 
@@ -1998,6 +2004,9 @@ msgstr "垂直(&V)"
 
 msgid "&Horizontal"
 msgstr "水平(&H)"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2479,6 +2488,9 @@ msgstr "计算总和(&T)"
 msgid "&Verbose operation"
 msgstr "冗余操作(&V)"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "快速重载入目录(&F)"
 
@@ -2622,6 +2634,9 @@ msgstr "属主"
 msgid "Group"
 msgstr "群组"
 
+msgid "<readlink failed>"
+msgstr "<readlink 失败>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2633,9 +2648,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%2$d 个文件，%1$s 字节"
 msgstr[1] "%2$d 个文件，%1$s 字节"
-
-msgid "<readlink failed>"
-msgstr "<readlink 失败>"
 
 msgid "Unknown tag on display format: "
 msgstr "显示格式中未知的标记："
@@ -2703,12 +2715,6 @@ msgstr "内建编辑器\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "使用系统中安装的 S-Lang 库"
-
-msgid "Using included S-Lang library"
-msgstr "使用自带的 S-Lang 库"
-
-msgid "with termcap database"
-msgstr "termcap 数据库"
 
 msgid "with terminfo database"
 msgstr "terminfo 数据库"
@@ -2841,9 +2847,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3602,6 +3605,12 @@ msgstr "内部错误："
 
 msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "使用自带的 S-Lang 库"
+
+#~ msgid "with termcap database"
+#~ msgstr "termcap 数据库"
 
 #~ msgid "&Home"
 #~ msgstr "主目录(&H)"

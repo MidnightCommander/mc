@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -59,9 +59,6 @@ msgstr " Маш том файл: "
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
 
-msgid " Enter file name: "
-msgstr " Файлын нэрээ оруул: "
-
 msgid "Warning"
 msgstr "Анхааруулга"
 
@@ -106,6 +103,9 @@ msgstr " Хадгалах гормыг засварлах "
 
 msgid " Save As "
 msgstr " Гэж хадгалах "
+
+msgid " Enter file name: "
+msgstr " Файлын нэрээ оруул: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл аль хэдийнэ ийм нэрээр үүссэн байна. "
@@ -797,6 +797,9 @@ msgstr "Учет ре&гистра"
 
 msgid "Sort order"
 msgstr "Эрэмбэлэх дараалал"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1769,6 +1772,9 @@ msgstr "&Засах - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Эхлэх цэг:"
 
@@ -2005,6 +2011,9 @@ msgstr "&Хөндлөн"
 
 msgid "&Horizontal"
 msgstr "&Босоо"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 msgid "&Xterm window title"
 msgstr "&Толгой xterm"
@@ -2491,6 +2500,9 @@ msgstr "&Нийлбэрийг тооцоолох"
 msgid "&Verbose operation"
 msgstr "&Ажиллагааны детали"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Хавтасыг хурдан ачаалах"
 
@@ -2633,6 +2645,9 @@ msgstr "Эзэмшигч"
 msgid "Group"
 msgstr "Бүлэг"
 
+msgid "<readlink failed>"
+msgstr "<унших холбоох алдаатай>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2644,9 +2659,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%2$d файлд %1$s байт"
 msgstr[1] "%2$d файлд %1$s байт"
-
-msgid "<readlink failed>"
-msgstr "<унших холбоох алдаатай>"
 
 msgid "Unknown tag on display format: "
 msgstr "Дүрслэх хэлбэрт тодорхойгүй tag байна: "
@@ -2714,12 +2726,6 @@ msgstr "Байгуулан засварлагчын хамт\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr " S-Lang санг суулгасан системийг ашиглах"
-
-msgid "Using included S-Lang library"
-msgstr " S-Lang санг агуулсаныг хэрэглэх"
-
-msgid "with termcap database"
-msgstr " termcap баазын хамт"
 
 msgid "with terminfo database"
 msgstr " terminfo баазын хамт"
@@ -2852,9 +2858,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3610,6 +3613,12 @@ msgstr "Дотоод алдаа:"
 
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr " S-Lang санг агуулсаныг хэрэглэх"
+
+#~ msgid "with termcap database"
+#~ msgstr " termcap баазын хамт"
 
 #~ msgid "&Home"
 #~ msgstr "&Гэр"

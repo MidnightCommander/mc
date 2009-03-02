@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-02 22:22+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -57,10 +57,6 @@ msgstr " Dosya çok fazla büyük: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Satýrý girin: "
-
 msgid "Warning"
 msgstr "Uyarý"
 
@@ -105,6 +101,10 @@ msgstr " Kaydetme kipini düzenle "
 
 msgid " Save As "
 msgstr " Farklý kaydet "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Satýrý girin: "
 
 msgid " A file already exists with this name. "
 msgstr " Bu isimde bir dosya zaten var. "
@@ -795,6 +795,9 @@ msgstr "&Harf büyüklüðüne duyarlý"
 
 msgid "Sort order"
 msgstr "Sýralama türü"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1770,6 +1773,9 @@ msgstr "Düz&enle - F4"
 msgid "&Find recursively"
 msgstr ""
 
+msgid "S&kip hidden"
+msgstr ""
+
 msgid "Start at:"
 msgstr "Baþlangýç:"
 
@@ -2006,6 +2012,9 @@ msgstr "Di&key"
 
 msgid "&Horizontal"
 msgstr "&Yatay"
+
+msgid "show free sp&Ace"
+msgstr ""
 
 #, fuzzy
 msgid "&Xterm window title"
@@ -2498,6 +2507,9 @@ msgstr "&Toplamlarý hesapla"
 msgid "&Verbose operation"
 msgstr "ayrýntý&Lý iþlem"
 
+msgid "Mkdir autoname"
+msgstr ""
+
 msgid "&Fast dir reload"
 msgstr "&Çabuk dizin tazeleme"
 
@@ -2641,6 +2653,9 @@ msgstr "Sahibi"
 msgid "Group"
 msgstr "Grup"
 
+msgid "<readlink failed>"
+msgstr "<bað okumasý baþarýsýz>"
+
 #, fuzzy, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
@@ -2652,9 +2667,6 @@ msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] "%s bayt (%d dosyada)"
 msgstr[1] "%s bayt (%d dosyada)"
-
-msgid "<readlink failed>"
-msgstr "<bað okumasý baþarýsýz>"
 
 msgid "Unknown tag on display format: "
 msgstr "Gösterme biçeminde bilinmeyen etiket:"
@@ -2723,12 +2735,6 @@ msgstr "Yerleþik Düzenleyiciyle\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Sisteme kurulu S-lang kitaplýðý kullanýlarak"
-
-msgid "Using included S-Lang library"
-msgstr "Paket içindeki S-lang kitaplýðý kullanýlarak"
-
-msgid "with termcap database"
-msgstr "termcap veritabaný ile"
 
 msgid "with terminfo database"
 msgstr "terminfo veritabaný ile"
@@ -2861,9 +2867,6 @@ msgstr "%e %b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
@@ -3623,6 +3626,12 @@ msgstr "Ýç hata:"
 
 msgid "Changes to file lost"
 msgstr "Deðiþiklikler kayýp"
+
+#~ msgid "Using included S-Lang library"
+#~ msgstr "Paket içindeki S-lang kitaplýðý kullanýlarak"
+
+#~ msgid "with termcap database"
+#~ msgstr "termcap veritabaný ile"
 
 #~ msgid "&Home"
 #~ msgstr "&Ev"
