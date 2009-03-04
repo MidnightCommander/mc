@@ -1,7 +1,7 @@
 #ifndef MC_EDIT_ETAGS_H
 #define MC_EDIT_ETAGS_H 1
 
-#define MAX_DEFINITIONS 50
+#define MAX_DEFINITIONS 60
 #define SHORT_DEF_LEN   30
 #define LONG_DEF_LEN    40
 #define LINE_DEF_LEN    16

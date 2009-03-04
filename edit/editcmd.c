@@ -3079,7 +3079,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_lines; i++) {
-        label_def = g_strdup_printf ("%s>%s:%ld", def_hash[i].short_define, def_hash[i].filename, def_hash[i].line);
+        label_def = g_strdup_printf ("%s -> %s:%ld", def_hash[i].short_define, def_hash[i].filename, def_hash[i].line);
         listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i]);
         g_free(label_def);
     }
@@ -3180,7 +3180,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     }
     g_free (path);
 
-    max_len = 50;
+    max_len = 60;
     word_len = 0;
     if ( num_def > 0 ) {
         edit_select_definition_dialog (edit, match_expr, max_len, word_len,
