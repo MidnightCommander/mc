@@ -3030,16 +3030,15 @@ edit_load_back_cmd (WEdit *edit)
     }
 }
 
-
 /* let the user select where function definition */
 static void
 edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int word_len,
-                               struct def_hash_type *def_hash, int num_lines)
+                               struct etags_hash_type *def_hash, int num_lines)
 {
 
     int start_x, start_y, offset, i;
     char *curr = NULL;
-    struct def_hash_type *curr_def;
+    struct etags_hash_type *curr_def;
     Dlg_head *def_dlg;
     WListbox *def_list;
     int def_dlg_h;      /* dialog height */
@@ -3080,7 +3079,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_lines; i++) {
-        label_def = g_strdup_printf ("%s:%i", def_hash[i].filename, def_hash[i].line);
+        label_def = g_strdup_printf ("%s>%s:%ld", def_hash[i].short_define, def_hash[i].filename, def_hash[i].line);
         listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i]);
         g_free(label_def);
     }
@@ -3088,7 +3087,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     run_dlg (def_dlg);
 
     /* apply the choosen completion */
-    if (def_dlg->ret_value == B_ENTER) {
+    if ( def_dlg->ret_value == B_ENTER ) {
         listbox_get_current (def_list, &curr, &curr_def);
         int do_moveto = 0;
         if ( edit->modified ) {
@@ -3105,12 +3104,17 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
         }
         if ( curr && do_moveto) {
             if ( edit_stack_iterator+1 < MAX_HISTORY_MOVETO ) {
-                g_free( edit_history_moveto[edit_stack_iterator].filename );
-                edit_history_moveto[edit_stack_iterator].filename = g_strdup(edit->filename);
-                edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
+                g_free (edit_history_moveto[edit_stack_iterator].filename);
+                if ( edit->dir ) {
+                    edit_history_moveto[edit_stack_iterator].filename = g_strdup_printf ("%s/%s", edit->dir, edit->filename);
+                } else {
+                    edit_history_moveto[edit_stack_iterator].filename = g_strdup (edit->filename);
+                }
+                edit_history_moveto[edit_stack_iterator].line = edit->start_line +
+                                                                edit->curs_row + 1;
                 edit_stack_iterator++;
                 g_free( edit_history_moveto[edit_stack_iterator].filename );
-                edit_history_moveto[edit_stack_iterator].filename = g_strdup(curr_def->filename);
+                edit_history_moveto[edit_stack_iterator].filename = g_strdup(curr_def->fullpath);
                 edit_history_moveto[edit_stack_iterator].line = curr_def->line;
                 edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
                                   edit_history_moveto[edit_stack_iterator].line);
@@ -3131,7 +3135,9 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 void
 edit_get_match_keyword_cmd (WEdit *edit)
 {
-    int word_len = 0, num_def = 0, max_len;
+    int word_len = 0;
+    int num_def = 0;
+    int max_len = 0;
     long word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
@@ -3139,7 +3145,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     char *ptr = NULL;
     char *tagfile = NULL;
 
-    struct def_hash_type def_hash[MAX_DEFINITIONS];
+    struct etags_hash_type def_hash[MAX_DEFINITIONS];
 
     for ( int i = 0; i < MAX_DEFINITIONS; i++) {
         def_hash[i].filename = NULL;
@@ -3169,7 +3175,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     } while (strcmp( path, G_DIR_SEPARATOR_S) != 0);
 
     if (tagfile){
-	etags_set_def_hash(tagfile, path, match_expr, (struct def_hash_type *) &def_hash, &num_def);
+	etags_set_definition_hash(tagfile, path, match_expr, (struct etags_hash_type *) &def_hash, &num_def);
 	g_free (tagfile);
     }
     g_free (path);
@@ -3178,7 +3184,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     word_len = 0;
     if ( num_def > 0 ) {
         edit_select_definition_dialog (edit, match_expr, max_len, word_len,
-                                       (struct def_hash_type *) &def_hash,
+                                       (struct etags_hash_type *) &def_hash,
                                        num_def);
     }
     g_free (match_expr);
