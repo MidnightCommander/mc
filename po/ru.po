@@ -795,7 +795,7 @@ msgid "Sort order"
 msgstr "Порядок сортировки"
 
 msgid "Executable first"
-msgstr "Сначала исполняемые"
+msgstr "Исполняемые вначале"
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
