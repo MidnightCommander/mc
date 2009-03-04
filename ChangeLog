@@ -4,7 +4,7 @@
 2009-03-02 Andrew Borodin <aborodin@vmail.ru>
 	* po/*.po: updated all *.po files.
 
-2009-02-21 Mikhail Pobolovets  <styx.mp@gmail.com>
+2009-03-02 Mikhail Pobolovets  <styx.mp@gmail.com>
 	* src/find.c: Micro fix for 'Skip hidden' shortcut
 	  It's now Alt+k instead of Alt+p
 
