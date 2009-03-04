@@ -14,6 +14,6 @@ struct etags_hash_type {
    long line;
 };
 
-int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_hash_type *def_hash, int *num);
+int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct etags_hash_type *def_hash, int *num);
 
 #endif
