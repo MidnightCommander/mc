@@ -1,9 +1,9 @@
 /* editor C-code navigation via tags.
    make TAGS file via command:
-   $ find . -type f -name "*.[ch]" | etags -l c --declarations - 
+   $ find . -type f -name "*.[ch]" | etags -l c --declarations -
 
    or, if etags utility not installed:
-   $ ctags --languages=c -e -R -h '[ch]'
+   $ find . -type f -name "*.[ch]" | ctags -R --c-kinds=+p --fields=+iaS --extra=+q -e -L-
 
    Copyright (C) 2009 Free Software Foundation, Inc.
 
@@ -42,53 +42,98 @@
 #include "../src/global.h"
 #include "../edit/etags.h"
 
-/*** global variables **************************************************/
-
-/*** file scope macro definitions **************************************/
-
-/*** file scope type declarations **************************************/
-
-/*** file scope variables **********************************************/
-
 /*** file scope functions **********************************************/
 
-static long etags_get_pos_from(char *str)
+int parse_define(char *buf, char **long_name, char **short_name, long *line)
 {
-    static char buf[16];
-    int i, j;
-    j = 0;
-    int len = strlen( str );
-    for ( i = 0; i < len && i < 16; i++ ) {
-        char c = (char) str[i];
-        if ( isdigit (c) ) {
-            buf[j++] = c;
-            buf[j] = '\0';
-        } else {
-            return atol((char *)buf);
+    enum {in_longname, in_shortname, in_line, finish} def_state = in_longname;
+
+    static char longdef[LONG_DEF_LEN];
+    static char shortdef[SHORT_DEF_LEN];
+    static char linedef[LINE_DEF_LEN];
+    int nlong = 0;
+    int nshort = 0;
+    int nline = 0;
+    char c = *buf;
+
+    while ( !(c =='\0' || c =='\n') ) {
+        switch ( def_state ) {
+        case in_longname:
+            if ( c == 0x01 ) {
+                def_state = in_line;
+            } else if ( c == 0x7F ) {
+                def_state = in_shortname;
+            } else {
+                if ( nlong < LONG_DEF_LEN - 1 ) {
+                    longdef[nlong++] = c;
+                }
+            }
+            break;
+        case in_shortname:
+            if ( isdigit(c) ) {
+                nshort = 0;
+                buf--;
+                def_state = in_line;
+            } else if ( c == 0x01 ) {
+                def_state = in_line;
+            } else {
+                if ( nshort < SHORT_DEF_LEN - 1 ) {
+                    shortdef[nshort++] = c;
+                }
+            }
+            break;
+        case in_line:
+            if ( c == ',' ) {
+                def_state = finish;
+            } else if ( isdigit(c) ) {
+                if ( nline < LINE_DEF_LEN - 1 ) {
+                    linedef[nline++] = c;
+                }
+            }
+            break;
+        case finish:
+            longdef[nlong] = '\0';
+            shortdef[nshort] = '\0';
+            linedef[nline] = '\0';
+            *long_name = g_strdup (longdef);
+            *short_name = g_strdup (shortdef);
+            *line = atol (linedef);
+            return 1;
+            break;
         }
+        buf++;
+        c = *buf;
     }
+    *long_name = NULL;
+    *short_name = NULL;
+    *line = 0;
     return 0;
 }
 
 /*** public functions **************************************************/
 
-
-int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct def_hash_type *def_hash, int *num)
+int etags_set_definition_hash(const char *tagfile, const char *start_path,
+                              const char *match_func,
+                              struct etags_hash_type *def_hash,
+                              int *num)
 {
     FILE *f;
-    static char buf[4048];
-    int len;
+    static char buf[1024];
 
+    char *longname = NULL;
+    char *shortname = NULL;
+    long line;
+
+    char *chekedstr = NULL;
+
+    /* open file with positions */
     f = fopen (tagfile, "r");
-    int i;
     if (!f)
         return 1;
-    len = strlen( match_func );
-    int pos;
 
+    int pos;
     char *fullpath = NULL;
     char *filename = NULL;
-    long line;
     enum {start, in_filename, in_define} state = start;
 
     while (fgets (buf, sizeof (buf), f)) {
@@ -102,8 +147,8 @@ int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct
         case in_filename:
             pos = strcspn(buf, ",");
             g_free(filename);
-            filename = malloc(pos + 2);
-            g_strlcpy ( filename, (char *)buf, pos + 1 );
+            filename = malloc (pos + 2);
+            g_strlcpy(filename, (char *)buf, pos + 1);
             state = in_define;
             break;
         case in_define:
@@ -112,22 +157,25 @@ int etags_set_def_hash(char *tagfile, char *start_path, char *match_func, struct
                 break;
             }
             /* check if the filename matches the define pos */
-            if ( strstr ( buf, match_func ) ) {
-                int l = (int)strlen( buf );
-                for ( i = 0; i < l; i++) {
-                    if ( ( buf[i] == 0x7F || buf[i] == 0x01 ) && isdigit(buf[i+1]) ) {
-                        line = etags_get_pos_from(&buf[i+1]);
-                        state = start;
-                        if ( *num < MAX_DEFINITIONS ) {
-                            def_hash[*num].filename_len = strlen(filename);
-                            fullpath = g_strdup_printf("%s/%s",start_path, filename);
-                            canonicalize_pathname (fullpath);
-                            def_hash[*num].filename = g_strdup(fullpath);
-                            g_free(fullpath);
-                            def_hash[*num].line = line;
-                            (*num)++;
-                        }
+            chekedstr = strstr (buf, match_func);
+            if ( chekedstr ) {
+                parse_define (chekedstr, &longname, &shortname, &line);
+                if ( *num < MAX_DEFINITIONS - 1 ) {
+                    def_hash[*num].filename_len = strlen (filename);
+                    fullpath = g_strdup_printf("%s/%s",start_path, filename);
+                    canonicalize_pathname (fullpath);
+                    def_hash[*num].fullpath = g_strdup(fullpath);
+                    g_free (fullpath);
+                    def_hash[*num].filename = g_strdup (filename);
+                    if ( shortname ) {
+                        def_hash[*num].short_define = g_strdup (shortname);
+                    } else {
+                        def_hash[*num].short_define = g_strdup (longname);
                     }
+                    def_hash[*num].line = line;
+                    g_free(shortname);
+                    g_free(longname);
+                    (*num)++;
                 }
             }
             break;

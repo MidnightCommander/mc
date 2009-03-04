@@ -2,10 +2,15 @@
 #define MC_EDIT_ETAGS_H 1
 
 #define MAX_DEFINITIONS 50
+#define SHORT_DEF_LEN   30
+#define LONG_DEF_LEN    40
+#define LINE_DEF_LEN    16
 
-struct def_hash_type {
+struct etags_hash_type {
    int filename_len;
+   unsigned char *fullpath;
    unsigned char *filename;
+   unsigned char *short_define;
    long line;
 };
 
