@@ -462,6 +462,22 @@ enum {
     DEST_FULL			/* Created, fully copied */
 };
 
+static int warn_same_file(const char *fmt, const char *a, const char *b)
+{
+    char *msg;
+    /* We don't expect %d etc, just %s, so strlen(fmt) should be ok */
+    int result = 0;
+    msg = g_strdup_printf (fmt, a, b);
+    result = query_dialog (MSG_ERROR, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
+    g_free(msg);
+    do_refresh ();
+    if ( result ) { /* 1 == Abort */
+        return FILE_ABORT;
+    } else {
+        return FILE_SKIP;
+    }
+}
+
 int
 copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		int ask_overwrite, off_t *progress_count,
@@ -516,13 +532,9 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
     if (dst_exists) {
 	/* Destination already exists */
-	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
-	    message (D_ERROR, MSG_ERROR,
-		    _(" `%s' and `%s' are the same file "), src_path, dst_path);
-	    do_refresh ();
-	    return FILE_SKIP;
-	}
-
+        if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino)
+            return warn_same_file(_(" `%s' and `%s' are the same file "),
+                                src_path, dst_path);
 	/* Should we replace destination? */
 	if (ask_overwrite) {
 	    ctx->do_reget = 0;
@@ -1048,22 +1060,8 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 
     if (mc_lstat (d, &dst_stats) == 0) {
 	if (src_stats.st_dev == dst_stats.st_dev
-	    && src_stats.st_ino == dst_stats.st_ino) {
-	    int msize = COLS - 36;
-	    char st[MC_MAXPATHLEN];
-	    char dt[MC_MAXPATHLEN];
-
-	    if (msize < 0)
-		msize = 40;
-	    msize /= 2;
-
-	    strcpy (st, path_trunc (s, msize));
-	    strcpy (dt, path_trunc (d, msize));
-	    message (D_ERROR, MSG_ERROR,
-			_(" `%s' and `%s' are the same file "), st, dt);
-	    do_refresh ();
-	    return FILE_SKIP;
-	}
+            && src_stats.st_ino == dst_stats.st_ino)
+            return warn_same_file(_(" `%s' and `%s' are the same file "), s, d);
 
 	if (S_ISDIR (dst_stats.st_mode)) {
 	    message (D_ERROR, MSG_ERROR,
@@ -1171,22 +1169,8 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     } else
 	destdir = concat_dir_and_file (d, x_basename (s));
 
-    if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino) {
-	int msize = COLS - 36;
-	char st[MC_MAXPATHLEN];
-	char dt[MC_MAXPATHLEN];
-
-	if (msize < 0)
-	    msize = 40;
-	msize /= 2;
-
-	strcpy (st, path_trunc (s, msize));
-	strcpy (dt, path_trunc (d, msize));
-	message (D_ERROR, MSG_ERROR,
-		    _(" `%s' and `%s' are the same directory "), st, dt);
-	do_refresh ();
-	return FILE_SKIP;
-    }
+    if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino)
+        return warn_same_file(_(" `%s' and `%s' are the same directory "), s, d);
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
