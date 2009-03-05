@@ -465,7 +465,6 @@ enum {
 static int warn_same_file(const char *fmt, const char *a, const char *b)
 {
     char *msg;
-    /* We don't expect %d etc, just %s, so strlen(fmt) should be ok */
     int result = 0;
     msg = g_strdup_printf (fmt, a, b);
     result = query_dialog (MSG_ERROR, msg, D_ERROR, 2, _("&Skip"), _("&Abort"));
