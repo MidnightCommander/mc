@@ -533,8 +533,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_exists) {
 	/* Destination already exists */
         if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino)
-            return warn_same_file(_(" `%s' and `%s' are the same file "),
-                                  src_path, dst_path);
+            return warn_same_file(_(" `%s' and\n `%s'\n are the same file "),
+                                src_path, dst_path);
 	/* Should we replace destination? */
 	if (ask_overwrite) {
 	    ctx->do_reget = 0;
