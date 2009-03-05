@@ -162,7 +162,7 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
                 parse_define (chekedstr, &longname, &shortname, &line);
                 if ( *num < MAX_DEFINITIONS - 1 ) {
                     def_hash[*num].filename_len = strlen (filename);
-                    fullpath = g_strdup_printf("%s/%s",start_path, filename);
+                    fullpath = g_build_filename (start_path, filename, NULL);
                     canonicalize_pathname (fullpath);
                     def_hash[*num].fullpath = g_strdup(fullpath);
                     g_free (fullpath);
