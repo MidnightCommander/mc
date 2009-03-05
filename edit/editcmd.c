@@ -3033,12 +3033,12 @@ edit_load_back_cmd (WEdit *edit)
 /* let the user select where function definition */
 static void
 edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int word_len,
-                               struct etags_hash_type *def_hash, int num_lines)
+                               etags_hash_t *def_hash, int num_lines)
 {
 
     int start_x, start_y, offset, i;
     char *curr = NULL;
-    struct etags_hash_type *curr_def;
+    etags_hash_t *curr_def;
     Dlg_head *def_dlg;
     WListbox *def_list;
     int def_dlg_h;      /* dialog height */
@@ -3145,7 +3145,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     char *ptr = NULL;
     char *tagfile = NULL;
 
-    struct etags_hash_type def_hash[MAX_DEFINITIONS];
+    etags_hash_t def_hash[MAX_DEFINITIONS];
 
     for ( int i = 0; i < MAX_DEFINITIONS; i++) {
         def_hash[i].filename = NULL;
@@ -3175,7 +3175,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     } while (strcmp( path, G_DIR_SEPARATOR_S) != 0);
 
     if (tagfile){
-	etags_set_definition_hash(tagfile, path, match_expr, (struct etags_hash_type *) &def_hash, &num_def);
+	etags_set_definition_hash(tagfile, path, match_expr, (etags_hash_t *) &def_hash, &num_def);
 	g_free (tagfile);
     }
     g_free (path);
@@ -3184,7 +3184,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     word_len = 0;
     if ( num_def > 0 ) {
         edit_select_definition_dialog (edit, match_expr, max_len, word_len,
-                                       (struct etags_hash_type *) &def_hash,
+                                       (etags_hash_t *) &def_hash,
                                        num_def);
     }
     g_free (match_expr);

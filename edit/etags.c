@@ -114,7 +114,7 @@ int parse_define(char *buf, char **long_name, char **short_name, long *line)
 
 int etags_set_definition_hash(const char *tagfile, const char *start_path,
                               const char *match_func,
-                              struct etags_hash_type *def_hash,
+                              etags_hash_t *def_hash,
                               int *num)
 {
     FILE *f;
