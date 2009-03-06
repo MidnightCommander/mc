@@ -3088,7 +3088,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 
     /* apply the choosen completion */
     if ( def_dlg->ret_value == B_ENTER ) {
-        listbox_get_current (def_list, &curr, &curr_def);
+        listbox_get_current (def_list, &curr, (etags_hash_t *) &curr_def);
         int do_moveto = 0;
         if ( edit->modified ) {
             if ( !edit_query_dialog2
@@ -3160,27 +3160,27 @@ edit_get_match_keyword_cmd (WEdit *edit)
                             [word_start & M_EDIT_BUF_SIZE];
     match_expr = g_strdup_printf ("%.*s", word_len, bufpos);
 
-    path = g_strdup_printf ("%s/", g_get_current_dir());
+    ptr = g_get_current_dir ();
+    path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);
+    g_free (ptr);
 
-    ptr = path;
-
-    /* Reursive search file 'TAGS' in parent dirs */
+    /* Recursive search file 'TAGS' in parent dirs */
     do {
 	ptr = g_path_get_dirname (path);
 	g_free(path); path = ptr;
-
-	tagfile = g_build_filename (path, "TAGS", NULL);
+	g_free (tagfile);
+	tagfile = g_build_filename (path, TAGS_NAME, (char *) NULL);
 	if ( exist_file (tagfile) )
 	    break;
     } while (strcmp( path, G_DIR_SEPARATOR_S) != 0);
 
     if (tagfile){
-	etags_set_definition_hash(tagfile, path, match_expr, (etags_hash_t *) &def_hash, &num_def);
+	num_def = etags_set_definition_hash(tagfile, path, match_expr, (etags_hash_t *) &def_hash);
 	g_free (tagfile);
     }
     g_free (path);
 
-    max_len = 60;
+    max_len = MAX_WIDTH_DEF_DIALOG;
     word_len = 0;
     if ( num_def > 0 ) {
         edit_select_definition_dialog (edit, match_expr, max_len, word_len,
