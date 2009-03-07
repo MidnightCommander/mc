@@ -6,6 +6,9 @@
 #ifndef MC_VFSDUMMY_H
 #define MC_VFSDYMMY_H
 
+#include "global.h"		/* glib.h*/
+#include "util.h"
+
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
@@ -76,4 +79,4 @@ vfs_canon (const char *path)
     return p;
 }
 
-#endif
+#endif				/* MC_VFSDUMMY_H */

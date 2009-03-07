@@ -7,6 +7,7 @@
 #define MC_FILE_H
 
 #include "global.h"
+#include <sys/types.h>		/* off_t */
 #include "fileopctx.h"
 #include "dialog.h"		/* Dlg_head */
 #include "widget.h"		/* WLabel */

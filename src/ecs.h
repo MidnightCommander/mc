@@ -35,6 +35,10 @@
  * byte-to-character encoding.
  */
 
+#include <sys/types.h>		/* size_t */
+
+#include "global.h"		/* include <glib.h> */
+
 /* Use the macros ECS_CHAR and ECS_STR to bring character and string
  * literals to the correct form required by the C compiler. */
 #ifdef EXTCHARSET_ENABLED

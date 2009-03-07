@@ -8,6 +8,8 @@
 
 #ifdef WITH_BACKGROUND
 
+#include <sys/types.h> /* pid_t */
+
 enum TaskState {
     Task_Running,
     Task_Stopped

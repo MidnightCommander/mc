@@ -46,7 +46,6 @@
 #include "mouse.h"
 #include "dialog.h"
 #include "widget.h"
-#include "win.h"
 #include "key.h"	/* XCTRL and ALT macros  */
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
