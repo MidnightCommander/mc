@@ -1146,7 +1146,8 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     struct link *lp;
     char *destdir;
     FileProgressStatus return_status;
-    int move_over = 0;
+    gboolean move_over = FALSE;
+    gboolean dstat_ok;
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT ||
 	file_progress_show_target (ctx, d) == FILE_ABORT)
@@ -1155,17 +1156,18 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
     mc_refresh ();
 
     mc_stat (s, &sbuf);
-    if (mc_stat (d, &dbuf))
+    dstat_ok = (mc_stat (d, &dbuf) == 0);
+
+    if (dstat_ok && sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino)
+        return warn_same_file (_(" `%s' \n and \n `%s' \n are the same directory "), s, d);
+
+    if (!dstat_ok)
 	destdir = g_strdup (d);	/* destination doesn't exist */
     else if (!ctx->dive_into_subdirs) {
 	destdir = g_strdup (d);
-	move_over = 1;
+	move_over = TRUE;
     } else
 	destdir = concat_dir_and_file (d, x_basename (s));
-
-    if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino)
-        return warn_same_file(_(" `%s' and `%s' are the same directory "), s, d);
-
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
     if (!mc_stat (destdir, &destbuf)) {
