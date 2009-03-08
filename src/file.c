@@ -1060,7 +1060,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
     if (mc_lstat (d, &dst_stats) == 0) {
 	if (src_stats.st_dev == dst_stats.st_dev
             && src_stats.st_ino == dst_stats.st_ino)
-            return warn_same_file(_(" `%s' and `%s' are the same file "), s, d);
+            return warn_same_file(_(" `%s' \n and\n `%s'\n are the same file "), s, d);
 	if (S_ISDIR (dst_stats.st_mode)) {
 	    message (1, MSG_ERROR,
 			_(" Cannot overwrite directory `%s' "), d);

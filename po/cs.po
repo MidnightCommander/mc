@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -59,8 +59,8 @@ msgstr " Soubor %s je pøíli¹ velký "
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je pøíli¹ hluboká"
 
-msgid " Enter file name: "
-msgstr " Zadejte jméno souboru: "
+msgid "&Dismiss"
+msgstr "&Odmítnout"
 
 msgid "Warning"
 msgstr "Varování"
@@ -106,6 +106,9 @@ msgstr " Upravit ukládací re¾im "
 
 msgid " Save As "
 msgstr " Ulo¾it jako "
+
+msgid " Enter file name: "
+msgstr " Zadejte jméno souboru: "
 
 msgid " A file already exists with this name. "
 msgstr " Soubor tohoto jména ji¾ existuje. "
@@ -353,9 +356,6 @@ msgstr " Stisknìte libovolnou klávesu: "
 
 msgid " Execute Macro "
 msgstr " Spustit makro "
-
-msgid "&Dismiss"
-msgstr "&Odmítnout"
 
 msgid " Emacs key: "
 msgstr " Emacsová klávesa: "
@@ -792,6 +792,9 @@ msgstr "v¹ímat si velikos&Ti písmen"
 
 msgid "Sort order"
 msgstr "Poøadí"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1329,6 +1332,9 @@ msgstr ""
 " Nelze vytvoøit cílový symlink \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Zru¹it"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1345,8 +1351,11 @@ msgstr ""
 " Na zdrojovém souboru \"%s\" nelze provést stat \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' a `%s' jsou stejný soubor "
 
 #, c-format
@@ -1509,6 +1518,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' a `%s' jsou stejný soubor "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nelze pøepsat adresáø `%s' "
 
@@ -1610,9 +1623,6 @@ msgstr " Bohu¾el, úlohu nelze pøesunout na pozadí "
 
 msgid "&Retry"
 msgstr "&Zkusit znovu"
-
-msgid "&Abort"
-msgstr "&Zru¹it"
 
 msgid ""
 "\n"
@@ -2870,9 +2880,6 @@ msgstr "%e.%b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e.%b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

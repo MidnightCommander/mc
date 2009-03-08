@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -54,7 +54,7 @@ msgstr " ­ó¾ §¸¡ôÒ Á¢¸ô ¦ÀÃ¢ÂÐ: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
+msgid "&Dismiss"
 msgstr ""
 
 msgid "Warning"
@@ -101,6 +101,9 @@ msgstr " §ºÁ¢ôÒ Ó¨È¨Á¨Â À¾¢ "
 
 msgid " Save As "
 msgstr " §ÅÚ ¦ÀÂÃ¢ø §ºÁ¢ "
+
+msgid " Enter file name: "
+msgstr ""
 
 msgid " A file already exists with this name. "
 msgstr " ­ó¾ ¦ÀÂÃ¢ø §¸¡ôÒ ´ýÚ ­Õì¸¢ýÈÐ. "
@@ -354,9 +357,6 @@ msgstr "²¾¡ÅÐ ´Õ Å¢¨º¨Â «ØòÐ: "
 
 msgid " Execute Macro "
 msgstr " ¦ÀÕ ¿¢Ã¨Ä ¦ºÂøÀÎòÐ "
-
-msgid "&Dismiss"
-msgstr ""
 
 msgid " Emacs key: "
 msgstr "  Emacs Å¢¨º:"
@@ -777,6 +777,9 @@ msgid "case sensi&tive"
 msgstr ""
 
 msgid "Sort order"
+msgstr ""
+
+msgid "Executable first"
 msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
@@ -1289,6 +1292,9 @@ msgid ""
 " %s "
 msgstr ""
 
+msgid "&Abort"
+msgstr ""
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1302,7 +1308,10 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " `%s' and `%s' are the same file "
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr ""
 
 #, c-format
@@ -1429,6 +1438,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr ""
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
@@ -1519,9 +1532,6 @@ msgid " Sorry, I could not put the job in background "
 msgstr ""
 
 msgid "&Retry"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid ""
@@ -2702,9 +2712,6 @@ msgid "%b %e %H:%M"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
-
-msgid "(invalid)"
 msgstr ""
 
 #, fuzzy, c-format

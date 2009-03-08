@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2008-06-15 19:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -55,8 +55,8 @@ msgstr " El archivo %s es demasiado grande "
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
 
-msgid " Enter file name: "
-msgstr " Teclee el nombre del archivo: "
+msgid "&Dismiss"
+msgstr "&Ignorar"
 
 msgid "Warning"
 msgstr "¡ Atención !"
@@ -102,6 +102,9 @@ msgstr " Modo de guardar "
 
 msgid " Save As "
 msgstr " Guardar como "
+
+msgid " Enter file name: "
+msgstr " Teclee el nombre del archivo: "
 
 msgid " A file already exists with this name. "
 msgstr " Ya existe un archivo con ese nombre. "
@@ -351,9 +354,6 @@ msgstr " Presione cualquier tecla: "
 
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
-
-msgid "&Dismiss"
-msgstr "&Ignorar"
 
 msgid " Emacs key: "
 msgstr " Tecla Emacs: "
@@ -783,6 +783,9 @@ msgstr "distinguir ma&Yúsculas"
 
 msgid "Sort order"
 msgstr " Ordenar "
+
+msgid "Executable first"
+msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " confirmar eliminación de &Favoritos "
@@ -1313,6 +1316,9 @@ msgstr ""
 " Imposible crear el enlace simbólico destino \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1329,8 +1335,11 @@ msgstr ""
 " Imposible identificar el archivo origen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " \"%s\" y \"%s\" son el mismo archivo "
 
 #, c-format
@@ -1493,6 +1502,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " \"%s\" y \"%s\" son el mismo archivo "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Imposible sobrescribir el directorio \"%s\" "
 
@@ -1594,9 +1607,6 @@ msgstr " Lo siento, no pude poner la tarea en 2º plano "
 
 msgid "&Retry"
 msgstr "&Reintentar"
-
-msgid "&Abort"
-msgstr "&Abortar"
 
 msgid ""
 "\n"
@@ -2847,9 +2857,6 @@ msgstr "%e %b %H:%M"
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
-msgid "(invalid)"
-msgstr "(inválido)"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s no es un directorio\n"
@@ -3606,6 +3613,9 @@ msgstr "Error interno:"
 
 msgid "Changes to file lost"
 msgstr "Los cambios del archivo se han perdido"
+
+#~ msgid "(invalid)"
+#~ msgstr "(inválido)"
 
 #~ msgid " Notice "
 #~ msgstr " Aviso "

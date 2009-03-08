@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -55,9 +55,8 @@ msgstr " Fails ir par lielu: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Ievadîet lîniju: "
+msgid "&Dismiss"
+msgstr "&Atcelt"
 
 msgid "Warning"
 msgstr "Brîdinâjums"
@@ -103,6 +102,10 @@ msgstr " Rediìçt Glabâðanas Reþîmu "
 
 msgid " Save As "
 msgstr " Glabât Kâ "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Ievadîet lîniju: "
 
 msgid " A file already exists with this name. "
 msgstr " Fails ar tâdu nosaukumu jau eksistç. "
@@ -361,9 +364,6 @@ msgstr " Spiest jebkuru taustiòu: "
 
 msgid " Execute Macro "
 msgstr " Palaist Makro "
-
-msgid "&Dismiss"
-msgstr "&Atcelt"
 
 msgid " Emacs key: "
 msgstr "Emacs taustiòð: "
@@ -795,6 +795,9 @@ msgstr "lielo/ma&zo burtu jûtîgs"
 
 msgid "Sort order"
 msgstr "Kârtoðanas secîba"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1329,6 +1332,9 @@ msgstr ""
 " Nevar izveidot mçría simbolsaiti \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Atsaukt"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1345,8 +1351,11 @@ msgstr ""
 " Nevar sâknçt avota failu \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' un `%s' ir tas pats fails "
 
 #, c-format
@@ -1509,6 +1518,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' un `%s' ir tas pats fails "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nevar pârrakstît direktoriju `%s' "
 
@@ -1610,9 +1623,6 @@ msgstr " Atvaino, bet nevarçju darbu nosûtît fonâ "
 
 msgid "&Retry"
 msgstr "&Vçlreiz"
-
-msgid "&Abort"
-msgstr "&Atsaukt"
 
 msgid ""
 "\n"
@@ -2867,9 +2877,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
@@ -58,8 +58,8 @@ msgstr " Il file %s è troppo grande "
 msgid "Macro recursion is too deep"
 msgstr "La ricorsione macro è troppo profonda"
 
-msgid " Enter file name: "
-msgstr " Inserire nome file: "
+msgid "&Dismiss"
+msgstr "&Chiudi"
 
 msgid "Warning"
 msgstr "Attenzione"
@@ -105,6 +105,9 @@ msgstr " Modifica modo salvataggio"
 
 msgid " Save As "
 msgstr " Salva come "
+
+msgid " Enter file name: "
+msgstr " Inserire nome file: "
 
 msgid " A file already exists with this name. "
 msgstr " Un file con lo stesso nome esiste già. "
@@ -354,9 +357,6 @@ msgstr " Premere un tasto: "
 
 msgid " Execute Macro "
 msgstr " Esegue macro "
-
-msgid "&Dismiss"
-msgstr "&Chiudi"
 
 msgid " Emacs key: "
 msgstr " Tasto emacs: "
@@ -786,6 +786,9 @@ msgstr "Controlla mai&uscole/minuscole"
 
 msgid "Sort order"
 msgstr "Modalità ordinamento"
+
+msgid "Executable first"
+msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " conferma cancellazione di&r favorite "
@@ -1319,6 +1322,9 @@ msgstr ""
 " Impossibile creare il coll. simbolico di destinazione \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Esci"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1335,8 +1341,11 @@ msgstr ""
 " Non trovo le informazioni sul file \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' e `%s' sono lo stesso file "
 
 #, c-format
@@ -1499,6 +1508,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' e `%s' sono lo stesso file "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Non posso rinominare la directory `%s' "
 
@@ -1602,9 +1615,6 @@ msgstr " Spiacente, non posso mettere il programma in background "
 
 msgid "&Retry"
 msgstr "&Riprova"
-
-msgid "&Abort"
-msgstr "&Esci"
 
 msgid ""
 "\n"
@@ -2856,9 +2866,6 @@ msgstr "%b %e %H:%M"
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-msgid "(invalid)"
-msgstr "(non valido)"
-
 #, c-format
 msgid "%s is not a directory\n"
 msgstr "%s non è una directory\n"
@@ -3613,6 +3620,9 @@ msgstr " Errore interno:"
 
 msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
+
+#~ msgid "(invalid)"
+#~ msgstr "(non valido)"
 
 #~ msgid " Notice "
 #~ msgstr " Avviso "

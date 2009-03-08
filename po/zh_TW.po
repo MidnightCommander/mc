@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -56,8 +56,8 @@ msgstr " 檔案太大了： "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " 輸入檔名： "
+msgid "&Dismiss"
+msgstr "關閉"
 
 msgid "Warning"
 msgstr "警告"
@@ -103,6 +103,9 @@ msgstr " 改變存檔模式 "
 
 msgid " Save As "
 msgstr " 另存新檔 "
+
+msgid " Enter file name: "
+msgstr " 輸入檔名： "
 
 msgid " A file already exists with this name. "
 msgstr " 同名的檔案已經存在。 "
@@ -358,9 +361,6 @@ msgstr " 按下任意鍵："
 
 msgid " Execute Macro "
 msgstr " 執行巨集 "
-
-msgid "&Dismiss"
-msgstr "關閉"
 
 msgid " Emacs key: "
 msgstr " Emacs 按鍵："
@@ -792,6 +792,9 @@ msgstr "大小寫不同"
 
 msgid "Sort order"
 msgstr "排序的順序"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1325,6 +1328,9 @@ msgstr ""
 " 無法建立目標符號連結 \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中斷"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1341,8 +1347,11 @@ msgstr ""
 " 無法 stat 來源檔案 \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' 與 `%s' 是同一個檔案 "
 
 #, c-format
@@ -1505,6 +1514,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' 與 `%s' 是同一個檔案 "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " 無法蓋寫目錄 `%s' "
 
@@ -1606,9 +1619,6 @@ msgstr " 抱歉，無法將此一工作放到背景裡執行 "
 
 msgid "&Retry"
 msgstr "重試"
-
-msgid "&Abort"
-msgstr "中斷"
 
 msgid ""
 "\n"
@@ -2861,9 +2871,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

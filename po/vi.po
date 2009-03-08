@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -55,8 +55,8 @@ msgstr " Tập tin %s quá lớn "
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
 
-msgid " Enter file name: "
-msgstr " Hãy nhập tên tập tin: "
+msgid "&Dismiss"
+msgstr "Đó&ng"
 
 msgid "Warning"
 msgstr "Cảnh báo"
@@ -102,6 +102,9 @@ msgstr " Chế độ ghi nhớ "
 
 msgid " Save As "
 msgstr " Ghi như "
+
+msgid " Enter file name: "
+msgstr " Hãy nhập tên tập tin: "
 
 msgid " A file already exists with this name. "
 msgstr " Tập tin có tên như vậy đã tồn tại. "
@@ -352,9 +355,6 @@ msgstr " Nhấn phím bất kỳ: "
 
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
-
-msgid "&Dismiss"
-msgstr "Đó&ng"
 
 msgid " Emacs key: "
 msgstr "Phím Emacs: "
@@ -784,6 +784,9 @@ msgstr "tính đến kiể&U chữ"
 
 msgid "Sort order"
 msgstr "Thứ tự sắp xếp"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1314,6 +1317,9 @@ msgstr ""
 " Khônt tạo được liên kết mềm đích \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Dừng"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1330,8 +1336,11 @@ msgstr ""
 " Không lấy được tính chất (stat) của tập tin nguồn \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' và `%s' là một tập tin "
 
 #, c-format
@@ -1494,6 +1503,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' và `%s' là một tập tin "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Không thể ghi đè lên thư mục `%s' "
 
@@ -1596,9 +1609,6 @@ msgstr " Xin lỗi, không thể đặt công việc nào vào chế độ nền
 
 msgid "&Retry"
 msgstr "&Thử lại"
-
-msgid "&Abort"
-msgstr "&Dừng"
 
 msgid ""
 "\n"
@@ -2845,9 +2855,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

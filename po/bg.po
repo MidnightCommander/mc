@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -52,9 +52,8 @@ msgstr " Файлът е прекалено голям: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Въведете ред: "
+msgid "&Dismiss"
+msgstr "Затвори"
 
 msgid "Warning"
 msgstr "Внимание"
@@ -100,6 +99,10 @@ msgstr " Промени начина на запазване "
 
 msgid " Save As "
 msgstr " Запази като "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Въведете ред: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с това има вече съществува. "
@@ -358,9 +361,6 @@ msgstr " Натиснете клавиш: "
 
 msgid " Execute Macro "
 msgstr " Изпълни Макрос "
-
-msgid "&Dismiss"
-msgstr "Затвори"
 
 msgid " Emacs key: "
 msgstr " Emacs клавиш: "
@@ -792,6 +792,9 @@ msgstr "Различавай главни/малки"
 
 msgid "Sort order"
 msgstr "Ред на сортиране"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1324,6 +1327,9 @@ msgstr ""
 " Не може да се създаде връзката назначение \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Отказ"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1340,8 +1346,11 @@ msgstr ""
 " Не може да се stat-не файлът източник \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' и `%s' са един и същи файл. "
 
 #, c-format
@@ -1504,6 +1513,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' и `%s' са един и същи файл. "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Не може да се презапише директорията `%s' "
 
@@ -1605,9 +1618,6 @@ msgstr " Съжалявам, не може да се сложи задачата
 
 msgid "&Retry"
 msgstr "Отново"
-
-msgid "&Abort"
-msgstr "Отказ"
 
 msgid ""
 "\n"
@@ -2855,9 +2865,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

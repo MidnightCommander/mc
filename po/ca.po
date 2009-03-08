@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -56,8 +56,8 @@ msgstr " El fitxer és massa gran: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Introduïu el nom del fitxer: "
+msgid "&Dismiss"
+msgstr "&Ignora"
 
 msgid "Warning"
 msgstr "Avís"
@@ -104,6 +104,9 @@ msgstr " Edita la manera de desar "
 
 msgid " Save As "
 msgstr " Desa com a"
+
+msgid " Enter file name: "
+msgstr " Introduïu el nom del fitxer: "
 
 msgid " A file already exists with this name. "
 msgstr " Ja existeix un fitxer amb aquest nom. "
@@ -361,9 +364,6 @@ msgstr " Premeu una tecla: "
 
 msgid " Execute Macro "
 msgstr " Executa la macro "
-
-msgid "&Dismiss"
-msgstr "&Ignora"
 
 msgid " Emacs key: "
 msgstr " Tecla d'Emacs: "
@@ -796,6 +796,9 @@ msgstr "distingeix entre majú&Scules/minúscules"
 
 msgid "Sort order"
 msgstr "Ordre de classificació"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1330,6 +1333,9 @@ msgstr ""
 " No puc crear l'enllaç simbòlic objectiu \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "a&Vorta"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1346,8 +1352,11 @@ msgstr ""
 " No puc estudiar el fitxer origen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' i `%s' són el mateix fitxer "
 
 #, c-format
@@ -1510,6 +1519,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' i `%s' són el mateix fitxer "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " No puc sobreescriure el directori `%s' "
 
@@ -1611,9 +1624,6 @@ msgstr " Ho sento, no he pogut posar la tasca al rerafons "
 
 msgid "&Retry"
 msgstr "&Reintenta"
-
-msgid "&Abort"
-msgstr "a&Vorta"
 
 msgid ""
 "\n"
@@ -2874,9 +2884,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
@@ -59,8 +59,8 @@ msgstr " Plik %s jest zbyt du¿y: "
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
 
-msgid " Enter file name: "
-msgstr " Wprowad¼ nazwê pliku: "
+msgid "&Dismiss"
+msgstr "&Porzuæ"
 
 msgid "Warning"
 msgstr "Ostrze¿enie"
@@ -106,6 +106,9 @@ msgstr " Modyfikacja trybu zapisu "
 
 msgid " Save As "
 msgstr " Zapisz jako "
+
+msgid " Enter file name: "
+msgstr " Wprowad¼ nazwê pliku: "
 
 msgid " A file already exists with this name. "
 msgstr " Plik o tej nazwie ju¿ istnieje. "
@@ -355,9 +358,6 @@ msgstr " Naci¶nij dowolny klawisz: "
 
 msgid " Execute Macro "
 msgstr " Wykonaj makro "
-
-msgid "&Dismiss"
-msgstr "&Porzuæ"
 
 msgid " Emacs key: "
 msgstr " Klawisz Emacsa: "
@@ -787,6 +787,9 @@ msgstr "Rozró¿nianie wie&lko¶ci"
 
 msgid "Sort order"
 msgstr "Porz±dek sortowania"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1317,6 +1320,9 @@ msgstr ""
 " Nie mo¿na utworzyæ dowi±zania symbolicznego \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Rezygnuj"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1333,8 +1339,11 @@ msgstr ""
 " Nie mo¿na wykonaæ operacji stat na pliku ¼ród³owym \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " '%s' oraz '%s' to ten sam plik "
 
 #, c-format
@@ -1497,6 +1506,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " '%s' oraz '%s' to ten sam plik "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nie mo¿na nadpisaæ katalogu '%s' "
 
@@ -1598,9 +1611,6 @@ msgstr " Niestety nie mo¿na umie¶ciæ zadania w tle "
 
 msgid "&Retry"
 msgstr "Ponów"
-
-msgid "&Abort"
-msgstr "&Rezygnuj"
 
 msgid ""
 "\n"
@@ -2852,9 +2862,6 @@ msgstr "%e.%m %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e.%m.%Y "
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

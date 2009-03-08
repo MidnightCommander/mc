@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -61,8 +61,8 @@ msgstr " Filen är för stor: "
 msgid "Macro recursion is too deep"
 msgstr "Makrorekursion är för djup"
 
-msgid " Enter file name: "
-msgstr " Ange filnamn: "
+msgid "&Dismiss"
+msgstr "&Försvinn"
 
 msgid "Warning"
 msgstr "Varning"
@@ -108,6 +108,9 @@ msgstr " Redigera sparläge "
 
 msgid " Save As "
 msgstr " Spara som "
+
+msgid " Enter file name: "
+msgstr " Ange filnamn: "
 
 msgid " A file already exists with this name. "
 msgstr " Det finns redan en fil med det namnet. "
@@ -369,9 +372,6 @@ msgstr " Tryck valfri tangent:"
 
 msgid " Execute Macro "
 msgstr " Kör makro "
-
-msgid "&Dismiss"
-msgstr "&Försvinn"
 
 msgid " Emacs key: "
 msgstr " Emacstangent: "
@@ -810,6 +810,9 @@ msgstr "ski&Lj på versaler/gemener"
 
 msgid "Sort order"
 msgstr "Sorteringsordning"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1343,6 +1346,9 @@ msgstr ""
 " Kan inte skapa symbolisk länk \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Avbryt"
+
 # bättre än 'målsymlänk'?
 #, c-format
 msgid ""
@@ -1360,8 +1366,11 @@ msgstr ""
 " Kan inte inhämta status om fil \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " \"%s\" och \"%s\" är samma fil "
 
 #, c-format
@@ -1525,6 +1534,10 @@ msgstr ""
 " %s"
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " \"%s\" och \"%s\" är samma fil "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Kan inte skriva över katalog \"%s\" "
 
@@ -1626,9 +1639,6 @@ msgstr " Tyvärr, kunde inte lägga jobbet i bakgrunden "
 
 msgid "&Retry"
 msgstr "försök &Igen"
-
-msgid "&Abort"
-msgstr "&Avbryt"
 
 msgid ""
 "\n"
@@ -2891,9 +2901,6 @@ msgstr "%e %b %H.%M"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

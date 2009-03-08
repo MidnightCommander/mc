@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -54,8 +54,8 @@ msgstr " Datoteka je prevelika: "
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
 
-msgid " Enter file name: "
-msgstr " Vpnesi ime datoteke: "
+msgid "&Dismiss"
+msgstr "&Opusti"
 
 msgid "Warning"
 msgstr "Opozorilo"
@@ -101,6 +101,9 @@ msgstr " Uredi Shranjevalni Način"
 
 msgid " Save As "
 msgstr " Shrani kot "
+
+msgid " Enter file name: "
+msgstr " Vpnesi ime datoteke: "
 
 msgid " A file already exists with this name. "
 msgstr " Datoteka s tem imenom že obstaja. "
@@ -358,9 +361,6 @@ msgstr " Pritisni tipko: "
 
 msgid " Execute Macro "
 msgstr " Izvedi makro "
-
-msgid "&Dismiss"
-msgstr "&Opusti"
 
 msgid " Emacs key: "
 msgstr " Emacs ključ: "
@@ -792,6 +792,9 @@ msgstr "razlikuj velike in male črke"
 
 msgid "Sort order"
 msgstr "Vrstni red sortiranja"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1321,6 +1324,9 @@ msgstr ""
 " Ne morem ustvariti cilja simbolične povezeave \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Prekini"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1337,8 +1343,11 @@ msgstr ""
 " Ne morem poizvedeti o stanju izvorne datoteke \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " datoteki `%s' in `%s' sta isti "
 
 #, c-format
@@ -1501,6 +1510,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " datoteki `%s' in `%s' sta isti "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Ne morem prepisati imenika `%s' "
 
@@ -1602,9 +1615,6 @@ msgstr " Oprostite, posla nisem mogel postaviti v ozadje"
 
 msgid "&Retry"
 msgstr "Poskusi &znova"
-
-msgid "&Abort"
-msgstr "&Prekini"
 
 msgid ""
 "\n"
@@ -2850,9 +2860,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

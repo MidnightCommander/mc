@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -62,9 +62,8 @@ msgstr " Filen er for stor: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Indtast linje: "
+msgid "&Dismiss"
+msgstr "&Forkast"
 
 msgid "Warning"
 msgstr "Advarsel"
@@ -110,6 +109,10 @@ msgstr " Redigér gemmemåde "
 
 msgid " Save As "
 msgstr " Gem som "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Indtast linje: "
 
 msgid " A file already exists with this name. "
 msgstr " En fil med dette navn eksisterer allerede. "
@@ -366,9 +369,6 @@ msgstr " Tryk på en tast: "
 
 msgid " Execute Macro "
 msgstr " Kør makro "
-
-msgid "&Dismiss"
-msgstr "&Forkast"
 
 msgid " Emacs key: "
 msgstr " Emacs-tast: "
@@ -800,6 +800,9 @@ msgstr "Forskel på store og små bogstaver"
 
 msgid "Sort order"
 msgstr "Sorteringsrækkefølge"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1334,6 +1337,9 @@ msgstr ""
 " Kan ikke oprette målsymlænken \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Afbryd"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1350,8 +1356,11 @@ msgstr ""
 " Kan ikke køre stat på kildefilen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' og `%s' er samme fil "
 
 #, c-format
@@ -1514,6 +1523,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' og `%s' er samme fil "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Kan ikke overskrive mappen `%s' "
 
@@ -1615,9 +1628,6 @@ msgstr " Beklager, Jeg kunne ikke placere jobbet i baggrunden "
 
 msgid "&Retry"
 msgstr "&Prøv igen"
-
-msgid "&Abort"
-msgstr "&Afbryd"
 
 msgid ""
 "\n"
@@ -2867,9 +2877,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

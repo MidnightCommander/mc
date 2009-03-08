@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -57,8 +57,8 @@ msgstr " Датотека је превелика: "
 msgid "Macro recursion is too deep"
 msgstr "Ниво рекурзије макроа је превисок"
 
-msgid " Enter file name: "
-msgstr " Унесите назив датотеке: "
+msgid "&Dismiss"
+msgstr "&Отпусти"
 
 msgid "Warning"
 msgstr "Упозорење"
@@ -104,6 +104,9 @@ msgstr " Режим чувања "
 
 msgid " Save As "
 msgstr " Сачувај као "
+
+msgid " Enter file name: "
+msgstr " Унесите назив датотеке: "
 
 msgid " A file already exists with this name. "
 msgstr " Датотека под тим називом већ постоји. "
@@ -357,9 +360,6 @@ msgstr " Притисните било који тастер: "
 
 msgid " Execute Macro "
 msgstr " Изврши макро "
-
-msgid "&Dismiss"
-msgstr "&Отпусти"
 
 msgid " Emacs key: "
 msgstr " Пречица Емакса: "
@@ -793,6 +793,9 @@ msgstr "разлику&ј велика и мала слова"
 
 msgid "Sort order"
 msgstr "Поредак ређања"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1321,6 +1324,9 @@ msgstr ""
 " Не могу да створим одредишну симвезу `%s' \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Прекини"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1337,8 +1343,11 @@ msgstr ""
 " Не могу да извршим `stat' на изворној датотеци `%s' \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' и `%s' су истоветни "
 
 #, c-format
@@ -1501,6 +1510,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' и `%s' су истоветни "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Не могу да препишем директоријум `%s' "
 
@@ -1602,9 +1615,6 @@ msgstr " Извините, али нисам могао да пошаљем посао у позадину "
 
 msgid "&Retry"
 msgstr "П&робај поново"
-
-msgid "&Abort"
-msgstr "&Прекини"
 
 msgid ""
 "\n"
@@ -2854,9 +2864,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

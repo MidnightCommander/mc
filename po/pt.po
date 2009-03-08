@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -55,9 +55,8 @@ msgstr " Ficheiro demasiado grande: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Introduza linha: "
+msgid "&Dismiss"
+msgstr "&Fechar"
 
 msgid "Warning"
 msgstr "Aviso"
@@ -103,6 +102,10 @@ msgstr " Editar Modo Gravação "
 
 msgid " Save As "
 msgstr " Gravar Como "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Introduza linha: "
 
 msgid " A file already exists with this name. "
 msgstr " Já existe um ficheiro com este nome. "
@@ -360,9 +363,6 @@ msgstr " Primir qualquer tecla: "
 
 msgid " Execute Macro "
 msgstr " Executar Macro "
-
-msgid "&Dismiss"
-msgstr "&Fechar"
 
 msgid " Emacs key: "
 msgstr " Tecla Emacs: "
@@ -794,6 +794,9 @@ msgstr "sensível à capi&talização"
 
 msgid "Sort order"
 msgstr "Ordem de ordenação"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1328,6 +1331,9 @@ msgstr ""
 " Incapaz de criar alvo de atalho \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1344,8 +1350,11 @@ msgstr ""
 " Incapaz de opter informação do ficheiro origem \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' e `%s' são o mesmo ficheiro "
 
 #, c-format
@@ -1508,6 +1517,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' e `%s' são o mesmo ficheiro "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Incapaz de sobrepor directório `%s' "
 
@@ -1609,9 +1622,6 @@ msgstr " Incapaz de colocar o processo em exedcução de fundo "
 
 msgid "&Retry"
 msgstr "&Repetir"
-
-msgid "&Abort"
-msgstr "&Abortar"
 
 msgid ""
 "\n"
@@ -2863,9 +2873,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -57,8 +57,8 @@ msgstr " Fiºierul este prea mare: "
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
 
-msgid " Enter file name: "
-msgstr " Introduceþi numele fiºierului: "
+msgid "&Dismiss"
+msgstr "&Închide"
 
 msgid "Warning"
 msgstr "Atenþie"
@@ -104,6 +104,9 @@ msgstr " Editeazã Modul de Salvare "
 
 msgid " Save As "
 msgstr " Salveazã Ca "
+
+msgid " Enter file name: "
+msgstr " Introduceþi numele fiºierului: "
 
 msgid " A file already exists with this name. "
 msgstr " Existã deja un fiºier cu acest nume. "
@@ -360,9 +363,6 @@ msgstr " Apãsaþi o tastã: "
 
 msgid " Execute Macro "
 msgstr " Executã Combinaþia "
-
-msgid "&Dismiss"
-msgstr "&Închide"
 
 msgid " Emacs key: "
 msgstr " Tasta Emacs: "
@@ -793,6 +793,9 @@ msgstr "nu ignora &Majusculele "
 
 msgid "Sort order"
 msgstr "Ordinea de sortare"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1321,6 +1324,9 @@ msgstr ""
 " Nu pot crea legãtura simbolicã þintã \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Întrerup"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1337,8 +1343,11 @@ msgstr ""
 " Nu pot executa stat pe fiºierul sursã \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' ºi `%s' sunt acelaºi fiºier "
 
 #, c-format
@@ -1501,6 +1510,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' ºi `%s' sunt acelaºi fiºier "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nu pot suprascrie directorul `%s' "
 
@@ -1602,9 +1615,6 @@ msgstr " Scuze, nu am putut trimite operaþiunea în fundal "
 
 msgid "&Retry"
 msgstr "&Reîncerc"
-
-msgid "&Abort"
-msgstr "&Întrerup"
 
 msgid ""
 "\n"
@@ -2850,9 +2860,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

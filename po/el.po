@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -55,7 +55,7 @@ msgstr " Αρχείο πολύ μεγάλο: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
+msgid "&Dismiss"
 msgstr ""
 
 msgid "Warning"
@@ -104,6 +104,9 @@ msgstr ""
 
 msgid " Save As "
 msgstr " Αποθήκευση ως "
+
+msgid " Enter file name: "
+msgstr ""
 
 msgid " A file already exists with this name. "
 msgstr ""
@@ -355,9 +358,6 @@ msgstr " Πιέστε κάποιο πλήκτρο: "
 
 msgid " Execute Macro "
 msgstr " Εκτελ. μακροεντολής"
-
-msgid "&Dismiss"
-msgstr ""
 
 msgid " Emacs key: "
 msgstr " Πλήκτρο Emacs: "
@@ -773,6 +773,9 @@ msgid "case sensi&tive"
 msgstr ""
 
 msgid "Sort order"
+msgstr ""
+
+msgid "Executable first"
 msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
@@ -1285,6 +1288,9 @@ msgid ""
 " %s "
 msgstr ""
 
+msgid "&Abort"
+msgstr ""
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1298,7 +1304,10 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " `%s' and `%s' are the same file "
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr ""
 
 #, c-format
@@ -1425,6 +1434,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr ""
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
@@ -1515,9 +1528,6 @@ msgid " Sorry, I could not put the job in background "
 msgstr ""
 
 msgid "&Retry"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid ""
@@ -2697,9 +2707,6 @@ msgid "%b %e %H:%M"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
-
-msgid "(invalid)"
 msgstr ""
 
 #, fuzzy, c-format

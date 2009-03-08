@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -55,9 +55,8 @@ msgstr " 文件太大："
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " 输入行号："
+msgid "&Dismiss"
+msgstr "取消(&D)"
 
 msgid "Warning"
 msgstr "警告"
@@ -103,6 +102,10 @@ msgstr " 编辑保存模式 "
 
 msgid " Save As "
 msgstr " 保存为"
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " 输入行号："
 
 msgid " A file already exists with this name. "
 msgstr " 同名文件已存在。"
@@ -358,9 +361,6 @@ msgstr " 按下任意键："
 
 msgid " Execute Macro "
 msgstr " 执行宏 "
-
-msgid "&Dismiss"
-msgstr "取消(&D)"
 
 msgid " Emacs key: "
 msgstr " Emacs 键："
@@ -790,6 +790,9 @@ msgstr "大小写敏感(&T)"
 
 msgid "Sort order"
 msgstr "排序"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1319,6 +1322,9 @@ msgstr ""
 " 无法创建目标符号链接“%s” \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中止(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1335,8 +1341,11 @@ msgstr ""
 " 无法 stat 源文件“%s” \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " “%s”和“%s”是同一个文件 "
 
 #, c-format
@@ -1499,6 +1508,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " “%s”和“%s”是同一个文件 "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " 无法覆盖目录“%s” "
 
@@ -1600,9 +1613,6 @@ msgstr " 抱歉，无法将任务放到后台 "
 
 msgid "&Retry"
 msgstr "重试(&R)"
-
-msgid "&Abort"
-msgstr "中止(&A)"
 
 msgid ""
 "\n"
@@ -2841,9 +2851,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

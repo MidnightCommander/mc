@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2;\n"
 
 msgid " Choose syntax highlighting "
 msgstr " Parinkite sintaksės ryškinimą "
@@ -55,8 +56,8 @@ msgstr " Failas %s yra per didelis "
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
 
-msgid " Enter file name: "
-msgstr " Įveskite failo pavadinimą: "
+msgid "&Dismiss"
+msgstr "At&mesti"
 
 msgid "Warning"
 msgstr "Įspėjimas"
@@ -102,6 +103,9 @@ msgstr " Keisti įrašymo režimą "
 
 msgid " Save As "
 msgstr " Įrašyti kaip "
+
+msgid " Enter file name: "
+msgstr " Įveskite failo pavadinimą: "
 
 msgid " A file already exists with this name. "
 msgstr " Failas šiuo pavadinimu jau yra. "
@@ -218,8 +222,11 @@ msgstr " Pakeisti "
 msgid "Search"
 msgstr "Paieška"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
-msgstr " Klaida reguliarioje išraiškoje, arba „scanf“ išraiška turi per daug konvertavimų "
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
+msgstr ""
+" Klaida reguliarioje išraiškoje, arba „scanf“ išraiška turi per daug "
+"konvertavimų "
 
 msgid " Error in replacement format string. "
 msgstr " Klaida pakeitimo eilutės formate. "
@@ -348,9 +355,6 @@ msgstr " Paspauskite bet kurį klavišą: "
 
 msgid " Execute Macro "
 msgstr " Įvykdyti makrokomandą "
-
-msgid "&Dismiss"
-msgstr "At&mesti"
 
 msgid " Emacs key: "
 msgstr " „Emacs“ klavišas: "
@@ -780,6 +784,9 @@ msgstr "Skir&ti ABC nuo abc"
 
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
+
+msgid "Executable first"
+msgstr ""
 
 msgid " confirm di&Rectory hotlist delete "
 msgstr " patvirtinti katalogų są&rašo šalinimą "
@@ -1245,16 +1252,26 @@ msgid " %s%s file error"
 msgstr " %s%s failo klaida"
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "3.0 versijoje pasikeitė „%smc.ext“ failo formatas. Panašu, kad įdiegimas nepavyko. Įsidiekite naują „Midnight Commander“ versiją."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"3.0 versijoje pasikeitė „%smc.ext“ failo formatas. Panašu, kad įdiegimas "
+"nepavyko. Įsidiekite naują „Midnight Commander“ versiją."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s failo klaida "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "3.0 versijoje pasikeitė ~/%s failo formatas. Galite jį nukopijuoti iš %smc.ext arba naudoti tą failą kaip pavyzdį naujo rašymui."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"3.0 versijoje pasikeitė ~/%s failo formatas. Galite jį nukopijuoti iš %smc."
+"ext arba naudoti tą failą kaip pavyzdį naujo rašymui."
 
 msgid " Copy "
 msgstr " Kopijuoti "
@@ -1296,6 +1313,9 @@ msgstr ""
 " Nepavyko pakeisti „%s“ režimo \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Nutr&aukti"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1312,8 +1332,11 @@ msgstr ""
 " Nepavyko nustatyti failo „%s“ būklės („stat“) \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " „%s“ ir „%s“ yra tas pats failas "
 
 #, c-format
@@ -1476,6 +1499,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " „%s“ ir „%s“ yra tas pats failas "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nepavyko perrašyti aplanko „%s“ "
 
@@ -1579,9 +1606,6 @@ msgstr " Nepavyko nukelti darbo į foną "
 
 msgid "&Retry"
 msgstr "&Iš naujo"
-
-msgid "&Abort"
-msgstr "Nutr&aukti"
 
 msgid ""
 "\n"
@@ -1886,7 +1910,8 @@ msgid " Hotlist Load "
 msgstr " Katalogų sąrašo įkėlimas "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr "MC nesugebėjo įrašyti ~/%s failo, jūsų seni sąrašai nebuvo ištrinti"
 
 #, c-format
@@ -2337,7 +2362,8 @@ msgid ""
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Editor:       editnormal, editbold, editmarked\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, core\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2357,7 +2383,8 @@ msgstr ""
 "   Meniu:          menu, menuhot, menusel, menuhotsel\n"
 "   Redaktorius:    editnormal, editbold, editmarked\n"
 "   Pagalba:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Failų tipai: directory, executable, link, stalelink, device, special, core\n"
+"   Failų tipai: directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Spalvos:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2827,9 +2854,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr "(negalioja)"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -3586,24 +3610,36 @@ msgstr "Vidinė klaida:"
 msgid "Changes to file lost"
 msgstr "Failo pakeitimai prarasti"
 
+#~ msgid "(invalid)"
+#~ msgstr "(negalioja)"
+
 #~ msgid "&Home"
 #~ msgstr "&Namų"
+
 #~ msgid "&Type"
 #~ msgstr "&Tipas"
+
 #~ msgid "&Links"
 #~ msgstr "&Nuorodos"
+
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
+
 #~ msgid "N&UID"
 #~ msgstr "N&UID"
+
 #~ msgid "&Owner"
 #~ msgstr "&Savin."
+
 #~ msgid "&Group"
 #~ msgstr "&Grupė"
+
 #~ msgid "MC was unable to write ~/"
 #~ msgstr "Nepavyko įrašyti ~/"
+
 #~ msgid " Notice "
 #~ msgstr " Pastaba "
+
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
@@ -3611,4 +3647,3 @@ msgstr "Failo pakeitimai prarasti"
 #~ msgstr ""
 #~ " „Midnight Commander“ savo nustatymus laiko \n"
 #~ " „~/.mc“ kataloge, rinkmenos perkeltos į jį.\n"
-

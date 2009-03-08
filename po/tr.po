@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -57,9 +57,8 @@ msgstr " Dosya çok fazla büyük: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Satýrý girin: "
+msgid "&Dismiss"
+msgstr "&Býrak"
 
 msgid "Warning"
 msgstr "Uyarý"
@@ -105,6 +104,10 @@ msgstr " Kaydetme kipini düzenle "
 
 msgid " Save As "
 msgstr " Farklý kaydet "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Satýrý girin: "
 
 msgid " A file already exists with this name. "
 msgstr " Bu isimde bir dosya zaten var. "
@@ -361,9 +364,6 @@ msgstr " Bir tuþa basýnýz: "
 
 msgid " Execute Macro "
 msgstr " Macro'yu çalýþtýr "
-
-msgid "&Dismiss"
-msgstr "&Býrak"
 
 msgid " Emacs key: "
 msgstr " Emacs tuþu: "
@@ -795,6 +795,9 @@ msgstr "&Harf büyüklüðüne duyarlý"
 
 msgid "Sort order"
 msgstr "Sýralama türü"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1327,6 +1330,9 @@ msgstr ""
 " Hedef sembolik bað \"%s\" oluþturulamýyor \n"
 " %s"
 
+msgid "&Abort"
+msgstr "Ý&ptal"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1343,8 +1349,11 @@ msgstr ""
 " \"%s\" kaynak dosyasý durumlanamýyor \n"
 " %s"
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' ve `%s' ayný dosyadýr "
 
 #, c-format
@@ -1507,6 +1516,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' ve `%s' ayný dosyadýr "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " %s dizinin üstüne yazýlamýyor "
 
@@ -1608,9 +1621,6 @@ msgstr " Ýþ artalana konulamadý "
 
 msgid "&Retry"
 msgstr "&Tekrar"
-
-msgid "&Abort"
-msgstr "Ý&ptal"
 
 msgid ""
 "\n"
@@ -2861,9 +2871,6 @@ msgstr "%e %b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -58,8 +58,8 @@ msgstr " Fichier trop gros : "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Saisissez le nom de fichier : "
+msgid "&Dismiss"
+msgstr "&Fermer"
 
 msgid "Warning"
 msgstr "Attention"
@@ -105,6 +105,9 @@ msgstr " Éditer le mode de sauvegarde"
 
 msgid " Save As "
 msgstr " Enregistrer sous "
+
+msgid " Enter file name: "
+msgstr " Saisissez le nom de fichier : "
 
 msgid " A file already exists with this name. "
 msgstr " Un fichier portant le même nom existe déjà. "
@@ -365,9 +368,6 @@ msgstr " Appuyez sur une touche : "
 
 msgid " Execute Macro "
 msgstr " Exécuter macro "
-
-msgid "&Dismiss"
-msgstr "&Fermer"
 
 msgid " Emacs key: "
 msgstr " Touches Emacs : "
@@ -798,6 +798,9 @@ msgstr "Respec&t de la casse "
 
 msgid "Sort order"
 msgstr "Ordre de tri"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1332,6 +1335,9 @@ msgstr ""
 " Ne peut créer le lien symbolique cible « %s »\n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Interrompre"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1348,8 +1354,11 @@ msgstr ""
 " Ne peut analyser le fichier source « %s »\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " « %s » et « %s » sont le même fichier "
 
 #, c-format
@@ -1510,6 +1519,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " « %s » et « %s » sont le même fichier "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Ne peut écraser le répertoire « %s » "
 
@@ -1611,9 +1624,6 @@ msgstr " Désolé, je ne peux pas passer le processus en tâche de fond "
 
 msgid "&Retry"
 msgstr "&Ré-essayer"
-
-msgid "&Abort"
-msgstr "&Interrompre"
 
 msgid ""
 "\n"
@@ -2870,9 +2880,6 @@ msgstr "%e %b %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
@@ -52,8 +52,8 @@ msgstr " Вельмі вялікі файл: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Увядзіце ймя файлу: "
+msgid "&Dismiss"
+msgstr "&Зачыніць"
 
 msgid "Warning"
 msgstr "Папярэджаньне"
@@ -99,6 +99,9 @@ msgstr " Рэжым захаваньня "
 
 msgid " Save As "
 msgstr " Захаваць як "
+
+msgid " Enter file name: "
+msgstr " Увядзіце ймя файлу: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с такім імем ужо йснуе. "
@@ -354,9 +357,6 @@ msgstr " Націсьніце любую клявішу: "
 
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
-
-msgid "&Dismiss"
-msgstr "&Зачыніць"
 
 msgid " Emacs key: "
 msgstr " Клявіша Emacs: "
@@ -788,6 +788,9 @@ msgstr "Улік рэ&гістру"
 
 msgid "Sort order"
 msgstr "Парадак сартаваньня"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1322,6 +1325,9 @@ msgstr ""
 " Немагчыма стварыць сымб. спасылку мэты \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Перарваць"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1338,8 +1344,11 @@ msgstr ""
 " Немагчыма атрымаць уласьцівасьці зыходнага файлу \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' і `%s' адзін і той жа файл "
 
 #, c-format
@@ -1502,6 +1511,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' і `%s' адзін і той жа файл "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Немагчыма перапісаць каталёг `%s' "
 
@@ -1603,9 +1616,6 @@ msgstr " Выбачайце, зрабіць гэта ў тле немагчыма "
 
 msgid "&Retry"
 msgstr "Па&ўтарыць"
-
-msgid "&Abort"
-msgstr "&Перарваць"
 
 msgid ""
 "\n"
@@ -2836,9 +2846,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

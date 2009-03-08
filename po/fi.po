@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -55,8 +55,8 @@ msgstr " Tiedosto on liian suuri: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Anna tiedostonimi: "
+msgid "&Dismiss"
+msgstr "&Kuittaa"
 
 msgid "Warning"
 msgstr "Varoitus"
@@ -104,6 +104,9 @@ msgstr " Muokkaa tallennusmoodia "
 
 msgid " Save As "
 msgstr " Tallenna nimellä "
+
+msgid " Enter file name: "
+msgstr " Anna tiedostonimi: "
 
 msgid " A file already exists with this name. "
 msgstr " Tämänniminen tiedosto on jo olemassa. "
@@ -360,9 +363,6 @@ msgstr " Paina jotakin näppäintä: "
 
 msgid " Execute Macro "
 msgstr " Suorita makro "
-
-msgid "&Dismiss"
-msgstr "&Kuittaa"
 
 msgid " Emacs key: "
 msgstr " Emacs-näppäin: "
@@ -793,6 +793,9 @@ msgstr "&Isot/pienet eroavat"
 
 msgid "Sort order"
 msgstr "Järjestys"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1330,6 +1333,9 @@ msgstr ""
 " Ei voitu luoda symbolista linkkiä \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr ""
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1346,9 +1352,12 @@ msgstr ""
 " Ei saada tietoja lähdetiedostosta \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
-msgstr ""
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
+msgstr " '%s' ja '%s' ovat sama tiedosto. "
 
 #, c-format
 msgid ""
@@ -1478,6 +1487,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr ""
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
@@ -1568,9 +1581,6 @@ msgid " Sorry, I could not put the job in background "
 msgstr ""
 
 msgid "&Retry"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid ""
@@ -2758,9 +2768,6 @@ msgid "%b %e %H:%M"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
-
-msgid "(invalid)"
 msgstr ""
 
 #, fuzzy, c-format

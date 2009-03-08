@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -59,8 +59,8 @@ msgstr " A(z) \"%s\" fájl túl nagy "
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
 
-msgid " Enter file name: "
-msgstr " Fájlnév: "
+msgid "&Dismiss"
+msgstr "&Tovább"
 
 #
 msgid "Warning"
@@ -110,6 +110,9 @@ msgstr " Mentési mód "
 
 msgid " Save As "
 msgstr " Mentés más névvel "
+
+msgid " Enter file name: "
+msgstr " Fájlnév: "
 
 msgid " A file already exists with this name. "
 msgstr " Már létezik ilyen nevû fájl. "
@@ -365,9 +368,6 @@ msgstr " Nyomjon meg egy billentyût: "
 
 msgid " Execute Macro "
 msgstr " Makró futtatása "
-
-msgid "&Dismiss"
-msgstr "&Tovább"
 
 msgid " Emacs key: "
 msgstr " Emacs-billentyû: "
@@ -811,6 +811,9 @@ msgstr "&Kis-/nagybetû számít"
 
 msgid "Sort order"
 msgstr " Rendezési mód "
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1360,6 +1363,9 @@ msgstr ""
 " (\"%s\"). \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Megszakítás"
+
 # 2. %s: hibaüzenet
 #, c-format
 msgid ""
@@ -1378,8 +1384,11 @@ msgstr ""
 " forrásfájl adatait. \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr ""
 " \"%s\" és \n"
 " \"%s\" ugyanaz a fájl "
@@ -1555,6 +1564,12 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr ""
+" \"%s\" és \n"
+" \"%s\" ugyanaz a fájl "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nem sikerült felülírni a(z) \"%s\" könyvtárt "
 
@@ -1672,9 +1687,6 @@ msgstr " Nem lehet a mûveletet a háttérben végezni. "
 
 msgid "&Retry"
 msgstr "Új&ra"
-
-msgid "&Abort"
-msgstr "&Megszakítás"
 
 msgid ""
 "\n"
@@ -2975,9 +2987,6 @@ msgstr "%b %e %H.%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -66,8 +66,8 @@ msgstr " Файл %s слишком большой "
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
 
-msgid " Enter file name: "
-msgstr " Введите имя файла: "
+msgid "&Dismiss"
+msgstr "&Закрыть"
 
 msgid "Warning"
 msgstr "Предупреждение"
@@ -113,6 +113,9 @@ msgstr " Режим сохранения "
 
 msgid " Save As "
 msgstr " Сохранить как "
+
+msgid " Enter file name: "
+msgstr " Введите имя файла: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
@@ -361,9 +364,6 @@ msgstr " Нажмите любую клавишу: "
 
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
@@ -793,6 +793,9 @@ msgstr "Учет ре&гистра"
 
 msgid "Sort order"
 msgstr "Порядок сортировки"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1321,6 +1324,9 @@ msgstr ""
 " Невозможно создать целевую симв. ссылку \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Прервать"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1337,8 +1343,11 @@ msgstr ""
 " Невозможно получить свойства исходного файла \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' и `%s' один и тот же файл "
 
 #, c-format
@@ -1501,6 +1510,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' и `%s' один и тот же файл "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Невозможно переписать каталог `%s' "
 
@@ -1603,9 +1616,6 @@ msgstr " Извините, сделать это в фоновом режиме невозможно "
 
 msgid "&Retry"
 msgstr "По&вторить"
-
-msgid "&Abort"
-msgstr "&Прервать"
 
 msgid ""
 "\n"
@@ -2854,9 +2864,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

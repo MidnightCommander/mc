@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -56,9 +56,8 @@ msgstr " Fayl çox böyükdür: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Sətiri tap: "
+msgid "&Dismiss"
+msgstr "&Keç"
 
 msgid "Warning"
 msgstr "Xəbərdarlıq"
@@ -104,6 +103,10 @@ msgstr " Qeyd Etmə şəklini dəyişdir "
 
 msgid " Save As "
 msgstr " Fərqli qeyd et "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Sətiri tap: "
 
 msgid " A file already exists with this name. "
 msgstr " Bu adla onsuz da bir fayl vardır "
@@ -359,9 +362,6 @@ msgstr " İstədiyin düyməyə bas :"
 
 msgid " Execute Macro "
 msgstr " Makronu işə sal"
-
-msgid "&Dismiss"
-msgstr "&Keç"
 
 msgid " Emacs key: "
 msgstr " Emacs düyməsi :"
@@ -793,6 +793,9 @@ msgstr "böyük/kiçik hərf həssas"
 
 msgid "Sort order"
 msgstr "Süzmə əmri"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1327,6 +1330,9 @@ msgstr ""
 " \"%s\" Hədəf yumşaq bağa yaradıla bilmir\n"
 " %s "
 
+msgid "&Abort"
+msgstr "Lə&ğv et"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1343,8 +1349,11 @@ msgstr ""
 " \"%s\" qayanq faylı stat edilə bilmir \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' və `%s' eyni fayldır "
 
 #, c-format
@@ -1507,6 +1516,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' və `%s' eyni fayldır "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " `%s' qovluğun üstünü yaza bilmərəm "
 
@@ -1608,9 +1621,6 @@ msgstr " Bağışlayın. Arxaya əməliyyat ala bilmərəm "
 
 msgid "&Retry"
 msgstr "Təzədən &sına"
-
-msgid "&Abort"
-msgstr "Lə&ğv et"
 
 msgid ""
 "\n"
@@ -2860,9 +2870,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

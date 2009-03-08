@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -59,8 +59,8 @@ msgstr " Маш том файл: "
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
 
-msgid " Enter file name: "
-msgstr " Файлын нэрээ оруул: "
+msgid "&Dismiss"
+msgstr "&Хаах"
 
 msgid "Warning"
 msgstr "Анхааруулга"
@@ -106,6 +106,9 @@ msgstr " Хадгалах гормыг засварлах "
 
 msgid " Save As "
 msgstr " Гэж хадгалах "
+
+msgid " Enter file name: "
+msgstr " Файлын нэрээ оруул: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл аль хэдийнэ ийм нэрээр үүссэн байна. "
@@ -364,9 +367,6 @@ msgstr " Дурын товч дарна уу: "
 
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
-
-msgid "&Dismiss"
-msgstr "&Хаах"
 
 msgid " Emacs key: "
 msgstr " Emacs-ийн товчлуурууд: "
@@ -797,6 +797,9 @@ msgstr "Учет ре&гистра"
 
 msgid "Sort order"
 msgstr "Эрэмбэлэх дараалал"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1325,6 +1328,9 @@ msgstr ""
 " Заагдсан тэмдэгт холбоосийг үүсгэж чадсангүй \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Таслах"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1341,8 +1347,11 @@ msgstr ""
 " Эх файлыг байрлуулж чадсангүй \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' ба `%s' ууд нь адил файл байна "
 
 #, c-format
@@ -1505,6 +1514,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' ба `%s' ууд нь адил файл байна "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " `%s' лавлахыг дарж бичиж чадсангүй "
 
@@ -1607,9 +1620,6 @@ msgstr " Уучлаарай, арын фонд ажилыг оруулж чад�
 
 msgid "&Retry"
 msgstr "&Дахих"
-
-msgid "&Abort"
-msgstr "&Таслах"
 
 msgid ""
 "\n"
@@ -2852,9 +2862,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

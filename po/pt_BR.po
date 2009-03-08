@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -59,8 +59,8 @@ msgstr " Arquivo grande demais: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-msgid " Enter file name: "
-msgstr " Informe nome do arquivo: "
+msgid "&Dismiss"
+msgstr "&Dispensar"
 
 msgid "Warning"
 msgstr "Aviso"
@@ -108,6 +108,9 @@ msgstr " Editar modo de salvamento "
 
 msgid " Save As "
 msgstr " Salvar Como "
+
+msgid " Enter file name: "
+msgstr " Informe nome do arquivo: "
 
 msgid " A file already exists with this name. "
 msgstr " Um arquivo com esse nome já existe. "
@@ -366,9 +369,6 @@ msgstr " Pressione qualquer tecla: "
 
 msgid " Execute Macro "
 msgstr " Executar Macro "
-
-msgid "&Dismiss"
-msgstr "&Dispensar"
 
 msgid " Emacs key: "
 msgstr " Tecla do Emacs: "
@@ -803,6 +803,9 @@ msgstr "sensível à &caixa (minúsc/maiusc)"
 
 msgid "Sort order"
 msgstr "Parâmetros de ordenamento"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1347,6 +1350,9 @@ msgstr ""
 " Impossível criar ligação simbólica \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "C&Ancelar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1363,8 +1369,11 @@ msgstr ""
 " Não é possível testar arquivo de origem \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " '%s' e '%s' são o mesmo arquivo"
 
 #, c-format
@@ -1527,6 +1536,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " '%s' e '%s' são o mesmo arquivo"
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Impossível sobrescrever diretório '%s' "
 
@@ -1628,9 +1641,6 @@ msgstr "Desculpe, mas não posso colocar a tarefa em segundo plano"
 
 msgid "&Retry"
 msgstr "&Tentar Novamente"
-
-msgid "&Abort"
-msgstr "C&Ancelar"
 
 msgid ""
 "\n"
@@ -2896,9 +2906,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -62,9 +62,8 @@ msgstr " Li fitchî est trop grand: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " Diner roye: "
+msgid "&Dismiss"
+msgstr "&Rinoncî"
 
 msgid "Warning"
 msgstr "Advertixhmint"
@@ -111,6 +110,10 @@ msgstr " Môde Aspougnî Schaper "
 
 msgid " Save As "
 msgstr " Schaper et rlomer "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Diner roye: "
 
 msgid " A file already exists with this name. "
 msgstr " I gn a ddja on fitchî lomé insi. "
@@ -371,9 +374,6 @@ msgstr " Tchôkî tot l' minme li kéne tape: "
 
 msgid " Execute Macro "
 msgstr " Enonder Macro "
-
-msgid "&Dismiss"
-msgstr "&Rinoncî"
 
 msgid " Emacs key: "
 msgstr " Tape di Emacs: "
@@ -806,6 +806,9 @@ msgstr "grandès <> ptitès letes"
 
 msgid "Sort order"
 msgstr "Ôrde po relire"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1344,6 +1347,9 @@ msgstr ""
 " Dji n' sai fé li loyén simbolike såme «%s» \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Ri&noncî"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1361,8 +1367,11 @@ msgstr ""
 " Dji n' sai fé on stat sol fitchî soûrdant «%s» \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " «%s» eyet «%s» sont li minme fitchî "
 
 #, c-format
@@ -1526,6 +1535,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " «%s» eyet «%s» sont li minme fitchî "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Dji n' såreu spotchî li ridant «%s» "
 
@@ -1627,9 +1640,6 @@ msgstr " Dji rgrete, dji n' sai mete ci bezogne la e fond "
 
 msgid "&Retry"
 msgstr "&Rissayî"
-
-msgid "&Abort"
-msgstr "Ri&noncî"
 
 msgid ""
 "\n"
@@ -2859,9 +2869,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

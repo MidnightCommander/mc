@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:07+0000\n"
 "PO-Revision-Date: 2005-09-10 13:28+0300\n"
 "Last-Translator: Anton Sergeevich Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Русский\n"
@@ -56,8 +56,8 @@ msgstr "файл %s надто великий"
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурс╕я макрос╕в"
 
-msgid " Enter file name: "
-msgstr " Введ╕ть назву файлу: "
+msgid "&Dismiss"
+msgstr "&Закрити"
 
 msgid "Warning"
 msgstr "Попередження"
@@ -103,6 +103,9 @@ msgstr " Режим збереження "
 
 msgid " Save As "
 msgstr " Зберегти як "
+
+msgid " Enter file name: "
+msgstr " Введ╕ть назву файлу: "
 
 msgid " A file already exists with this name. "
 msgstr " Файл з ц╕╓ю назвою вже ╕сну╓. "
@@ -350,9 +353,6 @@ msgstr " Натисн╕ть будь яку клав╕шу: "
 
 msgid " Execute Macro "
 msgstr " Виконати макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрити"
 
 msgid " Emacs key: "
 msgstr " Клав╕ша Emacs: "
@@ -782,6 +782,9 @@ msgstr "Врахування ре&г╕стру"
 
 msgid "Sort order"
 msgstr "Порядок сортування"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1310,6 +1313,9 @@ msgstr ""
 " Не вда╓ться створити ц╕льове символьне посилання \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Перервати"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1326,8 +1332,11 @@ msgstr ""
 " Не вда╓ться отримати властивост╕ вих╕дного файла \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " \"%s\" ╕ \"%s\" це один ╕ той же ж файл "
 
 #, c-format
@@ -1490,6 +1499,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " \"%s\" ╕ \"%s\" це один ╕ той же ж файл "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Не вда╓ться зам╕стити каталог \"%s\" "
 
@@ -1591,9 +1604,6 @@ msgstr " Вибачте, не зм╕г пом╕стити цей процес на тло"
 
 msgid "&Retry"
 msgstr "По&вторити"
-
-msgid "&Abort"
-msgstr "&Перервати"
 
 msgid ""
 "\n"
@@ -2839,9 +2849,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

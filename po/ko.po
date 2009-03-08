@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -53,8 +53,8 @@ msgstr " 파일 크기가 너무 큼: "
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
 
-msgid " Enter file name: "
-msgstr " 파일명 입력: "
+msgid "&Dismiss"
+msgstr "취소(&D)"
 
 msgid "Warning"
 msgstr "경고"
@@ -100,6 +100,9 @@ msgstr " 편집 저장 모드 "
 
 msgid " Save As "
 msgstr " 새이름으로 저장 "
+
+msgid " Enter file name: "
+msgstr " 파일명 입력: "
 
 msgid " A file already exists with this name. "
 msgstr " 같은 이름의 파일이 이미 있습니다. "
@@ -355,9 +358,6 @@ msgstr " 아무 글쇠나 누르십시오: "
 
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
-
-msgid "&Dismiss"
-msgstr "취소(&D)"
 
 msgid " Emacs key: "
 msgstr " Emacs 글쇠: "
@@ -788,6 +788,9 @@ msgstr "대소문자 구분(&t)"
 
 msgid "Sort order"
 msgstr "정렬 순서"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1316,6 +1319,9 @@ msgstr ""
 " 심볼릭링크 \"%s\"을(를) 만들 수 없습니다 \n"
 " %s "
 
+msgid "&Abort"
+msgstr "중단(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1332,8 +1338,11 @@ msgstr ""
 " \"%s\" 파일 정보를 얻을 수 없습니다 \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s'와 `%s'은(는) 같은 파일입니다 "
 
 #, c-format
@@ -1496,6 +1505,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s'와 `%s'은(는) 같은 파일입니다 "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " `%s' 디렉토리을 덮어쓸 수 없습니다 "
 
@@ -1597,9 +1610,6 @@ msgstr " 미안, 백그라운드로 일을 수행할 수 없네요 "
 
 msgid "&Retry"
 msgstr "재시도(&R)"
-
-msgid "&Abort"
-msgstr "중단(&A)"
 
 msgid ""
 "\n"
@@ -2842,9 +2852,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, c-format
 msgid "%s is not a directory\n"

@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-02-13 12:30+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:06+0000\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -56,6 +56,9 @@ msgstr " Bestand %s is te groot "
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
+
+msgid "&Dismiss"
+msgstr "&Verwerp"
 
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -352,9 +355,6 @@ msgstr " Druk een toets: "
 
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
-
-msgid "&Dismiss"
-msgstr "&Verwerp"
 
 msgid " Emacs key: "
 msgstr " Emacs-toets: "
@@ -1181,7 +1181,7 @@ msgstr ""
 msgid " Setup "
 msgstr " Instellingen "
 
-#,c-format
+#, c-format
 msgid " Setup saved to ~/%s"
 msgstr " Instellingen opgeslagen in ~/%s"
 
@@ -1317,6 +1317,9 @@ msgstr ""
 " Maken van doel van symbolische link \"%s\" mislukt \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Afbreken"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1333,8 +1336,11 @@ msgstr ""
 " Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' en `%s' zijn het zelfde bestand "
 
 #, c-format
@@ -1497,6 +1503,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' en `%s' zijn het zelfde bestand "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Overschrijven van map `%s' mislukt "
 
@@ -1598,9 +1608,6 @@ msgstr " De job kon niet in de achtergrond geplaatst worden "
 
 msgid "&Retry"
 msgstr "Nogmaals"
-
-msgid "&Abort"
-msgstr "&Afbreken"
 
 msgid ""
 "\n"
@@ -2485,9 +2492,6 @@ msgstr "Bereken tota&Len"
 msgid "&Verbose operation"
 msgstr "Uitvoering met &Weergave"
 
-msgid "Mkdir autoname"
-msgstr ""
-
 msgid "&Fast dir reload"
 msgstr "Snel herle&Zen"
 
@@ -2716,6 +2720,12 @@ msgstr "Met ingebouwde editor\n"
 
 msgid "Using system-installed S-Lang library"
 msgstr "Door het systeem geïnstalleerd S-Lang bibliotheek zal gebruikt worden."
+
+msgid "Using included S-Lang library"
+msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."
+
+msgid "with termcap database"
+msgstr "met termcap database"
 
 msgid "with terminfo database"
 msgstr "met terminfo database"
@@ -3604,12 +3614,6 @@ msgstr "Interne fout:"
 
 msgid "Changes to file lost"
 msgstr "Wijzigingen zijn verloren"
-
-#~ msgid "Using included S-Lang library"
-#~ msgstr "Bijgesloten S-Lang bibliotheek zal gebruikt worden."
-
-#~ msgid "with termcap database"
-#~ msgstr "met termcap database"
 
 #~ msgid "&Home"
 #~ msgstr "&Home"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -56,9 +56,8 @@ msgstr "ファイルが大きすぎます: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr " 行番号を入力してください: "
+msgid "&Dismiss"
+msgstr "消去(&D)"
 
 msgid "Warning"
 msgstr "警告"
@@ -104,6 +103,10 @@ msgstr "保存方法を変更 "
 
 msgid " Save As "
 msgstr " 別名で保存 "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr " 行番号を入力してください: "
 
 msgid " A file already exists with this name. "
 msgstr "同名のファイルが存在します"
@@ -360,9 +363,6 @@ msgstr " キーを押してください: "
 
 msgid " Execute Macro "
 msgstr " マクロを実行 "
-
-msgid "&Dismiss"
-msgstr "消去(&D)"
 
 msgid " Emacs key: "
 msgstr " Emacsキー: "
@@ -794,6 +794,9 @@ msgstr "大文字・小文字を区別(&t)"
 
 msgid "Sort order"
 msgstr "並び変える"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1328,6 +1331,9 @@ msgstr ""
 " ターゲットのシンボリックリンク \"%s\" を作成できません \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中断(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1344,8 +1350,11 @@ msgstr ""
 " 元ファイル \"%s\" を stat できません\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr " `%s' と `%s' は同じファイルです "
 
 #, c-format
@@ -1508,6 +1517,10 @@ msgstr ""
 "  %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' と `%s' は同じファイルです "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " ディレクトリ `%s' を上書きできません "
 
@@ -1609,9 +1622,6 @@ msgstr " ごめんなさい。ジョブをバックグランド処理にできません "
 
 msgid "&Retry"
 msgstr "再試行(&R)"
-
-msgid "&Abort"
-msgstr "中断(&A)"
 
 msgid ""
 "\n"
@@ -2860,9 +2870,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"

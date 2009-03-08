@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-01-06 13:46+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-17 17:05+0000\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -56,9 +56,8 @@ msgstr " Fitxategia handiegia da: "
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#, fuzzy
-msgid " Enter file name: "
-msgstr "Sartu lerroa: "
+msgid "&Dismiss"
+msgstr "&Itxi"
 
 msgid "Warning"
 msgstr "Abisua"
@@ -104,6 +103,10 @@ msgstr " Editatu Gorde modua "
 
 msgid " Save As "
 msgstr " Gorde honela "
+
+#, fuzzy
+msgid " Enter file name: "
+msgstr "Sartu lerroa: "
 
 msgid " A file already exists with this name. "
 msgstr " Izen hau duen fitxategia badago lehendik. "
@@ -362,9 +365,6 @@ msgstr " Sakatu tekla bat: "
 
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
-
-msgid "&Dismiss"
-msgstr "&Itxi"
 
 msgid " Emacs key: "
 msgstr " Emacs tekla: "
@@ -796,6 +796,9 @@ msgstr "maiuskulak eta minuskulak bereizten ditu"
 
 msgid "Sort order"
 msgstr "Ordenazioa"
+
+msgid "Executable first"
+msgstr ""
 
 #, fuzzy
 msgid " confirm di&Rectory hotlist delete "
@@ -1333,6 +1336,9 @@ msgstr ""
 "Ezin da \"%s\" helburu-esteka sinbolikorik sortu\n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortatu"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1349,8 +1355,11 @@ msgstr ""
 "Ezin da \"%s\" iturburu-fitxategia identifikatu\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' and\n"
+" `%s'\n"
+" are the same file "
 msgstr "`%s' eta `%s' fitxategi bera dira "
 
 #, c-format
@@ -1513,6 +1522,10 @@ msgstr ""
 " %s "
 
 #, c-format
+msgid " `%s' and `%s' are the same file "
+msgstr "`%s' eta `%s' fitxategi bera dira "
+
+#, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr "Ezin da `%s' direktorioa gainidatzi "
 
@@ -1614,9 +1627,6 @@ msgstr "Ezin izan dut lana atzeko planoan ipini "
 
 msgid "&Retry"
 msgstr "&Saiatu berriz"
-
-msgid "&Abort"
-msgstr "&Abortatu"
 
 msgid ""
 "\n"
@@ -2871,9 +2881,6 @@ msgstr "%b %e %H:%M"
 
 msgid "%b %e  %Y"
 msgstr "%Y %b %e"
-
-msgid "(invalid)"
-msgstr ""
 
 #, fuzzy, c-format
 msgid "%s is not a directory\n"
