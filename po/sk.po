@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-01-22 21:50+0100\n"
 "Last-Translator: Marcel Telka <marcel@telka.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -1323,6 +1323,9 @@ msgstr ""
 " Nemôžem vytvoriť cieľový symbolický odkaz \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "p&Rerušiť"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1339,8 +1342,12 @@ msgstr ""
 " Nemôžem určiť zdrojový súbor \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' a `%s' sú rovnaké súbory "
 
 #, c-format
@@ -1522,8 +1529,12 @@ msgstr ""
 " Nemôžem odstrániť súbor \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' a `%s' sú ten istý adresár "
 
 #, c-format
@@ -1604,9 +1615,6 @@ msgstr " Ľutujem, ale nemohol som uložiť úlohu do pozadia "
 
 msgid "&Retry"
 msgstr "&Zopakovať"
-
-msgid "&Abort"
-msgstr "p&Rerušiť"
 
 msgid ""
 "\n"

@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -1324,6 +1324,9 @@ msgstr ""
 " Ne morem ustvariti cilja simbolične povezeave \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Prekini"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1340,8 +1343,12 @@ msgstr ""
 " Ne morem poizvedeti o stanju izvorne datoteke \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " datoteki `%s' in `%s' sta isti "
 
 #, c-format
@@ -1523,8 +1530,12 @@ msgstr ""
 " Ne morem odstraniti datoteke \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " imenika `%s' and `%s' sta ista"
 
 #, c-format
@@ -1605,9 +1616,6 @@ msgstr " Oprostite, posla nisem mogel postaviti v ozadje"
 
 msgid "&Retry"
 msgstr "Poskusi &znova"
-
-msgid "&Abort"
-msgstr "&Prekini"
 
 msgid ""
 "\n"

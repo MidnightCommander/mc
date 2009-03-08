@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2008-06-15 19:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -1316,6 +1316,9 @@ msgstr ""
 " Imposible crear el enlace simbólico destino \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1332,8 +1335,12 @@ msgstr ""
 " Imposible identificar el archivo origen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " \"%s\" y \"%s\" son el mismo archivo "
 
 #, c-format
@@ -1515,8 +1522,12 @@ msgstr ""
 " Imposible borrar el archivo \"%s\" \n"
 " %s"
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " \"%s\" y \"%s\" son el mismo directorio "
 
 #, c-format
@@ -1597,9 +1608,6 @@ msgstr " Lo siento, no pude poner la tarea en 2º plano "
 
 msgid "&Retry"
 msgstr "&Reintentar"
-
-msgid "&Abort"
-msgstr "&Abortar"
 
 msgid ""
 "\n"

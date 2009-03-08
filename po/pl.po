@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
@@ -1320,6 +1320,9 @@ msgstr ""
 " Nie mo¿na utworzyæ dowi±zania symbolicznego \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Rezygnuj"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1336,8 +1339,12 @@ msgstr ""
 " Nie mo¿na wykonaæ operacji stat na pliku ¼ród³owym \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " '%s' oraz '%s' to ten sam plik "
 
 #, c-format
@@ -1519,8 +1526,12 @@ msgstr ""
 " Nie mo¿na usun±æ pliku \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " '%s' oraz '%s' to ten sam katalog "
 
 #, c-format
@@ -1601,9 +1612,6 @@ msgstr " Niestety nie mo¿na umie¶ciæ zadania w tle "
 
 msgid "&Retry"
 msgstr "Ponów"
-
-msgid "&Abort"
-msgstr "&Rezygnuj"
 
 msgid ""
 "\n"

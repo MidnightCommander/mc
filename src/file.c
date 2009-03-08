@@ -462,7 +462,8 @@ enum {
     DEST_FULL			/* Created, fully copied */
 };
 
-static int warn_same_file(const char *fmt, const char *a, const char *b)
+static FileProgressStatus
+warn_same_file (const char *fmt, const char *a, const char *b)
 {
     char *msg;
     int result = 0;
@@ -532,7 +533,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     if (dst_exists) {
 	/* Destination already exists */
         if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino)
-            return warn_same_file(_(" `%s' and\n `%s'\n are the same file "),
+            return warn_same_file (_(" `%s' \n and \n `%s' \n are the same file "),
                                 src_path, dst_path);
 	/* Should we replace destination? */
 	if (ask_overwrite) {
@@ -1060,7 +1061,7 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
     if (mc_lstat (d, &dst_stats) == 0) {
 	if (src_stats.st_dev == dst_stats.st_dev
             && src_stats.st_ino == dst_stats.st_ino)
-            return warn_same_file(_(" `%s' and `%s' are the same file "), s, d);
+            return warn_same_file (_(" `%s' \n and \n `%s' \n are the same file "), s, d);
 
 	if (S_ISDIR (dst_stats.st_mode)) {
 	    message (D_ERROR, MSG_ERROR,
@@ -1169,7 +1170,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	destdir = concat_dir_and_file (d, x_basename (s));
 
     if (sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino)
-        return warn_same_file(_(" `%s' and `%s' are the same directory "), s, d);
+        return warn_same_file (_(" `%s' \n and \n `%s' \n are the same directory "), s, d);
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:

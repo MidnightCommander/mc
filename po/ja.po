@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20011220\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-12-20 18:33+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -1331,6 +1331,9 @@ msgstr ""
 " ターゲットのシンボリックリンク \"%s\" を作成できません \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中断(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1347,8 +1350,12 @@ msgstr ""
 " 元ファイル \"%s\" を stat できません\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' と `%s' は同じファイルです "
 
 #, c-format
@@ -1530,8 +1537,12 @@ msgstr ""
 " ファイル \"%s\" を削除できません\n"
 "  %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' と `%s' は同じディレクトリです。"
 
 #, c-format
@@ -1612,9 +1623,6 @@ msgstr " ごめんなさい。ジョブをバックグランド処理にできません "
 
 msgid "&Retry"
 msgstr "再試行(&R)"
-
-msgid "&Abort"
-msgstr "中断(&A)"
 
 msgid ""
 "\n"

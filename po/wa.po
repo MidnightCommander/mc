@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -1347,6 +1347,9 @@ msgstr ""
 " Dji n' sai fé li loyén simbolike såme «%s» \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Ri&noncî"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1364,8 +1367,12 @@ msgstr ""
 " Dji n' sai fé on stat sol fitchî soûrdant «%s» \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " «%s» eyet «%s» sont li minme fitchî "
 
 #, c-format
@@ -1548,8 +1555,12 @@ msgstr ""
 " Dji n' sai waester li fitchî «%s» \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " «%s» eyet «%s» sont li minme ridant "
 
 #, c-format
@@ -1630,9 +1641,6 @@ msgstr " Dji rgrete, dji n' sai mete ci bezogne la e fond "
 
 msgid "&Retry"
 msgstr "&Rissayî"
-
-msgid "&Abort"
-msgstr "Ri&noncî"
 
 msgid ""
 "\n"

@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -1346,6 +1346,9 @@ msgstr ""
 " Kan inte skapa symbolisk länk \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Avbryt"
+
 # bättre än 'målsymlänk'?
 #, c-format
 msgid ""
@@ -1363,8 +1366,12 @@ msgstr ""
 " Kan inte inhämta status om fil \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " \"%s\" och \"%s\" är samma fil "
 
 #, c-format
@@ -1547,8 +1554,12 @@ msgstr ""
 " Kan inte radera fil \"%s\" \n"
 " %s"
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " \"%s\" och \"%s\" är samma katalog "
 
 #, c-format
@@ -1629,9 +1640,6 @@ msgstr " Tyvärr, kunde inte lägga jobbet i bakgrunden "
 
 msgid "&Retry"
 msgstr "försök &Igen"
-
-msgid "&Abort"
-msgstr "&Avbryt"
 
 msgid ""
 "\n"

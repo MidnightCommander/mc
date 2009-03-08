@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2000-10-26 11:00 CST\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil\n"
@@ -1292,6 +1292,9 @@ msgid ""
 " %s "
 msgstr ""
 
+msgid "&Abort"
+msgstr ""
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1305,7 +1308,11 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " `%s' and `%s' are the same file "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr ""
 
 #, c-format
@@ -1448,7 +1455,11 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid " `%s' and `%s' are the same directory "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr ""
 
 #, c-format
@@ -1522,9 +1533,6 @@ msgid " Sorry, I could not put the job in background "
 msgstr ""
 
 msgid "&Retry"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid ""

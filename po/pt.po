@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2002-04-25 03:55+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
@@ -1331,6 +1331,9 @@ msgstr ""
 " Incapaz de criar alvo de atalho \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1347,8 +1350,12 @@ msgstr ""
 " Incapaz de opter informação do ficheiro origem \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' e `%s' são o mesmo ficheiro "
 
 #, c-format
@@ -1530,8 +1537,12 @@ msgstr ""
 " Incapaz de remover ficheiro \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' e `%s' são o mesmo directório "
 
 #, c-format
@@ -1612,9 +1623,6 @@ msgstr " Incapaz de colocar o processo em exedcução de fundo "
 
 msgid "&Retry"
 msgstr "&Repetir"
-
-msgid "&Abort"
-msgstr "&Abortar"
 
 msgid ""
 "\n"

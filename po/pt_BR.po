@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2000-10-27 15:37-03:00\n"
 "Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
@@ -1350,6 +1350,9 @@ msgstr ""
 " Impossível criar ligação simbólica \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "C&Ancelar"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1366,8 +1369,12 @@ msgstr ""
 " Não é possível testar arquivo de origem \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " '%s' e '%s' são o mesmo arquivo"
 
 #, c-format
@@ -1549,8 +1556,12 @@ msgstr ""
 " Impossível apagar arquivo \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " '%s' e '%s' são o mesmo diretório"
 
 #, c-format
@@ -1631,9 +1642,6 @@ msgstr "Desculpe, mas não posso colocar a tarefa em segundo plano"
 
 msgid "&Retry"
 msgstr "&Tentar Novamente"
-
-msgid "&Abort"
-msgstr "C&Ancelar"
 
 msgid ""
 "\n"

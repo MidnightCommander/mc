@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -1328,6 +1328,9 @@ msgstr ""
 " Заагдсан тэмдэгт холбоосийг үүсгэж чадсангүй \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Таслах"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1344,8 +1347,12 @@ msgstr ""
 " Эх файлыг байрлуулж чадсангүй \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' ба `%s' ууд нь адил файл байна "
 
 #, c-format
@@ -1527,8 +1534,12 @@ msgstr ""
 " \"%s\" файлыг устгаж чадсангүй \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " %s ба %s - нь адил лавлахууд байна "
 
 #, c-format
@@ -1610,9 +1621,6 @@ msgstr " Уучлаарай, арын фонд ажилыг оруулж чад�
 
 msgid "&Retry"
 msgstr "&Дахих"
-
-msgid "&Abort"
-msgstr "&Таслах"
 
 msgid ""
 "\n"

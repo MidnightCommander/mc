@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -1324,6 +1324,9 @@ msgstr ""
 " Невозможно создать целевую симв. ссылку \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Прервать"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1341,8 +1344,16 @@ msgstr ""
 " %s "
 
 #, c-format
-msgid " `%s' and `%s' are the same file "
-msgstr " `%s' и `%s' один и тот же файл "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
+msgstr ""
+" `%s' \n"
+" и \n"
+" `%s' \n"
+" один и тот же file "
 
 #, c-format
 msgid ""
@@ -1524,8 +1535,16 @@ msgstr ""
 " %s "
 
 #, c-format
-msgid " `%s' and `%s' are the same directory "
-msgstr " %s и %s - один и тот же каталог "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
+msgstr ""
+" `%s' \n"
+" и \n"
+" `%s' \n"
+" один и тот же каталог "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
@@ -1606,9 +1625,6 @@ msgstr " Извините, сделать это в фоновом режиме невозможно "
 
 msgid "&Retry"
 msgstr "По&вторить"
-
-msgid "&Abort"
-msgstr "&Прервать"
 
 msgid ""
 "\n"
@@ -1913,10 +1929,10 @@ msgstr "Группа верхнего уровня"
 msgid " Hotlist Load "
 msgstr " Загрузка списка быстрого доступа "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr " file, Ваши старые элементы быстрого доступа небыли удалены"
+msgstr "MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были удалены"
 
 #, c-format
 msgid "Midnight Commander %s"

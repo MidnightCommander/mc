@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gmc finnish 0.01\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 1999-08-23 17:30+0200\n"
 "Last-Translator: Mikko Rauhala <mjr@iki.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -1333,6 +1333,9 @@ msgstr ""
 " Ei voitu luoda symbolista linkkiä \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr ""
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1349,9 +1352,13 @@ msgstr ""
 " Ei saada tietoja lähdetiedostosta \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
-msgstr ""
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
+msgstr " '%s' ja '%s' ovat sama tiedosto. "
 
 #, c-format
 msgid ""
@@ -1497,7 +1504,11 @@ msgid ""
 msgstr ""
 
 #, fuzzy, c-format
-msgid " `%s' and `%s' are the same directory "
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " '%s' ja '%s' ovat sama tiedosto. "
 
 #, c-format
@@ -1571,9 +1582,6 @@ msgid " Sorry, I could not put the job in background "
 msgstr ""
 
 msgid "&Retry"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid ""

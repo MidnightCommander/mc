@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -1324,6 +1324,9 @@ msgstr ""
 " Не могу да створим одредишну симвезу `%s' \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Прекини"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1340,8 +1343,12 @@ msgstr ""
 " Не могу да извршим `stat' на изворној датотеци `%s' \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' и `%s' су истоветни "
 
 #, c-format
@@ -1523,8 +1530,12 @@ msgstr ""
 " Не могу да уклоним датотеку `%s' \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' и `%s' су истоветни директоријуми "
 
 #, c-format
@@ -1605,9 +1616,6 @@ msgstr " Извините, али нисам могао да пошаљем посао у позадину "
 
 msgid "&Retry"
 msgstr "П&робај поново"
-
-msgid "&Abort"
-msgstr "&Прекини"
 
 msgid ""
 "\n"

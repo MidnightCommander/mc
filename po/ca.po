@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -1333,6 +1333,9 @@ msgstr ""
 " No puc crear l'enllaç simbòlic objectiu \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "a&Vorta"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1349,8 +1352,12 @@ msgstr ""
 " No puc estudiar el fitxer origen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' i `%s' són el mateix fitxer "
 
 #, c-format
@@ -1532,8 +1539,12 @@ msgstr ""
 " No puc suprimir el fitxer \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' i `%s' són el mateix directori "
 
 #, c-format
@@ -1614,9 +1625,6 @@ msgstr " Ho sento, no he pogut posar la tasca al rerafons "
 
 msgid "&Retry"
 msgstr "&Reintenta"
-
-msgid "&Abort"
-msgstr "a&Vorta"
 
 msgid ""
 "\n"

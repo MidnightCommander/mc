@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.55\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2002-06-24 02:15+0300\n"
 "Last-Translator: Todor Buyukliev <adrez@mail.bg>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
@@ -1327,6 +1327,9 @@ msgstr ""
 " Не може да се създаде връзката назначение \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Отказ"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1343,8 +1346,12 @@ msgstr ""
 " Не може да се stat-не файлът източник \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' и `%s' са един и същи файл. "
 
 #, c-format
@@ -1526,8 +1533,12 @@ msgstr ""
 " Не може да се изтрие файлът \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' и `%s' са една и съща директория "
 
 #, c-format
@@ -1608,9 +1619,6 @@ msgstr " Съжалявам, не може да се сложи задачата
 
 msgid "&Retry"
 msgstr "Отново"
-
-msgid "&Abort"
-msgstr "Отказ"
 
 msgid ""
 "\n"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -1330,6 +1330,9 @@ msgstr ""
 " Hedef sembolik bað \"%s\" oluþturulamýyor \n"
 " %s"
 
+msgid "&Abort"
+msgstr "Ý&ptal"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1346,8 +1349,12 @@ msgstr ""
 " \"%s\" kaynak dosyasý durumlanamýyor \n"
 " %s"
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' ve `%s' ayný dosyadýr "
 
 #, c-format
@@ -1529,8 +1536,12 @@ msgstr ""
 " \"%s\" dosyasý silinemiyor \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' ve `%s' ayný dizin "
 
 #, c-format
@@ -1611,9 +1622,6 @@ msgstr " Ýþ artalana konulamadý "
 
 msgid "&Retry"
 msgstr "&Tekrar"
-
-msgid "&Abort"
-msgstr "Ý&ptal"
 
 msgid ""
 "\n"
