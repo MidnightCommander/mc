@@ -125,16 +125,16 @@ const char *op_names[3] = {
 
 /* }}} */
 
-static int query_replace (FileOpContext * ctx, const char *destname,
-			  struct stat *_s_stat, struct stat *_d_stat);
-static int query_recursive (FileOpContext * ctx, const char *s);
-static int do_file_error (const char *str);
-static int erase_dir_iff_empty (FileOpContext *ctx, const char *s);
-static int erase_file (FileOpContext *ctx, const char *s,
-		       off_t *progress_count, double *progress_bytes,
-		       int is_toplevel_file);
-static int files_error (const char *format, const char *file1,
-			const char *file2);
+static FileProgressStatus query_replace (FileOpContext * ctx, const char *destname,
+					    struct stat *_s_stat, struct stat *_d_stat);
+static FileProgressStatus query_recursive (FileOpContext * ctx, const char *s);
+static FileProgressStatus do_file_error (const char *str);
+static FileProgressStatus erase_dir_iff_empty (FileOpContext *ctx, const char *s);
+static FileProgressStatus erase_file (FileOpContext *ctx, const char *s,
+					off_t *progress_count, double *progress_bytes,
+					int is_toplevel_file);
+static FileProgressStatus files_error (const char *format, const char *file1,
+					const char *file2);
 
 
 enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
@@ -157,7 +157,7 @@ convert_case (char c, enum CaseConvs *conversion)
 	return c;
 }
 
-static int transform_error = 0;
+static FileProgressStatus transform_error = FILE_CONT;
 
 static const char *
 do_transform_source (FileOpContext *ctx, const char *source)
@@ -345,12 +345,12 @@ check_hardlinks (const char *src_name, const char *dst_name, struct stat *pstat)
  * If dst_path is an existing symlink it will be deleted silently
  * (upper levels take already care of existing files at dst_path).
  */
-static int
+static FileProgressStatus
 make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 {
     char link_target[MC_MAXPATHLEN];
     int len;
-    int return_status;
+    FileProgressStatus return_status;
     struct stat sb;
     int dst_is_symlink;
 
@@ -478,7 +478,7 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     }
 }
 
-int
+FileProgressStatus
 copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 		int ask_overwrite, off_t *progress_count,
 		double *progress_bytes, int is_toplevel_file)
@@ -495,7 +495,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     struct utimbuf utb;
     int dst_exists = 0, appending = 0;
     off_t n_read_total = 0, file_size = -1;
-    int return_status, temp_status;
+    FileProgressStatus return_status, temp_status;
     struct timeval tv_transfer_start;
     int dst_status = DEST_NONE;	/* 1 if the file is not fully copied */
 
@@ -552,12 +552,8 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    return FILE_CONT;
 	}
 
-	if (S_ISLNK (sb.st_mode)) {
-	    int retval;
-
-	    retval = make_symlink (ctx, src_path, dst_path);
-	    return retval;
-	}
+	if (S_ISLNK (sb.st_mode))
+	    return make_symlink (ctx, src_path, dst_path);
 
 	if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || 
 		S_ISFIFO (sb.st_mode) || S_ISNAM (sb.st_mode) ||
@@ -837,7 +833,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
  */
 /* FIXME: This function needs to check the return values of the
    function calls */
-int
+FileProgressStatus
 copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	      int move_over, int delete, struct link *parent_dirs,
 	      off_t *progress_count, double *progress_bytes)
@@ -846,7 +842,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
     struct stat buf, cbuf;
     DIR *reading;
     char *path, *mdpath, *dest_file, *dest_dir;
-    int return_status = FILE_CONT;
+    FileProgressStatus return_status = FILE_CONT;
     struct utimbuf utb;
     struct link *lp;
 
@@ -1036,12 +1032,12 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 
 /* {{{ Move routines */
 
-static int
+static FileProgressStatus
 move_file_file (FileOpContext *ctx, const char *s, const char *d,
 		off_t *progress_count, double *progress_bytes)
 {
     struct stat src_stats, dst_stats;
-    int return_status = FILE_CONT;
+    FileProgressStatus return_status = FILE_CONT;
     gboolean copy_done = FALSE;
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
@@ -1144,14 +1140,14 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
     return return_status;
 }
 
-int
+FileProgressStatus
 move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	      off_t *progress_count, double *progress_bytes)
 {
     struct stat sbuf, dbuf, destbuf;
     struct link *lp;
     char *destdir;
-    int return_status;
+    FileProgressStatus return_status;
     int move_over = 0;
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT ||
@@ -1257,7 +1253,7 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
-static int
+static FileProgressStatus
 erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 	    double *progress_bytes, int is_toplevel_file)
 {
@@ -1287,7 +1283,7 @@ erase_file (FileOpContext *ctx, const char *s, off_t *progress_count,
 	return FILE_CONT;
 }
 
-static int
+static FileProgressStatus
 recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 		 double *progress_bytes)
 {
@@ -1295,15 +1291,15 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
     struct stat buf;
     DIR *reading;
     char *path;
-    int return_status = FILE_CONT;
+    FileProgressStatus return_status = FILE_CONT;
 
     if (!strcmp (s, ".."))
-	return 1;
+	return FILE_RETRY;
 
     reading = mc_opendir (s);
 
     if (!reading)
-	return 1;
+	return FILE_RETRY;
 
     while ((next = mc_readdir (reading)) && return_status == FILE_CONT) {
 	if (!strcmp (next->d_name, "."))
@@ -1314,13 +1310,13 @@ recursive_erase (FileOpContext *ctx, const char *s, off_t *progress_count,
 	if (mc_lstat (path, &buf)) {
 	    g_free (path);
 	    mc_closedir (reading);
-	    return 1;
+	    return FILE_RETRY;
 	}
 	if (S_ISDIR (buf.st_mode))
 	    return_status =
 		(recursive_erase
 		 (ctx, path, progress_count, progress_bytes)
-		 != FILE_CONT);
+		 != FILE_CONT) ? FILE_RETRY : FILE_CONT;
 	else
 	    return_status =
 		erase_file (ctx, path, progress_count, progress_bytes, 0);
@@ -1369,11 +1365,11 @@ check_dir_is_empty (const char *path)
     return i;
 }
 
-int
+FileProgressStatus
 erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
 	   double *progress_bytes)
 {
-    int error;
+    FileProgressStatus error;
 
     if (strcmp (s, "..") == 0)
 	return FILE_SKIP;
@@ -1412,10 +1408,10 @@ erase_dir (FileOpContext *ctx, const char *s, off_t *progress_count,
     return FILE_CONT;
 }
 
-static int
+static FileProgressStatus
 erase_dir_iff_empty (FileOpContext *ctx, const char *s)
 {
-    int error;
+    FileProgressStatus error;
 
     if (strcmp (s, "..") == 0)
 	return FILE_SKIP;
@@ -1723,7 +1719,8 @@ panel_operate (void *source_panel, FileOperation operation,
     int single_entry = (get_current_type () == view_tree)
 	|| (panel->marked <= 1) || force_single;
     struct stat src_stat, dst_stat;
-    int i, value;
+    int i;
+    FileProgressStatus value;
     FileOpContext *ctx;
 
     off_t count = 0;
@@ -2076,7 +2073,7 @@ panel_operate (void *source_panel, FileOperation operation,
 
 /* {{{ Query/status report routines */
 
-static int
+static FileProgressStatus
 real_do_file_error (enum OperationMode mode, const char *error)
 {
     int result;
@@ -2103,7 +2100,7 @@ real_do_file_error (enum OperationMode mode, const char *error)
 }
 
 /* Report error with one file */
-int
+FileProgressStatus
 file_error (const char *format, const char *file)
 {
     g_snprintf (cmd_buf, sizeof (cmd_buf), format,
@@ -2113,7 +2110,7 @@ file_error (const char *format, const char *file)
 }
 
 /* Report error with two files */
-static int
+static FileProgressStatus
 files_error (const char *format, const char *file1, const char *file2)
 {
     char nfile1[16];
@@ -2128,7 +2125,7 @@ files_error (const char *format, const char *file1, const char *file2)
     return do_file_error (cmd_buf);
 }
 
-static int
+static FileProgressStatus
 real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s)
 {
     gchar *text;
@@ -2172,7 +2169,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 }
 
 #ifdef WITH_BACKGROUND
-static int
+static FileProgressStatus
 do_file_error (const char *str)
 {
     if (we_are_background)
@@ -2182,7 +2179,7 @@ do_file_error (const char *str)
 	return real_do_file_error (Foreground, str);
 }
 
-static int
+static FileProgressStatus
 query_recursive (FileOpContext *ctx, const char *s)
 {
     if (we_are_background)
@@ -2191,7 +2188,7 @@ query_recursive (FileOpContext *ctx, const char *s)
 	return real_query_recursive (ctx, Foreground, s);
 }
 
-static int
+static FileProgressStatus
 query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {
@@ -2208,19 +2205,19 @@ query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 }
 
 #else
-static int
+static FileProgressStatus
 do_file_error (const char *str)
 {
     return real_do_file_error (Foreground, str);
 }
 
-static int
+static FileProgressStatus
 query_recursive (FileOpContext *ctx, const char *s)
 {
     return real_query_recursive (ctx, Foreground, s);
 }
 
-static int
+static FileProgressStatus
 query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {

@@ -118,10 +118,10 @@ void file_op_context_destroy (FileOpContext *ctx);
 extern const char *op_names [3];
 
 typedef enum {
-	FILE_CONT,
-	FILE_RETRY,
-	FILE_SKIP,
-	FILE_ABORT
+	FILE_CONT  = 0,
+	FILE_RETRY = 1,
+	FILE_SKIP  = 2,
+	FILE_ABORT = 3
 } FileProgressStatus;
 
 typedef enum {
