@@ -44,7 +44,7 @@
 
 /*** file scope functions **********************************************/
 
-gboolean parse_define(char *buf, char **long_name, char **short_name, long *line)
+static gboolean parse_define(char *buf, char **long_name, char **short_name, long *line)
 {
     enum {in_longname, in_shortname, in_line, finish} def_state = in_longname;
 
