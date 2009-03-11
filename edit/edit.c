@@ -646,6 +646,31 @@ edit_reload (WEdit *edit, const char *filename)
     return 1;
 }
 
+/*
+ * Load a new file into the editor and set line.  If it fails, preserve the old file.
+ * To do it, allocate a new widget, initialize it and, if the new file
+ * was loaded, copy the data to the old widget.
+ * Return 1 on success, 0 on failure.
+ */
+int
+edit_reload_line (WEdit *edit, const char *filename, long line)
+{
+    WEdit *e;
+    int lines = edit->num_widget_lines;
+    int columns = edit->num_widget_columns;
+
+    e = g_malloc0 (sizeof (WEdit));
+    e->widget = edit->widget;
+    if (!edit_init (e, lines, columns, filename, line)) {
+	g_free (e);
+	return 0;
+    }
+    edit_clean (edit);
+    memcpy (edit, e, sizeof (WEdit));
+    g_free (e);
+    return 1;
+}
+
 
 /*
    Recording stack for undo:
@@ -2480,6 +2505,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_insert_file_cmd (edit);
 	break;
 
+    case CK_Load_Prev_File:
+	edit_load_back_cmd (edit);
+	break;
+    case CK_Load_Next_File:
+	edit_load_forward_cmd (edit);
+	break;
+
     case CK_Toggle_Syntax:
 	if ((option_syntax_highlighting ^= 1) == 1)
 	    edit_load_syntax (edit, NULL, option_syntax_type);
@@ -2500,6 +2532,9 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Complete_Word:
 	edit_complete_word_cmd (edit);
+	break;
+    case CK_Find_Definition:
+	edit_get_match_keyword_cmd (edit);
 	break;
 
     case CK_Exit:
