@@ -15,8 +15,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
@@ -65,6 +65,9 @@ msgstr " Файл %s слишком большой "
 
 msgid "Macro recursion is too deep"
 msgstr "Слишком глубокая рекурсия макросов"
+
+msgid "&Dismiss"
+msgstr "&Закрыть"
 
 msgid "Warning"
 msgstr "Предупреждение"
@@ -361,9 +364,6 @@ msgstr " Нажмите любую клавишу: "
 
 msgid " Execute Macro "
 msgstr " Выполнить макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрыть"
 
 msgid " Emacs key: "
 msgstr " Клавиша Emacs: "
@@ -1932,7 +1932,9 @@ msgstr " Загрузка списка быстрого доступа "
 #, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были удалены"
+msgstr ""
+"MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были "
+"удалены"
 
 #, c-format
 msgid "Midnight Commander %s"

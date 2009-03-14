@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2008-06-15 19:00+0100\n"
 "Last-Translator: David Martín <dmartina@excite.com\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -54,6 +54,9 @@ msgstr " El archivo %s es demasiado grande "
 
 msgid "Macro recursion is too deep"
 msgstr "La macro es demasiado recursiva"
+
+msgid "&Dismiss"
+msgstr "&Ignorar"
 
 msgid "Warning"
 msgstr "¡ Atención !"
@@ -351,9 +354,6 @@ msgstr " Presione cualquier tecla: "
 
 msgid " Execute Macro "
 msgstr " Ejecutar macro "
-
-msgid "&Dismiss"
-msgstr "&Ignorar"
 
 msgid " Emacs key: "
 msgstr " Tecla Emacs: "

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -53,6 +53,9 @@ msgid " File %s is too large "
 msgstr " Αρχείο πολύ μεγάλο: "
 
 msgid "Macro recursion is too deep"
+msgstr ""
+
+msgid "&Dismiss"
 msgstr ""
 
 msgid "Warning"
@@ -355,9 +358,6 @@ msgstr " Πιέστε κάποιο πλήκτρο: "
 
 msgid " Execute Macro "
 msgstr " Εκτελ. μακροεντολής"
-
-msgid "&Dismiss"
-msgstr ""
 
 msgid " Emacs key: "
 msgstr " Πλήκτρο Emacs: "

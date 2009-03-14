@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2009-03-10 19:42+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -55,6 +55,9 @@ msgstr " Súbor %s je príliš veľký"
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzia makra je príliš hlboká"
+
+msgid "&Dismiss"
+msgstr "&Odmietnuť"
 
 msgid "Warning"
 msgstr "Varovanie"
@@ -219,7 +222,8 @@ msgstr " Nahradiť "
 msgid "Search"
 msgstr "Hľadať"
 
-msgid " Invalid regular expression, or scanf expression with too many conversions "
+msgid ""
+" Invalid regular expression, or scanf expression with too many conversions "
 msgstr " Nesprávny výraz, alebo scanf výraz s mnohými zmenami "
 
 msgid " Error in replacement format string. "
@@ -288,7 +292,8 @@ msgid " Run Sort "
 msgstr " Spustiť triedenie "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Zadajte voľby pre triedenie oddelené prázdnym miestom (pozri man stránku): "
+msgstr ""
+" Zadajte voľby pre triedenie oddelené prázdnym miestom (pozri man stránku): "
 
 msgid " Sort "
 msgstr " Triediť "
@@ -349,9 +354,6 @@ msgstr " Stlačte ľubovoľný kláves: "
 
 msgid " Execute Macro "
 msgstr " Spustiť makro "
-
-msgid "&Dismiss"
-msgstr "&Odmietnuť"
 
 msgid " Emacs key: "
 msgstr " Emacs kláves: "
@@ -1249,16 +1251,26 @@ msgid " %s%s file error"
 msgstr " %s%s chyba v súbore"
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0.  It seems that the installation failed.  Please fetch a fresh copy from the Midnight Commander package."
-msgstr "Formát súboru %smc.ext sa vo verzii 3.0 zmenil. Vyzerá to, že inštalácia zlyhala. Prosím, vezmite si novú kópiu z balíka Midnight Commander."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0.  It seems that "
+"the installation failed.  Please fetch a fresh copy from the Midnight "
+"Commander package."
+msgstr ""
+"Formát súboru %smc.ext sa vo verzii 3.0 zmenil. Vyzerá to, že inštalácia "
+"zlyhala. Prosím, vezmite si novú kópiu z balíka Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
 msgstr " ~/%s chyba v súbore "
 
 #, c-format
-msgid "The format of the ~/%s file has changed with version 3.0.  You may either want to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr "Formát súboru ~/%s sa vo verzii 3.0 zmenil. Buď si ho skopírujte z %smc.ext alebo ho použite ako vzor."
+msgid ""
+"The format of the ~/%s file has changed with version 3.0.  You may either "
+"want to copy it from %smc.ext or use that file as an example of how to write "
+"it."
+msgstr ""
+"Formát súboru ~/%s sa vo verzii 3.0 zmenil. Buď si ho skopírujte z %smc.ext "
+"alebo ho použite ako vzor."
 
 msgid " Copy "
 msgstr " Kopírovať "
@@ -1288,7 +1300,8 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Nepodarilo sa vyrobiť pevný symb. odkaz naprieč nelokálnymi súb. systémami: \n"
+" Nepodarilo sa vyrobiť pevný symb. odkaz naprieč nelokálnymi súb. "
+"systémami: \n"
 "\n"
 " Voľba stáleho Symbolického odkazu bude vypnutá "
 
@@ -1299,6 +1312,9 @@ msgid ""
 msgstr ""
 " Nepodarilo sa vytvoriť cieľový symbolický odkaz \"%s\" \n"
 " %s "
+
+msgid "&Abort"
+msgstr "p&Rerušiť"
 
 #, c-format
 msgid ""
@@ -1316,8 +1332,12 @@ msgstr ""
 " Nepodarilo sa zistiť stav zdrojový súbor \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' a `%s' sú rovnaké súbory "
 
 #, c-format
@@ -1499,8 +1519,12 @@ msgstr ""
 " Nepodarilo sa odstrániť súbor \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' a `%s' sú ten istý adresár "
 
 #, c-format
@@ -1581,9 +1605,6 @@ msgstr " Bohužiaľ, nebolo možné presunúť úlohu do pozadia "
 
 msgid "&Retry"
 msgstr "&Zopakovať"
-
-msgid "&Abort"
-msgstr "p&Rerušiť"
 
 msgid ""
 "\n"
@@ -1891,8 +1912,10 @@ msgid " Hotlist Load "
 msgstr " Nahrať Hotlistu "
 
 #, c-format
-msgid "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
-msgstr "MC nedokázal zapísať súbor ~/%s, vaše staré položky hotlistu neboli zmazané"
+msgid ""
+"MC was unable to write ~/%s file, your old hotlist entries were not deleted"
+msgstr ""
+"MC nedokázal zapísať súbor ~/%s, vaše staré položky hotlistu neboli zmazané"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2347,7 +2370,8 @@ msgid ""
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Editor:       editnormal, editbold, editmarked\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, core\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2367,7 +2391,8 @@ msgstr ""
 "   Menu:              menu, menuhot, menusel, menuhotsel\n"
 "   Editor:       editnormal, editbold, editmarked\n"
 "   Pomocník:          helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-"   Typy súborov:      directory, executable, link, stalelink, device, special, core\n"
+"   Typy súborov:      directory, executable, link, stalelink, device, "
+"special, core\n"
 "\n"
 "Farby:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2529,7 +2554,8 @@ msgid " Enter command label: "
 msgstr " Zadajte návestie pre príkaz: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Nepodarilo sa spustiť externé vytvorenie panelov v nelokálnom adresári "
+msgstr ""
+" Nepodarilo sa spustiť externé vytvorenie panelov v nelokálnom adresári "
 
 msgid "Find rejects after patching"
 msgstr "Nájsť súbory po oprave"
@@ -3592,28 +3618,40 @@ msgstr "Zmeny súboru stratené"
 
 #~ msgid "Using included S-Lang library"
 #~ msgstr "Použiť vloženú S-lang knižnicu"
+
 #~ msgid "with termcap database"
 #~ msgstr "s databázou termcap"
+
 #~ msgid "&Home"
 #~ msgstr "&Domáci"
+
 #~ msgid "&Type"
 #~ msgstr "&Typ"
+
 #~ msgid "&Links"
 #~ msgstr "&Odkazy"
+
 #~ msgid "N&GID"
 #~ msgstr "N&GID"
+
 #~ msgid "N&UID"
 #~ msgstr "N&UID"
+
 #~ msgid "&Owner"
 #~ msgstr "&Vlastník"
+
 #~ msgid "&Group"
 #~ msgstr "s&Kupina"
+
 #~ msgid "MC was unable to write ~/"
 #~ msgstr "MC nebol schopný zapísať ~/"
+
 #~ msgid " (%ld blocks)"
 #~ msgstr " (%ld blokov)"
+
 #~ msgid " Notice "
 #~ msgstr " Správa "
+
 #~ msgid ""
 #~ " The Midnight Commander configuration files \n"
 #~ " are now stored in the ~/.mc directory, the \n"
@@ -3622,14 +3660,19 @@ msgstr "Zmeny súboru stratené"
 #~ " Konfiguračné súbory pre Midnight Commander \n"
 #~ " sú teraz uložené v adresári ~/.mc, súbory  \n"
 #~ " boli teraz presunuté\n"
+
 #~ msgid "%s bytes in %d files"
 #~ msgstr "%s bytov v %d súboroch"
+
 #~ msgid " Cannot open file for reading: "
 #~ msgstr " Neúspešný pokus o otvorenie súboru pre čítanie: "
+
 #~ msgid " Not an ordinary file: "
 #~ msgstr " Toto nie je súbor ordinálneho typu: "
+
 #~ msgid "Format of the "
 #~ msgstr "Formát "
+
 #~ msgid ""
 #~ " file has changed\n"
 #~ "with version 3.0. You may want either to\n"
@@ -3638,48 +3681,68 @@ msgstr "Zmeny súboru stratené"
 #~ " súbor bol zmemený\n"
 #~ "verziou 3.0. Môžno ho tiež budete chcieť\n"
 #~ "kopírovať z "
+
 #~ msgid ""
 #~ "mc.ext or use that\n"
 #~ "file as an example of how to write it.\n"
 #~ msgstr ""
 #~ "mc.ext, alebo použite ten\n"
 #~ "súbor ako príklad, ako to napísať.\n"
+
 #~ msgid "mc.ext will be used for this moment."
 #~ msgstr "mc.ext bude používaný v tejto chvíli."
+
 #~ msgid " Cannot open file "
 #~ msgstr " Nemohol som otvoriť súbor "
+
 #~ msgid "Col %d"
 #~ msgstr "Col %d"
+
 #~ msgid "  [grow]"
 #~ msgstr "  [rásť]"
+
 #~ msgid "Ascii"
 #~ msgstr "Ascii"
+
 #~ msgid "Hex"
 #~ msgstr "Hex"
+
 #~ msgid "Goto"
 #~ msgstr "Choď"
+
 #~ msgid "Line"
 #~ msgstr "Riadok"
+
 #~ msgid "RxSrch"
 #~ msgstr "RxSrch"
+
 #~ msgid "EdHex"
 #~ msgstr "EdHex"
+
 #~ msgid "EdText"
 #~ msgstr "EdText"
+
 #~ msgid "UnWrap"
 #~ msgstr "Rozbaľ"
+
 #~ msgid "Wrap"
 #~ msgstr "Zabaľ"
+
 #~ msgid "HxSrch"
 #~ msgstr "HxSrch"
+
 #~ msgid "Raw"
 #~ msgstr "Prvotný"
+
 #~ msgid "Format"
 #~ msgstr "Formát"
+
 #~ msgid "User menu available only in mcedit invoked from mc"
 #~ msgstr "Používateľské menu k dispozícii iba v mcedit spustenom z mc"
+
 #~ msgid " Error while looking up IP address "
 #~ msgstr "Nastala chyba počas vyhľadávania IP adresy "
+
 #~ msgid ""
 #~ "\n"
 #~ "\n"
@@ -3694,14 +3757,18 @@ msgstr "Zmeny súboru stratené"
 #~ "obnovovací pamäťový zásobník nie je naplnený!\n"
 #~ "\n"
 #~ "\n"
+
 #~ msgid " Listing format edit "
 #~ msgstr " Upraviť formát výpisu "
+
 #~ msgid "&Drive...       M-d"
 #~ msgstr "&Jednotka...      M-d"
+
 #~ msgid "Use to debug the background code"
 #~ msgstr "Pre ladenie použite kód na pozadí"
+
 #~ msgid "Force subshell execution"
 #~ msgstr "vynútiť vykonanie v subshelli"
+
 #~ msgid " No action taken "
 #~ msgstr " Nie je zadaná činnosť "
-

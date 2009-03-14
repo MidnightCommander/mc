@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -55,6 +55,9 @@ msgstr " Fayl çox böyükdür: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Keç"
 
 msgid "Warning"
 msgstr "Xəbərdarlıq"
@@ -359,9 +362,6 @@ msgstr " İstədiyin düyməyə bas :"
 
 msgid " Execute Macro "
 msgstr " Makronu işə sal"
-
-msgid "&Dismiss"
-msgstr "&Keç"
 
 msgid " Emacs key: "
 msgstr " Emacs düyməsi :"

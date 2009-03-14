@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Andrzej Zaborowski <balrog@zabor.org>\n"
 "Language-Team: Polish\n"
@@ -58,6 +58,9 @@ msgstr " Plik %s jest zbyt du¿y: "
 
 msgid "Macro recursion is too deep"
 msgstr "Zbyt g³êboka rekursja makr"
+
+msgid "&Dismiss"
+msgstr "&Porzuæ"
 
 msgid "Warning"
 msgstr "Ostrze¿enie"
@@ -355,9 +358,6 @@ msgstr " Naci¶nij dowolny klawisz: "
 
 msgid " Execute Macro "
 msgstr " Wykonaj makro "
-
-msgid "&Dismiss"
-msgstr "&Porzuæ"
 
 msgid " Emacs key: "
 msgstr " Klawisz Emacsa: "

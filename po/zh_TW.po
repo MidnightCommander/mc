@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:44+0000\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -55,6 +55,9 @@ msgstr " 檔案太大了： "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "關閉"
 
 msgid "Warning"
 msgstr "警告"
@@ -358,9 +361,6 @@ msgstr " 按下任意鍵："
 
 msgid " Execute Macro "
 msgstr " 執行巨集 "
-
-msgid "&Dismiss"
-msgstr "關閉"
 
 msgid " Emacs key: "
 msgstr " Emacs 按鍵："

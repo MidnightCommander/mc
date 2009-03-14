@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -56,6 +56,9 @@ msgstr " Dosya çok fazla büyük: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Býrak"
 
 msgid "Warning"
 msgstr "Uyarý"
@@ -361,9 +364,6 @@ msgstr " Bir tuþa basýnýz: "
 
 msgid " Execute Macro "
 msgstr " Macro'yu çalýþtýr "
-
-msgid "&Dismiss"
-msgstr "&Býrak"
 
 msgid " Emacs key: "
 msgstr " Emacs tuþu: "

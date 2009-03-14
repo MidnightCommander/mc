@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -52,6 +52,9 @@ msgstr " 파일 크기가 너무 큼: "
 
 msgid "Macro recursion is too deep"
 msgstr "매크로가 너무 많이 반복되어 불려졌습니다"
+
+msgid "&Dismiss"
+msgstr "취소(&D)"
 
 msgid "Warning"
 msgstr "경고"
@@ -355,9 +358,6 @@ msgstr " 아무 글쇠나 누르십시오: "
 
 msgid " Execute Macro "
 msgstr " 매크로 실행 "
-
-msgid "&Dismiss"
-msgstr "취소(&D)"
 
 msgid " Emacs key: "
 msgstr " Emacs 글쇠: "

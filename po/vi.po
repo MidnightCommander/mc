@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2006-08-16 16:20+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
@@ -54,6 +54,9 @@ msgstr " Tập tin %s quá lớn "
 
 msgid "Macro recursion is too deep"
 msgstr "Đệ qui của macro quá sâu"
+
+msgid "&Dismiss"
+msgstr "Đó&ng"
 
 msgid "Warning"
 msgstr "Cảnh báo"
@@ -352,9 +355,6 @@ msgstr " Nhấn phím bất kỳ: "
 
 msgid " Execute Macro "
 msgstr "Thực hiện Macro "
-
-msgid "&Dismiss"
-msgstr "Đó&ng"
 
 msgid " Emacs key: "
 msgstr "Phím Emacs: "

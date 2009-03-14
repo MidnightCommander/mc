@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -56,6 +56,9 @@ msgstr " Fiºierul este prea mare: "
 
 msgid "Macro recursion is too deep"
 msgstr "Recursivitatea macro este prea mare"
+
+msgid "&Dismiss"
+msgstr "&Închide"
 
 msgid "Warning"
 msgstr "Atenþie"
@@ -360,9 +363,6 @@ msgstr " Apãsaþi o tastã: "
 
 msgid " Execute Macro "
 msgstr " Executã Combinaþia "
-
-msgid "&Dismiss"
-msgstr "&Închide"
 
 msgid " Emacs key: "
 msgstr " Tasta Emacs: "

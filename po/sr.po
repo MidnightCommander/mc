@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-09-20 18:50+0200\n"
 "Last-Translator: Strahinya Radich (Страхиња Радић) <mr99164@alas.matf.bg.ac."
 "yu>\n"
@@ -56,6 +56,9 @@ msgstr " Датотека је превелика: "
 
 msgid "Macro recursion is too deep"
 msgstr "Ниво рекурзије макроа је превисок"
+
+msgid "&Dismiss"
+msgstr "&Отпусти"
 
 msgid "Warning"
 msgstr "Упозорење"
@@ -357,9 +360,6 @@ msgstr " Притисните било који тастер: "
 
 msgid " Execute Macro "
 msgstr " Изврши макро "
-
-msgid "&Dismiss"
-msgstr "&Отпусти"
 
 msgid " Emacs key: "
 msgstr " Пречица Емакса: "

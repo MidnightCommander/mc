@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -56,6 +56,9 @@ msgstr " Bestand %s is te groot "
 
 msgid "Macro recursion is too deep"
 msgstr "Macro-recursie gaat te diep"
+
+msgid "&Dismiss"
+msgstr "&Verwerp"
 
 msgid "Warning"
 msgstr "Waarschuwing"
@@ -352,9 +355,6 @@ msgstr " Druk een toets: "
 
 msgid " Execute Macro "
 msgstr " Macro uitvoeren "
-
-msgid "&Dismiss"
-msgstr "&Verwerp"
 
 msgid " Emacs key: "
 msgstr " Emacs-toets: "

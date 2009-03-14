@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2008-12-21 23:28+0200\n"
 "Last-Translator: Pavel Piatruk <piatruk.p@gmail.com>\n"
 "Language-Team: Belarusian (Official spelling) <i18n@mova.org>\n"
@@ -53,6 +53,9 @@ msgstr " Файл %s надта вялікі "
 
 msgid "Macro recursion is too deep"
 msgstr "Рэкурсія макрасу надта глыбокая"
+
+msgid "&Dismiss"
+msgstr "&Закрыць"
 
 msgid "Warning"
 msgstr "Папярэджанне"
@@ -348,9 +351,6 @@ msgstr " Націсніце любую клавішу: "
 
 msgid " Execute Macro "
 msgstr " Выканаць макрас "
-
-msgid "&Dismiss"
-msgstr "&Закрыць"
 
 msgid " Emacs key: "
 msgstr " Клавіша Emacs: "

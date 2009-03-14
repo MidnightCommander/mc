@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -61,6 +61,9 @@ msgstr " Li fitchî est trop grand: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Rinoncî"
 
 msgid "Warning"
 msgstr "Advertixhmint"
@@ -371,9 +374,6 @@ msgstr " Tchôkî tot l' minme li kéne tape: "
 
 msgid " Execute Macro "
 msgstr " Enonder Macro "
-
-msgid "&Dismiss"
-msgstr "&Rinoncî"
 
 msgid " Emacs key: "
 msgstr " Tape di Emacs: "

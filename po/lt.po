@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -55,6 +55,9 @@ msgstr " Failas %s yra per didelis "
 
 msgid "Macro recursion is too deep"
 msgstr "Makrokomandų rekursija yra per gili"
+
+msgid "&Dismiss"
+msgstr "At&mesti"
 
 msgid "Warning"
 msgstr "Įspėjimas"
@@ -352,9 +355,6 @@ msgstr " Paspauskite bet kurį klavišą: "
 
 msgid " Execute Macro "
 msgstr " Įvykdyti makrokomandą "
-
-msgid "&Dismiss"
-msgstr "At&mesti"
 
 msgid " Emacs key: "
 msgstr " „Emacs“ klavišas: "

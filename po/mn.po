@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mn\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -58,6 +58,9 @@ msgstr " Маш том файл: "
 
 msgid "Macro recursion is too deep"
 msgstr "Макрогийн рекурс хэт гүн байна"
+
+msgid "&Dismiss"
+msgstr "&Хаах"
 
 msgid "Warning"
 msgstr "Анхааруулга"
@@ -364,9 +367,6 @@ msgstr " Дурын товч дарна уу: "
 
 msgid " Execute Macro "
 msgstr " Макрог гүйцэтгэх "
-
-msgid "&Dismiss"
-msgstr "&Хаах"
 
 msgid " Emacs key: "
 msgstr " Emacs-ийн товчлуурууд: "

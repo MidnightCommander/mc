@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -54,6 +54,9 @@ msgstr " Fails ir par lielu: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Atcelt"
 
 msgid "Warning"
 msgstr "Brîdinâjums"
@@ -361,9 +364,6 @@ msgstr " Spiest jebkuru taustiòu: "
 
 msgid " Execute Macro "
 msgstr " Palaist Makro "
-
-msgid "&Dismiss"
-msgstr "&Atcelt"
 
 msgid " Emacs key: "
 msgstr "Emacs taustiòð: "

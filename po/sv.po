@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2003-01-22 18:10+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -60,6 +60,9 @@ msgstr " Filen är för stor: "
 
 msgid "Macro recursion is too deep"
 msgstr "Makrorekursion är för djup"
+
+msgid "&Dismiss"
+msgstr "&Försvinn"
 
 msgid "Warning"
 msgstr "Varning"
@@ -369,9 +372,6 @@ msgstr " Tryck valfri tangent:"
 
 msgid " Execute Macro "
 msgstr " Kör makro "
-
-msgid "&Dismiss"
-msgstr "&Försvinn"
 
 msgid " Emacs key: "
 msgstr " Emacstangent: "

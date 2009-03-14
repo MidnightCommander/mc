@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2008-06-05 17:36+0100\n"
 "Last-Translator: Anna Talianova <anickat1@gmail.com>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -58,6 +58,9 @@ msgstr " Soubor %s je pøíli¹ velký "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurze maker je pøíli¹ hluboká"
+
+msgid "&Dismiss"
+msgstr "&Odmítnout"
 
 msgid "Warning"
 msgstr "Varování"
@@ -353,9 +356,6 @@ msgstr " Stisknìte libovolnou klávesu: "
 
 msgid " Execute Macro "
 msgstr " Spustit makro "
-
-msgid "&Dismiss"
-msgstr "&Odmítnout"
 
 msgid " Emacs key: "
 msgstr " Emacsová klávesa: "

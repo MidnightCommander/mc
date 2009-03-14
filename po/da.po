@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -61,6 +61,9 @@ msgstr " Filen er for stor: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Forkast"
 
 msgid "Warning"
 msgstr "Advarsel"
@@ -366,9 +369,6 @@ msgstr " Tryk på en tast: "
 
 msgid " Execute Macro "
 msgstr " Kør makro "
-
-msgid "&Dismiss"
-msgstr "&Forkast"
 
 msgid " Emacs key: "
 msgstr " Emacs-tast: "

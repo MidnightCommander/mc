@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -55,6 +55,9 @@ msgstr " Fitxategia handiegia da: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Itxi"
 
 msgid "Warning"
 msgstr "Abisua"
@@ -362,9 +365,6 @@ msgstr " Sakatu tekla bat: "
 
 msgid " Execute Macro "
 msgstr " Exekutatu makroa "
-
-msgid "&Dismiss"
-msgstr "&Itxi"
 
 msgid " Emacs key: "
 msgstr " Emacs tekla: "

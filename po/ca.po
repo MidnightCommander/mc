@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2001-09-29 17:41+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -55,6 +55,9 @@ msgstr " El fitxer és massa gran: "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Ignora"
 
 msgid "Warning"
 msgstr "Avís"
@@ -361,9 +364,6 @@ msgstr " Premeu una tecla: "
 
 msgid " Execute Macro "
 msgstr " Executa la macro "
-
-msgid "&Dismiss"
-msgstr "&Ignora"
 
 msgid " Emacs key: "
 msgstr " Tecla d'Emacs: "

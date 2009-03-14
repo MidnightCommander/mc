@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -58,6 +58,9 @@ msgstr " A(z) \"%s\" fájl túl nagy "
 
 msgid "Macro recursion is too deep"
 msgstr "A makrórekurzió túl mély"
+
+msgid "&Dismiss"
+msgstr "&Tovább"
 
 #
 msgid "Warning"
@@ -365,9 +368,6 @@ msgstr " Nyomjon meg egy billentyût: "
 
 msgid " Execute Macro "
 msgstr " Makró futtatása "
-
-msgid "&Dismiss"
-msgstr "&Tovább"
 
 msgid " Emacs key: "
 msgstr " Emacs-billentyû: "

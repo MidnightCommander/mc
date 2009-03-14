@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2002-04-30 16:46+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -57,6 +57,9 @@ msgstr " Fichier trop gros : "
 
 msgid "Macro recursion is too deep"
 msgstr ""
+
+msgid "&Dismiss"
+msgstr "&Fermer"
 
 msgid "Warning"
 msgstr "Attention"
@@ -365,9 +368,6 @@ msgstr " Appuyez sur une touche : "
 
 msgid " Execute Macro "
 msgstr " Exécuter macro "
-
-msgid "&Dismiss"
-msgstr "&Fermer"
 
 msgid " Emacs key: "
 msgstr " Touches Emacs : "

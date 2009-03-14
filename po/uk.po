@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2005-09-10 13:28+0300\n"
 "Last-Translator: Anton Sergeevich Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Русский\n"
@@ -55,6 +55,9 @@ msgstr "файл %s надто великий"
 
 msgid "Macro recursion is too deep"
 msgstr "Занадто глибока рекурс╕я макрос╕в"
+
+msgid "&Dismiss"
+msgstr "&Закрити"
 
 msgid "Warning"
 msgstr "Попередження"
@@ -350,9 +353,6 @@ msgstr " Натисн╕ть будь яку клав╕шу: "
 
 msgid " Execute Macro "
 msgstr " Виконати макрос "
-
-msgid "&Dismiss"
-msgstr "&Закрити"
 
 msgid " Emacs key: "
 msgstr " Клав╕ша Emacs: "

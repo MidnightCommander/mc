@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
-"POT-Creation-Date: 2009-03-08 12:19+0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-03-14 19:43+0000\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -53,6 +53,9 @@ msgstr " Datoteka je prevelika: "
 
 msgid "Macro recursion is too deep"
 msgstr "Rekurzija makra je pregloboka"
+
+msgid "&Dismiss"
+msgstr "&Opusti"
 
 msgid "Warning"
 msgstr "Opozorilo"
@@ -358,9 +361,6 @@ msgstr " Pritisni tipko: "
 
 msgid " Execute Macro "
 msgstr " Izvedi makro "
-
-msgid "&Dismiss"
-msgstr "&Opusti"
 
 msgid " Emacs key: "
 msgstr " Emacs ključ: "
