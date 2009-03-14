@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -1330,6 +1330,9 @@ msgstr ""
 " \"%s\" Hədəf yumşaq bağa yaradıla bilmir\n"
 " %s "
 
+msgid "&Abort"
+msgstr "Lə&ğv et"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1346,8 +1349,12 @@ msgstr ""
 " \"%s\" qayanq faylı stat edilə bilmir \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' və `%s' eyni fayldır "
 
 #, c-format
@@ -1529,8 +1536,12 @@ msgstr ""
 " \"%s\" faylını silə bilmədim \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' və `%s' eyni qovluqdur "
 
 #, c-format
@@ -1611,9 +1622,6 @@ msgstr " Bağışlayın. Arxaya əməliyyat ala bilmərəm "
 
 msgid "&Retry"
 msgstr "Təzədən &sına"
-
-msgid "&Abort"
-msgstr "Lə&ğv et"
 
 msgid ""
 "\n"

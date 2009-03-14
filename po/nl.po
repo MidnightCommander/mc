@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2009-02-13\n"
 "Last-Translator: Marcel Pol <mpol@gmx.net>\n"
 "Language-Team: \n"
@@ -1317,6 +1317,9 @@ msgstr ""
 " Maken van doel van symbolische link \"%s\" mislukt \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Afbreken"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1333,8 +1336,12 @@ msgstr ""
 " Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' en `%s' zijn het zelfde bestand "
 
 #, c-format
@@ -1516,8 +1523,12 @@ msgstr ""
 " Verwijderen van bestand \"%s\" mislukt \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' en `%s' zijn dezelfde map "
 
 #, c-format
@@ -1598,9 +1609,6 @@ msgstr " De job kon niet in de achtergrond geplaatst worden "
 
 msgid "&Retry"
 msgstr "Nogmaals"
-
-msgid "&Abort"
-msgstr "&Afbreken"
 
 msgid ""
 "\n"

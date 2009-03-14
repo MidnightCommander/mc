@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-07-27 03:02+0800\n"
 "Last-Translator: Jing-Jong Shyue <shyue@sonoma.com.tw>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -1328,6 +1328,9 @@ msgstr ""
 " 無法建立目標符號連結 \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中斷"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1344,8 +1347,12 @@ msgstr ""
 " 無法 stat 來源檔案 \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' 與 `%s' 是同一個檔案 "
 
 #, c-format
@@ -1527,8 +1534,12 @@ msgstr ""
 " 無法移除檔案 \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' 與 `%s' 是同一個檔案 "
 
 #, c-format
@@ -1609,9 +1620,6 @@ msgstr " 抱歉，無法將此一工作放到背景裡執行 "
 
 msgid "&Retry"
 msgstr "重試"
-
-msgid "&Abort"
-msgstr "中斷"
 
 msgid ""
 "\n"

@@ -12,8 +12,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-10-20 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
@@ -1337,6 +1337,9 @@ msgstr ""
 " Kan ikke oprette målsymlænken \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Afbryd"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1353,8 +1356,12 @@ msgstr ""
 " Kan ikke køre stat på kildefilen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' og `%s' er samme fil "
 
 #, c-format
@@ -1536,8 +1543,12 @@ msgstr ""
 " Kan ikke fjerne filen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' og `%s' er den samme mappe "
 
 #, c-format
@@ -1618,9 +1629,6 @@ msgstr " Beklager, Jeg kunne ikke placere jobbet i baggrunden "
 
 msgid "&Retry"
 msgstr "&Prøv igen"
-
-msgid "&Abort"
-msgstr "&Afbryd"
 
 msgid ""
 "\n"

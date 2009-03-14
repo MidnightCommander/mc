@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2002-08-25 16:15GMT+2\n"
 "Last-Translator: Vital Khilko <dojlid@mova.org>\n"
 "Language-Team: belarusian <i18n@mova.org>\n"
@@ -1325,6 +1325,9 @@ msgstr ""
 " Немагчыма стварыць сымб. спасылку мэты \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Перарваць"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1341,8 +1344,12 @@ msgstr ""
 " Немагчыма атрымаць уласьцівасьці зыходнага файлу \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' і `%s' адзін і той жа файл "
 
 #, c-format
@@ -1524,8 +1531,12 @@ msgstr ""
 " Немагчыма выдаліць файл \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' і `%s' адзін і той жа каталёг "
 
 #, c-format
@@ -1606,9 +1617,6 @@ msgstr " Выбачайце, зрабіць гэта ў тле немагчым�
 
 msgid "&Retry"
 msgstr "Па&ўтарыць"
-
-msgid "&Abort"
-msgstr "&Перарваць"
 
 msgid ""
 "\n"

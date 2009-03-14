@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0-pre3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2003-01-22 17:31+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <gnome-kr-translation@lists.sourceforge.net>\n"
@@ -1319,6 +1319,9 @@ msgstr ""
 " 심볼릭링크 \"%s\"을(를) 만들 수 없습니다 \n"
 " %s "
 
+msgid "&Abort"
+msgstr "중단(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1335,8 +1338,12 @@ msgstr ""
 " \"%s\" 파일 정보를 얻을 수 없습니다 \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s'와 `%s'은(는) 같은 파일입니다 "
 
 #, c-format
@@ -1518,8 +1525,12 @@ msgstr ""
 " \"%s\" 파일을 지울 수 없습니다 \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s'와 `%s'은(는) 같은 디렉토리입니다 "
 
 #, c-format
@@ -1600,9 +1611,6 @@ msgstr " 미안, 백그라운드로 일을 수행할 수 없네요 "
 
 msgid "&Retry"
 msgstr "재시도(&R)"
-
-msgid "&Abort"
-msgstr "중단(&A)"
 
 msgid ""
 "\n"

@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -1332,6 +1332,9 @@ msgstr ""
 " Nevar izveidot mçría simbolsaiti \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Atsaukt"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1348,8 +1351,12 @@ msgstr ""
 " Nevar sâknçt avota failu \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' un `%s' ir tas pats fails "
 
 #, c-format
@@ -1531,8 +1538,12 @@ msgstr ""
 " Nevar izdzçst failu \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' un `%s' ir tas pats direktorijs "
 
 #, c-format
@@ -1613,9 +1624,6 @@ msgstr " Atvaino, bet nevarçju darbu nosûtît fonâ "
 
 msgid "&Retry"
 msgstr "&Vçlreiz"
-
-msgid "&Abort"
-msgstr "&Atsaukt"
 
 msgid ""
 "\n"

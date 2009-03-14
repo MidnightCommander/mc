@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2002-01-29 22:05+0800\n"
 "Last-Translator: Wang Jian <lark@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
@@ -1322,6 +1322,9 @@ msgstr ""
 " 无法创建目标符号链接“%s” \n"
 " %s "
 
+msgid "&Abort"
+msgstr "中止(&A)"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1338,8 +1341,12 @@ msgstr ""
 " 无法 stat 源文件“%s” \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " “%s”和“%s”是同一个文件 "
 
 #, c-format
@@ -1521,8 +1528,12 @@ msgstr ""
 " 无法删除文件“%s” \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " “%s”和“%s”是同一个目录 "
 
 #, c-format
@@ -1603,9 +1614,6 @@ msgstr " 抱歉，无法将任务放到后台 "
 
 msgid "&Retry"
 msgstr "重试(&R)"
-
-msgid "&Abort"
-msgstr "中止(&A)"
 
 msgid ""
 "\n"

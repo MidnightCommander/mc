@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2005-07-22 00:47+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -1363,6 +1363,9 @@ msgstr ""
 " (\"%s\"). \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Megszakítás"
+
 # 2. %s: hibaüzenet
 #, c-format
 msgid ""
@@ -1381,8 +1384,12 @@ msgstr ""
 " forrásfájl adatait. \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr ""
 " \"%s\" és \n"
 " \"%s\" ugyanaz a fájl "
@@ -1578,8 +1585,12 @@ msgstr ""
 " Nem sikerült letörölni a(z) \"%s\" fájlt. \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr ""
 " \"%s\" és \n"
 " \"%s\" ugyanaz a könyvtár "
@@ -1675,9 +1686,6 @@ msgstr " Nem lehet a mûveletet a háttérben végezni. "
 
 msgid "&Retry"
 msgstr "Új&ra"
-
-msgid "&Abort"
-msgstr "&Megszakítás"
 
 msgid ""
 "\n"

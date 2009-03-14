@@ -11,8 +11,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2009-01-25 17:50-0000\n"
 "Last-Translator: Patrick Winnertz <winnie@der-winnie.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -1322,6 +1322,9 @@ msgstr ""
 " Kann Ziel des symbolischen Links \"%s\" nicht anlegen \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abbrechen"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1338,8 +1341,12 @@ msgstr ""
 " Kann Quelldatei \"%s\" nicht untersuchen \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' und `%s' sind die gleichen Dateien "
 
 #, c-format
@@ -1521,8 +1528,12 @@ msgstr ""
 " Kann Datei \"%s\" nicht löschen \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' und `%s' sind das gleiche Verzeichnis "
 
 #, c-format
@@ -1603,9 +1614,6 @@ msgstr " Ich kann den Job nicht im Hintergrund bearbeiten "
 
 msgid "&Retry"
 msgstr "wiede&Rholen"
-
-msgid "&Abort"
-msgstr "&Abbrechen"
 
 msgid ""
 "\n"

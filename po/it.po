@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2008-04-07 17:25+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <tp@lists.linux.it>,<it@li.org>\n"
@@ -1322,6 +1322,9 @@ msgstr ""
 " Impossibile creare il coll. simbolico di destinazione \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Esci"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1338,8 +1341,12 @@ msgstr ""
 " Non trovo le informazioni sul file \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' e `%s' sono lo stesso file "
 
 #, c-format
@@ -1521,8 +1528,12 @@ msgstr ""
 " Non posso rimuovere il file `%s' \n"
 " %s"
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' e `%s' sono lo stesso file "
 
 #, c-format
@@ -1605,9 +1616,6 @@ msgstr " Spiacente, non posso mettere il programma in background "
 
 msgid "&Retry"
 msgstr "&Riprova"
-
-msgid "&Abort"
-msgstr "&Esci"
 
 msgid ""
 "\n"

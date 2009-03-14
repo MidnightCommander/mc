@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -1326,6 +1326,9 @@ msgstr ""
 " Kan ikke lage mållenken \"%s\" \n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Avbryt"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1342,8 +1345,12 @@ msgstr ""
 " Kan ikke kjøre stat på kildefilen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " `%s' og `%s' er samme fil "
 
 #, c-format
@@ -1525,8 +1532,12 @@ msgstr ""
 " Kan ikke fjerne filen \"%s\" \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " `%s' og `%s' er samme katalog "
 
 #, c-format
@@ -1607,9 +1618,6 @@ msgstr " Beklager, Jeg kunne ikke plassere jobben i bakgrunnen "
 
 msgid "&Retry"
 msgstr "&Prøv igjen"
-
-msgid "&Abort"
-msgstr "&Avbryt"
 
 msgid ""
 "\n"

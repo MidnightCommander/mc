@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2009-02-16 19:45+0300\n"
 "Last-Translator: Andrius Štikonas <stikonas@gmail.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
@@ -1313,6 +1313,9 @@ msgstr ""
 " Nepavyko pakeisti „%s“ režimo \n"
 " %s "
 
+msgid "&Abort"
+msgstr "Nutr&aukti"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1329,8 +1332,12 @@ msgstr ""
 " Nepavyko nustatyti failo „%s“ būklės („stat“) \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr " „%s“ ir „%s“ yra tas pats failas "
 
 #, c-format
@@ -1512,8 +1519,12 @@ msgstr ""
 " Nepavyko pašalinti failo „%s“ \n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr " „%s“ ir „%s“ yra tas pats aplankas "
 
 #, c-format
@@ -1596,9 +1607,6 @@ msgstr " Nepavyko nukelti darbo į foną "
 
 msgid "&Retry"
 msgstr "&Iš naujo"
-
-msgid "&Abort"
-msgstr "Nutr&aukti"
 
 msgid ""
 "\n"

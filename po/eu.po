@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-02 22:22+0300\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-03-08 12:19+0300\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -1336,6 +1336,9 @@ msgstr ""
 "Ezin da \"%s\" helburu-esteka sinbolikorik sortu\n"
 " %s "
 
+msgid "&Abort"
+msgstr "&Abortatu"
+
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1352,8 +1355,12 @@ msgstr ""
 "Ezin da \"%s\" iturburu-fitxategia identifikatu\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same file "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same file "
 msgstr "`%s' eta `%s' fitxategi bera dira "
 
 #, c-format
@@ -1535,8 +1542,12 @@ msgstr ""
 "Ezin da \"%s\" fitxategia kendu\n"
 " %s "
 
-#, c-format
-msgid " `%s' and `%s' are the same directory "
+#, fuzzy, c-format
+msgid ""
+" `%s' \n"
+" and \n"
+" `%s' \n"
+" are the same directory "
 msgstr "`%s' eta `%s' direktorio bera dira "
 
 #, c-format
@@ -1617,9 +1628,6 @@ msgstr "Ezin izan dut lana atzeko planoan ipini "
 
 msgid "&Retry"
 msgstr "&Saiatu berriz"
-
-msgid "&Abort"
-msgstr "&Abortatu"
 
 msgid ""
 "\n"
