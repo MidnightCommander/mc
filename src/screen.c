@@ -684,6 +684,12 @@ display_mini_info (WPanel *panel)
 		     name_trunc (link_target, panel->widget.cols - 5));
 	} else
 	    tty_printf ("%-*s", panel->widget.cols - 2, _("<readlink failed>"));
+    } else if (strcmp (panel->dir.list [panel->selected].fname, "..") == 0) {
+	/* FIXME:
+	 * while loading directory (do_load_dir() and do_reload_dir(),
+	 * the actual stat info about ".." directory isn't got;
+	 * so just don't display incorrect info about ".." directory */
+        tty_printf ("%-*s", panel->widget.cols - 2, _("UP--DIR"));
     } else
 	/* Default behavior */
 	repaint_file (panel, panel->selected, 0, STATUS, 1);
