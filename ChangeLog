@@ -35,7 +35,7 @@
 	  Set attribute here instead of show_dir().
 	  display_mini_info(): check the show_mini_info value before call this.
 	  Move display size of total marked files from here...
-	  dispaly_total_marked_size(): ...to this new function.
+	  display_total_marked_size(): ...to this new function.
 	  display_mini_info(): removed unused return.
 	  mini_info_separator(): check the show_mini_info value before call this.
 	  Set attribute independently of HAVE_SLANG. Show total size of marked files.

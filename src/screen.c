@@ -711,7 +711,7 @@ paint_dir (WPanel *panel)
 }
 
 static void
-dispaly_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
+display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
 {
     char buffer[BUF_SMALL], b_bytes[BUF_SMALL], *buf;
     int cols;
@@ -773,7 +773,7 @@ mini_info_separator (WPanel *panel)
 
     /* Status displays total marked size.
      * Centered in panel, full format. */
-    dispaly_total_marked_size (panel, y, -1, FALSE);
+    display_total_marked_size (panel, y, -1, FALSE);
 }
 
 static void
@@ -872,7 +872,7 @@ show_dir (WPanel *panel)
 	} else {
 	    /* Show total size of marked files
 	     * In the bottom of panel, display size only. */
-	    dispaly_total_marked_size (panel, panel->widget.lines - 1, 2, TRUE);
+	    display_total_marked_size (panel, panel->widget.lines - 1, 2, TRUE);
 	}
     }
 
