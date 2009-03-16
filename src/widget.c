@@ -1440,7 +1440,7 @@ backward_word (WInput *in)
     memset (&mbs, 0, sizeof (mbs));
     while (in->point > 0) {
       wchar_t c;
-      char *p = in->buffer + charpos(in,in->point);
+      char *p = in->buffer + charpos(in,in->point-1);
       size_t res = mbrtowc(&c, p, strlen(p), &mbs);
       if (*p && (res <= 0 || !(iswspace (c) || iswpunct (c))))
           break;
@@ -1451,7 +1451,7 @@ backward_word (WInput *in)
 
     while (in->point > 0) {
       wchar_t c;
-      char *p = in->buffer + charpos(in,in->point);
+      char *p = in->buffer + charpos(in,in->point-1);
       size_t res = mbrtowc(&c, p, strlen(p), &mbs);
       if (*p && (res <= 0 || !iswalnum (c)))
           break;
