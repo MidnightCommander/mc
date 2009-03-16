@@ -309,7 +309,9 @@ void init_colors (void)
 
     if (use_colors){
 	start_color ();
+#ifndef HAVE_SLANG
 	use_default_colors ();
+#endif /* !HAVE_SLANG */
 	configure_colors ();
 
 #ifndef HAVE_SLANG
@@ -332,8 +334,8 @@ void init_colors (void)
 	     */
 	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, "default", "default");
 #else
-	    /* Always white on black */
-	    mc_init_pair(DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
+	    /* Use default terminal colors */
+	    mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
 #endif /* !HAVE_SLANG */
 	}
 
@@ -419,7 +421,7 @@ try_alloc_color_pair (const char *fg, const char *bg)
 void
 mc_init_pair (int index, CTYPE foreground, CTYPE background)
 {
-    init_pair (index, foreground, (background==0?-1:background));
+    init_pair (index, foreground, background == 0 ? -1 : background);
     if (index > max_index)
 	max_index = index;
 }
