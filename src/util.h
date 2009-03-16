@@ -107,6 +107,8 @@ char *get_owner (int);
 
 void fix_utf8(char *str);
 size_t mbstrlen (const char *);
+size_t mbstrnlen (const char *, size_t);
+int columns_to_bytes (const char *, int);
 wchar_t *mbstr_to_wchar (const char *);
 char *wchar_to_mbstr (const wchar_t *);
 char *utf8_to_local(char *str);

@@ -787,6 +787,25 @@ display_mini_info (WPanel *panel)
 
     if (panel->searching){
 	attrset (INPUT_COLOR);
+#ifdef UTF8
+	if (SLsmg_Is_Unicode) {
+	    int j;
+	    char search_buffer_valid_utf8 [sizeof (panel->search_buffer)];
+	    mbstate_t mbs;
+	    int pos = 0;
+	    int l = strlen (panel->search_buffer);
+	    strcpy (search_buffer_valid_utf8, panel->search_buffer);
+	    while (pos < l) {
+		memset (&mbs, 0, sizeof(mbs));
+		j = mbrlen (search_buffer_valid_utf8 + pos, l - pos, &mbs);
+		if (j <= 0) break;
+		pos += j;
+	    }
+	    search_buffer_valid_utf8[pos] = '\0';
+	    j = columns_to_bytes (search_buffer_valid_utf8, panel->widget.cols-3);
+	    tty_printf ("/%-*s", j, search_buffer_valid_utf8);
+	} else
+#endif
 	tty_printf ("/%-*s", panel->widget.cols-3, panel->search_buffer);
 	attrset (NORMAL_COLOR);
 	return;

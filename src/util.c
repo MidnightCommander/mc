@@ -143,6 +143,58 @@ mbstrlen (const char *str)
 	return strlen (str);
 }
 
+size_t
+mbstrnlen (const char *str, size_t maxlen)
+{
+#ifdef UTF8
+    if (1) {
+        size_t width = 0;
+
+        for (; *str && maxlen; str++, maxlen--) {
+            wchar_t c;
+            size_t len;
+
+            len = mbrtowc (&c, str, maxlen > MB_CUR_MAX ? MB_CUR_MAX : maxlen, NULL);
+	    
+            if (len == (size_t)(-1) || len == (size_t)(-2)) break;
+	    
+            if (len > 0) {
+                int wcsize = wcwidth(c);
+                width += wcsize >= 0 ? wcsize : 1;
+                str += len-1;
+            }
+        }
+
+        return width;
+    } else
+#endif
+        return strnlen (str, maxlen);
+}
+
+int
+columns_to_bytes (const char *str, int col)
+{
+    int bytes = 0;
+    int columns = 0;
+    int i;
+#ifdef UTF8
+    if (SLsmg_Is_Unicode) {
+	static mbstate_t s;
+	while (columns < col) {
+	    memset (&s, 0, sizeof (s));
+	    i = mbrlen (str + bytes, -1, &s);
+	    if (i <= 0) {
+		return col + bytes - columns;
+	    }
+	    bytes += i;
+	    columns ++;
+	}
+	return col + bytes - columns;
+    } else
+#endif
+	return col;
+}
+
 #ifdef UTF8
 
 void

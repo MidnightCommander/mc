@@ -866,7 +866,7 @@ static int insert_text (WInput *in, char *text, ssize_t len)
 	    *p = 0;
 	}
 	memcpy (in->buffer + start, text, len - start + end);
-	in->point += len;
+	in->point += mbstrnlen(text - start + end, len);
 	update_input (in, 1);
 	end += len;
     }
@@ -981,7 +981,7 @@ complete_engine (WInput *in, int what_to_do)
     if (in->completions && in->point != end)
     	free_completions (in);
     if (!in->completions){
-    	end = in->point;
+    	end = columns_to_bytes(in->buffer, in->point);
         for (start = end ? end - 1 : 0; start > -1; start--)
     	    if (strchr (" \t;|<>", in->buffer [start])){
     		if (start > 0 && in->buffer [start-1] == '\\')

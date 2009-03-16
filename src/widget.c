@@ -2026,6 +2026,7 @@ listbox_draw (WListbox *l, int focused)
 {
     WLEntry *e;
     int i;
+    int j;
     int sel_line;
     Dlg_head *h = l->widget.parent;
     int normalc = DLG_NORMALC (h);
@@ -2056,7 +2057,8 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-	tty_printf (" %-*s ", l->width-2, name_trunc (text, l->width-2));
+	j = columns_to_bytes (name_trunc (text, l->width-2), l->width-2);
+	tty_printf (" %-*s ", j, name_trunc (text, l->width-2));
     }
     l->cursor_y = sel_line;
     if (!l->scrollbar)
@@ -2594,11 +2596,14 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	attrset (DEFAULT_COLOR);
 	tty_printf ("%-*s", bb->widget.cols, "");
 	for (i = 0; i < COLS / 8 && i < 10; i++) {
+	    int j;
 	    widget_move (&bb->widget, 0, i * 8);
 	    attrset (DEFAULT_COLOR);
 	    tty_printf ("%d", i + 1);
 	    attrset (SELECTED_COLOR);
-	    tty_printf ("%-*s", ((i + 1) * 8 == COLS ? 5 : 6),
+	    j = columns_to_bytes(bb->labels[i].text ? bb->labels[i].text : "",
+	      ((i + 1) * 8 == COLS ? 5 : 6));
+	    tty_printf ("%-*s", j,
 		    bb->labels[i].text ? bb->labels[i].text : "");
 	    attrset (DEFAULT_COLOR);
 	}
