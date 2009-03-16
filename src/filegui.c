@@ -775,7 +775,7 @@ static QuickWidget fmd_widgets[] = {
  #define B_FROM B_USER+1
  #define B_TO   B_USER+2
 #else
- #define SKIP             10
+ #define SKIP             7
 #endif
 
     {quick_checkbox, 42,64, 8, FMDY, N_("&Stable Symlinks"),0,0,0,0,"stab-sym"},
