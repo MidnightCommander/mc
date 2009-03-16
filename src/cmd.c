@@ -375,7 +375,7 @@ mkdir_cmd (void)
         absdir = concat_dir_and_file (current_panel->cwd, recoded_dir);
         g_free(recoded_dir);
 #else
-	absdir = mhl_str_dir_plus_file (current_panel->cwd, dir);
+	absdir = concat_dir_and_file (current_panel->cwd, dir);
 #endif
     }
 
