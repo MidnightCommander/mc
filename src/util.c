@@ -132,7 +132,7 @@ mbstrlen (const char *str)
 
             if (len > 0) {
                 int wcsize = wcwidth(c);
-                width += wcsize > 0 ? wcsize : 0;
+                width += wcsize >= 0 ? wcsize : 1;
                 str += len-1;
             }
         }

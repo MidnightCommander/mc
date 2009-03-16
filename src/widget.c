@@ -859,7 +859,7 @@ charcolumn(WInput *in, int idx)
 	l = mbrtowc(&wc, in->buffer + pos, len - pos, &mbs);
 	if (l <= 0)
 	    return width;
-	pos += l; width += wcwidth(wc);
+	pos += l; width += (wcwidth(wc) >= 0 ? wcwidth(wc) : 1);
 	i++;
     };
     return width;
