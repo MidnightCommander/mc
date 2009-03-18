@@ -135,11 +135,11 @@ struct mount_entry
 
 struct fs_usage
 {
-  long fsu_blocks;		/* Total blocks. */
-  long fsu_bfree;		/* Free blocks available to superuser. */
-  long fsu_bavail;		/* Free blocks available to non-superuser. */
-  long fsu_files;		/* Total file nodes. */
-  long fsu_ffree;		/* Free file nodes. */
+    fsblkcnt_t fsu_blocks;	/* Total blocks. */
+    fsblkcnt_t fsu_bfree;	/* Free blocks available to superuser. */
+    fsblkcnt_t fsu_bavail;	/* Free blocks available to non-superuser. */
+    fsfilcnt_t fsu_files;	/* Total file nodes. */
+    fsfilcnt_t fsu_ffree;	/* Free file nodes. */
 };
 
 static int get_fs_usage (char *path, struct fs_usage *fsp);
@@ -756,8 +756,8 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
    BLOCKS FROMSIZE-byte blocks, rounding away from zero.
    TOSIZE must be positive.  Return -1 if FROMSIZE is not positive.  */
 
-static long
-fs_adjust_blocks (long blocks, int fromsize, int tosize)
+static fsblkcnt_t
+fs_adjust_blocks (fsblkcnt_t blocks, int fromsize, int tosize)
 {
     if (tosize <= 0)
 	abort ();
@@ -769,7 +769,7 @@ fs_adjust_blocks (long blocks, int fromsize, int tosize)
     else if (fromsize > tosize)	/* E.g., from 2048 to 512.  */
 	return blocks * (fromsize / tosize);
     else			/* E.g., from 256 to 512.  */
-	return (blocks + (blocks < 0 ? -1 : 1)) / (tosize / fromsize);
+	return blocks / (tosize / fromsize);
 }
 
 #if defined(_AIX) && defined(_I386)
