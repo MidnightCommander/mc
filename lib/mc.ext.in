@@ -225,10 +225,6 @@ regex/\.(7z|7Z)$
 	Open=%cd %p#u7z
 	View=%view{ascii} 7za l %f 2>/dev/null
 
-# Glade, a user interface designer for GTK+ and GNOME
-regex/\.([Gg][Ll][Aa][Dd][Ee])$
-	Open=if glade-3 --version >/dev/null 2>&1; then (glade-3 %f >/dev/null 2>&1 &); else (glade-2 %f >/dev/null 2>&1 &); fi
-
 # Mailboxes
 type/^ASCII\ mail\ text
 	Open=%cd %p#mailfs
@@ -539,6 +535,10 @@ regex/\.(d64|D64)$
 	Open=%cd %p#uc1541
 	View=%view{ascii} c1541 %f -list
 	Extract=c1541 %f -extract
+
+# Glade, a user interface designer for GTK+ and GNOME
+regex/\.([Gg][Ll][Aa][Dd][Ee])$
+	Open=if glade-3 --version >/dev/null 2>&1; then (glade-3 %f >/dev/null 2>&1 &); else (glade-2 %f >/dev/null 2>&1 &); fi
 
 
 ### Plain compressed files ###
