@@ -685,6 +685,15 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     int x = event->x;
     int y = event->y;
 
+    /* close the dialog by mouse click out of dialog area */
+    if (!h->fullscreen && ((event->type & GPM_DOWN) != 0)
+	&& !((x > h->x) && (x <= h->x + h->cols)
+	    && (y > h->y) && (y <= h->y + h->lines))) {
+	h->ret_value = B_CANCEL;
+	dlg_stop (h);
+	return MOU_NORMAL;
+    }
+
     item = starting_widget;
     do {
 	Widget *widget = item;
