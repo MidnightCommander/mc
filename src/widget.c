@@ -2042,6 +2042,8 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 
 	    listbox_select_entry (l, e);
 
+	    (*h->callback) (h, DLG_ACTION, l->pos);
+
 	    if (l->cback)
 		action = (*l->cback) (l);
 	    else
@@ -2056,12 +2058,15 @@ listbox_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
-	if ((ret_code = listbox_key (l, parm)))
+	if ((ret_code = listbox_key (l, parm)) != MSG_NOT_HANDLED) {
 	    listbox_draw (l, 1);
+	    (*h->callback) (h, DLG_ACTION, l->pos);
+	}
 	return ret_code;
 
     case WIDGET_CURSOR:
 	widget_move (&l->widget, l->cursor_y, 0);
+	(*h->callback) (h, DLG_ACTION, l->pos);
 	return MSG_HANDLED;
 
     case WIDGET_FOCUS:
