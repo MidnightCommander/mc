@@ -66,7 +66,8 @@ typedef enum {
     DLG_KEY,			/* Key before sending to widget */
     DLG_INIT,			/* Initialize dialog */
     DLG_END,			/* Shut down dialog */
-    DLG_ACTION,			/* State of check- and radioboxes has changed */
+    DLG_ACTION,			/* State of check- and radioboxes has changed
+				 * and listbox current entry has changed */
     DLG_DRAW,			/* Draw dialog on screen */
     DLG_FOCUS,			/* A widget has got focus */
     DLG_UNFOCUS,		/* A widget has been unfocused */
