@@ -1900,7 +1900,7 @@ edit_delete_line (WEdit *edit)
     };
 }
 
-static void insert_spaces_tab (WEdit * edit, int half)
+void insert_spaces_tab (WEdit * edit, int half)
 {
     int i;
     edit_update_curs_col (edit);
@@ -2377,13 +2377,19 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
 
     case CK_Tab:
-	edit_tab_cmd (edit);
-	if (option_auto_para_formatting) {
-	    format_paragraph (edit, 0);
-	    edit->force |= REDRAW_PAGE;
-	} else
-	    check_and_wrap_line (edit);
-	break;
+        /* if text marked shift block */
+        if (edit->mark1 != edit->mark2) {
+            edit_move_block_to_right (edit);
+        } else {
+            edit_tab_cmd (edit);
+            if (option_auto_para_formatting) {
+                format_paragraph (edit, 0);
+                edit->force |= REDRAW_PAGE;
+            } else {
+                check_and_wrap_line (edit);
+            }
+        }
+        break;
 
     case CK_Toggle_Insert:
 	edit->overwrite = (edit->overwrite == 0);
@@ -2531,7 +2537,12 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_replace_cmd (edit, 1);
 	break;
     case CK_Complete_Word:
-	edit_complete_word_cmd (edit);
+        /* if text marked shift block */
+        if (edit->mark1 != edit->mark2) {
+            edit_move_block_to_left (edit);
+        } else {
+            edit_complete_word_cmd (edit);
+        }
 	break;
     case CK_Find_Definition:
 	edit_get_match_keyword_cmd (edit);
