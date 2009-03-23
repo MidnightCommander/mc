@@ -17,10 +17,12 @@ context default
     keyword whole clone brightred
     keyword whole const yellow
     keyword whole continue yellow
+    keyword whole def yellow
     keyword whole default yellow
     keyword whole do yellow
     keyword whole double yellow
     keyword whole else yellow
+    keyword whole enum yellow
     keyword whole equals brightred
     keyword whole extends yellow
     keyword whole false yellow
