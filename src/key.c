@@ -265,6 +265,12 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "[1;6D", MCKEY_NOACTION },
 
+    /* putty */
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    ESC_STR "[[1;6A", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  ESC_STR "[[1;6B", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[[1;6C", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "[[1;6D", MCKEY_NOACTION },
+
     /* rxvt keys with modifiers */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[a",  MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[b",  MCKEY_NOACTION },
@@ -315,6 +321,10 @@ static key_define_t xterm_key_defines [] = {
     /* iTerm */
     { KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[5;2~", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[6;2~", MCKEY_NOACTION },
+
+    /* putty */
+    { KEY_M_SHIFT | KEY_PPAGE, ESC_STR "[[5;53~", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_NPAGE, ESC_STR "[[6;53~", MCKEY_NOACTION },
 
     /* keypad keys */
     { KEY_IC,                  ESC_STR "Op",  MCKEY_NOACTION },
