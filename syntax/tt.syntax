@@ -1,0 +1,126 @@
+#
+# Dan Dascalescu
+# Template::Toolkit syntax file
+# HTML entities
+#
+context default
+	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
+	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
+	keyword &#\[0123456789\]; brightgreen
+	
+# Although TT is most often used to generate HTML, it's not *only* used for that, so assuming HTML around it may be presumptuous anyway.
+# Since cooledit doesn't support sub-context, we can't have TT *in* HTML, like <img src="[% image_url %]">
+# The best possible workaround, which still sucks, is to uncomment the line below, which will highlight any HTML tags that don't contain a '[', but without special highlight for strings, and without any HTML-specific keywords
+#    keyword <\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890\s"#$%&'()*+,-.=?@\\\]^_`{|}~\]> green
+	spellcheck
+
+# TT directives - http://template-toolkit.org/docs/manual/Directives.html
+context [% %] red black
+    keyword whole GET yellow
+    keyword whole CALL yellow
+    keyword whole SET yellow
+    keyword whole DEFAULT yellow
+
+    keyword whole INSERT yellow
+    keyword whole INCLUDE yellow
+    keyword whole PROCESS yellow
+    keyword whole WRAPPER yellow
+    keyword whole BLOCK yellow
+
+    keyword whole IF yellow
+    keyword whole UNLESS yellow
+    keyword whole ELSIF yellow
+    keyword whole ELSE yellow
+    keyword whole SWITCH yellow
+    keyword whole CASE yellow
+
+    keyword whole FOREACH yellow
+    keyword whole IN yellow
+    keyword whole WHILE yellow
+
+    keyword whole FILTER yellow
+    keyword whole USE yellow
+    keyword whole MACRO yellow
+    keyword whole PERL yellow
+    keyword whole RAWPERL yellow
+
+    keyword whole TRY yellow
+    keyword whole THROW yellow
+    keyword whole CATCH yellow
+    keyword whole FINAL yellow
+
+    keyword whole NEXT yellow
+    keyword whole LAST yellow
+    keyword whole RETURN yellow
+    keyword whole STOP yellow
+    keyword whole CLEAR yellow
+    keyword whole META yellow
+    keyword whole TAGS yellow
+    keyword whole DEBUG yellow
+
+    keyword whole END yellow
+
+# AND, OR and NOT are apparently not documented
+    keyword whole AND white
+    keyword whole OR white
+    keyword whole NOT white
+    keyword | white
+
+# TT VMethods - http://template-toolkit.org/docs/manual/VMethods.html
+    keyword .defined brown
+    keyword .length brown
+    keyword .repeat brown
+    keyword .replace brown
+    keyword .remove brown
+    keyword .match brown
+    keyword .search brown
+    keyword .split brown
+    keyword .chunk brown
+    keyword .substr brown
+    keyword .list brown
+    keyword .hash brown
+    keyword .size brown
+    keyword .keys brown
+    keyword .values brown
+    keyword .items brown
+    keyword .each brown
+    keyword .pairs brown
+    keyword .sort brown
+    keyword .nsort brown
+    keyword .import brown
+    keyword .exists brown
+    keyword .delete brown
+    keyword .item brown
+    keyword .first brown
+    keyword .last brown
+    keyword .max brown
+    keyword .reverse brown
+    keyword .join brown
+    keyword .grep brown
+    keyword .unshift brown
+    keyword .push brown
+    keyword .shift brown
+    keyword .pop brown
+    keyword .unique brown
+    keyword .merge brown
+    keyword .slice brown
+    keyword .splice brown
+
+    keyword "*" green
+    keyword '*' brightgreen
+
+# HTML comments
+context <!-- --> brown
+    spellcheck
+
+# HTML DOCTYPE
+context <! > brightred/orange
+    spellcheck
+
+# HTML end tags
+context </ > brightcyan
+
+# HTML open tags - enabling this will hide TT syntax in HTML, e.g. <img src="[% image_url %]">
+#context < > brightcyan
+#   keyword "*" green
+#   keyword = yellow
