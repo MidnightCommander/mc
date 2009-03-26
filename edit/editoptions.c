@@ -43,7 +43,7 @@
 #include "../src/dialog.h"	/* B_CANCEL */
 #include "../src/wtools.h"	/* QuickDialog */
 
-#define OPT_DLG_H 17
+#define OPT_DLG_H 19
 #define OPT_DLG_W 72
 
 #ifndef USE_INTERNAL_EDIT
@@ -76,6 +76,7 @@ edit_options_dialog (void)
     int toption_save_position = option_save_position;
     int tedit_confirm_save = edit_confirm_save;
     int tedit_syntax_highlighting = option_syntax_highlighting;
+    int tedit_persistent_block = option_persistent_block;
     int toption_return_does_auto_indent = option_return_does_auto_indent;
     int toption_backspace_through_tabs = option_backspace_through_tabs;
     int toption_fake_half_tabs = option_fake_half_tabs;
@@ -89,10 +90,10 @@ edit_options_dialog (void)
 	{quick_button, 2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"), 0,
 	 B_ENTER, 0, 0, NULL},
 	/* 2 */
-	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H,
+	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H,
 	 N_("Word wrap line length: "), 0, 0, 0, 0, NULL},
 	/* 3 */
-	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 5,
+	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 7,
 	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0, "edit-word-wrap"},
 	/* 4 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 6, OPT_DLG_H,
@@ -102,38 +103,41 @@ edit_options_dialog (void)
 	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0,
 	 "edit-tab-spacing"},
 	/* 6 */
-	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 8,
+	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9,
+	 OPT_DLG_H, N_("Persistent block"), 8, 0, 0, 0, NULL},
+	/* 7 */
+	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10,
 	 OPT_DLG_H, N_("Synta&x highlighting"), 8, 0, 0, 0, NULL},
 	/* 7 */
-	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9,
-	 OPT_DLG_H, N_("Save file &position"), 0, 0, 0, 0, NULL},
-	/* 8 */
-	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10,
-	 OPT_DLG_H, N_("Confir&m before saving"), 6, 0, 0, 0, NULL},
-	/* 9 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 11,
-	 OPT_DLG_H, N_("Fill tabs with &spaces"), 0, 0, 0, 0, NULL},
-	/* 10 */
+	 OPT_DLG_H, N_("Save file &position"), 0, 0, 0, 0, NULL},
+	/* 9 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 12,
-	 OPT_DLG_H, N_("&Return does autoindent"), 0, 0, 0, 0, NULL},
-	/* 11 */
+	 OPT_DLG_H, N_("Confir&m before saving"), 6, 0, 0, 0, NULL},
+	/* 10 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 13,
-	 OPT_DLG_H, N_("&Backspace through tabs"), 0, 0, 0, 0, NULL},
-	/* 12 */
+	 OPT_DLG_H, N_("Fill tabs with &spaces"), 0, 0, 0, 0, NULL},
+	/* 11 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 14,
-	 OPT_DLG_H, N_("&Fake half tabs"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("&Return does autoindent"), 0, 0, 0, 0, NULL},
+	/* 12 */
+	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 15,
+	 OPT_DLG_H, N_("&Backspace through tabs"), 0, 0, 0, 0, NULL},
 	/* 13 */
-	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, "", 3, 0, 0,
-	 const_cast(char **, wrap_str), "wrapm"},
+	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 16,
+	 OPT_DLG_H, N_("&Fake half tabs"), 0, 0, 0, 0, NULL},
 	/* 14 */
-	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 8, OPT_DLG_H,
+	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 9, OPT_DLG_H, "", 3, 0, 0,
+	 const_cast(char **, wrap_str), "wrapm"},
+	/* 15 */
+	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 10, OPT_DLG_H,
 	 N_("Wrap mode"), 0, 0,
 	 0, 0, NULL},
-	/* 15 */
-	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 13, OPT_DLG_H, "", 3, 0, 0,
-	 const_cast(char **, key_emu_str), "keyemu"},
 	/* 16 */
-	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 14, OPT_DLG_H,
+	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 15, OPT_DLG_H, "", 3, 0, 0,
+	 const_cast(char **, key_emu_str), "keyemu"},
+	/* 17 */
+	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 16, OPT_DLG_H,
 	 N_("Key emulation"), 0, 0, 0, 0, NULL},
 	NULL_QuickWidget
     };
@@ -156,13 +160,14 @@ edit_options_dialog (void)
     quick_widgets[3].str_result = &p;
     quick_widgets[5].text = tab_spacing;
     quick_widgets[5].str_result = &q;
-    quick_widgets[6].result = &tedit_syntax_highlighting;
-    quick_widgets[7].result = &toption_save_position;
-    quick_widgets[8].result = &tedit_confirm_save;
-    quick_widgets[9].result = &toption_fill_tabs_with_spaces;
-    quick_widgets[10].result = &toption_return_does_auto_indent;
-    quick_widgets[11].result = &toption_backspace_through_tabs;
-    quick_widgets[12].result = &toption_fake_half_tabs;
+    quick_widgets[6].result = &tedit_persistent_block;
+    quick_widgets[7].result = &tedit_syntax_highlighting;
+    quick_widgets[8].result = &toption_save_position;
+    quick_widgets[9].result = &tedit_confirm_save;
+    quick_widgets[10].result = &toption_fill_tabs_with_spaces;
+    quick_widgets[11].result = &toption_return_does_auto_indent;
+    quick_widgets[12].result = &toption_backspace_through_tabs;
+    quick_widgets[13].result = &toption_fake_half_tabs;
 
     if (option_auto_para_formatting)
 	wrap_mode = 1;
@@ -171,11 +176,11 @@ edit_options_dialog (void)
     else
 	wrap_mode = 0;
 
-    quick_widgets[13].result = &wrap_mode;
-    quick_widgets[13].value = wrap_mode;
+    quick_widgets[14].result = &wrap_mode;
+    quick_widgets[14].value = wrap_mode;
 
-    quick_widgets[15].result = &tedit_key_emulation;
-    quick_widgets[15].value = tedit_key_emulation;
+    quick_widgets[16].result = &tedit_key_emulation;
+    quick_widgets[16].value = tedit_key_emulation;
 
     Quick_options.widgets = quick_widgets;
 
@@ -195,6 +200,7 @@ edit_options_dialog (void)
 	g_free (q);
     }
 
+    option_persistent_block = tedit_persistent_block;
     option_syntax_highlighting = tedit_syntax_highlighting;
     edit_confirm_save = tedit_confirm_save;
     option_save_position = toption_save_position;
