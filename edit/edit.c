@@ -63,6 +63,7 @@ int option_fake_half_tabs = 1;
 int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_max_undo = 32768;
+int option_persistent_blocks = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -2221,6 +2222,25 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Word_Right:
     case CK_Up:
     case CK_Down:
+    case CK_Left:
+    case CK_Right:
+        if ( !option_persistent_blocks ) {
+            if (column_highlighting)
+                edit_push_action (edit, COLUMN_ON);
+            column_highlighting = 0;
+            edit_mark_cmd (edit, 1);
+        }
+    }
+
+    switch (command) {
+    case CK_Begin_Page:
+    case CK_End_Page:
+    case CK_Begin_Page_Highlight:
+    case CK_End_Page_Highlight:
+    case CK_Word_Left:
+    case CK_Word_Right:
+    case CK_Up:
+    case CK_Down:
     case CK_Word_Left_Highlight:
     case CK_Word_Right_Highlight:
     case CK_Up_Highlight:
@@ -2237,6 +2257,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     /* basic cursor key commands */
     switch (command) {
     case CK_BackSpace:
+        /* if non persistent block and text selected */
+        if ( !option_persistent_blocks ) {
+            if ( edit->mark1 != edit->mark2 ) {
+                edit_block_delete_cmd (edit);
+                break;
+            }
+        }
 	if (option_backspace_through_tabs && is_in_indent (edit)) {
 	    while (edit_get_byte (edit, edit->curs1 - 1) != '\n'
 		   && edit->curs1 > 0)
@@ -2255,6 +2282,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_backspace (edit);
 	break;
     case CK_Delete:
+        /* if non persistent block and text selected */
+        if ( !option_persistent_blocks ) {
+            if ( edit->mark1 != edit->mark2 ) {
+                edit_block_delete_cmd (edit);
+                break;
+            }
+        }
 	if (option_fake_half_tabs) {
 	    int i;
 	    if (is_in_indent (edit) && left_of_four_spaces (edit)) {
