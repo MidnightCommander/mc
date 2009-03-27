@@ -76,7 +76,7 @@ edit_options_dialog (void)
     int toption_save_position = option_save_position;
     int tedit_confirm_save = edit_confirm_save;
     int tedit_syntax_highlighting = option_syntax_highlighting;
-    int tedit_persistent_blocks = option_persistent_blocks;
+    int tedit_persistent_selections = option_persistent_selections;
     int toption_return_does_auto_indent = option_return_does_auto_indent;
     int toption_backspace_through_tabs = option_backspace_through_tabs;
     int toption_fake_half_tabs = option_fake_half_tabs;
@@ -160,7 +160,7 @@ edit_options_dialog (void)
     quick_widgets[3].str_result = &p;
     quick_widgets[5].text = tab_spacing;
     quick_widgets[5].str_result = &q;
-    quick_widgets[6].result = &tedit_persistent_blocks;
+    quick_widgets[6].result = &tedit_persistent_selections;
     quick_widgets[7].result = &tedit_syntax_highlighting;
     quick_widgets[8].result = &toption_save_position;
     quick_widgets[9].result = &tedit_confirm_save;
@@ -200,7 +200,7 @@ edit_options_dialog (void)
 	g_free (q);
     }
 
-    option_persistent_blocks = tedit_persistent_blocks;
+    option_persistent_selections = tedit_persistent_selections;
     option_syntax_highlighting = tedit_syntax_highlighting;
     edit_confirm_save = tedit_confirm_save;
     option_save_position = toption_save_position;
