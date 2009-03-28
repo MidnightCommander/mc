@@ -76,7 +76,7 @@ edit_options_dialog (void)
     int toption_save_position = option_save_position;
     int tedit_confirm_save = edit_confirm_save;
     int tedit_syntax_highlighting = option_syntax_highlighting;
-    int tedit_persistent_block = option_persistent_block;
+    int tedit_persistent_selections = option_persistent_selections;
     int toption_return_does_auto_indent = option_return_does_auto_indent;
     int toption_backspace_through_tabs = option_backspace_through_tabs;
     int toption_fake_half_tabs = option_fake_half_tabs;
@@ -104,7 +104,7 @@ edit_options_dialog (void)
 	 "edit-tab-spacing"},
 	/* 6 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9,
-	 OPT_DLG_H, N_("Persistent block"), 8, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Pers&istent selection"), 8, 0, 0, 0, NULL},
 	/* 7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10,
 	 OPT_DLG_H, N_("Synta&x highlighting"), 8, 0, 0, 0, NULL},
@@ -160,7 +160,7 @@ edit_options_dialog (void)
     quick_widgets[3].str_result = &p;
     quick_widgets[5].text = tab_spacing;
     quick_widgets[5].str_result = &q;
-    quick_widgets[6].result = &tedit_persistent_block;
+    quick_widgets[6].result = &tedit_persistent_selections;
     quick_widgets[7].result = &tedit_syntax_highlighting;
     quick_widgets[8].result = &toption_save_position;
     quick_widgets[9].result = &tedit_confirm_save;
@@ -200,7 +200,7 @@ edit_options_dialog (void)
 	g_free (q);
     }
 
-    option_persistent_block = tedit_persistent_block;
+    option_persistent_selections = tedit_persistent_selections;
     option_syntax_highlighting = tedit_syntax_highlighting;
     edit_confirm_save = tedit_confirm_save;
     option_save_position = toption_save_position;
