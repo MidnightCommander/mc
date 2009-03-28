@@ -63,7 +63,7 @@ int option_fake_half_tabs = 1;
 int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_max_undo = 32768;
-int option_persistent_selections = 0;
+int option_persistent_selections = 1;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
