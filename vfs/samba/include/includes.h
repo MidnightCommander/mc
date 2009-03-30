@@ -484,16 +484,6 @@
 /***** automatically generated prototypes *****/
 #include "proto.h"
 
-#ifdef strcpy
-#undef strcpy
-#endif /* strcpy */
-#define strcpy(dest,src) __ERROR__XX__NEVER_USE_STRCPY___;
-
-#ifdef strcat
-#undef strcat
-#endif /* strcat */
-#define strcat(dest,src) __ERROR__XX__NEVER_USE_STRCAT___;
-
 #ifdef sprintf
 #undef sprintf
 #endif /* sprintf */
