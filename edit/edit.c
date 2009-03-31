@@ -2213,6 +2213,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_find_bracket (edit);
 	return;
     }
+
     switch (command) {
     case CK_Begin_Page:
     case CK_End_Page:
@@ -2224,13 +2225,16 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Down:
     case CK_Left:
     case CK_Right:
-        if ( !option_persistent_selections ) {
-            if (column_highlighting)
-                edit_push_action (edit, COLUMN_ON);
-            column_highlighting = 0;
-            edit_mark_cmd (edit, 1);
+        if ( edit->mark2 >= 0 ) {
+            if ( !option_persistent_selections ) {
+                if (column_highlighting)
+                    edit_push_action (edit, COLUMN_ON);
+                column_highlighting = 0;
+                edit_mark_cmd (edit, 1);
+            }
         }
     }
+
     switch (command) {
     case CK_Begin_Page:
     case CK_End_Page:
