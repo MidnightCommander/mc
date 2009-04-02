@@ -71,9 +71,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef FILE_L
-#define FILE_CMD "file -L "
+#define FILE_CMD "file -L -z "
 #else
-#define FILE_CMD "file "
+#define FILE_CMD "file -z "
 #endif
 
 /*** file scope type declarations ****************************************************************/
