@@ -38,6 +38,7 @@
 #include "execute.h"	/* suspend_cmd() */
 #include "main.h"	/* slow_terminal */
 #include "strutil.h"
+#include "setup.h"	/* mouse_close_dialog */
 
 #define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
 
@@ -47,6 +48,9 @@ Dlg_head *current_dlg = 0;
 
 /* A hook list for idle events */
 Hook *idle_hook = 0;
+
+/* left click outside of dialog closes it */
+int mouse_close_dialog = 0;
 
 static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 				  int reverse, int flags);
@@ -686,9 +690,9 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     int y = event->y;
 
     /* close the dialog by mouse click out of dialog area */
-    if (!h->fullscreen && ((event->type & GPM_DOWN) != 0)
-	&& !((x > h->x) && (x <= h->x + h->cols)
-	    && (y > h->y) && (y <= h->y + h->lines))) {
+    if (mouse_close_dialog && !h->fullscreen
+	&& ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0)  /* left click */
+	&& !((x > h->x) && (x <= h->x + h->cols) && (y > h->y) && (y <= h->y + h->lines))) {
 	h->ret_value = B_CANCEL;
 	dlg_stop (h);
 	return MOU_NORMAL;

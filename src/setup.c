@@ -178,6 +178,7 @@ static const struct {
     { "confirm_view_dir", &confirm_view_dir },
     { "mouse_move_pages", &mouse_move_pages },
     { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
+    { "mouse_close_dialog", &mouse_close_dialog},
     { "fast_refresh", &fast_refresh },
     { "navigate_with_arrows", &navigate_with_arrows },
     { "drop_menus", &drop_menus },
