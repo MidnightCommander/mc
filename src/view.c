@@ -3055,9 +3055,9 @@ view_search (WView *view, char *text,
 	dlg_run_done (d);
 	destroy_dlg (d);
     }
-    if (!s) {
+    if (search_status <= 0) { 
 	message (D_NORMAL, _("Search"), _(" Search string not found "));
-	view->search_length = 0;
+        view->search_end = view->search_start;
     }
     str_release_buffer (buffer);
 }
@@ -3221,7 +3221,6 @@ hex_search (WView *view, const char *text)
 
     if (pos == INVALID_OFFSET) {
 	message (D_NORMAL, _("Search"), _(" Search string not found "));
-	view->search_length = 0;
 	return;
     }
 
@@ -3657,22 +3656,21 @@ view_select_encoding (WView *view)
     char *enc;
     iconv_t conv;
     struct cache_line *line;
-    
-    enc = input_dialog ("encoding", "paste encoding", "");
-    
+
+    enc = input_dialog ("Encoding", "Paste encoding", NULL, "");
+
     if (enc != NULL) {
         conv = str_crt_conv_from (enc);
         if (conv != (iconv_t)(-1)) {
             if (view->converter != str_cnv_from_term) str_close_conv (view->converter);
             view->converter = conv;
-            
             view_reset_cache_lines (view);
             line = view_offset_to_line (view, view->dpy_start);
             view_set_first_showed (view, line);
         }
     }
-}        
-        
+}
+
 
 /* Both views */
 static cb_ret_t

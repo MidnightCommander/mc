@@ -705,29 +705,9 @@ short-month-name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
-<<<<<<< HEAD:src/util.c
-=======
     size_t length, a, b;
     char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
->>>>>>> patches by Rostislav Beneš: mc-11-panels:src/util.c
     time_t testtime = time (NULL);
-<<<<<<< HEAD:src/util.c
-    struct tm* lt = localtime(&testtime);
-    size_t length;
-
-    if (lt == NULL) {
-	    // huh, localtime() doesnt seem to work ... falling back to "(invalid)"
-	    length = strlen(INVALID_TIME_TEXT);
-    } else {
-	    char buf [MAX_I18NTIMELENGTH + 1];
-	    size_t a, b;
-	    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), lt);
-	    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), lt);
-	    length = max (a, b);
-    }
-
-=======
-    
     strftime (buf, sizeof(buf) - 1, _("%b %e %H:%M"), localtime(&testtime));
     a = str_term_width1 (buf);
     strftime (buf, sizeof(buf) - 1, _("%b %e  %Y"), localtime(&testtime));
@@ -736,7 +716,6 @@ i18n_checktimelength (void)
     length = max (a, b);
     length = max (str_term_width1 (_("(invalid)")), length);
     
->>>>>>> patches by Rostislav Beneš: mc-11-panels:src/util.c
     /* Don't handle big differences. Use standard value (email bug, please) */
     if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
 	    length = STD_I18NTIMELENGTH;
@@ -773,8 +752,8 @@ file_date (time_t when)
 	fmt = fmtyear;
     else
 	fmt = fmttime;
-    
-    FMT_LOCALTIME(timebuf, i18n_timelength, fmt, when);
+
+    FMT_LOCALTIME(timebuf, sizeof (timebuf), fmt, when);
 
     return timebuf;
 }

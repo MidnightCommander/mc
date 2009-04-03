@@ -1412,7 +1412,7 @@ set_panel_encoding (WPanel *panel)
     char *encoding;
     char *cd_path;
             
-    encoding = input_dialog ("Encoding", "Select encoding", NULL);
+    encoding = input_dialog ("Encoding", "Select encoding", NULL, "");
     
     if (encoding) {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
