@@ -297,124 +297,124 @@ menu_user_menu_cmd (void)
 
 static menu_entry FileMenu[] =
 {
-    {' ', N_("&Open file..."),         'O', menu_load_cmd},
-    {' ', N_("&New              C-n"), 'N', menu_new_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Save              F2"), 'S', menu_save_cmd},
-    {' ', N_("Save &as...       F12"), 'A', menu_save_as_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
-    {' ', N_("Copy to &file...  C-f"), 'F', menu_cut_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("A&bout...            "), 'B', edit_about_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Quit             F10"), 'Q', menu_quit_cmd}
+    {' ', N_("&Open file..."),         NULL_HOTKEY, menu_load_cmd},
+    {' ', N_("&New              C-n"), NULL_HOTKEY, menu_new_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Save              F2"), NULL_HOTKEY, menu_save_cmd},
+    {' ', N_("Save &as...       F12"), NULL_HOTKEY, menu_save_as_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Insert file...   F15"), NULL_HOTKEY, menu_insert_file_cmd},
+    {' ', N_("Copy to &file...  C-f"), NULL_HOTKEY, menu_cut_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&User menu...     F11"), NULL_HOTKEY, menu_user_menu_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("A&bout...            "), NULL_HOTKEY, edit_about_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Quit             F10"), NULL_HOTKEY, menu_quit_cmd}
  };
 
 static menu_entry FileMenuEmacs[] =
 {
-    {' ', N_("&Open file..."),         'O', menu_load_cmd},
-    {' ', N_("&New            C-x k"), 'N', menu_new_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Save              F2"), 'S', menu_save_cmd},
-    {' ', N_("Save &as...       F12"), 'A', menu_save_as_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
-    {' ', N_("Copy to &file...     "), 'F', menu_cut_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("A&bout...            "), 'B', edit_about_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Quit             F10"), 'Q', menu_quit_cmd}
+    {' ', N_("&Open file..."),         NULL_HOTKEY, menu_load_cmd},
+    {' ', N_("&New            C-x k"), NULL_HOTKEY, menu_new_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Save              F2"), NULL_HOTKEY, menu_save_cmd},
+    {' ', N_("Save &as...       F12"), NULL_HOTKEY, menu_save_as_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Insert file...   F15"), NULL_HOTKEY, menu_insert_file_cmd},
+    {' ', N_("Copy to &file...     "), NULL_HOTKEY, menu_cut_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&User menu...     F11"), NULL_HOTKEY, menu_user_menu_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("A&bout...            "), NULL_HOTKEY, edit_about_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Quit             F10"), NULL_HOTKEY, menu_quit_cmd}
 };
 
 static menu_entry EditMenu[] =
 {
-    {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
-    {' ', N_("&Mark Columns    S-F3"), 'T', menu_markcol_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Toggle &ins/overw Ins"), 'I', menu_ins_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Copy              F5"), 'C', menu_copy_cmd},
-    {' ', N_("&Move              F6"), 'M', menu_move_cmd},
-    {' ', N_("&Delete            F8"), 'D', menu_delete_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Undo             C-u"), 'U', menu_undo_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Beginning     C-PgUp"), 'B', menu_beginning_cmd},
-    {' ', N_("&End           C-PgDn"), 'E', menu_end_cmd}
+    {' ', N_("&Toggle Mark       F3"), NULL_HOTKEY, menu_mark_cmd},
+    {' ', N_("&Mark Columns    S-F3"), NULL_HOTKEY, menu_markcol_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Toggle &ins/overw Ins"), NULL_HOTKEY, menu_ins_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Copy              F5"), NULL_HOTKEY, menu_copy_cmd},
+    {' ', N_("&Move              F6"), NULL_HOTKEY, menu_move_cmd},
+    {' ', N_("&Delete            F8"), NULL_HOTKEY, menu_delete_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Undo             C-u"), NULL_HOTKEY, menu_undo_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Beginning     C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
+    {' ', N_("&End           C-PgDn"), NULL_HOTKEY, menu_end_cmd}
 };
 
 #define EditMenuEmacs EditMenu
 
 static menu_entry SearReplMenu[] =
 {
-    {' ', N_("&Search...         F7"), 'S', menu_search_cmd},
-    {' ', N_("Search &again     F17"), 'A', menu_search_again_cmd},
-    {' ', N_("&Replace...        F4"), 'R', menu_replace_cmd}
+    {' ', N_("&Search...         F7"), NULL_HOTKEY, menu_search_cmd},
+    {' ', N_("Search &again     F17"), NULL_HOTKEY, menu_search_again_cmd},
+    {' ', N_("&Replace...        F4"), NULL_HOTKEY, menu_replace_cmd}
 };
 
 #define SearReplMenuEmacs SearReplMenu
 
 static menu_entry CmdMenu[] =
 {
-    {' ', N_("&Go to line...            M-l"), 'G', menu_goto_line},
-    {' ', N_("Go to matching &bracket   M-b"), 'B', menu_goto_bracket},
-    {' ', "", ' ', 0},
-    {' ', N_("Insert &literal...       C-q"), 'L', menu_lit_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Refresh screen          C-l"), 'R', menu_refresh_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Start record macro      C-r"), 'S', menu_begin_record_cmd},
-    {' ', N_("&Finish record macro...  C-r"), 'F', menu_end_record_cmd},
-    {' ', N_("&Execute macro...   C-a, KEY"), 'E', menu_exec_macro_cmd},
-    {' ', N_("Delete macr&o...            "), 'O', menu_exec_macro_delete_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Insert &date/time           "), 'D', menu_date_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Format p&aragraph        M-p"), 'A', menu_format_paragraph},
-    {' ', N_("'ispell' s&pell check    C-p"), 'P', menu_ispell_cmd},
-    {' ', N_("Sor&t...                 M-t"), 'T', menu_sort_cmd},
-    {' ', N_("Paste o&utput of...      M-u"), 'U', menu_ext_cmd},
-    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
-    {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
+    {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
+    {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Refresh screen          C-l"), NULL_HOTKEY, menu_refresh_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Start record macro      C-r"), NULL_HOTKEY, menu_begin_record_cmd},
+    {' ', N_("&Finish record macro...  C-r"), NULL_HOTKEY, menu_end_record_cmd},
+    {' ', N_("&Execute macro...   C-a, KEY"), NULL_HOTKEY, menu_exec_macro_cmd},
+    {' ', N_("Delete macr&o...            "), NULL_HOTKEY, menu_exec_macro_delete_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
+    {' ', N_("'ispell' s&pell check    C-p"), NULL_HOTKEY, menu_ispell_cmd},
+    {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
+    {' ', N_("Paste o&utput of...      M-u"), NULL_HOTKEY, menu_ext_cmd},
+    {' ', N_("E&xternal Formatter      F19"), NULL_HOTKEY, menu_c_form_cmd},
+    {' ', N_("&Mail...                    "), NULL_HOTKEY, menu_mail_cmd}
 };
 
 static menu_entry CmdMenuEmacs[] =
 {
-    {' ', N_("&Go to line...            M-l"), 'G', menu_goto_line},
-    {' ', N_("Go to matching &bracket   M-b"), 'B', menu_goto_bracket},
-    {' ', "", ' ', 0},
-    {' ', N_("Insert &literal...       C-q"), 'L', menu_lit_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Refresh screen          C-l"), 'R', menu_refresh_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Start record macro      C-r"), 'S', menu_begin_record_cmd},
-    {' ', N_("&Finish record macro...  C-r"), 'F', menu_end_record_cmd},
-    {' ', N_("&Execute macro... C-x e, KEY"), 'E', menu_exec_macro_cmd},
-    {' ', N_("Delete macr&o...            "), 'o', menu_exec_macro_delete_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Insert &date/time           "), 'D', menu_date_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Format p&aragraph        M-p"), 'a', menu_format_paragraph},
-    {' ', N_("'ispell' s&pell check    M-$"), 'P', menu_ispell_cmd},
-    {' ', N_("Sor&t...                 M-t"), 'T', menu_sort_cmd},
-    {' ', N_("Paste o&utput of...      M-u"), 'U', menu_ext_cmd},
-    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
-    {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
+    {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
+    {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Refresh screen          C-l"), NULL_HOTKEY, menu_refresh_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Start record macro      C-r"), NULL_HOTKEY, menu_begin_record_cmd},
+    {' ', N_("&Finish record macro...  C-r"), NULL_HOTKEY, menu_end_record_cmd},
+    {' ', N_("&Execute macro... C-x e, KEY"), NULL_HOTKEY, menu_exec_macro_cmd},
+    {' ', N_("Delete macr&o...            "), NULL_HOTKEY, menu_exec_macro_delete_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
+    {' ', N_("'ispell' s&pell check    M-$"), NULL_HOTKEY, menu_ispell_cmd},
+    {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
+    {' ', N_("Paste o&utput of...      M-u"), NULL_HOTKEY, menu_ext_cmd},
+    {' ', N_("E&xternal Formatter      F19"), NULL_HOTKEY, menu_c_form_cmd},
+    {' ', N_("&Mail...                    "), NULL_HOTKEY, menu_mail_cmd}
 };
 
 static menu_entry OptMenu[] =
 {
-    {' ', N_("&General...  "), 'G', menu_options},
-    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
-    {' ', N_("Learn &Keys..."), 'K', learn_keys},
-    {' ', N_("Syntax &Highlighting..."), 'H', menu_syntax},
-    {' ', "", ' ', 0},
-    {' ', N_("Save setu&p..."), 'p', save_setup_cmd}
+    {' ', N_("&General...  "), NULL_HOTKEY, menu_options},
+    {' ', N_("&Save mode..."), NULL_HOTKEY, menu_save_mode_cmd},
+    {' ', N_("Learn &Keys..."), NULL_HOTKEY, learn_keys},
+    {' ', N_("Syntax &Highlighting..."), NULL_HOTKEY, menu_syntax},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Save setu&p..."), NULL_HOTKEY, save_setup_cmd}
 };
 
 #define OptMenuEmacs OptMenu

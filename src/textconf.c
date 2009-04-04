@@ -66,6 +66,8 @@ static const char *const features[] = {
 
 #elif defined(USE_NCURSES)
     N_("Using the ncurses library"),
+#elif defined(USE_NCURSESW)
+    N_("Using the ncursesw library"),
 #else
 #error "Cannot compile mc without S-Lang or ncurses"
 #endif				/* !HAVE_SLANG && !USE_NCURSES */

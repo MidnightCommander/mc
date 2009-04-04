@@ -33,6 +33,7 @@
 #include "layout.h"	/* winch_flag */
 #include "execute.h"	/* suspend_cmd() */
 #include "main.h"	/* slow_terminal */
+#include "strutil.h"
 
 #define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
 
@@ -167,8 +168,8 @@ common_dialog_repaint (struct Dlg_head *h)
 
     if (h->title) {
 	attrset (DLG_HOT_NORMALC (h));
-	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
-	addstr (h->title);
+	dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
+	addstr (str_term_form (h->title));
     }
 }
 
@@ -590,14 +591,16 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
      */
 
     if (h->current->options & W_IS_INPUT) {
-	if (d_key < 255 && isalpha (d_key))
+        /* skip ascii control characters, anything else can valid character in
+         * some encoding */
+	if (d_key >= 32 && d_key < 256)
 	    return 0;
     }
 
     /* If it's an alt key, send the message */
     c = d_key & ~ALT (0);
-    if (d_key & ALT (0) && c < 255 && isalpha (c))
-	d_key = tolower (c);
+    if (d_key & ALT (0) && g_ascii_isalpha (c))
+	d_key = g_ascii_tolower (c);
 
     handled = 0;
     if (h->current->options & W_WANT_HOTKEY)

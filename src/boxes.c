@@ -48,6 +48,7 @@
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
 #include "background.h"		/* task_list */
+#include "strutil.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -118,7 +119,7 @@ display_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    }
 	}
 
-	if (tolower (parm) == user_hotkey && dlg_widget_active (user)
+	if (g_ascii_tolower (parm) == user_hotkey && dlg_widget_active (user)
 	    && dlg_widget_active (status)) {
 	    my_radio->sel = 3;
 	    dlg_select_widget (my_radio);	/* force redraw */
@@ -153,23 +154,23 @@ display_init (int radio_sel, char *init_text, int _check_status,
 	display_title = _(display_title);
 	for (i = 0; i < LIST_TYPES; i++) {
 	    displays[i] = _(displays[i]);
-	    if ((l = strlen (displays[i])) > maxlen)
+	    if ((l = str_term_width1 (displays[i])) > maxlen)
 		maxlen = l;
 	}
 
-	i = strlen (ok_button) + 5;
-	l = strlen (cancel_button) + 3;
+	i = str_term_width1 (ok_button) + 5;
+	l = str_term_width1 (cancel_button) + 3;
 	l = max (i, l);
 
 	i = maxlen + l + 16;
 	if (i > DISPLAY_X)
 	    DISPLAY_X = i;
 
-	i = strlen (user_mini_status) + 13;
+	i = str_term_width1 (user_mini_status) + 13;
 	if (i > DISPLAY_X)
 	    DISPLAY_X = i;
 
-	i = strlen (display_title) + 10;
+	i = str_term_width1 (display_title) + 10;
 	if (i > DISPLAY_X)
 	    DISPLAY_X = i;
 
@@ -178,7 +179,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 	/* get hotkey of user-defined format string */
 	cp = strchr (displays[USER_TYPE], '&');
 	if (cp != NULL && *++cp != '\0')
-	    user_hotkey = tolower ((unsigned char) *cp);
+	    user_hotkey = g_ascii_tolower ((gchar) cp[0]);
 
 	i18n_displays_flag = 1;
     }
@@ -289,20 +290,20 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	int maxlen = 0;
 	for (i = SORT_TYPES - 1; i >= 0; i--) {
 	    sort_orders_names[i] = _(sort_orders[i].sort_name);
-	    r = strlen (sort_orders_names[i]);
+	    r = str_term_width1 (sort_orders_names[i]);
 	    if (r > maxlen)
 		maxlen = r;
 	}
 
 	check_pos = maxlen + 9;
 
-	r = strlen (reverse_label) + 4;
-	i = strlen (case_label) + 4;
+	r = str_term_width1 (reverse_label) + 4;
+	i = str_term_width1 (case_label) + 4;
 	if (i > r)
 	    r = i;
 
-	l = strlen (ok_button) + 6;
-	i = strlen (cancel_button) + 4;
+	l = str_term_width1 (ok_button) + 6;
+	i = str_term_width1 (cancel_button) + 4;
 	if (i > l)
 	    l = i;
 
@@ -311,7 +312,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive, int *exec_first)
 	if (i > SORT_X)
 	    SORT_X = i;
 
-	i = strlen (sort_title) + 6;
+	i = str_term_width1 (sort_title) + 6;
 	if (i > SORT_X)
 	    SORT_X = i;
 
@@ -412,7 +413,7 @@ confirm_box (void)
 		while (i--)
 		{
 			conf_widgets [i].text = _(conf_widgets [i].text);
-			l1 = strlen (conf_widgets [i].text) + 3;
+			l1 = str_term_width1 (conf_widgets [i].text) + 3;
 			if (l1 > maxlen)
 				maxlen = l1;
 		}
@@ -427,8 +428,8 @@ confirm_box (void)
 		 * And this for the case when buttons with some space to the right
 		 * do not fit within 2/6
 		 */
-		l1 = strlen (conf_widgets [0].text) + 3;
-		i = strlen (conf_widgets [1].text) + 5;
+		l1 = str_term_width1 (conf_widgets [0].text) + 3;
+		i = str_term_width1 (conf_widgets [1].text) + 5;
 		if (i > l1)
 			l1 = i;
 
@@ -501,11 +502,11 @@ display_bits_box (void)
 		{
 			display_widgets [i].text = _(display_widgets[i].text);
 			display_bits_str [i] = _(display_bits_str [i]);
-			l1 = strlen (display_bits_str [i]);
+			l1 = str_term_width1 (display_bits_str [i]);
 			if (l1 > maxlen)
 				maxlen = l1;
 		}
-		l1 = strlen (display_widgets [2].text);
+		l1 = str_term_width1 (display_widgets [2].text);
 		if (l1 > maxlen)
 			maxlen = l1;
 		
@@ -513,8 +514,8 @@ display_bits_box (void)
 		display_bits.xlen = (maxlen + 5) * 6 / 4;
 
 		/* See above confirm_box */
-		l1 = strlen (display_widgets [0].text) + 3;
-		i = strlen (display_widgets [1].text) + 5;
+		l1 = str_term_width1 (display_widgets [0].text) + 3;
+		i = str_term_width1 (display_widgets [1].text) + 5;
 		if (i > l1)
 			l1 = i;
 
@@ -609,7 +610,7 @@ init_disp_bits_box (void)
 
     cpname = _("&Select");
     add_widget (dbits_dlg,
-		button_new (4, DISPX - 8 - strlen (cpname), B_USER,
+		button_new (4, DISPX - 8 - str_term_width1 (cpname), B_USER,
 			    NORMAL_BUTTON, cpname, sel_charset_button));
 
     return dbits_dlg;
@@ -820,7 +821,7 @@ cd_dialog (void)
     quick_widgets [1].y_divisions =
 	quick_widgets [0].y_divisions = Quick_input.ylen = 5;
 
-    len = strlen (quick_widgets [1].text);
+    len = str_term_width1 (quick_widgets [1].text);
 
     quick_widgets [0].relative_x =
 	quick_widgets [1].relative_x + len + 1;
@@ -979,7 +980,7 @@ jobs_cmd (void)
 		{
 			job_buttons [i].name = _(job_buttons [i].name);
 
-			len = strlen (job_buttons [i].name) + 4;
+			len = str_term_width1 (job_buttons [i].name) + 4;
 			JOBS_X = max (JOBS_X, startx + len + 3);
 
 			job_buttons [i].xpos = startx;
@@ -988,7 +989,7 @@ jobs_cmd (void)
 
 		/* Last button - Ok a.k.a. Cancel :) */
 		job_buttons [n_buttons - 1].xpos =
-			JOBS_X - strlen (job_buttons [n_buttons - 1].name) - 7;
+                JOBS_X - str_term_width1 (job_buttons [n_buttons - 1].name) - 7;
 
 		i18n_flag = 1;
 	}
@@ -1046,7 +1047,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
         
         while (i--)
         {
-            l1 = strlen (labs [i] = _(labs [i]));
+            l1 = str_term_width1 (labs [i] = _(labs [i]));
             if (l1 > maxlen)
                 maxlen = l1;
         }
@@ -1056,7 +1057,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
         
         for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
         {
-            l1 += strlen (buts [i] = _(buts [i]));
+            l1 += str_term_width1 (buts [i] = _(buts [i]));
         }
         l1 += 15;
         if (l1 > dialog_x)
@@ -1065,7 +1066,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
         ilen = dialog_x - 7 - maxlen; /* for the case of very long buttons :) */
         istart = dialog_x - 3 - ilen;
         
-        b2 = dialog_x - (strlen(buts[1]) + 6);
+        b2 = dialog_x - (str_term_width1 (buts[1]) + 6);
         
         i18n_flag = 1;
     }

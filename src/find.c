@@ -33,6 +33,7 @@
 #include "color.h"
 #include "setup.h"
 #include "find.h"
+#include "strutil.h"
 
 /* Dialog manager and widgets */
 #include "dialog.h"
@@ -221,7 +222,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	int l1, maxlen = 0;
 
 	while (i--) {
-	    l1 = strlen (labs[i] = _(labs[i]));
+            l1 = str_term_width1 (labs[i] = _(labs[i]));
 	    if (l1 > maxlen)
 		maxlen = l1;
 	}
@@ -230,7 +231,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	    FIND_X = i;
 
 	for (i = sizeof (buts) / sizeof (buts[0]), l1 = 0; i--;) {
-	    l1 += strlen (buts[i] = _(buts[i]));
+            l1 += str_term_width1 (buts[i] = _(buts[i]));
 	}
 	l1 += 21;
 	if (l1 > FIND_X)
@@ -239,8 +240,8 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	ilen = FIND_X - 7 - maxlen;	/* for the case of very long buttons :) */
 	istart = FIND_X - 3 - ilen;
 
-	b1 = b0 + strlen (buts[0]) + 7;
-	b2 = FIND_X - (strlen (buts[2]) + 6);
+        b1 = b0 + str_term_width1 (buts[0]) + 7;
+        b2 = FIND_X - (str_term_width1 (buts[2]) + 6);
 
 	i18n_flag = 1;
 	case_label = _(case_label);
@@ -529,7 +530,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     if (file_fd == -1)
 	return 0;
 
-    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), name_trunc (filename, FIND2_X_USE));
+    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
     mc_refresh ();
@@ -544,8 +545,6 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	int has_newline;
 	char *p;
 	int found = 0;
-	typedef const char * (*search_fn) (const char *, const char *);
-	search_fn search_func;
 
 	if (resuming) {
 	    /* We've been previously suspended, start from the previous position */
@@ -554,8 +553,6 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    pos = last_pos;
 	}
 
-	search_func = (case_sensitive) ? cstrstr : cstrcasestr;
-	
 	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
 	    if (found == 0){	/* Search in binary line once */
 	    	if (find_regex_flag) {
@@ -566,7 +563,8 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 		    found = 1;
 		}
 	    	} else {
-	    	    if (search_func (p, content_pattern) != NULL) {
+                    // str_case_search_first do not accept invalid strings
+                    if (str_is_valid_string (p) && str_search_first (p, content_pattern, case_sensitive) != NULL) {
 	    	    	char *match = g_strdup_printf("%d:%s", line, filename);
 			find_add_match (h, directory, match);
 			found = TRUE;
@@ -666,7 +664,7 @@ do_search (struct Dlg_head *h)
 		char buffer [BUF_SMALL];
 
 		g_snprintf (buffer, sizeof (buffer), _("Searching %s"), 
-			    name_trunc (directory, FIND2_X_USE));
+			    str_trunc (directory, FIND2_X_USE));
 		status_update (buffer);
 	    }
 	    /* mc_stat should not be called after mc_opendir
@@ -683,11 +681,17 @@ do_search (struct Dlg_head *h)
 	    dirp = mc_opendir (directory);
 	}   /* while (!dirp) */
 	dp = mc_readdir (dirp);
+        /* skip invalid filenames */
+        while (dp != NULL && !str_is_valid_string (dp->d_name))
+            dp = mc_readdir (dirp);
     }	/* while (!dp) */
 
     if (strcmp (dp->d_name, ".") == 0 ||
 	strcmp (dp->d_name, "..") == 0){
 	dp = mc_readdir (dirp);
+        /* skip invalid filenames */
+        while (dp != NULL && !str_is_valid_string (dp->d_name))
+            dp = mc_readdir (dirp);
 	return 1;
     }
 
@@ -713,6 +717,9 @@ do_search (struct Dlg_head *h)
     }
 
     dp = mc_readdir (dirp);
+    /* skip invalid filenames */
+    while (dp != NULL && !str_is_valid_string (dp->d_name))
+        dp = mc_readdir (dirp);
 
     /* Displays the nice dot */
     count++;
@@ -866,7 +873,7 @@ setup_gui (void)
     if (!i18n_flag) {
 	register int i = sizeof (fbuts) / sizeof (fbuts[0]);
 	while (i--)
-	    fbuts[i].len = strlen (fbuts[i].text = _(fbuts[i].text)) + 3;
+            fbuts[i].len = str_term_width1 (fbuts[i].text = _(fbuts[i].text)) + 3;
 	fbuts[2].len += 2;	/* DEFPUSH_BUTTON */
 	i18n_flag = 1;
     }
@@ -969,7 +976,9 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
     /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
     find_pattern = pattern;
-    content_pattern = content;
+    content_pattern = (content != NULL && str_is_valid_string (content)) 
+            ? str_create_search_needle (content, case_sensitive)
+            : NULL;
 
     init_find_vars ();
     push_directory (start_dir);
@@ -1038,6 +1047,8 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	    list->list[next_free].f.stale_link = stale_link;
 	    list->list[next_free].f.dir_size_computed = 0;
 	    list->list[next_free].st = st;
+            list->list[next_free].sort_key = NULL;
+            list->list[next_free].second_sort_key = NULL;
 	    next_free++;
 	    if (!(next_free & 15))
 		rotate_dash ();
@@ -1059,6 +1070,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 	}
     }
 
+    if (content_pattern != NULL) str_release_search_needle (content_pattern, case_sensitive);
     kill_gui ();
     do_search (0);		/* force do_search to release resources */
     g_free (old_dir);

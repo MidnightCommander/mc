@@ -62,6 +62,7 @@
 #include "profile.h"		/* PROFILE_NAME */
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
+#include "strutil.h"
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -431,7 +432,7 @@ set_panel_filter (WPanel *p)
 {
     char *reg_exp;
     const char *x;
-    
+
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
     reg_exp = input_dialog_help (_(" Filter "),
@@ -916,7 +917,7 @@ do_link (int symbolic_link, const char *fname)
     char *dest = NULL, *src = NULL;
 
     if (!symbolic_link) {
-	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
+	src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
 	dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
 	if (!dest || !*dest)
 	    goto cleanup;
@@ -981,7 +982,7 @@ void edit_symlink_cmd (void)
 
 	p = selection (current_panel)->fname;
 
-	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
+	q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
 
 	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {
@@ -1062,11 +1063,13 @@ char *guess_message_value (void)
 char *
 get_random_hint (int force)
 {
-    char *data, *result, *eol;
+    char *data, *result = NULL, *eol;
     int len;
     int start;
     static int last_sec;
     static struct timeval tv;
+    str_conv_t conv;
+    struct str_buffer *buffer;
 
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
@@ -1092,7 +1095,20 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = g_strdup (&data[start]);
+    
+    /* hint files are stored in utf-8 */
+    /* try convert hint file from utf-8 to terminal encoding */
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv != INVALID_CONV) {
+        buffer = str_get_buffer ();
+        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE) {
+            result = g_strdup (buffer->data);
+        }
+        
+        str_release_buffer (buffer);
+        str_close_conv (conv);
+    }
+    
     g_free (data);
     return result;
 }
@@ -1369,3 +1385,60 @@ toggle_listing_cmd (void)
     set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
 }
 
+/* add "#enc:encodning" to end of path */
+/* if path end width a previous #enc:, only encoding is changed no additional 
+ * #enc: is appended 
+ * retun new string
+ */
+static char 
+*add_encoding_to_path (const char *path, const char *encoding)
+{
+    char *result;
+    char *semi;
+    char *slash;
+    
+    semi = g_strrstr (path, "#enc:");
+    
+    if (semi != NULL) {
+        slash = strchr (semi, PATH_SEP);
+        if (slash != NULL) {
+            result = g_strconcat (path, "/#enc:", encoding, NULL);
+        } else {
+            *semi = 0;
+            result = g_strconcat (path, "/#enc:", encoding, NULL);
+            *semi = '#';
+        }
+    } else {
+        result = g_strconcat (path, "/#enc:", encoding, NULL);
+    }
+    
+    return result;
+}
+
+static void
+set_panel_encoding (WPanel *panel)
+{
+    char *encoding;
+    char *cd_path;
+            
+    encoding = input_dialog ("Encoding", "Select encoding", NULL, "");
+    
+    if (encoding) {
+        cd_path = add_encoding_to_path (panel->cwd, encoding);
+        if (!do_panel_cd (MENU_PANEL, cd_path, 0))
+            message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+        g_free (cd_path);
+    }
+}
+
+void
+encoding_cmd (void)
+{
+    WPanel *panel;
+
+    if (!SELECTED_IS_PANEL)
+        return;
+
+    panel = MENU_PANEL;
+    set_panel_encoding (panel);
+}

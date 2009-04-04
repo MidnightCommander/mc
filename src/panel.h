@@ -72,6 +72,8 @@ typedef struct WPanel {
 
     int      searching;
     char     search_buffer [256];
+    char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
+    int      search_chpoint;           /*point after last characters in search_char*/
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);

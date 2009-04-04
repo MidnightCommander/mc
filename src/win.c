@@ -34,6 +34,7 @@
 #include "win.h"
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
+#include "strutil.h"
 
 /*
  * Common handler for standard movement keys in a text area.  Provided
@@ -217,7 +218,7 @@ int lookup_key (char *keyname)
     int i;
 
     for (i = 0; key_name_conv_tab [i].code; i++){
-	if ( g_strcasecmp (key_name_conv_tab [i].name, keyname))
+	if (str_casecmp (key_name_conv_tab [i].name, keyname))
 	    continue;
 	return key_name_conv_tab [i].code;
     }

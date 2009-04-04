@@ -7,17 +7,17 @@
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
 
-Questa è la principale schermata della guida interattiva
+Questa Ã¨ la principale schermata della guida interattiva
 del GNU Midnight Commander. 
 
-Per saperne di più su come usare la guida interattiva, premere
-semplicemente invioHow to use help. Se lo si desidera, è possibile 
+Per saperne di piÃ¹ su come usare la guida interattiva, premere
+semplicemente invioHow to use help. Se lo si desidera, Ã¨ possibile 
 consultare direttamente il sommarioContents della guida.
 
-Il Midnight Commander è stato scritto dai suoi autoriAUTHORS.
+Il Midnight Commander Ã¨ stato scritto dai suoi autoriAUTHORS.
 
 Il Midnight Commander NON E' COPERTO DA ALCUNA GARANZIAWarranty.
-Questo è software libero, lo si può ridistribuire sotto 
+Questo Ã¨ software libero, lo si puÃ² ridistribuire sotto 
 certe condizioniLicenza.[Licenza]
 
                 GNU GENERAL PUBLIC LICENSE
@@ -432,7 +432,7 @@ Library General Public License instead of this License.
 [QueryBox]
 Finestre di dialogo di richiesta dati
 
-Nelle finestre di dialogo di richiesta dati è possibile 
+Nelle finestre di dialogo di richiesta dati Ã¨ possibile 
 usare i tasti freccia o la prima lettera per selezionare 
 una voce o cliccare con il mouse sul bottone.
 
@@ -442,7 +442,7 @@ Come usare la guida interattiva
 Usare i tasti del cursore o il mouse per navigare
 nel visualizzatore della guida.
 
-Premere freccia in giù per spostarsi alla voce
+Premere freccia in giÃ¹ per spostarsi alla voce
 successiva o per spostarsi in basso.
 Premere freccia in su per spostarsi alla voce 
 precedente o per spostarsi in alto.
@@ -451,7 +451,7 @@ corrente.
 Premere freccia a sinistra per tornare indietro nello 
 storico dei nodi visitati.
 
-Se il terminale non supporta i tasti del cursore si può
+Se il terminale non supporta i tasti del cursore si puÃ²
 usare la barra spaziatrice per spostarsi in avanti
 ed il tasto 'b' per tornare indietro. Usare il tasto 
 TAB per spostarsi sulla prossima voce e premere
@@ -471,7 +471,7 @@ Sono accettati i tasti generali di movimentoGeneral Movement Keys.
 
 tab           Va alla voce successiva.
 M-tab         Va alla voce precedente. 
-giù           Va alla voce successiva o una riga in basso.
+giÃ¹           Va alla voce successiva o una riga in basso.
 su            Va alla voce precedente o una riga in alto.
 destra, invio Segue il collegamento corrente.    
 sinistra, l   Torna indietro nello storico dei nodi visitati.

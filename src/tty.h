@@ -15,6 +15,8 @@
 #ifdef USE_NCURSES
 #    ifdef HAVE_NCURSES_CURSES_H
 #        include <ncurses/curses.h>
+#    elif HAVE_NCURSESW_CURSES_H
+#        include <ncursesw/curses.h>
 #    elif HAVE_NCURSES_H
 #        include <ncurses.h>
 #    else
@@ -24,6 +26,13 @@
 #    include <term.h>
 #endif /* WANT_TERM_H */
 #endif /* USE_NCURSES */
+
+#ifdef USE_NCURSESW
+#   include <ncursesw/curses.h>
+#ifdef WANT_TERM_H
+#   include <term.h>
+#endif
+#endif
 
 /* {{{ Input }}} */
 

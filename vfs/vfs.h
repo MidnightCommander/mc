@@ -10,6 +10,17 @@ char *mc_get_current_wd (char *buffer, int bufsize);
 char *vfs_get_current_dir (void);
 int vfs_current_is_local (void);
 int vfs_file_is_local (const char *filename);
+/* translate path back to terminal encoding, remove all #enc: 
+ * every invalid character is replaced with question mark
+ * return static buffer */
+char *vfs_translate_path (const char *path);
+/* return new string */
+char *vfs_translate_path_n (const char *path);
+/* return encoding after last #enc: or NULL, if part does not contain #enc:
+ * return static buffer */
+const char *vfs_get_encoding (const char *path);
+// canonize and translate path, return new string */
+char *vfs_canon_and_translate (const char *path);
 
 /* Only the routines outside of the VFS module need the emulation macros */
 

@@ -459,6 +459,9 @@ xslang)
 xncurses)
 	MC_WITH_NCURSES
 	;;
+xncursesw)
+	MC_WITH_NCURSESW
+	;;
 x)
 	MC_WITH_SLANG
 	;;

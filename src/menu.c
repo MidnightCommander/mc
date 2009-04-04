@@ -33,55 +33,35 @@
 #include "mouse.h"
 #include "win.h"
 #include "key.h"	/* For mi_getch() */
+#include "strutil.h"
 
 int menubar_visible = 1;	/* This is the new default */
-
-static void
-menu_scan_hotkey (Menu *menu)
-{
-    char *cp = strchr (menu->name, '&');
-
-    if (cp != NULL && cp[1] != '\0') {
-	g_strlcpy (cp, cp + 1, strlen (cp));
-	menu->hotkey = tolower ((unsigned char) *cp);
-    } else
-	menu->hotkey = 0;
-}
 
 Menu *
 create_menu (const char *name, menu_entry *entries, int count, const char *help_node)
 {
     Menu *menu;
-    const char *cp;
 
-    menu = (Menu *) g_malloc (sizeof (*menu));
+    menu = g_new (Menu, 1);
     menu->count = count;
     menu->max_entry_len = 20;
     menu->entries = entries;
+    menu->text = parse_hotkey (name);
 
     if (entries != (menu_entry*) NULL) {
+        int len;
 	register menu_entry* mp;
 	for (mp = entries; count--; mp++) {
-	    if (mp->text[0] != '\0') {
-#ifdef ENABLE_NLS
-	        mp->text = _(mp->text);
-#endif /* ENABLE_NLS */
-	        cp = strchr (mp->text,'&');
+            if (mp->label[0] != '\0') {
+                mp->label = _(mp->label);
+                mp->text = parse_hotkey (mp->label);
+                len = hotkey_width (mp->text);
 
-		if (cp != NULL && *(cp+1) != '\0') {
-		    mp->hot_key = tolower ((unsigned char) *(cp+1));
-		    menu->max_entry_len = max ((int) (strlen (mp->text) - 1),
-			menu->max_entry_len);
-		} else {
-		    menu->max_entry_len = max ((int) strlen (mp->text),
-			menu->max_entry_len);
-		}
+                menu->max_entry_len = max (len, menu->max_entry_len);
 	    }
 	}
     }
 
-    menu->name = g_strdup (name);
-    menu_scan_hotkey(menu);
     menu->start_x = 0;
     menu->help_node = g_strdup (help_node);
     return menu;
@@ -94,34 +74,35 @@ static void menubar_drop_compute (WMenu *menubar)
 
 static void menubar_paint_idx (WMenu *menubar, int idx, int color)
 {
-    const Menu *menu = menubar->menu [menubar->selected];
+    const Menu *menu = menubar->menu[menubar->selected];
     const int y = 2 + idx;
-	int x = menubar-> menu[menubar->selected]->start_x;
+    int x = menu->start_x;
+    const menu_entry *entry = &menu->entries[idx];
 
 	if (x + menubar->max_entry_len + 3 > menubar->widget.cols)
 		x = menubar->widget.cols - menubar->max_entry_len - 3;
-
     widget_move (&menubar->widget, y, x);
-    attrset (color);
-    hline (' ', menubar->max_entry_len+2);
-    if (!*menu->entries [idx].text) {
-    	attrset (SELECTED_COLOR);
-        widget_move (&menubar->widget, y, x + 1);
-    	hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
-    } else {
-	const unsigned char *text;
 
-	addch((unsigned char)menu->entries [idx].first_letter);
-	for (text = menu->entries [idx].text; *text; text++)
-	{
-		if (*text != '&')
-		    addch(*text);
-		else {
+    attrset (color);
+    hline (' ', menubar->max_entry_len + 2);
+
+    if (entry->text.start == NULL) {
+        attrset (SELECTED_COLOR);
+        widget_move (&menubar->widget, y, x + 1);
+        hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
+    } else {
+        addch ((unsigned char)entry->first_letter);
+
+        addstr (str_term_form (entry->text.start));
+
+        if (entry->text.hotkey != NULL) {
 		    attrset (color == MENU_SELECTED_COLOR ?
 			MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-		    addch(*(++text));
+            addstr (str_term_form (entry->text.hotkey));
 		    attrset(color);
 		}
+        if (entry->text.end != NULL) {
+            addstr (str_term_form (entry->text.end));
 	}
     }
     widget_move (&menubar->widget, y, x + 1);
@@ -165,10 +146,22 @@ static void menubar_draw (WMenu *menubar)
     attrset (SELECTED_COLOR);
     /* Now each one of the entries */
     for (i = 0; i < items; i++){
-	if (menubar->active)
-	    attrset(i == menubar->selected?MENU_SELECTED_COLOR:SELECTED_COLOR);
+        attrset ((menubar->active && i == menubar->selected) ? 
+                MENU_SELECTED_COLOR : SELECTED_COLOR);
 	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
-	tty_printf ("%s", menubar->menu [i]->name);
+        
+        addstr (str_term_form (menubar->menu[i]->text.start));
+        
+        if (menubar->menu[i]->text.hotkey != NULL) {
+            attrset ((menubar->active && i == menubar->selected) ? 
+                    MENU_HOTSEL_COLOR : COLOR_HOT_FOCUS);
+            addstr (str_term_form (menubar->menu[i]->text.hotkey));
+            attrset ((menubar->active && i == menubar->selected) ? 
+                    MENU_SELECTED_COLOR : SELECTED_COLOR);
+        }
+        if (menubar->menu[i]->text.end != NULL) {
+            addstr (str_term_form (menubar->menu[i]->text.end));
+        }
     }
 
     if (menubar->dropped)
@@ -176,6 +169,7 @@ static void menubar_draw (WMenu *menubar)
     else 
 	widget_move (&menubar->widget, 0, 
 		menubar-> menu[menubar->selected]->start_x);
+    
 }
 
 static inline void menubar_remove (WMenu *menubar)
@@ -263,8 +257,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
     int   i;
 
     /* Lowercase */
-    if (key < 256 && isalpha (key)) /* Linux libc.so.5.x.x bug fix */
-	key = tolower (key);
+    if (isascii (key)) key = g_ascii_tolower (key);
     
     if (is_abort_char (key)){
 	menubar_finish (menubar);
@@ -292,16 +285,19 @@ static int menubar_handle_key (WMenu *menubar, int key)
 
     if (!menubar->dropped){
 	const int items = menubar->items;
-	for (i = 0; i < items; i++){
+        for (i = 0; i < items; i++) {
 	    const Menu *menu = menubar->menu [i];
 
-	    if (menu->hotkey == key){
+            if (menu->text.hotkey != NULL) {
+                if (g_ascii_tolower(menu->text.hotkey[0]) == key) {
 		menubar_drop (menubar, i);
 		return 1; 
 	    }
 	}
-	if (key == KEY_ENTER || key == XCTRL ('n') || key == KEY_DOWN
-	    || key == '\n'){
+        }
+        if (key == KEY_ENTER || key == XCTRL ('n') 
+            || key == KEY_DOWN || key == '\n') {
+            
 	    menubar_drop (menubar, menubar->selected);
 	    return 1;
 	}
@@ -311,18 +307,20 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	const Menu *menu = menubar->menu [selected];
 	const int items = menu->count;
 	
-	for (i = 0; i < items; i++){
+        for (i = 0; i < items; i++) {
 	    if (!menu->entries [i].call_back)
 		continue;
 	    
-		if (key != menu->entries [i].hot_key)
+            if (menu->entries[i].text.hotkey != NULL) {
+                if (key != g_ascii_tolower (menu->entries[i].text.hotkey[0]))
 			continue;
 	    
 	    menubar_execute (menubar, i);
 	    return 1;
 	}
+        }
 
-	if (key == KEY_ENTER || key == '\n'){
+        if (key == KEY_ENTER || key == '\n') {
 	    menubar_execute (menubar, menubar->subsel);
 	    return 1;
 	}
@@ -493,7 +491,7 @@ menubar_arrange(WMenu* menubar)
 
 	for (i = 0; i < items; i++)
 	{
-		int len = strlen(menubar->menu[i]->name);
+		int len = hotkey_width (menubar->menu[i]->text);
 		menubar->menu[i]->start_x = start_x;
 		start_x += len + gap;
 	}
@@ -506,7 +504,7 @@ menubar_arrange(WMenu* menubar)
 	for (i = 0; i < items; i++)
 	{
 		/* preserve length here, to be used below */
-		gap -= (menubar->menu[i]->start_x = strlen(menubar->menu[i]->name));
+		gap -= (menubar->menu[i]->start_x = hotkey_width (menubar->menu[i]->text));
 	}
 
 	gap /= (items - 1);
@@ -530,7 +528,16 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu *menu)
 {
-    g_free (menu->name);
+    release_hotkey (menu->text);
+    if (menu->entries != NULL) {
+        int me;
+        for (me = 0; me < menu->count; me++) {
+            if (menu->entries[me].label[0] != '\0') {
+                release_hotkey (menu->entries[me].text);
+            }
+        }
+    }
+
     g_free (menu->help_node);
     g_free (menu);
 }

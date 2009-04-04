@@ -61,6 +61,7 @@ static void
 exec_extension (const char *filename, const char *data, int *move_dir,
 		int start_line)
 {
+    char *fn;
     char *file_name;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -173,10 +174,13 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 			    localmtime = mystat.st_mtime;
 			    text = (*quote_func) (localcopy, 0);
 			} else {
-			    text = (*quote_func) (filename, 0);
+                            fn = vfs_canon_and_translate (filename);
+                            text = (*quote_func) (fn, 0);
+                            g_free (fn);
 			}
-		    } else
+		    } else {
 			text = expand_format (NULL, *data, !is_cd);
+                    }
 		    if (!is_cd)
 			fputs (text, cmd_file);
 		    else {

@@ -33,6 +33,7 @@
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"
+#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -268,9 +269,9 @@ chown_cmd (void)
 	if (fe)
 	    listbox_select_entry (l_group, fe);
 
-        chown_label (0, name_trunc (fname, 15));
-        chown_label (1, name_trunc (get_owner (sf_stat.st_uid), 15));
-	chown_label (2, name_trunc (get_group (sf_stat.st_gid), 15));
+        chown_label (0, str_trunc (fname, 15));
+        chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
+	chown_label (2, str_trunc (get_group (sf_stat.st_gid), 15));
 	size_trunc_len (buffer, 15, sf_stat.st_size, 0);
 	chown_label (3, buffer);
 	chown_label (4, string_perm (sf_stat.st_mode));

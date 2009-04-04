@@ -6,6 +6,7 @@
 
 #include <sys/stat.h>
 
+/* keys are set only during sorting */
 typedef struct {
 
     /* File attributes */
@@ -13,6 +14,10 @@ typedef struct {
     int  fnamelen;
     char *fname;
     struct stat st;
+    /* key used for comparing names */
+    char *sort_key;
+    /* key used for comparing extensions */
+    char *second_sort_key;
 
     /* Flags */
     struct {
@@ -42,14 +47,14 @@ int handle_path (dir_list *list, const char *path, struct stat *buf1,
 		 int next_free, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
-int unsorted   (const file_entry *a, const file_entry *b);
-int sort_name  (const file_entry *a, const file_entry *b);
-int sort_ext   (const file_entry *a, const file_entry *b);
-int sort_time  (const file_entry *a, const file_entry *b);
-int sort_atime (const file_entry *a, const file_entry *b);
-int sort_ctime (const file_entry *a, const file_entry *b);
-int sort_size  (const file_entry *a, const file_entry *b);
-int sort_inode (const file_entry *a, const file_entry *b);
+int unsorted   (file_entry *a, file_entry *b);
+int sort_name  (file_entry *a, file_entry *b);
+int sort_ext   (file_entry *a, file_entry *b);
+int sort_time  (file_entry *a, file_entry *b);
+int sort_atime (file_entry *a, file_entry *b);
+int sort_ctime (file_entry *a, file_entry *b);
+int sort_size  (file_entry *a, file_entry *b);
+int sort_inode (file_entry *a, file_entry *b);
 
 /* SORT_TYPES is used to build the nice dialog box entries */
 #define SORT_TYPES 8
@@ -62,7 +67,7 @@ int sort_inode (const file_entry *a, const file_entry *b);
 
 typedef struct {
     const char    *sort_name;
-    int     (*sort_fn)(const file_entry *, const file_entry *);
+    int     (*sort_fn)(file_entry *, file_entry *);
 } sort_orders_t;
 
 extern sort_orders_t sort_orders [SORT_TYPES_TOTAL];

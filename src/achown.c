@@ -35,6 +35,7 @@
 #include "widget.h"
 #include "wtools.h"		/* For init_box_colors() */
 #include "key.h"		/* XCTRL and ALT macros */
+#include "strutil.h"
 
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
@@ -139,9 +140,9 @@ static void set_perm_by_flags (char *s, int f_p)
 
 static void update_permissions (void)
 {
-    set_perm_by_flags (b_att[0]->text, 0);
-    set_perm_by_flags (b_att[1]->text, 3);
-    set_perm_by_flags (b_att[2]->text, 6);
+    set_perm_by_flags (b_att[0]->text.start, 0);
+    set_perm_by_flags (b_att[1]->text.start, 3);
+    set_perm_by_flags (b_att[2]->text.start, 6);
 }
 
 static mode_t get_perm (char *s, int base)
@@ -373,7 +374,7 @@ static void chown_info_update (void)
     
     /* name && mode */
     dlg_move (ch_dlg, 3, 8);
-    tty_printf ("%s", name_trunc (fname, 45));
+    addstr (str_fit_to_term (fname, 45, J_LEFT_FIT));
     dlg_move (ch_dlg, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     
@@ -484,7 +485,7 @@ advanced_chown_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	    if (f_pos > 2)
 		break;
 	    flag_pos = f_pos * 3 + i;	/* (strchr(ch_perm,parm)-ch_perm); */
-	    if (((WButton *) h->current)->text[(flag_pos % 3)] ==
+	    if (((WButton *) h->current)->text.start[(flag_pos % 3)] ==
 		'-')
 		ch_flags[flag_pos] = '+';
 	    else
@@ -545,7 +546,7 @@ init_chown_advanced (void)
 	int dx, cx;
 	for (i = 0 ; i < n_elem ; i++) {
 	    chown_advanced_but[i].text = _(chown_advanced_but[i].text);
-	    i18n_len += strlen (chown_advanced_but[i].text) + 3;
+	    i18n_len += str_term_width1 (chown_advanced_but[i].text) + 3;
 	    if (DEFPUSH_BUTTON == chown_advanced_but[i].flags)
 		i18n_len += 2; /* "<>" */ 
 	}
@@ -554,7 +555,7 @@ init_chown_advanced (void)
 	/* Reversed order */
 	for (i = n_elem - 1; i >= 0; i--) {
 	    chown_advanced_but[i].x = cx;
-	    cx += strlen (chown_advanced_but[i].text) + 3 + dx;
+	    cx += str_term_width1 (chown_advanced_but[i].text) + 3 + dx;
 	}
     }
 #endif /* ENABLE_NLS */

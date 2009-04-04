@@ -29,6 +29,7 @@
 #include "dir.h"
 #include "wtools.h"
 #include "treestore.h"
+#include "strutil.h"
 
 /* If true show files starting with a dot */
 int show_dot_files = 1;
@@ -61,50 +62,9 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Inode"),       sort_inode },
 };
 
-#ifdef HAVE_STRCOLL
-/*
- * g_strcasecmp() doesn't work well in some locales because it relies on
- * the locale-specific toupper().  On the other hand, strcoll() is case
- * sensitive in the "C" and "POSIX" locales, unlike other locales.
- * Solution: always use strcmp() for case sensitive sort.  For case
- * insensitive sort use strcoll() if it's case insensitive for ASCII and
- * g_strcasecmp() otherwise.
- */
-typedef enum {
-    STRCOLL_NO,
-    STRCOLL_YES,
-    STRCOLL_TEST	
-} strcoll_status;
-
-static int string_sortcomp (const char *str1, const char *str2)
-{
-    static strcoll_status use_strcoll = STRCOLL_TEST;
-
-    if (case_sensitive) {
-	return strcmp (str1, str2);
-    }
-
-    /* Initialize use_strcoll once.  */
-    if (use_strcoll == STRCOLL_TEST) {
-	/* Only use strcoll() if it considers "B" between "a" and "c".  */
-	if (strcoll ("a", "B") * strcoll ("B", "c") > 0) {
-	    use_strcoll = STRCOLL_YES;
-	} else {
-	    use_strcoll = STRCOLL_NO;
-	}
-    }
-
-    if (use_strcoll == STRCOLL_NO)
-	return g_strcasecmp (str1, str2);
-    else
-	return strcoll (str1, str2);
-}
-#else
-#define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : g_strcasecmp (a,b))
-#endif
 
 int
-unsorted (const file_entry *a, const file_entry *b)
+unsorted (file_entry *a, file_entry *b)
 {
     (void) a;
     (void) b;
@@ -112,28 +72,38 @@ unsorted (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_name (const file_entry *a, const file_entry *b)
+sort_name (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
-	return string_sortcomp (a->fname, b->fname) * reverse;
-    return bd-ad;
+    if (ad == bd || mix_all_files) {
+        /* create key if does not exist, key will be freed after sorting */
+        if (a->sort_key == NULL) 
+            a->sort_key = str_create_key_for_filename (a->fname, case_sensitive);
+        if (b->sort_key == NULL) 
+            b->sort_key = str_create_key_for_filename (b->fname, case_sensitive);
+        
+	return str_key_collate (a->sort_key, b->sort_key, case_sensitive) 
+                * reverse;
+    }
+    return bd - ad;
 }
 
 int
-sort_ext (const file_entry *a, const file_entry *b)
+sort_ext (file_entry *a, file_entry *b)
 {
-    const char *exta, *extb;
     int r;
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
     if (ad == bd || mix_all_files){
-	exta = extension (a->fname);
-	extb = extension (b->fname);
-	r = string_sortcomp (exta, extb);
+        if (a->second_sort_key == NULL) 
+            a->second_sort_key = str_create_key (extension (a->fname), case_sensitive);
+        if (b->second_sort_key == NULL) 
+            b->second_sort_key = str_create_key (extension (b->fname), case_sensitive);
+	
+        r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
 	if (r)
 	    return r * reverse;
 	else
@@ -143,7 +113,7 @@ sort_ext (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_time (const file_entry *a, const file_entry *b)
+sort_time (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -161,7 +131,7 @@ sort_time (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_ctime (const file_entry *a, const file_entry *b)
+sort_ctime (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -179,7 +149,7 @@ sort_ctime (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_atime (const file_entry *a, const file_entry *b)
+sort_atime (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -197,7 +167,7 @@ sort_atime (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_inode (const file_entry *a, const file_entry *b)
+sort_inode (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -209,7 +179,7 @@ sort_inode (const file_entry *a, const file_entry *b)
 }
 
 int
-sort_size (const file_entry *a, const file_entry *b)
+sort_size (file_entry *a, file_entry *b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -224,6 +194,20 @@ sort_size (const file_entry *a, const file_entry *b)
 	return result * reverse;
     else
 	return sort_name (a, b);
+}
+
+/* clear keys, should be call after sorting is finished */
+static void
+clean_sort_keys (dir_list *list, int start, int count)
+{
+    int i;
+
+    for (i = 0; i < count; i++){
+        str_release_key (list->list [i + start].sort_key, case_sensitive);
+        list->list [i + start].sort_key = NULL;
+        str_release_key (list->list [i + start].second_sort_key, case_sensitive);
+        list->list [i + start].second_sort_key = NULL;
+    }
 }
 
 
@@ -245,6 +229,8 @@ do_sort (dir_list *list, sortfn *sort, int top, int reverse_f, int case_sensitiv
     exec_first = exec_first_f;
     qsort (&(list->list) [dot_dot_found],
 	   top + 1 - dot_dot_found, sizeof (file_entry), sort);
+    
+    clean_sort_keys (list, dot_dot_found, top + 1 - dot_dot_found);
 }
 
 void
@@ -254,7 +240,7 @@ clean_dir (dir_list *list, int count)
 
     for (i = 0; i < count; i++){
 	g_free (list->list [i].fname);
-	list->list [i].fname = 0;
+	list->list [i].fname = NULL;
     }
 }
 
@@ -425,6 +411,8 @@ do_load_dir (const char *path, dir_list *list, sortfn *sort, int reverse,
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].st = st;
+        list->list[next_free].sort_key = NULL;
+        list->list[next_free].second_sort_key = NULL;
 	next_free++;
 	if (!(next_free % 32))
 	    rotate_dash ();
@@ -477,8 +465,11 @@ alloc_dir_copy (int size)
 	}
 
 	dir_copy.list = g_new (file_entry, size);
-	for (i = 0; i < size; i++)
-	    dir_copy.list [i].fname = 0;
+	for (i = 0; i < size; i++) {
+	    dir_copy.list [i].fname = NULL;
+            dir_copy.list [i].sort_key = NULL;
+            dir_copy.list [i].second_sort_key = NULL;
+        }
 
 	dir_copy.size = size;
     }
@@ -515,6 +506,8 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 	    list->list[i].f.dir_size_computed;
 	dir_copy.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
 	dir_copy.list[i].f.stale_link = list->list[i].f.stale_link;
+        dir_copy.list[i].sort_key = NULL;
+        dir_copy.list[i].second_sort_key = NULL;
 	if (list->list[i].f.marked) {
 	    g_hash_table_insert (marked_files, dir_copy.list[i].fname,
 				 &dir_copy.list[i]);
@@ -576,6 +569,8 @@ do_reload_dir (const char *path, dir_list *list, sortfn *sort, int count,
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].st = st;
+        list->list[next_free].sort_key = NULL;
+        list->list[next_free].second_sort_key = NULL;
 	next_free++;
 	if (!(next_free % 16))
 	    rotate_dash ();

@@ -50,6 +50,7 @@
 #include "treestore.h"
 #include "cmd.h"
 #include "history.h"
+#include "strutil.h"
 
 #define tlines(t) (t->is_panel ? t->widget.lines-2 - (show_mini_info ? 2 : 0) : t->widget.lines)
 
@@ -177,12 +178,14 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 	attrset (DLG_FOCUSC (h));
 	addch (PATH_SEP);
 
-	addstr ((char *) name_trunc (tree->search_buffer, tree_cols-2));
+	addstr (str_fit_to_term (tree->search_buffer, 
+		tree_cols - 2, J_LEFT_FIT));
 	addch (' ');
 	attrset (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
-	addstr ((char *) name_trunc (tree->selected_ptr->name, tree_cols));
+	addstr (str_fit_to_term (tree->selected_ptr->name, 
+		tree_cols, J_LEFT_FIT));
     }
 }
 
@@ -268,7 +271,7 @@ static void show_tree (WTree *tree)
 	    }
 
 	    /* Show full name */
-	    addstr ((char *) name_trunc (current->name, tree_cols - 6));
+	    addstr (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
 	} else{
 	    /* Sub level directory */
 
@@ -302,8 +305,8 @@ static void show_tree (WTree *tree)
 
 	    /* Show sub-name */
 	    addch (' ');
-	    addstr ((char *) name_trunc (current->subname,
-				tree_cols - 2 - 4 - 3 * j));
+	    addstr (str_fit_to_term (current->subname, 
+		    tree_cols - 2 - 4 - 3 * j, J_LEFT_FIT));
 	}
 	addch (' ');
 
@@ -598,7 +601,7 @@ static void tree_copy (WTree *tree, const char *default_dest)
     if (!tree->selected_ptr)
 	return;
     g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
-	     name_trunc (tree->selected_ptr->name, 50));
+	     str_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Copy "), cmd_buf, MC_HISTORY_FM_TREE_COPY, default_dest);
 
     if (!dest)
@@ -641,7 +644,7 @@ static void tree_move (WTree *tree, const char *default_dest)
     if (!tree->selected_ptr)
 	return;
     g_snprintf (cmd_buf, sizeof (cmd_buf), _("Move \"%s\" directory to:"),
-	     name_trunc (tree->selected_ptr->name, 50));
+    str_trunc (tree->selected_ptr->name, 50));
     dest = input_expand_dialog (_(" Move "), cmd_buf, MC_HISTORY_FM_TREE_MOVE, default_dest);
     if (!dest)
 	return;

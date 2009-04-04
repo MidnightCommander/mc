@@ -1,62 +1,62 @@
-.\"Przet³umaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
+.\"PrzetÅ‚umaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
 .TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH NAZWA
-mc - wizualny interpetator poleceñ dla systemów Unixopodobnych
+mc - wizualny interpetator poleceÅ„ dla systemÃ³w Unixopodobnych
 .\"SKIP_SECTION"
-.SH U¯YTKOWANIE
+.SH UÅ»YTKOWANIE
 .B mc
 [-abcCdfPstuUVx] [-l log] [kat1 [kat2]] [-v plik]
 .\"NODE "DESCRIPTION"
 .SH OPIS
-Midnight Commander jest przeszukiwark± katalogów/mened¿erem plików dla systemów
+Midnight Commander jest przeszukiwarkÄ… katalogÃ³w/menedÅ¼erem plikÃ³w dla systemÃ³w
 Unixopodobnych
 .\"NODE "OPTIONS"
 .\".\"DONT_SPLIT"
 .SH OPCJE
 .TP
 .I \-a
-Wy³±cza u¿ywanie symboli graficznych przy rysowaniu ramek.
+WyÅ‚Ä…cza uÅ¼ywanie symboli graficznych przy rysowaniu ramek.
 .TP
 .I \-b
-Wymusza wy¶wietlanie czarno-bia³e.
+Wymusza wyÅ›wietlanie czarno-biaÅ‚e.
 .TP
 .I \-c
-Wymusza wy¶wietlanie w kolorze, zobacz sekcjê
+Wymusza wyÅ›wietlanie w kolorze, zobacz sekcjÄ™
 .B Kolory
-¿eby zasiêgn±æ szerszej informacji.
+Å¼eby zasiÄ™gnÄ…Ä‡ szerszej informacji.
 .TP
 .I \-C arg
-U¿ywane do wybierania innego koloru, który ma byæ obecny w linii poleceñ. Format
+UÅ¼ywane do wybierania innego koloru, ktÃ³ry ma byÄ‡ obecny w linii poleceÅ„. Format
 argumentu
 .I arg
 jest opisany w sekcji
 .BR Kolory .
 .TP
 .I \-d
-Wy³±cza u¿ywanie myszy.
+WyÅ‚Ä…cza uÅ¼ywanie myszy.
 .TP
 .I \-f
-Wy¶wietla wkompilowane ¶cie¿ki, w których Mindnight Commander szuka swoich
-plików.
+WyÅ›wietla wkompilowane Å›cieÅ¼ki, w ktÃ³rych Mindnight Commander szuka swoich
+plikÃ³w.
 .TP
 .I \-k
-Resetuje "miêkkie" klawisze do ich standardowych funkcji z termcap/terminfo.
-U¿yteczne tylko przy terminalach HP, kiedy klawisze funkcyjne nie dzia³aj±.
+Resetuje "miÄ™kkie" klawisze do ich standardowych funkcji z termcap/terminfo.
+UÅ¼yteczne tylko przy terminalach HP, kiedy klawisze funkcyjne nie dziaÅ‚ajÄ….
 .TP
 .I -l plik
-Zachowuje logi z serwerów ftp do pliku
+Zachowuje logi z serwerÃ³w ftp do pliku
 .IR plik .
 .TP
 .I \-P
-Przy zakoñczeniu programu, Midnight Commander wydrukuje na ekranie katalog,
-w którym pracowali¶my na koñcu; to w po³aczeniu z funkcj± napisan± poni¿ej
-pozwoli ci na przegl±danie swoich katalogów i automatyczne przej¶cie do
+Przy zakoÅ„czeniu programu, Midnight Commander wydrukuje na ekranie katalog,
+w ktÃ³rym pracowaliÅ›my na koÅ„cu; to w poÅ‚aczeniu z funkcjÄ… napisanÄ… poniÅ¼ej
+pozwoli ci na przeglÄ…danie swoich katalogÃ³w i automatyczne przejÅ›cie do
 tego,
-w którym by³e¶ ostatnio (dziêkujê Torbenowi Fjerdingstadowi i Sergeyowi za wk³ad
-w tê funkcjê oraz za kod ¼ród³owy, który wprowadzili w ¿ycie).
+w ktÃ³rym byÅ‚eÅ› ostatnio (dziÄ™kujÄ™ Torbenowi Fjerdingstadowi i Sergeyowi za wkÅ‚ad
+w tÄ™ funkcjÄ™ oraz za kod ÅºrÃ³dÅ‚owy, ktÃ³ry wprowadzili w Å¼ycie).
 .nf
-u¿ytkownicy basha i zsh:
+uÅ¼ytkownicy basha i zsh:
 
 mc ()
 {
@@ -67,428 +67,428 @@ mc ()
         unset MC;
 }
 
-u¿ytkownicy tcsh:
+uÅ¼ytkownicy tcsh:
 alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
 .fi
-Wiem, ¿e ta funkcja mog³aby byæ krótsza dla basha i zsh, ale ma³e cudzys³owy
-nie zaakceptowa³y by zawieszenia programu kombinacj±
+Wiem, Å¼e ta funkcja mogÅ‚aby byÄ‡ krÃ³tsza dla basha i zsh, ale maÅ‚e cudzysÅ‚owy
+nie zaakceptowaÅ‚y by zawieszenia programu kombinacjÄ…
 .BR C-z .
 .TP
 .I \-s
-W³±cza tryb powolnego terminala, w którym program nie bêdzie rysowa³ zbyt
-obci±¿aj±cych znaków graficznych oraz wy³±czy opcjê weryfikacji.
+WÅ‚Ä…cza tryb powolnego terminala, w ktÃ³rym program nie bÄ™dzie rysowaÅ‚ zbyt
+obciÄ…Å¼ajÄ…cych znakÃ³w graficznych oraz wyÅ‚Ä…czy opcjÄ™ weryfikacji.
 .TP
 .I \-t
-U¿ywane tylko je¶li kod by³ skompilowany przy u¿yciu Slanga i terminfo:
-powoduje, ¿e Midnight Commander bêdzie u¿ywaæ zmiennej ¶rodowiskowej
+UÅ¼ywane tylko jeÅ›li kod byÅ‚ skompilowany przy uÅ¼yciu Slanga i terminfo:
+powoduje, Å¼e Midnight Commander bÄ™dzie uÅ¼ywaÄ‡ zmiennej Å›rodowiskowej
 .B TERMCAP
 do pokazywania informacji terminala, zamiast informacji w systemowej bazie
-typów terminali.
+typÃ³w terminali.
 .TP
 .I \-u
-Wy³±cza u¿ywanie równoleg³ej pow³oki (ma sens tylko je¶li
-Midnight Commander by³ kompilowany z obs³ug± równoleg³ych pow³ok).
+WyÅ‚Ä…cza uÅ¼ywanie rÃ³wnolegÅ‚ej powÅ‚oki (ma sens tylko jeÅ›li
+Midnight Commander byÅ‚ kompilowany z obsÅ‚ugÄ… rÃ³wnolegÅ‚ych powÅ‚ok).
 .TP
 .I \-U
-W³±cza u¿ycie jednoczesnego inerpretatora poleceñ (ma sens tylko je¶li Midnight
-Commander by³ zbudowany z ustawieniem pow³oki w tle jako opcji dodatkowej).
+WÅ‚Ä…cza uÅ¼ycie jednoczesnego inerpretatora poleceÅ„ (ma sens tylko jeÅ›li Midnight
+Commander byÅ‚ zbudowany z ustawieniem powÅ‚oki w tle jako opcji dodatkowej).
 .TP
 .I \-v plik
-W³±cza wbudowany podgl±d w celu obejrzenia wybranego pliku
+WÅ‚Ä…cza wbudowany podglÄ…d w celu obejrzenia wybranego pliku
 .IR plik .
 .TP
 .I \-V
-Wy¶wietla wersjê programu.
+WyÅ›wietla wersjÄ™ programu.
 .TP
 .I \-x
-Wymusza w³±czenie trybu xterm. U¿ywane kiedy dzia³a siê na terminalach wyposa¿onych
-w opcje xterm (dwa tryby ekranu i mo¿liwo¶æ wysy³ania mysz± sygna³ów wyj¶cia).
+Wymusza wÅ‚Ä…czenie trybu xterm. UÅ¼ywane kiedy dziaÅ‚a siÄ™ na terminalach wyposaÅ¼onych
+w opcje xterm (dwa tryby ekranu i moÅ¼liwoÅ›Ä‡ wysyÅ‚ania myszÄ… sygnaÅ‚Ã³w wyjÅ›cia).
 .PP
-Je¶li wybrano, pierwszy katalog u¿ywany jest do wy¶wietlenia w pierwszym panelu.
-Drugi wy¶wietlany jest w drugim panelu.
+JeÅ›li wybrano, pierwszy katalog uÅ¼ywany jest do wyÅ›wietlenia w pierwszym panelu.
+Drugi wyÅ›wietlany jest w drugim panelu.
 .\"NODE "Overview"
 .SH Opis
-Ekran Midnight Commandera podzielony jest na cztery czê¶ci. Prawie ca³y obszar
-ekranu zajmuj± dwa panele. Standardowo przedostatnia od do³u linijka ekranu,
-przeznaczona jest do wpisywania poleceñ, a ostatnia pokazuje klawisze funkcyjne.
-Najwy¿szy wiersz jest wierszem menu. Mo¿e on byæ niewidoczny, ale pojawia siê zawsze
-po klikniêciu w najwy¿sz± liniê ekranu, albo po wci¶niêciu klawisza F9.
+Ekran Midnight Commandera podzielony jest na cztery czÄ™Å›ci. Prawie caÅ‚y obszar
+ekranu zajmujÄ… dwa panele. Standardowo przedostatnia od doÅ‚u linijka ekranu,
+przeznaczona jest do wpisywania poleceÅ„, a ostatnia pokazuje klawisze funkcyjne.
+NajwyÅ¼szy wiersz jest wierszem menu. MoÅ¼e on byÄ‡ niewidoczny, ale pojawia siÄ™ zawsze
+po klikniÄ™ciu w najwyÅ¼szÄ… liniÄ™ ekranu, albo po wciÅ›niÄ™ciu klawisza F9.
 .PP
-Midnight Commander pozwala na ogl±danie dwóch paneli w tym samym czasie.
-Jeden z nich jest panelem aktywnym (pod¶wietlona linia wyboru znajduje siê w³a¶nie
-w nim). Niemal wszystkie operacje wykonuje siê na panelu aktywnym.
-Niektóre operacje, jak
-np. kopiowanie, zmiana nazwy u¿ywaj± jako domy¶lnego miejsca docelowego
+Midnight Commander pozwala na oglÄ…danie dwÃ³ch paneli w tym samym czasie.
+Jeden z nich jest panelem aktywnym (podÅ›wietlona linia wyboru znajduje siÄ™ wÅ‚aÅ›nie
+w nim). Niemal wszystkie operacje wykonuje siÄ™ na panelu aktywnym.
+NiektÃ³re operacje, jak
+np. kopiowanie, zmiana nazwy uÅ¼ywajÄ… jako domyÅ›lnego miejsca docelowego
 katalogu otwartego w panelu nieaktywnym
-(nie martw siê, zawsze zostaniesz poproszony o
-potwierdzenie takiej operacji). W celu zasiêgniêcia szerszych informacji zajrzyj
-do dzia³ów
-.BR "Panele katalogów" , " Lewe i prawe menu " oraz " Menu plików" .
+(nie martw siÄ™, zawsze zostaniesz poproszony o
+potwierdzenie takiej operacji). W celu zasiÄ™gniÄ™cia szerszych informacji zajrzyj
+do dziaÅ‚Ã³w
+.BR "Panele katalogÃ³w" , " Lewe i prawe menu " oraz " Menu plikÃ³w" .
 .PP
-Mo¿esz wywo³ywaæ dowolne komendy systemowe po prostu wpisuj±c je. Wszystko co
-piszesz pojawia siê w linii poleceñ i po naci¶niêciu klawisza Enter zostanie
-wykonane przez Midnight Commandera. Przeczytaj sekcjê
-.BR "Linia pow³oki i Linia wej¶ciowa klawiszy" ,
-¿eby nauczyæ siê wiêcej na ten temat.
+MoÅ¼esz wywoÅ‚ywaÄ‡ dowolne komendy systemowe po prostu wpisujÄ…c je. Wszystko co
+piszesz pojawia siÄ™ w linii poleceÅ„ i po naciÅ›niÄ™ciu klawisza Enter zostanie
+wykonane przez Midnight Commandera. Przeczytaj sekcjÄ™
+.BR "Linia powÅ‚oki i Linia wejÅ›ciowa klawiszy" ,
+Å¼eby nauczyÄ‡ siÄ™ wiÄ™cej na ten temat.
 .PP
 .\"NODE "Mouse Support"
-.SH "Obs³uga myszy"
-Midnight Commander obs³uguje mysz. Modu³ ten jest uruchamiany wtedy kiedy
+.SH "ObsÅ‚uga myszy"
+Midnight Commander obsÅ‚uguje mysz. ModuÅ‚ ten jest uruchamiany wtedy kiedy
 korzystasz z terminala
 .BR xterm (1)
-(dzia³a nawet wtedy, kiedy ³±czysz siê przez telnet albo rlogin z innym komputerem
-z terminala xterm) lub je¶li korzystasz z linuksa na konsoli z zainstalowanym
+(dziaÅ‚a nawet wtedy, kiedy Å‚Ä…czysz siÄ™ przez telnet albo rlogin z innym komputerem
+z terminala xterm) lub jeÅ›li korzystasz z linuksa na konsoli z zainstalowanym
 serwerem
 .BR gpm (1).
 .PP
 Kiedy klikniesz lewym przyciskiem na panel z katalogami, plik zostanie
-wybrany jako aktywny; je¶li klikniesz prawym przyciskiem zostanie on
-zaznaczony [lub odznaczony - w zale¿no¶ci od jego aktualnego stanu -
-dzia³anie podobne do klawisza
+wybrany jako aktywny; jeÅ›li klikniesz prawym przyciskiem zostanie on
+zaznaczony [lub odznaczony - w zaleÅ¼noÅ›ci od jego aktualnego stanu -
+dziaÅ‚anie podobne do klawisza
 .B Insert
-- przyp. t³umacza].
+- przyp. tÅ‚umacza].
 .PP
-Podwójne klikniêcie w plik spowoduje wykonanie pliku, je¶li jest on wykonywalny,
-a je¶li rozszerzenie pliku jest rozpoznawane przez Midnight Commander'a i dostêpny
+PodwÃ³jne klikniÄ™cie w plik spowoduje wykonanie pliku, jeÅ›li jest on wykonywalny,
+a jeÅ›li rozszerzenie pliku jest rozpoznawane przez Midnight Commander'a i dostÄ™pny
 jest odpowiedni program, jest on uruchamiany.
 .PP
-Mo¿liwe jest równie¿ wykonywanie komend przypisanych klawiszom funkcyjnym
-przez klikniêcie w nie.
+MoÅ¼liwe jest rÃ³wnieÅ¼ wykonywanie komend przypisanych klawiszom funkcyjnym
+przez klikniÄ™cie w nie.
 .PP
-Je¶li klikniêcie odbêdzie siê w rejonie górnej lini panelu z katalogami, zostanie
-on przewiniêty jedn± stronê wstecz. Podobnie klikniêcie na doln± ramkê przewija
-tekst jedn± stronê do przodu. Ta opcja klikania w ramki dzia³a równie¿ przy
-przegl±daniu pomocy i przy drzewie katalogów.
+JeÅ›li klikniÄ™cie odbÄ™dzie siÄ™ w rejonie gÃ³rnej lini panelu z katalogami, zostanie
+on przewiniÄ™ty jednÄ… stronÄ™ wstecz. Podobnie klikniÄ™cie na dolnÄ… ramkÄ™ przewija
+tekst jednÄ… stronÄ™ do przodu. Ta opcja klikania w ramki dziaÅ‚a rÃ³wnieÅ¼ przy
+przeglÄ…daniu pomocy i przy drzewie katalogÃ³w.
 .PP
-Standardowo czas autopowtórzenia przy klikaniu mysz± wynosi 400 milisekund.
-Tê warto¶æ mo¿na zmieniæ edytuj±c plik
+Standardowo czas autopowtÃ³rzenia przy klikaniu myszÄ… wynosi 400 milisekund.
+TÄ™ wartoÅ›Ä‡ moÅ¼na zmieniÄ‡ edytujÄ…c plik
 \&~/.mc/ini
-i zmieniaj±c parametr
+i zmieniajÄ…c parametr
 .IR mouse_repeat_rate .
 .PP
-Je¶li u¿ywasz Midnight Commandera z obs³ug± myszy, mo¿esz "przeszczepiaæ"
-kawa³ki tekstów i u¿ywaæ standardowych zastosowañ myszki (kopiowanie i
-wklejanie) za pomoc± klawisza Shift.
+JeÅ›li uÅ¼ywasz Midnight Commandera z obsÅ‚ugÄ… myszy, moÅ¼esz "przeszczepiaÄ‡"
+kawaÅ‚ki tekstÃ³w i uÅ¼ywaÄ‡ standardowych zastosowaÅ„ myszki (kopiowanie i
+wklejanie) za pomocÄ… klawisza Shift.
 .SH ""
 .\"NODE "Keys"
 .SH "Klawisze"
-Niektóre komendy Midnight Commandera wywo³uje siê kombinacj± klawiszy
+NiektÃ³re komendy Midnight Commandera wywoÅ‚uje siÄ™ kombinacjÄ… klawiszy
 .I Control
 (czasem opisywanego jako CTRL lub CTL) lub
 .I Meta
-(opisywanego ALT lub nawet Compose). W tym manualu (pliku pomocy) bêdziemy
-u¿ywaæ nastêpuj±cych kombinacji:
-C-<klawisz> - znaczy: trzymaj±c klawisz Control naci¶nij
-<klawisz>. Wiêc C-f bêdzie oznaczaæ: trzymaj±c Control, naci¶nij f.
+(opisywanego ALT lub nawet Compose). W tym manualu (pliku pomocy) bÄ™dziemy
+uÅ¼ywaÄ‡ nastÄ™pujÄ…cych kombinacji:
+C-<klawisz> - znaczy: trzymajÄ…c klawisz Control naciÅ›nij
+<klawisz>. WiÄ™c C-f bÄ™dzie oznaczaÄ‡: trzymajÄ…c Control, naciÅ›nij f.
 .PP
-M-<klawisz> - znaczy, ¿e trzymaj±c klawisz Meta lub alt naciskamy <klawisz>.
-Je¶li na twojej klawiaturze nie ma ani klawisza Alt ani Meta, naci¶nij ESC, pu¶æ
-go i wtedy naci¶nij <klawisz> [skutek ten sam, acz jednak u¿ycie trochê
-mniej przyjemne i bardziej skomlikowane - przyp. t³umacza].
+M-<klawisz> - znaczy, Å¼e trzymajÄ…c klawisz Meta lub alt naciskamy <klawisz>.
+JeÅ›li na twojej klawiaturze nie ma ani klawisza Alt ani Meta, naciÅ›nij ESC, puÅ›Ä‡
+go i wtedy naciÅ›nij <klawisz> [skutek ten sam, acz jednak uÅ¼ycie trochÄ™
+mniej przyjemne i bardziej skomlikowane - przyp. tÅ‚umacza].
 .PP
-Wszystkie linie wprowadzaj±ce Midnight Commandera u¿ywaj± w przybli¿eniu tych
-samych przypisañ klawiszy co wersja GNU edytora Emacs.
+Wszystkie linie wprowadzajÄ…ce Midnight Commandera uÅ¼ywajÄ… w przybliÅ¼eniu tych
+samych przypisaÅ„ klawiszy co wersja GNU edytora Emacs.
 .PP
-Jest wiele sekcji mówi±cych o klawiszach. Ta nastêpuj±ca jest najwa¿niejsza.
+Jest wiele sekcji mÃ³wiÄ…cych o klawiszach. Ta nastÄ™pujÄ…ca jest najwaÅ¼niejsza.
 .PP
 Sekcja
 .\"LINK2"
-.I Menu plików
+.I Menu plikÃ³w
 .\"File Menu"
-opisuje skróty klawiszowe do komend pojawiaj±cych siê w menu plików. Ta sekcja
-zawiera funkcjê klawiszy. Wiêkszo¶æ z tych komend wywo³uje jak±¶ akcjê przede
+opisuje skrÃ³ty klawiszowe do komend pojawiajÄ…cych siÄ™ w menu plikÃ³w. Ta sekcja
+zawiera funkcjÄ™ klawiszy. WiÄ™kszoÅ›Ä‡ z tych komend wywoÅ‚uje jakÄ…Å› akcjÄ™ przede
 wszystkim na jednym lub kilku wybranych plikach.
 .PP
 Sekcja
 .\"LINK2"
 .I Panele katalogowe
 .\"Directory Panels"
-opisuje klawisze, które zaznaczaj± plik lub pliki jako docelowe do dalszych
-dzia³añ (akcj± jest najczê¶ciej jedna z tych przedstawionych w menu plików).
+opisuje klawisze, ktÃ³re zaznaczajÄ… plik lub pliki jako docelowe do dalszych
+dziaÅ‚aÅ„ (akcjÄ… jest najczÄ™Å›ciej jedna z tych przedstawionych w menu plikÃ³w).
 .PP
 Sekcja
-.I Komendy linii poleceñ
-wypisuje listê klawiszy, które s± u¿ywane do wprowadzania lub edytowania
-tekstów w wierszu poleceñ. Wiêkszo¶æ z nich kopiuje nazwy, i inne tego typu,
-z panelu katalogów do linii poleceñ (¿eby unikn±æ ich przepisywania), lub
-pozwala zwiedziæ historiê komend linii poleceñ.
+.I Komendy linii poleceÅ„
+wypisuje listÄ™ klawiszy, ktÃ³re sÄ… uÅ¼ywane do wprowadzania lub edytowania
+tekstÃ³w w wierszu poleceÅ„. WiÄ™kszoÅ›Ä‡ z nich kopiuje nazwy, i inne tego typu,
+z panelu katalogÃ³w do linii poleceÅ„ (Å¼eby uniknÄ…Ä‡ ich przepisywania), lub
+pozwala zwiedziÄ‡ historiÄ™ komend linii poleceÅ„.
 .PP
-.I Klawisze linii wej¶ciowych
-s± u¿ywane do edytowania linii na wej¶ciu (przy wpisywaniu). Oznacza,
-to ¿e stosuje siê je zarówno
-do linii poleceñ jak do okien dialogowych.
+.I Klawisze linii wejÅ›ciowych
+sÄ… uÅ¼ywane do edytowania linii na wejÅ›ciu (przy wpisywaniu). Oznacza,
+to Å¼e stosuje siÄ™ je zarÃ³wno
+do linii poleceÅ„ jak do okien dialogowych.
 .PP
 .\"NODE "  Miscellaneous Keys"
-.SH "Klawisze ró¿ne"
-Jest tu kilka klawiszy, które nie kwalifikuj± siê do ¿adnej z wymienionych
-powy¿ej grup:
+.SH "Klawisze rÃ³Å¼ne"
+Jest tu kilka klawiszy, ktÃ³re nie kwalifikujÄ… siÄ™ do Å¼adnej z wymienionych
+powyÅ¼ej grup:
 .PP
 .BR Enter .
-Je¶li jest wpisany jaki¶ tekst w linii poleceñ (na samym dole, pod panelami),
-to wpisana komenda jest wykonywana. Je¶li nic nie jest wpisane, i linia wyboru
-jest na jakim¶ katalogu, Midnight Commander wykonuje komendê
+JeÅ›li jest wpisany jakiÅ› tekst w linii poleceÅ„ (na samym dole, pod panelami),
+to wpisana komenda jest wykonywana. JeÅ›li nic nie jest wpisane, i linia wyboru
+jest na jakimÅ› katalogu, Midnight Commander wykonuje komendÄ™
 .BR chdir (2)
-(zmiana katalogu) do wybranego katalogu i od¶wie¿a zawarto¶æ panelu; je¶li
-linia wyboru jest na pliku wykonywalnym jest on wykonywany. I wreszcie je¶li
-rozszerzenie pliku zgadza siê z ob³ugiwanym przez programy zewnêtrzne, które
-s± obs³ugiwane prze Midnight Commandera, s± one wywo³ywane z owym programem.
+(zmiana katalogu) do wybranego katalogu i odÅ›wieÅ¼a zawartoÅ›Ä‡ panelu; jeÅ›li
+linia wyboru jest na pliku wykonywalnym jest on wykonywany. I wreszcie jeÅ›li
+rozszerzenie pliku zgadza siÄ™ z obÅ‚ugiwanym przez programy zewnÄ™trzne, ktÃ³re
+sÄ… obsÅ‚ugiwane prze Midnight Commandera, sÄ… one wywoÅ‚ywane z owym programem.
 .PP
 .BR C-l .
 Od nowa rysuje wszystkie informacje okna Midnight Commandera.
 .PP
 .BR "C-x c" .
-Uruchamia komendê Chmod dla aktualnego pliku lub zaznaczonych plików.
+Uruchamia komendÄ™ Chmod dla aktualnego pliku lub zaznaczonych plikÃ³w.
 .PP
 .BR "C-x o" .
-Uruchamia komendê Chown dla aktualnego pliku lub zaznaczonych plików.
+Uruchamia komendÄ™ Chown dla aktualnego pliku lub zaznaczonych plikÃ³w.
 .PP
 .BR "C-x l" .
-Uruchamia komendê dowi±zywania.
+Uruchamia komendÄ™ dowiÄ…zywania.
 .PP
 .BR "C-x s" .
-Uruchamia komendê miêkkiego dowi±zywania.
+Uruchamia komendÄ™ miÄ™kkiego dowiÄ…zywania.
 .PP
 .BR "C-x i" .
 Zmienia aktywny panel.
 .PP
 .BR "C-x q" .
-Prze³acza nieaktywny panel w tryb "quick view".
+PrzeÅ‚acza nieaktywny panel w tryb "quick view".
 .PP
 .BR "C-x !" .
-Wykonuje komendê z zewnêtrznego panelu.
+Wykonuje komendÄ™ z zewnÄ™trznego panelu.
 .PP
 .BR "C-x h" .
-Uruchamia komendê dodawania katalogów do hotlisty.
+Uruchamia komendÄ™ dodawania katalogÃ³w do hotlisty.
 .PP
 .BR M-! .
-Uruchamia komendê filtrowanego podgl±du, opisanego w sekcji
-.IR Podgl±d .
+Uruchamia komendÄ™ filtrowanego podglÄ…du, opisanego w sekcji
+.IR PodglÄ…d .
 .PP
 .BR M-? .
-Uruchamia komendê szukania pliku.
+Uruchamia komendÄ™ szukania pliku.
 .PP
 .BR M-c .
-W³±cza okno dialogowe quick cd (szybkiej zmiany katalogów)
+WÅ‚Ä…cza okno dialogowe quick cd (szybkiej zmiany katalogÃ³w)
 .PP
 .BR C-o .
-Je¶li program jest uruchamiany na konsoli typu Linux lub FreeBSD lub te¿
-na konsoli xterm, poka¿e wyj¶cie ostatnio wykonywanego programu. Je¶li
-uruchomiono Midnight Commandera na konsoli type Linux, MC u¿ywa
-zewnêtrznego programu (cons.saver) w celu zachowywyania i odzyskiwania
+JeÅ›li program jest uruchamiany na konsoli typu Linux lub FreeBSD lub teÅ¼
+na konsoli xterm, pokaÅ¼e wyjÅ›cie ostatnio wykonywanego programu. JeÅ›li
+uruchomiono Midnight Commandera na konsoli type Linux, MC uÅ¼ywa
+zewnÄ™trznego programu (cons.saver) w celu zachowywyania i odzyskiwania
 informacji na ekranie komputera.
 .PP
-Je¶li u¿ycie trybu pow³oki w tle jest wkompilowane, mo¿esz nacisn±æ
-C-o w dowolnej chwili i zostataniesz przeniesiony z powrotem bezpo¶rednio
-do g³ównego okna Midnight Commandera, ¿eby powróciæ do wykonywania aplikacji
-po prostu naci¶nij znów C-o. Je¶li masz zawieszon± aplikacjê w³a¶nie przez
-u¿ycie tego triku, nie bêdziesz móg³ "odpalaæ" innych programów spod Midnight
-Commandera dopóki nie zamkniesz zawieszonego programu.
+JeÅ›li uÅ¼ycie trybu powÅ‚oki w tle jest wkompilowane, moÅ¼esz nacisnÄ…Ä‡
+C-o w dowolnej chwili i zostataniesz przeniesiony z powrotem bezpoÅ›rednio
+do gÅ‚Ã³wnego okna Midnight Commandera, Å¼eby powrÃ³ciÄ‡ do wykonywania aplikacji
+po prostu naciÅ›nij znÃ³w C-o. JeÅ›li masz zawieszonÄ… aplikacjÄ™ wÅ‚aÅ›nie przez
+uÅ¼ycie tego triku, nie bÄ™dziesz mÃ³gÅ‚ "odpalaÄ‡" innych programÃ³w spod Midnight
+Commandera dopÃ³ki nie zamkniesz zawieszonego programu.
 .PP
-Aby dowiedzieæ siê czego¶ na temat polskiech liter w Midnight Commanderze
-przeczytaj sekcjê
+Aby dowiedzieÄ‡ siÄ™ czegoÅ› na temat polskiech liter w Midnight Commanderze
+przeczytaj sekcjÄ™
 .IR "Polskie litery" .
 .PP
 .\"NODE "  Directory Panels"
-.SH "  Panel Katalogów"
-Sekcja opisuje klawisze, które operuj± na panelu katalogów. Je¶li chcesz
-wiedzieæ jak zmieniæ panele zobacz sekcjê
+.SH "  Panel KatalogÃ³w"
+Sekcja opisuje klawisze, ktÃ³re operujÄ… na panelu katalogÃ³w. JeÅ›li chcesz
+wiedzieÄ‡ jak zmieniÄ‡ panele zobacz sekcjÄ™
 .IR "Lewe i prawe menu" .
 .PP
 .BR Tab ", " C-i .
-Zmienia aktywny panel. Stary panel staje siê w tym momencie aktywnym panelem,
-a aktywny staje siê starym. Linia wyboru zmienia swoje po³o¿enia do aktywnego
+Zmienia aktywny panel. Stary panel staje siÄ™ w tym momencie aktywnym panelem,
+a aktywny staje siÄ™ starym. Linia wyboru zmienia swoje poÅ‚oÅ¼enia do aktywnego
 panelu.
 .PP
 .BR Insert ", " C-t .
-Do zaznaczania plików mo¿esz u¿ywaæ klawisza Insert lub C-t. ¯eby odznaczyæ plik
-po prostu zaznacz jaki¶ ju¿ zaznaczony.
+Do zaznaczania plikÃ³w moÅ¼esz uÅ¼ywaÄ‡ klawisza Insert lub C-t. Å»eby odznaczyÄ‡ plik
+po prostu zaznacz jakiÅ› juÅ¼ zaznaczony.
 .PP
 .BR M-g ", " M-r ", " M-j .
-U¿ywane do wybierania najwy¿szego, ¶rodkowego i najni¿szego pliku w panelu.
+UÅ¼ywane do wybierania najwyÅ¼szego, Å›rodkowego i najniÅ¼szego pliku w panelu.
 .PP
 .BR C-s ", " M-s .
 Uruchamia szukanie pliku w katalogu na podstawie jego nazwy. Kiedy szukanie
-jest aktywne, ka¿de naci¶niêcie klawisza doda jeden znak do poszukiwania
-zamiast wypisania go linii poleceñ. Je¶li opcja
+jest aktywne, kaÅ¼de naciÅ›niÄ™cie klawisza doda jeden znak do poszukiwania
+zamiast wypisania go linii poleceÅ„. JeÅ›li opcja
 .I "Show mini-status"
-jest w³±czona, szukany ci±g znaków pojawia siê w linii mini-statusu. Kiedy
-wpisujemy znak, linia wyboru przemieszcza siê do nastêpnego pliku zaczynaj±cego
-siê od podanych liter. Klawisze
+jest wÅ‚Ä…czona, szukany ciÄ…g znakÃ³w pojawia siÄ™ w linii mini-statusu. Kiedy
+wpisujemy znak, linia wyboru przemieszcza siÄ™ do nastÄ™pnego pliku zaczynajÄ…cego
+siÄ™ od podanych liter. Klawisze
 .I backspace
 lub
 .I del
-mog± byæ u¿ywane do poprawiania b³êdów. Je¶li C-s zostanie naci¶niête ponownie,
-Midnight Commander rozpoczyna szukanie nastêpnego pliku
-zaczynaj±cego siê od podanych znaków.
+mogÄ… byÄ‡ uÅ¼ywane do poprawiania bÅ‚Ä™dÃ³w. JeÅ›li C-s zostanie naciÅ›niÄ™te ponownie,
+Midnight Commander rozpoczyna szukanie nastÄ™pnego pliku
+zaczynajÄ…cego siÄ™ od podanych znakÃ³w.
 .PP
 .BR M-t .
-Prze³±cza tryb wy¶wietlania do nastêpnego mo¿liwego. U¿ywaj±c tej opcji
-³atwo jest przej¶æ szybko z d³ugiego do krótkiego trybu wy¶wietlania
-jak równie¿ do tego zdefiniowanego przez u¿ytkownika.
+PrzeÅ‚Ä…cza tryb wyÅ›wietlania do nastÄ™pnego moÅ¼liwego. UÅ¼ywajÄ…c tej opcji
+Å‚atwo jest przejÅ›Ä‡ szybko z dÅ‚ugiego do krÃ³tkiego trybu wyÅ›wietlania
+jak rÃ³wnieÅ¼ do tego zdefiniowanego przez uÅ¼ytkownika.
 .PP
 .B C-\\\\
 (control-backslash).
-Pokazuje hotlistê katalogów i zmienia katalog do wybranego przez u¿ytkownika.
+Pokazuje hotlistÄ™ katalogÃ³w i zmienia katalog do wybranego przez uÅ¼ytkownika.
 .PP
 .B +
 (plus).
-U¿ywane do zaznaczania grupy plików. Midnight Commander zapyta o
-wyra¿enie opisuj±c± grupê. Je¶li opcja
+UÅ¼ywane do zaznaczania grupy plikÃ³w. Midnight Commander zapyta o
+wyraÅ¼enie opisujÄ…cÄ… grupÄ™. JeÅ›li opcja
 .I Shell Patterns
-jest w³±czona, typ wyra¿eñ jest bardzo podobny do tego w pow³oce
-(* dla zera i wiêcej znaków i ? dla jednego znaku). Je¶li za¶ opcja
+jest wÅ‚Ä…czona, typ wyraÅ¼eÅ„ jest bardzo podobny do tego w powÅ‚oce
+(* dla zera i wiÄ™cej znakÃ³w i ? dla jednego znaku). JeÅ›li zaÅ› opcja
 .I Shell Patterns
-jest wy³±czona, sposób zaznaczania plików jest zgodny z ustawieniami
+jest wyÅ‚Ä…czona, sposÃ³b zaznaczania plikÃ³w jest zgodny z ustawieniami
 (zobacz
 .BR ed (1)).
 .PP
-Je¶li wyra¿enie zaczyna siê od uko¶nika (/), wtedy zaznaczone zostan± katalogi
-zamiast plików.
+JeÅ›li wyraÅ¼enie zaczyna siÄ™ od ukoÅ›nika (/), wtedy zaznaczone zostanÄ… katalogi
+zamiast plikÃ³w.
 .PP
 .B \\\\
 (backslash).
-U¿ywaj znaków "\\" do odznaczania grupy plików. Jest to przeciwieñstwo klawisza
+UÅ¼ywaj znakÃ³w "\\" do odznaczania grupy plikÃ³w. Jest to przeciwieÅ„stwo klawisza
 plus.
 .PP
-.BR "strza³ka do góry" ", " C-p .
-Przenosi liniê wyboru do poprzedniej pozycji w panelu.
+.BR "strzaÅ‚ka do gÃ³ry" ", " C-p .
+Przenosi liniÄ™ wyboru do poprzedniej pozycji w panelu.
 .PP
-.BR "strza³ka do do³u" ", " C-n .
-Przenosi liniê wyboru do nastêpnej pozycji w panelu.
+.BR "strzaÅ‚ka do doÅ‚u" ", " C-n .
+Przenosi liniÄ™ wyboru do nastÄ™pnej pozycji w panelu.
 .PP
 .BR home ", " a1 ", " M-< .
-Przenosi liniê wyboru do pierwszej pozycji w panelu.
+Przenosi liniÄ™ wyboru do pierwszej pozycji w panelu.
 .PP
 .BR end ", " c1 ", " M-> .
-Przenosi liniê wyboru do ostatniej pozycji w panelu.
+Przenosi liniÄ™ wyboru do ostatniej pozycji w panelu.
 .PP
 .BR PageDown ", " C-v .
-Przenosi liniê wyboru jedn± stronê do do³u.
+Przenosi liniÄ™ wyboru jednÄ… stronÄ™ do doÅ‚u.
 .PP
 .BR PageUp ", " M-v .
-Przenosi liniê wyboru jedn± stronê do góry.
+Przenosi liniÄ™ wyboru jednÄ… stronÄ™ do gÃ³ry.
 .PP
 .BR M-o .
-Je¶li drugi panel jest zwyk³ym panelem wy¶wietlaj±cym i w aktywnym panelu
-stoisz na katalogu, drugi panel bêdzie
-pokazywaæ zawarto¶æ
-akutalnego katalogu (tak jak w Emacsie kombinacja C-o). Je¶li nie stoisz
-na katalogu zawarto¶ci± drugiego katalogu stanie siê katalog o jedno piêtro
-wy¿szy od aktualnego.
+JeÅ›li drugi panel jest zwykÅ‚ym panelem wyÅ›wietlajÄ…cym i w aktywnym panelu
+stoisz na katalogu, drugi panel bÄ™dzie
+pokazywaÄ‡ zawartoÅ›Ä‡
+akutalnego katalogu (tak jak w Emacsie kombinacja C-o). JeÅ›li nie stoisz
+na katalogu zawartoÅ›ciÄ… drugiego katalogu stanie siÄ™ katalog o jedno piÄ™tro
+wyÅ¼szy od aktualnego.
 .PP
 .BR C-PageUp ", " C-PageDown .
-Dzia³a tylko na konsoli typu Linux: wykonuje przej¶cie do katalogu ".." lub
-do aktualnie wybranego, w zale¿no¶ci od kombinacji.
+DziaÅ‚a tylko na konsoli typu Linux: wykonuje przejÅ›cie do katalogu ".." lub
+do aktualnie wybranego, w zaleÅ¼noÅ›ci od kombinacji.
 .PP
 .BR M-y .
-Przenosi do poprzedniego katalogu w historii, podobne do klikniêcia myszk±.
+Przenosi do poprzedniego katalogu w historii, podobne do klikniÄ™cia myszkÄ….
 '<'.
 .PP
 .BR M-u .
-Przechodzi do nastêpnego katalogu w historii, podobne do klikniêcie myszk±
+Przechodzi do nastÄ™pnego katalogu w historii, podobne do klikniÄ™cie myszkÄ…
 w '>'.
 .PP
 .BR M-S-h ", " M-H .
-Wy¶wietla historiê katalogów, podobne dzia³anie do klikniêcia myszk± 'v'.
+WyÅ›wietla historiÄ™ katalogÃ³w, podobne dziaÅ‚anie do klikniÄ™cia myszkÄ… 'v'.
 .PP
 .\"NODE "  Shell Command Line"
-.SH "  Linia Pow³oki"
-Ta sekcja opisuje klawisze, które s± u¿yteczne do efektywniejszego
-wpisywania podczas podawania komend pow³oki.
+.SH "  Linia PowÅ‚oki"
+Ta sekcja opisuje klawisze, ktÃ³re sÄ… uÅ¼yteczne do efektywniejszego
+wpisywania podczas podawania komend powÅ‚oki.
 .PP
 .BR M-Enter .
-Kopiuje nazwê aktualniego wybranego pliku do linii poleceñ.
+Kopiuje nazwÄ™ aktualniego wybranego pliku do linii poleceÅ„.
 .PP
 .BR C-Enter .
-To samo co M-Enter, dzia³a tylko na konsoli typu Linux.
+To samo co M-Enter, dziaÅ‚a tylko na konsoli typu Linux.
 .PP
 .BR M-Tab .
-Wykonuje dokoñczenie nazw plików, komend, zmiennych, u¿ytkowników, nazw hostów
+Wykonuje dokoÅ„czenie nazw plikÃ³w, komend, zmiennych, uÅ¼ytkownikÃ³w, nazw hostÃ³w
 za Ciebie.
 .PP
 .BR "C-x t" ", " "C-x C-t" .
-Kopiuje nazwy zaznaczonych plików (lub je¶li nie ma zaznaczonych - aktywnego)
-w aktywnym (C-x t) lub nieaktywnym panelu (C-x C-t) do linii poleceñ.
+Kopiuje nazwy zaznaczonych plikÃ³w (lub jeÅ›li nie ma zaznaczonych - aktywnego)
+w aktywnym (C-x t) lub nieaktywnym panelu (C-x C-t) do linii poleceÅ„.
 .PP
 .BR "C-x p" ", " "C-x C-p" .
-Pierwsza kombinacja kopiuje pe³n± ¶cie¿kê z aktywnego, a druga z nieaktywnego
+Pierwsza kombinacja kopiuje peÅ‚nÄ… Å›cieÅ¼kÄ™ z aktywnego, a druga z nieaktywnego
 panelu.
 .PP
 .BR C-q .
-Komenda 'quote' (cytuj) mo¿e byæ u¿ywana do wpisywania do wiersza poleceñ znaków, które
-normalnie przechwytywane s± przez Commandera (tak jak znak '+').
+Komenda 'quote' (cytuj) moÅ¼e byÄ‡ uÅ¼ywana do wpisywania do wiersza poleceÅ„ znakÃ³w, ktÃ³re
+normalnie przechwytywane sÄ… przez Commandera (tak jak znak '+').
 .PP
 .BR M-p ", " M-n .
-U¿ywaj tych klawiszy, ¿eby przegl±daæ historiê komend. M-p wy¶wietla poprzedni±,
-a M-n nastêpn± komendê.
+UÅ¼ywaj tych klawiszy, Å¼eby przeglÄ…daÄ‡ historiÄ™ komend. M-p wyÅ›wietla poprzedniÄ…,
+a M-n nastÄ™pnÄ… komendÄ™.
 .PP
 .BR M-h .
-Wy¶wietla historiê aktualnej linii poleceñ.
+WyÅ›wietla historiÄ™ aktualnej linii poleceÅ„.
 .PP
 .\"NODE "  General Movement Keys"
 .SH "  Podstawowe klawisze ruchu"
-Przegl±darka pomocy, podgl±d plików i drzewo katalogów u¿ywaj± podobnych
-klawiszy do przemieszczania. Przez to akceptuj± dok³adnie te same klawisze.
-Ka¿de z nich z reszt± traktuj± je jako swoje w³asne.
+PrzeglÄ…darka pomocy, podglÄ…d plikÃ³w i drzewo katalogÃ³w uÅ¼ywajÄ… podobnych
+klawiszy do przemieszczania. Przez to akceptujÄ… dokÅ‚adnie te same klawisze.
+KaÅ¼de z nich z resztÄ… traktujÄ… je jako swoje wÅ‚asne.
 .PP
-Niektóre partie Midnight Commandera równie¿ u¿ywaj± tych klawiszy,
-wiêc niniejsza sekcja mo¿e byæ u¿yteczna równie¿ dla tych partii.
+NiektÃ³re partie Midnight Commandera rÃ³wnieÅ¼ uÅ¼ywajÄ… tych klawiszy,
+wiÄ™c niniejsza sekcja moÅ¼e byÄ‡ uÅ¼yteczna rÃ³wnieÅ¼ dla tych partii.
 .PP
-.BR "strza³ka w górê" ", " C-p .
-Przechodzi jedn± liniê wstecz.
+.BR "strzaÅ‚ka w gÃ³rÄ™" ", " C-p .
+Przechodzi jednÄ… liniÄ™ wstecz.
 .PP
-.BR "strza³ka w dó³" ", " C-n .
-Przechodzi jedn± liniê naprzód.
+.BR "strzaÅ‚ka w dÃ³Å‚" ", " C-n .
+Przechodzi jednÄ… liniÄ™ naprzÃ³d.
 .PP
 .BR "Page Up" ", " M-v .
-Przechodzi jedn± stronê wstecz.
+Przechodzi jednÄ… stronÄ™ wstecz.
 .PP
 .BR "Next Page" ", " "Page Down" ", " C-v .
-Przechodzi jedn± stronê naprzód.
+Przechodzi jednÄ… stronÄ™ naprzÃ³d.
 .PP
 .BR Home ", " A1 .
-Przechodzi do pocz±tku.
+Przechodzi do poczÄ…tku.
 .PP
 .BR End ", " C1 .
 Przechodzi na koniec.
 .PP
-Przegl±darka pomocy i podgl±d plików akceptuj± nastêpuj±ce klawisze
-(poza tymi opisanymi powy¿ej).
+PrzeglÄ…darka pomocy i podglÄ…d plikÃ³w akceptujÄ… nastÄ™pujÄ…ce klawisze
+(poza tymi opisanymi powyÅ¼ej).
 .PP
 .BR b ", " C-b ", " C-h ", " Backspace ", " Delete .
-Przechodzi jedn± stronê wstecz.
+Przechodzi jednÄ… stronÄ™ wstecz.
 .PP
 .BR "klawisz spacji" .
-Przechodzi jedn± stronê naprzód.
+Przechodzi jednÄ… stronÄ™ naprzÃ³d.
 .PP
 .BR u ", " d .
-Przechodzi pó³ strony naprzód lub wstecz.
+Przechodzi pÃ³Å‚ strony naprzÃ³d lub wstecz.
 .PP
 .BR g ", " G .
-Przechodzi do pocz±tku lub do koñca.
+Przechodzi do poczÄ…tku lub do koÅ„ca.
 .PP
 .\"NODE "  Input Line Keys"
-.SH "  Linia wej¶ciowa klawiszy"
-Linie wej¶ciowe (te u¿ywane w linii komend i w oknach dialogowych), akceptuj±
-nastêpuj±ce klawisze:
+.SH "  Linia wejÅ›ciowa klawiszy"
+Linie wejÅ›ciowe (te uÅ¼ywane w linii komend i w oknach dialogowych), akceptujÄ…
+nastÄ™pujÄ…ce klawisze:
 .PP
 .BR C-a .
-umieszcza kursor na pocz±tku linii.
+umieszcza kursor na poczÄ…tku linii.
 .PP
 .BR C-e .
-umieszcza kursor na koñcu linii.
+umieszcza kursor na koÅ„cu linii.
 .PP
 .BR C-b ", " move-left .
-przenosi kursor o jedn± pozycjê w lewo.
+przenosi kursor o jednÄ… pozycjÄ™ w lewo.
 .PP
 .BR C-f ", " move-right .
-przenosi kursor o jedn± pozycjê w prawo.
+przenosi kursor o jednÄ… pozycjÄ™ w prawo.
 .PP
 .BR M-f .
-przesuwa kursor o jedno s³owo naprzód.
+przesuwa kursor o jedno sÅ‚owo naprzÃ³d.
 .PP
 .BR M-b .
-przesuwa kursor o jedno s³owo wstecz.
+przesuwa kursor o jedno sÅ‚owo wstecz.
 .PP
 .BR C-h ", " backspace .
 kasuje poprzedni znak.
@@ -497,126 +497,126 @@ kasuje poprzedni znak.
 kasuje znak w miejscu kursora (nad nim).
 .PP
 .BR C-@ .
-wstawia zaznaczenie do kasowanie (patrz nastêpne pozycje).
+wstawia zaznaczenie do kasowanie (patrz nastÄ™pne pozycje).
 .PP
 .BR C-w .
-kopiuje tekst spomiêdzy kursora i zaznaczenia do bufora i usuwa go z linii
-poleceñ.
+kopiuje tekst spomiÄ™dzy kursora i zaznaczenia do bufora i usuwa go z linii
+poleceÅ„.
 .PP
 .BR M-w .
-to samo co C-w tylko, ¿e nie usuwa tekstu z linii.
+to samo co C-w tylko, Å¼e nie usuwa tekstu z linii.
 .PP
 .BR C-y .
-wstawia spowrotem zawarto¶æ wyciêtego bufora.
+wstawia spowrotem zawartoÅ›Ä‡ wyciÄ™tego bufora.
 .PP
 .BR C-k .
-wycina tekst od kursora do koñca linii.
+wycina tekst od kursora do koÅ„ca linii.
 .PP
 .BR M-p ", " M-n .
-U¿ywaj tych klawiszy, ¿eby przegl±daæ historiê komend. M-p wy¶wietla poprzedni±,
-a M-n nastêpn±.
+UÅ¼ywaj tych klawiszy, Å¼eby przeglÄ…daÄ‡ historiÄ™ komend. M-p wyÅ›wietla poprzedniÄ…,
+a M-n nastÄ™pnÄ….
 .PP
 .BR M-C-h ", " M-Backspace .
-kasuje jedno s³owo wstecz (poprzednie).
+kasuje jedno sÅ‚owo wstecz (poprzednie).
 .PP
 .BR M-Tab .
-Wykonuje dokoñczenie nazw plików, komend, zmiennych, u¿ytkowników, nazw hostów
+Wykonuje dokoÅ„czenie nazw plikÃ³w, komend, zmiennych, uÅ¼ytkownikÃ³w, nazw hostÃ³w
 za Ciebie.
 .PP
 .SH ""
 .\"NODE "Menu Bar"
 .SH "Linia menu"
-Linia menu uaktywnia siê kiedy wciskasz klawisz F9 lub kiedy klikasz myszk±
-na najwy¿szy wiersz ekranu. Linia menu ma piêæ podmenu: "left", "file", command",
+Linia menu uaktywnia siÄ™ kiedy wciskasz klawisz F9 lub kiedy klikasz myszkÄ…
+na najwyÅ¼szy wiersz ekranu. Linia menu ma piÄ™Ä‡ podmenu: "left", "file", command",
 "options" i "right" (po polsku to jest "lewe", "plik", "komendy", "opcje",
 "prawe").
 .PP
-Lewe i prawe menu pozwalaj± ci na modyfikacje wygl±du lewego i prawego panelu
+Lewe i prawe menu pozwalajÄ… ci na modyfikacje wyglÄ…du lewego i prawego panelu
 katalogowego.
 .PP
 Menu plik pozwala na wykonanie akcji na aktualnym lub zaznaczonych plikach.
 .PP
-Menu komend mie¶ci w sobie mo¿liwe do wykonania akcje, które s± du¿o bardziej
-globalne i nie maj± zwi±zku z aktualnym i zaznaczonymi plikami.
+Menu komend mieÅ›ci w sobie moÅ¼liwe do wykonania akcje, ktÃ³re sÄ… duÅ¼o bardziej
+globalne i nie majÄ… zwiÄ…zku z aktualnym i zaznaczonymi plikami.
 .PP
 .\"NODE "  Left and Right Menus"
 .SH "  Lewe i prawe menu"
-Wygl±d panelu katalogowego mo¿e zostaæ zmieniony poprzez menu
+WyglÄ…d panelu katalogowego moÅ¼e zostaÄ‡ zmieniony poprzez menu
 .B left
 i
 .BR right .
 .PP
 .\"NODE "    Listing Mode..."
-.SH "    Tryby wy¶wietlania (Listing modes)"
-Tryby wy¶wietlania s± u¿ywane do zmienia ustawieñ przy wy¶wietlaniu.
-Dostêpne s± cztery ró¿ne tryby:
+.SH "    Tryby wyÅ›wietlania (Listing modes)"
+Tryby wyÅ›wietlania sÄ… uÅ¼ywane do zmienia ustawieÅ„ przy wyÅ›wietlaniu.
+DostÄ™pne sÄ… cztery rÃ³Å¼ne tryby:
 .BR Full ,
 .BR Brief ,
 .B Long
 i
 .BR User .
-Tryb "Full" pokazuje nazwê, rozmiar i czas modyfikacji pliku.
+Tryb "Full" pokazuje nazwÄ™, rozmiar i czas modyfikacji pliku.
 .PP
-Tryb "Brief" pokazuje tylko nazwê pliku i ma dwie kolumny (dziêki temu
-mo¿e pokazywaæ nawet dwa razy wiêcej ni¿ inne tryby). Tryb "Long" jest
+Tryb "Brief" pokazuje tylko nazwÄ™ pliku i ma dwie kolumny (dziÄ™ki temu
+moÅ¼e pokazywaÄ‡ nawet dwa razy wiÄ™cej niÅ¼ inne tryby). Tryb "Long" jest
 podobny do wyniku polecenia
 .BR "ls -l" .
-Zabiera on szeroko¶æ ca³ego ekranu.
+Zabiera on szerokoÅ›Ä‡ caÅ‚ego ekranu.
 .PP
-Je¶li wybierzesz tryb "user" (u¿ytkownika), bêdziesz móg³ wybraæ w³asny
-sposób wy¶wietlania.
+JeÅ›li wybierzesz tryb "user" (uÅ¼ytkownika), bÄ™dziesz mÃ³gÅ‚ wybraÄ‡ wÅ‚asny
+sposÃ³b wyÅ›wietlania.
 .PP
-Tryb u¿ytkownika musi zaczynaæ siê od okre¶lenia wielko¶ci panelu. Mo¿e
-to byæ "half" (pó³) lub "full" (ca³y) i okre¶la, czy ma byæ widoczny
-jeden du¿y panel na ca³y ekran czy dwa mniejsze.
+Tryb uÅ¼ytkownika musi zaczynaÄ‡ siÄ™ od okreÅ›lenia wielkoÅ›ci panelu. MoÅ¼e
+to byÄ‡ "half" (pÃ³Å‚) lub "full" (caÅ‚y) i okreÅ›la, czy ma byÄ‡ widoczny
+jeden duÅ¼y panel na caÅ‚y ekran czy dwa mniejsze.
 .PP
-Po rozmiarze panelu mo¿esz w³±czyæ tryb dwóch kolumn panelu. Robi siê
-to dodaj±c liczbê "2" do tekstu formatu.
+Po rozmiarze panelu moÅ¼esz wÅ‚Ä…czyÄ‡ tryb dwÃ³ch kolumn panelu. Robi siÄ™
+to dodajÄ…c liczbÄ™ "2" do tekstu formatu.
 .PP
-Po tym wpisujesz ju¿ nazwy pól z podaniem opcjonalnej wielko¶ci.
-Wszystkie mo¿liwe pola jakich mo¿esz u¿yæ to:
+Po tym wpisujesz juÅ¼ nazwy pÃ³l z podaniem opcjonalnej wielkoÅ›ci.
+Wszystkie moÅ¼liwe pola jakich moÅ¼esz uÅ¼yÄ‡ to:
 .TP
 .B name
-wy¶wietla nazwê pliku.
+wyÅ›wietla nazwÄ™ pliku.
 .TP
 .B size
-wy¶wietla wielko¶æ pliku.
+wyÅ›wietla wielkoÅ›Ä‡ pliku.
 .TP
 .B bsize
-jest alternatyw± dla format
+jest alternatywÄ… dla format
 .BR size .
-Wy¶wietla rozmiar plików, a dla katalogów po prostu wy¶wietla tekst
+WyÅ›wietla rozmiar plikÃ³w, a dla katalogÃ³w po prostu wyÅ›wietla tekst
 "SUB-DIR" lub "UP--DIR".
 .TP
 .B type
-wy¶wietla jednoznakowy opis typu pliku. Ten znak jest taki sam co ten
-wy¶wietlany prze komendê ls z flag± -F. Wy¶wietlana jest gwiazdka
-dla plików wykonywalnych,
-uko¶nik dla katalogów, ma³pa (@) dla dowi±zañ, znak równo¶ci dla gniazd,
-minus dla urz±dzeñ niestniej±cych, znak plus dla urz±dzeñ istniej±cych,
-pionow± kreskê (|) dla kolejek FIFO, tyldê dla dowi±zañ
-symbolicznych, i wykrzyknik dla dowi±zañ wskazuj±cych na nieistniej±cy plik.
+wyÅ›wietla jednoznakowy opis typu pliku. Ten znak jest taki sam co ten
+wyÅ›wietlany prze komendÄ™ ls z flagÄ… -F. WyÅ›wietlana jest gwiazdka
+dla plikÃ³w wykonywalnych,
+ukoÅ›nik dla katalogÃ³w, maÅ‚pa (@) dla dowiÄ…zaÅ„, znak rÃ³wnoÅ›ci dla gniazd,
+minus dla urzÄ…dzeÅ„ niestniejÄ…cych, znak plus dla urzÄ…dzeÅ„ istniejÄ…cych,
+pionowÄ… kreskÄ™ (|) dla kolejek FIFO, tyldÄ™ dla dowiÄ…zaÅ„
+symbolicznych, i wykrzyknik dla dowiÄ…zaÅ„ wskazujÄ…cych na nieistniejÄ…cy plik.
 .TP
 .B mark
-Gwiazdka je¶li plik jest zaznaczony, spacja je¶li nie jest.
+Gwiazdka jeÅ›li plik jest zaznaczony, spacja jeÅ›li nie jest.
 .TP
 .B mtime
 czas ostatniej modyfikacji pliku.
 .TP
 .B atime
-czas ostatniego dostêpu do pliku.
+czas ostatniego dostÄ™pu do pliku.
 .TP
 .B ctime
 czas utworzenia pliku.
 .TP
 .B perm
-tekst reprezentuj±cy aktualne uprawnienia do pliku.
+tekst reprezentujÄ…cy aktualne uprawnienia do pliku.
 .TP
 .B mode
-warto¶æ (cyfrowa) przedstawiaj±ca prawa do pliku.
+wartoÅ›Ä‡ (cyfrowa) przedstawiajÄ…ca prawa do pliku.
 .TP
 .B nlink
-liczba dowi±zañ do pliku.
+liczba dowiÄ…zaÅ„ do pliku.
 .B ngid
 GID (numeryczny).
 .TP
@@ -624,322 +624,322 @@ GID (numeryczny).
 UID (numeryczny).
 .TP
 .B owner
-w³a¶ciciel pliku.
+wÅ‚aÅ›ciciel pliku.
 .TP
 .B group
 grupa pliku.
 .TP
 .B inode
-numer i-wêz³a pliku.
+numer i-wÄ™zÅ‚a pliku.
 .PP
-Mo¿esz równie¿ u¿ywaæ nastêpuj±cych znaków dla zmiany wy¶wietlania:
+MoÅ¼esz rÃ³wnieÅ¼ uÅ¼ywaÄ‡ nastÄ™pujÄ…cych znakÃ³w dla zmiany wyÅ›wietlania:
 .TP
 .B space
-spacja w formacie wy¶wietlania.
+spacja w formacie wyÅ›wietlania.
 .TP
 .B |
-Ten znak jest u¿ywany w celu dodania pionowej linii od formatu wy¶wietlania.
+Ten znak jest uÅ¼ywany w celu dodania pionowej linii od formatu wyÅ›wietlania.
 .PP
-¯eby wymusiæ szeroko¶æ pola, po prostu dodaj ':' a potem ilo¶æ znaków jakie
-chcesz ¿eby mia³o pole. Je¶li numer zaczyna siê od '+', to szeroko¶æ nie mo¿e
-byæ mniejsza od podanej, je¶li program zobaczy, ¿e jest jeszcze trochê
+Å»eby wymusiÄ‡ szerokoÅ›Ä‡ pola, po prostu dodaj ':' a potem iloÅ›Ä‡ znakÃ³w jakie
+chcesz Å¼eby miaÅ‚o pole. JeÅ›li numer zaczyna siÄ™ od '+', to szerokoÅ›Ä‡ nie moÅ¼e
+byÄ‡ mniejsza od podanej, jeÅ›li program zobaczy, Å¼e jest jeszcze trochÄ™
 miejsca na ekranie, rozszerzy to pole.
 .PP
-Na przyk³ad tryb
+Na przykÅ‚ad tryb
 .B Full
-wy¶wietla w formacie:
+wyÅ›wietla w formacie:
 .PP
 half type name | size | mtime
 .PP
 A format
 .B Long
-wy¶wietla w formacie:
+wyÅ›wietla w formacie:
 .PP
 full perm space nlink space owner space group space size space mtime
 space name
 .PP
-A to jest ca³kiem ³adny tryb u¿ytkownika:
+A to jest caÅ‚kiem Å‚adny tryb uÅ¼ytkownika:
 .PP
 half name | size:7 | type mode:3
 .PP
-Panele mog± byæ równie¿ przestawione do nastêpuj±cych trybów:
+Panele mogÄ… byÄ‡ rÃ³wnieÅ¼ przestawione do nastÄ™pujÄ…cych trybÃ³w:
 .TP
 .B Info
-Tryb info wy¶wietla informacjê o aktualnie zaznaczonym pliku i (je¶li
-to mo¿liwe) o systemie plików.
+Tryb info wyÅ›wietla informacjÄ™ o aktualnie zaznaczonym pliku i (jeÅ›li
+to moÅ¼liwe) o systemie plikÃ³w.
 .TP
 .B Tree (drzewo)
-Widok drzewa jest ca³kiem podobny do widoku
+Widok drzewa jest caÅ‚kiem podobny do widoku
 .\"LINK2"
-Drzewa katalogów\&.
+Drzewa katalogÃ³w\&.
 .\"Directory Tree"
-Zobacz tê sekcjê je¶li chcesz siê dowiedzieæ czego¶ na ten temat.
+Zobacz tÄ™ sekcjÄ™ jeÅ›li chcesz siÄ™ dowiedzieÄ‡ czegoÅ› na ten temat.
 .TP
 .B Quick View
-W tym trybie, panele zostan± prze³±czone w tryb zredukowanego podgl±du
-wy¶wietlaj±cego zawarto¶æ aktualnego pliku. Je¶li zaznaczysz panel
-(klawiszem tab lub myszk±), bêdziesz mia³ dostêp do wiêkszo¶ci komend
-podgl±du.
+W tym trybie, panele zostanÄ… przeÅ‚Ä…czone w tryb zredukowanego podglÄ…du
+wyÅ›wietlajÄ…cego zawartoÅ›Ä‡ aktualnego pliku. JeÅ›li zaznaczysz panel
+(klawiszem tab lub myszkÄ…), bÄ™dziesz miaÅ‚ dostÄ™p do wiÄ™kszoÅ›ci komend
+podglÄ…du.
 .\"NODE "    Sort Order..."
-.SH "    Porz±dek sortowania (Sort order...)"
-Istnieje osiem porz±dków sortowania. Przez: nazwê, rozszerzenie,
-datê modyfikacje, datê odczytu, datê zmiany, rozmiar,
-numeru i-wêz³a i niesortowane. Porz±dek sortowanie mo¿esz wybraæ w oknie
-dialogowym porz±dku sortowania. Mo¿liwe jest równie¿ wybranie porz±dku
-wstecznego (od ty³u).
+.SH "    PorzÄ…dek sortowania (Sort order...)"
+Istnieje osiem porzÄ…dkÃ³w sortowania. Przez: nazwÄ™, rozszerzenie,
+datÄ™ modyfikacje, datÄ™ odczytu, datÄ™ zmiany, rozmiar,
+numeru i-wÄ™zÅ‚a i niesortowane. PorzÄ…dek sortowanie moÅ¼esz wybraÄ‡ w oknie
+dialogowym porzÄ…dku sortowania. MoÅ¼liwe jest rÃ³wnieÅ¼ wybranie porzÄ…dku
+wstecznego (od tyÅ‚u).
 .PP
-Standardowo, katalogi s± sortowane przed plikami, ale mo¿e to byæ zmienione
-przez opcjê
+Standardowo, katalogi sÄ… sortowane przed plikami, ale moÅ¼e to byÄ‡ zmienione
+przez opcjÄ™
 .BR "Mix all files (mieszaj wszystkie pliki)" .
 .PP
 .\"NODE "    Filter..."
 .SH "    Filtry (Filter...)"
-Komenda filtra pozwala ci na podanie rozszerzenia, które musi byæ spe³nione,
-¿eby pliki by³y widoczne (na przyk³ad
+Komenda filtra pozwala ci na podanie rozszerzenia, ktÃ³re musi byÄ‡ speÅ‚nione,
+Å¼eby pliki byÅ‚y widoczne (na przykÅ‚ad
 .BR "*.tar.gz" ).
-Niezale¿nie od filtru katalalogi i dowi±zania do katalogów s± zawsze pokazywane.
+NiezaleÅ¼nie od filtru katalalogi i dowiÄ…zania do katalogÃ³w sÄ… zawsze pokazywane.
 .PP
 .\"NODE "    Reread"
-.SH "    Od¶wie¿ (Reread)"
-Komenda od¶wie¿ od¶wie¿a widok wszystkich plików w katalogów. Jest to u¿yteczne
-je¶li inny proces stworzy³ lub usun±³ jaki¶ pliki. Je¶li u¿y³e¶ panelu
-zewnêtrznego, wszystkie informacje zostan± przywrócone do prawdziwego stanu.
+.SH "    OdÅ›wieÅ¼ (Reread)"
+Komenda odÅ›wieÅ¼ odÅ›wieÅ¼a widok wszystkich plikÃ³w w katalogÃ³w. Jest to uÅ¼yteczne
+jeÅ›li inny proces stworzyÅ‚ lub usunÄ…Å‚ jakiÅ› pliki. JeÅ›li uÅ¼yÅ‚eÅ› panelu
+zewnÄ™trznego, wszystkie informacje zostanÄ… przywrÃ³cone do prawdziwego stanu.
 .\"NODE "  File Menu"
-.SH "Menu plików (File menu)"
+.SH "Menu plikÃ³w (File menu)"
 .PP
-Midnight Commander u¿ywa klawiszy F1 - F10 jako skrótów klawiszowych do komend
-wystêpuj±cych w menu plików. Na terminalach bez funkcji klawiszowych (F1 - F10)
-mo¿na u¿ywaæ kombinacji klawisza Escape i numeru ( odpowiednio 1 dla F1,
+Midnight Commander uÅ¼ywa klawiszy F1 - F10 jako skrÃ³tÃ³w klawiszowych do komend
+wystÄ™pujÄ…cych w menu plikÃ³w. Na terminalach bez funkcji klawiszowych (F1 - F10)
+moÅ¼na uÅ¼ywaÄ‡ kombinacji klawisza Escape i numeru ( odpowiednio 1 dla F1,
 2 dla F2 itd. )
 .PP
-Menu plików ma nastêpuj±ce komendy (skróty klawiszowe umieszczone s±
+Menu plikÃ³w ma nastÄ™pujÄ…ce komendy (skrÃ³ty klawiszowe umieszczone sÄ…
 na dole ekranu):
 .PP
 .B Pomoc (F1)
 .PP
-Wywo³uje wbudowan± przegl±darkê plików pomocy. Wewn±trz niej mo¿na u¿ywaæ
-klawisza Tab ¿eby przej¶æ do nastêpnego dowi±zania, Enter
-¿eby przej¶æ do wybranego dowi±zania. Klawisze Spacji i Backspace s± u¿ywane
-do poruszania siê naprzód i wstecz na stronach pomocy. Naci¶nij klawisz
-F1 ¿eby uzyskaæ pe³n± listê dostêpnych klawiszy w pomocy.
+WywoÅ‚uje wbudowanÄ… przeglÄ…darkÄ™ plikÃ³w pomocy. WewnÄ…trz niej moÅ¼na uÅ¼ywaÄ‡
+klawisza Tab Å¼eby przejÅ›Ä‡ do nastÄ™pnego dowiÄ…zania, Enter
+Å¼eby przejÅ›Ä‡ do wybranego dowiÄ…zania. Klawisze Spacji i Backspace sÄ… uÅ¼ywane
+do poruszania siÄ™ naprzÃ³d i wstecz na stronach pomocy. NaciÅ›nij klawisz
+F1 Å¼eby uzyskaÄ‡ peÅ‚nÄ… listÄ™ dostÄ™pnych klawiszy w pomocy.
 .PP
 .B Menu (F2)
 .PP
-Wywo³uje menu u¿ytkownika. Menu u¿ytkownika jest ³atwym w u¿yciu narzêdziem
-s³u¿±cym do obs³ugi zewnêtrznych programów i dodatkowych opcji Midnight
+WywoÅ‚uje menu uÅ¼ytkownika. Menu uÅ¼ytkownika jest Å‚atwym w uÅ¼yciu narzÄ™dziem
+sÅ‚uÅ¼Ä…cym do obsÅ‚ugi zewnÄ™trznych programÃ³w i dodatkowych opcji Midnight
 Commandera.
 .PP
-.B Podgl±d (F3, Shift-F3)
+.B PodglÄ…d (F3, Shift-F3)
 .PP
-W³±cza podgl±d aktualnie wybranego pliku. Standardowowo wywo³ywany jest
-wbudowany podgl±d plików, ale je¶li opcja "Use internal view" jest wy³±czona,
-wywo³ywany jest zewnêtrzny program do pogl±du, wskazywany przez zmienn±
+WÅ‚Ä…cza podglÄ…d aktualnie wybranego pliku. Standardowowo wywoÅ‚ywany jest
+wbudowany podglÄ…d plikÃ³w, ale jeÅ›li opcja "Use internal view" jest wyÅ‚Ä…czona,
+wywoÅ‚ywany jest zewnÄ™trzny program do poglÄ…du, wskazywany przez zmiennÄ…
 .BR PAGER .
-Je¶li jednak zmienna
+JeÅ›li jednak zmienna
 .B PAGER
-nie zosta³a jeszcze zdefiniowana, wywo³ywana jest komenda "view". Je¶li u¿yjesz
+nie zostaÅ‚a jeszcze zdefiniowana, wywoÅ‚ywana jest komenda "view". JeÅ›li uÅ¼yjesz
 kombinacji klawiszy
 .BR Shift-F3 ,
-pogl±d zostanie wywo³any bez jakiegokolwiek
+poglÄ…d zostanie wywoÅ‚any bez jakiegokolwiek
 formatownia pliku.
 .PP
-.B Filtrowany podgl±d (M-!)
+.B Filtrowany podglÄ…d (M-!)
 .PP
-Ta kombinacja klawiszy oczekuje na komendê i jej argument (argumentem standardowo
-jest wybrany aktualnie plik), ca³e wyj¶cie programu przekierowywane jest do pliku,
-który zostaje automatycznie wy¶wietlony na ekranie w trybie podgl±du.
+Ta kombinacja klawiszy oczekuje na komendÄ™ i jej argument (argumentem standardowo
+jest wybrany aktualnie plik), caÅ‚e wyjÅ›cie programu przekierowywane jest do pliku,
+ktÃ³ry zostaje automatycznie wyÅ›wietlony na ekranie w trybie podglÄ…du.
 .PP
 .B Edycja (F4)
 .PP
-Aktualnie ta komenda wywo³uje edytor
+Aktualnie ta komenda wywoÅ‚uje edytor
 .BR vi (1)
-lub edytor wybrany w zmiennej ¶rodowiskowej, lub wbudowany wewnêtrzny edytor
-plików je¶li opcja use_internal_edit jest w³±czona.
+lub edytor wybrany w zmiennej Å›rodowiskowej, lub wbudowany wewnÄ™trzny edytor
+plikÃ³w jeÅ›li opcja use_internal_edit jest wÅ‚Ä…czona.
 .PP
 .B Kopiuj (F5)
 .PP
-W³±cza okno dialogowe, w którym standardowo znajduje siê ¶cie¿ka do
+WÅ‚Ä…cza okno dialogowe, w ktÃ³rym standardowo znajduje siÄ™ Å›cieÅ¼ka do
 katalogu w
 nieaktywnym panelu, po czym kopiuje aktualny plik (lub wybrane
-je¶li wybrano jakiekolwiek) do katalogu, który wybrali¶my w oknie dialogowym.
-Podczas procesu kopiowania mo¿esz go w ka¿dej chwili przerwaæ wciskaj±c C-c lub
-Esc. ¯eby dowiedzieæ siê czego¶ wiêcej na temat jokerów w ¶cie¿ce ¼ród³owej
-(którymi najczê¶ciej bêd± * lub ^\\(.*\\)$) i innych mo¿liwych okre¶leñ w
-katalogu docelowym zobacz kategoriê
+jeÅ›li wybrano jakiekolwiek) do katalogu, ktÃ³ry wybraliÅ›my w oknie dialogowym.
+Podczas procesu kopiowania moÅ¼esz go w kaÅ¼dej chwili przerwaÄ‡ wciskajÄ…c C-c lub
+Esc. Å»eby dowiedzieÄ‡ siÄ™ czegoÅ› wiÄ™cej na temat jokerÃ³w w Å›cieÅ¼ce ÅºrÃ³dÅ‚owej
+(ktÃ³rymi najczÄ™Å›ciej bÄ™dÄ… * lub ^\\(.*\\)$) i innych moÅ¼liwych okreÅ›leÅ„ w
+katalogu docelowym zobacz kategoriÄ™
 .B "Maski kopiowania/przenoszenia"
 .PP
-Na niektórych systemach mo¿liwe jest kopiowanie w tle, robi siê to klikaj±c
-na przycisk backgorund (lub naciskaj±c kombinacjê M-b w oknie dialogowym).
-Background Jobs jest u¿ywane do kontrolowania prac w tle.
+Na niektÃ³rych systemach moÅ¼liwe jest kopiowanie w tle, robi siÄ™ to klikajÄ…c
+na przycisk backgorund (lub naciskajÄ…c kombinacjÄ™ M-b w oknie dialogowym).
+Background Jobs jest uÅ¼ywane do kontrolowania prac w tle.
 .PP
 .B Link (C-x l)
 .PP
-Tworzy sztywne dowi±zanie do aktualnego pliku.
+Tworzy sztywne dowiÄ…zanie do aktualnego pliku.
 .PP
 .B SymLink (C-x s)
 .PP
-Tworzy symboliczne dowi±zanie do aktualnego pliku. Dla tych, którzy nie wiedz±
-co to jest dowi±zanie: tworzenie dowi±zania do pliku jest tak jak kopiowanie
+Tworzy symboliczne dowiÄ…zanie do aktualnego pliku. Dla tych, ktÃ³rzy nie wiedzÄ…
+co to jest dowiÄ…zanie: tworzenie dowiÄ…zania do pliku jest tak jak kopiowanie
 pliku, z tym tylko,
-¿e zarówno plik ¼ród³owy i docelowy reprezentuj± ten sam plik. Na przyk³ad,
-je¶li edytujesz jeden z tych plików, zmiany, które czynisz pojawiaj± siê w obu
-plikach. Niektórzy mówi± na dowi±zania aliasy lub skróty.
+Å¼e zarÃ³wno plik ÅºrÃ³dÅ‚owy i docelowy reprezentujÄ… ten sam plik. Na przykÅ‚ad,
+jeÅ›li edytujesz jeden z tych plikÃ³w, zmiany, ktÃ³re czynisz pojawiajÄ… siÄ™ w obu
+plikach. NiektÃ³rzy mÃ³wiÄ… na dowiÄ…zania aliasy lub skrÃ³ty.
 .PP
-Twarde dowi±zanie wydaje siê byæ prawdziwym plikiem. Po stworzeniu go
-nie ma mo¿liwo¶ci
-rozró¿nienia, który z plików jest oryginalny, a który jest dowi±zaniem.
+Twarde dowiÄ…zanie wydaje siÄ™ byÄ‡ prawdziwym plikiem. Po stworzeniu go
+nie ma moÅ¼liwoÅ›ci
+rozrÃ³Å¼nienia, ktÃ³ry z plikÃ³w jest oryginalny, a ktÃ³ry jest dowiÄ…zaniem.
 Jest bardzo
-ciê¿ko zauwa¿yæ, ¿e wskazuj± one na ten sam plik.
-U¿ywaj dowi±zañ twardych wtedy kiedy nie chcesz tego wiedzieæ.
+ciÄ™Å¼ko zauwaÅ¼yÄ‡, Å¼e wskazujÄ… one na ten sam plik.
+UÅ¼ywaj dowiÄ…zaÅ„ twardych wtedy kiedy nie chcesz tego wiedzieÄ‡.
 .PP
-Dowi±zanie symboliczne jest tylko odwo³aniem do oryginalnego pliku.
-Je¶li ten plik
-zostanie wyrzucony, dowi±zanie stanie siê bezu¿yteczne. Jest ca³kiem ³atwo
-zauwa¿yæ,
-¿e pliki odnosz± siê w gruncie rzeczy do tego samego. Midnight Commander
-pokazuje znak "@" przed nazw± pliku je¶li jest dowi±zaniem
+DowiÄ…zanie symboliczne jest tylko odwoÅ‚aniem do oryginalnego pliku.
+JeÅ›li ten plik
+zostanie wyrzucony, dowiÄ…zanie stanie siÄ™ bezuÅ¼yteczne. Jest caÅ‚kiem Å‚atwo
+zauwaÅ¼yÄ‡,
+Å¼e pliki odnoszÄ… siÄ™ w gruncie rzeczy do tego samego. Midnight Commander
+pokazuje znak "@" przed nazwÄ… pliku jeÅ›li jest dowiÄ…zaniem
 symbolicznym do innych
-(poza katalogami, przed którymi pokazuje tyldê (~)). Oryginalny plik wskazywany
-przez dowi±zanie jest pokazywany w linii mini-statusu, je¶li opcja
+(poza katalogami, przed ktÃ³rymi pokazuje tyldÄ™ (~)). Oryginalny plik wskazywany
+przez dowiÄ…zanie jest pokazywany w linii mini-statusu, jeÅ›li opcja
 .I "Show mini-status"
-jest w³±czona. U¿ywaj dowi±zañ symbolicznych, je¶li chcesz unik±æ problemów z
-rozpoznawaniem twardych dowi±zañ.
+jest wÅ‚Ä…czona. UÅ¼ywaj dowiÄ…zaÅ„ symbolicznych, jeÅ›li chcesz unikÄ…Ä‡ problemÃ³w z
+rozpoznawaniem twardych dowiÄ…zaÅ„.
 .PP
 .B Zmiana nazwy/przeniesienie (F6)
 .PP
-W³±cza okno dialogowe, gdzie standardowo wpisana jest nazwa katalogu w
-nieaktywnym panelu, i przenosi aktualnie wybrany plik (lub zaznaczone je¶li
-choæ jeden jest zaznaczony) do katalogu wpisanego w oknie dialogowym. Podczas
-procesu przenoszenia mo¿esz u¿yæ kombinacji klawiszy C-c lub ESC, ¿eby przerwaæ
-operacjê. Po wiêcej szczegó³ów zobacz operacjê
+WÅ‚Ä…cza okno dialogowe, gdzie standardowo wpisana jest nazwa katalogu w
+nieaktywnym panelu, i przenosi aktualnie wybrany plik (lub zaznaczone jeÅ›li
+choÄ‡ jeden jest zaznaczony) do katalogu wpisanego w oknie dialogowym. Podczas
+procesu przenoszenia moÅ¼esz uÅ¼yÄ‡ kombinacji klawiszy C-c lub ESC, Å¼eby przerwaÄ‡
+operacjÄ™. Po wiÄ™cej szczegÃ³Å‚Ã³w zobacz operacjÄ™
 .B Kopiuj
-opisan± powy¿ej. Wiêkszo¶æ rzeczy jest ca³kiem podobna.
+opisanÄ… powyÅ¼ej. WiÄ™kszoÅ›Ä‡ rzeczy jest caÅ‚kiem podobna.
 .PP
-Na niektórych systemach mo¿liwe jest przenoszenie w tle, robi siê to klikaj±c
-na przycisk background (lub naciskaj±c kombinacjê M-b w oknie dialogowym).
-Background Jobs jest u¿ywane do kontrolowania prac w tle.
+Na niektÃ³rych systemach moÅ¼liwe jest przenoszenie w tle, robi siÄ™ to klikajÄ…c
+na przycisk background (lub naciskajÄ…c kombinacjÄ™ M-b w oknie dialogowym).
+Background Jobs jest uÅ¼ywane do kontrolowania prac w tle.
 .PP
-.B "Utwórz katalog (F7)"
+.B "UtwÃ³rz katalog (F7)"
 .PP
-W³±cza menu dialogowe i zak³ada katalog o podanej nazwie
+WÅ‚Ä…cza menu dialogowe i zakÅ‚ada katalog o podanej nazwie
 .PP
 .B Kasuj (F8)
 .PP
 Kasuje aktualnie wybrany lub zaznaczone pliki w aktywnym panelu. Podczas
-procesu mo¿esz nacisn±æ C-C lub Esc ¿eby przerwaæ operacjê. [skasowane pliki
-nie bêd± jednak odzyskane - przyp. t³umacza].
+procesu moÅ¼esz nacisnÄ…Ä‡ C-C lub Esc Å¼eby przerwaÄ‡ operacjÄ™. [skasowane pliki
+nie bÄ™dÄ… jednak odzyskane - przyp. tÅ‚umacza].
 .PP
-.B Zaznacz grupê (+)
+.B Zaznacz grupÄ™ (+)
 .PP
-U¿ywane do zaznaczania grupy plików. Midnight Commander bêdzie ¿±da³ tekstu
-opisuj±cego grupê plików. Je¶li opcja
+UÅ¼ywane do zaznaczania grupy plikÃ³w. Midnight Commander bÄ™dzie Å¼Ä…daÅ‚ tekstu
+opisujÄ…cego grupÄ™ plikÃ³w. JeÅ›li opcja
 .I Shell Patterns
-jest w³±czona, tekst bêdzie traktowany jako globalny dla interpretatora (*
-oznacza zero lub wiêcej znaków a ? oznacza jeden znak). Je¶li opcja
+jest wÅ‚Ä…czona, tekst bÄ™dzie traktowany jako globalny dla interpretatora (*
+oznacza zero lub wiÄ™cej znakÃ³w a ? oznacza jeden znak). JeÅ›li opcja
 .I Shell Patterns
-jest wy³±czona, wtedy zaznaczanie plików jest robione z zastosowaniem norm
-zewnêtrznych (zobacz ed (1)).
+jest wyÅ‚Ä…czona, wtedy zaznaczanie plikÃ³w jest robione z zastosowaniem norm
+zewnÄ™trznych (zobacz ed (1)).
 .PP
-¯eby zaznaczyæ katalogi zamiast plików, tekst musi zaczynaæ sie od znaku '/'.
+Å»eby zaznaczyÄ‡ katalogi zamiast plikÃ³w, tekst musi zaczynaÄ‡ sie od znaku '/'.
 .PP
-.B Odznacz grupê (\\\\)
+.B Odznacz grupÄ™ (\\\\)
 .PP
-U¿ywane do odznaczania grupy plików. Jest przeciwieñstwem komendy
+UÅ¼ywane do odznaczania grupy plikÃ³w. Jest przeciwieÅ„stwem komendy
 .IR "Zaznacz pliki" .
 .PP
-.B Wyjd¼ (F10, Shift-F10)
+.B WyjdÅº (F10, Shift-F10)
 .PP
-Zamyka Midnight Commandera. Shift-F10 jest u¿ywany je¶li u¿ywasz
-"wrappera" pow³oki. Shift-F10 nie przeniesie ciê do katalogu, w którym
-by³e¶ ostatnio w Midnight Commanderze, zamiast tego przejdzie do katalogu,
-z którego uruchomi³e¶ program.
+Zamyka Midnight Commandera. Shift-F10 jest uÅ¼ywany jeÅ›li uÅ¼ywasz
+"wrappera" powÅ‚oki. Shift-F10 nie przeniesie ciÄ™ do katalogu, w ktÃ³rym
+byÅ‚eÅ› ostatnio w Midnight Commanderze, zamiast tego przejdzie do katalogu,
+z ktÃ³rego uruchomiÅ‚eÅ› program.
 .PP
 .\"NODE "    Quick cd"
-.SH "    Szybka zmiana katalogów (Quick cd) M-c"
-Ta komenda jest bardzo u¿yteczna, je¶li masz ju¿ pe³n± liniê poleceñ, a
-chcesz przej¶æ do innego katalogu. Uruchamia ona ma³e okno dialogowe,
-w którym podajesz to co po normalnej komendzie
+.SH "    Szybka zmiana katalogÃ³w (Quick cd) M-c"
+Ta komenda jest bardzo uÅ¼yteczna, jeÅ›li masz juÅ¼ peÅ‚nÄ… liniÄ™ poleceÅ„, a
+chcesz przejÅ›Ä‡ do innego katalogu. Uruchamia ona maÅ‚e okno dialogowe,
+w ktÃ³rym podajesz to co po normalnej komendzie
 .B cd
-po czym naciskasz Enter. Wszystkie opcje s± dok³adnie takie same jak we
+po czym naciskasz Enter. Wszystkie opcje sÄ… dokÅ‚adnie takie same jak we
 wbudowanej komendzie cd.
 .PP
 .\"NODE "  Command Menu"
 .SH "  Menu komend (Command Menu)"
-Komenda drzewo katalogów (Directory tree) pokazuje drzewo katalogów.
+Komenda drzewo katalogÃ³w (Directory tree) pokazuje drzewo katalogÃ³w.
 .PP
-Komenda "Find file" szuka pliku spe³niaj±cego podane warunki, natomiast komenda
-"Swap panels" zamienia zawarto¶ci obu paneli.
+Komenda "Find file" szuka pliku speÅ‚niajÄ…cego podane warunki, natomiast komenda
+"Swap panels" zamienia zawartoÅ›ci obu paneli.
 .PP
-Komenda "Panels on/off" pokazuje wyj¶cie ostatniej komendy interpetatora
-poleceñ. Dzia³a ona tylko na terminalach typu Linux lub FreeBSD.
+Komenda "Panels on/off" pokazuje wyjÅ›cie ostatniej komendy interpetatora
+poleceÅ„. DziaÅ‚a ona tylko na terminalach typu Linux lub FreeBSD.
 .PP
-Komenda porównywania katalogów (Compare directories) (C-x d) porównuje
-zawarto¶ci panelu katalogowego z drugim. Mo¿esz potem u¿yc Kopiuj (F5)
-¿eby stworzyæ dwa dok³adnie identyczne panele. Metoda "quick" porównuje
-tylko i wy³±cznie rozmiary plików i ich daty. Metoda "thorough" porównuje
-pliki bajt po bajcie. Ta metoda dzia³a tylko wtedy kiedy komputer obs³uguje
-wywo³anie mmap(2). Metoda "size-only" zwraca uwagê tylko na rozmiar plików.
-Nie ma dla niej ¿adnego znaczenia czy plik ma inn± datê lub zawarto¶æ, liczy
-siê tylko rozmiar.
+Komenda porÃ³wnywania katalogÃ³w (Compare directories) (C-x d) porÃ³wnuje
+zawartoÅ›ci panelu katalogowego z drugim. MoÅ¼esz potem uÅ¼yc Kopiuj (F5)
+Å¼eby stworzyÄ‡ dwa dokÅ‚adnie identyczne panele. Metoda "quick" porÃ³wnuje
+tylko i wyÅ‚Ä…cznie rozmiary plikÃ³w i ich daty. Metoda "thorough" porÃ³wnuje
+pliki bajt po bajcie. Ta metoda dziaÅ‚a tylko wtedy kiedy komputer obsÅ‚uguje
+wywoÅ‚anie mmap(2). Metoda "size-only" zwraca uwagÄ™ tylko na rozmiar plikÃ³w.
+Nie ma dla niej Å¼adnego znaczenia czy plik ma innÄ… datÄ™ lub zawartoÅ›Ä‡, liczy
+siÄ™ tylko rozmiar.
 .PP
-Komenda historii komend (Command history) pokazuje listê wpisanych komend.
-Ta, któr± wybierzesz, jest kopiowana do linii poleceñ. Do historii komend
-mo¿na mieæ dostêp równie¿ przy u¿yciu kombinacji M-p lub M-n.
+Komenda historii komend (Command history) pokazuje listÄ™ wpisanych komend.
+Ta, ktÃ³rÄ… wybierzesz, jest kopiowana do linii poleceÅ„. Do historii komend
+moÅ¼na mieÄ‡ dostÄ™p rÃ³wnieÅ¼ przy uÅ¼yciu kombinacji M-p lub M-n.
 .PP
-Komenda hotlisty katalogów (Directory hotlist) (C-\\) pozwala na zmienianie
-katalogów do tych najczê¶ciej u¿ywanych du¿o szybciej.
+Komenda hotlisty katalogÃ³w (Directory hotlist) (C-\\) pozwala na zmienianie
+katalogÃ³w do tych najczÄ™Å›ciej uÅ¼ywanych duÅ¼o szybciej.
 .PP
-Komenda panelu zewnêtrznego (External panelize) pozwala na wykonywania programów
-zewnêtrznych i ustawienia zawarto¶ci paneli na to co zwróci³a wywo³ana
+Komenda panelu zewnÄ™trznego (External panelize) pozwala na wykonywania programÃ³w
+zewnÄ™trznych i ustawienia zawartoÅ›ci paneli na to co zwrÃ³ciÅ‚a wywoÅ‚ana
 komenda.
 .PP
-Komenda edycji rozszerzeñ plików (Extension file edit) pozwala na w³asny wybór
-programów, które maj± byæ u¿ywane do wykonywania plików z podanymi
-rozszerzeniami. Komenda edycji pliku menu (Menu file edit) mo¿e byæ u¿ywana do
-edytowania menu u¿ytkownika (tego, które pojawia siê po naci¶niêciu kombinacji
+Komenda edycji rozszerzeÅ„ plikÃ³w (Extension file edit) pozwala na wÅ‚asny wybÃ³r
+programÃ³w, ktÃ³re majÄ… byÄ‡ uÅ¼ywane do wykonywania plikÃ³w z podanymi
+rozszerzeniami. Komenda edycji pliku menu (Menu file edit) moÅ¼e byÄ‡ uÅ¼ywana do
+edytowania menu uÅ¼ytkownika (tego, ktÃ³re pojawia siÄ™ po naciÅ›niÄ™ciu kombinacji
 F2).
 .PP
 .\"NODE "    Directory Tree"
-.SH "    Drzewo katalogów (Directory Tree)"
-Mo¿esz wybieraæ katalogi z drzewa katalogów i Midnight Commander przejdzie do
+.SH "    Drzewo katalogÃ³w (Directory Tree)"
+MoÅ¼esz wybieraÄ‡ katalogi z drzewa katalogÃ³w i Midnight Commander przejdzie do
 wybranego przez Ciebie katalogu.
 .PP
-S± dwa sposoby wywo³ywania drzewa. Prawdziwa komenda drzewa katalogów jest
-dostêpna z menu komend. Inn± metod± jest wybranie drzewa z menu "lewego" b±d¼
+SÄ… dwa sposoby wywoÅ‚ywania drzewa. Prawdziwa komenda drzewa katalogÃ³w jest
+dostÄ™pna z menu komend. InnÄ… metodÄ… jest wybranie drzewa z menu "lewego" bÄ…dÅº
 "prawego".
 .PP
-¯eby nie mieæ zbyt du¿ych opó¼nieñ Midnight Commander skanuje tylko ma³±
-ilo¶æ katalogów (tê potrzebn± w danej chwili). Je¶li jakiego¶ katalogu nie
-widaæ przejd¼ do jego katalogu nadrzêdnego i naci¶nij C-r (lub F2).
+Å»eby nie mieÄ‡ zbyt duÅ¼ych opÃ³ÅºnieÅ„ Midnight Commander skanuje tylko maÅ‚Ä…
+iloÅ›Ä‡ katalogÃ³w (tÄ™ potrzebnÄ… w danej chwili). JeÅ›li jakiegoÅ› katalogu nie
+widaÄ‡ przejdÅº do jego katalogu nadrzÄ™dnego i naciÅ›nij C-r (lub F2).
 .PP
-Mo¿esz u¿ywaæ nastêpuj±cych klawiszy:
+MoÅ¼esz uÅ¼ywaÄ‡ nastÄ™pujÄ…cych klawiszy:
 .PP
-Generalne klawisze ruchu s± akceptowane.
+Generalne klawisze ruchu sÄ… akceptowane.
 .PP
 .BR Enter .
-W drzewie katalogów, wychodzi z trybu drzewa i przechodzi znów do trybu
-zwyk³ego panelu. W podgl±dzie drzewa zmienia katalog w drugim panelu i zostaje
-w trybie podgl±du drzewa w panelu aktywnym.
+W drzewie katalogÃ³w, wychodzi z trybu drzewa i przechodzi znÃ³w do trybu
+zwykÅ‚ego panelu. W podglÄ…dzie drzewa zmienia katalog w drugim panelu i zostaje
+w trybie podglÄ…du drzewa w panelu aktywnym.
 .PP
 .BR C-r ", " F2 " (Rescan)."
-Od¶wie¿a aktualny katalog. U¿ywane je¶li drzewo nie jest ju¿ aktualne. Nie
-pokazuje katalogów, które ju¿ istniej± lub pokazuje te, których ju¿ nie ma.
+OdÅ›wieÅ¼a aktualny katalog. UÅ¼ywane jeÅ›li drzewo nie jest juÅ¼ aktualne. Nie
+pokazuje katalogÃ³w, ktÃ³re juÅ¼ istniejÄ… lub pokazuje te, ktÃ³rych juÅ¼ nie ma.
 .PP
 .BR F3 " (Forget)."
-Usuwa aktualny katalog z drzewa katalogów. U¿ywaj tego je¶li chcesz usun±æ
-"¶miec±ce" i niepotrzebne katalogi z wy¶wietlania. ¯eby by³y one znów
-widoczne wystarczy nacisn±æ F2.
+Usuwa aktualny katalog z drzewa katalogÃ³w. UÅ¼ywaj tego jeÅ›li chcesz usunÄ…Ä‡
+"Å›miecÄ…ce" i niepotrzebne katalogi z wyÅ›wietlania. Å»eby byÅ‚y one znÃ³w
+widoczne wystarczy nacisnÄ…Ä‡ F2.
 .PP
 .BR F4 " (Static/Dynamic)."
-Prze³±cza pomiêdzy dynamicznym (standardowo) i statycznym trybem nawigacji.
+PrzeÅ‚Ä…cza pomiÄ™dzy dynamicznym (standardowo) i statycznym trybem nawigacji.
 .PP
-W trybie statycznym mo¿esz u¿ywaæ strza³ek do do³u i do góry do wybierania
-katalogu. Wszystkie zwiedzone katalogi s± widoczne.
+W trybie statycznym moÅ¼esz uÅ¼ywaÄ‡ strzaÅ‚ek do doÅ‚u i do gÃ³ry do wybierania
+katalogu. Wszystkie zwiedzone katalogi sÄ… widoczne.
 .PP
-W trybie dynamicznym mo¿esz u¿ywaæ strza³ek w celu wybrania równorzêdnego
-katalogu, strza³ki w lewo ¿eby dostaæ siê do katalogu domowego, strza³ki
-w prawo w celu dostania siê do katalogu podrzêdnego. Widoczne jest tylko
-najbardziej aktualne drzewo katalogów. Drzewo zmienia siê wiêc dynamicznie
+W trybie dynamicznym moÅ¼esz uÅ¼ywaÄ‡ strzaÅ‚ek w celu wybrania rÃ³wnorzÄ™dnego
+katalogu, strzaÅ‚ki w lewo Å¼eby dostaÄ‡ siÄ™ do katalogu domowego, strzaÅ‚ki
+w prawo w celu dostania siÄ™ do katalogu podrzÄ™dnego. Widoczne jest tylko
+najbardziej aktualne drzewo katalogÃ³w. Drzewo zmienia siÄ™ wiÄ™c dynamicznie
 podczas twojego przemieszczania.
 .PP
 .B F5
@@ -952,240 +952,240 @@ Przenosi katalog.
 .PP
 .B F7
 (Mkdir).
-Tworzy nowy katalog poni¿ej aktualnego.
+Tworzy nowy katalog poniÅ¼ej aktualnego.
 .PP
 .B F8
 (Delete).
-Kasuje katalog z systemu plików.
+Kasuje katalog z systemu plikÃ³w.
 .PP
 .BR C-s ", " M-s .
-Szuka natêpnego katalogu spe³niaj±cego podane warunki szukania. Je¶li taki
-nie istnieje te klawisze spowoduj± przemieszczenie siê o jedn± liniê w dó³.
+Szuka natÄ™pnego katalogu speÅ‚niajÄ…cego podane warunki szukania. JeÅ›li taki
+nie istnieje te klawisze spowodujÄ… przemieszczenie siÄ™ o jednÄ… liniÄ™ w dÃ³Å‚.
 .PP
 .BR C-h ", " Backspace .
-Kasuje ostatni znak w ci±gu znaków do poszukiwania.
+Kasuje ostatni znak w ciÄ…gu znakÃ³w do poszukiwania.
 .PP
 .BR "Jakikolwiek inny klawisz" .
-Dodaje klawisz do ci±gu znaków do szukania i przenosi do najbli¿szego
-katalogu, którego nazwa zaczyna siê od tych znaków. W podgl±dzie drzewa musisz
-najpierw uaktywniæ szukanie naciskaj±c C-s. Ci±g szukaj±cy jest pokazywany
+Dodaje klawisz do ciÄ…gu znakÃ³w do szukania i przenosi do najbliÅ¼szego
+katalogu, ktÃ³rego nazwa zaczyna siÄ™ od tych znakÃ³w. W podglÄ…dzie drzewa musisz
+najpierw uaktywniÄ‡ szukanie naciskajÄ…c C-s. CiÄ…g szukajÄ…cy jest pokazywany
 w linii mini-statusu.
 .PP
-Nastêpuj±ce klawisze s± dostêpne tylko w drzewie katalogów. Nie dzia³aj± one
-w pogl±dzie katalogów.
+NastÄ™pujÄ…ce klawisze sÄ… dostÄ™pne tylko w drzewie katalogÃ³w. Nie dziaÅ‚ajÄ… one
+w poglÄ…dzie katalogÃ³w.
 .PP
 .B F1
 (Help).
-Wywo³uje podgl±d pomocy i pokazuje tê sekcjê.
+WywoÅ‚uje podglÄ…d pomocy i pokazuje tÄ™ sekcjÄ™.
 .PP
 .BR Esc ", " F10 .
-Wychodzi z drzewa. Nie zmienia katalogów.
+Wychodzi z drzewa. Nie zmienia katalogÃ³w.
 .PP
-Mysz jest obs³ugiwana. Podwójne klikniêcie ma znaczenie identyczne do
-klawisza Enter. Zobacz równie¿ sekcjê
-.IR "Obs³uga myszy" .
+Mysz jest obsÅ‚ugiwana. PodwÃ³jne klikniÄ™cie ma znaczenie identyczne do
+klawisza Enter. Zobacz rÃ³wnieÅ¼ sekcjÄ™
+.IR "ObsÅ‚uga myszy" .
 .PP
 .\"NODE "    Find File"
-.SH "    Znajd¼ plik (Find File)"
-Komenda znajd¼ plik najpierw pyta siê o startowy katalog do przeszukiwania
-i o nazwê pliku, który ma byæ znaleziony. Wciskaj±c przycisk "Tree" (drzewo)
-mo¿esz wybraæ katalog startowy z drzewa katalogów.
+.SH "    ZnajdÅº plik (Find File)"
+Komenda znajdÅº plik najpierw pyta siÄ™ o startowy katalog do przeszukiwania
+i o nazwÄ™ pliku, ktÃ³ry ma byÄ‡ znaleziony. WciskajÄ…c przycisk "Tree" (drzewo)
+moÅ¼esz wybraÄ‡ katalog startowy z drzewa katalogÃ³w.
 .PP
-Pole trzecie akceptuje wszystkie wyra¿enia podobne do tych w egrep(1).
-Oznacza to, ¿e musisz rozpoczynaæ znaki o specjalnym znaczeniu kombinacj±
-"\\" np. szukaj±c "strcmp (" bêdziesz musia³ wpisaæ "strcmp \\(" (bez
-cudzys³owów oczywi¶cie).
+Pole trzecie akceptuje wszystkie wyraÅ¼enia podobne do tych w egrep(1).
+Oznacza to, Å¼e musisz rozpoczynaÄ‡ znaki o specjalnym znaczeniu kombinacjÄ…
+"\\" np. szukajÄ…c "strcmp (" bÄ™dziesz musiaÅ‚ wpisaÄ‡ "strcmp \\(" (bez
+cudzysÅ‚owÃ³w oczywiÅ›cie).
 .PP
-Mo¿esz zacz±æ przeszukiwanie naciskaj±c przycisk Ok. Podczas szukania mo¿esz
-zatrzymaæ proces przy u¿yciu przycisku Stop i kontynuowaæ po naci¶niêciu
+MoÅ¼esz zaczÄ…Ä‡ przeszukiwanie naciskajÄ…c przycisk Ok. Podczas szukania moÅ¼esz
+zatrzymaÄ‡ proces przy uÅ¼yciu przycisku Stop i kontynuowaÄ‡ po naciÅ›niÄ™ciu
 Startu.
 .PP
-Mo¿esz przegl±daæ liste znalezionych plików za pomoc± strza³ek do do³u
-i do góry. Komenda Chdir przejdzie do katalogu aktualnie wybranego. Przycisk
-Again zapyta siê o nowe parametry do szukania (rozpocznie proces od nowa).
-Przycisk Quit koñczy przeszukiwanie. Przycisk Panelize umie¶ci znalezione
-pliki w aktywnym panelu katalogowym tak, ¿e bêdziesz móg³ wykonywaæ na nich
-standardowe czynno¶ci (podgl±d, kopiowanie, przenoszenie, kasowanie itp.).
-Po spanelizowaniu wystarczy naci¶n±æ C-r ¿eby powróciæ do normalnego trybu.
+MoÅ¼esz przeglÄ…daÄ‡ liste znalezionych plikÃ³w za pomocÄ… strzaÅ‚ek do doÅ‚u
+i do gÃ³ry. Komenda Chdir przejdzie do katalogu aktualnie wybranego. Przycisk
+Again zapyta siÄ™ o nowe parametry do szukania (rozpocznie proces od nowa).
+Przycisk Quit koÅ„czy przeszukiwanie. Przycisk Panelize umieÅ›ci znalezione
+pliki w aktywnym panelu katalogowym tak, Å¼e bÄ™dziesz mÃ³gÅ‚ wykonywaÄ‡ na nich
+standardowe czynnoÅ›ci (podglÄ…d, kopiowanie, przenoszenie, kasowanie itp.).
+Po spanelizowaniu wystarczy naciÅ›nÄ…Ä‡ C-r Å¼eby powrÃ³ciÄ‡ do normalnego trybu.
 .PP
-Mo¿liwe jest posiadanie listy katalogów, których szukanie plików nie
-powinno uwzglêdniaæ (na przyk³ad mo¿esz chcieæ omin±æ przeszukiwanie CDROMu
-i innych podmontowanych systemów plików).
+MoÅ¼liwe jest posiadanie listy katalogÃ³w, ktÃ³rych szukanie plikÃ³w nie
+powinno uwzglÄ™dniaÄ‡ (na przykÅ‚ad moÅ¼esz chcieÄ‡ ominÄ…Ä‡ przeszukiwanie CDROMu
+i innych podmontowanych systemÃ³w plikÃ³w).
 .PP
-Katalogi do omijania powinny byæ umieszczone w zmiennej
+Katalogi do omijania powinny byÄ‡ umieszczone w zmiennej
 .B find_ignore_dirs
 w sekcji
 .B Misc
 twojego pliku ~/.mc/ini.
 .PP
-Sk³adowe katalogów powinny byæ oddzielone od siebie przez ¶redniki, to jest
-przyk³ad:
+SkÅ‚adowe katalogÃ³w powinny byÄ‡ oddzielone od siebie przez Å›redniki, to jest
+przykÅ‚ad:
 .PP
 .nf
 [Misc]
 find_ignore_dirs=/cdrom:/nfs/wuarchive:/afs
 .fi
 .PP
-Mo¿esz woleæ u¿ywaæ panelu zewnêtrznego do wykonywania niektórych operacji.
-Szukanie pliku jest dobre tylko dla prostych zapytañ. U¿ywaj±c panelu
-zewnêtrznego mo¿esz dokonywaæ tak skomplikowanych wyszukiwañ jak tylko
+MoÅ¼esz woleÄ‡ uÅ¼ywaÄ‡ panelu zewnÄ™trznego do wykonywania niektÃ³rych operacji.
+Szukanie pliku jest dobre tylko dla prostych zapytaÅ„. UÅ¼ywajÄ…c panelu
+zewnÄ™trznego moÅ¼esz dokonywaÄ‡ tak skomplikowanych wyszukiwaÅ„ jak tylko
 pragniesz.
 .PP
 .\"NODE "    External panelize"
-.SH "    Panel zewnêtrzny"
-Panel zewnêtrzny pozwala ci na wykonywanie zewnêtrznych programów i
-ogl±danie ich wyj¶cia jako zawarto¶ci aktywnego panelu.
+.SH "    Panel zewnÄ™trzny"
+Panel zewnÄ™trzny pozwala ci na wykonywanie zewnÄ™trznych programÃ³w i
+oglÄ…danie ich wyjÅ›cia jako zawartoÅ›ci aktywnego panelu.
 .PP
-Na przyk³ad, je¶li chcesz aby w aktywnym panelu wy¶wietlone zosta³y
-wszystkie dowi±zania w aktywnym katalogu, mo¿esz u¿yæ panelu zewnêtrznego
-i nastêpuj±cej komendy:
+Na przykÅ‚ad, jeÅ›li chcesz aby w aktywnym panelu wyÅ›wietlone zostaÅ‚y
+wszystkie dowiÄ…zania w aktywnym katalogu, moÅ¼esz uÅ¼yÄ‡ panelu zewnÄ™trznego
+i nastÄ™pujÄ…cej komendy:
 .PP
 .nf
 find . -type l -print
 .fi
-Zanim komenda zakoñczy dzia³anie, zawarto¶æ katalogów nie bêdzie ju¿ d³u¿ej
-zawarto¶ci± aktualnego katalogu, ale wszystkie pliki bêd± symbolicznymi
-dowi±zaniami.
+Zanim komenda zakoÅ„czy dziaÅ‚anie, zawartoÅ›Ä‡ katalogÃ³w nie bÄ™dzie juÅ¼ dÅ‚uÅ¼ej
+zawartoÅ›ciÄ… aktualnego katalogu, ale wszystkie pliki bÄ™dÄ… symbolicznymi
+dowiÄ…zaniami.
 .PP
-Je¶li chcesz wy¶wietliæ wszystkie pliki, które ¶ci±gn±³e¶ ze swoich
-serwerów ftp, mo¿esz u¿yæ tej komendy awk ¿eby wypisaæ nazwê pliku z
-logów transferu:
+JeÅ›li chcesz wyÅ›wietliÄ‡ wszystkie pliki, ktÃ³re Å›ciÄ…gnÄ…Å‚eÅ› ze swoich
+serwerÃ³w ftp, moÅ¼esz uÅ¼yÄ‡ tej komendy awk Å¼eby wypisaÄ‡ nazwÄ™ pliku z
+logÃ³w transferu:
 .PP
 .nf
 awk '$9 ~! /incoming/ { print $9 }' < /usr/adm/xferlog
 .fi
 .PP
-Mo¿esz zapisaæ sobie czêsto u¿ywane komendy pod jak±¶ nazw±, po to
-¿eby móc ich potem u¿ywaæ du¿o ³atwiej. Robisz to po prostu wpisuj±c komendê
-w linii wej¶ciowej, a potem naciskaj±æ przycisk Add. Potem wpisujesz nazwê,
-pod jak± ta komenda ma byæ widoczna. Nastêpnym razem po prostu wybierasz
-tê komendê z listy i nie musisz ju¿ wpisywaæ jej ponownie.
+MoÅ¼esz zapisaÄ‡ sobie czÄ™sto uÅ¼ywane komendy pod jakÄ…Å› nazwÄ…, po to
+Å¼eby mÃ³c ich potem uÅ¼ywaÄ‡ duÅ¼o Å‚atwiej. Robisz to po prostu wpisujÄ…c komendÄ™
+w linii wejÅ›ciowej, a potem naciskajÄ…Ä‡ przycisk Add. Potem wpisujesz nazwÄ™,
+pod jakÄ… ta komenda ma byÄ‡ widoczna. NastÄ™pnym razem po prostu wybierasz
+tÄ™ komendÄ™ z listy i nie musisz juÅ¼ wpisywaÄ‡ jej ponownie.
 .PP
 .\"NODE "    Hotlist"
 .SH "    Hotlist"
-Hotlista katalogów pokazuje nazwy katalogów wprowadzonych do hotlisty.
-Midnight Commander zmieni miejsce do tego, które wskazuje nazwa katalogu.
-Z hotlisty mo¿esz wyrzucaæ ju¿ dodane pozycje par nazw/wskazañ i dodawaæ nowe.
-Dla dodawania mo¿esz wykorzystaæ kombinacjê (C-x h), która dodaje
-¶cie¿kê
-aktualnego katalogu do hotlisty. U¿ytkownik musi tylko podaæ pod jak±
-nazw± ma byæ ten katalog widoczny.
+Hotlista katalogÃ³w pokazuje nazwy katalogÃ³w wprowadzonych do hotlisty.
+Midnight Commander zmieni miejsce do tego, ktÃ³re wskazuje nazwa katalogu.
+Z hotlisty moÅ¼esz wyrzucaÄ‡ juÅ¼ dodane pozycje par nazw/wskazaÅ„ i dodawaÄ‡ nowe.
+Dla dodawania moÅ¼esz wykorzystaÄ‡ kombinacjÄ™ (C-x h), ktÃ³ra dodaje
+Å›cieÅ¼kÄ™
+aktualnego katalogu do hotlisty. UÅ¼ytkownik musi tylko podaÄ‡ pod jakÄ…
+nazwÄ… ma byÄ‡ ten katalog widoczny.
 .PP
-Powoduje to przechodzenie do czê¶ciej przegl±danych katalogów znacznie szybciej.
-Mo¿esz u¿ywaæ ci±gle warto¶ci CDPATH opisanej w sekcji Wewnêtrzne
+Powoduje to przechodzenie do czÄ™Å›ciej przeglÄ…danych katalogÃ³w znacznie szybciej.
+MoÅ¼esz uÅ¼ywaÄ‡ ciÄ…gle wartoÅ›ci CDPATH opisanej w sekcji WewnÄ™trzne
 przemieszczanie.
 .PP
 .\"NODE "    Extension File Edit"
-.SH "    Edycja rozszerzeñ pliów (Extension File Edit)"
-Ta komenda wywo³a twój edytor na plik ~/.mc/bindings. Format tego pliku jest
-nastêpuj±cy (zmieni³ siê on pocz±wszy od wersji 3.0):
+.SH "    Edycja rozszerzeÅ„ pliÃ³w (Extension File Edit)"
+Ta komenda wywoÅ‚a twÃ³j edytor na plik ~/.mc/bindings. Format tego pliku jest
+nastÄ™pujÄ…cy (zmieniÅ‚ siÄ™ on poczÄ…wszy od wersji 3.0):
 .PP
-Wszystkie linie zaczynaj±ce siê od #, lub puste, nie s± brane pod uwagê.
+Wszystkie linie zaczynajÄ…ce siÄ™ od #, lub puste, nie sÄ… brane pod uwagÄ™.
 .PP
-Linie zaczynaj±ce siê od pierwszej kolumny powinny mieæ nastêpuj±cy format:
+Linie zaczynajÄ…ce siÄ™ od pierwszej kolumny powinny mieÄ‡ nastÄ™pujÄ…cy format:
 .PP
-.IR "s³owo kluczowe/wzorzec" ,
+.IR "sÅ‚owo kluczowe/wzorzec" ,
 tj. wszystko po
-.I s³owie kluczowym/
-dopóki now± lini± nie jest
+.I sÅ‚owie kluczowym/
+dopÃ³ki nowÄ… liniÄ… nie jest
 .I wzorzec
 .PP
-s³owami kluczowymi mog± byæ:
+sÅ‚owami kluczowymi mogÄ… byÄ‡:
 .PP
 .I shell
 .IP
-(wzorzec jest wtedy wyra¿eniem (bez jokerów), tj. pasuj± wszystkie pliki
+(wzorzec jest wtedy wyraÅ¼eniem (bez jokerÃ³w), tj. pasujÄ… wszystkie pliki
 *wzorzec. Np.: .tar znaczy *.tar)
 .PP
 .I regex
 .IP
-(wzorzec jest normalnym wyra¿eniem)
+(wzorzec jest normalnym wyraÅ¼eniem)
 .PP
 .I type
 .IP
-(plik spe³nia wymagania je¶li `file %f` zgadza siê z wyra¿eniem wzorca
-(nazwa: czê¶æ z `file %f` jest usuwana))
+(plik speÅ‚nia wymagania jeÅ›li `file %f` zgadza siÄ™ z wyraÅ¼eniem wzorca
+(nazwa: czÄ™Å›Ä‡ z `file %f` jest usuwana))
 .PP
 .I default
 .IP
-(wszystkie pliki spe³niaj±, nie wa¿ne jaki jest wzorzec)
+(wszystkie pliki speÅ‚niajÄ…, nie waÅ¼ne jaki jest wzorzec)
 .PP
-Inne linie powinny zaczynaæ siê od spacji lub tabulacji i powinny
-mieæ one nastêpuj±cy format:
+Inne linie powinny zaczynaÄ‡ siÄ™ od spacji lub tabulacji i powinny
+mieÄ‡ one nastÄ™pujÄ…cy format:
 .PP
-.I s³owo kluczowe=komenda
+.I sÅ‚owo kluczowe=komenda
 (bez spacji przy znaku =), gdzie
-.I s³owem kluczowym
-powinno byæ:
+.I sÅ‚owem kluczowym
+powinno byÄ‡:
 .PP
-.I Open (Otwórz)
-(je¶li u¿ytkownik naci¶nie Enter lub kliknie dwukrotnie),
-.I View (Podgl±d)
+.I Open (OtwÃ³rz)
+(jeÅ›li uÅ¼ytkownik naciÅ›nie Enter lub kliknie dwukrotnie),
+.I View (PodglÄ…d)
 (F3),
 .I Edit (Edytuj)
 (F4).
 .PP
 .I command
-jest jak±kolwiek jedn± lini± pow³oki, z zastosowaniem
+jest jakÄ…kolwiek jednÄ… liniÄ… powÅ‚oki, z zastosowaniem
 prostego makra.
 .PP
-Cele s± przeliczane od góry do do³u (porz±dek jest tu istotny). Je¶li
-jakiej¶ akcji brakuje, poszukiwanie kontynuuje siê tak jakby wcze¶niej
-nie nast±pi³a ¿adna zgodno¶æ (tj. je¶li zgadza siê z wzorcem pierwszym
-i trzecim i brakuje w pierwszym akcji View, to naciskaj±c F3 u¿yta bêdzie
-akcja z trzeciego wzorca). Opcja default powinna wychwyciæ wszystkie mo¿liwe
+Cele sÄ… przeliczane od gÃ³ry do doÅ‚u (porzÄ…dek jest tu istotny). JeÅ›li
+jakiejÅ› akcji brakuje, poszukiwanie kontynuuje siÄ™ tak jakby wczeÅ›niej
+nie nastÄ…piÅ‚a Å¼adna zgodnoÅ›Ä‡ (tj. jeÅ›li zgadza siÄ™ z wzorcem pierwszym
+i trzecim i brakuje w pierwszym akcji View, to naciskajÄ…c F3 uÅ¼yta bÄ™dzie
+akcja z trzeciego wzorca). Opcja default powinna wychwyciÄ‡ wszystkie moÅ¼liwe
 akcje.
 .PP
 .\"NODE "    Background Jobs"
 .SH "    Prace w tle (Background jobs)"
-Pozwalaj± ci one kontrolowaæ status jakichkolwiek procesów wykonywanych
+PozwalajÄ… ci one kontrolowaÄ‡ status jakichkolwiek procesÃ³w wykonywanych
 w tle
-przez Midnight Commandera (tylko operacje kopiowania i przenoszenia, mog±
-byæ wykonywane w tle). Z tego menu mo¿esz zastopowaæ, zresetowaæ i "zabiæ"
+przez Midnight Commandera (tylko operacje kopiowania i przenoszenia, mogÄ…
+byÄ‡ wykonywane w tle). Z tego menu moÅ¼esz zastopowaÄ‡, zresetowaÄ‡ i "zabiÄ‡"
 proces w tle.
 .PP
 .\"NODE "    Menu File Edit"
-.SH "    Edycja menu u¿ytkownika (Menu File Edit)"
-Menu u¿ytkownika jest bardzo u¿ytecznym menu, które mo¿e byæ tworzone
-w sposób dowolny, przez u¿ytkownika. Kiedy tylko próbujesz co¶ zrobiæ
-przy u¿yciu tego menu, ³adowany jest plik .mc.menu z aktualnego katalogu, ale
-tylko wtedy kiedy jest on w posiadaniu u¿ytkownika lub roota i mamy do niego
-prawa zapisu. Je¶li takiego nie ma próbuje siê z plikiem ~/.mc/menu z tymi
-samymi za³o¿eniami, je¶li jego te¿ nie ma - u¿ywa siê standardowego pliku
-systemowego, który znajduje siê w @prefix@/share/mc/mc.menu.
+.SH "    Edycja menu uÅ¼ytkownika (Menu File Edit)"
+Menu uÅ¼ytkownika jest bardzo uÅ¼ytecznym menu, ktÃ³re moÅ¼e byÄ‡ tworzone
+w sposÃ³b dowolny, przez uÅ¼ytkownika. Kiedy tylko prÃ³bujesz coÅ› zrobiÄ‡
+przy uÅ¼yciu tego menu, Å‚adowany jest plik .mc.menu z aktualnego katalogu, ale
+tylko wtedy kiedy jest on w posiadaniu uÅ¼ytkownika lub roota i mamy do niego
+prawa zapisu. JeÅ›li takiego nie ma prÃ³buje siÄ™ z plikiem ~/.mc/menu z tymi
+samymi zaÅ‚oÅ¼eniami, jeÅ›li jego teÅ¼ nie ma - uÅ¼ywa siÄ™ standardowego pliku
+systemowego, ktÃ³ry znajduje siÄ™ w @prefix@/share/mc/mc.menu.
 .PP
-Format pliku z menu u¿ytkownika jest bardzo prosty. Linie zaczynaj±ce siê
-od czegokolwiek innego ni¿ spacja lub tabulacja, s± traktowane jako
-wtyczki do menu (aby móc u¿ywaæ ich potem jako gor±cych klawiszy, dobrze
-jest aby pierwszy znak by³ liter±). Wszystkie linie zaczynaj±ce od spacji
-lub tabulacji, s± komendami, które maj± byæ wykonane je¶li wtyczka zostanie
+Format pliku z menu uÅ¼ytkownika jest bardzo prosty. Linie zaczynajÄ…ce siÄ™
+od czegokolwiek innego niÅ¼ spacja lub tabulacja, sÄ… traktowane jako
+wtyczki do menu (aby mÃ³c uÅ¼ywaÄ‡ ich potem jako gorÄ…cych klawiszy, dobrze
+jest aby pierwszy znak byÅ‚ literÄ…). Wszystkie linie zaczynajÄ…ce od spacji
+lub tabulacji, sÄ… komendami, ktÃ³re majÄ… byÄ‡ wykonane jeÅ›li wtyczka zostanie
 wybrana.
 .PP
-Kiedy opcja zostaje wybrana, wszystkie komendy nale¿±ce do tej opcji
-kopiowane s± do pliku w katalogu tymczasowym (najczê¶ciej do /usr/tmp), a
-potem plik jest wykonywany. Pozwala to u¿ytkownikowi wk³adaæ normalne
-konstrukcje pow³oki do konstrukcji kodu wykonywanego. Po wiêcej
-informacji zobacz, u¿ywania makr.
+Kiedy opcja zostaje wybrana, wszystkie komendy naleÅ¼Ä…ce do tej opcji
+kopiowane sÄ… do pliku w katalogu tymczasowym (najczÄ™Å›ciej do /usr/tmp), a
+potem plik jest wykonywany. Pozwala to uÅ¼ytkownikowi wkÅ‚adaÄ‡ normalne
+konstrukcje powÅ‚oki do konstrukcji kodu wykonywanego. Po wiÄ™cej
+informacji zobacz, uÅ¼ywania makr.
 .PP
-To jest przyk³adowy plik mc.menu:
+To jest przykÅ‚adowy plik mc.menu:
 .PP
 .nf
-A	Wyrzuæ aktualny plik.
+A	WyrzuÄ‡ aktualny plik.
 	od -c %f
 
-B	Stwórz raport o b³êdzie i wy¶lij do roota.
+B	StwÃ³rz raport o bÅ‚Ä™dzie i wyÅ›lij do roota.
 	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
 	vi $I
-	mail -s "B³±d Midnight Commandera" root < $I
+	mail -s "BÅ‚Ä…d Midnight Commandera" root < $I
 	rm -f $I
 
-M	Przeczytaj pocztê.
+M	Przeczytaj pocztÄ™.
 	emacs -f rmail
 
-N	Przeczytaj grupê dyskucyjn±.
+N	Przeczytaj grupÄ™ dyskucyjnÄ….
 	emacs -f gnus
 
-J	Skopiuj rekursywnie ca³y aktualny katalog.
+J	Skopiuj rekursywnie caÅ‚y aktualny katalog.
 	tar cf - . | (cd %D && tar xvpf -)
 
 = f *.tar.gz | f *.tgz & t n
@@ -1195,38 +1195,38 @@ X       Zdekompresuj skompresowany plik tar.
 .PP
 .B Standardowe warunki
 .PP
-Ka¿da opcja mo¿e byæ opatrzona w warunki. Warunek musi zaczynaæ siê od
-pierwszej kolumny i od znaku '='. Je¶li warunek jest prawdziwy, opcja
-stanie siê opcj± domy¶ln±.
+KaÅ¼da opcja moÅ¼e byÄ‡ opatrzona w warunki. Warunek musi zaczynaÄ‡ siÄ™ od
+pierwszej kolumny i od znaku '='. JeÅ›li warunek jest prawdziwy, opcja
+stanie siÄ™ opcjÄ… domyÅ›lnÄ….
 .PP
 .nf
-Sk³adnia warunku: 	= <warunek>
+SkÅ‚adnia warunku: 	= <warunek>
 	    lub:	= <warunek> | <warunek> ...
 	    lub:	= <warunek> & <warunek> ...
 
-Warunek jest jednym z nastêpuj±cych:
+Warunek jest jednym z nastÄ™pujÄ…cych:
 
   f <wzorzec>           aktualny plik zgodny z wzorcem?
   F <wzorzec>           plik w drugim panelu zgodny z wzorcem?
-  d <wzorzec>           aktualny katalog spe³niaj±cy wzorzec?
-  D <wzorzec>           katalog w drugim panelu spe³niaj±cy wzorzec?
+  d <wzorzec>           aktualny katalog speÅ‚niajÄ…cy wzorzec?
+  D <wzorzec>           katalog w drugim panelu speÅ‚niajÄ…cy wzorzec?
   t <typ>               aktualny pliku typu typ?
   T <typ>               plik w drugim panelu typu typ?
   ! <warunek>           zaprzeczenie warunku
 .fi
 .PP
-Wzorzec jest normalnym wzorcem pow³oki lub wyra¿eniem,
-podobnym do wzorca pow³oki. Mo¿esz zmieniæ globalne ustawienia
-wzorców pow³oki pisz±c "shell_patterns=x" w pierwszej linii menu
-u¿ytkownika (x jest równe 0 lub 1).
+Wzorzec jest normalnym wzorcem powÅ‚oki lub wyraÅ¼eniem,
+podobnym do wzorca powÅ‚oki. MoÅ¼esz zmieniÄ‡ globalne ustawienia
+wzorcÃ³w powÅ‚oki piszÄ…c "shell_patterns=x" w pierwszej linii menu
+uÅ¼ytkownika (x jest rÃ³wne 0 lub 1).
 .PP
 .nf
-Typ jest jednym lub wiêcej z podanych znaków:
+Typ jest jednym lub wiÄ™cej z podanych znakÃ³w:
 
   n	nie katalog
-  r	zwyk³y plik
+  r	zwykÅ‚y plik
   d	katalog
-  l	dowi±zanie
+  l	dowiÄ…zanie
   c	specjalny znak
   b	specjalny blok
   f	fifo
@@ -1235,17 +1235,17 @@ Typ jest jednym lub wiêcej z podanych znaków:
   t	zaznaczony
 .fi
 .PP
-Na przyk³ad 'rlf' oznacza zwyk³y plik, dowi±zanie lub fifo. Typ 't' jest
-trochê odmienny poniewa¿ dotyczy panelu a nie pliku. Warunek '=t t' jest
-prawdziwy je¶li s± jakie¶ zaznaczone pliki w aktywnym panelu, a fa³szywy je¶li
+Na przykÅ‚ad 'rlf' oznacza zwykÅ‚y plik, dowiÄ…zanie lub fifo. Typ 't' jest
+trochÄ™ odmienny poniewaÅ¼ dotyczy panelu a nie pliku. Warunek '=t t' jest
+prawdziwy jeÅ›li sÄ… jakieÅ› zaznaczone pliki w aktywnym panelu, a faÅ‚szywy jeÅ›li
 nie ma.
 .PP
-Je¶li warunek rozpoczyna siê od '=?' zamiast '=' droga przechodzenia
-przez warunki bêdzie pokazywana
-za ka¿dym razem kiedy warunek bêdzie obliczany [przydatne do wyszukiwania b³êdów
-- przyp. t³umacza].
+JeÅ›li warunek rozpoczyna siÄ™ od '=?' zamiast '=' droga przechodzenia
+przez warunki bÄ™dzie pokazywana
+za kaÅ¼dym razem kiedy warunek bÄ™dzie obliczany [przydatne do wyszukiwania bÅ‚Ä™dÃ³w
+- przyp. tÅ‚umacza].
 .PP
-Warunki s± obliczane od lewej do prawej. Oznacza to, ¿e
+Warunki sÄ… obliczane od lewej do prawej. Oznacza to, Å¼e
 .nf
 	= f *.tar.gz | f *.tgz & t n
 .fi
@@ -1254,64 +1254,64 @@ jest liczone tak samo jak
 	( (f *.tar.gz) | (f *.tgz) ) & (t n)
 .fi
 .PP
-To jest prosty przyk³ad zastosowania tych warunków:
+To jest prosty przykÅ‚ad zastosowania tych warunkÃ³w:
 .PP
 .nf
 = f *.tar.gz | f *.tgz & t n
-L	Listuje zawarto¶æ skompresowanego archiwum tar
+L	Listuje zawartoÅ›Ä‡ skompresowanego archiwum tar
 	gzip -cd %f | tar xvf -
 .fi
 .PP
 .B Warunki dodania
 .PP
-Je¶li warunek rozpoczyna siê od znaku '+' (lub '+?') zamiast od '=' (lub '=?')
-jest to warunek dodania. Je¶li warunek jest prawdziwy, opcja menu bêdzie
-do³±czona do menu. Je¶li nie jest prawdziwy, nie bêdzie ona w nim zawarty.
+JeÅ›li warunek rozpoczyna siÄ™ od znaku '+' (lub '+?') zamiast od '=' (lub '=?')
+jest to warunek dodania. JeÅ›li warunek jest prawdziwy, opcja menu bÄ™dzie
+doÅ‚Ä…czona do menu. JeÅ›li nie jest prawdziwy, nie bÄ™dzie ona w nim zawarty.
 .PP
-Mo¿esz ³±czyæ ze sob± standardowe i dodane warunki zaczynaj±c warunek od
+MoÅ¼esz Å‚Ä…czyÄ‡ ze sobÄ… standardowe i dodane warunki zaczynajÄ…c warunek od
 kombinacji
-'+=' lub '=+' (lub '+=?' lub '=+?' je¶li chcesz zobaczyæ trasê b³êdów).
-Je¶li chcesz u¿yæ ró¿nych warunków, dodanego i standardowego,
-mo¿esz poprzedziæ wpis menu dwoma wierszami warunkowymi. Jednym zaczynaj±cym
-siê od znaku '+', a drugim od '='.
+'+=' lub '=+' (lub '+=?' lub '=+?' jeÅ›li chcesz zobaczyÄ‡ trasÄ™ bÅ‚Ä™dÃ³w).
+JeÅ›li chcesz uÅ¼yÄ‡ rÃ³Å¼nych warunkÃ³w, dodanego i standardowego,
+moÅ¼esz poprzedziÄ‡ wpis menu dwoma wierszami warunkowymi. Jednym zaczynajÄ…cym
+siÄ™ od znaku '+', a drugim od '='.
 .PP
-Wszelkie komentarze rozpoczynaj± siê od znaku '#'.
+Wszelkie komentarze rozpoczynajÄ… siÄ™ od znaku '#'.
 .PP
 .\"NODE "  Options Menu"
 .SH "  Menu opcji (Options Menu)"
-Midnight Commander ma niektóre opcje, które mog± byæ w³±czane lyb wy³±czane
-w ró¿nych oknach dialogowych z tego menu. Opcja jest w³±czona je¶li widnieje
-przed ni± gwiazdka lyb "x".
+Midnight Commander ma niektÃ³re opcje, ktÃ³re mogÄ… byÄ‡ wÅ‚Ä…czane lyb wyÅ‚Ä…czane
+w rÃ³Å¼nych oknach dialogowych z tego menu. Opcja jest wÅ‚Ä…czona jeÅ›li widnieje
+przed niÄ… gwiazdka lyb "x".
 .PP
 Komenda
 .I Configuration
-w³±cza okno dialogowe, z którego mo¿esz zmieniæ
-wiêkszo¶æ ustawieñ Midnight Commandera.
+wÅ‚Ä…cza okno dialogowe, z ktÃ³rego moÅ¼esz zmieniÄ‡
+wiÄ™kszoÅ›Ä‡ ustawieÅ„ Midnight Commandera.
 .PP
 Menu
 .I Layout
-pozwala na zmianê wielu ustawieñ, które maj± znacz±cy wp³yw
-na to jak MC bêdzie wygl±da³ na ekranie.
+pozwala na zmianÄ™ wielu ustawieÅ„, ktÃ³re majÄ… znaczÄ…cy wpÅ‚yw
+na to jak MC bÄ™dzie wyglÄ…daÅ‚ na ekranie.
 .PP
 Menu
 .I Confirmation
-w³±cza okno dialogowe, w którym mo¿esz ustawiæ przy wykonaniu
-których operacji chcesz byæ pytany o potwierdzenie.
+wÅ‚Ä…cza okno dialogowe, w ktÃ³rym moÅ¼esz ustawiÄ‡ przy wykonaniu
+ktÃ³rych operacji chcesz byÄ‡ pytany o potwierdzenie.
 .PP
 Menu
 .I Display bits
-pozwala okre¶liæ jakiego typu znaki twój terminal jest
-w stanie wy¶wietliæ.
+pozwala okreÅ›liÄ‡ jakiego typu znaki twÃ³j terminal jest
+w stanie wyÅ›wietliÄ‡.
 .PP
 Menu
 .I Learn Keys
-pokazuje okno dialogowe, w którym mo¿esz poznaæ
-które klawisze nie dzia³aj± i w razie problemów naprawiæ to.
+pokazuje okno dialogowe, w ktÃ³rym moÅ¼esz poznaÄ‡
+ktÃ³re klawisze nie dziaÅ‚ajÄ… i w razie problemÃ³w naprawiÄ‡ to.
 .PP
 Menu
 .I Virtual FS
-pokazuje okno, w którym mo¿esz zmieniæ niektóre ustawienia
-dotycz±ce systemów VFS.
+pokazuje okno, w ktÃ³rym moÅ¼esz zmieniÄ‡ niektÃ³re ustawienia
+dotyczÄ…ce systemÃ³w VFS.
 .PP
 Komenda
 .I Save Setup
@@ -1319,345 +1319,345 @@ zachowuje wszystkie ustawienia z menu Lewego, Prawego i Opcji.
 .PP
 .\"NODE "    Configuration"
 .SH "    Konfiguracja"
-Opcje w tym oknie s± podzielone na trzy grupy:
+Opcje w tym oknie sÄ… podzielone na trzy grupy:
 opcje panelu (Panel Options), zatrzymaj po uruchomieniu (Pause after run) i
 inne opcje (Other Options).
 .PP
 .B Opcje panelu
 .PP
 .I Show Backup Files.
-Standardowo Midnight Commander nie wy¶wietla plików koñcz±cych siê znakiem
+Standardowo Midnight Commander nie wyÅ›wietla plikÃ³w koÅ„czÄ…cych siÄ™ znakiem
 '~' (tak jak komenda ls -B w wersji GNU).
 .PP
 .I Show Hidden Files.
-Standardowo Midnight Commander wy¶wietla wszystkie pliki zaczynaj±ce siê
+Standardowo Midnight Commander wyÅ›wietla wszystkie pliki zaczynajÄ…ce siÄ™
 od kropki (tak jak ls -a).
 .PP
 .I Mark moves down.
-Standardowo kiedy zaznaczasz plik (zarówno przy u¿yciu C-t lub klawisza Insert)
-linia wyboru przenosi siê o jedno w dó³.
+Standardowo kiedy zaznaczasz plik (zarÃ³wno przy uÅ¼yciu C-t lub klawisza Insert)
+linia wyboru przenosi siÄ™ o jedno w dÃ³Å‚.
 .PP
 .I Drop down menus.
-Kiedy ta opcja jest w³±czona, kiedy naciskasz klawisz
+Kiedy ta opcja jest wÅ‚Ä…czona, kiedy naciskasz klawisz
 .B F9
-menu bêdzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
-do tytu³ów w tym menu i bêdziesz musia³ wybraæ opcjê rêcznie przy u¿yciu
-strza³ek b±d¼ te¿ przy u¿yciu pierwszej litery z nazwy konkretnego menu.
+menu bÄ™dzie aktywowane, w przeciwnym wypadku zostaniesz tylko przeniosiony
+do tytuÅ‚Ã³w w tym menu i bÄ™dziesz musiaÅ‚ wybraÄ‡ opcjÄ™ rÄ™cznie przy uÅ¼yciu
+strzaÅ‚ek bÄ…dÅº teÅ¼ przy uÅ¼yciu pierwszej litery z nazwy konkretnego menu.
 .PP
 .I Mix all files.
-Je¶li ta opcja jest w³±czona, wszystkie pliki i katalogi s± pomieszane razem.
-Je¶li za¶ jest wy³±czona, katalogi (i dowi±zania do nich), s± listowane na
-pocz±tku a pozosta³e pliki dopiero za nimi.
+JeÅ›li ta opcja jest wÅ‚Ä…czona, wszystkie pliki i katalogi sÄ… pomieszane razem.
+JeÅ›li zaÅ› jest wyÅ‚Ä…czona, katalogi (i dowiÄ…zania do nich), sÄ… listowane na
+poczÄ…tku a pozostaÅ‚e pliki dopiero za nimi.
 .PP
 .I Fast directory reload.
-Standardowo ta opcja jest wy³±czona. Je¶li j± w³±czysz Midnight Commander
-bêdzie u¿ywa³ triku do sprawdzenia czy zawarto¶æ katalogu siê zmieni³a.
-Trik polega na tym, ¿e sprawdza siê i-wêze³ katalogu i je¶li siê on zmieni³
-to katalog jest ³adowany na nowo. Oznacza to prze³adowywanie zawarto¶ci panelu
-tylko wtedy, kiedy tworzysz lub kasujesz pliki. Je¶li robisz inne zmiany
-(rozmiaru, w³a¶ciciela, uprawnieñ, grupy itp.) bêdziesz musia³ rêcznie prze³adowaæ
-widok (np. u¿ywaj±c kombinacji klawiszy C-r).
+Standardowo ta opcja jest wyÅ‚Ä…czona. JeÅ›li jÄ… wÅ‚Ä…czysz Midnight Commander
+bÄ™dzie uÅ¼ywaÅ‚ triku do sprawdzenia czy zawartoÅ›Ä‡ katalogu siÄ™ zmieniÅ‚a.
+Trik polega na tym, Å¼e sprawdza siÄ™ i-wÄ™zeÅ‚ katalogu i jeÅ›li siÄ™ on zmieniÅ‚
+to katalog jest Å‚adowany na nowo. Oznacza to przeÅ‚adowywanie zawartoÅ›ci panelu
+tylko wtedy, kiedy tworzysz lub kasujesz pliki. JeÅ›li robisz inne zmiany
+(rozmiaru, wÅ‚aÅ›ciciela, uprawnieÅ„, grupy itp.) bÄ™dziesz musiaÅ‚ rÄ™cznie przeÅ‚adowaÄ‡
+widok (np. uÅ¼ywajÄ…c kombinacji klawiszy C-r).
 .PP
 .B Zatrzymaj po uruchomieniu
 .PP
-Po wykonaniu komendy, Midnight Commander mo¿e zrobiæ pauzê, po to aby¶
-móg³ spokojnie przejrzeæ wyj¶cie ostatniej komendy. S± trzy mo¿liwe warto¶ci
+Po wykonaniu komendy, Midnight Commander moÅ¼e zrobiÄ‡ pauzÄ™, po to abyÅ›
+mÃ³gÅ‚ spokojnie przejrzeÄ‡ wyjÅ›cie ostatniej komendy. SÄ… trzy moÅ¼liwe wartoÅ›ci
 dla tej zmiennej:
 .IP
 .I Nigdy (Never)
-Oznacza, ¿e nie chcesz widzieæ wyj¶cia twojej komendy. Je¶li u¿ywasz
-termianala typu Linux lub FreeBSD czy te¿ xterm, bêdziesz móg³ jednak
-zobaczyæ jej wyj¶cie naciskaj±c C-o.
+Oznacza, Å¼e nie chcesz widzieÄ‡ wyjÅ›cia twojej komendy. JeÅ›li uÅ¼ywasz
+termianala typu Linux lub FreeBSD czy teÅ¼ xterm, bÄ™dziesz mÃ³gÅ‚ jednak
+zobaczyÄ‡ jej wyjÅ›cie naciskajÄ…c C-o.
 .IP
 .I "On dumb terminals"
-Bêdziesz mia³ pauzê po uruchomieniu na terminalach, które nie s± w stanie
-pokazywaæ widoku ostatniej komendy (na wszystkich terminalach, które nie s±
+BÄ™dziesz miaÅ‚ pauzÄ™ po uruchomieniu na terminalach, ktÃ³re nie sÄ… w stanie
+pokazywaÄ‡ widoku ostatniej komendy (na wszystkich terminalach, ktÃ³re nie sÄ…
 xtermami lub Linux).
 .IP
 .I Zawsze (Always)
-Program zatrzyma siê po wykonaniu ka¿dej z twoich komend.
+Program zatrzyma siÄ™ po wykonaniu kaÅ¼dej z twoich komend.
 .PP
 .B Inne opcje
 .PP
 .I Operacje weryfikacji (Verbose operation).
-Prze³±cza czy podczas kopiowania, kasowania, przenoszenia plików ma byæ
-pokazywane okno dialogowe pokazuj±ce stopieñ zaawansowania. Je¶li masz powolny
-terminal, mo¿esz chcieæ wy³±czyæ weryfikacjê. Jest to wykonywane automatycznie
-za ciebie je¶li twój terminal jest wolniejszy ni¿ 9600 bps.
+PrzeÅ‚Ä…cza czy podczas kopiowania, kasowania, przenoszenia plikÃ³w ma byÄ‡
+pokazywane okno dialogowe pokazujÄ…ce stopieÅ„ zaawansowania. JeÅ›li masz powolny
+terminal, moÅ¼esz chcieÄ‡ wyÅ‚Ä…czyÄ‡ weryfikacjÄ™. Jest to wykonywane automatycznie
+za ciebie jeÅ›li twÃ³j terminal jest wolniejszy niÅ¼ 9600 bps.
 .PP
 .I Zliczaj wszystko (Compute totals).
-Je¶li ta opcja jest w³±czona, Midnight Commander zlicza wszytkie bajty
-plików, które s± przeznaczone do kopiowania, przenoszenia, kasowania. Spowoduje
-to wy¶wietlanie du¿o bardziej zaawansowanego wska¼nika postêpu w zamian
-zmiejszaj±c trochê prêdko¶æ. Ta opcja nie ma ¿adnego znaczenia je¶li opcja
+JeÅ›li ta opcja jest wÅ‚Ä…czona, Midnight Commander zlicza wszytkie bajty
+plikÃ³w, ktÃ³re sÄ… przeznaczone do kopiowania, przenoszenia, kasowania. Spowoduje
+to wyÅ›wietlanie duÅ¼o bardziej zaawansowanego wskaÅºnika postÄ™pu w zamian
+zmiejszajÄ…c trochÄ™ prÄ™dkoÅ›Ä‡. Ta opcja nie ma Å¼adnego znaczenia jeÅ›li opcja
 .I Verbose operation
-jest wy³±czona.
+jest wyÅ‚Ä…czona.
 .PP
-.I Wzorce pow³oki (Shell patterns).
+.I Wzorce powÅ‚oki (Shell patterns).
 Standardowo komendy zaznacz (Select), odznacz (Unselect), i filtruj (Filter)
-bêd± u¿ywaæ wyra¿eñ takich samych jak pow³oka. Oznacza to, ¿e
-gwiazdka oznacza zero lub wiêcej znaków, znak zapytania dok³adnie jeden znak,
-a ka¿dy inny znak sam siebie. Je¶li ta opcja jest wy³±czona, stosowane s±
-te, których u¿ywa w komenda
+bÄ™dÄ… uÅ¼ywaÄ‡ wyraÅ¼eÅ„ takich samych jak powÅ‚oka. Oznacza to, Å¼e
+gwiazdka oznacza zero lub wiÄ™cej znakÃ³w, znak zapytania dokÅ‚adnie jeden znak,
+a kaÅ¼dy inny znak sam siebie. JeÅ›li ta opcja jest wyÅ‚Ä…czona, stosowane sÄ…
+te, ktÃ³rych uÅ¼ywa w komenda
 .BR ed (1).
 .PP
 .I Auto Save Setup.
-Je¶li ta opcja jest w³±czona, kiedy wychodzisz z Midnight Commandera
+JeÅ›li ta opcja jest wÅ‚Ä…czona, kiedy wychodzisz z Midnight Commandera
 konfiguracja MC zostanie zachowana automatycznie (bez pytania)
 do pliku ~/.mc/ini.
 .PP
 .I Auto menus.
-Je¶li ta opcja jest w³±czona, menu u¿ytkownika bêdzie w³±czone na starcie.
-U¿yteczne do budowania menu dla nie unixowców.
+JeÅ›li ta opcja jest wÅ‚Ä…czona, menu uÅ¼ytkownika bÄ™dzie wÅ‚Ä…czone na starcie.
+UÅ¼yteczne do budowania menu dla nie unixowcÃ³w.
 .PP
-.I U¿ywaj wewnêtrznego edytora (Use internal editor).
-Je¶li ta opcja jest w³±czona, do edycji plików u¿ywany jest wbudowany
-edytor plików. Je¶li ta  opcja jest wy³±czona, u¿ywany bêdzie edytor wybrany
+.I UÅ¼ywaj wewnÄ™trznego edytora (Use internal editor).
+JeÅ›li ta opcja jest wÅ‚Ä…czona, do edycji plikÃ³w uÅ¼ywany jest wbudowany
+edytor plikÃ³w. JeÅ›li ta  opcja jest wyÅ‚Ä…czona, uÅ¼ywany bÄ™dzie edytor wybrany
 w zmiennej
 .BR EDITOR .
-Je¶li ¿aden edytor nie zosta³ wybrany, u¿ywany bêdzie
+JeÅ›li Å¼aden edytor nie zostaÅ‚ wybrany, uÅ¼ywany bÄ™dzie
 .BR vi (1).
-Zobacz sekcjê Wewnêtrzny edytor plików.
+Zobacz sekcjÄ™ WewnÄ™trzny edytor plikÃ³w.
 .PP
-.I U¿ywaj wewnêtrznego podgl±du (Use internal viewer).
-Je¶li ta opcja jest w³±czona, wbudowany podgl±d pliku jest u¿ywany do ogl±dania
-pliku. Je¶li ta opcja jest wy³±czona, u¿ywany jest podgl±d wybrany w zmiennej
+.I UÅ¼ywaj wewnÄ™trznego podglÄ…du (Use internal viewer).
+JeÅ›li ta opcja jest wÅ‚Ä…czona, wbudowany podglÄ…d pliku jest uÅ¼ywany do oglÄ…dania
+pliku. JeÅ›li ta opcja jest wyÅ‚Ä…czona, uÅ¼ywany jest podglÄ…d wybrany w zmiennej
 .BR PAGER .
-Je¶li ¿aden podgl±d nie zosta³ wybrany, wywo³ywana jest komenda
+JeÅ›li Å¼aden podglÄ…d nie zostaÅ‚ wybrany, wywoÅ‚ywana jest komenda
 .BR view .
-Zobacz sekcjê Wbudowany podgl±d plików.
+Zobacz sekcjÄ™ Wbudowany podglÄ…d plikÃ³w.
 .PP
-.I Dokañczanie: poka¿ wszystkie (Complete: show all).
-Standardowo Midnight Commander pokazuje wszystkie mo¿liwe dokoñczenia
-je¶li jest ich wiêcej, kiedy naci¶niesz drugi raz klawisz
+.I DokaÅ„czanie: pokaÅ¼ wszystkie (Complete: show all).
+Standardowo Midnight Commander pokazuje wszystkie moÅ¼liwe dokoÅ„czenia
+jeÅ›li jest ich wiÄ™cej, kiedy naciÅ›niesz drugi raz klawisz
 .BR M-Tab ,
-za pierwszym razem, po prostu dokañcza to na ile mo¿na i wydaje krótki
-d¼wiêk. Je¶li chcesz widzieæ wszystkie mo¿liwo¶ci po pierwszym naci¶niêciu
+za pierwszym razem, po prostu dokaÅ„cza to na ile moÅ¼na i wydaje krÃ³tki
+dÅºwiÄ™k. JeÅ›li chcesz widzieÄ‡ wszystkie moÅ¼liwoÅ›ci po pierwszym naciÅ›niÄ™ciu
 .B M-Tab
-w³±cz tê opcjê.
+wÅ‚Ä…cz tÄ™ opcjÄ™.
 .PP
-.I Obrotowy my¶lnik (Rotating dash).
-Je¶li ta opcja jest w³±czona, Midnight Commander bêdzie pokazywa³ obracaj±cy
-siê my¶lnik w lewym górnym rogu, je¶li bêdzie akurat w trakcie wykonywania
-jakiego¶ procesu.
+.I Obrotowy myÅ›lnik (Rotating dash).
+JeÅ›li ta opcja jest wÅ‚Ä…czona, Midnight Commander bÄ™dzie pokazywaÅ‚ obracajÄ…cy
+siÄ™ myÅ›lnik w lewym gÃ³rnym rogu, jeÅ›li bÄ™dzie akurat w trakcie wykonywania
+jakiegoÅ› procesu.
 .PP
 .I Lynx-like motion.
-Je¶li ta opcja jest w³±czona, mo¿esz u¿ywaæ strza³ek przemieszczenia
-¿eby automatycznie zmieniaæ katalog je¶li aktualnie wybrany katalog jest
-podkatalogiem, a linia poleceñ jest pusta. Standardowo ta opcja jest wy³±czona.
+JeÅ›li ta opcja jest wÅ‚Ä…czona, moÅ¼esz uÅ¼ywaÄ‡ strzaÅ‚ek przemieszczenia
+Å¼eby automatycznie zmieniaÄ‡ katalog jeÅ›li aktualnie wybrany katalog jest
+podkatalogiem, a linia poleceÅ„ jest pusta. Standardowo ta opcja jest wyÅ‚Ä…czona.
 .PP
-.I Dowi±zania pod±¿aj±ce cd (Cd follows links).
-Ta opcja, je¶li jest w³±czona, zmusza Midnight Commandera ¿eby pod±¿a³
-za ³añcuchem katalogów przy zmienianiu go w panelu czy za pomoc± komendy cd.
-To jest standardowe zachowanie basha. Je¶li jest wy³±czona, Midnight Commander
-pod±¿a za prawdziw± struktur± katalogów, wiêc cd .. je¶li wszed³e¶ do
-katalogu poprzez dowi±zanie, przeniesie ciê do prawdziwego katalogu na dysku, a nie
-tam gdzie wskazywa³o dowi±zanie.
+.I DowiÄ…zania podÄ…Å¼ajÄ…ce cd (Cd follows links).
+Ta opcja, jeÅ›li jest wÅ‚Ä…czona, zmusza Midnight Commandera Å¼eby podÄ…Å¼aÅ‚
+za Å‚aÅ„cuchem katalogÃ³w przy zmienianiu go w panelu czy za pomocÄ… komendy cd.
+To jest standardowe zachowanie basha. JeÅ›li jest wyÅ‚Ä…czona, Midnight Commander
+podÄ…Å¼a za prawdziwÄ… strukturÄ… katalogÃ³w, wiÄ™c cd .. jeÅ›li wszedÅ‚eÅ› do
+katalogu poprzez dowiÄ…zanie, przeniesie ciÄ™ do prawdziwego katalogu na dysku, a nie
+tam gdzie wskazywaÅ‚o dowiÄ…zanie.
 .PP
 .I Bezpieczne kasowanie (Safe delete).
-Je¶li ta opcja jest w³±czona, nieumy¶lne kasowanie plików stanie siê
-du¿o trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z
-"Yes" na "No". Standardowo ta opcja jest wy³±czona.
+JeÅ›li ta opcja jest wÅ‚Ä…czona, nieumyÅ›lne kasowanie plikÃ³w stanie siÄ™
+duÅ¼o trudniejsze. Standardowy wybÃ³r w linii potwierdzenia zmienia siÄ™ z
+"Yes" na "No". Standardowo ta opcja jest wyÅ‚Ä…czona.
 .PP
 .\"NODE "    Layout"
-.SH "    Wygl±d (Layout)"
-Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
-zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
-hintów (pomocy) i linia klawiszy funkcyjnych maj± byæ widoczne. Na
-konsolach typu Linux lub FreeBSD mo¿esz wybraæ ile linii ma byæ
-pokazywanych na wyj¶ciu okna.
+.SH "    WyglÄ…d (Layout)"
+Meny wyglÄ…d pozwala ci na rÃ³Å¼ne warianty zmieniania ogÃ³lnego wyglÄ…du
+zewnÄ™trznego ekranu. MoÅ¼esz wybraÄ‡, czy linia menu, linia poleceÅ„, linia
+hintÃ³w (pomocy) i linia klawiszy funkcyjnych majÄ… byÄ‡ widoczne. Na
+konsolach typu Linux lub FreeBSD moÅ¼esz wybraÄ‡ ile linii ma byÄ‡
+pokazywanych na wyjÅ›ciu okna.
 .PP
-Reszta powierzchni ekranu jest u¿ywana przez dwa panele katalogowe. Mo¿esz
-wybraæ nawet czy panele maj± byæ u³o¿one poziomo czy pionowo.
-Kolejn± mo¿liwo¶ci± jest zmiana ich standardowej szeroko¶ci (b±d¼ wysoko¶ci).
-Jest ona standardowo równa, ale mo¿na to zmieniæ.
+Reszta powierzchni ekranu jest uÅ¼ywana przez dwa panele katalogowe. MoÅ¼esz
+wybraÄ‡ nawet czy panele majÄ… byÄ‡ uÅ‚oÅ¼one poziomo czy pionowo.
+KolejnÄ… moÅ¼liwoÅ›ciÄ… jest zmiana ich standardowej szerokoÅ›ci (bÄ…dÅº wysokoÅ›ci).
+Jest ona standardowo rÃ³wna, ale moÅ¼na to zmieniÄ‡.
 .PP
-Standardowo ca³a zawarto¶æ panelu katalogowego jest wy¶wietlana t± sam± barw±,
-ale mo¿esz zmieniæ to tak aby
+Standardowo caÅ‚a zawartoÅ›Ä‡ panelu katalogowego jest wyÅ›wietlana tÄ… samÄ… barwÄ…,
+ale moÅ¼esz zmieniÄ‡ to tak aby
 .I uprawnienia
 i
-.I typy plików
-by³y wy¶wietlane specjalnym pod¶wietlonym kolorem.
-Je¶li pod¶wietlanie uprawnieñ jest w³±czone, czê¶æ pól (ta z
+.I typy plikÃ³w
+byÅ‚y wyÅ›wietlane specjalnym podÅ›wietlonym kolorem.
+JeÅ›li podÅ›wietlanie uprawnieÅ„ jest wÅ‚Ä…czone, czÄ™Å›Ä‡ pÃ³l (ta z
 .I uprawnieniami
 i
-.IR "typami plików" )
-bêdzie pod¶wietlona przy u¿yciu koloru wybranego jako
+.IR "typami plikÃ³w" )
+bÄ™dzie podÅ›wietlona przy uÅ¼yciu koloru wybranego jako
 .IR selected .
-Je¶li pod¶wietlanie jest w³±czone, pliki s± kolorowane w zale¿no¶æi od swojego
+JeÅ›li podÅ›wietlanie jest wÅ‚Ä…czone, pliki sÄ… kolorowane w zaleÅ¼noÅ›Ä‡i od swojego
 typu (np. katalogi, pliki typu core, wykonywalne, ...).
 .PP
-Je¶li opcja
+JeÅ›li opcja
 .I Show Mini-Status
-jest w³±czona, jeden wiersz informacji statusowych na temat aktualnie
-wybranej rzeczy w panelu, bêdzie pokazany na dole panelu.
+jest wÅ‚Ä…czona, jeden wiersz informacji statusowych na temat aktualnie
+wybranej rzeczy w panelu, bÄ™dzie pokazany na dole panelu.
 .PP
 .\"NODE "    Confirmation"
 .SH "    Potwierdzanie (Confirmation)"
-W tym menu mo¿esz skonfigurowaæ opcje potwierdzania dla kasowania,
-zastêpowania, wykonywania przez naci¶niêcie klawisza Enter, jak równie¿
+W tym menu moÅ¼esz skonfigurowaÄ‡ opcje potwierdzania dla kasowania,
+zastÄ™powania, wykonywania przez naciÅ›niÄ™cie klawisza Enter, jak rÃ³wnieÅ¼
 wychodzenia z programu.
 .PP
 .\"NODE "    Display bits"
-.SH "    Wy¶wietlanie znaków (Display bits)"
-U¿ywane do konfigurowania zakresu znaków widocznych potem na ekranie.
-To ustawienie mo¿e byæ 7-bitowe je¶li twój terminal obs³uguje tylko
-siedmiobitowe wyj¶cie, ISO-8859-1 wy¶wietla wszystkie znaki z mapy
-ISO-8859-1 a pe³ny 8 bitowy przeznaczony jest dla tych terminali, które radz±
-sobie z wy¶wietlaniem znaków o¶miobitowych.
+.SH "    WyÅ›wietlanie znakÃ³w (Display bits)"
+UÅ¼ywane do konfigurowania zakresu znakÃ³w widocznych potem na ekranie.
+To ustawienie moÅ¼e byÄ‡ 7-bitowe jeÅ›li twÃ³j terminal obsÅ‚uguje tylko
+siedmiobitowe wyjÅ›cie, ISO-8859-1 wyÅ›wietla wszystkie znaki z mapy
+ISO-8859-1 a peÅ‚ny 8 bitowy przeznaczony jest dla tych terminali, ktÃ³re radzÄ…
+sobie z wyÅ›wietlaniem znakÃ³w oÅ›miobitowych.
 .PP
-Zobacz sekcjê
+Zobacz sekcjÄ™
 .IR "Polskie znaki" ,
-po wiêcej szczegó³ów na temat ich u¿ywania w Midnight Commanderze.
+po wiÄ™cej szczegÃ³Å‚Ã³w na temat ich uÅ¼ywania w Midnight Commanderze.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
-W tym oknie mo¿esz przetestowaæ czy twoje klawisz F1-F20, Home, End itp.
-pracuj± poprawnie na twoim terminalu. Czêsto nie dzia³aj± tak, poniewa¿
-bazy danych terminali s± poniszczone.
+W tym oknie moÅ¼esz przetestowaÄ‡ czy twoje klawisz F1-F20, Home, End itp.
+pracujÄ… poprawnie na twoim terminalu. CzÄ™sto nie dziaÅ‚ajÄ… tak, poniewaÅ¼
+bazy danych terminali sÄ… poniszczone.
 .PP
-Przemieszczaæ siê mo¿esz za pomoc± klawisza Tab, za pomoc± klawiszy ruchu
-edytora vi ('h' lewo, 'j' dó³, 'k' góra i 'l' prawo) i po tym jak ju¿ raz
-naci¶niesz dan± strza³kê (zaznaczy siê ona na OK), za ich pomoc± równie¿.
+PrzemieszczaÄ‡ siÄ™ moÅ¼esz za pomocÄ… klawisza Tab, za pomocÄ… klawiszy ruchu
+edytora vi ('h' lewo, 'j' dÃ³Å‚, 'k' gÃ³ra i 'l' prawo) i po tym jak juÅ¼ raz
+naciÅ›niesz danÄ… strzaÅ‚kÄ™ (zaznaczy siÄ™ ona na OK), za ich pomocÄ… rÃ³wnieÅ¼.
 .PP
-Klawisze testujesz po prostu naciskaj±c ka¿dy z nich. Jak tylko naci¶niesz
-klawisz i pracuje on zupe³nie poprawnie, obok nazwy klawisza powinno pojawiæ
-siê OK. Kiedy klawisz jest ju¿ sprawdzony, zaczyna pracowaæ normalnie (np. F1
-wci¶niêty po raz pierwszy po prostu poka¿e, ¿e ten klawisz dzia³a, ale
-naci¶niêty po raz drugi poka¿e pomoc). Taka sama sytuacja powtarza siê przy strza³kach.
-Klawisz Tab powinien pracowaæ zawsze.
+Klawisze testujesz po prostu naciskajÄ…c kaÅ¼dy z nich. Jak tylko naciÅ›niesz
+klawisz i pracuje on zupeÅ‚nie poprawnie, obok nazwy klawisza powinno pojawiÄ‡
+siÄ™ OK. Kiedy klawisz jest juÅ¼ sprawdzony, zaczyna pracowaÄ‡ normalnie (np. F1
+wciÅ›niÄ™ty po raz pierwszy po prostu pokaÅ¼e, Å¼e ten klawisz dziaÅ‚a, ale
+naciÅ›niÄ™ty po raz drugi pokaÅ¼e pomoc). Taka sama sytuacja powtarza siÄ™ przy strzaÅ‚kach.
+Klawisz Tab powinien pracowaÄ‡ zawsze.
 .PP
-Je¶li niektóre klawisze nie pracuj± poprawnie, nie zobaczysz OK obok ich nazwy
-po naci¶niêciu ich. Mo¿esz chcieæ je naprawiæ. Robisz to naje¿d¿aj±c na
-odpowiedni przycisk dla tego klawisza i naciskaj±c Enter. Poka¿e siê wtedy
-czerwona wiadomo¶æ i zostaniesz poproszony o podanie odpowiedniego klawisza.
-Je¶li chcesz zrezygnowaæ, po prostu naci¶nij Esc i poczekaj do czasu kiedy
-wiadomo¶æ zniknie. W przeciwnym wypadku wci¶nij klawisz, który sobie ¿yczysz
-i równie¿ poczekaj na znikniêcie okna.
+JeÅ›li niektÃ³re klawisze nie pracujÄ… poprawnie, nie zobaczysz OK obok ich nazwy
+po naciÅ›niÄ™ciu ich. MoÅ¼esz chcieÄ‡ je naprawiÄ‡. Robisz to najeÅ¼dÅ¼ajÄ…c na
+odpowiedni przycisk dla tego klawisza i naciskajÄ…c Enter. PokaÅ¼e siÄ™ wtedy
+czerwona wiadomoÅ›Ä‡ i zostaniesz poproszony o podanie odpowiedniego klawisza.
+JeÅ›li chcesz zrezygnowaÄ‡, po prostu naciÅ›nij Esc i poczekaj do czasu kiedy
+wiadomoÅ›Ä‡ zniknie. W przeciwnym wypadku wciÅ›nij klawisz, ktÃ³ry sobie Å¼yczysz
+i rÃ³wnieÅ¼ poczekaj na znikniÄ™cie okna.
 .PP
-Kiedy skoñczysz ju¿ ze wszystkimi klawiszami, mo¿esz nacisn±æ Save
-¿eby zachowaæ zmiany do pliku ~/.mc/ini do sekcji [terminal:TERM] (gdzie
-TERM jest nazw± twojego aktualnego terminala) lub po prostu odrzuciæ je.
+Kiedy skoÅ„czysz juÅ¼ ze wszystkimi klawiszami, moÅ¼esz nacisnÄ…Ä‡ Save
+Å¼eby zachowaÄ‡ zmiany do pliku ~/.mc/ini do sekcji [terminal:TERM] (gdzie
+TERM jest nazwÄ… twojego aktualnego terminala) lub po prostu odrzuciÄ‡ je.
 .PP
 .\"NODE "    Virtual FS"
-.SH "    Wirtualny system plików (Virtual FS)"
-Ta opcja daje ci kontrolê nad ustawieniami informacji wirtualnego systemu
-plików.
-Midnight Commander zachowuje w pamiêci informacje zwi±zane z niektórymi
-wirtualnymi systemami plików, po to ¿eby kolejne po³±czenia przebiega³y du¿o
-szybciej (np. ¶ci±gane listy katalogów z serwerów ftp).
+.SH "    Wirtualny system plikÃ³w (Virtual FS)"
+Ta opcja daje ci kontrolÄ™ nad ustawieniami informacji wirtualnego systemu
+plikÃ³w.
+Midnight Commander zachowuje w pamiÄ™ci informacje zwiÄ…zane z niektÃ³rymi
+wirtualnymi systemami plikÃ³w, po to Å¼eby kolejne poÅ‚Ä…czenia przebiegaÅ‚y duÅ¼o
+szybciej (np. Å›ciÄ…gane listy katalogÃ³w z serwerÃ³w ftp).
 .PP
-Niemniej jednak, ¿eby mieæ dostêp do zawarto¶ci skompresowanego
+Niemniej jednak, Å¼eby mieÄ‡ dostÄ™p do zawartoÅ›ci skompresowanego
 pliku (np. skompresowanego pliku tar) Midnight Commander musi
-stworzyæ tymczasowy nieskompresowany plik na twoim dysku.
+stworzyÄ‡ tymczasowy nieskompresowany plik na twoim dysku.
 .PP
-Dopiero kiedy informacje w pamiêci i tymczasowe pliki na dysku s± zgodne z
-zasobami, mo¿esz chcieæ zmieniæ parametry informacji znajduj±cych siê w
-buforze podrêcznym po to, ¿eby zmniejszyæ obci±¿enie dysku do mninimum albo do
-zmaksymalizowania prêdko¶ci dostêpu do najczê¶ciej u¿ywanych systemów
-plików.
+Dopiero kiedy informacje w pamiÄ™ci i tymczasowe pliki na dysku sÄ… zgodne z
+zasobami, moÅ¼esz chcieÄ‡ zmieniÄ‡ parametry informacji znajdujÄ…cych siÄ™ w
+buforze podrÄ™cznym po to, Å¼eby zmniejszyÄ‡ obciÄ…Å¼enie dysku do mninimum albo do
+zmaksymalizowania prÄ™dkoÅ›ci dostÄ™pu do najczÄ™Å›ciej uÅ¼ywanych systemÃ³w
+plikÃ³w.
 .PP
-System plików tar jest ca³kiem inteligentny je¶li chodzi o przechowywanie
-plików: po prostu ¶ci±ga wej¶cia do katalogów i kiedy chcemy wiêcej
-szczegó³ów o nim to system je dla nas ¶ci±ga.
+System plikÃ³w tar jest caÅ‚kiem inteligentny jeÅ›li chodzi o przechowywanie
+plikÃ³w: po prostu Å›ciÄ…ga wejÅ›cia do katalogÃ³w i kiedy chcemy wiÄ™cej
+szczegÃ³Å‚Ã³w o nim to system je dla nas Å›ciÄ…ga.
 .PP
-W rzeczywisto¶ci jednak, pliki tar najczê¶ciej trzymane s± jako
-skompresowane i jako i¿ natura tych plików nie pozwala na ogl±danie ich bez
+W rzeczywistoÅ›ci jednak, pliki tar najczÄ™Å›ciej trzymane sÄ… jako
+skompresowane i jako iÅ¼ natura tych plikÃ³w nie pozwala na oglÄ…danie ich bez
 dekompresji (nie ma tam
-widocznych od razu wej¶æ do katalogów), system plików musi byæ najpierw
+widocznych od razu wejÅ›Ä‡ do katalogÃ³w), system plikÃ³w musi byÄ‡ najpierw
 zdekompresowany na dysk do pliku tymczasowego i dopiero potem MC ma do niego
-dostêp taki jak do normalnego pliku typu tar.
+dostÄ™p taki jak do normalnego pliku typu tar.
 .PP
-Teraz, kiedy tak kochamy odwiedzaæ ró¿ne pliki i zwiedzaæ systemy
-plików typu tar na ca³ym dysku, jest ca³kiem prawdopodobne, ¿e wyjdziesz
-z takiego pliku, a po krótkim czasie bêdziesz chcia³ wejd¶æ
+Teraz, kiedy tak kochamy odwiedzaÄ‡ rÃ³Å¼ne pliki i zwiedzaÄ‡ systemy
+plikÃ³w typu tar na caÅ‚ym dysku, jest caÅ‚kiem prawdopodobne, Å¼e wyjdziesz
+z takiego pliku, a po krÃ³tkim czasie bÄ™dziesz chciaÅ‚ wejdÅ›Ä‡
 do niego spowrotem.
-Poniewa¿ dekompresja jest powolna, Midnight Commander bêdzie robi³
-kopie plików w pamiêci na okre¶lony czas, po up³ywie którego pliki
-zostan± skasowane a miejsce zajmowane przez nie zwolnione. Standardowo ten
-czas ustawiony jest na jedn± minutê.
+PoniewaÅ¼ dekompresja jest powolna, Midnight Commander bÄ™dzie robiÅ‚
+kopie plikÃ³w w pamiÄ™ci na okreÅ›lony czas, po upÅ‚ywie ktÃ³rego pliki
+zostanÄ… skasowane a miejsce zajmowane przez nie zwolnione. Standardowo ten
+czas ustawiony jest na jednÄ… minutÄ™.
 .PP
-System plików FTP trzyma listê katalogów z odwiedzanego przez nas
-serwera w buforze podrêcznym. Jego wa¿no¶æ konfigurowana jest za pomoc± opcji
+System plikÃ³w FTP trzyma listÄ™ katalogÃ³w z odwiedzanego przez nas
+serwera w buforze podrÄ™cznym. Jego waÅ¼noÅ›Ä‡ konfigurowana jest za pomocÄ… opcji
 .IR ftpfs directory cache timeout .
-Ma³a warto¶æ dla tej opcji mo¿e spowolniæ wszystkie operacje na systemach
-ftp poniewa¿ ka¿da operacja bêdzie wymagaæ kolejnych zapytañ do serwera.
+MaÅ‚a wartoÅ›Ä‡ dla tej opcji moÅ¼e spowolniÄ‡ wszystkie operacje na systemach
+ftp poniewaÅ¼ kaÅ¼da operacja bÄ™dzie wymagaÄ‡ kolejnych zapytaÅ„ do serwera.
 .PP
-Ponadto mo¿esz zdefiniowaæ serwer proxy dla transferów ftp i skonfigurowaæ
-Midnight Commandera tak, aby zawsze go u¿ywa³. Zobacz sekcjê
-System plików FTP (FTP File System) po wiêcej szczegó³ów.
+Ponadto moÅ¼esz zdefiniowaÄ‡ serwer proxy dla transferÃ³w ftp i skonfigurowaÄ‡
+Midnight Commandera tak, aby zawsze go uÅ¼ywaÅ‚. Zobacz sekcjÄ™
+System plikÃ³w FTP (FTP File System) po wiÄ™cej szczegÃ³Å‚Ã³w.
 .\"NODE "    Save Setup"
 .SH "    Zapisz ustawienia (Save Setup)"
-Na starcie Midnight Commander bêdzie próbowa³ odczytaæ opcje startowe
-z pliku ~/.mc/ini. Je¶li on nie istnieje, odczyta on konfiguracje z
-ogólnodostêpnego pliku @prefix@/share/mc/mc.ini. Je¶li on te¿ nie istnieje MC
-u¿yje swoich domy¶lnych ustawieñ.
+Na starcie Midnight Commander bÄ™dzie prÃ³bowaÅ‚ odczytaÄ‡ opcje startowe
+z pliku ~/.mc/ini. JeÅ›li on nie istnieje, odczyta on konfiguracje z
+ogÃ³lnodostÄ™pnego pliku @prefix@/share/mc/mc.ini. JeÅ›li on teÅ¼ nie istnieje MC
+uÅ¼yje swoich domyÅ›lnych ustawieÅ„.
 .PP
 Komenda
 .I Save Setup
-tworzy plik ~/.mc/ini zachowuj±c aktualne ustawienia lewego, prawego menu,
-jak równie¿ menu opcji.
+tworzy plik ~/.mc/ini zachowujÄ…c aktualne ustawienia lewego, prawego menu,
+jak rÃ³wnieÅ¼ menu opcji.
 .PP
-Je¶li w³aczysz opcjê
+JeÅ›li wÅ‚aczysz opcjÄ™
 .IR "auto save setup" ,
-MC zawsze bêdzie zachowywa³ standardowe ustawienie podczas wychodzenia.
+MC zawsze bÄ™dzie zachowywaÅ‚ standardowe ustawienie podczas wychodzenia.
 .PP
-Istniej± równie¿ ustawienia, które nie mog± byæ zmienione z poziomu menu.
-Dla tych ustawieñ musisz wyedytowaæ swój plik konfiguracyjny za pomoc±
-twojego ulubionego edytora. Zobacz sekcjê Specjalne ustawienia po wiêcej
+IstniejÄ… rÃ³wnieÅ¼ ustawienia, ktÃ³re nie mogÄ… byÄ‡ zmienione z poziomu menu.
+Dla tych ustawieÅ„ musisz wyedytowaÄ‡ swÃ³j plik konfiguracyjny za pomocÄ…
+twojego ulubionego edytora. Zobacz sekcjÄ™ Specjalne ustawienia po wiÄ™cej
 informacji.
 .PP
 .SH ""
 .\"NODE "Executing operating system commands"
-.SH "Wykonywanie poleceñ systemu operacyjnego (Executing operating system commands)"
-Mo¿esz wykonywaæ komendy wpisuj±c je bezpo¶rednio do linii poleceñ Midnight
-Commandera, lub wybieraj±c program, który chcesz wykonaæ za pomoc± klawiszy
-przemieszczenia i nacisn±æ Enter.
+.SH "Wykonywanie poleceÅ„ systemu operacyjnego (Executing operating system commands)"
+MoÅ¼esz wykonywaÄ‡ komendy wpisujÄ…c je bezpoÅ›rednio do linii poleceÅ„ Midnight
+Commandera, lub wybierajÄ…c program, ktÃ³ry chcesz wykonaÄ‡ za pomocÄ… klawiszy
+przemieszczenia i nacisnÄ…Ä‡ Enter.
 .PP
-Je¶li naci¶niesz Enter na pliku, który nie jest wykonywalny, Midnight Commander
-sprawdzi rozszerzenie pliku i porówna je z rozszerzeniami wybranymi w pliku
-rozszerzeñ (Extensions File). Je¶li jaka¶ pozycja siê zgadza, wykonywana
-jest komenda (raczej bardziej rozszerzone makro) powi±zana z tym rozszerzeniem.
+JeÅ›li naciÅ›niesz Enter na pliku, ktÃ³ry nie jest wykonywalny, Midnight Commander
+sprawdzi rozszerzenie pliku i porÃ³wna je z rozszerzeniami wybranymi w pliku
+rozszerzeÅ„ (Extensions File). JeÅ›li jakaÅ› pozycja siÄ™ zgadza, wykonywana
+jest komenda (raczej bardziej rozszerzone makro) powiÄ…zana z tym rozszerzeniem.
 .PP
 .\"NODE "  The cd internal command"
 .SH "  Wbudowana komenda cd (The cd internal command)"
 Komenda cd jest interpretowana przez Midnight Commandera, nie
-dok³adnie tak samo jak wykonuje to pow³oka. Przez to rozkaz cd nie mo¿e zawieraæ
-wielu sk³adników makr, które s± standardowo dostêpne, jednak niektórych
-potrafi u¿ywaæ:
+dokÅ‚adnie tak samo jak wykonuje to powÅ‚oka. Przez to rozkaz cd nie moÅ¼e zawieraÄ‡
+wielu skÅ‚adnikÃ³w makr, ktÃ³re sÄ… standardowo dostÄ™pne, jednak niektÃ³rych
+potrafi uÅ¼ywaÄ‡:
 .PP
 .I Tylda
-Znak tyldy (~) jest zawsze równoznaczny z wpisaniem nazwy katalogu domowego.
-Je¶li po znaku tyldy dodasz jaki¶ login u¿ytkownika, zostanie on zast±piony
-przez katalog domowy wybranego u¿ytkownika.
+Znak tyldy (~) jest zawsze rÃ³wnoznaczny z wpisaniem nazwy katalogu domowego.
+JeÅ›li po znaku tyldy dodasz jakiÅ› login uÅ¼ytkownika, zostanie on zastÄ…piony
+przez katalog domowy wybranego uÅ¼ytkownika.
 .PP
-Na przyk³ad, ~guest jest katalogiem domowym u¿ytkownika guest, podczas
+Na przykÅ‚ad, ~guest jest katalogiem domowym uÅ¼ytkownika guest, podczas
 kiedy ~/guest jest katalogiem guest w twoim katalogu domowym.
 .PP
 .I Poprzedni katalog (Previous directory)
-Mo¿esz przeskakiwaæ do katalogu, w którym by³e¶ poprzednio, u¿ywaj±c specjalnej
+MoÅ¼esz przeskakiwaÄ‡ do katalogu, w ktÃ³rym byÅ‚eÅ› poprzednio, uÅ¼ywajÄ…c specjalnej
 nazwy katalogu '-' tak jak:
 .B cd -
 .PP
 .I katalogi CDPATH
-Je¶li katalog wybrany do przej¶cia nie jest w naszym aktualnym katalogu, to
-Midnight Commander u¿ywa ¶cie¿ki w zmiennej
+JeÅ›li katalog wybrany do przejÅ›cia nie jest w naszym aktualnym katalogu, to
+Midnight Commander uÅ¼ywa Å›cieÅ¼ki w zmiennej
 .B CDPATH
-do szukania w jakimkolwiek z wymienionych tam katalogów.
+do szukania w jakimkolwiek z wymienionych tam katalogÃ³w.
 .PP
-Na przyk³ad, mo¿esz ustawiæ swoj± zmienn±
+Na przykÅ‚ad, moÅ¼esz ustawiÄ‡ swojÄ… zmiennÄ…
 .B CDPATH
-na katalogi ~/src:/usr/src, pozwalaj±c na zmianê katalogów na jakikolwiek
-inny wewn±trz ~/src i /usr/src, z miejsca w którym jeste¶ (np. cd linux
-przeniesie ciê do katalogu /usr/src/linux).
+na katalogi ~/src:/usr/src, pozwalajÄ…c na zmianÄ™ katalogÃ³w na jakikolwiek
+inny wewnÄ…trz ~/src i /usr/src, z miejsca w ktÃ³rym jesteÅ› (np. cd linux
+przeniesie ciÄ™ do katalogu /usr/src/linux).
 .PP
 .\"NODE "  Macro Substitution"
-.SH "  Obs³uga makr (Macro Substitution)"
+.SH "  ObsÅ‚uga makr (Macro Substitution)"
 .PP
-Kiedy u¿ywamy menu u¿ytkownika, wykonujemy plik o znajomym rozszerzeniu, lub
-wykonujemy komendê z linii poleceñ, mo¿emy u¿yæ kilku bardzo prostych makr.
+Kiedy uÅ¼ywamy menu uÅ¼ytkownika, wykonujemy plik o znajomym rozszerzeniu, lub
+wykonujemy komendÄ™ z linii poleceÅ„, moÅ¼emy uÅ¼yÄ‡ kilku bardzo prostych makr.
 .PP
-S± to:
+SÄ… to:
 .PP
 .I "%f"
 .IP
@@ -1687,419 +1687,419 @@ Pliki zaznaczone w nieaktywnym panelu.
 i
 .I "%U"
 .IP
-Podobne w dzia³aniu do %t i do %T jednak z t± ró¿nic±, ¿e pliki po ich
-u¿yciu zostan± odznaczone. Oznacza to, ¿e mo¿na ich u¿yæ tylko raz w jednym
-menu, poniewa¿ potem nie bêdzie ju¿ ¿adnych plików zaznaczonych.
+Podobne w dziaÅ‚aniu do %t i do %T jednak z tÄ… rÃ³Å¼nicÄ…, Å¼e pliki po ich
+uÅ¼yciu zostanÄ… odznaczone. Oznacza to, Å¼e moÅ¼na ich uÅ¼yÄ‡ tylko raz w jednym
+menu, poniewaÅ¼ potem nie bÄ™dzie juÅ¼ Å¼adnych plikÃ³w zaznaczonych.
 .PP
 .I "%s"
 i
 .I "%S"
 .IP
-Wybiera: zaznaczone pliki je¶li s± jakie¶, w przeciwnym razie aktualny
+Wybiera: zaznaczone pliki jeÅ›li sÄ… jakieÅ›, w przeciwnym razie aktualny
 plik.
 .PP
 .I "%cd"
 .IP
-To jest specjalne makro, które jest u¿ywane do zmieniania aktualnego katalogu
-na wybrany katalog, na którego froncie jeste¶my. Jest to u¿ywane przede
-wszystkim jako interfejs do wirtualnych systemów plików.
+To jest specjalne makro, ktÃ³re jest uÅ¼ywane do zmieniania aktualnego katalogu
+na wybrany katalog, na ktÃ³rego froncie jesteÅ›my. Jest to uÅ¼ywane przede
+wszystkim jako interfejs do wirtualnych systemÃ³w plikÃ³w.
 .PP
 .I "%view"
 .IP
-To makro jest u¿ywane ¿eby w³±czaæ wbudowany podgl±d plików. Mo¿e byæ
-ono pojedynczo lub z grup± argumentów. Je¶li postanawiasz u¿ywaæ któregokolwiek
-z tych argumentów musisz je koniecznie wzi±æ w nawiasy.
+To makro jest uÅ¼ywane Å¼eby wÅ‚Ä…czaÄ‡ wbudowany podglÄ…d plikÃ³w. MoÅ¼e byÄ‡
+ono pojedynczo lub z grupÄ… argumentÃ³w. JeÅ›li postanawiasz uÅ¼ywaÄ‡ ktÃ³regokolwiek
+z tych argumentÃ³w musisz je koniecznie wziÄ…Ä‡ w nawiasy.
 .IP
-Argumentami s±:
+Argumentami sÄ…:
 .I ascii
-aby wymusiæ podgl±d w trybie ascii;
+aby wymusiÄ‡ podglÄ…d w trybie ascii;
 .I hex
-aby wymusiæ podgl±d w trybie szesnastkowym;
+aby wymusiÄ‡ podglÄ…d w trybie szesnastkowym;
 .I nroff
-przekazuje podgl±dowi, ¿e powinien interpretowaæ pogrubione
-i podkre¶lone sekwencje programu nroff;
+przekazuje podglÄ…dowi, Å¼e powinien interpretowaÄ‡ pogrubione
+i podkreÅ›lone sekwencje programu nroff;
 .I unformated
-aby przekazaæ podgl±dowi, ¿eby nie interpretowa³ komend nroff aby zrobiæ
-tekst pogrubiony lub podkre¶lony.
+aby przekazaÄ‡ podglÄ…dowi, Å¼eby nie interpretowaÅ‚ komend nroff aby zrobiÄ‡
+tekst pogrubiony lub podkreÅ›lony.
 .PP
 .I "%%"
 .IP
 Znak %
 .PP
-.I "%{jaki¶ tekst}"
+.I "%{jakiÅ› tekst}"
 .IP
-Pyta siê o zmienn±. Pokazuje siê okienko wej¶ciowe i tekst wewn±trz klamerek
-u¿ywany jest jako zachêta (prompt). Makro jest zastêpowane tekstem wpisanym
-przez u¿ytkownika. U¿ytkownik mo¿e nacisn±æ ESC lub F10 aby anulowaæ. To
-makro nie dzia³a jeszcze w linii poleceñ.
+Pyta siÄ™ o zmiennÄ…. Pokazuje siÄ™ okienko wejÅ›ciowe i tekst wewnÄ…trz klamerek
+uÅ¼ywany jest jako zachÄ™ta (prompt). Makro jest zastÄ™powane tekstem wpisanym
+przez uÅ¼ytkownika. UÅ¼ytkownik moÅ¼e nacisnÄ…Ä‡ ESC lub F10 aby anulowaÄ‡. To
+makro nie dziaÅ‚a jeszcze w linii poleceÅ„.
 .PP
 .\"NODE "  The subshell support"
-.SH "  Obs³uga podpow³oki (The subshell support)"
-Podpow³oka (pow³oka w tle) jest opcj±, która musi byæ wybrana przy kompilacji,
-dzia³a ona z pow³okami: bash, tcsh i zsh.
+.SH "  ObsÅ‚uga podpowÅ‚oki (The subshell support)"
+PodpowÅ‚oka (powÅ‚oka w tle) jest opcjÄ…, ktÃ³ra musi byÄ‡ wybrana przy kompilacji,
+dziaÅ‚a ona z powÅ‚okami: bash, tcsh i zsh.
 .PP
-Je¶li pow³oka w tle jest w³±czona do komplilacji, Midnight Commander bêdzie
-sobie tworzy³ kopie twojej pow³oki (tej zdefiniowanej w zmiennej
+JeÅ›li powÅ‚oka w tle jest wÅ‚Ä…czona do komplilacji, Midnight Commander bÄ™dzie
+sobie tworzyÅ‚ kopie twojej powÅ‚oki (tej zdefiniowanej w zmiennej
 .BR SHELL ,
-a je¶li nie ma, to bêdzie czerpa³ bezpo¶rednio z pliku /etc/passwd)
-i odpala³ pseudo terminal, zamiast wywo³ywaæ now± pow³okê za ka¿dym razem
-kiedy wywo³ujesz komendê, komenda bêdzie przekazana pow³oce w tle,
-jak tylko j± napiszesz. To pozwala ci na zmianê wielu zmiennych, u¿ywanie
-funkcji pow³oki i zdefiniowanych aliasów, które s± wa¿ne dopóki nie wyjdziesz
+a jeÅ›li nie ma, to bÄ™dzie czerpaÅ‚ bezpoÅ›rednio z pliku /etc/passwd)
+i odpalaÅ‚ pseudo terminal, zamiast wywoÅ‚ywaÄ‡ nowÄ… powÅ‚okÄ™ za kaÅ¼dym razem
+kiedy wywoÅ‚ujesz komendÄ™, komenda bÄ™dzie przekazana powÅ‚oce w tle,
+jak tylko jÄ… napiszesz. To pozwala ci na zmianÄ™ wielu zmiennych, uÅ¼ywanie
+funkcji powÅ‚oki i zdefiniowanych aliasÃ³w, ktÃ³re sÄ… waÅ¼ne dopÃ³ki nie wyjdziesz
 z Midnight Commandera.
 .PP
-Je¶li u¿ywasz
+JeÅ›li uÅ¼ywasz
 .B basha
-mo¿esz wybraæ startowe komendy twojej pow³oki w tle w pliku ~/.mc/bashrc,
+moÅ¼esz wybraÄ‡ startowe komendy twojej powÅ‚oki w tle w pliku ~/.mc/bashrc,
 a ustawienia klawiatury w ~/.mc/inputrc.
-U¿ytkownicy
+UÅ¼ytkownicy
 .B tcsh
-mog± wstawiaæ komendy startowe do pliku ~/.mc/tcshrc.
+mogÄ… wstawiaÄ‡ komendy startowe do pliku ~/.mc/tcshrc.
 .PP
-Je¶li kod pow³oki w tle jest u¿yty, mo¿esz zawiesiæ aplikacjê w dowolnej chwili
-po prostu naciskaj±c kombinacjê C-o i przeskakuj±c spowrotem do Midnight
-Commandera, je¶li zawiesisz jak±¶ aplikacjê nie bêdziesz móg³ u¿ywaæ innych
-zewnêtrznych komend zanim nie wyjdziesz z aplikacji, któr± przerwa³e¶.
+JeÅ›li kod powÅ‚oki w tle jest uÅ¼yty, moÅ¼esz zawiesiÄ‡ aplikacjÄ™ w dowolnej chwili
+po prostu naciskajÄ…c kombinacjÄ™ C-o i przeskakujÄ…c spowrotem do Midnight
+Commandera, jeÅ›li zawiesisz jakÄ…Å› aplikacjÄ™ nie bÄ™dziesz mÃ³gÅ‚ uÅ¼ywaÄ‡ innych
+zewnÄ™trznych komend zanim nie wyjdziesz z aplikacji, ktÃ³rÄ… przerwaÅ‚eÅ›.
 .PP
-Extra dodatkiem do u¿ywania pow³oki w tle jest to, ¿e zachêta widoczna
-w Midnight Commanderze jest t± sam±, któr± aktualnie u¿ywasz w pow³oce.
+Extra dodatkiem do uÅ¼ywania powÅ‚oki w tle jest to, Å¼e zachÄ™ta widoczna
+w Midnight Commanderze jest tÄ… samÄ…, ktÃ³rÄ… aktualnie uÅ¼ywasz w powÅ‚oce.
 .PP
-Zobacz sekcjê Opcje po wiêcej informacji na temat tego, jak mo¿esz
-kontrolowaæ pow³okê w tle.
+Zobacz sekcjÄ™ Opcje po wiÄ™cej informacji na temat tego, jak moÅ¼esz
+kontrolowaÄ‡ powÅ‚okÄ™ w tle.
 .PP
 .\"NODE "Chmod"
 .SH "Chmod"
-Okno Chmod jest u¿ywane do zmieniania atrybutów grupy plików lub katalogów.
-Mo¿e byæ ono wywo³ane kombinacj± C-x c.
+Okno Chmod jest uÅ¼ywane do zmieniania atrybutÃ³w grupy plikÃ³w lub katalogÃ³w.
+MoÅ¼e byÄ‡ ono wywoÅ‚ane kombinacjÄ… C-x c.
 .PP
-Okno Chmod ma dwie czê¶ci -
+Okno Chmod ma dwie czÄ™Å›ci -
 .I Uprawnienia (Permissions)
 i
 .I Plik (File)
 .PP
-W sekcji Plik wy¶wietlana jest nazwa pliku lub katalogu i jego uprawnienia
-w formie liczbowej jak równie¿ w³a¶ciciel i grupa.
+W sekcji Plik wyÅ›wietlana jest nazwa pliku lub katalogu i jego uprawnienia
+w formie liczbowej jak rÃ³wnieÅ¼ wÅ‚aÅ›ciciel i grupa.
 .PP
-W sekcji Uprawnienia jest kilka przycisków, z których ka¿dy odpowiada
-za odpowiednie uprawnienie do pliku. Podczas zmieniania atrybutów, widzisz
-jak zmienia siê warto¶æ liczbowa w oknie Plik.
+W sekcji Uprawnienia jest kilka przyciskÃ³w, z ktÃ³rych kaÅ¼dy odpowiada
+za odpowiednie uprawnienie do pliku. Podczas zmieniania atrybutÃ³w, widzisz
+jak zmienia siÄ™ wartoÅ›Ä‡ liczbowa w oknie Plik.
 .PP
-Do poruszania pomiêdzy okienkami (przyciskami i polami do zaznaczania) u¿ywaj
-.I strza³ek
+Do poruszania pomiÄ™dzy okienkami (przyciskami i polami do zaznaczania) uÅ¼ywaj
+.I strzaÅ‚ek
 lub klawisza
 .IR tab .
-Aby zmieniæ pola lub wcisn±æ przycisk u¿ywaj klawisza
+Aby zmieniÄ‡ pola lub wcisnÄ…Ä‡ przycisk uÅ¼ywaj klawisza
 .IR spacji .
-Mo¿esz równie¿ u¿ywaæ "gor±cych liter" aby go wybraæ
-(s± one pod¶wietlonymi literami na przyciskach).
+MoÅ¼esz rÃ³wnieÅ¼ uÅ¼ywaÄ‡ "gorÄ…cych liter" aby go wybraÄ‡
+(sÄ… one podÅ›wietlonymi literami na przyciskach).
 .PP
-Aby uaktywniæ wprowadzone zmiany wci¶nij Enter.
+Aby uaktywniÄ‡ wprowadzone zmiany wciÅ›nij Enter.
 .PP
-Kiedy pracujesz z grup± plików, lub katalogów, mo¿esz klikn±æ na
-bit, który chcesz wybraæ lub wyczy¶ciæ. Kiedy ju¿ wybra³e¶ bity,
-które chcesz zmieniæ, mo¿esz wcisn±æ jeden z przycisków aktywuj±cych
+Kiedy pracujesz z grupÄ… plikÃ³w, lub katalogÃ³w, moÅ¼esz kliknÄ…Ä‡ na
+bit, ktÃ³ry chcesz wybraÄ‡ lub wyczyÅ›ciÄ‡. Kiedy juÅ¼ wybraÅ‚eÅ› bity,
+ktÃ³re chcesz zmieniÄ‡, moÅ¼esz wcisnÄ…Ä‡ jeden z przyciskÃ³w aktywujÄ…cych
 .RI ( "Set marked"
 lub
 .IR "Clear marked" ).
 .PP
-I w koñcu, aby wprowadziæ dok³adnie takie zmiany jak wybra³e¶, u¿yj
+I w koÅ„cu, aby wprowadziÄ‡ dokÅ‚adnie takie zmiany jak wybraÅ‚eÅ›, uÅ¼yj
 przycisku
 .BR "[Set all]" ,
-który zadzia³a na wszystkich wybranych plikach.
+ktÃ³ry zadziaÅ‚a na wszystkich wybranych plikach.
 .PP
 .B [Marked all]
-w³±cza tylko zaznaczone atrybuty do wybranych plików.
+wÅ‚Ä…cza tylko zaznaczone atrybuty do wybranych plikÃ³w.
 .PP
 .B [Set marked]
-w³±cza zaznaczone bity w atrybutach wszystkich wybranych plików.
+wÅ‚Ä…cza zaznaczone bity w atrybutach wszystkich wybranych plikÃ³w.
 .PP
 .B [Clean marked]
-czy¶ci zaznaczone bity z atrybutów zaznaczonych plików.
+czyÅ›ci zaznaczone bity z atrybutÃ³w zaznaczonych plikÃ³w.
 .PP
 .B [Set]
 ustawia atrybuty jednego pliku.
 .PP
 .B [Cancel]
-uniewa¿nia komendê chmod.
+uniewaÅ¼nia komendÄ™ chmod.
 .PP
 .\"NODE "Chown"
 .SH "Chown"
-Komenda chown jest u¿ywana do zmiany w³a¶ciela/grupy pliku. Skrótem
+Komenda chown jest uÅ¼ywana do zmiany wÅ‚aÅ›ciela/grupy pliku. SkrÃ³tem
 klawiszowym jest kombinacja C-x o.
 .PP
 .\"NODE "Advanced Chown"
 .SH "Zaawansowane chown (Advanced Chown)"
-Zaawansowane chown jest komend± ³±cz±c± w sobie komendy chmod i chown.
-Mo¿esz za jednym zamachem zmieniæ atrybuty i w³a¶ciela/grupê pliku.
+Zaawansowane chown jest komendÄ… Å‚Ä…czÄ…cÄ… w sobie komendy chmod i chown.
+MoÅ¼esz za jednym zamachem zmieniÄ‡ atrybuty i wÅ‚aÅ›ciela/grupÄ™ pliku.
 .PP
 .\"NODE "File Operations"
 .SH "Operacje na plikach (File Operations)"
 Kiedy kopiujesz, przenosisz lub kasujesz pliki, Midnight Commander pokazuje
-okno opisowe operacji na pliku. Pokazuje nazwê pliku, na którym
-aktualnie dokonuje siê operacja. Widoczne s± co najwy¿ej trzy linie postêpu.
-Pierwsza (file) mówi nam jak du¿a czê¶æ pliku zosta³a ju¿ przekopiowana.
-Druga (bytes) mówi jak du¿a czê¶æ wszystkich zaznaczonych plików zosta³a
-przekopiowana jak do tej pory. Trzecia (count) mówi jaka ilo¶æ plików
-zosta³a ju¿ przekopiowana. Je¶li opcja verbose jest wy³±czona, linia
+okno opisowe operacji na pliku. Pokazuje nazwÄ™ pliku, na ktÃ³rym
+aktualnie dokonuje siÄ™ operacja. Widoczne sÄ… co najwyÅ¼ej trzy linie postÄ™pu.
+Pierwsza (file) mÃ³wi nam jak duÅ¼a czÄ™Å›Ä‡ pliku zostaÅ‚a juÅ¼ przekopiowana.
+Druga (bytes) mÃ³wi jak duÅ¼a czÄ™Å›Ä‡ wszystkich zaznaczonych plikÃ³w zostaÅ‚a
+przekopiowana jak do tej pory. Trzecia (count) mÃ³wi jaka iloÅ›Ä‡ plikÃ³w
+zostaÅ‚a juÅ¼ przekopiowana. JeÅ›li opcja verbose jest wyÅ‚Ä…czona, linia
 file i bytes nie jest pokazywana.
 .PP
-S± dwa przyciski na dole okna dialogowego. Naciskaj±c przycisk Skip
-ominiemy resztê aktualnie "ruszanego" pliku. Naciskaj±c przycisk Abort
-zatrzymamy ca³± operacjê, pominiemy resztê plików.
+SÄ… dwa przyciski na dole okna dialogowego. NaciskajÄ…c przycisk Skip
+ominiemy resztÄ™ aktualnie "ruszanego" pliku. NaciskajÄ…c przycisk Abort
+zatrzymamy caÅ‚Ä… operacjÄ™, pominiemy resztÄ™ plikÃ³w.
 .PP
-S± trzy inne okna dialogowe, które mog± siê w³±czyæ podczas operacji
+SÄ… trzy inne okna dialogowe, ktÃ³re mogÄ… siÄ™ wÅ‚Ä…czyÄ‡ podczas operacji
 na plikach.
 .PP
-Okno b³êdów informuje nas o b³êdach zaistnia³ych podczas operacji
-na pliku. S± w nim trzy mo¿liwo¶ci wyboru. Przycisk Skip mówi ¿eby
-pomin±æ wybrany plik, przycisk Abort ¿eby przerwaæ ca³± operacj±,
-a Retry aby ponowiæ próbê (np. kiedy usun±³e¶ problem korzystaj±c
+Okno bÅ‚Ä™dÃ³w informuje nas o bÅ‚Ä™dach zaistniaÅ‚ych podczas operacji
+na pliku. SÄ… w nim trzy moÅ¼liwoÅ›ci wyboru. Przycisk Skip mÃ³wi Å¼eby
+pominÄ…Ä‡ wybrany plik, przycisk Abort Å¼eby przerwaÄ‡ caÅ‚Ä… operacjÄ…,
+a Retry aby ponowiÄ‡ prÃ³bÄ™ (np. kiedy usunÄ…Å‚eÅ› problem korzystajÄ…c
 z innego terminala).
 .PP
-Okno zastêpowania jest pokazywane kiedy próbujesz przenie¶æ lub
-przekopiowaæ plik, a taki ju¿ w miejscu docelowym istnieje. Okno pokazuje
-daty i wielko¶ci obu plików. Naci¶nij przycisk Yes aby nadpisaæ (zast±piæ)
-stary plik nowym, No aby pomin±æ ten plik, alL aby zast±piæ wszystkie pliki,
-nonE aby nigdy nie zastêpowaæ i Update aby zast±piæ ale tylko wtedy kiedy
-plik ¼ród³owy jest nowszy ni¿ docelowy. Ca³± operacjê mo¿esz przerwaæ
-naciskaj±c przycisk Abort.
+Okno zastÄ™powania jest pokazywane kiedy prÃ³bujesz przenieÅ›Ä‡ lub
+przekopiowaÄ‡ plik, a taki juÅ¼ w miejscu docelowym istnieje. Okno pokazuje
+daty i wielkoÅ›ci obu plikÃ³w. NaciÅ›nij przycisk Yes aby nadpisaÄ‡ (zastÄ…piÄ‡)
+stary plik nowym, No aby pominÄ…Ä‡ ten plik, alL aby zastÄ…piÄ‡ wszystkie pliki,
+nonE aby nigdy nie zastÄ™powaÄ‡ i Update aby zastÄ…piÄ‡ ale tylko wtedy kiedy
+plik ÅºrÃ³dÅ‚owy jest nowszy niÅ¼ docelowy. CaÅ‚Ä… operacjÄ™ moÅ¼esz przerwaÄ‡
+naciskajÄ…c przycisk Abort.
 .PP
-Okno rekursywnego kasowania jest pokazywane kiedy próbujesz skasowaæ
-katalog, który nie jest pusty. Naci¶nij przycisk Yes aby skasowaæ
-katalog rekursywnie, No aby pomin±æ katalog, alL aby skasowaæ wszystkie
-katalogi rekursywnie i nonE aby pomin±æ wszystkie katalogi, które nie s±
-puste. Mo¿esz przerwaæ ca³± opecj± naciskaj±c przycisk Abort. Je¶li
-wybra³e¶ przycisk Yes lub alL bêdziesz zapytany o potwierdzenie. Wybierz
-"yes" tylko je¶li jeste¶ pewien, ¿e chcesz skasowaæ wszystko rekursywnie.
+Okno rekursywnego kasowania jest pokazywane kiedy prÃ³bujesz skasowaÄ‡
+katalog, ktÃ³ry nie jest pusty. NaciÅ›nij przycisk Yes aby skasowaÄ‡
+katalog rekursywnie, No aby pominÄ…Ä‡ katalog, alL aby skasowaÄ‡ wszystkie
+katalogi rekursywnie i nonE aby pominÄ…Ä‡ wszystkie katalogi, ktÃ³re nie sÄ…
+puste. MoÅ¼esz przerwaÄ‡ caÅ‚Ä… opecjÄ… naciskajÄ…c przycisk Abort. JeÅ›li
+wybraÅ‚eÅ› przycisk Yes lub alL bÄ™dziesz zapytany o potwierdzenie. Wybierz
+"yes" tylko jeÅ›li jesteÅ› pewien, Å¼e chcesz skasowaÄ‡ wszystko rekursywnie.
 .PP
-Je¶li zaznaczy³e¶ pliki, i wykonujesz operacje tylko na nich, to je¶li
-operacja siê uda³a zostan± one odznaczone, te, na których operacja
-nie przebieg³a ca³kowicie pomy¶lnie, pozostan± zaznaczone.
+JeÅ›li zaznaczyÅ‚eÅ› pliki, i wykonujesz operacje tylko na nich, to jeÅ›li
+operacja siÄ™ udaÅ‚a zostanÄ… one odznaczone, te, na ktÃ³rych operacja
+nie przebiegÅ‚a caÅ‚kowicie pomyÅ›lnie, pozostanÄ… zaznaczone.
 .PP
 .\"NODE "Mask Copy/Rename"
 .SH "Maski kopiowania/przenoszenia (Mask Copy/Rename)"
-Operacje przenoszenia i kopiowania pozwalaj± ci na t³umaczenie nazw
-plików w ³atwy sposób. Aby to zrobiæ, musisz wybraæ odpowiedni± maskê
-¼ród³ow± i najczê¶ciej w nazwie docelowej u¿yæ gwiazdek.
-Wszystkie pliki pasuj±ce do maski ¼ród³owej s± kopiowane/przenoszone
-w zgodzie z mask± docelow±. Je¶li s± jakie¶ pliki zaznaczone, tylko one s±
-brane pod uwagê przy wybieraniu plików.
+Operacje przenoszenia i kopiowania pozwalajÄ… ci na tÅ‚umaczenie nazw
+plikÃ³w w Å‚atwy sposÃ³b. Aby to zrobiÄ‡, musisz wybraÄ‡ odpowiedniÄ… maskÄ™
+ÅºrÃ³dÅ‚owÄ… i najczÄ™Å›ciej w nazwie docelowej uÅ¼yÄ‡ gwiazdek.
+Wszystkie pliki pasujÄ…ce do maski ÅºrÃ³dÅ‚owej sÄ… kopiowane/przenoszone
+w zgodzie z maskÄ… docelowÄ…. JeÅ›li sÄ… jakieÅ› pliki zaznaczone, tylko one sÄ…
+brane pod uwagÄ™ przy wybieraniu plikÃ³w.
 .PP
-S± jeszcze inne opcje, które mo¿esz ustawiæ:
+SÄ… jeszcze inne opcje, ktÃ³re moÅ¼esz ustawiÄ‡:
 .PP
 Opcja
 .I Follow links
-mówi czy dowi±zania i dowi±zania twarde w katalogu ¼ród³owym powinny byæ przenoszone
-jako dowi±zania czy te¿ powinna byæ przegrywana ich zawarto¶æ (plik, na
-który wskazuj±).
+mÃ³wi czy dowiÄ…zania i dowiÄ…zania twarde w katalogu ÅºrÃ³dÅ‚owym powinny byÄ‡ przenoszone
+jako dowiÄ…zania czy teÅ¼ powinna byÄ‡ przegrywana ich zawartoÅ›Ä‡ (plik, na
+ktÃ³ry wskazujÄ…).
 .PP
 Opcja
 .I Dive into subdirs ...
-mówi co program ma robiæ, kiedy kopiuje siê katalog, a taki ju¿ istnieje.
-Standardowo kopiuje siê pliki do wewn±trz ju¿ istniej±cego katalogu (dodaje),
-po w³±czeniu tej opcji kopiuje siê katalog ¼ród³owy do wnêtrza tego katalogu.
-Mo¿e przyk³ad pomo¿e:
+mÃ³wi co program ma robiÄ‡, kiedy kopiuje siÄ™ katalog, a taki juÅ¼ istnieje.
+Standardowo kopiuje siÄ™ pliki do wewnÄ…trz juÅ¼ istniejÄ…cego katalogu (dodaje),
+po wÅ‚Ä…czeniu tej opcji kopiuje siÄ™ katalog ÅºrÃ³dÅ‚owy do wnÄ™trza tego katalogu.
+MoÅ¼e przykÅ‚ad pomoÅ¼e:
 .PP
-Chcesz przekopiowaæ zawarto¶æ katalogu foo do /bla/foo, które
-ju¿ istnieje. Normalnie (Dive nie jest w³±czone), mc skopiuje to dok³adnie
-do /bla/foo. Po w³±czeniu tej opcji zawarto¶æ zostanie skopiowana
-do /bla/foo/foo poniewa¿ ten katalog ju¿ istnieje.
+Chcesz przekopiowaÄ‡ zawartoÅ›Ä‡ katalogu foo do /bla/foo, ktÃ³re
+juÅ¼ istnieje. Normalnie (Dive nie jest wÅ‚Ä…czone), mc skopiuje to dokÅ‚adnie
+do /bla/foo. Po wÅ‚Ä…czeniu tej opcji zawartoÅ›Ä‡ zostanie skopiowana
+do /bla/foo/foo poniewaÅ¼ ten katalog juÅ¼ istnieje.
 .PP
 Opcja
 .I Preserve attributes
-mówi czy zachowywaæ oryginalne atrybuty pliku, czasy i je¶li jeste¶
-rootem to nawet numery UID i GID. Je¶li ta opcja jest wy³±czona
-u¿ywana jest aktualna warto¶æ zmiennej umask.
+mÃ³wi czy zachowywaÄ‡ oryginalne atrybuty pliku, czasy i jeÅ›li jesteÅ›
+rootem to nawet numery UID i GID. JeÅ›li ta opcja jest wyÅ‚Ä…czona
+uÅ¼ywana jest aktualna wartoÅ›Ä‡ zmiennej umask.
 .PP
 .B "Use shell patterns on"
 .PP
-Je¶li opcja obs³ugi wzorców pow³oki jest w³±czona, mo¿esz u¿ywaæ znaków '*' i
-'?' w maskach ¼ród³owych. Dzia³aj± one tak jak w pow³oce. W masce docelowej mo¿esz
-u¿ywaæ tylko '*' i '\\<cyfra>'. Pierwsza maska '*' w nazwie docelowej
-odnosi sie do pierwszej gwiazdki w masce ¼ród³owej, druga do drugiej itd.
-Joker '\\1' odnosi siê do pierwszego jokera w masce ¼ród³owej, '\\2' odnosi
-siê do drugiego i tak dalej a¿ do '\\9'. Joker '\\0' oznacza pe³n± nazwê
-pliku ¼ród³owego.
+JeÅ›li opcja obsÅ‚ugi wzorcÃ³w powÅ‚oki jest wÅ‚Ä…czona, moÅ¼esz uÅ¼ywaÄ‡ znakÃ³w '*' i
+'?' w maskach ÅºrÃ³dÅ‚owych. DziaÅ‚ajÄ… one tak jak w powÅ‚oce. W masce docelowej moÅ¼esz
+uÅ¼ywaÄ‡ tylko '*' i '\\<cyfra>'. Pierwsza maska '*' w nazwie docelowej
+odnosi sie do pierwszej gwiazdki w masce ÅºrÃ³dÅ‚owej, druga do drugiej itd.
+Joker '\\1' odnosi siÄ™ do pierwszego jokera w masce ÅºrÃ³dÅ‚owej, '\\2' odnosi
+siÄ™ do drugiego i tak dalej aÅ¼ do '\\9'. Joker '\\0' oznacza peÅ‚nÄ… nazwÄ™
+pliku ÅºrÃ³dÅ‚owego.
 .PP
-Dwa przyk³ady:
+Dwa przykÅ‚ady:
 .PP
-Je¶li maska ¼ród³owa jest "*.tar.gz", a miejscem docelowym jest "/bla/*.tgz"
-i plikiem, który ma zostaæ przekopiowany jest "foo.tar.gz", to kopi± bêdzie
+JeÅ›li maska ÅºrÃ³dÅ‚owa jest "*.tar.gz", a miejscem docelowym jest "/bla/*.tgz"
+i plikiem, ktÃ³ry ma zostaÄ‡ przekopiowany jest "foo.tar.gz", to kopiÄ… bÄ™dzie
 "foo.tgz" w katalogu "/bla".
 .PP
-Za³ó¿my, ¿e chcesz zaminieæ miejscami nazwê i rozszerzenie pliku, tak, ¿e
-plik "plik.c" ma byæ zmieniony na "c.plik" itp. Maska ¼ród³owa powinna byæ
-nastêpuj±ca: "*.*", natomiast docelowa: "\\2.\\1".
+ZaÅ‚Ã³Å¼my, Å¼e chcesz zaminieÄ‡ miejscami nazwÄ™ i rozszerzenie pliku, tak, Å¼e
+plik "plik.c" ma byÄ‡ zmieniony na "c.plik" itp. Maska ÅºrÃ³dÅ‚owa powinna byÄ‡
+nastÄ™pujÄ…ca: "*.*", natomiast docelowa: "\\2.\\1".
 .PP
 .B "Use shell patterns off"
 .PP
-Kiedy wzorce pow³oki s± wy³±czone, MC nie dokonuje automatycznego grupowania
-plików. Musisz u¿yæ wyra¿enia'\\(...\\)' w masce ¼ród³owej aby zasygnalizowaæ
-istnienie jokerów w masce docelowej. Jest to trochê ³atwiejsze, ale te¿
-wymaga aby trochê siê napisaæ. Z drugiej jednak strony, makra s± bardzo
-podobne tych u¿ywanych kiedy wzorce pow³oki s± w³±czone.
+Kiedy wzorce powÅ‚oki sÄ… wyÅ‚Ä…czone, MC nie dokonuje automatycznego grupowania
+plikÃ³w. Musisz uÅ¼yÄ‡ wyraÅ¼enia'\\(...\\)' w masce ÅºrÃ³dÅ‚owej aby zasygnalizowaÄ‡
+istnienie jokerÃ³w w masce docelowej. Jest to trochÄ™ Å‚atwiejsze, ale teÅ¼
+wymaga aby trochÄ™ siÄ™ napisaÄ‡. Z drugiej jednak strony, makra sÄ… bardzo
+podobne tych uÅ¼ywanych kiedy wzorce powÅ‚oki sÄ… wÅ‚Ä…czone.
 .PP
-Dwa przyk³ady:
+Dwa przykÅ‚ady:
 .PP
-Je¶li mask± ¼ród³ow± jest "^\\(.*\\)\\.tar\\.gz$", docelow± jest
+JeÅ›li maskÄ… ÅºrÃ³dÅ‚owÄ… jest "^\\(.*\\)\\.tar\\.gz$", docelowÄ… jest
 "/bla/*.tgz"
-i plikiem do przekopiowania jest "foo.tar.gz", kopi± bêdzie "/bla/foo.tgz".
+i plikiem do przekopiowania jest "foo.tar.gz", kopiÄ… bÄ™dzie "/bla/foo.tgz".
 .PP
-Za³ó¿my, ¿e chemy zamieniæ miejscami nazwê i rozszerzenia, tak, ¿e plik
-"plik.c" bêdzie siê nazywa³ "c.plik" itp. Mask± ¼ród³ow± powinno byæ
-"^\\(.*\\)\\.\\(.*\\)$", a docelow± "\\2.\\1".
+ZaÅ‚Ã³Å¼my, Å¼e chemy zamieniÄ‡ miejscami nazwÄ™ i rozszerzenia, tak, Å¼e plik
+"plik.c" bÄ™dzie siÄ™ nazywaÅ‚ "c.plik" itp. MaskÄ… ÅºrÃ³dÅ‚owÄ… powinno byÄ‡
+"^\\(.*\\)\\.\\(.*\\)$", a docelowÄ… "\\2.\\1".
 .PP
 .B "Konwersje nazwy (Case Conversions)"
 .PP
-Mo¿esz równie¿ zmieniaæ nazwy plików. Je¶li u¿yjesz '\\u' lub
-'\\l' w masce docelowej, nastêpny znak bêdzie przekonwertowany na
-du¿y lub ma³y, zale¿nie od podanej opcji.
+MoÅ¼esz rÃ³wnieÅ¼ zmieniaÄ‡ nazwy plikÃ³w. JeÅ›li uÅ¼yjesz '\\u' lub
+'\\l' w masce docelowej, nastÄ™pny znak bÄ™dzie przekonwertowany na
+duÅ¼y lub maÅ‚y, zaleÅ¼nie od podanej opcji.
 .PP
-Je¶li u¿yjesz '\\U' lub '\\L' w masce docelowej, nastêpne znaki bêd±
-zmieniane na ma³e lub du¿e (zale¿nie od opcji), a¿ do napotkania znaku
-'\\E' lub nastêpnych '\\U', '\\L' b±d¼ te¿ koñca linii.
+JeÅ›li uÅ¼yjesz '\\U' lub '\\L' w masce docelowej, nastÄ™pne znaki bÄ™dÄ…
+zmieniane na maÅ‚e lub duÅ¼e (zaleÅ¼nie od opcji), aÅ¼ do napotkania znaku
+'\\E' lub nastÄ™pnych '\\U', '\\L' bÄ…dÅº teÅ¼ koÅ„ca linii.
 .PP
-Konwersje '\\u' i '\\l' maj± wy¿szy priorytet ni¿ '\\U' i '\\L'.
+Konwersje '\\u' i '\\l' majÄ… wyÅ¼szy priorytet niÅ¼ '\\U' i '\\L'.
 .PP
-Na przyk³ad, je¶li mask± ¼ród³ow± jest '*' (shell patterns on) lub '^\\(.*\\)$'
-(shell patterns off) i mask± docelow± jest '\\L\\u*', nazwa pliku bêdzie
-mia³a pierwsz± literê du¿±, ale pozosta³e ju¿ ma³e, niezale¿nie od obecnej
+Na przykÅ‚ad, jeÅ›li maskÄ… ÅºrÃ³dÅ‚owÄ… jest '*' (shell patterns on) lub '^\\(.*\\)$'
+(shell patterns off) i maskÄ… docelowÄ… jest '\\L\\u*', nazwa pliku bÄ™dzie
+miaÅ‚a pierwszÄ… literÄ™ duÅ¼Ä…, ale pozostaÅ‚e juÅ¼ maÅ‚e, niezaleÅ¼nie od obecnej
 nazwy.
 .PP
-Mo¿esz równie¿ u¿ywaæ '\\' aby "podkre¶liæ" znak. Na przyk³ad, '\\\\' jest
-backsleshem, a '\\*' jest gwiazdk±.
+MoÅ¼esz rÃ³wnieÅ¼ uÅ¼ywaÄ‡ '\\' aby "podkreÅ›liÄ‡" znak. Na przykÅ‚ad, '\\\\' jest
+backsleshem, a '\\*' jest gwiazdkÄ….
 .PP
 .\"NODE "Internal File Viewer"
-.SH "Wbudowany podgl±d plików"
-Wbudowany podgl±d plików pozwala na dwa tryby wy¶mietlania: ASCII i hex.
-Aby prze³±czaæ siê pomiêdzy tymi trybami u¿ywaj klawisza F4. Je¶li masz
-zainstalowany program GNU gzip, bêdzie on automatycznie u¿ywany do dekompresji
-plików w przypadku wyst±pienia takiej potrzeby.
+.SH "Wbudowany podglÄ…d plikÃ³w"
+Wbudowany podglÄ…d plikÃ³w pozwala na dwa tryby wyÅ›mietlania: ASCII i hex.
+Aby przeÅ‚Ä…czaÄ‡ siÄ™ pomiÄ™dzy tymi trybami uÅ¼ywaj klawisza F4. JeÅ›li masz
+zainstalowany program GNU gzip, bÄ™dzie on automatycznie uÅ¼ywany do dekompresji
+plikÃ³w w przypadku wystÄ…pienia takiej potrzeby.
 .PP
-Podgl±d plików bêdzie próbowa³ u¿yæ najlepszej metody zalecanej przez system
-lub rozszerzenie pliku. Wbudowany podgl±d plików bêdzie interpretowa³ wiele
-ci±gów znaków, i w³±cza³ podkre¶lenie lub pogrubienie, powoduj±c tym samym
-du¿o przyjemniejszy wygl±d plików.
+PodglÄ…d plikÃ³w bÄ™dzie prÃ³bowaÅ‚ uÅ¼yÄ‡ najlepszej metody zalecanej przez system
+lub rozszerzenie pliku. Wbudowany podglÄ…d plikÃ³w bÄ™dzie interpretowaÅ‚ wiele
+ciÄ…gÃ³w znakÃ³w, i wÅ‚Ä…czaÅ‚ podkreÅ›lenie lub pogrubienie, powodujÄ…c tym samym
+duÅ¼o przyjemniejszy wyglÄ…d plikÃ³w.
 .PP
-Kiedy jeste¶ w trybie hex, funkcja szukania akceptuje tekst w cudzys³owach
-równie dobrze jak warto¶ci szesnastkowe.
+Kiedy jesteÅ› w trybie hex, funkcja szukania akceptuje tekst w cudzysÅ‚owach
+rÃ³wnie dobrze jak wartoÅ›ci szesnastkowe.
 .PP
-Mo¿esz mieszaæ ci±gi znaków ze sta³ymi tak jak: "Ci±g" 0xFE 0xBB
-"wiêcej tekstu". Ci±g pomiêdzy sta³ymi i cudzys³owami jest po prostu
+MoÅ¼esz mieszaÄ‡ ciÄ…gi znakÃ³w ze staÅ‚ymi tak jak: "CiÄ…g" 0xFE 0xBB
+"wiÄ™cej tekstu". CiÄ…g pomiÄ™dzy staÅ‚ymi i cudzysÅ‚owami jest po prostu
 ignorowany.
 .PP
-Kilka wewnêtrznych szczegó³ów na temat podgl±du: Na systemach, które u¿ywaj±
-wywo³ania systemowego mmap(2), program mapuje pliki zamiast je ³adowaæ;
-je¶li system nie obs³uguje mmap(2) lub plik pasuje do którego¶ z wybranych
-filtrów, podgl±d u¿yje jego rozszerzalnych buforów, dziêki temu ³aduj±c tylko
-te czê¶ci, do których musisz mieæ aktualnie dostêp (dotyczy równie¿
-plików skompresowanych).
+Kilka wewnÄ™trznych szczegÃ³Å‚Ã³w na temat podglÄ…du: Na systemach, ktÃ³re uÅ¼ywajÄ…
+wywoÅ‚ania systemowego mmap(2), program mapuje pliki zamiast je Å‚adowaÄ‡;
+jeÅ›li system nie obsÅ‚uguje mmap(2) lub plik pasuje do ktÃ³regoÅ› z wybranych
+filtrÃ³w, podglÄ…d uÅ¼yje jego rozszerzalnych buforÃ³w, dziÄ™ki temu Å‚adujÄ…c tylko
+te czÄ™Å›ci, do ktÃ³rych musisz mieÄ‡ aktualnie dostÄ™p (dotyczy rÃ³wnieÅ¼
+plikÃ³w skompresowanych).
 .PP
-Tu jest lista akcji powi±zanych z ka¿dym klawiszem, który Midnight Commander
-obs³uguje w wewnêtrznym pogl±dzie.
+Tu jest lista akcji powiÄ…zanych z kaÅ¼dym klawiszem, ktÃ³ry Midnight Commander
+obsÅ‚uguje w wewnÄ™trznym poglÄ…dzie.
 .PP
 .B F1
-Wywo³uje wbudowan± przegl±darkê pomocy.
+WywoÅ‚uje wbudowanÄ… przeglÄ…darkÄ™ pomocy.
 .PP
 .B F2
-Prze³±cza tryb zawijania.
+PrzeÅ‚Ä…cza tryb zawijania.
 .PP
 .B F4
-Prze³±cza tryb wy¶wietlania.
+PrzeÅ‚Ä…cza tryb wyÅ›wietlania.
 .PP
 .B F5
-Id¼ do linii. Zostaniesz zapytany o numer linii i zostanie ona wy¶wietlona na
+IdÅº do linii. Zostaniesz zapytany o numer linii i zostanie ona wyÅ›wietlona na
 ekranie twojego monitora.
 .PP
 .BR F6 ", " / .
-Szukaj wyra¿eñ w dalszej czê¶ci.
+Szukaj wyraÅ¼eÅ„ w dalszej czÄ™Å›ci.
 .PP
 .B ?,
-Wsteczne wyszukiwanie wyra¿enia.
+Wsteczne wyszukiwanie wyraÅ¼enia.
 .PP
 .B F7
 Normalne wyszukiwanie\wyszukiwanie w trybie hex.
 .PP
 .BR C-s .
-Zaczyna normalne szukanie je¶li nie by³o ¿adnego wcze¶niej, w przeciwnym
-razie szuka nastêpnego wyst±pienia.
+Zaczyna normalne szukanie jeÅ›li nie byÅ‚o Å¼adnego wczeÅ›niej, w przeciwnym
+razie szuka nastÄ™pnego wystÄ…pienia.
 .PP
 .BR C-r .
-Zaczyna szukanie wsteczne je¶li jeszcze ¿adnego nie by³o, w przeciwnym
-razie szuka nastêpnego wyst±pienia.
+Zaczyna szukanie wsteczne jeÅ›li jeszcze Å¼adnego nie byÅ‚o, w przeciwnym
+razie szuka nastÄ™pnego wystÄ…pienia.
 .PP
 .BR n .
-Szuka nastêpnego wyst±pienia.
+Szuka nastÄ™pnego wystÄ…pienia.
 .PP
 .B F8
-Prze³±cza tryby Raw i Parsed. Poka¿e to plik w postaci takiej w jakiej
-zosta³ znaleziony na dysku, lub je¶li zosta³ wybrany jaki¶ filtr, b±d¼
-te¿ plik spe³nia wymagania w pliku mc.ext, wy¶wietlane jest to co
-przekazuje filtr. Aktualne ustawienie jest zawsze przeciwne ni¿ to napisane
-na przycisku, przycisk wskazuje zawsze to co siê stanie po jego
-naci¶niêciu.
+PrzeÅ‚Ä…cza tryby Raw i Parsed. PokaÅ¼e to plik w postaci takiej w jakiej
+zostaÅ‚ znaleziony na dysku, lub jeÅ›li zostaÅ‚ wybrany jakiÅ› filtr, bÄ…dÅº
+teÅ¼ plik speÅ‚nia wymagania w pliku mc.ext, wyÅ›wietlane jest to co
+przekazuje filtr. Aktualne ustawienie jest zawsze przeciwne niÅ¼ to napisane
+na przycisku, przycisk wskazuje zawsze to co siÄ™ stanie po jego
+naciÅ›niÄ™ciu.
 .PP
 .B F9
-Prze³±cza pomiêdzy trybami format i unformat. Kiedy tryb formatu jest
-w³±czony podgl±d bêdzie interpretowa³ niektóre sentencje i pokazywa³
-tekst pogrubiony i podkre¶lony innymi kolorami. Wynika z tego, ¿e przycisk
-wskazuje co innego ni¿ jest aktualnie (patrz wy¿ej).
+PrzeÅ‚Ä…cza pomiÄ™dzy trybami format i unformat. Kiedy tryb formatu jest
+wÅ‚Ä…czony podglÄ…d bÄ™dzie interpretowaÅ‚ niektÃ³re sentencje i pokazywaÅ‚
+tekst pogrubiony i podkreÅ›lony innymi kolorami. Wynika z tego, Å¼e przycisk
+wskazuje co innego niÅ¼ jest aktualnie (patrz wyÅ¼ej).
 .PP
 .BR F10 ", " Esc .
-Wychodzi z wbudowanego podgl±du.
+Wychodzi z wbudowanego podglÄ…du.
 .PP
 .BR "Page Down" ", " space ", " C-v .
-Przewija jedn± stronê naprzód.
+Przewija jednÄ… stronÄ™ naprzÃ³d.
 .PP
 .BR "Page Up" ", " M-v ", " C-b ", " backspace .
-Przewija jedn± stronê wstecz.
+Przewija jednÄ… stronÄ™ wstecz.
 .PP
-.BR "strza³ka w dó³" .
-Przewija jedn± liniê naprzód.
+.BR "strzaÅ‚ka w dÃ³Å‚" .
+Przewija jednÄ… liniÄ™ naprzÃ³d.
 .PP
-.BR "strza³ka w górê" .
-Przewija jedn± liniê wstecz.
+.BR "strzaÅ‚ka w gÃ³rÄ™" .
+Przewija jednÄ… liniÄ™ wstecz.
 .PP
 .BR C-l .
-Od¶wie¿a ekran.
+OdÅ›wieÅ¼a ekran.
 .PP
 .BR ! .
-W³±cza pow³okê w aktualnym katalogu roboczym.
+WÅ‚Ä…cza powÅ‚okÄ™ w aktualnym katalogu roboczym.
 .PP
 .BR C-f .
-Przeskakuje do nastêpnego pliku.
+Przeskakuje do nastÄ™pnego pliku.
 .PP
 .BR C-b .
 Przeskakuje do poprzedniego pliku.
 .PP
 .BR M-r .
-Prze³±cza linijkê.
+PrzeÅ‚Ä…cza linijkÄ™.
 .PP
-Mo¿liwe jest poinstruowanie podgl±du pliku jak ma wy¶wietlaæ plik, zobacz
-sekcjê Edycja pliku rozszerzeñ.
+MoÅ¼liwe jest poinstruowanie podglÄ…du pliku jak ma wyÅ›wietlaÄ‡ plik, zobacz
+sekcjÄ™ Edycja pliku rozszerzeÅ„.
 .\"NODE "Internal File Editor"
-.SH "Wbudowany edytor plików"
-Wbudowany edytor plików ma wiêkszo¶æ funkcji posiadanych przez inne
-edytory pe³no-ekranowe. Jest wywo³ywany po naci¶niêciu klawisza
+.SH "Wbudowany edytor plikÃ³w"
+Wbudowany edytor plikÃ³w ma wiÄ™kszoÅ›Ä‡ funkcji posiadanych przez inne
+edytory peÅ‚no-ekranowe. Jest wywoÅ‚ywany po naciÅ›niÄ™ciu klawisza
 .B F4
 o ile opcja
 .I use_internal_edit
-jest ustawiona w pliku startowyn. Ma maksymalny rozmiar pliku wynosz±cy
-szesna¶cie megabajtów i potrafi bez skazy edytowaæ pliki binarne.
+jest ustawiona w pliku startowyn. Ma maksymalny rozmiar pliku wynoszÄ…cy
+szesnaÅ›cie megabajtÃ³w i potrafi bez skazy edytowaÄ‡ pliki binarne.
 .PP
-Opcje, które aktualnie posiada to: kopiowanie, przenoszenie, kasowanie,
-wycinanie i wklejanie bloków;
+Opcje, ktÃ³re aktualnie posiada to: kopiowanie, przenoszenie, kasowanie,
+wycinanie i wklejanie blokÃ³w;
 .IR "klawisz dla klawisza undo" ;
-rozci±gane menu; wklejanie plików; definiowanie makr; szukanie i
-zastêpowanie wyra¿eñ regularnych (i nasze w³asne funkcje scanf-printf
-szukaj±ce i zamieniaj±ce); strza³ki z Shiftem zaznaczaj±ce teksty w stylu
-MSW-MAC (tylko dla konsoli typu Linux); prze³±czanie trybu
-wstawiania-zastêpowania; opcja pozwalaj±ca na "przerzucenie" bloku tekstu
-przez komendê pow³oki jak na przyk³ad indent.
+rozciÄ…gane menu; wklejanie plikÃ³w; definiowanie makr; szukanie i
+zastÄ™powanie wyraÅ¼eÅ„ regularnych (i nasze wÅ‚asne funkcje scanf-printf
+szukajÄ…ce i zamieniajÄ…ce); strzaÅ‚ki z Shiftem zaznaczajÄ…ce teksty w stylu
+MSW-MAC (tylko dla konsoli typu Linux); przeÅ‚Ä…czanie trybu
+wstawiania-zastÄ™powania; opcja pozwalajÄ…ca na "przerzucenie" bloku tekstu
+przez komendÄ™ powÅ‚oki jak na przykÅ‚ad indent.
 .PP
-Edytor jest bardzo prosty w u¿yciu i nie wymaga ¿adnego przygotowania. Aby
-zobaczyæ jakie s± klawisze po prostu obejrzyj odpowiednie menu
-rozwijalne. Inne klawisze to: przemieszczanie z Shiftem zaznaczaj±ce tekst.
+Edytor jest bardzo prosty w uÅ¼yciu i nie wymaga Å¼adnego przygotowania. Aby
+zobaczyÄ‡ jakie sÄ… klawisze po prostu obejrzyj odpowiednie menu
+rozwijalne. Inne klawisze to: przemieszczanie z Shiftem zaznaczajÄ…ce tekst.
 .B Ctrl-Ins
 kopiuje do pliku
 .B cooledit.clip
@@ -2111,32 +2111,32 @@ Wycina do
 .BR cooledit.clip ,
 a
 .B Ctrl-Del
-kasuje zaznaczony tekst. Klawisze dokoñczenia równie¿ daj± Enter z
-automatycznym wciêciem. Pod¶wietlanie mysz± równie¿ dzia³a,
-i mo¿esz je przes³oniæ i spowodowaæ normalne zaznaczanie tekstu (takie jak
-obs³uguje terminal) po prostu trzymaj±c klawisz Shift.
+kasuje zaznaczony tekst. Klawisze dokoÅ„czenia rÃ³wnieÅ¼ dajÄ… Enter z
+automatycznym wciÄ™ciem. PodÅ›wietlanie myszÄ… rÃ³wnieÅ¼ dziaÅ‚a,
+i moÅ¼esz je przesÅ‚oniÄ‡ i spowodowaÄ‡ normalne zaznaczanie tekstu (takie jak
+obsÅ‚uguje terminal) po prostu trzymajÄ…c klawisz Shift.
 .PP
-Aby zdefiniowaæ makro, naci¶nij
+Aby zdefiniowaÄ‡ makro, naciÅ›nij
 .B Ctrl-R
-i potem naci¶nij klawisze, które chcesz aby by³y wykonywane. Naci¶nij
+i potem naciÅ›nij klawisze, ktÃ³re chcesz aby byÅ‚y wykonywane. NaciÅ›nij
 ponownie
 .B Ctrl-R
-kiedy skoñczysz. Mo¿esz równie¿ przyporz±dkowaæ makro do dowolnego klawisza
-jaki chcesz naciskaj±c ten klawisz. Makro jest wykonywane kiedy naci¶niesz
+kiedy skoÅ„czysz. MoÅ¼esz rÃ³wnieÅ¼ przyporzÄ…dkowaÄ‡ makro do dowolnego klawisza
+jaki chcesz naciskajÄ…c ten klawisz. Makro jest wykonywane kiedy naciÅ›niesz
 .B Ctrl-A
-i przyporz±dkowany klawisz. Makro jest wykonywane równie¿ je¶li naci¶niesz
-klawisz Meta, Ctrl, lub Esc i wybrany klawisz, jednak tylko je¶li ten
-klawisz nie jest u¿ywane przez inne funkcje. Raz zdefiniowane, makro
-wêdruje sobie do pliku
+i przyporzÄ…dkowany klawisz. Makro jest wykonywane rÃ³wnieÅ¼ jeÅ›li naciÅ›niesz
+klawisz Meta, Ctrl, lub Esc i wybrany klawisz, jednak tylko jeÅ›li ten
+klawisz nie jest uÅ¼ywane przez inne funkcje. Raz zdefiniowane, makro
+wÄ™druje sobie do pliku
 .B .mc/cedit/cooledit.macros
-w twoim katalogu domowym. Mo¿esz skasowaæ makro kasuj±c odpowiedni± liniê z
+w twoim katalogu domowym. MoÅ¼esz skasowaÄ‡ makro kasujÄ…c odpowiedniÄ… liniÄ™ z
 tego pliku.
 .PP
 .B F19
-sformatuje format C je¶li jest pod¶wietlony. ¯eby to dzia³a³o, stwórz
+sformatuje format C jeÅ›li jest podÅ›wietlony. Å»eby to dziaÅ‚aÅ‚o, stwÃ³rz
 wykonywalny plik
 .B .mc/cedit/edit.indent.rc
-w twoim katalogu domowym zawieraj±cy poni¿sze:
+w twoim katalogu domowym zawierajÄ…cy poniÅ¼sze:
 .PP
 .nf
 #!/bin/sh
@@ -2144,135 +2144,135 @@ w twoim katalogu domowym zawieraj±cy poni¿sze:
 cat /dev/null > $HOME/.mc/cedit/cooledit.error
 .fi
 .PP
-Mo¿esz u¿ywaæ funkcji scanf do przeszukiwania i zastêpowania formatów
-znaków w C. Najpierw jest rzuæ okiem na stronê manuala funkcji
+MoÅ¼esz uÅ¼ywaÄ‡ funkcji scanf do przeszukiwania i zastÄ™powania formatÃ³w
+znakÃ³w w C. Najpierw jest rzuÄ‡ okiem na stronÄ™ manuala funkcji
 .B sscanf
 i
 .B sprintf
-aby zobaczyæ jaki jest format ci±gów i jak on dzia³a.
-Za³ó¿my, ¿e chcesz wszystkie wyst±pienia ci±gu z³o¿onego z, powiedzmy,
+aby zobaczyÄ‡ jaki jest format ciÄ…gÃ³w i jak on dziaÅ‚a.
+ZaÅ‚Ã³Å¼my, Å¼e chcesz wszystkie wystÄ…pienia ciÄ…gu zÅ‚oÅ¼onego z, powiedzmy,
 otwartego nawiasu, trzech oddzielonych przecinkami liczb i nawiasu
-zamykaj±cego, zast±piæ ci±giem z³o¿onym ze s³owa
-.IR jab³ka ,
-trzeciej liczby, s³owa
-.I pomarañcze
-i drugiej liczby. Nale¿y wówczas tak wype³niæ okno dialogowe zastêpowania:
+zamykajÄ…cego, zastÄ…piÄ‡ ciÄ…giem zÅ‚oÅ¼onym ze sÅ‚owa
+.IR jabÅ‚ka ,
+trzeciej liczby, sÅ‚owa
+.I pomaraÅ„cze
+i drugiej liczby. NaleÅ¼y wÃ³wczas tak wypeÅ‚niÄ‡ okno dialogowe zastÄ™powania:
 .PP
 .nf
  Enter search string
 (%d,%d,%d)
  Enter replace string
-jab³ka %d pomarañcze %d
+jabÅ‚ka %d pomaraÅ„cze %d
  Enter replacement argument order
 3,2
 .fi
 .PP
-Ostatnia linia mówi, ¿e w miejscu pierwszego i drugiego argumentu wyniku maj±
-byæ u¿yte trzeci i drugi wej¶ciowy.
+Ostatnia linia mÃ³wi, Å¼e w miejscu pierwszego i drugiego argumentu wyniku majÄ…
+byÄ‡ uÅ¼yte trzeci i drugi wejÅ›ciowy.
 .PP
-Jest równie¿ dobrym polecenia w³±czenie opcji pytania siê przed zamian±,
-poniewa¿ zgodno¶æ jest znajdowana kiedykolwiek tylko liczba argumentów
-znalezionych zgadza sie z liczb± podanych, co nie zawsze jest prawdziw±
-zgodno¶ci±. Scanf traktuje równie¿ bia³e znaki jako elastyczne. Zauwa¿, ¿e
-format scanfa % jest równie¿ bardzo u¿yteczny dla skanowania znaków i
-bia³ych spacji.
+Jest rÃ³wnieÅ¼ dobrym polecenia wÅ‚Ä…czenie opcji pytania siÄ™ przed zamianÄ…,
+poniewaÅ¼ zgodnoÅ›Ä‡ jest znajdowana kiedykolwiek tylko liczba argumentÃ³w
+znalezionych zgadza sie z liczbÄ… podanych, co nie zawsze jest prawdziwÄ…
+zgodnoÅ›ciÄ…. Scanf traktuje rÃ³wnieÅ¼ biaÅ‚e znaki jako elastyczne. ZauwaÅ¼, Å¼e
+format scanfa % jest rÃ³wnieÅ¼ bardzo uÅ¼yteczny dla skanowania znakÃ³w i
+biaÅ‚ych spacji.
 .PP
-Edytor wy¶wietla równie¿ znaki nieamerykañskie (160+). Kiedy edytujesz plik
-binarny, powiniene¶ ustawiæ opcjê
+Edytor wyÅ›wietla rÃ³wnieÅ¼ znaki nieamerykaÅ„skie (160+). Kiedy edytujesz plik
+binarny, powinieneÅ› ustawiÄ‡ opcjÄ™
 .B display bits
-do 7 bitów w menu opcji, aby utrzymaæ przejrzysto¶æ odstêpów miêdzy znakami.
+do 7 bitÃ³w w menu opcji, aby utrzymaÄ‡ przejrzystoÅ›Ä‡ odstÄ™pÃ³w miÄ™dzy znakami.
 .PP
-Zobacz sekcjê Polskie znaki, aby poznaæ szczegó³y na temat u¿ywania
-polskich znaków w Midnight Commanderze.
+Zobacz sekcjÄ™ Polskie znaki, aby poznaÄ‡ szczegÃ³Å‚y na temat uÅ¼ywania
+polskich znakÃ³w w Midnight Commanderze.
 .PP
 .\"NODE "Completion"
-.SH Dokañczanie
+.SH DokaÅ„czanie
 .PP
-Pozwól Midnight Commanderowi pisaæ za ciebie.
+PozwÃ³l Midnight Commanderowi pisaÄ‡ za ciebie.
 .PP
-Spróbuj u¿yæ dokoñczenia na tek¶cie przed aktualn± pozycj±. MC próbuje
-dokoñczyæ tekst jako zmienn± (je¶li tekst zaczyna siê od znaku
+SprÃ³buj uÅ¼yÄ‡ dokoÅ„czenia na tekÅ›cie przed aktualnÄ… pozycjÄ…. MC prÃ³buje
+dokoÅ„czyÄ‡ tekst jako zmiennÄ… (jeÅ›li tekst zaczyna siÄ™ od znaku
 .BR $ ),
-nazwê u¿ytkownika (je¶li tekst zaczyna siê od znaku
+nazwÄ™ uÅ¼ytkownika (jeÅ›li tekst zaczyna siÄ™ od znaku
 .BR ~ ),
-nazwê hosta (je¶li tekst zaczyna siê od znaku
+nazwÄ™ hosta (jeÅ›li tekst zaczyna siÄ™ od znaku
 .BR @ )
-lub komendê (je¶li jeste¶ w linii komend w pozycji gdzie mo¿esz wpisaæ
-jak±¶ komendê, mo¿liwe dokoñczenia bêd± zawieraæ równie¿ zarezerwowane
-s³owa i wbudowane komendy pow³oki). Je¶li ¿aden z powy¿szych warunków nie
-jest spe³niony, próbuje siê dokañczaæ nazwê pliku.
+lub komendÄ™ (jeÅ›li jesteÅ› w linii komend w pozycji gdzie moÅ¼esz wpisaÄ‡
+jakÄ…Å› komendÄ™, moÅ¼liwe dokoÅ„czenia bÄ™dÄ… zawieraÄ‡ rÃ³wnieÅ¼ zarezerwowane
+sÅ‚owa i wbudowane komendy powÅ‚oki). JeÅ›li Å¼aden z powyÅ¼szych warunkÃ³w nie
+jest speÅ‚niony, prÃ³buje siÄ™ dokaÅ„czaÄ‡ nazwÄ™ pliku.
 .PP
-Nazwa pliku, nazwa u¿ytkownika i hosta, pracuje we wszystkich liniach
-wej¶cia, dokañczanie komend pracuje tylko w wybranych. Je¶li dokañczanie
-jest rozbudowane (jest wiêcej ró¿nych mo¿liwo¶ci), MC wyda krótki d¼wiêk, a
-nastêpna akcja bêdzie zale¿eæ od warto¶ci zmiennej
+Nazwa pliku, nazwa uÅ¼ytkownika i hosta, pracuje we wszystkich liniach
+wejÅ›cia, dokaÅ„czanie komend pracuje tylko w wybranych. JeÅ›li dokaÅ„czanie
+jest rozbudowane (jest wiÄ™cej rÃ³Å¼nych moÅ¼liwoÅ›ci), MC wyda krÃ³tki dÅºwiÄ™k, a
+nastÄ™pna akcja bÄ™dzie zaleÅ¼eÄ‡ od wartoÅ›ci zmiennej
 .I Complete: show all
-w menu konfiguracja. Je¶li jest ona w³±czona, zostanie wy¶wietlona lista
-wszystkich mo¿liwych nazw. W³a¶ciw± nazwê mo¿esz wybraæ za pomoc± strza³ek
-a potem naciskaj±c klawisz
+w menu konfiguracja. JeÅ›li jest ona wÅ‚Ä…czona, zostanie wyÅ›wietlona lista
+wszystkich moÅ¼liwych nazw. WÅ‚aÅ›ciwÄ… nazwÄ™ moÅ¼esz wybraÄ‡ za pomocÄ… strzaÅ‚ek
+a potem naciskajÄ…c klawisz
 .B Enter
-na w³a¶ciwej pozycji. Mo¿esz tak¿e nacisn±æ pierwsze litery, którymi ró¿ni±
-siê mo¿liwo¶ci aby odrzuciæ tak du¿± czê¶æ dokoñczeñ jak to tylko mo¿liwe.
-Je¶li naci¶niesz znowu
+na wÅ‚aÅ›ciwej pozycji. MoÅ¼esz takÅ¼e nacisnÄ…Ä‡ pierwsze litery, ktÃ³rymi rÃ³Å¼niÄ…
+siÄ™ moÅ¼liwoÅ›ci aby odrzuciÄ‡ tak duÅ¼Ä… czÄ™Å›Ä‡ dokoÅ„czeÅ„ jak to tylko moÅ¼liwe.
+JeÅ›li naciÅ›niesz znowu
 .BR M-Tab ,
-pokazane zostan± tylko te pozycje, które zaczynaj± siê od kolejnych
-podanych liter. Kiedy nie maja ju¿ wiêcej mo¿liwo¶ci, okno znika, ale
-mo¿esz je wcze¶niej schowaæ u¿ywaj±c klawiszy anuluj±cych:
+pokazane zostanÄ… tylko te pozycje, ktÃ³re zaczynajÄ… siÄ™ od kolejnych
+podanych liter. Kiedy nie maja juÅ¼ wiÄ™cej moÅ¼liwoÅ›ci, okno znika, ale
+moÅ¼esz je wczeÅ›niej schowaÄ‡ uÅ¼ywajÄ…c klawiszy anulujÄ…cych:
 .BR Esc ,
 .B F10
-oraz strza³ek w lewo i prawo. Je¶li
+oraz strzaÅ‚ek w lewo i prawo. JeÅ›li
 Complete: show all
-jest wy³±czone, okno z list± w³±cza siê dopiero wtedy, kiedy naciskasz
+jest wyÅ‚Ä…czone, okno z listÄ… wÅ‚Ä…cza siÄ™ dopiero wtedy, kiedy naciskasz
 .B M-Tab
-po raz drugi. Za pierwszym razem MC wydaje tylko krótki d¼wiêk.
+po raz drugi. Za pierwszym razem MC wydaje tylko krÃ³tki dÅºwiÄ™k.
 .PP
 .\"NODE "Virtual File System"
-.SH "Wirtualny system plików (Virtual File System)"
-Midnight Commander jest dostarczany z kodem pozwalaj±cy na dostêp do
-systemów plików. Ten kod nazywany jest wirtualnym systemem plików. Pozwala on
-Midnight Commanderowi manipulowaæ plikami trzymanymi na systemach nie
+.SH "Wirtualny system plikÃ³w (Virtual File System)"
+Midnight Commander jest dostarczany z kodem pozwalajÄ…cy na dostÄ™p do
+systemÃ³w plikÃ³w. Ten kod nazywany jest wirtualnym systemem plikÃ³w. Pozwala on
+Midnight Commanderowi manipulowaÄ‡ plikami trzymanymi na systemach nie
 Unixowych.
 .PP
-Aktualnie Midnight Commander jest wyposa¿ony w niektóre wirtualne systemy
-plików (VFS): lokalny system plików, u¿ywany do dostêpu do typowych
-systemów plików Unixowych; ftpfs u¿ywanego do manipulowania plikami na
-zdalnych systemach na poprzez protokó³ FTP; tarfs u¿ywany do manipulania
-plikami w systemach tar i w skompresowanych systemach tar; undelfs, u¿ywany
-do odzyskiwania skasowanych plików na systemach typu ext2 (standardowy
+Aktualnie Midnight Commander jest wyposaÅ¼ony w niektÃ³re wirtualne systemy
+plikÃ³w (VFS): lokalny system plikÃ³w, uÅ¼ywany do dostÄ™pu do typowych
+systemÃ³w plikÃ³w Unixowych; ftpfs uÅ¼ywanego do manipulowania plikami na
+zdalnych systemach na poprzez protokÃ³Å‚ FTP; tarfs uÅ¼ywany do manipulania
+plikami w systemach tar i w skompresowanych systemach tar; undelfs, uÅ¼ywany
+do odzyskiwania skasowanych plikÃ³w na systemach typu ext2 (standardowy
 system pracy systemu Linux), fish (do manipulowania plikami poprzez
-po³±czenia pow³ok takich jak rsh czy ssh) i w koñcu system mcfs (system
-plików Midnight Commandera), oparty o sieæ.
+poÅ‚Ä…czenia powÅ‚ok takich jak rsh czy ssh) i w koÅ„cu system mcfs (system
+plikÃ³w Midnight Commandera), oparty o sieÄ‡.
 .PP
-Kod VFS potrafi interpretowaæ poprawnie wszystkie nazwy ¶cie¿ek i przekazuje
-je do w³a¶ciwego systemu plików. Format u¿ywany dla ka¿dego z systemów plików
+Kod VFS potrafi interpretowaÄ‡ poprawnie wszystkie nazwy Å›cieÅ¼ek i przekazuje
+je do wÅ‚aÅ›ciwego systemu plikÃ³w. Format uÅ¼ywany dla kaÅ¼dego z systemÃ³w plikÃ³w
 jest opisany w swojej oddzielnej sekcji.
 .PP
 .\"NODE "  FTP File System"
-.SH "  System plików FTP (FTP File System)"
+.SH "  System plikÃ³w FTP (FTP File System)"
 Ftpfs pozwala na manipulowanie plikami na zdalnych komputerach, do
-normalnego u¿ytku, mo¿esz próbowaæ u¿ywaæ panelowych komend FTP i dowi±zañ
-(dostêpnych z linii menu) lub zmieniæ ¶cie¿kê bezpo¶rednio za pomoc± zwyk³ej
-komendy cd wygl±daj±cej tak jak poni¿ej:
+normalnego uÅ¼ytku, moÅ¼esz prÃ³bowaÄ‡ uÅ¼ywaÄ‡ panelowych komend FTP i dowiÄ…zaÅ„
+(dostÄ™pnych z linii menu) lub zmieniÄ‡ Å›cieÅ¼kÄ™ bezpoÅ›rednio za pomocÄ… zwykÅ‚ej
+komendy cd wyglÄ…dajÄ…cej tak jak poniÅ¼ej:
 .PP
-.I /#ftp:[!][u¿ytkownik[:has³o]@]komputer[:port][zdalny katalog]
+.I /#ftp:[!][uÅ¼ytkownik[:hasÅ‚o]@]komputer[:port][zdalny katalog]
 .PP
 Parametry
-.IR u¿ytkownik ,
+.IR uÅ¼ytkownik ,
 .I port
 i
 .I zdalny katalog
-s± opcjonalne. Je¶li wybierzesz element
-.I u¿ytkownik
-Midnight Commander spróbuje zalogowaæ siê na zdalnym komputerze jako
-zadany u¿ytkownik, w przeciwnym razie u¿yje twojego loginu. Opcjonalne jest
-równie¿
-.IR has³o ,
-je¶li jest obecne zostanie u¿yte do nawi±zania po³±czenia. To u¿ycie nie
-jest zalecane (tak samo jak trzymanie tego w twojej hotli¶cie,
-dopóki nie ustawisz odpowiednich uprawnieñ, aby nikt niepowo³any nie mia³
-do tego dostêpu).
+sÄ… opcjonalne. JeÅ›li wybierzesz element
+.I uÅ¼ytkownik
+Midnight Commander sprÃ³buje zalogowaÄ‡ siÄ™ na zdalnym komputerze jako
+zadany uÅ¼ytkownik, w przeciwnym razie uÅ¼yje twojego loginu. Opcjonalne jest
+rÃ³wnieÅ¼
+.IR hasÅ‚o ,
+jeÅ›li jest obecne zostanie uÅ¼yte do nawiÄ…zania poÅ‚Ä…czenia. To uÅ¼ycie nie
+jest zalecane (tak samo jak trzymanie tego w twojej hotliÅ›cie,
+dopÃ³ki nie ustawisz odpowiednich uprawnieÅ„, aby nikt niepowoÅ‚any nie miaÅ‚
+do tego dostÄ™pu).
 .PP
-Przyk³ady:
+PrzykÅ‚ady:
 .PP
 .nf
     /#ftp:ftp.nuclecu.unam.mx/linux/local
@@ -2282,88 +2282,88 @@ Przyk³ady:
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
-Aby po³±czyæ siê z serwerem znajduj±cym siê za firewallem, bêdziesz musia³
-u¿yc przedrostka ftp://! aby wymusiæ na Midnight Commanderze u¿ywanie
-serwera proxy do transferu danch. Serwer proxy definiuje siê w oknie
-dialogowym wirtualnego systemu plików.
+Aby poÅ‚Ä…czyÄ‡ siÄ™ z serwerem znajdujÄ…cym siÄ™ za firewallem, bÄ™dziesz musiaÅ‚
+uÅ¼yc przedrostka ftp://! aby wymusiÄ‡ na Midnight Commanderze uÅ¼ywanie
+serwera proxy do transferu danch. Serwer proxy definiuje siÄ™ w oknie
+dialogowym wirtualnego systemu plikÃ³w.
 .PP
-Inn± mo¿liwo¶ci± jest ustawienie opcji
+InnÄ… moÅ¼liwoÅ›ciÄ… jest ustawienie opcji
 .I Always use ftp proxy
-w oknie konfiguracyjnym wirtualnego systemu plików. Skonfiguruje
+w oknie konfiguracyjnym wirtualnego systemu plikÃ³w. Skonfiguruje
 to program tak, aby zawsze
-u¿ywa³ serwera proxy. Je¶li ta zmienna jest ustawiona, program bêdzie robi³
-dwie rzeczy: konsultowa³ plik @prefix@/share/mc.no_proxy w celu znalezienia linii
-zawieraj±cych nazwy serwerów, które s± lokalne (je¶li nazwa hosta zaczyna
-siê od kropki, uznaje siê, ¿e jest to domena) i sprawdza czy jakie¶ hosty
-bez kropek w nazwie s± widoczne bezpo¶rednio.
+uÅ¼ywaÅ‚ serwera proxy. JeÅ›li ta zmienna jest ustawiona, program bÄ™dzie robiÅ‚
+dwie rzeczy: konsultowaÅ‚ plik @prefix@/share/mc.no_proxy w celu znalezienia linii
+zawierajÄ…cych nazwy serwerÃ³w, ktÃ³re sÄ… lokalne (jeÅ›li nazwa hosta zaczyna
+siÄ™ od kropki, uznaje siÄ™, Å¼e jest to domena) i sprawdza czy jakieÅ› hosty
+bez kropek w nazwie sÄ… widoczne bezpoÅ›rednio.
 .PP
-Je¶li u¿ywasz systemu ftpfs bêd±c za routerem filtruj±cym, który nie
-pozwala ci na u¿ywanie standardowej metody otwierania plików, mo¿esz
-chcieæ wymusiæ na programie u¿ywanie trybu passive-open. Aby tego u¿ywaæ
-ustaw opcjê ftpfs_use_passive_connections w pliku inicjuj±cym.
+JeÅ›li uÅ¼ywasz systemu ftpfs bÄ™dÄ…c za routerem filtrujÄ…cym, ktÃ³ry nie
+pozwala ci na uÅ¼ywanie standardowej metody otwierania plikÃ³w, moÅ¼esz
+chcieÄ‡ wymusiÄ‡ na programie uÅ¼ywanie trybu passive-open. Aby tego uÅ¼ywaÄ‡
+ustaw opcjÄ™ ftpfs_use_passive_connections w pliku inicjujÄ…cym.
 .PP
-Midnight Commander przechowuje listê katalogów w buforze podrêcznym. Czas wyrzucania
-bufora jest ustawiany w oknie dialogowym Wirtualnego Systemu Plików. To ma
-¶mieszn± w³a¶ciwo¶æ tak±, ¿e nawet kiedy wyst±pi± jakie¶ zmiany w katalogu, nie
-bêd± one pokazane w strukturze katalogów, dopóki nie wymusisz tego przy
-u¿yciu kombinacji C-r. To jest dobre rozwi±zanie (je¶li my¶lisz, ¿e to jest
-bug, to pomy¶l o pracy na zdalnych systemach po³o¿onych po drugiej stronie
-Atlantyku przy u¿yciu ftpfs :) ).
+Midnight Commander przechowuje listÄ™ katalogÃ³w w buforze podrÄ™cznym. Czas wyrzucania
+bufora jest ustawiany w oknie dialogowym Wirtualnego Systemu PlikÃ³w. To ma
+Å›miesznÄ… wÅ‚aÅ›ciwoÅ›Ä‡ takÄ…, Å¼e nawet kiedy wystÄ…piÄ… jakieÅ› zmiany w katalogu, nie
+bÄ™dÄ… one pokazane w strukturze katalogÃ³w, dopÃ³ki nie wymusisz tego przy
+uÅ¼yciu kombinacji C-r. To jest dobre rozwiÄ…zanie (jeÅ›li myÅ›lisz, Å¼e to jest
+bug, to pomyÅ›l o pracy na zdalnych systemach poÅ‚oÅ¼onych po drugiej stronie
+Atlantyku przy uÅ¼yciu ftpfs :) ).
 .PP
 .\"NODE "  Tar File System"
-.SH "  System plików tar (Tar File System)"
-System plików tar pozwala na dostêp w trybie tylko-do-odczytu do plików typu
-tar i do skompresowanych plików typu tar, za pomoc± komendy chdir. Aby
-zmieniæ katalog na plik tar, mo¿esz zmieniæ aktualny katalog u¿ywaj±c
-nastêpuj±cej konstrukcji:
+.SH "  System plikÃ³w tar (Tar File System)"
+System plikÃ³w tar pozwala na dostÄ™p w trybie tylko-do-odczytu do plikÃ³w typu
+tar i do skompresowanych plikÃ³w typu tar, za pomocÄ… komendy chdir. Aby
+zmieniÄ‡ katalog na plik tar, moÅ¼esz zmieniÄ‡ aktualny katalog uÅ¼ywajÄ…c
+nastÄ™pujÄ…cej konstrukcji:
 .PP
-.I /nazwa_pliku.tar:utar/[katalogu-wewn±trza-archiwum]
+.I /nazwa_pliku.tar:utar/[katalogu-wewnÄ…trza-archiwum]
 .PP
-Plik mc.ext pozwala ju¿ na tworzenie skrótów do plików tar, oznacza to, ¿e
-mo¿esz wybraæ jaki¶ plik tar i nacisn±æ enter aby do niego wej¶æ, zobacz
-sekcjê Edycja pliku rozszerzeñ po wiêcej szczegó³ów na temat tego jak
-zosta³o to pomy¶lane.
+Plik mc.ext pozwala juÅ¼ na tworzenie skrÃ³tÃ³w do plikÃ³w tar, oznacza to, Å¼e
+moÅ¼esz wybraÄ‡ jakiÅ› plik tar i nacisnÄ…Ä‡ enter aby do niego wejÅ›Ä‡, zobacz
+sekcjÄ™ Edycja pliku rozszerzeÅ„ po wiÄ™cej szczegÃ³Å‚Ã³w na temat tego jak
+zostaÅ‚o to pomyÅ›lane.
 .PP
-Przyk³ady
+PrzykÅ‚ady
 .PP
 .nf
     mc-3.0.tar.gz#utar/mc-3.0/vfs
     /ftp/GCC/gcc-2.7.0.tar#utar
 .fi
 .PP
-Pó¼niejszy podaje pe³n± ¶cie¿kê archiwum tar.
+PÃ³Åºniejszy podaje peÅ‚nÄ… Å›cieÅ¼kÄ™ archiwum tar.
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Transfer plików pomiêdzy systemami plików (FIle transfer over SHell filesystem)"
+.SH "  Transfer plikÃ³w pomiÄ™dzy systemami plikÃ³w (FIle transfer over SHell filesystem)"
 .PP
-System plików fish jest systemem opartym na sieci, który pozwala na
-manipulowanie plikami na obcej maszynie tak jakby by³y one lokalne. Aby
-tego u¿ywaæ, druga strona musi równie¿ mieæ ustawiony serwer fish, lub musi
-mieæ pow³okê kompatybiln± z bashem.
+System plikÃ³w fish jest systemem opartym na sieci, ktÃ³ry pozwala na
+manipulowanie plikami na obcej maszynie tak jakby byÅ‚y one lokalne. Aby
+tego uÅ¼ywaÄ‡, druga strona musi rÃ³wnieÅ¼ mieÄ‡ ustawiony serwer fish, lub musi
+mieÄ‡ powÅ‚okÄ™ kompatybilnÄ… z bashem.
 .PP
-Aby po³±czyæ siê z obc± maszyn±, musisz tylko zmieniæ katalog do
-specjalnego katalogu, którego nazwa jest w nastêpuj±cym formacie:
+Aby poÅ‚Ä…czyÄ‡ siÄ™ z obcÄ… maszynÄ…, musisz tylko zmieniÄ‡ katalog do
+specjalnego katalogu, ktÃ³rego nazwa jest w nastÄ™pujÄ…cym formacie:
 .PP
 .nf
-/#sh:[u¿ytkownik@]komputer[:opcje];/[zdalny-katalog];</em>
+/#sh:[uÅ¼ytkownik@]komputer[:opcje];/[zdalny-katalog];</em>
 .fi
 Elementy
-.IR u¿ytkownik ,
+.IR uÅ¼ytkownik ,
 .I opcje
 i
 .I zdalny katalog
-s± opcjonalne. Je¶li podasz
-.I u¿ytkownika
-Midnight Commander spróuje zalogowaæ siê na obcy komputer jako zadany
-u¿ytkownik w przeciwnym razie u¿yty zostanie twój login.
+sÄ… opcjonalne. JeÅ›li podasz
+.I uÅ¼ytkownika
+Midnight Commander sprÃ³uje zalogowaÄ‡ siÄ™ na obcy komputer jako zadany
+uÅ¼ytkownik w przeciwnym razie uÅ¼yty zostanie twÃ³j login.
 .PP
 Jako
 .I opcja
-mo¿e wyst±piæ 'C' - w³±cza kompresje i 'rsh' - w³±cza rsh zamist ssh. Je¶li
+moÅ¼e wystÄ…piÄ‡ 'C' - wÅ‚Ä…cza kompresje i 'rsh' - wÅ‚Ä…cza rsh zamist ssh. JeÅ›li
 .I zdalny-katalog
-istnieje, twój aktualny katalog na zdalnym komputerze bêdzie ustawiony
+istnieje, twÃ³j aktualny katalog na zdalnym komputerze bÄ™dzie ustawiony
 na niego.
 .PP
-Przyk³ady:
+PrzykÅ‚ady:
 .PP
 .nf
     /#sh:onlyrsh.mx:r/linux/local
@@ -2371,37 +2371,37 @@ Przyk³ady:
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
 .\"NODE "  Network File System"
-.SH "  Sieciowe systemy plików"
-Midnight Commander pozwala na obs³ugê zdalnych systemów i manipulowanie
-na ich dyskach, tak jakby by³y one lokalne. ¯eby to by³o mo¿liwe
-druga maszyna musi byæ uruchomiona razem z programem
+.SH "  Sieciowe systemy plikÃ³w"
+Midnight Commander pozwala na obsÅ‚ugÄ™ zdalnych systemÃ³w i manipulowanie
+na ich dyskach, tak jakby byÅ‚y one lokalne. Å»eby to byÅ‚o moÅ¼liwe
+druga maszyna musi byÄ‡ uruchomiona razem z programem
 .BR mcserv (8).
 .PP
-¯eby pod³±czyæ siê do obcego komputera musisz przej¶æ do katalogu w specjalny
-sposób opisany poni¿ej:
+Å»eby podÅ‚Ä…czyÄ‡ siÄ™ do obcego komputera musisz przejÅ›Ä‡ do katalogu w specjalny
+sposÃ³b opisany poniÅ¼ej:
 .PP
-.I mc:[u¿ytkownik@]komputer[:port][katalog]
+.I mc:[uÅ¼ytkownik@]komputer[:port][katalog]
 .PP
-.IR U¿ytkownik ,
+.IR UÅ¼ytkownik ,
 .I port
 i
 .I katalog
-s± opcjami nieobowi±zkowymi. Je¶li podasz
-.I u¿ytkownika
-Midnight Commander spróbuje zalogowaæ siê do systemu zdalnego jako
-zadany u¿ytkownik, w przeciwnym wypadku spróbuje u¿yæ twojej aktualnej
-nazwy zg³oszeniowej.
+sÄ… opcjami nieobowiÄ…zkowymi. JeÅ›li podasz
+.I uÅ¼ytkownika
+Midnight Commander sprÃ³buje zalogowaÄ‡ siÄ™ do systemu zdalnego jako
+zadany uÅ¼ytkownik, w przeciwnym wypadku sprÃ³buje uÅ¼yÄ‡ twojej aktualnej
+nazwy zgÅ‚oszeniowej.
 .PP
 .I Port
-jest u¿ywany je¶li zdalny komputer jest odpalony na niestandardowych portach
-(zobacz stronê manuala
+jest uÅ¼ywany jeÅ›li zdalny komputer jest odpalony na niestandardowych portach
+(zobacz stronÄ™ manuala
 .BR mcserv (8)
-po wiêcej informacji o portach); i wreszcie
-je¶li
+po wiÄ™cej informacji o portach); i wreszcie
+jeÅ›li
 .I katalog
-jest podany, twoim katalogiem domowym na zdalnym komputerze bêdzie ten podany.
+jest podany, twoim katalogiem domowym na zdalnym komputerze bÄ™dzie ten podany.
 .PP
-Przyk³ady:
+PrzykÅ‚ady:
 .PP
 .nf
     mc:ftp.nuclecu.unam.mx/linux/local
@@ -2409,33 +2409,33 @@ Przyk³ady:
 .fi
 .PP
 .\"NODE "  Undelete File System"
-.SH "  Odzyskiwanie plików"
-Na systemach Linuksowych, je¶li doda³e¶ w konfiguracji opcjê przywracania
-skasowanych plików z systemów ext2, bêdziesz w stanie to robiæ. Odzyskiwanie
-plików jest mo¿liwe tylko i wy³±cznie na systemach typu ext2. Przywracany
-system plików jest tylko nak³adk± na bibliotekê ext2fs: odzyskiwanie nazw
-wszystkich skasowanych plików i próba uczynienia z nich normalnej partycji.
+.SH "  Odzyskiwanie plikÃ³w"
+Na systemach Linuksowych, jeÅ›li dodaÅ‚eÅ› w konfiguracji opcjÄ™ przywracania
+skasowanych plikÃ³w z systemÃ³w ext2, bÄ™dziesz w stanie to robiÄ‡. Odzyskiwanie
+plikÃ³w jest moÅ¼liwe tylko i wyÅ‚Ä…cznie na systemach typu ext2. Przywracany
+system plikÃ³w jest tylko nakÅ‚adkÄ… na bibliotekÄ™ ext2fs: odzyskiwanie nazw
+wszystkich skasowanych plikÃ³w i prÃ³ba uczynienia z nich normalnej partycji.
 .PP
-¯eby u¿ywaæ tych systemów plików, bêdziesz musia³ przej¶æ od specjalnego
-pliku, którego nazwa sk³ada siê z przedrostka "undel:" i nazwy pliku,
-w której ów plik rezyduje.
+Å»eby uÅ¼ywaÄ‡ tych systemÃ³w plikÃ³w, bÄ™dziesz musiaÅ‚ przejÅ›Ä‡ od specjalnego
+pliku, ktÃ³rego nazwa skÅ‚ada siÄ™ z przedrostka "undel:" i nazwy pliku,
+w ktÃ³rej Ã³w plik rezyduje.
 .PP
-Na przyk³ad, aby odzyskaæ skasowane pliki z drugiej partycji pierwszego
-dysku scsi Linux, bêdziesz musia³ u¿yæ nastêpuj±cej ¶cie¿ki:
+Na przykÅ‚ad, aby odzyskaÄ‡ skasowane pliki z drugiej partycji pierwszego
+dysku scsi Linux, bÄ™dziesz musiaÅ‚ uÅ¼yÄ‡ nastÄ™pujÄ…cej Å›cieÅ¼ki:
 .PP
 .nf
     undel:/dev/sda2
 .fi
 .PP
-Mo¿e to chwilkê potrwaæ zanim pliki zostan± pokazane i bêdziesz móg³ je
-normalnie ogl±daæ.
+MoÅ¼e to chwilkÄ™ potrwaÄ‡ zanim pliki zostanÄ… pokazane i bÄ™dziesz mÃ³gÅ‚ je
+normalnie oglÄ…daÄ‡.
 .PP
 .SH Polskie znaki
-Midnight Commander bardzo dobrze radzi sobie z obs³ug± znaków
-nieamerykañskich (160+) w tym polskich. Wa¿ne jest aby mieæ ustawione
-polskie znaki na konsoli (tzn. aby pow³oka je obs³ugiwa³a). Je¶li u¿ywasz
-basha musisz tylko ustawiæ w pliku inputrc ( /etc/inputrc lub ~/.inputrc)
-nastêpuj±ce warto¶ci:
+Midnight Commander bardzo dobrze radzi sobie z obsÅ‚ugÄ… znakÃ³w
+nieamerykaÅ„skich (160+) w tym polskich. WaÅ¼ne jest aby mieÄ‡ ustawione
+polskie znaki na konsoli (tzn. aby powÅ‚oka je obsÅ‚ugiwaÅ‚a). JeÅ›li uÅ¼ywasz
+basha musisz tylko ustawiÄ‡ w pliku inputrc ( /etc/inputrc lub ~/.inputrc)
+nastÄ™pujÄ…ce wartoÅ›ci:
 .PP
 .nf
 set meta-flag on
@@ -2456,43 +2456,43 @@ natomiast w pliku /etc/sysconfig keyboard:
 KEYTABLE=pl
 .fi
 .PP
-Potem u¿yj poleceñ
+Potem uÅ¼yj poleceÅ„
 .I /sbin/setsysfont
 i
 .IR "loadkeys pl" .
-[Zwróæ uwagê na to, ¿e te pliki s± charakterystyczne dla dystrybucji
-RedHat, je¶li masz inn± i wiesz jak to ustawiæ, to napisz do mnie, a ja to
-tu dopiszê  [ patrz t³umacz na dole ;)) ]].
+[ZwrÃ³Ä‡ uwagÄ™ na to, Å¼e te pliki sÄ… charakterystyczne dla dystrybucji
+RedHat, jeÅ›li masz innÄ… i wiesz jak to ustawiÄ‡, to napisz do mnie, a ja to
+tu dopiszÄ™  [ patrz tÅ‚umacz na dole ;)) ]].
 .PP
-Teraz wystarczy ju¿ tylko w³±czyæ odpowiednie opcje w menu opcji (klawisz
+Teraz wystarczy juÅ¼ tylko wÅ‚Ä…czyÄ‡ odpowiednie opcje w menu opcji (klawisz
 F9). W menu opcji wybieramy
 .I Display bits
-i w³±czamy opcje 
+i wÅ‚Ä…czamy opcje 
 .I ISO 8859-1
 oraz
 .IR "Full 8 bits input" .
-Potem zapisujemy konfiguracjê w opcje | Save setup.
+Potem zapisujemy konfiguracjÄ™ w opcje | Save setup.
 .PP
-I gotowe - polskie literki dzia³aj± równie¿ w podgl±dzie i wbudowanym
-edytorze plików.
+I gotowe - polskie literki dziaÅ‚ajÄ… rÃ³wnieÅ¼ w podglÄ…dzie i wbudowanym
+edytorze plikÃ³w.
 .PP
 .\"NODE "Colors"
 .SH Kolory
-Midnight Commander próbuje sprawdziæ czy twój terminal obs³uguje
-kolory u¿ywaj±c bazy danych terminali. Czasami jest to zmieniane
-przez ró¿ne flagi startowe, np. mo¿esz wymusiæ wy¶wietlanie czarno-bia³e
-lub kolorowe startuj±c z opcj± odpowiednio -b i -c.
+Midnight Commander prÃ³buje sprawdziÄ‡ czy twÃ³j terminal obsÅ‚uguje
+kolory uÅ¼ywajÄ…c bazy danych terminali. Czasami jest to zmieniane
+przez rÃ³Å¼ne flagi startowe, np. moÅ¼esz wymusiÄ‡ wyÅ›wietlanie czarno-biaÅ‚e
+lub kolorowe startujÄ…c z opcjÄ… odpowiednio -b i -c.
 .PP
-Je¶li program jest skompilowany z mened¿erem ekranu Slang zamiast ncurses,
-sprawdzi on równie¿ warto¶æ zmiennej
+JeÅ›li program jest skompilowany z menedÅ¼erem ekranu Slang zamiast ncurses,
+sprawdzi on rÃ³wnieÅ¼ wartoÅ›Ä‡ zmiennej
 .BR COLORTERM .
-Je¶li jest ustawiona, ma takie samo znaczenie jak opcja -c.
+JeÅ›li jest ustawiona, ma takie samo znaczenie jak opcja -c.
 .PP
-Mo¿esz wybraæ terminale, które zawsze ¿±daj± wy¶wietlania w kolorze,
+MoÅ¼esz wybraÄ‡ terminale, ktÃ³re zawsze Å¼Ä…dajÄ… wyÅ›wietlania w kolorze,
 poprzez dodanie ich do pozycji
 .I color_terminals
-w sekcji pliku startuj±cego. Uchroni to Midnight Commandera przed próbami
-odkrycia typu twojego terminala. Na przyk³ad
+w sekcji pliku startujÄ…cego. Uchroni to Midnight Commandera przed prÃ³bami
+odkrycia typu twojego terminala. Na przykÅ‚ad
 .nf
 [Colors]
 color_terminals=linux,xterm
@@ -2501,19 +2501,19 @@ color_terminals=linux,xterm
 color_terminals=terminal-name1,terminal-name2...
 .fi
 .PP
-Program mo¿e byæ skompilowany zarówno z bibliotekami slang jak i ncurses.
-Ncurses nie obs³uguje metody wymuszania wy¶wietlania, zawsze sprawdza w bazie danych
+Program moÅ¼e byÄ‡ skompilowany zarÃ³wno z bibliotekami slang jak i ncurses.
+Ncurses nie obsÅ‚uguje metody wymuszania wyÅ›wietlania, zawsze sprawdza w bazie danych
 terminali.
 .PP
-Midnight Commander umo¿liwia równie¿ zmianê standardowych barw ekranu.
-Aktualnie kolory s± skonfigurowane przy u¿yciu zmiennej
+Midnight Commander umoÅ¼liwia rÃ³wnieÅ¼ zmianÄ™ standardowych barw ekranu.
+Aktualnie kolory sÄ… skonfigurowane przy uÅ¼yciu zmiennej
 .B MC_COLOR_TABLE
 w sekcji Colors pliku startowego.
 .PP
-W sekcji kolorów, standardowa mapa kolorów jest ³adowana ze zmiennej
+W sekcji kolorÃ³w, standardowa mapa kolorÃ³w jest Å‚adowana ze zmiennej
 .IR base_color .
-Mo¿esz wybraæ swoj± w³asn± mapê dla terminala poprzez u¿ycie nazwy terminala
-jako klucza w tej sekcji. Na przyk³ad:
+MoÅ¼esz wybraÄ‡ swojÄ… wÅ‚asnÄ… mapÄ™ dla terminala poprzez uÅ¼ycie nazwy terminala
+jako klucza w tej sekcji. Na przykÅ‚ad:
 .PP
 .nf
 [Colors]
@@ -2521,255 +2521,255 @@ base_color=
 xterm=menu=magenta:marked=,magenta:markselect=,red
 .fi
 .PP
-Format definicji kolorów jest nastêpuj±cy:
+Format definicji kolorÃ³w jest nastÄ™pujÄ…cy:
 .PP
 .nf
-  <s³owo kluczowe>=<kolor powierzchni">,<kolor t³a>:<s³owo kluczowe>= ...
+  <sÅ‚owo kluczowe>=<kolor powierzchni">,<kolor tÅ‚a>:<sÅ‚owo kluczowe>= ...
 .fi
 .PP
-Kolory s± opcjonalne, a s³owa kluczowe s± nastêpuj±ce: normal, selected,
+Kolory sÄ… opcjonalne, a sÅ‚owa kluczowe sÄ… nastÄ™pujÄ…ce: normal, selected,
 marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
 gauge;  kolory okien dialogowych: dnormal, dfocus, dhotnormal, dhotfocus;
 Kolory pomocy: helpnormal, helpitalic, helpbold, helplink,
-helpslink; Kolory podgl±du: viewunderline; Specjalne tryby pod¶wietlenia:
+helpslink; Kolory podglÄ…du: viewunderline; Specjalne tryby podÅ›wietlenia:
 executable, directory, link, device, special.
-[nie t³umaczy³em nazw z racji tego, ¿e trzeba je stosowaæ w ich angielskim
-brzmieniu - je¶li jeste¶ a¿ tak zaawansowany, u¿yj s³ownika].
+[nie tÅ‚umaczyÅ‚em nazw z racji tego, Å¼e trzeba je stosowaÄ‡ w ich angielskim
+brzmieniu - jeÅ›li jesteÅ› aÅ¼ tak zaawansowany, uÅ¼yj sÅ‚ownika].
 .PP
-Okna dialogowe mog± mieæ nastêpuj±ce kolory:
+Okna dialogowe mogÄ… mieÄ‡ nastÄ™pujÄ…ce kolory:
 .I dnormal
-u¿ywany do normalnego tekstu,
+uÅ¼ywany do normalnego tekstu,
 .I dfocus
-jest kolorem u¿ywanym do wy¶wietlania aktualnego komponentu,
+jest kolorem uÅ¼ywanym do wyÅ›wietlania aktualnego komponentu,
 .I dhotnormal
-jest kolorem u¿ywanym do odró¿nienia klawiszy w normalnych komponentach,
+jest kolorem uÅ¼ywanym do odrÃ³Å¼nienia klawiszy w normalnych komponentach,
 a
 .I dhotfocus
-jest u¿ywany do wy¶wietlania owych w aktualnie wybranym.
+jest uÅ¼ywany do wyÅ›wietlania owych w aktualnie wybranym.
 .PP
-Menu u¿ywa tego samego schematu, ale jako nazw kolorów u¿ywa menu, menusel,
+Menu uÅ¼ywa tego samego schematu, ale jako nazw kolorÃ³w uÅ¼ywa menu, menusel,
 menuhot i menuhotsel.
 .PP
-Pomoc u¿ywa nastêpuj±cych kolorów:
+Pomoc uÅ¼ywa nastÄ™pujÄ…cych kolorÃ³w:
 .I helpnormal
-u¿ywany do normalnego tekstu,
+uÅ¼ywany do normalnego tekstu,
 .I helpitalic
-u¿ywa tej samej czcionki, któr± wykorzystuje manual do wy¶wietlania
+uÅ¼ywa tej samej czcionki, ktÃ³rÄ… wykorzystuje manual do wyÅ›wietlania
 czcionki typu italic,
 .I helpbold
-tak samo jak wy¿ej tylko czcionki s± typu bold,
+tak samo jak wyÅ¼ej tylko czcionki sÄ… typu bold,
 .I helplink
-u¿ywane dla niewybranych jeszcze dowi±zañ i
+uÅ¼ywane dla niewybranych jeszcze dowiÄ…zaÅ„ i
 .I helpslink
-u¿ywane dla ju¿ wybranych.
+uÅ¼ywane dla juÅ¼ wybranych.
 .PP
 .I gauge
-pokazuje kolor wype³nienia pokazywany przy wska¼niku postêpu [ang. gauge],
-ukazuj±cym ile procent pliku zosta³o przekopiowane itp. w graficzny sposób.
+pokazuje kolor wypeÅ‚nienia pokazywany przy wskaÅºniku postÄ™pu [ang. gauge],
+ukazujÄ…cym ile procent pliku zostaÅ‚o przekopiowane itp. w graficzny sposÃ³b.
 .PP
-Dla trybu wysokiego pod¶wietlania
+Dla trybu wysokiego podÅ›wietlania
 .I directory
-jest u¿ywane jako kolor do wy¶wietlania katalogów;
+jest uÅ¼ywane jako kolor do wyÅ›wietlania katalogÃ³w;
 .I executable
-dla plików wykonywalnych;
+dla plikÃ³w wykonywalnych;
 .I link
-do wy¶wietlania dowi±zañ;
+do wyÅ›wietlania dowiÄ…zaÅ„;
 .I device
-do wy¶wietlania plików urz±dzeñ (devices);
+do wyÅ›wietlania plikÃ³w urzÄ…dzeÅ„ (devices);
 .I special
-dla plików specjalnych, takich jak gniazda FIFO i IPC;
+dla plikÃ³w specjalnych, takich jak gniazda FIFO i IPC;
 .I core
-dla wy¶wietlania plików typu core (zobacz równie¿ tê opcjê w sekcji Specjalne
+dla wyÅ›wietlania plikÃ³w typu core (zobacz rÃ³wnieÅ¼ tÄ™ opcjÄ™ w sekcji Specjalne
 ustawienia).
 .PP
-Mo¿liwe kolory to: black, gray, red, brightred, green,
+MoÅ¼liwe kolory to: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
-cyan, brightcyan, lightgray and white. [sorry, ¿e ich nazw nie t³umaczy³em,
-ale u¿ywaæ ich trzeba w oryginalnym brzmieniu :))].
+cyan, brightcyan, lightgray and white. [sorry, Å¼e ich nazw nie tÅ‚umaczyÅ‚em,
+ale uÅ¼ywaÄ‡ ich trzeba w oryginalnym brzmieniu :))].
 .PP
 .\"NODE "Special Settings"
 .SH "Specjalne ustawienia"
-Wiêkszo¶æ ustawieñ Midnight Commandera mo¿e byæ zmieniana z poziomu menu.
-Pomimo tego jest pewna ilo¶æ ustawieñ, których zmiana mo¿liwa jest jedynie
-poprzez zmianê w plikach konfiguracyjnych.
+WiÄ™kszoÅ›Ä‡ ustawieÅ„ Midnight Commandera moÅ¼e byÄ‡ zmieniana z poziomu menu.
+Pomimo tego jest pewna iloÅ›Ä‡ ustawieÅ„, ktÃ³rych zmiana moÅ¼liwa jest jedynie
+poprzez zmianÄ™ w plikach konfiguracyjnych.
 .PP
-Opcje mog± byæ ustawione w twoim pliku ~/.mc/ini :
+Opcje mogÄ… byÄ‡ ustawione w twoim pliku ~/.mc/ini :
 .PP
 .I clear_before_exec.
 .IP
-Standardowo Midnight Commander czy¶ci ekran przed wykonaniem komendy.
-Je¶li chcia³by¶ widzieæ wyj¶cie komendy na dole ekranu, wyedytuj twój plik
-~/mc/ini i zmieñ pole clear_before_exec na 0.
+Standardowo Midnight Commander czyÅ›ci ekran przed wykonaniem komendy.
+JeÅ›li chciaÅ‚byÅ› widzieÄ‡ wyjÅ›cie komendy na dole ekranu, wyedytuj twÃ³j plik
+~/mc/ini i zmieÅ„ pole clear_before_exec na 0.
 .PP
 .I confirm_view_dir.
 .IP
-Je¶li naciskasz F3 na katalogu, normalnie MC wchodzi do niego. Je¶li ta opcja
-ma warto¶æ 1, MC zapyta siê o potwierdzenie przed wej¶ciem do tego
-katalogu, je¶li masz zaznaczone jakie¶ pliki.
+JeÅ›li naciskasz F3 na katalogu, normalnie MC wchodzi do niego. JeÅ›li ta opcja
+ma wartoÅ›Ä‡ 1, MC zapyta siÄ™ o potwierdzenie przed wejÅ›ciem do tego
+katalogu, jeÅ›li masz zaznaczone jakieÅ› pliki.
 .PP
 .I drop_menus.
 .IP
-Je¶li ta opcja jest ustawiona, kiedy naciskasz klawisz F9, rozci±gane menu
-bêdzie od razu roz³o¿one, w przeciwnym wypadku znajdziesz siê po prostu
-w najwy¿szym wierszu ekranu traktowanym jako menu. Bêdziesz musia³ u¿yæ strza³ek
-lub pierwszych literek, aby wybraæ konkretne menu.
+JeÅ›li ta opcja jest ustawiona, kiedy naciskasz klawisz F9, rozciÄ…gane menu
+bÄ™dzie od razu rozÅ‚oÅ¼one, w przeciwnym wypadku znajdziesz siÄ™ po prostu
+w najwyÅ¼szym wierszu ekranu traktowanym jako menu. BÄ™dziesz musiaÅ‚ uÅ¼yÄ‡ strzaÅ‚ek
+lub pierwszych literek, aby wybraÄ‡ konkretne menu.
 .PP
 .I ftpfs_retry_seconds.
 .IP
-Warto¶æ jest ilo¶ci± sekund, przez które Midnight Commander bêdzie czeka³
-cierpliwie zanim rozpocznie ³±czenie siê z serwerem ftp od nowa. Dzieje
-siê to wtedy kiedy serwer odmówi³ po³±czenia lub has³o jest nieprawid³owe.
-Je¶li warto¶æ wynosi zero, nie nast±pi próba ponownego po³±czenia z serwerem.
+WartoÅ›Ä‡ jest iloÅ›ciÄ… sekund, przez ktÃ³re Midnight Commander bÄ™dzie czekaÅ‚
+cierpliwie zanim rozpocznie Å‚Ä…czenie siÄ™ z serwerem ftp od nowa. Dzieje
+siÄ™ to wtedy kiedy serwer odmÃ³wiÅ‚ poÅ‚Ä…czenia lub hasÅ‚o jest nieprawidÅ‚owe.
+JeÅ›li wartoÅ›Ä‡ wynosi zero, nie nastÄ…pi prÃ³ba ponownego poÅ‚Ä…czenia z serwerem.
 .PP
 .I ftpfs_use_passive_connections.
 .IP
-Standardowo ta opcja jest wy³±czona. Powoduje ona, ¿e ftpfs otwiera po³±czenia
-pasywne dla transmisji danych. Jest to u¿ywane przez ludzi, którzy siedz±
-za ruterami filtruj±cymi. Dzia³a to tylko wtedy, kiedy nie u¿ywasz serwera
+Standardowo ta opcja jest wyÅ‚Ä…czona. Powoduje ona, Å¼e ftpfs otwiera poÅ‚Ä…czenia
+pasywne dla transmisji danych. Jest to uÅ¼ywane przez ludzi, ktÃ³rzy siedzÄ…
+za ruterami filtrujÄ…cymi. DziaÅ‚a to tylko wtedy, kiedy nie uÅ¼ywasz serwera
 ftp proxy.
 .PP
 .I max_dirt_limit.
 .IP
-Opisuje jak wiele od¶wie¿eñ ekranu mo¿e byæ maksymalnie ominiête we wbudowanym
-podgl±dzie plików. Normalnie ta warto¶æ jest wa¿na, gdy¿ MC automatycznie
-dostosowuje liczbê od¶wie¿eñ do liczby naci¶niêtych klawiszy. Chocia¿ na bardzo
+Opisuje jak wiele odÅ›wieÅ¼eÅ„ ekranu moÅ¼e byÄ‡ maksymalnie ominiÄ™te we wbudowanym
+podglÄ…dzie plikÃ³w. Normalnie ta wartoÅ›Ä‡ jest waÅ¼na, gdyÅ¼ MC automatycznie
+dostosowuje liczbÄ™ odÅ›wieÅ¼eÅ„ do liczby naciÅ›niÄ™tych klawiszy. ChociaÅ¼ na bardzo
 wolnych komputerach lub na klawiaturach z szybkim powtarzaniem klawiszy,
-du¿a warto¶æ mog³aby spowodowaæ skoki ekranu i utratê p³ynno¶ci.
+duÅ¼a wartoÅ›Ä‡ mogÅ‚aby spowodowaÄ‡ skoki ekranu i utratÄ™ pÅ‚ynnoÅ›ci.
 .IP
-Wydaje siê, ¿e warto¶æ 10 dla max_dirt_limit jest najlepszym ustawieniem
-i to jest warto¶æ standardowa tej funkcji.
+Wydaje siÄ™, Å¼e wartoÅ›Ä‡ 10 dla max_dirt_limit jest najlepszym ustawieniem
+i to jest wartoÅ›Ä‡ standardowa tej funkcji.
 .PP
 .I mouse_move_pages.
 .IP
-Kontroluje czy przewijanie w panelu za pomoc± myszki odbywa siê strona po
+Kontroluje czy przewijanie w panelu za pomocÄ… myszki odbywa siÄ™ strona po
 stronie czy linijka po linjce.
 .PP
 .I mouse_move_pages_viewer.
 .IP
-Tak samo jak wy¿ej tylko, ¿e we wbudowanym wewnêtrznym podgl±dzie plików.
+Tak samo jak wyÅ¼ej tylko, Å¼e we wbudowanym wewnÄ™trznym podglÄ…dzie plikÃ³w.
 .PP
 .I navigate_with_arrows.
 .IP
-Je¶li ta opcja jest w³±czona, mo¿esz u¿ywaæ strza³ek do automatycznego
-przemieszczanie siê pomiêdzy katalogami, je¶li linia poleceñ jest pusta.
-(dotyczy to strze³ek w bok).
+JeÅ›li ta opcja jest wÅ‚Ä…czona, moÅ¼esz uÅ¼ywaÄ‡ strzaÅ‚ek do automatycznego
+przemieszczanie siÄ™ pomiÄ™dzy katalogami, jeÅ›li linia poleceÅ„ jest pusta.
+(dotyczy to strzeÅ‚ek w bok).
 .PP
 .I nice_rotating_dash
 .IP
-Je¶li jest w³±czony, Midnight Commander bêdzie pokazywa³ w lewym górnym
-rogu obracaj±cy siê my¶lnik kiedy bêdzie wykonywa³ jaki¶ proces.
+JeÅ›li jest wÅ‚Ä…czony, Midnight Commander bÄ™dzie pokazywaÅ‚ w lewym gÃ³rnym
+rogu obracajÄ…cy siÄ™ myÅ›lnik kiedy bÄ™dzie wykonywaÅ‚ jakiÅ› proces.
 .PP
 .I old_esc_mode
 .IP
 Standardowo Midnight Commander traktuje klawisz ESC jako przedrostek
-(old_esc_mode=0). Je¶li w³±czysz tê opcjê (old_esc_mode=1), to klawisz
-ESC bêdzie przedrostkiem dla innego klawisza, ale je¶li ten nie nast±pi,
-bêdzie on zinterpretowany jako klawisz anulowania (tak jak ESC ESC).
+(old_esc_mode=0). JeÅ›li wÅ‚Ä…czysz tÄ™ opcjÄ™ (old_esc_mode=1), to klawisz
+ESC bÄ™dzie przedrostkiem dla innego klawisza, ale jeÅ›li ten nie nastÄ…pi,
+bÄ™dzie on zinterpretowany jako klawisz anulowania (tak jak ESC ESC).
 .PP
 .PP
 .I only_leading_plus_minus
 .IP
-zmienia znaczenia znaków '+', '-', '*' w linii komend (wybór, odznaczenie,
-odwrócenie zaznaczenia). Standardowo dzia³aj± one tylko wtedy kiedy linia
-poleceñ jest pusta. Je¶li co¶ jest w niej ju¿ napisane, znaki te s± traktowane
-jako normalne. Jest to przydatne gdy¿ najczê¶ciej w trakcie pisania nie chcemy
-zmieniaæ zaznaczenia. Jednak czasami ... - wystarczy przestawiæ tê opcjê
-i klawisze te bêd± zawsze dzia³aæ.
+zmienia znaczenia znakÃ³w '+', '-', '*' w linii komend (wybÃ³r, odznaczenie,
+odwrÃ³cenie zaznaczenia). Standardowo dziaÅ‚ajÄ… one tylko wtedy kiedy linia
+poleceÅ„ jest pusta. JeÅ›li coÅ› jest w niej juÅ¼ napisane, znaki te sÄ… traktowane
+jako normalne. Jest to przydatne gdyÅ¼ najczÄ™Å›ciej w trakcie pisania nie chcemy
+zmieniaÄ‡ zaznaczenia. Jednak czasami ... - wystarczy przestawiÄ‡ tÄ™ opcjÄ™
+i klawisze te bÄ™dÄ… zawsze dziaÅ‚aÄ‡.
 .I panel_scroll_pages
 .IP
-Je¶li ustawione (standardowo), panel bêdzie przewijany o po³owê za ka¿dym
-razem kiedy kursor dochodzi do dolnej lub górnej linii, w przeciwnym wypadku
-przewijanie bêdzie siê odbywaæ linia po linii.
+JeÅ›li ustawione (standardowo), panel bÄ™dzie przewijany o poÅ‚owÄ™ za kaÅ¼dym
+razem kiedy kursor dochodzi do dolnej lub gÃ³rnej linii, w przeciwnym wypadku
+przewijanie bÄ™dzie siÄ™ odbywaÄ‡ linia po linii.
 .PP
 .I show_output_starts_shell
 .IP
-Ta opcja pracuje je¶li nie u¿ywasz obs³ugi pow³oki w tle. Kiedy
-u¿yjesz kombinacji klawiszy C-o i ta opcja jest w³±czona, bêdziesz
-mia³ now± pow³okê. Je¶li nie, dowolny klawisz przywróci znów Midnight
-Commandera (C-o dzia³a jak podgl±d).
+Ta opcja pracuje jeÅ›li nie uÅ¼ywasz obsÅ‚ugi powÅ‚oki w tle. Kiedy
+uÅ¼yjesz kombinacji klawiszy C-o i ta opcja jest wÅ‚Ä…czona, bÄ™dziesz
+miaÅ‚ nowÄ… powÅ‚okÄ™. JeÅ›li nie, dowolny klawisz przywrÃ³ci znÃ³w Midnight
+Commandera (C-o dziaÅ‚a jak podglÄ…d).
 .PP
 .I show_all_if_ambiguous.
 .IP
-Standardowo Midnight Commander pokazuje wszystkie mo¿liwe dokoñczenia
-je¶li jest ich wiêcej i naci¶niêto kombinacjê
+Standardowo Midnight Commander pokazuje wszystkie moÅ¼liwe dokoÅ„czenia
+jeÅ›li jest ich wiÄ™cej i naciÅ›niÄ™to kombinacjÄ™
 .B M-Tab
-po raz drugi, za pierwszym razem dokoñczone zostanie tylko tyle ile jest to
-mo¿liwe i je¶li bêdzie wiêcej mo¿liwo¶ci s³ychaæ bêdzie krótkie bipniêcie.
-Je¶li chcesz widzieæ wszystkie mo¿liwe dokoñczenia ju¿ po pierwszym naci¶niêciu
+po raz drugi, za pierwszym razem dokoÅ„czone zostanie tylko tyle ile jest to
+moÅ¼liwe i jeÅ›li bÄ™dzie wiÄ™cej moÅ¼liwoÅ›ci sÅ‚ychaÄ‡ bÄ™dzie krÃ³tkie bipniÄ™cie.
+JeÅ›li chcesz widzieÄ‡ wszystkie moÅ¼liwe dokoÅ„czenia juÅ¼ po pierwszym naciÅ›niÄ™ciu
 .BR M-Tab ,
-zmieñ tê opcjê na 1.
+zmieÅ„ tÄ™ opcjÄ™ na 1.
 .PP
 .I torben_fj_mode
 .IP
-Je¶li ta opcja jest w³±czona, klawisze home i end bêd± dzia³a³y troszkê
-inaczej w panelach, zamiast przemieszczaæ liniê wyboru do pierwszej lub
-ostatniej linii w panelu, bêd± dzia³a³y tak jak jest to opisane poni¿ej:
+JeÅ›li ta opcja jest wÅ‚Ä…czona, klawisze home i end bÄ™dÄ… dziaÅ‚aÅ‚y troszkÄ™
+inaczej w panelach, zamiast przemieszczaÄ‡ liniÄ™ wyboru do pierwszej lub
+ostatniej linii w panelu, bÄ™dÄ… dziaÅ‚aÅ‚y tak jak jest to opisane poniÅ¼ej:
 .IP
-Klawisz home bêdzie: przechodzi³ do ¶rodkowej linii, je¶li jest pod ni±; w
-przeciwnym wypadku bêdzie przechodzi³ do najwy¿szej linii w panelu, je¶li
-ju¿ w niej jest, bêdzie przechodzi³ do pierwszego pliku w panelu.
+Klawisz home bÄ™dzie: przechodziÅ‚ do Å›rodkowej linii, jeÅ›li jest pod niÄ…; w
+przeciwnym wypadku bÄ™dzie przechodziÅ‚ do najwyÅ¼szej linii w panelu, jeÅ›li
+juÅ¼ w niej jest, bÄ™dzie przechodziÅ‚ do pierwszego pliku w panelu.
 .IP
-Klawisz end ma podobne zastosowanie: przechodzi do ¶rodkowej linii, je¶li
-jest nad ni±; w przeciwnym wypadku przechodzi do najni¿szej linii w panelu,
-chyba ¿e ju¿ siê w niej znajduje, wtedy przechodzi do ostatniego pliku w
+Klawisz end ma podobne zastosowanie: przechodzi do Å›rodkowej linii, jeÅ›li
+jest nad niÄ…; w przeciwnym wypadku przechodzi do najniÅ¼szej linii w panelu,
+chyba Å¼e juÅ¼ siÄ™ w niej znajduje, wtedy przechodzi do ostatniego pliku w
 panelu.
 .PP
 .I highlight_mode
-Standardowo wszystkie informacje w panelach s± wy¶wietlane tym samym
-kolorem. Je¶li ta waro¶æ jest ustawiona na 1, to
+Standardowo wszystkie informacje w panelach sÄ… wyÅ›wietlane tym samym
+kolorem. JeÅ›li ta waroÅ›Ä‡ jest ustawiona na 1, to
 .I uprawnienia
 lub
 .I tryb
-bêd± wy¶wietlane przy u¿yciu pod¶wietlonej barwy, tak aby pokazaæ
-ustawienia dla u¿ytkownika. Tak wiêc prawa do odczytu, zapisu i wykonywania
-bêd± wy¶wietlane na ¿ó³to (tzn. kolorem
+bÄ™dÄ… wyÅ›wietlane przy uÅ¼yciu podÅ›wietlonej barwy, tak aby pokazaÄ‡
+ustawienia dla uÅ¼ytkownika. Tak wiÄ™c prawa do odczytu, zapisu i wykonywania
+bÄ™dÄ… wyÅ›wietlane na Å¼Ã³Å‚to (tzn. kolorem
 .IR selected ).
-W dodatku je¶li ta zmienna jest ustawiona na 2, to ca³e linie s±
-wy¶wietlane w kolorze odpowiadaj±cym ich typowi (zobacz sekcjê Kolory).
-Pod¶wietlenie uprawnieñ równie¿ pracuje w tym trybie.
+W dodatku jeÅ›li ta zmienna jest ustawiona na 2, to caÅ‚e linie sÄ…
+wyÅ›wietlane w kolorze odpowiadajÄ…cym ich typowi (zobacz sekcjÄ™ Kolory).
+PodÅ›wietlenie uprawnieÅ„ rÃ³wnieÅ¼ pracuje w tym trybie.
 .PP
 .I use_file_to_guess_type
 .IP
-Je¶li ta zmienna jest ustawiona (standardowo) próbuje siê dostosowaæ
+JeÅ›li ta zmienna jest ustawiona (standardowo) prÃ³buje siÄ™ dostosowaÄ‡
 rozszerzenie pliku do tego wybranego w pliku mc.ext.
 .PP
 .I xterm_mode
 .IP
-Je¶li ta opcja jest w³±czona (standardowo tak nie jest) kiedy przegl±dasz plik
-w panelu drzewa, bêdzie on automatycznie prze³adowywa³ drugi panel na
-zawarto¶æ wybranego katalogu.
+JeÅ›li ta opcja jest wÅ‚Ä…czona (standardowo tak nie jest) kiedy przeglÄ…dasz plik
+w panelu drzewa, bÄ™dzie on automatycznie przeÅ‚adowywaÅ‚ drugi panel na
+zawartoÅ›Ä‡ wybranego katalogu.
 .PP
 .\"NODE "Terminal databases"
 .SH Baza danych terminali (Terminal databases)
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
-posiadania uprawnieñ roota. Midnight Commander szuka w pliku startowym
-(mc.lib po³o¿onego w katalogach z bibliotekami Midnight Commandera) lub w
+posiadania uprawnieÅ„ roota. Midnight Commander szuka w pliku startowym
+(mc.lib poÅ‚oÅ¼onego w katalogach z bibliotekami Midnight Commandera) lub w
 pliku ~/.mc/ini sekcji "terminal:nazwa-twojego-terminala" i potem sekcji
-"terminal:general", ka¿da linia sekcji zawiera symbol klawisza, który
-chcesz zdefiniowaæ, zaczynaj±ce siê do znaku równo¶ci i definicji klawisza.
-Mo¿esz u¿yæ kombinacji \\E aby reprezentowaæ znak escape i ^x aby
-reprezentowaæ znak Control-x.
+"terminal:general", kaÅ¼da linia sekcji zawiera symbol klawisza, ktÃ³ry
+chcesz zdefiniowaÄ‡, zaczynajÄ…ce siÄ™ do znaku rÃ³wnoÅ›ci i definicji klawisza.
+MoÅ¼esz uÅ¼yÄ‡ kombinacji \\E aby reprezentowaÄ‡ znak escape i ^x aby
+reprezentowaÄ‡ znak Control-x.
 .PP
-Mo¿liwymi klawiszami symboli s±:
+MoÅ¼liwymi klawiszami symboli sÄ…:
 .PP
 .nf
 f0 do f20     Klawisze funkcyjne f0-f20
 bs            backspace
 home          klawisz home
 end           klawisz end
-up            strza³ka w górê
-down          strza³ka w dó³
-left          strza³ka w lewo
-right         strza³ka w prawo
+up            strzaÅ‚ka w gÃ³rÄ™
+down          strzaÅ‚ka w dÃ³Å‚
+left          strzaÅ‚ka w lewo
+right         strzaÅ‚ka w prawo
 pgdn          klawisz page down
 pgup          klawisz page up
 insert        znak insert
 delete        znak delete
-complete      do dokañczania
+complete      do dokaÅ„czania
 .fi
 .PP
-Na przyk³ad, aby zdefiniowaæ klawisz insert jako Escape + [ + O + p, mo¿esz
-ustawiæ to pliku ini:
+Na przykÅ‚ad, aby zdefiniowaÄ‡ klawisz insert jako Escape + [ + O + p, moÅ¼esz
+ustawiÄ‡ to pliku ini:
 .PP
 .nf
 insert=\\E[Op
@@ -2777,17 +2777,17 @@ insert=\\E[Op
 .PP
 Symbol klawisza
 .I complete
-reprezentuje sekwencjê wyj¶cia u¿ywan± do wywo³ywania procesu dokañczania,
-jest to wywo³ywane kombinacj± M-tab, ale mo¿esz zdefiniowaæ inne klawisze
-do wykonywania tych samych funkcji (na tych klawiaturach z ton± fajnych i
-zupe³nie bezu¿ytecznych klawiszy).
+reprezentuje sekwencjÄ™ wyjÅ›cia uÅ¼ywanÄ… do wywoÅ‚ywania procesu dokaÅ„czania,
+jest to wywoÅ‚ywane kombinacjÄ… M-tab, ale moÅ¼esz zdefiniowaÄ‡ inne klawisze
+do wykonywania tych samych funkcji (na tych klawiaturach z tonÄ… fajnych i
+zupeÅ‚nie bezuÅ¼ytecznych klawiszy).
 .PP
 .SH ""
 .\"NODE "FILES"
 .SH PLIKI
 .PP
-Program bêdzie pobiera³ wszystkie swoje informacje ze zmiennej MCHOME,
-je¶li jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
+Program bÄ™dzie pobieraÅ‚ wszystkie swoje informacje ze zmiennej MCHOME,
+jeÅ›li jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
 .PP
 @prefix@/share/mc.hlp
 .IP
@@ -2795,68 +2795,68 @@ Plik pomocy dla programu.
 .PP
 @prefix@/share/mc/mc.ext
 .IP
-Standardowy plik rozszerzeñ plików.
+Standardowy plik rozszerzeÅ„ plikÃ³w.
 .PP
 ~/.mc/bindings
 .IP
-W³asny plik u¿ytkownika, konfiguruje podgl±d i edycje plików. Ma wy¿szy
-priorytet ni¿ plik systemowy.
+WÅ‚asny plik uÅ¼ytkownika, konfiguruje podglÄ…d i edycje plikÃ³w. Ma wyÅ¼szy
+priorytet niÅ¼ plik systemowy.
 .PP
 @prefix@/share/mc/mc.ini
 .IP
-Standardowy plik setupu do Midnight Commandera, u¿ywany tylko wówczas,
-kiedy u¿ytkownik nie ma swojego w³asnego pliku ~/.mc/ini.
+Standardowy plik setupu do Midnight Commandera, uÅ¼ywany tylko wÃ³wczas,
+kiedy uÅ¼ytkownik nie ma swojego wÅ‚asnego pliku ~/.mc/ini.
 .PP
 @prefix@/share/mc/mc.lib
 .IP
-Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku s±
-uwzglêdniane przez wszystkie sesje Midnight Commandera, u¿yteczne do
-definiowania ogólnosystemowych ustawieñ terminali.
+Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku sÄ…
+uwzglÄ™dniane przez wszystkie sesje Midnight Commandera, uÅ¼yteczne do
+definiowania ogÃ³lnosystemowych ustawieÅ„ terminali.
 .PP
 ~/.mc/ini
 .IP
-W³asny setup u¿ytkownika. Je¶li ten plik jest dostêpny, jest ³adowany
+WÅ‚asny setup uÅ¼ytkownika. JeÅ›li ten plik jest dostÄ™pny, jest Å‚adowany
 zamiast pliku globalnego.
 .PP
 @prefix@/share/mc/mc.hint
 .IP
-Plik zawieraj±cy podpowiedzi (hints) wy¶wietlane przez program.
+Plik zawierajÄ…cy podpowiedzi (hints) wyÅ›wietlane przez program.
 .PP
 @prefix@/share/mc/mc.menu
 .IP
-Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
+Ten plik zawiera informacje o ogÃ³lnosystemowych aplikacjach w menu.
 .PP
 ~/.mc/menu
 .IP
-W³asny plik menu u¿ytkownika. Je¶li ten plik jest obecny jest u¿ywany
+WÅ‚asny plik menu uÅ¼ytkownika. JeÅ›li ten plik jest obecny jest uÅ¼ywany
 zamiast pliku globalnego.
 .PP
 ~/.mc/tree
 .IP
-Lista katalogów drzewa katalogów i podgl±du drzewa. Jedna linia jest jednym
-wej¶ciem. Linie zaczynaj±ce siê od uko¶nika s± pe³nymi nazwami katalogów.
-Linie zaczynaj±ce siê od numeru maj± tyle znaków ile poprzedni katalog.
-Je¶li chcesz mo¿esz stworzyæ plik u¿ywaj±c komendy "find / -type d
--print | sort > ~/.mc/tree". Normalnie nie ma sensu tego czyniæ, gdy¿
+Lista katalogÃ³w drzewa katalogÃ³w i podglÄ…du drzewa. Jedna linia jest jednym
+wejÅ›ciem. Linie zaczynajÄ…ce siÄ™ od ukoÅ›nika sÄ… peÅ‚nymi nazwami katalogÃ³w.
+Linie zaczynajÄ…ce siÄ™ od numeru majÄ… tyle znakÃ³w ile poprzedni katalog.
+JeÅ›li chcesz moÅ¼esz stworzyÄ‡ plik uÅ¼ywajÄ…c komendy "find / -type d
+-print | sort > ~/.mc/tree". Normalnie nie ma sensu tego czyniÄ‡, gdyÅ¼
 Midnight Commander robi to sam za ciebie.
 .PP
 \&./.mc.menu
 .IP
-Lokalny plik zdefiniowany przez u¿ytkownika. Je¶li ten plik jest dostêpny,
-jest u¿ywany zamiast pliku w katalogu domowym i ogólnosystemowego.
+Lokalny plik zdefiniowany przez uÅ¼ytkownika. JeÅ›li ten plik jest dostÄ™pny,
+jest uÅ¼ywany zamiast pliku w katalogu domowym i ogÃ³lnosystemowego.
 .PP
 .\"SKIP_SECTION"
 .SH LICENCJA
 Program jest dystrybuowany na zasadach licencji GNU General Public License
-dopóki jako publikowany przez Free Software Foundation. Zobacz wbudowan±
-pomoc po wiêcej szczegó³ów na temat licencji i braku gwarancji.
+dopÃ³ki jako publikowany przez Free Software Foundation. Zobacz wbudowanÄ…
+pomoc po wiÄ™cej szczegÃ³Å‚Ã³w na temat licencji i braku gwarancji.
 .\"NODE "AVAILABILITY"
-.SH DOSTÊPNO¦Æ
+.SH DOSTÄ˜PNOÅšÄ†
 Najnowsza wersja programu jest do zdobycia na serwerze ftp.nuclecu.unam.mc w
 katalogu /linux/local i w Europie na serwerze sunsite.mff.cuni.cz w katalogu
 /GNU/mc i na serwerze ftp.teuto.de w katalogu /lmb/mc.
 .\"NODE "SEE ALSO"
-.SH ZOBACZ TAK¯E
+.SH ZOBACZ TAKÅ»E
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
@@ -2901,15 +2901,15 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
 .\"NODE "BUGS"
-.SH B£ÊDY
+.SH BÅÄ˜DY
 W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
-pozosta³o jeszcze do zrobienia.
+pozostaÅ‚o jeszcze do zrobienia.
 .PP
-Je¶li chcesz zg³osiæ k³opoty z programem [b³êdy w nim],
-wy¶lij e-mail [po angielsku], na adres mc-devel@gnome.org.
+JeÅ›li chcesz zgÅ‚osiÄ‡ kÅ‚opoty z programem [bÅ‚Ä™dy w nim],
+wyÅ›lij e-mail [po angielsku], na adres mc-devel@gnome.org.
 .PP
-Do zg³oszenia b³êdu do³±cz opis problemu, versjê programu, którego u¿ywasz
-(wy¶wietla j± mc -V), system operacyjny, na którym pracujesz i je¶li program
-siê wyk³ada, chcieliby¶my dostaæ ¶lad stosu.
-.SH T£UMACZENIE
+Do zgÅ‚oszenia bÅ‚Ä™du doÅ‚Ä…cz opis problemu, versjÄ™ programu, ktÃ³rego uÅ¼ywasz
+(wyÅ›wietla jÄ… mc -V), system operacyjny, na ktÃ³rym pracujesz i jeÅ›li program
+siÄ™ wykÅ‚ada, chcielibyÅ›my dostaÄ‡ Å›lad stosu.
+.SH TÅUMACZENIE
 Maciej Wojciechowski    wojciech@staszic.waw.pl
