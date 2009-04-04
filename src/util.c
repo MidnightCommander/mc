@@ -701,25 +701,34 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 }
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different
-short-month-name sizes for different locales */ 
+   short-month-name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
-    size_t length, a, b;
-    char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
+    size_t length;
     time_t testtime = time (NULL);
-    strftime (buf, sizeof(buf) - 1, _("%b %e %H:%M"), localtime(&testtime));
-    a = str_term_width1 (buf);
-    strftime (buf, sizeof(buf) - 1, _("%b %e  %Y"), localtime(&testtime));
-    b = str_term_width1 (buf);
-    
-    length = max (a, b);
-    length = max (str_term_width1 (_("(invalid)")), length);
-    
+    struct tm* lt = localtime(&testtime);
+
+    if (lt == NULL) {
+	/* huh, localtime() doesnt seem to work ... falling back to "(invalid)" */
+	length = str_term_width1 (_(INVALID_TIME_TEXT));
+    } else {
+	char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
+	size_t a, b;
+
+	strftime (buf, sizeof(buf) - 1, _("%b %e %H:%M"), lt);
+	a = str_term_width1 (buf);
+	strftime (buf, sizeof(buf) - 1, _("%b %e %Y"), lt);
+	b = str_term_width1 (buf);
+
+	length = max (a, b);
+	length = max (str_term_width1 (_(INVALID_TIME_TEXT)), length);
+    }
+
     /* Don't handle big differences. Use standard value (email bug, please) */
-    if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
-	    length = STD_I18NTIMELENGTH;
-    
+    if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
+	length = STD_I18NTIMELENGTH;
+
     return length;
 }
 
