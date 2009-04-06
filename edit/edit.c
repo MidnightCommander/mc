@@ -195,9 +195,9 @@ static int edit_find_filter (const char *filename)
     size_t i, l, e;
     if (!filename)
 	return -1;
-    l = str_term_width1 (filename);
+    l = strlen (filename);
     for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++) {
-	e =  (all_filters[i].extension);
+	e = strlen (all_filters[i].extension);
 	if (l > e)
 	    if (!strcmp (all_filters[i].extension, filename + l - e))
 		return i;
