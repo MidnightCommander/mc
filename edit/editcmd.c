@@ -1183,7 +1183,6 @@ int edit_block_delete_cmd (WEdit * edit)
     return edit_block_delete (edit);
 }
 
-
 #define INPUT_INDEX 9
 #define SEARCH_DLG_WIDTH 58
 #define SEARCH_DLG_HEIGHT 10
@@ -3188,4 +3187,74 @@ edit_get_match_keyword_cmd (WEdit *edit)
                                        num_def);
     }
     g_free (match_expr);
+}
+
+void
+edit_move_block_to_right (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+
+    if ( eval_marks (edit, &start_mark, &end_mark) )
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+    do {
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+        if ( option_fill_tabs_with_spaces ) {
+            if ( option_fake_half_tabs ) {
+                insert_spaces_tab (edit, 1);
+            } else {
+                insert_spaces_tab (edit, 0);
+            }
+        } else {
+            edit_insert (edit, '\t');
+        }
+        edit_cursor_move (edit, edit_bol (edit, cur_bol) - edit->curs1);
+        if ( cur_bol == 0 ) {
+            break;
+        }
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    } while (cur_bol >= start_bol) ;
+    edit->force |= REDRAW_PAGE;
+}
+
+void
+edit_move_block_to_left (WEdit * edit)
+{
+    long start_mark, end_mark;
+    long cur_bol, start_bol;
+    int i, del_tab_width;
+    int next_char;
+
+    if ( eval_marks (edit, &start_mark, &end_mark) )
+        return;
+
+    start_bol = edit_bol (edit, start_mark);
+    cur_bol = edit_bol (edit, end_mark - 1);
+    do {
+        edit_cursor_move (edit, cur_bol - edit->curs1);
+        if (option_fake_half_tabs) {
+            del_tab_width = HALF_TAB_SIZE;
+        } else {
+            del_tab_width = option_tab_spacing;
+        }
+        next_char = edit_get_byte (edit, edit->curs1);
+        if ( next_char == '\t' ) {
+            edit_delete (edit);
+        } else if ( next_char == ' ' ) {
+            for (i = 1; i <= del_tab_width; i++) {
+                if ( next_char == ' ' ) {
+                    edit_delete (edit);
+                }
+                next_char = edit_get_byte (edit, edit->curs1);
+            }
+        }
+        if ( cur_bol == 0 ) {
+            break;
+        }
+        cur_bol = edit_bol (edit, cur_bol - 1);
+    } while (cur_bol >= start_bol) ;
+    edit->force |= REDRAW_PAGE;
 }
