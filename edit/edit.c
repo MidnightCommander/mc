@@ -513,7 +513,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 		    option_whole_chars_search);
 
 	    for (i = 1; i <= sizeof (option_whole_chars_search_buf); i++) {
-		if (islower (i) && !strchr (option_whole_chars_search, i)) {
+		if (g_ascii_islower ((gchar) i) && !strchr (option_whole_chars_search, i)) {
 		    option_whole_chars_search_buf[len++] = i;
 		}
 	    }
@@ -1687,7 +1687,7 @@ my_type_of (int c)
     }
     if (isupper (c))
 	c = 'A';
-    else if (islower (c))
+    else if (g_ascii_islower ((gchar) c))
 	c = 'a';
     else if (g_ascii_isalpha (c))
 	c = 'a';

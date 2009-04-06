@@ -90,7 +90,7 @@ static unsigned char *edit_get_block (WEdit *edit, long start,
 
 static inline int my_lower_case (int c)
 {
-    return tolower(c & 0xFF);
+    return g_ascii_tolower ((gchar)c & 0xFF);
 }
 
 static const char *
