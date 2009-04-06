@@ -1685,7 +1685,7 @@ my_type_of (int c)
 	    return 2;
 	return 0x80000000UL;
     }
-    if (isupper (c))
+    if (g_ascii_isupper ((gchar) c))
 	c = 'A';
     else if (g_ascii_islower ((gchar) c))
 	c = 'a';
