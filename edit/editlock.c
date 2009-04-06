@@ -42,6 +42,7 @@
 #include "editlock.h"
 
 #include "../src/wtools.h"	/* edit_query_dialog () */
+#include "../src/strutil.h"	/* utf string functions */
 
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10
@@ -112,7 +113,7 @@ lock_extract_info (const char *str)
     static char pid[PID_BUF_SIZE], who[BUF_SIZE];
     static struct lock_s lock;
 
-    for (p = str + strlen (str) - 1; p >= str; p--)
+    for (p = str + str_term_width1 (str) - 1; p >= str; p--)
 	if (*p == '.')
 	    break;
 
@@ -125,7 +126,7 @@ lock_extract_info (const char *str)
     /* Treat text between '.' and ':' or '\0' as pid */
     i = 0;
     for (p = p + 1;
-	 p < str + strlen (str) && *p != ':' && i < PID_BUF_SIZE; p++)
+	 p < str + str_term_width1 (str) && *p != ':' && i < PID_BUF_SIZE; p++)
 	pid[i++] = *p;
     pid[i] = '\0';
 

@@ -44,7 +44,7 @@
 #include "../src/user.h"	/* user_menu_cmd() */
 #include "../src/wtools.h"	/* query_dialog() */
 #include "../src/timefmt.h"	/* time formatting */
-
+#include "../src/strutil.h"	/* utf string functions */
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
@@ -195,9 +195,9 @@ static int edit_find_filter (const char *filename)
     size_t i, l, e;
     if (!filename)
 	return -1;
-    l = strlen (filename);
+    l = str_term_width1 (filename);
     for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++) {
-	e = strlen (all_filters[i].extension);
+	e =  (all_filters[i].extension);
 	if (l > e)
 	    if (!strcmp (all_filters[i].extension, filename + l - e))
 		return i;
@@ -214,8 +214,8 @@ edit_get_filter (const char *filename)
     if (i < 0)
 	return 0;
     quoted_name = name_quote (filename, 0);
-    l = strlen (quoted_name);
-    p = g_malloc (strlen (all_filters[i].read) + l + 2);
+    l = str_term_width1 (quoted_name);
+    p = g_malloc (str_term_width1 (all_filters[i].read) + l + 2);
     sprintf (p, all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
@@ -230,8 +230,8 @@ edit_get_write_filter (const char *write_name, const char *filename)
     if (i < 0)
 	return 0;
     writename = name_quote (write_name, 0);
-    l = strlen (writename);
-    p = g_malloc (strlen (all_filters[i].write) + l + 2);
+    l = str_term_width1 (writename);
+    p = g_malloc (str_term_width1 (all_filters[i].write) + l + 2);
     sprintf (p, all_filters[i].write, writename);
     g_free (writename);
     return p;
@@ -507,7 +507,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 
 	if (option_whole_chars_search_buf != option_whole_chars_search) {
 	    size_t i;
-	    size_t len = strlen (option_whole_chars_search);
+	    size_t len = str_term_width1 (option_whole_chars_search);
 
 	    strcpy (option_whole_chars_search_buf,
 		    option_whole_chars_search);
@@ -1689,7 +1689,7 @@ my_type_of (int c)
 	c = 'A';
     else if (islower (c))
 	c = 'a';
-    else if (isalpha (c))
+    else if (g_ascii_isalpha (c))
 	c = 'a';
     else if (isdigit (c))
 	c = '0';

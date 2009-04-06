@@ -39,6 +39,7 @@
 #include "../src/color.h"	/* use_colors */
 #include "../src/main.h"	/* mc_home */
 #include "../src/wtools.h"	/* message() */
+#include "../src/strutil.h"	/* utf string functions */
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -178,7 +179,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	if (strchr (whole_left, c))
 	    return -1;
 
-    for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
+    for (p = (unsigned char *) text, q = p + str_term_width1 ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case SYNTAX_TOKEN_STAR:
 	    if (++p > q)

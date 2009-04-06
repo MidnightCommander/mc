@@ -59,6 +59,7 @@
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
+#include "../src/strutil.h"	/* utf string functions */
 
 struct selection {
    unsigned char * text;
@@ -136,11 +137,11 @@ catstrs (const char *first,...)
     if (!first)
 	return 0;
 
-    len = strlen (first);
+    len = str_term_width1 (first);
     va_start (ap, first);
 
     while ((data = va_arg (ap, char *)) != 0)
-	 len += strlen (data);
+	 len += str_term_width1 (data);
 
     len++;
 
@@ -440,23 +441,23 @@ void menu_save_mode_cmd (void)
 	size_t l1;
 
 	/* OK/Cancel buttons */
-	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
+	l1 = str_term_width1 (_(widgets[0].text)) + str_term_width1 (_(widgets[1].text)) + 5;
 	maxlen = max (maxlen, l1);
 
         for (i = 0; i < 3; i++ ) {
             str[i] = _(str[i]);
-	    maxlen = max (maxlen, strlen (str[i]) + 7);
+	    maxlen = max (maxlen, str_term_width1 (str[i]) + 7);
 	}
         i18n_flag = 1;
 
-        dlg_x = maxlen + strlen (_(widgets[3].text)) + 5 + 1;
-        widgets[2].hotkey_pos = strlen (_(widgets[3].text)); /* input field length */
+        dlg_x = maxlen + str_term_width1 (_(widgets[3].text)) + 5 + 1;
+        widgets[2].hotkey_pos = str_term_width1 (_(widgets[3].text)); /* input field length */
         dlg_x = min (COLS, dlg_x);
 	dialog.xlen = dlg_x;
 
         i = (dlg_x - l1)/3;
 	widgets[1].relative_x = i;
-	widgets[0].relative_x = i + strlen (_(widgets[1].text)) + i + 4;
+	widgets[0].relative_x = i + str_term_width1 (_(widgets[1].text)) + i + 4;
 
 	widgets[2].relative_x = widgets[3].relative_x = maxlen + 2;
 
@@ -599,7 +600,7 @@ raw_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 int
 edit_raw_key_query (const char *heading, const char *query, int cancel)
 {
-    int w = strlen (query) + 7;
+    int w = str_term_width1 (query) + 7;
     struct Dlg_head *raw_dlg =
 	create_dlg (0, 0, 7, w, dialog_colors, raw_callback,
 		    NULL, heading,
@@ -1461,7 +1462,7 @@ static long
 edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
 {
     long p, q = 0;
-    long l = strlen ((char *) exp), f = 0;
+    long l = str_term_width1 ((char *) exp), f = 0;
     int n = 0;
 
     for (p = 0; p < l; p++)	/* count conversions... */
@@ -1523,7 +1524,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		start++;
 		buf++;		/* move the window along */
 		if (buf == mbuf + MAX_REPL_LEN) {	/* the window is about to go past the end of array, so... */
-		    memmove (mbuf, buf, strlen ((char *) buf) + 1);	/* reset it */
+		    memmove (mbuf, buf, str_term_width1 ((char *) buf) + 1);	/* reset it */
 		    buf = mbuf;
 		}
 		q--;
@@ -1572,7 +1573,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 
 		if (buf[q - 1] != '\n') { /* incomplete line: try to recover */
 		    buf = mbuf + MAX_REPL_LEN / 2;
-		    q = strlen ((const char *) buf);
+		    q = str_term_width1 ((const char *) buf);
 		    memmove (mbuf, buf, q);
 		    p = start + q;
 		    move_win = 1;
@@ -1582,7 +1583,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    }
 	}
     } else {
-	*len = strlen ((const char *) exp);
+	*len = str_term_width1 ((const char *) exp);
 	if (replace_case) {
 	    for (p = start; p <= last_byte - l; p++) {
 		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
@@ -1721,7 +1722,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	if (*p == '*') {
 	    p++;
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
-	    p1 += strlen (p1);
+	    p1 += str_term_width1 (p1);
 	} else {
 	    while (is_digit (*p) && p1 < q1 + 20)
 		*p1++ = *p++;
@@ -1733,7 +1734,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	if (*p == '*') {
 	    p++;
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
-	    p1 += strlen (p1);
+	    p1 += str_term_width1 (p1);
 	} else {
 	    while (is_digit (*p) && p1 < q1 + 32)
 		*p1++ = *p++;
@@ -1767,7 +1768,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	q = p;
     }
     va_end (ap);
-    n = strlen (q);
+    n = str_term_width1 (q);
     if (n >= (size_t) (e - s))
 	return -1;
     memcpy (s, q, n + 1);

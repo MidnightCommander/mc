@@ -46,6 +46,7 @@
 #include "../src/widget.h"	/* buttonbar_redraw() */
 #include "../src/key.h"		/* is_idle() */
 #include "../src/charsets.h"
+#include "../src/strutil.h"	/* utf string functions */
 
 /* Text styles */
 #define MOD_ABNORMAL		(1 << 8)
@@ -123,11 +124,11 @@ edit_status (WEdit *edit)
     const int preferred_fname_len = 16;
 
     status_string (edit, status, status_size);
-    status_len = (int) strlen (status);
+    status_len = (int) str_term_width1 (status);
 
     if (edit->filename)
         fname = edit->filename;
-    fname_len = strlen(fname);
+    fname_len = str_term_width1 (fname);
     if (fname_len < preferred_fname_len)
         fname_len = preferred_fname_len;
 
