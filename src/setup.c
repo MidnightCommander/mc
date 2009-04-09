@@ -378,6 +378,8 @@ save_setup (void)
 #ifdef HAVE_CHARSET
     save_string( "Misc", "display_codepage",
     		 get_codepage_id( display_codepage ), profile_name );
+    save_string( "Misc", "source_codepage",
+    		 get_codepage_id( source_codepage ), profile_name );
 #endif /* HAVE_CHARSET */
 
     g_free (profile);
@@ -581,8 +583,11 @@ load_setup (void)
 		     cpname, sizeof(cpname) );
 	if ( cpname[0] != '\0' )
 	    display_codepage = get_codepage_index( cpname );
+	load_string( "Misc", "source_codepage", "",
+		     cpname, sizeof(cpname) );
+	if ( cpname[0] != '\0' )
+	    source_codepage = get_codepage_index( cpname );
     }
-
     init_translation_table( source_codepage, display_codepage );
 #endif /* HAVE_CHARSET */
 }
