@@ -52,7 +52,7 @@
 #include "../src/tty.h"		/* LINES */
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
-#include "../src/main.h"	/* mc_home */
+#include "../src/main.h"	/* mc_home source_codepage */
 #include "../src/help.h"	/* interactive_display() */
 #include "../src/key.h"		/* XCTRL */
 #include "../src/dialog.h"	/* do_refresh() */
@@ -2932,6 +2932,7 @@ edit_select_codepage_cmd (WEdit *edit)
 {
 #ifdef HAVE_CHARSET
     do_select_codepage ();
+    edit->utf8 = str_isutf8 (get_codepage_id (source_codepage));
     edit->force = REDRAW_COMPLETELY;
     edit_refresh_cmd (edit);
 #endif

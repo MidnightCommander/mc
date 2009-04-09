@@ -45,6 +45,8 @@
 #include "../src/wtools.h"	/* query_dialog() */
 #include "../src/timefmt.h"	/* time formatting */
 #include "../src/strutil.h"	/* utf string functions */
+#include "../src/charsets.h"	/* get_codepage_id */
+#include "../src/main.h"	/* source_codepage */
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
@@ -162,6 +164,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
+    edit->utf8 = str_isutf8 (get_codepage_id( source_codepage ));
 
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 	GString *errmsg = g_string_new(NULL);

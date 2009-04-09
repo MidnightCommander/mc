@@ -65,6 +65,7 @@ struct WEdit {
     unsigned int screen_modified:1; /* File has been changed since the last screen draw */
     unsigned int delete_file:1;	/* New file, needs to be deleted unless modified */
     unsigned int highlight:1;	/* There is a selected block */
+    unsigned int utf8:1;	/* It's multibyte file codeset */
     long prev_col;		/* recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
     long curs_line;		/* line number of the cursor. */

@@ -398,6 +398,16 @@ str_choose_str_functions ()
     }
 }
 
+int
+str_isutf8 (char *codeset_name)
+{
+    int result = 0;
+    if (str_test_encoding_class (codeset_name, str_utf8_encodings)) {
+        result = 1;
+    }
+    return result;
+}
+
 void
 str_init_strings (const char *termenc)
 {
