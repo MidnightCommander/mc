@@ -1,8 +1,8 @@
 /* common strings utilities
    Copyright (C) 2007 Free Software Foundation, Inc.
-   
+
    Written 2007 by:
-   Rostislav Benes 
+   Rostislav Benes
 
    The file_date routine is mostly from GNU's fileutils package,
    written by Richard Stallman and David MacKenzie.
@@ -11,7 +11,7 @@
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -57,7 +57,7 @@ static const char *str_8bit_encodings[] = {
         "iso8859",
         "koi8",
         NULL
-};        
+};
 
 // terminal encoding
 static char *codeset;
@@ -75,7 +75,7 @@ static int
 str_test_not_convert (const char *enc)
 {
     return g_ascii_strcasecmp (enc, codeset) == 0;
-}        
+}
 
 str_conv_t
 str_crt_conv_to (const char *to_enc)
@@ -102,9 +102,9 @@ struct str_buffer *
 str_get_buffer () 
 {
     struct str_buffer *result;
-    
+
     result = buffer_list;
-    
+
     while (result != NULL) {
         if (!result->used) {
             str_reset_buffer (result);
@@ -113,21 +113,22 @@ str_get_buffer ()
         }
         result = result->next;
     }
-    
+
     result = g_new (struct str_buffer, 1);
     result->size = BUF_TINY;
     result->data = g_new0 (char, result->size);
     result->data[0] = '\0';
     result->actual = result->data;
     result->remain = result->size;
-    
+
     result->next = buffer_list;
     buffer_list = result;
-    
+
     result->used = 1;
-    
+
     return result;
-}    
+}
+
 
 void
 str_release_buffer (struct str_buffer *buffer)
@@ -139,7 +140,7 @@ void
 str_incrase_buffer (struct str_buffer *buffer) 
 {
     size_t offset;
-    
+
     offset = buffer->actual - buffer->data;
     buffer->remain+= buffer->size;
     buffer->size*= 2;
@@ -158,19 +159,20 @@ str_reset_buffer (struct str_buffer *buffer)
 static int
 _str_convert (str_conv_t coder, char *string, struct str_buffer *buffer)
 {
-    int state;        
+    int state;
+
     size_t left;
     size_t nconv;
-                    
+
     errno = 0;
-    
+
     if (used_class.is_valid_string (string)) {
         state = 0;
-       
+
         left = strlen (string);
 
         if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
-        
+
         iconv(coder, NULL, NULL, NULL, NULL);
 
         while (((int)left) > 0) {
@@ -206,10 +208,10 @@ int
 str_convert (str_conv_t coder, char *string, struct str_buffer *buffer)
 {
     int result; 
-    
+
     result = _str_convert (coder, string, buffer);
     buffer->actual[0] = '\0';
-    
+
     return result;
 }
 
@@ -221,9 +223,9 @@ _str_vfs_convert_from (str_conv_t coder, char *string,
     size_t nconv;
 
     left = strlen (string);
-        
+
     if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
-    
+
     iconv(coder, NULL, NULL, NULL, NULL);
 
     do {
@@ -241,7 +243,7 @@ _str_vfs_convert_from (str_conv_t coder, char *string,
             }
         }
     } while (left > 0);
-    
+
     return 0;
 }
 
@@ -249,16 +251,16 @@ int
 str_vfs_convert_from (str_conv_t coder, char *string, struct str_buffer *buffer)
 {
     int result;
-            
+
     if (coder == str_cnv_not_convert) {
         str_insert_string (string, buffer);
         result = 0;
     } else result = _str_vfs_convert_from (coder, string, buffer);
     buffer->actual[0] = '\0';
-    
+
     return result;
 }
-        
+
 int
 str_vfs_convert_to (str_conv_t coder, const char *string, 
                     int size, struct str_buffer *buffer)
@@ -270,10 +272,10 @@ void
 str_insert_string (const char *string, struct str_buffer *buffer)
 {
     size_t s;
-    
+
     s = strlen (string);
     while (buffer->remain < s) str_incrase_buffer (buffer);
-        
+
     memcpy (buffer->actual, string, s);
     buffer->actual+= s;
     buffer->remain-= s;
@@ -284,10 +286,10 @@ void
 str_insert_string2 (const char *string, int size, struct str_buffer *buffer)
 {
     size_t s;
-    
+
     s = (size >= 0) ? size : strlen (string);
     while (buffer->remain < s) str_incrase_buffer (buffer);
-        
+
     memcpy (buffer->actual, string, s);
     buffer->actual+= s;
     buffer->remain-= s;
@@ -299,7 +301,7 @@ str_printf (struct str_buffer *buffer, const char *format, ...)
 {
     int size;
     va_list ap;
-    
+
     va_start (ap, format);
     size = vsnprintf (buffer->actual, buffer->remain, format, ap);
     while (buffer->remain <= size) {
@@ -315,7 +317,7 @@ void
 str_insert_char (char ch, struct str_buffer *buffer)
 {
     if (buffer->remain <= 1) str_incrase_buffer (buffer);
-        
+
     buffer->actual[0] = ch;
     buffer->actual++;
     buffer->remain--;
@@ -332,7 +334,7 @@ void
 str_backward_buffer (struct str_buffer *buffer, int count)
 {
     char *prev;
-    
+
     while ((count > 0) && (buffer->actual > buffer->data)) {
         prev = str_get_prev_char (buffer->actual);
         buffer->remain+= buffer->actual - prev;
@@ -341,19 +343,19 @@ str_backward_buffer (struct str_buffer *buffer, int count)
         count--;
     }
 }
-        
 
-int 
+
+int
 str_translate_char (str_conv_t conv, char *keys, size_t ch_size, 
                     char *output, size_t out_size)
 {
     size_t left;
     size_t cnv;
-    
+
     iconv (conv, NULL, NULL, NULL, NULL);
-    
+
     left = (ch_size == (size_t)(-1)) ? strlen (keys) : ch_size;
-    
+
     cnv = iconv (conv, &keys, &left, &output, &out_size);
     if (cnv == (size_t)(-1)) {
         if (errno == EINVAL) return ESTR_PROBLEM; else return ESTR_FAILURE;
@@ -375,12 +377,12 @@ str_test_encoding_class (const char *encoding, const char **table)
 {
     int t;
     int result = 0;
-    
+
     for (t = 0; table[t] != NULL; t++) {
         result+= (g_ascii_strncasecmp (encoding, table[t], 
                   strlen (table[t])) == 0); 
     }
-    
+
     return result;
 }
 
@@ -394,9 +396,9 @@ str_choose_str_functions ()
     } else {
         used_class = str_ascii_init ();
     }
-}        
+}
 
-void 
+void
 str_init_strings (const char *termenc)
 {
     codeset = g_strdup ((termenc != NULL) 
@@ -410,17 +412,17 @@ str_init_strings (const char *termenc)
             codeset = g_strdup (str_detect_termencoding ());
             str_cnv_not_convert = iconv_open (codeset, codeset);
         }
-    
+
         if (str_cnv_not_convert == INVALID_CONV) {
             g_free (codeset);
             codeset = g_strdup ("ascii");
             str_cnv_not_convert = iconv_open (codeset, codeset);
         }
     }
-    
+
     str_cnv_to_term = str_cnv_not_convert;
     str_cnv_from_term = str_cnv_not_convert;
-    
+
     str_choose_str_functions ();
 }
 
@@ -429,7 +431,7 @@ str_release_buffer_list ()
 {
     struct str_buffer *buffer;
     struct str_buffer *next;
-    
+
     buffer = buffer_list;
     while (buffer != NULL) {
         next = buffer->next;
@@ -437,16 +439,16 @@ str_release_buffer_list ()
         g_free (buffer);
         buffer = next;
     }
-}            
-    
-void 
+}
+
+void
 str_uninit_strings ()
 {
     str_release_buffer_list ();
-    
+
     iconv_close (str_cnv_not_convert);
 }
-    
+
 const char *
 str_term_form (const char *text)
 {
@@ -480,7 +482,7 @@ str_term_substring (const char *text, int start, int width)
 char *
 str_get_next_char (char *text)
 {
-    
+
     used_class.cnext_char ((const char **)&text);
     return text;
 }
@@ -582,103 +584,103 @@ str_cprev_char_safe (const char **text)
     used_class.cprev_char_safe (text);
 }
 
-int 
+int
 str_next_noncomb_char (char **text)
 {
     return used_class.cnext_noncomb_char ((const char **) text);
 }
 
-int 
+int
 str_cnext_noncomb_char (const char **text)
 {
     return used_class.cnext_noncomb_char (text);
 }
 
-int 
+int
 str_prev_noncomb_char (char **text, const char *begin)
 {
     return used_class.cprev_noncomb_char ((const char **) text, begin);
 }
 
-int 
+int
 str_cprev_noncomb_char (const char **text, const char *begin)
 {
     return used_class.cprev_noncomb_char (text, begin);
 }
 
-int 
+int
 str_is_valid_char (const char *ch, size_t size)
 {
     return used_class.is_valid_char (ch, size);
 }
 
-int 
+int
 str_term_width1 (const char *text)
 {
     return used_class.term_width1 (text);
 }
 
-int 
+int
 str_term_width2 (const char *text, size_t length)
 {
     return used_class.term_width2 (text, length);
 }
 
-int 
+int
 str_term_char_width (const char *text)
 {
     return used_class.term_char_width (text);
 }
 
-int 
+int
 str_offset_to_pos (const char* text, size_t length)
 {
     return used_class.offset_to_pos (text, length);
 }
 
-int 
+int
 str_length (const char* text)
 {
     return used_class.length (text);
 }
 
-int 
+int
 str_length2 (const char* text, int size)
 {
     return used_class.length2 (text, size);
 }
 
-int 
+int
 str_length_noncomb (const char* text)
 {
     return used_class.length_noncomb (text);
 }
 
-int 
+int
 str_column_to_pos (const char *text, size_t pos)
 {
     return used_class.column_to_pos (text, pos);
 }
 
-int 
+int
 str_isspace (const char *ch)
 {
     return used_class.isspace (ch);
 }
 
-int 
+int
 str_ispunct (const char *ch) 
 {
     return used_class.ispunct (ch);
 }
 
-int 
+int
 str_isalnum (const char *ch)
 {
     return used_class.isalnum (ch);
 }
 
-int 
+int
 str_isdigit (const char *ch)
 {
     return used_class.isdigit (ch);
@@ -696,13 +698,13 @@ str_tolower (const char *ch, char **out, size_t *remain)
     return used_class.tolower (ch, out, remain);
 }
 
-int 
+int
 str_isprint (const char *ch)
 {
     return used_class.isprint (ch);
 }
 
-int 
+int
 str_iscombiningmark (const char *ch)
 {
     return used_class.iscombiningmark (ch);
@@ -725,7 +727,7 @@ void
 str_release_search_needle (char *needle, int case_sen)
 {
     used_class.release_search_needle (needle, case_sen);
-}        
+}
 
 const char *
 str_search_first (const char *text, const char *search, int case_sen)
@@ -739,7 +741,7 @@ str_search_last (const char *text, const char *search, int case_sen)
     return used_class.search_last (text, search, case_sen);
 }
 
-int 
+int
 str_is_valid_string (const char *text)
 {
     return used_class.is_valid_string (text);
@@ -799,13 +801,13 @@ str_create_key_for_filename (const char *text, int case_sen)
     return used_class.create_key_for_filename (text, case_sen);
 }
 
-int 
+int
 str_key_collate (const char *t1, const char *t2, int case_sen)
 {
     return used_class.key_collate (t1, t2, case_sen);
 }
 
-void 
+void
 str_release_key (char *key, int case_sen)
 {
     used_class.release_key (key, case_sen);
