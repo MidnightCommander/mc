@@ -118,6 +118,20 @@ int edit_get_byte (WEdit * edit, long byte_index)
     }
 }
 
+char *edit_get_utf_char (WEdit * edit, long byte_index)
+{
+    unsigned long p;
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
+	return NULL;
+
+    if (byte_index >= edit->curs1) {
+	p = edit->curs1 + edit->curs2 - byte_index - 1;
+	return str_get_next_char_safe (edit->buffers2[p >> S_EDIT_BUF_SIZE]+(EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+    } else {
+	return str_get_next_char_safe (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]+(byte_index & M_EDIT_BUF_SIZE));
+    }
+}
+
 /*
  * Initialize the buffers for an empty files.
  */
