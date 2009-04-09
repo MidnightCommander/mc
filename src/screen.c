@@ -609,34 +609,6 @@ display_mini_info (WPanel *panel)
 	return;
     }
 
-    /* Status displays total marked size */
-    if (panel->marked){
-	char buffer[BUF_SMALL], b_bytes[BUF_SMALL];
-	int  cols = panel->widget.cols - 2;
-
-	attrset (MARKED_COLOR);
-	widget_move (&panel->widget, llines (panel) + 3, 1);
-
-	/*
-	 * This is a trick to use two ngettext() calls in one sentence.
-	 * First make "N bytes", then insert it into "X in M files".
-	 */
-	g_snprintf(b_bytes, sizeof (b_bytes),
-		   ngettext("%s byte", "%s bytes",
-			    (unsigned long)panel->total),
-		   size_trunc_sep(panel->total));
-	g_snprintf(buffer, sizeof (buffer),
-		   ngettext("%s in %d file", "%s in %d files", panel->marked),
-		   b_bytes, panel->marked);
-
-	if (str_term_width1 (buffer) <= cols - 2){
-            addstr ("  ");
-            cols-= 2;
-        }
-	addstr (str_fit_to_term (buffer, cols, J_LEFT));
-	return;
-    }
-
     /* Status resolves links and show them */
     set_colors (panel);
 
@@ -655,12 +627,15 @@ display_mini_info (WPanel *panel)
 	} else
             addstr (str_fit_to_term (_("<readlink failed>"), 
                     panel->widget.cols - 2, J_LEFT));
-	return;
-    }
-
-    /* Default behavior */
-    repaint_file (panel, panel->selected, 0, STATUS, 1);
-    return;
+    } else if (strcmp (panel->dir.list [panel->selected].fname, "..") == 0) {
+	/* FIXME:
+	 * while loading directory (do_load_dir() and do_reload_dir(),
+	 * the actual stat info about ".." directory isn't got;
+	 * so just don't display incorrect info about ".." directory */
+	addstr (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
+    } else
+	/* Default behavior */
+	repaint_file (panel, panel->selected, 0, STATUS, 1);
 }
 
 static void
