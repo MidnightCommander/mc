@@ -120,17 +120,44 @@ int edit_get_byte (WEdit * edit, long byte_index)
     }
 }
 
-char *edit_get_utf_char (WEdit * edit, long byte_index)
+int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 {
     unsigned long p;
+    gunichar *str;
+    int res = -1;
+    gunichar ch;
+    gunichar *next_ch = NULL;
+
+    char_width = -1;
+
     if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-	return NULL;
+        return NULL;
 
     if (byte_index >= edit->curs1) {
-	p = edit->curs1 + edit->curs2 - byte_index - 1;
-	return str_get_next_char_safe (edit->buffers2[p >> S_EDIT_BUF_SIZE]+(EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+        p = edit->curs1 + edit->curs2 - byte_index - 1;
+        str = (edit->buffers2[p >> S_EDIT_BUF_SIZE]+(EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
     } else {
-	return str_get_next_char_safe (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]+(byte_index & M_EDIT_BUF_SIZE));
+        str = (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]+(byte_index & M_EDIT_BUF_SIZE));
+    }
+
+    res = g_utf8_get_char_validated (str, -1);
+
+    if ( res < 0 ) {
+        ch = (char) str;
+        char_width = 1;
+    } else {
+        ch = res;
+        next_ch = g_utf8_next_char(str);
+        if ( next_ch ) {
+            if ( next_ch != str ) {
+                char_width = next_ch - str;
+            } else {
+                char_width = -1;
+            }
+        } else {
+            ch = 0;
+            char_width = -1;
+        }
     }
 }
 

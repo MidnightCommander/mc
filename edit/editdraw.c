@@ -235,7 +235,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 
     while (p->ch) {
 	int style;
-	int textchar;
+	unsigned int textchar;
 	int color;
 
 	if (cols_to_skip) {
@@ -292,6 +292,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
+    int cw;
     unsigned int c;
     int color;
     int i;
@@ -335,8 +336,13 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		if (q >= edit->found_start
 		    && q < edit->found_start + edit->found_len)
 		    p->style |= MOD_BOLD;
-		c = edit_get_byte (edit, q);
-/* we don't use bg for mc - fg contains both */
+		cw = 1;
+		if ( !edit->utf8 ) {
+		    c = edit_get_byte (edit, q);
+		} else {
+		    c = edit_get_utf (edit, q, &cw);
+		}
+                /* we don't use bg for mc - fg contains both */
 		edit_get_syntax_color (edit, q, &color);
 		p->style |= color << 16;
 		switch (c) {
@@ -441,7 +447,10 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p++;
 			}
 		    } else {
-		        //FIXME: col += utfchar_width - 1
+			p->ch = c;
+			p++;
+		        if ( cw > 1)
+		            col += cw - 1;
 		    }
 		    col++;
 		    break;
