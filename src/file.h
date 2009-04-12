@@ -1,7 +1,12 @@
+/* File and directory operation routines for Midnight Commander */
+
 #ifndef MC_FILE_H
 #define MC_FILE_H
 
+#include "global.h"
 #include "fileopctx.h"
+#include "dialog.h"		/* Dlg_head */
+#include "widget.h"		/* WLabel */
 
 struct link;
 
@@ -25,9 +30,24 @@ extern int file_op_compute_totals;
 /* Report error with one file */
 FileProgressStatus file_error (const char *format, const char *file);
 
-/* Query routines */
+/* Compute directory size */
+/* callback to update status dialog */
+typedef FileProgressStatus (*compute_dir_size_callback)(const void *ui, const char *dirname);
 
-void compute_dir_size (const char *dirname, off_t *ret_marked,
-		       double *ret_total);
+/* return value is FILE_CONT or FILE_ABORT */
+FileProgressStatus compute_dir_size (const char *dirname, const void *ui,
+					compute_dir_size_callback cback,
+					off_t *ret_marked, double *ret_total);
 
-#endif
+/* status dialog of durectory size computing */
+typedef struct {
+    Dlg_head *dlg;
+    WLabel *dirname;
+} ComputeDirSizeUI;
+
+ComputeDirSizeUI *compute_dir_size_create_ui (void);
+void compute_dir_size_destroy_ui (ComputeDirSizeUI *ui);
+FileProgressStatus compute_dir_size_update_ui (const void *ui, const char *dirname);
+
+
+#endif				/* MC_FILE_H */
