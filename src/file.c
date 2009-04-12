@@ -1592,7 +1592,7 @@ compute_dir_size (const char *dirname, const void *ui,
 
 	if (res != 0) {
 	    g_free (fullname);
-	    break;
+	    continue;
 	}
 
 	if (S_ISDIR (s.st_mode)) {
