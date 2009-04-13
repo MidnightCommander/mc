@@ -137,7 +137,7 @@ regex/\.(qp[rk])$
 # tar
 regex/\.(tar|TAR)$
 	Open=%cd %p#utar
-	View=%view{ascii} tar tvvf %f
+	View=%view{ascii} tar tvvf - %f
 
 # lha
 type/^LHa\ .*archive
