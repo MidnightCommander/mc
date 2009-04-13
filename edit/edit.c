@@ -1381,7 +1381,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 {
     long p, q;
     int col = 0;
-
+    int cw = 1;
     if (upto) {
 	q = upto;
 	cols = -10;
@@ -1396,7 +1396,13 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    if (col > cols)
 		return p - 1;
 	}
-	c = edit_get_byte (edit, p);
+	if ( !edit->utf8 ) {
+	    c = edit_get_byte (edit, p);
+	} else {
+	    cw = 1;
+	    c = edit_get_byte (edit, p);
+	    edit_get_utf (edit, p, &cw);
+	}
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
@@ -1408,6 +1414,8 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    col += 2; /* Caret notation for control characters */
 	else
 	    col++;
+	if ( cw > 1 )
+	    col -= cw-1;
     }
     return col;
 }
