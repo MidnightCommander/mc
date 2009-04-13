@@ -39,7 +39,7 @@ FileProgressStatus compute_dir_size (const char *dirname, const void *ui,
 					compute_dir_size_callback cback,
 					off_t *ret_marked, double *ret_total);
 
-/* status dialog of durectory size computing */
+/* status dialog of directory size computing */
 typedef struct {
     Dlg_head *dlg;
     WLabel *dirname;

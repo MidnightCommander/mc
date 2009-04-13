@@ -1489,7 +1489,7 @@ compute_dir_size_create_ui (void)
     ui = g_new (ComputeDirSizeUI, 1);
 
     ui->dlg = create_dlg (0, 0, 8, COLS/2, dialog_colors, NULL,
-			    NULL, _("Directory size"), DLG_CENTER | DLG_TRYUP);
+			    NULL, _("Directory scanning"), DLG_CENTER);
     ui->dirname = label_new (3, 3, "");
     add_widget (ui->dlg, ui->dirname);
 
@@ -1497,7 +1497,7 @@ compute_dir_size_create_ui (void)
 		button_new (5, (ui->dlg->cols - strlen (b_name))/2,
 		FILE_ABORT, NORMAL_BUTTON, b_name, NULL));
 
-    /* We will manage the dialog without any help, 
+    /* We will manage the dialog without any help,
        that's why we have to call init_dlg */
     init_dlg (ui->dlg);
 
@@ -1508,10 +1508,10 @@ void
 compute_dir_size_destroy_ui (ComputeDirSizeUI *ui)
 {
     if (ui != NULL) {
-    /* schedule to update passive panel */
+	/* schedule to update passive panel */
 	other_panel->dirty = 1;
 
-    /* close and destroy dialog */
+	/* close and destroy dialog */
 	dlg_run_done (ui->dlg);
 	destroy_dlg (ui->dlg);
 	g_free (ui);
@@ -1522,16 +1522,13 @@ FileProgressStatus
 compute_dir_size_update_ui (const void *ui, const char *dirname)
 {
     const ComputeDirSizeUI *this = (const ComputeDirSizeUI *) ui;
-    char *msg;
     int c;
     Gpm_Event event;
 
     if (ui == NULL)
 	return FILE_CONT;
 
-    msg = g_strdup_printf (_("Scanning: %s"), dirname);
-    label_set_text (this->dirname, name_trunc (msg, this->dlg->cols - 6));
-    g_free (msg);
+    label_set_text (this->dirname, name_trunc (dirname, this->dlg->cols - 6));
 
     event.x = -1; /* Don't show the GPM cursor */
     c = get_event (&event, 0, 0);

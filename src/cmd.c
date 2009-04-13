@@ -1199,10 +1199,10 @@ single_dirsize_cmd (void)
     double total;
     ComputeDirSizeUI *ui;
 
-    ui = compute_dir_size_create_ui ();
-
     entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && strcmp(entry->fname, "..") != 0) {
+	ui = compute_dir_size_create_ui ();
+
 	total = 0.0;
 
 	if (compute_dir_size (entry->fname, ui, compute_dir_size_update_ui,
