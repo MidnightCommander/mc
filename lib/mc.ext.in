@@ -472,10 +472,10 @@ shell/.abw
 # Microsoft Word Document
 regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
 	Open=(abiword %f >/dev/null 2>&1 &)
-	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
+	View=%view{ascii} antiword -t %f || catdoc -w %f || word2x -f text %f - || strings %f
 type/^Microsoft\ Word
 	Open=(abiword %f >/dev/null 2>&1 &)
-	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
+	View=%view{ascii} antiword -t %f || catdoc -w %f || word2x -f text %f - || strings %f
 
 # RTF document
 regex/\.([rR][tT][fF])$
