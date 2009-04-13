@@ -192,7 +192,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int i = 0;
     int extmod = 0;
     const edit_key_map_type *key_map = NULL;
-
     switch (edit_key_emulation) {
     case EDIT_KEY_EMULATION_NORMAL:
 	key_map = cooledit_key_map;
@@ -244,12 +243,41 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
-	int c = convert_from_input_c (x_key);
+        if (!edit->utf8) {
+            int c = convert_from_input_c (x_key);
+            if (is_printable (c)) {
+                char_for_insertion = c;
+                goto fin;
+            }
+        } else {
+            if (edit->charpoint >= MB_LEN_MAX) {
+                goto fin;
+                edit->charpoint = 0;
+            }
 
-	if (is_printable (c)) {
-	    char_for_insertion = c;
-	    goto fin;
-	}
+            edit->charbuf[edit->charpoint] = x_key;
+            edit->charpoint++;
+
+            int res = str_is_valid_char (edit->charbuf, edit->charpoint);
+            mc_log("res:%i, edit->charpoint : %i\n",res, edit->charpoint);
+            if (res < 0) {
+                if (res != -2) {
+                    edit->charpoint = 0; /* broken multibyte char, skip */
+                    goto fin;
+                }
+                char_for_insertion = x_key;
+                goto fin;
+            } else {
+                edit->charbuf[edit->charpoint]='\0';
+                edit->charpoint = 0;
+                if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf))) {
+                    char_for_insertion = x_key;
+                    goto fin;
+                }
+            }
+            //char_for_insertion = x_key;
+            //goto fin;
+        }
     }
 
     /* Commands specific to the key emulation */

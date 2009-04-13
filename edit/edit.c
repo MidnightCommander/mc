@@ -120,9 +120,38 @@ int edit_get_byte (WEdit * edit, long byte_index)
     }
 }
 
-int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
+char *edit_get_byte_ptr (WEdit * edit, long byte_index)
 {
     unsigned long p;
+
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
+	return NULL;
+
+    if (byte_index >= edit->curs1) {
+	p = edit->curs1 + edit->curs2 - byte_index - 1;
+	return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE]+(EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+    } else {
+	return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]+(byte_index & M_EDIT_BUF_SIZE));
+    }
+}
+
+char *edit_get_buf_ptr (WEdit * edit, long byte_index)
+{
+    unsigned long p;
+
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
+	return NULL;
+
+    if (byte_index >= edit->curs1) {
+	p = edit->curs1 + edit->curs2 - byte_index - 1;
+	return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE]);
+    } else {
+	return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]);
+    }
+}
+
+int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
+{
     gchar *str = NULL;
     int res = -1;
     gunichar ch;
@@ -134,12 +163,50 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
         return '\n';
     }
 
-    if (byte_index >= edit->curs1) {
-        p = edit->curs1 + edit->curs2 - byte_index - 1;
-        str = (edit->buffers2[p >> S_EDIT_BUF_SIZE]+(EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
+    str = edit_get_byte_ptr (edit, byte_index);
+
+    res = g_utf8_get_char_validated (str, -1);
+
+    if ( res < 0 ) {
+        ch = *str;
+        width = 1;
     } else {
-        str = (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]+(byte_index & M_EDIT_BUF_SIZE));
+        ch = res;
+        /* Calculate UTF-8 char width */
+        next_ch = g_utf8_next_char(str);
+        if ( next_ch ) {
+            if ( next_ch != str ) {
+                width = next_ch - str;
+            } else {
+                width = 0;
+            }
+        } else {
+            ch = 0;
+            width = 0;
+        }
     }
+    *char_width = width;
+    return ch;
+}
+
+int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
+{
+    gchar *str, *buf = NULL;
+    int res = -1;
+    gunichar ch;
+    gchar *next_ch = NULL;
+    int width = 0;
+
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0) {
+        *char_width = 1;
+        return '\n';
+    }
+
+    str = edit_get_byte_ptr (edit, byte_index);
+    buf = edit_get_buf_ptr (edit, byte_index);
+
+    /* get prev utf8 char */
+    str = g_utf8_find_prev_char (buf, str);
 
     res = g_utf8_get_char_validated (str, -1);
 
