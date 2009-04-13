@@ -123,15 +123,16 @@ int edit_get_byte (WEdit * edit, long byte_index)
 int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 {
     unsigned long p;
-    gunichar *str;
+    gchar *str = NULL;
     int res = -1;
     gunichar ch;
-    gunichar *next_ch = NULL;
+    gchar *next_ch = NULL;
+    int width = 0;
 
-    char_width = -1;
-
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-        return NULL;
+    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0) {
+        *char_width = 0;
+        return 0;
+    }
 
     if (byte_index >= edit->curs1) {
         p = edit->curs1 + edit->curs2 - byte_index - 1;
@@ -143,22 +144,25 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
     res = g_utf8_get_char_validated (str, -1);
 
     if ( res < 0 ) {
-        ch = (char) str;
-        char_width = 1;
+        ch = *str;
+        width = 1;
     } else {
         ch = res;
+        /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char(str);
         if ( next_ch ) {
             if ( next_ch != str ) {
-                char_width = next_ch - str;
+                width = next_ch - str;
             } else {
-                char_width = -1;
+                width = 0;
             }
         } else {
             ch = 0;
-            char_width = -1;
+            width = 0;
         }
     }
+    *char_width = width;
+    return ch;
 }
 
 /*
