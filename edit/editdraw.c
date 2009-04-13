@@ -296,6 +296,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     unsigned int c;
     int color;
     int i;
+    int utf8lag = 0;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -318,7 +319,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	    }
 
 	    while (col <= end_col - edit->start_col) {
-	        mc_log("col=%i, end_col = %i, edit->start_col = %i, end_col - edit->start_col = %i\n",col, end_col, edit->start_col,end_col - edit->start_col );
 		p->ch = 0;
 		p->style = 0;
 		if (q == edit->curs1)
@@ -342,14 +342,13 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    c = edit_get_byte (edit, q);
 		} else {
 		    c = edit_get_utf (edit, q, &cw);
-		    mc_log("c:%04x, w:%i\n", c, cw);
 		}
                 /* we don't use bg for mc - fg contains both */
 		edit_get_syntax_color (edit, q, &color);
 		p->style |= color << 16;
 		switch (c) {
 		case '\n':
-		    col = end_col - edit->start_col + 1;	/* quit */
+		    col = (end_col + utf8lag) - edit->start_col + 1;	/* quit */
 		    p->ch = ' ';
 		    p++;
 		    break;
@@ -449,12 +448,14 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p++;
 			}
 		    } else {
-			p->ch = c;
-			p++;
-		        if ( cw > 1) {
-		            col += cw - 1;
-		            mc_log("col+ : %i\n",  cw-1);
-		        }
+		        if ( g_unichar_isprint (c) ) {
+			    p->ch = c;
+			    p++;
+			} else {
+			    p->ch = '.';
+			    p->style = MOD_ABNORMAL;
+			    p++;
+			}
 		    }
 		    col++;
 		    break;
