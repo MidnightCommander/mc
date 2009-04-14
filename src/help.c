@@ -69,12 +69,6 @@
 #define STRING_LINK_END		"\03"
 #define STRING_NODE_END		"\04"
 
-/* every help file is supposed to be in utf-8 and is translated to terminal
- * encoding */
-/* buffer for translation */
-static struct str_buffer *translated_data = NULL;
-/* point into translated_data->data or in NULL, 
- * if help file could not be converted */
 static char *data;		
 static int help_lines;		/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
@@ -775,26 +769,26 @@ interactive_display_finish (void)
     clear_link_areas ();
 }
 
-/* translate help file into terminal encoding
- * translated_data is initialized */
+/* translate help file into terminal encoding */
 static void 
 translate_file (char *filedata)
 {
-    str_conv_t conv;
-    
-    if (translated_data == NULL) translated_data = str_get_buffer ();
-    
-    str_reset_buffer (translated_data);
+    GIConv conv;
+    GString *translated_data;
+
+    translated_data = g_string_new ("");
+
     conv = str_crt_conv_from ("UTF-8");
-    
+
     if (conv != INVALID_CONV) {
         if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
-            data = translated_data->data;
+            data = translated_data->str;
         } else {
             data = NULL;
         }
         str_close_conv (conv);
     }
+    g_string_free (translated_data, TRUE);
 }
 
 void

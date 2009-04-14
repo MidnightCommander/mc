@@ -39,7 +39,8 @@
 static const char *str_utf8_encodings[] = {
         "utf-8", 
         "utf8", 
-        NULL};
+        NULL
+};
 
 // standard 8bit encodings, no wide or multibytes characters
 static const char *str_8bit_encodings[] = {
@@ -63,8 +64,6 @@ static const char *str_8bit_encodings[] = {
 static char *codeset;
 // function for encoding specific operations
 static struct str_class used_class;
-// linked list of string buffers
-static struct str_buffer *buffer_list = NULL; 
 
 iconv_t str_cnv_to_term;
 iconv_t str_cnv_from_term;
@@ -77,277 +76,197 @@ str_test_not_convert (const char *enc)
     return g_ascii_strcasecmp (enc, codeset) == 0;
 }
 
-str_conv_t
+GIConv
 str_crt_conv_to (const char *to_enc)
 {
-    return (!str_test_not_convert (to_enc)) ? iconv_open (to_enc, codeset) : 
-            str_cnv_not_convert;
+    return (!str_test_not_convert (to_enc))
+	? g_iconv_open (to_enc, codeset) : str_cnv_not_convert;
 }
 
-str_conv_t
+GIConv
 str_crt_conv_from (const char *from_enc)
 {
-    return (!str_test_not_convert (from_enc)) ? iconv_open (codeset, from_enc) :
-            str_cnv_not_convert;
+    return (!str_test_not_convert (from_enc))
+	? g_iconv_open (codeset, from_enc) : str_cnv_not_convert;
 }
 
 void
-str_close_conv (str_conv_t conv)
+str_close_conv (GIConv conv)
 {
     if (conv != str_cnv_not_convert)
-        iconv_close (conv);
-}
-
-struct str_buffer *
-str_get_buffer () 
-{
-    struct str_buffer *result;
-
-    result = buffer_list;
-
-    while (result != NULL) {
-        if (!result->used) {
-            str_reset_buffer (result);
-            result->used = 1;
-            return result;
-        }
-        result = result->next;
-    }
-
-    result = g_new (struct str_buffer, 1);
-    result->size = BUF_TINY;
-    result->data = g_new0 (char, result->size);
-    result->data[0] = '\0';
-    result->actual = result->data;
-    result->remain = result->size;
-
-    result->next = buffer_list;
-    buffer_list = result;
-
-    result->used = 1;
-
-    return result;
-}
-
-
-void
-str_release_buffer (struct str_buffer *buffer)
-{
-    buffer->used = 0;
-}
-
-void
-str_incrase_buffer (struct str_buffer *buffer) 
-{
-    size_t offset;
-
-    offset = buffer->actual - buffer->data;
-    buffer->remain+= buffer->size;
-    buffer->size*= 2;
-    buffer->data = g_renew (char, buffer->data, buffer->size);
-    buffer->actual = buffer->data + offset;
-}
-
-void
-str_reset_buffer (struct str_buffer *buffer)
-{
-    buffer->data[0] = '\0';
-    buffer->actual = buffer->data;
-    buffer->remain = buffer->size;
+	g_iconv_close (conv);
 }
 
 static int
-_str_convert (str_conv_t coder, char *string, struct str_buffer *buffer)
+_str_convert (GIConv coder, char *string, int size, GString * buffer)
 {
     int state;
-
-    size_t left;
-    size_t nconv;
+    gchar *tmp_buff;
+    gssize left;
+    gsize bytes_read, bytes_written;
+    GError *error = NULL;
 
     errno = 0;
 
-    if (used_class.is_valid_string (string)) {
-        state = 0;
+    if (used_class.is_valid_string (string))
+    {
+	state = 0;
+	if (size < 0)
+	{
+	    size = strlen (string);
+	}
+	else
+	{
+	    left = strlen (string);
+	    if (left < size)
+		size = left;
+	}
+	left = size;
 
-        left = strlen (string);
+	if (coder == (GIConv) (-1))
+	    return ESTR_FAILURE;
 
-        if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
+	g_iconv (coder, NULL, NULL, NULL, NULL);
 
-        iconv(coder, NULL, NULL, NULL, NULL);
+	while (left)
+	{
+	    tmp_buff = g_convert_with_iconv ((const gchar *) string,
+					     left,
+					     coder,
+					     &bytes_read,
+					     &bytes_written, &error);
 
-        while (((int)left) > 0) {
-            nconv = iconv(coder, &string, &left, 
-                          &(buffer->actual), &(buffer->remain));
-            if (nconv == (size_t) (-1)) {
-                switch (errno) {
-                    case EINVAL:
-                        return ESTR_FAILURE;
-                    case EILSEQ:
-                        string++;
-                        left--;
-                        if (buffer->remain <= 0) {
-                            str_incrase_buffer (buffer);
-                        }
-                        buffer->actual[0] = '?';
-                        buffer->actual++;
-                        buffer->remain--;
-                        state = ESTR_PROBLEM;   
-                        break; 
-                    case E2BIG:
-                        str_incrase_buffer (buffer);
-                        break;
-                }
-            }
-        };
+	    if (error)
+	    {
+		switch (error->code)
+		{
+		case G_CONVERT_ERROR_NO_CONVERSION:
+		    /* Conversion between the requested character sets is not supported. */
+		    tmp_buff = g_strnfill (strlen (string), '?');
+		    g_string_append (buffer, tmp_buff);
+		    g_free (tmp_buff);
+		    g_error_free (error);
+		    return ESTR_PROBLEM;
+		    break;
+		case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
+		    /* Invalid byte sequence in conversion input. */
+		    g_string_append (buffer, tmp_buff);
+		    g_string_append (buffer, "?");
+		    g_free (tmp_buff);
+		    if (bytes_read < left)
+		    {
+			string += bytes_read + 1;
+			size -= (bytes_read + 1);
+			left -= (bytes_read + 1);
+		    }
+		    else
+		    {
+			g_error_free (error);
+			return ESTR_PROBLEM;
+		    }
+		    state = ESTR_PROBLEM;
+		    break;
+		case G_CONVERT_ERROR_PARTIAL_INPUT:
+		    /* Partial character sequence at end of input. */
+		    g_error_free (error);
+		    g_string_append (buffer, tmp_buff);
+		    g_free (tmp_buff);
+		    if (bytes_read < left)
+		    {
+			left = left - bytes_read;
+			tmp_buff = g_strnfill (left, '?');
+			g_string_append (buffer, tmp_buff);
+			g_free (tmp_buff);
+		    }
+		    return ESTR_PROBLEM;
+		    break;
+		case G_CONVERT_ERROR_BAD_URI:	/* Don't know how handle this error :( */
+		case G_CONVERT_ERROR_NOT_ABSOLUTE_PATH:	/* Don't know how handle this error :( */
+		case G_CONVERT_ERROR_FAILED:	/* Conversion failed for some reason. */
+		default:
+		    g_error_free (error);
+		    if (tmp_buff)
+			g_free (tmp_buff);
 
-        return state;
-    } else return ESTR_FAILURE;
+		    return ESTR_FAILURE;
+		}
+		g_error_free (error);
+	    }
+	    else
+	    {
+		g_string_append (buffer, tmp_buff);
+		g_free (tmp_buff);
+		string += bytes_read;
+		left -= bytes_read;
+	    }
+	}
+	return state;
+    }
+    else
+	return ESTR_FAILURE;
 }
 
 int
-str_convert (str_conv_t coder, char *string, struct str_buffer *buffer)
-{
-    int result; 
-
-    result = _str_convert (coder, string, buffer);
-    buffer->actual[0] = '\0';
-
-    return result;
-}
-
-static int
-_str_vfs_convert_from (str_conv_t coder, char *string, 
-                       struct str_buffer *buffer)
-{
-    size_t left;
-    size_t nconv;
-
-    left = strlen (string);
-
-    if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
-
-    iconv(coder, NULL, NULL, NULL, NULL);
-
-    do {
-        nconv = iconv(coder, &string, &left, 
-                      &(buffer->actual), &(buffer->remain));
-        if (nconv == (size_t) (-1)) {
-            switch (errno) {
-                case EINVAL:
-                    return ESTR_FAILURE;
-                case EILSEQ:
-                    return ESTR_FAILURE;
-                case E2BIG:
-                    str_incrase_buffer (buffer);
-                    break;
-            }
-        }
-    } while (left > 0);
-
-    return 0;
-}
-
-int
-str_vfs_convert_from (str_conv_t coder, char *string, struct str_buffer *buffer)
+str_convert (GIConv coder, char *string, GString * buffer)
 {
     int result;
 
-    if (coder == str_cnv_not_convert) {
-        str_insert_string (string, buffer);
-        result = 0;
-    } else result = _str_vfs_convert_from (coder, string, buffer);
-    buffer->actual[0] = '\0';
+    result = _str_convert (coder, string, -1, buffer);
 
     return result;
 }
 
 int
-str_vfs_convert_to (str_conv_t coder, const char *string, 
-                    int size, struct str_buffer *buffer)
+str_nconvert (GIConv coder, char *string, int size, GString * buffer)
+{
+    int result;
+
+    result = _str_convert (coder, string, size, buffer);
+
+    return result;
+}
+
+int
+str_vfs_convert_from (GIConv coder, char *string, GString * buffer)
+{
+    int result;
+
+    if (coder == str_cnv_not_convert)
+    {
+	g_string_append (buffer, string);
+	result = 0;
+    }
+    else
+	result = _str_convert (coder, string, -1, buffer);
+
+    return result;
+}
+
+int
+str_vfs_convert_to (GIConv coder, const char *string, int size,
+		    GString * buffer)
 {
     return used_class.vfs_convert_to (coder, string, size, buffer);
 }
 
 void
-str_insert_string (const char *string, struct str_buffer *buffer)
+str_printf (GString * buffer, const char *format, ...)
 {
-    size_t s;
-
-    s = strlen (string);
-    while (buffer->remain < s) str_incrase_buffer (buffer);
-
-    memcpy (buffer->actual, string, s);
-    buffer->actual+= s;
-    buffer->remain-= s;
-    buffer->actual[0] = '\0';
-}
-
-void
-str_insert_string2 (const char *string, int size, struct str_buffer *buffer)
-{
-    size_t s;
-
-    s = (size >= 0) ? size : strlen (string);
-    while (buffer->remain < s) str_incrase_buffer (buffer);
-
-    memcpy (buffer->actual, string, s);
-    buffer->actual+= s;
-    buffer->remain-= s;
-    buffer->actual[0] = '\0';
-}
-
-void
-str_printf (struct str_buffer *buffer, const char *format, ...)
-{
-    int size;
     va_list ap;
-
     va_start (ap, format);
-    size = vsnprintf (buffer->actual, buffer->remain, format, ap);
-    while (buffer->remain <= size) {
-        str_incrase_buffer (buffer);
-        size = vsnprintf (buffer->actual, buffer->remain, format, ap);
-    }
-    buffer->actual+= size;
-    buffer->remain-= size;
+    g_string_append_vprintf (buffer, format, ap);
     va_end (ap);
 }
 
 void
-str_insert_char (char ch, struct str_buffer *buffer)
-{
-    if (buffer->remain <= 1) str_incrase_buffer (buffer);
-
-    buffer->actual[0] = ch;
-    buffer->actual++;
-    buffer->remain--;
-    buffer->actual[0] = '\0';
-}
-
-void
-str_insert_replace_char (struct str_buffer *buffer) 
+str_insert_replace_char (GString * buffer)
 {
     used_class.insert_replace_char (buffer);
 }
 
-void
-str_backward_buffer (struct str_buffer *buffer, int count)
-{
-    char *prev;
-
-    while ((count > 0) && (buffer->actual > buffer->data)) {
-        prev = str_get_prev_char (buffer->actual);
-        buffer->remain+= buffer->actual - prev;
-        buffer->actual = prev;
-        buffer->actual[0] = '\0';
-        count--;
-    }
-}
-
-
 int
-str_translate_char (str_conv_t conv, char *keys, size_t ch_size, 
-                    char *output, size_t out_size)
+str_translate_char (str_conv_t conv, char *keys, size_t ch_size,
+		    char *output, size_t out_size)
 {
     size_t left;
     size_t cnv;
@@ -356,7 +275,7 @@ str_translate_char (str_conv_t conv, char *keys, size_t ch_size,
 
     left = (ch_size == (size_t)(-1)) ? strlen (keys) : ch_size;
 
-    cnv = iconv (conv, &keys, &left, &output, &out_size);
+    cnv = g_iconv (conv, &keys, &left, &output, &out_size);
     if (cnv == (size_t)(-1)) {
         if (errno == EINVAL) return ESTR_PROBLEM; else return ESTR_FAILURE;
     } else {
@@ -382,7 +301,6 @@ str_test_encoding_class (const char *encoding, const char **table)
         result+= (g_ascii_strncasecmp (encoding, table[t], 
                   strlen (table[t])) == 0); 
     }
-
     return result;
 }
 
@@ -416,18 +334,21 @@ str_init_strings (const char *termenc)
                         : str_detect_termencoding ());
 
     str_cnv_not_convert = iconv_open (codeset, codeset);
-    if (str_cnv_not_convert == INVALID_CONV) {
-        if (termenc != NULL) {
-            g_free (codeset);
-            codeset = g_strdup (str_detect_termencoding ());
-            str_cnv_not_convert = iconv_open (codeset, codeset);
-        }
+    if (str_cnv_not_convert == INVALID_CONV)
+    {
+	if (termenc != NULL)
+	{
+	    g_free (codeset);
+	    codeset = g_strdup (str_detect_termencoding ());
+	    str_cnv_not_convert = iconv_open (codeset, codeset);
+	}
 
-        if (str_cnv_not_convert == INVALID_CONV) {
-            g_free (codeset);
-            codeset = g_strdup ("ascii");
-            str_cnv_not_convert = iconv_open (codeset, codeset);
-        }
+	if (str_cnv_not_convert == INVALID_CONV)
+	{
+	    g_free (codeset);
+	    codeset = g_strdup ("ascii");
+	    str_cnv_not_convert = iconv_open (codeset, codeset);
+	}
     }
 
     str_cnv_to_term = str_cnv_not_convert;
@@ -436,26 +357,9 @@ str_init_strings (const char *termenc)
     str_choose_str_functions ();
 }
 
-static void
-str_release_buffer_list ()
-{
-    struct str_buffer *buffer;
-    struct str_buffer *next;
-
-    buffer = buffer_list;
-    while (buffer != NULL) {
-        next = buffer->next;
-        g_free (buffer->data);
-        g_free (buffer);
-        buffer = next;
-    }
-}
-
 void
 str_uninit_strings ()
 {
-    str_release_buffer_list ();
-
     iconv_close (str_cnv_not_convert);
 }
 
@@ -477,7 +381,7 @@ str_term_trim (const char *text, int width)
     return used_class.term_trim (text, width);
 }
 
-void 
+void
 str_msg_term_size (const char *text, int *lines, int *columns)
 {
     return used_class.msg_term_size (text, lines, columns);
@@ -493,14 +397,14 @@ char *
 str_get_next_char (char *text)
 {
 
-    used_class.cnext_char ((const char **)&text);
+    used_class.cnext_char ((const char **) &text);
     return text;
 }
 
 const char *
 str_cget_next_char (const char *text)
 {
-    used_class.cnext_char (&text);
+    used_class.cnext_char(&text);
     return text;
 }
 
@@ -822,4 +726,3 @@ str_release_key (char *key, int case_sen)
 {
     used_class.release_key (key, case_sen);
 }
-

@@ -63,8 +63,7 @@ info_show_info (struct WInfo *info)
 {
     static int i18n_adjust=0;
     static const char *file_label;
-    struct str_buffer *buff;
-    
+    GString *buff;
     struct stat st;
 
     if (!is_idle ())
@@ -82,23 +81,23 @@ info_show_info (struct WInfo *info)
 
     if (!info->ready)
 	return;
-    
+
     my_statfs (&myfs_stats, current_panel->cwd);
     st = current_panel->dir.list [current_panel->selected].st;
 
     /* Print only lines which fit */
-    
+
     if(!i18n_adjust) {
 	/* This printf pattern string is used as a reference for size */
 	file_label=_("File:       %s");
 	i18n_adjust = str_term_width1(file_label) + 2;
     }
-    
-    buff = str_get_buffer ();
-    
+
+    buff = g_string_new ("");
+
     switch (info->widget.lines-2){
 	/* Note: all cases are fall-throughs */
-	
+
     default:
 
     case 16:
@@ -135,24 +134,21 @@ info_show_info (struct WInfo *info)
 	widget_move (&info->widget, 13, 3);
         str_printf (buff, _("Device:    %s"), 
                 str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->data));
-        str_reset_buffer (buff);
+        addstr (str_term_form (buff->str));
+        g_string_set_size(buff,0);
     case 12:
 	widget_move (&info->widget, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
 		str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->data));
-        str_reset_buffer (buff);
+        addstr (str_term_form (buff->str));
     case 11:
 	widget_move (&info->widget, 11, 3);
         str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
-        addstr (str_term_form (buff->data));
-        str_reset_buffer (buff);
+        addstr (str_term_form (buff->str));
     case 10:
 	widget_move (&info->widget, 10, 3);
         str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
-        addstr (str_term_form (buff->data));
-        str_reset_buffer (buff);
+        addstr (str_term_form (buff->str));
     case 9:
 	widget_move (&info->widget, 9, 3);
 	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
@@ -204,8 +200,7 @@ info_show_info (struct WInfo *info)
             str_printf (buff, file_label, 
             str_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
-            addstr (str_term_form (buff->data));
-            str_reset_buffer (buff);
+            addstr (str_term_form (buff->str));
 	} else
 		addstr (_("File:       None"));
      
@@ -214,8 +209,7 @@ info_show_info (struct WInfo *info)
     case 0:
 	;
     } /* switch */
-    
-    str_release_buffer (buff);
+    g_string_free (buff, TRUE);
 }
 
 static void info_hook (void *data)

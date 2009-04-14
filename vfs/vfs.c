@@ -75,7 +75,7 @@ static GSList *vfs_openfiles;
 #define VFS_FIRST_HANDLE 100
 
 static struct vfs_class *localfs_class;
-static struct str_buffer *vfs_str_buffer;
+static GString *vfs_str_buffer;
 
 static const char *supported_encodings[] = {
     "UTF8", 
@@ -382,8 +382,8 @@ vfs_supported_enconding (const char *encoding) {
  * buffer - used to store result of translation
  */ 
 static int
-_vfs_translate_path (const char *path, int size, 
-                     str_conv_t defcnv, struct str_buffer *buffer) 
+_vfs_translate_path (const char *path, int size,
+                     str_conv_t defcnv, GString *buffer)
 {
     const char *semi;
     const char *ps;
@@ -392,37 +392,37 @@ _vfs_translate_path (const char *path, int size,
     static char encoding[16];
     str_conv_t coder;
     int ms;
-    
+
     if (size == 0) return 0;    
     size = (size > 0) ? size : strlen (path);
-    
+
     /* try found #end: */
     semi = g_strrstr_len (path, size, "#enc:");
     if (semi != NULL) {
         /* first must be translated part before #enc: */
         ms = semi - path;
-        
+
         /* remove '/' before #enc */
         ps = str_cget_prev_char (semi);
         if (ps[0] == PATH_SEP) ms = ps - path;
-        
+
         state = _vfs_translate_path (path, ms, defcnv, buffer);
-        
+
         if (state != 0) return state;
         /* now can be translated part after #enc: */
-        
+
         semi+= 5;
         slash = strchr (semi, PATH_SEP);
         // ignore slashes after size;
         if (slash - path >= size) slash = NULL;
-        
+
         ms = (slash != NULL) ? slash - semi : strlen (semi);
         ms = min (ms, sizeof (encoding) - 1);
         // limit encoding size (ms) to path size (size)
         if (semi + ms > path + size) ms = path + size - semi;
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
-        
+
         switch (vfs_supported_enconding (encoding)) {
             case 1:
                 coder = str_crt_conv_to (encoding);
@@ -430,9 +430,9 @@ _vfs_translate_path (const char *path, int size,
                     if (slash != NULL) {
                         state = str_vfs_convert_to (coder, slash, 
                                 path + size - slash, buffer);
-                    } else if (buffer->data[0] == '\0') {
+                    } else if (buffer->str[0] == '\0') {
                         /* exmaple "/#enc:utf-8" */
-                        str_insert_char (PATH_SEP, buffer);
+                        g_string_append_c(buffer, PATH_SEP);
                     }
                     str_close_conv (coder);
                     return state;
@@ -459,12 +459,12 @@ char *
 vfs_translate_path (const char *path) 
 {
     int state;
-    
-    str_reset_buffer (vfs_str_buffer);
+
+    g_string_set_size(vfs_str_buffer,0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
     // strict version
     //return (state == 0) ? vfs_str_buffer->data : NULL;
-    return (state != ESTR_FAILURE) ? vfs_str_buffer->data : NULL;
+    return (state != ESTR_FAILURE) ? vfs_str_buffer->str : NULL;
 }
 
 char *
@@ -753,12 +753,12 @@ mc_readdir (DIR *dirp)
         do {
             entry = (*vfs->readdir) (dirinfo->info);
             if (entry == NULL) return NULL;
-            str_reset_buffer (vfs_str_buffer);
-            state = str_vfs_convert_from (dirinfo->converter, 
+            g_string_set_size(vfs_str_buffer,0);
+            state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
         } while (state != 0);
         memcpy (&result, entry, sizeof (struct dirent));
-        g_strlcpy (result.d_name, vfs_str_buffer->data, NAME_MAX + 1);
+        g_strlcpy (result.d_name, vfs_str_buffer->str, NAME_MAX + 1);
         result.d_reclen = strlen (result.d_name);
     }
     if (entry == NULL) errno = vfs->readdir ? ferrno (vfs) : E_NOTSUPP;
@@ -854,10 +854,10 @@ _vfs_get_cwd (void)
         if (encoding == NULL) {
             tmp = g_get_current_dir ();
             if (tmp != NULL) { /* One of the directories in the path is not readable */
-                str_reset_buffer (vfs_str_buffer);
+		g_string_set_size(vfs_str_buffer,0);
                 state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
                 g_free (tmp);
-                sys_cwd = (state == 0) ? g_strdup (vfs_str_buffer->data) : NULL;
+                sys_cwd = (state == 0) ? g_strdup (vfs_str_buffer->str) : NULL;
                 if (!sys_cwd)			
 	    return current_dir;
 
@@ -1174,7 +1174,7 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 void
 vfs_init (void)
 {
-    vfs_str_buffer = str_get_buffer ();
+    vfs_str_buffer = g_string_new("");
     /* localfs needs to be the first one */
     init_localfs();
     /* fallback value for vfs_get_class() */
@@ -1218,8 +1218,8 @@ vfs_shut (void)
 	    (*vfs->done) (vfs);
 
     g_slist_free (vfs_openfiles);
-    
-    str_release_buffer (vfs_str_buffer);
+
+    g_string_free (vfs_str_buffer, TRUE);
 }
 
 /*

@@ -1068,8 +1068,8 @@ get_random_hint (int force)
     int start;
     static int last_sec;
     static struct timeval tv;
-    str_conv_t conv;
-    struct str_buffer *buffer;
+    GIConv conv;
+    GString *buffer;
 
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
@@ -1095,20 +1095,19 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    
+
     /* hint files are stored in utf-8 */
     /* try convert hint file from utf-8 to terminal encoding */
     conv = str_crt_conv_from ("UTF-8");
     if (conv != INVALID_CONV) {
-        buffer = str_get_buffer ();
+	buffer = g_string_new ("");
         if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE) {
-            result = g_strdup (buffer->data);
+            result = g_strdup (buffer->str);
         }
-        
-        str_release_buffer (buffer);
+        g_string_free (buffer, TRUE);
         str_close_conv (conv);
     }
-    
+
     g_free (data);
     return result;
 }

@@ -34,13 +34,13 @@
 /* using g_ascii function from glib
  * on terminal are showed only ascii characters (lower then 0x80) 
  */
- 
+
 static const char replch = '?';
 
 static void
-str_ascii_insert_replace_char (struct str_buffer *buffer) 
+str_ascii_insert_replace_char (GString * buffer)
 {
-    str_insert_char (replch, buffer);
+    g_string_append_c (buffer, replch);
 }
 
 static int 
@@ -154,10 +154,10 @@ str_ascii_length2 (const char *text, int size)
 }
 
 int
-str_ascii_vfs_convert_to (str_conv_t coder, const char *string, 
-                          int size, struct str_buffer *buffer)
+str_ascii_vfs_convert_to (GIConv coder, const char *string,
+			  int size, GString * buffer)
 {
-    str_insert_string2 (string, size, buffer);
+    g_string_append_len (buffer, string, size);
     return 0;
 }
 
@@ -468,7 +468,7 @@ static int
 str_ascii_column_to_pos (const char *text, size_t pos)
 {
     return (int)pos;
-}        
+}
 
 static char *
 str_ascii_create_search_needle (const char *needle, int case_sen)

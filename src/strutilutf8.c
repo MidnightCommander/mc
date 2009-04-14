@@ -47,9 +47,9 @@ str_unichar_iscombiningmark (gunichar uni) {
 }
 
 static void
-str_utf8_insert_replace_char (struct str_buffer *buffer) 
+str_utf8_insert_replace_char (GString * buffer)
 {
-    str_insert_string (replch, buffer);
+    g_string_append (buffer, replch);
 }
 
 static int 
@@ -292,77 +292,92 @@ str_utf8_length_noncomb (const char *text)
 }    
 
 static void
-str_utf8_questmark_sustb (char **string, size_t *left, struct str_buffer *buffer)
+str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
 {
     char *next = g_utf8_next_char (*string);
     (*left)-= next - (*string);
     (*string) = next;
-    str_insert_char ('?', buffer);
+    g_string_append_c (buffer, '?');
 }
 
+/*
 static int
-_str_utf8_vfs_convert_to (str_conv_t coder, const char *string, 
-                     int size, struct str_buffer *buffer)
+_str_utf8_vfs_convert_to (str_conv_t coder, const char *string,
+			  int size, GString * buffer)
 {
-    int state = 0;        
+    int state = 0;
     size_t left;
     size_t nconv;
     char *composed, *c;
     const char *start, *end;
-    
+
     errno = 0;
-    
+
     size = (size >= 0) ? size : strlen (string);
-    if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
-    iconv(coder, NULL, NULL, NULL, NULL);
-    
+    if (coder == (iconv_t) (-1))
+	return ESTR_FAILURE;
+    iconv (coder, NULL, NULL, NULL, NULL);
+
     start = string;
-    while (size > 0) {
-        end = strchr (start, PATH_SEP);
-        end = (end == NULL || end >= start + size) ? start + size : end + 1;
-        if (g_utf8_validate (start, end - start, NULL)) {
-            c = composed = g_utf8_normalize (start, end - start, G_NORMALIZE_DEFAULT_COMPOSE);
-            left = strlen (composed);
-            while (((int)left) > 0) {
-                nconv = iconv(coder, &c, &left, &(buffer->actual), &(buffer->remain));
-                if (nconv == (size_t) (-1)) {
-                    switch (errno) {
-                        case EINVAL:
-                            g_free (composed);
-                            return ESTR_FAILURE;
-                        case EILSEQ:
-                            str_utf8_questmark_sustb (&c, &left, buffer);
-                            state = ESTR_PROBLEM;   
-                            break; 
-                        case E2BIG:
-                            str_incrase_buffer (buffer);
-                            break;
-                    }
-                }
-            }
-            g_free (composed);
-        } else {
-            str_insert_string2 (start, end - start, buffer);
-        }
-        size-= end - start;
-        start = end;
+    while (size > 0)
+    {
+	end = strchr (start, PATH_SEP);
+	end = (end == NULL || end >= start + size) ? start + size : end + 1;
+	if (g_utf8_validate (start, end - start, NULL))
+	{
+	    c = composed =
+		g_utf8_normalize (start, end - start,
+				  G_NORMALIZE_DEFAULT_COMPOSE);
+	    left = strlen (composed);
+	    while (((int) left) > 0)
+	    {
+		nconv =
+		    iconv (coder, &c, &left, &(buffer->actual),
+			   &(buffer->remain));
+		if (nconv == (size_t) (-1))
+		{
+		    switch (errno)
+		    {
+		    case EINVAL:
+			g_free (composed);
+			return ESTR_FAILURE;
+		    case EILSEQ:
+			str_utf8_questmark_sustb (&c, &left, buffer);
+			state = ESTR_PROBLEM;
+			break;
+		    case E2BIG:
+			str_incrase_buffer (buffer);
+			break;
+		    }
+		}
+	    }
+	    g_free (composed);
+	}
+	else
+	{
+	    g_string_append_len (buffer, start, end - start);
+	}
+	size -= end - start;
+	start = end;
     }
     return state;
 }
-
+*/
 static int
-str_utf8_vfs_convert_to (str_conv_t coder, const char *string, 
-                         int size, struct str_buffer *buffer)
+str_utf8_vfs_convert_to (str_conv_t coder, const char *string,
+			 int size, GString * buffer)
 {
-    int result; 
-    
-    if (coder == str_cnv_not_convert) {
-        str_insert_string2 (string, size, buffer);
-        result = 0;
-    } else result = _str_utf8_vfs_convert_to (coder, string, size, buffer);
-    buffer->actual[0] = '\0';
-    
-return result;
+    int result;
+
+    if (coder == str_cnv_not_convert)
+    {
+	g_string_append_len (buffer, string, size);
+	result = 0;
+    }
+    else
+	result = str_nconvert (coder, (char *) string, size, buffer);
+
+    return result;
 }
 
 struct term_form {
@@ -423,8 +438,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             actual+= strlen (replch);
             result.width++;
         }
-        if (length != (size_t) (-1)) length--;
-    }
+        if (length != (size_t) (-1)) length--;    }
     actual[0] = '\0';
     
     return &result;
@@ -773,15 +787,16 @@ static int
 str_utf8_offset_to_pos (const char *text, size_t length)
 {
     if (str_utf8_is_valid_string (text))
-        return g_utf8_offset_to_pointer (text, length) - text;
-    else {
-        int result;
-        struct str_buffer *buffer = str_get_buffer ();
-        str_insert_string (text, buffer);
-        str_utf8_fix_string (buffer->data);
-        result = g_utf8_offset_to_pointer (buffer->data, length) - buffer->data;
-        str_release_buffer (buffer);
-        return result;
+	return g_utf8_offset_to_pointer (text, length) - text;
+    else
+    {
+	int result;
+	GString *buffer = g_string_new (text);
+
+	str_utf8_fix_string (buffer->str);
+	result = g_utf8_offset_to_pointer (buffer->str, length) - buffer->str;
+	g_string_free (buffer, TRUE);
+	return result;
     }
 }
 
@@ -916,78 +931,88 @@ str_utf8_search_last (const char *text, const char *search, int case_sen)
 static char *
 str_utf8_normalize (const char *text) 
 {
-    struct str_buffer *fixed = str_get_buffer ();
+    GString *fixed = g_string_new ("");
     char *tmp;
     char *result;
     const char *start;
     const char *end;
     
     start = text;
-    while (!g_utf8_validate (start, -1, &end) && start[0] != '\0') {
-        if (start != end) {
-            tmp = g_utf8_normalize (start, end - start, G_NORMALIZE_ALL);
-            str_insert_string (tmp, fixed);
-            g_free (tmp);
-        }
-        str_insert_char (end[0], fixed);
-        start = end + 1;
+    while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
+    {
+	if (start != end)
+	{
+	    tmp = g_utf8_normalize (start, end - start, G_NORMALIZE_ALL);
+	    g_string_append (fixed, tmp);
+	    g_free (tmp);
+	}
+	g_string_append_c (fixed, end[0]);
+	start = end + 1;
     }
-    
-    if (start == text) {
-        result = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
-    } else {
-        if (start[0] != '\0' && start != end) {
-            tmp = g_utf8_normalize (start, end - start, G_NORMALIZE_ALL);
-            str_insert_string (tmp, fixed);
-            g_free (tmp);
-        }
-        result = g_strdup (fixed->data);
+
+    if (start == text)
+    {
+	result = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
     }
-    
-    str_release_buffer (fixed);
-    
+    else
+    {
+	if (start[0] != '\0' && start != end)
+	{
+	    tmp = g_utf8_normalize (start, end - start, G_NORMALIZE_ALL);
+	    g_string_append (fixed, tmp);
+	    g_free (tmp);
+	}
+	result = g_strdup (fixed->str);
+    }
+    g_string_free (fixed, TRUE);
+
     return result;
 }
-        
+
 static char *
 str_utf8_casefold_normalize (const char *text) 
 {
-    struct str_buffer *fixed = str_get_buffer ();
+    GString *fixed = g_string_new ("");
     char *tmp, *fold;
     char *result;
     const char *start;
     const char *end;
-    
+
     start = text;
-    while (!g_utf8_validate (start, -1, &end) && start[0] != '\0') {
-        if (start != end) {
-            fold = g_utf8_casefold (start, end - start);
-            tmp = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
-            str_insert_string (tmp, fixed);
-            g_free (tmp);
-            g_free (fold);
-        }
-        str_insert_char (end[0], fixed);
-        start = end + 1;
+    while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
+    {
+	if (start != end)
+	{
+	    fold = g_utf8_casefold (start, end - start);
+	    tmp = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
+	    g_string_append (fixed, tmp);
+	    g_free (tmp);
+	    g_free (fold);
+	}
+	g_string_append_c (fixed, end[0]);
+	start = end + 1;
     }
-    
-    if (start == text) {
-        fold = g_utf8_casefold (text, -1);
-        result = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
-        g_free (fold);
-    } else {
-        if (start[0] != '\0' && start != end) {
-            fold = g_utf8_casefold (start, end - start);
-            tmp = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
-            str_insert_string (tmp, fixed);
-            g_free (tmp);
-            g_free (fold);
-        }
-        result = g_strdup (fixed->data);
+
+    if (start == text)
+    {
+	fold = g_utf8_casefold (text, -1);
+	result = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
+	g_free (fold);
     }
-    
-    str_release_buffer (fixed);
-    
+    else
+    {
+	if (start[0] != '\0' && start != end)
+	{
+	    fold = g_utf8_casefold (start, end - start);
+	    tmp = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
+	    g_string_append (fixed, tmp);
+	    g_free (tmp);
+	    g_free (fold);
+	}
+	result = g_strdup (fixed->str);
+    }
+    g_string_free (fixed, TRUE);
+
     return result;
 }
         
@@ -1126,36 +1151,42 @@ str_utf8_create_key_gen (const char *text, int case_sen,
     } else {
         const char *start, *end;
         char *fold, *key;
-        struct str_buffer *fixed = str_get_buffer ();
-        
+        GString *fixed = g_string_new ("");
+
         start = text;
-        while (!g_utf8_validate (start, -1, &end) && start[0] != '\0') {
-            if (start != end) {
+        while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
+        {
+            if (start != end)
+            {
                 fold = g_utf8_casefold (start, end - start);
                 key = keygen (fold, -1);
-                str_insert_string (key, fixed);
+                g_string_append (fixed, key);
                 g_free (key);
                 g_free (fold);
             }
-            str_insert_char (end[0], fixed);
+            g_string_append_c (fixed, end[0]);
             start = end + 1;
         }
-    
-        if (start == text) {
+
+        if (start == text)
+        {
             fold = g_utf8_casefold (text, -1);
             result = keygen (fold, -1);
             g_free (fold);
-        } else {
-            if (start[0] != '\0' && start != end) {
+        }
+        else
+        {
+            if (start[0] != '\0' && start != end)
+            {
                 fold = g_utf8_casefold (start, end - start);
                 key = keygen (fold, -1);
-                str_insert_string (key, fixed);
+                g_string_append (fixed, key);
                 g_free (key);
                 g_free (fold);
             }
-            result = g_strdup (fixed->data);
+            result = g_strdup (fixed->str);
         }
-        str_release_buffer (fixed);
+        g_string_free (fixed, TRUE);
     }
     return result;
 }
@@ -1184,8 +1215,8 @@ str_utf8_release_key (char *key, int case_sen)
     g_free (key);
 }        
 
-struct str_class
-str_utf8_init () 
+struct str_class 
+str_utf8_init ()
 {
     struct str_class result;
     

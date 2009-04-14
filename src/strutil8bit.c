@@ -1,6 +1,6 @@
 /* 8bit strings utilities
    Copyright (C) 2007 Free Software Foundation, Inc.
-   
+
    Written 2007 by:
    Rostislav Benes 
 
@@ -11,7 +11,7 @@
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -40,9 +40,9 @@
 static const char replch = '?';
 
 static void
-str_8bit_insert_replace_char (struct str_buffer *buffer) 
+str_8bit_insert_replace_char (GString * buffer)
 {
-    str_insert_char (replch, buffer);
+    g_string_append_c (buffer, replch);
 }
 
 static int 
@@ -155,58 +155,20 @@ str_8bit_length2 (const char *text, int size)
     return (size >= 0) ? min (strlen (text), size) : strlen (text);
 }
 
-static int
-_str_8bit_vfs_convert_to (str_conv_t coder, char *string, 
-                          int size, struct str_buffer *buffer)
-{
-    int state;        
-    size_t left;
-    size_t nconv;
-                    
-    errno = 0;
-    
-    state = 0;
-       
-    left = (size >= 0) ? size : strlen (string);
-
-    if (coder == (iconv_t) (-1)) return ESTR_FAILURE;
-        
-    iconv(coder, NULL, NULL, NULL, NULL);
-
-    while (((int)left) > 0) {
-        nconv = iconv(coder, &string, &left, 
-                      &(buffer->actual), &(buffer->remain));
-        if (nconv == (size_t) (-1)) {
-            switch (errno) {
-                case EINVAL:
-                    return ESTR_FAILURE;
-                case EILSEQ:
-                    string++;
-                    left--;
-                    str_insert_char ('?', buffer);
-                    state = ESTR_PROBLEM;   
-                    break; 
-                case E2BIG:
-                    str_incrase_buffer (buffer);
-                    break;
-            }
-        }
-    }
-    return state;
-}
-
 int
-str_8bit_vfs_convert_to (str_conv_t coder, const char *string, 
-                         int size, struct str_buffer *buffer)
+str_8bit_vfs_convert_to (str_conv_t coder, const char *string,
+			 int size, GString * buffer)
 {
-    int result; 
-    
-    if (coder == str_cnv_not_convert) {
-        str_insert_string2 (string, size, buffer);
-        result = 0;
-    } else result = _str_8bit_vfs_convert_to (coder, (char*)string, size, buffer);
-    buffer->actual[0] = '\0';
-    
+    int result;
+
+    if (coder == str_cnv_not_convert)
+    {
+	g_string_append_len (buffer, string, size);
+	result = 0;
+    }
+    else
+	result = str_nconvert (coder, (char *) string, size, buffer);
+
     return result;
 }
 
@@ -484,7 +446,7 @@ static int
 str_8bit_column_to_pos (const char *text, size_t pos)
 {
     return (int)pos;
-}        
+}
 
 static char *
 str_8bit_create_search_needle (const char *needle, int case_sen)
@@ -518,7 +480,7 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
         g_free (fold_text);
         g_free (fold_search);
     }
-    
+
     return match;
 }
 

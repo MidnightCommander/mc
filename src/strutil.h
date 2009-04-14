@@ -74,29 +74,11 @@ extern str_conv_t str_cnv_from_term;
 // from terminal encoding to terminal encoding
 extern str_conv_t str_cnv_not_convert;
 
-/* structure for growing strings
- * try to avoid set any members manually
- */
-struct str_buffer {
-    // all buffers are stored in linked list
-    struct str_buffer *next;
-    // if is buffer in use or not
-    int used;
-    // whole string
-    char *data;
-    // size of string
-    size_t size;
-    // end of string, actual[0] is always '\0'
-    char *actual;
-    // how many (chars)bytes remain after actual
-    size_t remain;
-};
-
 // all functions in str_class must be defined for every encoding
 struct str_class {
     int (*vfs_convert_to) (str_conv_t coder, const char *string, 
-                        int size, struct str_buffer *buffer);           //I
-    void (*insert_replace_char) (struct str_buffer *buffer);
+                        int size, GString *buffer);           //I
+    void (*insert_replace_char) (GString *buffer);
     int (*is_valid_string) (const char *);                              //I
     int (*is_valid_char) (const char *, size_t);                        //I
     void (*cnext_char) (const char **);
@@ -151,85 +133,52 @@ struct str_class str_ascii_init ();
 /* create convertor from "from_enc" to terminal encoding
  * if "from_enc" is not supported return INVALID_CONV 
  */
-str_conv_t str_crt_conv_from (const char *from_enc);
+GIConv str_crt_conv_from (const char *);
 
 /* create convertor from terminal encoding to "to_enc"
  * if "to_enc" is not supported return INVALID_CONV 
  */
-str_conv_t str_crt_conv_to (const char *to_enc);
+GIConv str_crt_conv_to (const char *);
 
 /* close convertor, do not close str_cnv_to_term, str_cnv_from_term, 
  * str_cnv_not_convert 
  */
-void str_close_conv (str_conv_t conv);
+void str_close_conv (GIConv);
 
 /* return on of not used buffers (.used == 0) or create new
  * returned buffer has set .used to 1
  */
-struct str_buffer *str_get_buffer ();
-
-/* clear buffer, in .data is empty string, .actual = .data, .remain = .size
- * do not set .used 
- */
-void str_reset_buffer (struct str_buffer *buffer);
-
-/* set .used of buffer to 0, so can be returned by str_get_buffer again
- * data in buffer may stay valid after function return
- */
-void str_release_buffer (struct str_buffer *buffer);
-
-/* incrase capacity of buffer
- */
-void str_incrase_buffer (struct str_buffer *buffer);
 
 /* convert string using coder, result of conversion is appended at end of buffer
  * return 0 if there was no problem. 
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
  */ 
-int str_convert (str_conv_t coder, char *string, 
-                 struct str_buffer *buffer);
+int str_convert (GIConv, char *, GString *);
+
+int str_nconvert (GIConv, char *, int, GString *);
 
 /* return only 0 or ESTR_FAILURE, because vfs must be able to convert result to
  * original string. (so no replace with questionmark)
  * if coder is str_cnv_from_term or str_cnv_not_convert, string is only copied,
  * so is possible to show file, that is not valid in terminal encoding
  */                 
-int str_vfs_convert_from (str_conv_t coder, char *string, 
-                          struct str_buffer *buffer);
+int str_vfs_convert_from (GIConv, char *, GString *);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
  * does replace with questionmark 
  * I
  */
-int str_vfs_convert_to (str_conv_t coder, const char *string, 
-                        int size, struct str_buffer *buffer);
-
-/* append string at the end of buffer
- */                          
-void str_insert_string (const char *string, struct str_buffer *buffer);  
-
-/* append string at the end of buffer, limit to size
- */                          
-void
-str_insert_string2 (const char *string, int size, struct str_buffer *buffer);
+int str_vfs_convert_to (GIConv, const char *, int, GString *);
 
 /* printf functin for str_buffer, append result of printf at the end of buffer
- */                          
+ */
 void
-str_printf (struct str_buffer *buffer, const char *format, ...);
-
-/* append char at the end of buffer
- */                          
-void str_insert_char (char ch, struct str_buffer *buffer);  
+str_printf (GString *, const char *, ...);
 
 /* add standard replacement character in terminal encoding
  */
-void str_insert_replace_char (struct str_buffer *buffer);
+void str_insert_replace_char (GString *);
 
-/* rewind "count" characters buffer back
- */
-void str_backward_buffer (struct str_buffer *buffer, int count);                      
-                        
 /* init strings and set terminal encoding,
  * if is termenc NULL, detect terminal encoding
  * create all str_cnv_* and set functions for terminal encoding
