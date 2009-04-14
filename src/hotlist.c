@@ -218,20 +218,18 @@ do { \
 static void fill_listbox (void)
 {
     struct hotlist *current = current_group->head;
-    struct str_buffer *buff;
-
-    buff = str_get_buffer ();
+    GString *buff = g_string_new ("");
 
     while (current){
 	switch (current->type) {
 	case HL_TYPE_GROUP:
 	    {
-                str_insert_string ("->", buff);
-                str_insert_string (current->label, buff);
+		g_string_append(buff,"->");
+		g_string_append(buff,current->label);
 		if (hotlist_state.moving)
-		    listbox_add_item (l_movelist, 0, 0, buff->data, current);
+		    listbox_add_item (l_movelist, 0, 0, buff->str, current);
 		else
-                    listbox_add_item (l_hotlist, 0, 0, buff->data, current);
+                    listbox_add_item (l_hotlist, 0, 0, buff->str, current);
 	    }
 	    break;
 	case HL_TYPE_DOTDOT:
@@ -246,8 +244,7 @@ static void fill_listbox (void)
 	}
 	current = current->next;
     }
-
-    str_release_buffer (buff);
+    g_string_free (buff, TRUE);
 }
 
 static void
@@ -1203,7 +1200,7 @@ load_group (struct hotlist *grp)
 #define TKN_EOF		126
 #define TKN_UNKNOWN	127
 
-static struct str_buffer *tkn_buf = NULL;
+static GString *tkn_buf = NULL;
 
 static char *hotlist_file_name;
 static FILE *hotlist_file;
@@ -1221,41 +1218,47 @@ static int hot_skip_blanks (void)
 
 static int hot_next_token (void)
 {
-    int	c;
+    int	c, ret=0;
     size_t l;
 
-    if (tkn_buf == NULL) tkn_buf = str_get_buffer ();
-    str_reset_buffer (tkn_buf);
+
+    if (tkn_buf == NULL) tkn_buf = g_string_new ("");
+    g_string_set_size(tkn_buf,0);
 
 again:
     c = hot_skip_blanks ();
     switch (c) {
     case EOF:
-	return TKN_EOF;
+	ret = TKN_EOF;
 	break;
     case '\n':
-	return TKN_EOL;
+	ret = TKN_EOL;
 	break;
     case '#':
 	while ((c = getc (hotlist_file)) != EOF && c != '\n') {
-            str_insert_char (c, tkn_buf);
-	    }
-	return TKN_COMMENT;
+	    g_string_append_c (tkn_buf, c);
+	}
+	ret = TKN_COMMENT;
 	break;
     case '"':
 	while ((c = getc (hotlist_file)) != EOF && c != '"') {
 	    if (c == '\\')
-		if ((c = getc (hotlist_file)) == EOF)
+		if ((c = getc (hotlist_file)) == EOF){
+		    g_string_free (tkn_buf, TRUE);
 		    return TKN_EOF;
-            str_insert_char (c == '\n' ? ' ' : c, tkn_buf);
+		}
+	    g_string_append_c (tkn_buf, c == '\n' ? ' ' : c);
 	}
 	if (c == EOF)
-	    return TKN_EOF;
-	return TKN_STRING;
+	    ret = TKN_EOF;
+	else
+	    ret = TKN_STRING;
 	break;
     case '\\':
-	if ((c = getc (hotlist_file)) == EOF)
+	if ((c = getc (hotlist_file)) == EOF){
+	    g_string_free (tkn_buf, TRUE);
 	    return TKN_EOF;
+	}
 	if (c == '\n')
 	    goto again;
 
@@ -1263,24 +1266,25 @@ again:
 
     default:
 	do {
-            str_insert_char (g_ascii_toupper (c), tkn_buf);
+	    g_string_append_c (tkn_buf, g_ascii_toupper (c));
 	} while ((c = fgetc (hotlist_file)) != EOF && 
                          (g_ascii_isalnum (c) || !isascii (c)));
 	if (c != EOF)
 	    ungetc (c, hotlist_file);
-        l = tkn_buf->size - tkn_buf->remain;
-	if (strncmp (tkn_buf->data, "GROUP", l) == 0)
-	    return TKN_GROUP;
-	else if (strncmp (tkn_buf->data, "ENTRY", l) == 0)
-	    return TKN_ENTRY;
-	else if (strncmp (tkn_buf->data, "ENDGROUP", l) == 0)
-	    return TKN_ENDGROUP;
-	else if (strncmp (tkn_buf->data, "URL", l) == 0)
-	    return TKN_URL;
+        l = tkn_buf->len;
+	if (strncmp (tkn_buf->str, "GROUP", l) == 0)
+	    ret = TKN_GROUP;
+	else if (strncmp (tkn_buf->str, "ENTRY", l) == 0)
+	    ret = TKN_ENTRY;
+	else if (strncmp (tkn_buf->str, "ENDGROUP", l) == 0)
+	    ret = TKN_ENDGROUP;
+	else if (strncmp (tkn_buf->str, "URL", l) == 0)
+	    ret = TKN_URL;
 	else
-	    return TKN_UNKNOWN;
+	    ret = TKN_UNKNOWN;
 	break;
     }
+    return ret;
 }
 
 #define SKIP_TO_EOL	{ \
@@ -1310,22 +1314,22 @@ hot_load_group (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (g_strdup (tkn_buf->data), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf->str), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-            label = g_strdup (tkn_buf->data);
+            label = g_strdup (tkn_buf->str);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = g_strdup (tkn_buf->data);
+	    url = g_strdup (tkn_buf->str);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-            label = g_strdup (tkn_buf->data);
+            label = g_strdup (tkn_buf->str);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOF:
@@ -1358,22 +1362,22 @@ hot_load_file (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-            new_grp = add2hotlist (g_strdup (tkn_buf->data), 0, HL_TYPE_GROUP, 0);
+            new_grp = add2hotlist (g_strdup (tkn_buf->str), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-            label = g_strdup (tkn_buf->data);
+            label = g_strdup (tkn_buf->str);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-            url = g_strdup (tkn_buf->data);
+            url = g_strdup (tkn_buf->str);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-            label = g_strdup (tkn_buf->data);
+            label = g_strdup (tkn_buf->str);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOL:
@@ -1570,7 +1574,7 @@ void done_hotlist (void)
 	g_free (hotlist);
 	hotlist = 0;
     }
-    
+
     hotlist_state.loaded = 0;
 
     g_free (hotlist_file_name);
@@ -1579,7 +1583,7 @@ void done_hotlist (void)
     current_group = 0;
 
     if (tkn_buf){
-        str_release_buffer (tkn_buf);
+	g_string_free (tkn_buf, TRUE);
 	tkn_buf = NULL;
     }
 }

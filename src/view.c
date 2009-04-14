@@ -235,7 +235,7 @@ struct WView {
      * used for both normal adn nroff mode */
     struct cache_line *first_showed_line;
     /* converter for translation of text */
-    str_conv_t converter;
+    GIConv converter;
 };
 
 
@@ -2450,34 +2450,34 @@ view_display_text (WView * view)
 	if (col >= view->dpy_text_column
 	    && col + w - view->dpy_text_column <= width) {
 	    widget_move (view, top + row, left + (col - view->dpy_text_column));
-            
+
             if (!str_iscombiningmark (info.cnxt)) {
                 if (str_isprint (info.cact)) {
                     addstr (str_term_form (info.cact));
                 } else {
                     addch ('.');
 	}
-            } else {
-                struct str_buffer *comb = str_get_buffer ();
-                if (str_isprint (info.cact)) {
-                    str_insert_string (info.cact, comb);
-                } else {
-                    str_insert_string (".", comb);
-                }
-                while (str_iscombiningmark (info.cnxt)) {
-                    view_read_continue (view, &info);
-                    str_insert_string (info.cact, comb);
-                }
-                addstr (str_term_form (comb->data));
-                str_release_buffer (comb);
-            }
+	    } else {
+		GString *comb = g_string_new ("");
+		if (str_isprint (info.cact)) {
+		    g_string_append(comb,info.cact);
+		} else {
+		    g_string_append(comb,".");
+		}
+		while (str_iscombiningmark (info.cnxt)) {
+		    view_read_continue (view, &info);
+		    g_string_append(comb,info.cact);
+		}
+		addstr (str_term_form (comb->str));
+		g_string_free (comb, TRUE);
+	    }
 	} else {
-            while (str_iscombiningmark (info.cnxt)) {
-                view_read_continue (view, &info);
-            }
-        }
+	    while (str_iscombiningmark (info.cnxt)) {
+		view_read_continue (view, &info);
+	    }
+	}
         col+= w;
-        
+
 	tty_setcolor (NORMAL_COLOR);
     }
     view->dpy_end = info.next;
@@ -2731,7 +2731,7 @@ icase_search_p (WView *view, char *text, char *data, int nothing,
 
 /* read one whole line into buffer, return where line start and end */
 static int
-view_get_line_at (WView *view, offset_type from, struct str_buffer * buffer,
+view_get_line_at (WView *view, offset_type from, GString * buffer,
                   offset_type *buff_start, offset_type *buff_end) 
 {
     #define cmp(t1,t2) (strcmp((t1),(t2)) == 0)
@@ -2756,7 +2756,7 @@ view_get_line_at (WView *view, offset_type from, struct str_buffer * buffer,
     (*buff_start) = start;
     (*buff_end) = end;
 
-    str_reset_buffer (buffer);
+    g_string_set_size(buffer,0);
 
     view_read_start (view, &info, start);
     while ((info.result != -1) && (info.next < end)) {
@@ -2766,29 +2766,30 @@ view_get_line_at (WView *view, offset_type from, struct str_buffer * buffer,
         if (cmp (info.cact, "")) {
             if (info.actual < from) {
                 /* '\0' before start offset, continue */
-                str_reset_buffer (buffer);
+                g_string_set_size(buffer,0);
                 (*buff_start) = info.next;
                 continue;
             } else {
                 /* '\0' after start offset, end */
                 (*buff_end) = info.next;
                 return 1;
-    }
-    }
+	    }
+	}
 
         if (view_read_test_new_line (view, &info))
             continue;
 
         if (view_read_test_nroff_back (view, &info)) {
-            str_backward_buffer (buffer, 1);
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	    g_string_truncate (buffer, buffer->len-1);
             continue;
-    }
-
-        str_insert_string (info.cact, buffer);
 	}
 
+	g_string_append(buffer,info.cact);
+    }
+
     return 1;
-}        
+}
 
 /* map search result positions to offsets in text */
 void
@@ -2803,7 +2804,7 @@ view_matchs_to_offsets (WView *view, offset_type start, offset_type end,
     (*search_end) = INVALID_OFFSET;
 
     view_read_start (view, &info, start);
-        
+
     while ((info.result != -1) && (info.next < end)) {
         view_read_continue (view, &info);
 
@@ -2981,7 +2982,7 @@ static void
 view_search (WView *view, char *text, 
              int (*search) (WView *, char *, char *, int, size_t *, size_t *))
 {
-    struct str_buffer *buffer;
+    GString *buffer;
     offset_type search_start;
     int search_status;
     Dlg_head *d = 0;
@@ -2996,7 +2997,7 @@ view_search (WView *view, char *text,
 	mc_refresh ();
     }
 
-    buffer = str_get_buffer ();
+    buffer = g_string_new ("");
 
     search_start = (view->direction != 1) ? view->search_start :
             view->search_end;
@@ -3007,12 +3008,12 @@ view_search (WView *view, char *text,
 
     enable_interrupt_key ();
     search_status = -1;
-    
+
     while (1) {
-        if (search_start >= view->update_activate) {
+	if (search_start >= view->update_activate) {
 	    view->update_activate += view->update_steps;
 	    if (verbose) {
-                view_percent (view, search_start);
+		view_percent (view, search_start);
 		mc_refresh ();
 	    }
 	    if (got_interrupt ())
@@ -3022,9 +3023,9 @@ view_search (WView *view, char *text,
         if (!view_get_line_at (view, search_start, buffer, &line_start, &line_end))
 	    break;
 
-        search_status = (*search) (view, text, buffer->data, match_normal, 
+        search_status = (*search) (view, text, buffer->str, match_normal, 
                           &match_start, &match_end);
-        
+
 	if (search_status < 0) {
 	    break;
 	}
@@ -3041,11 +3042,11 @@ view_search (WView *view, char *text,
 
 	/* We found the string */
 
-        view_matchs_to_offsets (view, line_start, line_end, 
-                                match_start, match_end, 
-                                &(view->search_start), &(view->search_end));
+	view_matchs_to_offsets (view, line_start, line_end, 
+				match_start, match_end, 
+				&(view->search_start), &(view->search_end));
 
-        view_moveto_match (view);
+	view_moveto_match (view);
 
 	break;
     }
@@ -3058,7 +3059,7 @@ view_search (WView *view, char *text,
 	message (D_NORMAL, _("Search"), _(" Search string not found "));
         view->search_end = view->search_start;
     }
-    str_release_buffer (buffer);
+    g_string_free (buffer, TRUE);
 }
 
 /* Search buffer (its size is len) in the complete buffer
