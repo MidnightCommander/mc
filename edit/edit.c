@@ -717,9 +717,6 @@ edit_clean (WEdit *edit)
 
     edit_purge_widget (edit);
 
-    /* Free temporary strings used in catstrs() */
-    freestrs ();
-
     return 1;
 }
 

@@ -65,9 +65,9 @@ static char *codeset;
 // function for encoding specific operations
 static struct str_class used_class;
 
-iconv_t str_cnv_to_term;
-iconv_t str_cnv_from_term;
-iconv_t str_cnv_not_convert;
+GIConv str_cnv_to_term;
+GIConv str_cnv_from_term;
+GIConv str_cnv_not_convert;
 
 // if enc is same encoding like on terminal
 static int 
@@ -265,13 +265,13 @@ str_insert_replace_char (GString * buffer)
 }
 
 int
-str_translate_char (str_conv_t conv, char *keys, size_t ch_size,
+str_translate_char (GIConv conv, char *keys, size_t ch_size,
 		    char *output, size_t out_size)
 {
     size_t left;
     size_t cnv;
 
-    iconv (conv, NULL, NULL, NULL, NULL);
+    g_iconv (conv, NULL, NULL, NULL, NULL);
 
     left = (ch_size == (size_t)(-1)) ? strlen (keys) : ch_size;
 
@@ -333,21 +333,21 @@ str_init_strings (const char *termenc)
                         ? termenc 
                         : str_detect_termencoding ());
 
-    str_cnv_not_convert = iconv_open (codeset, codeset);
+    str_cnv_not_convert = g_iconv_open (codeset, codeset);
     if (str_cnv_not_convert == INVALID_CONV)
     {
 	if (termenc != NULL)
 	{
 	    g_free (codeset);
 	    codeset = g_strdup (str_detect_termencoding ());
-	    str_cnv_not_convert = iconv_open (codeset, codeset);
+	    str_cnv_not_convert = g_iconv_open (codeset, codeset);
 	}
 
 	if (str_cnv_not_convert == INVALID_CONV)
 	{
 	    g_free (codeset);
 	    codeset = g_strdup ("ascii");
-	    str_cnv_not_convert = iconv_open (codeset, codeset);
+	    str_cnv_not_convert = g_iconv_open (codeset, codeset);
 	}
     }
 
@@ -360,7 +360,7 @@ str_init_strings (const char *termenc)
 void
 str_uninit_strings ()
 {
-    iconv_close (str_cnv_not_convert);
+    g_iconv_close (str_cnv_not_convert);
 }
 
 const char *

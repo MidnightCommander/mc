@@ -3653,7 +3653,7 @@ static void
 view_select_encoding (WView *view) 
 {
     char *enc;
-    iconv_t conv;
+    GIConv conv;
     struct cache_line *line;
 
     enc = input_dialog ("Encoding", "Paste encoding", NULL, "");

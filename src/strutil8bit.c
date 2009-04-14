@@ -156,7 +156,7 @@ str_8bit_length2 (const char *text, int size)
 }
 
 int
-str_8bit_vfs_convert_to (str_conv_t coder, const char *string,
+str_8bit_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
 {
     int result;

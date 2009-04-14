@@ -186,7 +186,6 @@ int edit_insert_file (WEdit * edit, const char *filename);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block);
-void freestrs (void);
 void edit_refresh_cmd (WEdit * edit);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
