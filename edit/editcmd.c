@@ -118,58 +118,6 @@ MY_itoa (int i)
     return ++s;
 }
 
-/* Temporary strings */
-static char *stacked[16];
-
-/*
-   This joins strings end on end and allocates memory for the result.
-   The result is later automatically free'd and must not be free'd
-   by the caller.
- */
-static const char *
-catstrs (const char *first,...)
-{
-    static int i = 0;
-    va_list ap;
-    int len;
-    char *data;
-
-    if (!first)
-	return 0;
-
-    len = str_term_width1 (first);
-    va_start (ap, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	 len += str_term_width1 (data);
-
-    len++;
-
-    i = (i + 1) % 16;
-    g_free (stacked[i]);
-
-    stacked[i] = g_malloc (len);
-    va_end (ap);
-    va_start (ap, first);
-    strcpy (stacked[i], first);
-    while ((data = va_arg (ap, char *)) != 0)
-	 strcat (stacked[i], data);
-    va_end (ap);
-
-    return stacked[i];
-}
-
-/* Free temporary strings */
-void freestrs(void)
-{
-    size_t i;
-
-    for (i = 0; i < sizeof(stacked) / sizeof(stacked[0]); i++) {
-	g_free (stacked[i]);
-	stacked[i] = NULL;
-    }
-}
-
 void edit_help_cmd (WEdit * edit)
 {
     interactive_display (NULL, "[Internal File Editor]");
@@ -205,8 +153,10 @@ static int
 edit_save_file (WEdit *edit, const char *filename)
 {
     char *p;
+    gchar *tmp;
     long filelen = 0;
     char *savename = 0;
+    gchar *real_filename;
     int this_save_mode, fd = -1;
 
     if (!filename)
@@ -215,15 +165,15 @@ edit_save_file (WEdit *edit, const char *filename)
 	return 0;
 
     if (*filename != PATH_SEP && edit->dir) {
-	savename = concat_dir_and_file (edit->dir, filename);
-	filename = catstrs (savename, (char *) NULL);
-	g_free (savename);
+	real_filename = concat_dir_and_file (edit->dir, filename);
+    } else {
+	real_filename = g_strdup(filename);
     }
 
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE) {
-	if (!vfs_file_is_local (filename) ||
-	    (fd = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
+	if (!vfs_file_is_local (real_filename) ||
+	    (fd = mc_open (real_filename, O_RDONLY | O_BINARY)) == -1) {
 	    /*
 	     * The file does not exists yet, so no safe save or
 	     * backup are necessary.
@@ -239,7 +189,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	int rv;
 	struct stat sb;
 
-	rv = mc_stat (filename, &sb);
+	rv = mc_stat (real_filename, &sb);
 	if (rv == 0 && sb.st_nlink > 1) {
 	    rv = edit_query_dialog3 (_("Warning"),
 				     _(" File has hard-links. Detach before saving? "),
@@ -252,6 +202,7 @@ edit_save_file (WEdit *edit, const char *filename)
 		edit->skip_detach_prompt = 1;
 		break;
 	    default:
+		g_free(real_filename);
 		return -1;
 	    }
 	}
@@ -267,26 +218,30 @@ edit_save_file (WEdit *edit, const char *filename)
 		_("The file has been modified in the meantime. Save anyway?"),
 		_("&Yes"),
 		_("&Cancel"));
-	    if (rv != 0)
+	    if (rv != 0){
+		g_free(real_filename);
 		return -1;
+	    }
 	}
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE) {
 	char *savedir, *saveprefix;
 	const char *slashpos;
-	slashpos = strrchr (filename, PATH_SEP);
+	slashpos = strrchr (real_filename, PATH_SEP);
 	if (slashpos) {
-	    savedir = g_strdup (filename);
-	    savedir[slashpos - filename + 1] = '\0';
+	    savedir = g_strdup (real_filename);
+	    savedir[slashpos - real_filename + 1] = '\0';
 	} else
 	    savedir = g_strdup (".");
 	saveprefix = concat_dir_and_file (savedir, "cooledit");
 	g_free (savedir);
 	fd = mc_mkstemps (&savename, saveprefix, NULL);
 	g_free (saveprefix);
-	if (!savename)
+	if (!savename){
+	    g_free(real_filename);
 	    return 0;
+	}
 	/* FIXME:
 	 * Close for now because mc_mkstemps use pure open system call
 	 * to create temporary file and it needs to be reopened by
@@ -294,7 +249,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	 */
 	close (fd);
     } else
-	savename = g_strdup (filename);
+	savename = g_strdup (real_filename);
 
     mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
     mc_chmod (savename, edit->stat1.st_mode);
@@ -305,7 +260,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	goto error_save;
 
 /* pipe save */
-    if ((p = edit_get_write_filter (savename, filename))) {
+    if ((p = edit_get_write_filter (savename, real_filename))) {
 	FILE *file;
 
 	mc_close (fd);
@@ -317,20 +272,22 @@ edit_save_file (WEdit *edit, const char *filename)
 	    pclose (file);
 #else
 	    if (pclose (file) != 0) {
-		edit_error_dialog (_("Error"),
-				   catstrs (_(" Error writing to pipe: "),
-					    p, " ", (char *) NULL));
+		tmp = g_strconcat (_(" Error writing to pipe: "),
+					    p, " ", (char *) NULL);
+		edit_error_dialog (_("Error"), tmp);
+		g_free(tmp);
 		g_free (p);
 		goto error_save;
 	    }
 #endif
 	} else {
+	    tmp = g_strconcat (_(" Cannot open pipe for writing: "),
+					p, " ", (char *) NULL);
+
 	    edit_error_dialog (_("Error"),
-			       get_sys_error (catstrs
-					      (_
-					       (" Cannot open pipe for writing: "),
-					       p, " ", (char *) NULL)));
+			       get_sys_error (tmp));
 	    g_free (p);
+	    g_free(tmp);
 	    goto error_save;
 	}
 	g_free (p);
@@ -386,21 +343,25 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (this_save_mode == EDIT_DO_BACKUP) {
 	assert (option_backup_ext != NULL);
-	if (mc_rename (filename, catstrs (filename, option_backup_ext,
-	    (char *) NULL)) == -1)
+	tmp = g_strconcat (real_filename, option_backup_ext,(char *) NULL);
+	if (mc_rename (real_filename, tmp) == -1){
+	    g_free(tmp);
 	    goto error_save;
+	}
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE)
-	if (mc_rename (savename, filename) == -1)
+	if (mc_rename (savename, real_filename) == -1)
 	    goto error_save;
     g_free (savename);
+    g_free(real_filename);
     return 1;
   error_save:
 /*  FIXME: Is this safe ?
  *  if (this_save_mode != EDIT_QUICK_SAVE)
  *	mc_unlink (savename);
  */
+    g_free(real_filename);
     g_free (savename);
     return 0;
 }
@@ -627,13 +588,18 @@ edit_raw_key_query (const char *heading, const char *query, int cancel)
 /* creates a macro file if it doesn't exist */
 static FILE *edit_open_macro_file (const char *r)
 {
-    const char *filename;
+    gchar *filename;
+    FILE *fd;
     int file;
-    filename = catstrs (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
-    if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+    filename = g_strconcat ( home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
+    if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1){
+	g_free(filename);
 	return 0;
+    }
     close (file);
-    return fopen (filename, r);
+    fd = fopen (filename, r);
+    g_free(filename);
+    return fd;
 }
 
 #define MAX_MACROS 1024
@@ -658,6 +624,7 @@ macro_exists (int k)
 static int
 edit_delete_macro (WEdit * edit, int k)
 {
+    gchar *tmp, *tmp2;
     struct macro macro[MAX_MACRO_LENGTH];
     FILE *f, *g;
     int s, i, n, j = 0;
@@ -667,7 +634,9 @@ edit_delete_macro (WEdit * edit, int k)
     if (saved_macros_loaded)
 	if ((j = macro_exists (k)) < 0)
 	    return 0;
-    g = fopen (catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL), "w");
+    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    g = fopen (tmp , "w");
+    g_free(tmp);
     if (!g) {
 	edit_error_dialog (_(" Delete macro "),
 		 get_sys_error (_(" Cannot open temp file ")));
@@ -697,11 +666,18 @@ edit_delete_macro (WEdit * edit, int k)
     }
     fclose (f);
     fclose (g);
-    if (rename (catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL), catstrs (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL)) == -1) {
+    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp2 = g_strconcat (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
+    if (rename ( tmp, tmp2) == -1) {
 	edit_error_dialog (_(" Delete macro "),
 	   get_sys_error (_(" Cannot overwrite macro file ")));
+	g_free(tmp);
+	g_free(tmp2);
 	return 1;
     }
+    g_free(tmp);
+    g_free(tmp2);
+
     if (saved_macros_loaded)
 	memmove (saved_macro + j, saved_macro + j + 1, sizeof (int) * (MAX_MACROS - j - 1));
     return 0;
@@ -800,13 +776,16 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 /* returns 1 on success */
 int edit_save_confirm_cmd (WEdit * edit)
 {
-    const char *f;
-
+    gchar *f;
+    
     if (edit_confirm_save) {
-	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
-	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel")))
+	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", NULL);
+	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel"))){
+	    g_free(f);
 	    return 0;
+	}
     }
+    g_free(f);
     return edit_save_cmd (edit);
 }
 
@@ -2260,7 +2239,12 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 /* copies a block to clipboard file */
 static int edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
-    return edit_save_block (edit, catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL), start, finish);
+    int ret;
+    gchar *tmp;
+    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    ret = edit_save_block (edit, tmp, start, finish);
+    g_free(tmp);
+    return ret;
 }
 
 
@@ -2299,7 +2283,10 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 
 void edit_paste_from_X_buf_cmd (WEdit * edit)
 {
-    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
+    gchar *tmp;
+    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    edit_insert_file (edit, tmp);
+    g_free(tmp);
 }
 
 
@@ -2348,13 +2335,15 @@ int
 edit_save_block_cmd (WEdit *edit)
 {
     long start_mark, end_mark;
-    char *exp;
+    char *exp, *tmp;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
+    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
     exp =
 	input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
 			     MC_HISTORY_EDIT_SAVE_BLOCK, 
-			    catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
+			    tmp);
+    g_free(tmp);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2382,9 +2371,14 @@ edit_save_block_cmd (WEdit *edit)
 int
 edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
+    gchar *tmp;
+    char *exp;
+
+    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
 				     MC_HISTORY_EDIT_INSERT_FILE,
-				     catstrs (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL));
+				     tmp);
+    g_free(tmp);
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2411,7 +2405,7 @@ edit_insert_file_cmd (WEdit *edit)
 int edit_sort_cmd (WEdit * edit)
 {
     static char *old = 0;
-    char *exp;
+    char *exp, *tmp;
     long start_mark, end_mark;
     int e;
 
@@ -2419,7 +2413,9 @@ int edit_sort_cmd (WEdit * edit)
 	edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
 	return 0;
     }
-    edit_save_block (edit, catstrs (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL), start_mark, end_mark);
+    tmp = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);
+    edit_save_block (edit, tmp, start_mark, end_mark);
+    g_free(tmp);
 
     exp = input_dialog (_(" Run Sort "),
 	_(" Enter sort options (see manpage) separated by whitespace: "),
@@ -2429,8 +2425,9 @@ int edit_sort_cmd (WEdit * edit)
 	return 1;
     g_free (old);
     old = exp;
-
-    e = system (catstrs (" sort ", exp, " ", home_dir, PATH_SEP_STR BLOCK_FILE, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
+    tmp = g_strconcat (" sort ", exp, " ", home_dir, PATH_SEP_STR BLOCK_FILE, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    e = system (tmp);
+    g_free(tmp);
     if (e) {
 	if (e == -1 || e == 127) {
 	    edit_error_dialog (_(" Sort "),
@@ -2438,8 +2435,9 @@ int edit_sort_cmd (WEdit * edit)
 	} else {
 	    char q[8];
 	    sprintf (q, "%d ", e);
-	    edit_error_dialog (_(" Sort "),
-	    catstrs (_(" Sort returned non-zero: "), q, (char *) NULL));
+	    tmp = g_strconcat (_(" Sort returned non-zero: "), q, (char *) NULL);
+	    edit_error_dialog (_(" Sort "), tmp);
+	    g_free(tmp);
 	}
 	return -1;
     }
@@ -2448,7 +2446,9 @@ int edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
 	return 1;
-    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
+    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    edit_insert_file (edit, tmp);
+    g_free(tmp);
     return 0;
 }
 
@@ -2459,7 +2459,7 @@ int edit_sort_cmd (WEdit * edit)
 int
 edit_ext_cmd (WEdit *edit)
 {
-    char *exp;
+    char *exp, *tmp;
     int e;
 
     exp =
@@ -2470,7 +2470,9 @@ edit_ext_cmd (WEdit *edit)
     if (!exp)
 	return 1;
 
-    e = system (catstrs (exp, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
+    tmp = g_strconcat (exp, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    e = system (tmp);
+    g_free(tmp);
     g_free (exp);
 
     if (e) {
@@ -2480,8 +2482,9 @@ edit_ext_cmd (WEdit *edit)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-
-    edit_insert_file (edit, catstrs (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL));
+    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    edit_insert_file (edit, tmp);
+    g_free(tmp);
     return 0;
 }
 
@@ -2496,43 +2499,40 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     FILE *script_home = NULL;
     FILE *script_src = NULL;
     FILE *block_file = NULL;
-    const char *o = NULL;
-    const char *h = NULL;
-    const char *b = NULL;
+    gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
 
-    o = catstrs (mc_home, shell_cmd, (char *) NULL);	/* original source script */
-    h = catstrs (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
-    b = catstrs (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);	/* block file */
+    o = g_strconcat (mc_home, shell_cmd, (char *) NULL);	/* original source script */
+    h = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
+    b = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);	/* block file */
 
     if (!(script_home = fopen (h, "r"))) {
 	if (!(script_home = fopen (h, "w"))) {
-	    edit_error_dialog ("", get_sys_error (catstrs
-						  (_
-						   ("Error creating script:"),
-						   h, (char *) NULL)));
-	    return;
+	    tmp = g_strconcat (_("Error creating script:"), h, (char *) NULL);
+	    edit_error_dialog ("", get_sys_error (tmp));
+	    g_free(tmp);
+	    goto edit_block_process_cmd__EXIT;
 	}
 	if (!(script_src = fopen (o, "r"))) {
 	    fclose (script_home);
 	    unlink (h);
-	    edit_error_dialog ("", get_sys_error (catstrs
-						  (_("Error reading script:"),
-						   o, (char *) NULL)));
-	    return;
+	    tmp = g_strconcat (_("Error reading script:"), o, (char *) NULL);
+	    edit_error_dialog ("", get_sys_error (tmp));
+	    g_free(tmp);
+	    goto edit_block_process_cmd__EXIT;
 	}
 	while (fgets (buf, sizeof (buf), script_src))
 	    fputs (buf, script_home);
 	if (fclose (script_home)) {
-	    edit_error_dialog ("", get_sys_error (catstrs
-						  (_
-						   ("Error closing script:"),
-						   h, (char *) NULL)));
-	    return;
+	    tmp = g_strconcat (_("Error closing script:"), h, (char *) NULL);
+	    edit_error_dialog ("", get_sys_error (tmp));
+	    g_free(tmp);
+	    goto edit_block_process_cmd__EXIT;
 	}
 	chmod (h, 0700);
-	edit_error_dialog ("", get_sys_error (catstrs
-					      (_("Script created:"), h, (char *) NULL)));
+	tmp = g_strconcat (_("Script created:"), h, (char *) NULL);
+	edit_error_dialog ("", get_sys_error (tmp));
+	g_free(tmp);
     }
 
     open_error_pipe ();
@@ -2542,7 +2542,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	    edit_error_dialog (_("Process block"),
 			       _
 			       (" You must first highlight a block of text. "));
-	    return;
+	    goto edit_block_process_cmd__EXIT;
 	}
 	edit_save_block (edit, b, start_mark, end_mark);
 	quoted_name = name_quote (edit->filename, 0);
@@ -2555,17 +2555,20 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 *   $3 - file where error messages should be put
 	 *        (for compatibility with old scripts).
 	 */
-	system (catstrs (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
-			 " ", home_dir, PATH_SEP_STR BLOCK_FILE " /dev/null", (char *) NULL));
-
+	tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
+			 " ", home_dir, PATH_SEP_STR BLOCK_FILE " /dev/null", (char *) NULL);
+	system (tmp);
+	g_free(tmp);
     } else {
 	/*
 	 * No block selected, just execute the command for the file.
 	 * Arguments:
 	 *   $1 - name of the edited file.
 	 */
-	system (catstrs (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
-			 quoted_name, (char *) NULL));
+	tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ",
+			 quoted_name, (char *) NULL);
+	system (tmp);
+	g_free(tmp);
     }
     g_free (quoted_name);
     close_error_pipe (D_NORMAL, NULL);
@@ -2576,13 +2579,16 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     /* insert result block */
     if (block) {
 	if (edit_block_delete_cmd (edit))
-	    return;
+	    goto edit_block_process_cmd__EXIT;
 	edit_insert_file (edit, b);
 	if ((block_file = fopen (b, "w")))
 	    fclose (block_file);
-	return;
+	goto edit_block_process_cmd__EXIT;
     }
-
+edit_block_process_cmd__EXIT:
+    g_free(b);
+    g_free(h);
+    g_free(o);
     return;
 }
 
