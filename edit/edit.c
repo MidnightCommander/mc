@@ -1059,6 +1059,8 @@ void edit_insert_ahead (WEdit * edit, int c)
 int edit_delete (WEdit * edit)
 {
     int p;
+    int cw = 1;
+
     if (!edit->curs2)
 	return 0;
 
@@ -1066,14 +1068,22 @@ int edit_delete (WEdit * edit)
     edit->mark2 -= (edit->mark2 > edit->curs1);
     edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
 
-    p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
-
-    if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-	g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
-	edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = NULL;
+    cw = 1;
+    if ( edit->utf8 ) {
+        edit_get_utf (edit, edit->curs1, &cw);
+        if ( cw < 1 )
+            cw = 1;
     }
-    edit->last_byte--;
-    edit->curs2--;
+    for ( int i = 1; i<= cw; i++ ) {
+        p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
+
+        if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
+	    g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
+	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = NULL;
+        }
+        edit->last_byte--;
+        edit->curs2--;
+    }
 
     edit_modification (edit);
     if (p == '\n') {
@@ -1097,6 +1107,8 @@ static int
 edit_backspace (WEdit * edit)
 {
     int p;
+    int cw = 1;
+
     if (!edit->curs1)
 	return 0;
 
@@ -1104,14 +1116,21 @@ edit_backspace (WEdit * edit)
     edit->mark2 -= (edit->mark2 >= edit->curs1);
     edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
 
-    p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
-    if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-	g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
-	edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+    cw = 1;
+    if ( edit->utf8 ) {
+        edit_get_prev_utf (edit, edit->curs1, &cw);
+        if ( cw < 1 )
+            cw = 1;
     }
-    edit->last_byte--;
-    edit->curs1--;
-
+    for ( int i = 1; i<= cw; i++ ) {
+        p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
+        if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
+	    g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
+	    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+        }
+        edit->last_byte--;
+        edit->curs1--;
+    }
     edit_modification (edit);
     if (p == '\n') {
 	if (edit->book_mark)
