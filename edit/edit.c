@@ -1242,6 +1242,14 @@ void edit_cursor_move (WEdit * edit, long increment)
 {
 /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
     int c;
+    long curs1 = edit->curs1;
+    long curs2 = edit->curs2;
+    int cw = 1;
+    int char_step = 0;
+
+    /* one char move*/
+    if ( increment == -1 || increment == 1)
+        char_step = 1;
 
 #ifdef FAST_MOVE_CURSOR
     if (increment < -256) {
@@ -1258,17 +1266,27 @@ void edit_cursor_move (WEdit * edit, long increment)
 
 	    edit_push_action (edit, CURS_RIGHT);
 
-	    c = edit_get_byte (edit, edit->curs1 - 1);
-	    if (!((edit->curs2 + 1) & M_EDIT_BUF_SIZE))
-		edit->buffers2[(edit->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
-	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1] = c;
-	    edit->curs2++;
-	    c = edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->curs1 - 1) & M_EDIT_BUF_SIZE];
-	    if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
-		g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
-		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+	    cw = 1;
+	    if ( edit->utf8 && char_step ) {
+	        edit_get_prev_utf (edit, curs1, &cw);
+	        if ( cw < 1 )
+	            cw = 1;
 	    }
-	    edit->curs1--;
+	    for ( int i = 1; i<= cw; i++ ) {
+	        c = edit_get_byte (edit, curs1 - 1);
+	        if (!((curs2 + 1) & M_EDIT_BUF_SIZE))
+		    edit->buffers2[(curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
+	        edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (curs2 & M_EDIT_BUF_SIZE) - 1] = c;
+	        curs2++;
+	        c = edit->buffers1[(curs1 - 1) >> S_EDIT_BUF_SIZE][(curs1 - 1) & M_EDIT_BUF_SIZE];
+	        if (!((curs1 - 1) & M_EDIT_BUF_SIZE)) {
+		    g_free (edit->buffers1[curs1 >> S_EDIT_BUF_SIZE]);
+		    edit->buffers1[curs1 >> S_EDIT_BUF_SIZE] = NULL;
+	        }
+	        curs1--;
+	    }
+	    edit->curs1 = curs1;
+	    edit->curs2 = curs2;
 	    if (c == '\n') {
 		edit->curs_line--;
 		edit->force |= REDRAW_LINE_BELOW;
@@ -1282,17 +1300,27 @@ void edit_cursor_move (WEdit * edit, long increment)
 
 	    edit_push_action (edit, CURS_LEFT);
 
-	    c = edit_get_byte (edit, edit->curs1);
-	    if (!(edit->curs1 & M_EDIT_BUF_SIZE))
-		edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
-	    edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE][edit->curs1 & M_EDIT_BUF_SIZE] = c;
-	    edit->curs1++;
-	    c = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
-	    if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
-		g_free (edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE]);
-		edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] = 0;
+	    cw = 1;
+	    if ( edit->utf8 && char_step ) {
+	        edit_get_utf (edit, curs1, &cw);
+	        if ( cw < 1 )
+	            cw = 1;
 	    }
-	    edit->curs2--;
+	    for ( int i = 1; i<= cw; i++ ) {
+	        c = edit_get_byte (edit, curs1);
+	        if (!(curs1 & M_EDIT_BUF_SIZE))
+		    edit->buffers1[curs1 >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
+	        edit->buffers1[curs1 >> S_EDIT_BUF_SIZE][curs1 & M_EDIT_BUF_SIZE] = c;
+	        curs1++;
+	        c = edit->buffers2[(curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
+	        if (!(curs2 & M_EDIT_BUF_SIZE)) {
+		    g_free (edit->buffers2[curs2 >> S_EDIT_BUF_SIZE]);
+		    edit->buffers2[curs2 >> S_EDIT_BUF_SIZE] = 0;
+	        }
+	        curs2--;
+	    }
+	    edit->curs1 = curs1;
+	    edit->curs2 = curs2;
 	    if (c == '\n') {
 		edit->curs_line++;
 		edit->force |= REDRAW_LINE_ABOVE;
