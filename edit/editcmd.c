@@ -776,16 +776,16 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 /* returns 1 on success */
 int edit_save_confirm_cmd (WEdit * edit)
 {
-    gchar *f;
-    
+    gchar *f = NULL;
+
     if (edit_confirm_save) {
 	f = g_strconcat (_(" Confirm save file? : "), edit->filename, " ", NULL);
 	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel"))){
 	    g_free(f);
 	    return 0;
 	}
+        g_free(f);
     }
-    g_free(f);
     return edit_save_cmd (edit);
 }
 
