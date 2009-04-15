@@ -1059,7 +1059,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
 		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, w - 2, h - 2, 0);
+    query_list = listbox_new (1, 1, h - 2, w - 2, NULL);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
@@ -2278,7 +2278,7 @@ listbox_event (Gpm_Event *event, void *data)
 }
 
 WListbox *
-listbox_new (int y, int x, int width, int height, lcback callback)
+listbox_new (int y, int x, int height, int width, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
@@ -2635,7 +2635,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 WGroupbox *
-groupbox_new (int x, int y, int width, int height, const char *title)
+groupbox_new (int y, int x, int height, int width, const char *title)
 {
     WGroupbox *g = g_new (WGroupbox, 1);
 

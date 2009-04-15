@@ -172,13 +172,13 @@ init_configure (void)
 		    _("Configure options"), DLG_CENTER | DLG_REVERSE);
 
     add_widget (conf_dlg,
-		groupbox_new (PX, PY, first_width, PANEL_OPTIONS + 2, title1));
+		groupbox_new (PY, PX, PANEL_OPTIONS + 2, first_width, title1));
 
     add_widget (conf_dlg,
-		groupbox_new (RX, RY, first_width, PAUSE_OPTIONS + 2, title2));
+		groupbox_new (RY, RX, PAUSE_OPTIONS + 2, first_width, title2));
 
     add_widget (conf_dlg,
-		groupbox_new (OX, OY, second_width, OTHER_OPTIONS + 2, title3));
+		groupbox_new (OY, OX, OTHER_OPTIONS + 2, second_width, title3));
 
     add_widget (conf_dlg,
 		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON,
