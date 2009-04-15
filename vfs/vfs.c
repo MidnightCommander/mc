@@ -67,7 +67,7 @@ struct vfs_openfile {
 
 struct vfs_dirinfo{
     DIR *info;
-    str_conv_t converter;
+    GIConv converter;
 };
 
 
@@ -383,14 +383,14 @@ vfs_supported_enconding (const char *encoding) {
  */ 
 static int
 _vfs_translate_path (const char *path, int size,
-                     str_conv_t defcnv, GString *buffer)
+                     GIConv defcnv, GString *buffer)
 {
     const char *semi;
     const char *ps;
     const char *slash;
     int state = 0;
     static char encoding[16];
-    str_conv_t coder;
+    GIConv coder;
     int ms;
 
     if (size == 0) return 0;    
