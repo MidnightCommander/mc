@@ -67,7 +67,7 @@ struct vfs_openfile {
 
 struct vfs_dirinfo{
     DIR *info;
-    str_conv_t converter;
+    GIConv converter;
 };
 
 
@@ -382,47 +382,47 @@ vfs_supported_enconding (const char *encoding) {
  * buffer - used to store result of translation
  */ 
 static int
-_vfs_translate_path (const char *path, int size,
-                     str_conv_t defcnv, GString *buffer)
+_vfs_translate_path (const char *path, int size, 
+                     GIConv defcnv, GString *buffer)
 {
     const char *semi;
     const char *ps;
     const char *slash;
     int state = 0;
     static char encoding[16];
-    str_conv_t coder;
+    GIConv coder;
     int ms;
-
+    
     if (size == 0) return 0;    
     size = (size > 0) ? size : strlen (path);
-
+    
     /* try found #end: */
     semi = g_strrstr_len (path, size, "#enc:");
     if (semi != NULL) {
         /* first must be translated part before #enc: */
         ms = semi - path;
-
+        
         /* remove '/' before #enc */
         ps = str_cget_prev_char (semi);
         if (ps[0] == PATH_SEP) ms = ps - path;
-
+        
         state = _vfs_translate_path (path, ms, defcnv, buffer);
-
+        
         if (state != 0) return state;
         /* now can be translated part after #enc: */
-
+        
         semi+= 5;
         slash = strchr (semi, PATH_SEP);
         // ignore slashes after size;
         if (slash - path >= size) slash = NULL;
-
+        
         ms = (slash != NULL) ? slash - semi : strlen (semi);
         ms = min (ms, sizeof (encoding) - 1);
         // limit encoding size (ms) to path size (size)
         if (semi + ms > path + size) ms = path + size - semi;
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
-
+        
         switch (vfs_supported_enconding (encoding)) {
             case 1:
                 coder = str_crt_conv_to (encoding);
@@ -459,7 +459,7 @@ char *
 vfs_translate_path (const char *path) 
 {
     int state;
-
+    
     g_string_set_size(vfs_str_buffer,0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
     // strict version
@@ -1218,7 +1218,7 @@ vfs_shut (void)
 	    (*vfs->done) (vfs);
 
     g_slist_free (vfs_openfiles);
-
+    
     g_string_free (vfs_str_buffer, TRUE);
 }
 
