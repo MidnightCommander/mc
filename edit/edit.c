@@ -164,12 +164,11 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
     int width = 0;
 
     if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0) {
-        *char_width = 1;
+        *char_width = 0;
         return '\n';
     }
 
     str = edit_get_byte_ptr (edit, byte_index);
-
     res = g_utf8_get_char_validated (str, -1);
 
     if ( res < 0 ) {

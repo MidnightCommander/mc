@@ -73,11 +73,22 @@ static void status_string (WEdit * edit, char *s, int w)
      * as decimal and as hex.
      */
     if (edit->curs1 < edit->last_byte) {
-	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
-		    is_printable (cur_byte) ? cur_byte : '.',
-		    (int) cur_byte,
-		    (unsigned) cur_byte);
+        if ( !edit->utf8 ) {
+	    unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
+	    g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
+		        is_printable (cur_byte) ? cur_byte : '.',
+		        (int) cur_byte,
+		        (unsigned) cur_byte);
+	} else {
+	    int cw = 1;
+	    unsigned int cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+	    if ( cw > 0 ) {
+	        g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
+		            (unsigned) cur_utf,
+		            (unsigned) cur_utf);
+	    }
+	
+	}
     } else {
 	strcpy (byte_str, "<EOF>");
     }
