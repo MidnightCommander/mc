@@ -439,10 +439,10 @@ init_layout (void)
 		    dialog_colors, layout_callback, "[Layout]",
 		    _("Layout"), DLG_CENTER | DLG_REVERSE);
 
-    add_widget (layout_dlg, groupbox_new (4, 2, first_width, 6, title1));
-    add_widget (layout_dlg, groupbox_new (4, 8, first_width, 4, title2));
+    add_widget (layout_dlg, groupbox_new (2, 4, 6, first_width, title1));
+    add_widget (layout_dlg, groupbox_new (8, 4, 4, first_width, title2));
     add_widget (layout_dlg,
-		groupbox_new (5 + first_width, 2, second_width, 10,
+		groupbox_new (2, 5 + first_width, 10, second_width,
 			      title3));
 
     add_widget (layout_dlg,

@@ -2840,7 +2840,7 @@ edit_completion_dialog (WEdit * edit, int max_len, int word_len,
 
     /* create the listbox */
     compl_list =
-	listbox_new (1, 1, compl_dlg_w - 2, compl_dlg_h - 2, NULL);
+	listbox_new (1, 1, compl_dlg_h - 2, compl_dlg_w - 2, NULL);
 
     /* add the dialog */
     add_widget (compl_dlg, compl_list);
@@ -3078,7 +3078,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
                           DLG_COMPACT);
 
     /* create the listbox */
-    def_list = listbox_new (1, 1, def_dlg_w - 2, def_dlg_h - 2, NULL);
+    def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, NULL);
 
     /* add the dialog */
     add_widget (def_dlg, def_list);

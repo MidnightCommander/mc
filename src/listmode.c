@@ -173,10 +173,10 @@ init_listmode (char *oldlistformat)
 		    "Listing format edit", DLG_CENTER | DLG_REVERSE);
 
     add_widget (listmode_dlg,
-		groupbox_new (UX, UY, 63, 4, "General options"));
-    add_widget (listmode_dlg, groupbox_new (UX, UY + 4, 18, 11, "Items"));
+		groupbox_new (UY, UX, 4, 63, "General options"));
+    add_widget (listmode_dlg, groupbox_new (UY + 4, UX, 11, 18, "Items"));
     add_widget (listmode_dlg,
-		groupbox_new (UX + 20, UY + 4, 43, 11, "Item options"));
+		groupbox_new (UY + 4, UX + 20, 11, 43, "Item options"));
 
     for (i = 0;
 	 i < sizeof (listmode_but) / sizeof (struct listmode_button); i++)
@@ -205,7 +205,7 @@ init_listmode (char *oldlistformat)
     radio_justify->sel = 1;
 
     /* get new listbox */
-    l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, NULL);
+    l_listmode = listbox_new (UY + 5, UX + 1, 9, 16, NULL);
 
     if (strncmp (oldlistformat, "full ", 5) == 0) {
 	format_width = 1;
