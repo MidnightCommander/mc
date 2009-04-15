@@ -139,14 +139,19 @@ char *edit_get_buf_ptr (WEdit * edit, long byte_index)
 {
     unsigned long p;
 
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-	return NULL;
+    if (byte_index >= (edit->curs1 + edit->curs2) ) {
+        byte_index -= 1;
+    };
+
+    if ( byte_index < 0 ) {
+        return NULL;
+    }
 
     if (byte_index >= edit->curs1) {
-	p = edit->curs1 + edit->curs2 - byte_index - 1;
-	return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE]);
+	p = edit->curs1 + edit->curs2 - 1;
+	return (char *) (edit->buffers2[p >> S_EDIT_BUF_SIZE] + (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
     } else {
-	return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE]);
+	return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] + (0 & M_EDIT_BUF_SIZE));
     }
 }
 
@@ -169,7 +174,7 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
 
     if ( res < 0 ) {
         ch = *str;
-        width = 1;
+        width = 0;
     } else {
         ch = res;
         /* Calculate UTF-8 char width */
@@ -196,23 +201,33 @@ int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
     gunichar ch;
     gchar *next_ch = NULL;
     int width = 0;
+    gchar *prn_buf=NULL;
 
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0) {
+    if ( byte_index > 0 ) {
+        byte_index--;
+    }
+
+    ch = edit_get_utf (edit, byte_index, &width);
+
+    if ( width == 1 ) {
+        *char_width = width;
+        return ch;
+    }
+
+    if ( byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0 ) {
         *char_width = 1;
-        return '\n';
+        return 0;
     }
 
     str = edit_get_byte_ptr (edit, byte_index);
     buf = edit_get_buf_ptr (edit, byte_index);
-
     /* get prev utf8 char */
     str = g_utf8_find_prev_char (buf, str);
 
     res = g_utf8_get_char_validated (str, -1);
-
     if ( res < 0 ) {
         ch = *str;
-        width = 1;
+        width = 0;
     } else {
         ch = res;
         /* Calculate UTF-8 char width */
