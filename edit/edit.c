@@ -168,6 +168,7 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
         return '\n';
     }
 
+
     str = edit_get_byte_ptr (edit, byte_index);
     res = g_utf8_get_char_validated (str, -1);
 
@@ -200,28 +201,27 @@ int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
     gunichar ch;
     gchar *next_ch = NULL;
     int width = 0;
-    gchar *prn_buf=NULL;
 
     if ( byte_index > 0 ) {
         byte_index--;
     }
 
     ch = edit_get_utf (edit, byte_index, &width);
-
     if ( width == 1 ) {
         *char_width = width;
         return ch;
     }
 
     if ( byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0 ) {
-        *char_width = 1;
+        *char_width = 0;
         return 0;
     }
 
     str = edit_get_byte_ptr (edit, byte_index);
     buf = edit_get_buf_ptr (edit, byte_index);
     /* get prev utf8 char */
-    str = g_utf8_find_prev_char (buf, str);
+    if ( str != buf )
+        str = g_utf8_find_prev_char (buf, str);
 
     res = g_utf8_get_char_validated (str, -1);
     if ( res < 0 ) {
