@@ -172,7 +172,7 @@ init_panelize (void)
 
     /* get new listbox */
     l_panelize =
-	listbox_new (UY + 1, UX + 1, panelize_dlg->cols - 12, 10, NULL);
+	listbox_new (UY + 1, UX + 1, 10, panelize_dlg->cols - 12, NULL);
 
     while (current) {
 	listbox_add_item (l_panelize, 0, 0, current->label, current);

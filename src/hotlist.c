@@ -652,7 +652,7 @@ init_hotlist (int list_type)
     }
     /* get new listbox */
     l_hotlist =
-	listbox_new (UY + 1, UX + 1, COLS - 2 * UX - 8, LINES - 14,
+	listbox_new (UY + 1, UX + 1, LINES - 14, COLS - 2 * UX - 8,
 		     l_call);
 
     /* Fill the hotlist with the active VFS or the hotlist */
@@ -700,8 +700,8 @@ init_movelist (int list_type, struct hotlist *item)
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
     l_movelist =
-	listbox_new (UY + 1, UX + 1, movelist_dlg->cols - 2 * UX - 2,
-		     movelist_dlg->lines - 8, l_call);
+	listbox_new (UY + 1, UX + 1, movelist_dlg->lines - 8,
+			movelist_dlg->cols - 2 * UX - 2, l_call);
 
     fill_listbox ();
 

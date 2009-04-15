@@ -66,7 +66,7 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
 	create_dlg (ypos, xpos, lines + 6, cols + 4, dialog_colors, NULL,
 		    help, title, DLG_CENTER | DLG_REVERSE);
 
-    listbox->list = listbox_new (2, 2, cols, lines, 0);
+    listbox->list = listbox_new (2, 2, lines, cols, NULL);
 
     add_widget (listbox->dlg,
 		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,

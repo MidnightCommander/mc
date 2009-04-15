@@ -774,15 +774,13 @@ show_dir (WPanel *panel)
 		     panel->widget.y, panel->widget.x,
 		     panel->widget.lines, panel->widget.cols);
 
-#ifdef HAVE_SLANG
     if (show_mini_info) {
-	SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
-			   panel->widget.x, SLSMG_LTEE_CHAR);
-	SLsmg_draw_object (panel->widget.y + llines (panel) + 2,
-			   panel->widget.x + panel->widget.cols - 1,
-			   SLSMG_RTEE_CHAR);
+	widget_move (&panel->widget, llines (panel) + 2, 0);
+	tty_print_alt_char (ACS_LTEE);
+	widget_move (&panel->widget, llines (panel) + 2,
+			panel->widget.cols - 1);
+	tty_print_alt_char (ACS_RTEE);
     }
-#endif				/* HAVE_SLANG */
 
     if (panel->active)
 	attrset (REVERSE_COLOR);

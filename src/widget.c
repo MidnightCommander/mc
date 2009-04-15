@@ -156,10 +156,9 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
         if (b->text.hotkey != NULL) {
             if (g_ascii_tolower ((gchar)b->text.hotkey[0]) ==
                 g_ascii_tolower ((gchar)parm)) {
-                
-	    button_callback (w, WIDGET_KEY, ' ');
-	    return MSG_HANDLED;
-	}
+		button_callback (w, WIDGET_KEY, ' ');
+		return MSG_HANDLED;
+	    }
         }
 	return MSG_NOT_HANDLED;
 
@@ -204,7 +203,7 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
         widget_selectcolor (w, b->selected, FALSE);
         widget_move (w, 0, 0);
-        
+
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
                 addstr ("[< ");
@@ -221,11 +220,11 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 
         addstr (str_term_form (b->text.start));
-            
+
         if (b->text.hotkey != NULL) {
             widget_selectcolor (w, b->selected, TRUE);
             addstr (str_term_form (b->text.hotkey));
-	widget_selectcolor (w, b->selected, FALSE);
+	    widget_selectcolor (w, b->selected, FALSE);
         }
 
         if (b->text.end != NULL) {
@@ -243,7 +242,6 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
                 addstr ("]");
                 break;
 	}
-      
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -411,7 +409,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    widget_move (&r->widget, i, 0);
 
             addstr ((r->sel == i) ? "(*) " : "( ) ");
-            
+
             addstr (str_term_form (r->texts[i].start));
 
             if (r->texts[i].hotkey != NULL) {
@@ -431,7 +429,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
         }
         g_free (r->texts);
         return MSG_HANDLED;
-        
+
     default:
 	return default_proc (msg, parm);
     }
@@ -501,10 +499,10 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
         if (c->text.hotkey != NULL) {
             if (g_ascii_tolower ((gchar)c->text.hotkey[0]) == 
                 g_ascii_tolower ((gchar)parm)) {
-                
-	    check_callback (w, WIDGET_KEY, ' ');	/* make action */
-	    return MSG_HANDLED;
-	}
+
+		check_callback (w, WIDGET_KEY, ' ');	/* make action */
+		return MSG_HANDLED;
+	    }
 	}
 	return MSG_NOT_HANDLED;
 
@@ -535,7 +533,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
             addstr (str_term_form (c->text.hotkey));
             widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
         }
-        
+
         if (c->text.end != NULL) {
             addstr (str_term_form (c->text.end));
 	}
@@ -624,7 +622,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		
 		widget_move (&l->widget, y, 0);
                 addstr (str_fit_to_term (p, l->widget.cols, J_LEFT));
-                
+
                 if (q == NULL)
 		    break;
                 q[0] = c;
@@ -704,7 +702,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_INIT)
 	return MSG_HANDLED;
-    
+
     /* We don't want to get the focus */
     if (msg == WIDGET_FOCUS)
 	return MSG_NOT_HANDLED;
@@ -717,7 +715,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	else {
 	    int percentage, columns;
 	    long total = g->max, done = g->current;
-	    
+	
 	    if (total <= 0 || done < 0) {
 	        done = 0;
 	        total = 100;
@@ -738,6 +736,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 	return MSG_HANDLED;
     }
+
     return default_proc (msg, parm);
 }
 
@@ -1060,7 +1059,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
 		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, w - 2, h - 2, 0);
+    query_list = listbox_new (1, 1, h - 2, w - 2, NULL);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
@@ -1230,16 +1229,18 @@ insert_char (WInput *in, int c_code)
 
     if (c_code == -1)
 	return MSG_NOT_HANDLED;
-    
-    if (in->charpoint >= MB_LEN_MAX) return 1;
+
+    if (in->charpoint >= MB_LEN_MAX)
+	return MSG_HANDLED;
 
     in->charbuf[in->charpoint] = c_code;
     in->charpoint++;
 
     res = str_is_valid_char (in->charbuf, in->charpoint);
     if (res < 0) {
-        if (res != -2) in->charpoint = 0; /* broken multibyte char, skip */
-        return 1;
+        if (res != -2)
+	    in->charpoint = 0; /* broken multibyte char, skip */
+        return MSG_HANDLED;
     }
 
     in->need_push = 1;
@@ -1253,7 +1254,7 @@ insert_char (WInput *in, int c_code)
             in->current_max_size = new_length;
 	}
     }
-    
+
     if (strlen (in->buffer) + in->charpoint < in->current_max_size) {
         /* bytes from begin */
         size_t ins_point = str_offset_to_pos (in->buffer, in->point); 
@@ -1267,7 +1268,7 @@ insert_char (WInput *in, int c_code)
         memcpy(in->buffer + ins_point, in->charbuf, in->charpoint); 
 	in->point++;
     }
-    
+
     in->charpoint = 0;
     return MSG_HANDLED;
 }
@@ -2090,11 +2091,11 @@ static cb_ret_t
 listbox_key (WListbox *l, int key)
 {
     int i;
-    int j = 0;
+    cb_ret_t j = MSG_NOT_HANDLED;
 
     if (!l->list)
 	return MSG_NOT_HANDLED;
-    
+
     switch (key){
     case KEY_HOME:
     case KEY_A1:
@@ -2125,14 +2126,16 @@ listbox_key (WListbox *l, int key)
     case KEY_NPAGE:
     case XCTRL('v'):
 	for (i = 0; i < l->height-1; i++)
-	    j |= listbox_fwd (l);
-	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
+	    if (listbox_fwd (l) != MSG_NOT_HANDLED)
+		j = MSG_HANDLED;
+	return j;
 	
     case KEY_PPAGE:
     case ALT('v'):
 	for (i = 0; i < l->height-1; i++)
-	    j |= listbox_back (l);
-	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
+	    if (listbox_back (l) != MSG_NOT_HANDLED)
+		j = MSG_HANDLED;
+	return j;
     }
     return MSG_NOT_HANDLED;
 }
@@ -2275,7 +2278,7 @@ listbox_event (Gpm_Event *event, void *data)
 }
 
 WListbox *
-listbox_new (int y, int x, int width, int height, lcback callback)
+listbox_new (int y, int x, int height, int width, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
@@ -2434,7 +2437,7 @@ buttonbat_get_button_width ()
 {
     int result = COLS / 10;
     return (result >= 7) ? result : 7;
-}        
+}
 
 
 static cb_ret_t
@@ -2632,7 +2635,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 WGroupbox *
-groupbox_new (int x, int y, int width, int height, const char *title)
+groupbox_new (int y, int x, int height, int width, const char *title)
 {
     WGroupbox *g = g_new (WGroupbox, 1);
 

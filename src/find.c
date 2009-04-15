@@ -944,7 +944,7 @@ setup_gui (void)
     add_widget (find_dlg, status_label);
 
     find_list =
-	listbox_new (2, 2, FIND2_X - 4, FIND2_Y - 9, 0);
+	listbox_new (2, 2, FIND2_Y - 9, FIND2_X - 4, NULL);
     add_widget (find_dlg, find_list);
 }
 
