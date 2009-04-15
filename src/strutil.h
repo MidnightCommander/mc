@@ -65,18 +65,17 @@
 #define J_CENTER_LEFT_FIT  0x14
 
 // redefinition of iconv_t, so is not needed include iconv.h in other files.
-typedef iconv_t str_conv_t;
 #define INVALID_CONV ((iconv_t) (-1))
 
 // standard convertors 
-extern str_conv_t str_cnv_to_term;
-extern str_conv_t str_cnv_from_term;
+extern GIConv str_cnv_to_term;
+extern GIConv str_cnv_from_term;
 // from terminal encoding to terminal encoding
-extern str_conv_t str_cnv_not_convert;
+extern GIConv str_cnv_not_convert;
 
 // all functions in str_class must be defined for every encoding
 struct str_class {
-    int (*vfs_convert_to) (str_conv_t coder, const char *string, 
+    int (*vfs_convert_to) (GIConv coder, const char *string, 
                         int size, GString *buffer);           //I
     void (*insert_replace_char) (GString *buffer);
     int (*is_valid_string) (const char *);                              //I
@@ -195,7 +194,7 @@ void str_uninit_strings ();
  * return 0 if conversion was successfully, ESTR_PROBLEM if ch contains only 
  * part of characters, ESTR_FAILURE if conversion is not possible
  */
-int str_translate_char (str_conv_t conv, char *ch, size_t ch_size, 
+int str_translate_char (GIConv conv, char *ch, size_t ch_size, 
                         char *output, size_t out_size);
 
 /* test, if text is valid in terminal encoding

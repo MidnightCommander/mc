@@ -330,71 +330,8 @@ str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
     g_string_append_c (buffer, '?');
 }
 
-/*
 static int
-_str_utf8_vfs_convert_to (str_conv_t coder, const char *string,
-			  int size, GString * buffer)
-{
-    int state = 0;
-    size_t left;
-    size_t nconv;
-    char *composed, *c;
-    const char *start, *end;
-
-    errno = 0;
-
-    size = (size >= 0) ? size : strlen (string);
-    if (coder == (iconv_t) (-1))
-	return ESTR_FAILURE;
-    iconv (coder, NULL, NULL, NULL, NULL);
-
-    start = string;
-    while (size > 0)
-    {
-	end = strchr (start, PATH_SEP);
-	end = (end == NULL || end >= start + size) ? start + size : end + 1;
-	if (g_utf8_validate (start, end - start, NULL))
-	{
-	    c = composed =
-		g_utf8_normalize (start, end - start,
-				  G_NORMALIZE_DEFAULT_COMPOSE);
-	    left = strlen (composed);
-	    while (((int) left) > 0)
-	    {
-		nconv =
-		    iconv (coder, &c, &left, &(buffer->actual),
-			   &(buffer->remain));
-		if (nconv == (size_t) (-1))
-		{
-		    switch (errno)
-		    {
-		    case EINVAL:
-			g_free (composed);
-			return ESTR_FAILURE;
-		    case EILSEQ:
-			str_utf8_questmark_sustb (&c, &left, buffer);
-			state = ESTR_PROBLEM;
-			break;
-		    case E2BIG:
-			str_incrase_buffer (buffer);
-			break;
-		    }
-		}
-	    }
-	    g_free (composed);
-	}
-	else
-	{
-	    g_string_append_len (buffer, start, end - start);
-	}
-	size -= end - start;
-	start = end;
-    }
-    return state;
-}
-*/
-static int
-str_utf8_vfs_convert_to (str_conv_t coder, const char *string,
+str_utf8_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
 {
     int result;
