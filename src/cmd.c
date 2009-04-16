@@ -63,6 +63,9 @@
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
+#include "selcodepage.h"	/* do_select_codepage () */
+#include "charsets.h"		/* get_codepage_id () */
+
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0

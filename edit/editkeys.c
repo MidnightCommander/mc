@@ -45,6 +45,7 @@
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/selcodepage.h"	/* do_select_codepage() */
 #include "../src/main.h"	/* display_codepage */
+#include "../src/strutil.h"	/* str_isutf8 () */
 
 /*
  * Ordinary translations.  Note that the keys listed first take priority
@@ -258,7 +259,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
         if (!edit->utf8) {
             /* input from 8-bit locale */
-            if ( str_isutf8 (get_codepage_id( display_codepage )) == 1 ) {
+            if ( utf8_display ) {
                 c = convert_from_input_c (x_key);
                 if (is_printable (c)) {
                     char_for_insertion = c;

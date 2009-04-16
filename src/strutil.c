@@ -304,6 +304,8 @@ str_test_encoding_class (const char *encoding, const char **table)
 {
     int t;
     int result = 0;
+    if ( encoding == NULL )
+        return result;
 
     for (t = 0; table[t] != NULL; t++)
     {
@@ -331,7 +333,7 @@ str_choose_str_functions ()
 }
 
 int
-str_isutf8 (char *codeset_name)
+str_isutf8 (const char *codeset_name)
 {
     int result = 0;
     if (str_test_encoding_class (codeset_name, str_utf8_encodings))
