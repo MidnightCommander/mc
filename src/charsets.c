@@ -29,6 +29,8 @@
 
 #include "global.h"
 #include "charsets.h"
+#include "strutil.h"		/* utf-8 functions */
+#include "main.h"
 
 int n_codepages = 0;
 
@@ -249,4 +251,34 @@ convert_from_input (char *str)
 	str++;
     }
 }
+
+unsigned char
+convert_from_utf_to_current (char *str)
+{
+    if (!str)
+        return '.';
+
+    unsigned char ch;
+    char *cp_to = NULL;
+    GIConv conv;
+    GString *translated_data;
+
+    translated_data = g_string_new ("");
+    cp_to = g_strdup ( get_codepage_id ( display_codepage ) );
+    conv = str_crt_conv_to (cp_to);
+
+    if (conv != INVALID_CONV) {
+        if (str_convert (conv, str, translated_data) != ESTR_FAILURE) {
+            ch = translated_data->str[0];
+        } else {
+            ch = '.';
+        }
+        str_close_conv (conv);
+    }
+    g_free (cp_to);
+    g_string_free (translated_data, TRUE);
+    return ch;
+
+}
+
 #endif				/* HAVE_CHARSET */

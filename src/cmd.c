@@ -1395,9 +1395,9 @@ static char
     char *result;
     char *semi;
     char *slash;
-    
+
     semi = g_strrstr (path, "#enc:");
-    
+
     if (semi != NULL) {
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL) {
@@ -1410,23 +1410,26 @@ static char
     } else {
         result = g_strconcat (path, "/#enc:", encoding, NULL);
     }
-    
+
     return result;
 }
 
 static void
 set_panel_encoding (WPanel *panel)
 {
-    char *encoding;
+    char *encoding = NULL;
     char *cd_path;
-            
-    encoding = input_dialog ("Encoding", "Select encoding", NULL, "");
-    
+
+    do_select_codepage ();
+
+    encoding = g_strdup( get_codepage_id ( source_codepage ) );
+
     if (encoding) {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
         if (!do_panel_cd (MENU_PANEL, cd_path, 0))
             message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
         g_free (cd_path);
+        g_free (encoding);
     }
 }
 

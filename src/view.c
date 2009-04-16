@@ -2457,24 +2457,24 @@ view_display_text (WView * view)
                 } else {
                     addch ('.');
 	}
-	    } else {
-		GString *comb = g_string_new ("");
-		if (str_isprint (info.cact)) {
-		    g_string_append(comb,info.cact);
-		} else {
-		    g_string_append(comb,".");
-		}
-		while (str_iscombiningmark (info.cnxt)) {
-		    view_read_continue (view, &info);
-		    g_string_append(comb,info.cact);
-		}
-		addstr (str_term_form (comb->str));
-		g_string_free (comb, TRUE);
-	    }
+            } else {
+                GString *comb = g_string_new ("");
+                if (str_isprint (info.cact)) {
+                    g_string_append(comb,info.cact);
+                } else {
+                    g_string_append(comb,".");
+                }
+                while (str_iscombiningmark (info.cnxt)) {
+                    view_read_continue (view, &info);
+                    g_string_append(comb,info.cact);
+                }
+                addstr (str_term_form (comb->str));
+                g_string_free (comb, TRUE);
+            }
 	} else {
-	    while (str_iscombiningmark (info.cnxt)) {
-		view_read_continue (view, &info);
-	    }
+            while (str_iscombiningmark (info.cnxt)) {
+                view_read_continue (view, &info);
+            }
 	}
         col+= w;
 
@@ -2780,7 +2780,6 @@ view_get_line_at (WView *view, offset_type from, GString * buffer,
             continue;
 
         if (view_read_test_nroff_back (view, &info)) {
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	    g_string_truncate (buffer, buffer->len-1);
             continue;
 	}

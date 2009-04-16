@@ -382,7 +382,7 @@ vfs_supported_enconding (const char *encoding) {
  * buffer - used to store result of translation
  */ 
 static int
-_vfs_translate_path (const char *path, int size,
+_vfs_translate_path (const char *path, int size, 
                      GIConv defcnv, GString *buffer)
 {
     const char *semi;
@@ -459,7 +459,7 @@ char *
 vfs_translate_path (const char *path) 
 {
     int state;
-
+    
     g_string_set_size(vfs_str_buffer,0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
     // strict version
@@ -1218,7 +1218,7 @@ vfs_shut (void)
 	    (*vfs->done) (vfs);
 
     g_slist_free (vfs_openfiles);
-
+    
     g_string_free (vfs_str_buffer, TRUE);
 }
 

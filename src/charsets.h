@@ -6,7 +6,6 @@
 #define UNKNCHAR '\001'
 
 #define CHARSETS_INDEX "mc.charsets"
-
 extern int n_codepages;
 
 extern unsigned char conv_displ[256];
@@ -27,6 +26,7 @@ const char *init_translation_table (int cpsource, int cpdisplay);
 void convert_to_display (char *str);
 void convert_from_input (char *str);
 void convert_string (unsigned char *str);
+unsigned char convert_from_utf_to_current (char *str);
 
 /* Convert single characters */
 static inline int
