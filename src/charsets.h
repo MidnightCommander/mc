@@ -26,8 +26,8 @@ const char *init_translation_table (int cpsource, int cpdisplay);
 void convert_to_display (char *str);
 void convert_from_input (char *str);
 void convert_string (unsigned char *str);
-unsigned char convert_from_utf_to_current (char *str);
-
+unsigned char convert_from_utf_to_current (const char *str);
+unsigned char convert_from_utf_to_current_c (const int input_char);
 /* Convert single characters */
 static inline int
 convert_to_display_c (int c)
