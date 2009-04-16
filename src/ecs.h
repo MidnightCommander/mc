@@ -22,6 +22,10 @@
    MA 02110-1301, USA.
  */
 
+/** \file  ecs.h
+ *  \brief Header: basic support for extended character sets
+ */
+
 #ifndef MC_ECS_H
 #define MC_ECS_H
 

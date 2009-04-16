@@ -19,6 +19,10 @@
    Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
    02110-1301 USA.  */
 
+/** \file  eregex.h
+ *  \brief Header: data structures and routines for the regular expression library
+ */
+
 #ifndef USE_INCLUDED_REGEX
 #include <regex.h>
 #else

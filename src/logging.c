@@ -21,6 +21,10 @@
    MA 02110-1301, USA.
  */
 
+/** \file logging.c
+ *  \brief Source: provides a log file to ease tracing the program
+ */
+
 #include <config.h>
 
 #include <stdarg.h>

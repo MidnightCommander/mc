@@ -1,3 +1,8 @@
+
+/** \file wtools.h
+ *  \brief Header: widget based utility functions
+ */
+
 #ifndef MC_WTOOLS_H
 #define MC_WTOOLS_H
 

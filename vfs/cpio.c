@@ -18,6 +18,12 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file
+ *  \brief Source: Virtual File System: GNU Tar file system.
+ *  \author Jan Hudec
+ *  \date 2000
+ */
+
 #include <config.h>
 
 #include <errno.h>

@@ -18,6 +18,12 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file cmd.c
+ *  \brief Source: routines invoked by a function key
+ *
+ *  They normally operate on the current panel.
+ */
+
 #include <config.h>
 
 #include <errno.h>

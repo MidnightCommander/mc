@@ -18,6 +18,13 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/**
+ * \file
+ * \brief Source: Utilities for VFS modules
+ * \author Miguel de Icaza
+ * \date 1995, 1996
+ */
+
 #include <config.h>
 
 #include <ctype.h>

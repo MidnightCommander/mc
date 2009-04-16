@@ -1,3 +1,11 @@
+
+/** \file pipethrough.h
+ *  \brief Header: a module for piping
+ *
+ *  Pipe a buffer through a child command and receive two containing
+ *  the stdout and stderr output of the child process.
+ */
+
 #ifndef PIPETHROUGH_H
 #define PIPETHROUGH_H
 

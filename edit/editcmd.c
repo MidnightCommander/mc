@@ -22,6 +22,12 @@
 
 */
 
+/** \file
+ *  \brief Source: editor high level editing commands
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ */
+
 /* #define PIPE_BLOCKS_SO_READ_BYTE_BY_BYTE */
 
 #include <config.h>

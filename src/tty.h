@@ -1,12 +1,16 @@
+
+/** \file tty.h
+ *  \brief Header: %interface to the terminal controlling library
+ *
+ *  This file is the %interface to the terminal controlling library:
+ *  ncurses, slang or the built-in slang. It provides an additional
+ *  layer of abstraction above the "real" libraries to keep the number
+ *  of ifdefs in the other files small.
+ */
+
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
-/*
-    This file is the interface to the terminal controlling library---
-    ncurses, slang or the built-in slang. It provides an additional
-    layer of abstraction above the "real" libraries to keep the number
-    of ifdefs in the other files small.
- */
 
 #ifdef HAVE_SLANG
 #   include "myslang.h"

@@ -20,12 +20,20 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/* Warning: funtions like extfs_lstat() have right to destroy any
+/**
+ * \file
+ * \brief Source: Virtual File System switch code
+ * \author Miguel de Icaza
+ * \author Jakub Jelinek
+ * \author Pavel Machek
+ * \date 1995, 1998
+ * \warning funtions like extfs_lstat() have right to destroy any
  * strings you pass to them. This is acutally ok as you g_strdup what
- * you are passing to them, anyway; still, beware.  */
-
-/* Namespace: exports *many* functions with vfs_ prefix; exports
-   parse_ls_lga and friends which do not have that prefix. */
+ * you are passing to them, anyway; still, beware.
+ *
+ * Namespace: exports *many* functions with vfs_ prefix; exports
+ * parse_ls_lga and friends which do not have that prefix.
+ */
 
 #include <config.h>
 
@@ -54,7 +62,7 @@
 #include "smbfs.h"
 #include "local.h"
 
-/* They keep track of the current directory */
+/** They keep track of the current directory */
 static struct vfs_class *current_vfs;
 static char *current_dir;
 
@@ -69,7 +77,7 @@ static GSList *vfs_openfiles;
 
 static struct vfs_class *localfs_class;
 
-/* Create new VFS handle and put it to the list */
+/** Create new VFS handle and put it to the list */
 static int
 vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
 {
@@ -84,7 +92,7 @@ vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
     return h->handle;
 }
 
-/* Function to match handle, passed to g_slist_find_custom() */
+/** Function to match handle, passed to g_slist_find_custom() */
 static gint
 vfs_cmp_handle (gconstpointer a, gconstpointer b)
 {
@@ -93,7 +101,7 @@ vfs_cmp_handle (gconstpointer a, gconstpointer b)
     return ((struct vfs_openfile *) a)->handle != (long) b;
 }
 
-/* Find VFS class by file handle */
+/** Find VFS class by file handle */
 static inline struct vfs_class *
 vfs_op (int handle)
 {
@@ -110,7 +118,7 @@ vfs_op (int handle)
     return h->vclass;
 }
 
-/* Find private file data by file handle */
+/** Find private file data by file handle */
 static inline void *
 vfs_info (int handle)
 {
@@ -127,7 +135,7 @@ vfs_info (int handle)
     return h->fsinfo;
 }
 
-/* Free open file data for given file handle */
+/** Free open file data for given file handle */
 static inline void
 vfs_free_handle (int handle)
 {
@@ -153,7 +161,7 @@ vfs_register_class (struct vfs_class *vfs)
     return 1;
 }
 
-/* Return VFS class for the given prefix */
+/** Return VFS class for the given prefix */
 static struct vfs_class *
 vfs_prefix_to_class (char *prefix)
 {
@@ -173,9 +181,10 @@ vfs_prefix_to_class (char *prefix)
     return NULL;
 }
 
-/* Strip known vfs suffixes from a filename (possible improvement: strip
-   suffix from last path component). 
-   Returns a malloced string which has to be freed. */
+/** Strip known vfs suffixes from a filename (possible improvement: strip
+ *  suffix from last path component).
+ *  \return a malloced string which has to be freed.
+ */
 char *
 vfs_strip_suffix_from_filename (const char *filename)
 {
@@ -218,7 +227,7 @@ path_magic (const char *path)
     return 1;
 }
 
-/*
+/**
  * Splits path '/p1#op/inpath' into inpath,op; returns which vfs it is.
  * What is left in path is p1. You still want to g_free(path), you DON'T
  * want to free neither *inpath nor *op
@@ -562,7 +571,7 @@ int mc_fstat (int handle, struct stat *buf) {
     return result;
 }
 
-/*
+/**
  * Return current directory.  If it's local, reread the current directory
  * from the OS.  You must g_strdup() whatever this function returns.
  */
@@ -603,9 +612,9 @@ vfs_setup_wd (void)
     current_vfs = vfs_get_class (current_dir);
 }
 
-/*
- * Return current directory.  If it's local, reread the current directory
- * from the OS.  Put directory to the provided buffer.
+/**
+ * Return current directory. If it's local, reread the current directory
+ * from the OS. Put directory to the provided buffer.
  */
 char *
 mc_get_current_wd (char *buffer, int size)
@@ -616,7 +625,7 @@ mc_get_current_wd (char *buffer, int size)
     return buffer;
 }
 
-/*
+/**
  * Return current directory without any OS calls.
  */
 char *
@@ -640,7 +649,7 @@ off_t mc_lseek (int fd, off_t offset, int whence)
     return result;
 }
 
-/*
+/**
  * remove //, /./ and /../
  */
 
@@ -674,7 +683,7 @@ vfs_canon (const char *path)
     }
 }
 
-/*
+/**
  * VFS chdir.
  * Return 0 on success, -1 on failure.
  */

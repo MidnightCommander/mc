@@ -1,3 +1,8 @@
+
+/** \file win.h
+ *  \brief Header: curses utilities
+ */
+
 #ifndef MC_WIN_H
 #define MC_WIN_H
 

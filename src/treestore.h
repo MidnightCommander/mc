@@ -1,3 +1,10 @@
+
+/** \file treestore.h
+ *  \brief Header: tree store
+ *
+ *  Contains a storage of the file system tree representation.
+ */
+
 #ifndef MC_TREE_STORE_H
 #define MC_TREE_STORE_H
 

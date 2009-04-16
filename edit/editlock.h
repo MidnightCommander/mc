@@ -1,3 +1,11 @@
+
+/** \file
+ *  \brief Header: editor file locking
+ *  \author Adam Byrtek
+ *  \date 2003
+ *  Look at editlock.c for more details
+ */
+
 #ifndef MC_EDIT_LOCK_H
 #define MC_EDIT_LOCK_H
 

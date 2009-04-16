@@ -1,3 +1,8 @@
+
+/** \file main-widgets.h
+ *  \brief Header: provides definitions for some widgets
+ */
+
 #ifndef MC_MAIN_WIDGETS_H
 #define MC_MAIN_WIDGETS_H
 

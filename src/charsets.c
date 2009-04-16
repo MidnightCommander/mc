@@ -17,6 +17,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file charsets.c
+ *  \brief Source: Text conversion from one charset to another
+ */
+
 #include <config.h>
 
 #ifdef HAVE_CHARSET

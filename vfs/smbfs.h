@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System: smb file system
+ */
+
 #ifndef MC_VFS_SMBFS_H
 #define MC_VFS_SMBFS_H
 

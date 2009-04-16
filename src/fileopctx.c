@@ -21,6 +21,13 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file fileopctx.c
+ *  \brief Source: file operation contexts
+ *  \date 1998-2007
+ *  \author Federico Mena <federico@nuclecu.unam.mx>
+ *  \author Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
 #include <config.h>
 
 #include <unistd.h>
@@ -30,13 +37,13 @@
 
 
 /**
- * file_op_context_new:
- * 
+ * \fn FileOpContext * file_op_context_new (FileOperation op)
+ * \param op file operation struct
+ * \return The newly-created context, filled with the default file mask values.
+ *
  * Creates a new file operation context with the default values.  If you later want
- * to have a user interface for this, call #file_op_context_create_ui().
- * 
- * Return value: The newly-created context, filled with the default file mask values.
- **/
+ * to have a user interface for this, call file_op_context_create_ui().
+ */
 FileOpContext *
 file_op_context_new (FileOperation op)
 {
@@ -59,12 +66,12 @@ file_op_context_new (FileOperation op)
 
 
 /**
- * file_op_context_destroy:
- * @ctx: The file operation context to destroy.
- * 
+ * \fn void file_op_context_destroy (FileOpContext *ctx)
+ * \param ctx The file operation context to destroy.
+ *
  * Destroys the specified file operation context and its associated UI data, if
  * it exists.
- **/
+ */
 void
 file_op_context_destroy (FileOpContext *ctx)
 {
@@ -75,7 +82,7 @@ file_op_context_destroy (FileOpContext *ctx)
 
     regfree (&ctx->rx);
 
-    /* FIXME: do we need to free ctx->dest_mask? */
+    /** \todo FIXME: do we need to free ctx->dest_mask? */
 
     g_free (ctx);
 }

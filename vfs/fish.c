@@ -23,12 +23,20 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/*
+/**
+ * \file
+ * \brief Source: Virtual File System: FISH implementation for transfering files over
+ * shell connections
+ * \author Pavel Machek
+ * \author Michal Svec
+ * \date 1998, 2000
+ *
+ * Derived from ftpfs.c
  * Read README.fish for protocol specification.
  *
  * Syntax of path is: /#sh:user@host[:Cr]/path
- *	where C means you want compressed connection,
- *	and r means you want to use rsh
+ *      where C means you want compressed connection,
+ *      and r means you want to use rsh
  *
  * Namespace: fish_vfs_ops exported.
  */

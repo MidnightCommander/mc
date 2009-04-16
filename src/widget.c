@@ -25,6 +25,10 @@
 
  */
 
+/** \file widget.c
+ *  \brief Source: widgets
+ */
+
 #include <config.h>
 
 #include <assert.h>

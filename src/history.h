@@ -1,3 +1,8 @@
+
+/** \file history.h
+ *  \brief Header: defines history section names
+ */
+
 #ifndef __MC_HISTORY_H
 #define __MC_HISTORY_H
 

@@ -1,3 +1,8 @@
+
+/** \file widget.h
+ *  \brief Header: widgets
+ */
+
 #ifndef MC_WIDGET_H
 #define MC_WIDGET_H
 

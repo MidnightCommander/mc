@@ -1,3 +1,10 @@
+
+/** \file
+ *  \brief Header: cooledit.bindings file parser
+ *  \author Vitja Makarov
+ *  \date 2005
+ */
+
 #ifndef MC_USERMAP_H
 #define MC_USERMAP_H
 

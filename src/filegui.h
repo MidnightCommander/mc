@@ -1,3 +1,8 @@
+
+/** \file  filegui.h
+ *  \brief Header: file management GUI for the text mode edition
+ */
+
 #ifndef MC_FILEGUI_H
 #define MC_FILEGUI_H
 

@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System: Network utilities
+ */
+
 #ifndef MC_VFS_TCPUTIL_H
 #define MC_VFS_TCPUTIL_H
 

@@ -1,3 +1,8 @@
+
+/** \file setup.h
+ *  \brief Header: setup loading/saving
+ */
+
 #ifndef MC_SETUP_H
 #define MC_SETUP_H
 

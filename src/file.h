@@ -1,4 +1,7 @@
-/* File and directory operation routines for Midnight Commander */
+
+/** \file  file.h
+ *  \brief Header: File and directory operation routines
+ */
 
 #ifndef MC_FILE_H
 #define MC_FILE_H

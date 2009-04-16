@@ -21,6 +21,12 @@
    02110-1301, USA.
 */
 
+/** \file
+ *  \brief Source: editor text drawing
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ */
+
 #include <config.h>
 #include <stdlib.h>
 #include <stdio.h>

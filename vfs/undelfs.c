@@ -26,12 +26,16 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/* Assumptions:
+/**
+ * \file
+ * \brief Source: UnDel File System
+ *
+ * Assumptions:
  *
  * 1. We don't handle directories (thus undelfs_get_path is easy to write).
  * 2. Files are on the local file system (we do not support vfs files
  *    because we would have to provide an io_manager for the ext2fs tools,
- *    and I don't think it would be too useful to undelete files 
+ *    and I don't think it would be too useful to undelete files
  */
  
 #include <config.h>

@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: local FS
+ */
+
 #ifndef MC_VFS_LOCAL_H
 #define MC_VFS_LOCAL_H
 

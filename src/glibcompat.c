@@ -17,9 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-/*
- * Following code was copied from glib to GNU Midnight Commander to
- * provide compatibility with older versions of glib.
+/** \file glibcompat.c
+ *  \brief Source: old glib compatibility
+ *
+ *  Following code was copied from glib to GNU Midnight Commander to
+ *  provide compatibility with older versions of glib.
  */
 
 #include <config.h>

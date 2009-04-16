@@ -20,6 +20,17 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/**
+ * \file
+ * \brief Source: Virtual File System: garbage collection code
+ * \author Miguel de Icaza
+ * \author Jakub Jelinek
+ * \author Pavel Machek
+ * \author Pavel Roskin
+ * \date 1995, 1998, 2003
+ */
+
+
 #include <config.h>
 
 #include <stdio.h>

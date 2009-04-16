@@ -16,6 +16,10 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file cons.handler.c
+ *  \brief Source: client %interface for General purpose Linux console save/restore server
+ */
+
 #include <config.h>
 
 #include <signal.h>

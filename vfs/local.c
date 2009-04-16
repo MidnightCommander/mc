@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Source: local FS
+ */
+
 #include <config.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -13,11 +19,12 @@
 #include "vfs.h"
 #include "local.h"
 
-/* Note: Some of this functions are not static. This has rather good
+/**
+ * Note: Some of this functions are not static. This has rather good
  * reason: exactly same functions would have to appear in sfs.c. This
  * saves both computer's memory and my work.  <pavel@ucw.cz>
- * */
-    
+ */
+
 static struct vfs_class vfs_local_ops;
 
 static void *

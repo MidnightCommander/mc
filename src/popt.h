@@ -2,6 +2,10 @@
    file accompanying popt source distributions, available from
    ftp://ftp.redhat.com/pub/code/popt */
 
+/** \file popt.h
+ *  \brief Header: a module for parsing command line options
+ */
+
 #ifndef MC_POPT_H
 #define MC_POPT_H
 

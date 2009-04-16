@@ -17,6 +17,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file dialog.c
+ *  \brief Source: dialog box features module
+ */
+
 #include <config.h>
 
 #include <ctype.h>

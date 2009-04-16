@@ -1,3 +1,10 @@
+
+/**
+ * \file
+ * \brief Header: Virtual File System directory structure
+ */
+
+
 #ifndef MC_VFS_XDIRENTRY_H
 #define MC_VFS_XDIRENTRY_H
 

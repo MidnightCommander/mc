@@ -22,6 +22,10 @@
 
 /* }}} */
 
+/** \file background.c
+ *  \brief Source: Background support
+ */
+
 #include <config.h>
 
 #ifdef WITH_BACKGROUND

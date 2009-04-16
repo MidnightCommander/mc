@@ -1,3 +1,8 @@
+
+/** \file subshell.h
+ *  \brief Header: concurrent shell support
+ */
+
 #ifndef MC_SUBSHELL_H
 #define MC_SUBSHELL_H
 

@@ -16,6 +16,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
+/** \file rxvt.c
+ *  \brief Source: gives output lines on rxvt with a special rxvt patch
+ */
+
 #include <config.h>
 
 #include <stdio.h>

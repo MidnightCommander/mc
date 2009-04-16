@@ -18,6 +18,12 @@
    02111-1307, USA.
 */
 
+/** \file
+ *  \brief Source: cooledit.bindings file parser
+ *  \author Vitja Makarov
+ *  \date 2005
+ */
+
 #include <config.h>
 
 #include <ctype.h>

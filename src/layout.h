@@ -1,3 +1,8 @@
+
+/** \file layout.h
+ *  \brief Header: panel layout module
+ */
+
 #ifndef MC_LAYOUT_H
 #define MC_LAYOUT_H
 

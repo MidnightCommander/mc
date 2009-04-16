@@ -17,6 +17,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
+/** \file achown.c
+ *  \brief Source: Contains functions for advanced chowning
+ */
+
 #include <config.h>
 
 #include <errno.h>

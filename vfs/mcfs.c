@@ -21,7 +21,15 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
-/* Namespace: exports mcfs_vfs_ops, tcp_invalidate_socket */
+/**
+ * \file
+ * \brief Source: Midnight Commander file system
+ * \author Miguel de Icaza
+ * \author Andrej Borsenkow
+ * \author Norbert Warmuth
+ *
+ * Namespace: exports mcfs_vfs_ops, tcp_invalidate_socket
+ */
 
 #include <config.h>
 

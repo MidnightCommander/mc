@@ -20,6 +20,13 @@
    02110-1301, USA.
 */
 
+/** \file
+ *  \brief Source: editor low level data handling and cursor fundamentals
+ *  edit.h - main include file
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ */
+
 #ifndef MC_EDIT_H
 #define MC_EDIT_H
 

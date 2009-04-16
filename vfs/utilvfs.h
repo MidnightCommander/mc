@@ -1,3 +1,11 @@
+
+/**
+ * \file
+ * \brief Header: Utilities for VFS modules
+ * \author Miguel de Icaza
+ * \date 1995, 1996
+ */
+
 #ifndef MC_VFS_UTILVFS_H
 #define MC_VFS_UTILVFS_H
 

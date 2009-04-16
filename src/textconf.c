@@ -18,6 +18,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file textconf.c
+ *  \brief Source: prints features specific for this build
+ */
+
 #include <config.h>
 
 #include <limits.h>

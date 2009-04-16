@@ -23,6 +23,10 @@
 
  */
 
+/** \file wtools.c
+ *  \brief Source: widget based utility functions
+ */
+
 #include <config.h>
 
 #include <stdarg.h>

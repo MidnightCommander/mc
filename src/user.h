@@ -1,3 +1,8 @@
+
+/** \file user.h
+ *  \brief Header: user menu implementation
+ */
+
 #ifndef MC_USER_H
 #define MC_USER_H
 

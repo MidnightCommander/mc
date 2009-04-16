@@ -20,6 +20,15 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/**
+ * \file
+ * \brief Source: Virtual File System: External file system
+ * \author Jakub Jelinek
+ * \author Pavel Machek
+ * \author Andrew T. Veliath
+ * \date 1995, 1998, 1999
+ */
+
 /* Namespace: init_extfs */
 
 #include <config.h>

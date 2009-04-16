@@ -20,6 +20,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
+/** \file panelize.c
+ *  \brief Source: External panelization module
+ */
+
 #include <config.h>
 
 #include <errno.h>

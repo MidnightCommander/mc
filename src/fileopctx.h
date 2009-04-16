@@ -1,9 +1,15 @@
+
+/** \file fileopctx.h
+ *  \brief Header: file operation contexts
+ *  \date 1998
+ *  \author Federico Mena <federico@nuclecu.unam.mx>
+ *  \author Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
 /* File operation contexts for the Midnight Commander
  *
  * Copyright (C) 1998 Free Software Foundation, Inc.
  *
- * Authors: Federico Mena <federico@nuclecu.unam.mx>
- *          Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
 #ifndef FILEOPCTX_H

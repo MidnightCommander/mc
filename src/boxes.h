@@ -1,3 +1,8 @@
+
+/** \file boxes.h
+ *  \brief Header: Some misc dialog boxes for the program
+ */
+
 #ifndef MC_BOXES_H
 #define MC_BOXES_H
 

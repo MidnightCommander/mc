@@ -1,3 +1,8 @@
+
+/** \file util.h
+ *  \brief Header: various utilities
+ */
+
 #ifndef MC_UTIL_H
 #define MC_UTIL_H
 

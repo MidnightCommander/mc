@@ -1,3 +1,9 @@
+
+/**
+ * \file
+ * \brief Header: VFS implemntation (?)
+ */
+
 #ifndef MC_VFS_IMPL_H
 #define MC_VFS_IMPL_H
 

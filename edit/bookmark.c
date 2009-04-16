@@ -20,6 +20,12 @@
    02110-1301, USA.
  */
 
+/** \file
+ *  \brief Source: editor book mark handling
+ *  \author Paul Sheer
+ *  \date 1996, 1997
+ */
+
 #include <config.h>
 
 #include <ctype.h>

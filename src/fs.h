@@ -1,3 +1,8 @@
+
+/** \file fs.h
+ *  \brief Header: fs compatibility definitions
+ */
+
 /* Include file to use opendir/closedir/readdir */
 
 #ifndef MC_FS_H

@@ -1,3 +1,8 @@
+
+/** \file panel.h
+ *  \brief Header: defines WPanel structure
+ */
+
 #ifndef MC_PANEL_H
 #define MC_PANEL_H
 

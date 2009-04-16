@@ -24,6 +24,15 @@
    MA 02110-1301, USA.
  */
 
+/** \file
+ *  \brief This is a template file (here goes brief description).
+ *  \author Author1
+ *  \author Author2
+ *  \date 20xx
+ *
+ *  Detailed description.
+ */
+
 #include <config.h>
 
 #include <System Headers> /* see maint/headers.txt for details */

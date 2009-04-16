@@ -15,6 +15,13 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  */
 
+/** \file glibcompat.h
+ *  \brief Header: old glib compatibility
+ *
+ *  Following code was copied from glib to GNU Midnight Commander to
+ *  provide compatibility with older versions of glib.
+ */
+
 #ifndef MC_GLIBCOMPAT_H
 #define MC_GLIBCOMPAT_H
 

@@ -16,6 +16,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/** \file mfmt.c
+ *  \brief Source: sets bold and underline for mail files
+ */
+
 #include <stdio.h>
 
 enum states {

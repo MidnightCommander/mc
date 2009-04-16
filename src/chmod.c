@@ -17,6 +17,10 @@
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.  
  */
 
+/** \file chmod.c
+ *  \brief Source: chmod command
+ */
+
 #include <config.h>
 
 #include <errno.h>

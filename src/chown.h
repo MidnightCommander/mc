@@ -1,3 +1,8 @@
+
+/** \file chown.h
+ *  \brief Header: chown command
+ */
+
 #ifndef MC_CHOWN_H
 #define MC_CHOWN_H
 
