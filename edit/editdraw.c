@@ -330,7 +330,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	eval_marks (edit, &m1, &m2);
 
 	if (row <= edit->total_lines - edit->start_line) {
-		long tws;
+		long tws = 0;
 	    if (use_colors && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
@@ -432,10 +432,16 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    /* fallthrough */
 		default:
-		    if (!edit->utf8) {
-		        c = convert_to_display_c (c);
+		    if ( utf8_display ) {
+		        if ( !edit->utf8 ) {
+		            //c = convert_from_utf_to_current_c (c);
+		        }
 		    } else {
-		        //FIXME: if need
+		        if ( edit->utf8 ) {
+		            //c = convert_to_utf (c);
+		        } else {
+		            c = convert_to_display_c (c);
+		        }
 		    }
 		    /* Caret notation for control characters */
 		    if (c < 32) {
