@@ -206,7 +206,11 @@ regex/\.trpm$
 	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
 
 # RPM packages (SuSE uses *.spm for source packages)
-regex/\.(rpm|spm)$
+regex/\.(src\.rpm|spm)$
+	Open=%cd %p#srpm
+	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
+
+regex/\.rpm$
 	Open=%cd %p#rpm
 	View=%view{ascii} if rpm --nosignature --version >/dev/null 2>&1; then RPM="rpm --nosignature" ; else RPM="rpm" ; fi ; $RPM -qivlp --scripts %f
 
