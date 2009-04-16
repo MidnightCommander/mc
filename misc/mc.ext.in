@@ -224,6 +224,15 @@ regex/\.u?deb$
 	Open=%cd %p#deb
 	View=%view{ascii} dpkg-deb -I %f && echo && dpkg-deb -c %f
 
+# dpkg
+shell/.debd
+        Open=%cd %p#debd
+        View=%view{ascii} dpkg -s `echo %p | sed 's/\([0-9a-z.-]*\).*/\1/'`
+# apt
+shell/.deba
+        Open=%cd %p#deba
+        View=%view{ascii} apt-cache show `echo %p | sed 's/\([0-9a-z.-]*\).*/\1/'`
+
 # ISO9660
 regex/\.iso$
 	Open=%cd %p#iso9660
