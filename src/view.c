@@ -3652,12 +3652,13 @@ static void view_cmk_moveto_bottom (void *w, int n) {
 static void
 view_select_encoding (WView *view) 
 {
-    char *enc;
+    char *enc = NULL;
     GIConv conv;
     struct cache_line *line;
 
-    enc = input_dialog ("Encoding", "Paste encoding", NULL, "");
+    do_select_codepage ();
 
+    enc = g_strdup( get_codepage_id ( source_codepage ) );
     if (enc != NULL) {
         conv = str_crt_conv_from (enc);
         if (conv != (iconv_t)(-1)) {
@@ -3667,7 +3668,9 @@ view_select_encoding (WView *view)
             line = view_offset_to_line (view, view->dpy_start);
             view_set_first_showed (view, line);
         }
+    g_free(enc);
     }
+
 }
 
 
