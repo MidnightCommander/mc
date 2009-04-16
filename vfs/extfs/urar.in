@@ -22,6 +22,10 @@ for dir in $PATH; do
     fi
 done
 
+if [ ! -x $UNRAR -a -x $RAR ]; then
+    UNRAR=$RAR
+fi
+
 mcrarfs_list ()
 {
      $UNRAR v -c- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
