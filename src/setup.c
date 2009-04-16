@@ -59,6 +59,8 @@
 #   include "../edit/edit.h"
 #endif
 
+#include "../src/strutil.h"	/* str_isutf8 () */
+
 
 extern char *find_ignore_dirs;
 
@@ -589,6 +591,8 @@ load_setup (void)
 	    source_codepage = get_codepage_index( cpname );
     }
     init_translation_table( source_codepage, display_codepage );
+    if ( get_codepage_id( display_codepage ) )
+        utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
 #endif /* HAVE_CHARSET */
 }
 

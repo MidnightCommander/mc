@@ -152,7 +152,15 @@ int eight_bit_clean = 1;
  * This is reported to break on many terminals (xterm, qansi-m).
  */
 int full_eight_bits = 0;
+
 #endif				/* !HAVE_CHARSET */
+
+/*
+ * If utf-8 terminal utf8_display = 1
+ * Display bits set UTF-8
+ *
+*/
+int utf8_display = 0;
 
 /* If true use the internal viewer */
 int use_internal_view = 1;

@@ -569,7 +569,8 @@ sel_charset_button (int action)
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
 	: codepages[new_display_codepage].name;
-
+    if ( cpname )
+        utf8_display = str_isutf8 (cpname);
     /* avoid strange bug with label repainting */
     g_snprintf (buf, sizeof (buf), "%-27s", cpname);
     label_set_text (cplabel, buf);
