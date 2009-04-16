@@ -342,7 +342,6 @@ str_utf8_vfs_convert_to (GIConv coder, const char *string,
 	result = 0;
     }
     else
-//	result = _str_utf8_vfs_convert_to (coder, string, size, buffer);
 	result = str_nconvert (coder, (char *) string, size, buffer);
 
     return result;
@@ -386,44 +385,31 @@ str_utf8_make_make_term_form (const char *text, size_t length)
 	    }
 	}
     }
-
-    while (length != 0 && text[0] != '\0')
-    {
-	uni = g_utf8_get_char_validated (text, -1);
-	if ((uni != (gunichar) (-1)) && (uni != (gunichar) (-2)))
-	{
-	    if (g_unichar_isprint (uni))
-	    {
-		left = g_unichar_to_utf8 (uni, actual);
-		actual += left;
-		if (!str_unichar_iscombiningmark (uni))
-		{
-		    result.width++;
-		    if (g_unichar_iswide (uni))
-			result.width++;
-		}
-		else
-		    result.compose = 1;
-	    }
-	    else
-	    {
-		actual[0] = '.';
-		actual++;
-		result.width++;
-	    }
-	    text = g_utf8_next_char (text);
-	}
-	else
-	{
-	    text++;
-	    //actual[0] = '?';
-	    memcpy (actual, replch, strlen (replch));
-	    actual += strlen (replch);
-	    result.width++;
-	}
-	if (length != (size_t) (-1))
-	    length--;
-    }
+    
+    while (length != 0 && text[0] != '\0') {
+        uni = g_utf8_get_char_validated (text, -1);
+        if ((uni != (gunichar)(-1)) && (uni != (gunichar)(-2))) {
+            if (g_unichar_isprint(uni)) {
+                left = g_unichar_to_utf8 (uni, actual);
+                actual+= left;
+                if (!str_unichar_iscombiningmark (uni)) {
+                    result.width++;
+                    if (g_unichar_iswide(uni)) result.width++;
+                } else result.compose = 1;
+            } else {
+                actual[0] = '.';
+                actual++;
+                result.width++;
+            }
+            text = g_utf8_next_char (text);
+        } else {
+            text++;
+            //actual[0] = '?';
+            memcpy (actual, replch, strlen (replch));
+            actual+= strlen (replch);
+            result.width++;
+        }
+        if (length != (size_t) (-1)) length--;    }
     actual[0] = '\0';
 
     return &result;
@@ -1218,51 +1204,48 @@ str_utf8_create_key_gen (const char *text, int case_sen,
 			 gchar * (*keygen) (const gchar *, gssize size))
 {
     char *result;
+    
+    if (case_sen) {
+        result = str_utf8_normalize (text);
+    } else {
+        const char *start, *end;
+        char *fold, *key;
+        GString *fixed = g_string_new ("");
 
-    if (case_sen)
-    {
-	result = str_utf8_normalize (text);
-    }
-    else
-    {
-	const char *start, *end;
-	char *fold, *key;
-	GString *fixed = g_string_new ("");
+        start = text;
+        while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
+        {
+            if (start != end)
+            {
+                fold = g_utf8_casefold (start, end - start);
+                key = keygen (fold, -1);
+                g_string_append (fixed, key);
+                g_free (key);
+                g_free (fold);
+            }
+            g_string_append_c (fixed, end[0]);
+            start = end + 1;
+        }
 
-	start = text;
-	while (!g_utf8_validate (start, -1, &end) && start[0] != '\0')
-	{
-	    if (start != end)
-	    {
-		fold = g_utf8_casefold (start, end - start);
-		key = keygen (fold, -1);
-		g_string_append (fixed, key);
-		g_free (key);
-		g_free (fold);
-	    }
-	    g_string_append_c (fixed, end[0]);
-	    start = end + 1;
-	}
-
-	if (start == text)
-	{
-	    fold = g_utf8_casefold (text, -1);
-	    result = keygen (fold, -1);
-	    g_free (fold);
-	}
-	else
-	{
-	    if (start[0] != '\0' && start != end)
-	    {
-		fold = g_utf8_casefold (start, end - start);
-		key = keygen (fold, -1);
-		g_string_append (fixed, key);
-		g_free (key);
-		g_free (fold);
-	    }
-	    result = g_strdup (fixed->str);
-	}
-	g_string_free (fixed, TRUE);
+        if (start == text)
+        {
+            fold = g_utf8_casefold (text, -1);
+            result = keygen (fold, -1);
+            g_free (fold);
+        }
+        else
+        {
+            if (start[0] != '\0' && start != end)
+            {
+                fold = g_utf8_casefold (start, end - start);
+                key = keygen (fold, -1);
+                g_string_append (fixed, key);
+                g_free (key);
+                g_free (fold);
+            }
+            result = g_strdup (fixed->str);
+        }
+        g_string_free (fixed, TRUE);
     }
     return result;
 }
@@ -1292,7 +1275,7 @@ str_utf8_release_key (char *key, int case_sen)
     g_free (key);
 }
 
-struct str_class
+struct str_class 
 str_utf8_init ()
 {
     struct str_class result;

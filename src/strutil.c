@@ -37,9 +37,9 @@
 
 //names, that are used for utf-8 
 static const char *str_utf8_encodings[] = {
-    "utf-8",
-    "utf8",
-    NULL
+        "utf-8", 
+        "utf8", 
+        NULL
 };
 
 // standard 8bit encodings, no wide or multibytes characters
@@ -284,17 +284,11 @@ str_translate_char (GIConv conv, char *keys, size_t ch_size,
     left = (ch_size == (size_t) (-1)) ? strlen (keys) : ch_size;
 
     cnv = g_iconv (conv, &keys, &left, &output, &out_size);
-    if (cnv == (size_t) (-1))
-    {
-	if (errno == EINVAL)
-	    return ESTR_PROBLEM;
-	else
-	    return ESTR_FAILURE;
-    }
-    else
-    {
-	output[0] = '\0';
-	return 0;
+    if (cnv == (size_t)(-1)) {
+        if (errno == EINVAL) return ESTR_PROBLEM; else return ESTR_FAILURE;
+    } else {
+        output[0] = '\0';
+        return 0;
     }
 }
 
@@ -316,7 +310,6 @@ str_test_encoding_class (const char *encoding, const char **table)
 	result += (g_ascii_strncasecmp (encoding, table[t],
 					strlen (table[t])) == 0);
     }
-
     return result;
 }
 
@@ -351,8 +344,9 @@ str_isutf8 (char *codeset_name)
 void
 str_init_strings (const char *termenc)
 {
-    codeset = g_strdup ((termenc != NULL)
-			? termenc : str_detect_termencoding ());
+    codeset = g_strdup ((termenc != NULL) 
+                        ? termenc 
+                        : str_detect_termencoding ());
 
     str_cnv_not_convert = g_iconv_open (codeset, codeset);
     if (str_cnv_not_convert == INVALID_CONV)
@@ -425,7 +419,7 @@ str_get_next_char (char *text)
 const char *
 str_cget_next_char (const char *text)
 {
-    used_class.cnext_char (&text);
+    used_class.cnext_char(&text);
     return text;
 }
 

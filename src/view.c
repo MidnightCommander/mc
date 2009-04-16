@@ -2457,24 +2457,24 @@ view_display_text (WView * view)
                 } else {
                     addch ('.');
 	}
-	    } else {
-		GString *comb = g_string_new ("");
-		if (str_isprint (info.cact)) {
-		    g_string_append(comb,info.cact);
-		} else {
-		    g_string_append(comb,".");
-		}
-		while (str_iscombiningmark (info.cnxt)) {
-		    view_read_continue (view, &info);
-		    g_string_append(comb,info.cact);
-		}
-		addstr (str_term_form (comb->str));
-		g_string_free (comb, TRUE);
-	    }
+            } else {
+                GString *comb = g_string_new ("");
+                if (str_isprint (info.cact)) {
+                    g_string_append(comb,info.cact);
+                } else {
+                    g_string_append(comb,".");
+                }
+                while (str_iscombiningmark (info.cnxt)) {
+                    view_read_continue (view, &info);
+                    g_string_append(comb,info.cact);
+                }
+                addstr (str_term_form (comb->str));
+                g_string_free (comb, TRUE);
+            }
 	} else {
-	    while (str_iscombiningmark (info.cnxt)) {
-		view_read_continue (view, &info);
-	    }
+            while (str_iscombiningmark (info.cnxt)) {
+                view_read_continue (view, &info);
+            }
 	}
         col+= w;
 
@@ -2780,7 +2780,6 @@ view_get_line_at (WView *view, offset_type from, GString * buffer,
             continue;
 
         if (view_read_test_nroff_back (view, &info)) {
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	    g_string_truncate (buffer, buffer->len-1);
             continue;
 	}
@@ -3653,12 +3652,13 @@ static void view_cmk_moveto_bottom (void *w, int n) {
 static void
 view_select_encoding (WView *view) 
 {
-    char *enc;
+    char *enc = NULL;
     GIConv conv;
     struct cache_line *line;
 
-    enc = input_dialog ("Encoding", "Paste encoding", NULL, "");
+    do_select_codepage ();
 
+    enc = g_strdup( get_codepage_id ( source_codepage ) );
     if (enc != NULL) {
         conv = str_crt_conv_from (enc);
         if (conv != (iconv_t)(-1)) {
@@ -3668,7 +3668,9 @@ view_select_encoding (WView *view)
             line = view_offset_to_line (view, view->dpy_start);
             view_set_first_showed (view, line);
         }
+    g_free(enc);
     }
+
 }
 
 

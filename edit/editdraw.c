@@ -66,6 +66,9 @@
 static void status_string (WEdit * edit, char *s, int w)
 {
     char byte_str[16];
+    unsigned char cur_byte = 0;
+    unsigned int cur_utf = 0;
+    int cw = 1;
 
     /*
      * If we are at the end of file, print <EOF>,
@@ -74,28 +77,32 @@ static void status_string (WEdit * edit, char *s, int w)
      */
     if (edit->curs1 < edit->last_byte) {
         if ( !edit->utf8 ) {
-	    unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	    g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
-		        is_printable (cur_byte) ? cur_byte : '.',
+	    cur_byte = edit_get_byte (edit, edit->curs1);
+	
+	    g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X",
 		        (int) cur_byte,
 		        (unsigned) cur_byte);
 	} else {
-	    int cw = 1;
-	    unsigned int cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+	    cur_utf = edit_get_utf (edit, edit->curs1, &cw);
 	    if ( cw > 0 ) {
 	        g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
 		            (unsigned) cur_utf,
 		            (unsigned) cur_utf);
+	    } else {
+	        cur_utf = edit_get_byte (edit, edit->curs1);
+	        g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
+	                    (int) cur_utf,
+	                    (unsigned) cur_utf);
 	    }
 	
 	}
     } else {
-	strcpy (byte_str, "<EOF>");
+	strcpy (byte_str, "<EOF>     ");
     }
 
     /* The field lengths just prevent the status line from shortening too much */
     g_snprintf (s, w,
-		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s C:%s",
+		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s cp:%s",
 		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 		edit->modified ? 'M' : '-',
 		edit->macro_i < 0 ? '-' : 'R',
@@ -110,7 +117,9 @@ static void status_string (WEdit * edit, char *s, int w)
 		edit->curs1,
 		edit->last_byte,
 		byte_str,
-		get_codepage_id( source_codepage ));
+		get_codepage_id ( source_codepage )
+		);
+
 }
 
 static inline void

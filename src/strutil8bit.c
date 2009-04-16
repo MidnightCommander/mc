@@ -490,7 +490,7 @@ str_8bit_offset_to_pos (const char *text, size_t length)
 static int
 str_8bit_column_to_pos (const char *text, size_t pos)
 {
-    return (int) pos;
+    return (int)pos;
 }
 
 static char *
