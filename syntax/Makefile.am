@@ -6,18 +6,19 @@ SYNTAXFILES =			\
 	assembler.syntax	\
 	c.syntax		\
 	changelog.syntax	\
- 	debian-changelog.syntax \
- 	debian-control.syntax   \
+	debian-changelog.syntax	\
+	debian-control.syntax	\
 	debian-description.syntax \
- 	debian-sources-list.syntax \
+	debian-sources-list.syntax \
 	cs.syntax		\
 	css.syntax		\
-  cxx.syntax      \
+	cxx.syntax		\
 	d.syntax		\
 	diff.syntax		\
 	dos.syntax		\
 	ebuild.syntax		\
 	eiffel.syntax		\
+	f90.syntax		\
 	fortran.syntax		\
 	haskell.syntax		\
 	html.syntax		\
@@ -40,7 +41,7 @@ SYNTAXFILES =			\
 	php.syntax		\
 	po.syntax		\
 	povray.syntax		\
-	procmail.syntax \
+	procmail.syntax		\
 	python.syntax		\
 	ruby.syntax		\
 	sh.syntax		\

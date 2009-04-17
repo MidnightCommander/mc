@@ -1,0 +1,240 @@
+# ---------------------------------------------------
+# f90.syntax
+# FORTRAN 90/95 language freeform syntax highlighting template.
+# Provides syntax highlighting rules for the
+# FORTRAN programming language.
+#
+# Based on FORTRAN77 version fortran.syntax
+# Author: John Theal
+# Email: jtheal@renegadelinuxbox.dhs.org
+# December 7, 1999
+# ---------------------------------------------------
+
+# Heavily modified by Paul Sheer <psheer@obsidian.co.za>.
+# Adjusted to Fortran 90 by Norbert Nemec <Norbert@Nemec-online.de>.
+
+context default
+# keywords at the beginning of line
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} brightred
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\}\{0123456789\} brightred
+    keyword linestart \{0123456789\}\{0123456789\}\{0123456789\} brightred
+    keyword linestart \{0123456789\}\{0123456789\} brightred
+    keyword linestart \{0123456789\} brightred
+
+# structure
+    keyword whole MODULE white black
+    keyword whole SUBROUTINE white black
+    keyword whole PROGRAM white black
+    keyword whole FUNCTION white black
+    keyword whole CONTAINS white black
+    keyword whole END white black
+
+# boolean and logical expressions / operators
+    keyword .and. brightred/orange
+    keyword .eq. brightred/orange
+    keyword .eqv. brightred/orange
+    keyword .false. brightred/orange
+    keyword .ge. brightred/orange
+    keyword .gt. brightred/orange
+    keyword .le. brightred/orange
+    keyword .lt. brightred/orange
+    keyword .ne. brightred/orange
+    keyword .neqv. brightred/orange
+    keyword .not. brightred/orange
+    keyword .or. brightred/orange
+    keyword .true. brightred/orange
+    keyword whole lge brightred/orange
+    keyword whole lgt brightred/orange
+    keyword whole lle brightred/orange
+    keyword whole llt brightred/orange
+
+# declarations
+    keyword whole ALLOCATABLE brightcyan
+    keyword whole BLOCK brightcyan
+    keyword whole CHARACTER brightcyan
+    keyword whole COMMON brightcyan
+    keyword whole COMPLEX brightcyan
+    keyword whole DATA brightcyan
+    keyword whole DIMENSION brightcyan
+    keyword whole DOUBLE brightcyan
+    keyword whole EXTERNAL brightcyan
+    keyword whole FORMAT brightcyan
+    keyword whole IMPLICIT brightcyan
+    keyword whole INTEGER brightcyan
+    keyword whole INTENT brightcyan
+    keyword whole INTRINSIC brightcyan
+    keyword whole LOGICAL brightcyan
+    keyword whole NONE brightcyan
+    keyword whole ONLY brightcyan
+    keyword whole OPTIONAL brightcyan
+    keyword whole PARAMETER brightcyan
+    keyword whole POINTER brightcyan
+    keyword whole PRECISION brightcyan
+    keyword whole PRIVATE brightcyan
+    keyword whole PUBLIC brightcyan
+    keyword whole REAL brightcyan
+    keyword whole USE brightcyan
+
+# general programming syntax
+    keyword whole allocate brightgreen
+    keyword whole assign brightgreen
+    keyword whole call brightgreen
+    keyword whole continue brightgreen
+    keyword whole do brightgreen
+    keyword whole else brightgreen
+    keyword whole elseif brightgreen
+    keyword whole end brightgreen
+    keyword whole enddo brightgreen
+    keyword whole endif brightgreen
+    keyword whole for brightgreen
+    keyword whole goto brightgreen
+    keyword whole if brightgreen
+    keyword whole pause brightgreen
+    keyword whole return brightgreen
+    keyword whole stop brightgreen
+    keyword whole then brightgreen
+    keyword whole to brightgreen
+    keyword whole while brightgreen
+
+# headers
+    keyword whole entry brightgreen
+
+# I/O functions
+# may have optional equal signs after them: 'keyword ='
+    keyword whole access brightmagenta
+    keyword whole backspace brightmagenta
+    keyword whole blank brightmagenta
+    keyword whole close brightmagenta
+    keyword whole direct brightmagenta
+    keyword whole endfile brightmagenta
+    keyword whole err brightmagenta
+    keyword whole exist brightmagenta
+    keyword whole file brightmagenta
+    keyword whole fmt brightmagenta
+    keyword whole form brightmagenta
+    keyword whole formatted brightmagenta
+    keyword whole inquire brightmagenta
+    keyword whole iostat brightmagenta
+    keyword whole name brightmagenta
+    keyword whole named brightmagenta
+    keyword whole nextrec brightmagenta
+    keyword whole number brightmagenta
+    keyword whole open brightmagenta
+    keyword whole opened brightmagenta
+    keyword whole print brightmagenta
+    keyword whole read brightmagenta
+    keyword whole rec brightmagenta
+    keyword whole recl brightmagenta
+    keyword whole rewind brightmagenta
+    keyword whole sequential brightmagenta
+    keyword whole status brightmagenta
+    keyword whole unformatted brightmagenta
+    keyword whole unit brightmagenta
+    keyword whole write brightmagenta
+
+# mathematical functions
+    keyword whole abs yellow
+    keyword whole acos yellow
+    keyword whole aimag yellow
+    keyword whole aint yellow
+    keyword whole alog yellow
+    keyword whole alog10 yellow
+    keyword whole amax0 yellow
+    keyword whole amax1 yellow
+    keyword whole amin0 yellow
+    keyword whole amin1 yellow
+    keyword whole amod yellow
+    keyword whole anint yellow
+    keyword whole aprime yellow
+    keyword whole asin yellow
+    keyword whole atan yellow
+    keyword whole atan2 yellow
+    keyword whole acos yellow
+    keyword whole cabs yellow
+    keyword whole cexp yellow
+    keyword whole char yellow
+    keyword whole clog yellow
+    keyword whole cmplx yellow
+    keyword whole conjg yellow
+    keyword whole cos yellow
+    keyword whole cosh yellow
+    keyword whole ccos yellow
+    keyword whole csin yellow
+    keyword whole csqrt yellow
+    keyword whole dabs yellow
+    keyword whole dacos yellow
+    keyword whole dasin yellow
+    keyword whole datan yellow
+    keyword whole datan2 yellow
+    keyword whole dble yellow
+    keyword whole dcos yellow
+    keyword whole dcosh yellow
+    keyword whole dfloat yellow
+    keyword whole ddmim yellow
+    keyword whole dexp yellow
+    keyword whole dim yellow
+    keyword whole dint yellow
+    keyword whole dlog yellow
+    keyword whole dlog10 yellow
+    keyword whole dmax1 yellow
+    keyword whole dmin1 yellow
+    keyword whole dmod yellow
+    keyword whole dnint yellow
+    keyword whole dsign yellow
+    keyword whole dsin yellow
+    keyword whole dsinh yellow
+    keyword whole dsqrt yellow
+    keyword whole dtan yellow
+    keyword whole dtanh yellow
+    keyword whole equivalence yellow
+    keyword whole exp yellow
+    keyword whole float yellow
+    keyword whole iabs yellow
+    keyword whole ichar yellow
+    keyword whole idim yellow
+    keyword whole idint yellow
+    keyword whole ifix yellow
+    keyword whole index yellow
+    keyword whole int yellow
+    keyword whole isign yellow
+    keyword whole len yellow
+    keyword whole log yellow
+    keyword whole log10 yellow
+    keyword whole max yellow
+    keyword whole max0 yellow
+    keyword whole max1 yellow
+    keyword whole min yellow
+    keyword whole min0 yellow
+    keyword whole min1 yellow
+    keyword whole mod yellow
+    keyword whole rand yellow
+    keyword whole sign yellow
+    keyword whole sin yellow
+    keyword whole sinh yellow
+    keyword whole sngl yellow
+    keyword whole sqrt yellow
+    keyword whole tan yellow
+    keyword whole tanh yellow
+
+# operators and syntax elements
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword : brightcyan
+    keyword , brightcyan
+    keyword \+ yellow
+    keyword - yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword = yellow
+    keyword < yellow
+    keyword > yellow
+
+# comments and quotes
+    keyword '*' green
+
+context &\n & black cyan
+
+context format( ) green
+
+context ! \n brown
+   spellcheck
