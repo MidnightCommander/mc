@@ -434,11 +434,11 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		default:
 		    if ( utf8_display ) {
 		        if ( !edit->utf8 ) {
+		            //FIXME: if need
 		        }
 		    } else {
 		        if ( edit->utf8 ) {
 		            c = convert_from_utf_to_current_c (c);
-		            //c = convert_to_utf (c);
 		        } else {
 		            c = convert_to_display_c (c);
 		        }

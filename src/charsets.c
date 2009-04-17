@@ -259,23 +259,22 @@ convert_from_utf_to_current (const char *str)
         return '.';
 
     unsigned char ch;
-    char *cp_to = NULL;
+    char *cp_from = NULL;
     GIConv conv;
     GString *translated_data;
 
     translated_data = g_string_new ("");
-    cp_to = g_strdup ( get_codepage_id ( display_codepage ) );
-    conv = str_crt_conv_to (cp_to);
+    cp_from =  get_codepage_id ( source_codepage );
+    conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
-        if (str_convert (conv, str, translated_data) != ESTR_FAILURE) {
+        if (str_convert (conv, (char *) str, translated_data) != ESTR_FAILURE) {
             ch = translated_data->str[0];
         } else {
             ch = '.';
         }
         str_close_conv (conv);
     }
-    g_free (cp_to);
     g_string_free (translated_data, TRUE);
     return ch;
 
@@ -287,7 +286,7 @@ convert_from_utf_to_current_c (const int input_char)
     unsigned char str[6 + 1];
     unsigned char ch = '.';
 
-    char *cp_to = NULL;
+    char *cp_from = NULL;
     GIConv conv;
     GString *translated_data;
     int res = 0;
@@ -299,8 +298,8 @@ convert_from_utf_to_current_c (const int input_char)
     str[6] = '\0';
 
     translated_data = g_string_new ("");
-    cp_to = g_strdup ( get_codepage_id ( display_codepage ) );
-    conv = str_crt_conv_to (cp_to);
+    cp_from =  get_codepage_id ( source_codepage );
+    conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
         if (str_convert (conv, str, translated_data) != ESTR_FAILURE) {
@@ -310,7 +309,6 @@ convert_from_utf_to_current_c (const int input_char)
         }
         str_close_conv (conv);
     }
-    g_free (cp_to);
     g_string_free (translated_data, TRUE);
     return ch;
 
