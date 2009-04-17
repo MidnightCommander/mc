@@ -2123,7 +2123,7 @@ edit_replace_cmd (WEdit *edit, int again)
 void edit_search_cmd (WEdit * edit, int again)
 {
     static char *old = NULL;
-    char *exp = "";
+    char *exp = "", *old_exp=NULL;
 
     if (!edit) {
 	g_free (old);
@@ -2141,15 +2141,15 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (exp && *exp){
 	    GString *tmp = str_convert_to_display (exp);
 	    if (tmp && tmp->len){
-		g_free(exp);
-		exp = tmp->str;
+		old_exp = exp = tmp->str;
 	    }
 	    if (tmp)
 		g_string_free(tmp,FALSE);
 	}
 #endif /* HAVE_CHARSET */
-
 	edit_search_dialog (edit, &exp);
+	if (old_exp)
+	    g_free(old_exp);
 
 #ifdef HAVE_CHARSET
 	if (exp && *exp){

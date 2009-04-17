@@ -256,7 +256,7 @@ str_convert_to_display (char *str)
     if (cp_display == cp_source)
 	return g_string_new(str);
 
-    conv = str_crt_conv_from (cp_source);
+    conv = str_crt_conv_from (cp_display);
 
     buff = g_string_new("");
     str_convert (conv, str, buff);
