@@ -327,6 +327,11 @@ int str_length (const char* text);
  */
 int str_length2 (const char* text, int size);
 
+/* return length of one char
+ * I
+ */
+int str_length_char (const char *);
+
 /* return length of text in characters, count only noncombining characters
  * I
  */

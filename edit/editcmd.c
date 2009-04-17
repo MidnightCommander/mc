@@ -88,17 +88,44 @@ static int edit_save_cmd (WEdit *edit);
 static unsigned char *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
 
-static inline int my_lower_case (int c)
+static gchar *
+my_lower_case (char *ch)
 {
-    return g_ascii_tolower ((gchar)c & 0xFF);
+    gchar *tmp, *tmp1;
+    size_t size = 7;
+
+    tmp = ch;
+    tmp1 = tmp = g_malloc0(sizeof(gchar)*7);
+
+    str_tolower (ch, &tmp, &size);
+    return tmp1;
+}
+
+static gchar *
+my_lower_case_static (char *ch)
+{
+    static gchar tmp[7];
+    gchar *tmp2 = tmp;
+    size_t size=7;
+    memset(tmp,0,7);
+    str_tolower (ch, &tmp2, &size);
+    return tmp;
 }
 
 static const char *
-strcasechr (const char *s, int c)
+strcasechr (const char *s, char *c)
 {
-    for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
-	if (*s == '\0')
-	    return 0;
+    gchar *tmp_c=NULL;
+
+    tmp_c = my_lower_case (c);
+    while ( strcmp(tmp_c, my_lower_case_static((char *)s))){
+	if (*s == '\0'){
+	    g_free(tmp_c);
+	    return NULL;
+	}
+	s++;
+    }
+    g_free(tmp_c);
     return s;
 }
 
@@ -1435,14 +1462,18 @@ string_regexp_search (char *pattern, char *string, int match_type,
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
-typedef int (*edit_getbyte_fn) (WEdit *, long);
+typedef char * (*edit_getbyte_fn) (WEdit *, long);
 
 static long
 edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
 {
     long p, q = 0;
-    long l = str_term_width1 ((char *) exp), f = 0;
+    long l = strlen ((char *) exp), f = 0;
+    size_t tmp_len;
     int n = 0;
+    gchar *tmp_exp1, *tmp_exp2;
+    unsigned char *tmp_exp3;
+    gchar *c;
 
     for (p = 0; p < l; p++)	/* count conversions... */
 	if (exp[p] == '%')
@@ -1450,14 +1481,12 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		n++;
 
     if (replace_scanf || replace_regexp) {
-	int c;
 	unsigned char *buf;
 	unsigned char mbuf[MAX_REPL_LEN * 2 + 3];
 
 	replace_scanf = (!replace_regexp);	/* can't have both */
 
 	buf = mbuf;
-
 	if (replace_scanf) {
 	    unsigned char e[MAX_REPL_LEN];
 	    if (n >= NUM_REPL_ARGS)
@@ -1465,13 +1494,25 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 
 	    if (replace_case) {
 		for (p = start; p < last_byte && p < start + MAX_REPL_LEN; p++)
-		    buf[p - start] = (*get_byte) (data, p);
+		    buf[p - start] = *(*get_byte) (data, p);
 	    } else {
-		for (p = 0; exp[p] != 0; p++)
-		    exp[p] = my_lower_case (exp[p]);
-		for (p = start; p < last_byte && p < start + MAX_REPL_LEN; p++) {
-		    c = (*get_byte) (data, p);
-		    buf[p - start] = my_lower_case (c);
+		tmp_exp3 = exp;
+		tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
+		tmp_len = str_length((char *)exp);
+
+		while (str_tolower(tmp_exp1, &tmp_exp3, &tmp_len))
+		    tmp_exp1+=str_length_char(tmp_exp1);
+
+		g_free(tmp_exp2);
+
+		p = start;
+		while(p < last_byte && p < start + MAX_REPL_LEN)
+		{
+		    c = tmp_exp2 = (*get_byte) (data, p);
+		    tmp_exp1 = (gchar *) &buf[p - start];
+		    tmp_len=7;
+		    str_tolower(tmp_exp2, &tmp_exp1, &tmp_len);
+		    p+= str_length_char(c);
 		}
 	    }
 
@@ -1479,7 +1520,6 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    strcpy ((char *) e, (char *) exp);
 	    strcat ((char *) e, "%n");
 	    exp = e;
-
 	    while (q) {
 		*((int *) sargs[n]) = 0;	/* --> here was the problem - now fixed: good */
 		if (n == sscanf ((char *) buf, (char *) exp, SCANF_ARGS)) {
@@ -1492,10 +1532,12 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		    return -2;
 		if (q + start < last_byte) {
 		    if (replace_case) {
-			buf[q] = (*get_byte) (data, q + start);
+			buf[q] = *(*get_byte) (data, q + start);
 		    } else {
 			c = (*get_byte) (data, q + start);
-			buf[q] = my_lower_case (c);
+			tmp_exp1 = (gchar *) &buf[q];
+			tmp_len=7;
+			str_tolower(c, &tmp_exp1, &tmp_len);
 		    }
 		    q++;
 		}
@@ -1513,13 +1555,13 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    int found_start, match_bol, move_win = 0;
 
 	    while (start + offset < last_byte) {
-		match_bol = (start == 0 || (*get_byte) (data, start + offset - 1) == '\n');
+		match_bol = (start == 0 || *(*get_byte) (data, start + offset - 1) == '\n');
 		if (!move_win) {
 		    p = start + offset;
 		    q = 0;
 		}
 		for (; p < last_byte && q < MAX_REPL_LEN; p++, q++) {
-		    mbuf[q] = (*get_byte) (data, p);
+		    mbuf[q] = *(*get_byte) (data, p);
 		    if (mbuf[q] == '\n') {
 			q++;
 			break;
@@ -1564,31 +1606,70 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
     } else {
 	*len = str_term_width1 ((const char *) exp);
 	if (replace_case) {
-	    for (p = start; p <= last_byte - l; p++) {
-		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
-		    for (f = 0, q = 0; q < l && f < 1; q++)
-			if ((*get_byte) (data, q + p) != (unsigned char)exp[q])
+	    p = start;
+	    while ( p <= last_byte - l)
+	    {
+		c = (*get_byte) (data, p);
+		if ( !strncmp(c, exp, str_length_char(c)) )
+		{	/* check if first char matches */
+		    f = 0;
+		    q = 0;
+		    while ( q < l && f < 1)
+		    {
+			tmp_exp1 = (*get_byte) (data, q + p);
+			tmp_len = str_length_char(tmp_exp1);
+			if ( strncmp(tmp_exp1, &exp[q], (tmp_len==0)?1:tmp_len ) )
+			{
 			    f = 1;
+			}
+			if (tmp_len)
+			    q += tmp_len;
+			else
+			    q++;
+		    }
 		    if (f == 0)
 			return p;
 		}
 		if (once_only)
 		    return -2;
+		p+= str_length_char(c);
 	    }
 	} else {
-	    for (p = 0; exp[p] != 0; p++)
-		exp[p] = my_lower_case (exp[p]);
+	    tmp_exp3 = exp;
+	    tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
+	    tmp_len = strlen((char *) exp);
+	    while (str_tolower(tmp_exp1, &tmp_exp3, &tmp_len))
+		tmp_exp1+=str_length_char(tmp_exp1);
 
-	    for (p = start; p <= last_byte - l; p++) {
-		if (my_lower_case ((*get_byte) (data, p)) == (unsigned char)exp[0]) {
-		    for (f = 0, q = 0; q < l && f < 1; q++)
-			if (my_lower_case ((*get_byte) (data, q + p)) != (unsigned char)exp[q])
+	    g_free(tmp_exp2);
+	    p = start;
+	    while(p < last_byte -l)
+	    {
+		c = (*get_byte) (data, p);
+		tmp_exp1 = my_lower_case_static(c);
+		if (! strncmp((const char *)tmp_exp1, (const char *)&exp[0], strlen( (const char *) tmp_exp1)))
+		{
+		    f = 0;
+		    q = 0;
+		    while (q < l && f < 1)
+		    {
+			tmp_exp1 = my_lower_case_static((*get_byte) (data, q + p));
+			if ( strncmp((const char *)tmp_exp1, (const char *)&exp[q], strlen((const char *)tmp_exp1)))
 			    f = 1;
-		    if (f == 0)
+			if (strlen(tmp_exp1))
+			    q += strlen(tmp_exp1);
+			else
+			    q++;
+		    }
+		    if (f == 0){
 			return p;
+		    }
 		}
+
 		if (once_only)
 		    return -2;
+
+		p+= str_length_char(c);
 	    }
 	}
     }
@@ -1607,8 +1688,9 @@ edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_b
 	if (replace_whole) {
 /*If the bordering chars are not in option_whole_chars_search then word is whole */
 	    if (!strcasechr (option_whole_chars_search, (*get_byte) (data, p - 1))
-		&& !strcasechr (option_whole_chars_search, (*get_byte) (data, p + *len)))
+		&& !strcasechr (option_whole_chars_search, (*get_byte) (data, p + *len))){
 		return p;
+}
 	    if (once_only)
 		return -2;
 	} else
@@ -1870,7 +1952,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	long new_start;
 	new_start =
 	    edit_find (edit->search_start, (unsigned char *) input1, &len,
-		       last_search, edit_get_byte, (void *) edit, pmatch);
+		       last_search, edit_get_byte_ptr, (void *) edit, pmatch);
 	if (new_start == -3) {
 	    regexp_error (edit);
 	    break;
@@ -2059,7 +2141,6 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (exp && *exp)
 	    convert_from_input (exp);
 #endif /* HAVE_CHARSET */
-
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
     }
 
@@ -2075,7 +2156,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		long p, q = 0;
 		for (;;) {
 		    p = edit_find (q, (unsigned char *) exp, &len, edit->last_byte,
-				   edit_get_byte, (void *) edit, 0);
+				   edit_get_byte_ptr, (void *) edit, 0);
 		    if (p < 0)
 			break;
 		    found++;
@@ -2102,7 +2183,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		    edit->search_start++;
 
 		edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
-		                                edit_get_byte, (void *) edit, 0);
+		                                edit_get_byte_ptr, (void *) edit, 0);
 
 		if (edit->search_start >= 0) {
 		    edit->found_start = edit->search_start;
@@ -2760,7 +2841,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	/* get next match */
 	start =
 	    edit_find (start - 1, (unsigned char *) match_expr, &len,
-		       edit->last_byte, edit_get_byte, (void *) edit, 0);
+		       edit->last_byte, edit_get_byte_ptr, (void *) edit, 0);
 
 	/* not matched */
 	if (start < 0)

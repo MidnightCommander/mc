@@ -574,6 +574,12 @@ str_length (const char *text)
 }
 
 int
+str_length_char (const char *text)
+{
+    return str_cget_next_char_safe (text)-text;
+}
+
+int
 str_length2 (const char *text, int size)
 {
     return used_class.length2 (text, size);
