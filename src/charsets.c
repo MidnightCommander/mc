@@ -284,6 +284,7 @@ unsigned char
 convert_from_utf_to_current_c (const int input_char)
 {
     unsigned char str[6 + 1];
+    unsigned char buf_ch[6 + 1];
     unsigned char ch = '.';
 
     char *cp_from = NULL;
@@ -297,19 +298,22 @@ convert_from_utf_to_current_c (const int input_char)
     }
     str[6] = '\0';
 
-    translated_data = g_string_new ("");
     cp_from =  get_codepage_id ( source_codepage );
     conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
-        if (str_convert (conv, str, translated_data) != ESTR_FAILURE) {
-            ch = translated_data->str[0];
-        } else {
+        switch (str_translate_char (conv, str, res, buf_ch, sizeof(buf_ch))) {
+        case 0:
+            ch = buf_ch[0];
+            break;
+        case 1:
+            ch = '.';
+            break;
+        case 2:
             ch = '.';
         }
         str_close_conv (conv);
     }
-    g_string_free (translated_data, TRUE);
     return ch;
 
 }
