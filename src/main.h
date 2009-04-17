@@ -50,6 +50,7 @@ struct edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 #ifdef HAVE_CHARSET
 extern int source_codepage;
 extern int display_codepage;
+extern int utf8_display;
 #else
 extern int eight_bit_clean;
 extern int full_eight_bits;

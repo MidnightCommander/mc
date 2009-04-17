@@ -168,6 +168,7 @@ int edit_get_utf (WEdit * edit, long byte_index, int *char_width)
         return '\n';
     }
 
+
     str = edit_get_byte_ptr (edit, byte_index);
     res = g_utf8_get_char_validated (str, -1);
 
@@ -200,14 +201,12 @@ int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width)
     gunichar ch;
     gchar *next_ch = NULL;
     int width = 0;
-    gchar *prn_buf=NULL;
 
     if ( byte_index > 0 ) {
         byte_index--;
     }
 
     ch = edit_get_utf (edit, byte_index, &width);
-
     if ( width == 1 ) {
         *char_width = width;
         return ch;
@@ -277,7 +276,9 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
-    edit->utf8 = str_isutf8 (get_codepage_id( source_codepage ));
+    edit->utf8 = 0;
+    if ( get_codepage_id( source_codepage ) )
+        edit->utf8 = str_isutf8 (get_codepage_id( source_codepage ));
 
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 	GString *errmsg = g_string_new(NULL);

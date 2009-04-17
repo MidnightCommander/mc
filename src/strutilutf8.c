@@ -454,6 +454,8 @@ utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
     size_t left;
     gunichar uni;
 
+    tool->compose = 0;
+
     while (tool->cheked[0] != '\0')
     {
 	uni = g_utf8_get_char (tool->cheked);
@@ -477,6 +479,8 @@ utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
     size_t left;
     gunichar uni;
     int w;
+
+    tool->compose = 0;
 
     while (tool->cheked[0] != '\0')
     {
@@ -581,6 +585,7 @@ str_utf8_fit_to_term (const char *text, int width, int just_mode)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
+    tool.compose = 0;
 
     if (pre_form->width <= width)
     {
@@ -653,6 +658,7 @@ str_utf8_term_trim (const char *text, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
+    tool.compose = 0;
 
     if (width < pre_form->width)
     {
@@ -753,6 +759,7 @@ str_utf8_term_substring (const char *text, int start, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
+    tool.compose = 0;
 
     tool.ident = -start;
     utf8_tool_skip_chars_to (&tool, 0);
@@ -781,6 +788,7 @@ str_utf8_trunc (const char *text, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
+    tool.compose = 0;
 
     if (pre_form->width > width)
     {

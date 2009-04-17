@@ -44,6 +44,8 @@
 #include "../src/tty.h"		/* keys */
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/selcodepage.h"	/* do_select_codepage() */
+#include "../src/main.h"	/* display_codepage */
+#include "../src/strutil.h"	/* str_isutf8 () */
 
 /*
  * Ordinary translations.  Note that the keys listed first take priority
@@ -191,6 +193,8 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int char_for_insertion = -1;
     int i = 0;
     int extmod = 0;
+    int c;
+
     const edit_key_map_type *key_map = NULL;
     switch (edit_key_emulation) {
     case EDIT_KEY_EMULATION_NORMAL:
@@ -243,23 +247,55 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
+
+        if ( edit->charpoint >= 4 ) {
+            edit->charpoint = 0;
+            edit->charbuf[edit->charpoint] = '\0';
+        }
+        if ( edit->charpoint < 4 ) {
+            edit->charbuf[edit->charpoint++] = x_key;
+            edit->charbuf[edit->charpoint] = '\0';
+        }
+
         if (!edit->utf8) {
-            int c = convert_from_input_c (x_key);
-            if (is_printable (c)) {
-                char_for_insertion = c;
-                goto fin;
-            }
-        } else {
-            if (edit->charpoint >= MB_LEN_MAX) {
-                goto fin;
-                edit->charpoint = 0;
+            /* input from 8-bit locale */
+            if ( utf8_display ) {
+                c = convert_from_input_c (x_key);
+                if (is_printable (c)) {
+                    char_for_insertion = c;
+                    goto fin;
+                }
+            } else {
+                edit->charbuf[edit->charpoint + 1] = '\0';
+                int res = str_is_valid_char (edit->charbuf, edit->charpoint);
+                if (res < 0) {
+                    if (res != -2) {
+                        edit->charpoint = 0; /* broken multibyte char, skip */
+                        goto fin;
+                    }
+                    /* not finised multibyte input (in meddle multibyte utf-8 char) */
+                    goto fin;
+                } else {
+                    if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf)) ) {
+                        c = convert_from_utf_to_current ( edit->charbuf );
+                        edit->charbuf[0] = '\0';
+                        edit->charpoint = 0;
+                        if (is_printable (c)) {
+                            char_for_insertion = c;
+                            goto fin;
+                        }
+                    }
+                    /* unprinteble utf input, skip it */
+                    edit->charbuf[0] = '\0';
+                    edit->charpoint = 0;
+                    goto fin;
+                }
             }
 
-            edit->charbuf[edit->charpoint] = x_key;
-            edit->charpoint++;
+        } else {
 
             int res = str_is_valid_char (edit->charbuf, edit->charpoint);
-            mc_log("res:%i, edit->charpoint : %i\n",res, edit->charpoint);
+
             if (res < 0) {
                 if (res != -2) {
                     edit->charpoint = 0; /* broken multibyte char, skip */
@@ -271,6 +307,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 edit->charbuf[edit->charpoint]='\0';
                 edit->charpoint = 0;
                 if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf))) {
+                    mc_log("input:%s \n", edit->charbuf);
                     char_for_insertion = x_key;
                     goto fin;
                 }

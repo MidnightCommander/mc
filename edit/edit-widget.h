@@ -46,7 +46,7 @@ struct WEdit {
     unsigned char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
 
     /* UTF8 */
-    unsigned char charbuf[MB_LEN_MAX];
+    char charbuf[4 + 1];
     int charpoint;
     /* search variables */
     long search_start;		/* First character to start searching from */
