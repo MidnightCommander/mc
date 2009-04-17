@@ -88,6 +88,20 @@ static int edit_save_cmd (WEdit *edit);
 static unsigned char *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
 
+static int
+editcmd_get_str_nlen(const char*str, int byte_len)
+{
+    int ret;
+    if (!str || byte_len < 1)
+	return 0;
+
+    char *tmp = g_malloc(sizeof(char)*byte_len+1);
+    memcpy(tmp,str,byte_len);
+    tmp[byte_len] = '\0';
+    ret = str_length(tmp);
+    g_free(tmp);
+    return ret;
+}
 static gchar *
 my_lower_case (char *ch)
 {
@@ -117,6 +131,8 @@ strcasechr (const char *s, char *c)
 {
     gchar *tmp_c=NULL;
 
+    if (!s || !c)
+	return NULL;
     tmp_c = my_lower_case (c);
     while ( strcmp(tmp_c, my_lower_case_static((char *)s))){
 	if (*s == '\0'){
@@ -1479,7 +1495,6 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	if (exp[p] == '%')
 	    if (exp[++p] != '%')	/* ...except for "%%" */
 		n++;
-
     if (replace_scanf || replace_regexp) {
 	unsigned char *buf;
 	unsigned char mbuf[MAX_REPL_LEN * 2 + 3];
@@ -1610,15 +1625,15 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    while ( p <= last_byte - l)
 	    {
 		c = (*get_byte) (data, p);
-		if ( !strncmp(c, exp, str_length_char(c)) )
+		if ( !strncmp((const char *)c, (const char *)exp, str_length_char((const char *) c)) )
 		{	/* check if first char matches */
 		    f = 0;
 		    q = 0;
 		    while ( q < l && f < 1)
 		    {
 			tmp_exp1 = (*get_byte) (data, q + p);
-			tmp_len = str_length_char(tmp_exp1);
-			if ( strncmp(tmp_exp1, &exp[q], (tmp_len==0)?1:tmp_len ) )
+			tmp_len = str_length_char((const char *)tmp_exp1);
+			if ( strncmp((const char *)tmp_exp1, (const char *)&exp[q], (tmp_len==0)?1:tmp_len ) )
 			{
 			    f = 1;
 			}
@@ -1689,8 +1704,8 @@ edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_b
 /*If the bordering chars are not in option_whole_chars_search then word is whole */
 	    if (!strcasechr (option_whole_chars_search, (*get_byte) (data, p - 1))
 		&& !strcasechr (option_whole_chars_search, (*get_byte) (data, p + *len))){
-		return p;
-}
+		    return p;
+		}
 	    if (once_only)
 		return -2;
 	} else
@@ -1783,7 +1798,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	if (*p == '*') {
 	    p++;
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
-	    p1 += str_term_width1 (p1);
+	    p1 += strlen (p1);
 	} else {
 	    while (is_digit (*p) && p1 < q1 + 20)
 		*p1++ = *p++;
@@ -1795,7 +1810,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	if (*p == '*') {
 	    p++;
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
-	    p1 += str_term_width1 (p1);
+	    p1 += strlen (p1);
 	} else {
 	    while (is_digit (*p) && p1 < q1 + 32)
 		*p1++ = *p++;
@@ -1829,7 +1844,7 @@ static int snprintf_p (char *str, size_t size, const char *fmt,...)
 	q = p;
     }
     va_end (ap);
-    n = str_term_width1 (q);
+    n = strlen (q);
     if (n >= (size_t) (e - s))
 	return -1;
     memcpy (s, q, n + 1);
@@ -2030,17 +2045,11 @@ edit_replace_cmd (WEdit *edit, int again)
 			    for (j = 0;
 				 j < pmatch[k].rm_eo - pmatch[k].rm_so
 				 && j < 255; j++, t++)
-				*t = (unsigned char) edit_get_byte (edit,
-								    edit->
-								    search_start
-								    -
-								    pmatch
-								    [0].
-								    rm_so +
-								    pmatch
-								    [k].
-								    rm_so +
-								    j);
+				*t = (unsigned char) edit_get_byte 
+				    (
+					edit,
+					edit->search_start  - pmatch[0].rm_so + pmatch[k].rm_so + j
+				    );
 			    *t = '\0';
 			}
 			for (; k <= NUM_REPL_ARGS; k++)
@@ -2052,16 +2061,15 @@ edit_replace_cmd (WEdit *edit, int again)
 					PRINTF_ARGS);
 		    if (ret >= 0) {
 			times_replaced++;
+			i = editcmd_get_str_nlen(edit_get_byte_ptr(edit,edit->found_start), i);
 			while (i--)
 			    edit_delete (edit);
 			while (repl_str[++i])
 			    edit_insert (edit, repl_str[i]);
 		    } else {
 			edit_error_dialog (_(" Replace "),
-					   ret ==
-					   -2 ?
-					   _
-					   (" Error in replacement format string. ")
+					   ret == -2
+					   ? _(" Error in replacement format string. ")
 					   : _(" Replacement too long. "));
 			replace_continue = 0;
 		    }
