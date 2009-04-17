@@ -39,6 +39,10 @@ struct codepage_desc *codepages;
 unsigned char conv_displ[256];
 unsigned char conv_input[256];
 
+static char *cp_display = NULL;
+static char *cp_source = NULL;
+
+
 int
 load_codepages_list (void)
 {
@@ -191,8 +195,8 @@ init_translation_table (int cpsource, int cpdisplay)
 	conv_input[i] = i;
     }
 
-    cpsour = codepages[cpsource].id;
-    cpdisp = codepages[cpdisplay].id;
+    cp_display = cpsour = codepages[cpsource].id;
+    cp_source = cpdisp = codepages[cpdisplay].id;
 
     /* display <- inpit table */
 
@@ -240,6 +244,25 @@ convert_to_display (char *str)
     }
 }
 
+GString *
+str_convert_to_display (char *str)
+{
+    GString *buff;
+    GIConv conv;
+
+    if (!str)
+	return NULL;
+
+    if (cp_display == cp_source)
+	return g_string_new(str);
+
+    conv = str_crt_conv_from (cp_source);
+
+    buff = g_string_new("");
+    str_convert (conv, str, buff);
+    return buff;
+}
+
 void
 convert_from_input (char *str)
 {
@@ -250,6 +273,25 @@ convert_from_input (char *str)
 	*str = conv_input[(unsigned char) *str];
 	str++;
     }
+}
+
+GString *
+str_convert_from_input (char *str)
+{
+    GString *buff;
+    GIConv conv;
+
+    if (!str)
+	return NULL;
+
+    if (cp_display == cp_source)
+	return g_string_new(str);
+
+    conv = str_crt_conv_to (cp_display);
+
+    buff = g_string_new("");
+    str_convert (conv, str, buff);
+    return buff;
 }
 
 unsigned char

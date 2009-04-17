@@ -2137,17 +2137,30 @@ void edit_search_cmd (WEdit * edit, int again)
 	    return;
 	exp = g_strdup (old);
     } else {
-
 #ifdef HAVE_CHARSET
-	if (exp && *exp)
-	    convert_to_display (exp);
+	if (exp && *exp){
+	    GString *tmp = str_convert_to_display (exp);
+	    if (tmp && tmp->len){
+		g_free(exp);
+		exp = tmp->str;
+	    }
+	    if (tmp)
+		g_string_free(tmp,FALSE);
+	}
 #endif /* HAVE_CHARSET */
 
 	edit_search_dialog (edit, &exp);
 
 #ifdef HAVE_CHARSET
-	if (exp && *exp)
-	    convert_from_input (exp);
+	if (exp && *exp){
+	    GString *tmp = str_convert_from_input (exp);
+	    if (tmp && tmp->len){
+		g_free(exp);
+		exp = tmp->str;
+	    }
+	    if (tmp)
+		g_string_free(tmp,FALSE);
+	}
 #endif /* HAVE_CHARSET */
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
     }
