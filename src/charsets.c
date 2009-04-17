@@ -284,14 +284,19 @@ convert_from_utf_to_current (const char *str)
 unsigned char
 convert_from_utf_to_current_c (const int input_char)
 {
-    unsigned char str[2];
+    unsigned char str[6 + 1];
     unsigned char ch = '.';
+
     char *cp_to = NULL;
     GIConv conv;
     GString *translated_data;
+    int res = 0;
 
-    str[0] = input_char;
-    str[1] = '\0';
+    res = g_unichar_to_utf8 (input_char, str);
+    if ( res == 0 ) {
+        return ch;
+    }
+    str[6] = '\0';
 
     translated_data = g_string_new ("");
     cp_to = g_strdup ( get_codepage_id ( display_codepage ) );
