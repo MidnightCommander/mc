@@ -280,8 +280,8 @@ regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} file %f && nm %f
 
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])|\.man)$
-	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac | %var{PAGER:more}
-	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) nroff @MAN_FLAGS@ @MANDOC@ %f ;; esac
+	Open=case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac | %var{PAGER:more}
+	View=%view{ascii,nroff} case %d/%f in */log/*|*/logs/*) cat %f ;; *) { zsoelim %f 2>/dev/null || cat %f; } | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
 # Perl pod page
 shell/.pod
