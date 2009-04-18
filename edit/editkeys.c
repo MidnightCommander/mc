@@ -257,14 +257,41 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
             edit->charbuf[edit->charpoint] = '\0';
         }
 
-        if (!edit->utf8) {
-            /* input from 8-bit locale */
-            if ( utf8_display ) {
+        /* input from 8-bit locale */
+        if ( !utf8_display ) {
+            /* source in 8-bit codeset */
+            if (!edit->utf8) {
                 c = convert_from_input_c (x_key);
                 if (is_printable (c)) {
                     char_for_insertion = c;
                     goto fin;
                 }
+            } else {
+                //FIXME: need more think about
+                //must be return multibyte char
+            }
+        /* UTF-8 locale */
+        } else {
+            /* source in UTF-8 codeset */
+            if ( edit->utf8 ) {
+                int res = str_is_valid_char (edit->charbuf, edit->charpoint);
+                if (res < 0) {
+                    if (res != -2) {
+                        edit->charpoint = 0; /* broken multibyte char, skip */
+                        goto fin;
+                    }
+                    char_for_insertion = x_key;
+                    goto fin;
+                } else {
+                    edit->charbuf[edit->charpoint]='\0';
+                    edit->charpoint = 0;
+                    if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf))) {
+                        char_for_insertion = x_key;
+                        goto fin;
+                    }
+                }
+
+            /* 8-bit source */
             } else {
                 edit->charbuf[edit->charpoint + 1] = '\0';
                 int res = str_is_valid_char (edit->charbuf, edit->charpoint);
@@ -291,29 +318,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                     goto fin;
                 }
             }
-
-        } else {
-
-            int res = str_is_valid_char (edit->charbuf, edit->charpoint);
-
-            if (res < 0) {
-                if (res != -2) {
-                    edit->charpoint = 0; /* broken multibyte char, skip */
-                    goto fin;
-                }
-                char_for_insertion = x_key;
-                goto fin;
-            } else {
-                edit->charbuf[edit->charpoint]='\0';
-                edit->charpoint = 0;
-                if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf))) {
-                    mc_log("input:%s \n", edit->charbuf);
-                    char_for_insertion = x_key;
-                    goto fin;
-                }
-            }
-            //char_for_insertion = x_key;
-            //goto fin;
         }
     }
 
