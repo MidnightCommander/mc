@@ -252,17 +252,18 @@ str_vfs_convert_to (GIConv coder, const char *string, int size,
 void
 str_printf (GString * buffer, const char *format, ...)
 {
-    gchar *tmp;
     va_list ap;
     va_start (ap, format);
-    /*
-     * more simple call:
-     g_string_append_vprintf (buffer, format, ap);
-    * but not all versions of glib2 have this function :(
-    */
-    tmp = g_strdup_vprintf ( format, ap);
-    g_string_append (buffer, tmp);
-    g_free(tmp);
+#if GLIB_CHECK_VERSION (2, 14, 0)
+    g_string_append_vprintf (buffer, format, ap);
+#else
+    {
+	gchar *tmp;
+	tmp = g_strdup_vprintf (format, ap);
+	g_string_append (buffer, tmp);
+	g_free(tmp);
+    }
+#endif
     va_end (ap);
 }
 
