@@ -513,7 +513,7 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
     size_t offsset;
 
     fold_text = (case_sen) ? (char *) text : g_strdown (g_strdup (text));
-    fold_search = (case_sen) ? (char *) text : g_strdown (g_strdup (search));
+    fold_search = (case_sen) ? (char *) search : g_strdown (g_strdup (search));
 
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -540,7 +540,7 @@ str_8bit_search_last (const char *text, const char *search, int case_sen)
     size_t offsset;
 
     fold_text = (case_sen) ? (char *) text : g_strdown (g_strdup (text));
-    fold_search = (case_sen) ? (char *) text : g_strdown (g_strdup (search));
+    fold_search = (case_sen) ? (char *) search : g_strdown (g_strdup (search));
 
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
