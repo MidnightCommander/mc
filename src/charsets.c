@@ -348,7 +348,7 @@ convert_from_utf_to_current_c (const int input_char)
     conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, sizeof(str), buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
         case 0:
             ch = buf_ch[0];
             break;
