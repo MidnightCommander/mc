@@ -1,6 +1,8 @@
 #ifndef MC_STRUTIL_H
 #define MC_STRUTIL_H
 
+#include "global.h"	/* include glib.h */
+
 /* Header file for strutil.c, strutilascii.c, strutil8bit.c, strutilutf8.c.
  * There are two sort of functions:
  * 1. functions for working with growing strings and conversion strings between
@@ -33,7 +35,6 @@
  * prefix in second string. However, str_prefix return number of characters in
  * decompose form. (used in do_search (screen.c))
  */
-#include <iconv.h>
 
 /* errors for conversion function:
  * problem means, that not every characters was successfully converted (They are
@@ -59,13 +60,12 @@
 #define HIDE_FIT(x)	((x) & 0x000f)
 
 // fit alignment, if string is to long, is truncated with '~'
-#define J_LEFT_FIT	   0x11
-#define J_RIGHT_FIT	   0x12
-#define J_CENTER_FIT	   0x13
-#define J_CENTER_LEFT_FIT  0x14
+#define J_LEFT_FIT		0x11
+#define J_RIGHT_FIT		0x12
+#define J_CENTER_FIT		0x13
+#define J_CENTER_LEFT_FIT	0x14
 
-// redefinition of iconv_t, so is not needed include iconv.h in other files.
-#define INVALID_CONV ((iconv_t) (-1))
+#define INVALID_CONV	((GIConv) (-1))
 
 // standard convertors 
 extern GIConv str_cnv_to_term;
@@ -160,7 +160,7 @@ int str_nconvert (GIConv, char *, int, GString *);
  * original string. (so no replace with questionmark)
  * if coder is str_cnv_from_term or str_cnv_not_convert, string is only copied,
  * so is possible to show file, that is not valid in terminal encoding
- */                 
+ */
 int str_vfs_convert_from (GIConv, char *, GString *);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
@@ -486,9 +486,9 @@ int str_key_collate (const char *t1, const char *t2, int case_sen);
  */
 void str_release_key (char *key, int case_sen);
 
-#endif
-
 /* return 1 if codeset_name is utf8 or utf-8 
  * I
  */
 int str_isutf8 (const char *codeset_name);
+
+#endif				/* MC_STRUTIL_H*/

@@ -2008,7 +2008,8 @@ view_load (WView *view, const char *command, const char *file,
         enc = vfs_get_encoding (canon_fname);
         if (enc != NULL) {
             view->converter = str_crt_conv_from (enc);
-            if (view->converter == (iconv_t) (-1)) view->converter = str_cnv_from_term;
+            if (view->converter == INVALID_CONV)
+		view->converter = str_cnv_from_term;
         }
         g_free (canon_fname);
     }
@@ -3661,14 +3662,15 @@ view_select_encoding (WView *view)
     enc = g_strdup( get_codepage_id ( source_codepage ) );
     if (enc != NULL) {
         conv = str_crt_conv_from (enc);
-        if (conv != (iconv_t)(-1)) {
-            if (view->converter != str_cnv_from_term) str_close_conv (view->converter);
+        if (conv != INVALID_CONV) {
+            if (view->converter != str_cnv_from_term)
+		str_close_conv (view->converter);
             view->converter = conv;
             view_reset_cache_lines (view);
             line = view_offset_to_line (view, view->dpy_start);
             view_set_first_showed (view, line);
         }
-    g_free(enc);
+	g_free(enc);
     }
 
 }
