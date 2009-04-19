@@ -302,27 +302,26 @@ convert_from_utf_to_current (const char *str)
         return '.';
 
     unsigned char buf_ch[6 + 1];
-    unsigned char ch;
-    char *cp_from = NULL;
+    unsigned char ch = '.';
+    char *cp_to = NULL;
     GIConv conv;
-    int res = 0;
 
-    cp_from =  get_codepage_id ( source_codepage );
-    conv = str_crt_conv_from ( cp_from );
+    cp_to =  get_codepage_id ( source_codepage );
+    conv = str_crt_conv_to ( cp_to );
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, res, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
         case 0:
             ch = buf_ch[0];
             break;
         case 1:
-            ch = '.';
-            break;
         case 2:
             ch = '.';
+            break;
         }
         str_close_conv (conv);
     }
+
     return ch;
 
 }
@@ -349,7 +348,7 @@ convert_from_utf_to_current_c (const int input_char)
     conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, res, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, str, sizeof(str), buf_ch, sizeof(buf_ch))) {
         case 0:
             ch = buf_ch[0];
             break;

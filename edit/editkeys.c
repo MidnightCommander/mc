@@ -247,7 +247,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
-
         if ( edit->charpoint >= 4 ) {
             edit->charpoint = 0;
             edit->charbuf[edit->charpoint] = '\0';
@@ -268,7 +267,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 }
             } else {
                 //FIXME: need more think about
-                //must be return multibyte char
+                //must be return multibyte char but this func return 8bit char
             }
         /* UTF-8 locale */
         } else {
@@ -315,7 +314,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                     /* unprinteble utf input, skip it */
                     edit->charbuf[0] = '\0';
                     edit->charpoint = 0;
-                    goto fin;
                 }
             }
         }
