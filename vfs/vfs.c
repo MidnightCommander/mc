@@ -426,7 +426,7 @@ _vfs_translate_path (const char *path, int size,
         switch (vfs_supported_enconding (encoding)) {
             case 1:
                 coder = str_crt_conv_to (encoding);
-                if (coder != (iconv_t) (-1))  {
+                if (coder != INVALID_CONV)  {
                     if (slash != NULL) {
                         state = str_vfs_convert_to (coder, slash, 
                                 path + size - slash, buffer);
@@ -719,7 +719,7 @@ mc_opendir (const char *dirname)
         g_free (canon);
         dirinfo->converter = (encoding != NULL) ? str_crt_conv_from (encoding) :
                 str_cnv_from_term;
-        if (dirinfo->converter == (iconv_t) (-1)) dirinfo->converter =str_cnv_from_term;
+        if (dirinfo->converter == INVALID_CONV) dirinfo->converter =str_cnv_from_term;
     
         handle = vfs_new_handle (vfs, dirinfo);
 
