@@ -88,6 +88,9 @@ include d.syntax
 file ..\*\\.[fF]$ Fortran\sProgram
 include fortran.syntax
 
+file ..\*\\.[fF]9[05]$ Freeform\sFortran\sProgram
+include f90.syntax
+
 file ..\*\\.i$ SWIG\sSource
 include swig.syntax
 
