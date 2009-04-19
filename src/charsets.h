@@ -38,6 +38,13 @@ unsigned char convert_from_utf_to_current (const char *str);
  * return char in needle codepage (by global int source_codepage)
 */
 unsigned char convert_from_utf_to_current_c (const int input_char);
+/*
+ * Converter from selected codepage 8-bit
+ * param char input_char
+ * return int utf char
+*/
+int convert_from_8bit_to_utf_c (const char input_char);
+
 /* Convert single characters */
 static inline int
 convert_to_display_c (int c)

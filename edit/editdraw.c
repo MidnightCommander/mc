@@ -434,7 +434,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		default:
 		    if ( utf8_display ) {
 		        if ( !edit->utf8 ) {
-		            //FIXME: if need
+		            c = convert_from_8bit_to_utf_c ((unsigned char) c);
 		        }
 		    } else {
 		        if ( edit->utf8 ) {

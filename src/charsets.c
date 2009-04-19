@@ -364,4 +364,41 @@ convert_from_utf_to_current_c (const int input_char)
 
 }
 
+int
+convert_from_8bit_to_utf_c (const char input_char)
+{
+    unsigned char str[2];
+    unsigned char buf_ch[6 + 1];
+    int ch = '.';
+    int res = 0;
+    char *cp_from = NULL;
+    GIConv conv;
+    GString *translated_data;
+
+    str[0] = (unsigned char) input_char;
+    str[1] = '\0';
+
+    cp_from =  get_codepage_id ( source_codepage );
+    conv = str_crt_conv_from (cp_from);
+
+    if (conv != INVALID_CONV) {
+        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
+        case 0:
+            res = g_utf8_get_char_validated (buf_ch, -1);
+            if ( res < 0 ) {
+                ch = buf_ch[0];
+            } else {
+                ch = res;
+            }
+            break;
+        case 1:
+        case 2:
+            ch = '.';
+            break;
+        }
+        str_close_conv (conv);
+    }
+    return ch;
+
+}
 #endif				/* HAVE_CHARSET */
