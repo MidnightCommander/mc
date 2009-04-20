@@ -298,7 +298,6 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
             /* 8-bit source */
             } else {
-                edit->charbuf[edit->charpoint + 1] = '\0';
                 int res = str_is_valid_char (edit->charbuf, edit->charpoint);
                 if (res < 0) {
                     if (res != -2) {
@@ -312,10 +311,8 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                         c = convert_from_utf_to_current ( edit->charbuf );
                         edit->charbuf[0] = '\0';
                         edit->charpoint = 0;
-                        if (is_printable (c)) {
-                            char_for_insertion = c;
-                            goto fin;
-                        }
+                        char_for_insertion = c;
+                        goto fin;
                     }
                     /* unprinteble utf input, skip it */
                     edit->charbuf[0] = '\0';

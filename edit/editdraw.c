@@ -485,14 +485,15 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			break;
 		    }
 		    if (!edit->utf8) {
-			if (is_printable (c)) {
-			    p->ch = c;
-			    p++;
-			} else {
-			    p->ch = '.';
-			    p->style = MOD_ABNORMAL;
-			    p++;
-			}
+		        if ( ( utf8_display && g_unichar_isprint (c) ) ||
+		             ( utf8_display == 0 && is_printable (c) ) ) {
+			        p->ch = c;
+			        p++;
+			    } else {
+			        p->ch = '.';
+			        p->style = MOD_ABNORMAL;
+			        p++;
+			    }
 		    } else {
 		        if ( g_unichar_isprint (c) ) {
 			    p->ch = c;
