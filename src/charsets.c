@@ -39,8 +39,8 @@ struct codepage_desc *codepages;
 unsigned char conv_displ[256];
 unsigned char conv_input[256];
 
-static char *cp_display = NULL;
-static char *cp_source = NULL;
+static const char *cp_display = NULL;
+static const char *cp_source = NULL;
 
 
 int
@@ -195,8 +195,8 @@ init_translation_table (int cpsource, int cpdisplay)
 	conv_input[i] = i;
     }
 
-    cp_display = cpsour = codepages[cpsource].id;
-    cp_source = cpdisp = codepages[cpdisplay].id;
+    cp_display = cpsour = (char *) codepages[cpsource].id;
+    cp_source = cpdisp = (char *) codepages[cpdisplay].id;
 
     /* display <- inpit table */
 
