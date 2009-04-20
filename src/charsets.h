@@ -44,6 +44,12 @@ unsigned char convert_from_utf_to_current_c (const int input_char);
  * return int utf char
 */
 int convert_from_8bit_to_utf_c (const char input_char);
+/*
+ * Converter from display codepage 8-bit to utf-8
+ * param char input_char
+ * return int utf char
+*/
+int convert_from_8bit_to_utf_c2 (const char input_char);
 
 GString *str_convert_from_input (char *str);
 GString *str_convert_to_display (char *str);
