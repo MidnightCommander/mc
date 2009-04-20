@@ -300,7 +300,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
-#ifdef USE_NCURSES
+#ifndef HAVE_SLANG
         int res = g_unichar_to_utf8 (textchar, str);
         if ( res == 0 ) {
             str[0] = '.';
