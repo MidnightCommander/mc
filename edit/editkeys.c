@@ -269,8 +269,11 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 }
 #ifdef HAVE_CHARSET
             } else {
-                //FIXME: need more think about
-                //must be return multibyte char but this func return 8bit char
+		c = convert_from_input_c (x_key);
+                if (is_printable (c)) {
+                    char_for_insertion = convert_from_8bit_to_utf_c2((unsigned char) x_key);
+                    goto fin;
+                }
             }
         /* UTF-8 locale */
         } else {
