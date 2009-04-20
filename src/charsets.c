@@ -130,7 +130,7 @@ free_codepages_list (void)
 #define OTHER_8BIT "Other_8_bit"
 
 const char *
-get_codepage_id (int n)
+get_codepage_id (const int n)
 {
     return (n < 0) ? OTHER_8BIT : codepages[n].id;
 }
@@ -303,10 +303,9 @@ convert_from_utf_to_current (const char *str)
 
     unsigned char buf_ch[6 + 1];
     unsigned char ch = '.';
-    char *cp_to = NULL;
     GIConv conv;
 
-    cp_to =  get_codepage_id ( source_codepage );
+    const char *cp_to =  get_codepage_id ( source_codepage );
     conv = str_crt_conv_to ( cp_to );
 
     if (conv != INVALID_CONV) {
@@ -333,9 +332,7 @@ convert_from_utf_to_current_c (const int input_char)
     unsigned char buf_ch[6 + 1];
     unsigned char ch = '.';
 
-    char *cp_from = NULL;
     GIConv conv;
-    GString *translated_data;
     int res = 0;
 
     res = g_unichar_to_utf8 (input_char, str);
@@ -344,8 +341,8 @@ convert_from_utf_to_current_c (const int input_char)
     }
     str[6] = '\0';
 
-    cp_from =  get_codepage_id ( source_codepage );
-    conv = str_crt_conv_from (cp_from);
+    const char *cp_from =  get_codepage_id ( source_codepage );
+    conv = str_crt_conv_from ( cp_from );
 
     if (conv != INVALID_CONV) {
         switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
@@ -353,15 +350,13 @@ convert_from_utf_to_current_c (const int input_char)
             ch = buf_ch[0];
             break;
         case 1:
-            ch = '.';
-            break;
         case 2:
             ch = '.';
+            break;
         }
         str_close_conv (conv);
     }
     return ch;
-
 }
 
 int
@@ -371,14 +366,12 @@ convert_from_8bit_to_utf_c (const char input_char)
     unsigned char buf_ch[6 + 1];
     int ch = '.';
     int res = 0;
-    char *cp_from = NULL;
     GIConv conv;
-    GString *translated_data;
 
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    cp_from =  get_codepage_id ( source_codepage );
+    const char *cp_from = get_codepage_id ( source_codepage );
     conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {

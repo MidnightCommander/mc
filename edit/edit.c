@@ -1072,7 +1072,7 @@ void edit_insert_ahead (WEdit * edit, int c)
 
 int edit_delete (WEdit * edit)
 {
-    int p;
+    int p = 0;
     int cw = 1;
 
     if (!edit->curs2)
@@ -1120,7 +1120,7 @@ int edit_delete (WEdit * edit)
 static int
 edit_backspace (WEdit * edit)
 {
-    int p;
+    int p = 0;
     int cw = 1;
 
     if (!edit->curs1)
@@ -1274,7 +1274,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 void edit_cursor_move (WEdit * edit, long increment)
 {
 /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
-    int c;
+    int c = 0;
     long curs1 = edit->curs1;
     long curs2 = edit->curs2;
     int cw = 1;

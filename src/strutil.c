@@ -274,7 +274,7 @@ str_insert_replace_char (GString * buffer)
 }
 
 int
-str_translate_char (GIConv conv, char *keys, size_t ch_size,
+str_translate_char (GIConv conv, const char *keys, size_t ch_size,
 		    char *output, size_t out_size)
 {
     size_t left;

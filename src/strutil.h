@@ -194,7 +194,7 @@ void str_uninit_strings ();
  * return 0 if conversion was successfully, ESTR_PROBLEM if ch contains only 
  * part of characters, ESTR_FAILURE if conversion is not possible
  */
-int str_translate_char (GIConv conv, char *ch, size_t ch_size, 
+int str_translate_char (GIConv conv, const char *ch, size_t ch_size, 
                         char *output, size_t out_size);
 
 /* test, if text is valid in terminal encoding

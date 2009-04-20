@@ -18,7 +18,7 @@ struct codepage_desc {
 
 extern struct codepage_desc *codepages;
 
-const char *get_codepage_id (int n);
+const char *get_codepage_id (const int n);
 int get_codepage_index (const char *id);
 int load_codepages_list (void);
 void free_codepages_list (void);
@@ -44,6 +44,9 @@ unsigned char convert_from_utf_to_current_c (const int input_char);
  * return int utf char
 */
 int convert_from_8bit_to_utf_c (const char input_char);
+
+GString *str_convert_from_input (char *str);
+GString *str_convert_to_display (char *str);
 
 /* Convert single characters */
 static inline int
