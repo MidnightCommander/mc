@@ -106,14 +106,16 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
     gsize bytes_read, bytes_written;
     GError *error = NULL;
     errno = 0;
+
     if (string == NULL || buffer == NULL)
 	return ESTR_FAILURE;
 
+/*
     if (! used_class.is_valid_string (string))
     {
-    return ESTR_FAILURE;
+	return ESTR_FAILURE;
     }
-
+*/
     state = 0;
     if (size < 0)
     {
@@ -208,7 +210,8 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 	{
 	    if (tmp_buff != NULL)
 	    {
-		if (*tmp_buff){
+		if (*tmp_buff)
+		{
 		    g_string_append (buffer, tmp_buff);
 		    g_free (tmp_buff);
 		    string += bytes_read;
