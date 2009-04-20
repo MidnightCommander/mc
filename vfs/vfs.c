@@ -750,13 +750,13 @@ mc_readdir (DIR *dirp)
     vfs = vfs_op (handle);
     dirinfo = vfs_info (handle);
     if (vfs->readdir) {
-        do {
+//        do {
             entry = (*vfs->readdir) (dirinfo->info);
             if (entry == NULL) return NULL;
             g_string_set_size(vfs_str_buffer,0);
             state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
-        } while (state != 0);
+//        } while (state != 0);
         memcpy (&result, entry, sizeof (struct dirent));
         g_strlcpy (result.d_name, vfs_str_buffer->str, NAME_MAX + 1);
         result.d_reclen = strlen (result.d_name);

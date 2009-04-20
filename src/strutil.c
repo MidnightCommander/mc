@@ -101,109 +101,134 @@ static int
 _str_convert (GIConv coder, char *string, int size, GString * buffer)
 {
     int state;
-    gchar *tmp_buff;
+    gchar *tmp_buff = NULL;
     gssize left;
     gsize bytes_read, bytes_written;
     GError *error = NULL;
-
     errno = 0;
+    if (string == NULL || buffer == NULL)
+	return ESTR_FAILURE;
 
-    if (used_class.is_valid_string (string))
+    if (! used_class.is_valid_string (string))
     {
-	state = 0;
-	if (size < 0)
+    return ESTR_FAILURE;
+    }
+
+    state = 0;
+    if (size < 0)
+    {
+	size = strlen (string);
+    }
+    else
+    {
+	left = strlen (string);
+	if (left < size)
+	    size = left;
+    }
+
+    left = size;
+
+    if (coder == (GIConv) (-1))
+	return ESTR_FAILURE;
+
+    g_iconv (coder, NULL, NULL, NULL, NULL);
+
+    while (left)
+    {
+	tmp_buff = g_convert_with_iconv ((const gchar *) string,
+					 left,
+					 coder,
+					 &bytes_read,
+					 &bytes_written, &error);
+	if (error)
 	{
-	    size = strlen (string);
+	    switch (error->code)
+	    {
+	    case G_CONVERT_ERROR_NO_CONVERSION:
+		/* Conversion between the requested character sets is not supported. */
+		tmp_buff = g_strnfill (strlen (string), '?');
+		g_string_append (buffer, tmp_buff);
+		g_free (tmp_buff);
+		g_error_free (error);
+		error = NULL;
+		return ESTR_FAILURE;
+		break;
+	    case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
+		/* Invalid byte sequence in conversion input. */
+		if (tmp_buff){
+		    g_string_append (buffer, tmp_buff);
+		    g_free (tmp_buff);
+		}
+		if (bytes_read < left)
+		{
+		    string += bytes_read + 1;
+		    size -= (bytes_read + 1);
+		    left -= (bytes_read + 1);
+		    g_string_append_c (buffer, *(string-1));
+		}
+		else
+		{
+		    g_error_free (error);
+		    error = NULL;
+		    return ESTR_PROBLEM;
+		}
+		state = ESTR_PROBLEM;
+		break;
+	    case G_CONVERT_ERROR_PARTIAL_INPUT:
+		/* Partial character sequence at end of input. */
+		g_error_free (error);
+		error = NULL;
+		g_string_append (buffer, tmp_buff);
+		g_free (tmp_buff);
+		if (bytes_read < left)
+		{
+		    left = left - bytes_read;
+		    tmp_buff = g_strnfill (left, '?');
+		    g_string_append (buffer, tmp_buff);
+		    g_free (tmp_buff);
+		}
+		return ESTR_PROBLEM;
+		break;
+	    case G_CONVERT_ERROR_BAD_URI:	/* Don't know how handle this error :( */
+	    case G_CONVERT_ERROR_NOT_ABSOLUTE_PATH:	/* Don't know how handle this error :( */
+	    case G_CONVERT_ERROR_FAILED:	/* Conversion failed for some reason. */
+	    default:
+		g_error_free (error);
+		error = NULL;
+		if (tmp_buff){
+		    g_free (tmp_buff);
+		    tmp_buff = NULL;
+		}
+		return ESTR_FAILURE;
+	    }
+	    g_error_free (error);
+	    error = NULL;
 	}
 	else
 	{
-	    left = strlen (string);
-	    if (left < size)
-		size = left;
-	}
-	left = size;
-
-	if (coder == (GIConv) (-1))
-	    return ESTR_FAILURE;
-
-	g_iconv (coder, NULL, NULL, NULL, NULL);
-
-	while (left)
-	{
-	    tmp_buff = g_convert_with_iconv ((const gchar *) string,
-					     left,
-					     coder,
-					     &bytes_read,
-					     &bytes_written, &error);
-
-	    if (error)
+	    if (tmp_buff != NULL)
 	    {
-		switch (error->code)
-		{
-		case G_CONVERT_ERROR_NO_CONVERSION:
-		    /* Conversion between the requested character sets is not supported. */
-		    tmp_buff = g_strnfill (strlen (string), '?');
+		if (*tmp_buff){
 		    g_string_append (buffer, tmp_buff);
 		    g_free (tmp_buff);
-		    g_error_free (error);
-		    return ESTR_PROBLEM;
-		    break;
-		case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
-		    /* Invalid byte sequence in conversion input. */
-		    g_string_append (buffer, tmp_buff);
-		    g_string_append (buffer, "?");
-		    g_free (tmp_buff);
-		    if (bytes_read < left)
-		    {
-			string += bytes_read + 1;
-			size -= (bytes_read + 1);
-			left -= (bytes_read + 1);
-		    }
-		    else
-		    {
-			g_error_free (error);
-			return ESTR_PROBLEM;
-		    }
-		    state = ESTR_PROBLEM;
-		    break;
-		case G_CONVERT_ERROR_PARTIAL_INPUT:
-		    /* Partial character sequence at end of input. */
-		    g_error_free (error);
-		    g_string_append (buffer, tmp_buff);
-		    g_free (tmp_buff);
-		    if (bytes_read < left)
-		    {
-			left = left - bytes_read;
-			tmp_buff = g_strnfill (left, '?');
-			g_string_append (buffer, tmp_buff);
-			g_free (tmp_buff);
-		    }
-		    return ESTR_PROBLEM;
-		    break;
-		case G_CONVERT_ERROR_BAD_URI:	/* Don't know how handle this error :( */
-		case G_CONVERT_ERROR_NOT_ABSOLUTE_PATH:	/* Don't know how handle this error :( */
-		case G_CONVERT_ERROR_FAILED:	/* Conversion failed for some reason. */
-		default:
-		    g_error_free (error);
-		    if (tmp_buff)
-			g_free (tmp_buff);
-
-		    return ESTR_FAILURE;
+		    string += bytes_read;
+		    left -= bytes_read;
 		}
-		g_error_free (error);
+		else
+		{
+		    g_free (tmp_buff);
+		    g_string_append (buffer, string);
+		    return state;
+		}
 	    }
 	    else
 	    {
-		g_string_append (buffer, tmp_buff);
-		g_free (tmp_buff);
-		string += bytes_read;
-		left -= bytes_read;
+		g_string_append (buffer, string);
+		return ESTR_PROBLEM;
 	    }
 	}
-	return state;
     }
-    else
-	return ESTR_FAILURE;
+    return state;
 }
 
 int
@@ -233,7 +258,7 @@ str_vfs_convert_from (GIConv coder, char *string, GString * buffer)
 
     if (coder == str_cnv_not_convert)
     {
-	g_string_append (buffer, string);
+	g_string_append (buffer, (string)?string:"");
 	result = 0;
     }
     else
