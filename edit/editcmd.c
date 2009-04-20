@@ -3205,6 +3205,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     if ( def_dlg->ret_value == B_ENTER ) {
 	char *tmp_curr_def = (char *) curr_def;
         listbox_get_current (def_list,  &curr, &tmp_curr_def);
+        curr_def = (etags_hash_t *) tmp_curr_def;
         int do_moveto = 0;
         if ( edit->modified ) {
             if ( !edit_query_dialog2
