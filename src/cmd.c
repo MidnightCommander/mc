@@ -1423,10 +1423,10 @@ set_panel_encoding (WPanel *panel)
     char *encoding = NULL;
     char *cd_path;
 
+#ifdef HAVE_CHARSET
     do_select_codepage ();
-
     encoding = g_strdup( get_codepage_id ( source_codepage ) );
-
+#endif
     if (encoding) {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
         if (!do_panel_cd (MENU_PANEL, cd_path, 0))

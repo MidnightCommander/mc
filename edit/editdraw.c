@@ -102,7 +102,7 @@ static void status_string (WEdit * edit, char *s, int w)
 
     /* The field lengths just prevent the status line from shortening too much */
     g_snprintf (s, w,
-		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s cp:%s",
+		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s  %s",
 		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 		edit->modified ? 'M' : '-',
 		edit->macro_i < 0 ? '-' : 'R',
@@ -117,7 +117,12 @@ static void status_string (WEdit * edit, char *s, int w)
 		edit->curs1,
 		edit->last_byte,
 		byte_str,
+
+#ifdef HAVE_CHARSET
 		get_codepage_id ( source_codepage )
+#else
+		""
+#endif
 		);
 
 }
@@ -432,6 +437,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    /* fallthrough */
 		default:
+#ifdef HAVE_CHARSET
 		    if ( utf8_display ) {
 		        if ( !edit->utf8 ) {
 		            c = convert_from_8bit_to_utf_c ((unsigned char) c);
@@ -440,9 +446,12 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		        if ( edit->utf8 ) {
 		            c = convert_from_utf_to_current_c (c);
 		        } else {
+#endif
 		            c = convert_to_display_c (c);
+#ifdef HAVE_CHARSET
 		        }
 		    }
+#endif
 		    /* Caret notation for control characters */
 		    if (c < 32) {
 			p->ch = '^';

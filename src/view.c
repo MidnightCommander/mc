@@ -3657,10 +3657,11 @@ view_select_encoding (WView *view)
     GIConv conv;
     struct cache_line *line;
 
+#ifdef HAVE_CHARSET
     do_select_codepage ();
-
     enc = g_strdup( get_codepage_id ( source_codepage ) );
-    if (enc != NULL) {
+#endif
+    if ( enc ) {
         conv = str_crt_conv_from (enc);
         if (conv != INVALID_CONV) {
             if (view->converter != str_cnv_from_term)

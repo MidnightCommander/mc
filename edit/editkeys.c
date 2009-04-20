@@ -247,6 +247,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
+#ifdef HAVE_CHARSET
         if ( edit->charpoint >= 4 ) {
             edit->charpoint = 0;
             edit->charbuf[edit->charpoint] = '\0';
@@ -260,11 +261,13 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
         if ( !utf8_display ) {
             /* source in 8-bit codeset */
             if (!edit->utf8) {
+#endif
                 c = convert_from_input_c (x_key);
                 if (is_printable (c)) {
                     char_for_insertion = c;
                     goto fin;
                 }
+#ifdef HAVE_CHARSET
             } else {
                 //FIXME: need more think about
                 //must be return multibyte char but this func return 8bit char
@@ -317,6 +320,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
                 }
             }
         }
+#endif
     }
 
     /* Commands specific to the key emulation */
