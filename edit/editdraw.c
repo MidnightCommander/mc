@@ -250,7 +250,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
-
+    unsigned char str[6 + 1];
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
@@ -300,7 +300,18 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
+#ifdef USE_NCURSES
+        int res = g_unichar_to_utf8 (textchar, str);
+        if ( res == 0 ) {
+            str[0] = '.';
+            str[1] = '\0';
+        } else {
+            str[res] = '\0';
+        }
+	addstr (str);
+#else
 	addch (textchar);
+#endif
 	p++;
     }
 }
