@@ -2196,7 +2196,8 @@ static const panel_key_map panel_keymap [] = {
     { XCTRL('n'), move_down },		/* C-n like emacs */
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
-    { XCTRL('t'), mark_file },
+/*    { XCTRL('t'), mark_file },*/
+    { XCTRL('t'), encoding_cmd },
     { ALT('o'),   chdir_other_panel },
     { ALT('i'),   sync_other_panel },
     { ALT('l'),   chdir_to_readlink },
