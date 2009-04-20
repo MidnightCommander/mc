@@ -2385,6 +2385,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
 		edit_delete (edit);
 	}
+#ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
             unsigned char str[6 + 1];
             int res = g_unichar_to_utf8 (char_for_insertion, str);
@@ -2401,8 +2402,11 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	        i++;
 	    }
 	} else {
+#endif
 	    edit_insert (edit, char_for_insertion);
+#ifdef HAVE_CHARSET
 	}
+#endif
 	if (option_auto_para_formatting) {
 	    format_paragraph (edit, 0);
 	    edit->force |= REDRAW_PAGE;
