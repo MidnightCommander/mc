@@ -284,7 +284,7 @@ str_translate_char (GIConv conv, const char *keys, size_t ch_size,
 
     left = (ch_size == (size_t) (-1)) ? strlen (keys) : ch_size;
 
-    cnv = g_iconv (conv, &keys, &left, &output, &out_size);
+    cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &out_size);
     if (cnv == (size_t)(-1)) {
         if (errno == EINVAL) return ESTR_PROBLEM; else return ESTR_FAILURE;
     } else {

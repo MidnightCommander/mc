@@ -1489,6 +1489,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
     int n = 0;
     gchar *tmp_exp1, *tmp_exp2;
     unsigned char *tmp_exp3;
+    char *tmp_exp4;
     gchar *c;
 
     for (p = 0; p < l; p++)	/* count conversions... */
@@ -1512,10 +1513,12 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		    buf[p - start] = *(*get_byte) (data, p);
 	    } else {
 		tmp_exp3 = exp;
+		tmp_exp4 = (char *)tmp_exp3;
+		
 		tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
 		tmp_len = str_length((char *)exp);
 
-		while (str_tolower(tmp_exp1, &tmp_exp3, &tmp_len))
+		while (str_tolower(tmp_exp1, (char **) &tmp_exp4, &tmp_len))
 		    tmp_exp1+=str_length_char(tmp_exp1);
 
 		g_free(tmp_exp2);
@@ -1653,7 +1656,8 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    tmp_exp3 = exp;
 	    tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
 	    tmp_len = strlen((char *) exp);
-	    while (str_tolower(tmp_exp1, &tmp_exp3, &tmp_len))
+	    tmp_exp4 = (char *) tmp_exp3;
+	    while (str_tolower(tmp_exp1, &tmp_exp4, &tmp_len))
 		tmp_exp1+=str_length_char(tmp_exp1);
 
 	    g_free(tmp_exp2);
@@ -3149,7 +3153,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 
     int start_x, start_y, offset, i;
     char *curr = NULL;
-    etags_hash_t *curr_def;
+    etags_hash_t *curr_def = NULL;
     Dlg_head *def_dlg;
     WListbox *def_list;
     int def_dlg_h;      /* dialog height */
@@ -3199,7 +3203,8 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
 
     /* apply the choosen completion */
     if ( def_dlg->ret_value == B_ENTER ) {
-        listbox_get_current (def_list, &curr, (etags_hash_t *) &curr_def);
+	char *tmp_curr_def = (char *) curr_def;
+        listbox_get_current (def_list,  &curr, &tmp_curr_def);
         int do_moveto = 0;
         if ( edit->modified ) {
             if ( !edit_query_dialog2
@@ -3225,7 +3230,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
                                                                 edit->curs_row + 1;
                 edit_stack_iterator++;
                 g_free( edit_history_moveto[edit_stack_iterator].filename );
-                edit_history_moveto[edit_stack_iterator].filename = g_strdup(curr_def->fullpath);
+                edit_history_moveto[edit_stack_iterator].filename = g_strdup((char *)curr_def->fullpath);
                 edit_history_moveto[edit_stack_iterator].line = curr_def->line;
                 edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
                                   edit_history_moveto[edit_stack_iterator].line);

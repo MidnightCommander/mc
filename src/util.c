@@ -1278,7 +1278,7 @@ concat_dir_and_file (const char *dir, const char *file)
 GList *
 list_append_unique (GList *list, char *text)
 {
-    GList *link, *newlink;
+    GList *link, *newlink, *tmp;
 
     /*
      * Go to the last position and traverse the list backwards
@@ -1293,7 +1293,7 @@ list_append_unique (GList *list, char *text)
 	newlink = g_list_previous (link);
 	if (!strcmp ((char *) link->data, text)) {
 	    g_free (link->data);
-	    g_list_remove_link (list, link);
+	    tmp = g_list_remove_link (list, link);
 	    g_list_free_1 (link);
 	}
 	link = newlink;
