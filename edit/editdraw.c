@@ -300,7 +300,8 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
-	int res = g_unichar_to_utf8 (textchar, str);
+#ifndef HAVE_SLANG
+        int res = g_unichar_to_utf8 (textchar, str);
         if ( res == 0 ) {
             str[0] = '.';
             str[1] = '\0';
@@ -308,6 +309,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
             str[res] = '\0';
         }
 	addstr (str);
+#else
+	addch (textchar);
+#endif
 	p++;
     }
 }
