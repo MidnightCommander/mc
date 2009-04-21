@@ -63,8 +63,6 @@
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
-#include "selcodepage.h"	/* do_select_codepage () */
-#include "charsets.h"		/* get_codepage_id () */
 
 
 #ifndef MAP_FILE
@@ -1385,55 +1383,6 @@ toggle_listing_cmd (void)
     WPanel *p = (WPanel *) get_panel_widget (current);
 
     set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
-}
-
-/* add "#enc:encodning" to end of path */
-/* if path end width a previous #enc:, only encoding is changed no additional 
- * #enc: is appended 
- * retun new string
- */
-static char 
-*add_encoding_to_path (const char *path, const char *encoding)
-{
-    char *result;
-    char *semi;
-    char *slash;
-
-    semi = g_strrstr (path, "#enc:");
-
-    if (semi != NULL) {
-        slash = strchr (semi, PATH_SEP);
-        if (slash != NULL) {
-            result = g_strconcat (path, "/#enc:", encoding, NULL);
-        } else {
-            *semi = 0;
-            result = g_strconcat (path, "/#enc:", encoding, NULL);
-            *semi = '#';
-        }
-    } else {
-        result = g_strconcat (path, "/#enc:", encoding, NULL);
-    }
-
-    return result;
-}
-
-static void
-set_panel_encoding (WPanel *panel)
-{
-    char *encoding = NULL;
-    char *cd_path;
-
-#ifdef HAVE_CHARSET
-    do_select_codepage ();
-    encoding = g_strdup( get_codepage_id ( source_codepage ) );
-#endif
-    if (encoding) {
-        cd_path = add_encoding_to_path (panel->cwd, encoding);
-        if (!do_panel_cd (MENU_PANEL, cd_path, 0))
-            message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
-        g_free (cd_path);
-        g_free (encoding);
-    }
 }
 
 void

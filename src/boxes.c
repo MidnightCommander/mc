@@ -565,7 +565,7 @@ sel_charset_button (int action)
 {
     const char *cpname;
     char buf[64];
-    new_display_codepage = select_charset (new_display_codepage, 1);
+    new_display_codepage = select_charset (0, 0, new_display_codepage, 1);
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
 	: codepages[new_display_codepage].name;

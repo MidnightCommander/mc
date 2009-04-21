@@ -50,6 +50,8 @@
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
+#include "selcodepage.h"	/* do_select_codepage () */
+#include "charsets.h"		/* get_codepage_id () */
 #include "strutil.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
@@ -849,6 +851,36 @@ paint_panel (WPanel *panel)
     }
 
     panel->dirty = 0;
+}
+
+/* add "#enc:encodning" to end of path */
+/* if path end width a previous #enc:, only encoding is changed no additional 
+ * #enc: is appended 
+ * retun new string
+ */
+static char
+*add_encoding_to_path (const char *path, const char *encoding)
+{
+    char *result;
+    char *semi;
+    char *slash;
+
+    semi = g_strrstr (path, "#enc:");
+
+    if (semi != NULL) {
+        slash = strchr (semi, PATH_SEP);
+        if (slash != NULL) {
+            result = g_strconcat (path, "/#enc:", encoding, NULL);
+        } else {
+            *semi = 0;
+            result = g_strconcat (path, "/#enc:", encoding, NULL);
+            *semi = '#';
+        }
+    } else {
+        result = g_strconcat (path, "/#enc:", encoding, NULL);
+    }
+
+    return result;
 }
 
 /*
@@ -2197,7 +2229,7 @@ static const panel_key_map panel_keymap [] = {
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
 /*    { XCTRL('t'), mark_file },*/
-    { XCTRL('t'), encoding_cmd },
+    { XCTRL('t'), set_panel_encoding },
     { ALT('o'),   chdir_other_panel },
     { ALT('i'),   sync_other_panel },
     { ALT('l'),   chdir_to_readlink },
@@ -2538,4 +2570,33 @@ panel_set_sort_order (WPanel *panel, sortfn *sort_order)
 	g_free (current_file);
     }
     panel_re_sort (panel);
+}
+
+void
+set_panel_encoding (WPanel *panel)
+{
+    char *encoding = NULL;
+    char *cd_path;
+#ifdef HAVE_CHARSET
+    const char *errmsg;
+    int r;
+    int width = (panel->widget.x)? panel->widget.cols : panel->widget.cols * (-1);
+
+    r = select_charset (width, 0, source_codepage, 0);
+    if ( r > 0 )
+        source_codepage = r;
+    errmsg = init_translation_table (source_codepage, display_codepage);
+    if (errmsg) {
+        message (D_ERROR, MSG_ERROR, "%s", errmsg);
+        return;
+    }
+    encoding = g_strdup( get_codepage_id ( source_codepage ) );
+#endif
+    if (encoding) {
+        cd_path = add_encoding_to_path (panel->cwd, encoding);
+        if (!do_panel_cd (panel, cd_path, 0))
+            message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+        g_free (cd_path);
+        g_free (encoding);
+    }
 }

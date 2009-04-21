@@ -45,13 +45,14 @@ get_hotkey (int n)
 }
 
 int
-select_charset (int current_charset, int seldisplay)
+select_charset (int delta_x, int delta_y, int current_charset, int seldisplay)
 {
     int i, menu_lines = n_codepages + 1;
     char buffer[255];
 
     /* Create listbox */
-    Listbox *listbox = create_listbox_window (ENTRY_LEN + 2, menu_lines,
+    Listbox *listbox = create_listbox_window_delta (delta_x, delta_y,
+					      ENTRY_LEN + 2, menu_lines,
 					      _(" Choose input codepage "),
 					      "[Codepages Translation]");
 
@@ -95,7 +96,7 @@ do_select_codepage (void)
     const char *errmsg;
     int r;
 
-    r = select_charset (source_codepage, 0);
+    r = select_charset (0, 0, source_codepage, 0);
     if ( r > 0 )
         source_codepage = r;
 

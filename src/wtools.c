@@ -41,7 +41,7 @@
 
 
 Listbox *
-create_listbox_window (int cols, int lines, const char *title, const char *help)
+create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, const char *title, const char *help)
 {
     int xpos, ypos, len;
     Listbox *listbox = g_new (Listbox, 1);
@@ -58,13 +58,12 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
 	cols = len;
 
     cols = cols > COLS - 6 ? COLS - 6 : cols;
-    xpos = (COLS - cols) / 2;
-    ypos = (LINES - lines) / 2 - 2;
-
+    xpos = (COLS - cols + delta_x) / 2;
+    ypos = (LINES - lines + delta_y) / 2 - 2;
     /* Create components */
     listbox->dlg =
 	create_dlg (ypos, xpos, lines + 6, cols + 4, dialog_colors, NULL,
-		    help, title, DLG_CENTER | DLG_REVERSE);
+		    help, title, DLG_REVERSE);
 
     listbox->list = listbox_new (2, 2, lines, cols, NULL);
 
@@ -74,6 +73,12 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;
+}
+
+Listbox *
+create_listbox_window (int cols, int lines, const char *title, const char *help)
+{
+    return create_listbox_window_delta (0, 0, cols, lines, title, help);
 }
 
 /* Returns the number of the item selected */
