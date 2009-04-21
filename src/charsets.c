@@ -178,7 +178,6 @@ init_translation_table (int cpsource, int cpdisplay)
 {
     int i;
     iconv_t cd;
-    const char *cpsour, *cpdisp;
 
     /* Fill inpit <-> display tables */
 
@@ -186,6 +185,7 @@ init_translation_table (int cpsource, int cpdisplay)
 	for (i = 0; i <= 255; ++i) {
 	    conv_displ[i] = i;
 	    conv_input[i] = i;
+	    cp_source = cp_display;
 	}
 	return NULL;
     }
@@ -194,16 +194,15 @@ init_translation_table (int cpsource, int cpdisplay)
 	conv_displ[i] = i;
 	conv_input[i] = i;
     }
-
-    cp_display = cpsour = (char *) codepages[cpsource].id;
-    cp_source = cpdisp = (char *) codepages[cpdisplay].id;
+    cp_source = (char *) codepages[cpsource].id;
+    cp_display = (char *) codepages[cpdisplay].id;
 
     /* display <- inpit table */
 
-    cd = iconv_open (cpdisp, cpsour);
+    cd = iconv_open (cp_display, cp_source);
     if (cd == (iconv_t) - 1) {
 	g_snprintf (errbuf, sizeof (errbuf),
-		    _("Cannot translate from %s to %s"), cpsour, cpdisp);
+		    _("Cannot translate from %s to %s"), cp_source, cp_display);
 	return errbuf;
     }
 
@@ -214,10 +213,10 @@ init_translation_table (int cpsource, int cpdisplay)
 
     /* inpit <- display table */
 
-    cd = iconv_open (cpsour, cpdisp);
+    cd = iconv_open (cp_source, cp_display);
     if (cd == (iconv_t) - 1) {
 	g_snprintf (errbuf, sizeof (errbuf),
-		    _("Cannot translate from %s to %s"), cpdisp, cpsour);
+		    _("Cannot translate from %s to %s"), cp_display, cp_source);
 	return errbuf;
     }
 
@@ -247,6 +246,13 @@ convert_to_display (char *str)
 GString *
 str_convert_to_display (char *str)
 {
+    return str_nconvert_to_display (str, -1);
+
+}
+
+GString *
+str_nconvert_to_display (char *str, int len)
+{
     GString *buff;
     GIConv conv;
 
@@ -256,10 +262,10 @@ str_convert_to_display (char *str)
     if (cp_display == cp_source)
 	return g_string_new(str);
 
-    conv = str_crt_conv_from (cp_display);
+    conv = str_crt_conv_from (cp_source);
 
     buff = g_string_new("");
-    str_convert (conv, str, buff);
+    str_nconvert (conv, str, len, buff);
     return buff;
 }
 
@@ -276,7 +282,13 @@ convert_from_input (char *str)
 }
 
 GString *
-str_convert_from_input (char *str)
+str_convert_to_input (char *str)
+{
+    return str_nconvert_to_input (str, -1);
+}
+
+GString *
+str_nconvert_to_input (char *str, int len)
 {
     GString *buff;
     GIConv conv;
@@ -287,10 +299,10 @@ str_convert_from_input (char *str)
     if (cp_display == cp_source)
 	return g_string_new(str);
 
-    conv = str_crt_conv_to (cp_display);
+    conv = str_crt_conv_to (cp_source);
 
     buff = g_string_new("");
-    str_convert (conv, str, buff);
+    str_nconvert (conv, str, len, buff);
     return buff;
 }
 

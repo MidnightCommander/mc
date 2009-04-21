@@ -102,27 +102,68 @@ editcmd_get_str_nlen(const char*str, int byte_len)
     g_free(tmp);
     return ret;
 }
+
+/* Convert to display codepage
+ * then lowercase string.
+ * returns newly allocated string
+ */
+static gchar *
+my_lower_case_str (char *str)
+{
+    GString *buff;
+    gchar *tmp, *tmp_dup, *dup;
+    int len;
+
+    buff = str_convert_to_display (str);
+    dup = tmp_dup = g_strdup(buff->str);
+
+    tmp = buff->str;
+    len = buff->len;
+
+    while (str_tolower (tmp, &dup, &len))
+	tmp+=str_length_char(tmp);
+    g_string_free(buff, TRUE);
+
+    buff = str_convert_to_input (tmp_dup);
+    g_free(tmp_dup);
+    tmp = buff->str;
+    g_string_free(buff, FALSE);
+    return tmp;
+}
+
+
 static gchar *
 my_lower_case (char *ch)
 {
-    gchar *tmp, *tmp1;
-    size_t size = 7;
+    gchar *tmp, *tmp_dup, *dup;
+    GString *buff;
+    int len;
 
-    tmp = ch;
-    tmp1 = tmp = g_malloc0(sizeof(gchar)*7);
+    buff = str_nconvert_to_display (ch, 6);
+    dup = tmp_dup = g_malloc0(sizeof(gchar)*7);
 
-    str_tolower (ch, &tmp, &size);
-    return tmp1;
+    tmp = buff->str;
+    len = buff->len;
+
+    str_tolower (tmp, &dup, &len);
+    g_string_free(buff, TRUE);
+
+    buff = str_convert_to_input (tmp_dup);
+    g_free(tmp_dup);
+    tmp = buff->str;
+    g_string_free(buff, FALSE);
+    return tmp;
 }
 
 static gchar *
 my_lower_case_static (char *ch)
 {
     static gchar tmp[7];
-    gchar *tmp2 = tmp;
-    size_t size=7;
-    memset(tmp,0,7);
-    str_tolower (ch, &tmp2, &size);
+    gchar *tmp1;
+
+    tmp1 = my_lower_case (ch);
+    memcpy(tmp,tmp1,7);
+    g_free(tmp1);
     return tmp;
 }
 
@@ -1492,6 +1533,11 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
     char *tmp_exp4;
     gchar *c;
 
+    gchar *lower_exp;
+
+    lower_exp = my_lower_case_str(exp);
+
+
     for (p = 0; p < l; p++)	/* count conversions... */
 	if (exp[p] == '%')
 	    if (exp[++p] != '%')	/* ...except for "%%" */
@@ -1506,23 +1552,16 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	if (replace_scanf) {
 	    unsigned char e[MAX_REPL_LEN];
 	    if (n >= NUM_REPL_ARGS)
+	    {
+		g_free(lower_exp);
 		return -3;
+	    }
 
 	    if (replace_case) {
 		for (p = start; p < last_byte && p < start + MAX_REPL_LEN; p++)
 		    buf[p - start] = *(*get_byte) (data, p);
 	    } else {
-		tmp_exp3 = exp;
-		tmp_exp4 = (char *)tmp_exp3;
-		
-		tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
-		tmp_len = str_length((char *)exp);
-
-		while (str_tolower(tmp_exp1, (char **) &tmp_exp4, &tmp_len))
-		    tmp_exp1+=str_length_char(tmp_exp1);
-
-		g_free(tmp_exp2);
-
+		exp = lower_exp;
 		p = start;
 		while(p < last_byte && p < start + MAX_REPL_LEN)
 		{
@@ -1543,6 +1582,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 		if (n == sscanf ((char *) buf, (char *) exp, SCANF_ARGS)) {
 		    if (*((int *) sargs[n])) {
 			*len = *((int *) sargs[n]);
+			g_free(lower_exp);
 			return start;
 		    }
 		}
@@ -1594,6 +1634,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 
 		    if (found_start <= -2) {	/* regcomp/regexec error */
 			*len = 0;
+			g_free(lower_exp);
 			return -3;
 		    }
 		    else if (found_start == -1)	/* not found: try next line */
@@ -1605,10 +1646,16 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 			continue;
 		    }
 		    else	/* found */
+		    {
+			g_free(lower_exp);
 			return (start + offset - q + found_start);
+		    }
 		}
 		if (once_only)
+		{
+		    g_free(lower_exp);
 		    return -2;
+		}
 
 		if (buf[q - 1] != '\n') { /* incomplete line: try to recover */
 		    buf = mbuf + MAX_REPL_LEN / 2;
@@ -1646,21 +1693,21 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 			    q++;
 		    }
 		    if (f == 0)
+		    {
+			g_free(lower_exp);
 			return p;
+		    }
 		}
 		if (once_only)
+		{
+		    g_free(lower_exp);
 		    return -2;
+		}
 		p+= str_length_char(c);
 	    }
 	} else {
-	    tmp_exp3 = exp;
-	    tmp_exp1 = tmp_exp2 = g_strdup((gchar *)exp);
-	    tmp_len = strlen((char *) exp);
-	    tmp_exp4 = (char *) tmp_exp3;
-	    while (str_tolower(tmp_exp1, &tmp_exp4, &tmp_len))
-		tmp_exp1+=str_length_char(tmp_exp1);
+	    exp = lower_exp;
 
-	    g_free(tmp_exp2);
 	    p = start;
 	    while(p < last_byte -l)
 	    {
@@ -1681,17 +1728,22 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 			    q++;
 		    }
 		    if (f == 0){
+			g_free(lower_exp);
 			return p;
 		    }
 		}
 
 		if (once_only)
+		{
+		    g_free(lower_exp);
 		    return -2;
+		}
 
 		p+= str_length_char(c);
 	    }
 	}
     }
+    g_free(lower_exp);
     return -2;
 }
 
@@ -2157,7 +2209,7 @@ void edit_search_cmd (WEdit * edit, int again)
 
 #ifdef HAVE_CHARSET
 	if (exp && *exp){
-	    GString *tmp = str_convert_from_input (exp);
+	    GString *tmp = str_convert_to_input (exp);
 	    if (tmp && tmp->len){
 		g_free(exp);
 		exp = tmp->str;

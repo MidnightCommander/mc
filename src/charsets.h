@@ -51,8 +51,11 @@ int convert_from_8bit_to_utf_c (const char input_char);
 */
 int convert_from_8bit_to_utf_c2 (const char input_char);
 
-GString *str_convert_from_input (char *str);
+GString *str_convert_to_input (char *str);
+GString *str_nconvert_to_input (char *str, int len);
+
 GString *str_convert_to_display (char *str);
+GString *str_nconvert_to_display (char *str, int len);
 
 /* Convert single characters */
 static inline int
