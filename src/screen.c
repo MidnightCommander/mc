@@ -887,21 +887,38 @@ static char *
 remove_encoding_from_path (const char *path)
 {
     GString *ret;
-    char *tmp = path;
-    char *tmp2 = path;
+    GString *tmp_path, *tmp_conv;
+    char *tmp, *tmp2;
+    const char *enc;
+    GIConv converter;
+
     ret = g_string_new("");
-    while (*tmp2 && (tmp = strstr (tmp2, "/#enc:")) != NULL){
-mc_log("%s\n",tmp);
-	g_string_append_len (ret, tmp2, tmp - tmp2);
-	tmp += 6;
-	while (*tmp && *tmp != '/')
-	    tmp++;
-	tmp2 = tmp;
+    tmp_conv = g_string_new("");
+
+    tmp_path = g_string_new(path);
+
+    while ((tmp = g_strrstr (tmp_path->str, "/#enc:")) != NULL){
+	enc = vfs_get_encoding ((const char *) tmp);
+	converter = enc ? str_crt_conv_to (enc): str_cnv_to_term;
+        if (converter == INVALID_CONV) converter = str_cnv_to_term;
+
+	tmp2=tmp+1;
+	while (*tmp2 && *tmp2 != '/')
+	    tmp2++;
+
+	if (*tmp2){
+	    str_vfs_convert_from (converter, tmp2, tmp_conv);
+	    g_string_prepend(ret, tmp_conv->str);
+	    g_string_set_size(tmp_conv,0);
+	}
+	g_string_set_size(tmp_path,tmp - tmp_path->str);
     }
-    g_string_append (ret, tmp2);
+    g_string_prepend(ret, tmp_path->str);
+    g_string_free(tmp_path,TRUE);
+    g_string_free(tmp_conv,TRUE);
+
     tmp = ret->str;
     g_string_free(ret, FALSE);
-mc_log("return: %s\n", tmp);
     return tmp;
 }
 
