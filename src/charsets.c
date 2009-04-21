@@ -351,7 +351,7 @@ convert_from_utf_to_current_c (const int input_char)
     if ( res == 0 ) {
         return ch;
     }
-    str[6] = '\0';
+    str[res] = '\0';
 
     const char *cp_from =  get_codepage_id ( source_codepage );
     conv = str_crt_conv_from ( cp_from );

@@ -300,18 +300,18 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
-#ifndef HAVE_SLANG
-        int res = g_unichar_to_utf8 (textchar, str);
-        if ( res == 0 ) {
-            str[0] = '.';
-            str[1] = '\0';
+	if ( textchar > 255 ) {
+            int res = g_unichar_to_utf8 (textchar, str);
+            if ( res == 0 ) {
+                str[0] = '.';
+                str[1] = '\0';
+            } else {
+                str[res] = '\0';
+            }
+            addstr (str);
         } else {
-            str[res] = '\0';
+            addch(textchar);
         }
-	addstr (str);
-#else
-	addch (textchar);
-#endif
 	p++;
     }
 }
