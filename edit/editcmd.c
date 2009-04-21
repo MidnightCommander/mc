@@ -1142,7 +1142,7 @@ edit_block_move_cmd (WEdit *edit)
 	edit_scroll_screen_over_cursor (edit);
 	count = start_mark;
 	while (count < end_mark) {
-	    copy_buf[end_mark - count - 1] = edit_delete (edit);
+	    copy_buf[end_mark - count - 1] = edit_delete (edit, 1);
 	    count++;
 	}
 	edit_scroll_screen_over_cursor (edit);
@@ -1187,7 +1187,7 @@ edit_delete_column_of_text (WEdit * edit)
 	edit_cursor_move (edit, p - edit->curs1);
 	while (q > p) {		/* delete line between margins */
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
-		edit_delete (edit);
+		edit_delete (edit, 1);
 	    q--;
 	}
 	if (n)			/* move to next line except on the last delete */
@@ -1226,7 +1226,7 @@ edit_block_delete (WEdit *edit)
 	    edit_delete_column_of_text (edit);
 	} else {
 	    while (count < end_mark) {
-		edit_delete (edit);
+		edit_delete (edit, 1);
 		count++;
 	    }
 	}
@@ -2119,7 +2119,7 @@ edit_replace_cmd (WEdit *edit, int again)
 			times_replaced++;
 			i = editcmd_get_str_nlen(edit_get_byte_ptr(edit,edit->found_start), i);
 			while (i--)
-			    edit_delete (edit);
+			    edit_delete (edit, 1);
 			while (repl_str[++i])
 			    edit_insert (edit, repl_str[i]);
 		    } else {
@@ -2132,7 +2132,7 @@ edit_replace_cmd (WEdit *edit, int again)
 		} else {
 		    times_replaced++;
 		    while (i--)
-			edit_delete (edit);
+			edit_delete (edit, 1);
 		    while (input2[++i])
 			edit_insert (edit, input2[i]);
 		}

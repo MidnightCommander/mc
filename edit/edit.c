@@ -1070,7 +1070,7 @@ void edit_insert_ahead (WEdit * edit, int c)
 }
 
 
-int edit_delete (WEdit * edit)
+int edit_delete (WEdit * edit, const int byte_delete)
 {
     int p = 0;
     int cw = 1;
@@ -1083,7 +1083,8 @@ int edit_delete (WEdit * edit)
     edit->last_get_rule -= (edit->last_get_rule > edit->curs1);
 
     cw = 1;
-    if ( edit->utf8 ) {
+    /* if byte_delete = 1 then delete only one byte not multibyte char*/
+    if ( edit->utf8 && byte_delete == 0 ) {
         edit_get_utf (edit, edit->curs1, &cw);
         if ( cw < 1 )
             cw = 1;
@@ -1950,7 +1951,7 @@ static void edit_right_delete_word (WEdit * edit)
     for (;;) {
 	if (edit->curs1 >= edit->last_byte)
 	    break;
-	c1 = edit_delete (edit);
+	c1 = edit_delete (edit, 1);
 	c2 = edit_get_byte (edit, edit->curs1);
 	if ((isspace (c1) == 0) != (isspace (c2) == 0))
 	    break;
@@ -2000,7 +2001,7 @@ edit_do_undo (WEdit * edit)
 	    edit_backspace (edit);
 	    break;
 	case DELCHAR:
-	    edit_delete (edit);
+	    edit_delete (edit, 0);
 	    break;
 	case COLUMN_ON:
 	    column_highlighting = 1;
@@ -2044,7 +2045,7 @@ static void edit_delete_to_line_end (WEdit * edit)
     while (edit_get_byte (edit, edit->curs1) != '\n') {
 	if (!edit->curs2)
 	    break;
-	edit_delete (edit);
+	edit_delete (edit, 1);
     }
 }
 
@@ -2066,7 +2067,7 @@ edit_delete_line (WEdit *edit)
      *   beyond EOF.
      */
     while (edit_get_byte (edit, edit->curs1) != '\n') {
-	(void) edit_delete (edit);
+	(void) edit_delete (edit, 1);
     }
 
     /*
@@ -2074,7 +2075,7 @@ edit_delete_line (WEdit *edit)
      * Note that edit_delete() will not corrupt anything if called while
      *   cursor position is EOF.
      */
-    (void) edit_delete (edit);
+    (void) edit_delete (edit, 1);
 
     /*
      * Delete left part of the line.
@@ -2383,7 +2384,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     if (char_for_insertion >= 0) {
 	if (edit->overwrite) {
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
-		edit_delete (edit);
+		edit_delete (edit, 1);
 	}
 #ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
@@ -2501,11 +2502,11 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    int i;
 	    if (is_in_indent (edit) && left_of_four_spaces (edit)) {
 		for (i = 1; i <= HALF_TAB_SIZE; i++)
-		    edit_delete (edit);
+		    edit_delete (edit, 1);
 		break;
 	    }
 	}
-	edit_delete (edit);
+	edit_delete (edit, 0);
 	break;
     case CK_Delete_Word_Left:
 	edit_left_delete_word (edit);

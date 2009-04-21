@@ -160,7 +160,7 @@ void edit_block_move_cmd (WEdit * edit);
 int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 
-int edit_delete (WEdit * edit);
+int edit_delete (WEdit * edit, const int byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, long increment);
 void edit_push_action (WEdit * edit, long c, ...);
