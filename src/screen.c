@@ -883,6 +883,28 @@ static char
     return result;
 }
 
+static char *
+remove_encoding_from_path (const char *path)
+{
+    GString *ret;
+    char *tmp = path;
+    char *tmp2 = path;
+    ret = g_string_new("");
+    while (*tmp2 && (tmp = strstr (tmp2, "/#enc:")) != NULL){
+mc_log("%s\n",tmp);
+	g_string_append_len (ret, tmp2, tmp - tmp2);
+	tmp += 6;
+	while (*tmp && *tmp != '/')
+	    tmp++;
+	tmp2 = tmp;
+    }
+    g_string_append (ret, tmp2);
+    tmp = ret->str;
+    g_string_free(ret, FALSE);
+mc_log("return: %s\n", tmp);
+    return tmp;
+}
+
 /*
  * Repaint the contents of the panels without frames.  To schedule panel
  * for repainting, set panel->dirty to 1.  There are many reasons why
@@ -2583,8 +2605,21 @@ set_panel_encoding (WPanel *panel)
     int width = (panel->widget.x)? panel->widget.cols : panel->widget.cols * (-1);
 
     r = select_charset (width, 0, source_codepage, 0);
-    if ( r > 0 )
-        source_codepage = r;
+
+    if ( r == -2)
+	return;
+
+
+    if (r == -1){
+	errmsg = init_translation_table (display_codepage, display_codepage);
+	cd_path = remove_encoding_from_path (panel->cwd);
+	do_panel_cd (panel, cd_path, 0);
+	g_free (cd_path);
+	return;
+    }
+
+    source_codepage = r;
+
     errmsg = init_translation_table (source_codepage, display_codepage);
     if (errmsg) {
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
