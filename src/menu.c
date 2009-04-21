@@ -388,6 +388,9 @@ menubar_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	if (menubar_visible)
 	    menubar_draw (menubar);
+	else
+	    /* try show menu after screen resize */
+	    send_message (w, WIDGET_FOCUS, 0);
 	return MSG_HANDLED;
 
     default:
@@ -542,7 +545,7 @@ destroy_menu (Menu *menu)
 WMenu *
 menubar_new (int y, int x, int cols, Menu *menu[], int items)
 {
-    WMenu *menubar = g_new0 (WMenu, 1);	/* FIXME: subsel used w/o being set */
+    WMenu *menubar = g_new0 (WMenu, 1);
 
     init_widget (&menubar->widget, y, x, 1, cols,
 		 menubar_callback, menubar_event);
@@ -551,6 +554,7 @@ menubar_new (int y, int x, int cols, Menu *menu[], int items)
     menubar->dropped = 0;
     menubar->items = items;
     menubar->selected = 0;
+    menubar->subsel = 0;
     widget_want_cursor (menubar->widget, 0);
     menubar_arrange (menubar);
 
