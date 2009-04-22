@@ -161,12 +161,12 @@ str_ascii_length2 (const char *text, int size)
     return (size >= 0) ? min (strlen (text), size) : strlen (text);
 }
 
-int
+static estr_t
 str_ascii_vfs_convert_to (GIConv coder, const char *string,
 			  int size, GString * buffer)
 {
     g_string_append_len (buffer, string, size);
-    return 0;
+    return ESTR_SUCCESS;
 }
 
 

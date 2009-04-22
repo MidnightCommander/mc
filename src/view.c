@@ -338,11 +338,11 @@ view_get_char (WView *view, offset_type from, char *ch, int size)
         result++;
         buffer[result] = '\0';
         switch (str_translate_char (view->converter, buffer, result, ch, size)) {
-            case 0:
+            case ESTR_SUCCESS:
                 return (int) result;
-            case 1:
+            case ESTR_PROBLEM:
                 break;
-            case 2:
+            case ESTR_FAILURE:
                 ch[0] = '?';
                 ch[1] = '\0';
                 return 1;

@@ -381,14 +381,14 @@ vfs_supported_enconding (const char *encoding) {
  *          #enc: subtring
  * buffer - used to store result of translation
  */ 
-static int
+static estr_t
 _vfs_translate_path (const char *path, int size, 
                      GIConv defcnv, GString *buffer)
 {
     const char *semi;
     const char *ps;
     const char *slash;
-    int state = 0;
+    estr_t state = ESTR_SUCCESS;
     static char encoding[16];
     GIConv coder;
     int ms;
@@ -408,7 +408,8 @@ _vfs_translate_path (const char *path, int size,
 
         state = _vfs_translate_path (path, ms, defcnv, buffer);
 
-        if (state != 0) return state;
+        if (state != ESTR_SUCCESS)
+	    return state;
         /* now can be translated part after #enc: */
 
         semi+= 5;
@@ -445,21 +446,20 @@ _vfs_translate_path (const char *path, int size,
                 errno = EINVAL;
                 return ESTR_FAILURE;
         }
-        
     } else {
         /* path can be translated whole at once */
         state = str_vfs_convert_to (defcnv, path, size, buffer);
         return state;
     }
-    
-    return 0;
+
+    return ESTR_SUCCESS;
 }
 
 char *
 vfs_translate_path (const char *path) 
 {
-    int state;
-    
+    estr_t state;
+
     g_string_set_size(vfs_str_buffer,0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
     // strict version
@@ -740,7 +740,7 @@ mc_readdir (DIR *dirp)
     static struct dirent result;
     struct dirent *entry = NULL;
     struct vfs_dirinfo *dirinfo;
-    int state;
+    estr_t state;
 
     if (!dirp) {
 	errno = EFAULT;
@@ -756,7 +756,7 @@ mc_readdir (DIR *dirp)
             g_string_set_size(vfs_str_buffer,0);
             state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
-//        } while (state != 0);
+//        } while (state != ESTR_SUCCESS);
         memcpy (&result, entry, sizeof (struct dirent));
         g_strlcpy (result.d_name, vfs_str_buffer->str, NAME_MAX + 1);
         result.d_reclen = strlen (result.d_name);
@@ -844,7 +844,7 @@ _vfs_get_cwd (void)
     char *trans;
     const char *encoding;
     char *tmp;
-    int state;
+    estr_t state;
     struct stat my_stat, my_stat2;
 
     trans = vfs_translate_path_n (current_dir); //add check if NULL
@@ -857,9 +857,9 @@ _vfs_get_cwd (void)
 		g_string_set_size(vfs_str_buffer,0);
                 state = str_vfs_convert_from (str_cnv_from_term, tmp, vfs_str_buffer);
                 g_free (tmp);
-                sys_cwd = (state == 0) ? g_strdup (vfs_str_buffer->str) : NULL;
-                if (!sys_cwd)			
-	    return current_dir;
+                sys_cwd = (state == ESTR_SUCCESS) ? g_strdup (vfs_str_buffer->str) : NULL;
+                if (!sys_cwd)
+		    return current_dir;
 
 	/* Otherwise check if it is O.K. to use the current_dir */
                 if (!cd_symlinks || mc_stat (sys_cwd, &my_stat) 

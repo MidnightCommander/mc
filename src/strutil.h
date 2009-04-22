@@ -36,14 +36,21 @@
  * decompose form. (used in do_search (screen.c))
  */
 
-/* errors for conversion function:
- * problem means, that not every characters was successfully converted (They are
+/* results of conversion function
+ */
+typedef enum {
+/* success means, that convertion has been finished successully
+ */
+    ESTR_SUCCESS = 0,
+/* problem means, that not every characters was successfully converted (They are
  * replaced with questionmark). So is impossible convert string back. 
- * failure means, that conversion is not possible (example: wrong encoding 
+ */
+    ESTR_PROBLEM = 1,
+/* failure means, that conversion is not possible (example: wrong encoding 
  * of input string)
  */
-#define ESTR_PROBLEM    1
-#define ESTR_FAILURE    2
+    ESTR_FAILURE = 2
+} estr_t;
 
 /* constanst originally from screen.c
  * used for alignment strings on terminal
@@ -75,7 +82,7 @@ extern GIConv str_cnv_not_convert;
 
 // all functions in str_class must be defined for every encoding
 struct str_class {
-    int (*vfs_convert_to) (GIConv coder, const char *string, 
+    estr_t (*vfs_convert_to) (GIConv coder, const char *string, 
                         int size, GString *buffer);           //I
     void (*insert_replace_char) (GString *buffer);
     int (*is_valid_string) (const char *);                              //I
@@ -152,22 +159,22 @@ void str_close_conv (GIConv);
  * return 0 if there was no problem. 
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
  */ 
-int str_convert (GIConv, char *, GString *);
+estr_t str_convert (GIConv, char *, GString *);
 
-int str_nconvert (GIConv, char *, int, GString *);
+estr_t str_nconvert (GIConv, char *, int, GString *);
 
 /* return only 0 or ESTR_FAILURE, because vfs must be able to convert result to
  * original string. (so no replace with questionmark)
  * if coder is str_cnv_from_term or str_cnv_not_convert, string is only copied,
  * so is possible to show file, that is not valid in terminal encoding
  */
-int str_vfs_convert_from (GIConv, char *, GString *);
+estr_t str_vfs_convert_from (GIConv, char *, GString *);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
  * does replace with questionmark 
  * I
  */
-int str_vfs_convert_to (GIConv, const char *, int, GString *);
+estr_t str_vfs_convert_to (GIConv, const char *, int, GString *);
 
 /* printf functin for str_buffer, append result of printf at the end of buffer
  */
@@ -191,10 +198,11 @@ void str_uninit_strings ();
 /* try convert characters in ch to output using conv
  * ch_size is size of ch, can by (size_t)(-1) (-1 only for ASCII 
  *     compatible encoding, for other must be set)
- * return 0 if conversion was successfully, ESTR_PROBLEM if ch contains only 
- * part of characters, ESTR_FAILURE if conversion is not possible
+ * return ESTR_SUCCESS if conversion was successfully,
+ * ESTR_PROBLEM if ch contains only part of characters,
+ * ESTR_FAILURE if conversion is not possible
  */
-int str_translate_char (GIConv conv, const char *ch, size_t ch_size, 
+estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size, 
                         char *output, size_t out_size);
 
 /* test, if text is valid in terminal encoding

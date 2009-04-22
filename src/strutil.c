@@ -97,15 +97,18 @@ str_close_conv (GIConv conv)
 	g_iconv_close (conv);
 }
 
-static int
+static estr_t
 _str_convert (GIConv coder, char *string, int size, GString * buffer)
 {
-    int state;
+    estr_t state  = ESTR_SUCCESS;
     gchar *tmp_buff = NULL;
     gssize left;
     gsize bytes_read, bytes_written;
     GError *error = NULL;
     errno = 0;
+
+    if (coder == INVALID_CONV)
+	return ESTR_FAILURE;
 
     if (string == NULL || buffer == NULL)
 	return ESTR_FAILURE;
@@ -116,7 +119,6 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 	return ESTR_FAILURE;
     }
 */
-    state = 0;
     if (size < 0)
     {
 	size = strlen (string);
@@ -129,10 +131,6 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
     }
 
     left = size;
-
-    if (coder == (GIConv) (-1))
-	return ESTR_FAILURE;
-
     g_iconv (coder, NULL, NULL, NULL, NULL);
 
     while (left)
@@ -154,7 +152,7 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 		g_error_free (error);
 		error = NULL;
 		return ESTR_FAILURE;
-		break;
+
 	    case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
 		/* Invalid byte sequence in conversion input. */
 		if (tmp_buff){
@@ -176,6 +174,7 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 		}
 		state = ESTR_PROBLEM;
 		break;
+
 	    case G_CONVERT_ERROR_PARTIAL_INPUT:
 		/* Partial character sequence at end of input. */
 		g_error_free (error);
@@ -190,7 +189,7 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 		    g_free (tmp_buff);
 		}
 		return ESTR_PROBLEM;
-		break;
+
 	    case G_CONVERT_ERROR_BAD_URI:	/* Don't know how handle this error :( */
 	    case G_CONVERT_ERROR_NOT_ABSOLUTE_PATH:	/* Don't know how handle this error :( */
 	    case G_CONVERT_ERROR_FAILED:	/* Conversion failed for some reason. */
@@ -234,35 +233,27 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
     return state;
 }
 
-int
+estr_t
 str_convert (GIConv coder, char *string, GString * buffer)
 {
-    int result;
-
-    result = _str_convert (coder, string, -1, buffer);
-
-    return result;
+    return _str_convert (coder, string, -1, buffer);
 }
 
-int
+estr_t
 str_nconvert (GIConv coder, char *string, int size, GString * buffer)
 {
-    int result;
-
-    result = _str_convert (coder, string, size, buffer);
-
-    return result;
+    return _str_convert (coder, string, size, buffer);
 }
 
-int
+estr_t
 str_vfs_convert_from (GIConv coder, char *string, GString * buffer)
 {
-    int result;
+    estr_t result;
 
     if (coder == str_cnv_not_convert)
     {
-	g_string_append (buffer, (string)?string:"");
-	result = 0;
+	g_string_append (buffer, string != NULL ? string : "");
+	result = ESTR_SUCCESS;
     }
     else
 	result = _str_convert (coder, string, -1, buffer);
@@ -270,7 +261,7 @@ str_vfs_convert_from (GIConv coder, char *string, GString * buffer)
     return result;
 }
 
-int
+estr_t
 str_vfs_convert_to (GIConv coder, const char *string, int size,
 		    GString * buffer)
 {
@@ -301,7 +292,7 @@ str_insert_replace_char (GString * buffer)
     used_class.insert_replace_char (buffer);
 }
 
-int
+estr_t
 str_translate_char (GIConv conv, const char *keys, size_t ch_size,
 		    char *output, size_t out_size)
 {
@@ -314,10 +305,10 @@ str_translate_char (GIConv conv, const char *keys, size_t ch_size,
 
     cnv = g_iconv (conv, (gchar **) &keys, &left, &output, &out_size);
     if (cnv == (size_t)(-1)) {
-        if (errno == EINVAL) return ESTR_PROBLEM; else return ESTR_FAILURE;
+        return (errno == EINVAL) ? ESTR_PROBLEM : ESTR_FAILURE;
     } else {
         output[0] = '\0';
-        return 0;
+        return ESTR_SUCCESS;
     }
 }
 

@@ -330,16 +330,16 @@ str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
     g_string_append_c (buffer, '?');
 }
 
-static int
+static estr_t
 str_utf8_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
 {
-    int result;
+    estr_t result;
 
     if (coder == str_cnv_not_convert)
     {
 	g_string_append_len (buffer, string, size);
-	result = 0;
+	result = ESTR_SUCCESS;
     }
     else
 	result = str_nconvert (coder, (char *) string, size, buffer);

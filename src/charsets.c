@@ -324,11 +324,11 @@ convert_from_utf_to_current (const char *str)
 
     if (conv != INVALID_CONV) {
         switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
-        case 0:
+        case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
-        case 1:
-        case 2:
+        case ESTR_PROBLEM:
+        case ESTR_FAILURE:
             ch = '.';
             break;
         }
@@ -360,11 +360,11 @@ convert_from_utf_to_current_c (const int input_char)
 
     if (conv != INVALID_CONV) {
         switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
-        case 0:
+        case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
-        case 1:
-        case 2:
+        case ESTR_PROBLEM:
+        case ESTR_FAILURE:
             ch = '.';
             break;
         }
@@ -390,7 +390,7 @@ convert_from_8bit_to_utf_c (const char input_char)
 
     if (conv != INVALID_CONV) {
         switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
-        case 0:
+        case ESTR_SUCCESS:
             res = g_utf8_get_char_validated (buf_ch, -1);
             if ( res < 0 ) {
                 ch = buf_ch[0];
@@ -398,8 +398,8 @@ convert_from_8bit_to_utf_c (const char input_char)
                 ch = res;
             }
             break;
-        case 1:
-        case 2:
+        case ESTR_PROBLEM:
+        case ESTR_FAILURE:
             ch = '.';
             break;
         }
@@ -426,7 +426,7 @@ convert_from_8bit_to_utf_c2 (const char input_char)
 
     if (conv != INVALID_CONV) {
         switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
-        case 0:
+        case ESTR_SUCCESS:
             res = g_utf8_get_char_validated (buf_ch, -1);
             if ( res < 0 ) {
                 ch = buf_ch[0];
@@ -434,8 +434,8 @@ convert_from_8bit_to_utf_c2 (const char input_char)
                 ch = res;
             }
             break;
-        case 1:
-        case 2:
+        case ESTR_PROBLEM:
+        case ESTR_FAILURE:
             ch = '.';
             break;
         }

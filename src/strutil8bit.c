@@ -163,16 +163,16 @@ str_8bit_length2 (const char *text, int size)
     return (size >= 0) ? min (strlen (text), size) : strlen (text);
 }
 
-int
+static estr_t
 str_8bit_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
 {
-    int result;
+    estr_t result;
 
     if (coder == str_cnv_not_convert)
     {
 	g_string_append_len (buffer, string, size);
-	result = 0;
+	result = ESTR_SUCCESS;
     }
     else
 	result = str_nconvert (coder, (char *) string, size, buffer);
