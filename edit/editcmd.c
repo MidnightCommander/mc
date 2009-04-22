@@ -2183,7 +2183,6 @@ void edit_search_cmd (WEdit * edit, int again)
 
     if (!edit) {
 	g_free (old);
-	old = NULL;
 	return;
     }
 
@@ -2199,13 +2198,11 @@ void edit_search_cmd (WEdit * edit, int again)
 	    if (tmp && tmp->len){
 		old_exp = exp = tmp->str;
 	    }
-	    if (tmp)
-		g_string_free(tmp,FALSE);
+	    g_string_free (tmp, FALSE);
 	}
 #endif /* HAVE_CHARSET */
 	edit_search_dialog (edit, &exp);
-	if (old_exp)
-	    g_free(old_exp);
+	g_free (old_exp);
 
 #ifdef HAVE_CHARSET
 	if (exp && *exp){
@@ -2214,8 +2211,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		g_free(exp);
 		exp = tmp->str;
 	    }
-	    if (tmp)
-		g_string_free(tmp,FALSE);
+	    g_string_free (tmp, FALSE);
 	}
 #endif /* HAVE_CHARSET */
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
