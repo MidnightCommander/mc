@@ -266,6 +266,7 @@ str_nconvert_to_display (char *str, int len)
 
     buff = g_string_new("");
     str_nconvert (conv, str, len, buff);
+    str_close_conv (conv);
     return buff;
 }
 
@@ -303,6 +304,7 @@ str_nconvert_to_input (char *str, int len)
 
     buff = g_string_new("");
     str_nconvert (conv, str, len, buff);
+    str_close_conv (conv);
     return buff;
 }
 
