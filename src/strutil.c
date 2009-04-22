@@ -98,7 +98,7 @@ str_close_conv (GIConv conv)
 }
 
 static estr_t
-_str_convert (GIConv coder, char *string, int size, GString * buffer)
+_str_convert (GIConv coder, const char *string, int size, GString * buffer)
 {
     estr_t state  = ESTR_SUCCESS;
     gchar *tmp_buff = NULL;
@@ -234,19 +234,19 @@ _str_convert (GIConv coder, char *string, int size, GString * buffer)
 }
 
 estr_t
-str_convert (GIConv coder, char *string, GString * buffer)
+str_convert (GIConv coder, const char *string, GString * buffer)
 {
     return _str_convert (coder, string, -1, buffer);
 }
 
 estr_t
-str_nconvert (GIConv coder, char *string, int size, GString * buffer)
+str_nconvert (GIConv coder, const char *string, int size, GString * buffer)
 {
     return _str_convert (coder, string, size, buffer);
 }
 
 estr_t
-str_vfs_convert_from (GIConv coder, char *string, GString * buffer)
+str_vfs_convert_from (GIConv coder, const char *string, GString * buffer)
 {
     estr_t result;
 

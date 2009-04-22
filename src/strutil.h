@@ -159,16 +159,16 @@ void str_close_conv (GIConv);
  * return 0 if there was no problem. 
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
  */ 
-estr_t str_convert (GIConv, char *, GString *);
+estr_t str_convert (GIConv, const char *, GString *);
 
-estr_t str_nconvert (GIConv, char *, int, GString *);
+estr_t str_nconvert (GIConv, const char *, int, GString *);
 
 /* return only 0 or ESTR_FAILURE, because vfs must be able to convert result to
  * original string. (so no replace with questionmark)
  * if coder is str_cnv_from_term or str_cnv_not_convert, string is only copied,
  * so is possible to show file, that is not valid in terminal encoding
  */
-estr_t str_vfs_convert_from (GIConv, char *, GString *);
+estr_t str_vfs_convert_from (GIConv, const char *, GString *);
 
 /* if coder is str_cnv_to_term or str_cnv_not_convert, string is only copied,
  * does replace with questionmark 
