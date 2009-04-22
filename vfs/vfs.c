@@ -732,15 +732,31 @@ mc_opendir (const char *dirname)
     }
 }
 
+static struct dirent * mc_readdir_result = NULL;
+
 struct dirent *
 mc_readdir (DIR *dirp)
 {
     int handle;
     struct vfs_class *vfs;
-    static struct dirent result;
     struct dirent *entry = NULL;
     struct vfs_dirinfo *dirinfo;
     estr_t state;
+
+    if (!mc_readdir_result)
+    {
+        /* We can't just allocate struct dirent as (see man dirent.h)
+         * struct dirent has VERY nonnaive semantics of allocating
+         * d_name in it. Moreover, linux's glibc-2.9 allocates dirents _less_,
+         * than 'sizeof (struct dirent)' making full bitwise (sizeof dirent) copy
+         * heap corrupter. So, allocate longliving dirent with at least
+         * (NAME_MAX + 1) for d_name in it.
+         * Strictly saying resulting dirent is unusable as we don't adjust internal
+         * structures, holding dirent size. But we don't use it in libc infrastructure.
+         * TODO: to make simpler homemade dirent-alike structure.
+         */
+        mc_readdir_result = (struct dirent *)malloc(sizeof(struct dirent *) + NAME_MAX + 1);
+    }
 
     if (!dirp) {
 	errno = EFAULT;
@@ -757,12 +773,12 @@ mc_readdir (DIR *dirp)
             state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
 //        } while (state != ESTR_SUCCESS);
-        memcpy (&result, entry, sizeof (struct dirent));
-        g_strlcpy (result.d_name, vfs_str_buffer->str, NAME_MAX + 1);
-        result.d_reclen = strlen (result.d_name);
+
+        mc_readdir_result->d_ino = entry->d_ino;
+        g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, NAME_MAX + 1);
     }
     if (entry == NULL) errno = vfs->readdir ? ferrno (vfs) : E_NOTSUPP;
-    return (entry != NULL) ? &result : NULL;
+    return (entry != NULL) ? mc_readdir_result : NULL;
 }
 
 int
