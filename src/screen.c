@@ -912,6 +912,7 @@ remove_encoding_from_path (const char *path)
 	    g_string_set_size(tmp_conv,0);
 	}
 	g_string_set_size(tmp_path,tmp - tmp_path->str);
+	str_close_conv (converter);
     }
     g_string_prepend(ret, tmp_path->str);
     g_string_free(tmp_path,TRUE);
