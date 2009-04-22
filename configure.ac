@@ -31,7 +31,7 @@ DX_PDF_FEATURE(OFF)
 DX_PS_FEATURE(OFF)
 DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
 
-PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 
 dnl
 dnl First try glib 2.x.  If it's not found, use glib 1.2.x.
