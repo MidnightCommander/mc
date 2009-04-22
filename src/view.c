@@ -593,6 +593,12 @@ view_map_offset_and_column (WView *view, struct cache_line *line,
 {
     const screen_dimen width = view->data_area.width;
     struct read_info info;
+
+    /* HACK: valgrind screams here.
+     * TODO: to figure out WHY valgrind detects uninitialized
+     * variables. Maybe, info isn't fully initialized?
+     */
+    memset (&info, 0, sizeof info);
     offset_type nroff_start = 0;
     int nroff_seq = 0;
     int w;
