@@ -57,8 +57,8 @@ typedef enum {
 
 /*** file scope variables ************************************************************************/
 
-extern const char *cp_source;
-extern const char *cp_display;
+const char *cp_source;
+const char *cp_display;
 
 /*** file scope functions ************************************************************************/
 

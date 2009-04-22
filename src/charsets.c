@@ -39,8 +39,8 @@ struct codepage_desc *codepages;
 unsigned char conv_displ[256];
 unsigned char conv_input[256];
 
-static const char *cp_display = NULL;
-static const char *cp_source = NULL;
+const char *cp_display = NULL;
+const char *cp_source = NULL;
 
 
 int

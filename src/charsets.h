@@ -16,6 +16,8 @@ struct codepage_desc {
     char *name;
 };
 
+extern const char *cp_display;
+extern const char *cp_source;
 extern struct codepage_desc *codepages;
 
 const char *get_codepage_id (const int n);

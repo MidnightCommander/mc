@@ -1,6 +1,10 @@
 #ifndef MC__SEARCH_H
 #define MC__SEARCH_H
 
+#include <config.h>
+
+#include "../src/global.h"		/* <glib.h> */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
