@@ -1920,7 +1920,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	else
 	    edit->search->search_type = MC_SEARCH_T_NORMAL;
 
-	edit->search->is_case_sentitive = (!replace_case);
+	edit->search->is_case_sentitive = (replace_case);
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 

@@ -153,18 +153,10 @@ mc_search__cond_struct_new (const char *str, guint str_len, const char *charset,
     mc_search_cond->str = g_string_new_len (str, str_len);
     mc_search_cond->len = str_len;
     mc_search_cond->charset = g_strdup (charset);
-    if (case_sentitive) {
+    if (!case_sentitive) {
         mc_search_cond->upper = mc_search__toupper_case_str (charset, str, str_len);
         mc_search_cond->lower = mc_search__tolower_case_str (charset, str, str_len);
     }
-char *up, *lo;
-up = (mc_search_cond->upper) ? mc_search_cond->upper->str: "(null)";
-lo = (mc_search_cond->lower) ? mc_search_cond->lower->str: "(null)";
-mc_log("\
-mc_search_cond->str   = %s\n\
-mc_search_cond->upper = %s\n\
-mc_search_cond->lower = %s\n\
-\n",mc_search_cond->str->str, up, lo);
     return mc_search_cond;
 }
 
@@ -263,7 +255,7 @@ mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize se
     for (loop1 = 0; loop1 < mc_search->conditions->len; loop1++) {
         mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (mc_search->conditions, loop1);
 
-        if (search_pos > mc_search_cond->len)
+        if (search_pos > mc_search_cond->len-1)
             continue;
 
         if (mc_search->is_case_sentitive) {
@@ -278,7 +270,7 @@ mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize se
             if (((char) current_chr == upp->str[search_pos])
                 || ((char) current_chr == low->str[search_pos]))
                 return (search_pos ==
-                        mc_search_cond->len) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
+                        mc_search_cond->len-1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
         }
     }
     return COND__NOT_ALL_FOUND;
@@ -310,7 +302,6 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
             current_chr = mc_search__get_char (mc_search, user_data, current_pos + search_pos);
             if (current_chr == -1)
                 break;
-
 
             switch (mc_search__normal_found_cond (mc_search, current_chr, search_pos)) {
 
