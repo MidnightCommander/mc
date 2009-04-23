@@ -61,9 +61,10 @@ typedef struct mc_search_struct {
     gsize normal_offset;
 
     /* some data for regexp */
+#if GLIB_CHECK_VERSION (2, 14, 0)
     GRegex *regex_handle;
     GMatchInfo *regex_match_info;
-
+#endif
     /* some data for sscanf */
 
     /* some data for glob */
