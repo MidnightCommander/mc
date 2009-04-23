@@ -1237,7 +1237,7 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
         size_t label_len;
 	label_len = label_text->len;
         g_string_append (label_text, replace_text);
-        convert_to_display (label_text->str + label_len);
+	g_string_append (label_text, " ?");
     }
     quick_widgets[5].text = label_text->str;
 
@@ -1641,11 +1641,13 @@ edit_replace_cmd (WEdit *edit, int again)
     char *input1 = NULL;	/* user input from the dialog */
     char *input2 = NULL;
     char *input3 = NULL;
+    char *str_for_prompt_dialog = NULL;
     int replace_yes;
     int replace_continue;
     int treplace_prompt = 0;
     long times_replaced = 0, last_search;
     int argord[NUM_REPL_ARGS];
+    gboolean once_found = FALSE;
 
     if (!edit) {
 	g_free (saved1), saved1 = NULL;
@@ -1677,6 +1679,8 @@ edit_replace_cmd (WEdit *edit, int again)
 	g_free (disp1);
 	g_free (disp2);
 	g_free (disp3);
+	str_for_prompt_dialog = g_strdup(input2);
+
 
 	input1 = edit_replace_cmd__conv_to_input(input1);
 	input2 = edit_replace_cmd__conv_to_input(input2);
@@ -1757,10 +1761,13 @@ edit_replace_cmd (WEdit *edit, int again)
 	
 	if (! mc_search_run(edit->search, (void *) edit, edit->search_start, last_search, &len))
 	{
-// TODO: handle edit->search->error
+	    if (!(edit->search->error == MC_SEARCH_E_OK || (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
+	    {
+		edit_error_dialog (_ ("Search"), edit->search->error_str);
+	    }
 	    break;
 	}
-
+	once_found = TRUE;
 	new_start = edit->search->normal_offset;
 
 	edit->search_start = new_start = edit->search->normal_offset;
@@ -1792,7 +1799,7 @@ edit_replace_cmd (WEdit *edit, int again)
 		/*so that undo stops at each query */
 		edit_push_key_press (edit);
 
-		switch (edit_replace_prompt (edit, input2,	/* and prompt 2/3 down */
+		switch (edit_replace_prompt (edit, str_for_prompt_dialog,	/* and prompt 2/3 down */
 					     (edit->num_widget_columns -
 					      CONFIRM_DLG_WIDTH) / 2,
 					     edit->num_widget_lines * 2 /
@@ -1903,6 +1910,7 @@ edit_replace_cmd (WEdit *edit, int again)
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
   cleanup:
+    g_free (str_for_prompt_dialog);
     g_free (input1);
     g_free (input2);
     g_free (input3);
