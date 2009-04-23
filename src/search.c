@@ -261,7 +261,7 @@ mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize se
         if (mc_search->is_case_sentitive) {
             if ((char) current_chr == mc_search_cond->str->str[search_pos])
                 return (search_pos ==
-                        mc_search_cond->len) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
+                        mc_search_cond->len-1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
         } else {
             GString *upp, *low;
             upp = (mc_search_cond->upper) ? mc_search_cond->upper : mc_search_cond->str;
