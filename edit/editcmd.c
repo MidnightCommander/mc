@@ -89,6 +89,20 @@ static int edit_save_cmd (WEdit *edit);
 static unsigned char *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
 
+static int
+editcmd_get_str_nlen(const char*str, int byte_len)
+{
+    int ret;
+    if (!str || byte_len < 1)
+	return 0;
+
+    char *tmp = g_malloc(sizeof(char)*byte_len+1);
+    memcpy(tmp,str,byte_len);
+    tmp[byte_len] = '\0';
+    ret = str_length(tmp);
+    g_free(tmp);
+    return ret;
+}
 
 static void
 edit_search_cmd_search_create_bookmark(WEdit * edit, const char *search_string)
@@ -1588,6 +1602,33 @@ static void regexp_error (WEdit *edit)
     edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
 }
 
+static char *
+edit_replace_cmd__conv_to_display(char *str)
+{
+    GString *tmp;
+    tmp = str_convert_to_display (str);
+
+    if (tmp && tmp->len){
+	g_free(str);
+	str = tmp->str;
+    }
+    g_string_free (tmp, FALSE);
+    return str;
+}
+
+static char *
+edit_replace_cmd__conv_to_input(char *str)
+{
+    GString *tmp;
+    tmp = str_convert_to_input (str);
+
+    if (tmp && tmp->len){
+	g_free(str);
+	str = tmp->str;
+    }
+    g_string_free (tmp, FALSE);
+    return str;
+}
 /* call with edit = 0 before shutdown to close memory leaks */
 void
 edit_replace_cmd (WEdit *edit, int again)
@@ -1625,13 +1666,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	input2 = g_strdup (saved2 ? saved2 : "");
 	input3 = g_strdup (saved3 ? saved3 : "");
     } else {
-	char *disp1 = g_strdup (saved1 ? saved1 : "");
-	char *disp2 = g_strdup (saved2 ? saved2 : "");
-	char *disp3 = g_strdup (saved3 ? saved3 : "");
-
-	convert_to_display (disp1);
-	convert_to_display (disp2);
-	convert_to_display (disp3);
+	char *disp1 = edit_replace_cmd__conv_to_display(g_strdup (saved1 ? saved1 : ""));
+	char *disp2 = edit_replace_cmd__conv_to_display(g_strdup (saved2 ? saved2 : ""));
+	char *disp3 = edit_replace_cmd__conv_to_display(g_strdup (saved3 ? saved3 : ""));
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2,
@@ -1641,9 +1678,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	g_free (disp2);
 	g_free (disp3);
 
-	convert_from_input (input1);
-	convert_from_input (input2);
-	convert_from_input (input3);
+	input1 = edit_replace_cmd__conv_to_input(input1);
+	input2 = edit_replace_cmd__conv_to_input(input2);
+	input3 = edit_replace_cmd__conv_to_input(input3);
 
 	treplace_prompt = replace_prompt;
 	if (input1 == NULL || *input1 == '\0') {
@@ -1654,6 +1691,12 @@ edit_replace_cmd (WEdit *edit, int again)
 	g_free (saved1), saved1 = g_strdup (input1);
 	g_free (saved2), saved2 = g_strdup (input2);
 	g_free (saved3), saved3 = g_strdup (input3);
+
+	if (edit->search)
+	{
+	    mc_search_free(edit->search);
+	    edit->search = NULL;
+	}
     }
 
     {
@@ -1679,6 +1722,27 @@ edit_replace_cmd (WEdit *edit, int again)
 
     replace_continue = replace_all;
 
+    if (!edit->search)
+    {
+	edit->search = mc_search_new(input1, -1);
+	if (edit->search == NULL)
+	{
+	    edit->search_start = edit->curs1;
+	    return;
+	}
+	edit->search->is_backward = replace_backwards;
+
+	if (replace_scanf)
+	    edit->search->search_type = MC_SEARCH_T_SCANF;
+	else if (replace_regexp)
+	    edit->search->search_type = MC_SEARCH_T_REGEX;
+	else
+	    edit->search->search_type = MC_SEARCH_T_NORMAL;
+
+	edit->search->is_case_sentitive = (replace_case);
+	edit->search->search_fn = edit_search_cmd_callback;
+    }
+
     if (edit->found_len && edit->search_start == edit->found_start + 1
 	&& replace_backwards)
 	edit->search_start--;
@@ -1688,17 +1752,18 @@ edit_replace_cmd (WEdit *edit, int again)
 	edit->search_start++;
 
     do {
-	int len = 0;
+	gsize len = 0;
 	long new_start;
-//	new_start =
-//	    edit_find (edit->search_start, (unsigned char *) input1, &len,
-//		       last_search, edit_get_byte_ptr, (void *) edit, pmatch);
-new_start = -3;
-	if (new_start == -3) {
-	    regexp_error (edit);
+	
+	if (! mc_search_run(edit->search, (void *) edit, edit->search_start, last_search, &len))
+	{
+// TODO: handle edit->search->error
 	    break;
 	}
-	edit->search_start = new_start;
+
+	new_start = edit->search->normal_offset;
+
+	edit->search_start = new_start = edit->search->normal_offset;
 	/*returns negative on not found or error in pattern */
 
 	if (edit->search_start >= 0) {
