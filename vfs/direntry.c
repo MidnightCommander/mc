@@ -834,7 +834,7 @@ vfs_s_read (void *fh, char *buffer, int count)
     return -1;
 }
 
-static int
+static ssize_t
 vfs_s_write (void *fh, const char *buffer, int count)
 {
     int n;
