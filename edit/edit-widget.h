@@ -2,6 +2,7 @@
 #define MC_EDIT_WIDGET_H
 
 #include "../src/dialog.h"		/* Widget */
+#include "../src/search.h"		/* mc_search_t */
 #include "edit.h"
 
 #define MAX_MACRO_LENGTH 1024
@@ -49,6 +50,8 @@ struct WEdit {
     char charbuf[4 + 1];
     int charpoint;
     /* search variables */
+    mc_search_t *search;
+
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
     long found_start;		/* the found word from a search - start position */
@@ -120,6 +123,7 @@ struct WEdit {
     int extmod;
 
     char *labels[10];
+
 };
 
 #endif

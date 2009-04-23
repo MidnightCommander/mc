@@ -77,6 +77,7 @@ static int replace_whole = 0;
 static int replace_case = 0;
 static int replace_backwards = 0;
 static int search_create_bookmark = 0;
+static int search_in_all_charsets = 0;
 
 /* queries on a save */
 int edit_confirm_save = 1;
@@ -88,102 +89,41 @@ static int edit_save_cmd (WEdit *edit);
 static unsigned char *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
 
-static int
-editcmd_get_str_nlen(const char*str, int byte_len)
+
+static void
+edit_search_cmd_search_create_bookmark(WEdit * edit, const char *search_string)
 {
-    int ret;
-    if (!str || byte_len < 1)
-	return 0;
+    int found = 0, books = 0;
+    int l = 0, l_last = -1;
+    long q = 0;
+    gsize len = 0;
 
-    char *tmp = g_malloc(sizeof(char)*byte_len+1);
-    memcpy(tmp,str,byte_len);
-    tmp[byte_len] = '\0';
-    ret = str_length(tmp);
-    g_free(tmp);
-    return ret;
-}
-
-/* Convert to display codepage
- * then lowercase string.
- * returns newly allocated string
- */
-static gchar *
-my_lower_case_str (char *str)
-{
-    GString *buff;
-    gchar *tmp, *tmp_dup, *dup;
-    int len;
-
-    buff = str_convert_to_display (str);
-    dup = tmp_dup = g_strdup(buff->str);
-
-    tmp = buff->str;
-    len = buff->len;
-
-    while (str_tolower (tmp, &dup, &len))
-	tmp+=str_length_char(tmp);
-    g_string_free(buff, TRUE);
-
-    buff = str_convert_to_input (tmp_dup);
-    g_free(tmp_dup);
-    tmp = buff->str;
-    g_string_free(buff, FALSE);
-    return tmp;
-}
-
-
-static gchar *
-my_lower_case (char *ch)
-{
-    gchar *tmp, *tmp_dup, *dup;
-    GString *buff;
-    int len;
-
-    buff = str_nconvert_to_display (ch, 6);
-    dup = tmp_dup = g_malloc0(sizeof(gchar)*7);
-
-    tmp = buff->str;
-    len = buff->len;
-
-    str_tolower (tmp, &dup, &len);
-    g_string_free(buff, TRUE);
-
-    buff = str_convert_to_input (tmp_dup);
-    g_free(tmp_dup);
-    tmp = buff->str;
-    g_string_free(buff, FALSE);
-    return tmp;
-}
-
-static gchar *
-my_lower_case_static (char *ch)
-{
-    static gchar tmp[7];
-    gchar *tmp1;
-
-    tmp1 = my_lower_case (ch);
-    memcpy(tmp,tmp1,7);
-    g_free(tmp1);
-    return tmp;
-}
-
-static const char *
-strcasechr (const char *s, char *c)
-{
-    gchar *tmp_c=NULL;
-
-    if (!s || !c)
-	return NULL;
-    tmp_c = my_lower_case (c);
-    while ( strcmp(tmp_c, my_lower_case_static((char *)s))){
-	if (*s == '\0'){
-	    g_free(tmp_c);
-	    return NULL;
+    for (;;) {
+	if (!mc_search_run(edit->search, (void *) edit, q, edit->last_byte, &len))
+	    break;
+	
+	found++;
+	l += edit_count_lines (edit, q, edit->search->normal_offset);
+	if (l != l_last) {
+	    book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
+	    books++;
 	}
-	s++;
+	l_last = l;
+	q = edit->search->normal_offset + 1;
     }
-    g_free(tmp_c);
-    return s;
+
+    if (found) {
+/* in response to number of bookmarks added because of string being found %d times */
+	message (D_NORMAL, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
+    } else {
+	edit_error_dialog (_ ("Search"), _ (" Search string not found "));
+    }
+}
+
+static int
+edit_search_cmd_callback(const void *user_data, gsize char_offset)
+{
+    return edit_get_byte ((WEdit * )user_data, (long) char_offset);
 }
 
 /* #define itoa MY_itoa  <---- this line is now in edit.h */
@@ -1519,277 +1459,6 @@ string_regexp_search (char *pattern, char *string, int match_type,
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
-typedef char * (*edit_getbyte_fn) (WEdit *, long);
-
-static long
-edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
-{
-    long p, q = 0;
-    long l = strlen ((char *) exp), f = 0;
-    size_t tmp_len;
-    int n = 0;
-    gchar *tmp_exp1, *tmp_exp2;
-    unsigned char *tmp_exp3;
-    char *tmp_exp4;
-    gchar *c;
-
-    gchar *lower_exp;
-
-    lower_exp = my_lower_case_str(exp);
-
-
-    for (p = 0; p < l; p++)	/* count conversions... */
-	if (exp[p] == '%')
-	    if (exp[++p] != '%')	/* ...except for "%%" */
-		n++;
-    if (replace_scanf || replace_regexp) {
-	unsigned char *buf;
-	unsigned char mbuf[MAX_REPL_LEN * 2 + 3];
-
-	replace_scanf = (!replace_regexp);	/* can't have both */
-
-	buf = mbuf;
-	if (replace_scanf) {
-	    unsigned char e[MAX_REPL_LEN];
-	    if (n >= NUM_REPL_ARGS)
-	    {
-		g_free(lower_exp);
-		return -3;
-	    }
-
-	    if (replace_case) {
-		for (p = start; p < last_byte && p < start + MAX_REPL_LEN; p++)
-		    buf[p - start] = *(*get_byte) (data, p);
-	    } else {
-		exp = lower_exp;
-		p = start;
-		while(p < last_byte && p < start + MAX_REPL_LEN)
-		{
-		    c = tmp_exp2 = (*get_byte) (data, p);
-		    tmp_exp1 = (gchar *) &buf[p - start];
-		    tmp_len=7;
-		    str_tolower(tmp_exp2, &tmp_exp1, &tmp_len);
-		    p+= str_length_char(c);
-		}
-	    }
-
-	    buf[(q = p - start)] = 0;
-	    strcpy ((char *) e, (char *) exp);
-	    strcat ((char *) e, "%n");
-	    exp = e;
-	    while (q) {
-		*((int *) sargs[n]) = 0;	/* --> here was the problem - now fixed: good */
-		if (n == sscanf ((char *) buf, (char *) exp, SCANF_ARGS)) {
-		    if (*((int *) sargs[n])) {
-			*len = *((int *) sargs[n]);
-			g_free(lower_exp);
-			return start;
-		    }
-		}
-		if (once_only)
-		    return -2;
-		if (q + start < last_byte) {
-		    if (replace_case) {
-			buf[q] = *(*get_byte) (data, q + start);
-		    } else {
-			c = (*get_byte) (data, q + start);
-			tmp_exp1 = (gchar *) &buf[q];
-			tmp_len=7;
-			str_tolower(c, &tmp_exp1, &tmp_len);
-		    }
-		    q++;
-		}
-		buf[q] = 0;
-		start++;
-		buf++;		/* move the window along */
-		if (buf == mbuf + MAX_REPL_LEN) {	/* the window is about to go past the end of array, so... */
-		    memmove (mbuf, buf, str_term_width1 ((char *) buf) + 1);	/* reset it */
-		    buf = mbuf;
-		}
-		q--;
-	    }
-	} else {	/* regexp matching */
-	    long offset = 0;
-	    int found_start, match_bol, move_win = 0;
-
-	    while (start + offset < last_byte) {
-		match_bol = (start == 0 || *(*get_byte) (data, start + offset - 1) == '\n');
-		if (!move_win) {
-		    p = start + offset;
-		    q = 0;
-		}
-		for (; p < last_byte && q < MAX_REPL_LEN; p++, q++) {
-		    mbuf[q] = *(*get_byte) (data, p);
-		    if (mbuf[q] == '\n') {
-			q++;
-			break;
-		    }
-		}
-		offset += q;
-		mbuf[q] = 0;
-
-		buf = mbuf;
-		while (q) {
-		    found_start = string_regexp_search ((char *) exp, (char *) buf, match_normal, match_bol, !replace_case, len, d);
-
-		    if (found_start <= -2) {	/* regcomp/regexec error */
-			*len = 0;
-			g_free(lower_exp);
-			return -3;
-		    }
-		    else if (found_start == -1)	/* not found: try next line */
-			break;
-		    else if (*len == 0) { /* null pattern: try again at next character */
-			q--;
-			buf++;
-			match_bol = 0;
-			continue;
-		    }
-		    else	/* found */
-		    {
-			g_free(lower_exp);
-			return (start + offset - q + found_start);
-		    }
-		}
-		if (once_only)
-		{
-		    g_free(lower_exp);
-		    return -2;
-		}
-
-		if (buf[q - 1] != '\n') { /* incomplete line: try to recover */
-		    buf = mbuf + MAX_REPL_LEN / 2;
-		    q = str_term_width1 ((const char *) buf);
-		    memmove (mbuf, buf, q);
-		    p = start + q;
-		    move_win = 1;
-		}
-		else
-		    move_win = 0;
-	    }
-	}
-    } else {
-	*len = str_term_width1 ((const char *) exp);
-	if (replace_case) {
-	    p = start;
-	    while ( p <= last_byte - l)
-	    {
-		c = (*get_byte) (data, p);
-		if ( !strncmp((const char *)c, (const char *)exp, str_length_char((const char *) c)) )
-		{	/* check if first char matches */
-		    f = 0;
-		    q = 0;
-		    while ( q < l && f < 1)
-		    {
-			tmp_exp1 = (*get_byte) (data, q + p);
-			tmp_len = str_length_char((const char *)tmp_exp1);
-			if ( strncmp((const char *)tmp_exp1, (const char *)&exp[q], (tmp_len==0)?1:tmp_len ) )
-			{
-			    f = 1;
-			}
-			if (tmp_len)
-			    q += tmp_len;
-			else
-			    q++;
-		    }
-		    if (f == 0)
-		    {
-			g_free(lower_exp);
-			return p;
-		    }
-		}
-		if (once_only)
-		{
-		    g_free(lower_exp);
-		    return -2;
-		}
-		p+= str_length_char(c);
-	    }
-	} else {
-	    exp = lower_exp;
-
-	    p = start;
-	    while(p < last_byte -l)
-	    {
-		c = (*get_byte) (data, p);
-		tmp_exp1 = my_lower_case_static(c);
-		if (! strncmp((const char *)tmp_exp1, (const char *)&exp[0], strlen( (const char *) tmp_exp1)))
-		{
-		    f = 0;
-		    q = 0;
-		    while (q < l && f < 1)
-		    {
-			tmp_exp1 = my_lower_case_static((*get_byte) (data, q + p));
-			if ( strncmp((const char *)tmp_exp1, (const char *)&exp[q], strlen((const char *)tmp_exp1)))
-			    f = 1;
-			if (strlen(tmp_exp1))
-			    q += strlen(tmp_exp1);
-			else
-			    q++;
-		    }
-		    if (f == 0){
-			g_free(lower_exp);
-			return p;
-		    }
-		}
-
-		if (once_only)
-		{
-		    g_free(lower_exp);
-		    return -2;
-		}
-
-		p+= str_length_char(c);
-	    }
-	}
-    }
-    g_free(lower_exp);
-    return -2;
-}
-
-
-static long
-edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, int once_only, void *d)
-{				/*front end to find_string to check for
-				   whole words */
-    long p;
-    p = search_start;
-
-    while ((p = edit_find_string (p, exp, len, last_byte, get_byte, data, once_only, d)) >= 0) {
-	if (replace_whole) {
-/*If the bordering chars are not in option_whole_chars_search then word is whole */
-	    if (!strcasechr (option_whole_chars_search, (*get_byte) (data, p - 1))
-		&& !strcasechr (option_whole_chars_search, (*get_byte) (data, p + *len))){
-		    return p;
-		}
-	    if (once_only)
-		return -2;
-	} else
-	    return p;
-	if (once_only)
-	    break;
-	p++;			/*not a whole word so continue search. */
-    }
-    return p;
-}
-
-static long
-edit_find (long search_start, unsigned char *exp, int *len, long last_byte, edit_getbyte_fn get_byte, void *data, void *d)
-{
-    long p;
-    if (replace_backwards) {
-	while (search_start >= 0) {
-	    p = edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 1, d);
-	    if (p == search_start)
-		return p;
-	    search_start--;
-	}
-    } else {
-	return edit_find_forwards (search_start, exp, len, last_byte, get_byte, data, 0, d);
-    }
-    return -2;
-}
-
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
 #define snprint(v) { \
@@ -2021,9 +1690,10 @@ edit_replace_cmd (WEdit *edit, int again)
     do {
 	int len = 0;
 	long new_start;
-	new_start =
-	    edit_find (edit->search_start, (unsigned char *) input1, &len,
-		       last_search, edit_get_byte_ptr, (void *) edit, pmatch);
+//	new_start =
+//	    edit_find (edit->search_start, (unsigned char *) input1, &len,
+//		       last_search, edit_get_byte_ptr, (void *) edit, pmatch);
+new_start = -3;
 	if (new_start == -3) {
 	    regexp_error (edit);
 	    break;
@@ -2174,111 +1844,117 @@ edit_replace_cmd (WEdit *edit, int again)
 }
 
 
-
-
 void edit_search_cmd (WEdit * edit, int again)
 {
-    static char *old = NULL;
-    char *exp = "", *old_exp=NULL;
+    char *search_string = NULL, *search_string_dup = NULL;
 
-    if (!edit) {
-	g_free (old);
+    gsize len = 0;
+
+    if (!edit)
 	return;
-    }
 
-    exp = old ? old : exp;
-    if (again) {		/*ctrl-hotkey for search again. */
-	if (!old)
-	    return;
-	exp = g_strdup (old);
-    } else {
+    if (edit->search != NULL)
+	search_string_dup = search_string = g_strndup(edit->search->original, edit->search->original_len);
+
+    if (!again)
+    {
 #ifdef HAVE_CHARSET
-	if (exp && *exp){
-	    GString *tmp = str_convert_to_display (exp);
-	    if (tmp && tmp->len){
-		old_exp = exp = tmp->str;
-	    }
+	GString *tmp;
+	if (search_string && *search_string)
+	{
+	    tmp = str_convert_to_display (search_string);
+
+	    g_free(search_string_dup);
+	    search_string_dup = NULL;
+
+	    if (tmp && tmp->len)
+		search_string = search_string_dup = tmp->str;
 	    g_string_free (tmp, FALSE);
 	}
 #endif /* HAVE_CHARSET */
-	edit_search_dialog (edit, &exp);
-	g_free (old_exp);
-
+	edit_search_dialog (edit, &search_string);
 #ifdef HAVE_CHARSET
-	if (exp && *exp){
-	    GString *tmp = str_convert_to_input (exp);
-	    if (tmp && tmp->len){
-		g_free(exp);
-		exp = tmp->str;
-	    }
+	if (search_string && *search_string)
+	{
+	    tmp = str_convert_to_input (search_string);
+	    if (tmp && tmp->len)
+		search_string = tmp->str;
+
 	    g_string_free (tmp, FALSE);
+
+	    if (search_string_dup)
+		g_free(search_string_dup);
 	}
 #endif /* HAVE_CHARSET */
+
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
-    }
 
-    if (exp) {
-	if (*exp) {
-	    int len = 0;
-	    g_free (old);
-	    old = g_strdup (exp);
-
-	    if (search_create_bookmark) {
-		int found = 0, books = 0;
-		int l = 0, l_last = -1;
-		long p, q = 0;
-		for (;;) {
-		    p = edit_find (q, (unsigned char *) exp, &len, edit->last_byte,
-				   edit_get_byte_ptr, (void *) edit, 0);
-		    if (p < 0)
-			break;
-		    found++;
-		    l += edit_count_lines (edit, q, p);
-		    if (l != l_last) {
-			book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
-			books++;
-		    }
-		    l_last = l;
-		    q = p + 1;
-		}
-		if (found) {
-/* in response to number of bookmarks added because of string being found %d times */
-		    message (D_NORMAL, _("Search"), _(" %d items found, %d bookmarks added "), found, books);
-		} else {
-		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
-		}
-	    } else {
-
-		if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
-		    edit->search_start--;
-
-		if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
-		    edit->search_start++;
-
-		edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
-		                                edit_get_byte_ptr, (void *) edit, 0);
-
-		if (edit->search_start >= 0) {
-		    edit->found_start = edit->search_start;
-		    edit->found_len = len;
-
-		    edit_cursor_move (edit, edit->search_start - edit->curs1);
-		    edit_scroll_screen_over_cursor (edit);
-		    if (replace_backwards)
-			edit->search_start--;
-		    else
-			edit->search_start++;
-		} else if (edit->search_start == -3) {
-		    edit->search_start = edit->curs1;
-		    regexp_error (edit);
-		} else {
-		    edit->search_start = edit->curs1;
-		    edit_error_dialog (_ ("Search"), _ (" Search string not found "));
-		}
-	    }
+	if (!search_string)
+	{
+	    edit->force |= REDRAW_COMPLETELY;
+	    edit_scroll_screen_over_cursor (edit);
+	    return;
 	}
-	g_free (exp);
+
+	if (edit->search)
+	{
+	    mc_search_free(edit->search);
+	    edit->search = NULL;
+	}
     }
+
+    if (!edit->search)
+    {
+	edit->search = mc_search_new(search_string, -1);
+	if (edit->search == NULL)
+	{
+	    edit->search_start = edit->curs1;
+	    return;
+	}
+	edit->search->is_backward = replace_backwards;
+
+	if (replace_scanf)
+	    edit->search->search_type = MC_SEARCH_T_SCANF;
+	else if (replace_regexp)
+	    edit->search->search_type = MC_SEARCH_T_REGEX;
+	else
+	    edit->search->search_type = MC_SEARCH_T_NORMAL;
+
+	edit->search->is_case_sentitive = (!replace_case);
+	edit->search->search_fn = edit_search_cmd_callback;
+    }
+
+    if (search_create_bookmark)
+    {
+	edit_search_cmd_search_create_bookmark(edit, (const char *) search_string);
+    }
+    else
+    {
+	if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
+	    edit->search_start--;
+
+	if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
+	    edit->search_start++;
+
+	if (mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, &len))
+	{
+	    edit->found_start = edit->search_start = edit->search->normal_offset;
+	    edit->found_len = len;
+
+	    edit_cursor_move (edit, edit->search_start - edit->curs1);
+	    edit_scroll_screen_over_cursor (edit);
+	    if (replace_backwards)
+		edit->search_start--;
+	    else
+		edit->search_start++;
+	}
+	else
+	{
+	    edit->search_start = edit->curs1;
+	    edit_error_dialog (_ ("Search"), edit->search->error_str);
+	}
+    }
+
     edit->force |= REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
 }
@@ -2906,16 +2582,16 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 			  char *match_expr, struct selection *compl,
 			  int *num)
 {
-    int len, max_len = 0, i, skip;
+    int len = 0, max_len = 0, i, skip;
     unsigned char *bufpos;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
     while (*num < MAX_WORD_COMPLETIONS) {
 	/* get next match */
-	start =
-	    edit_find (start - 1, (unsigned char *) match_expr, &len,
-		       edit->last_byte, edit_get_byte_ptr, (void *) edit, 0);
-
+//	start =
+//	    edit_find (start - 1, (unsigned char *) match_expr, &len,
+//		       edit->last_byte, edit_get_byte_ptr, (void *) edit, 0);
+start = -1;
 	/* not matched */
 	if (start < 0)
 	    break;

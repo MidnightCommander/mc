@@ -655,6 +655,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	}
 #endif				/* ENABLE_NLS */
 	edit = g_malloc0 (sizeof (WEdit));
+	edit->search = NULL;
 	to_free = 1;
     }
     edit_purge_widget (edit);
@@ -732,6 +733,11 @@ edit_clean (WEdit *edit)
     g_free (edit->filename);
     g_free (edit->dir);
 
+    if (edit->search)
+    {
+	mc_search_free(edit->search);
+	edit->search = NULL;
+    }
     edit_purge_widget (edit);
 
     return 1;

@@ -57,9 +57,6 @@ typedef enum {
 
 /*** file scope variables ************************************************************************/
 
-const char *cp_source;
-const char *cp_display;
-
 /*** file scope functions ************************************************************************/
 
 static gchar *
@@ -69,6 +66,13 @@ mc_search__recode_str (const char *str, guint str_len, const char *charset_from,
     gchar *ret;
     gsize bytes_read;
     GIConv conv;
+
+
+    if (!strcmp(charset_to, charset_from)){
+	*bytes_written = str_len;
+	return g_strndup(str,str_len);
+    }
+
     conv = g_iconv_open (charset_to, charset_from);
     if (conv == (GIConv) - 1)
         return NULL;
@@ -91,7 +95,7 @@ mc_search__tolower_case_str (const char *charset, const char *str, guint str_len
     if (converted_str == NULL)
         return NULL;
 
-    tmp_len = converted_str_len;
+    tmp_len = converted_str_len+1;
 
     tmp_str3 = tmp_str1 = g_strdup (converted_str);
 
@@ -99,7 +103,6 @@ mc_search__tolower_case_str (const char *charset, const char *str, guint str_len
         tmp_str1 += str_length_char (tmp_str1);
 
     g_free (tmp_str3);
-
     tmp_str2 =
         mc_search__recode_str (converted_str, converted_str_len, cp_display, charset, &tmp_len);
     g_free (converted_str);
@@ -123,7 +126,7 @@ mc_search__toupper_case_str (const char *charset, const char *str, guint str_len
     if (converted_str == NULL)
         return NULL;
 
-    tmp_len = converted_str_len;
+    tmp_len = converted_str_len + 1;
 
     tmp_str3 = tmp_str1 = g_strdup (converted_str);
 
@@ -147,13 +150,21 @@ mc_search__cond_struct_new (const char *str, guint str_len, const char *charset,
 {
     mc_search_cond_t *mc_search_cond;
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
-    mc_search_cond->str = g_string_new (str);
+    mc_search_cond->str = g_string_new_len (str, str_len);
     mc_search_cond->len = str_len;
     mc_search_cond->charset = g_strdup (charset);
     if (case_sentitive) {
         mc_search_cond->upper = mc_search__toupper_case_str (charset, str, str_len);
         mc_search_cond->lower = mc_search__tolower_case_str (charset, str, str_len);
     }
+char *up, *lo;
+up = (mc_search_cond->upper) ? mc_search_cond->upper->str: "(null)";
+lo = (mc_search_cond->lower) ? mc_search_cond->lower->str: "(null)";
+mc_log("\
+mc_search_cond->str   = %s\n\
+mc_search_cond->upper = %s\n\
+mc_search_cond->lower = %s\n\
+\n",mc_search_cond->str->str, up, lo);
     return mc_search_cond;
 }
 
@@ -163,7 +174,6 @@ static GPtrArray *
 mc_search__conditions_new (const char *str, guint str_len, int all_charsets, int case_sentitive)
 {
     GPtrArray *ret;
-
     ret = g_ptr_array_new ();
 
     if (all_charsets) {
@@ -382,7 +392,9 @@ mc_search_free (mc_search_t * mc_search)
     if (mc_search->error_str)
         g_free (mc_search->error_str);
 
-    mc_search__conditions_free (mc_search->conditions);
+    if (mc_search->conditions)
+	mc_search__conditions_free (mc_search->conditions);
+
     g_free (mc_search);
 }
 
@@ -391,11 +403,12 @@ gboolean
 mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search, gsize end_search,
                gsize * founded_len)
 {
-    gboolean ret;
+    gboolean ret=FALSE;
     if (!mc_search)
         return FALSE;
 
-    mc_search->conditions = mc_search__conditions_new (mc_search->original, mc_search->original_len,
+    if (!mc_search->conditions)
+	mc_search->conditions = mc_search__conditions_new (mc_search->original, mc_search->original_len,
                                                        mc_search->is_all_charsets,
                                                        mc_search->is_case_sentitive);
 
@@ -411,7 +424,7 @@ mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_searc
         break;
     case MC_SEARCH_T_REGEX:
 //        ret = mc_search__run_regex (mc_search, user_data, start_search, end_search, founded_len);
-        break;
+//        break;
     case MC_SEARCH_T_HEX:
     case MC_SEARCH_T_SCANF:
     case MC_SEARCH_T_GLOB:
@@ -421,7 +434,6 @@ mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_searc
 	ret = FALSE;
         break;
     }
-    mc_search__conditions_free(mc_search->conditions);
     return ret;
 }
 

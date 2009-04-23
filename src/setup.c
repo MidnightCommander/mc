@@ -584,11 +584,17 @@ load_setup (void)
 	load_string( "Misc", "display_codepage", "",
 		     cpname, sizeof(cpname) );
 	if ( cpname[0] != '\0' )
+	{
 	    display_codepage = get_codepage_index( cpname );
+	    cp_display = get_codepage_id (display_codepage);
+	}
 	load_string( "Misc", "source_codepage", "",
 		     cpname, sizeof(cpname) );
 	if ( cpname[0] != '\0' )
+	{
 	    source_codepage = get_codepage_index( cpname );
+	    cp_source = get_codepage_id (source_codepage);
+	}
     }
     init_translation_table( source_codepage, display_codepage );
     if ( get_codepage_id( display_codepage ) )
