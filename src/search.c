@@ -68,9 +68,9 @@ mc_search__recode_str (const char *str, gsize str_len, const char *charset_from,
     GIConv conv;
 
 
-    if (!strcmp(charset_to, charset_from)){
-	*bytes_written = str_len;
-	return g_strndup(str,str_len);
+    if (!strcmp (charset_to, charset_from)) {
+        *bytes_written = str_len;
+        return g_strndup (str, str_len);
     }
 
     conv = g_iconv_open (charset_to, charset_from);
@@ -95,7 +95,7 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
     if (converted_str == NULL)
         return NULL;
 
-    tmp_len = converted_str_len+1;
+    tmp_len = converted_str_len + 1;
 
     tmp_str3 = tmp_str1 = g_strdup (converted_str);
 
@@ -146,7 +146,8 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 
 /* --------------------------------------------------------------------------------------------- */
 static mc_search_cond_t *
-mc_search__cond_struct_new (const char *str, gsize str_len, const char *charset, gboolean case_sentitive)
+mc_search__cond_struct_new (const char *str, gsize str_len, const char *charset,
+                            gboolean case_sentitive)
 {
     mc_search_cond_t *mc_search_cond;
     mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
@@ -163,7 +164,8 @@ mc_search__cond_struct_new (const char *str, gsize str_len, const char *charset,
 /* --------------------------------------------------------------------------------------------- */
 
 static GPtrArray *
-mc_search__conditions_new (const char *str, gsize str_len, gboolean all_charsets, gboolean case_sentitive)
+mc_search__conditions_new (const char *str, gsize str_len, gboolean all_charsets,
+                           gboolean case_sentitive)
 {
     GPtrArray *ret;
     ret = g_ptr_array_new ();
@@ -255,13 +257,13 @@ mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize se
     for (loop1 = 0; loop1 < mc_search->conditions->len; loop1++) {
         mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (mc_search->conditions, loop1);
 
-        if (search_pos > mc_search_cond->len-1)
+        if (search_pos > mc_search_cond->len - 1)
             continue;
 
         if (mc_search->is_case_sentitive) {
             if ((char) current_chr == mc_search_cond->str->str[search_pos])
                 return (search_pos ==
-                        mc_search_cond->len-1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
+                        mc_search_cond->len - 1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
         } else {
             GString *upp, *low;
             upp = (mc_search_cond->upper) ? mc_search_cond->upper : mc_search_cond->str;
@@ -270,7 +272,7 @@ mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize se
             if (((char) current_chr == upp->str[search_pos])
                 || ((char) current_chr == low->str[search_pos]))
                 return (search_pos ==
-                        mc_search_cond->len-1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
+                        mc_search_cond->len - 1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
         }
     }
     return COND__NOT_ALL_FOUND;
@@ -311,7 +313,7 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
 
             case COND__FOUND_CHAR_LAST:
                 mc_search->normal_offset = current_pos;
-                *found_len = search_pos;
+                *found_len = search_pos + 1;
                 return TRUE;
                 break;
 
@@ -384,7 +386,7 @@ mc_search_free (mc_search_t * mc_search)
         g_free (mc_search->error_str);
 
     if (mc_search->conditions)
-	mc_search__conditions_free (mc_search->conditions);
+        mc_search__conditions_free (mc_search->conditions);
 
     g_free (mc_search);
 }
@@ -394,14 +396,14 @@ gboolean
 mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search, gsize end_search,
                gsize * found_len)
 {
-    gboolean ret=FALSE;
+    gboolean ret = FALSE;
     if (!mc_search)
         return FALSE;
 
     if (!mc_search->conditions)
-	mc_search->conditions = mc_search__conditions_new (mc_search->original, mc_search->original_len,
-                                                       mc_search->is_all_charsets,
-                                                       mc_search->is_case_sentitive);
+        mc_search->conditions =
+            mc_search__conditions_new (mc_search->original, mc_search->original_len,
+                                       mc_search->is_all_charsets, mc_search->is_case_sentitive);
 
     mc_search->error = MC_SEARCH_E_OK;
     if (mc_search->error_str) {
@@ -421,8 +423,8 @@ mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_searc
     case MC_SEARCH_T_GLOB:
     default:
         mc_search->error = MC_SEARCH_E_INPUT;
-	mc_search->error_str = g_strdup (_(STR_E_UNKNOWN_TYPE));
-	ret = FALSE;
+        mc_search->error_str = g_strdup (_(STR_E_UNKNOWN_TYPE));
+        ret = FALSE;
         break;
     }
     return ret;
