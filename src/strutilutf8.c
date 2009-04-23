@@ -320,7 +320,7 @@ str_utf8_length_noncomb (const char *text)
 
     return result;
 }
-
+/*
 static void
 str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
 {
@@ -329,7 +329,7 @@ str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
     (*string) = next;
     g_string_append_c (buffer, '?');
 }
-
+*/
 static estr_t
 str_utf8_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
@@ -404,7 +404,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             text = g_utf8_next_char (text);
         } else {
             text++;
-            //actual[0] = '?';
+            /*actual[0] = '?';*/
             memcpy (actual, replch, strlen (replch));
             actual+= strlen (replch);
             result.width++;
@@ -517,7 +517,7 @@ utf8_tool_insert_space (struct utf8_tool *tool, int count)
 {
     if (count <= 0)
 	return 1;
-    if (tool->remain <= count)
+    if (tool->remain <= (gsize) count)
 	return 0;
     memset (tool->actual, ' ', count);
     tool->actual += count;
@@ -587,7 +587,7 @@ str_utf8_fit_to_term (const char *text, int width, int just_mode)
     tool.remain = sizeof (result);
     tool.compose = 0;
 
-    if (pre_form->width <= width)
+    if (pre_form->width <= (gsize)width)
     {
 	tool.ident = 0;
 	switch (HIDE_FIT (just_mode))
@@ -660,7 +660,7 @@ str_utf8_term_trim (const char *text, int width)
     tool.remain = sizeof (result);
     tool.compose = 0;
 
-    if (width < pre_form->width)
+    if ((gsize)width < pre_form->width)
     {
 	if (width <= 3)
 	{
@@ -716,14 +716,15 @@ str_utf8_term_char_width (const char *text)
 static void
 str_utf8_msg_term_size (const char *text, int *lines, int *columns)
 {
-    (*lines) = 1;
-    (*columns) = 0;
-
-    char *p, *tmp = g_strdup (text);
+    char *p, *tmp;
     char *q;
     char c = '\0';
     int width;
 
+    (*lines) = 1;
+    (*columns) = 0;
+
+    tmp = g_strdup (text);
     p = tmp;
     for (;;)
     {
@@ -790,7 +791,7 @@ str_utf8_trunc (const char *text, int width)
     tool.remain = sizeof (result);
     tool.compose = 0;
 
-    if (pre_form->width > width)
+    if (pre_form->width > (gsize)width)
     {
 	tool.ident = 0;
 	utf8_tool_copy_chars_to (&tool, width / 2);
@@ -863,7 +864,7 @@ str_utf8_column_to_pos (const char *text, size_t pos)
 	    text++;
 	    width++;
 	}
-	if (width > pos)
+	if ((gsize)width > pos)
 	    return result;
 
 	result++;
@@ -896,6 +897,7 @@ str_utf8_create_search_needle (const char *needle, int case_sen)
 static void
 str_utf8_release_search_needle (char *needle, int case_sen)
 {
+    (void) case_sen;
     if (needle != NULL)
 	g_free (needle);
 }
@@ -1274,12 +1276,14 @@ str_utf8_create_key_for_filename (const char *text, int case_sen)
 static int
 str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
 {
+    (void) case_sen;
     return strcmp (t1, t2);
 }
 
 static void
 str_utf8_release_key (char *key, int case_sen)
 {
+    (void) case_sen;
     g_free (key);
 }
 

@@ -8365,4 +8365,11 @@ weak_alias (__regfree, regfree)
 # undef WCHAR
 
 # define DEFINED_ONCE
+#else
+void mc_regex__unused(void)
+{
+/*
+    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
+*/
+}
 #endif /* USE_INCLUDED_REGEX */

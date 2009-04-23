@@ -52,7 +52,7 @@ typedef struct mc_search_cond_struct {
 typedef enum {
     COND__NOT_ALL_FOUND,
     COND__FOUND_CHAR,
-    COND__FOUND_CHAR_LAST,
+    COND__FOUND_CHAR_LAST
 } mc_search__found_cond_t;
 
 /*** file scope variables ************************************************************************/
@@ -175,7 +175,7 @@ mc_search__conditions_new (const char *str, gsize str_len, gboolean all_charsets
 
         gchar *buffer;
 
-        for (loop1 = 0; loop1 < n_codepages; loop1++) {
+        for (loop1 = 0; loop1 < (gsize)n_codepages; loop1++) {
             if (g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (str, str_len, cp_source,
@@ -344,14 +344,14 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
+/*
 static gboolean
 mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
                       gsize start_search, gsize end_search, gsize * found_len)
 {
     return FALSE;
 }
-
+*/
 /*** public functions ****************************************************************************/
 
 mc_search_t *
@@ -361,7 +361,7 @@ mc_search_new (const gchar * original, gsize str_len)
     if (!original)
         return NULL;
 
-    if (str_len == -1) {
+    if ((gssize)str_len == -1) {
         str_len = strlen (original);
         if (str_len == 0)
             return NULL;
@@ -416,8 +416,9 @@ mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_searc
         ret = mc_search__run_normal (mc_search, user_data, start_search, end_search, found_len);
         break;
     case MC_SEARCH_T_REGEX:
-        ret = mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
-//        break;
+/*        ret = mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);*/
+          ret = FALSE;
+/*        break;*/
     case MC_SEARCH_T_HEX:
     case MC_SEARCH_T_SCANF:
     case MC_SEARCH_T_GLOB:

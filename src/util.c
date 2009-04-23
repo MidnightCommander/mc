@@ -715,13 +715,13 @@ i18n_checktimelength (void)
 	char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
 	size_t a, b;
 
-	strftime (buf, sizeof(buf) - 1, _("%b %e %H:%M"), lt);
+	strftime (buf, sizeof(buf) - 1, _("%b %d %H:%M"), lt);
 	a = str_term_width1 (buf);
-	strftime (buf, sizeof(buf) - 1, _("%b %e %Y"), lt);
+	strftime (buf, sizeof(buf) - 1, _("%b %d %Y"), lt);
 	b = str_term_width1 (buf);
 
 	length = max (a, b);
-	length = max (str_term_width1 (_(INVALID_TIME_TEXT)), length);
+	length = max ((size_t)str_term_width1 (_(INVALID_TIME_TEXT)), length);
     }
 
     /* Don't handle big differences. Use standard value (email bug, please) */
@@ -1601,13 +1601,15 @@ shell_unescape(const char* text)
 {
 	GString *str;
 	char *result = NULL;
+	const char* readptr;
+	char c;
 	
 	if (!text)
 		return NULL;
 
 
 	/* look for the first \ - that's quick skipover if there's nothing to escape */
-	const char* readptr = text;
+	readptr = text;
 	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
 	if (!(*readptr)) {
 		result = g_strdup(text);
@@ -1616,7 +1618,6 @@ shell_unescape(const char* text)
 	str = g_string_new_len(text, readptr - text);
 
 	/* if we're here, we're standing on the first '\' */
-	char c;
 	while ((c = *readptr))
 	{
 		if (c=='\\')

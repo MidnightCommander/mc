@@ -302,6 +302,7 @@ hline (int ch, int len)
 void
 vline (int character, int len)
 {
+    (void) character;
     if (!slow_terminal){
 	SLsmg_draw_vline (len);
     } else {

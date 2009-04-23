@@ -63,7 +63,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
-//#include "util.h"
+/* #include "util.h" */
 #include "strutil.h"
 
 /* Needed for current_panel, other_panel and WTree */
@@ -2201,8 +2201,14 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 static FileProgressStatus
 do_file_error (const char *str)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_do_file_error;
+
     if (we_are_background)
-	return parent_call (real_do_file_error, NULL, 1, strlen (str),
+	return parent_call (pntr.p, NULL, 1, strlen (str),
 			    str);
     else
 	return real_do_file_error (Foreground, str);
@@ -2211,8 +2217,14 @@ do_file_error (const char *str)
 static FileProgressStatus
 query_recursive (FileOpContext *ctx, const char *s)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_query_recursive;
+
     if (we_are_background)
-	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
+	return parent_call (pntr.p, ctx, 1, strlen (s), s);
     else
 	return real_query_recursive (ctx, Foreground, s);
 }
@@ -2221,8 +2233,15 @@ static FileProgressStatus
 query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+				  struct stat *, struct stat *);
+    } pntr;
+    pntr.f = file_progress_real_query_replace;
+
     if (we_are_background)
-	return parent_call ((void *) file_progress_real_query_replace,
+	return parent_call (pntr.p,
 			    ctx,
 			    3,
 			    strlen (destname), destname,

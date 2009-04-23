@@ -77,7 +77,7 @@ static int replace_whole = 0;
 static int replace_case = 0;
 static int replace_backwards = 0;
 static int search_create_bookmark = 0;
-static int search_in_all_charsets = 0;
+/* static int search_in_all_charsets = 0; */
 
 /* queries on a save */
 int edit_confirm_save = 1;
@@ -93,10 +93,12 @@ static int
 editcmd_get_str_nlen(const char*str, int byte_len)
 {
     int ret;
+    char *tmp;
+
     if (!str || byte_len < 1)
 	return 0;
 
-    char *tmp = g_malloc(sizeof(char)*byte_len+1);
+    tmp = g_malloc(sizeof(char)*byte_len+1);
     memcpy(tmp,str,byte_len);
     tmp[byte_len] = '\0';
     ret = str_length(tmp);
@@ -105,7 +107,7 @@ editcmd_get_str_nlen(const char*str, int byte_len)
 }
 
 static void
-edit_search_cmd_search_create_bookmark(WEdit * edit, const char *search_string)
+edit_search_cmd_search_create_bookmark(WEdit * edit)
 {
     int found = 0, books = 0;
     int l = 0, l_last = -1;
@@ -445,7 +447,7 @@ void menu_save_mode_cmd (void)
 
         for (i = 0; i < 3; i++ ) {
             str[i] = _(str[i]);
-	    maxlen = max (maxlen, str_term_width1 (str[i]) + 7);
+	    maxlen = max (maxlen, (size_t) str_term_width1 (str[i]) + 7);
 	}
         i18n_flag = 1;
 
@@ -1429,6 +1431,7 @@ static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
+/*
 static int
 string_regexp_search (char *pattern, char *string, int match_type,
 		      int match_bol, int icase, int *found_len, void *d)
@@ -1469,7 +1472,7 @@ string_regexp_search (char *pattern, char *string, int match_type,
     *found_len = pmatch[0].rm_eo - pmatch[0].rm_so;
     return (pmatch[0].rm_so);
 }
-
+*/
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
@@ -1595,13 +1598,13 @@ err:
     va_end (ap);
     return -2;
 }
-
+/*
 static void regexp_error (WEdit *edit)
 {
     (void) edit;
     edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
 }
-
+*/
 static char *
 edit_replace_cmd__conv_to_display(char *str)
 {
@@ -1999,7 +2002,7 @@ void edit_search_cmd (WEdit * edit, int again)
 
     if (search_create_bookmark)
     {
-	edit_search_cmd_search_create_bookmark(edit, (const char *) search_string);
+	edit_search_cmd_search_create_bookmark(edit);
     }
     else
     {
@@ -2658,12 +2661,15 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     int len = 0, max_len = 0, i, skip;
     unsigned char *bufpos;
 
+(void) match_expr;
     /* collect max MAX_WORD_COMPLETIONS completions */
     while (*num < MAX_WORD_COMPLETIONS) {
 	/* get next match */
-//	start =
-//	    edit_find (start - 1, (unsigned char *) match_expr, &len,
-//		       edit->last_byte, edit_get_byte_ptr, (void *) edit, 0);
+/*
+	start =
+	    edit_find (start - 1, (unsigned char *) match_expr, &len,
+		       edit->last_byte, edit_get_byte_ptr, (void *) edit, 0);
+*/
 start = -1;
 	/* not matched */
 	if (start < 0)
@@ -2955,7 +2961,9 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     WListbox *def_list;
     int def_dlg_h;      /* dialog height */
     int def_dlg_w;      /* dialog width */
+    char *label_def = NULL;
 
+    (void) word_len;
     /* calculate the dialog metrics */
     def_dlg_h = num_lines + 2;
     def_dlg_w = max_len + 4;
@@ -2987,7 +2995,6 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     /* add the dialog */
     add_widget (def_dlg, def_list);
 
-    char *label_def = NULL;
 
     /* fill the listbox with the completions */
     for (i = 0; i < num_lines; i++) {
@@ -3001,9 +3008,10 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     /* apply the choosen completion */
     if ( def_dlg->ret_value == B_ENTER ) {
 	char *tmp_curr_def = (char *) curr_def;
+        int do_moveto = 0;
+
         listbox_get_current (def_list,  &curr, &tmp_curr_def);
         curr_def = (etags_hash_t *) tmp_curr_def;
-        int do_moveto = 0;
         if ( edit->modified ) {
             if ( !edit_query_dialog2
                 (_("Warning"),
@@ -3037,7 +3045,7 @@ edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int 
     }
 
     /* clear definition hash */
-    for ( int i = 0; i < MAX_DEFINITIONS; i++) {
+    for ( i = 0; i < MAX_DEFINITIONS; i++) {
         g_free(def_hash[i].filename);
     }
 
@@ -3052,6 +3060,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     int word_len = 0;
     int num_def = 0;
     int max_len = 0;
+    int i;
     long word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
@@ -3061,7 +3070,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
 
     etags_hash_t def_hash[MAX_DEFINITIONS];
 
-    for ( int i = 0; i < MAX_DEFINITIONS; i++) {
+    for ( i = 0; i < MAX_DEFINITIONS; i++) {
         def_hash[i].filename = NULL;
     }
 

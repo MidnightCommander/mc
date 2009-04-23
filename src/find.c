@@ -563,7 +563,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 		    found = 1;
 		}
 	    	} else {
-                    // str_case_search_first do not accept invalid strings
+                    /* str_case_search_first do not accept invalid strings */
                     if (str_is_valid_string (p) && str_search_first (p, content_pattern, case_sensitive) != NULL) {
 	    	    	char *match = g_strdup_printf("%d:%s", line, filename);
 			find_add_match (h, directory, match);

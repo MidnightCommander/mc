@@ -1246,5 +1246,11 @@ tcp_invalidate_socket (int sock)
 {
     mcfs_invalidate_socket (sock);
 }
-
+#else
+void mcfs__unused(void)
+{
+/*
+    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
+*/
+}
 #endif				/* WITH_MCFS */

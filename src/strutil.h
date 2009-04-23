@@ -58,15 +58,17 @@ typedef enum {
 #define J_LEFT 		0x01
 #define J_RIGHT		0x02
 #define J_CENTER	0x03
-// if there is enough space for string on terminal, string is centered
-// otherwise is aligned to left
+/*
+ if there is enough space for string on terminal, string is centered
+ otherwise is aligned to left
+*/
 #define J_CENTER_LEFT	0x04
 
 #define IS_FIT(x)	((x) & 0x0010)
 #define MAKE_FIT(x)	((x) | 0x0010)
 #define HIDE_FIT(x)	((x) & 0x000f)
 
-// fit alignment, if string is to long, is truncated with '~'
+/* fit alignment, if string is to long, is truncated with '~' */
 #define J_LEFT_FIT		0x11
 #define J_RIGHT_FIT		0x12
 #define J_CENTER_FIT		0x13
@@ -74,62 +76,62 @@ typedef enum {
 
 #define INVALID_CONV	((GIConv) (-1))
 
-// standard convertors 
+/* standard convertors */
 extern GIConv str_cnv_to_term;
 extern GIConv str_cnv_from_term;
-// from terminal encoding to terminal encoding
+/* from terminal encoding to terminal encoding */
 extern GIConv str_cnv_not_convert;
 
-// all functions in str_class must be defined for every encoding
+/* all functions in str_class must be defined for every encoding */
 struct str_class {
     estr_t (*vfs_convert_to) (GIConv coder, const char *string, 
-                        int size, GString *buffer);           //I
+                        int size, GString *buffer);           /*I*/
     void (*insert_replace_char) (GString *buffer);
-    int (*is_valid_string) (const char *);                              //I
-    int (*is_valid_char) (const char *, size_t);                        //I
+    int (*is_valid_string) (const char *);                              /*I*/
+    int (*is_valid_char) (const char *, size_t);                        /*I*/
     void (*cnext_char) (const char **);
     void (*cprev_char) (const char **);
-    void (*cnext_char_safe) (const char **);                            //I
-    void (*cprev_char_safe) (const char **);                            //I
-    int (*cnext_noncomb_char) (const char **text);                      //I
-    int (*cprev_noncomb_char) (const char **text, const char *begin);   //I
-    int (*isspace) (const char *);                                      //I
-    int (*ispunct) (const char *);                                      //I
-    int (*isalnum) (const char *);                                      //I
-    int (*isdigit) (const char *);                                      //I
-    int (*isprint) (const char *);                                      //I
-    int (*iscombiningmark) (const char *);                              //I
-    int (*length) (const char *);                                       //I
-    int (*length2) (const char *, int);                                 //I
-    int (*length_noncomb) (const char *);                               //I
+    void (*cnext_char_safe) (const char **);                            /*I*/
+    void (*cprev_char_safe) (const char **);                            /*I*/
+    int (*cnext_noncomb_char) (const char **text);                      /*I*/
+    int (*cprev_noncomb_char) (const char **text, const char *begin);   /*I*/
+    int (*isspace) (const char *);                                      /*I*/
+    int (*ispunct) (const char *);                                      /*I*/
+    int (*isalnum) (const char *);                                      /*I*/
+    int (*isdigit) (const char *);                                      /*I*/
+    int (*isprint) (const char *);                                      /*I*/
+    int (*iscombiningmark) (const char *);                              /*I*/
+    int (*length) (const char *);                                       /*I*/
+    int (*length2) (const char *, int);                                 /*I*/
+    int (*length_noncomb) (const char *);                               /*I*/
     int (*toupper) (const char *, char **, size_t *);
     int (*tolower) (const char *, char **, size_t *);
-    void (*fix_string) (char *);                                        //I
-    const char *(*term_form) (const char *);                            //I
-    const char *(*fit_to_term) (const char *, int, int);                //I
-    const char *(*term_trim) (const char *text, int width);             //I
-    void (*msg_term_size) (const char *, int *, int *);                 //I
-    const char *(*term_substring) (const char *, int, int);             //I
-    int (*term_width1) (const char *);                                  //I
-    int (*term_width2) (const char *, size_t);                          //I
-    int (*term_char_width) (const char *);                              //I
-    const char *(*trunc) (const char *, int);                           //I
-    int (*offset_to_pos) (const char *, size_t);                        //I
-    int (*column_to_pos) (const char *, size_t);                        //I
+    void (*fix_string) (char *);                                        /*I*/
+    const char *(*term_form) (const char *);                            /*I*/
+    const char *(*fit_to_term) (const char *, int, int);                /*I*/
+    const char *(*term_trim) (const char *text, int width);             /*I*/
+    void (*msg_term_size) (const char *, int *, int *);                 /*I*/
+    const char *(*term_substring) (const char *, int, int);             /*I*/
+    int (*term_width1) (const char *);                                  /*I*/
+    int (*term_width2) (const char *, size_t);                          /*I*/
+    int (*term_char_width) (const char *);                              /*I*/
+    const char *(*trunc) (const char *, int);                           /*I*/
+    int (*offset_to_pos) (const char *, size_t);                        /*I*/
+    int (*column_to_pos) (const char *, size_t);                        /*I*/
     char *(*create_search_needle) (const char *, int);
     void (*release_search_needle) (char *, int);
     const char *(*search_first) (const char *, const char *, int);
     const char *(*search_last) (const char *, const char *, int);
-    int (*compare) (const char *, const char *);                        //I
-    int (*ncompare) (const char *, const char *);                       //I
-    int (*casecmp) (const char *, const char *);                        //I
-    int (*ncasecmp) (const char *, const char *);                       //I
-    int (*prefix) (const char *, const char *);                         //I
-    int (*caseprefix) (const char *, const char *);                     //I
-    char *(*create_key) (const char *text, int case_sen);               //I
-    char *(*create_key_for_filename) (const char *text, int case_sen);  //I
-    int (*key_collate) (const char *t1, const char *t2, int case_sen);  //I
-    void (*release_key) (char *key, int case_sen);                      //I
+    int (*compare) (const char *, const char *);                        /*I*/
+    int (*ncompare) (const char *, const char *);                       /*I*/
+    int (*casecmp) (const char *, const char *);                        /*I*/
+    int (*ncasecmp) (const char *, const char *);                       /*I*/
+    int (*prefix) (const char *, const char *);                         /*I*/
+    int (*caseprefix) (const char *, const char *);                     /*I*/
+    char *(*create_key) (const char *text, int case_sen);               /*I*/
+    char *(*create_key_for_filename) (const char *text, int case_sen);  /*I*/
+    int (*key_collate) (const char *t1, const char *t2, int case_sen);  /*I*/
+    void (*release_key) (char *key, int case_sen);                      /*I*/
 };
 
 struct str_class str_utf8_init ();

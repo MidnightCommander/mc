@@ -110,6 +110,7 @@ static const char *mini_status_format (WPanel *panel);
 static void
 set_colors (WPanel *panel)
 {
+    (void) panel;
     standend ();
     attrset (NORMAL_COLOR);
 }
@@ -164,6 +165,8 @@ static const char *
 string_file_name (file_entry *fe, int len)
 {
     static char buffer [MC_MAXPATHLEN * MB_LEN_MAX + 1];
+
+    (void) len;
     g_strlcpy (buffer, fe->fname, sizeof(buffer));
     return buffer;
 }
@@ -237,6 +240,7 @@ string_file_type (file_entry *fe, int len)
 {
     static char buffer[2];
 
+    (void) len;
     if (S_ISDIR (fe->st.st_mode))
 	buffer[0] = PATH_SEP;
     else if (S_ISLNK (fe->st.st_mode)) {
@@ -272,6 +276,7 @@ string_file_type (file_entry *fe, int len)
 static const char *
 string_file_mtime (file_entry *fe, int len)
 {
+    (void) len;
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
@@ -282,6 +287,7 @@ string_file_mtime (file_entry *fe, int len)
 static const char *
 string_file_atime (file_entry *fe, int len)
 {
+    (void) len;
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
@@ -292,6 +298,7 @@ string_file_atime (file_entry *fe, int len)
 static const char *
 string_file_ctime (file_entry *fe, int len)
 {
+    (void) len;
     if (!strcmp (fe->fname, "..")) {
        return "";
     }
@@ -302,6 +309,7 @@ string_file_ctime (file_entry *fe, int len)
 static const char *
 string_file_permission (file_entry *fe, int len)
 {
+    (void) len;
     return string_perm (fe->st.st_mode);
 }
 
@@ -311,6 +319,7 @@ string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
 
+    (void) len;
     g_snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
     return buffer;
 }
@@ -321,6 +330,7 @@ string_file_nlinks (file_entry *fe, int len)
 {
     static char buffer[BUF_TINY];
 
+    (void) len;
     g_snprintf (buffer, sizeof (buffer), "%16d", (int) fe->st.st_nlink);
     return buffer;
 }
@@ -331,6 +341,7 @@ string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
 
+    (void) len;
     g_snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_ino);
     return buffer;
@@ -342,6 +353,7 @@ string_file_nuid (file_entry *fe, int len)
 {
     static char buffer [10];
 
+    (void) len;
     g_snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_uid);
     return buffer;
@@ -353,6 +365,7 @@ string_file_ngid (file_entry *fe, int len)
 {
     static char buffer [10];
 
+    (void) len;
     g_snprintf (buffer, sizeof (buffer), "%lu",
 		(unsigned long) fe->st.st_gid);
     return buffer;
@@ -362,6 +375,7 @@ string_file_ngid (file_entry *fe, int len)
 static const char *
 string_file_owner (file_entry *fe, int len)
 {
+    (void) len;
     return get_owner (fe->st.st_uid);
 }
 
@@ -369,6 +383,7 @@ string_file_owner (file_entry *fe, int len)
 static const char *
 string_file_group (file_entry *fe, int len)
 {
+    (void) len;
     return get_group (fe->st.st_gid);
 }
 
@@ -376,6 +391,7 @@ string_file_group (file_entry *fe, int len)
 static const char *
 string_marked (file_entry *fe, int len)
 {
+    (void) len;
     return fe->f.marked ? "*" : " ";
 }
 
@@ -383,6 +399,8 @@ string_marked (file_entry *fe, int len)
 static const char *
 string_space (file_entry *fe, int len)
 {
+    (void) fe;
+    (void) len;
     return " ";
 }
 
@@ -390,6 +408,8 @@ string_space (file_entry *fe, int len)
 static const char *
 string_dot (file_entry *fe, int len)
 {
+    (void) fe;
+    (void) len;
     return ".";
 }
 
@@ -486,6 +506,8 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
     format_e *format, *home;
     file_entry *fe;
 
+    (void) dest;
+    (void) limit;
     length     = 0;
     empty_line = (file_index >= panel->count);
     home       = (isstatus) ? panel->status_format : panel->format;
@@ -1729,6 +1751,7 @@ move_selection (WPanel *panel, int lines)
 static cb_ret_t
 move_left (WPanel *panel, int c_code)
 {
+    (void) c_code;
     if (panel->split) {
 	move_selection (panel, -llines (panel));
 	return MSG_HANDLED;
@@ -1739,6 +1762,7 @@ move_left (WPanel *panel, int c_code)
 static int
 move_right (WPanel *panel, int c_code)
 {
+    (void) c_code;
     if (panel->split) {
 	move_selection (panel, llines (panel));
 	return MSG_HANDLED;
@@ -1775,6 +1799,7 @@ prev_page (WPanel *panel)
 static void
 ctrl_prev_page (WPanel *panel)
 {
+    (void) panel;
     do_cd ("..", cd_exact);
 }
 
@@ -1980,7 +2005,7 @@ do_search (WPanel *panel, int c_code)
         }
         panel->search_chpoint = 0;
     } else {
-        if (c_code && panel->search_chpoint < sizeof (panel->search_char)) {
+        if (c_code && (gsize) panel->search_chpoint < sizeof (panel->search_char)) {
             panel->search_char[panel->search_chpoint] = c_code;
             panel->search_chpoint++;
 	}
@@ -2227,14 +2252,14 @@ typedef struct {
 } panel_key_map;
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
-static void cmd_view_simple(WPanel *wp) { view_simple_cmd(); }
-static void cmd_edit_new(WPanel *wp) { edit_cmd_new(); }
-static void cmd_copy_local(WPanel *wp) { copy_cmd_local(); }
-static void cmd_rename_local(WPanel *wp) { ren_cmd_local(); }
-static void cmd_delete_local(WPanel *wp) { delete_cmd_local(); }
-static void cmd_select(WPanel *wp) { select_cmd(); }
-static void cmd_unselect(WPanel *wp) { unselect_cmd(); }
-static void cmd_reverse_selection(WPanel *wp) { reverse_selection_cmd(); }
+static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
+static void cmd_edit_new(WPanel *wp) { (void) wp; edit_cmd_new(); }
+static void cmd_copy_local(WPanel *wp) { (void) wp;copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { (void) wp;ren_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { (void) wp;delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { (void) wp;select_cmd(); }
+static void cmd_unselect(WPanel *wp) { (void) wp;unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { (void) wp;reverse_selection_cmd(); }
 
 static const panel_key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },

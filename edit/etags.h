@@ -13,9 +13,9 @@
 
 typedef struct etags_hash_struct {
    size_t filename_len;
-   unsigned char *fullpath;
-   unsigned char *filename;
-   unsigned char *short_define;
+   char *fullpath;
+   char *filename;
+   char *short_define;
    long line;
 } etags_hash_t;
 

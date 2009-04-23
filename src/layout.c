@@ -180,7 +180,7 @@ static struct {
 #define SPLIT_OPTIONS_COUNT            1
 #define OTHER_OPTIONS_COUNT            7
 
-static int first_width, second_width;
+static gsize first_width, second_width;
 static const char *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
@@ -369,7 +369,7 @@ init_layout (void)
     static const char *title1, *title2, *title3;
 
     if (!i18n_layt_flag) {
-	size_t l1;
+	gsize l1;
 
 	first_width = 19;	/* length of line with '<' '>' buttons */
 

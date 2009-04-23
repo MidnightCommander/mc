@@ -35,14 +35,14 @@
 #include "global.h"
 #include "strutil.h"
 
-//names, that are used for utf-8 
+/*names, that are used for utf-8 */
 static const char *str_utf8_encodings[] = {
         "utf-8", 
         "utf8", 
         NULL
 };
 
-// standard 8bit encodings, no wide or multibytes characters
+/* standard 8bit encodings, no wide or multibytes characters*/
 static const char *str_8bit_encodings[] = {
     "cp-1251",
     "cp1251",
@@ -60,16 +60,16 @@ static const char *str_8bit_encodings[] = {
     NULL
 };
 
-// terminal encoding
+/* terminal encoding*/
 static char *codeset;
-// function for encoding specific operations
+/* function for encoding specific operations*/
 static struct str_class used_class;
 
 GIConv str_cnv_to_term;
 GIConv str_cnv_from_term;
 GIConv str_cnv_not_convert;
 
-// if enc is same encoding like on terminal
+/* if enc is same encoding like on terminal*/
 static int
 str_test_not_convert (const char *enc)
 {
@@ -159,7 +159,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 		    g_string_append (buffer, tmp_buff);
 		    g_free (tmp_buff);
 		}
-		if (bytes_read < left)
+		if ((int)bytes_read < left)
 		{
 		    string += bytes_read + 1;
 		    size -= (bytes_read + 1);
@@ -181,7 +181,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 		error = NULL;
 		g_string_append (buffer, tmp_buff);
 		g_free (tmp_buff);
-		if (bytes_read < left)
+		if ((int)bytes_read < left)
 		{
 		    left = left - bytes_read;
 		    tmp_buff = g_strnfill (left, '?');
@@ -421,7 +421,7 @@ str_term_trim (const char *text, int width)
 void
 str_msg_term_size (const char *text, int *lines, int *columns)
 {
-    return used_class.msg_term_size (text, lines, columns);
+    used_class.msg_term_size (text, lines, columns);
 }
 
 const char *

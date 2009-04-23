@@ -197,7 +197,26 @@ background_attention (int fd, void *closure)
 {
     FileOpContext *ctx;
     int have_ctx;
-    void *routine;
+    union 
+    {
+      int (*have_ctx1)(int, char *);
+      int (*have_ctx2)(int, char *, char *);
+      int (*have_ctx3)(int, char *, char *, char *);
+      int (*have_ctx4)(int, char *, char *, char *, char *);
+
+      int (*non_have_ctx1)(FileOpContext *, int, char *);
+      int (*non_have_ctx2)(FileOpContext *, int, char *, char *);
+      int (*non_have_ctx3)(FileOpContext *, int, char *, char *, char *);
+      int (*non_have_ctx4)(FileOpContext *, int, char *, char *, char *, char *);
+
+      char * (*ret_str1)(char *);
+      char * (*ret_str2)(char *, char *);
+      char * (*ret_str3)(char *, char *, char *);
+      char * (*ret_str4)(char *, char *, char *, char *);
+
+      void *pointer;
+    } routine;
+/*    void *routine;*/
     int  argc, i, result, status;
     char *data [MAXCALLARGS];
     ssize_t bytes;
@@ -205,7 +224,7 @@ background_attention (int fd, void *closure)
 
     ctx = closure;
 
-    bytes = read (fd, &routine, sizeof (routine));
+    bytes = read (fd, &routine.pointer, sizeof (routine));
     if (bytes == -1 || (size_t) bytes < (sizeof (routine))) {
 	const char *background_process_error = _(" Background process error ");
 
@@ -252,38 +271,31 @@ background_attention (int fd, void *closure)
 	if (!have_ctx)
 	    switch (argc){
 	    case 1:
-		result = (*(int (*)(int, char *))routine)(Background, data [0]);
+		result = routine.have_ctx1 (Background, data [0]);
 		break;
 	    case 2:
-		result = (*(int (*)(int, char *, char *))routine)
-		    (Background, data [0], data [1]);
+		result = routine.have_ctx2 (Background, data [0], data [1]);
 		break;
 	    case 3:
-		result = (*(int (*)(int, char *, char *, char *))routine)
-		    (Background, data [0], data [1], data [2]);
+		result = routine.have_ctx3 (Background, data [0], data [1], data [2]);
 		break;
 	    case 4:
-		result = (*(int (*)(int, char *, char *, char *, char *))routine)
-		    (Background, data [0], data [1], data [2], data [3]);
+		result = routine.have_ctx4 (Background, data [0], data [1], data [2], data [3]);
 		break;
 	    }
 	else
 	    switch (argc){
 	    case 1:
-		result = (*(int (*)(FileOpContext *, int, char *))routine)
-		    (ctx, Background, data [0]);
+		result = routine.non_have_ctx1 (ctx, Background, data [0]);
 		break;
 	    case 2:
-		result = (*(int (*)(FileOpContext *, int, char *, char *))routine)
-		    (ctx, Background, data [0], data [1]);
+		result = routine.non_have_ctx2 (ctx, Background, data [0], data [1]);
 		break;
 	    case 3:
-		result = (*(int (*)(FileOpContext *, int, char *, char *, char *))routine)
-		    (ctx, Background, data [0], data [1], data [2]);
+		result = routine.non_have_ctx3 (ctx, Background, data [0], data [1], data [2]);
 		break;
 	    case 4:
-		result = (*(int (*)(FileOpContext *, int, char *, char *, char *, char *))routine)
-		    (ctx, Background, data [0], data [1], data [2], data [3]);
+		result = routine.non_have_ctx4 (ctx, Background, data [0], data [1], data [2], data [3]);
 		break;
 	    }
 
@@ -300,19 +312,16 @@ background_attention (int fd, void *closure)
 	 */
 	switch (argc){
 	case 1:
-	    resstr = (*(char * (*)(char *))routine)(data [0]);
+	    resstr = routine.ret_str1 (data [0]);
 	    break;
 	case 2:
-	    resstr = (*(char * (*)(char *, char *))routine)
-		(data [0], data [1]);
+	    resstr = routine.ret_str2 (data [0], data [1]);
 	    break;
 	case 3:
-	    resstr = (*(char * (*)(char *, char *, char *))routine)
-		(data [0], data [1], data [2]);
+	    resstr = routine.ret_str3 (data [0], data [1], data [2]);
 	    break;
 	case 4:
-	    resstr = (*(char * (*)(char *, char *, char *, char *))routine)
-		(data [0], data [1], data [2], data [3]);
+	    resstr = routine.ret_str4 (data [0], data [1], data [2], data [3]);
 	    break;
 	default: g_assert_not_reached();
 	}

@@ -565,6 +565,8 @@ sel_charset_button (int action)
 {
     const char *cpname;
     char buf[64];
+    (void) action;
+
     new_display_codepage = select_charset (0, 0, new_display_codepage, 1);
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
@@ -680,6 +682,7 @@ tree_box (const char *current_dir)
     char     *val;
     WButtonBar *bar;
 
+    (void) current_dir;
     /* Create the components */
     dlg = create_dlg (0, 0, TREE_Y, TREE_X, dialog_colors,
 		      tree_callback, "[Directory Tree]", NULL, DLG_CENTER | DLG_REVERSE);

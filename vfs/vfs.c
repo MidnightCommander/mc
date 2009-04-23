@@ -382,7 +382,7 @@ vfs_supported_enconding (const char *encoding) {
  * buffer - used to store result of translation
  */ 
 static estr_t
-_vfs_translate_path (const char *path, int size, 
+_vfs_translate_path (const char *path, int size,
                      GIConv defcnv, GString *buffer)
 {
     const char *semi;
@@ -393,8 +393,8 @@ _vfs_translate_path (const char *path, int size,
     GIConv coder;
     int ms;
 
-    if (size == 0) return 0;    
-    size = (size > 0) ? size : strlen (path);
+    if (size == 0) return 0;
+    size = ( size > 0) ? size : (signed int)strlen (path);
 
     /* try found #end: */
     semi = g_strrstr_len (path, size, "#enc:");
@@ -414,12 +414,12 @@ _vfs_translate_path (const char *path, int size,
 
         semi+= 5;
         slash = strchr (semi, PATH_SEP);
-        // ignore slashes after size;
+        /* ignore slashes after size; */
         if (slash - path >= size) slash = NULL;
 
-        ms = (slash != NULL) ? slash - semi : strlen (semi);
-        ms = min (ms, sizeof (encoding) - 1);
-        // limit encoding size (ms) to path size (size)
+        ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
+        ms = min ((unsigned int) ms, sizeof (encoding) - 1);
+        /* limit encoding size (ms) to path size (size) */
         if (semi + ms > path + size) ms = path + size - semi;
         memcpy (encoding, semi, ms);
         encoding[ms] = '\0';
@@ -462,8 +462,10 @@ vfs_translate_path (const char *path)
 
     g_string_set_size(vfs_str_buffer,0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
-    // strict version
-    //return (state == 0) ? vfs_str_buffer->data : NULL;
+    /*
+     strict version
+     return (state == 0) ? vfs_str_buffer->data : NULL;
+    */
     return (state != ESTR_FAILURE) ? vfs_str_buffer->str : NULL;
 }
 
@@ -766,14 +768,11 @@ mc_readdir (DIR *dirp)
     vfs = vfs_op (handle);
     dirinfo = vfs_info (handle);
     if (vfs->readdir) {
-//        do {
-            entry = (*vfs->readdir) (dirinfo->info);
-            if (entry == NULL) return NULL;
-            g_string_set_size(vfs_str_buffer,0);
-            state = str_vfs_convert_from (dirinfo->converter,
+        entry = (*vfs->readdir) (dirinfo->info);
+        if (entry == NULL) return NULL;
+        g_string_set_size(vfs_str_buffer,0);
+        state = str_vfs_convert_from (dirinfo->converter,
                                           entry->d_name, vfs_str_buffer);
-//        } while (state != ESTR_SUCCESS);
-
         mc_readdir_result->d_ino = entry->d_ino;
         g_strlcpy (mc_readdir_result->d_name, vfs_str_buffer->str, NAME_MAX + 1);
     }
@@ -863,7 +862,7 @@ _vfs_get_cwd (void)
     estr_t state;
     struct stat my_stat, my_stat2;
 
-    trans = vfs_translate_path_n (current_dir); //add check if NULL
+    trans = vfs_translate_path_n (current_dir); /* add check if NULL */
     
     if (!_vfs_get_class (trans)) {
         encoding = vfs_get_encoding (current_dir);

@@ -204,4 +204,11 @@ rpc_get (int sock, ...)
 	}
     }
 }
+#else
+void mcfsutil__unused(void)
+{
+/*
+    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
+*/
+}
 #endif				/* WITH_MCFS */

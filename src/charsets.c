@@ -311,19 +311,19 @@ str_nconvert_to_input (char *str, int len)
 unsigned char
 convert_from_utf_to_current (const char *str)
 {
+    unsigned char buf_ch[6 + 1];
+    unsigned char ch = '.';
+    GIConv conv;
+    const char *cp_to;
 
     if (!str)
         return '.';
 
-    unsigned char buf_ch[6 + 1];
-    unsigned char ch = '.';
-    GIConv conv;
-
-    const char *cp_to =  get_codepage_id ( source_codepage );
+    cp_to =  get_codepage_id ( source_codepage );
     conv = str_crt_conv_to ( cp_to );
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, str, -1, (char *)buf_ch, sizeof(buf_ch))) {
         case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
@@ -345,21 +345,22 @@ convert_from_utf_to_current_c (const int input_char)
     unsigned char str[6 + 1];
     unsigned char buf_ch[6 + 1];
     unsigned char ch = '.';
+    const char *cp_from;
 
     GIConv conv;
     int res = 0;
 
-    res = g_unichar_to_utf8 (input_char, str);
+    res = g_unichar_to_utf8 (input_char, (char *)str);
     if ( res == 0 ) {
         return ch;
     }
     str[res] = '\0';
 
-    const char *cp_from =  get_codepage_id ( source_codepage );
+    cp_from =  get_codepage_id ( source_codepage );
     conv = str_crt_conv_from ( cp_from );
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
         case ESTR_SUCCESS:
             ch = buf_ch[0];
             break;
@@ -381,17 +382,18 @@ convert_from_8bit_to_utf_c (const char input_char)
     int ch = '.';
     int res = 0;
     GIConv conv;
+    const char *cp_from;
 
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    const char *cp_from = get_codepage_id ( source_codepage );
+    cp_from = get_codepage_id ( source_codepage );
     conv = str_crt_conv_from (cp_from);
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, (char *)str, -1, (char *)buf_ch, sizeof(buf_ch))) {
         case ESTR_SUCCESS:
-            res = g_utf8_get_char_validated (buf_ch, -1);
+            res = g_utf8_get_char_validated ((char *)buf_ch, -1);
             if ( res < 0 ) {
                 ch = buf_ch[0];
             } else {
@@ -417,17 +419,18 @@ convert_from_8bit_to_utf_c2 (const char input_char)
     int ch = '.';
     int res = 0;
     GIConv conv;
+    const char *cp_from;
 
     str[0] = (unsigned char) input_char;
     str[1] = '\0';
 
-    const char *cp_from = get_codepage_id ( source_codepage );
+    cp_from = get_codepage_id ( source_codepage );
     conv = str_crt_conv_to (cp_from);
 
     if (conv != INVALID_CONV) {
-        switch (str_translate_char (conv, str, -1, buf_ch, sizeof(buf_ch))) {
+        switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof(buf_ch))) {
         case ESTR_SUCCESS:
-            res = g_utf8_get_char_validated (buf_ch, -1);
+            res = g_utf8_get_char_validated ((char *) buf_ch, -1);
             if ( res < 0 ) {
                 ch = buf_ch[0];
             } else {

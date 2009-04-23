@@ -415,13 +415,13 @@ static int
 view_read_test_new_line (WView *view, struct read_info *info)
 {
 #define cmp(t1,t2) (strcmp((t1),(t2)) == 0)
-    
+    (void) view;
     if (cmp (info->cact, "\n")) return VRT_NW_YES;
-    
+
     if (cmp (info->cact, "\r")) {
         if (info->result != -1 && (cmp (info->cnxt, "\r") || cmp (info->cnxt, "\n")))
             return VRT_NW_CONTINUE;
-        
+
         return VRT_NW_YES;
     }
     return VRT_NW_NO;
@@ -433,6 +433,7 @@ static int
 view_read_test_tabulator (WView *view, struct read_info *info)
 {
 #define cmp(t1,t2) (strcmp((t1),(t2)) == 0)
+    (void) view;
     return cmp (info->cact, "\t");
 }                
         
@@ -510,7 +511,7 @@ view_load_cache_line (WView *view, struct cache_line *line)
     struct read_info info;
     offset_type nroff_start = 0;
     int nroff_seq = 0;
-    int w;
+    gsize w;
     
     line->width = 0;
         
@@ -593,17 +594,17 @@ view_map_offset_and_column (WView *view, struct cache_line *line,
 {
     const screen_dimen width = view->data_area.width;
     struct read_info info;
+    offset_type nroff_start = 0;
+    int nroff_seq = 0;
+    gsize w;
+    screen_dimen col;
 
     /* HACK: valgrind screams here.
      * TODO: to figure out WHY valgrind detects uninitialized
      * variables. Maybe, info isn't fully initialized?
      */
     memset (&info, 0, sizeof info);
-    offset_type nroff_start = 0;
-    int nroff_seq = 0;
-    int w;
-    screen_dimen col;
-    
+
     col = 0;
     view_read_start (view, &info, line->start);
     while (info.result != -1) {
@@ -804,6 +805,7 @@ view_get_last_line (WView *view)
 static struct cache_line *
 view_get_previous_line (WView *view, struct cache_line *line)
 {
+    (void) view;
     return line->prev;
 }
 
@@ -913,10 +915,10 @@ view_column_to_offset (WView *view, struct cache_line **line, offset_type column
         if ((next == NULL) || (next->number != (*line)->number)) break;
         (*line) = next;
     }
-//    if (column < (*line)->left + (*line)->width) {
+/*    if (column < (*line)->left + (*line)->width) { */
         result = INVALID_OFFSET,
         view_map_offset_and_column (view, *line, &column, &result);
-//    }
+/*    } */
     return result;
 }
 
@@ -1564,9 +1566,9 @@ view_moveto_eol (WView *view)
         if (w > width) {
             view->dpy_text_column = w - width; 
         } else {
-//            if (w + width <= view->dpy_text_column) {
+/*            if (w + width <= view->dpy_text_column) {*/
                 view->dpy_text_column = 0;
-//            }
+/*            }*/
         }
         view_set_first_showed (view, line);
     }
@@ -1598,7 +1600,7 @@ view_moveto (WView *view, offset_type row, offset_type col)
     struct cache_line *t;
 
     act = view_get_first_line (view);
-    view_move_to_stop (act, t, act->number != row, view_get_next_line)
+    view_move_to_stop (act, t, (off_t)act->number != row, view_get_next_line)
 
     view->dpy_text_column = (view->text_wrap_mode) ? 0 : col;
     view->dpy_start = view_column_to_offset (view, &act, col);
@@ -1618,7 +1620,7 @@ static void
 view_move_up (WView *view, offset_type lines)
 {
     struct cache_line *line, *t;
-    int li;
+    off_t li;
     
     if (view->hex_mode) {
 	offset_type bytes = lines * view->bytes_per_line;
@@ -1642,33 +1644,36 @@ view_move_up (WView *view, offset_type lines)
     }
     view_movement_fixups (view, (lines != 1));
 }
-
+/*
+static void
+return_up (struct cache_line * (*ne) (WView *, struct cache_line *),
+               struct cache_line * (*pr) (WView *, struct cache_line *),
+               off_t *li, struct cache_line **t, struct cache_line **line,
+               WView *view)
+{
+    *li = 0;
+    *t = *line;
+    while ((*t != NULL) && (*li < view->data_area.height)) {
+        (*li)++;
+        *t = ne (view, *t);
+    }
+    *li = view->data_area.height - *li;
+    *t = pr (view, *line);
+    while ((*t != NULL) && (*li > 0)) {
+        *line = *t;
+        *t = pr (view, *line);
+        (*li)--;
+    }
+}
+*/
 static void
 view_move_down (WView *view, offset_type lines)
 {
     struct cache_line *line;
     struct cache_line *t;
-    int li;
-    
-    void
-    return_up (struct cache_line * (*ne) (WView *, struct cache_line *),
-               struct cache_line * (*pr) (WView *, struct cache_line *)) 
-    {
-        li = 0;
-        t = line;
-        while ((t != NULL) && (li < view->data_area.height)) {
-            li++;
-            t = ne (view, t);
-        }
-        li = view->data_area.height - li;
-        t = pr (view, line);
-        while ((t != NULL) && (li > 0)) {
-            line = t;
-            t = pr (view, line);
-            li--;
-        }
-    }
-    
+    off_t li;
+
+
     if (view->hex_mode) {
 	offset_type i, limit, last_byte;
 
@@ -1686,16 +1691,16 @@ view_move_down (WView *view, offset_type lines)
     } else if (view->text_wrap_mode) {
         line = view_get_first_showed_line (view);
         li = 0;
-        view_count_to_stop (line, t, li, li < lines, view_get_next_line)
+        view_count_to_stop (line, t, li, (off_t)li < lines, view_get_next_line)
         
-      //  return_up (view_get_next_line, view_get_previous_line);
+      /*  return_up (view_get_next_line, view_get_previous_line); */
         view_set_first_showed (view, line);
     } else {
         line = view_get_first_showed_line (view);
         li = 0;
         view_count_to_stop (line, t, li, li < lines, view_get_next_whole_line)
 
-     //   return_up (view_get_next_whole_line, view_get_previous_whole_line);
+     /*   return_up (view_get_next_whole_line, view_get_previous_whole_line); */
         view_set_first_showed (view, line);
     }
     view_movement_fixups (view, (lines != 1));
@@ -2422,13 +2427,14 @@ view_display_text (WView * view)
         
         view_read_continue (view, &info);
         if (view_read_test_nroff_back (view, &info)) {
+            int c;
+
             w = str_term_width1 (info.chi1);
             col-= w;
             if (col >= view->dpy_text_column
                  && col + w - view->dpy_text_column <= width) { 
                 
                 widget_move (view, top + row, left + (col - view->dpy_text_column));
-                int c;
                 for (c = 0; c < w; c++) addch (' ');
 		}
             if (cmp (info.chi1, "_") && (!cmp (info.cnxt, "_") || !cmp (info.chi2, "\b")))
@@ -2861,10 +2867,12 @@ view_moveto_match (WView *view)
                 if (line->start <= view->search_end && line->end >= view->search_end)
                     end_off = off;
             }
-        
+
             line = view_get_first_showed_line (view);
-            
-            off = (start_off - end_off < height - height3) ? start_off + height3: end_off;
+
+            off = ((off_t)(start_off - end_off) < (off_t)(height - height3)) 
+                ? (int)(start_off + height3)
+                : (int)end_off;
             for (;off >= 0 && line->start > 0; off--) 
                 line = view_get_previous_line (view, line);
         } else {
@@ -2884,12 +2892,14 @@ view_moveto_match (WView *view)
                 if (line->start <= view->search_end && line->end >= view->search_end)
                     end_off = off;
             }
-        
+
             line = view_get_first_showed_line (view);
-            // if view->search_end is farther then screen heigth */
-            if (end_off >= height) {
-                off = (end_off - start_off < height - height3) ? end_off - height + height3: start_off;
-            
+            /* if view->search_end is farther then screen heigth */
+            if ((off_t)end_off >= height) {
+                off = ((off_t)(end_off - start_off) < (off_t)(height - height3))
+                    ? (int) (end_off - height + height3)
+                    : (int) start_off;
+
                 for (;off >= 0; off--) 
                     line = view_get_next_line (view, line);
             }
@@ -2918,7 +2928,9 @@ view_moveto_match (WView *view)
             
             line = view_get_first_showed_line (view);
             line = view_get_start_of_whole_line (view, line);
-            off = (start_off - end_off < height - height3) ? start_off + height3: end_off;
+            off = ((off_t)(start_off - end_off) < (off_t)(height - height3))
+                ? (int)(start_off + height3)
+                : (int)end_off;
             for (;off >= 0 && line->start > 0; off--) {
                 line = view_get_previous_whole_line (view, line);
                 line = view_get_start_of_whole_line (view, line);
@@ -2940,12 +2952,14 @@ view_moveto_match (WView *view)
                 if (line->start <= view->search_end && line_end->end >= view->search_end)
                     end_off = off;
             }
-            
+
             line = view_get_first_showed_line (view);
             line = view_get_start_of_whole_line (view, line);
-            if (end_off >= height) {
-                off = (end_off - start_off < height - height3) ? end_off - height + height3: start_off;
-            
+            if ((off_t)end_off >= height) {
+                off = ((off_t)(end_off - start_off) < (off_t)(height - height3))
+                    ? (int)(end_off - height + height3)
+                    : (int)start_off;
+
                 for (;off >= 0; off--) 
                     line = view_get_next_whole_line (view, line);
             }
@@ -2957,11 +2971,11 @@ view_moveto_match (WView *view)
         t = view_offset_to_line_from (view, view->search_end, line);
         end_off = view_offset_to_column (view, t, view->search_end);
         
-        if (end_off - start_off > width) end_off = start_off + width;
-        if (view->dpy_text_column > start_off) {
+        if ((off_t)(end_off - start_off) > width) end_off = start_off + width;
+        if (view->dpy_text_column > (off_t)start_off) {
             view->dpy_text_column = start_off;
         } else {
-            if (view->dpy_text_column + width < end_off) {
+            if (view->dpy_text_column + width < (off_t)end_off) {
                 view->dpy_text_column = end_off - width;
 	}
 	}
@@ -3250,6 +3264,7 @@ regexp_view_search (WView *view, char *pattern, char *string,
     regmatch_t pmatch[1];
     int i, flags = REG_ICASE;
 
+    (void) view;
     if (old_pattern == NULL || strcmp (old_pattern, pattern) != 0
 	|| old_type != match_type) {
 	if (old_pattern != NULL) {

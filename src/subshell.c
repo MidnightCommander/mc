@@ -191,6 +191,7 @@ init_subshell_child (const char *pty_name)
     pid_t mc_sid;
 #endif				/* HAVE_GETSID */
 
+    (void) pty_name;
     setsid ();			/* Get a fresh terminal session */
 
     /* Make sure that it has become our controlling terminal */

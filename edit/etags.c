@@ -116,6 +116,8 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
                               const char *match_func,
                               etags_hash_t *def_hash)
 {
+    enum {start, in_filename, in_define} state = start;
+
     FILE *f;
     static char buf[BUF_LARGE];
 
@@ -126,15 +128,13 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
     char *chekedstr = NULL;
 
     int num = 0; /* returned value */
+    int pos;
+    char *filename = NULL;
 
     /* open file with positions */
     f = fopen (tagfile, "r");
     if (!f)
         return 0;
-
-    int pos;
-    char *filename = NULL;
-    enum {start, in_filename, in_define} state = start;
 
     while (fgets (buf, sizeof (buf), f)) {
 
@@ -162,7 +162,8 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
                 parse_define (chekedstr, &longname, &shortname, &line);
                 if ( num < MAX_DEFINITIONS - 1 ) {
                     def_hash[num].filename_len = strlen (filename);
-                    def_hash[num].fullpath = g_build_filename (start_path, filename, (char *) NULL);
+                    def_hash[num].fullpath =  g_build_filename ( start_path, filename, (char *) NULL);
+
                     canonicalize_pathname (def_hash[num].fullpath);
                     def_hash[num].filename = g_strdup (filename);
                     if ( shortname ) {

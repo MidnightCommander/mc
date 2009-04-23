@@ -44,7 +44,7 @@
 
 typedef char *CompletionFunction (char * text, int state, INPUT_COMPLETE_FLAGS flags);
 
-//#define DO_COMPLETION_DEBUG
+/* #define DO_COMPLETION_DEBUG */
 #ifdef DO_COMPLETION_DEBUG
 /*
  * Useful to print/debug completion flags
@@ -106,7 +106,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
         /* Save the version of the directory that the user typed. */
         users_dirname = dirname;
         {
-	    // FIXME: memleak ?
+	    /* FIXME: memleak ? */
 	    dirname = tilde_expand (dirname);
 	    canonicalize_pathname (dirname);
 	    /* Here we should do something with variable expansion
@@ -160,7 +160,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 	    }
 	    else
 	    {
-	        // stat failed, strange. not a dir in any case
+	        /* stat failed, strange. not a dir in any case */
 	        isdir = 0;
 	    }
 	   g_free (tmp);
@@ -224,6 +224,7 @@ username_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     static struct passwd *entry;
     static int userlen;
 
+    (void) flags;
     SHOW_C_CTX("username_completion_function");
 
     if (text[0] == '\\' && text[1] == '~') text++;
@@ -267,6 +268,7 @@ variable_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     static int varlen, isbrace;
     const char *p = NULL;
 
+    (void) flags;
     SHOW_C_CTX("variable_completion_function");
 
     if (!state){ /* Initialization stuff */
@@ -390,6 +392,7 @@ hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     static char **host_p;
     static int textstart, textlen;
 
+    (void) flags;
     SHOW_C_CTX("hostname_completion_function");
 
     if (!state){ /* Initialization stuff */

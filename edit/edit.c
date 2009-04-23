@@ -1080,6 +1080,7 @@ int edit_delete (WEdit * edit, const int byte_delete)
 {
     int p = 0;
     int cw = 1;
+    int i;
 
     if (!edit->curs2)
 	return 0;
@@ -1095,7 +1096,7 @@ int edit_delete (WEdit * edit, const int byte_delete)
         if ( cw < 1 )
             cw = 1;
     }
-    for ( int i = 1; i<= cw; i++ ) {
+    for ( i = 1; i<= cw; i++ ) {
         p = edit->buffers2[(edit->curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - ((edit->curs2 - 1) & M_EDIT_BUF_SIZE) - 1];
 
         if (!(edit->curs2 & M_EDIT_BUF_SIZE)) {
@@ -1129,6 +1130,7 @@ edit_backspace (WEdit * edit)
 {
     int p = 0;
     int cw = 1;
+    int i;
 
     if (!edit->curs1)
 	return 0;
@@ -1143,7 +1145,7 @@ edit_backspace (WEdit * edit)
         if ( cw < 1 )
             cw = 1;
     }
-    for ( int i = 1; i<= cw; i++ ) {
+    for ( i = 1; i<= cw; i++ ) {
         p = *(edit->buffers1[(edit->curs1 - 1) >> S_EDIT_BUF_SIZE] + ((edit->curs1 - 1) & M_EDIT_BUF_SIZE));
         if (!((edit->curs1 - 1) & M_EDIT_BUF_SIZE)) {
 	    g_free (edit->buffers1[edit->curs1 >> S_EDIT_BUF_SIZE]);
@@ -1286,6 +1288,7 @@ void edit_cursor_move (WEdit * edit, long increment)
     long curs2 = edit->curs2;
     int cw = 1;
     int char_step = 0;
+    int i;
 
     /* one char move*/
     if ( increment == -1 || increment == 1)
@@ -1312,7 +1315,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 	        if ( cw < 1 )
 	            cw = 1;
 	    }
-	    for ( int i = 1; i<= cw; i++ ) {
+	    for ( i = 1; i<= cw; i++ ) {
 	        c = edit_get_byte (edit, curs1 - 1);
 	        if (!((curs2 + 1) & M_EDIT_BUF_SIZE))
 		    edit->buffers2[(curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
@@ -1346,7 +1349,7 @@ void edit_cursor_move (WEdit * edit, long increment)
 	        if ( cw < 1 )
 	            cw = 1;
 	    }
-	    for ( int i = 1; i<= cw; i++ ) {
+	    for ( i = 1; i<= cw; i++ ) {
 	        c = edit_get_byte (edit, curs1);
 	        if (!(curs1 & M_EDIT_BUF_SIZE))
 		    edit->buffers1[curs1 >> S_EDIT_BUF_SIZE] = g_malloc (EDIT_BUF_SIZE);
@@ -2356,6 +2359,8 @@ static const char * const shell_cmd[] = SHELL_COMMANDS_i;
 void
 edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 {
+    int i = 0;
+
     edit->force |= REDRAW_LINE;
 
     /* The next key press will unhighlight the found string, so update
@@ -2395,14 +2400,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 #ifdef HAVE_CHARSET
 	if ( char_for_insertion > 255 && utf8_display == 0 ) {
             unsigned char str[6 + 1];
-            int res = g_unichar_to_utf8 (char_for_insertion, str);
+            int res = g_unichar_to_utf8 (char_for_insertion, (char *)str);
             if ( res == 0 ) {
                 str[0] = '.';
                 str[1] = '\0';
             } else {
                 str[res] = '\0';
             }
-            int i = 0;
 	    while ( str[i] != 0 && i<=6) {
 	        char_for_insertion = str[i];
 	        edit_insert (edit, char_for_insertion);

@@ -48,12 +48,15 @@ str_8bit_insert_replace_char (GString * buffer)
 static int
 str_8bit_is_valid_string (const char *text)
 {
+    (void) text;
     return 1;
 }
 
 static int
 str_8bit_is_valid_char (const char *ch, size_t size)
 {
+    (void) ch;
+    (void) size;
     return 1;
 }
 
@@ -126,6 +129,7 @@ str_8bit_isprint (const char *text)
 static int
 str_8bit_iscombiningmark (const char *text)
 {
+    (void) text;
     return 0;
 }
 
@@ -160,7 +164,7 @@ str_8bit_length (const char *text)
 static int
 str_8bit_length2 (const char *text, int size)
 {
-    return (size >= 0) ? min (strlen (text), size) : strlen (text);
+    return (size >= 0) ? min (strlen (text), (gsize)size) : strlen (text);
 }
 
 static estr_t
@@ -217,7 +221,7 @@ str_8bit_fit_to_term (const char *text, int width, int just_mode)
     actual = result;
     remain = sizeof (result);
 
-    if (length <= width)
+    if ((int)length <= width)
     {
 	ident = 0;
 	switch (HIDE_FIT (just_mode))
@@ -231,7 +235,7 @@ str_8bit_fit_to_term (const char *text, int width, int just_mode)
 	    break;
 	}
 
-	if (remain <= ident)
+	if ((int)remain <= ident)
 	    goto finally;
 	memset (actual, ' ', ident);
 	actual += ident;
@@ -254,7 +258,7 @@ str_8bit_fit_to_term (const char *text, int width, int just_mode)
     {
 	if (IS_FIT (just_mode))
 	{
-	    for (; pos + 1 <= width / 2 && remain > 1;
+	    for (; pos + 1 <= (gsize)width / 2 && remain > 1;
 		 actual++, pos++, remain--)
 	    {
 
@@ -288,7 +292,7 @@ str_8bit_fit_to_term (const char *text, int width, int just_mode)
 	    }
 
 	    pos += ident;
-	    for (; pos < ident + width && remain > 1;
+	    for (; pos < (gsize)(ident + width) && remain > 1;
 		 pos++, actual++, remain--)
 	    {
 
@@ -315,7 +319,7 @@ str_8bit_term_trim (const char *text, int width)
     actual = result;
     remain = sizeof (result);
 
-    if (width < length)
+    if (width < (int)length)
     {
 	if (width <= 3)
 	{
@@ -365,21 +369,23 @@ str_8bit_term_width1 (const char *text)
 static int
 str_8bit_term_char_width (const char *text)
 {
+    (void) text;
     return 1;
 }
 
 static void
 str_8bit_msg_term_size (const char *text, int *lines, int *columns)
 {
-    (*lines) = 1;
-    (*columns) = 0;
 
-    char *p, *tmp = g_strdup (text);
+    char *p, *tmp;
     char *q;
     char c = '\0';
     int width;
     p = tmp;
 
+    (*lines) = 1;
+    (*columns) = 0;
+    tmp = g_strdup ((char *)text);
     for (;;)
     {
 	q = strchr (p, '\n');
@@ -415,7 +421,7 @@ str_8bit_term_substring (const char *text, int start, int width)
     remain = sizeof (result);
     length = strlen (text);
 
-    if (start < length)
+    if (start < (int)length)
     {
 	pos += start;
 	for (; pos < length && width > 0 && remain > 1;
@@ -448,9 +454,9 @@ str_8bit_trunc (const char *text, int width)
     remain = sizeof (result);
     length = strlen (text);
 
-    if (length > width)
+    if ((int)length > width)
     {
-	for (; pos + 1 <= width / 2 && remain > 1; actual++, pos++, remain--)
+	for (; pos + 1 <= (gsize)width / 2 && remain > 1; actual++, pos++, remain--)
 	{
 	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
 	}
@@ -484,24 +490,29 @@ str_8bit_trunc (const char *text, int width)
 static int
 str_8bit_offset_to_pos (const char *text, size_t length)
 {
+    (void) text;
     return (int) length;
 }
 
 static int
 str_8bit_column_to_pos (const char *text, size_t pos)
 {
+    (void) text;
     return (int)pos;
 }
 
 static char *
 str_8bit_create_search_needle (const char *needle, int case_sen)
 {
+    (void) case_sen;
     return (char *) needle;
 }
 
 static void
 str_8bit_release_search_needle (char *needle, int case_sen)
 {
+    (void) case_sen;
+    (void) needle;
 }
 
 static const char *
@@ -605,6 +616,7 @@ str_8bit_caseprefix (const char *text, const char *prefix)
 static void
 str_8bit_fix_string (char *text)
 {
+    (void) text;
 }
 
 static char *

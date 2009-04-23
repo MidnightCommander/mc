@@ -18,7 +18,7 @@ typedef enum {
     MC_SEARCH_E_OK,
     MC_SEARCH_E_INPUT,
     MC_SEARCH_E_REGEX,
-    MC_SEARCH_E_NOTFOUND,
+    MC_SEARCH_E_NOTFOUND
 } mc_search_error_t;
 
 typedef enum {
@@ -26,7 +26,7 @@ typedef enum {
     MC_SEARCH_T_REGEX,
     MC_SEARCH_T_SCANF,
     MC_SEARCH_T_HEX,
-    MC_SEARCH_T_GLOB,
+    MC_SEARCH_T_GLOB
 } mc_search_type_t;
 
 

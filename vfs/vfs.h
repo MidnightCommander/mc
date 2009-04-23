@@ -19,7 +19,7 @@ char *vfs_translate_path_n (const char *path);
 /* return encoding after last #enc: or NULL, if part does not contain #enc:
  * return static buffer */
 const char *vfs_get_encoding (const char *path);
-// canonize and translate path, return new string */
+/* canonize and translate path, return new string */
 char *vfs_canon_and_translate (const char *path);
 
 /* Only the routines outside of the VFS module need the emulation macros */

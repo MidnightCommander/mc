@@ -301,14 +301,14 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	    }
 	}
 	if ( textchar > 255 ) {
-            int res = g_unichar_to_utf8 (textchar, str);
+            int res = g_unichar_to_utf8 (textchar, (char *)str);
             if ( res == 0 ) {
                 str[0] = '.';
                 str[1] = '\0';
             } else {
                 str[res] = '\0';
             }
-            addstr (str);
+            addstr ((char *)str);
         } else {
             addch(textchar);
         }

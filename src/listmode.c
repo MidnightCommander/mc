@@ -298,5 +298,12 @@ listmode_edit (char *oldlistformat)
     listmode_done (listmode_dlg);
     return newformat;
 }
+#else
+void listmode__unused(void)
+{
+/*
+    CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
+*/
+}
 
 #endif				/* LISTMODE_EDITOR */
