@@ -77,7 +77,7 @@ typedef struct mc_search_struct {
 
     /* original search string */
     gchar *original;
-    guint original_len;
+    gsize original_len;
 
     /* error code after search */
     mc_search_error_t error;
@@ -89,7 +89,7 @@ typedef struct mc_search_struct {
 
 /*** declarations of public functions ************************************************************/
 
-mc_search_t *mc_search_new (const gchar * original, guint original_len);
+mc_search_t *mc_search_new (const gchar * original, gsize original_len);
 
 void mc_search_free (mc_search_t * mc_search);
 
