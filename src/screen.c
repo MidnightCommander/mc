@@ -70,7 +70,7 @@ typedef struct format_e {
     struct format_e *next;
     int    requested_field_len;
     int    field_len;
-    int    just_mode;
+    align_crt_t just_mode;
     int    expand;
     const char *(*string_fn)(file_entry *, int len);
     const char   *title;
@@ -419,7 +419,7 @@ static struct {
     const char *id;
     int  min_size;
     int  expands;
-    int  default_just;
+    align_crt_t default_just;
     const char *title;
     int  use_in_gui;
     const char *(*string_fn)(file_entry *, int);
@@ -1304,7 +1304,7 @@ parse_display_format (WPanel *panel, const char *format, char **error, int issta
     format_e *darr, *old = 0, *home = 0; /* The formats we return */
     int  total_cols = 0;		/* Used columns by the format */
     int  set_justify;                  	/* flag: set justification mode? */
-    int  justify = 0;                  	/* Which mode. */
+    align_crt_t justify = J_LEFT;	/* Which mode. */
     int  items = 0;			/* Number of items in the format */
     size_t  i;
 

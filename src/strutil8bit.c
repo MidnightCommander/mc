@@ -208,7 +208,7 @@ str_8bit_term_form (const char *text)
 }
 
 static const char *
-str_8bit_fit_to_term (const char *text, int width, int just_mode)
+str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 {
     static char result[BUF_MEDIUM];
     char *actual;

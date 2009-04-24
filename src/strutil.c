@@ -407,7 +407,7 @@ str_term_form (const char *text)
 }
 
 const char *
-str_fit_to_term (const char *text, int width, int just_mode)
+str_fit_to_term (const char *text, int width, align_crt_t just_mode)
 {
     return used_class.fit_to_term (text, width, just_mode);
 }
