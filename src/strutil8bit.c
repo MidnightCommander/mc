@@ -381,11 +381,11 @@ str_8bit_msg_term_size (const char *text, int *lines, int *columns)
     char *q;
     char c = '\0';
     int width;
-    p = tmp;
 
     (*lines) = 1;
     (*columns) = 0;
     tmp = g_strdup ((char *)text);
+    p = tmp;
     for (;;)
     {
 	q = strchr (p, '\n');
