@@ -2,7 +2,7 @@
 #define MC_EDIT_WIDGET_H
 
 #include "../src/dialog.h"		/* Widget */
-#include "../src/search.h"		/* mc_search_t */
+#include "../src/search/search.h"		/* mc_search_t */
 #include "edit.h"
 
 #define MAX_MACRO_LENGTH 1024

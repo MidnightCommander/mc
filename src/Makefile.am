@@ -39,6 +39,8 @@ mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
+MC_MODULE_SEARCH_FILES = search/search.c search/search.h
+
 SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
 	command.c command.h complete.c cons.handler.c	\
@@ -61,7 +63,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
 	x11conn.h x11conn.c ecs.h ecs.c \
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c \
-	search.c search.h
+	$(MC_MODULE_SEARCH_FILES)
 
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)
