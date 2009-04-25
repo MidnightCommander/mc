@@ -3,9 +3,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define STR_E_NOTFOUND		" Search string not found "
-#define STR_E_UNKNOWN_TYPE	" Unknown search type "
-
 /*** enums ***************************************************************************************/
 
 typedef enum {
@@ -31,6 +28,9 @@ typedef struct mc_search_cond_struct {
 } mc_search_cond_t;
 
 /*** global variables defined in .c file *********************************************************/
+
+extern char STR_E_NOTFOUND[];
+extern char STR_E_UNKNOWN_TYPE[];
 
 /*** declarations of public functions ************************************************************/
 
