@@ -15,6 +15,9 @@ AM_MAINTAINER_MODE
 AC_CANONICAL_HOST
 
 AC_USE_SYSTEM_EXTENSIONS
+
+AC_PROG_LIBTOOL
+
 AC_ISC_POSIX
 
 AC_PROG_CC_STDC
@@ -567,7 +570,10 @@ doc/Makefile
 vfs/Makefile
 vfs/extfs/Makefile
 lib/Makefile
+
 src/Makefile
+src/search/Makefile
+
 edit/Makefile 
 syntax/Makefile
 m4/Makefile

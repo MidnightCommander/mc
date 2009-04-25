@@ -1,3 +1,5 @@
+SUBDIRS = search
+
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 localedir = $(datadir)/locale
@@ -35,11 +37,9 @@ endif
 endif
 
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV)
+	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV) search/libsearch.la
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
-
-MC_MODULE_SEARCH_FILES = search/search.c search/search.h
 
 SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
@@ -63,7 +63,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
 	x11conn.h x11conn.c ecs.h ecs.c \
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c \
-	$(MC_MODULE_SEARCH_FILES)
+	search/search.h
 
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)

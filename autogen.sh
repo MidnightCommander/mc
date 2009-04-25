@@ -10,6 +10,7 @@ set -e
 : ${AUTOMAKE=automake}
 : ${ACLOCAL=aclocal}
 : ${AUTOPOINT=autopoint}
+: ${LIBTOOLIZE=libtoolize}
 : ${XGETTEXT=xgettext}
 
 srcdir=`dirname $0`
@@ -37,6 +38,8 @@ $XGETTEXT --keyword=_ --keyword=N_ --keyword=Q_ --output=- \
 	`find . -name '*.[ch]'` | sed -ne '/^#:/{s/#://;s/:[0-9]*/\
 /g;s/ //g;p;}' | \
 	grep -v '^$' | sort | uniq | grep -v 'regex.c' >po/POTFILES.in
+
+$LIBTOOLIZE
 
 ACLOCAL_INCLUDES="-I m4"
 
