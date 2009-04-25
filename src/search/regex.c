@@ -59,7 +59,7 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
         "\\r", "\\f",
         "\\a", "\\e",
         "\\x", "\\X",
-        "\\c[", "\\C",
+        "\\c", "\\C",
         "\\l", "\\L",
         "\\u", "\\U",
         "\\E", "\\Q",
@@ -85,12 +85,41 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
 }
 
 /* --------------------------------------------------------------------------------------------- */
+static void
+mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
+                                          const char *one_char, gsize str_len)
+{
+    GString *upp, *low;
+    gchar *tmp_str;
+    gsize loop;
+
+    upp = mc_search__toupper_case_str (charset, one_char, str_len);
+    low = mc_search__tolower_case_str (charset, one_char, str_len);
+
+    for (loop = 0; loop < upp->len; loop++) {
+
+        if (loop < low->len) {
+            if (upp->str[loop] == low->str[loop])
+                tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
+            else
+                tmp_str = g_strdup_printf ("[\\x%02X\\x%02X]", (unsigned char)upp->str[loop], (unsigned char)low->str[loop]);
+        } else {
+            tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
+        }
+        g_string_append (str_to, tmp_str);
+        g_free (tmp_str);
+    }
+    g_string_free (upp, TRUE);
+    g_string_free (low, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * str_to,
                                                GString * str_from)
 {
-    GString *recoded_part, *tmp;
+    GString *recoded_part;
     gchar *one_char;
     gsize loop;
     gboolean just_letters;
@@ -108,18 +137,8 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
             continue;
         }
         if (just_letters) {
-            g_string_append_c (recoded_part, '[');
-
-            tmp = mc_search__toupper_case_str (charset, one_char, strlen (one_char));
-            g_string_append (recoded_part, tmp->str);
-            g_string_free (tmp, TRUE);
-
-            tmp = mc_search__tolower_case_str (charset, one_char, strlen (one_char));
-            g_string_append (recoded_part, tmp->str);
-            g_string_free (tmp, TRUE);
-
-            g_string_append_c (recoded_part, ']');
-
+            mc_search__cond_struct_new_regex_hex_add (charset, recoded_part, one_char,
+                                                      strlen (one_char));
         } else {
             g_string_append (recoded_part, one_char);
         }
@@ -132,7 +151,6 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
     g_string_append (str_to, recoded_part->str);
     g_string_free (recoded_part, TRUE);
     g_string_set_size (str_from, 0);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -236,7 +254,6 @@ mc_search__regex_found_cond (mc_search_t * mc_search, GString * search_str)
     return COND__NOT_ALL_FOUND;
 }
 
-
 /*** public functions ****************************************************************************/
 
 void
@@ -246,6 +263,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
 #if GLIB_CHECK_VERSION (2, 14, 0)
     GString *tmp;
     GError *error = NULL;
+
     if (!mc_search->is_case_sentitive) {
         tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
         g_string_free (mc_search_cond->str, TRUE);
@@ -253,7 +271,8 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         g_string_free (tmp, TRUE);
     }
 
-    mc_search_cond->regex_str = g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE, 0, &error);
+    mc_search_cond->regex_str = g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE|G_REGEX_RAW, 0, &error);
+
     if (error != NULL) {
         mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
         mc_search->error_str = g_strdup (error->message);
