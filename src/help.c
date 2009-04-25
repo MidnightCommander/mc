@@ -69,7 +69,7 @@
 #define STRING_LINK_END		"\03"
 #define STRING_NODE_END		"\04"
 
-static char *data;		
+static char *data = NULL;	/* Pointer to the loaded data file */
 static int help_lines;		/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
 static const char *main_node;	/* The main node */
@@ -781,14 +781,18 @@ translate_file (char *filedata)
     conv = str_crt_conv_from ("UTF-8");
 
     if (conv != INVALID_CONV) {
+        g_free (data);
+
         if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
             data = translated_data->str;
+            g_string_free (translated_data, FALSE);
         } else {
             data = NULL;
+            g_string_free (translated_data, TRUE);
         }
         str_close_conv (conv);
-    }
-    g_string_free (translated_data, TRUE);
+    } else
+        g_string_free (translated_data, TRUE);
 }
 
 void
@@ -804,7 +808,7 @@ interactive_display (const char *filename, const char *node)
     else
 	filedata = load_mc_home_file ("mc.hlp", &hlpfile);
 
-    if (data == NULL) {
+    if (filedata == NULL) {
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
 		 unix_error_string (errno));
     }

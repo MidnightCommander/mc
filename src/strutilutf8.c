@@ -575,7 +575,7 @@ utf8_tool_compose (char *buffer, size_t size)
 
 
 static const char *
-str_utf8_fit_to_term (const char *text, int width, int just_mode)
+str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
 {
     static char result[BUF_MEDIUM * 6];
     const struct term_form *pre_form;

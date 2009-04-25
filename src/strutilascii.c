@@ -201,7 +201,7 @@ str_ascii_term_form (const char *text)
 }
 
 static const char *
-str_ascii_fit_to_term (const char *text, int width, int just_mode)
+str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
 {
     static char result[BUF_MEDIUM];
     char *actual;

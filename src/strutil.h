@@ -52,27 +52,25 @@ typedef enum {
     ESTR_FAILURE = 2
 } estr_t;
 
-/* constanst originally from screen.c
- * used for alignment strings on terminal
+/* alignment strings on terminal
  */
-#define J_LEFT 		0x01
-#define J_RIGHT		0x02
-#define J_CENTER	0x03
-/*
- if there is enough space for string on terminal, string is centered
- otherwise is aligned to left
-*/
-#define J_CENTER_LEFT	0x04
+typedef enum {
+    J_LEFT		= 0x01,
+    J_RIGHT		= 0x02,
+    J_CENTER		= 0x03,
+    /* if there is enough space for string on terminal,
+     * string is centered otherwise is aligned to left */
+    J_CENTER_LEFT	= 0x04,
+    /* fit alignment, if string is to long, is truncated with '~' */
+    J_LEFT_FIT		= 0x11,
+    J_RIGHT_FIT		= 0x12,
+    J_CENTER_FIT	= 0x13,
+    J_CENTER_LEFT_FIT	= 0x14
+} align_crt_t;
 
 #define IS_FIT(x)	((x) & 0x0010)
 #define MAKE_FIT(x)	((x) | 0x0010)
 #define HIDE_FIT(x)	((x) & 0x000f)
-
-/* fit alignment, if string is to long, is truncated with '~' */
-#define J_LEFT_FIT		0x11
-#define J_RIGHT_FIT		0x12
-#define J_CENTER_FIT		0x13
-#define J_CENTER_LEFT_FIT	0x14
 
 #define INVALID_CONV	((GIConv) (-1))
 
@@ -85,7 +83,7 @@ extern GIConv str_cnv_not_convert;
 /* all functions in str_class must be defined for every encoding */
 struct str_class {
     estr_t (*vfs_convert_to) (GIConv coder, const char *string, 
-                        int size, GString *buffer);           /*I*/
+                        int size, GString *buffer);                     /*I*/
     void (*insert_replace_char) (GString *buffer);
     int (*is_valid_string) (const char *);                              /*I*/
     int (*is_valid_char) (const char *, size_t);                        /*I*/
@@ -108,7 +106,7 @@ struct str_class {
     int (*tolower) (const char *, char **, size_t *);
     void (*fix_string) (char *);                                        /*I*/
     const char *(*term_form) (const char *);                            /*I*/
-    const char *(*fit_to_term) (const char *, int, int);                /*I*/
+    const char *(*fit_to_term) (const char *, int, align_crt_t);        /*I*/
     const char *(*term_trim) (const char *text, int width);             /*I*/
     void (*msg_term_size) (const char *, int *, int *);                 /*I*/
     const char *(*term_substring) (const char *, int, int);             /*I*/
@@ -366,7 +364,7 @@ const char *str_term_form (const char *text);
  * result is completed with spaces to width
  * I
  */
-const char *str_fit_to_term (const char *text, int width, int just_mode);
+const char *str_fit_to_term (const char *text, int width, align_crt_t just_mode);
 
 /* like str_term_form, but when text is wider than width, three dots are
  * inserted at begin and result is completed with suffix of text
