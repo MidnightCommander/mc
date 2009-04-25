@@ -17,6 +17,7 @@ typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 typedef enum {
     MC_SEARCH_E_OK,
     MC_SEARCH_E_INPUT,
+    MC_SEARCH_E_REGEX_COMPILE,
     MC_SEARCH_E_REGEX,
     MC_SEARCH_E_NOTFOUND
 } mc_search_error_t;
@@ -62,7 +63,6 @@ typedef struct mc_search_struct {
 
     /* some data for regexp */
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    GRegex *regex_handle;
     GMatchInfo *regex_match_info;
 #endif
     /* some data for sscanf */
@@ -95,5 +95,7 @@ void mc_search_free (mc_search_t * mc_search);
 
 gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search,
                         gsize end_search, gsize * founded_len);
+
+gboolean mc_search_is_type_avail (mc_search_type_t);
 
 #endif
