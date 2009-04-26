@@ -81,64 +81,74 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
     int x = menu->start_x;
     const menu_entry *entry = &menu->entries[idx];
 
-	if (x + menubar->max_entry_len + 3 > menubar->widget.cols)
-		x = menubar->widget.cols - menubar->max_entry_len - 3;
-    widget_move (&menubar->widget, y, x);
-
-    attrset (color);
-    hline (' ', menubar->max_entry_len + 2);
+    if (x + menubar->max_entry_len + 3 > menubar->widget.cols)
+        x = menubar->widget.cols - menubar->max_entry_len - 3;
 
     if (entry->text.start == NULL) {
+        /* menu separator */
         attrset (SELECTED_COLOR);
-        widget_move (&menubar->widget, y, x + 1);
-        hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
-    } else {
-        addch ((unsigned char)entry->first_letter);
 
+        if (!slow_terminal) {
+            widget_move (&menubar->widget, y, x - 1);
+            tty_print_alt_char (ACS_LTEE);
+        }
+
+        tty_print_hline (menubar->widget.y + y, menubar->widget.x + x,
+                            menubar->max_entry_len + 2);
+
+        if (!slow_terminal)
+            tty_print_alt_char (ACS_RTEE);
+    } else {
+        /* menu text */
+        attrset (color);
+        widget_move (&menubar->widget, y, x);
+        addch ((unsigned char) entry->first_letter);
+        hline (' ', menubar->max_entry_len + 1); /* clear line */
         addstr (str_term_form (entry->text.start));
 
         if (entry->text.hotkey != NULL) {
-		    attrset (color == MENU_SELECTED_COLOR ?
-			MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
+            attrset (color == MENU_SELECTED_COLOR ?
+                        MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
             addstr (str_term_form (entry->text.hotkey));
-		    attrset(color);
-		}
-        if (entry->text.end != NULL) {
+            attrset(color);
+        }
+
+        if (entry->text.end != NULL)
             addstr (str_term_form (entry->text.end));
-	}
+
+        /* move cursor to the start of entry text */
+        widget_move (&menubar->widget, y, x + 1);
     }
-    widget_move (&menubar->widget, y, x + 1);
 }
 
 static inline void menubar_draw_drop (WMenu *menubar)
 {
-    const int count = (menubar->menu [menubar->selected])->count;
-    int   i;
-    int   sel = menubar->subsel;
-    int   column = menubar-> menu[menubar->selected]->start_x - 1;
+    const int count = menubar->menu [menubar->selected]->count;
+    int column = menubar->menu [menubar->selected]->start_x - 1;
+    int i;
 
-	if (column + menubar->max_entry_len + 4 > menubar->widget.cols)
-		column = menubar->widget.cols - menubar->max_entry_len - 4;
+    if (column + menubar->max_entry_len + 4 > menubar->widget.cols)
+        column = menubar->widget.cols - menubar->max_entry_len - 4;
 
     attrset (SELECTED_COLOR);
     draw_box (menubar->widget.parent,
-	      menubar->widget.y+1, menubar->widget.x + column,
-	      count+2, menubar->max_entry_len + 4);
+	      menubar->widget.y + 1, menubar->widget.x + column,
+	      count + 2, menubar->max_entry_len + 4);
 
-    column++;
-    for (i = 0; i < count; i++){
-	if (i == sel)
-	    continue;
-	menubar_paint_idx (menubar, i, MENU_ENTRY_COLOR);
-    }
-    menubar_paint_idx (menubar, sel, MENU_SELECTED_COLOR);
+    /* draw items except selected */
+    for (i = 0; i < count; i++)
+        if (i != menubar->subsel)
+            menubar_paint_idx (menubar, i, MENU_ENTRY_COLOR);
+
+    /* draw selected item at last to move cursot to the nice location */
+    menubar_paint_idx (menubar, menubar->subsel, MENU_SELECTED_COLOR);
 }
 
 static void menubar_draw (WMenu *menubar)
 {
     const int items = menubar->items;
     int   i;
-    
+
     /* First draw the complete menubar */
     attrset (SELECTED_COLOR);
     widget_move (&menubar->widget, 0, 0);
@@ -151,9 +161,9 @@ static void menubar_draw (WMenu *menubar)
         attrset ((menubar->active && i == menubar->selected) ? 
                 MENU_SELECTED_COLOR : SELECTED_COLOR);
 	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
-        
+
         addstr (str_term_form (menubar->menu[i]->text.start));
-        
+
         if (menubar->menu[i]->text.hotkey != NULL) {
             attrset ((menubar->active && i == menubar->selected) ? 
                     MENU_HOTSEL_COLOR : COLOR_HOT_FOCUS);
@@ -168,10 +178,9 @@ static void menubar_draw (WMenu *menubar)
 
     if (menubar->dropped)
 	menubar_draw_drop (menubar);
-    else 
-	widget_move (&menubar->widget, 0, 
+    else
+	widget_move (&menubar->widget, 0,
 		menubar-> menu[menubar->selected]->start_x);
-    
 }
 
 static inline void menubar_remove (WMenu *menubar)
