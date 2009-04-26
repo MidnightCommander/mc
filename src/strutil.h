@@ -156,15 +156,15 @@ void str_close_conv (GIConv);
  */
 
 /* convert string using coder, result of conversion is appended at end of buffer
- * return 0 if there was no problem. 
+ * return ESTR_SUCCESS if there was no problem.
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
  */ 
 estr_t str_convert (GIConv, const char *, GString *);
 
 estr_t str_nconvert (GIConv, const char *, int, GString *);
 
-/* return only 0 or ESTR_FAILURE, because vfs must be able to convert result to
- * original string. (so no replace with questionmark)
+/* return only ESTR_SUCCESS or ESTR_FAILURE, because vfs must be able to convert
+ * result to original string. (so no replace with questionmark)
  * if coder is str_cnv_from_term or str_cnv_not_convert, string is only copied,
  * so is possible to show file, that is not valid in terminal encoding
  */

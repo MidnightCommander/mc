@@ -25,8 +25,6 @@
 #include <config.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <iconv.h>
-#include <glib.h>
 #include <langinfo.h>
 #include <string.h>
 #include <errno.h>
