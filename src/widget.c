@@ -64,6 +64,20 @@ struct WButtonBar {
     } labels [10];
 };
 
+static void
+widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
+{
+    Dlg_head *h = w->parent;
+
+    attrset (hotkey
+	? (focused
+	    ? DLG_HOT_FOCUSC (h)
+	    : DLG_HOT_NORMALC (h))
+	: (focused
+	    ? DLG_FOCUSC (h)
+	    : DLG_NORMALC (h)));
+}
+
 struct hotkey_t
 parse_hotkey (const char *text)
 {
@@ -109,23 +123,25 @@ hotkey_width (const struct hotkey_t hotkey)
     return result;
 }
 
+static void
+draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
+{
+    widget_selectcolor (w, focused, FALSE);
+    addstr (str_term_form (hotkey.start));
+
+    if (hotkey.hotkey != NULL) {
+	widget_selectcolor (w, focused, TRUE);
+	addstr (str_term_form (hotkey.hotkey));
+	widget_selectcolor (w, focused, FALSE);
+    }
+
+    if (hotkey.end != NULL)
+	addstr (str_term_form (hotkey.end));
+}
+
 static int button_event (Gpm_Event *event, void *);
 
 int quote = 0;
-
-static void
-widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
-{
-    Dlg_head *h = w->parent;
-
-    attrset (hotkey
-	? (focused
-	    ? DLG_HOT_FOCUSC (h)
-	    : DLG_HOT_NORMALC (h))
-	: (focused
-	    ? DLG_FOCUSC (h)
-	    : DLG_NORMALC (h)));
-}
 
 static cb_ret_t
 button_callback (Widget *w, widget_msg_t msg, int parm)
@@ -219,17 +235,7 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
                 return MSG_HANDLED;
 	}
 
-        addstr (str_term_form (b->text.start));
-
-        if (b->text.hotkey != NULL) {
-            widget_selectcolor (w, b->selected, TRUE);
-            addstr (str_term_form (b->text.hotkey));
-	    widget_selectcolor (w, b->selected, FALSE);
-        }
-
-        if (b->text.end != NULL) {
-            addstr (str_term_form (b->text.end));
-        }
+	draw_hotkey (w, b->text, b->selected);
 
         switch (b->flags) {
             case DEFPUSH_BUTTON:
@@ -407,19 +413,8 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
-
-            addstr ((r->sel == i) ? "(*) " : "( ) ");
-
-            addstr (str_term_form (r->texts[i].start));
-
-            if (r->texts[i].hotkey != NULL) {
-		    widget_selectcolor (w, focused, TRUE);
-                addstr (str_term_form (r->texts[i].hotkey));
-		    widget_selectcolor (w, focused, FALSE);
-            }
-            if (r->texts[i].end != NULL) {
-                addstr (str_term_form (r->texts[i].end));
-	    }
+	    addstr ((r->sel == i) ? "(*) " : "( ) ");
+	    draw_hotkey (w, r->texts[i], focused);
 	}
 	return MSG_HANDLED;
 
@@ -524,19 +519,8 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-        addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
-
-	addstr (str_term_form (c->text.start));
-
-        if (c->text.hotkey != NULL) {
-	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
-            addstr (str_term_form (c->text.hotkey));
-            widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
-        }
-
-        if (c->text.end != NULL) {
-            addstr (str_term_form (c->text.end));
-	}
+	addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+	draw_hotkey (w, c->text, msg == WIDGET_FOCUS);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
