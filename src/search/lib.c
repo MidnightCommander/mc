@@ -64,7 +64,7 @@ mc_search__recode_str (const char *str, gsize str_len,
     }
 
     conv = g_iconv_open (charset_to, charset_from);
-    if (conv == (GIConv) - 1)
+    if (conv == INVALID_CONV)
         return NULL;
 
     ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
