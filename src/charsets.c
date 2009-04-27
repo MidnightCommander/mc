@@ -257,7 +257,7 @@ str_nconvert_to_display (char *str, int len)
     GIConv conv;
 
     if (!str)
-	return NULL;
+	return g_string_new("");
 
     if (cp_display == cp_source)
 	return g_string_new(str);
@@ -295,7 +295,7 @@ str_nconvert_to_input (char *str, int len)
     GIConv conv;
 
     if (!str)
-	return NULL;
+	return g_string_new("");
 
     if (cp_display == cp_source)
 	return g_string_new(str);
