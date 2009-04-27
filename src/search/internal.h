@@ -22,6 +22,8 @@ typedef struct mc_search_cond_struct {
     GString *lower;
 #if GLIB_CHECK_VERSION (2, 14, 0)
     GRegex *regex_str;
+#else
+    GString *regex_str;
 #endif
     gsize len;
     gchar *charset;

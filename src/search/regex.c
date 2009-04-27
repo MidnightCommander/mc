@@ -209,7 +209,13 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_search__found_cond_t
-mc_search__regex_found_cond_one (mc_search_t * mc_search, GRegex * regex, GString * search_str)
+mc_search__regex_found_cond_one (mc_search_t * mc_search,
+#if GLIB_CHECK_VERSION (2, 14, 0)
+                                 GRegex * regex,
+#else
+                                 GString * regex,
+#endif
+                                 GString * search_str)
 {
 #if GLIB_CHECK_VERSION (2, 14, 0)
     GMatchInfo *match_info;
