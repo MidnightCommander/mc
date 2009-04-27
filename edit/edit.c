@@ -1475,8 +1475,10 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    c = edit_get_byte (edit, p);
 	    utf_ch = edit_get_utf (edit, p, &cw);
 	}
-	if ( edit->utf8 && g_unichar_iswide(utf_ch) )
-	    col++;
+	if ( utf8_display ) {
+	    if ( edit->utf8 && g_unichar_iswide(utf_ch) )
+	        col++;
+	}
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
