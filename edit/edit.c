@@ -1453,6 +1453,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
     long p, q;
     int col = 0;
     int cw = 1;
+    gunichar utf_ch = 0;
     if (upto) {
 	q = upto;
 	cols = -10;
@@ -1472,8 +1473,10 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	} else {
 	    cw = 1;
 	    c = edit_get_byte (edit, p);
-	    edit_get_utf (edit, p, &cw);
+	    utf_ch = edit_get_utf (edit, p, &cw);
 	}
+	if ( edit->utf8 && g_unichar_iswide(utf_ch) )
+	    col++;
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
