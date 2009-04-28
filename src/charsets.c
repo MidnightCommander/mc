@@ -25,8 +25,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <iconv.h>
-
 #include "global.h"
 #include "charsets.h"
 #include "strutil.h"		/* utf-8 functions */
@@ -148,21 +146,21 @@ get_codepage_index (const char *id)
 }
 
 static char
-translate_character (iconv_t cd, char c)
+translate_character (GIConv cd, char c)
 {
-    char outbuf[4], *obuf;
-    size_t ibuflen, obuflen, count;
+    gchar *tmp_buff = NULL;
+    gsize bytes_read, bytes_written = 0;
+    const char *ibuf = &c;
+    char ch = UNKNCHAR;
 
-    ICONV_CONST char *ibuf = &c;
-    obuf = outbuf;
-    ibuflen = 1;
-    obuflen = 4;
+    int ibuflen = 1;
+    int obuflen = 4;
 
-    count = iconv (cd, &ibuf, &ibuflen, &obuf, &obuflen);
-    if (count != ((size_t) -1) && ibuflen == 0)
-	return outbuf[0];
-
-    return UNKNCHAR;
+    tmp_buff = g_convert_with_iconv (ibuf, ibuflen, cd, &bytes_read, &bytes_written, NULL);
+    if ( tmp_buff )
+        ch = tmp_buff[0];
+    g_free (tmp_buff);
+    return ch;
 }
 
 char errbuf[255];
@@ -177,7 +175,7 @@ const char *
 init_translation_table (int cpsource, int cpdisplay)
 {
     int i;
-    iconv_t cd;
+    GIConv cd;
 
     /* Fill inpit <-> display tables */
 
@@ -199,8 +197,8 @@ init_translation_table (int cpsource, int cpdisplay)
 
     /* display <- inpit table */
 
-    cd = iconv_open (cp_display, cp_source);
-    if (cd == (iconv_t) - 1) {
+    cd = g_iconv_open (cp_display, cp_source);
+    if (cd == INVALID_CONV) {
 	g_snprintf (errbuf, sizeof (errbuf),
 		    _("Cannot translate from %s to %s"), cp_source, cp_display);
 	return errbuf;
@@ -209,12 +207,12 @@ init_translation_table (int cpsource, int cpdisplay)
     for (i = 128; i <= 255; ++i)
 	conv_displ[i] = translate_character (cd, i);
 
-    iconv_close (cd);
+    g_iconv_close (cd);
 
     /* inpit <- display table */
 
-    cd = iconv_open (cp_source, cp_display);
-    if (cd == (iconv_t) - 1) {
+    cd = g_iconv_open (cp_source, cp_display);
+    if (cd == INVALID_CONV) {
 	g_snprintf (errbuf, sizeof (errbuf),
 		    _("Cannot translate from %s to %s"), cp_display, cp_source);
 	return errbuf;
@@ -226,7 +224,7 @@ init_translation_table (int cpsource, int cpdisplay)
 	conv_input[i] = (ch == UNKNCHAR) ? i : ch;
     }
 
-    iconv_close (cd);
+    g_iconv_close (cd);
 
     return NULL;
 }

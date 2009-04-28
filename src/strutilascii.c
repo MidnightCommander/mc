@@ -27,8 +27,6 @@
 #include <ctype.h>
 #include <config.h>
 #include <errno.h>
-#include <iconv.h>
-
 #include "global.h"
 #include "strutil.h"
 
