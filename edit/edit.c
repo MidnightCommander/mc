@@ -2015,7 +2015,7 @@ edit_do_undo (WEdit * edit)
 	    edit_backspace (edit);
 	    break;
 	case DELCHAR:
-	    edit_delete (edit, 0);
+	    edit_delete (edit, 1);
 	    break;
 	case COLUMN_ON:
 	    column_highlighting = 1;
