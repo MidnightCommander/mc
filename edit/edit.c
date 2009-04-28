@@ -1105,6 +1105,7 @@ int edit_delete (WEdit * edit, const int byte_delete)
         }
         edit->last_byte--;
         edit->curs2--;
+        edit_push_action (edit, p + 256);
     }
 
     edit_modification (edit);
@@ -1114,7 +1115,6 @@ int edit_delete (WEdit * edit, const int byte_delete)
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
-    edit_push_action (edit, p + 256);
     if (edit->curs1 < edit->start_display) {
 	edit->start_display--;
 	if (p == '\n')
@@ -1126,7 +1126,7 @@ int edit_delete (WEdit * edit, const int byte_delete)
 
 
 static int
-edit_backspace (WEdit * edit)
+edit_backspace (WEdit * edit, const int byte_delete)
 {
     int p = 0;
     int cw = 1;
@@ -1153,6 +1153,7 @@ edit_backspace (WEdit * edit)
         }
         edit->last_byte--;
         edit->curs1--;
+        edit_push_action (edit, p);
     }
     edit_modification (edit);
     if (p == '\n') {
@@ -1162,7 +1163,6 @@ edit_backspace (WEdit * edit)
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
-    edit_push_action (edit, p);
 
     if (edit->curs1 < edit->start_display) {
 	edit->start_display--;
@@ -1980,7 +1980,7 @@ static void edit_left_delete_word (WEdit * edit)
     for (;;) {
 	if (edit->curs1 <= 0)
 	    break;
-	c1 = edit_backspace (edit);
+	c1 = edit_backspace (edit, 1);
 	c2 = edit_get_byte (edit, edit->curs1 - 1);
 	if ((isspace (c1) == 0) != (isspace (c2) == 0))
 	    break;
@@ -2012,7 +2012,7 @@ edit_do_undo (WEdit * edit)
 	    edit_cursor_move (edit, -1);
 	    break;
 	case BACKSPACE:
-	    edit_backspace (edit);
+	    edit_backspace (edit, 1);
 	    break;
 	case DELCHAR:
 	    edit_delete (edit, 1);
@@ -2068,7 +2068,7 @@ static void edit_delete_to_line_begin (WEdit * edit)
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n') {
 	if (!edit->curs1)
 	    break;
-	edit_backspace (edit);
+	edit_backspace (edit, 1);
     }
 }
 
@@ -2096,7 +2096,7 @@ edit_delete_line (WEdit *edit)
      * Note, that edit_get_byte() returns '\n' when byte position is < 0.
      */
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n') {
-	(void) edit_backspace (edit);
+	(void) edit_backspace (edit, 1);
     };
 }
 
@@ -2198,7 +2198,7 @@ static void edit_tab_cmd (WEdit * edit)
 	       full tab. */
 	    if (!option_fill_tabs_with_spaces && right_of_four_spaces (edit)) {
 		for (i = 1; i <= HALF_TAB_SIZE; i++)
-		    edit_backspace (edit);
+		    edit_backspace (edit, 1);
 		edit_insert (edit, '\t');
 	    } else {
 		insert_spaces_tab (edit, 1);
@@ -2491,19 +2491,19 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	if (option_backspace_through_tabs && is_in_indent (edit)) {
 	    while (edit_get_byte (edit, edit->curs1 - 1) != '\n'
 		   && edit->curs1 > 0)
-		edit_backspace (edit);
+		edit_backspace (edit, 1);
 	    break;
 	} else {
 	    if (option_fake_half_tabs) {
 		int i;
 		if (is_in_indent (edit) && right_of_four_spaces (edit)) {
 		    for (i = 0; i < HALF_TAB_SIZE; i++)
-			edit_backspace (edit);
+			edit_backspace (edit, 1);
 		    break;
 		}
 	    }
 	}
-	edit_backspace (edit);
+	edit_backspace (edit, 0);
 	break;
     case CK_Delete:
         /* if non persistent selection and text selected */
