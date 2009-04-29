@@ -228,7 +228,8 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search,
         g_match_info_free (match_info);
         if (error) {
             mc_search->error = MC_SEARCH_E_REGEX;
-            mc_search->error_str = g_strdup (error->message);
+            mc_search->error_str = str_conv_gerror_message (error,
+                                        _(" Regular expression error "));
             g_error_free (error);
             return COND__FOUND_ERROR;
         }
@@ -285,7 +286,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
 
     if (error != NULL) {
         mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-        mc_search->error_str = g_strdup (error->message);
+        mc_search->error_str = str_conv_gerror_message (error, _(" Regular expression error "));
         g_error_free (error);
         return;
     }
