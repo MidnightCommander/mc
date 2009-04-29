@@ -101,7 +101,8 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
     estr_t state  = ESTR_SUCCESS;
     gchar *tmp_buff = NULL;
     gssize left;
-    gsize bytes_read, bytes_written;
+    gsize bytes_read = 0;
+    gsize bytes_written = 0;
     GError *error = NULL;
     errno = 0;
 
@@ -153,10 +154,18 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 
 	    case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
 		/* Invalid byte sequence in conversion input. */
-		if (tmp_buff){
+		if ((tmp_buff == NULL) && (bytes_read != 0))
+		    /* recode valid byte sequence */
+		    tmp_buff = g_convert_with_iconv ((const gchar *) string,
+							bytes_read,
+							coder,
+							NULL, NULL, &error);
+
+		if (tmp_buff != NULL) {
 		    g_string_append (buffer, tmp_buff);
 		    g_free (tmp_buff);
 		}
+
 		if ((int)bytes_read < left)
 		{
 		    string += bytes_read + 1;
