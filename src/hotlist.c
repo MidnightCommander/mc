@@ -853,19 +853,19 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), 0, B_CANCEL, 
-	  0, 0, NULL , NULL},
+	  0, 0, NULL , NULL, NULL},
     { quick_button, 30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), 0, B_INSERT, 
-	  0, 0, NULL , NULL},
+	  0, 0, NULL , NULL, NULL},
     { quick_button, 10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), 0, B_APPEND, 
-	  0, 0, NULL , NULL},
+	  0, 0, NULL , NULL, NULL},
     { quick_input,  4, 80, RELATIVE_Y_INPUT_PTH, 0, "",58, 0, 
-	  0, 0, "input-pth" , NULL},
+	  0, 0, "input-pth" , NULL, NULL},
     { quick_label, RELATIVE_Y_LABEL_PTH, 80, 3, 0, 0, 0, 0, 
-	  0, 0, NULL , NULL},
+	  0, 0, NULL , NULL, NULL},
     { quick_input,  4, 80, 3, 0, "", 58, 0, 
-	  0, 0, "input-lbl" , NULL},
+	  0, 0, "input-lbl" , NULL, NULL},
     { quick_label,  3, 80, 2, 0, 0, 0, 0, 
-	  0, 0, NULL , NULL},
+	  0, 0, NULL , NULL, NULL},
     NULL_QuickWidget };
     
     int len;
@@ -956,13 +956,13 @@ add_new_group_input (const char *header, const char *label, char **result)
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  NULL , NULL},
+	  NULL , NULL, NULL},
     { quick_button, 30, 80, 1, 0, N_("&Insert"), 0, B_INSERT, 0, 0,
-	  NULL , NULL},
+	  NULL , NULL, NULL},
     { quick_button, 10, 80, 1, 0, N_("&Append"), 0, B_APPEND, 0, 0,
-	  NULL , NULL},
-    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" , NULL},
-    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, NULL , NULL},
+	  NULL , NULL, NULL},
+    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" , NULL, NULL},
+    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, NULL , NULL, NULL},
     NULL_QuickWidget };
     int relative_y[] = {1, 1, 1, 0, 2}; /* the relative_x component from the
                                            quick_widgets variable above */

@@ -85,60 +85,60 @@ edit_options_dialog (void)
     QuickWidget quick_widgets[] = {
 	/* 0 */
 	{quick_button, 6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), 0,
-	 B_CANCEL, 0, 0, NULL},
+	 B_CANCEL, 0, 0, NULL, NULL, NULL},
 	/* 1 */
 	{quick_button, 2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"), 0,
-	 B_ENTER, 0, 0, NULL},
+	 B_ENTER, 0, 0, NULL, NULL, NULL},
 	/* 2 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H,
-	 N_("Word wrap line length: "), 0, 0, 0, 0, NULL},
+	 N_("Word wrap line length: "), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 3 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 7,
-	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0, "edit-word-wrap"},
+	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0, "edit-word-wrap", NULL, NULL},
 	/* 4 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 6, OPT_DLG_H,
-	 N_("Tab spacing: "), 0, 0, 0, 0, NULL},
+	 N_("Tab spacing: "), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 5 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 6,
 	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0,
-	 "edit-tab-spacing"},
+	 "edit-tab-spacing", NULL, NULL},
 	/* 6 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9,
-	 OPT_DLG_H, N_("Pers&istent selection"), 8, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Pers&istent selection"), 8, 0, 0, 0, NULL, NULL, NULL},
 	/* 7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10,
-	 OPT_DLG_H, N_("Synta&x highlighting"), 8, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Synta&x highlighting"), 8, 0, 0, 0, NULL, NULL, NULL},
 	/* 7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 11,
-	 OPT_DLG_H, N_("Save file &position"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Save file &position"), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 9 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 12,
-	 OPT_DLG_H, N_("Confir&m before saving"), 6, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Confir&m before saving"), 6, 0, 0, 0, NULL, NULL, NULL},
 	/* 10 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 13,
-	 OPT_DLG_H, N_("Fill tabs with &spaces"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Fill tabs with &spaces"), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 11 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 14,
-	 OPT_DLG_H, N_("&Return does autoindent"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("&Return does autoindent"), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 12 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 15,
-	 OPT_DLG_H, N_("&Backspace through tabs"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("&Backspace through tabs"), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 13 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 16,
-	 OPT_DLG_H, N_("&Fake half tabs"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("&Fake half tabs"), 0, 0, 0, 0, NULL, NULL, NULL},
 	/* 14 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 9, OPT_DLG_H, "", 3, 0, 0,
-	 const_cast(char **, wrap_str), "wrapm"},
+	 const_cast(char **, wrap_str), "wrapm", NULL, NULL},
 	/* 15 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 10, OPT_DLG_H,
 	 N_("Wrap mode"), 0, 0,
-	 0, 0, NULL},
+	 0, 0, NULL, NULL, NULL},
 	/* 16 */
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 15, OPT_DLG_H, "", 3, 0, 0,
-	 const_cast(char **, key_emu_str), "keyemu"},
+	 const_cast(char **, key_emu_str), "keyemu", NULL, NULL},
 	/* 17 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 16, OPT_DLG_H,
-	 N_("Key emulation"), 0, 0, 0, 0, NULL},
+	 N_("Key emulation"), 0, 0, 0, 0, NULL, NULL, NULL},
 	NULL_QuickWidget
     };
 

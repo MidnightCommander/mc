@@ -377,20 +377,20 @@ static int my_exit;
 
 static QuickWidget conf_widgets [] = {
 { quick_button,   4, 6, 4, CONFY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, NULL , NULL},
+      0, B_CANCEL, 0, 0, NULL , NULL, NULL},
 { quick_button,   4, 6, 3, CONFY, N_("&OK"),
-      0, B_ENTER, 0, 0, NULL , NULL},
+      0, B_ENTER, 0, 0, NULL , NULL, NULL},
 
 { quick_checkbox, 1, 13, 7, CONFY, N_(" confirm di&Rectory hotlist delete "),
-      11, 0, &my_directory_hotlist_delete, NULL, NULL , NULL},
+      11, 0, &my_directory_hotlist_delete, NULL, NULL , NULL, NULL},
 { quick_checkbox, 1, 13, 6, CONFY, N_(" confirm &Exit "),
-      9, 0, &my_exit, 0, NULL , NULL},
+      9, 0, &my_exit, 0, NULL , NULL, NULL},
 { quick_checkbox, 1, 13, 5, CONFY, N_(" confirm e&Xecute "),
-      10, 0, &my_execute, 0, NULL , NULL},
+      10, 0, &my_execute, 0, NULL , NULL, NULL},
 { quick_checkbox, 1, 13, 4, CONFY, N_(" confirm o&Verwrite "),
-      10, 0, &my_overwrite, 0, NULL , NULL},
+      10, 0, &my_overwrite, 0, NULL , NULL, NULL},
 { quick_checkbox, 1, 13, 3, CONFY, N_(" confirm &Delete "),
-      9, 0, &my_delete, 0, NULL , NULL},
+      9, 0, &my_delete, 0, NULL , NULL, NULL},
 NULL_QuickWidget
 };
 
@@ -473,13 +473,13 @@ static const char *display_bits_str [] =
 
 static QuickWidget display_widgets [] = {
 { quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, NULL , NULL},
+      0, B_CANCEL, 0, 0, NULL , NULL, NULL},
 { quick_button,   4,  6,    3, DISPY, N_("&OK"),
-      0, B_ENTER, 0, 0, NULL , NULL},
+      0, B_ENTER, 0, 0, NULL , NULL, NULL},
 { quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
-      0, 0, &new_meta, 0, NULL , NULL},
+      0, 0, &new_meta, 0, NULL , NULL, NULL},
 { quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
-      &new_mode, const_cast(char **, display_bits_str), NULL , NULL},
+      &new_mode, const_cast(char **, display_bits_str), NULL , NULL, NULL},
 NULL_QuickWidget
 };
 
@@ -728,37 +728,37 @@ static int ret_ftpfs_use_passive_connections_over_proxy;
 
 static QuickWidget confvfs_widgets [] = {
 { quick_button,   30,  VFSX,    VFSY - 3, VFSY, N_("&Cancel"),
-      0, B_CANCEL, 0, 0, NULL , NULL},
+      0, B_CANCEL, 0, 0, NULL , NULL, NULL},
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&OK"),
-      0, B_ENTER, 0, 0, NULL , NULL},
+      0, B_ENTER, 0, 0, NULL , NULL, NULL},
 #if defined(USE_NETCODE)
 { quick_checkbox,  4, VFSX, 12, VFSY, N_("Use passive mode over pro&xy"), 0, 0,
-      &ret_ftpfs_use_passive_connections_over_proxy, 0, NULL , NULL},
+      &ret_ftpfs_use_passive_connections_over_proxy, 0, NULL , NULL, NULL},
 { quick_checkbox,  4, VFSX, 11, VFSY, N_("Use &passive mode"), 0, 0,
-      &ret_ftpfs_use_passive_connections, 0, NULL , NULL},
+      &ret_ftpfs_use_passive_connections, 0, NULL , NULL, NULL},
 { quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
-      &ret_use_netrc, 0, NULL , NULL},
+      &ret_use_netrc, 0, NULL , NULL, NULL},
 { quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
-      "input-ftp-proxy" , NULL},
+      "input-ftp-proxy" , NULL, NULL},
 { quick_checkbox,  4, VFSX, 8, VFSY, N_("&Always use ftp proxy"), 0, 0,
-      &ftpfs_always_use_proxy, 0, NULL , NULL},
+      &ftpfs_always_use_proxy, 0, NULL , NULL, NULL},
 { quick_label,    49, VFSX, 7, VFSY, N_("sec"),
-      0, 0, 0, 0, NULL , NULL},
+      0, 0, 0, 0, NULL , NULL, NULL},
 { quick_input,    38, VFSX, 7, VFSY, "", 10, 0, 0, &ret_directory_timeout,
-      "input-timeout" , NULL},
+      "input-timeout" , NULL, NULL},
 { quick_label,     4, VFSX, 7, VFSY, N_("ftpfs directory cache timeout:"),
-      0, 0, 0, 0, NULL , NULL},
+      0, 0, 0, 0, NULL , NULL, NULL},
 { quick_input,     4, VFSX, 6, VFSY, "", 48, 0, 0, &ret_passwd,
-      "input-passwd" , NULL},
+      "input-passwd" , NULL, NULL},
 { quick_label,     4, VFSX, 5, VFSY, N_("ftp anonymous password:"),
-      0, 0, 0, 0, NULL , NULL},
+      0, 0, 0, 0, NULL , NULL, NULL},
 #endif
 { quick_label,    49, VFSX, 3, VFSY, "sec",
-      0, 0, 0, 0, NULL , NULL},
+      0, 0, 0, 0, NULL , NULL, NULL},
 { quick_input,    38, VFSX, 3, VFSY, "", 10, 0, 0, &ret_timeout, 
-      "input-timo-vfs" , NULL},
+      "input-timo-vfs" , NULL, NULL},
 { quick_label,    4,  VFSX, 3, VFSY, N_("Timeout for freeing VFSs:"), 
-      0, 0, 0, 0, NULL , NULL},
+      0, 0, 0, 0, NULL , NULL, NULL},
 NULL_QuickWidget
 };
 
@@ -810,8 +810,8 @@ cd_dialog (void)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-	{ quick_input,  6, 57, 2, 0, "", 50, 0, 0, 0, "input" , NULL},
-	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, NULL , NULL},
+	{ quick_input,  6, 57, 2, 0, "", 50, 0, 0, 0, "input" , NULL, NULL},
+	{ quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, NULL , NULL, NULL},
 	NULL_QuickWidget
     };
     char *my_str;
@@ -853,15 +853,15 @@ symlink_dialog (const char *existing, const char *new, char **ret_existing,
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
 	{quick_button, 50, 80, 6, 8, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	 NULL, NULL},
-	{quick_button, 16, 80, 6, 8, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL},
-	{quick_input, 4, 80, 5, 8, "", 58, 0, 0, 0, "input-1", NULL},
+	 NULL, NULL, NULL},
+	{quick_button, 16, 80, 6, 8, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL, NULL},
+	{quick_input, 4, 80, 5, 8, "", 58, 0, 0, 0, "input-1", NULL, NULL},
 	{quick_label, 4, 80, 4, 8, N_("Symbolic link filename:"), 0, 0, 0,
-	 0, NULL, NULL},
-	{quick_input, 4, 80, 3, 8, "", 58, 0, 0, 0, "input-2", NULL},
+	 0, NULL, NULL, NULL},
+	{quick_input, 4, 80, 3, 8, "", 58, 0, 0, 0, "input-2", NULL, NULL},
 	{quick_label, 4, 80, 2, 8,
 	 N_("Existing filename (filename symlink will point to):"), 0, 0,
-	 0, 0, NULL, NULL},
+	 0, 0, NULL, NULL, NULL},
 	NULL_QuickWidget
     };
 

@@ -354,7 +354,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		button_new (ypos, xpos, qw->value,
 			    (qw->value ==
 			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-			    I18N (qw->text), 0);
+			    I18N (qw->text), (bcback) qw->cb);
 	    break;
 
 	    /* We use the hotkey pos as the field length */
@@ -445,10 +445,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
 	{quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	 NULL, NULL},
-	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL},
-	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, NULL, NULL},
-	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, NULL, NULL},
+	 NULL, NULL, NULL},
+	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL, NULL},
+	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, NULL, NULL, NULL},
+	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, NULL, NULL, NULL},
 	NULL_QuickWidget
     };
 
