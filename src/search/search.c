@@ -36,11 +36,21 @@
 
 /*** global variables ****************************************************************************/
 
+
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+static const mc_search_type_str_t mc_search__list_types[] = {
+    {N_("Normal"), MC_SEARCH_T_NORMAL},
+    {N_("Regex"), MC_SEARCH_T_REGEX},
+    {N_("Hex"), MC_SEARCH_T_HEX},
+    {N_("File"), MC_SEARCH_T_GLOB},
+    {NULL, -1}
+};
 
 /*** file scope functions ************************************************************************/
 
@@ -63,7 +73,6 @@ mc_search__cond_struct_new (mc_search_t * mc_search, const char *str,
     case MC_SEARCH_T_REGEX:
         mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
         break;
-    case MC_SEARCH_T_SCANF:
     case MC_SEARCH_T_HEX:
     default:
         break;
@@ -242,7 +251,6 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
         ret = mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
         break;
     case MC_SEARCH_T_HEX:
-    case MC_SEARCH_T_SCANF:
     case MC_SEARCH_T_GLOB:
     default:
         break;
@@ -267,12 +275,19 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 #endif
         break;
     case MC_SEARCH_T_HEX:
-    case MC_SEARCH_T_SCANF:
     case MC_SEARCH_T_GLOB:
     default:
         break;
     }
     return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+mc_search_type_str_t *
+mc_search_types_list_get (void)
+{
+    return mc_search__list_types;
 }
 
 /* --------------------------------------------------------------------------------------------- */

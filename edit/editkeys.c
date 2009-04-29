@@ -39,6 +39,7 @@
 
 #include "edit.h"
 #include "edit-widget.h"	/* edit->macro_i */
+#include "editcmd_dialogs.h"
 #include "editcmddef.h"		/* list of commands */
 #include "../src/key.h"		/* KEY_M_SHIFT */
 #include "../src/tty.h"		/* keys */
@@ -205,7 +206,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 	if (x_key == XCTRL ('x')) {
 	    int ext_key;
 	    ext_key =
-		edit_raw_key_query (" Ctrl-X ", _(" Emacs key: "), 0);
+		editcmd_dialog_raw_key_query (" Ctrl-X ", _(" Emacs key: "), 0);
 	    switch (ext_key) {
 	    case 's':
 		command = CK_Save;
@@ -218,7 +219,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 		goto fin;
 	    case 'e':
 		command =
-		    CK_Macro (edit_raw_key_query
+		    CK_Macro (editcmd_dialog_raw_key_query
 			      (_(" Execute Macro "),
 			       _(" Press macro hotkey: "), 1));
 		if (command == CK_Macro (0))

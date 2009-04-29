@@ -25,7 +25,6 @@ typedef enum {
 typedef enum {
     MC_SEARCH_T_NORMAL,
     MC_SEARCH_T_REGEX,
-    MC_SEARCH_T_SCANF,
     MC_SEARCH_T_HEX,
     MC_SEARCH_T_GLOB
 } mc_search_type_t;
@@ -85,6 +84,11 @@ typedef struct mc_search_struct {
 
 } mc_search_t;
 
+typedef struct mc_search_type_str_struct {
+    char *str;
+    mc_search_type_t type;
+} mc_search_type_str_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
@@ -97,5 +101,7 @@ gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize st
                         gsize end_search, gsize * founded_len);
 
 gboolean mc_search_is_type_avail (mc_search_type_t);
+
+mc_search_type_str_t *mc_search_types_list_get (void);
 
 #endif

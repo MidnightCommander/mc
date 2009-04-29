@@ -45,66 +45,33 @@
 #include "editlock.h"
 #include "editcmddef.h"
 #include "edit-widget.h"
+#include "editcmd_dialogs.h"
 #include "../edit/etags.h"
 #include "../src/panel.h"
 
-#include "../src/color.h"	/* dialog_colors */
 #include "../src/tty.h"		/* LINES */
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
 #include "../src/main.h"	/* mc_home source_codepage */
 #include "../src/help.h"	/* interactive_display() */
 #include "../src/key.h"		/* XCTRL */
-#include "../src/dialog.h"	/* do_refresh() */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
 
-struct selection {
-   unsigned char * text;
-   int len;
-};
-
 /* globals: */
 
 /* search and replace: */
-static int replace_scanf = 0;
-static int replace_regexp = 0;
-static int replace_all = 0;
-static int replace_prompt = 1;
-static int replace_whole = 0;
-static int replace_case = 0;
-static int replace_backwards = 0;
 static int search_create_bookmark = 0;
 /* static int search_in_all_charsets = 0; */
 
 /* queries on a save */
 int edit_confirm_save = 1;
 
-#define NUM_REPL_ARGS 64
-#define MAX_REPL_LEN 1024
-
 static int edit_save_cmd (WEdit *edit);
 static unsigned char *edit_get_block (WEdit *edit, long start,
 				      long finish, int *l);
-
-static int
-editcmd_get_str_nlen(const char*str, int byte_len)
-{
-    int ret;
-    char *tmp;
-
-    if (!str || byte_len < 1)
-	return 0;
-
-    tmp = g_malloc(sizeof(char)*byte_len+1);
-    memcpy(tmp,str,byte_len);
-    tmp[byte_len] = '\0';
-    ret = str_length(tmp);
-    g_free(tmp);
-    return ret;
-}
 
 static void
 edit_search_cmd_search_create_bookmark(WEdit * edit)
@@ -140,22 +107,6 @@ static int
 edit_search_cmd_callback(const void *user_data, gsize char_offset)
 {
     return edit_get_byte ((WEdit * )user_data, (long) char_offset);
-}
-
-/* #define itoa MY_itoa  <---- this line is now in edit.h */
-static char *
-MY_itoa (int i)
-{
-    static char t[14];
-    char *s = t + 13;
-    int j = i;
-    *s-- = 0;
-    do {
-	*s-- = i % 10 + '0';
-    } while ((i = i / 10));
-    if (j < 0)
-	*s-- = '-';
-    return ++s;
 }
 
 void edit_help_cmd (WEdit * edit)
@@ -417,18 +368,19 @@ void menu_save_mode_cmd (void)
 	N_("Quick save "),
 	N_("Safe save "),
 	N_("Do backups -->")};
+
     static QuickWidget widgets[] =
     {
 	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
-	 B_CANCEL, 0, 0, NULL},
+	 B_CANCEL, 0, 0, NULL, NULL, NULL},
 	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&OK"), 0,
-	 B_ENTER, 0, 0, NULL},
+	 B_ENTER, 0, 0, NULL, NULL, NULL},
 	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
-	 0, 0, &str_result, "edit-backup-ext"},
+	 0, 0, &str_result, "edit-backup-ext", NULL, NULL},
 	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
-	 0, 0, 0, NULL},
+	 0, 0, 0, NULL, NULL, NULL},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
-	 0, &save_mode_new, (char **) str, NULL},
+	 0, &save_mode_new, (char **) str, NULL, NULL, NULL},
 	NULL_QuickWidget};
     static QuickDialog dialog =
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
@@ -581,50 +533,6 @@ edit_save_as_cmd (WEdit *edit)
 
 /* {{{ Macro stuff starts here */
 
-static cb_ret_t
-raw_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
-{
-    switch (msg) {
-    case DLG_KEY:
-	h->running = 0;
-	h->ret_value = parm;
-	return MSG_HANDLED;
-    default:
-	return default_dlg_callback (h, msg, parm);
-    }
-}
-
-/* gets a raw key from the keyboard. Passing cancel = 1 draws
-   a cancel button thus allowing c-c etc.  Alternatively, cancel = 0
-   will return the next key pressed.  ctrl-a (=B_CANCEL), ctrl-g, ctrl-c,
-   and Esc are cannot returned */
-int
-edit_raw_key_query (const char *heading, const char *query, int cancel)
-{
-    int w = str_term_width1 (query) + 7;
-    struct Dlg_head *raw_dlg =
-	create_dlg (0, 0, 7, w, dialog_colors, raw_callback,
-		    NULL, heading,
-		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
-    add_widget (raw_dlg,
-		input_new (3 - cancel, w - 5, INPUT_COLOR, 2, "", 0, INPUT_COMPLETE_DEFAULT));
-    add_widget (raw_dlg, label_new (3 - cancel, 2, query));
-    if (cancel)
-	add_widget (raw_dlg,
-		    button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON,
-				_("Cancel"), 0));
-    run_dlg (raw_dlg);
-    w = raw_dlg->ret_value;
-    destroy_dlg (raw_dlg);
-    if (cancel) {
-	if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR
-	    || w == B_CANCEL)
-	    return 0;
-    }
-
-    return w;
-}
-
 /* creates a macro file if it doesn't exist */
 static FILE *edit_open_macro_file (const char *r)
 {
@@ -730,7 +638,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     int s, i;
 
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-    s = edit_raw_key_query (_(" Save macro "),
+    s = editcmd_dialog_raw_key_query (_(" Save macro "),
         _(" Press the macro's new hotkey: "), 1);
     edit->force |= REDRAW_COMPLETELY;
     if (s) {
@@ -758,7 +666,7 @@ void edit_delete_macro_cmd (WEdit * edit)
 {
     int command;
 
-    command = edit_raw_key_query (_ (" Delete macro "),
+    command = editcmd_dialog_raw_key_query (_ (" Delete macro "),
 				  _ (" Press macro hotkey: "), 1);
 
     if (!command)
@@ -1205,10 +1113,6 @@ int edit_block_delete_cmd (WEdit * edit)
 
 
 #define INPUT_INDEX 9
-#define SEARCH_DLG_WIDTH 58
-#define SEARCH_DLG_HEIGHT 10
-#define REPLACE_DLG_WIDTH 58
-#define REPLACE_DLG_HEIGHT 15
 #define CONFIRM_DLG_WIDTH 79
 #define CONFIRM_DLG_HEIGTH 6
 #define B_REPLACE_ALL (B_USER+1)
@@ -1221,17 +1125,17 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     QuickWidget quick_widgets[] =
     {
 	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
-	 0, B_CANCEL, 0, 0, NULL},
+	 0, B_CANCEL, 0, 0, NULL, NULL, NULL},
 	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("O&ne"),
-	 0, B_REPLACE_ONE, 0, 0, NULL},
+	 0, B_REPLACE_ONE, 0, 0, NULL, NULL, NULL},
 	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("A&ll"),
-	 0, B_REPLACE_ALL, 0, 0, NULL},
+	 0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
 	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
-	 0, B_SKIP_REPLACE, 0, 0, NULL},
+	 0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
 	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
-	 0, B_ENTER, 0, 0, NULL},
+	 0, B_ENTER, 0, 0, NULL, NULL, NULL},
 	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
-	 0, 0, 0, 0, 0},
+	 0, 0, 0, 0, 0, NULL, NULL},
 	 NULL_QuickWidget};
 
     GString *label_text = g_string_new (_(" Replace with: "));
@@ -1265,339 +1169,13 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     }
 }
 
-static void
-edit_replace_dialog (WEdit * edit, const char *search_default,
-                     const char *replace_default, const char *argorder_default,
-                     /*@out@*/ char **search_text, /*@out@*/ char **replace_text,
-                     /*@out@*/ char **arg_order)
-{
-    int treplace_scanf = replace_scanf;
-    int treplace_regexp = replace_regexp;
-    int treplace_all = replace_all;
-    int treplace_prompt = replace_prompt;
-    int treplace_backwards = replace_backwards;
-    int treplace_whole = replace_whole;
-    int treplace_case = replace_case;
-
-/* Alt-p is in use as hotkey for previous entry; don't use */
-    QuickWidget quick_widgets[] =
-    {
-	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
-	 0, NULL},
-	{quick_button, 2, 10, 12, REPLACE_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
-	 0, NULL},
-	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("replace &All"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("pro&Mpt on replace"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 11, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Regular expression"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("&Whole words only"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
-	 0, 0, NULL},
-	{quick_input,    3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
-	 0, "edit-argord"},
-	{quick_label, 2, REPLACE_DLG_WIDTH, 6, REPLACE_DLG_HEIGHT, N_(" Enter replacement argument order eg. 3,2,1,4 "), 0, 0,
-	 0, 0, 0},
-	{quick_input, 3, REPLACE_DLG_WIDTH, 5, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
-	 0, "edit-replace"},
-	{quick_label, 2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:"), 0, 0, 0,
-	 0, 0},
-	{quick_input, 3, REPLACE_DLG_WIDTH, 3, REPLACE_DLG_HEIGHT, "", 52, 0, 0,
-	 0, "edit-search"},
-	{quick_label, 2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
-	 0, 0},
-	 NULL_QuickWidget};
-
-    (void) edit;
-
-    quick_widgets[2].result = &treplace_scanf;
-    quick_widgets[3].result = &treplace_all;
-    quick_widgets[4].result = &treplace_prompt;
-    quick_widgets[5].result = &treplace_backwards;
-    quick_widgets[6].result = &treplace_regexp;
-    quick_widgets[7].result = &treplace_whole;
-    quick_widgets[8].result = &treplace_case;
-    quick_widgets[9].str_result = arg_order;
-    quick_widgets[9].text = argorder_default;
-    quick_widgets[11].str_result = replace_text;
-    quick_widgets[11].text = replace_default;
-    quick_widgets[13].str_result = search_text;
-    quick_widgets[13].text = search_default;
-    {
-	QuickDialog Quick_input =
-	{REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
-	 "[Input Line Keys]", 0 /*quick_widgets */, 0};
-
-	Quick_input.widgets = quick_widgets;
-
-	if (quick_dialog (&Quick_input) != B_CANCEL) {
-	    replace_scanf = treplace_scanf;
-	    replace_backwards = treplace_backwards;
-	    replace_regexp = treplace_regexp;
-	    replace_all = treplace_all;
-	    replace_prompt = treplace_prompt;
-	    replace_whole = treplace_whole;
-	    replace_case = treplace_case;
-	    return;
-	} else {
-	    *arg_order = NULL;
-	    *replace_text = NULL;
-	    *search_text = NULL;
-	    return;
-	}
-    }
-}
 
 
-static void
-edit_search_dialog (WEdit * edit, char **search_text)
-{
-    int treplace_scanf = replace_scanf;
-    int treplace_regexp = replace_regexp;
-    int treplace_whole = replace_whole;
-    int treplace_case = replace_case;
-    int treplace_backwards = replace_backwards;
-
-    QuickWidget quick_widgets[] =
-    {
-	{quick_button, 6, 10, 7, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
-	 0, NULL},
-	{quick_button, 2, 10, 7, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
-	 0, NULL},
-	{quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("scanf &Expression"), 0, 0,
-	 0, 0, NULL },
-	{quick_checkbox, 33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Regular expression"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("&Whole words only"), 0, 0,
-	 0, 0, NULL},
-	{quick_checkbox, 4, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
-	 0, 0, NULL},
-	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, "", 52, 0, 0,
-	 0, "edit-search"},
-	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
-	 0, 0},
-	 NULL_QuickWidget};
-
-    (void) edit;
-
-    quick_widgets[2].result = &treplace_scanf;
-    quick_widgets[3].result = &treplace_backwards;
-    quick_widgets[4].result = &treplace_regexp;
-    quick_widgets[5].result = &treplace_whole;
-    quick_widgets[6].result = &treplace_case;
-    quick_widgets[7].str_result = search_text;
-    quick_widgets[7].text = *search_text;
-
-    {
-	QuickDialog Quick_input =
-	{SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
-	 "[Input Line Keys]", 0 /*quick_widgets */, 0};
-
-	Quick_input.widgets = quick_widgets;
-
-	if (quick_dialog (&Quick_input) != B_CANCEL) {
-	    replace_scanf = treplace_scanf;
-	    replace_backwards = treplace_backwards;
-	    replace_regexp = treplace_regexp;
-	    replace_whole = treplace_whole;
-	    replace_case = treplace_case;
-	} else {
-	    *search_text = NULL;
-	}
-    }
-}
-
-
-static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
-
-#define SCANF_ARGS sargs[0], sargs[1], sargs[2], sargs[3], \
-		     sargs[4], sargs[5], sargs[6], sargs[7], \
-		     sargs[8], sargs[9], sargs[10], sargs[11], \
-		     sargs[12], sargs[13], sargs[14], sargs[15]
-
-#define PRINTF_ARGS sargs[argord[0]], sargs[argord[1]], sargs[argord[2]], sargs[argord[3]], \
-		     sargs[argord[4]], sargs[argord[5]], sargs[argord[6]], sargs[argord[7]], \
-		     sargs[argord[8]], sargs[argord[9]], sargs[argord[10]], sargs[argord[11]], \
-		     sargs[argord[12]], sargs[argord[13]], sargs[argord[14]], sargs[argord[15]]
-
-
-/* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
-/* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
-/*
-static int
-string_regexp_search (char *pattern, char *string, int match_type,
-		      int match_bol, int icase, int *found_len, void *d)
-{
-    static regex_t r;
-    static char *old_pattern = NULL;
-    static int old_type, old_icase;
-    regmatch_t *pmatch;
-    static regmatch_t s[1];
-
-    pmatch = (regmatch_t *) d;
-    if (!pmatch)
-	pmatch = s;
-
-    if (!old_pattern || strcmp (old_pattern, pattern)
-	|| old_type != match_type || old_icase != icase) {
-	if (old_pattern) {
-	    regfree (&r);
-	    g_free (old_pattern);
-	    old_pattern = 0;
-	}
-	if (regcomp (&r, pattern, REG_EXTENDED | (icase ? REG_ICASE : 0) |
-	    REG_NEWLINE)) {
-	    *found_len = 0;
-	    return -3;
-	}
-	old_pattern = g_strdup (pattern);
-	old_type = match_type;
-	old_icase = icase;
-    }
-    if (regexec
-	(&r, string, d ? NUM_REPL_ARGS : 1, pmatch,
-	 ((match_bol
-	   || match_type != match_normal) ? 0 : REG_NOTBOL)) != 0) {
-	*found_len = 0;
-	return -1;
-    }
-    *found_len = pmatch[0].rm_eo - pmatch[0].rm_so;
-    return (pmatch[0].rm_so);
-}
-*/
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
-#define snprint(v) { \
-		*p1++ = *p++; \
-		*p1 = '\0'; \
-		n = snprintf(s,e-s,q1,v); \
-		if (n >= (size_t) (e - s)) goto nospc; \
-		s += n; \
-	    }
-
-/* this function uses the sprintf command to do a vprintf */
-/* it takes pointers to arguments instead of the arguments themselves */
-/* The return value is the number of bytes written excluding '\0'
-   if successfull, -1 if the resulting string would be too long and
-   -2 if the format string is errorneous.  */
-static int snprintf_p (char *str, size_t size, const char *fmt,...)
-    __attribute__ ((format (printf, 3, 4)));
-
-static int snprintf_p (char *str, size_t size, const char *fmt,...)
-{
-    va_list ap;
-    size_t n;
-    const char *q, *p;
-    char *s = str, *e = str + size;
-    char q1[40];
-    char *p1;
-    int nargs = 0;
-
-    va_start (ap, fmt);
-    p = q = fmt;
-
-    while ((p = strchr (p, '%'))) {
-	n = p - q;
-	if (n >= (size_t) (e - s))
-	  goto nospc;
-	memcpy (s, q, n);	/* copy stuff between format specifiers */
-	s += n;
-	q = p;
-	p1 = q1;
-	*p1++ = *p++;
-	if (*p == '%') {
-	    p++;
-	    *s++ = '%';
-	    if (s == e)
-		goto nospc;
-	    q = p;
-	    continue;
-	}
-	if (*p == 'n')
-	    goto err;
-	/* We were passed only 16 arguments.  */
-	if (++nargs == 16)
-	    goto err;
-	if (*p == '#')
-	    *p1++ = *p++;
-	if (*p == '0')
-	    *p1++ = *p++;
-	if (*p == '-')
-	    *p1++ = *p++;
-	if (*p == '+')
-	    *p1++ = *p++;
-	if (*p == '*') {
-	    p++;
-	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
-	    p1 += strlen (p1);
-	} else {
-	    while (is_digit (*p) && p1 < q1 + 20)
-		*p1++ = *p++;
-	    if (is_digit (*p))
-		goto err;
-	}
-	if (*p == '.')
-	    *p1++ = *p++;
-	if (*p == '*') {
-	    p++;
-	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
-	    p1 += strlen (p1);
-	} else {
-	    while (is_digit (*p) && p1 < q1 + 32)
-		*p1++ = *p++;
-	    if (is_digit (*p))
-		goto err;
-	}
-/* flags done, now get argument */
-	if (*p == 's') {
-	    snprint (va_arg (ap, char *));
-	} else if (*p == 'h') {
-	    if (strchr ("diouxX", *p))
-		snprint (*va_arg (ap, short *));
-	} else if (*p == 'l') {
-	    *p1++ = *p++;
-	    if (strchr ("diouxX", *p))
-		snprint (*va_arg (ap, long *));
-	} else if (strchr ("cdiouxX", *p)) {
-	    snprint (*va_arg (ap, int *));
-	} else if (*p == 'L') {
-	    *p1++ = *p++;
-	    if (strchr ("EefgG", *p))
-		snprint (*va_arg (ap, double *));	/* should be long double */
-	} else if (strchr ("EefgG", *p)) {
-	    snprint (*va_arg (ap, double *));
-	} else if (strchr ("DOU", *p)) {
-	    snprint (*va_arg (ap, long *));
-	} else if (*p == 'p') {
-	    snprint (*va_arg (ap, void **));
-	} else
-	    goto err;
-	q = p;
-    }
-    va_end (ap);
-    n = strlen (q);
-    if (n >= (size_t) (e - s))
-	return -1;
-    memcpy (s, q, n + 1);
-    return s + n - str;
-nospc:
-    va_end (ap);
-    return -1;
-err:
-    va_end (ap);
-    return -2;
-}
 /*
 static void regexp_error (WEdit *edit)
 {
@@ -1636,26 +1214,19 @@ edit_replace_cmd__conv_to_input(char *str)
 void
 edit_replace_cmd (WEdit *edit, int again)
 {
-    static regmatch_t pmatch[NUM_REPL_ARGS];
-    /* 1 = search string, 2 = replace with, 3 = argument order */
+    /* 1 = search string, 2 = replace with */
     static char *saved1 = NULL;	/* saved default[123] */
     static char *saved2 = NULL;
-    static char *saved3 = NULL;
     char *input1 = NULL;	/* user input from the dialog */
     char *input2 = NULL;
-    char *input3 = NULL;
     char *str_for_prompt_dialog = NULL;
     int replace_yes;
-    int replace_continue;
-    int treplace_prompt = 0;
     long times_replaced = 0, last_search;
-    int argord[NUM_REPL_ARGS];
     gboolean once_found = FALSE;
 
     if (!edit) {
 	g_free (saved1), saved1 = NULL;
 	g_free (saved2), saved2 = NULL;
-	g_free (saved3), saved3 = NULL;
 	return;
     }
 
@@ -1669,35 +1240,29 @@ edit_replace_cmd (WEdit *edit, int again)
     if (again) {
 	input1 = g_strdup (saved1 ? saved1 : "");
 	input2 = g_strdup (saved2 ? saved2 : "");
-	input3 = g_strdup (saved3 ? saved3 : "");
     } else {
 	char *disp1 = edit_replace_cmd__conv_to_display(g_strdup (saved1 ? saved1 : ""));
 	char *disp2 = edit_replace_cmd__conv_to_display(g_strdup (saved2 ? saved2 : ""));
-	char *disp3 = edit_replace_cmd__conv_to_display(g_strdup (saved3 ? saved3 : ""));
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
-	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2,
-			     &input3);
+
+	editcmd_dialog_replace_show (edit, disp1, disp2, &input1, &input2 );
 
 	g_free (disp1);
 	g_free (disp2);
-	g_free (disp3);
+
 	str_for_prompt_dialog = g_strdup(input2);
 
-
-	input1 = edit_replace_cmd__conv_to_input(input1);
-	input2 = edit_replace_cmd__conv_to_input(input2);
-	input3 = edit_replace_cmd__conv_to_input(input3);
-
-	treplace_prompt = replace_prompt;
 	if (input1 == NULL || *input1 == '\0') {
 	    edit->force = REDRAW_COMPLETELY;
 	    goto cleanup;
 	}
 
+	input1 = edit_replace_cmd__conv_to_input(input1);
+	input2 = edit_replace_cmd__conv_to_input(input2);
+
 	g_free (saved1), saved1 = g_strdup (input1);
 	g_free (saved2), saved2 = g_strdup (input2);
-	g_free (saved3), saved3 = g_strdup (input3);
 
 	if (edit->search)
 	{
@@ -1705,29 +1270,6 @@ edit_replace_cmd (WEdit *edit, int again)
 	    edit->search = NULL;
 	}
     }
-
-    {
-	const char *s;
-	int ord;
-	size_t i;
-
-	s = input3;
-	for (i = 0; i < NUM_REPL_ARGS; i++) {
-	    if (s != NULL && *s != '\0') {
-		ord = atoi (s);
-		if ((ord > 0) && (ord <= NUM_REPL_ARGS))
-		    argord[i] = ord - 1;
-		else
-		    argord[i] = i;
-		s = strchr (s, ',');
-		if (s != NULL)
-		    s++;
-	    } else
-		argord[i] = i;
-	}
-    }
-
-    replace_continue = replace_all;
 
     if (!edit->search)
     {
@@ -1737,25 +1279,18 @@ edit_replace_cmd (WEdit *edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->is_backward = replace_backwards;
-
-	if (replace_scanf)
-	    edit->search->search_type = MC_SEARCH_T_SCANF;
-	else if (replace_regexp)
-	    edit->search->search_type = MC_SEARCH_T_REGEX;
-	else
-	    edit->search->search_type = MC_SEARCH_T_NORMAL;
-
-	edit->search->is_case_sentitive = (replace_case);
+	edit->search->is_backward = edit->replace_backwards;
+	edit->search->search_type = edit->search_type;
+	edit->search->is_case_sentitive = edit->replace_case;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
     if (edit->found_len && edit->search_start == edit->found_start + 1
-	&& replace_backwards)
+	&& edit->replace_backwards)
 	edit->search_start--;
 
     if (edit->found_len && edit->search_start == edit->found_start - 1
-	&& !replace_backwards)
+	&& !edit->replace_backwards)
 	edit->search_start++;
 
     do {
@@ -1787,7 +1322,7 @@ edit_replace_cmd (WEdit *edit, int again)
 
 	    replace_yes = 1;
 
-	    if (treplace_prompt) {
+	    if (edit->replace_mode==0) {
 		int l;
 		l = edit->curs_row - edit->num_widget_lines / 3;
 		if (l > 0)
@@ -1813,67 +1348,19 @@ edit_replace_cmd (WEdit *edit, int again)
 		    replace_yes = 0;
 		    break;
 		case B_REPLACE_ALL:
-		    treplace_prompt = 0;
-		    replace_continue = 1;
+		    edit->replace_mode=1;
 		    break;
 		case B_REPLACE_ONE:
-		    replace_continue = 0;
 		    break;
 		case B_CANCEL:
 		    replace_yes = 0;
-		    replace_continue = 0;
 		    break;
 		}
 	    }
 	    if (replace_yes) {	/* delete then insert new */
+/*
 		if (replace_scanf) {
-		    char repl_str[MAX_REPL_LEN + 2];
-		    int ret = 0;
-
-		    /* we need to fill in sargs just like with scanf */
-		    if (replace_regexp) {
-			int k, j;
-			for (k = 1;
-			     k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0;
-			     k++) {
-			    unsigned char *t;
-
-			    if (pmatch[k].rm_eo - pmatch[k].rm_so > 255) {
-				ret = -1;
-				break;
-			    }
-			    t = (unsigned char *) &sargs[k - 1][0];
-			    for (j = 0;
-				 j < pmatch[k].rm_eo - pmatch[k].rm_so
-				 && j < 255; j++, t++)
-				*t = (unsigned char) edit_get_byte 
-				    (
-					edit,
-					edit->search_start  - pmatch[0].rm_so + pmatch[k].rm_so + j
-				    );
-			    *t = '\0';
-			}
-			for (; k <= NUM_REPL_ARGS; k++)
-			    sargs[k - 1][0] = 0;
-		    }
-		    if (!ret)
-			ret =
-			    snprintf_p (repl_str, MAX_REPL_LEN + 2, input2,
-					PRINTF_ARGS);
-		    if (ret >= 0) {
-			times_replaced++;
-			i = editcmd_get_str_nlen(edit_get_byte_ptr(edit,edit->found_start), i);
-			while (i--)
-			    edit_delete (edit, 1);
-			while (repl_str[++i])
-			    edit_insert (edit, repl_str[i]);
-		    } else {
-			edit_error_dialog (_(" Replace "),
-					   ret == -2
-					   ? _(" Error in replacement format string. ")
-					   : _(" Replacement too long. "));
-			replace_continue = 0;
-		    }
+// REGEX!!!!!!!!!!!11 
 		} else {
 		    times_replaced++;
 		    while (i--)
@@ -1881,10 +1368,11 @@ edit_replace_cmd (WEdit *edit, int again)
 		    while (input2[++i])
 			edit_insert (edit, input2[i]);
 		}
+*/
 		edit->found_len = i;
 	    }
 	    /* so that we don't find the same string again */
-	    if (replace_backwards) {
+	    if (edit->replace_backwards) {
 		last_search = edit->search_start;
 		edit->search_start--;
 	    } else {
@@ -1906,9 +1394,9 @@ edit_replace_cmd (WEdit *edit, int again)
 	    } else
 		query_dialog (msg, _(" Search string not found "),
 			      D_NORMAL, 1, _("&OK"));
-	    replace_continue = 0;
+	    edit->replace_mode = -1;
 	}
-    } while (replace_continue);
+    } while (edit->replace_mode >0);
 
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
@@ -1916,7 +1404,6 @@ edit_replace_cmd (WEdit *edit, int again)
     g_free (str_for_prompt_dialog);
     g_free (input1);
     g_free (input2);
-    g_free (input3);
 }
 
 
@@ -1948,7 +1435,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	    g_string_free (tmp, FALSE);
 	}
 #endif /* HAVE_CHARSET */
-	edit_search_dialog (edit, &search_string);
+	editcmd_dialog_search_show (edit, &search_string);
 #ifdef HAVE_CHARSET
 	if (search_string && *search_string)
 	{
@@ -1987,16 +1474,10 @@ void edit_search_cmd (WEdit * edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->is_backward = replace_backwards;
+	edit->search->is_backward = edit->replace_backwards;
+	edit->search->search_type = edit->search_type;
 
-	if (replace_scanf)
-	    edit->search->search_type = MC_SEARCH_T_SCANF;
-	else if (replace_regexp)
-	    edit->search->search_type = MC_SEARCH_T_REGEX;
-	else
-	    edit->search->search_type = MC_SEARCH_T_NORMAL;
-
-	edit->search->is_case_sentitive = (replace_case);
+	edit->search->is_case_sentitive = edit->replace_case;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
 
@@ -2006,10 +1487,10 @@ void edit_search_cmd (WEdit * edit, int again)
     }
     else
     {
-	if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
+	if (edit->found_len && edit->search_start == edit->found_start + 1 && edit->replace_backwards)
 	    edit->search_start--;
 
-	if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
+	if (edit->found_len && edit->search_start == edit->found_start - 1 && !edit->replace_backwards)
 	    edit->search_start++;
 
 	if (mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, &len))
@@ -2019,7 +1500,7 @@ void edit_search_cmd (WEdit * edit, int again)
 
 	    edit_cursor_move (edit, edit->search_start - edit->curs1);
 	    edit_scroll_screen_over_cursor (edit);
-	    if (replace_backwards)
+	    if (edit->replace_backwards)
 		edit->search_start--;
 	    else
 		edit->search_start++;
@@ -2556,23 +2037,23 @@ void edit_mail_dialog (WEdit * edit)
     QuickWidget quick_widgets[] =
     {
 	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
-	 0, NULL},
+	 0, NULL, NULL, NULL},
 	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
-	 0, NULL},
+	 0, NULL, NULL, NULL},
 	{quick_input, 3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input"},
+	 0, "mail-dlg-input", NULL, NULL},
 	{quick_label, 2, 50, 7, MAIL_DLG_HEIGHT, N_(" Copies to"), 0, 0, 0,
-	 0, 0},
+	 0, 0, NULL, NULL},
 	{quick_input, 3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input-2"},
+	 0, "mail-dlg-input-2", NULL, NULL},
 	{quick_label, 2, 50, 5, MAIL_DLG_HEIGHT, N_(" Subject"), 0, 0, 0,
-	 0, 0},
+	 0, 0, NULL, NULL},
 	{quick_input, 3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, 0,
-	 0, "mail-dlg-input-3"},
+	 0, "mail-dlg-input-3", NULL, NULL},
 	{quick_label, 2, 50, 3, MAIL_DLG_HEIGHT, N_(" To"), 0, 0, 0,
-	 0, 0},
+	 0, 0, NULL, NULL},
 	{quick_label, 2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>"), 0, 0, 0,
-	 0, 0},
+	 0, 0, NULL, NULL},
 	NULL_QuickWidget};
 
     quick_widgets[2].str_result = &tmail_cc;
@@ -2640,13 +2121,11 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 
 
 /* (re)set search parameters to the given values */
-static void edit_set_search_parameters (int rs, int rb, int rr, int rw, int rc)
+static void edit_set_search_parameters (WEdit *edit, int replace_mode, int rb, int rc)
 {
-    replace_scanf = rs;
-    replace_backwards = rb;
-    replace_regexp = rr;
-    replace_whole = rw;
-    replace_case = rc;
+    edit->replace_mode = replace_mode;
+    edit->replace_backwards = rb;
+    edit->replace_case = rc;
 }
 
 
@@ -2707,74 +2186,6 @@ start = -1;
     return max_len;
 }
 
-
-/* let the user select its preferred completion */
-static void
-edit_completion_dialog (WEdit * edit, int max_len, int word_len,
-			struct selection *compl, int num_compl)
-{
-
-    int start_x, start_y, offset, i;
-    char *curr = NULL;
-    Dlg_head *compl_dlg;
-    WListbox *compl_list;
-    int compl_dlg_h;		/* completion dialog height */
-    int compl_dlg_w;		/* completion dialog width */
-
-    /* calculate the dialog metrics */
-    compl_dlg_h = num_compl + 2;
-    compl_dlg_w = max_len + 4;
-    start_x = edit->curs_col + edit->start_col - (compl_dlg_w / 2);
-    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + 1;
-
-    if (start_x < 0)
-	start_x = 0;
-    if (compl_dlg_w > COLS)
-	compl_dlg_w = COLS;
-    if (compl_dlg_h > LINES - 2)
-	compl_dlg_h = LINES - 2;
-
-    offset = start_x + compl_dlg_w - COLS;
-    if (offset > 0)
-	start_x -= offset;
-    offset = start_y + compl_dlg_h - LINES;
-    if (offset > 0)
-	start_y -= (offset + 1);
-
-    /* create the dialog */
-    compl_dlg =
-	create_dlg (start_y, start_x, compl_dlg_h, compl_dlg_w,
-		    dialog_colors, NULL, "[Completion]", NULL,
-		    DLG_COMPACT);
-
-    /* create the listbox */
-    compl_list =
-	listbox_new (1, 1, compl_dlg_h - 2, compl_dlg_w - 2, NULL);
-
-    /* add the dialog */
-    add_widget (compl_dlg, compl_list);
-
-    /* fill the listbox with the completions */
-    for (i = 0; i < num_compl; i++)
-	listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0,
-	    (char *) compl[i].text, NULL);
-
-    /* pop up the dialog */
-    run_dlg (compl_dlg);
-
-    /* apply the choosen completion */
-    if (compl_dlg->ret_value == B_ENTER) {
-	listbox_get_current (compl_list, &curr, NULL);
-	if (curr)
-	    for (curr += word_len; *curr; curr++)
-		edit_insert (edit, *curr);
-    }
-
-    /* destroy dialog before return */
-    destroy_dlg (compl_dlg);
-}
-
-
 /*
  * Complete current word using regular expression search
  * backwards beginning at the current cursor position.
@@ -2789,11 +2200,9 @@ edit_complete_word_cmd (WEdit *edit)
     struct selection compl[MAX_WORD_COMPLETIONS];	/* completions */
 
     /* don't want to disturb another search */
-    int old_rs = replace_scanf;
-    int old_rb = replace_backwards;
-    int old_rr = replace_regexp;
-    int old_rw = replace_whole;
-    int old_rc = replace_case;
+    int old_replace_mode = edit->replace_mode;
+    int old_rb = edit->replace_backwards;
+    int old_rc = edit->replace_case;
 
     /* search start of word to be completed */
     if (!edit_find_word_start (edit, &word_start, &word_len))
@@ -2805,7 +2214,7 @@ edit_complete_word_cmd (WEdit *edit)
 
     match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
     /* init search: backward, regexp, whole word, case sensitive */
-    edit_set_search_parameters (0, 1, 1, 1, 1);
+    edit_set_search_parameters (edit, 0, 1, 1);
 
     /* collect the possible completions              */
     /* start search from curs1 down to begin of file */
@@ -2827,7 +2236,7 @@ edit_complete_word_cmd (WEdit *edit)
 	    /*beep (); */
 
 	    /* let the user select the preferred completion */
-	    edit_completion_dialog (edit, max_len, word_len,
+	    editcmd_dialog_completion_show (edit, max_len, word_len,
 				    (struct selection *) &compl,
 				    num_compl);
 	}
@@ -2839,7 +2248,7 @@ edit_complete_word_cmd (WEdit *edit)
 	g_free (compl[i].text);
 
     /* restore search parameters */
-    edit_set_search_parameters (old_rs, old_rb, old_rr, old_rw, old_rc);
+    edit_set_search_parameters (edit, old_replace_mode, old_rb, old_rc);
 }
 
 void
@@ -2858,7 +2267,7 @@ void
 edit_insert_literal_cmd (WEdit *edit)
 {
     int char_for_insertion =
-	    edit_raw_key_query (_(" Insert Literal "),
+	    editcmd_dialog_raw_key_query (_(" Insert Literal "),
 				_(" Press any key: "), 0);
     edit_execute_key_command (edit, -1,
 	ascii_alpha_to_cntrl (char_for_insertion));
@@ -2868,7 +2277,7 @@ void
 edit_execute_macro_cmd (WEdit *edit)
 {
     int command =
-	    CK_Macro (edit_raw_key_query
+	    CK_Macro (editcmd_dialog_raw_key_query
 		      (_(" Execute Macro "), _(" Press macro hotkey: "),
 		       1));
     if (command == CK_Macro (0))
@@ -2948,112 +2357,6 @@ edit_load_back_cmd (WEdit *edit)
     }
 }
 
-/* let the user select where function definition */
-static void
-edit_select_definition_dialog (WEdit * edit, char *match_expr, int max_len, int word_len,
-                               etags_hash_t *def_hash, int num_lines)
-{
-
-    int start_x, start_y, offset, i;
-    char *curr = NULL;
-    etags_hash_t *curr_def = NULL;
-    Dlg_head *def_dlg;
-    WListbox *def_list;
-    int def_dlg_h;      /* dialog height */
-    int def_dlg_w;      /* dialog width */
-    char *label_def = NULL;
-
-    (void) word_len;
-    /* calculate the dialog metrics */
-    def_dlg_h = num_lines + 2;
-    def_dlg_w = max_len + 4;
-    start_x = edit->curs_col + edit->start_col - (def_dlg_w / 2);
-    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + 1;
-
-    if (start_x < 0)
-        start_x = 0;
-    if (def_dlg_w > COLS)
-        def_dlg_w = COLS;
-    if (def_dlg_h > LINES - 2)
-        def_dlg_h = LINES - 2;
-
-    offset = start_x + def_dlg_w - COLS;
-    if (offset > 0)
-        start_x -= offset;
-    offset = start_y + def_dlg_h - LINES;
-    if (offset > 0)
-        start_y -= (offset + 1);
-
-    /* create the dialog */
-    def_dlg = create_dlg (start_y, start_x, def_dlg_h, def_dlg_w,
-                          dialog_colors, NULL, "[Definitions]", match_expr,
-                          DLG_COMPACT);
-
-    /* create the listbox */
-    def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, NULL);
-
-    /* add the dialog */
-    add_widget (def_dlg, def_list);
-
-
-    /* fill the listbox with the completions */
-    for (i = 0; i < num_lines; i++) {
-        label_def = g_strdup_printf ("%s -> %s:%ld", def_hash[i].short_define, def_hash[i].filename, def_hash[i].line);
-        listbox_add_item (def_list, LISTBOX_APPEND_AT_END, 0, label_def, &def_hash[i]);
-        g_free(label_def);
-    }
-    /* pop up the dialog */
-    run_dlg (def_dlg);
-
-    /* apply the choosen completion */
-    if ( def_dlg->ret_value == B_ENTER ) {
-	char *tmp_curr_def = (char *) curr_def;
-        int do_moveto = 0;
-
-        listbox_get_current (def_list,  &curr, &tmp_curr_def);
-        curr_def = (etags_hash_t *) tmp_curr_def;
-        if ( edit->modified ) {
-            if ( !edit_query_dialog2
-                (_("Warning"),
-                 _(" Current text was modified without a file save. \n"
-                 " Continue discards these changes. "), _("C&ontinue"),
-                 _("&Cancel"))) {
-                edit->force |= REDRAW_COMPLETELY;
-                do_moveto = 1;
-            }
-        } else {
-            do_moveto = 1;
-        }
-        if ( curr && do_moveto) {
-            if ( edit_stack_iterator+1 < MAX_HISTORY_MOVETO ) {
-                g_free (edit_history_moveto[edit_stack_iterator].filename);
-                if ( edit->dir ) {
-                    edit_history_moveto[edit_stack_iterator].filename = g_strdup_printf ("%s/%s", edit->dir, edit->filename);
-                } else {
-                    edit_history_moveto[edit_stack_iterator].filename = g_strdup (edit->filename);
-                }
-                edit_history_moveto[edit_stack_iterator].line = edit->start_line +
-                                                                edit->curs_row + 1;
-                edit_stack_iterator++;
-                g_free( edit_history_moveto[edit_stack_iterator].filename );
-                edit_history_moveto[edit_stack_iterator].filename = g_strdup((char *)curr_def->fullpath);
-                edit_history_moveto[edit_stack_iterator].line = curr_def->line;
-                edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename,
-                                  edit_history_moveto[edit_stack_iterator].line);
-            }
-        }
-    }
-
-    /* clear definition hash */
-    for ( i = 0; i < MAX_DEFINITIONS; i++) {
-        g_free(def_hash[i].filename);
-    }
-
-    /* destroy dialog before return */
-    destroy_dlg (def_dlg);
-}
-
-
 void
 edit_get_match_keyword_cmd (WEdit *edit)
 {
@@ -3106,7 +2409,7 @@ edit_get_match_keyword_cmd (WEdit *edit)
     max_len = MAX_WIDTH_DEF_DIALOG;
     word_len = 0;
     if ( num_def > 0 ) {
-        edit_select_definition_dialog (edit, match_expr, max_len, word_len,
+        editcmd_dialog_select_definition_show (edit, match_expr, max_len, word_len,
                                        (etags_hash_t *) &def_hash,
                                        num_def);
     }

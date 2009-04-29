@@ -52,6 +52,11 @@ struct WEdit {
     /* search variables */
     mc_search_t *search;
 
+    unsigned int search_type;
+    int replace_mode;
+    int replace_backwards;
+    int replace_case;
+
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
     long found_start;		/* the found word from a search - start position */
