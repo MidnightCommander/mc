@@ -357,3 +357,31 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
     mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
     return FALSE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+GString *
+mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
+{
+#if GLIB_CHECK_VERSION (2, 14, 0)
+    GString *ret;
+    gchar *tmp_str;
+    GError *error = NULL;
+
+
+    tmp_str = g_match_info_expand_references (mc_search->regex_match_info,
+                                           replace_str->str, &error);
+
+    if (error){
+        mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
+        mc_search->error_str = g_strdup (error->message);
+        g_error_free (error);
+        return NULL;
+    }
+
+    ret = g_string_new (tmp_str);
+    g_free(tmp_str);
+    return ret;
+#else
+    return g_string_new_len (replace_str->str, replace_str->len);
+#endif
+}

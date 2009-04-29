@@ -19,6 +19,7 @@ typedef enum {
     MC_SEARCH_E_INPUT,
     MC_SEARCH_E_REGEX_COMPILE,
     MC_SEARCH_E_REGEX,
+    MC_SEARCH_E_REGEX_REPLACE,
     MC_SEARCH_E_NOTFOUND
 } mc_search_error_t;
 
@@ -103,5 +104,7 @@ gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize st
 gboolean mc_search_is_type_avail (mc_search_type_t);
 
 mc_search_type_str_t *mc_search_types_list_get (void);
+
+GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString *replace_str);
 
 #endif

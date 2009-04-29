@@ -1176,13 +1176,6 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
-/*
-static void regexp_error (WEdit *edit)
-{
-    (void) edit;
-    edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
-}
-*/
 static char *
 edit_replace_cmd__conv_to_display(char *str)
 {
@@ -1358,17 +1351,24 @@ edit_replace_cmd (WEdit *edit, int again)
 		}
 	    }
 	    if (replace_yes) {	/* delete then insert new */
-/*
-		if (replace_scanf) {
-// REGEX!!!!!!!!!!!11 
-		} else {
-		    times_replaced++;
-		    while (i--)
-			edit_delete (edit, 1);
-		    while (input2[++i])
-			edit_insert (edit, input2[i]);
+		GString *repl_str, *tmp_str;
+		tmp_str = g_string_new(input2);
+		
+		repl_str = mc_search_prepare_replace_str (edit->search, tmp_str);
+		g_string_free(tmp_str, TRUE);
+		if (edit->search->error != MC_SEARCH_E_OK)
+		{
+		    edit_error_dialog (_ ("Replace"), edit->search->error_str);
+		    break;
 		}
-*/
+
+		while (i--)
+		    edit_delete (edit, 1);
+
+		while (++i < repl_str->len)
+			edit_insert (edit, repl_str->str[i]);
+		
+		g_string_free(repl_str, TRUE);
 		edit->found_len = i;
 	    }
 	    /* so that we don't find the same string again */

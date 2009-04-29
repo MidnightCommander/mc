@@ -57,6 +57,8 @@ void mc_search__cond_struct_new_init_regex (const char *, mc_search_t *, mc_sear
 
 gboolean mc_search__run_regex (mc_search_t *, const void *, gsize, gsize, gsize *);
 
+GString *mc_search_regex_prepare_replace_str (mc_search_t *, GString *);
+
 /* search/normal.c : */
 
 void mc_search__cond_struct_new_init_normal (const char *, mc_search_t *, mc_search_cond_t *);
