@@ -102,7 +102,9 @@ mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
             if (upp->str[loop] == low->str[loop])
                 tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
             else
-                tmp_str = g_strdup_printf ("[\\x%02X\\x%02X]", (unsigned char)upp->str[loop], (unsigned char)low->str[loop]);
+                tmp_str =
+                    g_strdup_printf ("[\\x%02X\\x%02X]", (unsigned char) upp->str[loop],
+                                     (unsigned char) low->str[loop]);
         } else {
             tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
         }
@@ -181,9 +183,10 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
             && !mc_search__regex_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
-            while (!
-                   (tmp->str[loop] == ']'
-                    && !mc_search__regex_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1))) {
+            while (loop < str_len && !(tmp->str[loop] == ']'
+                                       && !mc_search__regex_is_char_escaped (tmp->str,
+                                                                             &(tmp->str[loop]) -
+                                                                             1))) {
                 g_string_append_c (ret_str, tmp->str[loop]);
                 loop++;
 
@@ -277,7 +280,8 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         g_string_free (tmp, TRUE);
     }
 
-    mc_search_cond->regex_str = g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE|G_REGEX_RAW, 0, &error);
+    mc_search_cond->regex_str =
+        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW, 0, &error);
 
     if (error != NULL) {
         mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
