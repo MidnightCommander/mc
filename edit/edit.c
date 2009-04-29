@@ -1140,7 +1140,7 @@ edit_backspace (WEdit * edit, const int byte_delete)
     edit->last_get_rule -= (edit->last_get_rule >= edit->curs1);
 
     cw = 1;
-    if ( edit->utf8 ) {
+    if ( edit->utf8 && byte_delete == 0 ) {
         edit_get_prev_utf (edit, edit->curs1, &cw);
         if ( cw < 1 )
             cw = 1;
