@@ -165,6 +165,36 @@ str_8bit_length2 (const char *text, int size)
     return (size >= 0) ? min (strlen (text), (gsize)size) : strlen (text);
 }
 
+static gchar *
+str_8bit_conv_gerror_message (GError *error, const char *def_msg)
+{
+    GIConv conv;
+    gchar *ret;
+
+    /* glib messages are in UTF-8 charset */
+    conv = str_crt_conv_from ("UTF-8");
+
+    if (conv == INVALID_CONV)
+        ret = g_strdup (def_msg != NULL ? def_msg : "");
+    else {
+        GString *buf;
+
+        buf = g_string_new ("");
+
+        if (str_convert (conv, error->message, buf) != ESTR_FAILURE) {
+            ret = buf->str;
+            g_string_free (buf, FALSE);
+        } else {
+            ret = g_strdup (def_msg != NULL ? def_msg : "");
+            g_string_free (buf, TRUE);
+        }
+
+        str_close_conv (conv);
+    }
+
+    return ret;
+}
+
 static estr_t
 str_8bit_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
@@ -644,6 +674,7 @@ str_8bit_init ()
 {
     struct str_class result;
 
+    result.conv_gerror_message = str_8bit_conv_gerror_message;
     result.vfs_convert_to = str_8bit_vfs_convert_to;
     result.insert_replace_char = str_8bit_insert_replace_char;
     result.is_valid_string = str_8bit_is_valid_string;

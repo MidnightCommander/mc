@@ -82,6 +82,7 @@ extern GIConv str_cnv_not_convert;
 
 /* all functions in str_class must be defined for every encoding */
 struct str_class {
+    gchar *(*conv_gerror_message) (GError *error, const char *def_msg); /*I*/
     estr_t (*vfs_convert_to) (GIConv coder, const char *string, 
                         int size, GString *buffer);                     /*I*/
     void (*insert_replace_char) (GString *buffer);
@@ -160,8 +161,14 @@ void str_close_conv (GIConv);
  * otherwise return  ESTR_PROBLEM or ESTR_FAILURE
  */ 
 estr_t str_convert (GIConv, const char *, GString *);
-
 estr_t str_nconvert (GIConv, const char *, int, GString *);
+
+/* convert GError message (which in UTF-8) to terminal charset
+ * def_char is used if result of error->str conversion if ESTR_FAILURE
+ * return new allocated null-terminated string, which is need to be freed
+ * I
+ */
+gchar *str_conv_gerror_message (GError *error, const char *def_msg);
 
 /* return only ESTR_SUCCESS or ESTR_FAILURE, because vfs must be able to convert
  * result to original string. (so no replace with questionmark)

@@ -252,6 +252,12 @@ str_nconvert (GIConv coder, const char *string, int size, GString * buffer)
     return _str_convert (coder, string, size, buffer);
 }
 
+gchar *
+str_conv_gerror_message (GError *error, const char *def_msg)
+{
+    return used_class.conv_gerror_message (error, def_msg);
+}
+
 estr_t
 str_vfs_convert_from (GIConv coder, const char *string, GString * buffer)
 {

@@ -329,6 +329,16 @@ str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
     g_string_append_c (buffer, '?');
 }
 */
+
+static gchar *
+str_utf8_conv_gerror_message (GError *error, const char *def_msg)
+{
+    if ((error != NULL) && (error->message != NULL))
+	return g_strdup (error->message);
+
+    return g_strdup (def_msg != NULL ? def_msg : "");
+}
+
 static estr_t
 str_utf8_vfs_convert_to (GIConv coder, const char *string,
 			 int size, GString * buffer)
@@ -1291,6 +1301,7 @@ str_utf8_init ()
 {
     struct str_class result;
 
+    result.conv_gerror_message = str_utf8_conv_gerror_message;
     result.vfs_convert_to = str_utf8_vfs_convert_to;
     result.insert_replace_char = str_utf8_insert_replace_char;
     result.is_valid_string = str_utf8_is_valid_string;

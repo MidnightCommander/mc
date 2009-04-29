@@ -164,6 +164,16 @@ str_ascii_length2 (const char *text, int size)
     return (size >= 0) ? min (strlen (text), (gsize) size) : strlen (text);
 }
 
+static gchar *
+str_ascii_conv_gerror_message (GError *error, const char *def_msg)
+{
+    /* the same as str_utf8_conv_gerror_message() */
+    if ((error != NULL) && (error->message != NULL))
+	return g_strdup (error->message);
+
+    return g_strdup (def_msg != NULL ? def_msg : "");
+}
+
 static estr_t
 str_ascii_vfs_convert_to (GIConv coder, const char *string,
 			  int size, GString * buffer)
@@ -671,6 +681,7 @@ str_ascii_init ()
 {
     struct str_class result;
 
+    result.conv_gerror_message = str_ascii_conv_gerror_message;
     result.vfs_convert_to = str_ascii_vfs_convert_to;
     result.insert_replace_char = str_ascii_insert_replace_char;
     result.is_valid_string = str_ascii_is_valid_string;
