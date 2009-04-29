@@ -141,15 +141,18 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 					 &bytes_written, &error);
 	if (error)
 	{
-	    switch (error->code)
+	    int code = error->code;
+
+	    g_error_free (error);
+	    error = NULL;
+
+	    switch (code)
 	    {
 	    case G_CONVERT_ERROR_NO_CONVERSION:
 		/* Conversion between the requested character sets is not supported. */
 		tmp_buff = g_strnfill (strlen (string), '?');
 		g_string_append (buffer, tmp_buff);
 		g_free (tmp_buff);
-		g_error_free (error);
-		error = NULL;
 		return ESTR_FAILURE;
 
 	    case G_CONVERT_ERROR_ILLEGAL_SEQUENCE:
@@ -158,10 +161,10 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 		    /* recode valid byte sequence */
 		    tmp_buff = g_convert_with_iconv ((const gchar *) string,
 							bytes_read,
-							coder,
-							NULL, NULL, &error);
+							coder, NULL, NULL, NULL);
 
-		if (tmp_buff != NULL) {
+		if (tmp_buff != NULL)
+		{
 		    g_string_append (buffer, tmp_buff);
 		    g_free (tmp_buff);
 		}
@@ -175,8 +178,6 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 		}
 		else
 		{
-		    g_error_free (error);
-		    error = NULL;
 		    return ESTR_PROBLEM;
 		}
 		state = ESTR_PROBLEM;
@@ -184,8 +185,6 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 
 	    case G_CONVERT_ERROR_PARTIAL_INPUT:
 		/* Partial character sequence at end of input. */
-		g_error_free (error);
-		error = NULL;
 		g_string_append (buffer, tmp_buff);
 		g_free (tmp_buff);
 		if ((int)bytes_read < left)
@@ -201,16 +200,9 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 	    case G_CONVERT_ERROR_NOT_ABSOLUTE_PATH:	/* Don't know how handle this error :( */
 	    case G_CONVERT_ERROR_FAILED:	/* Conversion failed for some reason. */
 	    default:
-		g_error_free (error);
-		error = NULL;
-		if (tmp_buff){
-		    g_free (tmp_buff);
-		    tmp_buff = NULL;
-		}
+		g_free (tmp_buff);
 		return ESTR_FAILURE;
 	    }
-	    g_error_free (error);
-	    error = NULL;
 	}
 	else
 	{
