@@ -39,8 +39,10 @@ typedef struct {
     int  *result;		/* Checkbutton: where to store result */
     char **str_result;		/* Input lines: destination  */
     const char *histname;	/* Name of the section for saving history */
+
+    Widget *widget;
 } QuickWidget;
-#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL }
+#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL , NULL }
 
 typedef struct {
     int  xlen, ylen;

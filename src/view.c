@@ -3467,17 +3467,17 @@ view_normal_search_cmd (WView *view)
     static QuickWidget quick_widgets[] = {
 	{quick_button, 6, 10, 5, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0,
 	 B_CANCEL,
-	 0, 0, NULL},
+	 0, 0, NULL, NULL},
 	{quick_button, 2, 10, 5, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
-	 0, 0, NULL},
+	 0, 0, NULL, NULL},
 	{quick_checkbox, 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT,
 	 N_("&Backwards"), 0, 0,
-	 0, 0, NULL},
+	 0, 0, NULL, NULL},
 	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, "", 52, 0,
-	 0, 0, N_("Search")},
+	 0, 0, N_("Search"), NULL},
 	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
 	 N_(" Enter search string:"), 0, 0,
-	 0, 0, 0},
+	 0, 0, 0, NULL},
 	NULL_QuickWidget
     };
     static QuickDialog Quick_input = {

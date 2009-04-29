@@ -731,24 +731,24 @@ static QuickWidget fmd_widgets[] = {
 #define	FMCB11 1
     /* follow symlinks and preserve Attributes must be the first */
     {quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-     0 /* &op_preserve */ , 0, NULL},
+     0 /* &op_preserve */ , 0, NULL, NULL},
     {quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0,
-     0 /* &file_mask_op_follow_links */ , 0, NULL},
-    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL},
+     0 /* &file_mask_op_follow_links */ , 0, NULL, NULL},
+    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL, NULL},
     {quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0,
-     0 /* &source_easy_patterns */ , 0, NULL},
+     0 /* &source_easy_patterns */ , 0, NULL, NULL},
     {quick_input, 3, 64, 3, FMDY, "", 58,
-     0, 0, 0, "input-def"},
+     0, 0, 0, "input-def", NULL},
 #define FMDI1 4
 #define FMDI2 5
 #define FMDC 3
     {quick_input, 3, 64, 6, FMDY, "", 58, 0,
-     0, 0, "input2"},
+     0, 0, "input2", NULL},
 #define FMDI0 6
-    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL},
+    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL, NULL},
 #define	FMBRGT 7
     {quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-     NULL},
+     NULL, NULL},
 #undef SKIP
 #ifdef WITH_BACKGROUND
 # define SKIP 5
@@ -757,7 +757,7 @@ static QuickWidget fmd_widgets[] = {
 # define FMBLFT 9
 # define FMBMID 8
     {quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0,
-     NULL},
+     NULL, NULL},
 #else				/* WITH_BACKGROUND */
 # define SKIP 4
 # define FMCB21 10
@@ -765,12 +765,12 @@ static QuickWidget fmd_widgets[] = {
 # define FMBLFT 8
 # undef  FMBMID
 #endif
-    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
+    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL},
     {quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-     0 /* &file_mask_stable_symlinks */ , 0, NULL},
+     0 /* &file_mask_stable_symlinks */ , 0, NULL, NULL},
     {quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0,
      0,
-     0 /* &dive_into_subdirs */ , 0, NULL},
+     0 /* &dive_into_subdirs */ , 0, NULL, NULL},
     NULL_QuickWidget
 };
 
