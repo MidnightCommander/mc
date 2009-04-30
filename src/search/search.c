@@ -203,6 +203,8 @@ mc_search_free (mc_search_t * mc_search)
 #if GLIB_CHECK_VERSION (2, 14, 0)
     if (mc_search->regex_match_info)
         g_match_info_free (mc_search->regex_match_info);
+    if (mc_search->regex_buffer != NULL)
+        g_string_free (mc_search->regex_buffer, TRUE);
 #endif
 
     g_free (mc_search);
@@ -293,22 +295,22 @@ mc_search_types_list_get (void)
 /* --------------------------------------------------------------------------------------------- */
 
 GString *
-mc_search_prepare_replace_str (mc_search_t * mc_search, GString *replace_str)
+mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 {
     GString *ret;
 
     if (mc_search == NULL)
-	return g_string_new_len(replace_str->str,replace_str->len);
+        return g_string_new_len (replace_str->str, replace_str->len);
 
     switch (mc_search->search_type) {
     case MC_SEARCH_T_REGEX:
-	ret = mc_search_regex_prepare_replace_str (mc_search, replace_str);
-    break;
+        ret = mc_search_regex_prepare_replace_str (mc_search, replace_str);
+        break;
     case MC_SEARCH_T_NORMAL:
     case MC_SEARCH_T_HEX:
     case MC_SEARCH_T_GLOB:
     default:
-	ret = g_string_new_len(replace_str->str,replace_str->len);
+        ret = g_string_new_len (replace_str->str, replace_str->len);
         break;
     }
     return ret;

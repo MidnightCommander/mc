@@ -64,6 +64,7 @@ typedef struct mc_search_struct {
     /* some data for regexp */
 #if GLIB_CHECK_VERSION (2, 14, 0)
     GMatchInfo *regex_match_info;
+    GString *regex_buffer;
 #endif
     /* some data for sscanf */
 
@@ -105,6 +106,6 @@ gboolean mc_search_is_type_avail (mc_search_type_t);
 
 mc_search_type_str_t *mc_search_types_list_get (void);
 
-GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString *replace_str);
+GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 
 #endif

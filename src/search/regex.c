@@ -228,8 +228,7 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search,
         g_match_info_free (match_info);
         if (error) {
             mc_search->error = MC_SEARCH_E_REGEX;
-            mc_search->error_str = str_conv_gerror_message (error,
-                                        _(" Regular expression error "));
+            mc_search->error_str = str_conv_gerror_message (error, _(" Regular expression error "));
             g_error_free (error);
             return COND__FOUND_ERROR;
         }
@@ -303,17 +302,19 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
                       gsize start_search, gsize end_search, gsize * found_len)
 {
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    GString *buffer;
     gsize current_pos, start_buffer;
     int current_chr = 0;
     gint start_pos;
     gint end_pos;
 
-    buffer = g_string_new ("");
+    if (mc_search->regex_buffer != NULL)
+        g_string_free (mc_search->regex_buffer, TRUE);
+
+    mc_search->regex_buffer = g_string_new ("");
 
     current_pos = start_search;
     while (current_pos <= end_search) {
-        g_string_set_size (buffer, 0);
+        g_string_set_size (mc_search->regex_buffer, 0);
         start_buffer = current_pos;
 
         while (1) {
@@ -321,7 +322,7 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
             if (current_chr == -1)
                 break;
 
-            g_string_append_c (buffer, (char) current_chr);
+            g_string_append_c (mc_search->regex_buffer, (char) current_chr);
 
             current_pos++;
 
@@ -335,24 +336,24 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
         if (current_chr == -1)
             break;
 
-        switch (mc_search__regex_found_cond (mc_search, buffer)) {
+        switch (mc_search__regex_found_cond (mc_search, mc_search->regex_buffer)) {
         case COND__FOUND_OK:
             g_match_info_fetch_pos (mc_search->regex_match_info, 0, &start_pos, &end_pos);
             *found_len = end_pos - start_pos;
             mc_search->normal_offset = start_buffer + start_pos;
-            g_string_free (buffer, TRUE);
             return TRUE;
             break;
         case COND__NOT_ALL_FOUND:
             break;
         default:
-            g_string_free (buffer, TRUE);
+            g_string_free (mc_search->regex_buffer, TRUE);
+            mc_search->regex_buffer = NULL;
             return FALSE;
             break;
         }
-
     }
-    g_string_free (buffer, TRUE);
+    g_string_free (mc_search->regex_buffer, TRUE);
+    mc_search->regex_buffer = NULL;
 #endif
     mc_search->error = MC_SEARCH_E_NOTFOUND;
     mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
@@ -368,11 +369,10 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     gchar *tmp_str;
     GError *error = NULL;
 
-
     tmp_str = g_match_info_expand_references (mc_search->regex_match_info,
-                                           replace_str->str, &error);
+                                              replace_str->str, &error);
 
-    if (error){
+    if (error) {
         mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
         mc_search->error_str = g_strdup (error->message);
         g_error_free (error);
@@ -380,7 +380,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     }
 
     ret = g_string_new (tmp_str);
-    g_free(tmp_str);
+    g_free (tmp_str);
     return ret;
 #else
     return g_string_new_len (replace_str->str, replace_str->len);
