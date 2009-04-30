@@ -1122,8 +1122,8 @@ editcmd_find (WEdit *edit, gsize *len)
 
     if (edit->replace_backwards) {
 	search_end = edit->curs1;
-	while (search_start >= 0) {
-	    if (search_end - search_start > edit->search->original_len)
+	while ((int) search_start >= 0) {
+	    if (search_end - search_start > edit->search->original_len && mc_search_is_fixed_search_str(edit->search))
 		search_end = search_start + edit->search->original_len +1;
 	    if ( mc_search_run(edit->search, (void *) edit, search_start, search_end, len))
 	    {

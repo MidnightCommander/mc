@@ -317,3 +317,21 @@ mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mc_search_is_fixed_search_str(mc_search_t * mc_search)
+{
+    if (mc_search == NULL)
+        return FALSE;
+    switch (mc_search->search_type) {
+    case MC_SEARCH_T_REGEX:
+    case MC_SEARCH_T_GLOB:
+	return FALSE;
+        break;
+    default:
+	return TRUE;
+        break;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
