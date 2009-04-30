@@ -37,7 +37,7 @@
 /*** global variables ****************************************************************************/
 
 char STR_E_NOTFOUND[] = N_(" Search string not found ");
-char STR_E_UNKNOWN_TYPE[] = N_(" Unsupported search type ");
+char STR_E_UNKNOWN_TYPE[] = N_(" Not implemented yet ");
 
 /*** file scope macro definitions ****************************************************************/
 
