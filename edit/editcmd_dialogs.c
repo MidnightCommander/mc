@@ -495,3 +495,70 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     /* destroy dialog before return */
     destroy_dlg (def_dlg);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+#define CONFIRM_DLG_WIDTH 79
+#define CONFIRM_DLG_HEIGTH 6
+
+int
+editcmd_dialog_replace_prompt_show (WEdit * edit, char *replace_text, int xpos, int ypos)
+{
+    int retval;
+
+    QuickWidget quick_widgets[] =
+    {
+	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
+	 0, B_CANCEL, 0, 0, NULL, NULL, NULL},
+	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("O&ne"),
+	 0, B_REPLACE_ONE, 0, 0, NULL, NULL, NULL},
+	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("A&ll"),
+	 0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
+	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
+	 0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
+	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
+	 0, B_ENTER, 0, 0, NULL, NULL, NULL},
+	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
+	 0, 0, 0, 0, 0, NULL, NULL},
+	 NULL_QuickWidget};
+
+    GString *label_text = g_string_new (_(" Replace with: "));
+
+    if (replace_text && *replace_text) {
+        size_t label_len;
+	label_len = label_text->len;
+        g_string_append (label_text, replace_text);
+	g_string_append (label_text, " ?");
+    }
+    quick_widgets[5].text = label_text->str;
+
+    if (xpos == -1){
+	xpos = (edit->num_widget_columns - CONFIRM_DLG_WIDTH) / 2;
+    }
+
+    if (ypos == -1){
+	ypos = edit->num_widget_lines * 2 / 3;
+    }
+
+    {
+	QuickDialog Quick_input =
+	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
+	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
+
+	Quick_input.widgets = quick_widgets;
+
+	Quick_input.xpos = xpos;
+
+	/* Sometimes menu can hide replaced text. I don't like it */
+
+	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH - 1))
+	    ypos -= CONFIRM_DLG_HEIGTH;
+
+	Quick_input.ypos = ypos;
+	retval = quick_dialog (&Quick_input);
+	g_string_free (label_text, TRUE);
+	return retval;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

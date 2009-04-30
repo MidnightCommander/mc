@@ -1113,61 +1113,6 @@ int edit_block_delete_cmd (WEdit * edit)
 
 
 #define INPUT_INDEX 9
-#define CONFIRM_DLG_WIDTH 79
-#define CONFIRM_DLG_HEIGTH 6
-#define B_REPLACE_ALL (B_USER+1)
-#define B_REPLACE_ONE (B_USER+2)
-#define B_SKIP_REPLACE (B_USER+3)
-
-static int
-edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
-{
-    QuickWidget quick_widgets[] =
-    {
-	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
-	 0, B_CANCEL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("O&ne"),
-	 0, B_REPLACE_ONE, 0, 0, NULL, NULL, NULL},
-	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("A&ll"),
-	 0, B_REPLACE_ALL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
-	 0, B_SKIP_REPLACE, 0, 0, NULL, NULL, NULL},
-	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
-	 0, B_ENTER, 0, 0, NULL, NULL, NULL},
-	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
-	 0, 0, 0, 0, 0, NULL, NULL},
-	 NULL_QuickWidget};
-
-    GString *label_text = g_string_new (_(" Replace with: "));
-    if (replace_text && *replace_text) {
-        size_t label_len;
-	label_len = label_text->len;
-        g_string_append (label_text, replace_text);
-	g_string_append (label_text, " ?");
-    }
-    quick_widgets[5].text = label_text->str;
-
-    {
-	int retval;
-	QuickDialog Quick_input =
-	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
-	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
-
-	Quick_input.widgets = quick_widgets;
-
-	Quick_input.xpos = xpos;
-
-	/* Sometimes menu can hide replaced text. I don't like it */
-
-	if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + CONFIRM_DLG_HEIGTH - 1))
-	    ypos -= CONFIRM_DLG_HEIGTH;
-
-	Quick_input.ypos = ypos;
-	retval = quick_dialog (&Quick_input);
-	g_string_free (label_text, TRUE);
-	return retval;
-    }
-}
 
 static gboolean
 editcmd_find (WEdit *edit, gsize *len)
@@ -1351,11 +1296,9 @@ edit_replace_cmd (WEdit *edit, int again)
 		/*so that undo stops at each query */
 		edit_push_key_press (edit);
 
-		switch (edit_replace_prompt (edit, str_for_prompt_dialog,	/* and prompt 2/3 down */
-					     (edit->num_widget_columns -
-					      CONFIRM_DLG_WIDTH) / 2,
-					     edit->num_widget_lines * 2 /
-					     3)) {
+		switch (editcmd_dialog_replace_prompt_show (edit, str_for_prompt_dialog,	/* and prompt 2/3 down */
+					     -1,
+					     -1)) {
 		case B_ENTER:
 		    break;
 		case B_SKIP_REPLACE:
