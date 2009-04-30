@@ -1139,7 +1139,7 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	 NULL_QuickWidget};
 
     GString *label_text = g_string_new (_(" Replace with: "));
-    if (*replace_text) {
+    if (replace_text && *replace_text) {
         size_t label_len;
 	label_len = label_text->len;
         g_string_append (label_text, replace_text);
@@ -1169,6 +1169,28 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     }
 }
 
+static gboolean
+editcmd_find (WEdit *edit, gsize *len)
+{
+    gsize search_start = edit->search_start;
+    gsize search_end;
+
+    if (edit->replace_backwards) {
+	search_end = edit->curs1;
+	while (search_start >= 0) {
+	    if (search_end - search_start > edit->search->original_len)
+		search_end = search_start + edit->search->original_len +1;
+	    if ( mc_search_run(edit->search, (void *) edit, search_start, search_end, len))
+	    {
+		return TRUE;
+	    }
+	    search_start--;
+	}
+    } else {
+	return mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, len);
+    }
+    return FALSE;
+}
 
 
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
@@ -1272,7 +1294,6 @@ edit_replace_cmd (WEdit *edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->is_backward = edit->replace_backwards;
 	edit->search->search_type = edit->search_type;
 	edit->search->is_case_sentitive = edit->replace_case;
 	edit->search->search_fn = edit_search_cmd_callback;
@@ -1290,7 +1311,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	gsize len = 0;
 	long new_start;
 	
-	if (! mc_search_run(edit->search, (void *) edit, edit->search_start, last_search, &len))
+	if (! editcmd_find(edit, &len))
 	{
 	    if (!(edit->search->error == MC_SEARCH_E_OK || (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
 	    {
@@ -1474,9 +1495,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	    edit->search_start = edit->curs1;
 	    return;
 	}
-	edit->search->is_backward = edit->replace_backwards;
 	edit->search->search_type = edit->search_type;
-
 	edit->search->is_case_sentitive = edit->replace_case;
 	edit->search->search_fn = edit_search_cmd_callback;
     }
@@ -1493,7 +1512,8 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (edit->found_len && edit->search_start == edit->found_start - 1 && !edit->replace_backwards)
 	    edit->search_start++;
 
-	if (mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, &len))
+	
+	if (editcmd_find(edit, &len))
 	{
 	    edit->found_start = edit->search_start = edit->search->normal_offset;
 	    edit->found_len = len;

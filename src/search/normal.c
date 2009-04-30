@@ -99,11 +99,7 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
     int current_chr = 0;
     gboolean found;
 
-    if (mc_search->is_backward) {
-        current_pos = end_search;
-    } else {
-        current_pos = start_search;
-    }
+    current_pos = start_search;
     while (1) {
         search_pos = 0;
         found = TRUE;
@@ -115,7 +111,6 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
             current_chr = mc_search__get_char (mc_search, user_data, current_pos + search_pos);
             if (current_chr == -1)
                 break;
-
             switch (mc_search__normal_found_cond (mc_search, current_chr, search_pos)) {
 
             case COND__NOT_ALL_FOUND:
@@ -139,15 +134,9 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
         if (current_chr == -1)
             break;
 
-        if (mc_search->is_backward) {
-            current_pos--;
-            if (current_pos == start_search - 1)
-                break;
-        } else {
-            current_pos++;
-            if (current_pos == end_search + 1)
-                break;
-        }
+        current_pos++;
+        if (current_pos == end_search + 1)
+            break;
     }
     mc_search->error = MC_SEARCH_E_NOTFOUND;
     mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));

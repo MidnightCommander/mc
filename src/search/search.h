@@ -43,9 +43,6 @@ typedef struct mc_search_struct {
     /* case sentitive search */
     gboolean is_case_sentitive;
 
-    /* backward search */
-    gboolean is_backward;
-
     /* search only once.  Is this for replace? */
     gboolean is_once_only;
 
