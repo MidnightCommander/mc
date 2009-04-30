@@ -16,9 +16,15 @@ set -e
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
+
 (
 # Some shells don't propagate "set -e" to subshells.
 set -e
+
+$AUTOPOINT --version >/dev/null 2>&1
+if test $? -ne 0;  then
+    AUTOPOINT=maint/autopoint
+fi
 
 cd "$srcdir"
 
