@@ -67,6 +67,8 @@ mc_search__cond_struct_new (mc_search_t * mc_search, const char *str,
 
     switch (mc_search->search_type) {
     case MC_SEARCH_T_GLOB:
+        mc_search__cond_struct_new_init_glob (charset, mc_search, mc_search_cond);
+        break;
     case MC_SEARCH_T_NORMAL:
         mc_search__cond_struct_new_init_normal (charset, mc_search, mc_search_cond);
         break;
@@ -252,8 +254,10 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
     case MC_SEARCH_T_REGEX:
         ret = mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
         break;
-    case MC_SEARCH_T_HEX:
     case MC_SEARCH_T_GLOB:
+        ret = mc_search__run_glob (mc_search, user_data, start_search, end_search, found_len);
+        break;
+    case MC_SEARCH_T_HEX:
     default:
         break;
     }
@@ -266,6 +270,7 @@ gboolean
 mc_search_is_type_avail (mc_search_type_t search_type)
 {
     switch (search_type) {
+    case MC_SEARCH_T_GLOB:
     case MC_SEARCH_T_NORMAL:
         return TRUE;
         break;
@@ -277,7 +282,6 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 #endif
         break;
     case MC_SEARCH_T_HEX:
-    case MC_SEARCH_T_GLOB:
     default:
         break;
     }
@@ -319,17 +323,17 @@ mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search_is_fixed_search_str(mc_search_t * mc_search)
+mc_search_is_fixed_search_str (mc_search_t * mc_search)
 {
     if (mc_search == NULL)
         return FALSE;
     switch (mc_search->search_type) {
     case MC_SEARCH_T_REGEX:
     case MC_SEARCH_T_GLOB:
-	return FALSE;
+        return FALSE;
         break;
     default:
-	return TRUE;
+        return TRUE;
         break;
     }
 }

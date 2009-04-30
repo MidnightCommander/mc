@@ -63,10 +63,9 @@ typedef struct mc_search_struct {
     GMatchInfo *regex_match_info;
     GString *regex_buffer;
 #endif
-    /* some data for sscanf */
 
     /* some data for glob */
-    GPatternSpec *glob_handle;
+    GPatternSpec *glob_match_info;
 
 /* private data */
 
@@ -105,6 +104,6 @@ mc_search_type_str_t *mc_search_types_list_get (void);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 
-gboolean mc_search_is_fixed_search_str(mc_search_t *);
+gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
 #endif
