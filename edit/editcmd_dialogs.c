@@ -49,20 +49,17 @@
 /*** file scope macro definitions **************************************/
 
 #define SEARCH_DLG_WIDTH 58
-#define SEARCH_DLG_HEIGHT 12
+#define SEARCH_DLG_MIN_HEIGHT 10
+#define SEARCH_DLG_HEIGHT_SUPPLY 2
+
 #define REPLACE_DLG_WIDTH 58
-#define REPLACE_DLG_HEIGHT 15
+#define REPLACE_DLG_MIN_HEIGHT 15
+#define REPLACE_DLG_HEIGHT_SUPPLY 4
 
 /*** file scope type declarations **************************************/
 
 /*** file scope variables **********************************************/
 
-static const char *replace_mode_str[] = { N_("pro&Mpt on replace"), N_("replace &All") };
-
-static QuickWidget *editcmd_dialog__widgets_for_searches_cb = NULL;
-static int editcmd_dialog__widgets_for_searches_index = 0;
-
-static mc_search_type_t editcmd_dialog__type_of_search = -1;
 
 /*** file scope functions **********************************************/
 
@@ -81,56 +78,25 @@ editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-edit_replace__select_search_type_cb (int action)
+gchar **
+editcmd_dialog__get_search_types_list(void)
 {
-    int i = 0;
-    gboolean fnd = FALSE;
+    GString *tmp;
+    gchar **ret;
     mc_search_type_str_t *type_str;
     mc_search_type_str_t *types_str = mc_search_types_list_get ();
 
-
-    (void) action;
-
-    Listbox *listbox =
-        create_listbox_window_delta (0, 1, 15, 4, _(" Search type "), "[Search Types]");
-
+    tmp = g_string_new("");
     type_str = types_str;
     while (type_str->str) {
-        LISTBOX_APPEND_TEXT (listbox, 0, type_str->str, NULL);
-        if (type_str->type == editcmd_dialog__type_of_search)
-            fnd = TRUE;
-        if (!fnd)
-            i++;
-
+	if (tmp->len)
+	    g_string_append (tmp,"__||__");
+	g_string_append (tmp, type_str->str);
         type_str++;
     }
-    listbox_select_by_number (listbox->list, i);
-
-    i = run_listbox (listbox);
-    if (i < 0)
-        return 0;
-
-    editcmd_dialog__type_of_search = types_str[i].type;
-
-    label_set_text ((WLabel *)
-                    editcmd_dialog__widgets_for_searches_cb
-                    [editcmd_dialog__widgets_for_searches_index].widget, types_str[i].str);
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-char *
-editcmd_dialog__get_search_type_label (void)
-{
-    mc_search_type_str_t *types_str;
-    if ((int) editcmd_dialog__type_of_search < 0)
-        editcmd_dialog__type_of_search = 0;
-
-    types_str = mc_search_types_list_get ();
-
-    return types_str[editcmd_dialog__type_of_search].str;
+    ret = g_strsplit (tmp->str,"__||__", -1);
+    g_string_free(tmp, TRUE);
+    return ret;
 }
 
 /*** public functions **************************************************/
@@ -142,12 +108,13 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     int treplace_backwards = edit->replace_backwards;
     int treplace_case = edit->replace_case;
     int treplace_mode = edit->replace_mode;
+    mc_search_type_t ttype_of_search = edit->search_type;
+
     int dialog_result;
+    gchar **list_of_types = editcmd_dialog__get_search_types_list();
+    const char *replace_mode_str[] = { N_("pro&Mpt on replace"), N_("replace &All") };
 
-    char *search_type_label = editcmd_dialog__get_search_type_label ();
-    char *search_button_caption = _("&Select");
-    int search_button_caption_len = str_term_width1 (search_button_caption);
-
+    int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
 
 
     QuickWidget quick_widgets[] = {
@@ -159,26 +126,18 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          0, 0, NULL, NULL, NULL},
 
 
-
         {quick_radio, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, "", 2, 0,
          &treplace_mode, const_cast (char **, replace_mode_str), NULL, NULL, NULL},
 
-        {quick_checkbox, 4, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
          &treplace_backwards, 0, NULL, NULL, NULL},
 
-        {quick_checkbox, 4, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
          &treplace_case, 0, NULL, NULL, NULL},
 
 
-        {quick_label, 2, REPLACE_DLG_WIDTH, 6, REPLACE_DLG_HEIGHT, N_(" Enter search type:"),
-         0, 0, 0, 0, 0, NULL, NULL},
-
-        {quick_label, 3 + search_button_caption_len + 5, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT,
-         search_type_label, 52, 0, 0, 0, NULL, NULL, NULL},
-
-        {quick_button, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, search_button_caption, 0,
-         B_USER, 0, 0, NULL, &edit_replace__select_search_type_cb, NULL},
-
+        {quick_radio, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", g_strv_length (list_of_types), 0,
+         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
 
         {quick_label, 2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:"),
          0, 0, 0, 0, 0, NULL, NULL},
@@ -209,13 +168,11 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
         0
     };
 
-    editcmd_dialog__widgets_for_searches_cb = quick_widgets;
-    editcmd_dialog__widgets_for_searches_index = 6;
-
     dialog_result = quick_dialog (&Quick_input);
+    g_strfreev (list_of_types);
 
     if (dialog_result != B_CANCEL) {
-        edit->search_type = editcmd_dialog__type_of_search;
+        edit->search_type = ttype_of_search;
         edit->replace_mode = treplace_mode;
         edit->replace_backwards = treplace_backwards;
         edit->replace_case = treplace_case;
@@ -232,14 +189,11 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
 void
 editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
-    int treplace_mode = edit->replace_mode;
-    int treplace_case = edit->replace_case;
-    int treplace_backwards = edit->replace_backwards;
-
-    char *search_type_label = editcmd_dialog__get_search_type_label ();
-    char *search_button_caption = _("&Select");
-    int search_button_caption_len = str_term_width1 (search_button_caption);
-
+    int tsearch_case = edit->replace_case;
+    int tsearch_backwards = edit->replace_backwards;
+    mc_search_type_t ttype_of_search = edit->search_type;
+    gchar **list_of_types = editcmd_dialog__get_search_types_list();
+    int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
 
     QuickWidget quick_widgets[] = {
@@ -248,21 +202,14 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         {quick_button, 2, 10, 9, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
          0, NULL, NULL, NULL},
 
-        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
-         &treplace_backwards, 0, NULL, NULL, NULL},
-        {quick_checkbox, 4, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
-         &treplace_case, 0, NULL, NULL, NULL},
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
+         &tsearch_backwards, 0, NULL, NULL, NULL},
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
+         &tsearch_case, 0, NULL, NULL, NULL},
 
 
-        {quick_label, 2, REPLACE_DLG_WIDTH, 6, REPLACE_DLG_HEIGHT, N_(" Enter search type:"),
-         0, 0, 0, 0, 0, NULL, NULL},
-
-        {quick_label, 3 + search_button_caption_len + 5, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT,
-         search_type_label, 52, 0, 0, 0, NULL, NULL, NULL},
-
-        {quick_button, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, search_button_caption, 0,
-         B_USER, 0, 0, NULL, &edit_replace__select_search_type_cb, NULL},
-
+        {quick_radio, 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT, 0, g_strv_length (list_of_types), ttype_of_search,
+         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
 
         {quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, *search_text, 52, 0, 0,
          search_text, "edit-search", NULL, NULL},
@@ -277,15 +224,11 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         "[Input Line Keys]", quick_widgets, 0
     };
 
-    editcmd_dialog__widgets_for_searches_cb = quick_widgets;
-    editcmd_dialog__widgets_for_searches_index = 5;
-
 
     if (quick_dialog (&Quick_input) != B_CANCEL) {
-        edit->search_type = editcmd_dialog__type_of_search;
-        edit->replace_mode = treplace_mode;
-        edit->replace_backwards = treplace_backwards;
-        edit->replace_case = treplace_case;
+        edit->search_type = ttype_of_search;
+        edit->replace_backwards = tsearch_backwards;
+        edit->replace_case = tsearch_case;
     } else {
         *search_text = NULL;
     }
