@@ -49,12 +49,12 @@
 /*** file scope macro definitions **************************************/
 
 #define SEARCH_DLG_WIDTH 58
-#define SEARCH_DLG_MIN_HEIGHT 10
-#define SEARCH_DLG_HEIGHT_SUPPLY 2
+#define SEARCH_DLG_MIN_HEIGHT 11
+#define SEARCH_DLG_HEIGHT_SUPPLY 3
 
 #define REPLACE_DLG_WIDTH 58
-#define REPLACE_DLG_MIN_HEIGHT 15
-#define REPLACE_DLG_HEIGHT_SUPPLY 4
+#define REPLACE_DLG_MIN_HEIGHT 16
+#define REPLACE_DLG_HEIGHT_SUPPLY 5
 
 /*** file scope type declarations **************************************/
 
@@ -108,6 +108,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     int treplace_backwards = edit->replace_backwards;
     int treplace_case = edit->replace_case;
     int treplace_mode = edit->replace_mode;
+    int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
 
     int dialog_result;
@@ -126,8 +127,11 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          0, 0, NULL, NULL, NULL},
 
 
-        {quick_radio, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, "", 2, 0,
+        {quick_radio, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, "", 2, 0,
          &treplace_mode, const_cast (char **, replace_mode_str), NULL, NULL, NULL},
+
+        {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("All charsets"), 0, 0,
+         &tall_codepages, 0, NULL, NULL, NULL},
 
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
          &treplace_backwards, 0, NULL, NULL, NULL},
@@ -174,6 +178,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     if (dialog_result != B_CANCEL) {
         edit->search_type = ttype_of_search;
         edit->replace_mode = treplace_mode;
+        edit->all_codepages = tall_codepages;
         edit->replace_backwards = treplace_backwards;
         edit->replace_case = treplace_case;
         return;
@@ -191,6 +196,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
 {
     int tsearch_case = edit->replace_case;
     int tsearch_backwards = edit->replace_backwards;
+    int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
     gchar **list_of_types = editcmd_dialog__get_search_types_list();
     int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
@@ -201,6 +207,9 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
          0, NULL, NULL, NULL},
         {quick_button, 2, 10, 9, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
          0, NULL, NULL, NULL},
+
+        {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("All charsets"), 0, 0,
+         &tall_codepages, 0, NULL, NULL, NULL},
 
         {quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
          &tsearch_backwards, 0, NULL, NULL, NULL},
@@ -228,6 +237,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
     if (quick_dialog (&Quick_input) != B_CANCEL) {
         edit->search_type = ttype_of_search;
         edit->replace_backwards = tsearch_backwards;
+        edit->all_codepages = tall_codepages;
         edit->replace_case = tsearch_case;
     } else {
         *search_text = NULL;

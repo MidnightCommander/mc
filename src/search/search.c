@@ -92,11 +92,9 @@ mc_search__conditions_new (mc_search_t * mc_search)
 
     if (mc_search->is_all_charsets) {
         gsize loop1, recoded_str_len;
-
         gchar *buffer;
-
         for (loop1 = 0; loop1 < (gsize) n_codepages; loop1++) {
-            if (g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
+            if (!g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (mc_search, mc_search->original,
                                                              mc_search->original_len, cp_source));

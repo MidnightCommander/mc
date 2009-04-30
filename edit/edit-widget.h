@@ -56,6 +56,7 @@ struct WEdit {
     int replace_mode;
     int replace_backwards;
     int replace_case;
+    int all_codepages;
 
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
