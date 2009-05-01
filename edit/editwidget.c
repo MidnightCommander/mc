@@ -195,7 +195,7 @@ edit_file (const char *_file, int line)
 
     edit_bar = buttonbar_new (1);
 
-    edit_menubar = edit_init_menu ();
+    edit_menubar = edit_create_menu ();
 
     add_widget (edit_dlg, edit_bar);
     add_widget (edit_dlg, wedit);

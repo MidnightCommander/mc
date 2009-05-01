@@ -421,8 +421,12 @@ static menu_entry OptMenu[] =
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
+#define N_menus 5
+
+static Menu *EditMenuBar [N_menus];
+
 static void
-edit_init_menu_normal (struct Menu *EditMenuBar[])
+edit_init_menu_normal (void)
 {
     EditMenuBar[0] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu),
 				    "[Internal File Editor]");
@@ -437,7 +441,7 @@ edit_init_menu_normal (struct Menu *EditMenuBar[])
 }
 
 static void
-edit_init_menu_emacs (struct Menu *EditMenuBar[])
+edit_init_menu_emacs (void)
 {
     EditMenuBar[0] = create_menu (_(" File "), FileMenuEmacs, menu_entries (FileMenuEmacs),
 				    "[Internal File Editor]");
@@ -451,20 +455,24 @@ edit_init_menu_emacs (struct Menu *EditMenuBar[])
 				    "[Internal File Editor]");
 }
 
-struct WMenu *
+static void
 edit_init_menu (void)
 {
-    struct Menu **EditMenuBar = g_new(struct Menu *, N_menus);
-
     switch (edit_key_emulation) {
     default:
     case EDIT_KEY_EMULATION_NORMAL:
-	edit_init_menu_normal (EditMenuBar);
+	edit_init_menu_normal ();
 	break;
     case EDIT_KEY_EMULATION_EMACS:
-	edit_init_menu_emacs (EditMenuBar);
+	edit_init_menu_emacs ();
 	break;
     }
+}
+
+struct WMenu *
+edit_create_menu (void)
+{
+    edit_init_menu ();
     return menubar_new (0, 0, COLS, EditMenuBar, N_menus);
 }
 
@@ -474,20 +482,15 @@ edit_done_menu (struct WMenu *wmenu)
     int i;
     for (i = 0; i < N_menus; i++)
 	destroy_menu (wmenu->menu[i]);
-
-    g_free(wmenu->menu);
 }
 
 
 void
 edit_reload_menu (void)
 {
-    struct WMenu *new_edit_menubar;
-
-    new_edit_menubar = edit_init_menu ();
-    dlg_replace_widget (&edit_menubar->widget, &new_edit_menubar->widget);
     edit_done_menu (edit_menubar);
-    edit_menubar = new_edit_menubar;
+    edit_init_menu ();
+    menubar_arrange (edit_menubar);
 }
 
 

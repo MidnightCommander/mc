@@ -25,8 +25,6 @@
 
 #include <stdio.h>
 
-#define N_menus 5
-
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
 #define SEARCH_DIALOG_OPTION_NO_CASE	(1 << 2)
@@ -122,7 +120,7 @@ struct Menu;
 
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-struct WMenu *edit_init_menu (void);
+struct WMenu *edit_create_menu (void);
 void edit_done_menu (struct WMenu *wmenu);
 void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
