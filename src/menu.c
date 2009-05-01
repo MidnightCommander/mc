@@ -53,12 +53,8 @@ create_menu (const char *name, menu_entry *entries, int count, const char *help_
 	register menu_entry* mp;
 	for (mp = entries; count--; mp++) {
             if (mp->label[0] != '\0') {
-#ifdef ENABLE_NLS
-                mp->label = _(mp->label);
-#endif
-                mp->text = parse_hotkey (mp->label);
+                mp->text = parse_hotkey (_(mp->label));
                 len = hotkey_width (mp->text);
-
                 menu->max_entry_len = max (len, menu->max_entry_len);
 	    }
 	}
