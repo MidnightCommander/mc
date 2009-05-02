@@ -975,8 +975,8 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 	fish_send_command (me, super, buf, OPT_FLUSH); 
 	/* FIXME: what should we report if chgrp succeeds but chown fails? */
 	g_snprintf (buf, sizeof(buf),
-            "#CHGRP /%s \"/%s\"\n"
-	    "chgrp %s \"/%s\" 2>/dev/null\n"
+	    "#CHGRP /%s /%s\n"
+	    "chgrp %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
