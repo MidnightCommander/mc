@@ -2121,6 +2121,9 @@ handle_args (int argc, char *argv[])
 int
 main (int argc, char *argv[])
 {
+    struct stat s;
+    char *mc_dir;
+
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
@@ -2180,6 +2183,16 @@ main (int argc, char *argv[])
     load_setup ();
 
     init_curses ();
+
+    /* create home directory */
+    /* do it after the screen library initialization to show the error message */
+    mc_dir = concat_dir_and_file (home_dir, MC_BASE);
+    canonicalize_pathname (mc_dir);
+    if ((stat (mc_dir, &s) != 0) && (errno == ENOENT)
+	&& mkdir (mc_dir, 0755) != 0)
+	message (D_ERROR, _("Warning"),
+		    _("Cannot create %s directory"), mc_dir);
+    g_free (mc_dir);
 
     init_xterm_support ();
 
