@@ -2200,7 +2200,7 @@ main (int argc, char *argv[])
     mc_dir = concat_dir_and_file (home_dir, MC_BASE);
     canonicalize_pathname (mc_dir);
     if ((stat (mc_dir, &s) != 0) && (errno == ENOENT)
-	&& mkdir (mc_dir, 0755) != 0)
+	&& mkdir (mc_dir, 0700) != 0)
 	message (D_ERROR, _("Warning"),
 		    _("Cannot create %s directory"), mc_dir);
     g_free (mc_dir);
