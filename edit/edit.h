@@ -288,6 +288,8 @@ extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
 extern int option_persistent_selections;
+extern int option_line_status;
+extern int option_line_status_width;
 
 typedef enum {
     EDIT_QUICK_SAVE = 0,

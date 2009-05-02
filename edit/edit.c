@@ -66,6 +66,8 @@ int option_save_mode = EDIT_QUICK_SAVE;
 int option_save_position = 1;
 int option_max_undo = 32768;
 int option_persistent_selections = 1;
+int option_line_status = 0;
+int option_line_status_width = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -627,7 +629,11 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 {
     int to_free = 0;
     option_auto_syntax = 1; /* Resetting to auto on every invokation */
-
+    if ( option_line_status ) {
+        option_line_status_width = LINE_STATUS_WIDTH;
+    } else {
+        option_line_status_width = 0;
+    }
     if (!edit) {
 #ifdef ENABLE_NLS
 	/*
@@ -1483,7 +1489,7 @@ void edit_update_curs_row (WEdit * edit)
 
 void edit_update_curs_col (WEdit * edit)
 {
-    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1) + 8;
+    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1) + option_line_status_width;
 }
 
 /*moves the display start position up by i lines */

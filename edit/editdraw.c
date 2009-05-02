@@ -247,7 +247,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 {
     struct line_s *p;
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
-    int x1 = LINE_STATUS_WIDTH + start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
+    int x1 = option_line_status_width + start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     unsigned char str[6 + 1];
@@ -256,14 +256,16 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
-    for (int i = 0; i < LINE_STATUS_WIDTH; i++) {
-        if ( status[i] == '\0' ) {
-            status[i] = ' ';
+    if ( option_line_status ) {
+        for (int i = 0; i < LINE_STATUS_WIDTH; i++) {
+            if ( status[i] == '\0' ) {
+                status[i] = ' ';
+            }
         }
+        set_color (MENU_ENTRY_COLOR);
+        edit_move (x1 + FONT_OFFSET_X - option_line_status_width, y + FONT_OFFSET_Y);
+        addstr (status);
     }
-    set_color (MENU_ENTRY_COLOR);
-    edit_move (x1 + FONT_OFFSET_X - LINE_STATUS_WIDTH, y + FONT_OFFSET_Y);
-    addstr (status);
 
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
@@ -354,14 +356,15 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     c1 = min (edit->column1, edit->column2);
     c2 = max (edit->column1, edit->column2);
     unsigned long cur_line = edit->start_line + row;
-    if ( cur_line < edit->total_lines ) {
-        g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
-    } else if ( cur_line == edit->total_lines ) {
-        g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "  <EOF>");
-    } else {
-        line_stat[0] = '\0';
+    if ( option_line_status ) {
+        if ( cur_line < edit->total_lines ) {
+            g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
+        } else if ( cur_line == edit->total_lines ) {
+            g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "eof");
+        } else {
+            line_stat[0] = '\0';
+        }
     }
-
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
 
