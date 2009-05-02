@@ -1470,7 +1470,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 /* returns the current column position of the cursor */
 int edit_get_col (WEdit * edit)
 {
-    return edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit->curs1);
+    return edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit->curs1) ;
 }
 
 
@@ -1483,7 +1483,7 @@ void edit_update_curs_row (WEdit * edit)
 
 void edit_update_curs_col (WEdit * edit)
 {
-    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1);
+    edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1) + 8;
 }
 
 /*moves the display start position up by i lines */

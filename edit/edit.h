@@ -104,6 +104,9 @@
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
 
+/* bytes for draw line number */
+#define LINE_STATUS_WIDTH	8
+
 typedef struct edit_stack_type {
     long line;
     char *filename;

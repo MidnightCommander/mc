@@ -32,6 +32,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 
 #include "../src/global.h"
@@ -107,7 +108,7 @@ static void status_string (WEdit * edit, char *s, int w)
 		edit->modified ? 'M' : '-',
 		edit->macro_i < 0 ? '-' : 'R',
 		edit->overwrite == 0 ? '-' : 'O',
-		edit->curs_col,
+		edit->curs_col - LINE_STATUS_WIDTH,
 
 		edit->start_line + 1,
 		edit->curs_row,
@@ -242,19 +243,29 @@ struct line_s {
 
 static void
 print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
-		 long end_col, struct line_s line[])
+		 long end_col, struct line_s line[], char *status)
 {
     struct line_s *p;
-
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
-    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
+    int x1 = LINE_STATUS_WIDTH + start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     unsigned char str[6 + 1];
+
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
+    for (int i = 0; i < LINE_STATUS_WIDTH; i++) {
+        if ( status[i] == '\0' ) {
+            status[i] = ' ';
+        }
+    }
+    set_color (MENU_ENTRY_COLOR);
+    edit_move (x1 + FONT_OFFSET_X - LINE_STATUS_WIDTH, y + FONT_OFFSET_Y);
+    addstr (status);
+
+    set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
 
@@ -325,6 +336,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 {
     struct line_s line[MAX_LINE_LEN];
     struct line_s *p = line;
+    char *line_stat[LINE_STATUS_WIDTH + 1];
 
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
@@ -341,6 +353,14 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 						q)) + edit->start_col;
     c1 = min (edit->column1, edit->column2);
     c2 = max (edit->column1, edit->column2);
+    unsigned long cur_line = edit->start_line + row;
+    if ( cur_line < edit->total_lines ) {
+        g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
+    } else if ( cur_line == edit->total_lines ) {
+        g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "  <EOF>");
+    } else {
+        line_stat[0] = '\0';
+    }
 
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
@@ -353,7 +373,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 				   || c == '\t'))
 		    tws--;
 	    }
-
+	
 	    while (col <= end_col - edit->start_col) {
 		p->ch = 0;
 		p->style = 0;
@@ -521,7 +541,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     }
     p->ch = 0;
 
-    print_to_widget (edit, row, start_col, start_col_real, end_col, line);
+    print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat);
 }
 
 #define key_pending(x) (!is_idle())
@@ -543,6 +563,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     int force = edit->force;
     long b;
+    int collapse_start = 300;
+    int collapse_end = 500;
 
 /*
  * If the position of the page has not moved then we can draw the cursor
@@ -559,11 +581,14 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    row = start_row;
 	    b = edit_move_forward (edit, edit->start_display, start_row, 0);
 	    while (row <= end_row) {
+	        mc_log("b=%ld\n", b);
 		if (key_pending (edit))
 		    goto exit_render;
-		edit_draw_this_line (edit, b, row, start_column, end_column);
+		//if (b<300 || b>600) {
+		    edit_draw_this_line (edit, b, row, start_column, end_column);
+		    row++;
+		//}
 		b = edit_move_forward (edit, b, 1, 0);
-		row++;
 	    }
 	} else {
 	    curs_row = edit->curs_row;
@@ -595,9 +620,11 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    while (row <= end_row) {
 			if (key_pending (edit))
 			    goto exit_render;
-			edit_draw_this_line (edit, b, row, start_column, end_column);
+			//if (b<300 || b>600) {
+		            edit_draw_this_line (edit, b, row, start_column, end_column);
+		            row++;
+		        //}
 			b = edit_move_forward (edit, b, 1, 0);
-			row++;
 		    }
 		}
 	    }
