@@ -1123,26 +1123,35 @@ create_panels (void)
 static void
 copy_current_pathname (void)
 {
+    char *cwd_path;
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, current_panel->cwd, 0);
-    if (current_panel->cwd[strlen (current_panel->cwd) - 1] != PATH_SEP)
+    cwd_path = remove_encoding_from_path (current_panel->cwd);
+    command_insert (cmdline, cwd_path, 0);
+
+    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
+    g_free (cwd_path);
 }
 
 static void
 copy_other_pathname (void)
 {
+    char *cwd_path;
+
     if (get_other_type () != view_listing)
 	return;
 
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, other_panel->cwd, 0);
-    if (other_panel->cwd[strlen (other_panel->cwd) - 1] != PATH_SEP)
+    cwd_path = remove_encoding_from_path (other_panel->cwd);
+    command_insert (cmdline, cwd_path, 0);
+
+    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
+    g_free (cwd_path);
 }
 
 static void

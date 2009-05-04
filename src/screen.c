@@ -905,7 +905,7 @@ static char
     return result;
 }
 
-static char *
+char *
 remove_encoding_from_path (const char *path)
 {
     GString *ret;

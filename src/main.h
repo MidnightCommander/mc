@@ -130,6 +130,8 @@ void do_possible_cd (const char *dir);
 void done_menu (void);
 void init_menu (void);
 
+char *remove_encoding_from_path (const char *);
+
 #define MC_BASE "/.mc/"
 
 void directory_history_add   (struct WPanel *panel, const char *dir);
