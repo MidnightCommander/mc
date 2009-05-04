@@ -332,9 +332,14 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 int visible_tabs = 1, visible_tws = 1;
 
 /* b is a pointer to the beginning of the line */
+/* collapse_state = -1 first elapsed line */
+/* collapse_state = 1 first collapsed line */
+/* collapse_state = 2 in middle collapsed lines */
+/* collapse_state = 3 last collapsed line */
+/* collapse_state = 0 not collapsed */
 static void
 edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
-		     long end_col)
+		     long end_col, int collapse_state)
 {
     struct line_s line[MAX_LINE_LEN];
     struct line_s *p = line;
@@ -348,18 +353,17 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int i;
     int utf8lag = 0;
 
-    unsigned long sl,el;
-    int stat;
+    unsigned long cur_line = 0;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
-    start_col_real = (col =
-		      (int) edit_move_forward3 (edit, b, 0,
-						q)) + edit->start_col;
+    start_col_real = (col = (int) edit_move_forward3 (edit, b, 0,
+				  q)) + edit->start_col;
     c1 = min (edit->column1, edit->column2);
     c2 = max (edit->column1, edit->column2);
-    unsigned long cur_line = edit->start_line + row;
+
     if ( option_line_status ) {
+        cur_line = edit->start_line + row;
         if ( cur_line <= edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
         } else {
@@ -368,8 +372,19 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR)){
             g_snprintf (line_stat, 2, "*");
         }
-        if (collapse_query (edit, cur_line, &sl, &el, &stat)){
-            g_snprintf (line_stat, 2, "+");
+        switch ( collapse_state ) {
+        case -1:
+            line_stat[0] = '-';
+            break;
+        case 1:
+            line_stat[0] = '+';
+            break;
+        case 2:
+            line_stat[0] = '|';
+            break;
+        case 3:
+            line_stat[0] = '\\';
+            break;
         }
     }
     if (col + 16 > -edit->start_col) {
@@ -559,7 +574,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 static void edit_draw_this_char (WEdit * edit, long curs, long row)
 {
     int b = edit_bol (edit, curs);
-    edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1);
+    edit_draw_this_line (edit, b, row, 0, edit->num_widget_columns - 1, 0);
 }
 
 /* cursor must be in screen for other than REDRAW_PAGE passed in force */
@@ -573,9 +588,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     int force = edit->force;
     long b;
-    int collapse_start = 300;
-    int collapse_end = 500;
-
+    int collapse_header = 0;
+    unsigned int count_collapsed_lines = 0;
+    unsigned long sline = 0;
+    unsigned long eline = 0;
+    int collapsed = 0;
+    int collapse_state = 0;
+    unsigned long cur_line;
 /*
  * If the position of the page has not moved then we can draw the cursor
  * character only.  This will prevent line flicker when using arrow keys.
@@ -593,7 +612,31 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    while (row <= end_row) {
 		if (key_pending (edit))
 		    goto exit_render;
-		edit_draw_this_line (edit, b, row, start_column, end_column);
+		if ( !collapse_header ) {
+		    cur_line = edit->start_line + row;
+		    collapse_header = collapse_query (edit, cur_line,
+						      &sline, &eline,
+						      &collapsed);
+		    if ( collapse_header ) {
+			count_collapsed_lines = sline - eline;
+			if ( collapsed ) {
+			    collapse_state = -1; //collapsed "+"
+			} else {
+			    collapse_state = 1; //elapsed "-"
+			}
+		    }
+		}
+		if ( count_collapsed_lines > 1 ) {
+		    count_collapsed_lines--;
+		    collapse_state = 2; //in middle
+		} else if ( count_collapsed_lines == 1 ) {
+		    count_collapsed_lines--;
+		    collapse_state = 3; //last collapsed line
+		    collapse_header = 0;
+		}
+		if (( !collapse_header ) || (( collapse_header ) && ( !collapsed ))) {
+		    edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
+		}
 		row++;
 		b = edit_move_forward (edit, b, 1, 0);
 	    }
@@ -605,10 +648,37 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    long upto = curs_row - 1 <= end_row ? curs_row - 1 : end_row;
 		    row = start_row;
 		    b = edit->start_display;
+		    collapse_state = 0;
 		    while (row <= upto) {
 			if (key_pending (edit))
 			    goto exit_render;
-			edit_draw_this_line (edit, b, row, start_column, end_column);
+			if ( !collapse_header ) {
+			    cur_line = edit->start_line + row;
+			    collapse_header = collapse_query (edit, cur_line,
+							      &sline, &eline,
+							      &collapsed);
+			    if ( collapse_header ) {
+			        count_collapsed_lines = sline - eline;
+			        if ( collapsed ) {
+			            collapse_state = -1; //collapsed "+"
+			        } else {
+			            collapse_state = 1; //elapsed "-"
+			        }
+			    }
+			}
+			if ( count_collapsed_lines > 1 ) {
+			    count_collapsed_lines--;
+			    collapse_state = 2; //in middle
+			} else if ( count_collapsed_lines == 1 ) {
+			    count_collapsed_lines--;
+			    collapse_state = 3; //last collapsed line
+			    collapse_header = 0;
+			}
+			if (( !collapse_header ) || (( collapse_header ) && ( !collapsed ))) {
+			    edit_draw_this_line (edit, b, row, start_column, end_column,
+						 collapse_state);
+			}
+			row++;
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
 		}
@@ -618,7 +688,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    if (curs_row >= start_row && curs_row <= end_row) {
 		if (key_pending (edit))
 		    goto exit_render;
-		edit_draw_this_line (edit, b, curs_row, start_column, end_column);
+		edit_draw_this_line (edit, b, curs_row, start_column, end_column, 0);
 	    }
 	    if (force & REDRAW_AFTER_CURSOR) {
 		if (end_row > curs_row) {
@@ -627,7 +697,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    while (row <= end_row) {
 			if (key_pending (edit))
 			    goto exit_render;
-		        edit_draw_this_line (edit, b, row, start_column, end_column);
+		        edit_draw_this_line (edit, b, row, start_column, end_column, 0);
 		        row++;
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
@@ -639,7 +709,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
 			goto exit_render;
-		    edit_draw_this_line (edit, b, row, start_column, end_column);
+		    edit_draw_this_line (edit, b, row, start_column, end_column, 0);
 		}
 	    }
 	    if (force & REDRAW_LINE_BELOW && row < edit->num_widget_lines - 1) {
@@ -649,7 +719,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
 			goto exit_render;
-		    edit_draw_this_line (edit, b, row, start_column, end_column);
+		    edit_draw_this_line (edit, b, row, start_column, end_column, 0);
 		}
 	    }
 	}
