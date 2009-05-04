@@ -239,6 +239,15 @@ void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
+struct collapsed_lines *collapsed_find (WEdit * edit, int start_line);
+void collapsed_insert (WEdit *edit,
+                       const unsigned long start_line,
+                       const unsigned long end_line, int state);
+int collapsed_query (WEdit * edit, const unsigned long line,
+                     unsigned long *start_line,
+                     unsigned long *end_line,
+                     int *state);
+
 int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
 void edit_insert_indent (WEdit *edit, int indent);

@@ -217,3 +217,126 @@ void book_mark_dec (WEdit * edit, int line)
 	}
     }
 }
+
+
+/*
+ *****************************************************************************
+ * collapsed lines algorithm
+ *
+ *****************************************************************************
+ */
+
+/* note, if there is more than one collapsed lines on a line, then they are
+   appended after each other and the last one is always the one found
+   by collapsed_found() i.e. last in is the one seen */
+
+static inline struct collapsed_lines *double_collapsed (WEdit * edit, struct collapsed_lines *p)
+{
+    (void) edit;
+
+    if (p->next)
+	while (p->next->start_line == p->start_line)
+	    p = p->next;
+    return p;
+}
+
+/* returns the first collapsed region on or before this line */
+struct collapsed_lines *collapsed_find (WEdit * edit, int start_line)
+{
+    struct collapsed_lines *p;
+    if (!edit->collapsed) {
+/* must have an imaginary top bookmark at line -1 to make things less complicated  */
+	edit->collapsed = g_malloc0 (sizeof (struct collapsed_lines));
+	edit->collapsed->start_line = -1;
+	return edit->collapsed;
+    }
+    for (p = edit->collapsed; p; p = p->next) {
+	if (p->start_line > start_line)
+	    break;		/* gone past it going downward */
+	if (p->start_line <= start_line) {
+	    if (p->next) {
+		if (p->next->start_line > start_line) {
+		    edit->collapsed = p;
+		    return double_collapsed (edit, p);
+		}
+	    } else {
+		edit->collapsed = p;
+		return double_collapsed (edit, p);
+	    }
+	}
+    }
+    for (p = edit->collapsed; p; p = p->prev) {
+	if (p->next)
+	    if (p->next->start_line <= start_line)
+		break;		/* gone past it going upward */
+	if (p->start_line <= start_line) {
+	    if (p->next) {
+		if (p->next->start_line > start_line) {
+		    edit->collapsed = p;
+		    return double_collapsed (edit, p);
+		}
+	    } else {
+		edit->collapsed = p;
+		return double_collapsed (edit, p);
+	    }
+	}
+    }
+    return 0;			/* can't get here */
+}
+
+
+/* insert a collapsed at this line */
+void
+collapsed_insert (WEdit *edit,
+                  const unsigned long start_line,
+                  const unsigned long end_line, int state)
+{
+    struct collapsed_lines *p, *q;
+    p = collapsed_find (edit, start_line);
+    if (p->start_line == start_line) {
+        /* already exists */
+    }
+    if (p->start_line > start_line && p->end_line > end_line) {
+        /* incorrect region */
+    }
+
+    /* create list entry */
+    q = g_malloc0 (sizeof (struct collapsed_lines));
+    q->start_line = start_line;
+    q->end_line = end_line;
+    q->state = state;
+    q->next = p->next;
+    /* insert into list */
+    q->prev = p;
+    if (p->next)
+	p->next->prev = q;
+    p->next = q;
+}
+
+/* returns true if a collapsed exists at this line
+ * return start_line, end_line if found region
+ *
+ */
+int collapsed_query (WEdit * edit, const unsigned long line,
+                     unsigned long *start_line,
+                     unsigned long *end_line,
+                     int *state)
+{
+    struct collapsed_lines *p;
+
+    *start_line = 0;
+    *end_line = 0;
+    *state = 0;
+
+    if (!edit->collapsed)
+        return 0;
+    for (p = collapsed_find (edit, line); p; p = p->prev) {
+        if (p->start_line != line)
+            return 0;
+        *start_line = p->start_line;
+        *end_line = p->end_line;
+        *state = p->state;
+        return 1;
+    }
+    return 0;
+}

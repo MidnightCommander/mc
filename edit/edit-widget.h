@@ -18,6 +18,14 @@ struct _book_mark {
     struct _book_mark *prev;
 };
 
+struct collapsed_lines {
+    int start_line;			/* first collpsed line number */
+    int end_line;			/* end collapsed line number */
+    int state;				/* 1 - collapsed; 0 - elapsed  */
+    struct collapsed_lines *next;
+    struct collapsed_lines *prev;
+};
+
 struct syntax_rule {
     unsigned short keyword;
     unsigned char end;
@@ -97,6 +105,7 @@ struct WEdit {
     long line_offsets[N_LINE_CACHES];
 
     struct _book_mark *book_mark;
+    struct collapsed_lines *collapsed;
 
     /* undo stack and pointers */
     unsigned long stack_pointer;
