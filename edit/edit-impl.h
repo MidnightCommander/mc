@@ -145,8 +145,7 @@ extern const char VERTICAL_MAGIC[5];
 extern int enable_show_tabs_tws;
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-struct WMenu *edit_create_menu (void);
-void edit_done_menu (struct WMenu *wmenu);
+struct WMenuBar *edit_create_menu (void);
 void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
@@ -299,8 +298,7 @@ extern int edit_stack_iterator;
 extern edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
 
 extern WEdit *wedit;
-struct WMenu;
-extern struct WMenu *edit_menubar;
+extern struct WMenuBar *edit_menubar;
 
 extern int option_line_state_width;
 

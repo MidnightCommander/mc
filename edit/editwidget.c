@@ -51,7 +51,7 @@
 #include "../src/menu.h"		/* menubar_new() */
 
 WEdit *wedit;
-struct WMenu *edit_menubar;
+struct WMenuBar *edit_menubar;
 
 int column_highlighting = 0;
 
@@ -212,8 +212,6 @@ edit_file (const char *_file, int line)
     add_widget (edit_dlg, edit_menubar);
 
     run_dlg (edit_dlg);
-
-    edit_done_menu (edit_menubar);		/* editmenu.c */
 
     destroy_dlg (edit_dlg);
 

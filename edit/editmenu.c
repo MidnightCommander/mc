@@ -373,272 +373,290 @@ menu_declare_forward (void)
     menu_cmd (CK_Load_Next_File);
 }
 
-static menu_entry FileMenu[] =
+static GPtrArray *
+create_file_menu (void)
 {
-    {' ', N_("&Open file..."),         NULL_HOTKEY, menu_load_cmd},
-    {' ', N_("&New              C-n"), NULL_HOTKEY, menu_new_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Save              F2"), NULL_HOTKEY, menu_save_cmd},
-    {' ', N_("Save &as...       F12"), NULL_HOTKEY, menu_save_as_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Insert file...   F15"), NULL_HOTKEY, menu_insert_file_cmd},
-    {' ', N_("Copy to &file...  C-f"), NULL_HOTKEY, menu_cut_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&User menu...     F11"), NULL_HOTKEY, menu_user_menu_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("A&bout...            "), NULL_HOTKEY, edit_about_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Quit             F10"), NULL_HOTKEY, menu_quit_cmd}
- };
+    GPtrArray *entries = g_ptr_array_new ();
 
-static menu_entry FileMenuEmacs[] =
+    g_ptr_array_add (entries, menu_entry_create (_("&Open file..."),         menu_load_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&New              C-n"), menu_new_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Save              F2"), menu_save_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Save &as...       F12"), menu_save_as_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Insert file...   F15"), menu_insert_file_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Copy to &file...  C-f"), menu_cut_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&User menu...     F11"), menu_user_menu_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("A&bout...            "), edit_about_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Quit             F10"), menu_quit_cmd));
+
+    return entries;
+}
+
+static GPtrArray *
+create_file_menu_emacs (void)
 {
-    {' ', N_("&Open file..."),         NULL_HOTKEY, menu_load_cmd},
-    {' ', N_("&New            C-x k"), NULL_HOTKEY, menu_new_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Save              F2"), NULL_HOTKEY, menu_save_cmd},
-    {' ', N_("Save &as...       F12"), NULL_HOTKEY, menu_save_as_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Insert file...   F15"), NULL_HOTKEY, menu_insert_file_cmd},
-    {' ', N_("Copy to &file...     "), NULL_HOTKEY, menu_cut_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&User menu...     F11"), NULL_HOTKEY, menu_user_menu_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("A&bout...            "), NULL_HOTKEY, edit_about_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Quit             F10"), NULL_HOTKEY, menu_quit_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-static menu_entry EditMenu[] =
+    g_ptr_array_add (entries, menu_entry_create (_("&Open file..."),         menu_load_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&New            C-x k"), menu_new_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Save              F2"), menu_save_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Save &as...       F12"), menu_save_as_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Insert file...   F15"), menu_insert_file_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Copy to &file...     "), menu_cut_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&User menu...     F11"), menu_user_menu_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("A&bout...            "), edit_about_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Quit             F10"), menu_quit_cmd));
+
+    return entries;
+}
+
+static GPtrArray *
+create_edit_menu (void)
 {
-    {' ', N_("&Toggle mark                 F3"), NULL_HOTKEY, menu_mark_cmd},
-    {' ', N_("Mar&k columns              S-F3"), NULL_HOTKEY, menu_markcol_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Toggle &ins/overw           Ins"), NULL_HOTKEY, menu_ins_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Copy                        F5"), NULL_HOTKEY, menu_copy_cmd},
-    {' ', N_("&Move                        F6"), NULL_HOTKEY, menu_move_cmd},
-    {' ', N_("&Delete                      F8"), NULL_HOTKEY, menu_delete_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("C&opy to clipfile         C-Ins"), NULL_HOTKEY, menu_xstore_cmd},
-    {' ', N_("C&ut to clipfile          S-Del"), NULL_HOTKEY, menu_xcut_cmd},
-    {' ', N_("&Paste from clipfile      S-Ins"), NULL_HOTKEY, menu_xpaste_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Toggle bookmar&k            M-k"), NULL_HOTKEY, menu_toggle_bookmark_cmd},
-    {' ', N_("&Next bookmark              M-j"), NULL_HOTKEY, menu_next_bookmark_cmd},
-    {' ', N_("Pre&v bookmark              M-i"), NULL_HOTKEY, menu_prev_bookmark_cmd},
-    {' ', N_("&Flush bookmark             M-o"), NULL_HOTKEY, menu_flush_bookmark_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Undo                       C-u"), NULL_HOTKEY, menu_undo_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Beginning               C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
-    {' ', N_("&End                     C-PgDn"), NULL_HOTKEY, menu_end_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-static menu_entry EditMenuEmacs[] =
+    g_ptr_array_add (entries, menu_entry_create (_("&Toggle Mark       F3"), menu_mark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Mark Columns    S-F3"), menu_markcol_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle &ins/overw Ins"), menu_ins_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Copy              F5"), menu_copy_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Move              F6"), menu_move_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Delete            F8"), menu_delete_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("C&opy to clipfile         C-Ins"), menu_xstore_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("C&ut to clipfile          S-Del"), menu_xcut_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Paste from clipfile      S-Ins"), menu_xpaste_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle bookmar&k            M-k"), menu_toggle_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Next bookmark              M-j"), menu_next_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Pre&v bookmark              M-i"), menu_prev_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Flush bookmark             M-o"), menu_flush_bookmark_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Undo                       C-u"), menu_undo_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Beginning     C-PgUp"), menu_beginning_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&End           C-PgDn"), menu_end_cmd));
+
+    return entries;
+}
+
+static GPtrArray *
+create_edit_menu_emacs (void)
 {
-    {' ', N_("&Toggle mark                 F3"), NULL_HOTKEY, menu_mark_cmd},
-    {' ', N_("Mar&k columns              S-F3"), NULL_HOTKEY, menu_markcol_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Toggle &ins/overw           Ins"), NULL_HOTKEY, menu_ins_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Copy                        F5"), NULL_HOTKEY, menu_copy_cmd},
-    {' ', N_("&Move                        F6"), NULL_HOTKEY, menu_move_cmd},
-    {' ', N_("&Delete                      F8"), NULL_HOTKEY, menu_delete_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("C&opy to clipfile           M-w"), NULL_HOTKEY, menu_xstore_cmd},
-    {' ', N_("C&ut to clipfile            C-w"), NULL_HOTKEY, menu_xcut_cmd},
-    {' ', N_("&Paste from clipfile        C-y"), NULL_HOTKEY, menu_xpaste_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Toggle bookmar&k               "), NULL_HOTKEY, menu_toggle_bookmark_cmd},
-    {' ', N_("&Next bookmark                 "), NULL_HOTKEY, menu_next_bookmark_cmd},
-    {' ', N_("Pre&v bookmark                 "), NULL_HOTKEY, menu_prev_bookmark_cmd},
-    {' ', N_("&Flush bookmark                "), NULL_HOTKEY, menu_flush_bookmark_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Undo                       C-u"), NULL_HOTKEY, menu_undo_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Beginning               C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
-    {' ', N_("&End                     C-PgDn"), NULL_HOTKEY, menu_end_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-static menu_entry SearReplMenu[] =
+    g_ptr_array_add (entries, menu_entry_create (_("&Toggle mark                 F3"), menu_mark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Mar&k columns              S-F3"), menu_markcol_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle &ins/overw           Ins"), menu_ins_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Copy                        F5"), menu_copy_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Move                        F6"), menu_move_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Delete                      F8"), menu_delete_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("C&opy to clipfile           M-w"), menu_xstore_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("C&ut to clipfile            C-w"), menu_xcut_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Paste from clipfile        C-y"), menu_xpaste_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle bookmar&k               "), menu_toggle_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Next bookmark                 "), menu_next_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Pre&v bookmark                 "), menu_prev_bookmark_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Flush bookmark                "), menu_flush_bookmark_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Undo                       C-u"), menu_undo_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Beginning               C-PgUp"), menu_beginning_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&End                     C-PgDn"), menu_end_cmd));
+
+    return entries;
+}
+
+static GPtrArray *
+create_search_replace_menu (void)
 {
-    {' ', N_("&Search...         F7"), NULL_HOTKEY, menu_search_cmd},
-    {' ', N_("Search &again     F17"), NULL_HOTKEY, menu_search_again_cmd},
-    {' ', N_("&Replace...        F4"), NULL_HOTKEY, menu_replace_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-#define SearReplMenuEmacs SearReplMenu
+    g_ptr_array_add (entries, menu_entry_create (_("&Search...         F7"), menu_search_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Search &again     F17"), menu_search_again_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Replace...        F4"), menu_replace_cmd));
 
-static menu_entry CmdMenu[] =
+    return entries;
+}
+
+static GPtrArray *
+create_command_menu (void)
 {
-    {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
-    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
-    {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Find declaration      A-Enter"), NULL_HOTKEY, menu_find_declare},
-    {' ', N_("Back from declaration     M--"), NULL_HOTKEY, menu_declare_back},
-    {' ', N_("Forward to declaration    M-+"), NULL_HOTKEY, menu_declare_forward},
+    GPtrArray *entries = g_ptr_array_new ();
+
+    g_ptr_array_add (entries, menu_entry_create (_("&Go to line...            M-l"), menu_goto_line));
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle li&ne state        M-n"), menu_toggle_line_state));
+    g_ptr_array_add (entries, menu_entry_create (_("Go to matching &bracket   M-b"), menu_goto_bracket));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Find declaration      A-Enter"), menu_find_declare));
+    g_ptr_array_add (entries, menu_entry_create (_("Back from declaration     M--"), menu_declare_back));
+    g_ptr_array_add (entries, menu_entry_create (_("Forward to declaration    M-+"), menu_declare_forward));
 #ifdef HAVE_CHARSET
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Encod&ing...             M-e"), NULL_HOTKEY, menu_select_codepage_cmd},
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Encod&ing...             M-e"), menu_select_codepage_cmd));
 #endif
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Refresh screen          C-l"), NULL_HOTKEY, menu_refresh_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Start record macro      C-r"), NULL_HOTKEY, menu_begin_record_cmd},
-    {' ', N_("&Finish record macro...  C-r"), NULL_HOTKEY, menu_end_record_cmd},
-    {' ', N_("&Execute macro...   C-a, KEY"), NULL_HOTKEY, menu_exec_macro_cmd},
-    {' ', N_("Delete macr&o...            "), NULL_HOTKEY, menu_exec_macro_delete_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
-    {' ', N_("'ispell' s&pell check    C-p"), NULL_HOTKEY, menu_ispell_cmd},
-    {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
-    {' ', N_("Paste o&utput of...      M-u"), NULL_HOTKEY, menu_ext_cmd},
-    {' ', N_("E&xternal Formatter      F19"), NULL_HOTKEY, menu_c_form_cmd},
-    {' ', N_("&Mail...                    "), NULL_HOTKEY, menu_mail_cmd}
-};
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Insert &literal...       C-q"),  menu_lit_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Refresh screen          C-l"),  menu_refresh_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Start record macro      C-r"),  menu_begin_record_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Finish record macro...  C-r"),  menu_end_record_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Execute macro...   C-a, KEY"),  menu_exec_macro_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Delete macr&o...            "),  menu_exec_macro_delete_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Insert &date/time           "),  menu_date_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Format p&aragraph        M-p"),  menu_format_paragraph));
+    g_ptr_array_add (entries, menu_entry_create (_("'ispell' s&pell check    C-p"),  menu_ispell_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Sor&t...                 M-t"),  menu_sort_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Paste o&utput of...      M-u"),  menu_ext_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("E&xternal Formatter      F19"),  menu_c_form_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Mail...                    "),  menu_mail_cmd));
 
-static menu_entry CmdMenuEmacs[] =
+    return entries;
+}
+
+static GPtrArray *
+create_command_menu_emacs (void)
 {
-    {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
-    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
-    {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Refresh screen          C-l"), NULL_HOTKEY, menu_refresh_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Start record macro      C-r"), NULL_HOTKEY, menu_begin_record_cmd},
-    {' ', N_("&Finish record macro...  C-r"), NULL_HOTKEY, menu_end_record_cmd},
-    {' ', N_("&Execute macro... C-x e, KEY"), NULL_HOTKEY, menu_exec_macro_cmd},
-    {' ', N_("Delete macr&o...            "), NULL_HOTKEY, menu_exec_macro_delete_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Insert &date/time           "), NULL_HOTKEY, menu_date_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Format p&aragraph        M-p"), NULL_HOTKEY, menu_format_paragraph},
-    {' ', N_("'ispell' s&pell check    M-$"), NULL_HOTKEY, menu_ispell_cmd},
-    {' ', N_("Sor&t...                 M-t"), NULL_HOTKEY, menu_sort_cmd},
-    {' ', N_("Paste o&utput of...      M-u"), NULL_HOTKEY, menu_ext_cmd},
-    {' ', N_("E&xternal Formatter      F19"), NULL_HOTKEY, menu_c_form_cmd},
-    {' ', N_("&Mail...                    "), NULL_HOTKEY, menu_mail_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-static menu_entry OptMenu[] =
+    g_ptr_array_add (entries, menu_entry_create (_("&Go to line...            M-l"), menu_goto_line));
+    g_ptr_array_add (entries, menu_entry_create (_("Toggle li&ne state        M-n"), menu_toggle_line_state));
+    g_ptr_array_add (entries, menu_entry_create (_("Go to matching &bracket   M-b"), menu_goto_bracket));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Find declaration      A-Enter"), menu_find_declare));
+    g_ptr_array_add (entries, menu_entry_create (_("Back from declaration     M--"), menu_declare_back));
+    g_ptr_array_add (entries, menu_entry_create (_("Forward to declaration    M-+"), menu_declare_forward));
+#ifdef HAVE_CHARSET
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Encod&ing...             C-t"), menu_select_codepage_cmd));
+#endif
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Insert &literal...       C-q"), menu_lit_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Refresh screen          C-l"), menu_refresh_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("&Start record macro      C-r"), menu_begin_record_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Finish record macro...  C-r"), menu_end_record_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Execute macro... C-x e, KEY"), menu_exec_macro_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Delete macr&o...            "), menu_exec_macro_delete_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Insert &date/time           "), menu_date_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Format p&aragraph        M-p"), menu_format_paragraph));
+    g_ptr_array_add (entries, menu_entry_create (_("'ispell' s&pell check    M-$"), menu_ispell_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Sor&t...                 M-t"), menu_sort_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Paste o&utput of...      M-u"), menu_ext_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("E&xternal Formatter      F19"), menu_c_form_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Mail...                    "), menu_mail_cmd));
+
+    return entries;
+}
+
+static GPtrArray *
+create_options_menu (void)
 {
-    {' ', N_("&General...  "), NULL_HOTKEY, edit_options_dialog},
-    {' ', N_("&Save mode..."), NULL_HOTKEY, menu_save_mode_cmd},
-    {' ', N_("Learn &Keys..."), NULL_HOTKEY, learn_keys},
-    {' ', N_("Syntax &Highlighting..."), NULL_HOTKEY, edit_syntax_dialog},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("S&yntax file"), NULL_HOTKEY, menu_edit_syntax_file_cmd},
-    {' ', N_("&Menu file"), NULL_HOTKEY, menu_edit_menu_file_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Save setu&p"), NULL_HOTKEY, save_setup_cmd}
-};
+    GPtrArray *entries = g_ptr_array_new ();
 
-#define OptMenuEmacs OptMenu
+    g_ptr_array_add (entries, menu_entry_create (_("&General...  "),           edit_options_dialog));
+    g_ptr_array_add (entries, menu_entry_create (_("&Save mode..."),           menu_save_mode_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("Learn &Keys..."),          learn_keys));
+    g_ptr_array_add (entries, menu_entry_create (_("Syntax &Highlighting..."), edit_syntax_dialog));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("S&yntax file"),            menu_edit_syntax_file_cmd));
+    g_ptr_array_add (entries, menu_entry_create (_("&Menu file"),              menu_edit_menu_file_cmd));
+    g_ptr_array_add (entries, menu_separator_create ());
+    g_ptr_array_add (entries, menu_entry_create (_("Save setu&p..."),          save_setup_cmd));
 
-#define menu_entries(x) sizeof(x)/sizeof(menu_entry)
-
-#define N_menus 5
-
-static Menu *EditMenuBar [N_menus];
-
-static void
-edit_init_menu_normal (void)
-{
-    EditMenuBar[0] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu),
-				    "[Internal File Editor]");
-    EditMenuBar[1] = create_menu (_(" Edit "), EditMenu, menu_entries (EditMenu),
-				    "[Internal File Editor]");
-    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenu, menu_entries (SearReplMenu),
-				    "[Internal File Editor]");
-    EditMenuBar[3] = create_menu (_(" Command "), CmdMenu, menu_entries (CmdMenu),
-				    "[Internal File Editor]");
-    EditMenuBar[4] = create_menu (_(" Options "), OptMenu, menu_entries (OptMenu),
-				    "[Internal File Editor]");
+    return entries;
 }
 
 static void
-edit_init_menu_emacs (void)
+edit_init_menu_normal (struct WMenuBar *menubar)
 {
-    EditMenuBar[0] = create_menu (_(" File "), FileMenuEmacs, menu_entries (FileMenuEmacs),
-				    "[Internal File Editor]");
-    EditMenuBar[1] = create_menu (_(" Edit "), EditMenuEmacs, menu_entries (EditMenuEmacs),
-				    "[Internal File Editor]");
-    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenuEmacs, menu_entries (SearReplMenuEmacs),
-				    "[Internal File Editor]");
-    EditMenuBar[3] = create_menu (_(" Command "), CmdMenuEmacs, menu_entries (CmdMenuEmacs),
-				    "[Internal File Editor]");
-    EditMenuBar[4] = create_menu (_(" Options "), OptMenuEmacs, menu_entries (OptMenuEmacs),
-				    "[Internal File Editor]");
+    menubar_add_menu (menubar, create_menu (_(" &File "),      create_file_menu (),           "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Edit "),      create_edit_menu (),           "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Sear/Repl "), create_search_replace_menu (), "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Command "),   create_command_menu (),        "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Options "),   create_options_menu (),        "[Internal File Editor]"));
 }
 
 static void
-edit_init_menu (void)
+edit_init_menu_emacs (struct WMenuBar *menubar)
+{
+    menubar_add_menu (menubar, create_menu (_(" &File "),      create_file_menu_emacs (),     "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Edit "),      create_edit_menu_emacs (),     "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Sear/Repl "), create_search_replace_menu (), "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Command "),   create_command_menu_emacs (),  "[Internal File Editor]"));
+    menubar_add_menu (menubar, create_menu (_(" &Options "),   create_options_menu (),        "[Internal File Editor]"));
+}
+
+static void
+edit_init_menu (struct WMenuBar *menubar)
 {
     switch (edit_key_emulation) {
     default:
     case EDIT_KEY_EMULATION_NORMAL:
-	edit_init_menu_normal ();
+	edit_init_menu_normal (menubar);
 	break;
     case EDIT_KEY_EMULATION_EMACS:
-	edit_init_menu_emacs ();
+	edit_init_menu_emacs (menubar);
 	break;
     }
 }
 
-struct WMenu *
+struct WMenuBar *
 edit_create_menu (void)
 {
-    edit_init_menu ();
-    return menubar_new (0, 0, COLS, EditMenuBar, N_menus);
-}
+    struct WMenuBar *menubar;
 
-void
-edit_done_menu (struct WMenu *wmenu)
-{
-    int i;
-    for (i = 0; i < N_menus; i++)
-	destroy_menu (wmenu->menu[i]);
+    menubar = menubar_new (0, 0, COLS, NULL);
+    edit_init_menu (menubar);
+    return menubar;
 }
-
 
 void
 edit_reload_menu (void)
 {
-    edit_done_menu (edit_menubar);
-    edit_init_menu ();
-    menubar_arrange (edit_menubar);
+    menubar_set_menu (edit_menubar, NULL);
+    edit_init_menu (edit_menubar);
 }
 
 
 static void
 edit_drop_menu_cmd (WEdit *e, int which)
 {
-    if (edit_menubar->active)
+    if (edit_menubar->is_active)
 	return;
-    edit_menubar->active = 1;
-    edit_menubar->dropped = drop_menus;
-    if (which >= 0) {
+    edit_menubar->is_active = TRUE;
+    edit_menubar->is_dropped = (drop_menus != 0);
+    if (which >= 0)
 	edit_menubar->selected = which;
-    }
 
     edit_menubar->previous_widget = e->widget.parent->current->dlg_id;
     dlg_select_widget (edit_menubar);
 }
 
-
 void edit_menu_cmd (WEdit * e)
 {
     edit_drop_menu_cmd (e, -1);
 }
-
 
 int edit_drop_hotkey_menu (WEdit * e, int key)
 {
