@@ -114,6 +114,7 @@ static const edit_key_map_type common_key_map[] = {
     { ALT ('-'), CK_Load_Prev_File },
     { ALT ('='), CK_Load_Next_File },
     { ALT (KEY_BACKSPACE), CK_Delete_Word_Left },
+    { ALT ('n'), CK_Toggle_Line_Status },
 
     { XCTRL ('k'), CK_Delete_To_Line_End },
     { XCTRL ('l'), CK_Refresh },
@@ -124,6 +125,7 @@ static const edit_key_map_type common_key_map[] = {
     { XCTRL ('q'), CK_Insert_Literal },
     { XCTRL ('a'), CK_Execute_Macro },
     { XCTRL ('r'), CK_Begin_End_Macro },
+    { XCTRL ('e'), CK_Add_Collapse_Region },
 
     { KEY_F (1), CK_Help },
     { KEY_F (2), CK_Save },

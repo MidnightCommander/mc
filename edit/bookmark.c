@@ -230,7 +230,7 @@ void book_mark_dec (WEdit * edit, int line)
    appended after each other and the last one is always the one found
    by collapsed_found() i.e. last in is the one seen */
 
-static inline struct collapsed_lines *double_collapsed (WEdit * edit, struct collapsed_lines *p)
+static inline struct collapsed_lines *double_collapse (WEdit * edit, struct collapsed_lines *p)
 {
     (void) edit;
 
@@ -241,7 +241,7 @@ static inline struct collapsed_lines *double_collapsed (WEdit * edit, struct col
 }
 
 /* returns the first collapsed region on or before this line */
-struct collapsed_lines *collapsed_find (WEdit * edit, int start_line)
+struct collapsed_lines *collapse_find (WEdit * edit, int start_line)
 {
     struct collapsed_lines *p;
     if (!edit->collapsed) {
@@ -257,11 +257,11 @@ struct collapsed_lines *collapsed_find (WEdit * edit, int start_line)
 	    if (p->next) {
 		if (p->next->start_line > start_line) {
 		    edit->collapsed = p;
-		    return double_collapsed (edit, p);
+		    return double_collapse (edit, p);
 		}
 	    } else {
 		edit->collapsed = p;
-		return double_collapsed (edit, p);
+		return double_collapse (edit, p);
 	    }
 	}
     }
@@ -273,11 +273,11 @@ struct collapsed_lines *collapsed_find (WEdit * edit, int start_line)
 	    if (p->next) {
 		if (p->next->start_line > start_line) {
 		    edit->collapsed = p;
-		    return double_collapsed (edit, p);
+		    return double_collapse (edit, p);
 		}
 	    } else {
 		edit->collapsed = p;
-		return double_collapsed (edit, p);
+		return double_collapse (edit, p);
 	    }
 	}
     }
@@ -287,12 +287,13 @@ struct collapsed_lines *collapsed_find (WEdit * edit, int start_line)
 
 /* insert a collapsed at this line */
 void
-collapsed_insert (WEdit *edit,
+collapse_insert (WEdit *edit,
                   const unsigned long start_line,
                   const unsigned long end_line, int state)
 {
     struct collapsed_lines *p, *q;
-    p = collapsed_find (edit, start_line);
+    mc_log("collapse_insert: %ld, %ld\n", start_line, end_line);
+    p = collapse_find (edit, start_line);
     if (p->start_line == start_line) {
         /* already exists */
     }
@@ -317,7 +318,7 @@ collapsed_insert (WEdit *edit,
  * return start_line, end_line if found region
  *
  */
-int collapsed_query (WEdit * edit, const unsigned long line,
+int collapse_query (WEdit * edit, const unsigned long line,
                      unsigned long *start_line,
                      unsigned long *end_line,
                      int *state)
@@ -330,7 +331,7 @@ int collapsed_query (WEdit * edit, const unsigned long line,
 
     if (!edit->collapsed)
         return 0;
-    for (p = collapsed_find (edit, line); p; p = p->prev) {
+    for (p = collapse_find (edit, line); p; p = p->prev) {
         if (p->start_line != line)
             return 0;
         *start_line = p->start_line;

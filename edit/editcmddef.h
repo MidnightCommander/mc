@@ -101,6 +101,8 @@
 #define CK_User_Menu		425
 #define CK_Find_Definition	426
 
+#define CK_Add_Collapse_Region	428
+
 /* application control */
 #define CK_Save_Desktop		451
 #define CK_New_Window		452
@@ -112,6 +114,7 @@
 #define CK_Maximize		458
 
 #define CK_Toggle_Syntax	480
+#define CK_Toggle_Line_Status	490
 
 /* macro */
 #define CK_Begin_Record_Macro	501

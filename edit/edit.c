@@ -2667,6 +2667,22 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_mark_cmd (edit, 1);
 	break;
 
+    case CK_Toggle_Line_Status:
+	option_line_status ^= 1;
+	if ( option_line_status ) {
+	    option_line_status_width = LINE_STATUS_WIDTH;
+	} else {
+	    option_line_status_width = 0;
+	}
+	edit->force |= REDRAW_PAGE;
+	break;
+
+    case CK_Add_Collapse_Region:
+	if ( edit->mark1 != edit->mark2 ) {
+	    collapse_insert (edit, edit->curs_line, edit->curs_line + 10, 1);
+	}
+	break;
+
     case CK_Toggle_Bookmark:
 	book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
 	if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))

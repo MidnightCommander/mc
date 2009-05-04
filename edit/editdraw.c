@@ -348,6 +348,9 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int i;
     int utf8lag = 0;
 
+    unsigned long sl,el;
+    int stat;
+
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col =
@@ -364,6 +367,9 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         }
         if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR)){
             g_snprintf (line_stat, 2, "*");
+        }
+        if (collapse_query (edit, cur_line, &sl, &el, &stat)){
+            g_snprintf (line_stat, 2, "+");
         }
     }
     if (col + 16 > -edit->start_col) {
