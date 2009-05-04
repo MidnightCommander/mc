@@ -115,7 +115,7 @@ mc_search__get_char (mc_search_t * mc_search, const void *user_data, gsize curre
         return (mc_search->search_fn) (user_data, current_pos);
 
     data = (char *) user_data;
-    return (int) data[current_pos];
+    return (int) (unsigned char) data[current_pos];
 }
 
 /* --------------------------------------------------------------------------------------------- */
