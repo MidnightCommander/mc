@@ -146,7 +146,7 @@ static gboolean file_all_charsets_flag = FALSE;
 static gboolean file_case_sentitive = TRUE;
 
 static mc_search_t  *search_content_handle = NULL;
-static gboolean content_regexp_flag = TRUE;
+static gboolean content_regexp_flag = FALSE;
 static gboolean content_all_charsets_flag = FALSE;
 static gboolean content_case_sensitive = TRUE;
 
