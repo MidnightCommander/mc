@@ -357,12 +357,13 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     c2 = max (edit->column1, edit->column2);
     unsigned long cur_line = edit->start_line + row;
     if ( option_line_status ) {
-        if ( cur_line < edit->total_lines ) {
-            g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
-        } else if ( cur_line == edit->total_lines ) {
-            g_snprintf(line_stat, LINE_STATUS_WIDTH + 1, "eof");
+        if ( cur_line <= edit->total_lines ) {
+            g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
         } else {
-            line_stat[0] = '\0';
+            g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "        ");
+        }
+        if (book_mark_query_color (edit, cur_line, BOOK_MARK_COLOR)){
+            g_snprintf (line_stat, 2, "*");
         }
     }
     if (col + 16 > -edit->start_col) {
@@ -584,13 +585,10 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    row = start_row;
 	    b = edit_move_forward (edit, edit->start_display, start_row, 0);
 	    while (row <= end_row) {
-	        mc_log("b=%ld\n", b);
 		if (key_pending (edit))
 		    goto exit_render;
-		//if (b<300 || b>600) {
-		    edit_draw_this_line (edit, b, row, start_column, end_column);
-		    row++;
-		//}
+		edit_draw_this_line (edit, b, row, start_column, end_column);
+		row++;
 		b = edit_move_forward (edit, b, 1, 0);
 	    }
 	} else {
@@ -623,10 +621,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    while (row <= end_row) {
 			if (key_pending (edit))
 			    goto exit_render;
-			//if (b<300 || b>600) {
-		            edit_draw_this_line (edit, b, row, start_column, end_column);
-		            row++;
-		        //}
+		        edit_draw_this_line (edit, b, row, start_column, end_column);
+		        row++;
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
 		}
