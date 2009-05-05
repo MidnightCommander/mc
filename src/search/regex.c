@@ -73,20 +73,18 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
         spec_chr_len = strlen (*spec_chr);
         if (!strncmp (tmp_regex_str, *spec_chr, spec_chr_len)) {
             if (!mc_search__regex_is_char_escaped (regex_str->str, tmp_regex_str - 1)) {
-        	if (!strncmp("\\x",*spec_chr, spec_chr_len))
-        	{
-        	    if (*(tmp_regex_str+spec_chr_len) == '{')
-        	    {
-        		while((spec_chr_len < regex_str->len - *offset) && *(tmp_regex_str+spec_chr_len) != '}')
-        		    spec_chr_len++;
-			if (*(tmp_regex_str+spec_chr_len) == '}')
-			    spec_chr_len++;
-        	    } else
-        		spec_chr_len+=2;
-        	}
+                if (!strncmp ("\\x", *spec_chr, spec_chr_len)) {
+                    if (*(tmp_regex_str + spec_chr_len) == '{') {
+                        while ((spec_chr_len < regex_str->len - *offset)
+                               && *(tmp_regex_str + spec_chr_len) != '}')
+                            spec_chr_len++;
+                        if (*(tmp_regex_str + spec_chr_len) == '}')
+                            spec_chr_len++;
+                    } else
+                        spec_chr_len += 2;
+                }
                 g_string_append_len (copy_to, tmp_regex_str, spec_chr_len);
                 *offset += spec_chr_len;
-mc_log("%s\n",copy_to->str);
                 return TRUE;
             }
         }
