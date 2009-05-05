@@ -345,6 +345,8 @@ linux*)
     ;;
 esac
 
+AX_PATH_LIB_PCRE
+
 dnl
 dnl Check nroff and the options it supports
 dnl

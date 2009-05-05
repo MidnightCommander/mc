@@ -136,10 +136,17 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
     g_free (mc_search_cond->charset);
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    if (mc_search_cond->regex_str)
-        g_regex_unref (mc_search_cond->regex_str);
-
-#endif
+    if (mc_search_cond->regex_handle)
+        g_regex_unref (mc_search_cond->regex_handle);
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+    if (mc_search_cond->regex_handle)
+        free (mc_search_cond->regex_handle);
+#else /* HAVE_LIBPCRE */
+    if (mc_search_cond->regex_handle)
+        regfree (mc_search_cond->regex_handle);
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     g_free (mc_search_cond);
 }
@@ -203,9 +210,18 @@ mc_search_free (mc_search_t * mc_search)
 #if GLIB_CHECK_VERSION (2, 14, 0)
     if (mc_search->regex_match_info)
         g_match_info_free (mc_search->regex_match_info);
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+    if (mc_search->regex_match_info)
+        free (mc_search->regex_match_info);
+#else /* HAVE_LIBPCRE */
+    if (mc_search->regex_match_info)
+        g_free (mc_search->regex_match_info);
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+
     if (mc_search->regex_buffer != NULL)
         g_string_free (mc_search->regex_buffer, TRUE);
-#endif
 
     g_free (mc_search);
 }
@@ -230,7 +246,7 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
         g_match_info_free (mc_search->regex_match_info);
         mc_search->regex_match_info = NULL;
     }
-#endif
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     mc_search->error = MC_SEARCH_E_OK;
     if (mc_search->error_str) {
@@ -273,11 +289,7 @@ mc_search_is_type_avail (mc_search_type_t search_type)
         return TRUE;
         break;
     case MC_SEARCH_T_REGEX:
-#if ! GLIB_CHECK_VERSION (2, 14, 0)
-        return FALSE;
-#else
         return TRUE;
-#endif
         break;
     case MC_SEARCH_T_HEX:
     default:

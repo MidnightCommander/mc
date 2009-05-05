@@ -1,6 +1,6 @@
 SUBDIRS = search
 
-AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 localedir = $(datadir)/locale
 pkglibexecdir =		$(libexecdir)/@PACKAGE@

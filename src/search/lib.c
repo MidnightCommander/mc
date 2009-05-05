@@ -38,6 +38,8 @@
 
 char STR_E_NOTFOUND[] = N_(" Search string not found ");
 char STR_E_UNKNOWN_TYPE[] = N_(" Not implemented yet ");
+char STR_E_RPL_NOT_EQ_TO_FOUND[] = N_(" Num of replace tokens not equal to num of found tokens ");
+char STR_E_RPL_INVALID_TOKEN[] = N_(" Invalid token number %d ");
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -185,7 +187,7 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search__regex_is_char_escaped (char *start, char *current)
+mc_search__regex_is_char_escaped (const char *start, const char *current)
 {
     int num_esc = 0;
     while (*current == '\\' && current >= start) {

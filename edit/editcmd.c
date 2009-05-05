@@ -1473,7 +1473,8 @@ void edit_search_cmd (WEdit * edit, int again)
 	else
 	{
 	    edit->search_start = edit->curs1;
-	    edit_error_dialog (_ ("Search"), edit->search->error_str);
+	    if (edit->search->error_str)
+		edit_error_dialog (_ ("Search"), edit->search->error_str);
 	}
     }
 

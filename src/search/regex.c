@@ -212,20 +212,15 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
 /* --------------------------------------------------------------------------------------------- */
 
 static mc_search__found_cond_t
-mc_search__regex_found_cond_one (mc_search_t * mc_search,
-#if GLIB_CHECK_VERSION (2, 14, 0)
-                                 GRegex * regex,
-#else
-                                 GString * regex,
-#endif
+mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * regex,
                                  GString * search_str)
 {
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    GMatchInfo *match_info;
     GError *error = NULL;
 
-    if (!g_regex_match_full (regex, search_str->str, -1, 0, 0, &match_info, &error)) {
-        g_match_info_free (match_info);
+    if (!g_regex_match_full
+        (regex, search_str->str, -1, 0, 0, &mc_search->regex_match_info, &error)) {
+        g_match_info_free (mc_search->regex_match_info);
         if (error) {
             mc_search->error = MC_SEARCH_E_REGEX;
             mc_search->error_str = str_conv_gerror_message (error, _(" Regular expression error "));
@@ -234,9 +229,28 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search,
         }
         return COND__NOT_FOUND;
     }
-    mc_search->regex_match_info = match_info;
+#else
+#if HAVE_LIBPCRE
+    mc_search->num_rezults = pcre_exec (regex, mc_search->regex_match_info,
+                                        search_str->str, search_str->len, 0, 0, mc_search->iovector,
+                                        MC_SEARCH__PCRE_MAX_MATCHES);
+    if (mc_search->num_rezults < 0) {
+        return COND__NOT_FOUND;
+    }
+#else /* HAVE_LIBPCRE */
+
+    if (regexec (regex, search_str->str, MC_SEARCH__NUM_REPL_ARGS, mc_search->regex_match_info, 0))
+        return COND__NOT_FOUND;
+
+    for (mc_search->num_rezults = 0; mc_search->num_rezults < MC_SEARCH__NUM_REPL_ARGS;
+         mc_search->num_rezults++) {
+        if (mc_search->regex_match_info[mc_search->num_rezults].rm_eo == 0)
+            break;
+
+    }
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
     return COND__FOUND_OK;
-#endif
 
 }
 
@@ -252,10 +266,10 @@ mc_search__regex_found_cond (mc_search_t * mc_search, GString * search_str)
     for (loop1 = 0; loop1 < mc_search->conditions->len; loop1++) {
         mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (mc_search->conditions, loop1);
 
-        if (!mc_search_cond->regex_str)
+        if (!mc_search_cond->regex_handle)
             continue;
 
-        ret = mc_search__regex_found_cond_one (mc_search, mc_search_cond->regex_str, search_str);
+        ret = mc_search__regex_found_cond_one (mc_search, mc_search_cond->regex_handle, search_str);
 
         if (ret != COND__NOT_FOUND)
             return ret;
@@ -263,15 +277,64 @@ mc_search__regex_found_cond (mc_search_t * mc_search, GString * search_str)
     return COND__NOT_ALL_FOUND;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
+{
+    int count_tokens = 0;
+    gsize loop;
+    for (loop = 0; loop < len - 1; loop++) {
+        if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
+            if (mc_search__regex_is_char_escaped (str, &str[loop - 1]))
+                continue;
+            count_tokens++;
+        }
+    }
+    return count_tokens;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 14, 0)
+static void
+mc_search_regex__append_found_token_by_num (const mc_search_t * mc_search, const gchar * fnd_str,
+                                            GString * str, gsize index)
+{
+#if HAVE_LIBPCRE
+    int fnd_start = mc_search->iovector[index * 2 + 0];
+    int fnd_end = mc_search->iovector[index * 2 + 1];
+#else /* HAVE_LIBPCRE */
+    int fnd_start = mc_search->regex_match_info[index].rm_so;
+    int fnd_end = mc_search->regex_match_info[index].rm_eo;
+#endif /* HAVE_LIBPCRE */
+
+    int fnd_len = fnd_end - fnd_start;
+    gchar *start_str = fnd_str + fnd_start;
+
+    if (fnd_len == 0)
+        return;
+
+    g_string_append_len (str, start_str, fnd_len);
+
+
+}
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+
+
 /*** public functions ****************************************************************************/
 
 void
 mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_search,
                                        mc_search_cond_t * mc_search_cond)
 {
+    GString *tmp = NULL;
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    GString *tmp;
     GError *error = NULL;
+#else
+    const char *error;
+    int erroffset;
+#endif
 
     if (!mc_search->is_case_sentitive) {
         tmp = g_string_new_len (mc_search_cond->str->str, mc_search_cond->str->len);
@@ -279,8 +342,8 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp->str, tmp->len);
         g_string_free (tmp, TRUE);
     }
-
-    mc_search_cond->regex_str =
+#if GLIB_CHECK_VERSION (2, 14, 0)
+    mc_search_cond->regex_handle =
         g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW, 0, &error);
 
     if (error != NULL) {
@@ -289,10 +352,41 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         g_error_free (error);
         return;
     }
-#else
-    (void) mc_search_cond;
-    (void) mc_search;
-#endif
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+    mc_search_cond->regex_handle =
+        pcre_compile (mc_search_cond->str->str, PCRE_EXTRA, &error, &erroffset, NULL);
+    if (mc_search_cond->regex_handle == NULL) {
+        mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+        mc_search->error_str = g_strdup (error);
+        return;
+    }
+    mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
+    if (mc_search->regex_match_info == NULL) {
+        if (error) {
+            mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+            mc_search->error_str = g_strdup (error);
+            free (mc_search_cond->regex_handle);
+            mc_search_cond->regex_handle = NULL;
+            return;
+        }
+    }
+#else /* HAVE_LIBPCRE */
+    mc_search_cond->regex_handle = g_malloc0 (sizeof (regex_t));
+    erroffset = regcomp (mc_search_cond->regex_handle, mc_search_cond->str->str, REG_EXTENDED);
+    if (erroffset) {
+        size_t err_len = regerror (erroffset, mc_search_cond->regex_handle, NULL, 0);
+        error = g_malloc (err_len + 1);
+        regerror (erroffset, mc_search_cond->regex_handle, error, err_len);
+        mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+        mc_search->error_str = error;
+        regfree (mc_search_cond->regex_handle);
+        mc_search_cond->regex_handle = NULL;
+        return;
+    }
+    mc_search->regex_match_info = g_new0 (mc_search_matchinfo_t, MC_SEARCH__NUM_REPL_ARGS);
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -301,7 +395,6 @@ gboolean
 mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
                       gsize start_search, gsize end_search, gsize * found_len)
 {
-#if GLIB_CHECK_VERSION (2, 14, 0)
     gsize current_pos, start_buffer;
     int current_chr = 0;
     gint start_pos;
@@ -338,7 +431,17 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
 
         switch (mc_search__regex_found_cond (mc_search, mc_search->regex_buffer)) {
         case COND__FOUND_OK:
+#if GLIB_CHECK_VERSION (2, 14, 0)
             g_match_info_fetch_pos (mc_search->regex_match_info, 0, &start_pos, &end_pos);
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+            start_pos = mc_search->iovector[0];
+            end_pos = mc_search->iovector[1];
+#else /* HAVE_LIBPCRE */
+            start_pos = mc_search->regex_match_info[0].rm_so;
+            end_pos = mc_search->regex_match_info[0].rm_eo;
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
             *found_len = end_pos - start_pos;
             mc_search->normal_offset = start_buffer + start_pos;
             return TRUE;
@@ -354,7 +457,6 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
     }
     g_string_free (mc_search->regex_buffer, TRUE);
     mc_search->regex_buffer = NULL;
-#endif
     mc_search->error = MC_SEARCH_E_NOTFOUND;
     mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
     return FALSE;
@@ -364,9 +466,9 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
 GString *
 mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 {
-#if GLIB_CHECK_VERSION (2, 14, 0)
     GString *ret;
     gchar *tmp_str;
+#if GLIB_CHECK_VERSION (2, 14, 0)
     GError *error = NULL;
 
     tmp_str = g_match_info_expand_references (mc_search->regex_match_info,
@@ -382,7 +484,56 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     ret = g_string_new (tmp_str);
     g_free (tmp_str);
     return ret;
-#else
-    return g_string_new_len (replace_str->str, replace_str->len);
-#endif
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+    int num_replace_tokens;
+    gsize loop;
+    gsize index, len;
+
+    gchar *prev_str;
+
+    num_replace_tokens =
+        mc_search_regex__get_num_replace_tokens (replace_str->str, replace_str->len);
+
+    if (mc_search->num_rezults < 0)
+        return g_string_new_len (replace_str->str, replace_str->len);
+
+    if (num_replace_tokens > mc_search->num_rezults - 1
+        || num_replace_tokens > MC_SEARCH__NUM_REPL_ARGS) {
+        mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
+        mc_search->error_str = g_strdup (STR_E_RPL_NOT_EQ_TO_FOUND);
+        return NULL;
+    }
+
+    ret = g_string_new ("");
+    prev_str = replace_str->str;
+    for (loop = 0; loop < replace_str->len - 1; loop++) {
+        if (replace_str->str[loop] == '\\'
+            && (replace_str->str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
+            if (mc_search__regex_is_char_escaped (replace_str->str, &replace_str->str[loop - 1]))
+                continue;
+            len = 0;
+            while (loop + 1 + len < replace_str->len
+                   && (replace_str->str[loop + 1 + len] & (char) 0xf0) == 0x30)
+                len++;
+            tmp_str = g_strndup (&(replace_str->str[loop + 1]), len);
+            index = (gsize) atoi (tmp_str);
+            g_free (tmp_str);
+            if (index > mc_search->num_rezults) {
+                g_string_free (ret, TRUE);
+                mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
+                mc_search->error_str = g_strdup_printf (STR_E_RPL_INVALID_TOKEN, index);
+                return NULL;
+            }
+            if (loop)
+                g_string_append_len (ret, prev_str, replace_str->str - prev_str + loop);
+
+            mc_search_regex__append_found_token_by_num (mc_search, mc_search->regex_buffer->str,
+                                                        ret, index);
+            prev_str = replace_str->str + loop + len + 1;
+        }
+    }
+    g_string_append_len (ret, prev_str, replace_str->str - prev_str + replace_str->len);
+
+    return ret;
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 }

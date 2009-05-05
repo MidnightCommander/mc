@@ -5,12 +5,34 @@
 
 #include "../src/global.h"      /* <glib.h> */
 
+#if ! GLIB_CHECK_VERSION (2, 14, 0)
+#	if HAVE_LIBPCRE
+#		include <pcre.h>
+#	else
+#		include <stdio.h>
+#		include <string.h>
+#		include <sys/types.h>
+#		include <regex.h>
+#	endif
+#endif
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 
 #define MC_SEARCH__NUM_REPL_ARGS 64
-#define MC_SEARCH__MAX_REPL_LEN 1024
+
+#if GLIB_CHECK_VERSION (2, 14, 0)
+#define mc_search_matchinfo_t GMatchInfo
+#else
+#	if HAVE_LIBPCRE
+#		define mc_search_matchinfo_t pcre_extra
+#	else
+#		define mc_search_matchinfo_t regmatch_t
+#	endif
+#endif
+
+#define MC_SEARCH__PCRE_MAX_MATCHES 64
 
 /*** enums ***************************************************************************************/
 
@@ -59,10 +81,17 @@ typedef struct mc_search_struct {
     gsize normal_offset;
 
     /* some data for regexp */
-#if GLIB_CHECK_VERSION (2, 14, 0)
-    GMatchInfo *regex_match_info;
+    mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
-#endif
+#if ! GLIB_CHECK_VERSION (2, 14, 0)
+    int num_rezults;
+#if HAVE_LIBPCRE
+    int iovector[MC_SEARCH__PCRE_MAX_MATCHES * 2];
+#else                           /* HAVE_LIBPCRE */
+#endif                          /* HAVE_LIBPCRE */
+#endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
+
+
 
     /* some data for glob */
     GPatternSpec *glob_match_info;

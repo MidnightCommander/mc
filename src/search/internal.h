@@ -3,6 +3,16 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#if GLIB_CHECK_VERSION (2, 14, 0)
+#define mc_search_regex_t GRegex
+#else
+#	if HAVE_LIBPCRE
+#		define mc_search_regex_t pcre
+#	else
+#		define mc_search_regex_t regex_t
+#	endif
+#endif
+
 /*** enums ***************************************************************************************/
 
 typedef enum {
@@ -20,11 +30,7 @@ typedef struct mc_search_cond_struct {
     GString *str;
     GString *upper;
     GString *lower;
-#if GLIB_CHECK_VERSION (2, 14, 0)
-    GRegex *regex_str;
-#else
-    GString *regex_str;
-#endif
+    mc_search_regex_t *regex_handle;
     gsize len;
     gchar *charset;
 } mc_search_cond_t;
@@ -33,7 +39,8 @@ typedef struct mc_search_cond_struct {
 
 extern char STR_E_NOTFOUND[];
 extern char STR_E_UNKNOWN_TYPE[];
-
+extern char STR_E_RPL_NOT_EQ_TO_FOUND[];
+extern char STR_E_RPL_INVALID_TOKEN[];
 /*** declarations of public functions ************************************************************/
 
 
@@ -49,7 +56,7 @@ GString *mc_search__tolower_case_str (const char *, const char *, gsize);
 
 GString *mc_search__toupper_case_str (const char *, const char *, gsize);
 
-gboolean mc_search__regex_is_char_escaped (char *, char *);
+gboolean mc_search__regex_is_char_escaped (const char *, const char *);
 
 /* search/regex.c : */
 
