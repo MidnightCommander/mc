@@ -36,8 +36,6 @@
 
 /*** global variables ****************************************************************************/
 
-
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -76,6 +74,8 @@ mc_search__cond_struct_new (mc_search_t * mc_search, const char *str,
         mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
         break;
     case MC_SEARCH_T_HEX:
+        mc_search__cond_struct_new_init_hex (charset, mc_search, mc_search_cond);
+        break;
     default:
         break;
     }
@@ -272,6 +272,8 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
         ret = mc_search__run_glob (mc_search, user_data, start_search, end_search, found_len);
         break;
     case MC_SEARCH_T_HEX:
+        ret = mc_search__run_hex (mc_search, user_data, start_search, end_search, found_len);
+        break;
     default:
         break;
     }
@@ -286,12 +288,10 @@ mc_search_is_type_avail (mc_search_type_t search_type)
     switch (search_type) {
     case MC_SEARCH_T_GLOB:
     case MC_SEARCH_T_NORMAL:
-        return TRUE;
-        break;
     case MC_SEARCH_T_REGEX:
+    case MC_SEARCH_T_HEX:
         return TRUE;
         break;
-    case MC_SEARCH_T_HEX:
     default:
         break;
     }

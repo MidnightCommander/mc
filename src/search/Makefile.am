@@ -7,7 +7,8 @@ libsearch_la_SOURCES = \
 	lib.c \
 	normal.c \
 	regex.c \
-	glob.c
+	glob.c \
+	hex.c
 
 libsearch_la_CFLAGS=-I../ -I$(top_srcdir)/src \
 	$(GLIB_CFLAGS) \

@@ -73,8 +73,20 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
         spec_chr_len = strlen (*spec_chr);
         if (!strncmp (tmp_regex_str, *spec_chr, spec_chr_len)) {
             if (!mc_search__regex_is_char_escaped (regex_str->str, tmp_regex_str - 1)) {
-                g_string_append_len (copy_to, *spec_chr, spec_chr_len);
+        	if (!strncmp("\\x",*spec_chr, spec_chr_len))
+        	{
+        	    if (*(tmp_regex_str+spec_chr_len) == '{')
+        	    {
+        		while((spec_chr_len < regex_str->len - *offset) && *(tmp_regex_str+spec_chr_len) != '}')
+        		    spec_chr_len++;
+			if (*(tmp_regex_str+spec_chr_len) == '}')
+			    spec_chr_len++;
+        	    } else
+        		spec_chr_len+=2;
+        	}
+                g_string_append_len (copy_to, tmp_regex_str, spec_chr_len);
                 *offset += spec_chr_len;
+mc_log("%s\n",copy_to->str);
                 return TRUE;
             }
         }
@@ -221,6 +233,7 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
     if (!g_regex_match_full
         (regex, search_str->str, -1, 0, 0, &mc_search->regex_match_info, &error)) {
         g_match_info_free (mc_search->regex_match_info);
+        mc_search->regex_match_info = NULL;
         if (error) {
             mc_search->error = MC_SEARCH_E_REGEX;
             mc_search->error_str = str_conv_gerror_message (error, _(" Regular expression error "));
@@ -279,6 +292,7 @@ mc_search__regex_found_cond (mc_search_t * mc_search, GString * search_str)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#if ! GLIB_CHECK_VERSION (2, 14, 0)
 static int
 mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
 {
@@ -296,7 +310,6 @@ mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if ! GLIB_CHECK_VERSION (2, 14, 0)
 static void
 mc_search_regex__append_found_token_by_num (const mc_search_t * mc_search, const gchar * fnd_str,
                                             GString * str, gsize index)

@@ -91,11 +91,6 @@ typedef struct mc_search_struct {
 #endif                          /* HAVE_LIBPCRE */
 #endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
 
-
-
-    /* some data for glob */
-    GPatternSpec *glob_match_info;
-
 /* private data */
 
     /* prepared conditions */
