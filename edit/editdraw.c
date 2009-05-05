@@ -374,16 +374,16 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         }
         switch ( collapse_state ) {
         case C_LINES_ELAPSED:
-            line_stat[0] = '-';
+            g_snprintf (line_stat, 4, "[-]");
             break;
         case C_LINES_COLLAPSED:
-            line_stat[0] = '+';
+            g_snprintf (line_stat, 4, "[+]");
             break;
         case C_LINES_MIDDLE_E:
-            line_stat[0] = '|';
+            g_snprintf (line_stat, 3, " |");
             break;
         case C_LINES_LAST:
-            line_stat[0] = '_';
+            g_snprintf (line_stat, 3, " \\");
             break;
         }
     }
@@ -613,7 +613,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (key_pending (edit))
 		    goto exit_render;
 		cur_line = edit->start_line + row;
-		mc_log("REDRAW_PAGE cur_line:%i\n", cur_line);
 		collapse_state = book_mark_get_collapse_state(edit->collapsed, cur_line);
 		if ( collapse_state != C_LINES_MIDDLE_C ) {
 		    edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
