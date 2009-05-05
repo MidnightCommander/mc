@@ -345,7 +345,11 @@ linux*)
     ;;
 esac
 
-AX_PATH_LIB_PCRE
+$PKG_CONFIG --max-version 2.14 glib-2.0
+if test $? -eq 0
+then
+    AX_PATH_LIB_PCRE
+fi
 
 dnl
 dnl Check nroff and the options it supports
