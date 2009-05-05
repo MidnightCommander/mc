@@ -904,6 +904,34 @@ strip_ctrl_codes (char *s)
 	    if (*(++r) == '[') {
 		/* strchr() matches trailing binary 0 */
 		while (*(++r) && strchr ("0123456789;?", *r));
+	    } else
+	    if (*r == ']') {
+		/*
+		 * Skip xterm's OSC (Operating System Command)
+		 * http://www.xfree86.org/current/ctlseqs.html
+		 * OSC P s ; P t ST
+		 * OSC P s ; P t BEL
+		 */
+		char * new_r = r;
+
+		for (; *new_r; ++new_r)
+		{
+		    switch (*new_r)
+		    {
+			/* BEL */
+			case '\a':
+			    r = new_r;
+			    goto osc_out;
+			case ESC_CHAR:
+			    /* ST */
+			    if (*(new_r + 1) == '\\')
+			    {
+				r = new_r + 1;
+				goto osc_out;
+			    }
+		    }
+		}
+		osc_out:;
 	    }
 
 	    /*
