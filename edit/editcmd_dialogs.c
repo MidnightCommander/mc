@@ -110,7 +110,6 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     int treplace_mode = edit->replace_mode;
     int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
-
     int dialog_result;
     gchar **list_of_types = editcmd_dialog__get_search_types_list();
     const char *replace_mode_str[] = { N_("pro&Mpt on replace"), N_("replace &All") };
@@ -127,7 +126,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          0, 0, NULL, NULL, NULL},
 
 
-        {quick_radio, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, "", 2, 0,
+        {quick_radio, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, "", 2, treplace_mode,
          &treplace_mode, const_cast (char **, replace_mode_str), NULL, NULL, NULL},
 
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("All charsets"), 0, 0,
@@ -140,7 +139,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
          &treplace_case, 0, NULL, NULL, NULL},
 
 
-        {quick_radio, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", g_strv_length (list_of_types), 0,
+        {quick_radio, 3, REPLACE_DLG_WIDTH, 7, REPLACE_DLG_HEIGHT, "", g_strv_length (list_of_types), ttype_of_search,
          (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
 
         {quick_label, 2, REPLACE_DLG_WIDTH, 4, REPLACE_DLG_HEIGHT, N_(" Enter replacement string:"),
