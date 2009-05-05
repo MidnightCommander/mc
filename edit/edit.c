@@ -2679,16 +2679,17 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 
     case CK_Add_Collapse_Region:
 	if ( edit->mark1 != edit->mark2 ) {
-	    int upto_start = edit_count_lines (edit, edit->mark1, edit->curs1);
-	    int lines_selected = edit_count_lines (edit, edit->mark1, edit->curs1);
+	    long start_mark = min (edit->mark1, edit->mark2);
+	    int upto_start = edit_count_lines (edit, start_mark, edit->curs1);
+	    int lines_selected = edit_count_lines (edit, start_mark, edit->curs1);
 	    int start_line = edit->curs_line;
+            mc_log("start_mark:%i  \n", start_mark);
 	    if ( edit->curs1 > edit->mark1 ) {
 	        start_line = edit->curs_line - upto_start;
 	    } else {
 	        start_line = edit->curs_line + upto_start;
 	    }
 	    unsigned int end_line = start_line + lines_selected;
-	    mc_log("lines_selected:%ld\n", lines_selected);
 	    edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 0);
 	}
 	edit->force |= REDRAW_PAGE;
