@@ -373,16 +373,16 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
             g_snprintf (line_stat, 2, "*");
         }
         switch ( collapse_state ) {
-        case -1:
+        case C_LINES_ELAPSED:
             line_stat[0] = '-';
             break;
-        case 1:
+        case C_LINES_COLLAPSED:
             line_stat[0] = '+';
             break;
-        case 2:
+        case C_LINES_MIDDLE_E:
             line_stat[0] = '|';
             break;
-        case 3:
+        case C_LINES_LAST:
             line_stat[0] = '\\';
             break;
         }
@@ -612,29 +612,10 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    while (row <= end_row) {
 		if (key_pending (edit))
 		    goto exit_render;
-		if ( !collapse_header ) {
-		    cur_line = edit->start_line + row;
-		    collapse_header = collapse_query (edit, cur_line,
-						      &sline, &eline,
-						      &collapsed);
-		    if ( collapse_header ) {
-			count_collapsed_lines = sline - eline;
-			if ( collapsed ) {
-			    collapse_state = -1; //collapsed "+"
-			} else {
-			    collapse_state = 1; //elapsed "-"
-			}
-		    }
-		}
-		if ( count_collapsed_lines > 1 ) {
-		    count_collapsed_lines--;
-		    collapse_state = 2; //in middle
-		} else if ( count_collapsed_lines == 1 ) {
-		    count_collapsed_lines--;
-		    collapse_state = 3; //last collapsed line
-		    collapse_header = 0;
-		}
-		if (( !collapse_header ) || (( collapse_header ) && ( !collapsed ))) {
+		cur_line = edit->start_line + row;
+		mc_log("REDRAW_PAGE cur_line:%i\n", cur_line);
+		collapse_state = book_mark_get_collapse_state(edit, cur_line);
+		if ( collapse_state != C_LINES_MIDDLE_C ) {
 		    edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
 		}
 		row++;
@@ -648,33 +629,12 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    long upto = curs_row - 1 <= end_row ? curs_row - 1 : end_row;
 		    row = start_row;
 		    b = edit->start_display;
-		    collapse_state = 0;
 		    while (row <= upto) {
 			if (key_pending (edit))
 			    goto exit_render;
-			if ( !collapse_header ) {
-			    cur_line = edit->start_line + row;
-			    collapse_header = collapse_query (edit, cur_line,
-							      &sline, &eline,
-							      &collapsed);
-			    if ( collapse_header ) {
-			        count_collapsed_lines = sline - eline;
-			        if ( collapsed ) {
-			            collapse_state = -1; //collapsed "+"
-			        } else {
-			            collapse_state = 1; //elapsed "-"
-			        }
-			    }
-			}
-			if ( count_collapsed_lines > 1 ) {
-			    count_collapsed_lines--;
-			    collapse_state = 2; //in middle
-			} else if ( count_collapsed_lines == 1 ) {
-			    count_collapsed_lines--;
-			    collapse_state = 3; //last collapsed line
-			    collapse_header = 0;
-			}
-			if (( !collapse_header ) || (( collapse_header ) && ( !collapsed ))) {
+			cur_line = edit->start_line + row;
+			collapse_state = book_mark_get_collapse_state(edit, cur_line);
+			if ( collapse_state != C_LINES_MIDDLE_C ) {
 			    edit_draw_this_line (edit, b, row, start_column, end_column,
 						 collapse_state);
 			}
@@ -688,7 +648,12 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	    if (curs_row >= start_row && curs_row <= end_row) {
 		if (key_pending (edit))
 		    goto exit_render;
-		edit_draw_this_line (edit, b, curs_row, start_column, end_column, 0);
+		cur_line = edit->start_line + curs_row;
+		collapse_state = book_mark_get_collapse_state(edit, cur_line);
+		if ( collapse_state != C_LINES_MIDDLE_C ) {
+		    edit_draw_this_line (edit, b, curs_row, start_column, end_column,
+					 collapse_state);
+		}
 	    }
 	    if (force & REDRAW_AFTER_CURSOR) {
 		if (end_row > curs_row) {
@@ -697,7 +662,11 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    while (row <= end_row) {
 			if (key_pending (edit))
 			    goto exit_render;
-		        edit_draw_this_line (edit, b, row, start_column, end_column, 0);
+			cur_line = edit->start_line + row;
+			collapse_state = book_mark_get_collapse_state(edit, cur_line);
+			if ( collapse_state != C_LINES_MIDDLE_C ) {
+			    edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
+			}
 		        row++;
 			b = edit_move_forward (edit, b, 1, 0);
 		    }
@@ -709,7 +678,11 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
 			goto exit_render;
-		    edit_draw_this_line (edit, b, row, start_column, end_column, 0);
+		    cur_line = edit->start_line + row;
+		    collapse_state = book_mark_get_collapse_state(edit, cur_line);
+		    if ( collapse_state != C_LINES_MIDDLE_C ) {
+			edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
+		    }
 		}
 	    }
 	    if (force & REDRAW_LINE_BELOW && row < edit->num_widget_lines - 1) {
@@ -719,7 +692,11 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		if (row >= start_row && row <= end_row) {
 		    if (key_pending (edit))
 			goto exit_render;
-		    edit_draw_this_line (edit, b, row, start_column, end_column, 0);
+		    cur_line = edit->start_line + row;
+		    collapse_state = book_mark_get_collapse_state(edit, cur_line);
+		    if ( collapse_state != C_LINES_MIDDLE_C ) {
+			edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
+		    }
 		}
 	    }
 	}

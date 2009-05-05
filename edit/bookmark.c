@@ -226,118 +226,125 @@ void book_mark_dec (WEdit * edit, int line)
  *****************************************************************************
  */
 
-/* note, if there is more than one collapsed lines on a line, then they are
-   appended after each other and the last one is always the one found
-   by collapsed_found() i.e. last in is the one seen */
-
-static inline struct collapsed_lines *double_collapse (WEdit * edit, struct collapsed_lines *p)
-{
-    (void) edit;
-
-    if (p->next)
-	while (p->next->start_line == p->start_line)
-	    p = p->next;
-    return p;
-}
-
 /* returns the first collapsed region on or before this line */
-struct collapsed_lines *collapse_find (WEdit * edit, int start_line)
+GList *
+book_mark_collapse_find (GList * list, int line)
 {
-    struct collapsed_lines *p;
-    if (!edit->collapsed) {
-/* must have an imaginary top bookmark at line -1 to make things less complicated  */
-	edit->collapsed = g_malloc0 (sizeof (struct collapsed_lines));
-	edit->collapsed->start_line = -1;
-	return edit->collapsed;
+    GList *cl, *l;
+    struct collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return NULL;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (struct collapsed_lines *) cl->data;
+        if ( collapsed->start_line>=line && line <= collapsed->end_line )
+            return cl;
+        cl = g_list_next (cl);
     }
-    for (p = edit->collapsed; p; p = p->next) {
-	if (p->start_line > start_line)
-	    break;		/* gone past it going downward */
-	if (p->start_line <= start_line) {
-	    if (p->next) {
-		if (p->next->start_line > start_line) {
-		    edit->collapsed = p;
-		    return double_collapse (edit, p);
-		}
-	    } else {
-		edit->collapsed = p;
-		return double_collapse (edit, p);
-	    }
-	}
-    }
-    for (p = edit->collapsed; p; p = p->prev) {
-	if (p->next)
-	    if (p->next->start_line <= start_line)
-		break;		/* gone past it going upward */
-	if (p->start_line <= start_line) {
-	    if (p->next) {
-		if (p->next->start_line > start_line) {
-		    edit->collapsed = p;
-		    return double_collapse (edit, p);
-		}
-	    } else {
-		edit->collapsed = p;
-		return double_collapse (edit, p);
-	    }
-	}
-    }
-    return 0;			/* can't get here */
+    return NULL;
 }
-
 
 /* insert a collapsed at this line */
-void
-collapse_insert (WEdit *edit,
-                  const unsigned long start_line,
-                  const unsigned long end_line, int state)
+GList *
+book_mark_collapse_insert (GList *list, const int start_line, const int end_line,
+                           int state)
 {
     struct collapsed_lines *p, *q;
-    mc_log("collapse_insert: %ld, %ld\n", start_line, end_line);
-    p = collapse_find (edit, start_line);
-    if (p->start_line == start_line) {
-        /* already exists */
-    }
-    if (p->start_line > start_line && p->end_line > end_line) {
-        /* incorrect region */
-    }
+    p = g_new0 (struct collapsed_lines, 1);
+    p->start_line = start_line;
+    p->end_line = end_line;
+    p->state = state;
 
-    /* create list entry */
-    q = g_malloc0 (sizeof (struct collapsed_lines));
-    q->start_line = start_line;
-    q->end_line = end_line;
-    q->state = state;
-    q->next = p->next;
-    /* insert into list */
-    q->prev = p;
-    if (p->next)
-	p->next->prev = q;
-    p->next = q;
+    GList *link, *newlink, *tmp;
+    /*
+     * Go to the last position and traverse the list backwards
+     * starting from the second last entry to make sure that we
+     * are not removing the current link.
+     */
+    list = g_list_append (list, p);
+    list = g_list_last (list);
+    link = g_list_previous (list);
+
+    int sl = 0;
+    int el = 0;
+
+    while (link) {
+        newlink = g_list_previous (link);
+        q = (struct collapsed_lines *) link->data;
+        sl = q->start_line;
+        el = q->end_line;
+        if (((sl == start_line) || (el == end_line) ||
+           (sl == end_line) || (el == start_line)) ||
+           ((sl < start_line) && (el > start_line) && (el < end_line)) ||
+           ((sl > start_line) && (sl < end_line) && (el > end_line))) {
+            g_free (link->data);
+            tmp = g_list_remove_link (list, link);
+            g_list_free_1 (link);
+        }
+        link = newlink;
+    }
+    return list;
 }
+
 
 /* returns true if a collapsed exists at this line
  * return start_line, end_line if found region
  *
  */
-int collapse_query (WEdit * edit, const unsigned long line,
-                     unsigned long *start_line,
-                     unsigned long *end_line,
-                     int *state)
+int book_mark_collapse_query (GList * list, const int line,
+                              int *start_line,
+                              int *end_line,
+                              int *state)
 {
+    GList *cl;
     struct collapsed_lines *p;
 
     *start_line = 0;
     *end_line = 0;
     *state = 0;
 
-    if (!edit->collapsed)
-        return 0;
-    for (p = collapse_find (edit, line); p; p = p->prev) {
-        if (p->start_line != line)
-            return 0;
-        *start_line = p->start_line;
-        *end_line = p->end_line;
-        *state = p->state;
-        return 1;
+    cl = book_mark_collapse_find (list, line);
+    if ( cl ){
+        p = (struct collapsed_lines *) cl->data;
+        if ((p->start_line >= line) && (line <= p->end_line) ) {
+            *start_line = p->start_line;
+            *end_line = p->end_line;
+            *state = p->state;
+            return 1;
+        }
     }
     return 0;
+}
+
+int book_mark_get_collapse_state (GList * list, const int line)
+{
+    int start_line;
+    int end_line;
+    int state;
+    int c = 0;
+
+//    mc_log("start_line: %ld, end_line: %ld, line: %ld [%i]\n", start_line, end_line, line, c);
+    c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
+    if ( c == 0 )
+        return C_LINES_DEFAULT;
+    if ( line == start_line ) {
+        if ( state )
+            return C_LINES_COLLAPSED;
+        else
+            return C_LINES_ELAPSED;
+    }
+    if ( line > start_line && line< end_line ) {
+        if ( state )
+            return C_LINES_MIDDLE_C;
+        else
+            return C_LINES_MIDDLE_E;
+    }
+    if ( line == end_line ) {
+        if ( state )
+            return C_LINES_MIDDLE_C;
+        else
+            return C_LINES_LAST;
+    }
 }

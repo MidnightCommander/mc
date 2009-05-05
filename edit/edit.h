@@ -24,6 +24,7 @@
 #define MC_EDIT_H
 
 #include <stdio.h>
+#include "../src/global.h"
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
@@ -100,6 +101,13 @@
 /* Tabs spaces: (sofar only HALF_TAB_SIZE is used: */
 #define TAB_SIZE		option_tab_spacing
 #define HALF_TAB_SIZE		((int) option_tab_spacing / 2)
+
+#define C_LINES_ELAPSED		1       /* first line elapsed region */
+#define C_LINES_COLLAPSED	2       /* first line collapsed region */
+#define C_LINES_MIDDLE_E	3       /* in middle collapsed */
+#define C_LINES_MIDDLE_C	4       /* in middle elapsed */
+#define C_LINES_LAST		5       /* last line elapsed region */
+#define C_LINES_DEFAULT		0
 
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
@@ -239,14 +247,15 @@ void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
-struct collapsed_lines *collapse_find (WEdit * edit, int start_line);
-void collapse_insert (WEdit *edit,
-                       const unsigned long start_line,
-                       const unsigned long end_line, int state);
-int collapse_query (WEdit * edit, const unsigned long line,
-                     unsigned long *start_line,
-                     unsigned long *end_line,
-                     int *state);
+
+GList * book_mark_collapse_insert (GList * list,
+                                  const int start_line,
+                                  const int end_line, int state);
+int book_mark_collapse_query (GList *list, const int line,
+                              int *start_line,
+                              int *end_line,
+                              int *state);
+int book_mark_get_collapse_state (GList *list, const int line);
 
 int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
