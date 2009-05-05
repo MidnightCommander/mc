@@ -638,10 +638,12 @@ do_search (struct Dlg_head *h)
     }
 
     search_content_handle = mc_search_new(content_pattern, -1);
-    search_content_handle->search_type = (content_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
-    search_content_handle->is_case_sentitive = content_case_sensitive;
-    search_content_handle->is_all_charsets = content_all_charsets_flag;
-
+    if (search_content_handle)
+    {
+        search_content_handle->search_type = (content_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
+        search_content_handle->is_case_sentitive = content_case_sensitive;
+        search_content_handle->is_all_charsets = content_all_charsets_flag;
+    }
     search_file_handle = mc_search_new(find_pattern, -1);
     search_file_handle->search_type = (file_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_GLOB;
     search_file_handle->is_case_sentitive = file_case_sentitive;
@@ -748,7 +750,7 @@ do_search (struct Dlg_head *h)
                     return 1;
                 }
             } else
-            find_add_match (h, directory, dp->d_name);
+                find_add_match (h, directory, dp->d_name);
         }
     }
 
