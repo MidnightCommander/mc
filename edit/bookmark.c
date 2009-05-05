@@ -269,13 +269,15 @@ book_mark_collapse_insert (GList *list, const int start_line, const int end_line
 
     int sl = 0;
     int el = 0;
+    mc_log("book_mark_collapse_insert \n");
 
-    while (link) {
+    while ( link ) {
         newlink = g_list_previous (link);
         q = (struct collapsed_lines *) link->data;
         sl = q->start_line;
         el = q->end_line;
-        if (((sl == start_line) || (el == end_line) ||
+        mc_log("link\n");
+        /*if (((sl == start_line) || (el == end_line) ||
            (sl == end_line) || (el == start_line)) ||
            ((sl < start_line) && (el > start_line) && (el < end_line)) ||
            ((sl > start_line) && (sl < end_line) && (el > end_line))) {
@@ -283,6 +285,7 @@ book_mark_collapse_insert (GList *list, const int start_line, const int end_line
             tmp = g_list_remove_link (list, link);
             g_list_free_1 (link);
         }
+        */
         link = newlink;
     }
     return list;
@@ -325,8 +328,8 @@ int book_mark_get_collapse_state (GList * list, const int line)
     int state;
     int c = 0;
 
-//    mc_log("start_line: %ld, end_line: %ld, line: %ld [%i]\n", start_line, end_line, line, c);
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
+    mc_log("start_line: %ld, end_line: %ld, line: %ld [%i]\n", start_line, end_line, line, c);
     if ( c == 0 )
         return C_LINES_DEFAULT;
     if ( line == start_line ) {

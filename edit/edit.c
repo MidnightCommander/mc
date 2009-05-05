@@ -2689,7 +2689,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    }
 	    unsigned int end_line = start_line + lines_selected;
 	    mc_log("lines_selected:%ld\n", lines_selected);
-	    book_mark_collapse_insert (edit->collapsed, start_line, end_line, 1);
+	    edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 1);
 	}
 	edit->force |= REDRAW_PAGE;
 	break;
