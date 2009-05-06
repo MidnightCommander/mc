@@ -115,6 +115,12 @@
 /* bytes for draw line number */
 #define LINE_STATUS_WIDTH	8
 
+typedef struct collapsed_lines {
+    int start_line;			/* first collpsed line number */
+    int end_line;			/* end collapsed line number */
+    int state;				/* 1 - collapsed; 0 - elapsed  */
+} collapsed_lines;
+
 typedef struct edit_stack_type {
     long line;
     char *filename;
@@ -256,7 +262,7 @@ int book_mark_collapse_query (GList *list, const int line,
                               int *end_line,
                               int *state);
 int book_mark_get_collapse_state (GList *list, const int line,
-                                  struct collapsed_lines *cl);
+                                  collapsed_lines *cl);
 void book_mark_collapse_inc (GList * list, int line);
 void book_mark_collapse_dec (GList * list, int line);
 

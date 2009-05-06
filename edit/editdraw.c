@@ -590,9 +590,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     int collapsed = 0;
     int collapse_state = 0;
     unsigned long cur_line;
-    struct collapsed_lines *cl;
+    collapsed_lines *cl;
 
-    cl = g_new0 (struct collapsed_lines, 1);
+    cl = g_new0 (collapsed_lines, 1);
 /*
  * If the position of the page has not moved then we can draw the cursor
  * character only.  This will prevent line flicker when using arrow keys.

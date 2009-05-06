@@ -231,14 +231,14 @@ GList *
 book_mark_collapse_find (GList * list, int line)
 {
     GList *cl, *l;
-    struct collapsed_lines *collapsed;
+    collapsed_lines *collapsed;
     l = list;
     if (!l)
         return NULL;
     l = g_list_first (list);
     cl = l;
     while (cl) {
-        collapsed = (struct collapsed_lines *) cl->data;
+        collapsed = (collapsed_lines *) cl->data;
         if ( collapsed->start_line <= line && line <= collapsed->end_line )
             return cl;
         cl = g_list_next (cl);
@@ -251,8 +251,8 @@ GList *
 book_mark_collapse_insert (GList *list, const int start_line, const int end_line,
                            int state)
 {
-    struct collapsed_lines *p, *q;
-    p = g_new0 (struct collapsed_lines, 1);
+    collapsed_lines *p, *q;
+    p = g_new0 (collapsed_lines, 1);
     p->start_line = start_line;
     p->end_line = end_line;
     p->state = state;
@@ -272,7 +272,7 @@ book_mark_collapse_insert (GList *list, const int start_line, const int end_line
 
     while ( link ) {
         newlink = g_list_previous (link);
-        q = (struct collapsed_lines *) link->data;
+        q = (collapsed_lines *) link->data;
         sl = q->start_line;
         el = q->end_line;
         if (((sl == start_line) || (el == end_line) ||
@@ -299,7 +299,7 @@ int book_mark_collapse_query (GList * list, const int line,
                               int *state)
 {
     GList *cl;
-    struct collapsed_lines *p;
+    collapsed_lines *p;
 
     *start_line = 0;
     *end_line = 0;
@@ -307,7 +307,7 @@ int book_mark_collapse_query (GList * list, const int line,
 
     cl = book_mark_collapse_find (list, line);
     if ( cl ){
-        p = (struct collapsed_lines *) cl->data;
+        p = (collapsed_lines *) cl->data;
         *start_line = p->start_line;
         *end_line = p->end_line;
         *state = p->state;
@@ -317,7 +317,7 @@ int book_mark_collapse_query (GList * list, const int line,
 }
 
 int book_mark_get_collapse_state (GList * list, const int line,
-                                  struct collapsed_lines *cl)
+                                  collapsed_lines *cl)
 {
     int start_line;
     int end_line;
@@ -327,12 +327,14 @@ int book_mark_get_collapse_state (GList * list, const int line,
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
     if ( c == 0 )
         return C_LINES_DEFAULT;
+    mc_log("line: %i, state:%i\n", line, state);
+    /*
     if ( cl ) {
         cl->start_line = start_line;
         cl->end_line = end_line;
         cl->state = state;
     }
-
+    */
     if ( line == start_line ) {
         if ( state )
             return C_LINES_COLLAPSED;
@@ -358,14 +360,14 @@ int book_mark_get_collapse_state (GList * list, const int line,
 void book_mark_collapse_inc (GList * list, int line)
 {
     GList *cl, *l;
-    struct collapsed_lines *collapsed;
+    collapsed_lines *collapsed;
     l = list;
     if (!l)
         return;
     l = g_list_first (list);
     cl = l;
     while (cl) {
-        collapsed = (struct collapsed_lines *) cl->data;
+        collapsed = (collapsed_lines *) cl->data;
         if ( collapsed->start_line >= line ) {
             collapsed->start_line++;
             collapsed->end_line++;
@@ -380,14 +382,14 @@ void book_mark_collapse_inc (GList * list, int line)
 void book_mark_collapse_dec (GList * list, int line)
 {
     GList *cl, *l, *tmp;
-    struct collapsed_lines *collapsed;
+    collapsed_lines *collapsed;
     l = list;
     if (!l)
         return;
     l = g_list_first (list);
     cl = l;
     while (cl) {
-        collapsed = (struct collapsed_lines *) cl->data;
+        collapsed = (collapsed_lines *) cl->data;
         if ( collapsed->start_line >= line ) {
             collapsed->start_line--;
             collapsed->end_line--;

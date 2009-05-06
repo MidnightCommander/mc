@@ -18,12 +18,6 @@ struct _book_mark {
     struct _book_mark *prev;
 };
 
-struct collapsed_lines {
-    int start_line;			/* first collpsed line number */
-    int end_line;			/* end collapsed line number */
-    int state;				/* 1 - collapsed; 0 - elapsed  */
-};
-
 struct syntax_rule {
     unsigned short keyword;
     unsigned char end;
