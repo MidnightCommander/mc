@@ -316,7 +316,8 @@ int book_mark_collapse_query (GList * list, const int line,
     return 0;
 }
 
-int book_mark_get_collapse_state (GList * list, const int line)
+int book_mark_get_collapse_state (GList * list, const int line,
+                                  struct collapsed_lines *cl)
 {
     int start_line;
     int end_line;
@@ -326,6 +327,12 @@ int book_mark_get_collapse_state (GList * list, const int line)
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
     if ( c == 0 )
         return C_LINES_DEFAULT;
+    if ( cl ) {
+        cl->start_line = start_line;
+        cl->end_line = end_line;
+        cl->state = state;
+    }
+
     if ( line == start_line ) {
         if ( state )
             return C_LINES_COLLAPSED;

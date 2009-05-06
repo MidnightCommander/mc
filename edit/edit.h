@@ -255,7 +255,8 @@ int book_mark_collapse_query (GList *list, const int line,
                               int *start_line,
                               int *end_line,
                               int *state);
-int book_mark_get_collapse_state (GList *list, const int line);
+int book_mark_get_collapse_state (GList *list, const int line,
+                                  struct collapsed_lines *cl);
 void book_mark_collapse_inc (GList * list, int line);
 void book_mark_collapse_dec (GList * list, int line);
 
