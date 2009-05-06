@@ -1019,6 +1019,8 @@ edit_insert (WEdit *edit, int c)
     if (c == '\n') {
 	if (edit->book_mark)
 	    book_mark_inc (edit, edit->curs_line);
+	if (edit->collapsed)
+	    book_mark_collapse_inc(edit->collapsed, edit->curs_line);
 	edit->curs_line++;
 	edit->total_lines++;
 	edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
@@ -1064,6 +1066,8 @@ void edit_insert_ahead (WEdit * edit, int c)
     if (c == '\n') {
 	if (edit->book_mark)
 	    book_mark_inc (edit, edit->curs_line);
+	if (edit->collapsed)
+	    book_mark_collapse_inc(edit->collapsed, edit->curs_line);
 	edit->total_lines++;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }

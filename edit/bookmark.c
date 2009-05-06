@@ -346,3 +346,26 @@ int book_mark_get_collapse_state (GList * list, const int line)
             return C_LINES_LAST;
     }
 }
+
+
+/* shift down bookmarks after this line */
+void book_mark_collapse_inc (GList * list, int line)
+{
+    GList *cl, *l;
+    struct collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (struct collapsed_lines *) cl->data;
+        if ( collapsed->start_line >= line ) {
+            collapsed->start_line++;
+            collapsed->end_line++;
+        } else if ( collapsed->end_line >= line ){
+            collapsed->end_line++;
+        }
+    }
+}
+

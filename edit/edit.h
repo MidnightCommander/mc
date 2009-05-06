@@ -256,6 +256,7 @@ int book_mark_collapse_query (GList *list, const int line,
                               int *end_line,
                               int *state);
 int book_mark_get_collapse_state (GList *list, const int line);
+void book_mark_collapse_inc (GList * list, int line);
 
 int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
