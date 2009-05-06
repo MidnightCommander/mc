@@ -198,3 +198,24 @@ mc_search__regex_is_char_escaped (const char *start, const char *current)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gchar **
+mc_search_get_types_strings_array (void)
+{
+    GString *tmp;
+    gchar **ret;
+    mc_search_type_str_t *type_str;
+    mc_search_type_str_t *types_str = mc_search_types_list_get ();
+
+    tmp = g_string_new ("");
+    type_str = types_str;
+    while (type_str->str) {
+        if (tmp->len)
+            g_string_append (tmp, "__||__");
+        g_string_append (tmp, type_str->str);
+        type_str++;
+    }
+    ret = g_strsplit (tmp->str, "__||__", -1);
+    g_string_free (tmp, TRUE);
+    return ret;
+}

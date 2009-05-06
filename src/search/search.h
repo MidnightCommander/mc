@@ -130,4 +130,6 @@ GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * repla
 
 gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
+gchar **mc_search_get_types_strings_array (void);
+
 #endif

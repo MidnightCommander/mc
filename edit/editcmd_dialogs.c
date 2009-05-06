@@ -76,29 +76,6 @@ editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, dlg_msg_t msg, int parm)
     }
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-gchar **
-editcmd_dialog__get_search_types_list(void)
-{
-    GString *tmp;
-    gchar **ret;
-    mc_search_type_str_t *type_str;
-    mc_search_type_str_t *types_str = mc_search_types_list_get ();
-
-    tmp = g_string_new("");
-    type_str = types_str;
-    while (type_str->str) {
-	if (tmp->len)
-	    g_string_append (tmp,"__||__");
-	g_string_append (tmp, type_str->str);
-        type_str++;
-    }
-    ret = g_strsplit (tmp->str,"__||__", -1);
-    g_string_free(tmp, TRUE);
-    return ret;
-}
-
 /*** public functions **************************************************/
 
 void
@@ -111,7 +88,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
     int dialog_result;
-    gchar **list_of_types = editcmd_dialog__get_search_types_list();
+    gchar **list_of_types = mc_search_get_types_strings_array();
     const char *replace_mode_str[] = { N_("pro&Mpt on replace"), N_("replace &All") };
 
     int REPLACE_DLG_HEIGHT = REPLACE_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - REPLACE_DLG_HEIGHT_SUPPLY;
@@ -197,7 +174,7 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
     int tsearch_backwards = edit->replace_backwards;
     int tall_codepages = edit->all_codepages;
     mc_search_type_t ttype_of_search = edit->search_type;
-    gchar **list_of_types = editcmd_dialog__get_search_types_list();
+    gchar **list_of_types = mc_search_get_types_strings_array();
     int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
 
 
