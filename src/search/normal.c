@@ -119,7 +119,8 @@ mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
 
             case COND__FOUND_CHAR_LAST:
                 mc_search->normal_offset = current_pos;
-                *found_len = search_pos + 1;
+                if (found_len)
+                    *found_len = search_pos + 1;
                 return TRUE;
                 break;
 

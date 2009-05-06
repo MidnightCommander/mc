@@ -453,7 +453,8 @@ mc_search__run_regex (mc_search_t * mc_search, const void *user_data,
             end_pos = mc_search->regex_match_info[0].rm_eo;
 #endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
-            *found_len = end_pos - start_pos;
+            if (found_len)
+                *found_len = end_pos - start_pos;
             mc_search->normal_offset = start_buffer + start_pos;
             return TRUE;
             break;
