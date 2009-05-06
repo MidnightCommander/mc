@@ -35,6 +35,7 @@
 #include "setup.h"
 #include "history.h"
 #include "strutil.h"
+#include "../src/search/search.h"
 
 #include "../edit/edit.h"		/* BLOCK_FILE */
 #include "../edit/edit-widget.h"	/* WEdit */
@@ -421,18 +422,18 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	    break;
 	case 'f': /* file name pattern */
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
+	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, MC_SEARCH_T_GLOB);
 	    break;
 	case 'y': /* syntax pattern */
             if (edit_widget && edit_widget->syntax_type) {
 	        p = extract_arg (p, arg, sizeof (arg));
 	        *condition = panel &&
-                    regexp_match (arg, edit_widget->syntax_type, match_normal);
+                    mc_search (arg, edit_widget->syntax_type, MC_SEARCH_T_NORMAL);
 	    }
             break;
 	case 'd':
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && regexp_match (arg, panel->cwd, match_file);
+	    *condition = panel && mc_search (arg, panel->cwd, MC_SEARCH_T_GLOB);
 	    break;
 	case 't':
 	    p = extract_arg (p, arg, sizeof (arg));

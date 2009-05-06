@@ -42,6 +42,7 @@
 #include "win.h"		/* xterm_flag */
 #include "timefmt.h"
 #include "strutil.h"
+#include "../src/search/search.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -483,109 +484,6 @@ strip_home_and_password(const char *dir)
     g_strlcpy (newdir, dir, sizeof(newdir));
     strip_password (newdir, 1);
     return newdir;
-}
-
-static char *
-maybe_start_group (char *d, int do_group, int *was_wildcard)
-{
-    if (!do_group)
-	return d;
-    if (*was_wildcard)
-	return d;
-    *was_wildcard = 1;
-    *d++ = '\\';
-    *d++ = '(';
-    return d;
-}
-
-static char *
-maybe_end_group (char *d, int do_group, int *was_wildcard)
-{
-    if (!do_group)
-	return d;
-    if (!*was_wildcard)
-	return d;
-    *was_wildcard = 0;
-    *d++ = '\\';
-    *d++ = ')';
-    return d;
-}
-
-/* If shell patterns are on converts a shell pattern to a regular
-   expression. Called by regexp_match and mask_rename. */
-/* Shouldn't we support [a-fw] type wildcards as well ?? */
-char *
-convert_pattern (const char *pattern, int match_type, int do_group)
-{
-    char *d;
-    char *new_pattern;
-    int was_wildcard = 0;
-    const char *s;
-
-    if ((match_type != match_regex) && easy_patterns){
-	new_pattern = g_malloc (MC_MAXPATHLEN);
-	d = new_pattern;
-	if (match_type == match_file)
-	    *d++ = '^';
-	for (s = pattern; *s; s++, d++){
-	    switch (*s){
-	    case '*':
-		d = maybe_start_group (d, do_group, &was_wildcard);
-		*d++ = '.';
-		*d   = '*';
-		break;
-		
-	    case '?':
-		d = maybe_start_group (d, do_group, &was_wildcard);
-		*d = '.';
-		break;
-		
-	    case '.':
-		d = maybe_end_group (d, do_group, &was_wildcard);
-		*d++ = '\\';
-		*d   = '.';
-		break;
-
-	    default:
-		d = maybe_end_group (d, do_group, &was_wildcard);
-		*d = *s;
-		break;
-	    }
-	}
-	d = maybe_end_group (d, do_group, &was_wildcard);
-	if (match_type == match_file)
-	    *d++ = '$';
-	*d = 0;
-	return new_pattern;
-    } else
-	return  g_strdup (pattern);
-}
-
-int
-regexp_match (const char *pattern, const char *string, int match_type)
-{
-    static regex_t r;
-    static char *old_pattern = NULL;
-    static int old_type;
-    int    rval;
-    char *my_pattern;
-
-    if (!old_pattern || STRCOMP (old_pattern, pattern) || old_type != match_type){
-	if (old_pattern){
-	    regfree (&r);
-	    g_free (old_pattern);
-	    old_pattern = NULL;
-	}
-	my_pattern = convert_pattern (pattern, match_type, 0);
-	if (regcomp (&r, my_pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
-	    g_free (my_pattern);
-	    return -1;
-	}
-	old_pattern = my_pattern;
-	old_type = match_type;
-    }
-    rval = !regexec (&r, string, 0, NULL, 0);
-    return rval;
 }
 
 const char *

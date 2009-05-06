@@ -30,6 +30,7 @@
 #include "wtools.h"
 #include "treestore.h"
 #include "strutil.h"
+#include "../src/search/search.h"
 
 /* If true show files starting with a dot */
 int show_dot_files = 1;
@@ -312,8 +313,8 @@ handle_dirent (dir_list *list, const char *filter, struct dirent *dp,
 	    *stale_link = 1;
     }
     if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && filter
-	&& !regexp_match (filter, dp->d_name, match_file))
-	return 0;
+	&& !mc_search(filter, dp->d_name, MC_SEARCH_T_GLOB) )
+	    return 0;
 
     /* Need to grow the *list? */
     if (next_free == list->size) {

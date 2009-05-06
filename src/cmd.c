@@ -63,6 +63,7 @@
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
+#include "../src/search/search.h"
 
 
 #ifndef MAP_FILE
@@ -521,13 +522,9 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	    if (dirflag)
 		continue;
 	}
-	c = regexp_match (reg_exp_t, current_panel->dir.list[i].fname,
-			  match_file);
-	if (c == -1) {
-	    message (D_ERROR, MSG_ERROR, _("  Malformed regular expression  "));
-	    g_free (reg_exp);
-	    return;
-	}
+        if (!mc_search(reg_exp_t, current_panel->dir.list[i].fname, MC_SEARCH_T_GLOB))
+            return;
+
 	if (c) {
 	    do_file_mark (current_panel, i, cmd);
 	}

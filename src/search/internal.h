@@ -80,4 +80,12 @@ gboolean mc_search__run_glob (mc_search_t *, const void *, gsize, gsize, gsize *
 
 GString *mc_search_glob_prepare_replace_str (mc_search_t *, GString *);
 
+/* search/hex.c : */
+
+void mc_search__cond_struct_new_init_hex (const char *, mc_search_t *, mc_search_cond_t *);
+
+gboolean mc_search__run_hex (mc_search_t *, const void *, gsize, gsize, gsize *);
+
+GString *mc_search_hex_prepare_replace_str (mc_search_t *, GString *);
+
 #endif

@@ -66,6 +66,7 @@
 #include "key.h"		/* get_event */
 #include "util.h"               /* strip_password() */
 #include "strutil.h"
+#include "../src/search/search.h"
 
 /* }}} */
 
@@ -859,7 +860,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 {
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir, *tmpdest;
-    const char *error;
     char *def_text_secure;
     struct stat buf;
     int val;
@@ -930,27 +930,28 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	g_free (source_mask);
 	return dest_dir;
     }
-    if (source_easy_patterns) {
-	source_easy_patterns = easy_patterns;
-	easy_patterns = 1;
-	source_mask = convert_pattern (source_mask, match_file, 1);
-	easy_patterns = source_easy_patterns;
-	error =
-	    re_compile_pattern (source_mask, strlen (source_mask),
-				&ctx->rx);
-	g_free (source_mask);
-    } else
-	error =
-	    re_compile_pattern (source_mask, strlen (source_mask),
-				&ctx->rx);
 
-    if (error) {
-	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
-		    orig_mask, error);
+    if (source_easy_patterns){
+        source_mask = g_strdup_printf("(%s)",orig_mask);
+        ctx->search_handle = mc_search_new(source_mask,-1);
+        g_free(source_mask);
+    }
+    else
+        ctx->search_handle = mc_search_new(source_mask,-1);
+
+    if (ctx->search_handle == NULL) {
+	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
+		    orig_mask);
 	g_free (orig_mask);
 	goto ask_file_mask;
     }
+
     g_free (orig_mask);
+    ctx->search_handle->is_case_sentitive = TRUE;
+    if (source_easy_patterns)
+        ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
+    else
+        ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
 
     tmpdest = dest_dir;
     dest_dir = tilde_expand(tmpdest);

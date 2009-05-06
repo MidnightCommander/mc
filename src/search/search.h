@@ -132,4 +132,9 @@ gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
 gchar **mc_search_get_types_strings_array (void);
 
+gboolean mc_search (const gchar *, const gchar *, mc_search_type_t);
+
+int mc_search_getstart_rezult_by_num(mc_search_t *, int);
+int mc_search_getend_rezult_by_num(mc_search_t *, int);
+
 #endif

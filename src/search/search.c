@@ -349,3 +349,67 @@ mc_search_is_fixed_search_str (mc_search_t * mc_search)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mc_search (const gchar *pattern, const gchar *str, mc_search_type_t type)
+{
+    gboolean ret;
+    mc_search_t *search = mc_search_new(pattern, -1);
+    if (search == NULL)
+        return FALSE;
+    search->search_type = type;
+    search->is_case_sentitive = TRUE;
+    ret = mc_search_run(search,str,0,strlen(str),NULL);
+    mc_search_free(search);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_search_getstart_rezult_by_num(mc_search_t *mc_search, int index)
+{
+    if (!mc_search)
+	return 0;
+    if (mc_search->search_type == MC_SEARCH_T_NORMAL)
+	return 0;
+#if GLIB_CHECK_VERSION (2, 14, 0)
+    guint start_pos;
+    guint end_pos;
+    g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
+    return (int) start_pos;
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+    return mc_search->iovector[index*2];
+#else /* HAVE_LIBPCRE */
+    return mc_search->regex_match_info[index].rm_so;
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+mc_search_getend_rezult_by_num(mc_search_t *mc_search, int index)
+{
+    if (!mc_search)
+	return 0;
+    if (mc_search->search_type == MC_SEARCH_T_NORMAL)
+	return 0;
+#if GLIB_CHECK_VERSION (2, 14, 0)
+    guint start_pos;
+    guint end_pos;
+    g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
+    return (int) end_pos;
+#else /* GLIB_CHECK_VERSION (2, 14, 0) */
+#if HAVE_LIBPCRE
+    return mc_search->iovector[index*2+1];
+#else /* HAVE_LIBPCRE */
+    return mc_search->regex_match_info[index].rm_eo;
+#endif /* HAVE_LIBPCRE */
+#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
+
+}
+
+/* --------------------------------------------------------------------------------------------- */

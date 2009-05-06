@@ -70,8 +70,6 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
         case '\\':
         case '+':
         case '.':
-        case '(':
-        case ')':
         case '|':
         case '$':
         case '^':
@@ -118,5 +116,4 @@ GString *
 mc_search_glob_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 {
     return mc_search_regex_prepare_replace_str (mc_search, replace_str);
-
 }

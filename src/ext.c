@@ -38,6 +38,7 @@
 #include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
+#include "../src/search/search.h"
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
@@ -397,7 +398,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
     }
 
     if (content_string[0]
-	&& regexp_match (ptr, content_string + content_shift, match_regex)) {
+	&& mc_search (ptr, content_string + content_shift, MC_SEARCH_T_REGEX)) {
 	found = 1;
     }
 
@@ -521,11 +522,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		/* Do not transform shell patterns, you can use shell/ for
 		 * that
 		 */
-		if (regexp_match (p, filename, match_regex))
+		if (mc_search (p, filename, MC_SEARCH_T_REGEX))
 		    found = 1;
 	    } else if (!strncmp (p, "directory/", 10)) {
 		if (S_ISDIR (mystat.st_mode)
-		    && regexp_match (p + 10, filename, match_regex))
+		    && mc_search (p + 10, filename, MC_SEARCH_T_REGEX))
 		    found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
 		p += 6;

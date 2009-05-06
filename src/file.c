@@ -52,7 +52,6 @@
 
 #include "global.h"
 #include "tty.h"
-#include "eregex.h"
 #include "setup.h"
 #include "color.h"
 #include "win.h"
@@ -65,6 +64,7 @@
 #include "background.h"		/* we_are_background */
 /* #include "util.h" */
 #include "strutil.h"
+#include "../src/search/search.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
@@ -172,7 +172,7 @@ static FileProgressStatus transform_error = FILE_CONT;
 static const char *
 do_transform_source (FileOpContext *ctx, const char *source)
 {
-    size_t j, len;
+    size_t j=0, len;
     const char *fnsource = x_basename (source);
     char *fnsource_fixed = g_strdup (fnsource);
     int next_reg;
@@ -187,13 +187,14 @@ do_transform_source (FileOpContext *ctx, const char *source)
     str_fix_string (fnsource_fixed);
 
     len = strlen (fnsource_fixed);
-    j = re_match (&ctx->rx, fnsource_fixed, len, 0, &ctx->regs);
-    if (j != len) {
+
+    if ( !( mc_search_run(ctx->search_handle, fnsource_fixed, 0, len, &j) && j == len) ){
 	transform_error = FILE_SKIP;
 	return NULL;
     }
+
     g_free (fnsource_fixed);
-    
+
     actual = fntarget;
     remain = sizeof (fntarget);
     dm = ctx->dest_mask;
@@ -233,14 +234,14 @@ do_transform_source (FileOpContext *ctx, const char *source)
 	    }
 
 	case '*':
-	    if (next_reg < 0 || next_reg >= RE_NREGS
-		|| ctx->regs.start[next_reg] < 0) {
+	    if (next_reg < 0 || next_reg >= MC_SEARCH__NUM_REPL_ARGS
+		|| mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg) < 0) {
 		message (D_ERROR, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
-	    for (fn = fnsource + ctx->regs.start[next_reg]; 
-                 fn < fnsource + ctx->regs.end[next_reg] && remain > 1; ) {
+	    for (fn = fnsource + mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg);
+                 fn < fnsource + mc_search_getend_rezult_by_num(ctx->search_handle, next_reg) && remain > 1; ) {
 		
                 if (str_is_valid_char (fn, -1) == 1) {
 		convert_case (fn, &case_conv, &actual, &remain);
