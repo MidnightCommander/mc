@@ -44,8 +44,6 @@
 
 /*** file scope functions ************************************************************************/
 
-//mc_search__regex_is_char_escaped (char *start, char *current)
-
 static GString *
 mc_search__glob_translate_to_regex (gchar * str, gsize * len)
 {
