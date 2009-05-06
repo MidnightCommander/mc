@@ -1122,6 +1122,8 @@ int edit_delete (WEdit * edit, const int byte_delete)
     if (p == '\n') {
 	if (edit->book_mark)
 	    book_mark_dec (edit, edit->curs_line);
+	if (edit->collapsed)
+	    book_mark_collapse_dec (edit->collapsed, edit->curs_line);
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
@@ -1169,6 +1171,8 @@ edit_backspace (WEdit * edit, const int byte_delete)
     if (p == '\n') {
 	if (edit->book_mark)
 	    book_mark_dec (edit, edit->curs_line);
+	if (edit->collapsed)
+	    book_mark_collapse_dec (edit->collapsed, edit->curs_line);
 	edit->curs_line--;
 	edit->total_lines--;
 	edit->force |= REDRAW_AFTER_CURSOR;
@@ -2687,14 +2691,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    int upto_start = edit_count_lines (edit, start_mark, edit->curs1);
 	    int lines_selected = edit_count_lines (edit, start_mark, edit->curs1);
 	    int start_line = edit->curs_line;
-            mc_log("start_mark:%i  \n", start_mark);
 	    if ( edit->curs1 > edit->mark1 ) {
 	        start_line = edit->curs_line - upto_start;
 	    } else {
 	        start_line = edit->curs_line + upto_start;
 	    }
 	    unsigned int end_line = start_line + lines_selected;
-	    edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 0);
+	    edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 1);
 	}
 	edit->force |= REDRAW_PAGE;
 	break;

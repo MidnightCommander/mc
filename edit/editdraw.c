@@ -332,11 +332,6 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 int visible_tabs = 1, visible_tws = 1;
 
 /* b is a pointer to the beginning of the line */
-/* collapse_state = -1 first elapsed line */
-/* collapse_state = 1 first collapsed line */
-/* collapse_state = 2 in middle collapsed lines */
-/* collapse_state = 3 last collapsed line */
-/* collapse_state = 0 not collapsed */
 static void
 edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		     long end_col, int collapse_state)

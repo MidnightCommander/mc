@@ -324,7 +324,6 @@ int book_mark_get_collapse_state (GList * list, const int line)
     int c = 0;
 
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
-//    mc_log("start_line: %ld, end_line: %ld, line: %ld [%i]\n", start_line, end_line, line, c);
     if ( c == 0 )
         return C_LINES_DEFAULT;
     if ( line == start_line ) {
@@ -348,7 +347,7 @@ int book_mark_get_collapse_state (GList * list, const int line)
 }
 
 
-/* shift down bookmarks after this line */
+/* shift down collapse after this line */
 void book_mark_collapse_inc (GList * list, int line)
 {
     GList *cl, *l;
@@ -366,6 +365,45 @@ void book_mark_collapse_inc (GList * list, int line)
         } else if ( collapsed->end_line >= line ){
             collapsed->end_line++;
         }
+        cl = g_list_next (cl);
     }
 }
+
+/* shift up collapse after this line */
+void book_mark_collapse_dec (GList * list, int line)
+{
+    GList *cl, *l, *tmp;
+    struct collapsed_lines *collapsed;
+    l = list;
+    if (!l)
+        return;
+    l = g_list_first (list);
+    cl = l;
+    while (cl) {
+        collapsed = (struct collapsed_lines *) cl->data;
+        if ( collapsed->start_line >= line ) {
+            collapsed->start_line--;
+            collapsed->end_line--;
+        } else if ( collapsed->end_line >= line ){
+            collapsed->end_line--;
+        }
+        cl = g_list_next (cl);
+    }
+
+/* remove demage region */
+/*
+    cl = g_list_last (list);
+    while ( cl ) {
+        collapsed = (struct collapsed_lines *) cl->data;
+        if ( abs (collapsed->start_line - collapsed->end_line) < 2 ) {
+            g_free (cl->data);
+            tmp = g_list_remove_link (list, cl);
+            g_list_free_1 (cl);
+        }
+        cl = g_list_previous (cl);
+    }
+*/
+
+}
+
 
