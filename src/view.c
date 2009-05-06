@@ -64,6 +64,7 @@
 #include "charsets.h"
 #include "selcodepage.h"
 #include "strutil.h"
+#include "../src/search/search.h"
 
 /* Block size for reading files in parts */
 #define VIEW_PAGE_SIZE		((size_t) 8192)
@@ -201,9 +202,7 @@ struct WView {
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
     offset_type search_end;	/* Length of found string or 0 if none was found */
-    char *search_exp;		/* The search expression */
-    int  direction;		/* 1= forward; -1 backward */
-    void (*last_search)(WView *);
+
 				/* Pointer to the last search command */
     gboolean want_to_quit;	/* Prepare for cleanup ... */
 
@@ -236,6 +235,14 @@ struct WView {
     struct cache_line *first_showed_line;
     /* converter for translation of text */
     GIConv converter;
+
+    /* handle of search engine */
+    mc_search_t *search;
+    gchar *last_search_string;
+    mc_search_type_t search_type;
+    gboolean search_all_codepages;
+    gboolean search_case;
+    gboolean search_backwards;
 };
 
 
@@ -273,8 +280,6 @@ int mcview_remember_file_position = FALSE;
 /* Our widget callback */
 static cb_ret_t view_callback (Widget *, widget_msg_t, int);
 
-static int regexp_view_search (WView * view, char *pattern, char *string,
-                               int match_type, size_t *match_start, size_t *match_end);
 static void view_labels (WView * view);
 
 static void view_init_growbuf (WView *);
@@ -1764,6 +1769,7 @@ view_toggle_hex_mode (WView *view)
     struct cache_line *line;
     
     view->hex_mode = !view->hex_mode;
+    view->search_type = (view->hex_mode)?MC_SEARCH_T_HEX:MC_SEARCH_T_NORMAL;
 
     if (view->hex_mode) {
 	view->hex_cursor = view->dpy_start;
@@ -1878,8 +1884,10 @@ view_done (WView *view)
     /* the growing buffer is freed with the datasource */
 
     view_hexedit_free_change_list (view);
-    /* FIXME: what about view->search_exp? */
-    
+
+    g_free(view->last_search_string);
+    view->last_search_string = NULL;
+
     /* Free memory used by the viewer */
     view_reduce_cache_lines (view);
     if (view->converter != str_cnv_from_term) str_close_conv (view->converter);
@@ -2010,7 +2018,6 @@ view_load (WView *view, const char *command, const char *file,
     view->search_start = 0;
     view->search_end = 0;
     view->dpy_text_column = 0;
-    view->last_search = 0;	/* Start a new search */
 
     view->converter = str_cnv_from_term;
     /* try detect encoding from path */
@@ -2730,7 +2737,7 @@ icase_search_p (WView *view, char *text, char *data, int nothing,
     (void) nothing;
 
 
-    q = (view->direction == 1) 
+    q = (!view->search_backwards)
             ? str_search_first (data, text, 0) 
             : str_search_last (data, text, 0);
 
@@ -2757,7 +2764,7 @@ view_get_line_at (WView *view, offset_type from, GString * buffer,
 
     line = view_offset_to_line_from (view, from, line);
 
-    if (view->direction == 1) {
+    if (!view->search_backwards) {
         start = from;
         end = view_get_end_of_whole_line (view, line)->end;
         if (start >= end) return 0;
@@ -2998,327 +3005,6 @@ search_update_steps (WView *view)
 	view->update_steps = 20000;
 }
 
-static void
-view_search (WView *view, char *text, 
-             int (*search) (WView *, char *, char *, int, size_t *, size_t *))
-{
-    GString *buffer;
-    offset_type search_start;
-    int search_status;
-    Dlg_head *d = 0;
-
-    offset_type line_start;
-    offset_type line_end;
-    size_t match_start;
-    size_t match_end;
-
-    if (verbose) {
-	d = create_message (D_NORMAL, _("Search"), _("Searching %s"), text);
-	mc_refresh ();
-    }
-
-    buffer = g_string_new ("");
-
-    search_start = (view->direction != 1) ? view->search_start :
-            view->search_end;
-
-    /* Compute the percent steps */
-    search_update_steps (view);
-    view->update_activate = 0;
-
-    enable_interrupt_key ();
-    search_status = -1;
-
-    while (1) {
-	if (search_start >= view->update_activate) {
-	    view->update_activate += view->update_steps;
-	    if (verbose) {
-		view_percent (view, search_start);
-		mc_refresh ();
-	    }
-	    if (got_interrupt ())
-		break;
-	}
-
-        if (!view_get_line_at (view, search_start, buffer, &line_start, &line_end))
-	    break;
-
-        search_status = (*search) (view, text, buffer->str, match_normal, 
-                          &match_start, &match_end);
-
-	if (search_status < 0) {
-	    break;
-	}
-
-        if (search_status == 0) {
-            if (view->direction == 1) 
-                search_start = line_end;
-            else {
-                if (line_start > 0) search_start = line_start - 1;
-                else break;
-            }
-	    continue;
-        }
-
-	/* We found the string */
-
-	view_matchs_to_offsets (view, line_start, line_end, 
-				match_start, match_end, 
-				&(view->search_start), &(view->search_end));
-
-	view_moveto_match (view);
-
-	break;
-    }
-    disable_interrupt_key ();
-    if (verbose) {
-	dlg_run_done (d);
-	destroy_dlg (d);
-    }
-    if (search_status <= 0) { 
-	message (D_NORMAL, _("Search"), _(" Search string not found "));
-        view->search_end = view->search_start;
-    }
-    g_string_free (buffer, TRUE);
-}
-
-/* Search buffer (its size is len) in the complete buffer
- * returns the position where the block was found or INVALID_OFFSET
- * if not found */
-static offset_type
-block_search (WView *view, const char *buffer, int len)
-{
-    int direction = view->direction;
-    const char *d = buffer;
-    char b;
-    offset_type e;
-
-    enable_interrupt_key ();
-    if (direction == 1)
-        e = view->search_start + ((view->search_start != view->search_end) ? 1 : 0);
-    else
-	e = view->search_start
-	  - ((view->search_end != view->search_start  && view->search_start >= 1) ? 1 : 0);
-
-    search_update_steps (view);
-    view->update_activate = 0;
-
-    if (direction == -1) {
-	for (d += len - 1;; e--) {
-	    if (e <= view->update_activate) {
-		view->update_activate -= view->update_steps;
-		if (verbose) {
-		    view_percent (view, e);
-		    mc_refresh ();
-		}
-		if (got_interrupt ())
-		    break;
-	    }
-	    b = get_byte (view, e);
-
-	    if (*d == b) {
-		if (d == buffer) {
-		    disable_interrupt_key ();
-		    return e;
-		}
-		d--;
-	    } else {
-		e += buffer + len - 1 - d;
-		d = buffer + len - 1;
-	    }
-	    if (e == 0)
-		break;
-	}
-    } else {
-	while (get_byte (view, e) != -1) {
-	    if (e >= view->update_activate) {
-		view->update_activate += view->update_steps;
-		if (verbose) {
-		    view_percent (view, e);
-		    mc_refresh ();
-		}
-		if (got_interrupt ())
-		    break;
-	    }
-	    b = get_byte (view, e++);
-
-	    if (*d == b) {
-		d++;
-		if (d - buffer == len) {
-		    disable_interrupt_key ();
-		    return e - len;
-		}
-	    } else {
-		e -= d - buffer;
-		d = buffer;
-	    }
-	}
-    }
-    disable_interrupt_key ();
-    return INVALID_OFFSET;
-}
-
-/*
- * Search in the hex mode.  Supported input:
- * - numbers (oct, dec, hex).  Each of them matches one byte.
- * - strings in double quotes.  Matches exactly without quotes.
- */
-static void
-hex_search (WView *view, const char *text)
-{
-    char *buffer;		/* Parsed search string */
-    char *cur;			/* Current position in it */
-    int block_len;		/* Length of the search string */
-    offset_type pos;		/* Position of the string in the file */
-    int parse_error = 0;
-
-    if (!*text) {
-	view->search_end = view->search_start;
-	return;
-    }
-
-    /* buffer will never be longer that text */
-    buffer = g_new (char, strlen (text));
-    cur = buffer;
-
-    /* First convert the string to a stream of bytes */
-    while (*text) {
-	int val;
-	int ptr;
-
-	/* Skip leading spaces */
-	if (*text == ' ' || *text == '\t') {
-	    text++;
-	    continue;
-	}
-
-	/* %i matches octal, decimal, and hexadecimal numbers */
-	if (sscanf (text, "%i%n", &val, &ptr) > 0) {
-	    /* Allow signed and unsigned char in the user input */
-	    if (val < -128 || val > 255) {
-		parse_error = 1;
-		break;
-	    }
-
-	    *cur++ = (char) val;
-	    text += ptr;
-	    continue;
-	}
-
-	/* Try quoted string, strip quotes */
-	if (*text == '"') {
-	    const char *next_quote;
-
-	    text++;
-	    next_quote = strchr (text, '"');
-	    if (next_quote) {
-		memcpy (cur, text, next_quote - text);
-		cur += next_quote - text;
-		text = next_quote + 1;
-		continue;
-	    }
-	    /* fall through */
-	}
-
-	parse_error = 1;
-	break;
-    }
-
-    block_len = cur - buffer;
-
-    /* No valid bytes in the user input */
-    if (block_len <= 0 || parse_error) {
-	message (D_NORMAL, _("Search"), _("Invalid hex search expression"));
-	g_free (buffer);
-	view->search_end = view->search_start;
-	return;
-    }
-
-    /* Then start the search */
-    pos = block_search (view, buffer, block_len);
-
-    g_free (buffer);
-
-    if (pos == INVALID_OFFSET) {
-	message (D_NORMAL, _("Search"), _(" Search string not found "));
-	return;
-    }
-
-    view->search_start = pos;
-    view->search_end = pos + block_len;
-    /* Set the edit cursor to the search position, left nibble */
-    view->hex_cursor = view->search_start;
-    view->hexedit_lownibble = FALSE;
-
-    /* Adjust the file offset */
-    view->dpy_start = pos - pos % view->bytes_per_line;
-}
-
-static int
-regexp_view_search (WView *view, char *pattern, char *string,
-		    int match_type, size_t *match_start, size_t *match_end)
-{
-    static regex_t r;
-    static char *old_pattern = NULL;
-    static int old_type;
-    regmatch_t pmatch[1];
-    int i, flags = REG_ICASE;
-
-    (void) view;
-    if (old_pattern == NULL || strcmp (old_pattern, pattern) != 0
-	|| old_type != match_type) {
-	if (old_pattern != NULL) {
-	    regfree (&r);
-	    g_free (old_pattern);
-	    old_pattern = 0;
-	}
-	for (i = 0; pattern[i] != '\0'; i++) {
-	    if (isupper ((unsigned char) pattern[i])) {
-		flags = 0;
-		break;
-	    }
-	}
-	flags |= REG_EXTENDED;
-	if (regcomp (&r, pattern, flags)) {
-	    message (D_ERROR, MSG_ERROR, _(" Invalid regular expression "));
-	    return -1;
-	}
-	old_pattern = g_strdup (pattern);
-	old_type = match_type;
-    }
-    if (regexec (&r, string, 1, pmatch, 0) != 0)
-	return 0;
-    
-    i = str_length (string);
-    (*match_start) = i - str_length (string + pmatch[0].rm_so);
-    (*match_end) = i - str_length (string + pmatch[0].rm_eo);
-    return 1;
-}
-
-static void
-do_regexp_search (WView *view)
-{
-    view_search (view, view->search_exp, regexp_view_search);
-    /* Had a refresh here */
-    view->dirty++;
-    view_update (view);
-}
-
-static void
-do_normal_search (WView *view)
-{
-    if (view->hex_mode)
-	hex_search (view, view->search_exp);
-    else {
-        char *needle = str_create_search_needle (view->search_exp, 0);
-	view_search (view, needle, icase_search_p);
-        str_release_search_needle (needle, 0);
-    }
-    /* Had a refresh here */
-    view->dirty++;
-    view_update (view);
-}
-
 /* {{{ User-definable commands }}} */
 
 /*
@@ -3416,97 +3102,193 @@ view_hexedit_save_changes_cmd (WView *view)
     (void) view_hexedit_save_changes (view);
 }
 
-/* {{{ Searching }}} */
 
 static void
-regexp_search (WView *view, int direction)
+do_search (WView *view)
 {
-    const char *defval;
-    char *regexp;
-    static char *last_regexp;
+    GString *buffer;
+    offset_type search_start;
+    int search_status;
+    Dlg_head *d = NULL;
 
-    defval = (last_regexp != NULL ? last_regexp : "");
+    offset_type line_start;
+    offset_type line_end;
+    size_t match_len;
 
-    regexp = input_dialog (_("Search"), _(" Enter regexp:"), MC_HISTORY_VIEW_SEARCH_REGEX, defval);
-    if (regexp == NULL || regexp[0] == '\0') {
-	g_free (regexp);
-	return;
+    if (verbose) {
+        d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
+        mc_refresh ();
     }
 
-    g_free (last_regexp);
-    view->search_exp = last_regexp = regexp;
+    buffer = g_string_new ("");
 
-    view->direction = direction;
-    do_regexp_search (view);
-    view->last_search = do_regexp_search;
+    search_start = (view->search_backwards) ?  view->search_start : view->search_end;
+
+    /* Compute the percent steps */
+    search_update_steps (view);
+    view->update_activate = 0;
+
+    enable_interrupt_key ();
+    search_status = -1;
+
+    while(1){
+        if (search_start >= view->update_activate) {
+            view->update_activate += view->update_steps;
+            if (verbose) {
+                view_percent (view, search_start);
+                mc_refresh ();
+            }
+            if (got_interrupt ())
+                break;
+        }
+
+        if (!view_get_line_at (view, search_start, buffer, &line_start, &line_end))
+            break;
+
+        if (! mc_search_run( view->search, buffer->str, 0, buffer->len, &match_len )){
+            if (view->search->error != MC_SEARCH_E_NOTFOUND) {
+                search_status = -2;
+                break;
+            }
+
+            if (! view->search_backwards) {
+                search_start = line_end;
+            } else {
+                if (line_start > 0) search_start = line_start - 1;
+                else break;
+            }
+            continue;
+        }
+        search_status = 1;
+
+        view->search_start = view->search->normal_offset+search_start;
+        view->search_end = view->search_start + match_len;
+
+        if (view->hex_mode){
+            view->hex_cursor = view->search_start;
+            view->hexedit_lownibble = FALSE;
+
+            view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
+            view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
+
+        }
+
+        view_moveto_match (view);
+
+        break;
+    }
+    disable_interrupt_key ();
+    if (verbose) {
+        dlg_run_done (d);
+        destroy_dlg (d);
+    }
+    switch (search_status)
+    {
+        case -1:
+            message (D_NORMAL, _("Search"), _(" Search string not found "));
+            view->search_end = view->search_start;
+            break;
+        case -2:
+            message (D_NORMAL, _("Search"), view->search->error_str);
+            view->search_end = view->search_start;
+            break;
+    }
+    g_string_free (buffer, TRUE);
+
+    view->dirty++;
+    view_update (view);
 }
 
-/* {{{ User-definable commands }}} */
-
-static void
-view_regexp_search_cmd (WView *view)
-{
-    regexp_search (view, 1);
-}
 
 /* Both views */
 static void
-view_normal_search_cmd (WView *view)
+view_search_cmd (WView *view)
 {
-    char *defval, *exp = NULL;
-    static char *last_search_string;
-
     enum {
-	SEARCH_DLG_HEIGHT = 8,
-	SEARCH_DLG_WIDTH = 58
+        SEARCH_DLG_MIN_HEIGHT = 10,
+        SEARCH_DLG_HEIGHT_SUPPLY = 3,
+        SEARCH_DLG_WIDTH = 58
     };
 
-    static int replace_backwards;
-    int treplace_backwards = replace_backwards;
+    char *defval = g_strdup (view->last_search_string != NULL ? view->last_search_string : "");
+    char *exp = NULL;
 
-    static QuickWidget quick_widgets[] = {
-	{quick_button, 6, 10, 5, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0,
+    int ttype_of_search = (int) view->search_type;
+    int tall_codepages = (int) view->search_all_codepages;
+    int tsearch_case = (int) view->search_case;
+    int tsearch_backwards = (int) view->search_backwards;
+
+    gchar **list_of_types = mc_search_get_types_strings_array();
+    int SEARCH_DLG_HEIGHT = SEARCH_DLG_MIN_HEIGHT + g_strv_length (list_of_types) - SEARCH_DLG_HEIGHT_SUPPLY;
+
+    QuickWidget quick_widgets[] = {
+
+	{quick_button, 6, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, NULL, NULL, NULL},
-	{quick_button, 2, 10, 5, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
+
+	{quick_button, 2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT , N_("&OK"), 0, B_ENTER,
 	 0, 0, NULL, NULL, NULL},
-	{quick_checkbox, 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT,
-	 N_("&Backwards"), 0, 0,
-	 0, 0, NULL, NULL, NULL},
-	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, "", 52, 0,
-	 0, 0, N_("Search"), NULL, NULL},
+
+        {quick_checkbox, SEARCH_DLG_WIDTH/2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("All charsets"), 0, 0,
+         &tall_codepages, 0, NULL, NULL, NULL},
+
+	{quick_checkbox, SEARCH_DLG_WIDTH/2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
+	 N_("&Backwards"), 0, 0, &tsearch_backwards, 0, NULL, NULL, NULL},
+
+        {quick_checkbox, SEARCH_DLG_WIDTH/2 + 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT, N_("case &Sensitive"), 0, 0,
+         &tsearch_case, 0, NULL, NULL, NULL},
+
+        {quick_radio, 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT, 0, g_strv_length (list_of_types), ttype_of_search,
+         (void *) &ttype_of_search, const_cast (char **, list_of_types), NULL, NULL, NULL},
+
+
+	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, defval, 52, 0,
+	 0, &exp, N_("Search"), NULL, NULL},
+
 	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
 	 N_(" Enter search string:"), 0, 0,  0, 0, 0, NULL, NULL},
+
 	NULL_QuickWidget
     };
-    static QuickDialog Quick_input = {
+
+    QuickDialog Quick_input = {
 	SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
 	"[Input Line Keys]", quick_widgets, 0
     };
 
-    defval = g_strdup (last_search_string != NULL ? last_search_string : "");
     convert_to_display (defval);
 
-    quick_widgets[2].result = &treplace_backwards;
-    quick_widgets[3].str_result = &exp;
-    quick_widgets[3].text = defval;
 
     if (quick_dialog (&Quick_input) == B_CANCEL)
 	goto cleanup;
 
-    replace_backwards = treplace_backwards;
+    view->search_backwards = tsearch_backwards;
+    view->search_type = (mc_search_type_t) ttype_of_search;
+
+    view->search_all_codepages = (gboolean) tall_codepages;
+    view->search_case = (gboolean) tsearch_case;
 
     if (exp == NULL || exp[0] == '\0')
 	goto cleanup;
 
     convert_from_input (exp);
 
-    g_free (last_search_string);
-    view->search_exp = last_search_string = exp;
+    g_free (view->last_search_string);
+    view->last_search_string = exp;
     exp = NULL;
 
-    view->direction = replace_backwards ? -1 : 1;
-    do_normal_search (view);
-    view->last_search = do_normal_search;
+    if (view->search)
+        mc_search_free(view->search);
+
+    view->search = mc_search_new(view->last_search_string, -1);
+    if (! view->search)
+        return;
+
+    view->search->search_type = view->search_type;
+    view->search->is_all_charsets = view->search_all_codepages;
+    view->search->is_case_sentitive = view->search_case;
+
+    do_search (view);
 
 cleanup:
     g_free (exp);
@@ -3567,12 +3349,10 @@ view_labels (WView *view)
     } else {
         text = view->text_wrap_mode ? "ButtonBar|UnWrap" : "ButtonBar|Wrap";
 	my_define (h, 2, Q_(text), view_toggle_wrap_mode_cmd, view);
-	my_define (h, 6, Q_("ButtonBar|RxSrch"),
-	    view_regexp_search_cmd, view);
     }
 
     text = view->hex_mode ? "ButtonBar|HxSrch" : "ButtonBar|Search";
-    my_define (h, 7, Q_(text), view_normal_search_cmd, view);
+    my_define (h, 7, Q_(text), view_search_cmd, view);
     text = view->magic_mode ? "ButtonBar|Raw" : "ButtonBar|Parse";
     my_define (h, 8, Q_(text), view_toggle_magic_mode_cmd, view);
 
@@ -3630,11 +3410,11 @@ check_left_right_keys (WView *view, int c)
 static void
 view_continue_search_cmd (WView *view)
 {
-    if (view->last_search) {
-	view->last_search (view);
+    if (view->last_search_string!=NULL) {
+        do_search(view);
     } else {
 	/* if not... then ask for an expression */
-	view_normal_search_cmd (view);
+	view_search_cmd (view);
     }
 }
 
@@ -3743,13 +3523,11 @@ view_handle_key (WView *view, int c)
     switch (c) {
 
     case '?':
-	regexp_search (view, -1);
-	return MSG_HANDLED;
-
     case '/':
-	regexp_search (view, 1);
+	view->search_type = MC_SEARCH_T_REGEX;
+	view_search_cmd(view);
 	return MSG_HANDLED;
-
+    break;
 	/* Continue search */
     case XCTRL ('r'):
     case XCTRL ('s'):
@@ -4130,9 +3908,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     view->search_start      = 0;
     view->search_end        = 0;
-    view->search_exp        = NULL;
-    view->direction         = 1; /* forward */
-    view->last_search       = 0; /* it's a function */
 
     view->want_to_quit      = FALSE;
     view->marker            = 0;
