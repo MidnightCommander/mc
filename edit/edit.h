@@ -32,8 +32,6 @@
 
 #include <stdio.h>
 
-#define N_menus 5
-
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)
 #define SEARCH_DIALOG_OPTION_NO_REGEX	(1 << 1)
 #define SEARCH_DIALOG_OPTION_NO_CASE	(1 << 2)
@@ -129,14 +127,17 @@ struct Menu;
 
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
-struct WMenu *edit_init_menu (void);
+struct WMenu *edit_create_menu (void);
 void edit_done_menu (struct WMenu *wmenu);
 void edit_reload_menu (void);
 void menu_save_mode_cmd (void);
-int edit_raw_key_query (const char *heading, const char *query, int cancel);
 int edit_file (const char *_file, int line);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (WEdit * edit, long byte_index);
+char *edit_get_byte_ptr (WEdit * edit, long byte_index);
+char *edit_get_buf_ptr (WEdit * edit, long byte_index);
+int edit_get_utf (WEdit * edit, long byte_index, int *char_width);
+int edit_get_prev_utf (WEdit * edit, long byte_index, int *char_width);
 int edit_count_lines (WEdit * edit, long current, int upto);
 long edit_move_forward (WEdit * edit, long current, int lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);
@@ -156,6 +157,7 @@ long edit_eol (WEdit * edit, long current);
 void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
+int edit_reload_line (WEdit *edit, const char *filename, long line);
 
 void edit_block_copy_cmd (WEdit * edit);
 void edit_block_move_cmd (WEdit * edit);
@@ -163,7 +165,7 @@ int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 void insert_spaces_tab (WEdit * edit, int half);
 
-int edit_delete (WEdit * edit);
+int edit_delete (WEdit * edit, const int byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, long increment);
 void edit_push_action (WEdit * edit, long c, ...);
@@ -187,6 +189,7 @@ void edit_push_markers (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, int again);
 void edit_complete_word_cmd (WEdit * edit);
+void edit_get_match_keyword_cmd (WEdit *edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
@@ -194,7 +197,6 @@ int edit_insert_file (WEdit * edit, const char *filename);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block);
-void freestrs (void);
 void edit_refresh_cmd (WEdit * edit);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);

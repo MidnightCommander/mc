@@ -556,7 +556,7 @@ vfs_parse_raw_filemode (const char *s, size_t *ret_skipped,
 
     p = s;
 
-    // isoctal
+    /* isoctal */
     while(*p >= '0' && *p <= '7')
     {
 	perms *= 010;
@@ -596,7 +596,7 @@ vfs_parse_raw_filemode (const char *s, size_t *ret_skipped,
 	case 0120000:
 	    local_type = S_IFLNK; break;
 	case 0100000:
-	default:// don't know what is it
+	default: /* don't know what is it */
 	    local_type = S_IFREG; break;
     }
 

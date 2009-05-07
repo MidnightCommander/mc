@@ -49,13 +49,14 @@ get_hotkey (int n)
 }
 
 int
-select_charset (int current_charset, int seldisplay)
+select_charset (int delta_x, int delta_y, int current_charset, int seldisplay)
 {
     int i, menu_lines = n_codepages + 1;
     char buffer[255];
 
     /* Create listbox */
-    Listbox *listbox = create_listbox_window (ENTRY_LEN + 2, menu_lines,
+    Listbox *listbox = create_listbox_window_delta (delta_x, delta_y,
+					      ENTRY_LEN + 2, menu_lines,
 					      _(" Choose input codepage "),
 					      "[Codepages Translation]");
 
@@ -97,21 +98,16 @@ int
 do_select_codepage (void)
 {
     const char *errmsg;
+    int r;
 
-    if (display_codepage > 0) {
-	source_codepage = select_charset (source_codepage, 0);
-	errmsg =
-	    init_translation_table (source_codepage, display_codepage);
-	if (errmsg) {
-	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
-	    return -1;
-	}
-    } else {
-	message (D_ERROR, _("Warning"),
-		 _("To use this feature select your codepage in\n"
-		   "Setup / Display Bits dialog!\n"
-		   "Do not forget to save options."));
-	return -1;
+    r = select_charset (0, 0, source_codepage, 0);
+    if ( r > 0 )
+        source_codepage = r;
+
+    errmsg = init_translation_table (source_codepage, display_codepage);
+    if (errmsg) {
+        message (D_ERROR, MSG_ERROR, "%s", errmsg);
+        return -1;
     }
     return 0;
 }

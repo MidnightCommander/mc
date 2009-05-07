@@ -6,23 +6,23 @@
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
 
-Ez a GNU Midnight Commander súgója.
+Ez a GNU Midnight Commander sÃºgÃ³ja.
 
-Az interaktív súgó használatának megismeréséhez csak üss
-egy entertHow to use help. Itt közvetlenül a súgó tartalomjegyzékébeContents
+Az interaktÃ­v sÃºgÃ³ hasznÃ¡latÃ¡nak megismerÃ©sÃ©hez csak Ã¼ss
+egy entertHow to use help. Itt kÃ¶zvetlenÃ¼l a sÃºgÃ³ tartalomjegyzÃ©kÃ©beContents
 juthatsz.
 
-A Midnight Commander-t a következõ szerzõkAUTHORS készítették.
+A Midnight Commander-t a kÃ¶vetkezÅ‘ szerzÅ‘kAUTHORS kÃ©szÃ­tettÃ©k.
 
-A Midnight Commander mindenféle garanciaWarranty nélkül kerül
-kiadásra. Ez szabad szoftver, így továbbadhatod azt a
-Felhasználási engedélybenLicense meghatározott feltételekkel.
+A Midnight Commander mindenfÃ©le garanciaWarranty nÃ©lkÃ¼l kerÃ¼l
+kiadÃ¡sra. Ez szabad szoftver, Ã­gy tovÃ¡bbadhatod azt a
+FelhasznÃ¡lÃ¡si engedÃ©lybenLicense meghatÃ¡rozott feltÃ©telekkel.
 
 [License]
-Engedélyek
+EngedÃ©lyek
 
-          Ez a rész a GNU általános felhasználási
-                  engedélyét tartalmazza.
+          Ez a rÃ©sz a GNU Ã¡ltalÃ¡nos felhasznÃ¡lÃ¡si
+                  engedÃ©lyÃ©t tartalmazza.
            -   Ennek hivatalos nyelve angol.   -
 
 
@@ -436,54 +436,54 @@ library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
 [QueryBox]
-Lekérdezõ box
+LekÃ©rdezÅ‘ box
 
-A lekérdezõ boxban kezeléséhez a nyíl billentyûket, a
-szövegrész elejének magadásást, vagy a gombokra történõ
-egérkattintást használhatod.
+A lekÃ©rdezÅ‘ boxban kezelÃ©sÃ©hez a nyÃ­l billentyÅ±ket, a
+szÃ¶vegrÃ©sz elejÃ©nek magadÃ¡sÃ¡st, vagy a gombokra tÃ¶rtÃ©nÅ‘
+egÃ©rkattintÃ¡st hasznÃ¡lhatod.
 
 [How to use help]
-Hogyan használjuk a súgót
+Hogyan hasznÃ¡ljuk a sÃºgÃ³t
 
-A súgóban a navigációhoz a billentyûzet gombjait és az
-egér gombjait is használhatod. A lefelé mutató nyíl
-lenyomására a következõ bejegyzésre ugorhatsz, vagy
-legördítheted azt. A felfelé mutató nyíl lenyomására
-ez elõzõ bejegyzésre ugorhatsz, vagy felhúzhatod azt.
-A jobbra mutató nyíl lenyomására a linknek megfelelõ
-címre lép. A balra mutató nyíl lenyomására az elõzõleg
-meglátogatott címre lépsz vissza.
+A sÃºgÃ³ban a navigÃ¡ciÃ³hoz a billentyÅ±zet gombjait Ã©s az
+egÃ©r gombjait is hasznÃ¡lhatod. A lefelÃ© mutatÃ³ nyÃ­l
+lenyomÃ¡sÃ¡ra a kÃ¶vetkezÅ‘ bejegyzÃ©sre ugorhatsz, vagy
+legÃ¶rdÃ­theted azt. A felfelÃ© mutatÃ³ nyÃ­l lenyomÃ¡sÃ¡ra
+ez elÅ‘zÅ‘ bejegyzÃ©sre ugorhatsz, vagy felhÃºzhatod azt.
+A jobbra mutatÃ³ nyÃ­l lenyomÃ¡sÃ¡ra a linknek megfelelÅ‘
+cÃ­mre lÃ©p. A balra mutatÃ³ nyÃ­l lenyomÃ¡sÃ¡ra az elÅ‘zÅ‘leg
+meglÃ¡togatott cÃ­mre lÃ©psz vissza.
 
-Ha az általad használt terminál nem támogatja a kurzor
-gombok használatát, használd a szóköz billentyût az
-elõre lépésre, a 'b' gombot a visszalépésre. Használd a
-TAB gombot a következõ bejegyzésre való ugráshoz és az
-ENTER-t a jelenlegi link által megadott címre történõ
-lépéshez. Az 'l' (last=utolsó) gombot az elõzõleg
-látogatott oldalra való visszalépésre használhatod. Az
-ESC lenyomásával kiléphetsz a Súgóból.
+Ha az Ã¡ltalad hasznÃ¡lt terminÃ¡l nem tÃ¡mogatja a kurzor
+gombok hasznÃ¡latÃ¡t, hasznÃ¡ld a szÃ³kÃ¶z billentyÅ±t az
+elÅ‘re lÃ©pÃ©sre, a 'b' gombot a visszalÃ©pÃ©sre. HasznÃ¡ld a
+TAB gombot a kÃ¶vetkezÅ‘ bejegyzÃ©sre valÃ³ ugrÃ¡shoz Ã©s az
+ENTER-t a jelenlegi link Ã¡ltal megadott cÃ­mre tÃ¶rtÃ©nÅ‘
+lÃ©pÃ©shez. Az 'l' (last=utolsÃ³) gombot az elÅ‘zÅ‘leg
+lÃ¡togatott oldalra valÃ³ visszalÃ©pÃ©sre hasznÃ¡lhatod. Az
+ESC lenyomÃ¡sÃ¡val kilÃ©phetsz a SÃºgÃ³bÃ³l.
 
-A bal egérgomb lenyomásával követheted a linket, vagy
-gördíthetsz. A jobb gomb lenyomásával visszatérhetsz az
-elõzõleg látogatott pontra.
+A bal egÃ©rgomb lenyomÃ¡sÃ¡val kÃ¶vetheted a linket, vagy
+gÃ¶rdÃ­thetsz. A jobb gomb lenyomÃ¡sÃ¡val visszatÃ©rhetsz az
+elÅ‘zÅ‘leg lÃ¡togatott pontra.
 
-A Súgóban használható összes gomb listája:
+A SÃºgÃ³ban hasznÃ¡lhatÃ³ Ã¶sszes gomb listÃ¡ja:
 
-Általános mozgási lehetõségek billentyûzettelGeneral Movement Keys.
+ÃltalÃ¡nos mozgÃ¡si lehetÅ‘sÃ©gek billentyÅ±zettelGeneral Movement Keys.
 
-tab           Mozgás a következõ elemre.
-M-tab         Mozgás az elõzõ elemre.
-down          Mozgás a következõ elemre; a sorokat lefelé
-              gördíti.
-up            Mozgás az elõzõ elemre; a sorokat felfelé
-              gördíti.
-right, enter  Követi a jelenlegi linket.
-left, l       Visszalép az elõzõleg meglátogatott pontra.
-F1            Megjeleníti a Súgót a Súgó nézõvel.
-n             Átlép a következõ pontra.
-p             Átlép az elõzõ pontra.
-c             A Tartalomjegyzékhez ugrik.
-F10, esc      Kilép a Súgóból.
+tab           MozgÃ¡s a kÃ¶vetkezÅ‘ elemre.
+M-tab         MozgÃ¡s az elÅ‘zÅ‘ elemre.
+down          MozgÃ¡s a kÃ¶vetkezÅ‘ elemre; a sorokat lefelÃ©
+              gÃ¶rdÃ­ti.
+up            MozgÃ¡s az elÅ‘zÅ‘ elemre; a sorokat felfelÃ©
+              gÃ¶rdÃ­ti.
+right, enter  KÃ¶veti a jelenlegi linket.
+left, l       VisszalÃ©p az elÅ‘zÅ‘leg meglÃ¡togatott pontra.
+F1            MegjelenÃ­ti a SÃºgÃ³t a SÃºgÃ³ nÃ©zÅ‘vel.
+n             ÃtlÃ©p a kÃ¶vetkezÅ‘ pontra.
+p             ÃtlÃ©p az elÅ‘zÅ‘ pontra.
+c             A TartalomjegyzÃ©khez ugrik.
+F10, esc      KilÃ©p a SÃºgÃ³bÃ³l.
 
 Local variables:
 fill-column: 58

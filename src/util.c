@@ -45,6 +45,8 @@
 #include "mountlist.h"
 #include "win.h"		/* xterm_flag */
 #include "timefmt.h"
+#include "strutil.h"
+#include "../src/search/search.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -232,32 +234,7 @@ fake_name_quote (const char *s, int quote_percent)
 const char *
 name_trunc (const char *txt, size_t trunc_len)
 {
-    static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
-    size_t txt_len;
-    char *p;
-
-    if (!txt)
-	return NULL;
-    if (!*txt)
-	return txt;
-
-    if (trunc_len > sizeof (x) - 1) {
-	trunc_len = sizeof (x) - 1;
-    }
-    txt_len = strlen (txt);
-    if (txt_len <= trunc_len) {
-	strcpy (x, txt);
-    } else {
-	size_t y = (trunc_len / 2) + (trunc_len % 2);
-	strncpy (x, txt, (size_t) y);
-	strncpy (x + y, txt + (txt_len - (trunc_len / 2)), trunc_len / 2);
-	x[y] = '~';
-    }
-    x[trunc_len] = 0;
-    for (p = x; *p; p++)
-	if (!is_printable (*p))
-	    *p = '?';
-    return x;
+    return str_trunc (txt, trunc_len);
 }
 
 /*
@@ -267,12 +244,11 @@ name_trunc (const char *txt, size_t trunc_len)
  */
 const char *
 path_trunc (const char *path, size_t trunc_len) {
-    const char *ret;
     char *secure_path = strip_password (g_strdup (path), 1);
-    
-    ret = name_trunc (secure_path, trunc_len);
+
+    const char *ret = str_trunc (secure_path, trunc_len);
     g_free (secure_path);
-    
+
     return ret;
 }
 
@@ -514,109 +490,6 @@ strip_home_and_password(const char *dir)
     return newdir;
 }
 
-static char *
-maybe_start_group (char *d, int do_group, int *was_wildcard)
-{
-    if (!do_group)
-	return d;
-    if (*was_wildcard)
-	return d;
-    *was_wildcard = 1;
-    *d++ = '\\';
-    *d++ = '(';
-    return d;
-}
-
-static char *
-maybe_end_group (char *d, int do_group, int *was_wildcard)
-{
-    if (!do_group)
-	return d;
-    if (!*was_wildcard)
-	return d;
-    *was_wildcard = 0;
-    *d++ = '\\';
-    *d++ = ')';
-    return d;
-}
-
-/* If shell patterns are on converts a shell pattern to a regular
-   expression. Called by regexp_match and mask_rename. */
-/* Shouldn't we support [a-fw] type wildcards as well ?? */
-char *
-convert_pattern (const char *pattern, int match_type, int do_group)
-{
-    char *d;
-    char *new_pattern;
-    int was_wildcard = 0;
-    const char *s;
-
-    if ((match_type != match_regex) && easy_patterns){
-	new_pattern = g_malloc (MC_MAXPATHLEN);
-	d = new_pattern;
-	if (match_type == match_file)
-	    *d++ = '^';
-	for (s = pattern; *s; s++, d++){
-	    switch (*s){
-	    case '*':
-		d = maybe_start_group (d, do_group, &was_wildcard);
-		*d++ = '.';
-		*d   = '*';
-		break;
-		
-	    case '?':
-		d = maybe_start_group (d, do_group, &was_wildcard);
-		*d = '.';
-		break;
-		
-	    case '.':
-		d = maybe_end_group (d, do_group, &was_wildcard);
-		*d++ = '\\';
-		*d   = '.';
-		break;
-
-	    default:
-		d = maybe_end_group (d, do_group, &was_wildcard);
-		*d = *s;
-		break;
-	    }
-	}
-	d = maybe_end_group (d, do_group, &was_wildcard);
-	if (match_type == match_file)
-	    *d++ = '$';
-	*d = 0;
-	return new_pattern;
-    } else
-	return  g_strdup (pattern);
-}
-
-int
-regexp_match (const char *pattern, const char *string, int match_type)
-{
-    static regex_t r;
-    static char *old_pattern = NULL;
-    static int old_type;
-    int    rval;
-    char *my_pattern;
-
-    if (!old_pattern || STRCOMP (old_pattern, pattern) || old_type != match_type){
-	if (old_pattern){
-	    regfree (&r);
-	    g_free (old_pattern);
-	    old_pattern = NULL;
-	}
-	my_pattern = convert_pattern (pattern, match_type, 0);
-	if (regcomp (&r, my_pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
-	    g_free (my_pattern);
-	    return -1;
-	}
-	old_pattern = my_pattern;
-	old_type = match_type;
-    }
-    rval = !regexec (&r, string, 0, NULL, 0);
-    return rval;
-}
-
 const char *
 extension (const char *filename)
 {
@@ -729,48 +602,52 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 }
 
 /* Check strftime() results. Some systems (i.e. Solaris) have different
-short-month-name sizes for different locales */ 
+   short-month-name sizes for different locales */
 size_t
 i18n_checktimelength (void)
 {
+    size_t length;
     time_t testtime = time (NULL);
     struct tm* lt = localtime(&testtime);
-    size_t length;
 
     if (lt == NULL) {
-	    // huh, localtime() doesnt seem to work ... falling back to "(invalid)"
-	    length = strlen(INVALID_TIME_TEXT);
+	/* huh, localtime() doesnt seem to work ... falling back to "(invalid)" */
+	length = str_term_width1 (_(INVALID_TIME_TEXT));
     } else {
-	    char buf [MAX_I18NTIMELENGTH + 1];
-	    size_t a, b;
-	    a = strftime (buf, sizeof(buf)-1, _("%b %e %H:%M"), lt);
-	    b = strftime (buf, sizeof(buf)-1, _("%b %e  %Y"), lt);
-	    length = max (a, b);
+	char buf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
+	size_t a, b;
+
+	strftime (buf, sizeof(buf) - 1, _("%b %d %H:%M"), lt);
+	a = str_term_width1 (buf);
+	strftime (buf, sizeof(buf) - 1, _("%b %d %Y"), lt);
+	b = str_term_width1 (buf);
+
+	length = max (a, b);
+	length = max ((size_t)str_term_width1 (_(INVALID_TIME_TEXT)), length);
     }
 
     /* Don't handle big differences. Use standard value (email bug, please) */
-    if ( length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH )
-	    length = STD_I18NTIMELENGTH;
-    
+    if (length > MAX_I18NTIMELENGTH || length < MIN_I18NTIMELENGTH)
+	length = STD_I18NTIMELENGTH;
+
     return length;
 }
 
 const char *
 file_date (time_t when)
 {
-    static char timebuf [MAX_I18NTIMELENGTH + 1];
+    static char timebuf [MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
-    static size_t i18n_timelength = 0;
+    static int i18n = 0;
     static const char *fmtyear, *fmttime;
     const char *fmt;
 
-    if (i18n_timelength == 0){
-	i18n_timelength = i18n_checktimelength() + 1;
-	
+    if (!i18n){
 	/* strftime() format string for old dates */
 	fmtyear = _("%b %e  %Y");
 	/* strftime() format string for recent dates */
 	fmttime = _("%b %e %H:%M");
+        i18n = 1;
     }
 
     if (current_time > when + 6L * 30L * 24L * 60L * 60L /* Old. */
@@ -785,8 +662,8 @@ file_date (time_t when)
 	fmt = fmtyear;
     else
 	fmt = fmttime;
-    
-    FMT_LOCALTIME(timebuf, i18n_timelength, fmt, when);
+
+    FMT_LOCALTIME(timebuf, sizeof (timebuf), fmt, when);
 
     return timebuf;
 }
@@ -818,7 +695,7 @@ _icase_search (const char *text, const char *data, int *lng)
 	    e += 2;
 	    dlng += 2;
 	}
-	if (toupper((unsigned char) *d) == toupper((unsigned char) *e))
+	if (g_ascii_toupper((gchar) *d) == g_ascii_toupper((gchar) *e))
 	    d++;
 	else {
 	    e -= d - text;
@@ -864,19 +741,23 @@ unix_error_string (int error_num)
 const char *
 skip_separators (const char *s)
 {
-    for (;*s; s++)
-	if (*s != ' ' && *s != '\t' && *s != ',')
-	    break;
-    return s;
+    const char *su = s;
+
+    for (;*su; str_cnext_char (&su))
+	if (*su != ' ' && *su != '\t' && *su != ',') break;
+
+    return su;
 }
 
 const char *
 skip_numbers (const char *s)
 {
-    for (;*s; s++)
-	if (!isdigit ((unsigned char) *s))
-	    break;
-    return s;
+    const char *su = s;
+
+    for (;*su; str_cnext_char (&su))
+	if (!str_isdigit (su)) break;
+
+    return su;
 }
 
 /* Remove all control sequences from the argument string.  We define
@@ -897,6 +778,7 @@ strip_ctrl_codes (char *s)
 {
     char *w; /* Current position where the stripped data is written */
     char *r; /* Current position where the original data is read */
+    char *n;
 
     if (!s)
 	return 0;
@@ -918,9 +800,12 @@ strip_ctrl_codes (char *s)
 	    continue;
 	}
 
-	if (is_printable(*r))
-	    *w++ = *r;
-	++r;
+	n = str_get_next_char (r);
+	if (str_isprint (r)) {
+	    memmove (w, r, n - r);
+	    w+= n - r;
+	}
+	r = n;
     }
     *w = 0;
     return s;
@@ -1295,7 +1180,7 @@ concat_dir_and_file (const char *dir, const char *file)
 GList *
 list_append_unique (GList *list, char *text)
 {
-    GList *link, *newlink;
+    GList *link, *newlink, *tmp;
 
     /*
      * Go to the last position and traverse the list backwards
@@ -1310,7 +1195,7 @@ list_append_unique (GList *list, char *text)
 	newlink = g_list_previous (link);
 	if (!strcmp ((char *) link->data, text)) {
 	    g_free (link->data);
-	    g_list_remove_link (list, link);
+	    tmp = g_list_remove_link (list, link);
 	    g_list_free_1 (link);
 	}
 	link = newlink;
@@ -1507,21 +1392,10 @@ save_file_position (const char *filename, long line, long column)
 extern const char *
 cstrcasestr (const char *haystack, const char *needle)
 {
-    const char *hptr;
-    size_t i, needle_len;
-
-    needle_len = strlen (needle);
-    for (hptr = haystack; *hptr != '\0'; hptr++) {
-	for (i = 0; i < needle_len; i++) {
-	    if (toupper ((unsigned char) hptr[i]) !=
-		toupper ((unsigned char) needle[i]))
-		goto next_try;
-	}
-	return hptr;
-      next_try:
-	(void) 0;
-    }
-    return NULL;
+    char *nee = str_create_search_needle (needle, 0);
+    const char *result = str_search_first (haystack, nee, 0);
+    str_release_search_needle (nee, 0);
+    return result;
 }
 
 const char *
@@ -1629,13 +1503,15 @@ shell_unescape(const char* text)
 {
 	GString *str;
 	char *result = NULL;
+	const char* readptr;
+	char c;
 	
 	if (!text)
 		return NULL;
 
 
 	/* look for the first \ - that's quick skipover if there's nothing to escape */
-	const char* readptr = text;
+	readptr = text;
 	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
 	if (!(*readptr)) {
 		result = g_strdup(text);
@@ -1644,7 +1520,6 @@ shell_unescape(const char* text)
 	str = g_string_new_len(text, readptr - text);
 
 	/* if we're here, we're standing on the first '\' */
-	char c;
 	while ((c = *readptr))
 	{
 		if (c=='\\')

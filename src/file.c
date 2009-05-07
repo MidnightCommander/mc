@@ -56,7 +56,6 @@
 
 #include "global.h"
 #include "tty.h"
-#include "eregex.h"
 #include "setup.h"
 #include "color.h"
 #include "win.h"
@@ -67,7 +66,9 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
-#include "util.h"
+/* #include "util.h" */
+#include "strutil.h"
+#include "../src/search/search.h"
 
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
@@ -144,21 +145,30 @@ static FileProgressStatus files_error (const char *format, const char *file1,
 enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
 	4, LOW_SECT = 8 };
 
-static char
-convert_case (char c, enum CaseConvs *conversion)
+static int
+convert_case (const char *text, enum CaseConvs *conversion,
+             char **out, size_t *remain)
 {
+    size_t left;
+    
     if (*conversion & UP_CHAR) {
 	*conversion &= ~UP_CHAR;
-	return toupper ((unsigned char) c);
+	return str_toupper (text, out, remain);
     } else if (*conversion & LOW_CHAR) {
 	*conversion &= ~LOW_CHAR;
-	return tolower ((unsigned char) c);
+	return str_tolower (text, out, remain);
     } else if (*conversion & UP_SECT) {
-	return toupper ((unsigned char) c);
+	return str_toupper (text, out, remain);
     } else if (*conversion & LOW_SECT) {
-	return tolower ((unsigned char) c);
-    } else
-	return c;
+	return str_tolower (text, out, remain);
+    } else {
+        left = str_cget_next_char (text) - text;
+        if (left >= *remain) return 0;
+        memcpy (*out, text, left);
+        (*out)+= left;
+        (*remain)-= left;
+	return 1;
+    }
 }
 
 static FileProgressStatus transform_error = FILE_CONT;
@@ -166,79 +176,96 @@ static FileProgressStatus transform_error = FILE_CONT;
 static const char *
 do_transform_source (FileOpContext *ctx, const char *source)
 {
-    size_t j, k, l, len;
+    size_t j=0, len;
     const char *fnsource = x_basename (source);
+    char *fnsource_fixed = g_strdup (fnsource);
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
     static char fntarget[MC_MAXPATHLEN];
+    const char *dm;
+    const char *fn;
+    char *actual;
+    size_t remain;
 
-    len = strlen (fnsource);
-    j = re_match (&ctx->rx, fnsource, len, 0, &ctx->regs);
-    if (j != len) {
+
+    str_fix_string (fnsource_fixed);
+
+    len = strlen (fnsource_fixed);
+
+    if ( !( mc_search_run(ctx->search_handle, fnsource_fixed, 0, len, &j) && j == len) ){
 	transform_error = FILE_SKIP;
 	return NULL;
     }
-    for (next_reg = 1, j = 0, k = 0; j < strlen (ctx->dest_mask); j++) {
-	switch (ctx->dest_mask[j]) {
+
+    g_free (fnsource_fixed);
+
+    actual = fntarget;
+    remain = sizeof (fntarget);
+    dm = ctx->dest_mask;
+    for (next_reg = 1; dm[0] != '\0' && remain > 1 ; str_cnext_char (&dm)) {
+	switch (dm[0]) {
 	case '\\':
-	    if (shell_is_char_escaped (&ctx->dest_mask[j])){
-		fntarget[k++] = ctx->dest_mask[j++];
-		fntarget[k++] = ctx->dest_mask[j];
+            str_cnext_char (&dm);
+	    if (!str_isdigit (dm)) {
+		/* Backslash followed by non-digit */
+		switch (dm[0]) {
+		case 'U':
+		    case_conv |= UP_SECT;
+		    case_conv &= ~LOW_SECT;
+		    break;
+		case 'u':
+		    case_conv |= UP_CHAR;
+		    break;
+		case 'L':
+		    case_conv |= LOW_SECT;
+		    case_conv &= ~UP_SECT;
+		    break;
+		case 'l':
+		    case_conv |= LOW_CHAR;
+		    break;
+		case 'E':
+		    case_conv = NO_CONV;
+		    break;
+		default:
+		    /* Backslash as quote mark */
+                    convert_case (dm, &case_conv, &actual, &remain);
+		}
 		break;
 	    } else {
-		j++;
-		if (!isdigit ((unsigned char) ctx->dest_mask[j])) {
-		    /* Backslash followed by non-digit */
-		    switch (ctx->dest_mask[j]) {
-		    case 'U':
-			case_conv |= UP_SECT;
-			case_conv &= ~LOW_SECT;
-			break;
-		    case 'u':
-			case_conv |= UP_CHAR;
-			break;
-		    case 'L':
-			case_conv |= LOW_SECT;
-			case_conv &= ~UP_SECT;
-			break;
-		    case 'l':
-			case_conv |= LOW_CHAR;
-			break;
-		    case 'E':
-			case_conv = NO_CONV;
-			break;
-		    default:
-			/* Backslash as quote mark */
-			fntarget[k++] =
-			    convert_case (ctx->dest_mask[j], &case_conv);
-		    }
-		    break;
-		} else {
-		    /* Backslash followed by digit */
-		    next_reg = ctx->dest_mask[j] - '0';
-		    /* Fall through */
-		}
+		/* Backslash followed by digit */
+		next_reg = dm[0] - '0';
+		/* Fall through */
 	    }
 
 	case '*':
-	    if (next_reg < 0 || next_reg >= RE_NREGS
-		|| ctx->regs.start[next_reg] < 0) {
+	    if (next_reg < 0 || next_reg >= MC_SEARCH__NUM_REPL_ARGS
+		|| mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg) < 0) {
 		message (D_ERROR, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
-	    for (l = (size_t) ctx->regs.start[next_reg];
-		 l < (size_t) ctx->regs.end[next_reg]; l++)
-		fntarget[k++] = convert_case (fnsource[l], &case_conv);
+	    for (fn = fnsource + mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg);
+                 fn < fnsource + mc_search_getend_rezult_by_num(ctx->search_handle, next_reg) && remain > 1; ) {
+		
+                if (str_is_valid_char (fn, -1) == 1) {
+		convert_case (fn, &case_conv, &actual, &remain);
+                    str_cnext_char (&fn);
+                } else {
+                    actual[0] = fn[0];
+                    actual++;
+                    remain--;
+                    fn++;
+                }
+            }
 	    next_reg++;
 	    break;
 
 	default:
-	    fntarget[k++] = convert_case (ctx->dest_mask[j], &case_conv);
+            convert_case (dm, &case_conv, &actual, &remain);
 	    break;
 	}
     }
-    fntarget[k] = 0;
+    actual[0] = '\0';
     return fntarget;
 }
 
@@ -1784,13 +1811,13 @@ panel_operate_generate_prompt (const WPanel *panel, const int operation,
     *dp = '\0';
 
     if (single_source) {
-	i = fmd_xlen - strlen (format_string) - 4;
+        i = fmd_xlen - str_term_width1 (format_string) - 4;
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
-		    name_trunc (single_source, i));
+		    str_trunc (single_source, i));
     } else {
 	g_snprintf (cmd_buf, sizeof (cmd_buf), format_string,
 		    panel->marked);
-	i = strlen (cmd_buf) + 6 - fmd_xlen;
+        i = str_term_width1 (cmd_buf) + 6 - fmd_xlen;
 	if (i > 0) {
 	    fmd_xlen += i;
 	    fmd_init_i18n (TRUE);	/* to recalculate positions of child widgets */
@@ -2231,15 +2258,15 @@ file_error (const char *format, const char *file)
 static FileProgressStatus
 files_error (const char *format, const char *file1, const char *file2)
 {
-    char nfile1[16];
-    char nfile2[16];
-
-    strcpy (nfile1, path_trunc (file1, 15));
-    strcpy (nfile2, path_trunc (file2, 15));
+    char *nfile1 = g_strdup (path_trunc (file1, 15));
+    char *nfile2 = g_strdup (path_trunc (file2, 15));
 
     g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
 		unix_error_string (errno));
 
+    g_free (nfile1);
+    g_free (nfile2);
+    
     return do_file_error (cmd_buf);
 }
 
@@ -2290,8 +2317,14 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 static FileProgressStatus
 do_file_error (const char *str)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_do_file_error;
+
     if (we_are_background)
-	return parent_call (real_do_file_error, NULL, 1, strlen (str),
+	return parent_call (pntr.p, NULL, 1, strlen (str),
 			    str);
     else
 	return real_do_file_error (Foreground, str);
@@ -2300,8 +2333,14 @@ do_file_error (const char *str)
 static FileProgressStatus
 query_recursive (FileOpContext *ctx, const char *s)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *);
+    } pntr;
+    pntr.f = real_query_recursive;
+
     if (we_are_background)
-	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
+	return parent_call (pntr.p, ctx, 1, strlen (s), s);
     else
 	return real_query_recursive (ctx, Foreground, s);
 }
@@ -2310,8 +2349,15 @@ static FileProgressStatus
 query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {
+    union {
+	void *p;
+	FileProgressStatus (*f) (FileOpContext *, enum OperationMode, const char *,
+				  struct stat *, struct stat *);
+    } pntr;
+    pntr.f = file_progress_real_query_replace;
+
     if (we_are_background)
-	return parent_call ((void *) file_progress_real_query_replace,
+	return parent_call (pntr.p,
 			    ctx,
 			    3,
 			    strlen (destname), destname,

@@ -42,6 +42,7 @@
 #include "history.h"
 #include "cons.saver.h"
 #include "layout.h"
+#include "../src/search/search.h"
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
@@ -65,6 +66,7 @@ static void
 exec_extension (const char *filename, const char *data, int *move_dir,
 		int start_line)
 {
+    char *fn;
     char *file_name;
     int cmd_file_fd;
     FILE *cmd_file;
@@ -177,10 +179,13 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 			    localmtime = mystat.st_mtime;
 			    text = (*quote_func) (localcopy, 0);
 			} else {
-			    text = (*quote_func) (filename, 0);
+                            fn = vfs_canon_and_translate (filename);
+                            text = (*quote_func) (fn, 0);
+                            g_free (fn);
 			}
-		    } else
+		    } else {
 			text = expand_format (NULL, *data, !is_cd);
+                    }
 		    if (!is_cd)
 			fputs (text, cmd_file);
 		    else {
@@ -397,7 +402,7 @@ regex_check_type (const char *filename, const char *ptr, int *have_type)
     }
 
     if (content_string[0]
-	&& regexp_match (ptr, content_string + content_shift, match_regex)) {
+	&& mc_search (ptr, content_string + content_shift, MC_SEARCH_T_REGEX)) {
 	found = 1;
     }
 
@@ -521,11 +526,11 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		/* Do not transform shell patterns, you can use shell/ for
 		 * that
 		 */
-		if (regexp_match (p, filename, match_regex))
+		if (mc_search (p, filename, MC_SEARCH_T_REGEX))
 		    found = 1;
 	    } else if (!strncmp (p, "directory/", 10)) {
 		if (S_ISDIR (mystat.st_mode)
-		    && regexp_match (p + 10, filename, match_regex))
+		    && mc_search (p + 10, filename, MC_SEARCH_T_REGEX))
 		    found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
 		p += 6;

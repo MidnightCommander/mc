@@ -17,8 +17,8 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "eregex.h"
 
+struct mc_search_struct;
 typedef enum {
 	OP_COPY,
 	OP_MOVE,
@@ -91,10 +91,7 @@ typedef struct FileOpContext {
 	/* The mask of files to actually operate on */
 	char *dest_mask;
 
-	/* Regex for the file mask */
-	struct re_pattern_buffer rx;
-	struct re_registers regs;
-
+        struct mc_search_struct *search_handle;
 	/* Whether to dive into subdirectories for recursive operations */
 	int dive_into_subdirs;
 

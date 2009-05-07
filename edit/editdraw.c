@@ -52,6 +52,8 @@
 #include "../src/widget.h"	/* buttonbar_redraw() */
 #include "../src/key.h"		/* is_idle() */
 #include "../src/charsets.h"
+#include "../src/strutil.h"	/* utf string functions */
+#include "../src/main.h"	/* source_codepage */
 
 /* Text styles */
 #define MOD_ABNORMAL		(1 << 8)
@@ -70,6 +72,9 @@
 static void status_string (WEdit * edit, char *s, int w)
 {
     char byte_str[16];
+    unsigned char cur_byte = 0;
+    unsigned int cur_utf = 0;
+    int cw = 1;
 
     /*
      * If we are at the end of file, print <EOF>,
@@ -77,18 +82,33 @@ static void status_string (WEdit * edit, char *s, int w)
      * as decimal and as hex.
      */
     if (edit->curs1 < edit->last_byte) {
-	unsigned char cur_byte = edit_get_byte (edit, edit->curs1);
-	g_snprintf (byte_str, sizeof (byte_str), "%c %3d 0x%02X",
-		    is_printable (cur_byte) ? cur_byte : '.',
-		    (int) cur_byte,
-		    (unsigned) cur_byte);
+        if ( !edit->utf8 ) {
+	    cur_byte = edit_get_byte (edit, edit->curs1);
+	
+	    g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X",
+		        (int) cur_byte,
+		        (unsigned) cur_byte);
+	} else {
+	    cur_utf = edit_get_utf (edit, edit->curs1, &cw);
+	    if ( cw > 0 ) {
+	        g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
+		            (unsigned) cur_utf,
+		            (unsigned) cur_utf);
+	    } else {
+	        cur_utf = edit_get_byte (edit, edit->curs1);
+	        g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
+	                    (int) cur_utf,
+	                    (unsigned) cur_utf);
+	    }
+	
+	}
     } else {
-	strcpy (byte_str, "<EOF>");
+	strcpy (byte_str, "<EOF>     ");
     }
 
     /* The field lengths just prevent the status line from shortening too much */
     g_snprintf (s, w,
-		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
+		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s  %s",
 		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 		edit->modified ? 'M' : '-',
 		edit->macro_i < 0 ? '-' : 'R',
@@ -102,7 +122,15 @@ static void status_string (WEdit * edit, char *s, int w)
 
 		edit->curs1,
 		edit->last_byte,
-		byte_str);
+		byte_str,
+
+#ifdef HAVE_CHARSET
+		get_codepage_id ( source_codepage )
+#else
+		""
+#endif
+		);
+
 }
 
 static inline void
@@ -129,11 +157,11 @@ edit_status (WEdit *edit)
     const int preferred_fname_len = 16;
 
     status_string (edit, status, status_size);
-    status_len = (int) strlen (status);
+    status_len = (int) str_term_width1 (status);
 
     if (edit->filename)
         fname = edit->filename;
-    fname_len = strlen(fname);
+    fname_len = str_term_width1 (fname);
     if (fname_len < preferred_fname_len)
         fname_len = preferred_fname_len;
 
@@ -142,7 +170,7 @@ edit_status (WEdit *edit)
 	    fname_len = preferred_fname_len;
 	else
             fname_len = w - (gap + status_len + right_gap);
-	fname = name_trunc (fname, fname_len);
+	fname = str_trunc (fname, fname_len);
     }
 
     widget_move (edit, 0, 0);
@@ -213,17 +241,22 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 #define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
 #endif
 
+struct line_s {
+    unsigned int ch;
+    unsigned int style;
+};
+
 static void
 print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
-		 long end_col, unsigned int line[])
+		 long end_col, struct line_s line[])
 {
-    unsigned int *p;
+    struct line_s *p;
 
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
-
+    unsigned char str[6 + 1];
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
@@ -231,9 +264,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
 
-    while (*p) {
+    while (p->ch) {
 	int style;
-	int textchar;
+	unsigned int textchar;
 	int color;
 
 	if (cols_to_skip) {
@@ -242,9 +275,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	    continue;
 	}
 
-	style = *p & 0xFF00;
-	textchar = *p & 0xFF;
-	color = *p >> 16;
+	style = p->style & 0xFF00;
+	textchar = p->ch;
+	color = p->style >> 16;
 
 	if (style & MOD_ABNORMAL) {
 	    /* Non-printable - use black background */
@@ -273,8 +306,18 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		lowlevel_set_color (color);
 	    }
 	}
-
-	addch (textchar);
+	if ( textchar > 255 ) {
+            int res = g_unichar_to_utf8 (textchar, (char *)str);
+            if ( res == 0 ) {
+                str[0] = '.';
+                str[1] = '\0';
+            } else {
+                str[res] = '\0';
+            }
+            addstr ((char *)str);
+        } else {
+            addch(textchar);
+        }
 	p++;
     }
 }
@@ -286,13 +329,16 @@ static void
 edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		     long end_col)
 {
-    static unsigned int line[MAX_LINE_LEN];
-    unsigned int *p = line;
+    struct line_s line[MAX_LINE_LEN];
+    struct line_s *p = line;
+
     long m1 = 0, m2 = 0, q, c1, c2;
     int col, start_col_real;
+    int cw;
     unsigned int c;
     int color;
     int i;
+    int utf8lag = 0;
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -306,7 +352,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	eval_marks (edit, &m1, &m2);
 
 	if (row <= edit->total_lines - edit->start_line) {
-		long tws;
+		long tws = 0;
 	    if (use_colors && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
@@ -315,98 +361,171 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 	    }
 
 	    while (col <= end_col - edit->start_col) {
-		*p = 0;
+		p->ch = 0;
+		p->style = 0;
 		if (q == edit->curs1)
-		    *p |= MOD_CURSOR;
+		    p->style |= MOD_CURSOR;
 		if (q >= m1 && q < m2) {
 		    if (column_highlighting) {
 			int x;
 			x = edit_move_forward3 (edit, b, 0, q);
 			if (x >= c1 && x < c2)
-			    *p |= MOD_MARKED;
+			    p->style |= MOD_MARKED;
 		    } else
-			*p |= MOD_MARKED;
+			p->style |= MOD_MARKED;
 		}
 		if (q == edit->bracket)
-		    *p |= MOD_BOLD;
+		    p->style |= MOD_BOLD;
 		if (q >= edit->found_start
 		    && q < edit->found_start + edit->found_len)
-		    *p |= MOD_BOLD;
-		c = edit_get_byte (edit, q);
-/* we don't use bg for mc - fg contains both */
+		    p->style |= MOD_BOLD;
+		cw = 1;
+		if ( !edit->utf8 ) {
+		    c = edit_get_byte (edit, q);
+		} else {
+		    c = edit_get_utf (edit, q, &cw);
+		}
+                /* we don't use bg for mc - fg contains both */
 		edit_get_syntax_color (edit, q, &color);
-		*p |= color << 16;
+		p->style |= color << 16;
 		switch (c) {
 		case '\n':
-		    col = end_col - edit->start_col + 1;	/* quit */
-		    *(p++) |= ' ';
+		    col = (end_col + utf8lag) - edit->start_col + 1;	/* quit */
+		    p->ch = ' ';
+		    p++;
 		    break;
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    col += i;
 		    if (use_colors && visible_tabs) {
-			c = (*p & ~MOD_CURSOR) | MOD_WHITESPACE;
+			c = 0;
 			if (i > 2) {
-			    *(p++) |= '<' | MOD_WHITESPACE;
-			    while (--i > 1)
-				*(p++) = c | '-';
-			    *(p++) = c | '>';
+			    p->ch |= '<';
+			    p->style = MOD_WHITESPACE;
+			    p++;
+			    while (--i > 1) {
+				p->ch = c | '-';
+				p->style = MOD_WHITESPACE;
+				p++;
+			    }
+			    p->ch = c | '>';
+			    p->style = MOD_WHITESPACE;
+			    p++;
 			} else if (i > 1) {
-			    *(p++) |= '<' | MOD_WHITESPACE;
-			    *(p++) = c | '>';
-			} else
-			    *(p++) |= '>' | MOD_WHITESPACE;
+			    p->ch |= '<';
+			    p->style = MOD_WHITESPACE;
+			    p++;
+			    p->ch = c | '>';
+			    p->style = MOD_WHITESPACE;
+			    p++;
+			} else {
+			    p->ch |= '>';
+			    p->style = MOD_WHITESPACE;
+			    p++;
+			}
 		    } else if (use_colors && visible_tws && q >= tws) {
-			*p |= '.' | MOD_WHITESPACE;
-			c = *(p++) & ~MOD_CURSOR;
-			while (--i)
-			    *(p++) = c;
+			p->ch |= '.';
+			p->style = MOD_WHITESPACE;
+			c = p->style & ~MOD_CURSOR;
+			p++;
+			while (--i) {
+			    p->ch = ' '; 
+			    p->style = c;
+			    p++;
+			}
 		    } else {
-			*p |= ' ';
-			c = *(p++) & ~MOD_CURSOR;
-			while (--i)
-			    *(p++) = c;
+			p->ch |= ' ';
+			c = p->style & ~MOD_CURSOR;
+			p++;
+			while (--i) {
+			    p->ch = ' '; 
+			    p->style = c;
+			    p++;
+			}
 		    }
 		    break;
 		case ' ':
 		    if (use_colors && visible_tws && q >= tws) {
-			*(p++) |= '.' | MOD_WHITESPACE;
+			p->ch |= '.';
+			p->style = MOD_WHITESPACE;
+			p++;
 			col++;
 			break;
 		    }
 		    /* fallthrough */
 		default:
-		    c = convert_to_display_c (c);
-
+#ifdef HAVE_CHARSET
+		    if ( utf8_display ) {
+		        if ( !edit->utf8 ) {
+		            c = convert_from_8bit_to_utf_c ((unsigned char) c);
+		        }
+		    } else {
+		        if ( edit->utf8 ) {
+		            c = convert_from_utf_to_current_c (c);
+		        } else {
+#endif
+		            c = convert_to_display_c (c);
+#ifdef HAVE_CHARSET
+		        }
+		    }
+#endif
 		    /* Caret notation for control characters */
 		    if (c < 32) {
-			*(p++) = '^' | MOD_ABNORMAL;
-			*(p++) = (c + 0x40) | MOD_ABNORMAL;
+			p->ch = '^';
+			p->style = MOD_ABNORMAL;
+			p++;
+			p->ch = c + 0x40;
+			p->style = MOD_ABNORMAL;
+			p++;
 			col += 2;
 			break;
 		    }
 		    if (c == 127) {
-			*(p++) = '^' | MOD_ABNORMAL;
-			*(p++) = '?' | MOD_ABNORMAL;
+			p->ch = '^';
+			p->style = MOD_ABNORMAL;
+			p++;
+			p->ch = '?';
+			p->style = MOD_ABNORMAL;
+			p++;
 			col += 2;
 			break;
 		    }
-
-		    if (is_printable (c)) {
-			*(p++) |= c;
+#ifndef HAVE_CHARSET
+                    int utf8_display = 0;
+#endif
+		    if (!edit->utf8) {
+		        if ( ( utf8_display && g_unichar_isprint (c) ) ||
+		             ( utf8_display == 0 && is_printable (c) ) ) {
+			        p->ch = c;
+			        p++;
+			} else {
+			        p->ch = '.';
+			        p->style = MOD_ABNORMAL;
+			        p++;
+			}
 		    } else {
-			*(p++) = '.' | MOD_ABNORMAL;
+		        if ( g_unichar_isprint (c) ) {
+			    p->ch = c;
+			    p++;
+			} else {
+			    p->ch = '.';
+			    p->style = MOD_ABNORMAL;
+			    p++;
+			}
 		    }
 		    col++;
 		    break;
 		}
 		q++;
+		if ( cw > 1) {
+		  q += cw - 1;
+		}
 	    }
 	}
     } else {
 	start_col_real = start_col = 0;
     }
-    *p = 0;
+    p->ch = 0;
 
     print_to_widget (edit, row, start_col, start_col_real, end_col, line);
 }

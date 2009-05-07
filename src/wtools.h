@@ -14,6 +14,8 @@ typedef struct {
 } Listbox;
 
 /* Listbox utility functions */
+Listbox *create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, const char *title, const char *help);
+
 Listbox *create_listbox_window (int cols, int lines, const char *title, const char *help);
 #define LISTBOX_APPEND_TEXT(l,h,t,d) \
     listbox_add_item (l->list, LISTBOX_APPEND_AT_END, h, t, d)
@@ -42,8 +44,11 @@ typedef struct {
     int  *result;		/* Checkbutton: where to store result */
     char **str_result;		/* Input lines: destination  */
     const char *histname;	/* Name of the section for saving history */
+    bcback cb;			/* Callback for quick_button */
+
+    Widget *widget;
 } QuickWidget;
-#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL }
+#define NULL_QuickWidget { 0, 0, 0, 0, 0, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL }
 
 typedef struct {
     int  xlen, ylen;

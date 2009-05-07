@@ -38,6 +38,8 @@
 #include "execute.h"
 #include "setup.h"
 #include "history.h"
+#include "strutil.h"
+#include "../src/search/search.h"
 
 #include "../edit/edit.h"		/* BLOCK_FILE */
 #include "../edit/edit-widget.h"	/* WEdit */
@@ -188,7 +190,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     if (edit_one_file != NULL)
 	fname = edit_widget->filename;
     else {
-	if (islower ((unsigned char) c))
+	if (g_ascii_islower ((gchar) c))
 	    panel = current_panel;
 	else {
 	    if (get_other_type () != view_listing)
@@ -203,7 +205,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     else
 	quote_func = fake_name_quote;
 
-    c_lc = tolower ((unsigned char) c);
+    c_lc = g_ascii_tolower ((gchar) c);
 
     switch (c_lc) {
     case 'f':
@@ -328,16 +330,22 @@ check_patterns (char *p)
    point after argument. */
 static char *extract_arg (char *p, char *arg, int size)
 {
+    char *np;
+
     while (*p && (*p == ' ' || *p == '\t' || *p == '\n'))
 	p++;
                 /* support quote space .mnu */
-    while (size > 1 && *p && (*p != ' ' || *(p-1) == '\\') && *p != '\t' && *p != '\n') {
-	*arg++ = *p++;
-	size--;
+    while (*p && (*p != ' ' || *(p-1) == '\\') && *p != '\t' && *p != '\n') {
+	np = str_get_next_char (p);
+	if (np - p >= size) break;
+	memcpy (arg, p, np - p);
+	arg+= np - p;
+	size-= np - p;
+	p = np;
     }
     *arg = 0;
     if (!*p || *p == '\n')
-	p --;
+	str_prev_char (&p);
     return p;
 }
 
@@ -414,22 +422,22 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	case '!':
 	    p = test_condition (edit_widget, p, condition);
 	    *condition = ! *condition;
-	    p--;
+	    str_prev_char (&p);
 	    break;
 	case 'f': /* file name pattern */
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
+	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, MC_SEARCH_T_GLOB);
 	    break;
 	case 'y': /* syntax pattern */
             if (edit_widget && edit_widget->syntax_type) {
 	        p = extract_arg (p, arg, sizeof (arg));
 	        *condition = panel &&
-                    regexp_match (arg, edit_widget->syntax_type, match_normal);
+                    mc_search (arg, edit_widget->syntax_type, MC_SEARCH_T_NORMAL);
 	    }
             break;
 	case 'd':
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && regexp_match (arg, panel->cwd, match_file);
+	    *condition = panel && mc_search (arg, panel->cwd, MC_SEARCH_T_GLOB);
 	    break;
 	case 't':
 	    p = extract_arg (p, arg, sizeof (arg));
@@ -558,7 +566,7 @@ static char *test_line (WEdit *edit_widget, char *p, int *result)
     debug_out (NULL, NULL, 1);
 
     if (!*p || *p == '\n')
-	p --;
+	str_prev_char (&p);
     return p;
 }
 
@@ -631,9 +639,9 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	    }
 	} else if (expand_prefix_found){
 	    expand_prefix_found = 0;
-	    if (isdigit ((unsigned char) *commands)) {
+	    if (g_ascii_isdigit ((gchar) *commands)) {
 		do_quote = atoi (commands);
-		while (isdigit ((unsigned char) *commands))
+		while (g_ascii_isdigit ((gchar) *commands))
 		    commands++;
 	    }
 	    if (*commands == '{')
@@ -750,7 +758,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     /* Parse the menu file */
     old_patterns = easy_patterns;
     p = check_patterns (data);
-    for (menu_lines = col = 0; *p; p++){
+    for (menu_lines = col = 0; *p; str_next_char (&p)){
 	if (menu_lines >= menu_limit){
 	    char ** new_entries;
 	    
@@ -793,7 +801,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 			selected = menu_lines;
 		}
 	    }
-	    else if (*p != ' ' && *p != '\t' && is_printable (*p)) {
+	    else if (*p != ' ' && *p != '\t' && str_isprint (p)) {
 		/* A menu entry title line */
 		if (accept_entry)
 		    entries [menu_lines] = p;

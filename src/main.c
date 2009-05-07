@@ -64,6 +64,7 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
+#include "strutil.h"
 
 /* Listbox for the command history feature */
 #include "widget.h"
@@ -155,7 +156,15 @@ int eight_bit_clean = 1;
  * This is reported to break on many terminals (xterm, qansi-m).
  */
 int full_eight_bits = 0;
+
 #endif				/* !HAVE_CHARSET */
+
+/*
+ * If utf-8 terminal utf8_display = 1
+ * Display bits set UTF-8
+ *
+*/
+int utf8_display = 0;
 
 /* If true use the internal viewer */
 int use_internal_view = 1;
@@ -557,7 +566,7 @@ get_parent_dir_name (const char *cwd, const char *lwd)
     const char *p;
     if (strlen (lwd) > strlen (cwd))
 	if ((p = strrchr (lwd, PATH_SEP)) && !strncmp (cwd, lwd, p - lwd) &&
-	 (strlen (cwd) == p - lwd || (p == lwd && cwd[0] == PATH_SEP &&
+	 ((gsize)strlen (cwd) == (gsize) p - (gsize) lwd || (p == lwd && cwd[0] == PATH_SEP &&
 	  cwd[1] == '\0'))) {
 	    return (p + 1);
 	}
@@ -713,7 +722,7 @@ load_prompt (int fd, void *unused)
 	int prompt_len;
 
 	tmp_prompt = strip_ctrl_codes (subshell_prompt);
-	prompt_len = strlen (tmp_prompt);
+	prompt_len = str_term_width1 (tmp_prompt);
 
 	/* Check for prompts too big */
 	if (COLS > 8 && prompt_len > COLS - 8) {
@@ -811,76 +820,80 @@ listmode_cmd (void)
 
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static menu_entry LeftMenu[] = {
-    {' ', N_("&Listing mode..."), 'L', listing_cmd},
-    {' ', N_("&Quick view     C-x q"), 'Q', quick_view_cmd},
-    {' ', N_("&Info           C-x i"), 'I', info_cmd},
-    {' ', N_("&Tree"), 'T', tree_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Sort order..."), 'S', sort_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Filter..."), 'F', filter_cmd},
+    {' ', N_("&Listing mode..."), NULL_HOTKEY, listing_cmd},
+    {' ', N_("&Quick view     C-x q"), NULL_HOTKEY, quick_view_cmd},
+    {' ', N_("&Info           C-x i"), NULL_HOTKEY, info_cmd},
+    {' ', N_("&Tree"), NULL_HOTKEY, tree_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+    {' ', "",NULL_HOTKEY, 0},
+    {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
-    {' ', "", ' ', 0},
+    {' ', "", NULL_HOTKEY, 0},
 #ifdef WITH_MCFS
-    {' ', N_("&Network link..."), 'N', netlink_cmd},
+    {' ', N_("&Network link..."), NULL_HOTKEY, netlink_cmd},
 #endif
-    {' ', N_("FT&P link..."), 'P', ftplink_cmd},
-    {' ', N_("S&hell link..."), 'H', fishlink_cmd},
+    {' ', N_("FT&P link..."), NULL_HOTKEY, ftplink_cmd},
+    {' ', N_("S&hell link..."), NULL_HOTKEY, fishlink_cmd},
 #ifdef WITH_SMBFS
-    {' ', N_("SM&B link..."), 'B', smblink_cmd},
+    {' ', N_("SM&B link..."), NULL_HOTKEY, smblink_cmd},
 #endif
 #endif
-    {' ', "", ' ', 0},
-    {' ', N_("&Rescan         C-r"), 'R', reread_cmd}
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Rescan         C-r"), NULL_HOTKEY, reread_cmd}
 };
 
 static menu_entry RightMenu[] = {
-    {' ', N_("&Listing mode..."), 'L', listing_cmd},
-    {' ', N_("&Quick view     C-x q"), 'Q', quick_view_cmd},
-    {' ', N_("&Info           C-x i"), 'I', info_cmd},
-    {' ', N_("&Tree"), 'T', tree_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Sort order..."), 'S', sort_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Filter..."), 'F', filter_cmd},
+    {' ', N_("&Listing mode..."), NULL_HOTKEY, listing_cmd},
+    {' ', N_("&Quick view     C-x q"), NULL_HOTKEY, quick_view_cmd},
+    {' ', N_("&Info           C-x i"), NULL_HOTKEY, info_cmd},
+    {' ', N_("&Tree"), NULL_HOTKEY, tree_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+    {' ', "",NULL_HOTKEY, 0},
+    {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
-    {' ', "", ' ', 0},
+    {' ', "", NULL_HOTKEY, 0},
 #ifdef WITH_MCFS
-    {' ', N_("&Network link..."), 'N', netlink_cmd},
+    {' ', N_("&Network link..."), NULL_HOTKEY, netlink_cmd},
 #endif
-    {' ', N_("FT&P link..."), 'P', ftplink_cmd},
-    {' ', N_("S&hell link..."), 'H', fishlink_cmd},
+    {' ', N_("FT&P link..."), NULL_HOTKEY, ftplink_cmd},
+    {' ', N_("S&hell link..."), NULL_HOTKEY, fishlink_cmd},
 #ifdef WITH_SMBFS
-    {' ', N_("SM&B link..."), 'B', smblink_cmd},
+    {' ', N_("SM&B link..."), NULL_HOTKEY, smblink_cmd},
 #endif
 #endif
-    {' ', "", ' ', 0},
-    {' ', N_("&Rescan         C-r"), 'R', reread_cmd}
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Rescan         C-r"), NULL_HOTKEY, reread_cmd}
 };
 
 static menu_entry FileMenu[] = {
-    {' ', N_("&User menu          F2"), 'U', user_file_menu_cmd},
-    {' ', N_("&View               F3"), 'V', view_cmd},
-    {' ', N_("Vie&w file...         "), 'W', view_file_cmd},
-    {' ', N_("&Filtered view     M-!"), 'F', filtered_view_cmd},
-    {' ', N_("&Edit               F4"), 'E', edit_cmd},
-    {' ', N_("&Copy               F5"), 'C', copy_cmd},
-    {' ', N_("c&Hmod           C-x c"), 'H', chmod_cmd},
-    {' ', N_("&Link            C-x l"), 'L', link_cmd},
-    {' ', N_("&SymLink         C-x s"), 'S', symlink_cmd},
-    {' ', N_("edit s&Ymlink  C-x C-s"), 'Y', edit_symlink_cmd},
-    {' ', N_("ch&Own           C-x o"), 'O', chown_cmd},
-    {' ', N_("&Advanced chown       "), 'A', chown_advanced_cmd},
-    {' ', N_("&Rename/Move        F6"), 'R', ren_cmd},
-    {' ', N_("&Mkdir              F7"), 'M', mkdir_cmd},
-    {' ', N_("&Delete             F8"), 'D', delete_cmd},
-    {' ', N_("&Quick cd          M-c"), 'Q', quick_cd_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("select &Group      M-+"), 'G', select_cmd},
-    {' ', N_("u&Nselect group    M-\\"), 'N', unselect_cmd},
-    {' ', N_("reverse selec&Tion M-*"), 'T', reverse_selection_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("e&Xit              F10"), 'X', quit_cmd}
+    {' ', N_("&User menu          F2"), NULL_HOTKEY, user_file_menu_cmd},
+    {' ', N_("&View               F3"), NULL_HOTKEY, view_cmd},
+    {' ', N_("Vie&w file...         "), NULL_HOTKEY, view_file_cmd},
+    {' ', N_("&Filtered view     M-!"), NULL_HOTKEY, filtered_view_cmd},
+    {' ', N_("&Edit               F4"), NULL_HOTKEY, edit_cmd},
+    {' ', N_("&Copy               F5"), NULL_HOTKEY, copy_cmd},
+    {' ', N_("c&Hmod           C-x c"), NULL_HOTKEY, chmod_cmd},
+    {' ', N_("&Link            C-x l"), NULL_HOTKEY, link_cmd},
+    {' ', N_("&SymLink         C-x s"), NULL_HOTKEY, symlink_cmd},
+    {' ', N_("edit s&Ymlink  C-x C-s"), NULL_HOTKEY, edit_symlink_cmd},
+    {' ', N_("ch&Own           C-x o"), NULL_HOTKEY, chown_cmd},
+    {' ', N_("&Advanced chown       "), NULL_HOTKEY, chown_advanced_cmd},
+    {' ', N_("&Rename/Move        F6"), NULL_HOTKEY, ren_cmd},
+    {' ', N_("&Mkdir              F7"), NULL_HOTKEY, mkdir_cmd},
+    {' ', N_("&Delete             F8"), NULL_HOTKEY, delete_cmd},
+    {' ', N_("&Quick cd          M-c"), NULL_HOTKEY, quick_cd_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("select &Group      M-+"), NULL_HOTKEY, select_cmd},
+    {' ', N_("u&Nselect group    M-\\"), NULL_HOTKEY, unselect_cmd},
+    {' ', N_("reverse selec&Tion M-*"), NULL_HOTKEY, reverse_selection_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("e&Xit              F10"), NULL_HOTKEY, quit_cmd}
 };
 
 static menu_entry CmdMenu[] = {
@@ -888,52 +901,52 @@ static menu_entry CmdMenu[] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-    {' ', N_("&Directory tree"), 'D', treebox_cmd},
-    {' ', N_("&Find file            M-?"), 'F', find_cmd},
-    {' ', N_("s&Wap panels          C-u"), 'W', swap_cmd},
-    {' ', N_("switch &Panels on/off C-o"), 'P', view_other_cmd},
-    {' ', N_("&Compare directories  C-x d"), 'C', compare_dirs_cmd},
-    {' ', N_("e&Xternal panelize    C-x !"), 'X', external_panelize},
-    {' ', N_("show directory s&Izes"), 'I', dirsizes_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("command &History"), 'H', history_cmd},
-    {' ', N_("di&Rectory hotlist    C-\\"), 'R', quick_chdir_cmd},
+    {' ', N_("&Directory tree"), NULL_HOTKEY, treebox_cmd},
+    {' ', N_("&Find file            M-?"), NULL_HOTKEY, find_cmd},
+    {' ', N_("s&Wap panels          C-u"), NULL_HOTKEY, swap_cmd},
+    {' ', N_("switch &Panels on/off C-o"), NULL_HOTKEY, view_other_cmd},
+    {' ', N_("&Compare directories  C-x d"), NULL_HOTKEY, compare_dirs_cmd},
+    {' ', N_("e&Xternal panelize    C-x !"), NULL_HOTKEY, external_panelize},
+    {' ', N_("show directory s&Izes"), NULL_HOTKEY, dirsizes_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("command &History"), NULL_HOTKEY, history_cmd},
+    {' ', N_("di&Rectory hotlist    C-\\"), NULL_HOTKEY, quick_chdir_cmd},
 #ifdef USE_VFS
-    {' ', N_("&Active VFS list      C-x a"), 'A', reselect_vfs},
+    {' ', N_("&Active VFS list      C-x a"), NULL_HOTKEY, reselect_vfs},
 #endif
 #ifdef WITH_BACKGROUND
-    {' ', N_("&Background jobs      C-x j"), 'B', jobs_cmd},
+    {' ', N_("&Background jobs      C-x j"), NULL_HOTKEY, jobs_cmd},
 #endif
-    {' ', "", ' ', 0},
+    {' ', "", NULL_HOTKEY, 0},
 #ifdef USE_EXT2FSLIB
-    {' ', N_("&Undelete files (ext2fs only)"), 'U', undelete_cmd},
+    {' ', N_("&Undelete files (ext2fs only)"), NULL_HOTKEY, undelete_cmd},
 #endif
 #ifdef LISTMODE_EDITOR
-    {' ', N_("&Listing format edit"), 'L', listmode_cmd},
+    {' ', N_("&Listing format edit"), NULL_HOTKEY, listmode_cmd},
 #endif
 #if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
-    {' ', "", ' ', 0},
+    {' ', "", NULL_HOTKEY, 0},
 #endif
-    {' ', N_("Edit &extension file"), 'E', ext_cmd},
-    {' ', N_("Edit &menu file"), 'M', edit_mc_menu_cmd},
+    {' ', N_("Edit &extension file"), NULL_HOTKEY, ext_cmd},
+    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd},
 #ifdef USE_INTERNAL_EDIT
-    {' ', N_("Edit edi&tor menu file"), 'T', edit_user_menu_cmd},
-    {' ', N_("Edit &syntax file"), 'S', edit_syntax_cmd}
+    {' ', N_("Edit edi&tor menu file"), NULL_HOTKEY, edit_user_menu_cmd},
+    {' ', N_("Edit &syntax file"), NULL_HOTKEY, edit_syntax_cmd}
 #endif				/* USE_INTERNAL_EDIT */
 };
 
 /* Must keep in sync with the constants in menu_cmd */
 static menu_entry OptMenu[] = {
-    {' ', N_("&Configuration..."), 'C', configure_box},
-    {' ', N_("&Layout..."), 'L', layout_cmd},
-    {' ', N_("c&Onfirmation..."), 'O', confirm_box},
-    {' ', N_("&Display bits..."), 'D', display_bits_box},
-    {' ', N_("learn &Keys..."), 'K', learn_keys},
+    {' ', N_("&Configuration..."), NULL_HOTKEY, configure_box},
+    {' ', N_("&Layout..."), NULL_HOTKEY, layout_cmd},
+    {' ', N_("c&Onfirmation..."), NULL_HOTKEY, confirm_box},
+    {' ', N_("&Display bits..."), NULL_HOTKEY, display_bits_box},
+    {' ', N_("learn &Keys..."), NULL_HOTKEY, learn_keys},
 #ifdef USE_VFS
-    {' ', N_("&Virtual FS..."), 'V', configure_vfs},
+    {' ', N_("&Virtual FS..."), NULL_HOTKEY, configure_vfs},
 #endif				/* !USE_VFS */
-    {' ', "", ' ', 0},
-    {' ', N_("&Save setup"), 'S', save_setup_cmd}
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Save setup"), NULL_HOTKEY, save_setup_cmd}
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
@@ -1114,26 +1127,35 @@ create_panels (void)
 static void
 copy_current_pathname (void)
 {
+    char *cwd_path;
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, current_panel->cwd, 0);
-    if (current_panel->cwd[strlen (current_panel->cwd) - 1] != PATH_SEP)
+    cwd_path = remove_encoding_from_path (current_panel->cwd);
+    command_insert (cmdline, cwd_path, 0);
+
+    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
+    g_free (cwd_path);
 }
 
 static void
 copy_other_pathname (void)
 {
+    char *cwd_path;
+
     if (get_other_type () != view_listing)
 	return;
 
     if (!command_prompt)
 	return;
 
-    command_insert (cmdline, other_panel->cwd, 0);
-    if (other_panel->cwd[strlen (other_panel->cwd) - 1] != PATH_SEP)
+    cwd_path = remove_encoding_from_path (other_panel->cwd);
+    command_insert (cmdline, cwd_path, 0);
+
+    if (cwd_path [strlen (cwd_path ) - 1] != PATH_SEP)
 	command_insert (cmdline, PATH_SEP_STR, 0);
+    g_free (cwd_path);
 }
 
 static void
@@ -1616,19 +1638,14 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 void
 update_xterm_title_path (void)
 {
-    char *p, *s;
+    const char *p;
 
     if (xterm_flag && xterm_title) {
-	p = s = g_strdup (strip_home_and_password (current_panel->cwd));
-	do {
-	    if (!is_printable ((unsigned char) *s))
-		*s = '?';
-	} while (*++s);
+	p = strip_home_and_password (current_panel->cwd);
+	fprintf (stdout, "\33]0;mc - %s\7", str_term_form (p));
 	if (!alternate_plus_minus)
 	    numeric_keypad_mode ();
-	fprintf (stdout, "\33]0;mc - %s\7", p);
 	fflush (stdout);
-	g_free (p);
     }
 }
 
@@ -1894,7 +1911,9 @@ print_color_usage (void)
 	    "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 	    "                 errdhotfocus\n"
 	    "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-	    "   Editor:       editnormal, editbold, editmarked\n"
+	    "   Editor:       editnormal, editbold, editmarked\n"), stdout);
+    fputs (_
+	   (
 	    "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 	    "   File types:   directory, executable, link, stalelink, device, special, core\n"
 	    "\n" "Colors:\n"
@@ -1962,70 +1981,70 @@ process_args (poptContext ctx, int c, const char *option_arg)
 
 static const struct poptOption argument_table[] = {
     /* generic options */
-    {"help", 'h', POPT_ARG_NONE, NULL, 'h',
+    {"help", 'h', POPT_ARG_NONE, {NULL}, 'h',
      N_("Displays this help message"), NULL},
-    {"version", 'V', POPT_ARG_NONE, NULL, 'V',
+    {"version", 'V', POPT_ARG_NONE, {NULL}, 'V',
      N_("Displays the current version"), NULL},
 
     /* terminal options */
-    {"xterm", 'x', POPT_ARG_NONE, &force_xterm, 0,
+    {"xterm", 'x', POPT_ARG_NONE, {&force_xterm}, 0,
      N_("Forces xterm features"), NULL},
-    {"nomouse", 'd', POPT_ARG_NONE, NULL, 'd',
+    {"nomouse", 'd', POPT_ARG_NONE, {NULL}, 'd',
      N_("Disable mouse support in text version"), NULL},
 #if defined(HAVE_SLANG)
-    {"termcap", 't', 0, &SLtt_Try_Termcap, 0,
+    {"termcap", 't', 0, {&SLtt_Try_Termcap}, 0,
      N_("Tries to use termcap instead of terminfo"), NULL},
 #endif
-    {"resetsoft", 'k', POPT_ARG_NONE, &reset_hp_softkeys, 0,
+    {"resetsoft", 'k', POPT_ARG_NONE, {&reset_hp_softkeys}, 0,
      N_("Resets soft keys on HP terminals"), NULL},
-    {"slow", 's', POPT_ARG_NONE, &slow_terminal, 0,
+    {"slow", 's', POPT_ARG_NONE, {&slow_terminal}, 0,
      N_("To run on slow terminals"), NULL},
-    {"stickchars", 'a', 0, &force_ugly_line_drawing, 0,
+    {"stickchars", 'a', 0, {&force_ugly_line_drawing}, 0,
      N_("Use stickchars to draw"), NULL},
 
     /* color options */
-    {"nocolor", 'b', POPT_ARG_NONE, &disable_colors, 0,
+    {"nocolor", 'b', POPT_ARG_NONE, {&disable_colors}, 0,
      N_("Requests to run in black and white"), NULL},
-    {"color", 'c', POPT_ARG_NONE, NULL, 'c',
+    {"color", 'c', POPT_ARG_NONE, {NULL}, 'c',
      N_("Request to run in color mode"), NULL},
-    {"colors", 'C', POPT_ARG_STRING, &command_line_colors, 0,
+    {"colors", 'C', POPT_ARG_STRING, {&command_line_colors}, 0,
      N_("Specifies a color configuration"), NULL},
-    {"help-colors", 'H', POPT_ARG_NONE, NULL, 'H',
+    {"help-colors", 'H', POPT_ARG_NONE, {NULL}, 'H',
      N_("Displays a help screen on how to change the color scheme"), NULL},
 
     /* debug options */
 #ifdef USE_NETCODE
-    {"ftplog", 'l', POPT_ARG_STRING, NULL, 'l',
+    {"ftplog", 'l', POPT_ARG_STRING, {NULL}, 'l',
      N_("Log ftp dialog to specified file"), NULL},
 #ifdef WITH_SMBFS
-    {"debuglevel", 'D', POPT_ARG_STRING, NULL, 'D',
+    {"debuglevel", 'D', POPT_ARG_STRING, {NULL}, 'D',
      N_("Set debug level"), NULL},
 #endif
 #endif
 
     /* options for wrappers */
-    {"datadir", 'f', POPT_ARG_NONE, NULL, 'f',
+    {"datadir", 'f', POPT_ARG_NONE, {NULL}, 'f',
      N_("Print data directory"), NULL},
-    {"printwd", 'P', POPT_ARG_STRING, &last_wd_file, 0,
+    {"printwd", 'P', POPT_ARG_STRING, {&last_wd_file}, 0,
      N_("Print last working directory to specified file"), NULL},
 
     /* subshell options */
 #ifdef HAVE_SUBSHELL_SUPPORT
-    {"subshell", 'U', POPT_ARG_NONE, &use_subshell, 0,
+    {"subshell", 'U', POPT_ARG_NONE, {&use_subshell}, 0,
      N_("Enables subshell support (default)"), NULL},
-    {"nosubshell", 'u', POPT_ARG_NONE, NULL, 'u',
+    {"nosubshell", 'u', POPT_ARG_NONE, {NULL}, 'u',
      N_("Disables subshell support"), NULL},
 #endif
 
     /* single file operations */
-    {"view", 'v', POPT_ARG_STRING, &view_one_file, 0,
+    {"view", 'v', POPT_ARG_STRING, {&view_one_file}, 0,
      N_("Launches the file viewer on a file"), NULL},
 #ifdef USE_INTERNAL_EDIT
-    {"edit", 'e', POPT_ARG_STRING, &edit_one_file, 0,
+    {"edit", 'e', POPT_ARG_STRING, {&edit_one_file}, 0,
      N_("Edits one file"), NULL},
 #endif
 
-    {NULL, '\0', 0, NULL, 0, NULL, NULL}
+    {NULL, '\0', 0, {NULL}, 0, NULL , NULL}
 };
 
 static void
@@ -2072,7 +2091,7 @@ handle_args (int argc, char *argv[])
 	    char *end = tmp + strlen (tmp), *p = end;
 	    if (p > tmp && p[-1] == ':')
 		p--;
-	    while (p > tmp && isdigit ((unsigned char) p[-1]))
+	    while (p > tmp && g_ascii_isdigit ((gchar) p[-1]))
 		p--;
 	    if (tmp < p && p < end && p[-1] == ':') {
 	        struct stat st;
@@ -2090,7 +2109,7 @@ handle_args (int argc, char *argv[])
 		}
 	    } else {
 	    try_plus_filename:
-		if (*tmp == '+' && isdigit ((unsigned char) tmp[1])) {
+		if (*tmp == '+' && g_ascii_isdigit ((gchar) tmp[1])) {
 		    int start_line = atoi (tmp);
 		    if (start_line > 0) {
 			char *file = poptGetArg (ctx);
@@ -2129,6 +2148,8 @@ main (int argc, char *argv[])
     char *mc_dir;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+    int i;
+
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
@@ -2145,10 +2166,12 @@ main (int argc, char *argv[])
 	home_dir = mc_home;
     }
 
+    str_init_strings (NULL);
+
     vfs_init ();
 
 #ifdef USE_INTERNAL_EDIT
-    for ( int i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
+    for ( i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
         edit_history_moveto[i].filename = NULL;
         edit_history_moveto[i].line = -1;
     }
@@ -2281,11 +2304,13 @@ main (int argc, char *argv[])
 #ifdef HAVE_CHARSET
     free_codepages_list ();
 #endif
+    str_uninit_strings ();
+
     g_free (this_dir);
     g_free (other_dir);
 
 #ifdef USE_INTERNAL_EDIT
-    for ( int i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
+    for ( i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
         g_free(edit_history_moveto[i].filename);
     }
 #endif

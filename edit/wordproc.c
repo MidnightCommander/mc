@@ -278,7 +278,7 @@ static void format_this (unsigned char *t, int size, int indent)
 static void replace_at (WEdit * edit, long q, int c)
 {
     edit_cursor_move (edit, q - edit->curs1);
-    edit_delete (edit);
+    edit_delete (edit, 1);
     edit_insert_ahead (edit, c);
 }
 
@@ -308,7 +308,7 @@ put_paragraph (WEdit * edit, unsigned char *t, long p, int indent, int size)
 	    } else if (c == '\n') {
 		edit_cursor_move (edit, p - edit->curs1);
 		while (strchr ("\t ", edit_get_byte (edit, p))) {
-		    edit_delete (edit);
+		    edit_delete (edit, 1);
 		    if (cursor > edit->curs1)
 			cursor--;
 		}

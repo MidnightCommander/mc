@@ -41,10 +41,11 @@
 #include "wtools.h"
 #include "key.h"		/* mi_getch() */
 #include "background.h"		/* parent_call */
+#include "strutil.h"
 
 
 Listbox *
-create_listbox_window (int cols, int lines, const char *title, const char *help)
+create_listbox_window_delta (int delta_x, int delta_y, int cols, int lines, const char *title, const char *help)
 {
     int xpos, ypos, len;
     Listbox *listbox = g_new (Listbox, 1);
@@ -53,23 +54,22 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
     /* Adjust sizes */
     lines = (lines > LINES - 6) ? LINES - 6 : lines;
 
-    if (title && (cols < (len = strlen (title) + 2)))
+    if (title && (cols < (len = str_term_width1 (title) + 2)))
 	cols = len;
 
     /* no &, but 4 spaces around button for brackets and such */
-    if (cols < (len = strlen (cancel_string) + 3))
+    if (cols < (len = str_term_width1 (cancel_string) + 3))
 	cols = len;
 
     cols = cols > COLS - 6 ? COLS - 6 : cols;
-    xpos = (COLS - cols) / 2;
-    ypos = (LINES - lines) / 2 - 2;
-
+    xpos = (COLS - cols + delta_x) / 2;
+    ypos = (LINES - lines + delta_y) / 2 - 2;
     /* Create components */
     listbox->dlg =
 	create_dlg (ypos, xpos, lines + 6, cols + 4, dialog_colors, NULL,
-		    help, title, DLG_CENTER | DLG_REVERSE);
+		    help, title, DLG_REVERSE);
 
-    listbox->list = listbox_new (2, 2, cols, lines, 0);
+    listbox->list = listbox_new (2, 2, lines, cols, NULL);
 
     add_widget (listbox->dlg,
 		button_new (lines + 3, (cols / 2 + 2) - len / 2, B_CANCEL,
@@ -77,6 +77,12 @@ create_listbox_window (int cols, int lines, const char *title, const char *help)
     add_widget (listbox->dlg, listbox->list);
 
     return listbox;
+}
+
+Listbox *
+create_listbox_window (int cols, int lines, const char *title, const char *help)
+{
+    return create_listbox_window_delta (0, 0, cols, lines, title, help);
 }
 
 /* Returns the number of the item selected */
@@ -128,7 +134,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
 	    char *cp = va_arg (ap, char *);
-	    win_len += strlen (cp) + 6;
+	    win_len += str_term_width1 (cp) + 6;
 	    if (strchr (cp, '&') != NULL)
 		win_len--;
 	}
@@ -136,8 +142,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
 
     /* count coordinates */
-    msglen (text, &lines, &cols);
-    cols = 6 + max (win_len, max ((int) strlen (header), cols));
+    str_msg_term_size (text, &lines, &cols);
+    cols = 6 + max (win_len, max (str_term_width1 (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
     xpos = COLS / 2 - cols / 2;
     ypos = LINES / 3 - (lines - 3) / 2;
@@ -152,7 +158,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 	va_start (ap, count);
 	for (i = 0; i < count; i++) {
 	    cur_name = va_arg (ap, char *);
-	    xpos = strlen (cur_name) + 6;
+	    xpos = str_term_width1 (cur_name) + 6;
 	    if (strchr (cur_name, '&') != NULL)
 		xpos--;
 
@@ -273,6 +279,10 @@ message (int flags, const char *title, const char *text, ...)
 {
     char *p;
     va_list ap;
+    union {
+	void *p;
+	void (*f) (int, int *, char *, const char *);
+    } func;
 
     va_start (ap, text);
     p = g_strdup_vprintf (text, ap);
@@ -283,7 +293,8 @@ message (int flags, const char *title, const char *text, ...)
 
 #ifdef WITH_BACKGROUND
     if (we_are_background) {
-	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
+	func.f = bg_message;
+	parent_call (func.p, NULL, 3, sizeof (flags), &flags,
 		     strlen (title), title, strlen (p), p);
     } else
 #endif				/* WITH_BACKGROUND */
@@ -301,7 +312,7 @@ int
 quick_dialog_skip (QuickDialog *qd, int nskip)
 {
     Dlg_head *dd;
-    void *widget;
+
     WRadio *r;
     int xpos;
     int ypos;
@@ -309,9 +320,6 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     WInput *input;
     QuickWidget *qw;
     int do_int;
-    int count = 0;		/* number of quick widgets */
-    int curr_widget;		/* number of the current quick widget */
-    Widget **widgets;		/* table of corresponding widgets */
 
     if (!qd->i18n) {
 	qd->i18n = 1;
@@ -330,34 +338,27 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 			 dialog_colors, NULL, qd->help, qd->title,
 			 DLG_REVERSE);
 
-    /* Count widgets */
     for (qw = qd->widgets; qw->widget_type; qw++) {
-	count++;
-    }
-
-    widgets = (Widget **) g_new (Widget *, count);
-
-    for (curr_widget = 0, qw = qd->widgets; qw->widget_type; qw++) {
 	xpos = (qd->xlen * qw->relative_x) / qw->x_divisions;
 	ypos = (qd->ylen * qw->relative_y) / qw->y_divisions;
 
 	switch (qw->widget_type) {
 	case quick_checkbox:
-	    widget = check_new (ypos, xpos, *qw->result, I18N (qw->text));
+	    qw->widget = check_new (ypos, xpos, *qw->result, I18N (qw->text));
 	    break;
 
 	case quick_radio:
 	    r = radio_new (ypos, xpos, qw->hotkey_pos, const_cast(const char **, qw->str_result));
 	    r->pos = r->sel = qw->value;
-	    widget = r;
+	    qw->widget = r;
 	    break;
 
 	case quick_button:
-	    widget =
+	    qw->widget =
 		button_new (ypos, xpos, qw->value,
 			    (qw->value ==
 			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-			    I18N (qw->text), 0);
+			    I18N (qw->text), (bcback) qw->cb);
 	    break;
 
 	    /* We use the hotkey pos as the field length */
@@ -369,20 +370,19 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    input->point = 0;
 	    if (qw->value & 2)
 		input->completion_flags |= INPUT_COMPLETE_CD;
-	    widget = input;
+	    qw->widget = input;
 	    break;
 
 	case quick_label:
-	    widget = label_new (ypos, xpos, I18N (qw->text));
+	    qw->widget = label_new (ypos, xpos, I18N (qw->text));
 	    break;
 
 	default:
-	    widget = 0;
+	    qw->widget = 0;
 	    fprintf (stderr, "QuickWidget: unknown widget type\n");
 	    break;
 	}
-	widgets[curr_widget++] = widget;
-	add_widget (dd, widget);
+	add_widget (dd, qw->widget);
     }
 
     while (nskip--)
@@ -392,8 +392,8 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 
     /* Get the data if we found something interesting */
     if (dd->ret_value != B_CANCEL) {
-	for (curr_widget = 0, qw = qd->widgets; qw->widget_type; qw++) {
-	    Widget *w = widgets[curr_widget++];
+	for (qw = qd->widgets; qw->widget_type; qw++) {
+	    Widget *w = qw->widget;
 
 	    switch (qw->widget_type) {
 	    case quick_checkbox:
@@ -416,7 +416,6 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
     }
     return_val = dd->ret_value;
     destroy_dlg (dd);
-    g_free (widgets);
 
     return return_val;
 }
@@ -450,10 +449,10 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
 	{quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	 NULL},
-	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
-	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, NULL},
-	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, NULL},
+	 NULL, NULL, NULL},
+	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL, NULL},
+	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, NULL, NULL, NULL},
+	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, NULL, NULL, NULL},
 	NULL_QuickWidget
     };
 
@@ -471,7 +470,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     }
 
     msglen (text, &lines, &cols);
-    len = max ((int) strlen (header), cols) + 4;
+    len = max (str_term_width1 (header), cols) + 4;
     len = max (len, 64);
 
     /* The special value of def_text is used to identify password boxes
@@ -493,7 +492,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     quick_widgets[1].text = _(quick_widgets[1].text);
     quick_widgets[0].relative_x = len / 2 + 4;
     quick_widgets[1].relative_x =
-	len / 2 - (strlen (quick_widgets[1].text) + 9);
+	len / 2 - (str_term_width1 (quick_widgets[1].text) + 9);
     quick_widgets[0].x_divisions = quick_widgets[1].x_divisions = len;
 #endif				/* ENABLE_NLS */
 
@@ -535,13 +534,21 @@ char *
 input_dialog_help (const char *header, const char *text, const char *help,
 		   const char *history_name, const char *def_text)
 {
+    union {
+	void *p;
+	char * (*f) (const char *, const char *, const char *,
+		      const char *, const char *);
+    } func;
 #ifdef WITH_BACKGROUND
     if (we_are_background)
-	return parent_call_string ((void *) fg_input_dialog_help, 5,
+    {
+	func.f = fg_input_dialog_help;
+	return parent_call_string (func.p, 5,
 				   strlen (header), header, strlen (text),
 				   text, strlen (help), help,
 				   strlen (history_name), history_name,
 				   strlen (def_text), def_text);
+    }
     else
 #endif				/* WITH_BACKGROUND */
 	return fg_input_dialog_help (header, text, help, history_name, def_text);

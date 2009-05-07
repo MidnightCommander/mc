@@ -7,6 +7,7 @@
 #define MC_EDIT_WIDGET_H
 
 #include "../src/dialog.h"		/* Widget */
+#include "../src/search/search.h"		/* mc_search_t */
 #include "edit.h"
 
 #define MAX_MACRO_LENGTH 1024
@@ -50,7 +51,18 @@ struct WEdit {
     unsigned char *buffers1[MAXBUFF + 1];	/* all data up to curs1 */
     unsigned char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
 
+    /* UTF8 */
+    char charbuf[4 + 1];
+    int charpoint;
     /* search variables */
+    mc_search_t *search;
+
+    unsigned int search_type;
+    int replace_mode;
+    int replace_backwards;
+    int replace_case;
+    int all_codepages;
+
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
     long found_start;		/* the found word from a search - start position */
@@ -70,6 +82,7 @@ struct WEdit {
     unsigned int screen_modified:1; /* File has been changed since the last screen draw */
     unsigned int delete_file:1;	/* New file, needs to be deleted unless modified */
     unsigned int highlight:1;	/* There is a selected block */
+    unsigned int utf8:1;	/* It's multibyte file codeset */
     long prev_col;		/* recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
     long curs_line;		/* line number of the cursor. */
@@ -121,6 +134,7 @@ struct WEdit {
     int extmod;
 
     char *labels[10];
+
 };
 
 #endif

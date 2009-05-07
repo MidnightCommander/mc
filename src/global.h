@@ -108,12 +108,6 @@ struct timeval {
 #include <glib.h>
 #include "glibcompat.h"
 
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#include <rx.h>
-#else
-#include "eregex.h"
-#endif
-
 #ifndef __GNUC__
 #  define __attribute__(x)
 #endif

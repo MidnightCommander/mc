@@ -11,7 +11,6 @@
 #define UNKNCHAR '\001'
 
 #define CHARSETS_INDEX "mc.charsets"
-
 extern int n_codepages;
 
 extern unsigned char conv_displ[256];
@@ -22,9 +21,11 @@ struct codepage_desc {
     char *name;
 };
 
+extern const char *cp_display;
+extern const char *cp_source;
 extern struct codepage_desc *codepages;
 
-const char *get_codepage_id (int n);
+const char *get_codepage_id (const int n);
 int get_codepage_index (const char *id);
 int load_codepages_list (void);
 void free_codepages_list (void);
@@ -32,6 +33,36 @@ const char *init_translation_table (int cpsource, int cpdisplay);
 void convert_to_display (char *str);
 void convert_from_input (char *str);
 void convert_string (unsigned char *str);
+/*
+ * Converter from utf to selected codepage
+ * param str, utf char
+ * return char in needle codepage (by global int source_codepage)
+*/
+unsigned char convert_from_utf_to_current (const char *str);
+/*
+ * Converter from utf to selected codepage
+ * param input_char, gunichar
+ * return char in needle codepage (by global int source_codepage)
+*/
+unsigned char convert_from_utf_to_current_c (const int input_char);
+/*
+ * Converter from selected codepage 8-bit
+ * param char input_char
+ * return int utf char
+*/
+int convert_from_8bit_to_utf_c (const char input_char);
+/*
+ * Converter from display codepage 8-bit to utf-8
+ * param char input_char
+ * return int utf char
+*/
+int convert_from_8bit_to_utf_c2 (const char input_char);
+
+GString *str_convert_to_input (char *str);
+GString *str_nconvert_to_input (char *str, int len);
+
+GString *str_convert_to_display (char *str);
+GString *str_nconvert_to_display (char *str, int len);
 
 /* Convert single characters */
 static inline int

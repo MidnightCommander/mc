@@ -23,12 +23,13 @@ enum {
 
 #define ACS_VLINE SLSMG_VLINE_CHAR
 #define ACS_HLINE SLSMG_HLINE_CHAR
+#define ACS_LTEE SLSMG_LTEE_CHAR
+#define ACS_RTEE SLSMG_RTEE_CHAR
 #define ACS_ULCORNER SLSMG_ULCORN_CHAR
 #define ACS_LLCORNER SLSMG_LLCORN_CHAR
 #define ACS_URCORNER SLSMG_URCORN_CHAR
 #define ACS_LRCORNER SLSMG_LRCORN_CHAR
 
-#define ACS_LTEE 't'
 #define acs()   SLsmg_set_char_set(1)
 #define noacs() SLsmg_set_char_set (0)
 #define baudrate() SLang_TT_Baud_Rate

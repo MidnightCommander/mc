@@ -375,6 +375,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     FILE *logfile;
     char *quoted_path;
     int reply_code;
+    gchar *shell_commands;
 
 #if 0
     /*
@@ -384,7 +385,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     {
         MEDATA->logfile = fopen("/tmp/mc-FISH.sh", "w");
     }
-#endif // 0
+#endif /* 0 */
 
     logfile = MEDATA->logfile;
 
@@ -393,7 +394,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     gettimeofday(&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
     quoted_path = shell_escape (remote_path);
-    fish_command (me, super, NONE,
+    shell_commands = g_strconcat(
 		"#LIST /%s\n"
 		"if `perl -v > /dev/null 2>&1` ; then\n"
 		  "perl -e '\n"
@@ -407,6 +408,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "while( (my $filename = readdir(DIR))){\n"
 		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
 		   "my $mloctime= scalar localtime $mtime;\n"
+	,
 		   "my $shell_escape_regex= s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
 		   "my $e_filename = $filename;\n"
 		   "$e_filename =~ $shell_escape_regex;\n"
@@ -426,6 +428,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				    ":\\\"$e_filename\\\"\\n"
 				    "\\n\", S_IMODE($mode), S_IFMT($mode));\n"
 		   "}}\n"
+	,
 		   "printf(\"### 200\\n\");\n"
 		   "closedir(DIR);\n"
 		   "} else {\n"
@@ -448,6 +451,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 					  "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 				  "elif `sed --version >/dev/null 2>&1` ; then\n"
 					  "file=`echo $n | sed -e 's#^\\(.*\\) -> \\(.*\\)#\\1\" -> \"\\2#'`\n"
+	,
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$file\"\n\"\n"
 				  "else\n"
 					  "echo \"P$p $u $g\nS$s\nd$m $d $y\n:\"$n\"\n\"\n"
@@ -467,8 +471,15 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		  "echo '### 200'\n"
 	"else\n"
 		  "echo '### 500'\n"
-	"fi\n",
+	"fi\n"
+	,
+	NULL
+    );
+
+    fish_command (me, super, NONE, shell_commands,
 	    quoted_path, quoted_path, quoted_path, quoted_path, quoted_path, quoted_path);
+
+    g_free(shell_commands);
     g_free (quoted_path);
     ent = vfs_s_generate_entry(me, NULL, dir, 0);
     while (1) {
@@ -506,9 +517,9 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			break;  /* We'll do "." and ".." ourselves */
 
 		if (S_ISLNK(ST.st_mode)) {
-			// we expect: "escaped-name" -> "escaped-name"
+			/* we expect: "escaped-name" -> "escaped-name"
 			//     -> cannot occur in filenames,
-			//     because it will be escaped to -\>
+			//     because it will be escaped to -\> */
 
 			if (*filename == '"')
 				++filename;
@@ -520,14 +531,14 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				linkname = filename_bound;
 				if (filename_bound > filename
 				    && *(filename_bound - 1) == '"')
-					--filename_bound; // skip trailing "
+					--filename_bound; /* skip trailing " */
 			}
 			else
 			{
 				filename_bound = linkname;
-				linkname += 6; // strlen ("\" -> \"")
+				linkname += 6; /* strlen ("\" -> \"") */
 				if (*(linkname_bound - 1) == '"')
-					--linkname_bound; // skip trailing "
+					--linkname_bound; /* skip trailing " */
 			}
 
 			ent->name = str_dup_range(filename, filename_bound);
@@ -536,11 +547,13 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			ent->ino->linkname = str_dup_range(linkname, linkname_bound);
 			shell_unescape(ent->ino->linkname);
 		} else {
-			// we expect: "escaped-name"
+			/* we expect: "escaped-name" */
 			if (filename_bound - filename > 2)
 			{
-				// there is at least 2 "
-				// and we skip them
+				/*
+				 there is at least 2 "
+				 and we skip them
+				*/
 				if (*filename == '"')
 					++filename;
 				if (*(filename_bound - 1) == '"')
@@ -565,8 +578,10 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	    break;
 	}
 	case 'R': {
-	    // raw filemode:
-	    // we expect: Roctal-filemode octal-filetype uid.gid
+	    /*
+	       raw filemode:
+	       we expect: Roctal-filemode octal-filetype uid.gid
+	    */
 	    size_t skipped;
 	    vfs_parse_raw_filemode (buffer + 1, &skipped, &ST.st_mode);
 	    break;
@@ -856,6 +871,8 @@ static int
 fish_ctl (void *fh, int ctlop, void *arg)
 {
     (void) arg;
+    (void) fh;
+    (void) ctlop;
     return 0;
 #if 0
     switch (ctlop) {

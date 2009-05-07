@@ -55,11 +55,30 @@ extern "C" {
 #define POPT_CONTEXT_KEEP_FIRST	(1 << 1)  /* pay attention to argv[0] */
 #define POPT_CONTEXT_POSIXMEHARDER (1 << 2) /* options can't follow args */
 
+struct poptOption;
+
+enum poptCallbackReason { POPT_CALLBACK_REASON_PRE,
+			  POPT_CALLBACK_REASON_POST,
+			  POPT_CALLBACK_REASON_OPTION };
+typedef struct poptContext_s * poptContext;
+
+typedef void (*poptCallbackType)(poptContext con,
+				 enum poptCallbackReason reason,
+			         const struct poptOption * opt,
+				 const char * arg, void * data);
+
+typedef union {
+	void *p;
+	void (*f1)(poptContext , enum poptCallbackReason, struct poptOption *,
+				const char *, void *);
+	poptCallbackType f2;
+} popt_arg_t;
+
 struct poptOption {
     const char * longName;	/* may be NULL */
     char shortName;		/* may be '\0' */
     int argInfo;
-    void * arg;			/* depends on argInfo */
+    popt_arg_t arg;		/* depends on argInfo */
     int val;			/* 0 means don't return, just update flag */
     char * descrip;	/* description for autohelp -- may be NULL */
     const char * argDescrip;	/* argument description for autohelp */
@@ -72,22 +91,10 @@ struct poptAlias {
     char ** argv;		/* must be free()able */
 };
 
-extern struct poptOption const poptHelpOptions[];
-#define POPT_AUTOHELP { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptHelpOptions, \
-			0, "Help options", NULL },
-
-typedef struct poptContext_s * poptContext;
 #ifndef __cplusplus
 typedef struct poptOption * poptOption;
 #endif
 
-enum poptCallbackReason { POPT_CALLBACK_REASON_PRE,
-			  POPT_CALLBACK_REASON_POST,
-			  POPT_CALLBACK_REASON_OPTION };
-typedef void (*poptCallbackType)(poptContext con,
-				 enum poptCallbackReason reason,
-			         const struct poptOption * opt,
-				 const char * arg, void * data);
 
 poptContext poptGetContext(const char * name, int argc, char ** argv,
 			   const struct poptOption * options, int flags);

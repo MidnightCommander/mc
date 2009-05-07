@@ -1,44 +1,44 @@
-Tipp: A kijelölt fájlnevek parancssorba való másolása: C-x t
-Tipp: Az aktuális elérési út parancssorba való másolása: C-x p
-Tipp: Kiegészítés: M-Tab (vagy Esc Tab). Kétszer lenyomva listát ad.
-Tipp: Korábbi parancsok elõhozása: M-p illetve M-n
-Tipp: Speciális karakter beírásához használja ezt: Control-q <karakter>
-Tipp: Az itt megjelenõ üzenetek kikapcsolhatók a "Beállítások/Megjelenés"-nél.
-Tipp: Könyvtárak kijelölése a minta végére / jelet írva lehetséges.
-Tipp: Ha a terminálon nincsenek funkcióbillentyûk, használja ezt: Esc <szám>
+Tipp: A kijelÃ¶lt fÃ¡jlnevek parancssorba valÃ³ mÃ¡solÃ¡sa: C-x t
+Tipp: Az aktuÃ¡lis elÃ©rÃ©si Ãºt parancssorba valÃ³ mÃ¡solÃ¡sa: C-x p
+Tipp: KiegÃ©szÃ­tÃ©s: M-Tab (vagy Esc Tab). KÃ©tszer lenyomva listÃ¡t ad.
+Tipp: KorÃ¡bbi parancsok elÅ‘hozÃ¡sa: M-p illetve M-n
+Tipp: SpeciÃ¡lis karakter beÃ­rÃ¡sÃ¡hoz hasznÃ¡lja ezt: Control-q <karakter>
+Tipp: Az itt megjelenÅ‘ Ã¼zenetek kikapcsolhatÃ³k a "BeÃ¡llÃ­tÃ¡sok/MegjelenÃ©s"-nÃ©l.
+Tipp: KÃ¶nyvtÃ¡rak kijelÃ¶lÃ©se a minta vÃ©gÃ©re / jelet Ã­rva lehetsÃ©ges.
+Tipp: Ha a terminÃ¡lon nincsenek funkciÃ³billentyÅ±k, hasznÃ¡lja ezt: Esc <szÃ¡m>
 Tipp: A Midnight Commander honlapja: http://www.midnight-commander.org/
-Tipp: Hibabejelentéseket a következõ címre lehet küldeni: mc-devel@gnome.org
-Tipp: A Tab billentyûvel lehet panelt váltani.
-Tipp: VFS-funkció: egy Tar-fájlon Entert nyomva megjelenik annak tartalma.
-Tipp: A Midnight Commandernek van "man" (kézikönyv) lapja is.
-Tipp: Szeretne Lynx-stílusú navigációt? Be lehet állítani az Alapbeállításoknál.
-Tipp: A % makrók még a parancssorban is használhatók.
-Tipp: Program végrehajtása a kimenetnek a fájlmegjelenítõbe való küldésével: M-!
-Tipp: A fájlok listázási módja beállítható; részletek a "man mc" paranccsal.
-Tipp: A %D/%T sztring a másik panel kijelölt fájljaival lesz helyettesítve.
-Tipp: A sima shell-t szeretné? Használja ezt: C-o (visszatérés MC-be: ugyanígy).
-Tipp: A CDPATH változó beállításával egyszerûbbé tehetõ a "cd" parancsok kiadása.
-Tipp: Ha látni szeretné a .* rejtett fájlokat, állítsa be az Alapbeállításoknál.
-Tipp: Ha látni szeretné a *~ másolatfájlokat, állítsa be az Alapbeállításoknál.
-Tipp: A kiegészítés minden ablak összes beviteli mezõjében mûködik: M-Tab
-Tipp: Lassú terminálokon a -s opció hasznos lehet.
-Tipp: Fájlkeresés: mûveletek végzése a megtalált fájlokkal: "Listát a panelra".
-Tipp: Komplex keresések végzéséhez a "Külsõ panel-parancs" funkció javasolt.
-Tipp: Könyvtárváltás egy parancs begépelése közben: M-c (gyors könyvtárváltás).
-Megjegyzés: A shell-parancsok távoli fájlrendszereken nem használhatók.
-Tipp: A pufferben levõ (például "C-k"-val oda tett) szöveg visszahozása: C-y
-Tipp: Ha nem mûködnek bizonyos billentyûk: "Beállítások/Billentyûk".
-Tipp: Egy parancs kimenetének megjelenítése a fájlmegjelenítõben: M-!
-Tipp: Az F13 (vagy Shift-F3) a fájlmegjelenítõt "nyers" módban indítja el.
-Tipp: Az F4-re használandó szerkesztõt az EDITOR shell-változóval lehet megadni.
-Tipp: A külsõ fájlmegjelenítõt a PAGER shell-változóval lehet megadni.
-Tipp: Az összes megerõsítéskérés kikapcsolható: "Beállítások/Megerõsítések".
-Tipp: Egyszerû módon elérhetõk a gyakran használt könyvtárak: C-\
-Tipp: "Anonymous" FTP-zés végezhetõ ezzel a paranccsal: "cd /#ftp:gépnév.edu".
-Tipp: Az FTP be van építve a Midnight Commanderbe: "FTP-kapcsolat" menüpontok.
-Tipp: A listázási mód gyorsan váltható a következõ billentyûkombinációval: M-t
-Tipp: FTP-zésnél felhasználónév is megadható: "cd /#ftp:felhasználó@gépnév.edu".
-Tipp: Az RPM-csomagfájlok böngészhetõk, ehhez Entert kell nyomni az adott fájlon.
-Tipp: Könyvtárak kijelölése a "Kijelölés" ablakban: / jel hozzáfûzésével.
-Tipp: Az egérrel való szövegkimásoláshoz szükség lehet a Shift lenyomására.
-Tipp: A gyakran látogatott FTP-helyek betehetõk a gyorslistába: C-\
+Tipp: HibabejelentÃ©seket a kÃ¶vetkezÅ‘ cÃ­mre lehet kÃ¼ldeni: mc-devel@gnome.org
+Tipp: A Tab billentyÅ±vel lehet panelt vÃ¡ltani.
+Tipp: VFS-funkciÃ³: egy Tar-fÃ¡jlon Entert nyomva megjelenik annak tartalma.
+Tipp: A Midnight Commandernek van "man" (kÃ©zikÃ¶nyv) lapja is.
+Tipp: Szeretne Lynx-stÃ­lusÃº navigÃ¡ciÃ³t? Be lehet Ã¡llÃ­tani az AlapbeÃ¡llÃ­tÃ¡soknÃ¡l.
+Tipp: A % makrÃ³k mÃ©g a parancssorban is hasznÃ¡lhatÃ³k.
+Tipp: Program vÃ©grehajtÃ¡sa a kimenetnek a fÃ¡jlmegjelenÃ­tÅ‘be valÃ³ kÃ¼ldÃ©sÃ©vel: M-!
+Tipp: A fÃ¡jlok listÃ¡zÃ¡si mÃ³dja beÃ¡llÃ­thatÃ³; rÃ©szletek a "man mc" paranccsal.
+Tipp: A %D/%T sztring a mÃ¡sik panel kijelÃ¶lt fÃ¡jljaival lesz helyettesÃ­tve.
+Tipp: A sima shell-t szeretnÃ©? HasznÃ¡lja ezt: C-o (visszatÃ©rÃ©s MC-be: ugyanÃ­gy).
+Tipp: A CDPATH vÃ¡ltozÃ³ beÃ¡llÃ­tÃ¡sÃ¡val egyszerÅ±bbÃ© tehetÅ‘ a "cd" parancsok kiadÃ¡sa.
+Tipp: Ha lÃ¡tni szeretnÃ© a .* rejtett fÃ¡jlokat, Ã¡llÃ­tsa be az AlapbeÃ¡llÃ­tÃ¡soknÃ¡l.
+Tipp: Ha lÃ¡tni szeretnÃ© a *~ mÃ¡solatfÃ¡jlokat, Ã¡llÃ­tsa be az AlapbeÃ¡llÃ­tÃ¡soknÃ¡l.
+Tipp: A kiegÃ©szÃ­tÃ©s minden ablak Ã¶sszes beviteli mezÅ‘jÃ©ben mÅ±kÃ¶dik: M-Tab
+Tipp: LassÃº terminÃ¡lokon a -s opciÃ³ hasznos lehet.
+Tipp: FÃ¡jlkeresÃ©s: mÅ±veletek vÃ©gzÃ©se a megtalÃ¡lt fÃ¡jlokkal: "ListÃ¡t a panelra".
+Tipp: Komplex keresÃ©sek vÃ©gzÃ©sÃ©hez a "KÃ¼lsÅ‘ panel-parancs" funkciÃ³ javasolt.
+Tipp: KÃ¶nyvtÃ¡rvÃ¡ltÃ¡s egy parancs begÃ©pelÃ©se kÃ¶zben: M-c (gyors kÃ¶nyvtÃ¡rvÃ¡ltÃ¡s).
+MegjegyzÃ©s: A shell-parancsok tÃ¡voli fÃ¡jlrendszereken nem hasznÃ¡lhatÃ³k.
+Tipp: A pufferben levÅ‘ (pÃ©ldÃ¡ul "C-k"-val oda tett) szÃ¶veg visszahozÃ¡sa: C-y
+Tipp: Ha nem mÅ±kÃ¶dnek bizonyos billentyÅ±k: "BeÃ¡llÃ­tÃ¡sok/BillentyÅ±k".
+Tipp: Egy parancs kimenetÃ©nek megjelenÃ­tÃ©se a fÃ¡jlmegjelenÃ­tÅ‘ben: M-!
+Tipp: Az F13 (vagy Shift-F3) a fÃ¡jlmegjelenÃ­tÅ‘t "nyers" mÃ³dban indÃ­tja el.
+Tipp: Az F4-re hasznÃ¡landÃ³ szerkesztÅ‘t az EDITOR shell-vÃ¡ltozÃ³val lehet megadni.
+Tipp: A kÃ¼lsÅ‘ fÃ¡jlmegjelenÃ­tÅ‘t a PAGER shell-vÃ¡ltozÃ³val lehet megadni.
+Tipp: Az Ã¶sszes megerÅ‘sÃ­tÃ©skÃ©rÃ©s kikapcsolhatÃ³: "BeÃ¡llÃ­tÃ¡sok/MegerÅ‘sÃ­tÃ©sek".
+Tipp: EgyszerÅ± mÃ³don elÃ©rhetÅ‘k a gyakran hasznÃ¡lt kÃ¶nyvtÃ¡rak: C-\
+Tipp: "Anonymous" FTP-zÃ©s vÃ©gezhetÅ‘ ezzel a paranccsal: "cd /#ftp:gÃ©pnÃ©v.edu".
+Tipp: Az FTP be van Ã©pÃ­tve a Midnight Commanderbe: "FTP-kapcsolat" menÃ¼pontok.
+Tipp: A listÃ¡zÃ¡si mÃ³d gyorsan vÃ¡lthatÃ³ a kÃ¶vetkezÅ‘ billentyÅ±kombinÃ¡ciÃ³val: M-t
+Tipp: FTP-zÃ©snÃ©l felhasznÃ¡lÃ³nÃ©v is megadhatÃ³: "cd /#ftp:felhasznÃ¡lÃ³@gÃ©pnÃ©v.edu".
+Tipp: Az RPM-csomagfÃ¡jlok bÃ¶ngÃ©szhetÅ‘k, ehhez Entert kell nyomni az adott fÃ¡jlon.
+Tipp: KÃ¶nyvtÃ¡rak kijelÃ¶lÃ©se a "KijelÃ¶lÃ©s" ablakban: / jel hozzÃ¡fÅ±zÃ©sÃ©vel.
+Tipp: Az egÃ©rrel valÃ³ szÃ¶vegkimÃ¡solÃ¡shoz szÃ¼ksÃ©g lehet a Shift lenyomÃ¡sÃ¡ra.
+Tipp: A gyakran lÃ¡togatott FTP-helyek betehetÅ‘k a gyorslistÃ¡ba: C-\

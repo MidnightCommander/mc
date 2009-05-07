@@ -37,6 +37,7 @@
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"
+#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -175,8 +176,8 @@ init_chown (void)
     }
 
     /* get new listboxes */
-    l_user = listbox_new (UY + 1, UX + 1, 19, 10, NULL);
-    l_group = listbox_new (GY + 1, GX + 1, 19, 10, NULL);
+    l_user = listbox_new (UY + 1, UX + 1, 10, 19, NULL);
+    l_group = listbox_new (GY + 1, GX + 1, 10, 19, NULL);
 
     /* add fields for unknown names (numbers) */
     listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);
@@ -272,9 +273,9 @@ chown_cmd (void)
 	if (fe)
 	    listbox_select_entry (l_group, fe);
 
-        chown_label (0, name_trunc (fname, 15));
-        chown_label (1, name_trunc (get_owner (sf_stat.st_uid), 15));
-	chown_label (2, name_trunc (get_group (sf_stat.st_gid), 15));
+        chown_label (0, str_trunc (fname, 15));
+        chown_label (1, str_trunc (get_owner (sf_stat.st_uid), 15));
+	chown_label (2, str_trunc (get_group (sf_stat.st_gid), 15));
 	size_trunc_len (buffer, 15, sf_stat.st_size, 0);
 	chown_label (3, buffer);
 	chown_label (4, string_perm (sf_stat.st_mode));

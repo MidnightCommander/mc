@@ -140,7 +140,9 @@ void
 slang_init (void)
 {
     SLtt_get_terminfo ();
-
+#if SLANG_VERSION >= 20000
+    SLutf8_enable (-1);
+#endif
    /*
     * If the terminal in not in terminfo but begins with a well-known
     * string such as "linux" or "xterm" S-Lang will go on, but the
@@ -305,6 +307,7 @@ hline (int ch, int len)
 void
 vline (int character, int len)
 {
+    (void) character;
     if (!slow_terminal){
 	SLsmg_draw_vline (len);
     } else {

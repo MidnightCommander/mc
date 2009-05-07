@@ -77,6 +77,8 @@ typedef struct WPanel {
 
     int      searching;
     char     search_buffer [256];
+    char     search_char [MB_LEN_MAX]; /*buffer for multibytes characters*/
+    int      search_chpoint;           /*point after last characters in search_char*/
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);
@@ -92,6 +94,7 @@ extern int fast_reload;
 void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
+void set_panel_encoding (WPanel *);
 
 void update_dirty_panels (void);
 void panel_update_cols (Widget *widget, int frame_size);

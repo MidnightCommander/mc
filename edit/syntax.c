@@ -52,6 +52,8 @@
 #include "../src/color.h"	/* use_colors */
 #include "../src/main.h"	/* mc_home */
 #include "../src/wtools.h"	/* message() */
+#include "../src/strutil.h"	/* utf string functions */
+#include "../src/search/search.h" /* search engine */
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -183,7 +185,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	if (strchr (whole_left, c))
 	    return -1;
 
-    for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
+    for (p = (unsigned char *) text, q = p + str_term_width1 ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case SYNTAX_TOKEN_STAR:
 	    if (++p > q)
@@ -1016,8 +1018,6 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 {
 #define NENTRIES 30
     FILE *f, *g = NULL;
-    regex_t r;
-    regmatch_t pmatch[1];
     char *args[1024], *l = 0;
     int line = 0;
     int result = 0;
@@ -1089,23 +1089,11 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
 /* 3: auto-detect rule set from regular expressions */
 	    int q;
-	    if (regcomp (&r, args[1], REG_EXTENDED)) {
-		result = line;
-		break;
-	    }
-
+            q = mc_search(args[1], editor_file, MC_SEARCH_T_REGEX);
 /* does filename match arg 1 ? */
-	    q = !regexec (&r, editor_file, 1, pmatch, 0);
-	    regfree (&r);
 	    if (!q && args[3]) {
-		if (regcomp (&r, args[3], REG_EXTENDED)) {
-		    result = line;
-		    break;
-		}
-
 /* does first line match arg 3 ? */
-		q = !regexec (&r, first_line, 1, pmatch, 0);
-		regfree (&r);
+                q = mc_search(args[3], first_line, MC_SEARCH_T_REGEX);
 	    }
 	    if (q) {
 		int line_error;

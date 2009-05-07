@@ -34,6 +34,7 @@
 
 #include "global.h"
 #include "fileopctx.h"
+#include "../src/search/search.h"
 
 
 /**
@@ -80,7 +81,7 @@ file_op_context_destroy (FileOpContext *ctx)
     if (ctx->ui)
 	file_op_context_destroy_ui (ctx);
 
-    regfree (&ctx->rx);
+    mc_search_free(ctx->search_handle);
 
     /** \todo FIXME: do we need to free ctx->dest_mask? */
 

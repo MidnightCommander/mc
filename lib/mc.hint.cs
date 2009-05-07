@@ -1,43 +1,43 @@
-Tip: C-x t vlo¾í na pøíkazovou øádku oznaèené soubory.
-Tip: C-x p vlo¾í na pøíkazovou øádku jméno aktuálního adresáøe.
-Tip: K doplòování pou¾ijte M-Tab (nebo Esc+Tab). Dvojitım zadání získáte seznam.
-Tip: Pou¾itím M-p nebo M-n se pohybujete v historii pøíkazù.
-Tip: Chcete zadat speciální znak(napø. tabelátor)? Pou¾ijte Ctrl-Q a danı znak.
-Tip: Nechcete ji¾ vidìt tipy? Vypnìte je v Nastavení/Zobrazení/Dal¹í nastavení.
-Tip: Adresáøe vyberete pøidáním lomítka na konec vzorku.
-Tip: Pokud Vá¹ terminál nezná nebo nemá funkèní klávesy, pou¾ijte Esc+èíslo.
-Tip: Domácí stránka programu Midnight Commander je http://www.midnight-commander.org/
-Tip: Zprávy o chybách posílejte na mc-devel@gnome.org (anglicky).
-Tip: Pomocí klávesy Tab zmìníte aktuální panel.
-Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.
-Tip: Existuje také manuálová stránka [mc(1)].
-Tip: Pøejete si klávesy stejnì jako v lynxu? Nastavte to v Nastavení.
-Tip: Makra uvozená % pracují na pøíkazové øádce.
-Tip: Pomocí M-! mù¾ete spustit pøíkaz a prohlédnout si vıstup v oknì.
-Tip: Zobrazení v panelech mù¾e bıt upraveno. Z 'man mc' se dozvíte více.
-Tip: %D/%T se rozvine na soubory oznaèené v druhém panelu.
-Tip: Chcete opìt vá¹ shell? Stisknìte C-o. Do MC se vrátíte opìt pøes C-o.
-Tip: Nastavením promìnné CDPATH mù¾ete ¹etøit klávesnici.
-Tip: Pokud chcete vidìt soubory zaèínající teèkou, øeknìte to v Nastavení.
-Tip: Chcete vidìt zálohy svıch souborù (konèí ~). Pou¾ijte Nastavení.
-Tip: Doplòování funguje ve vstupních øádkách v¹ech dialogù. Pou¾ijte M-Tab.
-Tip: Na terminálech s pomalou odezvou skuste na parametr -s (mc -s).
-Tip: S nalezenımi soubory mù¾ete pracovat. Stisknìte tlaèítko Panelizace.
-Tip: Pro opravdu slo¾ité operace zkuste pøíkaz Pøíkaz/Externí panelizace.
-Tip: Pokud chcete zmìnit adresáø pøi práci na pøíkoazové øádce, zkuste M-c.
-Poznámka: Pøíkazy shellu nefungují, pokud nepracujete na lokální systému souborù.
-Tip: Smazanı text obnovíte C-y.
-Tip: Pokud nìkteré klávesy nefungují, pou¾ijte menu Nastavení/uèení kláves.
-Tip: F13 (nebo Shift-F3) vyvolá prohlí¾ení bez zpracování obsahu souboru.
-Tip: Editor pro klávesu F4 urèíte pomocí promìnné prostøedí EDITOR.
-Tip: Externí prohlí¾eè urèíte promìnnou PAGER.
-Tip: V¹echny ¾ádosti o potvrzení mù¾ete zakázat v Nastavení/Potvrzování.
-Tip: K seznam èasto pou¾ívanıch adresáøù se mù¾ete dostat i pøes C-\.
-Tip: Na anonymní FTP se pøipojíte pomocí 'cd /#ftp:stroj.domena.cz'
-Tip: MC má vestavìnı FTP protokol. Podívejte se do menu Levı/Ftp spojení.
-Tip: M-t rychle mìní formát zobrazení panelù.
-Tip: Pøi FTP spojení mù¾ete zadat i jméno: 'cd /#ftp:jmeno@stroj.domena.cz'
-Tip: RPM soubory si prohlédnete stiskem Enter.
-Tip: Pokud chcete oznaèit adresáø, pøidejte '/' (lomítko).
-Tip: Chcete-li pou¾ít my¹ pro zkopírování nebo vlo¾ení textu, stisknìte Shift.
-Tip: V seznamu adresáøù mù¾ete mít i èasto nav¹tìvované ftp servery. Zkuste C-\.
+Tip: C-x t vloÅ¾Ã­ na pÅ™Ã­kazovou Å™Ã¡dku oznaÄenÃ© soubory.
+Tip: C-x p vloÅ¾Ã­ na pÅ™Ã­kazovou Å™Ã¡dku jmÃ©no aktuÃ¡lnÃ­ho adresÃ¡Å™e.
+Tip: K doplÅˆovÃ¡nÃ­ pouÅ¾ijte M-Tab (nebo Esc+Tab). DvojitÃ½m zadÃ¡nÃ­ zÃ­skÃ¡te seznam.
+Tip: PouÅ¾itÃ­m M-p nebo M-n se pohybujete v historii pÅ™Ã­kazÅ¯.
+Tip: Chcete zadat speciÃ¡lnÃ­ znak(napÅ™. tabelÃ¡tor)? PouÅ¾ijte Ctrl-Q a danÃ½ znak.
+Tip: Nechcete jiÅ¾ vidÄ›t tipy? VypnÄ›te je v NastavenÃ­/ZobrazenÃ­/DalÅ¡Ã­ nastavenÃ­.
+Tip: AdresÃ¡Å™e vyberete pÅ™idÃ¡nÃ­m lomÃ­tka na konec vzorku.
+Tip: Pokud VÃ¡Å¡ terminÃ¡l neznÃ¡ nebo nemÃ¡ funkÄnÃ­ klÃ¡vesy, pouÅ¾ijte Esc+ÄÃ­slo.
+Tip: DomÃ¡cÃ­ strÃ¡nka programu Midnight Commander je http://www.midnight-commander.org/
+Tip: ZprÃ¡vy o chybÃ¡ch posÃ­lejte na mc-devel@gnome.org (anglicky).
+Tip: PomocÃ­ klÃ¡vesy Tab zmÄ›nÃ­te aktuÃ¡lnÃ­ panel.
+Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlÃ©dnete obsah.
+Tip: Existuje takÃ© manuÃ¡lovÃ¡ strÃ¡nka [mc(1)].
+Tip: PÅ™ejete si klÃ¡vesy stejnÄ› jako v lynxu? Nastavte to v NastavenÃ­.
+Tip: Makra uvozenÃ¡ % pracujÃ­ na pÅ™Ã­kazovÃ© Å™Ã¡dce.
+Tip: PomocÃ­ M-! mÅ¯Å¾ete spustit pÅ™Ã­kaz a prohlÃ©dnout si vÃ½stup v oknÄ›.
+Tip: ZobrazenÃ­ v panelech mÅ¯Å¾e bÃ½t upraveno. Z 'man mc' se dozvÃ­te vÃ­ce.
+Tip: %D/%T se rozvine na soubory oznaÄenÃ© v druhÃ©m panelu.
+Tip: Chcete opÄ›t vÃ¡Å¡ shell? StisknÄ›te C-o. Do MC se vrÃ¡tÃ­te opÄ›t pÅ™es C-o.
+Tip: NastavenÃ­m promÄ›nnÃ© CDPATH mÅ¯Å¾ete Å¡etÅ™it klÃ¡vesnici.
+Tip: Pokud chcete vidÄ›t soubory zaÄÃ­najÃ­cÃ­ teÄkou, Å™eknÄ›te to v NastavenÃ­.
+Tip: Chcete vidÄ›t zÃ¡lohy svÃ½ch souborÅ¯ (konÄÃ­ ~). PouÅ¾ijte NastavenÃ­.
+Tip: DoplÅˆovÃ¡nÃ­ funguje ve vstupnÃ­ch Å™Ã¡dkÃ¡ch vÅ¡ech dialogÅ¯. PouÅ¾ijte M-Tab.
+Tip: Na terminÃ¡lech s pomalou odezvou skuste na parametr -s (mc -s).
+Tip: S nalezenÃ½mi soubory mÅ¯Å¾ete pracovat. StisknÄ›te tlaÄÃ­tko Panelizace.
+Tip: Pro opravdu sloÅ¾itÃ© operace zkuste pÅ™Ã­kaz PÅ™Ã­kaz/ExternÃ­ panelizace.
+Tip: Pokud chcete zmÄ›nit adresÃ¡Å™ pÅ™i prÃ¡ci na pÅ™Ã­koazovÃ© Å™Ã¡dce, zkuste M-c.
+PoznÃ¡mka: PÅ™Ã­kazy shellu nefungujÃ­, pokud nepracujete na lokÃ¡lnÃ­ systÃ©mu souborÅ¯.
+Tip: SmazanÃ½ text obnovÃ­te C-y.
+Tip: Pokud nÄ›kterÃ© klÃ¡vesy nefungujÃ­, pouÅ¾ijte menu NastavenÃ­/uÄenÃ­ klÃ¡ves.
+Tip: F13 (nebo Shift-F3) vyvolÃ¡ prohlÃ­Å¾enÃ­ bez zpracovÃ¡nÃ­ obsahu souboru.
+Tip: Editor pro klÃ¡vesu F4 urÄÃ­te pomocÃ­ promÄ›nnÃ© prostÅ™edÃ­ EDITOR.
+Tip: ExternÃ­ prohlÃ­Å¾eÄ urÄÃ­te promÄ›nnou PAGER.
+Tip: VÅ¡echny Å¾Ã¡dosti o potvrzenÃ­ mÅ¯Å¾ete zakÃ¡zat v NastavenÃ­/PotvrzovÃ¡nÃ­.
+Tip: K seznam Äasto pouÅ¾Ã­vanÃ½ch adresÃ¡Å™Å¯ se mÅ¯Å¾ete dostat i pÅ™es C-\.
+Tip: Na anonymnÃ­ FTP se pÅ™ipojÃ­te pomocÃ­ 'cd /#ftp:stroj.domena.cz'
+Tip: MC mÃ¡ vestavÄ›nÃ½ FTP protokol. PodÃ­vejte se do menu LevÃ½/Ftp spojenÃ­.
+Tip: M-t rychle mÄ›nÃ­ formÃ¡t zobrazenÃ­ panelÅ¯.
+Tip: PÅ™i FTP spojenÃ­ mÅ¯Å¾ete zadat i jmÃ©no: 'cd /#ftp:jmeno@stroj.domena.cz'
+Tip: RPM soubory si prohlÃ©dnete stiskem Enter.
+Tip: Pokud chcete oznaÄit adresÃ¡Å™, pÅ™idejte '/' (lomÃ­tko).
+Tip: Chcete-li pouÅ¾Ã­t myÅ¡ pro zkopÃ­rovÃ¡nÃ­ nebo vloÅ¾enÃ­ textu, stisknÄ›te Shift.
+Tip: V seznamu adresÃ¡Å™Å¯ mÅ¯Å¾ete mÃ­t i Äasto navÅ¡tÄ›vovanÃ© ftp servery. Zkuste C-\.

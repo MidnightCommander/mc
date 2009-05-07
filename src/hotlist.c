@@ -55,6 +55,7 @@
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 #include "history.h"
+#include "strutil.h"
 
 #define UX		5
 #define UY		2
@@ -193,15 +194,15 @@ update_path_name (void)
     }
     if (!hotlist_state.moving)
 	label_set_text (pname,
-			name_trunc (text, dlg->cols - (UX * 2 + 4)));
+			str_trunc (text, dlg->cols - (UX * 2 + 4)));
 
     p = g_strconcat (" ", current_group->label, " ", (char *) NULL);
     if (!hotlist_state.moving)
 	label_set_text (pname_group,
-			name_trunc (p, dlg->cols - (UX * 2 + 4)));
+			str_trunc (p, dlg->cols - (UX * 2 + 4)));
     else
 	label_set_text (movelist_group,
-			name_trunc (p, dlg->cols - (UX * 2 + 4)));
+			str_trunc (p, dlg->cols - (UX * 2 + 4)));
     g_free (p);
 
     dlg_redraw (dlg);
@@ -221,23 +222,18 @@ do { \
 static void fill_listbox (void)
 {
     struct hotlist *current = current_group->head;
-    static char *buf;
-    static int   buflen;
-
-    if (!buf)
-	buf = g_malloc (buflen = 1024);
-    buf[0] = '\0';
+    GString *buff = g_string_new ("");
 
     while (current){
 	switch (current->type) {
 	case HL_TYPE_GROUP:
 	    {
-		CHECK_BUFFER;
-		strcat (strcat (buf, "->"), current->label);
+		g_string_append(buff,"->");
+		g_string_append(buff,current->label);
 		if (hotlist_state.moving)
-		    listbox_add_item (l_movelist, 0, 0, buf, current);
+		    listbox_add_item (l_movelist, 0, 0, buff->str, current);
 		else
-		    listbox_add_item (l_hotlist, 0, 0, buf, current);
+                    listbox_add_item (l_hotlist, 0, 0, buff->str, current);
 	    }
 	    break;
 	case HL_TYPE_DOTDOT:
@@ -252,9 +248,8 @@ static void fill_listbox (void)
 	}
 	current = current->next;
     }
+    g_string_free (buff, TRUE);
 }
-
-#undef CHECK_BUFFER
 
 static void
 unlink_entry (struct hotlist *entry)
@@ -568,7 +563,7 @@ init_i18n_stuff(int list_type, int cols)
 
 			row = hotlist_but [i].y;
 			++count [row];
-			len [row] += strlen (hotlist_but [i].text) + 5;
+			len [row] += str_term_width1 (hotlist_but [i].text) + 5;
 			if (hotlist_but [i].flags == DEFPUSH_BUTTON)
 				len [row] += 2;
 		}
@@ -593,12 +588,12 @@ init_i18n_stuff(int list_type, int cols)
 				/* not first int the row */
 				if (!strcmp (hotlist_but [i].text, cancel_but))
 					hotlist_but [i].x = 
-						cols - strlen (hotlist_but [i].text) - 13;
+						cols - str_term_width1 (hotlist_but [i].text) - 13;
 				else
 					hotlist_but [i].x = cur_x [row];
 			}
 
-			cur_x [row] += strlen (hotlist_but [i].text) + 2
+			cur_x [row] += str_term_width1 (hotlist_but [i].text) + 2
 				+ (hotlist_but [i].flags == DEFPUSH_BUTTON ? 5 : 3);
 		}
 	}
@@ -661,7 +656,7 @@ init_hotlist (int list_type)
     }
     /* get new listbox */
     l_hotlist =
-	listbox_new (UY + 1, UX + 1, COLS - 2 * UX - 8, LINES - 14,
+	listbox_new (UY + 1, UX + 1, LINES - 14, COLS - 2 * UX - 8,
 		     l_call);
 
     /* Fill the hotlist with the active VFS or the hotlist */
@@ -709,8 +704,8 @@ init_movelist (int list_type, struct hotlist *item)
     add_widget (movelist_dlg, movelist_group);
     /* get new listbox */
     l_movelist =
-	listbox_new (UY + 1, UX + 1, movelist_dlg->cols - 2 * UX - 2,
-		     movelist_dlg->lines - 8, l_call);
+	listbox_new (UY + 1, UX + 1, movelist_dlg->lines - 8,
+			movelist_dlg->cols - 2 * UX - 2, l_call);
 
     fill_listbox ();
 
@@ -839,7 +834,7 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 	for (i = 0; i < 3; i++)
 	{
 		qw [i].text = _(qw [i].text);
-		l[i] = strlen (qw [i].text) + 3;
+		l[i] = str_term_width1 (qw [i].text) + 3;
 	}
 	space = (len - 4 - l[0] - l[1] - l[2]) / 4;
 
@@ -862,19 +857,19 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, RELATIVE_Y_BUTTONS, 0, N_("&Cancel"), 0, B_CANCEL, 
-	  0, 0, NULL },
+	  0, 0, NULL , NULL, NULL},
     { quick_button, 30, 80, RELATIVE_Y_BUTTONS, 0, N_("&Insert"), 0, B_INSERT, 
-	  0, 0, NULL },
+	  0, 0, NULL , NULL, NULL},
     { quick_button, 10, 80, RELATIVE_Y_BUTTONS, 0, N_("&Append"), 0, B_APPEND, 
-	  0, 0, NULL },
+	  0, 0, NULL , NULL, NULL},
     { quick_input,  4, 80, RELATIVE_Y_INPUT_PTH, 0, "",58, 0, 
-	  0, 0, "input-pth" },
+	  0, 0, "input-pth" , NULL, NULL},
     { quick_label, RELATIVE_Y_LABEL_PTH, 80, 3, 0, 0, 0, 0, 
-	  0, 0, NULL },
+	  0, 0, NULL , NULL, NULL},
     { quick_input,  4, 80, 3, 0, "", 58, 0, 
-	  0, 0, "input-lbl" },
+	  0, 0, "input-lbl" , NULL, NULL},
     { quick_label,  3, 80, 2, 0, 0, 0, 0, 
-	  0, 0, NULL },
+	  0, 0, NULL , NULL, NULL},
     NULL_QuickWidget };
     
     int len;
@@ -888,7 +883,7 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 
     msglen(text1, &lines1, &cols1);
     msglen(text2, &lines2, &cols2);
-    len = max ((int) strlen (header), cols1);
+    len = max (str_term_width1 (header), cols1);
     len = max (len, cols2) + 4;
     len = max (len, 64);
 
@@ -965,13 +960,13 @@ add_new_group_input (const char *header, const char *label, char **result)
     QuickDialog Quick_input;
     static QuickWidget quick_widgets [] = {
     { quick_button, 55, 80, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	  NULL },
+	  NULL , NULL, NULL},
     { quick_button, 30, 80, 1, 0, N_("&Insert"), 0, B_INSERT, 0, 0,
-	  NULL },
+	  NULL , NULL, NULL},
     { quick_button, 10, 80, 1, 0, N_("&Append"), 0, B_APPEND, 0, 0,
-	  NULL },
-    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" },
-    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, NULL },
+	  NULL , NULL, NULL},
+    { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" , NULL, NULL},
+    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, NULL , NULL, NULL},
     NULL_QuickWidget };
     int relative_y[] = {1, 1, 1, 0, 2}; /* the relative_x component from the
                                            quick_widgets variable above */
@@ -984,7 +979,7 @@ add_new_group_input (const char *header, const char *label, char **result)
 #endif /* ENABLE_NLS */
 
     msglen (label, &lines, &cols);
-    len = max ((int) strlen (header), cols) + 4;
+    len = max (str_term_width1 (header), cols) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS
@@ -1040,7 +1035,7 @@ void add2hotlist_cmd (void)
 {
     char *prompt, *label;
     const char *cp = _("Label for \"%s\":");
-    int l = strlen (cp);
+    int l = str_term_width1 (cp);
     char *label_string = g_strdup (current_panel->cwd);
 
     strip_password (label_string, 1);
@@ -1087,7 +1082,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 	int result;
 
 	title = g_strconcat (_(" Remove: "),
-				   name_trunc (entry->label, 30),
+				   str_trunc (entry->label, 30),
 				   " ",
 				   NULL);
 
@@ -1109,7 +1104,7 @@ static void remove_from_hotlist (struct hotlist *entry)
 	    int   result;
 
 	    header = g_strconcat (_(" Remove: "),
-				   name_trunc (entry->label, 30),
+				   str_trunc (entry->label, 30),
 				   " ",
 				   NULL);
 	    result = query_dialog (header, _("\n Group not empty.\n Remove it?"),
@@ -1209,9 +1204,7 @@ load_group (struct hotlist *grp)
 #define TKN_EOF		126
 #define TKN_UNKNOWN	127
 
-static char *tkn_buf;
-static int  tkn_buf_length;
-static int  tkn_length;
+static GString *tkn_buf = NULL;
 
 static char *hotlist_file_name;
 static FILE *hotlist_file;
@@ -1221,7 +1214,7 @@ static int hot_skip_blanks (void)
 {
     int c;
 
-    while ((c = getc (hotlist_file)) != EOF && c != '\n' && isspace (c))
+    while ((c = getc (hotlist_file)) != EOF && c != '\n' && g_ascii_isspace (c))
 	;
     return c;
     
@@ -1229,56 +1222,47 @@ static int hot_skip_blanks (void)
 
 static int hot_next_token (void)
 {
-    int	c;
+    int	c, ret=0;
+    size_t l;
 
-#define CHECK_BUF() \
-do { \
-    if (tkn_length == tkn_buf_length) \
-	tkn_buf = tkn_buf ? ( g_realloc (tkn_buf, tkn_buf_length += 1024)) \
-			  : ( g_malloc (tkn_buf_length = 1024)); \
-} while (0)
 
-    tkn_length = 0;
+    if (tkn_buf == NULL) tkn_buf = g_string_new ("");
+    g_string_set_size(tkn_buf,0);
 
 again:
     c = hot_skip_blanks ();
     switch (c) {
     case EOF:
-	return TKN_EOF;
+	ret = TKN_EOF;
 	break;
     case '\n':
-	return TKN_EOL;
+	ret = TKN_EOL;
 	break;
     case '#':
 	while ((c = getc (hotlist_file)) != EOF && c != '\n') {
-	    if (c == EOF)
-		return TKN_EOF;
-	    if (c != '\n') {
-		CHECK_BUF();
-		tkn_buf[tkn_length++] = c == '\n' ? ' ' : c;
-	    }
+	    g_string_append_c (tkn_buf, c);
 	}
-	CHECK_BUF();
-	tkn_buf[tkn_length] = '\0';
-	return TKN_COMMENT;
+	ret = TKN_COMMENT;
 	break;
     case '"':
 	while ((c = getc (hotlist_file)) != EOF && c != '"') {
 	    if (c == '\\')
-		if ((c = getc (hotlist_file)) == EOF)
+		if ((c = getc (hotlist_file)) == EOF){
+		    g_string_free (tkn_buf, TRUE);
 		    return TKN_EOF;
-	    CHECK_BUF();
-	    tkn_buf[tkn_length++] = c == '\n' ? ' ' : c;
+		}
+	    g_string_append_c (tkn_buf, c == '\n' ? ' ' : c);
 	}
 	if (c == EOF)
-	    return TKN_EOF;
-	CHECK_BUF();
-	tkn_buf[tkn_length] = '\0';
-	return TKN_STRING;
+	    ret = TKN_EOF;
+	else
+	    ret = TKN_STRING;
 	break;
     case '\\':
-	if ((c = getc (hotlist_file)) == EOF)
+	if ((c = getc (hotlist_file)) == EOF){
+	    g_string_free (tkn_buf, TRUE);
 	    return TKN_EOF;
+	}
 	if (c == '\n')
 	    goto again;
 
@@ -1286,25 +1270,25 @@ again:
 
     default:
 	do {
-	    CHECK_BUF();
-	    tkn_buf[tkn_length++] = toupper(c);
-	} while ((c = fgetc (hotlist_file)) != EOF && isalnum (c));
+	    g_string_append_c (tkn_buf, g_ascii_toupper (c));
+	} while ((c = fgetc (hotlist_file)) != EOF && 
+                         (g_ascii_isalnum (c) || !isascii (c)));
 	if (c != EOF)
 	    ungetc (c, hotlist_file);
-	CHECK_BUF();
-	tkn_buf[tkn_length] = '\0';
-	if (strncmp (tkn_buf, "GROUP", tkn_length) == 0)
-	    return TKN_GROUP;
-	else if (strncmp (tkn_buf, "ENTRY", tkn_length) == 0)
-	    return TKN_ENTRY;
-	else if (strncmp (tkn_buf, "ENDGROUP", tkn_length) == 0)
-	    return TKN_ENDGROUP;
-	else if (strncmp (tkn_buf, "URL", tkn_length) == 0)
-	    return TKN_URL;
+        l = tkn_buf->len;
+	if (strncmp (tkn_buf->str, "GROUP", l) == 0)
+	    ret = TKN_GROUP;
+	else if (strncmp (tkn_buf->str, "ENTRY", l) == 0)
+	    ret = TKN_ENTRY;
+	else if (strncmp (tkn_buf->str, "ENDGROUP", l) == 0)
+	    ret = TKN_ENDGROUP;
+	else if (strncmp (tkn_buf->str, "URL", l) == 0)
+	    ret = TKN_URL;
 	else
-	    return TKN_UNKNOWN;
+	    ret = TKN_UNKNOWN;
 	break;
     }
+    return ret;
 }
 
 #define SKIP_TO_EOL	{ \
@@ -1334,22 +1318,22 @@ hot_load_group (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+	    new_grp = add2hotlist (g_strdup (tkn_buf->str), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = g_strdup (tkn_buf);
+            label = g_strdup (tkn_buf->str);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = g_strdup (tkn_buf);
+	    url = g_strdup (tkn_buf->str);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = g_strdup (tkn_buf);
+            label = g_strdup (tkn_buf->str);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOF:
@@ -1382,22 +1366,22 @@ hot_load_file (struct hotlist * grp)
 	switch (tkn) {
 	case TKN_GROUP:
 	    CHECK_TOKEN(TKN_STRING);
-	    new_grp = add2hotlist (g_strdup (tkn_buf), 0, HL_TYPE_GROUP, 0);
+            new_grp = add2hotlist (g_strdup (tkn_buf->str), 0, HL_TYPE_GROUP, 0);
 	    SKIP_TO_EOL;
 	    hot_load_group (new_grp);
 	    current_group = grp;
 	    break;
 	case TKN_ENTRY:
 	    CHECK_TOKEN(TKN_STRING);
-	    label = g_strdup (tkn_buf);
+            label = g_strdup (tkn_buf->str);
 	    CHECK_TOKEN(TKN_URL);
 	    CHECK_TOKEN(TKN_STRING);
-	    url = g_strdup (tkn_buf);
+            url = g_strdup (tkn_buf->str);
 	    add2hotlist (label, url, HL_TYPE_ENTRY, 0);
 	    SKIP_TO_EOL;
 	    break;
 	case TKN_COMMENT:
-	    label = g_strdup (tkn_buf);
+            label = g_strdup (tkn_buf->str);
 	    add2hotlist (label, 0, HL_TYPE_COMMENT, 0);
 	    break;
 	case TKN_EOL:
@@ -1594,17 +1578,16 @@ void done_hotlist (void)
 	g_free (hotlist);
 	hotlist = 0;
     }
-    
+
     hotlist_state.loaded = 0;
 
     g_free (hotlist_file_name);
     hotlist_file_name = 0;
     l_hotlist = 0;
     current_group = 0;
+
     if (tkn_buf){
-        g_free (tkn_buf);
-	tkn_buf_length = 0;
-	tkn_length = 0;
+	g_string_free (tkn_buf, TRUE);
 	tkn_buf = NULL;
     }
 }

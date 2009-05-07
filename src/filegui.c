@@ -68,6 +68,8 @@
 #include "filegui.h"
 #include "key.h"		/* get_event */
 #include "util.h"               /* strip_password() */
+#include "strutil.h"
+#include "../src/search/search.h"
 
 /* }}} */
 
@@ -426,7 +428,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
 /* }}} */
 
-#define truncFileString(ui, s)       name_trunc (s, ui->eta_extra + 47)
+#define truncFileString(ui, s)       str_trunc (s, ui->eta_extra + 47)
 #define truncFileStringSecure(ui, s) path_trunc (s, ui->eta_extra + 47)
 
 FileProgressStatus
@@ -566,8 +568,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 	 * longest of "Overwrite..." labels 
 	 * (assume "Target date..." are short enough)
 	 */
-	l1 = max (strlen (rd_widgets[6].text),
-		  strlen (rd_widgets[11].text));
+        l1 = max (str_term_width1 (rd_widgets[6].text),
+                  str_term_width1 (rd_widgets[11].text));
 
 	/* longest of button rows */
 	i = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
@@ -578,7 +580,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 		    l2 = max (l2, l);
 		    l = 0;
 		}
-		l += strlen (rd_widgets[i].text) + 4;
+                l+= str_term_width1 (rd_widgets[i].text) + 4;
 	    }
 	}
 	l2 = max (l2, l);	/* last row */
@@ -596,12 +598,12 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 		    l = l1;
 		}
 		rd_widgets[i].xpos = l;
-		l += strlen (rd_widgets[i].text) + 4;
+                l+= str_term_width1 (rd_widgets[i].text) + 4;
 	    }
 	}
 	/* Abort button is centered */
 	rd_widgets[1].xpos =
-	    (rd_xlen - strlen (rd_widgets[1].text) - 3) / 2;
+            (rd_xlen - str_term_width1 (rd_widgets[1].text) - 3) / 2;
     }
 #endif				/* ENABLE_NLS */
 
@@ -619,8 +621,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 
 
     ADD_RD_LABEL (ui, 0,
-		  name_trunc (ui->replace_filename,
-			      rd_trunc - strlen (rd_widgets[0].text)), 0);
+		  str_trunc (ui->replace_filename,
+                             rd_trunc - str_term_width1 (rd_widgets[0].text)), 0);
     ADD_RD_BUTTON (1);
 
     ADD_RD_BUTTON (2);
@@ -733,24 +735,24 @@ static QuickWidget fmd_widgets[] = {
 #define	FMCB11 1
     /* follow symlinks and preserve Attributes must be the first */
     {quick_checkbox, 3, 64, 8, FMDY, N_("preserve &Attributes"), 9, 0,
-     0 /* &op_preserve */ , 0, NULL},
+     0 /* &op_preserve */ , 0, NULL, NULL, NULL},
     {quick_checkbox, 3, 64, 7, FMDY, N_("follow &Links"), 7, 0,
-     0 /* &file_mask_op_follow_links */ , 0, NULL},
-    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL},
+     0 /* &file_mask_op_follow_links */ , 0, NULL, NULL, NULL},
+    {quick_label, 3, 64, 5, FMDY, N_("to:"), 0, 0, 0, 0, NULL, NULL, NULL},
     {quick_checkbox, 37, 64, 4, FMDY, N_("&Using shell patterns"), 0, 0,
-     0 /* &source_easy_patterns */ , 0, NULL},
+     0 /* &source_easy_patterns */ , 0, NULL, NULL, NULL},
     {quick_input, 3, 64, 3, FMDY, "", 58,
-     0, 0, 0, "input-def"},
+     0, 0, 0, "input-def", NULL, NULL},
 #define FMDI1 4
 #define FMDI2 5
 #define FMDC 3
     {quick_input, 3, 64, 6, FMDY, "", 58, 0,
-     0, 0, "input2"},
+     0, 0, "input2", NULL, NULL},
 #define FMDI0 6
-    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL},
+    {quick_label, 3, 64, 2, FMDY, "", 0, 0, 0, 0, NULL, NULL, NULL},
 #define	FMBRGT 7
     {quick_button, 42, 64, 9, FMDY, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-     NULL},
+     NULL, NULL, NULL},
 #undef SKIP
 #ifdef WITH_BACKGROUND
 # define SKIP 5
@@ -759,7 +761,7 @@ static QuickWidget fmd_widgets[] = {
 # define FMBLFT 9
 # define FMBMID 8
     {quick_button, 25, 64, 9, FMDY, N_("&Background"), 0, B_USER, 0, 0,
-     NULL},
+     NULL, NULL, NULL},
 #else				/* WITH_BACKGROUND */
 # define SKIP 4
 # define FMCB21 10
@@ -767,12 +769,11 @@ static QuickWidget fmd_widgets[] = {
 # define FMBLFT 8
 # undef  FMBMID
 #endif
-    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
+    {quick_button, 14, 64, 9, FMDY, N_("&OK"), 0, B_ENTER, 0, 0, NULL, NULL, NULL},
     {quick_checkbox, 42, 64, 8, FMDY, N_("&Stable Symlinks"), 0, 0,
-     0 /* &file_mask_stable_symlinks */ , 0, NULL},
+     0 /* &file_mask_stable_symlinks */ , 0, NULL, NULL, NULL},
     {quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0,
-     0,
-     0 /* &dive_into_subdirs */ , 0, NULL},
+     0, 0 /* &dive_into_subdirs */ , 0, NULL, NULL, NULL},
     NULL_QuickWidget
 };
 
@@ -807,36 +808,36 @@ fmd_init_i18n (int force)
 	if (fmd_widgets[i].text[0] != '\0')
 	    fmd_widgets[i].text = _(fmd_widgets[i].text);
 
-    len = strlen (fmd_widgets[FMCB11].text)
-	+ strlen (fmd_widgets[FMCB21].text) + 15;
+    len = str_term_width1 (fmd_widgets[FMCB11].text)
+            + str_term_width1 (fmd_widgets[FMCB21].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = strlen (fmd_widgets[FMCB12].text)
-	+ strlen (fmd_widgets[FMCB22].text) + 15;
+    len = str_term_width1 (fmd_widgets[FMCB12].text)
+            + str_term_width1 (fmd_widgets[FMCB22].text) + 15;
     fmd_xlen = max (fmd_xlen, len);
 
-    len = strlen (fmd_widgets[FMBRGT].text)
-	+ strlen (fmd_widgets[FMBLFT].text) + 11;
+    len = str_term_width1 (fmd_widgets[FMBRGT].text)
+            + str_term_width1 (fmd_widgets[FMBLFT].text) + 11;
 
 #ifdef FMBMID
-    len += strlen (fmd_widgets[FMBMID].text) + 6;
+    len+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
 #endif
 
     fmd_xlen = max (fmd_xlen, len + 4);
 
     len = (fmd_xlen - (len + 6)) / 2;
     i = fmd_widgets[FMBLFT].relative_x = len + 3;
-    i += strlen (fmd_widgets[FMBLFT].text) + 8;
+    i+= str_term_width1 (fmd_widgets[FMBLFT].text) + 8;
 
 #ifdef FMBMID
     fmd_widgets[FMBMID].relative_x = i;
-    i += strlen (fmd_widgets[FMBMID].text) + 6;
+    i+= str_term_width1 (fmd_widgets[FMBMID].text) + 6;
 #endif
 
     fmd_widgets[FMBRGT].relative_x = i;
 
 #define	chkbox_xpos(i) \
-	fmd_widgets [i].relative_x = fmd_xlen - strlen (fmd_widgets [i].text) - 6
+    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].text) - 6
 
     chkbox_xpos (FMCB0);
     chkbox_xpos (FMCB21);
@@ -862,7 +863,6 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 {
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir, *tmpdest;
-    const char *error;
     char *def_text_secure;
     struct stat buf;
     int val;
@@ -933,27 +933,28 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	g_free (source_mask);
 	return dest_dir;
     }
-    if (source_easy_patterns) {
-	source_easy_patterns = easy_patterns;
-	easy_patterns = 1;
-	source_mask = convert_pattern (source_mask, match_file, 1);
-	easy_patterns = source_easy_patterns;
-	error =
-	    re_compile_pattern (source_mask, strlen (source_mask),
-				&ctx->rx);
-	g_free (source_mask);
-    } else
-	error =
-	    re_compile_pattern (source_mask, strlen (source_mask),
-				&ctx->rx);
 
-    if (error) {
-	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
-		    orig_mask, error);
+    if (source_easy_patterns){
+        source_mask = g_strdup_printf("{%s}",orig_mask);
+        ctx->search_handle = mc_search_new(source_mask,-1);
+        g_free(source_mask);
+    }
+    else
+        ctx->search_handle = mc_search_new(source_mask,-1);
+
+    if (ctx->search_handle == NULL) {
+	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
+		    orig_mask);
 	g_free (orig_mask);
 	goto ask_file_mask;
     }
+
     g_free (orig_mask);
+    ctx->search_handle->is_case_sentitive = TRUE;
+    if (source_easy_patterns)
+        ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
+    else
+        ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
 
     tmpdest = dest_dir;
     dest_dir = tilde_expand(tmpdest);

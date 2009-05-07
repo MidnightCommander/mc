@@ -36,12 +36,6 @@ static void displayArgs(poptContext con, enum poptCallbackReason foo,
     exit(0);
 }
 
-struct poptOption const poptHelpOptions[] = {
-    { NULL, '\0', POPT_ARG_CALLBACK, (void *)&displayArgs, '\0', NULL, NULL },
-    { "help", '?', 0, NULL, '?', N_("Show this help message"), NULL },
-    { "usage", '\0', 0, NULL, 'u', N_("Display brief usage message"), NULL },
-    { NULL, '\0', 0, NULL, 0, NULL, NULL }
-} ;
 
 
 static const char *
@@ -50,10 +44,10 @@ getTableTranslationDomain(const struct poptOption *table)
   const struct poptOption *opt;
 
   for(opt = table;
-      opt->longName || opt->shortName || opt->arg;
+      opt->longName || opt->shortName || opt->arg.p;
       opt++) {
     if(opt->argInfo == POPT_ARG_INTL_DOMAIN)
-      return opt->arg;
+      return opt->arg.p;
   }
 
   return NULL;
@@ -61,14 +55,62 @@ getTableTranslationDomain(const struct poptOption *table)
 
 static const char * getArgDescrip(const struct poptOption * opt,
 				  const char *translation_domain) {
+    struct poptOption *poptHelpOptions;
+
     (void) translation_domain;
 
-    if (!(opt->argInfo & POPT_ARG_MASK)) return NULL;
+    poptHelpOptions = g_malloc(sizeof(struct poptOption)*4);
+
+    poptHelpOptions[0].longName		= NULL;
+    poptHelpOptions[0].shortName	= '\0';
+    poptHelpOptions[0].argInfo		= POPT_ARG_CALLBACK;
+    poptHelpOptions[0].arg.f1		= &displayArgs;
+    poptHelpOptions[0].val		= '\0';
+    poptHelpOptions[0].descrip		= NULL;
+    poptHelpOptions[0].argDescrip	= NULL;
+
+    poptHelpOptions[1].longName		= "help";
+    poptHelpOptions[1].shortName	= '?';
+    poptHelpOptions[1].argInfo		= 0;
+    poptHelpOptions[1].arg.p		= NULL;
+    poptHelpOptions[1].val		= '?';
+    poptHelpOptions[1].descrip		= _("Show this help message");
+    poptHelpOptions[1].argDescrip	= NULL;
+
+    poptHelpOptions[2].longName		= "usage";
+    poptHelpOptions[2].shortName	= '\0';
+    poptHelpOptions[2].argInfo		= 0;
+    poptHelpOptions[2].arg.p		= NULL;
+    poptHelpOptions[2].val		= 'u';
+    poptHelpOptions[2].descrip		= _("Display brief usage message");
+    poptHelpOptions[2].argDescrip	= NULL;
+
+    poptHelpOptions[3].longName		= NULL;
+    poptHelpOptions[3].shortName	= '\0';
+    poptHelpOptions[3].argInfo		= 0;
+    poptHelpOptions[3].arg.p		= NULL;
+    poptHelpOptions[3].val		= 0;
+    poptHelpOptions[3].descrip		= NULL;
+    poptHelpOptions[3].argDescrip	= NULL;
+
+    if (!(opt->argInfo & POPT_ARG_MASK)){
+	g_free(poptHelpOptions);
+	return NULL;
+    }
 
     if (opt == (poptHelpOptions + 1) || opt == (poptHelpOptions + 2))
-	if (opt->argDescrip) return POPT_(opt->argDescrip);
+	if (opt->argDescrip)
+	{
+	    g_free(poptHelpOptions);
+	    return POPT_(opt->argDescrip);
+	}
 
-    if (opt->argDescrip) return D_(translation_domain, opt->argDescrip);
+    if (opt->argDescrip)
+    {
+	g_free(poptHelpOptions);
+	return D_(translation_domain, opt->argDescrip);
+    }
+    g_free(poptHelpOptions);
     return _("ARG");
 }
 
@@ -131,9 +173,9 @@ static int maxArgWidth(const struct poptOption * opt,
     int this;
     const char * s;
     
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    this = maxArgWidth(opt->arg, translation_domain);
+	    this = maxArgWidth(opt->arg.p, translation_domain);
 	    if (this > max) max = this;
 	} else if (!(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN)) {
 	    this = opt->shortName ? 2 : 0;
@@ -161,7 +203,7 @@ static void singleTableHelp(FILE * f, const struct poptOption * table,
     const char *sub_transdom;
 
     opt = table;
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if ((opt->longName || opt->shortName) && 
 	    !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
 	    singleOptionHelp(f, left, opt, translation_domain);
@@ -169,16 +211,16 @@ static void singleTableHelp(FILE * f, const struct poptOption * table,
     }
 
     opt = table;
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    sub_transdom = getTableTranslationDomain(opt->arg);
+	    sub_transdom = getTableTranslationDomain(opt->arg.p);
 	    if(!sub_transdom)
 		sub_transdom = translation_domain;
 	    
 	    if (opt->descrip)
 		fprintf(f, "\n%s\n", D_(sub_transdom, opt->descrip));
 
-	    singleTableHelp(f, opt->arg, left, sub_transdom);
+	    singleTableHelp(f, opt->arg.p, left, sub_transdom);
 	}
 	opt++;
     }
@@ -256,11 +298,11 @@ static int singleTableUsage(FILE * f, int cursor, const struct poptOption * tabl
     const struct poptOption * opt;
     
     opt = table;
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
         if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INTL_DOMAIN)
-	    translation_domain = (const char *)opt->arg;
+	    translation_domain = (const char *)opt->arg.p;
 	else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) 
-	    cursor = singleTableUsage(f, cursor, opt->arg,
+	    cursor = singleTableUsage(f, cursor, opt->arg.p,
 				      translation_domain);
 	else if ((opt->longName || opt->shortName) && 
 		 !(opt->argInfo & POPT_ARGFLAG_DOC_HIDDEN))
@@ -282,11 +324,11 @@ static int showShortOptions(const struct poptOption * opt, FILE * f,
 	memset(str, 0, sizeof(s));
     }
 
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if (opt->shortName && !(opt->argInfo & POPT_ARG_MASK))
 	    str[strlen(str)] = opt->shortName;
 	else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE)
-	    showShortOptions(opt->arg, f, str);
+	    showShortOptions(opt->arg.p, f, str);
 
 	opt++;
     } 

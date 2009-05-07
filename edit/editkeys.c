@@ -43,11 +43,14 @@
 
 #include "edit.h"
 #include "edit-widget.h"	/* edit->macro_i */
+#include "editcmd_dialogs.h"
 #include "editcmddef.h"		/* list of commands */
 #include "../src/key.h"		/* KEY_M_SHIFT */
 #include "../src/tty.h"		/* keys */
 #include "../src/charsets.h"	/* convert_from_input_c() */
 #include "../src/selcodepage.h"	/* do_select_codepage() */
+#include "../src/main.h"	/* display_codepage */
+#include "../src/strutil.h"	/* str_isutf8 () */
 
 /*
  * Ordinary translations.  Note that the keys listed first take priority
@@ -195,8 +198,9 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     int char_for_insertion = -1;
     int i = 0;
     int extmod = 0;
-    const edit_key_map_type *key_map = NULL;
+    int c;
 
+    const edit_key_map_type *key_map = NULL;
     switch (edit_key_emulation) {
     case EDIT_KEY_EMULATION_NORMAL:
 	key_map = cooledit_key_map;
@@ -206,7 +210,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 	if (x_key == XCTRL ('x')) {
 	    int ext_key;
 	    ext_key =
-		edit_raw_key_query (" Ctrl-X ", _(" Emacs key: "), 0);
+		editcmd_dialog_raw_key_query (" Ctrl-X ", _(" Emacs key: "), 0);
 	    switch (ext_key) {
 	    case 's':
 		command = CK_Save;
@@ -219,7 +223,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 		goto fin;
 	    case 'e':
 		command =
-		    CK_Macro (edit_raw_key_query
+		    CK_Macro (editcmd_dialog_raw_key_query
 			      (_(" Execute Macro "),
 			       _(" Press macro hotkey: "), 1));
 		if (command == CK_Macro (0))
@@ -248,12 +252,80 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
 
     /* an ordinary insertable character */
     if (x_key < 256 && !extmod) {
-	int c = convert_from_input_c (x_key);
+#ifdef HAVE_CHARSET
+        if ( edit->charpoint >= 4 ) {
+            edit->charpoint = 0;
+            edit->charbuf[edit->charpoint] = '\0';
+        }
+        if ( edit->charpoint < 4 ) {
+            edit->charbuf[edit->charpoint++] = x_key;
+            edit->charbuf[edit->charpoint] = '\0';
+        }
 
-	if (is_printable (c)) {
-	    char_for_insertion = c;
-	    goto fin;
-	}
+        /* input from 8-bit locale */
+        if ( !utf8_display ) {
+            /* source in 8-bit codeset */
+            if (!edit->utf8) {
+#endif
+                c = convert_from_input_c (x_key);
+                if (is_printable (c)) {
+                    char_for_insertion = c;
+                    goto fin;
+                }
+#ifdef HAVE_CHARSET
+            } else {
+		c = convert_from_input_c (x_key);
+                if (is_printable (c)) {
+                    char_for_insertion = convert_from_8bit_to_utf_c2((unsigned char) x_key);
+                    goto fin;
+                }
+            }
+        /* UTF-8 locale */
+        } else {
+            /* source in UTF-8 codeset */
+            if ( edit->utf8 ) {
+                int res = str_is_valid_char (edit->charbuf, edit->charpoint);
+                if (res < 0) {
+                    if (res != -2) {
+                        edit->charpoint = 0; /* broken multibyte char, skip */
+                        goto fin;
+                    }
+                    char_for_insertion = x_key;
+                    goto fin;
+                } else {
+                    edit->charbuf[edit->charpoint]='\0';
+                    edit->charpoint = 0;
+                    if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf))) {
+                        char_for_insertion = x_key;
+                        goto fin;
+                    }
+                }
+
+            /* 8-bit source */
+            } else {
+                int res = str_is_valid_char (edit->charbuf, edit->charpoint);
+                if (res < 0) {
+                    if (res != -2) {
+                        edit->charpoint = 0; /* broken multibyte char, skip */
+                        goto fin;
+                    }
+                    /* not finised multibyte input (in meddle multibyte utf-8 char) */
+                    goto fin;
+                } else {
+                    if ( g_unichar_isprint (g_utf8_get_char(edit->charbuf)) ) {
+                        c = convert_from_utf_to_current ( edit->charbuf );
+                        edit->charbuf[0] = '\0';
+                        edit->charpoint = 0;
+                        char_for_insertion = c;
+                        goto fin;
+                    }
+                    /* unprinteble utf input, skip it */
+                    edit->charbuf[0] = '\0';
+                    edit->charpoint = 0;
+                }
+            }
+        }
+#endif
     }
 
     /* Commands specific to the key emulation */

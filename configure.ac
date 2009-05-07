@@ -15,6 +15,9 @@ AM_MAINTAINER_MODE
 AC_CANONICAL_HOST
 
 AC_USE_SYSTEM_EXTENSIONS
+
+AC_PROG_LIBTOOL
+
 AC_ISC_POSIX
 
 AC_PROG_CC_STDC
@@ -356,6 +359,12 @@ linux*)
     ;;
 esac
 
+$PKG_CONFIG --max-version 2.14 glib-2.0
+if test $? -eq 0
+then
+    AX_PATH_LIB_PCRE
+fi
+
 dnl
 dnl Check nroff and the options it supports
 dnl
@@ -473,6 +482,9 @@ xslang)
 xncurses)
 	MC_WITH_NCURSES
 	;;
+xncursesw)
+	MC_WITH_NCURSESW
+	;;
 x)
 	MC_WITH_SLANG
 	;;
@@ -578,7 +590,10 @@ doc/Makefile
 vfs/Makefile
 vfs/extfs/Makefile
 lib/Makefile
+
 src/Makefile
+src/search/Makefile
+
 edit/Makefile 
 syntax/Makefile
 m4/Makefile

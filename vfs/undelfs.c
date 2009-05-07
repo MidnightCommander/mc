@@ -161,7 +161,7 @@ static int
 undelfs_lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
 {
     struct lsdel_struct *lsd = (struct lsdel_struct *) private;
-    
+    (void) blockcnt;
     lsd->num_blocks++;
     
     if (*block_nr < fs->super->s_first_data_block ||

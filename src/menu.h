@@ -12,17 +12,16 @@ typedef void (*callfn) (void);
 
 typedef struct {
     char first_letter;
-    const char *text;
-    int  hot_key;
+    const char *label;
+    struct hotkey_t text;
     callfn call_back;
 } menu_entry;
 
 typedef struct Menu {
-    char   *name;
+    struct hotkey_t text;
     int    count;
     int    max_entry_len;
     int    selected;
-    int    hotkey;
     menu_entry *entries;
     int    start_x;		/* position relative to menubar start */
     char   *help_node;

@@ -340,8 +340,8 @@ static ssize_t cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *sup
     u.buf[HEAD_LENGTH] = 0;
 
     if (sscanf (u.buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
-	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
-	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
+	      (unsigned long *)&hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
+	      &hd.c_nlink, (unsigned long *)&hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
 	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		    super->name);
@@ -401,7 +401,7 @@ static ssize_t cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *supe
     if (sscanf (u.buf, "%6ho%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx%8lx",
 	      &hd.c_magic, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink,  &hd.c_mtime, &hd.c_filesize,
-	      &hd.c_dev, &hd.c_devmin, &hd.c_rdev, &hd.c_rdevmin,
+	      (unsigned long *)&hd.c_dev, (unsigned long *)&hd.c_devmin, (unsigned long *)&hd.c_rdev, (unsigned long *)&hd.c_rdevmin,
 	      &hd.c_namesize, &hd.c_chksum) < 14) {
 	message (D_ERROR, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		   super->name);

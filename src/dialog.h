@@ -53,8 +53,8 @@ typedef enum {
 } widget_msg_t;
 
 typedef enum {
-    MSG_NOT_HANDLED,
-    MSG_HANDLED
+    MSG_NOT_HANDLED	= 0,
+    MSG_HANDLED		= 1
 } cb_ret_t;
 
 /* Widgets are expected to answer to the following messages:

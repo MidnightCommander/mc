@@ -49,12 +49,14 @@
 #include "profile.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
 #include "main.h"	/* for `slow_terminal' */
+#include "strutil.h"
 
 #define HISTORY_FILE_NAME ".mc/history"
 
 struct WButtonBar {
     Widget widget;
     int    visible;		/* Is it visible? */
+    int btn_width;              /* width of one button */
     struct {
 	char   *text;
 	enum { BBFUNC_NONE, BBFUNC_VOID, BBFUNC_PTR } tag;
@@ -65,10 +67,6 @@ struct WButtonBar {
 	void   *data;
     } labels [10];
 };
-
-static int button_event (Gpm_Event *event, void *);
-
-int quote = 0;
 
 static void
 widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
@@ -84,11 +82,75 @@ widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
 	    : DLG_NORMALC (h)));
 }
 
+struct hotkey_t
+parse_hotkey (const char *text)
+{
+    struct hotkey_t result;
+    const char *cp, *p;
+    
+    /* search for '&', that is not on the of text */
+    cp = strchr (text, '&');
+    if (cp != NULL && cp[1] != '\0') {
+        result.start = g_strndup (text, cp - text);
+        
+        /* skip '&' */
+        cp++;
+        p = str_cget_next_char (cp);
+        result.hotkey = g_strndup (cp, p - cp);
+        
+        cp = p;
+        result.end = g_strdup (cp);
+    } else {
+        result.start = g_strdup (text);
+        result.hotkey = NULL;
+        result.end = NULL;
+    }
+    
+    return result;
+}
+void
+release_hotkey (const struct hotkey_t hotkey)
+{
+    g_free (hotkey.start);
+    g_free (hotkey.hotkey);
+    g_free (hotkey.end);
+}        
+
+int
+hotkey_width (const struct hotkey_t hotkey)
+{
+    int result;
+    
+    result = str_term_width1 (hotkey.start);
+    result+= (hotkey.hotkey != NULL) ? str_term_width1 (hotkey.hotkey) : 0;
+    result+= (hotkey.end != NULL) ? str_term_width1 (hotkey.end) : 0;
+    return result;
+}
+
+static void
+draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
+{
+    widget_selectcolor (w, focused, FALSE);
+    addstr (str_term_form (hotkey.start));
+
+    if (hotkey.hotkey != NULL) {
+	widget_selectcolor (w, focused, TRUE);
+	addstr (str_term_form (hotkey.hotkey));
+	widget_selectcolor (w, focused, FALSE);
+    }
+
+    if (hotkey.end != NULL)
+	addstr (str_term_form (hotkey.end));
+}
+
+static int button_event (Gpm_Event *event, void *);
+
+int quote = 0;
+
 static cb_ret_t
 button_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WButton *b = (WButton *) w;
-    char buf[BUF_SMALL];
     int stop = 0;
     int off = 0;
     Dlg_head *h = b->widget.parent;
@@ -111,11 +173,13 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	}
 
-	if (b->hotkey == tolower (parm)) {
-	    button_callback (w, WIDGET_KEY, ' ');
-	    return MSG_HANDLED;
-	}
-
+        if (b->text.hotkey != NULL) {
+            if (g_ascii_tolower ((gchar)b->text.hotkey[0]) ==
+                g_ascii_tolower ((gchar)parm)) {
+		button_callback (w, WIDGET_KEY, ' ');
+		return MSG_HANDLED;
+	    }
+        }
 	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
@@ -157,40 +221,41 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 	else if (msg == WIDGET_FOCUS)
 	    b->selected = 1;
 
+        widget_selectcolor (w, b->selected, FALSE);
+        widget_move (w, 0, 0);
+
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[< %s >]", b->text);
-	    off = 3;
+                addstr ("[< ");
 	    break;
 	case NORMAL_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[ %s ]", b->text);
-	    off = 2;
+                addstr ("[ ");
 	    break;
 	case NARROW_BUTTON:
-	    g_snprintf (buf, sizeof (buf), "[%s]", b->text);
-	    off = 1;
+                addstr ("[");
 	    break;
 	case HIDDEN_BUTTON:
 	default:
-	    buf[0] = '\0';
-	    off = 0;
-	    break;
+                return MSG_HANDLED;
 	}
 
-	widget_selectcolor (w, b->selected, FALSE);
-	widget_move (w, 0, 0);
+	draw_hotkey (w, b->text, b->selected);
 
-	addstr (buf);
-
-	if (b->hotpos >= 0) {
-	    widget_selectcolor (w, b->selected, TRUE);
-	    widget_move (w, 0, b->hotpos + off);
-	    addch ((unsigned char) b->text[b->hotpos]);
+        switch (b->flags) {
+            case DEFPUSH_BUTTON:
+                addstr (" >]");
+                break;
+            case NORMAL_BUTTON:
+                addstr (" ]");
+                break;
+            case NARROW_BUTTON:
+                addstr ("]");
+                break;
 	}
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (b->text);
+        release_hotkey (b->text);
 	return MSG_HANDLED;
 
     default:
@@ -216,10 +281,10 @@ button_event (Gpm_Event *event, void *data)
 }
 
 static int
-button_len (const char *text, unsigned int flags)
+button_len (const struct hotkey_t text, unsigned int flags)
 {
-    int ret = strlen (text);
-    switch (flags){
+    int ret = hotkey_width (text);
+    switch (flags) {
 	case DEFPUSH_BUTTON:
 	    ret += 6;
 	    break;
@@ -236,57 +301,49 @@ button_len (const char *text, unsigned int flags)
     return ret;
 }
 
-/*
- * Locate the hotkey and remove it from the button text.  Assuming that
- * the button text is g_malloc()ed, we can safely change and shorten it.
- */
-static void
-button_scan_hotkey (WButton *b)
-{
-    char *cp = strchr (b->text, '&');
-
-    if (cp != NULL && cp[1] != '\0') {
-	g_strlcpy (cp, cp + 1, strlen (cp));
-	b->hotkey = tolower ((unsigned char) *cp);
-	b->hotpos = cp - b->text;
-    }
-}
-
 WButton *
 button_new (int y, int x, int action, int flags, const char *text,
 	    bcback callback)
 {
     WButton *b = g_new (WButton, 1);
 
-    init_widget (&b->widget, y, x, 1, button_len (text, flags),
+    b->text = parse_hotkey (text);
+    
+    init_widget (&b->widget, y, x, 1, button_len (b->text, flags),
 		 button_callback, button_event);
     
     b->action = action;
     b->flags  = flags;
     b->selected = 0;
-    b->text   = g_strdup (text);
     b->callback = callback;
     widget_want_hotkey (b->widget, 1);
-    b->hotkey = 0;
-    b->hotpos = -1;
+    b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
 
-    button_scan_hotkey(b);
     return b;
 }
 
 const char *
 button_get_text (WButton *b)
 {
-    return b->text;
+    if (b->text.hotkey != NULL) 
+        return g_strconcat (b->text.start, "&", b->text.hotkey, 
+                            b->text.end, NULL);
+    else
+        return g_strdup (b->text.start); 
 }
 
 void
 button_set_text (WButton *b, const char *text)
 {
+/*
     g_free (b->text);
     b->text = g_strdup (text);
     b->widget.cols = button_len (text, b->flags);
     button_scan_hotkey(b);
+*/
+    release_hotkey (b->text);
+    b->text = parse_hotkey (text);
+    b->widget.cols = button_len (b->text, b->flags);
     dlg_redraw (b->widget.parent);
 }
 
@@ -304,13 +361,11 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     switch (msg) {
     case WIDGET_HOTKEY:
 	{
-	    int i, lp = tolower (parm);
-	    const char *cp;
+	    int i, lp = g_ascii_tolower ((gchar)parm);
 
 	    for (i = 0; i < r->count; i++) {
-		cp = strchr (r->texts[i], '&');
-		if (cp != NULL && cp[1] != '\0') {
-		    int c = tolower ((unsigned char) cp[1]);
+                if (r->texts[i].hotkey != NULL) {
+                    int c = g_ascii_tolower ((gchar)r->texts[i].hotkey[0]);
 
 		    if (c != lp)
 			continue;
@@ -359,22 +414,20 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
-	    register const char *cp;
 	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
-
-	    tty_printf ("(%c) ", (r->sel == i) ? '*' : ' ');
-	    for (cp = r->texts[i]; *cp; cp++) {
-		if (*cp == '&') {
-		    widget_selectcolor (w, focused, TRUE);
-		    addch (*++cp);
-		    widget_selectcolor (w, focused, FALSE);
-		} else
-		    addch (*cp);
-	    }
+	    addstr ((r->sel == i) ? "(*) " : "( ) ");
+	    draw_hotkey (w, r->texts[i], focused);
 	}
 	return MSG_HANDLED;
+
+    case WIDGET_DESTROY:
+        for (i = 0; i < r->count; i++) {
+            release_hotkey (r->texts[i]);
+        }
+        g_free (r->texts);
+        return MSG_HANDLED;
 
     default:
 	return default_proc (msg, parm);
@@ -405,26 +458,28 @@ radio_event (Gpm_Event *event, void *data)
 WRadio *
 radio_new (int y, int x, int count, const char **texts)
 {
-    WRadio *r = g_new (WRadio, 1);
+    WRadio *result = g_new (WRadio, 1);
     int i, max, m;
 
     /* Compute the longest string */
+    result->texts = g_new (struct hotkey_t, count);
+    
     max = 0;
     for (i = 0; i < count; i++){
-	m = strlen (texts [i]);
+        result->texts[i] = parse_hotkey (texts[i]);
+        m = hotkey_width (result->texts[i]);
 	if (m > max)
 	    max = m;
     }
 
-    init_widget (&r->widget, y, x, count, max, radio_callback, radio_event);
-    r->state = 1;
-    r->pos = 0;
-    r->sel = 0;
-    r->count = count;
-    r->texts = texts;
-    widget_want_hotkey (r->widget, 1);
+    init_widget (&result->widget, y, x, count, max, radio_callback, radio_event);
+    result->state = 1;
+    result->pos = 0;
+    result->sel = 0;
+    result->count = count;
+    widget_want_hotkey (result->widget, 1);
     
-    return r;
+    return result;
 }
 
 
@@ -440,11 +495,13 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
 
     switch (msg) {
     case WIDGET_HOTKEY:
-	if (c->hotkey == parm
-	    || (c->hotkey >= 'a' && c->hotkey <= 'z'
-		&& c->hotkey - 32 == parm)) {
-	    check_callback (w, WIDGET_KEY, ' ');	/* make action */
-	    return MSG_HANDLED;
+        if (c->text.hotkey != NULL) {
+            if (g_ascii_tolower ((gchar)c->text.hotkey[0]) == 
+                g_ascii_tolower ((gchar)parm)) {
+
+		check_callback (w, WIDGET_KEY, ' ');	/* make action */
+		return MSG_HANDLED;
+	    }
 	}
 	return MSG_NOT_HANDLED;
 
@@ -466,17 +523,12 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-	tty_printf ("[%c] %s", (c->state & C_BOOL) ? 'x' : ' ', c->text);
-
-	if (c->hotpos >= 0) {
-	    widget_selectcolor (w, msg == WIDGET_FOCUS, TRUE);
-	    widget_move (&c->widget, 0, +c->hotpos + 4);
-	    addch ((unsigned char) c->text[c->hotpos]);
-	}
+	addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+	draw_hotkey (w, c->text, msg == WIDGET_FOCUS);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
-	g_free (c->text);
+        release_hotkey (c->text);
 	return MSG_HANDLED;
 
     default:
@@ -508,31 +560,14 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
-    const char *s;
-    char *t;
     
-    init_widget (&c->widget, y, x, 1, strlen (text),
+    c->text = parse_hotkey (text);
+    
+    init_widget (&c->widget, y, x, 1, hotkey_width (c->text), 
 	check_callback, check_event);
     c->state = state ? C_BOOL : 0;
-    c->text = g_strdup (text);
-    c->hotkey = 0;
-    c->hotpos = -1;
     widget_want_hotkey (c->widget, 1);
 
-    /* Scan for the hotkey */
-    for (s = text, t = c->text; *s; s++, t++){
-	if (*s != '&'){
-	    *t = *s;
-	    continue;
-	}
-	s++;
-	if (*s){
-	    c->hotkey = tolower ((unsigned char) *s);
-	    c->hotpos = t - c->text;
-	}
-	*t = *s;
-    }
-    *t = 0;
     return c;
 }
 
@@ -565,22 +600,20 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		attrset (DEFAULT_COLOR);
 	    else
 		attrset (DLG_NORMALC (h));
-	    for (;;) {
-		int xlen;
 
+            for (;;) {
 		q = strchr (p, '\n');
-		if (q) {
-		    c = *q;
-		    *q = 0;
+                if (q != NULL) {
+                    c = q[0];
+                    q[0] = '\0';
 		}
+		
 		widget_move (&l->widget, y, 0);
-		tty_printf ("%s", p);
-		xlen = l->widget.cols - strlen (p);
-		if (xlen > 0)
-		    tty_printf ("%*s", xlen, " ");
-		if (!q)
+                addstr (str_fit_to_term (p, l->widget.cols, J_LEFT));
+
+                if (q == NULL)
 		    break;
-		*q = c;
+                q[0] = c;
 		p = q + 1;
 		y++;
 	    }
@@ -600,21 +633,23 @@ void
 label_set_text (WLabel *label, const char *text)
 {
     int newcols = label->widget.cols;
+    int newlines;
     
     if (label->text && text && !strcmp (label->text, text))
         return; /* Flickering is not nice */
 
     g_free (label->text);
 
-    if (text){
+    if (text != NULL) {
 	label->text = g_strdup (text);
 	if (label->auto_adjust_cols) {
-	    newcols = strlen (text);
+            str_msg_term_size (text, &newlines, &newcols);
 	    if (newcols > label->widget.cols)
 	    label->widget.cols = newcols;
+            if (newlines > label->widget.lines)
+                label->widget.lines = newlines;
 	}
-    } else
-	label->text = 0;
+    } else label->text = NULL;
     
     if (label->widget.parent)
 	label_callback ((Widget *) label, WIDGET_DRAW, 0);
@@ -627,17 +662,15 @@ WLabel *
 label_new (int y, int x, const char *text)
 {
     WLabel *l;
-    int width;
+    int cols = 1;
+    int lines = 1;
 
-    /* Multiline labels are immutable - no need to compute their sizes */
-    if (!text || strchr(text, '\n'))
-	width = 1;
-    else
-	width = strlen (text);
+    if (text != NULL)
+        str_msg_term_size (text, &lines, &cols);
 
     l = g_new (WLabel, 1);
-    init_widget (&l->widget, y, x, 1, width, label_callback, NULL);
-    l->text = text ? g_strdup (text) : 0;
+    init_widget (&l->widget, y, x, lines, cols, label_callback, NULL);
+    l->text = (text != NULL) ? g_strdup (text) : NULL;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
     widget_want_cursor (l->widget, 0);
@@ -657,7 +690,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_INIT)
 	return MSG_HANDLED;
-    
+
     /* We don't want to get the focus */
     if (msg == WIDGET_FOCUS)
 	return MSG_NOT_HANDLED;
@@ -670,7 +703,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	else {
 	    int percentage, columns;
 	    long total = g->max, done = g->current;
-	    
+	
 	    if (total <= 0 || done < 0) {
 	        done = 0;
 	        total = 100;
@@ -691,6 +724,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	}
 	return MSG_HANDLED;
     }
+
     return default_proc (msg, parm);
 }
 
@@ -745,27 +779,21 @@ gauge_new (int y, int x, int shown, int max, int current)
 #endif
  
 #define should_show_history_button(in) \
-	    (in->history && in->field_len > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.parent)
+(in->history && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 && in->widget.parent)
 
 static void draw_history_button (WInput * in)
 {
     char c;
     c = in->history->next ? (in->history->prev ? '|' : 'v') : '^';
-    widget_move (&in->widget, 0, in->field_len - HISTORY_BUTTON_WIDTH);
+    widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
 #ifdef LARGE_HISTORY_BUTTON
     {
 	Dlg_head *h;
 	h = in->widget.parent;
-#if 0
-	attrset (NORMALC);	/* button has the same color as other buttons */
-	addstr ("[ ]");
-	attrset (HOT_NORMALC);
-#else
 	attrset (NORMAL_COLOR);
 	addstr ("[ ]");
 	/* Too distracting: attrset (MARKED_COLOR); */
-#endif
-	widget_move (&in->widget, 0, in->field_len - HISTORY_BUTTON_WIDTH + 1);
+        widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
 	addch (c);
     }
 #else
@@ -785,9 +813,10 @@ void
 update_input (WInput *in, int clear_first)
 {
     int has_history = 0;
-    int    i, j;
-    unsigned char   c;
-    int    buf_len = strlen (in->buffer);
+    int    i;
+    int    buf_len = str_length (in->buffer);
+    const char *cp;
+    int pw;
 
     if (should_show_history_button (in))
 	has_history = HISTORY_BUTTON_WIDTH;
@@ -795,12 +824,15 @@ update_input (WInput *in, int clear_first)
     if (in->disable_update)
 	return;
 
+    pw = str_term_width2 (in->buffer, in->point);
+    
     /* Make the point visible */
-    if ((in->point < in->first_shown) ||
-	(in->point >= in->first_shown+in->field_len - has_history)){
-	in->first_shown = in->point - (in->field_len / 3);
-	if (in->first_shown < 0)
-	    in->first_shown = 0;
+    if ((pw < in->term_first_shown) || 
+         (pw >= in->term_first_shown + in->field_width - has_history)) {
+        
+        in->term_first_shown = pw - (in->field_width / 3);
+        if (in->term_first_shown < 0)
+            in->term_first_shown = 0;
     }
 
     /* Adjust the mark */
@@ -813,28 +845,29 @@ update_input (WInput *in, int clear_first)
     attrset (in->color);
     
     widget_move (&in->widget, 0, 0);
-    for (i = 0; i < in->field_len - has_history; i++)
-	addch (' ');
-    widget_move (&in->widget, 0, 0);
     
-    for (i = 0, j = in->first_shown; i < in->field_len - has_history && in->buffer [j]; i++){
-	c = in->buffer [j++];
-	c = is_printable (c) ? c : '.';
-	if (in->is_password)
-	    c = '*';
-	addch (c);
+    if (!in->is_password) {
+        addstr (str_term_substring (in->buffer, in->term_first_shown, 
+                in->field_width - has_history));
+    } else {
+        cp = in->buffer;
+        for (i = -in->term_first_shown; i < in->field_width - has_history; i++){
+            if (i >= 0) {
+                addch ((cp[0] != '\0') ? '*' : ' ');
+            }
+            if (cp[0] != '\0') str_cnext_char (&cp);
+        }
     }
-    widget_move (&in->widget, 0, in->point - in->first_shown);
 
     if (clear_first)
 	    in->first = 0;
 }
 
 void
-winput_set_origin (WInput *in, int x, int field_len)
+winput_set_origin (WInput *in, int x, int field_width)
 {
     in->widget.x    = x;
-    in->field_len = in->widget.cols = field_len;
+    in->field_width = in->widget.cols = field_width;
     update_input (in, 0);
 }
 
@@ -953,11 +986,7 @@ history_put (const char *input_name, GList *h)
 static const char *
 i18n_htitle (void)
 {
-    static const char *history_title = NULL;
-
-    if (history_title == NULL)
-	history_title = _(" History ");
-    return history_title;	
+    return _(" History ");	
 }
 
 static WLEntry *listbox_select_pos (WListbox *l, WLEntry *base, int
@@ -977,7 +1006,7 @@ char *
 show_hist (GList *history, int widget_x, int widget_y)
 {
     GList *hi, *z;
-    size_t maxlen = strlen (i18n_htitle ()), i, count = 0;
+    size_t maxlen = str_term_width1 (i18n_htitle ()), i, count = 0;
     int x, y, w, h;
     char *q, *r = 0;
     Dlg_head *query_dlg;
@@ -990,7 +1019,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     z = g_list_first (history);
     hi = z;
     while (hi) {
-	if ((i = strlen ((char *) hi->data)) > maxlen)
+        if ((i = str_term_width1 ((char *) hi->data)) > maxlen)
 	    maxlen = i;
 	count++;
 	hi = g_list_next (hi);
@@ -1018,7 +1047,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
 		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, w - 2, h - 2, 0);
+    query_list = listbox_new (1, 1, h - 2, w - 2, NULL);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
@@ -1158,37 +1187,77 @@ new_input (WInput *in)
     if (in->buffer)
 	push_history (in, in->buffer);
     in->need_push = 1;
-    in->buffer [0] = 0;
+    in->buffer[0] = '\0';
     in->point = 0;
+    in->charpoint = 0;
     in->mark = 0;
     free_completions (in);
     update_input (in, 0);
+}
+
+static void
+move_buffer_backward (WInput *in, int start, int end)
+{
+    int i, pos, len;
+    int str_len = str_length (in->buffer);
+    if (start >= str_len || end > str_len + 1) return;
+
+    pos = str_offset_to_pos (in->buffer, start);
+    len = str_offset_to_pos (in->buffer, end) - pos;
+
+    for (i = pos; in->buffer[i + len - 1]; i++)
+        in->buffer[i] = in->buffer[i + len];
 }
 
 static cb_ret_t
 insert_char (WInput *in, int c_code)
 {
     size_t i;
+    int res;
 
     if (c_code == -1)
 	return MSG_NOT_HANDLED;
-    
+
+    if (in->charpoint >= MB_LEN_MAX)
+	return MSG_HANDLED;
+
+    in->charbuf[in->charpoint] = c_code;
+    in->charpoint++;
+
+    res = str_is_valid_char (in->charbuf, in->charpoint);
+    if (res < 0) {
+        if (res != -2)
+	    in->charpoint = 0; /* broken multibyte char, skip */
+        return MSG_HANDLED;
+    }
+
     in->need_push = 1;
-    if (strlen (in->buffer)+1 == (size_t) in->current_max_len){
+    if (strlen (in->buffer) + 1 + in->charpoint >= in->current_max_size){
 	/* Expand the buffer */
-	char *narea = g_realloc (in->buffer, in->current_max_len + in->field_len);
+        size_t new_length = in->current_max_size + 
+                in->field_width + in->charpoint;
+        char *narea = g_try_renew (char, in->buffer, new_length);
 	if (narea){
 	    in->buffer = narea;
-	    in->current_max_len += in->field_len;
+            in->current_max_size = new_length;
 	}
     }
-    if (strlen (in->buffer)+1 < (size_t) in->current_max_len){
-	size_t l = strlen (&in->buffer [in->point]);
-	for (i = l+1; i > 0; i--)
-	    in->buffer [in->point+i] = in->buffer [in->point+i-1];
-	in->buffer [in->point] = c_code;
+
+    if (strlen (in->buffer) + in->charpoint < in->current_max_size) {
+        /* bytes from begin */
+        size_t ins_point = str_offset_to_pos (in->buffer, in->point); 
+        /* move chars */
+        size_t rest_bytes = strlen (in->buffer + ins_point);
+
+        for (i = rest_bytes + 1; i > 0; i--) 
+            in->buffer[ins_point + i + in->charpoint - 1] = 
+                    in->buffer[ins_point + i - 1];
+
+        memcpy(in->buffer + ins_point, in->charbuf, in->charpoint); 
 	in->point++;
     }
+
+    in->charpoint = 0;
     return MSG_HANDLED;
 }
 
@@ -1196,54 +1265,70 @@ static void
 beginning_of_line (WInput *in)
 {
     in->point = 0;
+    in->charpoint = 0;
 }
 
 static void
 end_of_line (WInput *in)
 {
-    in->point = strlen (in->buffer);
+    in->point = str_length (in->buffer);
+    in->charpoint = 0;
 }
 
 static void
 backward_char (WInput *in)
 {
-    if (in->point)
-	in->point--;
+    const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    
+    if (in->point > 0) {
+        in->point-= str_cprev_noncomb_char (&act, in->buffer);
+    }
+    in->charpoint = 0;
 }
 
 static void
 forward_char (WInput *in)
 {
-    if (in->buffer [in->point])
-	in->point++;
+    const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    if (act[0] != '\0') {
+	in->point+= str_cnext_noncomb_char (&act);
+    }
+    in->charpoint = 0;
 }
 
 static void
 forward_word (WInput * in)
 {
-    char *p = in->buffer + in->point;
+    const char *p = in->buffer + str_offset_to_pos (in->buffer, in->point);
 
-    while (*p
-	   && (isspace ((unsigned char) *p)
-	       || ispunct ((unsigned char) *p)))
-	p++;
-    while (*p && isalnum ((unsigned char) *p))
-	p++;
-    in->point = p - in->buffer;
+    while (p[0] != '\0' && (str_isspace (p) || str_ispunct (p))) {
+        str_cnext_char (&p);
+        in->point++;
+    }
+    while (p[0] != '\0' && !str_isspace (p) && !str_ispunct (p)) {
+        str_cnext_char (&p);
+        in->point++;
+    }
 }
 
 static void
 backward_word (WInput *in)
 {
-    char *p = in->buffer + in->point;
+    const char *p = in->buffer + str_offset_to_pos (in->buffer, in->point);
 
-    while (p - 1 > in->buffer - 1 && (isspace ((unsigned char) *(p - 1))
-				      || ispunct ((unsigned char)
-						  *(p - 1))))
+    while ((p != in->buffer) && (p[0] == '\0')) {
 	p--;
-    while (p - 1 > in->buffer - 1 && isalnum ((unsigned char) *(p - 1)))
-	p--;
-    in->point = p - in->buffer;
+        in->point--;
+    }
+    
+    while ((p != in->buffer) && (str_isspace (p) || str_ispunct (p))) {
+        str_cprev_char (&p);
+        in->point--;
+    }
+    while ((p != in->buffer) && !str_isspace (p) && !str_ispunct (p)) {
+        str_cprev_char (&p);
+        in->point--;
+    }
 }
 
 static void
@@ -1272,23 +1357,29 @@ key_ctrl_right (WInput *in)
 static void
 backward_delete (WInput *in)
 {
-    int i;
+    const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    int start;
     
-    if (!in->point)
+    if (in->point == 0)
 	return;
-    for (i = in->point; in->buffer [i-1]; i++)
-	in->buffer [i-1] = in->buffer [i];
+
+    start = in->point - str_cprev_noncomb_char (&act, in->buffer);
+    move_buffer_backward(in, start, in->point);    
+    in->charpoint = 0;
     in->need_push = 1;
-    in->point--;
+    in->point = start;
 }
 
 static void
 delete_char (WInput *in)
 {
-    int i;
+    const char *act = in->buffer + str_offset_to_pos (in->buffer, in->point);
+    int end = in->point;
+    
+    end+= str_cnext_noncomb_char (&act);
 
-    for (i = in->point; in->buffer [i]; i++)
-	in->buffer [i] = in->buffer [i+1];
+    move_buffer_backward(in, in->point, end);    
+    in->charpoint = 0;
     in->need_push = 1;
 }
 
@@ -1303,7 +1394,10 @@ copy_region (WInput *in, int x_first, int x_last)
     
     g_free (kill_buffer);
 
-    kill_buffer = g_strndup(in->buffer+first,last-first);
+    first = str_offset_to_pos (in->buffer, first);
+    last = str_offset_to_pos (in->buffer, last);
+    
+    kill_buffer = g_strndup(in->buffer + first, last - first);
 }
 
 static void
@@ -1311,11 +1405,15 @@ delete_region (WInput *in, int x_first, int x_last)
 {
    int first = min (x_first, x_last);
    int last  = max (x_first, x_last);
-   size_t len = strlen (&in->buffer [last]) + 1;
+    size_t len;
 
    in->point = first;
    in->mark  = first;
-   memmove (&in->buffer [first], &in->buffer [last], len);
+    last = str_offset_to_pos (in->buffer, last);
+    first = str_offset_to_pos (in->buffer, first);
+    len = strlen (&in->buffer[last]) + 1;
+    memmove (&in->buffer[first], &in->buffer[last], len);
+    in->charpoint = 0;
    in->need_push = 1;
 }
 
@@ -1332,6 +1430,8 @@ kill_word (WInput *in)
     copy_region (in, old_point, new_point);
     delete_region (in, old_point, new_point);
     in->need_push = 1;
+    in->charpoint = 0;
+    in->charpoint = 0;
 }
 
 static void
@@ -1375,16 +1475,20 @@ yank (WInput *in)
     
     if (!kill_buffer)
         return;
+    in->charpoint = 0;
     for (p = kill_buffer; *p; p++)
 	insert_char (in, *p);
+    in->charpoint = 0;
 }
 
 static void
 kill_line (WInput *in)
 {
+    int chp = str_offset_to_pos (in->buffer, in->point);
     g_free (kill_buffer);
-    kill_buffer = g_strdup (&in->buffer [in->point]);
-    in->buffer [in->point] = 0;
+    kill_buffer = g_strdup (&in->buffer[chp]);
+    in->buffer[chp] = '\0';
+    in->charpoint = 0;
 }
 
 void
@@ -1393,10 +1497,11 @@ assign_text (WInput *in, const char *text)
     free_completions (in);
     g_free (in->buffer);
     in->buffer = g_strdup (text);	/* was in->buffer->text */
-    in->current_max_len = strlen (in->buffer) + 1;
-    in->point = strlen (in->buffer);
+    in->current_max_size = strlen (in->buffer) + 1;
+    in->point = str_length (in->buffer);
     in->mark = 0;
     in->need_push = 1;
+    in->charpoint = 0;
 }
 
 static void
@@ -1520,9 +1625,10 @@ is_in_input_map (WInput *in, int c_code)
 static void
 port_region_marked_for_delete (WInput *in)
 {
-    *in->buffer = 0;
+    in->buffer[0] = '\0';
     in->point = 0;
     in->first = 0;
+    in->charpoint = 0;
 }
 
 cb_ret_t
@@ -1551,7 +1657,7 @@ handle_char (WInput *in, int c_code)
 	}
     }
     if (!input_map [i].fn){
-	if (c_code > 255 || !is_printable (c_code))
+        if (c_code > 255)
 	    return MSG_NOT_HANDLED;
 	if (in->first){
 	    port_region_marked_for_delete (in);
@@ -1579,11 +1685,14 @@ stuff (WInput *in, const char *text, int insert_extra_space)
 void
 input_set_point (WInput *in, int pos)
 {
-    if (pos > in->current_max_len)
-	pos = in->current_max_len;
+    int max_pos = str_length (in->buffer);
+    
+    if (pos > max_pos)
+        pos = max_pos;
     if (pos != in->point)
     	free_completions (in);
     in->point = pos;
+    in->charpoint = 0;
     update_input (in, 1);
 }
 
@@ -1624,7 +1733,8 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_CURSOR:
-	widget_move (&in->widget, 0, in->point - in->first_shown);
+            widget_move (&in->widget, 0, str_term_width2 (in->buffer, in->point)
+                    - in->term_first_shown);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -1644,15 +1754,17 @@ input_event (Gpm_Event * event, void *data)
     if (event->type & (GPM_DOWN | GPM_DRAG)) {
 	dlg_select_widget (in);
 
-	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1
+        if (event->x >= in->field_width - HISTORY_BUTTON_WIDTH + 1
 	    && should_show_history_button (in)) {
 	    do_show_hist (in);
 	} else {
-	    in->point = strlen (in->buffer);
-	    if (event->x - in->first_shown - 1 < in->point)
-		in->point = event->x - in->first_shown - 1;
-	    if (in->point < 0)
-		in->point = 0;
+            in->point = str_length (in->buffer);
+            if (event->x + in->term_first_shown - 1 < 
+                str_term_width1 (in->buffer))
+                    
+                in->point = str_column_to_pos (in->buffer, event->x 
+                           + in->term_first_shown - 1);
+               
 	}
 	update_input (in, 1);
     }
@@ -1660,13 +1772,13 @@ input_event (Gpm_Event * event, void *data)
 }
 
 WInput *
-input_new (int y, int x, int color, int len, const char *def_text,
+input_new (int y, int x, int color, int width, const char *def_text,
 	   const char *histname, INPUT_COMPLETE_FLAGS completion_flags)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
 
-    init_widget (&in->widget, y, x, 1, len, input_callback, input_event);
+    init_widget (&in->widget, y, x, 1, width, input_callback, input_event);
 
     /* history setup */
     in->history = NULL;
@@ -1678,7 +1790,7 @@ input_new (int y, int x, int color, int len, const char *def_text,
 	}
     }
 
-    if (!def_text)
+    if (def_text == NULL)
 	def_text = "";
 
     if (def_text == INPUT_LAST_TEXT) {
@@ -1687,27 +1799,27 @@ input_new (int y, int x, int color, int len, const char *def_text,
 	    if (in->history->data)
 		def_text = (char *) in->history->data;
     }
-    initial_buffer_len = 1 + max ((size_t) len, strlen (def_text));
+    initial_buffer_len = 1 + max ((size_t) width, strlen (def_text));
     in->widget.options |= W_IS_INPUT;
     in->completions = NULL;
     in->completion_flags = completion_flags;
-    in->current_max_len = initial_buffer_len;
-    in->buffer = g_malloc (initial_buffer_len);
+    in->current_max_size = initial_buffer_len;
+    in->buffer = g_new (char, initial_buffer_len);
     in->color = color;
-    in->field_len = len;
+    in->field_width = width;
     in->first = 1;
-    in->first_shown = 0;
+    in->term_first_shown = 0;
     in->disable_update = 0;
     in->mark = 0;
     in->need_push = 1;
     in->is_password = 0;
 
     strcpy (in->buffer, def_text);
-    in->point = strlen (in->buffer);
+    in->point = str_length (in->buffer);
+    in->charpoint = 0;
     return in;
 }
 
-
 /* Listbox widget */
 
 /* Should draw the scrollbar, but currently draws only
@@ -1787,7 +1899,7 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-	tty_printf (" %-*s ", l->width-2, name_trunc (text, l->width-2));
+            addstr (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
     if (!l->scrollbar)
@@ -1967,11 +2079,11 @@ static cb_ret_t
 listbox_key (WListbox *l, int key)
 {
     int i;
-    int j = 0;
+    cb_ret_t j = MSG_NOT_HANDLED;
 
     if (!l->list)
 	return MSG_NOT_HANDLED;
-    
+
     switch (key){
     case KEY_HOME:
     case KEY_A1:
@@ -2002,14 +2114,16 @@ listbox_key (WListbox *l, int key)
     case KEY_NPAGE:
     case XCTRL('v'):
 	for (i = 0; i < l->height-1; i++)
-	    j |= listbox_fwd (l);
-	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
+	    if (listbox_fwd (l) != MSG_NOT_HANDLED)
+		j = MSG_HANDLED;
+	return j;
 	
     case KEY_PPAGE:
     case ALT('v'):
 	for (i = 0; i < l->height-1; i++)
-	    j |= listbox_back (l);
-	return (j > 0) ? MSG_HANDLED : MSG_NOT_HANDLED;
+	    if (listbox_back (l) != MSG_NOT_HANDLED)
+		j = MSG_HANDLED;
+	return j;
     }
     return MSG_NOT_HANDLED;
 }
@@ -2152,7 +2266,7 @@ listbox_event (Gpm_Event *event, void *data)
 }
 
 WListbox *
-listbox_new (int y, int x, int width, int height, lcback callback)
+listbox_new (int y, int x, int height, int width, lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
 
@@ -2305,12 +2419,21 @@ buttonbar_call (WButtonBar *bb, int i)
     return FALSE;
 }
 
+/* calculate width of one button, width is never lesser than 7 */
+static int
+buttonbat_get_button_width ()
+{
+    int result = COLS / 10;
+    return (result >= 7) ? result : 7;
+}
+
 
 static cb_ret_t
 buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 {
     WButtonBar *bb = (WButtonBar *) w;
     int i;
+    char *text;
 
     switch (msg) {
     case WIDGET_FOCUS:
@@ -2328,14 +2451,15 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	    return MSG_HANDLED;
 	widget_move (&bb->widget, 0, 0);
 	attrset (DEFAULT_COLOR);
+        bb->btn_width = buttonbat_get_button_width ();
 	tty_printf ("%-*s", bb->widget.cols, "");
-	for (i = 0; i < COLS / 8 && i < 10; i++) {
-	    widget_move (&bb->widget, 0, i * 8);
+        for (i = 0; i < COLS / bb->btn_width && i < 10; i++) {
+            widget_move (&bb->widget, 0, i * bb->btn_width);
 	    attrset (DEFAULT_COLOR);
-	    tty_printf ("%d", i + 1);
+            tty_printf ("%2d", i + 1);
 	    attrset (SELECTED_COLOR);
-	    tty_printf ("%-*s", ((i + 1) * 8 == COLS ? 5 : 6),
-		    bb->labels[i].text ? bb->labels[i].text : "");
+            text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
+            addstr (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
 	    attrset (DEFAULT_COLOR);
 	}
 	attrset (SELECTED_COLOR);
@@ -2361,7 +2485,7 @@ buttonbar_event (Gpm_Event *event, void *data)
 	return MOU_NORMAL;
     if (event->y == 2)
 	return MOU_NORMAL;
-    button = event->x / 8;
+    button = (event->x - 1) / bb->btn_width;
     if (button < 10)
 	buttonbar_call (bb, button);
     return MOU_NORMAL;
@@ -2383,6 +2507,7 @@ buttonbar_new (int visible)
     }
     widget_want_hotkey (bb->widget, 1);
     widget_want_cursor (bb->widget, 0);
+    bb->btn_width = buttonbat_get_button_width ();
 
     return bb;
 }
@@ -2418,8 +2543,8 @@ buttonbar_clear_label (Dlg_head *h, int idx)
 }
 
 void
-buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
-		   void *data)
+buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, 
+                          buttonbarfn cback, void *data)
 {
     WButtonBar *bb = find_buttonbar (h);
 
@@ -2485,7 +2610,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x + 1);
-	addstr (g->title);
+	addstr (str_term_form (g->title));
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -2498,7 +2623,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 }
 
 WGroupbox *
-groupbox_new (int x, int y, int width, int height, const char *title)
+groupbox_new (int y, int x, int height, int width, const char *title)
 {
     WGroupbox *g = g_new (WGroupbox, 1);
 

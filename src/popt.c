@@ -47,16 +47,14 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute) {
 static void invokeCallbacks(poptContext con, const struct poptOption * table,
 			    int post) {
     const struct poptOption * opt = table;
-    poptCallbackType cb;
-    
-    while (opt->longName || opt->shortName || opt->arg) {
+
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    invokeCallbacks(con, opt->arg, post);
+	    invokeCallbacks(con, opt->arg.p, post);
 	} else if (((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_CALLBACK) &&
 		   ((!post && (opt->argInfo & POPT_CBFLAG_PRE)) ||
 		    ( post && (opt->argInfo & POPT_CBFLAG_POST)))) {
-	    cb = (poptCallbackType)opt->arg;
-	    cb(con, post ? POPT_CALLBACK_REASON_POST : POPT_CALLBACK_REASON_PRE,
+	    opt->arg.f1(con, post ? POPT_CALLBACK_REASON_POST : POPT_CALLBACK_REASON_PRE,
 	       NULL, NULL, opt->descrip);
 	}
 	opt++;
@@ -251,9 +249,9 @@ static const struct poptOption * findOption(const struct poptOption * table,
     if (singleDash && !shortName && !*longName)
 	shortName = '-';
 
-    while (opt->longName || opt->shortName || opt->arg) {
+    while (opt->longName || opt->shortName || opt->arg.p) {
 	if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_INCLUDE_TABLE) {
-	    opt2 = findOption(opt->arg, longName, shortName, callback, 
+	    opt2 = findOption(opt->arg.p, longName, shortName, callback, 
 			      callbackData, singleDash);
 	    if (opt2) {
 		if (*callback && !*callbackData)
@@ -276,7 +274,7 @@ static const struct poptOption * findOption(const struct poptOption * table,
     *callbackData = NULL;
     *callback = NULL;
     if (cb) {
-	*callback = (poptCallbackType)cb->arg;
+	*callback = cb->arg.f2;
 	if (!(cb->argInfo & POPT_CBFLAG_INC_DATA))
 	    *callbackData = cb->descrip;
     }
@@ -380,10 +378,10 @@ int poptGetNextOpt(poptContext con) {
 		con->os->nextCharArg = origOptString;
 	}
 
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE) {
-	    *((int *)opt->arg) = 1;
+	if (opt->arg.p && (opt->argInfo & POPT_ARG_MASK) == POPT_ARG_NONE) {
+	    *((int *)opt->arg.p) = 1;
 	} else if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_VAL) {
-	    if (opt->arg) *((int *) opt->arg) = opt->val;
+	    if (opt->arg.p) *((int *) opt->arg.p) = opt->val;
 	} else if ((opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE) {
 	    if (longArg) {
 		con->os->nextArg = longArg;
@@ -400,10 +398,10 @@ int poptGetNextOpt(poptContext con) {
 		con->os->nextArg = con->os->argv[con->os->next++];
 	    }
 
-	    if (opt->arg) {
+	    if (opt->arg.p) {
 		switch (opt->argInfo & POPT_ARG_MASK) {
 		  case POPT_ARG_STRING:
-		    *((char **) opt->arg) = con->os->nextArg;
+		    *((char **) opt->arg.p) = con->os->nextArg;
 		    break;
 
 		  case POPT_ARG_INT:
@@ -415,11 +413,11 @@ int poptGetNextOpt(poptContext con) {
 		    if (aLong == LONG_MIN || aLong == LONG_MAX)
 			return POPT_ERROR_OVERFLOW;
 		    if ((opt->argInfo & POPT_ARG_MASK) == POPT_ARG_LONG) {
-			*((long *) opt->arg) = aLong;
+			*((long *) opt->arg.p) = aLong;
 		    } else {
 			if (aLong > INT_MAX || aLong < INT_MIN)
 			    return POPT_ERROR_OVERFLOW;
-			*((int *) opt->arg) =aLong;
+			*((int *) opt->arg.p) =aLong;
 		    }
 		    break;
 
@@ -450,7 +448,7 @@ int poptGetNextOpt(poptContext con) {
 	else 
 	    sprintf(con->finalArgv[i], "-%c", opt->shortName);
 
-	if (opt->arg && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE
+	if (opt->arg.p && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_NONE
 		     && (opt->argInfo & POPT_ARG_MASK) != POPT_ARG_VAL) 
 	    con->finalArgv[con->finalArgvCount++] = strdup(con->os->nextArg);
     }

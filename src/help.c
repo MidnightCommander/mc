@@ -61,6 +61,7 @@
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 #include "wtools.h"		/* For common_dialog_repaint() */
+#include "strutil.h"
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
@@ -71,7 +72,7 @@
 #define STRING_LINK_END		"\03"
 #define STRING_NODE_END		"\04"
 
-static char *data;		/* Pointer to the loaded data file */
+static char *data = NULL;	/* Pointer to the loaded data file */
 static int help_lines;		/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
 static const char *main_node;	/* The main node */
@@ -115,7 +116,7 @@ search_string (const char *start, const char *text)
     while (*d){
 	if (*d == '\n')
 	    *d = ' ';
-	d++;
+	str_next_char (&d);
     }
     /* Do search */
     for (d = local_text; *e; e++){
@@ -176,7 +177,9 @@ static const char *move_forward2 (const char *c, int lines)
     int  line;
 
     currentpoint = c;
-    for (line = 0, p = currentpoint; *p && *p != CHAR_NODE_END; p++){
+    for (line = 0, p = currentpoint; *p && *p != CHAR_NODE_END; 
+         str_cnext_char (&p)){
+             
 	if (line == lines)
 	    return currentpoint = p;
 	if (*p == '\n')
@@ -191,12 +194,14 @@ static const char *move_backward2 (const char *c, int lines)
     int line;
 
     currentpoint = c;
-    for (line = 0, p = currentpoint; *p && p >= data; p--){
+    for (line = 0, p = currentpoint; *p && p >= data; 
+         str_cprev_char (&p)) {
+             
 	if (*p == CHAR_NODE_END)
 	{
 	    /* We reached the beginning of the node */
 	    /* Skip the node headers */
-	    while (*p != ']') p++;
+	    while (*p != ']') str_cnext_char (&p);
 	    return currentpoint = p + 2; /* Skip the newline following the start of the node */
 	}
 	if (*(p - 1) == '\n')
@@ -336,12 +341,13 @@ static void clear_link_areas (void)
 
 static void help_show (Dlg_head *h, const char *paint_start)
 {
-    const char *p;
-    int  col, line, c;
+    const char *p, *n;
+    int  col, line, c, w;
     int  painting = 1;
     int acs;			/* Flag: Alternate character set active? */
     int repeat_paint;
     int active_col, active_line;/* Active link position */
+    static char buff[MB_LEN_MAX + 1];
 
     attrset (HELP_NORMAL_COLOR);
     do {
@@ -352,8 +358,15 @@ static void help_show (Dlg_head *h, const char *paint_start)
 	if (selected_item < paint_start)
 	    selected_item = NULL;
 	
-	for (p = paint_start; *p && *p != CHAR_NODE_END && line < help_lines; p++) {
-	    c = (unsigned char)*p;
+        p = paint_start;
+        n = paint_start;
+        while (n[0] != '\0' && n[0] != CHAR_NODE_END && line < help_lines) {
+            p = n;
+            n = str_cget_next_char (p);
+            memcpy (buff, p, n - p);
+            buff[n - p] = '\0';
+            c = (unsigned char) buff[0];
+                
 	    switch (c){
 	    case CHAR_LINK_START:
 		if (selected_item == NULL)
@@ -386,7 +399,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
 	    case CHAR_VERSION:
 		dlg_move (h, line+2, col+2);
 		addstr (VERSION);
-		col += strlen (VERSION);
+		col += str_term_width1 (VERSION);
 		break;
 	    case CHAR_FONT_BOLD:
 		attrset (HELP_BOLD_COLOR);
@@ -402,12 +415,13 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		col = 0;
 		break;
 	    case '\t':
-		col = (col/8 + 1) * 8;
+		col = (col / 8 + 1) * 8;
 		break;
 	    default:
 		if (!painting)
 		    continue;
-		if (col > HELP_WINDOW_WIDTH-1)
+                w = str_term_width1 (buff);
+		if (col + w > HELP_WINDOW_WIDTH)
 		    continue;
 		
 		dlg_move (h, line+2, col+2);
@@ -420,9 +434,10 @@ static void help_show (Dlg_head *h, const char *paint_start)
 #else
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif
-		} else
-		    addch (c);
-		col++;
+		} else {
+		    addstr (buff);
+                }
+                col+= w;
 		break;
 	    }
 	}
@@ -755,7 +770,32 @@ static void
 interactive_display_finish (void)
 {
     clear_link_areas ();
-    g_free (data);
+}
+
+/* translate help file into terminal encoding */
+static void 
+translate_file (char *filedata)
+{
+    GIConv conv;
+    GString *translated_data;
+
+    translated_data = g_string_new ("");
+
+    conv = str_crt_conv_from ("UTF-8");
+
+    if (conv != INVALID_CONV) {
+        g_free (data);
+
+        if (str_convert (conv, filedata, translated_data) != ESTR_FAILURE) {
+            data = translated_data->str;
+            g_string_free (translated_data, FALSE);
+        } else {
+            data = NULL;
+            g_string_free (translated_data, TRUE);
+        }
+        str_close_conv (conv);
+    } else
+        g_string_free (translated_data, TRUE);
 }
 
 void
@@ -764,13 +804,14 @@ interactive_display (const char *filename, const char *node)
     WButtonBar *help_bar;
     Widget *md;
     char *hlpfile = NULL;
+    char *filedata;
 
     if (filename)
-	data = load_file (filename);
+	filedata = load_file (filename);
     else
-	data = load_mc_home_file ("mc.hlp", &hlpfile);
+	filedata = load_mc_home_file ("mc.hlp", &hlpfile);
 
-    if (data == NULL) {
+    if (filedata == NULL) {
 	message (D_ERROR, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
 		 unix_error_string (errno));
     }
@@ -778,6 +819,13 @@ interactive_display (const char *filename, const char *node)
     if (!filename)
 	g_free (hlpfile);
 
+    if (filedata == NULL)
+	return;
+
+    translate_file (filedata);
+
+    g_free (filedata);
+    
     if (!data)
 	return;
 

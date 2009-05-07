@@ -63,6 +63,8 @@
 #   include "../edit/edit.h"
 #endif
 
+#include "../src/strutil.h"	/* str_isutf8 () */
+
 
 extern char *find_ignore_dirs;
 
@@ -240,7 +242,7 @@ static const struct {
 #ifdef USE_INTERNAL_EDIT
     { "editor_backup_extension", &option_backup_ext, "~" },
 #endif
-    { NULL, NULL }
+    { NULL, NULL, NULL }
 };
 
 void
@@ -382,6 +384,8 @@ save_setup (void)
 #ifdef HAVE_CHARSET
     save_string( "Misc", "display_codepage",
     		 get_codepage_id( display_codepage ), profile_name );
+    save_string( "Misc", "source_codepage",
+    		 get_codepage_id( source_codepage ), profile_name );
 #endif /* HAVE_CHARSET */
 
     g_free (profile);
@@ -584,10 +588,21 @@ load_setup (void)
 	load_string( "Misc", "display_codepage", "",
 		     cpname, sizeof(cpname) );
 	if ( cpname[0] != '\0' )
+	{
 	    display_codepage = get_codepage_index( cpname );
+	    cp_display = get_codepage_id (display_codepage);
+	}
+	load_string( "Misc", "source_codepage", "",
+		     cpname, sizeof(cpname) );
+	if ( cpname[0] != '\0' )
+	{
+	    source_codepage = get_codepage_index( cpname );
+	    cp_source = get_codepage_id (source_codepage);
+	}
     }
-
     init_translation_table( source_codepage, display_codepage );
+    if ( get_codepage_id( display_codepage ) )
+        utf8_display = str_isutf8 (get_codepage_id( display_codepage ));
 #endif /* HAVE_CHARSET */
 }
 

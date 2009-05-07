@@ -829,7 +829,7 @@ int get_key_code (int no_delay)
 	nodelay (stdscr, TRUE);
     }
     c = getch ();
-#if defined(USE_NCURSES) && defined(KEY_RESIZE)
+#if (defined(USE_NCURSES) || defined(USE_NCURSESW)) && defined(KEY_RESIZE)
     if (c == KEY_RESIZE)
 	goto nodelay_try_again;
 #endif
@@ -932,7 +932,7 @@ int get_key_code (int no_delay)
 		if (parent != NULL && parent->action == MCKEY_ESCAPE) {
 
 		    /* Convert escape-digits to F-keys */
-		    if (isdigit(c))
+		    if (g_ascii_isdigit(c))
 			c = KEY_F (c - '0');
 		    else if (c == ' ')
 			c = ESC_CHAR;

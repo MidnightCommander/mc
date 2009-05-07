@@ -68,6 +68,9 @@
 #include "profile.h"		/* PROFILE_NAME */
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
+#include "strutil.h"
+#include "../src/search/search.h"
+
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -437,7 +440,7 @@ set_panel_filter (WPanel *p)
 {
     char *reg_exp;
     const char *x;
-    
+
     x = p->filter ? p->filter : easy_patterns ? "*" : ".";
 	
     reg_exp = input_dialog_help (_(" Filter "),
@@ -490,7 +493,7 @@ void reverse_selection_cmd (void)
 static void
 select_unselect_cmd (const char *title, const char *history_name, int cmd)
 {
-    char *reg_exp, *reg_exp_t;
+    char *reg_exp, *reg_exp_t, *srch_regexp;
     int i;
     int c;
     int dirflag = 0;
@@ -514,6 +517,7 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	dirflag = 1;
 	reg_exp_t[strlen (reg_exp_t) - 1] = 0;
     }
+    srch_regexp = g_strdup_printf("{%s}",reg_exp_t);
 
     for (i = 0; i < current_panel->count; i++) {
 	if (!strcmp (current_panel->dir.list[i].fname, ".."))
@@ -525,17 +529,15 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	    if (dirflag)
 		continue;
 	}
-	c = regexp_match (reg_exp_t, current_panel->dir.list[i].fname,
-			  match_file);
-	if (c == -1) {
-	    message (D_ERROR, MSG_ERROR, _("  Malformed regular expression  "));
-	    g_free (reg_exp);
-	    return;
-	}
+        if (!mc_search(srch_regexp, current_panel->dir.list[i].fname, MC_SEARCH_T_GLOB)){
+            continue;
+        }
+
 	if (c) {
 	    do_file_mark (current_panel, i, cmd);
 	}
     }
+    g_free(srch_regexp);
     g_free (reg_exp);
 }
 
@@ -922,7 +924,7 @@ do_link (int symbolic_link, const char *fname)
     char *dest = NULL, *src = NULL;
 
     if (!symbolic_link) {
-	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
+	src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
 	dest = input_expand_dialog (_(" Link "), src, MC_HISTORY_FM_LINK, "");
 	if (!dest || !*dest)
 	    goto cleanup;
@@ -987,7 +989,7 @@ void edit_symlink_cmd (void)
 
 	p = selection (current_panel)->fname;
 
-	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
+	q = g_strdup_printf (_(" Symlink `%s\' points to: "), str_trunc (p, 32));
 
 	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {
@@ -1068,11 +1070,13 @@ char *guess_message_value (void)
 char *
 get_random_hint (int force)
 {
-    char *data, *result, *eol;
+    char *data, *result = NULL, *eol;
     int len;
     int start;
     static int last_sec;
     static struct timeval tv;
+    GIConv conv;
+    GString *buffer;
 
     /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
@@ -1098,7 +1102,19 @@ get_random_hint (int force)
     eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = g_strdup (&data[start]);
+
+    /* hint files are stored in utf-8 */
+    /* try convert hint file from utf-8 to terminal encoding */
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv != INVALID_CONV) {
+	buffer = g_string_new ("");
+        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE) {
+            result = g_strdup (buffer->str);
+        }
+        g_string_free (buffer, TRUE);
+        str_close_conv (conv);
+    }
+
     g_free (data);
     return result;
 }
@@ -1393,3 +1409,14 @@ toggle_listing_cmd (void)
     set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
 }
 
+void
+encoding_cmd (void)
+{
+    WPanel *panel;
+
+    if (!SELECTED_IS_PANEL)
+        return;
+
+    panel = MENU_PANEL;
+    set_panel_encoding (panel);
+}

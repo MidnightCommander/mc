@@ -31,6 +31,26 @@ typedef enum {
 /* button callback */
 typedef int (*bcback) (int);
 
+/* structure for label (caption) with hotkey, if original text does not contain
+ * hotkey, only start is valid and is equal to original text
+ * hotkey is defined as char*, but mc support only singlebyte hotkey
+ */
+struct hotkey_t {
+    char *start;
+    char *hotkey;
+    char *end;
+};
+
+/* used in static definition of menu entries */
+#define NULL_HOTKEY {NULL, NULL, NULL}
+
+/* create hotkey from text */
+struct hotkey_t parse_hotkey (const char *text);
+/* release hotkey, free all mebers of hotkey_t */
+void release_hotkey (const struct hotkey_t hotkey);
+/* return width on terminal of hotkey */
+int hotkey_width (const struct hotkey_t hotkey);
+
 typedef struct WButton {
     Widget widget;
     int action;			/* what to do when pressed */
@@ -41,8 +61,7 @@ typedef struct WButton {
 #define NORMAL_BUTTON		2
 #define DEFPUSH_BUTTON		3
     unsigned int flags;		/* button flags */
-    char *text;			/* text of button */
-    int hotkey;			/* hot KEY */
+    struct hotkey_t text;	/* text of button, contain hotkey too */
     int hotpos;			/* offset hot KEY char in text */
     bcback callback;		/* Callback function */
 } WButton;
@@ -52,7 +71,7 @@ typedef struct WRadio {
     unsigned int state;		/* radio button state */
     int pos, sel;
     int count;			/* number of members */
-    const char **texts;		/* texts of labels */
+    struct hotkey_t *texts;	/* texts of labels */
 } WRadio;
 
 typedef struct WCheck {
@@ -61,9 +80,7 @@ typedef struct WCheck {
 #define C_BOOL			0x0001
 #define C_CHANGE		0x0002
     unsigned int state;		/* check button state */
-    char *text;			/* text of check button */
-    int hotkey;                 /* hot KEY */
-    int hotpos;			/* offset hot KEY char in text */
+    struct hotkey_t text;		/* text of check button */
 } WCheck;
 
 typedef struct WGauge {
@@ -79,11 +96,11 @@ char *show_hist (GList *history, int widget_y, int widget_x);
 
 typedef struct {
     Widget widget;
-    int  point;			/* cursor position in the input line */
-    int  mark;			/* The mark position */
-    int  first_shown;		/* Index of the first shown character */
-    int  current_max_len;	/* Maximum length of input line */
-    int  field_len;		/* Length of the editing field */
+    int  point;		   /* cursor position in the input line in characters */
+    int  mark;			/* The mark position in characters */
+    int  term_first_shown;	/* column of the first shown character */
+    size_t current_max_size;	/* Maximum length of input line (bytes) */
+    int  field_width;		/* width of the editing field */
     int  color;			/* color used */
     int  first;			/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
@@ -94,6 +111,8 @@ typedef struct {
     char **completions;		/* Possible completions array */
     INPUT_COMPLETE_FLAGS completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */
     char *history_name;		/* name of history for loading and saving */
+    char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
+    size_t charpoint;         /* point to end of mulibyte sequence in charbuf */
 } WInput;
 
 /* For history load-save functions */
@@ -153,11 +172,11 @@ WCheck  *check_new    (int y, int x, int state,  const char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname, INPUT_COMPLETE_FLAGS completion_flags);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
-WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
-WGroupbox *groupbox_new (int x, int y, int width, int height, const char *title);
+WListbox *listbox_new (int y, int x, int height, int width, lcback callback);
+WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
 
 /* Input lines */
-void winput_set_origin (WInput *i, int x, int field_len);
+void winput_set_origin (WInput *i, int x, int field_width);
 cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
 void update_input (WInput *in, int clear_first);
@@ -180,6 +199,7 @@ void gauge_set_value (WGauge *g, int max, int current);
 void gauge_show (WGauge *g, int shown);
 
 /* Buttons */
+/* return copy of button text */
 const char *button_get_text (WButton *b);
 void button_set_text (WButton *b, const char *text);
 

@@ -61,6 +61,7 @@
 #include "subshell.h"	/* For use_subshell and resize_subshell() */
 #include "tree.h"
 #include "menu.h"
+#include "strutil.h"
 
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
@@ -183,7 +184,7 @@ static struct {
 #define SPLIT_OPTIONS_COUNT            1
 #define OTHER_OPTIONS_COUNT            7
 
-static int first_width, second_width;
+static gsize first_width, second_width;
 static const char *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
@@ -288,13 +289,13 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 {
     switch (msg) {
     case DLG_DRAW:
-    	/*When repainting the whole dialog (e.g. with C-l) we have to
-    	  update everything*/
+	/*When repainting the whole dialog (e.g. with C-l) we have to
+	  update everything*/
 	common_dialog_repaint (h);
 
-   	old_first_panel_size = -1;
-    	old_horizontal_split = -1;
-    	old_output_lines     = -1;
+	old_first_panel_size = -1;
+	old_horizontal_split = -1;
+	old_output_lines     = -1;
 
 	attrset (COLOR_HOT_NORMAL);
 	update_split ();
@@ -305,7 +306,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		old_output_lines = _output_lines;
 		attrset (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
-		addstr (output_lines_label);
+		addstr (str_term_form (output_lines_label));
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
@@ -356,7 +357,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     default:
-	return default_dlg_callback (h, msg, parm);
+        return default_dlg_callback (h, msg, parm);
     }
 }
 
@@ -372,7 +373,7 @@ init_layout (void)
     static const char *title1, *title2, *title3;
 
     if (!i18n_layt_flag) {
-	size_t l1;
+	gsize l1;
 
 	first_width = 19;	/* length of line with '<' '>' buttons */
 
@@ -383,41 +384,40 @@ init_layout (void)
 
 	while (i--) {
 	    s_split_direction[i] = _(s_split_direction[i]);
-	    l1 = strlen (s_split_direction[i]) + 7;
+            l1 = str_term_width1 (s_split_direction[i]) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
 	for (i = 0; i < LAYOUT_OPTIONS_COUNT; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+            l1 = str_term_width1 (check_options[i].text) + 7;
 	    if (l1 > first_width)
 		first_width = l1;
 	}
 
-	l1 = strlen (title1) + 1;
+        l1 = str_term_width1 (title1) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-	l1 = strlen (title2) + 1;
+        l1 = str_term_width1 (title2) + 1;
 	if (l1 > first_width)
 	    first_width = l1;
 
-
-	second_width = strlen (title3) + 1;
+        second_width = str_term_width1 (title3) + 1;
 	for (i = 0; i < OTHER_OPTIONS_COUNT; i++) {
 	    check_options[i].text = _(check_options[i].text);
-	    l1 = strlen (check_options[i].text) + 7;
+            l1 = str_term_width1 (check_options[i].text) + 7;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
 	if (console_flag) {
-	    l1 = strlen (output_lines_label) + 13;
+            l1 = str_term_width1 (output_lines_label) + 13;
 	    if (l1 > second_width)
 		second_width = l1;
 	}
 
-	/* 
+	/*
 	 * alex@bcs.zp.ua:
 	 * To be completely correct, one need to check if the title
 	 * does not exceed dialog length and total length of 3 buttons
@@ -426,14 +426,14 @@ init_layout (void)
 	 *
 	 * Now the last thing to do - properly space buttons...
 	 */
-	l1 = 11 + strlen (ok_button)	/* 14 - all brackets and inner space */
-	    +strlen (save_button)	/* notice: it is 3 char less because */
-	    +strlen (cancel_button);	/* of '&' char in button text */
+        l1 = 11 + str_term_width1 (ok_button)	/* 14 - all brackets and inner space */
+                + str_term_width1 (save_button)	/* notice: it is 3 char less because */
+                + str_term_width1 (cancel_button);	/* of '&' char in button text */
 
 	i = (first_width + second_width - l1) / 4;
 	b1 = 5 + i;
-	b2 = b1 + strlen (ok_button) + i + 6;
-	b3 = b2 + strlen (save_button) + i + 4;
+        b2 = b1 + str_term_width1 (ok_button) + i + 6;
+        b3 = b2 + str_term_width1 (save_button) + i + 4;
 
 	i18n_layt_flag = 1;
     }
@@ -443,10 +443,10 @@ init_layout (void)
 		    dialog_colors, layout_callback, "[Layout]",
 		    _("Layout"), DLG_CENTER | DLG_REVERSE);
 
-    add_widget (layout_dlg, groupbox_new (4, 2, first_width, 6, title1));
-    add_widget (layout_dlg, groupbox_new (4, 8, first_width, 4, title2));
+    add_widget (layout_dlg, groupbox_new (2, 4, 6, first_width, title1));
+    add_widget (layout_dlg, groupbox_new (8, 4, 4, first_width, title2));
     add_widget (layout_dlg,
-		groupbox_new (5 + first_width, 2, second_width, 10,
+		groupbox_new (2, 5 + first_width, 10, second_width,
 			      title3));
 
     add_widget (layout_dlg,
@@ -698,7 +698,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    promptl = strlen (prompt);
+    promptl = str_term_width1 (prompt);
 
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 
@@ -740,7 +740,7 @@ setup_panels (void)
 void flag_winch (int dummy)
 {
     (void) dummy;
-#ifndef USE_NCURSES	/* don't do malloc in a signal handler */
+#if !(defined(USE_NCURSES) || defined(USE_NCURSESW))	/* don't do malloc in a signal handler */
     low_level_change_screen_size ();
 #endif
     winch_flag = 1;
@@ -851,7 +851,7 @@ void print_vfs_message (const char *msg, ...)
 
 	move (0, 0);
 	attrset (NORMAL_COLOR);
-	tty_printf ("%-*s", COLS-1, str);
+	addstr (str_fit_to_term (str, COLS - 1, J_LEFT));
 
 	/* Restore cursor position */
 	move(row, col);

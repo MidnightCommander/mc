@@ -1,45 +1,45 @@
-���ܡG�ϥ� C-x t �ӽƻs�w��ܪ��ɮצW�٨���O�C�C
-���ܡG�ϥ� C-x p �ӱN�ثe�����|�W�ٽƻs����O�C�C
-���ܡG�ɻ��G�ϥ� M-Tab�]�� Esc+Tab�^�C���⦸�ݾ�ӦC���C
-���ܡG�ϥ� M-p �M M-n �Ӧs�����O�ϥά����C
-���ܡG�n�ϥθ��X�r���]escape cahracter�^�H�i�ϥ� Control-q �A�[�W�n��J���r���C
-���ܡG�O�_��o�ǰT�����¤F�H�i�b�u�ﶵ/�t�m�v��椤�������C
-���ܡG��ܥؿ��G�b�n��M���˦���[�J "/"�C
-���ܡG�p�G�A���׺ݾ��S���\����A�i�H�ϥ� ESC + �Ʀr����C
-���ܡGMidnight Commander URL�Ghttp://www.midnight-commander.org/
-���ܡGMidnight Commander �����Ghttp://www.midnight-commander.org/
-���ܡG�аe�X���~���i�� mc-devel@gnome.org
-���ܡGTab �|�����ϥΤ������O�C
-���ܡGVFS ���n�B�G�b tar �ɮפW�� enter �i�d�ݥ������e�C
-���ܡG�ڭ̦��@�Ӥ�������U���C
-���ܡG�A�O�_�Q�ϥ� lynx ���s���覡�H�Ш�]�w��ܵ����]�w�C
-���ܡG% �����b���O�C�]�i�ϥΡC
-���ܡGM-! �i���A������O�æb�˵����ݨ쥦����X�C
-���ܡG�A�i�ۭq�ɮצC�����榡�F��J "man mc" �i��o��h�Ӹ`�C
-���ܡG%D/%T �|�X�i���t�@�䭱�O���w�аO���ɮסC
-���ܡG�Q�ϥΥ��`���R�O�ߡH�i�� C-o�A�A���@���N�|��^ MC�C
-���ܡG�]�w CDPATH �����ܼƥi�H�O�ϥ� cd ���O�ɬ٫o�@�I����C
-���ܡG�Y�Q�ݧA�� .* �ɮסA�Ш�]�w��ܵ����]�w�C
-���ܡG�Q�ݧA�� *~ �ƥ��ɡH�Ш�]�w��ܵ����]�w�C
-���ܡG�ɻ��i�b�����ܵ����������J��줤�ϥΡC�u�n���U M-Tab �N�i�H�F�C
-���ܡG�b�w�C���׺ݾ��̨ϥ� -s �ﶵ�η|�����U�C
-���ܡG�j�M�ɮסG�A�i�H�ϥΡu���O�ơv�ﶵ�ӳB�z�j�M�쪺�ɮסC
-���ܡG�Q�B�z���������ɮ׷j�M�H�i�ϥΡu�~�����O�ơv���O�C
-���ܡG�n�b��J���O�~�����ܥؿ��A�i�ϥ� M-c�]�ֳt�����ؿ��^�C
-�`�N�G�b�D�������ɮרt�θ̵L�k�ϥΩR�O�߫��O�C
-���ܡG�i�� C-y �N�w�R������r���s��ܥX�ӡC
-���ܡG�O�_���ǫ���L�k�ϥΡH�i�ݬݡu�ﶵ/�{�ѫ���v��������C
-���ܡG�n�b�˵����̬ݨ���O����X�A�ϥ� M-!
-���ܡGF13�]�� Shift-F3�^�|�ϥέ�l�Ҧ��}���˵����C
-���ܡG�A�i�H�ϥ������ܼ� EDITOR �ӫ��w���U F4 ��}�Ҫ��s�边�C
-���ܡG�A�i�H�ϥ������ܼ� PAGER �ӫ��w�~�����˵����C
-���ܡG�A�i�H�b�u�ﶵ/�T�{�v�������Ҧ��T�{���n�D�C
-���ܡG�ϥ� C-\ �i�H�Y�ɸ���g�`�ϥΪ��ؿ��C
-���ܡG�A�i�H�b mc �ϥεL�W��Ҧ� FTP�A��k�O��J 'cd /#ftp:machine.edu'
-���ܡGFTP �O Midnight Commander �����إ\��A���ˬd�u�ɮ�/FTP �s�u�v���C
-���ܡGM-t �i�ֳt�a�����C���Ҧ��C
-���ܡG�A�i�H�b�ϥ� ftp �ɫ��w�ϥΪ̦W�١A�Ҧp�G'cd /#ftp:user@machine.edu'
-���ܡG�A�i�H�b rpm �ɤW�� enter ���s�� rpm �̪��ɮסC
-���ܡG�b��ܹ�ܲ�������ؿ��ɡA�n�b�᭱�[�@ "/"�C
-���ܡG�n�ϥηƹ��ŶK�\��ݭn�A���U shift ��
-���ܡG�n�N�`�쪺������J�`�ΦC���̡G��J C-\�C
+提示：使用 C-x t 來複製已選擇的檔案名稱到指令列。
+提示：使用 C-x p 來將目前的路徑名稱複製到指令列。
+提示：補齊：使用 M-Tab（或 Esc+Tab）。按兩次看整個列表。
+提示：使用 M-p 和 M-n 來存取指令使用紀錄。
+提示：要使用跳出字元（escape cahracter）？可使用 Control-q 再加上要輸入的字元。
+提示：是否對這些訊息厭倦了？可在「選項/配置」選單中關閉它。
+提示：選擇目錄：在要找尋的樣式後加入 "/"。
+提示：如果你的終端機沒有功能鍵，可以使用 ESC + 數字按鍵。
+提示：Midnight Commander URL：http://www.midnight-commander.org/
+提示：Midnight Commander 網頁：http://www.midnight-commander.org/
+提示：請送出錯誤報告到 mc-devel@gnome.org
+提示：Tab 會切換使用中的面板。
+提示：VFS 的好處：在 tar 檔案上按 enter 可查看它的內容。
+提示：我們有一個不錯的手冊頁。
+提示：你是否想使用 lynx 的瀏覽方式？請到設定對話窗中設定。
+提示：% 巨集在指令列也可使用。
+提示：M-! 可讓你執行指令並在檢視器看到它的輸出。
+提示：你可自訂檔案列表的格式；輸入 "man mc" 可獲得更多細節。
+提示：%D/%T 會擴展成另一邊面板中已標記的檔案。
+提示：想使用平常的命令殼？可按 C-o，再按一次就會返回 MC。
+提示：設定 CDPATH 環境變數可以令使用 cd 指令時省卻一點按鍵。
+提示：若想看你的 .* 檔案，請到設定對話窗中設定。
+提示：想看你的 *~ 備份檔？請到設定對話窗中設定。
+提示：補齊可在任何對話窗中的任何輸入欄位中使用。只要按下 M-Tab 就可以了。
+提示：在緩慢的終端機裡使用 -s 選項或會有幫助。
+提示：搜尋檔案：你可以使用「面板化」選項來處理搜尋到的檔案。
+提示：想處理較複雜的檔案搜尋？可使用「外部面板化」指令。
+提示：要在輸入指令途早改變目錄，可使用 M-c（快速切換目錄）。
+注意：在非本機的檔案系統裡無法使用命令殼指令。
+提示：可用 C-y 將已刪除的文字重新顯示出來。
+提示：是否有些按鍵無法使用？可看看「選項/認識按鍵」中的按鍵。
+提示：要在檢視器裡看到指令的輸出，使用 M-!
+提示：F13（或 Shift-F3）會使用原始模式開啟檢視器。
+提示：你可以使用環境變數 EDITOR 來指定按下 F4 後開啟的編輯器。
+提示：你可以使用環境變數 PAGER 來指定外部的檢視器。
+提示：你可以在「選項/確認」裡關閉所有確認的要求。
+提示：使用 C-\ 可以即時跳到經常使用的目錄。
+提示：你可以在 mc 使用無名氏模式 FTP，方法是輸入 'cd /#ftp:machine.edu'
+提示：FTP 是 Midnight Commander 的內建功能，請檢查「檔案/FTP 連線」選單。
+提示：M-t 可快速地切換列表模式。
+提示：你可以在使用 ftp 時指定使用者名稱，例如：'cd /#ftp:user@machine.edu'
+提示：你可以在 rpm 檔上按 enter 來瀏覽 rpm 裡的檔案。
+提示：在選擇對話盒中選取目錄時，要在後面加一 "/"。
+提示：要使用滑鼠剪貼功能需要你按下 shift 鍵
+提示：要將常到的網站輸入常用列表裡：鍵入 C-\。

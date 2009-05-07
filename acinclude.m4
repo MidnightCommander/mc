@@ -428,13 +428,20 @@ dnl
 AC_DEFUN([MC_WITH_NCURSES], [
     dnl has_colors() is specific to ncurses, it's not in the old curses
     save_LIBS="$LIBS"
+    ncursesw_found=
+    LIBS=
+    AC_SEARCH_LIBS([addwstr], [ncursesw ncurses curses], [MCLIBS="$MCLIBS $LIBS";ncursesw_found=yes],
+		   [AC_MSG_WARN([Cannot find ncurses library, that support wide characters])])
+
+    if test -z "$ncursesw_found"; then
     LIBS=
     AC_SEARCH_LIBS([has_colors], [ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
 		   [AC_MSG_ERROR([Cannot find ncurses library])])
+    fi
 
     dnl Check the header
     ncurses_h_found=
-    AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h],
+    AC_CHECK_HEADERS([ncursesw/curses.h ncurses/curses.h ncurses.h curses.h],
 		     [ncurses_h_found=yes; break])
 
     if test -z "$ncurses_h_found"; then
@@ -458,6 +465,52 @@ AC_DEFUN([MC_WITH_NCURSES], [
     if test "$mc_cv_ncurses_escdelay" = yes; then
 	AC_DEFINE(HAVE_ESCDELAY, 1,
 		  [Define if ncurses has ESCDELAY variable])
+    fi
+
+    AC_CHECK_FUNCS(resizeterm)
+    LIBS="$save_LIBS"
+])
+
+dnl
+dnl Use the ncurses library.  It can only be requested explicitly,
+dnl so just fail if anything goes wrong.
+dnl
+dnl If ncurses exports the ESCDELAY variable it should be set to 0
+dnl or you'll have to press Esc three times to dismiss a dialog box.
+dnl
+AC_DEFUN([MC_WITH_NCURSESW], [
+    dnl has_colors() is specific to ncurses, it's not in the old curses
+    save_LIBS="$LIBS"
+    LIBS=
+    AC_SEARCH_LIBS([has_colors], [ncursesw], [MCLIBS="$MCLIBS $LIBS"],
+		   [AC_MSG_ERROR([Cannot find ncursesw library])])
+
+    dnl Check the header
+    ncurses_h_found=
+    AC_CHECK_HEADERS([ncursesw/curses.h],
+		     [ncursesw_h_found=yes; break])
+
+    if test -z "$ncursesw_h_found"; then
+	AC_MSG_ERROR([Cannot find ncursesw header file])
+    fi
+
+    screen_type=ncursesw
+    screen_msg="ncursesw library"
+    AC_DEFINE(USE_NCURSESW, 1,
+	      [Define to use ncursesw for screen management])
+
+    AC_CACHE_CHECK([for ESCDELAY variable],
+		   [mc_cv_ncursesw_escdelay],
+		   [AC_TRY_LINK([], [
+			extern int ESCDELAY;
+			ESCDELAY = 0;
+			],
+			[mc_cv_ncursesw_escdelay=yes],
+			[mc_cv_ncursesw_escdelay=no])
+    ])
+    if test "$mc_cv_ncursesw_escdelay" = yes; then
+	AC_DEFINE(HAVE_ESCDELAY, 1,
+		  [Define if ncursesw has ESCDELAY variable])
     fi
 
     AC_CHECK_FUNCS(resizeterm)
@@ -513,4 +566,61 @@ if test "$mc_cv_g_module_supported" = yes; then
 	      [Define if gmodule functionality is supported])
 fi
 ])
+
+dnl @synopsis AX_PATH_LIB_PCRE [(A/NA)]
+dnl
+dnl check for pcre lib and set PCRE_LIBS and PCRE_CFLAGS accordingly.
+dnl
+dnl also provide --with-pcre option that may point to the $prefix of
+dnl the pcre installation - the macro will check $pcre/include and
+dnl $pcre/lib to contain the necessary files.
+dnl
+dnl the usual two ACTION-IF-FOUND / ACTION-IF-NOT-FOUND are supported
+dnl and they can take advantage of the LIBS/CFLAGS additions.
+dnl
+dnl @category InstalledPackages
+dnl @author Guido U. Draheim <guidod@gmx.de>
+dnl @version 2006-10-13
+dnl @license GPLWithACException
+
+AC_DEFUN([AX_PATH_LIB_PCRE],[dnl
+AC_MSG_CHECKING([lib pcre])
+AC_ARG_WITH(pcre,
+[  --with-pcre[[=prefix]]    compile xmlpcre part (via libpcre check)],,
+     with_pcre="yes")
+if test ".$with_pcre" = ".no" ; then
+  AC_MSG_RESULT([disabled])
+  m4_ifval($2,$2)
+else
+  AC_MSG_RESULT([(testing)])
+  AC_CHECK_LIB(pcre, pcre_study)
+  if test "$ac_cv_lib_pcre_pcre_study" = "yes" ; then
+     PCRE_LIBS="-lpcre"
+     AC_MSG_CHECKING([lib pcre])
+     AC_MSG_RESULT([$PCRE_LIBS])
+     m4_ifval($1,$1)
+  else
+     OLDLDFLAGS="$LDFLAGS" ; LDFLAGS="$LDFLAGS -L$with_pcre/lib"
+     OLDCPPFLAGS="$CPPFLAGS" ; CPPFLAGS="$CPPFLAGS -I$with_pcre/include"
+     AC_CHECK_LIB(pcre, pcre_compile)
+     CPPFLAGS="$OLDCPPFLAGS"
+     LDFLAGS="$OLDLDFLAGS"
+     if test "$ac_cv_lib_pcre_pcre_compile" = "yes" ; then
+        AC_MSG_RESULT(.setting PCRE_LIBS -L$with_pcre/lib -lpcre)
+        PCRE_LIBS="-L$with_pcre/lib -lpcre"
+        test -d "$with_pcre/include" && PCRE_CFLAGS="-I$with_pcre/include"
+        AC_MSG_CHECKING([lib pcre])
+        AC_MSG_RESULT([$PCRE_LIBS])
+        m4_ifval($1,$1)
+     else
+        AC_MSG_CHECKING([lib pcre])
+        AC_MSG_RESULT([no, (WARNING)])
+        m4_ifval($2,$2)
+     fi
+  fi
+fi
+AC_SUBST([PCRE_LIBS])
+AC_SUBST([PCRE_CFLAGS])
+])
+
 m4_include([m4.include/dx_doxygen.m4])
