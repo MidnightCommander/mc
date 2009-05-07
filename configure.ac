@@ -42,48 +42,17 @@ dnl Keep this check close to the beginning, so that the users
 dnl without any glib won't have their time wasted by other checks.
 dnl
 
-AC_ARG_WITH(glib12, 
-	[  --with-glib12            Force using glib 1.2.x [[no]]])
-
 AC_ARG_WITH([glib_static],
 	    [  --with-glib-static       Link glib statically [[no]]])
 
 glib_found=no
+
 if test "x$with_glib12" != "xyes"; then
 	PKG_CHECK_MODULES(GLIB, [glib-2.0], [glib_found=yes], [:])
 fi
 
-dnl Fall back to glib-1.2, don't use pkgconfig to find it.
-if test "x$glib_found" != "xyes" ; then
-	dnl This temporary variable is a workaround for a bug in Autoconf-2.53
-	glib_path=$PATH:/usr/local/bin
-
-	dnl Klugde for FreeBSD, where glib-config is renamed to glib12-config.
-	AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,[$glib_path])
-
-	AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config (version 1.2.x only)])
-	AM_PATH_GLIB(1.2.6, , [AC_MSG_ERROR([Test for glib failed.
-GNU Midnight Commander requires glib 1.2.6 or above.])])
-	dnl Save GLIB_CFLAGS and GLIB_LIBS, since the following call to
-	dnl AM_PATH_GLIB will overwrite them.
-	save_GLIB_CFLAGS="$GLIB_CFLAGS"
-	save_GLIB_LIBS="$GLIB_LIBS"
-	dnl Check for gmodule.  Store the flags necessary to compile and
-	dnl link programs using gmodule functionality in GMODULE_CFLAGS
-	dnl and GMODULE_LIBS.
-	AM_PATH_GLIB(1.2.6, [gmodule_found=yes], , [gmodule])
-	GMODULE_CFLAGS="$GLIB_CFLAGS"
-	GMODULE_LIBS="$GLIB_LIBS"
-	GLIB_CFLAGS="$save_GLIB_CFLAGS"
-	GLIB_LIBS="$save_GLIB_LIBS"
-	GLIB_LIBDIR="`$GLIB_CONFIG --exec-prefix`/lib"
-
-	dnl Used in src/glibcompat.c
-	AC_CHECK_FUNCS([strlcpy])
-else
-	PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
-	GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
-fi
+PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
+GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
 
 if test "x$gmodule_found" = "xyes" ; then
 	dnl Check if the gmodule functionality supported on this system.
@@ -329,7 +298,7 @@ AC_CHECK_LIB(seq, get_process_stats, [
 		  [Define if you have function `get_process_stats' and
 have to use that instead of gettimeofday])])
 
-MC_VFS_CHECKS
+AC_MC_VFS_CHECKS
 
 vfs_type="normal"
 if test x$use_vfs = xyes; then
@@ -596,7 +565,6 @@ src/search/Makefile
 
 edit/Makefile 
 syntax/Makefile
-m4/Makefile
 lib/mc.ext
 vfs/extfs/a
 vfs/extfs/apt
