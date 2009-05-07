@@ -66,6 +66,14 @@
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
 
+
+#include "../edit/edit.h"
+#include "../edit/editlock.h"
+#include "../edit/editcmddef.h"
+#include "../edit/edit-widget.h"
+#include "../edit/editcmd_dialogs.h"
+#include "../edit/etags.h"
+
 /* globals: */
 
 /* search and replace: */

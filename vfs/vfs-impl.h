@@ -9,7 +9,6 @@
 
 #ifdef USE_VFS
 
-/*#include <stddef.h>*/
 #include <sys/types.h>
 #include <dirent.h>
 
