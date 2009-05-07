@@ -2448,11 +2448,11 @@ edit_move_block_to_left (WEdit * edit)
         }
         next_char = edit_get_byte (edit, edit->curs1);
         if ( next_char == '\t' ) {
-            edit_delete (edit);
+            edit_delete (edit, 1);
         } else if ( next_char == ' ' ) {
             for (i = 1; i <= del_tab_width; i++) {
                 if ( next_char == ' ' ) {
-                    edit_delete (edit);
+                    edit_delete (edit, 1);
                 }
                 next_char = edit_get_byte (edit, edit->curs1);
             }
