@@ -1439,8 +1439,11 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    if (col > cols)
 		return p - 1;
 	}
+#ifdef HAVE_CHARSET
 	if ( !edit->utf8 ) {
+#endif
 	    c = edit_get_byte (edit, p);
+#ifdef HAVE_CHARSET
 	} else {
 	    cw = 1;
 	    c = edit_get_byte (edit, p);
@@ -1450,6 +1453,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    if ( edit->utf8 && g_unichar_iswide(utf_ch) )
 	        col++;
 	}
+#endif
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
 	else if (c == '\n') {
@@ -1461,8 +1465,10 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 	    col += 2; /* Caret notation for control characters */
 	else
 	    col++;
+#ifdef HAVE_CHARSET
 	if ( cw > 1 )
 	    col -= cw-1;
+#endif
     }
     return col;
 }
