@@ -318,8 +318,8 @@ str_translate_char (GIConv conv, const char *keys, size_t ch_size,
 }
 
 
-static const char *
-str_detect_termencoding ()
+const char *
+str_detect_termencoding (void)
 {
     return (nl_langinfo (CODESET));
 }

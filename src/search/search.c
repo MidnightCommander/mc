@@ -89,7 +89,7 @@ mc_search__conditions_new (mc_search_t * mc_search)
 {
     GPtrArray *ret;
     ret = g_ptr_array_new ();
-
+#ifdef HAVE_CHARSET
     if (mc_search->is_all_charsets) {
         gsize loop1, recoded_str_len;
         gchar *buffer;
@@ -118,6 +118,12 @@ mc_search__conditions_new (mc_search_t * mc_search)
                                                                 mc_search->original_len,
                                                                 cp_source));
     }
+#else
+        g_ptr_array_add (ret,
+                         (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
+                                                                mc_search->original_len,
+                                                                str_detect_termencoding()));
+#endif
     return ret;
 }
 
@@ -374,8 +380,8 @@ mc_search_getstart_rezult_by_num(mc_search_t *mc_search, int index)
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
 	return 0;
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    guint start_pos;
-    guint end_pos;
+    gint start_pos;
+    gint end_pos;
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) start_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
@@ -398,8 +404,8 @@ mc_search_getend_rezult_by_num(mc_search_t *mc_search, int index)
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
 	return 0;
 #if GLIB_CHECK_VERSION (2, 14, 0)
-    guint start_pos;
-    guint end_pos;
+    gint start_pos;
+    gint end_pos;
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) end_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */

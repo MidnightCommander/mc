@@ -506,4 +506,6 @@ void str_release_key (char *key, int case_sen);
  */
 int str_isutf8 (const char *codeset_name);
 
+const char *str_detect_termencoding (void);
+
 #endif				/* MC_STRUTIL_H*/

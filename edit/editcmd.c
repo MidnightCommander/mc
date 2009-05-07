@@ -1146,6 +1146,7 @@ editcmd_find (WEdit *edit, gsize *len)
 static char *
 edit_replace_cmd__conv_to_display(char *str)
 {
+#ifdef HAVE_CHARSET
     GString *tmp;
     tmp = str_convert_to_display (str);
 
@@ -1155,11 +1156,15 @@ edit_replace_cmd__conv_to_display(char *str)
     }
     g_string_free (tmp, FALSE);
     return str;
+#else
+    return g_strdup(str);
+#endif
 }
 
 static char *
 edit_replace_cmd__conv_to_input(char *str)
 {
+#ifdef HAVE_CHARSET
     GString *tmp;
     tmp = str_convert_to_input (str);
 
@@ -1169,6 +1174,9 @@ edit_replace_cmd__conv_to_input(char *str)
     }
     g_string_free (tmp, FALSE);
     return str;
+#else
+    return g_strdup(str);
+#endif
 }
 /* call with edit = 0 before shutdown to close memory leaks */
 void

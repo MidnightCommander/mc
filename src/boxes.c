@@ -459,7 +459,7 @@ confirm_box (void)
     }
 }
 
-#define DISPY 11
+#define DISPY 12
 #define DISPX 46
 
 
@@ -469,16 +469,16 @@ static int new_mode;
 static int new_meta;
 
 static const char *display_bits_str [] =
-{ N_("Full 8 bits output"), N_("ISO 8859-1"), N_("7 bits") };
+{ N_("UTF-8 output"), N_("Full 8 bits output"), N_("ISO 8859-1"), N_("7 bits") };
 
 static QuickWidget display_widgets [] = {
-{ quick_button,   4,  6,    4, DISPY, N_("&Cancel"),
+{ quick_button,   DISPX/2+7,  DISPX,    7, DISPY, N_("&Cancel"),
       0, B_CANCEL, 0, 0, NULL , NULL, NULL},
-{ quick_button,   4,  6,    3, DISPY, N_("&OK"),
+{ quick_button,   DISPX/2+7,  DISPX,    8, DISPY, N_("&OK"),
       0, B_ENTER, 0, 0, NULL , NULL, NULL},
-{ quick_checkbox, 4, DISPX, 7, DISPY, N_("F&ull 8 bits input"),
+{ quick_checkbox, 4, DISPX, 8, DISPY, N_("F&ull 8 bits input"),
       0, 0, &new_meta, 0, NULL , NULL, NULL},
-{ quick_radio,    4, DISPX, 3, DISPY, "", 3, 0,
+{ quick_radio,    4, DISPX, 3, DISPY, "", 4, 0,
       &new_mode, const_cast(char **, display_bits_str), NULL , NULL, NULL},
 NULL_QuickWidget
 };
@@ -541,8 +541,8 @@ display_bits_box (void)
     if (quick_dialog (&display_bits) != B_ENTER)
 	    return;
 
-    eight_bit_clean = new_mode < 2;
-    full_eight_bits = new_mode == 0;
+    eight_bit_clean = new_mode < 3;
+    full_eight_bits = new_mode < 2;
 #ifndef HAVE_SLANG
     meta (stdscr, eight_bit_clean);
 #else
