@@ -349,7 +349,6 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int utf8lag = 0;
 
     unsigned long cur_line = 0;
-
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0,
@@ -587,11 +586,10 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     unsigned int count_collapsed_lines = 0;
     unsigned long sline = 0;
     unsigned long eline = 0;
-    int collapsed = 0;
     int collapse_state = 0;
     unsigned long cur_line;
     collapsed_lines *cl;
-
+    int skip_rows = 0;
     cl = g_new0 (collapsed_lines, 1);
 /*
  * If the position of the page has not moved then we can draw the cursor
@@ -612,11 +610,12 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 		    goto exit_render;
 		cur_line = edit->start_line + row;
 		collapse_state = book_mark_get_collapse_state(edit->collapsed, cur_line, cl);
-		if ( collapse_state = C_LINES_COLLAPSED ) {
-		    //row -= cl->end_line - cl->start_line - 1;
+		if ( collapse_state == C_LINES_COLLAPSED ) {
+		    skip_rows = cl->end_line - cl->start_line - 1;
+		    mc_log("C_LINES_COLLAPSED, row=%i, skip: %i\n", row, cl->end_line - cl->start_line);
 		}
 		if ( collapse_state != C_LINES_MIDDLE_C ) {
-		    edit_draw_this_line (edit, b, row, start_column, end_column, collapse_state);
+		    edit_draw_this_line (edit, b, row - skip_rows, start_column, end_column, collapse_state);
 		}
 		row++;
 		b = edit_move_forward (edit, b, 1, 0);
