@@ -86,6 +86,4 @@ test -f configure || \
 
 if test -x $srcdir/configure.mc; then
   $srcdir/configure.mc "$@"
-else
-  $srcdir/configure --cache-file=config.cache --enable-maintainer-mode "$@"
 fi
