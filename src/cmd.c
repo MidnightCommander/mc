@@ -487,7 +487,7 @@ void reverse_selection_cmd (void)
 static void
 select_unselect_cmd (const char *title, const char *history_name, int cmd)
 {
-    char *reg_exp, *reg_exp_t;
+    char *reg_exp, *reg_exp_t, *srch_regexp;
     int i;
     int c;
     int dirflag = 0;
@@ -511,6 +511,7 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	dirflag = 1;
 	reg_exp_t[strlen (reg_exp_t) - 1] = 0;
     }
+    srch_regexp = g_strdup_printf("{%s}",reg_exp_t);
 
     for (i = 0; i < current_panel->count; i++) {
 	if (!strcmp (current_panel->dir.list[i].fname, ".."))
@@ -522,13 +523,15 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	    if (dirflag)
 		continue;
 	}
-        if (!mc_search(reg_exp_t, current_panel->dir.list[i].fname, MC_SEARCH_T_GLOB))
-            return;
+        if (!mc_search(srch_regexp, current_panel->dir.list[i].fname, MC_SEARCH_T_GLOB)){
+            continue;
+        }
 
 	if (c) {
 	    do_file_mark (current_panel, i, cmd);
 	}
     }
+    g_free(srch_regexp);
     g_free (reg_exp);
 }
 

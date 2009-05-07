@@ -932,7 +932,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
 
     if (source_easy_patterns){
-        source_mask = g_strdup_printf("(%s)",orig_mask);
+        source_mask = g_strdup_printf("{%s}",orig_mask);
         ctx->search_handle = mc_search_new(source_mask,-1);
         g_free(source_mask);
     }

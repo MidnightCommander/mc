@@ -67,11 +67,33 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
                 continue;
             }
             break;
+        case ',':
+            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+                g_string_append (buff, "|");
+                loop++;
+                continue;
+            }
+            break;
+        case '{':
+            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+                g_string_append (buff, "(");
+                loop++;
+                continue;
+            }
+            break;
+        case '}':
+            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+                g_string_append (buff, ")");
+                loop++;
+                continue;
+            }
+            break;
         case '\\':
         case '+':
         case '.':
-        case '|':
         case '$':
+        case '(':
+        case ')':
         case '^':
         case '-':
             g_string_append_c (buff, '\\');
