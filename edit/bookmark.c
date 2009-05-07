@@ -399,19 +399,28 @@ void book_mark_collapse_dec (GList * list, int line)
         cl = g_list_next (cl);
     }
 
-/* remove demage region */
-/*
-    cl = g_list_last (list);
-    while ( cl ) {
-        collapsed = (struct collapsed_lines *) cl->data;
-        if ( abs (collapsed->start_line - collapsed->end_line) < 2 ) {
-            g_free (cl->data);
-            tmp = g_list_remove_link (list, cl);
-            g_list_free_1 (cl);
+}
+
+int book_mark_get_shiftup (GList * list, int line)
+{
+    GList *cl;
+    collapsed_lines *collapsed;
+    int res = 0;
+
+    cl = list;
+
+    if (!cl)
+        return res;
+
+    cl = g_list_first (list);
+    while (cl) {
+        collapsed = (collapsed_lines *) cl->data;
+        if ( line >= collapsed->start_line && collapsed->state ) {
+            res += collapsed->end_line - collapsed->start_line - 1;
         }
-        cl = g_list_previous (cl);
+        cl = g_list_next (cl);
     }
-*/
+    return res;
 
 }
 
