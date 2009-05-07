@@ -25,14 +25,15 @@
 
 
 : ${MC_TOPDIR=`pwd`}
-: ${TMP_INSTDIR=$MC_TOPDIR/tmp-inst}
-: ${GLIB_VERSION=2.12.6}
-: ${PKGC_VERSION=0.21}
-: ${GETTEXT_VERSION=0.16.1}
+: ${WORK_TOPDIR=$MC_TOPDIR/build_glib2}
+: ${TMP_INSTDIR=$WORK_TOPDIR/tmp-inst}
+: ${GLIB_VERSION=2.21.0}
+: ${PKGC_VERSION=0.23}
+: ${GETTEXT_VERSION=0.17}
 
 GLIB_DIR="glib-$GLIB_VERSION"
 GLIB_TARBALL="glib-$GLIB_VERSION.tar.gz"
-GLIB_URL="ftp://ftp.gtk.org/pub/glib/2.12/$GLIB_TARBALL"
+GLIB_URL="ftp://ftp.gtk.org/pub/glib/2.21/$GLIB_TARBALL"
 
 PKGC_DIR="pkg-config-$PKGC_VERSION"
 PKGC_TARBALL="pkg-config-$PKGC_VERSION.tar.gz"
@@ -49,14 +50,17 @@ get_file() {
   ftp "$1" </dev/null || \
   exit 1
 }
+if test ! -d $WORK_TOPDIR; then
+    mkdir -p $WORK_TOPDIR
+fi
 
-if test -f src/dir.c; then : ; else
+if test -f $MC_TOPDIR/src/dir.c; then : ; else
   echo "Not in the top-level directory of GNU Midnight Commander." 2>&1
   exit 1
 fi
 
-if test -f configure; then : ; else
-  ./autogen.sh --help >/dev/null || exit 1
+if test -f $MC_TOPDIR/configure; then : ; else
+  $MC_TOPDIR/autogen.sh --help >/dev/null || exit 1
 fi
 
 rm -rf "$TMP_INSTDIR"
@@ -64,7 +68,7 @@ PATH="$TMP_INSTDIR/bin:$PATH"
 export PATH
 
 # Compile gettext
-cd "$MC_TOPDIR"
+cd "$WORK_TOPDIR"
 if gzip -vt "$GETTEXT_TARBALL"; then : ; else
   get_file "$GETTEXT_URL"
 fi
@@ -82,7 +86,7 @@ make all || exit 1
 make install || exit 1
 
 # Compile pkgconfig
-cd "$MC_TOPDIR"
+cd "$WORK_TOPDIR"
 if gzip -vt "$PKGC_TARBALL"; then : ; else
   get_file "$PKGC_URL"
 fi
@@ -100,7 +104,7 @@ make all || exit 1
 make install || exit 1
 
 # Compile glib
-cd "$MC_TOPDIR"
+cd "$WORK_TOPDIR"
 if gzip -vt "$GLIB_TARBALL"; then : ; else
   get_file "$GLIB_URL" || exit 1
 fi
@@ -121,7 +125,7 @@ make all || exit 1
 make install || exit 1
 
 cd "$MC_TOPDIR"
-./configure PKG_CONFIG="$TMP_INSTDIR/bin/pkg-config" || exit 1
+./configure PKG_CONFIG="$TMP_INSTDIR/bin/pkg-config" $@ || exit 1
 make clean || exit 1
 make || exit 1
 
