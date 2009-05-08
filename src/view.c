@@ -3173,7 +3173,7 @@ do_search (WView *view)
             view->search_end = view->search_start;
             break;
         case -2:
-            message (D_NORMAL, _("Search"), view->search->error_str);
+            message (D_NORMAL, _("Search"), "%s", view->search->error_str);
             view->search_end = view->search_start;
             break;
     }
