@@ -365,7 +365,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         if ( collapse_state == C_LINES_MIDDLE_C )
             return;
         skip_rows = book_mark_get_shiftup(edit->collapsed, cur_line);
-        mc_log("line: %i, skip: %i state: %i\n", cur_line, skip_rows, collapse_state);
+//        mc_log("line: %i, skip: %i state: %i\n", cur_line, skip_rows, collapse_state);
         if ( cur_line <= edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
         } else {

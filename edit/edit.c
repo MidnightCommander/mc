@@ -2615,9 +2615,12 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Down:
     case CK_Down_Highlight:
 	if ( option_line_status ) {
-	    int skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
-	    edit_move_down (edit, skip_rows, 0);
-	    edit->curs_line -= skip_rows;
+	    int collapse_state = book_mark_get_collapse_state (edit->collapsed, edit->curs_line + 1, NULL);
+	    mc_log("l: %i, state : %i\n", edit->curs_line + 1, collapse_state);
+	    if ( collapse_state == C_LINES_COLLAPSED ) {
+	        int skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 2);
+	        edit_move_down (edit, skip_rows, 0);
+	    }
 	}
 	edit_move_down (edit, 1, 0);
 	break;

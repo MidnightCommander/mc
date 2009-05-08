@@ -355,7 +355,7 @@ int book_mark_get_collapse_state (GList * list, const int line,
     int c = 0;
 
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
-    mc_log("l: %i, start_line:%i, end_line:%i", line, start_line, end_line);
+//    mc_log("l: %i, start_line:%i, end_line:%i", line, start_line, end_line);
     if ( c == 0 )
         return C_LINES_DEFAULT;
 
