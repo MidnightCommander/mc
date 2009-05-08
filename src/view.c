@@ -121,7 +121,7 @@ struct area {
 struct cache_line {
     /* number of line in text, so two cache_line have same number 
      * if they are on same text line (text line is wider than screen) */
-    long number;
+    unsigned long number;
     /* previous cache_line in list*/
     struct cache_line *prev;
     /* next cache_line in list*/
@@ -3040,8 +3040,8 @@ view_moveto_line_cmd (WView *view)
     row = line->number + 1;
 
     g_snprintf (prompt, sizeof (prompt),
-		_(" The current line number is %d.\n"
-		  " Enter the new line number:"), (int) (line + 1));
+		_(" The current line number is %lu.\n"
+		  " Enter the new line number:"), line->number);
     answer = input_dialog (_(" Goto line "), prompt, MC_HISTORY_VIEW_GOTO_LINE, "");
     if (answer != NULL && answer[0] != '\0') {
 	errno = 0;
@@ -3061,8 +3061,9 @@ view_moveto_addr_cmd (WView *view)
     offset_type addr;
 
     g_snprintf (prompt, sizeof (prompt),
-		_(" The current address is 0x%lx.\n"
+		_(" The current address is 0x%08"OFFSETTYPE_PRIX".\n"
 		  " Enter the new address:"), view->hex_cursor);
+
     line = input_dialog (_(" Goto Address "), prompt, MC_HISTORY_VIEW_GOTO_ADDR, "");
     if (line != NULL) {
 	if (*line != '\0') {
