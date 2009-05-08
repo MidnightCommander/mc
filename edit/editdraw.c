@@ -365,7 +365,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
         if ( collapse_state == C_LINES_MIDDLE_C )
             return;
         skip_rows = book_mark_get_shiftup(edit->collapsed, cur_line);
-//        mc_log("line: %i, skip: %i state: %i\n", cur_line, skip_rows, collapse_state);
+        if ( row - skip_rows < 0 )
+            return;
         if ( cur_line <= edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
         } else {
@@ -392,7 +393,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
 
-	if (row - skip_rows <= edit->total_lines - edit->start_line) {
+	if (row <= edit->total_lines - edit->start_line) {
 		long tws = 0;
 	    if (use_colors && visible_tws) {
 		tws = edit_eol (edit, b);
@@ -590,15 +591,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     int force = edit->force;
     long b;
-    int collapse_header = 0;
-    unsigned int count_collapsed_lines = 0;
-    unsigned long sline = 0;
-    unsigned long eline = 0;
-    int collapse_state = 0;
-    unsigned long cur_line;
-    collapsed_lines *cl;
     int skip_rows = 0;
-    cl = g_new0 (collapsed_lines, 1);
+
 /*
  * If the position of the page has not moved then we can draw the cursor
  * character only.  This will prevent line flicker when using arrow keys.
@@ -607,6 +601,10 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 	if (!(force & REDRAW_IN_BOUNDS)) {	/* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
 	    start_row = 0;
 	    end_row = edit->num_widget_lines - 1;
+	    if ( option_line_status ) {
+		skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
+		end_row += skip_rows;
+	    }
 	    start_column = 0;
 	    end_column = edit->num_widget_columns - 1;
 	}
@@ -693,7 +691,6 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     prev_curs = edit->curs1;
 
   exit_render:
-    g_free(cl);
     edit->screen_modified = 0;
     return;
 }

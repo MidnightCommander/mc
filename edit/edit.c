@@ -2614,15 +2614,21 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Down:
     case CK_Down_Highlight:
+	edit_move_down (edit, 1, 0);
 	if ( option_line_status ) {
-	    int collapse_state = book_mark_get_collapse_state (edit->collapsed, edit->curs_line + 1, NULL);
-	    mc_log("l: %i, state : %i\n", edit->curs_line + 1, collapse_state);
+	    int collapse_state = book_mark_get_collapse_state (edit->collapsed, edit->curs_line, NULL);
+	    //mc_log("l: %i, state : %i\n", edit->curs_line, collapse_state);
 	    if ( collapse_state == C_LINES_COLLAPSED ) {
-	        int skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 2);
+	        int skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
+	        //mc_log("move: %i\n", skip_rows);
 	        edit_move_down (edit, skip_rows, 0);
+	        //edit->start_display += skip_rows;
+	        //edit->start_line += skip_rows;
+	        //edit->curs_row += skip_rows;
+	        //edit->curs_line += skip_rows;
 	    }
 	}
-	edit_move_down (edit, 1, 0);
+	edit->force |= REDRAW_PAGE;
 	break;
     case CK_Paragraph_Up:
     case CK_Paragraph_Up_Highlight:
