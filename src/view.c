@@ -48,14 +48,14 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "cmd.h"		/* For view_other_cmd */
 #include "dialog.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
-#include "color.h"
-#include "mouse.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
 #include "help.h"
-#include "key.h"		/* For mi_getch() */
+#include "../src/tty/key.h"		/* For mi_getch() */
 #include "layout.h"
 #include "setup.h"
 #include "wtools.h"		/* For query_set_sel() */

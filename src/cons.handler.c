@@ -35,7 +35,7 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "cons.saver.h"
 
 signed char console_flag = 0;

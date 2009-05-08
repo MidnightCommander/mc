@@ -37,15 +37,16 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
+#include "../src/tty/tty.h"
+#include "win.h"
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
 #include "main.h"		/* show_all_if_ambiguous */
 #include "util.h"
 #include "../src/strescape.h"
-#include "key.h"		/* XCTRL and ALT macros */
+#include "../src/tty/key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
 typedef char *CompletionFunction (const char * text, int state, INPUT_COMPLETE_FLAGS flags);

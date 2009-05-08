@@ -33,7 +33,7 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "user.h"
 #include "main.h"
 #include "wtools.h"

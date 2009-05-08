@@ -41,8 +41,8 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"		/* COLS */
-#include "color.h"		/* dialog_colors */
+#include "../src/tty/tty.h"		/* COLS */
+#include "../src/tty/color.h"		/* dialog_colors */
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
@@ -51,7 +51,7 @@
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
 #include "hotlist.h"
-#include "key.h"		/* KEY_M_CTRL */
+#include "../src/tty/key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
 #include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 #include "history.h"

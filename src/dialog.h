@@ -23,7 +23,7 @@
 #ifndef MC_DIALOG_H
 #define MC_DIALOG_H
 
-#include "mouse.h"
+#include "../src/tty/mouse.h"
 #include "util.h" /* Hook */
 
 /* Color constants */

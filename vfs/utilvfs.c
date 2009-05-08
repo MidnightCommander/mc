@@ -34,13 +34,16 @@
 #include <stdlib.h>
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
+#include "../src/tty/tty.h"	/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
-#include "utilvfs.h"
-#include "vfs.h"
 #include "../src/unixcompat.h"
 #include "../src/history.h"
+
+#include "vfs.h"
+#include "utilvfs.h"
 
 /* Extract the hostname and username from the path */
 /* path is in the form: [user@]hostname:port/remote-dir, e.g.:

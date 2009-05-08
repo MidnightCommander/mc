@@ -30,10 +30,12 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "mouse.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"	/* mi_getch() */
+
 #include "help.h"	/* interactive_display() */
-#include "key.h"	/* mi_getch() */
 #include "dialog.h"
 #include "layout.h"	/* winch_flag */
 #include "execute.h"	/* suspend_cmd() */

@@ -34,12 +34,12 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"		/* dialog_colors */
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"		/* dialog_colors */
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "key.h"		/* mi_getch() */
+#include "../src/tty/key.h"		/* mi_getch() */
 #include "background.h"		/* parent_call */
 #include "strutil.h"
 

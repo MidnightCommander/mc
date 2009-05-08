@@ -30,7 +30,7 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"	/* move, addch */
+#include "../src/tty/tty.h"	/* move, addch */
 #include "cons.saver.h"
 
 static int rxvt_extensions = 0;

@@ -33,9 +33,9 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "win.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "widget.h"
 #include "strutil.h"

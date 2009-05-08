@@ -33,9 +33,9 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "win.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "setup.h"
 #include "find.h"
 #include "strutil.h"
@@ -47,7 +47,7 @@
 #include "wtools.h"
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
-#include "key.h"
+#include "../src/tty/key.h"
 #include "../src/search/search.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 

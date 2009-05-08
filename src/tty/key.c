@@ -37,21 +37,23 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "global.h"
-#include "tty.h"
-#include "mouse.h"
-#include "key.h"
-#include "layout.h"	/* winch_flag */
-#include "main.h"
-#include "win.h"
-#include "cons.saver.h"
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"
+#include "../../src/tty/mouse.h"
+#include "../../src/tty/key.h"
+
+#include "../../src/layout.h"	/* winch_flag */
+#include "../../src/main.h"
+#include "../../src/win.h"
+#include "../../src/cons.saver.h"
 
 #ifdef USE_VFS
-#include "../vfs/gc.h"
+#include "../../vfs/gc.h"
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#    include "x11conn.h"
+#    include "../src/x11conn.h"
 #endif
 
 #ifdef __linux__

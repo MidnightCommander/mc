@@ -26,9 +26,9 @@
 #include <sys/time.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "win.h"
-#include "key.h"
+#include "../src/tty/key.h"
 #include "main.h"
 #include "cons.saver.h"
 #include "subshell.h"

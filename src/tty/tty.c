@@ -33,15 +33,16 @@
 #include <signal.h>
 #include <stdarg.h>
 
-#include "global.h"
-#include "color.h"
-#include "main.h"		/* for slow_terminal */
-#include "strutil.h"
+#include "../../src/global.h"
 
+#include "../../src/tty/color.h"
 #if defined(USE_NCURSES) || defined(USE_NCURSESW)
 #define WANT_TERM_H
 #endif
-#include "tty.h"
+#include "../../src/tty/tty.h"
+
+#include "../../src/main.h"		/* for slow_terminal */
+#include "../../src/strutil.h"
 
 /*** file scope macro definitions **************************************/
 

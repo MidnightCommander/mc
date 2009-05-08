@@ -45,13 +45,14 @@
 
 #define MAX_LINE_LEN 1024
 
-#include "../src/color.h"	/* EDITOR_NORMAL_COLOR */
-#include "../src/tty.h"		/* attrset() */
-#include "../src/widget.h"	/* buttonbar_redraw() */
-#include "../src/key.h"		/* is_idle() */
+#include "../src/tty/tty.h"		/* attrset() */
+#include "../src/tty/color.h"		/* EDITOR_NORMAL_COLOR */
+#include "../src/tty/key.h"		/* is_idle() */
+
+#include "../src/widget.h"		/* buttonbar_redraw() */
 #include "../src/charsets.h"
-#include "../src/strutil.h"	/* utf string functions */
-#include "../src/main.h"	/* source_codepage */
+#include "../src/strutil.h"		/* utf string functions */
+#include "../src/main.h"		/* source_codepage */
 
 /* Text styles */
 #define MOD_ABNORMAL		(1 << 8)

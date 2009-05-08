@@ -25,9 +25,9 @@
 #include <stdio.h>
 
 #include "global.h"
-#include "tty.h"
-#include "mouse.h"		/* Gpm_Event */
-#include "color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/mouse.h"		/* Gpm_Event */
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "info.h"
 #include "dir.h"		/* required by panel */
@@ -35,7 +35,7 @@
 #include "main.h"		/* other_panel, current_panel definitions */
 #include "util.h"		/* size_trunc_len */
 #include "layout.h"
-#include "key.h"		/* is_idle() */
+#include "../src/tty/key.h"		/* is_idle() */
 #include "mountlist.h"
 #include "unixcompat.h"
 #include "strutil.h"

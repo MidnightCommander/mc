@@ -1,4 +1,4 @@
-SUBDIRS = mcconfig search
+SUBDIRS = mcconfig search tty
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -46,27 +46,26 @@ mc_LDADD = $(EDITLIB) $(VFSLIB) \
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
 SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
-	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
-	command.c command.h complete.c cons.handler.c	\
+	chmod.c chmod.h chown.c chown.h cmd.c cmd.h			\
+	command.c command.h complete.c cons.handler.c			\
 	cons.saver.h dialog.c dialog.h dir.c dir.h			\
-	execute.c execute.h ext.c ext.h file.c filegui.c	\
+	execute.c execute.h ext.c ext.h file.c filegui.c		\
 	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
 	find.h findme.c	findme.h fs.h					\
 	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
-	hotlist.h info.c info.h key.c key.h keyxdef.c layout.c		\
+	hotlist.h info.c info.h layout.c				\
 	layout.h learn.c learn.h listmode.c listmode.h history.h	\
-	logging.h logging.c						\
-	main.c main.h main-widgets.h					\
-	menu.c menu.h mountlist.c mountlist.h mouse.c mouse.h myslang.h	\
+	logging.h logging.c main.c main.h main-widgets.h		\
+	menu.c menu.h mountlist.c mountlist.h				\
 	option.c option.h panel.h panelize.c panelize.h poptalloca.h	\
 	popt.c poptconfig.c popt.h popthelp.c poptint.h poptparse.c	\
-	rxvt.c screen.c setup.c setup.h	\
-	slint.c	subshell.c subshell.h textconf.c textconf.h		\
-	tree.c tree.h treestore.c treestore.h timefmt.h tty.c tty.h user.c	\
+	screen.c setup.c setup.h					\
+	subshell.c subshell.h textconf.c textconf.h			\
+	tree.c tree.h treestore.c treestore.h timefmt.h user.c		\
 	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
-	x11conn.h x11conn.c ecs.h ecs.c \
-	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c \
+	x11conn.h x11conn.c ecs.h ecs.c					\
+	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c	\
 	search/search.h strescape.c strescape.h
 
 if CHARSET

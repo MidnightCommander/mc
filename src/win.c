@@ -23,10 +23,20 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <string.h>
 
-#include "global.h"		/* glib.h */
-#include "tty.h"		/* raw(), noraw() */
-#include "key.h"		/* XCTRL and ALT macros  */
+#ifdef HAVE_TERMIOS_H
+#include <termios.h>
+#endif
+
+#include "global.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "dialog.h"
+#include "widget.h"
+#include "win.h"
+#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
 #include "strutil.h"
 #include "win.h"

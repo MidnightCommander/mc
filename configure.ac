@@ -560,6 +560,7 @@ misc/mc.ext
 src/Makefile
 src/mcconfig/Makefile
 src/search/Makefile
+src/tty/Makefile
 
 edit/Makefile
 syntax/Makefile

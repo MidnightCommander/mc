@@ -29,10 +29,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "global.h"
-#include "tty.h"
-#include "mouse.h"
-#include "key.h"		/* define sequence */
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"
+#include "../../src/tty/mouse.h"
+#include "../../src/tty/key.h"		/* define sequence */
 
 int mouse_enabled = 0;
 const char *xmouse_seq;

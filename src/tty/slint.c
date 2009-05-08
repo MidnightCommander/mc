@@ -38,15 +38,17 @@
 #endif
 #include <unistd.h>
 
-#include "global.h"
-#include "tty.h"
-#include "color.h"
-#include "mouse.h"		/* Gpm_Event is required in key.h */
-#include "key.h"		/* define_sequence */
-#include "main.h"		/* extern: force_colors */
-#include "win.h"		/* do_exit_ca_mode */
-#include "setup.h"
-#include "background.h"		/* we_are_background */
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"
+#include "../../src/tty/color.h"
+#include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
+#include "../../src/tty/key.h"		/* define_sequence */
+
+#include "../../src/main.h"		/* extern: force_colors */
+#include "../../src/win.h"		/* do_exit_ca_mode */
+#include "../../src/setup.h"
+#include "../../src/background.h"		/* we_are_background */
 
 #ifdef HAVE_SLANG
 

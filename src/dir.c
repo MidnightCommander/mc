@@ -28,7 +28,7 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "dir.h"
 #include "wtools.h"
 #include "treestore.h"

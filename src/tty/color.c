@@ -26,13 +26,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "global.h"
-#include "tty.h"
-#include "setup.h"		/* For the externs */
-#include "color.h"
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"
+#include "../../src/setup.h"		/* For the externs */
+#include "../../src/tty/color.h"
 
 /* Set to force black and white display at program startup */
-int   disable_colors = 0;
+int disable_colors = 0;
 
 /* Set if we are actually using colors */
 int use_colors = 0;

@@ -35,15 +35,15 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "win.h"		/* Our window tools */
-#include "color.h"		/* Color definitions */
+#include "../src/tty/color.h"		/* Color definitions */
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */
 #include "wtools.h"
 #include "setup.h"		/* For profile_name */
 #include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
-#include "key.h"		/* XCTRL and ALT macros  */
+#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 #include "command.h"		/* For cmdline */
 #include "dir.h"
 #include "panel.h"

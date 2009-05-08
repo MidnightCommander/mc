@@ -37,12 +37,15 @@
 #include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
+#include "../src/tty/tty.h"	/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+
 #include "utilvfs.h"
 #include "vfs-impl.h"
-#include "gc.h"		/* vfs_rmstamp */
+#include "gc.h"			/* vfs_rmstamp */
 #include "xdirentry.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x

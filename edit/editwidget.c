@@ -41,13 +41,14 @@
 
 #include "../src/global.h"
 
+#include "../src/tty/tty.h"		/* LINES, COLS */
+#include "../src/tty/key.h"		/* is_idle() */
+
 #include "edit-impl.h"
 #include "edit-widget.h"
 
-#include "../src/tty.h"		/* LINES */
-#include "../src/widget.h"	/* buttonbar_redraw() */
-#include "../src/menu.h"	/* menubar_new() */
-#include "../src/key.h"		/* is_idle() */
+#include "../src/widget.h"		/* buttonbar_redraw() */
+#include "../src/menu.h"		/* menubar_new() */
 
 WEdit *wedit;
 struct WMenu *edit_menubar;

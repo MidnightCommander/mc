@@ -45,11 +45,11 @@
 
 #include "global.h"
 #include "background.h"
-#include "tty.h"	/* doupdate() */
+#include "../src/tty/tty.h"	/* doupdate() */
 #include "dialog.h"	/* do_refresh() */
 #include "wtools.h"
 #include "fileopctx.h"	/* FileOpContext */
-#include "key.h"	/* add_select_channel(), delete_select_channel() */
+#include "../src/tty/key.h"	/* add_select_channel(), delete_select_channel() */
 
 enum ReturnType {
     Return_String,

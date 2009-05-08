@@ -57,9 +57,9 @@
 #include <sys/time.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "setup.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "win.h"
 #include "dialog.h"
 #include "widget.h"
@@ -78,7 +78,7 @@
 #include "file.h"
 #include "filegui.h"
 #include "tree.h"
-#include "key.h"
+#include "../src/tty/key.h"
 #include "../vfs/vfs-impl.h"
 
 /* }}} */

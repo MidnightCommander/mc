@@ -34,13 +34,13 @@
 #include <grp.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "win.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For init_box_colors() */
-#include "key.h"		/* XCTRL and ALT macros */
+#include "../src/tty/key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
 #include "dir.h"

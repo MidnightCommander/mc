@@ -13,7 +13,7 @@
 
 
 #ifdef HAVE_SLANG
-#   include "myslang.h"
+#   include "../../src/tty/myslang.h"
 #endif
 
 #ifdef USE_NCURSES

@@ -32,18 +32,18 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "dir.h"
 #include "panel.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "tree.h"
 #include "win.h"
 #include "ext.h"		/* regexp_command */
-#include "mouse.h"		/* For Gpm_Event */
+#include "../src/tty/mouse.h"		/* For Gpm_Event */
 #include "layout.h"		/* Most layout variables are here */
 #include "wtools.h"		/* for message (...) */
 #include "cmd.h"
-#include "key.h"		/* XCTRL and ALT macros  */
+#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
 #include "../src/mcconfig/mcconfig.h"

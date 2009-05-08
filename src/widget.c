@@ -41,12 +41,14 @@
 #include <sys/types.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
-#include "mouse.h"
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"	/* XCTRL and ALT macros  */
+
 #include "dialog.h"
 #include "widget.h"
-#include "key.h"	/* XCTRL and ALT macros  */
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */
 #include "main.h"	/* for `slow_terminal' */

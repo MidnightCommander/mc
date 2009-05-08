@@ -81,17 +81,20 @@ What to do with this?
 #include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
-#include "../src/tty.h"		/* enable/disable interrupt key */
+
+#include "../src/tty/tty.h"	/* enable/disable interrupt key */
+
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/history.h"
+#include "../src/setup.h"	/* for load_anon_passwd */
+
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"
 #include "vfs-impl.h"
 #include "gc.h"		/* vfs_stamp_create */
 #include "tcputil.h"
-#include "../src/setup.h"	/* for load_anon_passwd */
 #include "ftpfs.h"
 #ifndef MAXHOSTNAMELEN
 #    define MAXHOSTNAMELEN 64

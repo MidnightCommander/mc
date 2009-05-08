@@ -54,12 +54,12 @@
 #include "tree.h"		/* tree_chdir() */
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"		/* console_flag */
-#include "tty.h"		/* LINES */
+#include "../src/tty/tty.h"		/* LINES */
 #include "dialog.h"		/* Widget */
 #include "view.h"		/* mc_internal_viewer() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
-#include "key.h"		/* application_keypad_mode() */
+#include "../src/tty/key.h"		/* application_keypad_mode() */
 #include "win.h"		/* do_enter_ca_mode() */
 #include "main.h"		/* change_panel() */
 #include "panel.h"		/* current_panel */

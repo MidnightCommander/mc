@@ -1,6 +1,8 @@
 #ifndef MC__EDITCMD_DIALOGS_H
 #define MC__EDITCMD_DIALOGS_H
 
+#include "../edit/edit.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 struct etags_hash_struct;

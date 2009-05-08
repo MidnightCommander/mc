@@ -39,18 +39,18 @@
 #include <string.h>
 
 #include "global.h"
-#include "tty.h"
-#include "color.h"
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
 #include "wtools.h"	/* message() */
 #include "dir.h"
 #include "dialog.h"
 #include "widget.h"
 #include "panel.h"
-#include "mouse.h"
+#include "../src/tty/mouse.h"
 #include "main.h"
 #include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "help.h"
-#include "key.h"	/* For mi_getch() */
+#include "../src/tty/key.h"	/* For mi_getch() */
 #include "tree.h"
 #include "treestore.h"
 #include "cmd.h"

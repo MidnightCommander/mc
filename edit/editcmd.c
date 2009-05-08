@@ -46,14 +46,15 @@
 #include <fcntl.h>
 
 #include "../src/global.h"
-#include "../src/history.h"
 
-#include "../src/tty.h"		/* LINES */
+#include "../src/tty/tty.h"	/* COLS */
+#include "../src/tty/key.h"	/* XCTRL */
+
+#include "../src/history.h"
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
 #include "../src/main.h"	/* mc_home source_codepage */
 #include "../src/help.h"	/* interactive_display() */
-#include "../src/key.h"		/* XCTRL */
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
 #include "../src/selcodepage.h"

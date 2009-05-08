@@ -41,21 +41,21 @@
 #include <pwd.h>
 
 #include "global.h"
-#include "tty.h"
+#include "../src/tty/tty.h"
 #include "dir.h"
-#include "color.h"
+#include "../src/tty/color.h"
 #include "dialog.h"
 #include "menu.h"
 #include "panel.h"
 #include "main.h"
 #include "win.h"
-#include "mouse.h"
+#include "../src/tty/mouse.h"
 #include "option.h"
 #include "tree.h"
 #include "treestore.h"
 #include "cons.saver.h"
 #include "subshell.h"
-#include "key.h"		/* For init_key() and mi_getch() */
+#include "../src/tty/key.h"		/* For init_key() and mi_getch() */
 #include "setup.h"		/* save_setup() */
 #include "../src/mcconfig/mcconfig.h"
 #include "boxes.h"		/* sort_box() */
