@@ -158,7 +158,6 @@ translate_character (GIConv cd, char c)
     char ch = UNKNCHAR;
 
     int ibuflen = 1;
-    int obuflen = 4;
 
     tmp_buff = g_convert_with_iconv (ibuf, ibuflen, cd, &bytes_read, &bytes_written, NULL);
     if ( tmp_buff )

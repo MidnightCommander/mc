@@ -2732,27 +2732,6 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 
 /* {{{ Searching }}} */
 
-/* Case insensitive search of text in data */
-static int
-icase_search_p (WView *view, char *text, char *data, int nothing, 
-                size_t *match_start, size_t *match_end)
-{
-    const char *q;
-    (void) nothing;
-
-
-    q = (!view->search_backwards)
-            ? str_search_first (data, text, 0) 
-            : str_search_last (data, text, 0);
-
-    if (q != NULL) {
-        (*match_start) = str_length_noncomb (data) - str_length_noncomb (q);
-        (*match_end) = (*match_start) + str_length_noncomb (text);
-	return 1;
-    }
-    return 0;
-}
-
 /* read one whole line into buffer, return where line start and end */
 static int
 view_get_line_at (WView *view, offset_type from, GString * buffer,
