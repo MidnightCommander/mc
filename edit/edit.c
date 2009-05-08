@@ -2614,6 +2614,11 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Down:
     case CK_Down_Highlight:
+	if ( option_line_status ) {
+	    int skip_rows = book_mark_get_shiftup (edit->collapsed, edit->curs_line + 1);
+	    edit_move_down (edit, skip_rows, 0);
+	    edit->curs_line -= skip_rows;
+	}
 	edit_move_down (edit, 1, 0);
 	break;
     case CK_Paragraph_Up:
@@ -2686,6 +2691,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
 
     case CK_Add_Collapse_Region:
+	if ( option_line_status ) {
 	if ( edit->mark1 != edit->mark2 ) {
 	    long start_mark = min (edit->mark1, edit->mark2);
 	    int upto_start = edit_count_lines (edit, start_mark, edit->curs1);
@@ -2706,6 +2712,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	    book_mark_collapse (edit->collapsed, edit->curs_line);
 	}
 	edit->force |= REDRAW_PAGE;
+	}
 	break;
 
     case CK_Toggle_Bookmark:
