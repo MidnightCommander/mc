@@ -168,6 +168,8 @@ void insert_spaces_tab (WEdit * edit, int half);
 int edit_delete (WEdit * edit, const int byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, long increment);
+void edit_move_block_to_right (WEdit * edit);
+void edit_move_block_to_left (WEdit * edit);
 void edit_push_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
