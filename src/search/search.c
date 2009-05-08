@@ -306,7 +306,7 @@ mc_search_is_type_avail (mc_search_type_t search_type)
 
 /* --------------------------------------------------------------------------------------------- */
 
-mc_search_type_str_t *
+const mc_search_type_str_t *
 mc_search_types_list_get (void)
 {
     return mc_search__list_types;

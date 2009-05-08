@@ -124,7 +124,7 @@ gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize st
 
 gboolean mc_search_is_type_avail (mc_search_type_t);
 
-mc_search_type_str_t *mc_search_types_list_get (void);
+const mc_search_type_str_t *mc_search_types_list_get (void);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
 
