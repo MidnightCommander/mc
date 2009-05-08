@@ -361,7 +361,11 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     if ( option_line_status ) {
         cur_line = edit->start_line + row;
         collapse_state = book_mark_get_collapse_state(edit->collapsed, cur_line, NULL);
+        /* not show line if in middle collapsed region */
+        if ( collapse_state == C_LINES_MIDDLE_C )
+            return;
         skip_rows = book_mark_get_shiftup(edit->collapsed, cur_line);
+        mc_log("line: %i, skip: %i state: %i\n", cur_line, skip_rows, collapse_state);
         if ( cur_line <= edit->total_lines ) {
             g_snprintf (line_stat, LINE_STATUS_WIDTH + 1, "%7ld ", cur_line + 1);
         } else {
@@ -388,7 +392,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
 
-	if (row <= edit->total_lines - edit->start_line) {
+	if (row - skip_rows <= edit->total_lines - edit->start_line) {
 		long tws = 0;
 	    if (use_colors && visible_tws) {
 		tws = edit_eol (edit, b);

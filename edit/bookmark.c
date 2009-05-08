@@ -289,6 +289,36 @@ book_mark_collapse_insert (GList *list, const int start_line, const int end_line
 }
 
 
+void
+book_mark_collapse (GList *list, const int line)
+{
+    GList *cl;
+    collapsed_lines *p;
+    int collapse_state;
+
+    collapse_state = book_mark_get_collapse_state(list, line, NULL);
+    cl = book_mark_collapse_find (list, line);
+    switch ( collapse_state ) {
+    case C_LINES_ELAPSED:
+        if ( cl ) {
+            p = (collapsed_lines *) cl->data;
+            p->state = 1;
+        }
+        break;
+    case C_LINES_COLLAPSED:
+        if ( cl ) {
+            p = (collapsed_lines *) cl->data;
+            p->state = 0;
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+
+
+
 /* returns true if a collapsed exists at this line
  * return start_line, end_line if found region
  *
@@ -325,11 +355,11 @@ int book_mark_get_collapse_state (GList * list, const int line,
     int c = 0;
 
     c = book_mark_collapse_query (list, line, &start_line, &end_line, &state);
+    mc_log("l: %i, start_line:%i, end_line:%i", line, start_line, end_line);
     if ( c == 0 )
         return C_LINES_DEFAULT;
 
     if ( cl ) {
-        mc_log("set cl");
         cl->start_line = start_line;
         cl->end_line = end_line;
         cl->state = state;
@@ -341,18 +371,16 @@ int book_mark_get_collapse_state (GList * list, const int line,
         else
             return C_LINES_ELAPSED;
     }
-    if ( line > start_line && line< end_line ) {
+    if ( line > start_line && line < end_line ) {
         if ( state )
             return C_LINES_MIDDLE_C;
         else
             return C_LINES_MIDDLE_E;
     }
     if ( line == end_line ) {
-        if ( state )
-            return C_LINES_MIDDLE_C;
-        else
-            return C_LINES_LAST;
+        return C_LINES_LAST;
     }
+    return C_LINES_DEFAULT;
 }
 
 
@@ -415,7 +443,7 @@ int book_mark_get_shiftup (GList * list, int line)
     cl = g_list_first (list);
     while (cl) {
         collapsed = (collapsed_lines *) cl->data;
-        if ( line >= collapsed->start_line && collapsed->state ) {
+        if ( line > collapsed->start_line && collapsed->state ) {
             res += collapsed->end_line - collapsed->start_line - 1;
         }
         cl = g_list_next (cl);

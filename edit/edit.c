@@ -2697,9 +2697,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	        start_line = edit->curs_line + upto_start;
 	    }
 	    edit->highlight = 0;
+	    edit->mark1 = 0;
+	    edit->mark2 = 0;
 	    unsigned int end_line = start_line + lines_selected - 1;
 	    if ( abs (end_line - start_line) > 1 )
 		edit->collapsed = book_mark_collapse_insert (edit->collapsed, start_line, end_line, 1);
+	} else {
+	    book_mark_collapse (edit->collapsed, edit->curs_line);
 	}
 	edit->force |= REDRAW_PAGE;
 	break;
