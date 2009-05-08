@@ -3,7 +3,7 @@ SUBDIRS = hints man $(DOC_LINGUAS)
 
 pkgdata_DATA = mc.hlp
 
-EXTRA_DIST = xnc.hlp $(DX_CONFIG) doc/devel doxygen-include.am
+EXTRA_DIST = xnc.hlp $(DX_CONFIG) doxygen-include.am
 CLEANFILES = $(pkgdata_DATA)
 
 mc.hlp: man/mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp

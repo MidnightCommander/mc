@@ -561,7 +561,9 @@ contrib/dist/redhat/mc.spec
 contrib/dist/mc.qpg
 contrib/dist/pkginfo
 contrib/dist/prototype
-contrib/mc.ext
+
+misc/Makefile
+misc/mc.ext
 
 src/Makefile
 src/search/Makefile

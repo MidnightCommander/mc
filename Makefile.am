@@ -2,7 +2,7 @@
 
 AUTOMAKE_OPTIONS = 1.5
 
-SUBDIRS = intl po vfs edit src doc syntax contrib
+SUBDIRS = intl po vfs edit src doc syntax contrib misc
 
 EXTRA_DIST = 
 
