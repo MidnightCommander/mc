@@ -46,6 +46,13 @@
 #include <sys/time.h>
 
 #include "global.h"
+
+#include "../src/tty/tty.h"		/* LINES */
+#include "../src/tty/key.h"		/* application_keypad_mode() */
+#include "../src/tty/win.h"		/* do_enter_ca_mode() */
+
+#include "../src/search/search.h"
+
 #include "cmd.h"		/* Our definitions */
 #include "fileopctx.h"
 #include "file.h"		/* file operation routines */
@@ -54,13 +61,10 @@
 #include "tree.h"		/* tree_chdir() */
 #include "subshell.h"		/* use_subshell */
 #include "cons.saver.h"		/* console_flag */
-#include "../src/tty/tty.h"		/* LINES */
 #include "dialog.h"		/* Widget */
 #include "view.h"		/* mc_internal_viewer() */
 #include "wtools.h"		/* message() */
 #include "widget.h"		/* push_history() */
-#include "../src/tty/key.h"		/* application_keypad_mode() */
-#include "win.h"		/* do_enter_ca_mode() */
 #include "main.h"		/* change_panel() */
 #include "panel.h"		/* current_panel */
 #include "help.h"		/* interactive_display() */
@@ -74,9 +78,7 @@
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
-#include "../src/search/search.h"
 #include "dir.h"
-
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0

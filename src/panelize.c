@@ -34,9 +34,11 @@
 #include <unistd.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"		/* attrset() */
-#include "win.h"
 #include "../src/tty/color.h"
+#include "../src/tty/win.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */

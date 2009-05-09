@@ -31,20 +31,22 @@
 #include <unistd.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
-#include "win.h"
 #include "../src/tty/color.h"
+#include "../src/tty/win.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
 #include "main.h"
 #include "../src/mcconfig/mcconfig.h"	/* For mc_config_save_file */
 #include "strutil.h"
-
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"		/* safe_delete */
 #include "layout.h"		/* For nice_rotating_dash */
 #include "option.h"
+
 static Dlg_head *conf_dlg;
 
 #define TOGGLE_VARIABLE 0

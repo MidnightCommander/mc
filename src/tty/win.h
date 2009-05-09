@@ -6,12 +6,13 @@
 #ifndef MC_WIN_H
 #define MC_WIN_H
 
-#include "dialog.h"	/* cb_ret_t */
+#include "../../src/dialog.h"		/* cb_ret_t */
 
 /* Keys management */
 typedef void (*movefn) (void *, int);
-cb_ret_t check_movement_keys (int key, int page_size, void *data, movefn backfn,
-				movefn forfn, movefn topfn, movefn bottomfn);
+cb_ret_t check_movement_keys (int key, int page_size, void *data,
+				movefn backfn, movefn forfn,
+				movefn topfn, movefn bottomfn);
 int lookup_key (char *keyname);
 
 /* Terminal management */

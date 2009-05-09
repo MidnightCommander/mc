@@ -52,11 +52,13 @@
 #include <sys/stat.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
-#include "win.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"		/* For mi_getch() */
+#include "../src/tty/win.h"
+
 #include "help.h"
 #include "dialog.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */

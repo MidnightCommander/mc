@@ -44,9 +44,9 @@
 #include "../../src/tty/color.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
 #include "../../src/tty/key.h"		/* define_sequence */
+#include "../../src/tty/win.h"		/* do_exit_ca_mode */
 
 #include "../../src/main.h"		/* extern: force_colors */
-#include "../../src/win.h"		/* do_exit_ca_mode */
 #include "../../src/setup.h"
 #include "../../src/background.h"		/* we_are_background */
 

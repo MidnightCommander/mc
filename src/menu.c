@@ -28,15 +28,17 @@
 #include <sys/types.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"	/* For mi_getch() */
+#include "../src/tty/win.h"
+
 #include "menu.h"
 #include "help.h"
 #include "dialog.h"
-#include "../src/tty/color.h"
 #include "main.h"
-#include "../src/tty/mouse.h"
-#include "win.h"
-#include "../src/tty/key.h"	/* For mi_getch() */
 #include "strutil.h"
 
 int menubar_visible = 1;	/* This is the new default */

@@ -42,10 +42,10 @@
 #include "../../src/tty/tty.h"
 #include "../../src/tty/mouse.h"
 #include "../../src/tty/key.h"
+#include "../../src/tty/win.h"
 
-#include "../../src/layout.h"	/* winch_flag */
 #include "../../src/main.h"
-#include "../../src/win.h"
+#include "../../src/layout.h"	/* winch_flag */
 #include "../../src/cons.saver.h"
 
 #ifdef USE_VFS

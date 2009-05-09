@@ -29,21 +29,23 @@
 #include <sys/stat.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
+#include "../src/tty/key.h"		/* For the externs */
+#include "../src/tty/mouse.h"		/* To make view.h happy */
+#include "../src/tty/win.h"		/* lookup_key */
+
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
 #include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
-#include "../src/tty/mouse.h"		/* To make view.h happy */
 #include "view.h"		/* For the externs */
-#include "../src/tty/key.h"		/* For the externs */
 #include "hotlist.h"		/* load/save/done hotlist */
 #include "panelize.h"		/* load/save/done panelize */
 #include "layout.h"
 #include "menu.h"		/* menubar_visible declaration */
-#include "win.h"		/* lookup_key */
 #include "cmd.h"
 #include "file.h"		/* safe_delete */
 

@@ -47,15 +47,17 @@
 #include <unistd.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"		/* COLS */
-#include "win.h"
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/win.h"
+
 #include "dialog.h"
 #include "widget.h"
 #include "command.h"
 #include "../src/mcconfig/mcconfig.h"
-#include "../src/tty/mouse.h"
 #include "main-widgets.h"
 #include "main.h"
 #include "subshell.h"	/* For use_subshell and resize_subshell() */

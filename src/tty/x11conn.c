@@ -34,16 +34,13 @@ typedef int dummy;		/* C99 forbids empty compilation unit */
 #else
 
 #include <setjmp.h>
-
 #include <X11/Xlib.h>
-
-#include "../src/global.h"
-
 #ifdef HAVE_GMODULE
 #  include <gmodule.h>
 #endif
 
-#include "x11conn.h"
+#include "../../src/global.h"
+#include "../../src/tty/x11conn.h"
 
 /*** file scope type declarations **************************************/
 

@@ -29,23 +29,24 @@
 #include <termios.h>
 #endif
 
-#include "global.h"
-#include "../src/tty/tty.h"
-#include "../src/tty/color.h"
-#include "../src/tty/mouse.h"
-#include "dialog.h"
-#include "widget.h"
-#include "win.h"
-#include "../src/tty/key.h"		/* XCTRL and ALT macros  */
-#include "layout.h"
-#include "strutil.h"
-#include "win.h"
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"
+#include "../../src/tty/color.h"
+#include "../../src/tty/mouse.h"
+#include "../../src/tty/key.h"		/* XCTRL and ALT macros  */
+#include "../../src/tty/win.h"
+
+#include "../../src/dialog.h"
+#include "../../src/widget.h"
+#include "../../src/layout.h"
+#include "../../src/strutil.h"
 
 /*
  * Common handler for standard movement keys in a text area.  Provided
  * functions are called with the "data" argument.  backfn and forfn also
- * get an argument indicating how many lines to scroll.  Return MSG_HANDLED if
- * the key was handled, MSG_NOT_HANDLED otherwise.
+ * get an argument indicating how many lines to scroll. Return MSG_HANDLED
+ * if the key was handled, MSG_NOT_HANDLED otherwise.
  */
 cb_ret_t
 check_movement_keys (int key, int page_size, void *data, movefn backfn,

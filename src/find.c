@@ -33,9 +33,14 @@
 #include <sys/stat.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
-#include "win.h"
 #include "../src/tty/color.h"
+#include "../src/tty/key.h"
+#include "../src/tty/win.h"
+
+#include "../src/search/search.h"
+
 #include "setup.h"
 #include "find.h"
 #include "strutil.h"
@@ -47,8 +52,6 @@
 #include "wtools.h"
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
-#include "../src/tty/key.h"
-#include "../src/search/search.h"
 #include "history.h"		/* MC_HISTORY_SHARED_SEARCH */
 
 /* Size of the find parameters window */

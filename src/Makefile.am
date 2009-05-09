@@ -39,8 +39,12 @@ VFSLIB = ../vfs/libvfs-mc.a
 endif
 endif
 
+MCCONFIGLIB = mcconfig/libmcconfig.la
+SEARCHLIB = search/libsearch.la
+TTYLIB =  tty/libmctty.la
+
 mc_LDADD = $(EDITLIB) $(VFSLIB) \
-	search/libsearch.la mcconfig/libmcconfig.la \
+	$(MCCONFIGLIB) $(SEARCHLIB) $(TTYLIB) \
 	$(INTLLIBS) $(MCLIBS) $(SLANGLIB) $(LIBICONV) $(GLIB_LIBS)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
@@ -62,9 +66,9 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	screen.c setup.c setup.h					\
 	subshell.c subshell.h textconf.c textconf.h			\
 	tree.c tree.h treestore.c treestore.h timefmt.h user.c		\
-	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\
-	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
-	x11conn.h x11conn.c ecs.h ecs.c					\
+	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h 	\
+	widget.c widget.h wtools.c wtools.h unixcompat.h		\
+	ecs.h ecs.c							\
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c	\
 	search/search.h strescape.c strescape.h
 

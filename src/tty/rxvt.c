@@ -29,9 +29,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "global.h"
-#include "../src/tty/tty.h"	/* move, addch */
-#include "cons.saver.h"
+#include "../../src/global.h"
+
+#include "../../src/tty/tty.h"	/* move, addch */
+
+#include "../../src/cons.saver.h"
 
 static int rxvt_extensions = 0;
 
@@ -119,4 +121,3 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     }
     g_free (k);
 }
-
