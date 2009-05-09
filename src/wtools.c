@@ -344,17 +344,17 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 
 	switch (qw->widget_type) {
 	case quick_checkbox:
-	    qw->widget = check_new (ypos, xpos, *qw->result, I18N (qw->text));
+	    qw->widget = (Widget *)check_new (ypos, xpos, *qw->result, I18N (qw->text));
 	    break;
 
 	case quick_radio:
 	    r = radio_new (ypos, xpos, qw->hotkey_pos, const_cast(const char **, qw->str_result));
 	    r->pos = r->sel = qw->value;
-	    qw->widget = r;
+	    qw->widget = (Widget *)r;
 	    break;
 
 	case quick_button:
-	    qw->widget =
+	    qw->widget = (Widget *)
 		button_new (ypos, xpos, qw->value,
 			    (qw->value ==
 			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
@@ -370,11 +370,11 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 	    input->point = 0;
 	    if (qw->value & 2)
 		input->completion_flags |= INPUT_COMPLETE_CD;
-	    qw->widget = input;
+	    qw->widget = (Widget *)input;
 	    break;
 
 	case quick_label:
-	    qw->widget = label_new (ypos, xpos, I18N (qw->text));
+	    qw->widget = (Widget *)label_new (ypos, xpos, I18N (qw->text));
 	    break;
 
 	default:

@@ -347,7 +347,7 @@ button_set_text (WButton *b, const char *text)
     dlg_redraw (b->widget.parent);
 }
 
-
+
 /* Radio button widget */
 static int radio_event (Gpm_Event *event, void *);
 
