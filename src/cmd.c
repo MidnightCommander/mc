@@ -495,7 +495,6 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 {
     char *reg_exp, *reg_exp_t, *srch_regexp;
     int i;
-    int c;
     int dirflag = 0;
 
     reg_exp = input_dialog (title, "", history_name, easy_patterns ? "*" : ".");
@@ -533,9 +532,7 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
             continue;
         }
 
-	if (c) {
-	    do_file_mark (current_panel, i, cmd);
-	}
+        do_file_mark (current_panel, i, cmd);
     }
     g_free(srch_regexp);
     g_free (reg_exp);
