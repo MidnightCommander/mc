@@ -6,10 +6,13 @@
 #ifndef MC_UTIL_H
 #define MC_UTIL_H
 
-#include <sys/types.h>
-#include <assert.h>
+#include "global.h"		/* include <glib.h> */
+
 #include <string.h>
+#include <assert.h>
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet

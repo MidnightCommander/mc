@@ -3,39 +3,20 @@
  *  \brief Header: %interface to the terminal controlling library
  *
  *  This file is the %interface to the terminal controlling library:
- *  ncurses, slang or the built-in slang. It provides an additional
- *  layer of abstraction above the "real" libraries to keep the number
- *  of ifdefs in the other files small.
+ *  slang or ncurses. It provides an additional layer of abstraction
+ *  above the "real" libraries to keep the number of ifdefs in the other
+ *  files small.
  */
 
 #ifndef MC_TTY_H
 #define MC_TTY_H
 
+#include "../../src/global.h"		/* include <glib.h> */
 
 #ifdef HAVE_SLANG
-#   include "../../src/tty/myslang.h"
-#endif
-
-#ifdef USE_NCURSES
-#    ifdef HAVE_NCURSES_CURSES_H
-#        include <ncurses/curses.h>
-#    elif HAVE_NCURSESW_CURSES_H
-#        include <ncursesw/curses.h>
-#    elif HAVE_NCURSES_H
-#        include <ncurses.h>
-#    else
-#        include <curses.h>
-#    endif
-#ifdef WANT_TERM_H
-#    include <term.h>
-#endif /* WANT_TERM_H */
-#endif /* USE_NCURSES */
-
-#ifdef USE_NCURSESW
-#   include <ncursesw/curses.h>
-#ifdef WANT_TERM_H
-#   include <term.h>
-#endif
+#   include "../../src/tty/tty-slang.h"
+#else
+#   include "../../src/tty/tty-ncurses.h"
 #endif
 
 /* {{{ Input }}} */
@@ -53,19 +34,20 @@ extern gboolean tty_got_interrupt(void);
     While SLang provides such a feature, ncurses does not.
  */
 
-extern void tty_gotoyx(int, int);
-extern void tty_getyx(int *, int *);
+extern void tty_gotoyx(int y, int x);
+extern void tty_getyx(int *py, int *px);
 
-extern void tty_setcolor(int);
+extern void tty_setcolor(int color);
+extern void tty_lowlevel_setcolor(int color);
 
-extern void tty_print_char(int);
-extern void tty_print_alt_char(int);
-extern void tty_print_string(const char *);
+extern void tty_print_char(int c);
+extern void tty_print_alt_char(int c);
+extern void tty_print_string(const char *s);
 extern void tty_print_one_vline(void);
 extern void tty_print_one_hline(void);
 extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
-extern void tty_printf(const char *, ...);
+extern void tty_printf(const char *s, ...);
 
 extern char *tty_tgetstr (const char *name);
 
@@ -78,15 +60,10 @@ extern char *tty_tgetstr (const char *name);
 #define one_hline()		tty_print_one_hline()
 #define one_vline()		tty_print_one_vline()
 
-#ifndef HAVE_SLANG
-#   define acs()
-#   define noacs()
-#endif
-
 #define KEY_KP_ADD	4001
 #define KEY_KP_SUBTRACT	4002
 #define KEY_KP_MULTIPLY	4003
 
 void mc_refresh (void);
 
-#endif
+#endif			/* MC_TTY_H */

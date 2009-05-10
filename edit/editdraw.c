@@ -257,13 +257,6 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 
 #define edit_move(x,y) widget_move(edit, y, x);
 
-/* Set colorpair by index, don't interpret S-Lang "emulated attributes" */
-#ifdef HAVE_SLANG
-#define lowlevel_set_color(x) SLsmg_set_color(x & 0x7F)
-#else
-#define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
-#endif
-
 struct line_s {
     unsigned int ch;
     unsigned int style;
@@ -327,7 +320,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 #if 0
 		if (color != EDITOR_NORMAL_COLOR) {
 		    textchar = ' ';
-		    lowlevel_set_color (color);
+		    tty_lowlevel_setcolor (color);
 		} else
 #endif
 		    set_color (EDITOR_WHITESPACE_COLOR);
@@ -338,7 +331,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	    } else if (style & MOD_MARKED) {
 		set_color (EDITOR_MARKED_COLOR);
 	    } else {
-		lowlevel_set_color (color);
+		tty_lowlevel_setcolor (color);
 	    }
 	}
 	if ( textchar > 255 ) {

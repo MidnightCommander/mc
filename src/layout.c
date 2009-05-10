@@ -826,7 +826,7 @@ void set_hintbar(const char *str)
 {
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
-        refresh();
+        mc_refresh();
 }
 
 void print_vfs_message (const char *msg, ...)

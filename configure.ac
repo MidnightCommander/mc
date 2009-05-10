@@ -532,6 +532,7 @@ if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi
 
+AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])

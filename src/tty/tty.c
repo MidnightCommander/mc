@@ -35,23 +35,16 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/color.h"
-#if defined(USE_NCURSES) || defined(USE_NCURSESW)
-#define WANT_TERM_H
-#endif
 #include "../../src/tty/tty.h"
+#include "../../src/tty/color.h"
 
 #include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/strutil.h"
-
-/*** file scope macro definitions **************************************/
-
-#ifndef HAVE_SLANG
-#   define acs()
-#   define noacs()
-#endif
+#include "../../src/background.h"	/* we_are_background */
 
 /*** global variables **************************************************/
+
+/*** file scope macro definitions **************************************/
 
 /*** file scope type declarations **************************************/
 
@@ -115,71 +108,9 @@ tty_got_interrupt(void)
 }
 
 extern void
-tty_gotoyx(int y, int x)
-{
-#ifdef HAVE_SLANG
-    SLsmg_gotorc(y, x);
-#else
-    move(y, x);
-#endif
-}
-
-extern void
-tty_getyx(int *py, int *px)
-{
-#ifdef HAVE_SLANG
-    *px = SLsmg_get_column();
-    *py = SLsmg_get_row();
-#else
-    getyx(stdscr, *py, *px);
-#endif
-}
-
-extern void
 tty_setcolor(int c)
 {
     attrset(c);
-}
-
-extern void
-tty_print_char(int c)
-{
-#ifdef HAVE_SLANG
-    /* We cannot use SLsmg_write_char here because the Debian and Redhat
-     * people thought changing the API of an external project was fun,
-     * especially when it depends on the preprocessor symbol UTF8 being
-     * defined or not. Congratulations! At least, they left the API call
-     * for SLsmg_write_nchars as it has always been.
-     */
-    char ch;
-
-    ch = c;
-    SLsmg_write_nchars(&ch, 1);
-#else
-    addch(c);
-#endif
-}
-
-extern void
-tty_print_alt_char(int c)
-{
-#ifdef HAVE_SLANG
-    SLsmg_draw_object(SLsmg_get_row(), SLsmg_get_column(), c);
-#else
-    acs();
-    addch(c);
-    noacs();
-#endif
-}
-
-extern void
-tty_print_string(const char *s)
-{
-#ifdef HAVE_SLANG
-    SLsmg_write_string (str_unconst (str_term_form (s)));
-#else
-    addstr (str_term_form (s));
-#endif
 }
 
 extern void
@@ -220,31 +151,4 @@ tty_print_vline(int top, int left, int length)
 	tty_gotoyx(top + i, left);
 	tty_print_one_vline();
     }
-}
-
-extern void
-tty_printf(const char *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-#ifdef HAVE_SLANG
-    SLsmg_vprintf(str_unconst(fmt), args);
-#else
-    vw_printw(stdscr, fmt, args);
-#endif
-    va_end(args);
-}
-
-extern char *
-tty_tgetstr (const char *cap)
-{
-#ifdef HAVE_SLANG
-    return SLtt_tgetstr (str_unconst (cap));
-#else
-    {
-	char *unused = NULL;
-	return tgetstr (str_unconst (cap), &unused);
-    }
-#endif
 }
