@@ -3086,6 +3086,28 @@ view_hexedit_save_changes_cmd (WView *view)
     (void) view_hexedit_save_changes (view);
 }
 
+static int
+view__get_nroff_real_len(WView *view, offset_type start, offset_type length)
+{
+    offset_type loop1 = 0;
+    int nroff_seq = 0;
+    struct read_info info;
+
+    view_read_start (view, &info, start);
+    while((loop1 < length ) && (info.result != -1))
+    {
+        view_read_continue (view, &info);
+        if (*info.cnxt == '\b')
+        {
+            view_read_continue (view, &info);
+            view_read_continue (view, &info);
+            nroff_seq+=2;
+        }
+        loop1++;
+    }
+    return nroff_seq;
+}
+
 
 static void
 do_search (WView *view)
@@ -3106,7 +3128,9 @@ do_search (WView *view)
 
     buffer = g_string_new ("");
 
-    search_start = (view->search_backwards) ?  view->search_start : view->search_end;
+    search_start = (view->search_backwards) ?  view->search_start-1 : view->search_end;
+    if (view->search_backwards && (int) search_start < 0 )
+        search_start = 0;
 
     /* Compute the percent steps */
     search_update_steps (view);
@@ -3144,17 +3168,21 @@ do_search (WView *view)
             continue;
         }
         search_status = 1;
+        if (view->search_backwards){
+            search_start = line_start;
+        }
 
-        view->search_start = view->search->normal_offset+search_start;
-        view->search_end = view->search_start + match_len;
+        view->search_start = search_start + view->search->normal_offset +
+                view__get_nroff_real_len(view, search_start, view->search->normal_offset);
+
+        view->search_end = view->search_start + match_len +
+                view__get_nroff_real_len(view, view->search_start, match_len);
 
         if (view->hex_mode){
             view->hex_cursor = view->search_start;
             view->hexedit_lownibble = FALSE;
-
             view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
             view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
-
         }
 
         view_moveto_match (view);
