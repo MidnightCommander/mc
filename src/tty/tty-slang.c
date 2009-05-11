@@ -482,6 +482,12 @@ tty_getyx (int *py, int *px)
 }
 
 void
+tty_draw_box (int y, int x, int rows, int cols)
+{
+    SLsmg_draw_box (y, x, rows, cols);
+}
+
+void
 tty_print_char (int c)
 {
     /* We cannot use SLsmg_write_char here because the Debian and Redhat

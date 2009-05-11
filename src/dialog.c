@@ -43,8 +43,6 @@
 #include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
 
-#define waddc(w, y1, x1, c) tty_gotoyx (w->y + y1, w->x + x1); addch (c)
-
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
 Dlg_head *current_dlg = 0;
@@ -58,7 +56,8 @@ int mouse_close_dialog = 0;
 static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 				  int reverse, int flags);
 
-static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
+static void
+slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     tty_gotoyx (h->y + y, h->x + x);
     hline (' ', xs);
@@ -70,38 +69,23 @@ static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 }
 
 /* draw box in window */
-void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
+void
+draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    if (slow_terminal){
+    if (slow_terminal)
 	slow_box (h, y, x, ys, xs);
-	return;
-    }
-
-#ifndef HAVE_SLANG
-    waddc (h, y, x, ACS_ULCORNER);
-    hline (ACS_HLINE, xs - 2);
-    waddc (h, y + ys - 1, x, ACS_LLCORNER);
-    hline (ACS_HLINE, xs - 2);
-
-    waddc (h, y, x + xs - 1, ACS_URCORNER);
-    waddc (h, y + ys - 1, x + xs - 1, ACS_LRCORNER);
-
-    tty_gotoyx (h->y + y + 1, h->x + x);
-    vline (ACS_VLINE, ys - 2);
-    tty_gotoyx (h->y + y + 1, h->x + x + xs - 1);
-    vline (ACS_VLINE, ys - 2);
-#else
-    SLsmg_draw_box (h->y + y, h->x + x, ys, xs);
-#endif /* HAVE_SLANG */
+    else
+	tty_draw_box (h->y + y, h->x + x, ys, xs);
 }
 
 /* draw box in window */
-void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
+void
+draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
 #ifndef HAVE_SLANG
     draw_box (h, y, x, ys, xs);
 #else
-    SLsmg_draw_double_box (h->y+y, h->x+x, ys, xs);
+    SLsmg_draw_double_box (h->y + y, h->x + x, ys, xs);
 #endif /* HAVE_SLANG */
 }
 
