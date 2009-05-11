@@ -87,7 +87,7 @@ else
 libvfs_mc_a_SOURCES = $(NONETFILES)
 endif
 
-if USE_MCFS
+if ENABLE_VFS_MCFS
 sbin_PROGRAMS = mcserv
 endif
 

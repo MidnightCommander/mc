@@ -545,27 +545,34 @@ AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
-AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
+AM_CONDITIONAL(ENABLE_VFS_MCFS, [test -n "$use_mcfs"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
 AC_CONFIG_FILES([
-Makefile 
-mc.spec
-mc.qpg
-pkginfo
-prototype
-doc/Makefile 
-vfs/Makefile
-vfs/extfs/Makefile
-lib/Makefile
+Makefile
+
+contrib/Makefile
+contrib/dist/Makefile
+contrib/dist/debian/Makefile
+contrib/dist/gentoo/Makefile
+contrib/dist/redhat/Makefile
+contrib/dist/redhat/mc.spec
+contrib/dist/mc.qpg
+contrib/dist/pkginfo
+contrib/dist/prototype
+
+misc/Makefile
+misc/mc.ext
 
 src/Makefile
 src/search/Makefile
 
 edit/Makefile 
 syntax/Makefile
-lib/mc.ext
+
+vfs/Makefile
+vfs/extfs/Makefile
 vfs/extfs/a
 vfs/extfs/apt
 vfs/extfs/audio
@@ -591,13 +598,21 @@ vfs/extfs/urar
 vfs/extfs/uzip
 vfs/extfs/uzoo
 
-doc/mc.1 doc/mcedit.1 doc/mcview.1 doc/mcserv.8
-doc/es/mc.1 doc/es/Makefile
-doc/hu/mc.1 doc/hu/Makefile
-doc/it/mc.1 doc/it/Makefile
-doc/pl/mc.1 doc/pl/Makefile
-doc/ru/mc.1 doc/ru/Makefile
-doc/sr/mc.1 doc/sr/mcserv.8 doc/sr/Makefile
+doc/Makefile 
+doc/hints/Makefile
+doc/man/mc.1 doc/man/mcedit.1 doc/man/mcview.1 doc/man/mcserv.8 doc/man/Makefile
+doc/man/es/mc.1 doc/man/es/Makefile
+doc/man/hu/mc.1 doc/man/hu/Makefile
+doc/man/it/mc.1 doc/man/it/Makefile
+doc/man/pl/mc.1 doc/man/pl/Makefile
+doc/man/ru/mc.1 doc/man/ru/Makefile
+doc/man/sr/mc.1 doc/man/sr/mcserv.8 doc/man/sr/Makefile
+doc/es/Makefile
+doc/hu/Makefile
+doc/it/Makefile
+doc/pl/Makefile
+doc/ru/Makefile
+doc/sr/Makefile
 
 intl/Makefile
 po/Makefile.in

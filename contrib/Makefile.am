@@ -1,3 +1,7 @@
+## Process this file with automake to create Makefile.in.
+
+SUBDIRS = dist
+
 suppbindir = $(pkgdatadir)/bin
 
 if CHARSET
@@ -6,26 +10,19 @@ else
 LIBFILES_ADD =
 endif
 
-LIBFILES_OUT = mc.ext
-LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.hu mc.hint.it	\
-	mc.hint.nl mc.hint.pl mc.hint.ru mc.hint.sr mc.hint.uk		\
-	mc.hint.zh mc.lib mc.menu mc.menu.sr cedit.menu edit.indent.rc	\
-	edit.spell.rc
-
-noinst_DATA = README.xterm mcserv.init mcserv.pamd xterm.ad
+noinst_DATA = README.xterm mcserv.init mcserv.pamd
 
 SCRIPTS_IN = mc.csh.in mc.sh.in mc-wrapper.csh.in mc-wrapper.sh.in
 SCRIPTS_OUT = mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh
 
 suppbin_SCRIPTS = $(SCRIPTS_OUT)
 
-pkgdata_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
+pkgdata_DATA = $(LIBFILES_ADD)
 
 CLEANFILES = $(SCRIPTS_OUT)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
-	$(LIBFILES_CONST) \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
 	mc.charsets
