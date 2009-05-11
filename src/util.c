@@ -680,37 +680,6 @@ extract_line (const char *s, const char *top)
     return tmp_line;
 }
 
-/* FIXME: I should write a faster version of this (Aho-Corasick stuff) */
-const char *
-_icase_search (const char *text, const char *data, int *lng)
-{
-    const char *d = text;
-    const char *e = data;
-    int dlng = 0;
-
-    if (lng)
-	*lng = 0;
-    for (;*e; e++) {
-	while (*(e+1) == '\b' && *(e+2)) {
-	    e += 2;
-	    dlng += 2;
-	}
-	if (g_ascii_toupper((gchar) *d) == g_ascii_toupper((gchar) *e))
-	    d++;
-	else {
-	    e -= d - text;
-	    d = text;
-	    dlng = 0;
-	}
-	if (!*d) {
-	    if (lng)
-		*lng = strlen (text) + dlng;
-	    return e+1;
-	}
-    }
-    return 0;
-}
-
 /* The basename routine */
 const char *
 x_basename (const char *s)
