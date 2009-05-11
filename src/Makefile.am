@@ -1,4 +1,4 @@
-SUBDIRS = search
+SUBDIRS = mcconfig search
 
 AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
@@ -37,7 +37,7 @@ endif
 endif
 
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV) search/libsearch.la
+	$(INTLLIBS) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV) search/libsearch.la mcconfig/libmcconfig.la
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
@@ -56,7 +56,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	menu.c menu.h mountlist.c mountlist.h mouse.c mouse.h myslang.h	\
 	option.c option.h panel.h panelize.c panelize.h poptalloca.h	\
 	popt.c poptconfig.c popt.h popthelp.c poptint.h poptparse.c	\
-	profile.c profile.h rxvt.c screen.c setup.c setup.h	\
+	rxvt.c screen.c setup.c setup.h	\
 	slint.c	subshell.c subshell.h textconf.c textconf.h		\
 	tree.c tree.h treestore.c treestore.h timefmt.h tty.c tty.h user.c	\
 	user.h util.c util.h utilunix.c view.c view.h vfsdummy.h widget.c	\

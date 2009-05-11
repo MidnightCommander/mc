@@ -1,6 +1,6 @@
 /* Directory hotlist -- for the Midnight Commander
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+   2003, 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
 
    Written by:
     1994 Radek Doulik
@@ -46,7 +46,7 @@
 #include "dialog.h"
 #include "widget.h"
 #include "setup.h"		/* For profile_bname */
-#include "profile.h"		/* Load/save directories hotlist */
+#include "../src/mcconfig/mcconfig.h"
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
@@ -612,9 +612,7 @@ init_hotlist (int list_type)
 
     do_refresh ();
 
-    hotlist_state.expanded =
-	GetPrivateProfileInt ("HotlistConfig", "expanded_view_of_groups",
-			      0, profile_name);
+    hotlist_state.expanded = mc_config_get_int (mc_profile, "HotlistConfig", "expanded_view_of_groups",  0);
 
     if (list_type == LIST_VFSLIST) {
 	title = _("Active VFS directories");
@@ -1166,29 +1164,43 @@ char *hotlist_cmd (int vfs_or_hotlist)
 static void
 load_group (struct hotlist *grp)
 {
-    void *profile_keys;
-    char *key, *value;
+    gchar  **profile_keys, **keys;
+    gsize  len;
     char *group_section;
     struct hotlist *current = 0;
     
     group_section = find_group_section (grp);
 
-    profile_keys = profile_init_iterator (group_section, profile_name);
+    keys = mc_config_get_keys (mc_profile, group_section, &len);
 
     current_group = grp;
 
-    while (profile_keys){
-	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (g_strdup (value), g_strdup (key), HL_TYPE_GROUP, 0);
+    profile_keys = keys;
+    while (*profile_keys)
+    {
+	add2hotlist (
+	    mc_config_get_string(mc_profile,group_section,*profile_keys,""),
+	    g_strdup (*profile_keys),
+	    HL_TYPE_GROUP,
+	    0);
+	profile_keys++;
     }
     g_free (group_section);
+    g_strfreev(keys);
 
-    profile_keys = profile_init_iterator (grp->directory, profile_name);
+    keys = mc_config_get_keys (mc_profile, grp->directory,&len);
+    profile_keys = keys;
 
-    while (profile_keys){
-	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	add2hotlist (g_strdup (value),g_strdup (key), HL_TYPE_ENTRY, 0);
+    while (*profile_keys)
+    {
+	add2hotlist (
+	    mc_config_get_string(mc_profile,group_section,*profile_keys,""),
+	    g_strdup (*profile_keys),
+	    HL_TYPE_ENTRY,
+	    0);
+	profile_keys++;
     }
+    g_strfreev(keys);
 
     for (current = grp->head; current; current = current->next)
 	load_group (current);
@@ -1399,20 +1411,27 @@ static void
 clean_up_hotlist_groups (const char *section)
 {
     char	*grp_section;
-    void	*profile_keys;
-    char	*key, *value;
+    gchar **profile_keys, **keys;
+    gsize len;
 
     grp_section = g_strconcat (section, ".Group", (char *) NULL);
-    if (profile_has_section (section, profile_name))
-	profile_clean_section (section, profile_name);
-    if (profile_has_section (grp_section, profile_name)) {
-	profile_keys = profile_init_iterator (grp_section, profile_name);
 
-	while (profile_keys) {
-	    profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	    clean_up_hotlist_groups (key);
+    if (mc_config_has_group(mc_profile, section))
+	mc_config_del_group (mc_profile, section);
+
+    if (mc_config_has_group(mc_profile, grp_section))
+    {
+	keys = mc_config_get_keys (mc_profile, grp_section,&len);
+
+	profile_keys = keys;
+
+	while (*profile_keys)
+	{
+	    clean_up_hotlist_groups (*profile_keys);
+	    profile_keys++;
 	}
-	profile_clean_section (grp_section, profile_name);
+	g_strfreev(keys);
+	mc_config_del_group (mc_profile, grp_section);
     }
     g_free (grp_section);
 }
@@ -1471,7 +1490,7 @@ load_hotlist (void)
 
     if (remove_old_list) {
 	clean_up_hotlist_groups ("Hotlist");
-	sync_profiles ();
+	mc_config_save_file (mc_profile);
     }
 
     stat (hotlist_file_name, &stat_buf);

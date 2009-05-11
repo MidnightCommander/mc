@@ -1,6 +1,6 @@
 /* Panel layout module for the Midnight Commander
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007 Free Software Foundation, Inc.
+   2006, 2007, 2009 Free Software Foundation, Inc.
    
    Written: 1995 Janne Kukonlehto
             1995 Miguel de Icaza
@@ -54,7 +54,7 @@
 #include "dialog.h"
 #include "widget.h"
 #include "command.h"
-#include "profile.h"		/* For sync_profiles() */
+#include "../src/mcconfig/mcconfig.h"
 #include "mouse.h"
 #include "main-widgets.h"
 #include "main.h"
@@ -538,7 +538,7 @@ void layout_cmd (void)
     }
     if (result == B_EXIT){
 	save_layout ();
-	sync_profiles ();
+	mc_config_save_file (mc_profile);
     }
 
     destroy_dlg (layout_dlg);

@@ -1,6 +1,6 @@
 /* Various utilities
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2007 Free Software Foundation, Inc.
+   2004, 2005, 2007, 2009 Free Software Foundation, Inc.
    Written 1994, 1995, 1996 by:
    Miguel de Icaza, Janne Kukonlehto, Dugan Porter,
    Jakub Jelinek, Mauricio Plaza.
@@ -39,7 +39,7 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "profile.h"
+#include "../src/mcconfig/mcconfig.h"
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "mountlist.h"
@@ -495,35 +495,6 @@ extension (const char *filename)
 {
     const char *d = strrchr (filename, '.');
     return (d != NULL) ? d + 1 : "";
-}
-
-int
-get_int (const char *file, const char *key, int def)
-{
-    return GetPrivateProfileInt (app_text, key, def, file);
-}
-
-int
-set_int (const char *file, const char *key, int value)
-{
-    char buffer [BUF_TINY];
-
-    g_snprintf (buffer, sizeof (buffer), "%d", value);
-    return WritePrivateProfileString (app_text, key, buffer, file);
-}
-
-extern char *
-get_config_string (const char *file, const char *key, const char *defval)
-{
-    char buffer[1024];
-    (void)GetPrivateProfileString (app_text, key, defval, buffer, sizeof(buffer), file);
-    return g_strdup (buffer);
-}
-
-extern void
-set_config_string (const char *file, const char *key, const char *val)
-{
-    (void)WritePrivateProfileString (app_text, key, val, file);
 }
 
 int
