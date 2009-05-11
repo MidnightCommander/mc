@@ -545,7 +545,7 @@ AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
-AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
+AM_CONDITIONAL(ENABLE_VFS_MCFS, [test -n "$use_mcfs"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
