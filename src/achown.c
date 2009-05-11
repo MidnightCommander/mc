@@ -186,7 +186,7 @@ static void print_flags (void)
 {
     int i;
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY+1, 9+i);
@@ -218,7 +218,7 @@ static void print_flags (void)
 static void update_mode (Dlg_head * h)
 {
     print_flags ();
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     send_message (h->current, WIDGET_FOCUS, 0);
@@ -344,7 +344,7 @@ static void chown_refresh (void)
 {
     common_dialog_repaint (ch_dlg);
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     dlg_move (ch_dlg, BY - 1, 8);
     addstr (_("owner"));
@@ -378,7 +378,7 @@ static void chown_refresh (void)
 static void chown_info_update (void)
 {
     /* display file info */
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     
     /* name && mode */
     dlg_move (ch_dlg, 3, 8);

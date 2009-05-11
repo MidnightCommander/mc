@@ -84,7 +84,7 @@ show_console_contents_linux (int starty, unsigned char begin_line,
     /* Read the bytes and output them */
     for (i = 0; i < bytes; i++) {
 	if ((i % COLS) == 0)
-	    move (starty + (i / COLS), 0);
+	    tty_gotoyx (starty + (i / COLS), 0);
 	read (pipefd2[0], &message, 1);
 	addch (message);
     }
@@ -332,7 +332,7 @@ show_console_contents_freebsd (int starty, unsigned char begin_line,
 	return;
 
     for (line = begin_line; line <= end_line; line++) {
-	move (starty + line - begin_line, 0);
+	tty_gotoyx (starty + line - begin_line, 0);
         for (col = 0; col < min (COLS, screen_info.mv_csz); col++) {
 	    c = screen_shot.buf[line * screen_info.mv_csz + col] & 0xFF;
 	    addch (c);

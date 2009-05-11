@@ -79,7 +79,6 @@ void slang_set_raw_mode (void);
 #define reset_prog_mode()	slang_prog_mode ()
 #define flushinp()
 
-void attrset (int color);
 void set_slang_delay (int);
 void slang_init (void);
 void slang_prog_mode (void);
@@ -91,12 +90,6 @@ void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
 
-#define move(y, x)	SLsmg_gotorc (y, x)
-#define getyx(stdscr, row, col) \
-    do { \
-	row = SLsmg_get_row(); \
-	col = SLsmg_get_column(); \
-    } while (0)
 #define printw		SLsmg_printf
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows

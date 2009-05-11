@@ -118,7 +118,7 @@ set_colors (WPanel *panel)
 {
     (void) panel;
     standend ();
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 }
 
 /* Delete format string, it is a linked list */
@@ -155,11 +155,11 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
     for(i = 0; i < width; i++){
 	if (i >= l && i < r){
             if (attr == SELECTED || attr == MARKED_SELECTED)
-                attrset (MARKED_SELECTED_COLOR);
+                tty_setcolor (MARKED_SELECTED_COLOR);
             else
-                attrset (MARKED_COLOR);
+                tty_setcolor (MARKED_COLOR);
         } else
-            attrset (color);
+            tty_setcolor (color);
 
 	addch (dest[i]);
     }
@@ -552,7 +552,7 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                     perm = 2;
             }
 
-            attrset (color);
+            tty_setcolor (color);
 
             preperad_text = (char*) str_fit_to_term(txt, len, format->just_mode);
             if (perm)
@@ -564,9 +564,9 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
             length+= len;
 	} else {
             if (attr == SELECTED || attr == MARKED_SELECTED)
-                attrset (SELECTED_COLOR);
+                tty_setcolor (SELECTED_COLOR);
             else
-                attrset (NORMAL_COLOR);
+                tty_setcolor (NORMAL_COLOR);
 	    one_vline ();
 	    length++;
 	}
@@ -619,7 +619,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	if (second_column)
 	    addch (' ');
 	else {
-	    attrset (NORMAL_COLOR);
+	    tty_setcolor (NORMAL_COLOR);
 	    one_vline ();
 	}
     }
@@ -631,11 +631,11 @@ display_mini_info (WPanel *panel)
     widget_move (&panel->widget, llines (panel)+3, 1);
 
     if (panel->searching){
-	attrset (INPUT_COLOR);
+	tty_setcolor (INPUT_COLOR);
         addstr ("/");
         addstr (str_fit_to_term (panel->search_buffer, 
                 panel->widget.cols - 3, J_LEFT));
-	attrset (NORMAL_COLOR);
+	tty_setcolor (NORMAL_COLOR);
 	return;
     }
 
@@ -731,7 +731,7 @@ display_total_marked_size (WPanel *panel, int y, int x, gboolean size_only)
      * y == panel->widget.lines - 1 for panel bottom frame
      */
     widget_move (&panel->widget, y, x);
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     tty_printf (" %s ", buf);
 }
 
@@ -742,7 +742,7 @@ mini_info_separator (WPanel *panel)
 
     standend ();
     widget_move (&panel->widget, y, 1);
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 #ifdef HAVE_SLANG
     hline (ACS_HLINE, panel->widget.cols - 2);
 #else
@@ -789,7 +789,7 @@ show_free_space (WPanel *panel)
 				(int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0);
 	widget_move (&panel->widget, panel->widget.lines - 1,
 				     panel->widget.cols - 2 - (int) strlen (tmp));
-	attrset (NORMAL_COLOR);
+	tty_setcolor (NORMAL_COLOR);
 	addstr (tmp);
     }
 }
@@ -813,7 +813,7 @@ show_dir (WPanel *panel)
     }
 
     if (panel->active)
-	attrset (REVERSE_COLOR);
+	tty_setcolor (REVERSE_COLOR);
 
     widget_move (&panel->widget, 0, 3);
 
@@ -837,7 +837,7 @@ show_dir (WPanel *panel)
 
 		g_snprintf (buffer, sizeof (buffer), " %s ",
 			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
-		attrset (NORMAL_COLOR);
+		tty_setcolor (NORMAL_COLOR);
 		widget_move (&panel->widget, panel->widget.lines - 1, 2);
 		addstr (buffer);
 	    }
@@ -1223,7 +1223,7 @@ paint_frame (WPanel *panel)
 	format_e *format;
 
 	if (side){
-	    attrset (NORMAL_COLOR);
+	    tty_setcolor (NORMAL_COLOR);
 	    one_vline ();
 	    width = panel->widget.cols - panel->widget.cols/2 - 1;
 	} else if (panel->split)
@@ -1243,12 +1243,12 @@ paint_frame (WPanel *panel)
 		if (header_len > format->field_len)
 		    header_len = format->field_len;
 
-                attrset (MARKED_COLOR);
+                tty_setcolor (MARKED_COLOR);
                 addstr (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
                 g_free(txt);
                 width -= format->field_len;
 	    } else {
-		attrset (NORMAL_COLOR);
+		tty_setcolor (NORMAL_COLOR);
 		one_vline ();
 		width --;
 		continue;

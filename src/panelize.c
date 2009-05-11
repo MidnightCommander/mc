@@ -35,7 +35,7 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* attrset() */
+#include "../src/tty/tty.h"		/* tty_setcolor() */
 #include "../src/tty/color.h"
 #include "../src/tty/win.h"
 
@@ -105,14 +105,14 @@ panelize_callback (Dlg_head *h, dlg_msg_t msg, int parm)
     switch (msg) {
     case DLG_DRAW:
 	common_dialog_repaint (h);
-	attrset (COLOR_NORMAL);
+	tty_setcolor (COLOR_NORMAL);
 	draw_box (h, UY, UX, h->lines - 10, h->cols - 10);
 	return MSG_HANDLED;
 
     case DLG_POST_KEY:
 	/* fall */
     case DLG_INIT:
-	attrset (MENU_ENTRY_COLOR);
+	tty_setcolor (MENU_ENTRY_COLOR);
 	update_command ();
 	return MSG_HANDLED;
 
@@ -280,7 +280,7 @@ external_panelize (void)
     init_panelize ();
     
     /* display file info */
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
 
     run_dlg (panelize_dlg);
 

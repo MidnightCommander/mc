@@ -43,7 +43,7 @@
 #include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
 
-#define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
+#define waddc(w, y1, x1, c) tty_gotoyx (w->y + y1, w->x + x1); addch (c)
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
@@ -60,12 +60,12 @@ static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    move (h->y+y, h->x+x);
+    tty_gotoyx (h->y + y, h->x + x);
     hline (' ', xs);
     vline (' ', ys);
-    move (h->y+y, h->x+x+xs-1);
+    tty_gotoyx (h->y + y, h->x + x + xs - 1);
     vline (' ', ys);
-    move (h->y+y+ys-1, h->x+x);
+    tty_gotoyx (h->y + y + ys - 1, h->x + x);
     hline (' ', xs);
 }
 
@@ -86,12 +86,12 @@ void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
     waddc (h, y, x + xs - 1, ACS_URCORNER);
     waddc (h, y + ys - 1, x + xs - 1, ACS_LRCORNER);
 
-    move (h->y+y+1, h->x+x);
+    tty_gotoyx (h->y + y + 1, h->x + x);
     vline (ACS_VLINE, ys - 2);
-    move (h->y+y+1, h->x+x+xs-1);
+    tty_gotoyx (h->y + y + 1, h->x + x + xs - 1);
     vline (ACS_VLINE, ys - 2);
 #else
-    SLsmg_draw_box (h->y+y, h->x+x, ys, xs);
+    SLsmg_draw_box (h->y + y, h->x + x, ys, xs);
 #endif /* HAVE_SLANG */
 }
 
@@ -122,7 +122,7 @@ void dlg_erase (Dlg_head *h)
     if (h == NULL)
 	return;
     for (y = 0; y < h->lines; y++){
-	move (y+h->y, h->x);	/* FIXME: should test if ERR */
+	tty_gotoyx (y + h->y, h->x);	/* FIXME: should test if ERR */
 	for (x = 0; x < h->cols; x++){
 	    addch (' ');
 	}
@@ -174,12 +174,12 @@ common_dialog_repaint (struct Dlg_head *h)
 
     space = (h->flags & DLG_COMPACT) ? 0 : 1;
 
-    attrset (DLG_NORMALC (h));
+    tty_setcolor (DLG_NORMALC (h));
     dlg_erase (h);
     draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
 
     if (h->title) {
-	attrset (DLG_HOT_NORMALC (h));
+	tty_setcolor (DLG_HOT_NORMALC (h));
 	dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
 	addstr (str_term_form (h->title));
     }

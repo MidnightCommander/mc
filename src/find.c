@@ -780,7 +780,7 @@ do_search (struct Dlg_head *h)
 	while (!dirp){
 	    char *tmp = NULL;
 
-	    attrset (REVERSE_COLOR);
+	    tty_setcolor (REVERSE_COLOR);
 	    while (1) {
 		char *temp_dir = NULL;
 		gboolean found;
@@ -894,7 +894,7 @@ do_search (struct Dlg_head *h)
 
 	if (verbose){
 	    pos = (pos + 1) % 4;
-	    attrset (DLG_NORMALC (h));
+	    tty_setcolor (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
 	    addch (rotating_dash [pos]);
 	    mc_refresh ();

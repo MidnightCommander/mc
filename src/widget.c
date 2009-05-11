@@ -77,7 +77,7 @@ widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey)
 {
     Dlg_head *h = w->parent;
 
-    attrset (hotkey
+    tty_setcolor (hotkey
 	? (focused
 	    ? DLG_HOT_FOCUSC (h)
 	    : DLG_HOT_NORMALC (h))
@@ -601,9 +601,9 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		return MSG_HANDLED;
 
 	    if (l->transparent)
-		attrset (DEFAULT_COLOR);
+		tty_setcolor (DEFAULT_COLOR);
 	    else
-		attrset (DLG_NORMALC (h));
+		tty_setcolor (DLG_NORMALC (h));
 
             for (;;) {
 		q = strchr (p, '\n');
@@ -701,7 +701,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 
     if (msg == WIDGET_DRAW){
 	widget_move (&g->widget, 0, 0);
-	attrset (DLG_NORMALC (h));
+	tty_setcolor (DLG_NORMALC (h));
 	if (!g->shown)
 	    tty_printf ("%*s", gauge_len, "");
 	else {
@@ -721,9 +721,9 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    percentage = (200 * done / total + 1) / 2;
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
 	    addch ('[');
-	    attrset (GAUGE_COLOR);
+	    tty_setcolor (GAUGE_COLOR);
 	    tty_printf ("%*s", (int) columns, "");
-	    attrset (DLG_NORMALC (h));
+	    tty_setcolor (DLG_NORMALC (h));
 	    tty_printf ("%*s] %3d%%", (int)(gauge_len - 7 - columns), "", (int) percentage);
 	}
 	return MSG_HANDLED;
@@ -794,14 +794,14 @@ static void draw_history_button (WInput * in)
     {
 	Dlg_head *h;
 	h = in->widget.parent;
-	attrset (NORMAL_COLOR);
+	tty_setcolor (NORMAL_COLOR);
 	addstr ("[ ]");
-	/* Too distracting: attrset (MARKED_COLOR); */
+	/* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
 	addch (c);
     }
 #else
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     addch (c);
 #endif
 }
@@ -846,7 +846,7 @@ update_input (WInput *in, int clear_first)
     if (has_history)
 	draw_history_button (in);
 
-    attrset (in->color);
+    tty_setcolor (in->color);
     
     widget_move (&in->widget, 0, 0);
     
@@ -1898,9 +1898,9 @@ listbox_draw (WListbox *l, int focused)
 	/* Display the entry */
 	if (e == l->current && sel_line == -1){
 	    sel_line = i;
-	    attrset (selc);
+	    tty_setcolor (selc);
 	} else
-	    attrset (normalc);
+	    tty_setcolor (normalc);
 
 	widget_move (&l->widget, i, 0);
 
@@ -1915,7 +1915,7 @@ listbox_draw (WListbox *l, int focused)
     l->cursor_y = sel_line;
     if (!l->scrollbar)
 	return;
-    attrset (normalc);
+    tty_setcolor (normalc);
     listbox_drawscroll (l);
 }
 
@@ -2469,19 +2469,19 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
 	if (!bb->visible)
 	    return MSG_HANDLED;
 	widget_move (&bb->widget, 0, 0);
-	attrset (DEFAULT_COLOR);
+	tty_setcolor (DEFAULT_COLOR);
         bb->btn_width = buttonbat_get_button_width ();
 	tty_printf ("%-*s", bb->widget.cols, "");
         for (i = 0; i < COLS / bb->btn_width && i < 10; i++) {
             widget_move (&bb->widget, 0, i * bb->btn_width);
-	    attrset (DEFAULT_COLOR);
+	    tty_setcolor (DEFAULT_COLOR);
             tty_printf ("%2d", i + 1);
-	    attrset (SELECTED_COLOR);
+	    tty_setcolor (SELECTED_COLOR);
             text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
             addstr (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
-	    attrset (DEFAULT_COLOR);
+	    tty_setcolor (DEFAULT_COLOR);
 	}
-	attrset (SELECTED_COLOR);
+	tty_setcolor (SELECTED_COLOR);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:
@@ -2621,12 +2621,12 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	return MSG_NOT_HANDLED;
 
     case WIDGET_DRAW:
-	attrset (COLOR_NORMAL);
+	tty_setcolor (COLOR_NORMAL);
 	draw_box (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x, g->widget.lines,
 		  g->widget.cols);
 
-	attrset (COLOR_HOT_NORMAL);
+	tty_setcolor (COLOR_HOT_NORMAL);
 	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x + 1);
 	addstr (str_term_form (g->title));

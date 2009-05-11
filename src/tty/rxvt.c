@@ -30,7 +30,7 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"	/* move, addch */
+#include "../../src/tty/tty.h"	/* tty_gotoyx, addch */
 
 #include "../../src/cons.saver.h"
 
@@ -115,7 +115,7 @@ void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     }
     for (i = 0; i < j; i++) {
 	if ((i % cols) == 0)
-	    move (starty + (i / cols), 0);
+	    tty_gotoyx (starty + (i / cols), 0);
 	addch (is_printable (k[i]) ? k[i] : ' ');
     }
     g_free (k);

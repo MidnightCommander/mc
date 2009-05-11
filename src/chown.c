@@ -101,7 +101,7 @@ chown_refresh (Dlg_head *h)
 {
     common_dialog_repaint (h);
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
 
     draw_box (h, UY, UX, 12, 21);
     draw_box (h, GY, GX, 12, 21);
@@ -118,7 +118,7 @@ chown_refresh (Dlg_head *h)
     dlg_move (h, TY + 9, TX + 1);
     addstr (_(" Permission "));
     
-    attrset (COLOR_HOT_NORMAL);
+    tty_setcolor (COLOR_HOT_NORMAL);
     dlg_move (h, UY, UX + 1);
     addstr (_(" User name "));
     dlg_move (h, GY, GX + 1);

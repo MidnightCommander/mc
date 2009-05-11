@@ -228,7 +228,7 @@ static void update_split (void)
     old_first_panel_size = _first_panel_size;
     old_horizontal_split = _horizontal_split; 
    
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     dlg_move (layout_dlg, 6, 6);
     tty_printf ("%03d", _first_panel_size);
     dlg_move (layout_dlg, 6, 18);
@@ -299,14 +299,14 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	old_horizontal_split = -1;
 	old_output_lines     = -1;
 
-	attrset (COLOR_HOT_NORMAL);
+	tty_setcolor (COLOR_HOT_NORMAL);
 	update_split ();
 	dlg_move (h, 6, 13);
 	addch ('=');
 	if (console_flag){
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
-		attrset (COLOR_NORMAL);
+		tty_setcolor (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
 		addstr (str_term_form (output_lines_label));
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
@@ -351,7 +351,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	if (console_flag){
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
-		attrset (COLOR_NORMAL);
+		tty_setcolor (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }
@@ -849,14 +849,14 @@ void print_vfs_message (const char *msg, ...)
 	    return;
 
 	/* Preserve current cursor position */
-	getyx (stdscr, row, col);
+	tty_getyx (&row, &col);
 
-	move (0, 0);
-	attrset (NORMAL_COLOR);
+	tty_gotoyx (0, 0);
+	tty_setcolor (NORMAL_COLOR);
 	addstr (str_fit_to_term (str, COLS - 1, J_LEFT));
 
 	/* Restore cursor position */
-	move(row, col);
+	tty_gotoyx (row, col);
 	mc_refresh ();
 	return;
     }
@@ -876,8 +876,8 @@ void rotate_dash (void)
 
     if (pos >= sizeof (rotating_dash)-1)
 	pos = 0;
-    move (0, COLS-1);
-    attrset (NORMAL_COLOR);
+    tty_gotoyx (0, COLS - 1);
+    tty_setcolor (NORMAL_COLOR);
     addch (rotating_dash [pos]);
     mc_refresh ();
     pos++;

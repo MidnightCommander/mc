@@ -163,7 +163,7 @@ static void
 hotlist_refresh (Dlg_head * dlg)
 {
     common_dialog_repaint (dlg);
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     draw_box (dlg, 2, 5, dlg->lines - (hotlist_state.moving ? 6 : 10),
 	      dlg->cols - (UX * 2));
     if (!hotlist_state.moving)
@@ -484,7 +484,7 @@ hotlist_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	/* fall through */
 
     case DLG_INIT:
-	attrset (MENU_ENTRY_COLOR);
+	tty_setcolor (MENU_ENTRY_COLOR);
 	update_path_name ();
 	return MSG_HANDLED;
 
@@ -1140,7 +1140,7 @@ char *hotlist_cmd (int vfs_or_hotlist)
     init_hotlist (vfs_or_hotlist);
 
     /* display file info */
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
 
     hotlist_state.running = 1;
     run_dlg (hotlist_dlg);

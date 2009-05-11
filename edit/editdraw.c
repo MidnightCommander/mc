@@ -45,7 +45,7 @@
 
 #define MAX_LINE_LEN 1024
 
-#include "../src/tty/tty.h"		/* attrset() */
+#include "../src/tty/tty.h"		/* tty_setcolor() */
 #include "../src/tty/color.h"		/* EDITOR_NORMAL_COLOR */
 #include "../src/tty/key.h"		/* is_idle() */
 
@@ -197,10 +197,10 @@ edit_status (WEdit *edit)
     }
 
     widget_move (edit, 0, 0);
-    attrset (SELECTED_COLOR);
+    tty_setcolor (SELECTED_COLOR);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
-    attrset (EDITOR_NORMAL_COLOR);
+    tty_setcolor (EDITOR_NORMAL_COLOR);
 
     g_free (status);
 }
@@ -253,8 +253,6 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
     edit_update_curs_row (edit);
 }
 
-#define set_color(font)    attrset (font)
-
 #define edit_move(x,y) widget_move(edit, y, x);
 
 struct line_s {
@@ -273,7 +271,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     unsigned char str[6 + 1];
-    set_color (EDITOR_NORMAL_COLOR);
+    tty_setcolor (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
@@ -315,7 +313,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 	if (style & MOD_WHITESPACE) {
 	    if (style & MOD_MARKED) {
 		textchar = ' ';
-		set_color (EDITOR_MARKED_COLOR);
+		tty_setcolor (EDITOR_MARKED_COLOR);
 	    } else {
 #if 0
 		if (color != EDITOR_NORMAL_COLOR) {
@@ -323,13 +321,13 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 		    tty_lowlevel_setcolor (color);
 		} else
 #endif
-		    set_color (EDITOR_WHITESPACE_COLOR);
+		    tty_setcolor (EDITOR_WHITESPACE_COLOR);
 	    }
 	} else {
 	    if (style & MOD_BOLD) {
-		set_color (EDITOR_BOLD_COLOR);
+		tty_setcolor (EDITOR_BOLD_COLOR);
 	    } else if (style & MOD_MARKED) {
-		set_color (EDITOR_MARKED_COLOR);
+		tty_setcolor (EDITOR_MARKED_COLOR);
 	    } else {
 		tty_lowlevel_setcolor (color);
 	    }

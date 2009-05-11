@@ -56,7 +56,7 @@ static struct my_statfs myfs_stats;
 static void info_box (Dlg_head *h, struct WInfo *info)
 {
     standend ();
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
     draw_double_box (h, info->widget.y,  info->widget.x,
 	             info->widget.lines, info->widget.cols);
@@ -74,10 +74,10 @@ info_show_info (struct WInfo *info)
 	return;
 
     info_box (info->widget.parent, info);
-    attrset (MARKED_COLOR);
+    tty_setcolor (MARKED_COLOR);
     widget_move (&info->widget, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
     hline (ACS_HLINE|NORMAL_COLOR, info->widget.cols-2);
     if (get_current_type () != view_listing)

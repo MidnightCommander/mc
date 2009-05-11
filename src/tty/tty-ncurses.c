@@ -41,6 +41,12 @@
 /*** public functions **************************************************/
 
 void
+tty_setcolor (int color)
+{
+    attrset (color);
+}
+
+void
 tty_lowlevel_setcolor (int color)
 {
     attrset (MY_COLOR_PAIR (color));

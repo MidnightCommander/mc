@@ -363,15 +363,17 @@ vline (int character, int len)
 	last_y = SLsmg_get_row ();
 
 	while (len--) {
-	    move (last_y + pos++, last_x);
+	    SLsmg_gotorc (last_y + pos, last_x);
 	    addch (' ');
+	    pos++;
 	}
 
 	SLsmg_gotorc (last_x, last_y);
     }
 }
 
-int has_colors (void)
+int
+has_colors (void)
 {
     const char *terminal = getenv ("TERM");
     char *cts = color_terminal_string;
@@ -426,7 +428,7 @@ int has_colors (void)
 }
 
 void
-attrset (int color)
+tty_setcolor (int color)
 {
     if (!SLtt_Use_Ansi_Colors)
 	SLsmg_set_color (color);
@@ -475,8 +477,8 @@ tty_gotoyx (int y, int x)
 void
 tty_getyx (int *py, int *px)
 {
-    *px = SLsmg_get_column ();
     *py = SLsmg_get_row ();
+    *px = SLsmg_get_column ();
 }
 
 void

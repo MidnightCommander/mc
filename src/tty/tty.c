@@ -108,12 +108,6 @@ tty_got_interrupt(void)
 }
 
 extern void
-tty_setcolor(int c)
-{
-    attrset(c);
-}
-
-extern void
 tty_print_one_hline(void)
 {
     if (slow_terminal)

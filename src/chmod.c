@@ -113,7 +113,7 @@ static struct {
 
 static void chmod_toggle_select (Dlg_head *h, int Id)
 {
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected ^= 1;
 
     dlg_move (h, PY + PERMISSIONS - Id, PX + 1);
@@ -125,7 +125,7 @@ static void chmod_refresh (Dlg_head *h)
 {
     common_dialog_repaint (h);
 
-    attrset (COLOR_NORMAL);
+    tty_setcolor (COLOR_NORMAL);
     
     draw_box (h, PY, PX, PERMISSIONS + 2, 33);
     draw_box (h, FY, FX, 10, 25);
@@ -148,7 +148,7 @@ static void chmod_refresh (Dlg_head *h)
     dlg_move (h, TY + 3, TX);
     addstr (_("and T or INS to mark"));
 
-    attrset (COLOR_HOT_NORMAL);
+    tty_setcolor (COLOR_HOT_NORMAL);
 
     dlg_move (h, PY, PX + 1);
     addstr (_(" Permission "));

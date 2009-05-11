@@ -179,14 +179,14 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 
     if (tree->searching){
 	/* Show search string */
-	attrset (TREE_NORMALC (h));
-	attrset (DLG_FOCUSC (h));
+	tty_setcolor (TREE_NORMALC (h));
+	tty_setcolor (DLG_FOCUSC (h));
 	addch (PATH_SEP);
 
 	addstr (str_fit_to_term (tree->search_buffer, 
 		tree_cols - 2, J_LEFT_FIT));
 	addch (' ');
-	attrset (DLG_FOCUSC (h));
+	tty_setcolor (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
 	addstr (str_fit_to_term (tree->selected_ptr->name, 
@@ -207,7 +207,7 @@ static void show_tree (WTree *tree)
     tree_lines = tlines (tree);
     tree_cols  = tree->widget.cols;
 
-    attrset (TREE_NORMALC (h));
+    tty_setcolor (TREE_NORMALC (h));
     widget_move ((Widget*)tree, y, x);
     if (tree->is_panel){
 	tree_cols  -= 2;
@@ -270,9 +270,9 @@ static void show_tree (WTree *tree)
 	    /* Top level directory */
 	    if (tree->active && current == tree->selected_ptr) {
 		if (!use_colors && !tree->is_panel)
-			attrset (MARKED_COLOR);
+			tty_setcolor (MARKED_COLOR);
 		else
-			attrset (SELECTED_COLOR);
+			tty_setcolor (SELECTED_COLOR);
 	    }
 
 	    /* Show full name */
@@ -303,9 +303,9 @@ static void show_tree (WTree *tree)
 	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */
 		if (!use_colors && !tree->is_panel)
-		    attrset (MARKED_COLOR);
+		    tty_setcolor (MARKED_COLOR);
 		else
-		    attrset (SELECTED_COLOR);
+		    tty_setcolor (SELECTED_COLOR);
 	    }
 
 	    /* Show sub-name */
@@ -316,7 +316,7 @@ static void show_tree (WTree *tree)
 	addch (' ');
 
 	/* Return to normal color */
-	attrset (TREE_NORMALC (h));
+	tty_setcolor (TREE_NORMALC (h));
 
 	/* Calculate the next value for current */
 	current = current->next;
@@ -964,7 +964,7 @@ tree_key (WTree *tree, int key)
 static void
 tree_frame (Dlg_head *h, WTree *tree)
 {
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget*) tree);
     if (tree->is_panel)
 	draw_double_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,

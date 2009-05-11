@@ -2256,7 +2256,7 @@ view_display_ruler (WView *view)
 	    }
 	}
     }
-    attrset (NORMAL_COLOR);
+    tty_setcolor (NORMAL_COLOR);
 }
 
 static void
