@@ -2641,7 +2641,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 
     case CK_Tab:
         /* if text marked shift block */
-        if (edit->mark1 != edit->mark2) {
+        if ( edit->mark1 != edit->mark2 && !option_persistent_selections ) {
             edit_move_block_to_right (edit);
         } else {
             edit_tab_cmd (edit);
@@ -2801,7 +2801,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Complete_Word:
         /* if text marked shift block */
-        if (edit->mark1 != edit->mark2) {
+        if ( edit->mark1 != edit->mark2 && !option_persistent_selections ) {
             edit_move_block_to_left (edit);
         } else {
             edit_complete_word_cmd (edit);
