@@ -1911,7 +1911,8 @@ print_color_usage (void)
 	    "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 	    "                 errdhotfocus\n"
 	    "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-	    "   Editor:       editnormal, editbold, editmarked\n"), stdout);
+	    "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+	    "                 editlinestate\n"), stdout);
     fputs (_
 	   (
 	    "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"

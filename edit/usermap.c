@@ -221,6 +221,7 @@ static const name_map_t command_names[] = {
     {"Execute-Macro", CK_Execute_Macro},
     {"Begin-or-End-Macro", CK_Begin_End_Macro},
     {"Ext-mode", CK_Ext_Mode},
+    {"Toggle-Line-State", CK_Toggle_Line_State},
 #if 0
     {"Focus-Next", CK_Focus_Next},
     {"Focus-Prev", CK_Focus_Prev},

@@ -248,18 +248,29 @@ struct line_s {
 
 static void
 print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
-		 long end_col, struct line_s line[])
+		 long end_col, struct line_s line[], char *status)
 {
     struct line_s *p;
 
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
-    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
+    int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
     int cols_to_skip = abs (x);
     unsigned char str[6 + 1];
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
+
+    if ( option_line_state ) {
+        for (int i = 0; i < LINE_STATE_WIDTH; i++) {
+            if ( status[i] == '\0' ) {
+                status[i] = ' ';
+            }
+        }
+        set_color (LINE_STATE_COLOR);
+        edit_move (x1 + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
+        addstr (status);
+    }
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
@@ -339,6 +350,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     int color;
     int i;
     int utf8lag = 0;
+    unsigned int cur_line = 0;
+    char line_stat[LINE_STATE_WIDTH + 1];
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
@@ -347,6 +360,16 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 						q)) + edit->start_col;
     c1 = min (edit->column1, edit->column2);
     c2 = max (edit->column1, edit->column2);
+
+    if ( option_line_state ) {
+        cur_line = edit->start_line + row;
+        if ( cur_line <= edit->total_lines ) {
+            g_snprintf (line_stat, LINE_STATE_WIDTH + 1, "%7i ", cur_line + 1);
+        } else {
+            memset(line_stat, ' ', LINE_STATE_WIDTH);
+            line_stat[LINE_STATE_WIDTH] = '\0';
+        }
+    }
 
     if (col + 16 > -edit->start_col) {
 	eval_marks (edit, &m1, &m2);
@@ -527,7 +550,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
     }
     p->ch = 0;
 
-    print_to_widget (edit, row, start_col, start_col_real, end_col, line);
+    print_to_widget (edit, row, start_col, start_col_real, end_col, line, line_stat);
 }
 
 #define key_pending(x) (!is_idle())

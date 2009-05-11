@@ -105,9 +105,10 @@ static struct colorpair color_map [] = {
     { "editbold=",       0, 0 },	/* search->found */
     { "editmarked=",     0, 0 },	/* marked/selected */
     { "editwhitespace=", 0, 0 },	/* whitespace */
+    { "editlinestate=", 0, 0 },	/* line number bar*/
 
-/* error dialog colors start at 38 */
-    { "errdhotnormal=",  0, 0 }, /* Error dialog normal/hot */ /* 38 */
+/* error dialog colors start at 39 */
+    { "errdhotnormal=",  0, 0 }, /* Error dialog normal/hot */ /* 39 */
     { "errdhotfocus=",   0, 0 }, /* Error dialog focused/hot */
 };
 
@@ -259,6 +260,7 @@ static void configure_colors (void)
 	"editbold=yellow,blue:"
 	"editmarked=black,cyan:"
 	"editwhitespace=brightblue,blue:"
+	"editlinestate=white,cyan:"
 	"errdhotnormal=yellow,red:"
 	"errdhotfocus=yellow,lightgray", NULL);
 
