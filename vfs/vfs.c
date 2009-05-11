@@ -1220,9 +1220,9 @@ vfs_init (void)
 #ifdef WITH_SMBFS
     init_smbfs ();
 #endif /* WITH_SMBFS */
-#ifdef WITH_MCFS
+#ifdef ENABLE_VFS_MCFS
     init_mcfs ();
-#endif /* WITH_MCFS */
+#endif /* ENABLE_VFS_MCFS */
 #endif /* USE_NETCODE */
 
     vfs_setup_wd ();

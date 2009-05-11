@@ -832,7 +832,7 @@ static menu_entry LeftMenu[] = {
     {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
-#ifdef WITH_MCFS
+#ifdef ENABLE_VFS_MCFS
     {' ', N_("&Network link..."), NULL_HOTKEY, netlink_cmd},
 #endif
     {' ', N_("FT&P link..."), NULL_HOTKEY, ftplink_cmd},
@@ -858,7 +858,7 @@ static menu_entry RightMenu[] = {
     {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
-#ifdef WITH_MCFS
+#ifdef ENABLE_VFS_MCFS
     {' ', N_("&Network link..."), NULL_HOTKEY, netlink_cmd},
 #endif
     {' ', N_("FT&P link..."), NULL_HOTKEY, ftplink_cmd},
