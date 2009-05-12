@@ -25,7 +25,7 @@
 
 #include <config.h>
 
-#ifdef	WITH_MCFS
+#ifdef	ENABLE_VFS_MCFS
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -218,4 +218,4 @@ void mcfsutil__unused(void)
     CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
 */
 }
-#endif				/* WITH_MCFS */
+#endif				/* ENABLE_VFS_MCFS */

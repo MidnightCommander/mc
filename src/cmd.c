@@ -1153,14 +1153,14 @@ nice_cd (const char *text, const char *xtext, const char *help,
 
 static const char *machine_str = N_(" Enter machine name (F1 for details): ");
 
-#ifdef WITH_MCFS
+#ifdef ENABLE_VFS_MCFS
 void netlink_cmd (void)
 {
     nice_cd (_(" Link to a remote machine "), _(machine_str),
 	     "[Network File System]", ":netlink_cmd: Link to a remote ",
 	     "/#mc:", 1);
 }
-#endif /* WITH_MCFS */
+#endif /* ENABLE_VFS_MCFS */
 
 void ftplink_cmd (void)
 {

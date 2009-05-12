@@ -33,7 +33,7 @@
 
 #include <config.h>
 
-#ifdef WITH_MCFS
+#ifdef ENABLE_VFS_MCFS
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
@@ -1261,4 +1261,4 @@ void mcfs__unused(void)
     CFLAGS="-ansi -pedantic -Wall -Wextra -Werror"
 */
 }
-#endif				/* WITH_MCFS */
+#endif				/* ENABLE_VFS_MCFS */

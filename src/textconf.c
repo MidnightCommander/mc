@@ -40,7 +40,7 @@ static const char *const vfs_supported[] = {
 #ifdef USE_NETCODE
     "ftpfs",
     "fish",
-#   ifdef WITH_MCFS
+#   ifdef ENABLE_VFS_MCFS
     "mcfs",
 #   endif
 #   ifdef WITH_SMBFS
