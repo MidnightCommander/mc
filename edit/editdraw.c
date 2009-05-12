@@ -398,38 +398,41 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    col += i;
 		    if (use_colors && visible_tabs) {
-			c = 0;
+			if (p->style & MOD_MARKED)
+			    c = (p->style);
+			else
+			    c = p->style | MOD_WHITESPACE;
 			if (i > 2) {
-			    p->ch |= '<';
-			    p->style = MOD_WHITESPACE;
+			    p->ch = '<';
+			    p->style = c;
 			    p++;
 			    while (--i > 1) {
-				p->ch = c | '-';
-				p->style = MOD_WHITESPACE;
+				p->ch = '-';
+				p->style = c;
 				p++;
 			    }
-			    p->ch = c | '>';
-			    p->style = MOD_WHITESPACE;
+			    p->ch = '>';
+			    p->style = c;
 			    p++;
 			} else if (i > 1) {
-			    p->ch |= '<';
-			    p->style = MOD_WHITESPACE;
+			    p->ch = '<';
+			    p->style = c;
 			    p++;
-			    p->ch = c | '>';
-			    p->style = MOD_WHITESPACE;
+			    p->ch = '>';
+			    p->style = c;
 			    p++;
 			} else {
-			    p->ch |= '>';
-			    p->style = MOD_WHITESPACE;
+			    p->ch = '>';
+			    p->style = c;
 			    p++;
 			}
 		    } else if (use_colors && visible_tws && q >= tws) {
-			p->ch |= '.';
-			p->style = MOD_WHITESPACE;
+			p->ch = '.';
+			p->style |= MOD_WHITESPACE;
 			c = p->style & ~MOD_CURSOR;
 			p++;
 			while (--i) {
-			    p->ch = ' '; 
+			    p->ch = ' ';
 			    p->style = c;
 			    p++;
 			}
@@ -438,7 +441,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			c = p->style & ~MOD_CURSOR;
 			p++;
 			while (--i) {
-			    p->ch = ' '; 
+			    p->ch = ' ';
 			    p->style = c;
 			    p++;
 			}
@@ -446,8 +449,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    break;
 		case ' ':
 		    if (use_colors && visible_tws && q >= tws) {
-			p->ch |= '.';
-			p->style = MOD_WHITESPACE;
+			p->ch = '.';
+			p->style |= MOD_WHITESPACE;
 			p++;
 			col++;
 			break;
