@@ -183,7 +183,8 @@ enum compression_type {
 	COMPRESSION_GZIP,
 	COMPRESSION_BZIP,
 	COMPRESSION_BZIP2,
-	COMPRESSION_LZMA
+	COMPRESSION_LZMA,
+	COMPRESSION_XZ
 };
 
 /* Looks for ``magic'' bytes at the start of the VFS file to guess the

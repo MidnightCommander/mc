@@ -13,6 +13,7 @@ use File::Temp 'tempfile';
 
 # standard binaries
 my $lzma = 'lzma';
+my $xz   = 'xz';
 my $bzip = 'bzip2';
 my $gzip = 'gzip';
 my $fileutil = 'file';
@@ -73,6 +74,8 @@ sub myin
     $_=`$fileutil $qfname`;
     if (/lzma/) {
 	return "$lzma -dc $qfname";
+    } elsif (/xz/) {
+	return "$xz -dc $qfname";
     } elsif (/bzip/) {
 	return "$bzip -dc $qfname";
     } elsif (/gzip/) {
@@ -91,6 +94,8 @@ sub myout
     $_=`$fileutil $qfname`;
     if (/lzma/) {
 	return "$lzma -c $sep $qfname";
+    } elsif (/xz/) {
+	return "$xz -c $sep $qfname";
     } elsif (/bzip/) {
 	return "$bzip -c $sep $qfname";
     } elsif (/gzip/) {
