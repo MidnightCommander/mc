@@ -607,12 +607,14 @@ doc/man/it/mc.1 doc/man/it/Makefile
 doc/man/pl/mc.1 doc/man/pl/Makefile
 doc/man/ru/mc.1 doc/man/ru/Makefile
 doc/man/sr/mc.1 doc/man/sr/mcserv.8 doc/man/sr/Makefile
-doc/es/Makefile
-doc/hu/Makefile
-doc/it/Makefile
-doc/pl/Makefile
-doc/ru/Makefile
-doc/sr/Makefile
+
+doc/hlp/Makefile
+doc/hlp/es/Makefile
+doc/hlp/hu/Makefile
+doc/hlp/it/Makefile
+doc/hlp/pl/Makefile
+doc/hlp/ru/Makefile
+doc/hlp/sr/Makefile
 
 intl/Makefile
 po/Makefile.in
