@@ -374,7 +374,7 @@ static menu_entry SearReplMenu[] =
 static menu_entry CmdMenu[] =
 {
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
-    {' ', N_("&Toggle line state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
+    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
@@ -399,7 +399,7 @@ static menu_entry CmdMenu[] =
 static menu_entry CmdMenuEmacs[] =
 {
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
-    {' ', N_("&Toggle line state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
+    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
