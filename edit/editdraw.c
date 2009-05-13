@@ -340,7 +340,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
             } else {
                 str[res] = '\0';
             }
-            addstr ((char *)str);
+            tty_print_string ((char *) str);
         } else {
             addch(textchar);
         }

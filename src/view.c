@@ -2130,7 +2130,6 @@ view_display_status (WView *view)
     const char *file_label, *file_name;
     screen_dimen file_label_width;
     int i;
-    char *tmp;
 
     if (height < 1)
 	return;
@@ -2146,13 +2145,11 @@ view_display_status (WView *view)
 	: "";
 
     if (width < file_label_width + 6)
-	addstr (str_fit_to_term (file_name, width, J_LEFT_FIT));
+	tty_print_string (str_fit_to_term (file_name, width, J_LEFT_FIT));
     else {
 	i = (width > 22 ? 22 : width) - file_label_width;
-        
-        tmp = g_strdup_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
-        addstr (tmp);
-        g_free (tmp);
+        tty_printf (file_label, str_fit_to_term (file_name, i, J_LEFT_FIT));
+
 	if (width > 46) {
 	    widget_move (view, top, left + 24);
 	    /* FIXME: the format strings need to be changed when offset_type changes */
@@ -2282,7 +2279,7 @@ view_display_hex (WView *view)
     struct hexedit_change_node *curr = view->change_list;
     size_t i;
 
-    char hex_buff[10];	/* A temporary buffer for sprintf and mvwaddstr */
+    char hex_buff[10];	/* A temporary buffer for sprintf */
     int bytes;		/* Number of bytes already printed on the line */
 
     view_display_clean (view);

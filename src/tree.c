@@ -183,13 +183,13 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 	tty_setcolor (DLG_FOCUSC (h));
 	addch (PATH_SEP);
 
-	addstr (str_fit_to_term (tree->search_buffer, 
+	tty_print_string (str_fit_to_term (tree->search_buffer, 
 		tree_cols - 2, J_LEFT_FIT));
 	addch (' ');
 	tty_setcolor (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
-	addstr (str_fit_to_term (tree->selected_ptr->name, 
+	tty_print_string (str_fit_to_term (tree->selected_ptr->name, 
 		tree_cols, J_LEFT_FIT));
     }
 }
@@ -276,7 +276,7 @@ static void show_tree (WTree *tree)
 	    }
 
 	    /* Show full name */
-	    addstr (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
+	    tty_print_string (str_fit_to_term (current->name, tree_cols - 6, J_LEFT_FIT));
 	} else{
 	    /* Sub level directory */
 
@@ -310,7 +310,7 @@ static void show_tree (WTree *tree)
 
 	    /* Show sub-name */
 	    addch (' ');
-	    addstr (str_fit_to_term (current->subname, 
+	    tty_print_string (str_fit_to_term (current->subname, 
 		    tree_cols - 2 - 4 - 3 * j, J_LEFT_FIT));
 	}
 	addch (' ');

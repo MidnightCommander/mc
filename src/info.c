@@ -113,7 +113,7 @@ info_show_info (struct WInfo *info)
 		    ? 100 * myfs_stats.nfree / myfs_stats.nodes : 0,
 		    myfs_stats.nodes);
 	else
-	    addstr (_("No node information"));
+	    tty_print_string (_("No node information"));
 
     case 15:
 	widget_move (&info->widget, 15, 3);
@@ -125,7 +125,7 @@ info_show_info (struct WInfo *info)
 		    (int)(100 * (double)myfs_stats.avail / myfs_stats.total) : 0,
 		    buffer2);
 	} else
-	    addstr (_("No space information"));
+	    tty_print_string (_("No space information"));
 
     case 14:
 	widget_move (&info->widget, 14, 3);
@@ -211,7 +211,7 @@ info_show_info (struct WInfo *info)
 				    info->widget.cols - i18n_adjust));
             tty_print_string (buff->str);
 	} else
-	    addstr (_("File:       None"));
+	    tty_print_string (_("File:       None"));
 
     case 2:
     case 1:

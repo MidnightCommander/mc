@@ -108,23 +108,23 @@ chown_refresh (Dlg_head *h)
     draw_box (h, TY, TX, 12, 19);
 
     dlg_move (h, TY + 1, TX + 1);
-    addstr (_(" Name "));
+    tty_print_string (_(" Name "));
     dlg_move (h, TY + 3, TX + 1);
-    addstr (_(" Owner name "));
+    tty_print_string (_(" Owner name "));
     dlg_move (h, TY + 5, TX + 1);
-    addstr (_(" Group name "));
+    tty_print_string (_(" Group name "));
     dlg_move (h, TY + 7, TX + 1);
-    addstr (_(" Size "));
+    tty_print_string (_(" Size "));
     dlg_move (h, TY + 9, TX + 1);
-    addstr (_(" Permission "));
+    tty_print_string (_(" Permission "));
     
     tty_setcolor (COLOR_HOT_NORMAL);
     dlg_move (h, UY, UX + 1);
-    addstr (_(" User name "));
+    tty_print_string (_(" User name "));
     dlg_move (h, GY, GX + 1);
-    addstr (_(" Group name "));
+    tty_print_string (_(" Group name "));
     dlg_move (h, TY, TX + 1);
-    addstr (_(" File "));
+    tty_print_string (_(" File "));
 }
 
 static char *

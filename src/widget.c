@@ -230,13 +230,13 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
 	switch (b->flags) {
 	case DEFPUSH_BUTTON:
-                addstr ("[< ");
+                tty_print_string ("[< ");
 	    break;
 	case NORMAL_BUTTON:
-                addstr ("[ ");
+                tty_print_string ("[ ");
 	    break;
 	case NARROW_BUTTON:
-                addstr ("[");
+                tty_print_string ("[");
 	    break;
 	case HIDDEN_BUTTON:
 	default:
@@ -247,13 +247,13 @@ button_callback (Widget *w, widget_msg_t msg, int parm)
 
         switch (b->flags) {
             case DEFPUSH_BUTTON:
-                addstr (" >]");
+                tty_print_string (" >]");
                 break;
             case NORMAL_BUTTON:
-                addstr (" ]");
+                tty_print_string (" ]");
                 break;
             case NARROW_BUTTON:
-                addstr ("]");
+                tty_print_string ("]");
                 break;
 	}
 	return MSG_HANDLED;
@@ -421,7 +421,7 @@ radio_callback (Widget *w, widget_msg_t msg, int parm)
 	    const gboolean focused = (i == r->pos && msg == WIDGET_FOCUS);
 	    widget_selectcolor (w, focused, FALSE);
 	    widget_move (&r->widget, i, 0);
-	    addstr ((r->sel == i) ? "(*) " : "( ) ");
+	    tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
 	    draw_hotkey (w, r->texts[i], focused);
 	}
 	return MSG_HANDLED;
@@ -527,7 +527,7 @@ check_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_DRAW:
 	widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
 	widget_move (&c->widget, 0, 0);
-	addstr ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+	tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
 	draw_hotkey (w, c->text, msg == WIDGET_FOCUS);
 	return MSG_HANDLED;
 
@@ -613,7 +613,7 @@ label_callback (Widget *w, widget_msg_t msg, int parm)
 		}
 		
 		widget_move (&l->widget, y, 0);
-                addstr (str_fit_to_term (p, l->widget.cols, J_LEFT));
+                tty_print_string (str_fit_to_term (p, l->widget.cols, J_LEFT));
 
                 if (q == NULL)
 		    break;
@@ -795,7 +795,7 @@ static void draw_history_button (WInput * in)
 	Dlg_head *h;
 	h = in->widget.parent;
 	tty_setcolor (NORMAL_COLOR);
-	addstr ("[ ]");
+	tty_print_string ("[ ]");
 	/* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
 	addch (c);
@@ -851,7 +851,7 @@ update_input (WInput *in, int clear_first)
     widget_move (&in->widget, 0, 0);
     
     if (!in->is_password) {
-        addstr (str_term_substring (in->buffer, in->term_first_shown, 
+        tty_print_string (str_term_substring (in->buffer, in->term_first_shown, 
                 in->field_width - has_history));
     } else {
         cp = in->buffer;
@@ -1910,7 +1910,7 @@ listbox_draw (WListbox *l, int focused)
 	    text = e->text;
 	    e = e->next;
 	}
-            addstr (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term (text, l->width - 2, J_LEFT_FIT));
     }
     l->cursor_y = sel_line;
     if (!l->scrollbar)
@@ -2478,7 +2478,7 @@ buttonbar_callback (Widget *w, widget_msg_t msg, int parm)
             tty_printf ("%2d", i + 1);
 	    tty_setcolor (SELECTED_COLOR);
             text = (bb->labels[i].text != NULL) ? bb->labels[i].text : "";
-            addstr (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
+            tty_print_string (str_fit_to_term (text, bb->btn_width - 2, J_CENTER_LEFT));
 	    tty_setcolor (DEFAULT_COLOR);
 	}
 	tty_setcolor (SELECTED_COLOR);

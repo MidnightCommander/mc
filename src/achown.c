@@ -347,23 +347,23 @@ static void chown_refresh (void)
     tty_setcolor (COLOR_NORMAL);
 
     dlg_move (ch_dlg, BY - 1, 8);
-    addstr (_("owner"));
+    tty_print_string (_("owner"));
     dlg_move (ch_dlg, BY - 1, 16);
-    addstr (_("group"));
+    tty_print_string (_("group"));
     dlg_move (ch_dlg, BY - 1, 24);
-    addstr (_("other"));
+    tty_print_string (_("other"));
     
     dlg_move (ch_dlg, BY - 1, 35);
-    addstr (_("owner"));
+    tty_print_string (_("owner"));
     dlg_move (ch_dlg, BY - 1, 53);
-    addstr (_("group"));
+    tty_print_string (_("group"));
     
     dlg_move (ch_dlg, 3, 4);
-    addstr (_("On"));
+    tty_print_string (_("On"));
     dlg_move (ch_dlg, BY + 1, 4);
-    addstr (_("Flag"));
+    tty_print_string (_("Flag"));
     dlg_move (ch_dlg, BY + 2, 4);
-    addstr (_("Mode"));
+    tty_print_string (_("Mode"));
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
@@ -382,7 +382,7 @@ static void chown_info_update (void)
     
     /* name && mode */
     dlg_move (ch_dlg, 3, 8);
-    addstr (str_fit_to_term (fname, 45, J_LEFT_FIT));
+    tty_print_string (str_fit_to_term (fname, 45, J_LEFT_FIT));
     dlg_move (ch_dlg, BY + 2, 9);
     tty_printf ("%12o", get_mode ());
     

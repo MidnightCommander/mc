@@ -400,7 +400,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		break;
 	    case CHAR_VERSION:
 		dlg_move (h, line+2, col+2);
-		addstr (VERSION);
+		tty_print_string (VERSION);
 		col += str_term_width1 (VERSION);
 		break;
 	    case CHAR_FONT_BOLD:
@@ -437,7 +437,7 @@ static void help_show (Dlg_head *h, const char *paint_start)
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif
 		} else {
-		    addstr (buff);
+		    tty_print_string (buff);
                 }
                 col+= w;
 		break;

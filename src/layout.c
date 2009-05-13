@@ -853,7 +853,7 @@ void print_vfs_message (const char *msg, ...)
 
 	tty_gotoyx (0, 0);
 	tty_setcolor (NORMAL_COLOR);
-	addstr (str_fit_to_term (str, COLS - 1, J_LEFT));
+	tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
 
 	/* Restore cursor position */
 	tty_gotoyx (row, col);

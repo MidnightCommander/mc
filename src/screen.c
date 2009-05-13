@@ -559,7 +559,7 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                 add_permission_string (preperad_text, format->field_len, fe,
                                        attr, color, perm - 1);
             else
-                addstr (preperad_text);
+                tty_print_string (preperad_text);
 
             length+= len;
 	} else {
@@ -632,8 +632,8 @@ display_mini_info (WPanel *panel)
 
     if (panel->searching){
 	tty_setcolor (INPUT_COLOR);
-        addstr ("/");
-        addstr (str_fit_to_term (panel->search_buffer, 
+        tty_print_string ("/");
+        tty_print_string (str_fit_to_term (panel->search_buffer, 
                 panel->widget.cols - 3, J_LEFT));
 	tty_setcolor (NORMAL_COLOR);
 	return;
@@ -651,18 +651,18 @@ display_mini_info (WPanel *panel)
 	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
-            addstr ("-> ");
-            addstr (str_fit_to_term (link_target, panel->widget.cols - 5, 
+            tty_print_string ("-> ");
+            tty_print_string (str_fit_to_term (link_target, panel->widget.cols - 5, 
                     J_LEFT_FIT));
 	} else
-            addstr (str_fit_to_term (_("<readlink failed>"), 
+            tty_print_string (str_fit_to_term (_("<readlink failed>"), 
                     panel->widget.cols - 2, J_LEFT));
     } else if (strcmp (panel->dir.list [panel->selected].fname, "..") == 0) {
 	/* FIXME:
 	 * while loading directory (do_load_dir() and do_reload_dir(),
 	 * the actual stat info about ".." directory isn't got;
 	 * so just don't display incorrect info about ".." directory */
-	addstr (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
+	tty_print_string (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
     } else
 	/* Default behavior */
 	repaint_file (panel, panel->selected, 0, STATUS, 1);
@@ -790,7 +790,7 @@ show_free_space (WPanel *panel)
 	widget_move (&panel->widget, panel->widget.lines - 1,
 				     panel->widget.cols - 2 - (int) strlen (tmp));
 	tty_setcolor (NORMAL_COLOR);
-	addstr (tmp);
+	tty_print_string (tmp);
     }
 }
 
@@ -819,15 +819,15 @@ show_dir (WPanel *panel)
 
     addch (' ');
     len = min (max (panel->widget.cols - 9, 0), panel->widget.cols); 
-    addstr (str_term_trim (strip_home_and_password (panel->cwd), len));
+    tty_print_string (str_term_trim (strip_home_and_password (panel->cwd), len));
     addch (' ');
 
     widget_move (&panel->widget, 0, 1);
-    addstr ("<");
+    tty_print_string ("<");
     widget_move (&panel->widget, 0, panel->widget.cols - 2);
-    addstr (">");
+    tty_print_string (">");
     widget_move (&panel->widget, 0, panel->widget.cols - 3);
-    addstr ("v");
+    tty_print_string ("v");
 
     if (!show_mini_info) {
 	if (panel->marked == 0) {
@@ -839,7 +839,7 @@ show_dir (WPanel *panel)
 			    size_trunc_sep (panel->dir.list [panel->selected].st.st_size));
 		tty_setcolor (NORMAL_COLOR);
 		widget_move (&panel->widget, panel->widget.lines - 1, 2);
-		addstr (buffer);
+		tty_print_string (buffer);
 	    }
 	} else {
 	    /* Show total size of marked files
@@ -1244,7 +1244,7 @@ paint_frame (WPanel *panel)
 		    header_len = format->field_len;
 
                 tty_setcolor (MARKED_COLOR);
-                addstr (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
+                tty_print_string (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
                 g_free(txt);
                 width -= format->field_len;
 	    } else {

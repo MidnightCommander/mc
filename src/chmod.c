@@ -131,29 +131,29 @@ static void chmod_refresh (Dlg_head *h)
     draw_box (h, FY, FX, 10, 25);
 
     dlg_move (h, FY + 1, FX + 2);
-    addstr (_("Name"));
+    tty_print_string (_("Name"));
     dlg_move (h, FY + 3, FX + 2);
-    addstr (_("Permissions (Octal)"));
+    tty_print_string (_("Permissions (Octal)"));
     dlg_move (h, FY + 5, FX + 2);
-    addstr (_("Owner name"));
+    tty_print_string (_("Owner name"));
     dlg_move (h, FY + 7, FX + 2);
-    addstr (_("Group name"));
+    tty_print_string (_("Group name"));
     
     dlg_move (h, TY, TX);
-    addstr (_("Use SPACE to change"));
+    tty_print_string (_("Use SPACE to change"));
     dlg_move (h, TY + 1, TX);
-    addstr (_("an option, ARROW KEYS"));
+    tty_print_string (_("an option, ARROW KEYS"));
     dlg_move (h, TY + 2, TX);
-    addstr (_("to move between options"));
+    tty_print_string (_("to move between options"));
     dlg_move (h, TY + 3, TX);
-    addstr (_("and T or INS to mark"));
+    tty_print_string (_("and T or INS to mark"));
 
     tty_setcolor (COLOR_HOT_NORMAL);
 
     dlg_move (h, PY, PX + 1);
-    addstr (_(" Permission "));
+    tty_print_string (_(" Permission "));
     dlg_move (h, FY, FX + 1);
-    addstr (_(" File "));
+    tty_print_string (_(" File "));
 }
 
 static cb_ret_t
