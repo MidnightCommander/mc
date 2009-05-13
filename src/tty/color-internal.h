@@ -8,11 +8,16 @@
 
 #include <sys/types.h>			/* size_t */
 
+#include "../../src/global.h"
+
 #ifdef HAVE_SLANG
 #   include "../../src/tty/tty-slang.h"
 #else
 #   include "../../src/tty/tty-ncurses.h"
 #endif			/* HAVE_SLANG */
+
+extern gboolean disable_colors;
+extern gboolean force_colors;	/* for S-Lang only */
 
 struct color_table_s {
     const char *name;

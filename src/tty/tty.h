@@ -26,6 +26,7 @@ extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
 extern gboolean tty_got_interrupt(void);
 
+
 /* {{{ Output }}} */
 
 /*
@@ -37,18 +38,23 @@ extern gboolean tty_got_interrupt(void);
 extern void tty_gotoyx(int y, int x);
 extern void tty_getyx(int *py, int *px);
 
+extern void tty_disable_colors (gboolean disable, gboolean force);
 extern void tty_setcolor(int color);
 extern void tty_lowlevel_setcolor(int color);
 
 extern void tty_print_char(int c);
 extern void tty_print_alt_char(int c);
 extern void tty_print_string(const char *s);
+extern void tty_printf(const char *s, ...);
+
+extern void tty_set_ugly_line_drawing (gboolean do_ugly);
+extern gboolean tty_is_ugly_line_drawing (void);
 extern void tty_print_one_vline(void);
 extern void tty_print_one_hline(void);
 extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
 extern void tty_draw_box (int y, int x, int rows, int cols);
-extern void tty_printf(const char *s, ...);
+
 
 extern char *tty_tgetstr (const char *name);
 

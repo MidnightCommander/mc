@@ -48,7 +48,7 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* COLS */
+#include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"
@@ -566,65 +566,6 @@ static void check_split (void)
 	    first_panel_size = COLS - MINWIDTH;
     }
 }
-
-#ifdef HAVE_SLANG
-void
-init_curses ()
-{
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    init_colors ();
-    keypad (stdscr, TRUE);
-    nodelay (stdscr, FALSE);
-}
-#else
-static const struct {
-    int acscode;
-    int character;
-} acs_approx [] = {
-    { 'q',  '-' }, /* ACS_HLINE */
-    { 'x',  '|' }, /* ACS_VLINE */
-    { 'l',  '+' }, /* ACS_ULCORNER */
-    { 'k',  '+' }, /* ACS_URCORNER */
-    { 'm',  '+' }, /* ACS_LLCORNER */
-    { 'j',  '+' }, /* ACS_LRCORNER */
-    { 'a',  '#' }, /* ACS_CKBOARD */
-    { 'u',  '+' }, /* ACS_RTEE */
-    { 't',  '+' }, /* ACS_LTEE */
-    { 'w',  '+' }, /* ACS_TTEE */
-    { 'v',  '+' }, /* ACS_BTEE */
-    { 'n',  '+' }, /* ACS_PLUS */
-    { 0, 0 } };
-
-void init_curses (void)
-{
-    int i;
-    initscr();
-#ifdef HAVE_ESCDELAY
-    /*
-     * If ncurses exports the ESCDELAY variable, it should be set to
-     * a low value, or you'll experience a delay in processing escape
-     * sequences that are recognized by mc (e.g. Esc-Esc).  On the other
-     * hand, making ESCDELAY too small can result in some sequences
-     * (e.g. cursor arrows) being reported as separate keys under heavy
-     * processor load, and this can be a problem if mc hasn't learned
-     * them in the "Learn Keys" dialog.  The value is in milliseconds.
-     */
-    ESCDELAY = 200;
-#endif /* HAVE_ESCDELAY */
-    do_enter_ca_mode ();
-    mc_raw_mode ();
-    noecho ();
-    keypad (stdscr, TRUE);
-    nodelay (stdscr, FALSE);
-    init_colors ();
-    if (force_ugly_line_drawing) {
-	for (i = 0; acs_approx[i].acscode != 0; i++) {
-	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
-	}
-    }
-}
-#endif /* ! HAVE_SLANG */
 
 void
 clr_scr (void)

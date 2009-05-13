@@ -13,7 +13,6 @@
 #endif
 
 extern int use_colors;
-extern int disable_colors;
 
 /* Beware! When using Slang with color, not all the indexes are free.
    See myslang.h (A_*) */

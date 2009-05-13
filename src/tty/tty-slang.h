@@ -32,31 +32,6 @@ enum {
 #define noacs()		SLsmg_set_char_set (0)
 #define baudrate()	SLang_TT_Baud_Rate
 
-enum {
-    COLOR_BLACK = 0,
-    COLOR_RED,
-    COLOR_GREEN,
-    COLOR_YELLOW,
-    COLOR_BLUE,
-    COLOR_MAGENTA,
-    COLOR_CYAN,
-    COLOR_WHITE
-};
-
-/* When using Slang with color, we have all the indexes free but
- * those defined here (A_BOLD, A_UNDERLINE, A_REVERSE, A_BOLD_REVERSE)
- */
-#define A_BOLD		0x40
-#define A_UNDERLINE	0x40
-#define A_REVERSE	0x20
-#define A_BOLD_REVERSE	0x21
-
-#ifndef A_NORMAL
-#    define A_NORMAL	0x00
-#endif
-
-#define COLOR_PAIR(x) x
-
 #ifndef TRUE
 #    define TRUE 1
 #    define FALSE 0
@@ -80,7 +55,8 @@ void slang_set_raw_mode (void);
 #define flushinp()
 
 void set_slang_delay (int);
-void slang_init (void);
+void init_slang (void);
+void init_curses (void);
 void slang_prog_mode (void);
 void hline (int ch, int len);
 void vline (int ch, int len);

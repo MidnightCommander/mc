@@ -16,6 +16,8 @@
 
 #include "../../src/tty/color-ncurses.h"
 #include "../../src/tty/tty-ncurses.h"
+#include "../../src/tty/color-internal.h"	/* disable_colors */
+#include "../../src/tty/win.h"
 
 #include "../../src/background.h"	/* we_are_background */
 #include "../../src/strutil.h"		/* str_term_form */
@@ -36,9 +38,66 @@
 
 /*** file scope variables **********************************************/
 
+static const struct {
+    int acscode;
+    int character;
+} acs_approx [] = {
+    { 'q',  '-' }, /* ACS_HLINE */
+    { 'x',  '|' }, /* ACS_VLINE */
+    { 'l',  '+' }, /* ACS_ULCORNER */
+    { 'k',  '+' }, /* ACS_URCORNER */
+    { 'm',  '+' }, /* ACS_LLCORNER */
+    { 'j',  '+' }, /* ACS_LRCORNER */
+    { 'a',  '#' }, /* ACS_CKBOARD */
+    { 'u',  '+' }, /* ACS_RTEE */
+    { 't',  '+' }, /* ACS_LTEE */
+    { 'w',  '+' }, /* ACS_TTEE */
+    { 'v',  '+' }, /* ACS_BTEE */
+    { 'n',  '+' }, /* ACS_PLUS */
+    { 0, 0 } };
+
 /*** file scope functions **********************************************/
 
 /*** public functions **************************************************/
+
+void
+init_curses (void)
+{
+    initscr ();
+
+#ifdef HAVE_ESCDELAY
+    /*
+     * If ncurses exports the ESCDELAY variable, it should be set to
+     * a low value, or you'll experience a delay in processing escape
+     * sequences that are recognized by mc (e.g. Esc-Esc).  On the other
+     * hand, making ESCDELAY too small can result in some sequences
+     * (e.g. cursor arrows) being reported as separate keys under heavy
+     * processor load, and this can be a problem if mc hasn't learned
+     * them in the "Learn Keys" dialog.  The value is in milliseconds.
+     */
+    ESCDELAY = 200;
+#endif /* HAVE_ESCDELAY */
+
+    do_enter_ca_mode ();
+    mc_raw_mode ();
+    noecho ();
+    keypad (stdscr, TRUE);
+    nodelay (stdscr, FALSE);
+    init_colors ();
+
+    if (tty_is_ugly_line_drawing ()) {
+	int i;
+	for (i = 0; acs_approx[i].acscode != 0; i++)
+	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
+    }
+}
+
+void
+tty_disable_colors (gboolean disable, gboolean force)
+{
+    disable_colors = disable;
+    (void) force_colors;
+}
 
 void
 tty_setcolor (int color)

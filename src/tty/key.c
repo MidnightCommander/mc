@@ -488,7 +488,7 @@ init_key_x11 (void)
 #endif				/* HAVE_TEXTMODE_X11_SUPPORT */
 
 
-/* This has to be called before slang_init or whatever routine
+/* This has to be called before init_slang or whatever routine
    calls any define_sequence */
 void
 init_key (void)

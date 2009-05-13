@@ -52,6 +52,9 @@
 
 static volatile sig_atomic_t got_interrupt = 0;
 
+/* If true use +, -, | for line drawing */
+static gboolean force_ugly_line_drawing = FALSE;
+
 /*** file scope functions **********************************************/
 
 static void
@@ -105,6 +108,16 @@ tty_got_interrupt(void)
     rv = (got_interrupt != 0);
     got_interrupt = 0;
     return rv;
+}
+
+void tty_set_ugly_line_drawing (gboolean do_ugly)
+{
+    force_ugly_line_drawing = do_ugly;
+}
+
+gboolean tty_is_ugly_line_drawing (void)
+{
+    return force_ugly_line_drawing;
 }
 
 extern void

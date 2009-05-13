@@ -16,16 +16,17 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-slang.h"	/* mc-init_pair */
+#include "../../src/tty/tty-slang.h"	/* mc_init_pair */
 #include "../../src/tty/color.h"
+#include "../../src/tty/color-internal.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
 #include "../../src/tty/key.h"		/* define_sequence */
-#include "../../src/tty/win.h"		/* do_exit_ca_mode */
+#include "../../src/tty/win.h"
 
 #include "../../src/background.h"	/* we_are_background */
+#include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/util.h"		/* str_unconst */
 #include "../../src/strutil.h"		/* str_term_form */
-#include "../../src/main.h"		/* extern: force_colors */
 #include "../../src/setup.h"
 
 /*** global variables **************************************************/
@@ -217,7 +218,7 @@ load_terminfo_keys (void)
 /*** public functions **************************************************/
 
 void
-slang_init (void)
+init_slang (void)
 {
     SLtt_get_terminfo ();
 #if SLANG_VERSION >= 20000
@@ -251,7 +252,7 @@ slang_init (void)
     if (SLang_TT_Read_FD == fileno (stderr))
 	SLang_TT_Read_FD = fileno (stdin);
 
-    if (force_ugly_line_drawing)
+    if (tty_is_ugly_line_drawing ())
 	SLtt_Has_Alt_Charset = 0;
     if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0) {
 #ifdef VDSUSP
@@ -327,6 +328,16 @@ void
 set_slang_delay (int v)
 {
     no_slang_delay = v;
+}
+
+void
+init_curses (void)
+{
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    init_colors ();
+    keypad (stdscr, TRUE);
+    nodelay (stdscr, FALSE);
 }
 
 void
@@ -425,6 +436,13 @@ has_colors (void)
     }
 
     return SLtt_Use_Ansi_Colors;
+}
+
+void
+tty_disable_colors (gboolean disable, gboolean force)
+{
+    disable_colors = disable;
+    force_colors = force;
 }
 
 void

@@ -10,7 +10,6 @@
 #include "widget.h"
 
 void layout_cmd (void);
-void init_curses (void);
 void done_screen (void);
 void setup_panels (void);
 void destroy_panels (void);

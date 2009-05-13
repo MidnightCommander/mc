@@ -18,6 +18,7 @@
 #   include <ncursesw/curses.h>
 #endif		/* USE_NCURSESW */
 
+void init_curses (void);
 
 #define acs()
 #define noacs()

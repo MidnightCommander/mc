@@ -184,9 +184,6 @@ int mouse_move_pages = 1;
 /* If true: l&r arrows are used to chdir if the input line is empty */
 int navigate_with_arrows = 0;
 
-/* If true use +, -, | for line drawing */
-int force_ugly_line_drawing = 0;
-
 /* If true program softkeys (HP terminals only) on startup and after every
    command ran in the subshell to the description found in the termcap/terminfo
    database */
@@ -275,9 +272,6 @@ static char *last_wd_file = NULL;
 static char *last_wd_string = NULL;
 /* Set to 1 to suppress printing the last directory */
 static int print_last_revert = 0;
-
-/* Force colors, only used by Slang */
-int force_colors = 0;
 
 /* colors specified on the command line: they override any other setting */
 char *command_line_colors = NULL;
@@ -2034,11 +2028,16 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	exit (0);
 	break;
 
+    case 'a':
+	tty_set_ugly_line_drawing (TRUE);
+	break;
+
+    case 'b':
+	tty_disable_colors (TRUE, FALSE);
+	break;
+
     case 'c':
-	disable_colors = 0;
-#ifdef HAVE_SLANG
-	force_colors = 1;
-#endif				/* HAVE_SLANG */
+	tty_disable_colors (FALSE, TRUE);
 	break;
 
     case 'f':
@@ -2102,11 +2101,11 @@ static const struct poptOption argument_table[] = {
      N_("Resets soft keys on HP terminals"), NULL},
     {"slow", 's', POPT_ARG_NONE, {&slow_terminal}, 0,
      N_("To run on slow terminals"), NULL},
-    {"stickchars", 'a', 0, {&force_ugly_line_drawing}, 0,
+    {"stickchars", 'a', POPT_ARG_NONE, {NULL}, 'a',
      N_("Use stickchars to draw"), NULL},
 
     /* color options */
-    {"nocolor", 'b', POPT_ARG_NONE, {&disable_colors}, 0,
+    {"nocolor", 'b', POPT_ARG_NONE, {NULL}, 'b',
      N_("Requests to run in black and white"), NULL},
     {"color", 'c', POPT_ARG_NONE, {NULL}, 'c',
      N_("Request to run in color mode"), NULL},
@@ -2281,7 +2280,7 @@ main (int argc, char *argv[])
 
     handle_args (argc, argv);
 
-    /* NOTE: This has to be called before slang_init or whatever routine
+    /* NOTE: This has to be called before init_slang or whatever routine
        calls any define_sequence */
     init_key ();
 
@@ -2306,7 +2305,7 @@ main (int argc, char *argv[])
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
 #ifdef HAVE_SLANG
-    slang_init ();
+    init_slang ();
 #endif
 
     start_interrupt_key ();

@@ -6,6 +6,8 @@
 #ifndef MC_COLOR_NCURSES_H
 #define MC_COLOR_NCURSES_H
 
+#include "../../src/tty/tty-ncurses.h"	/* NCurses headers */
+
 #define MAX_PAIRS 64
 extern int attr_pairs [MAX_PAIRS];
 
