@@ -78,7 +78,7 @@ extern int midnight_shutdown;
 extern char cmd_buf [512];
 extern const char *shell;
 extern int auto_fill_mkdir_name;
-
+extern int skip_check_codeset;
 /* Ugly hack in order to distinguish between left and right panel in menubar */
 extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
