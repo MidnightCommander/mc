@@ -308,7 +308,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 		old_output_lines = _output_lines;
 		tty_setcolor (COLOR_NORMAL);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 16 + first_width);
-		addstr (str_term_form (output_lines_label));
+		tty_print_string (output_lines_label);
 		dlg_move (h, LAYOUT_OPTIONS_COUNT, 10 + first_width);
 		tty_printf ("%02d", _output_lines);
 	    }

@@ -135,16 +135,16 @@ static void
 draw_hotkey (Widget *w, const struct hotkey_t hotkey, gboolean focused)
 {
     widget_selectcolor (w, focused, FALSE);
-    addstr (str_term_form (hotkey.start));
+    tty_print_string (hotkey.start);
 
     if (hotkey.hotkey != NULL) {
 	widget_selectcolor (w, focused, TRUE);
-	addstr (str_term_form (hotkey.hotkey));
+	tty_print_string (hotkey.hotkey);
 	widget_selectcolor (w, focused, FALSE);
     }
 
     if (hotkey.end != NULL)
-	addstr (str_term_form (hotkey.end));
+	tty_print_string (hotkey.end);
 }
 
 static int button_event (Gpm_Event *event, void *);
@@ -2629,7 +2629,7 @@ groupbox_callback (Widget *w, widget_msg_t msg, int parm)
 	tty_setcolor (COLOR_HOT_NORMAL);
 	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
 		  g->widget.x - g->widget.parent->x + 1);
-	addstr (str_term_form (g->title));
+	tty_print_string (g->title);
 	return MSG_HANDLED;
 
     case WIDGET_DESTROY:

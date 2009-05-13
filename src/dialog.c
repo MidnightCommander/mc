@@ -165,7 +165,7 @@ common_dialog_repaint (struct Dlg_head *h)
     if (h->title) {
 	tty_setcolor (DLG_HOT_NORMALC (h));
 	dlg_move (h, space, (h->cols - str_term_width1 (h->title)) / 2);
-	addstr (str_term_form (h->title));
+	tty_print_string (h->title);
     }
 }
 

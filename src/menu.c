@@ -106,17 +106,17 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         widget_move (&menubar->widget, y, x);
         addch ((unsigned char) entry->first_letter);
         hline (' ', menubar->max_entry_len + 1); /* clear line */
-        addstr (str_term_form (entry->text.start));
+        tty_print_string (entry->text.start);
 
         if (entry->text.hotkey != NULL) {
             tty_setcolor (color == MENU_SELECTED_COLOR ?
                         MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-            addstr (str_term_form (entry->text.hotkey));
+            tty_print_string (entry->text.hotkey);
             tty_setcolor(color);
         }
 
         if (entry->text.end != NULL)
-            addstr (str_term_form (entry->text.end));
+            tty_print_string (entry->text.end);
 
         /* move cursor to the start of entry text */
         widget_move (&menubar->widget, y, x + 1);
@@ -164,18 +164,17 @@ static void menubar_draw (WMenu *menubar)
                 MENU_SELECTED_COLOR : SELECTED_COLOR);
 	widget_move (&menubar->widget, 0, menubar->menu [i]->start_x);
 
-        addstr (str_term_form (menubar->menu[i]->text.start));
+        tty_print_string (menubar->menu[i]->text.start);
 
         if (menubar->menu[i]->text.hotkey != NULL) {
             tty_setcolor ((menubar->active && i == menubar->selected) ? 
                     MENU_HOTSEL_COLOR : COLOR_HOT_FOCUS);
-            addstr (str_term_form (menubar->menu[i]->text.hotkey));
+            tty_print_string (menubar->menu[i]->text.hotkey);
             tty_setcolor ((menubar->active && i == menubar->selected) ? 
                     MENU_SELECTED_COLOR : SELECTED_COLOR);
         }
-        if (menubar->menu[i]->text.end != NULL) {
-            addstr (str_term_form (menubar->menu[i]->text.end));
-        }
+        if (menubar->menu[i]->text.end != NULL)
+            tty_print_string (menubar->menu[i]->text.end);
     }
 
     if (menubar->dropped)

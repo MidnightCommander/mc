@@ -138,28 +138,30 @@ info_show_info (struct WInfo *info)
 	widget_move (&info->widget, 13, 3);
         str_printf (buff, _("Device:    %s"), 
                 str_trunc (myfs_stats.device, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 12:
 	widget_move (&info->widget, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
 		str_trunc (myfs_stats.mpoint, info->widget.cols - i18n_adjust));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 11:
 	widget_move (&info->widget, 11, 3);
         str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 10:
 	widget_move (&info->widget, 10, 3);
         str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
-        addstr (str_term_form (buff->str));
+        tty_print_string (buff->str);
         g_string_set_size(buff, 0);
     case 9:
 	widget_move (&info->widget, 9, 3);
 	/* TRANSLATORS: "Status changed", like in the stat(2) man page */
-	printw (_("Status:    %s"), file_date (st.st_ctime));
+        str_printf (buff, _("Status:    %s"), file_date (st.st_ctime));
+        tty_print_string (buff->str);
+        g_string_set_size(buff, 0);
 
     case 8:
 	widget_move (&info->widget, 8, 3);
@@ -207,7 +209,7 @@ info_show_info (struct WInfo *info)
             str_printf (buff, file_label, 
             str_trunc (current_panel->dir.list [current_panel->selected].fname,
 				    info->widget.cols - i18n_adjust));
-            addstr (str_term_form (buff->str));
+            tty_print_string (buff->str);
 	} else
 	    addstr (_("File:       None"));
 

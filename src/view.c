@@ -2494,7 +2494,7 @@ view_display_text (WView * view)
 
             if (!str_iscombiningmark (info.cnxt)) {
                 if (str_isprint (info.cact)) {
-                    addstr (str_term_form (info.cact));
+                    tty_print_string (info.cact);
                 } else {
                     addch ('.');
 	}
@@ -2509,7 +2509,7 @@ view_display_text (WView * view)
                     view_read_continue (view, &info);
                     g_string_append(comb,info.cact);
                 }
-                addstr (str_term_form (comb->str));
+                tty_print_string (comb->str);
                 g_string_free (comb, TRUE);
             }
 	} else {
