@@ -719,6 +719,9 @@ static int compare_files (char *name1, char *name2, off_t size)
     int file1, file2;
     int result = -1;		/* Different by default */
 
+    if (size == 0)
+        return 0;
+
     file1 = open (name1, O_RDONLY);
     if (file1 >= 0){
 	file2 = open (name2, O_RDONLY);
