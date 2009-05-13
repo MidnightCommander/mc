@@ -665,7 +665,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), str_trunc (filename, FIND2_X_USE));
 
     status_update (buffer);
-    mc_refresh ();
+    tty_refresh ();
 
     enable_interrupt_key ();
     got_interrupt ();
@@ -897,7 +897,7 @@ do_search (struct Dlg_head *h)
 	    tty_setcolor (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
 	    addch (rotating_dash [pos]);
-	    mc_refresh ();
+	    tty_refresh ();
 	}
     } else
 	goto do_search_begin;

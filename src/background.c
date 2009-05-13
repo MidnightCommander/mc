@@ -348,7 +348,7 @@ background_attention (int fd, void *closure)
 	g_free (data [i]);
 
     do_refresh ();
-    mc_refresh ();
+    tty_refresh ();
     doupdate ();
     return 0;
 }

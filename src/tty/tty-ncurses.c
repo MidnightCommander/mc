@@ -97,7 +97,7 @@ tty_print_alt_char (int c)
 }
 
 void
-tty_print_string(const char *s)
+tty_print_string (const char *s)
 {
     addstr (str_term_form (s));
 }
@@ -120,7 +120,7 @@ tty_tgetstr (const char *cap)
 }
 
 void
-mc_refresh (void)
+tty_refresh (void)
 {
 #ifdef WITH_BACKGROUND
     if (!we_are_background)

@@ -2251,7 +2251,7 @@ listbox_event (Gpm_Event *event, void *data)
 	/* We need to refresh ourselves since the dialog manager doesn't */
 	/* know about this event */
 	listbox_callback (w, WIDGET_DRAW, 0);
-	mc_refresh ();
+	tty_refresh ();
 	return MOU_REPEAT;
     }
 

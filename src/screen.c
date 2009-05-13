@@ -2093,7 +2093,7 @@ start_search (WPanel *panel)
         panel->search_char[0] = '\0';
         panel->search_chpoint = 0;
 	display_mini_info (panel);
-	mc_refresh ();
+	tty_refresh ();
     }
 }
 

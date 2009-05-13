@@ -631,7 +631,7 @@ clr_scr (void)
 {
     standend ();
     dlg_erase (midnight_dlg);
-    mc_refresh ();
+    tty_refresh ();
     doupdate ();
 }
 
@@ -826,7 +826,7 @@ void set_hintbar(const char *str)
 {
     label_set_text (the_hint, str);
     if (ok_to_refresh > 0)
-        mc_refresh();
+        tty_refresh();
 }
 
 void print_vfs_message (const char *msg, ...)
@@ -857,7 +857,7 @@ void print_vfs_message (const char *msg, ...)
 
 	/* Restore cursor position */
 	tty_gotoyx (row, col);
-	mc_refresh ();
+	tty_refresh ();
 	return;
     }
 
@@ -879,7 +879,7 @@ void rotate_dash (void)
     tty_gotoyx (0, COLS - 1);
     tty_setcolor (NORMAL_COLOR);
     addch (rotating_dash [pos]);
-    mc_refresh ();
+    tty_refresh ();
     pos++;
 }
 

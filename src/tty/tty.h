@@ -65,6 +65,6 @@ extern char *tty_tgetstr (const char *name);
 #define KEY_KP_SUBTRACT	4002
 #define KEY_KP_MULTIPLY	4003
 
-void mc_refresh (void);
+void tty_refresh (void);
 
 #endif			/* MC_TTY_H */

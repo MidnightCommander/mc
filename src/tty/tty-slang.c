@@ -514,13 +514,12 @@ tty_print_string (const char *s)
     SLsmg_write_string (str_unconst (str_term_form (s)));
 }
 
-
 void
 tty_printf (const char *fmt, ...)
 {
     va_list args;
 
-    va_start(args, fmt);
+    va_start (args, fmt);
     SLsmg_vprintf (str_unconst(fmt), args);
     va_end (args);
 }
@@ -532,7 +531,7 @@ tty_tgetstr (const char *cap)
 }
 
 void
-mc_refresh (void)
+tty_refresh (void)
 {
 #ifdef WITH_BACKGROUND
     if (!we_are_background)

@@ -135,7 +135,7 @@ void edit_refresh_cmd (WEdit * edit)
     }
     touchwin(stdscr);
 #endif /* !HAVE_SLANG */
-    mc_refresh();
+    tty_refresh ();
     doupdate();
 }
 

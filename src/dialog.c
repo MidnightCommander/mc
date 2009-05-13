@@ -552,7 +552,7 @@ static inline void dialog_handle_key (Dlg_head *h, int d_key)
 #else
 	touchwin (stdscr);
 #endif /* HAVE_SLANG */
-	mc_refresh ();
+	tty_refresh ();
 	doupdate ();
 	break;
 

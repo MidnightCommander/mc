@@ -3178,7 +3178,7 @@ do_search (WView *view)
 
     if (verbose) {
         d = create_message (D_NORMAL, _("Search"), _("Searching %s"), view->last_search_string);
-        mc_refresh ();
+        tty_refresh ();
     }
 
     /*for avoid infinite search loop we need to increase or decrease start offset of search */
@@ -3226,7 +3226,7 @@ do_search (WView *view)
                 dlg_run_done (d);
                 destroy_dlg (d);
                 d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
-                mc_refresh ();
+                tty_refresh ();
             }
 
             view_moveto_match (view);

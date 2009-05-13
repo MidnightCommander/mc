@@ -537,7 +537,7 @@ void
 repaint_screen (void)
 {
     do_refresh ();
-    mc_refresh ();
+    tty_refresh ();
 }
 
 /* Wrapper for do_subshell_chdir, check for availability of subshell */
@@ -748,7 +748,7 @@ load_prompt (int fd, void *unused)
 	 * automatically: force a cursor update and a screen refresh
 	 */
 	update_cursor (midnight_dlg);
-	mc_refresh ();
+	tty_refresh ();
     }
     update_prompt = 1;
     return 0;
