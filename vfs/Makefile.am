@@ -87,13 +87,12 @@ else
 libvfs_mc_a_SOURCES = $(NONETFILES)
 endif
 
-if ENABLE_VFS_MCFS
+if ENABLE_MCSERVER
 sbin_PROGRAMS = mcserv
+mcserv_SOURCES = mcserv.c mcfsutil.c
+mcserv_LDADD = $(MCSERVLIBS)
 endif
 
-mcserv_SOURCES = mcserv.c mcfsutil.c
-
-mcserv_LDADD = $(MCSERVLIBS)
 
 SAMBA_DIST =			\
 	Makefile.in		\

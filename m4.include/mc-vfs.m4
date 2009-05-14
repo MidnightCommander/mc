@@ -49,18 +49,8 @@ AC_DEFUN([MC_WITH_VFS],
 	    AC_CHECK_RPC
 	    AC_REQUIRE_SOCKET
 
-      dnl
-      dnl mcfs support
-      dnl
-      AC_ARG_WITH(mcfs,
-	[  --with-mcfs              Support mc-specific networking file system [[no]]],
-	[if test "x$withval" != "xno"; then
-	    AC_DEFINE(ENABLE_VFS_MCFS, 1, [Define to enable mc-specific networking file system])
-	    AC_MC_VFS_ADDNAME([mcfs])
-	    use_mcfs=yes
-	    MC_MCSERVER_CHECKS
-	fi]
-      )
+      MC_MCSERVER_CHECKS
+
       use_net_code=true
     fi
   fi
