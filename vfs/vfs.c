@@ -79,7 +79,8 @@ struct vfs_dirinfo{
 };
 
 
-static GSList *vfs_openfiles;
+static GPtrArray *vfs_openfiles;
+static long vfs_free_handle_list = -1;
 #define VFS_FIRST_HANDLE 100
 
 static struct vfs_class *localfs_class;
@@ -104,40 +105,44 @@ static const char *supported_encodings[] = {
 static int
 vfs_new_handle (struct vfs_class *vclass, void *fsinfo)
 {
-    static int vfs_handle_counter = VFS_FIRST_HANDLE;
     struct vfs_openfile *h;
 
     h = g_new (struct vfs_openfile, 1);
-    h->handle = vfs_handle_counter++;
     h->fsinfo = fsinfo;
     h->vclass = vclass;
-    vfs_openfiles = g_slist_prepend (vfs_openfiles, h);
-    return h->handle;
-}
 
-/** Function to match handle, passed to g_slist_find_custom() */
-static gint
-vfs_cmp_handle (gconstpointer a, gconstpointer b)
-{
-    if (!a)
-	return 1;
-    return ((struct vfs_openfile *) a)->handle != (long) b;
+    /* Allocate the first free handle */
+    h->handle = vfs_free_handle_list;
+    if (h->handle == -1) {
+        /* No free allocated handles, allocate one */
+        h->handle = vfs_openfiles->len;
+        g_ptr_array_add (vfs_openfiles, h);
+    } else {
+        vfs_free_handle_list = (long) g_ptr_array_index (vfs_openfiles, vfs_free_handle_list);
+        g_ptr_array_index (vfs_openfiles, h->handle) = h;
+    }
+
+    h->handle += VFS_FIRST_HANDLE;
+    return h->handle;
 }
 
 /** Find VFS class by file handle */
 static inline struct vfs_class *
 vfs_op (int handle)
 {
-    GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
-			     vfs_cmp_handle);
-    if (!l)
-	return NULL;
-    h = (struct vfs_openfile *) l->data;
+    if (handle < VFS_FIRST_HANDLE ||
+        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        return NULL;
+
+    h = (struct vfs_openfile *) g_ptr_array_index (
+                                vfs_openfiles, handle - VFS_FIRST_HANDLE);
     if (!h)
 	return NULL;
+
+    g_assert (h->handle == handle);
+
     return h->vclass;
 }
 
@@ -145,16 +150,19 @@ vfs_op (int handle)
 static inline void *
 vfs_info (int handle)
 {
-    GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
-			     vfs_cmp_handle);
-    if (!l)
-	return NULL;
-    h = (struct vfs_openfile *) l->data;
+    if (handle < VFS_FIRST_HANDLE ||
+        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        return NULL;
+
+    h = (struct vfs_openfile *) g_ptr_array_index (
+                                vfs_openfiles, handle - VFS_FIRST_HANDLE);
     if (!h)
 	return NULL;
+
+    g_assert (h->handle == handle);
+
     return h->fsinfo;
 }
 
@@ -162,11 +170,13 @@ vfs_info (int handle)
 static inline void
 vfs_free_handle (int handle)
 {
-    GSList *l;
+    if (handle < VFS_FIRST_HANDLE ||
+        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        return;
 
-    l = g_slist_find_custom (vfs_openfiles, (void *) (long) handle,
-			     vfs_cmp_handle);
-    vfs_openfiles = g_slist_delete_link (vfs_openfiles, l);
+    g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE) =
+			(void *) vfs_free_handle_list;
+    vfs_free_handle_list = handle - VFS_FIRST_HANDLE;
 }
 
 static struct vfs_class *vfs_list;
@@ -1198,6 +1208,9 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
 void
 vfs_init (void)
 {
+    /* create the VFS handle array */
+    vfs_openfiles = g_ptr_array_new ();
+
     vfs_str_buffer = g_string_new("");
     /* localfs needs to be the first one */
     init_localfs();
@@ -1241,7 +1254,7 @@ vfs_shut (void)
 	if (vfs->done)
 	    (*vfs->done) (vfs);
 
-    g_slist_free (vfs_openfiles);
+    g_ptr_array_free (vfs_openfiles, TRUE);
     
     g_string_free (vfs_str_buffer, TRUE);
 }
