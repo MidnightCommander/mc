@@ -497,7 +497,7 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
     int i;
     int dirflag = 0;
 
-    reg_exp = input_dialog (title, "", history_name, easy_patterns ? "*" : ".");
+    reg_exp = input_dialog (title, "", history_name, INPUT_LAST_TEXT);
     if (!reg_exp)
 	return;
     if (!*reg_exp) {
