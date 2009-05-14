@@ -1,6 +1,7 @@
 #! @PERL@ -w
 #
 # Written by Adam Byrtek <alpha@debian.org>, 2002
+# Rewritten by David Sterba <dave@jikos.cz>, 2009
 #
 # Extfs to handle patches in context and unified diff format.
 # Known issues: When name of file to patch is modified during editing, 
@@ -22,11 +23,12 @@ my $fileutil = 'file';
 my $parsedates = eval 'require Date::Parse';
 
 # regular expressions
-my $unified_header=qr/^--- .*\n\+\+\+ .*\n@@ .* @@.*\n$/;
+my $unified_header=qr/^--- .*\n\+\+\+ .*\n$/;
 my $unified_extract=qr/^--- ([^\s]+).*\n\+\+\+ ([^\s]+)\s*([^\t\n]*)/;
 my $unified_contents=qr/^([+\-\\ \n]|@@ .* @@)/;
+my $unified_hunk=qr/@@ -(\d+)(,(\d+))? \+(\d+)(,(\d+)) @@.*\n/;
 
-my $context_header=qr/^\*\*\* .*\n--- .*\n\*{15}\n$/;
+my $context_header=qr/^\*\*\* .*\n--- .*\n$/;
 my $context_extract=qr/^\*\*\* ([^\s]+).*\n--- ([^\s]+)\s*([^\t\n]*)/;
 my $context_contents=qr/^([!+\-\\ \n]|-{3} .* -{4}|\*{3} .* \*{4}|\*{15})/;
 
@@ -109,6 +111,7 @@ sub myout
 sub diff_filename
 {
     my ($fsrc,$fdst)= @_;
+    # TODO: can remove these two calls later
     $fsrc = patchfs_canonicalize_path ($fsrc);
     $fdst = patchfs_canonicalize_path ($fdst);
     if (!$fdst && !$fsrc) {
@@ -127,9 +130,9 @@ sub diff_filename
 	    return ($fsrc,'');
 	} else {
 	    # shorter base name
-	    if (($fdst=~/$basename/,length $2) < ($fsrc=~/$basename/,length $2)) {
+	    if (($fdst=~/$basename/o,length $2) < ($fsrc=~/$basename/o,length $2)) {
 		return ($fdst,'');
-	    } elsif (($fdst=~/$basename/,length $2) > ($fsrc=~/$basename/,length $2)) {
+	    } elsif (($fdst=~/$basename/o,length $2) > ($fsrc=~/$basename/o,length $2)) {
 		return ($fsrc,'');
 	    } else {
 		# shortest names
@@ -143,218 +146,218 @@ sub diff_filename
     }
 }
 
-# parse unified or context header
-sub parse_header
+# IN: diff "archive" name
+# IN: file handle for output; STDIN for list, tempfile else
+# IN: filename to watch (for: copyout, rm), '' for: list
+# IN: remove the file?
+#     true  - ... and print out the rest
+#     false - ie. copyout mode, print just the file
+sub parse($$$$)
 {
-    my ($unified,$context,$buf)=@_;
+    my $archive=quotemeta shift;
+    my $fh=shift;
+    my $file=shift;
+    my $rmmod=shift;
+    my ($state,$fsize,$time);
+    my ($f,$fsrc,$fdst,$prefix);
+    my ($unified,$context);
+    my ($skipread, $filetoprint, $filefound);
+    my ($h_add,$h_del,$h_ctx);	# hunk line counts
+    my ($h_r1,$h_r2);		# hunk ranges
+    my @outsrc;		# if desired ...
+    my @outdst;
+    my $line;
 
-    if ($unified) {
-	error "Can't parse unified diff header"
-	  unless ((($$buf.=<I>).=<I>)=~/$unified_header/);
-	return $$buf=~/$unified_extract/;
-    } elsif ($context) {
-	error "Can't parse context diff header"
-	  unless ((($$buf.=<I>).=<I>)=~/$context_header/);
-	return $$buf=~/$context_extract/;
+    # use uid and gid from file
+    my ($uid,$gid)=(`ls -l $archive`=~/$ls_extract_id/o);
+
+    import Date::Parse if ($parsedates && $file eq '');
+
+    $line=1;
+    $state=0; $fsize=0; $f='';
+    $filefound=0;
+    while ($skipread || ($line++,$_=<I>)) {
+	$skipread=0;
+	if($state == 0) {	# expecting comments
+	    $unified=$context=0;
+	    $unified=1 if (/^--- /);
+	    $context=1 if (/^\*\*\* /);
+	    if (!$unified && !$context) {
+		$filefound=0 if($file ne '' && $filetoprint);
+		# shortcut for rmmod xor filefound
+		# - in rmmod we print if not found
+		# - in copyout (!rmmod) we print if found
+		print $fh $_ if($rmmod != $filefound);
+		next;
+	    }
+
+	    if($file eq '' && $filetoprint) {
+		printf $fh "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $fsize, datetime($time), $prefix, $f;
+	    }
+
+	    # start of new file
+	    $_ .=<I>;	# steel next line, both formats
+	    $line++;
+	    if($unified) {
+		if(/$unified_header/o) {
+		    ($fsrc,$fdst,$time) = /$unified_extract/o;
+		} else {
+		    error "Can't parse unified diff header";
+		}
+	    } elsif($context) {
+		if(/$context_header/o) {
+		    ($fsrc,$fdst,$time) = /$context_extract/o;
+		} else {
+		    error "Can't parse context diff header";
+		}
+	    } else {
+		error "Unrecognized diff header";
+	    }
+	    $fsrc=patchfs_canonicalize_path($fsrc);
+	    $fdst=patchfs_canonicalize_path($fdst);
+	    if(wantarray) {
+		push @outsrc,$fsrc;
+		push @outdst,$fdst;
+	    }
+	    ($f,$prefix)=diff_filename($fsrc,$fdst);
+	    $filefound=($fsrc eq $file || $fdst eq $file);
+
+	    $f="$f.diff";
+	    $filetoprint=1;
+	    $fsize=length;
+	    print $fh $_ if($rmmod != $filefound);
+
+	    $state=1;
+	} elsif($state == 1) { # expecting diff hunk headers, end of file or comments
+	    if($unified) {
+		my ($a,$b,$c,$d);
+		($a,$b,$h_r1,$c,$d,$h_r2)=/$unified_hunk/o;
+		if(!defined($a) || !defined($c)) {
+		    # hunk header does not come, a comment inside
+		    # or maybe a new file, state 0 will decide
+		    $skipread=1;
+		    $state=0;
+		    next;
+		}
+		$fsize+=length;
+		print $fh $_ if($rmmod != $filefound);
+		$h_r1=1 if(!defined($b));
+		$h_r2=1 if(!defined($d));
+		$h_add=$h_del=$h_ctx=0;
+		$state=2;
+	    } elsif($context) {
+		if(!/$context_contents/o) {
+		    $skipread=1;
+		    $state=0;
+		    next;
+		}
+		print $fh $_ if($rmmod != $filefound);
+		$fsize+=length;
+	    }
+	} elsif($state == 2) { # expecting hunk contents
+	    if($h_del + $h_ctx == $h_r1 && $h_add + $h_ctx == $h_r2) {
+		# hooray, end of hunk
+		# we optimistically ended with a hunk before but
+		# the line has been read already
+		$skipread=1;
+		$state=1;
+		next;
+	    }
+	    print $fh $_ if($rmmod != $filefound);
+	    $fsize+=length;
+	    my ($first)= /^(.)/;
+	    if(ord($first) == ord('+')) { $h_add++; }
+	    elsif(ord($first) == ord('-')) { $h_del++; }
+	    elsif(ord($first) == ord(' ')) { $h_ctx++; }
+	    elsif(ord($first) == ord('\\')) { 0; }
+	    elsif(ord($first) == ord('@')) { error "Malformed hunk, header came too early"; }
+	    else { error "Unrecognized character in hunk"; }
+	}
     }
+    if($file eq '' && $filetoprint) {
+	printf $fh "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $fsize, datetime($time), $prefix, $f;
+    }
+
+    close($fh) if($file ne '');
+    return \(@outsrc, @outdst) if wantarray;
 }
 
 # list files affected by patch
-sub list
-{
-    my ($archive)=(quotemeta $_[0]);
-    my ($state,$pos,$len,$time);
-    my ($f,$fsrc,$fdst,$prefix);
-    my ($unified,$context)=(0,0);
-
-    # use uid and gid from file
-    my ($uid,$gid)=(`ls -l $archive`=~/$ls_extract_id/);
-
-    import Date::Parse if ($parsedates);
-    
-    # state==1 means diff contents, state==0 means comments
-    $state=0; $len=0; $f='';
-    while (<I>) {
-
-	# recognize diff type
-	if (!$unified && !$context) {
-	    $unified=1 if (/^--- /);
-	    $context=1 if (/^\*\*\* /);
-	    if (!$unified && !$context) {
-		$len+=length;
-		next;
-	    }
-	}
-
-	if (($unified && /^--- /) || ($context && /^\*\*\* [^\*]*$/)) {
-	    # start of new file
-	    if ($state==1) {
-		printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
-		  if $f;
-		$len=0;
-	    }
-	    $state=1;
-
-	    ($fsrc,$fdst,$time)=parse_header($unified,$context,\$_);
-	    ($f,$prefix)=diff_filename($fsrc,$fdst);
-	    $f=$f.".diff";
-
-	} elsif ($state==1 && (($unified && !/$unified_contents/) || ($context && !/$context_contents/))) {
-	    # start of comments, end of diff contents
-	    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
-	      if $f;
-	    $state=$len=0;
-	}
-
-	$len+=length;
-    }
-    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
-      if ($f && $state==1);
+sub list($) {
+	parse($_[0], *STDOUT, '', 0);
+	close(I);
 }
 
 # extract diff from patch
-sub copyout
-{
+# IN: diff file to find
+# IN: output file name
+sub copyout($$) {
     my ($file,$out)=@_;
-    my ($fsrc,$fdst,$found,$state,$buf);
-    my ($unified,$context)=(0,0);
 
     $file=~s/^(PATCH-(CREATE|REMOVE)\/)?(.*)\.diff$/$3/;
     $file = patchfs_canonicalize_path ($file);
-    
-    # state==1 means diff contents, state==0 mens comments
-    $state=0; $found=0; $buf='';
-    while (<I>) {
 
-	# recognize diff type
-	if (!$unified && !$context) {
-	    $unified=1 if (/^--- /);
-	    $context=1 if (/^\*\*\* /);
-	    if (!$unified && !$context) {
-		$buf.=$_;
-		next;
-	    }
-	}
-
-	if (($unified && /^--- /) || ($context && /^\*\*\* [^\*]*$/)) {
-	    last if ($state==1 && $found);
-	    $state=1;
-
-	    ($fsrc,$fdst,)=parse_header($unified,$context,\$_);
-	    $fsrc = patchfs_canonicalize_path ($fsrc);
-	    $fdst = patchfs_canonicalize_path ($fdst);
-	    $found=1 if (($fsrc eq $file) || ($fdst eq $file));
-
-	} elsif ($state==1 && (($unified && !/$unified_contents/) || ($context && !/$context_contents/))) {
-	    # start of comments, end of diff contents
-	    last if ($found);
-	    $state=0;
-	    $buf='';
-	}
-
-	$buf.=$_ if ($found || $state==0)
-    }
-    if ($found) {
-	open O, "> $out";
-	print O $buf;
-	close O;
-    }
+    open(FH, ">$out") or error("Cannot open output file");
+    parse('', *FH, $file, 0);
 }
 
 # remove diff(s) from patch
-sub rm
-{
-    my ($archive)=(shift);
-    my ($fsrc,$fdst,$found,$state,$buf);
+# IN: archive
+# IN: file to delete
+sub rm($$) {
+    my $archive=shift;
     my ($tmp,$tmpname)=tempfile();
-    my ($unified,$context)=(0,0);
 
     @_=map {scalar(s/^(PATCH-(CREATE|REMOVE)\/)?(.*)\.diff$/$3/,$_)} @_;
 
-    # state==1 means diff contents, state==0 mens comments
-    $state=0; $found=0; $buf='';
-    while (<I>) {
-
-	# recognize diff type
-	if (!$unified && !$context) {
-	    $unified=1 if (/^--- /);
-	    $context=1 if (/^\*\*\* /);
-	    if (!$unified && !$context) {
-		$buf.=$_;
-		next;
-	    }
-	}
-
-	if (($unified && /^--- /) || ($context && /^\*\*\* [^\*]*$/)) {
-	    $state=1;
-
-	    ($fsrc,$fdst,)=parse_header($unified,$context,\$_);
-
-	    # remove listed files
-	    foreach (@_) {
-		if (($fsrc eq $_) || ($fdst eq $_)) {
-		    $found=1;
-		    last;
-		}
-	    }
-	    if (!$found) {
-		print $tmp $buf;
-		$buf='';
-	    }
-
-	} elsif ($state==1 && (($unified && !/$unified_contents/) || ($context && !/$context_contents/))) {
-	    # start of comments, end of diff contents
-	    $found=0;
-	    $state=0;
-	    $buf='';
-	}
-
-	if ($state==0) {
-	    $buf.=$_;
-	} elsif (!$found) {
-	    print $tmp $_;
-	}
-    }
-    print $tmp $buf if (!$found);
-    close $tmp;
+    # just the first file for now
+    parse($archive, $tmp, $_[0], 1);
     close I;
 
-    # replace archive with temporary file
-    system('cat '.quotemeta($tmpname).'|'.myout($archive,0))==0
+    # replace archive
+    system("cat \Q$tmpname\E | " . myout($archive,0))==0
       or error "Can't write to archive";
-    system 'rm -f '.quotemeta($tmpname);
+    system("rm -f -- \Q$tmpname\E");
 }
 
 # append diff to archive
-sub copyin
-{
-    my ($archive,$name,$src)=(@_);
-    my ($fsrc,$fdst,$f,@files);
-    my ($unified,$context)=(0,0);
+# IN: diff archive name
+# IN: newly created file name in archive
+# IN: the real source file
+sub copyin($$$) {
+    # TODO: seems to be tricky. what to do?
+    # copyin of file which is already there may:
+    #  * delete the original and copy only the new
+    #  * just append the new hunks to the same file
+    #    problems: may not be a valid diff, unmerged hunks
+    #  * try to merge the two together
+    #    ... but we do not want write patchutils again, right?
+    error "Copying files into diff not supported";
+    return;
 
-    # build filelist
+    my ($archive,$name,$src)=@_;
+
+    # in case we are appending another diff, we have
+    # to delete/merge all the files
+    open(DEVNULL, ">/dev/null");
     open I, myin($src).'|';
-    while (<I>) {
-	# recognize diff type
-	if (!$unified && !$context) {
-	    $unified=1 if (/^--- /);
-	    $context=1 if (/^\*\*\* /);
-	}
-
-	if (($unified && /^--- /) || ($context && /^\*\*\* [^\*]*$/)) {
-	    ($fsrc,$fdst,)=parse_header($unified,$context,\$_);
-	    ($f,)=diff_filename($fsrc,$fdst);
-	    push(@files,$f);
-	}
+    my ($srclist,$dstlist)=parse($archive, *DEVNULL, '', 0);
+    close(I);
+    close(DEVNULL);
+    foreach(@$srclist) {
+	print("SRC: del $_\n");
     }
-    close I;
+    foreach(@$dstlist) {
+	print("DST: del $_\n");
+    }
+    return;
 
-    # remove overwrited files
+    # remove overwritten file
     open I, myin($archive).'|';
-    rm ($archive, map($_.'.diff',@files));
+    rm ($archive, $name);
     close I;
 
-    my $cmd1=myin($src);
+    my $cmd1=myin("$src.diff");
     my $cmd2=myout($archive,1);
     system("$cmd1 | $cmd2")==0
       or error "Can't write to archive";
@@ -363,7 +366,7 @@ sub copyin
 
 if ($ARGV[0] eq 'list') {
     open I, myin($ARGV[1]).'|';
-    list $ARGV[1];
+    list ($ARGV[1]);
     exit 0;
 } elsif ($ARGV[0] eq 'copyout') {
     open I, myin($ARGV[1])."|";
