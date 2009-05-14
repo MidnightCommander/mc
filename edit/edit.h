@@ -110,6 +110,7 @@
 
 /* max count stack files */
 #define MAX_HISTORY_MOVETO     50
+#define LINE_STATE_WIDTH	8
 
 typedef struct edit_stack_type {
     long line;
@@ -295,6 +296,8 @@ extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
 extern int option_fake_half_tabs;
 extern int option_persistent_selections;
+extern int option_line_state;
+extern int option_line_state_width;
 
 typedef enum {
     EDIT_QUICK_SAVE = 0,

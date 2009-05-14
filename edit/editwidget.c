@@ -92,7 +92,7 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
     if (event->type & (GPM_DOWN | GPM_UP))
 	edit_push_key_press (edit);
 
-    edit->prev_col = event->x - edit->start_col - 1;
+    edit->prev_col = event->x - edit->start_col - 1 - option_line_state_width;
 
     if (--event->y > (edit->curs_row + 1))
 	edit_move_down (edit, event->y - (edit->curs_row + 1), 0);

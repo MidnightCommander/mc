@@ -118,6 +118,7 @@
 #define CK_Maximize		458
 
 #define CK_Toggle_Syntax	480
+#define CK_Toggle_Line_State	490
 
 /* macro */
 #define CK_Begin_Record_Macro	501

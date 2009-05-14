@@ -225,6 +225,7 @@ static const struct {
     { "editor_persistent_selections", &option_persistent_selections },
     { "editor_visible_tabs", &visible_tabs },
     { "editor_visible_spaces", &visible_tws },
+    { "editor_line_state", &option_line_state },
 #endif /* USE_INTERNAL_EDIT */
 
     { "nice_rotating_dash", &nice_rotating_dash },

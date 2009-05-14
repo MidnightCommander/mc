@@ -266,6 +266,12 @@ menu_goto_line (void)
 }
 
 static void
+menu_toggle_line_state (void)
+{
+    menu_cmd (CK_Toggle_Line_State);
+}
+
+static void
 menu_goto_bracket (void)
 {
     menu_cmd (CK_Match_Bracket);
@@ -368,6 +374,7 @@ static menu_entry SearReplMenu[] =
 static menu_entry CmdMenu[] =
 {
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
+    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
@@ -392,6 +399,7 @@ static menu_entry CmdMenu[] =
 static menu_entry CmdMenuEmacs[] =
 {
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
+    {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
