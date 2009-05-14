@@ -38,10 +38,6 @@ extern gboolean tty_got_interrupt(void);
 extern void tty_gotoyx(int y, int x);
 extern void tty_getyx(int *py, int *px);
 
-extern void tty_disable_colors (gboolean disable, gboolean force);
-extern void tty_setcolor(int color);
-extern void tty_lowlevel_setcolor(int color);
-
 extern void tty_print_char(int c);
 extern void tty_print_alt_char(int c);
 extern void tty_print_string(const char *s);

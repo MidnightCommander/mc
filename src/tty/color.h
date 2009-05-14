@@ -6,16 +6,16 @@
 #ifndef MC_COLOR_H
 #define MC_COLOR_H
 
+#include "../../src/global.h"		/* glib.h */
+
 #ifdef HAVE_SLANG
 #   include "../../src/tty/color-slang.h"
 #else
 #   include "../../src/tty/color-ncurses.h"
 #endif
 
-extern int use_colors;
-
 /* Beware! When using Slang with color, not all the indexes are free.
-   See myslang.h (A_*) */
+   See color-slang.h (A_*) */
 #define NORMAL_COLOR          IF_COLOR (1, 0)
 #define SELECTED_COLOR        IF_COLOR (2, A_REVERSE)
 #define MARKED_COLOR          IF_COLOR (3, A_BOLD)
@@ -83,8 +83,11 @@ extern int alarm_colors[4];
 #define ERROR_HOT_NORMAL   IF_COLOR (39, 0)
 #define ERROR_HOT_FOCUS    IF_COLOR (40, 0)
 
-void init_colors (void);
-void done_colors (void);
-int try_alloc_color_pair (const char *fg, const char *bg);
+void tty_colors_done (void);
+gboolean tty_use_colors (void);
+void tty_disable_colors (gboolean disable, gboolean force);
+int tty_try_alloc_color_pair (const char *fg, const char *bg);
+void tty_setcolor (int color);
+void tty_lowlevel_setcolor (int color);
 
 #endif				/* MC_COLOR_H */

@@ -14,9 +14,9 @@
 #   define WANT_TERM_H
 #endif
 
+#include "../../src/tty/tty.h"		/* tty_is_ugly_line_drawing() */
 #include "../../src/tty/color-ncurses.h"
-#include "../../src/tty/tty-ncurses.h"
-#include "../../src/tty/color-internal.h"	/* disable_colors */
+#include "../../src/tty/color-internal.h"
 #include "../../src/tty/win.h"
 
 #include "../../src/background.h"	/* we_are_background */
@@ -83,32 +83,13 @@ init_curses (void)
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
-    init_colors ();
+    tty_init_colors ();
 
     if (tty_is_ugly_line_drawing ()) {
 	int i;
 	for (i = 0; acs_approx[i].acscode != 0; i++)
 	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
     }
-}
-
-void
-tty_disable_colors (gboolean disable, gboolean force)
-{
-    disable_colors = disable;
-    (void) force_colors;
-}
-
-void
-tty_setcolor (int color)
-{
-    attrset (color);
-}
-
-void
-tty_lowlevel_setcolor (int color)
-{
-    attrset (MY_COLOR_PAIR (color));
 }
 
 void

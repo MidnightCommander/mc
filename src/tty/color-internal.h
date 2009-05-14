@@ -18,6 +18,7 @@
 
 extern gboolean disable_colors;
 extern gboolean force_colors;	/* for S-Lang only */
+extern gboolean use_colors;
 
 struct color_table_s {
     const char *name;
@@ -104,6 +105,7 @@ extern int max_index;
 size_t color_table_len (void);
 size_t color_map_len (void);
 
+void tty_init_colors (void);
 void configure_colors (void);
 void load_dialog_colors (void);
 void get_color (const char *cpp, CTYPE *colp);

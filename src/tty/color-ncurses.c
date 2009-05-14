@@ -36,10 +36,10 @@
 int attr_pairs [MAX_PAIRS];
 
 void
-init_colors (void)
+tty_init_colors (void)
 {
     if (has_colors () && !disable_colors)
-	use_colors = 1;
+	use_colors = TRUE;
 
     if (use_colors) {
 	const size_t map_len = color_map_len ();
@@ -74,6 +74,13 @@ init_colors (void)
     load_dialog_colors ();
 }
 
+void
+tty_disable_colors (gboolean disable, gboolean force)
+{
+    disable_colors = disable;
+    (void) force_colors;
+}
+
 /* Functions necessary to implement syntax highlighting  */
 void
 mc_init_pair (int index, CTYPE foreground, CTYPE background)
@@ -84,7 +91,7 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
 }
 
 int
-try_alloc_color_pair (const char *fg, const char *bg)
+tty_try_alloc_color_pair (const char *fg, const char *bg)
 {
     int fg_index, bg_index;
     int bold_attr;
@@ -122,4 +129,16 @@ try_alloc_color_pair (const char *fg, const char *bg)
     p->index = alloc_color_pair (fg_index, bg_index);
     attr_pairs [p->index] = bold_attr;
     return p->index;
+}
+
+void
+tty_setcolor (int color)
+{
+    attrset (color);
+}
+
+void
+tty_lowlevel_setcolor (int color)
+{
+    attrset (MY_COLOR_PAIR (color));
 }

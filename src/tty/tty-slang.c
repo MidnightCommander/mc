@@ -16,8 +16,8 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty-slang.h"	/* mc_init_pair */
-#include "../../src/tty/color.h"
+#include "../../src/tty/tty.h"		/* tty_is_ugly_line_drawing() */
+#include "../../src/tty/color-slang.h"
 #include "../../src/tty/color-internal.h"
 #include "../../src/tty/mouse.h"	/* Gpm_Event is required in key.h */
 #include "../../src/tty/key.h"		/* define_sequence */
@@ -27,7 +27,6 @@
 #include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/util.h"		/* str_unconst */
 #include "../../src/strutil.h"		/* str_term_form */
-#include "../../src/setup.h"
 
 /*** global variables **************************************************/
 
@@ -335,7 +334,7 @@ init_curses (void)
 {
     SLsmg_init_smg ();
     do_enter_ca_mode ();
-    init_colors ();
+    tty_init_colors ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
 }
@@ -381,89 +380,6 @@ vline (int character, int len)
 
 	SLsmg_gotorc (last_x, last_y);
     }
-}
-
-int
-has_colors (void)
-{
-    const char *terminal = getenv ("TERM");
-    char *cts = color_terminal_string;
-    char *s;
-    size_t i;
-
-    if (force_colors)
-       SLtt_Use_Ansi_Colors = 1;
-    if (getenv ("COLORTERM") != NULL)
-	SLtt_Use_Ansi_Colors = 1;
-
-    /* We want to allow overwriding */
-    if (!disable_colors) {
-	/* check color_terminal_string */
-	while (*cts != '\0') {
-	    while (*cts == ' ' || *cts == '\t')
-		cts++;
-	    s = cts;
-	    i = 0;
-
-	    while (*cts != '\0' && *cts != ',') {
-		cts++;
-		i++;
-	    }
-
-	    if (i != 0 && i == strlen (terminal)
-		&& strncmp (s, terminal, i) == 0)
-		SLtt_Use_Ansi_Colors = 1;
-
-	    if (*cts == ',')
-	        cts++;
-	}
-    }
-
-    /* Setup emulated colors */
-    if (SLtt_Use_Ansi_Colors) {
-        if (use_colors) {
-	    mc_init_pair (A_REVERSE, "black", "white");
-	    mc_init_pair (A_BOLD, "white", "black");
-	} else {
-	    mc_init_pair (A_REVERSE, "black", "lightgray");
-	    mc_init_pair (A_BOLD, "white", "black");
-	    mc_init_pair (A_BOLD_REVERSE, "white", "lightgray");
-	}
-    } else {
-	SLtt_set_mono (A_BOLD,    NULL, SLTT_BOLD_MASK);
-	SLtt_set_mono (A_REVERSE, NULL, SLTT_REV_MASK);
-	SLtt_set_mono (A_BOLD|A_REVERSE, NULL, SLTT_BOLD_MASK | SLTT_REV_MASK);
-    }
-
-    return SLtt_Use_Ansi_Colors;
-}
-
-void
-tty_disable_colors (gboolean disable, gboolean force)
-{
-    disable_colors = disable;
-    force_colors = force;
-}
-
-void
-tty_setcolor (int color)
-{
-    if (!SLtt_Use_Ansi_Colors)
-	SLsmg_set_color (color);
-    else if ((color & A_BOLD) != 0) {
-	if (color == A_BOLD)
-	    SLsmg_set_color (A_BOLD);
-	else
-	    SLsmg_set_color ((color & (~A_BOLD)) + 8);
-    } else
-	SLsmg_set_color (color);
-}
-
-/* Set colorpair by index, don't interpret S-Lang "emulated attributes" */
-void
-tty_lowlevel_setcolor (int color)
-{
-    SLsmg_set_color (color & 0x7F);
 }
 
 int

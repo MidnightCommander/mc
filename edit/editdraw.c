@@ -45,8 +45,8 @@
 
 #define MAX_LINE_LEN 1024
 
-#include "../src/tty/tty.h"		/* tty_setcolor() */
-#include "../src/tty/color.h"		/* EDITOR_NORMAL_COLOR */
+#include "../src/tty/tty.h"		/* tty_printf() */
+#include "../src/tty/color.h"
 #include "../src/tty/key.h"		/* is_idle() */
 
 #include "../src/widget.h"		/* buttonbar_redraw() */
@@ -391,7 +391,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 
 	if (row <= edit->total_lines - edit->start_line) {
 		long tws = 0;
-	    if (use_colors && visible_tws) {
+	    if (tty_use_colors () && visible_tws) {
 		tws = edit_eol (edit, b);
 		while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' '
 				   || c == '\t'))
@@ -435,10 +435,10 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		case '\t':
 		    i = TAB_SIZE - ((int) col % TAB_SIZE);
 		    col += i;
-		    if (use_colors &&
+		    if (tty_use_colors() &&
 		       ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws)) {
 			if (p->style & MOD_MARKED)
-			    c = (p->style);
+			    c = p->style;
 			else
 			    c = p->style | MOD_WHITESPACE;
 			if (i > 2) {
@@ -465,7 +465,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			    p->style = c;
 			    p++;
 			}
-		    } else if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
+		    } else if (tty_use_colors() && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			c = p->style & ~MOD_CURSOR;
@@ -487,7 +487,7 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 		    }
 		    break;
 		case ' ':
-		    if (use_colors && visible_tws && q >= tws && enable_show_tabs_tws) {
+		    if (tty_use_colors() && visible_tws && q >= tws && enable_show_tabs_tws) {
 			p->ch = '.';
 			p->style |= MOD_WHITESPACE;
 			p++;

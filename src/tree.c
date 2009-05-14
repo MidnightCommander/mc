@@ -39,18 +39,20 @@
 #include <string.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
+#include "../src/tty/mouse.h"
+#include "../src/tty/key.h"	/* For mi_getch() */
+
 #include "wtools.h"	/* message() */
 #include "dir.h"
 #include "dialog.h"
 #include "widget.h"
 #include "panel.h"
-#include "../src/tty/mouse.h"
 #include "main.h"
 #include "file.h"	/* For copy_dir_dir(), move_dir_dir(), erase_dir() */
 #include "help.h"
-#include "../src/tty/key.h"	/* For mi_getch() */
 #include "tree.h"
 #include "treestore.h"
 #include "cmd.h"
@@ -269,7 +271,7 @@ static void show_tree (WTree *tree)
 
 	    /* Top level directory */
 	    if (tree->active && current == tree->selected_ptr) {
-		if (!use_colors && !tree->is_panel)
+		if (!tty_use_colors () && !tree->is_panel)
 			tty_setcolor (MARKED_COLOR);
 		else
 			tty_setcolor (SELECTED_COLOR);
@@ -302,7 +304,7 @@ static void show_tree (WTree *tree)
 
 	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */
-		if (!use_colors && !tree->is_panel)
+		if (!tty_use_colors () && !tree->is_panel)
 		    tty_setcolor (MARKED_COLOR);
 		else
 		    tty_setcolor (SELECTED_COLOR);

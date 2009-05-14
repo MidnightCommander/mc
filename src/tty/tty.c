@@ -36,7 +36,6 @@
 #include "../../src/global.h"
 
 #include "../../src/tty/tty.h"
-#include "../../src/tty/color.h"
 
 #include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/strutil.h"
@@ -110,12 +109,14 @@ tty_got_interrupt(void)
     return rv;
 }
 
-void tty_set_ugly_line_drawing (gboolean do_ugly)
+void
+tty_set_ugly_line_drawing (gboolean do_ugly)
 {
     force_ugly_line_drawing = do_ugly;
 }
 
-gboolean tty_is_ugly_line_drawing (void)
+gboolean
+tty_is_ugly_line_drawing (void)
 {
     return force_ugly_line_drawing;
 }
