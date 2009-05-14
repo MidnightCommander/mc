@@ -48,7 +48,7 @@ AC_ARG_WITH([glib_static],
 glib_found=no
 
 if test "x$with_glib12" != "xyes"; then
-	PKG_CHECK_MODULES(GLIB, [glib-2.0], [glib_found=yes], [:])
+	PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.6], [glib_found=yes], [:])
 fi
 
 PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
