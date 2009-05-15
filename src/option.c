@@ -38,7 +38,7 @@
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
 #include "main.h"
-#include "profile.h"		/* For sync_profiles */
+#include "../src/mcconfig/mcconfig.h"
 #include "strutil.h"
 
 #include "panel.h"		/* Needed for the externs */
@@ -243,7 +243,7 @@ void configure_box (void)
     /* If they pressed the save button */
     if (result == B_EXIT){
 	save_configure ();
-	sync_profiles ();
+	mc_config_save_file (mc_profile);
     }
 
     destroy_dlg (conf_dlg);

@@ -1,6 +1,6 @@
 /* Learn keys
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007 Free Software Foundation, Inc.
+   2007, 2009 Free Software Foundation, Inc.
    
    Written by: 1995 Jakub Jelinek
 
@@ -40,7 +40,7 @@
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"
-#include "profile.h"		/* Save profile */
+#include "../src/mcconfig/mcconfig.h"
 #include "key.h"
 #include "setup.h"
 #include "main.h"
@@ -318,8 +318,8 @@ learn_save (void)
     for (i = 0; i < learn_total; i++) {
 	if (learnkeys [i].sequence != NULL) {
 	    profile_changed = 1;
-	    WritePrivateProfileString (section, key_name_conv_tab [i].name,
-	        learnkeys [i].sequence, profile_name);
+	    mc_config_set_string ( mc_profile, section,
+		      key_name_conv_tab [i].name, learnkeys [i].sequence);
 	}
     }
 
@@ -330,7 +330,7 @@ learn_save (void)
      * disk is much worse.
      */
     if (profile_changed)
-	sync_profiles ();
+	mc_config_save_file (mc_profile);
 
     g_free (section);
 }

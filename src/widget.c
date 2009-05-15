@@ -1,7 +1,7 @@
 /* Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+   2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
    
    Authors: 1994, 1995 Radek Doulik
             1994, 1995 Miguel de Icaza
@@ -46,7 +46,7 @@
 #include "widget.h"
 #include "win.h"
 #include "key.h"	/* XCTRL and ALT macros  */
-#include "profile.h"	/* for history loading and saving */
+#include "../src/mcconfig/mcconfig.h"
 #include "wtools.h"	/* For common_dialog_repaint() */
 #include "main.h"	/* for `slow_terminal' */
 #include "strutil.h"
@@ -892,6 +892,8 @@ history_get (const char *input_name)
     int i;
     GList *hist;
     char *profile;
+    mc_config_t *cfg;
+    char *this_entry;
 
     hist = NULL;
 
@@ -902,17 +904,19 @@ history_get (const char *input_name)
     if (!*input_name)
 	return NULL;
     profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
+    cfg = mc_config_init(profile);
     for (i = 0;; i++) {
 	char key_name[BUF_TINY];
-	char this_entry[BUF_LARGE];
 	g_snprintf (key_name, sizeof (key_name), "%d", i);
-	GetPrivateProfileString (input_name, key_name, "", this_entry,
-				 sizeof (this_entry), profile);
-	if (!*this_entry)
+	
+	this_entry = mc_config_get_string(cfg, input_name, key_name, "");
+	if (!*this_entry){
+	    g_free(this_entry);
 	    break;
-
-	hist = list_append_unique (hist, g_strdup (this_entry));
+	}
+	hist = list_append_unique (hist, this_entry);
     }
+    mc_config_deinit(cfg);
     g_free (profile);
 
     /* return pointer to the last entry in the list */
@@ -926,6 +930,7 @@ history_put (const char *input_name, GList *h)
 {
     int i;
     char *profile;
+    mc_config_t *cfg;
 
     if (!input_name)
 	return;
@@ -957,8 +962,10 @@ history_put (const char *input_name, GList *h)
     for (i = 0; i < num_history_items_recorded - 1 && h->prev; i++)
 	h = g_list_previous (h);
 
+    cfg = mc_config_init(profile);
+
     if (input_name)
-	profile_clean_section (input_name, profile);
+	mc_config_del_group(cfg,input_name);
 
     /* dump histories into profile */
     for (i = 0; h; h = g_list_next (h)) {
@@ -970,11 +977,11 @@ history_put (const char *input_name, GList *h)
 	if (text && *text) {
 	    char key_name[BUF_TINY];
 	    g_snprintf (key_name, sizeof (key_name), "%d", i++);
-	    WritePrivateProfileString (input_name, key_name, text,
-				       profile);
+	    mc_config_set_string(cfg,input_name, key_name, text);
 	}
     }
 
+    mc_config_deinit(cfg);
     g_free (profile);
 }
 
