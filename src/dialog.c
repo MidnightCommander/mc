@@ -522,9 +522,22 @@ void dlg_stop (Dlg_head *h)
     h->running = 0;
 }
 
-static inline void dialog_handle_key (Dlg_head *h, int d_key)
+static inline void
+dialog_handle_key (Dlg_head *h, int d_key)
 {
-    switch (d_key){
+    if (is_abort_char (d_key)) {
+	h->ret_value = B_CANCEL;
+	dlg_stop (h);
+	return;
+    }
+
+    switch (d_key) {
+    case '\n':
+    case KEY_ENTER:
+	h->ret_value = B_ENTER;
+	dlg_stop (h);
+	break;
+
     case KEY_LEFT:
     case KEY_UP:
 	dlg_one_up (h);
@@ -556,18 +569,7 @@ static inline void dialog_handle_key (Dlg_head *h, int d_key)
 	doupdate ();
 	break;
 
-    case '\n':
-    case KEY_ENTER:
-	h->ret_value = B_ENTER;
-	h->running = 0;
-	break;
-
-    case ESC_CHAR:
-    case KEY_F (10):
-    case XCTRL ('c'):
-    case XCTRL ('g'):
-	h->ret_value = B_CANCEL;
-	dlg_stop (h);
+    default:
 	break;
     }
 }

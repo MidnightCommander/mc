@@ -121,12 +121,6 @@ check_movement_keys (int key, int page_size, void *data, movefn backfn,
 }
 
 /* Classification routines */
-int is_abort_char (int c)
-{
-    return (c == XCTRL('c') || c == XCTRL('g') || c == ESC_CHAR ||
-	    c == KEY_F(10));
-}
-
 void mc_raw_mode (void)
 {
     raw ();

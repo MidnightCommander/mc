@@ -204,17 +204,24 @@ static void check_selects (fd_set *select_set)
     } while (retry);
 }
 
-void channels_down (void)
-{
-    disabled_channels++;
-}
-
 void channels_up (void)
 {
     if (!disabled_channels)
 	fputs ("Error: channels_up called with disabled_channels = 0\n",
 	       stderr);
     disabled_channels--;
+}
+
+void channels_down (void)
+{
+    disabled_channels++;
+}
+
+gboolean
+is_abort_char (int c)
+{
+    return (c == XCTRL('c') || c == XCTRL('g') || c == ESC_CHAR ||
+	    c  == KEY_F(10));
 }
 
 typedef const struct {

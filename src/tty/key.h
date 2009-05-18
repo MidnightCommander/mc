@@ -6,6 +6,8 @@
 #ifndef MC_KEY_H
 #define MC_KEY_H
 
+#include "../../src/global.h"		/* <glib.h> */
+
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
@@ -47,9 +49,7 @@ void remove_select_channel (int fd);
 void channels_up (void);
 void channels_down (void);
 
-/* Abort/Quit chars */
-int is_abort_char (int c);
-int is_quit_char (int c);
+gboolean is_abort_char (int c);
 
 #define XCTRL(x) (KEY_M_CTRL | ((x) & 31))
 #define ALT(x) (KEY_M_ALT | (unsigned int)(x))
