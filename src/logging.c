@@ -1,9 +1,7 @@
 /*
    Provides a log file to ease tracing the program.
 
-   Copyright (C) 2006,2009 Free Software Foundation, Inc.
-
-   Written: 2006 Roland Illig <roland.illig@gmx.de>.
+   Copyright (C) 2006 Roland Illig <roland.illig@gmx.de>.
 
    This file is part of the Midnight Commander.
 
@@ -35,8 +33,6 @@
 #include "global.h"
 #include "logging.h"
 #include "setup.h"
-#include "../src/mcconfig/mcconfig.h"
-
 
 /*** file scope functions **********************************************/
 
@@ -50,7 +46,7 @@ is_logging_enabled(void)
 	if (!logging_initialized) {
 		mc_ini = g_strdup_printf("%s/%s", home_dir, PROFILE_NAME);
 		logging_enabled =
-		    mc_config_get_int (mc_profile, mc_ini, "development.enable_logging", FALSE);
+		    get_int(mc_ini, "development.enable_logging", FALSE);
 		g_free(mc_ini);
 		logging_initialized = TRUE;
 	}

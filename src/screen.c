@@ -1,6 +1,6 @@
 /* Panel managing.
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2009 Free Software Foundation, Inc.
+   2005, 2006, 2007 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
-#include "../src/mcconfig/mcconfig.h"
+#include "profile.h"
 #include "execute.h"
 #include "widget.h"
 #include "menu.h"		/* menubar_visible */
@@ -1142,7 +1142,7 @@ panel_new (const char *panel_name)
     panel->search_buffer[0] = 0;
     panel->frame_size = frame_half;
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
-    if (!mc_config_has_group (mc_profile, section)) {
+    if (!profile_has_section (section, profile_name)) {
 	g_free (section);
 	section = g_strdup (panel->panel_name);
     }

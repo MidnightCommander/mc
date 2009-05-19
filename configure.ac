@@ -566,7 +566,6 @@ misc/Makefile
 misc/mc.ext
 
 src/Makefile
-src/mcconfig/Makefile
 src/search/Makefile
 
 edit/Makefile 

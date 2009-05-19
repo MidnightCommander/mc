@@ -1,6 +1,6 @@
 /* External panelize
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009 Free Software Foundation, Inc.
+   2007 Free Software Foundation, Inc.
    
    Written by: 1995 Janne Kukonlehto
                1995 Jakub Jelinek
@@ -41,7 +41,7 @@
 #include "widget.h"
 #include "wtools.h"		/* For common_dialog_repaint() */
 #include "setup.h"		/* For profile_bname */
-#include "../src/mcconfig/mcconfig.h"
+#include "profile.h"		/* Load/save directories panelize */
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* repaint_screen */
@@ -312,11 +312,10 @@ external_panelize (void)
 
 void load_panelize (void)
 {
-    gchar	**profile_keys, **keys;
-    gsize len;
-
-    keys = mc_config_get_keys (mc_profile, panelize_section,&len);
-    profile_keys = keys;
+    void *profile_keys;
+    char *key, *value;
+    
+    profile_keys = profile_init_iterator (panelize_section, profile_name);
     
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
@@ -327,29 +326,25 @@ void load_panelize (void)
 	return;
     }
     
-    while (*profile_keys)
-    {
-	add2panelize (
-		g_strdup (*profile_keys),
-		mc_config_get_string(mc_profile,panelize_section,*profile_keys,"")
-	);
-	profile_keys++;
+    while (profile_keys){
+	profile_keys = profile_iterator_next (profile_keys, &key, &value);
+	add2panelize (g_strdup (key), g_strdup (value));
     }
-    g_strfreev(keys);
 }
 
 void save_panelize (void)
 {
     struct panelize *current = panelize;
     
-    mc_config_del_group (mc_profile, panelize_section);
-
-    for (;current; current = current->next)
-    {
-	if (strcmp (current->label, _("Other command")))
-	    mc_config_set_string(mc_profile,panelize_section,current->label,current->command);
+    profile_clean_section (panelize_section, profile_name);
+    for (;current; current = current->next){
+    	if (strcmp (current->label, _("Other command")))
+	    WritePrivateProfileString (panelize_section,
+				       current->label,
+				       current->command,
+				       profile_name);
     }
-    mc_config_save_file (mc_profile);
+    sync_profiles ();
 }
 
 void done_panelize (void)
