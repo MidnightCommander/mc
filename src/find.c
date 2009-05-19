@@ -667,8 +667,8 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
     status_update (buffer);
     tty_refresh ();
 
-    enable_interrupt_key ();
-    got_interrupt ();
+    tty_enable_interrupt_key ();
+    tty_got_interrupt ();
 
     {
 	int line = 1;
@@ -727,7 +727,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 
 	}
     }
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     mc_close (file_fd);
     return ret_val;
 }

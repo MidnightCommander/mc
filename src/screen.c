@@ -567,7 +567,7 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                 tty_setcolor (SELECTED_COLOR);
             else
                 tty_setcolor (NORMAL_COLOR);
-	    one_vline ();
+	    tty_print_one_vline ();
 	    length++;
 	}
     }
@@ -620,7 +620,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	    addch (' ');
 	else {
 	    tty_setcolor (NORMAL_COLOR);
-	    one_vline ();
+	    tty_print_one_vline ();
 	}
     }
 }
@@ -1224,7 +1224,7 @@ paint_frame (WPanel *panel)
 
 	if (side){
 	    tty_setcolor (NORMAL_COLOR);
-	    one_vline ();
+	    tty_print_one_vline ();
 	    width = panel->widget.cols - panel->widget.cols/2 - 1;
 	} else if (panel->split)
 	    width = panel->widget.cols/2 - 3;
@@ -1249,8 +1249,8 @@ paint_frame (WPanel *panel)
                 width -= format->field_len;
 	    } else {
 		tty_setcolor (NORMAL_COLOR);
-		one_vline ();
-		width --;
+		tty_print_one_vline ();
+		width--;
 		continue;
 	    }
 	}

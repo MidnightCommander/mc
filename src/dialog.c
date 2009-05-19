@@ -32,6 +32,7 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
+#include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"	/* mi_getch() */
 
@@ -752,7 +753,7 @@ void dlg_run_done (Dlg_head *h)
 void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 {
     if (key == EV_NONE){
-	if (got_interrupt ())
+	if (tty_got_interrupt ())
 	    key = XCTRL('g');
 	else
 	    return;
@@ -790,7 +791,7 @@ frontend_run_dlg (Dlg_head *h)
 	update_cursor (h);
 
 	/* Clear interrupt flag */
-	got_interrupt ();
+	tty_got_interrupt ();
 	d_key = get_event (&event, h->mouse_status == MOU_REPEAT, 1);
 
 	dlg_process_event (h, d_key, &event);

@@ -969,8 +969,8 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 	goto error_3;
 
     /* Clear the interrupt status */
-    got_interrupt ();
-    enable_interrupt_key ();
+    tty_got_interrupt ();
+    tty_enable_interrupt_key ();
 
     while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof (buffer)))) {
 	int t;
@@ -981,7 +981,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 	vfs_s_print_stats (me->name, _("Getting file"), ino->ent->name,
 			   total, stat_size);
 
-	if (got_interrupt ())
+	if (tty_got_interrupt ())
 	    goto error_1;
 
 	t = write (handle, buffer, n);
@@ -994,13 +994,13 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     MEDATA->linear_close (me, &fh);
     close (handle);
 
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     return 0;
 
   error_1:
     MEDATA->linear_close (me, &fh);
   error_3:
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     close (handle);
     unlink (ino->localname);
   error_4:
@@ -1241,10 +1241,10 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
 
     (void) me;
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
     for (i = 0; i < size-1; i++){
 	n = read (fd, buffer+i, 1);
-	disable_interrupt_key ();
+	tty_disable_interrupt_key ();
 	if (n == -1 && errno == EINTR){
 	    buffer [i] = 0;
 	    return EINTR;

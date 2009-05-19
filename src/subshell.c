@@ -518,11 +518,11 @@ init_subshell (void)
     /* Wait until the subshell has started up and processed the command */
 
     subshell_state = RUNNING_COMMAND;
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
     if (!feed_subshell (QUIETLY, TRUE)) {
 	use_subshell = FALSE;
     }
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     if (!subshell_alive)
 	use_subshell = FALSE;	/* Subshell died instantly, so don't use it */
 }

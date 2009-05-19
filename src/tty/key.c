@@ -1143,9 +1143,9 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 	    timeout.tv_sec = 0;
 	    timeout.tv_usec = 0;
 	}
-	enable_interrupt_key ();
+	tty_enable_interrupt_key ();
 	flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
-	disable_interrupt_key ();
+	tty_disable_interrupt_key ();
 
 	/* select timed out: it could be for any of the following reasons:
 	 * redo_event -> it was because of the MOU_REPEAT handler

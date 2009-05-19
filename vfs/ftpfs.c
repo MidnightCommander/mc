@@ -358,7 +358,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     }
 
     got_sigpipe = 0;
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
     status = write (SUP.sock, cmdstr, cmdlen);
 
     if (status < 0) {
@@ -377,12 +377,12 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 	    got_sigpipe = 1;
 	}
 	g_free (cmdstr);
-	disable_interrupt_key ();
+	tty_disable_interrupt_key ();
 	return TRANSIENT;
     }
     retry = 0;
   ok:
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
 
     if (wait_reply)
     {
@@ -679,8 +679,8 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 	free_host = 1;
     }
 
-    enable_interrupt_key(); /* clear the interrupt flag */
-    
+    tty_enable_interrupt_key(); /* clear the interrupt flag */
+
     /* Get host address */
     memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = AF_INET;
@@ -688,7 +688,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (server_address.sin_addr.s_addr == INADDR_NONE) {
 	hp = gethostbyname (host);
 	if (hp == NULL){
-	    disable_interrupt_key();
+	    tty_disable_interrupt_key ();
 	    print_vfs_message (_("ftpfs: Invalid host address."));
 	    ftpfs_errno = EINVAL;
 	    if (free_host)
@@ -705,7 +705,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 
     /* Connect */
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
-	disable_interrupt_key();
+	tty_disable_interrupt_key ();
 	ftpfs_errno = errno;
         if (free_host)
 	    g_free (host);
@@ -719,16 +719,16 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     if (connect (my_socket, (struct sockaddr *) &server_address,
 	     sizeof (server_address)) < 0){
 	ftpfs_errno = errno;
-	if (errno == EINTR && got_interrupt ())
+	if (errno == EINTR && tty_got_interrupt ())
 	    print_vfs_message (_("ftpfs: connection interrupted by user"));
 	else
 	    print_vfs_message (_("ftpfs: connection to server failed: %s"),
 				   unix_error_string(errno));
-	disable_interrupt_key();
+	tty_disable_interrupt_key ();
 	close (my_socket);
 	return -1;
     }
-    disable_interrupt_key();
+    tty_disable_interrupt_key ();
     return my_socket;
 }
 
@@ -761,17 +761,17 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 	    } 
 	    if (ftpfs_retry_seconds){
 		retry_seconds = ftpfs_retry_seconds;
-		enable_interrupt_key ();
+		tty_enable_interrupt_key ();
 		for (count_down = retry_seconds; count_down; count_down--){
 		    print_vfs_message (_("Waiting to retry... %d (Control-C to cancel)"), count_down);
 		    sleep (1);
-		    if (got_interrupt ()){
+		    if (tty_got_interrupt ()) {
 			/* ftpfs_errno = E; */
-			disable_interrupt_key ();
+			tty_disable_interrupt_key ();
 			return 0;
 		    }
 		}
-		disable_interrupt_key ();
+		tty_disable_interrupt_key ();
 	    }
 	}
     } while (retry_seconds);
@@ -986,7 +986,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
     	j = ftpfs_command (me, super, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
 	ERRNOR (EPERM, -1);
-    enable_interrupt_key();
+    tty_enable_interrupt_key ();
     if (SUP.use_passive_connection)
 	data = s;
     else {
@@ -997,8 +997,8 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 	    return -1;
 	}
 	close (s);
-    } 
-    disable_interrupt_key();
+    }
+    tty_disable_interrupt_key ();
     return data;
 }
 
@@ -1148,7 +1148,7 @@ resolve_symlink_with_ls_options(struct vfs_class *me, struct vfs_s_super *super,
 	print_vfs_message(_("ftpfs: couldn't resolve symlink"));
 	return;
     }
-    enable_interrupt_key();
+    tty_enable_interrupt_key ();
     flist = dir->file_list->next;
     while (1) {
 	do {
@@ -1164,7 +1164,7 @@ resolve_symlink_with_ls_options(struct vfs_class *me, struct vfs_s_super *super,
 		fputs (buffer, MEDATA->logfile);
 	        fflush (MEDATA->logfile);
 	    }
-vfs_die("This code should be commented out\n");
+	    vfs_die("This code should be commented out\n");
 	    if (vfs_parse_ls_lga (buffer, &s, &filename, NULL)) {
 		int r = strcmp(fe->name, filename);
 		g_free(filename);
@@ -1188,7 +1188,7 @@ vfs_die("This code should be commented out\n");
     }
 done:
     while (fgets(buffer, sizeof(buffer), fp) != NULL);
-    disable_interrupt_key();
+    tty_disable_interrupt_key ();
     fclose(fp);
     ftpfs_get_reply(me, SUP.sock, NULL, 0);
 }
@@ -1255,7 +1255,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	goto fallback;
 
     /* Clear the interrupt flag */
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
 
     while (1) {
 	int i;
@@ -1268,7 +1268,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 	if (res == EINTR) {
 	    me->verrno = ECONNRESET;
 	    close (sock);
-	    disable_interrupt_key ();
+	    tty_disable_interrupt_key ();
 	    ftpfs_get_reply (me, SUP.sock, NULL, 0);
 	    print_vfs_message (_("%s: failure"), me->name);
 	    return -1;
@@ -1368,11 +1368,11 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name,
 #endif
     n_stored = 0;
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
     while (1) {
 	while ((n_read = read (h, buffer, sizeof (buffer))) == -1) {
 	    if (errno == EINTR) {
-		if (got_interrupt ()) {
+		if (tty_got_interrupt ()) {
 		    ftpfs_errno = EINTR;
 		    goto error_return;
 		} else
@@ -1387,7 +1387,7 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name,
 	w_buf = buffer;
 	while ((n_written = write (sock, w_buf, n_read)) != n_read) {
 	    if (n_written == -1) {
-		if (errno == EINTR && !got_interrupt ()) {
+		if (errno == EINTR && !tty_got_interrupt ()) {
 		    continue;
 		}
 		ftpfs_errno = errno;
@@ -1399,14 +1399,14 @@ ftpfs_file_store (struct vfs_class *me, struct vfs_s_fh *fh, char *name,
 	print_vfs_message (_("ftpfs: storing file %lu (%lu)"),
 			   (unsigned long) n_stored, (unsigned long) s.st_size);
     }
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     close (sock);
     close (h);
     if (ftpfs_get_reply (me, SUP.sock, NULL, 0) != COMPLETE)
 	ERRNOR (EIO, -1);
     return 0;
   error_return:
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     close (sock);
     close (h);
     ftpfs_get_reply (me, SUP.sock, NULL, 0);
@@ -1437,7 +1437,7 @@ ftpfs_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len
     struct vfs_s_super *super = FH_SUPER;
 
     while ((n = read (FH_SOCK, buf, len))<0) {
-        if ((errno == EINTR) && !got_interrupt())
+        if ((errno == EINTR) && !tty_got_interrupt ())
 	    continue;
 	break;
     }

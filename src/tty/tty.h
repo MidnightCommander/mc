@@ -51,17 +51,7 @@ extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
 extern void tty_draw_box (int y, int x, int rows, int cols);
 
-
 extern char *tty_tgetstr (const char *name);
-
-/* legacy interface */
-
-#define start_interrupt_key()	tty_start_interrupt_key()
-#define enable_interrupt_key()	tty_enable_interrupt_key()
-#define disable_interrupt_key()	tty_disable_interrupt_key()
-#define got_interrupt()		tty_got_interrupt()
-#define one_hline()		tty_print_one_hline()
-#define one_vline()		tty_print_one_vline()
 
 #define KEY_KP_ADD	4001
 #define KEY_KP_SUBTRACT	4002

@@ -3198,7 +3198,7 @@ do_search (WView *view)
     search_update_steps (view);
     view->update_activate = 0;
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
 
     do
     {
@@ -3240,8 +3240,8 @@ do_search (WView *view)
     view->dirty++;
     view_update (view);
 
+    tty_disable_interrupt_key ();
 
-    disable_interrupt_key ();
     if (verbose) {
         dlg_run_done (d);
         destroy_dlg (d);

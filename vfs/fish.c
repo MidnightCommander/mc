@@ -157,12 +157,12 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super,
 	fflush (logfile);
     }
 
-    enable_interrupt_key ();
+    tty_enable_interrupt_key ();
 
     status = write (SUP.sockw, str, strlen (str));
     g_free (str);
 
-    disable_interrupt_key ();
+    tty_disable_interrupt_key ();
     if (status < 0)
 	return TRANSIENT;
 
@@ -749,7 +749,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
     while (1) {
 	int t;
 	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
-	    if ((errno == EINTR) && got_interrupt())
+	    if ((errno == EINTR) && tty_got_interrupt ())
 	        continue;
 	    print_vfs_message(_("fish: Local read failed, sending zeros") );
 	    close(h);
@@ -765,7 +765,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 	    }
 	    goto error_return;
 	}
-	disable_interrupt_key();
+	tty_disable_interrupt_key ();
 	total += n;
 	print_vfs_message(_("fish: storing %s %d (%lu)"), 
 			  was_error ? _("zeros") : _("file"), total,
@@ -861,13 +861,13 @@ fish_linear_read (struct vfs_class *me, struct vfs_s_fh *fh, void *buf, int len)
     struct vfs_s_super *super = FH_SUPER;
     int n = 0;
     len = MIN( fh->u.fish.total - fh->u.fish.got, len );
-    disable_interrupt_key();
+    tty_disable_interrupt_key ();
     while (len && ((n = read (SUP.sockr, buf, len))<0)) {
-        if ((errno == EINTR) && !got_interrupt())
+        if ((errno == EINTR) && !tty_got_interrupt ())
 	    continue;
 	break;
     }
-    enable_interrupt_key();
+    tty_enable_interrupt_key();
 
     if (n>0) fh->u.fish.got += n;
     if (n<0) fish_linear_abort(me, fh);
