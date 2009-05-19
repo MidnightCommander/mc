@@ -52,7 +52,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
 #include "../src/tty/mouse.h"
-#include "../src/tty/win.h"
 
 #include "dialog.h"
 #include "widget.h"
@@ -582,7 +581,7 @@ done_screen ()
     if (!(quit & SUBSHELL_EXIT))
 	clr_scr ();
     reset_shell_mode ();
-    mc_noraw_mode ();
+    tty_noraw_mode ();
     keypad (stdscr, FALSE);
     tty_colors_done ();
 }
@@ -723,7 +722,7 @@ change_screen_size (void)
 #if defined TIOCGWINSZ
 
 #ifndef NCURSES_VERSION
-    mc_noraw_mode ();
+    tty_noraw_mode ();
     endwin ();
 #endif
     low_level_change_screen_size ();

@@ -37,11 +37,7 @@ enum {
 #    define FALSE 0
 #endif
 
-void slang_set_raw_mode (void);
-
 #define doupdate()
-#define raw()		slang_set_raw_mode ()
-#define noraw()
 #define nodelay(x, val)		set_slang_delay (val)
 #define noecho()
 #define beep()			SLtt_beep ()

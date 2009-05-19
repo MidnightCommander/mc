@@ -20,7 +20,4 @@ extern int xterm_flag;
 void do_enter_ca_mode (void);
 void do_exit_ca_mode (void);
 
-void mc_raw_mode (void);
-void mc_noraw_mode (void);
-
 #endif				/* MC_WIN_H */

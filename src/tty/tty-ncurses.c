@@ -79,7 +79,7 @@ init_curses (void)
 #endif /* HAVE_ESCDELAY */
 
     do_enter_ca_mode ();
-    mc_raw_mode ();
+    raw ();
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
@@ -90,6 +90,18 @@ init_curses (void)
 	for (i = 0; acs_approx[i].acscode != 0; i++)
 	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
     }
+}
+
+void
+tty_raw_mode (void)
+{
+    raw ();
+}
+
+void
+tty_noraw_mode (void)
+{
+    noraw ();
 }
 
 void

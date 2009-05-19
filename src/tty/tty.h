@@ -26,6 +26,8 @@ extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
 extern gboolean tty_got_interrupt(void);
 
+extern void tty_raw_mode (void);
+extern void tty_noraw_mode (void);
 
 /* {{{ Output }}} */
 

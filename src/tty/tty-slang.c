@@ -269,9 +269,14 @@ init_slang (void)
 }
 
 void
-slang_set_raw_mode (void)
+tty_raw_mode (void)
 {
     tcsetattr (SLang_TT_Read_FD, TCSANOW, &new_mode);
+}
+
+void
+tty_noraw_mode (void)
+{
 }
 
 /* Done each time we come back from done mode */

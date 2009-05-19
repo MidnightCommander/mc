@@ -120,17 +120,6 @@ check_movement_keys (int key, int page_size, void *data, movefn backfn,
     return MSG_HANDLED;
 }
 
-/* Classification routines */
-void mc_raw_mode (void)
-{
-    raw ();
-}
-
-void mc_noraw_mode (void)
-{
-    noraw ();
-}
-
 /* This flag is set by xterm detection routine in function main() */
 /* It is used by function view_other_cmd() */
 int xterm_flag = 0;

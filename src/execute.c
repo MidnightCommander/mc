@@ -51,7 +51,7 @@ edition_post_exec (void)
     flushinp ();
 
     keypad (stdscr, TRUE);
-    mc_raw_mode ();
+    tty_raw_mode ();
     channels_up ();
     enable_mouse ();
     if (alternate_plus_minus)
@@ -144,7 +144,7 @@ do_execute (const char *shell, const char *command, int flags)
 	    ) {
 	    printf (_("Press any key to continue..."));
 	    fflush (stdout);
-	    mc_raw_mode ();
+	    tty_raw_mode ();
 	    get_key_code (0);
 	    printf ("\r\n");
 	    fflush (stdout);
@@ -231,7 +231,7 @@ toggle_panels (void)
 	numeric_keypad_mode ();
 #ifndef HAVE_SLANG
     /* With slang we don't want any of this, since there
-     * is no mc_raw_mode supported
+     * is no tty_raw_mode supported
      */
     reset_shell_mode ();
     noecho ();
@@ -239,7 +239,7 @@ toggle_panels (void)
     keypad (stdscr, FALSE);
     endwin ();
     do_exit_ca_mode ();
-    mc_raw_mode ();
+    tty_raw_mode ();
     if (console_flag)
 	handle_console (CONSOLE_RESTORE);
 
