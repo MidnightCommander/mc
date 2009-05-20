@@ -37,6 +37,36 @@
 
 static const char replch = '?';
 
+/*
+ * Inlines to equalize 'char' signedness for single 'char' encodings.
+ * Instead of writing
+ *    isspace((unsigned char)c);
+ * you can write
+ *    char_isspace(c);
+ */
+
+#define DECLARE_CTYPE_WRAPPER(func_name)       \
+static inline int char_##func_name(char c)     \
+{                                              \
+    return func_name((int)(unsigned char)c);   \
+}
+
+DECLARE_CTYPE_WRAPPER(isalnum)
+DECLARE_CTYPE_WRAPPER(isalpha)
+DECLARE_CTYPE_WRAPPER(isascii)
+DECLARE_CTYPE_WRAPPER(isblank)
+DECLARE_CTYPE_WRAPPER(iscntrl)
+DECLARE_CTYPE_WRAPPER(isdigit)
+DECLARE_CTYPE_WRAPPER(isgraph)
+DECLARE_CTYPE_WRAPPER(islower)
+DECLARE_CTYPE_WRAPPER(isprint)
+DECLARE_CTYPE_WRAPPER(ispunct)
+DECLARE_CTYPE_WRAPPER(isspace)
+DECLARE_CTYPE_WRAPPER(isupper)
+DECLARE_CTYPE_WRAPPER(isxdigit)
+DECLARE_CTYPE_WRAPPER(toupper)
+DECLARE_CTYPE_WRAPPER(tolower)
+
 static void
 str_8bit_insert_replace_char (GString * buffer)
 {
@@ -97,31 +127,31 @@ str_8bit_cprev_noncomb_char (const char **text, const char *begin)
 static int
 str_8bit_isspace (const char *text)
 {
-    return isspace (text[0]);
+    return char_isspace (text[0]);
 }
 
 static int
 str_8bit_ispunct (const char *text)
 {
-    return ispunct (text[0]);
+    return char_ispunct (text[0]);
 }
 
 static int
 str_8bit_isalnum (const char *text)
 {
-    return isalnum (text[0]);
+    return char_isalnum (text[0]);
 }
 
 static int
 str_8bit_isdigit (const char *text)
 {
-    return isdigit (text[0]);
+    return char_isdigit (text[0]);
 }
 
 static int
 str_8bit_isprint (const char *text)
 {
-    return isprint (text[0]);
+    return char_isprint (text[0]);
 }
 
 static int
@@ -136,7 +166,7 @@ str_8bit_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
 	return 0;
-    (*out)[0] = toupper ((unsigned char) text[0]);
+    (*out)[0] = char_toupper (text[0]);
     (*out)++;
     (*remain)--;
     return 1;
@@ -147,7 +177,7 @@ str_8bit_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
 	return 0;
-    (*out)[0] = tolower ((unsigned char) text[0]);
+    (*out)[0] = char_tolower (text[0]);
     (*out)++;
     (*remain)--;
     return 1;
@@ -228,7 +258,7 @@ str_8bit_term_form (const char *text)
 
     for (; pos < length && remain > 1; pos++, actual++, remain--)
     {
-	actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
     }
 
     actual[0] = '\0';
@@ -271,7 +301,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
 	for (; pos < length && remain > 1; pos++, actual++, remain--)
 	{
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
 	if (width - length - ident > 0)
 	{
@@ -290,7 +320,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 		 actual++, pos++, remain--)
 	    {
 
-		actual[0] = isprint (text[pos]) ? text[pos] : '.';
+		actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	    }
 
 	    if (remain <= 1)
@@ -303,7 +333,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
 	    for (; pos < length && remain > 1; pos++, actual++, remain--)
 	    {
-		actual[0] = isprint (text[pos]) ? text[pos] : '.';
+		actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	    }
 	}
 	else
@@ -324,7 +354,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 		 pos++, actual++, remain--)
 	    {
 
-		actual[0] = isprint (text[pos]) ? text[pos] : '.';
+		actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	    }
 
 	}
@@ -365,7 +395,7 @@ str_8bit_term_trim (const char *text, int width)
 
 	    for (; pos < length && remain > 1; pos++, actual++, remain--)
 	    {
-		actual[0] = isprint (text[pos]) ? text[pos] : '.';
+		actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	    }
 	}
     }
@@ -373,7 +403,7 @@ str_8bit_term_trim (const char *text, int width)
     {
 	for (; pos < length && remain > 1; pos++, actual++, remain--)
 	{
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
     }
 
@@ -456,7 +486,7 @@ str_8bit_term_substring (const char *text, int start, int width)
 	     pos++, width--, actual++, remain--)
 	{
 
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
     }
 
@@ -486,7 +516,7 @@ str_8bit_trunc (const char *text, int width)
     {
 	for (; pos + 1 <= (gsize)width / 2 && remain > 1; actual++, pos++, remain--)
 	{
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
 
 	if (remain <= 1)
@@ -499,14 +529,14 @@ str_8bit_trunc (const char *text, int width)
 
 	for (; pos < length && remain > 1; pos++, actual++, remain--)
 	{
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
     }
     else
     {
 	for (; pos < length && remain > 1; pos++, actual++, remain--)
 	{
-	    actual[0] = isprint (text[pos]) ? text[pos] : '.';
+	    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
 	}
     }
 
@@ -635,7 +665,7 @@ str_8bit_caseprefix (const char *text, const char *prefix)
 {
     int result;
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
-	 && toupper (text[result]) == toupper (prefix[result]); result++);
+	 && char_toupper (text[result]) == char_toupper (prefix[result]); result++);
     return result;
 }
 
