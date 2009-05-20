@@ -350,6 +350,12 @@ save_panel_types (void)
 	    mc_config_set_string(mc_panels_config, "Dirs" , "current_is_left",
 				       get_current_index () == 0 ? "1" : "0");
 
+    if (mc_panels_config->ini_path == NULL)
+        mc_panels_config->ini_path = g_strdup(panels_profile_name);
+
+    mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
+    mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
+
     mc_config_save_file (mc_panels_config);
 }
 
@@ -568,8 +574,6 @@ load_setup (void)
     /* Load the directory history */
 /*    directory_history_load (); */
     /* Remove the temporal entries */
-    mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
-    mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
 #if defined(USE_VFS) && defined (USE_NETCODE)
     ftpfs_init_passwd ();
 #endif /* USE_VFS && USE_NETCODE */

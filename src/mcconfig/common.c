@@ -219,7 +219,6 @@ mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path)
     {
 	mc_unlink (ini_path);
     }
-mc_log("ini_path = %s\n", ini_path);
     ret = g_file_set_contents(ini_path,data,len,NULL);
     g_free(data);
     return ret;
