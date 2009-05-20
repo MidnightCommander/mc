@@ -575,16 +575,24 @@ load_mc_home_file (const char *filename, char **allocated_filename)
 
     if (!data) {
 	g_free (hintfile);
-	/* Fall back to the two-letter language code */
-	if (lang[0] && lang[1])
-	    lang[2] = 0;
+	g_free (hintfile_base);
+	hintfile_base = concat_dir_and_file (mc_home_alt, filename);
+
 	hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
 	data = load_file (hintfile);
 
 	if (!data) {
-	    g_free (hintfile);
-	    hintfile = hintfile_base;
-	    data = load_file (hintfile_base);
+	    /* Fall back to the two-letter language code */
+	    if (lang[0] && lang[1])
+		lang[2] = 0;
+	    hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
+	    data = load_file (hintfile);
+
+	    if (!data) {
+		g_free (hintfile);
+		hintfile = hintfile_base;
+		data = load_file (hintfile_base);
+	    }
 	}
     }
 

@@ -685,6 +685,15 @@ static FILE *open_include_file (const char *filename)
     g_free (error_file_name);
     error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
 				   filename, (char *) NULL);
+
+    if ((f = fopen (error_file_name, "r"))) {
+	g_free (error_file_name);
+	return f;
+    }
+    g_free (error_file_name);
+    error_file_name = g_strconcat (mc_home_alt, PATH_SEP_STR "syntax" PATH_SEP_STR,
+				   filename, (char *) NULL);
+
     return fopen (error_file_name, "r");
 }
 

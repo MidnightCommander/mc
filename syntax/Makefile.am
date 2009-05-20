@@ -1,5 +1,4 @@
 SYNTAXFILES =			\
-	Syntax			\
 	ada95.syntax		\
 	awk.syntax		\
 	aspx.syntax		\
@@ -57,9 +56,15 @@ SYNTAXFILES =			\
 	unknown.syntax		\
 	xml.syntax
 
+SYNTAXCONFFILES =		\
+	Syntax
+
 if USE_EDIT
 syntaxdir =		$(pkgdatadir)/syntax
 syntax_DATA =		$(SYNTAXFILES)
+
+syntaxconfdir =		$(sysconfdir)/@PACKAGE@
+syntaxconf_DATA =	$(SYNTAXCONFFILES)
 endif
 
-EXTRA_DIST =		$(SYNTAXFILES)
+EXTRA_DIST =		$(SYNTAXFILES) $(SYNTAXCONFFILES)

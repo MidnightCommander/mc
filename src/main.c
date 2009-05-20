@@ -287,8 +287,11 @@ int midnight_shutdown = 0;
 /* The user's shell */
 const char *shell = NULL;
 
-/* mc_home: The home of MC */
+/* mc_home: The home of MC - /etc/mc or defined by MC_DATADIR */
 char *mc_home = NULL;
+
+/* mc_home_alt: Alternative home of MC - deprecated /usr/share/mc */
+char *mc_home_alt = NULL;
 
 char cmd_buf[512];
 
@@ -1806,8 +1809,9 @@ OS_Setup (void)
     if ((mc_libdir = getenv ("MC_DATADIR")) != NULL) {
 	mc_home = g_strdup (mc_libdir);
     } else {
-	mc_home = g_strdup (DATADIR);
+	mc_home = g_strdup (SYSCONFDIR);
     }
+    mc_home_alt = mc_libdir != NULL ? g_strdup (SYSCONFDIR) : g_strdup (DATADIR);
 }
 
 static void
@@ -1940,7 +1944,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	break;
 
     case 'f':
-	printf ("%s\n", mc_home);
+	printf ("%s (%s)\n", mc_home, mc_home_alt);
 	exit (0);
 	break;
 
@@ -2300,6 +2304,7 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
+    g_free (mc_home_alt);
     g_free (mc_home);
     done_key ();
 #ifdef HAVE_CHARSET

@@ -53,12 +53,17 @@ load_codepages_list (void)
     char *fname;
     char buf[256];
     extern char *mc_home;
+    extern char *mc_home_alt;
     extern int display_codepage;
     char *default_codepage = NULL;
 
     fname = concat_dir_and_file (mc_home, CHARSETS_INDEX);
     if (!(f = fopen (fname, "r"))) {
-	fprintf (stderr, _("Warning: file %s not found\n"), fname);
+	g_free (fname);
+	fname = concat_dir_and_file (mc_home_alt, CHARSETS_INDEX);
+	if (!(f = fopen (fname, "r"))) {
+	    fprintf (stderr, _("Warning: file %s not found\n"), fname);
+	}
 	g_free (fname);
 	return -1;
     }

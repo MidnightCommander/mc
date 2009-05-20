@@ -127,6 +127,7 @@ void print_vfs_message(const char *msg, ...)
 extern const char *prompt;
 extern const char *edit_one_file;
 extern char *mc_home;
+extern char *mc_home_alt;
 char *get_mc_lib_dir (void);
 
 int maybe_cd (int move_up_dir);

@@ -1880,12 +1880,15 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	    goto edit_block_process_cmd__EXIT;
 	}
 	if (!(script_src = fopen (o, "r"))) {
-	    fclose (script_home);
-	    unlink (h);
-	    tmp = g_strconcat (_("Error reading script:"), o, (char *) NULL);
-	    edit_error_dialog ("", get_sys_error (tmp));
-	    g_free(tmp);
-	    goto edit_block_process_cmd__EXIT;
+	    o = g_strconcat (mc_home_alt, shell_cmd, (char *) NULL);
+	    if (!(script_src = fopen (o, "r"))) {
+		fclose (script_home);
+		unlink (h);
+		tmp = g_strconcat (_("Error reading script:"), o, (char *) NULL);
+		edit_error_dialog ("", get_sys_error (tmp));
+		g_free(tmp);
+		goto edit_block_process_cmd__EXIT;
+	    }
 	}
 	while (fgets (buf, sizeof (buf), script_src))
 	    fputs (buf, script_home);

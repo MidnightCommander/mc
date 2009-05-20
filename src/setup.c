@@ -500,8 +500,15 @@ setup_init (void)
 	if (exist_file (inifile)){
 	    g_free (profile);
 	    profile = inifile;
-	} else
+	} else {
 	    g_free (inifile);
+	    inifile = concat_dir_and_file (mc_home_alt, "mc.ini");
+	    if (exist_file (inifile)) {
+		g_free (profile);
+		profile = inifile;
+	    } else
+		g_free (inifile);
+	}
     }
 
     profile_name = profile;
@@ -520,6 +527,11 @@ load_setup (void)
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
     global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
+
+    if (!exist_file(global_profile_name)) {
+	g_free (global_profile_name);
+	global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
+    }
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name; i++)

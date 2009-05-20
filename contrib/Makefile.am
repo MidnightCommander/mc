@@ -17,7 +17,9 @@ SCRIPTS_OUT = mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh
 
 suppbin_SCRIPTS = $(SCRIPTS_OUT)
 
-pkgdata_DATA = $(LIBFILES_ADD)
+cfgdir = $(sysconfdir)/@PACKAGE@
+cfg_DATA = \
+	$(LIBFILES_ADD)
 
 CLEANFILES = $(SCRIPTS_OUT)
 
@@ -25,7 +27,7 @@ CLEANFILES = $(SCRIPTS_OUT)
 EXTRA_DIST = \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
-	mc.charsets
+	$(cfg_DATA)
 
 mc.csh: $(srcdir)/mc.csh.in
 	sed "s%@""suppbindir@%$(suppbindir)%" $(srcdir)/mc.csh.in > mc.csh
