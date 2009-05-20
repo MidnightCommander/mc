@@ -61,16 +61,16 @@ kpnumlock=\eOP
 
 [terminal:xterm]
 insert=\e[2~
-f11=\e[23~
-f12=\e[24~
-f13=\e[25~
-f14=\e[26~
-f15=\e[28~
-f16=\e[29~
-f17=\e[31~
-f18=\e[32~
-f19=\e[33~
-f20=\e[34~
+f11=\e[23~;\eO2P;\eO1;2P
+f12=\e[24~;\eO2Q;\eO1;2Q
+f13=\e[25~;\eO2R
+f14=\e[26~;\eO2S
+f15=\e[28~;\e[15;2~
+f16=\e[29~;\e[17;2~
+f17=\e[31~;\e[18;2~
+f18=\e[32~;\e[19;2~
+f19=\e[33~;\e[20;2~
+f20=\e[34~;\e[21;2~
 kpleft=\eOt
 kpright=\eOv
 kpup=\eOx
@@ -84,32 +84,10 @@ kpminus=\eOm
 kpasterix=\eOj
 delete=\e[3~
 bs=
-home=\e[1~
-home=\e[7~
-end=\eOF
-end=\e[F
-end=\e[4~
-end=\e[8~
-home=\eOH
-home=\e[H
+home=\e[1~;\e[7~;\eOH;\e[H
+end=\eOF;\e[F;\e[4~;\e[8~
 pgdn=\e[6~
 pgup=\e[5~
-
-# Sequences below are for Konsole, which also sets TERM=xterm
-f11=\eO2P
-f12=\eO2Q
-f13=\eO2R
-f14=\eO2S
-f15=\e[15;2~
-f16=\e[17;2~
-f17=\e[18;2~
-f18=\e[19;2~
-f19=\e[20;2~
-f20=\e[21;2~
-
-# Sequences below are for gnome-terminal, which also sets TERM=xterm
-f11=\eO1;2P
-f12=\eO1;2Q
 
 # Arrows for both keypad modes (application and normal).
 up=\e[A
@@ -155,12 +133,8 @@ kpminus=\eOm
 kpasterix=\eOj
 delete=\e[3~
 bs=
-home=\e[1~
-home=\e[7~
-home=\eOH
-end=\e[4~
-end=\e[8~
-end=\eOF
+home=\e[1~;\e[7~;\eOH
+end=\e[4~;\e[8~;\eOF
 pgdn=\e[6~
 pgup=\e[5~
 
