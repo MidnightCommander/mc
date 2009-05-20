@@ -1,5 +1,5 @@
 [Special dirs]
-list=/afs,/coda,/:,/...,/net,/#smb
+list=/afs;/coda;/:;/...;/net;/#smb
 
 [terminal:console]
 insert=\\e[2~

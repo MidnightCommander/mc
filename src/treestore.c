@@ -728,22 +728,25 @@ tree_store_end_check(void)
 static void
 process_special_dirs(GList ** special_dirs, char *file)
 {
-    char *token;
-    char *buffer;
-    char *s;
+    gchar **buffers, **start_buff;
     mc_config_t *cfg;
+    gsize buffers_len;
 
     cfg = mc_config_init(file);
     if (cfg == NULL)
 	return;
 
-    buffer = mc_config_get_string(cfg, "Special dirs", "list", "");
-    s = buffer;
-    while ((token = strtok(s, ",")) != NULL) {
-	*special_dirs = g_list_prepend(*special_dirs, g_strdup(token));
-	s = NULL;
+    start_buff = buffers = mc_config_get_string_list(cfg, "Special dirs", "list", &buffers_len);
+    if (buffers == NULL){
+        mc_config_deinit(cfg);
+        return;
     }
-    g_free(buffer);
+
+    while(*buffers) {
+        *special_dirs = g_list_prepend(*special_dirs, g_strdup(*buffers));
+        buffers++;
+    }
+    g_strfreev(start_buff);
     mc_config_deinit(cfg);
 }
 
