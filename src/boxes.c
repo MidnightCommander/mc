@@ -1,7 +1,7 @@
 /* Some misc dialog boxes for the program.
    
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006 Free Software Foundation, Inc.
+   2005, 2006, 2009 Free Software Foundation, Inc.
    
    Authors: 1994, 1995 Miguel de Icaza
             1995 Jakub Jelinek
@@ -42,7 +42,7 @@
 #include "widget.h"		/* The widgets for the nice dialog manager */
 #include "wtools.h"
 #include "setup.h"		/* For profile_name */
-#include "profile.h"		/* Load/save user formats */
+#include "../src/mcconfig/mcconfig.h"	/* Load/save user formats */
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "command.h"		/* For cmdline */
 #include "dir.h"
@@ -236,7 +236,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 	for (i = 0; i < LIST_TYPES; i++)
     	    panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
-        if (!profile_has_section (section, profile_name)) {
+        if (! mc_config_has_group (mc_main_config, section)) {
             g_free (section);
             section = g_strdup (p);
         }

@@ -1,6 +1,6 @@
 /* Main program for the Midnight Commander
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+   2003, 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
    
    Written by: 1994, 1995, 1996, 1997 Miguel de Icaza
                1994, 1995 Janne Kukonlehto
@@ -54,7 +54,7 @@
 #include "subshell.h"
 #include "key.h"		/* For init_key() and mi_getch() */
 #include "setup.h"		/* save_setup() */
-#include "profile.h"		/* free_profiles() */
+#include "../src/mcconfig/mcconfig.h"
 #include "boxes.h"		/* sort_box() */
 #include "layout.h"
 #include "cmd.h"		/* Normal commands */
@@ -1477,11 +1477,9 @@ done_mc (void)
 static void
 done_mc_profile (void)
 {
-    if (!auto_save_setup)
-	profile_forget_profile (profile_name);
-    sync_profiles ();
+    if (auto_save_setup)
+	mc_config_save_file (mc_main_config);
     done_setup ();
-    free_profiles ();
 }
 
 static cb_ret_t

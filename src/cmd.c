@@ -2,7 +2,7 @@
    They normally operate on the current panel.
    
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007 Free Software Foundation, Inc.
+   2005, 2006, 2007, 2009 Free Software Foundation, Inc.
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@
 #include "ext.h"		/* regex_command() */
 #include "boxes.h"		/* cd_dialog() */
 #include "setup.h"		/* save_setup() */
-#include "profile.h"		/* PROFILE_NAME */
+#include "../src/mcconfig/mcconfig.h"
 #include "execute.h"		/* toggle_panels() */
 #include "history.h"
 #include "strutil.h"
@@ -1294,8 +1294,6 @@ void
 save_setup_cmd (void)
 {
     save_setup ();
-    sync_profiles ();
-    
     message (D_NORMAL, _(" Setup "), _(" Setup saved to ~/%s"), PROFILE_NAME);
 }
 

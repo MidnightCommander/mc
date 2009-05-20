@@ -1,6 +1,6 @@
 /* Configure box module for the Midnight Commander
    Copyright (C) 1994, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007 Free Software Foundation, Inc. 
+   2007, 2009 Free Software Foundation, Inc. 
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@
 #include "widget.h"
 #include "setup.h"		/* For save_setup() */
 #include "main.h"
-#include "profile.h"		/* For sync_profiles */
+#include "../src/mcconfig/mcconfig.h"	/* For mc_config_save_file */
 #include "strutil.h"
 
 #include "panel.h"		/* Needed for the externs */
@@ -243,7 +243,7 @@ void configure_box (void)
     /* If they pressed the save button */
     if (result == B_EXIT){
 	save_configure ();
-	sync_profiles ();
+	mc_config_save_file (mc_main_config);
     }
 
     destroy_dlg (conf_dlg);

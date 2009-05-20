@@ -3,7 +3,7 @@
  *
  * Contains a storage of the file system tree representation
  *
-   Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007
+   Copyright (C) 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2009
    Free Software Foundation, Inc.
 
    Written: 1994, 1996 Janne Kukonlehto
@@ -49,7 +49,7 @@
 
 #include "global.h"
 #include "treestore.h"
-#include "profile.h"
+#include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
 
 #define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
@@ -729,17 +729,22 @@ static void
 process_special_dirs(GList ** special_dirs, char *file)
 {
     char *token;
-    char *buffer = g_malloc(4096);
+    char *buffer;
     char *s;
+    mc_config_t *cfg;
 
-    GetPrivateProfileString("Special dirs", "list",
-			    "", buffer, 4096, file);
+    cfg = mc_config_init(file);
+    if (cfg == NULL)
+	return;
+
+    buffer = mc_config_get_string(cfg, "Special dirs", "list", "");
     s = buffer;
     while ((token = strtok(s, ",")) != NULL) {
 	*special_dirs = g_list_prepend(*special_dirs, g_strdup(token));
 	s = NULL;
     }
     g_free(buffer);
+    mc_config_deinit(cfg);
 }
 
 static gboolean

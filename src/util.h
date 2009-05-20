@@ -92,12 +92,6 @@ char *diff_two_paths (const char *first, const char *second);
 /* Returns the basename of fname. The result is a pointer into fname. */
 const char *x_basename (const char *fname);
 
-/* Profile managing functions */
-int set_int (const char *, const char *, int);
-int get_int (const char *, const char *, int);
-extern char * get_config_string (const char *, const char *, const char *);
-extern void set_config_string (const char *, const char *, const char *);
-
 char *load_file (const char *filename);
 char *load_mc_home_file (const char *filename, char ** allocated_filename);
 

@@ -1,6 +1,6 @@
 /* Setup loading/saving.
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007 Free Software Foundation, Inc.
+   2006, 2007, 2009 Free Software Foundation, Inc.
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@
 #include "panel.h"
 #include "main.h"
 #include "tree.h"		/* xtree_mode */
-#include "profile.h"
+#include "../src/mcconfig/mcconfig.h"
 #include "setup.h"
 #include "mouse.h"		/* To make view.h happy */
 #include "view.h"		/* For the externs */
@@ -72,14 +72,11 @@ extern int num_history_items_recorded;
 
 char *profile_name;		/* .mc/ini */
 char *global_profile_name;	/* mc.lib */
+char *panels_profile_name;	/* .mc/panels.ini */
 
-char setup_color_string [4096];
-char term_color_string [4096];
-char color_terminal_string [512];
-
-#define load_int(a,b,c) GetPrivateProfileInt(a,b,c,profile_name)
-#define load_string(a,b,c,d,e) GetPrivateProfileString(a,b,c,d,e,profile_name)
-#define save_string WritePrivateProfileString
+char *setup_color_string;
+char *term_color_string;
+char *color_terminal_string;
 
 int startup_left_mode;
 int startup_right_mode;
@@ -250,40 +247,35 @@ static const struct {
 void
 panel_save_setup (struct WPanel *panel, const char *section)
 {
-    char buffer [BUF_TINY];
+    char *buffer;
     int  i;
 
-    g_snprintf (buffer, sizeof (buffer), "%d", panel->reverse);
-    save_string (section, "reverse", buffer, profile_name);
-    g_snprintf (buffer, sizeof (buffer), "%d", panel->case_sensitive);
-    save_string (section, "case_sensitive", buffer, profile_name);
-    g_snprintf (buffer, sizeof (buffer), "%d", panel->exec_first);
-    save_string (section, "exec_first", buffer, profile_name);
+    mc_config_set_int(mc_panels_config, section, "reverse", panel->reverse);
+    mc_config_set_int(mc_panels_config, section, "case_sensitive", panel->case_sensitive);
+    mc_config_set_int(mc_panels_config, section, "exec_first", panel->exec_first);
+
     for (i = 0; sort_names [i].key; i++)
 	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
-	    save_string (section, "sort_order",
-				       sort_names [i].key, profile_name);
+	    mc_config_set_string(mc_panels_config, section, "sort_order", sort_names [i].key);
 	    break;
 	}
 
     for (i = 0; list_types [i].key; i++)
 	if (list_types [i].list_type == panel->list_type){
-	    save_string (section, "list_mode", list_types [i].key, profile_name);
+	    mc_config_set_string(mc_panels_config, section, "list_mode", list_types [i].key);
 	    break;
 	}
 
-    save_string (section, "user_format",
-			       panel->user_format, profile_name);
+    mc_config_set_string(mc_panels_config, section, "user_format", panel->user_format);
 
     for (i = 0; i < LIST_TYPES; i++){
-	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
-	save_string (section, buffer,
-	    panel->user_status_format [i], profile_name);
+	buffer = g_strdup_printf("user_status%d", i);
+	mc_config_set_string(mc_panels_config, section, buffer, panel->user_status_format [i]);
+	g_free(buffer);
     }
 
-    g_snprintf (buffer, sizeof (buffer), "%d", panel->user_mini_status);
-    save_string (section, "user_mini_status", buffer,
-			       profile_name);
+    mc_config_set_int(mc_panels_config, section, "user_mini_status", panel->user_mini_status);
+    mc_config_save_file (mc_panels_config);
 }
 
 void
@@ -291,15 +283,14 @@ save_layout (void)
 {
     char *profile;
     int  i;
-    char buffer [BUF_TINY];
 
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
     /* Save integer options */
     for (i = 0; layout [i].opt_name; i++){
-	g_snprintf (buffer, sizeof (buffer), "%d", *layout [i].opt_addr);
-	save_string ("Layout", layout [i].opt_name, buffer, profile);
+	mc_config_set_int(mc_main_config, "Layout", layout [i].opt_name, *layout [i].opt_addr);
     }
+    mc_config_save_to_file (mc_main_config, profile);
 
     g_free (profile);
 }
@@ -314,13 +305,13 @@ save_configure (void)
 
     /* Save integer options */
     for (i = 0; int_options[i].opt_name; i++)
-	set_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
+	mc_config_set_int(mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name, *int_options[i].opt_addr);
 
     /* Save string options */
     for (i = 0; str_options[i].opt_name != NULL; i++)
-	set_config_string (profile, str_options[i].opt_name,
-	    *str_options[i].opt_addr);
+	mc_config_set_string(mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name, *str_options[i].opt_addr);
 
+    mc_config_save_to_file (mc_main_config, profile);
     g_free (profile);
 }
 
@@ -331,8 +322,8 @@ panel_save_type (const char *section, int type)
 
     for (i = 0; panel_types [i].opt_name; i++)
 	if (panel_types [i].opt_type == type){
-	    save_string (section, "display", panel_types [i].opt_name,
-			 profile_name);
+	    mc_config_set_string(mc_panels_config, section,
+	                "display", panel_types [i].opt_name);
 	    break;
 	}
 }
@@ -350,25 +341,29 @@ save_panel_types (void)
     panel_save_type ("New Right Panel", type);
     if (type == view_listing)
 	panel_save_setup (right_panel, right_panel->panel_name);
+
+    mc_config_set_string(mc_panels_config, "Dirs" , "other_dir",
+			       get_other_type () == view_listing
+			       ? other_panel->cwd : ".");
+
+    if (current_panel != NULL)
+	    mc_config_set_string(mc_panels_config, "Dirs" , "current_is_left",
+				       get_current_index () == 0 ? "1" : "0");
+
+    mc_config_save_file (mc_panels_config);
 }
 
 void
 save_setup (void)
 {
-    char *profile;
+    char *tmp_profile;
 
     saving_setup = 1;
-    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
     save_configure ();
 
     save_layout ();
-    save_string ("Dirs", "other_dir",
-			       get_other_type () == view_listing
-			       ? other_panel->cwd : ".", profile);
-    if (current_panel != NULL)
-	    WritePrivateProfileString ("Dirs", "current_is_left",
-				       get_current_index () == 0 ? "1" : "0", profile);
+
     save_hotlist ();
 
     save_panelize ();
@@ -376,21 +371,22 @@ save_setup (void)
 /*     directory_history_save (); */
 
 #if defined(USE_VFS) && defined (USE_NETCODE)
-    WritePrivateProfileString ("Misc", "ftpfs_password",
-			       ftpfs_anonymous_passwd, profile);
+    mc_config_set_string(mc_main_config, "Misc" , "ftpfs_password",
+			       ftpfs_anonymous_passwd);
     if (ftpfs_proxy_host)
-	WritePrivateProfileString ("Misc", "ftp_proxy_host",
-				   ftpfs_proxy_host, profile);
+	mc_config_set_string(mc_main_config, "Misc" , "ftp_proxy_host",
+				   ftpfs_proxy_host);
 #endif /* USE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
-    save_string( "Misc", "display_codepage",
-    		 get_codepage_id( display_codepage ), profile_name );
-    save_string( "Misc", "source_codepage",
-    		 get_codepage_id( source_codepage ), profile_name );
+    mc_config_set_string(mc_main_config, "Misc" , "display_codepage",
+		 get_codepage_id( display_codepage ));
+    mc_config_set_string(mc_main_config, "Misc" , "source_codepage",
+		 get_codepage_id( source_codepage ));
 #endif /* HAVE_CHARSET */
-
-    g_free (profile);
+    tmp_profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    mc_config_save_to_file (mc_main_config, tmp_profile);
+    g_free (tmp_profile);
     saving_setup = 0;
 }
 
@@ -398,93 +394,78 @@ void
 panel_load_setup (WPanel *panel, const char *section)
 {
     int i;
-    char buffer [BUF_TINY];
+    char *buffer;
 
-    panel->reverse = load_int (section, "reverse", 0);
-    panel->case_sensitive = load_int (section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
-    panel->exec_first = load_int (section, "exec_first", 0);
+    panel->reverse = mc_config_get_int(mc_panels_config, section, "reverse", 0);
+    panel->case_sensitive = mc_config_get_int(mc_panels_config, section, "case_sensitive", OS_SORT_CASE_SENSITIVE_DEFAULT);
+    panel->exec_first = mc_config_get_int(mc_panels_config, section, "exec_first", 0);
 
     /* Load sort order */
-    load_string (section, "sort_order", "name", buffer, sizeof (buffer));
+    buffer = mc_config_get_string(mc_panels_config, section, "sort_order", "name");
+
     panel->sort_type = (sortfn *) sort_name;
     for (i = 0; sort_names [i].key; i++)
 	if ( g_strcasecmp (sort_names [i].key, buffer) == 0){
 	    panel->sort_type = sort_names [i].sort_type;
 	    break;
 	}
-
+    g_free(buffer);
     /* Load the listing mode */
-    load_string (section, "list_mode", "full", buffer, sizeof (buffer));
+    buffer = mc_config_get_string(mc_panels_config, section, "list_mode", "full");
     panel->list_type = list_full;
     for (i = 0; list_types [i].key; i++)
 	if ( g_strcasecmp (list_types [i].key, buffer) == 0){
 	    panel->list_type = list_types [i].list_type;
 	    break;
 	}
+    g_free(buffer);
 
     /* User formats */
     g_free (panel->user_format);
-    panel->user_format = g_strdup (get_profile_string (section, "user_format",
-						     DEFAULT_USER_FORMAT,
-						     profile_name));
+    panel->user_format = mc_config_get_string(mc_panels_config, section, "user_format", DEFAULT_USER_FORMAT);
+
     for (i = 0; i < LIST_TYPES; i++){
 	g_free (panel->user_status_format [i]);
-	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
+	buffer = g_strdup_printf("user_status%d",i);
 	panel->user_status_format [i] =
-	    g_strdup (get_profile_string (section, buffer,
-			DEFAULT_USER_FORMAT, profile_name));
+	    mc_config_get_string(mc_panels_config, section, buffer, DEFAULT_USER_FORMAT);
+        g_free(buffer);
     }
 
     panel->user_mini_status =
-	load_int (section, "user_mini_status", 0);
+        mc_config_get_int(mc_panels_config, section, "user_mini_status", 0);
 
 }
 
 static void
-load_layout (char *profile_name)
+load_layout ()
 {
     int i;
 
     for (i = 0; layout [i].opt_name; i++)
 	*layout [i].opt_addr =
-	    load_int ("Layout", layout [i].opt_name,
-				  *layout [i].opt_addr);
+	    mc_config_get_int(mc_main_config,"Layout", layout [i].opt_name, *layout [i].opt_addr);
 }
 
 static int
-load_mode (const char *section)
+setup__load_panel_state (const char *section)
 {
-    char buffer [20];
+    char *buffer;
     int  i;
 
     int mode = view_listing;
 
     /* Load the display mode */
-    load_string (section, "display", "listing", buffer, sizeof (buffer));
+    buffer = mc_config_get_string(mc_panels_config, section, "display", "listing");
 
     for (i = 0; panel_types [i].opt_name; i++)
 	if ( g_strcasecmp (panel_types [i].opt_name, buffer) == 0){
 	    mode = panel_types [i].opt_type;
 	    break;
 	}
-
+    g_free(buffer);
     return mode;
 }
-
-#ifdef USE_NETCODE
-static char *
-do_load_string (const char *s, const char *ss, const char *def)
-{
-    char *buffer = g_malloc (BUF_SMALL);
-    char *p;
-
-    load_string (s, ss, def, buffer, BUF_SMALL);
-
-    p = g_strdup (buffer);
-    g_free (buffer);
-    return p;
-}
-#endif /* !USE_NETCODE */
 
 char *
 setup_init (void)
@@ -522,6 +503,7 @@ load_setup (void)
 {
     char *profile;
     int    i;
+    char *buffer;
 
     profile = setup_init ();
 
@@ -533,34 +515,34 @@ load_setup (void)
 	g_free (global_profile_name);
 	global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
     }
+    panels_profile_name = concat_dir_and_file (home_dir, PANELS_PROFILE_NAME);
+
+    mc_main_config = mc_config_init(profile);
+    mc_panels_config = mc_config_init(panels_profile_name);
 
     /* Load integer boolean options */
     for (i = 0; int_options[i].opt_name; i++)
 	*int_options[i].opt_addr =
-	    get_int (profile, int_options[i].opt_name, *int_options[i].opt_addr);
+	    mc_config_get_int(mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name, *int_options[i].opt_addr);
 
     /* Load string options */
     for (i = 0; str_options[i].opt_name != NULL; i++)
-	*str_options[i].opt_addr = get_config_string (profile,
-	    str_options[i].opt_name, str_options[i].opt_defval);
+	*str_options[i].opt_addr =
+	    mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name, str_options[i].opt_defval);
 
-    load_layout (profile);
+    load_layout ();
 
     load_panelize ();
 
-    startup_left_mode = load_mode ("New Left Panel");
-    startup_right_mode = load_mode ("New Right Panel");
+    startup_left_mode = setup__load_panel_state ("New Left Panel");
+    startup_right_mode = setup__load_panel_state ("New Right Panel");
 
     /* At least one of the panels is a listing panel */
     if (startup_left_mode != view_listing && startup_right_mode!=view_listing)
 	startup_left_mode = view_listing;
 
     if (!other_dir){
-	char *buffer;
-
-	buffer = (char*) g_malloc (MC_MAXPATHLEN);
-	load_string ("Dirs", "other_dir", ".", buffer,
-			     MC_MAXPATHLEN);
+	buffer = mc_config_get_string(mc_panels_config, "Dirs", "other_dir", ".");
 	if (vfs_file_is_local (buffer))
 	    other_dir = buffer;
 	else
@@ -568,51 +550,46 @@ load_setup (void)
     }
 
     boot_current_is_left =
-	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);
+        mc_config_get_int(mc_panels_config, "Dirs", "current_is_left", 1);
 
 #ifdef USE_NETCODE
-    ftpfs_proxy_host = do_load_string ("Misc", "ftp_proxy_host", "gate");
+    ftpfs_proxy_host = mc_config_get_string(mc_main_config, "Misc", "ftp_proxy_host", "gate");
 #endif
-
-    load_string ("Misc", "find_ignore_dirs", "", setup_color_string,
-		 sizeof (setup_color_string));
+    setup_color_string = mc_config_get_string(mc_main_config, "Misc", "find_ignore_dirs", "");
     if (setup_color_string [0])
 	find_ignore_dirs = g_strconcat (":", setup_color_string, ":", (char *) NULL);
+    g_free(setup_color_string);
 
     /* The default color and the terminal dependent color */
-    load_string ("Colors", "base_color", "", setup_color_string,
-			     sizeof (setup_color_string));
-    load_string ("Colors", getenv ("TERM"), "",
-			     term_color_string, sizeof (term_color_string));
-    load_string ("Colors", "color_terminals", "",
-			     color_terminal_string, sizeof (color_terminal_string));
+    setup_color_string = mc_config_get_string(mc_main_config, "Colors", "base_color", "");
+    term_color_string = mc_config_get_string(mc_main_config, "Colors", getenv ("TERM"), "");
+    color_terminal_string = mc_config_get_string(mc_main_config, "Colors", "color_terminals", "");
 
     /* Load the directory history */
 /*    directory_history_load (); */
     /* Remove the temporal entries */
-    profile_clean_section ("Temporal:New Left Panel", profile_name);
-    profile_clean_section ("Temporal:New Right Panel", profile_name);
+    mc_config_del_group (mc_panels_config, "Temporal:New Left Panel");
+    mc_config_del_group (mc_panels_config, "Temporal:New Right Panel");
 #if defined(USE_VFS) && defined (USE_NETCODE)
     ftpfs_init_passwd ();
 #endif /* USE_VFS && USE_NETCODE */
 
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() > 0 ) {
-	char cpname[128];
-	load_string( "Misc", "display_codepage", "",
-		     cpname, sizeof(cpname) );
-	if ( cpname[0] != '\0' )
+	buffer = mc_config_get_string(mc_main_config, "Misc", "display_codepage", "");
+	if ( buffer[0] != '\0' )
 	{
-	    display_codepage = get_codepage_index( cpname );
+	    display_codepage = get_codepage_index( buffer );
 	    cp_display = get_codepage_id (display_codepage);
 	}
-	load_string( "Misc", "source_codepage", "",
-		     cpname, sizeof(cpname) );
-	if ( cpname[0] != '\0' )
+	g_free(buffer);
+	buffer = mc_config_get_string(mc_main_config, "Misc", "source_codepage", "");
+	if ( buffer[0] != '\0' )
 	{
-	    source_codepage = get_codepage_index( cpname );
+	    source_codepage = get_codepage_index( buffer );
 	    cp_source = get_codepage_id (source_codepage);
 	}
+	g_free(buffer);
     }
     init_translation_table( source_codepage, display_codepage );
     if ( get_codepage_id( display_codepage ) )
@@ -624,13 +601,14 @@ load_setup (void)
 char *
 load_anon_passwd ()
 {
-    char buffer [255];
+    char *buffer;
 
-    load_string ("Misc", "ftpfs_password", "", buffer, sizeof (buffer));
+    buffer = mc_config_get_string(mc_main_config, "Misc", "ftpfs_password", "");
     if (buffer [0])
-	return g_strdup (buffer);
-    else
-	return 0;
+	return buffer;
+
+    g_free(buffer);
+    return NULL;
 }
 #endif /* USE_VFS && USE_NETCODE */
 
@@ -638,41 +616,67 @@ void done_setup (void)
 {
     g_free (profile_name);
     g_free (global_profile_name);
+    g_free(color_terminal_string);
+    g_free(term_color_string);
+    g_free(setup_color_string);
+    mc_config_deinit(mc_main_config);
+    mc_config_deinit(mc_panels_config);
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
 }
 
 static void
-load_keys_from_section (const char *terminal, const char *profile_name)
+load_keys_from_section (const char *terminal, mc_config_t *cfg)
 {
     char *section_name;
-    void *profile_keys;
-    char *key, *value, *valcopy;
+    gchar **profile_keys, **keys;
+    gchar **values, **curr_values;
+    char *valcopy, *value;
     int  key_code;
+    gsize len, values_len;
 
     if (!terminal)
 	return;
 
     section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
-    profile_keys = profile_init_iterator (section_name, profile_name);
-    g_free (section_name);
-    while (profile_keys){
-	profile_keys = profile_iterator_next (profile_keys, &key, &value);
+    profile_keys = keys = mc_config_get_keys (cfg, section_name, &len);
+
+    while (*profile_keys){
 
 	/* copy=other causes all keys from [terminal:other] to be loaded.  */
-	if (g_strcasecmp (key, "copy") == 0) {
-	    load_keys_from_section (value, profile_name);
+	if (g_strcasecmp (*profile_keys, "copy") == 0) {
+	    valcopy = mc_config_get_string (cfg, section_name, *profile_keys, "");
+	    load_keys_from_section (valcopy, cfg);
+	    g_free(valcopy);
+	    profile_keys++;
 	    continue;
 	}
+	curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
 
-	key_code = lookup_key (key);
+	key_code = lookup_key (*profile_keys);
 	if (key_code){
-	    valcopy = convert_controls (value);
-	    define_sequence (key_code, valcopy, MCKEY_NOACTION);
-	    g_free (valcopy);
+	    if (curr_values){
+	        while (*curr_values){
+	            valcopy = convert_controls (*curr_values);
+	            define_sequence (key_code, valcopy, MCKEY_NOACTION);
+	            g_free (valcopy);
+	            curr_values++;
+	        }
+	    } else {
+	        value = mc_config_get_string (cfg, section_name, *profile_keys, "");
+	        valcopy = convert_controls (value);
+	        define_sequence (key_code, valcopy, MCKEY_NOACTION);
+	        g_free (valcopy);
+	        g_free(value);
+	    }
 	}
+	profile_keys++;
+	if (values)
+	    g_strfreev(values);
     }
+    g_strfreev(keys);
+    g_free (section_name);
 }
 
 void load_key_defs (void)
@@ -681,11 +685,16 @@ void load_key_defs (void)
      * Load keys from mc.lib before ~/.mc/ini, so that the user
      * definitions override global settings.
      */
-    load_keys_from_section ("general", global_profile_name);
-    load_keys_from_section (getenv ("TERM"), global_profile_name);
-    load_keys_from_section ("general", profile_name);
-    load_keys_from_section (getenv ("TERM"), profile_name);
+    mc_config_t *mc_global_config;
 
-    /* We don't want a huge database loaded in core */
-    free_profile_name (global_profile_name);
+    mc_global_config = mc_config_init(global_profile_name);
+    if (mc_global_config != NULL)
+    {
+        load_keys_from_section ("general", mc_global_config);
+        load_keys_from_section (getenv ("TERM"), mc_global_config);
+        mc_config_deinit(mc_global_config);
+    }
+    load_keys_from_section ("general", mc_main_config);
+    load_keys_from_section (getenv ("TERM"), mc_main_config);
+
 }
