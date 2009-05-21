@@ -113,6 +113,9 @@ const char *file_date (time_t);
 
 int exist_file (const char *name);
 
+/* Check if the file exists. If not copy the default */
+int check_for_default (const char *default_file, const char *file);
+
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
 

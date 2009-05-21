@@ -126,6 +126,13 @@ struct WEdit;
 typedef struct WEdit WEdit;
 struct Menu;
 
+/* type for file which is currently being edited */
+typedef enum {
+    EDIT_FILE_COMMON	= 0,
+    EDIT_FILE_SYNTAX	= 1,
+    EDIT_FILE_MENU	= 2
+} edit_current_file_t;
+
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 struct WMenu *edit_create_menu (void);
@@ -185,7 +192,7 @@ int edit_ok_to_exit (WEdit *edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
 int edit_reload (WEdit *edit, const char *filename);
-int edit_load_cmd (WEdit * edit);
+int edit_load_cmd (WEdit * edit, edit_current_file_t what);
 void edit_mark_cmd (WEdit * edit, int unmark);
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);
 void edit_push_markers (WEdit * edit);
@@ -334,5 +341,10 @@ extern int visible_tws;
 #define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
 #define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
 #define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
+
+#define CEDIT_GLOBAL_MENU    "cedit.menu"
+#define CEDIT_LOCAL_MENU     ".cedit.menu"
+#define CEDIT_HOME_MENU      ".mc" PATH_SEP_STR "cedit" PATH_SEP_STR "menu"
+
 
 #endif

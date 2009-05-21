@@ -2790,7 +2790,7 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_save_confirm_cmd (edit);
 	break;
     case CK_Load:
-	edit_load_cmd (edit);
+	edit_load_cmd (edit, EDIT_FILE_COMMON);
 	break;
     case CK_Save_Block:
 	edit_save_block_cmd (edit);
@@ -2804,6 +2804,13 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Load_Next_File:
 	edit_load_forward_cmd (edit);
+	break;
+
+    case CK_Load_Syntax_File:
+	edit_load_cmd (edit, EDIT_FILE_SYNTAX);
+	break;
+    case CK_Load_Menu_File:
+	edit_load_cmd (edit, EDIT_FILE_MENU);
 	break;
 
     case CK_Toggle_Syntax:

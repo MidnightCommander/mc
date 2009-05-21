@@ -42,8 +42,8 @@
 
 #include "global.h"
 #include "cmd.h"		/* Our definitions */
-#include "fileopctx.h"		/* file_op_context_new() */
-#include "file.h"		/* file operation routines */
+#include "fileopctx.h"
+#include "file.h"		/* file operation routines */ 
 #include "find.h"		/* do_find() */
 #include "hotlist.h"		/* hotlist_cmd() */
 #include "tree.h"		/* tree_chdir() */
@@ -570,28 +570,6 @@ void unselect_cmd (void)
     select_unselect_cmd (_(" Unselect "), ":unselect_cmd: Unselect ", FALSE);
 }
 
-/* Check if the file exists */
-/* If not copy the default */
-static int
-check_for_default(char *default_file, char *file)
-{
-    struct stat s;
-    off_t  count = 0;
-    double bytes = 0;
-    FileOpContext *ctx;
-    
-    if (mc_stat (file, &s)){
-	if (mc_stat (default_file, &s)){
-	    return -1;
-	}
-	ctx = file_op_context_new (OP_COPY);
-	file_op_context_create_ui (ctx, 0);
-	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
-	file_op_context_destroy (ctx);
-    }
-    return 0;
-}
-
 void ext_cmd (void)
 {
     char *buffer;
@@ -622,59 +600,6 @@ void ext_cmd (void)
    flush_extension_file ();
 }
 
-/* where  = 0 - do edit file menu for mc */
-/* where  = 1 - do edit file menu for mcedit */
-static void
-menu_edit_cmd (int where)
-{
-    char *buffer;
-    char *menufile;
-    int dir = 0;
-    
-    dir = query_dialog (
-	_(" Menu edit "),
-	_(" Which menu file do you want to edit? "), 
-	D_NORMAL, geteuid() ? 2 : 3,
-	_("&Local"), _("&User"), _("&System Wide")
-    );
-
-    menufile = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
-
-    if (!exist_file(menufile)) {
-	g_free (menufile);
-	menufile = concat_dir_and_file (mc_home_alt, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
-    }
-
-    switch (dir) {
-	case 0:
-	    buffer = g_strdup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
-	    check_for_default (menufile, buffer);
-	    break;
-
-	case 1:
-	    buffer = concat_dir_and_file (home_dir, where ? CEDIT_HOME_MENU : MC_HOME_MENU);
-	    check_for_default (menufile, buffer);
-	    break;
-	
-	case 2:
-	    buffer = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
-	    if (!exist_file(buffer)) {
-		g_free (buffer);
-		buffer = concat_dir_and_file (mc_home_alt, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
-	    }
-	    break;
-
-	default:
-	   g_free (menufile);
-	    return;
-    }
-    do_edit (buffer);
-	if (dir == 0)
-		chmod(buffer, 0600);
-    g_free (buffer);
-    g_free (menufile);
-}
-
 void quick_chdir_cmd (void)
 {
     char *target;
@@ -695,44 +620,70 @@ void quick_chdir_cmd (void)
 void
 edit_mc_menu_cmd (void)
 {
-    menu_edit_cmd (0);
-}
-
-#ifdef USE_INTERNAL_EDIT
-/* edit file menu for mcedit */
-void
-edit_user_menu_cmd (void)
-{
-    menu_edit_cmd (1);
-}
-
-/* edit syntax file for mcedit */
-void
-edit_syntax_cmd (void)
-{
     char *buffer;
-    char *extdir;
+    char *menufile;
     int dir = 0;
 
-    if (geteuid () == 0) {
-	dir =
-	    query_dialog (_("Syntax file edit"),
-			  _(" Which syntax file you want to edit? "), D_NORMAL, 2,
-			  _("&User"), _("&System Wide"));
+    dir = query_dialog (
+	_(" Menu edit "),
+	_(" Which menu file do you want to edit? "), 
+	D_NORMAL, geteuid() ? 2 : 3,
+	_("&Local"), _("&User"), _("&System Wide")
+    );
+
+    menufile = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+
+    if (!exist_file(menufile)) {
+	g_free (menufile);
+	menufile = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
     }
-    extdir = concat_dir_and_file (mc_home_alt, "syntax" PATH_SEP_STR "Syntax");
 
-    if (dir == 0) {
-	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
-	check_for_default (extdir, buffer);
-	do_edit (buffer);
-	g_free (buffer);
-    } else if (dir == 1)
-	do_edit (extdir);
+    switch (dir) {
+	case 0:
+	    buffer = g_strdup (MC_LOCAL_MENU);
+	    check_for_default (menufile, buffer);
+	    chmod (buffer, 0600);
+	    break;
 
-    g_free (extdir);
+	case 1:
+	    buffer = concat_dir_and_file (home_dir, MC_HOME_MENU);
+	    check_for_default (menufile, buffer);
+	    break;
+	
+	case 2:
+	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+	    if (!exist_file(buffer)) {
+		g_free (buffer);
+		buffer = concat_dir_and_file (mc_home_alt, MC_GLOBAL_MENU);
+	    }
+	    break;
+
+	default:
+	    g_free (menufile);
+	    return;
+    }
+
+    do_edit (buffer);
+
+    g_free (buffer);
+    g_free (menufile);
 }
-#endif
+
+void quick_chdir_cmd (void)
+{
+    char *target;
+
+    target = hotlist_cmd (LIST_HOTLIST);
+    if (!target)
+	return;
+
+    if (get_current_type () == view_tree)
+	tree_chdir (the_tree, target);
+    else
+        if (!do_cd (target, cd_exact))
+	    message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
+    g_free (target);
+}
 
 #ifdef USE_VFS
 void reselect_vfs (void)

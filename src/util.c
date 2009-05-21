@@ -45,6 +45,8 @@
 #include "win.h"		/* xterm_flag */
 #include "timefmt.h"
 #include "strutil.h"
+#include "fileopctx.h"
+#include "file.h"		/* copy_file_file() */
 #include "../src/search/search.h"
 
 #ifdef HAVE_CHARSET
@@ -500,6 +502,28 @@ exist_file (const char *name)
 {
     return access (name, R_OK) == 0;
 }
+
+int
+check_for_default (const char *default_file, const char *file)
+{
+    if (!exist_file (file)) {
+	FileOpContext *ctx;
+	off_t  count = 0;
+	double bytes = 0.0;
+
+	if (!exist_file (default_file))
+	    return -1;
+
+	ctx = file_op_context_new (OP_COPY);
+	file_op_context_create_ui (ctx, 0);
+	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
+	file_op_context_destroy (ctx);
+    }
+
+    return 0;
+}
+
+
 
 char *
 load_file (const char *filename)

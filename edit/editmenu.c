@@ -45,7 +45,7 @@
 #include "../src/global.h"
 
 #include "edit.h"
-#include "../src/cmd.h"		/* save_setup_cmd() */
+#include "../src/cmd.h"
 #include "../src/wtools.h"	/* query_dialog() */
 #include "../src/menu.h"	/* menu_entry */
 #include "../src/tty.h"		/* KEY_F */
@@ -290,15 +290,15 @@ menu_format_paragraph (void)
 }
 
 static void
-menu_options (void)
+menu_edit_syntax_file_cmd (void)
 {
-    edit_options_dialog ();
+    menu_cmd (CK_Load_Syntax_File);
 }
 
 static void
-menu_syntax (void)
+menu_edit_menu_file_cmd (void)
 {
-    edit_syntax_dialog ();
+    menu_cmd (CK_Load_Menu_File);
 }
 
 static void
@@ -423,12 +423,14 @@ static menu_entry CmdMenuEmacs[] =
 
 static menu_entry OptMenu[] =
 {
-    {' ', N_("&General...  "), NULL_HOTKEY, menu_options},
+    {' ', N_("&General...  "), NULL_HOTKEY, edit_options_dialog},
     {' ', N_("&Save mode..."), NULL_HOTKEY, menu_save_mode_cmd},
     {' ', N_("Learn &Keys..."), NULL_HOTKEY, learn_keys},
-    {' ', N_("Syntax &Highlighting..."), NULL_HOTKEY, menu_syntax},
+    {' ', N_("Syntax &Highlighting..."), NULL_HOTKEY, edit_syntax_dialog},
+    {' ', N_("S&yntax file"), NULL_HOTKEY, menu_edit_syntax_file_cmd},
+    {' ', N_("&Menu file"), NULL_HOTKEY, menu_edit_menu_file_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Save setu&p..."), NULL_HOTKEY, save_setup_cmd}
+    {' ', N_("Save setu&p"), NULL_HOTKEY, save_setup_cmd}
 };
 
 #define OptMenuEmacs OptMenu

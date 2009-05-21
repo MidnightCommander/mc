@@ -875,7 +875,6 @@ static menu_entry RightMenu[] = {
 };
 
 static menu_entry FileMenu[] = {
-    {' ', N_("&User menu          F2"), NULL_HOTKEY, user_file_menu_cmd},
     {' ', N_("&View               F3"), NULL_HOTKEY, view_cmd},
     {' ', N_("Vie&w file...         "), NULL_HOTKEY, view_file_cmd},
     {' ', N_("&Filtered view     M-!"), NULL_HOTKEY, filtered_view_cmd},
@@ -900,6 +899,7 @@ static menu_entry FileMenu[] = {
 };
 
 static menu_entry CmdMenu[] = {
+    {' ', N_("&User menu          F2"), NULL_HOTKEY, user_file_menu_cmd},
     /* I know, I'm lazy, but the tree widget when it's not running
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
@@ -931,11 +931,7 @@ static menu_entry CmdMenu[] = {
     {' ', "", NULL_HOTKEY, 0},
 #endif
     {' ', N_("Edit &extension file"), NULL_HOTKEY, ext_cmd},
-    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd},
-#ifdef USE_INTERNAL_EDIT
-    {' ', N_("Edit edi&tor menu file"), NULL_HOTKEY, edit_user_menu_cmd},
-    {' ', N_("Edit &syntax file"), NULL_HOTKEY, edit_syntax_cmd}
-#endif				/* USE_INTERNAL_EDIT */
+    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd}
 };
 
 /* Must keep in sync with the constants in menu_cmd */

@@ -803,30 +803,113 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     return 0;
 }
 
+static void
+edit_load_syntax_file (WEdit * edit)
+{
+    char *extdir;
+    int dir = 0;
+
+    if (geteuid () == 0) {
+	dir = query_dialog (_("Syntax file edit"),
+			    _(" Which syntax file you want to edit? "), D_NORMAL, 2,
+			    _("&User"), _("&System Wide"));
+    }
+    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+
+    if (dir == 0) {
+	char *buffer;
+
+	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
+	check_for_default (extdir, buffer);
+	edit_load_file_from_filename (edit, buffer);
+	g_free (buffer);
+    } else if (dir == 1)
+	edit_load_file_from_filename (edit, extdir);
+
+    g_free (extdir);
+}
+
+static void
+edit_load_menu_file (WEdit * edit)
+{
+    char *buffer;
+    char *menufile;
+    int dir = 0;
+
+    dir = query_dialog (
+	_(" Menu edit "),
+	_(" Which menu file do you want to edit? "), D_NORMAL,
+	geteuid() ? 2 : 3, _("&Local"), _("&User"), _("&System Wide")
+    );
+
+    menufile = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
+
+    switch (dir) {
+	case 0:
+	    buffer = g_strdup (CEDIT_LOCAL_MENU);
+	    check_for_default (menufile, buffer);
+	    chmod (buffer, 0600);
+	    break;
+
+	case 1:
+	    buffer = concat_dir_and_file (home_dir, CEDIT_HOME_MENU);
+	    check_for_default (menufile, buffer);
+	    break;
+	
+	case 2:
+	    buffer = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
+	    break;
+
+	default:
+	    g_free (menufile);
+	    return;
+    }
+
+    edit_load_file_from_filename (edit, buffer);
+
+    g_free (buffer);
+    g_free (menufile);
+}
+
 int
-edit_load_cmd (WEdit *edit)
+edit_load_cmd (WEdit *edit, edit_current_file_t what)
 {
     char *exp;
 
-    if (edit->modified) {
-	if (edit_query_dialog2
+    if (edit->modified
+	&& (edit_query_dialog2
 	    (_("Warning"),
 	     _(" Current text was modified without a file save. \n"
-	       " Continue discards these changes. "), _("C&ontinue"),
-	     _("&Cancel"))) {
+	       " Continue discards these changes. "),
+	     _("C&ontinue"), _("&Cancel")) == 1)) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
+
+    switch (what) {
+    case EDIT_FILE_COMMON:
+	exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
+				    MC_HISTORY_EDIT_LOAD, edit->filename);
+
+	if (exp) {
+	    if (*exp)
+		edit_load_file_from_filename (edit, exp);
+	    g_free (exp);
+	}
+	break;
+
+    case EDIT_FILE_SYNTAX:
+	edit_load_syntax_file (edit);
+	break;
+
+    case EDIT_FILE_MENU:
+	edit_load_menu_file (edit);
+	break;
+
+    default:
+	break;
     }
 
-    exp = input_expand_dialog (_(" Load "), _(" Enter file name: "),
-				MC_HISTORY_EDIT_LOAD, edit->filename);
-
-    if (exp) {
-	if (*exp)
-	    edit_load_file_from_filename (edit, exp);
-	g_free (exp);
-    }
     edit->force |= REDRAW_COMPLETELY;
     return 0;
 }

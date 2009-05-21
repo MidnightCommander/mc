@@ -50,6 +50,8 @@
 #define CK_Save_As		104
 #define CK_Load_Prev_File	111
 #define CK_Load_Next_File	112
+#define CK_Load_Syntax_File	121
+#define CK_Load_Menu_File	122
 
 /* block commands */
 #define CK_Mark			201
