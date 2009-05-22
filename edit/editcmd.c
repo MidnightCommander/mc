@@ -814,7 +814,7 @@ edit_load_syntax_file (WEdit * edit)
 			    _(" Which syntax file you want to edit? "), D_NORMAL, 2,
 			    _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+    extdir = concat_dir_and_file (mc_home_alt, "syntax" PATH_SEP_STR "Syntax");
 
     if (dir == 0) {
 	char *buffer;
@@ -844,6 +844,11 @@ edit_load_menu_file (WEdit * edit)
 
     menufile = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
 
+    if (!exist_file (menufile)) {
+	g_free (menufile);
+	menufile = concat_dir_and_file (mc_home_alt, CEDIT_GLOBAL_MENU);
+    }
+
     switch (dir) {
 	case 0:
 	    buffer = g_strdup (CEDIT_LOCAL_MENU);
@@ -858,6 +863,10 @@ edit_load_menu_file (WEdit * edit)
 	
 	case 2:
 	    buffer = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
+	    if (!exist_file (buffer)) {
+		g_free (buffer);
+		buffer = concat_dir_and_file (mc_home_alt, CEDIT_GLOBAL_MENU);
+	    }
 	    break;
 
 	default:
