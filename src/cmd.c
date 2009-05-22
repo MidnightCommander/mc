@@ -600,22 +600,6 @@ void ext_cmd (void)
    flush_extension_file ();
 }
 
-void quick_chdir_cmd (void)
-{
-    char *target;
-
-    target = hotlist_cmd (LIST_HOTLIST);
-    if (!target)
-	return;
-
-    if (get_current_type () == view_tree)
-	tree_chdir (the_tree, target);
-    else
-        if (!do_cd (target, cd_exact))
-	    message (D_ERROR, MSG_ERROR, _("Cannot change directory") );
-    g_free (target);
-}
-
 /* edit file menu for mc */
 void
 edit_mc_menu_cmd (void)
