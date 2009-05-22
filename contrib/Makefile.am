@@ -2,8 +2,6 @@
 
 SUBDIRS = dist
 
-suppbindir = $(pkgdatadir)/bin
-
 if CHARSET
 LIBFILES_ADD = mc.charsets
 else
@@ -15,7 +13,8 @@ noinst_DATA = README.xterm mcserv.init mcserv.pamd
 SCRIPTS_IN = mc.csh.in mc.sh.in mc-wrapper.csh.in mc-wrapper.sh.in
 SCRIPTS_OUT = mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh
 
-suppbin_SCRIPTS = $(SCRIPTS_OUT)
+pkglibexec_SCRIPTS = $(SCRIPTS_OUT)
+pkglibexecdir =		$(libexecdir)/@PACKAGE@
 
 cfgdir = $(sysconfdir)/@PACKAGE@
 cfg_DATA = \
@@ -30,10 +29,10 @@ EXTRA_DIST = \
 	$(cfg_DATA)
 
 mc.csh: $(srcdir)/mc.csh.in
-	sed "s%@""suppbindir@%$(suppbindir)%" $(srcdir)/mc.csh.in > mc.csh
+	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
 
 mc.sh: $(srcdir)/mc.sh.in
-	sed "s%@""suppbindir@%$(suppbindir)%" $(srcdir)/mc.sh.in > mc.sh
+	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.sh.in > mc.sh
 
 mc-wrapper.csh: $(srcdir)/mc-wrapper.csh.in
 	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
