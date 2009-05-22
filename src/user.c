@@ -739,6 +739,11 @@ user_menu_cmd (struct WEdit *edit_widget)
 	    g_free (menu);
 	    menu = concat_dir_and_file \
                         (mc_home, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    if (!exist_file (menu)) {
+		g_free (menu);
+		menu = concat_dir_and_file \
+			(mc_home_alt, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    }
 	}
     }
 

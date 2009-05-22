@@ -1,7 +1,9 @@
 extfsdir = $(pkgdatadir)/extfs
 
+EXTFSCONFFILES = extfs.ini sfs.ini
+
 # Files to install and distribute other than extfs scripts
-EXTFS_MISC  = README extfs.ini sfs.ini
+EXTFS_MISC  = README
 
 # Scripts hat don't need adaptation to the local system
 EXTFS_CONST = bpp rpm trpm srpm u7z
@@ -63,7 +65,10 @@ EXTFS_OUT = 			\
 if USE_VFS
 extfs_DATA = $(EXTFS_MISC)
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
+
+extfsconfdir = $(sysconfdir)/@PACKAGE@/extfs
+extfsconf_DATA = $(EXTFSCONFFILES)
 endif
 
-EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST)
+EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFSCONFFILES)
 

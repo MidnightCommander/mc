@@ -683,8 +683,17 @@ static FILE *open_include_file (const char *filename)
 	return f;
 
     g_free (error_file_name);
-    error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
+    error_file_name = g_strconcat (mc_home, PATH_SEP_STR, "syntax", PATH_SEP_STR,
 				   filename, (char *) NULL);
+
+    if ((f = fopen (error_file_name, "r"))) {
+	g_free (error_file_name);
+	return f;
+    }
+    g_free (error_file_name);
+    error_file_name = g_strconcat (mc_home_alt, PATH_SEP_STR "syntax" PATH_SEP_STR,
+				   filename, (char *) NULL);
+
     return fopen (error_file_name, "r");
 }
 
@@ -1028,7 +1037,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
     f = fopen (syntax_file, "r");
     if (!f){
-	lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+	lib_file = concat_dir_and_file (mc_home, "Syntax");
 	f = fopen (lib_file, "r");
 	g_free (lib_file);
 	if (!f)

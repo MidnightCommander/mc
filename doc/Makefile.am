@@ -3,7 +3,8 @@ SUBDIRS = hints man $(DOC_LINGUAS)
 
 pkgdata_DATA = mc.hlp
 
-EXTRA_DIST = xnc.hlp $(DX_CONFIG) doxygen-include.am
+DOCS = FAQ HACKING INSTALL INSTALL.FAST MAINTAINERS
+EXTRA_DIST = xnc.hlp $(DX_CONFIG) doxygen-include.am $(pkgdata_DATA) $(DOCS)
 CLEANFILES = $(pkgdata_DATA)
 
 mc.hlp: man/mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp

@@ -1,21 +1,31 @@
 ## Process this file with automake to create Makefile.in.
 
-
 LIBFILES_OUT = mc.ext
-
-LIBFILES_CONST =  mc.lib mc.menu mc.menu.sr cedit.menu edit.indent.rc	\
-	edit.spell.rc
 
 noinst_DATA = xterm.ad
 
+pkgdata_DATA = mc.menu.sr
 
-pkgdata_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
+LIBFILES_CONST = \
+	cedit.menu      \
+	edit.indent.rc \
+	edit.spell.rc \
+	mc.lib \
+	mc.menu
+
 
 CLEANFILES = $(SCRIPTS_OUT)
+
+cfgdir = $(sysconfdir)/@PACKAGE@
+cfg_DATA = \
+	$(LIBFILES_CONST) \
+	$(LIBFILES_OUT) \
+	$(LIBFILES_ADD)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
 	$(SCRIPTS_IN) \
-	$(noinst_DATA)
+	$(noinst_DATA) \
+	$(pkgdata_DATA)
 

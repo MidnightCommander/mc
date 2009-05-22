@@ -589,9 +589,13 @@ void ext_cmd (void)
 	check_for_default (extdir, buffer);
 	do_edit (buffer);
 	g_free (buffer);
-    } else if (dir == 1)
+    } else if (dir == 1) {
+	if (!exist_file(extdir)) {
+	    g_free (extdir);
+	    extdir = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
+	}
 	do_edit (extdir);
-
+    }
    g_free (extdir);
    flush_extension_file ();
 }
@@ -614,6 +618,11 @@ menu_edit_cmd (int where)
 
     menufile = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 
+    if (!exist_file(menufile)) {
+	g_free (menufile);
+	menufile = concat_dir_and_file (mc_home_alt, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+    }
+
     switch (dir) {
 	case 0:
 	    buffer = g_strdup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
@@ -627,6 +636,10 @@ menu_edit_cmd (int where)
 	
 	case 2:
 	    buffer = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    if (!exist_file(buffer)) {
+		g_free (buffer);
+		buffer = concat_dir_and_file (mc_home_alt, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    }
 	    break;
 
 	default:
@@ -685,7 +698,7 @@ edit_syntax_cmd (void)
 			  _(" Which syntax file you want to edit? "), D_NORMAL, 2,
 			  _("&User"), _("&System Wide"));
     }
-    extdir = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+    extdir = concat_dir_and_file (mc_home_alt, "syntax" PATH_SEP_STR "Syntax");
 
     if (dir == 0) {
 	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);

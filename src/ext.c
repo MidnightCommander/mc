@@ -453,6 +453,10 @@ regex_command (const char *filename, const char *action, int *move_dir)
 	    g_free (extension_file);
 	  check_stock_mc_ext:
 	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
+	    if (!exist_file (extension_file)) {
+		g_free (extension_file);
+		extension_file = concat_dir_and_file (mc_home_alt, MC_LIB_EXT);
+	    }
 	    mc_user_ext = 0;
 	}
 	data = load_file (extension_file);

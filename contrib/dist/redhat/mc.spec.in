@@ -15,7 +15,7 @@
 Summary:   User-friendly text console file manager and visual shell
 Name:      mc
 Version:   %rpmver
-Release:   %rel%{?dist}
+Release:   %rel
 Epoch:     1
 License:   GPLv2
 Group:     System Environment/Shells
@@ -77,12 +77,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_sysconfdir}/profile.d/*
 
+%config %{_sysconfdir}/mc/Syntax
+%config %{_sysconfdir}/mc/mc.charsets
+%config %{_sysconfdir}/mc/mc.lib
+%config(noreplace) %{_sysconfdir}/mc/*edit*
+%config(noreplace) %{_sysconfdir}/mc/mc.ext
+%config(noreplace) %{_sysconfdir}/mc/mc.menu
+%config(noreplace) %{_sysconfdir}/mc/extfs/extfs.ini
+%config(noreplace) %{_sysconfdir}/mc/extfs/sfs.ini
+
 %dir %{_datadir}/mc
 %{_datadir}/mc/*
 
 %dir %{_libexecdir}/mc
 
 %changelog
+* Thu May 21 2009 Slava Zanko <slavazanko@gmail.com>
+- Fix install patches: use %{_sysconfdir}/mc directory
+
 * Fri May 8 2009 Slava Zanko <slavazanko@gmail.com>
 - Review spec-file to build on the current distributions
 - Change build rules

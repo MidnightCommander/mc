@@ -10,9 +10,12 @@ bin_PROGRAMS = mc mcmfmt
 if CONS_SAVER
 pkglibexec_PROGRAMS = cons.saver
 AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
-	-DSAVERDIR=\""$(pkglibexecdir)"\"
+	-DSAVERDIR=\""$(pkglibexecdir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
 else
-AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" \
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\"
 endif
 
 noinst_PROGRAMS = man2hlp

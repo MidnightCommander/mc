@@ -1,1 +1,1 @@
-alias mc 'source @suppbindir@/mc-wrapper.csh'
+alias mc 'source @pkglibexecdir@/mc-wrapper.csh'
