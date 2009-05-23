@@ -89,6 +89,14 @@ int use_internal_edit = 1;
 /* Automatically fills name with current selected item name on mkdir */
 int auto_fill_mkdir_name = 1;
 
+/* selection flags */
+enum {
+    SELECT_FILES_ONLY = 1 << 0,
+    SELECT_MATCH_CASE = 1 << 1
+};
+
+static int select_flags = SELECT_MATCH_CASE;
+
 int
 view_file_at_line (const char *filename, int plain_view, int internal,
 		   int start_line)
@@ -477,27 +485,43 @@ void reread_cmd (void)
     repaint_screen ();
 }
 
-void reverse_selection_cmd (void)
+void
+reverse_selection_cmd (void)
 {
-    file_entry *file;
     int i;
 
-    for (i = 0; i < current_panel->count; i++){
-	file = &current_panel->dir.list [i];
-	if (S_ISDIR (file->st.st_mode))
-	    continue;
-	do_file_mark (current_panel, i, !file->f.marked);
-    }
+    for (i = 0; i < current_panel->count; i++)
+	do_file_mark (current_panel, i, !current_panel->dir.list [i].f.marked);
 }
 
 static void
-select_unselect_cmd (const char *title, const char *history_name, int cmd)
+select_unselect_cmd (const char *title, const char *history_name, gboolean do_select)
 {
-    char *reg_exp, *reg_exp_t, *srch_regexp;
-    int i;
-    int dirflag = 0;
+    int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
+    int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
 
-    reg_exp = input_dialog (title, "", history_name, INPUT_LAST_TEXT);
+    char *reg_exp;
+    mc_search_t *search;
+    int i;
+
+#define DX 50
+#define DY 6
+    QuickWidget quick_widgets[] = {
+	{ quick_checkbox, DX/2 + 1, DX, DY - 3, DY, N_("&Case sensitive"), 0,      0, &case_sens,  NULL,     NULL },
+	{ quick_checkbox, 3,        DX, DY - 3, DY, N_("&Files only"),     0,      0, &files_only, NULL,     NULL },
+	{ quick_input,    3,        DX, DY - 4, DY, INPUT_LAST_TEXT,       DX - 6, 0, NULL,        &reg_exp, history_name },
+	NULL_QuickWidget
+    };
+
+    QuickDialog quick_dlg = {
+	DX, DY, -1, -1, title, "[Select/Uselect Files]", quick_widgets, 0
+    };
+#undef DY
+#undef DX
+
+    if (quick_dialog (&quick_dlg) == B_CANCEL)
+	return;
+
     if (!reg_exp)
 	return;
     if (!*reg_exp) {
@@ -505,47 +529,40 @@ select_unselect_cmd (const char *title, const char *history_name, int cmd)
 	return;
     }
 
-    reg_exp_t = reg_exp;
-
-    /* Check if they specified a directory */
-    if (*reg_exp_t == PATH_SEP) {
-	dirflag = 1;
-	reg_exp_t++;
-    }
-    if (reg_exp_t[strlen (reg_exp_t) - 1] == PATH_SEP) {
-	dirflag = 1;
-	reg_exp_t[strlen (reg_exp_t) - 1] = 0;
-    }
-    srch_regexp = g_strdup_printf("{%s}",reg_exp_t);
+    search = mc_search_new (reg_exp, -1);
+    search->search_type = MC_SEARCH_T_GLOB;
+    search->is_case_sentitive = case_sens != 0;
 
     for (i = 0; i < current_panel->count; i++) {
-	if (!strcmp (current_panel->dir.list[i].fname, ".."))
+	if (strcmp (current_panel->dir.list[i].fname, "..") == 0)
 	    continue;
-	if (S_ISDIR (current_panel->dir.list[i].st.st_mode)) {
-	    if (!dirflag)
-		continue;
-	} else {
-	    if (dirflag)
-		continue;
-	}
-        if (!mc_search(srch_regexp, current_panel->dir.list[i].fname, MC_SEARCH_T_GLOB)){
-            continue;
-        }
+	if (S_ISDIR (current_panel->dir.list[i].st.st_mode) && files_only != 0)
+	    continue;
 
-        do_file_mark (current_panel, i, cmd);
+        if (mc_search_run (search, current_panel->dir.list[i].fname,
+			    0, current_panel->dir.list[i].fnamelen, NULL))
+	    do_file_mark (current_panel, i, do_select);
     }
-    g_free(srch_regexp);
+
+    mc_search_free (search);
     g_free (reg_exp);
+
+    /* result flags */
+    select_flags = 0;
+    if (case_sens != 0)
+	select_flags |= SELECT_MATCH_CASE;
+    if (files_only != 0)
+	select_flags |= SELECT_FILES_ONLY;
 }
 
 void select_cmd (void)
 {
-    select_unselect_cmd (_(" Select "), ":select_cmd: Select ", 1);
+    select_unselect_cmd (_(" Select "), ":select_cmd: Select ", TRUE);
 }
 
 void unselect_cmd (void)
 {
-    select_unselect_cmd (_(" Unselect "), ":unselect_cmd: Unselect ", 0);
+    select_unselect_cmd (_(" Unselect "), ":unselect_cmd: Unselect ", FALSE);
 }
 
 /* Check if the file exists */
