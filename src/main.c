@@ -831,8 +831,10 @@ static menu_entry LeftMenu[] = {
     {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+#ifdef HAVE_CHARSET
     {' ', "",NULL_HOTKEY, 0},
     {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
+#endif
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
 #ifdef ENABLE_VFS_MCFS
@@ -857,8 +859,10 @@ static menu_entry RightMenu[] = {
     {' ', N_("&Sort order..."), NULL_HOTKEY, sort_cmd},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("&Filter..."), NULL_HOTKEY, filter_cmd},
+#ifdef HAVE_CHARSET
     {' ', "",NULL_HOTKEY, 0},
     {' ', N_("&Encoding...    C-t"), NULL_HOTKEY, encoding_cmd},
+#endif
 #ifdef USE_NETCODE
     {' ', "", NULL_HOTKEY, 0},
 #ifdef ENABLE_VFS_MCFS

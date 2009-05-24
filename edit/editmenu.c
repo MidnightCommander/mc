@@ -182,6 +182,12 @@ menu_replace_cmd (void)
 }
 
 static void
+menu_select_codepage_cmd (void)
+{
+    menu_cmd (CK_Select_Codepage);
+}
+
+static void
 menu_begin_record_cmd (void)
 {
     menu_cmd (CK_Begin_Record_Macro);
@@ -376,6 +382,10 @@ static menu_entry CmdMenu[] =
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
     {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
+#ifdef HAVE_CHARSET 
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Encod&ing...             C-t"), NULL_HOTKEY, menu_select_codepage_cmd},
+#endif 
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
     {' ', "", NULL_HOTKEY, 0},
