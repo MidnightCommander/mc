@@ -897,9 +897,7 @@ static menu_entry FileMenu[] = {
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("select &Group      M-+"), NULL_HOTKEY, select_cmd},
     {' ', N_("u&Nselect group    M-\\"), NULL_HOTKEY, unselect_cmd},
-    {' ', N_("reverse selec&Tion M-*"), NULL_HOTKEY, reverse_selection_cmd},
-    {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("e&Xit              F10"), NULL_HOTKEY, quit_cmd}
+    {' ', N_("reverse selec&Tion M-*"), NULL_HOTKEY, reverse_selection_cmd}
 };
 
 static menu_entry CmdMenu[] = {
@@ -913,7 +911,7 @@ static menu_entry CmdMenu[] = {
     {' ', N_("s&Wap panels          C-u"), NULL_HOTKEY, swap_cmd},
     {' ', N_("switch &Panels on/off C-o"), NULL_HOTKEY, view_other_cmd},
     {' ', N_("&Compare directories  C-x d"), NULL_HOTKEY, compare_dirs_cmd},
-    {' ', N_("e&Xternal panelize    C-x !"), NULL_HOTKEY, external_panelize},
+    {' ', N_("External paneli&ze    C-x !"), NULL_HOTKEY, external_panelize},
     {' ', N_("show directory s&Izes"), NULL_HOTKEY, dirsizes_cmd},
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("command &History"), NULL_HOTKEY, history_cmd},
@@ -935,7 +933,9 @@ static menu_entry CmdMenu[] = {
     {' ', "", NULL_HOTKEY, 0},
 #endif
     {' ', N_("Edit &extension file"), NULL_HOTKEY, ext_cmd},
-    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd}
+    {' ', N_("Edit &menu file"), NULL_HOTKEY, edit_mc_menu_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("e&Xit              F10"), NULL_HOTKEY, quit_cmd}
 };
 
 /* Must keep in sync with the constants in menu_cmd */
