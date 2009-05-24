@@ -37,7 +37,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"		/* For Gpm_Event */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
-#include "../src/tty/win.h"
 
 #include "dir.h"
 #include "panel.h"

@@ -30,46 +30,50 @@
 
 #include "../../src/global.h"
 
-#include "../../src/tty/tty.h"	/* tty_gotoyx, addch */
+#include "../../src/tty/tty.h"		/* tty_gotoyx, addch */
 
-#include "../../src/cons.saver.h"
+#include "../../src/cons.saver.h"	/* console_flag */
 
-static int rxvt_extensions = 0;
+static gboolean rxvt_extensions = FALSE;
 
-int look_for_rxvt_extensions (void)
+gboolean
+look_for_rxvt_extensions (void)
 {
-    static int been_called = 0;
-    const char *e;
+    static gboolean been_called = FALSE;
+
     if (!been_called) {
-	rxvt_extensions = 0;
-	e = getenv ("RXVT_EXT");
-	if (e)
-	    if (!strcmp (e, "1.0"))
-		rxvt_extensions = 1;
-	been_called = 1;
+	const char *e = getenv ("RXVT_EXT");
+	rxvt_extensions = ((e != NULL) && (strcmp (e, "1.0") == 0));
+	been_called = TRUE;
     }
+
     if (rxvt_extensions)
 	console_flag = 4;
+
     return rxvt_extensions;
 }
 
 /* my own wierd protocol base 16 - paul */
-static int rxvt_getc (void)
+static int
+rxvt_getc (void)
 {
     int r;
     unsigned char c;
-    while (read (0, &c, 1) != 1);
+    while (read (0, &c, 1) != 1)
+	;
     if (c == '\n')
 	return -1;
     r = (c - 'A') * 16;
-    while (read (0, &c, 1) != 1);
+    while (read (0, &c, 1) != 1)
+	;
     r += (c - 'A');
     return r;
 }
 
 extern int keybar_visible;
 
-static int anything_ready (void)
+static int
+anything_ready (void)
 {
     fd_set fds;
     struct timeval tv;
@@ -81,10 +85,12 @@ static int anything_ready (void)
     return select (1, &fds, 0, 0, &tv);
 }
 
-void show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
+void
+show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
 {
     unsigned char *k;
     int bytes, i, j, cols = 0;
+
     y1 += (keybar_visible != 0);	/* i don't knwo why we need this - paul */
     y2 += (keybar_visible != 0);
     while (anything_ready ())

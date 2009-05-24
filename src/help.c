@@ -57,7 +57,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"		/* For mi_getch() */
-#include "../src/tty/win.h"
 
 #include "help.h"
 #include "dialog.h"		/* For Dlg_head */

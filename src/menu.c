@@ -33,7 +33,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"	/* For mi_getch() */
-#include "../src/tty/win.h"
 
 #include "menu.h"
 #include "help.h"

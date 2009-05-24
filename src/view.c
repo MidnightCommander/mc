@@ -53,7 +53,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"		/* For mi_getch() */
 #include "../src/tty/mouse.h"
-#include "../src/tty/win.h"
 
 #include "cmd.h"		/* For view_other_cmd */
 #include "dialog.h"		/* Needed by widget.h */

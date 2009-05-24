@@ -39,7 +39,6 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"		/* Color definitions */
 #include "../src/tty/key.h"		/* XCTRL and ALT macros  */
-#include "../src/tty/win.h"		/* Our window tools */
 
 #include "dialog.h"		/* The nice dialog manager */
 #include "widget.h"		/* The widgets for the nice dialog manager */

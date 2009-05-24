@@ -37,7 +37,7 @@
 
 #include "global.h"
 #include "tty.h"
-#include "win.h"
+#include "key.h"
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"

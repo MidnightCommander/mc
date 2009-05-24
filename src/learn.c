@@ -39,7 +39,6 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
-#include "../src/tty/win.h"
 
 #include "dialog.h"
 #include "widget.h"

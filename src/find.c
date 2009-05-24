@@ -37,7 +37,6 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/key.h"
-#include "../src/tty/win.h"
 
 #include "../src/search/search.h"
 

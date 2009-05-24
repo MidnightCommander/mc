@@ -37,7 +37,6 @@
 
 #include "../src/tty/tty.h"		/* tty_setcolor() */
 #include "../src/tty/color.h"
-#include "../src/tty/win.h"
 
 #include "dialog.h"
 #include "widget.h"

@@ -7,16 +7,34 @@
 #define MC_KEY_H
 
 #include "../../src/global.h"		/* <glib.h> */
+#include "../../src/dialog.h"		/* cb_ret_t */
 
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
 
+/* Keys management */
+typedef void (*move_fn) (void *data, int param);
+cb_ret_t check_movement_keys (int key, int page_size, void *data,
+				move_fn backfn, move_fn forfn,
+				move_fn topfn, move_fn bottomfn);
+int lookup_keyname (char *keyname);
+int lookup_key (char *keyname);
+
+typedef const struct {
+    int code;
+    const char *name;
+    const char *longname;
+} key_code_name_t;
+
+extern key_code_name_t key_name_conv_tab [];
+
+/* mouse support */
 struct Gpm_Event;
 int get_event (struct Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
-
 int mi_getch (void);
+
 /* Possible return values from get_event: */
 #define EV_MOUSE   -2
 #define EV_NONE    -1
@@ -37,7 +55,6 @@ extern int irix_fn_keys;
 extern int use_8th_bit_as_meta;
 
 /* While waiting for input, the program can select on more than one file */
-
 typedef int (*select_fn)(int fd, void *info);
 
 /* Channel manipulation */
@@ -72,16 +89,8 @@ char *learn_key (void);
 /* Returns a key code (interpreted) */
 int get_key_code (int nodelay);
 
-typedef const struct {
-    int code;
-    const char *name;
-    const char *longname;
-} key_code_name_t;
-
-extern key_code_name_t key_name_conv_tab [];
-
 /* Set keypad mode (xterm and linux console only) */
 void numeric_keypad_mode (void);
 void application_keypad_mode (void);
 
-#endif
+#endif				/* MC_KEY_H */

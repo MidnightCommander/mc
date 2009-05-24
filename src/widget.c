@@ -46,7 +46,6 @@
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
 #include "../src/tty/key.h"	/* XCTRL and ALT macros  */
-#include "../src/tty/win.h"
 
 #include "dialog.h"
 #include "widget.h"

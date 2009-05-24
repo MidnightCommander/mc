@@ -31,9 +31,8 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/key.h"		/* For the externs */
+#include "../src/tty/key.h"
 #include "../src/tty/mouse.h"		/* To make view.h happy */
-#include "../src/tty/win.h"		/* lookup_key */
 
 #include "dir.h"
 #include "panel.h"
