@@ -106,8 +106,10 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
         {quick_radio, 33, REPLACE_DLG_WIDTH, 10, REPLACE_DLG_HEIGHT, "", 2, treplace_mode,
          &treplace_mode, const_cast (char **, replace_mode_str), NULL, NULL, NULL},
 
+#ifdef HAVE_CHARSET
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 9, REPLACE_DLG_HEIGHT, N_("All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
+#endif
 
         {quick_checkbox, 33, REPLACE_DLG_WIDTH, 8, REPLACE_DLG_HEIGHT, N_("&Backwards"), 0, 0,
          &treplace_backwards, 0, NULL, NULL, NULL},
@@ -184,8 +186,10 @@ editcmd_dialog_search_show (WEdit * edit, char **search_text)
         {quick_button, 2, 10, 9, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER, 0,
          0, NULL, NULL, NULL},
 
+#ifdef HAVE_CHARSET
         {quick_checkbox, 33, SEARCH_DLG_WIDTH, 7, SEARCH_DLG_HEIGHT, N_("All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
+#endif
 
         {quick_checkbox, 33, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("&Backwards"), 0, 0,
          &tsearch_backwards, 0, NULL, NULL, NULL},

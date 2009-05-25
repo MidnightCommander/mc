@@ -3241,8 +3241,10 @@ view_search_cmd (WView *view)
 	{quick_button, 2, 10, SEARCH_DLG_HEIGHT - 3, SEARCH_DLG_HEIGHT , N_("&OK"), 0, B_ENTER,
 	 0, 0, NULL, NULL, NULL},
 
+#ifdef HAVE_CHARSET
         {quick_checkbox, SEARCH_DLG_WIDTH/2 + 3, SEARCH_DLG_WIDTH, 6, SEARCH_DLG_HEIGHT, N_("All charsets"), 0, 0,
          &tall_codepages, 0, NULL, NULL, NULL},
+#endif
 
 	{quick_checkbox, SEARCH_DLG_WIDTH/2 + 3, SEARCH_DLG_WIDTH, 5, SEARCH_DLG_HEIGHT,
 	 N_("&Backwards"), 0, 0, &tsearch_backwards, 0, NULL, NULL, NULL},

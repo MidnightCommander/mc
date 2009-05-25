@@ -285,22 +285,29 @@ find_parameters (char **start_dir, char **pattern, char **content)
     file_regexp_cbox = check_new (6, 3, file_regexp_flag, file_regexp_label);
     recursively_cbox = check_new (7, 3, find_recursively, recurs_label);
     skip_hidden_cbox = check_new (6, 33, skip_hidden_flag, skip_hidden_label);
+#ifdef HAVE_CHARSET
     file_all_charsets_cbox = check_new (7, 33, file_all_charsets_flag, all_charsets_label);
-
+#endif
 
     find_regex_cbox = check_new (11, 3, content_regexp_flag, regexp_label);
     case_sense = check_new (10, 3, content_case_sensitive, case_label);
+#ifdef HAVE_CHARSET
     content_all_charsets_cbox = check_new (10, 33, content_all_charsets_flag, all_charsets_label);
+#endif
 
     in_with = input_new (9, istart, INPUT_COLOR, ilen, in_contents, "content", INPUT_COMPLETE_DEFAULT);
     in_name = input_new (5, istart, INPUT_COLOR, ilen, in_start_name, "name", INPUT_COMPLETE_DEFAULT);
     in_start = input_new (3, istart, INPUT_COLOR, ilen, in_start_dir, "start", INPUT_COMPLETE_DEFAULT);
 
+#ifdef HAVE_CHARSET
     add_widget (find_dlg, content_all_charsets_cbox);
+#endif
     add_widget (find_dlg, find_regex_cbox);
     add_widget (find_dlg, case_sense);
     add_widget (find_dlg, in_with);
+#ifdef HAVE_CHARSET
     add_widget (find_dlg, file_all_charsets_cbox);
+#endif
     add_widget (find_dlg, skip_hidden_cbox);
     add_widget (find_dlg, recursively_cbox);
     add_widget (find_dlg, file_regexp_cbox);
