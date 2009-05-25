@@ -1126,7 +1126,7 @@ editcmd_find (WEdit *edit, gsize *len)
     gsize search_end;
 
     if (edit->replace_backwards) {
-	search_end = edit->curs1;
+	search_end = edit->curs1-1;
 	while ((int) search_start >= 0) {
 	    if (search_end - search_start > edit->search->original_len && mc_search_is_fixed_search_str(edit->search))
 		search_end = search_start + edit->search->original_len +1;
@@ -1136,6 +1136,7 @@ editcmd_find (WEdit *edit, gsize *len)
 	    }
 	    search_start--;
 	}
+	edit->search->error_str = g_strdup(_(" Search string not found "));
     } else {
 	return mc_search_run(edit->search, (void *) edit, edit->search_start, edit->last_byte, len);
     }
