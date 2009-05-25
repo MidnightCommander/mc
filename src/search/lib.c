@@ -167,7 +167,7 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
 #else
     const gchar *tmp_str1 = str;
     gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len;
+    gsize converted_str_len = str_len+1;
 
     tmp_str2 = converted_str = g_strndup(str, str_len);
 
@@ -217,7 +217,7 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 #else
     const gchar *tmp_str1 = str;
     gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len;
+    gsize converted_str_len = str_len+1;
 
     tmp_str2 = converted_str = g_strndup(str, str_len);
 

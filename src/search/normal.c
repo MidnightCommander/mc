@@ -44,48 +44,55 @@
 
 /*** file scope functions ************************************************************************/
 
-static mc_search__found_cond_t
-mc_search__normal_found_cond (mc_search_t * mc_search, int current_chr, gsize search_pos)
+static GString *
+mc_search__normal_translate_to_regex (gchar * str, gsize * len)
 {
-    gsize loop1;
-    mc_search_cond_t *mc_search_cond;
+    GString *buff = g_string_new ("");
+    gsize orig_len = *len;
+    gsize loop = 0;
 
-    for (loop1 = 0; loop1 < mc_search->conditions->len; loop1++) {
-        mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (mc_search->conditions, loop1);
-
-        if (search_pos > mc_search_cond->len - 1)
+    while (loop < orig_len) {
+        switch (str[loop]) {
+        case '*':
+        case '?':
+        case ',':
+        case '{':
+        case '}':
+        case '[':
+        case ']':
+        case '\\':
+        case '+':
+        case '.':
+        case '$':
+        case '(':
+        case ')':
+        case '^':
+        case '-':
+            g_string_append_c (buff, '\\');
+            g_string_append_c (buff, str[loop]);
+            loop++;
             continue;
-
-        if (mc_search->is_case_sentitive) {
-            if ((char) current_chr == mc_search_cond->str->str[search_pos])
-                return (search_pos ==
-                        mc_search_cond->len - 1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
-        } else {
-            GString *upp, *low;
-            upp = (mc_search_cond->upper) ? mc_search_cond->upper : mc_search_cond->str;
-            low = (mc_search_cond->lower) ? mc_search_cond->lower : mc_search_cond->str;
-
-            if (((char) current_chr == upp->str[search_pos])
-                || ((char) current_chr == low->str[search_pos]))
-                return (search_pos ==
-                        mc_search_cond->len - 1) ? COND__FOUND_CHAR_LAST : COND__FOUND_CHAR;
+            break;
         }
+        g_string_append_c (buff, str[loop]);
+        loop++;
     }
-    return COND__NOT_ALL_FOUND;
+    *len = buff->len;
+    return buff;
 }
 
 /*** public functions ****************************************************************************/
 
 void
 mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * mc_search,
-                                        mc_search_cond_t * mc_search_cond)
+                                      mc_search_cond_t * mc_search_cond)
 {
-    if (!mc_search->is_case_sentitive) {
-        mc_search_cond->upper =
-            mc_search__toupper_case_str (charset, mc_search_cond->str->str, mc_search_cond->len);
-        mc_search_cond->lower =
-            mc_search__tolower_case_str (charset, mc_search_cond->str->str, mc_search_cond->len);
-    }
+    GString *tmp = mc_search__normal_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+
+    g_string_free (mc_search_cond->str, TRUE);
+    mc_search_cond->str = tmp;
+
+    mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
 
 }
 
@@ -93,55 +100,14 @@ mc_search__cond_struct_new_init_normal (const char *charset, mc_search_t * mc_se
 
 gboolean
 mc_search__run_normal (mc_search_t * mc_search, const void *user_data,
-                       gsize start_search, gsize end_search, gsize * found_len)
+                     gsize start_search, gsize end_search, gsize * found_len)
 {
-    gsize current_pos, search_pos;
-    int current_chr = 0;
-    gboolean found;
-
-    current_pos = start_search;
-    while (1) {
-        search_pos = 0;
-        found = TRUE;
-
-        while (1) {
-            if (current_pos + search_pos > end_search)
-                break;
-
-            current_chr = mc_search__get_char (mc_search, user_data, current_pos + search_pos);
-            if (current_chr == -1)
-                break;
-            switch (mc_search__normal_found_cond (mc_search, current_chr, search_pos)) {
-
-            case COND__NOT_ALL_FOUND:
-                found = FALSE;
-                break;
-
-            case COND__FOUND_CHAR_LAST:
-                mc_search->normal_offset = current_pos;
-                if (found_len)
-                    *found_len = search_pos + 1;
-                return TRUE;
-                break;
-
-            default:
-                break;
-            }
-            if (!found)
-                break;
-
-            search_pos++;
-        }
-        if (current_chr == -1)
-            break;
-
-        current_pos++;
-        if (current_pos == end_search + 1)
-            break;
-    }
-    mc_search->error = MC_SEARCH_E_NOTFOUND;
-    mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
-    return FALSE;
+    return mc_search__run_regex (mc_search, user_data, start_search, end_search, found_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
+GString *
+mc_search_normal_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
+{
+    return mc_search_regex_prepare_replace_str (mc_search, replace_str);
+}
