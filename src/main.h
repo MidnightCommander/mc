@@ -39,7 +39,6 @@ extern int use_internal_view;
 extern int use_internal_edit;
 extern int fast_reload_w;
 extern int clear_before_exec;
-extern int mou_auto_repeat;
 extern char *other_dir;
 extern int mouse_move_pages;
 

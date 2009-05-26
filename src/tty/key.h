@@ -51,8 +51,8 @@ int mi_getch (void);
 
 extern int double_click_speed;
 extern int old_esc_mode;
-extern int irix_fn_keys;
 extern int use_8th_bit_as_meta;
+extern int mou_auto_repeat;
 
 /* While waiting for input, the program can select on more than one file */
 typedef int (*select_fn)(int fd, void *info);
