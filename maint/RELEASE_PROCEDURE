@@ -31,7 +31,6 @@ ${underscore_version} shall be replaced by something like 4_6
   Update the date and the version number in the .TH macro of the English
   manual pages.
 * Update the NEWS file to contain all user-visible changes.
-* Fix wrong formatting in the ChangeLog files.
 * Set the version number in configure.ac to "${dotted_version}".
   Commit it.
 * Update the translation files NOT to contain line number information.

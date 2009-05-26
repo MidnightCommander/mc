@@ -74,7 +74,7 @@ else
 mc_SOURCES = $(SRCS)
 endif
 
-EXTRA_DIST = ChangeLog OChangeLog man2hlp.c $(CHARSET_SRC)
+EXTRA_DIST = man2hlp.c $(CHARSET_SRC)
 
 # automated testing
 

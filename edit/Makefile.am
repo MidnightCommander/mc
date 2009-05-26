@@ -12,4 +12,4 @@ libedit_a_SOURCES = \
 	editlock.c editlock.h syntax.c usermap.h usermap.c wordproc.c \
 	choosesyntax.c etags.c etags.h editcmd_dialogs.c editcmd_dialogs.h
 
-EXTRA_DIST = ChangeLog
+EXTRA_DIST =
