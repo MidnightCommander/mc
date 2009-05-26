@@ -73,8 +73,9 @@ static const char * show_c_flags(INPUT_COMPLETE_FLAGS flags)
 #endif /* DO_CMPLETION_DEBUG */
 
 static char *
-filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
+filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS flags)
 {
+    char *text;
     static DIR *directory;
     static char *filename = NULL;
     static char *dirname = NULL;
@@ -87,7 +88,7 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     SHOW_C_CTX("filename_completion_function");
 
     if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
-        text = shell_unescape (text);
+        text = shell_unescape (_text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -214,8 +215,11 @@ filename_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
 	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
 	{
+	    char *temp2 = temp;
 	    temp = shell_escape(temp);
+	    g_free(temp2);
 	}
+	g_free(text);
 	return temp;
     }
 }
@@ -448,8 +452,9 @@ hostname_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
  * table of shell built-ins.
  */
 static char *
-command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
+command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS flags)
 {
+    char *text;
     static const char *path_end;
     static int isabsolute;
     static int phase;
@@ -478,8 +483,7 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
-
-    text = shell_unescape(text);
+    text = shell_unescape(_text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
@@ -499,10 +503,16 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     }
 
     if (isabsolute) {
+	char *temp_p;
 	p = filename_completion_function (text, state, flags);
-	if (!p)
+	if (!p){
+	    g_free(text);
 	    return 0;
+	}
+	temp_p = p;
 	p = shell_escape(p);
+	g_free(temp_p);
+	g_free(text);
 	return p;
     }
 
@@ -554,14 +564,19 @@ command_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
     if (!found) {
 	g_free (path);
 	path = NULL;
+	g_free(text);
 	return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	p++;
+	g_free(found);
+	found = p;
 	p = shell_escape(p);
 	g_free(found);
+	g_free(text);
 	return p;
     }
+    g_free(text);
     return found;
 
 }

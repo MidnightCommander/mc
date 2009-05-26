@@ -59,15 +59,15 @@ WInput *cmdline;
  * they want the behavior they are used to in the shell.
  */
 static int
-examine_cd (char *path)
+examine_cd (const char *_path)
 {
     int result, qlen;
-    char *path_tilde;
+    char *path_tilde, *path;
     char *p, *q, *r, *s, c;
     const char *t;
 
     /* Tilde expansion */
-    path = shell_unescape(path);
+    path = shell_unescape(_path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
@@ -139,6 +139,7 @@ examine_cd (char *path)
     }
     g_free (q);
     g_free (path_tilde);
+    g_free (path);
     return result;
 }
 

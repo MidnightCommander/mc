@@ -2118,9 +2118,14 @@ panel_operate (void *source_panel, FileOperation operation,
 		    value = transform_error;
 		else {
 		    char *temp2 = concat_dir_and_file (dest, temp);
+		    char *temp3;
 
+		    temp3 = source_with_path;
 		    source_with_path = shell_unescape(source_with_path);
+		    g_free(temp3);
+		    temp3 = temp2;
 		    temp2 = shell_unescape(temp2);
+		    g_free(temp3);
 
 		    switch (operation) {
 		    case OP_COPY:

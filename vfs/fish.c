@@ -508,6 +508,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 	switch(buffer[0]) {
 	case ':': {
+	    char *temp;
 	    char *data_start = buffer+1;
 	    char *filename = data_start;
 	    char *linkname = data_start;
@@ -542,10 +543,14 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			}
 
 			ent->name = str_dup_range(filename, filename_bound);
-			shell_unescape(ent->name);
+			temp = ent->name;
+			ent->name = shell_unescape(ent->name);
+			g_free(temp);
 
 			ent->ino->linkname = str_dup_range(linkname, linkname_bound);
-			shell_unescape(ent->ino->linkname);
+			temp = ent->ino->linkname;
+			ent->ino->linkname = shell_unescape(ent->ino->linkname);
+			g_free(temp);
 		} else {
 			/* we expect: "escaped-name" */
 			if (filename_bound - filename > 2)
@@ -559,9 +564,10 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 				if (*(filename_bound - 1) == '"')
 					--filename_bound;
 			}
-
 			ent->name = str_dup_range(filename, filename_bound);
-			shell_unescape(ent->name);
+			temp = ent->name;
+			ent->name = shell_unescape(ent->name);
+			g_free(temp);
 		}
 		break;
 	}
