@@ -51,7 +51,7 @@
 
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
-#include "../src/tty/key.h"		/* For mi_getch() */
+#include "../src/tty/key.h"
 #include "../src/tty/mouse.h"
 
 #include "cmd.h"		/* For view_other_cmd */

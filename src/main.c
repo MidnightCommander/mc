@@ -45,7 +45,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
-#include "../src/tty/key.h"		/* For init_key() and mi_getch() */
+#include "../src/tty/key.h"		/* For init_key() */
 #include "../src/tty/win.h"		/* xterm_flag */
 
 #include "dir.h"

@@ -43,7 +43,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
-#include "../src/tty/key.h"	/* For mi_getch() */
+#include "../src/tty/key.h"
 
 #include "wtools.h"	/* message() */
 #include "dir.h"

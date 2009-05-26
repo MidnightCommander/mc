@@ -48,7 +48,6 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"		/* LINES */
-#include "../src/tty/key.h"		/* application_keypad_mode() */
 #include "../src/tty/win.h"		/* do_enter_ca_mode() */
 
 #include "../src/search/search.h"

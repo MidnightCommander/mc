@@ -32,7 +32,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
-#include "../src/tty/key.h"	/* For mi_getch() */
+#include "../src/tty/key.h"	/* key macros */
 
 #include "menu.h"
 #include "help.h"
