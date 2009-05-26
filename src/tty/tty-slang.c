@@ -427,6 +427,12 @@ tty_draw_box (int y, int x, int rows, int cols)
 }
 
 void
+tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
+{
+    SLsmg_fill_region (y, x, rows, cols, ch);
+}
+
+void
 tty_print_char (int c)
 {
     /* We cannot use SLsmg_write_char here because the Debian and Redhat

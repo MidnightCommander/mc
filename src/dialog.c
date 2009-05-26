@@ -34,7 +34,7 @@
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"
 #include "../src/tty/mouse.h"
-#include "../src/tty/key.h"	/* mi_getch() */
+#include "../src/tty/key.h"
 
 #include "help.h"	/* interactive_display() */
 #include "dialog.h"
@@ -90,28 +90,17 @@ draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
 #endif /* HAVE_SLANG */
 }
 
-void widget_erase (Widget *w)
+void
+widget_erase (Widget *w)
 {
-    int x, y;
-
-    for (y = 0; y < w->lines; y++){
-	widget_move (w, y, 0);
-	for (x = 0; x < w->cols; x++)
-	    addch (' ');
-    }
+    tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
 }
 
-void dlg_erase (Dlg_head *h)
+void
+dlg_erase (Dlg_head *h)
 {
-    int x, y;
-    if (h == NULL)
-	return;
-    for (y = 0; y < h->lines; y++){
-	tty_gotoyx (y + h->y, h->x);	/* FIXME: should test if ERR */
-	for (x = 0; x < h->cols; x++){
-	    addch (' ');
-	}
-    }
+    if (h != NULL)
+	tty_fill_region (h->y, h->x, h->lines, h->cols, ' ');
 }
 
 void

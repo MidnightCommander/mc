@@ -52,6 +52,7 @@ extern void tty_print_one_hline(void);
 extern void tty_print_vline(int top, int left, int length);
 extern void tty_print_hline(int top, int left, int length);
 extern void tty_draw_box (int y, int x, int rows, int cols);
+extern void tty_fill_region (int y, int x, int rows, int cols, unsigned char ch);
 
 extern char *tty_tgetstr (const char *name);
 

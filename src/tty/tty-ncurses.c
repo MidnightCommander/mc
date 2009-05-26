@@ -137,6 +137,19 @@ tty_draw_box (int y, int x, int rows, int cols)
 }
 
 void
+tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
+{
+    int i;
+
+    for (i = 0; i < rows; i++) {
+	move (y + i, x);
+	hline (ch, cols);
+    }
+
+    move (y, x);
+}
+
+void
 tty_print_char (int c)
 {
     addch (c);
