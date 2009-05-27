@@ -1463,10 +1463,13 @@ done_mc (void)
      * We sync the profiles since the hotlist may have changed, while
      * we only change the setup data if we have the auto save feature set
      */
+    
     if (auto_save_setup)
 	save_setup ();		/* does also call save_hotlist */
-    else
+    else {
 	save_hotlist ();
+	save_panel_types ();
+    }
     done_screen ();
     vfs_add_current_stamps ();
 }
@@ -1477,8 +1480,6 @@ done_mc (void)
 static void
 done_mc_profile (void)
 {
-    if (auto_save_setup)
-	mc_config_save_file (mc_main_config);
     done_setup ();
 }
 

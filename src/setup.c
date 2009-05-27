@@ -254,6 +254,7 @@ panel_save_setup (struct WPanel *panel, const char *section)
     mc_config_set_int(mc_panels_config, section, "case_sensitive", panel->case_sensitive);
     mc_config_set_int(mc_panels_config, section, "exec_first", panel->exec_first);
 
+
     for (i = 0; sort_names [i].key; i++)
 	if (sort_names [i].sort_type == (sortfn *) panel->sort_type){
 	    mc_config_set_string(mc_panels_config, section, "sort_order", sort_names [i].key);
@@ -275,7 +276,6 @@ panel_save_setup (struct WPanel *panel, const char *section)
     }
 
     mc_config_set_int(mc_panels_config, section, "user_mini_status", panel->user_mini_status);
-    mc_config_save_file (mc_panels_config);
 }
 
 void
@@ -328,7 +328,7 @@ panel_save_type (const char *section, int type)
 	}
 }
 
-static void
+void
 save_panel_types (void)
 {
     int type;
@@ -345,7 +345,6 @@ save_panel_types (void)
     mc_config_set_string(mc_panels_config, "Dirs" , "other_dir",
 			       get_other_type () == view_listing
 			       ? other_panel->cwd : ".");
-
     if (current_panel != NULL)
 	    mc_config_set_string(mc_panels_config, "Dirs" , "current_is_left",
 				       get_current_index () == 0 ? "1" : "0");
@@ -473,6 +472,77 @@ setup__load_panel_state (const char *section)
     return mode;
 }
 
+static const char *
+setup__is_cfg_group_must_panel_config(const char *grp)
+{
+    if (
+        ! strcasecmp("Dirs",grp) ||
+        ! strcasecmp("Temporal:New Right Panel",grp) ||
+        ! strcasecmp("Temporal:New Left Panel",grp) ||
+        ! strcasecmp("New Left Panel",grp) ||
+        ! strcasecmp("New Right Panel",grp)
+    )
+        return grp;
+    return NULL;
+}
+
+static void
+setup__move_panels_config_into_separate_file(const char*profile)
+{
+    mc_config_t *tmp_cfg;
+    char **groups, **curr_grp;
+    char *need_grp;
+    gsize groups_count;
+
+    if (!exist_file(profile))
+        return;
+
+    tmp_cfg = mc_config_init(profile);
+    if (!tmp_cfg)
+        return;
+
+    curr_grp = groups = mc_config_get_groups (tmp_cfg, &groups_count);
+    if (!groups)
+    {
+        mc_config_deinit(tmp_cfg);
+        return;
+    }
+    while (*curr_grp)
+    {
+        if ( setup__is_cfg_group_must_panel_config(*curr_grp) == NULL)
+        {
+            mc_config_del_group (tmp_cfg, *curr_grp);
+        }
+        curr_grp++;
+    }
+
+    mc_config_save_to_file (tmp_cfg, panels_profile_name);
+    mc_config_deinit(tmp_cfg);
+
+    tmp_cfg = mc_config_init(profile);
+    if (!tmp_cfg)
+    {
+        g_strfreev(groups);
+        return;
+    }
+
+    curr_grp = groups;
+
+    while (*curr_grp)
+    {
+        need_grp = setup__is_cfg_group_must_panel_config(*curr_grp);
+        if ( need_grp != NULL)
+        {
+            mc_config_del_group (tmp_cfg, need_grp);
+        }
+        curr_grp++;
+    }
+    g_strfreev(groups);
+    mc_config_save_file (tmp_cfg);
+    mc_config_deinit(tmp_cfg);
+
+}
+
 char *
 setup_init (void)
 {
@@ -515,7 +585,7 @@ load_setup (void)
 
     /* mc.lib is common for all users, but has priority lower than
        ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
-    global_profile_name = concat_dir_and_file (mc_home_alt, "mc.lib");
+    global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
 
     if (!exist_file(global_profile_name)) {
 	g_free (global_profile_name);
@@ -524,6 +594,10 @@ load_setup (void)
     panels_profile_name = concat_dir_and_file (home_dir, PANELS_PROFILE_NAME);
 
     mc_main_config = mc_config_init(profile);
+
+    if (!exist_file(panels_profile_name))
+        setup__move_panels_config_into_separate_file(profile);
+
     mc_panels_config = mc_config_init(panels_profile_name);
 
     /* Load integer boolean options */
