@@ -497,6 +497,10 @@ reverse_selection_cmd (void)
 static void
 select_unselect_cmd (const char *title, const char *history_name, gboolean do_select)
 {
+    /* dialog sizes */
+    const int DX = 50;
+    const int DY = 6;
+
     int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
     int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
 
@@ -504,8 +508,6 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     mc_search_t *search;
     int i;
 
-#define DX 50
-#define DY 6
     QuickWidget quick_widgets[] = {
 	{ quick_checkbox, DX/2 + 1, DX, DY - 3, DY, N_("&Case sensitive"), 0,      0, &case_sens,  NULL,     NULL },
 	{ quick_checkbox, 3,        DX, DY - 3, DY, N_("&Files only"),     0,      0, &files_only, NULL,     NULL },
@@ -516,8 +518,6 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     QuickDialog quick_dlg = {
 	DX, DY, -1, -1, title, "[Select/Uselect Files]", quick_widgets, 0
     };
-#undef DY
-#undef DX
 
     if (quick_dialog (&quick_dlg) == B_CANCEL)
 	return;
