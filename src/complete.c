@@ -110,14 +110,13 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 
         /* Save the version of the directory that the user typed. */
         users_dirname = dirname;
-        {
-	    /* FIXME: memleak ? */
-	    dirname = tilde_expand (dirname);
-	    canonicalize_pathname (dirname);
-	    /* Here we should do something with variable expansion
-	       and `command`.
-	       Maybe a dream - UNIMPLEMENTED yet. */
-        }
+	dirname = tilde_expand (dirname);
+	canonicalize_pathname (dirname);
+
+	/* Here we should do something with variable expansion
+	   and `command`.
+	   Maybe a dream - UNIMPLEMENTED yet. */
+
         directory = mc_opendir (dirname);
         filename_len = strlen (filename);
     }
@@ -125,11 +124,12 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
     /* Now that we have some state, we can read the directory. */
 
     while (directory && (entry = mc_readdir (directory))){
-        if (!str_is_valid_string (entry->d_name)) continue;
-        
+	if (!str_is_valid_string (entry->d_name))
+	    continue;
+
         /* Special case for no filename.
 	   All entries except "." and ".." match. */
-        if (!filename_len){
+	if (filename_len == 0) {
 	    if (!strcmp (entry->d_name, ".") || !strcmp (entry->d_name, ".."))
 	        continue;
 	} else {
@@ -142,18 +142,16 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 	}
 	isdir = 1; isexec = 0;
 	{
-	    char *tmp = g_malloc (3 + strlen (dirname) + NLENGTH (entry));
+	    char *tmp;
 	    struct stat tempstat;
-	    
-	    strcpy (tmp, dirname);
-	    strcat (tmp, PATH_SEP_STR);
-	    strcat (tmp, entry->d_name);
+	
+	    tmp = g_strconcat (dirname, PATH_SEP_STR, entry->d_name, (char *) NULL);
 	    canonicalize_pathname (tmp);
 	    /* Unix version */
 	    if (!mc_stat (tmp, &tempstat)){
 	    	uid_t my_uid = getuid ();
 	    	gid_t my_gid = getgid ();
-	    	
+	
 	        if (!S_ISDIR (tempstat.st_mode)){
 	            isdir = 0;
 	            if ((!my_uid && (tempstat.st_mode & 0111)) ||
@@ -168,7 +166,7 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 	        /* stat failed, strange. not a dir in any case */
 	        isdir = 0;
 	    }
-	   g_free (tmp);
+	    g_free (tmp);
 	}
 	if ((flags & INPUT_COMPLETE_COMMANDS)
 	    && (isexec || isdir))
@@ -178,7 +176,6 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 	    break;
 	if (flags & (INPUT_COMPLETE_FILENAMES))
 	    break;
-	continue;
     }
 
     if (!entry){
@@ -197,7 +194,7 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
         char *temp;
 
         if (users_dirname && (users_dirname[0] != '.' || users_dirname[1])){
-	    int dirlen = strlen (users_dirname);
+	    size_t dirlen = strlen (users_dirname);
 	    temp = g_malloc (3 + dirlen + NLENGTH (entry));
 	    strcpy (temp, users_dirname);
 	    /* We need a `/' at the end. */
@@ -230,36 +227,31 @@ static char *
 username_completion_function (char *text, int state, INPUT_COMPLETE_FLAGS flags)
 {
     static struct passwd *entry;
-    static int userlen;
+    static size_t userlen;
 
     (void) flags;
     SHOW_C_CTX("username_completion_function");
 
-    if (text[0] == '\\' && text[1] == '~') text++;
+    if (text[0] == '\\' && text[1] == '~')
+	text++;
     if (!state){ /* Initialization stuff */
         setpwent ();
         userlen = strlen (text + 1);
     }
     while ((entry = getpwent ()) != NULL){
         /* Null usernames should result in all users as possible completions. */
-        if (!userlen)
+        if (userlen == 0)
             break;
-        else if (text[1] == entry->pw_name[0] &&
-	         !strncmp (text + 1, entry->pw_name, userlen))
+        if (text[1] == entry->pw_name[0]
+	    && !strncmp (text + 1, entry->pw_name, userlen))
 	    break;
     }
 
-    if (!entry){
-        endpwent ();
-        return NULL;
-    } else {
-        char *temp = g_malloc (3 + strlen (entry->pw_name));
-        
-        *temp = '~';
-        strcpy (temp + 1, entry->pw_name);
-        strcat (temp, PATH_SEP_STR);
-        return temp;
-    }
+    if (entry)
+	return g_strconcat ("~", entry->pw_name, PATH_SEP_STR, (char *) NULL);
+
+    endpwent ();
+    return NULL;
 }
 
 /* Linux declares environ in <unistd.h>, so don't repeat it here. */
@@ -456,7 +448,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 {
     char *text;
     static const char *path_end;
-    static int isabsolute;
+    static gboolean isabsolute;
     static int phase;
     static int text_len;
     static const char *const *words;
@@ -487,7 +479,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
-	isabsolute = strchr (text, PATH_SEP) != 0;
+	isabsolute = strchr (text, PATH_SEP) != NULL;
 	if (!isabsolute) {
 	    words = bash_reserved;
 	    phase = 0;
@@ -503,16 +495,15 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
     }
 
     if (isabsolute) {
-	char *temp_p;
 	p = filename_completion_function (text, state, flags);
-	if (!p){
-	    g_free(text);
-	    return 0;
+
+	if (p) {
+	    char *temp_p = p;
+	    p = shell_escape (p);
+	    g_free (temp_p);
 	}
-	temp_p = p;
-	p = shell_escape(p);
-	g_free(temp_p);
-	g_free(text);
+
+	g_free (text);
 	return p;
     }
 
@@ -561,24 +552,17 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 	}
     }
 
-    if (!found) {
+    if (found == NULL) {
 	g_free (path);
 	path = NULL;
-	g_free(text);
-	return NULL;
+    } else if ((p = strrchr (found, PATH_SEP)) != NULL) {
+	char *tmp = found;
+	found = shell_escape (p + 1);
+	g_free (tmp);
     }
-    if ((p = strrchr (found, PATH_SEP)) != NULL) {
-	p++;
-	g_free(found);
-	found = p;
-	p = shell_escape(p);
-	g_free(found);
-	g_free(text);
-	return p;
-    }
+
     g_free(text);
     return found;
-
 }
 
 static int
