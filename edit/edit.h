@@ -327,6 +327,8 @@ extern int column_highlighting;
 extern int visible_tabs;
 extern int visible_tws;
 
+extern int simple_statusbar;
+
 /* File names */
 #define EDIT_DIR           ".mc" PATH_SEP_STR "cedit"
 #define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"

@@ -68,6 +68,8 @@
 #define FONT_PIX_PER_LINE 1
 #define FONT_MEAN_WIDTH 1
 
+/* Toggles statusbar draw style */
+int simple_statusbar = 0;
 
 static void status_string (WEdit * edit, char *s, int w)
 {
@@ -107,30 +109,52 @@ static void status_string (WEdit * edit, char *s, int w)
     }
 
     /* The field lengths just prevent the status line from shortening too much */
-    g_snprintf (s, w,
-		"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s  %s",
-		edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
-		edit->modified ? 'M' : '-',
-		edit->macro_i < 0 ? '-' : 'R',
-		edit->overwrite == 0 ? '-' : 'O',
-		edit->curs_col,
+    if (simple_statusbar)
+        g_snprintf (s, w,
+                        "[%c%c%c%c] %2ld %3ld/%3ld (%-4ld/%4ldb)= %s  cp:%s",
+                        edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
+                        edit->modified ? 'M' : '-',
+                        edit->macro_i < 0 ? '-' : 'R',
+                        edit->overwrite == 0 ? '-' : 'O',
+                        edit->curs_col,
 
-		edit->start_line + 1,
-		edit->curs_row,
-		edit->curs_line + 1,
-		edit->total_lines + 1,
+                        edit->curs_line + 1,
+                        edit->total_lines + 1,
 
-		edit->curs1,
-		edit->last_byte,
-		byte_str,
+                        edit->curs1,
+                        edit->last_byte,
+                        byte_str,
 
 #ifdef HAVE_CHARSET
-		get_codepage_id ( source_codepage )
+                        get_codepage_id ( source_codepage )
 #else
-		""
+                        ""
 #endif
-		);
+                    );
+    else
+        g_snprintf (s, w,
+                        "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s  %s",
+                        edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
+                        edit->modified ? 'M' : '-',
+                        edit->macro_i < 0 ? '-' : 'R',
+                        edit->overwrite == 0 ? '-' : 'O',
+                        edit->curs_col,
 
+                        edit->start_line + 1,
+                        edit->curs_row,
+                        edit->curs_line + 1,
+                        edit->total_lines + 1,
+
+                        edit->curs1,
+                        edit->last_byte,
+                        byte_str,
+
+#ifdef HAVE_CHARSET
+                        get_codepage_id ( source_codepage )
+#else
+                        ""
+#endif
+                    );
 }
 
 static inline void
