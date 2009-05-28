@@ -416,6 +416,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     FileProgressStatus return_status, temp_status;
     struct timeval tv_transfer_start;
     int dst_status = DEST_NONE;	/* 1 if the file is not fully copied */
+    int open_flags;
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -540,12 +541,19 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     utb.modtime = sb.st_mtime;
     file_size = sb.st_size;
 
-    /* Create the new regular file with small permissions initially,
-       do not create a security hole.  FIXME: You have security hole
-       here, btw. Imagine copying to /tmp and symlink attack :-( */
-
-    while ((dest_desc = mc_open (dst_path, O_WRONLY | (ctx->do_append ?
-    	    O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0) {
+    open_flags = O_WRONLY;
+    if (dst_exists != 0) {
+	if (ctx->do_append != 0)
+	    open_flags |= O_APPEND;
+	else
+	    open_flags |= O_CREAT | O_TRUNC;
+    } else {
+	open_flags |= O_CREAT | O_EXCL;
+    }
+    while ((dest_desc = mc_open (dst_path, open_flags, src_mode)) < 0) {
+	if (errno == EEXIST) {
+	    goto ret;
+	}
 	return_status = file_error (
 		_(" Cannot create target file \"%s\" \n %s "), dst_path);
 	if (return_status == FILE_RETRY)
@@ -1762,6 +1770,12 @@ panel_operate (void *source_panel, FileOperation operation,
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
+
+    /* Update panel contents to avoid actions on deleted files */
+    if (!panel->is_panelized) {
+	update_panels (UP_RELOAD, UP_KEEPSEL);
+	repaint_screen ();
+    }
 
     if (single_entry) {
 	if (force_single) {
