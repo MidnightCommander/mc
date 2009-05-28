@@ -89,6 +89,7 @@ static const char default_colors[] = {
 	"editbold=yellow,blue:"
 	"editmarked=black,cyan:"
 	"editwhitespace=brightblue,blue:"
+	"editlinestate=white,cyan:"
 	"errdhotnormal=yellow,red:"
 	"errdhotfocus=yellow,lightgray"
 };

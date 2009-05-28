@@ -277,14 +277,13 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
 
     if (option_line_state) {
         int i;
-        for (i = 0; i < LINE_STATE_WIDTH; i++) {
-            if ( status[i] == '\0' ) {
+        for (i = 0; i < LINE_STATE_WIDTH; i++)
+            if (status[i] == '\0') {
                 status[i] = ' ';
-            }
-        }
-        set_color (LINE_STATE_COLOR);
+
+        tty_setcolor (LINE_STATE_COLOR);
         edit_move (x1 + FONT_OFFSET_X - option_line_state_width, y + FONT_OFFSET_Y);
-        addstr (status);
+        tty_print_string (status);
     }
 
     edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
