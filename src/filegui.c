@@ -1,7 +1,7 @@
 /* File management GUI for the text mode edition
  *
  * Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
- * 2004, 2005, 2006, 2007 Free Software Foundation, Inc.
+ * 2004, 2005, 2006, 2007, 2009 Free Software Foundation, Inc.
  *  
  * Written by: 1994, 1995       Janne Kukonlehto
  *             1994, 1995       Fred Leeflang
@@ -9,6 +9,7 @@
  *             1995, 1996       Jakub Jelinek
  *	       1997             Norbert Warmuth
  *	       1998		Pavel Machek
+ *             2009             Slava Zanko
  *
  * The copy code was based in GNU's cp, and was written by:
  * Torbjorn Granlund, David MacKenzie, and Jim Meyering.
@@ -53,6 +54,22 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#if defined (__FreeBSD__)
+#      include <sys/param.h>
+#endif
+#if defined(__APPLE__) || defined (__FreeBSD__)
+#      include <sys/mount.h>
+#elif defined (__NetBSD__)
+#      include <sys/param.h>
+#else
+#      ifdef HAVE_VFS
+#           include <sys/vfs.h>
+#      else
+#           include <sys/statfs.h>
+#      endif
+#endif
+
 #include <unistd.h>
 
 #include "global.h"
@@ -73,6 +90,15 @@
 #include "../src/strescape.h"
 
 /* }}} */
+typedef enum {
+    MSDOS_SUPER_MAGIC     = 0x4d44,
+    NTFS_SB_MAGIC         = 0x5346544e,
+    NTFS_3G_MAGIC         = 0x65735546,
+    PROC_SUPER_MAGIC      = 0x9fa0,
+    SMB_SUPER_MAGIC       = 0x517B,
+    NCP_SUPER_MAGIC       = 0x564c,
+    USBDEVICE_SUPER_MAGIC = 0x9fa2
+} filegui_nonattrs_fs_t;
 
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
@@ -132,6 +158,29 @@ enum {
     REPLACE_SIZE,
     REPLACE_REGET
 };
+
+static int
+filegui__check_attrs_on_fs(const char *fs_path)
+{
+    struct statfs stfs;
+
+    if (statfs(fs_path, &stfs)!=0)
+        return 1;
+
+    switch ((filegui_nonattrs_fs_t) stfs.f_type)
+    {
+    case MSDOS_SUPER_MAGIC:
+    case NTFS_SB_MAGIC:
+    case NTFS_3G_MAGIC:
+    case PROC_SUPER_MAGIC:
+    case SMB_SUPER_MAGIC:
+    case NCP_SUPER_MAGIC:
+    case USBDEVICE_SUPER_MAGIC:
+        return 0;
+        break;
+    }
+    return 1;
+}
 
 static FileProgressStatus
 check_progress_buttons (FileOpContext *ctx)
@@ -872,6 +921,10 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     g_return_val_if_fail (ctx != NULL, NULL);
 
     fmd_init_i18n (FALSE);
+
+
+    /* unselect checkbox if target filesystem don't support attributes */
+    ctx->op_preserve = filegui__check_attrs_on_fs(def_text);
 
     /* Set up the result pointers */
 
