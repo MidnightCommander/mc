@@ -87,8 +87,10 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 
     SHOW_C_CTX("filename_completion_function");
 
-    if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
+    if (_text && (flags & INPUT_COMPLETE_SHELL_ESC))
         text = shell_unescape (_text);
+    else
+        text = g_strdup (_text);
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
