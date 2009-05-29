@@ -73,9 +73,8 @@ static const char * show_c_flags(INPUT_COMPLETE_FLAGS flags)
 #endif /* DO_CMPLETION_DEBUG */
 
 static char *
-filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS flags)
+filename_completion_function (const char * text, int state, INPUT_COMPLETE_FLAGS flags)
 {
-    char *text;
     static DIR *directory;
     static char *filename = NULL;
     static char *dirname = NULL;
@@ -87,10 +86,22 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 
     SHOW_C_CTX("filename_completion_function");
 
-    if (_text && (flags & INPUT_COMPLETE_SHELL_ESC))
-        text = shell_unescape (_text);
-    else
-        text = g_strdup (_text);
+    if (text && (flags & INPUT_COMPLETE_SHELL_ESC))
+    {
+        char * u_text;
+        char * result;
+        char * e_result;
+
+        u_text = shell_unescape (text);
+
+        result = filename_completion_function (u_text, state, flags & (~INPUT_COMPLETE_SHELL_ESC));
+        g_free (u_text);
+
+        e_result = shell_escape (result);
+        g_free (result);
+
+        return e_result;
+    }
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
@@ -212,13 +223,6 @@ filename_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS
 	if (isdir)
 	    strcat (temp, PATH_SEP_STR);
 
-	if (temp && (flags & INPUT_COMPLETE_SHELL_ESC))
-	{
-	    char *temp2 = temp;
-	    temp = shell_escape(temp);
-	    g_free(temp2);
-	}
-	g_free(text);
 	return temp;
     }
 }
