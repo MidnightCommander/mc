@@ -2234,7 +2234,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 
     c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
 /* return if not at end or in word */
-    if (isspace (c) || !(isalnum (c) || c == '_'))
+    if (isspace (c) || c == '_')
 	return 0;
 
 /* search start of word to be completed */
@@ -2246,7 +2246,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 	last = c;
 	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
 
-	if (!(isalnum (c) || c == '_')) {
+	if (isspace (c) || c == '_') {
 /* return if word starts with digit */
 	    if (isdigit (last))
 		return 0;
@@ -2259,16 +2259,6 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 /* success */
     return 1;
 }
-
-
-/* (re)set search parameters to the given values */
-static void edit_set_search_parameters (WEdit *edit, int replace_mode, int rb, int rc)
-{
-    edit->replace_mode = replace_mode;
-    edit->replace_backwards = rb;
-    edit->replace_case = rc;
-}
-
 
 #define MAX_WORD_COMPLETIONS 100	/* in listbox */
 
@@ -2300,8 +2290,12 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 
 	/* add matched completion if not yet added */
 	temp = g_string_new("");
-	for (i = 0; i < len; i++)
-	    g_string_append_c (temp, edit_get_byte(edit, start+i));
+	for (i = 0; i < len; i++){
+	    skip =  edit_get_byte(edit, start+i);
+	    if (isspace(skip))
+	        continue;
+	    g_string_append_c (temp, skip);
+	}
 
 	skip = 0;
 
@@ -2322,7 +2316,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
 	}
 
 	compl[*num].text = temp->str;
-	compl[*num].len = len;
+	compl[*num].len = temp->len;
 	(*num)++;
 	g_string_free(temp, FALSE);
 
@@ -2347,11 +2341,6 @@ edit_complete_word_cmd (WEdit *edit)
     char *match_expr;
     struct selection compl[MAX_WORD_COMPLETIONS];	/* completions */
 
-    /* don't want to disturb another search */
-    int old_replace_mode = edit->replace_mode;
-    int old_rb = edit->replace_backwards;
-    int old_rc = edit->replace_case;
-
     /* search start of word to be completed */
     if (!edit_find_word_start (edit, &word_start, &word_len))
 	return;
@@ -2360,10 +2349,8 @@ edit_complete_word_cmd (WEdit *edit)
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
 
-    match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
-    /* init search: backward, regexp, whole word, case sensitive */
-    edit_set_search_parameters (edit, 0, 1, 1);
-
+    match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
+mc_log("%s\n",match_expr);
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
@@ -2395,8 +2382,6 @@ edit_complete_word_cmd (WEdit *edit)
     for (i = 0; i < num_compl; i++)
 	g_free (compl[i].text);
 
-    /* restore search parameters */
-    edit_set_search_parameters (edit, old_replace_mode, old_rb, old_rc);
 }
 
 void
