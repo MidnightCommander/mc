@@ -895,7 +895,7 @@ do_search (struct Dlg_head *h)
 	    pos = (pos + 1) % 4;
 	    tty_setcolor (DLG_NORMALC (h));
 	    dlg_move (h, FIND2_Y - 7, FIND2_X - 4);
-	    addch (rotating_dash [pos]);
+	    tty_print_char (rotating_dash [pos]);
 	    tty_refresh ();
 	}
     } else

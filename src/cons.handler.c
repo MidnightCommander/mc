@@ -86,7 +86,7 @@ show_console_contents_linux (int starty, unsigned char begin_line,
 	if ((i % COLS) == 0)
 	    tty_gotoyx (starty + (i / COLS), 0);
 	read (pipefd2[0], &message, 1);
-	addch (message);
+	tty_print_char (message);
     }
 
     /* Read the value of the console_flag */
@@ -335,7 +335,7 @@ show_console_contents_freebsd (int starty, unsigned char begin_line,
 	tty_gotoyx (starty + line - begin_line, 0);
         for (col = 0; col < min (COLS, screen_info.mv_csz); col++) {
 	    c = screen_shot.buf[line * screen_info.mv_csz + col] & 0xFF;
-	    addch (c);
+	    tty_print_char (c);
 	}
     }
 }

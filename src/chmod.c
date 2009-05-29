@@ -117,7 +117,7 @@ static void chmod_toggle_select (Dlg_head *h, int Id)
     check_perm[Id].selected ^= 1;
 
     dlg_move (h, PY + PERMISSIONS - Id, PX + 1);
-    addch ((check_perm[Id].selected) ? '*' : ' ');
+    tty_print_char ((check_perm[Id].selected) ? '*' : ' ');
     dlg_move (h, PY + PERMISSIONS - Id, PX + 3);
 }
 

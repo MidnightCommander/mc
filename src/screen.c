@@ -160,7 +160,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
         } else
             tty_setcolor (color);
 
-	addch (dest[i]);
+	tty_print_char (dest[i]);
     }
 }
 
@@ -571,11 +571,8 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
 	}
     }
 
-    if (length < width){
-	int still = width - length;
-	while (still--)
-	    addch (' ');
-    }
+    if (length < width)
+	hline (' ', width - length);
 }
 
 static void
@@ -616,7 +613,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 
     if (!isstatus && panel->split){
 	if (second_column)
-	    addch (' ');
+	    tty_print_char (' ');
 	else {
 	    tty_setcolor (NORMAL_COLOR);
 	    tty_print_one_vline ();
@@ -796,8 +793,6 @@ show_free_space (WPanel *panel)
 static void
 show_dir (WPanel *panel)
 {
-    int len;
-
     set_colors (panel);
     draw_double_box (panel->widget.parent,
 		     panel->widget.y, panel->widget.x,
@@ -816,10 +811,10 @@ show_dir (WPanel *panel)
 
     widget_move (&panel->widget, 0, 3);
 
-    addch (' ');
-    len = min (max (panel->widget.cols - 9, 0), panel->widget.cols); 
-    tty_print_string (str_term_trim (strip_home_and_password (panel->cwd), len));
-    addch (' ');
+    tty_printf (" %s ",
+		str_term_trim (strip_home_and_password (panel->cwd),
+				min (max (panel->widget.cols - 9, 0),
+					panel->widget.cols)));
 
     widget_move (&panel->widget, 0, 1);
     tty_print_string ("<");

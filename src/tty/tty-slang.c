@@ -359,7 +359,7 @@ hline (int ch, int len)
 	SLsmg_draw_hline (len);
     else
 	while (len--)
-	    addch (ch);
+	    tty_print_char (ch);
 
     SLsmg_gotorc (last_y, last_x);
 }
@@ -379,7 +379,7 @@ vline (int character, int len)
 
 	while (len--) {
 	    SLsmg_gotorc (last_y + pos, last_x);
-	    addch (' ');
+	    tty_print_char (' ');
 	    pos++;
 	}
 
@@ -435,16 +435,7 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 void
 tty_print_char (int c)
 {
-    /* We cannot use SLsmg_write_char here because the Debian and Redhat
-     * people thought changing the API of an external project was fun,
-     * especially when it depends on the preprocessor symbol UTF8 being
-     * defined or not. Congratulations! At least, they left the API call
-     * for SLsmg_write_nchars as it has always been.
-     */
-    char ch;
-
-    ch = c;
-    SLsmg_write_nchars(&ch, 1);
+    SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));
 }
 
 void

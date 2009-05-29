@@ -301,7 +301,7 @@ layout_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	tty_setcolor (COLOR_HOT_NORMAL);
 	update_split ();
 	dlg_move (h, 6, 13);
-	addch ('=');
+	tty_print_char ('=');
 	if (console_flag){
 	    if (old_output_lines != _output_lines){
 		old_output_lines = _output_lines;
@@ -818,7 +818,7 @@ void rotate_dash (void)
 	pos = 0;
     tty_gotoyx (0, COLS - 1);
     tty_setcolor (NORMAL_COLOR);
-    addch (rotating_dash [pos]);
+    tty_print_char (rotating_dash [pos]);
     tty_refresh ();
     pos++;
 }

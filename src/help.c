@@ -428,10 +428,10 @@ static void help_show (Dlg_head *h, const char *paint_start)
 		dlg_move (h, line+2, col+2);
 		if (acs){
 		    if (c == ' ' || c == '.')
-			addch (c);
+			tty_print_char (c);
 		    else
 #ifndef HAVE_SLANG
-			addch (acs_map [c]);
+			tty_print_char (acs_map [c]);
 #else
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif

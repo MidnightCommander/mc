@@ -341,7 +341,7 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
             }
             tty_print_string ((char *) str);
         } else {
-            addch(textchar);
+            tty_print_char (textchar);
         }
 	p++;
     }

@@ -103,7 +103,7 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
         /* menu text */
         tty_setcolor (color);
         widget_move (&menubar->widget, y, x);
-        addch ((unsigned char) entry->first_letter);
+        tty_print_char ((unsigned char) entry->first_letter);
         hline (' ', menubar->max_entry_len + 1); /* clear line */
         tty_print_string (entry->text.start);
 

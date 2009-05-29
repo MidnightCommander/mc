@@ -2297,9 +2297,8 @@ view_display_hex (WView *view)
 	widget_move (view, top + row, left);
 	tty_setcolor (MARKED_COLOR);
 	for (i = 0; col < width && hex_buff[i] != '\0'; i++) {
-             addch (hex_buff[i]);
-/*		tty_print_char(hex_buff[i]);*/
-		col += 1;
+	    tty_print_char (hex_buff[i]);
+	    col++;
 	}
 	tty_setcolor (NORMAL_COLOR);
 
@@ -2451,16 +2450,13 @@ view_display_text (WView * view)
         
         view_read_continue (view, &info);
         if (view_read_test_nroff_back (view, &info)) {
-            int c;
-
             w = str_term_width1 (info.chi1);
-            col-= w;
+            col -= w;
             if (col >= view->dpy_text_column
-                 && col + w - view->dpy_text_column <= width) { 
-                
+                && col + w - view->dpy_text_column <= width) {
                 widget_move (view, top + row, left + (col - view->dpy_text_column));
-                for (c = 0; c < w; c++) addch (' ');
-		}
+                hline (' ', w);
+	    }
             if (cmp (info.chi1, "_") && (!cmp (info.cnxt, "_") || !cmp (info.chi2, "\b")))
 		    tty_setcolor (VIEW_UNDERLINED_COLOR);
 		else
@@ -2492,7 +2488,7 @@ view_display_text (WView * view)
                 if (str_isprint (info.cact)) {
                     tty_print_string (info.cact);
                 } else {
-                    addch ('.');
+                    tty_print_char ('.');
 	}
             } else {
                 GString *comb = g_string_new ("");

@@ -189,28 +189,28 @@ static void print_flags (void)
 
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY+1, 9+i);
-	addch (ch_flags [i]);
+	tty_print_char (ch_flags [i]);
     }
     
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY + 1, 17 + i);
-	addch (ch_flags [i+3]);
+	tty_print_char (ch_flags [i+3]);
     }
     
     for (i = 0; i < 3; i++){
 	dlg_move (ch_dlg, BY + 1, 25 + i);
-	addch (ch_flags [i+6]);
+	tty_print_char (ch_flags [i+6]);
     }
 
     update_permissions ();
 
     for (i = 0; i < 15; i++){
 	dlg_move (ch_dlg, BY+1, 35+i);
-	addch (ch_flags[9]);
+	tty_print_char (ch_flags[9]);
     }
     for (i = 0; i < 15; i++){
 	dlg_move (ch_dlg, BY + 1, 53 + i);
-	addch (ch_flags[10]);
+	tty_print_char (ch_flags[10]);
     }
 }
 

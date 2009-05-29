@@ -65,23 +65,6 @@ void slang_shutdown (void);
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows
 #define standend()	SLsmg_normal_video ()
-
-#ifdef UTF8
-/*
- * Patched S-Lang in Red Hat 8.0 expects wchar_t as the argument to addch()
- * Avoid conversion by using SLsmg_write_nchars(), which takes char*
- */
-#undef addch
-static inline void
-mc_addch (char c)
-{
-    SLsmg_write_nchars (&c, 1);
-}
-#define addch(c)	mc_addch (c)
-#else
-#define addch(c)	SLsmg_write_char (c)
-#endif
-
 #define endwin()	SLsmg_reset_smg ()
 
 #define SLsmg_draw_double_box(r, c, dr, dc)	SLsmg_draw_box ((r), (c), (dr), (dc))

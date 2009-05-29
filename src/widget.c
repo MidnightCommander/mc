@@ -719,7 +719,7 @@ gauge_callback (Widget *w, widget_msg_t msg, int parm)
 	    }
 	    percentage = (200 * done / total + 1) / 2;
 	    columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
-	    addch ('[');
+	    tty_print_char ('[');
 	    tty_setcolor (GAUGE_COLOR);
 	    tty_printf ("%*s", (int) columns, "");
 	    tty_setcolor (DLG_NORMALC (h));
@@ -797,11 +797,11 @@ static void draw_history_button (WInput * in)
 	tty_print_string ("[ ]");
 	/* Too distracting: tty_setcolor (MARKED_COLOR); */
         widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
-	addch (c);
+	tty_print_char (c);
     }
 #else
     tty_setcolor (MARKED_COLOR);
-    addch (c);
+    tty_print_char (c);
 #endif
 }
 
@@ -856,7 +856,7 @@ update_input (WInput *in, int clear_first)
         cp = in->buffer;
         for (i = -in->term_first_shown; i < in->field_width - has_history; i++){
             if (i >= 0) {
-                addch ((cp[0] != '\0') ? '*' : ' ');
+                tty_print_char ((cp[0] != '\0') ? '*' : ' ');
             }
             if (cp[0] != '\0') str_cnext_char (&cp);
         }
@@ -1849,7 +1849,7 @@ listbox_drawscroll (WListbox *l)
     if (l->list == l->top)
 	tty_print_one_vline ();
     else
-	addch ('^');
+	tty_print_char ('^');
 
     /* Are we at the bottom? */
     widget_move (&l->widget, max_line, l->width);
@@ -1857,7 +1857,7 @@ listbox_drawscroll (WListbox *l)
     if ((top + l->height == l->count) || l->height >= l->count)
 	tty_print_one_vline ();
     else
-	addch ('v');
+	tty_print_char ('v');
 
     /* Now draw the nice relative pointer */
     if (l->count)
@@ -1870,7 +1870,7 @@ listbox_drawscroll (WListbox *l)
 	if (i != line)
 	    tty_print_one_vline ();
 	else
-	    addch ('*');
+	    tty_print_char ('*');
     }
 }
     

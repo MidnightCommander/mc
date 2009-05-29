@@ -183,11 +183,11 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 	/* Show search string */
 	tty_setcolor (TREE_NORMALC (h));
 	tty_setcolor (DLG_FOCUSC (h));
-	addch (PATH_SEP);
+	tty_print_char (PATH_SEP);
 
 	tty_print_string (str_fit_to_term (tree->search_buffer, 
 		tree_cols - 2, J_LEFT_FIT));
-	addch (' ');
+	tty_print_char (' ');
 	tty_setcolor (DLG_FOCUSC (h));
     } else {
 	/* Show full name of selected directory */
@@ -287,19 +287,19 @@ static void show_tree (WTree *tree)
 	    for (j = 0; j < current->sublevel - topsublevel - 1; j++){
 		if (tree_cols - 8 - 3 * j < 9)
 		    break;
-		addch (' ');
+		tty_print_char (' ');
 		if (current->submask & (1 << (j + topsublevel + 1)))
-		    addch (ACS_VLINE);
+		    tty_print_char (ACS_VLINE);
 		else
-		    addch (' ');
-		addch (' ');
+		    tty_print_char (' ');
+		tty_print_char (' ');
 	    }
-	    addch (' '); j++;
+	    tty_print_char (' '); j++;
 	    if (!current->next || !(current->next->submask & (1 << current->sublevel)))
-		addch (ACS_LLCORNER);
+		tty_print_char (ACS_LLCORNER);
 	    else
-		addch (ACS_LTEE);
-	    addch (ACS_HLINE);
+		tty_print_char (ACS_LTEE);
+	    tty_print_char (ACS_HLINE);
 	    noacs ();
 
 	    if (tree->active && current == tree->selected_ptr) {
@@ -311,11 +311,11 @@ static void show_tree (WTree *tree)
 	    }
 
 	    /* Show sub-name */
-	    addch (' ');
+	    tty_print_char (' ');
 	    tty_print_string (str_fit_to_term (current->subname, 
 		    tree_cols - 2 - 4 - 3 * j, J_LEFT_FIT));
 	}
-	addch (' ');
+	tty_print_char (' ');
 
 	/* Return to normal color */
 	tty_setcolor (TREE_NORMALC (h));
