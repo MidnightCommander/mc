@@ -1469,6 +1469,7 @@ Q_ (const char *s)
 
  \returns
  return escaped string (which needs to be freed later)
+        or NULL when NULL string is passed.
  */
 char*
 shell_escape(const char* src)
@@ -1476,7 +1477,11 @@ shell_escape(const char* src)
 	GString *str;
 	char *result = NULL;
 
-	if ((src==NULL)||(!(*src)))
+	/* do NOT break allocation semantics */
+	if (!src)
+		return NULL;
+
+	if (*src == '\0')
 		return strdup("");
 
 	str = g_string_new("");
