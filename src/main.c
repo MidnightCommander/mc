@@ -2318,6 +2318,8 @@ main (int argc, char *argv[])
 
     init_curses ();
 
+    dlg_set_default_colors ();
+
     /* create home directory */
     /* do it after the screen library initialization to show the error message */
     mc_dir = concat_dir_and_file (home_dir, MC_BASE);

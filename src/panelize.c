@@ -35,7 +35,6 @@
 
 #include "global.h"
 
-#include "../src/tty/tty.h"		/* tty_setcolor() */
 #include "../src/tty/color.h"
 
 #include "dialog.h"

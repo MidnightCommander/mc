@@ -38,11 +38,15 @@
 
 #include "help.h"	/* interactive_display() */
 #include "dialog.h"
-#include "layout.h"	/* winch_flag */
+#include "layout.h"	/* winch_flag, change_screen_size() */
 #include "execute.h"	/* suspend_cmd() */
 #include "main.h"	/* slow_terminal */
 #include "strutil.h"
 #include "setup.h"	/* mouse_close_dialog */
+
+/* Color styles for normal and error dialogs */
+int dialog_colors [4];
+int alarm_colors [4];
 
 /* Primitive way to check if the the current dialog is our dialog */
 /* This is needed by async routines like load_prompt */
@@ -209,6 +213,20 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     }
 
     return (new_d);
+}
+
+void
+dlg_set_default_colors (void)
+{
+    dialog_colors [0] = COLOR_NORMAL;
+    dialog_colors [1] = COLOR_FOCUS;
+    dialog_colors [2] = COLOR_HOT_NORMAL;
+    dialog_colors [3] = COLOR_HOT_FOCUS;
+
+    alarm_colors [0] = ERROR_COLOR;
+    alarm_colors [1] = REVERSE_COLOR;
+    alarm_colors [2] = ERROR_HOT_NORMAL;
+    alarm_colors [3] = ERROR_HOT_FOCUS;
 }
 
 void

@@ -24,9 +24,6 @@
 #define MENU_ENTRY_COLOR      IF_COLOR (6, A_REVERSE)
 #define REVERSE_COLOR         IF_COLOR (7, A_REVERSE)
 
-extern int dialog_colors[4];
-extern int alarm_colors[4];
-
 /* Dialog colors */
 #define COLOR_NORMAL       IF_COLOR (8, A_REVERSE)
 #define COLOR_FOCUS        IF_COLOR (9, A_BOLD)

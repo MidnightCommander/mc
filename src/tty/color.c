@@ -38,10 +38,6 @@
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
 
-/* Color styles for normal and error dialogs */
-int dialog_colors [4];
-int alarm_colors [4];
-
 void
 get_color (const char *cpp, CTYPE *colp)
 {
@@ -134,20 +130,6 @@ configure_colors (void)
     configure_colors_string (term_color_string);
     configure_colors_string (getenv ("MC_COLOR_TABLE"));
     configure_colors_string (command_line_colors);
-}
-
-void
-load_dialog_colors (void)
-{
-    dialog_colors [0] = COLOR_NORMAL;
-    dialog_colors [1] = COLOR_FOCUS;
-    dialog_colors [2] = COLOR_HOT_NORMAL;
-    dialog_colors [3] = COLOR_HOT_FOCUS;
-
-    alarm_colors [0] = ERROR_COLOR;
-    alarm_colors [1] = REVERSE_COLOR;
-    alarm_colors [2] = ERROR_HOT_NORMAL;
-    alarm_colors [3] = ERROR_HOT_FOCUS;
 }
 
 /* Functions necessary to implement syntax highlighting  */

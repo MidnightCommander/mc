@@ -90,7 +90,6 @@ struct Dlg_head;
 typedef cb_ret_t (*dlg_cb_fn)(struct Dlg_head *h, dlg_msg_t msg, int parm);
 
 typedef struct Dlg_head {
-
     /* Set by the user */
     int flags;			/* User flags */
     const char *help_ctx;	/* Name of the help entry */
@@ -114,9 +113,11 @@ typedef struct Dlg_head {
     struct Widget *current;	/* Curently active widget */
     dlg_cb_fn callback;
     struct Dlg_head *parent;	/* Parent dialog */
-
 } Dlg_head;
 
+/* Color styles for normal and error dialogs */
+extern int dialog_colors[4];
+extern int alarm_colors[4];
 
 typedef struct Widget Widget;
 
@@ -160,6 +161,9 @@ void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set, dlg_cb_fn callback,
 		      const char *help_ctx, const char *title, int flags);
+
+void dlg_set_default_colors (void);
+
 int  add_widget           (Dlg_head *dest, void *Widget);
 
 /* Runs dialog d */

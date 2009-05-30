@@ -116,8 +116,6 @@ tty_init_colors (void)
 	    if (color_map [i].name != NULL)
 		mc_init_pair (i + 1, color_map_fg(i), color_map_bg(i));
     }
-
-    load_dialog_colors ();
 }
 
 void

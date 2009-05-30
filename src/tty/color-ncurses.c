@@ -70,8 +70,6 @@ tty_init_colors (void)
 		attr_pairs [i + 1] = color_map [i].fg & A_BOLD;
 	    }
     }
-
-    load_dialog_colors ();
 }
 
 void

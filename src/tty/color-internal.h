@@ -108,7 +108,6 @@ size_t color_map_len (void);
 
 void tty_init_colors (void);
 void configure_colors (void);
-void load_dialog_colors (void);
 void get_color (const char *cpp, CTYPE *colp);
 int alloc_color_pair (CTYPE foreground, CTYPE background);
 

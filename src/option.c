@@ -33,7 +33,6 @@
 #include "global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
 
 #include "dialog.h"
 #include "widget.h"

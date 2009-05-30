@@ -29,7 +29,7 @@
 #include "../src/global.h"
 
 #include "../src/tty/tty.h"
-#include "../src/tty/color.h"
+#include "../src/tty/color.h"		/* INPUT_COLOR */
 #include "../src/tty/key.h"
 
 #include "../src/search/search.h"

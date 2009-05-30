@@ -32,8 +32,10 @@
 #include <unistd.h>
 
 #include "global.h"
-#include "../src/tty/tty.h"	/* A_REVERSE */
-#include "../src/tty/color.h"	/* dialog_colors */
+
+#include "../src/tty/tty.h"
+#include "../src/tty/color.h"
+
 #include "dialog.h"	/* add_widget() */
 #include "widget.h"	/* NORMAL_BUTTON */
 #include "wtools.h"	/* message() */
