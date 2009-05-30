@@ -47,6 +47,7 @@ tty_init_colors (void)
 
 	start_color ();
 	use_default_colors ();
+
 	configure_colors ();
 
 	if (map_len > MAX_PAIRS) {
@@ -56,10 +57,8 @@ tty_init_colors (void)
 	    exit (1);
 	}
 
-	if (use_colors) {
-	    /* Use default terminal colors */
-	    mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
-	}
+	/* Use default terminal colors */
+	mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
 
 	for (i = 0; i < map_len; i++)
 	    if (color_map [i].name != NULL) {

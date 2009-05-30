@@ -101,19 +101,16 @@ tty_init_colors (void)
 	const size_t map_len = color_map_len ();
 	size_t i;
 
-	start_color ();
 	configure_colors ();
 
-	if (use_colors) {
-	    /*
-	     * We are relying on undocumented feature of
-	     * S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
-	     * the default fg/bg of the terminal.
-	     * Hopefully, future versions of S-Lang will
-	     * document this feature.
-	     */
-	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, (char *) "default", (char *) "default");
-	}
+	/*
+	 * We are relying on undocumented feature of
+	 * S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
+	 * the default fg/bg of the terminal.
+	 * Hopefully, future versions of S-Lang will
+	 * document this feature.
+	 */
+	SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, (char *) "default", (char *) "default");
 
 	for (i = 0; i < map_len; i++)
 	    if (color_map [i].name != NULL)

@@ -44,7 +44,6 @@ enum {
 #define keypad(scr, value)	slang_keypad (value)
 
 #define ungetch(x)		SLang_ungetkey (x)
-#define start_color()
 #define touchwin(x)		SLsmg_touch_lines (0, LINES)
 #define reset_shell_mode()	slang_shell_mode ()
 #define reset_prog_mode()	slang_prog_mode ()
