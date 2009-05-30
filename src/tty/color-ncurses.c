@@ -46,6 +46,7 @@ tty_init_colors (void)
         size_t i;
 
 	start_color ();
+	use_default_colors ();
 	configure_colors ();
 
 	if (map_len > MAX_PAIRS) {
@@ -56,8 +57,8 @@ tty_init_colors (void)
 	}
 
 	if (use_colors) {
-	    /* Always white on black */
-	    mc_init_pair (DEFAULT_COLOR_INDEX, COLOR_WHITE, COLOR_BLACK);
+	    /* Use default terminal colors */
+	    mc_init_pair (DEFAULT_COLOR_INDEX, -1, -1);
 	}
 
 	for (i = 0; i < map_len; i++)
@@ -85,7 +86,7 @@ tty_disable_colors (gboolean disable, gboolean force)
 void
 mc_init_pair (int index, CTYPE foreground, CTYPE background)
 {
-    init_pair (index, foreground, background);
+    init_pair (index, foreground, background == 0 ? -1 : background);
     if (index > max_index)
 	max_index = index;
 }
