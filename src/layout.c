@@ -580,9 +580,9 @@ done_screen ()
 {
     if (!(quit & SUBSHELL_EXIT))
 	clr_scr ();
-    reset_shell_mode ();
+    tty_reset_shell_mode ();
     tty_noraw_mode ();
-    keypad (stdscr, FALSE);
+    tty_keypad (FALSE);
     tty_colors_done ();
 }
 

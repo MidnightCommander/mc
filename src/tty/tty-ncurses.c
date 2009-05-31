@@ -93,6 +93,18 @@ init_curses (void)
 }
 
 void
+tty_reset_prog_mode (void)
+{
+    reset_prog_mode ();
+}
+
+void
+tty_reset_shell_mode (void)
+{
+    reset_shell_mode ();
+}
+
+void
 tty_raw_mode (void)
 {
     raw ();
@@ -102,6 +114,18 @@ void
 tty_noraw_mode (void)
 {
     noraw ();
+}
+
+void
+tty_keypad (gboolean set)
+{
+    keypad (stdscr, (bool) set);
+}
+
+void
+tty_nodelay (gboolean set)
+{
+    nodelay (stdscr, (bool) set);
 }
 
 void
@@ -191,4 +215,10 @@ tty_refresh (void)
     if (!we_are_background)
 #endif				/* WITH_BACKGROUND */
 	refresh ();
+}
+
+void
+tty_beep (void)
+{
+    beep ();
 }

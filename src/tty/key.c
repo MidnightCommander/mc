@@ -1091,7 +1091,7 @@ int get_key_code (int no_delay)
 
  nodelay_try_again:
     if (no_delay) {
-	nodelay (stdscr, TRUE);
+	tty_nodelay (TRUE);
     }
     c = getch ();
 #if (defined(USE_NCURSES) || defined(USE_NCURSESW)) && defined(KEY_RESIZE)
@@ -1099,7 +1099,7 @@ int get_key_code (int no_delay)
 	goto nodelay_try_again;
 #endif
     if (no_delay) {
-	nodelay (stdscr, FALSE);
+	tty_nodelay (FALSE);
 	if (c == -1) {
 	    if (this != NULL && parent != NULL &&
 		parent->action == MCKEY_ESCAPE && old_esc_mode) {
@@ -1450,12 +1450,12 @@ static int xgetch_second (void)
 
     timeout.tv_sec = keyboard_key_timeout / 1000000;
     timeout.tv_usec = keyboard_key_timeout % 1000000;
-    nodelay (stdscr, TRUE);
+    tty_nodelay (TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
     select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
     c = getch ();
-    nodelay (stdscr, FALSE);
+    tty_nodelay (FALSE);
     return c;
 }
 
@@ -1489,7 +1489,7 @@ char *learn_key (void)
     char buffer [256];
     char *p = buffer;
 
-    keypad(stdscr, FALSE); /* disable intepreting keys by ncurses */
+    tty_keypad (FALSE); /* disable intepreting keys by ncurses */
     c = getch ();
     while (c == -1)
 	c = getch (); /* Sanity check, should be unnecessary */
@@ -1500,7 +1500,7 @@ char *learn_key (void)
 	endtime.tv_usec -= 1000000;
 	endtime.tv_sec++;
     }
-    nodelay (stdscr, TRUE);
+    tty_nodelay (TRUE);
     for (;;) {
 	while ((c = getch ()) == -1) {
 	    GET_TIME (timeout);
@@ -1519,8 +1519,8 @@ char *learn_key (void)
 	    break;
 	learn_store_key (buffer, &p, c);
     }
-    keypad(stdscr, TRUE);
-    nodelay (stdscr, FALSE);
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
     *p = 0;
     return g_strdup (buffer);
 }

@@ -8,8 +8,6 @@
 #    include <slang.h>
 #endif		/* HAVE_SLANG_SLANG_H */
 
-#include "../../src/util.h"		/* str_unconst*/
-
 enum {
     KEY_BACKSPACE = 400,
     KEY_END, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT,
@@ -38,26 +36,17 @@ enum {
 #endif
 
 #define doupdate()
-#define nodelay(x, val)		set_slang_delay (val)
 #define noecho()
-#define beep()			SLtt_beep ()
-#define keypad(scr, value)	slang_keypad (value)
 
 #define ungetch(x)		SLang_ungetkey (x)
 #define touchwin(x)		SLsmg_touch_lines (0, LINES)
-#define reset_shell_mode()	slang_shell_mode ()
-#define reset_prog_mode()	slang_prog_mode ()
 #define flushinp()
 
-void set_slang_delay (int);
 void init_slang (void);
 void init_curses (void);
-void slang_prog_mode (void);
 void hline (int ch, int len);
 void vline (int ch, int len);
 int getch (void);
-void slang_keypad (int set);
-void slang_shell_mode (void);
 void slang_shutdown (void);
 
 #define printw		SLsmg_printf

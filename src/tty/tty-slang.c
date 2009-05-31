@@ -29,6 +29,7 @@
 #include "../../src/strutil.h"		/* str_term_form */
 
 /*** global variables **************************************************/
+extern int reset_hp_softkeys;
 
 /*** file scope macro definitions **************************************/
 
@@ -56,7 +57,7 @@ static struct termios boot_mode;
 static struct termios new_mode;
 
 /* Controls whether we should wait for input in getch */
-static int no_slang_delay;
+static gboolean no_slang_delay;
 
 /* This table describes which capabilities we want and which values we
  * assign to them.
@@ -263,9 +264,25 @@ init_slang (void)
 	tcsetattr (SLang_TT_Read_FD, TCSADRAIN, &new_mode);
     }
 
-    slang_prog_mode ();
+    tty_reset_prog_mode ();
     load_terminfo_keys ();
     SLtt_Blink_Mode = 0;
+}
+
+/* Done each time we come back from done mode */
+void
+tty_reset_prog_mode (void)
+{
+    tcsetattr (SLang_TT_Read_FD, TCSANOW, &new_mode);
+    SLsmg_init_smg ();
+    SLsmg_touch_lines (0, LINES);
+}
+
+/* Called each time we want to shutdown slang screen manager */
+void
+tty_reset_shell_mode (void)
+{
+    tcsetattr (SLang_TT_Read_FD, TCSANOW, &boot_mode);
 }
 
 void
@@ -279,20 +296,22 @@ tty_noraw_mode (void)
 {
 }
 
-/* Done each time we come back from done mode */
 void
-slang_prog_mode (void)
+tty_keypad (gboolean set)
 {
-    tcsetattr (SLang_TT_Read_FD, TCSANOW, &new_mode);
-    SLsmg_init_smg ();
-    SLsmg_touch_lines (0, LINES);
+    char *keypad_string;
+
+    keypad_string = (char *) SLtt_tgetstr ((char *) (set ? "ks" : "ke"));
+    if (keypad_string != NULL)
+	SLtt_write_string (keypad_string);
+    if (set && reset_hp_softkeys)
+	slang_reset_softkeys ();
 }
 
-/* Called each time we want to shutdown slang screen manager */
 void
-slang_shell_mode (void)
+tty_nodelay (gboolean set)
 {
-    tcsetattr (SLang_TT_Read_FD, TCSANOW, &boot_mode);
+    no_slang_delay = set;
 }
 
 void
@@ -300,38 +319,18 @@ slang_shutdown (void)
 {
     char *op_cap;
 
-    slang_shell_mode ();
+    tty_reset_shell_mode ();
     do_exit_ca_mode ();
     SLang_reset_tty ();
 
     /* Load the op capability to reset the colors to those that were 
      * active when the program was started up 
      */
-    op_cap = SLtt_tgetstr ((cagr *) "op");
+    op_cap = SLtt_tgetstr ((char *) "op");
     if (op_cap != NULL) {
 	fputs (op_cap, stdout);
 	fflush (stdout);
     }
-}
-
-/* keypad routines */
-void
-slang_keypad (int set)
-{
-    const char *keypad_string;
-    extern int reset_hp_softkeys;
-
-    keypad_string = SLtt_tgetstr ((char *) (set ? "ks" : "ke"));
-    if (keypad_string != NULL)
-	SLtt_write_string ((char *) keypad_string);
-    if (set && reset_hp_softkeys)
-	slang_reset_softkeys ();
-}
-
-void
-set_slang_delay (int v)
-{
-    no_slang_delay = v;
 }
 
 void
@@ -340,8 +339,8 @@ init_curses (void)
     SLsmg_init_smg ();
     do_enter_ca_mode ();
     tty_init_colors ();
-    keypad (stdscr, TRUE);
-    nodelay (stdscr, FALSE);
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 }
 
 void
@@ -473,4 +472,10 @@ tty_refresh (void)
     if (!we_are_background)
 #endif				/* WITH_BACKGROUND */
 	SLsmg_refresh ();
+}
+
+void
+tty_beep (void)
+{
+    SLtt_beep ();
 }

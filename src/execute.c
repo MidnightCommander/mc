@@ -47,10 +47,10 @@ edition_post_exec (void)
     do_enter_ca_mode ();
 
     /* FIXME: Missing on slang endwin? */
-    reset_prog_mode ();
+    tty_reset_prog_mode ();
     flushinp ();
 
-    keypad (stdscr, TRUE);
+    tty_keypad (TRUE);
     tty_raw_mode ();
     channels_up ();
     enable_mouse ();
@@ -72,8 +72,8 @@ edition_pre_exec (void)
     channels_down ();
     disable_mouse ();
 
-    reset_shell_mode ();
-    keypad (stdscr, FALSE);
+    tty_reset_shell_mode ();
+    tty_keypad (FALSE);
     endwin ();
 
     numeric_keypad_mode ();
@@ -233,10 +233,10 @@ toggle_panels (void)
     /* With slang we don't want any of this, since there
      * is no tty_raw_mode supported
      */
-    reset_shell_mode ();
+    tty_reset_shell_mode ();
     noecho ();
 #endif				/* !HAVE_SLANG */
-    keypad (stdscr, FALSE);
+    tty_keypad (FALSE);
     endwin ();
     do_exit_ca_mode ();
     tty_raw_mode ();
@@ -265,8 +265,8 @@ toggle_panels (void)
 
     do_enter_ca_mode ();
 
-    reset_prog_mode ();
-    keypad (stdscr, TRUE);
+    tty_reset_prog_mode ();
+    tty_keypad (TRUE);
 
     /* Prevent screen flash when user did 'exit' or 'logout' within
        subshell */

@@ -2373,7 +2373,7 @@ edit_complete_word_cmd (WEdit *edit)
 	    /* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
 	    /* !!! pressed again the selection dialog pops up, but that  !!! */
 	    /* !!! seems to require a further internal state             !!! */
-	    /*beep (); */
+	    /*tty_beep (); */
 
 	    /* let the user select the preferred completion */
 	    editcmd_dialog_completion_show (edit, max_len, word_len,

@@ -532,11 +532,11 @@ static void init_raw_mode ()
 {
     static int initialized = 0;
 
-    /* MC calls reset_shell_mode() in pre_exec() to set the real tty to its */
-    /* original settings.  However, here we need to make this tty very raw, */
-    /* so that all keyboard signals, XON/XOFF, etc. will get through to the */
-    /* pty.  So, instead of changing the code for execute(), pre_exec(),    */
-    /* etc, we just set up the modes we need here, before each command.     */
+    /* MC calls tty_reset_shell_mode() in pre_exec() to set the real tty to its */
+    /* original settings.  However, here we need to make this tty very raw,     */
+    /* so that all keyboard signals, XON/XOFF, etc. will get through to the     */
+    /* pty.  So, instead of changing the code for execute(), pre_exec(),        */
+    /* etc, we just set up the modes we need here, before each command.         */
 
     if (initialized == 0)  /* First time: initialise `raw_mode' */
     {
