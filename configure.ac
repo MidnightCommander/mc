@@ -37,7 +37,7 @@ DX_INIT_DOXYGEN(mc,doxygen.cfg,devel)
 dnl PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
 
 dnl
-dnl First try glib 2.x.  If it's not found, use glib 1.2.x.
+dnl First try glib 2.x.
 dnl Keep this check close to the beginning, so that the users
 dnl without any glib won't have their time wasted by other checks.
 dnl
@@ -47,9 +47,7 @@ AC_ARG_WITH([glib_static],
 
 glib_found=no
 
-if test "x$with_glib12" != "xyes"; then
-	PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.6], [glib_found=yes], [:])
-fi
+PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.6], [glib_found=yes], [:])
 
 PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
 GLIB_LIBDIR="`$PKG_CONFIG --variable=libdir glib-2.0`"
