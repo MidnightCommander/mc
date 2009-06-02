@@ -238,7 +238,7 @@ do_transform_source (FileOpContext *ctx, const char *source)
 	    }
 
 	case '*':
-	    if (next_reg < 0 || next_reg >= MC_SEARCH__NUM_REPL_ARGS
+	    if (next_reg < 0 || next_reg >= MC_SEARCH__NUM_REPLACE_ARGS 
 		|| mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg) < 0) {
 		message (D_ERROR, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
