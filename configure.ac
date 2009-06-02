@@ -7,7 +7,8 @@ AC_PREREQ(2.60)
 m4_pattern_forbid(MC_)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_AUX_DIR(config)
-AM_INIT_AUTOMAKE(mc, 4.6.2)
+MC_VERSION
+AM_INIT_AUTOMAKE(mc, ${VERSION} )
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
@@ -531,7 +532,7 @@ dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
 dnl Version for the RedHat package, without dashes
-RPM_VERSION=`echo $VERSION | sed 's/-//g'`
+RPM_VERSION=`echo $VERSION | sed 's/-/./g'`
 AC_SUBST(RPM_VERSION)
 
 if test -n "$use_smbfs"; then
