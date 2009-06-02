@@ -314,6 +314,12 @@ tty_nodelay (gboolean set)
     no_slang_delay = set;
 }
 
+int
+tty_baudrate (void)
+{
+    return SLang_TT_Baud_Rate;
+}
+
 void
 slang_shutdown (void)
 {
@@ -407,6 +413,12 @@ getch (void)
 }
 
 void
+tty_touch_screen (void)
+{
+    SLsmg_touch_lines (0, LINES);
+}
+
+void
 tty_gotoyx (int y, int x)
 {
     SLsmg_gotorc (y, x);
@@ -429,6 +441,12 @@ void
 tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
 {
     SLsmg_fill_region (y, x, rows, cols, ch);
+}
+
+void
+tty_set_alt_charset (gboolean alt_charset)
+{
+    SLsmg_set_char_set ((int) alt_charset);
 }
 
 void

@@ -1411,7 +1411,7 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 
 #ifndef HAVE_SLANG
     if (flag)
-	touchwin (stdscr);
+	tty_touch_screen ();
 #endif				/* !HAVE_SLANG */
 
     if (c == MCKEY_MOUSE

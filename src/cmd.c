@@ -846,7 +846,7 @@ history_cmd (void)
 void swap_cmd (void)
 {
     swap_panels ();
-    touchwin (stdscr);
+    tty_touch_screen ();
     repaint_screen ();
 }
 

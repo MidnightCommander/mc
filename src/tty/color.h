@@ -86,5 +86,6 @@ void tty_disable_colors (gboolean disable, gboolean force);
 int tty_try_alloc_color_pair (const char *fg, const char *bg);
 void tty_setcolor (int color);
 void tty_lowlevel_setcolor (int color);
+void tty_set_normal_attrs (void);
 
 #endif				/* MC_COLOR_H */

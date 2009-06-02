@@ -55,7 +55,7 @@ static struct my_statfs myfs_stats;
 
 static void info_box (Dlg_head *h, struct WInfo *info)
 {
-    standend ();
+    tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
     widget_erase (&info->widget);
     draw_double_box (h, info->widget.y,  info->widget.x,

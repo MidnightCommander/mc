@@ -571,7 +571,7 @@ dialog_handle_key (Dlg_head *h, int d_key)
 	clr_scr ();
 	do_refresh ();
 #else
-	touchwin (stdscr);
+	tty_touch_screen ();
 #endif /* HAVE_SLANG */
 	tty_refresh ();
 	doupdate ();

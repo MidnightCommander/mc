@@ -116,7 +116,7 @@ static void
 set_colors (WPanel *panel)
 {
     (void) panel;
-    standend ();
+    tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
 }
 
@@ -682,7 +682,7 @@ paint_dir (WPanel *panel)
 	}
 	repaint_file (panel, i+panel->top_file, 1, color, 0);
     }
-    standend ();
+    tty_set_normal_attrs ();
 }
 
 static void
@@ -736,7 +736,7 @@ mini_info_separator (WPanel *panel)
 {
     const int y = llines (panel) + 2;
 
-    standend ();
+    tty_set_normal_attrs (); /* FIXME: unneeded? */
     widget_move (&panel->widget, y, 1);
     tty_setcolor (NORMAL_COLOR);
 #ifdef HAVE_SLANG
@@ -845,7 +845,7 @@ show_dir (WPanel *panel)
     show_free_space (panel);
 
     if (panel->active)
-	standend ();
+	tty_set_normal_attrs ();
 }
 
 /* To be used only by long_frame and full_frame to adjust top_file */

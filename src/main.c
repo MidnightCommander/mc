@@ -1438,9 +1438,8 @@ setup_mc (void)
 
     setup_sigwinch ();
 
-    if (baudrate () < 9600 || slow_terminal) {
-	verbose = 0;
-    }
+    verbose = !((tty_baudrate () < 9600) || slow_terminal);
+
     init_mouse ();
 }
 

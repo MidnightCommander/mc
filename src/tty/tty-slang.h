@@ -26,20 +26,10 @@ enum {
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
 
-#define acs()		SLsmg_set_char_set (1)
-#define noacs()		SLsmg_set_char_set (0)
-#define baudrate()	SLang_TT_Baud_Rate
-
-#ifndef TRUE
-#    define TRUE 1
-#    define FALSE 0
-#endif
-
 #define doupdate()
 #define noecho()
 
 #define ungetch(x)		SLang_ungetkey (x)
-#define touchwin(x)		SLsmg_touch_lines (0, LINES)
 #define flushinp()
 
 void init_slang (void);
@@ -52,7 +42,6 @@ void slang_shutdown (void);
 #define printw		SLsmg_printf
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows
-#define standend()	SLsmg_normal_video ()
 #define endwin()	SLsmg_reset_smg ()
 
 #define SLsmg_draw_double_box(r, c, dr, dc)	SLsmg_draw_box ((r), (c), (dr), (dc))

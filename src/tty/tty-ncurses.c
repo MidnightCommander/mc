@@ -128,6 +128,18 @@ tty_nodelay (gboolean set)
     nodelay (stdscr, (bool) set);
 }
 
+int
+tty_baudrate (void)
+{
+    return baudrate();
+}
+
+void
+tty_touch_screen (void)
+{
+    touchwin (stdscr);
+}
+
 void
 tty_gotoyx (int y, int x)
 {
@@ -171,6 +183,12 @@ tty_fill_region (int y, int x, int rows, int cols, unsigned char ch)
     }
 
     move (y, x);
+}
+
+void
+tty_set_alt_charset (gboolean alt_charset)
+{
+    (void) alt_charset;
 }
 
 void

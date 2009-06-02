@@ -282,7 +282,7 @@ static void show_tree (WTree *tree)
 	} else{
 	    /* Sub level directory */
 
-	    acs ();
+	    tty_set_alt_charset (TRUE);
 	    /* Output branch parts */
 	    for (j = 0; j < current->sublevel - topsublevel - 1; j++){
 		if (tree_cols - 8 - 3 * j < 9)
@@ -300,7 +300,7 @@ static void show_tree (WTree *tree)
 	    else
 		tty_print_char (ACS_LTEE);
 	    tty_print_char (ACS_HLINE);
-	    noacs ();
+	    tty_set_alt_charset (FALSE);
 
 	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */

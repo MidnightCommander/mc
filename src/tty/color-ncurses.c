@@ -140,3 +140,9 @@ tty_lowlevel_setcolor (int color)
 {
     attrset (MY_COLOR_PAIR (color));
 }
+
+void
+tty_set_normal_attrs (void)
+{
+    standend ();
+}

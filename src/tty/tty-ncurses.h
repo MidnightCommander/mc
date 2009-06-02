@@ -20,7 +20,4 @@
 
 void init_curses (void);
 
-#define acs()
-#define noacs()
-
 #endif				/* MC_TTY_NCURSES_H */

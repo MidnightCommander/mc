@@ -569,7 +569,7 @@ static void check_split (void)
 void
 clr_scr (void)
 {
-    standend ();
+    tty_set_normal_attrs ();
     dlg_erase (midnight_dlg);
     tty_refresh ();
     doupdate ();
@@ -747,7 +747,7 @@ change_screen_size (void)
 
     /* Now, force the redraw */
     do_refresh ();
-    touchwin (stdscr);
+    tty_touch_screen ();
 #endif				/* TIOCGWINSZ */
 #endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }

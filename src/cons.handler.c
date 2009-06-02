@@ -367,7 +367,7 @@ void
 show_console_contents (int starty, unsigned char begin_line,
 		       unsigned char end_line)
 {
-    standend ();
+    tty_set_normal_attrs ();
 
     if (look_for_rxvt_extensions ()) {
 	show_rxvt_contents (starty, begin_line, end_line);

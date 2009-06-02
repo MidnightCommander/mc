@@ -133,7 +133,7 @@ void edit_refresh_cmd (WEdit * edit)
 	int color;
 	edit_get_syntax_color (edit, -1, &color);
     }
-    touchwin(stdscr);
+    tty_touch_screen ();
 #endif /* !HAVE_SLANG */
     tty_refresh ();
     doupdate();

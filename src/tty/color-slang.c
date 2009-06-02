@@ -188,3 +188,9 @@ tty_lowlevel_setcolor (int color)
 {
     SLsmg_set_color (color & 0x7F);
 }
+
+void
+tty_set_normal_attrs (void)
+{
+    SLsmg_normal_video ();
+}

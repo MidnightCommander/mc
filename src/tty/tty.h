@@ -34,6 +34,7 @@ extern void tty_noraw_mode (void);
 
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
+extern int tty_baudrate (void);
 
 /* {{{ Output }}} */
 
@@ -43,8 +44,12 @@ extern void tty_nodelay (gboolean set);
     While SLang provides such a feature, ncurses does not.
  */
 
+extern void tty_touch_screen (void);
+
 extern void tty_gotoyx(int y, int x);
 extern void tty_getyx(int *py, int *px);
+
+extern void tty_set_alt_charset (gboolean alt_charset);
 
 extern void tty_print_char(int c);
 extern void tty_print_alt_char(int c);
