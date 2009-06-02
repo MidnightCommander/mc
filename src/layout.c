@@ -574,17 +574,6 @@ clr_scr (void)
     tty_refresh ();
 }
 
-void
-done_screen ()
-{
-    if (!(quit & SUBSHELL_EXIT))
-	clr_scr ();
-    tty_reset_shell_mode ();
-    tty_noraw_mode ();
-    tty_keypad (FALSE);
-    tty_colors_done ();
-}
-
 static void
 panel_do_cols (int index)
 {

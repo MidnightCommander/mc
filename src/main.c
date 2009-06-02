@@ -1525,6 +1525,17 @@ static void check_codeset()
 }
 
 static void
+done_screen (void)
+{
+    if (!(quit & SUBSHELL_EXIT))
+	clr_scr ();
+    tty_reset_shell_mode ();
+    tty_noraw_mode ();
+    tty_keypad (FALSE);
+    tty_colors_done ();
+}
+
+static void
 done_mc (void)
 {
     disable_mouse ();
