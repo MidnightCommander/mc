@@ -574,7 +574,6 @@ dialog_handle_key (Dlg_head *h, int d_key)
 	tty_touch_screen ();
 #endif /* HAVE_SLANG */
 	tty_refresh ();
-	doupdate ();
 	break;
 
     default:

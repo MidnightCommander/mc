@@ -45,8 +45,6 @@
 
 #include "global.h"
 #include "background.h"
-#include "../src/tty/tty.h"	/* doupdate() */
-#include "dialog.h"	/* do_refresh() */
 #include "wtools.h"
 #include "fileopctx.h"	/* FileOpContext */
 #include "../src/tty/key.h"	/* add_select_channel(), delete_select_channel() */
@@ -347,9 +345,7 @@ background_attention (int fd, void *closure)
     for (i = 0; i < argc; i++)
 	g_free (data [i]);
 
-    do_refresh ();
-    tty_refresh ();
-    doupdate ();
+    repaint_screen ();
     return 0;
 }
 

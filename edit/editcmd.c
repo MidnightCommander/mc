@@ -136,7 +136,6 @@ void edit_refresh_cmd (WEdit * edit)
     tty_touch_screen ();
 #endif /* !HAVE_SLANG */
     tty_refresh ();
-    doupdate();
 }
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,

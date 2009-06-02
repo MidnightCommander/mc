@@ -1304,7 +1304,6 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 
     if ((dirty == 3) || is_idle ()) {
 	tty_refresh ();
-	doupdate ();
 	dirty = 1;
     } else
 	dirty++;

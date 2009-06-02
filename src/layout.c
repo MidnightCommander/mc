@@ -572,7 +572,6 @@ clr_scr (void)
     tty_set_normal_attrs ();
     dlg_erase (midnight_dlg);
     tty_refresh ();
-    doupdate ();
 }
 
 void

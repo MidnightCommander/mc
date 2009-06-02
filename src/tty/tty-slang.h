@@ -26,7 +26,6 @@ enum {
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
 
-#define doupdate()
 #define noecho()
 
 #define ungetch(x)		SLang_ungetkey (x)

@@ -233,6 +233,7 @@ tty_refresh (void)
     if (!we_are_background)
 #endif				/* WITH_BACKGROUND */
 	refresh ();
+    doupdate ();
 }
 
 void
