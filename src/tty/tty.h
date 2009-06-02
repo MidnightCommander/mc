@@ -32,9 +32,14 @@ extern void tty_reset_shell_mode (void);
 extern void tty_raw_mode (void);
 extern void tty_noraw_mode (void);
 
+extern void tty_noecho (void);
+extern int tty_flush_input (void);
+
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
+
+extern void tty_shutdown (void);
 
 /* {{{ Output }}} */
 
@@ -44,6 +49,7 @@ extern int tty_baudrate (void);
     While SLang provides such a feature, ncurses does not.
  */
 
+extern int tty_reset_screen (void);
 extern void tty_touch_screen (void);
 
 extern void tty_gotoyx(int y, int x);

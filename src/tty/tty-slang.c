@@ -218,6 +218,16 @@ load_terminfo_keys (void)
 /*** public functions **************************************************/
 
 void
+init_curses (void)
+{
+    SLsmg_init_smg ();
+    do_enter_ca_mode ();
+    tty_init_colors ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
+}
+
+void
 init_slang (void)
 {
     SLtt_get_terminfo ();
@@ -269,6 +279,26 @@ init_slang (void)
     SLtt_Blink_Mode = 0;
 }
 
+void
+tty_shutdown (void)
+{
+    char *op_cap;
+
+    SLsmg_reset_smg ();
+    tty_reset_shell_mode ();
+    do_exit_ca_mode ();
+    SLang_reset_tty ();
+
+    /* Load the op capability to reset the colors to those that were 
+     * active when the program was started up 
+     */
+    op_cap = SLtt_tgetstr ((char *) "op");
+    if (op_cap != NULL){
+	fputs (op_cap, stdout);
+	fflush (stdout);
+    }
+}
+
 /* Done each time we come back from done mode */
 void
 tty_reset_prog_mode (void)
@@ -297,6 +327,17 @@ tty_noraw_mode (void)
 }
 
 void
+tty_noecho (void)
+{
+}
+
+int
+tty_flush_input (void)
+{
+    return 0; /* OK */
+}
+
+void
 tty_keypad (gboolean set)
 {
     char *keypad_string;
@@ -318,35 +359,6 @@ int
 tty_baudrate (void)
 {
     return SLang_TT_Baud_Rate;
-}
-
-void
-slang_shutdown (void)
-{
-    char *op_cap;
-
-    tty_reset_shell_mode ();
-    do_exit_ca_mode ();
-    SLang_reset_tty ();
-
-    /* Load the op capability to reset the colors to those that were 
-     * active when the program was started up 
-     */
-    op_cap = SLtt_tgetstr ((char *) "op");
-    if (op_cap != NULL) {
-	fputs (op_cap, stdout);
-	fflush (stdout);
-    }
-}
-
-void
-init_curses (void)
-{
-    SLsmg_init_smg ();
-    do_enter_ca_mode ();
-    tty_init_colors ();
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
 }
 
 void
@@ -410,6 +422,13 @@ getch (void)
     }
 
     return c;
+}
+
+int
+tty_reset_screen (void)
+{
+    SLsmg_reset_smg ();
+    return 0; /* OK */
 }
 
 void

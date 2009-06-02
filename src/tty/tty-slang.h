@@ -26,22 +26,15 @@ enum {
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
 
-#define noecho()
-
-#define ungetch(x)		SLang_ungetkey (x)
-#define flushinp()
-
 void init_slang (void);
 void init_curses (void);
 void hline (int ch, int len);
 void vline (int ch, int len);
 int getch (void);
-void slang_shutdown (void);
 
 #define printw		SLsmg_printf
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows
-#define endwin()	SLsmg_reset_smg ()
 
 #define SLsmg_draw_double_box(r, c, dr, dc)	SLsmg_draw_box ((r), (c), (dr), (dc))
 

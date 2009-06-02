@@ -722,7 +722,7 @@ change_screen_size (void)
 
 #ifndef NCURSES_VERSION
     tty_noraw_mode ();
-    endwin ();
+    tty_reset_screen ();
 #endif
     low_level_change_screen_size ();
     check_split ();

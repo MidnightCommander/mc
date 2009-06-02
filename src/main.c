@@ -2371,10 +2371,7 @@ main (int argc, char *argv[])
 
     flush_extension_file ();	/* does only free memory */
 
-    endwin ();
-#ifdef HAVE_SLANG
-    slang_shutdown ();
-#endif
+    tty_shutdown ();
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
 	handle_console (CONSOLE_RESTORE);

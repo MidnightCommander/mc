@@ -48,7 +48,7 @@ edition_post_exec (void)
 
     /* FIXME: Missing on slang endwin? */
     tty_reset_prog_mode ();
-    flushinp ();
+    tty_flush_input ();
 
     tty_keypad (TRUE);
     tty_raw_mode ();
@@ -74,7 +74,7 @@ edition_pre_exec (void)
 
     tty_reset_shell_mode ();
     tty_keypad (FALSE);
-    endwin ();
+    tty_reset_screen ();
 
     numeric_keypad_mode ();
 
@@ -234,10 +234,10 @@ toggle_panels (void)
      * is no tty_raw_mode supported
      */
     tty_reset_shell_mode ();
-    noecho ();
 #endif				/* !HAVE_SLANG */
+    tty_noecho ();
     tty_keypad (FALSE);
-    endwin ();
+    tty_reset_screen ();
     do_exit_ca_mode ();
     tty_raw_mode ();
     if (console_flag)

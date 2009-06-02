@@ -93,6 +93,12 @@ init_curses (void)
 }
 
 void
+tty_shutdown (void)
+{
+    endwin ();
+}
+
+void
 tty_reset_prog_mode (void)
 {
     reset_prog_mode ();
@@ -117,6 +123,18 @@ tty_noraw_mode (void)
 }
 
 void
+tty_noecho (void)
+{
+    noecho ();
+}
+
+int
+tty_flush_input (void)
+{
+    return flushinp ();
+}
+
+void
 tty_keypad (gboolean set)
 {
     keypad (stdscr, (bool) set);
@@ -132,6 +150,12 @@ int
 tty_baudrate (void)
 {
     return baudrate();
+}
+
+int
+tty_reset_screen (void)
+{
+    return endwin ();
 }
 
 void
