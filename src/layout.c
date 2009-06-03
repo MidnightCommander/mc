@@ -570,7 +570,7 @@ void
 clr_scr (void)
 {
     tty_set_normal_attrs ();
-    dlg_erase (midnight_dlg);
+    tty_fill_region (0, 0, LINES, COLS, ' ');
     tty_refresh ();
 }
 
