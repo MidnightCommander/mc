@@ -736,7 +736,6 @@ mini_info_separator (WPanel *panel)
 {
     const int y = llines (panel) + 2;
 
-    tty_set_normal_attrs (); /* FIXME: unneeded? */
     tty_setcolor (NORMAL_COLOR);
     tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
 		    slow_terminal ? '-' : ACS_HLINE,
@@ -1196,10 +1195,9 @@ panel_reload (WPanel *panel)
 static void
 paint_frame (WPanel *panel)
 {
-    int  header_len;
-    int  side, width;
-
+    int side, width;
     char *txt = NULL;
+
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1228,19 +1226,15 @@ paint_frame (WPanel *panel)
                     txt = g_strdup (format->title);
                 }
 
-		header_len = strlen (txt);
-		if (header_len > format->field_len)
-		    header_len = format->field_len;
-
                 tty_setcolor (MARKED_COLOR);
-                tty_print_string (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
+                tty_print_string (str_fit_to_term (format->title, format->field_len,
+                                                    J_CENTER_LEFT));
                 g_free(txt);
                 width -= format->field_len;
 	    } else {
 		tty_setcolor (NORMAL_COLOR);
 		tty_print_one_vline (slow_terminal);
 		width--;
-		continue;
 	    }
 	}
 
