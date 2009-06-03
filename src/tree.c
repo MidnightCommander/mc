@@ -175,8 +175,7 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
     } else
 	line = tree_lines+1;
 
-    widget_move (&tree->widget, line, 1);
-    hline (' ', tree_cols);
+    tty_draw_hline (tree->widget.y + line, tree->widget.x + 1, ' ', tree_cols);
     widget_move (&tree->widget, line, 1);
 
     if (tree->searching){
@@ -258,10 +257,8 @@ static void show_tree (WTree *tree)
     /* Loop for every line */
     for (i = 0; i < tree_lines; i++){
 	/* Move to the beginning of the line */
-	widget_move (&tree->widget, y+i, x);
-
-	hline (' ', tree_cols);
-	widget_move (&tree->widget, y+i, x);
+	tty_draw_hline (tree->widget.y + y + i, tree->widget.x + x,
+			' ', tree_cols);
 
 	if (!current)
 	    continue;
@@ -968,13 +965,14 @@ tree_frame (Dlg_head *h, WTree *tree)
 {
     tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget*) tree);
-    if (tree->is_panel)
+    if (tree->is_panel) {
 	draw_double_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
 		         tree->widget.cols);
 
-    if (show_mini_info && tree->is_panel){
-	widget_move (tree, tlines (tree) + 1, 1);
-	hline (ACS_HLINE, tree->widget.cols - 2);
+	if (show_mini_info)
+	    tty_draw_hline (tree->widget.y + tlines (tree) + 1,
+			    tree->widget.x + 1,
+			    ACS_HLINE, tree->widget.cols - 2);
     }
 }
 

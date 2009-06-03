@@ -2134,8 +2134,7 @@ view_display_status (WView *view)
 	return;
 
     tty_setcolor (SELECTED_COLOR);
-    widget_move (view, top, left);
-    hline (' ', width);
+    tty_draw_hline (view->widget.y + top, view->widget.x + left, ' ', width);
 
     file_label = _("File: %s");
     file_label_width = str_term_width1 (file_label) - 2;
@@ -2358,7 +2357,7 @@ view_display_hex (WView *view)
 		/* After every four bytes, print a group separator */
 		if (bytes % 4 == 3) {
 		    if (view->data_area.width >= 80 && col < width) {
-			tty_print_one_vline ();
+			tty_print_one_vline (slow_terminal);
 			col += 1;
 		    }
 		    if (col < width) {
@@ -2437,26 +2436,26 @@ view_display_text (WView * view)
         /* real detection of new line */
         if (info.next >= line_act->end) {
             line_nxt = view_get_next_line (view, line_act);
-            if (line_nxt == NULL) break;
-            
+            if (line_nxt == NULL)
+		break;
             if (view->text_wrap_mode || (line_act->number != line_nxt->number)){
                 row++;
                 col = line_nxt->left;
             }
             line_act = line_nxt;
-            
-			continue;
-		    }
-        
+	    continue;
+	}
+
         view_read_continue (view, &info);
         if (view_read_test_nroff_back (view, &info)) {
             w = str_term_width1 (info.chi1);
             col -= w;
             if (col >= view->dpy_text_column
-                && col + w - view->dpy_text_column <= width) {
-                widget_move (view, top + row, left + (col - view->dpy_text_column));
-                hline (' ', w);
-	    }
+                && col + w - view->dpy_text_column <= width)
+		tty_draw_hline (view->widget.y + top + row,
+				view->widget.x + left + (col - view->dpy_text_column),
+				' ', w);
+
             if (cmp (info.chi1, "_") && (!cmp (info.cnxt, "_") || !cmp (info.chi2, "\b")))
 		    tty_setcolor (VIEW_UNDERLINED_COLOR);
 		else

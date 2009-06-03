@@ -35,7 +35,11 @@
 #include <unistd.h>
 
 #include "global.h"
+
 #include "../src/tty/tty.h"
+#include "../src/tty/color.h"		/* tty_set_normal_attrs */
+#include "../src/tty/win.h"
+
 #include "cons.saver.h"
 
 signed char console_flag = 0;

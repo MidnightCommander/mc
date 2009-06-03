@@ -64,13 +64,10 @@ static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
 static void
 slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    tty_gotoyx (h->y + y, h->x + x);
-    hline (' ', xs);
-    vline (' ', ys);
-    tty_gotoyx (h->y + y, h->x + x + xs - 1);
-    vline (' ', ys);
-    tty_gotoyx (h->y + y + ys - 1, h->x + x);
-    hline (' ', xs);
+    tty_draw_hline (h->y + y, h->x + x, ' ', xs);
+    tty_draw_vline (h->y + y, h->x + x, ' ', ys);
+    tty_draw_vline (h->y + y, h->x + x + xs - 1, ' ', ys);
+    tty_draw_hline (h->y + y + ys - 1, h->x + x, ' ', xs);
 }
 
 /* draw box in window */

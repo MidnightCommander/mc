@@ -28,8 +28,6 @@ enum {
 
 void init_slang (void);
 void init_curses (void);
-void hline (int ch, int len);
-void vline (int ch, int len);
 int getch (void);
 
 #define printw		SLsmg_printf

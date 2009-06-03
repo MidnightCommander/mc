@@ -52,7 +52,7 @@
 #include "widget.h"
 #include "menu.h"		/* menubar_visible */
 #include "main-widgets.h"
-#include "main.h"		/* the_menubar */
+#include "main.h"		/* the_menubar, slow_terminal */
 #include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
 #include "selcodepage.h"	/* select_charset () */
@@ -566,13 +566,13 @@ format_file (char *dest, int limit, WPanel *panel, int file_index, int width, in
                 tty_setcolor (SELECTED_COLOR);
             else
                 tty_setcolor (NORMAL_COLOR);
-	    tty_print_one_vline ();
+	    tty_print_one_vline (slow_terminal);
 	    length++;
 	}
     }
 
     if (length < width)
-	hline (' ', width - length);
+	tty_draw_hline (-1, -1, ' ', width - length);
 }
 
 static void
@@ -616,7 +616,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	    tty_print_char (' ');
 	else {
 	    tty_setcolor (NORMAL_COLOR);
-	    tty_print_one_vline ();
+	    tty_print_one_vline (slow_terminal);
 	}
     }
 }
@@ -737,15 +737,10 @@ mini_info_separator (WPanel *panel)
     const int y = llines (panel) + 2;
 
     tty_set_normal_attrs (); /* FIXME: unneeded? */
-    widget_move (&panel->widget, y, 1);
     tty_setcolor (NORMAL_COLOR);
-#ifdef HAVE_SLANG
-    hline (ACS_HLINE, panel->widget.cols - 2);
-#else
-    hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
-	   panel->widget.cols - 2);
-#endif				/* !HAVE_SLANG */
-
+    tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
+		    slow_terminal ? '-' : ACS_HLINE,
+		    panel->widget.cols - 2);
     /* Status displays total marked size.
      * Centered in panel, full format. */
     display_total_marked_size (panel, y, -1, FALSE);
@@ -798,7 +793,7 @@ show_dir (WPanel *panel)
 		     panel->widget.y, panel->widget.x,
 		     panel->widget.lines, panel->widget.cols);
 
-    if (show_mini_info) {
+    if (show_mini_info && !slow_terminal) {
 	widget_move (&panel->widget, llines (panel) + 2, 0);
 	tty_print_alt_char (ACS_LTEE);
 	widget_move (&panel->widget, llines (panel) + 2,
@@ -1218,7 +1213,7 @@ paint_frame (WPanel *panel)
 
 	if (side){
 	    tty_setcolor (NORMAL_COLOR);
-	    tty_print_one_vline ();
+	    tty_print_one_vline (slow_terminal);
 	    width = panel->widget.cols - panel->widget.cols/2 - 1;
 	} else if (panel->split)
 	    width = panel->widget.cols/2 - 3;
@@ -1243,14 +1238,14 @@ paint_frame (WPanel *panel)
                 width -= format->field_len;
 	    } else {
 		tty_setcolor (NORMAL_COLOR);
-		tty_print_one_vline ();
+		tty_print_one_vline (slow_terminal);
 		width--;
 		continue;
 	    }
 	}
 
 	if (width > 0)
-	    tty_printf ("%*s", width, "");
+	    tty_draw_hline (-1, -1, ' ', width);
     }
 }
 

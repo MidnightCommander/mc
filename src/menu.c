@@ -94,17 +94,19 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
             tty_print_alt_char (ACS_LTEE);
         }
 
-        tty_print_hline (menubar->widget.y + y, menubar->widget.x + x,
-                            menubar->max_entry_len + 2);
+        tty_draw_hline (menubar->widget.y + y, menubar->widget.x + x,
+                        slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len + 2);
 
-        if (!slow_terminal)
+        if (!slow_terminal) {
+            widget_move (&menubar->widget, y, x + menubar->max_entry_len + 2);
             tty_print_alt_char (ACS_RTEE);
+        }
     } else {
         /* menu text */
         tty_setcolor (color);
         widget_move (&menubar->widget, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
-        hline (' ', menubar->max_entry_len + 1); /* clear line */
+        tty_draw_hline (-1, -1, ' ', menubar->max_entry_len + 1); /* clear line */
         tty_print_string (entry->text.start);
 
         if (entry->text.hotkey != NULL) {
@@ -152,9 +154,7 @@ static void menubar_draw (WMenu *menubar)
 
     /* First draw the complete menubar */
     tty_setcolor (SELECTED_COLOR);
-    widget_move (&menubar->widget, 0, 0);
-
-    hline (' ', menubar->widget.cols);
+    tty_draw_hline (menubar->widget.y, menubar->widget.x, ' ', menubar->widget.cols);
 
     tty_setcolor (SELECTED_COLOR);
     /* Now each one of the entries */

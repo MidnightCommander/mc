@@ -176,6 +176,24 @@ tty_getyx (int *py, int *px)
     getyx (stdscr, *py, *px);
 }
 
+/* if x < 0 or y < 0, draw line starting from current position */
+void
+tty_draw_hline (int y, int x, int ch, int len)
+{
+    if ((y >= 0) && (x >= 0))
+	move (y, x);
+    hline (ch, len);
+}
+
+/* if x < 0 or y < 0, draw line starting from current position */
+void
+tty_draw_vline (int y, int x, int ch, int len)
+{
+    if ((y >= 0) && (x >= 0))
+	move (y, x);
+    vline (ch, len);
+}
+
 void
 tty_draw_box (int y, int x, int rows, int cols)
 {

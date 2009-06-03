@@ -37,7 +37,6 @@
 
 #include "../../src/tty/tty.h"
 
-#include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/strutil.h"
 #include "../../src/background.h"	/* we_are_background */
 
@@ -121,42 +120,20 @@ tty_is_ugly_line_drawing (void)
     return force_ugly_line_drawing;
 }
 
-extern void
-tty_print_one_hline(void)
+void
+tty_print_one_hline (gboolean is_slow_term)
 {
-    if (slow_terminal)
-	tty_print_char(' ');
+    if (is_slow_term)
+	tty_print_char (' ');
     else
-	tty_print_alt_char(ACS_HLINE);
+	tty_print_alt_char (ACS_HLINE);
 }
 
-extern void
-tty_print_one_vline(void)
+void
+tty_print_one_vline (gboolean is_slow_term)
 {
-    if (slow_terminal)
-	tty_print_char(' ');
+    if (is_slow_term)
+	tty_print_char (' ');
     else
-	tty_print_alt_char(ACS_VLINE);
-}
-
-extern void
-tty_print_hline(int top, int left, int length)
-{
-    int i;
-
-    tty_gotoyx(top, left);
-    for (i = 0; i < length; i++)
-	tty_print_one_hline();
-}
-
-extern void
-tty_print_vline(int top, int left, int length)
-{
-    int i;
-
-    tty_gotoyx(top, left);
-    for (i = 0; i < length; i++) {
-	tty_gotoyx(top + i, left);
-	tty_print_one_vline();
-    }
+	tty_print_alt_char (ACS_VLINE);
 }

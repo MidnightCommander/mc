@@ -78,8 +78,8 @@ info_show_info (struct WInfo *info)
     widget_move (&info->widget, 1, 3);
     tty_printf (_("Midnight Commander %s"), VERSION);
     tty_setcolor (NORMAL_COLOR);
-    widget_move (&info->widget, 2, 1);
-    hline (ACS_HLINE|NORMAL_COLOR, info->widget.cols-2);
+    tty_draw_hline (info->widget.y + 2, info->widget.x + 1,
+		    ACS_HLINE, info->widget.cols - 2);
     if (get_current_type () != view_listing)
 	return;
 

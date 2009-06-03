@@ -24,7 +24,6 @@
 #include "../../src/tty/win.h"
 
 #include "../../src/background.h"	/* we_are_background */
-#include "../../src/main.h"		/* for slow_terminal */
 #include "../../src/util.h"		/* str_unconst */
 #include "../../src/strutil.h"		/* str_term_form */
 
@@ -361,49 +360,6 @@ tty_baudrate (void)
     return SLang_TT_Baud_Rate;
 }
 
-void
-hline (int ch, int len)
-{
-    int last_x, last_y;
-
-    last_x = SLsmg_get_column ();
-    last_y = SLsmg_get_row ();
-
-    if (ch == 0)
-	ch = ACS_HLINE;
-
-    if (ch == ACS_HLINE)
-	SLsmg_draw_hline (len);
-    else
-	while (len--)
-	    tty_print_char (ch);
-
-    SLsmg_gotorc (last_y, last_x);
-}
-
-void
-vline (int character, int len)
-{
-    (void) character;
-
-    if (!slow_terminal)
-	SLsmg_draw_vline (len);
-    else {
-	int last_x, last_y, pos = 0;
-
-	last_x = SLsmg_get_column ();
-	last_y = SLsmg_get_row ();
-
-	while (len--) {
-	    SLsmg_gotorc (last_y + pos, last_x);
-	    tty_print_char (' ');
-	    pos++;
-	}
-
-	SLsmg_gotorc (last_x, last_y);
-    }
-}
-
 int
 getch (void)
 {
@@ -448,6 +404,56 @@ tty_getyx (int *py, int *px)
 {
     *py = SLsmg_get_row ();
     *px = SLsmg_get_column ();
+}
+
+/* if x < 0 or y < 0, draw line staring from current position */
+void
+tty_draw_hline (int y, int x, int ch, int len)
+{
+    if ((y < 0) || (x < 0)) {
+	y = SLsmg_get_row ();
+	x = SLsmg_get_column ();
+    } else
+	SLsmg_gotorc (y, x);
+
+    if (ch == 0)
+	ch = ACS_HLINE;
+
+    if (ch == ACS_HLINE)
+	SLsmg_draw_hline (len);
+    else
+	while (len-- != 0)
+	    tty_print_char (ch);
+
+    SLsmg_gotorc (y, x);
+}
+
+/* if x < 0 or y < 0, draw line staring from current position */
+void
+tty_draw_vline (int y, int x, int ch, int len)
+{
+    if ((y < 0) || (x < 0)) {
+	y = SLsmg_get_row ();
+	x = SLsmg_get_column ();
+    } else
+	SLsmg_gotorc (y, x);
+
+    if (ch == 0)
+	ch = ACS_VLINE;
+
+    if (ch == ACS_VLINE)
+	SLsmg_draw_vline (len);
+    else {
+	int pos = 0;
+
+	while (len-- != 0) {
+	    SLsmg_gotorc (y + pos, x);
+	    tty_print_char (ch);
+	    pos++;
+	}
+    }
+
+    SLsmg_gotorc (y, x);
 }
 
 void
