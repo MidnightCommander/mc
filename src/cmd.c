@@ -853,7 +853,7 @@ compare_dirs_cmd (void)
 
     choice =
 	query_dialog (_(" Compare directories "),
-		      _(" Select compare method: "), 0, D_NORMAL, 
+		      _(" Select compare method: "), D_NORMAL, 4,
 		      _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
 
     if (choice < 0 || choice > 2)
