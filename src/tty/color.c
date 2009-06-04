@@ -35,8 +35,13 @@
 
 #include "../../src/setup.h"		/* setup_color_string, term_color_string */
 
+extern char *command_line_colors;
+
 /* Set if we are actually using colors */
 gboolean use_colors = FALSE;
+
+struct colors_avail c;
+int max_index = 0;
 
 void
 get_color (const char *cpp, CTYPE *colp)
@@ -52,89 +57,63 @@ get_color (const char *cpp, CTYPE *colp)
 }
 
 static void
-get_two_colors (char **cpp, struct colorpair *colorpairp)
-{
-    char *p = *cpp;
-    int state;
-
-    state = 0;
-
-    for (; *p; p++) {
-	if (*p == ':') {
-	    *p = 0;
-	    get_color (*cpp, state ? &colorpairp->bg : &colorpairp->fg);
-	    *p = ':';
-	    *cpp = p + 1;
-	    return;
-	}
-
-	if (*p == ',') {
-	    state = 1;
-	    *p = 0;
-	    get_color (*cpp, &colorpairp->fg);
-	    *p = ',';
-	    *cpp = p + 1;
-	}
-    }
-
-    get_color (*cpp, state ? &colorpairp->bg : &colorpairp->fg);
-}
-
-static void
 configure_colors_string (const char *the_color_string)
 {
     const size_t map_len = color_map_len ();
-    char *color_string, *p;
+
     size_t i;
-    gboolean found;
+    char **color_strings, **p;
 
     if (!the_color_string)
 	return;
 
-    p = color_string = g_strdup (the_color_string);
-    while (color_string && *color_string) {
-	while (*color_string == ' ' || *color_string == '\t')
-	    color_string++;
+    color_strings = g_strsplit (the_color_string, ":", -1);
 
-	found = FALSE;
-	for (i = 0; i < map_len; i++){
-	    size_t klen;
+    p = color_strings;
 
-	    if (!color_map [i].name)
-		continue;
-	    klen = strlen (color_map [i].name);
+    while ((p != NULL) && (*p != NULL)) {
+	char **cfb; /* color, fore, back*/
+	/* cfb[0] - entry name
+	 * cfb[1] - fore color
+	 * cfb[20 - back color
+	 */
+	char *e;
 
-	    if (strncmp (color_string, color_map [i].name, klen) == 0) {
-		color_string += klen;
-		get_two_colors (&color_string, &color_map [i]);
-		found = TRUE;
+	cfb = g_strsplit_set (*p, "=,", 3);
+	/* append '=' to the entry name */
+	e = g_strdup_printf ("%s=", cfb[0]);
+	g_free (cfb[0]);
+	cfb[0] = e;
+
+	for (i = 0; i < map_len; i++)
+	    if (color_map [i].name != NULL) {
+		size_t klen = strlen (color_map [i].name);
+
+		if (strncmp (cfb[0], color_map [i].name, klen) == 0) {
+		    if ((cfb[1] != NULL) && (*cfb[1] != '\0'))
+			get_color (cfb[1], &color_map [i].fg);
+		    if ((cfb[2] != NULL) && (*cfb[2] != '\0'))
+			get_color (cfb[2], &color_map [i].bg);
+		    break;
+		}
 	    }
-	}
-	if (!found) {
-	    while (*color_string && *color_string != ':')
-		color_string++;
-	    if (*color_string)
-		color_string++;
-	}
+
+	g_strfreev (cfb);
+	p++;
     }
-   g_free (p);
+
+   g_strfreev (color_strings);
 }
 
 void
 configure_colors (void)
 {
-    extern char *command_line_colors;
-
     configure_colors_string (default_colors);
     configure_colors_string (setup_color_string);
     configure_colors_string (term_color_string);
     configure_colors_string (getenv ("MC_COLOR_TABLE"));
     configure_colors_string (command_line_colors);
 }
-
-/* Functions necessary to implement syntax highlighting  */
-struct colors_avail c;
-int max_index = 0;
 
 int
 alloc_color_pair (CTYPE foreground, CTYPE background)
@@ -148,7 +127,7 @@ tty_colors_done (void)
 {
     struct colors_avail *p, *next;
 
-    for (p = c.next; p; p = next) {
+    for (p = c.next; p != NULL; p = next) {
 	next = p->next;
 	g_free (p->fg);
 	g_free (p->bg);
