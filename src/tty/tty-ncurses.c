@@ -83,7 +83,6 @@ init_curses (void)
     noecho ();
     keypad (stdscr, TRUE);
     nodelay (stdscr, FALSE);
-    tty_init_colors ();
 
     if (tty_is_ugly_line_drawing ()) {
 	int i;

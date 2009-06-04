@@ -221,7 +221,6 @@ init_curses (void)
 {
     SLsmg_init_smg ();
     do_enter_ca_mode ();
-    tty_init_colors ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
 }

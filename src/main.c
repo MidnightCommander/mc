@@ -2328,6 +2328,8 @@ main (int argc, char *argv[])
 
     init_curses ();
 
+    tty_init_colors ();
+
     dlg_set_default_colors ();
 
     /* create home directory */
