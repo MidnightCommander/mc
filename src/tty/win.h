@@ -1,6 +1,6 @@
 
 /** \file win.h
- *  \brief Header: curses utilities
+ *  \brief Header: X terminal management: xterm and rxvt
  */
 
 #ifndef MC_WIN_H
@@ -8,8 +8,8 @@
 
 #include "../../src/global.h"		/* <glib.h> */
 
-/* Terminal management */
 extern int xterm_flag;
+
 void do_enter_ca_mode (void);
 void do_exit_ca_mode (void);
 

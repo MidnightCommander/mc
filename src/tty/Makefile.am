@@ -16,7 +16,6 @@ TTY_SRC = \
 	color.c color.h \
 	key.c key.h keyxdef.c \
 	mouse.c mouse.h \
-	rxvt.c \
 	tty.c tty.h \
 	win.c win.h \
 	x11conn.c x11conn.h
