@@ -87,7 +87,7 @@ typedef struct mc_search_struct {
     GString *regex_buffer;
 #if ! GLIB_CHECK_VERSION (2, 14, 0)
 #if HAVE_LIBPCRE
-    int iovector[MC_SEARCH__NUM_REPLACE_ARGS  * 2];
+    int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
 #endif                          /* HAVE_LIBPCRE */
 #endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
 

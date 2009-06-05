@@ -297,21 +297,21 @@ mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
     int count_tokens = 0;
     gsize loop;
     for (loop = 0; loop < len - 1; loop++) {
-        if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ )
-        {
+        if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
             if (mc_search__regex_is_char_escaped (str, &str[loop - 1]))
                 continue;
 
             count_tokens++;
             continue;
         }
-        if (str[loop] == '$' && str[loop + 1] == '{' )
-        {
+        if (str[loop] == '$' && str[loop + 1] == '{') {
             gsize tmp_len;
             if (mc_search__regex_is_char_escaped (str, &str[loop - 1]))
                 continue;
 
-            for (tmp_len = 0; loop + tmp_len + 2 < len && (str[loop + 2 + tmp_len] & (char) 0xf0) == 0x30; tmp_len++);
+            for (tmp_len = 0;
+                 loop + tmp_len + 2 < len && (str[loop + 2 + tmp_len] & (char) 0xf0) == 0x30;
+                 tmp_len++);
             if (str[loop + 2 + tmp_len] == '}')
                 count_tokens++;
         }
@@ -512,7 +512,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
         return g_string_new_len (replace_str->str, replace_str->len);
 
     if (num_replace_tokens > mc_search->num_rezults - 1
-        || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS ) {
+        || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS) {
         mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
         mc_search->error_str = g_strdup (STR_E_RPL_NOT_EQ_TO_FOUND);
         return NULL;
@@ -526,37 +526,40 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
         if (replace_str->str[loop] == '\\'
             && (replace_str->str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
             /* \1 relace tokens */
-            if (! mc_search__regex_is_char_escaped (replace_str->str, &replace_str->str[loop - 1]))
+            if (!mc_search__regex_is_char_escaped (replace_str->str, &replace_str->str[loop - 1]))
                 tmp_str = g_strndup (&(replace_str->str[loop + 1]), 1);
-            len=2;
+            len = 2;
 
-        } else if (replace_str->str[loop] == '$' && replace_str->str[loop + 1] == '{' && (replace_str->str[loop + 2] & (char) 0xf0) == 0x30) {
+        } else if (replace_str->str[loop] == '$' && replace_str->str[loop + 1] == '{'
+                   && (replace_str->str[loop + 2] & (char) 0xf0) == 0x30) {
             /* ${1} replace token */
-            for (len = 0; loop+len+2 < replace_str->len && (replace_str->str[loop + 2 + len] & (char) 0xf0) == 0x30; len++);
+            for (len = 0;
+                 loop + len + 2 < replace_str->len
+                 && (replace_str->str[loop + 2 + len] & (char) 0xf0) == 0x30; len++);
             if (replace_str->str[loop + 2 + len] == '}')
                 tmp_str = g_strndup (&(replace_str->str[loop + 2]), len);
-            len+=3;
+            len += 3;
         }
 
         if (tmp_str == NULL)
             continue;
 
-            index = (gsize) atoi (tmp_str);
-            g_free (tmp_str);
-            tmp_str = NULL;
+        index = (gsize) atoi (tmp_str);
+        g_free (tmp_str);
+        tmp_str = NULL;
 
-            if (index > mc_search->num_rezults) {
-                g_string_free (ret, TRUE);
-                mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
-                mc_search->error_str = g_strdup_printf (STR_E_RPL_INVALID_TOKEN, index);
-                return NULL;
-            }
-            if (loop)
-                g_string_append_len (ret, prev_str, replace_str->str - prev_str + loop);
+        if (index > mc_search->num_rezults) {
+            g_string_free (ret, TRUE);
+            mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
+            mc_search->error_str = g_strdup_printf (STR_E_RPL_INVALID_TOKEN, index);
+            return NULL;
+        }
+        if (loop)
+            g_string_append_len (ret, prev_str, replace_str->str - prev_str + loop);
 
-            mc_search_regex__append_found_token_by_num (mc_search,
-                                                        mc_search->regex_buffer->str, ret, index);
-            prev_str = replace_str->str + loop + len;
+        mc_search_regex__append_found_token_by_num (mc_search,
+                                                    mc_search->regex_buffer->str, ret, index);
+        prev_str = replace_str->str + loop + len;
     }
     g_string_append_len (ret, prev_str, replace_str->str - prev_str + replace_str->len);
 
