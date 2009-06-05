@@ -563,14 +563,14 @@ dialog_handle_key (Dlg_head *h, int d_key)
 	/* Fall through */
 
     case XCTRL('l'):
-#ifndef HAVE_SLANG
+#ifdef HAVE_SLANG
+	tty_touch_screen ();
+	tty_refresh ();
+#else
 	/* Use this if the refreshes fail */
 	clr_scr ();
-	do_refresh ();
-#else
-	tty_touch_screen ();
+	repaint_screen ();
 #endif /* HAVE_SLANG */
-	tty_refresh ();
 	break;
 
     default:

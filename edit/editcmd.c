@@ -125,17 +125,17 @@ void edit_help_cmd (WEdit * edit)
 
 void edit_refresh_cmd (WEdit * edit)
 {
-#ifndef HAVE_SLANG
-    clr_scr();
-    do_refresh();
-#else
+#ifdef HAVE_SLANG
     {
 	int color;
 	edit_get_syntax_color (edit, -1, &color);
     }
     tty_touch_screen ();
-#endif /* !HAVE_SLANG */
     tty_refresh ();
+#else
+    clr_scr();
+    repaint_screen ();
+#endif /* !HAVE_SLANG */
 }
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
