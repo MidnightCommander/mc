@@ -493,20 +493,16 @@ dlg_one_down (Dlg_head *h)
 
 void update_cursor (Dlg_head *h)
 {
-    if (!h->current)
-         return;
-    if (h->current->options & W_WANT_CURSOR)
-	send_message (h->current, WIDGET_CURSOR, 0);
-    else {
-	Widget *p = h->current;
+    Widget *p = h->current;
 
-	do {
-	    if (p->options & W_WANT_CURSOR)
-		if ((*p->callback)(p, WIDGET_CURSOR, 0)){
-		    break;
-		}
-	    p = p->next;
-	} while (h->current != p);
+    if (p != NULL) {
+	if (p->options & W_WANT_CURSOR)
+	    send_message (p, WIDGET_CURSOR, 0);
+	else
+	    while ((p = p->next) != h->current)
+		if (p->options & W_WANT_CURSOR)
+		    if (send_message (p, WIDGET_CURSOR, 0) == MSG_HANDLED)
+			break;
     }
 }
 
@@ -578,14 +574,15 @@ dialog_handle_key (Dlg_head *h, int d_key)
     }
 }
 
-static int
+static cb_ret_t
 dlg_try_hotkey (Dlg_head *h, int d_key)
 {
     Widget *hot_cur;
-    int handled, c;
+    cb_ret_t handled;
+    int c;
 
-    if (!h->current)
-	return 0;
+    if (h->current == NULL)
+	return MSG_NOT_HANDLED;
 
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
@@ -596,7 +593,7 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
 	if (d_key >= 32 && d_key < 256)
-	    return 0;
+	    return MSG_NOT_HANDLED;
     }
 
     /* If it's an alt key, send the message */
@@ -604,39 +601,37 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
     if (d_key & ALT (0) && g_ascii_isalpha (c))
 	d_key = g_ascii_tolower (c);
 
-    handled = 0;
+    handled = MSG_NOT_HANDLED;
     if (h->current->options & W_WANT_HOTKEY)
-	handled = h->current->callback (h->current, WIDGET_HOTKEY, d_key);
+	handled = send_message (h->current, WIDGET_HOTKEY, d_key);
 
     /* If not used, send hotkey to other widgets */
-    if (handled)
-	return handled;
+    if (handled == MSG_HANDLED)
+	return MSG_HANDLED;
 
-    hot_cur = h->current;
+    hot_cur = h->current->next;
 
     /* send it to all widgets */
-    do {
+    while (h->current != hot_cur && handled == MSG_NOT_HANDLED) {
 	if (hot_cur->options & W_WANT_HOTKEY)
-	    handled |=
-		(*hot_cur->callback) (hot_cur, WIDGET_HOTKEY, d_key);
+	    handled = send_message (hot_cur, WIDGET_HOTKEY, d_key);
 
-	if (!handled)
+	if (handled == MSG_NOT_HANDLED)
 	    hot_cur = hot_cur->next;
-    } while (h->current != hot_cur && !handled);
+    }
 
-    if (!handled)
-	return 0;
+    if (handled == MSG_HANDLED)
+	do_select_widget (h, hot_cur, SELECT_EXACT);
 
-    do_select_widget (h, hot_cur, SELECT_EXACT);
     return handled;
 }
 
 static void
 dlg_key_event (Dlg_head *h, int d_key)
 {
-    int handled;
+    cb_ret_t handled;
 
-    if (!h->current)
+    if (h->current == NULL)
 	return;
 
     /* TAB used to cycle */
@@ -654,21 +649,20 @@ dlg_key_event (Dlg_head *h, int d_key)
     handled = (*h->callback) (h, DLG_KEY, d_key);
 
     /* next try the hotkey */
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	handled = dlg_try_hotkey (h, d_key);
 
-    if (handled)
+    if (handled == MSG_HANDLED)
 	(*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
-
-    /* not used - then try widget_callback */
-    if (!handled)
-	handled = h->current->callback (h->current, WIDGET_KEY, d_key);
+    else
+	/* not used - then try widget_callback */
+	handled = send_message (h->current, WIDGET_KEY, d_key);
 
     /* not used- try to use the unhandled case */
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
 
-    if (!handled)
+    if (handled == MSG_NOT_HANDLED)
 	dialog_handle_key (h, d_key);
 
     (*h->callback) (h, DLG_POST_KEY, d_key);
