@@ -2194,9 +2194,9 @@ view_display_clean (WView *view)
     tty_setcolor (NORMAL_COLOR);
     widget_erase ((Widget *) view);
     if (view->dpy_frame_size != 0) {
-	draw_double_box (view->widget.parent, view->widget.y,
-			 view->widget.x, view->widget.lines,
-			 view->widget.cols);
+	draw_box (view->widget.parent, view->widget.y,
+		    view->widget.x, view->widget.lines,
+		    view->widget.cols);
     }
 }
 

@@ -34,6 +34,4 @@ int getch (void);
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows
 
-#define SLsmg_draw_double_box(r, c, dr, dc)	SLsmg_draw_box ((r), (c), (dr), (dc))
-
 #endif				/* MC_TTY_SLANG_H */

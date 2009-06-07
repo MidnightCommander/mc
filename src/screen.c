@@ -788,9 +788,9 @@ static void
 show_dir (WPanel *panel)
 {
     set_colors (panel);
-    draw_double_box (panel->widget.parent,
-		     panel->widget.y, panel->widget.x,
-		     panel->widget.lines, panel->widget.cols);
+    draw_box (panel->widget.parent,
+		 panel->widget.y, panel->widget.x,
+		 panel->widget.lines, panel->widget.cols);
 
     if (show_mini_info && !slow_terminal) {
 	widget_move (&panel->widget, llines (panel) + 2, 0);

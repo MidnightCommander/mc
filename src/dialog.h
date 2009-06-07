@@ -145,9 +145,6 @@ struct Widget {
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
 
-/* doubled line if possible */
-void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
-
 /* Flags for create_dlg: */
 #define DLG_REVERSE	(1 << 5) /* Tab order is opposite to the add order */
 #define DLG_WANT_TAB	(1 << 4) /* Should the tab key be sent to the dialog? */

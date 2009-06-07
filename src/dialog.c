@@ -80,17 +80,6 @@ draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 	tty_draw_box (h->y + y, h->x + x, ys, xs);
 }
 
-/* draw box in window */
-void
-draw_double_box (Dlg_head *h, int y, int x, int ys, int xs)
-{
-#ifndef HAVE_SLANG
-    draw_box (h, y, x, ys, xs);
-#else
-    SLsmg_draw_double_box (h->y + y, h->x + x, ys, xs);
-#endif /* HAVE_SLANG */
-}
-
 void
 widget_erase (Widget *w)
 {
