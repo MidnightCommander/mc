@@ -231,7 +231,7 @@ toggle_panels (void)
 	numeric_keypad_mode ();
 #ifndef HAVE_SLANG
     /* With slang we don't want any of this, since there
-     * is no tty_raw_mode supported
+     * is no raw_mode supported
      */
     tty_reset_shell_mode ();
 #endif				/* !HAVE_SLANG */
@@ -292,7 +292,7 @@ toggle_panels (void)
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     update_xterm_title_path ();
-    do_refresh ();
+    repaint_screen ();
 }
 
 
