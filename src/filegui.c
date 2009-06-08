@@ -928,25 +928,21 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	ctx->umask_kill = i ^ 0777777;
     }
 
-    orig_mask = source_mask;
     if (!dest_dir || !*dest_dir) {
 	g_free (source_mask);
 	return dest_dir;
     }
 
-    if (source_easy_patterns){
-        ctx->search_handle = mc_search_new(orig_mask,-1);
-    }
-    else
-        ctx->search_handle = mc_search_new(source_mask,-1);
+    ctx->search_handle = mc_search_new(source_mask,-1);
+
     if (ctx->search_handle == NULL) {
 	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
-		    orig_mask);
-	g_free (orig_mask);
+		    source_mask);
+	g_free (source_mask);
 	goto ask_file_mask;
     }
+    g_free (source_mask);
 
-    g_free (orig_mask);
     ctx->search_handle->is_case_sentitive = TRUE;
     if (source_easy_patterns)
         ctx->search_handle->search_type = MC_SEARCH_T_GLOB;
