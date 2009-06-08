@@ -40,6 +40,14 @@
 
 /*** file scope type declarations ****************************************************************/
 
+typedef enum {
+    REPLACE_T_NO_TRANSFORM = 0,
+    REPLACE_T_UPP_TRANSFORM_CHAR = 1,
+    REPLACE_T_LOW_TRANSFORM_CHAR = 2,
+    REPLACE_T_UPP_TRANSFORM = 4,
+    REPLACE_T_LOW_TRANSFORM = 8
+} replace_transform_type_t;
+
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -72,7 +80,7 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
     while (*spec_chr) {
         spec_chr_len = strlen (*spec_chr);
         if (!strncmp (tmp_regex_str, *spec_chr, spec_chr_len)) {
-            if (!mc_search__regex_is_char_escaped (regex_str->str, tmp_regex_str - 1)) {
+            if (!mc_search_is_char_escaped (regex_str->str, tmp_regex_str - 1)) {
                 if (!strncmp ("\\x", *spec_chr, spec_chr_len)) {
                     if (*(tmp_regex_str + spec_chr_len) == '{') {
                         while ((spec_chr_len < regex_str->len - *offset)
@@ -190,11 +198,11 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
         }
 
         if (tmp->str[loop] == '['
-            && !mc_search__regex_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
+            && !mc_search_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
             while (loop < str_len && !(tmp->str[loop] == ']'
-                                       && !mc_search__regex_is_char_escaped (tmp->str,
+                                       && !mc_search_is_char_escaped (tmp->str,
                                                                              &(tmp->str[loop]) -
                                                                              1))) {
                 g_string_append_c (ret_str, tmp->str[loop]);
@@ -298,7 +306,9 @@ mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
     gsize loop;
     for (loop = 0; loop < len - 1; loop++) {
         if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
-            if (mc_search__regex_is_char_escaped (str, &str[loop - 1]))
+            if (mc_search_is_char_escaped (str, &str[loop - 1]))
+                continue;
+            if (str[loop + 1] == '0')
                 continue;
 
             count_tokens++;
@@ -306,7 +316,7 @@ mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
         }
         if (str[loop] == '$' && str[loop + 1] == '{') {
             gsize tmp_len;
-            if (mc_search__regex_is_char_escaped (str, &str[loop - 1]))
+            if (mc_search_is_char_escaped (str, &str[loop - 1]))
                 continue;
 
             for (tmp_len = 0;
@@ -321,12 +331,10 @@ mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-mc_search_regex__append_found_token_by_num (const mc_search_t * mc_search, const gchar * fnd_str,
-                                            GString * str, gsize index)
+static char *
+mc_search_regex__get_token_by_num (const mc_search_t * mc_search, gsize index)
 {
-    int fnd_start, fnd_end, fnd_len;
-    gchar *start_str;
+    int fnd_start, fnd_end;
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &fnd_start, &fnd_end);
@@ -340,16 +348,134 @@ mc_search_regex__append_found_token_by_num (const mc_search_t * mc_search, const
 #endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
-    fnd_len = fnd_end - fnd_start;
-    start_str = fnd_str + fnd_start;
+    if (fnd_end - fnd_start == 0)
+        return NULL;
 
-    if (fnd_len == 0)
-        return;
-
-    g_string_append_len (str, start_str, fnd_len);
+    return g_strndup (mc_search->regex_buffer->str + fnd_start, fnd_end - fnd_start);
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+static int
+mc_search_regex__process_replace_str (const GString * replace_str, const gsize current_pos,
+                                      gsize * skip_len, replace_transform_type_t * replace_flags)
+{
+    int ret = -1;
+    char *tmp_str;
+    const char *curr_str = &(replace_str->str[current_pos]);
+
+    if (current_pos > replace_str->len)
+        return -1;
+
+    *skip_len = 0;
+
+    if (*curr_str == '$' && *(curr_str + 1) == '{' && (*(curr_str + 2) & (char) 0xf0) == 0x30) {
+        if (mc_search_is_char_escaped (replace_str->str, curr_str - 1))
+            return -1;
+
+        for (*skip_len = 0;
+             current_pos + *skip_len + 2 < replace_str->len
+             && (*(curr_str + 2 + *skip_len) & (char) 0xf0) == 0x30; *skip_len++);
+
+        if (*(curr_str + 2 + *skip_len) != '}')
+            return -1;
+
+        tmp_str = g_strndup (curr_str + 2, *skip_len);
+        if (tmp_str == NULL)
+            return -1;
+
+        ret = atoi (tmp_str);
+        g_free (tmp_str);
+
+        *skip_len += 3;         /* ${} */
+        return ret;
+    }
+
+    if (*curr_str == '\\') {
+        if (mc_search_is_char_escaped (replace_str->str, curr_str - 1))
+            return -1;
+
+        if ((*(curr_str + 1) & (char) 0xf0) == 0x30) {
+            ret = *(curr_str + 1) - '0';
+            *skip_len = 2;      /* \\ and one digit */
+            return ret;
+        }
+        ret = -2;
+        *skip_len += 2;
+        switch (*(curr_str + 1)) {
+        case 'U':
+            *replace_flags |= REPLACE_T_UPP_TRANSFORM;
+            *replace_flags &= ~REPLACE_T_LOW_TRANSFORM;
+            break;
+        case 'u':
+            *replace_flags |= REPLACE_T_UPP_TRANSFORM_CHAR;
+            break;
+        case 'L':
+            *replace_flags |= REPLACE_T_LOW_TRANSFORM;
+            *replace_flags &= ~REPLACE_T_UPP_TRANSFORM;
+            break;
+        case 'l':
+            *replace_flags |= REPLACE_T_LOW_TRANSFORM_CHAR;
+            break;
+        case 'E':
+            *replace_flags = REPLACE_T_NO_TRANSFORM;
+            break;
+        default:
+            ret = -1;
+            break;
+        }
+    }
+    return ret;
+}
+static void
+mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize len,
+                                     replace_transform_type_t * replace_flags)
+{
+    gsize loop = 0;
+    gsize char_len;
+    char *tmp_str;
+    GString *tmp_string;
+
+    if (len == -1)
+        len = strlen (from);
+
+    if (*replace_flags == REPLACE_T_NO_TRANSFORM) {
+        g_string_append_len (dest_str, from, len);
+        return;
+    }
+    while (loop < len) {
+        tmp_str = mc_search__get_one_symbol (NULL, from + loop, len - loop, NULL);
+        char_len = strlen (tmp_str);
+        if (*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR) {
+            *replace_flags &= !REPLACE_T_UPP_TRANSFORM_CHAR;
+            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
+            g_string_append (dest_str, tmp_string->str);
+            g_string_free (tmp_string, TRUE);
+
+        } else if (*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) {
+            *replace_flags &= !REPLACE_T_LOW_TRANSFORM_CHAR;
+            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
+            g_string_append (dest_str, tmp_string->str);
+            g_string_free (tmp_string, TRUE);
+
+        } else if (*replace_flags & REPLACE_T_UPP_TRANSFORM) {
+            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
+            g_string_append (dest_str, tmp_string->str);
+            g_string_free (tmp_string, TRUE);
+
+        } else if (*replace_flags & REPLACE_T_LOW_TRANSFORM) {
+            tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
+            g_string_append (dest_str, tmp_string->str);
+            g_string_free (tmp_string, TRUE);
+
+        } else {
+            g_string_append (dest_str, tmp_str);
+        }
+        g_free (tmp_str);
+        loop += char_len;
+    }
+
+}
 
 /*** public functions ****************************************************************************/
 
@@ -499,11 +625,11 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     GString *ret;
     gchar *tmp_str;
 
-    int num_replace_tokens;
+    int num_replace_tokens, index;
     gsize loop;
-    gsize index, len;
-
+    gsize len;
     gchar *prev_str;
+    replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
     num_replace_tokens =
         mc_search_regex__get_num_replace_tokens (replace_str->str, replace_str->len);
@@ -521,32 +647,20 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     ret = g_string_new ("");
     prev_str = replace_str->str;
     for (loop = 0; loop < replace_str->len - 1; loop++) {
-        tmp_str = NULL;
+        index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);
 
-        if (replace_str->str[loop] == '\\'
-            && (replace_str->str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
-            /* \1 relace tokens */
-            if (!mc_search__regex_is_char_escaped (replace_str->str, &replace_str->str[loop - 1]))
-                tmp_str = g_strndup (&(replace_str->str[loop + 1]), 1);
-            len = 2;
-
-        } else if (replace_str->str[loop] == '$' && replace_str->str[loop + 1] == '{'
-                   && (replace_str->str[loop + 2] & (char) 0xf0) == 0x30) {
-            /* ${1} replace token */
-            for (len = 0;
-                 loop + len + 2 < replace_str->len
-                 && (replace_str->str[loop + 2 + len] & (char) 0xf0) == 0x30; len++);
-            if (replace_str->str[loop + 2 + len] == '}')
-                tmp_str = g_strndup (&(replace_str->str[loop + 2]), len);
-            len += 3;
-        }
-
-        if (tmp_str == NULL)
+        if (index == -1)
             continue;
 
-        index = (gsize) atoi (tmp_str);
-        g_free (tmp_str);
-        tmp_str = NULL;
+        if (index == -2) {
+            if (loop)
+                mc_search_regex__process_append_str (ret, prev_str,
+                                                     replace_str->str - prev_str + loop,
+                                                     &replace_flags);
+            prev_str = replace_str->str + loop + len;
+            loop += len - 1;
+            continue;
+        }
 
         if (index > mc_search->num_rezults) {
             g_string_free (ret, TRUE);
@@ -554,15 +668,26 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
             mc_search->error_str = g_strdup_printf (STR_E_RPL_INVALID_TOKEN, index);
             return NULL;
         }
-        if (loop)
-            g_string_append_len (ret, prev_str, replace_str->str - prev_str + loop);
 
-        mc_search_regex__append_found_token_by_num (mc_search,
-                                                    mc_search->regex_buffer->str, ret, index);
+
+
+        tmp_str = mc_search_regex__get_token_by_num (mc_search, index);
+
+        if (tmp_str == NULL)
+            continue;
+
+        if (loop)
+            mc_search_regex__process_append_str (ret, prev_str, replace_str->str - prev_str + loop,
+                                                 &replace_flags);
         prev_str = replace_str->str + loop + len;
+
+        mc_search_regex__process_append_str (ret, tmp_str, -1, &replace_flags);
+        g_free (tmp_str);
+        loop += len - 1;
     }
-    g_string_append_len (ret, prev_str, replace_str->str - prev_str + replace_str->len);
+    mc_search_regex__process_append_str (ret, prev_str,
+                                         replace_str->str - prev_str + replace_str->len,
+                                         &replace_flags);
 
     return ret;
-    //#endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 }

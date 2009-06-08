@@ -70,17 +70,17 @@ mc_search__hex_translate_to_regex (gchar * str, gsize * len)
         }
 
         if (*(tmp_str + loop) == '"') {
-    	    loop++;
-	    gsize loop2=0;
-	    while (loop + loop2 < *len){
-		if (*(tmp_str + loop + loop2) == '"' &&
-		    !mc_search__regex_is_char_escaped(tmp_str, tmp_str + loop + loop2 - 1))
-		    break;
-		loop2++;
-	    }
-	    g_string_append_len(buff, tmp_str + loop, loop2 - 1);
-	    loop+=loop2;
-	    continue;
+            loop++;
+            gsize loop2 = 0;
+            while (loop + loop2 < *len) {
+                if (*(tmp_str + loop + loop2) == '"' &&
+                    !mc_search_is_char_escaped (tmp_str, tmp_str + loop + loop2 - 1))
+                    break;
+                loop2++;
+            }
+            g_string_append_len (buff, tmp_str + loop, loop2 - 1);
+            loop += loop2;
+            continue;
         }
         loop++;
     }
@@ -118,7 +118,8 @@ mc_search__run_hex (mc_search_t * mc_search, const void *user_data,
 GString *
 mc_search_hex_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 {
-    return mc_search_regex_prepare_replace_str (mc_search, replace_str);
+    (void) mc_search;
+    return g_string_new_len (replace_str->str, replace_str->len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
