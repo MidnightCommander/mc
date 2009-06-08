@@ -145,136 +145,18 @@ static FileProgressStatus files_error (const char *format, const char *file1,
 enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
 	4, LOW_SECT = 8 };
 
-static int
-convert_case (const char *text, enum CaseConvs *conversion,
-             char **out, size_t *remain)
-{
-    size_t left;
-    
-    if (*conversion & UP_CHAR) {
-	*conversion &= ~UP_CHAR;
-	return str_toupper (text, out, remain);
-    } else if (*conversion & LOW_CHAR) {
-	*conversion &= ~LOW_CHAR;
-	return str_tolower (text, out, remain);
-    } else if (*conversion & UP_SECT) {
-	return str_toupper (text, out, remain);
-    } else if (*conversion & LOW_SECT) {
-	return str_tolower (text, out, remain);
-    } else {
-        left = str_cget_next_char (text) - text;
-        if (left >= *remain) return 0;
-        memcpy (*out, text, left);
-        (*out)+= left;
-        (*remain)-= left;
-	return 1;
-    }
-}
-
 static FileProgressStatus transform_error = FILE_CONT;
 
-static const char *
-do_transform_source (FileOpContext *ctx, const char *source)
-{
-    size_t j=0, len;
-    const char *fnsource = x_basename (source);
-    char *fnsource_fixed = g_strdup (fnsource);
-    int next_reg;
-    enum CaseConvs case_conv = NO_CONV;
-    static char fntarget[MC_MAXPATHLEN];
-    const char *dm;
-    const char *fn;
-    char *actual;
-    size_t remain;
-
-
-    str_fix_string (fnsource_fixed);
-
-    len = strlen (fnsource_fixed);
-
-    if ( !( mc_search_run(ctx->search_handle, fnsource_fixed, 0, len, &j) && j == len) ){
-	transform_error = FILE_SKIP;
-	return NULL;
-    }
-
-    g_free (fnsource_fixed);
-
-    actual = fntarget;
-    remain = sizeof (fntarget);
-    dm = ctx->dest_mask;
-    for (next_reg = 1; dm[0] != '\0' && remain > 1 ; str_cnext_char (&dm)) {
-	switch (dm[0]) {
-	case '\\':
-            str_cnext_char (&dm);
-	    if (!str_isdigit (dm)) {
-		/* Backslash followed by non-digit */
-		switch (dm[0]) {
-		case 'U':
-		    case_conv |= UP_SECT;
-		    case_conv &= ~LOW_SECT;
-		    break;
-		case 'u':
-		    case_conv |= UP_CHAR;
-		    break;
-		case 'L':
-		    case_conv |= LOW_SECT;
-		    case_conv &= ~UP_SECT;
-		    break;
-		case 'l':
-		    case_conv |= LOW_CHAR;
-		    break;
-		case 'E':
-		    case_conv = NO_CONV;
-		    break;
-		default:
-		    /* Backslash as quote mark */
-                    convert_case (dm, &case_conv, &actual, &remain);
-		}
-		break;
-	    } else {
-		/* Backslash followed by digit */
-		next_reg = dm[0] - '0';
-		/* Fall through */
-	    }
-
-	case '*':
-	    if (next_reg < 0 || next_reg >= MC_SEARCH__NUM_REPLACE_ARGS 
-		|| mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg) < 0) {
-		message (D_ERROR, MSG_ERROR, _(" Invalid target mask "));
-		transform_error = FILE_ABORT;
-		return NULL;
-	    }
-	    for (fn = fnsource + mc_search_getstart_rezult_by_num(ctx->search_handle, next_reg);
-                 fn < fnsource + mc_search_getend_rezult_by_num(ctx->search_handle, next_reg) && remain > 1; ) {
-		
-                if (str_is_valid_char (fn, -1) == 1) {
-		convert_case (fn, &case_conv, &actual, &remain);
-                    str_cnext_char (&fn);
-                } else {
-                    actual[0] = fn[0];
-                    actual++;
-                    remain--;
-                    fn++;
-                }
-            }
-	    next_reg++;
-	    break;
-
-	default:
-            convert_case (dm, &case_conv, &actual, &remain);
-	    break;
-	}
-    }
-    actual[0] = '\0';
-    return fntarget;
-}
-
-static const char *
+static char *
 transform_source (FileOpContext *ctx, const char *source)
 {
     char *s = g_strdup (source);
     char *q;
-    const char *p;
+    char *ret;
+    GString *destination_mask;
+    const char *fnsource = x_basename (s);
+    char *fnsource_fixed = g_strdup (fnsource);
+    size_t j=0, len;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -282,9 +164,21 @@ transform_source (FileOpContext *ctx, const char *source)
 	if (*q == '\n')
 	    *q = ' ';
     }
-    p = do_transform_source (ctx, s);
+
+    str_fix_string (fnsource_fixed);
+    len = strlen (fnsource_fixed);
+
+    if ( !( mc_search_run(ctx->search_handle, fnsource_fixed, 0, len, &j) && j == len) ){
+	transform_error = FILE_SKIP;
+	return NULL;
+    }
+    g_free (fnsource_fixed);
+
+    destination_mask = g_string_new(ctx->dest_mask);
+    ret = g_string_free(mc_search_prepare_replace_str (ctx->search_handle, destination_mask), FALSE);
+    g_string_free(destination_mask, TRUE);
     g_free (s);
-    return p;
+    return ret;
 }
 
 static void
@@ -1849,7 +1743,7 @@ panel_operate (void *source_panel, FileOperation operation,
 #endif				/* !WITH_FULL_PATHS */
     char *source = NULL;
     char *dest = NULL;
-    const char *temp = NULL;
+    char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     int single_entry = (get_current_type () == view_tree)
 	|| (panel->marked <= 1) || force_single;
@@ -2015,8 +1909,8 @@ panel_operate (void *source_panel, FileOperation operation,
 	    } else {
 		char *temp2 = concat_dir_and_file (dest, temp);
 		g_free (dest);
+		g_free (temp);
 		dest = temp2;
-		temp = NULL;
 		
 		switch (operation) {
 		case OP_COPY:
@@ -2120,6 +2014,7 @@ panel_operate (void *source_panel, FileOperation operation,
 		    char *temp2 = concat_dir_and_file (dest, temp);
 		    char *temp3;
 
+		    g_free(temp);
 		    temp3 = source_with_path;
 		    source_with_path = shell_unescape(source_with_path);
 		    g_free(temp3);

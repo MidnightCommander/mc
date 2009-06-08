@@ -935,13 +935,23 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
 
     if (source_easy_patterns){
-        source_mask = g_strdup_printf("{%s}",orig_mask);
+        int is_multiple_tokens=0;
+        char *tmp;
+        for (tmp=orig_mask;*tmp;tmp++){
+            if (( *tmp == '*' || *tmp == '?') && ! mc_search_is_char_escaped (orig_mask, tmp)){
+                is_multiple_tokens++;
+            }
+        }
+        if (is_multiple_tokens>1)
+            source_mask = g_strdup(orig_mask);
+        else
+            source_mask = g_strdup_printf("{%s}",orig_mask);
+
         ctx->search_handle = mc_search_new(source_mask,-1);
         g_free(source_mask);
     }
     else
         ctx->search_handle = mc_search_new(source_mask,-1);
-
     if (ctx->search_handle == NULL) {
 	message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"),
 		    orig_mask);
@@ -974,7 +984,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 	    && ((!only_one && !is_wildcarded (ctx->dest_mask))
 		|| (only_one && !mc_stat (dest_dir, &buf)
 		    && S_ISDIR (buf.st_mode)))))
-	ctx->dest_mask = g_strdup ("*");
+	ctx->dest_mask = g_strdup ("\\0");
     else {
 	ctx->dest_mask = g_strdup (ctx->dest_mask);
 	*orig_mask = 0;
