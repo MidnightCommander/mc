@@ -1373,10 +1373,10 @@ setup_pre (void)
 #define eight_bit_clean (1)
 #endif				/* !HAVE_CHARSET */
 
-#ifndef HAVE_SLANG
-    meta (stdscr, eight_bit_clean);
+#ifdef HAVE_SLANG
+    tty_display_8bit (full_eight_bits != 0);
 #else
-    SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+    tty_display_8bit (eight_bit_clean != 0);
 #endif
 }
 

@@ -474,6 +474,12 @@ tty_set_alt_charset (gboolean alt_charset)
 }
 
 void
+tty_display_8bit (gboolean what)
+{
+    SLsmg_Display_Eight_Bit = what ? 128 : 160;
+}
+
+void
 tty_print_char (int c)
 {
     SLsmg_write_char ((SLwchar_Type) ((unsigned int) c));

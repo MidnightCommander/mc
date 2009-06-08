@@ -57,6 +57,7 @@ extern void tty_getyx(int *py, int *px);
 
 extern void tty_set_alt_charset (gboolean alt_charset);
 
+extern void tty_display_8bit (gboolean what);
 extern void tty_print_char(int c);
 extern void tty_print_alt_char(int c);
 extern void tty_print_string(const char *s);

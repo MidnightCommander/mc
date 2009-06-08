@@ -233,6 +233,12 @@ tty_set_alt_charset (gboolean alt_charset)
 }
 
 void
+tty_display_8bit (gboolean what)
+{
+    meta (stdscr, (int) what);
+}
+
+void
 tty_print_char (int c)
 {
     addch (c);

@@ -548,10 +548,10 @@ display_bits_box (void)
 
     eight_bit_clean = new_mode < 3;
     full_eight_bits = new_mode < 2;
-#ifndef HAVE_SLANG
-    meta (stdscr, eight_bit_clean);
+#ifdef HAVE_SLANG
+    tty_display_8bit (full_eight_bits != 0);
 #else
-    SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
+    tty_display_8bit (eight_bit_clean != 0);
 #endif
     use_8th_bit_as_meta = !new_meta;
 }
@@ -649,11 +649,10 @@ display_bits_box (void)
 	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg)
 	    message (D_ERROR, MSG_ERROR, "%s", errmsg);
-#ifndef HAVE_SLANG
-	meta (stdscr, display_codepage != 0);
+#ifdef HAVE_SLANG
+	tty_display_8bit (display_codepage != 0 && display_codepage != 1);
 #else
-	SLsmg_Display_Eight_Bit = (display_codepage != 0
-				   && display_codepage != 1) ? 128 : 160;
+	tty_display_8bit (display_codepage != 0);
 #endif
 	use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
     }
