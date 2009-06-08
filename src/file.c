@@ -152,8 +152,7 @@ transform_source (FileOpContext *ctx, const char *source)
 {
     char *s = g_strdup (source);
     char *q;
-    char *ret;
-    GString *destination_mask;
+    GString *destination_mask, *temp_string;
     const char *fnsource = x_basename (s);
     char *fnsource_fixed = g_strdup (fnsource);
     size_t j=0, len;
@@ -175,10 +174,12 @@ transform_source (FileOpContext *ctx, const char *source)
     g_free (fnsource_fixed);
 
     destination_mask = g_string_new(ctx->dest_mask);
-    ret = g_string_free(mc_search_prepare_replace_str (ctx->search_handle, destination_mask), FALSE);
+    temp_string = mc_search_prepare_replace_str (ctx->search_handle, destination_mask);
     g_string_free(destination_mask, TRUE);
     g_free (s);
-    return ret;
+    if (temp_string == NULL)
+        return NULL;
+    return g_string_free(temp_string, FALSE);
 }
 
 static void

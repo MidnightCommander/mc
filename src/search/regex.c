@@ -197,14 +197,12 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
             continue;
         }
 
-        if (tmp->str[loop] == '['
-            && !mc_search_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
+        if (tmp->str[loop] == '[' && !mc_search_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
             while (loop < str_len && !(tmp->str[loop] == ']'
                                        && !mc_search_is_char_escaped (tmp->str,
-                                                                             &(tmp->str[loop]) -
-                                                                             1))) {
+                                                                      &(tmp->str[loop]) - 1))) {
                 g_string_append_c (ret_str, tmp->str[loop]);
                 loop++;
 
@@ -300,33 +298,38 @@ mc_search__regex_found_cond (mc_search_t * mc_search, GString * search_str)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-mc_search_regex__get_num_replace_tokens (const gchar * str, gsize len)
+mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
 {
-    int count_tokens = 0;
+    int max_token = 0;
     gsize loop;
     for (loop = 0; loop < len - 1; loop++) {
         if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
             if (mc_search_is_char_escaped (str, &str[loop - 1]))
                 continue;
-            if (str[loop + 1] == '0')
-                continue;
-
-            count_tokens++;
+            if (max_token < str[loop + 1] - '0')
+                max_token = str[loop + 1] - '0';
             continue;
         }
         if (str[loop] == '$' && str[loop + 1] == '{') {
             gsize tmp_len;
+            char *tmp_str;
+            int tmp_token;
             if (mc_search_is_char_escaped (str, &str[loop - 1]))
                 continue;
 
             for (tmp_len = 0;
                  loop + tmp_len + 2 < len && (str[loop + 2 + tmp_len] & (char) 0xf0) == 0x30;
                  tmp_len++);
-            if (str[loop + 2 + tmp_len] == '}')
-                count_tokens++;
+            if (str[loop + 2 + tmp_len] == '}') {
+                tmp_str = g_strndup (loop + 2, tmp_len);
+                tmp_token = atoi (tmp_str);
+                if (max_token < tmp_token)
+                    max_token = tmp_token;
+                g_free (tmp_str);
+            }
         }
     }
-    return count_tokens;
+    return max_token;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -632,7 +635,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
     num_replace_tokens =
-        mc_search_regex__get_num_replace_tokens (replace_str->str, replace_str->len);
+        mc_search_regex__get_max_num_of_replace_tokens (replace_str->str, replace_str->len);
 
     if (mc_search->num_rezults < 0)
         return g_string_new_len (replace_str->str, replace_str->len);
