@@ -935,20 +935,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
 
     if (source_easy_patterns){
-        int is_multiple_tokens=0;
-        char *tmp;
-        for (tmp=orig_mask;*tmp;tmp++){
-            if (( *tmp == '*' || *tmp == '?') && ! mc_search_is_char_escaped (orig_mask, tmp)){
-                is_multiple_tokens++;
-            }
-        }
-        if (is_multiple_tokens>1)
-            source_mask = g_strdup(orig_mask);
-        else
-            source_mask = g_strdup_printf("{%s}",orig_mask);
-
-        ctx->search_handle = mc_search_new(source_mask,-1);
-        g_free(source_mask);
+        ctx->search_handle = mc_search_new(orig_mask,-1);
     }
     else
         ctx->search_handle = mc_search_new(source_mask,-1);
