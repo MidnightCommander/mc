@@ -21,6 +21,10 @@
 
 /* {{{ Input }}} */
 
+extern void tty_init_slang (void);
+extern void tty_init_curses (void);
+extern void tty_shutdown (void);
+
 extern void tty_start_interrupt_key(void);
 extern void tty_enable_interrupt_key(void);
 extern void tty_disable_interrupt_key(void);
@@ -38,8 +42,6 @@ extern int tty_flush_input (void);
 extern void tty_keypad (gboolean set);
 extern void tty_nodelay (gboolean set);
 extern int tty_baudrate (void);
-
-extern void tty_shutdown (void);
 
 /* {{{ Output }}} */
 

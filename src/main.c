@@ -2291,7 +2291,7 @@ main (int argc, char *argv[])
 
     handle_args (argc, argv);
 
-    /* NOTE: This has to be called before init_slang or whatever routine
+    /* NOTE: This has to be called before tty_init_slang or whatever routine
        calls any define_sequence */
     init_key ();
 
@@ -2315,19 +2315,11 @@ main (int argc, char *argv[])
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
-#ifdef HAVE_SLANG
-    init_slang ();
-#endif
-
-    start_interrupt_key ();
-
-    /* NOTE: This call has to be after slang_init. It's the small part from
-       the previous init_key which had to be moved after the call of slang_init */
-    init_key_input_fd ();
+    tty_init_slang ();
 
     load_setup ();
 
-    init_curses ();
+    tty_init_curses ();
 
     tty_init_colors ();
 
@@ -2346,7 +2338,6 @@ main (int argc, char *argv[])
     init_xterm_support ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
     if (use_subshell)

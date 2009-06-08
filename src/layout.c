@@ -722,7 +722,7 @@ change_screen_size (void)
      * more than one curses implementation does this); it is guaranteed to work
      * only with slang.
      */
-    init_curses ();
+    tty_init_curses ();
 #endif
     setup_panels ();
 

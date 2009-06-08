@@ -61,7 +61,7 @@ static const struct {
 /*** public functions **************************************************/
 
 void
-init_curses (void)
+tty_init_curses (void)
 {
     initscr ();
 
@@ -89,6 +89,11 @@ init_curses (void)
 	for (i = 0; acs_approx[i].acscode != 0; i++)
 	    acs_map[acs_approx[i].acscode] = acs_approx[i].character;
     }
+}
+
+void
+tty_init_slang (void)
+{
 }
 
 void

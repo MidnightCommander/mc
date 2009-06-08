@@ -217,7 +217,7 @@ load_terminfo_keys (void)
 /*** public functions **************************************************/
 
 void
-init_curses (void)
+tty_init_curses (void)
 {
     SLsmg_init_smg ();
     do_enter_ca_mode ();
@@ -226,7 +226,7 @@ init_curses (void)
 }
 
 void
-init_slang (void)
+tty_init_slang (void)
 {
     SLtt_get_terminfo ();
 #if SLANG_VERSION >= 20000
@@ -275,6 +275,9 @@ init_slang (void)
     tty_reset_prog_mode ();
     load_terminfo_keys ();
     SLtt_Blink_Mode = 0;
+
+    /* It's the small part from the previous init_key() */
+    init_key_input_fd ();
 }
 
 void

@@ -26,8 +26,6 @@ enum {
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
 
-void init_slang (void);
-void init_curses (void);
 int getch (void);
 
 #define printw		SLsmg_printf
