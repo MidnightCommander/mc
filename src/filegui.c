@@ -869,10 +869,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     QuickDialog Quick_input;
 
     g_return_val_if_fail (ctx != NULL, NULL);
-#if 0
-    message (D_ERROR, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
-		def_text);
-#endif
+
     fmd_init_i18n (FALSE);
 
     /* Set up the result pointers */
