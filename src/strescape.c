@@ -33,15 +33,9 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define shell_escape_toesc(x)	\
-    (((x)==' ')||((x)=='!')||((x)=='#')||((x)=='$')||((x)=='%')||	\
-     ((x)=='(')||((x)==')')||((x)=='\'')||((x)=='&')||((x)=='~')||	\
-     ((x)=='{')||((x)=='}')||((x)=='[')||((x)==']')||((x)=='`')||	\
-     ((x)=='?')||((x)=='|')||((x)=='<')||((x)=='>')||((x)==';')||	\
-     ((x)=='*')||((x)=='\\')||((x)=='"'))
-
-#define shell_escape_nottoesc(x)	\
-    (((x)!=0) && (!shell_escape_toesc((x))))
+#define ESCAPE_SHELL_CHARS " !#$%()&~{}[]`?|<>;*\\\""
+#define ESCAPE_REGEX_CHARS "^!#$%()&~{}[]`?|<>;*.\\"
+#define ESCAPE_GLOB_CHARS  "${}*."
 
 /*** file scope type declarations ****************************************************************/
 
@@ -50,6 +44,111 @@
 /*** file scope functions ************************************************************************/
 
 /*** public functions ****************************************************************************/
+
+char *
+strutils_escape (const char *src, int src_len, const char *escaped_chars,
+                 gboolean escape_non_printable)
+{
+    GString *ret;
+    gsize loop;
+    /* do NOT break allocation semantics */
+    if (src == NULL)
+        return NULL;
+
+    if (*src == '\0')
+        return strdup ("");
+
+    ret = g_string_new ("");
+
+    if (src_len == -1)
+        src_len = strlen (src);
+
+    for (loop = 0; loop < src_len; loop++) {
+
+        if (escape_non_printable) {
+            switch (src[loop]) {
+            case '\n':
+                g_string_append (ret, "\\n");
+                continue;
+                break;
+            case '\t':
+                g_string_append (ret, "\\t");
+                continue;
+                break;
+            case '\b':
+                g_string_append (ret, "\\b");
+                continue;
+                break;
+            case '\0':
+                g_string_append (ret, "\\0");
+                continue;
+                break;
+            }
+        }
+
+        if (strchr (escaped_chars, (int) src[loop]))
+            g_string_append_c (ret, '\\');
+
+        g_string_append_c (ret, src[loop]);
+    }
+    return g_string_free (ret, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+char *
+strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
+                 gboolean unescape_non_printable)
+{
+    GString *ret;
+    gsize loop;
+
+    if (src == NULL)
+        return NULL;
+
+    if (*src == '\0')
+        return strdup ("");
+
+    ret = g_string_new ("");
+
+    if (src_len == -1)
+        src_len = strlen (src);
+
+    for (loop = 0; loop < src_len-1; loop++) {
+        if (src[loop] != '\\'){
+            g_string_append_c (ret, src[loop]);
+            continue;
+        }
+        loop++;
+        if (unescape_non_printable) {
+            switch (src[loop]) {
+            case 'n':
+                g_string_append_c (ret, '\n');
+                continue;
+                break;
+            case 't':
+                g_string_append_c (ret, '\t');
+                continue;
+                break;
+            case 'b':
+                g_string_append_c (ret, '\b');
+                continue;
+                break;
+            case '0':
+                g_string_append (ret, '\0');
+                continue;
+                break;
+            }
+        }
+        if (strchr (unescaped_chars, (int) src[loop]) == NULL)
+            g_string_append_c (ret, '\\');
+
+        g_string_append_c (ret, src[loop]);
+    }
+    g_string_append_c (ret, src[loop]);
+
+    return g_string_free (ret, FALSE);
+}
+/* --------------------------------------------------------------------------------------------- */
 
 /** To be compatible with the general posix command lines we have to escape
  strings for the command line
@@ -64,38 +163,23 @@
 char *
 strutils_shell_escape (const char *src)
 {
-    GString *str;
-    char *result = NULL;
+    return strutils_escape (src, -1, ESCAPE_SHELL_CHARS, FALSE);
+}
 
-    /* do NOT break allocation semantics */
-    if (!src)
-        return NULL;
+/* --------------------------------------------------------------------------------------------- */
 
-    if (*src == '\0')
-        return strdup ("");
+char *
+strutils_glob_escape (const char *src)
+{
+    return strutils_escape (src, -1, ESCAPE_GLOB_CHARS, TRUE);
+}
 
-    str = g_string_new ("");
+/* --------------------------------------------------------------------------------------------- */
 
-    /* look for the first char to escape */
-    while (1) {
-        char c;
-        /* copy over all chars not to escape */
-        while ((c = (*src)) && shell_escape_nottoesc (c)) {
-            g_string_append_c (str, c);
-            src++;
-        }
-
-        /* at this point we either have an \0 or an char to escape */
-        if (!c) {
-            result = str->str;
-            g_string_free (str, FALSE);
-            return result;
-        }
-
-        g_string_append_c (str, '\\');
-        g_string_append_c (str, c);
-        src++;
-    }
+char *
+strutils_regex_escape (const char *src)
+{
+    return strutils_escape (src, -1, ESCAPE_REGEX_CHARS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -112,78 +196,22 @@ strutils_shell_escape (const char *src)
 char *
 strutils_shell_unescape (const char *text)
 {
-    GString *str;
-    char *result = NULL;
-    const char *readptr;
-    char c;
+    return strutils_unescape (text, -1, ESCAPE_SHELL_CHARS, TRUE);
+}
 
-    if (!text)
-        return NULL;
+/* --------------------------------------------------------------------------------------------- */
 
+char *
+strutils_glob_unescape (const char *text)
+{
+    return strutils_unescape (text, -1, ESCAPE_GLOB_CHARS, TRUE);
+}
 
-    /* look for the first \ - that's quick skipover if there's nothing to escape */
-    readptr = text;
-    while ((*readptr) && ((*readptr) != '\\'))
-        readptr++;
-    if (!(*readptr)) {
-        result = g_strdup (text);
-        return result;
-    }
-    str = g_string_new_len (text, readptr - text);
-
-    /* if we're here, we're standing on the first '\' */
-    while ((c = *readptr)) {
-        if (c == '\\') {
-            readptr++;
-            switch ((c = *readptr)) {
-            case '\0':         /* end of string! malformed escape string */
-                goto out;
-
-            case 'n':
-                g_string_append_c (str, '\n');
-                break;
-            case 'r':
-                g_string_append_c (str, '\r');
-                break;
-            case 't':
-                g_string_append_c (str, '\t');
-                break;
-
-            case ' ':
-            case '\\':
-            case '#':
-            case '$':
-            case '%':
-            case '(':
-            case ')':
-            case '[':
-            case ']':
-            case '{':
-            case '}':
-            case '<':
-            case '>':
-            case '!':
-            case '*':
-            case '?':
-            case '~':
-            case '`':
-            case '"':
-            case ';':
-            default:
-                g_string_append_c (str, c);
-                break;
-            }
-        } else {                /* got a normal character */
-
-            g_string_append_c (str, c);
-        }
-        readptr++;
-    }
-  out:
-
-    result = str->str;
-    g_string_free (str, FALSE);
-    return result;
+/* --------------------------------------------------------------------------------------------- */
+char *
+strutils_regex_unescape (const char *text)
+{
+    return strutils_unescape (text, -1, ESCAPE_REGEX_CHARS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
