@@ -32,6 +32,7 @@
 #include "../src/search/search.h"
 #include "../src/search/internal.h"
 #include "../src/strutil.h"
+#include "../src/strescape.h"
 #include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/
@@ -80,7 +81,7 @@ mc_search__regex_str_append_if_special (GString * copy_to, GString * regex_str, 
     while (*spec_chr) {
         spec_chr_len = strlen (*spec_chr);
         if (!strncmp (tmp_regex_str, *spec_chr, spec_chr_len)) {
-            if (!mc_search_is_char_escaped (regex_str->str, tmp_regex_str - 1)) {
+            if (!strutils_is_char_escaped (regex_str->str, tmp_regex_str)) {
                 if (!strncmp ("\\x", *spec_chr, spec_chr_len)) {
                     if (*(tmp_regex_str + spec_chr_len) == '{') {
                         while ((spec_chr_len < regex_str->len - *offset)
@@ -197,12 +198,12 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
             continue;
         }
 
-        if (tmp->str[loop] == '[' && !mc_search_is_char_escaped (tmp->str, &(tmp->str[loop]) - 1)) {
+        if (tmp->str[loop] == '[' && !strutils_is_char_escaped (tmp->str, &(tmp->str[loop]))) {
             mc_search__cond_struct_new_regex_accum_append (charset, ret_str, accumulator);
 
             while (loop < str_len && !(tmp->str[loop] == ']'
-                                       && !mc_search_is_char_escaped (tmp->str,
-                                                                      &(tmp->str[loop]) - 1))) {
+                                       && !strutils_is_char_escaped (tmp->str,
+                                                                      &(tmp->str[loop])))) {
                 g_string_append_c (ret_str, tmp->str[loop]);
                 loop++;
 
@@ -304,7 +305,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
     gsize loop;
     for (loop = 0; loop < len - 1; loop++) {
         if (str[loop] == '\\' && (str[loop + 1] & (char) 0xf0) == 0x30 /* 0-9 */ ) {
-            if (mc_search_is_char_escaped (str, &str[loop - 1]))
+            if (strutils_is_char_escaped (str, &str[loop]))
                 continue;
             if (max_token < str[loop + 1] - '0')
                 max_token = str[loop + 1] - '0';
@@ -314,7 +315,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
             gsize tmp_len;
             char *tmp_str;
             int tmp_token;
-            if (mc_search_is_char_escaped (str, &str[loop - 1]))
+            if (strutils_is_char_escaped (str, &str[loop]))
                 continue;
 
             for (tmp_len = 0;
@@ -373,7 +374,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     *skip_len = 0;
 
     if (*curr_str == '$' && *(curr_str + 1) == '{' && (*(curr_str + 2) & (char) 0xf0) == 0x30) {
-        if (mc_search_is_char_escaped (replace_str->str, curr_str - 1))
+        if (strutils_is_char_escaped (replace_str->str, curr_str ))
             return -1;
 
         for (*skip_len = 0;
@@ -395,7 +396,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     }
 
     if (*curr_str == '\\') {
-        if (mc_search_is_char_escaped (replace_str->str, curr_str - 1))
+        if (strutils_is_char_escaped (replace_str->str, curr_str ))
             return -1;
 
         if ((*(curr_str + 1) & (char) 0xf0) == 0x30) {

@@ -240,19 +240,6 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-mc_search_is_char_escaped (const char *start, const char *current)
-{
-    int num_esc = 0;
-    while (current >= start && *current == '\\' ) {
-        num_esc++;
-        current--;
-    }
-    return (gboolean) num_esc % 2;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 gchar **
 mc_search_get_types_strings_array (void)
 {
@@ -273,3 +260,5 @@ mc_search_get_types_strings_array (void)
     g_string_free (tmp, TRUE);
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */

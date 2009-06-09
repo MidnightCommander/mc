@@ -33,6 +33,7 @@
 #include "../src/search/search.h"
 #include "../src/search/internal.h"
 #include "../src/strutil.h"
+#include "../src/strescape.h"
 #include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/
@@ -74,7 +75,7 @@ mc_search__hex_translate_to_regex (gchar * str, gsize * len)
             gsize loop2 = 0;
             while (loop + loop2 < *len) {
                 if (*(tmp_str + loop + loop2) == '"' &&
-                    !mc_search_is_char_escaped (tmp_str, tmp_str + loop + loop2 - 1))
+                    !strutils_is_char_escaped (tmp_str, tmp_str + loop + loop2 ))
                     break;
                 loop2++;
             }

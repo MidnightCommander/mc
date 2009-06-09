@@ -194,13 +194,19 @@ out:
  otherwise return FALSE
  */
 gboolean
-shell_is_char_escaped ( const char *in )
+strutils_is_char_escaped ( const char *start, const char *current )
 {
-	if (in == NULL || !*in || in[0] != '\\')
-		return FALSE;
-	if (shell_escape_toesc(in[1]))
-		return TRUE;
-	return FALSE;
+    int num_esc = 0;
+
+    if (start == NULL || current == NULL || current <= start)
+        return FALSE;
+
+    current--;
+    while (current >= start && *current == '\\' ) {
+        num_esc++;
+        current--;
+    }
+    return (gboolean) num_esc % 2;
 }
 
 
