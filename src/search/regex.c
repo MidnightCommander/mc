@@ -203,7 +203,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const char *str, g
 
             while (loop < str_len && !(tmp->str[loop] == ']'
                                        && !strutils_is_char_escaped (tmp->str,
-                                                                      &(tmp->str[loop])))) {
+                                                                     &(tmp->str[loop])))) {
                 g_string_append_c (ret_str, tmp->str[loop]);
                 loop++;
 
@@ -374,7 +374,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     *skip_len = 0;
 
     if (*curr_str == '$' && *(curr_str + 1) == '{' && (*(curr_str + 2) & (char) 0xf0) == 0x30) {
-        if (strutils_is_char_escaped (replace_str->str, curr_str ))
+        if (strutils_is_char_escaped (replace_str->str, curr_str))
             return -1;
 
         for (*skip_len = 0;
@@ -396,7 +396,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     }
 
     if (*curr_str == '\\') {
-        if (strutils_is_char_escaped (replace_str->str, curr_str ))
+        if (strutils_is_char_escaped (replace_str->str, curr_str))
             return -1;
 
         if ((*(curr_str + 1) & (char) 0xf0) == 0x30) {

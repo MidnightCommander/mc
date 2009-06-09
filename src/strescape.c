@@ -61,44 +61,43 @@
  return escaped string (which needs to be freed later)
         or NULL when NULL string is passed.
  */
-char*
-shell_escape(const char* src)
+char *
+shell_escape (const char *src)
 {
-	GString *str;
-	char *result = NULL;
+    GString *str;
+    char *result = NULL;
 
-	/* do NOT break allocation semantics */
-	if (!src)
-		return NULL;
+    /* do NOT break allocation semantics */
+    if (!src)
+        return NULL;
 
-	if (*src == '\0')
-		return strdup("");
+    if (*src == '\0')
+        return strdup ("");
 
-	str = g_string_new("");
-	
-	/* look for the first char to escape */
-	while (1)
-	{
-		char c;
-		/* copy over all chars not to escape */
-		while ((c=(*src)) && shell_escape_nottoesc(c))
-		{
-			g_string_append_c(str,c);
-			src++;
-		}
+    str = g_string_new ("");
 
-		/* at this point we either have an \0 or an char to escape */
-		if (!c) {
-			result = str->str;
-			g_string_free(str,FALSE);
-			return result;
-		}
+    /* look for the first char to escape */
+    while (1) {
+        char c;
+        /* copy over all chars not to escape */
+        while ((c = (*src)) && shell_escape_nottoesc (c)) {
+            g_string_append_c (str, c);
+            src++;
+        }
 
-		g_string_append_c(str,'\\');
-		g_string_append_c(str,c);
-		src++;
-	}
+        /* at this point we either have an \0 or an char to escape */
+        if (!c) {
+            result = str->str;
+            g_string_free (str, FALSE);
+            return result;
+        }
+
+        g_string_append_c (str, '\\');
+        g_string_append_c (str, c);
+        src++;
+    }
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** Unescape paths or other strings for e.g the internal cd
@@ -110,78 +109,83 @@ shell_escape(const char* src)
  \returns
  return unescaped string (which needs to be freed)
  */
-char*
-shell_unescape(const char* text)
+char *
+shell_unescape (const char *text)
 {
-	GString *str;
-	char *result = NULL;
-	const char* readptr;
-	char c;
-	
-	if (!text)
-		return NULL;
+    GString *str;
+    char *result = NULL;
+    const char *readptr;
+    char c;
+
+    if (!text)
+        return NULL;
 
 
-	/* look for the first \ - that's quick skipover if there's nothing to escape */
-	readptr = text;
-	while ((*readptr) && ((*readptr)!='\\'))	readptr++;
-	if (!(*readptr)) {
-		result = g_strdup(text);
-		return result;
-	}
-	str = g_string_new_len(text, readptr - text);
+    /* look for the first \ - that's quick skipover if there's nothing to escape */
+    readptr = text;
+    while ((*readptr) && ((*readptr) != '\\'))
+        readptr++;
+    if (!(*readptr)) {
+        result = g_strdup (text);
+        return result;
+    }
+    str = g_string_new_len (text, readptr - text);
 
-	/* if we're here, we're standing on the first '\' */
-	while ((c = *readptr))
-	{
-		if (c=='\\')
-		{
-			readptr++;
-			switch ((c = *readptr))
-			{
-				case '\0': /* end of string! malformed escape string */
-					goto out;
+    /* if we're here, we're standing on the first '\' */
+    while ((c = *readptr)) {
+        if (c == '\\') {
+            readptr++;
+            switch ((c = *readptr)) {
+            case '\0':         /* end of string! malformed escape string */
+                goto out;
 
-				case 'n':	g_string_append_c(str,'\n');	break;
-				case 'r':	g_string_append_c(str,'\r');	break;
-				case 't':	g_string_append_c(str,'\t');	break;
+            case 'n':
+                g_string_append_c (str, '\n');
+                break;
+            case 'r':
+                g_string_append_c (str, '\r');
+                break;
+            case 't':
+                g_string_append_c (str, '\t');
+                break;
 
-				case ' ':
-				case '\\':
-				case '#':
-				case '$':
-				case '%':
-				case '(':
-				case ')':
-				case '[':
-				case ']':
-				case '{':
-				case '}':
-				case '<':
-				case '>':
-				case '!':
-				case '*':
-				case '?':
-				case '~':
-				case '`':
-				case '"':
-				case ';':
-				default:
-					g_string_append_c(str,c); break;
-			}
-		}
-		else	/* got a normal character */
-		{
-			g_string_append_c(str,c);
-		}
-		readptr++;
-	}
-out:
+            case ' ':
+            case '\\':
+            case '#':
+            case '$':
+            case '%':
+            case '(':
+            case ')':
+            case '[':
+            case ']':
+            case '{':
+            case '}':
+            case '<':
+            case '>':
+            case '!':
+            case '*':
+            case '?':
+            case '~':
+            case '`':
+            case '"':
+            case ';':
+            default:
+                g_string_append_c (str, c);
+                break;
+            }
+        } else {                /* got a normal character */
 
-	result = str->str;
-	g_string_free(str,FALSE);
+            g_string_append_c (str, c);
+        }
+        readptr++;
+    }
+  out:
+
+    result = str->str;
+    g_string_free (str, FALSE);
     return result;
 }
+
 /* --------------------------------------------------------------------------------------------- */
 
 /** Check if char in pointer contain escape'd chars
@@ -194,7 +198,7 @@ out:
  otherwise return FALSE
  */
 gboolean
-strutils_is_char_escaped ( const char *start, const char *current )
+strutils_is_char_escaped (const char *start, const char *current)
 {
     int num_esc = 0;
 
@@ -202,7 +206,7 @@ strutils_is_char_escaped ( const char *start, const char *current )
         return FALSE;
 
     current--;
-    while (current >= start && *current == '\\' ) {
+    while (current >= start && *current == '\\') {
         num_esc++;
         current--;
     }

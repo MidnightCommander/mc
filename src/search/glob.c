@@ -55,28 +55,28 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
     while (loop < orig_len) {
         switch (str[loop]) {
         case '*':
-            if (!strutils_is_char_escaped (str, &(str[loop]) )) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, (inside_group) ? ".*" : "(.*)");
                 loop++;
                 continue;
             }
             break;
         case '?':
-            if (!strutils_is_char_escaped (str, &(str[loop]) )) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, (inside_group) ? "." : "(.)");
                 loop++;
                 continue;
             }
             break;
         case ',':
-            if (!strutils_is_char_escaped (str, &(str[loop]) )) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, "|");
                 loop++;
                 continue;
             }
             break;
         case '{':
-            if (!strutils_is_char_escaped (str, &(str[loop]) )) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, "(");
                 inside_group = TRUE;
                 loop++;
@@ -84,7 +84,7 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
             }
             break;
         case '}':
-            if (!strutils_is_char_escaped (str, &(str[loop]) )) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, ")");
                 inside_group = FALSE;
                 loop++;
