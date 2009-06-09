@@ -50,7 +50,7 @@ strutils_escape (const char *src, int src_len, const char *escaped_chars,
                  gboolean escape_non_printable)
 {
     GString *ret;
-    gsize loop;
+    gsize curr_index;
     /* do NOT break allocation semantics */
     if (src == NULL)
         return NULL;
@@ -63,10 +63,10 @@ strutils_escape (const char *src, int src_len, const char *escaped_chars,
     if (src_len == -1)
         src_len = strlen (src);
 
-    for (loop = 0; loop < src_len; loop++) {
+    for (curr_index = 0; curr_index < src_len; curr_index++) {
 
         if (escape_non_printable) {
-            switch (src[loop]) {
+            switch (src[curr_index]) {
             case '\n':
                 g_string_append (ret, "\\n");
                 continue;
@@ -86,10 +86,10 @@ strutils_escape (const char *src, int src_len, const char *escaped_chars,
             }
         }
 
-        if (strchr (escaped_chars, (int) src[loop]))
+        if (strchr (escaped_chars, (int) src[curr_index]))
             g_string_append_c (ret, '\\');
 
-        g_string_append_c (ret, src[loop]);
+        g_string_append_c (ret, src[curr_index]);
     }
     return g_string_free (ret, FALSE);
 }
@@ -100,7 +100,7 @@ strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
                  gboolean unescape_non_printable)
 {
     GString *ret;
-    gsize loop;
+    gsize curr_index;
 
     if (src == NULL)
         return NULL;
@@ -113,14 +113,14 @@ strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
     if (src_len == -1)
         src_len = strlen (src);
 
-    for (loop = 0; loop < src_len-1; loop++) {
-        if (src[loop] != '\\'){
-            g_string_append_c (ret, src[loop]);
+    for (curr_index = 0; curr_index < src_len-1; curr_index++) {
+        if (src[curr_index] != '\\'){
+            g_string_append_c (ret, src[curr_index]);
             continue;
         }
-        loop++;
+        curr_index++;
         if (unescape_non_printable) {
-            switch (src[loop]) {
+            switch (src[curr_index]) {
             case 'n':
                 g_string_append_c (ret, '\n');
                 continue;
@@ -139,12 +139,12 @@ strutils_unescape (const char *src, int src_len, const char *unescaped_chars,
                 break;
             }
         }
-        if (strchr (unescaped_chars, (int) src[loop]) == NULL)
+        if (strchr (unescaped_chars, (int) src[curr_index]) == NULL)
             g_string_append_c (ret, '\\');
 
-        g_string_append_c (ret, src[loop]);
+        g_string_append_c (ret, src[curr_index]);
     }
-    g_string_append_c (ret, src[loop]);
+    g_string_append_c (ret, src[curr_index]);
 
     return g_string_free (ret, FALSE);
 }
