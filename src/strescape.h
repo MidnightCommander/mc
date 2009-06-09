@@ -22,10 +22,10 @@ char *strutils_shell_unescape (const char *);
 char *strutils_shell_escape (const char *);
 
 char *strutils_glob_escape (const char *);
-char *strutils_glob_escape (const char *);
+char *strutils_glob_unescape (const char *);
 
 char *strutils_regex_escape (const char *);
-char *strutils_regex_escape (const char *);
+char *strutils_regex_unescape (const char *);
 
 gboolean strutils_is_char_escaped (const char *, const char *);
 
