@@ -66,7 +66,7 @@
 #include "widget.h"
 #include "wtools.h"
 #include "background.h"		/* we_are_background */
-/* #include "util.h" */
+#include "../src/strescape.h"
 #include "strutil.h"
 #include "../src/search/search.h"
 

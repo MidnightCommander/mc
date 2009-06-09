@@ -51,6 +51,7 @@
 #include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 #include "../src/util.h"
+#include "../src/strescape.h"
 #include "utilvfs.h"
 #include "xdirentry.h"
 #include "vfs.h"

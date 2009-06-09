@@ -43,6 +43,7 @@
 #include "wtools.h"
 #include "main.h"
 #include "util.h"
+#include "../src/strescape.h"
 #include "key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
