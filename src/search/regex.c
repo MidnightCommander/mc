@@ -321,7 +321,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
                  loop + tmp_len + 2 < len && (str[loop + 2 + tmp_len] & (char) 0xf0) == 0x30;
                  tmp_len++);
             if (str[loop + 2 + tmp_len] == '}') {
-                tmp_str = g_strndup (loop + 2, tmp_len);
+                tmp_str = g_strndup (&str[loop + 2], tmp_len);
                 tmp_token = atoi (tmp_str);
                 if (max_token < tmp_token)
                     max_token = tmp_token;
@@ -378,7 +378,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
         for (*skip_len = 0;
              current_pos + *skip_len + 2 < replace_str->len
-             && (*(curr_str + 2 + *skip_len) & (char) 0xf0) == 0x30; *skip_len++);
+             && (*(curr_str + 2 + *skip_len) & (char) 0xf0) == 0x30; (*skip_len)++);
 
         if (*(curr_str + 2 + *skip_len) != '}')
             return -1;
