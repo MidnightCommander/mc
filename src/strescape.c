@@ -62,7 +62,7 @@
         or NULL when NULL string is passed.
  */
 char *
-shell_escape (const char *src)
+strutils_shell_escape (const char *src)
 {
     GString *str;
     char *result = NULL;
@@ -110,7 +110,7 @@ shell_escape (const char *src)
  return unescaped string (which needs to be freed)
  */
 char *
-shell_unescape (const char *text)
+strutils_shell_unescape (const char *text)
 {
     GString *str;
     char *result = NULL;

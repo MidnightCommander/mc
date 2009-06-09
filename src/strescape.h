@@ -15,8 +15,8 @@
 
 /*** declarations of public functions ************************************************************/
 
-gboolean shell_is_char_escaped (const char *);
-char *shell_unescape (const char *);
-char *shell_escape (const char *);
+gboolean strutils_is_char_escaped (const char *);
+char *strutils_shell_unescape (const char *);
+char *strutils_shell_escape (const char *);
 
 #endif

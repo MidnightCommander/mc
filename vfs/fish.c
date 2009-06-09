@@ -394,7 +394,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     gettimeofday(&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
-    quoted_path = shell_escape (remote_path);
+    quoted_path = strutils_shell_escape (remote_path);
     shell_commands = g_strconcat(
 		"#LIST /%s\n"
 		"if `perl -v > /dev/null 2>&1` ; then\n"
@@ -410,12 +410,12 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 		   "my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat(\"$dirname/$filename\");\n"
 		   "my $mloctime= scalar localtime $mtime;\n"
 	,
-		   "my $shell_escape_regex= s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
+		   "my $strutils_shell_escape_regex= s/([;<>\\*\\|`&\\$!#\\(\\)\\[\\]\\{\\}:'\\''\"\\ \\\\])/\\\\$1/g;\n"
 		   "my $e_filename = $filename;\n"
-		   "$e_filename =~ $shell_escape_regex;\n"
+		   "$e_filename =~ $strutils_shell_escape_regex;\n"
 		   "if (S_ISLNK($mode) ) {\n"
 		   "my $linkname = readlink (\"$dirname/$filename\");\n"
-		   "$linkname =~ $shell_escape_regex;\n"
+		   "$linkname =~ $strutils_shell_escape_regex;\n"
 		   "\n"
 			  "printf(\"R%%o %%o $uid.$gid\\n"
 				    "S$size\\n"
@@ -545,12 +545,12 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
 			ent->name = str_dup_range(filename, filename_bound);
 			temp = ent->name;
-			ent->name = shell_unescape(ent->name);
+			ent->name = strutils_shell_unescape(ent->name);
 			g_free(temp);
 
 			ent->ino->linkname = str_dup_range(linkname, linkname_bound);
 			temp = ent->ino->linkname;
-			ent->ino->linkname = shell_unescape(ent->ino->linkname);
+			ent->ino->linkname = strutils_shell_unescape(ent->ino->linkname);
 			g_free(temp);
 		} else {
 			/* we expect: "escaped-name" */
@@ -567,7 +567,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 			}
 			ent->name = str_dup_range(filename, filename_bound);
 			temp = ent->name;
-			ent->name = shell_unescape(ent->name);
+			ent->name = strutils_shell_unescape(ent->name);
 			g_free(temp);
 		}
 		break;
@@ -686,7 +686,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
      *	algorithm for file appending case, therefore just "dd" is used for it.
      */
 
-    quoted_name = shell_escape(name);
+    quoted_name = strutils_shell_escape(name);
     print_vfs_message(_("fish: store %s: sending command..."), quoted_name );
 
     /* FIXME: File size is limited to ULONG_MAX */
@@ -784,7 +784,7 @@ fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
-    quoted_name = shell_escape(name);
+    quoted_name = strutils_shell_escape(name);
     fh->u.fish.append = 0;
 
     /*
@@ -925,7 +925,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 	g_free (mpath); \
 	return -1; \
     } \
-    rpath = shell_escape(crpath); \
+    rpath = strutils_shell_escape(crpath); \
     g_free (mpath);
 
 #define POSTFIX(flags) \
@@ -960,9 +960,9 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
 	g_free (mpath2); \
 	return -1; \
     } \
-    rpath1 = shell_escape (crpath1); \
+    rpath1 = strutils_shell_escape (crpath1); \
     g_free (mpath1); \
-    rpath2 = shell_escape (crpath2); \
+    rpath2 = strutils_shell_escape (crpath2); \
     g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \
@@ -981,7 +981,7 @@ static int fish_symlink (struct vfs_class *me, const char *setto, const char *pa
 {
     char *qsetto;
     PREFIX
-    qsetto = shell_escape (setto);
+    qsetto = strutils_shell_escape (setto);
     g_snprintf(buf, sizeof(buf),
             "#SYMLINK %s /%s\n"
 	    "ln -s %s /%s 2>/dev/null\n"

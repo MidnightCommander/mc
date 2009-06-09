@@ -68,7 +68,7 @@ examine_cd (const char *_path)
     const char *t;
 
     /* Tilde expansion */
-    path = shell_unescape(_path);
+    path = strutils_shell_unescape(_path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */
