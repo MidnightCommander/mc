@@ -760,7 +760,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 /* FIXME: This function needs to check the return values of the
    function calls */
 FileProgressStatus
-copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
+copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	      int move_over, int delete, struct link *parent_dirs,
 	      off_t *progress_count, double *progress_bytes)
 {
@@ -771,6 +771,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
     FileProgressStatus return_status = FILE_CONT;
     struct utimbuf utb;
     struct link *lp;
+    char *d;
 
     /* First get the mode of the source dir */
   retry_src_stat:
@@ -789,6 +790,8 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	return FILE_CONT;
     }
 
+    d = strutils_shell_unescape (_d);
+
 /* Hmm, hardlink to directory??? - Norbert */
 /* FIXME: In this step we should do something
    in case the destination already exist */
@@ -796,6 +799,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
     if (ctx->preserve && cbuf.st_nlink > 1
 	&& check_hardlinks (s, d, &cbuf) == 1) {
 	/* We have made a hardlink - no more processing is necessary */
+	g_free(d);
 	return return_status;
     }
 
@@ -804,6 +808,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	    file_error (_(" Source \"%s\" is not a directory \n %s "), s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;
+	g_free(d);
 	return return_status;
     }
 
@@ -811,6 +816,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	/* we found a cyclic symbolic link */
 	message (D_ERROR, MSG_ERROR,
 		    _(" Cannot copy cyclic symbolic link \n `%s' "), s);
+	g_free(d);
 	return FILE_SKIP;
     }
 
@@ -829,6 +835,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	if (move_over) {
 	    if (mc_rename (s, d) == 0) {
 		g_free (parent_dirs);
+		g_free(d);
 		return FILE_CONT;
 	    }
 	}
@@ -848,6 +855,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
 	    if (return_status == FILE_RETRY)
 		goto retry_dst_stat;
 	    g_free (parent_dirs);
+	    g_free(d);
 	    return return_status;
 	}
 	/* Dive into subdir if exists */
@@ -951,6 +959,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
   ret:
     g_free (dest_dir);
     g_free (parent_dirs);
+    g_free(d);
     return return_status;
 }
 
