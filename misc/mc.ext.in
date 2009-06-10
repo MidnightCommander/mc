@@ -400,9 +400,12 @@ regex/\.([mM][pP]3)$
 	Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
-regex/\.([oO][gG][gG])$
+regex/\.([oO][gG][gG|aA|vV|xX])$
 	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f >/dev/null 2>&1 &); fi
 	View=%view{ascii} ogginfo %s
+
+regex/\.([sS][pP][xX]|[fF][lL][aA][cC])$
+	Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms %f >/dev/null 2>&1 &); fi
 
 regex/\.([mM][iI][dD][iI]?|[rR][mM][iI][dD]?)$
 	Open=timidity %f

@@ -981,6 +981,7 @@ history_put (const char *input_name, GList *h)
 	}
     }
 
+    mc_config_save_file (cfg);
     mc_config_deinit(cfg);
     g_free (profile);
 }
