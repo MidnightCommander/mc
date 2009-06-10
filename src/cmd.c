@@ -528,9 +528,9 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 	g_free (reg_exp);
 	return;
     }
-
     search = mc_search_new (reg_exp, -1);
     search->search_type = MC_SEARCH_T_GLOB;
+    search->is_entire_line = TRUE;
     search->is_case_sentitive = case_sens != 0;
 
     for (i = 0; i < current_panel->count; i++) {

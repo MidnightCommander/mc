@@ -115,9 +115,15 @@ void
 mc_search__cond_struct_new_init_glob (const char *charset, mc_search_t * mc_search,
                                       mc_search_cond_t * mc_search_cond)
 {
-    GString *tmp = mc_search__glob_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
+    GString *tmp =
+        mc_search__glob_translate_to_regex (mc_search_cond->str->str, &mc_search_cond->len);
 
     g_string_free (mc_search_cond->str, TRUE);
+
+    if (mc_search->is_entire_line) {
+        g_string_prepend_c (tmp, '^');
+        g_string_append_c (tmp, '$');
+    }
     mc_search_cond->str = tmp;
 
     mc_search__cond_struct_new_init_regex (charset, mc_search, mc_search_cond);
