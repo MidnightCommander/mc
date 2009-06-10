@@ -90,12 +90,12 @@ int use_internal_edit = 1;
 int auto_fill_mkdir_name = 1;
 
 /* selection flags */
-enum {
+typedef enum {
     SELECT_FILES_ONLY = 1 << 0,
     SELECT_MATCH_CASE = 1 << 1
-};
+} select_flags_t;
 
-static int select_flags = SELECT_MATCH_CASE;
+static select_flags_t select_flags = SELECT_MATCH_CASE;
 
 int
 view_file_at_line (const char *filename, int plain_view, int internal,
