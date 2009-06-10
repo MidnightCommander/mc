@@ -92,10 +92,11 @@ int auto_fill_mkdir_name = 1;
 /* selection flags */
 typedef enum {
     SELECT_FILES_ONLY = 1 << 0,
-    SELECT_MATCH_CASE = 1 << 1
+    SELECT_MATCH_CASE = 1 << 1,
+    SELECT_SHELL_PATTERNS = 1 << 2
 } select_flags_t;
 
-static select_flags_t select_flags = SELECT_MATCH_CASE;
+static select_flags_t select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 
 int
 view_file_at_line (const char *filename, int plain_view, int internal,
@@ -499,19 +500,21 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 {
     /* dialog sizes */
     const int DX = 50;
-    const int DY = 6;
+    const int DY = 7;
 
     int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
     int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
+    int shell_patterns = (select_flags & SELECT_SHELL_PATTERNS) != 0;
 
     char *reg_exp;
     mc_search_t *search;
     int i;
 
     QuickWidget quick_widgets[] = {
-	{ quick_checkbox, DX/2 + 1, DX, DY - 3, DY, N_("&Case sensitive"), 0,      0, &case_sens,  NULL,     NULL },
-	{ quick_checkbox, 3,        DX, DY - 3, DY, N_("&Files only"),     0,      0, &files_only, NULL,     NULL },
-	{ quick_input,    3,        DX, DY - 4, DY, INPUT_LAST_TEXT,       DX - 6, 0, NULL,        &reg_exp, history_name },
+	{ quick_checkbox, 3,        DX, DY - 3, DY, N_("&Using shell patterns"),     0,      0, &shell_patterns, NULL,     NULL },
+	{ quick_checkbox, DX/2 + 1, DX, DY - 4, DY, N_("&Case sensitive"), 0,      0, &case_sens,  NULL,     NULL },
+	{ quick_checkbox, 3,        DX, DY - 4, DY, N_("&Files only"),     0,      0, &files_only, NULL,     NULL },
+	{ quick_input,    3,        DX, DY - 5, DY, INPUT_LAST_TEXT,       DX - 6, 0, NULL,        &reg_exp, history_name },
 	NULL_QuickWidget
     };
 
@@ -529,7 +532,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 	return;
     }
     search = mc_search_new (reg_exp, -1);
-    search->search_type = MC_SEARCH_T_GLOB;
+    search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sentitive = case_sens != 0;
 
@@ -553,6 +556,8 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 	select_flags |= SELECT_MATCH_CASE;
     if (files_only != 0)
 	select_flags |= SELECT_FILES_ONLY;
+    if (shell_patterns != 0)
+	select_flags |= SELECT_SHELL_PATTERNS;
 }
 
 void select_cmd (void)
