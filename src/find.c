@@ -214,8 +214,10 @@ find_parameters (char **start_dir, char **pattern, char **content)
     WCheck *recursively_cbox;
     WCheck *file_regexp_cbox;
     WCheck *skip_hidden_cbox;
+#ifdef HAVE_CHARSET
     WCheck *file_all_charsets_cbox;
     WCheck *content_all_charsets_cbox;
+#endif
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
@@ -329,11 +331,13 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
     case B_TREE:
 	temp_dir = g_strdup (in_start->buffer);
+#ifdef HAVE_CHARSET
+	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
+	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
+#endif
 	content_case_sensitive = case_sense->state & C_BOOL;
 	content_regexp_flag = find_regex_cbox->state & C_BOOL;
-	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
 	file_regexp_flag = file_regexp_cbox->state & C_BOOL;
-	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
 	find_recursively = recursively_cbox->state & C_BOOL;
 	skip_hidden_flag = skip_hidden_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
@@ -359,8 +363,10 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	} else {
 	    *content = in_contents = NULL;
 	}
+#ifdef HAVE_CHARSET
 	file_all_charsets_flag = file_all_charsets_cbox->state & C_BOOL;
 	content_all_charsets_flag = content_all_charsets_cbox->state & C_BOOL;
+#endif
 	content_case_sensitive = case_sense->state & C_BOOL;
 	content_regexp_flag = find_regex_cbox->state & C_BOOL;
 	find_recursively = recursively_cbox->state & C_BOOL;
@@ -587,7 +593,7 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	}
 	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
 	    if (found == FALSE){	/* Search in binary line once */
-		if (mc_search_run(search_content_handle, (const void *)p, 0, strlen(p)+1, &founded_len))
+		if (mc_search_run (search_content_handle, (const void *) p, 0, strlen(p), &founded_len))
 		{
 		    char *fnd_info = g_strdup_printf ("%d:%s", line, filename);
 		    find_add_match (h, directory, fnd_info);
@@ -659,6 +665,7 @@ do_search (struct Dlg_head *h)
     search_file_handle->search_type = (file_regexp_flag) ? MC_SEARCH_T_REGEX : MC_SEARCH_T_GLOB;
     search_file_handle->is_case_sentitive = file_case_sentitive;
     search_file_handle->is_all_charsets = file_all_charsets_flag;
+    search_file_handle->is_entire_line = !file_regexp_flag;
 
  do_search_begin:
     while (!dp){
@@ -751,7 +758,7 @@ do_search (struct Dlg_head *h)
             }
             g_free (tmp_name);
         }
-        if (mc_search_run(search_file_handle,dp->d_name,0,strlen(dp->d_name)+1,&bytes_found)){
+        if (mc_search_run (search_file_handle,dp->d_name, 0, strlen (dp->d_name), &bytes_found)) {
             if (content_pattern) {
                 if (search_content (h, directory, dp->d_name)) {
                     mc_search_free(search_file_handle);
