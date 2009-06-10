@@ -863,7 +863,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 {
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir, *tmpdest;
-    char *def_text_secure;
+    char *def_text_secure, *def_text_secure2;
     struct stat buf;
     int val;
     QuickDialog Quick_input;
@@ -881,6 +881,10 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     /* filter out a possible password from def_text */
     def_text_secure = strip_password (g_strdup (def_text), 1);
+    if (source_easy_patterns)
+        def_text_secure2 = strutils_glob_escape (def_text_secure);
+    else
+        def_text_secure2 = strutils_regex_escape (def_text_secure);
 
     /* Create the dialog */
 
@@ -895,7 +899,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     Quick_input.i18n = 1;
     Quick_input.widgets = fmd_widgets;
     fmd_widgets[FMDI0].text = text;
-    fmd_widgets[FMDI2].text = def_text_secure;
+    fmd_widgets[FMDI2].text = def_text_secure2;
     fmd_widgets[FMDI2].str_result = &dest_dir;
     fmd_widgets[FMDI1].str_result = &source_mask;
 
@@ -927,6 +931,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
 
     if (!dest_dir || !*dest_dir) {
 	g_free (source_mask);
+	g_free(def_text_secure2);
 	return dest_dir;
     }
 
@@ -975,5 +980,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     }
     if (val == B_USER)
 	*do_background = 1;
+
+    g_free(def_text_secure2);
     return dest_dir;
 }
