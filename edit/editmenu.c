@@ -437,6 +437,7 @@ static menu_entry OptMenu[] =
     {' ', N_("&Save mode..."), NULL_HOTKEY, menu_save_mode_cmd},
     {' ', N_("Learn &Keys..."), NULL_HOTKEY, learn_keys},
     {' ', N_("Syntax &Highlighting..."), NULL_HOTKEY, edit_syntax_dialog},
+    {' ', "", NULL_HOTKEY, 0},
     {' ', N_("S&yntax file"), NULL_HOTKEY, menu_edit_syntax_file_cmd},
     {' ', N_("&Menu file"), NULL_HOTKEY, menu_edit_menu_file_cmd},
     {' ', "", NULL_HOTKEY, 0},
