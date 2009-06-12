@@ -2251,7 +2251,7 @@ msgid "s&Wap panels          C-u"
 msgstr "Echanger pannea&Ux               C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "inverser &Panneaux on/off        C-o"
+msgstr "Inverser &Panneaux on/off        C-o"
 
 msgid "&Compare directories  C-x d"
 msgstr "&Comparer répertoires          C-x d"
