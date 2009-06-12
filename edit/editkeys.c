@@ -160,6 +160,16 @@ static const edit_key_map_type common_key_map[] = {
     { KEY_M_SHIFT | KEY_DC, CK_XCut },
     { KEY_M_SHIFT | '\n', CK_Return },	/* useful for pasting multiline text */
 
+    /* Alt */
+    { KEY_M_ALT | KEY_PPAGE, CK_Page_Up_Alt_Highlight },
+    { KEY_M_ALT | KEY_NPAGE, CK_Page_Down_Highlight },
+    { KEY_M_ALT | KEY_LEFT, CK_Left_Alt_Highlight },
+    { KEY_M_ALT | KEY_RIGHT, CK_Right_Alt_Highlight },
+    { KEY_M_ALT | KEY_UP, CK_Up_Alt_Highlight },
+    { KEY_M_ALT | KEY_DOWN, CK_Down_Alt_Highlight },
+    { KEY_M_ALT | KEY_HOME, CK_Home_Highlight },
+    { KEY_M_ALT | KEY_END, CK_End_Alt_Highlight },
+
     /* Ctrl */
     { KEY_M_CTRL | (KEY_F (2)), CK_Save_As },
     { KEY_M_CTRL | (KEY_F (4)), CK_Replace_Again },
