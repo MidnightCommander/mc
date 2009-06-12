@@ -2489,6 +2489,8 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Word_Right_Highlight:
     case CK_Up_Highlight:
     case CK_Down_Highlight:
+    case CK_Up_Alt_Highlight:
+    case CK_Down_Alt_Highlight:
 	if (edit->mark2 == -1)
 	    break;		/*marking is following the cursor: may need to highlight a whole line */
     case CK_Left:
@@ -2575,14 +2577,20 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	edit_insert (edit, '\n');
 	break;
 
+    case CK_Page_Up_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Page_Up:
     case CK_Page_Up_Highlight:
 	edit_move_up (edit, edit->num_widget_lines - 1, 1);
 	break;
+    case CK_Page_Down_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Page_Down:
     case CK_Page_Down_Highlight:
 	edit_move_down (edit, edit->num_widget_lines - 1, 1);
 	break;
+    case CK_Left_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Left:
     case CK_Left_Highlight:
 	if (option_fake_half_tabs) {
@@ -2594,6 +2602,8 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	}
 	edit_left_char_move_cmd (edit);
 	break;
+    case CK_Right_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Right:
     case CK_Right_Highlight:
 	if (option_fake_half_tabs) {
@@ -2621,26 +2631,38 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_Word_Right_Highlight:
 	edit_right_word_move_cmd (edit);
 	break;
+    case CK_Up_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Up:
     case CK_Up_Highlight:
 	edit_move_up (edit, 1, 0);
 	break;
+    case CK_Down_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Down:
     case CK_Down_Highlight:
 	edit_move_down (edit, 1, 0);
 	break;
+    case CK_Paragraph_Up_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Paragraph_Up:
     case CK_Paragraph_Up_Highlight:
 	edit_move_up_paragraph (edit, 0);
 	break;
+    case CK_Paragraph_Down_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Paragraph_Down:
     case CK_Paragraph_Down_Highlight:
 	edit_move_down_paragraph (edit, 0);
 	break;
+    case CK_Scroll_Up_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Scroll_Up:
     case CK_Scroll_Up_Highlight:
 	edit_move_up (edit, 1, 1);
 	break;
+    case CK_Scroll_Down_Alt_Highlight:
+        column_highlighting = 1;
     case CK_Scroll_Down:
     case CK_Scroll_Down_Highlight:
 	edit_move_down (edit, 1, 1);
@@ -2653,7 +2675,6 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
     case CK_End_Highlight:
 	edit_cursor_to_eol (edit);
 	break;
-
     case CK_Tab:
         /* if text marked shift block */
         if ( edit->mark1 != edit->mark2 && !option_persistent_selections ) {
@@ -2930,24 +2951,32 @@ edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 	break;
     case CK_Up:
     case CK_Up_Highlight:
+    case CK_Up_Alt_Highlight:
     case CK_Down:
     case CK_Down_Highlight:
+    case CK_Down_Alt_Highlight:
     case CK_Page_Up:
     case CK_Page_Up_Highlight:
+    case CK_Page_Up_Alt_Highlight:
     case CK_Page_Down:
     case CK_Page_Down_Highlight:
+    case CK_Page_Down_Alt_Highlight:
     case CK_Beginning_Of_Text:
     case CK_Beginning_Of_Text_Highlight:
     case CK_End_Of_Text:
     case CK_End_Of_Text_Highlight:
     case CK_Paragraph_Up:
     case CK_Paragraph_Up_Highlight:
+    case CK_Paragraph_Up_Alt_Highlight:
     case CK_Paragraph_Down:
     case CK_Paragraph_Down_Highlight:
+    case CK_Paragraph_Down_Alt_Highlight:
     case CK_Scroll_Up:
     case CK_Scroll_Up_Highlight:
+    case CK_Scroll_Up_Alt_Highlight:
     case CK_Scroll_Down:
     case CK_Scroll_Down_Highlight:
+    case CK_Scroll_Down_Alt_Highlight:
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
 	break;

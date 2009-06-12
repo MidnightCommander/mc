@@ -151,6 +151,26 @@
 #define CK_Paragraph_Up_Highlight	620
 #define CK_Paragraph_Down_Highlight	621
 
+/* alt highlight commands */
+#define CK_Page_Up_Alt_Highlight		654
+#define CK_Page_Down_Alt_Highlight		655
+#define CK_Left_Alt_Highlight			656
+#define CK_Right_Alt_Highlight			657
+#define CK_Word_Left_Alt_Highlight		658
+#define CK_Word_Right_Alt_Highlight		659
+#define CK_Up_Alt_Highlight			660
+#define CK_Down_Alt_Highlight			661
+#define CK_Home_Alt_Highlight			662
+#define CK_End_Alt_Highlight			663
+#define CK_Beginning_Of_Text_Alt_Highlight	664
+#define CK_End_Of_Text_Alt_Highlight		665
+#define CK_Begin_Page_Alt_Highlight		666
+#define CK_End_Page_Alt_Highlight		667
+#define CK_Scroll_Up_Alt_Highlight		668
+#define CK_Scroll_Down_Alt_Highlight		669
+#define CK_Paragraph_Up_Alt_Highlight		670
+#define CK_Paragraph_Down_Alt_Highlight		671
+
 
 /* X clipboard operations */
 #define CK_XStore		701
