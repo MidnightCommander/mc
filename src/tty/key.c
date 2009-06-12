@@ -54,7 +54,7 @@
 #endif
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-#    include "../src/x11conn.h"
+#    include "../src/tty/x11conn.h"
 #endif
 
 #ifdef __linux__
