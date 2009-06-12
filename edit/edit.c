@@ -576,6 +576,7 @@ edit_load_file (WEdit *edit)
 	    }
 	    edit->stack_disable = 0;
 	}
+
 #ifdef HAVE_CHARSET
 	codepage_id = get_codepage_id( source_codepage );
 	if ( codepage_id )

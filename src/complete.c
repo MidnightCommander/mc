@@ -43,6 +43,7 @@
 #include "wtools.h"
 #include "main.h"
 #include "util.h"
+#include "../src/strescape.h"
 #include "key.h"		/* XCTRL and ALT macros */
 #include "strutil.h"
 
@@ -92,12 +93,12 @@ filename_completion_function (const char * text, int state, INPUT_COMPLETE_FLAGS
         char * result;
         char * e_result;
 
-        u_text = shell_unescape (text);
+        u_text = strutils_shell_unescape (text);
 
         result = filename_completion_function (u_text, state, flags & (~INPUT_COMPLETE_SHELL_ESC));
         g_free (u_text);
 
-        e_result = shell_escape (result);
+        e_result = strutils_shell_escape (result);
         g_free (result);
 
         return e_result;
@@ -481,7 +482,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
-    text = shell_unescape(_text);
+    text = strutils_shell_unescape(_text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (!state) {		/* Initialize us a little bit */
@@ -505,7 +506,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 
 	if (p) {
 	    char *temp_p = p;
-	    p = shell_escape (p);
+	    p = strutils_shell_escape (p);
 	    g_free (temp_p);
 	}
 
@@ -563,7 +564,7 @@ command_completion_function (const char *_text, int state, INPUT_COMPLETE_FLAGS 
 	path = NULL;
     } else if ((p = strrchr (found, PATH_SEP)) != NULL) {
 	char *tmp = found;
-	found = shell_escape (p + 1);
+	found = strutils_shell_escape (p + 1);
 	g_free (tmp);
     }
 

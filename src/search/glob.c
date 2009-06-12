@@ -32,6 +32,7 @@
 #include "../src/search/search.h"
 #include "../src/search/internal.h"
 #include "../src/strutil.h"
+#include "../src/strescape.h"
 #include "../src/charsets.h"
 
 /*** global variables ****************************************************************************/
@@ -50,40 +51,42 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
     GString *buff = g_string_new ("");
     gsize orig_len = *len;
     gsize loop = 0;
-
+    gboolean inside_group = FALSE;
     while (loop < orig_len) {
         switch (str[loop]) {
         case '*':
-            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
-                g_string_append (buff, ".*");
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+                g_string_append (buff, (inside_group) ? ".*" : "(.*)");
                 loop++;
                 continue;
             }
             break;
         case '?':
-            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
-                g_string_append (buff, ".");
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
+                g_string_append (buff, (inside_group) ? "." : "(.)");
                 loop++;
                 continue;
             }
             break;
         case ',':
-            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, "|");
                 loop++;
                 continue;
             }
             break;
         case '{':
-            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, "(");
+                inside_group = TRUE;
                 loop++;
                 continue;
             }
             break;
         case '}':
-            if (!mc_search__regex_is_char_escaped (str, &(str[loop]) - 1)) {
+            if (!strutils_is_char_escaped (str, &(str[loop]))) {
                 g_string_append (buff, ")");
+                inside_group = FALSE;
                 loop++;
                 continue;
             }

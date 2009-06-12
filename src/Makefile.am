@@ -67,7 +67,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	widget.h win.c win.h wtools.c wtools.h unixcompat.h		\
 	x11conn.h x11conn.c ecs.h ecs.c \
 	strutil.h strutil.c strutilascii.c strutil8bit.c strutilutf8.c \
-	search/search.h
+	search/search.h strescape.c strescape.h
 
 if CHARSET
 mc_SOURCES = $(SRCS) $(CHARSET_SRC)

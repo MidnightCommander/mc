@@ -44,6 +44,7 @@
 #include "tree.h"		/* for tree_chdir */
 #include "color.h"		/* DEFAULT_COLOR */
 #include "execute.h"		/* shell_execute */
+#include "../src/strescape.h"
 
 /* This holds the command line */
 WInput *cmdline;
@@ -67,7 +68,7 @@ examine_cd (const char *_path)
     const char *t;
 
     /* Tilde expansion */
-    path = shell_unescape(_path);
+    path = strutils_shell_unescape(_path);
     path_tilde = tilde_expand (path);
 
     /* Leave space for further expansion */

@@ -20,7 +20,7 @@
 
 typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 
-#define MC_SEARCH__NUM_REPL_ARGS 64
+#define MC_SEARCH__NUM_REPLACE_ARGS 64
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
 #define mc_search_matchinfo_t GMatchInfo
@@ -31,8 +31,6 @@ typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 #		define mc_search_matchinfo_t regmatch_t
 #	endif
 #endif
-
-#define MC_SEARCH__PCRE_MAX_MATCHES 64
 
 /*** enums ***************************************************************************************/
 
@@ -84,13 +82,12 @@ typedef struct mc_search_struct {
     gsize normal_offset;
 
     /* some data for regexp */
+    int num_rezults;
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #if ! GLIB_CHECK_VERSION (2, 14, 0)
-    int num_rezults;
 #if HAVE_LIBPCRE
-    int iovector[MC_SEARCH__PCRE_MAX_MATCHES * 2];
-#else                           /* HAVE_LIBPCRE */
+    int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
 #endif                          /* HAVE_LIBPCRE */
 #endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
 
@@ -130,6 +127,7 @@ gboolean mc_search_is_type_avail (mc_search_type_t);
 const mc_search_type_str_t *mc_search_types_list_get (void);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
+char *mc_search_prepare_replace_str2 (mc_search_t *, char *);
 
 gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
@@ -137,7 +135,7 @@ gchar **mc_search_get_types_strings_array (void);
 
 gboolean mc_search (const gchar *, const gchar *, mc_search_type_t);
 
-int mc_search_getstart_rezult_by_num(mc_search_t *, int);
-int mc_search_getend_rezult_by_num(mc_search_t *, int);
+int mc_search_getstart_rezult_by_num (mc_search_t *, int);
+int mc_search_getend_rezult_by_num (mc_search_t *, int);
 
 #endif

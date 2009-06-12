@@ -88,9 +88,12 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
     gsize converted_str_len;
     gchar *converted_str2;
 
+    if (charset == NULL)
+        charset = cp_source;
+
     converted_str = mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
 #else
-    converted_str = g_strndup(str, str_len);
+    converted_str = g_strndup (str, str_len);
 #endif
 
     next_char = (char *) str_cget_next_char (converted_str);
@@ -103,13 +106,12 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
     converted_str2 =
         mc_search__recode_str (converted_str, tmp_len, cp_display, charset, &converted_str_len);
 #endif
-
-    if (str_isalnum (converted_str) && !str_isdigit (converted_str))
-        *just_letters = TRUE;
-    else
-        *just_letters = FALSE;
-
-
+    if (just_letters) {
+        if (str_isalnum (converted_str) && !str_isdigit (converted_str))
+            *just_letters = TRUE;
+        else
+            *just_letters = FALSE;
+    }
 #ifdef HAVE_CHARSET
     g_free (converted_str);
     return converted_str2;
@@ -142,6 +144,9 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
     gsize converted_str_len;
     gsize tmp_len;
 
+    if (charset == NULL)
+        charset = cp_source;
+
     tmp_str2 = converted_str =
         mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
     if (converted_str == NULL)
@@ -162,20 +167,20 @@ mc_search__tolower_case_str (const char *charset, const char *str, gsize str_len
         return NULL;
 
     ret = g_string_new_len (tmp_str2, tmp_len);
-    g_free(tmp_str2);
+    g_free (tmp_str2);
     return ret;
 #else
     const gchar *tmp_str1 = str;
     gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len+1;
+    gsize converted_str_len = str_len + 1;
 
-    tmp_str2 = converted_str = g_strndup(str, str_len);
+    tmp_str2 = converted_str = g_strndup (str, str_len);
 
     while (str_tolower (tmp_str1, &tmp_str2, &converted_str_len))
         tmp_str1 += str_length_char (tmp_str1);
 
     ret = g_string_new_len (converted_str, str_len);
-    g_free(converted_str);
+    g_free (converted_str);
     return ret;
 #endif
 }
@@ -190,6 +195,9 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
     gchar *converted_str, *tmp_str1, *tmp_str2, *tmp_str3;
     gsize converted_str_len;
     gsize tmp_len;
+
+    if (charset == NULL)
+        charset = cp_source;
 
     tmp_str2 = converted_str =
         mc_search__recode_str (str, str_len, charset, cp_display, &converted_str_len);
@@ -212,35 +220,22 @@ mc_search__toupper_case_str (const char *charset, const char *str, gsize str_len
         return NULL;
 
     ret = g_string_new_len (tmp_str2, tmp_len);
-    g_free(tmp_str2);
+    g_free (tmp_str2);
     return ret;
 #else
     const gchar *tmp_str1 = str;
     gchar *converted_str, *tmp_str2;
-    gsize converted_str_len = str_len+1;
+    gsize converted_str_len = str_len + 1;
 
-    tmp_str2 = converted_str = g_strndup(str, str_len);
+    tmp_str2 = converted_str = g_strndup (str, str_len);
 
     while (str_toupper (tmp_str1, &tmp_str2, &converted_str_len))
         tmp_str1 += str_length_char (tmp_str1);
 
     ret = g_string_new_len (converted_str, str_len);
-    g_free(converted_str);
+    g_free (converted_str);
     return ret;
 #endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mc_search__regex_is_char_escaped (const char *start, const char *current)
-{
-    int num_esc = 0;
-    while (*current == '\\' && current >= start) {
-        num_esc++;
-        current--;
-    }
-    return (gboolean) num_esc % 2;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -265,3 +260,5 @@ mc_search_get_types_strings_array (void)
     g_string_free (tmp, TRUE);
     return ret;
 }
+
+/* --------------------------------------------------------------------------------------------- */

@@ -119,10 +119,10 @@ mc_search__conditions_new (mc_search_t * mc_search)
                                                                 cp_source));
     }
 #else
-        g_ptr_array_add (ret,
-                         (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
-                                                                mc_search->original_len,
-                                                                str_detect_termencoding()));
+    g_ptr_array_add (ret,
+                     (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
+                                                            mc_search->original_len,
+                                                            str_detect_termencoding ()));
 #endif
     return ret;
 }
@@ -326,14 +326,34 @@ mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
     case MC_SEARCH_T_REGEX:
         ret = mc_search_regex_prepare_replace_str (mc_search, replace_str);
         break;
-    case MC_SEARCH_T_NORMAL:
-    case MC_SEARCH_T_HEX:
     case MC_SEARCH_T_GLOB:
+        ret = mc_search_glob_prepare_replace_str (mc_search, replace_str);
+        break;
+    case MC_SEARCH_T_NORMAL:
+        ret = mc_search_normal_prepare_replace_str (mc_search, replace_str);
+        break;
+    case MC_SEARCH_T_HEX:
+        ret = mc_search_hex_prepare_replace_str (mc_search, replace_str);
+        break;
     default:
         ret = g_string_new_len (replace_str->str, replace_str->len);
         break;
     }
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+mc_search_prepare_replace_str2 (mc_search_t * mc_search, char *replace_str)
+{
+    GString *ret;
+    GString *replace_str2 = g_string_new (replace_str);
+    ret = mc_search_prepare_replace_str (mc_search, replace_str2);
+    g_string_free (replace_str2, TRUE);
+    if (ret)
+        return g_string_free (ret, FALSE);
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -357,28 +377,28 @@ mc_search_is_fixed_search_str (mc_search_t * mc_search)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_search (const gchar *pattern, const gchar *str, mc_search_type_t type)
+mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
 {
     gboolean ret;
-    mc_search_t *search = mc_search_new(pattern, -1);
+    mc_search_t *search = mc_search_new (pattern, -1);
     if (search == NULL)
         return FALSE;
     search->search_type = type;
     search->is_case_sentitive = TRUE;
-    ret = mc_search_run(search,str,0,strlen(str),NULL);
-    mc_search_free(search);
+    ret = mc_search_run (search, str, 0, strlen (str), NULL);
+    mc_search_free (search);
     return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getstart_rezult_by_num(mc_search_t *mc_search, int index)
+mc_search_getstart_rezult_by_num (mc_search_t * mc_search, int index)
 {
     if (!mc_search)
-	return 0;
+        return 0;
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
-	return 0;
+        return 0;
 #if GLIB_CHECK_VERSION (2, 14, 0)
     gint start_pos;
     gint end_pos;
@@ -386,7 +406,7 @@ mc_search_getstart_rezult_by_num(mc_search_t *mc_search, int index)
     return (int) start_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
 #if HAVE_LIBPCRE
-    return mc_search->iovector[index*2];
+    return mc_search->iovector[index * 2];
 #else /* HAVE_LIBPCRE */
     return mc_search->regex_match_info[index].rm_so;
 #endif /* HAVE_LIBPCRE */
@@ -397,12 +417,12 @@ mc_search_getstart_rezult_by_num(mc_search_t *mc_search, int index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mc_search_getend_rezult_by_num(mc_search_t *mc_search, int index)
+mc_search_getend_rezult_by_num (mc_search_t * mc_search, int index)
 {
     if (!mc_search)
-	return 0;
+        return 0;
     if (mc_search->search_type == MC_SEARCH_T_NORMAL)
-	return 0;
+        return 0;
 #if GLIB_CHECK_VERSION (2, 14, 0)
     gint start_pos;
     gint end_pos;
@@ -410,7 +430,7 @@ mc_search_getend_rezult_by_num(mc_search_t *mc_search, int index)
     return (int) end_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
 #if HAVE_LIBPCRE
-    return mc_search->iovector[index*2+1];
+    return mc_search->iovector[index * 2 + 1];
 #else /* HAVE_LIBPCRE */
     return mc_search->regex_match_info[index].rm_eo;
 #endif /* HAVE_LIBPCRE */
