@@ -152,9 +152,7 @@ transform_source (FileOpContext *ctx, const char *source)
 {
     char *s = g_strdup (source);
     char *q;
-    GString *destination_mask, *temp_string;
     const char *fnsource = x_basename (s);
-    char *fnsource_fixed = g_strdup (fnsource);
     size_t j=0, len;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
@@ -164,22 +162,16 @@ transform_source (FileOpContext *ctx, const char *source)
 	    *q = ' ';
     }
 
-    str_fix_string (fnsource_fixed);
-    len = strlen (fnsource_fixed);
+    str_fix_string (fnsource);
+    len = strlen (fnsource);
 
-    if ( !( mc_search_run(ctx->search_handle, fnsource_fixed, 0, len, &j) && j == len) ){
+    if ( !( mc_search_run(ctx->search_handle, fnsource, 0, len, &j) && j == len) ){
 	transform_error = FILE_SKIP;
+	g_free (s);
 	return NULL;
     }
-    g_free (fnsource_fixed);
-
-    destination_mask = g_string_new(ctx->dest_mask);
-    temp_string = mc_search_prepare_replace_str (ctx->search_handle, destination_mask);
-    g_string_free(destination_mask, TRUE);
     g_free (s);
-    if (temp_string == NULL)
-        return NULL;
-    return g_string_free(temp_string, FALSE);
+    return mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
 }
 
 static void
@@ -1813,7 +1805,6 @@ panel_operate (void *source_panel, FileOperation operation,
 	    dest_dir = other_panel->cwd;
 	else
 	    dest_dir = panel->cwd;
-
 	/*
 	 * Add trailing backslash only when do non-locally ops.
 	 * It saves user from occasional file renames (when destination
@@ -1913,13 +1904,14 @@ panel_operate (void *source_panel, FileOperation operation,
 		    erase_file (ctx, source_with_path, &count, &bytes, 1);
 	} else {
 	    temp = transform_source (ctx, source_with_path);
-
 	    if (temp == NULL) {
 		value = transform_error;
 	    } else {
-		char *temp2 = concat_dir_and_file (dest, temp);
-		g_free (dest);
+		char *repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+		char *temp2 = concat_dir_and_file (repl_dest, temp);
+		g_free (repl_dest);
 		g_free (temp);
+		g_free(dest);
 		dest = temp2;
 		
 		switch (operation) {
@@ -1929,14 +1921,15 @@ panel_operate (void *source_panel, FileOperation operation,
 		     */
 		    (*ctx->stat_func) (source_with_path, &src_stat);
 
-		    if (S_ISDIR (src_stat.st_mode))
+		    if (S_ISDIR (src_stat.st_mode)) {
 			value =
 			    copy_dir_dir (ctx, source_with_path, dest, 1,
 					  0, 0, 0, &count, &bytes);
-		    else
+		    } else {
 			value =
 			    copy_file_file (ctx, source_with_path, dest, 1,
 					    &count, &bytes, 1);
+                    }
 		    break;
 
 		case OP_MOVE:
@@ -2021,8 +2014,10 @@ panel_operate (void *source_panel, FileOperation operation,
 		if (temp == NULL)
 		    value = transform_error;
 		else {
-		    char *temp2 = concat_dir_and_file (dest, temp);
 		    char *temp3;
+		    char *repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+		    char *temp2 = concat_dir_and_file (repl_dest, temp);
+		    g_free(repl_dest);
 
 		    g_free(temp);
 		    temp3 = source_with_path;

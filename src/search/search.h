@@ -127,6 +127,7 @@ gboolean mc_search_is_type_avail (mc_search_type_t);
 const mc_search_type_str_t *mc_search_types_list_get (void);
 
 GString *mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str);
+char *mc_search_prepare_replace_str2 (mc_search_t *, char *);
 
 gboolean mc_search_is_fixed_search_str (mc_search_t *);
 

@@ -344,6 +344,20 @@ mc_search_prepare_replace_str (mc_search_t * mc_search, GString * replace_str)
 
 /* --------------------------------------------------------------------------------------------- */
 
+char *
+mc_search_prepare_replace_str2 (mc_search_t * mc_search, char *replace_str)
+{
+    GString *ret;
+    GString *replace_str2 = g_string_new (replace_str);
+    ret = mc_search_prepare_replace_str (mc_search, replace_str2);
+    g_string_free (replace_str2, TRUE);
+    if (ret)
+        return g_string_free (ret, FALSE);
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 gboolean
 mc_search_is_fixed_search_str (mc_search_t * mc_search)
 {
