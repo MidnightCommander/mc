@@ -70,6 +70,7 @@
 #include "util.h"               /* strip_password() */
 #include "strutil.h"
 #include "../src/search/search.h"
+#include "../src/strescape.h"
 
 /* }}} */
 
