@@ -1,6 +1,9 @@
 /* Mouse managing
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006,
-   2007 Free Software Foundation, Inc.
+   2007, 2009 Free Software Foundation, Inc.
+   
+   Written by:
+   Andrew Borodin <aborodin@vmail.ru>, 2009.
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
