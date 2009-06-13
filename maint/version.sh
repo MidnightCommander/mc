@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git --version &>/dev/null || exit
+git --version >/dev/null || exit
 
 curr_dir=$(pwd)
 
