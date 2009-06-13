@@ -30,7 +30,7 @@ new_version="$(git --git-dir "${src_top_dir}" describe 2>/dev/null)"
 
 saved_version=
 [ -r  ${VERSION_FILE} ] && {
-    saved_version=$(grep '^#define MC_CURRENT_VERSION' ${VERSION_FILE}| sed -r 's/.*"(.*)"$/\1/')
+    saved_version=$(sed -rn 's/^#define MC_CURRENT_VERSION "(.*)"$/\1/p' ${VERSION_FILE})
 }
 
 [ -z "${saved_version}" -o "${saved_version}" != "${new_version}" ] && {
