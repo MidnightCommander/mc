@@ -158,6 +158,48 @@ menu_delete_cmd (void)
 }
 
 static void
+menu_xstore_cmd (void)
+{
+    menu_cmd (CK_XStore);
+}
+
+static void
+menu_xcut_cmd (void)
+{
+    menu_cmd (CK_XCut);
+}
+
+static void
+menu_xpaste_cmd (void)
+{
+    menu_cmd (CK_XPaste);
+}
+
+static void
+menu_toggle_bookmark_cmd (void)
+{
+    menu_cmd (CK_Toggle_Bookmark);
+}
+
+static void
+menu_flush_bookmark_cmd (void)
+{
+    menu_cmd (CK_Flush_Bookmarks);
+}
+
+static void
+menu_next_bookmark_cmd (void)
+{
+    menu_cmd (CK_Next_Bookmark);
+}
+
+static void
+menu_prev_bookmark_cmd (void)
+{
+    menu_cmd (CK_Prev_Bookmark);
+}
+
+static void
 menu_cut_cmd (void)
 {
     menu_cmd (CK_Save_Block);
@@ -313,6 +355,24 @@ menu_user_menu_cmd (void)
     menu_key (KEY_F (11));
 }
 
+static void
+menu_find_declare (void)
+{
+    menu_cmd (CK_Find_Definition);
+}
+
+static void
+menu_declare_back (void)
+{
+    menu_cmd (CK_Load_Prev_File);
+}
+
+static void
+menu_declare_forward (void)
+{
+    menu_cmd (CK_Load_Next_File);
+}
+
 static menu_entry FileMenu[] =
 {
     {' ', N_("&Open file..."),         NULL_HOTKEY, menu_load_cmd},
@@ -351,22 +411,55 @@ static menu_entry FileMenuEmacs[] =
 
 static menu_entry EditMenu[] =
 {
-    {' ', N_("&Toggle Mark       F3"), NULL_HOTKEY, menu_mark_cmd},
-    {' ', N_("&Mark Columns    S-F3"), NULL_HOTKEY, menu_markcol_cmd},
+    {' ', N_("&Toggle mark                 F3"), NULL_HOTKEY, menu_mark_cmd},
+    {' ', N_("Mar&k columns              S-F3"), NULL_HOTKEY, menu_markcol_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("Toggle &ins/overw Ins"), NULL_HOTKEY, menu_ins_cmd},
+    {' ', N_("Toggle &ins/overw           Ins"), NULL_HOTKEY, menu_ins_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Copy              F5"), NULL_HOTKEY, menu_copy_cmd},
-    {' ', N_("&Move              F6"), NULL_HOTKEY, menu_move_cmd},
-    {' ', N_("&Delete            F8"), NULL_HOTKEY, menu_delete_cmd},
+    {' ', N_("&Copy                        F5"), NULL_HOTKEY, menu_copy_cmd},
+    {' ', N_("&Move                        F6"), NULL_HOTKEY, menu_move_cmd},
+    {' ', N_("&Delete                      F8"), NULL_HOTKEY, menu_delete_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Undo             C-u"), NULL_HOTKEY, menu_undo_cmd},
+    {' ', N_("C&opy to clipfile         C-Ins"), NULL_HOTKEY, menu_xstore_cmd},
+    {' ', N_("C&ut to clipfile          S-Del"), NULL_HOTKEY, menu_xcut_cmd},
+    {' ', N_("&Paste from clipfile      S-Ins"), NULL_HOTKEY, menu_xpaste_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("&Beginning     C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
-    {' ', N_("&End           C-PgDn"), NULL_HOTKEY, menu_end_cmd}
+    {' ', N_("Toggle bookmar&k               "), NULL_HOTKEY, menu_toggle_bookmark_cmd},
+    {' ', N_("&Next bookmark                 "), NULL_HOTKEY, menu_next_bookmark_cmd},
+    {' ', N_("Pre&v bookmark                 "), NULL_HOTKEY, menu_prev_bookmark_cmd},
+    {' ', N_("&Flush bookmark                "), NULL_HOTKEY, menu_flush_bookmark_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Undo                       C-u"), NULL_HOTKEY, menu_undo_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Beginning               C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
+    {' ', N_("&End                     C-PgDn"), NULL_HOTKEY, menu_end_cmd}
 };
 
-#define EditMenuEmacs EditMenu
+static menu_entry EditMenuEmacs[] =
+{
+    {' ', N_("&Toggle mark                 F3"), NULL_HOTKEY, menu_mark_cmd},
+    {' ', N_("Mar&k columns              S-F3"), NULL_HOTKEY, menu_markcol_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Toggle &ins/overw           Ins"), NULL_HOTKEY, menu_ins_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Copy                        F5"), NULL_HOTKEY, menu_copy_cmd},
+    {' ', N_("&Move                        F6"), NULL_HOTKEY, menu_move_cmd},
+    {' ', N_("&Delete                      F8"), NULL_HOTKEY, menu_delete_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("C&opy to clipfile           M-w"), NULL_HOTKEY, menu_xstore_cmd},
+    {' ', N_("C&ut to clipfile            C-w"), NULL_HOTKEY, menu_xcut_cmd},
+    {' ', N_("&Paste from clipfile        C-y"), NULL_HOTKEY, menu_xpaste_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Toggle bookmar&k               "), NULL_HOTKEY, menu_toggle_bookmark_cmd},
+    {' ', N_("&Next bookmark                 "), NULL_HOTKEY, menu_next_bookmark_cmd},
+    {' ', N_("Pre&v bookmark                 "), NULL_HOTKEY, menu_prev_bookmark_cmd},
+    {' ', N_("&Flush bookmark                "), NULL_HOTKEY, menu_flush_bookmark_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Undo                       C-u"), NULL_HOTKEY, menu_undo_cmd},
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("&Beginning               C-PgUp"), NULL_HOTKEY, menu_beginning_cmd},
+    {' ', N_("&End                     C-PgDn"), NULL_HOTKEY, menu_end_cmd}
+};
 
 static menu_entry SearReplMenu[] =
 {
@@ -382,10 +475,14 @@ static menu_entry CmdMenu[] =
     {' ', N_("&Go to line...            M-l"), NULL_HOTKEY, menu_goto_line},
     {' ', N_("Toggle li&ne state        M-n"), NULL_HOTKEY, menu_toggle_line_state},
     {' ', N_("Go to matching &bracket   M-b"), NULL_HOTKEY, menu_goto_bracket},
-#ifdef HAVE_CHARSET 
+    {' ', "", NULL_HOTKEY, 0},
+    {' ', N_("Find declaration      A-Enter"), NULL_HOTKEY, menu_find_declare},
+    {' ', N_("Back from declaration     M--"), NULL_HOTKEY, menu_declare_back},
+    {' ', N_("Forward to declaration    M-+"), NULL_HOTKEY, menu_declare_forward},
+#ifdef HAVE_CHARSET
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Encod&ing...             C-t"), NULL_HOTKEY, menu_select_codepage_cmd},
-#endif 
+#endif
     {' ', "", NULL_HOTKEY, 0},
     {' ', N_("Insert &literal...       C-q"), NULL_HOTKEY, menu_lit_cmd},
     {' ', "", NULL_HOTKEY, 0},
