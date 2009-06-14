@@ -54,7 +54,7 @@
 #include "main.h"		/* the_menubar */
 #include "unixcompat.h"
 #include "mountlist.h"		/* my_statfs */
-#include "selcodepage.h"	/* do_select_codepage () */
+#include "selcodepage.h"	/* select_charset () */
 #include "charsets.h"		/* get_codepage_id () */
 #include "strutil.h"
 
@@ -2651,13 +2651,13 @@ set_panel_encoding (WPanel *panel)
     int r;
     int width = (panel->widget.x)? panel->widget.cols : panel->widget.cols * (-1);
 
-    r = select_charset (width, 0, source_codepage, 0);
+    r = select_charset (width, 0, source_codepage, FALSE);
 
-    if ( r == -2)
-	return;
+    if (r == SELECT_CHARSET_CANCEL)
+	return; /* Cancel */
 
-
-    if (r == -1){
+    if (r == SELECT_CHARSET_NO_TRANSLATE) {
+	/* No translation */
 	errmsg = init_translation_table (display_codepage, display_codepage);
 	cd_path = remove_encoding_from_path (panel->cwd);
 	do_panel_cd (panel, cd_path, 0);
@@ -2672,13 +2672,13 @@ set_panel_encoding (WPanel *panel)
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
         return;
     }
-    encoding = g_strdup( get_codepage_id ( source_codepage ) );
+
+    encoding = get_codepage_id (source_codepage);
 #endif
-    if (encoding) {
+    if (encoding != NULL) {
         cd_path = add_encoding_to_path (panel->cwd, encoding);
         if (!do_panel_cd (panel, cd_path, 0))
-            message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
+            message (D_ERROR, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
         g_free (cd_path);
-        g_free (encoding);
     }
 }

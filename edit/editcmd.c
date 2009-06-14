@@ -2335,9 +2335,14 @@ void
 edit_select_codepage_cmd (WEdit *edit)
 {
 #ifdef HAVE_CHARSET
-    do_select_codepage ();
-    if ( get_codepage_id (source_codepage) )
-        edit->utf8 = str_isutf8 (get_codepage_id (source_codepage));
+    if (do_select_codepage ()) {
+	char *cp_id;
+
+	cp_id = get_codepage_id (source_codepage);
+	if (cp_id != NULL)
+	    edit->utf8 = str_isutf8 (cp_id);
+    }
+
     edit->force = REDRAW_COMPLETELY;
     edit_refresh_cmd (edit);
 #endif

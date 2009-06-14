@@ -567,19 +567,26 @@ static WCheck *inpcheck;
 static int
 sel_charset_button (int action)
 {
-    const char *cpname;
-    char buf[64];
+    int new_dcp;
+
     (void) action;
 
-    new_display_codepage = select_charset (0, 0, new_display_codepage, 1);
-    cpname = (new_display_codepage < 0)
-	? _("Other 8 bit")
-	: codepages[new_display_codepage].name;
-    if ( cpname )
-        utf8_display = str_isutf8 (cpname);
-    /* avoid strange bug with label repainting */
-    g_snprintf (buf, sizeof (buf), "%-27s", cpname);
-    label_set_text (cplabel, buf);
+    new_dcp = select_charset (0, 0, new_display_codepage, TRUE);
+
+    if (new_dcp != SELECT_CHARSET_CANCEL) {
+	const char *cpname;
+	char buf[BUF_TINY];
+
+	new_display_codepage = new_dcp;
+	cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
+		    _("Other 8 bit") : codepages[new_display_codepage].name;
+	if (cpname != NULL)
+	    utf8_display = str_isutf8 (cpname);
+	/* avoid strange bug with label repainting */
+	g_snprintf (buf, sizeof (buf), "%-27s", cpname);
+	label_set_text (cplabel, buf);
+    }
+
     return 0;
 }
 

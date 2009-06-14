@@ -48,7 +48,6 @@
 #include "../src/key.h"		/* KEY_M_SHIFT */
 #include "../src/tty.h"		/* keys */
 #include "../src/charsets.h"	/* convert_from_input_c() */
-#include "../src/selcodepage.h"	/* do_select_codepage() */
 #include "../src/main.h"	/* display_codepage */
 #include "../src/strutil.h"	/* str_isutf8 () */
 

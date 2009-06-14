@@ -281,13 +281,18 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 {
     long buf, buf2;
     int file = -1;
+#ifdef HAVE_CHARSET
+    char *cp_id;
+#endif
 
     edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
     edit->utf8 = 0;
 #ifdef HAVE_CHARSET
-    if ( get_codepage_id( source_codepage ) )
-        edit->utf8 = str_isutf8 (get_codepage_id( source_codepage ));
+    cp_id = get_codepage_id (source_codepage);
+
+    if (cp_id != NULL)
+        edit->utf8 = str_isutf8 (cp_id);
 #endif
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 	GString *errmsg = g_string_new(NULL);

@@ -3466,15 +3466,17 @@ static void view_cmk_moveto_bottom (void *w, int n) {
 static void
 view_select_encoding (WView *view) 
 {
-    char *enc = NULL;
-    GIConv conv;
-    struct cache_line *line;
-
 #ifdef HAVE_CHARSET
-    do_select_codepage ();
-    enc = g_strdup( get_codepage_id ( source_codepage ) );
-#endif
-    if ( enc ) {
+    char *enc = NULL;
+
+    if (!do_select_codepage ())
+	return;
+
+    enc = get_codepage_id (source_codepage);
+    if (enc != NULL) {
+	GIConv conv;
+	struct cache_line *line;
+
         conv = str_crt_conv_from (enc);
         if (conv != INVALID_CONV) {
             if (view->converter != str_cnv_from_term)
@@ -3484,9 +3486,8 @@ view_select_encoding (WView *view)
             line = view_offset_to_line (view, view->dpy_start);
             view_set_first_showed (view, line);
         }
-	g_free(enc);
     }
-
+#endif
 }
 
 
