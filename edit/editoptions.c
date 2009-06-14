@@ -44,7 +44,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "usermap.h"
 #include "../src/dialog.h"	/* B_CANCEL */
 #include "../src/wtools.h"	/* QuickDialog */

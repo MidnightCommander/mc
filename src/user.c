@@ -42,7 +42,6 @@
 #include "../src/search/search.h"
 
 #include "../edit/edit.h"		/* BLOCK_FILE */
-#include "../edit/edit-widget.h"	/* WEdit */
 
 /* For the simple listbox manager */
 #include "dialog.h"
@@ -176,11 +175,11 @@ strip_ext(char *ss)
 }
 
 char *
-expand_format (struct WEdit *edit_widget, char c, int quote)
+expand_format (WEdit *edit_widget, char c, int quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, int);
-    char *fname;
+    char *fname = NULL;
     char *result;
     char c_lc;
 
@@ -188,7 +187,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	return g_strdup ("%");
 
     if (edit_one_file != NULL)
-	fname = edit_widget->filename;
+	fname = str_unconst (edit_get_file_name (edit_widget));
     else {
 	if (g_ascii_islower ((gchar) c))
 	    panel = current_panel;
@@ -233,16 +232,19 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	}
     case 'i':			/* indent equal number cursor position in line */
 	if (edit_widget)
-	    return g_strnfill (edit_widget->curs_col, ' ');
+	    return g_strnfill (edit_get_curs_col (edit_widget), ' ');
 	break;
     case 'y':			/* syntax type */
-	if (edit_widget && edit_widget->syntax_type)
-	    return g_strdup (edit_widget->syntax_type);
+	if (edit_widget) {
+	    const char *syntax_type = edit_get_syntax_type (edit_widget);
+	    if (syntax_type != NULL)
+		return g_strdup (syntax_type);
+	}
 	break;
     case 'k':			/* block file name */
     case 'b':			/* block file name / strip extension */  {
 	    if (edit_widget) {
-		char *file = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);
+		char *file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
 		fname = (*quote_func) (file, 0);
 		g_free (file);
 		return fname;
@@ -429,10 +431,12 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, MC_SEARCH_T_GLOB);
 	    break;
 	case 'y': /* syntax pattern */
-            if (edit_widget && edit_widget->syntax_type) {
-	        p = extract_arg (p, arg, sizeof (arg));
-	        *condition = panel &&
-                    mc_search (arg, edit_widget->syntax_type, MC_SEARCH_T_NORMAL);
+	    if (edit_widget) {
+		const char *syntax_type = edit_get_syntax_type (edit_widget);
+		if (syntax_type != NULL) {
+		    p = extract_arg (p, arg, sizeof (arg));
+		    *condition = panel && mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL);
+		}
 	    }
             break;
 	case 'd':
@@ -715,7 +719,7 @@ menu_file_own(char* path)
  * otherwise we are called from the mcedit menu.
  */
 void
-user_menu_cmd (struct WEdit *edit_widget)
+user_menu_cmd (WEdit *edit_widget)
 {
     char *p;
     char *data, **entries;
@@ -730,19 +734,19 @@ user_menu_cmd (struct WEdit *edit_widget)
 	return;
     }
     
-    menu = g_strdup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
+    menu = g_strdup (edit_widget ? EDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
-        menu = concat_dir_and_file \
-                            (home_dir, edit_widget ? CEDIT_HOME_MENU : MC_HOME_MENU);
+        menu = concat_dir_and_file
+                            (home_dir, edit_widget ? EDIT_HOME_MENU : MC_HOME_MENU);
 	if (!exist_file (menu)){
 	    g_free (menu);
-	    menu = concat_dir_and_file \
-                        (mc_home, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+	    menu = concat_dir_and_file
+                        (mc_home, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	    if (!exist_file (menu)) {
 		g_free (menu);
-		menu = concat_dir_and_file \
-			(mc_home_alt, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
+		menu = concat_dir_and_file
+			(mc_home_alt, edit_widget ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	    }
 	}
     }

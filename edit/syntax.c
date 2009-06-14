@@ -47,7 +47,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 #include "../src/color.h"	/* use_colors */
 #include "../src/main.h"	/* mc_home */
@@ -1186,7 +1186,7 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 	if (!*edit->filename && !type)
 	    return;
     }
-    f = concat_dir_and_file (home_dir, SYNTAX_FILE);
+    f = concat_dir_and_file (home_dir, EDIT_SYNTAX_FILE);
     r = edit_read_syntax_file (edit, pnames, f, edit ? edit->filename : 0,
 			       get_first_editor_line (edit), type);
     if (r == -1) {
@@ -1204,4 +1204,10 @@ edit_load_syntax (WEdit *edit, char ***pnames, const char *type)
 	/* succeeded */
     }
     g_free (f);
+}
+
+const char *
+edit_get_syntax_type (const WEdit *edit)
+{
+    return edit->syntax_type;
 }

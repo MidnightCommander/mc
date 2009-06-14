@@ -10,10 +10,6 @@
 #include "panel.h"
 #include "widget.h"
 
-#ifdef USE_INTERNAL_EDIT
-#include "../edit/edit.h"
-#endif
-
 /* Toggling functions */
 void toggle_fast_reload (void);
 void toggle_mix_all_files (void);
@@ -46,11 +42,6 @@ extern int clear_before_exec;
 extern int mou_auto_repeat;
 extern char *other_dir;
 extern int mouse_move_pages;
-
-#ifdef USE_INTERNAL_EDIT
-extern int edit_stack_iterator;
-struct edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-#endif
 
 #ifdef HAVE_CHARSET
 extern int source_codepage;

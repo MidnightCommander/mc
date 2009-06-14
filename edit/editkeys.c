@@ -41,7 +41,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
 #include "editcmddef.h"		/* list of commands */

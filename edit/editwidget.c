@@ -43,7 +43,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 
 #include "../src/tty.h"		/* LINES */
@@ -214,6 +214,12 @@ edit_file (const char *_file, int line)
     destroy_dlg (edit_dlg);
 
     return 1;
+}
+
+const char *
+edit_get_file_name (const WEdit *edit)
+{
+    return edit->filename;
 }
 
 static void edit_my_define (Dlg_head * h, int idx, const char *text,

@@ -40,7 +40,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "editlock.h"
 #include "edit-widget.h"
 #include "editcmddef.h"
@@ -82,6 +82,9 @@ int option_edit_bottom_extreme = 0;
 
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
+
+int edit_stack_iterator = 0;
+edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
 
 /*-
  *
@@ -858,7 +861,7 @@ edit_reload_line (WEdit *edit, const char *filename, long line)
 
    If the stack long int is 0-255 it represents a normal insert (from a backspace),
    256-512 is an insert ahead (from a delete), If it is betwen 600 and 700 it is one
-   of the cursor functions #define'd in edit.h. 1000 through 700'000'000 is to
+   of the cursor functions #define'd in edit-impl.h. 1000 through 700'000'000 is to
    set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
    position.
 
@@ -1517,6 +1520,12 @@ void edit_update_curs_row (WEdit * edit)
 void edit_update_curs_col (WEdit * edit)
 {
     edit->curs_col = edit_move_forward3(edit, edit_bol(edit, edit->curs1), 0, edit->curs1) + option_line_state_width;
+}
+
+int
+edit_get_curs_col (const WEdit *edit)
+{
+    return edit->curs_col;
 }
 
 /*moves the display start position up by i lines */
@@ -3041,7 +3050,7 @@ user_menu (WEdit * edit)
     int nomark;
     struct stat status;
     long start_mark, end_mark;
-    char *block_file = concat_dir_and_file (home_dir, BLOCK_FILE);
+    char *block_file = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
     int rc = 0;
 
     nomark = eval_marks (edit, &start_mark, &end_mark);
@@ -3075,4 +3084,26 @@ user_menu (WEdit * edit)
 
 cleanup:
     g_free (block_file);
+}
+
+void
+edit_stack_init (void)
+{
+    for (edit_stack_iterator = 0;
+	    edit_stack_iterator < MAX_HISTORY_MOVETO;
+	    edit_stack_iterator++ ) {
+	edit_history_moveto[edit_stack_iterator].filename = NULL;
+	edit_history_moveto[edit_stack_iterator].line = -1;
+    }
+
+    edit_stack_iterator = 0;
+}
+
+void
+edit_stack_free (void)
+{
+    for (edit_stack_iterator = 0;
+	    edit_stack_iterator < MAX_HISTORY_MOVETO;
+	    edit_stack_iterator++)
+	g_free (edit_history_moveto[edit_stack_iterator].filename);
 }
