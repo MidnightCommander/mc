@@ -224,6 +224,7 @@ static const struct {
     { "editor_visible_tabs", &visible_tabs },
     { "editor_visible_spaces", &visible_tws },
     { "editor_line_state", &option_line_state },
+    { "editor_simple_statusbar", &simple_statusbar },
 #endif /* USE_INTERNAL_EDIT */
 
     { "nice_rotating_dash", &nice_rotating_dash },
