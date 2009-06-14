@@ -404,6 +404,13 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 {
     WPanel *panel;
     char arg [256];
+    mc_search_type_t search_type;
+
+    if (easy_patterns) {
+	search_type = MC_SEARCH_T_GLOB;
+    } else {
+	search_type = MC_SEARCH_T_REGEX;
+    }
 
     /* Handle one condition */
     for (;*p != '\n' && *p != '&' && *p != '|'; p++){
@@ -428,7 +435,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	    break;
 	case 'f': /* file name pattern */
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, MC_SEARCH_T_GLOB);
+	    *condition = panel && mc_search (arg, panel->dir.list [panel->selected].fname, search_type);
 	    break;
 	case 'y': /* syntax pattern */
 	    if (edit_widget) {
@@ -441,7 +448,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
             break;
 	case 'd':
 	    p = extract_arg (p, arg, sizeof (arg));
-	    *condition = panel && mc_search (arg, panel->cwd, MC_SEARCH_T_GLOB);
+	    *condition = panel && mc_search (arg, panel->cwd, search_type);
 	    break;
 	case 't':
 	    p = extract_arg (p, arg, sizeof (arg));
@@ -450,7 +457,7 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	case 'x': /* executable */
 	{
 	    struct stat status;
-	    
+
 	    p = extract_arg (p, arg, sizeof (arg));
 	    if (stat (arg, &status) == 0)
 		*condition = is_exe (status.st_mode);
