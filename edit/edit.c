@@ -282,7 +282,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
     long buf, buf2;
     int file = -1;
 #ifdef HAVE_CHARSET
-    char *cp_id;
+    const char *cp_id;
 #endif
 
     edit->curs2 = edit->last_byte;

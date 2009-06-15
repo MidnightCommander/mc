@@ -2336,7 +2336,7 @@ edit_select_codepage_cmd (WEdit *edit)
 {
 #ifdef HAVE_CHARSET
     if (do_select_codepage ()) {
-	char *cp_id;
+	const char *cp_id;
 
 	cp_id = get_codepage_id (source_codepage);
 	if (cp_id != NULL)
