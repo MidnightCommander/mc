@@ -21,9 +21,8 @@
    02110-1301, USA.
 */
 
-/** \file edit.h
+/** \file edit-impl.h
  *  \brief Header: editor low level data handling and cursor fundamentals
- *  edit.h - main include file
  *  \author Paul Sheer
  *  \date 1996, 1997
  */

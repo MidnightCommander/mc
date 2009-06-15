@@ -2,7 +2,8 @@
 
    Copyright (C) 2009 Free Software Foundation, Inc.
 
-   Authors: 2009 Andrew Borodin
+   Authors: 1996, 1997 Paul Sheer
+            2009 Andrew Borodin
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,6 +23,8 @@
 
 /** \file edit.h
  *  \brief Header: editor public API
+ *  \author Paul Sheer
+ *  \date 1996, 1997
  *  \author Andrew Borodin
  *  \date 2009
  */
