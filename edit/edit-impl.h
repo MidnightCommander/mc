@@ -131,6 +131,7 @@ typedef enum {
     EDIT_FILE_MENU	= 2
 } edit_current_file_t;
 
+extern const char VERTICAL_MAGIC[5];
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
 struct WMenu *edit_create_menu (void);
@@ -200,6 +201,8 @@ void edit_get_match_keyword_cmd (WEdit *edit);
 int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
+void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width);
+int edit_insert_column_of_text_from_file (WEdit * edit, int file);
 int edit_insert_file (WEdit * edit, const char *filename);
 int edit_load_back_cmd (WEdit * edit);
 int edit_load_forward_cmd (WEdit * edit);

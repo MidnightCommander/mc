@@ -954,7 +954,7 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 
 #define space_width 1
 
-static void
+void
 edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
 {
     long cursor;
@@ -997,6 +997,62 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
     edit_cursor_move (edit, cursor - edit->curs1);
 }
 
+#define TEMP_BUF_LEN 1024
+
+int
+edit_insert_column_of_text_from_file (WEdit * edit, int file)
+{
+    long cursor;
+    int i, col;
+    int blocklen = -1, width;
+    unsigned char *data;
+    cursor = edit->curs1;
+    col = edit_get_col (edit);
+    data = g_malloc (TEMP_BUF_LEN);
+    while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0) {
+        for (width = 0; width < blocklen; width++) {
+            if (data[width] == '\n')
+                break;
+        }
+        for (i = 0; i < blocklen; i++) {
+            if (data[i] == '\n') {      /* fill in and move to next line */
+                int l;
+                long p;
+                if (edit_get_byte (edit, edit->curs1) != '\n') {
+                    l = width - (edit_get_col (edit) - col);
+                    while (l > 0) {
+                        edit_insert (edit, ' ');
+                        l -= space_width;
+                    }
+                }
+                for (p = edit->curs1;; p++) {
+                    if (p == edit->last_byte) {
+                        edit_cursor_move (edit, edit->last_byte - edit->curs1);
+                        edit_insert_ahead (edit, '\n');
+                        p++;
+                        break;
+                    }
+                    if (edit_get_byte (edit, p) == '\n') {
+                        p++;
+                        break;
+                    }
+                }
+                edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
+                l = col - edit_get_col (edit);
+                while (l >= space_width) {
+                    edit_insert (edit, ' ');
+                    l -= space_width;
+                }
+                continue;
+            }
+            edit_insert (edit, data[i]);
+        }
+    }
+    edit_cursor_move (edit, cursor - edit->curs1);
+    g_free(data);
+    edit->force |= REDRAW_PAGE;
+    return blocklen;
+}
 
 void
 edit_block_copy_cmd (WEdit *edit)
@@ -1623,9 +1679,6 @@ edit_ok_to_exit (WEdit *edit)
     return 1;
 }
 
-
-#define TEMP_BUF_LEN 1024
-
 /* Return a null terminated length of text. Result must be g_free'd */
 static unsigned char *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
@@ -1669,17 +1722,20 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 	return 0;
 
     if (column_highlighting) {
-	unsigned char *block, *p;
 	int r;
-	p = block = edit_get_block (edit, start, finish, &len);
-	while (len) {
-	    r = mc_write (file, p, len);
-	    if (r < 0)
-		break;
-	    p += r;
-	    len -= r;
+	r = mc_write (file, VERTICAL_MAGIC, sizeof(VERTICAL_MAGIC));
+	if (r > 0) {
+	    unsigned char *block, *p;
+	    p = block = edit_get_block (edit, start, finish, &len);
+	    while (len) {
+	        r = mc_write (file, p, len);
+	        if (r < 0)
+	            break;
+	        p += r;
+	        len -= r;
+	    }
+	    g_free (block);
 	}
-	g_free (block);
     } else {
 	unsigned char *buf;
 	int i = start, end;

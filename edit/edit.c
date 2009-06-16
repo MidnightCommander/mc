@@ -85,7 +85,8 @@ char *option_backup_ext = NULL;
 
 int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto [MAX_HISTORY_MOVETO];
-
+/* magic sequense for say than block is vertical */
+const char VERTICAL_MAGIC[] = {'\1', '\1', '\1', '\1', '\n'};
 /*-
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
@@ -441,13 +442,27 @@ edit_insert_file (WEdit *edit, const char *filename)
     } else {
 	int i, file, blocklen;
 	long current = edit->curs1;
-	unsigned char *buf;
+	int vertical_insertion = 0;
+	char *buf;
 	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1)
 	    return 0;
 	buf = g_malloc (TEMP_BUF_LEN);
-	while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
-	    for (i = 0; i < blocklen; i++)
-		edit_insert (edit, buf[i]);
+        blocklen = mc_read (file, buf, sizeof(VERTICAL_MAGIC));
+        if (blocklen > 0) {
+            /* if contain signature VERTICAL_MAGIC tnen it vertical block */
+            if ( memcmp(buf, VERTICAL_MAGIC, sizeof(VERTICAL_MAGIC)) == 0 ) {
+                vertical_insertion = 1;
+            } else {
+                mc_lseek (file, 0, SEEK_SET);
+            }
+        }
+        if (vertical_insertion) {
+            blocklen = edit_insert_column_of_text_from_file (edit, file);
+        } else {
+            while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
+                for (i = 0; i < blocklen; i++)
+                    edit_insert (edit, buf[i]);
+            }
 	}
 	edit_cursor_move (edit, current - edit->curs1);
 	g_free (buf);
