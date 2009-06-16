@@ -1,6 +1,6 @@
 /* edit.h - editor public API
 
-   Copyright (C) 2009 Free Software Foundation, Inc.
+   Copyright (C) 1996, 1997, 2009 Free Software Foundation, Inc.
 
    Authors: 1996, 1997 Paul Sheer
             2009 Andrew Borodin
@@ -64,6 +64,8 @@ extern int edit_confirm_save;
 
 extern int visible_tabs;
 extern int visible_tws;
+
+extern int simple_statusbar;
 
 /* used in main() */
 void edit_stack_init (void);
