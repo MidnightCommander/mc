@@ -48,16 +48,22 @@ get_hotkey (int n)
     return (n <= 9) ? '0' + n : 'a' + n - 10;
 }
 
+/* Return value:
+ *   -2 (SELECT_CHARSET_CANCEL)       : Cancel
+ *   -1 (SELECT_CHARSET_OTHER_8BIT)   : "Other 8 bit"    if seldisplay == TRUE
+ *   -1 (SELECT_CHARSET_NO_TRANSLATE) : "No translation" if seldisplay == FALSE
+ *   >= 0                             : charset number
+ */
 int
-select_charset (int delta_x, int delta_y, int current_charset, int seldisplay)
+select_charset (int delta_x, int delta_y, int current_charset, gboolean seldisplay)
 {
-    int i, menu_lines = n_codepages + 1;
+    int i;
     char buffer[255];
 
     /* Create listbox */
     Listbox *listbox = create_listbox_window_delta (delta_x, delta_y,
-					      ENTRY_LEN + 2, menu_lines,
-					      _(" Choose input codepage "),
+					      ENTRY_LEN + 2, n_codepages + 1,
+					      _("Choose codepage"),
 					      "[Codepages Translation]");
 
     if (!seldisplay)
@@ -87,29 +93,40 @@ select_charset (int delta_x, int delta_y, int current_charset, int seldisplay)
 
     i = run_listbox (listbox);
 
-    return (seldisplay) ? ((i >= n_codepages) ? -1 : i)
-	: (i - 1);
+    if (i < 0) {
+	/* Cancel dialog */
+	return SELECT_CHARSET_CANCEL;
+    } else {
+	/* some charset has been selected */
+	if (seldisplay) {
+	    /* charset list is finished with "Other 8 bit" item */
+	    return (i >= n_codepages) ? SELECT_CHARSET_OTHER_8BIT : i;
+	} else {
+	    /* charset list is began with "-  < No translation >" item */
+	    return (i - 1);
+	}
+    }
 }
 
-/* Helper functions for codepages support */
-
-
-int
+gboolean
 do_select_codepage (void)
 {
-    const char *errmsg;
+    const char *errmsg = NULL;
     int r;
 
-    r = select_charset (0, 0, source_codepage, 0);
-    if ( r > 0 )
-        source_codepage = r;
+    r = select_charset (0, 0, source_codepage, FALSE);
+    if (r == SELECT_CHARSET_CANCEL)
+	return FALSE;
 
-    errmsg = init_translation_table (source_codepage, display_codepage);
-    if (errmsg) {
+    source_codepage = r;
+
+    errmsg = init_translation_table (r == SELECT_CHARSET_NO_TRANSLATE ?
+					display_codepage : source_codepage,
+					display_codepage);
+    if (errmsg != NULL)
         message (D_ERROR, MSG_ERROR, "%s", errmsg);
-        return -1;
-    }
-    return 0;
+
+    return (errmsg == NULL);
 }
 
 #endif				/* HAVE_CHARSET */
