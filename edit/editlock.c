@@ -55,7 +55,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "editlock.h"
 
 #include "../src/wtools.h"	/* edit_query_dialog () */

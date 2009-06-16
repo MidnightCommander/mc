@@ -47,7 +47,7 @@
 #include "../src/global.h"
 #include "../src/history.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "editlock.h"
 #include "editcmddef.h"
 #include "edit-widget.h"
@@ -545,7 +545,7 @@ static FILE *edit_open_macro_file (const char *r)
     gchar *filename;
     FILE *fd;
     int file;
-    filename = g_strconcat ( home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
+    filename = concat_dir_and_file (home_dir, EDIT_MACRO_FILE);
     if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1){
 	g_free(filename);
 	return 0;
@@ -588,7 +588,7 @@ edit_delete_macro (WEdit * edit, int k)
     if (saved_macros_loaded)
 	if ((j = macro_exists (k)) < 0)
 	    return 0;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_TEMP_FILE);
     g = fopen (tmp , "w");
     g_free(tmp);
     if (!g) {
@@ -620,8 +620,8 @@ edit_delete_macro (WEdit * edit, int k)
     }
     fclose (f);
     fclose (g);
-    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
-    tmp2 = g_strconcat (home_dir, PATH_SEP_STR MACRO_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_TEMP_FILE);
+    tmp2 = concat_dir_and_file (home_dir, EDIT_MACRO_FILE);
     if (rename ( tmp, tmp2) == -1) {
 	edit_error_dialog (_(" Delete macro "),
 	   get_sys_error (_(" Cannot overwrite macro file ")));
@@ -824,7 +824,7 @@ edit_load_syntax_file (WEdit * edit)
     if (dir == 0) {
 	char *buffer;
 
-	buffer = concat_dir_and_file (home_dir, SYNTAX_FILE);
+	buffer = concat_dir_and_file (home_dir, EDIT_SYNTAX_FILE);
 	check_for_default (extdir, buffer);
 	edit_load_file_from_filename (edit, buffer);
 	g_free (buffer);
@@ -847,30 +847,30 @@ edit_load_menu_file (WEdit * edit)
 	geteuid() ? 2 : 3, _("&Local"), _("&User"), _("&System Wide")
     );
 
-    menufile = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
 
     if (!exist_file (menufile)) {
 	g_free (menufile);
-	menufile = concat_dir_and_file (mc_home_alt, CEDIT_GLOBAL_MENU);
+	menufile = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
     }
 
     switch (dir) {
 	case 0:
-	    buffer = g_strdup (CEDIT_LOCAL_MENU);
+	    buffer = g_strdup (EDIT_LOCAL_MENU);
 	    check_for_default (menufile, buffer);
 	    chmod (buffer, 0600);
 	    break;
 
 	case 1:
-	    buffer = concat_dir_and_file (home_dir, CEDIT_HOME_MENU);
+	    buffer = concat_dir_and_file (home_dir, EDIT_HOME_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 	
 	case 2:
-	    buffer = concat_dir_and_file (mc_home, CEDIT_GLOBAL_MENU);
+	    buffer = concat_dir_and_file (mc_home, EDIT_GLOBAL_MENU);
 	    if (!exist_file (buffer)) {
 		g_free (buffer);
-		buffer = concat_dir_and_file (mc_home_alt, CEDIT_GLOBAL_MENU);
+		buffer = concat_dir_and_file (mc_home_alt, EDIT_GLOBAL_MENU);
 	    }
 	    break;
 
@@ -1705,7 +1705,7 @@ static int edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
     int ret;
     gchar *tmp;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     ret = edit_save_block (edit, tmp, start, finish);
     g_free(tmp);
     return ret;
@@ -1748,7 +1748,7 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 void edit_paste_from_X_buf_cmd (WEdit * edit)
 {
     gchar *tmp;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     g_free(tmp);
 }
@@ -1800,9 +1800,11 @@ edit_save_block_cmd (WEdit *edit)
 {
     long start_mark, end_mark;
     char *exp, *tmp;
+
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+
+    tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     exp =
 	input_expand_dialog (_(" Save Block "), _(" Enter file name: "),
 			     MC_HISTORY_EDIT_SAVE_BLOCK, 
@@ -1838,7 +1840,7 @@ edit_insert_file_cmd (WEdit *edit)
     gchar *tmp;
     char *exp;
 
-    tmp = g_strconcat (home_dir, PATH_SEP_STR CLIP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_CLIP_FILE);
     exp = input_expand_dialog (_(" Insert File "), _(" Enter file name: "),
 				     MC_HISTORY_EDIT_INSERT_FILE,
 				     tmp);
@@ -1877,7 +1879,8 @@ int edit_sort_cmd (WEdit * edit)
 	edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
 	return 0;
     }
-    tmp = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);
+
+    tmp = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);
     edit_save_block (edit, tmp, start_mark, end_mark);
     g_free(tmp);
 
@@ -1889,7 +1892,8 @@ int edit_sort_cmd (WEdit * edit)
 	return 1;
     g_free (old);
     old = exp;
-    tmp = g_strconcat (" sort ", exp, " ", home_dir, PATH_SEP_STR BLOCK_FILE, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp = g_strconcat (" sort ", exp, " ", home_dir, PATH_SEP_STR EDIT_BLOCK_FILE, " > ",
+			home_dir, PATH_SEP_STR EDIT_TEMP_FILE, (char *) NULL);
     e = system (tmp);
     g_free(tmp);
     if (e) {
@@ -1910,7 +1914,7 @@ int edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
 	return 1;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_TEMP_FILE);
     edit_insert_file (edit, tmp);
     g_free(tmp);
     return 0;
@@ -1934,7 +1938,7 @@ edit_ext_cmd (WEdit *edit)
     if (!exp)
 	return 1;
 
-    tmp = g_strconcat (exp, " > ", home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp = g_strconcat (exp, " > ", home_dir, PATH_SEP_STR EDIT_TEMP_FILE, (char *) NULL);
     e = system (tmp);
     g_free(tmp);
     g_free (exp);
@@ -1946,7 +1950,7 @@ edit_ext_cmd (WEdit *edit)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    tmp = g_strconcat (home_dir, PATH_SEP_STR TEMP_FILE, (char *) NULL);
+    tmp = concat_dir_and_file (home_dir, EDIT_TEMP_FILE);
     edit_insert_file (edit, tmp);
     g_free(tmp);
     return 0;
@@ -1966,9 +1970,9 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     gchar *o, *h, *b, *tmp;
     char *quoted_name = NULL;
 
-    o = g_strconcat (mc_home, shell_cmd, (char *) NULL);	/* original source script */
+    o = g_strconcat (mc_home, shell_cmd, (char *) NULL);				/* original source script */
     h = g_strconcat (home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
-    b = g_strconcat (home_dir, PATH_SEP_STR BLOCK_FILE, (char *) NULL);	/* block file */
+    b = concat_dir_and_file (home_dir, EDIT_BLOCK_FILE);				/* block file */
 
     if (!(script_home = fopen (h, "r"))) {
 	if (!(script_home = fopen (h, "w"))) {
@@ -2023,7 +2027,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 *        (for compatibility with old scripts).
 	 */
 	tmp = g_strconcat (" ", home_dir, PATH_SEP_STR EDIT_DIR, shell_cmd, " ", quoted_name,
-			 " ", home_dir, PATH_SEP_STR BLOCK_FILE " /dev/null", (char *) NULL);
+			 " ", home_dir, PATH_SEP_STR EDIT_BLOCK_FILE " /dev/null", (char *) NULL);
 	system (tmp);
 	g_free(tmp);
     } else {
@@ -2335,9 +2339,16 @@ void
 edit_select_codepage_cmd (WEdit *edit)
 {
 #ifdef HAVE_CHARSET
-    do_select_codepage ();
-    if ( get_codepage_id (source_codepage) )
-        edit->utf8 = str_isutf8 (get_codepage_id (source_codepage));
+    if (do_select_codepage ()) {
+	const char *cp_id;
+
+	cp_id = get_codepage_id (source_codepage >= 0 ?
+				    source_codepage : display_codepage);
+
+	if (cp_id != NULL)
+	    edit->utf8 = str_isutf8 (cp_id);
+    }
+
     edit->force = REDRAW_COMPLETELY;
     edit_refresh_cmd (edit);
 #endif

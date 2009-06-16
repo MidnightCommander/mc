@@ -42,7 +42,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 
 #define MAX_LINE_LEN 1024
@@ -126,7 +126,7 @@ static void status_string (WEdit * edit, char *s, int w)
                         byte_str,
 
 #ifdef HAVE_CHARSET
-                        get_codepage_id ( source_codepage )
+                        source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
 #else
                         ""
 #endif
@@ -150,7 +150,7 @@ static void status_string (WEdit * edit, char *s, int w)
                         byte_str,
 
 #ifdef HAVE_CHARSET
-                        get_codepage_id ( source_codepage )
+                        source_codepage >= 0 ? get_codepage_id (source_codepage) : ""
 #else
                         ""
 #endif

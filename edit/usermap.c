@@ -38,7 +38,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 #include "editcmddef.h"		/* list of commands */
 #include "usermap.h"

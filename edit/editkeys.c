@@ -41,14 +41,13 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"	/* edit->macro_i */
 #include "editcmd_dialogs.h"
 #include "editcmddef.h"		/* list of commands */
 #include "../src/key.h"		/* KEY_M_SHIFT */
 #include "../src/tty.h"		/* keys */
 #include "../src/charsets.h"	/* convert_from_input_c() */
-#include "../src/selcodepage.h"	/* do_select_codepage() */
 #include "../src/main.h"	/* display_codepage */
 #include "../src/strutil.h"	/* str_isutf8 () */
 
