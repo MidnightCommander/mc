@@ -2338,7 +2338,9 @@ edit_select_codepage_cmd (WEdit *edit)
     if (do_select_codepage ()) {
 	const char *cp_id;
 
-	cp_id = get_codepage_id (source_codepage);
+	cp_id = get_codepage_id (source_codepage >= 0 ?
+				    source_codepage : display_codepage);
+
 	if (cp_id != NULL)
 	    edit->utf8 = str_isutf8 (cp_id);
     }
