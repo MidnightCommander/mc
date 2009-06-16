@@ -21,10 +21,10 @@ src_top_dir=
 
 VERSION_FILE=${src_top_dir}/version.h
 
-git_head=$(git --git-dir "${src_top_dir}" rev-parse --verify HEAD 2>/dev/null)
+git_head=$(git --git-dir "${src_top_dir}/.git" rev-parse --verify HEAD 2>/dev/null)
 [ -z "${git_head}" ] && exit
 
-new_version="$(git --git-dir "${src_top_dir}" describe 2>/dev/null)"
+new_version="$(git --git-dir "${src_top_dir}/.git" describe 2>/dev/null)"
 [ -z "${new_version}" ] && exit
 
 
