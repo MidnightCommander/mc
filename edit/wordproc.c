@@ -41,7 +41,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 
 #define tab_width option_tab_spacing

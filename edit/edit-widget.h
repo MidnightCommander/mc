@@ -8,7 +8,8 @@
 
 #include "../src/dialog.h"		/* Widget */
 #include "../src/search/search.h"		/* mc_search_t */
-#include "edit.h"
+
+#include "edit-impl.h"
 
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32
@@ -137,4 +138,4 @@ struct WEdit {
 
 };
 
-#endif
+#endif				/* MC_EDIT_WIDGET_H */

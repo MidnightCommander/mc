@@ -10,9 +10,9 @@
 
 #define MC_USERMAP ".mc/cedit/cooledit.bindings"
 
-#include "edit.h"
+#include "edit-impl.h"
 
 /* load user map */
-gboolean edit_load_user_map(WEdit *);
+gboolean edit_load_user_map (WEdit *edit);
 
 #endif

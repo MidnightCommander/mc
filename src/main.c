@@ -295,11 +295,6 @@ char *mc_home_alt = NULL;
 
 char cmd_buf[512];
 
-#ifdef USE_INTERNAL_EDIT
-int edit_stack_iterator = 0;
-struct edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
-#endif
-
 static void
 reload_panelized (WPanel *panel)
 {
@@ -2152,8 +2147,6 @@ main (int argc, char *argv[])
     char *mc_dir;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
-    int i;
-
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
@@ -2175,10 +2168,7 @@ main (int argc, char *argv[])
     vfs_init ();
 
 #ifdef USE_INTERNAL_EDIT
-    for ( i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
-        edit_history_moveto[i].filename = NULL;
-        edit_history_moveto[i].line = -1;
-    }
+    edit_stack_init ();
 #endif
 
 #ifdef HAVE_SLANG
@@ -2315,9 +2305,7 @@ main (int argc, char *argv[])
     g_free (other_dir);
 
 #ifdef USE_INTERNAL_EDIT
-    for ( i = 0; i < MAX_HISTORY_MOVETO; i++ ) {
-        g_free(edit_history_moveto[i].filename);
-    }
+    edit_stack_free ();
 #endif
 
     return 0;

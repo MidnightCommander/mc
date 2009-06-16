@@ -44,7 +44,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "../src/cmd.h"
 #include "../src/wtools.h"	/* query_dialog() */
 #include "../src/menu.h"	/* menu_entry */

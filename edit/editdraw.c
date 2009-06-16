@@ -42,7 +42,7 @@
 
 #include "../src/global.h"
 
-#include "edit.h"
+#include "edit-impl.h"
 #include "edit-widget.h"
 
 #define MAX_LINE_LEN 1024
