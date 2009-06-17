@@ -253,7 +253,7 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
 #if HAVE_LIBPCRE
     mc_search->num_rezults = pcre_exec (regex, mc_search->regex_match_info,
                                         search_str->str, search_str->len, 0, 0, mc_search->iovector,
-                                        MC_SEARCH__PCRE_MAX_MATCHES);
+                                        MC_SEARCH__NUM_REPLACE_ARGS);
     if (mc_search->num_rezults < 0) {
         return COND__NOT_FOUND;
     }
