@@ -153,7 +153,6 @@ transform_source (FileOpContext *ctx, const char *source)
     char *s = g_strdup (source);
     char *q;
     const char *fnsource = x_basename (s);
-    char *fnsource_fixed = g_strdup (fnsource);
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -164,7 +163,7 @@ transform_source (FileOpContext *ctx, const char *source)
 
     str_fix_string (fnsource);
 
-    if ( ! mc_search_run(ctx->search_handle, fnsource_fixed, 0, strlen(fnsource_fixed), NULL) ){
+    if ( ! mc_search_run(ctx->search_handle, fnsource, 0, strlen (fnsource), NULL) ){
 	transform_error = FILE_SKIP;
 	g_free (s);
 	return NULL;
