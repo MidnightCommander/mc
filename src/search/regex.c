@@ -259,10 +259,10 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
     }
 #else /* HAVE_LIBPCRE */
 
-    if (regexec (regex, search_str->str, MC_SEARCH__NUM_REPL_ARGS, mc_search->regex_match_info, 0))
+    if (regexec (regex, search_str->str, MC_SEARCH__NUM_REPLACE_ARGS, mc_search->regex_match_info, 0))
         return COND__NOT_FOUND;
 
-    for (mc_search->num_rezults = 0; mc_search->num_rezults < MC_SEARCH__NUM_REPL_ARGS;
+    for (mc_search->num_rezults = 0; mc_search->num_rezults < MC_SEARCH__NUM_REPLACE_ARGS;
          mc_search->num_rezults++) {
         if (mc_search->regex_match_info[mc_search->num_rezults].rm_eo == 0)
             break;
@@ -549,7 +549,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         mc_search_cond->regex_handle = NULL;
         return;
     }
-    mc_search->regex_match_info = g_new0 (mc_search_matchinfo_t, MC_SEARCH__NUM_REPL_ARGS);
+    mc_search->regex_match_info = g_new0 (mc_search_matchinfo_t, MC_SEARCH__NUM_REPLACE_ARGS);
 #endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 }
