@@ -236,7 +236,8 @@ mc_search__regex_found_cond_one (mc_search_t * mc_search, mc_search_regex_t * re
     GError *error = NULL;
 
     if (!g_regex_match_full
-        (regex, search_str->str, -1, 0, 0, &mc_search->regex_match_info, &error)) {
+        (regex, search_str->str, -1, 0, G_REGEX_MATCH_NEWLINE_ANY, &mc_search->regex_match_info,
+         &error)) {
         g_match_info_free (mc_search->regex_match_info);
         mc_search->regex_match_info = NULL;
         if (error) {
@@ -338,7 +339,7 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
 static char *
 mc_search_regex__get_token_by_num (const mc_search_t * mc_search, gsize index)
 {
-    int fnd_start, fnd_end;
+    int fnd_start = 0, fnd_end = 0;
 
 #if GLIB_CHECK_VERSION (2, 14, 0)
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &fnd_start, &fnd_end);
@@ -507,7 +508,8 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
     }
 #if GLIB_CHECK_VERSION (2, 14, 0)
     mc_search_cond->regex_handle =
-        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW, 0, &error);
+        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL, 0,
+                     &error);
 
     if (error != NULL) {
         mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
@@ -687,10 +689,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * mc_search, GString * replace_
             return NULL;
         }
 
-
-
         tmp_str = mc_search_regex__get_token_by_num (mc_search, index);
-
         if (tmp_str == NULL)
             continue;
 
