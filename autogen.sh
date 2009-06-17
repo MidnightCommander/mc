@@ -84,6 +84,8 @@ test -f configure || \
   { echo "autoconf failed to generate vfs/samba/configure" >&2; exit 1; }
 ) || exit 1
 
+$srcdir/maint/version.sh "$srcdir"
+
 if test -x $srcdir/configure.mc; then
   $srcdir/configure.mc "$@"
 fi
