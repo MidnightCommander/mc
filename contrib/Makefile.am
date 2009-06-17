@@ -26,7 +26,7 @@ CLEANFILES = $(SCRIPTS_OUT)
 EXTRA_DIST = \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
-	$(cfg_DATA)
+	mc.charsets
 
 mc.csh: $(srcdir)/mc.csh.in
 	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
