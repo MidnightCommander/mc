@@ -2282,6 +2282,7 @@ edit_collect_completions (WEdit *edit, long start, int word_len,
     srch->search_fn = edit_search_cmd_callback;
 
     /* collect max MAX_WORD_COMPLETIONS completions */
+    start--;
     while (*num < MAX_WORD_COMPLETIONS) {
 	/* get next match */
 	if (mc_search_run (srch, (void *) edit, start+1, edit->last_byte, &len) == FALSE)
@@ -2350,7 +2351,7 @@ edit_complete_word_cmd (WEdit *edit)
 	[word_start & M_EDIT_BUF_SIZE];
 
     match_expr = g_strdup_printf ("(^|\\s)%.*s[^\\s\\.=\\+\\{\\}\\[\\]\\(\\)\\\\\\!\\,<>\\?\\/@#\\$%\\^&\\*\\~\\|\\\"'\\:\\;]+", word_len, bufpos);
-mc_log("%s\n",match_expr);
+
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
