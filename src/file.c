@@ -1804,19 +1804,18 @@ panel_operate (void *source_panel, FileOperation operation,
 	else
 	    dest_dir = panel->cwd;
 	/*
-	 * Add trailing backslash only when do non-locally ops.
+	 * Add trailing backslash only when do non-local ops.
 	 * It saves user from occasional file renames (when destination
 	 * dir is deleted)
 	 */
-	if (force_single)
+	if (!force_single
+	 && dest_dir[0]
+	 && dest_dir[strlen(dest_dir)-1] != PATH_SEP) {
+	    /* add trailing separator */
+	    dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char*)0);
+	} else {
 	    /* just copy */
 	    dest_dir_ = g_strdup (dest_dir);
-	else
-	    /* add trailing separator */
-	    if (*dest_dir && strcmp(&dest_dir[strlen(dest_dir)-1], PATH_SEP_STR)) {
-		dest_dir_ = g_strconcat (dest_dir, PATH_SEP_STR, (char*)0);
-	} else {
-		dest_dir_ = g_strdup (dest_dir);
 	}
 	if (!dest_dir_) {
 	    file_op_context_destroy (ctx);
@@ -1828,11 +1827,7 @@ panel_operate (void *source_panel, FileOperation operation,
 			      single_entry, &do_bg);
 	g_free(dest_dir_);
 
-	if (!dest) {
-	    file_op_context_destroy (ctx);
-	    return 0;
-	}
-	if (!*dest) {
+	if (!dest || !dest[0]) {
 	    file_op_context_destroy (ctx);
 	    g_free (dest);
 	    return 0;
