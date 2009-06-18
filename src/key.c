@@ -276,6 +276,8 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "[[1;6D", MCKEY_NOACTION },
 
     /* putty alt-arrow keys */
+    /* removed as source esc esc esc trouble */
+    /*
     { KEY_M_ALT | KEY_UP,    ESC_STR ESC_STR "OA", MCKEY_NOACTION },
     { KEY_M_ALT | KEY_DOWN,  ESC_STR ESC_STR "OB", MCKEY_NOACTION },
     { KEY_M_ALT | KEY_RIGHT, ESC_STR ESC_STR "OC", MCKEY_NOACTION },
@@ -294,7 +296,7 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_CTRL | KEY_M_ALT | KEY_NPAGE, ESC_STR ESC_STR "[[6;5~", MCKEY_NOACTION },
     { KEY_M_CTRL | KEY_M_ALT | KEY_HOME,  ESC_STR ESC_STR "[1;5H", MCKEY_NOACTION },
     { KEY_M_CTRL | KEY_M_ALT | KEY_END,   ESC_STR ESC_STR "[1;5F", MCKEY_NOACTION },
-
+    */
     /* xterm alt-arrow keys */
     { KEY_M_ALT | KEY_UP,    ESC_STR "[1;3A", MCKEY_NOACTION },
     { KEY_M_ALT | KEY_DOWN,  ESC_STR "[1;3B", MCKEY_NOACTION },
