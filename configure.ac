@@ -327,11 +327,7 @@ linux*)
     ;;
 esac
 
-$PKG_CONFIG --max-version 2.14 glib-2.0
-if test $? -eq 0
-then
-    AX_PATH_LIB_PCRE
-fi
+MC_CHECK_SEARCH_TYPE
 
 dnl
 dnl Check nroff and the options it supports
@@ -636,4 +632,5 @@ Configuration:
   With subshell support:      ${subshell}
   Internal editor:            ${edit_msg}
   Support for charset:        ${charset_msg}
+  Search type:                ${SEARCH_TYPE}
 "
