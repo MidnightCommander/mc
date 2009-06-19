@@ -183,6 +183,12 @@ tty_baudrate (void)
 }
 
 int
+tty_lowlevel_getch (void)
+{
+    return getch ();
+}
+
+int
 tty_reset_screen (void)
 {
     return endwin ();

@@ -114,7 +114,7 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     y1 += (keybar_visible != 0);	/* i don't knwo why we need this - paul */
     y2 += (keybar_visible != 0);
     while (anything_ready ())
-	getch ();
+	tty_lowlevel_getch ();
 
 /* my own wierd protocol base 26 - paul */
     printf ("\033CL%c%c%c%c\n",

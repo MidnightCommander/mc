@@ -778,7 +778,7 @@ frontend_run_dlg (Dlg_head *h)
 
 	/* Clear interrupt flag */
 	tty_got_interrupt ();
-	d_key = get_event (&event, h->mouse_status == MOU_REPEAT, 1);
+	d_key = tty_get_event (&event, h->mouse_status == MOU_REPEAT, TRUE);
 
 	dlg_process_event (h, d_key, &event);
 

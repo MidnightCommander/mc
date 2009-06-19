@@ -81,7 +81,7 @@ extern int reset_hp_softkeys;
 static struct termios boot_mode;
 static struct termios new_mode;
 
-/* Controls whether we should wait for input in getch */
+/* Controls whether we should wait for input in tty_lowlevel_getch */
 static gboolean no_slang_delay;
 
 /* This table describes which capabilities we want and which values we
@@ -389,7 +389,7 @@ tty_baudrate (void)
 }
 
 int
-getch (void)
+tty_lowlevel_getch (void)
 {
     int c;
 

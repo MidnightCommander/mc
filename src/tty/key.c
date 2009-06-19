@@ -788,7 +788,7 @@ xmouse_get_event (Gpm_Event *ev)
 
     /* Variable btn has following meaning: */
     /* 0 = btn1 dn, 1 = btn2 dn, 2 = btn3 dn, 3 = btn up */
-    btn = getch () - 32;
+    btn = tty_lowlevel_getch () - 32;
 
     /* There seems to be no way of knowing which button was released */
     /* So we assume all the buttons were released */
@@ -846,8 +846,8 @@ xmouse_get_event (Gpm_Event *ev)
     }
     /* Coordinates are 33-based */
     /* Transform them to 1-based */
-    ev->x = getch () - 32;
-    ev->y = getch () - 32;
+    ev->x = tty_lowlevel_getch () - 32;
+    ev->y = tty_lowlevel_getch () - 32;
 }
 
 static key_def *create_sequence (const char *seq, int code, int action)
@@ -1093,7 +1093,7 @@ int get_key_code (int no_delay)
     if (no_delay) {
 	tty_nodelay (TRUE);
     }
-    c = getch ();
+    c = tty_lowlevel_getch ();
 #if (defined(USE_NCURSES) || defined(USE_NCURSESW)) && defined(KEY_RESIZE)
     if (c == KEY_RESIZE)
 	goto nodelay_try_again;
@@ -1128,7 +1128,7 @@ int get_key_code (int no_delay)
     } else if (c == -1) {
 	/* Maybe we got an incomplete match.
 	   This we do only in delay mode, since otherwise
-	   getch can return -1 at any time. */
+	   tty_lowlevel_getch can return -1 at any time. */
 	if (seq_append) {
 	    pending_keys = seq_buffer;
 	    goto pend_send;
@@ -1179,7 +1179,7 @@ int get_key_code (int no_delay)
 		} else {
 		    if (no_delay)
 			goto nodelay_try_again;
-		    c = getch ();
+		    c = tty_lowlevel_getch ();
 		}
 	    } else {
 		/* We got a complete match, return and reset search */
@@ -1291,7 +1291,7 @@ static int getch_with_delay (void)
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
 int
-get_event (struct Gpm_Event *event, int redo_event, int block)
+tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
     static int flag;		/* Return value from select */
@@ -1430,13 +1430,14 @@ get_event (struct Gpm_Event *event, int redo_event, int block)
 }
 
 /* Returns a key press, mouse events are discarded */
-int mi_getch ()
+int
+tty_getch ()
 {
     Gpm_Event ev;
     int       key;
 
     ev.x = -1;
-    while ((key = get_event (&ev, 0, 1)) == EV_NONE)
+    while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
 	;
     return key;
 }
@@ -1453,7 +1454,7 @@ static int xgetch_second (void)
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
     select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
-    c = getch ();
+    c = tty_lowlevel_getch ();
     tty_nodelay (FALSE);
     return c;
 }
@@ -1489,9 +1490,9 @@ char *learn_key (void)
     char *p = buffer;
 
     tty_keypad (FALSE); /* disable intepreting keys by ncurses */
-    c = getch ();
+    c = tty_lowlevel_getch ();
     while (c == -1)
-	c = getch (); /* Sanity check, should be unnecessary */
+	c = tty_lowlevel_getch (); /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
@@ -1501,7 +1502,7 @@ char *learn_key (void)
     }
     tty_nodelay (TRUE);
     for (;;) {
-	while ((c = getch ()) == -1) {
+	while ((c = tty_lowlevel_getch ()) == -1) {
 	    GET_TIME (timeout);
 	    timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
 	    if (timeout.tv_usec < 0)

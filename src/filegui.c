@@ -74,7 +74,7 @@
 
 #include "global.h"
 
-#include "../src/tty/key.h"		/* get_event */
+#include "../src/tty/key.h"		/* tty_get_event */
 
 #include "../src/search/search.h"
 
@@ -197,7 +197,7 @@ check_progress_buttons (FileOpContext *ctx)
     ui = ctx->ui;
 
     event.x = -1;		/* Don't show the GPM cursor */
-    c = get_event (&event, 0, 0);
+    c = tty_get_event (&event, FALSE, FALSE);
     if (c == EV_NONE)
 	return FILE_CONT;
 

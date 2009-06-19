@@ -1483,7 +1483,7 @@ compute_dir_size_update_ui (const void *ui, const char *dirname)
     label_set_text (this->dirname, name_trunc (dirname, this->dlg->cols - 6));
 
     event.x = -1; /* Don't show the GPM cursor */
-    c = get_event (&event, 0, 0);
+    c = tty_get_event (&event, FALSE, FALSE);
     if (c == EV_NONE)
 	return FILE_CONT;
 

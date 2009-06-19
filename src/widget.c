@@ -1716,7 +1716,7 @@ input_callback (Widget *w, widget_msg_t msg, int parm)
     case WIDGET_KEY:
 	if (parm == XCTRL ('q')) {
 	    quote = 1;
-	    v = handle_char (in, ascii_alpha_to_cntrl (mi_getch ()));
+	    v = handle_char (in, ascii_alpha_to_cntrl (tty_getch ()));
 	    quote = 0;
 	    return v;
 	}

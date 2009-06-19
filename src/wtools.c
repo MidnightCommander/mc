@@ -37,7 +37,7 @@
 
 #include "../src/tty/tty.h"
 #include "../src/tty/color.h"		/* INPUT_COLOR */
-#include "../src/tty/key.h"		/* mi_getch() */
+#include "../src/tty/key.h"		/* tty_getch() */
 
 #include "dialog.h"
 #include "widget.h"
@@ -256,7 +256,7 @@ fg_message (int flags, const char *title, const char *text)
     Dlg_head *d;
 
     d = do_create_message (flags, title, text);
-    mi_getch ();
+    tty_getch ();
     dlg_run_done (d);
     destroy_dlg (d);
 }

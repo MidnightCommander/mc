@@ -26,8 +26,6 @@ enum {
 #define ACS_URCORNER		SLSMG_URCORN_CHAR
 #define ACS_LRCORNER		SLSMG_LRCORN_CHAR
 
-int getch (void);
-
 #define printw		SLsmg_printf
 #define COLS		SLtt_Screen_Cols
 #define LINES		SLtt_Screen_Rows

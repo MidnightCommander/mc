@@ -739,7 +739,7 @@ load_prompt (int fd, void *unused)
 			   COLS - prompt_len);
 
 	/* since the prompt has changed, and we are called from one of the
-	 * get_event channels, the prompt updating does not take place
+	 * tty_get_event channels, the prompt updating does not take place
 	 * automatically: force a cursor update and a screen refresh
 	 */
 	update_cursor (midnight_dlg);

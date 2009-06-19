@@ -31,11 +31,11 @@ extern key_code_name_t key_name_conv_tab [];
 
 /* mouse support */
 struct Gpm_Event;
-int get_event (struct Gpm_Event *event, int redo_event, int block);
+int tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block);
 int is_idle (void);
-int mi_getch (void);
+int tty_getch (void);
 
-/* Possible return values from get_event: */
+/* Possible return values from tty_get_event: */
 #define EV_MOUSE   -2
 #define EV_NONE    -1
 

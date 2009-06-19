@@ -611,7 +611,7 @@ check_find_events(Dlg_head *h)
     int c;
 
     event.x = -1;
-    c = get_event (&event, h->mouse_status == MOU_REPEAT, 0);
+    c = tty_get_event (&event, h->mouse_status == MOU_REPEAT, FALSE);
     if (c != EV_NONE) {
  	dlg_process_event (h, c, &event);
  	if (h->ret_value == B_ENTER
