@@ -68,6 +68,7 @@
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 #include "strutil.h"
+#include <pwd.h>		/* for username in xterm title */
 
 /* Listbox for the command history feature */
 #include "widget.h"
@@ -1708,11 +1709,30 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 void
 update_xterm_title_path (void)
 {
-    const char *p;
-
+    const char *path;
+    char host[BUF_TINY];
+    char *p;
+    struct passwd *pw = NULL;
+    char *login = NULL;
+    int res = 0;
     if (xterm_flag && xterm_title) {
-	p = strip_home_and_password (current_panel->cwd);
-	fprintf (stdout, "\33]0;mc - %s\7", str_term_form (p));
+	path = strip_home_and_password (current_panel->cwd);
+	res = gethostname(host, sizeof (host));
+	if ( res ) { /* On success, res = 0 */
+	    host[0] = '\0';
+	} else {
+	    host[sizeof (host) - 1] = '\0';
+	}
+	pw = getpwuid(getuid());
+	if ( pw ) {
+	    login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+	} else {
+	    login = g_strdup (host);
+	}
+	p = g_strdup_printf ("mc [%s]:%s", login, path);
+	fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+	g_free (login);
+	g_free (p);
 	if (!alternate_plus_minus)
 	    numeric_keypad_mode ();
 	fflush (stdout);
