@@ -1,4 +1,5 @@
 m4_include([m4.include/ac_onceonly.m4])
+m4_include([m4.include/ax_path_lib_pcre.m4])
 m4_include([m4.include/dx_doxygen.m4])
 m4_include([m4.include/mc-mcserver.m4])
 m4_include([m4.include/ac-get-fs-info.m4])
