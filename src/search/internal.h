@@ -6,11 +6,7 @@
 #if GLIB_CHECK_VERSION (2, 14, 0)
 #define mc_search_regex_t GRegex
 #else
-#	if HAVE_LIBPCRE
-#		define mc_search_regex_t pcre
-#	else
-#		define mc_search_regex_t regex_t
-#	endif
+#define mc_search_regex_t pcre
 #endif
 
 /*** enums ***************************************************************************************/

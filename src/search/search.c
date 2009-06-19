@@ -145,13 +145,8 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
     if (mc_search_cond->regex_handle)
         g_regex_unref (mc_search_cond->regex_handle);
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-#if HAVE_LIBPCRE
     if (mc_search_cond->regex_handle)
         free (mc_search_cond->regex_handle);
-#else /* HAVE_LIBPCRE */
-    if (mc_search_cond->regex_handle)
-        regfree (mc_search_cond->regex_handle);
-#endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     g_free (mc_search_cond);
@@ -217,13 +212,8 @@ mc_search_free (mc_search_t * mc_search)
     if (mc_search->regex_match_info)
         g_match_info_free (mc_search->regex_match_info);
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-#if HAVE_LIBPCRE
     if (mc_search->regex_match_info)
         free (mc_search->regex_match_info);
-#else /* HAVE_LIBPCRE */
-    if (mc_search->regex_match_info)
-        g_free (mc_search->regex_match_info);
-#endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     if (mc_search->regex_buffer != NULL)
@@ -405,11 +395,7 @@ mc_search_getstart_rezult_by_num (mc_search_t * mc_search, int index)
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) start_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-#if HAVE_LIBPCRE
     return mc_search->iovector[index * 2];
-#else /* HAVE_LIBPCRE */
-    return mc_search->regex_match_info[index].rm_so;
-#endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
 }
@@ -429,11 +415,7 @@ mc_search_getend_rezult_by_num (mc_search_t * mc_search, int index)
     g_match_info_fetch_pos (mc_search->regex_match_info, index, &start_pos, &end_pos);
     return (int) end_pos;
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-#if HAVE_LIBPCRE
     return mc_search->iovector[index * 2 + 1];
-#else /* HAVE_LIBPCRE */
-    return mc_search->regex_match_info[index].rm_eo;
-#endif /* HAVE_LIBPCRE */
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
 }

@@ -6,14 +6,7 @@
 #include "../src/global.h"      /* <glib.h> */
 
 #if ! GLIB_CHECK_VERSION (2, 14, 0)
-#	if HAVE_LIBPCRE
-#		include <pcre.h>
-#	else
-#		include <stdio.h>
-#		include <string.h>
-#		include <sys/types.h>
-#		include <regex.h>
-#	endif
+#	include <pcre.h>
 #endif
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -25,11 +18,7 @@ typedef int (*mc_search_fn) (const void *user_data, gsize char_offset);
 #if GLIB_CHECK_VERSION (2, 14, 0)
 #define mc_search_matchinfo_t GMatchInfo
 #else
-#	if HAVE_LIBPCRE
-#		define mc_search_matchinfo_t pcre_extra
-#	else
-#		define mc_search_matchinfo_t regmatch_t
-#	endif
+#	define mc_search_matchinfo_t pcre_extra
 #endif
 
 /*** enums ***************************************************************************************/
@@ -86,9 +75,7 @@ typedef struct mc_search_struct {
     mc_search_matchinfo_t *regex_match_info;
     GString *regex_buffer;
 #if ! GLIB_CHECK_VERSION (2, 14, 0)
-#if HAVE_LIBPCRE
     int iovector[MC_SEARCH__NUM_REPLACE_ARGS * 2];
-#endif                          /* HAVE_LIBPCRE */
 #endif                          /* ! GLIB_CHECK_VERSION (2, 14, 0) */
 
 /* private data */
