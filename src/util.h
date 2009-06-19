@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <assert.h>
 #include <string.h>
+#include <sys/stat.h>
 
 /* Returns its argument as a "modifiable" string. This function is
  * intended to pass strings to legacy libraries that don't know yet

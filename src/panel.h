@@ -8,6 +8,7 @@
 
 #include "dir.h"		/* dir_list */
 #include "dialog.h"		/* Widget */
+#include "fs.h"			/* MC_MAXPATHLEN */
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"

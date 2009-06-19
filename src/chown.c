@@ -26,7 +26,8 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
-
+#include <pwd.h>
+#include <grp.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>

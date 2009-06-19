@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <ctype.h>
+#include <fcntl.h>
 
 #ifdef hpux
 /* major() and minor() macros (among other things) defined here for hpux */

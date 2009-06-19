@@ -77,6 +77,8 @@ What to do with this?
 #include <sys/param.h>
 #include <errno.h>
 #include <ctype.h>
+#include <fcntl.h>
+#include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

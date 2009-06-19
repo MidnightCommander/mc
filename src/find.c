@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #include <sys/stat.h>
 
 #include "global.h"
@@ -38,11 +39,8 @@
 #include "setup.h"
 #include "find.h"
 #include "strutil.h"
-
-/* Dialog manager and widgets */
 #include "dialog.h"
 #include "widget.h"
-
 #include "dir.h"
 #include "panel.h"		/* current_panel */
 #include "main.h"		/* do_cd, try_to_select */

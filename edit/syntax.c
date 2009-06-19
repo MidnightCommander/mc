@@ -35,6 +35,7 @@
  */
 
 #include <config.h>
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -49,6 +50,7 @@
 
 #include "edit-impl.h"
 #include "edit-widget.h"
+
 #include "../src/color.h"	/* use_colors */
 #include "../src/main.h"	/* mc_home */
 #include "../src/wtools.h"	/* message() */

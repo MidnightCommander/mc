@@ -32,6 +32,9 @@
 #include <config.h>
 
 #include <errno.h>
+#include <sys/fcntl.h>
+#include <time.h>
+#include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

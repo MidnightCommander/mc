@@ -27,6 +27,7 @@
 
 #include <config.h>
 
+#include <stdlib.h>
 
 #include "../src/global.h"
 #include "../src/search/search.h"

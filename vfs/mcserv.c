@@ -40,9 +40,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
+#include <unistd.h>
 #include <string.h>
 #ifdef HAVE_LIMITS_H
 #    include <limits.h>
@@ -53,9 +51,7 @@
 #        define NGROUPS_MAX NGROUPS
 #    endif
 #endif
-#ifdef HAVE_GRP_H
-#    include <grp.h>
-#endif
+#include <grp.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>

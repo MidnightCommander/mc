@@ -20,10 +20,11 @@
  *  \brief Header: dialog box features module
  */
 
-#ifndef MC_DLG_H
-#define MC_DLG_H
+#ifndef MC_DIALOG_H
+#define MC_DIALOG_H
 
 #include "mouse.h"
+#include "util.h" /* Hook */
 
 /* Color constants */
 #define DLG_NORMALC(h)		((h)->color[0])
@@ -241,4 +242,4 @@ void do_refresh (void);
 /* Used in load_prompt() */
 void update_cursor (Dlg_head *h);
 
-#endif
+#endif				/* MC_DIALOG_H */

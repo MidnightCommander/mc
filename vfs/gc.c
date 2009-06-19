@@ -39,20 +39,17 @@
 #include <string.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <signal.h>
 #include <ctype.h>		/* is_digit() */
+#include <sys/time.h>		/* gettimeofday() */
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
-#include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
+#include "../src/layout.h"	/* get_current_type() */
 #include "utilvfs.h"
 #include "vfs-impl.h"
-#include "gc.h"
 #include "vfs.h"
-
-#include "../src/panel.h"	/* get_current_panel() */
-#include "../src/layout.h"	/* get_current_type() */
+#include "gc.h"
 
 
 int vfs_timeout = 60;		/* VFS timeout in seconds */

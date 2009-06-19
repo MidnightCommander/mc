@@ -23,30 +23,21 @@
 #include <config.h>
 
 #include <stdio.h>
-#include <string.h>
 
-#ifdef HAVE_TERMIOS_H
-#include <termios.h>
-#endif
-
-#include "global.h"
-#include "tty.h"
-#include "color.h"
-#include "mouse.h"
-#include "dialog.h"
-#include "widget.h"
-#include "win.h"
+#include "global.h"		/* glib.h */
+#include "tty.h"		/* raw(), noraw() */
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
 #include "strutil.h"
+#include "win.h"
 
 /*
  * Common handler for standard movement keys in a text area.  Provided
  * functions are called with the "data" argument.  backfn and forfn also
- * get an argument indicating how many lines to scroll.  Return 1 if
- * the key was handled, 0 otherwise.
+ * get an argument indicating how many lines to scroll.  Return MSG_HANDLED if
+ * the key was handled, MSG_NOT_HANDLED otherwise.
  */
-int
+cb_ret_t
 check_movement_keys (int key, int page_size, void *data, movefn backfn,
 		     movefn forfn, movefn topfn, movefn bottomfn)
 {
@@ -228,4 +219,3 @@ int lookup_key (char *keyname)
     }
     return 0;
 }
-

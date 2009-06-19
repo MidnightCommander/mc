@@ -30,6 +30,7 @@
 
 #ifdef WITH_BACKGROUND
 
+#include <stdlib.h>
 #include <errno.h>
 #include <signal.h>
 #include <stdarg.h>
@@ -38,7 +39,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>	/* waitpid() */
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "global.h"
 #include "background.h"

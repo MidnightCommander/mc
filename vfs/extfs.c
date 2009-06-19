@@ -32,6 +32,7 @@
 /* Namespace: init_extfs */
 
 #include <config.h>
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -40,10 +41,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <signal.h>
-#ifdef HAVE_SYS_WAIT_H
-#include <sys/wait.h>
-#endif
+#include <fcntl.h>
 #include <errno.h>
+#include <sys/wait.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

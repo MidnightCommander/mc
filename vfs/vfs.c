@@ -45,6 +45,10 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <ctype.h>	/* is_digit() */
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <dirent.h>
 
 #include "../src/global.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */

@@ -237,9 +237,7 @@ this should cover most of the rest of systems
 #elif defined(HAVE_NETMASK_AIX)
 
 #include <stdio.h>
-#ifdef	HAVE_UNISTD_H
 #include <unistd.h>	/* close() declaration for gcc in fussy mode */
-#endif
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

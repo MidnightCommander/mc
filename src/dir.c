@@ -22,7 +22,6 @@
 
 #include <config.h>
 
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,6 +33,7 @@
 #include "wtools.h"
 #include "treestore.h"
 #include "strutil.h"
+#include "fs.h"
 #include "../src/search/search.h"
 
 /* If true show files starting with a dot */

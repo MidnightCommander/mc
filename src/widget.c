@@ -34,8 +34,10 @@
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
 #include <sys/types.h>
 
 #include "global.h"
@@ -44,7 +46,6 @@
 #include "mouse.h"
 #include "dialog.h"
 #include "widget.h"
-#include "win.h"
 #include "key.h"	/* XCTRL and ALT macros  */
 #include "../src/mcconfig/mcconfig.h"	/* for history loading and saving */
 #include "wtools.h"	/* For common_dialog_repaint() */

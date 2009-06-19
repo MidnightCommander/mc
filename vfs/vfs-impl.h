@@ -9,7 +9,10 @@
 
 #ifdef USE_VFS
 
-#include <stddef.h>
+#include <sys/types.h>
+#include <dirent.h>
+
+#include "../src/fs.h"		/* MC_MAXPATHLEN */
 
 typedef void *vfsid;
 struct vfs_stamping;

@@ -46,35 +46,23 @@
 #endif
 
 #include <sys/types.h>
-
-#ifdef TIME_WITH_SYS_TIME
+#include <fcntl.h>
+#include <sys/stat.h>
 #include <sys/time.h>
 #include <time.h>
-#else
-#ifdef HAVE_SYS_TIME_H
-#include <sys/time.h>
-#else
-#include <time.h>
-#endif
-#endif
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/wait.h>
 
 #ifdef HAVE_SYS_RESOURCE_H
 #include <sys/resource.h>
 #endif
 
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-
-#include <stdio.h>
-#include <stddef.h>
-
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
-#endif
-
-#ifdef HAVE_STDLIB_H
-#include <stdlib.h>
 #endif
 
 #ifdef HAVE_SYS_SOCKET_H
@@ -107,16 +95,6 @@
 #endif
 #endif
 
-#ifdef HAVE_FCNTL_H
-#include <fcntl.h>
-#else
-#ifdef HAVE_SYS_FCNTL_H
-#include <sys/fcntl.h>
-#endif
-#endif
-
-#include <sys/stat.h>
-
 #ifdef HAVE_LIMITS_H
 #include <limits.h>
 #endif
@@ -129,17 +107,11 @@
 #include <sys/filio.h>
 #endif
 
-#include <signal.h>
 
-#ifdef HAVE_SYS_WAIT_H
-#include <sys/wait.h>
-#endif
 #ifdef HAVE_CTYPE_H
 #include <ctype.h>
 #endif
-#ifdef HAVE_GRP_H
 #include <grp.h>
-#endif
 #ifdef HAVE_SYS_ID_H
 #include <sys/id.h>
 #endif
@@ -212,22 +184,7 @@
 #include <sys/termio.h>
 #endif
 
-#if HAVE_DIRENT_H
 # include <dirent.h>
-# define NAMLEN(dirent) strlen((dirent)->d_name)
-#else
-# define dirent direct
-# define NAMLEN(dirent) (dirent)->d_namlen
-# if HAVE_SYS_NDIR_H
-#  include <sys/ndir.h>
-# endif
-# if HAVE_SYS_DIR_H
-#  include <sys/dir.h>
-# endif
-# if HAVE_NDIR_H
-#  include <ndir.h>
-# endif
-#endif
 
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h>

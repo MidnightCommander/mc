@@ -30,18 +30,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <pwd.h>
 #include <unistd.h>
 
 #include "global.h"
 #include "tty.h"
-#include "win.h"
 #include "color.h"
 #include "dialog.h"
 #include "widget.h"
 #include "wtools.h"
-#include "main.h"
+#include "main.h"		/* show_all_if_ambiguous */
 #include "util.h"
 #include "../src/strescape.h"
 #include "key.h"		/* XCTRL and ALT macros */

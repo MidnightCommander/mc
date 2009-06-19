@@ -36,14 +36,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <fcntl.h>
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
 #include <unistd.h>
+#include <pwd.h>
+#include <grp.h>
 
 #include "global.h"
 #include "execute.h"
