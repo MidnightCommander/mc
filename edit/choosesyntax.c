@@ -24,6 +24,8 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+
 #include "edit-impl.h"
 #include "../src/global.h"
 #include "../src/wtools.h"

@@ -48,13 +48,6 @@
 #include "../src/global.h"
 #include "../src/history.h"
 
-#include "edit-impl.h"
-#include "editlock.h"
-#include "editcmddef.h"
-#include "edit-widget.h"
-#include "editcmd_dialogs.h"
-#include "../edit/etags.h"
-
 #include "../src/tty.h"		/* LINES */
 #include "../src/widget.h"	/* listbox_new() */
 #include "../src/layout.h"	/* clr_scr() */
@@ -66,7 +59,7 @@
 #include "../src/selcodepage.h"
 #include "../src/strutil.h"	/* utf string functions */
 
-
+#include "../edit/edit-impl.h"
 #include "../edit/edit.h"
 #include "../edit/editlock.h"
 #include "../edit/editcmddef.h"
