@@ -1457,6 +1457,7 @@ setup_dummy_mc ()
 
 static void check_codeset()
 {
+#ifdef HAVE_CHARSET
     const char *_system_codepage = NULL;
     const char *_source_codepage = NULL;
     const char *_display_codepage = NULL;
@@ -1518,6 +1519,7 @@ static void check_codeset()
         if ( profile_changed )
             save_configure ();
     }
+#endif
 }
 
 static void
