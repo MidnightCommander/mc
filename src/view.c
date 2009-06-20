@@ -2046,7 +2046,7 @@ view_load (WView *view, const char *command, const char *file,
 	long line, col;
 
 	canon_fname = vfs_canon (view->filename);
-	load_file_position (file, &line, &col);
+	load_file_position (canon_fname, &line, &col);
 	g_free (canon_fname);
 	view_moveto (view, offset_doz(line, 1), col);
     } else if (start_line > 0) {
