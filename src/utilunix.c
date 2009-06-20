@@ -351,10 +351,13 @@ void open_error_pipe (void)
     old_error = dup (2);
     if(old_error < 0 || close(2) || dup (error_pipe[1]) != 2){
 	message (D_NORMAL, _("Warning"), _(" Dup failed "));
+
 	close (error_pipe[0]);
-	close (error_pipe[1]);
+	error_pipe[0] = -1;
     }
+    /* we never write there */
     close (error_pipe[1]);
+    error_pipe[1] = -1;
 }
 
 /*
@@ -369,6 +372,10 @@ close_error_pipe (int error, const char *text)
     char msg[MAX_PIPE_SIZE];
     int len = 0;
 
+    /* already closed */
+    if (error_pipe[0] == -1)
+	return;
+
     if (error)
 	title = MSG_ERROR;
     else
@@ -382,6 +389,7 @@ close_error_pipe (int error, const char *text)
 	if (len >= 0)
 	    msg[len] = 0;
 	close (error_pipe[0]);
+	error_pipe[0] = -1;
     }
     if (error < 0)
 	return 0;	/* Just ignore error message */

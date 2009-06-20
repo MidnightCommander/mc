@@ -1936,6 +1936,15 @@ view_load_command_output (WView *view, const char *command)
 	if (!close_error_pipe (view_is_in_panel (view) ? -1 : D_ERROR, NULL))
 	    view_show_error (view, _("Empty output from child filter"));
 	return FALSE;
+    } else {
+	/*
+	 * At least something was read correctly. Close stderr and let
+	 * program die if it will try to write something there.
+	 *
+	 * Ideally stderr should be read asynchronously to prevent programs
+	 * from blocking (poll/select multiplexor).
+	 */
+	close_error_pipe (D_NORMAL, NULL);
     }
     return TRUE;
 }
