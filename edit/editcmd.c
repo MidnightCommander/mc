@@ -2246,7 +2246,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 	last = c;
 	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
 
-	if (isspace (c) || c == '_') {
+	if (isspace (c) || strchr("{}[]()<>=|/\\!?~'\",.;:#$%^&*", c)) {
 /* return if word starts with digit */
 	    if (isdigit (last))
 		return 0;
