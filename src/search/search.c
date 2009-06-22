@@ -375,6 +375,10 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
         return FALSE;
     search->search_type = type;
     search->is_case_sentitive = TRUE;
+
+    if (type == MC_SEARCH_T_GLOB)
+        search->is_entire_line = TRUE;
+
     ret = mc_search_run (search, str, 0, strlen (str), NULL);
     mc_search_free (search);
     return ret;

@@ -1208,7 +1208,7 @@ paint_frame (WPanel *panel)
     int  header_len;
     int  side, width;
 
-    const char *txt;
+    char *txt = NULL;
     if (!panel->split)
 	adjust_top_file (panel);
 
@@ -1231,7 +1231,11 @@ paint_frame (WPanel *panel)
 
 	for (format = panel->format; format; format = format->next){
             if (format->string_fn){
-                txt = format->title;
+                if (panel->filter && !strcmp (format->id, "name")) {
+                    txt = g_strdup_printf ("%s [%s]", format->title, panel->filter);
+                } else {
+                    txt = g_strdup (format->title);
+                }
 
 		header_len = strlen (txt);
 		if (header_len > format->field_len)
@@ -1239,6 +1243,7 @@ paint_frame (WPanel *panel)
 
                 attrset (MARKED_COLOR);
                 addstr (str_fit_to_term (txt, format->field_len, J_CENTER_LEFT));
+                g_free(txt);
                 width -= format->field_len;
 	    } else {
 		attrset (NORMAL_COLOR);
