@@ -513,7 +513,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * mc_sea
         if (error) {
             mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
             mc_search->error_str = g_strdup (error);
-            free (mc_search_cond->regex_handle);
+            g_free (mc_search_cond->regex_handle);
             mc_search_cond->regex_handle = NULL;
             return;
         }

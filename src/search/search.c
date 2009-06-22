@@ -84,51 +84,6 @@ mc_search__cond_struct_new (mc_search_t * mc_search, const char *str,
 
 /* --------------------------------------------------------------------------------------------- */
 
-static GPtrArray *
-mc_search__conditions_new (mc_search_t * mc_search)
-{
-    GPtrArray *ret;
-    ret = g_ptr_array_new ();
-#ifdef HAVE_CHARSET
-    if (mc_search->is_all_charsets) {
-        gsize loop1, recoded_str_len;
-        gchar *buffer;
-        for (loop1 = 0; loop1 < (gsize) n_codepages; loop1++) {
-            if (!g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
-                g_ptr_array_add (ret,
-                                 mc_search__cond_struct_new (mc_search, mc_search->original,
-                                                             mc_search->original_len, cp_source));
-                continue;
-            }
-
-            buffer =
-                mc_search__recode_str (mc_search->original, mc_search->original_len, cp_source,
-                                       codepages[loop1].id, &recoded_str_len);
-            if (buffer == NULL)
-                continue;
-
-            g_ptr_array_add (ret,
-                             mc_search__cond_struct_new (mc_search, buffer,
-                                                         recoded_str_len, codepages[loop1].id));
-            g_free (buffer);
-        }
-    } else {
-        g_ptr_array_add (ret,
-                         (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
-                                                                mc_search->original_len,
-                                                                cp_source));
-    }
-#else
-    g_ptr_array_add (ret,
-                     (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
-                                                            mc_search->original_len,
-                                                            str_detect_termencoding ()));
-#endif
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
 {
@@ -145,8 +100,7 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
     if (mc_search_cond->regex_handle)
         g_regex_unref (mc_search_cond->regex_handle);
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-    if (mc_search_cond->regex_handle)
-        free (mc_search_cond->regex_handle);
+    g_free (mc_search_cond->regex_handle);
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     g_free (mc_search_cond);
@@ -201,9 +155,7 @@ mc_search_free (mc_search_t * mc_search)
         return;
 
     g_free (mc_search->original);
-
-    if (mc_search->error_str)
-        g_free (mc_search->error_str);
+    g_free (mc_search->error_str);
 
     if (mc_search->conditions)
         mc_search__conditions_free (mc_search->conditions);
@@ -212,14 +164,60 @@ mc_search_free (mc_search_t * mc_search)
     if (mc_search->regex_match_info)
         g_match_info_free (mc_search->regex_match_info);
 #else /* GLIB_CHECK_VERSION (2, 14, 0) */
-    if (mc_search->regex_match_info)
-        free (mc_search->regex_match_info);
+    g_free (mc_search->regex_match_info);
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     if (mc_search->regex_buffer != NULL)
         g_string_free (mc_search->regex_buffer, TRUE);
 
     g_free (mc_search);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mc_search_prepare (mc_search_t * mc_search)
+{
+    GPtrArray *ret;
+    ret = g_ptr_array_new ();
+#ifdef HAVE_CHARSET
+    if (mc_search->is_all_charsets) {
+        gsize loop1, recoded_str_len;
+        gchar *buffer;
+        for (loop1 = 0; loop1 < (gsize) n_codepages; loop1++) {
+            if (!g_ascii_strcasecmp (codepages[loop1].id, cp_source)) {
+                g_ptr_array_add (ret,
+                                 mc_search__cond_struct_new (mc_search, mc_search->original,
+                                                             mc_search->original_len, cp_source));
+                continue;
+            }
+
+            buffer =
+                mc_search__recode_str (mc_search->original, mc_search->original_len, cp_source,
+                                       codepages[loop1].id, &recoded_str_len);
+            if (buffer == NULL)
+                continue;
+
+            g_ptr_array_add (ret,
+                             mc_search__cond_struct_new (mc_search, buffer,
+                                                         recoded_str_len, codepages[loop1].id));
+            g_free (buffer);
+        }
+    } else {
+        g_ptr_array_add (ret,
+                         (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
+                                                                mc_search->original_len,
+                                                                cp_source));
+    }
+#else
+    g_ptr_array_add (ret,
+                     (gpointer) mc_search__cond_struct_new (mc_search, mc_search->original,
+                                                            mc_search->original_len,
+                                                            str_detect_termencoding ()));
+#endif
+    mc_search->conditions = ret;
+
+    return (mc_search->error == MC_SEARCH_E_OK);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -245,17 +243,12 @@ mc_search_run (mc_search_t * mc_search, const void *user_data,
 #endif /* GLIB_CHECK_VERSION (2, 14, 0) */
 
     mc_search->error = MC_SEARCH_E_OK;
-    if (mc_search->error_str) {
-        g_free (mc_search->error_str);
-        mc_search->error_str = NULL;
-    }
+    g_free (mc_search->error_str);
+    mc_search->error_str = NULL;
 
-    if (!mc_search->conditions) {
-        mc_search->conditions = mc_search__conditions_new (mc_search);
+    if ((mc_search->conditions == NULL) && !mc_search_prepare (mc_search))
+        return FALSE;
 
-        if (mc_search->error != MC_SEARCH_E_OK)
-            return FALSE;
-    }
 
     switch (mc_search->search_type) {
     case MC_SEARCH_T_NORMAL:

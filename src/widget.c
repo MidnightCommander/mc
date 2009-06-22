@@ -2376,7 +2376,8 @@ listbox_add_item (WListbox *l, enum append_pos pos, int hotkey,
 void
 listbox_select_by_number (WListbox *l, int n)
 {
-    listbox_select_entry (l, listbox_select_pos (l, l->list, n));
+    if (l->list != NULL)
+	listbox_select_entry (l, listbox_select_pos (l, l->list, n));
 }
 
 WLEntry *

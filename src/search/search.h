@@ -106,6 +106,8 @@ mc_search_t *mc_search_new (const gchar * original, gsize original_len);
 
 void mc_search_free (mc_search_t * mc_search);
 
+gboolean mc_search_prepare (mc_search_t * mc_search);
+
 gboolean mc_search_run (mc_search_t * mc_search, const void *user_data, gsize start_search,
                         gsize end_search, gsize * founded_len);
 
