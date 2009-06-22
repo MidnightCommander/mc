@@ -39,7 +39,7 @@
 
 static const char ESCAPE_SHELL_CHARS[] = " !#$%()&~{}[]`?|<>;*\\\"";
 static const char ESCAPE_REGEX_CHARS[] = "^!#$%()&~{}[]`?|<>;*.\\";
-static const char ESCAPE_GLOB_CHARS[]  = "${}*.\\";
+static const char ESCAPE_GLOB_CHARS[]  = "$*\\";
 
 /*** file scope functions ************************************************************************/
 

@@ -91,14 +91,12 @@ mc_search__glob_translate_to_regex (gchar * str, gsize * len)
                 continue;
             }
             break;
-        case '\\':
         case '+':
         case '.':
         case '$':
         case '(':
         case ')':
         case '^':
-        case '-':
             g_string_append_c (buff, '\\');
             g_string_append_c (buff, str[loop]);
             loop++;
