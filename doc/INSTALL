@@ -1,9 +1,25 @@
 This file contains:
 
+- Build requirements for GNU Midnight Commander
 - Installation instructions for GNU Midnight Commander
 - Where to get more information on GNU Midnight Commander
 - Notes about GNU Midnight Commander installation
 - Obtaining related software
+
+Build requirements for GNU Midnight Commander
+----------------------------------------------------
+
+- glibc
+- gcc
+- make
+- autoconf
+- automake
+- libtool
+- glib2
+- pcre (if glib < 2.14)
+- slang or ncurses
+- gettext
+- cvs
 
 
 Installation instructions for GNU Midnight Commander
@@ -63,9 +79,6 @@ incomplete, use `configure --help' to get the full list):
 `--silent'
      Do not print messages saying which checks are being made.
 
-`--verbose'
-     Print the results of the checks.
-
 `--version'
      Print the version of Autoconf used to generate the `configure'
      script, and exit.
@@ -75,19 +88,9 @@ incomplete, use `configure --help' to get the full list):
      built-in file editor.  The built-in editor is compiled in by
      default.
 
-`--with-ext2undel'
-     On systems that use the ext2 or ext3 file system and have the
-     libext2fs library available, this option adds support for
-     recovering deleted files (the undel virtual file system). 
-
 `--without-gpm-mouse'
      Use this flag to disable gpm mouse support (e.g. if you want to
      use mouse only on X terminals).
-
-`--with-glib12'
-     Force using glib 1.2.x even if glib 2.0.x is present.  Use this
-     flag for testing or if you want to use the binary on systems that
-     don't have glib 2.0.x installed.
 
 `--with-glib-static'
      Force linking against glib statically.  This option is intended for
@@ -115,26 +118,6 @@ incomplete, use `configure --help' to get the full list):
      and Shift-Cursor keys.  Use `--without-x' if the dependency on
      X11 libraries is not desired.
 
-`--without-vfs'
-     This option disables the Virtual File System switch code in the
-     Midnight Commander and uses the standard file system calls for
-     file access.  If you specify this option, you won't get the
-     transparent access to archives and remote directories.
-
-`--with-mcfs'
-     This option enables mcfs - a non-standard remote filesystem
-     designed specifically for the Midnight Commander.  It also enables
-     a server for that filesystem, mcserv.  Please note that the
-     implementation of mcfs is not optimized for speed.  There may be
-     security issues with mcserv - don't run it if you don't need it.
-
-`--with-samba'
-     This option enables remote VFS over the SMB protocol.  A stripped
-     down version of samba distributed with the sources is compiled and
-     linked with the mc executable.  It is recommended that you install
-     Samba client, since mc uses some files from Samba under certain
-     conditions.  Please visit http://www.samba.org/ to learn more.
-
 `--disable-largefile'
      This option disables support for large files (2 gigabytes and more)
      on the systems where file operations use 32-bit offsets by default,
@@ -155,12 +138,75 @@ incomplete, use `configure --help' to get the full list):
      default.  Background code is known to be less stable than the rest
      of the code, so you may want to disable it at the compile time.
 
+
+VFS options:
+- - - - - -
+
+`--disable-vfs'
+     This option disables the Virtual File System switch code in the
+     Midnight Commander and uses the standard file system calls for
+     file access.  If you specify this option, you won't get the
+     transparent access to archives and remote directories.
+
+`--enable-vfs-cpio'
+     (on by default)
+     Support for cpio filesystem
+
+`--enable-vfs-tar'
+     (on by default)
+     Support for tar filesystem
+
+`--enable-vfs-ftp'
+     (on by default)
+     Support for FTP vfs
+
+`--enable-vfs-fish'
+     (on by default)
+     Support for FISH vfs
+
+`--enable-vfs-extfs'
+     (on by default)
+     Support for extfs
+
+`--enable-vfs-sfs`
+     (on by default)
+     Support for sfs
+
+`--enable-vfs-undelfs'
+     Support for ext2 undelete filesystem.
+     On systems that use the ext2 or ext3 file system and have the
+     libext2fs library available, this option adds support for
+     recovering deleted files (the undel virtual file system).
+
+`--enable-vfs-mcfs'
+     Enable Support MCFS (mc's network filesystem).
+     This option enables mcfs - a non-standard remote filesystem
+     designed specifically for the Midnight Commander.  It also enables
+     a server for that filesystem, mcserv.  Please note that the
+     implementation of mcfs is not optimized for speed.  There may be
+     security issues with mcserv - don't run it if you don't need it.
+
+`--enable-mcserver'
+     (off by default)
+     Support mc-specific networking file system server
+
 `--disable-netcode'
      This option disables support for networked virtual filesystems.
      It's primarily used by developers to make sure that the code would
      compile and run on operating systems that lack POSIX compatible
      network support.  But you can use it is you know that you won't be
      accessing remote filesystems from GNU Midnight Commander.
+
+`--with-samba'
+     This option enables remote VFS over the SMB protocol.  A stripped
+     down version of samba distributed with the sources is compiled and
+     linked with the mc executable.  It is recommended that you install
+     Samba client, since mc uses some files from Samba under certain
+     conditions.  Please visit http://www.samba.org/ to learn more.
+
+
+Screen library:
+- - - - - - - -
 
 You may also tell configure which screen library you want to use with
 the Midnight Commander.  The configure script will use S-Lang as
@@ -169,7 +215,7 @@ included one, but you can override this by using the following flag
 (please note that since S-Lang is default, it is tested better than
 ncurses):
 
-`--with-screen={slang|mcslang|ncurses}'
+`--with-screen={slang|ncurses}'
      Choose the library used to manage interaction with the terminal.
      `slang' means S-Lang library already installed on the system,
      `mcslang' means S-Lang library included with the sources of
@@ -182,6 +228,9 @@ ncurses):
      If the included S-Lang library is used, this option forces it to
      use the termcap database, as opposed to the default terminfo
      database.
+
+Compiler options:
+- - - - - - - - -
 
 On systems that require unusual options for compilation or linking that
 the package's `configure' script does not know about, you can give
@@ -310,8 +359,7 @@ always compiled in.
 
 We are working on further enhancements to the program, but we're not
 sure which ones must go first.  If you would like to point us in the
-Right Direction we will be glad to hear from you (you could check the
-file TODO included with this distribution for the current projects).
+Right Direction we will be glad to hear from you.
 
 If you happen to find a feature that doesn't do what you expect, please
 write to mc@gnome.org telling as much as you can about the problem
@@ -328,10 +376,22 @@ glib
 The only "hard" dependency of GNU Midnight Commander is glib.  You can
 get glib from
 
-ftp://ftp.gtk.org/pub/gtk/
+ftp://ftp.gtk.org/pub/glib/
 
-Note that only versions 1.2.x and 2.0.x are supported.  Newer versions
-may work, but haven't been tested.
+Minimal version of glib: 2.6.x
+Recommended version: 2.14.x and higher.
+
+Newer versions may work, but haven't been tested.
+
+PCRE
+----
+
+If the version of glib you have installed is older than 2.14.x, then you
+also need to install PCRE library.
+
+You can get PCRE from
+
+http://www.pcre.org/
 
 Terminal database
 -----------------
@@ -364,7 +424,7 @@ Mouse support
 
 The general purpose mouse (gpm) daemon is available from
 
-ftp://arcana.linux.it/pub/gpm/
+http://unix.schottelius.org/gpm/
 
 Compiler
 --------

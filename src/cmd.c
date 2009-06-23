@@ -524,7 +524,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     };
 
     QuickDialog quick_dlg = {
-	DX, DY, -1, -1, title, "[Select/Uselect Files]", quick_widgets, 0
+	DX, DY, -1, -1, title, "[Select/Unselect Files]", quick_widgets, 0
     };
 
     if (quick_dialog (&quick_dlg) == B_CANCEL)

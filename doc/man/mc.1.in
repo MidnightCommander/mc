@@ -1,5 +1,5 @@
 .\"TOPICS "Topics:"
-.TH MC 1 "September 2007" "MC Version 4.6.2-pre1" "GNU Midnight Commander"
+.TH MC 1 "August 2009" "MC Version 4.7.0-pre1" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NAME"
 mc \- Visual shell for Unix-like systems.
@@ -365,10 +365,16 @@ panel and the old current panel becomes the new other panel. The
 selection bar moves from the old current panel to the new current
 panel.
 .TP
-.B Insert, C-t
-to tag files you may use the Insert key (the kich1 terminfo sequence)
-or the C-t (Control-t) sequence. To untag files, just retag a tagged
-file.
+.B Insert
+to tag files you may use the Insert key (the kich1 terminfo sequence). 
+To untag files, just retag a tagged file.
+.TP
+.B C-t
+to change charset of panel you may use C-t (Control-t).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "directory up" (..) in active panel.
+To cancel the charsets in all directories, select "No translation " in 
+the dialog of encodings.
 .TP
 .B Alt-g, Alt-r, Alt-j
 used to select the top file in a panel, the middle file and the bottom one,
@@ -402,18 +408,25 @@ directory hotlist
 and change to the selected directory.
 .TP
 .B + \ (plus)
-this is used to select (tag) a group of files. The Midnight Commander
-will prompt for a regular expression describing the group. When
+this is used to select (tag) a group of files.The Midnight Commander
+will prompt for a selection options. When
+.I Files only
+checkbox is on, than files only will be selected. If
+.I Files only
+is off, as files as directories will be selected.
+When
 .I Shell Patterns
-are enabled, the regular expression is much like the regular
-expressions in the shell (* standing for zero or more characters and ?
-standing for one character). If
+checkbox is on, the regular expression is much like the filename globbing
+in the shell (* standing for zero or more characters and ?  standing
+for one character). If
 .I Shell Patterns
 is off, then the tagging of files is done with normal regular
-expressions (see ed (1)).
-.PP
-If the expression starts or ends with a slash (/), then it will select
-directories instead of files.
+expressions (see ed (1)). When
+.I Case sensitive
+checkbox is on, the selection will be case sensitive characters.
+If
+.I Case sensitive
+is off, the case will be ignored.
 .TP
 .B \\\\ (backslash)
 use the "\\" key to unselect a group of files. This is the opposite of
@@ -1013,17 +1026,24 @@ command if you have full command line and want to cd somewhere.
 .B Select group (+)
 .PP
 This is used to select (tag) a group of files. The Midnight Commander
-will prompt for a regular expression describing the group. When
+will prompt for a selection options. When
+.I Files only
+checkbox is on, than files only will be selected. If
+.I Files only
+is off, as files as directories will be selected.
+When
 .I Shell Patterns
-are enabled, the regular expression is much like the filename globbing
+checkbox is on, the regular expression is much like the filename globbing
 in the shell (* standing for zero or more characters and ?  standing
 for one character). If
 .I Shell Patterns
 is off, then the tagging of files is done with normal regular
-expressions (see ed (1)).
-.PP
-To mark directories instead of files, the expression must start or end
-with a '/'.
+expressions (see ed (1)). When
+.I Case sensitive
+checkbox is on, the selection will be case sensitive characters.
+If
+.I Case sensitive
+is off, the case will be ignored.
 .PP
 .B Unselect group (\\\\)
 .PP
@@ -1604,7 +1624,7 @@ a dot (like ls -a).
 .PP
 .I Mark moves down.
 If enabled, the selection bar will move down when you mark a file (with
-either C-t or the Insert key).
+Insert key).
 .PP
 .I Drop down menus.
 When this option is enabled, the pull down menus will be activated as
@@ -2368,6 +2388,34 @@ will be converted to have initial upper case and otherwise lower case.
 .PP
 You can also use '\\' as a quote character. For example, '\\\\' is
 a backslash and '\\*' is an asterisk.
+.\"NODE "Select/Unselect Files"
+.SH "Select/Unselect Files"
+The dialog of group of files and directories selection or uselection.
+The
+.\"LINK2"
+input line
+.\"Input Line Keys"
+allow enter the regular expression of filenames that will be
+selected/unselected.
+.PP
+When
+.I Files only
+checkbox is on, than files only will be selected. If
+.I Files only
+is off, as files as directories will be selected.
+When
+.I Shell Patterns
+checkbox is on, the regular expression is much like the filename globbing
+in the shell (* standing for zero or more characters and ?  standing
+for one character). If
+.I Shell Patterns
+is off, then the tagging of files is done with normal regular
+expressions (see ed (1)). When
+.I Case sensitive
+checkbox is on, the selection will be case sensitive characters.
+If
+.I Case sensitive
+is off, the case will be ignored.
 .\"NODE "Internal File Viewer"
 .SH "Internal File Viewer"
 The internal file viewer provides two display modes: ASCII and hex.
@@ -2491,9 +2539,8 @@ option is set in the initialization file.
 .PP
 The features it presently supports are: block copy, move, delete, cut,
 paste; key for key undo; pull-down menus; file insertion; macro
-commands; regular expression search and replace (and our own
-scanf-printf search and replace); shift-arrow text highlighting (if
-supported by the terminal); insert-overwrite toggle; word wrap;
+commands; regular expression search and replace; shift-arrow text highlighting
+(if supported by the terminal); insert-overwrite toggle; word wrap;
 autoindent; tunable tab size; syntax highlighting for various file
 types; and an option to pipe text blocks through shell commands like
 indent and ispell.
@@ -2544,39 +2591,6 @@ file
 which is copied to
 .B .mc/cedit/edit.indent.rc
 in your home directory the first time you use it.
-.PP
-You can use scanf search and replace to search and replace
-a C format string. First take a look at the
-.B sscanf
-and
-.B sprintf
-man pages to see what a format string is and how it works.  Consider
-following example.  Suppose you want to replace all occurrences of an
-open bracket, three comma separated numbers, and a close bracket, with
-the word
-.IR apples ,
-the third number, the word
-.I oranges
-and then the second number.  Then fill in the Replace dialog box as
-follows:
-.PP
-.nf
- Enter search string:
-  (%d,%d,%d)
- Enter replacement string:
-  apples %d oranges %d
- Enter replacement argument order:
-  3,2
-.fi
-.PP
-The last line specifies that the third and then the second
-number are to be used in place of the first and second.
-.PP
-It is advisable to use this feature with Prompt on replace on, because
-a match is thought to be found whenever the number of arguments found
-matches the number given, which is not always a real match. Scanf also
-treats whitespace as being elastic.  Note that the scanf format %[ is
-very useful for scanning strings, and whitespace.
 .PP
 The editor also displays non-us characters (160+). When editing
 binary files, you should set
@@ -3233,6 +3247,21 @@ set this in the ini file:
 .nf
 insert=\\e[Op
 .fi
+
+.PP
+Also now you can use 
+.I extended learn keys.
+For example:
+
+.nf
+    ctrl alt right=\\e[[1;6C
+    ctrl alt left=\\e[[1;6D
+.fi
+
+.PP
+This means that ctrl+alt+left send \\e[[1;6D esc sequence
+and mc interprets "\\e[[1;6D" as C-A-Left.
+
 .PP
 The
 .I complete

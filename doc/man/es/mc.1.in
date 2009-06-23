@@ -367,9 +367,20 @@ pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquel y aparece en éste.
 .TP
 .B Insertar, Ctrl-t
-para marcar archivos (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
+DEPRECATED! para marcar archivos (y/o directorios) como seleccionados podemos usar la tecla Insertar (Ins)
 (La secuencia kich1 de terminfo) o la combinación Ctrl-t (Control-t). Para deseleccionar
 archivos, basta con repetir la operación sobre los archivos y/o directorios antes marcados.
+.TP
+.B Insert
+to tag files you may use the Insert key (the kich1 terminfo sequence). 
+To untag files, just retag a tagged file.
+.TP
+.B C-t
+to change charset of panel you may use C-t (Control-t).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "directory up" (..) in active panel.
+To cancel the charsets in all directories, select "No translation " in 
+the dialog of encodings.
 .TP
 .B Alt-g, Alt-r, Alt-j
 usadas para seleccionar el archivo superior en un panel, el archivo central y el inferior del
@@ -418,9 +429,6 @@ para uno o más caracteres). Si los
 están deshabilitados, entonces la selección de archivos se realiza con expresiones
 regulares normales. Véase la página de manual de
 .BR "ed (1)" .
-.IP
-Si la expresión empieza o termina con una barra (/), entonces la selección se
-realiza sobre directorios en vez de archivos.
 .TP
 .B - (menos) o \\\\ (contrabarra)
 usaremos la tecla - o "\\" para deseleccionar un grupo de archivos. Ésta es la operación contraria
@@ -1024,9 +1032,6 @@ están desactivados, entonces la selección de archivos se realiza con expresion
 regulares normales. Véase la página de manual de
 .BR "ed (1)" .
 .PP
-Para marcar directorios en vez de archivos, la expresión debe empezar o terminar
-con '/'.
-.PP
 .B De-seleccionar Grupo (\\\\)
 .PP
 Utilizado para deseleccionar un grupo de archivos. Es la operación antagonista al comando
@@ -1575,8 +1580,8 @@ Commander no los muestra (como la opción -B de ls de GNU).
 Mostrar los archivos que comiencen con un punto (como ls -a).
 .PP
 .I Marcar y Avanzar.
-Hacer avanzar la barra de selección tras marcar un archivo (con Ctrl-t o
-con la tecla Insertar).
+Hacer avanzar la barra de selección tras marcar un archivo (con la tecla
+Insertar).
 .PP
 .I Menús Desplegables.
 Mostrar el contenido de los menús desplegables inmediatamente al presionar
@@ -2442,8 +2447,7 @@ esté presente en el archivo de inicialización.
 Las características soportadas actualmente son: copia, desplazamiento,
 borrado, corte, y pegado de bloques; deshacer paso a paso; menús
 desplegables; inserción de archivos; definición de macros; buscar y
-reemplazar usando expresiones regulares (y su propio buscar y reemplazar
-basado en formatos de scanf/printf); selección de texto con
+reemplazar usando expresiones regulares); selección de texto con
 mayúsculas-cursor (si el terminal lo soporta); alternancia
 insertar-sobreescribir; plegado de líneas; sangrado automático; tamaño
 de tabulación configurable; realce de sintaxis para varios tipos de
@@ -2498,40 +2502,6 @@ u otro). Esto está controlado por el archivo
 que se copia la primera vez que se usa en
 .B .mc/cedit/edit.indent.rc
 en el directorio personal.
-.PP
-Podemos usar la búsqueda scanf y reemplazar para buscar y cambiar una
-cierta cadena en formato C. Se pueden consultar las páginas del manual
-de
-.B sscanf(3)
-y
-.B sprintf(3)
-para saber qué es una cadena de formato y cómo funciona. Veamos un
-ejemplo: supongamos que queremos cambiar todas las apariciones de un
-paréntesis abierto, tres números separados por comas, y un paréntesis
-cerrado, con la palabra
-.I Melones_De_Pozo-Estrecho,
-el tercer número, la palabra
-.I Tomates_De_Mazarrón
-y el segundo número. Rellenaremos el diálogo Reemplazar
-como sigue:
-.PP
-.nf
- Teclee el texto a buscar:
-  (%d,%d,%d)
- Teclee el cambio a realizar:
-  Melones_De_Pozo-Estrecho %d Tomates_De_Mazarrón %d
- Teclee el orden de los argumentos:
-  3,2
-.fi
-.PP
-La última línea indica que el tercer y el segundo número deben ser
-usados en primer y segundo lugar respectivamente.
-.PP
-Es conveniente usar esta característica con "Confirmar cambios" marcado,
-porque se pueden producir coincidencias que no correspondan exactamente
-con lo deseado. Scanf también trata el espacio en blanco como si fuese
-elástico. El formato de scanf %[ resulta muy útil para rastrear cadenas,
-y el espacio en blanco.
 .PP
 El editor también visualiza caracteres no estadounidenses (160+). Al editar
 archivos binarios, debemos configurar los

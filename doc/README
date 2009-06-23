@@ -28,9 +28,13 @@ included with this distribution package.
 Dependencies
 ------------
 
-To compile the GNU Midnight Commander you need to have a copy of the
-glib library version 1.2.x or 2.0.x, available at
-ftp://ftp.gtk.org/pub/gtk/
+To compile the GNU Midnight Commander, you need to have a copy of the
+glib library version 2.6.x or newer, available at
+
+ftp://ftp.gtk.org/pub/glib/
+
+Please read the file INSTALL for installation instructions
+and full list of dependencies.
 
 
 Features
@@ -133,8 +137,6 @@ These are hints for the text mode edition:
 
 * Please read the manual page.
 
-* Read the file TODO for the current projects.
-
 You can access the whole documentation online with the F1 key,
 although it's not as nice as the groff printed manual page :-)
 
@@ -151,11 +153,17 @@ useful advices how to report bugs.
 
 You can download the latest version of GNU Midnight Commander from
 
-ftp://ftp.gnu.org/gnu/mc/
+http://www.midnight-commander.org/downloads/
 
 
 Reporting problems
 ------------------
+
+You can report bug on our site, please read 
+
+http://midnight-commander.org/wiki/defectReports
+
+Also you can use mc mailing lists to discuss problems.
 
 There are two mailing lists, mc@gnome.org and mc-devel@gnome.org.  Use
 mc-devel@gnome.org if you are prepared for a more technical discussion

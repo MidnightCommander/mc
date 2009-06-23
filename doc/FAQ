@@ -2,7 +2,7 @@ GNU Midnight Commander
 Frequently Asked Questions
 
    The newest version of this document is available at
-   http://www.midnight-commander.org/browser/FAQ
+   http://www.midnight-commander.org/browser/doc/FAQ
 
      * 1 Getting started
           + 1.1 What is Midnight Commander?
@@ -189,8 +189,7 @@ Frequently Asked Questions
    If you have compile problems in the VFS code, try disabling it by
    using "--disable-vfs" option.
 
-
-2 Keyboard
+f2 Keyboard
 
 2.1 What does documentation mean with the C-?, M-? and F? keys?
 
@@ -228,8 +227,8 @@ Frequently Asked Questions
 
    Up-to-date termcap and terminfo databases are available here:
 
-     http://www.tuxedo.org/~esr/terminfo/
-     ftp://dickey.his.com/ncurses/
+     http://www.catb.org/~esr/terminfo/
+     ftp://ftp.gnu.org/pub/gnu/ncurses/
 
    If you don't have permissions to edit terminal databases you can use
    Learn keys feature of Midnight Commander instead.  Press Esc 9 o k
@@ -562,11 +561,11 @@ all anymore!
 
 6.2 How can I access command line history?
 
-   Alt-h shows the last commands you executed from the command line.
+   Meta-h shows the last commands you executed from the command line.
    Duplicates are suppressed from the history.  Commands executed from
    the subshell prompt are not shown.
 
-   You can put previous commands to the command line with Alt-p.  Alt-n
+   You can put previous commands to the command line with Meta-p.  Meta-n
    moves you forward in history.
 
    Since version 4.1.15 all the input widgets have permanent history.
@@ -782,7 +781,7 @@ indenting increases with each line!
 10.2 Do I dare to use a development version?
 
    Yes, of course. Feel free to test:
-   http://www.midnight-commander.org/wiki#Downloading
+   http://www.midnight-commander.org/wiki#Download
    As we do our development in git, please do a git checkout
    of the master branch and build it
 

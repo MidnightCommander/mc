@@ -381,9 +381,20 @@ corrente mentre il pannello corrente diventa l'altro pannello.
 La barra di selezione si sposta dal vecchio pannello al nuovo corrente.
 .TP
 .B Ins, C-t
-per marcare i file si può usare il tasto di Inserimento (la sequenza
+DEPRECATED! per marcare i file si può usare il tasto di Inserimento (la sequenza
 teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
 basta marcare un file già marcato.
+.TP
+.B Insert
+to tag files you may use the Insert key (the kich1 terminfo sequence). 
+To untag files, just retag a tagged file.
+.TP
+.B C-t
+to change charset of panel you may use C-t (Control-t).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "directory up" (..) in active panel.
+To cancel the charsets in all directories, select "No translation " in 
+the dialog of encodings.
 .TP
 .B M-g, M-r, M-j
 usato per selezionare rispettivamente il file superiore, il file centrale o 
@@ -425,9 +436,6 @@ regolari in una shell (* significa zero o più caratteri e ? un carattere). Se i
 .I modelli della shell
 sono disabilitati, la marcatura dei file viene fatta con le normali espressioni
 regolari (vedere ed (1)).
-.IP
-Se l'espressione comincia o finisce con una barra (/), allora selezionerà
-directory invece che file.
 .TP
 .B \\\\ (barra retroversa)
 usare il tasto "\\" per deselezionare un gruppo di file. Questo è l'opposto
@@ -1018,9 +1026,6 @@ gruppo; se l'opzione
 è disabilitata, allora la selezione dei file viene eseguita con le normali
 espressioni regolari (vedere ed (1)).
 .PP
-Per selezionare directory invece di file, l'espressione deve cominciare
-o finire con una '/'.
-.PP
 .B Deseleziona gruppo (\\\\)
 .PP
 Usata per deselezionare un gruppo di file. E' l'opposto di del comando
@@ -1576,7 +1581,7 @@ un punto (come ls -a).
 .PP
 .I Cursore in basso mentre seleziona.
 Se abilitata, la barra di selezione si muoverà in basso dopo aver selezionato
-un file (sia con C-t che con il tasto Ins).
+un file (sia con tasto Ins).
 .PP
 .I Rilascia menu a cascata.
 Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
@@ -2478,8 +2483,7 @@ Le funzioni che allo stato attuale supporta sono: copia,
 spostamento, cancellazione, taglia e incolla di blocchi;
 .IR "tasto per l'annullamento" ; 
 menu a discesa, inserimento file, definizione di macro, ricerca e
-sostituzione di espressioni regolari (e una propria ricerca e
-sostituzione a scanf e printf); evidenziazione di testo maiuscole-freccia 
+sostituzione di espressioni regolari; evidenziazione di testo maiuscole-freccia 
 MSW-MAC (solo per la console Linux); scambio tra inserimento-rimpiazzo e
 un'opzionale flusso di blocchi di testo attraverso comandi shell come indent.
 .PP
@@ -2528,39 +2532,6 @@ o altro). Questo comportamento viene controllato dal file
 che viene copiato nel 
 .B .mc/cedit/edit.indent.rc
 nella propria directory home la prima volta che lo si usa.
-.PP
-E' possibile usare la ricerca e sostituzione scanf per cercare
-e rimpiazzare una stringa in formato C. Vedere le pagine man di 
-.B sscanf
-e 
-.B sprintf
-per vedere cos'è una stringa di formato e come funziona. Il seguente
-è un esempio: supponiamo di voler sostituire tutte le ricorrenze di,
-poniamo, una parentesi aperta, tre numeri separati da virgole, una 
-parentesi chiusa, con la parola
-.IR mele ,
-il terzo numero, la parola
-.I arance
-ed il secondo numero, si dovrebbe riempire la finestra di sostituzione
-nella maniera seguente:
-.PP
-.nf
- Immettere stringa di ricerca
-(%d,%d,%d)
- Immettere stringa di sostituzione
-mele %d arance %d
- Ordine di sostituzione degli argomenti
-3,2
-.fi
-.PP
-L'ultima riga specifica che il terzo ed il secondo numero
-devono essere usati al posto del primo e del secondo.
-.PP
-E' consigliabile usare questa caratteristica con l'opzione 'Chiedi sempre'
-abilitata, dato che una corrispondenza viene considerata valida quando
-il numero degli argomenti dati corrisponde al numero dato, che non è sempre
-una reale corrispondenza. Scanf tratta anche gli spazi come elastici. Notare 
-che il formato % è molto utile per scansionare stringhe, e spazi.
 .PP
 L'editor visualizza snche caratteri non-americani (160+). Quando si modifica
 file binari, si dovrebbe impostare

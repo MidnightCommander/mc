@@ -369,9 +369,20 @@ panel és az előzőleg aktív panel lesz az inaktív panel. A kiválasztó sáv
 az előzőleg aktívról átugrik az újonnan aktív panelre.
 .PP
 .B Insert, C-t
-A fájlok kijelölésére az Insert gombot használhatod (a kich1 terminfo
+DEPRECATED! A fájlok kijelölésére az Insert gombot használhatod (a kich1 terminfo
 kombináció), vagy a C-t (Control-t) kombinációt. A kijelölés
 megszüntetéséhez csak újra ki kell jelölni a kijelölt fájlt.
+.TP
+.B Insert
+to tag files you may use the Insert key (the kich1 terminfo sequence). 
+To untag files, just retag a tagged file.
+.TP
+.B C-t
+to change charset of panel you may use C-t (Control-t).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "directory up" (..) in active panel.
+To cancel the charsets in all directories, select "No translation " in 
+the dialog of encodings.
 .PP
 .B M-g, M-r, M-j
 A panel legfelső, középső és alsó fájljának kiválasztásához használd
@@ -416,9 +427,6 @@ egyetlen karaktert). Ha a
 kikapcsolva tartjuk, a fájlok kijelölésére a normál kifejezések
 használhatóak (lásd
 .IR "ed (1)" ).
-.PP
-Ha a kifejezés törtjellel (slash-sel="/") kezdődik, vagy végződik,
-akkor ez egész könyvtárakat választ ki, beleértve annak fájljait.
 .PP
 .B \\\\ (backslash).
 Használd a "\\" gombot a fájlcsoportok kiválasztásának megszüntetéséhez.
@@ -997,9 +1005,6 @@ kikapcsoltad, akkor a fájlok kijelölése a szabványos kifejezésekkel
 (regular expression) történik (lásd
 .IR "ed (1)" ).
 .PP
-A könyvtárak kijelöléséhez, beleértve a fájlokat is, a meghatározásnak
-'/'-lel kell kezdődnie, vagy befejeződnie.
-.PP
 .B Csoport kiválasztás megszüntetése (\)
 .PP
 A fájlcsoportok kiválasztottságának megszüntetésére szolgál.  Ez a
@@ -1572,7 +1577,7 @@ Alapértelmezésben a Midnight Commander láthatóvá teszi a ponttal kezdődő
 fájlokat (az ls \-a \-hoz hasonlóan).
 .PP
 .I Kijelölés után lefele lép
-Alapértelmezésben, amikor kijelölsz egy fájlt (a C-t, vagy az Insert
+Alapértelmezésben, amikor kijelölsz egy fájlt (a Insert
 gomb közül valamelyikkel,) a kiválasztó sáv lefelé mozdul el.
 .PP
 .I Legördülő menük.
@@ -2442,8 +2447,7 @@ Az eszközök, amielyek használhatók: Blokk másolás, mozgatás, törlés,
 kivágás, beillesztés;
 .I "billentyű a billentyű visszavonására";
 legördülő menük; fájl beillesztés; makró készítés; szabványos kifejezés
-keresés és csere (a mi saját scanf-printf keresésünk és cserénk);
-shift-kurzor MSW-MAC szöveg kijelölés (csak linux konzolon);
+keresés és csere; shift-kurzor MSW-MAC szöveg kijelölés (csak linux konzolon);
 beillesztés-felülírás beállítás váltása; és a pipe szöveg blokkokkal a
 shell parancsok közvetlen elérése.
 .PP
@@ -2492,40 +2496,6 @@ vagy más kódra) amikor ez a rész
 Ennek használatához elöször egy futtatható fájlt kell készítened
 .B ~/.cedit/edit.indent.rc
 néven. Szerkeszd ezt szkriptet, ha szükséges.
-.PP
-A scanf keresést és a cserét használhatod C formátumú szöveg kereséséhez,
-és cseréjéhez. Elöször nézd át a
-.BR sscanf -t
-és a
-.B sprintf
-man oldalt, hogy lásd a szöveg formátumának használatát a működés
-megértéséhez. Példaként íme az alábbiak: Feltételezve azt, hogy le
-akarok cserélni minden olyan szöveget, ahol egy nyitó zárójel, három,
-vesszövel elválasztott szám és egy záró zárójel található, az
-.IR almák ,
-szóval, a harmadik számmal, a
-.I narancsok
-szóval és a második számmal, akkor nekem a következőket kell beírnom a
-Csere dialog boxba:
-.PP
-.nf
- Gépeld be a keresett szöveget
-(%d,%d,%d)
- Gépeld be a csere szöveget
-almák %d narancsok %d
- Gépeld be a csere további kiegészítéseit
-3,2
-.fi
-.PP
-Az utolsó sor határozza meg azt, hogy a harmadik és a második szám
-szerepel elsőként és másodikként.
-.PP
-Ezt az eszközt ajánlatos Prompt-tal használni cserekor, mivel a megtalált
-egyezés esetén a kiegészítésben megadott számot egyezőnek találja a
-számmal, amely nem mindíg valós egyezés. A scanf-hez még használható a
-whitespace, mint rugalmas kezdés. Fontos megjegyezni azt, hogy a scanf
-% alak gyakran használatos a szövegek, és a whitespace-ek (szóköz)
-vizsgálatához.
 .PP
 A szerkesztő megjeleníti még a nem-amerikai karaktereket is (160
 fölött). Amikor bináris fájlokat szerkesztesz, a Beállításoknál

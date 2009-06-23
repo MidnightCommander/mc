@@ -1,4 +1,4 @@
-.TH MCEDIT 1 "September 2007" "MC Version 4.6.2-pre1" "GNU Midnight Commander"
+.TH MCEDIT 1 "August 2009" "MC Version 4.7.0-pre1" "GNU Midnight Commander"
 .SH NAME
 mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
@@ -92,7 +92,7 @@ doesn't share the clipboard with
 .BR mcedit .
 .PP
 The completion key (usually
-.B "Alt-Tab"
+.B "Meta-Tab"
 or
 .BR "Escape Tab" )
 completes the word under the cursor using the words used earlier in the
@@ -135,6 +135,26 @@ If some keys don't work, you can use
 in the
 .B Options
 menu.
+.SH CODE NAVIGATION
+.B mcedit
+can be used to navigation through code with tags files created by etags
+or ctags commands. If there is no file TAGS code navigation would not work.
+In example, in case of exuberant-ctags for C language command will be:
+.PP
+ctags -e --language-force=C -R ./
+.PP
+.B Meta-Enter 
+show list box to select item under cursor (cusor should stand at end of
+word).
+.PP
+.B Meta-Minus 
+where minus is symbol "-" go to previous function in navigation list (like a browser
+Back).
+.PP
+.B Meta-Equal
+where equal is symbol "=" go to next function in navigation list (like a browser
+Forward).
+.PP
 .SH SYNTAX HIGHLIGHTING
 .B mcedit
 supports syntax highlighting.  This means that keywords and contexts
@@ -374,9 +394,9 @@ This option is ignored when invoking
 .I editor_key_emulation
 1 for
 .B Emacs
-keys, and 0 for normal
+keys, 0 for normal
 .B Cooledit
-keys.
+keys, and 2 for user defined keys. 0 is default.
 .TP
 .I editor_tab_spacing
 Interpret the tab character as being of this length.
@@ -423,6 +443,44 @@ original file, thus replacing it.  The safest method is create backups
 (2).  Where a backup file is created before any changes are made.  You
 can specify your own backup file extension in the dialog.  Note that
 saving twice will replace your backup as well as your original file.
+.TP
+.I editor_word_wrap_line_length
+line length to wrap. 72 default.
+.TP
+.I editor_backup_extension
+symbol for add extension to name of backup files. Default "~".
+.TP
+.I editor_line_state
+show state line of editor now it show number of file line (in future it
+can show things like folding, breakpoints, etc.). M-n toglle this option.
+.TP
+.I editor_visible_spaces
+Toggle show visible trailing spaces (TWS), if editor_visible_spaces=1 TWS
+showed as '.'
+.TP
+.I editor_visible_tabs
+Toggle show visible tabs, if editor_visible_tabs=1 tabs showed as '<---->'
+.TP
+.I editor_persistent_selections
+Do not remove block selection after moving the cursor.
+.TP
+.I editor_syntax_highlighting
+enable syntax highlighting.
+.TP
+.I editor_edit_confirm_save
+show confirm dialog on save.
+.TP
+.I editor_option_typewriter_wrap
+to be described
+.TP
+.I editor_option_auto_para_formatting
+to be described
+.TP
+.I editor_option_save_position
+save file position on exit.
+.TP
+.I source_codepage
+symbol representation of codepage name for file (i.e. CP1251, ~ - default).
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the
@@ -498,7 +556,7 @@ help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-ftp://ftp.gnu.org/gnu/mc/.
+http://midnight-commander.org/.
 .SH SEE ALSO
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH AUTHORS

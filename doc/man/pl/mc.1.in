@@ -300,8 +300,19 @@ a aktywny staje się starym. Linia wyboru zmienia swoje położenia do aktywnego
 panelu.
 .PP
 .BR Insert ", " C-t .
-Do zaznaczania plików możesz używać klawisza Insert lub C-t. Żeby odznaczyć plik
+DEPRECATED! Do zaznaczania plików możesz używać klawisza Insert lub C-t. Żeby odznaczyć plik
 po prostu zaznacz jakiś już zaznaczony.
+.TP
+.B Insert
+to tag files you may use the Insert key (the kich1 terminfo sequence). 
+To untag files, just retag a tagged file.
+.TP
+.B C-t
+to change charset of panel you may use C-t (Control-t).
+Recoding is made from selected codepage into system codepage. To
+cancel the recoding you may select "directory up" (..) in active panel.
+To cancel the charsets in all directories, select "No translation " in 
+the dialog of encodings.
 .PP
 .BR M-g ", " M-r ", " M-j .
 Używane do wybierania najwyższego, środkowego i najniższego pliku w panelu.
@@ -341,9 +352,6 @@ jest włączona, typ wyrażeń jest bardzo podobny do tego w powłoce
 jest wyłączona, sposób zaznaczania plików jest zgodny z ustawieniami
 (zobacz
 .BR ed (1)).
-.PP
-Jeśli wyrażenie zaczyna się od ukośnika (/), wtedy zaznaczone zostaną katalogi
-zamiast plików.
 .PP
 .B \\\\
 (backslash).
@@ -840,8 +848,6 @@ oznacza zero lub więcej znaków a ? oznacza jeden znak). Jeśli opcja
 jest wyłączona, wtedy zaznaczanie plików jest robione z zastosowaniem norm
 zewnętrznych (zobacz ed (1)).
 .PP
-Żeby zaznaczyć katalogi zamiast plików, tekst musi zaczynać sie od znaku '/'.
-.PP
 .B Odznacz grupę (\\\\)
 .PP
 Używane do odznaczania grupy plików. Jest przeciwieństwem komendy
@@ -1334,7 +1340,7 @@ Standardowo Midnight Commander wyświetla wszystkie pliki zaczynające się
 od kropki (tak jak ls -a).
 .PP
 .I Mark moves down.
-Standardowo kiedy zaznaczasz plik (zarówno przy użyciu C-t lub klawisza Insert)
+Standardowo kiedy zaznaczasz plik (zarówno przy klawisze Insert)
 linia wyboru przenosi się o jedno w dół.
 .PP
 .I Drop down menus.
@@ -2091,9 +2097,8 @@ Opcje, które aktualnie posiada to: kopiowanie, przenoszenie, kasowanie,
 wycinanie i wklejanie bloków;
 .IR "klawisz dla klawisza undo" ;
 rozciągane menu; wklejanie plików; definiowanie makr; szukanie i
-zastępowanie wyrażeń regularnych (i nasze własne funkcje scanf-printf
-szukające i zamieniające); strzałki z Shiftem zaznaczające teksty w stylu
-MSW-MAC (tylko dla konsoli typu Linux); przełączanie trybu
+zastępowanie wyrażeń regularnych; strzałki z Shiftem zaznaczające teksty
+w stylu MSW-MAC (tylko dla konsoli typu Linux); przełączanie trybu
 wstawiania-zastępowania; opcja pozwalająca na "przerzucenie" bloku tekstu
 przez komendę powłoki jak na przykład indent.
 .PP
@@ -2143,39 +2148,6 @@ w twoim katalogu domowym zawierający poniższe:
 /usr/bin/indent -kr -pcs $HOME/.mc/cedit/cooledit.block >& /dev/null
 cat /dev/null > $HOME/.mc/cedit/cooledit.error
 .fi
-.PP
-Możesz używać funkcji scanf do przeszukiwania i zastępowania formatów
-znaków w C. Najpierw jest rzuć okiem na stronę manuala funkcji
-.B sscanf
-i
-.B sprintf
-aby zobaczyć jaki jest format ciągów i jak on działa.
-Załóżmy, że chcesz wszystkie wystąpienia ciągu złożonego z, powiedzmy,
-otwartego nawiasu, trzech oddzielonych przecinkami liczb i nawiasu
-zamykającego, zastąpić ciągiem złożonym ze słowa
-.IR jabłka ,
-trzeciej liczby, słowa
-.I pomarańcze
-i drugiej liczby. Należy wówczas tak wypełnić okno dialogowe zastępowania:
-.PP
-.nf
- Enter search string
-(%d,%d,%d)
- Enter replace string
-jabłka %d pomarańcze %d
- Enter replacement argument order
-3,2
-.fi
-.PP
-Ostatnia linia mówi, że w miejscu pierwszego i drugiego argumentu wyniku mają
-być użyte trzeci i drugi wejściowy.
-.PP
-Jest również dobrym polecenia włączenie opcji pytania się przed zamianą,
-ponieważ zgodność jest znajdowana kiedykolwiek tylko liczba argumentów
-znalezionych zgadza sie z liczbą podanych, co nie zawsze jest prawdziwą
-zgodnością. Scanf traktuje również białe znaki jako elastyczne. Zauważ, że
-format scanfa % jest również bardzo użyteczny dla skanowania znaków i
-białych spacji.
 .PP
 Edytor wyświetla również znaki nieamerykańskie (160+). Kiedy edytujesz plik
 binarny, powinieneś ustawić opcję

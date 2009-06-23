@@ -1,3 +1,49 @@
+Version 4.7.0-pre1
+
+Core changes:
+
+    * native UTF-8 support
+    * filenames charset selection support in panels
+    * new 'Find File' dialog
+    * new unified search/replace engine with search types: Plain, Wildcard, Regexp, Hex
+    * extended learn keys
+    * locale based codepage autodetection
+    * initial support for doxygen generated docs
+    * refresh of autoconf stuff
+    * translation updates
+    * x86_64 fixes
+
+Editor:
+
+    * various editor enchancements (vertical block marking/moving/copy/paste)
+    * navigate across source code through ctags/etags TAGS file
+    * new option 'Persistent selection'
+    * Del/Backspace - delete selected block if 'Persistent selection' switched off
+    * shift block right with TAB key by TAB size or TAB symbol, shift block left with COMPLETE key
+      if 'Persistent selection' switched off
+    * optional showing of line numbers
+    * various syntax files updates
+    * optional highlighting of the tabs and trailing spaces
+    * add some hot-keys
+
+Misc:
+
+    * showing of the free space on current file system
+    * showing of the size selected files in mini-status bar
+
+Bug fixes:
+
+    * editor's undo fixes
+    * many fixes from other distributions are included
+    * fish handling for symlinks is fixed
+    * escaping of fancy names is fixed
+    * segfault in fish permission checks is fixed
+    * various mc.ext fixes
+    * commandline completion fixes (mainly, escaping hadling)
+    * small fixes in history handling (locale independent .mc/history entries)
+    * code cleanups, various memleak/etc fixes (many thanks to valgrind)
+
+
 Version 4.6.2
 
 - MC Core
