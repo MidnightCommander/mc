@@ -732,16 +732,23 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 	    }
 	}
 
-	if (!appending && ctx->preserve) {
-	    while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
-		temp_status = file_error (
+	if (!appending) {
+            if (ctx->preserve){
+		while (mc_chmod (dst_path, (src_mode & ctx->umask_kill))) {
+		    temp_status = file_error (
 			_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
-		if (temp_status != FILE_RETRY) {
-		    return_status = temp_status;
-		    break;
+		    if (temp_status != FILE_RETRY) {
+			return_status = temp_status;
+			break;
+		    }
 		}
+		mc_utime (dst_path, &utb);
+	    } else {
+		src_mode = umask(-1);
+		umask(src_mode);
+		src_mode = 0100666 & ~src_mode;
+		mc_chmod (dst_path, (src_mode & ctx->umask_kill));
 	    }
-	    mc_utime (dst_path, &utb);
 	}
     }
 
@@ -954,6 +961,11 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *_d, int toplevel,
 	utb.actime = cbuf.st_atime;
 	utb.modtime = cbuf.st_mtime;
 	mc_utime (dest_dir, &utb);
+    } else {
+	cbuf.st_mode = umask(-1);
+	umask(cbuf.st_mode);
+	cbuf.st_mode = 0100777 & ~cbuf.st_mode;
+	mc_chmod (dest_dir, cbuf.st_mode & ctx->umask_kill);
     }
 
   ret:
