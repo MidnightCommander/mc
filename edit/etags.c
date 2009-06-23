@@ -131,6 +131,9 @@ int etags_set_definition_hash(const char *tagfile, const char *start_path,
     int pos;
     char *filename = NULL;
 
+    if ( !match_func || !tagfile )
+        return 0;
+
     /* open file with positions */
     f = fopen (tagfile, "r");
     if (!f)
