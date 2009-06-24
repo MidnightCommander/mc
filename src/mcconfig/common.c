@@ -66,7 +66,7 @@ mc_config_init (const gchar * ini_path)
 	return mc_config;
     }
 
-    if (mc_stat (ini_path, &st) && st.st_size)
+    if (!mc_stat (ini_path, &st) && st.st_size)
     {
 	/* file present and not empty */
 	g_key_file_load_from_file
