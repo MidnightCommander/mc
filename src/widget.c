@@ -891,39 +891,39 @@ GList *
 history_get (const char *input_name)
 {
     int i;
-    GList *hist;
+    GList *hist = NULL;
     char *profile;
     mc_config_t *cfg;
+    char **keys;
+    size_t keys_num = 0;
     char *this_entry;
-
-    hist = NULL;
 
     if (!num_history_items_recorded)	/* this is how to disable */
 	return NULL;
-    if (!input_name)
+    if (!input_name || !*input_name)
 	return NULL;
-    if (!*input_name)
-	return NULL;
+
     profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
-    cfg = mc_config_init(profile);
-    for (i = 0;; i++) {
+    cfg = mc_config_init (profile);
+
+    /* get number of keys */
+    keys = mc_config_get_keys (cfg, input_name, &keys_num);
+    g_strfreev (keys);
+
+    for (i = 0; i < keys_num; i++) {
 	char key_name[BUF_TINY];
 	g_snprintf (key_name, sizeof (key_name), "%d", i);
-	this_entry = mc_config_get_string(cfg, input_name, key_name, "");
-	if (!*this_entry){
-	    g_free(this_entry);
-	    break;
-	}
+	this_entry = mc_config_get_string (cfg, input_name, key_name, "");
 
-	hist = list_append_unique (hist, this_entry);
+	if (this_entry && *this_entry)
+	    hist = list_append_unique (hist, this_entry);
     }
-    mc_config_deinit(cfg);
+
+    mc_config_deinit (cfg);
     g_free (profile);
 
     /* return pointer to the last entry in the list */
-    hist = g_list_last (hist);
-
-    return hist;
+    return g_list_last (hist);
 }
 
 void
