@@ -66,18 +66,15 @@ mc_config_init (const gchar * ini_path)
 	return mc_config;
     }
 
-    if (((mc_stat (ini_path, &st) == 0) && (st.st_size == 0))
-	|| g_key_file_load_from_file
-	    (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL))
+    if (mc_stat (ini_path, &st) && st.st_size)
     {
-	/* file is empty or normal */
-	mc_config->ini_path = g_strdup (ini_path);
-	return mc_config;
+	/* file present and not empty */
+	g_key_file_load_from_file
+	    (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
     }
 
-    g_key_file_free (mc_config->handle);
-    g_free (mc_config);
-    return NULL;
+    mc_config->ini_path = g_strdup (ini_path);
+    return mc_config;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
