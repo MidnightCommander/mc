@@ -837,37 +837,8 @@ compare_dirs_cmd (void)
 void
 history_cmd (void)
 {
-    Listbox *listbox;
-    GList *current;
-
-    if (cmdline->need_push) {
-	if (push_history (cmdline, cmdline->buffer) == 2)
-	    cmdline->need_push = 0;
-    }
-    if (!cmdline->history) {
-	message (D_ERROR, MSG_ERROR, _(" The command history is empty "));
-	return;
-    }
-    current = g_list_first (cmdline->history);
-    listbox = create_listbox_window (60, 10, _(" Command history "),
-				     "[Command Menu]");
-    while (current) {
-	LISTBOX_APPEND_TEXT (listbox, 0, (char *) current->data, current);
-	current = g_list_next(current);
-    }
-    run_dlg (listbox->dlg);
-    if (listbox->dlg->ret_value == B_CANCEL)
-	current = NULL;
-    else
-	current = listbox->list->current->data;
-    destroy_dlg (listbox->dlg);
-    g_free (listbox);
-
-    if (!current)
-	return;
-    cmdline->history = current;
-    assign_text (cmdline, (char *) current->data);
-    update_input (cmdline, 1);
+    /* show the history of command line widget */
+    send_message (&cmdline->widget, WIDGET_KEY, ALT ('h'));
 }
 
 void swap_cmd (void)

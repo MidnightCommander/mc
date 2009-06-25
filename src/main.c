@@ -920,7 +920,7 @@ static menu_entry CmdMenu[] = {
     {' ', N_("e&Xternal panelize    C-x !"), NULL_HOTKEY, external_panelize},
     {' ', N_("show directory s&Izes"), NULL_HOTKEY, dirsizes_cmd},
     {' ', "", NULL_HOTKEY, 0},
-    {' ', N_("command &History"), NULL_HOTKEY, history_cmd},
+    {' ', N_("Command &history      M-h"), NULL_HOTKEY, history_cmd},
     {' ', N_("di&Rectory hotlist    C-\\"), NULL_HOTKEY, quick_chdir_cmd},
 #ifdef USE_VFS
     {' ', N_("&Active VFS list      C-x a"), NULL_HOTKEY, reselect_vfs},
