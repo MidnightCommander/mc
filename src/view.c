@@ -139,6 +139,20 @@ struct cache_line {
     screen_dimen left;
 };
 
+/* this structure and view_read_* functions make reading text simpler 
+ * view need remeber 4 following charsets: actual, next and two previous */
+struct read_info {
+    char ch[4][MB_LEN_MAX + 1];
+    char *cnxt;
+    char *cact;
+    char *chi1;
+    char *chi2;
+    offset_type next;
+    offset_type actual;
+    int result;
+};
+
+
 struct WView {
     Widget widget;
 
@@ -248,6 +262,9 @@ struct WView {
     gboolean search_all_codepages;
     gboolean search_case;
     gboolean search_backwards;
+
+    int search_numNeedSkipChar;
+    struct read_info search_onechar_info;
 };
 
 
@@ -361,18 +378,6 @@ view_get_char (WView *view, offset_type from, char *ch, int size)
     return -1;
 }
 
-/* this structure and view_read_* functions make reading text simpler 
- * view need remeber 4 following charsets: actual, next and two previous */
-struct read_info {
-    char ch[4][MB_LEN_MAX + 1];
-    char *cnxt;
-    char *cact;
-    char *chi1;
-    char *chi2;
-    offset_type next;
-    offset_type actual;
-    int result;
-};
 
 /* set read_info into initial state and read first character to cnxt 
  * return how many bytes was read or -1 if end of text */
@@ -2742,66 +2747,6 @@ my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 
 /* {{{ Searching }}} */
 
-/* read one whole line into buffer, return where line start and end */
-static int
-view_get_line_at (WView *view, offset_type from, GString * buffer,
-                  offset_type *buff_start, offset_type *buff_end) 
-{
-    #define cmp(t1,t2) (strcmp((t1),(t2)) == 0)
-    struct read_info info;
-    struct cache_line *line;
-    offset_type start;
-    offset_type end;
-
-    line = view_get_first_showed_line (view);
-
-    line = view_offset_to_line_from (view, from, line);
-
-    if (!view->search_backwards) {
-        start = from;
-        end = view_get_end_of_whole_line (view, line)->end;
-        if (start >= end) return 0;
-    } else {
-        start = view_get_start_of_whole_line (view, line)->start;
-        end = from;
-    }
-
-    (*buff_start) = start;
-    (*buff_end) = end;
-
-    g_string_set_size(buffer,0);
-
-    view_read_start (view, &info, start);
-    while ((info.result != -1) && (info.next < end)) {
-        view_read_continue (view, &info);
-
-        /* if text contains '\0' */
-        if (cmp (info.cact, "")) {
-            if (info.actual < from) {
-                /* '\0' before start offset, continue */
-                g_string_set_size(buffer,0);
-                (*buff_start) = info.next;
-                continue;
-            } else {
-                /* '\0' after start offset, end */
-                (*buff_end) = info.next;
-                return 1;
-	    }
-	}
-
-        if (view_read_test_new_line (view, &info))
-            continue;
-
-        if (view_read_test_nroff_back (view, &info)) {
-	    g_string_truncate (buffer, buffer->len-1);
-            continue;
-	}
-
-	g_string_append(buffer,info.cact);
-    }
-
-    return 1;
-}
 
 /* map search result positions to offsets in text */
 void
@@ -3104,10 +3049,24 @@ view__get_nroff_real_len(WView *view, offset_type start, offset_type length)
     struct read_info info;
 
     view_read_start (view, &info, start);
-    while((loop1 < length ) && (info.result != -1))
-    {
+    while((loop1 < length ) && (info.result != -1)) {
         view_read_continue (view, &info);
-        if (*info.cnxt == '\b')
+        if (view_read_test_nroff_back (view, &info)) {
+
+            if (cmp (info.chi1, "_") && (!cmp (info.cnxt, "_") || !cmp (info.chi2, "\b")))
+            {
+                view_read_continue (view, &info);
+                view_read_continue (view, &info);
+                view_read_continue (view, &info);
+                view_read_continue (view, &info);
+                nroff_seq+=4;
+            } else {
+                view_read_continue (view, &info);
+                view_read_continue (view, &info);
+                nroff_seq+=2;
+            }
+        }
+        if (*info.cact == '_' && *info.cnxt == 0x8)
         {
             view_read_continue (view, &info);
             view_read_continue (view, &info);
@@ -3118,17 +3077,100 @@ view__get_nroff_real_len(WView *view, offset_type start, offset_type length)
     return nroff_seq;
 }
 
+static int
+view_search_update_cmd_callback(const void *user_data, gsize char_offset)
+{
+    WView *view = (WView *) user_data;
+
+    if (char_offset >= view->update_activate) {
+        view->update_activate += view->update_steps;
+        if (verbose) {
+            view_percent (view, char_offset);
+            mc_refresh ();
+        }
+        if (got_interrupt ())
+            return MC_SEARCH_CB_ABORT;
+    }
+    /* may be in future return from this callback will change current position
+    * in searching block. Now this just constant return value.
+    */
+    return 1;
+}
+
+static int
+view_search_cmd_callback(const void *user_data, gsize char_offset)
+{
+    int byte;
+    WView *view = (WView *) user_data;
+
+    byte = get_byte (view, char_offset);
+    if (byte == -1)
+        return MC_SEARCH_CB_ABORT;
+    view_read_continue (view, &view->search_onechar_info);
+
+    if (view->search_numNeedSkipChar) {
+        view->search_numNeedSkipChar--;
+        if (view->search_numNeedSkipChar){
+            return byte;
+        }
+        return MC_SEARCH_CB_SKIP;
+    }
+
+    if (view_read_test_nroff_back (view, &view->search_onechar_info)) {
+        if (
+            cmp (view->search_onechar_info.chi1, "_") &&
+            (!cmp (view->search_onechar_info.cnxt, "_") || !cmp (view->search_onechar_info.chi2, "\b"))
+        )
+            view->search_numNeedSkipChar = 2;
+        else
+            view->search_numNeedSkipChar = 1;
+
+        return MC_SEARCH_CB_SKIP;
+    }
+    if (byte == '_' && *view->search_onechar_info.cnxt == 0x8)
+    {
+        view->search_numNeedSkipChar = 1;
+        return MC_SEARCH_CB_SKIP;
+    }
+
+    return byte;
+}
+
+static gboolean
+view_find (WView *view, gsize search_start, gsize *len)
+{
+    gsize search_end;
+
+    view->search_numNeedSkipChar = 0;
+
+    if (view->search_backwards) {
+        search_end = view_get_filesize (view);
+        while ((int) search_start >= 0) {
+            if (search_end - search_start > view->search->original_len && mc_search_is_fixed_search_str(view->search))
+                search_end = search_start + view->search->original_len;
+
+            view_read_start (view, &view->search_onechar_info, search_start);
+
+            if ( mc_search_run(view->search, (void *) view, search_start, search_end, len))
+                return TRUE;
+
+            search_start--;
+        }
+        view->search->error_str = g_strdup(_(" Search string not found "));
+        return FALSE;
+    }
+    view_read_start (view, &view->search_onechar_info, search_start);
+    return mc_search_run(view->search, (void *) view, search_start, view_get_filesize (view), len);
+}
 
 static void
 do_search (WView *view)
 {
-    GString *buffer;
     offset_type search_start;
-    int search_status;
+    gboolean isFound = FALSE;
+
     Dlg_head *d = NULL;
 
-    offset_type line_start;
-    offset_type line_end;
     size_t match_len;
 
     if (verbose) {
@@ -3136,9 +3178,19 @@ do_search (WView *view)
         mc_refresh ();
     }
 
-    buffer = g_string_new ("");
+    /*for avoid infinite search loop we need to increase or decrease start offset of search */
 
-    search_start = (view->search_backwards) ?  view->search_start-1 : view->search_end;
+    if (view->search_start)
+    {
+        search_start = (view->search_backwards) ? -2 : 2;
+        search_start = view->search_start + search_start +
+            view__get_nroff_real_len(view, view->search_start, 2) * search_start;
+    }
+    else
+    {
+        search_start = view->search_start;
+    }
+
     if (view->search_backwards && (int) search_start < 0 )
         search_start = 0;
 
@@ -3147,80 +3199,55 @@ do_search (WView *view)
     view->update_activate = 0;
 
     enable_interrupt_key ();
-    search_status = -1;
 
-    while(1){
-        if (search_start >= view->update_activate) {
-            view->update_activate += view->update_steps;
+    do
+    {
+        if (view_find(view, search_start, &match_len))
+        {
+            view->search_start =  view->search->normal_offset +
+                view__get_nroff_real_len(view,
+                                    view->search->start_buffer,
+                                    view->search->normal_offset - view->search->start_buffer);
+
+            view->search_end = view->search_start + match_len +
+                view__get_nroff_real_len(view, view->search_start, match_len + 1);
+
+            if (view->hex_mode){
+                view->hex_cursor = view->search_start;
+                view->hexedit_lownibble = FALSE;
+                view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
+                view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
+            }
+
             if (verbose) {
-                view_percent (view, search_start);
+                dlg_run_done (d);
+                destroy_dlg (d);
+                d = create_message (D_NORMAL, _("Search"), _("Seeking to search result"));
                 mc_refresh ();
             }
-            if (got_interrupt ())
-                break;
-        }
 
-        if (!view_get_line_at (view, search_start, buffer, &line_start, &line_end))
+            view_moveto_match (view);
+            isFound = TRUE;
             break;
-
-        if (! mc_search_run( view->search, buffer->str, 0, buffer->len, &match_len )){
-            if (view->search->error != MC_SEARCH_E_NOTFOUND) {
-                search_status = -2;
-                break;
-            }
-
-            if (! view->search_backwards) {
-                search_start = line_end;
-            } else {
-                if (line_start > 0) search_start = line_start - 1;
-                else break;
-            }
-            continue;
         }
-        search_status = 1;
-        if (view->search_backwards){
-            search_start = line_start;
-        }
+    } while (view_may_still_grow(view));
 
-        view->search_start = search_start + view->search->normal_offset +
-                view__get_nroff_real_len(view, search_start, view->search->normal_offset);
-
-        view->search_end = view->search_start + match_len +
-                view__get_nroff_real_len(view, view->search_start, match_len);
-
-        if (view->hex_mode){
-            view->hex_cursor = view->search_start;
-            view->hexedit_lownibble = FALSE;
-            view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
-            view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
-        }
-
-        view_moveto_match (view);
-
-        break;
+    if (!isFound){
+        if (view->search->error_str)
+            message (D_NORMAL, _("Search"), view->search->error_str);
     }
+
+    view->dirty++;
+    view_update (view);
+
+
     disable_interrupt_key ();
     if (verbose) {
         dlg_run_done (d);
         destroy_dlg (d);
     }
-    switch (search_status)
-    {
-        case -1:
-            message (D_NORMAL, _("Search"), _(" Search string not found "));
-            view->search_end = view->search_start;
-            break;
-        case -2:
-            message (D_NORMAL, _("Search"), "%s", view->search->error_str);
-            view->search_end = view->search_start;
-            break;
-    }
-    g_string_free (buffer, TRUE);
 
-    view->dirty++;
-    view_update (view);
 }
-
 
 /* Both views */
 static void
@@ -3234,6 +3261,7 @@ view_search_cmd (WView *view)
 
     char *defval = g_strdup (view->last_search_string != NULL ? view->last_search_string : "");
     char *exp = NULL;
+    GString *tmp;
 
     int ttype_of_search = (int) view->search_type;
     int tall_codepages = (int) view->search_all_codepages;
@@ -3295,7 +3323,14 @@ view_search_cmd (WView *view)
     if (exp == NULL || exp[0] == '\0')
 	goto cleanup;
 
-    convert_from_input (exp);
+    g_free (defval);
+    defval = NULL;
+    tmp = str_convert_to_input (exp);
+
+    if (tmp)
+        defval = tmp->str;
+
+    g_string_free (tmp, FALSE);
 
     g_free (view->last_search_string);
     view->last_search_string = exp;
@@ -3304,13 +3339,15 @@ view_search_cmd (WView *view)
     if (view->search)
         mc_search_free(view->search);
 
-    view->search = mc_search_new(view->last_search_string, -1);
+    view->search = mc_search_new(defval, -1);
     if (! view->search)
-        return;
+        goto cleanup;
 
     view->search->search_type = view->search_type;
     view->search->is_all_charsets = view->search_all_codepages;
     view->search->is_case_sentitive = view->search_case;
+    view->search->search_fn = view_search_cmd_callback;
+    view->search->update_fn = view_search_update_cmd_callback;
 
     do_search (view);
 
