@@ -355,6 +355,27 @@ void open_error_pipe (void)
 	close (error_pipe[0]);
 	error_pipe[0] = -1;
     }
+    else
+    {
+        /*
+         * Settng stderr in nonblocking mode as we close it earlier, than
+         * program stops. We try to read some error at program startup,
+         * but we should not block on it.
+         *
+         * TODO: make piped stdin/stderr poll()/select()able to get rid
+         * of following hack.
+         */
+        int fd_flags;
+        fd_flags = fcntl (error_pipe[0], F_GETFL, NULL);
+        if (fd_flags != -1)
+        {
+            fd_flags |= O_NONBLOCK;
+            if (fcntl(error_pipe[0], F_SETFL, fd_flags) == -1)
+            {
+                /* TODO: handle it somehow */
+            }
+        }
+    }
     /* we never write there */
     close (error_pipe[1]);
     error_pipe[1] = -1;
