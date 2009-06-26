@@ -395,7 +395,7 @@ close_error_pipe (int error, const char *text)
 
     /* already closed */
     if (error_pipe[0] == -1)
-	return;
+	return 0;
 
     if (error)
 	title = MSG_ERROR;
