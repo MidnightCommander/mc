@@ -19,7 +19,13 @@
 
 #include <config.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 #include "global.h"
+
+#include "../../vfs/vfs.h"	/* mc_stat */
 
 #include "mcconfig.h"
 
@@ -42,6 +48,7 @@ mc_config_t *
 mc_config_init (const gchar * ini_path)
 {
     mc_config_t *mc_config;
+    struct stat st;
 
     mc_config = g_try_malloc0 (sizeof (mc_config_t));
 
@@ -59,13 +66,13 @@ mc_config_init (const gchar * ini_path)
 	return mc_config;
     }
 
-    if (!g_key_file_load_from_file
-	(mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL))
+    if (!mc_stat (ini_path, &st) && st.st_size)
     {
-	g_key_file_free (mc_config->handle);
-	g_free (mc_config);
-	return NULL;
+	/* file present and not empty */
+	g_key_file_load_from_file
+	    (mc_config->handle, ini_path, G_KEY_FILE_KEEP_COMMENTS, NULL);
     }
+
     mc_config->ini_path = g_strdup (ini_path);
     return mc_config;
 }
