@@ -1,4 +1,4 @@
-# translation of ru.po to Русский
+# translation of ru.po to п═я┐я│я│п╨п╦п╧
 # Russian translation of Midnight Commander
 # Copyright (C) 1998-2003, 2005 Free Software Foundation, Inc.
 # Current translators: Anton S. Chumak <nightfast@yahoo.co.uk>
@@ -11,362 +11,368 @@
 # 	Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
-#
+# Andrew Borodin <aborodin@vmail.ru> 2009
+# Ilia Maslakov <il.smind@gmail.com> 2009
+
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-03-14 19:43+0000\n"
+"Report-Msgid-Bugs-To: mc-devel@gnome.org\n"
+"POT-Creation-Date: 2009-06-27 13:41+0400\n"
 "PO-Revision-Date: 2005-09-09 14:37+0300\n"
 "Last-Translator: Anton S. Chumak <nightfast@yahoo.co.uk>\n"
 "Language-Team: Russian ru@li.org\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: KBabel 1.10.1\n"
 
 msgid " Choose syntax highlighting "
-msgstr "\tВыбор цветовыделения синтаксиса"
+msgstr "\tп▓я▀п╠п╬я─ я├п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦я▐ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
 
 msgid "< Auto >"
-msgstr "< Автоматически >"
+msgstr "< п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦ >"
 
 msgid "< Reload Current Syntax >"
-msgstr "Перезагрузить текущее цветовыделение"
+msgstr "п÷п╣я─п╣п╥п╟пЁя─я┐п╥п╦я┌я▄ я┌п╣п╨я┐я┴п╣п╣ я├п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦п╣"
 
 #, c-format
 msgid " Cannot open %s for reading "
-msgstr " Невозможно открыть файл %s для чтения "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s п╢п╩я▐ я┤я┌п╣п╫п╦я▐ "
 
 msgid "Error"
-msgstr "Ошибка"
+msgstr "п·я┬п╦п╠п╨п╟"
 
 #, c-format
 msgid " Error reading from pipe: %s "
-msgstr " Ошибка чтения из канала: %s "
+msgstr " п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ п╦п╥ п╨п╟п╫п╟п╩п╟: %s "
 
 #, c-format
 msgid " Cannot open pipe for reading: %s "
-msgstr " Невозможно открыть канал для чтения: %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п╨п╟п╫п╟п╩ п╢п╩я▐ я┤я┌п╣п╫п╦я▐: %s "
 
 #, c-format
 msgid " Cannot get size/permissions for %s "
-msgstr " Невозможно получить размер/права доступа для файла %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я─п╟п╥п╪п╣я─/п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╢п╩я▐ я└п╟п╧п╩п╟ %s "
 
 #, c-format
 msgid " %s is not a regular file "
-msgstr " %s не является обычным файлом "
+msgstr " %s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╬п╠я▀я┤п╫я▀п╪ я└п╟п╧п╩п╬п╪ "
 
 #, c-format
 msgid " File %s is too large "
-msgstr " Файл %s слишком большой "
+msgstr " п╓п╟п╧п╩ %s я│п╩п╦я┬п╨п╬п╪ п╠п╬п╩я▄я┬п╬п╧ "
 
 msgid "Macro recursion is too deep"
-msgstr "Слишком глубокая рекурсия макросов"
+msgstr "п║п╩п╦я┬п╨п╬п╪ пЁп╩я┐п╠п╬п╨п╟я▐ я─п╣п╨я┐я─я│п╦я▐ п╪п╟п╨я─п╬я│п╬п╡"
 
-msgid "&Dismiss"
-msgstr "&Закрыть"
+msgid "Search"
+msgstr "п÷п╬п╦я│п╨"
+
+#, c-format
+msgid " %d items found, %d bookmarks added "
+msgstr " %d п╫п╟п╧п╢п╣п╫п╬, %d п╥п╟п╨п╩п╟п╢п╬п╨ п╢п╬п╠п╟п╡п╩п╣п╫п╬ "
+
+msgid " Search string not found "
+msgstr " п≤я│п╨п╬п╪п╟я▐ я│я┌я─п╬п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫п╟ "
 
 msgid "Warning"
-msgstr "Предупреждение"
+msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣"
 
 msgid " File has hard-links. Detach before saving? "
-msgstr ""
+msgstr " п╓п╟п╧п╩ п╦п╪п╣п╣я┌ п╤п╣я│я┌п╨п╦п╣ я│я│я▀п╩п╨п╦. п·я┌я│п╬п╣п╢п╦п╫п╦я┌я▄ п©п╣я─п╣п╢ я│п╬я┘я─п╟п╫п╣п╫п╦п╣п╪? "
 
 msgid "&Yes"
-msgstr "&Да"
+msgstr "&п■п╟"
 
 msgid "&No"
-msgstr "&Нет"
+msgstr "&п²п╣я┌"
 
 msgid "&Cancel"
-msgstr "&Прервать"
+msgstr "&п÷я─п╣я─п╡п╟я┌я▄"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "п╓п╟п╧п╩ п╠я▀п╩ п╦п╥п╪п╣п╫п╣п╫ п╡п╫п╣я┬п╫п╣п╧ п©я─п╬пЁя─п╟п╪п╪п╬п╧. п║п╬я┘я─п╟п╦я┌я▄ п©п╬п╡п╣я─я┘?"
 
 msgid " Error writing to pipe: "
-msgstr " Ошибка записи в канал: "
+msgstr " п·я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦ п╡ п╨п╟п╫п╟п╩: "
 
 msgid " Cannot open pipe for writing: "
-msgstr " Невозможно открыть канал для записи: "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п╨п╟п╫п╟п╩ п╢п╩я▐ п╥п╟п©п╦я│п╦: "
 
 msgid "Quick save "
-msgstr "Быстрое сохранение"
+msgstr "п▒я▀я│я┌я─п╬п╣ я│п╬я┘я─п╟п╫п╣п╫п╦п╣"
 
 msgid "Safe save "
-msgstr "Безопасное сохранение"
+msgstr "п▒п╣п╥п╬п©п╟я│п╫п╬п╣ я│п╬я┘я─п╟п╫п╣п╫п╦п╣"
 
 msgid "Do backups -->"
-msgstr "Резервные копии -->"
+msgstr "п═п╣п╥п╣я─п╡п╫я▀п╣ п╨п╬п©п╦п╦ -->"
 
 msgid "&OK"
-msgstr "&Дальше"
+msgstr "&п■п╟п╩я▄я┬п╣"
 
 msgid "Extension:"
-msgstr "Расширение:"
+msgstr "п═п╟я│я┬п╦я─п╣п╫п╦п╣:"
 
 msgid " Edit Save Mode "
-msgstr " Режим сохранения "
+msgstr " п═п╣п╤п╦п╪ я│п╬я┘я─п╟п╫п╣п╫п╦я▐ "
 
 msgid " Save As "
-msgstr " Сохранить как "
+msgstr " п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨ "
 
 msgid " Enter file name: "
-msgstr " Введите имя файла: "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╦п╪я▐ я└п╟п╧п╩п╟: "
 
 msgid " A file already exists with this name. "
-msgstr " Файл с таким именем уже существует. "
+msgstr " п╓п╟п╧п╩ я│ я┌п╟п╨п╦п╪ п╦п╪п╣п╫п╣п╪ я┐п╤п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌. "
 
 msgid "&Overwrite"
-msgstr "Пе&реписать"
+msgstr "п÷п╣&я─п╣п©п╦я│п╟я┌я▄"
 
 msgid " Cannot save file. "
-msgstr " Невозможно сохранить файл "
-
-msgid "Cancel"
-msgstr "Прервать"
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ "
 
 msgid " Delete macro "
-msgstr " Удалить макрос "
+msgstr " пёп╢п╟п╩п╦я┌я▄ п╪п╟п╨я─п╬я│ "
 
 msgid " Cannot open temp file "
-msgstr " Невозможно открыть временный файл "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п╡я─п╣п╪п╣п╫п╫я▀п╧ я└п╟п╧п╩ "
 
 msgid " Cannot open macro file "
-msgstr " Невозможно открыть файл макросов "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ п╪п╟п╨я─п╬я│п╬п╡ "
 
 msgid " Cannot overwrite macro file "
-msgstr " Невозможно перезаписать файл макросов "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╥п╟п©п╦я│п╟я┌я▄ я└п╟п╧п╩ п╪п╟п╨я─п╬я│п╬п╡ "
 
 msgid " Save macro "
-msgstr " Сохранить макрос "
+msgstr " п║п╬я┘я─п╟п╫п╦я┌я▄ п╪п╟п╨я─п╬я│ "
 
 msgid " Press the macro's new hotkey: "
-msgstr " Нажмите новую клавишу макроса: "
+msgstr " п²п╟п╤п╪п╦я┌п╣ п╫п╬п╡я┐я▌ п╨п╩п╟п╡п╦я┬я┐ п╪п╟п╨я─п╬я│п╟: "
 
 msgid " Press macro hotkey: "
-msgstr " Нажмите горячую клавишу для макроса: "
+msgstr " п²п╟п╤п╪п╦я┌п╣ пЁп╬я─я▐я┤я┐я▌ п╨п╩п╟п╡п╦я┬я┐ п╢п╩я▐ п╪п╟п╨я─п╬я│п╟: "
 
 msgid " Load macro "
-msgstr " Загрузить макрос "
+msgstr " п≈п╟пЁя─я┐п╥п╦я┌я▄ п╪п╟п╨я─п╬я│ "
 
 msgid " Confirm save file? : "
-msgstr " Подтверждаете запись файла?: "
+msgstr " п÷п╬п╢я┌п╡п╣я─п╤п╢п╟п╣я┌п╣ п╥п╟п©п╦я│я▄ я└п╟п╧п╩п╟?: "
 
 msgid " Save file "
-msgstr " Сохранить файл "
+msgstr " п║п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ "
 
 msgid "&Save"
-msgstr "&Сохранить"
+msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Текущий текст был модифицирован и не сохранен. \n"
-" Продолжение операции приведет к потере изменений. "
+" п╒п╣п╨я┐я┴п╦п╧ я┌п╣п╨я│я┌ п╠я▀п╩ п╪п╬п╢п╦я└п╦я├п╦я─п╬п╡п╟п╫ п╦ п╫п╣ я│п╬я┘я─п╟п╫п╣п╫. \n"
+" п÷я─п╬п╢п╬п╩п╤п╣п╫п╦п╣ п╬п©п╣я─п╟я├п╦п╦ п©я─п╦п╡п╣п╢п╣я┌ п╨ п©п╬я┌п╣я─п╣ п╦п╥п╪п╣п╫п╣п╫п╦п╧. "
 
 msgid "C&ontinue"
-msgstr "П&родолжить"
+msgstr "п÷&я─п╬п╢п╬п╩п╤п╦я┌я▄"
+
+msgid "Syntax file edit"
+msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
+
+msgid " Which syntax file you want to edit? "
+msgstr " п п╟п╨п╬п╧ я└п╟п╧п╩ я│п╦п╫я┌п╟п╨я│п╦я│п╟ п▓я▀ я┘п╬я┌п╦я┌п╣ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄? "
+
+msgid "&User"
+msgstr "&п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╦п╧"
+
+msgid "&System Wide"
+msgstr "&п·п╠я┴п╣я│п╦я│я┌п╣п╪п╫я▀п╧"
+
+msgid " Menu edit "
+msgstr " п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ п╪п╣п╫я▌ "
+
+msgid " Which menu file do you want to edit? "
+msgstr " п п╟п╨п╬п╧ я└п╟п╧п╩ п╪п╣п╫я▌ п▓я▀ я┘п╬я┌п╦я┌п╣ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄? "
+
+msgid "&Local"
+msgstr "&п°п╣я│я┌п╫я▀п╧"
 
 msgid " Load "
-msgstr " Загрузить "
+msgstr " п≈п╟пЁя─я┐п╥п╦я┌я▄ "
 
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блок слишком велик, вам может не удастся отменить эту операцию. "
+msgstr " п▒п╩п╬п╨ я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨, п╡п╟п╪ п╪п╬п╤п╣я┌ п╫п╣ я┐п╢п╟я│я┌я│я▐ п╬я┌п╪п╣п╫п╦я┌я▄ я█я┌я┐ п╬п©п╣я─п╟я├п╦я▌. "
 
-msgid "O&ne"
-msgstr "&Один"
-
-msgid "A&ll"
-msgstr "&Все"
-
-msgid "&Skip"
-msgstr "П&ропустить"
-
-msgid "&Replace"
-msgstr "&Заменить"
-
-msgid " Replace with: "
-msgstr " Заменить на: "
-
-msgid " Confirm replace "
-msgstr " Подтвердить замену "
-
-msgid "scanf &Expression"
-msgstr "Выражение &scanf"
-
-msgid "replace &All"
-msgstr "Заменить &все"
-
-msgid "pro&Mpt on replace"
-msgstr "Подтверждать &замену"
-
-msgid "&Backwards"
-msgstr "&Назад"
-
-msgid "&Regular expression"
-msgstr "&Регулярное выражение"
-
-msgid "&Whole words only"
-msgstr "Только целые &слова"
-
-msgid "case &Sensitive"
-msgstr "Учет ре&гистра"
-
-msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Введите порядок аргументов замены, напр. 3,2,1,4 "
-
-msgid " Enter replacement string:"
-msgstr " Введите текст для замены: "
-
-msgid " Enter search string:"
-msgstr " Введите строку для поиска:"
+msgid "Replace"
+msgstr "&п≈п╟п╪п╣п╫п╦я┌я▄"
 
 msgid " Replace "
-msgstr " Заменить "
-
-msgid "Search"
-msgstr "Поиск"
-
-msgid ""
-" Invalid regular expression, or scanf expression with too many conversions "
-msgstr ""
-" Неверное регулярное выражение или в scanf-формате много преобразований"
-
-msgid " Error in replacement format string. "
-msgstr " Ошибка в формате строки замены. "
-
-msgid " Replacement too long. "
-msgstr " Текст для замены слишком длинный. "
+msgstr " п≈п╟п╪п╣п╫п╦я┌я▄ "
 
 #, c-format
 msgid " %ld replacements made. "
-msgstr " Осуществлено подстановок: %ld "
-
-msgid " Search string not found "
-msgstr " Искомая строка не найдена "
-
-#, c-format
-msgid " %d items found, %d bookmarks added "
-msgstr " %d найдено, %d закладок добавлено "
+msgstr " п·я│я┐я┴п╣я│я┌п╡п╩п╣п╫п╬ п©п╬п╢я│я┌п╟п╫п╬п╡п╬п╨: %ld "
 
 msgid "Quit"
-msgstr "Выход"
+msgstr "п▓я▀я┘п╬п╢"
 
 msgid " File was modified, Save with exit? "
-msgstr " Файл был изменен, сохранить при выходе? "
+msgstr " п╓п╟п╧п╩ п╠я▀п╩ п╦п╥п╪п╣п╫п╣п╫, я│п╬я┘я─п╟п╫п╦я┌я▄ п©я─п╦ п╡я▀я┘п╬п╢п╣? "
 
 msgid "&Cancel quit"
-msgstr "&Прервать выход"
+msgstr "&п÷я─п╣я─п╡п╟я┌я▄ п╡я▀я┘п╬п╢"
 
 msgid " Error "
-msgstr " Ошибка "
+msgstr " п·я┬п╦п╠п╨п╟ "
 
 msgid " This function is not implemented. "
-msgstr " Эта функция не реализована. "
+msgstr " п╜я┌п╟ я└я┐п╫п╨я├п╦я▐ п╫п╣ я─п╣п╟п╩п╦п╥п╬п╡п╟п╫п╟. "
 
 msgid " Copy to clipboard "
-msgstr " Копировать в буфер "
+msgstr " п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ п╠я┐я└п╣я─ "
 
 msgid " Unable to save to file. "
-msgstr " Невозможно сохранить в файл. "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ п╡ я└п╟п╧п╩. "
 
 msgid " Cut to clipboard "
-msgstr " Вырезать в буфер "
+msgstr " п▓я▀я─п╣п╥п╟я┌я▄ п╡ п╠я┐я└п╣я─ "
 
 msgid " Goto line "
-msgstr " Перейти к строке "
+msgstr " п÷п╣я─п╣п╧я┌п╦ п╨ я│я┌я─п╬п╨п╣ "
 
 msgid " Enter line: "
-msgstr " Введите номер строки: "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╫п╬п╪п╣я─ я│я┌я─п╬п╨п╦: "
 
 msgid " Save Block "
-msgstr " Сохранить блок "
+msgstr " п║п╬я┘я─п╟п╫п╦я┌я▄ п╠п╩п╬п╨ "
 
 msgid " Insert File "
-msgstr " Вставить файл "
+msgstr " п▓я│я┌п╟п╡п╦я┌я▄ я└п╟п╧п╩ "
 
 msgid " Cannot insert file. "
-msgstr " Невозможно вставить файл. "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я│я┌п╟п╡п╦я┌я▄ я└п╟п╧п╩. "
 
 msgid " Sort block "
-msgstr " Сортировать блок "
+msgstr " п║п╬я─я┌п╦я─п╬п╡п╟я┌я▄ п╠п╩п╬п╨ "
 
 msgid " You must first highlight a block of text. "
-msgstr " Вы должны сначала выделить блок текста. "
+msgstr " п▓я▀ п╢п╬п╩п╤п╫я▀ я│п╫п╟я┤п╟п╩п╟ п╡я▀п╢п╣п╩п╦я┌я▄ п╠п╩п╬п╨ я┌п╣п╨я│я┌п╟. "
 
 msgid " Run Sort "
-msgstr " Выполнить сортировку "
+msgstr " п▓я▀п©п╬п╩п╫п╦я┌я▄ я│п╬я─я┌п╦я─п╬п╡п╨я┐ "
 
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами: "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п©п╟я─п╟п╪п╣я┌я─я▀ я│п╬я─я┌п╦я─п╬п╡п╨п╦ (man sort(1)), я─п╟п╥п╢п╣п╩п╣п╫п╫я▀п╣ п©я─п╬п╠п╣п╩п╟п╪п╦: "
 
 msgid " Sort "
-msgstr " Сортировка "
+msgstr " п║п╬я─я┌п╦я─п╬п╡п╨п╟ "
 
 msgid " Cannot execute sort command "
-msgstr " Невозможно выполнить команду sort "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╨п╬п╪п╟п╫п╢я┐ sort "
 
 msgid " Sort returned non-zero: "
-msgstr " Сортировка вернула ненулевой код: "
+msgstr " п║п╬я─я┌п╦я─п╬п╡п╨п╟ п╡п╣я─п╫я┐п╩п╟ п╫п╣п╫я┐п╩п╣п╡п╬п╧ п╨п╬п╢: "
 
 msgid "Paste output of external command"
-msgstr "Вставить вывод внешней команды"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╡я▀п╡п╬п╢ п╡п╫п╣я┬п╫п╣п╧ п╨п╬п╪п╟п╫п╢я▀"
 
 msgid "Enter shell command(s):"
-msgstr "Введите команду оболочки:"
+msgstr "п▓п╡п╣п╢п╦я┌п╣ п╨п╬п╪п╟п╫п╢я┐ п╬п╠п╬п╩п╬я┤п╨п╦:"
 
 msgid "External command"
-msgstr "Внешняя команда"
+msgstr "п▓п╫п╣я┬п╫я▐я▐ п╨п╬п╪п╟п╫п╢п╟"
 
 msgid "Cannot execute command"
-msgstr "Невозможно выполнить команду"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╨п╬п╪п╟п╫п╢я┐"
 
 msgid "Error creating script:"
-msgstr "Ошибка создания скрипта:"
+msgstr "п·я┬п╦п╠п╨п╟ я│п╬п╥п╢п╟п╫п╦я▐ я│п╨я─п╦п©я┌п╟:"
 
 msgid "Error reading script:"
-msgstr "Ошибка чтения скрипта:"
+msgstr "п·я┬п╦п╠п╨п╟ я┤я┌п╣п╫п╦я▐ я│п╨я─п╦п©я┌п╟:"
 
 msgid "Error closing script:"
-msgstr "Ошибка закрытия скрипта:"
+msgstr "п·я┬п╦п╠п╨п╟ п╥п╟п╨я─я▀я┌п╦я▐ я│п╨я─п╦п©я┌п╟:"
 
 msgid "Script created:"
-msgstr "Скрипт создан:"
+msgstr "п║п╨я─п╦п©я┌ я│п╬п╥п╢п╟п╫:"
 
 msgid "Process block"
-msgstr "Обработать блок"
+msgstr "п·п╠я─п╟п╠п╬я┌п╟я┌я▄ п╠п╩п╬п╨"
 
 msgid " Mail "
-msgstr " Почта "
+msgstr " п÷п╬я┤я┌п╟ "
 
 msgid " Copies to"
-msgstr " Отправить копии адресатам"
+msgstr " п·я┌п©я─п╟п╡п╦я┌я▄ п╨п╬п©п╦п╦ п╟п╢я─п╣я│п╟я┌п╟п╪"
 
 msgid " Subject"
-msgstr " Тема"
+msgstr " п╒п╣п╪п╟"
 
 msgid " To"
-msgstr " Кому"
+msgstr " п п╬п╪я┐"
 
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr " mail -s <Тема> -c <Копии> <Кому>"
+msgstr " mail -s <п╒п╣п╪п╟> -c <п п╬п©п╦п╦> <п п╬п╪я┐>"
 
 msgid " Insert Literal "
-msgstr " Вставить литерал "
+msgstr " п▓я│я┌п╟п╡п╦я┌я▄ п╩п╦я┌п╣я─п╟п╩ "
 
 msgid " Press any key: "
-msgstr " Нажмите любую клавишу: "
+msgstr " п²п╟п╤п╪п╦я┌п╣ п╩я▌п╠я┐я▌ п╨п╩п╟п╡п╦я┬я┐: "
 
 msgid " Execute Macro "
-msgstr " Выполнить макрос "
+msgstr " п▓я▀п©п╬п╩п╫п╦я┌я▄ п╪п╟п╨я─п╬я│ "
+
+msgid "pro&Mpt on replace"
+msgstr "п÷п╬п╢я┌п╡п╣я─п╤п╢п╟я┌я▄ &п╥п╟п╪п╣п╫я┐"
+
+msgid "replace &All"
+msgstr "п≈п╟п╪п╣п╫п╦я┌я▄ &п╡я│я▒"
+
+msgid "All charsets"
+msgstr "п▓я│п╣ п╨п╬п╢п╦я─п╬п╡п╨п╦"
+
+msgid "&Backwards"
+msgstr "&п²п╟п╥п╟п╢"
+
+msgid "case &Sensitive"
+msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
+
+msgid " Enter replacement string:"
+msgstr " п▓п╡п╣п╢п╦я┌п╣ я┌п╣п╨я│я┌ п╢п╩я▐ п╥п╟п╪п╣п╫я▀: "
+
+msgid " Enter search string:"
+msgstr " п▓п╡п╣п╢п╦я┌п╣ я│я┌я─п╬п╨я┐ п╢п╩я▐ п©п╬п╦я│п╨п╟:"
+
+msgid "Cancel"
+msgstr "п÷я─п╣я─п╡п╟я┌я▄"
+
+msgid "O&ne"
+msgstr "&п·п╢п╦п╫"
+
+msgid "A&ll"
+msgstr "&п▓я│п╣"
+
+msgid "&Skip"
+msgstr "п÷&я─п╬п©я┐я│я┌п╦я┌я▄"
+
+msgid "&Replace"
+msgstr "&п≈п╟п╪п╣п╫п╦я┌я▄"
+
+msgid " Replace with: "
+msgstr " п≈п╟п╪п╣п╫п╦я┌я▄ п╫п╟: "
+
+msgid " Confirm replace "
+msgstr " п÷п╬п╢я┌п╡п╣я─п╢п╦я┌я▄ п╥п╟п╪п╣п╫я┐ "
+
+msgid "&Dismiss"
+msgstr "&п≈п╟п╨я─я▀я┌я▄"
 
 msgid " Emacs key: "
-msgstr " Клавиша Emacs: "
+msgstr " п п╩п╟п╡п╦я┬п╟ Emacs: "
 
 #, c-format
 msgid ""
@@ -374,21 +380,21 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
-"Файл \"%s\" уже редактируется\n"
-"Пользователь: %s\n"
-"Идентификатор процесса: %d"
+"п╓п╟п╧п╩ \"%s\" я┐п╤п╣ я─п╣п╢п╟п╨я┌п╦я─я┐п╣я┌я│я▐\n"
+"п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄: %s\n"
+"п≤п╢п╣п╫я┌п╦я└п╦п╨п╟я┌п╬я─ п©я─п╬я├п╣я│я│п╟: %d"
 
 msgid "File locked"
-msgstr "Файл закрыт"
+msgstr "п╓п╟п╧п╩ п╥п╟п╨я─я▀я┌"
 
 msgid "&Grab lock"
-msgstr "Захватить замок"
+msgstr "п≈п╟я┘п╡п╟я┌п╦я┌я▄ п╥п╟п╪п╬п╨"
 
 msgid "&Ignore lock"
-msgstr "Игнорировать замок"
+msgstr "п≤пЁп╫п╬я─п╦я─п╬п╡п╟я┌я▄ п╥п╟п╪п╬п╨"
 
 msgid " About "
-msgstr " О программе "
+msgstr " п· п©я─п╬пЁя─п╟п╪п╪п╣ "
 
 msgid ""
 "\n"
@@ -404,283 +410,337 @@ msgstr ""
 "\n"
 "       Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
-" Текстовый редактор с дружественным интерфейсом пользователя.\n"
-"               Создан для Midnight Commander.\n"
+" п╒п╣п╨я│я┌п╬п╡я▀п╧ я─п╣п╢п╟п╨я┌п╬я─ я│ п╢я─я┐п╤п╣я│я┌п╡п╣п╫п╫я▀п╪ п╦п╫я┌п╣я─я└п╣п╧я│п╬п╪ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐.\n"
+"               п║п╬п╥п╢п╟п╫ п╢п╩я▐ Midnight Commander.\n"
 
 msgid "&Open file..."
-msgstr "&Открыть файл..."
+msgstr "&п·я┌п╨я─я▀я┌я▄ я└п╟п╧п╩..."
 
 msgid "&New              C-n"
-msgstr "&Новый файл           C-n"
+msgstr "&п²п╬п╡я▀п╧ я└п╟п╧п╩           C-n"
 
 msgid "&Save              F2"
-msgstr "&Сохранить             F2"
+msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄             F2"
 
 msgid "Save &as...       F12"
-msgstr "Сохранить &как...     F12"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ &п╨п╟п╨...     F12"
 
 msgid "&Insert file...   F15"
-msgstr "&Вставить файл...     F15"
+msgstr "&п▓я│я┌п╟п╡п╦я┌я▄ я└п╟п╧п╩...     F15"
 
 msgid "Copy to &file...  C-f"
-msgstr "Ко&пировать в файл... C-f"
+msgstr "п п╬&п©п╦я─п╬п╡п╟я┌я▄ п╡ я└п╟п╧п╩... C-f"
 
 msgid "&User menu...     F11"
-msgstr "&Меню пользователя... F11"
+msgstr "&п°п╣п╫я▌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐... F11"
 
 msgid "A&bout...            "
-msgstr "Об &авторах..."
+msgstr "п·п╠ &п╟п╡я┌п╬я─п╟я┘..."
 
 msgid "&Quit             F10"
-msgstr "Вы&ход                F10"
+msgstr "п▓я▀&я┘п╬п╢                F10"
 
 msgid "&New            C-x k"
-msgstr "&Новый файл         C-x k"
+msgstr "&п²п╬п╡я▀п╧ я└п╟п╧п╩         C-x k"
 
 msgid "Copy to &file...     "
-msgstr "&Копировать в файл..."
+msgstr "&п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ я└п╟п╧п╩..."
 
-msgid "&Toggle Mark       F3"
-msgstr "&Выделить блок          F3"
+msgid "&Toggle mark                 F3"
+msgstr "&п÷п╣я─п╣п╨п╩я▌я┤п╦я┌я▄ п╡ я─п╣п╤п╦п╪ п©п╬п╪п╣я┌п╨п╦       F3"
 
-msgid "&Mark Columns    S-F3"
-msgstr "Выделить &столбцы     S-F3"
+msgid "Mar&k columns              S-F3"
+msgstr "п▓я▀п╢п╣п╩п╦я┌я▄ &я│я┌п╬п╩п╠я├я▀                S-F3"
 
-msgid "Toggle &ins/overw Ins"
-msgstr "&Режим вставки/замены  Ins"
+msgid "Toggle &ins/overw           Ins"
+msgstr "&п═п╣п╤п╦п╪ п╡я│я┌п╟п╡п╨п╦/п╥п╟п╪п╣п╫я▀             Ins"
 
-msgid "&Copy              F5"
-msgstr "&Копировать блок        F5"
+msgid "&Copy                        F5"
+msgstr "&п п╬п©п╦я─п╬п╡п╟п╫п╦п╣                       F5"
 
-msgid "&Move              F6"
-msgstr "&Переместить блок       F6"
+msgid "&Move                        F6"
+msgstr "&п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╠п╩п╬п╨                  F6"
 
-msgid "&Delete            F8"
-msgstr "&Удалить блок           F8"
+msgid "&Delete                      F8"
+msgstr "&пёп╢п╟п╩п╣п╫п╦п╣                          F8"
 
-msgid "&Undo             C-u"
-msgstr "&Отмена                C-u"
+msgid "C&opy to clipfile         C-Ins"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ я└п╟п╧п╩ п╨п╩п╦п©п╠п╬я─п╢п╟     C-Ins"
 
-msgid "&Beginning     C-PgUp"
-msgstr "&Начало файла       C-PgUp"
+msgid "C&ut to clipfile          S-Del"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄ п╡ я└п╟п╧п╩ п╨п╩п╦п©п╠п╬я─п╢п╟       S-Del"
 
-msgid "&End           C-PgDn"
-msgstr "Конец &файла        C-PgDn"
+msgid "&Paste from clipfile      S-Ins"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ я└п╟п╧п╩п╟ п╨п╩п╦п©п╠п╬я─п╢п╟     S-Ins"
+
+msgid "Toggle bookmar&k               "
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄/я│п╫я▐я┌я▄ п╥п╟п╨п╩п╟п╢п╨я┐     "
+
+msgid "&Next bookmark                 "
+msgstr "п  я│п╩п╣п╢я┐я▌я┴п╣п╧ п╥п╟п╨п╩п╟п╢п╨п╣          "
+
+msgid "Pre&v bookmark                 "
+msgstr "п  п©я─п╣п╢я▀п╢я┐я┴п╣ п╥п╟п╨п╩п╟п╢п╨п╣          "
+
+msgid "&Flush bookmark                "
+msgstr "пёп╠я─п╟я┌я▄ п╡я│п╣ п╥п╟п╨п╩п╟п╢п╨п╦           "
+
+msgid "&Undo                       C-u"
+msgstr "&п·я┌п╪п╣п╫п╟                           C-u"
+
+msgid "&Beginning               C-PgUp"
+msgstr "&п²п╟я┤п╟п╩п╬ я└п╟п╧п╩п╟                  C-PgUp"
+
+msgid "&End                     C-PgDn"
+msgstr "п п╬п╫п╣я├ &я└п╟п╧п╩п╟                   C-PgDn"
+
+msgid "C&opy to clipfile           M-w"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ я└п╟п╧п╩ п╨п╩п╦п©п╠п╬я─п╢п╟       M-w"
+
+msgid "C&ut to clipfile            C-w"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄ п╡ я└п╟п╧п╩ п╨п╩п╦п©п╠п╬я─п╢п╟         C-w"
+
+msgid "&Paste from clipfile        C-y"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╦п╥ я└п╟п╧п╩п╟ п╨п╩п╦п©п╠п╬я─п╢п╟       C-y"
 
 msgid "&Search...         F7"
-msgstr "&Поиск...          F7"
+msgstr "&п÷п╬п╦я│п╨...          F7"
 
 msgid "Search &again     F17"
-msgstr "П&родолжить поиск F17"
+msgstr "п÷&я─п╬п╢п╬п╩п╤п╦я┌я▄ п©п╬п╦я│п╨ F17"
 
 msgid "&Replace...        F4"
-msgstr "&Замена...         F4"
+msgstr "&п≈п╟п╪п╣п╫п╟...         F4"
 
 msgid "&Go to line...            M-l"
-msgstr "&Перейти к строке...        M-l"
+msgstr "&п÷п╣я─п╣п╧я┌п╦ п╨ я│я┌я─п╬п╨п╣...             M-l"
+
+msgid "Toggle li&ne state        M-n"
+msgstr "п·я┌п╬п╠я─п╟п╥п╦я┌я▄/я│п╨я─я▀я┌я▄ п╫п╬п╪п╣я─п╟ я│я┌я─п╬п╨  M-n"
 
 msgid "Go to matching &bracket   M-b"
-msgstr "Перейти к парной ско&бке    M-b"
+msgstr "п÷п╣я─п╣п╧я┌п╦ п╨ п©п╟я─п╫п╬п╧ я│п╨п╬&п╠п╨п╣         M-b"
+
+msgid "Find declaration      A-Enter"
+msgstr "п÷п╣я─п╣п╧я┌п╦ п╨ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▌       A-Enter"
+
+msgid "Back from declaration     M--"
+msgstr "п²п╟п╥п╟п╢...                        M-+"
+
+msgid "Forward to declaration    M-+"
+msgstr "п▓п©п╣я─п╣п╢ п╨ п╬п©я─п╣п╢п╣п╩п╣п╫п╦я▌            M-+"
+
+msgid "Encod&ing...             C-t"
+msgstr "п п╬п╢п╦я─п╬п╡п╨п╟...                    п║-t"
 
 msgid "Insert &literal...       C-q"
-msgstr "Вставить &литерал...        C-q"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ &п╩п╦я┌п╣я─п╟п╩...             C-q"
 
 msgid "&Refresh screen          C-l"
-msgstr "Пере&рисовать экран         C-l"
+msgstr "п÷п╣я─п╣&я─п╦я│п╬п╡п╟я┌я▄ я█п╨я─п╟п╫              C-l"
 
 msgid "&Start record macro      C-r"
-msgstr "&Начать запись макроса      C-r"
+msgstr "&п²п╟я┤п╟я┌я▄ п╥п╟п©п╦я│я▄ п╪п╟п╨я─п╬я│п╟           C-r"
 
 msgid "&Finish record macro...  C-r"
-msgstr "&Окончить запись макроса... C-r"
+msgstr "&п·п╨п╬п╫я┤п╦я┌я▄ п╥п╟п©п╦я│я▄ п╪п╟п╨я─п╬я│п╟...      C-r"
 
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Выполнить макрос...   C-a, KEY"
+msgstr "&п▓я▀п©п╬п╩п╫п╦я┌я▄ п╪п╟п╨я─п╬я│...        C-a, KEY"
 
 msgid "Delete macr&o...            "
-msgstr "&Удалить макрос..."
+msgstr "&пёп╢п╟п╩п╦я┌я▄ п╪п╟п╨я─п╬я│..."
 
 msgid "Insert &date/time           "
-msgstr "Вставить &дату/время"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ &п╢п╟я┌я┐/п╡я─п╣п╪я▐"
 
 msgid "Format p&aragraph        M-p"
-msgstr "Форматировать &абзац        M-p"
+msgstr "п╓п╬я─п╪п╟я┌п╦я─п╬п╡п╟я┌я▄ &п╟п╠п╥п╟я├             M-p"
 
 msgid "'ispell' s&pell check    C-p"
-msgstr "Провер&ка орфографии        C-p"
+msgstr "п÷я─п╬п╡п╣я─&п╨п╟ п╬я─я└п╬пЁя─п╟я└п╦п╦             C-p"
 
 msgid "Sor&t...                 M-t"
-msgstr "&Сортировка...              M-t"
+msgstr "&п║п╬я─я┌п╦я─п╬п╡п╨п╟...                   M-t"
 
 msgid "Paste o&utput of...      M-u"
-msgstr "Вставить в&ывод команды...  M-u"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╡&я▀п╡п╬п╢ п╨п╬п╪п╟п╫п╢я▀...       M-u"
 
 msgid "E&xternal Formatter      F19"
-msgstr "&Форматирование             F19"
+msgstr "&п╓п╬я─п╪п╟я┌п╦я─п╬п╡п╟п╫п╦п╣                  F19"
 
 msgid "&Mail...                    "
-msgstr "&Электронная почта..."
+msgstr "&п╜п╩п╣п╨я┌я─п╬п╫п╫п╟я▐ п©п╬я┤я┌п╟..."
 
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Выполнить макрос... C-x e, KEY"
+msgstr "&п▓я▀п©п╬п╩п╫п╦я┌я▄ п╪п╟п╨я─п╬я│...      C-x e, KEY"
 
 msgid "'ispell' s&pell check    M-$"
-msgstr "Проверк&а орфографии        M-$"
+msgstr "п÷я─п╬п╡п╣я─п╨&п╟ п╬я─я└п╬пЁя─п╟я└п╦п╦             M-$"
 
 msgid "&General...  "
-msgstr "&Общая..."
+msgstr "&п·п╠я┴п╟я▐..."
 
 msgid "&Save mode..."
-msgstr "Режим &сохранения..."
+msgstr "п═п╣п╤п╦п╪ &я│п╬я┘я─п╟п╫п╣п╫п╦я▐..."
 
 msgid "Learn &Keys..."
-msgstr "&Распознавание клавиш..."
+msgstr "&п═п╟я│п©п╬п╥п╫п╟п╡п╟п╫п╦п╣ п╨п╩п╟п╡п╦я┬..."
 
 msgid "Syntax &Highlighting..."
-msgstr "&Цветовыделение синтаксиса..."
+msgstr "&п╕п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦п╣ я│п╦п╫я┌п╟п╨я│п╦я│п╟..."
 
-msgid "Save setu&p..."
-msgstr "Со&хранить настройки"
+msgid "S&yntax file"
+msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
+
+msgid "&Menu file"
+msgstr "п╓п╟п╧п╩ &п╪п╣п╫я▌"
+
+msgid "Save setu&p"
+msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄ п╫п╟я│я┌я─п╬п╧п╨п╦"
 
 msgid " File "
-msgstr " Файл "
+msgstr " п╓п╟п╧п╩ "
 
 msgid " Edit "
-msgstr " Редактирование "
+msgstr " п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ "
 
 msgid " Sear/Repl "
-msgstr " Поиск/Замена "
+msgstr " п÷п╬п╦я│п╨/п≈п╟п╪п╣п╫п╟ "
 
 msgid " Command "
-msgstr " Команда "
+msgstr " п п╬п╪п╟п╫п╢п╟ "
 
 msgid " Options "
-msgstr " Настройка "
+msgstr " п²п╟я│я┌я─п╬п╧п╨п╟ "
 
 msgid "Intuitive"
-msgstr "Интуитивная"
+msgstr "п≤п╫я┌я┐п╦я┌п╦п╡п╫п╟я▐"
 
 msgid "Emacs"
 msgstr "Emacs"
 
 msgid "User-defined"
-msgstr "&Определенный пользователем"
+msgstr "&п·п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╧ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╪"
 
 msgid "None"
-msgstr "Отключен"
+msgstr "п·я┌п╨п╩я▌я┤п╣п╫"
 
 msgid "Dynamic paragraphing"
-msgstr "Динамич. форматирование"
+msgstr "п■п╦п╫п╟п╪п╦я┤. я└п╬я─п╪п╟я┌п╦я─п╬п╡п╟п╫п╦п╣"
 
 msgid "Type writer wrap"
-msgstr "Автоматический перенос"
+msgstr "п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦п╧ п©п╣я─п╣п╫п╬я│"
 
 msgid "Word wrap line length: "
-msgstr "Позиция переноса строк:"
+msgstr "п÷п╬п╥п╦я├п╦я▐ п©п╣я─п╣п╫п╬я│п╟ я│я┌я─п╬п╨:"
 
 msgid "Tab spacing: "
-msgstr "Шаг табуляции: "
+msgstr "п╗п╟пЁ я┌п╟п╠я┐п╩я▐я├п╦п╦: "
+
+msgid "Pers&istent selection"
+msgstr "п÷п╬я│я┌п╬я▐п╫п╫я▀п╣ п╠п╩п╬п╨п╦"
 
 msgid "Synta&x highlighting"
-msgstr "&Цветовыделение синтаксиса"
+msgstr "&п╕п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦п╣ я│п╦п╫я┌п╟п╨я│п╦я│п╟"
 
 msgid "Save file &position"
-msgstr "Со&хранять позицию в файле"
+msgstr "п║п╬&я┘я─п╟п╫я▐я┌я▄ п©п╬п╥п╦я├п╦я▌ п╡ я└п╟п╧п╩п╣"
 
 msgid "Confir&m before saving"
-msgstr "П&одтверждать запись файла"
+msgstr "п÷&п╬п╢я┌п╡п╣я─п╤п╢п╟я┌я▄ п╥п╟п©п╦я│я▄ я└п╟п╧п╩п╟"
 
 msgid "Fill tabs with &spaces"
-msgstr "&Заполнять табуляцию пробелами"
+msgstr "&п≈п╟п©п╬п╩п╫я▐я┌я▄ я┌п╟п╠я┐п╩я▐я├п╦я▌ п©я─п╬п╠п╣п╩п╟п╪п╦"
 
 msgid "&Return does autoindent"
-msgstr "&Автовыравн. возвратом каретки"
+msgstr "&п░п╡я┌п╬п╡я▀я─п╟п╡п╫. п╡п╬п╥п╡я─п╟я┌п╬п╪ п╨п╟я─п╣я┌п╨п╦"
 
 msgid "&Backspace through tabs"
-msgstr "&Забой в обход табуляции"
+msgstr "&п≈п╟п╠п╬п╧ п╡ п╬п╠я┘п╬п╢ я┌п╟п╠я┐п╩я▐я├п╦п╦"
 
 msgid "&Fake half tabs"
-msgstr "&Симулировать неполн.табуляцию"
+msgstr "&п║п╦п╪я┐п╩п╦я─п╬п╡п╟я┌я▄ п╫п╣п©п╬п╩п╫.я┌п╟п╠я┐п╩я▐я├п╦я▌"
 
 msgid "Wrap mode"
-msgstr "Режим переноса строк"
+msgstr "п═п╣п╤п╦п╪ п©п╣я─п╣п╫п╬я│п╟ я│я┌я─п╬п╨"
 
 msgid "Key emulation"
-msgstr "Эмуляция раскладки клавиш"
+msgstr "п╜п╪я┐п╩я▐я├п╦я▐ я─п╟я│п╨п╩п╟п╢п╨п╦ п╨п╩п╟п╡п╦я┬"
 
 msgid " Editor options "
-msgstr " Настройки редактора "
+msgstr " п²п╟я│я┌я─п╬п╧п╨п╦ я─п╣п╢п╟п╨я┌п╬я─п╟ "
 
 msgid "Help"
-msgstr "Помощь"
+msgstr "п÷п╬п╪п╬я┴я▄"
 
 msgid "Save"
-msgstr "Сохранить"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 msgid "Mark"
-msgstr "Блок"
+msgstr "п▒п╩п╬п╨"
 
 msgid "Replac"
-msgstr "Замена"
+msgstr "п≈п╟п╪п╣п╫п╟"
 
 msgid "Copy"
-msgstr "Копия"
+msgstr "п п╬п©п╦я▐"
 
 msgid "Move"
-msgstr "Переместить"
+msgstr "п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄"
 
 msgid "Delete"
-msgstr "Удалить"
+msgstr "пёп╢п╟п╩п╦я┌я▄"
 
 msgid "PullDn"
-msgstr "МенюMC"
+msgstr "п°п╣п╫я▌MC"
 
 msgid " Load syntax file "
-msgstr " Загрузить синтаксический файл "
+msgstr " п≈п╟пЁя─я┐п╥п╦я┌я▄ я│п╦п╫я┌п╟п╨я│п╦я┤п╣я│п╨п╦п╧ я└п╟п╧п╩ "
 
 #, c-format
 msgid ""
 " Cannot open file %s \n"
 " %s "
 msgstr ""
-" Невозможно открыть файл %s \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s \n"
 " %s "
 
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Ошибка в файле %s в строке %d "
+msgstr " п·я┬п╦п╠п╨п╟ п╡ я└п╟п╧п╩п╣ %s п╡ я│я┌я─п╬п╨п╣ %d "
 
 #, c-format
 msgid "bind: Wrong argument number, bind <key> <command>"
-msgstr "bind: Не верное количество аргументов, bind <клавиша> <команда>"
+msgstr "bind: п²п╣ п╡п╣я─п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡, bind <п╨п╩п╟п╡п╦я┬п╟> <п╨п╬п╪п╟п╫п╢п╟>"
 
 #, c-format
 msgid "bind: Bad key value `%s'"
-msgstr "Неподходящее значение клавиши `%s' "
+msgstr "п²п╣п©п╬п╢я┘п╬п╢я▐я┴п╣п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╨п╩п╟п╡п╦я┬п╦ `%s' "
 
 #, c-format
 msgid "bind: Ehh...no key?"
-msgstr "bind: М-мм... нет клавиши?"
+msgstr "bind: п°-п╪п╪... п╫п╣я┌ п╨п╩п╟п╡п╦я┬п╦?"
 
 #, c-format
 msgid "bind: Unknown key: `%s'"
-msgstr "bind: Неизвестная клавиша: `%s'"
+msgstr "bind: п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╨п╩п╟п╡п╦я┬п╟: `%s'"
 
 #, c-format
 msgid "bind: Unknown command: `%s'"
-msgstr "bind: Неизвестная команда.`%s'"
+msgstr "bind: п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟.`%s'"
 
 #, c-format
 msgid "%s: Syntax: %s <n> <command> <label>"
-msgstr "%s: Синтаксис: %s <n> <command> <label>"
+msgstr "%s: п║п╦п╫я┌п╟п╨я│п╦я│: %s <n> <command> <label>"
 
 #, c-format
 msgid "%s: Unknown command: `%s'"
-msgstr "%s: Неизвестная команда: `%s'"
+msgstr "%s: п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟: `%s'"
 
 #, c-format
 msgid "%s: fn should be 1-10"
-msgstr "%s: fn должно быть 1-10"
+msgstr "%s: fn п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ 1-10"
 
 #, c-format
 msgid "%s: fopen(): %s"
@@ -688,7 +748,7 @@ msgstr "%s: fopen(): %s"
 
 #, c-format
 msgid "%s:%d: unknown command `%s'"
-msgstr "%s:%d: неизвестная команда `%s'"
+msgstr "%s:%d: п╫п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟ `%s'"
 
 #, c-format
 msgid "%s:%d: %s"
@@ -696,48 +756,48 @@ msgstr "%s:%d: %s"
 
 #, c-format
 msgid "%s not found!"
-msgstr "%s не найдено!"
+msgstr "%s п╫п╣ п╫п╟п╧п╢п╣п╫п╬!"
 
 msgid "&Set"
-msgstr "&Установить"
+msgstr "&пёя│я┌п╟п╫п╬п╡п╦я┌я▄"
 
 msgid "S&kip"
-msgstr "П&ропустить"
+msgstr "п÷&я─п╬п©я┐я│я┌п╦я┌я▄"
 
 msgid "Set &all"
-msgstr "Установить &все"
+msgstr "пёя│&я┌п╟п╫п╬п╡п╦я┌я▄ п╡я│я▒"
 
 msgid "owner"
-msgstr "хозяин"
+msgstr "я┘п╬п╥я▐п╦п╫"
 
 msgid "group"
-msgstr "группа"
+msgstr "пЁя─я┐п©п©п╟"
 
 msgid "other"
-msgstr "другие"
+msgstr "п╢я─я┐пЁп╦п╣"
 
 msgid "On"
-msgstr "На"
+msgstr "п²п╟"
 
 msgid "Flag"
-msgstr "Флаг"
+msgstr "п╓п╩п╟пЁ"
 
 msgid "Mode"
-msgstr "Режим"
+msgstr "п═п╣п╤п╦п╪"
 
 #, c-format
 msgid "%6d of %d"
-msgstr "%6d из %d"
+msgstr "%6d п╦п╥ %d"
 
 msgid " Chown advanced command "
-msgstr " Расширенная команда chown "
+msgstr " п═п╟я│я┬п╦я─п╣п╫п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╟ chown "
 
 #, c-format
 msgid ""
 " Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно изменить доступ \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╦п╥п╪п╣п╫п╦я┌я▄ п╢п╬я│я┌я┐п© \"%s\" \n"
 " %s "
 
 #, c-format
@@ -745,521 +805,502 @@ msgid ""
 " Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно изменить владельца \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╦п╥п╪п╣п╫п╦я┌я▄ п╡п╩п╟п╢п╣п╩я▄я├п╟ \"%s\" \n"
 " %s "
 
 msgid " Background process error "
-msgstr " Ошибка фонового процесса "
+msgstr " п·я┬п╦п╠п╨п╟ я└п╬п╫п╬п╡п╬пЁп╬ п©я─п╬я├п╣я│я│п╟ "
 
 msgid " Unknown error in child "
-msgstr " Неизвестная ошибка в дочернем процессе "
+msgstr " п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐ п╬я┬п╦п╠п╨п╟ п╡ п╢п╬я┤п╣я─п╫п╣п╪ п©я─п╬я├п╣я│я│п╣ "
 
 msgid " Child died unexpectedly "
-msgstr " Дочерний процесс неожиданно завершился "
+msgstr " п■п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│ п╫п╣п╬п╤п╦п╢п╟п╫п╫п╬ п╥п╟п╡п╣я─я┬п╦п╩я│я▐ "
 
 msgid " Background protocol error "
-msgstr " Ошибка фонового протокола "
+msgstr " п·я┬п╦п╠п╨п╟ я└п╬п╫п╬п╡п╬пЁп╬ п©я─п╬я┌п╬п╨п╬п╩п╟ "
 
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
 msgstr ""
-" Фоновый процесс запрашивает больше аргументов, \n"
-" чем мы можем контролировать. \n"
+" п╓п╬п╫п╬п╡я▀п╧ п©я─п╬я├п╣я│я│ п╥п╟п©я─п╟я┬п╦п╡п╟п╣я┌ п╠п╬п╩я▄я┬п╣ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡, \n"
+" я┤п╣п╪ п╪я▀ п╪п╬п╤п╣п╪ п╨п╬п╫я┌я─п╬п╩п╦я─п╬п╡п╟я┌я▄. \n"
 
 msgid "&Full file list"
-msgstr "&Стандартный"
+msgstr "&п║я┌п╟п╫п╢п╟я─я┌п╫я▀п╧"
 
 msgid "&Brief file list"
-msgstr "&Укороченный"
+msgstr "&пёп╨п╬я─п╬я┤п╣п╫п╫я▀п╧"
 
 msgid "&Long file list"
-msgstr "&Расширенный"
+msgstr "&п═п╟я│я┬п╦я─п╣п╫п╫я▀п╧"
 
 msgid "&User defined:"
-msgstr "&Определенный пользователем"
+msgstr "&п·п©я─п╣п╢п╣п╩п╣п╫п╫я▀п╧ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╪"
 
 msgid "Listing mode"
-msgstr "Формат списка файлов"
+msgstr "п╓п╬я─п╪п╟я┌ я│п©п╦я│п╨п╟ я└п╟п╧п╩п╬п╡"
 
 msgid "user &Mini status"
-msgstr "Строка &мини-статуса в формате пользователя"
+msgstr "п║я┌я─п╬п╨п╟ &п╪п╦п╫п╦-я│я┌п╟я┌я┐я│п╟ п╡ я└п╬я─п╪п╟я┌п╣ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 msgid "&Reverse"
-msgstr "&Обратный"
+msgstr "&п·п╠я─п╟я┌п╫я▀п╧"
 
 msgid "case sensi&tive"
-msgstr "Учет ре&гистра"
+msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
 
 msgid "Sort order"
-msgstr "Порядок сортировки"
+msgstr "п÷п╬я─я▐п╢п╬п╨ я│п╬я─я┌п╦я─п╬п╡п╨п╦"
 
 msgid "Executable first"
-msgstr "Исполняемые вначале"
+msgstr "п≤я│п©п╬п╩п╫я▐п╣п╪я▀п╣ п╡п╫п╟я┤п╟п╩п╣"
 
-#, fuzzy
 msgid " confirm di&Rectory hotlist delete "
-msgstr "Быстрый доступ к ката&логам  C-\\"
+msgstr " п©п╬п╢я┌п╡п╣я─п╢п╦я┌п╣ я┐п╢п╟п╩п╣п╫п╦п╣ п╦п╥ я│п©п╦я│п╨п╟ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟"
 
 msgid " confirm &Exit "
-msgstr "перед &выходом"
+msgstr "п©п╣я─п╣п╢ &п╡я▀я┘п╬п╢п╬п╪"
 
 msgid " confirm e&Xecute "
-msgstr "перед выполнен&ием"
+msgstr "п©п╣я─п╣п╢ п╡я▀п©п╬п╩п╫п╣п╫&п╦п╣п╪"
 
 msgid " confirm o&Verwrite "
-msgstr "перед &перезаписью"
+msgstr "п©п╣я─п╣п╢ &п©п╣я─п╣п╥п╟п©п╦я│я▄я▌"
 
 msgid " confirm &Delete "
-msgstr "перед &удалением"
+msgstr "п©п╣я─п╣п╢ &я┐п╢п╟п╩п╣п╫п╦п╣п╪"
 
 msgid " Confirmation "
-msgstr " Запрос подтверждения "
+msgstr " п≈п╟п©я─п╬я│ п©п╬п╢я┌п╡п╣я─п╤п╢п╣п╫п╦я▐ "
+
+msgid "UTF-8 output"
+msgstr "UTF-8 п╡я▀п╡п╬п╢"
 
 msgid "Full 8 bits output"
-msgstr "Полный &8-битный вывод"
+msgstr "п÷п╬п╩п╫я▀п╧ &8-п╠п╦я┌п╫я▀п╧ п╡я▀п╡п╬п╢"
 
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
 msgid "7 bits"
-msgstr "&7 бит"
+msgstr "&7 п╠п╦я┌"
 
 msgid "F&ull 8 bits input"
-msgstr "Полный 8-битный &ввод"
+msgstr "п÷п╬п╩п╫я▀п╧ 8-п╠п╦я┌п╫я▀п╧ &п╡п╡п╬п╢"
 
 msgid " Display bits "
-msgstr " Отображение символов "
+msgstr " п·я┌п╬п╠я─п╟п╤п╣п╫п╦п╣ я│п╦п╪п╡п╬п╩п╬п╡ "
 
 msgid "Other 8 bit"
-msgstr "Другая 8-битная"
+msgstr "п■я─я┐пЁп╟я▐ 8-п╠п╦я┌п╫п╟я▐"
 
 msgid "Input / display codepage:"
-msgstr "Кодировка ввода/вывода: "
+msgstr "п п╬п╢п╦я─п╬п╡п╨п╟ п╡п╡п╬п╢п╟/п╡я▀п╡п╬п╢п╟: "
 
 msgid "&Select"
-msgstr "Выбрать"
+msgstr "п▓я▀п╠я─п╟я┌я▄"
 
 msgid "Use passive mode over pro&xy"
-msgstr "Использовать пассивный режим через прокси"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п©п╟я│я│п╦п╡п╫я▀п╧ я─п╣п╤п╦п╪ я┤п╣я─п╣п╥ п©я─п╬п╨я│п╦"
 
 msgid "Use &passive mode"
-msgstr "Использовать пассивный режим"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п©п╟я│я│п╦п╡п╫я▀п╧ я─п╣п╤п╦п╪"
 
 msgid "&Use ~/.netrc"
-msgstr "&Использовать ~/.netrc"
+msgstr "&п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ ~/.netrc"
 
 msgid "&Always use ftp proxy"
-msgstr "&Всегда использовать FTP-прокси"
+msgstr "&п▓я│п╣пЁп╢п╟ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ FTP-п©я─п╬п╨я│п╦"
 
 msgid "sec"
-msgstr "с"
+msgstr "я│"
 
 msgid "ftpfs directory cache timeout:"
-msgstr "Тайм-аут кэша каталога FTP:"
+msgstr "п╒п╟п╧п╪-п╟я┐я┌ п╨я█я┬п╟ п╨п╟я┌п╟п╩п╬пЁп╟ FTP:"
 
 msgid "ftp anonymous password:"
-msgstr "Пароль анонимного FTP:"
+msgstr "п÷п╟я─п╬п╩я▄ п╟п╫п╬п╫п╦п╪п╫п╬пЁп╬ FTP:"
 
 msgid "Timeout for freeing VFSs:"
-msgstr "Тайм-аут высвобождения ВФС:"
+msgstr "п╒п╟п╧п╪-п╟я┐я┌ п╡я▀я│п╡п╬п╠п╬п╤п╢п╣п╫п╦я▐ п▓п╓п║:"
 
 msgid " Virtual File System Setting "
-msgstr " Настройки виртуальной файловой системы "
+msgstr " п²п╟я│я┌я─п╬п╧п╨п╦ п╡п╦я─я┌я┐п╟п╩я▄п╫п╬п╧ я└п╟п╧п╩п╬п╡п╬п╧ я│п╦я│я┌п╣п╪я▀ "
 
 msgid "Quick cd"
-msgstr " Смена рабочего каталога "
+msgstr " п║п╪п╣п╫п╟ я─п╟п╠п╬я┤п╣пЁп╬ п╨п╟я┌п╟п╩п╬пЁп╟ "
 
 msgid "cd"
-msgstr "Перейти в"
+msgstr "п÷п╣я─п╣п╧я┌п╦ п╡"
 
 msgid "Symbolic link filename:"
-msgstr "Имя символической ссылки:"
+msgstr "п≤п╪я▐ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╬п╧ я│я│я▀п╩п╨п╦:"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Имя существующего файла (для ссылки):"
+msgstr "п≤п╪я▐ я│я┐я┴п╣я│я┌п╡я┐я▌я┴п╣пЁп╬ я└п╟п╧п╩п╟ (п╢п╩я▐ я│я│я▀п╩п╨п╦):"
 
 msgid "Symbolic link"
-msgstr " Символическая ссылка "
+msgstr " п║п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╟я▐ я│я│я▀п╩п╨п╟ "
 
 msgid "Running "
-msgstr "Выполняется "
+msgstr "п▓я▀п©п╬п╩п╫я▐п╣я┌я│я▐ "
 
 msgid "Stopped"
-msgstr "Остановлен"
+msgstr "п·я│я┌п╟п╫п╬п╡п╩п╣п╫"
 
 msgid "&Stop"
-msgstr "&Остановить"
+msgstr "&п·я│я┌п╟п╫п╬п╡п╦я┌я▄"
 
 msgid "&Resume"
-msgstr "&Возобновить"
+msgstr "&п▓п╬п╥п╬п╠п╫п╬п╡п╦я┌я▄"
 
 msgid "&Kill"
-msgstr "&Снять"
+msgstr "&п║п╫я▐я┌я▄"
 
 msgid "Background Jobs"
-msgstr " Фоновые задания "
+msgstr " п╓п╬п╫п╬п╡я▀п╣ п╥п╟п╢п╟п╫п╦я▐ "
 
 msgid "Domain:"
-msgstr "Домен:"
+msgstr "п■п╬п╪п╣п╫:"
 
 msgid "Username:"
-msgstr "Имя пользователя:"
+msgstr "п≤п╪я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐:"
 
 msgid "Password:"
-msgstr "Пароль:"
+msgstr "п÷п╟я─п╬п╩я▄:"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "Пароль для \\\\%s\\%s"
+msgstr "п÷п╟я─п╬п╩я▄ п╢п╩я▐ \\\\%s\\%s"
 
 #, c-format
 msgid "Warning: file %s not found\n"
-msgstr "Предупреждение: файл %s не найден\n"
+msgstr "п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: я└п╟п╧п╩ %s п╫п╣ п╫п╟п╧п╢п╣п╫\n"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Невозможно перекодировать из %s в %s"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╨п╬п╢п╦я─п╬п╡п╟я┌я▄ п╦п╥ %s п╡ %s"
 
 msgid "execute/search by others"
-msgstr "запуск/поиск для других"
+msgstr "п╥п╟п©я┐я│п╨/п©п╬п╦я│п╨ п╢п╩я▐ п╢я─я┐пЁп╦я┘"
 
 msgid "write by others"
-msgstr "запись для других"
+msgstr "п╥п╟п©п╦я│я▄ п╢п╩я▐ п╢я─я┐пЁп╦я┘"
 
 msgid "read by others"
-msgstr "чтение для других"
+msgstr "я┤я┌п╣п╫п╦п╣ п╢п╩я▐ п╢я─я┐пЁп╦я┘"
 
 msgid "execute/search by group"
-msgstr "запуск/поиск для группы"
+msgstr "п╥п╟п©я┐я│п╨/п©п╬п╦я│п╨ п╢п╩я▐ пЁя─я┐п©п©я▀"
 
 msgid "write by group"
-msgstr "запись для группы"
+msgstr "п╥п╟п©п╦я│я▄ п╢п╩я▐ пЁя─я┐п©п©я▀"
 
 msgid "read by group"
-msgstr "чтение для группы"
+msgstr "я┤я┌п╣п╫п╦п╣ п╢п╩я▐ пЁя─я┐п©п©я▀"
 
 msgid "execute/search by owner"
-msgstr "запуск/поиск для владельца"
+msgstr "п╥п╟п©я┐я│п╨/п©п╬п╦я│п╨ п╢п╩я▐ п╡п╩п╟п╢п╣п╩я▄я├п╟"
 
 msgid "write by owner"
-msgstr "запись для владельца"
+msgstr "п╥п╟п©п╦я│я▄ п╢п╩я▐ п╡п╩п╟п╢п╣п╩я▄я├п╟"
 
 msgid "read by owner"
-msgstr "чтение для владельца"
+msgstr "я┤я┌п╣п╫п╦п╣ п╢п╩я▐ п╡п╩п╟п╢п╣п╩я▄я├п╟"
 
 msgid "sticky bit"
-msgstr "закрепляющий бит"
+msgstr "п╥п╟п╨я─п╣п©п╩я▐я▌я┴п╦п╧ п╠п╦я┌"
 
 msgid "set group ID on execution"
-msgstr "присв. GID при выполнении"
+msgstr "п©я─п╦я│п╡. GID п©я─п╦ п╡я▀п©п╬п╩п╫п╣п╫п╦п╦"
 
 msgid "set user ID on execution"
-msgstr "присв. UID при выполнении"
+msgstr "п©я─п╦я│п╡. UID п©я─п╦ п╡я▀п©п╬п╩п╫п╣п╫п╦п╦"
 
 msgid "C&lear marked"
-msgstr "&Очистить помеченное"
+msgstr "&п·я┤п╦я│я┌п╦я┌я▄ п©п╬п╪п╣я┤п╣п╫п╫п╬п╣"
 
 msgid "S&et marked"
-msgstr "&Установить помеченное"
+msgstr "пёя│я┌п╟&п╫п╬п╡п╦я┌я▄ п©п╬п╪п╣я┤п╣п╫п╫п╬п╣"
 
 msgid "&Marked all"
-msgstr "Отметить &все"
+msgstr "п·я┌п╪п╣я┌п╦я┌я▄ &п╡я│я▒"
 
 msgid "Name"
-msgstr "Имя"
+msgstr "п≤п╪я▐"
 
 msgid "Permissions (Octal)"
-msgstr "Доступ (восьмеричный)"
+msgstr "п■п╬я│я┌я┐п© (п╡п╬я│я▄п╪п╣я─п╦я┤п╫я▀п╧)"
 
 msgid "Owner name"
-msgstr "Имя владельца"
+msgstr "п≤п╪я▐ п╡п╩п╟п╢п╣п╩я▄я├п╟"
 
 msgid "Group name"
-msgstr "Имя группы"
+msgstr "п≤п╪я▐ пЁя─я┐п©п©я▀"
 
 msgid "Use SPACE to change"
-msgstr "ПРОБЕЛ - для изменений"
+msgstr "п÷п═п·п▒п∙п⌡ - п╢п╩я▐ п╦п╥п╪п╣п╫п╣п╫п╦п╧"
 
 msgid "an option, ARROW KEYS"
-msgstr "опций, КЛАВИШИ-СТРЕЛКИ - "
+msgstr "п╬п©я├п╦п╧, п п⌡п░п▓п≤п╗п≤-п║п╒п═п∙п⌡п п≤ - "
 
 msgid "to move between options"
-msgstr "перемещения между опциями"
+msgstr "п©п╣я─п╣п╪п╣я┴п╣п╫п╦я▐ п╪п╣п╤п╢я┐ п╬п©я├п╦я▐п╪п╦"
 
 msgid "and T or INS to mark"
-msgstr "и T или INS для пометки"
+msgstr "п╦ T п╦п╩п╦ INS п╢п╩я▐ п©п╬п╪п╣я┌п╨п╦"
 
 msgid " Permission "
-msgstr " Права доступа "
+msgstr " п÷я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ "
 
 msgid "Chmod command"
-msgstr " Команда chmod "
+msgstr " п п╬п╪п╟п╫п╢п╟ chmod "
 
 msgid "Set &users"
-msgstr "Установить &пользователей"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п©п╬п╩я▄&п╥п╬п╡п╟я┌п╣п╩п╣п╧"
 
 msgid "Set &groups"
-msgstr "Установить &группы"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ &пЁя─я┐п©п©я▀"
 
 msgid " Name "
-msgstr " Имя "
+msgstr " п≤п╪я▐ "
 
 msgid " Owner name "
-msgstr " Имя владельца "
+msgstr " п≤п╪я▐ п╡п╩п╟п╢п╣п╩я▄я├п╟ "
 
 msgid " Group name "
-msgstr " Имя группы "
+msgstr " п≤п╪я▐ пЁя─я┐п©п©я▀ "
 
 msgid " Size "
-msgstr " Размер "
+msgstr " п═п╟п╥п╪п╣я─ "
 
 msgid " User name "
-msgstr " Имя пользователя "
+msgstr " п≤п╪я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ "
 
 msgid " Chown command "
-msgstr " Команда chown "
+msgstr " п п╬п╪п╟п╫п╢п╟ chown "
 
 msgid "<Unknown user>"
-msgstr "<Неизвестный>"
+msgstr "<п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧>"
 
 msgid "<Unknown group>"
-msgstr "<Неизвестная>"
+msgstr "<п²п╣п╦п╥п╡п╣я│я┌п╫п╟я▐>"
 
 msgid "Files tagged, want to cd?"
-msgstr "Файлы помечены, сменить каталог?"
+msgstr "п╓п╟п╧п╩я▀ п©п╬п╪п╣я┤п╣п╫я▀, я│п╪п╣п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ?"
 
 msgid "Cannot change directory"
-msgstr "Невозможно сменить каталог"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╪п╣п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ"
 
 msgid " View file "
-msgstr " Просмотр файла "
+msgstr " п÷я─п╬я│п╪п╬я┌я─ я└п╟п╧п╩п╟ "
 
 msgid " Filename:"
-msgstr " Имя файла:"
+msgstr " п≤п╪я▐ я└п╟п╧п╩п╟:"
 
 msgid " Filtered view "
-msgstr " Просмотр вывода команды "
+msgstr " п÷я─п╬я│п╪п╬я┌я─ п╡я▀п╡п╬п╢п╟ п╨п╬п╪п╟п╫п╢я▀ "
 
 msgid " Filter command and arguments:"
-msgstr " Введите команду и ее аргументы: "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╨п╬п╪п╟п╫п╢я┐ п╦ п╣п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀: "
 
 msgid "Create a new Directory"
-msgstr " Создать новый каталог "
+msgstr " п║п╬п╥п╢п╟я┌я▄ п╫п╬п╡я▀п╧ п╨п╟я┌п╟п╩п╬пЁ "
 
 msgid " Enter directory name:"
-msgstr " Введите имя каталога:"
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╦п╪я▐ п╨п╟я┌п╟п╩п╬пЁп╟:"
 
 msgid " Filter "
-msgstr " Фильтр "
+msgstr " п╓п╦п╩я▄я┌я─ "
 
 msgid " Set expression for filtering filenames"
-msgstr " Задайте выражение для выбора имен файлов:"
+msgstr " п≈п╟п╢п╟п╧я┌п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣ п╢п╩я▐ п╡я▀п╠п╬я─п╟ п╦п╪п╣п╫ я└п╟п╧п╩п╬п╡:"
 
-msgid "  Malformed regular expression  "
-msgstr "  Регулярное выражение сформировано неверно  "
+msgid "&Using shell patterns"
+msgstr "&п°п╣я┌п╟я│п╦п╪п╡п╬п╩я▀ shell"
+
+msgid "&Case sensitive"
+msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
+
+msgid "&Files only"
+msgstr "п╒п╬п╩я▄п╨п╬ я└п╟п╧п╩я▀"
 
 msgid " Select "
-msgstr " Отметить группу "
+msgstr " п·я┌п╪п╣я┌п╦я┌я▄ пЁя─я┐п©п©я┐ "
 
 msgid " Unselect "
-msgstr " Снять отметку "
+msgstr " п║п╫я▐я┌я▄ п╬я┌п╪п╣я┌п╨я┐ "
 
 msgid "Extension file edit"
-msgstr " Редактирование файла расширений "
+msgstr " п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╟п╧п╩п╟ я─п╟я│я┬п╦я─п╣п╫п╦п╧ "
 
 msgid " Which extension file you want to edit? "
-msgstr " Какой файл расширений Вы хотите редактировать? "
-
-msgid "&User"
-msgstr "&Пользовательский"
-
-msgid "&System Wide"
-msgstr "&Общесистемный"
-
-msgid " Menu edit "
-msgstr " Редактирование файла меню "
-
-msgid " Which menu file do you want to edit? "
-msgstr " Какой файл меню Вы хотите редактировать? "
-
-msgid "&Local"
-msgstr "&Местный"
-
-msgid "Syntax file edit"
-msgstr "Редактирование файла синтаксиса"
-
-msgid " Which syntax file you want to edit? "
-msgstr " Какой файл синтаксиса Вы хотите редактировать? "
+msgstr " п п╟п╨п╬п╧ я└п╟п╧п╩ я─п╟я│я┬п╦я─п╣п╫п╦п╧ п▓я▀ я┘п╬я┌п╦я┌п╣ я─п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄? "
 
 msgid " Compare directories "
-msgstr " Сравнить каталоги "
+msgstr " п║я─п╟п╡п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁп╦ "
 
 msgid " Select compare method: "
-msgstr " Выберите метод сравнения: "
+msgstr " п▓я▀п╠п╣я─п╦я┌п╣ п╪п╣я┌п╬п╢ я│я─п╟п╡п╫п╣п╫п╦я▐: "
 
 msgid "&Quick"
-msgstr "&Быстрый"
+msgstr "&п▒я▀я│я┌я─я▀п╧"
 
 msgid "&Size only"
-msgstr "По &размеру"
+msgstr "п÷п╬ &я─п╟п╥п╪п╣я─я┐"
 
 msgid "&Thorough"
-msgstr "По&байтный"
+msgstr "п÷п╬&п╠п╟п╧я┌п╫я▀п╧"
 
 msgid " Both panels should be in the listing mode to use this command "
-msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
-
-msgid " The command history is empty "
-msgstr " История командной строки пуста "
-
-msgid " Command history "
-msgstr " История командной строки "
+msgstr "п■п╩я▐ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐ я█я┌п╬п╧ п╨п╬п╪п╟п╫п╢я▀ п╬п╠п╣ п©п╟п╫п╣п╩п╦ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╡ я─п╣п╤п╦п╪п╣ я│п©п╦я│п╨п╟"
 
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" Это не xterm и не консоль Linux; \n"
-"    панели не могут быть отключены. "
+" п╜я┌п╬ п╫п╣ xterm п╦ п╫п╣ п╨п╬п╫я│п╬п╩я▄ Linux; \n"
+" п©п╟п╫п╣п╩п╦ п╫п╣ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п╬я┌п╨п╩я▌я┤п╣п╫я▀. "
 
 #, c-format
 msgid "Link %s to:"
-msgstr "Создать ссылку с %s на:"
+msgstr "п║п╬п╥п╢п╟я┌я▄ я│я│я▀п╩п╨я┐ я│ %s п╫п╟:"
 
 msgid " Link "
-msgstr " Ссылка "
+msgstr " п║я│я▀п╩п╨п╟ "
 
 #, c-format
 msgid " link: %s "
-msgstr " ссылка: %s "
+msgstr " я│я│я▀п╩п╨п╟: %s "
 
 #, c-format
 msgid " symlink: %s "
-msgstr " символическая ссылка: %s "
+msgstr " я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╟я▐ я│я│я▀п╩п╨п╟: %s "
 
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Символическая ссылка %s указывает на: "
+msgstr " п║п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╟я▐ я│я│я▀п╩п╨п╟ %s я┐п╨п╟п╥я▀п╡п╟п╣я┌ п╫п╟: "
 
 msgid " Edit symlink "
-msgstr " Правка символической ссылки "
+msgstr " п÷я─п╟п╡п╨п╟ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╬п╧ я│я│я▀п╩п╨п╦ "
 
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " правка символической ссылки, невозможно удалить %s: %s "
+msgstr " п©я─п╟п╡п╨п╟ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╬п╧ я│я│я▀п╩п╨п╦, п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐п╢п╟п╩п╦я┌я▄ %s: %s "
 
 #, c-format
 msgid " edit symlink: %s "
-msgstr " правка символической ссылки: %s "
+msgstr " п©я─п╟п╡п╨п╟ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╬п╧ я│я│я▀п╩п╨п╦: %s "
 
 #, c-format
 msgid "`%s' is not a symbolic link"
-msgstr "%s не является символической ссылкой"
+msgstr "%s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╬п╧ я│я│я▀п╩п╨п╬п╧"
 
 #, c-format
 msgid " Cannot chdir to %s "
-msgstr " Невозможно перейти в %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╧я┌п╦ п╡ %s "
 
 msgid " Enter machine name (F1 for details): "
-msgstr " Введите имя машины (детали по F1): "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╦п╪я▐ п╪п╟я┬п╦п╫я▀ (п╢п╣я┌п╟п╩п╦ п©п╬ F1): "
 
 msgid " Link to a remote machine "
-msgstr " Соединение с удаленной машиной "
+msgstr " п║п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ п╪п╟я┬п╦п╫п╬п╧ "
 
 msgid " FTP to machine "
-msgstr " FTP-соединение с удаленной машиной "
+msgstr " FTP-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ п╪п╟я┬п╦п╫п╬п╧ "
 
 msgid " Shell link to machine "
-msgstr " Shell-соединение с удаленной машиной "
+msgstr " Shell-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ п╪п╟я┬п╦п╫п╬п╧ "
 
 msgid " SMB link to machine "
-msgstr " SMB-соединение с удаленной с машиной "
+msgstr " SMB-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ я│ п╪п╟я┬п╦п╫п╬п╧ "
 
 msgid " Undelete files on an ext2 file system "
-msgstr " Восстановление файлов на файловой системе ext2 "
+msgstr " п▓п╬я│я│я┌п╟п╫п╬п╡п╩п╣п╫п╦п╣ я└п╟п╧п╩п╬п╡ п╫п╟ я└п╟п╧п╩п╬п╡п╬п╧ я│п╦я│я┌п╣п╪п╣ ext2 "
 
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Введите имя устройства (без /dev/), на котором\n"
-" восстанавливать файлы после удаления: (детали по F1)"
+" п▓п╡п╣п╢п╦я┌п╣ п╦п╪я▐ я┐я│я┌я─п╬п╧я│я┌п╡п╟ (п╠п╣п╥ /dev/), п╫п╟ п╨п╬я┌п╬я─п╬п╪\n"
+" п╡п╬я│я│я┌п╟п╫п╟п╡п╩п╦п╡п╟я┌я▄ я└п╟п╧п╩я▀ п©п╬я│п╩п╣ я┐п╢п╟п╩п╣п╫п╦я▐: (п╢п╣я┌п╟п╩п╦ п©п╬ F1)"
 
 msgid " Setup "
-msgstr " Настройка "
+msgstr " п²п╟я│я┌я─п╬п╧п╨п╟ "
 
 #, c-format
 msgid " Setup saved to ~/%s"
-msgstr " Параметры сохранены в ~/%s"
+msgstr " п÷п╟я─п╟п╪п╣я┌я─я▀ я│п╬я┘я─п╟п╫п╣п╫я▀ п╡ ~/%s"
 
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно перейти в \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╧я┌п╦ п╡ \"%s\" \n"
 " %s "
 
 msgid " Cannot execute commands on non-local filesystems"
-msgstr " Невозможно выполнять команды на не локальных файловых системах"
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫я▐я┌я▄ п╨п╬п╪п╟п╫п╢я▀ п╫п╟ п╫п╣ п╩п╬п╨п╟п╩я▄п╫я▀я┘ я└п╟п╧п╩п╬п╡я▀я┘ я│п╦я│я┌п╣п╪п╟я┘"
 
 msgid " The shell is already running a command "
-msgstr " Интерпретатор занят выполнением команды "
+msgstr " п≤п╫я┌п╣я─п©я─п╣я┌п╟я┌п╬я─ п╥п╟п╫я▐я┌ п╡я▀п©п╬п╩п╫п╣п╫п╦п╣п╪ п╨п╬п╪п╟п╫п╢я▀ "
 
 msgid "&Unsorted"
-msgstr "&Без сортировки"
+msgstr "&п▒п╣п╥ я│п╬я─я┌п╦я─п╬п╡п╨п╦"
 
 msgid "&Name"
-msgstr "&Имя"
+msgstr "&п≤п╪я▐"
 
 msgid "&Extension"
-msgstr "Рас&ширение"
+msgstr "п═п╟я│&я┬п╦я─п╣п╫п╦п╣"
 
 msgid "&Modify time"
-msgstr "Время &правки"
+msgstr "п▓я─п╣п╪я▐ &п©я─п╟п╡п╨п╦"
 
 msgid "&Access time"
-msgstr "Время &доступа"
+msgstr "п▓я─п╣п╪я▐ &п╢п╬я│я┌я┐п©п╟"
 
 msgid "C&Hange time"
-msgstr "Время изменения &атрибутов"
+msgstr "п▓я─п╣п╪я▐ п╦п╥п╪п╣п╫п╣п╫п╦я▐ &п╟я┌я─п╦п╠я┐я┌п╬п╡"
 
 msgid "&Size"
-msgstr "&Размер"
+msgstr "&п═п╟п╥п╪п╣я─"
 
 msgid "&Inode"
-msgstr "&Узел"
+msgstr "&пёп╥п╣п╩"
 
 msgid "Cannot read directory contents"
-msgstr "Невозможно прочесть содержимое каталога"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©я─п╬я┤п╣я│я┌я▄ я│п╬п╢п╣я─п╤п╦п╪п╬п╣ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Для продолжения нажмите любую клавишу..."
+msgstr "п■п╩я▐ п©я─п╬п╢п╬п╩п╤п╣п╫п╦я▐ п╫п╟п╤п╪п╦я┌п╣ п╩я▌п╠я┐я▌ п╨п╩п╟п╡п╦я┬я┐..."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Введите \"exit\" для возврата в Midnight Commander"
+msgstr "п▓п╡п╣п╢п╦я┌п╣ \"exit\" п╢п╩я▐ п╡п╬п╥п╡я─п╟я┌п╟ п╡ Midnight Commander"
 
 #, c-format
 msgid " Cannot fetch a local copy of %s "
-msgstr " Невозможно получить локальную копию %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ п╩п╬п╨п╟п╩я▄п╫я┐я▌ п╨п╬п©п╦я▌ %s "
 
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
 " %s "
 msgstr ""
-" Невозможно создать временный командный файл \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╡я─п╣п╪п╣п╫п╫я▀п╧ п╨п╬п╪п╟п╫п╢п╫я▀п╧ я└п╟п╧п╩ \n"
 " %s "
 
 msgid " Parameter "
-msgstr " Параметр "
+msgstr " п÷п╟я─п╟п╪п╣я┌я─ "
 
 #, c-format
 msgid " %s%s file error"
-msgstr " %s%s ошибка файла "
+msgstr " %s%s п╬я┬п╦п╠п╨п╟ я└п╟п╧п╩п╟ "
 
 #, c-format
 msgid ""
@@ -1267,12 +1308,12 @@ msgid ""
 "the installation failed.  Please fetch a fresh copy from the Midnight "
 "Commander package."
 msgstr ""
-"формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке."
-"Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+"я└п╬я─п╪п╟я┌ %smc.ext п╦п╥п╪п╣п╫я▒п╫ я│ п╡п╣я─я│п╦п╦ 3.0. п▓п╬п╥п╪п╬п╤п╫п╬, п©я─п╬п╦п╥п╬я┬я▒п╩ я│п╠п╬п╧ п©я─п╦ я┐я│я┌п╟п╫п╬п╡п╨п╣."
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п╡п╬п╥я▄п╪п╦я┌п╣ я│п╡п╣п╤я┐я▌ п╨п╬п©п╦я▌ п╦п╥ п©п╟п╨п╣я┌п╟ Midnight Commander."
 
 #, c-format
 msgid " ~/%s file error "
-msgstr " ошибка файла ~/%s"
+msgstr " п╬я┬п╦п╠п╨п╟ я└п╟п╧п╩п╟ ~/%s"
 
 #, c-format
 msgid ""
@@ -1280,30 +1321,27 @@ msgid ""
 "want to copy it from %smc.ext or use that file as an example of how to write "
 "it."
 msgstr ""
-"формат файла %smc.ext изменён с версии 3.0. Вы можете либо скопировать его с "
-"%smc.ext либо использовать этот файл как пример и написать свой."
+"я└п╬я─п╪п╟я┌ я└п╟п╧п╩п╟ %smc.ext п╦п╥п╪п╣п╫я▒п╫ я│ п╡п╣я─я│п╦п╦ 3.0. п▓я▀ п╪п╬п╤п╣я┌п╣ п╩п╦п╠п╬ я│п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╣пЁп╬ я│ "
+"%smc.ext п╩п╦п╠п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я█я┌п╬я┌ я└п╟п╧п╩ п╨п╟п╨ п©я─п╦п╪п╣я─ п╦ п╫п╟п©п╦я│п╟я┌я▄ я│п╡п╬п╧."
 
 msgid " Copy "
-msgstr " Копирование "
+msgstr " п п╬п©п╦я─п╬п╡п╟п╫п╦п╣ "
 
 msgid " Move "
-msgstr " Перемещение "
+msgstr " п÷п╣я─п╣п╪п╣я┴п╣п╫п╦п╣ "
 
 msgid " Delete "
-msgstr " Удаление "
-
-msgid " Invalid target mask "
-msgstr " Неправильный шаблон цели "
+msgstr " пёп╢п╟п╩п╣п╫п╦п╣ "
 
 msgid " Cannot make the hardlink "
-msgstr " Невозможно создать жесткую ссылку "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╤п╣я│я┌п╨я┐я▌ я│я│я▀п╩п╨я┐ "
 
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно прочесть исходную ссылку \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©я─п╬я┤п╣я│я┌я▄ п╦я│я┘п╬п╢п╫я┐я▌ я│я│я▀п╩п╨я┐ \"%s\" \n"
 " %s "
 
 msgid ""
@@ -1311,28 +1349,28 @@ msgid ""
 "\n"
 " Option Stable Symlinks will be disabled "
 msgstr ""
-" Невозможно создать устойчивые симв. ссылки через не локальные файловые "
-"системы:\n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я┐я│я┌п╬п╧я┤п╦п╡я▀п╣ я│п╦п╪п╡. я│я│я▀п╩п╨п╦ я┤п╣я─п╣п╥ п╫п╣ п╩п╬п╨п╟п╩я▄п╫я▀п╣ я└п╟п╧п╩п╬п╡я▀п╣ "
+"я│п╦я│я┌п╣п╪я▀:\n"
 "\n"
-" Опция \"Устойчивые символические ссылки\" будет отменена "
+" п·п©я├п╦я▐ \"пёя│я┌п╬п╧я┤п╦п╡я▀п╣ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╦п╣ я│я│я▀п╩п╨п╦\" п╠я┐п╢п╣я┌ п╬я┌п╪п╣п╫п╣п╫п╟ "
 
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно создать целевую симв. ссылку \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я├п╣п╩п╣п╡я┐я▌ я│п╦п╪п╡. я│я│я▀п╩п╨я┐ \"%s\" \n"
 " %s "
 
 msgid "&Abort"
-msgstr "&Прервать"
+msgstr "&п÷я─п╣я─п╡п╟я┌я▄"
 
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно переписать каталог \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п©п╦я│п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1340,7 +1378,7 @@ msgid ""
 " Cannot stat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства исходного файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╦я│я┘п╬п╢п╫п╬пЁп╬ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1351,16 +1389,16 @@ msgid ""
 " are the same file "
 msgstr ""
 " `%s' \n"
-" и \n"
+" п╦ \n"
 " `%s' \n"
-" один и тот же file "
+" п╬п╢п╦п╫ п╦ я┌п╬я┌ п╤п╣ file "
 
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно создать специальный файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я│п©п╣я├п╦п╟п╩я▄п╫я▀п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1368,7 +1406,7 @@ msgid ""
 " Cannot chown target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно сменить владельца целевого файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╪п╣п╫п╦я┌я▄ п╡п╩п╟п╢п╣п╩я▄я├п╟ я├п╣п╩п╣п╡п╬пЁп╬ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1376,7 +1414,7 @@ msgid ""
 " Cannot chmod target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно сменить режим доступа целевого файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╪п╣п╫п╦я┌я▄ я─п╣п╤п╦п╪ п╢п╬я│я┌я┐п©п╟ я├п╣п╩п╣п╡п╬пЁп╬ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1384,18 +1422,18 @@ msgid ""
 " Cannot open source file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно открыть исходный файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п╦я│я┘п╬п╢п╫я▀п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 msgid " Reget failed, about to overwrite file "
-msgstr " Сбой докачки файла, файл будет переписан "
+msgstr " п║п╠п╬п╧ п╢п╬п╨п╟я┤п╨п╦ я└п╟п╧п╩п╟, я└п╟п╧п╩ п╠я┐п╢п╣я┌ п©п╣я─п╣п©п╦я│п╟п╫ "
 
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства исходного файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╦я│я┘п╬п╢п╫п╬пЁп╬ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1403,7 +1441,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно создать целевой файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я├п╣п╩п╣п╡п╬п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1411,7 +1449,7 @@ msgid ""
 " Cannot fstat target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства целевого файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ я├п╣п╩п╣п╡п╬пЁп╬ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1419,7 +1457,7 @@ msgid ""
 " Cannot read source file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно прочесть исходный файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©я─п╬я┤п╣я│я┌я▄ п╦я│я┘п╬п╢п╫я▀п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1427,18 +1465,18 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно записать целевой файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╥п╟п©п╦я│п╟я┌я▄ я├п╣п╩п╣п╡п╬п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 msgid "(stalled)"
-msgstr "(застрял)"
+msgstr "(п╥п╟я│я┌я─я▐п╩)"
 
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно закрыть исходный файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╥п╟п╨я─я▀я┌я▄ п╦я│я┘п╬п╢п╫я▀п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1446,24 +1484,24 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно закрыть целевой файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╥п╟п╨я─я▀я┌я▄ я├п╣п╩п╣п╡п╬п╧ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr "Был получен неполный файл. Сохранить?"
+msgstr "п▒я▀п╩ п©п╬п╩я┐я┤п╣п╫ п╫п╣п©п╬п╩п╫я▀п╧ я└п╟п╧п╩. п║п╬я┘я─п╟п╫п╦я┌я▄?"
 
 msgid "&Delete"
-msgstr "&Удалить"
+msgstr "&пёп╢п╟п╩п╦я┌я▄"
 
 msgid "&Keep"
-msgstr "&Сохранить"
+msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства исходного каталога \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╦я│я┘п╬п╢п╫п╬пЁп╬ п╨п╟я┌п╟п╩п╬пЁп╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1471,7 +1509,7 @@ msgid ""
 " Source \"%s\" is not a directory \n"
 " %s "
 msgstr ""
-" Исходный каталог \"%s\" каталогом не является \n"
+" п≤я│я┘п╬п╢п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ \"%s\" п╨п╟я┌п╟п╩п╬пЁп╬п╪ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ \n"
 " %s "
 
 #, c-format
@@ -1479,7 +1517,7 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Невозможно скопировать циклическую символическую ссылку \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╨п╬п©п╦я─п╬п╡п╟я┌я▄ я├п╦п╨п╩п╦я┤п╣я│п╨я┐я▌ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨я┐я▌ я│я│я▀п╩п╨я┐ \n"
 " `%s' "
 
 #, c-format
@@ -1487,7 +1525,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Назначение \"%s\" должно быть каталогом \n"
+" п²п╟п╥п╫п╟я┤п╣п╫п╦п╣ \"%s\" п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╨п╟я┌п╟п╩п╬пЁп╬п╪ \n"
 " %s "
 
 #, c-format
@@ -1495,7 +1533,7 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно создать целевой каталог \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я├п╣п╩п╣п╡п╬п╧ п╨п╟я┌п╟п╩п╬пЁ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1503,7 +1541,7 @@ msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно сменить владельца целевого каталога \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╪п╣п╫п╦я┌я▄ п╡п╩п╟п╢п╣п╩я▄я├п╟ я├п╣п╩п╣п╡п╬пЁп╬ п╨п╟я┌п╟п╩п╬пЁп╟ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1511,19 +1549,19 @@ msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства файла \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ я└п╟п╧п╩п╟ \"%s\" \n"
 " %s "
 
 #, c-format
 msgid " Cannot overwrite directory `%s' "
-msgstr " Невозможно переписать каталог `%s' "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п©п╦я│п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ `%s' "
 
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно переместить файл \"%s\" в \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╪п╣я│я┌п╦я┌я▄ я└п╟п╧п╩ \"%s\" п╡ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1531,7 +1569,7 @@ msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно удалить файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐п╢п╟п╩п╦я┌я▄ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1542,24 +1580,24 @@ msgid ""
 " are the same directory "
 msgstr ""
 " `%s' \n"
-" и \n"
+" п╦ \n"
 " `%s' \n"
-" один и тот же каталог "
+" п╬п╢п╦п╫ п╦ я┌п╬я┌ п╤п╣ п╨п╟я┌п╟п╩п╬пЁ "
 
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
-msgstr " Невозможно переписать каталог \"%s\" %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п©п╦я│п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" %s "
 
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
-msgstr " Невозможно переписать файл \"%s\" %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п©п╦я│п╟я┌я▄ я└п╟п╧п╩ \"%s\" %s "
 
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно переместить каталог \"%s\" в \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" п╡ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1567,7 +1605,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно удалить файл \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐п╢п╟п╩п╦я┌я▄ я└п╟п╧п╩ \"%s\" \n"
 " %s "
 
 #, c-format
@@ -1575,17 +1613,20 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно удалить каталог \"%s\" \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐п╢п╟п╩п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" \n"
 " %s "
 
+msgid "Directory scanning"
+msgstr " п÷я┐я┌я▄ п╨ п╨п╟я┌п╟п╩п╬пЁя┐"
+
 msgid "1Copy"
-msgstr "1Копировать"
+msgstr "1п п╬п©п╦я─п╬п╡п╟я┌я▄"
 
 msgid "1Move"
-msgstr "1Перенести"
+msgstr "1п÷п╣я─п╣п╫п╣я│я┌п╦"
 
 msgid "1Delete"
-msgstr "1Удалить"
+msgstr "1пёп╢п╟п╩п╦я┌я▄"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -1594,37 +1635,37 @@ msgstr "%o %f \"%s\"%m"
 # msgfmt warnings/errors must be ignored. mc parse this pattern itself.
 #, no-c-format
 msgid "%o %d %f%m"
-msgstr "%o эти %f (%d шт.)%m"
+msgstr "%o я█я┌п╦ %f (%d я┬я┌.)%m"
 
 msgid "file"
-msgstr "файл"
+msgstr "я└п╟п╧п╩"
 
 msgid "files"
-msgstr "файлы"
+msgstr "я└п╟п╧п╩я▀"
 
 msgid "directory"
-msgstr "каталог"
+msgstr "п╨п╟я┌п╟п╩п╬пЁ"
 
 msgid "directories"
-msgstr "каталоги"
+msgstr "п╨п╟я┌п╟п╩п╬пЁп╦"
 
 msgid "files/directories"
-msgstr "файлы/каталоги"
+msgstr "я└п╟п╧п╩я▀/п╨п╟я┌п╟п╩п╬пЁп╦"
 
 msgid " with source mask:"
-msgstr " с исходным шаблоном:"
+msgstr " я│ п╦я│я┘п╬п╢п╫я▀п╪ я┬п╟п╠п╩п╬п╫п╬п╪:"
 
 msgid " to:"
-msgstr " в:"
+msgstr " п╡:"
 
 msgid " Cannot operate on \"..\"! "
-msgstr " Эту операцию невозможно выполнить на \"..\"! "
+msgstr " п╜я┌я┐ п╬п©п╣я─п╟я├п╦я▌ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╫п╟ \"..\"! "
 
 msgid " Sorry, I could not put the job in background "
-msgstr " Извините, сделать это в фоновом режиме невозможно "
+msgstr " п≤п╥п╡п╦п╫п╦я┌п╣, я│п╢п╣п╩п╟я┌я▄ я█я┌п╬ п╡ я└п╬п╫п╬п╡п╬п╪ я─п╣п╤п╦п╪п╣ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ "
 
 msgid "&Retry"
-msgstr "По&вторить"
+msgstr "п÷п╬&п╡я┌п╬я─п╦я┌я▄"
 
 msgid ""
 "\n"
@@ -1632,8 +1673,8 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Каталог не пуст.    \n"
-"   Удалить рекурсивно? "
+"   п п╟я┌п╟п╩п╬пЁ п╫п╣ п©я┐я│я┌.    \n"
+"   пёп╢п╟п╩п╦я┌я▄ я─п╣п╨я┐я─я│п╦п╡п╫п╬? "
 
 msgid ""
 "\n"
@@ -1641,14 +1682,14 @@ msgid ""
 "   Delete it recursively? "
 msgstr ""
 "\n"
-"   Фоновый процесс: каталог не пуст \n"
-"   Удалить рекурсивно? "
+"   п╓п╬п╫п╬п╡я▀п╧ п©я─п╬я├п╣я│я│: п╨п╟я┌п╟п╩п╬пЁ п╫п╣ п©я┐я│я┌ \n"
+"   пёп╢п╟п╩п╦я┌я▄ я─п╣п╨я┐я─я│п╦п╡п╫п╬? "
 
 msgid " Delete: "
-msgstr " Удалить: "
+msgstr " пёп╢п╟п╩п╦я┌я▄: "
 
 msgid "Non&e"
-msgstr "ни &Одного"
+msgstr "п╫п╦ &п·п╢п╫п╬пЁп╬"
 
 #, c-format
 msgid "ETA %d:%02d.%02d"
@@ -1656,263 +1697,280 @@ msgstr "ETA %d:%02d.%02d"
 
 #, c-format
 msgid "%.2f MB/s"
-msgstr "%.2f Мб/с"
+msgstr "%.2f п°п╠/я│"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f кб/с"
+msgstr "%.2f п╨п╠/я│"
 
 #, c-format
 msgid "%ld B/s"
-msgstr "%ld б/с"
+msgstr "%ld п╠/я│"
 
 msgid "File"
-msgstr "Файл"
+msgstr "п╓п╟п╧п╩"
 
 msgid "Count"
-msgstr "Счет"
+msgstr "п║я┤п╣я┌"
 
 msgid "Bytes"
-msgstr "Байт"
+msgstr "п▒п╟п╧я┌"
 
 msgid "Source"
-msgstr "Источник"
+msgstr "п≤я│я┌п╬я┤п╫п╦п╨"
 
 msgid "Target"
-msgstr "Приемник"
+msgstr "п÷я─п╦п╣п╪п╫п╦п╨"
 
 msgid "Deleting"
-msgstr "Удаляем"
+msgstr "пёп╢п╟п╩я▐п╣п╪"
 
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Целевой файл \"%s\" уже существует!"
+msgstr "п╕п╣п╩п╣п╡п╬п╧ я└п╟п╧п╩ \"%s\" я┐п╤п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌!"
 
 msgid "If &size differs"
-msgstr "&Различающиеся по длине"
+msgstr "&п═п╟п╥п╩п╦я┤п╟я▌я┴п╦п╣я│я▐ п©п╬ п╢п╩п╦п╫п╣"
 
 msgid "&Update"
-msgstr "&Устаревшие"
+msgstr "&пёя│я┌п╟я─п╣п╡я┬п╦п╣"
 
 msgid "Overwrite all targets?"
-msgstr "Переписать все файлы?"
+msgstr "п÷п╣я─п╣п©п╦я│п╟я┌я▄ п╡я│п╣ я└п╟п╧п╩я▀?"
 
 msgid "&Reget"
-msgstr "пере&Читать"
+msgstr "п©п╣я─п╣&п╖п╦я┌п╟я┌я▄"
 
 msgid "A&ppend"
-msgstr "дописать в &Конец"
+msgstr "п╢п╬п©п╦я│п╟я┌я▄ п╡ &п п╬п╫п╣я├"
 
 msgid "Overwrite this target?"
-msgstr "Переписать этот файл?"
+msgstr "п÷п╣я─п╣п©п╦я│п╟я┌я▄ я█я┌п╬я┌ я└п╟п╧п╩?"
 
 #, c-format
 msgid "Target date: %s, size %llu"
-msgstr "Дата модификации приемника: %s, размер %llu"
+msgstr "п■п╟я┌п╟ п╪п╬п╢п╦я└п╦п╨п╟я├п╦п╦ п©я─п╦п╣п╪п╫п╦п╨п╟: %s, я─п╟п╥п╪п╣я─ %llu"
 
 #, c-format
 msgid "Source date: %s, size %llu"
-msgstr "Дата модификации источника: %s, размер %llu"
+msgstr "п■п╟я┌п╟ п╪п╬п╢п╦я└п╦п╨п╟я├п╦п╦ п╦я│я┌п╬я┤п╫п╦п╨п╟: %s, я─п╟п╥п╪п╣я─ %llu"
 
 #, c-format
 msgid "Target date: %s, size %u"
-msgstr "Дата модификации приемника: %s, размер %u"
+msgstr "п■п╟я┌п╟ п╪п╬п╢п╦я└п╦п╨п╟я├п╦п╦ п©я─п╦п╣п╪п╫п╦п╨п╟: %s, я─п╟п╥п╪п╣я─ %u"
 
 #, c-format
 msgid "Source date: %s, size %u"
-msgstr "Дата модификации источника: %s, размер %u"
+msgstr "п■п╟я┌п╟ п╪п╬п╢п╦я└п╦п╨п╟я├п╦п╦ п╦я│я┌п╬я┤п╫п╦п╨п╟: %s, я─п╟п╥п╪п╣я─ %u"
 
 msgid " File exists "
-msgstr " Файл существует "
+msgstr " п╓п╟п╧п╩ я│я┐я┴п╣я│я┌п╡я┐п╣я┌ "
 
 msgid " Background process: File exists "
-msgstr " Фоновый процесс: файл существует "
+msgstr " п╓п╬п╫п╬п╡я▀п╧ п©я─п╬я├п╣я│я│: я└п╟п╧п╩ я│я┐я┴п╣я│я┌п╡я┐п╣я┌ "
 
 msgid "preserve &Attributes"
-msgstr "Сохранять &атрибуты"
+msgstr "п║п╬я┘я─п╟п╫я▐я┌я▄ &п╟я┌я─п╦п╠я┐я┌я▀"
 
 msgid "follow &Links"
-msgstr "&Разыменовывать ссылки"
+msgstr "&п═п╟п╥я▀п╪п╣п╫п╬п╡я▀п╡п╟я┌я▄ я│я│я▀п╩п╨п╦"
 
 msgid "to:"
-msgstr "в:"
-
-msgid "&Using shell patterns"
-msgstr "&Метасимволы shell"
+msgstr "п╡:"
 
 msgid "&Background"
-msgstr "В &фоне"
+msgstr "п▓ &я└п╬п╫п╣"
 
 msgid "&Stable Symlinks"
-msgstr "&Сохранять символические ссылки"
+msgstr "&п║п╬я┘я─п╟п╫я▐я┌я▄ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╦п╣ я│я│я▀п╩п╨п╦"
 
 msgid "&Dive into subdir if exists"
-msgstr "&Внутрь каталога, если есть"
+msgstr "&п▓п╫я┐я┌я─я▄ п╨п╟я┌п╟п╩п╬пЁп╟, п╣я│п╩п╦ п╣я│я┌я▄"
 
 #, c-format
-msgid ""
-"Invalid source pattern `%s' \n"
-" %s "
-msgstr ""
-"Неправильный образец \"%s\" \n"
-" %s "
+msgid "Invalid source pattern `%s'"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╬п╠я─п╟п╥п╣я├ \"%s\""
 
 msgid "&Suspend"
-msgstr "При&остановить"
+msgstr "п÷я─п╦&п╬я│я┌п╟п╫п╬п╡п╦я┌я▄"
 
 msgid "Con&tinue"
-msgstr "Продолжить"
+msgstr "п÷я─п╬п╢п╬п╩п╤п╦я┌я▄"
 
 msgid "&Chdir"
-msgstr "Пере&ход"
+msgstr "п÷п╣я─п╣&я┘п╬п╢"
 
 msgid "&Again"
-msgstr "Пов&тор"
+msgstr "п÷п╬п╡&я┌п╬я─"
 
 msgid "&Quit"
-msgstr "&Выход"
+msgstr "&п▓я▀я┘п╬п╢"
 
 msgid "Pane&lize"
-msgstr "Па&нелизация"
+msgstr "п÷п╟&п╫п╣п╩п╦п╥п╟я├п╦я▐"
 
 msgid "&View - F3"
-msgstr "Прос&мотр - F3"
+msgstr "п÷я─п╬я│&п╪п╬я┌я─ - F3"
 
 msgid "&Edit - F4"
-msgstr "&Правка - F4"
+msgstr "&п÷я─п╟п╡п╨п╟ - F4"
+
+#, c-format
+msgid "Found: %ld"
+msgstr "п²п╟п╧п╢п╣п╫: %ld"
+
+msgid " Malformed regular expression "
+msgstr " п═п╣пЁя┐п╩я▐я─п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣ я│я└п╬я─п╪п╦я─п╬п╡п╟п╫п╬ п╫п╣п╡п╣я─п╫п╬ "
+
+msgid "Cas&e sensitive"
+msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
+
+msgid "Case sens&itive"
+msgstr "пёя┤п╣я┌ я─п╣&пЁп╦я│я┌я─п╟"
 
 msgid "&Find recursively"
-msgstr "Найти ре&курсивно"
+msgstr "п²п╟п╧я┌п╦ я─п╣&п╨я┐я─я│п╦п╡п╫п╬"
 
 msgid "S&kip hidden"
-msgstr "Пропускать скр&ытые"
+msgstr "п÷я─п╬п©я┐я│п╨п╟я┌я▄ я│п╨я─&я▀я┌я▀п╣"
 
-msgid "Start at:"
-msgstr "От каталога:"
+msgid "&All charsets"
+msgstr "&п▓я│п╣ п╨п╬п╢п╦я─п╬п╡п╨п╦"
 
-msgid "Filename:"
-msgstr "Шаблон имени:"
+msgid "All cha&rsets"
+msgstr "п▓я│п╣ п╨п╬п╢п╦&я─п╬п╡п╨п╦"
 
-msgid "Content: "
-msgstr "Содержит текст:"
+msgid "Re&gular expression"
+msgstr "&п═п╣пЁя┐п╩я▐я─п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣"
 
 msgid "&Tree"
-msgstr "Д&ерево"
+msgstr "п■&п╣я─п╣п╡п╬"
 
 msgid "Find File"
-msgstr "Поиск файла"
+msgstr "п÷п╬п╦я│п╨ я└п╟п╧п╩п╟"
+
+msgid "Content:"
+msgstr "п║п╬п╢п╣я─п╤п╦п╪п╬п╣:"
+
+msgid "File name:"
+msgstr "п╗п╟п╠п╩п╬п╫ п╦п╪п╣п╫п╦:"
+
+msgid "Start at:"
+msgstr "п·я┌ п╨п╟я┌п╟п╩п╬пЁп╟:"
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "Ищем в %s"
+msgstr "п≤я┴п╣п╪ п╡ %s"
 
 msgid "Finished"
-msgstr "Готово"
+msgstr "п⌠п╬я┌п╬п╡п╬"
 
 #, c-format
 msgid "Searching %s"
-msgstr "Ищем %s"
+msgstr "п≤я┴п╣п╪ %s"
 
 msgid "Searching"
-msgstr "Ищем"
+msgstr "п≤я┴п╣п╪"
 
 msgid " Help file format error\n"
-msgstr " Ошибка в формате файла помощи\n"
+msgstr " п·я┬п╦п╠п╨п╟ п╡ я└п╬я─п╪п╟я┌п╣ я└п╟п╧п╩п╟ п©п╬п╪п╬я┴п╦\n"
 
 msgid " Internal bug: Double start of link area "
-msgstr " Внутренняя ошибка: двойное начало области ссылки "
+msgstr " п▓п╫я┐я┌я─п╣п╫п╫я▐я▐ п╬я┬п╦п╠п╨п╟: п╢п╡п╬п╧п╫п╬п╣ п╫п╟я┤п╟п╩п╬ п╬п╠п╩п╟я│я┌п╦ я│я│я▀п╩п╨п╦ "
 
 #, c-format
 msgid " Cannot find node %s in help file "
-msgstr " Невозможно найти узел %s в файле помощи "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╫п╟п╧я┌п╦ я┐п╥п╣п╩ %s п╡ я└п╟п╧п╩п╣ п©п╬п╪п╬я┴п╦ "
 
 msgid "Index"
-msgstr "Содерж"
+msgstr "п║п╬п╢п╣я─п╤"
 
 msgid "Prev"
-msgstr "Назад"
+msgstr "п²п╟п╥п╟п╢"
 
 msgid "&Move"
-msgstr "Пере&местить"
+msgstr "п÷п╣я─п╣&п╪п╣я│я┌п╦я┌я▄"
 
 msgid "&Remove"
-msgstr "&Удалить"
+msgstr "&пёп╢п╟п╩п╦я┌я▄"
 
 msgid "&Append"
-msgstr "В &конец"
+msgstr "п▓ &п╨п╬п╫п╣я├"
 
 msgid "&Insert"
-msgstr "В &начало"
+msgstr "п▓ &п╫п╟я┤п╟п╩п╬"
 
 msgid "New &Entry"
-msgstr "Новый &элемент"
+msgstr "п²п╬п╡я▀п╧ &я█п╩п╣п╪п╣п╫я┌"
 
 msgid "New &Group"
-msgstr "Новая &группа"
+msgstr "п²п╬п╡п╟я▐ &пЁя─я┐п©п©п╟"
 
 msgid "&Up"
-msgstr "&Вверх"
+msgstr "&п▓п╡п╣я─я┘"
 
 msgid "&Add current"
-msgstr "Добавить &текущий"
+msgstr "п■п╬п╠п╟п╡п╦я┌я▄ &я┌п╣п╨я┐я┴п╦п╧"
 
 msgid "&Refresh"
-msgstr "&Освежить"
+msgstr "&п·я│п╡п╣п╤п╦я┌я▄"
 
 msgid "Fr&ee VFSs now"
-msgstr "Освободить ВФС сейчас"
+msgstr "п·я│п╡п╬п╠п╬п╢п╦я┌я▄ п▓п╓п║ я│п╣п╧я┤п╟я│"
 
 msgid "Change &To"
-msgstr "Пере&йти"
+msgstr "п÷п╣я─п╣&п╧я┌п╦"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "Подгруппа - для просмотра нажмите ENTER"
+msgstr "п÷п╬п╢пЁя─я┐п©п©п╟ - п╢п╩я▐ п©я─п╬я│п╪п╬я┌я─п╟ п╫п╟п╤п╪п╦я┌п╣ ENTER"
 
 msgid "Active VFS directories"
-msgstr "Активные каталоги ВФС"
+msgstr "п░п╨я┌п╦п╡п╫я▀п╣ п╨п╟я┌п╟п╩п╬пЁп╦ п▓п╓п║"
 
 msgid "Directory hotlist"
-msgstr " Каталоги быстрого доступа"
+msgstr " п п╟я┌п╟п╩п╬пЁп╦ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟"
 
 msgid " Directory path "
-msgstr " Путь к каталогу "
+msgstr " п÷я┐я┌я▄ п╨ п╨п╟я┌п╟п╩п╬пЁя┐ "
 
 msgid " Directory label "
-msgstr " Метка каталога "
+msgstr " п°п╣я┌п╨п╟ п╨п╟я┌п╟п╩п╬пЁп╟ "
 
 #, c-format
 msgid "Moving %s"
-msgstr "Перемещаем %s"
+msgstr "п÷п╣я─п╣п╪п╣я┴п╟п╣п╪ %s"
 
 msgid "New hotlist entry"
-msgstr "Новый элемент быстрого доступа"
+msgstr "п²п╬п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟"
 
 msgid "Directory label"
-msgstr " Метка каталога"
+msgstr " п°п╣я┌п╨п╟ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 msgid "Directory path"
-msgstr " Путь к каталогу"
+msgstr " п÷я┐я┌я▄ п╨ п╨п╟я┌п╟п╩п╬пЁя┐"
 
 msgid " New hotlist group "
-msgstr "Новая группа быстрого доступа"
+msgstr "п²п╬п╡п╟я▐ пЁя─я┐п©п©п╟ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟"
 
 msgid "Name of new group"
-msgstr " Имя новой группы"
+msgstr " п≤п╪я▐ п╫п╬п╡п╬п╧ пЁя─я┐п©п©я▀"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr " Метка для \"%s\": "
+msgstr " п°п╣я┌п╨п╟ п╢п╩я▐ \"%s\": "
 
 msgid " Add to hotlist "
-msgstr " Добавить быстрый доступ к папке"
+msgstr " п■п╬п╠п╟п╡п╦я┌я▄ п╠я▀я│я┌я─я▀п╧ п╢п╬я│я┌я┐п© п╨ п©п╟п©п╨п╣"
 
 msgid " Remove: "
-msgstr " Удалить: "
+msgstr " пёп╢п╟п╩п╦я┌я▄: "
 
 msgid ""
 "\n"
 " Are you sure you want to remove this entry?"
 msgstr ""
+"\n"
+" п╔п╬я┌п╦я┌п╣ я┐п╢п╟п╩п╦я┌я▄?"
 
 msgid ""
 "\n"
@@ -1920,21 +1978,21 @@ msgid ""
 " Remove it?"
 msgstr ""
 "\n"
-" Группа не пуста.\n"
-" Удалить ее?"
+" п⌠я─я┐п©п©п╟ п╫п╣ п©я┐я│я┌п╟.\n"
+" пёп╢п╟п╩п╦я┌я▄ п╣п╣?"
 
 msgid " Top level group "
-msgstr "Группа верхнего уровня"
+msgstr "п⌠я─я┐п©п©п╟ п╡п╣я─я┘п╫п╣пЁп╬ я┐я─п╬п╡п╫я▐"
 
 msgid " Hotlist Load "
-msgstr " Загрузка списка быстрого доступа "
+msgstr " п≈п╟пЁя─я┐п╥п╨п╟ я│п©п╦я│п╨п╟ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟ "
 
 #, c-format
 msgid ""
 "MC was unable to write ~/%s file, your old hotlist entries were not deleted"
 msgstr ""
-"MC не смог удалить файл ~/%s, ваши старые элементы быстрого доступа не были "
-"удалены"
+"MC п╫п╣ я│п╪п╬пЁ я┐п╢п╟п╩п╦я┌я▄ я└п╟п╧п╩ ~/%s, п╡п╟я┬п╦ я│я┌п╟я─я▀п╣ я█п╩п╣п╪п╣п╫я┌я▀ п╠я▀я│я┌я─п╬пЁп╬ п╢п╬я│я┌я┐п©п╟ п╫п╣ п╠я▀п╩п╦ "
+"я┐п╢п╟п╩п╣п╫я▀"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -1942,140 +2000,140 @@ msgstr "Midnight Commander %s"
 
 #, c-format
 msgid "File:       %s"
-msgstr "Файл:       %s"
+msgstr "п╓п╟п╧п╩:       %s"
 
 #, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Своб. узлов: %d (%d%%) из %d"
+msgstr "п║п╡п╬п╠. я┐п╥п╩п╬п╡: %d (%d%%) п╦п╥ %d"
 
 msgid "No node information"
-msgstr "Нет информации об узле"
+msgstr "п²п╣я┌ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬п╠ я┐п╥п╩п╣"
 
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Своб. место: %s (%d%%) из %s"
+msgstr "п║п╡п╬п╠. п╪п╣я│я┌п╬: %s (%d%%) п╦п╥ %s"
 
 msgid "No space information"
-msgstr "Нет информации о пространстве"
+msgstr "п²п╣я┌ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╣"
 
 #, c-format
 msgid "Type:      %s "
-msgstr "Тип:       %s "
+msgstr "п╒п╦п©:       %s "
 
 msgid "non-local vfs"
-msgstr "не локальная ВФС"
+msgstr "п╫п╣ п╩п╬п╨п╟п╩я▄п╫п╟я▐ п▓п╓п║"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "Устройство:%s"
+msgstr "пёя│я┌я─п╬п╧я│я┌п╡п╬:%s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "ФС: %s"
+msgstr "п╓п║: %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Обращение: %s"
+msgstr "п·п╠я─п╟я┴п╣п╫п╦п╣: %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Изменен:   %s"
+msgstr "п≤п╥п╪п╣п╫п╣п╫:   %s"
 
 #. TRANSLATORS: "Status changed", like in the stat(2) man page
 #, c-format
 msgid "Status:    %s"
-msgstr "Cтатус:    %s"
+msgstr "Cя┌п╟я┌я┐я│:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr "Тип устройства: major %lu, minor %lu"
+msgstr "п╒п╦п© я┐я│я┌я─п╬п╧я│я┌п╡п╟: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:      %s"
-msgstr "Размер:    %s"
+msgstr "п═п╟п╥п╪п╣я─:    %s"
 
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] "(%ld блок)"
-msgstr[1] "(%ld блока)"
-msgstr[2] "(%ld блоков)"
+msgstr[0] "(%ld п╠п╩п╬п╨)"
+msgstr[1] "(%ld п╠п╩п╬п╨п╟)"
+msgstr[2] "(%ld п╠п╩п╬п╨п╬п╡)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Владелец:  %s/%s"
+msgstr "п▓п╩п╟п╢п╣п╩п╣я├:  %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "Ссылок:    %d"
+msgstr "п║я│я▀п╩п╬п╨:    %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Права:     %s (%04o)"
+msgstr "п÷я─п╟п╡п╟:     %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Положение: %Xh:%Xh"
+msgstr "п÷п╬п╩п╬п╤п╣п╫п╦п╣: %Xh:%Xh"
 
 msgid "File:       None"
-msgstr "Файл:      Отсутствует"
+msgstr "п╓п╟п╧п╩:      п·я┌я│я┐я┌я│я┌п╡я┐п╣я┌"
 
 msgid "&Vertical"
-msgstr "&Вертикальное"
+msgstr "&п▓п╣я─я┌п╦п╨п╟п╩я▄п╫п╬п╣"
 
 msgid "&Horizontal"
-msgstr "&Горизонтальное"
+msgstr "&п⌠п╬я─п╦п╥п╬п╫я┌п╟п╩я▄п╫п╬п╣"
 
 msgid "show free sp&Ace"
-msgstr ""
+msgstr "п©п╬п╨п╟п╥п╟я┌я▄ я│п╡п╬п╠п╬п╢п╫п╬п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬"
 
 msgid "&Xterm window title"
-msgstr "&Заголовок xterm"
+msgstr "&п≈п╟пЁп╬п╩п╬п╡п╬п╨ xterm"
 
 msgid "h&Intbar visible"
-msgstr "С&трока подсказки"
+msgstr "п║&я┌я─п╬п╨п╟ п©п╬п╢я│п╨п╟п╥п╨п╦"
 
 msgid "&Keybar visible"
-msgstr "М&етки клавиш"
+msgstr "п°&п╣я┌п╨п╦ п╨п╩п╟п╡п╦я┬"
 
 msgid "command &Prompt"
-msgstr "&Командная строка"
+msgstr "&п п╬п╪п╟п╫п╢п╫п╟я▐ я│я┌я─п╬п╨п╟"
 
 msgid "show &Mini status"
-msgstr "&Мини-статус"
+msgstr "&п°п╦п╫п╦-я│я┌п╟я┌я┐я│"
 
 msgid "menu&Bar visible"
-msgstr "&Линейка меню"
+msgstr "&п⌡п╦п╫п╣п╧п╨п╟ п╪п╣п╫я▌"
 
 msgid "&Equal split"
-msgstr "&Равные размеры"
+msgstr "&п═п╟п╡п╫я▀п╣ я─п╟п╥п╪п╣я─я▀"
 
 msgid "pe&Rmissions"
-msgstr "Права д&оступа"
+msgstr "п÷я─п╟п╡п╟ п╢&п╬я│я┌я┐п©п╟"
 
 msgid "&File types"
-msgstr "Типы &файлов"
+msgstr "п╒п╦п©я▀ &я└п╟п╧п╩п╬п╡"
 
 msgid " Panel split "
-msgstr " Разбиение панелей "
+msgstr " п═п╟п╥п╠п╦п╣п╫п╦п╣ п©п╟п╫п╣п╩п╣п╧ "
 
 msgid " Highlight... "
-msgstr " Цветовыделение... "
+msgstr " п╕п╡п╣я┌п╬п╡я▀п╢п╣п╩п╣п╫п╦п╣... "
 
 msgid " Other options "
-msgstr " Прочие настройки "
+msgstr " п÷я─п╬я┤п╦п╣ п╫п╟я│я┌я─п╬п╧п╨п╦ "
 
 msgid "output lines"
-msgstr "строки вывода"
+msgstr "я│я┌я─п╬п╨п╦ п╡я▀п╡п╬п╢п╟"
 
 msgid "Layout"
-msgstr "Внешний вид"
+msgstr "п▓п╫п╣я┬п╫п╦п╧ п╡п╦п╢"
 
 msgid "Learn keys"
-msgstr "Распознавание клавиш"
+msgstr "п═п╟я│п©п╬п╥п╫п╟п╡п╟п╫п╦п╣ п╨п╩п╟п╡п╦я┬"
 
 msgid " Teach me a key "
-msgstr " Обучите меня клавише "
+msgstr " п·п╠я┐я┤п╦я┌п╣ п╪п╣п╫я▐ п╨п╩п╟п╡п╦я┬п╣ "
 
 #, c-format
 msgid ""
@@ -2088,21 +2146,21 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Пожалуйста, нажмите клавишу %s\n"
-"и подождите, пока это сообщение пропадет.\n"
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п╫п╟п╤п╪п╦я┌п╣ п╨п╩п╟п╡п╦я┬я┐ %s\n"
+"п╦ п©п╬п╢п╬п╤п╢п╦я┌п╣, п©п╬п╨п╟ я█я┌п╬ я│п╬п╬п╠я┴п╣п╫п╦п╣ п©я─п╬п©п╟п╢п╣я┌.\n"
 "\n"
-"Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось \"OK\".\n"
+"п≈п╟я┌п╣п╪ п╫п╟п╤п╪п╦я┌п╣ п╣п╣ п╣я┴п╣ я─п╟п╥, я┤я┌п╬п╠я▀ я┐п╠п╣п╢п╦я┌я▄я│я▐,\n"
+"я┤я┌п╬ я│п©я─п╟п╡п╟ п╬я┌ п╣п╣ п╫п╟п╥п╡п╟п╫п╦я▐ п©п╬я▐п╡п╦п╩п╬я│я▄ \"OK\".\n"
 "\n"
-"Если вы хотите прервать обучение, нажмите\n"
-"клавишу Esc и тоже немного подождите."
+"п∙я│п╩п╦ п╡я▀ я┘п╬я┌п╦я┌п╣ п©я─п╣я─п╡п╟я┌я▄ п╬п╠я┐я┤п╣п╫п╦п╣, п╫п╟п╤п╪п╦я┌п╣\n"
+"п╨п╩п╟п╡п╦я┬я┐ Esc п╦ я┌п╬п╤п╣ п╫п╣п╪п╫п╬пЁп╬ п©п╬п╢п╬п╤п╢п╦я┌п╣."
 
 msgid " Cannot accept this key "
-msgstr " Невозможно принять эту клавишу "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©я─п╦п╫я▐я┌я▄ я█я┌я┐ п╨п╩п╟п╡п╦я┬я┐ "
 
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Вы ввели \"%s\""
+msgstr " п▓я▀ п╡п╡п╣п╩п╦ \"%s\""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -2112,27 +2170,27 @@ msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Похоже, что все Ваши клавиши теперь\n"
-"работают нормально. Просто здорово!"
+"п÷п╬я┘п╬п╤п╣, я┤я┌п╬ п╡я│п╣ п▓п╟я┬п╦ п╨п╩п╟п╡п╦я┬п╦ я┌п╣п©п╣я─я▄\n"
+"я─п╟п╠п╬я┌п╟я▌я┌ п╫п╬я─п╪п╟п╩я▄п╫п╬. п÷я─п╬я│я┌п╬ п╥п╢п╬я─п╬п╡п╬!"
 
 msgid "&Discard"
-msgstr "Отменить"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄"
 
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Отлично! У вас есть полная база описаний терминалов!\n"
-"Все ваши клавиши работают хорошо."
+"п·я┌п╩п╦я┤п╫п╬! пё п╡п╟я│ п╣я│я┌я▄ п©п╬п╩п╫п╟я▐ п╠п╟п╥п╟ п╬п©п╦я│п╟п╫п╦п╧ я┌п╣я─п╪п╦п╫п╟п╩п╬п╡!\n"
+"п▓я│п╣ п╡п╟я┬п╦ п╨п╩п╟п╡п╦я┬п╦ я─п╟п╠п╬я┌п╟я▌я┌ я┘п╬я─п╬я┬п╬."
 
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
+msgstr "п²п╟п╤п╪п╦я┌п╣ п╡я│п╣ п©п╣я─п╣я┤п╦я│п╩п╣п╫п╫я▀п╣ п╡я▀я┬п╣ п╨п╩п╟п╡п╦я┬п╦. п÷п╬я│п╩п╣ п╫п╟п╤п╟я┌п╦п╧ п╫п╟п╧п╢п╦я┌п╣,"
 
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите"
+msgstr "п╨п╟п╨п╦п╣ п╨п╩п╟п╡п╦я┬п╦ п╫п╣ п╦п╪п╣я▌я┌ п©п╬п╪п╣я┌п╨п╦ \"OK\". п■п╩я▐ п╬п╠я┐я┤п╣п╫п╦я▐ п╨п╩п╟п╡п╦я┬п╣ п╡я▀п╠п╣я─п╦я┌п╣"
 
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "ее при помощи Tab или мышкой и нажмите пробел."
+msgstr "п╣п╣ п©я─п╦ п©п╬п╪п╬я┴п╦ Tab п╦п╩п╦ п╪я▀я┬п╨п╬п╧ п╦ п╫п╟п╤п╪п╦я┌п╣ п©я─п╬п╠п╣п╩."
 
 msgid ""
 " The Commander can't change to the directory that \n"
@@ -2140,202 +2198,199 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" MC не может перейти в каталог, который ему \n"
-" сообщил дочерний процесс интерпретатора. Может, вы \n"
-" удалили рабочий каталог или дали себе дополнительные \n"
-" привилегии доступа при помощи команды \"su\"? "
+" MC п╫п╣ п╪п╬п╤п╣я┌ п©п╣я─п╣п╧я┌п╦ п╡ п╨п╟я┌п╟п╩п╬пЁ, п╨п╬я┌п╬я─я▀п╧ п╣п╪я┐ \n"
+" я│п╬п╬п╠я┴п╦п╩ п╢п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│ п╦п╫я┌п╣я─п©я─п╣я┌п╟я┌п╬я─п╟. п°п╬п╤п╣я┌, п╡я▀ \n"
+" я┐п╢п╟п╩п╦п╩п╦ я─п╟п╠п╬я┤п╦п╧ п╨п╟я┌п╟п╩п╬пЁ п╦п╩п╦ п╢п╟п╩п╦ я│п╣п╠п╣ п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ \n"
+" п©я─п╦п╡п╦п╩п╣пЁп╦п╦ п╢п╬я│я┌я┐п©п╟ п©я─п╦ п©п╬п╪п╬я┴п╦ п╨п╬п╪п╟п╫п╢я▀ \"su\"? "
 
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Вы действительно хотите выйти из Midnight Commander? "
+msgstr " п▓я▀ п╢п╣п╧я│я┌п╡п╦я┌п╣п╩я▄п╫п╬ я┘п╬я┌п╦я┌п╣ п╡я▀п╧я┌п╦ п╦п╥ Midnight Commander? "
 
 msgid "&Listing mode..."
-msgstr "Фор&мат списка..."
+msgstr "п╓п╬я─&п╪п╟я┌ я│п©п╦я│п╨п╟..."
 
 msgid "&Quick view     C-x q"
-msgstr "&Быстрый просмотр   C-x q"
+msgstr "&п▒я▀я│я┌я─я▀п╧ п©я─п╬я│п╪п╬я┌я─   C-x q"
 
 msgid "&Info           C-x i"
-msgstr "&Информация         C-x i"
+msgstr "&п≤п╫я└п╬я─п╪п╟я├п╦я▐         C-x i"
 
 msgid "&Sort order..."
-msgstr "Порядок &сортировки..."
+msgstr "п÷п╬я─я▐п╢п╬п╨ &я│п╬я─я┌п╦я─п╬п╡п╨п╦..."
 
 msgid "&Filter..."
-msgstr "&Фильтр..."
+msgstr "&п╓п╦п╩я▄я┌я─..."
+
+msgid "&Encoding...    C-t"
+msgstr "п п╬п╢п╦я─п╬п╡п╨п╟ п©п╟п╫п╣п╩п╦     C-t"
 
 msgid "&Network link..."
-msgstr "Се&тевое соединение..."
+msgstr "п║п╣&я┌п╣п╡п╬п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
 msgid "FT&P link..."
-msgstr "&FTP-соединение..."
+msgstr "&FTP-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
 msgid "S&hell link..."
-msgstr "S&hell-соединение..."
+msgstr "S&hell-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
 msgid "SM&B link..."
-msgstr "SM&B-соединение..."
+msgstr "SM&B-я│п╬п╣п╢п╦п╫п╣п╫п╦п╣..."
 
 msgid "&Rescan         C-r"
-msgstr "&Пересмотреть         C-r"
-
-msgid "&User menu          F2"
-msgstr "&Меню пользователя     F2"
+msgstr "&п÷п╣я─п╣я│п╪п╬я┌я─п╣я┌я▄         C-r"
 
 msgid "&View               F3"
-msgstr "Просмотр &файла        F3"
+msgstr "п÷я─п╬я│п╪п╬я┌я─ &я└п╟п╧п╩п╟        F3"
 
 msgid "Vie&w file...         "
-msgstr "&Просмотр файла..."
+msgstr "&п÷я─п╬я│п╪п╬я┌я─ я└п╟п╧п╩п╟..."
 
 msgid "&Filtered view     M-!"
-msgstr "Просмотр команд&ы     M-!"
+msgstr "п÷я─п╬я│п╪п╬я┌я─ п╨п╬п╪п╟п╫п╢&я▀     M-!"
 
 msgid "&Edit               F4"
-msgstr "&Редактирование        F4"
+msgstr "&п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣        F4"
 
 msgid "&Copy               F5"
-msgstr "&Копирование           F5"
+msgstr "&п п╬п©п╦я─п╬п╡п╟п╫п╦п╣           F5"
 
 msgid "c&Hmod           C-x c"
-msgstr "Права &доступа      C-x c"
+msgstr "п÷я─п╟п╡п╟ &п╢п╬я│я┌я┐п©п╟      C-x c"
 
 msgid "&Link            C-x l"
-msgstr "&Жесткая ссылка     C-x l"
+msgstr "&п√п╣я│я┌п╨п╟я▐ я│я│я▀п╩п╨п╟     C-x l"
 
 msgid "&SymLink         C-x s"
-msgstr "&Символич. ссылка   C-x s"
+msgstr "&п║п╦п╪п╡п╬п╩п╦я┤. я│я│я▀п╩п╨п╟   C-x s"
 
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "Правка ссы&лки    C-x C-s"
+msgstr "п÷я─п╟п╡п╨п╟ я│я│я▀&п╩п╨п╦    C-x C-s"
 
 msgid "ch&Own           C-x o"
-msgstr "&Владелец/группа    C-x o"
+msgstr "&п▓п╩п╟п╢п╣п╩п╣я├/пЁя─я┐п©п©п╟    C-x o"
 
 msgid "&Advanced chown       "
-msgstr "Пр&ава (расширенные)    "
+msgstr "п÷я─&п╟п╡п╟ (я─п╟я│я┬п╦я─п╣п╫п╫я▀п╣)    "
 
 msgid "&Rename/Move        F6"
-msgstr "Пере&именование        F6"
+msgstr "п÷п╣я─п╣&п╦п╪п╣п╫п╬п╡п╟п╫п╦п╣        F6"
 
 msgid "&Mkdir              F7"
-msgstr "Со&здание каталога     F7"
+msgstr "п║п╬&п╥п╢п╟п╫п╦п╣ п╨п╟я┌п╟п╩п╬пЁп╟     F7"
 
 msgid "&Delete             F8"
-msgstr "&Удаление              F8"
+msgstr "&пёп╢п╟п╩п╣п╫п╦п╣              F8"
 
 msgid "&Quick cd          M-c"
-msgstr "Сме&на каталога       M-c"
+msgstr "п║п╪п╣&п╫п╟ п╨п╟я┌п╟п╩п╬пЁп╟       M-c"
 
 msgid "select &Group      M-+"
-msgstr "Отметить &группу      M-+"
+msgstr "п·я┌п╪п╣я┌п╦я┌я▄ &пЁя─я┐п©п©я┐      M-+"
 
 msgid "u&Nselect group    M-\\"
-msgstr "Снять &отметку        M-\\"
+msgstr "п║п╫я▐я┌я▄ &п╬я┌п╪п╣я┌п╨я┐        M-\\"
 
 msgid "reverse selec&Tion M-*"
-msgstr "Инвер&тировать отметку  *"
+msgstr "п≤п╫п╡п╣я─&я┌п╦я─п╬п╡п╟я┌я▄ п╬я┌п╪п╣я┌п╨я┐  *"
 
 msgid "e&Xit              F10"
-msgstr "Вы&ход                F10"
+msgstr "п▓я▀&я┘п╬п╢                F10"
+
+msgid "&User menu          F2"
+msgstr "&п°п╣п╫я▌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐          F2"
 
 msgid "&Directory tree"
-msgstr "&Дерево каталогов"
+msgstr "&п■п╣я─п╣п╡п╬ п╨п╟я┌п╟п╩п╬пЁп╬п╡"
 
 msgid "&Find file            M-?"
-msgstr "Поиск &файла           M-?"
+msgstr "п÷п╬п╦я│п╨ &я└п╟п╧п╩п╟                M-?"
 
 msgid "s&Wap panels          C-u"
-msgstr "&Переставить панели    C-u"
+msgstr "&п÷п╣я─п╣я│я┌п╟п╡п╦я┌я▄ п©п╟п╫п╣п╩п╦         C-u"
 
 msgid "switch &Panels on/off C-o"
-msgstr "&Отключить панели      C-o"
+msgstr "&п·я┌п╨п╩я▌я┤п╦я┌я▄ п©п╟п╫п╣п╩п╦           C-o"
 
 msgid "&Compare directories  C-x d"
-msgstr "&Сравнить каталоги     C-x d"
+msgstr "&п║я─п╟п╡п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁп╦          C-x d"
 
 msgid "e&Xternal panelize    C-x !"
-msgstr "&Критерий панелизации  C-x !"
+msgstr "&п я─п╦я┌п╣я─п╦п╧ п©п╟п╫п╣п╩п╦п╥п╟я├п╦п╦       C-x !"
 
 msgid "show directory s&Izes"
-msgstr "&Размеры каталогов"
+msgstr "&п═п╟п╥п╪п╣я─я▀ п╨п╟я┌п╟п╩п╬пЁп╬п╡"
 
-msgid "command &History"
-msgstr "&История команд"
+msgid "Command &history      M-h"
+msgstr "&п≤я│я┌п╬я─п╦я▐ п╨п╬п╪п╟п╫п╢п╫п╬п╧ я│я┌я─п╬п╨п╦   M-h"
 
 msgid "di&Rectory hotlist    C-\\"
-msgstr "Быстрый доступ к ката&логам  C-\\"
+msgstr "п▒я▀я│я┌я─я▀п╧ п╢п╬я│я┌я┐п© п╨ п╨п╟я┌п╟&п╩п╬пЁп╟п╪ C-\\"
 
 msgid "&Active VFS list      C-x a"
-msgstr "Список &активных ВФС   C-x a"
+msgstr "п║п©п╦я│п╬п╨ &п╟п╨я┌п╦п╡п╫я▀я┘ п▓п╓п║        C-x a"
 
 msgid "&Background jobs      C-x j"
-msgstr "Фо&новые задания       C-x j"
+msgstr "п╓п╬&п╫п╬п╡я▀п╣ п╥п╟п╢п╟п╫п╦я▐            C-x j"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Восстановление файлов"
+msgstr "&п▓п╬я│я│я┌п╟п╫п╬п╡п╩п╣п╫п╦п╣ я└п╟п╧п╩п╬п╡"
 
 msgid "&Listing format edit"
-msgstr "&Редактирование формата"
+msgstr "&п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣ я└п╬я─п╪п╟я┌п╟"
 
 msgid "Edit &extension file"
-msgstr "Файл рас&ширений"
+msgstr "п╓п╟п╧п╩ я─п╟я│&я┬п╦я─п╣п╫п╦п╧"
 
 msgid "Edit &menu file"
-msgstr "Файл &меню"
-
-msgid "Edit edi&tor menu file"
-msgstr "Правка меню р&едактора"
-
-msgid "Edit &syntax file"
-msgstr "Фа&йл синтаксиса"
+msgstr "п╓п╟п╧п╩ &п╪п╣п╫я▌"
 
 msgid "&Configuration..."
-msgstr "&Конфигурация..."
+msgstr "&п п╬п╫я└п╦пЁя┐я─п╟я├п╦я▐..."
 
 msgid "&Layout..."
-msgstr "&Внешний вид..."
+msgstr "&п▓п╫п╣я┬п╫п╦п╧ п╡п╦п╢..."
 
 msgid "c&Onfirmation..."
-msgstr "&Подтверждение..."
+msgstr "&п÷п╬п╢я┌п╡п╣я─п╤п╢п╣п╫п╦п╣..."
 
 msgid "&Display bits..."
-msgstr "&Биты символов..."
+msgstr "&п▒п╦я┌я▀ я│п╦п╪п╡п╬п╩п╬п╡..."
 
 msgid "learn &Keys..."
-msgstr "&Распознавание клавиш..."
+msgstr "&п═п╟я│п©п╬п╥п╫п╟п╡п╟п╫п╦п╣ п╨п╩п╟п╡п╦я┬..."
 
 msgid "&Virtual FS..."
-msgstr "Виртуальные &ФС..."
+msgstr "п▓п╦я─я┌я┐п╟п╩я▄п╫я▀п╣ &п╓п║..."
 
 msgid "&Save setup"
-msgstr "&Сохранить настройки"
+msgstr "&п║п╬я┘я─п╟п╫п╦я┌я▄ п╫п╟я│я┌я─п╬п╧п╨п╦"
 
 msgid " &Above "
-msgstr " Верхняя "
+msgstr " п▓п╣я─я┘п╫я▐я▐ "
 
 msgid " &Left "
-msgstr " &Левая панель "
+msgstr " &п⌡п╣п╡п╟я▐ п©п╟п╫п╣п╩я▄ "
 
 msgid " &File "
-msgstr " &Файл "
+msgstr " &п╓п╟п╧п╩ "
 
 msgid " &Command "
-msgstr " &Команда "
+msgstr " &п п╬п╪п╟п╫п╢п╟ "
 
 msgid " &Options "
-msgstr " &Настройки "
+msgstr " &п²п╟я│я┌я─п╬п╧п╨п╦ "
 
 msgid " &Below "
-msgstr " Нижняя "
+msgstr " п²п╦п╤п╫я▐я▐ "
 
 msgid " &Right "
-msgstr " &Правая панель "
+msgstr " &п÷я─п╟п╡п╟я▐ п©п╟п╫п╣п╩я▄ "
 
 msgid " Information "
-msgstr " Информация "
+msgstr " п≤п╫я└п╬я─п╪п╟я├п╦я▐ "
 
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
@@ -2343,29 +2398,52 @@ msgid ""
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
-" Использование опции быстрой перезагрузки может не отразить     \n"
-" текущего содержимого каталога. В этом случае требуется вручную \n"
-" перезагрузить каталог. Для дополнительной информации смотрите  \n"
-" руководство (man)."
+" п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ п╬п©я├п╦п╦ п╠я▀я│я┌я─п╬п╧ п©п╣я─п╣п╥п╟пЁя─я┐п╥п╨п╦ п╪п╬п╤п╣я┌ п╫п╣ п╬я┌я─п╟п╥п╦я┌я▄     \n"
+" я┌п╣п╨я┐я┴п╣пЁп╬ я│п╬п╢п╣я─п╤п╦п╪п╬пЁп╬ п╨п╟я┌п╟п╩п╬пЁп╟. п▓ я█я┌п╬п╪ я│п╩я┐я┤п╟п╣ я┌я─п╣п╠я┐п╣я┌я│я▐ п╡я─я┐я┤п╫я┐я▌ \n"
+" п©п╣я─п╣п╥п╟пЁя─я┐п╥п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ. п■п╩я▐ п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫п╬п╧ п╦п╫я└п╬я─п╪п╟я├п╦п╦ я│п╪п╬я┌я─п╦я┌п╣  \n"
+" я─я┐п╨п╬п╡п╬п╢я│я┌п╡п╬ (man)."
 
 msgid "Menu"
-msgstr "Меню"
+msgstr "п°п╣п╫я▌"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "Переменная среды TERM не определена!\n"
+msgstr "п÷п╣я─п╣п╪п╣п╫п╫п╟я▐ я│я─п╣п╢я▀ TERM п╫п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╟!\n"
+
+msgid "&Fix it"
+msgstr "&п≤я│п©я─п╟п╡п╦я┌я▄"
+
+msgid "don't ask again"
+msgstr "п╠п╬п╩я▄я┬п╣ п╫п╣ я│п©я─п╟я┬п╦п╡п╟я┌я▄"
+
+msgid ""
+"Chosen display charset (Settings->Display bits)\n"
+"or source codeset (in mcedit ctrl-t) \n"
+"does not match one set via locale. \n"
+"Set correct codeset manually or press <<Fix it>> \n"
+"to set locale default.\n"
+"\n"
+"Or set 'don't ask again' and press <<Skip>>"
+msgstr ""
+"п п╬п╢п╦я─п╬п╡п╨п╟ п╡я▀п╡п╬п╢п╟ (п²п╟я│я┌я─п╬п╧п╨п╦->п▒п╦я┌я▀ я│п╦п╪п╡п╬п╩п╬п╡)\n"
+"п╦п╩п╦ п╨п╬п╢п╦я─п╬п╡п╨п╟ п╦я│я┌п╬я┤п╫п╦п╨п╟ (ctrl-t п╡ я─п╣п╢п╟п╨я┌п╬я─п╣)\n"
+"п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ я┌п╣п╨я┐я┴п╣п╧ п╩п╬п╨п╟п╩п╦.\n"
+"п■п╩я▐ п╟п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╬пЁп╬ я─п╟п╥я─п╣я┬п╣п╫п╦я▐ п©я─п╬п╠п╩п╣п╪я▀ \n"
+"п╫п╟п╤п╪п╦я┌п╣ <<п≤я│п©я─п╟п╡п╦я┌я▄>>\n"
+"п≤п╩п╦ п©п╬п╪п╣я┌я▄я┌п╣ \"п╠п╬п╩я▄я┬п╣ п╫п╣ я│п©я─п╟я┬п╦п╡п╟я┌я▄\"\n"
+"п╦ п╫п╟п╤п╪п╦я┌п╣ <<п÷я─п╬п©я┐я│я┌п╦я┌я▄>>"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "GNU Midnight Commander, версия %s\n"
+msgstr "GNU Midnight Commander, п╡п╣я─я│п╦я▐ %s\n"
 
 msgid "[flags] [this_dir] [other_panel_dir]\n"
-msgstr "[флаги] [этот_каталог] [каталог_другой_панели]\n"
+msgstr "[я└п╩п╟пЁп╦] [я█я┌п╬я┌_п╨п╟я┌п╟п╩п╬пЁ] [п╨п╟я┌п╟п╩п╬пЁ_п╢я─я┐пЁп╬п╧_п©п╟п╫п╣п╩п╦]\n"
 
 msgid "+number"
-msgstr "+число"
+msgstr "+я┤п╦я│п╩п╬"
 
 msgid "Set initial line number for the internal editor"
-msgstr "Задать начальную строку для встроенного редактора"
+msgstr "п≈п╟п╢п╟я┌я▄ п╫п╟я┤п╟п╩я▄п╫я┐я▌ я│я┌я─п╬п╨я┐ п╢п╩я▐ п╡я│я┌я─п╬п╣п╫п╫п╬пЁп╬ я─п╣п╢п╟п╨я┌п╬я─п╟"
 
 msgid ""
 "\n"
@@ -2373,8 +2451,8 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
-"по адресу mc-devel@gnome.org\n"
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п©п╬я│я▀п╩п╟п╧я┌п╣ п╩я▌п╠я▀п╣ я│п╬п╬п╠я┴п╣п╫п╦я▐ п╬п╠ п╬я┬п╦п╠п╨п╟я┘ (п╡п╨п╩я▌я┤п╟я▐ п╡я▀п╡п╬п╢ 'mc -V')\n"
+"п©п╬ п╟п╢я─п╣я│я┐ mc-devel@gnome.org\n"
 
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
@@ -2387,7 +2465,23 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                 errdhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
-"   Editor:       editnormal, editbold, editmarked\n"
+"   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
+"                 editlinestate\n"
+msgstr ""
+"--colors {п п⌡п╝п╖п∙п▓п·п∙ п║п⌡п·п▓п·}={п╒п∙п п║п╒},{п╓п·п²}\n"
+"\n"
+"{п╒п∙п п║п╒} п╦ {п╓п·п²} п╪п╬п╤п╫п╬ п╬п©я┐я│я┌п╦я┌я▄, я┤я┌п╬п╠я▀ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╥п╫п╟я┤п╣п╫п╦я▐ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌\n"
+"\n"
+"п п╩я▌я┤п╣п╡я▀п╣ я│п╩п╬п╡п╟:\n"
+"   п·п╠я┬п╦п╣:              errors, reverse, gauge, input, viewunderline\n"
+"   п·я┌п╬п╠я─п╟п╤п╣п╫п╦п╣ я└п╟п╧п╩п╬п╡: normal, selected, marked, markselect\n"
+"   п■п╦п╟п╩п╬пЁп╦:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
+"                       errdhotfocus\n"
+"   п°п╣п╫я▌:               menu, menuhot, menusel, menuhotsel\n"
+"   п═п╣п╢п╟п╨я┌п╬я─:           editnormal, editbold, editmarked, editwhitespace,\n"
+"                       editlinestate\n"
+
+msgid ""
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 "   File types:   directory, executable, link, stalelink, device, special, "
 "core\n"
@@ -2398,253 +2492,248 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
-"\n"
-"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значения по умолчанию\n"
-"\n"
-"Ключевые слова:\n"
-"   Обшие:              errors, reverse, gauge, input\n"
-"   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus\n"
-"   Меню:               menu, menuhot, menusel, menuhotsel\n"
-"   Справка:            helpnormal, helpitalic, helplink, helpslink\n"
-"   Типы файлов:        directory, executable, link, stalelink, device, "
+"   п║п©я─п╟п╡п╨п╟:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
+"   п╒п╦п©я▀ я└п╟п╧п╩п╬п╡:        directory, executable, link, stalelink, device, "
 "special, core\n"
 "\n"
-"Цвета:\n"
+"п╕п╡п╣я┌п╟:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, white\n"
 "\n"
 
 msgid "Displays this help message"
-msgstr "Показать это справочное сообщение"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я█я┌п╬ я│п©я─п╟п╡п╬я┤п╫п╬п╣ я│п╬п╬п╠я┴п╣п╫п╦п╣"
 
 msgid "Displays the current version"
-msgstr "Показать текущую версию"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я┌п╣п╨я┐я┴я┐я▌ п╡п╣я─я│п╦я▌"
 
 msgid "Forces xterm features"
-msgstr "Подразумевать свойства xterm"
+msgstr "п÷п╬п╢я─п╟п╥я┐п╪п╣п╡п╟я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ xterm"
 
 msgid "Disable mouse support in text version"
-msgstr "Отключить поддержку мыши в текстовой версии"
+msgstr "п·я┌п╨п╩я▌я┤п╦я┌я▄ п©п╬п╢п╢п╣я─п╤п╨я┐ п╪я▀я┬п╦ п╡ я┌п╣п╨я│я┌п╬п╡п╬п╧ п╡п╣я─я│п╦п╦"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Пытаться использовать termcap вместо terminfo"
+msgstr "п÷я▀я┌п╟я┌я▄я│я▐ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ termcap п╡п╪п╣я│я┌п╬ terminfo"
 
 msgid "Resets soft keys on HP terminals"
-msgstr "Сбросить программные клавиши на терминалах HP"
+msgstr "п║п╠я─п╬я│п╦я┌я▄ п©я─п╬пЁя─п╟п╪п╪п╫я▀п╣ п╨п╩п╟п╡п╦я┬п╦ п╫п╟ я┌п╣я─п╪п╦п╫п╟п╩п╟я┘ HP"
 
 msgid "To run on slow terminals"
-msgstr "Подразумевать медленный терминал"
+msgstr "п÷п╬п╢я─п╟п╥я┐п╪п╣п╡п╟я┌я▄ п╪п╣п╢п╩п╣п╫п╫я▀п╧ я┌п╣я─п╪п╦п╫п╟п╩"
 
 msgid "Use stickchars to draw"
-msgstr "Использовать псевдографику для рисования"
+msgstr "п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п©я│п╣п╡п╢п╬пЁя─п╟я└п╦п╨я┐ п╢п╩я▐ я─п╦я│п╬п╡п╟п╫п╦я▐"
 
 msgid "Requests to run in black and white"
-msgstr "Принудительно установить черно-белый режим"
+msgstr "п÷я─п╦п╫я┐п╢п╦я┌п╣п╩я▄п╫п╬ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ я┤п╣я─п╫п╬-п╠п╣п╩я▀п╧ я─п╣п╤п╦п╪"
 
 msgid "Request to run in color mode"
-msgstr "Принудительно установить цветной режим"
+msgstr "п÷я─п╦п╫я┐п╢п╦я┌п╣п╩я▄п╫п╬ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ я├п╡п╣я┌п╫п╬п╧ я─п╣п╤п╦п╪"
 
 msgid "Specifies a color configuration"
-msgstr "Определить настройки цветов"
+msgstr "п·п©я─п╣п╢п╣п╩п╦я┌я▄ п╫п╟я│я┌я─п╬п╧п╨п╦ я├п╡п╣я┌п╬п╡"
 
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "Показать справку, как изменить цветовую схему"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я│п©я─п╟п╡п╨я┐, п╨п╟п╨ п╦п╥п╪п╣п╫п╦я┌я▄ я├п╡п╣я┌п╬п╡я┐я▌ я│я┘п╣п╪я┐"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Записывать диалог с FTP в заданный файл"
+msgstr "п≈п╟п©п╦я│я▀п╡п╟я┌я▄ п╢п╦п╟п╩п╬пЁ я│ FTP п╡ п╥п╟п╢п╟п╫п╫я▀п╧ я└п╟п╧п╩"
 
 msgid "Set debug level"
-msgstr "Установить уровень отладки"
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ я┐я─п╬п╡п╣п╫я▄ п╬я┌п╩п╟п╢п╨п╦"
 
 msgid "Print data directory"
-msgstr "Распечатать имя каталога для данных"
+msgstr "п═п╟я│п©п╣я┤п╟я┌п╟я┌я▄ п╦п╪я▐ п╨п╟я┌п╟п╩п╬пЁп╟ п╢п╩я▐ п╢п╟п╫п╫я▀я┘"
 
 msgid "Print last working directory to specified file"
-msgstr "Записать последний рабочий каталог в указанный файл"
+msgstr "п≈п╟п©п╦я│п╟я┌я▄ п©п╬я│п╩п╣п╢п╫п╦п╧ я─п╟п╠п╬я┤п╦п╧ п╨п╟я┌п╟п╩п╬пЁ п╡ я┐п╨п╟п╥п╟п╫п╫я▀п╧ я└п╟п╧п╩"
 
 msgid "Enables subshell support (default)"
-msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
+msgstr "п▓п╨п╩я▌я┤п╦я┌я▄ п©п╬п╢п╢п╣я─п╤п╨я┐ п╡я│я┌я─п╬п╣п╫п╫п╬п╧ п╨п╬п╪п╟п╫п╢п╫п╬п╧ п╬п╠п╬п╩п╬я┤п╨п╦ (п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌)"
 
 msgid "Disables subshell support"
-msgstr "Отключить поддержку встроенной командной оболочки"
+msgstr "п·я┌п╨п╩я▌я┤п╦я┌я▄ п©п╬п╢п╢п╣я─п╤п╨я┐ п╡я│я┌я─п╬п╣п╫п╫п╬п╧ п╨п╬п╪п╟п╫п╢п╫п╬п╧ п╬п╠п╬п╩п╬я┤п╨п╦"
 
 msgid "Launches the file viewer on a file"
-msgstr "Просматривать файл"
+msgstr "п÷я─п╬я│п╪п╟я┌я─п╦п╡п╟я┌я▄ я└п╟п╧п╩"
 
 msgid "Edits one file"
-msgstr "Редактировать файл"
+msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟я┌я▄ я└п╟п╧п╩"
+
+#, c-format
+msgid "Cannot create %s directory"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\""
 
 msgid "safe de&Lete"
-msgstr "Безопасное &удаление"
+msgstr "п▒п╣п╥п╬п©п╟я│п╫п╬п╣ &я┐п╢п╟п╩п╣п╫п╦п╣"
 
 msgid "cd follows lin&Ks"
-msgstr "Смена &каталога по ссылкам"
+msgstr "п║п╪п╣п╫п╟ &п╨п╟я┌п╟п╩п╬пЁп╟ п©п╬ я│я│я▀п╩п╨п╟п╪"
 
 msgid "L&ynx-like motion"
-msgstr "Навигация в стиле l&ynx"
+msgstr "п²п╟п╡п╦пЁп╟я├п╦я▐ п╡ я│я┌п╦п╩п╣ l&ynx"
 
 msgid "rotatin&G dash"
-msgstr "Вращающийся &индикатор"
+msgstr "п▓я─п╟я┴п╟я▌я┴п╦п╧я│я▐ &п╦п╫п╢п╦п╨п╟я┌п╬я─"
 
 msgid "co&Mplete: show all"
-msgstr "Допо&лнение: показывать все"
+msgstr "п■п╬п©п╬&п╩п╫п╣п╫п╦п╣: п©п╬п╨п╟п╥я▀п╡п╟я┌я▄ п╡я│я▒"
 
 msgid "&Use internal view"
-msgstr "Встро&енный просмотр"
+msgstr "п▓я│я┌я─п╬&п╣п╫п╫я▀п╧ п©я─п╬я│п╪п╬я┌я─"
 
 msgid "use internal ed&It"
-msgstr "Встроенный &редактор"
+msgstr "п▓я│я┌я─п╬п╣п╫п╫я▀п╧ &я─п╣п╢п╟п╨я┌п╬я─"
 
 msgid "auto m&Enus"
-msgstr "Автоматические &меню"
+msgstr "п░п╡я┌п╬п╪п╟я┌п╦я┤п╣я│п╨п╦п╣ &п╪п╣п╫я▌"
 
 msgid "&Auto save setup"
-msgstr "&Автосохранение настроек"
+msgstr "&п░п╡я┌п╬я│п╬я┘я─п╟п╫п╣п╫п╦п╣ п╫п╟я│я┌я─п╬п╣п╨"
 
 msgid "shell &Patterns"
-msgstr "Образцы в стиле &shell"
+msgstr "п·п╠я─п╟п╥я├я▀ п╡ я│я┌п╦п╩п╣ &shell"
 
 msgid "Compute &Totals"
-msgstr "Подсчитывать об&щий размер"
+msgstr "п÷п╬п╢я│я┤п╦я┌я▀п╡п╟я┌я▄ п╬п╠&я┴п╦п╧ я─п╟п╥п╪п╣я─"
 
 msgid "&Verbose operation"
-msgstr "Детали операци&й"
+msgstr "п■п╣я┌п╟п╩п╦ п╬п©п╣я─п╟я├п╦&п╧"
 
 msgid "Mkdir autoname"
-msgstr ""
+msgstr "п░п╡я┌п╬п╦п╪я▐ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 msgid "&Fast dir reload"
-msgstr "&Быстрая загрузка каталога"
+msgstr "&п▒я▀я│я┌я─п╟я▐ п╥п╟пЁя─я┐п╥п╨п╟ п╨п╟я┌п╟п╩п╬пЁп╟"
 
 msgid "mi&X all files"
-msgstr "Смешивать &файлы/каталоги"
+msgstr "п║п╪п╣я┬п╦п╡п╟я┌я▄ &я└п╟п╧п╩я▀/п╨п╟я┌п╟п╩п╬пЁп╦"
 
 msgid "&Drop down menus"
-msgstr "Выпадение мен&ю при вызове"
+msgstr "п▓я▀п©п╟п╢п╣п╫п╦п╣ п╪п╣п╫&я▌ п©я─п╦ п╡я▀п╥п╬п╡п╣"
 
 msgid "ma&Rk moves down"
-msgstr "&Отметка перемещает курсор"
+msgstr "&п·я┌п╪п╣я┌п╨п╟ п©п╣я─п╣п╪п╣я┴п╟п╣я┌ п╨я┐я─я│п╬я─"
 
 msgid "show &Hidden files"
-msgstr "Показывать скр&ытые файлы"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ я│п╨я─&я▀я┌я▀п╣ я└п╟п╧п╩я▀"
 
 msgid "show &Backup files"
-msgstr "Показывать ре&зервные файлы"
+msgstr "п÷п╬п╨п╟п╥я▀п╡п╟я┌я▄ я─п╣&п╥п╣я─п╡п╫я▀п╣ я└п╟п╧п╩я▀"
 
 msgid "&Never"
-msgstr "&Никогда"
+msgstr "&п²п╦п╨п╬пЁп╢п╟"
 
 msgid "on dumb &Terminals"
-msgstr "На &тупых терминалах"
+msgstr "п²п╟ &я┌я┐п©я▀я┘ я┌п╣я─п╪п╦п╫п╟п╩п╟я┘"
 
 msgid "Alwa&ys"
-msgstr "&Всегда"
+msgstr "&п▓я│п╣пЁп╢п╟"
 
 msgid " Panel options "
-msgstr " Настройки панелей "
+msgstr " п²п╟я│я┌я─п╬п╧п╨п╦ п©п╟п╫п╣п╩п╣п╧ "
 
 msgid " Pause after run... "
-msgstr " Пауза после выполнения... "
+msgstr " п÷п╟я┐п╥п╟ п©п╬я│п╩п╣ п╡я▀п©п╬п╩п╫п╣п╫п╦я▐... "
 
 msgid "Configure options"
-msgstr "Параметры конфигурации"
+msgstr "п÷п╟я─п╟п╪п╣я┌я─я▀ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╦"
 
 msgid "&Add new"
-msgstr "&Добавить"
+msgstr "&п■п╬п╠п╟п╡п╦я┌я▄"
 
 msgid "External panelize"
-msgstr "Внешняя панелизация"
+msgstr "п▓п╫п╣я┬п╫я▐я▐ п©п╟п╫п╣п╩п╦п╥п╟я├п╦я▐"
 
 msgid "Command"
-msgstr "Команда"
+msgstr "п п╬п╪п╟п╫п╢п╟"
 
 msgid "Other command"
-msgstr "Новая команда"
+msgstr "п²п╬п╡п╟я▐ п╨п╬п╪п╟п╫п╢п╟"
 
 msgid " Add to external panelize "
-msgstr " Добавить в список команд "
+msgstr " п■п╬п╠п╟п╡п╦я┌я▄ п╡ я│п©п╦я│п╬п╨ п╨п╬п╪п╟п╫п╢ "
 
 msgid " Enter command label: "
-msgstr " Введите название команды: "
+msgstr " п▓п╡п╣п╢п╦я┌п╣ п╫п╟п╥п╡п╟п╫п╦п╣ п╨п╬п╪п╟п╫п╢я▀: "
 
 msgid " Cannot run external panelize in a non-local directory "
-msgstr " Невозможно выполнить эту команду, находясь не в локальном каталоге "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ я█я┌я┐ п╨п╬п╪п╟п╫п╢я┐, п╫п╟я┘п╬п╢я▐я│я▄ п╫п╣ п╡ п╩п╬п╨п╟п╩я▄п╫п╬п╪ п╨п╟я┌п╟п╩п╬пЁп╣ "
 
 msgid "Find rejects after patching"
-msgstr "Найти корректуры, отвергнутые командой patch"
+msgstr "п²п╟п╧я┌п╦ п╨п╬я─я─п╣п╨я┌я┐я─я▀, п╬я┌п╡п╣я─пЁп╫я┐я┌я▀п╣ п╨п╬п╪п╟п╫п╢п╬п╧ patch"
 
 msgid "Find *.orig after patching"
-msgstr "Найти оригиналы (*.orig) после команды patch"
+msgstr "п²п╟п╧я┌п╦ п╬я─п╦пЁп╦п╫п╟п╩я▀ (*.orig) п©п╬я│п╩п╣ п╨п╬п╪п╟п╫п╢я▀ patch"
 
 msgid "Find SUID and SGID programs"
-msgstr "Найти программы с установленными SUID/SGID битами"
+msgstr "п²п╟п╧я┌п╦ п©я─п╬пЁя─п╟п╪п╪я▀ я│ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╫я▀п╪п╦ SUID/SGID п╠п╦я┌п╟п╪п╦"
 
 msgid "Cannot invoke command."
-msgstr "Невозможно выполнить команду."
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╡я▀п©п╬п╩п╫п╦я┌я▄ п╨п╬п╪п╟п╫п╢я┐."
 
 msgid "Pipe close failed"
-msgstr "Сбой закрытия канала"
+msgstr "п║п╠п╬п╧ п╥п╟п╨я─я▀я┌п╦я▐ п╨п╟п╫п╟п╩п╟"
 
 msgid "missing argument"
-msgstr "отсутствует аргумент"
+msgstr "п╬я┌я│я┐я┌я│я┌п╡я┐п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌"
 
 msgid "unknown option"
-msgstr "неизвестный ключ"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ п╨п╩я▌я┤"
 
 msgid "invalid numeric value"
-msgstr "неверное числовое значение"
+msgstr "п╫п╣п╡п╣я─п╫п╬п╣ я┤п╦я│п╩п╬п╡п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 msgid "Show this help message"
-msgstr "Показать это сообщение помощи"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я█я┌п╬ я│п╬п╬п╠я┴п╣п╫п╦п╣ п©п╬п╪п╬я┴п╦"
 
 msgid "Display brief usage message"
-msgstr "Показать краткую инструкцию"
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ п╨я─п╟я┌п╨я┐я▌ п╦п╫я│я┌я─я┐п╨я├п╦я▌"
 
 msgid "ARG"
-msgstr "АРГ"
+msgstr "п░п═п⌠"
 
 #, c-format
 msgid "Usage:"
-msgstr "Используйте:"
+msgstr "п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣:"
 
 msgid "[dev]"
 msgstr "[dev]"
 
 msgid "UP--DIR"
-msgstr "-ВВЕРХ-"
+msgstr "-п▓п▓п∙п═п╔-"
 
 msgid "SYMLINK"
-msgstr "ССЫЛКА"
+msgstr "п║п║п╚п⌡п п░"
 
 msgid "SUB-DIR"
-msgstr "ПОД-КАТ"
+msgstr "п÷п·п■-п п░п╒"
 
 msgid "Size"
-msgstr "Размер"
+msgstr "п═п╟п╥п╪п╣я─"
 
 msgid "MTime"
-msgstr "Время правки"
+msgstr "п▓я─п╣п╪я▐ п©я─п╟п╡п╨п╦"
 
 msgid "ATime"
-msgstr "Посл. доступ"
+msgstr "п÷п╬я│п╩. п╢п╬я│я┌я┐п©"
 
 msgid "CTime"
-msgstr "Изм. узла"
+msgstr "п≤п╥п╪. я┐п╥п╩п╟"
 
 msgid "Permission"
-msgstr "Атрибуты"
+msgstr "п░я┌я─п╦п╠я┐я┌я▀"
 
 msgid "Perm"
-msgstr "Права"
+msgstr "п÷я─п╟п╡п╟"
 
 msgid "Nl"
-msgstr "Кс"
+msgstr "п я│"
 
 msgid "Inode"
-msgstr "Узел"
+msgstr "пёп╥п╣п╩"
 
 msgid "UID"
 msgstr "UID"
@@ -2653,273 +2742,296 @@ msgid "GID"
 msgstr "GID"
 
 msgid "Owner"
-msgstr "Владелец"
+msgstr "п▓п╩п╟п╢п╣п╩п╣я├"
 
 msgid "Group"
-msgstr "Группа"
+msgstr "п⌠я─я┐п©п©п╟"
 
 msgid "<readlink failed>"
-msgstr "<сбой чтения ссылки>"
+msgstr "<я│п╠п╬п╧ я┤я┌п╣п╫п╦я▐ я│я│я▀п╩п╨п╦>"
 
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] "%s байт"
-msgstr[1] "%s байта"
-msgstr[2] "%s байт"
+msgstr[0] "%s п╠п╟п╧я┌"
+msgstr[1] "%s п╠п╟п╧я┌п╟"
+msgstr[2] "%s п╠п╟п╧я┌"
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] "%s в %d файле"
-msgstr[1] "%s в %d файлах"
-msgstr[2] "%s в %d файлах"
+msgstr[0] "%s п╡ %d я└п╟п╧п╩п╣"
+msgstr[1] "%s п╡ %d я└п╟п╧п╩п╟я┘"
+msgstr[2] "%s п╡ %d я└п╟п╧п╩п╟я┘"
 
 msgid "Unknown tag on display format: "
-msgstr "Неизвестный тег в формате отображения: "
+msgstr "п²п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╣пЁ п╡ я└п╬я─п╪п╟я┌п╣ п╬я┌п╬п╠я─п╟п╤п╣п╫п╦я▐: "
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Пользовательский формат выглядит неверным, возвращаю к стандартному."
+msgstr "п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╦п╧ я└п╬я─п╪п╟я┌ п╡я▀пЁп╩я▐п╢п╦я┌ п╫п╣п╡п╣я─п╫я▀п╪, п╡п╬п╥п╡я─п╟я┴п╟я▌ п╨ я│я┌п╟п╫п╢п╟я─я┌п╫п╬п╪я┐."
 
 msgid " Do you really want to execute? "
-msgstr " Вы действительно хотите выполнить это? "
+msgstr " п▓я▀ п╢п╣п╧я│я┌п╡п╦я┌п╣п╩я▄п╫п╬ я┘п╬я┌п╦я┌п╣ п╡я▀п©п╬п╩п╫п╦я┌я▄ я█я┌п╬? "
 
 msgid "View"
-msgstr "Просмотр"
+msgstr "п÷я─п╬я│п╪п╬я┌я─"
 
 msgid "Edit"
-msgstr "Правка"
+msgstr "п÷я─п╟п╡п╨п╟"
 
 msgid "RenMov"
-msgstr "Перемес"
+msgstr "п÷п╣я─п╣п╪п╣я│"
 
 msgid "Mkdir"
-msgstr "НвКтлог"
+msgstr "п²п╡п я┌п╩п╬пЁ"
 
-msgid " Choose input codepage "
-msgstr " Выберите кодировку ввода "
+msgid " Not implemented yet "
+msgstr " п÷п╬п╨п╟ п╫п╣ я─п╣п╟п╩п╦п╥п╬п╡п╟п╫п╬ "
+
+msgid " Num of replace tokens not equal to num of found tokens "
+msgstr ""
+" п п╬п╩п╦я┤п╣я│я┌п╡п╬ я┬п╟п╠п╩п╬п╫п╫я▀я┘ п©п╬п╩п╣п╧ п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ п╨п╬п╩п╦я┤п╣я│я┌п╡я┐ п©п╬п╩п╣п╧ п╢п╩я▐ п╥п╟п╪п╣п╫я▀ "
+
+#, c-format
+msgid " Invalid token number %d "
+msgstr " п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┬п╟п╠п╩п╬п╫ я├п╣п╩п╦ %d "
+
+msgid "Normal"
+msgstr "п·п╠я▀я┤п╫я▀п╧"
+
+msgid "&Regular expression"
+msgstr "&п═п╣пЁя┐п╩я▐я─п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣"
+
+msgid "Hexadecimal"
+msgstr "п╗п╣я│я┌п╫п╟п╢я├п╟я┌п╣я─п╦я┤п╫я▀п╧"
+
+msgid "Wildcard search"
+msgstr "п÷п╬ я┬п╟п╠п╩п╬п╫я┐"
+
+msgid "Choose codepage"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╨п╬п╢п╦я─п╬п╡п╨я┐"
 
 msgid "-  < No translation >"
-msgstr "-  < Без перекодировки >"
-
-msgid ""
-"To use this feature select your codepage in\n"
-"Setup / Display Bits dialog!\n"
-"Do not forget to save options."
-msgstr ""
-"Чтобы использовать перекодировку, установите\n"
-"кодировку в меню \"Настройки / Биты символов\"...!\n"
-"Не забудьте сохранить настройки."
+msgstr "-  < п▒п╣п╥ п©п╣я─п╣п╨п╬п╢п╦я─п╬п╡п╨п╦ >"
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Размер экрана %dx%d не поддерживается.\n"
-"Проверьте переменную окружения TERM.\n"
+"п═п╟п╥п╪п╣я─ я█п╨я─п╟п╫п╟ %dx%d п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐.\n"
+"п÷я─п╬п╡п╣я─я▄я┌п╣ п©п╣я─п╣п╪п╣п╫п╫я┐я▌ п╬п╨я─я┐п╤п╣п╫п╦я▐ TERM.\n"
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
-"Другой Midnight Commander уже работает\n"
-"на этом терминале. Встроенная командная\n"
-"оболочка будет выключена."
+"п■я─я┐пЁп╬п╧ Midnight Commander я┐п╤п╣ я─п╟п╠п╬я┌п╟п╣я┌\n"
+"п╫п╟ я█я┌п╬п╪ я┌п╣я─п╪п╦п╫п╟п╩п╣. п▓я│я┌я─п╬п╣п╫п╫п╟я▐ п╨п╬п╪п╟п╫п╢п╫п╟я▐\n"
+"п╬п╠п╬п╩п╬я┤п╨п╟ п╠я┐п╢п╣я┌ п╡я▀п╨п╩я▌я┤п╣п╫п╟."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Невозможно открыть именованный канал %s\n"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╧ п╨п╟п╫п╟п╩ %s\n"
 
 msgid " The shell is still active. Quit anyway? "
-msgstr " Оболочка все еще активна. Все равно выйти? "
+msgstr " п·п╠п╬п╩п╬я┤п╨п╟ п╡я│я▒ п╣я┴п╣ п╟п╨я┌п╦п╡п╫п╟. п▓я│я▒ я─п╟п╡п╫п╬ п╡я▀п╧я┌п╦? "
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Внимание: невозможно перейти в %s. \n"
+msgstr "п▓п╫п╦п╪п╟п╫п╦п╣: п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╣я─п╣п╧я┌п╦ п╡ %s. \n"
 
 msgid "With builtin Editor\n"
-msgstr "Со встроенным редактором\n"
+msgstr "п║п╬ п╡я│я┌я─п╬п╣п╫п╫я▀п╪ я─п╣п╢п╟п╨я┌п╬я─п╬п╪\n"
 
 msgid "Using system-installed S-Lang library"
-msgstr "С установленной в системе библиотекой S-Lang"
+msgstr "п║ я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╫п╬п╧ п╡ я│п╦я│я┌п╣п╪п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╬п╧ S-Lang"
 
 msgid "with terminfo database"
-msgstr "с базой данных terminfo"
+msgstr "я│ п╠п╟п╥п╬п╧ п╢п╟п╫п╫я▀я┘ terminfo"
 
 msgid "Using the ncurses library"
-msgstr "С библиотекой ncurses"
+msgstr "п║ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╬п╧ ncurses"
+
+msgid "Using the ncursesw library"
+msgstr "п║ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╬п╧ ncursesw"
 
 msgid "With optional subshell support"
-msgstr "С опциональной поддержкой внутренней командной оболочки"
+msgstr "п║ п╬п©я├п╦п╬п╫п╟п╩я▄п╫п╬п╧ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╡п╫я┐я┌я─п╣п╫п╫п╣п╧ п╨п╬п╪п╟п╫п╢п╫п╬п╧ п╬п╠п╬п╩п╬я┤п╨п╦"
 
 msgid "With subshell support as default"
-msgstr "C поддержкой внутренней командной оболочки"
+msgstr "C п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╡п╫я┐я┌я─п╣п╫п╫п╣п╧ п╨п╬п╪п╟п╫п╢п╫п╬п╧ п╬п╠п╬п╩п╬я┤п╨п╦"
 
 msgid "With support for background operations\n"
-msgstr "С поддержкой фоновых операций\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ я└п╬п╫п╬п╡я▀я┘ п╬п©п╣я─п╟я├п╦п╧\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "С поддержкой мыши в xterm и консоли Linux\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╪я▀я┬п╦ п╡ xterm п╦ п╨п╬п╫я│п╬п╩п╦ Linux\n"
 
 msgid "With mouse support on xterm\n"
-msgstr "С поддержкой мыши в xterm\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╪я▀я┬п╦ п╡ xterm\n"
 
 msgid "With support for X11 events\n"
-msgstr "С поддержкой событий X11\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ я│п╬п╠я▀я┌п╦п╧ X11\n"
 
 msgid "With internationalization support\n"
-msgstr "С поддержкой интернационализации\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╦п╫я┌п╣я─п╫п╟я├п╦п╬п╫п╟п╩п╦п╥п╟я├п╦п╦\n"
 
 msgid "With multiple codepages support\n"
-msgstr "С поддержкой многих кодировок\n"
+msgstr "п║ п©п╬п╢п╢п╣я─п╤п╨п╬п╧ п╪п╫п╬пЁп╦я┘ п╨п╬п╢п╦я─п╬п╡п╬п╨\n"
 
 #, c-format
 msgid "Virtual File System:"
-msgstr "Виртуальная файловая система:"
+msgstr "п▓п╦я─я┌я┐п╟п╩я▄п╫п╟я▐ я└п╟п╧п╩п╬п╡п╟я▐ я│п╦я│я┌п╣п╪п╟:"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Невозможно открыть файл %s для записи:\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s п╢п╩я▐ п╥п╟п©п╦я│п╦:\n"
 "%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr " Копировать каталог \"%s\" в:"
+msgstr " п п╬п©п╦я─п╬п╡п╟я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" п╡:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
-msgstr " Переместить каталог \"%s\" в:"
+msgstr " п÷п╣я─п╣п╪п╣я│я┌п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ \"%s\" п╡:"
 
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
-" Невозможно получить свойства места назначения \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ п╪п╣я│я┌п╟ п╫п╟п╥п╫п╟я┤п╣п╫п╦я▐ \n"
 " %s "
 
 #, c-format
 msgid "  Delete %s?  "
-msgstr "  Удалить %s?  "
+msgstr "  пёп╢п╟п╩п╦я┌я▄ %s?  "
 
 msgid "Static"
-msgstr "Статич"
+msgstr "п║я┌п╟я┌п╦я┤"
 
 msgid "Dynamc"
-msgstr "Динамч"
+msgstr "п■п╦п╫п╟п╪я┤"
 
 msgid "Rescan"
-msgstr "Пересм."
+msgstr "п÷п╣я─п╣я│п╪."
 
 msgid "Forget"
-msgstr "Забыть"
+msgstr "п≈п╟п╠я▀я┌я▄"
 
 msgid "Rmdir"
-msgstr "УдКтлог"
+msgstr "пёп╢п я┌п╩п╬пЁ"
 
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Невозможно писать в файл %s:\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╦я│п╟я┌я▄ п╡ я└п╟п╧п╩ %s:\n"
 "%s\n"
 
 msgid " Format error on file Extensions File "
-msgstr " Ошибка в формате файла Расширений файлов "
+msgstr " п·я┬п╦п╠п╨п╟ п╡ я└п╬я─п╪п╟я┌п╣ я└п╟п╧п╩п╟ п═п╟я│я┬п╦я─п╣п╫п╦п╧ я└п╟п╧п╩п╬п╡ "
 
 #, c-format
 msgid " The %%var macro has no default "
-msgstr " Макрос %%var не имеет значения по умолчанию "
+msgstr " п°п╟п╨я─п╬я│ %%var п╫п╣ п╦п╪п╣п╣я┌ п╥п╫п╟я┤п╣п╫п╦я▐ п©п╬ я┐п╪п╬п╩я┤п╟п╫п╦я▌ "
 
 #, c-format
 msgid " The %%var macro has no variable "
-msgstr " Макрос %%var не имеет переменной "
+msgstr " п°п╟п╨я─п╬я│ %%var п╫п╣ п╦п╪п╣п╣я┌ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ "
 
 msgid " Debug "
-msgstr " Отладка "
+msgstr " п·я┌п╩п╟п╢п╨п╟ "
 
 msgid " ERROR: "
-msgstr " ОШИБКА: "
+msgstr " п·п╗п≤п▒п п░: "
 
 msgid " True:  "
-msgstr " Истина: "
+msgstr " п≤я│я┌п╦п╫п╟: "
 
 msgid " False: "
-msgstr " Ложь: "
+msgstr " п⌡п╬п╤я▄: "
 
 msgid " Warning -- ignoring file "
-msgstr " Предупреждение - файл игнорируется "
+msgstr " п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣ - я└п╟п╧п╩ п╦пЁп╫п╬я─п╦я─я┐п╣я┌я│я▐ "
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
-"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"или доступен другим на запись. Использование такого файла неприемлемо\n"
-"c точки зрения безопасности."
+"п╓п╟п╧п╩ %s п╡ я┌п╣п╨я┐я┴п╣п╪ п╨п╟я┌п╟п╩п╬пЁп╣ п╫п╣ п©я─п╦п╫п╟п╢п╩п╣п╤п╦я┌ п╫п╦ root'я┐, п╫п╦ п▓п╟п╪,\n"
+"п╦п╩п╦ п╢п╬я│я┌я┐п©п╣п╫ п╢я─я┐пЁп╦п╪ п╫п╟ п╥п╟п©п╦я│я▄. п≤я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ я┌п╟п╨п╬пЁп╬ я└п╟п╧п╩п╟ п╫п╣п©я─п╦п╣п╪п╩п╣п╪п╬\n"
+"c я┌п╬я┤п╨п╦ п╥я─п╣п╫п╦я▐ п╠п╣п╥п╬п©п╟я│п╫п╬я│я┌п╦."
 
 #, c-format
 msgid " No suitable entries found in %s "
-msgstr " Не найдено подходящих элементов в %s"
+msgstr " п²п╣ п╫п╟п╧п╢п╣п╫п╬ п©п╬п╢я┘п╬п╢я▐я┴п╦я┘ я█п╩п╣п╪п╣п╫я┌п╬п╡ п╡ %s"
 
 msgid " User menu "
-msgstr " Меню пользователя "
+msgstr " п°п╣п╫я▌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ "
 
-msgid "%b %e %H:%M"
+msgid "%b %d %H:%M"
 msgstr "%b %e %H:%M"
+
+msgid "%b %d %Y"
+msgstr "%b %e %Y"
 
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
+msgid "%b %e %H:%M"
+msgstr "%b %e %H:%M"
+
 #, c-format
 msgid "%s is not a directory\n"
-msgstr "%s не является каталогом\n"
+msgstr "%s п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╨п╟я┌п╟п╩п╬пЁп╬п╪\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr "Вы не владеете каталогом %s\n"
+msgstr "п▓я▀ п╫п╣ п╡п╩п╟п╢п╣п╣я┌п╣ п╨п╟я┌п╟п╩п╬пЁп╬п╪ %s\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr "Невозможно установить правильные права доступа к каталогу %s\n"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п©я─п╟п╡п╟ п╢п╬я│я┌я┐п©п╟ п╨ п╨п╟я┌п╟п╩п╬пЁя┐ %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Невозможно создать временный каталог %s: %s\n"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╡я─п╣п╪п╣п╫п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr "Временные файлы будут создаваться в каталоге %s\n"
+msgstr "п▓я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ п╠я┐п╢я┐я┌ я│п╬п╥п╢п╟п╡п╟я┌я▄я│я▐ п╡ п╨п╟я┌п╟п╩п╬пЁп╣ %s\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr "Временные файлы не будут создаваться\n"
+msgstr "п▓я─п╣п╪п╣п╫п╫я▀п╣ я└п╟п╧п╩я▀ п╫п╣ п╠я┐п╢я┐я┌ я│п╬п╥п╢п╟п╡п╟я┌я▄я│я▐\n"
 
 msgid " Pipe failed "
-msgstr " Сбой канала "
+msgstr " п║п╠п╬п╧ п╨п╟п╫п╟п╩п╟ "
 
 msgid " Dup failed "
-msgstr " Сбой дублирования дескриптора "
+msgstr " п║п╠п╬п╧ п╢я┐п╠п╩п╦я─п╬п╡п╟п╫п╦я▐ п╢п╣я│п╨я─п╦п©я┌п╬я─п╟ "
 
 msgid " Cannot spawn child process "
-msgstr " Невозможно породить дочерний процесс "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬я─п╬п╢п╦я┌я▄ п╢п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│ "
 
 msgid "Empty output from child filter"
-msgstr "Дочерний фильтр не вернул данных"
+msgstr "п■п╬я┤п╣я─п╫п╦п╧ я└п╦п╩я▄я┌я─ п╫п╣ п╡п╣я─п╫я┐п╩ п╢п╟п╫п╫я▀я┘"
 
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
 " %s "
 msgstr ""
-" Невозможно открыть \"%s\"\n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ \"%s\"\n"
 " %s "
 
 #, c-format
@@ -2927,31 +3039,31 @@ msgid ""
 " Cannot stat \"%s\"\n"
 " %s "
 msgstr ""
-" Невозможно получить свойства \"%s\"\n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©п╬п╩я┐я┤п╦я┌я▄ я│п╡п╬п╧я│я┌п╡п╟ \"%s\"\n"
 " %s "
 
 msgid " Cannot view: not a regular file "
-msgstr " Просмотр невозможен: необычный файл "
+msgstr " п÷я─п╬я│п╪п╬я┌я─ п╫п╣п╡п╬п╥п╪п╬п╤п╣п╫: п╫п╣п╬п╠я▀я┤п╫я▀п╧ я└п╟п╧п╩ "
 
 #, c-format
 msgid "File: %s"
-msgstr "Файл: %s"
+msgstr "п╓п╟п╧п╩: %s"
 
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Смещение 0x%08lx"
+msgstr "п║п╪п╣я┴п╣п╫п╦п╣ 0x%08lx"
 
 #, c-format
 msgid "Line %lu Col %lu"
-msgstr "Строка %lu Позиция %lu"
+msgstr "п║я┌я─п╬п╨п╟ %lu п÷п╬п╥п╦я├п╦я▐ %lu"
 
 #, c-format
 msgid "%s bytes"
-msgstr "%s байт"
+msgstr "%s п╠п╟п╧я┌"
 
 #, c-format
 msgid ">= %s bytes"
-msgstr ">= %s байт"
+msgstr ">= %s п╠п╟п╧я┌"
 
 #, c-format
 msgid ""
@@ -2959,210 +3071,157 @@ msgid ""
 " %s \n"
 " Data may have been written or not. "
 msgstr ""
-"Ошибка при закрытии файла: \n"
+"п·я┬п╦п╠п╨п╟ п©я─п╦ п╥п╟п╨я─я▀я┌п╦п╦ я└п╟п╧п╩п╟: \n"
 " %s \n"
-"Данные могли быть как записаны так и нет."
+"п■п╟п╫п╫я▀п╣ п╪п╬пЁп╩п╦ п╠я▀я┌я▄ п╨п╟п╨ п╥п╟п©п╦я│п╟п╫я▀ я┌п╟п╨ п╦ п╫п╣я┌."
 
 #, c-format
 msgid ""
 " Cannot save file: \n"
 " %s "
 msgstr ""
-" Невозможно сохранить файл: \n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩: \n"
 " %s "
 
-msgid "Invalid hex search expression"
-msgstr "Неверное выражение для поиска байтов"
-
-msgid " Invalid regular expression "
-msgstr " Неверное регулярное выражение "
-
 #, c-format
 msgid ""
-" The current line number is %d.\n"
+" The current line number is %lu.\n"
 " Enter the new line number:"
 msgstr ""
-" Номер текущей строки %d.\n"
-" Введите номер новой строки:"
+" п²п╬п╪п╣я─ я┌п╣п╨я┐я┴п╣п╧ я│я┌я─п╬п╨п╦ %lu.\n"
+" п▓п╡п╣п╢п╦я┌п╣ п╫п╬п╪п╣я─ п╫п╬п╡п╬п╧ я│я┌я─п╬п╨п╦:"
 
-#, c-format
-msgid ""
-" The current address is 0x%lx.\n"
-" Enter the new address:"
-msgstr ""
-" Текущий адрес - 0x%lx.\n"
-" Введите новый адрес:"
+msgid " The current address is 0x%08"
+msgstr "  п╒п╣п╨я┐я┴п╦п╧ п╟п╢я─п╣я│ - 0x%08"
 
 msgid " Goto Address "
-msgstr " Перейти на адрес "
+msgstr " п÷п╣я─п╣п╧я┌п╦ п╫п╟ п╟п╢я─п╣я│ "
 
 msgid " Invalid address "
-msgstr " Неверный адрес "
-
-msgid " Enter regexp:"
-msgstr " Введите регулярное выражение:"
+msgstr " п²п╣п╡п╣я─п╫я▀п╧ п╟п╢я─п╣я│ "
 
 msgid "ButtonBar|Help"
-msgstr "Нижняя панель|Помощ"
+msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п÷п╬п╪п╬я┴"
 
 msgid "ButtonBar|Quit"
-msgstr "Нижняя панель|Выход"
-
-msgid "ButtonBar|Ascii"
-msgstr "Нижняя панель|Ascii"
-
-msgid "ButtonBar|Hex"
-msgstr "Нижняя панель|Hex"
-
-msgid "ButtonBar|Goto"
-msgstr "Нижняя панель|Переход"
-
-msgid "ButtonBar|Line"
-msgstr "Нижняя панель|Строка"
+msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п▓я▀я┘п╬п╢"
 
 msgid "ButtonBar|View"
-msgstr "Нижняя панель|Вид"
+msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п▓п╦п╢"
 
 msgid "ButtonBar|Edit"
-msgstr "Нижняя панель|Правка"
+msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п÷я─п╟п╡п╨п╟"
 
 msgid "ButtonBar|Save"
-msgstr "Нижняя панель|Сохранить"
-
-msgid "ButtonBar|UnWrap"
-msgstr "Нижняя панель|НеПеренос."
-
-msgid "ButtonBar|Wrap"
-msgstr "Нижняя панель|Перенос."
-
-msgid "ButtonBar|RxSrch"
-msgstr "Нижняя панель|RxПоиск"
-
-msgid "ButtonBar|HxSrch"
-msgstr "Нижняя панель|HxПоиск"
-
-msgid "ButtonBar|Search"
-msgstr "Нижняя панель|Поиск"
-
-msgid "ButtonBar|Raw"
-msgstr "Нижняя панель|Как есть"
-
-msgid "ButtonBar|Parse"
-msgstr "ButtonBar|Фильтр"
-
-msgid "ButtonBar|Unform"
-msgstr "Нижняя панель|НеФормат."
-
-msgid "ButtonBar|Format"
-msgstr "Нижняя панель|Формат."
+msgstr "п²п╦п╤п╫я▐я▐ п©п╟п╫п╣п╩я▄|п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 msgid " History "
-msgstr "История команд"
+msgstr "п≤я│я┌п╬я─п╦я▐ п╨п╬п╪п╟п╫п╢"
 
 msgid "Function key 1"
-msgstr "Функциональная 1 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 1 "
 
 msgid "Function key 2"
-msgstr "Функциональная 2 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 2 "
 
 msgid "Function key 3"
-msgstr "Функциональная 3 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 3 "
 
 msgid "Function key 4"
-msgstr "Функциональная 4 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 4 "
 
 msgid "Function key 5"
-msgstr "Функциональная 5 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 5 "
 
 msgid "Function key 6"
-msgstr "Функциональная 6 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 6 "
 
 msgid "Function key 7"
-msgstr "Функциональная 7 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 7 "
 
 msgid "Function key 8"
-msgstr "Функциональная 8 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 8 "
 
 msgid "Function key 9"
-msgstr "Функциональная 9 "
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 9 "
 
 msgid "Function key 10"
-msgstr "Функциональная 10"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 10"
 
 msgid "Function key 11"
-msgstr "Функциональная 11"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 11"
 
 msgid "Function key 12"
-msgstr "Функциональная 12"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 12"
 
 msgid "Function key 13"
-msgstr "Функциональная 13"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 13"
 
 msgid "Function key 14"
-msgstr "Функциональная 14"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 14"
 
 msgid "Function key 15"
-msgstr "Функциональная 15"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 15"
 
 msgid "Function key 16"
-msgstr "Функциональная 16"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 16"
 
 msgid "Function key 17"
-msgstr "Функциональная 17"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 17"
 
 msgid "Function key 18"
-msgstr "Функциональная 18"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 18"
 
 msgid "Function key 19"
-msgstr "Функциональная 19"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 19"
 
 msgid "Function key 20"
-msgstr "Функциональная 20"
+msgstr "п╓я┐п╫п╨я├п╦п╬п╫п╟п╩я▄п╫п╟я▐ 20"
 
 msgid "Backspace key"
-msgstr "Клавиша Backspace"
+msgstr "п п╩п╟п╡п╦я┬п╟ Backspace"
 
 msgid "End key"
-msgstr "Клавиша End      "
+msgstr "п п╩п╟п╡п╦я┬п╟ End      "
 
 msgid "Up arrow key"
-msgstr "Стрелка вверх    "
+msgstr "п║я┌я─п╣п╩п╨п╟ п╡п╡п╣я─я┘    "
 
 msgid "Down arrow key"
-msgstr "Стрелка вниз     "
+msgstr "п║я┌я─п╣п╩п╨п╟ п╡п╫п╦п╥     "
 
 msgid "Left arrow key"
-msgstr "Стрелка влево    "
+msgstr "п║я┌я─п╣п╩п╨п╟ п╡п╩п╣п╡п╬    "
 
 msgid "Right arrow key"
-msgstr "Стрелка вправо   "
+msgstr "п║я┌я─п╣п╩п╨п╟ п╡п©я─п╟п╡п╬   "
 
 msgid "Home key"
-msgstr "Клавиша Home     "
+msgstr "п п╩п╟п╡п╦я┬п╟ Home     "
 
 msgid "Page Down key"
-msgstr "Клавиша Page Down"
+msgstr "п п╩п╟п╡п╦я┬п╟ Page Down"
 
 msgid "Page Up key"
-msgstr "Клавиша Page Up  "
+msgstr "п п╩п╟п╡п╦я┬п╟ Page Up  "
 
 msgid "Insert key"
-msgstr "Клавиша Insert   "
+msgstr "п п╩п╟п╡п╦я┬п╟ Insert   "
 
 msgid "Delete key"
-msgstr "Клавиша Delete   "
+msgstr "п п╩п╟п╡п╦я┬п╟ Delete   "
 
 msgid "Completion/M-tab"
-msgstr "Завершение/M-Tab "
+msgstr "п≈п╟п╡п╣я─я┬п╣п╫п╦п╣/M-Tab "
 
 msgid "+ on keypad"
-msgstr "+ доп.клавиатуры "
+msgstr "+ п╢п╬п©.п╨п╩п╟п╡п╦п╟я┌я┐я─я▀ "
 
 msgid "- on keypad"
-msgstr "- доп.клавиатуры "
+msgstr "- п╢п╬п©.п╨п╩п╟п╡п╦п╟я┌я┐я─я▀ "
 
 msgid "* on keypad"
-msgstr "* доп.клавиатуры "
+msgstr "* п╢п╬п©.п╨п╩п╟п╡п╦п╟я┌я┐я─я▀ "
 
 msgid "Left arrow keypad"
 msgstr "Left arrow keypad"
@@ -3204,14 +3263,14 @@ msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
 
 msgid "Background process:"
-msgstr "Фоновый процесс:"
+msgstr "п╓п╬п╫п╬п╡я▀п╧ п©я─п╬я├п╣я│я│:"
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
-"Невозможно открыть cpio-архив\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ cpio-п╟я─я┘п╦п╡\n"
 "%s"
 
 #, c-format
@@ -3219,7 +3278,7 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
-"Преждевременный конец архива cpio\n"
+"п÷я─п╣п╤п╢п╣п╡я─п╣п╪п╣п╫п╫я▀п╧ п╨п╬п╫п╣я├ п╟я─я┘п╦п╡п╟ cpio\n"
 "%s"
 
 #, c-format
@@ -3227,7 +3286,7 @@ msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
-"Поврежденный заголовок cpio обнаружен в\n"
+"п÷п╬п╡я─п╣п╤п╢п╣п╫п╫я▀п╧ п╥п╟пЁп╬п╩п╬п╡п╬п╨ cpio п╬п╠п╫п╟я─я┐п╤п╣п╫ п╡\n"
 "%s"
 
 #, c-format
@@ -3237,255 +3296,255 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Несогласованная жесткая ссылка\n"
+"п²п╣я│п╬пЁп╩п╟я│п╬п╡п╟п╫п╫п╟я▐ п╤п╣я│я┌п╨п╟я▐ я│я│я▀п╩п╨п╟\n"
 "%s\n"
-"в архиве cpio\n"
+"п╡ п╟я─я┘п╦п╡п╣ cpio\n"
 "%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s содержит сдвоенные элементы! Пропущено!"
+msgstr "%s я│п╬п╢п╣я─п╤п╦я┌ я│п╢п╡п╬п╣п╫п╫я▀п╣ я█п╩п╣п╪п╣п╫я┌я▀! п÷я─п╬п©я┐я┴п╣п╫п╬!"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Неожиданный конец файла\n"
+"п²п╣п╬п╤п╦п╢п╟п╫п╫я▀п╧ п╨п╬п╫п╣я├ я└п╟п╧п╩п╟\n"
 "%s"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr "Кэш каталога устарел для %s"
+msgstr "п я█я┬ п╨п╟я┌п╟п╩п╬пЁп╟ я┐я│я┌п╟я─п╣п╩ п╢п╩я▐ %s"
 
 msgid "Starting linear transfer..."
-msgstr "Запуск линейной передачи..."
+msgstr "п≈п╟п©я┐я│п╨ п╩п╦п╫п╣п╧п╫п╬п╧ п©п╣я─п╣п╢п╟я┤п╦..."
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
-msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
+msgstr "%s: %s: %s %3d%% (%lu п╠п╟п╧я┌ п©п╣я─п╣п╫п╣я│п╣п╫п╬)"
 
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
-msgstr "%s: %s: %s %lu байт перенесено"
+msgstr "%s: %s: %s %lu п╠п╟п╧я┌ п©п╣я─п╣п╫п╣я│п╣п╫п╬"
 
 msgid "Getting file"
-msgstr "Получение файла"
+msgstr "п÷п╬п╩я┐я┤п╣п╫п╦п╣ я└п╟п╧п╩п╟"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
-"Невозможно открыть %s-архив\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ %s-п╟я─я┘п╦п╡\n"
 "%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Несогласованный архив extfs"
+msgstr "п²п╣я│п╬пЁп╩п╟я│п╬п╡п╟п╫п╫я▀п╧ п╟я─я┘п╦п╡ extfs"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: отсоединение от %s"
+msgstr "fish: п╬я┌я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ п╬я┌ %s"
 
 msgid "fish: Waiting for initial line..."
-msgstr "fish: ожидается начальная строка..."
+msgstr "fish: п╬п╤п╦п╢п╟п╣я┌я│я▐ п╫п╟я┤п╟п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Извините, сейчас невозможно создать авторизованные паролем соединения."
+msgstr "п≤п╥п╡п╦п╫п╦я┌п╣, я│п╣п╧я┤п╟я│ п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ п╟п╡я┌п╬я─п╦п╥п╬п╡п╟п╫п╫я▀п╣ п©п╟я─п╬п╩п╣п╪ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐."
 
 msgid " fish: Password required for "
-msgstr "fish: требуется пароль для "
+msgstr "fish: я┌я─п╣п╠я┐п╣я┌я│я▐ п©п╟я─п╬п╩я▄ п╢п╩я▐ "
 
 msgid "fish: Sending password..."
-msgstr "fish: посылается пароль..."
+msgstr "fish: п©п╬я│я▀п╩п╟п╣я┌я│я▐ п©п╟я─п╬п╩я▄..."
 
 msgid "fish: Sending initial line..."
-msgstr "fish: посылается начальная строка..."
+msgstr "fish: п©п╬я│я▀п╩п╟п╣я┌я│я▐ п╫п╟я┤п╟п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: версия подтверждения связи..."
+msgstr "fish: п╡п╣я─я│п╦я▐ п©п╬п╢я┌п╡п╣я─п╤п╢п╣п╫п╦я▐ я│п╡я▐п╥п╦..."
 
 msgid "fish: Setting up current directory..."
-msgstr "fish: устанавливается текущий каталог..."
+msgstr "fish: я┐я│я┌п╟п╫п╟п╡п╩п╦п╡п╟п╣я┌я│я▐ я┌п╣п╨я┐я┴п╦п╧ п╨п╟я┌п╟п╩п╬пЁ..."
 
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: соединение успешно, персональный каталог %s."
+msgstr "fish: я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я┐я│п©п╣я┬п╫п╬, п©п╣я─я│п╬п╫п╟п╩я▄п╫я▀п╧ п╨п╟я┌п╟п╩п╬пЁ %s."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: чтение каталога %s..."
+msgstr "fish: я┤я┌п╣п╫п╦п╣ п╨п╟я┌п╟п╩п╬пЁп╟ %s..."
 
 #, c-format
 msgid "%s: done."
-msgstr "%s: готово."
+msgstr "%s: пЁп╬я┌п╬п╡п╬."
 
 #, c-format
 msgid "%s: failure"
-msgstr "%s: ошибка"
+msgstr "%s: п╬я┬п╦п╠п╨п╟"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: запись %s: посылается команда..."
+msgstr "fish: п╥п╟п©п╦я│я▄ %s: п©п╬я│я▀п╩п╟п╣я┌я│я▐ п╨п╬п╪п╟п╫п╢п╟..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: сбой локального чтения, посылаются нули"
+msgstr "fish: я│п╠п╬п╧ п╩п╬п╨п╟п╩я▄п╫п╬пЁп╬ я┤я┌п╣п╫п╦я▐, п©п╬я│я▀п╩п╟я▌я┌я│я▐ п╫я┐п╩п╦"
 
 #, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: запись %s %d (%lu)"
+msgstr "fish: п╥п╟п©п╦я│я▄ %s %d (%lu)"
 
 msgid "zeros"
-msgstr "нули"
+msgstr "п╫я┐п╩п╦"
 
 msgid "Aborting transfer..."
-msgstr "Прерывание передачи..."
+msgstr "п÷я─п╣я─я▀п╡п╟п╫п╦п╣ п©п╣я─п╣п╢п╟я┤п╦..."
 
 msgid "Error reported after abort."
-msgstr "Отмечена ошибка после прерывания."
+msgstr "п·я┌п╪п╣я┤п╣п╫п╟ п╬я┬п╦п╠п╨п╟ п©п╬я│п╩п╣ п©я─п╣я─я▀п╡п╟п╫п╦я▐."
 
 msgid "Aborted transfer would be successful."
-msgstr "Передача успешно прервана."
+msgstr "п÷п╣я─п╣п╢п╟я┤п╟ я┐я│п©п╣я┬п╫п╬ п©я─п╣я─п╡п╟п╫п╟."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: отсоединение от %s"
+msgstr "ftpfs: п╬я┌я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ п╬я┌ %s"
 
 msgid " FTP: Password required for "
-msgstr " FTP: требуется пароль для "
+msgstr " FTP: я┌я─п╣п╠я┐п╣я┌я│я▐ п©п╟я─п╬п╩я▄ п╢п╩я▐ "
 
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: посылается имя пользователя"
+msgstr "ftpfs: п©п╬я│я▀п╩п╟п╣я┌я│я▐ п╦п╪я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 msgid "ftpfs: sending user password"
-msgstr "ftpfs: посылается пароль пользователя"
+msgstr "ftpfs: п©п╬я│я▀п╩п╟п╣я┌я│я▐ п©п╟я─п╬п╩я▄ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP: Tребуется счет для пользователя %s"
+msgstr "FTP: Tя─п╣п╠я┐п╣я┌я│я▐ я│я┤п╣я┌ п╢п╩я▐ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ %s"
 
 msgid "Account:"
-msgstr "Счет:"
+msgstr "п║я┤п╣я┌:"
 
 msgid "ftpfs: sending user account"
-msgstr "ftpfs: посылается счет пользователя"
+msgstr "ftpfs: п©п╬я│я▀п╩п╟п╣я┌я│я▐ я│я┤п╣я┌ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐"
 
 msgid "ftpfs: logged in"
-msgstr "ftpfs: зарегистрирован"
+msgstr "ftpfs: п╥п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫"
 
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: ошибка регистрации пользователя %s "
+msgstr "ftpfs: п╬я┬п╦п╠п╨п╟ я─п╣пЁп╦я│я┌я─п╟я├п╦п╦ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▐ %s "
 
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: неверное имя системы."
+msgstr "ftpfs: п╫п╣п╡п╣я─п╫п╬п╣ п╦п╪я▐ я│п╦я│я┌п╣п╪я▀."
 
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: неверный адрес системы."
+msgstr "ftpfs: п╫п╣п╡п╣я─п╫я▀п╧ п╟п╢я─п╣я│ я│п╦я│я┌п╣п╪я▀."
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: осуществляется соединение с %s"
+msgstr "ftpfs: п╬я│я┐я┴п╣я│я┌п╡п╩я▐п╣я┌я│я▐ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ я│ %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: соединение прервано пользователем"
+msgstr "ftpfs: я│п╬п╣п╢п╦п╫п╣п╫п╦п╣ п©я─п╣я─п╡п╟п╫п╬ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩п╣п╪"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: сбой соединения с сервером: %s"
+msgstr "ftpfs: я│п╠п╬п╧ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐ я│ я│п╣я─п╡п╣я─п╬п╪: %s"
 
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
+msgstr "п·п╤п╦п╢п╟п╫п╦п╣ п©п╬п╡я┌п╬я─п╟ п©п╬п©я▀я┌п╨п╦... %d (Control-C п╢п╩я▐ п╬я┌п╪п╣п╫я▀)"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: невозможно установить пассивный режим"
+msgstr "ftpfs: п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ п©п╟я│я│п╦п╡п╫я▀п╧ я─п╣п╤п╦п╪"
 
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: прерывание передачи."
+msgstr "ftpfs: п©я─п╣я─я▀п╡п╟п╫п╦п╣ п©п╣я─п╣п╢п╟я┤п╦."
 
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr "ftpfs: ошибка прерывания: %s"
+msgstr "ftpfs: п╬я┬п╦п╠п╨п╟ п©я─п╣я─я▀п╡п╟п╫п╦я▐: %s"
 
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: сбой прерывания"
+msgstr "ftpfs: я│п╠п╬п╧ п©я─п╣я─я▀п╡п╟п╫п╦я▐"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
+msgstr "ftpfs: п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╦п╥п╪п╣п╫п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я─п╟п╠п╬я┤п╦п╧ п╨п╟я┌п╟п╩п╬пЁ."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: невозможно распознать символическую ссылку"
+msgstr "ftpfs: п╫п╣п╡п╬п╥п╪п╬п╤п╫п╬ я─п╟я│п©п╬п╥п╫п╟я┌я▄ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨я┐я▌ я│я│я▀п╩п╨я┐"
 
 msgid "Resolving symlink..."
-msgstr "Распознается символическая ссылка..."
+msgstr "п═п╟я│п©п╬п╥п╫п╟п╣я┌я│я▐ я│п╦п╪п╡п╬п╩п╦я┤п╣я│п╨п╟я▐ я│я│я▀п╩п╨п╟..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: чтение каталога FTP %s... %s%s"
+msgstr "ftpfs: я┤я┌п╣п╫п╦п╣ п╨п╟я┌п╟п╩п╬пЁп╟ FTP %s... %s%s"
 
 msgid "(strict rfc959)"
-msgstr "(ограничение rfc959)"
+msgstr "(п╬пЁя─п╟п╫п╦я┤п╣п╫п╦п╣ rfc959)"
 
 msgid "(chdir first)"
-msgstr "(сначала chdir)"
+msgstr "(я│п╫п╟я┤п╟п╩п╟ chdir)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
+msgstr "ftpfs: п╬я┬п╦п╠п╨п╟; п╫п╣п╨я┐п╢п╟ п©п╣я─п╣п╧я┌п╦ п╫п╟ п╟п╡п╟я─п╦п╧п╫я▀п╧ я─п╣п╤п╦п╪"
 
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: запись файла %lu (%lu)"
+msgstr "ftpfs: п╥п╟п©п╦я│я▄ я└п╟п╧п╩п╟ %lu (%lu)"
 
 msgid ""
 "~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
-"Файл ~/.netrc имеет неверный режим доступа/владения.\n"
-"Удалите пароль или исправьте режим доступа/владения."
+"п╓п╟п╧п╩ ~/.netrc п╦п╪п╣п╣я┌ п╫п╣п╡п╣я─п╫я▀п╧ я─п╣п╤п╦п╪ п╢п╬я│я┌я┐п©п╟/п╡п╩п╟п╢п╣п╫п╦я▐.\n"
+"пёп╢п╟п╩п╦я┌п╣ п©п╟я─п╬п╩я▄ п╦п╩п╦ п╦я│п©я─п╟п╡я▄я┌п╣ я─п╣п╤п╦п╪ п╢п╬я│я┌я┐п©п╟/п╡п╩п╟п╢п╣п╫п╦я▐."
 
 msgid " MCFS "
 msgstr " MCFS "
 
 msgid " The server does not support this version "
-msgstr " Сервер не поддерживает данную версию "
+msgstr " п║п╣я─п╡п╣я─ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ п╢п╟п╫п╫я┐я▌ п╡п╣я─я│п╦я▌ "
 
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" Удаленный сервер запущен не на системном порту. \n"
-" Требуется пароль для входа в систему, но это может быть \n"
-" небезопасно для информации на удаленной стороне. Продолжать?\n"
+" пёп╢п╟п╩п╣п╫п╫я▀п╧ я│п╣я─п╡п╣я─ п╥п╟п©я┐я┴п╣п╫ п╫п╣ п╫п╟ я│п╦я│я┌п╣п╪п╫п╬п╪ п©п╬я─я┌я┐. \n"
+" п╒я─п╣п╠я┐п╣я┌я│я▐ п©п╟я─п╬п╩я▄ п╢п╩я▐ п╡я┘п╬п╢п╟ п╡ я│п╦я│я┌п╣п╪я┐, п╫п╬ я█я┌п╬ п╪п╬п╤п╣я┌ п╠я▀я┌я▄ \n"
+" п╫п╣п╠п╣п╥п╬п©п╟я│п╫п╬ п╢п╩я▐ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╫п╟ я┐п╢п╟п╩п╣п╫п╫п╬п╧ я│я┌п╬я─п╬п╫п╣. п÷я─п╬п╢п╬п╩п╤п╟я┌я▄?\n"
 
 msgid " MCFS Password required "
-msgstr " Требуется пароль MCFS "
+msgstr " п╒я─п╣п╠я┐п╣я┌я│я▐ п©п╟я─п╬п╩я▄ MCFS "
 
 msgid " Invalid password "
-msgstr " Неверный пароль "
+msgstr " п²п╣п╡п╣я─п╫я▀п╧ п©п╟я─п╬п╩я▄ "
 
 #, c-format
 msgid " Cannot locate hostname: %s "
-msgstr " Невозможно определить имя машины: %s"
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬п©я─п╣п╢п╣п╩п╦я┌я▄ п╦п╪я▐ п╪п╟я┬п╦п╫я▀: %s"
 
 #, c-format
 msgid " Cannot create socket: %s "
-msgstr " Невозможно создать сокет: %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╥п╢п╟я┌я▄ я│п╬п╨п╣я┌: %s "
 
 #, c-format
 msgid " Cannot connect to server: %s "
-msgstr "Невозможно соединиться с сервером: %s "
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ я│п╬п╣п╢п╦п╫п╦я┌я▄я│я▐ я│ я│п╣я─п╡п╣я─п╬п╪: %s "
 
 msgid " Too many open connections "
-msgstr " Слишком много открытых соединений "
+msgstr " п║п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ п╬я┌п╨я─я▀я┌я▀я┘ я│п╬п╣п╢п╦п╫п╣п╫п╦п╧ "
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Предупреждение: неправильная строка в %s:\n"
+"п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ п╡ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3493,7 +3552,7 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Предупреждение: неправильный флаг %c в %s:\n"
+"п÷я─п╣п╢я┐п©я─п╣п╤п╢п╣п╫п╦п╣: п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╩п╟пЁ %c п╡ %s:\n"
 "%s\n"
 
 #, c-format
@@ -3501,45 +3560,45 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" Сбой повторного соединения к %s\n"
+" п║п╠п╬п╧ п©п╬п╡я┌п╬я─п╫п╬пЁп╬ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐ п╨ %s\n"
 " "
 
 msgid " Authentication failed "
-msgstr " Сбой идентификации "
+msgstr " п║п╠п╬п╧ п╦п╢п╣п╫я┌п╦я└п╦п╨п╟я├п╦п╦ "
 
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " %s при создании каталога %s "
+msgstr " %s п©я─п╦ я│п╬п╥п╢п╟п╫п╦п╦ п╨п╟я┌п╟п╩п╬пЁп╟ %s "
 
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " %s при удалении каталога %s "
+msgstr " %s п©я─п╦ я┐п╢п╟п╩п╣п╫п╦п╦ п╨п╟я┌п╟п╩п╬пЁп╟ %s "
 
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s при открытии файла %s с удаленной машины "
+msgstr " %s п©я─п╦ п╬я┌п╨я─я▀я┌п╦п╦ я└п╟п╧п╩п╟ %s я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ п╪п╟я┬п╦п╫я▀ "
 
 #, c-format
 msgid " %s removing remote file %s "
-msgstr " %s при удалении файла %s с удаленной машины "
+msgstr " %s п©я─п╦ я┐п╢п╟п╩п╣п╫п╦п╦ я└п╟п╧п╩п╟ %s я│ я┐п╢п╟п╩п╣п╫п╫п╬п╧ п╪п╟я┬п╦п╫я▀ "
 
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s при переименовывании файлa\n"
+msgstr " %s п©я─п╦ п©п╣я─п╣п╦п╪п╣п╫п╬п╡я▀п╡п╟п╫п╦п╦ я└п╟п╧п╩a\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
-"Невозможно открыть tar-архив\n"
+"п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ tar-п╟я─я┘п╦п╡\n"
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Несогласованный архив tar"
+msgstr "п²п╣я│п╬пЁп╩п╟я│п╬п╡п╟п╫п╫я▀п╧ п╟я─я┘п╦п╡ tar"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Неожиданный конец архивного файла"
+msgstr "п²п╣п╬п╤п╦п╢п╟п╫п╫я▀п╧ п╨п╬п╫п╣я├ п╟я─я┘п╦п╡п╫п╬пЁп╬ я└п╟п╧п╩п╟"
 
 #, c-format
 msgid ""
@@ -3547,18 +3606,18 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-"Хмм,...\n"
+"п╔п╪п╪,...\n"
 "%s\n"
-"не похож на tar-архив."
+"п╫п╣ п©п╬я┘п╬п╤ п╫п╟ tar-п╟я─я┘п╦п╡."
 
 msgid " undelfs: error "
-msgstr " undelfs: ошибка "
+msgstr " undelfs: п╬я┬п╦п╠п╨п╟ "
 
 msgid " not enough memory "
-msgstr " недостаточно памяти "
+msgstr " п╫п╣п╢п╬я│я┌п╟я┌п╬я┤п╫п╬ п©п╟п╪я▐я┌п╦ "
 
 msgid " while allocating block buffer "
-msgstr " при получении блока буферов "
+msgstr " п©я─п╦ п©п╬п╩я┐я┤п╣п╫п╦п╦ п╠п╩п╬п╨п╟ п╠я┐я└п╣я─п╬п╡ "
 
 #, c-format
 msgid " open_inode_scan: %d "
@@ -3566,114 +3625,70 @@ msgstr " open_inode_scan: %d "
 
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " при начале сканирования узла %d "
+msgstr " п©я─п╦ п╫п╟я┤п╟п╩п╣ я│п╨п╟п╫п╦я─п╬п╡п╟п╫п╦я▐ я┐п╥п╩п╟ %d "
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
+msgstr "undelfs: п╥п╟пЁя─я┐п╥п╨п╟ п╦п╫я└п╬я─п╪п╟я├п╦п╦ п╬п╠ я┐п╢п╟п╩п╣п╫п╫я▀я┘ я└п╟п╧п╩п╟я┘ %d inodes"
 
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr " при вызове ext2_block_iterate %d "
+msgstr " п©я─п╦ п╡я▀п╥п╬п╡п╣ ext2_block_iterate %d "
 
 msgid " no more memory while reallocating array "
-msgstr " не хватило памяти при переоткрытии массива "
+msgstr " п╫п╣ я┘п╡п╟я┌п╦п╩п╬ п©п╟п╪я▐я┌п╦ п©я─п╦ п©п╣я─п╣п╬я┌п╨я─я▀я┌п╦п╦ п╪п╟я│я│п╦п╡п╟ "
 
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " при сканировании узла %d "
+msgstr " п©я─п╦ я│п╨п╟п╫п╦я─п╬п╡п╟п╫п╦п╦ я┐п╥п╩п╟ %d "
 
 msgid " Ext2lib error "
-msgstr " Сбой Ext2lib "
+msgstr " п║п╠п╬п╧ Ext2lib "
 
 #, c-format
 msgid " Cannot open file %s "
-msgstr " Невозможно открыть файл %s "
+msgstr " п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s "
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: чтение битовой карты узлов..."
+msgstr "undelfs: я┤я┌п╣п╫п╦п╣ п╠п╦я┌п╬п╡п╬п╧ п╨п╟я─я┌я▀ я┐п╥п╩п╬п╡..."
 
 #, c-format
 msgid ""
 " Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
-" Невозможно загрузить битовую карту узлов с:\n"
+" п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╥п╟пЁя─я┐п╥п╦я┌я▄ п╠п╦я┌п╬п╡я┐я▌ п╨п╟я─я┌я┐ я┐п╥п╩п╬п╡ я│:\n"
 " %s \n"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: чтение блока битовой карты..."
+msgstr "undelfs: я┤я┌п╣п╫п╦п╣ п╠п╩п╬п╨п╟ п╠п╦я┌п╬п╡п╬п╧ п╨п╟я─я┌я▀..."
 
 #, c-format
 msgid ""
 " Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
-"  Невозможно загрузить блок битовой карты с:\n"
+"  п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п╥п╟пЁя─я┐п╥п╦я┌я▄ п╠п╩п╬п╨ п╠п╦я┌п╬п╡п╬п╧ п╨п╟я─я┌я▀ я│:\n"
 " %s \n"
 
 msgid " vfs_info is not fs! "
-msgstr " vfs_info - не файловая система! "
+msgstr " vfs_info - п╫п╣ я└п╟п╧п╩п╬п╡п╟я▐ я│п╦я│я┌п╣п╪п╟! "
 
 msgid " You have to chdir to extract files first "
-msgstr " Вы должны сначала сменить каталог, чтобы извлечь файлы "
+msgstr " п▓я▀ п╢п╬п╩п╤п╫я▀ я│п╫п╟я┤п╟п╩п╟ я│п╪п╣п╫п╦я┌я▄ п╨п╟я┌п╟п╩п╬пЁ, я┤я┌п╬п╠я▀ п╦п╥п╡п╩п╣я┤я▄ я└п╟п╧п╩я▀ "
 
 msgid " while iterating over blocks "
-msgstr " при переборе блоков "
+msgstr " п©я─п╦ п©п╣я─п╣п╠п╬я─п╣ п╠п╩п╬п╨п╬п╡ "
 
 msgid "Cannot parse:"
-msgstr "Невозможно проанализировать:"
+msgstr "п²п╣п╡п╬п╥п╪п╬п╤п╫п╬ п©я─п╬п╟п╫п╟п╩п╦п╥п╦я─п╬п╡п╟я┌я▄:"
 
 msgid "More parsing errors will be ignored."
-msgstr "Остальные ошибки анализа будут проигнорированы."
+msgstr "п·я│я┌п╟п╩я▄п╫я▀п╣ п╬я┬п╦п╠п╨п╦ п╟п╫п╟п╩п╦п╥п╟ п╠я┐п╢я┐я┌ п©я─п╬п╦пЁп╫п╬я─п╦я─п╬п╡п╟п╫я▀."
 
 msgid "Internal error:"
-msgstr "Внутренняя ошибка:"
+msgstr "п▓п╫я┐я┌я─п╣п╫п╫я▐я▐ п╬я┬п╦п╠п╨п╟:"
 
 msgid "Changes to file lost"
-msgstr "Изменения для файла потеряны"
+msgstr "п≤п╥п╪п╣п╫п╣п╫п╦я▐ п╢п╩я▐ я└п╟п╧п╩п╟ п©п╬я┌п╣я─я▐п╫я▀"
 
-#~ msgid "Using included S-Lang library"
-#~ msgstr "С включенной библиотекой S-Lang"
-
-#~ msgid "with termcap database"
-#~ msgstr "с базой данных termcap"
-
-#~ msgid "&Home"
-#~ msgstr "&Персональный"
-
-#~ msgid "&Type"
-#~ msgstr "&Тип"
-
-#~ msgid "&Links"
-#~ msgstr "&Ссылки"
-
-#~ msgid "N&GID"
-#~ msgstr "N&GID"
-
-#~ msgid "N&UID"
-#~ msgstr "N&UID"
-
-#~ msgid "&Owner"
-#~ msgstr "&Владелец"
-
-#~ msgid "&Group"
-#~ msgstr "&Группа"
-
-#~ msgid "MC was unable to write ~/"
-#~ msgstr "MC не может писать в файл ~/,"
-
-#~ msgid " Notice "
-#~ msgstr " Предупреждение "
-
-#~ msgid ""
-#~ " The Midnight Commander configuration files \n"
-#~ " are now stored in the ~/.mc directory, the \n"
-#~ " files have been moved now\n"
-#~ msgstr ""
-#~ " Файлы конфигурации Midnight Commander \n"
-#~ " теперь хранятся в каталоге ~/.mc, старые \n"
-#~ " файлы сейчас туда перемещены\n"
-
-#~ msgid "%s bytes in %d files"
-#~ msgstr "%s байт в %d файлах"
