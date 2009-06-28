@@ -117,7 +117,8 @@ void widget_erase (Widget *w)
 void dlg_erase (Dlg_head *h)
 {
     int x, y;
-
+    if (h == NULL)
+	return;
     for (y = 0; y < h->lines; y++){
 	move (y+h->y, h->x);	/* FIXME: should test if ERR */
 	for (x = 0; x < h->cols; x++){

@@ -245,7 +245,7 @@ int drop_menus = 0;
 int skip_check_codeset = 0;
 
 /* The dialog handle for the main program */
-Dlg_head *midnight_dlg;
+Dlg_head *midnight_dlg = NULL;
 
 /* Subshell: if set, then the prompt was not saved on CONSOLE_SAVE */
 /* We need to paint it after CONSOLE_RESTORE, see: load_prompt */
@@ -1852,29 +1852,27 @@ do_nc (void)
     midnight_colors[2] = INPUT_COLOR;	/* HOT_NORMALC */
     midnight_colors[3] = NORMAL_COLOR;	/* HOT_FOCUSC */
 
-    midnight_dlg =
-	create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
-		    "[main]", NULL, DLG_WANT_IDLE);
 
-    /* Check if we were invoked as an editor or file viewer */
-    if (mc_maybe_editor_or_viewer ())
-	return;
+    midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
+			       "[main]", NULL, DLG_WANT_IDLE);
 
-    setup_mc ();
-
+    /* start check display_codepage and source_codepage */
     check_codeset();
 
-    setup_panels_and_run_mc ();
+    /* Check if we were invoked as an editor or file viewer */
+    if (!mc_maybe_editor_or_viewer ()) {
+	setup_mc ();
+	setup_panels_and_run_mc ();
 
-    /* Program end */
-    midnight_shutdown = 1;
+	/* Program end */
+	midnight_shutdown = 1;
 
-    /* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
-    if (last_wd_file && vfs_current_is_local ()) {
-	last_wd_string = g_strdup (current_panel->cwd);
+	/* destroy_dlg destroys even current_panel->cwd, so we have to save a copy :) */
+	if (last_wd_file && vfs_current_is_local ()) {
+	    last_wd_string = g_strdup (current_panel->cwd);
+	}
+	done_mc ();
     }
-    done_mc ();
-
     destroy_dlg (midnight_dlg);
     current_panel = 0;
     done_mc_profile ();
