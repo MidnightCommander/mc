@@ -2222,6 +2222,10 @@ void edit_mail_dialog (WEdit * edit)
 /* Word Completion */
 /*******************/
 
+static gboolean is_break_char(char c)
+{
+    return (isspace(c) || strchr("{}[]()<>=|/\\!?~'\",.;:#$%^&*", c));
+}
 
 /* find first character of current word */
 static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
@@ -2234,7 +2238,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 
     c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
 /* return if not at end or in word */
-    if (isspace (c) || c == '_')
+    if (is_break_char(c))
 	return 0;
 
 /* search start of word to be completed */
@@ -2246,7 +2250,7 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 	last = c;
 	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
 
-	if (isspace (c) || strchr("{}[]()<>=|/\\!?~'\",.;:#$%^&*", c)) {
+	if (is_break_char(c)) {
 /* return if word starts with digit */
 	    if (isdigit (last))
 		return 0;
