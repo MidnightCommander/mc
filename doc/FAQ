@@ -154,8 +154,8 @@ Frequently Asked Questions
    You need a POSIX (Unix compatible) operating system.  If you are
    running Windows, use Cygwin.
 
-   To compile any edition you need to have glib 2.x  installed.  
-   It's available at ftp://ftp.gtk.org/pub/gtk/. 
+   To compile any edition you need to have glib 2.x  installed.
+   It's available at ftp://ftp.gtk.org/pub/gtk/.
 
    If you want to use mouse on the Linux console you need the gpm daemon
    from ftp://ftp.systemy.it/pub/develop/.  You need nothing extra to
