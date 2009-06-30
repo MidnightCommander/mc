@@ -14,7 +14,7 @@ struct etags_hash_struct;
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 struct selection {
-    unsigned char *text;
+    gchar *text;
     int len;
 };
 
