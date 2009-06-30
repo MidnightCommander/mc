@@ -1437,7 +1437,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	/*returns negative on not found or error in pattern */
 
 	if (edit->search_start >= 0) {
-	    int i;
+	    guint i;
 
 	    edit->found_start = edit->search_start;
 	    i = edit->found_len = len;

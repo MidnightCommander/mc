@@ -890,7 +890,7 @@ int num_history_items_recorded = 60;
 GList *
 history_get (const char *input_name)
 {
-    int i;
+    size_t i;
     GList *hist = NULL;
     char *profile;
     mc_config_t *cfg;
@@ -912,7 +912,7 @@ history_get (const char *input_name)
 
     for (i = 0; i < keys_num; i++) {
 	char key_name[BUF_TINY];
-	g_snprintf (key_name, sizeof (key_name), "%d", i);
+	g_snprintf (key_name, sizeof (key_name), "%lu", (unsigned long)i);
 	this_entry = mc_config_get_string (cfg, input_name, key_name, "");
 
 	if (this_entry && *this_entry)

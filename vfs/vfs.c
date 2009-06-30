@@ -137,7 +137,7 @@ vfs_op (int handle)
     struct vfs_openfile *h;
 
     if (handle < VFS_FIRST_HANDLE ||
-        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        (guint)(handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
         return NULL;
 
     h = (struct vfs_openfile *) g_ptr_array_index (
@@ -157,7 +157,7 @@ vfs_info (int handle)
     struct vfs_openfile *h;
 
     if (handle < VFS_FIRST_HANDLE ||
-        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        (guint)(handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
         return NULL;
 
     h = (struct vfs_openfile *) g_ptr_array_index (
@@ -175,7 +175,7 @@ static inline void
 vfs_free_handle (int handle)
 {
     if (handle < VFS_FIRST_HANDLE ||
-        handle - VFS_FIRST_HANDLE >= vfs_openfiles->len)
+        (guint)(handle - VFS_FIRST_HANDLE) >= vfs_openfiles->len)
         return;
 
     g_ptr_array_index (vfs_openfiles, handle - VFS_FIRST_HANDLE) =

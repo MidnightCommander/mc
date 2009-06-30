@@ -283,8 +283,9 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
-    if ( option_line_state ) {
-        for (int i = 0; i < LINE_STATE_WIDTH; i++) {
+    if (option_line_state) {
+        int i;
+        for (i = 0; i < LINE_STATE_WIDTH; i++) {
             if ( status[i] == '\0' ) {
                 status[i] = ' ';
             }
