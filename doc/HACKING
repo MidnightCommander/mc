@@ -22,7 +22,7 @@ Gettext 0.11.5 and above
 Glib 2.6 and above (2.14 and higher is recommended)
 
 Full list of requirements you can see at:
-http://www.midnight-commander.org/wiki/en/doc/buildAndInstall/req
+http://www.midnight-commander.org/wiki/doc/buildAndInstall/req
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
