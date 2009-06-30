@@ -5,20 +5,21 @@ This document is a guide how to develop GNU Midnight Commander.  It's
 quite incomplete, but may be worth reading anyway.
 
 The document was written by Miguel de Icaza and reworked by Pavel
-Roskin.  Some parts were taken from the messages posted in the mailing
+Roskin and later from Patrick Winnertz.
+ Some parts were taken from the messages posted in the mailing
 lists.
 
 
-Compiling from CVS
+Compiling from GIT
 ==================
 
-To compile GNU Midnight commander from CVS, the following software is
+To compile GNU Midnight commander from GIT, the following software is
 required:
 
 Autoconf 2.52 and above (latest is recommended)
 Automake 1.5 and above (latest is recommended)
 Gettext 0.11.5 and above
-Glib 1.2.6 and above (2.x is recommended)
+Glib 2.x and above
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
@@ -44,17 +45,17 @@ used in the AM_GNU_GETTEXT_VERSION macro, which is 0.11.5.
 Working with GNU Midnight Commander
 ===================================
 
-Please use the CVS version.  It may be quite different from the released
-versions.  A lot of cleanup is going on.  The CVS version may be easier
+Please use the GIT version.  It may be quite different from the released
+versions.  A lot of cleanup is going on.  The GIT version may be easier
 to understand, in addition to the obvious fact that the merging is
-easier with the CVS version.
+easier with the GIT version.
 
-There are some tools in the maint directory on CVS.  They are not
+There are some tools in the maint directory on GIT.  They are not
 included with releases or snapshots.  You may be interested to look at
 them if you are going to work on the project for an extended period of
 time.  In particular, the release procedure is described there.
 
-In order to compile GNU Midnight Commander from a clean CVS checkout you
+In order to compile GNU Midnight Commander from a clean GIT checkout you
 should use autogen.sh instead of configure.  Arguments passed to
 autogen.sh are passed to configure after it's generated.
 
@@ -126,14 +127,6 @@ src - the main part of the code.
 
 This code includes the dialog manager written by Radek Doulik and source
 code of the main application.
-
-slang - stripped down S-Lang library.
-
-It's provided to allow compilation that don't have the S-Lang library
-with complete headers or the library is broken.  Please avoid changing
-this code.  If you do change it, please consider contributing your
-changes to the maintainers of S-Lang.
-
 
 Code structure - details
 ========================
