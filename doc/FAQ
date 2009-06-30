@@ -11,8 +11,7 @@ Frequently Asked Questions
           + 1.4 What else do I need to run MC?
           + 1.5 Is GNU Midnight Commander Public Domain?  Copyrighted?
           + 1.6 Where can I get GNU Midnight Commander?
-          + 1.7 I don't have FTP access.  Where can I get MC?
-          + 1.8 I cannot compile MC.  What should I do?
+          + 1.7 I cannot compile MC.  What should I do?
 
      * 2 Keyboard
           + 2.1 What does documentation mean with the C-?, M-? and F?
@@ -155,10 +154,8 @@ Frequently Asked Questions
    You need a POSIX (Unix compatible) operating system.  If you are
    running Windows, use Cygwin.
 
-   To compile any edition you need to have glib 1.2.x or newer
-   installed.  It's available at ftp://ftp.gtk.org/pub/gtk/.  If you
-   don't have glib installed already, please note that glib 2.x is much
-   harder to compile, so your first choice should be glib 1.2.10.
+   To compile any edition you need to have glib 2.x  installed.  
+   It's available at ftp://ftp.gtk.org/pub/gtk/. 
 
    If you want to use mouse on the Linux console you need the gpm daemon
    from ftp://ftp.systemy.it/pub/develop/.  You need nothing extra to
@@ -182,21 +179,15 @@ Frequently Asked Questions
 
 1.6 Where can I get GNU Midnight Commander?
 
-   The main site is ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
+   The main site is http://www.midnight-commander.org
 
-1.7 I don't have FTP access.  Where can I get MC?
-
-   Most GNU/Linux distributions include GNU Midnight Commander.  For
-   example, Debian, Mandrake, Red Hat, Slackware and SuSE.
-
-1.8 I cannot compile MC.  What should I do?
+1.7 I cannot compile MC.  What should I do?
 
    Make sure you have read the INSTALL file in the sources.  Report the
    error messages exactly as they appear, mention the versions of your
    OS, your compiler and whatever else software you think is relevant.
    If you have compile problems in the VFS code, try disabling it by
-   using "--without-vfs" switch.  As the last resort, you can use
-   precompiled binaries from the GNU Midnight Commander website.
+   using "--disable-vfs" option.
 
 
 2 Keyboard
@@ -239,10 +230,6 @@ Frequently Asked Questions
 
      http://www.tuxedo.org/~esr/terminfo/
      ftp://dickey.his.com/ncurses/
-
-   You can force Midnight Commander to use the termcap database by
-   giving --with-termcap option to the configure script.  The default
-   is to use terminfo.
 
    If you don't have permissions to edit terminal databases you can use
    Learn keys feature of Midnight Commander instead.  Press Esc 9 o k
@@ -352,12 +339,6 @@ Frequently Asked Questions
    or if you use sh, bash, ksh or zsh:
 
      export TERM=vt100
-
-   If this doesn't help you can recompile MC to use termcap instead of
-   terminfo:
-
-     ./configure --with-termcap
-     make
 
 4.2 Why don't line drawing characters work?
 
@@ -557,19 +538,6 @@ all anymore!
 
     xterm|xterm-color|vs100|xterm terminal emulator
 
-4.9 Why are there both terminfo and termcap? Wouldn't one database be
-enough?
-
-   You might want to read the Unix-Haters Handbook at
-   http://catalog.com/hopkins/unix-haters/handbook.html.  It lists many
-   more reasons why Unix sucks.
-
-   You can configure which terminal database you want to use with the
-   "--with-termcap" and "--with-terminfo" flags of configure.  If you
-   don't specify them, the configure script will try to use terminfo if
-   available otherwise it will use termcap.
-
-
 5 Graphical user interface
 
 5.1 Xview, Tk and Gnome editions?
@@ -750,13 +718,6 @@ indenting increases with each line!
    upgrade your shell to a newer version.  If you use something else
    than bash, tcsh or zsh, subshell support is disabled automatically.
 
-   If disabling subshell doesn't help, try to reconfigure MC with
-   "--with-included-slang" and "--with-termcap" options and recompile.
-   If this helps, something is wrong with your terminfo database or
-   shared S-Lang library.  For better terminfo databases see chapter 4
-   of this FAQ.  For a better S-Lang library, upgrade to a newer version
-   or keep using the "--with-included-slang" option.
-
    Another reason is problems with gpm.  Try using "--nomouse" option to
    see if it makes any difference.  Restarting gpm can help.  Sometimes
    it's enough to move the mouse.
@@ -785,6 +746,7 @@ indenting increases with each line!
      * Norbert Warmuth
      * Alex I. Tkachenko
 
+
    Alessandro Rubini has been specially helpful with debugging and
    enhancing of the mouse support.  John E. Davis has made his S-Lang
    library available to us and answered many questions about it.
@@ -810,9 +772,21 @@ indenting increases with each line!
      * Jon Stevens
      * Adam Tla/lka
 
+   Current list of active developers can be found here:
+   http://www.midnight-commander.org/wiki/McDevelopers
+
+   This page lists everbody who has provided a patch or
+   has written code for the midnight-commander in the past:
+   http://www.midnight-commander.org/wiki/McContributors
+
 10.2 Do I dare to use a development version?
 
-   That's up to you to decide.  Development versions may have nasty bugs
+   Yes, of course. Feel free to test:
+   http://www.midnight-commander.org/wiki#Downloading
+   As we do our development in git, please do a git checkout
+   of the master branch and build it
+
+   But always remember: development versions may have nasty bugs
    at some points of time.  It's up to you to judge whether the new
    features and fixes for the bugs you know outweigh the risk of unknown
    bugs.
@@ -822,7 +796,12 @@ indenting increases with each line!
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
 
-   Send your report/request to mc-devel@gnome.org or mc@gnome.org. 
+   If this is not the case, feel free to add a ticket in our ticket-system,
+   which is located here: http://www.midnight-commander.org/newticket
+
+   If you want to send an email instead write your report to mc-devel@gnome.org 
+   or mc@gnome.org.
+
    These mailing lists are the most certain way to contact the
    developers.  Remember to mention if you are not on the mailing list
    to make sure that you will receive a copy of replies.
@@ -888,6 +867,16 @@ an answer?
           Technical development discussion
           To subscribe visit
           http://mail.gnome.org/mailman/listinfo/mc-devel/
+
+   mc-commits@googlegroups.com
+          mailing list only for applyed commits into master/stable branches
+          To subscribe visit
+          http://groups.google.com/group/mc-commits/subscribe
+
+   mc-bugs@googlegroups.com
+          Mailing list only for tickets and comments (use it as RSS :) )
+          To subscribe visit
+          http://groups.google.com/group/mc-bugs/subscribe
 
 11.3 Where should I look on the World Wide Web for MC stuff?
 
