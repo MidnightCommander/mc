@@ -19,15 +19,18 @@ required:
 Autoconf 2.52 and above (latest is recommended)
 Automake 1.5 and above (latest is recommended)
 Gettext 0.11.5 and above
-Glib 2.x and above
+Glib 2.6 and above (2.14 and higher is recommended)
+
+Full list of requirements you can see at:
+http://www.midnight-commander.org/wiki/en/doc/buildAndInstall/req
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
 PATH.
 
 Once you have the right tools, run `autogen.sh' - it will generate
-everything necessary for the build and run `configure'.  Arguments given
-to `autogen.sh' are passed to `configure'.  Then run `make' as usually.
+everything necessary for the build `configure'. Then run 'configure'
+and `make' as usually.
 
 The distribution tarball is created by the command `make distcheck'. 
 This command can take a while.
@@ -50,14 +53,8 @@ versions.  A lot of cleanup is going on.  The GIT version may be easier
 to understand, in addition to the obvious fact that the merging is
 easier with the GIT version.
 
-There are some tools in the maint directory on GIT.  They are not
-included with releases or snapshots.  You may be interested to look at
-them if you are going to work on the project for an extended period of
-time.  In particular, the release procedure is described there.
-
 In order to compile GNU Midnight Commander from a clean GIT checkout you
-should use autogen.sh instead of configure.  Arguments passed to
-autogen.sh are passed to configure after it's generated.
+should use 'autogen.sh && ./configure' instead of 'configure'.
 
 GNU Midnight Commander uses Autoconf and Automake, with make it fairly
 portable.  However, GNU Make is strongly recommended for development
@@ -68,10 +65,6 @@ any header files.
 If you add or remove any files, please change Makefile.am in the same
 directory accordingly.  When doing significant changes in the tree
 structure, "make distcheck" is strongly recommended.
-
-If you have etags installed, you can run "make tags" and use tags in
-emacs to find functions or variables.  But you can also use the internal
-editor and the "Find File" command to find any text in the source tree.
 
 GNU Autoconf allows you to test several different configurations are
 once.  To do so, use the so called out-of-tree (or VPATH) compilation. 
@@ -119,7 +112,7 @@ mc_open() instead.
 
 edit - the internal editor.
 
-This code has been contributed by Paul Sheer, the author of Cooledit. 
+This code has been contributed by Paul Sheer, the author of Cooledit.
 The internal editor shares some code with Cooledit, but now it's
 developed as part of GNU Midnight Commander.
 
@@ -133,17 +126,18 @@ Code structure - details
 
 GNU Midnight Commander uses extensively the dialog manager written by
 Radek Doulik.  To understand how the dialog manager works, please read
-the dialog.c.  You will find the basic widgets in the files widget.c. 
+the dialog.c.  You will find the basic widgets in the files widget.c.
 Some more high-level functions, e.g. to display a message box, are
 located in wtools.c.  This file also contains the Quick Dialog code,
 which makes it easier to create complex dialogs.
 
 Files findme.c, popt.c, poptconfig.c, popthelp.c and poptparse.c come
 from the popt library used to parse the command line.  They should not
-be modified unless absolutely necessary.
+be modified unless absolutely necessary. At near time these stuff will
+removed.
 
 The files util.c and utilunix.c have a lot of utility functions.  Get
-familiar with them, they are very simple. 
+familiar with them, they are very simple.
 
 glib is used for memory allocation and for some utility functions, such
 as manipulation with lists and trees.  gmodule (part of the glib
@@ -278,7 +272,7 @@ The official place for bug reports is:
     http://www.midnight-commander.org/
 
 
-There are various unofficial sources where bug reports and patches can 
+There are various unofficial sources where bug reports and patches can
 be found (NOT maintained by the MC team).
 
 
